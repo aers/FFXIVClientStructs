@@ -51,6 +51,21 @@
     <Compile Include="Client\Graphics\Scene\DrawObject.cs" />
     <Compile Include="Client\Graphics\Scene\Human.cs" />
     <Compile Include="Client\Graphics\Scene\Object.cs" />
+    <Compile Include="Client\UI\RaptureAtkUnitManager.cs" />
+    <Compile Include="Component\GUI\AtkCollisionNode.cs" />
+    <Compile Include="Component\GUI\AtkComponentNode.cs" />
+    <Compile Include="Component\GUI\AtkCounterNode.cs" />
+    <Compile Include="Component\GUI\AtkEventListener.cs" />
+    <Compile Include="Component\GUI\AtkEventTarget.cs" />
+    <Compile Include="Component\GUI\AtkImageNode.cs" />
+    <Compile Include="Component\GUI\AtkNineGridNode.cs" />
+    <Compile Include="Component\GUI\AtkResNode.cs" />
+    <Compile Include="Component\GUI\AtkStage.cs" />
+    <Compile Include="Component\GUI\AtkTextNode.cs" />
+    <Compile Include="Component\GUI\AtkUnitBase.cs" />
+    <Compile Include="Component\GUI\AtkUnitList.cs" />
+    <Compile Include="Component\GUI\AtkUnitManager.cs" />
+    <Compile Include="FFXIVString.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
