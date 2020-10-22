@@ -10,16 +10,18 @@ namespace FFXIVClientStructs.Component.GUI
         NineGrid = 4,
         Counter = 5,
         Collision = 8,
+        // these are wrong
+        /*
         ComponentBase = 1000, // C0
-        ComponentButton = 1001, // F0
-        ComponentWindow = 1002, // 108
+        //ComponentButton = 1001, // F0
+        //ComponentWindow = 1002, // 108
         ComponentCheckBox = 1003, // 110
-        ComponentRadioButton = 1004, // F8
+        //ComponentRadioButton = 1004, // F8
         ComponentGaugeBar = 1005, // 1A8
-        ComponentSlider = 1006, // 100
+        //ComponentSlider = 1006, // 100
         ComponentTextInput = 1007, // 600
         ComponentNumericInput = 1008, // 338
-        ComponentList = 1009, // 1A8
+        //ComponentList = 1009, // 1A8
         ComponentDropDownList = 1010, // E0
         ComponentTab = 1011, // 168
         ComponentTreeList = 1012, // 220
@@ -35,7 +37,13 @@ namespace FFXIVClientStructs.Component.GUI
         ComponentMap = 1022, // 410
         ComponentPreview = 1023, // D8
         // added since 2.3, no rtti, but derives from Button
-        ComponentUnknownButton = 1024 // 120
+        ComponentUnknownButton = 1024, // 120
+        // something weird happens to the type creating these variant? dupes, same class
+        // only saw these in-game in the AreaMap addon
+        ComponentButton = 1002,
+        ComponentList = 1025,
+        ComponentRadioButton = 1026,
+        ComponentSlider = 1027,*/
     }
 
     // Component::GUI::AtkResNode

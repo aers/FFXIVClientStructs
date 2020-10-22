@@ -53,7 +53,16 @@
     <Compile Include="Client\Graphics\Scene\Object.cs" />
     <Compile Include="Client\UI\RaptureAtkUnitManager.cs" />
     <Compile Include="Component\GUI\AtkCollisionNode.cs" />
+    <Compile Include="Component\GUI\AtkComponentBase.cs" />
+    <Compile Include="Component\GUI\AtkComponentButton.cs" />
+    <Compile Include="Component\GUI\AtkComponentCheckBox.cs" />
+    <Compile Include="Component\GUI\AtkComponentGaugeBar.cs" />
+    <Compile Include="Component\GUI\AtkComponentInputBase.cs" />
     <Compile Include="Component\GUI\AtkComponentNode.cs" />
+    <Compile Include="Component\GUI\AtkComponentRadioButton.cs" />
+    <Compile Include="Component\GUI\AtkComponentSlider.cs" />
+    <Compile Include="Component\GUI\AtkComponentTextInput.cs" />
+    <Compile Include="Component\GUI\AtkComponentWindow.cs" />
     <Compile Include="Component\GUI\AtkCounterNode.cs" />
     <Compile Include="Component\GUI\AtkEventListener.cs" />
     <Compile Include="Component\GUI\AtkEventTarget.cs" />

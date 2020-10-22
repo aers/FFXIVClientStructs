@@ -15,6 +15,6 @@ namespace FFXIVClientStructs.Component.GUI
     public unsafe struct AtkComponentNode
     {
         [FieldOffset(0x0)] public AtkResNode AtkResNode;
-        [FieldOffset(0xA8)] public void* Component;
+        [FieldOffset(0xA8)] public AtkComponentBase* Component;
     }
 }
