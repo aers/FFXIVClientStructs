@@ -16,5 +16,6 @@ namespace FFXIVClientStructs.Client.Game.Character
         [FieldOffset(0x0)] public GameObject GameObject;
         [FieldOffset(0x1708)] public fixed byte EquipSlotData[4 * 10];
         [FieldOffset(0x17B8)] public fixed byte CustomizeData[0x1A];
+        [FieldOffset(0x1878)] public uint OwnerID;
     }
 }
