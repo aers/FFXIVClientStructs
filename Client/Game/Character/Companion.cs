@@ -15,5 +15,6 @@ namespace FFXIVClientStructs.Client.Game.Character
     public unsafe struct Companion
     {
         [FieldOffset(0x0)] public Character Character;
+        [FieldOffset(0x1878)] public uint OwnerID;
     }
 }
