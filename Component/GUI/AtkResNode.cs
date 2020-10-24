@@ -10,40 +10,23 @@ namespace FFXIVClientStructs.Component.GUI
         NineGrid = 4,
         Counter = 5,
         Collision = 8,
-        // these are wrong
-        /*
-        ComponentBase = 1000, // C0
-        //ComponentButton = 1001, // F0
-        //ComponentWindow = 1002, // 108
-        ComponentCheckBox = 1003, // 110
-        //ComponentRadioButton = 1004, // F8
-        ComponentGaugeBar = 1005, // 1A8
-        //ComponentSlider = 1006, // 100
-        ComponentTextInput = 1007, // 600
-        ComponentNumericInput = 1008, // 338
-        //ComponentList = 1009, // 1A8
-        ComponentDropDownList = 1010, // E0
-        ComponentTab = 1011, // 168
-        ComponentTreeList = 1012, // 220
-        ComponentScrollBar = 1013, // 140
-        ComponentListItemRenderer = 1014, // 1A8
-        ComponentIcon = 1015, // 118
-        ComponentIconText = 1016, // E8
-        ComponentDragDrop = 1017, // 110
-        ComponentGuildLeveCard = 1018, // F0
-        ComponentTextNineGrid = 1019, // D8
-        ComponentJournalCanvas = 1020, // 510
-        ComponentMultipurpose = 1021, // D8
-        ComponentMap = 1022, // 410
-        ComponentPreview = 1023, // D8
-        // added since 2.3, no rtti, but derives from Button
-        ComponentUnknownButton = 1024, // 120
-        // something weird happens to the type creating these variant? dupes, same class
-        // only saw these in-game in the AreaMap addon
-        ComponentButton = 1002,
-        ComponentList = 1025,
-        ComponentRadioButton = 1026,
-        ComponentSlider = 1027,*/
+        // Component: >=1000
+    }
+
+    // 'visible' will change visibility immediately, the rest rely on other stuff to happen so they dont do anything
+    // top and bottom assumed based on a scrollbar, lots of left-aligned text has AnchorLeft set
+    public enum NodeFlags
+    {
+        AnchorTop = 0x01,
+        AnchorLeft = 0x02,
+        AnchorBottom = 0x04,
+        AnchorRight = 0x08,
+        Visible = 0x10,
+        Enabled = 0x20, // this is like, "button can be clicked" etc
+        //Fill = 0x40,
+        //Clip = 0x80,
+        IsCollisionNode = 0x100, // set if node type == 8, might be "HasCollision", also set if Unk2 first bit is set (https://github.com/NotAdam/Lumina/blob/714a1d8b9c4e182b411e7c68330d49a5dfccb9bc/src/Lumina/Data/Parsing/Uld/UldRoot.cs#L273)
+        Unk1 = 0x200 // this also gets set if the above flag is set
     }
 
     // Component::GUI::AtkResNode
@@ -57,6 +40,31 @@ namespace FFXIVClientStructs.Component.GUI
     public unsafe struct AtkResNode
     {
         [FieldOffset(0x0)] public AtkEventTarget AtkEventTarget;
+        [FieldOffset(0x8)] public uint NodeID;
+        // these are all technically union types with a node ID and a pointer but should be replaced by the loader always
+        [FieldOffset(0x20)] public AtkResNode* ParentNode;
+        [FieldOffset(0x28)] public AtkResNode* NextSiblingNode;
+        [FieldOffset(0x30)] public AtkResNode* PrevSiblingNode;
+        [FieldOffset(0x38)] public AtkResNode* ChildNode;
         [FieldOffset(0x40)] public ushort Type;
+        [FieldOffset(0x44)] public float X; // X,Y converted to floats on load, file is int16
+        [FieldOffset(0x48)] public float Y;
+        [FieldOffset(0x4C)] public float ScaleX;
+        [FieldOffset(0x50)] public float ScaleY;
+        [FieldOffset(0x54)] public float Rotation; // radians (file is degrees)
+        [FieldOffset(0x73)] public byte Alpha;
+        [FieldOffset(0x7C)] public ushort AddRed;
+        [FieldOffset(0x7E)] public ushort AddGreen;
+        [FieldOffset(0x80)] public ushort AddBlue;
+        [FieldOffset(0x88)] public byte MultiplyRed;
+        [FieldOffset(0x89)] public byte MultiplyGreen;
+        [FieldOffset(0x8A)] public byte MultiplyBlue;
+        [FieldOffset(0x90)] public ushort Width;
+        [FieldOffset(0x92)] public ushort Height;
+        [FieldOffset(0x94)] public float OriginX;
+        [FieldOffset(0x98)] public float OriginY;
+        [FieldOffset(0x9C)] public ushort Priority;
+        [FieldOffset(0x9E)] public ushort Flags;
+        [FieldOffset(0xA0)] public uint BitField; // bit 9 = 1 if AnchorRight flag is not set, ClipCount is bits 10-17, idk its a mess
     }
 }
