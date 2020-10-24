@@ -45,5 +45,6 @@ namespace FFXIVClientStructs.Component.GUI
     {
         [FieldOffset(0x0)] public AtkEventListener AtkEventListener;
         [FieldOffset(0x18)] public NodeList* ChildNodes;
+        [FieldOffset(0x80)] public AtkResNode* RootNode;
     }
 }

@@ -24,6 +24,7 @@ namespace FFXIVClientStructs.Component.GUI
         [FieldOffset(0x0)] public AtkEventListener AtkEventListener;
         [FieldOffset(0x8)] public fixed byte Name[0x20];
         [FieldOffset(0x38)] public NodeList* ChildNodes;
+        [FieldOffset(0xC8)] public AtkResNode* RootNode;
         [FieldOffset(0x182)] public byte Flags;
         [FieldOffset(0x1BC)] public ushort X;
         [FieldOffset(0x1BE)] public ushort Y;
