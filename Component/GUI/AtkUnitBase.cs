@@ -29,5 +29,6 @@ namespace FFXIVClientStructs.Component.GUI
         [FieldOffset(0x1BC)] public ushort X;
         [FieldOffset(0x1BE)] public ushort Y;
         [FieldOffset(0x1AC)] public float Scale;
+        [FieldOffset(0x1D5)] public byte Alpha;
     }
 }

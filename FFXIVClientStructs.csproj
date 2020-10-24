@@ -51,6 +51,7 @@
     <Compile Include="Client\Graphics\Scene\DrawObject.cs" />
     <Compile Include="Client\Graphics\Scene\Human.cs" />
     <Compile Include="Client\Graphics\Scene\Object.cs" />
+    <Compile Include="Client\UI\AddonHudLayoutScreen.cs" />
     <Compile Include="Client\UI\RaptureAtkUnitManager.cs" />
     <Compile Include="Component\GUI\AtkCollisionNode.cs" />
     <Compile Include="Component\GUI\AtkComponentBase.cs" />

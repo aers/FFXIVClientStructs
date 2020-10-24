@@ -65,6 +65,6 @@ namespace FFXIVClientStructs.Component.GUI
         [FieldOffset(0x98)] public float OriginY;
         [FieldOffset(0x9C)] public ushort Priority;
         [FieldOffset(0x9E)] public ushort Flags;
-        [FieldOffset(0xA0)] public uint BitField; // bit 9 = 1 if AnchorRight flag is not set, ClipCount is bits 10-17, idk its a mess
+        [FieldOffset(0xA0)] public uint BitField; // bit 1 = has changes, bit 9 = 1 if AnchorRight flag is not set, ClipCount is bits 10-17, idk its a mess
     }
 }
