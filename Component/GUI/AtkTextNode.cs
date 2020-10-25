@@ -16,5 +16,13 @@ namespace FFXIVClientStructs.Component.GUI
     {
         [FieldOffset(0x0)] public AtkResNode AtkResNode;
         [FieldOffset(0xB8)] public FFXIVString NodeText;
+        [FieldOffset(0xAC)] public byte ForegroundRed;
+        [FieldOffset(0xAD)] public byte ForegroundGreen;
+        [FieldOffset(0xAE)] public byte ForegroundBlue;
+        [FieldOffset(0xAF)] public byte ForegroundAlpha;
+        [FieldOffset(0xB0)] public byte BackgroundRed;
+        [FieldOffset(0xB1)] public byte BackgroundGreen;
+        [FieldOffset(0xB2)] public byte BackgroundBlue;
+        [FieldOffset(0xB3)] public byte BackgroundAlpha;
     }
 }

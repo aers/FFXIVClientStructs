@@ -12,6 +12,8 @@ namespace FFXIVClientStructs.Client.UI
     public unsafe struct SelectedAddonStruct
     {
         [FieldOffset(0x28)] public AtkUnitBase* SelectedAtkUnit;
+        [FieldOffset(0x44)] public short XOffset;
+        [FieldOffset(0x46)] public short YOffset;
     }
 
     // Client::UI::AddonHudLayoutScreen
@@ -26,6 +28,7 @@ namespace FFXIVClientStructs.Client.UI
     public unsafe struct AddonHudLayoutScreen
     {
         [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
+        [FieldOffset(0x540)] public AtkResNode* SelectedOverlayNode; // actually an array of active overlay nodes here, but this should be the selected one in theory
         [FieldOffset(0x7B0)] public SelectedAddonStruct* SelectedAddon;
     }
 }

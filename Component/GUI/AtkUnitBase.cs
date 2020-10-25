@@ -26,8 +26,8 @@ namespace FFXIVClientStructs.Component.GUI
         [FieldOffset(0x38)] public NodeList* ChildNodes;
         [FieldOffset(0xC8)] public AtkResNode* RootNode;
         [FieldOffset(0x182)] public byte Flags;
-        [FieldOffset(0x1BC)] public ushort X;
-        [FieldOffset(0x1BE)] public ushort Y;
+        [FieldOffset(0x1BC)] public short X;
+        [FieldOffset(0x1BE)] public short Y;
         [FieldOffset(0x1AC)] public float Scale;
         [FieldOffset(0x1D5)] public byte Alpha;
     }
