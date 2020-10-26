@@ -63,6 +63,7 @@ namespace FFXIVClientStructs.Component.GUI
         [FieldOffset(0x92)] public ushort Height;
         [FieldOffset(0x94)] public float OriginX;
         [FieldOffset(0x98)] public float OriginY;
+        // when accessing the field at 0x9E the compiled assembly always takes 9C and shifts it 16+ bits so this might be one field
         [FieldOffset(0x9C)] public ushort Priority;
         [FieldOffset(0x9E)] public short Flags;
         [FieldOffset(0xA0)] public uint BitField; // bit 1 = has changes, bit 9 = 1 if AnchorRight flag is not set, ClipCount is bits 10-17, idk its a mess

@@ -11,9 +11,14 @@ namespace FFXIVClientStructs.Client.UI
     [StructLayout(LayoutKind.Explicit)]
     public unsafe struct MoveableAddonInfoStruct
     {
+        [FieldOffset(0x20)] public AddonHudLayoutScreen* hudLayoutScreen;
         [FieldOffset(0x28)] public AtkUnitBase* SelectedAtkUnit;
+        [FieldOffset(0x3C)] public int Flags;
         [FieldOffset(0x44)] public short XOffset;
         [FieldOffset(0x46)] public short YOffset;
+        [FieldOffset(0x48)] public short OverlayWidth;
+        [FieldOffset(0x4A)] public short OverlayHeight;
+        [FieldOffset(0x4D)] public byte Slot;
         [FieldOffset(0x4F)] public bool PositionHasChanged;
     }
 
@@ -29,7 +34,7 @@ namespace FFXIVClientStructs.Client.UI
     public unsafe struct AddonHudLayoutScreen
     {
         [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
-        [FieldOffset(0x540)] public AtkResNode* SelectedOverlayNode; // actually an array of active overlay nodes here, but this should be the selected one in theory
+        [FieldOffset(0x540)] public AtkComponentNode* SelectedOverlayNode; // actually an array of active overlay nodes here, but this should be the selected one in theory
         [FieldOffset(0x7B0)] public MoveableAddonInfoStruct* SelectedAddon;
     }
 }
