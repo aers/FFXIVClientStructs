@@ -15,7 +15,6 @@ namespace FFXIVClientStructs.Component.GUI
     public unsafe struct AtkTextNode
     {
         [FieldOffset(0x0)] public AtkResNode AtkResNode;
-        [FieldOffset(0xB8)] public FFXIVString NodeText;
         [FieldOffset(0xAC)] public byte ForegroundRed;
         [FieldOffset(0xAD)] public byte ForegroundGreen;
         [FieldOffset(0xAE)] public byte ForegroundBlue;
@@ -24,5 +23,6 @@ namespace FFXIVClientStructs.Component.GUI
         [FieldOffset(0xB1)] public byte BackgroundGreen;
         [FieldOffset(0xB2)] public byte BackgroundBlue;
         [FieldOffset(0xB3)] public byte BackgroundAlpha;
+        [FieldOffset(0xB8)] public FFXIVString NodeText;
     }
 }

@@ -9,11 +9,12 @@ using System.Threading.Tasks;
 namespace FFXIVClientStructs.Client.UI
 {
     [StructLayout(LayoutKind.Explicit)]
-    public unsafe struct SelectedAddonStruct
+    public unsafe struct MoveableAddonInfoStruct
     {
         [FieldOffset(0x28)] public AtkUnitBase* SelectedAtkUnit;
         [FieldOffset(0x44)] public short XOffset;
         [FieldOffset(0x46)] public short YOffset;
+        [FieldOffset(0x4F)] public bool PositionHasChanged;
     }
 
     // Client::UI::AddonHudLayoutScreen
@@ -29,6 +30,6 @@ namespace FFXIVClientStructs.Client.UI
     {
         [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
         [FieldOffset(0x540)] public AtkResNode* SelectedOverlayNode; // actually an array of active overlay nodes here, but this should be the selected one in theory
-        [FieldOffset(0x7B0)] public SelectedAddonStruct* SelectedAddon;
+        [FieldOffset(0x7B0)] public MoveableAddonInfoStruct* SelectedAddon;
     }
 }
