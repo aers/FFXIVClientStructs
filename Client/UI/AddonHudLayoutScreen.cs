@@ -19,7 +19,7 @@ namespace FFXIVClientStructs.Client.UI
         [FieldOffset(0x48)] public short OverlayWidth;
         [FieldOffset(0x4A)] public short OverlayHeight;
         [FieldOffset(0x4D)] public byte Slot;
-        [FieldOffset(0x4F)] public bool PositionHasChanged;
+        [FieldOffset(0x4F)] public byte PositionHasChanged;
     }
 
     // Client::UI::AddonHudLayoutScreen
