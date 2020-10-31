@@ -76,6 +76,7 @@
     <Compile Include="Component\GUI\AtkResNode.cs" />
     <Compile Include="Component\GUI\AtkStage.cs" />
     <Compile Include="Component\GUI\AtkTextNode.cs" />
+    <Compile Include="Component\GUI\AtkTexture.cs" />
     <Compile Include="Component\GUI\AtkUnitBase.cs" />
     <Compile Include="Component\GUI\AtkUnitList.cs" />
     <Compile Include="Component\GUI\AtkUnitManager.cs" />

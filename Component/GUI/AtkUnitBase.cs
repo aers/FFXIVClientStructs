@@ -3,7 +3,7 @@
 namespace FFXIVClientStructs.Component.GUI
 {
     // probably a more generic type they use in multiple places
-    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public unsafe struct NodeList
     {
         [FieldOffset(0x4)] public int Count;
@@ -23,7 +23,12 @@ namespace FFXIVClientStructs.Component.GUI
     {
         [FieldOffset(0x0)] public AtkEventListener AtkEventListener;
         [FieldOffset(0x8)] public fixed byte Name[0x20];
-        [FieldOffset(0x38)] public NodeList* ChildNodes;
+        // there's a struct starting at 0x28 that lasts at least through B1
+        [FieldOffset(0x38)] public NodeList* ChildNodes; // this is actually an array of lists one for each widget
+        [FieldOffset(0x4C)] public ushort WidgetCount;
+        [FieldOffset(0x50)] public void* UldResourceHandle; // only exists during loading, pointer is released immediately afterwards
+        [FieldOffset(0x70)] public void* AtkResourceRendererManager;
+        [FieldOffset(0xB1)] public byte LoadState;
         [FieldOffset(0xC8)] public AtkResNode* RootNode;
         [FieldOffset(0x1AC)] public float Scale;
         [FieldOffset(0x182)] public byte Flags;

@@ -2,6 +2,15 @@
 
 namespace FFXIVClientStructs.Component.GUI
 {
+    public enum ImageNodeFlags
+    {
+        FlipH = 0x01,
+        FlipV = 0x02,
+        // unk byte https://github.com/NotAdam/Lumina/blob/714a1d8b9c4e182b411e7c68330d49a5dfccb9bc/src/Lumina/Data/Parsing/Uld/NodeData.cs#L51
+        // sets two flags 0x20, 0x40
+        TextureNotLoaded = 0x80 // set if the texture pointer is null
+    }
+
     // Component::GUI::AtkImageNode
     //   Component::GUI::AtkResNode
     //     Component::GUI::AtkEventTarget
@@ -13,5 +22,8 @@ namespace FFXIVClientStructs.Component.GUI
     public unsafe struct AtkImageNode
     {
         [FieldOffset(0x0)] public AtkResNode AtkResNode;
+        [FieldOffset(0xB0)] public ushort PartId;
+        [FieldOffset(0xB2)] public byte Wrap;
+        [FieldOffset(0xB3)] public byte Flags;
     }
 }
