@@ -2,7 +2,8 @@
 using System.Runtime.InteropServices;
 
 namespace FFXIVClientStructs.Component.GUI
-{    public enum AlignmentType
+{    
+    public enum AlignmentType
     {
         TopLeft = 0x0,
         Top = 0x1,
@@ -28,11 +29,11 @@ namespace FFXIVClientStructs.Component.GUI
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public unsafe struct PartInfo
     {
-        [FieldOffset(0x0)] public TextureInfo* Texture;
+        [FieldOffset(0x0)] public TextureInfo* Texture; // union ID+texture pointer replaced by loader
         [FieldOffset(0x8)] public ushort U;
         [FieldOffset(0xA)] public ushort V;
-        [FieldOffset(0xC)] public ushort W;
-        [FieldOffset(0xE)] public ushort H;
+        [FieldOffset(0xC)] public ushort Width;
+        [FieldOffset(0xE)] public ushort Height;
     }
 
     // tphd header
@@ -41,7 +42,7 @@ namespace FFXIVClientStructs.Component.GUI
     {
         [FieldOffset(0x0)] public uint Id;
         [FieldOffset(0x4)] public uint PartCount;
-        [FieldOffset(0x8)] public PartInfo* Parts;
+        [FieldOffset(0x8)] public PartInfo* Parts; // array with size PartCount
     }
 
     // ashd header

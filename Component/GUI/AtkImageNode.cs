@@ -22,6 +22,7 @@ namespace FFXIVClientStructs.Component.GUI
     public unsafe struct AtkImageNode
     {
         [FieldOffset(0x0)] public AtkResNode AtkResNode;
+        [FieldOffset(0xA8)] public TextureInfo* ImageTexture;
         [FieldOffset(0xB0)] public ushort PartId;
         [FieldOffset(0xB2)] public byte Wrap;
         [FieldOffset(0xB3)] public byte Flags;
