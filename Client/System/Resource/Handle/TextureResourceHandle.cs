@@ -11,6 +11,6 @@ namespace FFXIVClientStructs.Client.System.Resource.Handle
     [StructLayout(LayoutKind.Explicit, Size = 0x128)]
     public unsafe struct TextureResourceHandle
     {
-        [FieldOffset(0x0)] ResourceHandle ResourceHandle;
+        [FieldOffset(0x0)] public ResourceHandle ResourceHandle;
     }
 }

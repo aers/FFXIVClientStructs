@@ -10,7 +10,7 @@ namespace FFXIVClientStructs.Component.GUI
     public unsafe struct AtkTexture
     {
         [FieldOffset(0x0)] public void* vtbl;
-        [FieldOffset(0x8)] public TexHolder* Texture;
+        [FieldOffset(0x8)] public TexHolder* TextureInfo;
         [FieldOffset(0x10)] public byte UnkBool_1;
         [FieldOffset(0x11)] public byte UnkBool_2;
     }

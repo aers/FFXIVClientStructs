@@ -29,7 +29,7 @@ namespace FFXIVClientStructs.Component.GUI
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public unsafe struct PartInfo
     {
-        [FieldOffset(0x0)] public TextureInfo* Texture; // union ID+texture pointer replaced by loader
+        [FieldOffset(0x0)] public TextureInfo* TextureInfo; // union ID+texture pointer replaced by loader
         [FieldOffset(0x8)] public ushort U;
         [FieldOffset(0xA)] public ushort V;
         [FieldOffset(0xC)] public ushort Width;
@@ -50,7 +50,7 @@ namespace FFXIVClientStructs.Component.GUI
     public unsafe struct TextureInfo
     {
         [FieldOffset(0x0)] public uint Id;
-        [FieldOffset(0x8)] public AtkTexture Texture;
+        [FieldOffset(0x8)] public AtkTexture AtkTexture;
     }
 
     // this is passed to functions as its own struct, they lea AtkUnitBase+0x28
