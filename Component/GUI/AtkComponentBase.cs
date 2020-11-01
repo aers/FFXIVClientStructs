@@ -1,8 +1,7 @@
 ﻿using System.Runtime.InteropServices;
 
 namespace FFXIVClientStructs.Component.GUI
-{
-    public enum ComponentType
+{    public enum ComponentType
     { 
         Base = 0, 
         Button = 1,
@@ -32,6 +31,14 @@ namespace FFXIVClientStructs.Component.GUI
         UnknownButton = 24
     }
 
+    [StructLayout(LayoutKind.Explicit, Size = 0x18)]
+    public unsafe struct ComponentInfo
+    {
+        [FieldOffset(0x0)] public uint Id;
+        [FieldOffset(0x4)] public int NodeCount;
+        [FieldOffset(0x8)] public AtkResNode** NodeList;
+        [FieldOffset(0x10)] public byte ComponentType;
+    }
     // Component::GUI::AtkComponentBase
     //   Component::GUI::AtkEventListener
 
@@ -44,7 +51,7 @@ namespace FFXIVClientStructs.Component.GUI
     public unsafe struct AtkComponentBase
     {
         [FieldOffset(0x0)] public AtkEventListener AtkEventListener;
-        [FieldOffset(0x18)] public NodeList* ChildNodes;
+        [FieldOffset(0x18)] public ComponentInfo* ComponentInfo;
         [FieldOffset(0x80)] public AtkResNode* RootNode;
         [FieldOffset(0xA8)] public AtkComponentNode* OwnerNode;
     }
