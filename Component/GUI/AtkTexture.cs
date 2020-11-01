@@ -4,12 +4,14 @@ namespace FFXIVClientStructs.Component.GUI
 {
     // Component::GUI::AtkTexture
 
-    // size = 0x10
+    // size = 0x18
     // no explicit ctor
-    [StructLayout(LayoutKind.Explicit, Size=0x10)]
+    [StructLayout(LayoutKind.Explicit, Size=0x18)]
     public unsafe struct AtkTexture
     {
         [FieldOffset(0x0)] public void* vtbl;
-        [FieldOffset(0x8)] public void* TexHandle;
+        [FieldOffset(0x8)] public TexHolder* Texture;
+        [FieldOffset(0x10)] public byte UnkBool_1;
+        [FieldOffset(0x11)] public byte UnkBool_2;
     }
 }
