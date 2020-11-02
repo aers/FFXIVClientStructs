@@ -82,6 +82,7 @@
     <Compile Include="Component\GUI\AtkUnitBase.cs" />
     <Compile Include="Component\GUI\AtkUnitList.cs" />
     <Compile Include="Component\GUI\AtkUnitManager.cs" />
+    <Compile Include="FFXIVByteColor.cs" />
     <Compile Include="FFXIVString.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
