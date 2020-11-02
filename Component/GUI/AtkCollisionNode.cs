@@ -1,7 +1,13 @@
 ﻿using System.Runtime.InteropServices;
 
 namespace FFXIVClientStructs.Component.GUI
-{
+{    public enum CollisionType : ushort
+    {
+        Hit = 0x0,
+        Focus = 0x1,
+        Move = 0x2,
+    }
+
     // Component::GUI::AtkCollisionNode
     //   Component::GUI::AtkResNode
     //     Component::GUI::AtkEventTarget
@@ -13,5 +19,8 @@ namespace FFXIVClientStructs.Component.GUI
     public unsafe struct AtkCollisionNode
     {
         [FieldOffset(0x0)] public AtkResNode AtkResNode;
+        [FieldOffset(0xA8)] public ushort CollisionType;
+        [FieldOffset(0xAA)] public ushort Uses;
+        [FieldOffset(0xB0)] public AtkComponentBase* LinkedComponent;
     }
 }

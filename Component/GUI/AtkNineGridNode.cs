@@ -13,5 +13,14 @@ namespace FFXIVClientStructs.Component.GUI
     public unsafe struct AtkNineGridNode
     {
         [FieldOffset(0x0)] public AtkResNode AtkResNode;
+        [FieldOffset(0xA8)] public TPInfo* TPInfo;
+        [FieldOffset(0xB0)] public uint PartID;
+        [FieldOffset(0xB4)] public short TopOffset;
+        [FieldOffset(0xB6)] public short BottomOffset;
+        [FieldOffset(0xB8)] public short LeftOffset;
+        [FieldOffset(0xBA)] public short RightOffset;
+        [FieldOffset(0xBC)] public uint BlendMode;
+        // bit 1 = parts type, bit 2 = render type
+        [FieldOffset(0xC0)] public byte PartsTypeRenderType;
     }
 }

@@ -13,6 +13,13 @@ namespace FFXIVClientStructs.Component.GUI
     public unsafe struct AtkCounterNode
     {
         [FieldOffset(0x0)] public AtkResNode AtkResNode;
+        [FieldOffset(0xA8)] public TPInfo* TPInfo;
+        [FieldOffset(0xB0)] public uint PartId;
+        [FieldOffset(0xB4)] public byte NumberWidth;
+        [FieldOffset(0xB5)] public byte CommaWidth;
+        [FieldOffset(0xB6)] public byte SpaceWidth;
+        [FieldOffset(0xB8)] public ushort TextAlign;
+        [FieldOffset(0xBC)] public float Width;
         [FieldOffset(0xC0)] public FFXIVString NodeText;
     }
 }
