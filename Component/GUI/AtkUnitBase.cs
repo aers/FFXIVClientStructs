@@ -64,7 +64,9 @@ namespace FFXIVClientStructs.Component.GUI
         [FieldOffset(0x22)] public ushort TPCount;
         [FieldOffset(0x24)] public ushort WidgetCount;
         [FieldOffset(0x28)] public void* UldResourceHandle; // only exists during loading, pointer is released immediately afterwards
+        [FieldOffset(0x42)] public ushort NodeListCount;
         [FieldOffset(0x48)] public void* AtkResourceRendererManager;
+        [FieldOffset(0x50)] public AtkResNode** NodeList; // doesnt include component children
         [FieldOffset(0x86)] public byte Flags1; // bit 0x10 is set if byte 5 in a widget is set
         [FieldOffset(0x89)] public byte LoadedState;
     }
@@ -89,5 +91,7 @@ namespace FFXIVClientStructs.Component.GUI
         [FieldOffset(0x1BC)] public short X;
         [FieldOffset(0x1BE)] public short Y;
         [FieldOffset(0x1D5)] public byte Alpha;
+        [FieldOffset(0x1D8)] public AtkCollisionNode** CollisionNodeList; // seems to be all collision nodes in tree, may be something else though
+        [FieldOffset(0x1E0)] public uint CollisionNodeListCount;
     }
 }

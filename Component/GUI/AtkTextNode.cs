@@ -2,6 +2,23 @@
 
 namespace FFXIVClientStructs.Component.GUI
 {
+    public enum TextFlags
+    {
+        Unk = 0x01,
+        Bold = 0x02,
+        Italic = 0x04,
+        Edge = 0x08,
+        Glare = 0x10,
+        Emboss = 0x20,
+        WordWrap = 0x40,
+        MultiLine = 0x80
+    }
+
+    public enum TextFlags2
+    {
+        Ellipsis = 0x04
+    }
+
     // Component::GUI::AtkTextNode
     //   Component::GUI::AtkResNode
     //     Component::GUI::AtkEventTarget
@@ -15,14 +32,21 @@ namespace FFXIVClientStructs.Component.GUI
     public unsafe struct AtkTextNode
     {
         [FieldOffset(0x0)] public AtkResNode AtkResNode;
-        [FieldOffset(0xAC)] public byte ForegroundRed;
-        [FieldOffset(0xAD)] public byte ForegroundGreen;
-        [FieldOffset(0xAE)] public byte ForegroundBlue;
-        [FieldOffset(0xAF)] public byte ForegroundAlpha;
-        [FieldOffset(0xB0)] public byte BackgroundRed;
-        [FieldOffset(0xB1)] public byte BackgroundGreen;
-        [FieldOffset(0xB2)] public byte BackgroundBlue;
-        [FieldOffset(0xB3)] public byte BackgroundAlpha;
+        [FieldOffset(0xA8)] public uint TextId;
+        [FieldOffset(0xAC)] public FFXIVByteColor TextColor;
+        [FieldOffset(0xB0)] public FFXIVByteColor EdgeColor;
+        [FieldOffset(0xB4)] public FFXIVByteColor BackgroundColor;
         [FieldOffset(0xB8)] public FFXIVString NodeText;
+        // if text is "asdf" and you selected "sd" this is 2, 3
+        [FieldOffset(0x128)] public uint SelectStart;
+        [FieldOffset(0x12C)] public uint SelectEnd;
+        [FieldOffset(0x14A)] public byte LineSpacing;
+        [FieldOffset(0x14B)] public byte CharSpacing;
+        // alignment bits 0-3 font type bits 4-7
+        [FieldOffset(0x14C)] public byte AlignmentFontType;
+        [FieldOffset(0x14D)] public byte FontSize;
+        [FieldOffset(0x14E)] public byte SheetType;
+        [FieldOffset(0x152)] public byte TextFlags;
+        [FieldOffset(0x153)] public byte TextFlags2;
     }
 }
