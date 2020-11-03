@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.Component.GUI.ULD
     {
         [FieldOffset(0x00)] public ULDTexture* Textures; // array with size TextureCount, "ashd" (asset) header
         [FieldOffset(0x08)] public ULDPartsList* PartsList; // array with size PartsListcount, "tphd" header 
-        [FieldOffset(0x10)] public ULDObjectInfo* Object; // cast to ULDWidgetInfo or ULDComponentInfo depending on base type
+        [FieldOffset(0x10)] public ULDObjectInfo* Objects; // cast to ULDWidgetInfo or ULDComponentInfo depending on base type
         [FieldOffset(0x18)] public ULDComponentDataBase* ComponentData; // need to cast this to the appropriate one for your component type
         [FieldOffset(0x20)] public ushort TextureCount;
         [FieldOffset(0x22)] public ushort PartsListCount;
