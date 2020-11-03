@@ -1,4 +1,5 @@
-﻿using System.Runtime.InteropServices;
+﻿using FFXIVClientStructs.Component.GUI.ULD;
+using System.Runtime.InteropServices;
 
 namespace FFXIVClientStructs.Component.GUI
 {
@@ -13,7 +14,7 @@ namespace FFXIVClientStructs.Component.GUI
     public unsafe struct AtkCounterNode
     {
         [FieldOffset(0x0)] public AtkResNode AtkResNode;
-        [FieldOffset(0xA8)] public TPInfo* TPInfo;
+        [FieldOffset(0xA8)] public ULDPartsList* PartsList;
         [FieldOffset(0xB0)] public uint PartId;
         [FieldOffset(0xB4)] public byte NumberWidth;
         [FieldOffset(0xB5)] public byte CommaWidth;

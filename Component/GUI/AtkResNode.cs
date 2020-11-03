@@ -26,7 +26,7 @@ namespace FFXIVClientStructs.Component.GUI
         Enabled = 0x20, // this is like, "button can be clicked" etc
         Clip = 0x40,
         Fill = 0x80,
-        IsCollisionNode = 0x100, // set if node type == 8, might be "HasCollision", also set if Unk2 first bit is set (https://github.com/NotAdam/Lumina/blob/714a1d8b9c4e182b411e7c68330d49a5dfccb9bc/src/Lumina/Data/Parsing/Uld/UldRoot.cs#L273)
+        HasCollision = 0x100, // set if node type == 8, might be "HasCollision", also set if Unk2 first bit is set (https://github.com/NotAdam/Lumina/blob/714a1d8b9c4e182b411e7c68330d49a5dfccb9bc/src/Lumina/Data/Parsing/Uld/UldRoot.cs#L273)
         RespondToMouse = 0x200 // this also gets set if the above flag is set
     }
 

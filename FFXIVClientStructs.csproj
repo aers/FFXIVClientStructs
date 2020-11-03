@@ -82,6 +82,16 @@
     <Compile Include="Component\GUI\AtkUnitBase.cs" />
     <Compile Include="Component\GUI\AtkUnitList.cs" />
     <Compile Include="Component\GUI\AtkUnitManager.cs" />
+    <Compile Include="Component\GUI\ULD\ULDComponentDataBase.cs" />
+    <Compile Include="Component\GUI\ULD\ULDComponentDataButton.cs" />
+    <Compile Include="Component\GUI\ULD\ULDComponentDataWIndow.cs" />
+    <Compile Include="Component\GUI\ULD\ULDComponentInfo.cs" />
+    <Compile Include="Component\GUI\ULD\ULDData.cs" />
+    <Compile Include="Component\GUI\ULD\ULDObjectInfo.cs" />
+    <Compile Include="Component\GUI\ULD\ULDPart.cs" />
+    <Compile Include="Component\GUI\ULD\ULDPartsList.cs" />
+    <Compile Include="Component\GUI\ULD\ULDTexture.cs" />
+    <Compile Include="Component\GUI\ULD\ULDWidgetInfo.cs" />
     <Compile Include="FFXIVByteColor.cs" />
     <Compile Include="FFXIVString.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
