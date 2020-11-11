@@ -19,6 +19,7 @@ namespace FFXIVClientStructs.Component.GUI
         [FieldOffset(0x8)] public fixed byte Name[0x20];
         [FieldOffset(0x28)] public ULDData ULDData;
         [FieldOffset(0xC8)] public AtkResNode* RootNode;
+        [FieldOffset(0x108)] public AtkComponentNode* WindowNode;
         [FieldOffset(0x1AC)] public float Scale;
         [FieldOffset(0x182)] public byte Flags;
         [FieldOffset(0x1BC)] public short X;
