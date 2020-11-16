@@ -51,6 +51,8 @@
     <Compile Include="Client\Graphics\Scene\DrawObject.cs" />
     <Compile Include="Client\Graphics\Scene\Human.cs" />
     <Compile Include="Client\Graphics\Scene\Object.cs" />
+    <Compile Include="Client\System\Configuration\SystemConfig.cs" />
+    <Compile Include="Client\System\Framework.cs" />
     <Compile Include="Client\System\Resource\Handle\TextureResourceHandle.cs" />
     <Compile Include="Client\System\Resource\Handle\ResourceHandle.cs" />
     <Compile Include="Client\UI\AddonHudLayoutScreen.cs" />
@@ -58,6 +60,8 @@
     <Compile Include="Client\UI\Agent\AgentHudLayout.cs" />
     <Compile Include="Client\UI\Agent\AgentInterface.cs" />
     <Compile Include="Client\UI\RaptureAtkUnitManager.cs" />
+    <Compile Include="Common\Configuration\ConfigBase.cs" />
+    <Compile Include="Common\Configuration\SystemConfig.cs" />
     <Compile Include="Component\GUI\AtkCollisionNode.cs" />
     <Compile Include="Component\GUI\AtkComponentBase.cs" />
     <Compile Include="Component\GUI\AtkComponentButton.cs" />
