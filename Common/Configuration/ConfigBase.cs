@@ -2,20 +2,61 @@
 
 namespace FFXIVClientStructs.Common.Configuration
 {
-    enum ConfigType
+    public enum ConfigType
     {
-        Unknown = 0,
+        Unused = 0,
         Category = 1,
         UInt = 2,
         Float = 3,
         String = 4
     }
 
+    // union type for uint/float/string
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
+    public unsafe struct ConfigProperties
+    {
+        [FieldOffset(0x0)] public UIntProperties UInt;
+        [FieldOffset(0x0)] public FloatProperties Float;
+        [FieldOffset(0x0)] public StringProperties String;
+
+        [StructLayout(LayoutKind.Explicit, Size = 0xC)]
+        public struct UIntProperties
+        {
+            [FieldOffset(0x0)] public uint DefaultValue;
+            [FieldOffset(0x4)] public uint MinValue;
+            [FieldOffset(0x8)] public uint MaxValue;
+        }
+
+        [StructLayout(LayoutKind.Explicit, Size = 0xC)]
+        public struct FloatProperties
+        {
+            [FieldOffset(0x0)] public float DefaultValue;
+            [FieldOffset(0x4)] public float MinValue;
+            [FieldOffset(0x8)] public float MaxValue;
+        }
+
+        [StructLayout(LayoutKind.Explicit, Size = 0x8)]
+        public struct StringProperties
+        {
+            [FieldOffset(0x0)] public FFXIVString* DefaultValue;
+        }
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x8)]
+    public unsafe struct ConfigValue
+    {
+        [FieldOffset(0x0)] public uint UInt;
+        [FieldOffset(0x0)] public float Float;
+        [FieldOffset(0x0)] public FFXIVString* String;
+    }
+
     [StructLayout(LayoutKind.Explicit, Size = 0x38)]
     public unsafe struct ConfigEntry
     {
+        [FieldOffset(0x0)] public ConfigProperties Properties;
         [FieldOffset(0x10)] public byte* Name; // null-terminated string
         [FieldOffset(0x18)] public int Type;
+        [FieldOffset(0x20)] public ConfigValue Value;
         [FieldOffset(0x28)] public ConfigBase* Owner;
         [FieldOffset(0x30)] public uint Index;
         [FieldOffset(0x34)] public uint _Padding; // pad to 0x38 to align pointers in array
