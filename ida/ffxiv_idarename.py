@@ -64,6 +64,7 @@ NameAddr(0x1401F2990, "Client::UI::Agent::AgentModule_ctor")
 NameAddr(0x1401F7840, "Client::UI::Agent::AgentModule::GetAgentByInternalID")
 NameAddr(0x1401F7850, "Client::UI::Agent::AgentModule::GetAgentByInternalID_2") # dupe?
 NameAddr(0x14020CD10, "Client::UI::Agent::AgentLobby_ctor")
+NameAddr(0x14029f340, "CountdownPointer")
 NameAddr(0x1402F2860, "Client::Graphics::Kernel::Texture_ctor")
 NameAddr(0x1402F9ED0, "Client::Graphics::Kernel::Device_ctor")
 NameAddr(0x140318C20, "Client::Graphics::Render::GraphicsConfig_ctor")
