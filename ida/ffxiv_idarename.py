@@ -1,16 +1,154 @@
 # current exe version: 2020.12.02.0000.0000
 
-def NameAddr(ea, name):
-    idc.MakeName(ea, name)
+from __future__ import print_function
 
-print "Importing IDA data ..."
+try:
+    from typing import List, Optional
+except ImportError:
+    pass
 
-# functions
+try:
+    import idaapi
+    import idc
+
+    # @formatter:off
+    get_image_base = idaapi.get_imagebase  # func()->ea
+    set_addr_name = idc.set_name           # func(ea, name)->1: ok, 0: fail
+    get_addr_name = idc.get_name           # func(ea)->name: ok, "": fail
+    get_qword = idc.get_qword              # func(ea)->long
+    def is_offset(ea): return idc.is_off0(idc.get_full_flags(ea))  # func(ea)->bool
+    # @formatter:on
+except ImportError:  # Ghidra
+    # @formatter:off
+    def get_image_base():        raise NotImplementedError  # noqa
+    def set_addr_name(ea, name): raise NotImplementedError  # noqa
+    def get_addr_name(ea):       raise NotImplementedError  # noqa
+    def get_qword(ea):           raise NotImplementedError  # noqa
+    def is_offset(ea):           raise NotImplementedError  # noqa
+    # @formatter:on
+
+NameAddr = set_addr_name
+
+print("Importing IDA data ...")
+
+
+# TODO: Biggest thing: inheritance needs to be setup so that the base functions get named properly.
+# TODO: Test the image offset stuff, should set the names regardless of your current image base
+# TODO: Force the vtable into a struct, fancy decompiled output
+# TODO: VTables with a count of 1 are likely placeholders. Figure out their true vfunc count
+# TODO: Move individually named functions into their vtable definition
+
+class VTable(object):
+    STANDARD_IMAGE_BASE = 0x140000000L
+    IMAGE_OFFSET = 0x0L
+
+    VTBL_FORMAT = "vtbl_{name}"
+    NAMED_FORMAT = "{name}_{vf_name}"
+    SUB_FORMAT = "{name}_vf{number}"
+    NULLSUB_FORMAT = "{name}_vf{number}_nullsub"
+
+    SUB_PREFIX = "sub_"
+    NULLSUB_PREFIX = "nullsub_"
+    PURECALL = "_purecall"
+
+    def __init__(self, vtable_addr, class_name, vfunc_count):
+        current_image_base = idaapi.get_imagebase()
+        if self.STANDARD_IMAGE_BASE != current_image_base:
+            self.IMAGE_OFFSET = self.STANDARD_IMAGE_BASE - current_image_base
+
+        self.vtable_addr = vtable_addr + self.IMAGE_OFFSET  # type: long
+        self.class_name = class_name  # type: str
+        self.vfunc_count = vfunc_count  # type: int
+        self.vtbl_entries = []  # type: List[Optional[long]]
+
+        set_addr_name(self.vtable_addr, self.VTBL_FORMAT.format(name=self.class_name))
+
+        # Add all the dq offset vfuncs
+        for vfunc_rel_offset in xrange(0, self.vfunc_count * 8, 8):
+            vfunc_offset = self.vtable_addr + vfunc_rel_offset
+            vfunc_addr = get_qword(vfunc_offset)  # type: long
+            if not is_offset(vfunc_offset):
+                print("Skipping: vtbl {0} offset {1:X} is not an offset: {2:X}".format(self.class_name, vfunc_rel_offset, vfunc_addr))
+                self.vtbl_entries.append(None)
+            else:
+                self.vtbl_entries.append(vfunc_addr)
+
+    def set_defaults(self):
+        for index in xrange(len(self.vtbl_entries)):
+            self.set(index, None)
+
+    def set(self, vfunc_index, name=None):
+        """
+        Set the name of a vfunc target via vfunc index from the vtable start
+        :param vfunc_index: VFunc index from the VTable start ea
+        :param name: VFunc name, None for default
+        :return: self
+        """
+        vfunc_addr = self.vtbl_entries[vfunc_index]
+        if vfunc_addr is None:
+            return
+
+        vfunc_name = get_addr_name(vfunc_addr)  # type: str
+
+        if name is not None:
+            vfunc_target_name = self.NAMED_FORMAT.format(name=self.class_name, vf_name=name)
+            set_addr_name(vfunc_addr, vfunc_target_name)
+        else:
+            if self.class_name in vfunc_name:
+                return
+            elif vfunc_name == self.PURECALL:
+                return
+            elif vfunc_name.startswith(self.SUB_PREFIX):
+                vfunc_target_name = self.SUB_FORMAT.format(name=self.class_name, number=vfunc_index)
+                set_addr_name(vfunc_addr, vfunc_target_name)
+            elif vfunc_name.startswith(self.NULLSUB_PREFIX):
+                vfunc_target_name = self.NULLSUB_FORMAT.format(name=self.class_name, number=vfunc_index)
+                set_addr_name(vfunc_addr, vfunc_target_name)
+            else:
+                print("Skipping: vtbl {0} index {1} had a name of \"{2}\"".format(self.class_name, vfunc_index, vfunc_name))
+
+        return self
+
+    def set_rel(self, vfunc_rel_offset, name):
+        """
+        Set the name of a vfunc target via relative offset from the vtable start.
+        :param vfunc_rel_offset: Relative offset from the VTable start ea
+        :param name: VFunc name, None for default
+        :return: self
+        """
+        vfunc_index = vfunc_rel_offset / 8
+        if vfunc_index > self.vfunc_count:
+            print("Error: vtbl {0} attempted to set a relative vfunc higher than its scope: {1:X}".format(self.class_name, rel_offset))
+
+        return self.set(vfunc_index, name)
+
+    def set_many(self, mapping):
+        """
+        Call set many times
+        :param mapping: index:name pairings to be passed to set()
+        :return: self
+        """
+        for kvp in mapping.items():
+            self.set(*kvp)
+        return self
+
+    def set_rel_many(self, mapping):
+        """
+        Call set_rel many times
+        :param mapping: index:name pairings to be passed to set_rel()
+        :return: self
+        """
+        for kvp in mapping.items():
+            self.set_rel(*kvp)
+        return self
+
+
+# region: functions
 # ffxivstring is just their implementation of std::string presumably, there are more ctors etc
-NameAddr(0x140059670, "FFXIVString_ctor") # empty string ctor
-NameAddr(0x1400596B0, "FFXIVString_ctor_copy") # copy constructor
-NameAddr(0x140059730, "FFXIVString_ctor_FromCStr") # from null-terminated string
-NameAddr(0x1400597C0, "FFXIVString_ctor_FromSequence") # (FFXIVString, char * str, size_t size)
+NameAddr(0x140059670, "FFXIVString_ctor")  # empty string ctor
+NameAddr(0x1400596B0, "FFXIVString_ctor_copy")  # copy constructor
+NameAddr(0x140059730, "FFXIVString_ctor_FromCStr")  # from null-terminated string
+NameAddr(0x1400597C0, "FFXIVString_ctor_FromSequence")  # (FFXIVString, char * str, size_t size)
 NameAddr(0x14005A280, "FFXIVString_dtor")
 NameAddr(0x14005A300, "FFXIVString_SetString")
 NameAddr(0x1400604B0, "MemoryManager_Alloc")
@@ -29,7 +167,7 @@ NameAddr(0x140093330, "Client::System::Framework::Task_RunTask_UpdateBonePhysics
 NameAddr(0x1400933B0, "Client::System::Framework::Task_RunTask_ResourceManager")
 NameAddr(0x1400933C0, "Client::System::Framework::Task_RunTask_UpdateGame")
 NameAddr(0x140093E60, "Client::System::Framework::TaskManager_ctor")
-NameAddr(0x1400946B0, "Client::System::Framework::Task_TaskRunner") # task starter which runs the task's function pointer
+NameAddr(0x1400946B0, "Client::System::Framework::Task_TaskRunner")  # task starter which runs the task's function pointer
 NameAddr(0x1400AAE50, "Client::UI::RaptureAtkUnitManager_ctor")
 NameAddr(0x1400B06F0, "Client::UI::RaptureAtkModule_ctor")
 NameAddr(0x1400D37C0, "Client::UI::RaptureAtkModule_UpdateTask1")
@@ -51,7 +189,7 @@ NameAddr(0x1401A0270, "Client::System::Resource::Handle::ResourceHandle_ctor")
 NameAddr(0x1401A1F70, "Client::System::Resource::Handle::ResourceHandle_GetData")
 NameAddr(0x1401A3730, "Client::System::Resource::Handle::TextureResourceHandle_ctor")
 NameAddr(0x1401AF430, "Client::System::Resource::Handle::ApricotResourceHandle_Load")
-NameAddr(0x1401B0460, "ResourceManager_GetResourceAsync") # no vtbl on this class wouldnt be surprised if it was Client::System::Resource::ResourceManager or something though
+NameAddr(0x1401B0460, "ResourceManager_GetResourceAsync")  # no vtbl on this class wouldnt be surprised if it was Client::System::Resource::ResourceManager or something though
 NameAddr(0x1401B0680, "ResourceManager_GetResourceSync")
 NameAddr(0x1401B8A40, "Client::System::Resource::Handle::ModelResourceHandle_GetMaterialFileNameBySlot")
 NameAddr(0x1401D1EB0, "Client::Graphics::Primitive::Manager_ctor")
@@ -62,7 +200,7 @@ NameAddr(0x1401EDBF0, "Client::UI::Agent::AgentInterface_ctor")
 NameAddr(0x1401EDCF0, "Client::UI::AgentInterface_IsAgentActive")
 NameAddr(0x1401F5FF0, "Client::UI::Agent::AgentModule_ctor")
 NameAddr(0x1401FB250, "Client::UI::Agent::AgentModule::GetAgentByInternalID")
-NameAddr(0x1401FB260, "Client::UI::Agent::AgentModule::GetAgentByInternalID_2") # dupe?
+NameAddr(0x1401FB260, "Client::UI::Agent::AgentModule::GetAgentByInternalID_2")  # dupe?
 NameAddr(0x140210710, "Client::UI::Agent::AgentLobby_ctor")
 NameAddr(0x1402A5270, "CountdownPointer")
 NameAddr(0x1402F9930, "Client::Graphics::Kernel::Texture_ctor")
@@ -140,7 +278,7 @@ NameAddr(0x1404CD590, "Component::GUI::AtkResNode_GetScaleX")
 NameAddr(0x1404CD5B0, "Component::GUI::AtkResNode_GetScaleY")
 NameAddr(0x1404CD5D0, "Component::GUI::AtkResNode_SetScale")
 NameAddr(0x1404CE6E0, "Component::GUI::AtkResNode_Init")
-NameAddr(0x1404CE8B0, "Component::GUI::AtkResNode_SetScale0") # SetScale jumps to this
+NameAddr(0x1404CE8B0, "Component::GUI::AtkResNode_SetScale0")  # SetScale jumps to this
 NameAddr(0x1404CF1A0, "Component::GUI::AtkTextNode_SetText")
 NameAddr(0x1404CFCD0, "Component::GUI::AtkTextNode_SetForegroundColour")
 NameAddr(0x1404D0DF0, "Component::GUI::AtkTextNode_SetGlowColour")
@@ -158,10 +296,10 @@ NameAddr(0x1404DB2C0, "GetScaleListEntryFromScale")
 NameAddr(0x1404DB3E0, "Component::GUI::AtkUnitBase_SetScale")
 NameAddr(0x1404DB750, "Component::GUI::AtkUnitBase_CalculateBounds")
 NameAddr(0x1404DDA00, "Component::GUI::AtkUnitBase_Draw")
-NameAddr(0x1404DDEA0, "Component::GUI::AtkStage_GetSingleton1") # dalamud GetBaseUIObject
+NameAddr(0x1404DDEA0, "Component::GUI::AtkStage_GetSingleton1")  # dalamud GetBaseUIObject
 NameAddr(0x1404DDEB0, "Component::GUI::AtkStage_GetSingleton2")
 NameAddr(0x1404E5470, "Component::GUI::AtkUnitManager_ctor")
-NameAddr(0x1404E6F80, "Client::UI::RaptureAtkUnitManager_GetAddonByName") # dalamud GetUIObjByName
+NameAddr(0x1404E6F80, "Client::UI::RaptureAtkUnitManager_GetAddonByName")  # dalamud GetUIObjByName
 NameAddr(0x1404E9750, "Client::UI::RaptureAtkUnitManager_SetUnitScale")
 NameAddr(0x1404E9A10, "GetScaleForListOption")
 NameAddr(0x1404F2670, "Component::GUI::AtkComponentBase_ctor")
@@ -278,14 +416,15 @@ NameAddr(0x1410C3D00, "Client::Game::Character::Companion_EnableDraw")
 NameAddr(0x141101890, "Client::Game::Character::Companion_ctor")
 NameAddr(0x1412F78E0, "crc")
 NameAddr(0x1413716E4, "FreeMemory")
+# endregion
 
-# globals
+# region: globals
 NameAddr(0x14169A2A0, "g_HUDScaleTable")
 NameAddr(0x141D3CE60, "g_ActionManager")
 NameAddr(0x141D66690, "g_Framework")
 NameAddr(0x141D66860, "g_KernelDevice")
 NameAddr(0x141D68228, "g_GraphicsConfig")
-NameAddr(0x141D68238, "g_Framework_2") # these both point to framework
+NameAddr(0x141D68238, "g_Framework_2")  # these both point to framework
 NameAddr(0x141D68278, "g_AllocatorManager")
 NameAddr(0x141D68280, "g_PrimitiveManager")
 NameAddr(0x141D68288, "g_RenderManager")
@@ -305,224 +444,236 @@ NameAddr(0x141D6FA90, "g_ResourceManager")
 NameAddr(0x141D81AA0, "g_OcclusionCullingManager")
 NameAddr(0x141D81AE0, "g_RenderModelLinkedListStart")
 NameAddr(0x141D81AE8, "g_RenderModelLinkedListEnd")
-NameAddr(0x141D82930, "g_JobSystem_ApricotEngineCore") # not a ptr
+NameAddr(0x141D82930, "g_JobSystem_ApricotEngineCore")  # not a ptr
 NameAddr(0x141D8A070, "g_CameraHolder")
 NameAddr(0x141D8A1C0, "g_TargetSystem")
 NameAddr(0x141D8E500, "g_AtkStage")
-NameAddr(0x141DB1D00, "g_BattleCharaStore") # this is a struct/object containing a list of all battlecharas (0x100) and the memory ptrs below
+NameAddr(0x141DB1D00, "g_BattleCharaStore")  # this is a struct/object containing a list of all battlecharas (0x100) and the memory ptrs below
 NameAddr(0x141DB2020, "g_BattleCharaMemory")
 NameAddr(0x141DB2028, "g_CompanionMemory")
 NameAddr(0x141DB2050, "g_ActorList")
 NameAddr(0x141DB2D90, "g_ActorListEnd")
 NameAddr(0x141DD6F08, "g_EventFramework")
 NameAddr(0x141DE2D50, "g_ClientObjectManager")
+# endregion
 
-# vtbl
-NameAddr(0x14164E260, "vtbl_Common::Configuration::ConfigBase")
-NameAddr(0x14164E2C0, "vtbl_Common::Configuration::SystemConfig")
-NameAddr(0x14164E280, "vtbl_Common::Configuration::UIConfig")
-NameAddr(0x14164E2A0, "vtbl_Common::Configuration::UIControlConfig")
-NameAddr(0x14164E2E0, "vtbl_Common::Configuration::DevConfig")
-NameAddr(0x14164F4B8, "vtbl_Client::System::Framework")	
-NameAddr(0x14164F430, "vtbl_Client::System::Framework::Task")
-NameAddr(0x14164F448, "vtbl_Client::System::Framework::TaskManager::RootTask")
-NameAddr(0x14164F460, "vtbl_Client::System::Framework::TaskManager")
-NameAddr(0x14164F478, "vtbl_Client::System::Configuration::SystemConfig")
-NameAddr(0x14164F498, "vtbl_Client::System::Configuration::DevConfig")
-NameAddr(0x14164F4B8, "vtbl_Client::System::Framework")
-NameAddr(0x14164F4E0, "vtbl_Component::Excel::ExcelModuleInterface")
-NameAddr(0x1416594C0, "vtbl_Component::GUI::AtkUnitList")	
-NameAddr(0x1416594C8, "vtbl_Component::GUI::AtkUnitManager")	
-NameAddr(0x141659620, "vtbl_Client::UI::RaptureAtkUnitManager")	
-NameAddr(0x141659878, "vtbl_Client::UI::RaptureAtkModule")
-NameAddr(0x141661D28, "vtbl_Client::Graphics::Kernel::Notifier")
-NameAddr(0x1416657C0, "vtbl_Client::System::Crypt::Crc32")
-NameAddr(0x14166BD58, "vtbl_Client::Graphics::Environment::EnvSoundState")
-NameAddr(0x14166BD78, "vtbl_Client::Graphics::Environment::EnvState")
-NameAddr(0x14166BDC8, "vtbl_Client::Graphics::Environment::EnvSimulator")
-NameAddr(0x14166BDD8, "vtbl_Client::Graphics::Environment::EnvManager")
-NameAddr(0x14166DA88, "vtbl_Client::System::Resource::Handle::ResourceHandle")
-NameAddr(0x14166DC08, "vtbl_Client::System::Resource::Handle::DefaultResourceHandle")
-NameAddr(0x14166E088, "vtbl_Client::System::Resource::Handle::TextureResourceHandle")
-NameAddr(0x14166E8B8, "vtbl_Client::System::Resource::Handle::CharaMakeParameterResourceHandle")
-NameAddr(0x14166FB38, "vtbl_Client::System::Resource::Handle::ApricotResourceHandle")
-NameAddr(0x1416729E8, "vtbl_Client::System::Resource::Handle::UldResourceHandle")
-NameAddr(0x141672B50, "vtbl_Client::System::Resource::Handle::UldResourceHandleFactory")
-NameAddr(0x141673178, "vtbl_Client::Graphics::Primitive::Manager")
-NameAddr(0x141673338, "vtbl_Client::Graphics::DelayedReleaseClassBase")
-NameAddr(0x1416734B0, "vtbl_Client::Graphics::AllocatorLowLevel")
-NameAddr(0x141673568, "vtbl_Client::Graphics::AllocatorManager")
-NameAddr(0x141674968, "vtbl_Client::Network::NetworkModuleProxy")
-NameAddr(0x141675928, "vtbl_Client::UI::Agent::AgentInterface")
-NameAddr(0x141675998, "vtbl_Client::UI::Agent::AgentCharaMake")
-NameAddr(0x141675D70, "vtbl_Client::UI::Agent::AgentModule")
-NameAddr(0x141676AE0, "vtbl_Client::UI::Agent::AgentCursor")
-NameAddr(0x141676B50, "vtbl_Client::UI::Agent::AgentCursorLocation")
-NameAddr(0x14167E120, "vtbl_Client::Graphics::Kernel::Texture")
-NameAddr(0x14167E3A8, "vtbl_Client::Graphics::Kernel::ConstantBuffer")
-NameAddr(0x14167E430, "vtbl_Client::Graphics::Kernel::Device")
-NameAddr(0x1416856A8, "vtbl_Client::Graphics::Kernel::ShaderSceneKey")
-NameAddr(0x1416856B0, "vtbl_Client::Graphics::Kernel::ShaderSubViewKey")
-NameAddr(0x1416856C8, "vtbl_Client::Graphics::Render::GraphicsConfig")
-NameAddr(0x141685708, "vtbl_Client::Graphics::Render::ShadowCamera")
-NameAddr(0x141685850, "vtbl_Client::Graphics::Render::View")
-NameAddr(0x1416858D8, "vtbl_Client::Graphics::Render::PostBoneDeformerBase")
-NameAddr(0x1416859C0, "vtbl_Client::Graphics::Render::AmbientLight")
-NameAddr(0x1416859D0, "vtbl_Client::Graphics::Render::Model")
-NameAddr(0x141685A88, "vtbl_Client::Graphics::Render::ModelRenderer_Client::Graphics::JobSystem_Client::Graphics::Render::ModelRenderer::RenderJob")
-NameAddr(0x141685A90, "vtbl_Client::Graphics::Render::ModelRenderer")
-NameAddr(0x141685AB8, "vtbl_Client::Graphics::Render::GeometryInstancingRenderer")
-NameAddr(0x141685B60, "vtbl_Client::Graphics::Render::BGInstancingRenderer_Client::Graphics::JobSystem_CClient::Graphics::Render::tagInstancingContainerRenderInfo")
-NameAddr(0x141685B68, "vtbl_Client::Graphics::Render::BGInstancingRenderer")
-NameAddr(0x141685BD0, "vtbl_Client::Graphics::Render::TerrainRenderer_Client::Graphics::JobSystem_Client::Graphics::Render::TerrainRenderer::RenderJob")
-NameAddr(0x141685BD8, "vtbl_Client::Graphics::Render::TerrainRenderer")
-NameAddr(0x141685C48, "vtbl_Client::Graphics::Render::UnknownRenderer")
-NameAddr(0x141685CB0, "vtbl_Client::Graphics::Render::WaterRenderer_Client::Graphics::JobSystem_Client::Graphics::Render::WaterRenderer::RenderJob")
-NameAddr(0x141685CB8, "vtbl_Client::Graphics::Render::WaterRenderer")
-NameAddr(0x141685DA0, "vtbl_Client::Graphics::Render::VerticalFogRenderer_Client::Graphics::JobSystem_Client::Graphics::Render::VerticalFogRenderer::RenderJob")
-NameAddr(0x141685DA8, "vtbl_Client::Graphics::Render::VerticalFogRenderer")
-NameAddr(0x141685EC0, "vtbl_Client::Graphics::Render::ShadowMaskUnit")
-NameAddr(0x141685ED8, "vtbl_Client::Graphics::Render::ShaderManager")
-NameAddr(0x141685EE8, "vtbl_Client::Graphics::Render::Manager_Client::Graphics::JobSystem_Client::Graphics::Render::Manager::BoneCollectorJob")
-NameAddr(0x141685EF0, "vtbl_Client::Graphics::Render::Updater_Client::Graphics::Render::PostBoneDeformerBase")
-NameAddr(0x141685EF8, "vtbl_Client::Graphics::Render::Manager")
-NameAddr(0x141685F10, "vtbl_Client::Graphics::Render::ShadowManager")
-NameAddr(0x141685F20, "vtbl_Client::Graphics::Render::LightingManager::LightShape")
-NameAddr(0x141685F28, "vtbl_Client::Graphics::Render::LightingManager::LightingRenderer_Client::Graphics::JobSystem_Client::Graphics::Render::LightingManager::LightingRenderer::RenderJob")
-NameAddr(0x141685F30, "vtbl_Client::Graphics::Render::LightingManager::LightingRenderer")
-NameAddr(0x141685F38, "vtbl_Client::Graphics::Render::LightingManager")
-NameAddr(0x141685F40, "vtbl_Client::Graphics::Render::LightingManager_Client::Graphics::Kernel::Notifier")
-NameAddr(0x141685F60, "vtbl_Client::Graphics::Render::RenderTargetManager")
-NameAddr(0x141685F68, "vtbl_Client::Graphics::Render::RenderTargetManager_Client::Graphics::Kernel::Notifier")
-NameAddr(0x1416885D8, "vtbl_Client::Graphics::PostEffect::PostEffectChain")
-NameAddr(0x1416885E0, "vtbl_Client::Graphics::PostEffect::PostEffectRainbow")
-NameAddr(0x1416885E8, "vtbl_Client::Graphics::PostEffect::PostEffectLensFlare")
-NameAddr(0x1416885F0, "vtbl_Client::Graphics::PostEffect::PostEffectRoofQuery")
-NameAddr(0x141688600, "vtbl_Client::Graphics::PostEffect::PostEffectManager")
-NameAddr(0x141688608, "vtbl_Client::Graphics::PostEffect::PostEffectManager_Client::Graphics::Kernel::Notifier")
-NameAddr(0x14168C238, "vtbl_Client::Graphics::JobSystem(Apricot::Engine::Core_Apricot::Engine::Core::CoreJob_1)")
-NameAddr(0x1416959D0, "vtbl_Client::Graphics::Scene::Object")	
-NameAddr(0x141695A00, "vtbl_Client::Graphics::Scene::DrawObject")
-NameAddr(0x141695B98, "vtbl_Client::Graphics::Scene::World_Client::Graphics::JobSystem_Client::Graphics::Scene::World::SceneUpdateJob")
-NameAddr(0x141695BA0, "vtbl_Client::Graphics::Scene::World")
-NameAddr(0x141695BD0, "vtbl_Client::Graphics::Scene::World_Client::Graphics::Singleton")
-NameAddr(0x141695BD8, "vtbl_Client::Graphics::Scene::Camera")
-NameAddr(0x141695C38, "vtbl_Client::Graphics::Scene::CameraManager_Client::Graphics::Singleton")
-NameAddr(0x141695C40, "vtbl_Client::Graphics::Scene::CameraManager")
-NameAddr(0x141695E08, "vtbl_Client::Graphics::Scene::CharacterUtility")	
-NameAddr(0x141695E88, "vtbl_Client::Graphics::Scene::CharacterBase")	
-NameAddr(0x141696198, "vtbl_Client::Graphics::Scene::Human")
-NameAddr(0x141697860, "vtbl_Client::Graphics::Scene::ResidentResourceManager::ResourceList")
-NameAddr(0x141697870, "vtbl_Client::Graphics::Scene::ResidentResourceManager")
-NameAddr(0x141697950, "vtbl_Client::System::Task::SpursJobEntityWorkerThread")
-NameAddr(0x141697D60, "vtbl_Common::Lua::LuaState")
-NameAddr(0x141697D60, "vtbl_Common::Lua::LuaThread")
-NameAddr(0x141698A90, "vtbl_Client::Game::Control::TargetSystem::AggroListFeeder")
-NameAddr(0x141698AA0, "vtbl_Client::Game::Control::TargetSystem::AllianceListFeeder")
-NameAddr(0x141698AB0, "vtbl_Client::Game::Control::TargetSystem::PartyListFeeder")
-NameAddr(0x141698B00, "vtbl_Client::Game::Control::TargetSystem")	
-NameAddr(0x14169A300, "vtbl_Component::GUI::AtkArrayData")	
-NameAddr(0x14169A310, "vtbl_Component::GUI::NumberArrayData")	
-NameAddr(0x14169A320, "vtbl_Component::GUI::StringArrayData")	
-NameAddr(0x14169A330, "vtbl_Component::GUI::ExtendArrayData")	
-NameAddr(0x14169A438, "vtbl_Component::GUI::AtkSimpleTween")
-NameAddr(0x14169A448, "vtbl_Component::GUI::AtkTexture")
-NameAddr(0x14169A5A8, "vtbl_Component::GUI::AtkStage")	
-NameAddr(0x14169AE50, "vtbl_Component::GUI::AtkResNode")	
-NameAddr(0x14169AE68, "vtbl_Component::GUI::AtkImageNode")	
-NameAddr(0x14169AE80, "vtbl_Component::GUI::AtkTextNode")	
-NameAddr(0x14169AE98, "vtbl_Component::GUI::AtkNineGridNode")	
-NameAddr(0x14169AEB0, "vtbl_Component::GUI::AtkCounterNode")	
-NameAddr(0x14169AEC8, "vtbl_Component::GUI::AtkCollisionNode")	
-NameAddr(0x14169AEE0, "vtbl_Component::GUI::AtkComponentNode")	
-NameAddr(0x14169AEF8, "vtbl_Component::GUI::AtkUnitBase")	
-NameAddr(0x14169B188, "vtbl_Component::GUI::AtkComponentBase")	
-NameAddr(0x14169B228, "vtbl_Component::GUI::AtkComponentButton")	
-NameAddr(0x14169B2F0, "vtbl_Component::GUI::AtkComponentIcon")	
-NameAddr(0x14169B410, "vtbl_Component::GUI::AtkComponentListItemRenderer")	
-NameAddr(0x14169B580, "vtbl_Component::GUI::AtkComponentList")	
-NameAddr(0x14169B6E8, "vtbl_Component::GUI::AtkComponentTreeList")	
-NameAddr(0x14169B850, "vtbl_Component::GUI::AtkModule")	
-NameAddr(0x14169BAF8, "vtbl_Component::GUI::AtkComponentCheckBox")	
-NameAddr(0x14169BBC8, "vtbl_Component::GUI::AtkComponentGaugeBar")	
-NameAddr(0x14169BC68, "vtbl_Component::GUI::AtkComponentSlider")	
-NameAddr(0x14169BD08, "vtbl_Component::GUI::AtkComponentInputBase")	
-NameAddr(0x14169BDA8, "vtbl_Component::GUI::AtkComponentTextInput")	
-NameAddr(0x14169BEA8, "vtbl_Component::GUI::AtkComponentNumericInput")	
-NameAddr(0x14169BF70, "vtbl_Component::GUI::AtkComponentDropDownList")	
-NameAddr(0x14169C010, "vtbl_Component::GUI::AtkComponentRadioButton")	
-NameAddr(0x14169C120, "vtbl_Component::GUI::AtkComponentTab")	
-NameAddr(0x14169C230, "vtbl_Component::GUI::AtkComponentGuildLeveCard")	
-NameAddr(0x14169C2D0, "vtbl_Component::GUI::AtkComponentTextNineGrid")	
-NameAddr(0x14169C370, "vtbl_Component::GUI::AtkResourceRendererBase")
-NameAddr(0x14169C388, "vtbl_Component::GUI::AtkImageNodeRenderer")
-NameAddr(0x14169C3A0, "vtbl_Component::GUI::AtkTextNodeRenderer")
-NameAddr(0x14169C3C0, "vtbl_Component::GUI::AtkNineGridNodeRenderer")
-NameAddr(0x14169C3D8, "vtbl_Component::GUI::AtkCounterNodeRenderer")
-NameAddr(0x14169C3F0, "vtbl_Component::GUI::AtkComponentNodeRenderer")
-NameAddr(0x14169C428, "vtbl_Component::GUI::AtkComponentMap")
-NameAddr(0x14169C408, "vtbl_Component::GUI::AtkResourceRendererManager")	
-NameAddr(0x14169C4C8, "vtbl_Component::GUI::AtkComponentPreview")	
-NameAddr(0x14169C568, "vtbl_Component::GUI::AtkComponentScrollBar")	
-NameAddr(0x14169C608, "vtbl_Component::GUI::AtkComponentIconText")	
-NameAddr(0x14169C6A8, "vtbl_Component::GUI::AtkComponentDragDrop")	
-NameAddr(0x14169C7C8, "vtbl_Component::GUI::AtkComponentMultipurpose")	
-NameAddr(0x14169C938, "vtbl_Component::GUI::AtkComponentWindow")	
-NameAddr(0x14169CA08, "vtbl_Component::GUI::AtkComponentJournalCanvas")	
-NameAddr(0x14169CAA8, "vtbl_Component::GUI::AtkComponentUnknownButton")
-NameAddr(0x1416A9390, "vtbl_Client::UI::Misc::UserFileManager::UserFileEvent")
-NameAddr(0x1416A9CF8, "vtbl_Client::UI::UI3DModule::ObjectInfo")	
-NameAddr(0x1416A9D28, "vtbl_Client::UI::UI3DModule::MemberInfo")	
-NameAddr(0x1416A9D88, "vtbl_Client::UI::UI3DModule")	
-NameAddr(0x1416A9DA0, "vtbl_Client::UI::UIModule")	
-NameAddr(0x1416AA5A0, "vtbl_Client::System::Crypt::SimpleString")
-NameAddr(0x1416AB430, "vtbl_Component::Text::MacroDecoder")
-NameAddr(0x1416AB5F0, "vtbl_Component::Text::TextChecker")
-NameAddr(0x1416AEAE8, "vtbl_Client::UI::Misc::ConfigModule")
-NameAddr(0x1416AEAF8, "vtbl_Client::UI::Misc::ConfigModule_Common::Configuration::ConfigBase::ChangeEventInterface")
-NameAddr(0x1416AEBD8, "vtbl_Client::UI::Misc::RaptureMacroModule")
-NameAddr(0x1416AEC40, "vtbl_Client::UI::Misc::RaptureTextModule")
-NameAddr(0x1416AEEB8, "vtbl_Client::UI::Misc::RaptureLogModule")
-NameAddr(0x1416AEF08, "vtbl_Client::UI::Misc::RaptureHotbarModule")
-NameAddr(0x1416AEF70, "vtbl_Client::UI::Misc::RaptureHotbarModule_Client::System::Input::InputCodeModifiedInterface")
-NameAddr(0x1416AEFE8, "vtbl_Client::UI::Misc::PronounModule")
-NameAddr(0x1416AFAC0, "vtbl_Client::UI::Misc::CharaView")
-NameAddr(0x1416B0EC0, "vtbl_Client::Game::Object::GameObject")	
-NameAddr(0x1416B1B48, "vtbl_Client::Game::Character::Character")
-NameAddr(0x1416B1E10, "vtbl_Client::Game::Character::Character_Client::Graphics::Vfx::VfxDataListener")	
-NameAddr(0x1416C8150, "vtbl_Client::Game::Character::BattleChara")
-NameAddr(0x1416C8418, "vtbl_Client::Game::Character::BattleChara_Client::Graphics::Vfx::VfxDataListener")
-NameAddr(0x1416CA7C0, "vtbl_Client::Game::ActionManager")	
-NameAddr(0x1416CC740, "vtbl_Client::UI::Agent::AgentHUD")
-NameAddr(0x1416CCAF0, "vtbl_Client::UI::Agent::AgentItemDetail")
-NameAddr(0x1416CD4B8, "vtbl_Client::UI::Agent::AgentMap::MapMarkerStructSearchName")	
-NameAddr(0x1416CD4C8, "vtbl_Client::UI::Agent::AgentMap")	
-NameAddr(0x1416CE090, "vtbl_Client::UI::Agent::AgentHudLayout")
-NameAddr(0x1416CEED8, "vtbl_Client::UI::Agent::AgentStatus")
-NameAddr(0x1416CEEA0, "vtbl_Client::UI::Agent::AgentStatus::StatusCharaView")
-NameAddr(0x1416DF680, "vtbl_Client::Game::Event::ModuleBase")
-NameAddr(0x1416E05C8, "vtbl_Client::Game::Event::EventSceneModuleUsualImpl")
-NameAddr(0x1416E48A0, "vtbl_Client::Game::Event::EventHandlerModule")
-NameAddr(0x1416E4918, "vtbl_Client::Game::Event::DirectorModule")
-NameAddr(0x1416F4AA8, "vtbl_Client::Game::Gimmick::GimmickBill")
-NameAddr(0x141798F70, "vtbl_Client::UI::AddonNowLoading")
-NameAddr(0x1417C9DC8, "vtbl_Client::UI::Atk2DAreaMap")	
-NameAddr(0x1417D4E18, "vtbl_Client::UI::AddonTalk")
-NameAddr(0x1417D6AA0, "vtbl_Client::UI::AddonItemDetail")
-NameAddr(0x1417DCDD0, "vtbl_Client::UI::AddonAreaMap")
-NameAddr(0x1417DEC90, "vtbl_Client::UI::AddonNamePlate")	
-NameAddr(0x14179BAD0, "vtbl_Client::UI::AddonHudSelectYesno")
-NameAddr(0x141810480, "vtbl_Client::UI::AddonHudLayoutWindow")	
-NameAddr(0x1418106A0, "vtbl_Client::UI::AddonHudLayoutScreen")
-NameAddr(0x141825368, "vtbl_Client::Graphics::Culling::CullingManager_Client::Graphics::JobSystem_Client::Graphics::Culling::CullingJobOpt")
-NameAddr(0x141825370, "vtbl_Client::Graphics::Culling::CullingManager_Client::Graphics::JobSystem_Client::Graphics::Culling::CallbackJobOpt")
-NameAddr(0x141825378, "vtbl_Client::Graphics::Culling::CullingManager_Client::Graphics::JobSystem_Client::Graphics::Culling::RenderCallbackJob")
-NameAddr(0x141825380, "vtbl_Client::Graphics::Culling::CullingManager")
-NameAddr(0x141828A68, "vtbl_Client::Game::Character::Companion")
-NameAddr(0x141829C80, "vtbl_Client::Game::CameraBase")
-NameAddr(0x141829CE0, "vtbl_Client::Game::Camera")	
-NameAddr(0x14182B780, "vtbl_Client::Graphics::Culling::OcclusionCullingManager")
-NameAddr(0x14182B790, "vtbl_Client::Graphics::Streaming::StreamingManager_Client::Graphics::JobSystem_Client::Graphics::Streaming::StreamingManager::StreamingJob")
-NameAddr(0x14182B798, "vtbl_Client::Graphics::Streaming::StreamingManager")
-NameAddr(0x1418334C8, "vtbl_Component::Log::LogModule")	
-NameAddr(0x14187A2A0, "vtbl_Client::Game::Gimmick::GimmickRect")
+# region: vtbl
+VTable(0x14164E260, "Common::Configuration::ConfigBase", 1).set_defaults()
+VTable(0x14164E2C0, "Common::Configuration::SystemConfig", 1).set_defaults()
+VTable(0x14164E280, "Common::Configuration::UIConfig", 1).set_defaults()
+VTable(0x14164E2A0, "Common::Configuration::UIControlConfig", 1).set_defaults()
+VTable(0x14164E2E0, "Common::Configuration::DevConfig", 1).set_defaults()
+VTable(0x14164F4B8, "Client::System::Framework", 1).set_defaults()
+VTable(0x14164F430, "Client::System::Framework::Task", 1).set_defaults()
+VTable(0x14164F448, "Client::System::Framework::TaskManager::RootTask", 1).set_defaults()
+VTable(0x14164F460, "Client::System::Framework::TaskManager", 1).set_defaults()
+VTable(0x14164F478, "Client::System::Configuration::SystemConfig", 1).set_defaults()
+VTable(0x14164F498, "Client::System::Configuration::DevConfig", 1).set_defaults()
+VTable(0x14164F4B8, "Client::System::Framework", 1).set_defaults()
+VTable(0x14164F4E0, "Component::Excel::ExcelModuleInterface", 1).set_defaults()
+VTable(0x1416594C0, "Component::GUI::AtkUnitList", 1).set_defaults()
+VTable(0x1416594C8, "Component::GUI::AtkUnitManager", 1).set_defaults()
+VTable(0x141659620, "Client::UI::RaptureAtkUnitManager", 1).set_defaults()
+VTable(0x141659878, "Client::UI::RaptureAtkModule", 1).set_defaults()
+VTable(0x141661D28, "Client::Graphics::Kernel::Notifier", 1).set_defaults()
+VTable(0x1416657C0, "Client::System::Crypt::Crc32", 1).set_defaults()
+VTable(0x14166BD58, "Client::Graphics::Environment::EnvSoundState", 1).set_defaults()
+VTable(0x14166BD78, "Client::Graphics::Environment::EnvState", 1).set_defaults()
+VTable(0x14166BDC8, "Client::Graphics::Environment::EnvSimulator", 1).set_defaults()
+VTable(0x14166BDD8, "Client::Graphics::Environment::EnvManager", 1).set_defaults()
+VTable(0x14166DA88, "Client::System::Resource::Handle::ResourceHandle", 1).set_defaults()
+VTable(0x14166DC08, "Client::System::Resource::Handle::DefaultResourceHandle", 1).set_defaults()
+VTable(0x14166E088, "Client::System::Resource::Handle::TextureResourceHandle", 1).set_defaults()
+VTable(0x14166E8B8, "Client::System::Resource::Handle::CharaMakeParameterResourceHandle", 1).set_defaults()
+VTable(0x14166FB38, "Client::System::Resource::Handle::ApricotResourceHandle", 1).set_defaults()
+VTable(0x1416729E8, "Client::System::Resource::Handle::UldResourceHandle", 1).set_defaults()
+VTable(0x141672B50, "Client::System::Resource::Handle::UldResourceHandleFactory", 1).set_defaults()
+VTable(0x141673178, "Client::Graphics::Primitive::Manager", 1).set_defaults()
+VTable(0x141673338, "Client::Graphics::DelayedReleaseClassBase", 1).set_defaults()
+VTable(0x1416734B0, "Client::Graphics::AllocatorLowLevel", 1).set_defaults()
+VTable(0x141673568, "Client::Graphics::AllocatorManager", 1).set_defaults()
+VTable(0x141674968, "Client::Network::NetworkModuleProxy", 1).set_defaults()
+VTable(0x141675928, "Client::UI::Agent::AgentInterface", 1).set_defaults()
+VTable(0x141675998, "Client::UI::Agent::AgentCharaMake", 1).set_defaults()
+VTable(0x141675D70, "Client::UI::Agent::AgentModule", 1).set_defaults()
+VTable(0x141676AE0, "Client::UI::Agent::AgentCursor", 1).set_defaults()
+VTable(0x141676B50, "Client::UI::Agent::AgentCursorLocation", 1).set_defaults()
+VTable(0x14167E120, "Client::Graphics::Kernel::Texture", 1).set_defaults()
+VTable(0x14167E3A8, "Client::Graphics::Kernel::ConstantBuffer", 1).set_defaults()
+VTable(0x14167E430, "Client::Graphics::Kernel::Device", 1).set_defaults()
+VTable(0x1416856A8, "Client::Graphics::Kernel::ShaderSceneKey", 1).set_defaults()
+VTable(0x1416856B0, "Client::Graphics::Kernel::ShaderSubViewKey", 1).set_defaults()
+VTable(0x1416856C8, "Client::Graphics::Render::GraphicsConfig", 1).set_defaults()
+VTable(0x141685708, "Client::Graphics::Render::ShadowCamera", 1).set_defaults()
+VTable(0x141685850, "Client::Graphics::Render::View", 1).set_defaults()
+VTable(0x1416858D8, "Client::Graphics::Render::PostBoneDeformerBase", 1).set_defaults()
+VTable(0x1416859C0, "Client::Graphics::Render::AmbientLight", 1).set_defaults()
+VTable(0x1416859D0, "Client::Graphics::Render::Model", 1).set_defaults()
+VTable(0x141685A88, "Client::Graphics::Render::ModelRenderer_Client::Graphics::JobSystem_Client::Graphics::Render::ModelRenderer::RenderJob", 1).set_defaults()
+VTable(0x141685A90, "Client::Graphics::Render::ModelRenderer", 1).set_defaults()
+VTable(0x141685AB8, "Client::Graphics::Render::GeometryInstancingRenderer", 1).set_defaults()
+VTable(0x141685B60, "Client::Graphics::Render::BGInstancingRenderer_Client::Graphics::JobSystem_CClient::Graphics::Render::tagInstancingContainerRenderInfo", 1).set_defaults()
+VTable(0x141685B68, "Client::Graphics::Render::BGInstancingRenderer", 1).set_defaults()
+VTable(0x141685BD0, "Client::Graphics::Render::TerrainRenderer_Client::Graphics::JobSystem_Client::Graphics::Render::TerrainRenderer::RenderJob", 1).set_defaults()
+VTable(0x141685BD8, "Client::Graphics::Render::TerrainRenderer", 1).set_defaults()
+VTable(0x141685C48, "Client::Graphics::Render::UnknownRenderer", 1).set_defaults()
+VTable(0x141685CB0, "Client::Graphics::Render::WaterRenderer_Client::Graphics::JobSystem_Client::Graphics::Render::WaterRenderer::RenderJob", 1).set_defaults()
+VTable(0x141685CB8, "Client::Graphics::Render::WaterRenderer", 1).set_defaults()
+VTable(0x141685DA0, "Client::Graphics::Render::VerticalFogRenderer_Client::Graphics::JobSystem_Client::Graphics::Render::VerticalFogRenderer::RenderJob", 1).set_defaults()
+VTable(0x141685DA8, "Client::Graphics::Render::VerticalFogRenderer", 1).set_defaults()
+VTable(0x141685EC0, "Client::Graphics::Render::ShadowMaskUnit", 1).set_defaults()
+VTable(0x141685ED8, "Client::Graphics::Render::ShaderManager", 1).set_defaults()
+VTable(0x141685EE8, "Client::Graphics::Render::Manager_Client::Graphics::JobSystem_Client::Graphics::Render::Manager::BoneCollectorJob", 1).set_defaults()
+VTable(0x141685EF0, "Client::Graphics::Render::Updater_Client::Graphics::Render::PostBoneDeformerBase", 1).set_defaults()
+VTable(0x141685EF8, "Client::Graphics::Render::Manager", 1).set_defaults()
+VTable(0x141685F10, "Client::Graphics::Render::ShadowManager", 1).set_defaults()
+VTable(0x141685F20, "Client::Graphics::Render::LightingManager::LightShape", 1).set_defaults()
+VTable(0x141685F28, "Client::Graphics::Render::LightingManager::LightingRenderer_Client::Graphics::JobSystem_Client::Graphics::Render::LightingManager::LightingRenderer::RenderJob", 1).set_defaults()
+VTable(0x141685F30, "Client::Graphics::Render::LightingManager::LightingRenderer", 1).set_defaults()
+VTable(0x141685F38, "Client::Graphics::Render::LightingManager", 1).set_defaults()
+VTable(0x141685F40, "Client::Graphics::Render::LightingManager_Client::Graphics::Kernel::Notifier", 1).set_defaults()
+VTable(0x141685F60, "Client::Graphics::Render::RenderTargetManager", 1).set_defaults()
+VTable(0x141685F68, "Client::Graphics::Render::RenderTargetManager_Client::Graphics::Kernel::Notifier", 1).set_defaults()
+VTable(0x1416885D8, "Client::Graphics::PostEffect::PostEffectChain", 1).set_defaults()
+VTable(0x1416885E0, "Client::Graphics::PostEffect::PostEffectRainbow", 1).set_defaults()
+VTable(0x1416885E8, "Client::Graphics::PostEffect::PostEffectLensFlare", 1).set_defaults()
+VTable(0x1416885F0, "Client::Graphics::PostEffect::PostEffectRoofQuery", 1).set_defaults()
+VTable(0x141688600, "Client::Graphics::PostEffect::PostEffectManager", 1).set_defaults()
+VTable(0x141688608, "Client::Graphics::PostEffect::PostEffectManager_Client::Graphics::Kernel::Notifier", 1).set_defaults()
+VTable(0x14168C238, "Client::Graphics::JobSystem(Apricot::Engine::Core_Apricot::Engine::Core::CoreJob_1)", 1).set_defaults()
+VTable(0x1416959D0, "Client::Graphics::Scene::Object", 1).set_defaults()
+VTable(0x141695A00, "Client::Graphics::Scene::DrawObject", 1).set_defaults()
+VTable(0x141695B98, "Client::Graphics::Scene::World_Client::Graphics::JobSystem_Client::Graphics::Scene::World::SceneUpdateJob", 1).set_defaults()
+VTable(0x141695BA0, "Client::Graphics::Scene::World", 1).set_defaults()
+VTable(0x141695BD0, "Client::Graphics::Scene::World_Client::Graphics::Singleton", 1).set_defaults()
+VTable(0x141695BD8, "Client::Graphics::Scene::Camera", 1).set_defaults()
+VTable(0x141695C38, "Client::Graphics::Scene::CameraManager_Client::Graphics::Singleton", 1).set_defaults()
+VTable(0x141695C40, "Client::Graphics::Scene::CameraManager", 1).set_defaults()
+VTable(0x141695E08, "Client::Graphics::Scene::CharacterUtility", 1).set_defaults()
+VTable(0x141695E88, "Client::Graphics::Scene::CharacterBase", 1).set_defaults()
+VTable(0x141696198, "Client::Graphics::Scene::Human", 1).set_defaults()
+VTable(0x141697860, "Client::Graphics::Scene::ResidentResourceManager::ResourceList", 1).set_defaults()
+VTable(0x141697870, "Client::Graphics::Scene::ResidentResourceManager", 1).set_defaults()
+VTable(0x141697950, "Client::System::Task::SpursJobEntityWorkerThread", 1).set_defaults()
+VTable(0x141697D60, "Common::Lua::LuaState", 1).set_defaults()
+VTable(0x141697D60, "Common::Lua::LuaThread", 1).set_defaults()
+VTable(0x141698A90, "Client::Game::Control::TargetSystem::AggroListFeeder", 1).set_defaults()
+VTable(0x141698AA0, "Client::Game::Control::TargetSystem::AllianceListFeeder", 1).set_defaults()
+VTable(0x141698AB0, "Client::Game::Control::TargetSystem::PartyListFeeder", 1).set_defaults()
+VTable(0x141698B00, "Client::Game::Control::TargetSystem", 1).set_defaults()
+VTable(0x14169A300, "Component::GUI::AtkArrayData", 2).set_defaults()
+VTable(0x14169A310, "Component::GUI::NumberArrayData", 2).set_defaults()
+VTable(0x14169A320, "Component::GUI::StringArrayData", 2).set_defaults()
+VTable(0x14169A330, "Component::GUI::ExtendArrayData", 2).set_defaults()
+VTable(0x14169A438, "Component::GUI::AtkSimpleTween", 2).set_defaults()
+VTable(0x14169A448, "Component::GUI::AtkTexture", 1).set_defaults()
+VTable(0x14169A5A8, "Component::GUI::AtkStage", 1).set_defaults()
+VTable(0x14169AE50, "Component::GUI::AtkResNode", 3).set_defaults()
+VTable(0x14169AE68, "Component::GUI::AtkImageNode", 3).set_defaults()
+VTable(0x14169AE80, "Component::GUI::AtkTextNode", 3).set_defaults()
+VTable(0x14169AE98, "Component::GUI::AtkNineGridNode", 3).set_defaults()
+VTable(0x14169AEB0, "Component::GUI::AtkCounterNode", 3).set_defaults()
+VTable(0x14169AEC8, "Component::GUI::AtkCollisionNode", 3).set_defaults()
+VTable(0x14169AEE0, "Component::GUI::AtkComponentNode", 3).set_defaults()
+VTable(0x14169AEF8, "Component::GUI::AtkUnitBase", 68).set_many({
+    9: "SetPosition",
+    10: "SetX",
+    11: "SetY",
+    12: "GetX",
+    13: "GetY",
+    14: "GetPosition",
+    15: "SetAlpha",
+    16: "SetScale",
+    39: "Draw"
+}).set_defaults()
+VTable(0x14169B188, "Component::GUI::AtkComponentBase", 19).set_defaults()
+VTable(0x14169B228, "Component::GUI::AtkComponentButton", 25).set_defaults()
+VTable(0x14169B2F0, "Component::GUI::AtkComponentIcon", 20).set_defaults()
+VTable(0x14169B410, "Component::GUI::AtkComponentListItemRenderer", 26).set_defaults()
+VTable(0x14169B580, "Component::GUI::AtkComponentList", 45).set_defaults()
+VTable(0x14169B6E8, "Component::GUI::AtkComponentTreeList", 45).set_defaults()
+VTable(0x14169B850, "Component::GUI::AtkModule", 73).set_defaults()
+VTable(0x14169BAF8, "Component::GUI::AtkComponentCheckBox", 26).set_defaults()
+VTable(0x14169BBC8, "Component::GUI::AtkComponentGaugeBar", 20).set_defaults()
+VTable(0x14169BC68, "Component::GUI::AtkComponentSlider", 20).set_defaults()
+VTable(0x14169BD08, "Component::GUI::AtkComponentInputBase", 20).set_defaults()
+VTable(0x14169BDA8, "Component::GUI::AtkComponentTextInput", 20).set_defaults()
+VTable(0x14169BEA8, "Component::GUI::AtkComponentNumericInput", 20).set_defaults()
+VTable(0x14169BF70, "Component::GUI::AtkComponentDropDownList", 20).set_defaults()
+VTable(0x14169C010, "Component::GUI::AtkComponentRadioButton", 34).set_defaults()
+VTable(0x14169C120, "Component::GUI::AtkComponentTab", 34).set_defaults()
+VTable(0x14169C230, "Component::GUI::AtkComponentGuildLeveCard", 20).set_defaults()
+VTable(0x14169C2D0, "Component::GUI::AtkComponentTextNineGrid", 20).set_defaults()
+VTable(0x14169C370, "Component::GUI::AtkResourceRendererBase", 3).set_defaults()
+VTable(0x14169C388, "Component::GUI::AtkImageNodeRenderer", 3).set_defaults()
+VTable(0x14169C3A0, "Component::GUI::AtkTextNodeRenderer", 4).set_defaults()
+VTable(0x14169C3C0, "Component::GUI::AtkNineGridNodeRenderer", 3).set_defaults()
+VTable(0x14169C3D8, "Component::GUI::AtkCounterNodeRenderer", 3).set_defaults()
+VTable(0x14169C3F0, "Component::GUI::AtkComponentNodeRenderer", 3).set_defaults()
+VTable(0x14169C408, "Component::GUI::AtkResourceRendererManager", 4).set_defaults()
+VTable(0x14169C428, "Component::GUI::AtkComponentMap", 20).set_defaults()
+VTable(0x14169C4C8, "Component::GUI::AtkComponentPreview", 20).set_defaults()
+VTable(0x14169C568, "Component::GUI::AtkComponentScrollBar", 20).set_defaults()
+VTable(0x14169C608, "Component::GUI::AtkComponentIconText", 20).set_defaults()
+VTable(0x14169C6A8, "Component::GUI::AtkComponentDragDrop", 20).set_defaults()
+VTable(0x14169C7C8, "Component::GUI::AtkComponentMultipurpose", 20).set_defaults()
+VTable(0x14169C938, "Component::GUI::AtkComponentWindow", 26).set_defaults()
+VTable(0x14169CA08, "Component::GUI::AtkComponentJournalCanvas", 20).set_defaults()
+VTable(0x14169CAA8, "Component::GUI::AtkComponentUnknownButton", 25).set_defaults()
+VTable(0x1416A9390, "Client::UI::Misc::UserFileManager::UserFileEvent", 1).set_defaults()
+VTable(0x1416A9CF8, "Client::UI::UI3DModule::ObjectInfo", 1).set_defaults()
+VTable(0x1416A9D28, "Client::UI::UI3DModule::MemberInfo", 1).set_defaults()
+VTable(0x1416A9D88, "Client::UI::UI3DModule", 1).set_defaults()
+VTable(0x1416A9DA0, "Client::UI::UIModule", 1).set_defaults()
+VTable(0x1416AA5A0, "Client::System::Crypt::SimpleString", 1).set_defaults()
+VTable(0x1416AB430, "Component::Text::MacroDecoder", 1).set_defaults()
+VTable(0x1416AB5F0, "Component::Text::TextChecker", 1).set_defaults()
+VTable(0x1416AEAE8, "Client::UI::Misc::ConfigModule", 1).set_defaults()
+VTable(0x1416AEAF8, "Client::UI::Misc::ConfigModule_Common::Configuration::ConfigBase::ChangeEventInterface", 1).set_defaults()
+VTable(0x1416AEBD8, "Client::UI::Misc::RaptureMacroModule", 1).set_defaults()
+VTable(0x1416AEC40, "Client::UI::Misc::RaptureTextModule", 1).set_defaults()
+VTable(0x1416AEEB8, "Client::UI::Misc::RaptureLogModule", 1).set_defaults()
+VTable(0x1416AEF08, "Client::UI::Misc::RaptureHotbarModule", 1).set_defaults()
+VTable(0x1416AEF70, "Client::UI::Misc::RaptureHotbarModule_Client::System::Input::InputCodeModifiedInterface", 1).set_defaults()
+VTable(0x1416AEFE8, "Client::UI::Misc::PronounModule", 1).set_defaults()
+VTable(0x1416AFAC0, "Client::UI::Misc::CharaView", 1).set_defaults()
+VTable(0x1416B0EC0, "Client::Game::Object::GameObject", 1).set_defaults()
+VTable(0x1416B1B48, "Client::Game::Character::Character", 1).set_defaults()
+VTable(0x1416B1E10, "Client::Game::Character::Character_Client::Graphics::Vfx::VfxDataListener", 1).set_defaults()
+VTable(0x1416C8150, "Client::Game::Character::BattleChara", 1).set_defaults()
+VTable(0x1416C8418, "Client::Game::Character::BattleChara_Client::Graphics::Vfx::VfxDataListener", 1).set_defaults()
+VTable(0x1416CA7C0, "Client::Game::ActionManager", 1).set_defaults()
+VTable(0x1416CC740, "Client::UI::Agent::AgentHUD", 1).set_defaults()
+VTable(0x1416CCAF0, "Client::UI::Agent::AgentItemDetail", 1).set_defaults()
+VTable(0x1416CD4B8, "Client::UI::Agent::AgentMap::MapMarkerStructSearchName", 1).set_defaults()
+VTable(0x1416CD4C8, "Client::UI::Agent::AgentMap", 1).set_defaults()
+VTable(0x1416CE090, "Client::UI::Agent::AgentHudLayout", 1).set_defaults()
+VTable(0x1416CEED8, "Client::UI::Agent::AgentStatus", 1).set_defaults()
+VTable(0x1416CEEA0, "Client::UI::Agent::AgentStatus::StatusCharaView", 1).set_defaults()
+VTable(0x1416DF680, "Client::Game::Event::ModuleBase", 1).set_defaults()
+VTable(0x1416E05C8, "Client::Game::Event::EventSceneModuleUsualImpl", 1).set_defaults()
+VTable(0x1416E48A0, "Client::Game::Event::EventHandlerModule", 1).set_defaults()
+VTable(0x1416E4918, "Client::Game::Event::DirectorModule", 1).set_defaults()
+VTable(0x1416F4AA8, "Client::Game::Gimmick::GimmickBill", 1).set_defaults()
+VTable(0x141798F70, "Client::UI::AddonNowLoading", 1).set_defaults()
+VTable(0x1417C9DC8, "Client::UI::Atk2DAreaMap", 1).set_defaults()
+VTable(0x1417D4E18, "Client::UI::AddonTalk", 1).set_defaults()
+VTable(0x1417D6AA0, "Client::UI::AddonItemDetail", 1).set_defaults()
+VTable(0x1417DCDD0, "Client::UI::AddonAreaMap", 1).set_defaults()
+VTable(0x1417DEC90, "Client::UI::AddonNamePlate", 1).set_defaults()
+VTable(0x14179BAD0, "Client::UI::AddonHudSelectYesno", 1).set_defaults()
+VTable(0x141810480, "Client::UI::AddonHudLayoutWindow", 1).set_defaults()
+VTable(0x1418106A0, "Client::UI::AddonHudLayoutScreen", 1).set_defaults()
+VTable(0x141825368, "Client::Graphics::Culling::CullingManager_Client::Graphics::JobSystem_Client::Graphics::Culling::CullingJobOpt", 1).set_defaults()
+VTable(0x141825370, "Client::Graphics::Culling::CullingManager_Client::Graphics::JobSystem_Client::Graphics::Culling::CallbackJobOpt", 1).set_defaults()
+VTable(0x141825378, "Client::Graphics::Culling::CullingManager_Client::Graphics::JobSystem_Client::Graphics::Culling::RenderCallbackJob", 1).set_defaults()
+VTable(0x141825380, "Client::Graphics::Culling::CullingManager", 1).set_defaults()
+VTable(0x141828A68, "Client::Game::Character::Companion", 1).set_defaults()
+VTable(0x141829C80, "Client::Game::CameraBase", 1).set_defaults()
+VTable(0x141829CE0, "Client::Game::Camera", 1).set_defaults()
+VTable(0x14182B780, "Client::Graphics::Culling::OcclusionCullingManager", 1).set_defaults()
+VTable(0x14182B790, "Client::Graphics::Streaming::StreamingManager_Client::Graphics::JobSystem_Client::Graphics::Streaming::StreamingManager::StreamingJob", 1).set_defaults()
+VTable(0x14182B798, "Client::Graphics::Streaming::StreamingManager", 1).set_defaults()
+VTable(0x1418334C8, "Component::Log::LogModule", 1).set_defaults()
+VTable(0x14187A2A0, "Client::Game::Gimmick::GimmickRect", 1).set_defaults()
+# endregion
