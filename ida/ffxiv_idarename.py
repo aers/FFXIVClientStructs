@@ -52,7 +52,7 @@ class VTable(object):
     PURECALL = "_purecall"
 
     def __init__(self, vtable_addr, class_name, vfunc_count):
-        current_image_base = idaapi.get_imagebase()
+        current_image_base = get_image_base()
         if self.STANDARD_IMAGE_BASE != current_image_base:
             self.IMAGE_OFFSET = self.STANDARD_IMAGE_BASE - current_image_base
 
