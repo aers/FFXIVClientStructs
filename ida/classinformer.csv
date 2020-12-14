@@ -22,8 +22,8 @@ Vftable,Methods,Flags,Type,Hierarchy
 40D0107C,15,,Client::System::Memory::Regular::RegularAllocator,Client::System::Memory::Regular::RegularAllocator: Client::System::Memory::IMemoryModule;
 40D010BC,15,,Client::System::Memory::Regular::UIAllocator,"Client::System::Memory::Regular::UIAllocator: Client::System::Memory::Regular::RegularAllocator, Client::System::Memory::IMemoryModule;"
 40D010FC,15,,Client::System::Memory::Regular::FileAllocator,"Client::System::Memory::Regular::FileAllocator: Client::System::Memory::Regular::RegularAllocator, Client::System::Memory::IMemoryModule;"
-40D0334C,1,,Client::System::Crypt::Crc32,Client::System::Crypt::Crc32: 
-40D03354,1,,Client::System::Crypt::CryptKey,Client::System::Crypt::CryptKey: 
+40D0334C,1,,Client::System::Crypt::Crc32,Client::System::Crypt::Crc32:
+40D03354,1,,Client::System::Crypt::CryptKey,Client::System::Crypt::CryptKey:
 40D0335C,2,,Client::System::Crypt::ImportUtil,Client::System::Crypt::ImportUtil: 
 40D03368,1,,Client::System::Crypt::PublicKey,Client::System::Crypt::PublicKey: Client::System::Crypt::CryptKey;
 40D03370,1,,Client::System::Crypt::SessionKey,Client::System::Crypt::SessionKey: Client::System::Crypt::CryptKey;
@@ -301,9 +301,9 @@ Vftable,Methods,Flags,Type,Hierarchy
 40D16F08,3,M,Client::System::Framework::JobListArgArrayAndIndex,Client::System::Framework::Task: 
 40D16F18,5,M,Client::System::Framework::JobListNoArg,"Client::System::Framework::JobListNoArg: Client::System::Framework::JobListInterface, Client::System::Common::NonCopyable, Client::System::Framework::Task;"
 40D16F30,3,M,Client::System::Framework::JobListNoArg,Client::System::Framework::Task: 
-40D1898C,1,,Client::Graphics::Environment::EnvSoundState,Client::Graphics::Environment::EnvSoundState: 
-40D18994,1,,Client::Graphics::Environment::EnvState,Client::Graphics::Environment::EnvState: 
-40D1899C,1,,Client::Graphics::Environment::EnvAnim,Client::Graphics::Environment::EnvAnim: 
+40D1898C,1,,Client::Graphics::Environment::EnvSoundState,Client::Graphics::Environment::EnvSoundState:
+40D18994,1,,Client::Graphics::Environment::EnvState,Client::Graphics::Environment::EnvState:
+40D1899C,1,,Client::Graphics::Environment::EnvAnim,Client::Graphics::Environment::EnvAnim:
 40D189A4,1,,Client::Graphics::Environment::EnvSimulator,Client::Graphics::Environment::EnvSimulator: 
 40D189AC,1,,Client::Graphics::Environment::EnvRenderController,Client::Graphics::Environment::EnvRenderController: 
 40D189B4,1,,Client::Graphics::Singleton<Client::Graphics::Environment::EnvManager>,Client::Graphics::Singleton<Client::Graphics::Environment::EnvManager>: 
@@ -323,7 +323,7 @@ Vftable,Methods,Flags,Type,Hierarchy
 40D1AA9C,1,,Client::Graphics::Kernel::InputLayout,Client::Graphics::Kernel::InputLayout: 
 40D1AAA4,1,,Client::Graphics::Singleton<Client::Graphics::Kernel::Device>,Client::Graphics::Singleton<Client::Graphics::Kernel::Device>: 
 40D1AAB4,1,,Client::Graphics::Kernel::Context,Client::Graphics::Kernel::Context: 
-40D1AABC,5,,Client::Graphics::Kernel::Notifier,Client::Graphics::Kernel::Notifier: 
+40D1AABC,5,,Client::Graphics::Kernel::Notifier,Client::Graphics::Kernel::Notifier:
 40D1AAD4,5,,Client::Graphics::Kernel::Resource,"Client::Graphics::Kernel::Resource: Client::Graphics::DelayedReleaseClassBase, Client::Graphics::ReferencedClassBase;"
 40D1AAEC,5,,Client::Graphics::Kernel::Buffer,"Client::Graphics::Kernel::Buffer: Client::Graphics::Kernel::Resource, Client::Graphics::DelayedReleaseClassBase, Client::Graphics::ReferencedClassBase;"
 40D1AB04,5,M,Client::Graphics::Kernel::VertexBuffer,"Client::Graphics::Kernel::VertexBuffer: Client::Graphics::Kernel::Buffer, Client::Graphics::Kernel::Resource, Client::Graphics::DelayedReleaseClassBase, Client::Graphics::ReferencedClassBase, Client::Graphics::Kernel::Notifier;"
