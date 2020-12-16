@@ -188,7 +188,7 @@ class VTable(object):
         set_addr_name(vtbl_ea, self.VTBL_FORMAT.format(cls=self.class_name))
 
         # Name each vfunc
-        for vfunc_index in xrange(self.vfunc_count):
+        for vfunc_index in range(self.vfunc_count):
             vfunc_offset = vtbl_ea + vfunc_index * 8
             vfunc_ea = get_qword(vfunc_offset)  # type: int
             if is_offset(vfunc_offset):
