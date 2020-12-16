@@ -322,13 +322,8 @@ NameAddr(0x141DE2D50, "g_ClientObjectManager")
 vtbls = VTableManager()
 # Unknown classes old RTTI data says known classes inherit from
 vtbls.register(0x0, "Client::Game::Control::TargetSystem::ListFeeder")
-vtbls.register(0x0, "Client::Game::Event::EventHandler")
-vtbls.register(0x0, "Client::Game::Event::EventSceneModuleImplBase")
-vtbls.register(0x0, "Client::Game::Event::LuaEventHandler")
-vtbls.register(0x0, "Client::Game::Gimmick::GimmickEventHandler")
 vtbls.register(0x0, "Client::Game::InstanceContent::ContentSheetWaiterInterface")
 vtbls.register(0x0, "Client::Game::Object::IGameObjectEventListener")
-vtbls.register(0x0, "Client::Graphics::IAllocator")
 vtbls.register(0x0, "Client::Graphics::Kernel::Buffer")
 vtbls.register(0x0, "Client::Graphics::Kernel::Resource")
 vtbls.register(0x0, "Client::Graphics::ReferencedClassBase")
@@ -438,6 +433,7 @@ vtbls.register(0x141673178, "Client::Graphics::Primitive::Manager", 1, ["Client:
 vtbls.register(0x141673338, "Client::Graphics::DelayedReleaseClassBase", 5, ["Client::Graphics::ReferencedClassBase"], {
     0x1401D4810: "ctor",
 })
+vtbls.register(0x141673360, "Client::Graphics::IAllocator", 10, [], {})
 vtbls.register(0x1416734B0, "Client::Graphics::AllocatorLowLevel", 10, ["Client::Graphics::IAllocator"], {})
 vtbls.register(0x141673568, "Client::Graphics::AllocatorManager", 2, ["Client::Graphics::Singleton"], {
     0x1401D6D90: "ctor",
@@ -852,7 +848,10 @@ vtbls.register(0x1416CEED8, "Client::UI::Agent::AgentStatus", 14, ["Client::UI::
     0x140904190: "ctor",
 })
 vtbls.register(0x1416CEEA0, "Client::UI::Agent::AgentStatus::StatusCharaView", 7, ["Client::UI::Misc::CharaView"], {})
+vtbls.register(0x1416DEE58, "Client::Game::Event::EventHandler", 256, [], {})
 vtbls.register(0x1416DF680, "Client::Game::Event::ModuleBase", 7, [], {})
+vtbls.register(0x1416DF6E0, "Client::Game::Event::LuaEventHandler", 258, ["Client::Game::Event::EventHandler"], {})
+vtbls.register(0x1416DFEF0, "Client::Game::Event::EventSceneModuleImplBase", 219, [], {})
 vtbls.register(0x1416E05C8, "Client::Game::Event::EventSceneModuleUsualImpl", 219, ["Client::Game::Event::EventSceneModuleImplBase"], {})
 vtbls.register(0x1416E48A0, "Client::Game::Event::EventHandlerModule", 8, ["Client::Game::Event::ModuleBase"], {})
 vtbls.register(0x1416E4918, "Client::Game::Event::DirectorModule", 7, ["Client::Game::Event::ModuleBase"], {})
@@ -909,6 +908,7 @@ vtbls.register(0x14182B780, "Client::Graphics::Culling::OcclusionCullingManager"
 vtbls.register(0x14182B790, "Client::Graphics::Streaming::StreamingManager_Client::Graphics::JobSystem_Client::Graphics::Streaming::StreamingManager::StreamingJob", 1, ["Client::Graphics::Singleton"], {})
 vtbls.register(0x14182B798, "Client::Graphics::Streaming::StreamingManager", 1, ["Client::Graphics::Singleton"], {})
 vtbls.register(0x1418334C8, "Component::Log::LogModule", 10, ["Component::Log::LogModuleInterface", "Client::System::Common::NonCopyable"], {})
+vtbls.register(0x1418791E0, "Client::Game::Gimmick::GimmickEventHandler", 265, ["Client::Game::Event::LuaEventHandler", "Client::Game::Event::EventHandler"], {})
 vtbls.register(0x14187A2A0, "Client::Game::Gimmick::GimmickRect", 265, ["Client::Game::Gimmick::GimmickEventHandler", "Client::Game::Event::LuaEventHandler", "Client::Game::Event::EventHandler", "Client::Game::InstanceContent::ContentSheetWaiterInterface"], {})
 vtbls.finalize()
 
