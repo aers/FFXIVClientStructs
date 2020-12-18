@@ -588,6 +588,7 @@ vtbls.register(0x141698AA0, "Client::Game::Control::TargetSystem::AllianceListFe
 vtbls.register(0x141698AB0, "Client::Game::Control::TargetSystem::PartyListFeeder", 2, ["Client::Game::Control::TargetSystem::ListFeeder"], {})
 vtbls.register(0x141698B00, "Client::Game::Control::TargetSystem", 4, ["Client::Game::Object::IGameObjectEventListener"], {
     0x1404937B0: "ctor",
+    0x14049E2D0: "IsActorInViewRange",
 })
 vtbls.register(0x14169A300, "Component::GUI::AtkArrayData", 2, [], {})
 vtbls.register(0x14169A310, "Component::GUI::NumberArrayData", 2, ["Component::GUI::AtkArrayData"], {
@@ -814,6 +815,7 @@ vtbls.register(0x1416B1B48, "Client::Game::Character::Character", 89, ["Client::
     16: "EnableDraw",
     17: "DisableDraw",
     21: "SetDrawObject",
+    40: "Update",
     0x1406D5AC0: "dtor",
     0x1406EA340: "ctor",
 })
