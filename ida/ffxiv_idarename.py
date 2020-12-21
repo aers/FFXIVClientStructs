@@ -670,29 +670,6 @@ api.set_addr_name(0x141DE2D50, "g_ClientObjectManager")
 # region: vtbl
 factory = FfxivClassFactory()
 
-# TODO: Error: The sum of "Client::Graphics::Kernel::Texture"s parent vtbl sizes (8) is greater than the actual class itself (5)
-# TODO: Error: The sum of "Client::Graphics::Render::ModelRenderer_Client::Graphics::JobSystem_Client::Graphics::Render::ModelRenderer::RenderJob"s parent vtbl sizes (4) is greater than the actual class itself (1)
-# TODO: Error: The sum of "Client::Graphics::Render::BGInstancingRenderer_Client::Graphics::JobSystem_CClient::Graphics::Render::tagInstancingContainerRenderInfo"s parent vtbl sizes (5) is greater than the actual class itself (1)
-# TODO: Error: The sum of "Client::Graphics::Render::TerrainRenderer_Client::Graphics::JobSystem_Client::Graphics::Render::TerrainRenderer::RenderJob"s parent vtbl sizes (5) is greater than the actual class itself (1)
-# TODO: Error: The sum of "Client::Graphics::Render::WaterRenderer_Client::Graphics::JobSystem_Client::Graphics::Render::WaterRenderer::RenderJob"s parent vtbl sizes (5) is greater than the actual class itself (1)
-# TODO: Error: The sum of "Client::Graphics::Render::VerticalFogRenderer_Client::Graphics::JobSystem_Client::Graphics::Render::VerticalFogRenderer::RenderJob"s parent vtbl sizes (5) is greater than the actual class itself (1)
-# TODO: Error: The sum of "Client::Graphics::Render::ShadowManager"s parent vtbl sizes (3) is greater than the actual class itself (1)
-# TODO: Error: The sum of "Client::Graphics::Render::LightingManager"s parent vtbl sizes (3) is greater than the actual class itself (1)
-# TODO: Error: The sum of "Client::Graphics::Render::RenderTargetManager"s parent vtbl sizes (3) is greater than the actual class itself (1)
-# TODO: Error: The sum of "Client::Graphics::PostEffect::PostEffectManager"s parent vtbl sizes (3) is greater than the actual class itself (1)
-# TODO: Error: The sum of "Client::Graphics::JobSystem(Apricot::Engine::Core_Apricot::Engine::Core::CoreJob_1)"s parent vtbl sizes (3) is greater than the actual class itself (1)
-# TODO: Error: The sum of "Client::Graphics::Scene::World_Client::Graphics::JobSystem_Client::Graphics::Scene::World::SceneUpdateJob"s parent vtbl sizes (6) is greater than the actual class itself (1)
-# TODO: Error: The sum of "Client::Graphics::Scene::World_Client::Graphics::Singleton"s parent vtbl sizes (6) is greater than the actual class itself (1)
-# TODO: Error: The sum of "Client::Graphics::Scene::CameraManager_Client::Graphics::Singleton"s parent vtbl sizes (6) is greater than the actual class itself (1)
-# TODO: Error: The sum of "Client::Graphics::Scene::CameraManager"s parent vtbl sizes (3) is greater than the actual class itself (1)
-# TODO: Error: The sum of "Client::UI::Misc::RaptureTextModule"s parent vtbl sizes (55) is greater than the actual class itself (20)
-# TODO: Error: The sum of "Client::UI::Misc::RaptureHotbarModule_Client::System::Input::InputCodeModifiedInterface"s parent vtbl sizes (13) is greater than the actual class itself (1)
-# TODO: Error: The sum of "Client::Game::Character::Character_Client::Graphics::Vfx::VfxDataListener"s parent vtbl sizes (78) is greater than the actual class itself (2)
-# TODO: Error: The sum of "Client::Game::Character::BattleChara_Client::Graphics::Vfx::VfxDataListener"s parent vtbl sizes (89) is greater than the actual class itself (2)
-# TODO: Error: The sum of "Client::Graphics::Culling::CullingManager_Client::Graphics::JobSystem_Client::Graphics::Culling::CullingJobOpt"s parent vtbl sizes (68) is greater than the actual class itself (1)
-# TODO: Error: The sum of "Client::Graphics::Culling::CullingManager_Client::Graphics::JobSystem_Client::Graphics::Culling::CallbackJobOpt"s parent vtbl sizes (68) is greater than the actual class itself (1)
-# TODO: Error: The sum of "Client::Graphics::Culling::CullingManager_Client::Graphics::JobSystem_Client::Graphics::Culling::RenderCallbackJob"s parent vtbl sizes (68) is greater than the actual class itself (1)
-
 # Unknown classes old RTTI data says known classes inherit from
 factory.register("Client::Game::Control::TargetSystem::ListFeeder")
 factory.register("Client::Game::InstanceContent::ContentSheetWaiterInterface")
@@ -825,7 +802,7 @@ factory.register(0x141675D70, "Client::UI::Agent::AgentModule", [], {
 })
 factory.register(0x141676AE0, "Client::UI::Agent::AgentCursor", ["Client::UI::Agent::AgentInterface"], {})
 factory.register(0x141676B50, "Client::UI::Agent::AgentCursorLocation", ["Client::UI::Agent::AgentInterface"], {})
-factory.register(0x14167E120, "Client::Graphics::Kernel::Texture", ["Client::Graphics::Kernel::Resource", "Client::Graphics::DelayedReleaseClassBase", "Client::Graphics::Kernel::Notifier"], {
+factory.register(0x14167E120, "Client::Graphics::Kernel::Texture", ["Client::Graphics::Kernel::Resource", "Client::Graphics::DelayedReleaseClassBase"], {
     0x1402F9930: "ctor",
 })
 factory.register(0x14167E3A8, "Client::Graphics::Kernel::ConstantBuffer", ["Client::Graphics::Kernel::Buffer", "Client::Graphics::Kernel::Resource", "Client::Graphics::DelayedReleaseClassBase"], {})
@@ -848,24 +825,24 @@ factory.register(0x1416859D0, "Client::Graphics::Render::Model", ["Client::Graph
     0x14032B780: "SetupFromModelResourceHandle",
 })
 factory.register(0x141685A50, "Client::Graphics::Render::BaseRenderer", [], {})  # TODO: Verify this
-factory.register(0x141685A88, "Client::Graphics::Render::ModelRenderer_Client::Graphics::JobSystem_Client::Graphics::Render::ModelRenderer::RenderJob", ["Client::Graphics::RenderObjectList", "Client::Graphics::Render::RenderObject", "Client::Graphics::ReferencedClassBase"], {})
+factory.register(0x141685A88, "Client::Graphics::Render::ModelRenderer_Client::Graphics::JobSystem_Client::Graphics::Render::ModelRenderer::RenderJob", [], {})
 factory.register(0x141685A90, "Client::Graphics::Render::ModelRenderer", ["Client::Graphics::Render::BaseRenderer"], {})
 factory.register(0x141685AB8, "Client::Graphics::Render::GeometryInstancingRenderer", ["Client::Graphics::Render::BaseRenderer"], {})
-factory.register(0x141685B60, "Client::Graphics::Render::BGInstancingRenderer_Client::Graphics::JobSystem_CClient::Graphics::Render::tagInstancingContainerRenderInfo", ["Client::Graphics::Render::BaseRenderer"], {})
+factory.register(0x141685B60, "Client::Graphics::Render::BGInstancingRenderer_Client::Graphics::JobSystem_CClient::Graphics::Render::tagInstancingContainerRenderInfo", [], {})
 factory.register(0x141685B68, "Client::Graphics::Render::BGInstancingRenderer", ["Client::Graphics::Render::GeometryInstancingRenderer"], {})
-factory.register(0x141685BD0, "Client::Graphics::Render::TerrainRenderer_Client::Graphics::JobSystem_Client::Graphics::Render::TerrainRenderer::RenderJob", ["Client::Graphics::Render::GeometryInstancingRenderer"], {})
+factory.register(0x141685BD0, "Client::Graphics::Render::TerrainRenderer_Client::Graphics::JobSystem_Client::Graphics::Render::TerrainRenderer::RenderJob", [], {})
 factory.register(0x141685BD8, "Client::Graphics::Render::TerrainRenderer", ["Client::Graphics::Render::BaseRenderer"], {})
 factory.register(0x141685C48, "Client::Graphics::Render::UnknownRenderer", ["Client::Graphics::Render::BaseRenderer"], {})
-factory.register(0x141685CB0, "Client::Graphics::Render::WaterRenderer_Client::Graphics::JobSystem_Client::Graphics::Render::WaterRenderer::RenderJob", ["Client::Graphics::Render::BaseRenderer"], {})
+factory.register(0x141685CB0, "Client::Graphics::Render::WaterRenderer_Client::Graphics::JobSystem_Client::Graphics::Render::WaterRenderer::RenderJob", [], {})
 factory.register(0x141685CB8, "Client::Graphics::Render::WaterRenderer", ["Client::Graphics::Render::BaseRenderer"], {})
-factory.register(0x141685DA0, "Client::Graphics::Render::VerticalFogRenderer_Client::Graphics::JobSystem_Client::Graphics::Render::VerticalFogRenderer::RenderJob", ["Client::Graphics::Render::BaseRenderer"], {})
+factory.register(0x141685DA0, "Client::Graphics::Render::VerticalFogRenderer_Client::Graphics::JobSystem_Client::Graphics::Render::VerticalFogRenderer::RenderJob", [], {})
 factory.register(0x141685DA8, "Client::Graphics::Render::VerticalFogRenderer", ["Client::Graphics::Render::BaseRenderer"], {})
 factory.register(0x141685EC0, "Client::Graphics::Render::ShadowMaskUnit", [], {})
 factory.register(0x141685ED8, "Client::Graphics::Render::ShaderManager", [], {})
 factory.register(0x141685EE8, "Client::Graphics::Render::Manager_Client::Graphics::JobSystem_Client::Graphics::Render::Manager::BoneCollectorJob", [], {})
 factory.register(0x141685EF0, "Client::Graphics::Render::Updater_Client::Graphics::Render::PostBoneDeformerBase", [], {})
 factory.register(0x141685EF8, "Client::Graphics::Render::Manager", ["Client::Graphics::Singleton"], {})
-factory.register(0x141685F10, "Client::Graphics::Render::ShadowManager", ["Client::Graphics::Singleton", "Client::Graphics::Kernel::Notifier"], {
+factory.register(0x141685F10, "Client::Graphics::Render::ShadowManager", [], {
     0x140365BA0: "ctor",
 })
 factory.register(0x141685F20, "Client::Graphics::Render::LightingManager::LightShape", [], {})
@@ -873,11 +850,11 @@ factory.register(0x141685F28, "Client::Graphics::Render::LightingManager::Lighti
 factory.register(0x141685F30, "Client::Graphics::Render::LightingManager::LightingRenderer", [], {
     0x14036A1D0: "ctor",
 })
-factory.register(0x141685F38, "Client::Graphics::Render::LightingManager", ["Client::Graphics::Singleton", "Client::Graphics::Kernel::Notifier"], {
+factory.register(0x141685F38, "Client::Graphics::Render::LightingManager", [], {
     0x140374A80: "ctor",
 })
 factory.register(0x141685F40, "Client::Graphics::Render::LightingManager_Client::Graphics::Kernel::Notifier", ["Client::Graphics::Singleton", "Client::Graphics::Kernel::Notifier"], {})
-factory.register(0x141685F60, "Client::Graphics::Render::RenderTargetManager", ["Client::Graphics::Singleton", "Client::Graphics::Kernel::Notifier"], {
+factory.register(0x141685F60, "Client::Graphics::Render::RenderTargetManager", [], {
     0x140375260: "ctor",
 })
 factory.register(0x141685F68, "Client::Graphics::Render::RenderTargetManager_Client::Graphics::Kernel::Notifier", ["Client::Graphics::Singleton", "Client::Graphics::Kernel::Notifier"], {})
@@ -885,11 +862,11 @@ factory.register(0x1416885D8, "Client::Graphics::PostEffect::PostEffectChain", [
 factory.register(0x1416885E0, "Client::Graphics::PostEffect::PostEffectRainbow", [], {})
 factory.register(0x1416885E8, "Client::Graphics::PostEffect::PostEffectLensFlare", [], {})
 factory.register(0x1416885F0, "Client::Graphics::PostEffect::PostEffectRoofQuery", [], {})
-factory.register(0x141688600, "Client::Graphics::PostEffect::PostEffectManager", ["Client::Graphics::Singleton", "Client::Graphics::Kernel::Notifier"], {
+factory.register(0x141688600, "Client::Graphics::PostEffect::PostEffectManager", [], {
     0x140396010: "ctor",
 })
 factory.register(0x141688608, "Client::Graphics::PostEffect::PostEffectManager_Client::Graphics::Kernel::Notifier", ["Client::Graphics::Singleton", "Client::Graphics::Kernel::Notifier"], {})
-factory.register(0x14168C238, "Client::Graphics::JobSystem(Apricot::Engine::Core_Apricot::Engine::Core::CoreJob_1)", ["Client::Graphics::Singleton", "Client::Graphics::Kernel::Notifier"], {
+factory.register(0x14168C238, "Client::Graphics::JobSystem(Apricot::Engine::Core_Apricot::Engine::Core::CoreJob_1)", [], {
     0x1403DD170: "ctor",
     0x1403DD3A0: "GetSingleton",
 })
@@ -897,16 +874,16 @@ factory.register(0x1416959D0, "Client::Graphics::Scene::Object", [], {})
 factory.register(0x141695A00, "Client::Graphics::Scene::DrawObject", ["Client::Graphics::Scene::Object"], {
     0x14042BCE0: "ctor",
 })
-factory.register(0x141695B98, "Client::Graphics::Scene::World_Client::Graphics::JobSystem_Client::Graphics::Scene::World::SceneUpdateJob", ["Client::Graphics::Scene::Object"], {})
+factory.register(0x141695B98, "Client::Graphics::Scene::World_Client::Graphics::JobSystem_Client::Graphics::Scene::World::SceneUpdateJob", [], {})
 factory.register(0x141695BA0, "Client::Graphics::Scene::World", ["Client::Graphics::Scene::Object", "Client::Graphics::Singleton"], {
     0x14042C290: "ctor",
 })
-factory.register(0x141695BD0, "Client::Graphics::Scene::World_Client::Graphics::Singleton", ["Client::Graphics::Scene::Object", "Client::Graphics::Singleton"], {})
+factory.register(0x141695BD0, "Client::Graphics::Scene::World_Client::Graphics::Singleton", ["Client::Graphics::Singleton"], {})
 factory.register(0x141695BD8, "Client::Graphics::Scene::Camera", ["Client::Graphics::Scene::Object"], {
     0x14042C550: "ctor",
 })
-factory.register(0x141695C38, "Client::Graphics::Scene::CameraManager_Client::Graphics::Singleton", ["Client::Graphics::Scene::Object"], {})
-factory.register(0x141695C40, "Client::Graphics::Scene::CameraManager", ["Client::Graphics::Singleton", "Client::Graphics::Kernel::Notifier"], {
+factory.register(0x141695C38, "Client::Graphics::Scene::CameraManager_Client::Graphics::Singleton", [], {})
+factory.register(0x141695C40, "Client::Graphics::Scene::CameraManager", [], {
     0x14042E020: "ctor",
 })
 factory.register(0x141695E08, "Client::Graphics::Scene::CharacterUtility", ["Client::Graphics::Singleton"], {
@@ -1163,7 +1140,7 @@ factory.register(0x1416AEAF8, "Client::UI::Misc::ConfigModule_Common::Configurat
 factory.register(0x1416AEBD8, "Client::UI::Misc::RaptureMacroModule", ["Client::UI::Misc::UserFileManager::UserFileEvent"], {
     1: "ReadFile", 2: "WriteFile",
 })
-factory.register(0x1416AEC40, "Client::UI::Misc::RaptureTextModule", ["Component::Text::TextModule", "Component::Text::TextModuleInterface", "Component::Text::MacroDecoder", "Client::System::Common::NonCopyable", "Component::Text::TextChecker::ExecNonMacroFunc", "Component::Excel::ExcelLanguageEvent"], {})
+factory.register(0x1416AEC40, "Client::UI::Misc::RaptureTextModule", [], {})
 factory.register(0x1416AEEB8, "Client::UI::Misc::RaptureLogModule", ["Component::Log::LogModule"], {
     0x140615880: "ctor",
     0x140617010: "PrintMessage",
@@ -1171,7 +1148,7 @@ factory.register(0x1416AEEB8, "Client::UI::Misc::RaptureLogModule", ["Component:
 factory.register(0x1416AEF08, "Client::UI::Misc::RaptureHotbarModule", ["Client::UI::Misc::UserFileManager::UserFileEvent", "Client::System::Input::InputData::InputCodeModifiedInterface"], {
     0x1406207D0: "ctor",
 })
-factory.register(0x1416AEF70, "Client::UI::Misc::RaptureHotbarModule_Client::System::Input::InputCodeModifiedInterface", ["Client::UI::Misc::UserFileManager::UserFileEvent", "Client::System::Input::InputData::InputCodeModifiedInterface"], {})
+factory.register(0x1416AEF70, "Client::UI::Misc::RaptureHotbarModule_Client::System::Input::InputCodeModifiedInterface", ["Client::System::Input::InputData::InputCodeModifiedInterface"], {})
 factory.register(0x1416AEFE8, "Client::UI::Misc::PronounModule", ["Component::Text::TextChecker::ExecNonMacroFunc"], {
     0x140629590: "ctor",
 })
@@ -1194,12 +1171,12 @@ factory.register(0x1416B1B48, "Client::Game::Character::Character", ["Client::Ga
     0x1406D5AC0: "dtor",
     0x1406EA340: "ctor",
 })
-factory.register(0x1416B1E10, "Client::Game::Character::Character_Client::Graphics::Vfx::VfxDataListener", ["Client::Game::Object::GameObject", "Client::Graphics::Vfx::VfxDataListenner"], {})
+factory.register(0x1416B1E10, "Client::Game::Character::Character_Client::Graphics::Vfx::VfxDataListener", ["Client::Graphics::Vfx::VfxDataListenner"], {})
 factory.register(0x1416C8150, "Client::Game::Character::BattleChara", ["Client::Game::Character::Character"], {
     0x14073C140: "ctor",
     0x14073C230: "dtor",
 })
-factory.register(0x1416C8418, "Client::Game::Character::BattleChara_Client::Graphics::Vfx::VfxDataListener", ["Client::Game::Character::Character"], {})
+factory.register(0x1416C8418, "Client::Game::Character::BattleChara_Client::Graphics::Vfx::VfxDataListener", ["Client::Game::Character::Character_Client::Graphics::Vfx::VfxDataListener"], {})
 factory.register(0x1416CA7C0, "Client::Game::ActionManager", ["Client::Graphics::Vfx::VfxDataListenner"], {})
 factory.register(0x1416CC740, "Client::UI::Agent::AgentHUD", ["Client::UI::Agent::AgentInterface", "Common::Configuration::ConfigBase::ChangeEventInterface"], {
     5: "Update",
@@ -1270,9 +1247,9 @@ factory.register(0x1418106A0, "Client::UI::AddonHudLayoutScreen", ["Component::G
 })
 factory.register(0x1417CDB58, "Client::UI::AddonMateriaAttach", ["Component::GUI::AtkUnitBase"], {})
 factory.register(0x1417CDF98, "Client::UI::AddonMateriaAttachDialog", ["Component::GUI::AtkUnitBase"], {})
-factory.register(0x141825368, "Client::Graphics::Culling::CullingManager_Client::Graphics::JobSystem_Client::Graphics::Culling::CullingJobOpt", ["Component::GUI::AtkUnitBase"], {})
-factory.register(0x141825370, "Client::Graphics::Culling::CullingManager_Client::Graphics::JobSystem_Client::Graphics::Culling::CallbackJobOpt", ["Component::GUI::AtkUnitBase"], {})
-factory.register(0x141825378, "Client::Graphics::Culling::CullingManager_Client::Graphics::JobSystem_Client::Graphics::Culling::RenderCallbackJob", ["Component::GUI::AtkUnitBase"], {})
+factory.register(0x141825368, "Client::Graphics::Culling::CullingManager_Client::Graphics::JobSystem_Client::Graphics::Culling::CullingJobOpt", [], {})
+factory.register(0x141825370, "Client::Graphics::Culling::CullingManager_Client::Graphics::JobSystem_Client::Graphics::Culling::CallbackJobOpt", [], {})
+factory.register(0x141825378, "Client::Graphics::Culling::CullingManager_Client::Graphics::JobSystem_Client::Graphics::Culling::RenderCallbackJob", [], {})
 factory.register(0x141825380, "Client::Graphics::Culling::CullingManager", ["Client::Graphics::Singleton"], {})
 factory.register(0x141828A68, "Client::Game::Character::Companion", ["Client::Game::Character::Character"], {
     16: "EnableDraw",
