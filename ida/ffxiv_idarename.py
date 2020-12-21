@@ -561,6 +561,7 @@ factory.register(0x141695E88, "Client::Graphics::Scene::CharacterBase", ["Client
     0x1406E3470: "Create",
 })
 factory.register(0x141696198, "Client::Graphics::Scene::Human", ["Client::Graphics::Scene::CharacterBase"], {
+    0: "dtor",
     1: "CleanupRender",
     4: "UpdateRender",
     67: "FlagSlotForUpdate",
@@ -570,7 +571,6 @@ factory.register(0x141696198, "Client::Graphics::Scene::Human", ["Client::Graphi
     86: "GetDyeForSlot",
     0x140443E40: "ctor",
     0x140444080: "SetupFromCharacterData",
-    0x140460BB0: "dtor",
 })
 factory.register(0x141697860, "Client::Graphics::Scene::ResidentResourceManager::ResourceList", [], {})
 factory.register(0x141697870, "Client::Graphics::Scene::ResidentResourceManager", ["Client::Graphics::Singleton"], {
@@ -801,10 +801,10 @@ factory.register(0x1416AEFE8, "Client::UI::Misc::PronounModule", ["Component::Te
     0x140629590: "ctor",
 })
 factory.register(0x1416AFAC0, "Client::UI::Misc::CharaView", [], {
+    0: "dtor",
     1: "Initialize",
     2: "Finalize",
     0x14064FB80: "ctor",
-    0x14065F700: "dtor",
 })
 factory.register(0x1416B0EC0, "Client::Game::Object::GameObject", [], {
     0x1406C5270: "Initialize",
@@ -879,8 +879,8 @@ factory.register(0x1417DEC90, "Client::UI::AddonNamePlate", ["Component::GUI::At
 })
 factory.register(0x1417C9520, "Client::UI::AddonRecipeNote", ["Component::GUI::AtkUnitBase"], {})
 factory.register(0x14179BAD0, "Client::UI::AddonHudSelectYesno", ["Component::GUI::AtkUnitBase"], {
+    0: "dtor",
     0x140CD9150: "ctor",
-    0x140DD2610: "dtor",
 })
 factory.register(0x141810480, "Client::UI::AddonHudLayoutWindow", ["Component::GUI::AtkUnitBase"], {
     0x14101D810: "ctor",
