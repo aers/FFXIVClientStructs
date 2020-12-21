@@ -319,230 +319,230 @@ api.set_addr_name(0x141DE2D50, "g_ClientObjectManager")
 # endregion
 
 # region: vtbl
-vtbls = VTableManager()
+factory = VTableManager()
 # Unknown classes old RTTI data says known classes inherit from
-vtbls.register("Client::Game::Control::TargetSystem::ListFeeder")
-vtbls.register("Client::Game::InstanceContent::ContentSheetWaiterInterface")
-vtbls.register("Client::Game::Object::IGameObjectEventListener")
-vtbls.register("Client::Graphics::Kernel::Buffer")
-vtbls.register("Client::Graphics::Kernel::Resource")
-vtbls.register("Client::Graphics::ReferencedClassBase")
-vtbls.register("Client::Graphics::Render::BaseRenderer")
-vtbls.register("Client::Graphics::Render::Camera")
-vtbls.register("Client::Graphics::Render::RenderObject")
-vtbls.register("Client::Graphics::RenderObjectList")
-vtbls.register("Client::Graphics::Singleton")
-vtbls.register("Client::Graphics::Vfx::VfxDataListenner")
-vtbls.register("Client::System::Common::NonCopyable")
-vtbls.register("Client::System::Crypt::CryptInterface")
-vtbls.register("Client::System::Input::InputData::InputCodeModifiedInterface")
-vtbls.register("Client::System::Input::SoftKeyboardDeviceInterface::SoftKeyboardInputInterface")
-vtbls.register("Client::System::Input::TextServiceInterface::TextServiceEvent")
-vtbls.register("Client::System::Resource::Handle::ResourceHandleFactory")
-vtbls.register("Client::UI::AddonItemDetailBase")
-vtbls.register("Client::UI::Agent::AgentItemDetailBase")
-vtbls.register("Client::UI::Agent::AgentMap::MapMarkerStructSearch")
-vtbls.register("Client::UI::Atk2DMap")
-vtbls.register("Client::UI::UI3DModule::MapInfo")
-vtbls.register("Client::UI::UIModuleInterface")
-vtbls.register("Common::Configuration::ConfigBase::ChangeEventInterface")
-vtbls.register("Component::Excel::ExcelLanguageEvent")
-vtbls.register("Component::GUI::AtkComponentWindowGrab")
-vtbls.register("Component::GUI::AtkDragDropInterface")
-vtbls.register("Component::GUI::AtkEventListener")
-vtbls.register("Component::GUI::AtkEventTarget")
-vtbls.register("Component::GUI::AtkExternalInterface")
-vtbls.register("Component::GUI::AtkManagedInterface")
-vtbls.register("Component::GUI::AtkModuleEvent")
-vtbls.register("Component::GUI::AtkModuleInterface")
-vtbls.register("Component::GUI::AtkModuleInterface::AtkEventInterface")
-vtbls.register("Component::GUI::AtkTextInput::AtkTextInputEventInterface")
-vtbls.register("Component::Log::LogModuleInterface")
-vtbls.register("Component::Text::TextChecker::ExecNonMacroFunc")
-vtbls.register("Component::Text::TextModule")
-vtbls.register("Component::Text::TextModuleInterface")
+factory.register("Client::Game::Control::TargetSystem::ListFeeder")
+factory.register("Client::Game::InstanceContent::ContentSheetWaiterInterface")
+factory.register("Client::Game::Object::IGameObjectEventListener")
+factory.register("Client::Graphics::Kernel::Buffer")
+factory.register("Client::Graphics::Kernel::Resource")
+factory.register("Client::Graphics::ReferencedClassBase")
+factory.register("Client::Graphics::Render::BaseRenderer")
+factory.register("Client::Graphics::Render::Camera")
+factory.register("Client::Graphics::Render::RenderObject")
+factory.register("Client::Graphics::RenderObjectList")
+factory.register("Client::Graphics::Singleton")
+factory.register("Client::Graphics::Vfx::VfxDataListenner")
+factory.register("Client::System::Common::NonCopyable")
+factory.register("Client::System::Crypt::CryptInterface")
+factory.register("Client::System::Input::InputData::InputCodeModifiedInterface")
+factory.register("Client::System::Input::SoftKeyboardDeviceInterface::SoftKeyboardInputInterface")
+factory.register("Client::System::Input::TextServiceInterface::TextServiceEvent")
+factory.register("Client::System::Resource::Handle::ResourceHandleFactory")
+factory.register("Client::UI::AddonItemDetailBase")
+factory.register("Client::UI::Agent::AgentItemDetailBase")
+factory.register("Client::UI::Agent::AgentMap::MapMarkerStructSearch")
+factory.register("Client::UI::Atk2DMap")
+factory.register("Client::UI::UI3DModule::MapInfo")
+factory.register("Client::UI::UIModuleInterface")
+factory.register("Common::Configuration::ConfigBase::ChangeEventInterface")
+factory.register("Component::Excel::ExcelLanguageEvent")
+factory.register("Component::GUI::AtkComponentWindowGrab")
+factory.register("Component::GUI::AtkDragDropInterface")
+factory.register("Component::GUI::AtkEventListener")
+factory.register("Component::GUI::AtkEventTarget")
+factory.register("Component::GUI::AtkExternalInterface")
+factory.register("Component::GUI::AtkManagedInterface")
+factory.register("Component::GUI::AtkModuleEvent")
+factory.register("Component::GUI::AtkModuleInterface")
+factory.register("Component::GUI::AtkModuleInterface::AtkEventInterface")
+factory.register("Component::GUI::AtkTextInput::AtkTextInputEventInterface")
+factory.register("Component::Log::LogModuleInterface")
+factory.register("Component::Text::TextChecker::ExecNonMacroFunc")
+factory.register("Component::Text::TextModule")
+factory.register("Component::Text::TextModuleInterface")
 # Known classes
-vtbls.register(0x14164E260, "Common::Configuration::ConfigBase", ["Client::System::Common::NonCopyable"], {
+factory.register(0x14164E260, "Common::Configuration::ConfigBase", ["Client::System::Common::NonCopyable"], {
     0x140068C30: "ctor",
 })
-vtbls.register(0x14164E2C0, "Common::Configuration::SystemConfig", ["Common::Configuration::ConfigBase", "Client::System::Common::NonCopyable"], {
+factory.register(0x14164E2C0, "Common::Configuration::SystemConfig", ["Common::Configuration::ConfigBase", "Client::System::Common::NonCopyable"], {
     0x140078DE0: "ctor",
 })
-vtbls.register(0x14164E280, "Common::Configuration::UIConfig", ["Common::Configuration::ConfigBase", "Client::System::Common::NonCopyable"], {})
-vtbls.register(0x14164E2A0, "Common::Configuration::UIControlConfig", ["Common::Configuration::ConfigBase", "Client::System::Common::NonCopyable"], {})
-vtbls.register(0x14164E2E0, "Common::Configuration::DevConfig", ["Common::Configuration::ConfigBase", "Client::System::Common::NonCopyable"], {
+factory.register(0x14164E280, "Common::Configuration::UIConfig", ["Common::Configuration::ConfigBase", "Client::System::Common::NonCopyable"], {})
+factory.register(0x14164E2A0, "Common::Configuration::UIControlConfig", ["Common::Configuration::ConfigBase", "Client::System::Common::NonCopyable"], {})
+factory.register(0x14164E2E0, "Common::Configuration::DevConfig", ["Common::Configuration::ConfigBase", "Client::System::Common::NonCopyable"], {
     0x14007EA30: "ctor",
 })
-vtbls.register(0x14164F4B8, "Client::System::Framework::Framework", [], {
+factory.register(0x14164F4B8, "Client::System::Framework::Framework", [], {
     1: "Setup",
     4: "Tick",
     0x14008EA40: "ctor",
     0x140091EB0: "GetUIModule",
 })
-vtbls.register(0x14164F430, "Client::System::Framework::Task", [], {
+factory.register(0x14164F430, "Client::System::Framework::Task", [], {
     0x1400946B0: "TaskRunner",  # task starter which runs the task's function pointer
 })
-vtbls.register(0x14164F448, "Client::System::Framework::TaskManager::RootTask", ["Client::System::Framework::Task"], {})
-vtbls.register(0x14164F460, "Client::System::Framework::TaskManager", [], {
+factory.register(0x14164F448, "Client::System::Framework::TaskManager::RootTask", ["Client::System::Framework::Task"], {})
+factory.register(0x14164F460, "Client::System::Framework::TaskManager", [], {
     0x140093E60: "ctor",
     0x140171440: "SetTask",
 })
-vtbls.register(0x14164F478, "Client::System::Configuration::SystemConfig", ["Common::Configuration::SystemConfig", "Common::Configuration::ConfigBase", "Client::System::Common::NonCopyable"], {})
-vtbls.register(0x14164F498, "Client::System::Configuration::DevConfig", ["Common::Configuration::DevConfig", "Common::Configuration::ConfigBase", "Client::System::Common::NonCopyable"], {})
-vtbls.register(0x14164F4E0, "Component::Excel::ExcelModuleInterface", [], {})
-vtbls.register(0x1416594C0, "Component::GUI::AtkUnitList", [], {})
-vtbls.register(0x1416594C8, "Component::GUI::AtkUnitManager", ["Component::GUI::AtkEventListener"], {
+factory.register(0x14164F478, "Client::System::Configuration::SystemConfig", ["Common::Configuration::SystemConfig", "Common::Configuration::ConfigBase", "Client::System::Common::NonCopyable"], {})
+factory.register(0x14164F498, "Client::System::Configuration::DevConfig", ["Common::Configuration::DevConfig", "Common::Configuration::ConfigBase", "Client::System::Common::NonCopyable"], {})
+factory.register(0x14164F4E0, "Component::Excel::ExcelModuleInterface", [], {})
+factory.register(0x1416594C0, "Component::GUI::AtkUnitList", [], {})
+factory.register(0x1416594C8, "Component::GUI::AtkUnitManager", ["Component::GUI::AtkEventListener"], {
     0x1404E5470: "ctor",
 })
-vtbls.register(0x141659620, "Client::UI::RaptureAtkUnitManager", ["Component::GUI::AtkUnitManager", "Component::GUI::AtkEventListener"], {
+factory.register(0x141659620, "Client::UI::RaptureAtkUnitManager", ["Component::GUI::AtkUnitManager", "Component::GUI::AtkEventListener"], {
     0x1400AAE50: "ctor",
     0x1404E6F80: "GetAddonByName",  # dalamud GetUIObjByName
 })
-vtbls.register(0x141659878, "Client::UI::RaptureAtkModule", ["Component::GUI::AtkModule", "Component::GUI::AtkModuleInterface", "Component::GUI::AtkExternalInterface", "Client::System::Input::TextServiceInterface::TextServiceEvent", "Common::Configuration::ConfigBase::ChangeEventInterface"], {
+factory.register(0x141659878, "Client::UI::RaptureAtkModule", ["Component::GUI::AtkModule", "Component::GUI::AtkModuleInterface", "Component::GUI::AtkExternalInterface", "Client::System::Input::TextServiceInterface::TextServiceEvent", "Common::Configuration::ConfigBase::ChangeEventInterface"], {
     39: "SetUIVisibility",
     0x1400B06F0: "ctor",
     0x1400D37C0: "UpdateTask1",
     0x1400D6750: "IsUIVisible",
 })
-vtbls.register(0x141661D28, "Client::Graphics::Kernel::Notifier", [], {})
-vtbls.register(0x1416657C0, "Client::System::Crypt::Crc32", [], {})
-vtbls.register(0x14166BD58, "Client::Graphics::Environment::EnvSoundState", [], {})
-vtbls.register(0x14166BD78, "Client::Graphics::Environment::EnvState", [], {})
-vtbls.register(0x14166BDC8, "Client::Graphics::Environment::EnvSimulator", [], {})
-vtbls.register(0x14166BDD8, "Client::Graphics::Environment::EnvManager", ["Client::Graphics::Singleton"], {})
-vtbls.register(0x14166DA88, "Client::System::Resource::Handle::ResourceHandle", ["Client::System::Common::NonCopyable"], {
+factory.register(0x141661D28, "Client::Graphics::Kernel::Notifier", [], {})
+factory.register(0x1416657C0, "Client::System::Crypt::Crc32", [], {})
+factory.register(0x14166BD58, "Client::Graphics::Environment::EnvSoundState", [], {})
+factory.register(0x14166BD78, "Client::Graphics::Environment::EnvState", [], {})
+factory.register(0x14166BDC8, "Client::Graphics::Environment::EnvSimulator", [], {})
+factory.register(0x14166BDD8, "Client::Graphics::Environment::EnvManager", ["Client::Graphics::Singleton"], {})
+factory.register(0x14166DA88, "Client::System::Resource::Handle::ResourceHandle", ["Client::System::Common::NonCopyable"], {
     0x1401A0080: "DecRef",
     0x1401A00B0: "IncRef",
     0x1401A0270: "ctor",
 })
-vtbls.register(0x14166DC08, "Client::System::Resource::Handle::DefaultResourceHandle", ["Client::System::Resource::Handle::ResourceHandle", "Client::System::Common::NonCopyable"], {
+factory.register(0x14166DC08, "Client::System::Resource::Handle::DefaultResourceHandle", ["Client::System::Resource::Handle::ResourceHandle", "Client::System::Common::NonCopyable"], {
     23: "GetData",  # This was under Client::System::Resource::Handle::ResourceHandle
 })
-vtbls.register(0x14166E088, "Client::System::Resource::Handle::TextureResourceHandle", ["Client::System::Resource::Handle::ResourceHandle", "Client::System::Common::NonCopyable"], {
+factory.register(0x14166E088, "Client::System::Resource::Handle::TextureResourceHandle", ["Client::System::Resource::Handle::ResourceHandle", "Client::System::Common::NonCopyable"], {
     0x1401A3730: "ctor",
 })
-vtbls.register(0x14166E8B8, "Client::System::Resource::Handle::CharaMakeParameterResourceHandle", ["Client::System::Resource::Handle::DefaultResourceHandle", "Client::System::Resource::Handle::ResourceHandle", "Client::System::Common::NonCopyable"], {})
-vtbls.register(0x14166FB38, "Client::System::Resource::Handle::ApricotResourceHandle", ["Client::System::Resource::Handle::DefaultResourceHandle", "Client::System::Resource::Handle::ResourceHandle", "Client::System::Common::NonCopyable"], {
+factory.register(0x14166E8B8, "Client::System::Resource::Handle::CharaMakeParameterResourceHandle", ["Client::System::Resource::Handle::DefaultResourceHandle", "Client::System::Resource::Handle::ResourceHandle", "Client::System::Common::NonCopyable"], {})
+factory.register(0x14166FB38, "Client::System::Resource::Handle::ApricotResourceHandle", ["Client::System::Resource::Handle::DefaultResourceHandle", "Client::System::Resource::Handle::ResourceHandle", "Client::System::Common::NonCopyable"], {
     33: "Load",
 })
-vtbls.register(0x1416729E8, "Client::System::Resource::Handle::UldResourceHandle", ["Client::System::Resource::Handle::DefaultResourceHandle", "Client::System::Resource::Handle::ResourceHandle", "Client::System::Common::NonCopyable"], {})
-vtbls.register(0x141672B50, "Client::System::Resource::Handle::UldResourceHandleFactory", ["Client::System::Resource::Handle::ResourceHandleFactory"], {})
-vtbls.register(0x141673178, "Client::Graphics::Primitive::Manager", ["Client::Graphics::Singleton"], {
+factory.register(0x1416729E8, "Client::System::Resource::Handle::UldResourceHandle", ["Client::System::Resource::Handle::DefaultResourceHandle", "Client::System::Resource::Handle::ResourceHandle", "Client::System::Common::NonCopyable"], {})
+factory.register(0x141672B50, "Client::System::Resource::Handle::UldResourceHandleFactory", ["Client::System::Resource::Handle::ResourceHandleFactory"], {})
+factory.register(0x141673178, "Client::Graphics::Primitive::Manager", ["Client::Graphics::Singleton"], {
     0x1401D1EB0: "ctor",
 })
-vtbls.register(0x141673338, "Client::Graphics::DelayedReleaseClassBase", ["Client::Graphics::ReferencedClassBase"], {
+factory.register(0x141673338, "Client::Graphics::DelayedReleaseClassBase", ["Client::Graphics::ReferencedClassBase"], {
     0x1401D4810: "ctor",
 })
-vtbls.register(0x141673360, "Client::Graphics::IAllocator", [], {})
-vtbls.register(0x1416734B0, "Client::Graphics::AllocatorLowLevel", ["Client::Graphics::IAllocator"], {})
-vtbls.register(0x141673568, "Client::Graphics::AllocatorManager", ["Client::Graphics::Singleton"], {
+factory.register(0x141673360, "Client::Graphics::IAllocator", [], {})
+factory.register(0x1416734B0, "Client::Graphics::AllocatorLowLevel", ["Client::Graphics::IAllocator"], {})
+factory.register(0x141673568, "Client::Graphics::AllocatorManager", ["Client::Graphics::Singleton"], {
     0x1401D6D90: "ctor",
 })
-vtbls.register(0x141674968, "Client::Network::NetworkModuleProxy", ["Client::System::Common::NonCopyable"], {
+factory.register(0x141674968, "Client::Network::NetworkModuleProxy", ["Client::System::Common::NonCopyable"], {
     0x1401EBFE0: "ctor",
 })
-vtbls.register(0x141675928, "Client::UI::Agent::AgentInterface", ["Component::GUI::AtkModuleInterface::AtkEventInterface"], {
+factory.register(0x141675928, "Client::UI::Agent::AgentInterface", ["Component::GUI::AtkModuleInterface::AtkEventInterface"], {
     4: "IsAgentActive",
     0x1401EDBF0: "ctor",
 })
-vtbls.register(0x141675998, "Client::UI::Agent::AgentCharaMake", ["Client::UI::Agent::AgentInterface", "Component::GUI::AtkModuleInterface::AtkEventInterface"], {})
-vtbls.register(0x141675D70, "Client::UI::Agent::AgentModule", [], {
+factory.register(0x141675998, "Client::UI::Agent::AgentCharaMake", ["Client::UI::Agent::AgentInterface", "Component::GUI::AtkModuleInterface::AtkEventInterface"], {})
+factory.register(0x141675D70, "Client::UI::Agent::AgentModule", [], {
     0x1401F5FF0: "ctor",
     0x1401FB250: "GetAgentByInternalID",
     0x1401FB260: "GetAgentByInternalID_2",  # dupe?
 })
-vtbls.register(0x141676AE0, "Client::UI::Agent::AgentCursor", ["Client::UI::Agent::AgentInterface", "Component::GUI::AtkModuleInterface::AtkEventInterface"], {})
-vtbls.register(0x141676B50, "Client::UI::Agent::AgentCursorLocation", ["Client::UI::Agent::AgentInterface", "Component::GUI::AtkModuleInterface::AtkEventInterface"], {})
-vtbls.register(0x14167E120, "Client::Graphics::Kernel::Texture", ["Client::Graphics::Kernel::Resource", "Client::Graphics::DelayedReleaseClassBase", "Client::Graphics::ReferencedClassBase", "Client::Graphics::Kernel::Notifier"], {
+factory.register(0x141676AE0, "Client::UI::Agent::AgentCursor", ["Client::UI::Agent::AgentInterface", "Component::GUI::AtkModuleInterface::AtkEventInterface"], {})
+factory.register(0x141676B50, "Client::UI::Agent::AgentCursorLocation", ["Client::UI::Agent::AgentInterface", "Component::GUI::AtkModuleInterface::AtkEventInterface"], {})
+factory.register(0x14167E120, "Client::Graphics::Kernel::Texture", ["Client::Graphics::Kernel::Resource", "Client::Graphics::DelayedReleaseClassBase", "Client::Graphics::ReferencedClassBase", "Client::Graphics::Kernel::Notifier"], {
     0x1402F9930: "ctor",
 })
-vtbls.register(0x14167E3A8, "Client::Graphics::Kernel::ConstantBuffer", ["Client::Graphics::Kernel::Buffer", "Client::Graphics::Kernel::Resource", "Client::Graphics::DelayedReleaseClassBase", "Client::Graphics::ReferencedClassBase"], {})
-vtbls.register(0x14167E430, "Client::Graphics::Kernel::Device", ["Client::Graphics::Singleton"], {
+factory.register(0x14167E3A8, "Client::Graphics::Kernel::ConstantBuffer", ["Client::Graphics::Kernel::Buffer", "Client::Graphics::Kernel::Resource", "Client::Graphics::DelayedReleaseClassBase", "Client::Graphics::ReferencedClassBase"], {})
+factory.register(0x14167E430, "Client::Graphics::Kernel::Device", ["Client::Graphics::Singleton"], {
     0x140300FA0: "ctor",
 })
-vtbls.register(0x1416856A8, "Client::Graphics::Kernel::ShaderSceneKey", [], {})
-vtbls.register(0x1416856B0, "Client::Graphics::Kernel::ShaderSubViewKey", [], {})
-vtbls.register(0x1416856C8, "Client::Graphics::Render::GraphicsConfig", ["Client::Graphics::Singleton"], {
+factory.register(0x1416856A8, "Client::Graphics::Kernel::ShaderSceneKey", [], {})
+factory.register(0x1416856B0, "Client::Graphics::Kernel::ShaderSubViewKey", [], {})
+factory.register(0x1416856C8, "Client::Graphics::Render::GraphicsConfig", ["Client::Graphics::Singleton"], {
     0x14031FCE0: "ctor",
 })
-vtbls.register(0x141685708, "Client::Graphics::Render::ShadowCamera", ["Client::Graphics::Render::Camera", "Client::Graphics::ReferencedClassBase"], {})
-vtbls.register(0x141685850, "Client::Graphics::Render::View", [], {})
-vtbls.register(0x1416858D8, "Client::Graphics::Render::PostBoneDeformerBase", ["Client::Graphics::RenderObjectList", "Client::System::Framework::Task"], {})
-vtbls.register(0x1416859C0, "Client::Graphics::Render::AmbientLight", [], {
+factory.register(0x141685708, "Client::Graphics::Render::ShadowCamera", ["Client::Graphics::Render::Camera", "Client::Graphics::ReferencedClassBase"], {})
+factory.register(0x141685850, "Client::Graphics::Render::View", [], {})
+factory.register(0x1416858D8, "Client::Graphics::Render::PostBoneDeformerBase", ["Client::Graphics::RenderObjectList", "Client::System::Framework::Task"], {})
+factory.register(0x1416859C0, "Client::Graphics::Render::AmbientLight", [], {
     0x1403296C0: "ctor",
 })
-vtbls.register(0x1416859D0, "Client::Graphics::Render::Model", ["Client::Graphics::RenderObjectList", "Client::Graphics::Render::RenderObject", "Client::Graphics::ReferencedClassBase"], {
+factory.register(0x1416859D0, "Client::Graphics::Render::Model", ["Client::Graphics::RenderObjectList", "Client::Graphics::Render::RenderObject", "Client::Graphics::ReferencedClassBase"], {
     0x14032B630: "ctor",
     0x14032B780: "SetupFromModelResourceHandle",
 })
-vtbls.register(0x141685A88, "Client::Graphics::Render::ModelRenderer_Client::Graphics::JobSystem_Client::Graphics::Render::ModelRenderer::RenderJob", ["Client::Graphics::RenderObjectList", "Client::Graphics::Render::RenderObject", "Client::Graphics::ReferencedClassBase"], {})
-vtbls.register(0x141685A90, "Client::Graphics::Render::ModelRenderer", ["Client::Graphics::Render::BaseRenderer"], {})
-vtbls.register(0x141685AB8, "Client::Graphics::Render::GeometryInstancingRenderer", ["Client::Graphics::Render::BaseRenderer"], {})
-vtbls.register(0x141685B60, "Client::Graphics::Render::BGInstancingRenderer_Client::Graphics::JobSystem_CClient::Graphics::Render::tagInstancingContainerRenderInfo", ["Client::Graphics::Render::BaseRenderer"], {})
-vtbls.register(0x141685B68, "Client::Graphics::Render::BGInstancingRenderer", ["Client::Graphics::Render::GeometryInstancingRenderer", "Client::Graphics::Render::BaseRenderer"], {})
-vtbls.register(0x141685BD0, "Client::Graphics::Render::TerrainRenderer_Client::Graphics::JobSystem_Client::Graphics::Render::TerrainRenderer::RenderJob", ["Client::Graphics::Render::GeometryInstancingRenderer", "Client::Graphics::Render::BaseRenderer"], {})
-vtbls.register(0x141685BD8, "Client::Graphics::Render::TerrainRenderer", ["Client::Graphics::Render::BaseRenderer"], {})
-vtbls.register(0x141685C48, "Client::Graphics::Render::UnknownRenderer", ["Client::Graphics::Render::BaseRenderer"], {})
-vtbls.register(0x141685CB0, "Client::Graphics::Render::WaterRenderer_Client::Graphics::JobSystem_Client::Graphics::Render::WaterRenderer::RenderJob", ["Client::Graphics::Render::BaseRenderer"], {})
-vtbls.register(0x141685CB8, "Client::Graphics::Render::WaterRenderer", ["Client::Graphics::Render::BaseRenderer"], {})
-vtbls.register(0x141685DA0, "Client::Graphics::Render::VerticalFogRenderer_Client::Graphics::JobSystem_Client::Graphics::Render::VerticalFogRenderer::RenderJob", ["Client::Graphics::Render::BaseRenderer"], {})
-vtbls.register(0x141685DA8, "Client::Graphics::Render::VerticalFogRenderer", ["Client::Graphics::Render::BaseRenderer"], {})
-vtbls.register(0x141685EC0, "Client::Graphics::Render::ShadowMaskUnit", [], {})
-vtbls.register(0x141685ED8, "Client::Graphics::Render::ShaderManager", [], {})
-vtbls.register(0x141685EE8, "Client::Graphics::Render::Manager_Client::Graphics::JobSystem_Client::Graphics::Render::Manager::BoneCollectorJob", [], {})
-vtbls.register(0x141685EF0, "Client::Graphics::Render::Updater_Client::Graphics::Render::PostBoneDeformerBase", [], {})
-vtbls.register(0x141685EF8, "Client::Graphics::Render::Manager", ["Client::Graphics::Singleton"], {})
-vtbls.register(0x141685F10, "Client::Graphics::Render::ShadowManager", ["Client::Graphics::Singleton", "Client::Graphics::Kernel::Notifier"], {
+factory.register(0x141685A88, "Client::Graphics::Render::ModelRenderer_Client::Graphics::JobSystem_Client::Graphics::Render::ModelRenderer::RenderJob", ["Client::Graphics::RenderObjectList", "Client::Graphics::Render::RenderObject", "Client::Graphics::ReferencedClassBase"], {})
+factory.register(0x141685A90, "Client::Graphics::Render::ModelRenderer", ["Client::Graphics::Render::BaseRenderer"], {})
+factory.register(0x141685AB8, "Client::Graphics::Render::GeometryInstancingRenderer", ["Client::Graphics::Render::BaseRenderer"], {})
+factory.register(0x141685B60, "Client::Graphics::Render::BGInstancingRenderer_Client::Graphics::JobSystem_CClient::Graphics::Render::tagInstancingContainerRenderInfo", ["Client::Graphics::Render::BaseRenderer"], {})
+factory.register(0x141685B68, "Client::Graphics::Render::BGInstancingRenderer", ["Client::Graphics::Render::GeometryInstancingRenderer", "Client::Graphics::Render::BaseRenderer"], {})
+factory.register(0x141685BD0, "Client::Graphics::Render::TerrainRenderer_Client::Graphics::JobSystem_Client::Graphics::Render::TerrainRenderer::RenderJob", ["Client::Graphics::Render::GeometryInstancingRenderer", "Client::Graphics::Render::BaseRenderer"], {})
+factory.register(0x141685BD8, "Client::Graphics::Render::TerrainRenderer", ["Client::Graphics::Render::BaseRenderer"], {})
+factory.register(0x141685C48, "Client::Graphics::Render::UnknownRenderer", ["Client::Graphics::Render::BaseRenderer"], {})
+factory.register(0x141685CB0, "Client::Graphics::Render::WaterRenderer_Client::Graphics::JobSystem_Client::Graphics::Render::WaterRenderer::RenderJob", ["Client::Graphics::Render::BaseRenderer"], {})
+factory.register(0x141685CB8, "Client::Graphics::Render::WaterRenderer", ["Client::Graphics::Render::BaseRenderer"], {})
+factory.register(0x141685DA0, "Client::Graphics::Render::VerticalFogRenderer_Client::Graphics::JobSystem_Client::Graphics::Render::VerticalFogRenderer::RenderJob", ["Client::Graphics::Render::BaseRenderer"], {})
+factory.register(0x141685DA8, "Client::Graphics::Render::VerticalFogRenderer", ["Client::Graphics::Render::BaseRenderer"], {})
+factory.register(0x141685EC0, "Client::Graphics::Render::ShadowMaskUnit", [], {})
+factory.register(0x141685ED8, "Client::Graphics::Render::ShaderManager", [], {})
+factory.register(0x141685EE8, "Client::Graphics::Render::Manager_Client::Graphics::JobSystem_Client::Graphics::Render::Manager::BoneCollectorJob", [], {})
+factory.register(0x141685EF0, "Client::Graphics::Render::Updater_Client::Graphics::Render::PostBoneDeformerBase", [], {})
+factory.register(0x141685EF8, "Client::Graphics::Render::Manager", ["Client::Graphics::Singleton"], {})
+factory.register(0x141685F10, "Client::Graphics::Render::ShadowManager", ["Client::Graphics::Singleton", "Client::Graphics::Kernel::Notifier"], {
     0x140365BA0: "ctor",
 })
-vtbls.register(0x141685F20, "Client::Graphics::Render::LightingManager::LightShape", [], {})
-vtbls.register(0x141685F28, "Client::Graphics::Render::LightingManager::LightingRenderer_Client::Graphics::JobSystem_Client::Graphics::Render::LightingManager::LightingRenderer::RenderJob", [], {})
-vtbls.register(0x141685F30, "Client::Graphics::Render::LightingManager::LightingRenderer", [], {
+factory.register(0x141685F20, "Client::Graphics::Render::LightingManager::LightShape", [], {})
+factory.register(0x141685F28, "Client::Graphics::Render::LightingManager::LightingRenderer_Client::Graphics::JobSystem_Client::Graphics::Render::LightingManager::LightingRenderer::RenderJob", [], {})
+factory.register(0x141685F30, "Client::Graphics::Render::LightingManager::LightingRenderer", [], {
     0x14036A1D0: "ctor",
 })
-vtbls.register(0x141685F38, "Client::Graphics::Render::LightingManager", ["Client::Graphics::Singleton", "Client::Graphics::Kernel::Notifier"], {
+factory.register(0x141685F38, "Client::Graphics::Render::LightingManager", ["Client::Graphics::Singleton", "Client::Graphics::Kernel::Notifier"], {
     0x140374A80: "ctor",
 })
-vtbls.register(0x141685F40, "Client::Graphics::Render::LightingManager_Client::Graphics::Kernel::Notifier", ["Client::Graphics::Singleton", "Client::Graphics::Kernel::Notifier"], {})
-vtbls.register(0x141685F60, "Client::Graphics::Render::RenderTargetManager", ["Client::Graphics::Singleton", "Client::Graphics::Kernel::Notifier"], {
+factory.register(0x141685F40, "Client::Graphics::Render::LightingManager_Client::Graphics::Kernel::Notifier", ["Client::Graphics::Singleton", "Client::Graphics::Kernel::Notifier"], {})
+factory.register(0x141685F60, "Client::Graphics::Render::RenderTargetManager", ["Client::Graphics::Singleton", "Client::Graphics::Kernel::Notifier"], {
     0x140375260: "ctor",
 })
-vtbls.register(0x141685F68, "Client::Graphics::Render::RenderTargetManager_Client::Graphics::Kernel::Notifier", ["Client::Graphics::Singleton", "Client::Graphics::Kernel::Notifier"], {})
-vtbls.register(0x1416885D8, "Client::Graphics::PostEffect::PostEffectChain", [], {})
-vtbls.register(0x1416885E0, "Client::Graphics::PostEffect::PostEffectRainbow", [], {})
-vtbls.register(0x1416885E8, "Client::Graphics::PostEffect::PostEffectLensFlare", [], {})
-vtbls.register(0x1416885F0, "Client::Graphics::PostEffect::PostEffectRoofQuery", [], {})
-vtbls.register(0x141688600, "Client::Graphics::PostEffect::PostEffectManager", ["Client::Graphics::Singleton", "Client::Graphics::Kernel::Notifier"], {
+factory.register(0x141685F68, "Client::Graphics::Render::RenderTargetManager_Client::Graphics::Kernel::Notifier", ["Client::Graphics::Singleton", "Client::Graphics::Kernel::Notifier"], {})
+factory.register(0x1416885D8, "Client::Graphics::PostEffect::PostEffectChain", [], {})
+factory.register(0x1416885E0, "Client::Graphics::PostEffect::PostEffectRainbow", [], {})
+factory.register(0x1416885E8, "Client::Graphics::PostEffect::PostEffectLensFlare", [], {})
+factory.register(0x1416885F0, "Client::Graphics::PostEffect::PostEffectRoofQuery", [], {})
+factory.register(0x141688600, "Client::Graphics::PostEffect::PostEffectManager", ["Client::Graphics::Singleton", "Client::Graphics::Kernel::Notifier"], {
     0x140396010: "ctor",
 })
-vtbls.register(0x141688608, "Client::Graphics::PostEffect::PostEffectManager_Client::Graphics::Kernel::Notifier", ["Client::Graphics::Singleton", "Client::Graphics::Kernel::Notifier"], {})
-vtbls.register(0x14168C238, "Client::Graphics::JobSystem(Apricot::Engine::Core_Apricot::Engine::Core::CoreJob_1)", ["Client::Graphics::Singleton", "Client::Graphics::Kernel::Notifier"], {
+factory.register(0x141688608, "Client::Graphics::PostEffect::PostEffectManager_Client::Graphics::Kernel::Notifier", ["Client::Graphics::Singleton", "Client::Graphics::Kernel::Notifier"], {})
+factory.register(0x14168C238, "Client::Graphics::JobSystem(Apricot::Engine::Core_Apricot::Engine::Core::CoreJob_1)", ["Client::Graphics::Singleton", "Client::Graphics::Kernel::Notifier"], {
     0x1403DD170: "ctor",
     0x1403DD3A0: "GetSingleton",
 })
-vtbls.register(0x1416959D0, "Client::Graphics::Scene::Object", [], {})
-vtbls.register(0x141695A00, "Client::Graphics::Scene::DrawObject", ["Client::Graphics::Scene::Object"], {
+factory.register(0x1416959D0, "Client::Graphics::Scene::Object", [], {})
+factory.register(0x141695A00, "Client::Graphics::Scene::DrawObject", ["Client::Graphics::Scene::Object"], {
     0x14042BCE0: "ctor",
 })
-vtbls.register(0x141695B98, "Client::Graphics::Scene::World_Client::Graphics::JobSystem_Client::Graphics::Scene::World::SceneUpdateJob", ["Client::Graphics::Scene::Object"], {})
-vtbls.register(0x141695BA0, "Client::Graphics::Scene::World", ["Client::Graphics::Scene::Object", "Client::Graphics::Singleton"], {
+factory.register(0x141695B98, "Client::Graphics::Scene::World_Client::Graphics::JobSystem_Client::Graphics::Scene::World::SceneUpdateJob", ["Client::Graphics::Scene::Object"], {})
+factory.register(0x141695BA0, "Client::Graphics::Scene::World", ["Client::Graphics::Scene::Object", "Client::Graphics::Singleton"], {
     0x14042C290: "ctor",
 })
-vtbls.register(0x141695BD0, "Client::Graphics::Scene::World_Client::Graphics::Singleton", ["Client::Graphics::Scene::Object", "Client::Graphics::Singleton"], {})
-vtbls.register(0x141695BD8, "Client::Graphics::Scene::Camera", ["Client::Graphics::Scene::Object"], {
+factory.register(0x141695BD0, "Client::Graphics::Scene::World_Client::Graphics::Singleton", ["Client::Graphics::Scene::Object", "Client::Graphics::Singleton"], {})
+factory.register(0x141695BD8, "Client::Graphics::Scene::Camera", ["Client::Graphics::Scene::Object"], {
     0x14042C550: "ctor",
 })
-vtbls.register(0x141695C38, "Client::Graphics::Scene::CameraManager_Client::Graphics::Singleton", ["Client::Graphics::Scene::Object"], {})
-vtbls.register(0x141695C40, "Client::Graphics::Scene::CameraManager", ["Client::Graphics::Singleton", "Client::Graphics::Kernel::Notifier"], {
+factory.register(0x141695C38, "Client::Graphics::Scene::CameraManager_Client::Graphics::Singleton", ["Client::Graphics::Scene::Object"], {})
+factory.register(0x141695C40, "Client::Graphics::Scene::CameraManager", ["Client::Graphics::Singleton", "Client::Graphics::Kernel::Notifier"], {
     0x14042E020: "ctor",
 })
-vtbls.register(0x141695E08, "Client::Graphics::Scene::CharacterUtility", ["Client::Graphics::Singleton"], {
+factory.register(0x141695E08, "Client::Graphics::Scene::CharacterUtility", ["Client::Graphics::Singleton"], {
     0x140431750: "ctor",
     0x140431960: "CreateDXRenderObjects",
     0x140431DB0: "LoadDataFiles",
     0x140435B30: "GetSlotEqpFlags",
 })
-vtbls.register(0x141695E88, "Client::Graphics::Scene::CharacterBase", ["Client::Graphics::Scene::DrawObject", "Client::Graphics::Scene::Object"], {
+factory.register(0x141695E88, "Client::Graphics::Scene::CharacterBase", ["Client::Graphics::Scene::DrawObject", "Client::Graphics::Scene::Object"], {
     11: "UpdateMaterials",
     92: "CreateRenderModelForMDL",
     0x140438BD0: "ctor",
@@ -562,7 +562,7 @@ vtbls.register(0x141695E88, "Client::Graphics::Scene::CharacterBase", ["Client::
     0x14045FDD0: "dtor",
     0x1406E3470: "Create",
 })
-vtbls.register(0x141696198, "Client::Graphics::Scene::Human", ["Client::Graphics::Scene::CharacterBase", "Client::Graphics::Scene::DrawObject", "Client::Graphics::Scene::Object"], {
+factory.register(0x141696198, "Client::Graphics::Scene::Human", ["Client::Graphics::Scene::CharacterBase", "Client::Graphics::Scene::DrawObject", "Client::Graphics::Scene::Object"], {
     1: "CleanupRender",
     4: "UpdateRender",
     67: "FlagSlotForUpdate",
@@ -574,35 +574,35 @@ vtbls.register(0x141696198, "Client::Graphics::Scene::Human", ["Client::Graphics
     0x140444080: "SetupFromCharacterData",
     0x140460BB0: "dtor",
 })
-vtbls.register(0x141697860, "Client::Graphics::Scene::ResidentResourceManager::ResourceList", [], {})
-vtbls.register(0x141697870, "Client::Graphics::Scene::ResidentResourceManager", ["Client::Graphics::Singleton"], {
+factory.register(0x141697860, "Client::Graphics::Scene::ResidentResourceManager::ResourceList", [], {})
+factory.register(0x141697870, "Client::Graphics::Scene::ResidentResourceManager", ["Client::Graphics::Singleton"], {
     0x14045E220: "ctor",
     0x14045E250: "nullsub_1",
     0x14045E280: "LoadDataFiles",
 })
-vtbls.register(0x141697950, "Client::System::Task::SpursJobEntityWorkerThread", ["Client::Graphics::Singleton"], {})
-vtbls.register(0x141697D60, "Common::Lua::LuaState", [], {})
-vtbls.register(0x141697D60, "Common::Lua::LuaThread", ["Common::Lua::LuaState"], {})
-vtbls.register(0x141698A90, "Client::Game::Control::TargetSystem::AggroListFeeder", ["Client::Game::Control::TargetSystem::ListFeeder"], {})
-vtbls.register(0x141698AA0, "Client::Game::Control::TargetSystem::AllianceListFeeder", ["Client::Game::Control::TargetSystem::ListFeeder"], {})
-vtbls.register(0x141698AB0, "Client::Game::Control::TargetSystem::PartyListFeeder", ["Client::Game::Control::TargetSystem::ListFeeder"], {})
-vtbls.register(0x141698B00, "Client::Game::Control::TargetSystem", ["Client::Game::Object::IGameObjectEventListener"], {
+factory.register(0x141697950, "Client::System::Task::SpursJobEntityWorkerThread", ["Client::Graphics::Singleton"], {})
+factory.register(0x141697D60, "Common::Lua::LuaState", [], {})
+factory.register(0x141697D60, "Common::Lua::LuaThread", ["Common::Lua::LuaState"], {})
+factory.register(0x141698A90, "Client::Game::Control::TargetSystem::AggroListFeeder", ["Client::Game::Control::TargetSystem::ListFeeder"], {})
+factory.register(0x141698AA0, "Client::Game::Control::TargetSystem::AllianceListFeeder", ["Client::Game::Control::TargetSystem::ListFeeder"], {})
+factory.register(0x141698AB0, "Client::Game::Control::TargetSystem::PartyListFeeder", ["Client::Game::Control::TargetSystem::ListFeeder"], {})
+factory.register(0x141698B00, "Client::Game::Control::TargetSystem", ["Client::Game::Object::IGameObjectEventListener"], {
     0x1404937B0: "ctor",
     0x14049E2D0: "IsActorInViewRange",
 })
-vtbls.register(0x14169A300, "Component::GUI::AtkArrayData", [], {})
-vtbls.register(0x14169A310, "Component::GUI::NumberArrayData", ["Component::GUI::AtkArrayData"], {
+factory.register(0x14169A300, "Component::GUI::AtkArrayData", [], {})
+factory.register(0x14169A310, "Component::GUI::NumberArrayData", ["Component::GUI::AtkArrayData"], {
     0x1404AABE0: "SetValue",
 })
-vtbls.register(0x14169A320, "Component::GUI::StringArrayData", ["Component::GUI::AtkArrayData"], {})
-vtbls.register(0x14169A330, "Component::GUI::ExtendArrayData", ["Component::GUI::AtkArrayData"], {})
-vtbls.register(0x14169A438, "Component::GUI::AtkSimpleTween", ["Component::GUI::AtkEventTarget"], {})
-vtbls.register(0x14169A448, "Component::GUI::AtkTexture", [], {})
-vtbls.register(0x14169A5A8, "Component::GUI::AtkStage", ["Component::GUI::AtkEventTarget"], {
+factory.register(0x14169A320, "Component::GUI::StringArrayData", ["Component::GUI::AtkArrayData"], {})
+factory.register(0x14169A330, "Component::GUI::ExtendArrayData", ["Component::GUI::AtkArrayData"], {})
+factory.register(0x14169A438, "Component::GUI::AtkSimpleTween", ["Component::GUI::AtkEventTarget"], {})
+factory.register(0x14169A448, "Component::GUI::AtkTexture", [], {})
+factory.register(0x14169A5A8, "Component::GUI::AtkStage", ["Component::GUI::AtkEventTarget"], {
     0x1404BC9C0: "ctor",
     0x1404DDEA0: "GetSingleton1",  # dalamud GetBaseUIObject
 })
-vtbls.register(0x14169AE50, "Component::GUI::AtkResNode", ["Component::GUI::AtkEventTarget"], {
+factory.register(0x14169AE50, "Component::GUI::AtkResNode", ["Component::GUI::AtkEventTarget"], {
     1: "Destroy",
     0x1404CC6B0: "ctor",
     0x1404CC810: "GetAsAtkImageNode",
@@ -624,34 +624,34 @@ vtbls.register(0x14169AE50, "Component::GUI::AtkResNode", ["Component::GUI::AtkE
     0x1404CE6E0: "Init",
     0x1404CE8B0: "SetScale0",  # SetScale jumps to this
 })
-vtbls.register(0x14169AE68, "Component::GUI::AtkImageNode", ["Component::GUI::AtkResNode", "Component::GUI::AtkEventTarget"], {
+factory.register(0x14169AE68, "Component::GUI::AtkImageNode", ["Component::GUI::AtkResNode", "Component::GUI::AtkEventTarget"], {
     1: "Destroy",
     0x14053F960: "ctor",
 })
-vtbls.register(0x14169AE80, "Component::GUI::AtkTextNode", ["Component::GUI::AtkResNode", "Component::GUI::AtkEventTarget"], {
+factory.register(0x14169AE80, "Component::GUI::AtkTextNode", ["Component::GUI::AtkResNode", "Component::GUI::AtkEventTarget"], {
     1: "Destroy",
     0x14053FB10: "ctor",
     0x1404CF1A0: "SetText",
     0x1404CFCD0: "SetForegroundColour",
     0x1404D0DF0: "SetGlowColour",
 })
-vtbls.register(0x14169AE98, "Component::GUI::AtkNineGridNode", ["Component::GUI::AtkResNode", "Component::GUI::AtkEventTarget"], {
+factory.register(0x14169AE98, "Component::GUI::AtkNineGridNode", ["Component::GUI::AtkResNode", "Component::GUI::AtkEventTarget"], {
     1: "Destroy",
     0x14053F9C0: "ctor",
 })
-vtbls.register(0x14169AEB0, "Component::GUI::AtkCounterNode", ["Component::GUI::AtkResNode", "Component::GUI::AtkEventTarget"], {
+factory.register(0x14169AEB0, "Component::GUI::AtkCounterNode", ["Component::GUI::AtkResNode", "Component::GUI::AtkEventTarget"], {
     1: "Destroy",
     0x14053F8E0: "ctor",
 })
-vtbls.register(0x14169AEC8, "Component::GUI::AtkCollisionNode", ["Component::GUI::AtkResNode", "Component::GUI::AtkEventTarget"], {
+factory.register(0x14169AEC8, "Component::GUI::AtkCollisionNode", ["Component::GUI::AtkResNode", "Component::GUI::AtkEventTarget"], {
     1: "Destroy",
     0x14053F820: "ctor",
 })
-vtbls.register(0x14169AEE0, "Component::GUI::AtkComponentNode", ["Component::GUI::AtkResNode", "Component::GUI::AtkEventTarget"], {
+factory.register(0x14169AEE0, "Component::GUI::AtkComponentNode", ["Component::GUI::AtkResNode", "Component::GUI::AtkEventTarget"], {
     1: "Destroy",
     0x14053F880: "ctor",
 })
-vtbls.register(0x14169AEF8, "Component::GUI::AtkUnitBase", ["Component::GUI::AtkEventListener"], {
+factory.register(0x14169AEF8, "Component::GUI::AtkUnitBase", ["Component::GUI::AtkEventListener"], {
     8: "SetPosition",
     9: "SetX",
     10: "SetY",
@@ -671,146 +671,146 @@ vtbls.register(0x14169AEF8, "Component::GUI::AtkUnitBase", ["Component::GUI::Atk
     0x1404D5FD0: "ULDAddonData_ReadTPHD",
     0x1404D61E0: "ULDAddonData_ReadAHSDAndLoadTextures",
 })
-vtbls.register(0x14169B188, "Component::GUI::AtkComponentBase", ["Component::GUI::AtkEventListener"], {
+factory.register(0x14169B188, "Component::GUI::AtkComponentBase", ["Component::GUI::AtkEventListener"], {
     0x1404F2670: "ctor",
     0x1404F2920: "GetOwnerNodePosition",
 })
-vtbls.register(0x14169B228, "Component::GUI::AtkComponentButton", ["Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener"], {
+factory.register(0x14169B228, "Component::GUI::AtkComponentButton", ["Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener"], {
     10: "SetEnabledState",
     17: "InitializeFromComponentData",
     0x1404F3DA0: "ctor",
 })
-vtbls.register(0x14169B2F0, "Component::GUI::AtkComponentIcon", ["Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener"], {
+factory.register(0x14169B2F0, "Component::GUI::AtkComponentIcon", ["Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener"], {
     0x1404F62E0: "ctor",
 })
-vtbls.register(0x14169B410, "Component::GUI::AtkComponentListItemRenderer", ["Component::GUI::AtkComponentButton", "Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener", "Component::GUI::AtkDragDropInterface"], {
+factory.register(0x14169B410, "Component::GUI::AtkComponentListItemRenderer", ["Component::GUI::AtkComponentButton", "Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener", "Component::GUI::AtkDragDropInterface"], {
     0x1404F6E20: "ctor",
 })
-vtbls.register(0x14169B580, "Component::GUI::AtkComponentList", ["Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener"], {
+factory.register(0x14169B580, "Component::GUI::AtkComponentList", ["Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener"], {
     0x140502070: "ctor",
 })
-vtbls.register(0x14169B6E8, "Component::GUI::AtkComponentTreeList", ["Component::GUI::AtkComponentList", "Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener"], {
+factory.register(0x14169B6E8, "Component::GUI::AtkComponentTreeList", ["Component::GUI::AtkComponentList", "Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener"], {
     0x140506A00: "ctor",
 })
-vtbls.register(0x14169B850, "Component::GUI::AtkModule", ["Component::GUI::AtkModuleInterface", "Component::GUI::AtkExternalInterface", "Client::System::Input::TextServiceInterface::TextServiceEvent"], {
+factory.register(0x14169B850, "Component::GUI::AtkModule", ["Component::GUI::AtkModuleInterface", "Component::GUI::AtkExternalInterface", "Client::System::Input::TextServiceInterface::TextServiceEvent"], {
     0x14050B670: "ctor",
 })
-vtbls.register(0x14169BAF8, "Component::GUI::AtkComponentCheckBox", ["Component::GUI::AtkComponentButton", "Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener"], {
+factory.register(0x14169BAF8, "Component::GUI::AtkComponentCheckBox", ["Component::GUI::AtkComponentButton", "Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener"], {
     0x14050F620: "ctor",
 })
-vtbls.register(0x14169BBC8, "Component::GUI::AtkComponentGaugeBar", ["Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener"], {
+factory.register(0x14169BBC8, "Component::GUI::AtkComponentGaugeBar", ["Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener"], {
     0x140510540: "ctor",
 })
-vtbls.register(0x14169BC68, "Component::GUI::AtkComponentSlider", ["Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener"], {
+factory.register(0x14169BC68, "Component::GUI::AtkComponentSlider", ["Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener"], {
     0x140512670: "ctor",
 })
-vtbls.register(0x14169BD08, "Component::GUI::AtkComponentInputBase", ["Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener"], {
+factory.register(0x14169BD08, "Component::GUI::AtkComponentInputBase", ["Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener"], {
     0x140513A80: "ctor",
 })
-vtbls.register(0x14169BDA8, "Component::GUI::AtkComponentTextInput", ["Component::GUI::AtkComponentInputBase", "Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener", "Component::GUI::AtkTextInput::AtkTextInputEventInterface", "Client::System::Input::SoftKeyboardDeviceInterface::SoftKeyboardInputInterface"], {
+factory.register(0x14169BDA8, "Component::GUI::AtkComponentTextInput", ["Component::GUI::AtkComponentInputBase", "Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener", "Component::GUI::AtkTextInput::AtkTextInputEventInterface", "Client::System::Input::SoftKeyboardDeviceInterface::SoftKeyboardInputInterface"], {
     0x140515240: "ctor",
 })
-vtbls.register(0x14169BEA8, "Component::GUI::AtkComponentNumericInput", ["Component::GUI::AtkComponentInputBase", "Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener", "Component::GUI::AtkTextInput::AtkTextInputEventInterface"], {
+factory.register(0x14169BEA8, "Component::GUI::AtkComponentNumericInput", ["Component::GUI::AtkComponentInputBase", "Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener", "Component::GUI::AtkTextInput::AtkTextInputEventInterface"], {
     0x140519950: "ctor",
 })
-vtbls.register(0x14169BF70, "Component::GUI::AtkComponentDropDownList", ["Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener"], {
+factory.register(0x14169BF70, "Component::GUI::AtkComponentDropDownList", ["Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener"], {
     0x14051D5F0: "ctor",
 })
-vtbls.register(0x14169C010, "Component::GUI::AtkComponentRadioButton", ["Component::GUI::AtkComponentButton", "Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener"], {
+factory.register(0x14169C010, "Component::GUI::AtkComponentRadioButton", ["Component::GUI::AtkComponentButton", "Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener"], {
     0x14051EAE0: "ctor",
 })
-vtbls.register(0x14169C120, "Component::GUI::AtkComponentTab", ["Component::GUI::AtkComponentRadioButton", "Component::GUI::AtkComponentButton", "Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener"], {
+factory.register(0x14169C120, "Component::GUI::AtkComponentTab", ["Component::GUI::AtkComponentRadioButton", "Component::GUI::AtkComponentButton", "Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener"], {
     0x14051F3B0: "ctor",
 })
-vtbls.register(0x14169C230, "Component::GUI::AtkComponentGuildLeveCard", ["Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener"], {
+factory.register(0x14169C230, "Component::GUI::AtkComponentGuildLeveCard", ["Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener"], {
     0x14051F990: "ctor",
 })
-vtbls.register(0x14169C2D0, "Component::GUI::AtkComponentTextNineGrid", ["Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener"], {
+factory.register(0x14169C2D0, "Component::GUI::AtkComponentTextNineGrid", ["Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener"], {
     0x14051FD20: "ctor",
 })
-vtbls.register(0x14169C370, "Component::GUI::AtkResourceRendererBase", [], {})
-vtbls.register(0x14169C388, "Component::GUI::AtkImageNodeRenderer", ["Component::GUI::AtkResourceRendererBase"], {})
-vtbls.register(0x14169C3A0, "Component::GUI::AtkTextNodeRenderer", ["Component::GUI::AtkResourceRendererBase"], {})
-vtbls.register(0x14169C3C0, "Component::GUI::AtkNineGridNodeRenderer", ["Component::GUI::AtkResourceRendererBase"], {})
-vtbls.register(0x14169C3D8, "Component::GUI::AtkCounterNodeRenderer", ["Component::GUI::AtkResourceRendererBase"], {})
-vtbls.register(0x14169C3F0, "Component::GUI::AtkComponentNodeRenderer", ["Component::GUI::AtkResourceRendererBase"], {})
-vtbls.register(0x14169C408, "Component::GUI::AtkResourceRendererManager", [], {
+factory.register(0x14169C370, "Component::GUI::AtkResourceRendererBase", [], {})
+factory.register(0x14169C388, "Component::GUI::AtkImageNodeRenderer", ["Component::GUI::AtkResourceRendererBase"], {})
+factory.register(0x14169C3A0, "Component::GUI::AtkTextNodeRenderer", ["Component::GUI::AtkResourceRendererBase"], {})
+factory.register(0x14169C3C0, "Component::GUI::AtkNineGridNodeRenderer", ["Component::GUI::AtkResourceRendererBase"], {})
+factory.register(0x14169C3D8, "Component::GUI::AtkCounterNodeRenderer", ["Component::GUI::AtkResourceRendererBase"], {})
+factory.register(0x14169C3F0, "Component::GUI::AtkComponentNodeRenderer", ["Component::GUI::AtkResourceRendererBase"], {})
+factory.register(0x14169C408, "Component::GUI::AtkResourceRendererManager", [], {
     0x140522930: "ctor",
     0x140522B30: "DrawUldFromData",
     0x140522C10: "DrawUldFromDataClipped",
 })
-vtbls.register(0x14169C428, "Component::GUI::AtkComponentMap", ["Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener"], {
+factory.register(0x14169C428, "Component::GUI::AtkComponentMap", ["Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener"], {
     0x140525120: "ctor",
 })
-vtbls.register(0x14169C4C8, "Component::GUI::AtkComponentPreview", ["Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener"], {
+factory.register(0x14169C4C8, "Component::GUI::AtkComponentPreview", ["Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener"], {
     0x140527B50: "ctor",
 })
-vtbls.register(0x14169C568, "Component::GUI::AtkComponentScrollBar", ["Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener"], {
+factory.register(0x14169C568, "Component::GUI::AtkComponentScrollBar", ["Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener"], {
     0x140528BB0: "ctor",
 })
-vtbls.register(0x14169C608, "Component::GUI::AtkComponentIconText", ["Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener"], {
+factory.register(0x14169C608, "Component::GUI::AtkComponentIconText", ["Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener"], {
     0x14052A5C0: "ctor",
 })
-vtbls.register(0x14169C6A8, "Component::GUI::AtkComponentDragDrop", ["Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener", "Component::GUI::AtkDragDropInterface"], {
+factory.register(0x14169C6A8, "Component::GUI::AtkComponentDragDrop", ["Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener", "Component::GUI::AtkDragDropInterface"], {
     0x14052B840: "ctor",
 })
-vtbls.register(0x14169C7C8, "Component::GUI::AtkComponentMultipurpose", ["Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener"], {
+factory.register(0x14169C7C8, "Component::GUI::AtkComponentMultipurpose", ["Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener"], {
     0x14052D4A0: "ctor",
 })
-vtbls.register(0x14169C938, "Component::GUI::AtkComponentWindow", ["Component::GUI::AtkComponentWindowGrab", "Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener"], {
+factory.register(0x14169C938, "Component::GUI::AtkComponentWindow", ["Component::GUI::AtkComponentWindowGrab", "Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener"], {
     0x14052DDD0: "ctor",
 })
-vtbls.register(0x14169CA08, "Component::GUI::AtkComponentJournalCanvas", ["Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener"], {
+factory.register(0x14169CA08, "Component::GUI::AtkComponentJournalCanvas", ["Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener"], {
     0x140533360: "ctor",
 })
-vtbls.register(0x14169CAA8, "Component::GUI::AtkComponentUnknownButton", ["Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener"], {
+factory.register(0x14169CAA8, "Component::GUI::AtkComponentUnknownButton", ["Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener"], {
     0x140536E90: "ctor",
 })
-vtbls.register(0x1416A9390, "Client::UI::Misc::UserFileManager::UserFileEvent", [], {})
-vtbls.register(0x1416A9CF8, "Client::UI::UI3DModule::ObjectInfo", ["Client::UI::UI3DModule::MapInfo"], {})
-vtbls.register(0x1416A9D28, "Client::UI::UI3DModule::MemberInfo", ["Client::UI::UI3DModule::MapInfo"], {})
-vtbls.register(0x1416A9D88, "Client::UI::UI3DModule", [], {
+factory.register(0x1416A9390, "Client::UI::Misc::UserFileManager::UserFileEvent", [], {})
+factory.register(0x1416A9CF8, "Client::UI::UI3DModule::ObjectInfo", ["Client::UI::UI3DModule::MapInfo"], {})
+factory.register(0x1416A9D28, "Client::UI::UI3DModule::MemberInfo", ["Client::UI::UI3DModule::MapInfo"], {})
+factory.register(0x1416A9D88, "Client::UI::UI3DModule", [], {
     0x1405BB780: "ctor",
 })
-vtbls.register(0x1416A9DA0, "Client::UI::UIModule", ["Client::UI::UIModuleInterface", "Component::GUI::AtkModuleEvent", "Component::Excel::ExcelLanguageEvent", "Common::Configuration::ConfigBase::ChangeEventInterface"], {
+factory.register(0x1416A9DA0, "Client::UI::UIModule", ["Client::UI::UIModuleInterface", "Component::GUI::AtkModuleEvent", "Component::Excel::ExcelLanguageEvent", "Common::Configuration::ConfigBase::ChangeEventInterface"], {
     0x1405C47E0: "ctor",
 })
-vtbls.register(0x1416AA5A0, "Client::System::Crypt::SimpleString", ["Client::System::Crypt::CryptInterface"], {
+factory.register(0x1416AA5A0, "Client::System::Crypt::SimpleString", ["Client::System::Crypt::CryptInterface"], {
     1: "Encrypt",
     2: "Decrypt",
 })
-vtbls.register(0x1416AB430, "Component::Text::MacroDecoder", [], {})
-vtbls.register(0x1416AB5F0, "Component::Text::TextChecker", ["Component::Text::MacroDecoder", "Client::System::Common::NonCopyable"], {})
-vtbls.register(0x1416AEAE8, "Client::UI::Misc::ConfigModule", ["Component::GUI::AtkModuleInterface::AtkEventInterface", "Common::Configuration::ConfigBase::ChangeEventInterface"], {
+factory.register(0x1416AB430, "Component::Text::MacroDecoder", [], {})
+factory.register(0x1416AB5F0, "Component::Text::TextChecker", ["Component::Text::MacroDecoder", "Client::System::Common::NonCopyable"], {})
+factory.register(0x1416AEAE8, "Client::UI::Misc::ConfigModule", ["Component::GUI::AtkModuleInterface::AtkEventInterface", "Common::Configuration::ConfigBase::ChangeEventInterface"], {
     0x1405FAEA0: "ctor",
 })
-vtbls.register(0x1416AEAF8, "Client::UI::Misc::ConfigModule_Common::Configuration::ConfigBase::ChangeEventInterface", ["Component::GUI::AtkModuleInterface::AtkEventInterface", "Common::Configuration::ConfigBase::ChangeEventInterface"], {})
-vtbls.register(0x1416AEBD8, "Client::UI::Misc::RaptureMacroModule", ["Client::UI::Misc::UserFileManager::UserFileEvent"], {
+factory.register(0x1416AEAF8, "Client::UI::Misc::ConfigModule_Common::Configuration::ConfigBase::ChangeEventInterface", ["Component::GUI::AtkModuleInterface::AtkEventInterface", "Common::Configuration::ConfigBase::ChangeEventInterface"], {})
+factory.register(0x1416AEBD8, "Client::UI::Misc::RaptureMacroModule", ["Client::UI::Misc::UserFileManager::UserFileEvent"], {
     1: "ReadFile", 2: "WriteFile",
 })
-vtbls.register(0x1416AEC40, "Client::UI::Misc::RaptureTextModule", ["Component::Text::TextModule", "Component::Text::TextModuleInterface", "Component::Text::MacroDecoder", "Client::System::Common::NonCopyable", "Component::Text::TextChecker::ExecNonMacroFunc", "Component::Excel::ExcelLanguageEvent"], {})
-vtbls.register(0x1416AEEB8, "Client::UI::Misc::RaptureLogModule", ["Component::Log::LogModule", "Component::Log::LogModuleInterface", "Client::System::Common::NonCopyable"], {
+factory.register(0x1416AEC40, "Client::UI::Misc::RaptureTextModule", ["Component::Text::TextModule", "Component::Text::TextModuleInterface", "Component::Text::MacroDecoder", "Client::System::Common::NonCopyable", "Component::Text::TextChecker::ExecNonMacroFunc", "Component::Excel::ExcelLanguageEvent"], {})
+factory.register(0x1416AEEB8, "Client::UI::Misc::RaptureLogModule", ["Component::Log::LogModule", "Component::Log::LogModuleInterface", "Client::System::Common::NonCopyable"], {
     0x140615880: "ctor",
     0x140617010: "PrintMessage",
 })
-vtbls.register(0x1416AEF08, "Client::UI::Misc::RaptureHotbarModule", ["Client::UI::Misc::UserFileManager::UserFileEvent", "Client::System::Input::InputData::InputCodeModifiedInterface"], {
+factory.register(0x1416AEF08, "Client::UI::Misc::RaptureHotbarModule", ["Client::UI::Misc::UserFileManager::UserFileEvent", "Client::System::Input::InputData::InputCodeModifiedInterface"], {
     0x1406207D0: "ctor",
 })
-vtbls.register(0x1416AEF70, "Client::UI::Misc::RaptureHotbarModule_Client::System::Input::InputCodeModifiedInterface", ["Client::UI::Misc::UserFileManager::UserFileEvent", "Client::System::Input::InputData::InputCodeModifiedInterface"], {})
-vtbls.register(0x1416AEFE8, "Client::UI::Misc::PronounModule", ["Component::Text::TextChecker::ExecNonMacroFunc"], {
+factory.register(0x1416AEF70, "Client::UI::Misc::RaptureHotbarModule_Client::System::Input::InputCodeModifiedInterface", ["Client::UI::Misc::UserFileManager::UserFileEvent", "Client::System::Input::InputData::InputCodeModifiedInterface"], {})
+factory.register(0x1416AEFE8, "Client::UI::Misc::PronounModule", ["Component::Text::TextChecker::ExecNonMacroFunc"], {
     0x140629590: "ctor",
 })
-vtbls.register(0x1416AFAC0, "Client::UI::Misc::CharaView", [], {
+factory.register(0x1416AFAC0, "Client::UI::Misc::CharaView", [], {
     1: "Initialize",
     2: "Finalize",
     0x14064FB80: "ctor",
     0x14065F700: "dtor",
 })
-vtbls.register(0x1416B0EC0, "Client::Game::Object::GameObject", [], {
+factory.register(0x1416B0EC0, "Client::Game::Object::GameObject", [], {
     0x1406C5270: "Initialize",
     0x1406C54D0: "ctor",
 })
-vtbls.register(0x1416B1B48, "Client::Game::Character::Character", ["Client::Game::Object::GameObject", "Client::Graphics::Vfx::VfxDataListenner"], {
+factory.register(0x1416B1B48, "Client::Game::Character::Character", ["Client::Game::Object::GameObject", "Client::Graphics::Vfx::VfxDataListenner"], {
     3: "GetObjectKind",
     16: "EnableDraw",
     17: "DisableDraw",
@@ -819,72 +819,72 @@ vtbls.register(0x1416B1B48, "Client::Game::Character::Character", ["Client::Game
     0x1406D5AC0: "dtor",
     0x1406EA340: "ctor",
 })
-vtbls.register(0x1416B1E10, "Client::Game::Character::Character_Client::Graphics::Vfx::VfxDataListener", ["Client::Game::Object::GameObject", "Client::Graphics::Vfx::VfxDataListenner"], {})
-vtbls.register(0x1416C8150, "Client::Game::Character::BattleChara", ["Client::Game::Character::Character", "Client::Game::Object::GameObject", "Client::Graphics::Vfx::VfxDataListenner"], {
+factory.register(0x1416B1E10, "Client::Game::Character::Character_Client::Graphics::Vfx::VfxDataListener", ["Client::Game::Object::GameObject", "Client::Graphics::Vfx::VfxDataListenner"], {})
+factory.register(0x1416C8150, "Client::Game::Character::BattleChara", ["Client::Game::Character::Character", "Client::Game::Object::GameObject", "Client::Graphics::Vfx::VfxDataListenner"], {
     0x14073C140: "ctor",
     0x14073C230: "dtor",
 })
-vtbls.register(0x1416C8418, "Client::Game::Character::BattleChara_Client::Graphics::Vfx::VfxDataListener", ["Client::Game::Character::Character", "Client::Game::Object::GameObject", "Client::Graphics::Vfx::VfxDataListenner"], {})
-vtbls.register(0x1416CA7C0, "Client::Game::ActionManager", ["Client::Graphics::Vfx::VfxDataListenner"], {})
-vtbls.register(0x1416CC740, "Client::UI::Agent::AgentHUD", ["Client::UI::Agent::AgentInterface", "Component::GUI::AtkModuleInterface::AtkEventInterface", "Common::Configuration::ConfigBase::ChangeEventInterface"], {
+factory.register(0x1416C8418, "Client::Game::Character::BattleChara_Client::Graphics::Vfx::VfxDataListener", ["Client::Game::Character::Character", "Client::Game::Object::GameObject", "Client::Graphics::Vfx::VfxDataListenner"], {})
+factory.register(0x1416CA7C0, "Client::Game::ActionManager", ["Client::Graphics::Vfx::VfxDataListenner"], {})
+factory.register(0x1416CC740, "Client::UI::Agent::AgentHUD", ["Client::UI::Agent::AgentInterface", "Component::GUI::AtkModuleInterface::AtkEventInterface", "Common::Configuration::ConfigBase::ChangeEventInterface"], {
     5: "Update",
     0x14081F350: "ctor",
     0x140824ED0: "UpdateParty",
 })
-vtbls.register(0x1416CCAF0, "Client::UI::Agent::AgentItemDetail", ["Client::UI::Agent::AgentItemDetailBase", "Client::UI::Agent::AgentInterface", "Component::GUI::AtkModuleInterface::AtkEventInterface"], {
+factory.register(0x1416CCAF0, "Client::UI::Agent::AgentItemDetail", ["Client::UI::Agent::AgentItemDetailBase", "Client::UI::Agent::AgentInterface", "Component::GUI::AtkModuleInterface::AtkEventInterface"], {
     0x1408D3F50: "ctor",
     0x1408D4F80: "OnItemHovered",
 })
-vtbls.register(0x1416CD4B8, "Client::UI::Agent::AgentMap::MapMarkerStructSearchName", ["Client::UI::Agent::AgentMap::MapMarkerStructSearch"], {
+factory.register(0x1416CD4B8, "Client::UI::Agent::AgentMap::MapMarkerStructSearchName", ["Client::UI::Agent::AgentMap::MapMarkerStructSearch"], {
     1: "Evaluate",
 })
-vtbls.register(0x1416CD4C8, "Client::UI::Agent::AgentMap", ["Client::UI::Agent::AgentInterface", "Component::GUI::AtkModuleInterface::AtkEventInterface"], {
+factory.register(0x1416CD4C8, "Client::UI::Agent::AgentMap", ["Client::UI::Agent::AgentInterface", "Component::GUI::AtkModuleInterface::AtkEventInterface"], {
     0x140887BE0: "ctor",
 })
-vtbls.register(0x1416CE090, "Client::UI::Agent::AgentHudLayout", ["Client::UI::Agent::AgentInterface", "Component::GUI::AtkModuleInterface::AtkEventInterface"], {
+factory.register(0x1416CE090, "Client::UI::Agent::AgentHudLayout", ["Client::UI::Agent::AgentInterface", "Component::GUI::AtkModuleInterface::AtkEventInterface"], {
     2: "Show",
     3: "Hide",
     0x1408C0B10: "ctor",
 })
-vtbls.register(0x1416CEED8, "Client::UI::Agent::AgentStatus", ["Client::UI::Agent::AgentInterface", "Component::GUI::AtkModuleInterface::AtkEventInterface"], {
+factory.register(0x1416CEED8, "Client::UI::Agent::AgentStatus", ["Client::UI::Agent::AgentInterface", "Component::GUI::AtkModuleInterface::AtkEventInterface"], {
     0x140904190: "ctor",
 })
-vtbls.register(0x1416CEEA0, "Client::UI::Agent::AgentStatus::StatusCharaView", ["Client::UI::Misc::CharaView"], {})
-vtbls.register(0x1416DEE58, "Client::Game::Event::EventHandler", [], {})
-vtbls.register(0x1416DF680, "Client::Game::Event::ModuleBase", [], {})
-vtbls.register(0x1416DF6E0, "Client::Game::Event::LuaEventHandler", ["Client::Game::Event::EventHandler"], {})
-vtbls.register(0x1416DFEF0, "Client::Game::Event::EventSceneModuleImplBase", [], {})
-vtbls.register(0x1416E05C8, "Client::Game::Event::EventSceneModuleUsualImpl", ["Client::Game::Event::EventSceneModuleImplBase"], {})
-vtbls.register(0x1416E48A0, "Client::Game::Event::EventHandlerModule", ["Client::Game::Event::ModuleBase"], {})
-vtbls.register(0x1416E4918, "Client::Game::Event::DirectorModule", ["Client::Game::Event::ModuleBase"], {})
-vtbls.register(0x1416F4AA8, "Client::Game::Gimmick::GimmickBill", ["Client::Game::Gimmick::GimmickEventHandler", "Client::Game::Event::LuaEventHandler", "Client::Game::Event::EventHandler", "Client::Game::InstanceContent::ContentSheetWaiterInterface"], {})
-vtbls.register(0x141798F70, "Client::UI::AddonNowLoading", ["Component::GUI::AtkUnitBase", "Component::GUI::AtkEventListener"], {
+factory.register(0x1416CEEA0, "Client::UI::Agent::AgentStatus::StatusCharaView", ["Client::UI::Misc::CharaView"], {})
+factory.register(0x1416DEE58, "Client::Game::Event::EventHandler", [], {})
+factory.register(0x1416DF680, "Client::Game::Event::ModuleBase", [], {})
+factory.register(0x1416DF6E0, "Client::Game::Event::LuaEventHandler", ["Client::Game::Event::EventHandler"], {})
+factory.register(0x1416DFEF0, "Client::Game::Event::EventSceneModuleImplBase", [], {})
+factory.register(0x1416E05C8, "Client::Game::Event::EventSceneModuleUsualImpl", ["Client::Game::Event::EventSceneModuleImplBase"], {})
+factory.register(0x1416E48A0, "Client::Game::Event::EventHandlerModule", ["Client::Game::Event::ModuleBase"], {})
+factory.register(0x1416E4918, "Client::Game::Event::DirectorModule", ["Client::Game::Event::ModuleBase"], {})
+factory.register(0x1416F4AA8, "Client::Game::Gimmick::GimmickBill", ["Client::Game::Gimmick::GimmickEventHandler", "Client::Game::Event::LuaEventHandler", "Client::Game::Event::EventHandler", "Client::Game::InstanceContent::ContentSheetWaiterInterface"], {})
+factory.register(0x141798F70, "Client::UI::AddonNowLoading", ["Component::GUI::AtkUnitBase", "Component::GUI::AtkEventListener"], {
     41: "LoadUldResourceHandle",
     0x140CCD730: "ctor",
 })
-vtbls.register(0x1417C9DC8, "Client::UI::Atk2DAreaMap", ["Client::UI::Atk2DMap"], {})
-vtbls.register(0x1417D4E18, "Client::UI::AddonTalk", ["Component::GUI::AtkUnitBase", "Component::GUI::AtkEventListener"], {
+factory.register(0x1417C9DC8, "Client::UI::Atk2DAreaMap", ["Client::UI::Atk2DMap"], {})
+factory.register(0x1417D4E18, "Client::UI::AddonTalk", ["Component::GUI::AtkUnitBase", "Component::GUI::AtkEventListener"], {
     0x140E7C1D0: "ctor",
 })
-vtbls.register(0x1417D6AA0, "Client::UI::AddonItemDetail", ["Client::UI::AddonItemDetailBase", "Component::GUI::AtkUnitBase", "Component::GUI::AtkEventListener", "Component::GUI::AtkManagedInterface"], {
+factory.register(0x1417D6AA0, "Client::UI::AddonItemDetail", ["Client::UI::AddonItemDetailBase", "Component::GUI::AtkUnitBase", "Component::GUI::AtkEventListener", "Component::GUI::AtkManagedInterface"], {
     0x140E90440: "ctor",
     0x140E91960: "GenerateTooltip",
 })
-vtbls.register(0x1417DCDD0, "Client::UI::AddonAreaMap", ["Component::GUI::AtkUnitBase", "Component::GUI::AtkEventListener"], {
+factory.register(0x1417DCDD0, "Client::UI::AddonAreaMap", ["Component::GUI::AtkUnitBase", "Component::GUI::AtkEventListener"], {
     0x140EBDC30: "ctor",
 })
-vtbls.register(0x1417DEC90, "Client::UI::AddonNamePlate", ["Component::GUI::AtkUnitBase", "Component::GUI::AtkEventListener"], {
+factory.register(0x1417DEC90, "Client::UI::AddonNamePlate", ["Component::GUI::AtkUnitBase", "Component::GUI::AtkEventListener"], {
     47: "UpdateNameplates",
     0x140ED87F0: "ctor",
 })
-vtbls.register(0x14179BAD0, "Client::UI::AddonHudSelectYesno", ["Component::GUI::AtkUnitBase", "Component::GUI::AtkEventListener"], {
+factory.register(0x14179BAD0, "Client::UI::AddonHudSelectYesno", ["Component::GUI::AtkUnitBase", "Component::GUI::AtkEventListener"], {
     0x140CD9150: "ctor",
     0x140DD2610: "dtor",
 })
-vtbls.register(0x141810480, "Client::UI::AddonHudLayoutWindow", ["Component::GUI::AtkUnitBase", "Component::GUI::AtkEventListener"], {
+factory.register(0x141810480, "Client::UI::AddonHudLayoutWindow", ["Component::GUI::AtkUnitBase", "Component::GUI::AtkEventListener"], {
     0x14101D810: "ctor",
 })
-vtbls.register(0x1418106A0, "Client::UI::AddonHudLayoutScreen", ["Component::GUI::AtkUnitBase", "Component::GUI::AtkEventListener"], {
+factory.register(0x1418106A0, "Client::UI::AddonHudLayoutScreen", ["Component::GUI::AtkUnitBase", "Component::GUI::AtkEventListener"], {
     2: "HandleMouseEvent",
     0x14101EAA0: "ctor",
     0x141023730: "AddonOverlayMouseMovedEvent",
@@ -892,27 +892,27 @@ vtbls.register(0x1418106A0, "Client::UI::AddonHudLayoutScreen", ["Component::GUI
     0x141023D60: "AddonOverlayMouseReleaseEvent",
     0x1410259A0: "_SetAddonScale",
 })
-vtbls.register(0x1417CDB58, "Client::UI::AddonMateriaAttach", ["Component::GUI::AtkUnitBase", "Component::GUI::AtkEventListener"], {})
-vtbls.register(0x1417CDF98, "Client::UI::AddonMateriaAttachDialog", ["Component::GUI::AtkUnitBase", "Component::GUI::AtkEventListener"], {})
-vtbls.register(0x141825368, "Client::Graphics::Culling::CullingManager_Client::Graphics::JobSystem_Client::Graphics::Culling::CullingJobOpt", ["Component::GUI::AtkUnitBase", "Component::GUI::AtkEventListener"], {})
-vtbls.register(0x141825370, "Client::Graphics::Culling::CullingManager_Client::Graphics::JobSystem_Client::Graphics::Culling::CallbackJobOpt", ["Component::GUI::AtkUnitBase", "Component::GUI::AtkEventListener"], {})
-vtbls.register(0x141825378, "Client::Graphics::Culling::CullingManager_Client::Graphics::JobSystem_Client::Graphics::Culling::RenderCallbackJob", ["Component::GUI::AtkUnitBase", "Component::GUI::AtkEventListener"], {})
-vtbls.register(0x141825380, "Client::Graphics::Culling::CullingManager", ["Client::Graphics::Singleton"], {})
-vtbls.register(0x141828A68, "Client::Game::Character::Companion", ["Client::Game::Character::Character", "Client::Game::Object::GameObject", "Client::Graphics::Vfx::VfxDataListenner"], {
+factory.register(0x1417CDB58, "Client::UI::AddonMateriaAttach", ["Component::GUI::AtkUnitBase", "Component::GUI::AtkEventListener"], {})
+factory.register(0x1417CDF98, "Client::UI::AddonMateriaAttachDialog", ["Component::GUI::AtkUnitBase", "Component::GUI::AtkEventListener"], {})
+factory.register(0x141825368, "Client::Graphics::Culling::CullingManager_Client::Graphics::JobSystem_Client::Graphics::Culling::CullingJobOpt", ["Component::GUI::AtkUnitBase", "Component::GUI::AtkEventListener"], {})
+factory.register(0x141825370, "Client::Graphics::Culling::CullingManager_Client::Graphics::JobSystem_Client::Graphics::Culling::CallbackJobOpt", ["Component::GUI::AtkUnitBase", "Component::GUI::AtkEventListener"], {})
+factory.register(0x141825378, "Client::Graphics::Culling::CullingManager_Client::Graphics::JobSystem_Client::Graphics::Culling::RenderCallbackJob", ["Component::GUI::AtkUnitBase", "Component::GUI::AtkEventListener"], {})
+factory.register(0x141825380, "Client::Graphics::Culling::CullingManager", ["Client::Graphics::Singleton"], {})
+factory.register(0x141828A68, "Client::Game::Character::Companion", ["Client::Game::Character::Character", "Client::Game::Object::GameObject", "Client::Graphics::Vfx::VfxDataListenner"], {
     16: "EnableDraw",
     0x141101890: "ctor",
 })
-vtbls.register(0x141829C80, "Client::Game::CameraBase", [], {})
-vtbls.register(0x141829CE0, "Client::Game::Camera", ["Client::Game::CameraBase"], {
+factory.register(0x141829C80, "Client::Game::CameraBase", [], {})
+factory.register(0x141829CE0, "Client::Game::Camera", ["Client::Game::CameraBase"], {
     0x14110A340: "ctor",
 })
-vtbls.register(0x14182B780, "Client::Graphics::Culling::OcclusionCullingManager", ["Client::Graphics::Singleton"], {})
-vtbls.register(0x14182B790, "Client::Graphics::Streaming::StreamingManager_Client::Graphics::JobSystem_Client::Graphics::Streaming::StreamingManager::StreamingJob", ["Client::Graphics::Singleton"], {})
-vtbls.register(0x14182B798, "Client::Graphics::Streaming::StreamingManager", ["Client::Graphics::Singleton"], {})
-vtbls.register(0x1418334C8, "Component::Log::LogModule", ["Component::Log::LogModuleInterface", "Client::System::Common::NonCopyable"], {})
-vtbls.register(0x1418791E0, "Client::Game::Gimmick::GimmickEventHandler", ["Client::Game::Event::LuaEventHandler", "Client::Game::Event::EventHandler"], {})
-vtbls.register(0x14187A2A0, "Client::Game::Gimmick::GimmickRect", ["Client::Game::Gimmick::GimmickEventHandler", "Client::Game::Event::LuaEventHandler", "Client::Game::Event::EventHandler", "Client::Game::InstanceContent::ContentSheetWaiterInterface"], {})
-vtbls.finalize()
+factory.register(0x14182B780, "Client::Graphics::Culling::OcclusionCullingManager", ["Client::Graphics::Singleton"], {})
+factory.register(0x14182B790, "Client::Graphics::Streaming::StreamingManager_Client::Graphics::JobSystem_Client::Graphics::Streaming::StreamingManager::StreamingJob", ["Client::Graphics::Singleton"], {})
+factory.register(0x14182B798, "Client::Graphics::Streaming::StreamingManager", ["Client::Graphics::Singleton"], {})
+factory.register(0x1418334C8, "Component::Log::LogModule", ["Component::Log::LogModuleInterface", "Client::System::Common::NonCopyable"], {})
+factory.register(0x1418791E0, "Client::Game::Gimmick::GimmickEventHandler", ["Client::Game::Event::LuaEventHandler", "Client::Game::Event::EventHandler"], {})
+factory.register(0x14187A2A0, "Client::Game::Gimmick::GimmickRect", ["Client::Game::Gimmick::GimmickEventHandler", "Client::Game::Event::LuaEventHandler", "Client::Game::Event::EventHandler", "Client::Game::InstanceContent::ContentSheetWaiterInterface"], {})
+factory.finalize()
 
 # endregion
 
