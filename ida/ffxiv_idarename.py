@@ -857,7 +857,7 @@ factory.register(0x1416DFEF0, "Client::Game::Event::EventSceneModuleImplBase", [
 factory.register(0x1416E05C8, "Client::Game::Event::EventSceneModuleUsualImpl", ["Client::Game::Event::EventSceneModuleImplBase"], {})
 factory.register(0x1416E48A0, "Client::Game::Event::EventHandlerModule", ["Client::Game::Event::ModuleBase"], {})
 factory.register(0x1416E4918, "Client::Game::Event::DirectorModule", ["Client::Game::Event::ModuleBase"], {})
-factory.register(0x1416F4AA8, "Client::Game::Gimmick::GimmickBill", ["Client::Game::Gimmick::GimmickEventHandler", "Client::Game::Event::LuaEventHandler", "Client::Game::Event::EventHandler", "Client::Game::InstanceContent::ContentSheetWaiterInterface"], {})
+factory.register(0x1416F4AA8, "Client::Game::Gimmick::GimmickBill", ["Client::Game::Gimmick::GimmickEventHandler", "Client::Game::InstanceContent::ContentSheetWaiterInterface"], {})
 factory.register(0x141798F70, "Client::UI::AddonNowLoading", ["Component::GUI::AtkUnitBase"], {
     41: "LoadUldResourceHandle",
     0x140CCD730: "ctor",
@@ -911,8 +911,9 @@ factory.register(0x14182B780, "Client::Graphics::Culling::OcclusionCullingManage
 factory.register(0x14182B790, "Client::Graphics::Streaming::StreamingManager_Client::Graphics::JobSystem_Client::Graphics::Streaming::StreamingManager::StreamingJob", ["Client::Graphics::Singleton"], {})
 factory.register(0x14182B798, "Client::Graphics::Streaming::StreamingManager", ["Client::Graphics::Singleton"], {})
 factory.register(0x1418334C8, "Component::Log::LogModule", ["Component::Log::LogModuleInterface", "Client::System::Common::NonCopyable"], {})
-factory.register(0x1418791E0, "Client::Game::Gimmick::GimmickEventHandler", ["Client::Game::Event::LuaEventHandler", "Client::Game::Event::EventHandler"], {})
-factory.register(0x14187A2A0, "Client::Game::Gimmick::GimmickRect", ["Client::Game::Gimmick::GimmickEventHandler", "Client::Game::Event::LuaEventHandler", "Client::Game::Event::EventHandler", "Client::Game::InstanceContent::ContentSheetWaiterInterface"], {})
+factory.register(0x1418791E0, "Client::Game::Gimmick::GimmickEventHandler", ["Client::Game::Event::LuaEventHandler"], {})
+factory.register(0x14187A2A0, "Client::Game::Gimmick::GimmickRect", ["Client::Game::Gimmick::GimmickEventHandler", "Client::Game::InstanceContent::ContentSheetWaiterInterface"], {})
+factory.register(0x141879A40, "Client::Game::Gimmick::Gimmick_Unk1", ["Client::Game::Gimmick::GimmickEventHandler", "Client::Game::InstanceContent::ContentSheetWaiterInterface"], {})
 factory.finalize()
 
 # endregion
