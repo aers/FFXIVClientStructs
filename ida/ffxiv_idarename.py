@@ -624,30 +624,30 @@ factory.register(0x14169AE50, "Component::GUI::AtkResNode", ["Component::GUI::At
     0x1404CE6E0: "Init",
     0x1404CE8B0: "SetScale0",  # SetScale jumps to this
 })
-factory.register(0x14169AE68, "Component::GUI::AtkImageNode", ["Component::GUI::AtkResNode", "Component::GUI::AtkEventTarget"], {
+factory.register(0x14169AE68, "Component::GUI::AtkImageNode", ["Component::GUI::AtkResNode"], {
     1: "Destroy",
     0x14053F960: "ctor",
 })
-factory.register(0x14169AE80, "Component::GUI::AtkTextNode", ["Component::GUI::AtkResNode", "Component::GUI::AtkEventTarget"], {
+factory.register(0x14169AE80, "Component::GUI::AtkTextNode", ["Component::GUI::AtkResNode"], {
     1: "Destroy",
     0x14053FB10: "ctor",
     0x1404CF1A0: "SetText",
     0x1404CFCD0: "SetForegroundColour",
     0x1404D0DF0: "SetGlowColour",
 })
-factory.register(0x14169AE98, "Component::GUI::AtkNineGridNode", ["Component::GUI::AtkResNode", "Component::GUI::AtkEventTarget"], {
+factory.register(0x14169AE98, "Component::GUI::AtkNineGridNode", ["Component::GUI::AtkResNode"], {
     1: "Destroy",
     0x14053F9C0: "ctor",
 })
-factory.register(0x14169AEB0, "Component::GUI::AtkCounterNode", ["Component::GUI::AtkResNode", "Component::GUI::AtkEventTarget"], {
+factory.register(0x14169AEB0, "Component::GUI::AtkCounterNode", ["Component::GUI::AtkResNode"], {
     1: "Destroy",
     0x14053F8E0: "ctor",
 })
-factory.register(0x14169AEC8, "Component::GUI::AtkCollisionNode", ["Component::GUI::AtkResNode", "Component::GUI::AtkEventTarget"], {
+factory.register(0x14169AEC8, "Component::GUI::AtkCollisionNode", ["Component::GUI::AtkResNode"], {
     1: "Destroy",
     0x14053F820: "ctor",
 })
-factory.register(0x14169AEE0, "Component::GUI::AtkComponentNode", ["Component::GUI::AtkResNode", "Component::GUI::AtkEventTarget"], {
+factory.register(0x14169AEE0, "Component::GUI::AtkComponentNode", ["Component::GUI::AtkResNode"], {
     1: "Destroy",
     0x14053F880: "ctor",
 })
@@ -675,57 +675,57 @@ factory.register(0x14169B188, "Component::GUI::AtkComponentBase", ["Component::G
     0x1404F2670: "ctor",
     0x1404F2920: "GetOwnerNodePosition",
 })
-factory.register(0x14169B228, "Component::GUI::AtkComponentButton", ["Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener"], {
+factory.register(0x14169B228, "Component::GUI::AtkComponentButton", ["Component::GUI::AtkComponentBase"], {
     10: "SetEnabledState",
     17: "InitializeFromComponentData",
     0x1404F3DA0: "ctor",
 })
-factory.register(0x14169B2F0, "Component::GUI::AtkComponentIcon", ["Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener"], {
+factory.register(0x14169B2F0, "Component::GUI::AtkComponentIcon", ["Component::GUI::AtkComponentBase"], {
     0x1404F62E0: "ctor",
 })
-factory.register(0x14169B410, "Component::GUI::AtkComponentListItemRenderer", ["Component::GUI::AtkComponentButton", "Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener", "Component::GUI::AtkDragDropInterface"], {
+factory.register(0x14169B410, "Component::GUI::AtkComponentListItemRenderer", ["Component::GUI::AtkComponentButton", "Component::GUI::AtkDragDropInterface"], {
     0x1404F6E20: "ctor",
 })
-factory.register(0x14169B580, "Component::GUI::AtkComponentList", ["Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener"], {
+factory.register(0x14169B580, "Component::GUI::AtkComponentList", ["Component::GUI::AtkComponentBase"], {
     0x140502070: "ctor",
 })
-factory.register(0x14169B6E8, "Component::GUI::AtkComponentTreeList", ["Component::GUI::AtkComponentList", "Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener"], {
+factory.register(0x14169B6E8, "Component::GUI::AtkComponentTreeList", ["Component::GUI::AtkComponentList"], {
     0x140506A00: "ctor",
 })
 factory.register(0x14169B850, "Component::GUI::AtkModule", ["Component::GUI::AtkModuleInterface", "Component::GUI::AtkExternalInterface", "Client::System::Input::TextServiceInterface::TextServiceEvent"], {
     0x14050B670: "ctor",
 })
-factory.register(0x14169BAF8, "Component::GUI::AtkComponentCheckBox", ["Component::GUI::AtkComponentButton", "Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener"], {
+factory.register(0x14169BAF8, "Component::GUI::AtkComponentCheckBox", ["Component::GUI::AtkComponentButton"], {
     0x14050F620: "ctor",
 })
-factory.register(0x14169BBC8, "Component::GUI::AtkComponentGaugeBar", ["Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener"], {
+factory.register(0x14169BBC8, "Component::GUI::AtkComponentGaugeBar", ["Component::GUI::AtkComponentBase"], {
     0x140510540: "ctor",
 })
-factory.register(0x14169BC68, "Component::GUI::AtkComponentSlider", ["Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener"], {
+factory.register(0x14169BC68, "Component::GUI::AtkComponentSlider", ["Component::GUI::AtkComponentBase"], {
     0x140512670: "ctor",
 })
-factory.register(0x14169BD08, "Component::GUI::AtkComponentInputBase", ["Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener"], {
+factory.register(0x14169BD08, "Component::GUI::AtkComponentInputBase", ["Component::GUI::AtkComponentBase"], {
     0x140513A80: "ctor",
 })
-factory.register(0x14169BDA8, "Component::GUI::AtkComponentTextInput", ["Component::GUI::AtkComponentInputBase", "Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener", "Component::GUI::AtkTextInput::AtkTextInputEventInterface", "Client::System::Input::SoftKeyboardDeviceInterface::SoftKeyboardInputInterface"], {
+factory.register(0x14169BDA8, "Component::GUI::AtkComponentTextInput", ["Component::GUI::AtkComponentInputBase", "Component::GUI::AtkTextInput::AtkTextInputEventInterface", "Client::System::Input::SoftKeyboardDeviceInterface::SoftKeyboardInputInterface"], {
     0x140515240: "ctor",
 })
-factory.register(0x14169BEA8, "Component::GUI::AtkComponentNumericInput", ["Component::GUI::AtkComponentInputBase", "Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener", "Component::GUI::AtkTextInput::AtkTextInputEventInterface"], {
+factory.register(0x14169BEA8, "Component::GUI::AtkComponentNumericInput", ["Component::GUI::AtkComponentInputBase", "Component::GUI::AtkTextInput::AtkTextInputEventInterface"], {
     0x140519950: "ctor",
 })
-factory.register(0x14169BF70, "Component::GUI::AtkComponentDropDownList", ["Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener"], {
+factory.register(0x14169BF70, "Component::GUI::AtkComponentDropDownList", ["Component::GUI::AtkComponentBase"], {
     0x14051D5F0: "ctor",
 })
-factory.register(0x14169C010, "Component::GUI::AtkComponentRadioButton", ["Component::GUI::AtkComponentButton", "Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener"], {
+factory.register(0x14169C010, "Component::GUI::AtkComponentRadioButton", ["Component::GUI::AtkComponentButton"], {
     0x14051EAE0: "ctor",
 })
-factory.register(0x14169C120, "Component::GUI::AtkComponentTab", ["Component::GUI::AtkComponentRadioButton", "Component::GUI::AtkComponentButton", "Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener"], {
+factory.register(0x14169C120, "Component::GUI::AtkComponentTab", ["Component::GUI::AtkComponentRadioButton"], {
     0x14051F3B0: "ctor",
 })
-factory.register(0x14169C230, "Component::GUI::AtkComponentGuildLeveCard", ["Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener"], {
+factory.register(0x14169C230, "Component::GUI::AtkComponentGuildLeveCard", ["Component::GUI::AtkComponentBase"], {
     0x14051F990: "ctor",
 })
-factory.register(0x14169C2D0, "Component::GUI::AtkComponentTextNineGrid", ["Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener"], {
+factory.register(0x14169C2D0, "Component::GUI::AtkComponentTextNineGrid", ["Component::GUI::AtkComponentBase"], {
     0x14051FD20: "ctor",
 })
 factory.register(0x14169C370, "Component::GUI::AtkResourceRendererBase", [], {})
@@ -739,31 +739,31 @@ factory.register(0x14169C408, "Component::GUI::AtkResourceRendererManager", [], 
     0x140522B30: "DrawUldFromData",
     0x140522C10: "DrawUldFromDataClipped",
 })
-factory.register(0x14169C428, "Component::GUI::AtkComponentMap", ["Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener"], {
+factory.register(0x14169C428, "Component::GUI::AtkComponentMap", ["Component::GUI::AtkComponentBase"], {
     0x140525120: "ctor",
 })
-factory.register(0x14169C4C8, "Component::GUI::AtkComponentPreview", ["Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener"], {
+factory.register(0x14169C4C8, "Component::GUI::AtkComponentPreview", ["Component::GUI::AtkComponentBase"], {
     0x140527B50: "ctor",
 })
-factory.register(0x14169C568, "Component::GUI::AtkComponentScrollBar", ["Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener"], {
+factory.register(0x14169C568, "Component::GUI::AtkComponentScrollBar", ["Component::GUI::AtkComponentBase"], {
     0x140528BB0: "ctor",
 })
-factory.register(0x14169C608, "Component::GUI::AtkComponentIconText", ["Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener"], {
+factory.register(0x14169C608, "Component::GUI::AtkComponentIconText", ["Component::GUI::AtkComponentBase"], {
     0x14052A5C0: "ctor",
 })
-factory.register(0x14169C6A8, "Component::GUI::AtkComponentDragDrop", ["Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener", "Component::GUI::AtkDragDropInterface"], {
+factory.register(0x14169C6A8, "Component::GUI::AtkComponentDragDrop", ["Component::GUI::AtkComponentBase", "Component::GUI::AtkDragDropInterface"], {
     0x14052B840: "ctor",
 })
-factory.register(0x14169C7C8, "Component::GUI::AtkComponentMultipurpose", ["Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener"], {
+factory.register(0x14169C7C8, "Component::GUI::AtkComponentMultipurpose", ["Component::GUI::AtkComponentBase"], {
     0x14052D4A0: "ctor",
 })
-factory.register(0x14169C938, "Component::GUI::AtkComponentWindow", ["Component::GUI::AtkComponentWindowGrab", "Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener"], {
+factory.register(0x14169C938, "Component::GUI::AtkComponentWindow", ["Component::GUI::AtkComponentWindowGrab", "Component::GUI::AtkComponentBase"], {
     0x14052DDD0: "ctor",
 })
-factory.register(0x14169CA08, "Component::GUI::AtkComponentJournalCanvas", ["Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener"], {
+factory.register(0x14169CA08, "Component::GUI::AtkComponentJournalCanvas", ["Component::GUI::AtkComponentBase"], {
     0x140533360: "ctor",
 })
-factory.register(0x14169CAA8, "Component::GUI::AtkComponentUnknownButton", ["Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener"], {
+factory.register(0x14169CAA8, "Component::GUI::AtkComponentUnknownButton", ["Component::GUI::AtkComponentButton"], {
     0x140536E90: "ctor",
 })
 factory.register(0x1416A9390, "Client::UI::Misc::UserFileManager::UserFileEvent", [], {})
@@ -838,15 +838,15 @@ factory.register(0x1416CCAF0, "Client::UI::Agent::AgentItemDetail", ["Client::UI
 factory.register(0x1416CD4B8, "Client::UI::Agent::AgentMap::MapMarkerStructSearchName", ["Client::UI::Agent::AgentMap::MapMarkerStructSearch"], {
     1: "Evaluate",
 })
-factory.register(0x1416CD4C8, "Client::UI::Agent::AgentMap", ["Client::UI::Agent::AgentInterface", "Component::GUI::AtkModuleInterface::AtkEventInterface"], {
+factory.register(0x1416CD4C8, "Client::UI::Agent::AgentMap", ["Client::UI::Agent::AgentInterface"], {
     0x140887BE0: "ctor",
 })
-factory.register(0x1416CE090, "Client::UI::Agent::AgentHudLayout", ["Client::UI::Agent::AgentInterface", "Component::GUI::AtkModuleInterface::AtkEventInterface"], {
+factory.register(0x1416CE090, "Client::UI::Agent::AgentHudLayout", ["Client::UI::Agent::AgentInterface"], {
     2: "Show",
     3: "Hide",
     0x1408C0B10: "ctor",
 })
-factory.register(0x1416CEED8, "Client::UI::Agent::AgentStatus", ["Client::UI::Agent::AgentInterface", "Component::GUI::AtkModuleInterface::AtkEventInterface"], {
+factory.register(0x1416CEED8, "Client::UI::Agent::AgentStatus", ["Client::UI::Agent::AgentInterface"], {
     0x140904190: "ctor",
 })
 factory.register(0x1416CEEA0, "Client::UI::Agent::AgentStatus::StatusCharaView", ["Client::UI::Misc::CharaView"], {})
@@ -863,17 +863,17 @@ factory.register(0x141798F70, "Client::UI::AddonNowLoading", ["Component::GUI::A
     0x140CCD730: "ctor",
 })
 factory.register(0x1417C9DC8, "Client::UI::Atk2DAreaMap", ["Client::UI::Atk2DMap"], {})
-factory.register(0x1417D4E18, "Client::UI::AddonTalk", ["Component::GUI::AtkUnitBase", "Component::GUI::AtkEventListener"], {
+factory.register(0x1417D4E18, "Client::UI::AddonTalk", ["Component::GUI::AtkUnitBase"], {
     0x140E7C1D0: "ctor",
 })
-factory.register(0x1417D6AA0, "Client::UI::AddonItemDetail", ["Client::UI::AddonItemDetailBase", "Component::GUI::AtkUnitBase", "Component::GUI::AtkEventListener", "Component::GUI::AtkManagedInterface"], {
+factory.register(0x1417D6AA0, "Client::UI::AddonItemDetail", ["Client::UI::AddonItemDetailBase", "Component::GUI::AtkUnitBase", "Component::GUI::AtkManagedInterface"], {
     0x140E90440: "ctor",
     0x140E91960: "GenerateTooltip",
 })
-factory.register(0x1417DCDD0, "Client::UI::AddonAreaMap", ["Component::GUI::AtkUnitBase", "Component::GUI::AtkEventListener"], {
+factory.register(0x1417DCDD0, "Client::UI::AddonAreaMap", ["Component::GUI::AtkUnitBase"], {
     0x140EBDC30: "ctor",
 })
-factory.register(0x1417DEC90, "Client::UI::AddonNamePlate", ["Component::GUI::AtkUnitBase", "Component::GUI::AtkEventListener"], {
+factory.register(0x1417DEC90, "Client::UI::AddonNamePlate", ["Component::GUI::AtkUnitBase"], {
     47: "UpdateNameplates",
     0x140ED87F0: "ctor",
 })
@@ -881,10 +881,10 @@ factory.register(0x14179BAD0, "Client::UI::AddonHudSelectYesno", ["Component::GU
     0x140CD9150: "ctor",
     0x140DD2610: "dtor",
 })
-factory.register(0x141810480, "Client::UI::AddonHudLayoutWindow", ["Component::GUI::AtkUnitBase", "Component::GUI::AtkEventListener"], {
+factory.register(0x141810480, "Client::UI::AddonHudLayoutWindow", ["Component::GUI::AtkUnitBase"], {
     0x14101D810: "ctor",
 })
-factory.register(0x1418106A0, "Client::UI::AddonHudLayoutScreen", ["Component::GUI::AtkUnitBase", "Component::GUI::AtkEventListener"], {
+factory.register(0x1418106A0, "Client::UI::AddonHudLayoutScreen", ["Component::GUI::AtkUnitBase"], {
     2: "HandleMouseEvent",
     0x14101EAA0: "ctor",
     0x141023730: "AddonOverlayMouseMovedEvent",
