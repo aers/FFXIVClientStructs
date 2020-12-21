@@ -755,7 +755,9 @@ factory.register(0x14164F460, "Client::System::Framework::TaskManager", [], {
 factory.register(0x14164F478, "Client::System::Configuration::SystemConfig", ["Common::Configuration::SystemConfig"], {})
 factory.register(0x14164F498, "Client::System::Configuration::DevConfig", ["Common::Configuration::DevConfig"], {})
 factory.register(0x14164F4E0, "Component::Excel::ExcelModuleInterface", [], {})
-factory.register(0x141659488, "Component::GUI::AtkEventListener", [], {})  # TODO: Verify this
+factory.register(0x141659488, "Component::GUI::AtkEventListener", [], {
+    2: "ReceiveEvent",
+})  # TODO: Verify this
 factory.register(0x1416594C0, "Component::GUI::AtkUnitList", [], {})
 factory.register(0x1416594C8, "Component::GUI::AtkUnitManager", ["Component::GUI::AtkEventListener"], {
     0x1404E5470: "ctor",
