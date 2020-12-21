@@ -47,7 +47,7 @@ class VTableManager(object):
     # Class name -> [Parent class name, ...]
     _inheritance = {}  # type: Dict[str, List[str]]
 
-    def register(self, vtbl_ea, class_name, vfunc_count=0, vtbl_inheritance=None, funcs=None):
+    def register(self, vtbl_ea, class_name, vtbl_inheritance=None, funcs=None):
         """
         Register a vtable for later renaming
         :param vtbl_ea: Vtable effective address
@@ -365,12 +365,12 @@ factory.register("Component::Text::TextModuleInterface")
 factory.register(0x14164E260, "Common::Configuration::ConfigBase", ["Client::System::Common::NonCopyable"], {
     0x140068C30: "ctor",
 })
-factory.register(0x14164E2C0, "Common::Configuration::SystemConfig", ["Common::Configuration::ConfigBase", "Client::System::Common::NonCopyable"], {
+factory.register(0x14164E2C0, "Common::Configuration::SystemConfig", ["Common::Configuration::ConfigBase"], {
     0x140078DE0: "ctor",
 })
-factory.register(0x14164E280, "Common::Configuration::UIConfig", ["Common::Configuration::ConfigBase", "Client::System::Common::NonCopyable"], {})
-factory.register(0x14164E2A0, "Common::Configuration::UIControlConfig", ["Common::Configuration::ConfigBase", "Client::System::Common::NonCopyable"], {})
-factory.register(0x14164E2E0, "Common::Configuration::DevConfig", ["Common::Configuration::ConfigBase", "Client::System::Common::NonCopyable"], {
+factory.register(0x14164E280, "Common::Configuration::UIConfig", ["Common::Configuration::ConfigBase"], {})
+factory.register(0x14164E2A0, "Common::Configuration::UIControlConfig", ["Common::Configuration::ConfigBase"], {})
+factory.register(0x14164E2E0, "Common::Configuration::DevConfig", ["Common::Configuration::ConfigBase"], {
     0x14007EA30: "ctor",
 })
 factory.register(0x14164F4B8, "Client::System::Framework::Framework", [], {
@@ -387,8 +387,8 @@ factory.register(0x14164F460, "Client::System::Framework::TaskManager", [], {
     0x140093E60: "ctor",
     0x140171440: "SetTask",
 })
-factory.register(0x14164F478, "Client::System::Configuration::SystemConfig", ["Common::Configuration::SystemConfig", "Common::Configuration::ConfigBase", "Client::System::Common::NonCopyable"], {})
-factory.register(0x14164F498, "Client::System::Configuration::DevConfig", ["Common::Configuration::DevConfig", "Common::Configuration::ConfigBase", "Client::System::Common::NonCopyable"], {})
+factory.register(0x14164F478, "Client::System::Configuration::SystemConfig", ["Common::Configuration::SystemConfig"], {})
+factory.register(0x14164F498, "Client::System::Configuration::DevConfig", ["Common::Configuration::DevConfig"], {})
 factory.register(0x14164F4E0, "Component::Excel::ExcelModuleInterface", [], {})
 factory.register(0x1416594C0, "Component::GUI::AtkUnitList", [], {})
 factory.register(0x1416594C8, "Component::GUI::AtkUnitManager", ["Component::GUI::AtkEventListener"], {
