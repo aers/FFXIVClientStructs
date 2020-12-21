@@ -3,142 +3,368 @@
 from __future__ import print_function
 
 try:
-    from typing import Dict, List, Optional, Any  # noqa
+    from typing import Any, Dict, List, Optional, Union  # noqa
 except ImportError:
     pass
 
+import sys
+import itertools
+from abc import abstractmethod
+from collections import deque
+
+if sys.version_info[0] >= 3:
+    long = int
+
+
+class BaseApi(object):
+    @abstractmethod
+    def get_image_base(self):
+        """
+        Get the image base ea
+        :return: Image base ea
+        :rtype: int
+        """
+
+    @abstractmethod
+    def set_addr_name(self, ea, name):
+        """
+        Set the name of a given address (function)
+        :param ea: Effective address
+        :type ea: int
+        :param name: Name to set
+        :type name: str
+        :return: Success/failure
+        :rtype: bool
+        """
+
+    @abstractmethod
+    def get_addr_name(self, ea):
+        """
+        Get the name of a given address
+        :param ea: Effective address
+        :type ea: int
+        :return: Name or empty
+        :rtype: str
+        """
+
+    @abstractmethod
+    def get_qword(self, ea):
+        """
+        Read a qword of data from an address
+        :param ea: Effective address
+        :type ea: int
+        :return: 64bits of data
+        :rtype: int
+        """
+
+    @abstractmethod
+    def is_offset(self, ea):
+        """
+        Is the given address an offset to something else
+        :param ea: Effective address
+        :type ea: int
+        :return: Is offset or not
+        :rtype: bool
+        """
+
+    @abstractmethod
+    def xrefs_to(self, ea):
+        """
+        Retrieve all xrefs to the given address
+        :param ea: Effective address
+        :type ea: int
+        :return: List of addresses
+        :rtype: List[int]
+        """
+
+    @abstractmethod
+    def get_struct_id(self, name):
+        """
+        Get the ID of a given struct by name
+        :param name: Struct name
+        :type name: str
+        :return: Struct ID, -1 if does not exist
+        :rtype: int
+        """
+
+    @abstractmethod
+    def create_struct(self, name):
+        """
+        Create a new struct with the given Name
+        :param name: Struct name
+        :type name: str
+        :return: Struct ID, -1 if failure
+        :rtype: int
+        """
+
+    @abstractmethod
+    def add_struct_member(self, sid, name):
+        """
+        Add a new struct member at the end of the structure
+        :param sid: Struct ID
+        :type sid: int
+        :param name: Struct member name
+        :type name: str
+        :return: Success/failure
+        :rtype: bool
+        """
+
+    @abstractmethod
+    def clear_struct(self, sid):
+        """
+        Delete all struct members
+        :param sid: Struct ID
+        :type sid: int
+        :return: Success/failure
+        :rtype: bool
+        """
+
+    @abstractmethod
+    def convert_to_struct(self, ea, sid):
+        """
+        Convert a location to a struct
+        :param ea: Effective address
+        :type ea: int
+        :param sid: Struct ID
+        :type sid: int
+        :return: Success/failure
+        :rtype: bool
+        """
+
+
+api = None
+# region IDA Api
 try:
     import idaapi  # noqa
     import idc  # noqa
+    import idautils  # noqa
 
-    # @formatter:off
-    get_image_base = idaapi.get_imagebase  # func()->ea
-    set_addr_name = idc.set_name           # func(ea, name)->1: ok, 0: fail
-    get_addr_name = idc.get_name           # func(ea)->name: ok, "": fail
-    get_qword = idc.get_qword              # func(ea)->long
-    def is_offset(ea): return idc.is_off0(idc.get_full_flags(ea))  # func(ea)->bool
-    # @formatter:on
-except ImportError:  # Ghidra
-    # @formatter:off
-    def get_image_base():        raise NotImplementedError  # noqa
-    def set_addr_name(ea, name): raise NotImplementedError  # noqa
-    def get_addr_name(ea):       raise NotImplementedError  # noqa
-    def get_qword(ea):           raise NotImplementedError  # noqa
-    def is_offset(ea):           raise NotImplementedError  # noqa
-    # @formatter:on
 
-NameAddr = set_addr_name
+    class IdaApi(BaseApi):
+
+        def get_image_base(self):
+            return idaapi.get_imagebase()
+
+        def set_addr_name(self, ea, name):
+            result = idc.set_name(ea, name)
+            return bool(result)
+
+        def get_addr_name(self, ea):
+            return idc.get_name(ea)
+
+        def get_qword(self, ea):
+            return idc.get_qword(ea)
+
+        def is_offset(self, ea):
+            return idc.is_off0(idc.get_full_flags(ea))
+
+        def xrefs_to(self, ea):
+            return [xref.to for xref in idautils.XrefsTo(ea)]
+
+        def get_struct_id(self, name):
+            sid = idc.get_struc_id(name)
+            if sid == idc.BADADDR:
+                return -1
+            else:
+                return sid
+
+        def create_struct(self, name):
+            sid = idc.add_struc(-1, name, is_union=0)
+            return sid
+
+        def add_struct_member(self, sid, name):
+            idc.add_struc_member(sid, name, offset=-1, flag=idc.FF_DATA | idc.FF_QWORD, typeid=-1, nbytes=8, reftype=idc.REF_OFF64)
+            member_offset = idc.get_last_member(sid)
+            member_id = idc.get_member_id(sid, member_offset)
+            idc.SetType(member_id, "void*")
+
+        def clear_struct(self, sid):
+            member_offset = idc.get_first_member(sid)
+            if member_offset == -1:
+                return False
+            while member_offset != idc.BADADDR:
+                idc.del_struc_member(sid, member_offset)
+                member_offset = idc.get_first_member(sid)
+            return True
+
+        def convert_to_struct(self, ea, sid):
+            struct_name = idc.get_struc_name(sid)
+            result = idc.create_struct(ea, -1, struct_name)
+            return bool(result)
+
+
+    api = IdaApi()
+except ImportError:
+    print("Warning: Unable to load IDA")
+# endregion
+# region Ghidra Api
+try:
+    import ghidra
+
+
+    class GhidraApi(BaseApi):
+        def get_image_base(self):
+            raise NotImplementedError
+
+        def set_addr_name(self, ea, name):
+            raise NotImplementedError
+
+        def get_addr_name(self, ea):
+            raise NotImplementedError
+
+        def get_qword(self, ea):
+            raise NotImplementedError
+
+        def is_offset(self, ea):
+            raise NotImplementedError
+
+        def xrefs_to(self, ea):
+            raise NotImplementedError
+
+        def get_struct_id(self, name):
+            raise NotImplementedError
+
+        def create_struct(self, name):
+            raise NotImplementedError
+
+        def add_struct_member(self, sid, name):
+            raise NotImplementedError
+
+        def clear_struct(self, sid):
+            raise NotImplementedError
+
+
+    api = GhidraApi()
+except ImportError:
+    print("Warning: Unable to load Ghidra")
+# endregion
+
+if api is None:
+    raise Exception("Unable to load IDA or Ghidra")
 
 print("Importing IDA data ...")
 
 
-# TODO: Test the image offset stuff, should set the names regardless of your current image base
-# TODO: Force the vtable into a struct, fancy decompiled output
-# TODO: jump prefixed offsets "j_<stuff>"
+# TODO: Clobber 0x141697D60! "Common::Lua::LuaState", "Common::Lua::LuaThread"
 
-# Client::Graphics::Kernel::Notifier May be 4, looks funky
-# Clobber 0x141697D60! "Common::Lua::LuaState", "Common::Lua::LuaThread"
+class FfxivClassFactory:
+    # {name: ea}
+    _vtbls_ea = []  # type: List[int]
+    # name -> {class_name: FfxivClass}
+    _classes = {}  # type: Dict[str, FfxivClass]
 
-class VTableManager(object):
-    # Class ea -> Class name
-    _vtbls_ea = {}  # type: Dict[int, str]
-    # Class name -> VTable obj
-    _vtbls = {}  # type: Dict[str, VTable]
-    # Class name -> [Parent class name, ...]
-    _inheritance = {}  # type: Dict[str, List[str]]
-
-    def register(self, vtbl_ea, class_name, vtbl_inheritance=None, funcs=None):
+    def register(self, *args):
         """
-        Register a vtable for later renaming
-        :param vtbl_ea: Vtable effective address
-        :type vtbl_ea: int
-        :param class_name: Class name
-        :type class_name: str
-        :param vfunc_count: VFunc count
-        :type vfunc_count: int
-        :param vtbl_inheritance: List of classes inherited from, enforces naming order such that base classes are written first.
-        :type vtbl_inheritance: List[str]
-        :param funcs: Dictionary of vfunc indexes or effective addresses and their name. The class name will be prepended.
-        :type funcs: Dict[int,str]
-        :return: self
+        Register a class
+        :param args: Optional[vtbl_ea], class_name, [hierarchy], {index/func_ea: func_name}
+        :return: None
         """
-        if vtbl_inheritance is None:
-            vtbl_inheritance = []
-        if funcs is None:
+        if len(args) == 1:
+            vtbl_ea = 0x0
+            class_name, = args
+            hierarchy = []
             funcs = {}
+        elif len(args) == 2:
+            vtbl_ea, class_name = args
+            hierarchy = []
+            funcs = {}
+        elif len(args) == 3:
+            vtbl_ea = 0x0
+            class_name, hierarchy, funcs = args
+        elif len(args) == 4:
+            vtbl_ea, class_name, hierarchy, funcs = args
+        else:
+            print("Error: Unsupported argument layout, args={0}".format(args))
+            return
+
+        arg_types = [type(arg) for arg in (vtbl_ea, class_name, hierarchy, funcs)]
+        if (arg_types != [int, str, list, dict] and
+                arg_types != [long, str, list, dict]):  # py2
+            print("Error: Argument mismatch, types={0}".format(arg_types))
+            return
 
         if vtbl_ea in self._vtbls_ea and vtbl_ea != 0x0:
-            other_name = self._vtbls_ea[vtbl_ea]
-            print("Warning: Class \"{0}\" at 0x{1:x} is overwritten by {2}".format(other_name, vtbl_ea, class_name))
+            print("Error: Multiple vtables are defined at 0x{0:X}".format(vtbl_ea))
             return
 
-        if class_name in self._vtbls:
-            other = self._vtbls[class_name]
-            other_ea = other.vtbl_ea if other else 0x0
-            print("Warning: Class \"{0}\" at 0x{1:x} is already registered at 0x{2:X}".format(class_name, vtbl_ea, other_ea))
+        if class_name in self._classes:
+            print("Error: Multiple classes are registered with the name \"{0}\"".format(class_name))
             return
 
-        self._vtbls_ea[vtbl_ea] = class_name
-        self._vtbls[class_name] = VTable(vtbl_ea, class_name, vfunc_count, vtbl_inheritance, funcs) if vtbl_ea > 0x0 else None
-        self._inheritance[class_name] = list(vtbl_inheritance)  # Make a copy so the VTable has the data too
+        self._vtbls_ea.append(vtbl_ea)
+        self._classes[class_name] = FfxivClass(vtbl_ea, class_name, hierarchy, funcs)
 
     def finalize(self):
         """
-        Perform the vtable renaming
+        Perform the class naming
         :return: None
         """
-        # If I was smarter, this would be a dependency graph.
-        # Don't screw this up with circular inheritance
-        while not len(self._vtbls) == 0:
-            for class_name in list(self._vtbls):  # Make a copy to delete while iterating
-                inherits_from = self._inheritance.get(class_name)
-                if inherits_from:
-                    for parent_class_name in inherits_from:
-                        if parent_class_name in self._vtbls:
-                            # print("Debug: Skipping \"{0}\", parent class \"{1}\" is not yet resolved".format(class_name, parent_class_name))
-                            break
-                        else:
-                            print("Warning: Inherited class \"{0}\" is not documented, add a placeholder entry with an ea of 0x0 and find it later".format(parent_class_name))
-                            self._resolve_inheritance(parent_class_name)
-                    else:  # Did not break
-                        self._write_vtbl(class_name)
-                else:
-                    self._write_vtbl(class_name)
+        self._resolve_hierarchies()
+        for class_name, cls in self._classes.items():
+            self._finalize_cls(cls)
 
-    def _write_vtbl(self, class_name):
+    def _resolve_hierarchies(self):
         """
-        Write out the given vtbl
-        :param class_name: Class name
-        :type class_name: str
+        Convert each class_name in each hierarchy to a class object reference
         :return: None
         """
-        vtbl = self._vtbls.pop(class_name)
-        if vtbl:
-            # print("Info: Writing {0}".format(class_name))
-            vtbl.write()
-        self._resolve_inheritance(class_name)
+        for class_name, cls in self._classes.items():
+            for idx, parent_class_name in enumerate(cls.hierarchy):
+                if isinstance(parent_class_name, str):
+                    if parent_class_name not in self._classes:
+                        print("Warning: Inherited class \"{0}\" is not documented, add a placeholder entry".format(parent_class_name))
+                        self.register(parent_class_name)
+                    cls.hierarchy[idx] = self._classes[parent_class_name]
 
-    def _resolve_inheritance(self, parent_class_name):
+        # Check for duplicate entries in hierarchy, likely a previous parent class inherits from the duplicate
+        for class_name, cls in self._classes.items():
+            hierarchy = cls.hierarchy_names
+            if len(hierarchy) != len(set(hierarchy)):
+                extras = set([x for x in hierarchy if hierarchy.count(x) > 1])
+                for extra in extras:
+                    print("Warning: \"{0}\" has a duplicate hierarchy entry \"{1}\"".format(cls.name, extra))
+
+    _finalize_stack = deque()
+
+    def _finalize_cls(self, cls):
         """
-        Remove the given parent class from all hierarchies
-        :param parent_class_name: Parent class name
-        :type parent_class_name: str
+        Perform a single class naming
+        :param cls: Class object
+        :type cls: FfxivClass
         :return: None
         """
-        for inherited_from in self._inheritance.values():
-            if parent_class_name in inherited_from:
-                inherited_from.remove(parent_class_name)
+        if cls in self._finalize_stack:
+            names = [c.name for c in self._finalize_stack] + [cls.name]
+            names = "\n".join(["    - {0}".format(name) for name in names])
+            raise ValueError("Hierarchy cycle detected: \n{0}".format(names))
+
+        self._finalize_stack.append(cls)
+
+        if not cls.finalized:
+            for parent_cls in cls.hierarchy:
+                if not parent_cls.finalized:
+                    self._finalize_cls(parent_cls)
+            cls.finalize()
+
+        self._finalize_stack.pop()
 
 
-class VTable(object):
+class FfxivClass:
     STANDARD_IMAGE_BASE = 0x140000000
-    REBASE_OFFSET = 0x0
 
     VTBL_FORMAT = "vtbl_{cls}"
-    NAMED_FORMAT = "{cls}_{name}"
-    SUB_FORMAT = "{cls}_vf{number}"
-    NULLSUB_FORMAT = "{cls}_vf{number}_nullsub"
-    LOC_FORMAT = "{cls}_vloc{number}"
+    NAMED_FUNC_FORMAT = "{cls}.{name}"
+    GENERIC_SUB_FORMAT = "{cls}.vf{index}"
+    GENERIC_NULLSUB_FORMAT = "{cls}.vf{index}_nullsub"
+    GENERIC_LOC_FORMAT = "{cls}.vloc{index}"
+
+    STRUCT_VTBL_FORMAT = "vtbl_{cls}_struct"
+    STRUCT_NAMED_FORMAT = "{name}"
+    STRUCT_GENERIC_SUB_FORMAT = "vf{index}"
+    STRUCT_GENERIC_NULLSUB_FORMAT = "vf{index}_nullsub"
+    STRUCT_GENERIC_LOC_FORMAT = "vloc{index}"
+    STRUCT_PURECALL_FORMAT = "purecall{index}"
+    STRUCT_MANGLE_FORMAT = "mangled{index}"
 
     SUB_PREFIX = "sub_"
     NULLSUB_PREFIX = "nullsub_"
@@ -146,98 +372,216 @@ class VTable(object):
     JUMP_PREFIX = "j_"
     PURECALL = "_purecall"
 
-    def __init__(self, vtbl_ea, class_name, vfunc_count, inherits_from, funcs):
+    def __init__(self, vtbl_ea, class_name, hierarchy, funcs):
         """
-        A vtable definition
+        Object representing a class
         :param vtbl_ea: Vtable effective address
         :type vtbl_ea: int
         :param class_name: Class name
         :type class_name: str
-        :param vfunc_count: VFunc count
-        :type vfunc_count: int
-        :param inherits_from: Class names this inherits from
-        :type inherits_from: List[str]
-        :param funcs: Dictionary of vfunc indexes or effective addresses and their name. The class name will be prepended.
-        :type funcs: Dict[int,str]
+        :param hierarchy: Inheritance hierarchy
+        :type hierarchy: List[str|FfxivClass]
+        :param funcs: Mapping of vtbl index or effective addresses to func names
+        :type funcs: Dict[int, str]
         """
-        current_image_base = get_image_base()
-        if self.STANDARD_IMAGE_BASE != current_image_base:
-            self.REBASE_OFFSET = current_image_base - self.STANDARD_IMAGE_BASE
-
         self.vtbl_ea = vtbl_ea
-        self.class_name = class_name
-        self.vfuncs = {}  # vtbl funcs
-        self.rfuncs = {}  # related funcs
-        self.vfunc_count = vfunc_count
-        self.inherits_from = inherits_from
-        for ea_or_index, func_name in funcs.items():
-            if ea_or_index < 0x1000:
-                vfunc_index = ea_or_index
-                if vfunc_index >= self.vfunc_count:
-                    print("Error: {0} vfunc \"{1}\" (Index {2}) is greater than vfunc count {3}".format(class_name, func_name, vfunc_index, vfunc_count))
-                else:
-                    self.vfuncs[vfunc_index] = func_name
-            else:
-                vfunc_ea = ea_or_index
-                self.rfuncs[vfunc_ea] = func_name
+        self.name = class_name
+        self.hierarchy = hierarchy
+        self.funcs = funcs
 
-    def write(self):
-        vtbl_ea = self.vtbl_ea + self.REBASE_OFFSET
+        # Offset the vtbl and funcs if the program has been rebased
+        current_image_base = api.get_image_base()
+        if self.STANDARD_IMAGE_BASE != current_image_base:
+            rebase_offset = current_image_base - self.STANDARD_IMAGE_BASE
+            self.vtbl_ea + rebase_offset
+            for idx_or_ea in list(funcs.keys()):
+                if idx_or_ea > 0x1000:
+                    funcs[idx_or_ea + rebase_offset] = funcs.pop(idx_or_ea)
 
-        # Name the vtbl start offset
-        set_addr_name(vtbl_ea, self.VTBL_FORMAT.format(cls=self.class_name))
+    # region hierarchy_names
 
-        # Name each vfunc
-        for vfunc_index in range(self.vfunc_count):
-            vfunc_offset = vtbl_ea + vfunc_index * 8
-            vfunc_ea = get_qword(vfunc_offset)  # type: int
-            if is_offset(vfunc_offset):
-                self._set_index_name(vfunc_ea=vfunc_ea, vfunc_index=vfunc_index)
-            else:
-                vtbl_name = self.VTBL_FORMAT.format(cls=self.class_name)
-                print("Warning: {0} ea 0x{1:X} is not an offset: {2:X}".format(vtbl_name, vfunc_offset, vfunc_ea))
+    _hierarchy_names = None
 
-        for rfunc_ea, rfunc_name in self.rfuncs.items():
-            rfunc_full_name = self.NAMED_FORMAT.format(cls=self.class_name, name=rfunc_name)
-            set_addr_name(rfunc_ea + self.REBASE_OFFSET, rfunc_full_name)
-
-    def _set_index_name(self, vfunc_ea, vfunc_index):
+    @property
+    def hierarchy_names(self):
         """
-        Set the name of a vfunc target via ea, vfunc index from the vtable start
-        :param vfunc_ea: VFunc ea, ensure the rebase offset is already applied
-        :param vfunc_index: VFunc index from the VTable start ea
+        Get the class names of the entire hierarchy as a flat list
+        :return: [class_name]
+        """
+        if self._hierarchy_names is None:
+            self._hierarchy_names = list(itertools.chain(*[cls.hierarchy_names for cls in self.hierarchy])) + [self.name]
+        return self._hierarchy_names
+
+    # endregion
+
+    # region vtbl_size
+    _vtbl_size = 0
+
+    @property
+    def vtbl_size(self):
+        """
+        Iterate from the vtbl start until a non-offset or xref is encountered.
+        This strategy implies that the only xref in a vtbl is the first vfunc.
+        :return: VTable func count
+        """
+        if self.vtbl_ea == 0x0:
+            return self._vtbl_size
+
+        if self._vtbl_size == 0:
+            self._vtbl_size = 1  # Set to 1, skip the first entry
+            for ea in itertools.count(self.vtbl_ea + 8, 8):
+                if api.is_offset(ea) and api.xrefs_to(ea) == []:
+                    self._vtbl_size += 1
+                else:
+                    break
+
+            parent_vtbl_size = sum(parent.vtbl_size for parent in self.hierarchy)
+            if self.vtbl_size < parent_vtbl_size:
+                print("Error: The sum of \"{0}\"'s parent vtbl sizes ({1}) is greater than the actual class itself ({2})".format(self.name, parent_vtbl_size, self._vtbl_size))
+
+        return self._vtbl_size
+
+    # endregion
+
+    # region finalizing
+
+    _finalized = False
+
+    @property
+    def finalized(self):
+        """
+        Has this class and its hierarchy been written out or not
+        :return: bool yes/no
+        :rtype: bool
+        """
+        return self._finalized and all(parent.finalized for parent in self.hierarchy)
+
+    def finalize(self):
+        """
+        Write out this class
         :return: None
         """
-        if vfunc_index in self.vfuncs:
-            vfunc_name = self.vfuncs[vfunc_index]
-            vfunc_full_name = self.NAMED_FORMAT.format(cls=self.class_name, name=vfunc_name)
-            set_addr_name(vfunc_ea, vfunc_full_name)
-        else:
-            existing_vfunc_name = get_addr_name(vfunc_ea)  # type: str
-            if existing_vfunc_name.startswith(self.JUMP_PREFIX):
-                existing_vfunc_name = existing_vfunc_name.replace(self.JUMP_PREFIX, '', 1)
+        self._write_vtbl()
+        self._write_funcs()
+        self._finalized = True
 
-            if existing_vfunc_name.startswith(self.SUB_PREFIX):
-                vfunc_full_name = self.SUB_FORMAT.format(cls=self.class_name, number=vfunc_index)
-                set_addr_name(vfunc_ea, vfunc_full_name)
-            elif existing_vfunc_name.startswith(self.NULLSUB_PREFIX):
-                vfunc_full_name = self.NULLSUB_FORMAT.format(cls=self.class_name, number=vfunc_index)
-                set_addr_name(vfunc_ea, vfunc_full_name)
-            elif existing_vfunc_name.startswith(self.LOC_PREFIX):
-                vfunc_full_name = self.LOC_FORMAT.format(cls=self.class_name, number=vfunc_index)
-                set_addr_name(vfunc_ea, vfunc_full_name)
-            elif existing_vfunc_name == self.PURECALL:
-                return
-            elif existing_vfunc_name.startswith(self.class_name):
-                return
-            elif any(existing_vfunc_name.startswith(parent_class_name) for parent_class_name in self.inherits_from):
-                return
-            elif existing_vfunc_name.startswith("?"):
-                return  # Probably some library garbage
+    def _write_vtbl(self):
+        # Name the vtbl start offset
+        api.set_addr_name(self.vtbl_ea, self.VTBL_FORMAT.format(cls=self.name))
+
+        struct_name = self.STRUCT_VTBL_FORMAT.format(cls=self.name)
+        struct_id = api.get_struct_id(struct_name)
+        if struct_id == -1:
+            struct_id = api.create_struct(struct_name)
+        else:
+            api.clear_struct(struct_id)
+
+        # Iterate through each offset
+        for idx in range(0, self.vtbl_size):
+            vfunc_offset = self.vtbl_ea + idx * 8
+            vfunc_ea = api.get_qword(vfunc_offset)  # type: int
+
+            if idx in self.funcs:
+                func_name = self.funcs[idx]
+                full_func_name = self.NAMED_FUNC_FORMAT.format(cls=self.name, name=func_name)
+                api.set_addr_name(vfunc_ea, full_func_name)
+                api.add_struct_member(struct_id, func_name)
             else:
-                vtbl_name = self.VTBL_FORMAT.format(cls=self.class_name)
-                print("Warning: {0}[{1}] had a name of \"{2}\"".format(vtbl_name, vfunc_index, existing_vfunc_name))
-                return
+                current_func_name = api.get_addr_name(vfunc_ea)  # type: str
+
+                if current_func_name.startswith(self.JUMP_PREFIX):
+                    current_func_name = current_func_name.lstrip(self.JUMP_PREFIX)
+
+                parent_func_name = self._get_parent_func_name(idx)
+                if parent_func_name:
+                    parent_full_func_name = self.NAMED_FUNC_FORMAT.format(cls=self.name, name=parent_func_name)
+                else:
+                    parent_full_func_name = ""
+
+                if current_func_name.startswith(self.SUB_PREFIX):
+                    full_func_name = parent_full_func_name or self.GENERIC_SUB_FORMAT.format(cls=self.name, index=idx)
+                    struct_member_name = parent_func_name or self.STRUCT_GENERIC_SUB_FORMAT.format(index=idx)
+                elif current_func_name.startswith(self.NULLSUB_PREFIX):
+                    full_func_name = parent_full_func_name or self.GENERIC_NULLSUB_FORMAT.format(cls=self.name, index=idx)
+                    struct_member_name = parent_func_name or self.STRUCT_GENERIC_NULLSUB_FORMAT.format(index=idx)
+                elif current_func_name.startswith(self.LOC_PREFIX):
+                    full_func_name = parent_full_func_name or self.GENERIC_LOC_FORMAT.format(cls=self.name, index=idx)
+                    struct_member_name = parent_func_name or self.STRUCT_GENERIC_LOC_FORMAT.format(index=idx)
+                elif any(current_func_name.startswith(parent_class_name) for parent_class_name in self.hierarchy_names):
+                    full_func_name = None  # Not an override
+                    # Rework this at some point to get the actual parent name, minus the class?
+                    struct_member_name = current_func_name.split(".", 1)[-1]
+                elif current_func_name == self.PURECALL:
+                    full_func_name = None  # Ignored
+                    struct_member_name = self.STRUCT_PURECALL_FORMAT.format(index=idx)
+                elif current_func_name.startswith("?"):
+                    full_func_name = None  # Mangled? Probably a library
+                    struct_member_name = self.STRUCT_MANGLE_FORMAT.format(index=idx)
+                elif current_func_name.startswith("qword_"):
+                    print("Warning: qword in vtbl at 0x{0:X}, it may be an offset to undefined code".format(vfunc_offset))
+                    full_func_name = None
+                    struct_member_name = "qword{0}".format(idx)
+                    # TODO: How to handle this? Only observed instance so far is to unresolved code
+                    # 0x141696198 Client::Graphics::Scene::Human
+                    # 0x141696380 qword_140444F00, sub_140444F00, vf61
+                else:
+                    print("Error: Unexpected function name \"{0}\" at 0x{1:X}".format(current_func_name, self.vtbl_ea + idx * 8))
+                    full_func_name = None
+                    struct_member_name = "naming_error{0}".format(idx)
+
+                if full_func_name:
+                    api.set_addr_name(vfunc_ea, full_func_name)
+                api.add_struct_member(struct_id, struct_member_name)
+
+        api.convert_to_struct(self.vtbl_ea, struct_id)
+
+    def _get_parent_func_name(self, index):
+        """
+        Override vfuncs need to inherit their parent vfunc name, iterate through each parent in the
+        hierarchy until the base+index is within the base+parent_vtbl_range.
+        :param index: VFunc index
+        :type index: int
+        :return: Parent vfunc name or empty
+        :rtype: str
+        """
+        base = 0
+        parent_iter = iter(self.hierarchy)
+        parent = next(parent_iter, None)
+        while parent:
+            if base < index + base < parent.vtbl_size + base:
+                return parent.funcs.get(index, "")
+            else:
+                base += parent.vtbl_size
+                parent = next(parent_iter, None)
+        return None
+
+    def _write_funcs(self):
+        """
+        Write the names of all non-vtbl funcs
+        :return: None
+        """
+        for ea, func_name in self.funcs.items():
+            if ea > 0x1000:
+                full_func_name = self.NAMED_FUNC_FORMAT.format(cls=self.name, name=func_name)
+                current_name = api.get_addr_name(ea)  # type: str
+
+                # strip jump prefixed
+                if current_name.startswith(self.JUMP_PREFIX):
+                    current_name = current_name.lstrip(self.JUMP_PREFIX)
+
+                # same name? skip it
+                if current_name == full_func_name:
+                    continue
+                # check that the name is unnamed
+                elif any(current_name.startswith(prefix) for prefix in [self.SUB_PREFIX, self.NULLSUB_PREFIX, self.LOC_PREFIX]):
+                    api.set_addr_name(ea, full_func_name)
+                else:
+                    print("Warning: 0x{0:X} \"{1}\" was already named \"{2}\"".format(ea, func_name, current_name))
+
+    # endregion
+
+    def __repr__(self):
+        return "<{0}(\"{1}\")>".format(self.__class__.__name__, self.name)
 
 
 # region: functions
@@ -319,7 +663,8 @@ api.set_addr_name(0x141DE2D50, "g_ClientObjectManager")
 # endregion
 
 # region: vtbl
-factory = VTableManager()
+factory = FfxivClassFactory()
+
 # TODO: Error: The sum of "Client::Graphics::Kernel::Texture"s parent vtbl sizes (8) is greater than the actual class itself (5)
 # TODO: Error: The sum of "Client::Graphics::Render::ModelRenderer_Client::Graphics::JobSystem_Client::Graphics::Render::ModelRenderer::RenderJob"s parent vtbl sizes (4) is greater than the actual class itself (1)
 # TODO: Error: The sum of "Client::Graphics::Render::BGInstancingRenderer_Client::Graphics::JobSystem_CClient::Graphics::Render::tagInstancingContainerRenderInfo"s parent vtbl sizes (5) is greater than the actual class itself (1)
