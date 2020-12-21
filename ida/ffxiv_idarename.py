@@ -877,7 +877,8 @@ factory.register(0x1417DEC90, "Client::UI::AddonNamePlate", ["Component::GUI::At
     47: "UpdateNameplates",
     0x140ED87F0: "ctor",
 })
-factory.register(0x14179BAD0, "Client::UI::AddonHudSelectYesno", ["Component::GUI::AtkUnitBase", "Component::GUI::AtkEventListener"], {
+factory.register(0x1417C9520, "Client::UI::AddonRecipeNote", ["Component::GUI::AtkUnitBase"], {})
+factory.register(0x14179BAD0, "Client::UI::AddonHudSelectYesno", ["Component::GUI::AtkUnitBase"], {
     0x140CD9150: "ctor",
     0x140DD2610: "dtor",
 })
@@ -892,13 +893,13 @@ factory.register(0x1418106A0, "Client::UI::AddonHudLayoutScreen", ["Component::G
     0x141023D60: "AddonOverlayMouseReleaseEvent",
     0x1410259A0: "_SetAddonScale",
 })
-factory.register(0x1417CDB58, "Client::UI::AddonMateriaAttach", ["Component::GUI::AtkUnitBase", "Component::GUI::AtkEventListener"], {})
-factory.register(0x1417CDF98, "Client::UI::AddonMateriaAttachDialog", ["Component::GUI::AtkUnitBase", "Component::GUI::AtkEventListener"], {})
-factory.register(0x141825368, "Client::Graphics::Culling::CullingManager_Client::Graphics::JobSystem_Client::Graphics::Culling::CullingJobOpt", ["Component::GUI::AtkUnitBase", "Component::GUI::AtkEventListener"], {})
-factory.register(0x141825370, "Client::Graphics::Culling::CullingManager_Client::Graphics::JobSystem_Client::Graphics::Culling::CallbackJobOpt", ["Component::GUI::AtkUnitBase", "Component::GUI::AtkEventListener"], {})
-factory.register(0x141825378, "Client::Graphics::Culling::CullingManager_Client::Graphics::JobSystem_Client::Graphics::Culling::RenderCallbackJob", ["Component::GUI::AtkUnitBase", "Component::GUI::AtkEventListener"], {})
+factory.register(0x1417CDB58, "Client::UI::AddonMateriaAttach", ["Component::GUI::AtkUnitBase"], {})
+factory.register(0x1417CDF98, "Client::UI::AddonMateriaAttachDialog", ["Component::GUI::AtkUnitBase"], {})
+factory.register(0x141825368, "Client::Graphics::Culling::CullingManager_Client::Graphics::JobSystem_Client::Graphics::Culling::CullingJobOpt", ["Component::GUI::AtkUnitBase"], {})
+factory.register(0x141825370, "Client::Graphics::Culling::CullingManager_Client::Graphics::JobSystem_Client::Graphics::Culling::CallbackJobOpt", ["Component::GUI::AtkUnitBase"], {})
+factory.register(0x141825378, "Client::Graphics::Culling::CullingManager_Client::Graphics::JobSystem_Client::Graphics::Culling::RenderCallbackJob", ["Component::GUI::AtkUnitBase"], {})
 factory.register(0x141825380, "Client::Graphics::Culling::CullingManager", ["Client::Graphics::Singleton"], {})
-factory.register(0x141828A68, "Client::Game::Character::Companion", ["Client::Game::Character::Character", "Client::Game::Object::GameObject", "Client::Graphics::Vfx::VfxDataListenner"], {
+factory.register(0x141828A68, "Client::Game::Character::Companion", ["Client::Game::Character::Character"], {
     16: "EnableDraw",
     0x141101890: "ctor",
 })
