@@ -551,7 +551,10 @@ class FfxivClass:
         parent = next(parent_iter, None)
         while parent:
             if base < index + base < parent.vtbl_size + base:
-                return parent.funcs.get(index, "")
+                parent_func_name = parent.funcs.get(index, "")
+                if not parent_func_name:
+                    return parent._get_parent_func_name(index - base)
+                return parent_func_name
             else:
                 base += parent.vtbl_size
                 parent = next(parent_iter, None)
