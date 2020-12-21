@@ -789,7 +789,7 @@ factory.register(0x1416AEBD8, "Client::UI::Misc::RaptureMacroModule", ["Client::
     1: "ReadFile", 2: "WriteFile",
 })
 factory.register(0x1416AEC40, "Client::UI::Misc::RaptureTextModule", ["Component::Text::TextModule", "Component::Text::TextModuleInterface", "Component::Text::MacroDecoder", "Client::System::Common::NonCopyable", "Component::Text::TextChecker::ExecNonMacroFunc", "Component::Excel::ExcelLanguageEvent"], {})
-factory.register(0x1416AEEB8, "Client::UI::Misc::RaptureLogModule", ["Component::Log::LogModule", "Component::Log::LogModuleInterface", "Client::System::Common::NonCopyable"], {
+factory.register(0x1416AEEB8, "Client::UI::Misc::RaptureLogModule", ["Component::Log::LogModule"], {
     0x140615880: "ctor",
     0x140617010: "PrintMessage",
 })
