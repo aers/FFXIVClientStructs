@@ -753,7 +753,7 @@ factory.register(0x14164F460, "Client::System::Framework::TaskManager", [], {
 factory.register(0x14164F478, "Client::System::Configuration::SystemConfig", ["Common::Configuration::SystemConfig"], {})
 factory.register(0x14164F498, "Client::System::Configuration::DevConfig", ["Common::Configuration::DevConfig"], {})
 factory.register(0x14164F4E0, "Component::Excel::ExcelModuleInterface", [], {})
-factory.register(0x141659488, "Component::GUI::AtkEventListener")  # TODO: Verify this
+factory.register(0x141659488, "Component::GUI::AtkEventListener", [], {})  # TODO: Verify this
 factory.register(0x1416594C0, "Component::GUI::AtkUnitList", [], {})
 factory.register(0x1416594C8, "Component::GUI::AtkUnitManager", ["Component::GUI::AtkEventListener"], {
     0x1404E5470: "ctor",
@@ -770,7 +770,7 @@ factory.register(0x141659878, "Client::UI::RaptureAtkModule", ["Component::GUI::
 })
 factory.register(0x141661D28, "Client::Graphics::Kernel::Notifier", [], {})
 factory.register(0x1416657C0, "Client::System::Crypt::Crc32", [], {})
-factory.register(0x14166BD10, "Client::Graphics::ReferencedClassBase")  # TODO: Verify this
+factory.register(0x14166BD10, "Client::Graphics::ReferencedClassBase", [], {})  # TODO: Verify this
 factory.register(0x14166BD58, "Client::Graphics::Environment::EnvSoundState", [], {})
 factory.register(0x14166BD78, "Client::Graphics::Environment::EnvState", [], {})
 factory.register(0x14166BDC8, "Client::Graphics::Environment::EnvSimulator", [], {})
@@ -840,7 +840,7 @@ factory.register(0x1416859D0, "Client::Graphics::Render::Model", ["Client::Graph
     0x14032B630: "ctor",
     0x14032B780: "SetupFromModelResourceHandle",
 })
-factory.register(0x141685A50, "Client::Graphics::Render::BaseRenderer")  # TODO: Verify this
+factory.register(0x141685A50, "Client::Graphics::Render::BaseRenderer", [], {})  # TODO: Verify this
 factory.register(0x141685A88, "Client::Graphics::Render::ModelRenderer_Client::Graphics::JobSystem_Client::Graphics::Render::ModelRenderer::RenderJob", ["Client::Graphics::RenderObjectList", "Client::Graphics::Render::RenderObject", "Client::Graphics::ReferencedClassBase"], {})
 factory.register(0x141685A90, "Client::Graphics::Render::ModelRenderer", ["Client::Graphics::Render::BaseRenderer"], {})
 factory.register(0x141685AB8, "Client::Graphics::Render::GeometryInstancingRenderer", ["Client::Graphics::Render::BaseRenderer"], {})
@@ -962,7 +962,7 @@ factory.register(0x14169A310, "Component::GUI::NumberArrayData", ["Component::GU
 })
 factory.register(0x14169A320, "Component::GUI::StringArrayData", ["Component::GUI::AtkArrayData"], {})
 factory.register(0x14169A330, "Component::GUI::ExtendArrayData", ["Component::GUI::AtkArrayData"], {})
-factory.register(0x14169A3C8, "Component::GUI::AtkEventTarget")  # TODO: Verify this
+factory.register(0x14169A3C8, "Component::GUI::AtkEventTarget", [], {})  # TODO: Verify this
 factory.register(0x14169A438, "Component::GUI::AtkSimpleTween", ["Component::GUI::AtkEventTarget"], {})
 factory.register(0x14169A448, "Component::GUI::AtkTexture", [], {})
 factory.register(0x14169A5A8, "Component::GUI::AtkStage", ["Component::GUI::AtkEventTarget"], {
