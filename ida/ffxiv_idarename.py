@@ -533,7 +533,9 @@ class FfxivClass:
                     api.set_addr_name(vfunc_ea, full_func_name)
                 api.add_struct_member(struct_id, struct_member_name)
 
-        api.convert_to_struct(self.vtbl_ea, struct_id)
+        # Running the script twice will undefine vast segments of the vtbl since theyre now structs
+        # Need to work a method of not screwing that up.
+        # api.convert_to_struct(self.vtbl_ea, struct_id)
 
     def _get_parent_func_name(self, index):
         """
