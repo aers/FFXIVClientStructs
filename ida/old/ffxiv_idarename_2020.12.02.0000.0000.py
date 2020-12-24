@@ -1,4 +1,4 @@
-# current exe version: 2020.12.15.0000.0000
+# current exe version: 2020.12.02.0000.0000
 
 from __future__ import print_function
 
@@ -599,33 +599,33 @@ api.set_addr_name(0x14005A280, "FFXIVString_dtor")
 api.set_addr_name(0x14005A300, "FFXIVString_SetString")
 api.set_addr_name(0x1400604B0, "MemoryManager_Alloc")
 api.set_addr_name(0x140064F10, "IsMacClient")
-api.set_addr_name(0x140180000, "Client::Graphics::Environment::EnvManager_ctor")
-api.set_addr_name(0x140194F90, "j_SleepEx")
-api.set_addr_name(0x1401B0510, "ResourceManager_GetResourceAsync")  # no vtbl on this class wouldn't be surprised if it was Client::System::Resource::ResourceManager or something though
-api.set_addr_name(0x1401B0730, "ResourceManager_GetResourceSync")
-api.set_addr_name(0x1401B8AF0, "Client::System::Resource::Handle::ModelResourceHandle_GetMaterialFileNameBySlot")
-api.set_addr_name(0x1402107C0, "Client::UI::Agent::AgentLobby_ctor")
-api.set_addr_name(0x1402A5320, "CountdownPointer")
-api.set_addr_name(0x140363790, "Client::Graphics::Render::RenderManager_ctor")
-api.set_addr_name(0x140364970, "Client::Graphics::Render::RenderManager_CreateModel")
-api.set_addr_name(0x140440ED0, "PrepareColorSet")
-api.set_addr_name(0x1404411A0, "ReadStainingTemplate")
-api.set_addr_name(0x1404D6770, "CreateAtkNode")
-api.set_addr_name(0x1404D7B80, "CreateAtkComponent")
-api.set_addr_name(0x1404DB370, "GetScaleListEntryFromScale")
-api.set_addr_name(0x1404E9AC0, "GetScaleForListOption")
-api.set_addr_name(0x140536430, "Component::GUI::TextModuleInterface::GetTextLabelByID")
-api.set_addr_name(0x1407089D0, "Client::UI::Shell::RaptureShellModule_ctor")
-api.set_addr_name(0x14070CCF0, "Client::UI::Shell::RaptureShellModule_SetChatChannel")
-api.set_addr_name(0x14073B690, "CreateBattleCharaStore")
-api.set_addr_name(0x14073BC60, "BattleCharaStore_LookupBattleCharaByObjectID")
-api.set_addr_name(0x140803D60, "ActionManager::StartCooldown")
-api.set_addr_name(0x1408C1840, "CreateSelectYesno")
-api.set_addr_name(0x140A77FD0, "EventFramework_GetSingleton")
-api.set_addr_name(0x140A806E0, "EventFramework_ProcessDirectorUpdate")
-api.set_addr_name(0x141021C30, "Client::UI::AddonHudLayoutScreen::MoveableAddonInfoStruct_UpdateAddonPosition")
-api.set_addr_name(0x1412F7B50, "crc")
-api.set_addr_name(0x141371954, "FreeMemory")
+api.set_addr_name(0x14017FF50, "Client::Graphics::Environment::EnvManager_ctor")
+api.set_addr_name(0x140194EE0, "j_SleepEx")
+api.set_addr_name(0x1401B0460, "ResourceManager_GetResourceAsync")  # no vtbl on this class wouldn't be surprised if it was Client::System::Resource::ResourceManager or something though
+api.set_addr_name(0x1401B0680, "ResourceManager_GetResourceSync")
+api.set_addr_name(0x1401B8A40, "Client::System::Resource::Handle::ModelResourceHandle_GetMaterialFileNameBySlot")
+api.set_addr_name(0x140210710, "Client::UI::Agent::AgentLobby_ctor")
+api.set_addr_name(0x1402A5270, "CountdownPointer")
+api.set_addr_name(0x1403636E0, "Client::Graphics::Render::RenderManager_ctor")
+api.set_addr_name(0x1403648C0, "Client::Graphics::Render::RenderManager_CreateModel")
+api.set_addr_name(0x140440E20, "PrepareColorSet")
+api.set_addr_name(0x1404410F0, "ReadStainingTemplate")
+api.set_addr_name(0x1404D66C0, "CreateAtkNode")
+api.set_addr_name(0x1404D7AD0, "CreateAtkComponent")
+api.set_addr_name(0x1404DB2C0, "GetScaleListEntryFromScale")
+api.set_addr_name(0x1404E9A10, "GetScaleForListOption")
+api.set_addr_name(0x140536380, "Component::GUI::TextModuleInterface::GetTextLabelByID")
+api.set_addr_name(0x140708970, "Client::UI::Shell::RaptureShellModule_ctor")
+api.set_addr_name(0x14070CC90, "Client::UI::Shell::RaptureShellModule_SetChatChannel")
+api.set_addr_name(0x14073B630, "CreateBattleCharaStore")
+api.set_addr_name(0x14073BC00, "BattleCharaStore_LookupBattleCharaByObjectID")
+api.set_addr_name(0x140803D00, "ActionManager::StartCooldown")
+api.set_addr_name(0x1408C17E0, "CreateSelectYesno")
+api.set_addr_name(0x140A77F70, "EventFramework_GetSingleton")
+api.set_addr_name(0x140A80680, "EventFramework_ProcessDirectorUpdate")
+api.set_addr_name(0x141021BD0, "Client::UI::AddonHudLayoutScreen::MoveableAddonInfoStruct_UpdateAddonPosition")
+api.set_addr_name(0x1412F78E0, "crc")
+api.set_addr_name(0x1413716E4, "FreeMemory")
 # endregion
 
 # region: globals
@@ -730,7 +730,7 @@ factory.register(0x14164F430, "Client::System::Framework::Task", [], {
 factory.register(0x14164F448, "Client::System::Framework::TaskManager::RootTask", ["Client::System::Framework::Task"], {})
 factory.register(0x14164F460, "Client::System::Framework::TaskManager", [], {
     0x140093E60: "ctor",
-    0x1401714F0: "SetTask",
+    0x140171440: "SetTask",
 })
 factory.register(0x14164F478, "Client::System::Configuration::SystemConfig", ["Common::Configuration::SystemConfig"], {})
 factory.register(0x14164F498, "Client::System::Configuration::DevConfig", ["Common::Configuration::DevConfig"], {})
@@ -740,11 +740,11 @@ factory.register(0x141659488, "Component::GUI::AtkEventListener", [], {
 })  # TODO: Verify this
 factory.register(0x1416594C0, "Component::GUI::AtkUnitList", [], {})
 factory.register(0x1416594C8, "Component::GUI::AtkUnitManager", ["Component::GUI::AtkEventListener"], {
-    0x1404E5520: "ctor",
+    0x1404E5470: "ctor",
 })
 factory.register(0x141659620, "Client::UI::RaptureAtkUnitManager", ["Component::GUI::AtkUnitManager"], {
     0x1400AAE50: "ctor",
-    0x1404E7030: "GetAddonByName",  # dalamud GetUIObjByName
+    0x1404E6F80: "GetAddonByName",  # dalamud GetUIObjByName
 })
 factory.register(0x141659878, "Client::UI::RaptureAtkModule", ["Component::GUI::AtkModule", "Common::Configuration::ConfigBase::ChangeEventInterface"], {
     39: "SetUIVisibility",
@@ -760,15 +760,15 @@ factory.register(0x14166BD78, "Client::Graphics::Environment::EnvState", [], {})
 factory.register(0x14166BDC8, "Client::Graphics::Environment::EnvSimulator", [], {})
 factory.register(0x14166BDD8, "Client::Graphics::Environment::EnvManager", ["Client::Graphics::Singleton"], {})
 factory.register(0x14166DA88, "Client::System::Resource::Handle::ResourceHandle", ["Client::System::Common::NonCopyable"], {
-    0x1401A0130: "DecRef",
-    0x1401A0160: "IncRef",
-    0x1401A0320: "ctor",
+    0x1401A0080: "DecRef",
+    0x1401A00B0: "IncRef",
+    0x1401A0270: "ctor",
 })
 factory.register(0x14166DC08, "Client::System::Resource::Handle::DefaultResourceHandle", ["Client::System::Resource::Handle::ResourceHandle"], {
     23: "GetData",  # This was under Client::System::Resource::Handle::ResourceHandle
 })
 factory.register(0x14166E088, "Client::System::Resource::Handle::TextureResourceHandle", ["Client::System::Resource::Handle::ResourceHandle"], {
-    0x1401A37E0: "ctor",
+    0x1401A3730: "ctor",
 })
 factory.register(0x14166E8B8, "Client::System::Resource::Handle::CharaMakeParameterResourceHandle", ["Client::System::Resource::Handle::DefaultResourceHandle"], {})
 factory.register(0x14166FB38, "Client::System::Resource::Handle::ApricotResourceHandle", ["Client::System::Resource::Handle::DefaultResourceHandle"], {
@@ -777,52 +777,52 @@ factory.register(0x14166FB38, "Client::System::Resource::Handle::ApricotResource
 factory.register(0x1416729E8, "Client::System::Resource::Handle::UldResourceHandle", ["Client::System::Resource::Handle::DefaultResourceHandle"], {})
 factory.register(0x141672B50, "Client::System::Resource::Handle::UldResourceHandleFactory", ["Client::System::Resource::Handle::ResourceHandleFactory"], {})
 factory.register(0x141673178, "Client::Graphics::Primitive::Manager", ["Client::Graphics::Singleton"], {
-    0x1401D1F60: "ctor",
+    0x1401D1EB0: "ctor",
 })
 factory.register(0x141673338, "Client::Graphics::DelayedReleaseClassBase", ["Client::Graphics::ReferencedClassBase"], {
-    0x1401D48C0: "ctor",
+    0x1401D4810: "ctor",
 })
 factory.register(0x141673360, "Client::Graphics::IAllocator", [], {})
 factory.register(0x1416734B0, "Client::Graphics::AllocatorLowLevel", ["Client::Graphics::IAllocator"], {})
 factory.register(0x141673568, "Client::Graphics::AllocatorManager", ["Client::Graphics::Singleton"], {
-    0x1401D6E40: "ctor",
+    0x1401D6D90: "ctor",
 })
 factory.register(0x141674968, "Client::Network::NetworkModuleProxy", ["Client::System::Common::NonCopyable"], {
-    0x1401EC090: "ctor",
+    0x1401EBFE0: "ctor",
 })
 factory.register(0x141675928, "Client::UI::Agent::AgentInterface", ["Component::GUI::AtkModuleInterface::AtkEventInterface"], {
     4: "IsAgentActive",
-    0x1401EDCA0: "ctor",
+    0x1401EDBF0: "ctor",
 })
 factory.register(0x141675998, "Client::UI::Agent::AgentCharaMake", ["Client::UI::Agent::AgentInterface"], {})
 factory.register(0x141675D70, "Client::UI::Agent::AgentModule", [], {
-    0x1401F60A0: "ctor",
-    0x1401FB300: "GetAgentByInternalID",
-    0x1401FB310: "GetAgentByInternalID_2",  # dupe?
+    0x1401F5FF0: "ctor",
+    0x1401FB250: "GetAgentByInternalID",
+    0x1401FB260: "GetAgentByInternalID_2",  # dupe?
 })
 factory.register(0x141676AE0, "Client::UI::Agent::AgentCursor", ["Client::UI::Agent::AgentInterface"], {})
 factory.register(0x141676B50, "Client::UI::Agent::AgentCursorLocation", ["Client::UI::Agent::AgentInterface"], {})
 factory.register(0x14167E120, "Client::Graphics::Kernel::Texture", ["Client::Graphics::Kernel::Resource", "Client::Graphics::DelayedReleaseClassBase"], {
-    0x1402F99E0: "ctor",
+    0x1402F9930: "ctor",
 })
 factory.register(0x14167E3A8, "Client::Graphics::Kernel::ConstantBuffer", ["Client::Graphics::Kernel::Buffer", "Client::Graphics::Kernel::Resource", "Client::Graphics::DelayedReleaseClassBase"], {})
 factory.register(0x14167E430, "Client::Graphics::Kernel::Device", ["Client::Graphics::Singleton"], {
-    0x140301050: "ctor",
+    0x140300FA0: "ctor",
 })
 factory.register(0x1416856A8, "Client::Graphics::Kernel::ShaderSceneKey", [], {})
 factory.register(0x1416856B0, "Client::Graphics::Kernel::ShaderSubViewKey", [], {})
 factory.register(0x1416856C8, "Client::Graphics::Render::GraphicsConfig", ["Client::Graphics::Singleton"], {
-    0x14031FD90: "ctor",
+    0x14031FCE0: "ctor",
 })
 factory.register(0x141685708, "Client::Graphics::Render::ShadowCamera", ["Client::Graphics::Render::Camera", "Client::Graphics::ReferencedClassBase"], {})
 factory.register(0x141685850, "Client::Graphics::Render::View", [], {})
 factory.register(0x1416858D8, "Client::Graphics::Render::PostBoneDeformerBase", ["Client::Graphics::RenderObjectList", "Client::System::Framework::Task"], {})
 factory.register(0x1416859C0, "Client::Graphics::Render::AmbientLight", [], {
-    0x140329770: "ctor",
+    0x1403296C0: "ctor",
 })
 factory.register(0x1416859D0, "Client::Graphics::Render::Model", ["Client::Graphics::RenderObjectList", "Client::Graphics::Render::RenderObject", "Client::Graphics::ReferencedClassBase"], {
-    0x14032B6E0: "ctor",
-    0x14032B830: "SetupFromModelResourceHandle",
+    0x14032B630: "ctor",
+    0x14032B780: "SetupFromModelResourceHandle",
 })
 factory.register(0x141685A50, "Client::Graphics::Render::BaseRenderer", [], {})  # TODO: Verify this
 factory.register(0x141685A88, "Client::Graphics::Render::ModelRenderer_Client::Graphics::JobSystem_Client::Graphics::Render::ModelRenderer::RenderJob", [], {})
@@ -843,19 +843,19 @@ factory.register(0x141685EE8, "Client::Graphics::Render::Manager_Client::Graphic
 factory.register(0x141685EF0, "Client::Graphics::Render::Updater_Client::Graphics::Render::PostBoneDeformerBase", [], {})
 factory.register(0x141685EF8, "Client::Graphics::Render::Manager", ["Client::Graphics::Singleton"], {})
 factory.register(0x141685F10, "Client::Graphics::Render::ShadowManager", [], {
-    0x140365C50: "ctor",
+    0x140365BA0: "ctor",
 })
 factory.register(0x141685F20, "Client::Graphics::Render::LightingManager::LightShape", [], {})
 factory.register(0x141685F28, "Client::Graphics::Render::LightingManager::LightingRenderer_Client::Graphics::JobSystem_Client::Graphics::Render::LightingManager::LightingRenderer::RenderJob", [], {})
 factory.register(0x141685F30, "Client::Graphics::Render::LightingManager::LightingRenderer", [], {
-    0x14036A280: "ctor",
+    0x14036A1D0: "ctor",
 })
 factory.register(0x141685F38, "Client::Graphics::Render::LightingManager", [], {
-    0x140374B30: "ctor",
+    0x140374A80: "ctor",
 })
 factory.register(0x141685F40, "Client::Graphics::Render::LightingManager_Client::Graphics::Kernel::Notifier", ["Client::Graphics::Singleton", "Client::Graphics::Kernel::Notifier"], {})
 factory.register(0x141685F60, "Client::Graphics::Render::RenderTargetManager", [], {
-    0x140375310: "ctor",
+    0x140375260: "ctor",
 })
 factory.register(0x141685F68, "Client::Graphics::Render::RenderTargetManager_Client::Graphics::Kernel::Notifier", ["Client::Graphics::Singleton", "Client::Graphics::Kernel::Notifier"], {})
 factory.register(0x1416885D8, "Client::Graphics::PostEffect::PostEffectChain", [], {})
@@ -863,54 +863,54 @@ factory.register(0x1416885E0, "Client::Graphics::PostEffect::PostEffectRainbow",
 factory.register(0x1416885E8, "Client::Graphics::PostEffect::PostEffectLensFlare", [], {})
 factory.register(0x1416885F0, "Client::Graphics::PostEffect::PostEffectRoofQuery", [], {})
 factory.register(0x141688600, "Client::Graphics::PostEffect::PostEffectManager", [], {
-    0x1403960C0: "ctor",
+    0x140396010: "ctor",
 })
 factory.register(0x141688608, "Client::Graphics::PostEffect::PostEffectManager_Client::Graphics::Kernel::Notifier", ["Client::Graphics::Singleton", "Client::Graphics::Kernel::Notifier"], {})
 factory.register(0x14168C238, "Client::Graphics::JobSystem(Apricot::Engine::Core_Apricot::Engine::Core::CoreJob_1)", [], {
-    0x1403DD220: "ctor",
-    0x1403DD450: "GetSingleton",
+    0x1403DD170: "ctor",
+    0x1403DD3A0: "GetSingleton",
 })
 factory.register(0x1416959D0, "Client::Graphics::Scene::Object", [], {})
 factory.register(0x141695A00, "Client::Graphics::Scene::DrawObject", ["Client::Graphics::Scene::Object"], {
-    0x14042BD90: "ctor",
+    0x14042BCE0: "ctor",
 })
 factory.register(0x141695B98, "Client::Graphics::Scene::World_Client::Graphics::JobSystem_Client::Graphics::Scene::World::SceneUpdateJob", [], {})
 factory.register(0x141695BA0, "Client::Graphics::Scene::World", ["Client::Graphics::Scene::Object", "Client::Graphics::Singleton"], {
-    0x14042C340: "ctor",
+    0x14042C290: "ctor",
 })
 factory.register(0x141695BD0, "Client::Graphics::Scene::World_Client::Graphics::Singleton", ["Client::Graphics::Singleton"], {})
 factory.register(0x141695BD8, "Client::Graphics::Scene::Camera", ["Client::Graphics::Scene::Object"], {
-    0x14042C600: "ctor",
+    0x14042C550: "ctor",
 })
 factory.register(0x141695C38, "Client::Graphics::Scene::CameraManager_Client::Graphics::Singleton", [], {})
 factory.register(0x141695C40, "Client::Graphics::Scene::CameraManager", [], {
-    0x14042E0D0: "ctor",
+    0x14042E020: "ctor",
 })
 factory.register(0x141695E08, "Client::Graphics::Scene::CharacterUtility", ["Client::Graphics::Singleton"], {
-    0x140431800: "ctor",
-    0x140431A10: "CreateDXRenderObjects",
-    0x140431E60: "LoadDataFiles",
-    0x140435BE0: "GetSlotEqpFlags",
+    0x140431750: "ctor",
+    0x140431960: "CreateDXRenderObjects",
+    0x140431DB0: "LoadDataFiles",
+    0x140435B30: "GetSlotEqpFlags",
 })
 factory.register(0x141695E88, "Client::Graphics::Scene::CharacterBase", ["Client::Graphics::Scene::DrawObject"], {
     11: "UpdateMaterials",
     92: "CreateRenderModelForMDL",
-    0x140438C80: "ctor",
-    0x14044AD00: "CreateSlotStorage",
-    0x14043CA70: "CreateBonePhysicsModule",
-    0x14043E4E0: "LoadAnimation",
-    0x14043EEB0: "LoadMDLForSlot",
-    0x14043EFA0: "LoadIMCForSlot",
-    0x14043F170: "LoadAllMTRLsFromMDLInSlot",
-    0x14043F310: "LoadAllDecalTexFromMDLInSlot",
-    0x14043F480: "LoadPHYBForSlot",
-    0x14043FC30: "CopyIMCForSlot",
-    0x14043FFA0: "CreateStagingArea",
-    0x1404400C0: "PopulateMaterialsFromStaging",
-    0x140440210: "LoadMDLSubFilesIntoStaging",
-    0x140440420: "LoadMDLSubFilesForSlot",
-    0x14045FE80: "dtor",
-    0x1406E3530: "Create",
+    0x140438BD0: "ctor",
+    0x14044AC50: "CreateSlotStorage",
+    0x14043C9C0: "CreateBonePhysicsModule",
+    0x14043E430: "LoadAnimation",
+    0x14043EE00: "LoadMDLForSlot",
+    0x14043EEF0: "LoadIMCForSlot",
+    0x14043F0C0: "LoadAllMTRLsFromMDLInSlot",
+    0x14043F260: "LoadAllDecalTexFromMDLInSlot",
+    0x14043F3D0: "LoadPHYBForSlot",
+    0x14043FB80: "CopyIMCForSlot",
+    0x14043FEF0: "CreateStagingArea",
+    0x140440010: "PopulateMaterialsFromStaging",
+    0x140440160: "LoadMDLSubFilesIntoStaging",
+    0x140440370: "LoadMDLSubFilesForSlot",
+    0x14045FDD0: "dtor",
+    0x1406E3470: "Create",
 })
 factory.register(0x141696198, "Client::Graphics::Scene::Human", ["Client::Graphics::Scene::CharacterBase"], {
     0: "dtor",
@@ -921,14 +921,14 @@ factory.register(0x141696198, "Client::Graphics::Scene::Human", ["Client::Graphi
     73: "ResolveMDLPath",
     82: "ResolveMTRLPath",
     86: "GetDyeForSlot",
-    0x140443EF0: "ctor",
-    0x140444130: "SetupFromCharacterData",
+    0x140443E40: "ctor",
+    0x140444080: "SetupFromCharacterData",
 })
 factory.register(0x141697860, "Client::Graphics::Scene::ResidentResourceManager::ResourceList", [], {})
 factory.register(0x141697870, "Client::Graphics::Scene::ResidentResourceManager", ["Client::Graphics::Singleton"], {
-    0x14045E2D0: "ctor",
-    0x14045E300: "nullsub_1",
-    0x14045E330: "LoadDataFiles",
+    0x14045E220: "ctor",
+    0x14045E250: "nullsub_1",
+    0x14045E280: "LoadDataFiles",
 })
 factory.register(0x141697950, "Client::System::Task::SpursJobEntityWorkerThread", ["Client::Graphics::Singleton"], {})
 factory.register(0x141697D60, "Common::Lua::LuaState", [], {})
@@ -937,12 +937,12 @@ factory.register(0x141698A90, "Client::Game::Control::TargetSystem::AggroListFee
 factory.register(0x141698AA0, "Client::Game::Control::TargetSystem::AllianceListFeeder", ["Client::Game::Control::TargetSystem::ListFeeder"], {})
 factory.register(0x141698AB0, "Client::Game::Control::TargetSystem::PartyListFeeder", ["Client::Game::Control::TargetSystem::ListFeeder"], {})
 factory.register(0x141698B00, "Client::Game::Control::TargetSystem", ["Client::Game::Object::IGameObjectEventListener"], {
-    0x140493860: "ctor",
-    0x14049E380: "IsActorInViewRange",
+    0x1404937B0: "ctor",
+    0x14049E2D0: "IsActorInViewRange",
 })
 factory.register(0x14169A300, "Component::GUI::AtkArrayData", [], {})
 factory.register(0x14169A310, "Component::GUI::NumberArrayData", ["Component::GUI::AtkArrayData"], {
-    0x1404AAC90: "SetValue",
+    0x1404AABE0: "SetValue",
 })
 factory.register(0x14169A320, "Component::GUI::StringArrayData", ["Component::GUI::AtkArrayData"], {})
 factory.register(0x14169A330, "Component::GUI::ExtendArrayData", ["Component::GUI::AtkArrayData"], {})
@@ -950,57 +950,57 @@ factory.register(0x14169A3C8, "Component::GUI::AtkEventTarget", [], {})  # TODO:
 factory.register(0x14169A438, "Component::GUI::AtkSimpleTween", ["Component::GUI::AtkEventTarget"], {})
 factory.register(0x14169A448, "Component::GUI::AtkTexture", [], {})
 factory.register(0x14169A5A8, "Component::GUI::AtkStage", ["Component::GUI::AtkEventTarget"], {
-    0x1404BCA70: "ctor",
-    0x1404DDF50: "GetSingleton1",  # dalamud GetBaseUIObject
+    0x1404BC9C0: "ctor",
+    0x1404DDEA0: "GetSingleton1",  # dalamud GetBaseUIObject
 })
 factory.register(0x14169AE50, "Component::GUI::AtkResNode", ["Component::GUI::AtkEventTarget"], {
     1: "Destroy",
-    0x1404CC760: "ctor",
-    0x1404CC8C0: "GetAsAtkImageNode",
-    0x1404CC8E0: "GetAsAtkTextNode",
-    0x1404CC900: "GetAsAtkNineGridNode",
-    0x1404CC920: "GetAsAtkCounterNode",
-    0x1404CC940: "GetAsAtkCollisionNode",
-    0x1404CC960: "GetAsAtkComponentNode",
-    0x1404CC980: "GetComponent",
-    0x1404CD520: "GetPositionFloat",
-    0x1404CD540: "SetPositionFloat",
-    0x1404CD590: "GetPositionShort",
-    0x1404CD5C0: "SetPositionShort",
-    0x1404CD620: "GetScale",
-    0x1404CD640: "GetScaleX",
-    0x1404CD660: "GetScaleY",
-    0x1404CD680: "SetScale",
-    0x1404D8EA0: "SetSize",
-    0x1404CE790: "Init",
-    0x1404CE960: "SetScale0",  # SetScale jumps to this
+    0x1404CC6B0: "ctor",
+    0x1404CC810: "GetAsAtkImageNode",
+    0x1404CC830: "GetAsAtkTextNode",
+    0x1404CC850: "GetAsAtkNineGridNode",
+    0x1404CC870: "GetAsAtkCounterNode",
+    0x1404CC890: "GetAsAtkCollisionNode",
+    0x1404CC8B0: "GetAsAtkComponentNode",
+    0x1404CC8D0: "GetComponent",
+    0x1404CD470: "GetPositionFloat",
+    0x1404CD490: "SetPositionFloat",
+    0x1404CD4E0: "GetPositionShort",
+    0x1404CD510: "SetPositionShort",
+    0x1404CD570: "GetScale",
+    0x1404CD590: "GetScaleX",
+    0x1404CD5B0: "GetScaleY",
+    0x1404CD5D0: "SetScale",
+    0x1404D8DF0: "SetSize",
+    0x1404CE6E0: "Init",
+    0x1404CE8B0: "SetScale0",  # SetScale jumps to this
 })
 factory.register(0x14169AE68, "Component::GUI::AtkImageNode", ["Component::GUI::AtkResNode"], {
     1: "Destroy",
-    0x14053FA10: "ctor",
+    0x14053F960: "ctor",
 })
 factory.register(0x14169AE80, "Component::GUI::AtkTextNode", ["Component::GUI::AtkResNode"], {
     1: "Destroy",
-    0x14053FBC0: "ctor",
-    0x1404CF250: "SetText",
-    0x1404CFD80: "SetForegroundColour",
-    0x1404D0EA0: "SetGlowColour",
+    0x14053FB10: "ctor",
+    0x1404CF1A0: "SetText",
+    0x1404CFCD0: "SetForegroundColour",
+    0x1404D0DF0: "SetGlowColour",
 })
 factory.register(0x14169AE98, "Component::GUI::AtkNineGridNode", ["Component::GUI::AtkResNode"], {
     1: "Destroy",
-    0x14053FA70: "ctor",
+    0x14053F9C0: "ctor",
 })
 factory.register(0x14169AEB0, "Component::GUI::AtkCounterNode", ["Component::GUI::AtkResNode"], {
     1: "Destroy",
-    0x14053F990: "ctor",
+    0x14053F8E0: "ctor",
 })
 factory.register(0x14169AEC8, "Component::GUI::AtkCollisionNode", ["Component::GUI::AtkResNode"], {
     1: "Destroy",
-    0x14053F8D0: "ctor",
+    0x14053F820: "ctor",
 })
 factory.register(0x14169AEE0, "Component::GUI::AtkComponentNode", ["Component::GUI::AtkResNode"], {
     1: "Destroy",
-    0x14053F930: "ctor",
+    0x14053F880: "ctor",
 })
 factory.register(0x14169AEF8, "Component::GUI::AtkUnitBase", ["Component::GUI::AtkEventListener"], {
     8: "SetPosition",
@@ -1012,72 +1012,72 @@ factory.register(0x14169AEF8, "Component::GUI::AtkUnitBase", ["Component::GUI::A
     14: "SetAlpha",
     15: "SetScale",
     39: "Draw",
-    0x1404DA7B0: "ctor",
-    0x1404DAF10: "SetPosition",
-    0x1404DB090: "SetAlpha",
-    0x1404DB490: "SetScale",
-    0x1404DB800: "CalculateBounds",
-    0x1404DDAB0: "Draw",
-    0x1404D3C60: "ULDAddonData_SetupFromULDResourceHandle",
-    0x1404D6080: "ULDAddonData_ReadTPHD",
-    0x1404D6290: "ULDAddonData_ReadAHSDAndLoadTextures",
+    0x1404DA700: "ctor",
+    0x1404DAE60: "SetPosition",
+    0x1404DAFE0: "SetAlpha",
+    0x1404DB3E0: "SetScale",
+    0x1404DB750: "CalculateBounds",
+    0x1404DDA00: "Draw",
+    0x1404D3BB0: "ULDAddonData_SetupFromULDResourceHandle",
+    0x1404D5FD0: "ULDAddonData_ReadTPHD",
+    0x1404D61E0: "ULDAddonData_ReadAHSDAndLoadTextures",
 })
 factory.register(0x14169B188, "Component::GUI::AtkComponentBase", ["Component::GUI::AtkEventListener"], {
-    0x1404F2720: "ctor",
-    0x1404F29D0: "GetOwnerNodePosition",
+    0x1404F2670: "ctor",
+    0x1404F2920: "GetOwnerNodePosition",
 })
 factory.register(0x14169B228, "Component::GUI::AtkComponentButton", ["Component::GUI::AtkComponentBase"], {
     10: "SetEnabledState",
     17: "InitializeFromComponentData",
-    0x1404F3E50: "ctor",
+    0x1404F3DA0: "ctor",
 })
 factory.register(0x14169B2F0, "Component::GUI::AtkComponentIcon", ["Component::GUI::AtkComponentBase"], {
-    0x1404F6390: "ctor",
+    0x1404F62E0: "ctor",
 })
 factory.register(0x14169B410, "Component::GUI::AtkComponentListItemRenderer", ["Component::GUI::AtkComponentButton", "Component::GUI::AtkDragDropInterface"], {
-    0x1404F6ED0: "ctor",
+    0x1404F6E20: "ctor",
 })
 factory.register(0x14169B580, "Component::GUI::AtkComponentList", ["Component::GUI::AtkComponentBase"], {
-    0x140502120: "ctor",
+    0x140502070: "ctor",
 })
 factory.register(0x14169B6E8, "Component::GUI::AtkComponentTreeList", ["Component::GUI::AtkComponentList"], {
-    0x140506AB0: "ctor",
+    0x140506A00: "ctor",
 })
 factory.register(0x14169B850, "Component::GUI::AtkModule", ["Component::GUI::AtkModuleInterface", "Component::GUI::AtkExternalInterface", "Client::System::Input::TextServiceInterface::TextServiceEvent"], {
-    0x14050B720: "ctor",
+    0x14050B670: "ctor",
 })
 factory.register(0x14169BAF8, "Component::GUI::AtkComponentCheckBox", ["Component::GUI::AtkComponentButton"], {
-    0x14050F6D0: "ctor",
+    0x14050F620: "ctor",
 })
 factory.register(0x14169BBC8, "Component::GUI::AtkComponentGaugeBar", ["Component::GUI::AtkComponentBase"], {
-    0x1405105F0: "ctor",
+    0x140510540: "ctor",
 })
 factory.register(0x14169BC68, "Component::GUI::AtkComponentSlider", ["Component::GUI::AtkComponentBase"], {
-    0x140512720: "ctor",
+    0x140512670: "ctor",
 })
 factory.register(0x14169BD08, "Component::GUI::AtkComponentInputBase", ["Component::GUI::AtkComponentBase"], {
-    0x140513B30: "ctor",
+    0x140513A80: "ctor",
 })
 factory.register(0x14169BDA8, "Component::GUI::AtkComponentTextInput", ["Component::GUI::AtkComponentInputBase", "Component::GUI::AtkTextInput::AtkTextInputEventInterface", "Client::System::Input::SoftKeyboardDeviceInterface::SoftKeyboardInputInterface"], {
-    0x1405152F0: "ctor",
+    0x140515240: "ctor",
 })
 factory.register(0x14169BEA8, "Component::GUI::AtkComponentNumericInput", ["Component::GUI::AtkComponentInputBase", "Component::GUI::AtkTextInput::AtkTextInputEventInterface"], {
-    0x140519A00: "ctor",
+    0x140519950: "ctor",
 })
 factory.register(0x14169BF70, "Component::GUI::AtkComponentDropDownList", ["Component::GUI::AtkComponentBase"], {
-    0x14051D6A0: "ctor",
+    0x14051D5F0: "ctor",
 })
 factory.register(0x14169C010, "Component::GUI::AtkComponentRadioButton", ["Component::GUI::AtkComponentButton"], {
-    0x14051EB90: "ctor",
+    0x14051EAE0: "ctor",
 })
 factory.register(0x14169C120, "Component::GUI::AtkComponentTab", ["Component::GUI::AtkComponentRadioButton"], {
-    0x14051F460: "ctor",
+    0x14051F3B0: "ctor",
 })
 factory.register(0x14169C230, "Component::GUI::AtkComponentGuildLeveCard", ["Component::GUI::AtkComponentBase"], {
-    0x14051FA40: "ctor",
+    0x14051F990: "ctor",
 })
 factory.register(0x14169C2D0, "Component::GUI::AtkComponentTextNineGrid", ["Component::GUI::AtkComponentBase"], {
-    0x14051FDD0: "ctor",
+    0x14051FD20: "ctor",
 })
 factory.register(0x14169C370, "Component::GUI::AtkResourceRendererBase", [], {})
 factory.register(0x14169C388, "Component::GUI::AtkImageNodeRenderer", ["Component::GUI::AtkResourceRendererBase"], {})
@@ -1086,46 +1086,46 @@ factory.register(0x14169C3C0, "Component::GUI::AtkNineGridNodeRenderer", ["Compo
 factory.register(0x14169C3D8, "Component::GUI::AtkCounterNodeRenderer", ["Component::GUI::AtkResourceRendererBase"], {})
 factory.register(0x14169C3F0, "Component::GUI::AtkComponentNodeRenderer", ["Component::GUI::AtkResourceRendererBase"], {})
 factory.register(0x14169C408, "Component::GUI::AtkResourceRendererManager", [], {
-    0x1405229E0: "ctor",
-    0x140522BE0: "DrawUldFromData",
-    0x140522CC0: "DrawUldFromDataClipped",
+    0x140522930: "ctor",
+    0x140522B30: "DrawUldFromData",
+    0x140522C10: "DrawUldFromDataClipped",
 })
 factory.register(0x14169C428, "Component::GUI::AtkComponentMap", ["Component::GUI::AtkComponentBase"], {
-    0x1405251D0: "ctor",
+    0x140525120: "ctor",
 })
 factory.register(0x14169C4C8, "Component::GUI::AtkComponentPreview", ["Component::GUI::AtkComponentBase"], {
-    0x140527C00: "ctor",
+    0x140527B50: "ctor",
 })
 factory.register(0x14169C568, "Component::GUI::AtkComponentScrollBar", ["Component::GUI::AtkComponentBase"], {
-    0x140528C60: "ctor",
+    0x140528BB0: "ctor",
 })
 factory.register(0x14169C608, "Component::GUI::AtkComponentIconText", ["Component::GUI::AtkComponentBase"], {
-    0x14052A670: "ctor",
+    0x14052A5C0: "ctor",
 })
 factory.register(0x14169C6A8, "Component::GUI::AtkComponentDragDrop", ["Component::GUI::AtkComponentBase", "Component::GUI::AtkDragDropInterface"], {
-    0x14052B8F0: "ctor",
+    0x14052B840: "ctor",
 })
 factory.register(0x14169C7C8, "Component::GUI::AtkComponentMultipurpose", ["Component::GUI::AtkComponentBase"], {
-    0x14052D550: "ctor",
+    0x14052D4A0: "ctor",
 })
 factory.register(0x14169C938, "Component::GUI::AtkComponentWindow", ["Component::GUI::AtkComponentWindowGrab", "Component::GUI::AtkComponentBase"], {
-    0x14052DE80: "ctor",
+    0x14052DDD0: "ctor",
 })
 factory.register(0x14169CA08, "Component::GUI::AtkComponentJournalCanvas", ["Component::GUI::AtkComponentBase"], {
-    0x140533410: "ctor",
+    0x140533360: "ctor",
 })
 factory.register(0x14169CAA8, "Component::GUI::AtkComponentUnknownButton", ["Component::GUI::AtkComponentButton"], {
-    0x140536F40: "ctor",
+    0x140536E90: "ctor",
 })
 factory.register(0x1416A9390, "Client::UI::Misc::UserFileManager::UserFileEvent", [], {})
 factory.register(0x1416A9CD0, "Client::UI::UI3DModule::MapInfo", [], {})  # TODO: Verify this
 factory.register(0x1416A9CF8, "Client::UI::UI3DModule::ObjectInfo", ["Client::UI::UI3DModule::MapInfo"], {})
 factory.register(0x1416A9D28, "Client::UI::UI3DModule::MemberInfo", ["Client::UI::UI3DModule::MapInfo"], {})
 factory.register(0x1416A9D88, "Client::UI::UI3DModule", [], {
-    0x1405BB830: "ctor",
+    0x1405BB780: "ctor",
 })
 factory.register(0x1416A9DA0, "Client::UI::UIModule", ["Client::UI::UIModuleInterface", "Component::GUI::AtkModuleEvent", "Component::Excel::ExcelLanguageEvent", "Common::Configuration::ConfigBase::ChangeEventInterface"], {
-    0x1405C4890: "ctor",
+    0x1405C47E0: "ctor",
 })
 factory.register(0x1416AA5A0, "Client::System::Crypt::SimpleString", ["Client::System::Crypt::CryptInterface"], {
     1: "Encrypt",
@@ -1134,7 +1134,7 @@ factory.register(0x1416AA5A0, "Client::System::Crypt::SimpleString", ["Client::S
 factory.register(0x1416AB430, "Component::Text::MacroDecoder", [], {})
 factory.register(0x1416AB5F0, "Component::Text::TextChecker", ["Component::Text::MacroDecoder", "Client::System::Common::NonCopyable"], {})
 factory.register(0x1416AEAE8, "Client::UI::Misc::ConfigModule", ["Component::GUI::AtkModuleInterface::AtkEventInterface", "Common::Configuration::ConfigBase::ChangeEventInterface"], {
-    0x1405FAF50: "ctor",
+    0x1405FAEA0: "ctor",
 })
 factory.register(0x1416AEAF8, "Client::UI::Misc::ConfigModule_Common::Configuration::ConfigBase::ChangeEventInterface", ["Component::GUI::AtkModuleInterface::AtkEventInterface", "Common::Configuration::ConfigBase::ChangeEventInterface"], {})
 factory.register(0x1416AEBD8, "Client::UI::Misc::RaptureMacroModule", ["Client::UI::Misc::UserFileManager::UserFileEvent"], {
@@ -1142,25 +1142,25 @@ factory.register(0x1416AEBD8, "Client::UI::Misc::RaptureMacroModule", ["Client::
 })
 factory.register(0x1416AEC40, "Client::UI::Misc::RaptureTextModule", [], {})
 factory.register(0x1416AEEB8, "Client::UI::Misc::RaptureLogModule", ["Component::Log::LogModule"], {
-    0x140615930: "ctor",
-    0x1406170C0: "PrintMessage",
+    0x140615880: "ctor",
+    0x140617010: "PrintMessage",
 })
 factory.register(0x1416AEF08, "Client::UI::Misc::RaptureHotbarModule", ["Client::UI::Misc::UserFileManager::UserFileEvent", "Client::System::Input::InputData::InputCodeModifiedInterface"], {
-    0x140620880: "ctor",
+    0x1406207D0: "ctor",
 })
 factory.register(0x1416AEF70, "Client::UI::Misc::RaptureHotbarModule_Client::System::Input::InputCodeModifiedInterface", ["Client::System::Input::InputData::InputCodeModifiedInterface"], {})
 factory.register(0x1416AEFE8, "Client::UI::Misc::PronounModule", ["Component::Text::TextChecker::ExecNonMacroFunc"], {
-    0x140629640: "ctor",
+    0x140629590: "ctor",
 })
 factory.register(0x1416AFAC0, "Client::UI::Misc::CharaView", [], {
     0: "dtor",
     1: "Initialize",
     2: "Finalize",
-    0x14064FC30: "ctor",
+    0x14064FB80: "ctor",
 })
 factory.register(0x1416B0EC0, "Client::Game::Object::GameObject", [], {
-    0x1406C5330: "Initialize",
-    0x1406C5590: "ctor",
+    0x1406C5270: "Initialize",
+    0x1406C54D0: "ctor",
 })
 factory.register(0x1416B1B48, "Client::Game::Character::Character", ["Client::Game::Object::GameObject", "Client::Graphics::Vfx::VfxDataListenner"], {
     3: "GetObjectKind",
@@ -1168,38 +1168,38 @@ factory.register(0x1416B1B48, "Client::Game::Character::Character", ["Client::Ga
     17: "DisableDraw",
     21: "SetDrawObject",
     40: "Update",
-    0x1406D5B80: "dtor",
-    0x1406EA400: "ctor",
+    0x1406D5AC0: "dtor",
+    0x1406EA340: "ctor",
 })
 factory.register(0x1416B1E10, "Client::Game::Character::Character_Client::Graphics::Vfx::VfxDataListener", ["Client::Graphics::Vfx::VfxDataListenner"], {})
 factory.register(0x1416C8150, "Client::Game::Character::BattleChara", ["Client::Game::Character::Character"], {
-    0x14073C1A0: "ctor",
-    0x14073C290: "dtor",
+    0x14073C140: "ctor",
+    0x14073C230: "dtor",
 })
 factory.register(0x1416C8418, "Client::Game::Character::BattleChara_Client::Graphics::Vfx::VfxDataListener", ["Client::Game::Character::Character_Client::Graphics::Vfx::VfxDataListener"], {})
 factory.register(0x1416CA7C0, "Client::Game::ActionManager", ["Client::Graphics::Vfx::VfxDataListenner"], {})
 factory.register(0x1416CC740, "Client::UI::Agent::AgentHUD", ["Client::UI::Agent::AgentInterface", "Common::Configuration::ConfigBase::ChangeEventInterface"], {
     5: "Update",
-    0x14081F3B0: "ctor",
-    0x140824F30: "UpdateParty",
+    0x14081F350: "ctor",
+    0x140824ED0: "UpdateParty",
 })
 factory.register(0x1416CCAF0, "Client::UI::Agent::AgentItemDetail", ["Client::UI::Agent::AgentItemDetailBase", "Client::UI::Agent::AgentInterface"], {
-    0x1408D3FB0: "ctor",
-    0x1408D4FE0: "OnItemHovered",
+    0x1408D3F50: "ctor",
+    0x1408D4F80: "OnItemHovered",
 })
 factory.register(0x1416CD4B8, "Client::UI::Agent::AgentMap::MapMarkerStructSearchName", ["Client::UI::Agent::AgentMap::MapMarkerStructSearch"], {
     1: "Evaluate",
 })
 factory.register(0x1416CD4C8, "Client::UI::Agent::AgentMap", ["Client::UI::Agent::AgentInterface"], {
-    0x140887C40: "ctor",
+    0x140887BE0: "ctor",
 })
 factory.register(0x1416CE090, "Client::UI::Agent::AgentHudLayout", ["Client::UI::Agent::AgentInterface"], {
     2: "Show",
     3: "Hide",
-    0x1408C0B70: "ctor",
+    0x1408C0B10: "ctor",
 })
 factory.register(0x1416CEED8, "Client::UI::Agent::AgentStatus", ["Client::UI::Agent::AgentInterface"], {
-    0x1409041F0: "ctor",
+    0x140904190: "ctor",
 })
 factory.register(0x1416CEEA0, "Client::UI::Agent::AgentStatus::StatusCharaView", ["Client::UI::Misc::CharaView"], {})
 factory.register(0x1416DEE58, "Client::Game::Event::EventHandler", [], {})
@@ -1212,38 +1212,38 @@ factory.register(0x1416E4918, "Client::Game::Event::DirectorModule", ["Client::G
 factory.register(0x1416F4AA8, "Client::Game::Gimmick::GimmickBill", ["Client::Game::Gimmick::GimmickEventHandler", "Client::Game::InstanceContent::ContentSheetWaiterInterface"], {})
 factory.register(0x141798F70, "Client::UI::AddonNowLoading", ["Component::GUI::AtkUnitBase"], {
     41: "LoadUldResourceHandle",
-    0x140CCD7B0: "ctor",
+    0x140CCD730: "ctor",
 })
 factory.register(0x1417C9DC8, "Client::UI::Atk2DAreaMap", ["Client::UI::Atk2DMap"], {})
 factory.register(0x1417D4E18, "Client::UI::AddonTalk", ["Component::GUI::AtkUnitBase"], {
-    0x140E7C230: "ctor",
+    0x140E7C1D0: "ctor",
 })
 factory.register(0x1417D6AA0, "Client::UI::AddonItemDetail", ["Client::UI::AddonItemDetailBase", "Component::GUI::AtkUnitBase", "Component::GUI::AtkManagedInterface"], {
-    0x140E904A0: "ctor",
-    0x140E919C0: "GenerateTooltip",
+    0x140E90440: "ctor",
+    0x140E91960: "GenerateTooltip",
 })
 factory.register(0x1417DCDD0, "Client::UI::AddonAreaMap", ["Component::GUI::AtkUnitBase"], {
-    0x140EBDC90: "ctor",
+    0x140EBDC30: "ctor",
 })
 factory.register(0x1417DEC90, "Client::UI::AddonNamePlate", ["Component::GUI::AtkUnitBase"], {
     47: "UpdateNameplates",
-    0x140ED8850: "ctor",
+    0x140ED87F0: "ctor",
 })
 factory.register(0x1417C9520, "Client::UI::AddonRecipeNote", ["Component::GUI::AtkUnitBase"], {})
 factory.register(0x14179BAD0, "Client::UI::AddonHudSelectYesno", ["Component::GUI::AtkUnitBase"], {
     0: "dtor",
-    0x140CD91D0: "ctor",
+    0x140CD9150: "ctor",
 })
 factory.register(0x141810480, "Client::UI::AddonHudLayoutWindow", ["Component::GUI::AtkUnitBase"], {
-    0x14101D870: "ctor",
+    0x14101D810: "ctor",
 })
 factory.register(0x1418106A0, "Client::UI::AddonHudLayoutScreen", ["Component::GUI::AtkUnitBase"], {
     2: "HandleMouseEvent",
-    0x14101EB00: "ctor",
-    0x141023790: "AddonOverlayMouseMovedEvent",
-    0x1410239C0: "AddonOverlayMouseClickEvent",
-    0x141023DC0: "AddonOverlayMouseReleaseEvent",
-    0x141025A00: "_SetAddonScale",
+    0x14101EAA0: "ctor",
+    0x141023730: "AddonOverlayMouseMovedEvent",
+    0x141023960: "AddonOverlayMouseClickEvent",
+    0x141023D60: "AddonOverlayMouseReleaseEvent",
+    0x1410259A0: "_SetAddonScale",
 })
 factory.register(0x1417CDB58, "Client::UI::AddonMateriaAttach", ["Component::GUI::AtkUnitBase"], {})
 factory.register(0x1417CDF98, "Client::UI::AddonMateriaAttachDialog", ["Component::GUI::AtkUnitBase"], {})
@@ -1253,11 +1253,11 @@ factory.register(0x141825378, "Client::Graphics::Culling::CullingManager_Client:
 factory.register(0x141825380, "Client::Graphics::Culling::CullingManager", ["Client::Graphics::Singleton"], {})
 factory.register(0x141828A68, "Client::Game::Character::Companion", ["Client::Game::Character::Character"], {
     16: "EnableDraw",
-    0x141101910: "ctor",
+    0x141101890: "ctor",
 })
 factory.register(0x141829C80, "Client::Game::CameraBase", [], {})
 factory.register(0x141829CE0, "Client::Game::Camera", ["Client::Game::CameraBase"], {
-    0x14110A3C0: "ctor",
+    0x14110A340: "ctor",
 })
 factory.register(0x14182B780, "Client::Graphics::Culling::OcclusionCullingManager", ["Client::Graphics::Singleton"], {})
 factory.register(0x14182B790, "Client::Graphics::Streaming::StreamingManager_Client::Graphics::JobSystem_Client::Graphics::Streaming::StreamingManager::StreamingJob", ["Client::Graphics::Singleton"], {})
