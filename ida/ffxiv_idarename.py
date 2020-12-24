@@ -791,6 +791,8 @@ factory.register(0x141674968, "Client::Network::NetworkModuleProxy", ["Client::S
     0x1401EC090: "ctor",
 })
 factory.register(0x141675928, "Client::UI::Agent::AgentInterface", ["Component::GUI::AtkModuleInterface::AtkEventInterface"], {
+    2: "Show",
+    3: "Hide",
     4: "IsAgentActive",
     0x1401EDCA0: "ctor",
 })
@@ -931,7 +933,7 @@ factory.register(0x141697870, "Client::Graphics::Scene::ResidentResourceManager"
     0x14045E330: "LoadDataFiles",
 })
 factory.register(0x141697950, "Client::System::Task::SpursJobEntityWorkerThread", ["Client::Graphics::Singleton"], {})
-factory.register(0x141697D60, "Common::Lua::LuaState", [], {})
+factory.register(0x141697D58, "Common::Lua::LuaState", [], {})
 factory.register(0x141697D60, "Common::Lua::LuaThread", ["Common::Lua::LuaState"], {})
 factory.register(0x141698A90, "Client::Game::Control::TargetSystem::AggroListFeeder", ["Client::Game::Control::TargetSystem::ListFeeder"], {})
 factory.register(0x141698AA0, "Client::Game::Control::TargetSystem::AllianceListFeeder", ["Client::Game::Control::TargetSystem::ListFeeder"], {})
@@ -1194,8 +1196,6 @@ factory.register(0x1416CD4C8, "Client::UI::Agent::AgentMap", ["Client::UI::Agent
     0x140887C40: "ctor",
 })
 factory.register(0x1416CE090, "Client::UI::Agent::AgentHudLayout", ["Client::UI::Agent::AgentInterface"], {
-    2: "Show",
-    3: "Hide",
     0x1408C0B70: "ctor",
 })
 factory.register(0x1416CEED8, "Client::UI::Agent::AgentStatus", ["Client::UI::Agent::AgentInterface"], {
@@ -1252,7 +1252,6 @@ factory.register(0x141825370, "Client::Graphics::Culling::CullingManager_Client:
 factory.register(0x141825378, "Client::Graphics::Culling::CullingManager_Client::Graphics::JobSystem_Client::Graphics::Culling::RenderCallbackJob", [], {})
 factory.register(0x141825380, "Client::Graphics::Culling::CullingManager", ["Client::Graphics::Singleton"], {})
 factory.register(0x141828A68, "Client::Game::Character::Companion", ["Client::Game::Character::Character"], {
-    16: "EnableDraw",
     0x141101910: "ctor",
 })
 factory.register(0x141829C80, "Client::Game::CameraBase", [], {})
