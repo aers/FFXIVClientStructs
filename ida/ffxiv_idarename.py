@@ -131,112 +131,155 @@ class BaseApi(object):
         :rtype: bool
         """
 
+    @abstractmethod
+    def get_comment(self, ea):
+        """
+        Get the comment at an address
+        :param ea: Effective address
+        :type ea: int
+        :return: Comment
+        :rtype: str
+        """
+
+    @abstractmethod
+    def set_comment(self, ea, comment):
+        """
+        Add a comment to an address
+        :param ea: Effective address
+        :type ea: int
+        :param comment: Comment
+        :type comment: str
+        :return: None
+        """
+
 
 api = None
+
 # region IDA Api
-try:
-    import idaapi  # noqa
-    import idc  # noqa
-    import idautils  # noqa
+
+if api is None:
+    try:
+        import idaapi  # noqa
+        import idc  # noqa
+        import idautils  # noqa
 
 
-    class IdaApi(BaseApi):
+        class IdaApi(BaseApi):
 
-        def get_image_base(self):
-            return idaapi.get_imagebase()
+            def get_image_base(self):
+                return idaapi.get_imagebase()
 
-        def set_addr_name(self, ea, name):
-            result = idc.set_name(ea, name)
-            return bool(result)
+            def set_addr_name(self, ea, name):
+                result = idc.set_name(ea, name)
+                return bool(result)
 
-        def get_addr_name(self, ea):
-            return idc.get_name(ea)
+            def get_addr_name(self, ea):
+                return idc.get_name(ea)
 
-        def get_qword(self, ea):
-            return idc.get_qword(ea)
+            def get_qword(self, ea):
+                return idc.get_qword(ea)
 
-        def is_offset(self, ea):
-            return idc.is_off0(idc.get_full_flags(ea))
+            def is_offset(self, ea):
+                return idc.is_off0(idc.get_full_flags(ea))
 
-        def xrefs_to(self, ea):
-            return [xref.to for xref in idautils.XrefsTo(ea)]
+            def xrefs_to(self, ea):
+                return [xref.to for xref in idautils.XrefsTo(ea)]
 
-        def get_struct_id(self, name):
-            sid = idc.get_struc_id(name)
-            if sid == idc.BADADDR:
-                return -1
-            else:
+            def get_struct_id(self, name):
+                sid = idc.get_struc_id(name)
+                if sid == idc.BADADDR:
+                    return -1
+                else:
+                    return sid
+
+            def create_struct(self, name):
+                sid = idc.add_struc(-1, name, is_union=0)
                 return sid
 
-        def create_struct(self, name):
-            sid = idc.add_struc(-1, name, is_union=0)
-            return sid
+            def add_struct_member(self, sid, name):
+                idc.add_struc_member(sid, name, offset=-1, flag=idc.FF_DATA | idc.FF_QWORD, typeid=-1, nbytes=8, reftype=idc.REF_OFF64)
+                member_offset = idc.get_last_member(sid)
+                member_id = idc.get_member_id(sid, member_offset)
+                idc.SetType(member_id, "void*")
 
-        def add_struct_member(self, sid, name):
-            idc.add_struc_member(sid, name, offset=-1, flag=idc.FF_DATA | idc.FF_QWORD, typeid=-1, nbytes=8, reftype=idc.REF_OFF64)
-            member_offset = idc.get_last_member(sid)
-            member_id = idc.get_member_id(sid, member_offset)
-            idc.SetType(member_id, "void*")
-
-        def clear_struct(self, sid):
-            member_offset = idc.get_first_member(sid)
-            if member_offset == -1:
-                return False
-            while member_offset != idc.BADADDR:
-                idc.del_struc_member(sid, member_offset)
+            def clear_struct(self, sid):
                 member_offset = idc.get_first_member(sid)
-            return True
+                if member_offset == -1:
+                    return False
+                while member_offset != idc.BADADDR:
+                    idc.del_struc_member(sid, member_offset)
+                    member_offset = idc.get_first_member(sid)
+                return True
 
-        def convert_to_struct(self, ea, sid):
-            struct_name = idc.get_struc_name(sid)
-            result = idc.create_struct(ea, -1, struct_name)
-            return bool(result)
+            def convert_to_struct(self, ea, sid):
+                struct_name = idc.get_struc_name(sid)
+                result = idc.create_struct(ea, -1, struct_name)
+                return bool(result)
+
+            def get_comment(self, ea):
+                idc.get_cmt(ea, False)
+
+            def set_comment(self, ea, comment):
+                idc.set_cmt(ea, comment, False)
 
 
-    api = IdaApi()
-except ImportError:
-    print("Warning: Unable to load IDA")
+        api = IdaApi()
+    except ImportError:
+        print("Warning: Unable to load IDA")
+
 # endregion
 # region Ghidra Api
-try:
-    import ghidra
+
+if api is None:
+    try:
+        import ghidra
 
 
-    class GhidraApi(BaseApi):
-        def get_image_base(self):
-            raise NotImplementedError
+        class GhidraApi(BaseApi):
+            def get_image_base(self):
+                raise NotImplementedError
 
-        def set_addr_name(self, ea, name):
-            raise NotImplementedError
+            def set_addr_name(self, ea, name):
+                raise NotImplementedError
 
-        def get_addr_name(self, ea):
-            raise NotImplementedError
+            def get_addr_name(self, ea):
+                raise NotImplementedError
 
-        def get_qword(self, ea):
-            raise NotImplementedError
+            def get_qword(self, ea):
+                raise NotImplementedError
 
-        def is_offset(self, ea):
-            raise NotImplementedError
+            def is_offset(self, ea):
+                raise NotImplementedError
 
-        def xrefs_to(self, ea):
-            raise NotImplementedError
+            def xrefs_to(self, ea):
+                raise NotImplementedError
 
-        def get_struct_id(self, name):
-            raise NotImplementedError
+            def get_struct_id(self, name):
+                raise NotImplementedError
 
-        def create_struct(self, name):
-            raise NotImplementedError
+            def create_struct(self, name):
+                raise NotImplementedError
 
-        def add_struct_member(self, sid, name):
-            raise NotImplementedError
+            def add_struct_member(self, sid, name):
+                raise NotImplementedError
 
-        def clear_struct(self, sid):
-            raise NotImplementedError
+            def clear_struct(self, sid):
+                raise NotImplementedError
+
+            def convert_to_struct(self, ea, sid):
+                raise NotImplementedError
+
+            def get_comment(self, ea):
+                raise NotImplementedError
+
+            def set_comment(self, ea, comment):
+                raise NotImplementedError
 
 
-    api = GhidraApi()
-except ImportError:
-    print("Warning: Unable to load Ghidra")
+        api = GhidraApi()
+    except ImportError:
+        print("Warning: Unable to load Ghidra")
+
 # endregion
 
 if api is None:
@@ -244,8 +287,6 @@ if api is None:
 
 print("Importing IDA data ...")
 
-
-# TODO: Clobber 0x141697D60! "Common::Lua::LuaState", "Common::Lua::LuaThread"
 
 class FfxivClassFactory:
     # {name: ea}
@@ -262,24 +303,24 @@ class FfxivClassFactory:
         if len(args) == 1:
             vtbl_ea = 0x0
             class_name, = args
-            hierarchy = []
+            parent_class_name = ""
             funcs = {}
         elif len(args) == 2:
             vtbl_ea, class_name = args
-            hierarchy = []
+            parent_class_name = ""
             funcs = {}
         elif len(args) == 3:
             vtbl_ea = 0x0
-            class_name, hierarchy, funcs = args
+            class_name, parent_class_name, funcs = args
         elif len(args) == 4:
-            vtbl_ea, class_name, hierarchy, funcs = args
+            vtbl_ea, class_name, parent_class_name, funcs = args
         else:
             print("Error: Unsupported argument layout, args={0}".format(args))
             return
 
-        arg_types = [type(arg) for arg in (vtbl_ea, class_name, hierarchy, funcs)]
-        if (arg_types != [int, str, list, dict] and
-                arg_types != [long, str, list, dict]):  # py2
+        arg_types = [type(arg) for arg in (vtbl_ea, class_name, parent_class_name, funcs)]
+        if (arg_types != [int, str, str, dict] and
+                arg_types != [long, str, str, dict]):  # py2
             print("Error: Argument mismatch, types={0}".format(arg_types))
             return
 
@@ -292,41 +333,32 @@ class FfxivClassFactory:
             return
 
         self._vtbls_ea.append(vtbl_ea)
-        self._classes[class_name] = FfxivClass(vtbl_ea, class_name, hierarchy, funcs)
+        self._classes[class_name] = FfxivClass(vtbl_ea, class_name, parent_class_name, funcs)
 
     def finalize(self):
         """
         Perform the class naming
         :return: None
         """
-        self._resolve_hierarchies()
+        self._resolve_class_inheritance()
         for class_name, cls in self._classes.items():
-            self._finalize_cls(cls)
+            self._finalize_class(cls)
 
-    def _resolve_hierarchies(self):
+    def _resolve_class_inheritance(self):
         """
-        Convert each class_name in each hierarchy to a class object reference
+        Set the parent_class attribute in each cls to the object corresponding to its parent_class_name attribute
         :return: None
         """
-        for class_name, cls in self._classes.items():
-            for idx, parent_class_name in enumerate(cls.hierarchy):
-                if isinstance(parent_class_name, str):
-                    if parent_class_name not in self._classes:
-                        print("Warning: Inherited class \"{0}\" is not documented, add a placeholder entry".format(parent_class_name))
-                        self.register(parent_class_name)
-                    cls.hierarchy[idx] = self._classes[parent_class_name]
-
-        # Check for duplicate entries in hierarchy, likely a previous parent class inherits from the duplicate
-        for class_name, cls in self._classes.items():
-            hierarchy = cls.hierarchy_names
-            if len(hierarchy) != len(set(hierarchy)):
-                extras = set([x for x in hierarchy if hierarchy.count(x) > 1])
-                for extra in extras:
-                    print("Warning: \"{0}\" has a duplicate hierarchy entry \"{1}\"".format(cls.name, extra))
+        for class_name, cls in list(self._classes.items()):
+            if cls.parent_class is None and cls.parent_class_name:
+                if cls.parent_class_name not in self._classes:
+                    print("Warning: Inherited class \"{0}\" is not documented, add a placeholder entry".format(cls.parent_class_name))
+                    self.register(cls.parent_class_name)
+                cls.parent_class = self._classes[cls.parent_class_name]
 
     _finalize_stack = deque()
 
-    def _finalize_cls(self, cls):
+    def _finalize_class(self, cls):
         """
         Perform a single class naming
         :param cls: Class object
@@ -336,14 +368,13 @@ class FfxivClassFactory:
         if cls in self._finalize_stack:
             names = [c.name for c in self._finalize_stack] + [cls.name]
             names = "\n".join(["    - {0}".format(name) for name in names])
-            raise ValueError("Hierarchy cycle detected: \n{0}".format(names))
+            raise ValueError("Inheritance cycle detected: \n{0}".format(names))
 
         self._finalize_stack.append(cls)
 
         if not cls.finalized:
-            for parent_cls in cls.hierarchy:
-                if not parent_cls.finalized:
-                    self._finalize_cls(parent_cls)
+            if cls.parent_class and not cls.parent_class.finalized:
+                self._finalize_class(cls.parent_class)
             cls.finalize()
 
         self._finalize_stack.pop()
@@ -372,21 +403,23 @@ class FfxivClass:
     JUMP_PREFIX = "j_"
     PURECALL = "_purecall"
 
-    def __init__(self, vtbl_ea, class_name, hierarchy, funcs):
+    parent_class = None  # type: FfxivClass
+
+    def __init__(self, vtbl_ea, class_name, parent_class_name, funcs):
         """
         Object representing a class
         :param vtbl_ea: Vtable effective address
         :type vtbl_ea: int
         :param class_name: Class name
         :type class_name: str
-        :param hierarchy: Inheritance hierarchy
-        :type hierarchy: List[str|FfxivClass]
+        :param parent_class_name: Parent class
+        :type parent_class_name: str
         :param funcs: Mapping of vtbl index or effective addresses to func names
         :type funcs: Dict[int, str]
         """
         self.vtbl_ea = vtbl_ea
         self.name = class_name
-        self.hierarchy = hierarchy
+        self.parent_class_name = parent_class_name
         self.funcs = funcs
 
         # Offset the vtbl and funcs if the program has been rebased
@@ -398,23 +431,30 @@ class FfxivClass:
                 if idx_or_ea > 0x1000:
                     funcs[idx_or_ea + rebase_offset] = funcs.pop(idx_or_ea)
 
-    # region hierarchy_names
+    # region parent_class_names
 
-    _hierarchy_names = None
+    _parent_class_names = None
 
     @property
-    def hierarchy_names(self):
+    def parent_class_names(self):
         """
         Get the class names of the entire hierarchy as a flat list
         :return: [class_name]
         """
-        if self._hierarchy_names is None:
-            self._hierarchy_names = list(itertools.chain(*[cls.hierarchy_names for cls in self.hierarchy])) + [self.name]
-        return self._hierarchy_names
+        if self._parent_class_names is None:
+            self._parent_class_names = []
+
+            current_class = self.parent_class
+            while current_class:
+                self._parent_class_names.append(current_class.name)
+                current_class = current_class.parent_class
+
+        return self._parent_class_names
 
     # endregion
 
     # region vtbl_size
+
     _vtbl_size = 0
 
     @property
@@ -435,15 +475,14 @@ class FfxivClass:
                 else:
                     break
 
-            parent_vtbl_size = sum(parent.vtbl_size for parent in self.hierarchy)
-            if self.vtbl_size < parent_vtbl_size:
-                print("Error: The sum of \"{0}\"'s parent vtbl sizes ({1}) is greater than the actual class itself ({2})".format(self.name, parent_vtbl_size, self._vtbl_size))
+            if self.parent_class and self.vtbl_size < self.parent_class.vtbl_size:
+                print("Error: The sum of \"{0}\"'s parent vtbl sizes ({1}) is greater than the actual class itself ({2})".format(self.name, self.parent_class.vtbl_size, self.vtbl_size))
 
         return self._vtbl_size
 
     # endregion
 
-    # region finalizing
+    # region finalized
 
     _finalized = False
 
@@ -454,20 +493,122 @@ class FfxivClass:
         :return: bool yes/no
         :rtype: bool
         """
-        return self._finalized and all(parent.finalized for parent in self.hierarchy)
+        if self.parent_class:
+            return self._finalized and self.parent_class.finalized
+        else:
+            return self._finalized
+
+    @finalized.setter
+    def finalized(self, value):
+        self._finalized = value
+
+    # endregion
 
     def finalize(self):
         """
         Write out this class
         :return: None
         """
+        self._inherit_func_names_from_parent()
+        self._comment_vtbl_with_inheritance_tree()
         self._write_vtbl()
         self._write_funcs()
-        self._finalized = True
+        self.finalized = True
+
+    def _inherit_func_names_from_parent(self):
+        if self.parent_class:
+            for idx, parent_func_name in self.parent_class.funcs.items():
+                if idx < 0x1000:
+                    if idx in self.funcs:
+                        print("Warning: 0x{0:X} \"{1}\" overwrites the name of inherited function \"{2}\"".format(self.vtbl_ea, self.name, parent_func_name))
+                        pass
+                    else:
+                        self.funcs[idx] = parent_func_name
+
+    def _comment_vtbl_with_inheritance_tree(self):
+        comment = api.get_comment(self.vtbl_ea) or ""
+        indent = 0
+        for parent_class_name in self.parent_class_names[-1::-1] + [self.name]:
+            if comment:
+                comment += "\n"
+            comment += (" " * indent) + self.VTBL_FORMAT.format(cls=parent_class_name)
+            indent += 4
+        api.set_comment(self.vtbl_ea, comment)
+
+    def _build_vtbl(self):
+        class_func_addresses = []
+        class_func_names = []
+        struct_member_names = []
+
+        # Iterate through each offset
+        for idx in range(0, self.vtbl_size):
+            vfunc_offset = self.vtbl_ea + idx * 8
+            vfunc_ea = api.get_qword(vfunc_offset)  # type: int
+
+            current_func_name = api.get_addr_name(vfunc_ea)  # type: str
+            if current_func_name.startswith(self.JUMP_PREFIX):
+                current_func_name = current_func_name.lstrip(self.JUMP_PREFIX)
+
+            if idx in self.funcs:
+                named_func = self.funcs[idx]
+                named_full_func_name = self.NAMED_FUNC_FORMAT.format(cls=self.name, name=named_func)
+                named_struct_member_name = named_func
+            else:
+                named_full_func_name = ""
+                named_struct_member_name = ""
+
+            if current_func_name.startswith("qword_"):
+                # Problem for another day, or codatify
+                if isinstance(api, IdaApi) and self.name == "Client::Graphics::Scene::Human" and idx == 61:
+                    idc.auto_mark_range(vfunc_ea, vfunc_ea + 1, idc.AU_CODE)
+                    idc.create_insn(vfunc_ea)
+                    idc.add_func(vfunc_ea)
+                    current_func_name = api.get_addr_name(vfunc_ea)  # type: str
+                else:
+                    print("Warning: qword in vtbl at 0x{0:X}, it may be an offset to undefined code".format(vfunc_offset))
+
+            if current_func_name.startswith(self.SUB_PREFIX):
+                generic_full_func_name = self.GENERIC_SUB_FORMAT.format(cls=self.name, index=idx)
+                generic_struct_member_name = self.STRUCT_GENERIC_SUB_FORMAT.format(index=idx)
+            elif current_func_name.startswith(self.NULLSUB_PREFIX):
+                generic_full_func_name = self.GENERIC_NULLSUB_FORMAT.format(cls=self.name, index=idx)
+                generic_struct_member_name = self.STRUCT_GENERIC_NULLSUB_FORMAT.format(index=idx)
+            elif current_func_name.startswith(self.LOC_PREFIX):
+                generic_full_func_name = self.GENERIC_LOC_FORMAT.format(cls=self.name, index=idx)
+                generic_struct_member_name = self.STRUCT_GENERIC_LOC_FORMAT.format(index=idx)
+            elif any(current_func_name.startswith(parent_class_name) for parent_class_name in self.parent_class_names):
+                generic_full_func_name = None  # No override present
+                generic_struct_member_name = current_func_name.split(".", 1)[-1]
+            elif current_func_name == self.PURECALL:
+                generic_full_func_name = None  # Ignored
+                generic_struct_member_name = self.STRUCT_PURECALL_FORMAT.format(index=idx)
+            elif current_func_name.startswith("?") or current_func_name.startswith("_"):
+                generic_full_func_name = None  # Mangled
+                generic_struct_member_name = self.STRUCT_MANGLE_FORMAT.format(index=idx)
+            else:
+                print("Error: Unexpected function name \"{0}\" at 0x{1:X}".format(current_func_name, self.vtbl_ea + idx * 8))
+                generic_full_func_name = None
+                generic_struct_member_name = "naming_error{0}".format(idx)
+
+            class_func_addresses.append(vfunc_ea)
+
+            if generic_full_func_name is None:
+                class_func_names.append(None)
+            else:
+                class_func_names.append(named_full_func_name or generic_full_func_name)
+
+            struct_member_names.append(named_struct_member_name or generic_struct_member_name)
+
+        return class_func_addresses, class_func_names, struct_member_names
 
     def _write_vtbl(self):
-        # Name the vtbl start offset
+        class_func_addresses, class_func_names, struct_member_names = self._build_vtbl()
+
         api.set_addr_name(self.vtbl_ea, self.VTBL_FORMAT.format(cls=self.name))
+
+        for func_ea, func_name in zip(class_func_addresses, class_func_names):
+            if func_name:
+                api.set_addr_name(func_ea, func_name)
 
         struct_name = self.STRUCT_VTBL_FORMAT.format(cls=self.name)
         struct_id = api.get_struct_id(struct_name)
@@ -475,90 +616,11 @@ class FfxivClass:
             struct_id = api.create_struct(struct_name)
         else:
             api.clear_struct(struct_id)
-
-        # Iterate through each offset
-        for idx in range(0, self.vtbl_size):
-            vfunc_offset = self.vtbl_ea + idx * 8
-            vfunc_ea = api.get_qword(vfunc_offset)  # type: int
-
-            if idx in self.funcs:
-                func_name = self.funcs[idx]
-                full_func_name = self.NAMED_FUNC_FORMAT.format(cls=self.name, name=func_name)
-                api.set_addr_name(vfunc_ea, full_func_name)
-                api.add_struct_member(struct_id, func_name)
-            else:
-                current_func_name = api.get_addr_name(vfunc_ea)  # type: str
-
-                if current_func_name.startswith(self.JUMP_PREFIX):
-                    current_func_name = current_func_name.lstrip(self.JUMP_PREFIX)
-
-                parent_func_name = self._get_parent_func_name(idx)
-                if parent_func_name:
-                    parent_full_func_name = self.NAMED_FUNC_FORMAT.format(cls=self.name, name=parent_func_name)
-                else:
-                    parent_full_func_name = ""
-
-                if current_func_name.startswith(self.SUB_PREFIX):
-                    full_func_name = parent_full_func_name or self.GENERIC_SUB_FORMAT.format(cls=self.name, index=idx)
-                    struct_member_name = parent_func_name or self.STRUCT_GENERIC_SUB_FORMAT.format(index=idx)
-                elif current_func_name.startswith(self.NULLSUB_PREFIX):
-                    full_func_name = parent_full_func_name or self.GENERIC_NULLSUB_FORMAT.format(cls=self.name, index=idx)
-                    struct_member_name = parent_func_name or self.STRUCT_GENERIC_NULLSUB_FORMAT.format(index=idx)
-                elif current_func_name.startswith(self.LOC_PREFIX):
-                    full_func_name = parent_full_func_name or self.GENERIC_LOC_FORMAT.format(cls=self.name, index=idx)
-                    struct_member_name = parent_func_name or self.STRUCT_GENERIC_LOC_FORMAT.format(index=idx)
-                elif any(current_func_name.startswith(parent_class_name) for parent_class_name in self.hierarchy_names):
-                    full_func_name = None  # Not an override
-                    # Rework this at some point to get the actual parent name, minus the class?
-                    struct_member_name = current_func_name.split(".", 1)[-1]
-                elif current_func_name == self.PURECALL:
-                    full_func_name = None  # Ignored
-                    struct_member_name = self.STRUCT_PURECALL_FORMAT.format(index=idx)
-                elif current_func_name.startswith("?"):
-                    full_func_name = None  # Mangled? Probably a library
-                    struct_member_name = self.STRUCT_MANGLE_FORMAT.format(index=idx)
-                elif current_func_name.startswith("qword_"):
-                    print("Warning: qword in vtbl at 0x{0:X}, it may be an offset to undefined code".format(vfunc_offset))
-                    full_func_name = None
-                    struct_member_name = "qword{0}".format(idx)
-                    # TODO: How to handle this? Only observed instance so far is to unresolved code
-                    # 0x141696198 Client::Graphics::Scene::Human
-                    # 0x141696380 qword_140444F00, sub_140444F00, vf61
-                else:
-                    print("Error: Unexpected function name \"{0}\" at 0x{1:X}".format(current_func_name, self.vtbl_ea + idx * 8))
-                    full_func_name = None
-                    struct_member_name = "naming_error{0}".format(idx)
-
-                if full_func_name:
-                    api.set_addr_name(vfunc_ea, full_func_name)
-                api.add_struct_member(struct_id, struct_member_name)
-
-        # Running the script twice will undefine vast segments of the vtbl since theyre now structs
+        for struct_member_name in struct_member_names:
+            api.add_struct_member(struct_id, struct_member_name)
+        # Running the script twice will undefine vast segments of the vtbl since they're now structs
         # Need to work a method of not screwing that up.
         # api.convert_to_struct(self.vtbl_ea, struct_id)
-
-    def _get_parent_func_name(self, index):
-        """
-        Override vfuncs need to inherit their parent vfunc name, iterate through each parent in the
-        hierarchy until the base+index is within the base+parent_vtbl_range.
-        :param index: VFunc index
-        :type index: int
-        :return: Parent vfunc name or empty
-        :rtype: str
-        """
-        base = 0
-        parent_iter = iter(self.hierarchy)
-        parent = next(parent_iter, None)
-        while parent:
-            if base < index + base < parent.vtbl_size + base:
-                parent_func_name = parent.funcs.get(index, "")
-                if not parent_func_name:
-                    return parent._get_parent_func_name(index - base)
-                return parent_func_name
-            else:
-                base += parent.vtbl_size
-                parent = next(parent_iter, None)
-        return None
 
     def _write_funcs(self):
         """
@@ -568,20 +630,20 @@ class FfxivClass:
         for ea, func_name in self.funcs.items():
             if ea > 0x1000:
                 full_func_name = self.NAMED_FUNC_FORMAT.format(cls=self.name, name=func_name)
-                current_name = api.get_addr_name(ea)  # type: str
 
-                # strip jump prefixed
-                if current_name.startswith(self.JUMP_PREFIX):
-                    current_name = current_name.lstrip(self.JUMP_PREFIX)
+                current_func_name = api.get_addr_name(ea)  # type: str
+                if current_func_name.startswith(self.JUMP_PREFIX):
+                    current_func_name = current_func_name.lstrip(self.JUMP_PREFIX)
 
-                # same name? skip it
-                if current_name == full_func_name:
-                    continue
+                if current_func_name == full_func_name:
+                    continue  # same name? skip it
+                elif current_func_name == self.PURECALL:
+                    continue  # purecall? skip it
                 # check that the name is unnamed
-                elif any(current_name.startswith(prefix) for prefix in [self.SUB_PREFIX, self.NULLSUB_PREFIX, self.LOC_PREFIX]):
+                elif any(current_func_name.startswith(prefix) for prefix in [self.SUB_PREFIX, self.NULLSUB_PREFIX, self.LOC_PREFIX]):
                     api.set_addr_name(ea, full_func_name)
                 else:
-                    print("Warning: 0x{0:X} \"{1}\" was already named \"{2}\"".format(ea, func_name, current_name))
+                    print("Warning: 0x{0:X} \"{1}\" was already named \"{2}\"".format(ea, func_name, current_func_name))
 
     # endregion
 
@@ -687,7 +749,6 @@ factory.register("Client::System::Input::InputData::InputCodeModifiedInterface")
 factory.register("Client::System::Input::SoftKeyboardDeviceInterface::SoftKeyboardInputInterface")
 factory.register("Client::System::Input::TextServiceInterface::TextServiceEvent")
 factory.register("Client::System::Resource::Handle::ResourceHandleFactory")
-factory.register("Client::UI::AddonItemDetailBase")
 factory.register("Client::UI::Agent::AgentItemDetailBase")
 factory.register("Client::UI::Agent::AgentMap::MapMarkerStructSearch")
 factory.register("Client::UI::Atk2DMap")
@@ -707,196 +768,196 @@ factory.register("Component::Text::TextChecker::ExecNonMacroFunc")
 factory.register("Component::Text::TextModule")
 factory.register("Component::Text::TextModuleInterface")
 # Known classes
-factory.register(0x14164E260, "Common::Configuration::ConfigBase", ["Client::System::Common::NonCopyable"], {
+factory.register(0x14164E260, "Common::Configuration::ConfigBase", "Client::System::Common::NonCopyable", {
     0x140068C30: "ctor",
 })
-factory.register(0x14164E2C0, "Common::Configuration::SystemConfig", ["Common::Configuration::ConfigBase"], {
+factory.register(0x14164E2C0, "Common::Configuration::SystemConfig", "Common::Configuration::ConfigBase", {
     0x140078DE0: "ctor",
 })
-factory.register(0x14164E280, "Common::Configuration::UIConfig", ["Common::Configuration::ConfigBase"], {})
-factory.register(0x14164E2A0, "Common::Configuration::UIControlConfig", ["Common::Configuration::ConfigBase"], {})
-factory.register(0x14164E2E0, "Common::Configuration::DevConfig", ["Common::Configuration::ConfigBase"], {
+factory.register(0x14164E280, "Common::Configuration::UIConfig", "Common::Configuration::ConfigBase", {})
+factory.register(0x14164E2A0, "Common::Configuration::UIControlConfig", "Common::Configuration::ConfigBase", {})
+factory.register(0x14164E2E0, "Common::Configuration::DevConfig", "Common::Configuration::ConfigBase", {
     0x14007EA30: "ctor",
 })
-factory.register(0x14164F4B8, "Client::System::Framework::Framework", [], {
+factory.register(0x14164F4B8, "Client::System::Framework::Framework", "", {
     1: "Setup",
     4: "Tick",
     0x14008EA40: "ctor",
     0x140091EB0: "GetUIModule",
 })
-factory.register(0x14164F430, "Client::System::Framework::Task", [], {
+factory.register(0x14164F430, "Client::System::Framework::Task", "", {
     0x1400946B0: "TaskRunner",  # task starter which runs the task's function pointer
 })
-factory.register(0x14164F448, "Client::System::Framework::TaskManager::RootTask", ["Client::System::Framework::Task"], {})
-factory.register(0x14164F460, "Client::System::Framework::TaskManager", [], {
+factory.register(0x14164F448, "Client::System::Framework::TaskManager::RootTask", "Client::System::Framework::Task", {})
+factory.register(0x14164F460, "Client::System::Framework::TaskManager", "", {
     0x140093E60: "ctor",
     0x1401714F0: "SetTask",
 })
-factory.register(0x14164F478, "Client::System::Configuration::SystemConfig", ["Common::Configuration::SystemConfig"], {})
-factory.register(0x14164F498, "Client::System::Configuration::DevConfig", ["Common::Configuration::DevConfig"], {})
-factory.register(0x14164F4E0, "Component::Excel::ExcelModuleInterface", [], {})
-factory.register(0x141659488, "Component::GUI::AtkEventListener", [], {
+factory.register(0x14164F478, "Client::System::Configuration::SystemConfig", "Common::Configuration::SystemConfig", {})
+factory.register(0x14164F498, "Client::System::Configuration::DevConfig", "Common::Configuration::DevConfig", {})
+factory.register(0x14164F4E0, "Component::Excel::ExcelModuleInterface", "", {})
+factory.register(0x141659488, "Component::GUI::AtkEventListener", "", {
     2: "ReceiveEvent",
 })  # TODO: Verify this
-factory.register(0x1416594C0, "Component::GUI::AtkUnitList", [], {})
-factory.register(0x1416594C8, "Component::GUI::AtkUnitManager", ["Component::GUI::AtkEventListener"], {
+factory.register(0x1416594C0, "Component::GUI::AtkUnitList", "", {})
+factory.register(0x1416594C8, "Component::GUI::AtkUnitManager", "Component::GUI::AtkEventListener", {
     0x1404E5520: "ctor",
 })
-factory.register(0x141659620, "Client::UI::RaptureAtkUnitManager", ["Component::GUI::AtkUnitManager"], {
+factory.register(0x141659620, "Client::UI::RaptureAtkUnitManager", "Component::GUI::AtkUnitManager", {
     0x1400AAE50: "ctor",
     0x1404E7030: "GetAddonByName",  # dalamud GetUIObjByName
 })
-factory.register(0x141659878, "Client::UI::RaptureAtkModule", ["Component::GUI::AtkModule"], {
+factory.register(0x141659878, "Client::UI::RaptureAtkModule", "Component::GUI::AtkModule", {
     0x1400B06F0: "ctor",
     0x1400D37C0: "UpdateTask1",
     0x1400D6750: "IsUIVisible",
 })
-factory.register(0x141661D28, "Client::Graphics::Kernel::Notifier", [], {})
-factory.register(0x1416657C0, "Client::System::Crypt::Crc32", [], {})
-factory.register(0x14166BD10, "Client::Graphics::ReferencedClassBase", [], {})  # TODO: Verify this
-factory.register(0x14166BD58, "Client::Graphics::Environment::EnvSoundState", [], {})
-factory.register(0x14166BD78, "Client::Graphics::Environment::EnvState", [], {})
-factory.register(0x14166BDC8, "Client::Graphics::Environment::EnvSimulator", [], {})
-factory.register(0x14166BDD8, "Client::Graphics::Environment::EnvManager", ["Client::Graphics::Singleton"], {})
-factory.register(0x14166DA88, "Client::System::Resource::Handle::ResourceHandle", ["Client::System::Common::NonCopyable"], {
+factory.register(0x141661D28, "Client::Graphics::Kernel::Notifier", "", {})
+factory.register(0x1416657C0, "Client::System::Crypt::Crc32", "", {})
+factory.register(0x14166BD10, "Client::Graphics::ReferencedClassBase", "", {})  # TODO: Verify this
+factory.register(0x14166BD58, "Client::Graphics::Environment::EnvSoundState", "", {})
+factory.register(0x14166BD78, "Client::Graphics::Environment::EnvState", "", {})
+factory.register(0x14166BDC8, "Client::Graphics::Environment::EnvSimulator", "", {})
+factory.register(0x14166BDD8, "Client::Graphics::Environment::EnvManager", "Client::Graphics::Singleton", {})
+factory.register(0x14166DA88, "Client::System::Resource::Handle::ResourceHandle", "Client::System::Common::NonCopyable", {
     23: "GetData",
     33: "Load",
     0x1401A0130: "DecRef",
     0x1401A0160: "IncRef",
     0x1401A0320: "ctor",
 })
-factory.register(0x14166DC08, "Client::System::Resource::Handle::DefaultResourceHandle", ["Client::System::Resource::Handle::ResourceHandle"], {})
-factory.register(0x14166E088, "Client::System::Resource::Handle::TextureResourceHandle", ["Client::System::Resource::Handle::ResourceHandle"], {
+factory.register(0x14166DC08, "Client::System::Resource::Handle::DefaultResourceHandle", "Client::System::Resource::Handle::ResourceHandle", {})
+factory.register(0x14166E088, "Client::System::Resource::Handle::TextureResourceHandle", "Client::System::Resource::Handle::ResourceHandle", {
     0x1401A37E0: "ctor",
 })
-factory.register(0x14166E8B8, "Client::System::Resource::Handle::CharaMakeParameterResourceHandle", ["Client::System::Resource::Handle::DefaultResourceHandle"], {})
-factory.register(0x14166FB38, "Client::System::Resource::Handle::ApricotResourceHandle", ["Client::System::Resource::Handle::DefaultResourceHandle"], {})
-factory.register(0x1416729E8, "Client::System::Resource::Handle::UldResourceHandle", ["Client::System::Resource::Handle::DefaultResourceHandle"], {})
-factory.register(0x141672B50, "Client::System::Resource::Handle::UldResourceHandleFactory", ["Client::System::Resource::Handle::ResourceHandleFactory"], {})
-factory.register(0x141673178, "Client::Graphics::Primitive::Manager", ["Client::Graphics::Singleton"], {
+factory.register(0x14166E8B8, "Client::System::Resource::Handle::CharaMakeParameterResourceHandle", "Client::System::Resource::Handle::DefaultResourceHandle", {})
+factory.register(0x14166FB38, "Client::System::Resource::Handle::ApricotResourceHandle", "Client::System::Resource::Handle::DefaultResourceHandle", {})
+factory.register(0x1416729E8, "Client::System::Resource::Handle::UldResourceHandle", "Client::System::Resource::Handle::DefaultResourceHandle", {})
+factory.register(0x141672B50, "Client::System::Resource::Handle::UldResourceHandleFactory", "Client::System::Resource::Handle::ResourceHandleFactory", {})
+factory.register(0x141673178, "Client::Graphics::Primitive::Manager", "Client::Graphics::Singleton", {
     0x1401D1F60: "ctor",
 })
-factory.register(0x141673338, "Client::Graphics::DelayedReleaseClassBase", ["Client::Graphics::ReferencedClassBase"], {
+factory.register(0x141673338, "Client::Graphics::DelayedReleaseClassBase", "Client::Graphics::ReferencedClassBase", {
     0x1401D48C0: "ctor",
 })
-factory.register(0x141673360, "Client::Graphics::IAllocator", [], {})
-factory.register(0x1416734B0, "Client::Graphics::AllocatorLowLevel", ["Client::Graphics::IAllocator"], {})
-factory.register(0x141673568, "Client::Graphics::AllocatorManager", ["Client::Graphics::Singleton"], {
+factory.register(0x141673360, "Client::Graphics::IAllocator", "", {})
+factory.register(0x1416734B0, "Client::Graphics::AllocatorLowLevel", "Client::Graphics::IAllocator", {})
+factory.register(0x141673568, "Client::Graphics::AllocatorManager", "Client::Graphics::Singleton", {
     0x1401D6E40: "ctor",
 })
-factory.register(0x141674968, "Client::Network::NetworkModuleProxy", ["Client::System::Common::NonCopyable"], {
+factory.register(0x141674968, "Client::Network::NetworkModuleProxy", "Client::System::Common::NonCopyable", {
     0x1401EC090: "ctor",
 })
-factory.register(0x141675928, "Client::UI::Agent::AgentInterface", ["Component::GUI::AtkModuleInterface::AtkEventInterface"], {
+factory.register(0x141675928, "Client::UI::Agent::AgentInterface", "Component::GUI::AtkModuleInterface::AtkEventInterface", {
     2: "Show",
     3: "Hide",
     4: "IsAgentActive",
     5: "Update",
     0x1401EDCA0: "ctor",
 })
-factory.register(0x141675998, "Client::UI::Agent::AgentCharaMake", ["Client::UI::Agent::AgentInterface"], {})
-factory.register(0x141675D70, "Client::UI::Agent::AgentModule", [], {
+factory.register(0x141675998, "Client::UI::Agent::AgentCharaMake", "Client::UI::Agent::AgentInterface", {})
+factory.register(0x141675D70, "Client::UI::Agent::AgentModule", "", {
     0x1401F60A0: "ctor",
     0x1401FB300: "GetAgentByInternalID",
     0x1401FB310: "GetAgentByInternalID_2",  # dupe?
 })
-factory.register(0x141676AE0, "Client::UI::Agent::AgentCursor", ["Client::UI::Agent::AgentInterface"], {})
-factory.register(0x141676B50, "Client::UI::Agent::AgentCursorLocation", ["Client::UI::Agent::AgentInterface"], {})
-factory.register(0x14167E120, "Client::Graphics::Kernel::Texture", ["Client::Graphics::Kernel::Resource"], {
+factory.register(0x141676AE0, "Client::UI::Agent::AgentCursor", "Client::UI::Agent::AgentInterface", {})
+factory.register(0x141676B50, "Client::UI::Agent::AgentCursorLocation", "Client::UI::Agent::AgentInterface", {})
+factory.register(0x14167E120, "Client::Graphics::Kernel::Texture", "Client::Graphics::DelayedReleaseClassBase", {
     0x1402F99E0: "ctor",
 })
-factory.register(0x14167E3A8, "Client::Graphics::Kernel::ConstantBuffer", ["Client::Graphics::Kernel::Buffer"], {})
-factory.register(0x14167E430, "Client::Graphics::Kernel::Device", ["Client::Graphics::Singleton"], {
+factory.register(0x14167E3A8, "Client::Graphics::Kernel::ConstantBuffer", "Client::Graphics::DelayedReleaseClassBase", {})
+factory.register(0x14167E430, "Client::Graphics::Kernel::Device", "Client::Graphics::Singleton", {
     0x140301050: "ctor",
 })
-factory.register(0x1416856A8, "Client::Graphics::Kernel::ShaderSceneKey", [], {})
-factory.register(0x1416856B0, "Client::Graphics::Kernel::ShaderSubViewKey", [], {})
-factory.register(0x1416856C8, "Client::Graphics::Render::GraphicsConfig", ["Client::Graphics::Singleton"], {
+factory.register(0x1416856A8, "Client::Graphics::Kernel::ShaderSceneKey", "", {})
+factory.register(0x1416856B0, "Client::Graphics::Kernel::ShaderSubViewKey", "", {})
+factory.register(0x1416856C8, "Client::Graphics::Render::GraphicsConfig", "Client::Graphics::Singleton", {
     0x14031FD90: "ctor",
 })
-factory.register(0x141685708, "Client::Graphics::Render::ShadowCamera", ["Client::Graphics::Render::Camera"], {})
-factory.register(0x141685850, "Client::Graphics::Render::View", [], {})
-factory.register(0x1416858D8, "Client::Graphics::Render::PostBoneDeformerBase", ["Client::Graphics::RenderObjectList"], {})
-factory.register(0x1416859C0, "Client::Graphics::Render::AmbientLight", [], {
+factory.register(0x141685708, "Client::Graphics::Render::ShadowCamera", "Client::Graphics::Render::Camera", {})
+factory.register(0x141685850, "Client::Graphics::Render::View", "", {})
+factory.register(0x1416858D8, "Client::Graphics::Render::PostBoneDeformerBase", "Client::Graphics::RenderObjectList", {})
+factory.register(0x1416859C0, "Client::Graphics::Render::AmbientLight", "", {
     0x140329770: "ctor",
 })
-factory.register(0x1416859D0, "Client::Graphics::Render::Model", ["Client::Graphics::RenderObjectList"], {
+factory.register(0x1416859D0, "Client::Graphics::Render::Model", "Client::Graphics::RenderObjectList", {
     0x14032B6E0: "ctor",
     0x14032B830: "SetupFromModelResourceHandle",
 })
-factory.register(0x141685A50, "Client::Graphics::Render::BaseRenderer", [], {})  # TODO: Verify this
-factory.register(0x141685A88, "Client::Graphics::Render::ModelRenderer_Client::Graphics::JobSystem_Client::Graphics::Render::ModelRenderer::RenderJob", [], {})
-factory.register(0x141685A90, "Client::Graphics::Render::ModelRenderer", ["Client::Graphics::Render::BaseRenderer"], {})
-factory.register(0x141685AB8, "Client::Graphics::Render::GeometryInstancingRenderer", ["Client::Graphics::Render::BaseRenderer"], {})
-factory.register(0x141685B60, "Client::Graphics::Render::BGInstancingRenderer_Client::Graphics::JobSystem_CClient::Graphics::Render::tagInstancingContainerRenderInfo", [], {})
-factory.register(0x141685B68, "Client::Graphics::Render::BGInstancingRenderer", ["Client::Graphics::Render::GeometryInstancingRenderer"], {})
-factory.register(0x141685BD0, "Client::Graphics::Render::TerrainRenderer_Client::Graphics::JobSystem_Client::Graphics::Render::TerrainRenderer::RenderJob", [], {})
-factory.register(0x141685BD8, "Client::Graphics::Render::TerrainRenderer", ["Client::Graphics::Render::BaseRenderer"], {})
-factory.register(0x141685C48, "Client::Graphics::Render::UnknownRenderer", ["Client::Graphics::Render::BaseRenderer"], {})
-factory.register(0x141685CB0, "Client::Graphics::Render::WaterRenderer_Client::Graphics::JobSystem_Client::Graphics::Render::WaterRenderer::RenderJob", [], {})
-factory.register(0x141685CB8, "Client::Graphics::Render::WaterRenderer", ["Client::Graphics::Render::BaseRenderer"], {})
-factory.register(0x141685DA0, "Client::Graphics::Render::VerticalFogRenderer_Client::Graphics::JobSystem_Client::Graphics::Render::VerticalFogRenderer::RenderJob", [], {})
-factory.register(0x141685DA8, "Client::Graphics::Render::VerticalFogRenderer", ["Client::Graphics::Render::BaseRenderer"], {})
-factory.register(0x141685EC0, "Client::Graphics::Render::ShadowMaskUnit", [], {})
-factory.register(0x141685ED8, "Client::Graphics::Render::ShaderManager", [], {})
-factory.register(0x141685EE8, "Client::Graphics::Render::Manager_Client::Graphics::JobSystem_Client::Graphics::Render::Manager::BoneCollectorJob", [], {})
-factory.register(0x141685EF0, "Client::Graphics::Render::Updater_Client::Graphics::Render::PostBoneDeformerBase", [], {})
-factory.register(0x141685EF8, "Client::Graphics::Render::Manager", ["Client::Graphics::Singleton"], {})
-factory.register(0x141685F10, "Client::Graphics::Render::ShadowManager", [], {
+factory.register(0x141685A50, "Client::Graphics::Render::BaseRenderer", "", {})  # TODO: Verify this
+factory.register(0x141685A88, "Client::Graphics::Render::ModelRenderer_Client::Graphics::JobSystem_Client::Graphics::Render::ModelRenderer::RenderJob", "", {})
+factory.register(0x141685A90, "Client::Graphics::Render::ModelRenderer", "Client::Graphics::Render::BaseRenderer", {})
+factory.register(0x141685AB8, "Client::Graphics::Render::GeometryInstancingRenderer", "Client::Graphics::Render::BaseRenderer", {})
+factory.register(0x141685B60, "Client::Graphics::Render::BGInstancingRenderer_Client::Graphics::JobSystem_CClient::Graphics::Render::tagInstancingContainerRenderInfo", "", {})
+factory.register(0x141685B68, "Client::Graphics::Render::BGInstancingRenderer", "Client::Graphics::Render::GeometryInstancingRenderer", {})
+factory.register(0x141685BD0, "Client::Graphics::Render::TerrainRenderer_Client::Graphics::JobSystem_Client::Graphics::Render::TerrainRenderer::RenderJob", "", {})
+factory.register(0x141685BD8, "Client::Graphics::Render::TerrainRenderer", "Client::Graphics::Render::BaseRenderer", {})
+factory.register(0x141685C48, "Client::Graphics::Render::UnknownRenderer", "Client::Graphics::Render::BaseRenderer", {})
+factory.register(0x141685CB0, "Client::Graphics::Render::WaterRenderer_Client::Graphics::JobSystem_Client::Graphics::Render::WaterRenderer::RenderJob", "", {})
+factory.register(0x141685CB8, "Client::Graphics::Render::WaterRenderer", "Client::Graphics::Render::BaseRenderer", {})
+factory.register(0x141685DA0, "Client::Graphics::Render::VerticalFogRenderer_Client::Graphics::JobSystem_Client::Graphics::Render::VerticalFogRenderer::RenderJob", "", {})
+factory.register(0x141685DA8, "Client::Graphics::Render::VerticalFogRenderer", "Client::Graphics::Render::BaseRenderer", {})
+factory.register(0x141685EC0, "Client::Graphics::Render::ShadowMaskUnit", "", {})
+factory.register(0x141685ED8, "Client::Graphics::Render::ShaderManager", "", {})
+factory.register(0x141685EE8, "Client::Graphics::Render::Manager_Client::Graphics::JobSystem_Client::Graphics::Render::Manager::BoneCollectorJob", "", {})
+factory.register(0x141685EF0, "Client::Graphics::Render::Updater_Client::Graphics::Render::PostBoneDeformerBase", "", {})
+factory.register(0x141685EF8, "Client::Graphics::Render::Manager", "Client::Graphics::Singleton", {})
+factory.register(0x141685F10, "Client::Graphics::Render::ShadowManager", "", {
     0x140365C50: "ctor",
 })
-factory.register(0x141685F20, "Client::Graphics::Render::LightingManager::LightShape", [], {})
-factory.register(0x141685F28, "Client::Graphics::Render::LightingManager::LightingRenderer_Client::Graphics::JobSystem_Client::Graphics::Render::LightingManager::LightingRenderer::RenderJob", [], {})
-factory.register(0x141685F30, "Client::Graphics::Render::LightingManager::LightingRenderer", [], {
+factory.register(0x141685F20, "Client::Graphics::Render::LightingManager::LightShape", "", {})
+factory.register(0x141685F28, "Client::Graphics::Render::LightingManager::LightingRenderer_Client::Graphics::JobSystem_Client::Graphics::Render::LightingManager::LightingRenderer::RenderJob", "", {})
+factory.register(0x141685F30, "Client::Graphics::Render::LightingManager::LightingRenderer", "", {
     0x14036A280: "ctor",
 })
-factory.register(0x141685F38, "Client::Graphics::Render::LightingManager", ["Client::Graphics::Singleton"], {
+factory.register(0x141685F38, "Client::Graphics::Render::LightingManager", "Client::Graphics::Singleton", {
     0x140374B30: "ctor",
 })
-factory.register(0x141685F40, "Client::Graphics::Render::LightingManager_Client::Graphics::Kernel::Notifier", ["Client::Graphics::Kernel::Notifier"], {})
-factory.register(0x141685F60, "Client::Graphics::Render::RenderTargetManager", ["Client::Graphics::Singleton"], {
+factory.register(0x141685F40, "Client::Graphics::Render::LightingManager_Client::Graphics::Kernel::Notifier", "Client::Graphics::Kernel::Notifier", {})
+factory.register(0x141685F60, "Client::Graphics::Render::RenderTargetManager", "Client::Graphics::Singleton", {
     0x140375310: "ctor",
 })
-factory.register(0x141685F68, "Client::Graphics::Render::RenderTargetManager_Client::Graphics::Kernel::Notifier", ["Client::Graphics::Kernel::Notifier"], {})
-factory.register(0x1416885D8, "Client::Graphics::PostEffect::PostEffectChain", [], {})
-factory.register(0x1416885E0, "Client::Graphics::PostEffect::PostEffectRainbow", [], {})
-factory.register(0x1416885E8, "Client::Graphics::PostEffect::PostEffectLensFlare", [], {})
-factory.register(0x1416885F0, "Client::Graphics::PostEffect::PostEffectRoofQuery", [], {})
-factory.register(0x141688600, "Client::Graphics::PostEffect::PostEffectManager", ["Client::Graphics::Singleton"], {
+factory.register(0x141685F68, "Client::Graphics::Render::RenderTargetManager_Client::Graphics::Kernel::Notifier", "Client::Graphics::Kernel::Notifier", {})
+factory.register(0x1416885D8, "Client::Graphics::PostEffect::PostEffectChain", "", {})
+factory.register(0x1416885E0, "Client::Graphics::PostEffect::PostEffectRainbow", "", {})
+factory.register(0x1416885E8, "Client::Graphics::PostEffect::PostEffectLensFlare", "", {})
+factory.register(0x1416885F0, "Client::Graphics::PostEffect::PostEffectRoofQuery", "", {})
+factory.register(0x141688600, "Client::Graphics::PostEffect::PostEffectManager", "Client::Graphics::Singleton", {
     0x1403960C0: "ctor",
 })
-factory.register(0x141688608, "Client::Graphics::PostEffect::PostEffectManager_Client::Graphics::Kernel::Notifier", ["Client::Graphics::Kernel::Notifier"], {})
-factory.register(0x14168C238, "Client::Graphics::JobSystem(Apricot::Engine::Core_Apricot::Engine::Core::CoreJob_1)", [], {
+factory.register(0x141688608, "Client::Graphics::PostEffect::PostEffectManager_Client::Graphics::Kernel::Notifier", "Client::Graphics::Kernel::Notifier", {})
+factory.register(0x14168C238, "Client::Graphics::JobSystem(Apricot::Engine::Core_Apricot::Engine::Core::CoreJob_1)", "", {
     0x1403DD220: "ctor",
     0x1403DD450: "GetSingleton",
 })
-factory.register(0x1416959D0, "Client::Graphics::Scene::Object", [], {})
-factory.register(0x141695A00, "Client::Graphics::Scene::DrawObject", ["Client::Graphics::Scene::Object"], {
+factory.register(0x1416959D0, "Client::Graphics::Scene::Object", "", {})
+factory.register(0x141695A00, "Client::Graphics::Scene::DrawObject", "Client::Graphics::Scene::Object", {
     0: "dtor",
     1: "CleanupRender",
     4: "UpdateRender",
     11: "UpdateMaterials",
     0x14042BD90: "ctor",
 })
-factory.register(0x141695B98, "Client::Graphics::Scene::World_Client::Graphics::JobSystem_Client::Graphics::Scene::World::SceneUpdateJob", [], {})
-factory.register(0x141695BA0, "Client::Graphics::Scene::World", ["Client::Graphics::Scene::Object"], {
+factory.register(0x141695B98, "Client::Graphics::Scene::World_Client::Graphics::JobSystem_Client::Graphics::Scene::World::SceneUpdateJob", "", {})
+factory.register(0x141695BA0, "Client::Graphics::Scene::World", "Client::Graphics::Scene::Object", {
     0x14042C340: "ctor",
 })
-factory.register(0x141695BD0, "Client::Graphics::Scene::World_Client::Graphics::Singleton", ["Client::Graphics::Singleton"], {})
-factory.register(0x141695BD8, "Client::Graphics::Scene::Camera", ["Client::Graphics::Scene::Object"], {
+factory.register(0x141695BD0, "Client::Graphics::Scene::World_Client::Graphics::Singleton", "Client::Graphics::Singleton", {})
+factory.register(0x141695BD8, "Client::Graphics::Scene::Camera", "Client::Graphics::Scene::Object", {
     0x14042C600: "ctor",
 })
-factory.register(0x141695C38, "Client::Graphics::Scene::CameraManager_Client::Graphics::Singleton", [], {})
-factory.register(0x141695C40, "Client::Graphics::Scene::CameraManager", [], {
+factory.register(0x141695C38, "Client::Graphics::Scene::CameraManager_Client::Graphics::Singleton", "", {})
+factory.register(0x141695C40, "Client::Graphics::Scene::CameraManager", "", {
     0x14042E0D0: "ctor",
 })
-factory.register(0x141695E08, "Client::Graphics::Scene::CharacterUtility", ["Client::Graphics::Singleton"], {
+factory.register(0x141695E08, "Client::Graphics::Scene::CharacterUtility", "Client::Graphics::Singleton", {
     0x140431800: "ctor",
     0x140431A10: "CreateDXRenderObjects",
     0x140431E60: "LoadDataFiles",
     0x140435BE0: "GetSlotEqpFlags",
 })
-factory.register(0x141695E88, "Client::Graphics::Scene::CharacterBase", ["Client::Graphics::Scene::DrawObject"], {
+factory.register(0x141695E88, "Client::Graphics::Scene::CharacterBase", "Client::Graphics::Scene::DrawObject", {
     67: "FlagSlotForUpdate",
     68: "GetDataForSlot",
     73: "ResolveMDLPath",
@@ -917,43 +978,43 @@ factory.register(0x141695E88, "Client::Graphics::Scene::CharacterBase", ["Client
     0x1404400C0: "PopulateMaterialsFromStaging",
     0x140440210: "LoadMDLSubFilesIntoStaging",
     0x140440420: "LoadMDLSubFilesForSlot",
-    0x14045FE80: "dtor",
+    0x14045FE80: "dtor2",  # Called by base dtor
     0x1406E3530: "Create",
 })
-factory.register(0x141696198, "Client::Graphics::Scene::Human", ["Client::Graphics::Scene::CharacterBase"], {
+factory.register(0x141696198, "Client::Graphics::Scene::Human", "Client::Graphics::Scene::CharacterBase", {
     0x140443EF0: "ctor",
     0x140444130: "SetupFromCharacterData",
 })
-factory.register(0x141697860, "Client::Graphics::Scene::ResidentResourceManager::ResourceList", [], {})
-factory.register(0x141697870, "Client::Graphics::Scene::ResidentResourceManager", ["Client::Graphics::Singleton"], {
+factory.register(0x141697860, "Client::Graphics::Scene::ResidentResourceManager::ResourceList", "", {})
+factory.register(0x141697870, "Client::Graphics::Scene::ResidentResourceManager", "Client::Graphics::Singleton", {
     0x14045E2D0: "ctor",
     0x14045E300: "nullsub_1",
     0x14045E330: "LoadDataFiles",
 })
-factory.register(0x141697950, "Client::System::Task::SpursJobEntityWorkerThread", ["Client::Graphics::Singleton"], {})
-factory.register(0x141697D58, "Common::Lua::LuaState", [], {})
-factory.register(0x141697D60, "Common::Lua::LuaThread", ["Common::Lua::LuaState"], {})
-factory.register(0x141698A90, "Client::Game::Control::TargetSystem::AggroListFeeder", ["Client::Game::Control::TargetSystem::ListFeeder"], {})
-factory.register(0x141698AA0, "Client::Game::Control::TargetSystem::AllianceListFeeder", ["Client::Game::Control::TargetSystem::ListFeeder"], {})
-factory.register(0x141698AB0, "Client::Game::Control::TargetSystem::PartyListFeeder", ["Client::Game::Control::TargetSystem::ListFeeder"], {})
-factory.register(0x141698B00, "Client::Game::Control::TargetSystem", ["Client::Game::Object::IGameObjectEventListener"], {
+factory.register(0x141697950, "Client::System::Task::SpursJobEntityWorkerThread", "Client::Graphics::Singleton", {})
+factory.register(0x141697D58, "Common::Lua::LuaState", "", {})
+factory.register(0x141697D60, "Common::Lua::LuaThread", "Common::Lua::LuaState", {})
+factory.register(0x141698A90, "Client::Game::Control::TargetSystem::AggroListFeeder", "Client::Game::Control::TargetSystem::ListFeeder", {})
+factory.register(0x141698AA0, "Client::Game::Control::TargetSystem::AllianceListFeeder", "Client::Game::Control::TargetSystem::ListFeeder", {})
+factory.register(0x141698AB0, "Client::Game::Control::TargetSystem::PartyListFeeder", "Client::Game::Control::TargetSystem::ListFeeder", {})
+factory.register(0x141698B00, "Client::Game::Control::TargetSystem", "Client::Game::Object::IGameObjectEventListener", {
     0x140493860: "ctor",
     0x14049E380: "IsActorInViewRange",
 })
-factory.register(0x14169A300, "Component::GUI::AtkArrayData", [], {})
-factory.register(0x14169A310, "Component::GUI::NumberArrayData", ["Component::GUI::AtkArrayData"], {
+factory.register(0x14169A300, "Component::GUI::AtkArrayData", "", {})
+factory.register(0x14169A310, "Component::GUI::NumberArrayData", "Component::GUI::AtkArrayData", {
     0x1404AAC90: "SetValue",
 })
-factory.register(0x14169A320, "Component::GUI::StringArrayData", ["Component::GUI::AtkArrayData"], {})
-factory.register(0x14169A330, "Component::GUI::ExtendArrayData", ["Component::GUI::AtkArrayData"], {})
-factory.register(0x14169A3C8, "Component::GUI::AtkEventTarget", [], {})  # TODO: Verify this
-factory.register(0x14169A438, "Component::GUI::AtkSimpleTween", ["Component::GUI::AtkEventTarget"], {})
-factory.register(0x14169A448, "Component::GUI::AtkTexture", [], {})
-factory.register(0x14169A5A8, "Component::GUI::AtkStage", ["Component::GUI::AtkEventTarget"], {
+factory.register(0x14169A320, "Component::GUI::StringArrayData", "Component::GUI::AtkArrayData", {})
+factory.register(0x14169A330, "Component::GUI::ExtendArrayData", "Component::GUI::AtkArrayData", {})
+factory.register(0x14169A3C8, "Component::GUI::AtkEventTarget", "", {})  # TODO: Verify this
+factory.register(0x14169A438, "Component::GUI::AtkSimpleTween", "Component::GUI::AtkEventTarget", {})
+factory.register(0x14169A448, "Component::GUI::AtkTexture", "", {})
+factory.register(0x14169A5A8, "Component::GUI::AtkStage", "Component::GUI::AtkEventTarget", {
     0x1404BCA70: "ctor",
     0x1404DDF50: "GetSingleton1",  # dalamud GetBaseUIObject
 })
-factory.register(0x14169AE50, "Component::GUI::AtkResNode", ["Component::GUI::AtkEventTarget"], {
+factory.register(0x14169AE50, "Component::GUI::AtkResNode", "Component::GUI::AtkEventTarget", {
     1: "Destroy",
     0x1404CC760: "ctor",
     0x1404CC8C0: "GetAsAtkImageNode",
@@ -975,28 +1036,28 @@ factory.register(0x14169AE50, "Component::GUI::AtkResNode", ["Component::GUI::At
     0x1404CE790: "Init",
     0x1404CE960: "SetScale0",  # SetScale jumps to this
 })
-factory.register(0x14169AE68, "Component::GUI::AtkImageNode", ["Component::GUI::AtkResNode"], {
+factory.register(0x14169AE68, "Component::GUI::AtkImageNode", "Component::GUI::AtkResNode", {
     0x14053FA10: "ctor",
 })
-factory.register(0x14169AE80, "Component::GUI::AtkTextNode", ["Component::GUI::AtkResNode"], {
+factory.register(0x14169AE80, "Component::GUI::AtkTextNode", "Component::GUI::AtkResNode", {
     0x14053FBC0: "ctor",
     0x1404CF250: "SetText",
     0x1404CFD80: "SetForegroundColour",
     0x1404D0EA0: "SetGlowColour",
 })
-factory.register(0x14169AE98, "Component::GUI::AtkNineGridNode", ["Component::GUI::AtkResNode"], {
+factory.register(0x14169AE98, "Component::GUI::AtkNineGridNode", "Component::GUI::AtkResNode", {
     0x14053FA70: "ctor",
 })
-factory.register(0x14169AEB0, "Component::GUI::AtkCounterNode", ["Component::GUI::AtkResNode"], {
+factory.register(0x14169AEB0, "Component::GUI::AtkCounterNode", "Component::GUI::AtkResNode", {
     0x14053F990: "ctor",
 })
-factory.register(0x14169AEC8, "Component::GUI::AtkCollisionNode", ["Component::GUI::AtkResNode"], {
+factory.register(0x14169AEC8, "Component::GUI::AtkCollisionNode", "Component::GUI::AtkResNode", {
     0x14053F8D0: "ctor",
 })
-factory.register(0x14169AEE0, "Component::GUI::AtkComponentNode", ["Component::GUI::AtkResNode"], {
+factory.register(0x14169AEE0, "Component::GUI::AtkComponentNode", "Component::GUI::AtkResNode", {
     0x14053F930: "ctor",
 })
-factory.register(0x14169AEF8, "Component::GUI::AtkUnitBase", ["Component::GUI::AtkEventListener"], {
+factory.register(0x14169AEF8, "Component::GUI::AtkUnitBase", "Component::GUI::AtkEventListener", {
     0: "dtor",
     8: "SetPosition",
     9: "SetX",
@@ -1008,7 +1069,7 @@ factory.register(0x14169AEF8, "Component::GUI::AtkUnitBase", ["Component::GUI::A
     15: "SetScale",
     39: "Draw",
     41: "LoadUldResourceHandle",
-    47: "UpdateAddon", 
+    47: "UpdateAddon",
     0x1404DA7B0: "ctor",
     0x1404DAF10: "SetPosition",
     0x1404DB090: "SetAlpha",
@@ -1019,145 +1080,145 @@ factory.register(0x14169AEF8, "Component::GUI::AtkUnitBase", ["Component::GUI::A
     0x1404D6080: "ULDAddonData_ReadTPHD",
     0x1404D6290: "ULDAddonData_ReadAHSDAndLoadTextures",
 })
-factory.register(0x14169B188, "Component::GUI::AtkComponentBase", ["Component::GUI::AtkEventListener"], {
+factory.register(0x14169B188, "Component::GUI::AtkComponentBase", "Component::GUI::AtkEventListener", {
     10: "SetEnabledState",
     17: "InitializeFromComponentData",
     0x1404F2720: "ctor",
     0x1404F29D0: "GetOwnerNodePosition",
 })
-factory.register(0x14169B228, "Component::GUI::AtkComponentButton", ["Component::GUI::AtkComponentBase"], {
+factory.register(0x14169B228, "Component::GUI::AtkComponentButton", "Component::GUI::AtkComponentBase", {
     0x1404F3E50: "ctor",
 })
-factory.register(0x14169B2F0, "Component::GUI::AtkComponentIcon", ["Component::GUI::AtkComponentBase"], {
+factory.register(0x14169B2F0, "Component::GUI::AtkComponentIcon", "Component::GUI::AtkComponentBase", {
     0x1404F6390: "ctor",
 })
-factory.register(0x14169B410, "Component::GUI::AtkComponentListItemRenderer", ["Component::GUI::AtkComponentButton"], {
+factory.register(0x14169B410, "Component::GUI::AtkComponentListItemRenderer", "Component::GUI::AtkComponentButton", {
     0x1404F6ED0: "ctor",
 })
-factory.register(0x14169B580, "Component::GUI::AtkComponentList", ["Component::GUI::AtkComponentBase"], {
+factory.register(0x14169B580, "Component::GUI::AtkComponentList", "Component::GUI::AtkComponentBase", {
     0x140502120: "ctor",
 })
-factory.register(0x14169B6E8, "Component::GUI::AtkComponentTreeList", ["Component::GUI::AtkComponentList"], {
+factory.register(0x14169B6E8, "Component::GUI::AtkComponentTreeList", "Component::GUI::AtkComponentList", {
     0x140506AB0: "ctor",
 })
-factory.register(0x14169B850, "Component::GUI::AtkModule", ["Component::GUI::AtkModuleInterface"], {
+factory.register(0x14169B850, "Component::GUI::AtkModule", "Component::GUI::AtkModuleInterface", {
     39: "SetUIVisibility",
     0x14050B720: "ctor",
 })
-factory.register(0x14169BAF8, "Component::GUI::AtkComponentCheckBox", ["Component::GUI::AtkComponentButton"], {
+factory.register(0x14169BAF8, "Component::GUI::AtkComponentCheckBox", "Component::GUI::AtkComponentButton", {
     0x14050F6D0: "ctor",
 })
-factory.register(0x14169BBC8, "Component::GUI::AtkComponentGaugeBar", ["Component::GUI::AtkComponentBase"], {
+factory.register(0x14169BBC8, "Component::GUI::AtkComponentGaugeBar", "Component::GUI::AtkComponentBase", {
     0x1405105F0: "ctor",
 })
-factory.register(0x14169BC68, "Component::GUI::AtkComponentSlider", ["Component::GUI::AtkComponentBase"], {
+factory.register(0x14169BC68, "Component::GUI::AtkComponentSlider", "Component::GUI::AtkComponentBase", {
     0x140512720: "ctor",
 })
-factory.register(0x14169BD08, "Component::GUI::AtkComponentInputBase", ["Component::GUI::AtkComponentBase"], {
+factory.register(0x14169BD08, "Component::GUI::AtkComponentInputBase", "Component::GUI::AtkComponentBase", {
     0x140513B30: "ctor",
 })
-factory.register(0x14169BDA8, "Component::GUI::AtkComponentTextInput", ["Component::GUI::AtkComponentInputBase"], {
+factory.register(0x14169BDA8, "Component::GUI::AtkComponentTextInput", "Component::GUI::AtkComponentInputBase", {
     0x1405152F0: "ctor",
 })
-factory.register(0x14169BEA8, "Component::GUI::AtkComponentNumericInput", ["Component::GUI::AtkComponentInputBase"], {
+factory.register(0x14169BEA8, "Component::GUI::AtkComponentNumericInput", "Component::GUI::AtkComponentInputBase", {
     0x140519A00: "ctor",
 })
-factory.register(0x14169BF70, "Component::GUI::AtkComponentDropDownList", ["Component::GUI::AtkComponentBase"], {
+factory.register(0x14169BF70, "Component::GUI::AtkComponentDropDownList", "Component::GUI::AtkComponentBase", {
     0x14051D6A0: "ctor",
 })
-factory.register(0x14169C010, "Component::GUI::AtkComponentRadioButton", ["Component::GUI::AtkComponentButton"], {
+factory.register(0x14169C010, "Component::GUI::AtkComponentRadioButton", "Component::GUI::AtkComponentButton", {
     0x14051EB90: "ctor",
 })
-factory.register(0x14169C120, "Component::GUI::AtkComponentTab", ["Component::GUI::AtkComponentRadioButton"], {
+factory.register(0x14169C120, "Component::GUI::AtkComponentTab", "Component::GUI::AtkComponentRadioButton", {
     0x14051F460: "ctor",
 })
-factory.register(0x14169C230, "Component::GUI::AtkComponentGuildLeveCard", ["Component::GUI::AtkComponentBase"], {
+factory.register(0x14169C230, "Component::GUI::AtkComponentGuildLeveCard", "Component::GUI::AtkComponentBase", {
     0x14051FA40: "ctor",
 })
-factory.register(0x14169C2D0, "Component::GUI::AtkComponentTextNineGrid", ["Component::GUI::AtkComponentBase"], {
+factory.register(0x14169C2D0, "Component::GUI::AtkComponentTextNineGrid", "Component::GUI::AtkComponentBase", {
     0x14051FDD0: "ctor",
 })
-factory.register(0x14169C370, "Component::GUI::AtkResourceRendererBase", [], {})
-factory.register(0x14169C388, "Component::GUI::AtkImageNodeRenderer", ["Component::GUI::AtkResourceRendererBase"], {})
-factory.register(0x14169C3A0, "Component::GUI::AtkTextNodeRenderer", ["Component::GUI::AtkResourceRendererBase"], {})
-factory.register(0x14169C3C0, "Component::GUI::AtkNineGridNodeRenderer", ["Component::GUI::AtkResourceRendererBase"], {})
-factory.register(0x14169C3D8, "Component::GUI::AtkCounterNodeRenderer", ["Component::GUI::AtkResourceRendererBase"], {})
-factory.register(0x14169C3F0, "Component::GUI::AtkComponentNodeRenderer", ["Component::GUI::AtkResourceRendererBase"], {})
-factory.register(0x14169C408, "Component::GUI::AtkResourceRendererManager", [], {
+factory.register(0x14169C370, "Component::GUI::AtkResourceRendererBase", "", {})
+factory.register(0x14169C388, "Component::GUI::AtkImageNodeRenderer", "Component::GUI::AtkResourceRendererBase", {})
+factory.register(0x14169C3A0, "Component::GUI::AtkTextNodeRenderer", "Component::GUI::AtkResourceRendererBase", {})
+factory.register(0x14169C3C0, "Component::GUI::AtkNineGridNodeRenderer", "Component::GUI::AtkResourceRendererBase", {})
+factory.register(0x14169C3D8, "Component::GUI::AtkCounterNodeRenderer", "Component::GUI::AtkResourceRendererBase", {})
+factory.register(0x14169C3F0, "Component::GUI::AtkComponentNodeRenderer", "Component::GUI::AtkResourceRendererBase", {})
+factory.register(0x14169C408, "Component::GUI::AtkResourceRendererManager", "", {
     0x1405229E0: "ctor",
     0x140522BE0: "DrawUldFromData",
     0x140522CC0: "DrawUldFromDataClipped",
 })
-factory.register(0x14169C428, "Component::GUI::AtkComponentMap", ["Component::GUI::AtkComponentBase"], {
+factory.register(0x14169C428, "Component::GUI::AtkComponentMap", "Component::GUI::AtkComponentBase", {
     0x1405251D0: "ctor",
 })
-factory.register(0x14169C4C8, "Component::GUI::AtkComponentPreview", ["Component::GUI::AtkComponentBase"], {
+factory.register(0x14169C4C8, "Component::GUI::AtkComponentPreview", "Component::GUI::AtkComponentBase", {
     0x140527C00: "ctor",
 })
-factory.register(0x14169C568, "Component::GUI::AtkComponentScrollBar", ["Component::GUI::AtkComponentBase"], {
+factory.register(0x14169C568, "Component::GUI::AtkComponentScrollBar", "Component::GUI::AtkComponentBase", {
     0x140528C60: "ctor",
 })
-factory.register(0x14169C608, "Component::GUI::AtkComponentIconText", ["Component::GUI::AtkComponentBase"], {
+factory.register(0x14169C608, "Component::GUI::AtkComponentIconText", "Component::GUI::AtkComponentBase", {
     0x14052A670: "ctor",
 })
-factory.register(0x14169C6A8, "Component::GUI::AtkComponentDragDrop", ["Component::GUI::AtkComponentBase"], {
+factory.register(0x14169C6A8, "Component::GUI::AtkComponentDragDrop", "Component::GUI::AtkComponentBase", {
     0x14052B8F0: "ctor",
 })
-factory.register(0x14169C7C8, "Component::GUI::AtkComponentMultipurpose", ["Component::GUI::AtkComponentBase"], {
+factory.register(0x14169C7C8, "Component::GUI::AtkComponentMultipurpose", "Component::GUI::AtkComponentBase", {
     0x14052D550: "ctor",
 })
-factory.register(0x14169C938, "Component::GUI::AtkComponentWindow", ["Component::GUI::AtkComponentWindowGrab"], {
+factory.register(0x14169C938, "Component::GUI::AtkComponentWindow", "Component::GUI::AtkComponentBase", {
     0x14052DE80: "ctor",
 })
-factory.register(0x14169CA08, "Component::GUI::AtkComponentJournalCanvas", ["Component::GUI::AtkComponentBase"], {
+factory.register(0x14169CA08, "Component::GUI::AtkComponentJournalCanvas", "Component::GUI::AtkComponentBase", {
     0x140533410: "ctor",
 })
-factory.register(0x14169CAA8, "Component::GUI::AtkComponentUnknownButton", ["Component::GUI::AtkComponentButton"], {
+factory.register(0x14169CAA8, "Component::GUI::AtkComponentUnknownButton", "Component::GUI::AtkComponentButton", {
     0x140536F40: "ctor",
 })
-factory.register(0x1416A9390, "Client::UI::Misc::UserFileManager::UserFileEvent", [], {
+factory.register(0x1416A9390, "Client::UI::Misc::UserFileManager::UserFileEvent", "", {
     1: "ReadFile",
     2: "WriteFile",
 })
-factory.register(0x1416A9CD0, "Client::UI::UI3DModule::MapInfo", [], {})  # TODO: Verify this
-factory.register(0x1416A9CF8, "Client::UI::UI3DModule::ObjectInfo", ["Client::UI::UI3DModule::MapInfo"], {})
-factory.register(0x1416A9D28, "Client::UI::UI3DModule::MemberInfo", ["Client::UI::UI3DModule::MapInfo"], {})
-factory.register(0x1416A9D88, "Client::UI::UI3DModule", [], {
+factory.register(0x1416A9CD0, "Client::UI::UI3DModule::MapInfo", "", {})  # TODO: Verify this
+factory.register(0x1416A9CF8, "Client::UI::UI3DModule::ObjectInfo", "Client::UI::UI3DModule::MapInfo", {})
+factory.register(0x1416A9D28, "Client::UI::UI3DModule::MemberInfo", "Client::UI::UI3DModule::MapInfo", {})
+factory.register(0x1416A9D88, "Client::UI::UI3DModule", "", {
     0x1405BB830: "ctor",
 })
-factory.register(0x1416A9DA0, "Client::UI::UIModule", ["Client::UI::UIModuleInterface"], {
+factory.register(0x1416A9DA0, "Client::UI::UIModule", "Client::UI::UIModuleInterface", {
     0x1405C4890: "ctor",
 })
-factory.register(0x1416AA5A0, "Client::System::Crypt::SimpleString", ["Client::System::Crypt::CryptInterface"], {
+factory.register(0x1416AA5A0, "Client::System::Crypt::SimpleString", "Client::System::Crypt::CryptInterface", {
     1: "Encrypt",
     2: "Decrypt",
 })
-factory.register(0x1416AB430, "Component::Text::MacroDecoder", [], {})
-factory.register(0x1416AB5F0, "Component::Text::TextChecker", ["Component::Text::MacroDecoder"], {})
-factory.register(0x1416AEAE8, "Client::UI::Misc::ConfigModule", ["Component::GUI::AtkModuleInterface::AtkEventInterface"], {
+factory.register(0x1416AB430, "Component::Text::MacroDecoder", "", {})
+factory.register(0x1416AB5F0, "Component::Text::TextChecker", "Component::Text::MacroDecoder", {})
+factory.register(0x1416AEAE8, "Client::UI::Misc::ConfigModule", "Component::GUI::AtkModuleInterface::AtkEventInterface", {
     0x1405FAF50: "ctor",
 })
-factory.register(0x1416AEAF8, "Client::UI::Misc::ConfigModule_Common::Configuration::ConfigBase::ChangeEventInterface", ["Common::Configuration::ConfigBase::ChangeEventInterface"], {})
-factory.register(0x1416AEBD8, "Client::UI::Misc::RaptureMacroModule", ["Client::UI::Misc::UserFileManager::UserFileEvent"], {})
-factory.register(0x1416AEC40, "Client::UI::Misc::RaptureTextModule", [], {})
-factory.register(0x1416AEEB8, "Client::UI::Misc::RaptureLogModule", ["Component::Log::LogModule"], {
+factory.register(0x1416AEAF8, "Client::UI::Misc::ConfigModule_Common::Configuration::ConfigBase::ChangeEventInterface", "Common::Configuration::ConfigBase::ChangeEventInterface", {})
+factory.register(0x1416AEBD8, "Client::UI::Misc::RaptureMacroModule", "Client::UI::Misc::UserFileManager::UserFileEvent", {})
+factory.register(0x1416AEC40, "Client::UI::Misc::RaptureTextModule", "", {})
+factory.register(0x1416AEEB8, "Client::UI::Misc::RaptureLogModule", "Component::Log::LogModule", {
     0x140615930: "ctor",
     0x1406170C0: "PrintMessage",
 })
-factory.register(0x1416AEF08, "Client::UI::Misc::RaptureHotbarModule", ["Client::UI::Misc::UserFileManager::UserFileEvent"], {
+factory.register(0x1416AEF08, "Client::UI::Misc::RaptureHotbarModule", "Client::UI::Misc::UserFileManager::UserFileEvent", {
     0x140620880: "ctor",
 })
-factory.register(0x1416AEF70, "Client::UI::Misc::RaptureHotbarModule_Client::System::Input::InputCodeModifiedInterface", ["Client::System::Input::InputData::InputCodeModifiedInterface"], {})
-factory.register(0x1416AEFE8, "Client::UI::Misc::PronounModule", ["Component::Text::TextChecker::ExecNonMacroFunc"], {
+factory.register(0x1416AEF70, "Client::UI::Misc::RaptureHotbarModule_Client::System::Input::InputCodeModifiedInterface", "Client::System::Input::InputData::InputCodeModifiedInterface", {})
+factory.register(0x1416AEFE8, "Client::UI::Misc::PronounModule", "Component::Text::TextChecker::ExecNonMacroFunc", {
     0x140629640: "ctor",
 })
-factory.register(0x1416AFAC0, "Client::UI::Misc::CharaView", [], {
+factory.register(0x1416AFAC0, "Client::UI::Misc::CharaView", "", {
     0: "dtor",
     1: "Initialize",
     2: "Finalize",
     0x14064FC30: "ctor",
 })
-factory.register(0x1416B0EC0, "Client::Game::Object::GameObject", [], {
+factory.register(0x1416B0EC0, "Client::Game::Object::GameObject", "", {
     3: "GetObjectKind",
     16: "EnableDraw",
     17: "DisableDraw",
@@ -1166,97 +1227,97 @@ factory.register(0x1416B0EC0, "Client::Game::Object::GameObject", [], {
     0x1406C5330: "Initialize",
     0x1406C5590: "ctor",
 })
-factory.register(0x1416B1B48, "Client::Game::Character::Character", ["Client::Game::Object::GameObject"], {
+factory.register(0x1416B1B48, "Client::Game::Character::Character", "Client::Game::Object::GameObject", {
     0x1406D5B80: "dtor",
     0x1406EA400: "ctor",
 })
-factory.register(0x1416B1E10, "Client::Game::Character::Character_Client::Graphics::Vfx::VfxDataListener", ["Client::Graphics::Vfx::VfxDataListenner"], {})
-factory.register(0x1416C8150, "Client::Game::Character::BattleChara", ["Client::Game::Character::Character"], {
+factory.register(0x1416B1E10, "Client::Game::Character::Character_Client::Graphics::Vfx::VfxDataListener", "Client::Graphics::Vfx::VfxDataListenner", {})
+factory.register(0x1416C8150, "Client::Game::Character::BattleChara", "Client::Game::Character::Character", {
     0x14073C1A0: "ctor",
     0x14073C290: "dtor",
 })
-factory.register(0x1416C8418, "Client::Game::Character::BattleChara_Client::Graphics::Vfx::VfxDataListener", ["Client::Game::Character::Character_Client::Graphics::Vfx::VfxDataListener"], {})
-factory.register(0x1416CA7C0, "Client::Game::ActionManager", ["Client::Graphics::Vfx::VfxDataListenner"], {})
-factory.register(0x1416CC740, "Client::UI::Agent::AgentHUD", ["Client::UI::Agent::AgentInterface"], {
+factory.register(0x1416C8418, "Client::Game::Character::BattleChara_Client::Graphics::Vfx::VfxDataListener", "Client::Game::Character::Character_Client::Graphics::Vfx::VfxDataListener", {})
+factory.register(0x1416CA7C0, "Client::Game::ActionManager", "Client::Graphics::Vfx::VfxDataListenner", {})
+factory.register(0x1416CC740, "Client::UI::Agent::AgentHUD", "Client::UI::Agent::AgentInterface", {
     0x14081F3B0: "ctor",
     0x140824F30: "UpdateParty",
 })
-factory.register(0x1416CCAF0, "Client::UI::Agent::AgentItemDetail", ["Client::UI::Agent::AgentItemDetailBase"], {
+factory.register(0x1416CCAF0, "Client::UI::Agent::AgentItemDetail", "Client::UI::Agent::AgentInterface", {
     0x1408D3FB0: "ctor",
     0x1408D4FE0: "OnItemHovered",
 })
-factory.register(0x1416CD4B8, "Client::UI::Agent::AgentMap::MapMarkerStructSearchName", ["Client::UI::Agent::AgentMap::MapMarkerStructSearch"], {
+factory.register(0x1416CD4B8, "Client::UI::Agent::AgentMap::MapMarkerStructSearchName", "Client::UI::Agent::AgentMap::MapMarkerStructSearch", {
     1: "Evaluate",
 })
-factory.register(0x1416CD4C8, "Client::UI::Agent::AgentMap", ["Client::UI::Agent::AgentInterface"], {
+factory.register(0x1416CD4C8, "Client::UI::Agent::AgentMap", "Client::UI::Agent::AgentInterface", {
     0x140887C40: "ctor",
 })
-factory.register(0x1416CE090, "Client::UI::Agent::AgentHudLayout", ["Client::UI::Agent::AgentInterface"], {
+factory.register(0x1416CE090, "Client::UI::Agent::AgentHudLayout", "Client::UI::Agent::AgentInterface", {
     0x1408C0B70: "ctor",
 })
-factory.register(0x1416CEED8, "Client::UI::Agent::AgentStatus", ["Client::UI::Agent::AgentInterface"], {
+factory.register(0x1416CEED8, "Client::UI::Agent::AgentStatus", "Client::UI::Agent::AgentInterface", {
     0x1409041F0: "ctor",
 })
-factory.register(0x1416CEEA0, "Client::UI::Agent::AgentStatus::StatusCharaView", ["Client::UI::Misc::CharaView"], {})
-factory.register(0x1416DEE58, "Client::Game::Event::EventHandler", [], {})
-factory.register(0x1416DF680, "Client::Game::Event::ModuleBase", [], {})
-factory.register(0x1416DF6E0, "Client::Game::Event::LuaEventHandler", ["Client::Game::Event::EventHandler"], {})
-factory.register(0x1416DFEF0, "Client::Game::Event::EventSceneModuleImplBase", [], {})
-factory.register(0x1416E05C8, "Client::Game::Event::EventSceneModuleUsualImpl", ["Client::Game::Event::EventSceneModuleImplBase"], {})
-factory.register(0x1416E48A0, "Client::Game::Event::EventHandlerModule", ["Client::Game::Event::ModuleBase"], {})
-factory.register(0x1416E4918, "Client::Game::Event::DirectorModule", ["Client::Game::Event::ModuleBase"], {})
-factory.register(0x1416F4AA8, "Client::Game::Gimmick::GimmickBill", ["Client::Game::Gimmick::GimmickEventHandler"], {})
-factory.register(0x141798F70, "Client::UI::AddonNowLoading", ["Component::GUI::AtkUnitBase"], {
+factory.register(0x1416CEEA0, "Client::UI::Agent::AgentStatus::StatusCharaView", "Client::UI::Misc::CharaView", {})
+factory.register(0x1416DEE58, "Client::Game::Event::EventHandler", "", {})
+factory.register(0x1416DF680, "Client::Game::Event::ModuleBase", "", {})
+factory.register(0x1416DF6E0, "Client::Game::Event::LuaEventHandler", "Client::Game::Event::EventHandler", {})
+factory.register(0x1416DFEF0, "Client::Game::Event::EventSceneModuleImplBase", "", {})
+factory.register(0x1416E05C8, "Client::Game::Event::EventSceneModuleUsualImpl", "Client::Game::Event::EventSceneModuleImplBase", {})
+factory.register(0x1416E48A0, "Client::Game::Event::EventHandlerModule", "Client::Game::Event::ModuleBase", {})
+factory.register(0x1416E4918, "Client::Game::Event::DirectorModule", "Client::Game::Event::ModuleBase", {})
+factory.register(0x1416F4AA8, "Client::Game::Gimmick::GimmickBill", "Client::Game::Gimmick::GimmickEventHandler", {})
+factory.register(0x141798F70, "Client::UI::AddonNowLoading", "Component::GUI::AtkUnitBase", {
     0x140CCD7B0: "ctor",
 })
-factory.register(0x1417C9DC8, "Client::UI::Atk2DAreaMap", ["Client::UI::Atk2DMap"], {})
-factory.register(0x1417D4E18, "Client::UI::AddonTalk", ["Component::GUI::AtkUnitBase"], {
+factory.register(0x1417C9DC8, "Client::UI::Atk2DAreaMap", "Client::UI::Atk2DMap", {})
+factory.register(0x1417D4E18, "Client::UI::AddonTalk", "Component::GUI::AtkUnitBase", {
     0x140E7C230: "ctor",
 })
-factory.register(0x1417D6AA0, "Client::UI::AddonItemDetail", ["Client::UI::AddonItemDetailBase"], {
+factory.register(0x1417D6AA0, "Client::UI::AddonItemDetail", "Component::GUI::AtkUnitBase", {
     0x140E904A0: "ctor",
     0x140E919C0: "GenerateTooltip",
 })
-factory.register(0x1417DCDD0, "Client::UI::AddonAreaMap", ["Component::GUI::AtkUnitBase"], {
+factory.register(0x1417DCDD0, "Client::UI::AddonAreaMap", "Component::GUI::AtkUnitBase", {
     0x140EBDC90: "ctor",
 })
-factory.register(0x1417DEC90, "Client::UI::AddonNamePlate", ["Component::GUI::AtkUnitBase"], {
+factory.register(0x1417DEC90, "Client::UI::AddonNamePlate", "Component::GUI::AtkUnitBase", {
     0x140ED8850: "ctor",
 })
-factory.register(0x1417C9520, "Client::UI::AddonRecipeNote", ["Component::GUI::AtkUnitBase"], {})
-factory.register(0x14179BAD0, "Client::UI::AddonHudSelectYesno", ["Component::GUI::AtkUnitBase"], {
+factory.register(0x1417C9520, "Client::UI::AddonRecipeNote", "Component::GUI::AtkUnitBase", {})
+factory.register(0x14179BAD0, "Client::UI::AddonHudSelectYesno", "Component::GUI::AtkUnitBase", {
     0x140CD91D0: "ctor",
 })
-factory.register(0x141810480, "Client::UI::AddonHudLayoutWindow", ["Component::GUI::AtkUnitBase"], {
+factory.register(0x141810480, "Client::UI::AddonHudLayoutWindow", "Component::GUI::AtkUnitBase", {
     0x14101D870: "ctor",
 })
-factory.register(0x1418106A0, "Client::UI::AddonHudLayoutScreen", ["Component::GUI::AtkUnitBase"], {
+factory.register(0x1418106A0, "Client::UI::AddonHudLayoutScreen", "Component::GUI::AtkUnitBase", {
     0x14101EB00: "ctor",
     0x141023790: "AddonOverlayMouseMovedEvent",
     0x1410239C0: "AddonOverlayMouseClickEvent",
     0x141023DC0: "AddonOverlayMouseReleaseEvent",
     0x141025A00: "_SetAddonScale",
 })
-factory.register(0x1417CDB58, "Client::UI::AddonMateriaAttach", ["Component::GUI::AtkUnitBase"], {})
-factory.register(0x1417CDF98, "Client::UI::AddonMateriaAttachDialog", ["Component::GUI::AtkUnitBase"], {})
-factory.register(0x141825368, "Client::Graphics::Culling::CullingManager_Client::Graphics::JobSystem_Client::Graphics::Culling::CullingJobOpt", [], {})
-factory.register(0x141825370, "Client::Graphics::Culling::CullingManager_Client::Graphics::JobSystem_Client::Graphics::Culling::CallbackJobOpt", [], {})
-factory.register(0x141825378, "Client::Graphics::Culling::CullingManager_Client::Graphics::JobSystem_Client::Graphics::Culling::RenderCallbackJob", [], {})
-factory.register(0x141825380, "Client::Graphics::Culling::CullingManager", ["Client::Graphics::Singleton"], {})
-factory.register(0x141828A68, "Client::Game::Character::Companion", ["Client::Game::Character::Character"], {
+factory.register(0x1417CDB58, "Client::UI::AddonMateriaAttach", "Component::GUI::AtkUnitBase", {})
+factory.register(0x1417CDF98, "Client::UI::AddonMateriaAttachDialog", "Component::GUI::AtkUnitBase", {})
+factory.register(0x141825368, "Client::Graphics::Culling::CullingManager_Client::Graphics::JobSystem_Client::Graphics::Culling::CullingJobOpt", "", {})
+factory.register(0x141825370, "Client::Graphics::Culling::CullingManager_Client::Graphics::JobSystem_Client::Graphics::Culling::CallbackJobOpt", "", {})
+factory.register(0x141825378, "Client::Graphics::Culling::CullingManager_Client::Graphics::JobSystem_Client::Graphics::Culling::RenderCallbackJob", "", {})
+factory.register(0x141825380, "Client::Graphics::Culling::CullingManager", "Client::Graphics::Singleton", {})
+factory.register(0x141828A68, "Client::Game::Character::Companion", "Client::Game::Character::Character", {
     0x141101910: "ctor",
 })
-factory.register(0x141829C80, "Client::Game::CameraBase", [], {})
-factory.register(0x141829CE0, "Client::Game::Camera", ["Client::Game::CameraBase"], {
+factory.register(0x141829C80, "Client::Game::CameraBase", "", {})
+factory.register(0x141829CE0, "Client::Game::Camera", "Client::Game::CameraBase", {
     0x14110A3C0: "ctor",
 })
-factory.register(0x14182B780, "Client::Graphics::Culling::OcclusionCullingManager", ["Client::Graphics::Singleton"], {})
-factory.register(0x14182B790, "Client::Graphics::Streaming::StreamingManager_Client::Graphics::JobSystem_Client::Graphics::Streaming::StreamingManager::StreamingJob", ["Client::Graphics::Singleton"], {})
-factory.register(0x14182B798, "Client::Graphics::Streaming::StreamingManager", ["Client::Graphics::Singleton"], {})
-factory.register(0x1418334C8, "Component::Log::LogModule", ["Component::Log::LogModuleInterface", "Client::System::Common::NonCopyable"], {})
-factory.register(0x1418791E0, "Client::Game::Gimmick::GimmickEventHandler", ["Client::Game::Event::LuaEventHandler"], {})
-factory.register(0x14187A2A0, "Client::Game::Gimmick::GimmickRect", ["Client::Game::Gimmick::GimmickEventHandler"], {})
-factory.register(0x141879A40, "Client::Game::Gimmick::Gimmick_Unk1", ["Client::Game::Gimmick::GimmickEventHandler"], {})
+factory.register(0x14182B780, "Client::Graphics::Culling::OcclusionCullingManager", "Client::Graphics::Singleton", {})
+factory.register(0x14182B790, "Client::Graphics::Streaming::StreamingManager_Client::Graphics::JobSystem_Client::Graphics::Streaming::StreamingManager::StreamingJob", "Client::Graphics::Singleton", {})
+factory.register(0x14182B798, "Client::Graphics::Streaming::StreamingManager", "Client::Graphics::Singleton", {})
+factory.register(0x1418334C8, "Component::Log::LogModule", "Client::System::Common::NonCopyable", {})
+factory.register(0x1418791E0, "Client::Game::Gimmick::GimmickEventHandler", "Client::Game::Event::LuaEventHandler", {})
+factory.register(0x14187A2A0, "Client::Game::Gimmick::GimmickRect", "Client::Game::Gimmick::GimmickEventHandler", {})
+factory.register(0x141879A40, "Client::Game::Gimmick::Gimmick_Unk1", "Client::Game::Gimmick::GimmickEventHandler", {})
 factory.finalize()
 
 # endregion
