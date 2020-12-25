@@ -131,112 +131,155 @@ class BaseApi(object):
         :rtype: bool
         """
 
+    @abstractmethod
+    def get_comment(self, ea):
+        """
+        Get the comment at an address
+        :param ea: Effective address
+        :type ea: int
+        :return: Comment
+        :rtype: str
+        """
+
+    @abstractmethod
+    def set_comment(self, ea, comment):
+        """
+        Add a comment to an address
+        :param ea: Effective address
+        :type ea: int
+        :param comment: Comment
+        :type comment: str
+        :return: None
+        """
+
 
 api = None
+
 # region IDA Api
-try:
-    import idaapi  # noqa
-    import idc  # noqa
-    import idautils  # noqa
+
+if api is None:
+    try:
+        import idaapi  # noqa
+        import idc  # noqa
+        import idautils  # noqa
 
 
-    class IdaApi(BaseApi):
+        class IdaApi(BaseApi):
 
-        def get_image_base(self):
-            return idaapi.get_imagebase()
+            def get_image_base(self):
+                return idaapi.get_imagebase()
 
-        def set_addr_name(self, ea, name):
-            result = idc.set_name(ea, name)
-            return bool(result)
+            def set_addr_name(self, ea, name):
+                result = idc.set_name(ea, name)
+                return bool(result)
 
-        def get_addr_name(self, ea):
-            return idc.get_name(ea)
+            def get_addr_name(self, ea):
+                return idc.get_name(ea)
 
-        def get_qword(self, ea):
-            return idc.get_qword(ea)
+            def get_qword(self, ea):
+                return idc.get_qword(ea)
 
-        def is_offset(self, ea):
-            return idc.is_off0(idc.get_full_flags(ea))
+            def is_offset(self, ea):
+                return idc.is_off0(idc.get_full_flags(ea))
 
-        def xrefs_to(self, ea):
-            return [xref.to for xref in idautils.XrefsTo(ea)]
+            def xrefs_to(self, ea):
+                return [xref.to for xref in idautils.XrefsTo(ea)]
 
-        def get_struct_id(self, name):
-            sid = idc.get_struc_id(name)
-            if sid == idc.BADADDR:
-                return -1
-            else:
+            def get_struct_id(self, name):
+                sid = idc.get_struc_id(name)
+                if sid == idc.BADADDR:
+                    return -1
+                else:
+                    return sid
+
+            def create_struct(self, name):
+                sid = idc.add_struc(-1, name, is_union=0)
                 return sid
 
-        def create_struct(self, name):
-            sid = idc.add_struc(-1, name, is_union=0)
-            return sid
+            def add_struct_member(self, sid, name):
+                idc.add_struc_member(sid, name, offset=-1, flag=idc.FF_DATA | idc.FF_QWORD, typeid=-1, nbytes=8, reftype=idc.REF_OFF64)
+                member_offset = idc.get_last_member(sid)
+                member_id = idc.get_member_id(sid, member_offset)
+                idc.SetType(member_id, "void*")
 
-        def add_struct_member(self, sid, name):
-            idc.add_struc_member(sid, name, offset=-1, flag=idc.FF_DATA | idc.FF_QWORD, typeid=-1, nbytes=8, reftype=idc.REF_OFF64)
-            member_offset = idc.get_last_member(sid)
-            member_id = idc.get_member_id(sid, member_offset)
-            idc.SetType(member_id, "void*")
-
-        def clear_struct(self, sid):
-            member_offset = idc.get_first_member(sid)
-            if member_offset == -1:
-                return False
-            while member_offset != idc.BADADDR:
-                idc.del_struc_member(sid, member_offset)
+            def clear_struct(self, sid):
                 member_offset = idc.get_first_member(sid)
-            return True
+                if member_offset == -1:
+                    return False
+                while member_offset != idc.BADADDR:
+                    idc.del_struc_member(sid, member_offset)
+                    member_offset = idc.get_first_member(sid)
+                return True
 
-        def convert_to_struct(self, ea, sid):
-            struct_name = idc.get_struc_name(sid)
-            result = idc.create_struct(ea, -1, struct_name)
-            return bool(result)
+            def convert_to_struct(self, ea, sid):
+                struct_name = idc.get_struc_name(sid)
+                result = idc.create_struct(ea, -1, struct_name)
+                return bool(result)
+
+            def get_comment(self, ea):
+                idc.get_cmt(ea, False)
+
+            def set_comment(self, ea, comment):
+                idc.set_cmt(ea, comment, False)
 
 
-    api = IdaApi()
-except ImportError:
-    print("Warning: Unable to load IDA")
+        api = IdaApi()
+    except ImportError:
+        print("Warning: Unable to load IDA")
+
 # endregion
 # region Ghidra Api
-try:
-    import ghidra
+
+if api is None:
+    try:
+        import ghidra
 
 
-    class GhidraApi(BaseApi):
-        def get_image_base(self):
-            raise NotImplementedError
+        class GhidraApi(BaseApi):
+            def get_image_base(self):
+                raise NotImplementedError
 
-        def set_addr_name(self, ea, name):
-            raise NotImplementedError
+            def set_addr_name(self, ea, name):
+                raise NotImplementedError
 
-        def get_addr_name(self, ea):
-            raise NotImplementedError
+            def get_addr_name(self, ea):
+                raise NotImplementedError
 
-        def get_qword(self, ea):
-            raise NotImplementedError
+            def get_qword(self, ea):
+                raise NotImplementedError
 
-        def is_offset(self, ea):
-            raise NotImplementedError
+            def is_offset(self, ea):
+                raise NotImplementedError
 
-        def xrefs_to(self, ea):
-            raise NotImplementedError
+            def xrefs_to(self, ea):
+                raise NotImplementedError
 
-        def get_struct_id(self, name):
-            raise NotImplementedError
+            def get_struct_id(self, name):
+                raise NotImplementedError
 
-        def create_struct(self, name):
-            raise NotImplementedError
+            def create_struct(self, name):
+                raise NotImplementedError
 
-        def add_struct_member(self, sid, name):
-            raise NotImplementedError
+            def add_struct_member(self, sid, name):
+                raise NotImplementedError
 
-        def clear_struct(self, sid):
-            raise NotImplementedError
+            def clear_struct(self, sid):
+                raise NotImplementedError
+
+            def convert_to_struct(self, ea, sid):
+                raise NotImplementedError
+
+            def get_comment(self, ea):
+                raise NotImplementedError
+
+            def set_comment(self, ea, comment):
+                raise NotImplementedError
 
 
-    api = GhidraApi()
-except ImportError:
-    print("Warning: Unable to load Ghidra")
+        api = GhidraApi()
+    except ImportError:
+        print("Warning: Unable to load Ghidra")
+
 # endregion
 
 if api is None:
