@@ -531,7 +531,7 @@ class FfxivClass:
         for parent_class_name in self.parent_class_names[-1::-1] + [self.name]:
             if comment:
                 comment += "\n"
-            comment += (" " * indent) + parent_class_name
+            comment += (" " * indent) + self.VTBL_FORMAT.format(cls=parent_class_name)
             indent += 4
         api.set_comment(self.vtbl_ea, comment)
 
