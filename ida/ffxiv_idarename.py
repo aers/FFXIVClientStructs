@@ -303,24 +303,24 @@ class FfxivClassFactory:
         if len(args) == 1:
             vtbl_ea = 0x0
             class_name, = args
-            hierarchy = []
+            parent_class_name = ""
             funcs = {}
         elif len(args) == 2:
             vtbl_ea, class_name = args
-            hierarchy = []
+            parent_class_name = ""
             funcs = {}
         elif len(args) == 3:
             vtbl_ea = 0x0
-            class_name, hierarchy, funcs = args
+            class_name, parent_class_name, funcs = args
         elif len(args) == 4:
-            vtbl_ea, class_name, hierarchy, funcs = args
+            vtbl_ea, class_name, parent_class_name, funcs = args
         else:
             print("Error: Unsupported argument layout, args={0}".format(args))
             return
 
-        arg_types = [type(arg) for arg in (vtbl_ea, class_name, hierarchy, funcs)]
-        if (arg_types != [int, str, list, dict] and
-                arg_types != [long, str, list, dict]):  # py2
+        arg_types = [type(arg) for arg in (vtbl_ea, class_name, parent_class_name, funcs)]
+        if (arg_types != [int, str, str, dict] and
+                arg_types != [long, str, str, dict]):  # py2
             print("Error: Argument mismatch, types={0}".format(arg_types))
             return
 
@@ -333,41 +333,32 @@ class FfxivClassFactory:
             return
 
         self._vtbls_ea.append(vtbl_ea)
-        self._classes[class_name] = FfxivClass(vtbl_ea, class_name, hierarchy, funcs)
+        self._classes[class_name] = FfxivClass(vtbl_ea, class_name, parent_class_name, funcs)
 
     def finalize(self):
         """
         Perform the class naming
         :return: None
         """
-        self._resolve_hierarchies()
+        self._resolve_class_inheritance()
         for class_name, cls in self._classes.items():
-            self._finalize_cls(cls)
+            self._finalize_class(cls)
 
-    def _resolve_hierarchies(self):
+    def _resolve_class_inheritance(self):
         """
-        Convert each class_name in each hierarchy to a class object reference
+        Set the parent_class attribute in each cls to the object corresponding to its parent_class_name attribute
         :return: None
         """
-        for class_name, cls in self._classes.items():
-            for idx, parent_class_name in enumerate(cls.hierarchy):
-                if isinstance(parent_class_name, str):
-                    if parent_class_name not in self._classes:
-                        print("Warning: Inherited class \"{0}\" is not documented, add a placeholder entry".format(parent_class_name))
-                        self.register(parent_class_name)
-                    cls.hierarchy[idx] = self._classes[parent_class_name]
-
-        # Check for duplicate entries in hierarchy, likely a previous parent class inherits from the duplicate
-        for class_name, cls in self._classes.items():
-            hierarchy = cls.hierarchy_names
-            if len(hierarchy) != len(set(hierarchy)):
-                extras = set([x for x in hierarchy if hierarchy.count(x) > 1])
-                for extra in extras:
-                    print("Warning: \"{0}\" has a duplicate hierarchy entry \"{1}\"".format(cls.name, extra))
+        for class_name, cls in list(self._classes.items()):
+            if cls.parent_class is None and cls.parent_class_name:
+                if cls.parent_class_name not in self._classes:
+                    print("Warning: Inherited class \"{0}\" is not documented, add a placeholder entry".format(cls.parent_class_name))
+                    self.register(cls.parent_class_name)
+                cls.parent_class = self._classes[cls.parent_class_name]
 
     _finalize_stack = deque()
 
-    def _finalize_cls(self, cls):
+    def _finalize_class(self, cls):
         """
         Perform a single class naming
         :param cls: Class object
@@ -377,14 +368,13 @@ class FfxivClassFactory:
         if cls in self._finalize_stack:
             names = [c.name for c in self._finalize_stack] + [cls.name]
             names = "\n".join(["    - {0}".format(name) for name in names])
-            raise ValueError("Hierarchy cycle detected: \n{0}".format(names))
+            raise ValueError("Inheritance cycle detected: \n{0}".format(names))
 
         self._finalize_stack.append(cls)
 
         if not cls.finalized:
-            for parent_cls in cls.hierarchy:
-                if not parent_cls.finalized:
-                    self._finalize_cls(parent_cls)
+            if cls.parent_class and not cls.parent_class.finalized:
+                self._finalize_class(cls.parent_class)
             cls.finalize()
 
         self._finalize_stack.pop()
@@ -413,21 +403,23 @@ class FfxivClass:
     JUMP_PREFIX = "j_"
     PURECALL = "_purecall"
 
-    def __init__(self, vtbl_ea, class_name, hierarchy, funcs):
+    parent_class = None  # type: FfxivClass
+
+    def __init__(self, vtbl_ea, class_name, parent_class_name, funcs):
         """
         Object representing a class
         :param vtbl_ea: Vtable effective address
         :type vtbl_ea: int
         :param class_name: Class name
         :type class_name: str
-        :param hierarchy: Inheritance hierarchy
-        :type hierarchy: List[str|FfxivClass]
+        :param parent_class_name: Parent class
+        :type parent_class_name: str
         :param funcs: Mapping of vtbl index or effective addresses to func names
         :type funcs: Dict[int, str]
         """
         self.vtbl_ea = vtbl_ea
         self.name = class_name
-        self.hierarchy = hierarchy
+        self.parent_class_name = parent_class_name
         self.funcs = funcs
 
         # Offset the vtbl and funcs if the program has been rebased
@@ -439,23 +431,30 @@ class FfxivClass:
                 if idx_or_ea > 0x1000:
                     funcs[idx_or_ea + rebase_offset] = funcs.pop(idx_or_ea)
 
-    # region hierarchy_names
+    # region parent_class_names
 
-    _hierarchy_names = None
+    _parent_class_names = None
 
     @property
-    def hierarchy_names(self):
+    def parent_class_names(self):
         """
         Get the class names of the entire hierarchy as a flat list
         :return: [class_name]
         """
-        if self._hierarchy_names is None:
-            self._hierarchy_names = list(itertools.chain(*[cls.hierarchy_names for cls in self.hierarchy])) + [self.name]
-        return self._hierarchy_names
+        if self._parent_class_names is None:
+            self._parent_class_names = []
+
+            current_class = self.parent_class
+            while current_class:
+                self._parent_class_names.append(current_class.name)
+                current_class = current_class.parent_class
+
+        return self._parent_class_names
 
     # endregion
 
     # region vtbl_size
+
     _vtbl_size = 0
 
     @property
@@ -476,15 +475,14 @@ class FfxivClass:
                 else:
                     break
 
-            parent_vtbl_size = sum(parent.vtbl_size for parent in self.hierarchy)
-            if self.vtbl_size < parent_vtbl_size:
-                print("Error: The sum of \"{0}\"'s parent vtbl sizes ({1}) is greater than the actual class itself ({2})".format(self.name, parent_vtbl_size, self._vtbl_size))
+            if self.parent_class and self.vtbl_size < self.parent_class.vtbl_size:
+                print("Error: The sum of \"{0}\"'s parent vtbl sizes ({1}) is greater than the actual class itself ({2})".format(self.name, self.parent_class.vtbl_size, self.vtbl_size))
 
         return self._vtbl_size
 
     # endregion
 
-    # region finalizing
+    # region finalized
 
     _finalized = False
 
@@ -495,20 +493,122 @@ class FfxivClass:
         :return: bool yes/no
         :rtype: bool
         """
-        return self._finalized and all(parent.finalized for parent in self.hierarchy)
+        if self.parent_class:
+            return self._finalized and self.parent_class.finalized
+        else:
+            return self._finalized
+
+    @finalized.setter
+    def finalized(self, value):
+        self._finalized = value
+
+    # endregion
 
     def finalize(self):
         """
         Write out this class
         :return: None
         """
+        self._inherit_func_names_from_parent()
+        self._comment_vtbl_with_inheritance_tree()
         self._write_vtbl()
         self._write_funcs()
-        self._finalized = True
+        self.finalized = True
+
+    def _inherit_func_names_from_parent(self):
+        if self.parent_class:
+            for idx, parent_func_name in self.parent_class.funcs.items():
+                if idx < 0x1000:
+                    if idx in self.funcs:
+                        print("Warning: 0x{0:X} \"{1}\" overwrites the name of inherited function \"{2}\"".format(self.vtbl_ea, self.name, parent_func_name))
+                        pass
+                    else:
+                        self.funcs[idx] = parent_func_name
+
+    def _comment_vtbl_with_inheritance_tree(self):
+        comment = api.get_comment(self.vtbl_ea) or ""
+        indent = 0
+        for parent_class_name in self.parent_class_names[-1::-1] + [self.name]:
+            if comment:
+                comment += "\n"
+            comment += (" " * indent) + parent_class_name
+            indent += 4
+        api.set_comment(self.vtbl_ea, comment)
+
+    def _build_vtbl(self):
+        class_func_addresses = []
+        class_func_names = []
+        struct_member_names = []
+
+        # Iterate through each offset
+        for idx in range(0, self.vtbl_size):
+            vfunc_offset = self.vtbl_ea + idx * 8
+            vfunc_ea = api.get_qword(vfunc_offset)  # type: int
+
+            current_func_name = api.get_addr_name(vfunc_ea)  # type: str
+            if current_func_name.startswith(self.JUMP_PREFIX):
+                current_func_name = current_func_name.lstrip(self.JUMP_PREFIX)
+
+            if idx in self.funcs:
+                named_func = self.funcs[idx]
+                named_full_func_name = self.NAMED_FUNC_FORMAT.format(cls=self.name, name=named_func)
+                named_struct_member_name = named_func
+            else:
+                named_full_func_name = ""
+                named_struct_member_name = ""
+
+            if current_func_name.startswith("qword_"):
+                # Problem for another day, or codatify
+                if isinstance(api, IdaApi) and self.name == "Client::Graphics::Scene::Human" and idx == 61:
+                    idc.auto_mark_range(vfunc_ea, vfunc_ea + 1, idc.AU_CODE)
+                    idc.create_insn(vfunc_ea)
+                    idc.add_func(vfunc_ea)
+                    current_func_name = api.get_addr_name(vfunc_ea)  # type: str
+                else:
+                    print("Warning: qword in vtbl at 0x{0:X}, it may be an offset to undefined code".format(vfunc_offset))
+
+            if current_func_name.startswith(self.SUB_PREFIX):
+                generic_full_func_name = self.GENERIC_SUB_FORMAT.format(cls=self.name, index=idx)
+                generic_struct_member_name = self.STRUCT_GENERIC_SUB_FORMAT.format(index=idx)
+            elif current_func_name.startswith(self.NULLSUB_PREFIX):
+                generic_full_func_name = self.GENERIC_NULLSUB_FORMAT.format(cls=self.name, index=idx)
+                generic_struct_member_name = self.STRUCT_GENERIC_NULLSUB_FORMAT.format(index=idx)
+            elif current_func_name.startswith(self.LOC_PREFIX):
+                generic_full_func_name = self.GENERIC_LOC_FORMAT.format(cls=self.name, index=idx)
+                generic_struct_member_name = self.STRUCT_GENERIC_LOC_FORMAT.format(index=idx)
+            elif any(current_func_name.startswith(parent_class_name) for parent_class_name in self.parent_class_names):
+                generic_full_func_name = None  # No override present
+                generic_struct_member_name = current_func_name.split(".", 1)[-1]
+            elif current_func_name == self.PURECALL:
+                generic_full_func_name = None  # Ignored
+                generic_struct_member_name = self.STRUCT_PURECALL_FORMAT.format(index=idx)
+            elif current_func_name.startswith("?") or current_func_name.startswith("_"):
+                generic_full_func_name = None  # Mangled
+                generic_struct_member_name = self.STRUCT_MANGLE_FORMAT.format(index=idx)
+            else:
+                print("Error: Unexpected function name \"{0}\" at 0x{1:X}".format(current_func_name, self.vtbl_ea + idx * 8))
+                generic_full_func_name = None
+                generic_struct_member_name = "naming_error{0}".format(idx)
+
+            class_func_addresses.append(vfunc_ea)
+
+            if generic_full_func_name is None:
+                class_func_names.append(None)
+            else:
+                class_func_names.append(named_full_func_name or generic_full_func_name)
+
+            struct_member_names.append(named_struct_member_name or generic_struct_member_name)
+
+        return class_func_addresses, class_func_names, struct_member_names
 
     def _write_vtbl(self):
-        # Name the vtbl start offset
+        class_func_addresses, class_func_names, struct_member_names = self._build_vtbl()
+
         api.set_addr_name(self.vtbl_ea, self.VTBL_FORMAT.format(cls=self.name))
+
+        for func_ea, func_name in zip(class_func_addresses, class_func_names):
+            if func_name:
+                api.set_addr_name(func_ea, func_name)
 
         struct_name = self.STRUCT_VTBL_FORMAT.format(cls=self.name)
         struct_id = api.get_struct_id(struct_name)
@@ -516,90 +616,11 @@ class FfxivClass:
             struct_id = api.create_struct(struct_name)
         else:
             api.clear_struct(struct_id)
-
-        # Iterate through each offset
-        for idx in range(0, self.vtbl_size):
-            vfunc_offset = self.vtbl_ea + idx * 8
-            vfunc_ea = api.get_qword(vfunc_offset)  # type: int
-
-            if idx in self.funcs:
-                func_name = self.funcs[idx]
-                full_func_name = self.NAMED_FUNC_FORMAT.format(cls=self.name, name=func_name)
-                api.set_addr_name(vfunc_ea, full_func_name)
-                api.add_struct_member(struct_id, func_name)
-            else:
-                current_func_name = api.get_addr_name(vfunc_ea)  # type: str
-
-                if current_func_name.startswith(self.JUMP_PREFIX):
-                    current_func_name = current_func_name.lstrip(self.JUMP_PREFIX)
-
-                parent_func_name = self._get_parent_func_name(idx)
-                if parent_func_name:
-                    parent_full_func_name = self.NAMED_FUNC_FORMAT.format(cls=self.name, name=parent_func_name)
-                else:
-                    parent_full_func_name = ""
-
-                if current_func_name.startswith(self.SUB_PREFIX):
-                    full_func_name = parent_full_func_name or self.GENERIC_SUB_FORMAT.format(cls=self.name, index=idx)
-                    struct_member_name = parent_func_name or self.STRUCT_GENERIC_SUB_FORMAT.format(index=idx)
-                elif current_func_name.startswith(self.NULLSUB_PREFIX):
-                    full_func_name = parent_full_func_name or self.GENERIC_NULLSUB_FORMAT.format(cls=self.name, index=idx)
-                    struct_member_name = parent_func_name or self.STRUCT_GENERIC_NULLSUB_FORMAT.format(index=idx)
-                elif current_func_name.startswith(self.LOC_PREFIX):
-                    full_func_name = parent_full_func_name or self.GENERIC_LOC_FORMAT.format(cls=self.name, index=idx)
-                    struct_member_name = parent_func_name or self.STRUCT_GENERIC_LOC_FORMAT.format(index=idx)
-                elif any(current_func_name.startswith(parent_class_name) for parent_class_name in self.hierarchy_names):
-                    full_func_name = None  # Not an override
-                    # Rework this at some point to get the actual parent name, minus the class?
-                    struct_member_name = current_func_name.split(".", 1)[-1]
-                elif current_func_name == self.PURECALL:
-                    full_func_name = None  # Ignored
-                    struct_member_name = self.STRUCT_PURECALL_FORMAT.format(index=idx)
-                elif current_func_name.startswith("?"):
-                    full_func_name = None  # Mangled? Probably a library
-                    struct_member_name = self.STRUCT_MANGLE_FORMAT.format(index=idx)
-                elif current_func_name.startswith("qword_"):
-                    print("Warning: qword in vtbl at 0x{0:X}, it may be an offset to undefined code".format(vfunc_offset))
-                    full_func_name = None
-                    struct_member_name = "qword{0}".format(idx)
-                    # TODO: How to handle this? Only observed instance so far is to unresolved code
-                    # 0x141696198 Client::Graphics::Scene::Human
-                    # 0x141696380 qword_140444F00, sub_140444F00, vf61
-                else:
-                    print("Error: Unexpected function name \"{0}\" at 0x{1:X}".format(current_func_name, self.vtbl_ea + idx * 8))
-                    full_func_name = None
-                    struct_member_name = "naming_error{0}".format(idx)
-
-                if full_func_name:
-                    api.set_addr_name(vfunc_ea, full_func_name)
-                api.add_struct_member(struct_id, struct_member_name)
-
-        # Running the script twice will undefine vast segments of the vtbl since theyre now structs
+        for struct_member_name in struct_member_names:
+            api.add_struct_member(struct_id, struct_member_name)
+        # Running the script twice will undefine vast segments of the vtbl since they're now structs
         # Need to work a method of not screwing that up.
         # api.convert_to_struct(self.vtbl_ea, struct_id)
-
-    def _get_parent_func_name(self, index):
-        """
-        Override vfuncs need to inherit their parent vfunc name, iterate through each parent in the
-        hierarchy until the base+index is within the base+parent_vtbl_range.
-        :param index: VFunc index
-        :type index: int
-        :return: Parent vfunc name or empty
-        :rtype: str
-        """
-        base = 0
-        parent_iter = iter(self.hierarchy)
-        parent = next(parent_iter, None)
-        while parent:
-            if base < index + base < parent.vtbl_size + base:
-                parent_func_name = parent.funcs.get(index, "")
-                if not parent_func_name:
-                    return parent._get_parent_func_name(index - base)
-                return parent_func_name
-            else:
-                base += parent.vtbl_size
-                parent = next(parent_iter, None)
-        return None
 
     def _write_funcs(self):
         """
@@ -609,20 +630,20 @@ class FfxivClass:
         for ea, func_name in self.funcs.items():
             if ea > 0x1000:
                 full_func_name = self.NAMED_FUNC_FORMAT.format(cls=self.name, name=func_name)
-                current_name = api.get_addr_name(ea)  # type: str
 
-                # strip jump prefixed
-                if current_name.startswith(self.JUMP_PREFIX):
-                    current_name = current_name.lstrip(self.JUMP_PREFIX)
+                current_func_name = api.get_addr_name(ea)  # type: str
+                if current_func_name.startswith(self.JUMP_PREFIX):
+                    current_func_name = current_func_name.lstrip(self.JUMP_PREFIX)
 
-                # same name? skip it
-                if current_name == full_func_name:
-                    continue
+                if current_func_name == full_func_name:
+                    continue  # same name? skip it
+                elif current_func_name == self.PURECALL:
+                    continue  # purecall? skip it
                 # check that the name is unnamed
-                elif any(current_name.startswith(prefix) for prefix in [self.SUB_PREFIX, self.NULLSUB_PREFIX, self.LOC_PREFIX]):
+                elif any(current_func_name.startswith(prefix) for prefix in [self.SUB_PREFIX, self.NULLSUB_PREFIX, self.LOC_PREFIX]):
                     api.set_addr_name(ea, full_func_name)
                 else:
-                    print("Warning: 0x{0:X} \"{1}\" was already named \"{2}\"".format(ea, func_name, current_name))
+                    print("Warning: 0x{0:X} \"{1}\" was already named \"{2}\"".format(ea, func_name, current_func_name))
 
     # endregion
 
