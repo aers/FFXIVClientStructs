@@ -288,8 +288,6 @@ if api is None:
 print("Importing IDA data ...")
 
 
-# TODO: Clobber 0x141697D60! "Common::Lua::LuaState", "Common::Lua::LuaThread"
-
 class FfxivClassFactory:
     # {name: ea}
     _vtbls_ea = []  # type: List[int]
