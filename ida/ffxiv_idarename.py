@@ -567,7 +567,10 @@ class FfxivClass:
                 else:
                     print("Warning: qword in vtbl at 0x{0:X}, it may be an offset to undefined code".format(vfunc_offset))
 
-            if current_func_name.startswith(self.SUB_PREFIX):
+            if current_func_name.startswith(self.name):
+                generic_full_func_name = current_func_name
+                generic_struct_member_name = current_func_name.strip(self.name).strip(".")
+            elif current_func_name.startswith(self.SUB_PREFIX):
                 generic_full_func_name = self.GENERIC_SUB_FORMAT.format(cls=self.name, index=idx)
                 generic_struct_member_name = self.STRUCT_GENERIC_SUB_FORMAT.format(index=idx)
             elif current_func_name.startswith(self.NULLSUB_PREFIX):
@@ -1270,6 +1273,7 @@ factory.register(0x1416F4AA8, "Client::Game::Gimmick::GimmickBill", "Client::Gam
 factory.register(0x141798F70, "Client::UI::AddonNowLoading", "Component::GUI::AtkUnitBase", {
     0x140CCD7B0: "ctor",
 })
+factory.register(0x1417CD2A8, "Client::UI::AddonRaidFinder", "Component::GUI::AtkUnitBase", {})
 factory.register(0x1417C9DC8, "Client::UI::Atk2DAreaMap", "Client::UI::Atk2DMap", {})
 factory.register(0x1417D4E18, "Client::UI::AddonTalk", "Component::GUI::AtkUnitBase", {
     0x140E7C230: "ctor",
@@ -1300,6 +1304,7 @@ factory.register(0x1418106A0, "Client::UI::AddonHudLayoutScreen", "Component::GU
 })
 factory.register(0x1417CDB58, "Client::UI::AddonMateriaAttach", "Component::GUI::AtkUnitBase", {})
 factory.register(0x1417CDF98, "Client::UI::AddonMateriaAttachDialog", "Component::GUI::AtkUnitBase", {})
+factory.register(0x1417DE1D0, "Client::UI::AddonGathering", "Component::GUI::AtkUnitBase", {})
 factory.register(0x141825368, "Client::Graphics::Culling::CullingManager_Client::Graphics::JobSystem_Client::Graphics::Culling::CullingJobOpt", "", {})
 factory.register(0x141825370, "Client::Graphics::Culling::CullingManager_Client::Graphics::JobSystem_Client::Graphics::Culling::CallbackJobOpt", "", {})
 factory.register(0x141825378, "Client::Graphics::Culling::CullingManager_Client::Graphics::JobSystem_Client::Graphics::Culling::RenderCallbackJob", "", {})
