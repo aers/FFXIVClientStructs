@@ -729,6 +729,7 @@ api.set_addr_name(0x141DB2028, "g_CompanionMemory")
 api.set_addr_name(0x141DB2050, "g_ActorList")
 api.set_addr_name(0x141DB2D90, "g_ActorListEnd")
 api.set_addr_name(0x141DD6F08, "g_EventFramework")
+api.set_addr_name(0x141DDAA20, "g_GroupManager")
 api.set_addr_name(0x141DE2D50, "g_ClientObjectManager")
 # endregion
 
@@ -805,6 +806,7 @@ factory.register(0x141659488, "Component::GUI::AtkEventListener", "", {
 factory.register(0x1416594C0, "Component::GUI::AtkUnitList", "", {})
 factory.register(0x1416594C8, "Component::GUI::AtkUnitManager", "Component::GUI::AtkEventListener", {
     0x1404E5520: "ctor",
+    11: "UpdateAddonByID",
 })
 factory.register(0x141659620, "Client::UI::RaptureAtkUnitManager", "Component::GUI::AtkUnitManager", {
     0x1400AAE50: "ctor",
@@ -1035,6 +1037,11 @@ factory.register(0x14169AE50, "Component::GUI::AtkResNode", "Component::GUI::Atk
     0x1404CD640: "GetScaleX",
     0x1404CD660: "GetScaleY",
     0x1404CD680: "SetScale",
+    0x1404CD7E0: "GetYFloat",
+    0x1404CD820: "GetYShort",
+    0x1404CDA10: "GetHeight",
+    0x1404CDC70: "SetHeight",
+    0x1404CDF70: "SetVisibility",
     0x1404D8EA0: "SetSize",
     0x1404CE790: "Init",
     0x1404CE960: "SetScale0",  # SetScale jumps to this
@@ -1305,6 +1312,9 @@ factory.register(0x1418106A0, "Client::UI::AddonHudLayoutScreen", "Component::GU
 factory.register(0x1417CDB58, "Client::UI::AddonMateriaAttach", "Component::GUI::AtkUnitBase", {})
 factory.register(0x1417CDF98, "Client::UI::AddonMateriaAttachDialog", "Component::GUI::AtkUnitBase", {})
 factory.register(0x1417DE1D0, "Client::UI::AddonGathering", "Component::GUI::AtkUnitBase", {})
+factory.register(0x141808FE8, "Client::UI::AddonPartyList", "Component::GUI::AtkUnitBase", {
+    0x140FEB9F0: "ResizeForPartySize",
+})
 factory.register(0x141825368, "Client::Graphics::Culling::CullingManager_Client::Graphics::JobSystem_Client::Graphics::Culling::CullingJobOpt", "", {})
 factory.register(0x141825370, "Client::Graphics::Culling::CullingManager_Client::Graphics::JobSystem_Client::Graphics::Culling::CallbackJobOpt", "", {})
 factory.register(0x141825378, "Client::Graphics::Culling::CullingManager_Client::Graphics::JobSystem_Client::Graphics::Culling::RenderCallbackJob", "", {})
