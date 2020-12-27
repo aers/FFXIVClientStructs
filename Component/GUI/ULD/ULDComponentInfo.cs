@@ -6,6 +6,6 @@ namespace FFXIVClientStructs.Component.GUI.ULD
     public unsafe struct ULDComponentInfo
     {
         [FieldOffset(0x0)] public ULDObjectInfo ObjectInfo;
-        [FieldOffset(0x10)] public byte ComponentType;
+        [FieldOffset(0x10)] public ComponentType ComponentType;
     }
 }
