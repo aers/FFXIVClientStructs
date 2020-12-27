@@ -1,10 +1,10 @@
-﻿using System.Runtime.InteropServices;
+using System.Runtime.InteropServices;
 
 using FFXIVClientStructs.Component.GUI.ULD;
 
 namespace FFXIVClientStructs.Component.GUI
 {    public enum ComponentType
-    { 
+    public enum ComponentType : byte
         Base = 0, 
         Button = 1,
         Window = 2, 
