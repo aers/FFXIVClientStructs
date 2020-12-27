@@ -1,9 +1,9 @@
-﻿using System.Runtime.CompilerServices;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 namespace FFXIVClientStructs.Component.GUI
 {
-    public enum NodeType
+    public enum NodeType : ushort
     {
         Res = 1,
         Image = 2,
@@ -47,7 +47,7 @@ namespace FFXIVClientStructs.Component.GUI
         [FieldOffset(0x28)] public AtkResNode* PrevSiblingNode;
         [FieldOffset(0x30)] public AtkResNode* NextSiblingNode;
         [FieldOffset(0x38)] public AtkResNode* ChildNode;
-        [FieldOffset(0x40)] public ushort Type;
+        [FieldOffset(0x40)] public NodeType Type;
         [FieldOffset(0x42)] public ushort ChildCount;
         [FieldOffset(0x44)] public float X; // X,Y converted to floats on load, file is int16
         [FieldOffset(0x48)] public float Y;
