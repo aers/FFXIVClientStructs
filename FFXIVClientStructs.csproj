@@ -1,17 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+	<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{3DBAEE68-9D94-4807-BCB1-E42EDD52B489}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>FFXIVClientStructs</RootNamespace>
     <AssemblyName>FFXIVClientStructs</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
+    <AssemblyProduct>FFXIVClientStructs</AssemblyProduct>
+	<TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
+    <TargetFramework>net472</TargetFramework>
+	<FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+	<AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -32,100 +35,4 @@
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Client\Game\Character\BattleChara.cs" />
-    <Compile Include="Client\Game\Character\Character.cs" />
-    <Compile Include="Client\Game\Character\Companion.cs" />
-    <Compile Include="Client\Game\Object\GameObject.cs" />
-    <Compile Include="Client\Graphics\Scene\CharacterBase.cs" />
-    <Compile Include="Client\Graphics\Scene\DrawObject.cs" />
-    <Compile Include="Client\Graphics\Scene\Human.cs" />
-    <Compile Include="Client\Graphics\Scene\Object.cs" />
-    <Compile Include="Client\System\Configuration\SystemConfig.cs" />
-    <Compile Include="Client\System\Framework.cs" />
-    <Compile Include="Client\System\Resource\Handle\TextureResourceHandle.cs" />
-    <Compile Include="Client\System\Resource\Handle\ResourceHandle.cs" />
-    <Compile Include="Client\UI\AddonHudLayoutScreen.cs" />
-    <Compile Include="Client\UI\AddonHudLayoutWindow.cs" />
-    <Compile Include="Client\UI\Agent\AgentHudLayout.cs" />
-    <Compile Include="Client\UI\Agent\AgentInterface.cs" />
-    <Compile Include="Client\UI\RaptureAtkUnitManager.cs" />
-    <Compile Include="Common\Configuration\ConfigBase.cs" />
-    <Compile Include="Common\Configuration\SystemConfig.cs" />
-    <Compile Include="Component\GUI\AtkCollisionNode.cs" />
-    <Compile Include="Component\GUI\AtkComponentBase.cs" />
-    <Compile Include="Component\GUI\AtkComponentButton.cs" />
-    <Compile Include="Component\GUI\AtkComponentCheckBox.cs" />
-    <Compile Include="Component\GUI\AtkComponentGaugeBar.cs" />
-    <Compile Include="Component\GUI\AtkComponentInputBase.cs" />
-    <Compile Include="Component\GUI\AtkComponentNode.cs" />
-    <Compile Include="Component\GUI\AtkComponentRadioButton.cs" />
-    <Compile Include="Component\GUI\AtkComponentSlider.cs" />
-    <Compile Include="Component\GUI\AtkComponentTextInput.cs" />
-    <Compile Include="Component\GUI\AtkComponentWindow.cs" />
-    <Compile Include="Component\GUI\AtkCounterNode.cs" />
-    <Compile Include="Component\GUI\AtkEventListener.cs" />
-    <Compile Include="Component\GUI\AtkEventTarget.cs" />
-    <Compile Include="Component\GUI\AtkImageNode.cs" />
-    <Compile Include="Component\GUI\AtkModuleInterface\AtkEventInterface.cs" />
-    <Compile Include="Component\GUI\AtkNineGridNode.cs" />
-    <Compile Include="Component\GUI\AtkResNode.cs" />
-    <Compile Include="Component\GUI\AtkStage.cs" />
-    <Compile Include="Component\GUI\AtkTextNode.cs" />
-    <Compile Include="Component\GUI\AtkTexture.cs" />
-    <Compile Include="Component\GUI\AtkUnitBase.cs" />
-    <Compile Include="Component\GUI\AtkUnitList.cs" />
-    <Compile Include="Component\GUI\AtkUnitManager.cs" />
-    <Compile Include="Component\GUI\ULD\ULDComponentDataBase.cs" />
-    <Compile Include="Component\GUI\ULD\ULDComponentDataButton.cs" />
-    <Compile Include="Component\GUI\ULD\ULDComponentDataCheckBox.cs" />
-    <Compile Include="Component\GUI\ULD\ULDComponentDataDragDrop.cs" />
-    <Compile Include="Component\GUI\ULD\ULDComponentDataDropDownList.cs" />
-    <Compile Include="Component\GUI\ULD\ULDComponentDataGaugeBar.cs" />
-    <Compile Include="Component\GUI\ULD\ULDComponentDataGuildLeveCard.cs" />
-    <Compile Include="Component\GUI\ULD\ULDComponentDataIcon.cs" />
-    <Compile Include="Component\GUI\ULD\ULDComponentDataIconText.cs" />
-    <Compile Include="Component\GUI\ULD\ULDComponentDataInputBase.cs" />
-    <Compile Include="Component\GUI\ULD\ULDComponentDataJournalCanvas.cs" />
-    <Compile Include="Component\GUI\ULD\ULDComponentDataList.cs" />
-    <Compile Include="Component\GUI\ULD\ULDComponentDataListItemRenderer.cs" />
-    <Compile Include="Component\GUI\ULD\ULDComponentDataMap.cs" />
-    <Compile Include="Component\GUI\ULD\ULDComponentDataMultipurpose.cs" />
-    <Compile Include="Component\GUI\ULD\ULDComponentDataNumericInput.cs" />
-    <Compile Include="Component\GUI\ULD\ULDComponentDataPreview.cs" />
-    <Compile Include="Component\GUI\ULD\ULDComponentDataRadioButton.cs" />
-    <Compile Include="Component\GUI\ULD\ULDComponentDataScrollBar.cs" />
-    <Compile Include="Component\GUI\ULD\ULDComponentDataSlider.cs" />
-    <Compile Include="Component\GUI\ULD\ULDComponentDataTab.cs" />
-    <Compile Include="Component\GUI\ULD\ULDComponentDataTextInput.cs" />
-    <Compile Include="Component\GUI\ULD\ULDComponentDataTextNineGrid.cs" />
-    <Compile Include="Component\GUI\ULD\ULDComponentDataTreeList.cs" />
-    <Compile Include="Component\GUI\ULD\ULDComponentDataUnknownButton.cs" />
-    <Compile Include="Component\GUI\ULD\ULDComponentDataWIndow.cs" />
-    <Compile Include="Component\GUI\ULD\ULDComponentInfo.cs" />
-    <Compile Include="Component\GUI\ULD\ULDData.cs" />
-    <Compile Include="Component\GUI\ULD\ULDObjectInfo.cs" />
-    <Compile Include="Component\GUI\ULD\ULDPart.cs" />
-    <Compile Include="Component\GUI\ULD\ULDPartsList.cs" />
-    <Compile Include="Component\GUI\ULD\ULDTexture.cs" />
-    <Compile Include="Component\GUI\ULD\ULDWidgetInfo.cs" />
-    <Compile Include="FFXIVByteColor.cs" />
-    <Compile Include="FFXIVString.cs" />
-    <Compile Include="Group\BuffList.cs" />
-    <Compile Include="Group\GroupManager.cs" />
-    <Compile Include="Group\PartyMember.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup />
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
