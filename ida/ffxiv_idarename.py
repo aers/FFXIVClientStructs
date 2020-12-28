@@ -771,6 +771,18 @@ factory.register("Component::Log::LogModuleInterface")
 factory.register("Component::Text::TextChecker::ExecNonMacroFunc")
 factory.register("Component::Text::TextModule")
 factory.register("Component::Text::TextModuleInterface")
+# Known classes - no vfunc/vtables
+factory.register("GroupManager", "", {
+    0x140BB2650: "Create",
+    0x1407776A0: "ctor",
+    0x140777810: "SetPartyEmpty",
+    0x1407785A0: "GetAllianceMemberByGroupAndIndex", # (this, group, index)
+    0x140778600: "GetAllianceMemberByIndex", # (this, index)
+    0x140778620: "IsObjectIDInParty", # (this, objectID)
+    0x140778680: "IsCharacterInPartyByName", # (this, char*)
+    0x140778700: "IsObjectIDInAlliance",
+    0x140778780: "IsObjectIDPartyLeader", 
+})
 # Known classes
 factory.register(0x14164E260, "Common::Configuration::ConfigBase", "Client::System::Common::NonCopyable", {
     0x140068C30: "ctor",
