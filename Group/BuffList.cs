@@ -7,9 +7,10 @@ namespace FFXIVClientStructs.Group
     public unsafe struct Buff
     {
         [FieldOffset(0x0)] public ushort StatusID;
-        [FieldOffset(0x2)] public ushort UnkParam; // might indicate no-duration buffs? idk
+        [FieldOffset(0x2)] public byte Param;
+        [FieldOffset(0x3)] public byte StackCount;
         [FieldOffset(0x4)] public float RemainingTime;
-        [FieldOffset(0x8)] public ushort SourceID; // objectID matching the entity that cast the effect - regens will be from the white mage ID etc
+        [FieldOffset(0x8)] public uint SourceID; // objectID matching the entity that cast the effect - regens will be from the white mage ID etc
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x190)]
