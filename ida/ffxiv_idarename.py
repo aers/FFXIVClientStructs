@@ -1307,7 +1307,11 @@ factory.register(0x1417DCDD0, "Client::UI::AddonAreaMap", "Component::GUI::AtkUn
 factory.register(0x1417DEC90, "Client::UI::AddonNamePlate", "Component::GUI::AtkUnitBase", {
     0x140ED8850: "ctor",
 })
-factory.register(0x1417C9520, "Client::UI::AddonRecipeNote", "Component::GUI::AtkUnitBase", {})
+factory.register(0x1417C9520, "Client::UI::AddonRecipeNote", "Component::GUI::AtkUnitBase", {
+    0x140E15650: "ReceiveEvent_ClickSynthesizeButton",
+    0x140E156A0: "ReceiveEvent_ClickQuickSynthesisButton",
+    0x140E156F0: "ReceiveEvent_ClickTrialSynthesisButton",
+})
 factory.register(0x14179BAD0, "Client::UI::AddonHudSelectYesno", "Component::GUI::AtkUnitBase", {
     0x140CD91D0: "ctor",
 })
@@ -1323,7 +1327,13 @@ factory.register(0x1418106A0, "Client::UI::AddonHudLayoutScreen", "Component::GU
 })
 factory.register(0x1417CDB58, "Client::UI::AddonMateriaAttach", "Component::GUI::AtkUnitBase", {})
 factory.register(0x1417CDF98, "Client::UI::AddonMateriaAttachDialog", "Component::GUI::AtkUnitBase", {})
-factory.register(0x1417DE1D0, "Client::UI::AddonGathering", "Component::GUI::AtkUnitBase", {})
+factory.register(0x1417DE1D0, "Client::UI::AddonGathering", "Component::GUI::AtkUnitBase", {
+    0x140ecfeb0: "ctor",
+    0x1404cdf70: "ReceiveEvent_HoverEnter",
+    0x140ed0610: "ReceiveEvent_ToggleQuickGathering",
+    0x140ed06c0: "ReceiveEvent_Gather",
+    0x140ed0850: "ReceiveEvent_HoverExit",
+})
 factory.register(0x141808FE8, "Client::UI::AddonPartyList", "Component::GUI::AtkUnitBase", {
     0x140FEB9F0: "ResizeForPartySize",
 })
