@@ -121,6 +121,9 @@
     <Compile Include="Component\GUI\ULD\ULDWidgetInfo.cs" />
     <Compile Include="FFXIVByteColor.cs" />
     <Compile Include="FFXIVString.cs" />
+    <Compile Include="Group\BuffList.cs" />
+    <Compile Include="Group\GroupManager.cs" />
+    <Compile Include="Group\PartyMember.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
