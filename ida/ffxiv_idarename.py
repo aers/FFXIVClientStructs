@@ -654,7 +654,7 @@ class FfxivClass:
         return "<{0}(\"{1}\")>".format(self.__class__.__name__, self.name)
 
 
-# region: functions
+# region functions
 # ffxivstring is just their implementation of std::string presumably, there are more ctors etc
 api.set_addr_name(0x140059670, "FFXIVString_ctor")  # empty string ctor
 api.set_addr_name(0x1400596B0, "FFXIVString_ctor_copy")  # copy constructor
@@ -693,7 +693,7 @@ api.set_addr_name(0x1412F7B50, "crc")
 api.set_addr_name(0x141371954, "FreeMemory")
 # endregion
 
-# region: globals
+# region globals
 api.set_addr_name(0x14169A2A0, "g_HUDScaleTable")
 api.set_addr_name(0x141D3CE60, "g_ActionManager")
 api.set_addr_name(0x141D66690, "g_Framework")
@@ -733,7 +733,7 @@ api.set_addr_name(0x141DDAA20, "g_GroupManager")
 api.set_addr_name(0x141DE2D50, "g_ClientObjectManager")
 # endregion
 
-# region: vtbl
+# region vtbl
 factory = FfxivClassFactory()
 
 # Unknown classes old RTTI data says known classes inherit from
@@ -1337,6 +1337,7 @@ factory.register(0x1417DE1D0, "Client::UI::AddonGathering", "Component::GUI::Atk
 factory.register(0x141808FE8, "Client::UI::AddonPartyList", "Component::GUI::AtkUnitBase", {
     0x140FEB9F0: "ResizeForPartySize",
 })
+factory.register(0x141820EF0, "Client::UI::AddonLotteryDaily", "Component::GUI::AtkUnitBase", {})
 factory.register(0x141825368, "Client::Graphics::Culling::CullingManager_Client::Graphics::JobSystem_Client::Graphics::Culling::CullingJobOpt", "", {})
 factory.register(0x141825370, "Client::Graphics::Culling::CullingManager_Client::Graphics::JobSystem_Client::Graphics::Culling::CallbackJobOpt", "", {})
 factory.register(0x141825378, "Client::Graphics::Culling::CullingManager_Client::Graphics::JobSystem_Client::Graphics::Culling::RenderCallbackJob", "", {})
