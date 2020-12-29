@@ -1334,6 +1334,7 @@ factory.register(0x1417DE1D0, "Client::UI::AddonGathering", "Component::GUI::Atk
     0x140ed06c0: "ReceiveEvent_Gather",
     0x140ed0850: "ReceiveEvent_HoverExit",
 })
+factory.register(0x1417F8530, "Client::UI::AddonWeeklyPuzzle", "Component::GUI::AtkUnitBase", {})  # Faux Hollows
 factory.register(0x141808FE8, "Client::UI::AddonPartyList", "Component::GUI::AtkUnitBase", {
     0x140FEB9F0: "ResizeForPartySize",
 })
