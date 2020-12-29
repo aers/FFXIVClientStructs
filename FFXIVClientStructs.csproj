@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-	<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{3DBAEE68-9D94-4807-BCB1-E42EDD52B489}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -9,11 +9,11 @@
     <RootNamespace>FFXIVClientStructs</RootNamespace>
     <AssemblyName>FFXIVClientStructs</AssemblyName>
     <AssemblyProduct>FFXIVClientStructs</AssemblyProduct>
-	<TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
+    <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFramework>net472</TargetFramework>
-	<FileAlignment>512</FileAlignment>
+    <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
-	<AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
     <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
