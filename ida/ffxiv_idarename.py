@@ -1329,10 +1329,8 @@ factory.register(0x1417CDB58, "Client::UI::AddonMateriaAttach", "Component::GUI:
 factory.register(0x1417CDF98, "Client::UI::AddonMateriaAttachDialog", "Component::GUI::AtkUnitBase", {})
 factory.register(0x1417DE1D0, "Client::UI::AddonGathering", "Component::GUI::AtkUnitBase", {
     0x140ecfeb0: "ctor",
-    0x1404cdf70: "ReceiveEvent_HoverEnter",
     0x140ed0610: "ReceiveEvent_ToggleQuickGathering",
     0x140ed06c0: "ReceiveEvent_Gather",
-    0x140ed0850: "ReceiveEvent_HoverExit",
 })
 factory.register(0x1417F8530, "Client::UI::AddonWeeklyPuzzle", "Component::GUI::AtkUnitBase", {})  # Faux Hollows
 factory.register(0x141808FE8, "Client::UI::AddonPartyList", "Component::GUI::AtkUnitBase", {
