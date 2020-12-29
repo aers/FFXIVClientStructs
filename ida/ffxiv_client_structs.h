@@ -1806,7 +1806,7 @@ struct Component::GUI::AtkUnitBase /* Size=0x220 */
     /* 0x028 */ Component::GUI::ULD::ULDData ULDData;
     /*       */ __int64 _gap_0xB8;
     /*       */ __int64 _gap_0xC0;
-    /*       */ __int64 _gap_0xC8;
+    /* 0x0C8 */ Component::GUI::AtkResNode* RootNode;
     /*       */ __int64 _gap_0xD0;
     /*       */ __int64 _gap_0xD8;
     /*       */ __int64 _gap_0xE0;

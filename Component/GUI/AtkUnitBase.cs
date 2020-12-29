@@ -18,6 +18,7 @@ namespace FFXIVClientStructs.Component.GUI
         [FieldOffset(0x0)] public AtkEventListener AtkEventListener;
         [FieldOffset(0x8)] public fixed byte Name[0x20];
         [FieldOffset(0x28)] public ULDData ULDData;
+        [FieldOffset(0xC8)] public AtkResNode* RootNode;
         [FieldOffset(0x108)] public AtkComponentNode* WindowNode;
         [FieldOffset(0x1AC)] public float Scale;
         [FieldOffset(0x182)] public byte Flags;
@@ -26,7 +27,5 @@ namespace FFXIVClientStructs.Component.GUI
         [FieldOffset(0x1D5)] public byte Alpha;
         [FieldOffset(0x1D8)] public AtkCollisionNode** CollisionNodeList; // seems to be all collision nodes in tree, may be something else though
         [FieldOffset(0x1E0)] public uint CollisionNodeListCount;
-
-        public AtkResNode* RootNote => ULDData.RootNode;
     }
 }
