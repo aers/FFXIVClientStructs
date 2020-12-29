@@ -130,8 +130,10 @@ namespace CExporter
                         offset = FillGaps(offset, fieldOffset, padFill, sb);
 
                     if (offset > fieldOffset)
-                        throw new Exception($"Current offset exceeded the next field's offset (0x{offset:X} > 0x{fieldOffset:X}): {FixFullName(type)}.{FixTypeName(fieldType)}");
-
+                    {
+                        Debug.WriteLine($"Current offset exceeded the next field's offset (0x{offset:X} > 0x{fieldOffset:X}): {FixFullName(type)}.{FixTypeName(fieldType)}");
+                        return;
+                    }
 
                     if (finfo.IsFixed())
                     {
@@ -264,21 +266,22 @@ namespace CExporter
         private int FillGaps(int offset, int maxOffset, string padFill, StringBuilder sb)
         {
             int gap;
+
             while ((gap = maxOffset - offset) > 0)
             {
-                if (gap % 8 == 0)
+                if (offset % 8 == 0 && gap >= 8)
                 {
                     sb.AppendLine($"    /* {padFill} */ __int64 _gap_0x{offset:X};");
                     offset += 8;
                 }
-                else if (gap % 4 == 0)
-                {
-                    sb.AppendLine($"    /* {padFill} */ __int16 _gap_0x{offset:X};");
-                    offset += 4;
-                }
-                else if (gap % 2 == 0)
+                else if (offset % 4 == 0 && gap >= 4)
                 {
                     sb.AppendLine($"    /* {padFill} */ __int32 _gap_0x{offset:X};");
+                    offset += 4;
+                }
+                else if (offset % 2 == 0 && gap >= 2)
+                {
+                    sb.AppendLine($"    /* {padFill} */ __int16 _gap_0x{offset:X};");
                     offset += 2;
                 }
                 else

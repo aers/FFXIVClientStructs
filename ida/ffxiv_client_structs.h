@@ -74,6 +74,7 @@ struct Component::GUI::ULD::ULDPart;
 struct Component::GUI::ULD::ULDPartsList;
 struct Component::GUI::ULD::ULDTexture;
 struct Component::GUI::ULD::ULDWidgetInfo;
+struct Component::GUI::Addon::AddonDailyLottery;
 struct Client::UI::MoveableAddonInfoStruct;
 struct Client::UI::AddonHudLayoutScreen;
 struct Client::UI::AddonHudLayoutWindow;
@@ -108,8 +109,8 @@ struct FFXIVString /* Size=0x68 */
     /* 0x18 */ __int64 StringLength;
     /* 0x20 */ unsigned __int16 Unk;
     /* 0x22 */ byte InlineBuffer[0x40];
-    /*      */ __int32 _gap_0x62;
-    /*      */ __int16 _gap_0x64;
+    /*      */ __int16 _gap_0x62;
+    /*      */ __int32 _gap_0x64;
 };
 
 struct Group::Buff /* Size=0xC */
@@ -130,19 +131,19 @@ struct Client::Game::Object::GameObject /* Size=0x1A0 */
     /*       */ __int64 _gap_0x20;
     /*       */ __int64 _gap_0x28;
     /* 0x030 */ byte Name[0x1E];
-    /*       */ __int32 _gap_0x4E;
-    /*       */ __int16 _gap_0x50;
-    /*       */ __int64 _gap_0x54;
-    /*       */ __int64 _gap_0x5C;
-    /*       */ __int64 _gap_0x64;
-    /*       */ __int64 _gap_0x6C;
+    /*       */ __int16 _gap_0x4E;
+    /*       */ __int64 _gap_0x50;
+    /*       */ __int64 _gap_0x58;
+    /*       */ __int64 _gap_0x60;
+    /*       */ __int64 _gap_0x68;
+    /*       */ __int32 _gap_0x70;
     /* 0x074 */ unsigned __int32 ObjectID;
-    /*       */ __int16 _gap_0x78;
-    /*       */ __int64 _gap_0x7C;
-    /*       */ __int64 _gap_0x84;
+    /*       */ __int64 _gap_0x78;
+    /*       */ __int64 _gap_0x80;
+    /*       */ __int32 _gap_0x88;
     /* 0x08C */ byte ObjectKind;
     /*       */ byte _gap_0x8D;
-    /*       */ __int32 _gap_0x8E;
+    /*       */ __int16 _gap_0x8E;
     /*       */ __int64 _gap_0x90;
     /*       */ __int64 _gap_0x98;
     /*       */ __int64 _gap_0xA0;
@@ -156,8 +157,8 @@ struct Client::Game::Object::GameObject /* Size=0x1A0 */
     /*       */ __int64 _gap_0xE0;
     /*       */ __int64 _gap_0xE8;
     /* 0x0F0 */ void* DrawObject;
-    /*       */ __int16 _gap_0xF8;
-    /*       */ __int64 _gap_0xFC;
+    /*       */ __int64 _gap_0xF8;
+    /*       */ __int32 _gap_0x100;
     /* 0x104 */ __int32 RenderFlags;
     /*       */ __int64 _gap_0x108;
     /*       */ __int64 _gap_0x110;
@@ -887,8 +888,8 @@ struct Client::Game::Character::Character /* Size=0x1934 */
     /*        */ __int64 _gap_0x17A8;
     /*        */ __int64 _gap_0x17B0;
     /* 0x17B8 */ byte CustomizeData[0x1A];
-    /*        */ __int32 _gap_0x17D2;
-    /*        */ __int16 _gap_0x17D4;
+    /*        */ __int16 _gap_0x17D2;
+    /*        */ __int32 _gap_0x17D4;
     /*        */ __int64 _gap_0x17D8;
     /*        */ __int64 _gap_0x17E0;
     /*        */ __int64 _gap_0x17E8;
@@ -941,12 +942,12 @@ struct Group::BuffList /* Size=0x190 */
     /* 0x008 */ byte Buffs[0x168];
     /* 0x170 */ unsigned __int32 Unk_170;
     /* 0x174 */ unsigned __int16 Unk_174;
-    /*       */ __int32 _gap_0x176;
+    /*       */ __int16 _gap_0x176;
     /* 0x178 */ __int64 Unk_178;
     /* 0x180 */ byte Unk_180;
     /*       */ byte _gap_0x181;
-    /*       */ __int32 _gap_0x182;
-    /*       */ __int16 _gap_0x184;
+    /*       */ __int16 _gap_0x182;
+    /*       */ __int32 _gap_0x184;
     /*       */ __int64 _gap_0x188;
 };
 
@@ -956,7 +957,7 @@ struct Group::GroupManager /* Size=0x3D70 */
     /* 0x1180 */ byte AllianceMembers[0x2BC0];
     /* 0x3D40 */ unsigned __int32 Unk_3D40;
     /* 0x3D44 */ unsigned __int16 Unk_3D44;
-    /*        */ __int32 _gap_0x3D46;
+    /*        */ __int16 _gap_0x3D46;
     /* 0x3D48 */ __int64 Unk_3D48;
     /* 0x3D50 */ __int64 Unk_3D50;
     /* 0x3D58 */ unsigned __int32 PartyLeaderIndex;
@@ -966,8 +967,8 @@ struct Group::GroupManager /* Size=0x3D70 */
     /* 0x3D5F */ byte Unk_3D5F;
     /* 0x3D60 */ byte Unk_3D60;
     /*        */ byte _gap_0x3D61;
-    /*        */ __int32 _gap_0x3D62;
-    /*        */ __int16 _gap_0x3D64;
+    /*        */ __int16 _gap_0x3D62;
+    /*        */ __int32 _gap_0x3D64;
     /*        */ __int64 _gap_0x3D68;
 };
 
@@ -977,7 +978,7 @@ struct Group::PartyMember /* Size=0x230 */
     /* 0x190 */ float X;
     /* 0x194 */ float Y;
     /* 0x198 */ float Z;
-    /*       */ __int16 _gap_0x19C;
+    /*       */ __int32 _gap_0x19C;
     /* 0x1A0 */ __int64 Unk_1A0;
     /* 0x1A8 */ unsigned __int32 ObjectID;
     /* 0x1AC */ unsigned __int32 Unk_ObjectID_1;
@@ -995,18 +996,18 @@ struct Group::PartyMember /* Size=0x230 */
     /*       */ byte _gap_0x207;
     /* 0x208 */ byte Unk_Struct_208__0;
     /*       */ byte _gap_0x209;
-    /*       */ __int32 _gap_0x20A;
+    /*       */ __int16 _gap_0x20A;
     /* 0x20C */ unsigned __int32 Unk_Struct_208__4;
     /* 0x210 */ unsigned __int16 Unk_Struct_208__8;
-    /*       */ __int32 _gap_0x212;
+    /*       */ __int16 _gap_0x212;
     /* 0x214 */ unsigned __int32 Unk_Struct_208__C;
     /* 0x218 */ unsigned __int16 Unk_Struct_208__10;
     /* 0x21A */ unsigned __int16 Unk_Struct_208__14;
-    /*       */ __int16 _gap_0x21C;
+    /*       */ __int32 _gap_0x21C;
     /* 0x220 */ byte Unk_220;
     /*       */ byte _gap_0x221;
-    /*       */ __int32 _gap_0x222;
-    /*       */ __int16 _gap_0x224;
+    /*       */ __int16 _gap_0x222;
+    /*       */ __int32 _gap_0x224;
     /*       */ __int64 _gap_0x228;
 };
 
@@ -1068,7 +1069,7 @@ struct Common::Configuration::ConfigBase /* Size=0x110 */
 {
     /* 0x000 */ void* vtbl;
     /* 0x008 */ Common::Configuration::ChangeEventInterface* Listener;
-    /*       */ __int16 _gap_0x10;
+    /*       */ __int32 _gap_0x10;
     /* 0x014 */ unsigned __int32 ConfigCount;
     /* 0x018 */ Common::Configuration::ConfigEntry* ConfigEntry;
     /*       */ __int64 _gap_0x20;
@@ -1096,7 +1097,7 @@ struct Common::Configuration::ConfigEntry /* Size=0x38 */
     /* 0x00 */ Common::Configuration::ConfigProperties Properties;
     /* 0x10 */ byte* Name;
     /* 0x18 */ __int32 Type;
-    /*      */ __int16 _gap_0x1C;
+    /*      */ __int32 _gap_0x1C;
     /* 0x20 */ Common::Configuration::ConfigValue Value;
     /* 0x28 */ Common::Configuration::ConfigBase* Owner;
     /* 0x30 */ unsigned __int32 Index;
@@ -1240,8 +1241,8 @@ struct Component::GUI::AgentHudLayout /* Size=0x78 */
     /*      */ __int64 _gap_0x68;
     /* 0x70 */ bool NeedToSave;
     /*      */ byte _gap_0x71;
-    /*      */ __int32 _gap_0x72;
-    /*      */ __int16 _gap_0x74;
+    /*      */ __int16 _gap_0x72;
+    /*      */ __int32 _gap_0x74;
 };
 
 enum CollisionType: unsigned __int16
@@ -1270,7 +1271,7 @@ struct Component::GUI::AtkResNode /* Size=0xA8 */
 {
     /* 0x00 */ Component::GUI::AtkEventTarget AtkEventTarget;
     /* 0x08 */ unsigned __int32 NodeID;
-    /*      */ __int16 _gap_0xC;
+    /*      */ __int32 _gap_0xC;
     /*      */ __int64 _gap_0x10;
     /*      */ __int64 _gap_0x18;
     /* 0x20 */ Component::GUI::AtkResNode* ParentNode;
@@ -1309,7 +1310,7 @@ struct Component::GUI::AtkResNode /* Size=0xA8 */
     /* 0x9C */ unsigned __int16 Priority;
     /* 0x9E */ __int16 Flags;
     /* 0xA0 */ unsigned __int32 Flags_2;
-    /*      */ __int16 _gap_0xA4;
+    /*      */ __int32 _gap_0xA4;
 };
 
 struct Component::GUI::AtkEventListener /* Size=0x8 */
@@ -1319,11 +1320,11 @@ struct Component::GUI::AtkEventListener /* Size=0x8 */
 
 struct Client::System::Resource::Handle::ResourceHandle /* Size=0xA8 */
 {
-    /*      */ __int32 _gap_0x0;
-    /*      */ __int64 _gap_0x2;
-    /*      */ __int64 _gap_0xA;
+    /*      */ __int64 _gap_0x0;
+    /*      */ __int64 _gap_0x8;
+    /*      */ __int16 _gap_0x10;
     /* 0x12 */ unsigned __int32 FileType;
-    /*      */ __int32 _gap_0x16;
+    /*      */ __int16 _gap_0x16;
     /*      */ __int64 _gap_0x18;
     /*      */ __int64 _gap_0x20;
     /*      */ __int64 _gap_0x28;
@@ -1374,7 +1375,7 @@ struct Component::GUI::TexHolder /* Size=0x20 */
     /* 0x18 */ unsigned __int16 Count_1;
     /* 0x1A */ byte Count_2;
     /*      */ byte _gap_0x1B;
-    /*      */ __int16 _gap_0x1C;
+    /*      */ __int32 _gap_0x1C;
 };
 
 struct Component::GUI::AtkTexture /* Size=0x18 */
@@ -1383,14 +1384,14 @@ struct Component::GUI::AtkTexture /* Size=0x18 */
     /* 0x08 */ Component::GUI::TexHolder* TextureInfo;
     /* 0x10 */ byte UnkBool_1;
     /* 0x11 */ byte UnkBool_2;
-    /*      */ __int32 _gap_0x12;
-    /*      */ __int16 _gap_0x14;
+    /*      */ __int16 _gap_0x12;
+    /*      */ __int32 _gap_0x14;
 };
 
 struct Component::GUI::ULD::ULDTexture /* Size=0x20 */
 {
     /* 0x00 */ unsigned __int32 Id;
-    /*      */ __int16 _gap_0x4;
+    /*      */ __int32 _gap_0x4;
     /* 0x08 */ Component::GUI::AtkTexture AtkTexture;
 };
 
@@ -1439,13 +1440,13 @@ struct Component::GUI::ULD::ULDData /* Size=0x90 */
     /* 0x20 */ unsigned __int16 TextureCount;
     /* 0x22 */ unsigned __int16 PartsListCount;
     /* 0x24 */ unsigned __int16 ObjectCount;
-    /*      */ __int32 _gap_0x26;
+    /*      */ __int16 _gap_0x26;
     /* 0x28 */ void* UldResourceHandle;
-    /*      */ __int32 _gap_0x30;
-    /*      */ __int64 _gap_0x32;
-    /*      */ __int64 _gap_0x3A;
+    /*      */ __int64 _gap_0x30;
+    /*      */ __int64 _gap_0x38;
+    /*      */ __int16 _gap_0x40;
     /* 0x42 */ unsigned __int16 NodeListCount;
-    /*      */ __int16 _gap_0x44;
+    /*      */ __int32 _gap_0x44;
     /* 0x48 */ void* AtkResourceRendererManager;
     /* 0x50 */ Component::GUI::AtkResNode** NodeList;
     /*      */ __int64 _gap_0x58;
@@ -1455,12 +1456,13 @@ struct Component::GUI::ULD::ULDData /* Size=0x90 */
     /* 0x78 */ Component::GUI::AtkResNode* RootNode;
     /* 0x80 */ unsigned __int16 RootNodeWidth;
     /* 0x82 */ unsigned __int16 RootNodeHeight;
-    /*      */ __int32 _gap_0x84;
+    /*      */ __int16 _gap_0x84;
     /* 0x86 */ byte Flags1;
-    /*      */ __int32 _gap_0x87;
+    /*      */ byte _gap_0x87;
+    /*      */ byte _gap_0x88;
     /* 0x89 */ byte LoadedState;
-    /*      */ __int32 _gap_0x8A;
-    /*      */ __int16 _gap_0x8C;
+    /*      */ __int16 _gap_0x8A;
+    /*      */ __int32 _gap_0x8C;
 };
 
 struct Component::GUI::AtkComponentNode /* Size=0xB0 */
@@ -1485,7 +1487,7 @@ struct Component::GUI::AtkCollisionNode /* Size=0xB8 */
     /* 0x00 */ Component::GUI::AtkResNode AtkResNode;
     /* 0xA8 */ unsigned __int16 CollisionType;
     /* 0xAA */ unsigned __int16 Uses;
-    /*      */ __int16 _gap_0xAC;
+    /*      */ __int32 _gap_0xAC;
     /* 0xB0 */ Component::GUI::AtkComponentBase* LinkedComponent;
 };
 
@@ -1529,20 +1531,20 @@ struct Component::GUI::AtkTextNode /* Size=0x158 */
     /*       */ __int64 _gap_0x120;
     /* 0x128 */ unsigned __int32 SelectStart;
     /* 0x12C */ unsigned __int32 SelectEnd;
-    /*       */ __int32 _gap_0x130;
-    /*       */ __int64 _gap_0x132;
-    /*       */ __int64 _gap_0x13A;
-    /*       */ __int64 _gap_0x142;
+    /*       */ __int64 _gap_0x130;
+    /*       */ __int64 _gap_0x138;
+    /*       */ __int64 _gap_0x140;
+    /*       */ __int16 _gap_0x148;
     /* 0x14A */ byte LineSpacing;
     /* 0x14B */ byte CharSpacing;
     /* 0x14C */ byte AlignmentFontType;
     /* 0x14D */ byte FontSize;
     /* 0x14E */ byte SheetType;
     /*       */ byte _gap_0x14F;
-    /*       */ __int32 _gap_0x150;
+    /*       */ __int16 _gap_0x150;
     /* 0x152 */ byte TextFlags;
     /* 0x153 */ byte TextFlags2;
-    /*       */ __int16 _gap_0x154;
+    /*       */ __int32 _gap_0x154;
 };
 
 struct Component::GUI::AtkComponentButton /* Size=0xF0 */
@@ -1745,7 +1747,7 @@ struct Component::GUI::AtkCounterNode /* Size=0x128 */
     /* 0x0B6 */ byte SpaceWidth;
     /*       */ byte _gap_0xB7;
     /* 0x0B8 */ unsigned __int16 TextAlign;
-    /*       */ __int32 _gap_0xBA;
+    /*       */ __int16 _gap_0xBA;
     /* 0x0BC */ float Width;
     /* 0x0C0 */ FFXIVString NodeText;
 };
@@ -1764,7 +1766,7 @@ struct Component::GUI::AtkImageNode /* Size=0xB8 */
     /* 0xB0 */ unsigned __int16 PartId;
     /* 0xB2 */ byte WrapMode;
     /* 0xB3 */ byte Flags;
-    /*      */ __int16 _gap_0xB4;
+    /*      */ __int32 _gap_0xB4;
 };
 
 struct Component::GUI::AtkNineGridNode /* Size=0xC8 */
@@ -1779,8 +1781,8 @@ struct Component::GUI::AtkNineGridNode /* Size=0xC8 */
     /* 0xBC */ unsigned __int32 BlendMode;
     /* 0xC0 */ byte PartsTypeRenderType;
     /*      */ byte _gap_0xC1;
-    /*      */ __int32 _gap_0xC2;
-    /*      */ __int16 _gap_0xC4;
+    /*      */ __int16 _gap_0xC2;
+    /*      */ __int32 _gap_0xC4;
 };
 
 enum NodeFlags: __int32
@@ -1804,7 +1806,7 @@ struct Component::GUI::AtkUnitBase /* Size=0x220 */
     /* 0x028 */ Component::GUI::ULD::ULDData ULDData;
     /*       */ __int64 _gap_0xB8;
     /*       */ __int64 _gap_0xC0;
-    /* 0x0C8 */ Component::GUI::AtkResNode* RootNode;
+    /*       */ __int64 _gap_0xC8;
     /*       */ __int64 _gap_0xD0;
     /*       */ __int64 _gap_0xD8;
     /*       */ __int64 _gap_0xE0;
@@ -1813,42 +1815,43 @@ struct Component::GUI::AtkUnitBase /* Size=0x220 */
     /*       */ __int64 _gap_0xF8;
     /*       */ __int64 _gap_0x100;
     /* 0x108 */ Component::GUI::AtkComponentNode* WindowNode;
-    /*       */ __int32 _gap_0x110;
-    /*       */ __int64 _gap_0x112;
-    /*       */ __int64 _gap_0x11A;
-    /*       */ __int64 _gap_0x122;
-    /*       */ __int64 _gap_0x12A;
-    /*       */ __int64 _gap_0x132;
-    /*       */ __int64 _gap_0x13A;
-    /*       */ __int64 _gap_0x142;
-    /*       */ __int64 _gap_0x14A;
-    /*       */ __int64 _gap_0x152;
-    /*       */ __int64 _gap_0x15A;
-    /*       */ __int64 _gap_0x162;
-    /*       */ __int64 _gap_0x16A;
-    /*       */ __int64 _gap_0x172;
-    /*       */ __int64 _gap_0x17A;
+    /*       */ __int64 _gap_0x110;
+    /*       */ __int64 _gap_0x118;
+    /*       */ __int64 _gap_0x120;
+    /*       */ __int64 _gap_0x128;
+    /*       */ __int64 _gap_0x130;
+    /*       */ __int64 _gap_0x138;
+    /*       */ __int64 _gap_0x140;
+    /*       */ __int64 _gap_0x148;
+    /*       */ __int64 _gap_0x150;
+    /*       */ __int64 _gap_0x158;
+    /*       */ __int64 _gap_0x160;
+    /*       */ __int64 _gap_0x168;
+    /*       */ __int64 _gap_0x170;
+    /*       */ __int64 _gap_0x178;
+    /*       */ __int16 _gap_0x180;
     /* 0x182 */ byte Flags;
     /*       */ byte _gap_0x183;
-    /*       */ __int64 _gap_0x184;
-    /*       */ __int64 _gap_0x18C;
-    /*       */ __int64 _gap_0x194;
-    /*       */ __int64 _gap_0x19C;
-    /*       */ __int64 _gap_0x1A4;
+    /*       */ __int32 _gap_0x184;
+    /*       */ __int64 _gap_0x188;
+    /*       */ __int64 _gap_0x190;
+    /*       */ __int64 _gap_0x198;
+    /*       */ __int64 _gap_0x1A0;
+    /*       */ __int32 _gap_0x1A8;
     /* 0x1AC */ float Scale;
-    /*       */ __int16 _gap_0x1B0;
-    /*       */ __int64 _gap_0x1B4;
+    /*       */ __int64 _gap_0x1B0;
+    /*       */ __int32 _gap_0x1B8;
     /* 0x1BC */ __int16 X;
     /* 0x1BE */ __int16 Y;
-    /*       */ byte _gap_0x1C0;
-    /*       */ __int16 _gap_0x1C1;
-    /*       */ __int64 _gap_0x1C5;
-    /*       */ __int64 _gap_0x1CD;
+    /*       */ __int64 _gap_0x1C0;
+    /*       */ __int64 _gap_0x1C8;
+    /*       */ __int32 _gap_0x1D0;
+    /*       */ byte _gap_0x1D4;
     /* 0x1D5 */ byte Alpha;
-    /*       */ __int32 _gap_0x1D6;
+    /*       */ __int16 _gap_0x1D6;
     /* 0x1D8 */ Component::GUI::AtkCollisionNode** CollisionNodeList;
     /* 0x1E0 */ unsigned __int32 CollisionNodeListCount;
-    /*       */ __int16 _gap_0x1E4;
+    /*       */ __int32 _gap_0x1E4;
     /*       */ __int64 _gap_0x1E8;
     /*       */ __int64 _gap_0x1F0;
     /*       */ __int64 _gap_0x1F8;
@@ -2118,7 +2121,7 @@ struct Component::GUI::AtkUnitList /* Size=0x810 */
     /*       */ __int64 _gap_0x7F8;
     /*       */ __int64 _gap_0x800;
     /* 0x808 */ unsigned __int32 Count;
-    /*       */ __int16 _gap_0x80C;
+    /*       */ __int32 _gap_0x80C;
 };
 
 struct Component::GUI::AtkUnitManager /* Size=0x9C80 */
@@ -2510,28 +2513,28 @@ struct Component::GUI::AtkUnitManager /* Size=0x9C80 */
 struct Client::UI::RaptureAtkUnitManager /* Size=0x9D2C */
 {
     /* 0x0000 */ Component::GUI::AtkUnitManager AtkUnitManager;
-    /*        */ __int16 _gap_0x9C80;
-    /*        */ __int64 _gap_0x9C84;
-    /*        */ __int64 _gap_0x9C8C;
-    /*        */ __int64 _gap_0x9C94;
-    /*        */ __int64 _gap_0x9C9C;
-    /*        */ __int64 _gap_0x9CA4;
-    /*        */ __int64 _gap_0x9CAC;
-    /*        */ __int64 _gap_0x9CB4;
-    /*        */ __int64 _gap_0x9CBC;
-    /*        */ __int64 _gap_0x9CC4;
-    /*        */ __int64 _gap_0x9CCC;
-    /*        */ __int64 _gap_0x9CD4;
-    /*        */ __int64 _gap_0x9CDC;
-    /*        */ __int64 _gap_0x9CE4;
-    /*        */ __int64 _gap_0x9CEC;
-    /*        */ __int64 _gap_0x9CF4;
-    /*        */ __int64 _gap_0x9CFC;
-    /*        */ __int64 _gap_0x9D04;
-    /*        */ __int64 _gap_0x9D0C;
-    /*        */ __int64 _gap_0x9D14;
-    /*        */ __int64 _gap_0x9D1C;
-    /*        */ __int64 _gap_0x9D24;
+    /*        */ __int64 _gap_0x9C80;
+    /*        */ __int64 _gap_0x9C88;
+    /*        */ __int64 _gap_0x9C90;
+    /*        */ __int64 _gap_0x9C98;
+    /*        */ __int64 _gap_0x9CA0;
+    /*        */ __int64 _gap_0x9CA8;
+    /*        */ __int64 _gap_0x9CB0;
+    /*        */ __int64 _gap_0x9CB8;
+    /*        */ __int64 _gap_0x9CC0;
+    /*        */ __int64 _gap_0x9CC8;
+    /*        */ __int64 _gap_0x9CD0;
+    /*        */ __int64 _gap_0x9CD8;
+    /*        */ __int64 _gap_0x9CE0;
+    /*        */ __int64 _gap_0x9CE8;
+    /*        */ __int64 _gap_0x9CF0;
+    /*        */ __int64 _gap_0x9CF8;
+    /*        */ __int64 _gap_0x9D00;
+    /*        */ __int64 _gap_0x9D08;
+    /*        */ __int64 _gap_0x9D10;
+    /*        */ __int64 _gap_0x9D18;
+    /*        */ __int64 _gap_0x9D20;
+    /*        */ __int32 _gap_0x9D28;
 };
 
 struct Component::GUI::AtkStage /* Size=0x75DF8 */
@@ -62910,7 +62913,7 @@ struct Component::GUI::ULD::ULDComponentDataButton /* Size=0x18 */
 {
     /* 0x00 */ Component::GUI::ULD::ULDComponentDataBase Base;
     /*      */ byte _gap_0x9;
-    /*      */ __int32 _gap_0xA;
+    /*      */ __int16 _gap_0xA;
     /* 0x0C */ unsigned __int32 Nodes[0x2];
     /* 0x14 */ unsigned __int32 TextId;
 };
@@ -62919,7 +62922,7 @@ struct Component::GUI::ULD::ULDComponentDataCheckBox /* Size=0x1C */
 {
     /* 0x00 */ Component::GUI::ULD::ULDComponentDataBase Base;
     /*      */ byte _gap_0x9;
-    /*      */ __int32 _gap_0xA;
+    /*      */ __int16 _gap_0xA;
     /* 0x0C */ unsigned __int32 Nodes[0x3];
     /* 0x18 */ unsigned __int32 TextId;
 };
@@ -62928,7 +62931,7 @@ struct Component::GUI::ULD::ULDComponentDataDragDrop /* Size=0x10 */
 {
     /* 0x00 */ Component::GUI::ULD::ULDComponentDataBase Base;
     /*      */ byte _gap_0x9;
-    /*      */ __int32 _gap_0xA;
+    /*      */ __int16 _gap_0xA;
     /* 0x0C */ unsigned __int32 Nodes[0x1];
 };
 
@@ -62936,7 +62939,7 @@ struct Component::GUI::ULD::ULDComponentDataDropDownList /* Size=0x14 */
 {
     /* 0x00 */ Component::GUI::ULD::ULDComponentDataBase Base;
     /*      */ byte _gap_0x9;
-    /*      */ __int32 _gap_0xA;
+    /*      */ __int16 _gap_0xA;
     /* 0x0C */ unsigned __int32 Nodes[0x2];
 };
 
@@ -62944,13 +62947,13 @@ struct Component::GUI::ULD::ULDComponentDataGaugeBar /* Size=0x3C */
 {
     /* 0x00 */ Component::GUI::ULD::ULDComponentDataBase Base;
     /*      */ byte _gap_0x9;
-    /*      */ __int32 _gap_0xA;
+    /*      */ __int16 _gap_0xA;
     /* 0x0C */ unsigned __int32 Nodes[0x6];
     /* 0x24 */ unsigned __int16 MarginV;
     /* 0x26 */ unsigned __int16 MarginH;
     /* 0x28 */ byte Vertical;
     /*      */ byte _gap_0x29;
-    /*      */ __int32 _gap_0x2A;
+    /*      */ __int16 _gap_0x2A;
     /* 0x2C */ __int32 Indicator;
     /* 0x30 */ __int32 Min;
     /* 0x34 */ __int32 Max;
@@ -62961,16 +62964,16 @@ struct Component::GUI::ULD::ULDComponentDataGuildLeveCard /* Size=0x1C */
 {
     /* 0x00 */ Component::GUI::ULD::ULDComponentDataBase Base;
     /*      */ byte _gap_0x9;
-    /*      */ __int32 _gap_0xA;
+    /*      */ __int16 _gap_0xA;
     /* 0x0C */ unsigned __int32 Nodes[0x3];
-    /*      */ __int16 _gap_0x18;
+    /*      */ __int32 _gap_0x18;
 };
 
 struct Component::GUI::ULD::ULDComponentDataIcon /* Size=0x2C */
 {
     /* 0x00 */ Component::GUI::ULD::ULDComponentDataBase Base;
     /*      */ byte _gap_0x9;
-    /*      */ __int32 _gap_0xA;
+    /*      */ __int16 _gap_0xA;
     /* 0x0C */ unsigned __int32 Nodes[0x8];
 };
 
@@ -62978,7 +62981,7 @@ struct Component::GUI::ULD::ULDComponentDataIconText /* Size=0x14 */
 {
     /* 0x00 */ Component::GUI::ULD::ULDComponentDataBase Base;
     /*      */ byte _gap_0x9;
-    /*      */ __int32 _gap_0xA;
+    /*      */ __int16 _gap_0xA;
     /* 0x0C */ unsigned __int32 Nodes[0x2];
 };
 
@@ -62986,7 +62989,7 @@ struct Component::GUI::ULD::ULDComponentDataInputBase /* Size=0x10 */
 {
     /* 0x00 */ Component::GUI::ULD::ULDComponentDataBase Base;
     /*      */ byte _gap_0x9;
-    /*      */ __int32 _gap_0xA;
+    /*      */ __int16 _gap_0xA;
     /* 0x0C */ FFXIVByteColor FocusColor;
 };
 
@@ -62994,7 +62997,7 @@ struct Component::GUI::ULD::ULDComponentDataJournalCanvas /* Size=0x94 */
 {
     /* 0x00 */ Component::GUI::ULD::ULDComponentDataBase Base;
     /*      */ byte _gap_0x9;
-    /*      */ __int32 _gap_0xA;
+    /*      */ __int16 _gap_0xA;
     /* 0x0C */ unsigned __int32 Nodes[0x20];
     /* 0x8C */ unsigned __int16 ItemMargin;
     /* 0x8E */ unsigned __int16 BasicMargin;
@@ -63006,31 +63009,31 @@ struct Component::GUI::ULD::ULDComponentDataList /* Size=0x28 */
 {
     /* 0x00 */ Component::GUI::ULD::ULDComponentDataBase Base;
     /*      */ byte _gap_0x9;
-    /*      */ __int32 _gap_0xA;
+    /*      */ __int16 _gap_0xA;
     /* 0x0C */ unsigned __int32 Nodes[0x5];
     /* 0x20 */ byte Wrap;
     /* 0x21 */ byte Orientation;
     /* 0x22 */ unsigned __int16 RowNum;
     /* 0x24 */ unsigned __int16 ColNum;
-    /*      */ __int32 _gap_0x26;
+    /*      */ __int16 _gap_0x26;
 };
 
 struct Component::GUI::ULD::ULDComponentDataListItemRenderer /* Size=0x20 */
 {
     /* 0x00 */ Component::GUI::ULD::ULDComponentDataBase Base;
     /*      */ byte _gap_0x9;
-    /*      */ __int32 _gap_0xA;
+    /*      */ __int16 _gap_0xA;
     /* 0x0C */ unsigned __int32 Nodes[0x4];
     /* 0x1C */ byte CanToggle;
     /*      */ byte _gap_0x1D;
-    /*      */ __int32 _gap_0x1E;
+    /*      */ __int16 _gap_0x1E;
 };
 
 struct Component::GUI::ULD::ULDComponentDataMap /* Size=0x34 */
 {
     /* 0x00 */ Component::GUI::ULD::ULDComponentDataBase Base;
     /*      */ byte _gap_0x9;
-    /*      */ __int32 _gap_0xA;
+    /*      */ __int16 _gap_0xA;
     /* 0x0C */ unsigned __int32 Nodes[0xA];
 };
 
@@ -63038,7 +63041,7 @@ struct Component::GUI::ULD::ULDComponentDataMultipurpose /* Size=0x18 */
 {
     /* 0x00 */ Component::GUI::ULD::ULDComponentDataBase Base;
     /*      */ byte _gap_0x9;
-    /*      */ __int32 _gap_0xA;
+    /*      */ __int16 _gap_0xA;
     /* 0x0C */ unsigned __int32 Nodes[0x3];
 };
 
@@ -63053,14 +63056,14 @@ struct Component::GUI::ULD::ULDComponentDataNumericInput /* Size=0x3C */
     /* 0x34 */ unsigned __int32 EndLetterId;
     /* 0x38 */ byte Comma;
     /*      */ byte _gap_0x39;
-    /*      */ __int32 _gap_0x3A;
+    /*      */ __int16 _gap_0x3A;
 };
 
 struct Component::GUI::ULD::ULDComponentDataPreview /* Size=0x14 */
 {
     /* 0x00 */ Component::GUI::ULD::ULDComponentDataBase Base;
     /*      */ byte _gap_0x9;
-    /*      */ __int32 _gap_0xA;
+    /*      */ __int16 _gap_0xA;
     /* 0x0C */ unsigned __int32 Nodes[0x2];
 };
 
@@ -63068,7 +63071,7 @@ struct Component::GUI::ULD::ULDComponentDataRadioButton /* Size=0x24 */
 {
     /* 0x00 */ Component::GUI::ULD::ULDComponentDataBase Base;
     /*      */ byte _gap_0x9;
-    /*      */ __int32 _gap_0xA;
+    /*      */ __int16 _gap_0xA;
     /* 0x0C */ unsigned __int32 Nodes[0x4];
     /* 0x1C */ unsigned __int32 TextId;
     /* 0x20 */ unsigned __int32 GroupId;
@@ -63078,7 +63081,7 @@ struct Component::GUI::ULD::ULDComponentDataScrollBar /* Size=0x20 */
 {
     /* 0x00 */ Component::GUI::ULD::ULDComponentDataBase Base;
     /*      */ byte _gap_0x9;
-    /*      */ __int32 _gap_0xA;
+    /*      */ __int16 _gap_0xA;
     /* 0x0C */ unsigned __int32 Nodes[0x4];
     /* 0x1C */ unsigned __int16 Margin;
     /* 0x1E */ byte Vertical;
@@ -63089,7 +63092,7 @@ struct Component::GUI::ULD::ULDComponentDataSlider /* Size=0x34 */
 {
     /* 0x00 */ Component::GUI::ULD::ULDComponentDataBase Base;
     /*      */ byte _gap_0x9;
-    /*      */ __int32 _gap_0xA;
+    /*      */ __int16 _gap_0xA;
     /* 0x0C */ unsigned __int32 Nodes[0x4];
     /* 0x1C */ __int32 Min;
     /* 0x20 */ __int32 Max;
@@ -63098,14 +63101,14 @@ struct Component::GUI::ULD::ULDComponentDataSlider /* Size=0x34 */
     /* 0x2C */ __int32 OffsetR;
     /* 0x30 */ byte Vertical;
     /*      */ byte _gap_0x31;
-    /*      */ __int32 _gap_0x32;
+    /*      */ __int16 _gap_0x32;
 };
 
 struct Component::GUI::ULD::ULDComponentDataTab /* Size=0x24 */
 {
     /* 0x00 */ Component::GUI::ULD::ULDComponentDataBase Base;
     /*      */ byte _gap_0x9;
-    /*      */ __int32 _gap_0xA;
+    /*      */ __int16 _gap_0xA;
     /* 0x0C */ unsigned __int32 Nodes[0x4];
     /* 0x1C */ unsigned __int32 TextId;
     /* 0x20 */ unsigned __int32 GroupId;
@@ -63152,7 +63155,7 @@ struct Component::GUI::ULD::ULDComponentDataTextNineGrid /* Size=0x18 */
 {
     /* 0x00 */ Component::GUI::ULD::ULDComponentDataBase Base;
     /*      */ byte _gap_0x9;
-    /*      */ __int32 _gap_0xA;
+    /*      */ __int16 _gap_0xA;
     /* 0x0C */ unsigned __int32 Nodes[0x2];
     /* 0x14 */ unsigned __int32 TextId;
 };
@@ -63161,20 +63164,20 @@ struct Component::GUI::ULD::ULDComponentDataTreeList /* Size=0x28 */
 {
     /* 0x00 */ Component::GUI::ULD::ULDComponentDataBase Base;
     /*      */ byte _gap_0x9;
-    /*      */ __int32 _gap_0xA;
+    /*      */ __int16 _gap_0xA;
     /* 0x0C */ unsigned __int32 Nodes[0x5];
     /* 0x20 */ byte Wrap;
     /* 0x21 */ byte Orientation;
     /* 0x22 */ unsigned __int16 RowNum;
     /* 0x24 */ unsigned __int16 ColNum;
-    /*      */ __int32 _gap_0x26;
+    /*      */ __int16 _gap_0x26;
 };
 
 struct Component::GUI::ULD::ULDComponentDataUnknownButton /* Size=0x20 */
 {
     /* 0x00 */ Component::GUI::ULD::ULDComponentDataBase Base;
     /*      */ byte _gap_0x9;
-    /*      */ __int32 _gap_0xA;
+    /*      */ __int16 _gap_0xA;
     /* 0x0C */ unsigned __int32 Nodes[0x4];
     /* 0x1C */ unsigned __int32 TextId;
 };
@@ -63183,7 +63186,7 @@ struct Component::GUI::ULD::ULDComponentDataWindow /* Size=0x38 */
 {
     /* 0x00 */ Component::GUI::ULD::ULDComponentDataBase Base;
     /*      */ byte _gap_0x9;
-    /*      */ __int32 _gap_0xA;
+    /*      */ __int16 _gap_0xA;
     /* 0x0C */ unsigned __int32 Nodes[0x8];
     /* 0x2C */ unsigned __int32 TitleTextId;
     /* 0x30 */ unsigned __int32 SubtitleTextId;
@@ -63198,8 +63201,8 @@ struct Component::GUI::ULD::ULDComponentInfo /* Size=0x18 */
     /* 0x00 */ Component::GUI::ULD::ULDObjectInfo ObjectInfo;
     /* 0x10 */ Component::GUI::ComponentType ComponentType;
     /*      */ byte _gap_0x11;
-    /*      */ __int32 _gap_0x12;
-    /*      */ __int16 _gap_0x14;
+    /*      */ __int16 _gap_0x12;
+    /*      */ __int32 _gap_0x14;
 };
 
 enum AlignmentType: __int32
@@ -63221,7 +63224,80 @@ struct Component::GUI::ULD::ULDWidgetInfo /* Size=0x20 */
     /* 0x10 */ unsigned __int32 AlignmentType;
     /* 0x14 */ float X;
     /* 0x18 */ float Y;
-    /*      */ __int16 _gap_0x1C;
+    /*      */ __int32 _gap_0x1C;
+};
+
+struct Component::GUI::Addon::AddonDailyLottery /* Size=0x408 */
+{
+    /* 0x000 */ Component::GUI::AtkUnitBase AtkUnitBase;
+    /* 0x220 */ Component::GUI::AtkComponentCheckBox* GameplayTileUpperLeft;
+    /* 0x228 */ Component::GUI::AtkComponentCheckBox* GameplayTileUpperMiddle;
+    /* 0x230 */ Component::GUI::AtkComponentCheckBox* GameplayTileUpperRight;
+    /* 0x238 */ Component::GUI::AtkComponentCheckBox* GameplayTileMiddleLeft;
+    /* 0x240 */ Component::GUI::AtkComponentCheckBox* GameplayTileCenter;
+    /* 0x248 */ Component::GUI::AtkComponentCheckBox* GameplayTileMiddleRight;
+    /* 0x250 */ Component::GUI::AtkComponentCheckBox* GameplayTileLowerLeft;
+    /* 0x258 */ Component::GUI::AtkComponentCheckBox* GameplayTileLowerMiddle;
+    /* 0x260 */ Component::GUI::AtkComponentCheckBox* GameplayTileLowerRight;
+    /* 0x268 */ Component::GUI::AtkComponentRadioButton* LaneSelectorMajorDiagonal;
+    /* 0x270 */ Component::GUI::AtkComponentRadioButton* LaneSelectorLeftColumn;
+    /* 0x278 */ Component::GUI::AtkComponentRadioButton* LaneSelectorCenterColumn;
+    /* 0x280 */ Component::GUI::AtkComponentRadioButton* LaneSelectorRightColumn;
+    /* 0x288 */ Component::GUI::AtkComponentRadioButton* LaneSelectorMinorDiagonal;
+    /* 0x290 */ Component::GUI::AtkComponentRadioButton* LaneSelectorTopRow;
+    /* 0x298 */ Component::GUI::AtkComponentRadioButton* LaneSelectorCenterRow;
+    /* 0x2A0 */ Component::GUI::AtkComponentRadioButton* LaneSelectorBottomRow;
+    /* 0x2A8 */ Component::GUI::AtkComponentBase* UnkCompBase1;
+    /* 0x2B0 */ Component::GUI::AtkComponentBase* UnkCompBase2;
+    /* 0x2B8 */ Component::GUI::AtkComponentBase* UnkCompBase3;
+    /* 0x2C0 */ Component::GUI::AtkComponentBase* UnkCompBase4;
+    /* 0x2C8 */ Component::GUI::AtkComponentBase* UnkCompBase5;
+    /* 0x2D0 */ Component::GUI::AtkComponentBase* UnkCompBase6;
+    /* 0x2D8 */ Component::GUI::AtkComponentBase* UnkCompBase7;
+    /* 0x2E0 */ Component::GUI::AtkComponentBase* UnkCompBase8;
+    /* 0x2E8 */ Component::GUI::AtkComponentBase* UnkCompBase9;
+    /* 0x2F0 */ Component::GUI::AtkResNode* UnkResNode1;
+    /* 0x2F8 */ Component::GUI::AtkResNode* UnkResNode2;
+    /* 0x300 */ Component::GUI::AtkResNode* UnkResNode3;
+    /* 0x308 */ Component::GUI::AtkComponentBase* UnkCompBase10;
+    /* 0x310 */ Component::GUI::AtkComponentBase* UnkCompBase11;
+    /* 0x318 */ Component::GUI::AtkComponentBase* UnkCompBase12;
+    /* 0x320 */ Component::GUI::AtkComponentButton* UnkCompButton1;
+    /* 0x328 */ Component::GUI::AtkTextNode* UnkTextNode1;
+    /* 0x330 */ Component::GUI::AtkComponentBase* UnkCompBase13;
+    /* 0x338 */ Component::GUI::AtkComponentBase* UnkCompBase14;
+    /* 0x340 */ Component::GUI::AtkComponentBase* UnkCompBase15;
+    /* 0x348 */ Component::GUI::AtkComponentBase* UnkCompBase16;
+    /* 0x350 */ Component::GUI::AtkComponentBase* UnkCompBase17;
+    /* 0x358 */ Component::GUI::AtkComponentBase* UnkCompBase18;
+    /* 0x360 */ Component::GUI::AtkComponentBase* UnkCompBase19;
+    /* 0x368 */ Component::GUI::AtkComponentBase* UnkCompBase20;
+    /* 0x370 */ Component::GUI::AtkComponentBase* UnkCompBase21;
+    /* 0x378 */ Component::GUI::AtkComponentBase* UnkCompBase22;
+    /* 0x380 */ Component::GUI::AtkComponentBase* UnkCompBase23;
+    /* 0x388 */ Component::GUI::AtkComponentBase* UnkCompBase24;
+    /* 0x390 */ Component::GUI::AtkComponentBase* UnkCompBase25;
+    /* 0x398 */ Component::GUI::AtkComponentBase* UnkCompBase26;
+    /* 0x3A0 */ Component::GUI::AtkComponentBase* UnkCompBase27;
+    /* 0x3A8 */ Component::GUI::AtkComponentBase* UnkCompBase28;
+    /* 0x3B0 */ Component::GUI::AtkComponentBase* UnkCompBase29;
+    /* 0x3B8 */ Component::GUI::AtkComponentBase* UnkCompBase30;
+    /* 0x3C0 */ Component::GUI::AtkComponentBase* UnkCompBase31;
+    /* 0x3C8 */ Component::GUI::AtkImageNode* UnkImageNode1;
+    /* 0x3D0 */ __int32 UnkNumber1;
+    /* 0x3D4 */ __int32 UnkNumber2;
+    /* 0x3D8 */ __int32 GameplayTileUpperLeftNumber;
+    /* 0x3DC */ __int32 GameplayTileUpperMiddleNumber;
+    /* 0x3E0 */ __int32 GameplayTileUpperRightNumber;
+    /* 0x3E4 */ __int32 GameplayTileMiddleLeftNumber;
+    /* 0x3E8 */ __int32 GameplayTileCenterNumber;
+    /* 0x3EC */ __int32 GameplayTileMiddleRightNumber;
+    /* 0x3F0 */ __int32 GameplayTileLowerLeftNumber;
+    /* 0x3F4 */ __int32 GameplayTileLowerMiddleNumber;
+    /* 0x3F8 */ __int32 GameplayTileLowerRightNumber;
+    /* 0x3FC */ __int32 UnkNumber3;
+    /* 0x400 */ __int32 UnkNumber4;
+    /* 0x404 */ __int32 UnkNumber5;
 };
 
 struct Client::UI::AddonHudLayoutWindow /* Size=0x7E8 */
@@ -63612,10 +63688,10 @@ struct Client::UI::MoveableAddonInfoStruct /* Size=0x50 */
     /*      */ __int64 _gap_0x18;
     /* 0x20 */ Client::UI::AddonHudLayoutScreen* hudLayoutScreen;
     /* 0x28 */ Component::GUI::AtkUnitBase* SelectedAtkUnit;
-    /*      */ __int16 _gap_0x30;
-    /*      */ __int64 _gap_0x34;
+    /*      */ __int64 _gap_0x30;
+    /*      */ __int32 _gap_0x38;
     /* 0x3C */ __int32 Flags;
-    /*      */ __int16 _gap_0x40;
+    /*      */ __int32 _gap_0x40;
     /* 0x44 */ __int16 XOffset;
     /* 0x46 */ __int16 YOffset;
     /* 0x48 */ __int16 OverlayWidth;
@@ -64916,10 +64992,10 @@ struct Client::Graphics::Scene::CharacterBase /* Size=0x8F0 */
     /* 0x000 */ Client::Graphics::Scene::DrawObject DrawObject;
     /* 0x090 */ byte UnkFlags_01;
     /*       */ byte _gap_0x91;
-    /*       */ __int32 _gap_0x92;
-    /*       */ __int16 _gap_0x94;
+    /*       */ __int16 _gap_0x92;
+    /*       */ __int32 _gap_0x94;
     /* 0x098 */ __int32 SlotCount;
-    /*       */ __int16 _gap_0x9C;
+    /*       */ __int32 _gap_0x9C;
     /* 0x0A0 */ void* Skeleton;
     /* 0x0A8 */ void** ModelArray;
     /*       */ __int64 _gap_0xB0;
@@ -65193,7 +65269,7 @@ struct Client::Graphics::Scene::Human /* Size=0xA80 */
 {
     /* 0x000 */ Client::Graphics::Scene::CharacterBase CharacterBase;
     /* 0x8F0 */ byte CustomizeData[0x1A];
-    /*       */ __int32 _gap_0x90A;
+    /*       */ __int16 _gap_0x90A;
     /* 0x90C */ unsigned __int32 SlotNeedsUpdateBitfield;
     /* 0x910 */ byte EquipSlotData[0x28];
     /* 0x938 */ unsigned __int16 RaceSexId;
@@ -65245,7 +65321,7 @@ struct Client::Graphics::Scene::Human /* Size=0xA80 */
 struct Client::Game::Character::BattleChara /* Size=0x2B60 */
 {
     /* 0x0000 */ Client::Game::Character::Character Character;
-    /*        */ __int16 _gap_0x1934;
+    /*        */ __int32 _gap_0x1934;
     /*        */ __int64 _gap_0x1938;
     /*        */ __int64 _gap_0x1940;
     /*        */ __int64 _gap_0x1948;
@@ -65832,7 +65908,7 @@ struct Client::Game::Character::BattleChara /* Size=0x2B60 */
 struct Client::Game::Character::Companion /* Size=0x19C0 */
 {
     /* 0x0000 */ Client::Game::Character::Character Character;
-    /*        */ __int16 _gap_0x1934;
+    /*        */ __int32 _gap_0x1934;
     /*        */ __int64 _gap_0x1938;
     /*        */ __int64 _gap_0x1940;
     /*        */ __int64 _gap_0x1948;
