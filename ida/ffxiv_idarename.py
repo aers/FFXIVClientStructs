@@ -426,7 +426,7 @@ class FfxivClass:
         current_image_base = api.get_image_base()
         if self.STANDARD_IMAGE_BASE != current_image_base:
             rebase_offset = current_image_base - self.STANDARD_IMAGE_BASE
-            self.vtbl_ea + rebase_offset
+            self.vtbl_ea += rebase_offset
             for idx_or_ea in list(funcs.keys()):
                 if idx_or_ea > 0x1000:
                     funcs[idx_or_ea + rebase_offset] = funcs.pop(idx_or_ea)
