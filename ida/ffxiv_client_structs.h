@@ -451,8 +451,8 @@ struct FXIVClientStructs::Component::GUI::Addon::AddonWeeklyPuzzle::RewardPanelI
 {
     /* 0x00 */ Component::GUI::AtkComponentBase* CompBase;
     /* 0x08 */ Component::GUI::AtkResNode* Res;
-    /* 0x10 */ Component::GUI::AtkTextNode* TileNameText;
-    /* 0x18 */ Component::GUI::AtkTextNode* TileRewardText;
+    /* 0x10 */ Component::GUI::AtkTextNode* NameText;
+    /* 0x18 */ Component::GUI::AtkTextNode* RewardText;
     /* 0x20 */ __int64 Unk20;
 };
 

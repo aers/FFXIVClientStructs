@@ -17,8 +17,8 @@
             {
                 [FieldOffset(0x0)] public AtkComponentBase* CompBase;
                 [FieldOffset(0x8)] public AtkResNode* Res;
-                [FieldOffset(0x10)] public AtkTextNode* TileNameText;
-                [FieldOffset(0x18)] public AtkTextNode* TileRewardText;
+                [FieldOffset(0x10)] public AtkTextNode* NameText;
+                [FieldOffset(0x18)] public AtkTextNode* RewardText;
                 [FieldOffset(0x20)] public long Unk20;  // array stuff?
             }
 
