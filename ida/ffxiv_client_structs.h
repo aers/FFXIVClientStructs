@@ -1,4 +1,5 @@
 // Forward References
+struct FXIVClientStructs::Component::GUI::Addon::AddonWeeklyPuzzle;
 struct FFXIVByteColor;
 struct FFXIVString;
 struct Group::Buff;
@@ -6,9 +7,6 @@ struct Group::BuffList;
 struct Group::GroupManager;
 struct Group::PartyMember;
 struct Common::Configuration::ConfigProperties;
-struct Common::Configuration::ConfigProperties_UIntProperties;
-struct Common::Configuration::ConfigProperties_FloatProperties;
-struct Common::Configuration::ConfigProperties_StringProperties;
 struct Common::Configuration::ConfigValue;
 struct Common::Configuration::ConfigEntry;
 struct Common::Configuration::ChangeEventInterface;
@@ -92,14 +90,322 @@ struct Client::Game::Object::GameObject;
 struct Client::Game::Character::BattleChara;
 struct Client::Game::Character::Character;
 struct Client::Game::Character::Companion;
+struct FXIVClientStructs::Component::GUI::Addon::AddonWeeklyPuzzle::RewardPanelItem;
+struct FXIVClientStructs::Component::GUI::Addon::AddonWeeklyPuzzle::GameTileItem;
+struct FXIVClientStructs::Component::GUI::Addon::AddonWeeklyPuzzle::GameTileRow;
+struct FXIVClientStructs::Component::GUI::Addon::AddonWeeklyPuzzle::GameTileBoard;
+struct Common::Configuration::ConfigProperties::UIntProperties;
+struct Common::Configuration::ConfigProperties::FloatProperties;
+struct Common::Configuration::ConfigProperties::StringProperties;
 
 // Definitions
+struct Component::GUI::AtkEventListener /* Size=0x8 */
+{
+    /* 0x0 */ void* vtbl;
+};
+
+struct Client::System::Resource::Handle::ResourceHandle /* Size=0xA8 */
+{
+    /*      */ __int64 _gap_0x0;
+    /*      */ __int64 _gap_0x8;
+    /*      */ __int16 _gap_0x10;
+    /* 0x12 */ unsigned __int32 FileType;
+    /*      */ __int16 _gap_0x16;
+    /*      */ __int64 _gap_0x18;
+    /*      */ __int64 _gap_0x20;
+    /*      */ __int64 _gap_0x28;
+    /*      */ __int64 _gap_0x30;
+    /*      */ __int64 _gap_0x38;
+    /*      */ __int64 _gap_0x40;
+    /* 0x48 */ char* FileName;
+    /*      */ __int64 _gap_0x50;
+    /*      */ __int64 _gap_0x58;
+    /*      */ __int64 _gap_0x60;
+    /*      */ __int64 _gap_0x68;
+    /*      */ __int64 _gap_0x70;
+    /*      */ __int64 _gap_0x78;
+    /*      */ __int64 _gap_0x80;
+    /*      */ __int64 _gap_0x88;
+    /*      */ __int64 _gap_0x90;
+    /*      */ __int64 _gap_0x98;
+    /*      */ __int64 _gap_0xA0;
+};
+
+struct Client::System::Resource::Handle::TextureResourceHandle /* Size=0x128 */
+{
+    /* 0x000 */ Client::System::Resource::Handle::ResourceHandle ResourceHandle;
+    /*       */ __int64 _gap_0xA8;
+    /*       */ __int64 _gap_0xB0;
+    /*       */ __int64 _gap_0xB8;
+    /*       */ __int64 _gap_0xC0;
+    /*       */ __int64 _gap_0xC8;
+    /*       */ __int64 _gap_0xD0;
+    /*       */ __int64 _gap_0xD8;
+    /*       */ __int64 _gap_0xE0;
+    /*       */ __int64 _gap_0xE8;
+    /*       */ __int64 _gap_0xF0;
+    /*       */ __int64 _gap_0xF8;
+    /*       */ __int64 _gap_0x100;
+    /*       */ __int64 _gap_0x108;
+    /*       */ __int64 _gap_0x110;
+    /*       */ __int64 _gap_0x118;
+    /*       */ __int64 _gap_0x120;
+};
+
+struct Component::GUI::TexHolder /* Size=0x20 */
+{
+    /* 0x00 */ unsigned __int32 TexPathHash;
+    /* 0x04 */ unsigned __int32 Unk_1;
+    /* 0x08 */ Client::System::Resource::Handle::TextureResourceHandle* TexFileResourceHandle;
+    /* 0x10 */ void* KernelTextureObject;
+    /* 0x18 */ unsigned __int16 Count_1;
+    /* 0x1A */ byte Count_2;
+    /*      */ byte _gap_0x1B;
+    /*      */ __int32 _gap_0x1C;
+};
+
+struct Component::GUI::AtkTexture /* Size=0x18 */
+{
+    /* 0x00 */ void* vtbl;
+    /* 0x08 */ Component::GUI::TexHolder* TextureInfo;
+    /* 0x10 */ byte UnkBool_1;
+    /* 0x11 */ byte UnkBool_2;
+    /*      */ __int16 _gap_0x12;
+    /*      */ __int32 _gap_0x14;
+};
+
+struct Component::GUI::ULD::ULDTexture /* Size=0x20 */
+{
+    /* 0x00 */ unsigned __int32 Id;
+    /*      */ __int32 _gap_0x4;
+    /* 0x08 */ Component::GUI::AtkTexture AtkTexture;
+};
+
+struct Component::GUI::ULD::ULDPart /* Size=0x10 */
+{
+    /* 0x00 */ Component::GUI::ULD::ULDTexture* ULDTexture;
+    /* 0x08 */ unsigned __int16 U;
+    /* 0x0A */ unsigned __int16 V;
+    /* 0x0C */ unsigned __int16 Width;
+    /* 0x0E */ unsigned __int16 Height;
+};
+
+struct Component::GUI::ULD::ULDPartsList /* Size=0x10 */
+{
+    /* 0x00 */ unsigned __int32 Id;
+    /* 0x04 */ unsigned __int32 PartCount;
+    /* 0x08 */ Component::GUI::ULD::ULDPart* Parts;
+};
+
+struct Component::GUI::AtkEventTarget /* Size=0x8 */
+{
+    /* 0x0 */ void* vtbl;
+};
+
+enum NodeType: unsigned __int16
+{
+    Res = 1,
+    Image = 2,
+    Text = 3,
+    NineGrid = 4,
+    Counter = 5,
+    Collision = 8
+};
+
 struct FFXIVByteColor /* Size=0x4 */
 {
     /* 0x0 */ byte R;
     /* 0x1 */ byte G;
     /* 0x2 */ byte B;
     /* 0x3 */ byte A;
+};
+
+struct Component::GUI::AtkResNode /* Size=0xA8 */
+{
+    /* 0x00 */ Component::GUI::AtkEventTarget AtkEventTarget;
+    /* 0x08 */ unsigned __int32 NodeID;
+    /*      */ __int32 _gap_0xC;
+    /*      */ __int64 _gap_0x10;
+    /*      */ __int64 _gap_0x18;
+    /* 0x20 */ Component::GUI::AtkResNode* ParentNode;
+    /* 0x28 */ Component::GUI::AtkResNode* PrevSiblingNode;
+    /* 0x30 */ Component::GUI::AtkResNode* NextSiblingNode;
+    /* 0x38 */ Component::GUI::AtkResNode* ChildNode;
+    /* 0x40 */ Component::GUI::NodeType Type;
+    /* 0x42 */ unsigned __int16 ChildCount;
+    /* 0x44 */ float X;
+    /* 0x48 */ float Y;
+    /* 0x4C */ float ScaleX;
+    /* 0x50 */ float ScaleY;
+    /* 0x54 */ float Rotation;
+    /* 0x58 */ float UnkMatrix[0x6];
+    /* 0x70 */ FFXIVByteColor Color;
+    /* 0x74 */ float Depth;
+    /* 0x78 */ float Depth_2;
+    /* 0x7C */ unsigned __int16 AddRed;
+    /* 0x7E */ unsigned __int16 AddGreen;
+    /* 0x80 */ unsigned __int16 AddBlue;
+    /* 0x82 */ unsigned __int16 AddRed_2;
+    /* 0x84 */ unsigned __int16 AddGreen_2;
+    /* 0x86 */ unsigned __int16 AddBlue_2;
+    /* 0x88 */ byte MultiplyRed;
+    /* 0x89 */ byte MultiplyGreen;
+    /* 0x8A */ byte MultiplyBlue;
+    /* 0x8B */ byte MultiplyRed_2;
+    /* 0x8C */ byte MultiplyGreen_2;
+    /* 0x8D */ byte MultiplyBlue_2;
+    /* 0x8E */ byte Alpha_2;
+    /* 0x8F */ byte UnkByte_1;
+    /* 0x90 */ unsigned __int16 Width;
+    /* 0x92 */ unsigned __int16 Height;
+    /* 0x94 */ float OriginX;
+    /* 0x98 */ float OriginY;
+    /* 0x9C */ unsigned __int16 Priority;
+    /* 0x9E */ __int16 Flags;
+    /* 0xA0 */ unsigned __int32 Flags_2;
+    /*      */ __int32 _gap_0xA4;
+};
+
+struct Component::GUI::ULD::ULDObjectInfo /* Size=0x10 */
+{
+    /* 0x00 */ unsigned __int32 Id;
+    /* 0x04 */ __int32 NodeCount;
+    /* 0x08 */ Component::GUI::AtkResNode** NodeList;
+};
+
+struct Component::GUI::ULD::ULDComponentDataBase /* Size=0x9 */
+{
+    /* 0x0 */ byte Index;
+    /* 0x1 */ byte Up;
+    /* 0x2 */ byte Down;
+    /* 0x3 */ byte Left;
+    /* 0x4 */ byte Right;
+    /* 0x5 */ byte Cursor;
+    /* 0x6 */ byte OffsetX;
+    /* 0x7 */ byte OffsetY;
+    /* 0x8 */ byte Unk;
+};
+
+struct Component::GUI::ULD::ULDData /* Size=0x90 */
+{
+    /* 0x00 */ Component::GUI::ULD::ULDTexture* Textures;
+    /* 0x08 */ Component::GUI::ULD::ULDPartsList* PartsList;
+    /* 0x10 */ Component::GUI::ULD::ULDObjectInfo* Objects;
+    /* 0x18 */ Component::GUI::ULD::ULDComponentDataBase* ComponentData;
+    /* 0x20 */ unsigned __int16 TextureCount;
+    /* 0x22 */ unsigned __int16 PartsListCount;
+    /* 0x24 */ unsigned __int16 ObjectCount;
+    /*      */ __int16 _gap_0x26;
+    /* 0x28 */ void* UldResourceHandle;
+    /*      */ __int64 _gap_0x30;
+    /*      */ __int64 _gap_0x38;
+    /*      */ __int16 _gap_0x40;
+    /* 0x42 */ unsigned __int16 NodeListCount;
+    /*      */ __int32 _gap_0x44;
+    /* 0x48 */ void* AtkResourceRendererManager;
+    /* 0x50 */ Component::GUI::AtkResNode** NodeList;
+    /*      */ __int64 _gap_0x58;
+    /*      */ __int64 _gap_0x60;
+    /*      */ __int64 _gap_0x68;
+    /*      */ __int64 _gap_0x70;
+    /* 0x78 */ Component::GUI::AtkResNode* RootNode;
+    /* 0x80 */ unsigned __int16 RootNodeWidth;
+    /* 0x82 */ unsigned __int16 RootNodeHeight;
+    /*      */ __int16 _gap_0x84;
+    /* 0x86 */ byte Flags1;
+    /*      */ byte _gap_0x87;
+    /*      */ byte _gap_0x88;
+    /* 0x89 */ byte LoadedState;
+    /*      */ __int16 _gap_0x8A;
+    /*      */ __int32 _gap_0x8C;
+};
+
+struct Component::GUI::AtkComponentBase /* Size=0xC0 */
+{
+    /* 0x00 */ Component::GUI::AtkEventListener AtkEventListener;
+    /* 0x08 */ Component::GUI::ULD::ULDData ULDData;
+    /*      */ __int64 _gap_0x98;
+    /*      */ __int64 _gap_0xA0;
+    /* 0xA8 */ Component::GUI::AtkComponentNode* OwnerNode;
+    /*      */ __int64 _gap_0xB0;
+    /*      */ __int64 _gap_0xB8;
+};
+
+struct Component::GUI::AtkComponentNode /* Size=0xB0 */
+{
+    /* 0x00 */ Component::GUI::AtkResNode AtkResNode;
+    /* 0xA8 */ Component::GUI::AtkComponentBase* Component;
+};
+
+struct Component::GUI::AtkCollisionNode /* Size=0xB8 */
+{
+    /* 0x00 */ Component::GUI::AtkResNode AtkResNode;
+    /* 0xA8 */ unsigned __int16 CollisionType;
+    /* 0xAA */ unsigned __int16 Uses;
+    /*      */ __int32 _gap_0xAC;
+    /* 0xB0 */ Component::GUI::AtkComponentBase* LinkedComponent;
+};
+
+struct Component::GUI::AtkUnitBase /* Size=0x220 */
+{
+    /* 0x000 */ Component::GUI::AtkEventListener AtkEventListener;
+    /* 0x008 */ byte Name[0x20];
+    /* 0x028 */ Component::GUI::ULD::ULDData ULDData;
+    /*       */ __int64 _gap_0xB8;
+    /*       */ __int64 _gap_0xC0;
+    /* 0x0C8 */ Component::GUI::AtkResNode* RootNode;
+    /*       */ __int64 _gap_0xD0;
+    /*       */ __int64 _gap_0xD8;
+    /*       */ __int64 _gap_0xE0;
+    /*       */ __int64 _gap_0xE8;
+    /*       */ __int64 _gap_0xF0;
+    /*       */ __int64 _gap_0xF8;
+    /*       */ __int64 _gap_0x100;
+    /* 0x108 */ Component::GUI::AtkComponentNode* WindowNode;
+    /*       */ __int64 _gap_0x110;
+    /*       */ __int64 _gap_0x118;
+    /*       */ __int64 _gap_0x120;
+    /*       */ __int64 _gap_0x128;
+    /*       */ __int64 _gap_0x130;
+    /*       */ __int64 _gap_0x138;
+    /*       */ __int64 _gap_0x140;
+    /*       */ __int64 _gap_0x148;
+    /*       */ __int64 _gap_0x150;
+    /*       */ __int64 _gap_0x158;
+    /*       */ __int64 _gap_0x160;
+    /*       */ __int64 _gap_0x168;
+    /*       */ __int64 _gap_0x170;
+    /*       */ __int64 _gap_0x178;
+    /*       */ __int16 _gap_0x180;
+    /* 0x182 */ byte Flags;
+    /*       */ byte _gap_0x183;
+    /*       */ __int32 _gap_0x184;
+    /*       */ __int64 _gap_0x188;
+    /*       */ __int64 _gap_0x190;
+    /*       */ __int64 _gap_0x198;
+    /*       */ __int64 _gap_0x1A0;
+    /*       */ __int32 _gap_0x1A8;
+    /* 0x1AC */ float Scale;
+    /*       */ __int64 _gap_0x1B0;
+    /*       */ __int32 _gap_0x1B8;
+    /* 0x1BC */ __int16 X;
+    /* 0x1BE */ __int16 Y;
+    /*       */ __int64 _gap_0x1C0;
+    /*       */ __int64 _gap_0x1C8;
+    /*       */ __int32 _gap_0x1D0;
+    /*       */ byte _gap_0x1D4;
+    /* 0x1D5 */ byte Alpha;
+    /*       */ __int16 _gap_0x1D6;
+    /* 0x1D8 */ Component::GUI::AtkCollisionNode** CollisionNodeList;
+    /* 0x1E0 */ unsigned __int32 CollisionNodeListCount;
+    /*       */ __int32 _gap_0x1E4;
+    /*       */ __int64 _gap_0x1E8;
+    /*       */ __int64 _gap_0x1F0;
+    /*       */ __int64 _gap_0x1F8;
+    /*       */ __int64 _gap_0x200;
+    /*       */ __int64 _gap_0x208;
+    /*       */ __int64 _gap_0x210;
+    /*       */ __int64 _gap_0x218;
 };
 
 struct FFXIVString /* Size=0x68 */
@@ -112,6 +418,160 @@ struct FFXIVString /* Size=0x68 */
     /* 0x22 */ byte InlineBuffer[0x40];
     /*      */ __int16 _gap_0x62;
     /*      */ __int32 _gap_0x64;
+};
+
+struct Component::GUI::AtkTextNode /* Size=0x158 */
+{
+    /* 0x000 */ Component::GUI::AtkResNode AtkResNode;
+    /* 0x0A8 */ unsigned __int32 TextId;
+    /* 0x0AC */ FFXIVByteColor TextColor;
+    /* 0x0B0 */ FFXIVByteColor EdgeColor;
+    /* 0x0B4 */ FFXIVByteColor BackgroundColor;
+    /* 0x0B8 */ FFXIVString NodeText;
+    /*       */ __int64 _gap_0x120;
+    /* 0x128 */ unsigned __int32 SelectStart;
+    /* 0x12C */ unsigned __int32 SelectEnd;
+    /*       */ __int64 _gap_0x130;
+    /*       */ __int64 _gap_0x138;
+    /*       */ __int64 _gap_0x140;
+    /*       */ __int16 _gap_0x148;
+    /* 0x14A */ byte LineSpacing;
+    /* 0x14B */ byte CharSpacing;
+    /* 0x14C */ byte AlignmentFontType;
+    /* 0x14D */ byte FontSize;
+    /* 0x14E */ byte SheetType;
+    /*       */ byte _gap_0x14F;
+    /*       */ __int16 _gap_0x150;
+    /* 0x152 */ byte TextFlags;
+    /* 0x153 */ byte TextFlags2;
+    /*       */ __int32 _gap_0x154;
+};
+
+struct FXIVClientStructs::Component::GUI::Addon::AddonWeeklyPuzzle::RewardPanelItem /* Size=0x28 */
+{
+    /* 0x00 */ Component::GUI::AtkComponentBase* CompBase;
+    /* 0x08 */ Component::GUI::AtkResNode* Res;
+    /* 0x10 */ Component::GUI::AtkTextNode* TileNameText;
+    /* 0x18 */ Component::GUI::AtkTextNode* TileRewardText;
+    /* 0x20 */ __int64 Unk20;
+};
+
+struct Component::GUI::AtkComponentButton /* Size=0xF0 */
+{
+    /* 0x00 */ Component::GUI::AtkComponentBase AtkComponentBase;
+    /* 0xC0 */ __int16 Left;
+    /* 0xC2 */ __int16 Top;
+    /* 0xC4 */ __int16 Right;
+    /* 0xC6 */ __int16 Bottom;
+    /* 0xC8 */ Component::GUI::AtkTextNode* ButtonTextNode;
+    /* 0xD0 */ Component::GUI::AtkResNode* ButtonBGNode;
+    /*      */ __int64 _gap_0xD8;
+    /*      */ __int64 _gap_0xE0;
+    /*      */ __int64 _gap_0xE8;
+};
+
+struct FXIVClientStructs::Component::GUI::Addon::AddonWeeklyPuzzle::GameTileItem /* Size=0x30 */
+{
+    /* 0x00 */ FXIVClientStructs::Component::GUI::Addon::AddonWeeklyPuzzle* self;
+    /* 0x08 */ Component::GUI::AtkComponentButton* Button;
+    /* 0x10 */ Component::GUI::AtkResNode* UnkRes10;
+    /* 0x18 */ Component::GUI::AtkResNode* UnkRes18;
+    /* 0x20 */ Component::GUI::AtkResNode* UnkRes20;
+    /* 0x28 */ __int64 Unk28;
+};
+
+struct FXIVClientStructs::Component::GUI::Addon::AddonWeeklyPuzzle::GameTileRow /* Size=0x120 */
+{
+    /* 0x000 */ FXIVClientStructs::Component::GUI::Addon::AddonWeeklyPuzzle::GameTileItem Col1;
+    /* 0x030 */ FXIVClientStructs::Component::GUI::Addon::AddonWeeklyPuzzle::GameTileItem Col2;
+    /* 0x060 */ FXIVClientStructs::Component::GUI::Addon::AddonWeeklyPuzzle::GameTileItem Col3;
+    /* 0x090 */ FXIVClientStructs::Component::GUI::Addon::AddonWeeklyPuzzle::GameTileItem Col4;
+    /* 0x0C0 */ FXIVClientStructs::Component::GUI::Addon::AddonWeeklyPuzzle::GameTileItem Col5;
+    /* 0x0F0 */ FXIVClientStructs::Component::GUI::Addon::AddonWeeklyPuzzle::GameTileItem Col6;
+};
+
+struct FXIVClientStructs::Component::GUI::Addon::AddonWeeklyPuzzle::GameTileBoard /* Size=0x6C0 */
+{
+    /* 0x000 */ FXIVClientStructs::Component::GUI::Addon::AddonWeeklyPuzzle::GameTileRow Row1;
+    /* 0x120 */ FXIVClientStructs::Component::GUI::Addon::AddonWeeklyPuzzle::GameTileRow Row2;
+    /* 0x240 */ FXIVClientStructs::Component::GUI::Addon::AddonWeeklyPuzzle::GameTileRow Row3;
+    /* 0x360 */ FXIVClientStructs::Component::GUI::Addon::AddonWeeklyPuzzle::GameTileRow Row4;
+    /* 0x480 */ FXIVClientStructs::Component::GUI::Addon::AddonWeeklyPuzzle::GameTileRow Row5;
+    /* 0x5A0 */ FXIVClientStructs::Component::GUI::Addon::AddonWeeklyPuzzle::GameTileRow Row6;
+};
+
+struct FXIVClientStructs::Component::GUI::Addon::AddonWeeklyPuzzle /* Size=0xD00 */
+{
+    /* 0x000 */ Component::GUI::AtkUnitBase AtkUnitBase;
+    /* 0x220 */ FXIVClientStructs::Component::GUI::Addon::AddonWeeklyPuzzle::RewardPanelItem RewardPanelCommander;
+    /* 0x248 */ FXIVClientStructs::Component::GUI::Addon::AddonWeeklyPuzzle::RewardPanelItem RewardPanelCoffer;
+    /* 0x270 */ FXIVClientStructs::Component::GUI::Addon::AddonWeeklyPuzzle::RewardPanelItem RewardPanelGiftBox;
+    /* 0x298 */ FXIVClientStructs::Component::GUI::Addon::AddonWeeklyPuzzle::RewardPanelItem RewardPanelDualBlades;
+    /* 0x2C0 */ Component::GUI::AtkComponentButton* Unk2C0;
+    /* 0x2C8 */ Component::GUI::AtkResNode* Unk2C8;
+    /* 0x2D0 */ Component::GUI::AtkTextNode* Unk2D0;
+    /* 0x2D8 */ Component::GUI::AtkTextNode* Unk2D8;
+    /* 0x2E0 */ Component::GUI::AtkResNode* Unk2E0;
+    /* 0x2E8 */ Component::GUI::AtkTextNode* Unk2E8;
+    /* 0x2F0 */ Component::GUI::AtkTextNode* Unk2F0;
+    /* 0x2F8 */ FXIVClientStructs::Component::GUI::Addon::AddonWeeklyPuzzle::GameTileBoard GameBoard;
+    /*       */ __int64 _gap_0x9B8;
+    /*       */ __int64 _gap_0x9C0;
+    /*       */ __int64 _gap_0x9C8;
+    /*       */ __int64 _gap_0x9D0;
+    /*       */ __int64 _gap_0x9D8;
+    /*       */ __int64 _gap_0x9E0;
+    /*       */ __int64 _gap_0x9E8;
+    /*       */ __int64 _gap_0x9F0;
+    /*       */ __int64 _gap_0x9F8;
+    /*       */ __int64 _gap_0xA00;
+    /*       */ __int64 _gap_0xA08;
+    /*       */ __int64 _gap_0xA10;
+    /*       */ __int64 _gap_0xA18;
+    /*       */ __int64 _gap_0xA20;
+    /*       */ __int64 _gap_0xA28;
+    /*       */ __int64 _gap_0xA30;
+    /* 0xA38 */ Component::GUI::AtkResNode* UnkA38;
+    /*       */ __int64 _gap_0xA40;
+    /*       */ __int64 _gap_0xA48;
+    /*       */ __int64 _gap_0xA50;
+    /*       */ __int64 _gap_0xA58;
+    /*       */ __int64 _gap_0xA60;
+    /*       */ __int64 _gap_0xA68;
+    /*       */ __int64 _gap_0xA70;
+    /*       */ __int64 _gap_0xA78;
+    /*       */ __int64 _gap_0xA80;
+    /*       */ __int64 _gap_0xA88;
+    /*       */ __int64 _gap_0xA90;
+    /*       */ __int64 _gap_0xA98;
+    /*       */ __int64 _gap_0xAA0;
+    /*       */ __int64 _gap_0xAA8;
+    /*       */ __int64 _gap_0xAB0;
+    /*       */ __int64 _gap_0xAB8;
+    /*       */ __int64 _gap_0xAC0;
+    /*       */ __int64 _gap_0xAC8;
+    /*       */ __int64 _gap_0xAD0;
+    /*       */ __int64 _gap_0xAD8;
+    /*       */ __int64 _gap_0xAE0;
+    /*       */ __int64 _gap_0xAE8;
+    /*       */ __int64 _gap_0xAF0;
+    /*       */ __int64 _gap_0xAF8;
+    /*       */ __int64 _gap_0xB00;
+    /*       */ __int64 _gap_0xB08;
+    /*       */ __int64 _gap_0xB10;
+    /*       */ __int64 _gap_0xB18;
+    /*       */ __int64 _gap_0xB20;
+    /*       */ __int64 _gap_0xB28;
+    /*       */ __int64 _gap_0xB30;
+    /*       */ __int64 _gap_0xB38;
+    /*       */ __int64 _gap_0xB40;
+    /* 0xB48 */ FFXIVString CommanderStr;
+    /* 0xBB0 */ FFXIVString CofferStr;
+    /* 0xC18 */ FFXIVString GiftBoxStr;
+    /* 0xC80 */ FFXIVString DualBladesStr;
+    /*       */ __int64 _gap_0xCE8;
+    /*       */ __int64 _gap_0xCF0;
+    /*       */ __int64 _gap_0xCF8;
 };
 
 struct Group::Buff /* Size=0xC */
@@ -1021,21 +1481,21 @@ enum ConfigType: __int32
     String = 4
 };
 
-struct Common::Configuration::ConfigProperties_UIntProperties /* Size=0xC */
+struct Common::Configuration::ConfigProperties::UIntProperties /* Size=0xC */
 {
     /* 0x0 */ unsigned __int32 DefaultValue;
     /* 0x4 */ unsigned __int32 MinValue;
     /* 0x8 */ unsigned __int32 MaxValue;
 };
 
-struct Common::Configuration::ConfigProperties_FloatProperties /* Size=0xC */
+struct Common::Configuration::ConfigProperties::FloatProperties /* Size=0xC */
 {
     /* 0x0 */ float DefaultValue;
     /* 0x4 */ float MinValue;
     /* 0x8 */ float MaxValue;
 };
 
-struct Common::Configuration::ConfigProperties_StringProperties /* Size=0x8 */
+struct Common::Configuration::ConfigProperties::StringProperties /* Size=0x8 */
 {
     /* 0x0 */ FFXIVString* DefaultValue;
 };
@@ -1043,9 +1503,9 @@ struct Common::Configuration::ConfigProperties_StringProperties /* Size=0x8 */
 struct Common::Configuration::ConfigProperties /* Size=0x10 */
 {
     union {
-    /* 0x00 */ Common::Configuration::ConfigProperties_UIntProperties UInt;
-    /* 0x00 */ Common::Configuration::ConfigProperties_FloatProperties Float;
-    /* 0x00 */ Common::Configuration::ConfigProperties_StringProperties String;
+    /* 0x00 */ Common::Configuration::ConfigProperties::UIntProperties UInt;
+    /* 0x00 */ Common::Configuration::ConfigProperties::FloatProperties Float;
+    /* 0x00 */ Common::Configuration::ConfigProperties::StringProperties String;
     } _union_0x0;
     /*      */ __int64 _gap_0x8;
 };
@@ -1253,245 +1713,6 @@ enum CollisionType: unsigned __int16
     Move = 2
 };
 
-struct Component::GUI::AtkEventTarget /* Size=0x8 */
-{
-    /* 0x0 */ void* vtbl;
-};
-
-enum NodeType: unsigned __int16
-{
-    Res = 1,
-    Image = 2,
-    Text = 3,
-    NineGrid = 4,
-    Counter = 5,
-    Collision = 8
-};
-
-struct Component::GUI::AtkResNode /* Size=0xA8 */
-{
-    /* 0x00 */ Component::GUI::AtkEventTarget AtkEventTarget;
-    /* 0x08 */ unsigned __int32 NodeID;
-    /*      */ __int32 _gap_0xC;
-    /*      */ __int64 _gap_0x10;
-    /*      */ __int64 _gap_0x18;
-    /* 0x20 */ Component::GUI::AtkResNode* ParentNode;
-    /* 0x28 */ Component::GUI::AtkResNode* PrevSiblingNode;
-    /* 0x30 */ Component::GUI::AtkResNode* NextSiblingNode;
-    /* 0x38 */ Component::GUI::AtkResNode* ChildNode;
-    /* 0x40 */ Component::GUI::NodeType Type;
-    /* 0x42 */ unsigned __int16 ChildCount;
-    /* 0x44 */ float X;
-    /* 0x48 */ float Y;
-    /* 0x4C */ float ScaleX;
-    /* 0x50 */ float ScaleY;
-    /* 0x54 */ float Rotation;
-    /* 0x58 */ float UnkMatrix[0x6];
-    /* 0x70 */ FFXIVByteColor Color;
-    /* 0x74 */ float Depth;
-    /* 0x78 */ float Depth_2;
-    /* 0x7C */ unsigned __int16 AddRed;
-    /* 0x7E */ unsigned __int16 AddGreen;
-    /* 0x80 */ unsigned __int16 AddBlue;
-    /* 0x82 */ unsigned __int16 AddRed_2;
-    /* 0x84 */ unsigned __int16 AddGreen_2;
-    /* 0x86 */ unsigned __int16 AddBlue_2;
-    /* 0x88 */ byte MultiplyRed;
-    /* 0x89 */ byte MultiplyGreen;
-    /* 0x8A */ byte MultiplyBlue;
-    /* 0x8B */ byte MultiplyRed_2;
-    /* 0x8C */ byte MultiplyGreen_2;
-    /* 0x8D */ byte MultiplyBlue_2;
-    /* 0x8E */ byte Alpha_2;
-    /* 0x8F */ byte UnkByte_1;
-    /* 0x90 */ unsigned __int16 Width;
-    /* 0x92 */ unsigned __int16 Height;
-    /* 0x94 */ float OriginX;
-    /* 0x98 */ float OriginY;
-    /* 0x9C */ unsigned __int16 Priority;
-    /* 0x9E */ __int16 Flags;
-    /* 0xA0 */ unsigned __int32 Flags_2;
-    /*      */ __int32 _gap_0xA4;
-};
-
-struct Component::GUI::AtkEventListener /* Size=0x8 */
-{
-    /* 0x0 */ void* vtbl;
-};
-
-struct Client::System::Resource::Handle::ResourceHandle /* Size=0xA8 */
-{
-    /*      */ __int64 _gap_0x0;
-    /*      */ __int64 _gap_0x8;
-    /*      */ __int16 _gap_0x10;
-    /* 0x12 */ unsigned __int32 FileType;
-    /*      */ __int16 _gap_0x16;
-    /*      */ __int64 _gap_0x18;
-    /*      */ __int64 _gap_0x20;
-    /*      */ __int64 _gap_0x28;
-    /*      */ __int64 _gap_0x30;
-    /*      */ __int64 _gap_0x38;
-    /*      */ __int64 _gap_0x40;
-    /* 0x48 */ char* FileName;
-    /*      */ __int64 _gap_0x50;
-    /*      */ __int64 _gap_0x58;
-    /*      */ __int64 _gap_0x60;
-    /*      */ __int64 _gap_0x68;
-    /*      */ __int64 _gap_0x70;
-    /*      */ __int64 _gap_0x78;
-    /*      */ __int64 _gap_0x80;
-    /*      */ __int64 _gap_0x88;
-    /*      */ __int64 _gap_0x90;
-    /*      */ __int64 _gap_0x98;
-    /*      */ __int64 _gap_0xA0;
-};
-
-struct Client::System::Resource::Handle::TextureResourceHandle /* Size=0x128 */
-{
-    /* 0x000 */ Client::System::Resource::Handle::ResourceHandle ResourceHandle;
-    /*       */ __int64 _gap_0xA8;
-    /*       */ __int64 _gap_0xB0;
-    /*       */ __int64 _gap_0xB8;
-    /*       */ __int64 _gap_0xC0;
-    /*       */ __int64 _gap_0xC8;
-    /*       */ __int64 _gap_0xD0;
-    /*       */ __int64 _gap_0xD8;
-    /*       */ __int64 _gap_0xE0;
-    /*       */ __int64 _gap_0xE8;
-    /*       */ __int64 _gap_0xF0;
-    /*       */ __int64 _gap_0xF8;
-    /*       */ __int64 _gap_0x100;
-    /*       */ __int64 _gap_0x108;
-    /*       */ __int64 _gap_0x110;
-    /*       */ __int64 _gap_0x118;
-    /*       */ __int64 _gap_0x120;
-};
-
-struct Component::GUI::TexHolder /* Size=0x20 */
-{
-    /* 0x00 */ unsigned __int32 TexPathHash;
-    /* 0x04 */ unsigned __int32 Unk_1;
-    /* 0x08 */ Client::System::Resource::Handle::TextureResourceHandle* TexFileResourceHandle;
-    /* 0x10 */ void* KernelTextureObject;
-    /* 0x18 */ unsigned __int16 Count_1;
-    /* 0x1A */ byte Count_2;
-    /*      */ byte _gap_0x1B;
-    /*      */ __int32 _gap_0x1C;
-};
-
-struct Component::GUI::AtkTexture /* Size=0x18 */
-{
-    /* 0x00 */ void* vtbl;
-    /* 0x08 */ Component::GUI::TexHolder* TextureInfo;
-    /* 0x10 */ byte UnkBool_1;
-    /* 0x11 */ byte UnkBool_2;
-    /*      */ __int16 _gap_0x12;
-    /*      */ __int32 _gap_0x14;
-};
-
-struct Component::GUI::ULD::ULDTexture /* Size=0x20 */
-{
-    /* 0x00 */ unsigned __int32 Id;
-    /*      */ __int32 _gap_0x4;
-    /* 0x08 */ Component::GUI::AtkTexture AtkTexture;
-};
-
-struct Component::GUI::ULD::ULDPart /* Size=0x10 */
-{
-    /* 0x00 */ Component::GUI::ULD::ULDTexture* ULDTexture;
-    /* 0x08 */ unsigned __int16 U;
-    /* 0x0A */ unsigned __int16 V;
-    /* 0x0C */ unsigned __int16 Width;
-    /* 0x0E */ unsigned __int16 Height;
-};
-
-struct Component::GUI::ULD::ULDPartsList /* Size=0x10 */
-{
-    /* 0x00 */ unsigned __int32 Id;
-    /* 0x04 */ unsigned __int32 PartCount;
-    /* 0x08 */ Component::GUI::ULD::ULDPart* Parts;
-};
-
-struct Component::GUI::ULD::ULDObjectInfo /* Size=0x10 */
-{
-    /* 0x00 */ unsigned __int32 Id;
-    /* 0x04 */ __int32 NodeCount;
-    /* 0x08 */ Component::GUI::AtkResNode** NodeList;
-};
-
-struct Component::GUI::ULD::ULDComponentDataBase /* Size=0x9 */
-{
-    /* 0x0 */ byte Index;
-    /* 0x1 */ byte Up;
-    /* 0x2 */ byte Down;
-    /* 0x3 */ byte Left;
-    /* 0x4 */ byte Right;
-    /* 0x5 */ byte Cursor;
-    /* 0x6 */ byte OffsetX;
-    /* 0x7 */ byte OffsetY;
-    /* 0x8 */ byte Unk;
-};
-
-struct Component::GUI::ULD::ULDData /* Size=0x90 */
-{
-    /* 0x00 */ Component::GUI::ULD::ULDTexture* Textures;
-    /* 0x08 */ Component::GUI::ULD::ULDPartsList* PartsList;
-    /* 0x10 */ Component::GUI::ULD::ULDObjectInfo* Objects;
-    /* 0x18 */ Component::GUI::ULD::ULDComponentDataBase* ComponentData;
-    /* 0x20 */ unsigned __int16 TextureCount;
-    /* 0x22 */ unsigned __int16 PartsListCount;
-    /* 0x24 */ unsigned __int16 ObjectCount;
-    /*      */ __int16 _gap_0x26;
-    /* 0x28 */ void* UldResourceHandle;
-    /*      */ __int64 _gap_0x30;
-    /*      */ __int64 _gap_0x38;
-    /*      */ __int16 _gap_0x40;
-    /* 0x42 */ unsigned __int16 NodeListCount;
-    /*      */ __int32 _gap_0x44;
-    /* 0x48 */ void* AtkResourceRendererManager;
-    /* 0x50 */ Component::GUI::AtkResNode** NodeList;
-    /*      */ __int64 _gap_0x58;
-    /*      */ __int64 _gap_0x60;
-    /*      */ __int64 _gap_0x68;
-    /*      */ __int64 _gap_0x70;
-    /* 0x78 */ Component::GUI::AtkResNode* RootNode;
-    /* 0x80 */ unsigned __int16 RootNodeWidth;
-    /* 0x82 */ unsigned __int16 RootNodeHeight;
-    /*      */ __int16 _gap_0x84;
-    /* 0x86 */ byte Flags1;
-    /*      */ byte _gap_0x87;
-    /*      */ byte _gap_0x88;
-    /* 0x89 */ byte LoadedState;
-    /*      */ __int16 _gap_0x8A;
-    /*      */ __int32 _gap_0x8C;
-};
-
-struct Component::GUI::AtkComponentNode /* Size=0xB0 */
-{
-    /* 0x00 */ Component::GUI::AtkResNode AtkResNode;
-    /* 0xA8 */ Component::GUI::AtkComponentBase* Component;
-};
-
-struct Component::GUI::AtkComponentBase /* Size=0xC0 */
-{
-    /* 0x00 */ Component::GUI::AtkEventListener AtkEventListener;
-    /* 0x08 */ Component::GUI::ULD::ULDData ULDData;
-    /*      */ __int64 _gap_0x98;
-    /*      */ __int64 _gap_0xA0;
-    /* 0xA8 */ Component::GUI::AtkComponentNode* OwnerNode;
-    /*      */ __int64 _gap_0xB0;
-    /*      */ __int64 _gap_0xB8;
-};
-
-struct Component::GUI::AtkCollisionNode /* Size=0xB8 */
-{
-    /* 0x00 */ Component::GUI::AtkResNode AtkResNode;
-    /* 0xA8 */ unsigned __int16 CollisionType;
-    /* 0xAA */ unsigned __int16 Uses;
-    /*      */ __int32 _gap_0xAC;
-    /* 0xB0 */ Component::GUI::AtkComponentBase* LinkedComponent;
-};
-
 enum ComponentType: byte
 {
     Base = 0,
@@ -1519,47 +1740,6 @@ enum ComponentType: byte
     Map = 22,
     Preview = 23,
     UnknownButton = 24
-};
-
-struct Component::GUI::AtkTextNode /* Size=0x158 */
-{
-    /* 0x000 */ Component::GUI::AtkResNode AtkResNode;
-    /* 0x0A8 */ unsigned __int32 TextId;
-    /* 0x0AC */ FFXIVByteColor TextColor;
-    /* 0x0B0 */ FFXIVByteColor EdgeColor;
-    /* 0x0B4 */ FFXIVByteColor BackgroundColor;
-    /* 0x0B8 */ FFXIVString NodeText;
-    /*       */ __int64 _gap_0x120;
-    /* 0x128 */ unsigned __int32 SelectStart;
-    /* 0x12C */ unsigned __int32 SelectEnd;
-    /*       */ __int64 _gap_0x130;
-    /*       */ __int64 _gap_0x138;
-    /*       */ __int64 _gap_0x140;
-    /*       */ __int16 _gap_0x148;
-    /* 0x14A */ byte LineSpacing;
-    /* 0x14B */ byte CharSpacing;
-    /* 0x14C */ byte AlignmentFontType;
-    /* 0x14D */ byte FontSize;
-    /* 0x14E */ byte SheetType;
-    /*       */ byte _gap_0x14F;
-    /*       */ __int16 _gap_0x150;
-    /* 0x152 */ byte TextFlags;
-    /* 0x153 */ byte TextFlags2;
-    /*       */ __int32 _gap_0x154;
-};
-
-struct Component::GUI::AtkComponentButton /* Size=0xF0 */
-{
-    /* 0x00 */ Component::GUI::AtkComponentBase AtkComponentBase;
-    /* 0xC0 */ __int16 Left;
-    /* 0xC2 */ __int16 Top;
-    /* 0xC4 */ __int16 Right;
-    /* 0xC6 */ __int16 Bottom;
-    /* 0xC8 */ Component::GUI::AtkTextNode* ButtonTextNode;
-    /* 0xD0 */ Component::GUI::AtkResNode* ButtonBGNode;
-    /*      */ __int64 _gap_0xD8;
-    /*      */ __int64 _gap_0xE0;
-    /*      */ __int64 _gap_0xE8;
 };
 
 struct Component::GUI::AtkComponentCheckBox /* Size=0x110 */
@@ -1798,68 +1978,6 @@ enum NodeFlags: __int32
     Fill = 128,
     HasCollision = 256,
     RespondToMouse = 512
-};
-
-struct Component::GUI::AtkUnitBase /* Size=0x220 */
-{
-    /* 0x000 */ Component::GUI::AtkEventListener AtkEventListener;
-    /* 0x008 */ byte Name[0x20];
-    /* 0x028 */ Component::GUI::ULD::ULDData ULDData;
-    /*       */ __int64 _gap_0xB8;
-    /*       */ __int64 _gap_0xC0;
-    /* 0x0C8 */ Component::GUI::AtkResNode* RootNode;
-    /*       */ __int64 _gap_0xD0;
-    /*       */ __int64 _gap_0xD8;
-    /*       */ __int64 _gap_0xE0;
-    /*       */ __int64 _gap_0xE8;
-    /*       */ __int64 _gap_0xF0;
-    /*       */ __int64 _gap_0xF8;
-    /*       */ __int64 _gap_0x100;
-    /* 0x108 */ Component::GUI::AtkComponentNode* WindowNode;
-    /*       */ __int64 _gap_0x110;
-    /*       */ __int64 _gap_0x118;
-    /*       */ __int64 _gap_0x120;
-    /*       */ __int64 _gap_0x128;
-    /*       */ __int64 _gap_0x130;
-    /*       */ __int64 _gap_0x138;
-    /*       */ __int64 _gap_0x140;
-    /*       */ __int64 _gap_0x148;
-    /*       */ __int64 _gap_0x150;
-    /*       */ __int64 _gap_0x158;
-    /*       */ __int64 _gap_0x160;
-    /*       */ __int64 _gap_0x168;
-    /*       */ __int64 _gap_0x170;
-    /*       */ __int64 _gap_0x178;
-    /*       */ __int16 _gap_0x180;
-    /* 0x182 */ byte Flags;
-    /*       */ byte _gap_0x183;
-    /*       */ __int32 _gap_0x184;
-    /*       */ __int64 _gap_0x188;
-    /*       */ __int64 _gap_0x190;
-    /*       */ __int64 _gap_0x198;
-    /*       */ __int64 _gap_0x1A0;
-    /*       */ __int32 _gap_0x1A8;
-    /* 0x1AC */ float Scale;
-    /*       */ __int64 _gap_0x1B0;
-    /*       */ __int32 _gap_0x1B8;
-    /* 0x1BC */ __int16 X;
-    /* 0x1BE */ __int16 Y;
-    /*       */ __int64 _gap_0x1C0;
-    /*       */ __int64 _gap_0x1C8;
-    /*       */ __int32 _gap_0x1D0;
-    /*       */ byte _gap_0x1D4;
-    /* 0x1D5 */ byte Alpha;
-    /*       */ __int16 _gap_0x1D6;
-    /* 0x1D8 */ Component::GUI::AtkCollisionNode** CollisionNodeList;
-    /* 0x1E0 */ unsigned __int32 CollisionNodeListCount;
-    /*       */ __int32 _gap_0x1E4;
-    /*       */ __int64 _gap_0x1E8;
-    /*       */ __int64 _gap_0x1F0;
-    /*       */ __int64 _gap_0x1F8;
-    /*       */ __int64 _gap_0x200;
-    /*       */ __int64 _gap_0x208;
-    /*       */ __int64 _gap_0x210;
-    /*       */ __int64 _gap_0x218;
 };
 
 struct Component::GUI::AtkUnitList /* Size=0x810 */

@@ -242,7 +242,7 @@ namespace CExporter
 
         private string FixFullName(Type type)
         {
-            return type.FullName.Remove(0, nameof(FFXIVClientStructs).Length + 1).Replace(".", "::");
+            return type.FullName.Remove(0, nameof(FFXIVClientStructs).Length + 1).Replace(".", "::").Replace("+", "::");
         }
 
         private string FixTypeName(Type type)
