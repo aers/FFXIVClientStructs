@@ -42,7 +42,6 @@ namespace FFXIVClientStructs.Common.Configuration
         }
     }
 
-
     [StructLayout(LayoutKind.Explicit, Size = 0x8)]
     public unsafe struct ConfigValue
     {
