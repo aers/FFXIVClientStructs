@@ -15,32 +15,34 @@ namespace FFXIVClientStructs.Common.Configuration
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public unsafe struct ConfigProperties
     {
-        [FieldOffset(0x0)] public ConfigProperties_UIntProperties UInt;
-        [FieldOffset(0x0)] public ConfigProperties_FloatProperties Float;
-        [FieldOffset(0x0)] public ConfigProperties_StringProperties String;
+
+        [StructLayout(LayoutKind.Explicit, Size = 0xC)]
+        public unsafe struct UIntProperties
+        {
+            [FieldOffset(0x0)] public uint DefaultValue;
+            [FieldOffset(0x4)] public uint MinValue;
+            [FieldOffset(0x8)] public uint MaxValue;
+        }
+
+        [StructLayout(LayoutKind.Explicit, Size = 0xC)]
+        public unsafe struct FloatProperties
+        {
+            [FieldOffset(0x0)] public float DefaultValue;
+            [FieldOffset(0x4)] public float MinValue;
+            [FieldOffset(0x8)] public float MaxValue;
+        }
+
+        [StructLayout(LayoutKind.Explicit, Size = 0x8)]
+        public unsafe struct StringProperties
+        {
+            [FieldOffset(0x0)] public FFXIVString* DefaultValue;
+        }
+
+        [FieldOffset(0x0)] public UIntProperties UInt;
+        [FieldOffset(0x0)] public FloatProperties Float;
+        [FieldOffset(0x0)] public StringProperties String;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 0xC)]
-    public unsafe struct ConfigProperties_UIntProperties
-    {
-        [FieldOffset(0x0)] public uint DefaultValue;
-        [FieldOffset(0x4)] public uint MinValue;
-        [FieldOffset(0x8)] public uint MaxValue;
-    }
-
-    [StructLayout(LayoutKind.Explicit, Size = 0xC)]
-    public unsafe struct ConfigProperties_FloatProperties
-    {
-        [FieldOffset(0x0)] public float DefaultValue;
-        [FieldOffset(0x4)] public float MinValue;
-        [FieldOffset(0x8)] public float MaxValue;
-    }
-
-    [StructLayout(LayoutKind.Explicit, Size = 0x8)]
-    public unsafe struct ConfigProperties_StringProperties
-    {
-        [FieldOffset(0x0)] public FFXIVString* DefaultValue;
-    }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x8)]
     public unsafe struct ConfigValue
