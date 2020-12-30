@@ -1,4 +1,5 @@
-﻿using System.Runtime.InteropServices;
+﻿using System;
+using System.Runtime.InteropServices;
 
 namespace FFXIVClientStructs.Component.GUI.Addon
 {
@@ -8,25 +9,9 @@ namespace FFXIVClientStructs.Component.GUI.Addon
     [StructLayout(LayoutKind.Explicit, Size = 0x408)]
     public unsafe struct AddonDailyLottery
     {
-        // There are likely several fixed arrays in here
         [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
-        [FieldOffset(0x220)] public AtkComponentCheckBox* GameplayTileUpperLeft;
-        [FieldOffset(0x228)] public AtkComponentCheckBox* GameplayTileUpperMiddle;
-        [FieldOffset(0x230)] public AtkComponentCheckBox* GameplayTileUpperRight;
-        [FieldOffset(0x238)] public AtkComponentCheckBox* GameplayTileMiddleLeft;
-        [FieldOffset(0x240)] public AtkComponentCheckBox* GameplayTileCenter;
-        [FieldOffset(0x248)] public AtkComponentCheckBox* GameplayTileMiddleRight;
-        [FieldOffset(0x250)] public AtkComponentCheckBox* GameplayTileLowerLeft;
-        [FieldOffset(0x258)] public AtkComponentCheckBox* GameplayTileLowerMiddle;
-        [FieldOffset(0x260)] public AtkComponentCheckBox* GameplayTileLowerRight;
-        [FieldOffset(0x268)] public AtkComponentRadioButton* LaneSelectorMajorDiagonal;
-        [FieldOffset(0x270)] public AtkComponentRadioButton* LaneSelectorLeftColumn;
-        [FieldOffset(0x278)] public AtkComponentRadioButton* LaneSelectorCenterColumn;
-        [FieldOffset(0x280)] public AtkComponentRadioButton* LaneSelectorRightColumn;
-        [FieldOffset(0x288)] public AtkComponentRadioButton* LaneSelectorMinorDiagonal;
-        [FieldOffset(0x290)] public AtkComponentRadioButton* LaneSelectorTopRow;
-        [FieldOffset(0x298)] public AtkComponentRadioButton* LaneSelectorCenterRow;
-        [FieldOffset(0x2A0)] public AtkComponentRadioButton* LaneSelectorBottomRow;
+        [FieldOffset(0x220)] public GameTileBoard GameBoard;
+        [FieldOffset(0x268)] public LaneTileSelector LaneSelector;
         [FieldOffset(0x2A8)] public AtkComponentBase* UnkCompBase2A8;
         [FieldOffset(0x2B0)] public AtkComponentBase* UnkCompBase2B0;
         [FieldOffset(0x2B8)] public AtkComponentBase* UnkCompBase2B8;
@@ -66,17 +51,99 @@ namespace FFXIVClientStructs.Component.GUI.Addon
         [FieldOffset(0x3C8)] public AtkImageNode* UnkImageNode3C8;
         [FieldOffset(0x3D0)] public int UnkNumber3D0;
         [FieldOffset(0x3D4)] public int UnkNumber3D4;
-        [FieldOffset(0x3D8)] public int GameplayTileUpperLeftNumber;
-        [FieldOffset(0x3DC)] public int GameplayTileUpperMiddleNumber;
-        [FieldOffset(0x3E0)] public int GameplayTileUpperRightNumber;
-        [FieldOffset(0x3E4)] public int GameplayTileMiddleLeftNumber;
-        [FieldOffset(0x3E8)] public int GameplayTileCenterNumber;
-        [FieldOffset(0x3EC)] public int GameplayTileMiddleRightNumber;
-        [FieldOffset(0x3F0)] public int GameplayTileLowerLeftNumber;
-        [FieldOffset(0x3F4)] public int GameplayTileLowerMiddleNumber;
-        [FieldOffset(0x3F8)] public int GameplayTileLowerRightNumber;
+        [FieldOffset(0x3D8)] public GameBoardNumbers GameNumbers;
         [FieldOffset(0x3FC)] public int UnkNumber3FC;
         [FieldOffset(0x400)] public int UnkNumber400;
         [FieldOffset(0x404)] public int UnkNumber404;
+
+        [StructLayout(LayoutKind.Explicit, Size = 0x18)]
+        public struct GameTileRow
+        {
+            [FieldOffset(0x0)] public AtkComponentCheckBox* Col1;
+            [FieldOffset(0x8)] public AtkComponentCheckBox* Col2;
+            [FieldOffset(0x10)] public AtkComponentCheckBox* Col3;
+
+            public AtkComponentCheckBox* this[int index] => index switch
+            {
+                0 => Col1,
+                1 => Col2,
+                2 => Col3,
+                _ => throw new ArgumentOutOfRangeException("Valid indexes are 0 through 2 inclusive.")
+            };
+        }
+
+        [StructLayout(LayoutKind.Explicit, Size = 0x48)]
+        public struct GameTileBoard
+        {
+            [FieldOffset(0x0)] public GameTileRow Row1;
+            [FieldOffset(0x18)] public GameTileRow Row2;
+            [FieldOffset(0x30)] public GameTileRow Row3;
+
+            public AtkComponentCheckBox* this[int index] => (index / 3) switch
+            {
+                0 => Row1[index % 3],
+                1 => Row2[index % 3],
+                2 => Row3[index % 3],
+                _ => throw new ArgumentOutOfRangeException("Valid indexes are 0 through 8 inclusive.")
+            };
+        }
+
+        [StructLayout(LayoutKind.Explicit, Size = 0x40)]
+        public struct LaneTileSelector
+        {
+            [FieldOffset(0x0)] public AtkComponentRadioButton* MajorDiagonal;
+            [FieldOffset(0x8)] public AtkComponentRadioButton* Col1;
+            [FieldOffset(0x10)] public AtkComponentRadioButton* Col2;
+            [FieldOffset(0x18)] public AtkComponentRadioButton* Col3;
+            [FieldOffset(0x20)] public AtkComponentRadioButton* MinorDiagonal;
+            [FieldOffset(0x28)] public AtkComponentRadioButton* Row1;
+            [FieldOffset(0x30)] public AtkComponentRadioButton* Row2;
+            [FieldOffset(0x38)] public AtkComponentRadioButton* Row3;
+
+            public AtkComponentRadioButton* this[int index] => index switch
+            {
+                0 => MajorDiagonal,
+                1 => Col1,
+                2 => Col2,
+                3 => Col3,
+                4 => MinorDiagonal,
+                5 => Row1,
+                6 => Row2,
+                7 => Row3,
+                _ => throw new ArgumentOutOfRangeException("Valid indexes are 0 through 8 inclusive.")
+            };
+        }
+
+        [StructLayout(LayoutKind.Explicit, Size = 0xC)]
+        public struct GameNumberRow
+        {
+            [FieldOffset(0x0)] public int Col1;
+            [FieldOffset(0x4)] public int Col2;
+            [FieldOffset(0x8)] public int Col3;
+
+            public int this[int index] => index switch
+            {
+                0 => Col1,
+                1 => Col2,
+                2 => Col3,
+                _ => throw new ArgumentOutOfRangeException("Valid indexes are 0 through 8 inclusive.")
+            };
+        }
+
+        [StructLayout(LayoutKind.Explicit, Size = 0x24)]
+        public struct GameBoardNumbers
+        {
+            [FieldOffset(0x0)] public GameNumberRow Row1;
+            [FieldOffset(0xC)] public GameNumberRow Row2;
+            [FieldOffset(0x18)] public GameNumberRow Row3;
+
+            public int this[int index] => (index / 3) switch
+            {
+                0 => Row1[index % 3],
+                1 => Row2[index % 3],
+                2 => Row3[index % 3],
+                _ => throw new ArgumentOutOfRangeException("Valid indexes are 0 through 8 inclusive.")
+            };
+        }
     }
 }
