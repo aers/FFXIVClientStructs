@@ -12,6 +12,25 @@
         [StructLayout(LayoutKind.Explicit, Size = 0xD00)]
         public unsafe struct AddonWeeklyPuzzle
         {
+            [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
+            [FieldOffset(0x220)] public RewardPanelItem RewardPanelCommander;
+            [FieldOffset(0x248)] public RewardPanelItem RewardPanelCoffer;
+            [FieldOffset(0x270)] public RewardPanelItem RewardPanelGiftBox;
+            [FieldOffset(0x298)] public RewardPanelItem RewardPanelDualBlades;
+            [FieldOffset(0x2C0)] public AtkComponentButton* Unk2C0;
+            [FieldOffset(0x2C8)] public AtkResNode* Unk2C8;
+            [FieldOffset(0x2D0)] public AtkTextNode* Unk2D0;
+            [FieldOffset(0x2D8)] public AtkTextNode* Unk2D8;
+            [FieldOffset(0x2E0)] public AtkResNode* Unk2E0;
+            [FieldOffset(0x2E8)] public AtkTextNode* Unk2E8;
+            [FieldOffset(0x2F0)] public AtkTextNode* Unk2F0;
+            [FieldOffset(0x2F8)] public GameTileBoard GameBoard;
+            [FieldOffset(0xA38)] public AtkResNode* UnkA38;
+            [FieldOffset(0xB48)] public FFXIVString CommanderStr;
+            [FieldOffset(0xBB0)] public FFXIVString CofferStr;
+            [FieldOffset(0xC18)] public FFXIVString GiftBoxStr;
+            [FieldOffset(0xC80)] public FFXIVString DualBladesStr;
+
             [StructLayout(LayoutKind.Explicit, Size = 0x28)]
             public struct RewardPanelItem
             {
@@ -55,24 +74,6 @@
                 [FieldOffset(0x5A0)] public GameTileRow Row6;
             }
 
-            [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
-            [FieldOffset(0x220)] public RewardPanelItem RewardPanelCommander;
-            [FieldOffset(0x248)] public RewardPanelItem RewardPanelCoffer;
-            [FieldOffset(0x270)] public RewardPanelItem RewardPanelGiftBox;
-            [FieldOffset(0x298)] public RewardPanelItem RewardPanelDualBlades;
-            [FieldOffset(0x2C0)] public AtkComponentButton* Unk2C0;
-            [FieldOffset(0x2C8)] public AtkResNode* Unk2C8;
-            [FieldOffset(0x2D0)] public AtkTextNode* Unk2D0;
-            [FieldOffset(0x2D8)] public AtkTextNode* Unk2D8;
-            [FieldOffset(0x2E0)] public AtkResNode* Unk2E0;
-            [FieldOffset(0x2E8)] public AtkTextNode* Unk2E8;
-            [FieldOffset(0x2F0)] public AtkTextNode* Unk2F0;
-            [FieldOffset(0x2F8)] public GameTileBoard GameBoard;
-            [FieldOffset(0xA38)] public AtkResNode* UnkA38;
-            [FieldOffset(0xB48)] public FFXIVString CommanderStr;
-            [FieldOffset(0xBB0)] public FFXIVString CofferStr;
-            [FieldOffset(0xC18)] public FFXIVString GiftBoxStr;
-            [FieldOffset(0xC80)] public FFXIVString DualBladesStr;
         }
     }
 }

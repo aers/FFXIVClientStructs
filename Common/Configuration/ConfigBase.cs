@@ -15,6 +15,9 @@ namespace FFXIVClientStructs.Common.Configuration
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public unsafe struct ConfigProperties
     {
+        [FieldOffset(0x0)] public UIntProperties UInt;
+        [FieldOffset(0x0)] public FloatProperties Float;
+        [FieldOffset(0x0)] public StringProperties String;
 
         [StructLayout(LayoutKind.Explicit, Size = 0xC)]
         public struct UIntProperties
@@ -37,10 +40,6 @@ namespace FFXIVClientStructs.Common.Configuration
         {
             [FieldOffset(0x0)] public FFXIVString* DefaultValue;
         }
-
-        [FieldOffset(0x0)] public UIntProperties UInt;
-        [FieldOffset(0x0)] public FloatProperties Float;
-        [FieldOffset(0x0)] public StringProperties String;
     }
 
 
