@@ -3,7 +3,7 @@
 using FFXIVClientStructs.Component.GUI.ULD;
 
 namespace FFXIVClientStructs.Component.GUI
-{   
+{
     // Component::GUI::AtkUnitBase
     //   Component::GUI::AtkEventListener
 

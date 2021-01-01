@@ -426,7 +426,7 @@ class FfxivClass:
         current_image_base = api.get_image_base()
         if self.STANDARD_IMAGE_BASE != current_image_base:
             rebase_offset = current_image_base - self.STANDARD_IMAGE_BASE
-            self.vtbl_ea + rebase_offset
+            self.vtbl_ea += rebase_offset
             for idx_or_ea in list(funcs.keys()):
                 if idx_or_ea > 0x1000:
                     funcs[idx_or_ea + rebase_offset] = funcs.pop(idx_or_ea)
@@ -654,7 +654,7 @@ class FfxivClass:
         return "<{0}(\"{1}\")>".format(self.__class__.__name__, self.name)
 
 
-# region: functions
+# region functions
 # ffxivstring is just their implementation of std::string presumably, there are more ctors etc
 api.set_addr_name(0x140059670, "FFXIVString_ctor")  # empty string ctor
 api.set_addr_name(0x1400596B0, "FFXIVString_ctor_copy")  # copy constructor
@@ -693,7 +693,7 @@ api.set_addr_name(0x1412F7B50, "crc")
 api.set_addr_name(0x141371954, "FreeMemory")
 # endregion
 
-# region: globals
+# region globals
 api.set_addr_name(0x14169A2A0, "g_HUDScaleTable")
 api.set_addr_name(0x141D3CE60, "g_ActionManager")
 api.set_addr_name(0x141D66690, "g_Framework")
@@ -733,7 +733,7 @@ api.set_addr_name(0x141DDAA20, "g_GroupManager")
 api.set_addr_name(0x141DE2D50, "g_ClientObjectManager")
 # endregion
 
-# region: vtbl
+# region vtbl
 factory = FfxivClassFactory()
 
 # Unknown classes old RTTI data says known classes inherit from
@@ -776,12 +776,12 @@ factory.register("GroupManager", "", {
     0x140BB2650: "Create",
     0x1407776A0: "ctor",
     0x140777810: "SetPartyEmpty",
-    0x1407785A0: "GetAllianceMemberByGroupAndIndex", # (this, group, index)
-    0x140778600: "GetAllianceMemberByIndex", # (this, index)
-    0x140778620: "IsObjectIDInParty", # (this, objectID)
-    0x140778680: "IsCharacterInPartyByName", # (this, char*)
+    0x1407785A0: "GetAllianceMemberByGroupAndIndex",  # (this, group, index)
+    0x140778600: "GetAllianceMemberByIndex",  # (this, index)
+    0x140778620: "IsObjectIDInParty",  # (this, objectID)
+    0x140778680: "IsCharacterInPartyByName",  # (this, char*)
     0x140778700: "IsObjectIDInAlliance",
-    0x140778780: "IsObjectIDPartyLeader", 
+    0x140778780: "IsObjectIDPartyLeader",
 })
 # Known classes
 factory.register(0x14164E260, "Common::Configuration::ConfigBase", "Client::System::Common::NonCopyable", {
@@ -1307,7 +1307,11 @@ factory.register(0x1417DCDD0, "Client::UI::AddonAreaMap", "Component::GUI::AtkUn
 factory.register(0x1417DEC90, "Client::UI::AddonNamePlate", "Component::GUI::AtkUnitBase", {
     0x140ED8850: "ctor",
 })
-factory.register(0x1417C9520, "Client::UI::AddonRecipeNote", "Component::GUI::AtkUnitBase", {})
+factory.register(0x1417C9520, "Client::UI::AddonRecipeNote", "Component::GUI::AtkUnitBase", {
+    0x140E15650: "ReceiveEvent_ClickSynthesizeButton",
+    0x140E156A0: "ReceiveEvent_ClickQuickSynthesisButton",
+    0x140E156F0: "ReceiveEvent_ClickTrialSynthesisButton",
+})
 factory.register(0x14179BAD0, "Client::UI::AddonHudSelectYesno", "Component::GUI::AtkUnitBase", {
     0x140CD91D0: "ctor",
 })
@@ -1323,10 +1327,16 @@ factory.register(0x1418106A0, "Client::UI::AddonHudLayoutScreen", "Component::GU
 })
 factory.register(0x1417CDB58, "Client::UI::AddonMateriaAttach", "Component::GUI::AtkUnitBase", {})
 factory.register(0x1417CDF98, "Client::UI::AddonMateriaAttachDialog", "Component::GUI::AtkUnitBase", {})
-factory.register(0x1417DE1D0, "Client::UI::AddonGathering", "Component::GUI::AtkUnitBase", {})
+factory.register(0x1417DE1D0, "Client::UI::AddonGathering", "Component::GUI::AtkUnitBase", {
+    0x140ecfeb0: "ctor",
+    0x140ed0610: "ReceiveEvent_ToggleQuickGathering",
+    0x140ed06c0: "ReceiveEvent_Gather",
+})
+factory.register(0x1417F8530, "Client::UI::AddonWeeklyPuzzle", "Component::GUI::AtkUnitBase", {})  # Faux Hollows
 factory.register(0x141808FE8, "Client::UI::AddonPartyList", "Component::GUI::AtkUnitBase", {
     0x140FEB9F0: "ResizeForPartySize",
 })
+factory.register(0x141820EF0, "Client::UI::AddonLotteryDaily", "Component::GUI::AtkUnitBase", {})  # Mini Cactpot
 factory.register(0x141825368, "Client::Graphics::Culling::CullingManager_Client::Graphics::JobSystem_Client::Graphics::Culling::CullingJobOpt", "", {})
 factory.register(0x141825370, "Client::Graphics::Culling::CullingManager_Client::Graphics::JobSystem_Client::Graphics::Culling::CallbackJobOpt", "", {})
 factory.register(0x141825378, "Client::Graphics::Culling::CullingManager_Client::Graphics::JobSystem_Client::Graphics::Culling::RenderCallbackJob", "", {})
