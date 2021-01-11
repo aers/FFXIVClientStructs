@@ -740,8 +740,6 @@ factory = FfxivClassFactory()
 factory.register("Client::Game::Control::TargetSystem::ListFeeder")
 factory.register("Client::Game::InstanceContent::ContentSheetWaiterInterface")
 factory.register("Client::Game::Object::IGameObjectEventListener")
-factory.register("Client::Graphics::Kernel::Buffer")
-factory.register("Client::Graphics::Kernel::Resource")
 factory.register("Client::Graphics::Render::Camera")
 factory.register("Client::Graphics::Render::RenderObject")
 factory.register("Client::Graphics::RenderObjectList")
@@ -880,10 +878,15 @@ factory.register(0x141675D70, "Client::UI::Agent::AgentModule", "", {
 })
 factory.register(0x141676AE0, "Client::UI::Agent::AgentCursor", "Client::UI::Agent::AgentInterface", {})
 factory.register(0x141676B50, "Client::UI::Agent::AgentCursorLocation", "Client::UI::Agent::AgentInterface", {})
-factory.register(0x14167E120, "Client::Graphics::Kernel::Texture", "Client::Graphics::DelayedReleaseClassBase", {
+factory.register(0x14167E0D0, "Client::Graphics::Kernel::Resource", "Client::Graphics::DelayedReleaseClassBase", {})
+factory.register(0x14167E0F8, "Client::Graphics::Kernel::Shader", "Client::Graphics::Kernel::Resource", {}) # its possible shader and buffer are reversed, there's no way to actually tell, not very important
+factory.register(0x14167E120, "Client::Graphics::Kernel::Texture", "Client::Graphics::Kernel::Resource", {
     0x1402F99E0: "ctor",
 })
-factory.register(0x14167E3A8, "Client::Graphics::Kernel::ConstantBuffer", "Client::Graphics::DelayedReleaseClassBase", {})
+factory.register(0x14167E1A0, "Client::Graphics::Kernel::Buffer", "Client::Graphics::Kernel::Resource", {})
+factory.register(0x14167E3A8, "Client::Graphics::Kernel::ConstantBuffer", "Client::Graphics::Kernel::Buffer", {
+    0x140300790: "ctor",
+})
 factory.register(0x14167E430, "Client::Graphics::Kernel::Device", "Client::Graphics::Singleton", {
     0x140301050: "ctor",
 })
@@ -977,9 +980,21 @@ factory.register(0x141695E08, "Client::Graphics::Scene::CharacterUtility", "Clie
 factory.register(0x141695E88, "Client::Graphics::Scene::CharacterBase", "Client::Graphics::Scene::DrawObject", {
     67: "FlagSlotForUpdate",
     68: "GetDataForSlot",
+    71: "ResolveRootPath",
+    72: "ResolveSKLBPath",
     73: "ResolveMDLPath",
+    74: "ResolveSKPPath",
+    75: "ResolvePHYBPath",
+    76: "ResolvePAPPath",
+    77: "ResolveTMBPath",
+    79: "ResolveMaterialPAPPath",
+    81: "ResolveIMCPath",
     82: "ResolveMTRLPath",
+    83: "ResolveDecalPath",
+    84: "ResolveVFXPath",
+    85: "ResolveEIDPath",
     86: "GetDyeForSlot",
+    87: "GetSkeletonCount",
     92: "CreateRenderModelForMDL",
     0x140438C80: "ctor",
     0x14044AD00: "CreateSlotStorage",
@@ -1264,6 +1279,8 @@ factory.register(0x1416CC740, "Client::UI::Agent::AgentHUD", "Client::UI::Agent:
     0x14081F3B0: "ctor",
     0x140824F30: "UpdateParty",
 })
+factory.register(0x1416CCA40, "Client::UI::Agent::AgentTryon::TryonCharaView", "Client::UI::Misc::CharaView", {})
+factory.register(0x1416CCA80, "Client::UI::Agent::AgentTryon", "Client::UI::Agent::AgentInterface", {})
 factory.register(0x1416CCAF0, "Client::UI::Agent::AgentItemDetail", "Client::UI::Agent::AgentInterface", {
     0x1408D3FB0: "ctor",
     0x1408D4FE0: "OnItemHovered",
