@@ -381,7 +381,7 @@ class FfxivClassFactory:
 
 
 class FfxivClass:
-#     STANDARD_IMAGE_BASE = 0x140000000
+    STANDARD_IMAGE_BASE = 0x140000000
 
     VTBL_FORMAT = "vtbl_{cls}"
     NAMED_FUNC_FORMAT = "{cls}.{name}"
