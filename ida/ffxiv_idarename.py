@@ -671,6 +671,7 @@ api.set_addr_name(0x1401B0730, "ResourceManager_GetResourceSync")
 api.set_addr_name(0x1401B8AF0, "Client::System::Resource::Handle::ModelResourceHandle_GetMaterialFileNameBySlot")
 api.set_addr_name(0x1402107C0, "Client::UI::Agent::AgentLobby_ctor")
 api.set_addr_name(0x1402A5320, "CountdownPointer")
+api.set_addr_name(0x140301D70, "Client::Graphics::Kernel::Device::CreateTexture2D")
 api.set_addr_name(0x140363790, "Client::Graphics::Render::RenderManager_ctor")
 api.set_addr_name(0x140364970, "Client::Graphics::Render::RenderManager_CreateModel")
 api.set_addr_name(0x140440ED0, "PrepareColorSet")
@@ -717,6 +718,7 @@ api.set_addr_name(0x141D6A7E0, "g_CullingManager")
 api.set_addr_name(0x141D6A800, "g_TaskManager")
 api.set_addr_name(0x141D6FA90, "g_ResourceManager")
 api.set_addr_name(0x141D81AA0, "g_OcclusionCullingManager")
+api.set_addr_name(0x141D81AD8, "g_OffscreenRenderingManager")
 api.set_addr_name(0x141D81AE0, "g_RenderModelLinkedListStart")
 api.set_addr_name(0x141D81AE8, "g_RenderModelLinkedListEnd")
 api.set_addr_name(0x141D82930, "g_JobSystem_ApricotEngineCore")  # not a ptr
@@ -898,6 +900,10 @@ factory.register(0x1416856C8, "Client::Graphics::Render::GraphicsConfig", "Clien
 factory.register(0x141685708, "Client::Graphics::Render::ShadowCamera", "Client::Graphics::Render::Camera", {})
 factory.register(0x141685850, "Client::Graphics::Render::View", "", {})
 factory.register(0x1416858D8, "Client::Graphics::Render::PostBoneDeformerBase", "Client::Graphics::RenderObjectList", {})
+factory.register(0x141685938, "Client::Graphics::Render::OffscreenRenderingManager", "", {
+    0x1403283B0: "ctor",
+    0x1403284A0: "Initialize",
+})
 factory.register(0x1416859C0, "Client::Graphics::Render::AmbientLight", "", {
     0x140329770: "ctor",
 })
@@ -922,7 +928,9 @@ factory.register(0x141685EC0, "Client::Graphics::Render::ShadowMaskUnit", "", {}
 factory.register(0x141685ED8, "Client::Graphics::Render::ShaderManager", "", {})
 factory.register(0x141685EE8, "Client::Graphics::Render::Manager_Client::Graphics::JobSystem_Client::Graphics::Render::Manager::BoneCollectorJob", "", {})
 factory.register(0x141685EF0, "Client::Graphics::Render::Updater_Client::Graphics::Render::PostBoneDeformerBase", "", {})
-factory.register(0x141685EF8, "Client::Graphics::Render::Manager", "Client::Graphics::Singleton", {})
+factory.register(0x141685EF8, "Client::Graphics::Render::Manager", "Client::Graphics::Singleton", {
+    0x1403646C0: "CreateCamera",
+})
 factory.register(0x141685F10, "Client::Graphics::Render::ShadowManager", "", {
     0x140365C50: "ctor",
 })
