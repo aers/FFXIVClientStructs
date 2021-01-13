@@ -248,7 +248,7 @@ namespace CExporter
         private string FixTypeName(Type type)
         {
             if (type == typeof(void) || type == typeof(void*) || type == typeof(void**) ||
-                type == typeof(char) || type == typeof(char*) ||
+                type == typeof(char) || type == typeof(char*) || type == typeof(char**) ||
                 type == typeof(byte) || type == typeof(byte*))
                 return type.Name.ToLower();
             else if (type == typeof(bool)) return "bool";
