@@ -81,5 +81,7 @@ namespace FFXIVClientStructs.Component.GUI
         [FieldOffset(0x9C)] public ushort Priority;
         [FieldOffset(0x9E)] public short Flags;
         [FieldOffset(0xA0)] public uint Flags_2; // bit 1 = has changes, ClipCount is bits 10-17, idk its a mess
+
+        public bool IsVisible => (Flags & 0x10) == 0x10;
     }
 }
