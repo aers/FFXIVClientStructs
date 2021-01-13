@@ -10,5 +10,6 @@ namespace FFXIVClientStructs.Component.GUI
     public unsafe struct AtkEventListener
     {
         [FieldOffset(0x0)] public void* vtbl;
+        [FieldOffset(0x0)] public void** vfunc;
     }
 }
