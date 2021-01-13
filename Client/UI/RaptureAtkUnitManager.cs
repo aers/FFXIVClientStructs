@@ -1,5 +1,4 @@
 ﻿using System.Runtime.InteropServices;
-
 using FFXIVClientStructs.Component.GUI;
 
 namespace FFXIVClientStructs.Client.UI

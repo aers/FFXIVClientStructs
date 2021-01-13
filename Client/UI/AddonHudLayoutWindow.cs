@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 
 namespace FFXIVClientStructs.Client.UI
 {
-
     // Client::UI::AddonHudLayoutWindow
     //   Component::GUI::AtkUnitBase
     //     Component::GUI::AtkEventListener
