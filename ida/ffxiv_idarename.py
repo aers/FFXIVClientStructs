@@ -1233,6 +1233,11 @@ factory.register(0x1416A9D88, "Client::UI::UI3DModule", "", {
 })
 factory.register(0x1416A9DA0, "Client::UI::UIModule", "Client::UI::UIModuleInterface", {
     0x1405C48F0: "ctor",
+    12: "GetRaptureMacroModule",
+    13: "GetRaptureHotbarModule",
+    14: "GetRaptureGearsetModule",
+    16: "GetItemOrderModule",
+    17: "GetItemFinderModule",
 })
 factory.register(0x1416AA5A0, "Client::System::Crypt::SimpleString", "Client::System::Crypt::CryptInterface", {
     1: "Encrypt",
@@ -1244,7 +1249,9 @@ factory.register(0x1416AEAE8, "Client::UI::Misc::ConfigModule", "Component::GUI:
     0x1405FAFB0: "ctor",
 })
 factory.register(0x1416AEAF8, "Client::UI::Misc::ConfigModule_Common::Configuration::ConfigBase::ChangeEventInterface", "Common::Configuration::ConfigBase::ChangeEventInterface", {})
-factory.register(0x1416AEBD8, "Client::UI::Misc::RaptureMacroModule", "Client::UI::Misc::UserFileManager::UserFileEvent", {})
+factory.register(0x1416AEBD8, "Client::UI::Misc::RaptureMacroModule", "Client::UI::Misc::UserFileManager::UserFileEvent", {
+    0x140603B90: "ctor",
+})
 factory.register(0x1416AEC40, "Client::UI::Misc::RaptureTextModule", "", {})
 factory.register(0x1416AEEB8, "Client::UI::Misc::RaptureLogModule", "Component::Log::LogModule", {
     0x140615990: "ctor",
@@ -1254,6 +1261,15 @@ factory.register(0x1416AEF08, "Client::UI::Misc::RaptureHotbarModule", "Client::
     0x1406208E0: "ctor",
 })
 factory.register(0x1416AEF70, "Client::UI::Misc::RaptureHotbarModule_Client::System::Input::InputCodeModifiedInterface", "Client::System::Input::InputData::InputCodeModifiedInterface", {})
+factory.register(0x1416AEFF8, "Client::UI::Misc::RaptureGearsetModule", "Client::UI::Misc::UserFileManager::UserFileEvent", {
+    0x14062DDC0: "ctor",
+})
+factory.register(0x1416AF068, "Client::UI::Misc::ItemFinderModule", "Client::UI::Misc::UserFileManager::UserFileEvent", {
+    0x1406316F0: "ctor",
+})
+factory.register(0x1416AF210, "Client::UI::Misc::ItemOrderModule", "Client::UI::Misc::UserFileManager::UserFileEvent", {
+    0x140640040: "ctor",
+})
 factory.register(0x1416AEFE8, "Client::UI::Misc::PronounModule", "Component::Text::TextChecker::ExecNonMacroFunc", {
     0x1406296A0: "ctor",
 })
