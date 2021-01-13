@@ -642,6 +642,8 @@ class FfxivClass:
                     continue  # same name? skip it
                 elif current_func_name == self.PURECALL:
                     continue  # purecall? skip it
+                elif current_func_name == "":
+                    api.set_addr_name(ea, full_func_name)
                 # check that the name is unnamed
                 elif any(current_func_name.startswith(prefix) for prefix in [self.SUB_PREFIX, self.NULLSUB_PREFIX, self.LOC_PREFIX]):
                     api.set_addr_name(ea, full_func_name)
@@ -787,19 +789,13 @@ factory.register("GroupManager", "", {
 factory.register(0x14164E260, "Common::Configuration::ConfigBase", "Client::System::Common::NonCopyable", {
     0x140068C30: "ctor",
 })
+factory.register(0x14164E280, "Common::Configuration::UIConfig", "Common::Configuration::ConfigBase", {})
+factory.register(0x14164E2A0, "Common::Configuration::UIControlConfig", "Common::Configuration::ConfigBase", {})
 factory.register(0x14164E2C0, "Common::Configuration::SystemConfig", "Common::Configuration::ConfigBase", {
     0x140078DE0: "ctor",
 })
-factory.register(0x14164E280, "Common::Configuration::UIConfig", "Common::Configuration::ConfigBase", {})
-factory.register(0x14164E2A0, "Common::Configuration::UIControlConfig", "Common::Configuration::ConfigBase", {})
 factory.register(0x14164E2E0, "Common::Configuration::DevConfig", "Common::Configuration::ConfigBase", {
     0x14007EA30: "ctor",
-})
-factory.register(0x14164F4B8, "Client::System::Framework::Framework", "", {
-    1: "Setup",
-    4: "Tick",
-    0x14008EA40: "ctor",
-    0x140091EB0: "GetUIModule",
 })
 factory.register(0x14164F430, "Client::System::Framework::Task", "", {
     0x1400946B0: "TaskRunner",  # task starter which runs the task's function pointer
@@ -811,6 +807,12 @@ factory.register(0x14164F460, "Client::System::Framework::TaskManager", "", {
 })
 factory.register(0x14164F478, "Client::System::Configuration::SystemConfig", "Common::Configuration::SystemConfig", {})
 factory.register(0x14164F498, "Client::System::Configuration::DevConfig", "Common::Configuration::DevConfig", {})
+factory.register(0x14164F4B8, "Client::System::Framework::Framework", "", {
+    1: "Setup",
+    4: "Tick",
+    0x14008EA40: "ctor",
+    0x140091EB0: "GetUIModule",
+})
 factory.register(0x14164F4E0, "Component::Excel::ExcelModuleInterface", "", {})
 factory.register(0x141659488, "Component::GUI::AtkEventListener", "", {
     2: "ReceiveEvent",
@@ -881,7 +883,7 @@ factory.register(0x141675D70, "Client::UI::Agent::AgentModule", "", {
 factory.register(0x141676AE0, "Client::UI::Agent::AgentCursor", "Client::UI::Agent::AgentInterface", {})
 factory.register(0x141676B50, "Client::UI::Agent::AgentCursorLocation", "Client::UI::Agent::AgentInterface", {})
 factory.register(0x14167E0D0, "Client::Graphics::Kernel::Resource", "Client::Graphics::DelayedReleaseClassBase", {})
-factory.register(0x14167E0F8, "Client::Graphics::Kernel::Shader", "Client::Graphics::Kernel::Resource", {}) # its possible shader and buffer are reversed, there's no way to actually tell, not very important
+factory.register(0x14167E0F8, "Client::Graphics::Kernel::Shader", "Client::Graphics::Kernel::Resource", {})  # its possible shader and buffer are reversed, there's no way to actually tell, not very important
 factory.register(0x14167E120, "Client::Graphics::Kernel::Texture", "Client::Graphics::Kernel::Resource", {
     0x1402F9A40: "ctor",
 })
@@ -1261,6 +1263,9 @@ factory.register(0x1416AEF08, "Client::UI::Misc::RaptureHotbarModule", "Client::
     0x1406208E0: "ctor",
 })
 factory.register(0x1416AEF70, "Client::UI::Misc::RaptureHotbarModule_Client::System::Input::InputCodeModifiedInterface", "Client::System::Input::InputData::InputCodeModifiedInterface", {})
+factory.register(0x1416AEFE8, "Client::UI::Misc::PronounModule", "Component::Text::TextChecker::ExecNonMacroFunc", {
+    0x1406296A0: "ctor",
+})
 factory.register(0x1416AEFF8, "Client::UI::Misc::RaptureGearsetModule", "Client::UI::Misc::UserFileManager::UserFileEvent", {
     0x14062DDC0: "ctor",
 })
@@ -1269,9 +1274,6 @@ factory.register(0x1416AF068, "Client::UI::Misc::ItemFinderModule", "Client::UI:
 })
 factory.register(0x1416AF210, "Client::UI::Misc::ItemOrderModule", "Client::UI::Misc::UserFileManager::UserFileEvent", {
     0x140640040: "ctor",
-})
-factory.register(0x1416AEFE8, "Client::UI::Misc::PronounModule", "Component::Text::TextChecker::ExecNonMacroFunc", {
-    0x1406296A0: "ctor",
 })
 factory.register(0x1416AFAC0, "Client::UI::Misc::CharaView", "", {
     0: "dtor",
@@ -1333,8 +1335,25 @@ factory.register(0x1416F4AA8, "Client::Game::Gimmick::GimmickBill", "Client::Gam
 factory.register(0x141798F70, "Client::UI::AddonNowLoading", "Component::GUI::AtkUnitBase", {
     0x140CCD770: "ctor",
 })
-factory.register(0x1417CD2A8, "Client::UI::AddonRaidFinder", "Component::GUI::AtkUnitBase", {})
+factory.register(0x141799CA8, "Client::UI::AddonSelectString", "Component::GUI::AtkUnitBase", {})
+factory.register(0x14179A330, "Client::UI::AddonSelectIconString", "Component::GUI::AtkUnitBase", {})
+factory.register(0x14179ADE8, "Client::UI::AddonContextIconMenu", "Component::GUI::AtkUnitBase", {})
+factory.register(0x14179BAD0, "Client::UI::AddonSelectYesno", "Component::GUI::AtkUnitBase", {
+    0x140CD9190: "ctor",
+})
+factory.register(0x14179E5B0, "Client::UI::AddonRequest", "Component::GUI::AtkUnitBase", {})
+factory.register(0x1417C34A8, "Client::UI::AddonJournalDetail", "Component::GUI::AtkUnitBase", {})
+factory.register(0x1417C3D28, "Client::UI::AddonJournalResult", "Component::GUI::AtkUnitBase", {})
+factory.register(0x1417C3F68, "Client::UI::AddonGuildLeve", "Component::GUI::AtkUnitBase", {})
+factory.register(0x1417C9520, "Client::UI::AddonRecipeNote", "Component::GUI::AtkUnitBase", {
+    0x140E15610: "ReceiveEvent_ClickSynthesizeButton",
+    0x140E15660: "ReceiveEvent_ClickQuickSynthesisButton",
+    0x140E156B0: "ReceiveEvent_ClickTrialSynthesisButton",
+})
 factory.register(0x1417C9DC8, "Client::UI::Atk2DAreaMap", "Client::UI::Atk2DMap", {})
+factory.register(0x1417CD2A8, "Client::UI::AddonRaidFinder", "Component::GUI::AtkUnitBase", {})
+factory.register(0x1417CDB58, "Client::UI::AddonMateriaAttach", "Component::GUI::AtkUnitBase", {})
+factory.register(0x1417CDF98, "Client::UI::AddonMateriaAttachDialog", "Component::GUI::AtkUnitBase", {})
 factory.register(0x1417D4E18, "Client::UI::AddonTalk", "Component::GUI::AtkUnitBase", {
     0x140E7C1F0: "ctor",
 })
@@ -1345,16 +1364,19 @@ factory.register(0x1417D6AA0, "Client::UI::AddonItemDetail", "Component::GUI::At
 factory.register(0x1417DCDD0, "Client::UI::AddonAreaMap", "Component::GUI::AtkUnitBase", {
     0x140EBDC40: "ctor",
 })
+factory.register(0x1417DE1D0, "Client::UI::AddonGathering", "Component::GUI::AtkUnitBase", {
+    0x140ECFE60: "ctor",
+    0x140ED05B0: "ReceiveEvent_ToggleQuickGathering",
+    0x140ED0660: "ReceiveEvent_Gather",
+})
+factory.register(0x1417DE3F0, "Client::UI::AddonGatheringMasterpiece", "Component::GUI::AtkUnitBase", {})
 factory.register(0x1417DEC90, "Client::UI::AddonNamePlate", "Component::GUI::AtkUnitBase", {
     0x140ED87F0: "ctor",
 })
-factory.register(0x1417C9520, "Client::UI::AddonRecipeNote", "Component::GUI::AtkUnitBase", {
-    0x140E15610: "ReceiveEvent_ClickSynthesizeButton",
-    0x140E15660: "ReceiveEvent_ClickQuickSynthesisButton",
-    0x140E156B0: "ReceiveEvent_ClickTrialSynthesisButton",
-})
-factory.register(0x14179BAD0, "Client::UI::AddonHudSelectYesno", "Component::GUI::AtkUnitBase", {
-    0x140CD9190: "ctor",
+factory.register(0x1417F7ED0, "Client::UI::AddonWeeklyBingo", "Component::GUI::AtkUnitBase", {})  # Wondrous Tails
+factory.register(0x1417F8530, "Client::UI::AddonWeeklyPuzzle", "Component::GUI::AtkUnitBase", {})  # Faux Hollows
+factory.register(0x141808FE8, "Client::UI::AddonPartyList", "Component::GUI::AtkUnitBase", {
+    0x140FEB990: "ResizeForPartySize",
 })
 factory.register(0x141810480, "Client::UI::AddonHudLayoutWindow", "Component::GUI::AtkUnitBase", {
     0x14101D810: "ctor",
@@ -1365,17 +1387,6 @@ factory.register(0x1418106A0, "Client::UI::AddonHudLayoutScreen", "Component::GU
     0x141023960: "AddonOverlayMouseClickEvent",
     0x141023D60: "AddonOverlayMouseReleaseEvent",
     0x1410259A0: "_SetAddonScale",
-})
-factory.register(0x1417CDB58, "Client::UI::AddonMateriaAttach", "Component::GUI::AtkUnitBase", {})
-factory.register(0x1417CDF98, "Client::UI::AddonMateriaAttachDialog", "Component::GUI::AtkUnitBase", {})
-factory.register(0x1417DE1D0, "Client::UI::AddonGathering", "Component::GUI::AtkUnitBase", {
-    0x140ECFE60: "ctor",
-    0x140ED05B0: "ReceiveEvent_ToggleQuickGathering",
-    0x140ED0660: "ReceiveEvent_Gather",
-})
-factory.register(0x1417F8530, "Client::UI::AddonWeeklyPuzzle", "Component::GUI::AtkUnitBase", {})  # Faux Hollows
-factory.register(0x141808FE8, "Client::UI::AddonPartyList", "Component::GUI::AtkUnitBase", {
-    0x140FEB990: "ResizeForPartySize",
 })
 factory.register(0x141820EF0, "Client::UI::AddonLotteryDaily", "Component::GUI::AtkUnitBase", {})  # Mini Cactpot
 factory.register(0x141825368, "Client::Graphics::Culling::CullingManager_Client::Graphics::JobSystem_Client::Graphics::Culling::CullingJobOpt", "", {})
