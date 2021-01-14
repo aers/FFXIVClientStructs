@@ -1259,6 +1259,7 @@ factory.register(0x1416A9DA0, "Client::UI::UIModule", "Client::UI::UIModuleInter
     29: "GetRaptureTeleportHistory",
     34: "GetAgentModule",
     36: "GetUI3DModule",
+    54: "GetUIInputModule",
     56: "GetLogFilterConfig",
 })
 factory.register(0x1416AA5A0, "Client::System::Crypt::SimpleString", "Client::System::Crypt::CryptInterface", {
