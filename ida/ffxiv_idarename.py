@@ -1235,11 +1235,26 @@ factory.register(0x1416A9D88, "Client::UI::UI3DModule", "", {
 })
 factory.register(0x1416A9DA0, "Client::UI::UIModule", "Client::UI::UIModuleInterface", {
     0x1405C48F0: "ctor",
+    6: "GetRaptureTextModule",
+    7: "GetRaptureAtkModule",
+    8: "GetRaptureAtkModule2",
+    9: "GetRaptureShellModule",
+    10: "GetPronounModule",
+    11: "GetRaptureLogModule",
     12: "GetRaptureMacroModule",
     13: "GetRaptureHotbarModule",
     14: "GetRaptureGearsetModule",
+    15: "GetAcquaintanceModule",
     16: "GetItemOrderModule",
     17: "GetItemFinderModule",
+    18: "GetConfigModule",
+    20: "GetUiSavePackModule",
+    21: "GetLetterDataModule",
+    22: "GetRetainerTaskDataModule",
+    23: "GetFlagStatusModule",
+    29: "GetRaptureTeleportHistory",
+    34: "GetAgentModule",
+    36: "GetUI3DModule",
 })
 factory.register(0x1416AA5A0, "Client::System::Crypt::SimpleString", "Client::System::Crypt::CryptInterface", {
     1: "Encrypt",
