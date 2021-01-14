@@ -11,5 +11,6 @@ namespace FFXIVClientStructs.Component.GUI
     public unsafe struct AtkEventTarget
     {
         [FieldOffset(0x0)] public void* vtbl;
+        [FieldOffset(0x0)] public void** vfunc;
     }
 }

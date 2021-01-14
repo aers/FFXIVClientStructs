@@ -1,8 +1,9 @@
-﻿using System.Runtime.InteropServices;
+﻿using FFXIVClientStructs.Component.GUI;
+using System.Runtime.InteropServices;
 
-namespace FFXIVClientStructs.Component.GUI.Addon
+namespace FFXIVClientStructs.Client.UI
 {
-    // Component::GUI::AddonRecipeNote
+    // Client::UI::AddonRecipeNote
     //   Component::GUI::AtkUnitBase
     //     Component::GUI::AtkEventListener
     [StructLayout(LayoutKind.Explicit, Size = 0x21A0)]

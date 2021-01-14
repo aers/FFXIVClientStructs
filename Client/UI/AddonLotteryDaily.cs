@@ -1,13 +1,14 @@
-﻿using System;
+﻿using FFXIVClientStructs.Component.GUI;
+using System;
 using System.Runtime.InteropServices;
 
-namespace FFXIVClientStructs.Component.GUI.Addon
+namespace FFXIVClientStructs.Client.UI
 {
-    // Component::GUI::AddonDailyLottery
+    // Client::UI::AddonLotteryDaily
     //   Component::GUI::AtkUnitBase
     //     Component::GUI::AtkEventListener
     [StructLayout(LayoutKind.Explicit, Size = 0x408)]
-    public unsafe struct AddonDailyLottery
+    public unsafe struct AddonLotteryDaily
     {
         [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
         [FieldOffset(0x220)] public GameTileBoard GameBoard;

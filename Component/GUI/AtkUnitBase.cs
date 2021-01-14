@@ -27,5 +27,7 @@ namespace FFXIVClientStructs.Component.GUI
         [FieldOffset(0x1D5)] public byte Alpha;
         [FieldOffset(0x1D8)] public AtkCollisionNode** CollisionNodeList; // seems to be all collision nodes in tree, may be something else though
         [FieldOffset(0x1E0)] public uint CollisionNodeListCount;
+
+        public bool IsVisible => (Flags & 0x20) == 0x20;
     }
 }
