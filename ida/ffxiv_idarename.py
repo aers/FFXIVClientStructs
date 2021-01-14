@@ -1235,6 +1235,9 @@ factory.register(0x1416A9D88, "Client::UI::UI3DModule", "", {
 })
 factory.register(0x1416A9DA0, "Client::UI::UIModule", "Client::UI::UIModuleInterface", {
     0x1405C48F0: "ctor",
+    0: "dtor",
+    4: "Abort",
+    5: "ExcelModule",
     6: "GetRaptureTextModule",
     7: "GetRaptureAtkModule",
     8: "GetRaptureAtkModule2",
@@ -1248,6 +1251,7 @@ factory.register(0x1416A9DA0, "Client::UI::UIModule", "Client::UI::UIModuleInter
     16: "GetItemOrderModule",
     17: "GetItemFinderModule",
     18: "GetConfigModule",
+    19: "GetAddonConfig",
     20: "GetUiSavePackModule",
     21: "GetLetterDataModule",
     22: "GetRetainerTaskDataModule",
@@ -1255,6 +1259,7 @@ factory.register(0x1416A9DA0, "Client::UI::UIModule", "Client::UI::UIModuleInter
     29: "GetRaptureTeleportHistory",
     34: "GetAgentModule",
     36: "GetUI3DModule",
+    56: "GetLogFilterConfig",
 })
 factory.register(0x1416AA5A0, "Client::System::Crypt::SimpleString", "Client::System::Crypt::CryptInterface", {
     1: "Encrypt",
