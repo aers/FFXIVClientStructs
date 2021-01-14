@@ -1237,7 +1237,7 @@ factory.register(0x1416A9DA0, "Client::UI::UIModule", "Client::UI::UIModuleInter
     0x1405C48F0: "ctor",
     0: "dtor",
     4: "Abort",
-    5: "ExcelModule",
+    5: "GetExcelModule",
     6: "GetRaptureTextModule",
     7: "GetRaptureAtkModule",
     8: "GetRaptureAtkModule2",
