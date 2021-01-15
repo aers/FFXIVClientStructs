@@ -1303,11 +1303,15 @@ factory.register(0x1416AFAC0, "Client::UI::Misc::CharaView", "", {
     0x14064FC90: "ctor",
 })
 factory.register(0x1416B0EC0, "Client::Game::Object::GameObject", "", {
+    2: "GetObjectID",
     3: "GetObjectKind",
+    7: "GetName",
+    8: "GetTargetRingRadius",
     16: "EnableDraw",
     17: "DisableDraw",
     21: "SetDrawObject",
     40: "Update",
+    50: "GetNpcID",
     0x1406C5330: "Initialize",
     0x1406C5590: "ctor",
 })
@@ -1315,6 +1319,13 @@ factory.register(0x1416B1B48, "Client::Game::Character::Character", "Client::Gam
     0x1406D5B80: "dtor",
     0x1406EA400: "ctor",
 })
+factory.register(0x141824078, "Client::Game::Object::Treasure", "Client::Game::Object::GameObject", {})
+factory.register(0x141832D18, "Client::Game::Object::Aetheryte", "Client::Game::Object::GameObject", {})
+factory.register(0x1418243B8, "Client::Game::Object::GatheringPointObject", "Client::Game::Object::GameObject", {})
+factory.register(0x141824628, "Client::Game::Object::AreaObject", "Client::Game::Object::GameObject", {})
+factory.register(0x141823E08, "Client::Game::Object::EventObject", "Client::Game::Object::GameObject", {})
+factory.register(0x14186A7D0, "Client::Game::Object::HousingObject", "Client::Game::Object::GameObject", {})
+factory.register(0x14187D5F8, "Client::Game::Object::HousingCombinedObject", "Client::Game::Object::HousingObject", {})
 factory.register(0x1416B1E10, "Client::Game::Character::Character_Client::Graphics::Vfx::VfxDataListener", "Client::Graphics::Vfx::VfxDataListenner", {})
 factory.register(0x1416C8150, "Client::Game::Character::BattleChara", "Client::Game::Character::Character", {
     0x14073C180: "ctor",
