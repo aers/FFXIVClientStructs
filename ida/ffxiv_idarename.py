@@ -1321,6 +1321,9 @@ factory.register(0x1416C8150, "Client::Game::Character::BattleChara", "Client::G
     0x14073C270: "dtor",
 })
 factory.register(0x1416C8418, "Client::Game::Character::BattleChara_Client::Graphics::Vfx::VfxDataListener", "Client::Game::Character::Character_Client::Graphics::Vfx::VfxDataListener", {})
+factory.register(0x141824078, "Client::Game::Object::Treasure", "Client::Game::Object::GameObject", {})
+factory.register(0x141832D18, "Client::Game::Object::Aetheryte", "Client::Game::Object::GameObject", {})
+factory.register(0x1418243B8, "Client::Game::Object::GatheringPointObject", "Client::Game::Object::GameObject", {})
 factory.register(0x1416CA7C0, "Client::Game::ActionManager", "Client::Graphics::Vfx::VfxDataListenner", {})
 factory.register(0x1416CC740, "Client::UI::Agent::AgentHUD", "Client::UI::Agent::AgentInterface", {
     0x14081F390: "ctor",
