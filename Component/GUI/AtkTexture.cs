@@ -1,7 +1,15 @@
-﻿using System.Runtime.InteropServices;
+﻿using FFXIVClientStructs.Client.Graphics.Render;
+using System.Runtime.InteropServices;
 
 namespace FFXIVClientStructs.Component.GUI
 {
+    public enum TextureType : byte
+    {
+        Resource = 1,
+        Crest = 2,
+        KernelTexture = 3
+    }
+
     // Component::GUI::AtkTexture
 
     // size = 0x18
@@ -10,8 +18,11 @@ namespace FFXIVClientStructs.Component.GUI
     public unsafe struct AtkTexture
     {
         [FieldOffset(0x0)] public void* vtbl;
-        [FieldOffset(0x8)] public TexHolder* TextureInfo;
-        [FieldOffset(0x10)] public byte UnkBool_1;
+        // union type
+        [FieldOffset(0x8)] public TextureResource* Resource;
+        [FieldOffset(0x8)] public void* Crest;
+        [FieldOffset(0x8)] public Texture* KernelTexture;
+        [FieldOffset(0x10)] public TextureType TextureType;
         [FieldOffset(0x11)] public byte UnkBool_2;
     }
 }

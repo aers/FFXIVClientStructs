@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.Component.GUI
 {
     // probably belongs to something other than AtkStage 
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]
-    public unsafe struct TexHolder
+    public unsafe struct TextureResource
     {
         [FieldOffset(0x0)] public uint TexPathHash; // crc32(full path)
         [FieldOffset(0x4)] public uint Unk_1; // defaults to 0xFFFFFFFF which is -1 so might be signed
