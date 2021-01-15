@@ -1325,7 +1325,6 @@ factory.register(0x1418243B8, "Client::Game::Object::GatheringPointObject", "Cli
 factory.register(0x141824628, "Client::Game::Object::AreaObject", "Client::Game::Object::GameObject", {})
 factory.register(0x141823E08, "Client::Game::Object::EventObject", "Client::Game::Object::GameObject", {})
 factory.register(0x14186A7D0, "Client::Game::Object::HousingObject", "Client::Game::Object::GameObject", {})
-factory.register(0x14186AA70, "Client::Game::Object::HousingEventObject", "Client::Game::Object::HousingObject", {})
 factory.register(0x14187D5F8, "Client::Game::Object::HousingCombinedObject", "Client::Game::Object::HousingObject", {})
 factory.register(0x1416B1E10, "Client::Game::Character::Character_Client::Graphics::Vfx::VfxDataListener", "Client::Graphics::Vfx::VfxDataListenner", {})
 factory.register(0x1416C8150, "Client::Game::Character::BattleChara", "Client::Game::Character::Character", {
