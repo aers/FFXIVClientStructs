@@ -1319,16 +1319,20 @@ factory.register(0x1416B1B48, "Client::Game::Character::Character", "Client::Gam
     0x1406D5B80: "dtor",
     0x1406EA400: "ctor",
 })
+factory.register(0x141824078, "Client::Game::Object::Treasure", "Client::Game::Object::GameObject", {})
+factory.register(0x141832D18, "Client::Game::Object::Aetheryte", "Client::Game::Object::GameObject", {})
+factory.register(0x1418243B8, "Client::Game::Object::GatheringPointObject", "Client::Game::Object::GameObject", {})
+factory.register(0x141824628, "Client::Game::Object::AreaObject", "Client::Game::Object::GameObject", {})
+factory.register(0x141823E08, "Client::Game::Object::EventObject", "Client::Game::Object::GameObject", {})
+factory.register(0x14186A7D0, "Client::Game::Object::HousingObject", "Client::Game::Object::GameObject", {})
+factory.register(0x14186AA70, "Client::Game::Object::HousingEventObject", "Client::Game::Object::HousingObject", {})
+factory.register(0x14187D5F8, "Client::Game::Object::HousingCombinedObject", "Client::Game::Object::HousingEventObject", {})
 factory.register(0x1416B1E10, "Client::Game::Character::Character_Client::Graphics::Vfx::VfxDataListener", "Client::Graphics::Vfx::VfxDataListenner", {})
 factory.register(0x1416C8150, "Client::Game::Character::BattleChara", "Client::Game::Character::Character", {
     0x14073C180: "ctor",
     0x14073C270: "dtor",
 })
 factory.register(0x1416C8418, "Client::Game::Character::BattleChara_Client::Graphics::Vfx::VfxDataListener", "Client::Game::Character::Character_Client::Graphics::Vfx::VfxDataListener", {})
-factory.register(0x141824078, "Client::Game::Object::Treasure", "Client::Game::Object::GameObject", {})
-factory.register(0x141832D18, "Client::Game::Object::Aetheryte", "Client::Game::Object::GameObject", {})
-factory.register(0x1418243B8, "Client::Game::Object::GatheringPointObject", "Client::Game::Object::GameObject", {})
-factory.register(0x141824628, "Client::Game::Object::AreaObject", "Client::Game::Object::GameObject", {})
 factory.register(0x1416CA7C0, "Client::Game::ActionManager", "Client::Graphics::Vfx::VfxDataListenner", {})
 factory.register(0x1416CC740, "Client::UI::Agent::AgentHUD", "Client::UI::Agent::AgentInterface", {
     0x14081F390: "ctor",
