@@ -1303,7 +1303,10 @@ factory.register(0x1416AFAC0, "Client::UI::Misc::CharaView", "", {
     0x14064FC90: "ctor",
 })
 factory.register(0x1416B0EC0, "Client::Game::Object::GameObject", "", {
+    2: "GetObjectID",
     3: "GetObjectKind",
+    7: "GetName",
+    8: "GetTargetCircleRadius",
     16: "EnableDraw",
     17: "DisableDraw",
     21: "SetDrawObject",
@@ -1324,6 +1327,7 @@ factory.register(0x1416C8418, "Client::Game::Character::BattleChara_Client::Grap
 factory.register(0x141824078, "Client::Game::Object::Treasure", "Client::Game::Object::GameObject", {})
 factory.register(0x141832D18, "Client::Game::Object::Aetheryte", "Client::Game::Object::GameObject", {})
 factory.register(0x1418243B8, "Client::Game::Object::GatheringPointObject", "Client::Game::Object::GameObject", {})
+factory.register(0x141824628, "Client::Game::Object::AreaObject", "Client::Game::Object::GameObject", {})
 factory.register(0x1416CA7C0, "Client::Game::ActionManager", "Client::Graphics::Vfx::VfxDataListenner", {})
 factory.register(0x1416CC740, "Client::UI::Agent::AgentHUD", "Client::UI::Agent::AgentInterface", {
     0x14081F390: "ctor",
