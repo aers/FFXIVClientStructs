@@ -1306,11 +1306,12 @@ factory.register(0x1416B0EC0, "Client::Game::Object::GameObject", "", {
     2: "GetObjectID",
     3: "GetObjectKind",
     7: "GetName",
-    8: "GetTargetCircleRadius",
+    8: "GetTargetRingRadius",
     16: "EnableDraw",
     17: "DisableDraw",
     21: "SetDrawObject",
     40: "Update",
+    50: "GetNpcID",
     0x1406C5330: "Initialize",
     0x1406C5590: "ctor",
 })
