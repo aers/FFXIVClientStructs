@@ -735,6 +735,7 @@ api.set_addr_name(0x141DB2D90, "g_ActorListEnd")
 api.set_addr_name(0x141DD6F08, "g_EventFramework")
 api.set_addr_name(0x141DDAA20, "g_GroupManager")
 api.set_addr_name(0x141DE2D50, "g_ClientObjectManager")
+api.set_addr_name(0x141DAD610, "g_InventoryManager")
 # endregion
 
 # region vtbl
@@ -784,6 +785,12 @@ factory.register("GroupManager", "", {
     0x140778660: "IsCharacterInPartyByName",  # (this, char*)
     0x1407786E0: "IsObjectIDInAlliance",
     0x140778750: "IsObjectIDPartyLeader",
+})
+factory.register("InventoryManager", "", {
+    0x1406995E0: "GetInventoryContainer", # (this, containerId)
+})
+factory.register("InventoryContainer", "", {
+    0x140697F00: "GetInventorySlot", # (this, slotIndex)
 })
 # Known classes
 factory.register(0x14164E260, "Common::Configuration::ConfigBase", "Client::System::Common::NonCopyable", {
@@ -1392,6 +1399,9 @@ factory.register(0x1417D4E18, "Client::UI::AddonTalk", "Component::GUI::AtkUnitB
 factory.register(0x1417D6AA0, "Client::UI::AddonItemDetail", "Component::GUI::AtkUnitBase", {
     0x140E90460: "ctor",
     0x140E91980: "GenerateTooltip",
+})
+factory.register(0x1417D6618, "Client::UI::AddonActionDetail", "Compoent::GUI::AtkUnitBase", {
+    0x140E8F650: "ctor",
 })
 factory.register(0x1417DCDD0, "Client::UI::AddonAreaMap", "Component::GUI::AtkUnitBase", {
     0x140EBDC40: "ctor",
