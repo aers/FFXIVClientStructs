@@ -1445,6 +1445,14 @@ factory.register(0x141829CE0, "Client::Game::Camera", "Client::Game::CameraBase"
 factory.register(0x14182B780, "Client::Graphics::Culling::OcclusionCullingManager", "Client::Graphics::Singleton", {})
 factory.register(0x14182B790, "Client::Graphics::Streaming::StreamingManager_Client::Graphics::JobSystem_Client::Graphics::Streaming::StreamingManager::StreamingJob", "Client::Graphics::Singleton", {})
 factory.register(0x14182B798, "Client::Graphics::Streaming::StreamingManager", "Client::Graphics::Singleton", {})
+factory.register(0x14182DD60, "Client::Graphics::Physics::BonePhysicsModule", "", {
+    0: "dtor",
+    0x141139250: "ctor",
+    0x1411393D0: "Initialize",
+})
+factory.register(0x1418324B0, "Client::Graphics::Physics::BoneSimulator", "", {
+    0x141159DC0: "ctor",
+})
 factory.register(0x1418334C8, "Component::Log::LogModule", "Client::System::Common::NonCopyable", {})
 factory.register(0x1418791E0, "Client::Game::Gimmick::GimmickEventHandler", "Client::Game::Event::LuaEventHandler", {})
 factory.register(0x14187A2A0, "Client::Game::Gimmick::GimmickRect", "Client::Game::Gimmick::GimmickEventHandler", {})

@@ -1,4 +1,5 @@
-﻿using System.Runtime.InteropServices;
+﻿using FFXIVClientStructs.FFXIV.Client.Graphics.Physics;
+using System.Runtime.InteropServices;
 
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene
 {
@@ -18,7 +19,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene
         [FieldOffset(0xA0)] public void* Skeleton; // Client::Graphics::Render::Skeleton
         [FieldOffset(0xA8)] public void** ModelArray; // array of Client::Graphics::Render::Model ptrs size = SlotCount
         [FieldOffset(0x148)] public void* PostBoneDeformer; // Client::Graphics::Scene::PostBoneDeformer ptr
-        [FieldOffset(0x150)] public void* BonePhysicsModule; // Client::Graphics::Physics::BonePhysicsModule ptr
+        [FieldOffset(0x150)] public BonePhysicsModule* BonePhysicsModule; // Client::Graphics::Physics::BonePhysicsModule ptr
         [FieldOffset(0x240)] public void* CharacterDataCB; // Client::Graphics::Kernel::ConstantBuffer ptr, this CB includes stuff like hair color
         // next few fields are used temporarily when loading the render object and cleared after load
         [FieldOffset(0x2C8)] public uint HasModelInSlotLoaded; // tracks which slots have loaded models into staging
