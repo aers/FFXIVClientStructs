@@ -41,7 +41,7 @@ namespace CExporter
 
             var header = new StringBuilder();
 
-            var clientStructs = AppDomain.CurrentDomain.Load(nameof(FFXIVClientStructs));
+            var clientStructs = AppDomain.CurrentDomain.Load(nameof(FFXIVClientStructs.FFXIV));
             // Make forward references for everything, cycles are bad, detecting them is harder.
             header.AppendLine("// Forward References");
             foreach (var type in clientStructs.DefinedTypes)
@@ -242,7 +242,7 @@ namespace CExporter
 
         private string FixFullName(Type type)
         {
-            return type.FullName.Remove(0, nameof(FFXIVClientStructs).Length + 1).Replace(".", "::").Replace("+", "::");
+            return type.FullName.Remove(0, nameof(FFXIVClientStructs.FFXIV).Length + 1).Replace(".", "::").Replace("+", "::");
         }
 
         private string FixTypeName(Type type)
