@@ -881,6 +881,9 @@ factory.register(0x141675928, "Client::UI::Agent::AgentInterface", "Component::G
     5: "Update",
     0x1401EDD00: "ctor",
 })
+factory.register(0x1416CDC20, "Client::UI::Agent::AgentTeleport", "Client::UI::Agent::AgentInterface", {
+    0x1408B6730: "ctor",
+})
 factory.register(0x141675998, "Client::UI::Agent::AgentCharaMake", "Client::UI::Agent::AgentInterface", {})
 factory.register(0x141675D70, "Client::UI::Agent::AgentModule", "", {
     0x1401F6100: "ctor",
@@ -1312,8 +1315,9 @@ factory.register(0x1416AFAC0, "Client::UI::Misc::CharaView", "", {
 factory.register(0x1416B0EC0, "Client::Game::Object::GameObject", "", {
     2: "GetObjectID",
     3: "GetObjectKind",
+    5: "GetIsTargetable",
     7: "GetName",
-    8: "GetTargetRingRadius",
+    8: "GetRadius",
     16: "EnableDraw",
     17: "DisableDraw",
     21: "SetDrawObject",
