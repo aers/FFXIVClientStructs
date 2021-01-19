@@ -11,11 +11,17 @@ namespace FFXIVClientStructs.STD
 
         public ulong Size()
         {
+            if (First == null || Last == null)
+                return 0;
+
             return ((ulong)Last - (ulong)First) / (ulong)sizeof(T);
         }
 
         public ulong Capacity()
         {
+            if (End == null || First == null)
+                return 0;
+
             return ((ulong)End - (ulong)First) / (ulong)sizeof(T);
         }
     }
@@ -29,11 +35,17 @@ namespace FFXIVClientStructs.STD
 
         public ulong Size()
         {
+            if (First == null || Last == null)
+                return 0;
+
             return ((ulong)Last - (ulong)First) / 8;
         }
 
         public ulong Capacity()
         {
+            if (End == null || First == null)
+                return 0;
+
             return ((ulong)End - (ulong)First) / 8;
         }
 
