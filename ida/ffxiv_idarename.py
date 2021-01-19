@@ -687,18 +687,6 @@ api.set_addr_name(0x1407089B0, "Client::UI::Shell::RaptureShellModule_ctor")
 api.set_addr_name(0x14070CCD0, "Client::UI::Shell::RaptureShellModule_SetChatChannel")
 api.set_addr_name(0x14073B670, "CreateBattleCharaStore")
 api.set_addr_name(0x14073BC40, "BattleCharaStore_LookupBattleCharaByObjectID")
-api.set_addr_name(0x1407F69D0, "GetActionInRangeOrLoS")
-api.set_addr_name(0x1400A7F00, "GetCurrentComboActionId")
-api.set_addr_name(0x1407F6FC0, "GetAdjustedActionCastTime")
-api.set_addr_name(0x1407F7680, "GetAdjustedActionRecast")
-api.set_addr_name(0x1407FF080, "ActionManager::CanUseAction")
-api.set_addr_name(0x140801200, "ActionManager::GetAdjustedActionId")
-api.set_addr_name(0x140802A50, "ActionManager::RequestAction")
-api.set_addr_name(0x1408030B0, "ActionManager::RequestComboAction")
-api.set_addr_name(0x140803980, "ActionManager::GetActionRecastActive")
-api.set_addr_name(0x140803D40, "ActionManager::StartCooldown")
-api.set_addr_name(0x140804020, "ActionManager::GetActionRecastElapsed")
-api.set_addr_name(0x1408040D0, "ActionManager::GetActionRecast")
 api.set_addr_name(0x1408C1820, "CreateSelectYesno")
 api.set_addr_name(0x140A77FC0, "EventFramework_GetSingleton")
 api.set_addr_name(0x140A806D0, "EventFramework_ProcessDirectorUpdate")
@@ -1354,7 +1342,20 @@ factory.register(0x1416C8150, "Client::Game::Character::BattleChara", "Client::G
     0x14073C270: "dtor",
 })
 factory.register(0x1416C8418, "Client::Game::Character::BattleChara_Client::Graphics::Vfx::VfxDataListener", "Client::Game::Character::Character_Client::Graphics::Vfx::VfxDataListener", {})
-factory.register(0x1416CA7C0, "Client::Game::ActionManager", "Client::Graphics::Vfx::VfxDataListenner", {})
+factory.register(0x1416CA7C0, "Client::Game::ActionManager", "Client::Graphics::Vfx::VfxDataListenner", {
+    0x1407F69D0: "GetActionInRangeOrLoS",
+    0x1400A7F00: "GetCurrentComboActionId",
+    0x1407F6FC0: "GetAdjustedCastTime",
+    0x1407F7680: "GetAdjustedRecastTime",
+    0x1407FF080: "CanUseAction",
+    0x140801200: "GetAdjustedActionId",
+    0x140802A50: "RequestAction",
+    0x1408030B0: "RequestComboAction",
+    0x140803980: "GetRecastTimerActive",
+    0x140803D40: "StartCooldown",
+    0x140804020: "GetRecastTimerElapsed",
+    0x1408040D0: "GetRecastTime",
+})
 factory.register(0x1416CC740, "Client::UI::Agent::AgentHUD", "Client::UI::Agent::AgentInterface", {
     0x14081F390: "ctor",
     0x140824F10: "UpdateParty",
