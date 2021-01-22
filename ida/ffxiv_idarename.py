@@ -1416,7 +1416,7 @@ factory.register(0x1417D6AA0, "Client::UI::AddonItemDetail", "Component::GUI::At
     0x140E90460: "ctor",
     0x140E91980: "GenerateTooltip",
 })
-factory.register(0x1417D6618, "Client::UI::AddonActionDetail", "Compoent::GUI::AtkUnitBase", {
+factory.register(0x1417D6618, "Client::UI::AddonActionDetail", "Component::GUI::AtkUnitBase", {
     0x140E8F650: "ctor",
 })
 factory.register(0x1417DCDD0, "Client::UI::AddonAreaMap", "Component::GUI::AtkUnitBase", {
