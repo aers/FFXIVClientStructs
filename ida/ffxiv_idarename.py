@@ -822,7 +822,7 @@ factory.register(0x14164F4B8, "Client::System::Framework::Framework", "", {
 factory.register(0x14164F4E0, "Component::Excel::ExcelModuleInterface", "", {})
 factory.register(0x141659488, "Component::GUI::AtkEventListener", "", {
     2: "ReceiveEvent",
-})  # TODO: Verify this
+})
 factory.register(0x1416594C0, "Component::GUI::AtkUnitList", "", {})
 factory.register(0x1416594C8, "Component::GUI::AtkUnitManager", "Component::GUI::AtkEventListener", {
     0x1404E5580: "ctor",
@@ -1416,7 +1416,7 @@ factory.register(0x1417D6AA0, "Client::UI::AddonItemDetail", "Component::GUI::At
     0x140E90460: "ctor",
     0x140E91980: "GenerateTooltip",
 })
-factory.register(0x1417D6618, "Client::UI::AddonActionDetail", "Compoent::GUI::AtkUnitBase", {
+factory.register(0x1417D6618, "Client::UI::AddonActionDetail", "Component::GUI::AtkUnitBase", {
     0x140E8F650: "ctor",
 })
 factory.register(0x1417DCDD0, "Client::UI::AddonAreaMap", "Component::GUI::AtkUnitBase", {
@@ -1431,6 +1431,14 @@ factory.register(0x1417DE3F0, "Client::UI::AddonGatheringMasterpiece", "Componen
 factory.register(0x1417DEC90, "Client::UI::AddonNamePlate", "Component::GUI::AtkUnitBase", {
     0x140ED87F0: "ctor",
 })
+factory.register(0x1417F7E60, "Client::UI::AddonWeeklyBingo::DutySlot", "Component::GUI::AtkEventListener", {})
+factory.register(0x1417F7E78, "Client::UI::AddonWeeklyBingo::DutySlotList", "", {})
+factory.register(0x1417F7E80, "Client::UI::AddonWeeklyBingo::StringThing", "", {})
+factory.register(0x1417F7E88, "Client::UI::AddonWeeklyBingo::StickerSlot", "", {})
+factory.register(0x1417F7E90, "Client::UI::AddonWeeklyBingo::StickerSlotList", "", {})
+factory.register(0x1417F7E98, "Client::UI::AddonWeeklyBingo::RewardCategory", "Component::GUI::AtkEventListener", {})
+factory.register(0x1417F7EB0, "Client::UI::AddonWeeklyBingo::RewardGuaranteed", "Component::GUI::AtkEventListener", {})
+factory.register(0x1417F7EC8, "Client::UI::AddonWeeklyBingo::RewardCategoryList", "", {})
 factory.register(0x1417F7ED0, "Client::UI::AddonWeeklyBingo", "Component::GUI::AtkUnitBase", {})  # Wondrous Tails
 factory.register(0x1417F8530, "Client::UI::AddonWeeklyPuzzle", "Component::GUI::AtkUnitBase", {})  # Faux Hollows
 factory.register(0x141808FE8, "Client::UI::AddonPartyList", "Component::GUI::AtkUnitBase", {
