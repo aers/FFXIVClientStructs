@@ -786,6 +786,8 @@ api.set_addr_name(0x1407089B0, "Client::UI::Shell::RaptureShellModule_ctor")
 api.set_addr_name(0x14070CCD0, "Client::UI::Shell::RaptureShellModule_SetChatChannel")
 api.set_addr_name(0x14073B670, "CreateBattleCharaStore")
 api.set_addr_name(0x14073BC40, "BattleCharaStore_LookupBattleCharaByObjectID")
+api.set_addr_name(0x1407B0CB0, "UpdateTeleportList")
+api.set_addr_name(0x1407B24F0, "TryTeleportWithTicket")
 api.set_addr_name(0x1408C1820, "CreateSelectYesno")
 api.set_addr_name(0x140A77FC0, "EventFramework_GetSingleton")
 api.set_addr_name(0x140A806D0, "EventFramework_ProcessDirectorUpdate")
@@ -886,6 +888,7 @@ factory.register("GroupManager", "", {
 })
 factory.register("InventoryManager", "", {
     0x1406995E0: "GetInventoryContainer",  # (this, containerId)
+    0x1406A1AB0: "GetInventoryItemCount",
 })
 factory.register("InventoryContainer", "", {
     0x140697F00: "GetInventorySlot",  # (this, slotIndex)
