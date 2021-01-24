@@ -10,6 +10,6 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Framework
     public unsafe struct Framework
     {
         [FieldOffset(0x10)] public Client.System.Configuration.SystemConfig SystemConfig;
-        [FieldOffset(0x2F98)] public void* UIModule;
+        [FieldOffset(0x29F8)] public void* UIModule;
     }
 }

@@ -1,4 +1,5 @@
 # current exe version: 2020.12.29.0000.0000
+#@category __UserScripts
 
 from __future__ import print_function
 
@@ -297,8 +298,11 @@ if api is None:
 if api is None:
     try:
         import ghidra
-
-
+        from ghidra.program.model.data import CategoryPath
+        from ghidra.program.model.data import StructureDataType
+        #from ghidra.program.model.data import Undefined8DataType
+        from ghidra.program.model.data import PointerDataType
+        
         class GhidraApi(BaseApi):
 
             @property
@@ -344,19 +348,42 @@ if api is None:
                 return [xref.getFromAddress().getOffset() for xref in getReferencesTo(toAddr(ea))]
 
             def get_struct_id(self, name):
-                return 0;
+                gdt = currentProgram.getDataTypeManager()
+                struct = gdt.getDataType(CategoryPath("/__VFTables"), name.replace("_struct",""))
+                if struct: return gdt.getID(struct)
+                return -1;
 
             def create_struct(self, name):
-                return 0;
+                typeName = name.replace("_struct","")
+                structPath = CategoryPath("/___VFTables")
+                gdt = currentProgram.getDataTypeManager()
+                struct = gdt.getDataType(structPath, typeName)
+                if not struct:
+                    struct = StructureDataType(structPath, typeName, 0, gdt)
+                struct.deleteAll()
+                dt = gdt.addDataType(struct, None)
+                ## this takes way too long, and even longer if the pointers already exist
+                ## because it starts looking up all referneces to a struct and/or pointer
+                # p = gdt.getPointer(struct)
+                # gdt.addDataType(p, None)
+                return gdt.getID(dt)
 
             def add_struct_member(self, sid, name):
-                return True;
+                gdt = currentProgram.getDataTypeManager()
+                struct = gdt.getDataType(sid)
+                if not struct: return False
+                member = struct.add(PointerDataType(), 8, name, None)
+                return True
 
             def clear_struct(self, sid):
-                return True;
+                gdt = currentProgram.getDataTypeManager()
+                struct = gdt.getDataType(sid)
+                if not struct: return False
+                struct.deleteAll()
+                return True
 
             def convert_to_struct(self, ea, sid):
-                return True;
+                return False;
 
             def get_comment(self, ea):
                 return getEOLComment(toAddr(ea))
