@@ -17,6 +17,50 @@ if sys.version_info[0] >= 3:
 
 
 class BaseApi(object):
+
+    @property
+    @abstractmethod
+    def sub_prefixes(self):
+        """
+        Common prefixes that funcs are labeled with. "SUB_", "FUNC_", "THUNK_", etc.
+        :return: List of prefixes
+        :rtype: List[str]
+        """
+
+    @property
+    @abstractmethod
+    def nullsub_prefixes(self):
+        """
+        What nullsub funcs look like, might only be an IDA thing. "nullsub_<name>"
+        :return: List of prefixes
+        :rtype: List[str]
+        """
+
+    @property
+    @abstractmethod
+    def loc_prefixes(self):
+        """
+        What locations look like, might only be an IDA thing. "loc_<name>"
+        :return: List of prefixes
+        :rtype: List[str]
+        """
+
+    @property
+    @abstractmethod
+    def jump_prefix(self):
+        """
+        What jumpsubs look like, might only be an IDA thing. "j_<name>"
+        :return: str
+        """
+
+    @property
+    @abstractmethod
+    def purecall_str(self):
+        """
+        Special func name case, something like "_purecall" perhaps.
+        :return: str
+        """
+
     @abstractmethod
     def get_image_base(self):
         """
@@ -166,6 +210,26 @@ if api is None:
 
         class IdaApi(BaseApi):
 
+            @property
+            def sub_prefixes(self):
+                return ["sub_"]
+
+            @property
+            def nullsub_prefixes(self):
+                return ["nullsub_"]
+
+            @property
+            def loc_prefixes(self):
+                return ["loc_"]
+
+            @property
+            def jump_prefix(self):
+                return "j_"
+
+            @property
+            def purecall_str(self):
+                return "_purecall"
+
             def get_image_base(self):
                 return idaapi.get_imagebase()
 
@@ -236,45 +300,70 @@ if api is None:
 
 
         class GhidraApi(BaseApi):
+
+            @property
+            def sub_prefixes(self):
+                return ["FUN_", "LAB_", "SUB_"]
+
+            @property
+            def nullsub_prefixes(self):
+                return ["FUN_", "LAB_", "SUB_"]
+
+            @property
+            def loc_prefixes(self):
+                return ["LOC_"]
+
+            @property
+            def jump_prefix(self):
+                return "thunk_"
+
+            @property
+            def purecall_str(self):
+                return "_purecall"
+
             def get_image_base(self):
-                raise NotImplementedError
+                return currentProgram.getImageBase().getOffset()
 
             def set_addr_name(self, ea, name):
-                raise NotImplementedError
+                return createLabel(toAddr(ea), name, True).checkIsValid()
 
             def get_addr_name(self, ea):
-                raise NotImplementedError
+                sym = getSymbolAt(toAddr(ea))
+                if not sym: return None
+                return sym.getName(True)
 
             def get_qword(self, ea):
-                raise NotImplementedError
+                return getLong(toAddr(ea))
 
             def is_offset(self, ea):
-                raise NotImplementedError
+                data = getDataAt(toAddr(ea))
+                if not data: return False
+                return data.isPointer();
 
             def xrefs_to(self, ea):
-                raise NotImplementedError
+                return [xref.getFromAddress().getOffset() for xref in getReferencesTo(toAddr(ea))]
 
             def get_struct_id(self, name):
-                raise NotImplementedError
+                return 0;
 
             def create_struct(self, name):
-                raise NotImplementedError
+                return 0;
 
             def add_struct_member(self, sid, name):
-                raise NotImplementedError
+                return True;
 
             def clear_struct(self, sid):
-                raise NotImplementedError
+                return True;
 
             def convert_to_struct(self, ea, sid):
-                raise NotImplementedError
+                return True;
 
             def get_comment(self, ea):
-                raise NotImplementedError
+                return getEOLComment(toAddr(ea))
 
             def set_comment(self, ea, comment):
-                raise NotImplementedError
-
+                if getEOLComment(toAddr(ea)) is None:
+                    setEOLComment(toAddr(ea), comment)
 
         api = GhidraApi()
     except ImportError:
@@ -397,12 +486,6 @@ class FfxivClass:
     STRUCT_PURECALL_FORMAT = "purecall{index}"
     STRUCT_MANGLE_FORMAT = "mangled{index}"
 
-    SUB_PREFIX = "sub_"
-    NULLSUB_PREFIX = "nullsub_"
-    LOC_PREFIX = "loc_"
-    JUMP_PREFIX = "j_"
-    PURECALL = "_purecall"
-
     parent_class = None  # type: FfxivClass
 
     def __init__(self, vtbl_ea, class_name, parent_class_name, funcs):
@@ -504,6 +587,8 @@ class FfxivClass:
 
     # endregion
 
+    # region finalize
+
     def finalize(self):
         """
         Write out this class
@@ -546,8 +631,8 @@ class FfxivClass:
             vfunc_ea = api.get_qword(vfunc_offset)  # type: int
 
             current_func_name = api.get_addr_name(vfunc_ea)  # type: str
-            if current_func_name.startswith(self.JUMP_PREFIX):
-                current_func_name = current_func_name.lstrip(self.JUMP_PREFIX)
+            if current_func_name.startswith(api.jump_prefix):
+                current_func_name = current_func_name.lstrip(api.jump_prefix)
 
             if idx in self.funcs:
                 named_func = self.funcs[idx]
@@ -567,22 +652,22 @@ class FfxivClass:
                 else:
                     print("Warning: qword in vtbl at 0x{0:X}, it may be an offset to undefined code".format(vfunc_offset))
 
-            if current_func_name.startswith(self.name):
+            if self._text_has_prefix(current_func_name, self.name):
                 generic_full_func_name = current_func_name
                 generic_struct_member_name = current_func_name.strip(self.name).strip(".")
-            elif current_func_name.startswith(self.SUB_PREFIX):
+            elif self._text_has_prefix(current_func_name, api.sub_prefixes):
                 generic_full_func_name = self.GENERIC_SUB_FORMAT.format(cls=self.name, index=idx)
                 generic_struct_member_name = self.STRUCT_GENERIC_SUB_FORMAT.format(index=idx)
-            elif current_func_name.startswith(self.NULLSUB_PREFIX):
+            elif self._text_has_prefix(current_func_name, api.nullsub_prefixes):
                 generic_full_func_name = self.GENERIC_NULLSUB_FORMAT.format(cls=self.name, index=idx)
                 generic_struct_member_name = self.STRUCT_GENERIC_NULLSUB_FORMAT.format(index=idx)
-            elif current_func_name.startswith(self.LOC_PREFIX):
+            elif self._text_has_prefix(current_func_name, api.loc_prefixes):
                 generic_full_func_name = self.GENERIC_LOC_FORMAT.format(cls=self.name, index=idx)
                 generic_struct_member_name = self.STRUCT_GENERIC_LOC_FORMAT.format(index=idx)
-            elif any(current_func_name.startswith(parent_class_name) for parent_class_name in self.parent_class_names):
+            elif self._text_has_prefix(current_func_name, self.parent_class_names):
                 generic_full_func_name = None  # No override present
                 generic_struct_member_name = current_func_name.split(".", 1)[-1]
-            elif current_func_name == self.PURECALL:
+            elif current_func_name == api.purecall_str:
                 generic_full_func_name = None  # Ignored
                 generic_struct_member_name = self.STRUCT_PURECALL_FORMAT.format(index=idx)
             elif current_func_name.startswith("?") or current_func_name.startswith("_"):
@@ -635,22 +720,36 @@ class FfxivClass:
                 full_func_name = self.NAMED_FUNC_FORMAT.format(cls=self.name, name=func_name)
 
                 current_func_name = api.get_addr_name(ea)  # type: str
-                if current_func_name.startswith(self.JUMP_PREFIX):
-                    current_func_name = current_func_name.lstrip(self.JUMP_PREFIX)
+                if self._text_has_prefix(current_func_name, api.jump_prefix):
+                    current_func_name = current_func_name.lstrip(api.jump_prefix)
 
                 if current_func_name == full_func_name:
                     continue  # same name? skip it
-                elif current_func_name == self.PURECALL:
+                elif current_func_name == api.purecall_str:
                     continue  # purecall? skip it
                 elif current_func_name == "":
                     api.set_addr_name(ea, full_func_name)
                 # check that the name is unnamed
-                elif any(current_func_name.startswith(prefix) for prefix in [self.SUB_PREFIX, self.NULLSUB_PREFIX, self.LOC_PREFIX]):
+                elif self._text_has_prefix(current_func_name, api.sub_prefixes + api.nullsub_prefixes + api.loc_prefixes):
                     api.set_addr_name(ea, full_func_name)
                 else:
                     print("Warning: 0x{0:X} \"{1}\" was already named \"{2}\"".format(ea, func_name, current_func_name))
 
     # endregion
+
+    def _text_has_prefix(self, text, prefixes):
+        """
+        Wrapper to check if any text.startswith(prefix)
+        :param text: Text to check
+        :type text: str
+        :param prefixes: Prefix or List of prefixes
+        :type prefixes: str|List[str]
+        :return: True/False
+        """
+        if not text: return False
+        if isinstance(prefixes, str):
+            return text.startswith(prefixes)
+        return any([text.startswith(prefix) for prefix in prefixes])
 
     def __repr__(self):
         return "<{0}(\"{1}\")>".format(self.__class__.__name__, self.name)
@@ -687,6 +786,8 @@ api.set_addr_name(0x1407089B0, "Client::UI::Shell::RaptureShellModule_ctor")
 api.set_addr_name(0x14070CCD0, "Client::UI::Shell::RaptureShellModule_SetChatChannel")
 api.set_addr_name(0x14073B670, "CreateBattleCharaStore")
 api.set_addr_name(0x14073BC40, "BattleCharaStore_LookupBattleCharaByObjectID")
+api.set_addr_name(0x1407B0CB0, "UpdateTeleportList")
+api.set_addr_name(0x1407B24F0, "TryTeleportWithTicket")
 api.set_addr_name(0x1408C1820, "CreateSelectYesno")
 api.set_addr_name(0x140A77FC0, "EventFramework_GetSingleton")
 api.set_addr_name(0x140A806D0, "EventFramework_ProcessDirectorUpdate")
@@ -786,10 +887,11 @@ factory.register("GroupManager", "", {
     0x140778750: "IsObjectIDPartyLeader",
 })
 factory.register("InventoryManager", "", {
-    0x1406995E0: "GetInventoryContainer", # (this, containerId)
+    0x1406995E0: "GetInventoryContainer",  # (this, containerId)
+    0x1406A1AB0: "GetInventoryItemCount",
 })
 factory.register("InventoryContainer", "", {
-    0x140697F00: "GetInventorySlot", # (this, slotIndex)
+    0x140697F00: "GetInventorySlot",  # (this, slotIndex)
 })
 # Known classes
 factory.register(0x14164E260, "Common::Configuration::ConfigBase", "Client::System::Common::NonCopyable", {
