@@ -1189,8 +1189,12 @@ factory.register(0x14169AE50, "Component::GUI::AtkResNode", "Component::GUI::Atk
     0x1404CD880: "GetYShort",
     0x1404CDA70: "GetHeight",
     0x1404CDCD0: "SetHeight",
+    0x1404CDEC0: "SetAddRGB",
+    0x1404CDF10: "SetMultiplyRGB",
+    0x1404CDF80: "SetPriority",
     0x1404CDFD0: "SetVisibility",
     0x1404D8F00: "SetSize",
+    0x1404CE420: "SetDepth",
     0x1404CE7F0: "Init",
     0x1404CE9C0: "SetScale0",  # SetScale jumps to this
 })
