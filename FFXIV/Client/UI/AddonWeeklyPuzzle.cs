@@ -40,15 +40,26 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
             [FieldOffset(0x20)] public long Unk20;
         }
 
-        [StructLayout(LayoutKind.Explicit, Size = 0x30)]
-        public struct GameTileItem
+        [StructLayout(LayoutKind.Explicit, Size = 0x6C0)]
+        public struct GameTileBoard
         {
-            [FieldOffset(0x0)] public AddonWeeklyPuzzle* self;
-            [FieldOffset(0x8)] public AtkComponentButton* Button;
-            [FieldOffset(0x10)] public AtkResNode* UnkRes10;
-            [FieldOffset(0x18)] public AtkResNode* UnkRes18;
-            [FieldOffset(0x20)] public AtkResNode* UnkRes20;
-            [FieldOffset(0x28)] public long Unk28;
+            [FieldOffset(0x0)] public GameTileRow Row1;
+            [FieldOffset(0x120)] public GameTileRow Row2;
+            [FieldOffset(0x240)] public GameTileRow Row3;
+            [FieldOffset(0x360)] public GameTileRow Row4;
+            [FieldOffset(0x480)] public GameTileRow Row5;
+            [FieldOffset(0x5A0)] public GameTileRow Row6;
+
+            public GameTileRow this[int index] => index switch
+            {
+                0 => Row1,
+                1 => Row2,
+                2 => Row3,
+                3 => Row4,
+                4 => Row5,
+                5 => Row6,
+                _ => throw new ArgumentOutOfRangeException("Valid indexes are 0 through 5 inclusive.")
+            };
         }
 
         [StructLayout(LayoutKind.Explicit, Size = 0x120)]
@@ -67,32 +78,21 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
                 1 => Col2,
                 2 => Col3,
                 3 => Col4,
-                4 => Col4,
-                5 => Col5,
-                _ => throw new ArgumentOutOfRangeException("Valid indexes are 0 through 35 inclusive.")
+                4 => Col5,
+                5 => Col6,
+                _ => throw new ArgumentOutOfRangeException("Valid indexes are 0 through 5 inclusive.")
             };
         }
 
-        [StructLayout(LayoutKind.Explicit, Size = 0x6C0)]
-        public struct GameTileBoard
+        [StructLayout(LayoutKind.Explicit, Size = 0x30)]
+        public struct GameTileItem
         {
-            [FieldOffset(0x0)] public GameTileRow Row1;
-            [FieldOffset(0x120)] public GameTileRow Row2;
-            [FieldOffset(0x240)] public GameTileRow Row3;
-            [FieldOffset(0x360)] public GameTileRow Row4;
-            [FieldOffset(0x480)] public GameTileRow Row5;
-            [FieldOffset(0x5A0)] public GameTileRow Row6;
-
-            public GameTileItem this[int index] => (index / 6) switch
-            {
-                0 => Row1[index % 6],
-                1 => Row2[index % 6],
-                2 => Row3[index % 6],
-                3 => Row4[index % 6],
-                4 => Row5[index % 6],
-                5 => Row6[index % 6],
-                _ => throw new ArgumentOutOfRangeException("Valid indexes are 0 through 35 inclusive.")
-            };
+            [FieldOffset(0x0)] public AddonWeeklyPuzzle* self;
+            [FieldOffset(0x8)] public AtkComponentButton* Button;
+            [FieldOffset(0x10)] public AtkResNode* RevealedIconResNode;
+            [FieldOffset(0x18)] public AtkResNode* UnkRes20;
+            [FieldOffset(0x20)] public AtkResNode* RevealedTileResNode;
+            [FieldOffset(0x28)] public long Unk28;
         }
     }
 }
