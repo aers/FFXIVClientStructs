@@ -1233,6 +1233,7 @@ factory.register(0x14169AE80, "Component::GUI::AtkTextNode", "Component::GUI::At
     0x1404CF2B0: "SetText",
     0x1404CFDE0: "SetForegroundColour",
     0x1404D0F00: "SetGlowColour",
+    0x1404D0120: "GetTextDrawSize", 
 })
 factory.register(0x14169AE98, "Component::GUI::AtkNineGridNode", "Component::GUI::AtkResNode", {
     0x14053FAD0: "ctor",
@@ -1588,6 +1589,21 @@ factory.register(0x1418106A0, "Client::UI::AddonHudLayoutScreen", "Component::GU
     0x1410259A0: "_SetAddonScale",
 })
 factory.register(0x141820EF0, "Client::UI::AddonLotteryDaily", "Component::GUI::AtkUnitBase", {})  # Mini Cactpot
+factory.register(0x1417DD230, "Client::UI::AddonScreenText", "Component::GUI::AtkUnitBase", {
+    0x140EC7840: "ctor",
+})
+factory.register(0x1417FDA00, "Client::UI::AddonTargetCursor", "Component::GUI::AtkUnitBase", {
+    0x140FC1290: "ctor",
+})
+factory.register(0x1417DD450, "Client::UI::AddonPopUpText", "Component::GUI::AtkUnitBase", {
+    0x140EC7D30: "ctor",
+})
+factory.register(0x1417DD670, "Client::UI::AddonFlyText", "Component::GUI::AtkUnitBase", {
+    0x140ECA1B0: "ctor",
+})
+factory.register(0x1417DD890, "Client::UI::AddonMiniTalk", "Component::GUI::AtkUnitBase", {
+    0x140ECCB60: "ctor"
+})
 factory.register(0x141825368, "Client::Graphics::Culling::CullingManager_Client::Graphics::JobSystem_Client::Graphics::Culling::CullingJobOpt", "", {})
 factory.register(0x141825370, "Client::Graphics::Culling::CullingManager_Client::Graphics::JobSystem_Client::Graphics::Culling::CallbackJobOpt", "", {})
 factory.register(0x141825378, "Client::Graphics::Culling::CullingManager_Client::Graphics::JobSystem_Client::Graphics::Culling::RenderCallbackJob", "", {})
