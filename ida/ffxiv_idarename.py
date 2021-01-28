@@ -1,5 +1,6 @@
 # current exe version: 2020.12.29.0000.0000
 #@category __UserScripts
+#@menupath Tools.Scripts.ffxiv_idarename
 
 from __future__ import print_function
 
@@ -300,7 +301,6 @@ if api is None:
         import ghidra
         from ghidra.program.model.data import CategoryPath
         from ghidra.program.model.data import StructureDataType
-        #from ghidra.program.model.data import Undefined8DataType
         from ghidra.program.model.data import PointerDataType
         
         class GhidraApi(BaseApi):
@@ -349,23 +349,19 @@ if api is None:
 
             def get_struct_id(self, name):
                 gdt = currentProgram.getDataTypeManager()
-                struct = gdt.getDataType(CategoryPath("/__VFTables"), name.replace("_struct",""))
+                struct = gdt.getDataType(CategoryPath("/___vftables"), name.replace("_struct",""))
                 if struct: return gdt.getID(struct)
                 return -1;
 
             def create_struct(self, name):
-                typeName = name.replace("_struct","")
-                structPath = CategoryPath("/___VFTables")
+                structName = name.replace("_struct","")
+                structPath = CategoryPath("/___vftables")
                 gdt = currentProgram.getDataTypeManager()
-                struct = gdt.getDataType(structPath, typeName)
+                struct = gdt.getDataType(structPath, structName)
                 if not struct:
-                    struct = StructureDataType(structPath, typeName, 0, gdt)
+                    struct = StructureDataType(structPath, structName, 0, gdt)
                 struct.deleteAll()
                 dt = gdt.addDataType(struct, None)
-                ## this takes way too long, and even longer if the pointers already exist
-                ## because it starts looking up all referneces to a struct and/or pointer
-                # p = gdt.getPointer(struct)
-                # gdt.addDataType(p, None)
                 return gdt.getID(dt)
 
             def add_struct_member(self, sid, name):
@@ -915,7 +911,8 @@ factory.register("GroupManager", "", {
 })
 factory.register("InventoryManager", "", {
     0x1406995E0: "GetInventoryContainer",  # (this, containerId)
-    0x1406A1AB0: "GetInventoryItemCount",
+    0x1406A1AB0: "GetInventoryItemCount", # (this, itemId, hq, 1, 1, 0)
+    0x1406A2220: "GetItemCountInContainer", # (this, itemId, containerId, hq, 0)
 })
 factory.register("InventoryContainer", "", {
     0x140697F00: "GetInventorySlot",  # (this, slotIndex)
