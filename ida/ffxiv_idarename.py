@@ -1569,8 +1569,10 @@ factory.register(0x1417DE1D0, "Client::UI::AddonGathering", "Component::GUI::Atk
     0x140ED0660: "ReceiveEvent_Gather",
 })
 factory.register(0x1417DE3F0, "Client::UI::AddonGatheringMasterpiece", "Component::GUI::AtkUnitBase", {})
+factory.register(0x1417DEC70, "Client::UI::AddonNamePlate::BakePlateRenderer", "Component::GUI::AtkTextNodeRenderer", {})
 factory.register(0x1417DEC90, "Client::UI::AddonNamePlate", "Component::GUI::AtkUnitBase", {
     0x140ED87F0: "ctor",
+    0x140ED8CD0: "SetNamePlate",
 })
 factory.register(0x1417ED628, "Client::UI::AddonDeepDungeonStatus", "Component::GUI::AtkUnitBase", {
     0x140F43180: "ctor",
