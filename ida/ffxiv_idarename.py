@@ -804,6 +804,10 @@ api.set_addr_name(0x1403637F0, "Client::Graphics::Render::RenderManager_ctor")
 api.set_addr_name(0x1403649D0, "Client::Graphics::Render::RenderManager_CreateModel")
 api.set_addr_name(0x140440F30, "PrepareColorSet")
 api.set_addr_name(0x140441200, "ReadStainingTemplate")
+api.set_addr_name(0x1404AB520, "Component::GUI::AtkValue_dtor")
+api.set_addr_name(0x1404ABB60, "Component::GUI::AtkValue_ChangeType")
+api.set_addr_name(0x1404B13A0, "Component::GUI::AtkEvent_SetEventIsHandled")
+api.set_addr_name(0x1404B26D0, "Component::GUI::AtkCursor_SetCursorType") # the cursor's icon i believe
 api.set_addr_name(0x1404D67D0, "CreateAtkNode")
 api.set_addr_name(0x1404D7BE0, "CreateAtkComponent")
 api.set_addr_name(0x1404DB3D0, "GetScaleListEntryFromScale")
@@ -846,6 +850,7 @@ api.set_addr_name(0x141D682D8, "g_ResidentResourceManager")
 api.set_addr_name(0x141D6A7E0, "g_CullingManager")
 api.set_addr_name(0x141D6A800, "g_TaskManager")
 api.set_addr_name(0x141D6FA90, "g_ResourceManager")
+api.set_addr_name(0x141D6F6F0, "g_EnvRenderController") # Client::Graphics::Environment::EnvRenderController, not a ptr
 api.set_addr_name(0x141D81AA0, "g_OcclusionCullingManager")
 api.set_addr_name(0x141D81AD8, "g_OffscreenRenderingManager")
 api.set_addr_name(0x141D81AE0, "g_RenderModelLinkedListStart")
@@ -1191,6 +1196,8 @@ factory.register(0x14169A3C8, "Component::GUI::AtkEventTarget", "", {})  # TODO:
 factory.register(0x14169A438, "Component::GUI::AtkSimpleTween", "Component::GUI::AtkEventTarget", {})
 factory.register(0x14169A448, "Component::GUI::AtkTexture", "", {})
 factory.register(0x14169A5A8, "Component::GUI::AtkStage", "Component::GUI::AtkEventTarget", {
+    0x1404BBA70: "ClearFocus",
+    0x1404BC9A0: "GetNumberArrayData",
     0x1404BCAD0: "ctor",
     0x1404DDFB0: "GetSingleton1",  # dalamud GetBaseUIObject
 })
@@ -1564,6 +1571,9 @@ factory.register(0x1417DE1D0, "Client::UI::AddonGathering", "Component::GUI::Atk
 factory.register(0x1417DE3F0, "Client::UI::AddonGatheringMasterpiece", "Component::GUI::AtkUnitBase", {})
 factory.register(0x1417DEC90, "Client::UI::AddonNamePlate", "Component::GUI::AtkUnitBase", {
     0x140ED87F0: "ctor",
+})
+factory.register(0x1417ED628, "Client::UI::AddonDeepDungeonStatus", "Component::GUI::AtkUnitBase", {
+    0x140F43180: "ctor",
 })
 factory.register(0x1417F7E60, "Client::UI::AddonWeeklyBingo::DutySlot", "Component::GUI::AtkEventListener", {})
 factory.register(0x1417F7E78, "Client::UI::AddonWeeklyBingo::DutySlotList", "", {})
