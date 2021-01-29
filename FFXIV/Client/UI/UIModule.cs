@@ -4,7 +4,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
 {
     // Client::UI::UIModule
     //   Client::UI::UIModuleInterface
-    [StructLayout(LayoutKind.Explicit, Size = 0x30)]  // size?
+    [StructLayout(LayoutKind.Explicit, Size = 0xDE750)]
     public unsafe struct UIModule
     {
         [FieldOffset(0x0)] public void* vtbl;
@@ -14,6 +14,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
         [FieldOffset(0x18)] public Unk3 UnkObj3;
         [FieldOffset(0x20)] public void* unk;
         [FieldOffset(0x28)] public void* SystemConfig;
+
+        [FieldOffset(0xB47D0)] public RaptureAtkModule RaptureAtkModule;
 
         /*
             dq 0                                    ; +0x30
