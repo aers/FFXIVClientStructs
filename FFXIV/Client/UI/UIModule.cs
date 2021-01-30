@@ -15,7 +15,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
         [FieldOffset(0x20)] public void* unk;
         [FieldOffset(0x28)] public void* SystemConfig;
 
-        [FieldOffset(0xB47D0)] public RaptureAtkModule RaptureAtkModule;
+        [FieldOffset(0xB47D0)] public RaptureAtkModule RaptureAtkModule; // note: NOT a pointer, the module's a member
 
         /*
             dq 0                                    ; +0x30

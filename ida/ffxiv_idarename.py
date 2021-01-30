@@ -884,7 +884,6 @@ factory.register("Client::System::Input::InputData::InputCodeModifiedInterface")
 factory.register("Client::System::Input::SoftKeyboardDeviceInterface::SoftKeyboardInputInterface")
 factory.register("Client::System::Input::TextServiceInterface::TextServiceEvent")
 factory.register("Client::System::Resource::Handle::ResourceHandleFactory")
-factory.register("Client::UI::Agent::AgentItemDetailBase")
 factory.register("Client::UI::Agent::AgentMap::MapMarkerStructSearch")
 factory.register("Client::UI::Atk2DMap")
 factory.register("Client::UI::UIModuleInterface")
@@ -1261,9 +1260,13 @@ factory.register(0x14169AEF8, "Component::GUI::AtkUnitBase", "Component::GUI::At
     13: "GetPosition",
     14: "SetAlpha",
     15: "SetScale",
+    36: "Initialize",
+    37: "Finalize",
+    38: "Update",
     39: "Draw",
     41: "LoadUldResourceHandle",
-    47: "UpdateAddon",
+    44: "OnSetup",
+    47: "OnUpdate",
     0x1404DA810: "ctor",
     0x1404DAF70: "SetPosition",
     0x1404DB0F0: "SetAlpha",
@@ -1500,10 +1503,7 @@ factory.register(0x1416CC740, "Client::UI::Agent::AgentHUD", "Client::UI::Agent:
 })
 factory.register(0x1416CCA40, "Client::UI::Agent::AgentTryon::TryonCharaView", "Client::UI::Misc::CharaView", {})
 factory.register(0x1416CCA80, "Client::UI::Agent::AgentTryon", "Client::UI::Agent::AgentInterface", {})
-factory.register(0x1416CCAF0, "Client::UI::Agent::AgentItemDetail", "Client::UI::Agent::AgentInterface", {
-    0x1408D3F90: "ctor",
-    0x1408D4FC0: "OnItemHovered",
-})
+factory.register(0x1416CCAF0, "Client::UI::Agent::AgentItemDetailBase", "Client::UI::Agent::AgentInterface", {})
 factory.register(0x1416CD4B8, "Client::UI::Agent::AgentMap::MapMarkerStructSearchName", "Client::UI::Agent::AgentMap::MapMarkerStructSearch", {
     1: "Evaluate",
 })
@@ -1512,6 +1512,10 @@ factory.register(0x1416CD4C8, "Client::UI::Agent::AgentMap", "Client::UI::Agent:
 })
 factory.register(0x1416CE090, "Client::UI::Agent::AgentHudLayout", "Client::UI::Agent::AgentInterface", {
     0x1408C0B50: "ctor",
+})
+factory.register(0x1416CE5A0, "Client::UI::Agent::AgentItemDetail", "Client::UI::Agent::AgentItemDetailBase", {
+    0x1408D3F90: "ctor",
+    0x1408D4FC0: "OnItemHovered",
 })
 factory.register(0x1416CEED8, "Client::UI::Agent::AgentStatus", "Client::UI::Agent::AgentInterface", {
     0x1409041D0: "ctor",
