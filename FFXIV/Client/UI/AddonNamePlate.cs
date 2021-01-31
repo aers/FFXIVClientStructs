@@ -1,6 +1,4 @@
-﻿using FFXIVClientStructs.FFXIV.Client.System.String;
-using FFXIVClientStructs.FFXIV.Component.GUI;
-using System;
+﻿using FFXIVClientStructs.FFXIV.Component.GUI;
 using System.Runtime.InteropServices;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI
@@ -31,7 +29,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
             [FieldOffset(0x0)] public AtkComponentNode* ComponentNode;
             [FieldOffset(0x8)] public AtkResNode* ResNode;
             [FieldOffset(0x10)] public AtkTextNode* TextNode10;
-            [FieldOffset(0x18)] public AtkImageNode* ImageNode1;
+            [FieldOffset(0x18)] public AtkImageNode* IconImageNode;
             [FieldOffset(0x20)] public AtkImageNode* ImageNode2;
             [FieldOffset(0x28)] public AtkImageNode* ImageNode3;
             [FieldOffset(0x30)] public AtkImageNode* ImageNode4;
@@ -43,6 +41,16 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
             [FieldOffset(0x56)] public short TextH;
             [FieldOffset(0x58)] public short IconXAdjust;
             [FieldOffset(0x5A)] public short IconYAdjust;
+            [FieldOffset(0x5C)] public short UnkType;   // For lack of a better name, it is NOT ObjectKind
+            [FieldOffset(0x5E)] public short IsLocalPlayerValue;
+            [FieldOffset(0x60)] public byte IsVisibleByte;
+            [FieldOffset(0x6A)] public byte ComponentNodeScale;
+
+            public bool IsPlayerCharacter => UnkType == 0;
+            
+            public bool IsLocalPlayer => IsLocalPlayerValue == 1;
+
+            public bool IsVisible => IsVisibleByte == 0;
         }
     }
 }
