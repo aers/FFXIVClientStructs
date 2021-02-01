@@ -37,6 +37,7 @@ globals:
   0x141DB2028: g_CompanionMemory
   0x141DB2050: g_ActorList
   0x141DB2D90: g_ActorListEnd
+  0x141DB60D0: g_PlayerAetheryteList
   0x141DD6F08: g_EventFramework
   0x141DDAA20: g_GroupManager
   0x141DE2D50: g_ClientObjectManager
@@ -73,12 +74,11 @@ functions:
   0x1404DB3D0: GetScaleListEntryFromScale
   0x1404E9B20: GetScaleForListOption
   0x140536490: Component::GUI::TextModuleInterface::GetTextLabelByID
+  0x1406EE990: ExecuteCommand
   0x1407089B0: Client::UI::Shell::RaptureShellModule_ctor
   0x14070CCD0: Client::UI::Shell::RaptureShellModule_SetChatChannel
   0x14073B670: CreateBattleCharaStore
   0x14073BC40: BattleCharaStore_LookupBattleCharaByObjectID
-  0x1407B0CB0: UpdateTeleportList
-  0x1407B24F0: TryTeleportWithTicket
   0x1408C1820: CreateSelectYesno
   0x140A77FC0: EventFramework_GetSingleton
   0x140A806D0: EventFramework_ProcessDirectorUpdate
@@ -955,6 +955,7 @@ classes:
     funcs:
       0x140615990: ctor
       0x140617120: PrintMessage
+      0x1406184D0: ShowLogMessage
   Client::UI::Misc::RaptureHotbarModule:
     inherits_from: Client::UI::Misc::UserFileManager::UserFileEvent
     vtbl: 0x1416AEF08
@@ -1347,3 +1348,15 @@ classes:
   Client::Game::Gimmick::Gimmick_Unk1:
     inherits_from: Client::Game::Gimmick::GimmickEventHandler
     vtbl: 0x141879A40
+  Client::UI::AddonTeleport:
+    inherits_from: Component::GUI::AtkUnitBase
+    vtbl: 0x1417E2F38
+  Client::Game::UI::Telepo:
+    vtbl: 0x1416C9590
+    vfuncs:
+      0: AcceptTeleportOffer
+    funcs:
+      0x1407B1350: Teleport
+      0x1407B24F0: TryTeleportWithTicket
+      0x1407B0CB0: UpdatePlayerAetheryteList
+      
