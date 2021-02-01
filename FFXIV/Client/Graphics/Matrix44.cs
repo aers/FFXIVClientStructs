@@ -1,4 +1,5 @@
-﻿using System.Runtime.InteropServices;
+﻿using FFXIVClientStructs.STD;
+using System.Runtime.InteropServices;
 
 namespace FFXIVClientStructs.FFXIV.Client.Graphics
 {
@@ -7,21 +8,21 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics
     {
         [FieldOffset(0x00)] public fixed float Matrix[16];
 
-        [FieldOffset(0x00)] public float Matrix_1_1;
-        [FieldOffset(0x04)] public float Matrix_1_2;
-        [FieldOffset(0x08)] public float Matrix_1_3;
-        [FieldOffset(0x0C)] public float Matrix_1_4;
-        [FieldOffset(0x10)] public float Matrix_2_1;
-        [FieldOffset(0x14)] public float Matrix_2_2;
-        [FieldOffset(0x18)] public float Matrix_2_3;
-        [FieldOffset(0x1C)] public float Matrix_2_4;
-        [FieldOffset(0x20)] public float Matrix_3_1;
-        [FieldOffset(0x24)] public float Matrix_3_2;
-        [FieldOffset(0x28)] public float Matrix_3_3;
-        [FieldOffset(0x2C)] public float Matrix_3_4;
-        [FieldOffset(0x30)] public float Matrix_4_1;
-        [FieldOffset(0x34)] public float Matrix_4_2;
-        [FieldOffset(0x38)] public float Matrix_4_3;
-        [FieldOffset(0x3C)] public float Matrix_4_4;
+        [NoExport] [FieldOffset(0x00)] public float Matrix_1_1;
+        [NoExport] [FieldOffset(0x04)] public float Matrix_1_2;
+        [NoExport] [FieldOffset(0x08)] public float Matrix_1_3;
+        [NoExport] [FieldOffset(0x0C)] public float Matrix_1_4;
+        [NoExport] [FieldOffset(0x10)] public float Matrix_2_1;
+        [NoExport] [FieldOffset(0x14)] public float Matrix_2_2;
+        [NoExport] [FieldOffset(0x18)] public float Matrix_2_3;
+        [NoExport] [FieldOffset(0x1C)] public float Matrix_2_4;
+        [NoExport] [FieldOffset(0x20)] public float Matrix_3_1;
+        [NoExport] [FieldOffset(0x24)] public float Matrix_3_2;
+        [NoExport] [FieldOffset(0x28)] public float Matrix_3_3;
+        [NoExport] [FieldOffset(0x2C)] public float Matrix_3_4;
+        [NoExport] [FieldOffset(0x30)] public float Matrix_4_1;
+        [NoExport] [FieldOffset(0x34)] public float Matrix_4_2;
+        [NoExport] [FieldOffset(0x38)] public float Matrix_4_3;
+        [NoExport] [FieldOffset(0x3C)] public float Matrix_4_4;
     }
 }

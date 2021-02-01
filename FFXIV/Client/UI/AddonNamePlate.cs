@@ -20,8 +20,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
         [StructLayout(LayoutKind.Explicit, Size = 0x230)]
         public unsafe struct BakePlateRenderer { }
 
-
-        public static int NumNamePlateObjects = 50;
+        public static int NumNamePlateObjects => 50;
 
         [StructLayout(LayoutKind.Explicit, Size = 0x70)]
         public unsafe struct NamePlateObject
@@ -47,7 +46,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
             [FieldOffset(0x6A)] public byte ComponentNodeScale;
 
             public bool IsPlayerCharacter => UnkType == 0;
-            
+
             public bool IsLocalPlayer => IsLocalPlayerValue == 1;
 
             public bool IsVisible => IsVisibleByte == 0;
