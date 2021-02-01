@@ -22,9 +22,6 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
         [FieldOffset(0x3F0)] public Utf8String String3F0;
         [FieldOffset(0x458)] public Utf8String String458;
         [FieldOffset(0x4C0)] public Utf8String String4C0;
-        [FieldOffset(0x590)] public void* vtbl590;
-        [FieldOffset(0x2F0)] public void* vtbl598;
-        [FieldOffset(0x2F8)] public void* unk2F8;
         [FieldOffset(0x5B8)] public AddonTalk* this5B8;
         [FieldOffset(0x5C0)] public AtkStage* AtkStage;
     }
