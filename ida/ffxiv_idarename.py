@@ -345,7 +345,8 @@ if api is None:
 
             @property
             def purecall_str(self):
-                return "_purecall"
+                #workaround for Ghidra not naming purecall so all purecall references end up as IAllocator.vf9
+                return "Client::Graphics::IAllocator.vf9"
 
             def get_image_base(self):
                 return currentProgram.getImageBase().getOffset()
@@ -355,7 +356,7 @@ if api is None:
 
             def get_addr_name(self, ea):
                 sym = getSymbolAt(toAddr(ea))
-                if not sym: return None
+                if not sym: return ""
                 return sym.getName(True)
 
             def get_qword(self, ea):
@@ -363,45 +364,48 @@ if api is None:
 
             def is_offset(self, ea):
                 data = getDataAt(toAddr(ea))
-                if not data:
-                    return False
+                if not data: return False
                 return data.isPointer()
 
             def xrefs_to(self, ea):
                 return [xref.getFromAddress().getOffset() for xref in getReferencesTo(toAddr(ea))]
 
             def get_struct_id(self, name):
-                gdt = currentProgram.getDataTypeManager()
-                struct = gdt.getDataType(CategoryPath("/___vftables"), name.replace("_struct", ""))
-                if struct: return gdt.getID(struct)
+                #gdt = currentProgram.getDataTypeManager()
+                #struct = gdt.getDataType(CategoryPath("/___vftables"), name.replace("_struct", ""))
+                #if struct: return gdt.getID(struct)
+                #return -1
                 return -1
 
             def create_struct(self, name):
-                structName = name.replace("_struct", "")
-                structPath = CategoryPath("/___vftables")
-                gdt = currentProgram.getDataTypeManager()
-                struct = gdt.getDataType(structPath, structName)
-                if not struct:
-                    struct = StructureDataType(structPath, structName, 0, gdt)
-                struct.deleteAll()
-                dt = gdt.addDataType(struct, None)
-                return gdt.getID(dt)
+                #structName = name.replace("_struct", "")
+                #structPath = CategoryPath("/___vftables")
+                #gdt = currentProgram.getDataTypeManager()
+                #struct = gdt.getDataType(structPath, structName)
+                #if not struct:
+                #    struct = StructureDataType(structPath, structName, 0, gdt)
+                #struct.deleteAll()
+                #dt = gdt.addDataType(struct, None)
+                #return gdt.getID(dt)
+                return -1
 
             def add_struct_member(self, sid, name):
-                gdt = currentProgram.getDataTypeManager()
-                struct = gdt.getDataType(sid)
-                if not struct:
-                    return False
-                member = struct.add(PointerDataType(), 8, name, None)
-                return True
+                #gdt = currentProgram.getDataTypeManager()
+                #struct = gdt.getDataType(sid)
+                #if not struct:
+                #    return False
+                #member = struct.add(PointerDataType(), 8, name, None)
+                #return True
+                return False
 
             def clear_struct(self, sid):
-                gdt = currentProgram.getDataTypeManager()
-                struct = gdt.getDataType(sid)
-                if not struct:
-                    return False
-                struct.deleteAll()
-                return True
+                #gdt = currentProgram.getDataTypeManager()
+                #struct = gdt.getDataType(sid)
+                #if not struct:
+                #    return False
+                #struct.deleteAll()
+                #return True
+                return False
 
             def convert_to_struct(self, ea, sid):
                 return False
@@ -427,13 +431,13 @@ def load_data():
         data = yaml.safe_load(fd)
 
     for ea, name in data["globals"].items():
-        if not isinstance(ea, int):
+        if not isinstance(ea, (int, long)):
             print('Warning: {0} has an invalid address {1}'.format(name, ea))
             continue
         api.set_addr_name(ea, name)
 
     for ea, name in data["functions"].items():
-        if not isinstance(ea, int):
+        if not isinstance(ea, (int, long)):
             print('Warning: {0} has an invalid address {1}'.format(name, ea))
             continue
         api.set_addr_name(ea, name)
@@ -461,7 +465,7 @@ class FfxivClassFactory:
     # name -> {class_name: FfxivClass}
     _classes = {}  # type: Dict[str, FfxivClass]
 
-    def register(self, class_name, parent_class_name="", vtbl_ea=0x0, funcs=None, vfuncs=None):
+    def register(self, class_name, parent_class_name="", vtbl_ea=0x0, vfuncs=None, funcs=None):
         """
         Register a class
         :param class_name: Class name
