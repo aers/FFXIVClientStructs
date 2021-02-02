@@ -876,7 +876,7 @@ classes:
       0x140536FA0: ctor
   Client::UI::Misc::UserFileManager::UserFileEvent:
     vtbl: 0x1416A9390
-    funcs:
+    vfuncs:
       1: ReadFile
       2: WriteFile
   Client::UI::UI3DModule::MapInfo:
@@ -926,7 +926,7 @@ classes:
   Client::System::Crypt::SimpleString:
     inherits_from: Client::System::Crypt::CryptInterface
     vtbl: 0x1416AA5A0
-    funcs:
+    vfuncs:
       1: Encrypt
       2: Decrypt
   Component::Text::MacroDecoder:
@@ -994,7 +994,7 @@ classes:
       0x14064FC90: ctor
   Client::Game::Object::GameObject:
     vtbl: 0x1416B0EC0
-    funcs:
+    vfuncs:
       2: GetObjectID
       3: GetObjectKind
       5: GetIsTargetable
