@@ -1,4 +1,4 @@
-﻿version: 2020.12.29.0000.0000
+version: 2020.12.29.0000.0000
 
 globals:
   0x14169A2A0: g_HUDScaleTable
@@ -647,7 +647,7 @@ classes:
       0x1404CE7F0: Init
       0x1404CE9C0: SetScale0  # SetScale jumps to this
   Component::GUI::AtkImageNode:
-    inherits_from: &Component::GUI::AtkResNode
+    inherits_from: Component::GUI::AtkResNode
     vtbl: 0x14169AE68
     funcs:
       0x14053FA70: ctor

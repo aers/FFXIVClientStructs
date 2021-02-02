@@ -21,6 +21,14 @@ if sys.version_info[0] >= 3:
 
 
 class BaseApi(object):
+    @property
+    @abstractmethod
+    def data_file_path(self):
+        """
+        Get the Path to the data.yml File
+        :return: Path to the data.yml File
+        :rtype: str
+        """
 
     @property
     @abstractmethod
@@ -210,9 +218,15 @@ if api is None:
         import idaapi  # noqa
         import idc  # noqa
         import idautils  # noqa
-
-
+    except ImportError:
+        print("Warning: Unable to load IDA")
+    else:
+        # noinspection PyUnresolvedReferences
         class IdaApi(BaseApi):
+
+            @property
+            def data_file_path(self):
+                return os.path.join(os.path.dirname(os.path.realpath(__file__)), "data.yml")
 
             @property
             def sub_prefixes(self):
@@ -292,8 +306,6 @@ if api is None:
 
 
         api = IdaApi()
-    except ImportError:
-        print("Warning: Unable to load IDA")
 
 # endregion
 # region Ghidra Api
@@ -301,12 +313,19 @@ if api is None:
 if api is None:
     try:
         import ghidra
-        from ghidra.program.model.data import CategoryPath
-        from ghidra.program.model.data import StructureDataType
-        from ghidra.program.model.data import PointerDataType
 
-
+        from ghidra.program.model.data import CategoryPath  # noqa
+        from ghidra.program.model.data import StructureDataType  # noqa
+        from ghidra.program.model.data import PointerDataType  # noqa
+    except ImportError:
+        print("Warning: Unable to load Ghidra")
+    else:
+        # noinspection PyUnresolvedReferences
         class GhidraApi(BaseApi):
+
+            @property
+            def data_file_path(self):
+                return os.path.join(os.path.dirname(str(sourceFile)), "data.yml")
 
             @property
             def sub_prefixes(self):
@@ -396,8 +415,6 @@ if api is None:
 
 
         api = GhidraApi()
-    except ImportError:
-        print("Warning: Unable to load Ghidra")
 
 # endregion
 
@@ -406,8 +423,7 @@ if api is None:
 
 
 def load_data():
-    data_file = os.path.join(os.path.dirname(os.path.realpath(__file__)), "data.yml")
-    with open(data_file, "r") as fd:
+    with open(api.data_file_path, "r") as fd:
         data = yaml.safe_load(fd)
 
     for ea, name in data["globals"].items():

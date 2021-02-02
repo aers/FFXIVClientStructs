@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FFXIVClientStructs.STD;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -12,11 +13,20 @@ namespace CExporter
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static void Main(string[] _)
         {
-            var data = Exporter.Instance.Export();
-            File.WriteAllText("../../../../ffxiv_client_structs.h", data);
+            var outputBase = "../../../../";
+            File.WriteAllText($"{outputBase}ffxiv_client_structs.h",
+                Exporter.Instance.Export(GapStrategy.FullSize));
+            File.WriteAllText($"{outputBase}ffxiv_client_structs_arrays.h",
+                Exporter.Instance.Export(GapStrategy.ByteArray));
         }
+    }
+
+    public enum GapStrategy
+    {
+        FullSize,   // Fill gaps in structs with sequential longs, ints, shorts, or bytes
+        ByteArray,  // Fill gaps in structs with byte arrays
     }
 
     public class Exporter
@@ -28,31 +38,48 @@ namespace CExporter
 
         #endregion
 
-        private HashSet<Type> KnownTypes = new HashSet<Type>();
+        private GapStrategy GapStrategy;
 
-        private HashSet<Type> DoNotProcessAsStruct = new HashSet<Type>() {
-            typeof(void)
-        };
+        private readonly HashSet<Type> KnownTypes = new HashSet<Type>();
 
-        public string Export()
+        private readonly string FFXIVNamespacePrefix = string.Join(".", new string[] { nameof(FFXIVClientStructs), nameof(FFXIVClientStructs.FFXIV), "" });
+        private readonly string STDNamespacePrefix = string.Join(".", new string[] { nameof(FFXIVClientStructs), nameof(FFXIVClientStructs.STD), "" });
+
+        private Type[] GetExportableTypes(string assemblyName)
         {
-            var assemblies = AppDomain.CurrentDomain.GetAssemblies();
-            var assembly = Assembly.GetExecutingAssembly();
+            var assembly = AppDomain.CurrentDomain.Load(assemblyName);
+
+            Type[] definedTypes;
+            try
+            {
+                definedTypes = assembly.DefinedTypes.Select(ti => ti.AsType()).ToArray();
+            }
+            catch (ReflectionTypeLoadException ex)
+            {
+                definedTypes = ex.Types.Where(t => t != null).ToArray();
+            }
+
+            return definedTypes.Where(t => t.FullName.StartsWith(FFXIVNamespacePrefix)).ToArray();
+        }
+
+        public string Export(GapStrategy strategy)
+        {
+            GapStrategy = strategy;
+            KnownTypes.Clear();
 
             var header = new StringBuilder();
 
-            var clientStructs = AppDomain.CurrentDomain.Load(nameof(FFXIVClientStructs.FFXIV));
+            var definedTypes = GetExportableTypes(nameof(FFXIVClientStructs));
+
             // Make forward references for everything, cycles are bad, detecting them is harder.
             header.AppendLine("// Forward References");
-            foreach (var type in clientStructs.DefinedTypes)
-            {
-                if (type.IsStruct() && !type.Name.EndsWith("e__FixedBuffer"))
+            foreach (var type in definedTypes)
+                if (type.IsStruct() && !type.IsFixedBuffer())
                     header.AppendLine($"struct {FixFullName(type)};");
-            }
 
             header.AppendLine();
             header.AppendLine("// Definitions");
-            foreach (var type in clientStructs.DefinedTypes)
+            foreach (var type in definedTypes)
             {
                 ProcessType(type, header);
             }
@@ -65,7 +92,7 @@ namespace CExporter
             if (KnownTypes.Contains(type))
                 return;
 
-            if (type.Name.EndsWith("e__FixedBuffer"))
+            if (type.IsFixedBuffer())
             {
                 return;
             }
@@ -79,7 +106,7 @@ namespace CExporter
             }
             else if (type.IsPrimitive)
             {
-                ProcessPrimitive(type, header);
+                ProcessPrimitive(type);
             }
             else
             {
@@ -92,14 +119,19 @@ namespace CExporter
             if (KnownTypes.Contains(type))
                 return;
 
-            if (DoNotProcessAsStruct.Contains(type))
+            if (type == typeof(void))
                 return;
 
             Debug.WriteLine($"Processing Struct:  {type.FullName}");
 
             KnownTypes.Add(type);
 
-            var structSize = Marshal.SizeOf(type);
+            int structSize;
+            if (type.IsGenericType)
+                structSize = Marshal.SizeOf(Activator.CreateInstance(type));
+            else
+                structSize = Marshal.SizeOf(type);
+
             var pad = structSize.ToString("X").Length;
             var padFill = new string(' ', pad + 2);
 
@@ -108,7 +140,11 @@ namespace CExporter
             sb.AppendLine("{");
 
             var offset = 0;
-            foreach (var grouping in type.GetFields().OrderBy(finfo => finfo.GetFieldOffset()).GroupBy(finfo => finfo.GetFieldOffset()))
+            var fieldGroupings = type.GetFields()
+                .Where(finfo => !Attribute.IsDefined(finfo, typeof(NoExportAttribute)))
+                .OrderBy(finfo => finfo.GetFieldOffset())
+                .GroupBy(finfo => finfo.GetFieldOffset());
+            foreach (var grouping in fieldGroupings)
             {
                 var fieldOffset = grouping.Key;
                 var finfos = grouping.ToList();
@@ -173,6 +209,8 @@ namespace CExporter
 
                         if (fieldType == typeof(bool))
                             fieldSize = 1;
+                        else if (fieldType.IsGenericType)
+                            fieldSize = Marshal.SizeOf(Activator.CreateInstance(fieldType));
                         else
                             fieldSize = Marshal.SizeOf(fieldType);
                     }
@@ -230,7 +268,7 @@ namespace CExporter
             header.AppendLine(sb.ToString());
         }
 
-        private void ProcessPrimitive(Type type, StringBuilder header)
+        private void ProcessPrimitive(Type type)
         {
             if (KnownTypes.Contains(type))
                 return;
@@ -242,14 +280,35 @@ namespace CExporter
 
         private string FixFullName(Type type)
         {
-            return type.FullName.Remove(0, nameof(FFXIVClientStructs.FFXIV).Length + 1).Replace(".", "::").Replace("+", "::");
+            string fullName;
+            if (type.IsGenericType)
+            {
+                var generic = type.GetGenericTypeDefinition();
+                fullName = generic.FullName.Split('`')[0];
+                foreach (var argType in type.GenericTypeArguments)
+                {
+                    var argTypeFullName = FixFullName(argType).Replace("::", "");
+                    fullName += $"::{argTypeFullName}";
+                }
+            }
+            else
+            {
+                fullName = type.FullName;
+            }
+
+            if (fullName.Contains(FFXIVNamespacePrefix))
+                fullName = fullName.Remove(0, FFXIVNamespacePrefix.Length);
+            if (fullName.Contains(STDNamespacePrefix))
+                fullName = fullName.Remove(0, STDNamespacePrefix.Length);
+
+            return fullName.Replace(".", "::").Replace("+", "::");
         }
 
         private string FixTypeName(Type type)
         {
             if (type == typeof(void) || type == typeof(void*) || type == typeof(void**) ||
                 type == typeof(char) || type == typeof(char*) || type == typeof(char**) ||
-                type == typeof(byte) || type == typeof(byte*))
+                type == typeof(byte) || type == typeof(byte*) || type == typeof(byte**))
                 return type.Name.ToLower();
             else if (type == typeof(bool)) return "bool";
             else if (type == typeof(float)) return "float";
@@ -266,28 +325,58 @@ namespace CExporter
         private int FillGaps(int offset, int maxOffset, string padFill, StringBuilder sb)
         {
             int gap;
-
             while ((gap = maxOffset - offset) > 0)
             {
-                if (offset % 8 == 0 && gap >= 8)
+                if (GapStrategy == GapStrategy.FullSize)
                 {
-                    sb.AppendLine($"    /* {padFill} */ __int64 _gap_0x{offset:X};");
-                    offset += 8;
+                    if (offset % 8 == 0 && gap >= 8)
+                    {
+                        sb.AppendLine($"    /* {padFill} */ __int64 _gap_0x{offset:X};");
+                        offset += 8;
+                    }
+                    else if (offset % 4 == 0 && gap >= 4)
+                    {
+                        sb.AppendLine($"    /* {padFill} */ __int32 _gap_0x{offset:X};");
+                        offset += 4;
+                    }
+                    else if (offset % 2 == 0 && gap >= 2)
+                    {
+                        sb.AppendLine($"    /* {padFill} */ __int16 _gap_0x{offset:X};");
+                        offset += 2;
+                    }
+                    else
+                    {
+                        sb.AppendLine($"    /* {padFill} */ byte _gap_0x{offset:X};");
+                        offset += 1;
+                    }
                 }
-                else if (offset % 4 == 0 && gap >= 4)
+                else if (GapStrategy == GapStrategy.ByteArray)
                 {
-                    sb.AppendLine($"    /* {padFill} */ __int32 _gap_0x{offset:X};");
-                    offset += 4;
-                }
-                else if (offset % 2 == 0 && gap >= 2)
-                {
-                    sb.AppendLine($"    /* {padFill} */ __int16 _gap_0x{offset:X};");
-                    offset += 2;
+                    if (offset % 8 == 0 && gap >= 8)
+                    {
+                        var gapDiv = gap - gap % 8;
+                        sb.AppendLine($"    /* {padFill} */ byte _gap_0x{offset:X}[0x{gapDiv:X}];");
+                        offset += gapDiv;
+                    }
+                    else if (offset % 4 == 0 && gap >= 4)
+                    {
+                        sb.AppendLine($"    /* {padFill} */ byte _gap_0x{offset:X}[0x4];");
+                        offset += 4;
+                    }
+                    else if (offset % 2 == 0 && gap >= 2)
+                    {
+                        sb.AppendLine($"    /* {padFill} */ byte _gap_0x{offset:X}[0x2];");
+                        offset += 2;
+                    }
+                    else
+                    {
+                        sb.AppendLine($"    /* {padFill} */ byte _gap_0x{offset:X};");
+                        offset += 1;
+                    }
                 }
                 else
                 {
-                    sb.AppendLine($"    /* {padFill} */ byte _gap_0x{offset:X};");
-                    offset += 1;
+                    throw new Exception($"Unknown GapStrategy {GapStrategy}");
                 }
             }
             return offset;
@@ -296,6 +385,11 @@ namespace CExporter
 
     public static class TypeExtensions
     {
+        public static bool IsFixedBuffer(this Type type)
+        {
+            return type.Name.EndsWith("e__FixedBuffer");
+        }
+
         public static bool IsStruct(this Type type)
         {
             return type.IsValueType && !type.IsPrimitive && !type.IsEnum && type != typeof(decimal);
@@ -322,7 +416,12 @@ namespace CExporter
 
         public static int GetFieldOffset(this FieldInfo finfo)
         {
-            return finfo.GetCustomAttributes(typeof(FieldOffsetAttribute), false).Cast<FieldOffsetAttribute>().Single().Value;
+            var attrs = finfo.GetCustomAttributes(typeof(FieldOffsetAttribute), false);
+            if (attrs.Length != 0)
+                return attrs.Cast<FieldOffsetAttribute>().Single().Value;
+
+            // Lets assume this is because it's a LayoutKind.Sequential struct
+            return Marshal.OffsetOf(finfo.DeclaringType, finfo.Name).ToInt32();
         }
     }
 }
