@@ -777,19 +777,6 @@ class FfxivClass:
         for (func_ea, func_name) in builder:
             api.set_addr_name(func_ea, func_name)
 
-        # struct_name = self.STRUCT_VTBL_FORMAT.format(cls=self.name)
-        # struct_id = api.get_struct_id(struct_name)
-        # if struct_id == -1:
-        #     struct_id = api.create_struct(struct_name)
-        # else:
-        #     api.clear_struct(struct_id)
-        # for struct_member_name in struct_member_names:
-        #     api.add_struct_member(struct_id, struct_member_name)
-
-        # Running the script twice will undefine vast segments of the vtbl since they're now structs
-        # Need to work a method of not screwing that up.
-        # api.convert_to_struct(self.vtbl_ea, struct_id)
-
     def _write_funcs(self):
         """
         Write the names of all non-vtbl funcs
