@@ -47,6 +47,7 @@ globals:
   0x141DC3000: g_LimitBreakController
   0x141DC3010: g_TitleController
   0x141DC3018: g_TitleList
+  0x141DBEBC8: g_ActiveDirector
 
 functions:
   # ffxivstring is just their implementation of std::string presumably there are more ctors etc
@@ -1184,6 +1185,18 @@ classes:
   Client::Game::Event::DirectorModule:
     inherits_from: Client::Game::Event::ModuleBase
     vtbl: 0x1416E4910
+  Client::Game::Event::Director:
+    inherits_from: Client::Game::Event::LuaEventHandler
+    vtbl: 0x1416E2428
+  Client::Game::InstanceContent::InstanceContentDirector:
+    inherits_from: Client::Game::Event::Director
+    vtbl: 0x14171F380
+  Client::Game::Event::LeveDirector:
+    inherits_from: Client::Game::Event::Director
+    vtbl: 0x1416E6A20
+  Client::Game::Event::BattleLeveDirector:
+    inherits_from: Client::Game::Event::LeveDirector
+    vtbl: 0x1416E72F8
   Client::Game::Gimmick::GimmickBill:
     inherits_from: Client::Game::Gimmick::GimmickEventHandler
     vtbl: 0x1416F4AA0
