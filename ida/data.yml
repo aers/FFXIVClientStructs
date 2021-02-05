@@ -86,6 +86,7 @@ functions:
   0x141021C60: Client::UI::AddonHudLayoutScreen::MoveableAddonInfoStruct_UpdateAddonPosition
   0x1412F7ED0: crc
   0x141371CC4: FreeMemory
+  0x141379C20: _purecall  # Ghidra does not have a notation for pure virtual calls
 
 classes:
   # Unknown classes old RTTI data says known classes inherit from
