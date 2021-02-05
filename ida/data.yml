@@ -38,7 +38,7 @@ globals:
   0x141DB2058: g_CompanionMemory
   0x141DB2080: g_ActorList
   0x141DB2DC0: g_ActorListEnd
-  0x141DB6100: g_PlayerAetheryteList
+  0x141DB6100: g_Client::Game::UI::Telepo
   0x141DD6F38: g_EventFramework
   0x141DDAA50: g_GroupManager
   0x141DE2D80: g_ClientObjectManager
