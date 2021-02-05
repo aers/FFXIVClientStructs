@@ -42,6 +42,10 @@ globals:
   0x141DDAA50: g_GroupManager
   0x141DE2D80: g_ClientObjectManager
   0x141DAD640: g_InventoryManager
+  0x141DC2D50: g_MarkingController
+  0x141DC3000: g_LimitBreakController
+  0x141DC3010: g_TitleController
+  0x141DC3018: g_TitleList
 
 functions:
   # ffxivstring is just their implementation of std::string presumably there are more ctors etc
@@ -85,6 +89,7 @@ functions:
   0x140A83CC0: EventFramework_GetInstanceContentDirector
   0x141021C60: Client::UI::AddonHudLayoutScreen::MoveableAddonInfoStruct_UpdateAddonPosition
   0x1412F7ED0: crc
+  0x14134B404: ThrowException
   0x141371CC4: FreeMemory
   0x141379C20: _purecall  # Ghidra does not have a notation for pure virtual calls
 
@@ -217,6 +222,7 @@ classes:
       0x1400B06F0: ctor
       0x1400D37C0: UpdateTask1
       0x1400D6750: IsUIVisible
+      0x1400B2500: ShowMessageBox
   Client::Graphics::Kernel::Notifier:
     vtbl: 0x141661D28
   Client::System::Crypt::Crc32:
@@ -586,6 +592,7 @@ classes:
     funcs:
       0x1404936F0: ctor
       0x14049E210: IsActorInViewRange
+      0x14049D4D0: GetCurrentTargetId
   Component::GUI::AtkArrayData:
     vtbl: 0x14169A300
   Component::GUI::NumberArrayData:
@@ -959,6 +966,11 @@ classes:
       0x1406039D0: ctor
   Client::UI::Misc::RaptureTextModule:
     vtbl: 0x1416AEC40
+    funcs:
+      0x140607540: GetAddonText
+      0x140608710: FormatAddonText
+      0x1406089C0: FormatAddonText2
+      0x14060D370: FormatAddonText3
   Client::UI::Misc::RaptureLogModule:
     inherits_from: Component::Log::LogModule
     vtbl: 0x1416AEEB8
@@ -994,6 +1006,29 @@ classes:
     vtbl: 0x1416AF210
     funcs:
       0x14063FE80: ctor
+  Client::UI::Misc::RaptureTeleportHistory:
+    inherits_from: Client::UI::Misc::UserFileManager::UserFileEvent
+    vtbl: 0x1416AF348
+    funcs:
+      0x140646680: AddHistoryEntry
+  Client::Game::UI::MarkingController:
+    vtbl: 0x1416C94F0
+    vfuncs:
+      0: dtor
+    funcs:
+      0x1407A6F70: ClearWaymarks
+  Client::Game::LimitBreakController:
+    vtbl: 0x1416C94F8
+    vfuncs:
+      0: dtor
+  Client::Game::TitleController:
+    vtbl: 0x1416C9128
+    vfuncs:
+      0: dtor
+  Client::Game::TitleList:
+    vtbl: 0x1416C9470
+    vfuncs:
+      0: dtor
   Client::UI::Misc::CharaView:
     vtbl: 0x1416AFAC0
     vfuncs:
@@ -1061,11 +1096,13 @@ classes:
     inherits_from: Client::Graphics::Vfx::VfxDataListenner
     vtbl: 0x1416CA7C0
     funcs:
-      0x1407F6950: GetActionInRangeOrLoS
       0x1400A7F00: GetCurrentComboActionId
+      0x1407F6950: GetActionInRangeOrLoS
       0x1407F6F40: GetAdjustedCastTime
       0x1407F7600: GetAdjustedRecastTime
+      0x1407F97F0: RequestActionLocation
       0x1407FA5B0: RequestGeneralAction
+      0x1407FB1C0: UseWaymarkAction
       0x1407FF000: CanUseAction
       0x140801180: GetAdjustedActionId
       0x1408029D0: RequestAction
@@ -1362,12 +1399,18 @@ classes:
   Client::UI::AddonTeleport:
     inherits_from: Component::GUI::AtkUnitBase
     vtbl: 0x1417E2F28
+  Client::Game::UI::Telepo::SelectUseTicketInvoker:
+    vtbl: 0x1416C9578
+    vfuncs:
+      0: SelectUseTicketResultHandler
+      1: dtor
   Client::Game::UI::Telepo:
     vtbl: 0x1416C9588
     vfuncs:
       0: AcceptTeleportOffer
+      1: dtor
     funcs:
       0x1407B12D0: Teleport
-      0x1407B2470: TryTeleportWithTicket
+      0x1407B2470: TeleportWithTicket
       0x1407B0C30: UpdatePlayerAetheryteList
-      
+      0x1407B2500: InvokeSelectUseTicket
