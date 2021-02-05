@@ -32,6 +32,7 @@ globals:
   0x141D8A070: g_CameraHolder
   0x141D8A1C0: g_TargetSystem
   0x141D8E500: g_AtkStage
+  0x141D8EB68: g_LayoutWorld
   0x141DB1D30: g_BattleCharaStore  # this is a struct/object containing a list of all battlecharas (0x100) and the memory ptrs below
   0x141DB2050: g_BattleCharaMemory
   0x141DB2058: g_CompanionMemory
@@ -194,6 +195,7 @@ classes:
     funcs:
       0x14008EA40: ctor
       0x140091EB0: GetUIModule
+      0x140093390: TaskUpdateLayoutWorld
   Component::Excel::ExcelModuleInterface:
     vtbl: 0x14164F4E0
   Component::GUI::AtkEventListener:
@@ -883,9 +885,18 @@ classes:
     vtbl: 0x14169CAA8
     funcs:
       0x140536DD0: ctor
+  Client::LayoutEngine::IManagerBase:
+    inherits_from: Client::System::Common::NonCopyable
+    vtbl: 0x14169D9C0
   Client::LayoutEngine::ILayoutInstance:
     inherits_from: Client::System::Common::NonCopyable
     vtbl: 0x14169D9E0  
+  Client::LayoutEngine::LayoutWorld:
+    inherits_from: Client::LayoutEngine::IManagerBase
+    vtbl: 0x14169E1F8
+    funcs:
+      0x14055A0D0: ctor
+      0x14055A360: CreateSingleton
   Client::LayoutEngine::Group::TimeLineLayoutInstance:
     inherits_from: Client::LayoutEngine::ILayoutInstance
     vtbl: 0x1416A51E8 # ctor is inlined
