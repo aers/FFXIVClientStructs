@@ -82,6 +82,7 @@ functions:
   0x1408C17A0: CreateSelectYesno
   0x140A78010: EventFramework_GetSingleton
   0x140A80720: EventFramework_ProcessDirectorUpdate
+  0x140A83CC0: EventFramework_GetInstanceContentDirector
   0x141021C60: Client::UI::AddonHudLayoutScreen::MoveableAddonInfoStruct_UpdateAddonPosition
   0x1412F7ED0: crc
   0x141371CC4: FreeMemory
@@ -874,6 +875,14 @@ classes:
     vtbl: 0x14169CAA8
     funcs:
       0x140536DD0: ctor
+  Client::LayoutEngine::ILayoutInstance:
+    inherits_from: Client::System::Common::NonCopyable
+    vtbl: 0x14169D9E0  
+  Client::LayoutEngine::Group::TimeLineLayoutInstance:
+    inherits_from: Client::LayoutEngine::ILayoutInstance
+    vtbl: 0x1416A51E8 # ctor is inlined
+    vfuncs:
+      0: dtor
   Client::UI::Misc::UserFileManager::UserFileEvent:
     vtbl: 0x1416A9390
     vfuncs:
@@ -1055,6 +1064,7 @@ classes:
       0x1400A7F00: GetCurrentComboActionId
       0x1407F6F40: GetAdjustedCastTime
       0x1407F7600: GetAdjustedRecastTime
+      0x1407FA5B0: RequestGeneralAction
       0x1407FF000: CanUseAction
       0x140801180: GetAdjustedActionId
       0x1408029D0: RequestAction
