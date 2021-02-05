@@ -1403,4 +1403,4 @@ classes:
       0x1407B12D0: Teleport
       0x1407B2470: TeleportWithTicket
       0x1407B0C30: UpdatePlayerAetheryteList
-      0x1407B2500: RequestTeleportTicketPopup
+      0x1407B2500: InvokeSelectUseTicket
