@@ -38,7 +38,7 @@ globals:
   0x141DB2058: g_CompanionMemory
   0x141DB2080: g_ActorList
   0x141DB2DC0: g_ActorListEnd
-  0x141DB6100: g_PlayerAetheryteList
+  0x141DB6100: g_Client::Game::UI::Telepo
   0x141DD6F38: g_EventFramework
   0x141DDAA50: g_GroupManager
   0x141DE2D80: g_ClientObjectManager
@@ -47,6 +47,7 @@ globals:
   0x141DC3000: g_LimitBreakController
   0x141DC3010: g_TitleController
   0x141DC3018: g_TitleList
+  0x141DBEBC8: g_ActiveDirector
 
 functions:
   # ffxivstring is just their implementation of std::string presumably there are more ctors etc
@@ -80,8 +81,6 @@ functions:
   0x1404E9950: GetScaleForListOption
   0x1405362C0: Component::GUI::TextModuleInterface::GetTextLabelByID
   0x1406EE890: ExecuteCommand
-  0x140708930: Client::UI::Shell::RaptureShellModule_ctor
-  0x14070CC50: Client::UI::Shell::RaptureShellModule_SetChatChannel
   0x14073B5F0: CreateBattleCharaStore
   0x14073BBC0: BattleCharaStore_LookupBattleCharaByObjectID
   0x1408C17A0: CreateSelectYesno
@@ -108,6 +107,7 @@ classes:
   Client::System::Crypt::CryptInterface:
   Client::System::Input::InputData::InputCodeModifiedInterface:
   Client::System::Input::SoftKeyboardDeviceInterface::SoftKeyboardInputInterface:
+  Client::System::Input::TextServiceInterface:
   Client::System::Input::TextServiceInterface::TextServiceEvent:
   Client::System::Resource::Handle::ResourceHandleFactory:
   Client::UI::Agent::AgentMap::MapMarkerStructSearch:
@@ -127,6 +127,7 @@ classes:
   Component::Text::TextChecker::ExecNonMacroFunc:
   Component::Text::TextModule:
   Component::Text::TextModuleInterface:
+  SQEX::CDev::Engine::Sd::SdMemoryAllocator:
 
   # Known classes - no vfunc/vtables
   GroupManager:
@@ -148,6 +149,31 @@ classes:
   InventoryContainer:
     funcs:
       0x140697E00: GetInventorySlot  # (this, slotIndex)
+  SQEX::CDev::Engine::Sd::Driver::IEffect:
+    inherits_from: SQEX::CDev::Engine::Sd::SdMemoryAllocator
+    vtbl: 0x141947E90
+  SQEX::CDev::Engine::Sd::Driver::FilterBase:
+    inherits_from: SQEX::CDev::Engine::Sd::Driver::IEffect
+    vtbl: 0x141947ED8
+  SQEX::CDev::Engine::Sd::Driver::DynamicValue:
+    inherits_from: SQEX::CDev::Engine::Sd::SdMemoryAllocator
+    vtbl: 0x141948938
+  SQEX::CDev::Engine::Sd::Driver::ISound:
+    vtbl: 0x141948970
+  SQEX::CDev::Engine::Sd::Driver::RootSound:
+    inherits_from: SQEX::CDev::Engine::Sd::Driver::ISound
+    vtbl: 0x141948CE0
+  SQEX::CDev::Engine::Sd::Driver::StreamSoundEx:
+    inherits_from: SQEX::CDev::Engine::Sd::Driver::RootSound
+    vtbl: 0x1419497B0
+  Client::System::Scheduler::ScheduleManagement:
+    inherits_from: Client::System::Framework::Task
+    vtbl: 0x141698298
+  Client::System::Scheduler::Base::SchedulerState:
+    vtbl: 0x141831A88
+  Client::System::Scheduler::Base::SceneConnectionBlock:
+    inherits_from: Client::System::Scheduler::Base::SchedulerState
+    vtbl: 0x14188CDD0
   Common::Configuration::ConfigBase:
     inherits_from: Client::System::Common::NonCopyable
     vtbl: 0x14164E260
@@ -959,6 +985,9 @@ classes:
       2: Decrypt
   Component::Text::MacroDecoder:
     vtbl: 0x1416AB430
+  Client::System::Input::TextService:
+    inherits_from: Client::System::Input::TextServiceInterface
+    vtbl: 0x14164fb88
   Component::Text::TextChecker:
     inherits_from: Component::Text::MacroDecoder
     vtbl: 0x1416AB5F0
@@ -989,6 +1018,19 @@ classes:
       0x1406157D0: ctor
       0x140616F60: PrintMessage
       0x140618310: ShowLogMessage
+  Component::Shell::ShellCommandInterface:
+    vtbl: 0x1416C5560
+  Client::UI::Shell::ShellCommandAction:
+    inherits_from: Component::Shell::ShellCommandInterface
+    vtbl: 0x1416C55E8
+  Component::Shell::ShellCommandModule:
+    vtbl: 0x14164FC80
+  Client::UI::Shell::RaptureShellModule:
+    inherits_from: Component::Shell::ShellCommandModule
+    vtbl: 0x1416C55A0
+    funcs:
+      0x140708930: ctor
+      0x14070CC50: SetChatChannel
   Client::UI::Misc::RaptureHotbarModule:
     inherits_from: Client::UI::Misc::UserFileManager::UserFileEvent
     vtbl: 0x1416AEF08
@@ -1108,6 +1150,7 @@ classes:
     vtbl: 0x1416CA7C0
     funcs:
       0x1400A7F00: GetCurrentComboActionId
+      0x1407F65C0: GetActionRange
       0x1407F6950: GetActionInRangeOrLoS
       0x1407F6F40: GetAdjustedCastTime
       0x1407F7600: GetAdjustedRecastTime
@@ -1142,6 +1185,12 @@ classes:
     vtbl: 0x1416CD4B8
     vfuncs:
       1: Evaluate
+  Client::UI::Agent::AgentLetterEdit:
+    inherits_from: Client::UI::Agent::AgentInterface
+    vtbl: 0x141677AE8
+  Client::UI::Agent::AgentFreeCompanyChest:
+    inherits_from: Client::UI::Agent::AgentInterface
+    vtbl: 0x141677EB8
   Client::UI::Agent::AgentMap:
     inherits_from: Client::UI::Agent::AgentInterface
     vtbl: 0x1416CD4C8
@@ -1184,6 +1233,18 @@ classes:
   Client::Game::Event::DirectorModule:
     inherits_from: Client::Game::Event::ModuleBase
     vtbl: 0x1416E4910
+  Client::Game::Event::Director:
+    inherits_from: Client::Game::Event::LuaEventHandler
+    vtbl: 0x1416E2428
+  Client::Game::InstanceContent::InstanceContentDirector:
+    inherits_from: Client::Game::Event::Director
+    vtbl: 0x14171F380
+  Client::Game::Event::LeveDirector:
+    inherits_from: Client::Game::Event::Director
+    vtbl: 0x1416E6A20
+  Client::Game::Event::BattleLeveDirector:
+    inherits_from: Client::Game::Event::LeveDirector
+    vtbl: 0x1416E72F8
   Client::Game::Gimmick::GimmickBill:
     inherits_from: Client::Game::Gimmick::GimmickEventHandler
     vtbl: 0x1416F4AA0
