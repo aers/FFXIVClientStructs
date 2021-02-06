@@ -107,6 +107,7 @@ classes:
   Client::System::Crypt::CryptInterface:
   Client::System::Input::InputData::InputCodeModifiedInterface:
   Client::System::Input::SoftKeyboardDeviceInterface::SoftKeyboardInputInterface:
+  Client::System::Input::TextServiceInterface:
   Client::System::Input::TextServiceInterface::TextServiceEvent:
   Client::System::Resource::Handle::ResourceHandleFactory:
   Client::UI::Agent::AgentMap::MapMarkerStructSearch:
@@ -126,6 +127,7 @@ classes:
   Component::Text::TextChecker::ExecNonMacroFunc:
   Component::Text::TextModule:
   Component::Text::TextModuleInterface:
+  SQEX::CDev::Engine::Sd::SdMemoryAllocator:
 
   # Known classes - no vfunc/vtables
   GroupManager:
@@ -147,6 +149,31 @@ classes:
   InventoryContainer:
     funcs:
       0x140697E00: GetInventorySlot  # (this, slotIndex)
+  SQEX::CDev::Engine::Sd::Driver::IEffect:
+    inherits_from: SQEX::CDev::Engine::Sd::SdMemoryAllocator
+    vtbl: 0x141947E90
+  SQEX::CDev::Engine::Sd::Driver::FilterBase:
+    inherits_from: SQEX::CDev::Engine::Sd::Driver::IEffect
+    vtbl: 0x141947ED8
+  SQEX::CDev::Engine::Sd::Driver::DynamicValue:
+    inherits_from: SQEX::CDev::Engine::Sd::SdMemoryAllocator
+    vtbl: 0x141948938
+  SQEX::CDev::Engine::Sd::Driver::ISound:
+    vtbl: 0x141948970
+  SQEX::CDev::Engine::Sd::Driver::RootSound:
+    inherits_from: SQEX::CDev::Engine::Sd::Driver::ISound
+    vtbl: 0x141948CE0
+  SQEX::CDev::Engine::Sd::Driver::StreamSoundEx:
+    inherits_from: SQEX::CDev::Engine::Sd::Driver::RootSound
+    vtbl: 0x1419497B0
+  Client::System::Scheduler::ScheduleManagement:
+    inherits_from: Client::System::Framework::Task
+    vtbl: 0x141698298
+  Client::System::Scheduler::Base::SchedulerState:
+    vtbl: 0x141831A88
+  Client::System::Scheduler::Base::SceneConnectionBlock:
+    inherits_from: Client::System::Scheduler::Base::SchedulerState
+    vtbl: 0x14188CDD0
   Common::Configuration::ConfigBase:
     inherits_from: Client::System::Common::NonCopyable
     vtbl: 0x14164E260
@@ -958,6 +985,9 @@ classes:
       2: Decrypt
   Component::Text::MacroDecoder:
     vtbl: 0x1416AB430
+  Client::System::Input::TextService:
+    inherits_from: Client::System::Input::TextServiceInterface
+    vtbl: 0x14164fb88
   Component::Text::TextChecker:
     inherits_from: Component::Text::MacroDecoder
     vtbl: 0x1416AB5F0
@@ -1155,6 +1185,12 @@ classes:
     vtbl: 0x1416CD4B8
     vfuncs:
       1: Evaluate
+  Client::UI::Agent::AgentLetterEdit:
+    inherits_from: Client::UI::Agent::AgentInterface
+    vtbl: 0x141677AE8
+  Client::UI::Agent::AgentFreeCompanyChest:
+    inherits_from: Client::UI::Agent::AgentInterface
+    vtbl: 0x141677EB8
   Client::UI::Agent::AgentMap:
     inherits_from: Client::UI::Agent::AgentInterface
     vtbl: 0x1416CD4C8
