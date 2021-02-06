@@ -81,8 +81,6 @@ functions:
   0x1404E9950: GetScaleForListOption
   0x1405362C0: Component::GUI::TextModuleInterface::GetTextLabelByID
   0x1406EE890: ExecuteCommand
-  0x140708930: Client::UI::Shell::RaptureShellModule_ctor
-  0x14070CC50: Client::UI::Shell::RaptureShellModule_SetChatChannel
   0x14073B5F0: CreateBattleCharaStore
   0x14073BBC0: BattleCharaStore_LookupBattleCharaByObjectID
   0x1408C17A0: CreateSelectYesno
@@ -1000,6 +998,9 @@ classes:
   Client::UI::Shell::RaptureShellModule:
     inherits_from: Component::Shell::ShellCommandModule
     vtbl: 0x1416C55A0
+    funcs:
+      0x140708930: ctor
+      0x14070CC50: SetChatChannel
   Client::UI::Misc::RaptureHotbarModule:
     inherits_from: Client::UI::Misc::UserFileManager::UserFileEvent
     vtbl: 0x1416AEF08
