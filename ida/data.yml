@@ -990,6 +990,16 @@ classes:
       0x1406157D0: ctor
       0x140616F60: PrintMessage
       0x140618310: ShowLogMessage
+  Component::Shell::ShellCommandInterface:
+    vtbl: 0x1416C5560
+  Client::UI::Shell::ShellCommandAction:
+    inherits_from: Component::Shell::ShellCommandInterface
+    vtbl: 0x1416C55E8
+  Component::Shell::ShellCommandModule:
+    vtbl: 0x14164FC80
+  Client::UI::Shell::RaptureShellModule:
+    inherits_from: Component::Shell::ShellCommandModule
+    vtbl: 0x1416C55A0
   Client::UI::Misc::RaptureHotbarModule:
     inherits_from: Client::UI::Misc::UserFileManager::UserFileEvent
     vtbl: 0x1416AEF08
@@ -1109,6 +1119,7 @@ classes:
     vtbl: 0x1416CA7C0
     funcs:
       0x1400A7F00: GetCurrentComboActionId
+      0x1407F65C0: GetActionRange
       0x1407F6950: GetActionInRangeOrLoS
       0x1407F6F40: GetAdjustedCastTime
       0x1407F7600: GetAdjustedRecastTime
