@@ -60,6 +60,7 @@ functions:
   0x1400604B0: MemoryManager_Alloc
   0x140064F10: IsMacClient
   0x14017FE80: Client::Graphics::Environment::EnvManager_ctor
+  0x140194D10: Client::System::Threading::Thread_CreateThread
   0x140194E10: j_SleepEx
   0x1401B0390: ResourceManager_GetResourceAsync  # no vtbl on this class wouldn't be surprised if it was Client::System::Resource::ResourceManager or something though
   0x1401B05B0: ResourceManager_GetResourceSync
@@ -71,6 +72,7 @@ functions:
   0x1403647F0: Client::Graphics::Render::RenderManager_CreateModel
   0x140440D60: PrepareColorSet
   0x140441030: ReadStainingTemplate
+  0x140474680: Component::Exd::ExdModule_GetEntryByIndex
   0x1404AB350: Component::GUI::AtkValue_dtor
   0x1404AB990: Component::GUI::AtkValue_ChangeType
   0x1404B11D0: Component::GUI::AtkEvent_SetEventIsHandled
@@ -1104,6 +1106,7 @@ classes:
       40: Update
       50: GetNpcID
     funcs:
+      0x1406C1A20: GetPosition
       0x1406C5230: Initialize
       0x1406C5490: ctor
   Client::Game::Character::Character:
