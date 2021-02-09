@@ -65,7 +65,6 @@ functions:
   0x1401B0390: ResourceManager_GetResourceAsync  # no vtbl on this class wouldn't be surprised if it was Client::System::Resource::ResourceManager or something though
   0x1401B05B0: ResourceManager_GetResourceSync
   0x1401B8970: Client::System::Resource::Handle::ModelResourceHandle_GetMaterialFileNameBySlot
-  0x140210640: Client::UI::Agent::AgentLobby_ctor
   0x1402A51A0: CountdownPointer
   0x140301BF0: Client::Graphics::Kernel::Device::CreateTexture2D
   0x140363610: Client::Graphics::Render::RenderManager_ctor
@@ -130,6 +129,7 @@ classes:
   Component::Text::TextModule:
   Component::Text::TextModuleInterface:
   SQEX::CDev::Engine::Sd::SdMemoryAllocator:
+  Client::System::Scheduler::Base::LinkList:
 
   # Known classes - no vfunc/vtables
   GroupManager:
@@ -168,6 +168,18 @@ classes:
   SQEX::CDev::Engine::Sd::Driver::StreamSoundEx:
     inherits_from: SQEX::CDev::Engine::Sd::Driver::RootSound
     vtbl: 0x1419497B0
+  SQEX::CDev::Engine::Sd::Driver::AtomosgearSound:
+    inherits_from: SQEX::CDev::Engine::Sd::Driver::RootSound
+    vtbl: 0x141949B48
+  SQEX::CDev::Engine::Sd::Driver::Surround4chSound:
+    inherits_from: SQEX::CDev::Engine::Sd::Driver::RootSound
+    vtbl: 0x14194A278
+  SQEX::CDev::Engine::Sd::Driver::ISoundDriver:
+    inherits_from: SQEX::CDev::Engine::Sd::SdMemoryAllocator
+    vtbl: 0x141997D98
+  SQEX::CDev::Engine::Sd::Driver::SoundDriver:
+    inherits_from: SQEX::CDev::Engine::Sd::Driver::ISoundDriver
+    vtbl: 0x141998000
   Client::System::Scheduler::ScheduleManagement:
     inherits_from: Client::System::Framework::Task
     vtbl: 0x141698298
@@ -176,6 +188,12 @@ classes:
   Client::System::Scheduler::Base::SceneConnectionBlock:
     inherits_from: Client::System::Scheduler::Base::SchedulerState
     vtbl: 0x14188CDD0
+  Client::System::Scheduler::Clip::BaseClip:
+    inherits_from: Client::System::Scheduler::Base::SchedulerState
+    vtbl: 0x1418815B0
+  Client::System::Scheduler::Clip::HavokAnimationClip:
+    inherits_from: Client::System::Scheduler::Clip::BaseClip
+    vtbl: 0x1418827C0
   Common::Configuration::ConfigBase:
     inherits_from: Client::System::Common::NonCopyable
     vtbl: 0x14164E260
@@ -338,6 +356,11 @@ classes:
     vtbl: 0x1416CDC20
     funcs:
       0x1408B66B0: ctor
+  Client::UI::Agent::AgentLobby:
+    inherits_from: Client::UI::Agent::AgentInterface
+    vtbl: 0x141676378
+    funcs:
+      0x140210640: ctor
   Client::UI::Agent::AgentCharaMake:
     inherits_from: Client::UI::Agent::AgentInterface
     vtbl: 0x141675998
