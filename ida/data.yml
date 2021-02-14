@@ -29,6 +29,7 @@ globals:
   0x141D81AE0: g_RenderModelLinkedListStart
   0x141D81AE8: g_RenderModelLinkedListEnd
   0x141D82930: g_JobSystem_ApricotEngineCore  # not a ptr
+  0x141D85398: g_InputDeviceManager
   0x141D8A070: g_CameraHolder
   0x141D8A1C0: g_TargetSystem
   0x141D8E500: g_AtkStage
@@ -1130,6 +1131,7 @@ classes:
       50: GetNpcID
     funcs:
       0x1406C1A20: GetPosition
+      0x1406C1A70: SetPosition
       0x1406C5230: Initialize
       0x1406C5490: ctor
   Client::Game::Character::Character:
