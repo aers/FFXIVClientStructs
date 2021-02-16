@@ -1443,6 +1443,11 @@ classes:
     vtbl: 0x1417DD870
     funcs:
       0x140ECCB00: "ctor"
+  Client::UI::AddonMiragePrismMiragePlate:
+    inherits_from: Component::GUI::AtkUnitBase
+    vtbl: 0x1417CF630
+    funcs:
+      0x140E4E7E0: "ctor"
   Client::Graphics::Culling::CullingManager_Client::Graphics::JobSystem_Client::Graphics::Culling::CullingJobOpt:
     vtbl: 0x141825348
   Client::Graphics::Culling::CullingManager_Client::Graphics::JobSystem_Client::Graphics::Culling::CallbackJobOpt:
