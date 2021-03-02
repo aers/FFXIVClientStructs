@@ -2,6 +2,8 @@ version: 2021.02.10.0000.0000
 
 globals:
   0x14169A2A0: g_HUDScaleTable
+  0x141D3A4D0: g_InputManager
+  0x141D3A4F8: g_InputManager_MouseButtonHoldState
   0x141D3CE60: g_ActionManager
   0x141D66690: g_Framework
   0x141D66860: g_KernelDevice
@@ -30,8 +32,9 @@ globals:
   0x141D81AE8: g_RenderModelLinkedListEnd
   0x141D82930: g_JobSystem_ApricotEngineCore  # not a ptr
   0x141D85398: g_InputDeviceManager
-  0x141D8A070: g_CameraHolder
-  0x141D8A1C0: g_TargetSystem
+  0x141D8A070: g_ControlSystem_CameraManager # control system, object actually contains target system global below
+  0x141D8A1C0: g_ControlSystem_TargetSystem
+  0x141D8DF00: g_PlayerMoveController
   0x141D8E500: g_AtkStage
   0x141D8EB68: g_LayoutWorld
   0x141DB1D30: g_BattleCharaStore  # this is a struct/object containing a list of all battlecharas (0x100) and the memory ptrs below
@@ -73,6 +76,12 @@ functions:
   0x140440CF0: PrepareColorSet
   0x140440FC0: ReadStainingTemplate
   0x140474610: Component::Exd::ExdModule_GetEntryByIndex
+  0x140480650: Client::Game::GameMain_Initialize
+  0x140480C30: Client::Game::GameMain_Update
+  0x1404922D0: Client::Game::Control::InputManager_GetInputStatus
+  0x1404A9250: Client::System::Input::InputData_IsInputIDKeyPress
+  0x1404A9360: Client::System::Input::InputData_IsInputIDClicked
+  0x1404A9C60: Client::System::Input::InputData_IsMouseCombinationDragged
   0x1404AB2E0: Component::GUI::AtkValue_dtor
   0x1404AB920: Component::GUI::AtkValue_ChangeType
   0x1404B1160: Component::GUI::AtkEvent_SetEventIsHandled
@@ -133,6 +142,13 @@ classes:
   Client::System::Scheduler::Base::LinkList:
 
   # Known classes - no vfunc/vtables
+  Client::Game::Control::Control:
+    funcs:
+      0x1404A18B0: Initialize
+      0x1404A1AD0: Update
+  Client::Game::CameraManager:
+    funcs:
+      0x1411120B0: PreUpdate
   GroupManager:
     funcs:
       0x140BB25C0: Create
@@ -1469,6 +1485,7 @@ classes:
     vtbl: 0x141829CC0
     funcs:
       0x14110A730: ctor
+      0x141107C40: UpdateRotation
   Client::Graphics::Culling::OcclusionCullingManager:
     inherits_from: Client::Graphics::Singleton
     vtbl: 0x14182B760
