@@ -1292,6 +1292,9 @@ classes:
   Client::Game::Gimmick::GimmickBill:
     inherits_from: Client::Game::Gimmick::GimmickEventHandler
     vtbl: 0x1416F4AA0
+  Client::UI:SelectEventThing:
+    inherits_from: Component::GUI::AtkEventListener
+    vtbl: 0x141797D80
   Client::UI::AddonNowLoading:
     inherits_from: Component::GUI::AtkUnitBase
     vtbl: 0x141798F58
@@ -1300,9 +1303,15 @@ classes:
   Client::UI::AddonSelectString:
     inherits_from: Component::GUI::AtkUnitBase
     vtbl: 0x141799C90
+  Client::UI::AddonSelectString::EventThing:
+    inherits_from: Client::UI:SelectEventThing
+    vtbl: 0x141799C68
   Client::UI::AddonSelectIconString:
     inherits_from: Component::GUI::AtkUnitBase
     vtbl: 0x14179A318
+  Client::UI::AddonSelectIconString::EventThing:
+    inherits_from: Client::UI:SelectEventThing
+    vtbl: 0x14179A2F0
   Client::UI::AddonContextIconMenu:
     inherits_from: Component::GUI::AtkUnitBase
     vtbl: 0x14179ADD0
