@@ -1336,6 +1336,11 @@ classes:
   Client::UI::AddonRaidFinder:
     inherits_from: Component::GUI::AtkUnitBase
     vtbl: 0x1417CD288
+  Client::UI::AddonMaterializeDialog:
+    inherits_from: Component::GUI::AtkUnitBase
+    vtbl: 0x1417CD918
+    funcs:
+      0x140E44B60: ctor    
   Client::UI::AddonMateriaAttach:
     inherits_from: Component::GUI::AtkUnitBase
     vtbl: 0x1417CDB38
