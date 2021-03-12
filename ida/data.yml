@@ -1358,6 +1358,11 @@ classes:
     vtbl: 0x1417D65F8
     funcs:
       0x140E8F5C0: ctor
+  Client::UI::AddonSalvageDialog:
+    inherits_from: Component::GUI::AtkUnitBase
+    vtbl: 0x1417DB430
+    funcs:
+      0x140EB3AC0: ctor    
   Client::UI::AddonAreaMap:
     inherits_from: Component::GUI::AtkUnitBase
     vtbl: 0x1417DCDB0
