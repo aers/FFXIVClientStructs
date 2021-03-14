@@ -1409,6 +1409,9 @@ classes:
   Client::UI::AddonItemInspectionList:
     inherits_from: Component::GUI::AtkUnitBase
     vtbl: 0x1417EFF28
+  Client::UI::AddonItemInspectionResult:
+    inherits_from: Component::GUI::AtkUnitBase
+    vtbl: 0x1417F0368
   Client::UI::AddonWeeklyBingo::DutySlot:
     inherits_from: Component::GUI::AtkEventListener
     vtbl: 0x1417F7E40
