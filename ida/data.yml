@@ -258,6 +258,8 @@ classes:
     funcs:
       0x14008EA40: ctor
       0x140091EB0: GetUIModule
+      0x1400932D0: TaskRenderManagerUpdate
+      0x1400932F0: TaskRenderManagerRender
       0x140093390: TaskUpdateLayoutWorld
   Component::Excel::ExcelModuleInterface:
     vtbl: 0x14164F4E0
@@ -975,6 +977,7 @@ classes:
     vfuncs:
       1: ReadFile
       2: WriteFile
+      6: GetFileVersion
   Client::UI::UI3DModule::MapInfo:
     vtbl: 0x1416A9CD0
   Client::UI::UI3DModule::ObjectInfo:
