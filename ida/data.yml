@@ -1406,6 +1406,9 @@ classes:
     vtbl: 0x1417ED608
     funcs:
       0x140F43120: ctor
+  Client::UI::AddonItemInspectionList:
+    inherits_from: Component::GUI::AtkUnitBase
+    vtbl: 0x1417EFF28
   Client::UI::AddonWeeklyBingo::DutySlot:
     inherits_from: Component::GUI::AtkEventListener
     vtbl: 0x1417F7E40
