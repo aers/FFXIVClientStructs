@@ -1332,6 +1332,9 @@ classes:
   Client::UI::AddonGuildLeve:
     inherits_from: Component::GUI::AtkUnitBase
     vtbl: 0x1417C3F48
+  Client::UI::AddonRetainerTaskList:
+    inherits_from: Component::GUI::AtkUnitBase
+    vtbl: 0x1417C85A0
   Client::UI::AddonRetainerTaskAsk:
     inherits_from: Component::GUI::AtkUnitBase
     vtbl: 0x1417C87C0
