@@ -30,8 +30,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
         Multipurpose = 21,
         Map = 22,
         Preview = 23,
-        // derives from Button
-        UnknownButton = 24
+        HoldButton = 24
     }
 
     // Component::GUI::AtkComponentBase
