@@ -1335,6 +1335,15 @@ classes:
   Client::UI::AddonGuildLeve:
     inherits_from: Component::GUI::AtkUnitBase
     vtbl: 0x1417C3F48
+  Client::UI::AddonRetainerTaskList:
+    inherits_from: Component::GUI::AtkUnitBase
+    vtbl: 0x1417C85A0
+  Client::UI::AddonRetainerTaskAsk:
+    inherits_from: Component::GUI::AtkUnitBase
+    vtbl: 0x1417C87C0
+  Client::UI::AddonRetainerTaskResult:
+    inherits_from: Component::GUI::AtkUnitBase
+    vtbl: 0x1417C89E0
   Client::UI::AddonRecipeNote:
     inherits_from: Component::GUI::AtkUnitBase
     vtbl: 0x1417C9500
@@ -1409,6 +1418,12 @@ classes:
     vtbl: 0x1417ED608
     funcs:
       0x140F43120: ctor
+  Client::UI::AddonItemInspectionList:
+    inherits_from: Component::GUI::AtkUnitBase
+    vtbl: 0x1417EFF28
+  Client::UI::AddonItemInspectionResult:
+    inherits_from: Component::GUI::AtkUnitBase
+    vtbl: 0x1417F0368
   Client::UI::AddonWeeklyBingo::DutySlot:
     inherits_from: Component::GUI::AtkEventListener
     vtbl: 0x1417F7E40
