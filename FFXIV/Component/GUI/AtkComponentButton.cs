@@ -21,5 +21,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
         [FieldOffset(0xC8)] public AtkTextNode* ButtonTextNode;
         [FieldOffset(0xD0)] public AtkResNode* ButtonBGNode;
         [FieldOffset(0xE8)] public uint Flags;
+
+        public bool IsEnabled => (AtkComponentBase.OwnerNode->AtkResNode.Flags & 1 << 5) != 0;
     }
 }
