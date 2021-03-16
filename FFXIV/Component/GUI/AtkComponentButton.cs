@@ -20,5 +20,6 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
         [FieldOffset(0xC6)] public short Bottom;
         [FieldOffset(0xC8)] public AtkTextNode* ButtonTextNode;
         [FieldOffset(0xD0)] public AtkResNode* ButtonBGNode;
+        [FieldOffset(0xE8)] public uint Flags;
     }
 }
