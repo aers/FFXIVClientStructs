@@ -15,6 +15,6 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
     {
         [FieldOffset(0x0)] public AtkComponentButton AtkComponentButton;
 
-        public bool Checked => (AtkComponentButton.Flags & (1 << 18)) != 0;
+        public bool IsChecked => (AtkComponentButton.Flags & (1 << 18)) != 0;
     }
 }
