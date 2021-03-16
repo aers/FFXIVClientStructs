@@ -14,5 +14,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
     public unsafe struct AtkComponentCheckBox
     {
         [FieldOffset(0x0)] public AtkComponentButton AtkComponentButton;
+
+        public bool Checked => (AtkComponentButton.Flags & (1 << 18)) != 0;
     }
 }
