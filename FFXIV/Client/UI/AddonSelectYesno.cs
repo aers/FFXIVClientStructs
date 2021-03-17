@@ -20,9 +20,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
         [FieldOffset(0x260)] public AtkComponentButton* AtkComponentButton260;  // repeat 228
         [FieldOffset(0x268)] public AtkComponentButton* AtkComponentButton268;  // repeat 230
         [FieldOffset(0x270)] public AtkComponentButton* AtkComponentButton270;  // repeat 238
-        [FieldOffset(0x278)] public AtkComponentUnknownButton* AtkComponentUnknownButton278;
-        [FieldOffset(0x280)] public AtkComponentUnknownButton* AtkComponentUnknownButton280;
-        [FieldOffset(0x288)] public AtkComponentUnknownButton* AtkComponentUnknownButton288;
+        [FieldOffset(0x278)] public AtkComponentHoldButton* AtkComponentUnknownButton278;
+        [FieldOffset(0x280)] public AtkComponentHoldButton* AtkComponentUnknownButton280;
+        [FieldOffset(0x288)] public AtkComponentHoldButton* AtkComponentUnknownButton288;
         [FieldOffset(0x290)] public AtkComponentCheckBox* ConfirmCheckBox;
         [FieldOffset(0x298)] public AtkTextNode* AtkTextNode298;
         [FieldOffset(0x2A0)] public AtkComponentBase* AtkComponentBase2A0;
