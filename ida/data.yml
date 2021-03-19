@@ -32,6 +32,7 @@ globals:
   0x141D81AE8: g_RenderModelLinkedListEnd
   0x141D82930: g_JobSystem_ApricotEngineCore  # not a ptr
   0x141D85398: g_InputDeviceManager
+  0x141D85630: g_GameMain
   0x141D8A070: g_ControlSystem_CameraManager # control system, object actually contains target system global below
   0x141D8A1C0: g_ControlSystem_TargetSystem
   0x141D8DF00: g_PlayerMoveController
@@ -77,6 +78,7 @@ functions:
   0x140440FC0: ReadStainingTemplate
   0x140474610: Component::Exd::ExdModule_GetEntryByIndex
   0x140480650: Client::Game::GameMain_Initialize
+  0x140480950: Client::Game::GameMain_Terminate
   0x140480C30: Client::Game::GameMain_Update
   0x1404922D0: Client::Game::Control::InputManager_GetInputStatus
   0x1404A9250: Client::System::Input::InputData_IsInputIDKeyPress
