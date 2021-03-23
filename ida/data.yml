@@ -54,6 +54,7 @@ globals:
   0x141DC3010: g_TitleController
   0x141DC3018: g_TitleList
   0x141DBEBC8: g_ActiveDirector
+  0x141D8E490: g_LocalPlayer
 
 functions:
   # ffxivstring is just their implementation of std::string presumably there are more ctors etc
