@@ -47,6 +47,8 @@ globals:
   0x141DD6F38: g_EventFramework
   0x141DDAA50: g_GroupManager # not a pointer
   0x141DDE7C0: g_GroupManager_2 #not a pointer
+  0x141D6A770: g_CrossRealmGroupManager #pointer
+  0x141DB6ED8: g_TrustGroupManager #pointer
   0x141DE2D80: g_ClientObjectManager
   0x141DAD640: g_InventoryManager
   0x141DC2D50: g_MarkingController
