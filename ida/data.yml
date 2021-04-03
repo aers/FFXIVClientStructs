@@ -22,6 +22,7 @@ globals:
   0x141D682C8: g_CameraManager
   0x141D682D0: g_CharacterUtility
   0x141D682D8: g_ResidentResourceManager
+  0x141D6A770: g_CrossRealmGroupManager # pointer
   0x141D6A7E0: g_CullingManager
   0x141D6A800: g_TaskManager
   0x141D6F6F0: g_EnvRenderController # Client::Graphics::Environment::EnvRenderController not a ptr
@@ -45,9 +46,8 @@ globals:
   0x141DB2080: g_ActorList
   0x141DB2DC0: g_ActorListEnd
   0x141DB6100: g_Client::Game::UI::Telepo
+  0x141DB6ED8: g_TrustGroupManager # pointer
   0x141DBEBC8: g_ActiveDirector
-  0x141D6A770: g_CrossRealmGroupManager #pointer
-  0x141DB6ED8: g_TrustGroupManager #pointer
   0x141DE2D80: g_ClientObjectManager
   0x141DAD640: g_InventoryManager
   0x141DC2D50: g_MarkingController
