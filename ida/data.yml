@@ -61,10 +61,10 @@ globals:
 
 functions:
   # ffxivstring is just their implementation of std::string presumably there are more ctors etc
-  0x140059670: FFXIVString_ctor  # empty string ctor
-  0x1400596B0: FFXIVString_ctor_copy  # copy constructor
-  0x140059730: FFXIVString_ctor_FromCStr  # from null-terminated string
-  0x1400597C0: FFXIVString_ctor_FromSequence  # (FFXIVString, char * str, size_t size)
+  0x140059670: FFXIVString_ctor # empty string ctor
+  0x1400596B0: FFXIVString_ctor_copy # copy constructor
+  0x140059730: FFXIVString_ctor_FromCStr # from null-terminated string
+  0x1400597C0: FFXIVString_ctor_FromSequence # (FFXIVString, char * str, size_t size)
   0x14005A280: FFXIVString_dtor
   0x14005A300: FFXIVString_SetString
   0x1400604B0: MemoryManager_Alloc
@@ -72,7 +72,7 @@ functions:
   0x14017FDF0: Client::Graphics::Environment::EnvManager_ctor
   0x140194C80: Client::System::Threading::Thread_CreateThread
   0x140194D80: j_SleepEx
-  0x1401B0300: ResourceManager_GetResourceAsync  # no vtbl on this class wouldn't be surprised if it was Client::System::Resource::ResourceManager or something though
+  0x1401B0300: ResourceManager_GetResourceAsync # no vtbl on this class wouldn't be surprised if it was Client::System::Resource::ResourceManager or something though
   0x1401B0520: ResourceManager_GetResourceSync
   0x1401B88E0: Client::System::Resource::Handle::ModelResourceHandle_GetMaterialFileNameBySlot
   0x1402A5130: CountdownPointer
@@ -92,7 +92,7 @@ functions:
   0x1404AB2E0: Component::GUI::AtkValue_dtor
   0x1404AB920: Component::GUI::AtkValue_ChangeType
   0x1404B1160: Component::GUI::AtkEvent_SetEventIsHandled
-  0x1404B2490: Component::GUI::AtkCursor_SetCursorType  # the cursor's icon i believe
+  0x1404B2490: Component::GUI::AtkCursor_SetCursorType # the cursor's icon I believe
   0x1404D6590: CreateAtkNode
   0x1404D79A0: CreateAtkComponent
   0x1404DB190: GetScaleListEntryFromScale
@@ -109,7 +109,7 @@ functions:
   0x1412F8030: crc
   0x14134B574: ThrowException
   0x141371E34: FreeMemory
-  0x141379D90: _purecall  # Ghidra does not have a notation for pure virtual calls
+  0x141379D90: _purecall # Ghidra does not have a notation for pure virtual calls
 
 classes:
   # Unknown classes old RTTI data says known classes inherit from
