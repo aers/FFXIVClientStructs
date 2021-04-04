@@ -48,8 +48,6 @@ globals:
   0x141DB6100: g_Client::Game::UI::Telepo
   0x141DB6ED8: g_TrustGroupManager # pointer
   0x141DBEBC8: g_ActiveDirector
-  0x141DE2D80: g_ClientObjectManager
-  0x141DAD640: g_InventoryManager
   0x141DC2D50: g_MarkingController
   0x141DC3000: g_LimitBreakController
   0x141DC3010: g_TitleController
@@ -131,7 +129,6 @@ classes:
   Client::UI::Agent::AgentMap::MapMarkerStructSearch:
   Client::UI::Atk2DMap:
   Client::UI::UIModuleInterface:
-  Common::Configuration::ConfigBase::ChangeEventInterface:
   Component::Excel::ExcelLanguageEvent:
   Component::GUI::AtkComponentWindowGrab:
   Component::GUI::AtkDragDropInterface:
@@ -146,6 +143,7 @@ classes:
   Component::Text::TextModule:
   Component::Text::TextModuleInterface:
   SQEX::CDev::Engine::Sd::SdMemoryAllocator:
+  SQEX::CDev::Engine::Sd::Driver::BankController:
   Client::System::Scheduler::Base::LinkList:
   
   # Known classes - no vfunc/vtables
@@ -1048,6 +1046,8 @@ classes:
     vtbl: 0x1416AEAE8
     funcs:
       0x1405FAD80: ctor
+  Common::Configuration::ConfigBase::ChangeEventInterface:
+    vtbl: 0x141659B20
   Client::UI::Misc::ConfigModule_Common::Configuration::ConfigBase::ChangeEventInterface:
     inherits_from: Common::Configuration::ConfigBase::ChangeEventInterface
     vtbl: 0x1416AEAF8
@@ -1744,3 +1744,12 @@ classes:
   SQEX::CDev::Engine::Sd::Driver::SoundDriver:
     inherits_from: SQEX::CDev::Engine::Sd::Driver::ISoundDriver
     vtbl: 0x141997FF0
+  SQEX::CDev::Engine::Sd::Driver::ToolBankController:
+    inherits_from: SQEX::CDev::Engine::Sd::Driver::BankController
+    vtbl: 0x141998258
+  SQEX::CDev::Engine::Sd::Whiz::IWhizManager:
+    inherits_from: SQEX::CDev::Engine::Sd::SdMemoryAllocator
+    vtbl: 0x1419982C0
+  SQEX::CDev::Engine::Sd::Whiz::WhizManager:
+    inherits_from: SQEX::CDev::Engine::Sd::Whiz::IWhizManager
+    vtbl: 0x141998310
