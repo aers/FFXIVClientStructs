@@ -116,8 +116,8 @@ classes:
   Client::Game::Control::TargetSystem::ListFeeder:
   Client::Game::InstanceContent::ContentSheetWaiterInterface:
   Client::Game::Object::IGameObjectEventListener:
-  Client::Graphics::Render::Camera:
   Client::Graphics::Render::RenderObject:
+    inherits_from: Client::Graphics::ReferencedClassBase
   Client::Graphics::RenderObjectList:
   Client::Graphics::Singleton:
   Client::Graphics::Vfx::VfxDataListenner:
@@ -418,13 +418,28 @@ classes:
     vtbl: 0x1416856C8
     funcs:
       0x14031FBA0: ctor
+  Client::Graphics::Render::Camera:
+    inherits_from: Client::Graphics::ReferencedClassBase
+    vtbl: 0x1416856D0
   Client::Graphics::Render::ShadowCamera:
     inherits_from: Client::Graphics::Render::Camera
     vtbl: 0x141685708
+  Client::Graphics::Render::UnknownCamera1:
+    inherits_from: Client::Graphics::Render::Camera
+    vtbl: 0x141685740
+  Client::Graphics::Render::UnknownCamera2:
+    inherits_from: Client::Graphics::Render::Camera
+    vtbl: 0x141685780
+  Client::Graphics::Render::UnknownCamera3:
+    inherits_from: Client::Graphics::Render::Camera
+    vtbl: 0x1416857C0
+  Client::Graphics::Render::UnknownCamera4:
+    inherits_from: Client::Graphics::Render::Camera
+    vtbl: 0x141685808
   Client::Graphics::Render::View:
     vtbl: 0x141685850
   Client::Graphics::Render::PostBoneDeformerBase:
-    inherits_from: Client::Graphics::RenderObjectList
+    inherits_from: Client::System::Framework::Task
     vtbl: 0x1416858D8
   Client::Graphics::Render::OffscreenRenderingManager:
     vtbl: 0x141685938
@@ -436,7 +451,7 @@ classes:
     funcs:
       0x140329580: ctor
   Client::Graphics::Render::Model:
-    inherits_from: Client::Graphics::RenderObjectList
+    inherits_from: Client::Graphics::Render::RenderObject
     vtbl: 0x1416859D0
     funcs:
       0x14032B4F0: ctor
@@ -785,7 +800,7 @@ classes:
       0x1404D3A80: ULDAddonData_SetupFromULDResourceHandle
       0x1404D5EA0: ULDAddonData_ReadTPHD
       0x1404D60B0: ULDAddonData_ReadAHSDAndLoadTextures
-      0x1404DE7A0: GetNodeFromULDNodeList
+      0x1404DE7A0: ULDAddonData_GetNodeByIndex
   Component::GUI::AtkComponentBase:
     inherits_from: Component::GUI::AtkEventListener
     vtbl: 0x14169B188
@@ -1288,7 +1303,7 @@ classes:
     inherits_from: Component::GUI::AtkUnitBase
     vtbl: 0x141799818
   Client::UI::AddonContextMenuTitle:
-    inherits_from: Component::GUI::AtkUnitBase
+    inherits_from: Client::UI::AddonContextMenu
     vtbl: 0x141799A40
   Client::UI::AddonSelectString::EventThing:
     inherits_from: Client::UI::SelectEventThing
@@ -1497,92 +1512,104 @@ classes:
   Client::UI::AddonMYCItemBox:
     inherits_from: Component::GUI::AtkUnitBase
     vtbl: 0x1417F9B00
-  Client::UI::Addon_TargetInfo:
+  Client::UI::AddonTargetInfoBase: # Name is a guess
     inherits_from: Component::GUI::AtkUnitBase
+    vtbl: 0x1417FCF40
+  Client::UI::AddonTargetInfo: # _TargetInfo
+    inherits_from: Client::UI::AddonTargetInfoBase
     vtbl: 0x1417FD160
-  Client::UI::Addon_TargetInfoMainTarget:
-    inherits_from: Component::GUI::AtkUnitBase
+  Client::UI::AddonTargetInfoUnknown1:
+    inherits_from: Client::UI::AddonTargetInfoBase
+    vtbl: 0x1417FD380
+  Client::UI::AddonTargetInfoUnknown2:
+    inherits_from: Client::UI::AddonTargetInfoBase
+    vtbl: 0x1417FD5A0
+  Client::UI::AddonTargetInfoMainTarget:
+    inherits_from: Client::UI::AddonTargetInfoBase
     vtbl: 0x1417FD7C0
   Client::UI::AddonTargetCursor:
     inherits_from: Component::GUI::AtkUnitBase
     vtbl: 0x1417FD9E0
     funcs:
       0x140FC1230: ctor
-  Client::UI::Addon_BattleTalk:
+  Client::UI::AddonBattleTalk: # _BattleTalk
     inherits_from: Component::GUI::AtkUnitBase
     vtbl: 0x1417FDE20
-  Client::UI::Addon_ScreenInfoFrontBack: # Both _ScreenInfoFront and _ScreenInfoBack
+  Client::UI::AddonScreenInfoFrontBack: # Both _ScreenInfoFront and _ScreenInfoBack
     inherits_from: Component::GUI::AtkUnitBase
     vtbl: 0x1417FE040
-  Client::UI::Addon_MainCommand:
+  Client::UI::AddonMainCommand: # _MainCommand
     inherits_from: Component::GUI::AtkUnitBase
     vtbl: 0x141806458
-  Client::UI::Addon_ParameterWidget:
+  Client::UI::AddonParameterWidget: # _ParameterWidget
     inherits_from: Component::GUI::AtkUnitBase
     vtbl: 0x141806698
-  Client::UI::Addon_Exp:
+  Client::UI::AddonExp: # _Exp
     inherits_from: Component::GUI::AtkUnitBase
     vtbl: 0x1418068B8
-  Client::UI::Addon_EnemyList:
+  Client::UI::AddonEnemyList: # _EnemyList
     inherits_from: Component::GUI::AtkUnitBase
     vtbl: 0x141806AD8
-  Client::UI::Addon_BagWidget:
+  Client::UI::AddonBagWidget: # _BagWidget
     inherits_from: Component::GUI::AtkUnitBase
     vtbl: 0x1418073F0
-  Client::UI::Addon_Money:
+  Client::UI::AddonMoney: # _Money
     inherits_from: Component::GUI::AtkUnitBase
     vtbl: 0x141807610
-  Client::UI::Addon_Notification:
+  Client::UI::AddonNotification: # _Notification
     inherits_from: Component::GUI::AtkUnitBase
     vtbl: 0x141807830
-  Client::UI::Addon_DTR:
+  Client::UI::AddonDTR: # _DTR
     inherits_from: Component::GUI::AtkUnitBase
     vtbl: 0x141807DC0
-  Client::UI::Addon_CastBar:
+  Client::UI::AddonCastBar: # _CastBar
     inherits_from: Component::GUI::AtkUnitBase
     vtbl: 0x141807FE0
-  Client::UI::Addon_NaviMap:
+  Client::UI::AddonNaviMap: # _NaviMap
     inherits_from: Component::GUI::AtkUnitBase
     vtbl: 0x141808230
-  Client::UI::Addon_ActionBarXX: # _ActionBar01 through _ActionBar09, and _ActionBarEx
+  Client::UI::AddonActionBarBase:  # Name is a guess
     inherits_from: Component::GUI::AtkUnitBase
+    vtbl: 0x141808458
+  Client::UI::AddonActionBarX: # _ActionBar01 through _ActionBar09, and _ActionBarEx
+    inherits_from: Client::UI::AddonActionBarBase
     vtbl: 0x141808700
-  Client::UI::Addon_ActionBar:
-    inherits_from: Component::GUI::AtkUnitBase
+  Client::UI::AddonActionBar: # _ActionBar
+    inherits_from: Client::UI::AddonActionBarX
     vtbl: 0x141808A10
-  Client::UI::AddonPartyList:
+  Client::UI::AddonPartyList: # _PartyList
     inherits_from: Component::GUI::AtkUnitBase
     vtbl: 0x141808FC8
     funcs:
       0x140FEB930: ResizeForPartySize
-  Client::UI::Addon_PartyList:
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x141808FC8
-  Client::UI::Addon_AllianceListX: # _AllianceList1 and _AllianceList2
+  Client::UI::AddonAllianceListX: # _AllianceList1 and _AllianceList2
     inherits_from: Component::GUI::AtkUnitBase
     vtbl: 0x1418091F0
-  Client::UI::Addon_ToDoList:
+  Client::UI::AddonToDoList: # _ToDoList
     inherits_from: Component::GUI::AtkUnitBase
     vtbl: 0x141809B78
-  Client::UI::Addon_ActionCross:
-    inherits_from: Component::GUI::AtkUnitBase
+  Client::UI::AddonActionCross: # _ActionCross
+    inherits_from: Client::UI::AddonActionBarBase
     vtbl: 0x14180A3B8
-  Client::UI::Addon_ActionContents:
+  Client::UI::AddonActionContents: # _ActionContents
     inherits_from: Component::GUI::AtkUnitBase
     vtbl: 0x14180A668
-  Client::UI::Addon_ActionDoubleCrossL:
-    inherits_from: Component::GUI::AtkUnitBase
+  Client::UI::AddonActionDoubleCrossBase: # Name is a guess
+    inherits_from: Client::UI::AddonActionBarX
+    vtbl: 0x14180A898
+  Client::UI::AddonActionDoubleCrossL: # _ActionDoubleCrossL
+    inherits_from: Client::UI::AddonActionDoubleCrossBase
     vtbl: 0x14180AB80
-  Client::UI::Addon_ActionDoubleCrossR:
-    inherits_from: Component::GUI::AtkUnitBase
+  Client::UI::AddonActionDoubleCrossR: # _ActionDoubleCrossR
+    inherits_from: Client::UI::AddonActionDoubleCrossBase
     vtbl: 0x14180AE78
-  Client::UI::Addon_FocusTargetInfo:
+  Client::UI::AddonFocusTargetInfo: # _FocusTargetInfo
     inherits_from: Component::GUI::AtkUnitBase
     vtbl: 0x14180B160
-  Client::UI::Addon_LimitBreak:
+  Client::UI::AddonLimitBreak: # _LimitBreak
     inherits_from: Component::GUI::AtkUnitBase
     vtbl: 0x14180B380
-  Client::UI::Addon_MainCross:
+  Client::UI::AddonMainCross: # _MainCross
     inherits_from: Component::GUI::AtkUnitBase
     vtbl: 0x14180B5D8
   Client::UI::AddonHudLayoutWindow:
