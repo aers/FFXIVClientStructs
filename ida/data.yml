@@ -395,6 +395,9 @@ classes:
     vtbl: 0x14167E120
     funcs:
       0x1402F97F0: ctor
+  Client::Graphics::Kernel::SwapChain:
+    inherits_from: Client::Graphics::Kernel::Resource
+    vtbl: 0x14167E160
   Client::Graphics::Kernel::Buffer:
     inherits_from: Client::Graphics::Kernel::Resource
     vtbl: 0x14167E1A0
