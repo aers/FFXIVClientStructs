@@ -67,6 +67,7 @@ functions:
   0x14005A300: FFXIVString_SetString
   0x1400604B0: MemoryManager_Alloc
   0x140064F10: IsMacClient
+  0x1400A3F00: Client::UI::PlaySoundEffect # this is a static function in the UI namespace, arg1 is the SE
   0x14017FDF0: Client::Graphics::Environment::EnvManager_ctor
   0x140194C80: Client::System::Threading::Thread_CreateThread
   0x140194D80: j_SleepEx
@@ -1028,6 +1029,9 @@ classes:
       36: GetUI3DModule
       54: GetUIInputModule
       56: GetLogFilterConfig
+      146: ShowText
+      148: ShowWideText
+      150: ShowErrorText 
     funcs:
       0x1405C46B0: ctor
   Client::System::Crypt::SimpleString:

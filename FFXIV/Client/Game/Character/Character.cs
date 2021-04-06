@@ -16,6 +16,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character
         [FieldOffset(0x0)] public GameObject GameObject;
         [FieldOffset(0x1708)] public fixed byte EquipSlotData[4 * 10];
         [FieldOffset(0x17B8)] public fixed byte CustomizeData[0x1A];
+        [FieldOffset(0x1858)] public Companion* CompanionObject; // minion
         [FieldOffset(0x1930)] public uint OwnerID;
     }
 }
