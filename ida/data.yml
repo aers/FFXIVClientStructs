@@ -974,7 +974,7 @@ classes:
     vtbl: 0x14169CA08
     funcs:
       0x140533230: ctor
-  Component::GUI::AtkComponentUnknownButton:
+  Component::GUI::AtkComponentHoldButton:
     inherits_from: Component::GUI::AtkComponentButton
     vtbl: 0x14169CAA8
     funcs:
