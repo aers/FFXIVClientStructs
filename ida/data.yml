@@ -69,7 +69,6 @@ functions:
   0x140064F10: IsMacClient
   0x1400A3F00: Client::UI::PlaySoundEffect # this is a static function in the UI namespace, arg1 is the SE
   0x14017FDF0: Client::Graphics::Environment::EnvManager_ctor
-  0x140194C80: Client::System::Threading::Thread_CreateThread
   0x140194D80: j_SleepEx
   0x1401B0300: ResourceManager_GetResourceAsync # no vtbl on this class wouldn't be surprised if it was Client::System::Resource::ResourceManager or something though
   0x1401B0520: ResourceManager_GetResourceSync
@@ -293,6 +292,13 @@ classes:
   Client::Graphics::Environment::EnvManager:
     inherits_from: Client::Graphics::Singleton
     vtbl: 0x14166BDD8
+  Client::System::Threading::Thread:
+    inherits_from: Client::System::Common::NonCopyable
+    vtbl: 0x14166C1F0
+    vfuncs:
+      5: Run
+    funcs:
+      0x140194C80: CreateThread
   Client::System::Resource::Handle::ResourceHandle:
     inherits_from: Client::System::Common::NonCopyable
     vtbl: 0x14166DA88
@@ -411,6 +417,12 @@ classes:
     vtbl: 0x14167E430
     funcs:
       0x140300E60: ctor
+      0x140301000: Initialize
+  Client::Graphics::Kernel::Device::ImmediateContext:
+    vtbl: 0x14167E438
+  Client::Graphics::Kernel::Device::RenderThread:
+    inherits_from: Client::System::Threading::Thread
+    vtbl: 0x14167E488
   Client::Graphics::Kernel::ShaderSceneKey:
     vtbl: 0x1416856A8
   Client::Graphics::Kernel::ShaderSubViewKey:
@@ -649,7 +661,7 @@ classes:
       0x14045E120: nullsub_1
       0x14045E150: LoadDataFiles
   Client::System::Task::SpursJobEntityWorkerThread:
-    inherits_from: Client::Graphics::Singleton
+    inherits_from: Client::System::Threading::Thread
     vtbl: 0x141697950
   Common::Lua::LuaState:
     vtbl: 0x141697D58

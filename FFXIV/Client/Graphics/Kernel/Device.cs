@@ -9,6 +9,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Kernel
     [StructLayout(LayoutKind.Explicit, Size = 0x210)]
     public unsafe struct Device
     {
+        [FieldOffset(0x8)] public void* ContextArray; // Client::Graphics::Kernel::Context array
+        [FieldOffset(0x10)] public void* ImmediateContext; // Client::Graphics::Kernel::Device::ImmediateContext
+        [FieldOffset(0x18)] public void* RenderThread; // Client::Graphics::Kernel::RenderThread
         [FieldOffset(0x80)] public SwapChain* SwapChain;
         [FieldOffset(0x94)] public int D3DFeatureLevel; // D3D_FEATURE_LEVEL enum
         [FieldOffset(0x98)] public void* DXGIFactory; // IDXGIFactory1
