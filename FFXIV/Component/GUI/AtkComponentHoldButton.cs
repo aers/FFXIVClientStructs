@@ -16,6 +16,6 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
     [StructLayout(LayoutKind.Explicit, Size = 0x120)]
     public unsafe struct AtkComponentHoldButton
     {
-        [FieldOffset(0x0)] public AtkComponentBase AtkComponentBase;
+        [FieldOffset(0x0)] public AtkComponentButton AtkComponentButton;
     }
 }
