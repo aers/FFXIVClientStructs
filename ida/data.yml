@@ -40,6 +40,7 @@ globals:
   0x141D8E500: g_AtkStage
   0x141D8EB68: g_LayoutWorld
   0x141DAD640: g_InventoryManager
+  0x141DB1CC0: g_LastTextCommand
   0x141DB1D30: g_BattleCharaStore # this is a struct/object containing a list of all battlecharas (0x100) and the memory ptrs below
   0x141DB2050: g_BattleCharaMemory
   0x141DB2058: g_CompanionMemory
@@ -1241,6 +1242,11 @@ classes:
     vtbl: 0x1416CD4C8
     funcs:
       0x140887B50: ctor
+  Client::UI::Agent::AgentRecipeNote:
+    inherits_from: Client::UI::Agent::AgentInterface
+    vtbl: 0x1416CD7C0
+    funcs:
+      0x14089DB80: ctor
   Client::UI::Agent::AgentTeleport:
     inherits_from: Client::UI::Agent::AgentInterface
     vtbl: 0x1416CDC20
@@ -1426,6 +1432,9 @@ classes:
     vtbl: 0x1417D4DF8
     funcs:
       0x140E7C160: ctor
+  Client::UI::AddonChatLogPanel:
+    inherits_from: Component::GUI::AtkUnitBase
+    vtbl: 0x1417D5AB8
   Client::UI::AddonChatLog:
     inherits_from: Component::GUI::AtkUnitBase
     vtbl: 0x1417D5CD8
