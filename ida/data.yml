@@ -277,7 +277,7 @@ classes:
       0x1400B06F0: ctor
       0x1400D37C0: UpdateTask1
       0x1400D6750: IsUIVisible
-      0x1400B2500: ShowMessageBox
+      0x1400B2500: OpenAddon
   Client::Graphics::Kernel::Notifier:
     vtbl: 0x141661D28
   Client::System::Crypt::Crc32:
