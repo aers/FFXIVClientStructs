@@ -25,13 +25,13 @@ globals:
   0x141D6A770: g_CrossRealmGroupManager # pointer
   0x141D6A7E0: g_CullingManager
   0x141D6A800: g_TaskManager
-  0x141D6F6F0: g_EnvRenderController # Client::Graphics::Environment::EnvRenderController not a ptr
+  0x141D6F6F0: g_EnvRenderController # Client::Graphics::Environment::EnvRenderController not a pointer
   0x141D6FA90: g_ResourceManager
   0x141D81AA0: g_OcclusionCullingManager
   0x141D81AD8: g_OffscreenRenderingManager
   0x141D81AE0: g_RenderModelLinkedListStart
   0x141D81AE8: g_RenderModelLinkedListEnd
-  0x141D82930: g_JobSystem_ApricotEngineCore # not a ptr
+  0x141D82930: g_JobSystem_ApricotEngineCore # not a pointer
   0x141D85398: g_InputDeviceManager
   0x141D85630: g_GameMain
   0x141D8A070: g_ControlSystem_CameraManager # control system, object actually contains target system global below
@@ -46,6 +46,7 @@ globals:
   0x141DB2058: g_CompanionMemory
   0x141DB2080: g_ActorList
   0x141DB2DC0: g_ActorListEnd
+  0x141DB4D50: g_Client::Game::UI::Hotbar # not a pointer
   0x141DB6100: g_Client::Game::UI::Telepo
   0x141DB6ED8: g_TrustGroupManager # pointer
   0x141DBEBC8: g_ActiveDirector
@@ -1195,6 +1196,12 @@ classes:
     vtbl: 0x1416C9470
     vfuncs:
       0: dtor
+  Client::Game::UI::Hotbar:
+    vtbl: 0x1416C9498
+    vfuncs:
+      0: dtor
+    funcs:
+      0x1407D54E0: IsActionUnlocked
   Client::Game::UI::MarkingController:
     vtbl: 0x1416C94F0
     vfuncs:
