@@ -59,13 +59,6 @@ globals:
   0x141DE2D80: g_ClientObjectManager
 
 functions:
-  # ffxivstring is just their implementation of std::string presumably there are more ctors etc
-  0x140059670: FFXIVString_ctor # empty string ctor
-  0x1400596B0: FFXIVString_ctor_copy # copy constructor
-  0x140059730: FFXIVString_ctor_FromCStr # from null-terminated string
-  0x1400597C0: FFXIVString_ctor_FromSequence # (FFXIVString, char * str, size_t size)
-  0x14005A280: FFXIVString_dtor
-  0x14005A300: FFXIVString_SetString
   0x1400604B0: MemoryManager_Alloc
   0x140064F10: IsMacClient
   0x1400A3F00: Client::UI::PlaySoundEffect # this is a static function in the UI namespace, arg1 is the SE
@@ -75,7 +68,6 @@ functions:
   0x1401B0520: ResourceManager_GetResourceSync
   0x1401B88E0: Client::System::Resource::Handle::ModelResourceHandle_GetMaterialFileNameBySlot
   0x1402A5130: CountdownPointer
-  0x140301B80: Client::Graphics::Kernel::Device::CreateTexture2D
   0x1403635A0: Client::Graphics::Render::RenderManager_ctor
   0x140364780: Client::Graphics::Render::RenderManager_CreateModel
   0x140440CF0: PrepareColorSet
@@ -88,12 +80,7 @@ functions:
   0x1404A9250: Client::System::Input::InputData_IsInputIDKeyPress
   0x1404A9360: Client::System::Input::InputData_IsInputIDClicked
   0x1404A9C60: Client::System::Input::InputData_IsMouseCombinationDragged
-  0x1404AB2E0: Component::GUI::AtkValue_dtor
-  0x1404AB920: Component::GUI::AtkValue_ChangeType
-  0x1404B1160: Component::GUI::AtkEvent_SetEventIsHandled
   0x1404B2490: Component::GUI::AtkCursor_SetCursorType # the cursor's icon I believe
-  0x1404D6590: CreateAtkNode
-  0x1404D79A0: CreateAtkComponent
   0x1404DB190: GetScaleListEntryFromScale
   0x1404E98E0: GetScaleForListOption
   0x140536250: Component::GUI::TextModuleInterface::GetTextLabelByID
@@ -174,6 +161,30 @@ classes:
   InventoryContainer:
     funcs:
       0x140697D90: GetInventorySlot # (this, slotIndex)
+  Client::System::String::Utf8String:
+    funcs:
+      0x140059670: ctor # empty string ctor
+      0x1400596B0: ctor_copy # copy constructor
+      0x140059730: ctor_FromCStr # from null-terminated string
+      0x1400597C0: ctor_FromSequence # (FFXIVString, char * str, size_t size)
+      0x14005A280: dtor
+      0x14005A300: SetString
+  Component::GUI::AtkValue:
+    funcs:
+      0x1404AB2E0: dtor
+      0x1404AB920: ChangeType
+  Component::GUI::AtkEvent:
+    funcs:
+      0x1404B1160: SetEventIsHandled
+  Component::GUI::AtkUldManager:
+    funcs:
+      0x1404D3A80: SetupFromULDResourceHandle
+      0x1404D5EA0: ReadTPHD
+      0x1404D60B0: ReadAHSDAndLoadTextures
+      0x1404D6590: CreateAtkNode
+      0x1404D79A0: CreateAtkComponent
+      0x1404DE7A0: GetNodeByIndex
+#
   Client::Game::ActionManager:
     inherits_from: Client::Graphics::Vfx::VfxDataListenner
     # vtbl: 0x1416CA7C0
@@ -275,9 +286,9 @@ classes:
     vtbl: 0x141659878
     funcs:
       0x1400B06F0: ctor
-      0x1400D37C0: UpdateTask1
-      0x1400D6750: IsUIVisible
       0x1400B2500: OpenAddon
+      0x1400D37C0: UpdateNameplates_Task1
+      0x1400D6750: IsUIVisible
   Client::Graphics::Kernel::Notifier:
     vtbl: 0x141661D28
   Client::System::Crypt::Crc32:
@@ -419,6 +430,7 @@ classes:
     funcs:
       0x140300E60: ctor
       0x140301000: Initialize
+      0x140301B80: CreateTexture2D
   Client::Graphics::Kernel::Device::ImmediateContext:
     vtbl: 0x14167E438
   Client::Graphics::Kernel::Device::RenderThread:
@@ -812,10 +824,6 @@ classes:
       0x1404DB2B0: SetScale
       0x1404DB620: CalculateBounds
       0x1404DD8D0: Draw
-      0x1404D3A80: ULDAddonData_SetupFromULDResourceHandle
-      0x1404D5EA0: ULDAddonData_ReadTPHD
-      0x1404D60B0: ULDAddonData_ReadAHSDAndLoadTextures
-      0x1404DE7A0: ULDAddonData_GetNodeByIndex
   Component::GUI::AtkComponentBase:
     inherits_from: Component::GUI::AtkEventListener
     vtbl: 0x14169B188
@@ -854,6 +862,7 @@ classes:
     inherits_from: Component::GUI::AtkModuleInterface
     vtbl: 0x14169B850
     vfuncs:
+      17: SetHandlerFunction
       39: SetUIVisibility
     funcs:
       0x14050B540: ctor
