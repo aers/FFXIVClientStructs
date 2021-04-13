@@ -16,7 +16,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
     {
         [FieldOffset(0x0)] public AtkComponentBase AtkComponentBase;
         [FieldOffset(0x0C0)] public long IconId;
-        [FieldOffset(0x0C8)] public ULDTexture* Texture;
+        [FieldOffset(0x0C8)] public AtkUldAsset* Texture;
         [FieldOffset(0x0D0)] public AtkResNode* IconAdditionsContainer;
         [FieldOffset(0x0D8)] public AtkResNode* ComboBorder;
         [FieldOffset(0x0E0)] public AtkResNode* Frame;
