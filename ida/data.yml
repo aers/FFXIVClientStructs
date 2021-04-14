@@ -278,7 +278,7 @@ classes:
       0x1404E9CC0: ctor
   Client::UI::RaptureAtkUnitManager:
     inherits_from: Component::GUI::AtkUnitManager
-#fail     vtbl: 0x141659620
+    vtbl: 0x14167F8B0
     funcs:
       0x1400AB1F0: ctor
       0x1404EB770: GetAddonByName # dalamud GetUIObjByName
@@ -293,7 +293,7 @@ classes:
   Client::Graphics::Kernel::Notifier:
     vtbl: 0x141687FF8
   Client::System::Crypt::Crc32:
-#fail     vtbl: 0x1416657C0
+    vtbl: 0x14168BAA0
   Client::Graphics::ReferencedClassBase:
     vtbl: 0x141691FF0
   Client::Graphics::Environment::EnvSoundState:
@@ -379,9 +379,9 @@ classes:
       0x1401EFC10: ctor
   Client::UI::Agent::AgentCharaMake:
     inherits_from: Client::UI::Agent::AgentInterface
-#fail     vtbl: 0x141675998
+    vtbl: 0x14169BC80
   Client::UI::Agent::AgentModule:
-#fail     vtbl: 0x141675D70
+    vtbl: 0x14169C058
     funcs:
       0x1401F8030: ctor
       0x1401FD2C0: GetAgentByInternalID
@@ -393,16 +393,16 @@ classes:
       0x140213630: ctor
   Client::UI::Agent::AgentCursor:
     inherits_from: Client::UI::Agent::AgentInterface
-#fail     vtbl: 0x141676AE0
+    vtbl: 0x14169CDF0
   Client::UI::Agent::AgentCursorLocation:
     inherits_from: Client::UI::Agent::AgentInterface
-#fail     vtbl: 0x141676B50
+    vtbl: 0x14169CE60
   Client::UI::Agent::AgentLetterEdit:
     inherits_from: Client::UI::Agent::AgentInterface
-#fail     vtbl: 0x141677AE8
+    vtbl: 0x14169DDF8
   Client::UI::Agent::AgentFreeCompanyChest:
     inherits_from: Client::UI::Agent::AgentInterface
-#fail     vtbl: 0x141677EB8
+    vtbl: 0x14169E1C8
   Client::Graphics::Kernel::Resource:
     inherits_from: Client::Graphics::DelayedReleaseClassBase
     vtbl: 0x1416A43D8
@@ -438,62 +438,62 @@ classes:
     inherits_from: Client::System::Threading::Thread
     vtbl: 0x1416A4790
   Client::Graphics::Kernel::ShaderSceneKey:
-#fail     vtbl: 0x1416856A8
+    vtbl: 0x1416AB9C8
   Client::Graphics::Kernel::ShaderSubViewKey:
-#fail     vtbl: 0x1416856B0
+    vtbl: 0x1416AB9D0
   Client::Graphics::Render::GraphicsConfig:
     inherits_from: Client::Graphics::Singleton
-#fail     vtbl: 0x1416856C8
+    vtbl: 0x1416AB9E8
     funcs:
       0x140323180: ctor
   Client::Graphics::Render::Camera:
     inherits_from: Client::Graphics::ReferencedClassBase
-#fail     vtbl: 0x1416856D0
+    vtbl: 0x1416AB9F0
   Client::Graphics::Render::ShadowCamera:
     inherits_from: Client::Graphics::Render::Camera
-#fail     vtbl: 0x141685708
+    vtbl: 0x1416ABA28
   Client::Graphics::Render::UnknownCamera1:
     inherits_from: Client::Graphics::Render::Camera
-#fail     vtbl: 0x141685740
+    vtbl: 0x1416ABA60
   Client::Graphics::Render::UnknownCamera2:
     inherits_from: Client::Graphics::Render::Camera
-#fail     vtbl: 0x141685780
+    vtbl: 0x1416ABAA0
   Client::Graphics::Render::UnknownCamera3:
     inherits_from: Client::Graphics::Render::Camera
-#fail     vtbl: 0x1416857C0
+    vtbl: 0x1416ABAE0
   Client::Graphics::Render::UnknownCamera4:
     inherits_from: Client::Graphics::Render::Camera
-#fail     vtbl: 0x141685808
+    vtbl: 0x141ABB28
   Client::Graphics::Render::View:
-#fail     vtbl: 0x141685850
+    vtbl: 0x1416ABB70
   Client::Graphics::Render::PostBoneDeformerBase:
     inherits_from: Client::System::Framework::Task
-#fail     vtbl: 0x1416858D8
+    vtbl: 0x1416ABBF8
   Client::Graphics::Render::OffscreenRenderingManager:
-#fail     vtbl: 0x141685938
+    vtbl: 0x1416ABC58
     funcs:
       0x14032B7A0: ctor
       0x14032B890: Initialize
   Client::Graphics::Render::AmbientLight:
-#fail     vtbl: 0x1416859C0
+    vtbl: 0x1416ABCE0
     funcs:
       0x14032CB60: ctor
   Client::Graphics::Render::Model:
     inherits_from: Client::Graphics::Render::RenderObject
-#fail     vtbl: 0x1416859D0
+    vtbl: 0x1416ABCF0
     funcs:
       0x14032EAD0: ctor
       0x14032EC20: SetupFromModelResourceHandle
   Client::Graphics::Render::BaseRenderer:
-#fail     vtbl: 0x141685A50
+    vtbl: 0x1416ABD70
   Client::Graphics::Render::ModelRenderer_Client::Graphics::JobSystem_Client::Graphics::Render::ModelRenderer::RenderJob:
-#fail     vtbl: 0x141685A88
+    vtbl: 0x1416ABDA8
   Client::Graphics::Render::ModelRenderer:
     inherits_from: Client::Graphics::Render::BaseRenderer
-#fail     vtbl: 0x141685A90
+    vtbl: 0x1416ABDB0
   Client::Graphics::Render::GeometryInstancingRenderer:
     inherits_from: Client::Graphics::Render::BaseRenderer
-#fail     vtbl: 0x141685AB8
+    vtbl: 0x1416ABDD8
   Client::Graphics::Render::BGInstancingRenderer_Client::Graphics::JobSystem_CClient::Graphics::Render::tagInstancingContainerRenderInfo:
     vtbl: 0x1416ABE80
   Client::Graphics::Render::BGInstancingRenderer:
@@ -575,7 +575,7 @@ classes:
     inherits_from: Client::Graphics::Kernel::Notifier
     vtbl: 0x1416AE938
   Client::Graphics::JobSystem(Apricot::Engine::Core_Apricot::Engine::Core::CoreJob_1):
-#fail     vtbl: 0x14168C238
+    vtbl: 0x1416B25A0
     funcs:
       0x1403E0C50: ctor
       0x1403E0E80: GetSingleton
@@ -720,7 +720,7 @@ classes:
     inherits_from: Component::GUI::AtkEventTarget
     vtbl: 0x1416C0B48
   Component::GUI::AtkTexture:
-#fail     vtbl: 0x14169A448
+    vtbl: 0x1416C0AC8
   Component::GUI::AtkStage:
     inherits_from: Component::GUI::AtkEventTarget
     vtbl: 0x1416C0CA8
