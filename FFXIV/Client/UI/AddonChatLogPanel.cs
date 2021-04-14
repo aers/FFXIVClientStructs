@@ -7,6 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
     //   Component::GUI::AtkUnitBase
     //     Component::GUI::AtkEventListener
     [StructLayout(LayoutKind.Explicit, Size = 0x3D0)]
+    [Addon("ChatLogPanel_0", "ChatLogPanel_1", "ChatLogPanel_2", "ChatLogPanel_3")]
     public unsafe struct AddonChatLogPanel
     {
         [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
