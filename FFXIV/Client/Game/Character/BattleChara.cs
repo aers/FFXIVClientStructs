@@ -10,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character
 
     // size = 0x2B60
     // ctor E8 ? ? ? ? 48 8B F8 EB 02 33 FF 8B 86 ? ? ? ? 
-    [StructLayout(LayoutKind.Explicit, Size = 0x2B60)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x2C00)]
     public unsafe struct BattleChara
     {
         [FieldOffset(0x0)] public Character Character;
