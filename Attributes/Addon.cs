@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace FFXIVClientStructs.FFXIV.Client.UI {
+namespace FFXIVClientStructs.Attributes {
     public class Addon : Attribute {
         
         public IEnumerable<string> AddonIdentifiers { get; }
