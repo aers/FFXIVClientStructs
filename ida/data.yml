@@ -147,7 +147,7 @@ classes:
     funcs:
       0x1407437B0: Update
       0x140743F10: DeleteAllModels
-      0x140744020: DeleteAllObjects # dont ever call this 
+      0x140744020: DeleteAllObjects # IMPORTANT:: DONT EVER CALL THIS FOR REAL OKAY
   Client::Game::Character::CharacterManager:
     funcs:
       0x1407423D0: Initialize
