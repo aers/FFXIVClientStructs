@@ -69,6 +69,7 @@ functions:
   0x1401B2610: ResourceManager_GetResourceSync
   0x1401BA9D0: Client::System::Resource::Handle::ModelResourceHandle_GetMaterialFileNameBySlot
   0x1402A8940: CountdownPointer
+  0x1402EACA0: std::vector_SetSize
   0x140366C80: Client::Graphics::Render::RenderManager_ctor
   0x140367E60: Client::Graphics::Render::RenderManager_CreateModel
   0x140444910: PrepareColorSet
@@ -173,6 +174,17 @@ classes:
   Component::GUI::AtkValue:
     funcs:
       0x1404AF5C0: dtor
+      0x1404AF600: GetBool
+      0x1404AF620: GetInt
+      0x1404AF640: GetUInt # these two could be backwards
+      0x1404AF660: GetFloat
+      0x1404AF680: GetString
+      0x1404AF6A0: GetUnkPtr # could also be string, returns a pointer size 
+      0x1404AF6E0: SetString
+      0x1404AF770: CopyValue # = operator
+      0x1404AF7E0: Equals # == operator
+      0x1404AF960: CreateArray # uses std::vector for array type (9)
+      0x1404AFE10: ReleaseManagedMemory # called by SetString, frees old strings
       0x1404AFC00: ChangeType
   Component::GUI::AtkEvent:
     funcs:
