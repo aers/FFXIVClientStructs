@@ -41,11 +41,12 @@ globals:
   0x141DBC9F8: g_LayoutWorld
   0x141DDB4F0: g_InventoryManager
   0x141DDFA90: g_LastTextCommand
-  0x141DDFB00: g_BattleCharaStore # this is a struct/object containing a list of all battlecharas (0x100) and the memory ptrs below
-  0x141DDFE20: g_BattleCharaMemory
-  0x141DDFE28: g_CompanionMemory
-  0x141DDFE50: g_ActorList
-  0x141DE0B90: g_ActorListEnd
+  0x141DDFB00: g_CharacterManager
+  0x141DDFE20: g_CharacterManager_BattleCharaMemoryPtr
+  0x141DDFE28: g_CharacterManager_CompanionMemoryPtr
+  0x141DDFE40: g_GameObjectManager
+  0x141DDFE50: g_GameObjectManager_ObjectList
+  0x141DE0B90: g_GameObjectManager_ObjectListEnd
   0x141DE2B30: g_Client::Game::UI::Hotbar # not a pointer
   0x141DE3EE8: g_Client::Game::UI::Telepo
   0x141DE4CE0: g_TrustGroupManager # pointer
@@ -87,8 +88,6 @@ functions:
   0x1404EE210: GetScaleForListOption
   0x14053ADA0: Component::GUI::TextModuleInterface::GetTextLabelByID
   0x1406F5D70: ExecuteCommand
-  0x1407423D0: CreateBattleCharaStore
-  0x1407429A0: BattleCharaStore_LookupBattleCharaByObjectID
   0x1408DB5C0: CreateSelectYesno
   0x140A8D690: EventFramework_GetSingleton
   0x140A95E70: EventFramework_ProcessDirectorUpdate
@@ -144,6 +143,16 @@ classes:
   Client::Game::CameraManager:
     funcs:
       0x1411328C0: PreUpdate
+  Client::Game::Object::GameObjectManager:
+    funcs:
+      0x1407437B0: Update
+      0x140743F10: DeleteAllModels
+      0x140744020: DeleteAllObjects # dont ever call this 
+  Client::Game::Character::CharacterManager:
+    funcs:
+      0x1407423D0: Initialize
+      0x1407428B0: DeleteAllCharacters
+      0x1407429A0: LookupBattleCharaByObjectID
   GroupManager:
     funcs:
       0x140BC77E0: Create
