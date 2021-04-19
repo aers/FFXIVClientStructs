@@ -772,10 +772,18 @@ classes:
       0x1404D1D40: GetScaleX
       0x1404D1D60: GetScaleY
       0x1404D1D80: SetScale
+      0x1404D1EA0: SetSize0
       0x1404D1EE0: GetYFloat
       0x1404D1F20: GetYShort
       0x1404D2110: GetHeight
+      0x1404D2350: SetWidth
       0x1404D2370: SetHeight
+      0x1404D23C0: GetRotation
+      0x1404D23E0: SetRotation
+      0x1404D2450: GetRotationDegrees
+      0x1404D2480: SetRotationDegrees
+      0x1404D2500: GetColor
+      0x1404D2520: SetColor
       0x1404D2560: SetAddRGB
       0x1404D25B0: SetMultiplyRGB
       0x1404D2620: SetPriority
