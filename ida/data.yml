@@ -48,7 +48,7 @@ globals:
   0x141DDFE50: g_GameObjectManager_ObjectList
   0x141DE0B90: g_GameObjectManager_ObjectListEnd
   0x141DE2B30: g_Client::Game::UI::Hotbar # not a pointer
-  0x141DE3EE8: g_Client::Game::UI::Telepo
+  0x141DE3EE8: g_Client::Game::UI::Telepo # not a pointer
   0x141DE4CE0: g_TrustGroupManager # pointer
   0x141DEC9C8: g_ActiveDirector
   0x141DF0C30: g_MarkingController
@@ -1223,6 +1223,7 @@ classes:
       0: dtor
     funcs:
       0x1407DFD00: IsActionUnlocked
+      0x1407F2740: ctor # this is probably just the ctor for a container
   Client::Game::UI::MarkingController:
     vtbl: 0x1416EFDF8
     vfuncs:
@@ -1244,6 +1245,7 @@ classes:
       0: AcceptTeleportOffer
       1: dtor
     funcs:
+      0x1407BAD60: ctor
       0x1407BB5C0: Teleport
       0x1407BC760: TeleportWithTicket
       0x1407BAF20: UpdatePlayerAetheryteList
