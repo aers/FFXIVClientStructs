@@ -1223,7 +1223,7 @@ classes:
       0: dtor
     funcs:
       0x1407DFD00: IsActionUnlocked
-      0x1407F2740: ctor # this is probably just the ctor for a container
+      # 0x1407F2740: ctor # this is probably just the ctor for a container
   Client::Game::UI::MarkingController:
     vtbl: 0x1416EFDF8
     vfuncs:
