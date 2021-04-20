@@ -1,4 +1,5 @@
-﻿using System.Runtime.InteropServices;
+﻿using System;
+using System.Runtime.InteropServices;
 
 namespace FFXIVClientStructs.STD
 {
@@ -23,6 +24,14 @@ namespace FFXIVClientStructs.STD
                 return 0;
 
             return ((ulong)End - (ulong)First) / (ulong)sizeof(T);
+        }
+
+        public T Get(ulong index) 
+        {
+            if (index >= Size())
+                throw new IndexOutOfRangeException($"Index out of Range: {index}");
+
+            return First[index];
         }
     }
 

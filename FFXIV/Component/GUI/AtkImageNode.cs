@@ -23,7 +23,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
     public unsafe struct AtkImageNode
     {
         [FieldOffset(0x0)] public AtkResNode AtkResNode;
-        [FieldOffset(0xA8)] public ULDPartsList* PartsList;
+        [FieldOffset(0xA8)] public AtkUldPartsList* PartsList;
         [FieldOffset(0xB0)] public ushort PartId;
         [FieldOffset(0xB2)] public byte WrapMode;
         [FieldOffset(0xB3)] public byte Flags; // actually a bitfield

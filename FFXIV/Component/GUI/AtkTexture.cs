@@ -19,7 +19,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
     {
         [FieldOffset(0x0)] public void* vtbl;
         // union type
-        [FieldOffset(0x8)] public TextureResource* Resource;
+        [FieldOffset(0x8)] public AtkTextureResource* Resource;
         [FieldOffset(0x8)] public void* Crest;
         [FieldOffset(0x8)] public Texture* KernelTexture;
         [FieldOffset(0x10)] public TextureType TextureType;

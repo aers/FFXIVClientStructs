@@ -6,11 +6,11 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
     // Client::UI::RaptureAtkModule
     //   Component::GUI::AtkModule
     //     Component::GUI::AtkModuleInterface
-    [StructLayout(LayoutKind.Explicit, Size = 0x275E8)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x27718)]
     public unsafe struct RaptureAtkModule
     {
         [FieldOffset(0x0)] public void* vtbl;
-        [FieldOffset(0x1A248)] public NamePlateInfo NamePlateInfoArray;  // 0-50, &NamePlateInfoArray[i]
+        [FieldOffset(0x1A378)] public NamePlateInfo NamePlateInfoArray;  // 0-50, &NamePlateInfoArray[i]
 
         [StructLayout(LayoutKind.Explicit, Size = 0x248)]
         public unsafe struct NamePlateInfo

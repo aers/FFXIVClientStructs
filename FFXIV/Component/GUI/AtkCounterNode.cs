@@ -15,7 +15,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
     public unsafe struct AtkCounterNode
     {
         [FieldOffset(0x0)] public AtkResNode AtkResNode;
-        [FieldOffset(0xA8)] public ULDPartsList* PartsList;
+        [FieldOffset(0xA8)] public AtkUldPartsList* PartsList;
         [FieldOffset(0xB0)] public uint PartId;
         [FieldOffset(0xB4)] public byte NumberWidth;
         [FieldOffset(0xB5)] public byte CommaWidth;
