@@ -27,6 +27,8 @@ globals:
   0x141D977A8: g_TaskManager
   0x141D9C690: g_EnvRenderController # Client::Graphics::Environment::EnvRenderController not a pointer
   0x141D9CA30: g_ResourceManager
+  0x141DAEA80: g_RenderSkeletonLinkedListStart
+  0x141DAEA88: g_RenderSkeletonLinkedListEnd
   0x141DAEAA0: g_OcclusionCullingManager
   0x141DAEAD8: g_OffscreenRenderingManager
   0x141DAEAE0: g_RenderModelLinkedListStart
@@ -317,6 +319,11 @@ classes:
     vtbl: 0x14168BAA0
   Client::Graphics::ReferencedClassBase:
     vtbl: 0x141691FF0
+    vfuncs:
+      0: dtor
+      1: Cleanup # this is called by DecRef when there are no refs left, before the dtor is called
+      2: IncRef
+      3: DecRef
   Client::Graphics::Environment::EnvSoundState:
     vtbl: 0x141692038
   Client::Graphics::Environment::EnvState:
@@ -424,6 +431,11 @@ classes:
   Client::UI::Agent::AgentFreeCompanyChest:
     inherits_from: Client::UI::Agent::AgentInterface
     vtbl: 0x14169E1C8
+  Client::Graphics::Animation::IAnimationControllerListener:
+    vtbl: 0x1416A37C0
+  Client::Graphics::Animation::PartialSkeleton:
+    inherits_from: Client::Graphics::Animation::IAnimationControllerListener
+    vtbl: 0x1416A3808
   Client::Graphics::Kernel::Resource:
     inherits_from: Client::Graphics::DelayedReleaseClassBase
     vtbl: 0x1416A43D8
@@ -458,6 +470,12 @@ classes:
   Client::Graphics::Kernel::Device::RenderThread:
     inherits_from: Client::System::Threading::Thread
     vtbl: 0x1416A4790
+  Client::Graphics::Render::Skeleton:
+    inherits_from: Client::Graphics::ReferencedClassBase
+    # also inherits from RenderObjectList<Skeleton>
+    vtbl: 0x1416AB960
+    funcs:
+      0x14031E190: ctor
   Client::Graphics::Kernel::ShaderSceneKey:
     vtbl: 0x1416AB9C8
   Client::Graphics::Kernel::ShaderSubViewKey:

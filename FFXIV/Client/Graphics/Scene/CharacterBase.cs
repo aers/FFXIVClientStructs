@@ -1,5 +1,6 @@
 ﻿using FFXIVClientStructs.FFXIV.Client.Graphics.Physics;
 using System.Runtime.InteropServices;
+using FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene
 {
@@ -16,7 +17,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene
         [FieldOffset(0x0)] public DrawObject DrawObject;
         [FieldOffset(0x90)] public byte UnkFlags_01; // bit 8 - has visor
         [FieldOffset(0x98)] public int SlotCount; // model slots
-        [FieldOffset(0xA0)] public void* Skeleton; // Client::Graphics::Render::Skeleton
+        [FieldOffset(0xA0)] public Skeleton* Skeleton; // Client::Graphics::Render::Skeleton
         [FieldOffset(0xA8)] public void** ModelArray; // array of Client::Graphics::Render::Model ptrs size = SlotCount
         [FieldOffset(0x148)] public void* PostBoneDeformer; // Client::Graphics::Scene::PostBoneDeformer ptr
         [FieldOffset(0x150)] public BonePhysicsModule* BonePhysicsModule; // Client::Graphics::Physics::BonePhysicsModule ptr
