@@ -50,7 +50,7 @@ globals:
   0x141DDFE50: g_GameObjectManager_ObjectList
   0x141DE0B90: g_GameObjectManager_ObjectListEnd
   0x141DE2B30: g_Client::Game::UI::Hotbar # not a pointer
-  0x141DE3EE8: g_Client::Game::UI::Telepo
+  0x141DE3EE8: g_Client::Game::UI::Telepo # not a pointer
   0x141DE4CE0: g_TrustGroupManager # pointer
   0x141DEC9C8: g_ActiveDirector
   0x141DF0C30: g_MarkingController
@@ -790,10 +790,18 @@ classes:
       0x1404D1D40: GetScaleX
       0x1404D1D60: GetScaleY
       0x1404D1D80: SetScale
+      0x1404D1EA0: SetSize0
       0x1404D1EE0: GetYFloat
       0x1404D1F20: GetYShort
       0x1404D2110: GetHeight
+      0x1404D2350: SetWidth
       0x1404D2370: SetHeight
+      0x1404D23C0: GetRotation
+      0x1404D23E0: SetRotation
+      0x1404D2450: GetRotationDegrees
+      0x1404D2480: SetRotationDegrees
+      0x1404D2500: GetColor
+      0x1404D2520: SetColor
       0x1404D2560: SetAddRGB
       0x1404D25B0: SetMultiplyRGB
       0x1404D2620: SetPriority
@@ -1241,6 +1249,7 @@ classes:
       0: dtor
     funcs:
       0x1407DFD00: IsActionUnlocked
+      # 0x1407F2740: ctor # this is probably just the ctor for a container
   Client::Game::UI::MarkingController:
     vtbl: 0x1416EFDF8
     vfuncs:
@@ -1262,6 +1271,7 @@ classes:
       0: AcceptTeleportOffer
       1: dtor
     funcs:
+      0x1407BAD60: ctor
       0x1407BB5C0: Teleport
       0x1407BC760: TeleportWithTicket
       0x1407BAF20: UpdatePlayerAetheryteList
