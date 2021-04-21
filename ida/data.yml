@@ -50,7 +50,7 @@ globals:
   0x141DDFE40: g_GameObjectManager
   0x141DDFE50: g_GameObjectManager_ObjectList
   0x141DE0B90: g_GameObjectManager_ObjectListEnd
-  0x141DE2B30: g_Client::Game::UI::Hotbar # not a pointer
+  0x141DE2B30: g_Client::Game::UI::UIState # not a pointer
   0x141DE3EE8: g_Client::Game::UI::Telepo # not a pointer
   0x141DE4CE0: g_TrustGroupManager # pointer
   0x141DEC9C8: g_ActiveDirector
