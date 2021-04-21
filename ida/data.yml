@@ -39,6 +39,7 @@ globals:
   0x141DB7F10: g_ControlSystem_CameraManager # control system, object actually contains target system global below
   0x141DB8060: g_ControlSystem_TargetSystem
   0x141DBBDA0: g_PlayerMoveController
+  0x141DBC330: g_LocalPlayer
   0x141DBC4F0: g_AtkStage
   0x141DBC9F8: g_LayoutWorld
   0x141DDB4F0: g_InventoryManager
