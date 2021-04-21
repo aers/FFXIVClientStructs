@@ -39,6 +39,7 @@ globals:
   0x141DB7F10: g_ControlSystem_CameraManager # control system, object actually contains target system global below
   0x141DB8060: g_ControlSystem_TargetSystem
   0x141DBBDA0: g_PlayerMoveController
+  0x141DBC330: g_LocalPlayer
   0x141DBC4F0: g_AtkStage
   0x141DBC9F8: g_LayoutWorld
   0x141DDB4F0: g_InventoryManager
@@ -49,7 +50,7 @@ globals:
   0x141DDFE40: g_GameObjectManager
   0x141DDFE50: g_GameObjectManager_ObjectList
   0x141DE0B90: g_GameObjectManager_ObjectListEnd
-  0x141DE2B30: g_Client::Game::UI::Hotbar # not a pointer
+  0x141DE2B30: g_Client::Game::UI::UIState # not a pointer
   0x141DE3EE8: g_Client::Game::UI::Telepo # not a pointer
   0x141DE4CE0: g_TrustGroupManager # pointer
   0x141DEC9C8: g_ActiveDirector
