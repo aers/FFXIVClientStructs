@@ -289,6 +289,8 @@ classes:
   Component::GUI::AtkEventListener:
     vtbl: 0x14167F718
     vfuncs:
+      0: dtor
+      1: ReceiveGlobalEvent # this seems to be a common event handler shared by all AtkUnitBase instances, they don't overwrite it
       2: ReceiveEvent
   Component::GUI::AtkUnitList:
     vtbl: 0x14167F750
@@ -867,11 +869,13 @@ classes:
       46: OnUpdate
     funcs:
       0x1404DEF20: ctor
+      0x1404DF590: FireCallbackInt # this creates an int AtkValue and puts its argument into it before calling Callback
       0x1404DF680: SetPosition
       0x1404DF800: SetAlpha
       0x1404DFC00: SetScale
       0x1404DFF70: CalculateBounds
       0x1404E2220: Draw
+      0x1404E3510: FireCallback
   Component::GUI::AtkComponentBase:
     inherits_from: Component::GUI::AtkEventListener
     vtbl: 0x1416C1880
@@ -1372,9 +1376,11 @@ classes:
   Client::Game::InstanceContent::InstanceContentDirector:
     inherits_from: Client::Game::Event::Director
     vtbl: 0x1417466B8
-  Client::UI::SelectEventThing:
+  Client::UI::PopupMenu:
     inherits_from: Component::GUI::AtkEventListener
     vtbl: 0x1417BF5E0
+    vfuncs:
+      3: OnItemSelected
   Client::UI::AddonFadeMiddleBack: # Both AddonFadeMiddle and AddonFadeBack
     inherits_from: Component::GUI::AtkUnitBase
     vtbl: 0x1417BFCA0
@@ -1395,14 +1401,14 @@ classes:
   Client::UI::AddonContextMenuTitle:
     inherits_from: Client::UI::AddonContextMenu
     vtbl: 0x1417C1238
-  Client::UI::AddonSelectString::EventThing:
-    inherits_from: Client::UI::SelectEventThing
+  Client::UI::AddonSelectString::PopupMenuDerive:
+    inherits_from: Client::UI::PopupMenu
     vtbl: 0x1417C1458
   Client::UI::AddonSelectString:
     inherits_from: Component::GUI::AtkUnitBase
     vtbl: 0x1417C1480
-  Client::UI::AddonSelectIconString::EventThing:
-    inherits_from: Client::UI::SelectEventThing
+  Client::UI::AddonSelectIconString::PopupMenuDerive:
+    inherits_from: Client::UI::PopupMenu
     vtbl: 0x1417C1AC8
   Client::UI::AddonSelectIconString:
     inherits_from: Component::GUI::AtkUnitBase
