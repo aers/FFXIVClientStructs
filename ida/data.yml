@@ -287,6 +287,8 @@ classes:
     vtbl: 0x141675C48
   Component::Shell::ShellCommandModule:
     vtbl: 0x141675D40
+    funcs:
+      0x140098B90: ExecuteCommand
   Component::GUI::AtkEventListener:
     vtbl: 0x14167F718
     vfuncs:
@@ -314,6 +316,7 @@ classes:
     funcs:
       0x1400B0B70: ctor
       0x1400B2BA0: OpenAddon
+      0x1400B3280: OpenYesNo
       0x1400D3EC0: UpdateNameplates_Task1
       0x1400D6E50: IsUIVisible
   Client::Graphics::Kernel::Notifier:
@@ -1110,8 +1113,9 @@ classes:
       148: ShowText
       150: ShowWideText
       152: ShowErrorText
+      171: ExecuteMainCommand
     funcs:
-#fail       0x1405C46B0: ctor
+      0x1405C9BB0: ctor
   Client::System::Crypt::SimpleString:
     inherits_from: Client::System::Crypt::CryptInterface
     vtbl: 0x1416D0E70
@@ -1569,7 +1573,7 @@ classes:
     vtbl: 0x141805D38
     funcs:
       0x140EF0A40: ctor
-#fail       0x140ED8C70: SetNamePlate
+      0x140EF0F20: SetPlayerNamePlate
   Client::UI::AddonTeleport:
     inherits_from: Component::GUI::AtkUnitBase
     vtbl: 0x14180A338
