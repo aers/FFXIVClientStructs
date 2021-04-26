@@ -11,7 +11,23 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
     public unsafe struct AddonWeeklyBingo
     {
         [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
+        [FieldOffset(0x18E8)] public StringThing StringThing;
         [FieldOffset(0x1938)] public StickerSlotList StickerSlotList;
+        [FieldOffset(0x1F20)] public uint NumStickersPlaced;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x50)]
+    public unsafe struct StringThing
+    {
+        [FieldOffset(0x0)] public void* vtbl;
+        [FieldOffset(0x08)] public byte* FullSealsText;              // No more seals can be applied. Deliver the journal to Khloe Aliapoh to receive your reward.
+        [FieldOffset(0x10)] public byte* OneOrMoreLinesText;         // One or more lines of seals have been completed. Deliver the journal to Khloe Aliapoh to receive your reward or continue adventuring to add more seals.
+        [FieldOffset(0x18)] public byte* SecondChancePointsText;     // Second Chance points can be used to increase your chances of completing lines.
+        [FieldOffset(0x20)] public byte* ReceiveSealCompleteText;    // Select a completed duty to receive a seal.
+        [FieldOffset(0x28)] public byte* ReceiveSealIncompleteText;  // Complete a task to receive a seal.
+        [FieldOffset(0x30)] public byte* SecondChanceRetryText;      // Select a completed duty to be rendered incomplete.
+        [FieldOffset(0x40)] public void* addon;
+        [FieldOffset(0x48)] public AtkTextNode* TextNode;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x590)]
