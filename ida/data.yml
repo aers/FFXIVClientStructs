@@ -1291,6 +1291,8 @@ classes:
     funcs:
       0x14082C2F0: ctor
       0x140831EA0: UpdateParty
+      0x140845C10: GetMainCommandString # MainCommand exd
+      0x140845F50: OpenSystemMenu
   Client::UI::Agent::AgentTryon::TryonCharaView:
     inherits_from: Client::UI::Misc::CharaView
     vtbl: 0x1416F35C0
