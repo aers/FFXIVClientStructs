@@ -211,7 +211,7 @@ classes:
 #
   Client::Game::ActionManager:
     inherits_from: Client::Graphics::Vfx::VfxDataListenner
-    vtbl: 0x1416F11D0
+    vtbl: 0x1416F11C0
     funcs:
       0x1400A82A0: GetCurrentComboActionId
       0x140803440: GetActionRange
@@ -402,7 +402,7 @@ classes:
       0x1401EDFC0: ctor
   Client::UI::Agent::AgentInterface:
     inherits_from: Component::GUI::AtkModuleInterface::AtkEventInterface
-    vtbl: failed match - old 0X14169BC10
+    vtbl: 0x14169BC00
     vfuncs:
       2: Show
       3: Hide
@@ -775,7 +775,7 @@ classes:
       0x1404E26B0: GetSingleton1 # dalamud GetBaseUIObject
   Component::GUI::AtkResNode:
     inherits_from: Component::GUI::AtkEventTarget
-    vtbl: failed match - old 0X1416C1550
+    vtbl: 0x1416C1540
     vfuncs:
       1: Destroy
     funcs:
@@ -817,12 +817,12 @@ classes:
       0x1404D3050: SetScale0 # SetScale jumps to this
   Component::GUI::AtkImageNode:
     inherits_from: Component::GUI::AtkResNode
-    vtbl: failed match - old 0X1416C1568
+    vtbl: 0x1416C1558
     funcs:
       0x1405443D0: ctor
   Component::GUI::AtkTextNode:
     inherits_from: Component::GUI::AtkResNode
-    vtbl: failed match - old 0X1416C1580
+    vtbl: 0x1416C1570
     funcs:
       0x140544580: ctor
       0x1404D39B0: SetText
@@ -832,22 +832,22 @@ classes:
       0x1404D54F0: SetFontSize
   Component::GUI::AtkNineGridNode:
     inherits_from: Component::GUI::AtkResNode
-    vtbl: failed match - old 0X1416C1598
+    vtbl: 0x1416C1588
     funcs:
       0x140544430: ctor
   Component::GUI::AtkCounterNode:
     inherits_from: Component::GUI::AtkResNode
-    vtbl: failed match - old 0X1416C15B0
+    vtbl: 0x1416C15A0
     funcs:
       0x140544350: ctor
   Component::GUI::AtkCollisionNode:
     inherits_from: Component::GUI::AtkResNode
-    vtbl: failed match - old 0X1416C15C8
+    vtbl: 0x1416C15B8
     funcs:
       0x140544290: ctor
   Component::GUI::AtkComponentNode:
     inherits_from: Component::GUI::AtkResNode
-    vtbl: failed match - old 0X1416C15E0
+    vtbl: 0x1416C15D0
     funcs:
       0x1405442F0: ctor
   Component::GUI::AtkUnitBase:
@@ -1197,7 +1197,7 @@ classes:
     funcs:
       0x140656C90: ctor
   Client::Game::Object::GameObject:
-    vtbl: failed match - old 0X1416D7800
+    vtbl: 0x1416D77F0
     vfuncs:
       2: GetObjectID
       3: GetObjectKind
@@ -1216,7 +1216,7 @@ classes:
       0x1406CDDB0: ctor
   Client::Game::Character::Character:
     inherits_from: Client::Game::Object::GameObject
-    vtbl: failed match - old 0X1416D84B8
+    vtbl: 0x1416D84A8
     funcs:
       0x1406DDCC0: dtor
       0x1406F1780: ctor
@@ -1236,7 +1236,7 @@ classes:
     vtbl: 0x1416EBF40
   Client::Game::Character::BattleChara:
     inherits_from: Client::Game::Character::Character
-    vtbl: failed match - old 0X1416EEB28
+    vtbl: 0x1416EEB18
     funcs:
       0x140742EE0: ctor
       0x140742FD0: dtor
@@ -1300,7 +1300,7 @@ classes:
     vtbl: 0x1416F35F0
   Client::UI::Agent::AgentItemDetailBase:
     inherits_from: Client::UI::Agent::AgentInterface
-    vtbl: failed match - old 0X1416F3670
+    vtbl: 0x1416F3660
   Client::UI::Agent::AgentContentsFinderSetting:
     inherits_from: Client::UI::Agent::AgentInterface
     vtbl: 0x1416F3B30
@@ -1736,16 +1736,16 @@ classes:
     vtbl: 0x141847F90
   Client::Game::Object::EventObject:
     inherits_from: Client::Game::Object::GameObject
-    vtbl: failed match - old 0X14184AE68
+    vtbl: 0x14184AE28
   Client::Game::Object::Treasure:
     inherits_from: Client::Game::Object::GameObject
-    vtbl: failed match - old 0X14184B0D0
+    vtbl: 0x14184B090
   Client::Game::Object::GatheringPointObject:
     inherits_from: Client::Game::Object::GameObject
-    vtbl: failed match - old 0X14184B408
+    vtbl: 0x14184B3C8
   Client::Game::Object::AreaObject:
     inherits_from: Client::Game::Object::GameObject
-    vtbl: failed match - old 0X14184B670
+    vtbl: 0x14184B630
   Client::Graphics::Culling::CullingManager_Client::Graphics::JobSystem_Client::Graphics::Culling::CullingJobOpt:
     vtbl: 0x14184C340
   Client::Graphics::Culling::CullingManager_Client::Graphics::JobSystem_Client::Graphics::Culling::CallbackJobOpt:
@@ -1757,7 +1757,7 @@ classes:
     vtbl: 0x14184C358
   Client::Game::Character::Companion:
     inherits_from: Client::Game::Character::Character
-    vtbl: failed match - old 0X14184FAA0
+    vtbl: 0x14184FA60
     funcs:
       0x141122530: ctor
   Client::Game::CameraBase:
@@ -1792,7 +1792,7 @@ classes:
       0x14117ADD0: ctor
   Client::Game::Object::Aetheryte:
     inherits_from: Client::Game::Object::GameObject
-    vtbl: failed match - old 0X141859DB0
+    vtbl: 0x141859D70
     funcs:
       0x14119F2A0: Create
   Component::Log::LogModule:
@@ -1802,7 +1802,7 @@ classes:
       0x1411B9A30: ctor
   Client::Game::Object::HousingObject:
     inherits_from: Client::Game::Object::GameObject
-    vtbl: failed match - old 0X141891AD0
+    vtbl: 0x141891A90
   Client::Game::Gimmick::GimmickEventHandler:
     inherits_from: Client::Game::Event::LuaEventHandler
     vtbl: 0x1418A1128
@@ -1814,7 +1814,7 @@ classes:
     vtbl: 0x1418A21F8
   Client::Game::Object::HousingCombinedObject:
     inherits_from: Client::Game::Object::HousingObject
-    vtbl: failed match - old 0X1418A55D0
+    vtbl: 0x1418A5590
   Client::System::Scheduler::Clip::BaseClip:
     inherits_from: Client::System::Scheduler::Base::SchedulerState
     vtbl: 0x1418A95E0
