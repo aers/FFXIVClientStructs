@@ -1676,6 +1676,8 @@ classes:
   Client::UI::AddonActionBarBase:  # Name is a guess
     inherits_from: Component::GUI::AtkUnitBase
     vtbl: 0x14182FA40
+    vfuncs:
+      73: PulseActionBarSlot
   Client::UI::AddonActionBarX: # _ActionBar01 through _ActionBar09, and _ActionBarEx
     inherits_from: Client::UI::AddonActionBarBase
     vtbl: 0x14182FCE0
