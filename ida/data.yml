@@ -665,6 +665,9 @@ classes:
       0x140435440: CreateDXRenderObjects
       0x140435890: LoadDataFiles
       0x140439610: GetSlotEqpFlags
+      0x14043AC40: GetEqpDataForAdults
+      0x14043AEA0: GetEqpDataForChildren
+      0x14043AFF0: GetEqpDataForOther      
   Client::Graphics::Scene::CharacterBase:
     inherits_from: Client::Graphics::Scene::DrawObject
     vtbl: 0x1416BC1D8
@@ -697,6 +700,7 @@ classes:
       0x140442BA0: LoadAllMTRLsFromMDLInSlot
       0x140442D40: LoadAllDecalTexFromMDLInSlot
       0x140442EB0: LoadPHYBForSlot
+      0x140443110: UnloadMDLForSlot
       0x140443660: CopyIMCForSlot
       0x1404439D0: CreateStagingArea
       0x140443AF0: PopulateMaterialsFromStaging
@@ -707,9 +711,24 @@ classes:
   Client::Graphics::Scene::Human:
     inherits_from: Client::Graphics::Scene::CharacterBase
     vtbl: 0x1416BC4E8
+    vfuncs:
+      58: OnModelLoadComplete
     funcs:
       0x140447920: ctor
       0x140447B60: SetupFromCharacterData
+      0x14044BC30: UpdateModels
+      0x14044BE60: CheckSlotsForUnload
+      0x14044C190: SetupModelAttributes # wrist, fingers, tail all got inlined here
+      0x14044C470: SetupHelmetModelAttributes
+      0x14044C5C0: SetupTopModelAttributes
+      0x14044C990: SetupHandModelAttributes
+      0x14044CAF0: SetupLegModelAttributes
+      0x14044CE00: SetupFeetModelAttributes
+      0x14044CFF0: SetupEarringModelAttributes
+      0x14044D100: SetupNecklaceModelAttributes
+      0x14044D3A0: SetupHairModelAttributes
+      0x14044D730: SetupFaceModelAttributes
+      0x14044DD70: SetupConnectorModelAttributes
   Client::Graphics::Scene::ResidentResourceManager::ResourceList:
     vtbl: 0x1416BDBB0
   Client::Graphics::Scene::ResidentResourceManager:
