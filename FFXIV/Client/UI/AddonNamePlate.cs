@@ -3,6 +3,15 @@ using System.Runtime.InteropServices;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI
 {
+    // AddonNamePlate::OnUpdate notes
+    // uses NumberArrayData index 5, StringArrayData index 4
+    
+    // NumberArrayData
+    //  index 1 - bool, force re-bake of nameplates
+    //  index 2 - float, some sort of scale
+    //  index 3 - bool, toggle nameplate text render style (0 = new, 1 = old)
+    //  index 6-24~ repeated 50 times: nameplate specific data
+
     // Client::UI::AddonNamePlate
     //   Component::GUI::AtkUnitBase
     //     Component::GUI::AtkEventListener

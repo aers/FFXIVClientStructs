@@ -316,6 +316,7 @@ classes:
       0x1400B0B70: ctor
       0x1400B2BA0: OpenAddon
       0x1400B3280: OpenYesNo
+      0x1400C54E0: OnUpdate_Nameplates
       0x1400D3EC0: UpdateNameplates_Task1
       0x1400D6E50: IsUIVisible
   Client::Graphics::Kernel::Notifier:
@@ -751,7 +752,8 @@ classes:
     inherits_from: Component::GUI::AtkArrayData
     vtbl: 0x1416C0A00
     funcs:
-      0x1404AED80: SetValue
+      0x1404AED80: SetValueIfDifferentAndNotify
+      0x1404AEE20: SetValueForced
   Component::GUI::StringArrayData:
     inherits_from: Component::GUI::AtkArrayData
     vtbl: 0x1416C0A10
@@ -875,6 +877,7 @@ classes:
       0x1404DF580: FireCallbackInt # this creates an int AtkValue and puts its argument into it before calling Callback
       0x1404DF670: SetPosition
       0x1404DF7F0: SetAlpha
+      0x1404DF820: GetScale
       0x1404DFBF0: SetScale
       0x1404DFF60: CalculateBounds
       0x1404E2210: Draw
@@ -919,6 +922,7 @@ classes:
     vfuncs:
       17: SetHandlerFunction
       39: SetUIVisibility
+      58: OnUpdate
     funcs:
       0x140510010: ctor
   Component::GUI::AtkComponentCheckBox:
@@ -1575,6 +1579,7 @@ classes:
     funcs:
       0x140EF0B20: ctor
       0x140EF1000: SetPlayerNamePlate
+      0x140EF39D0: ToggleTextRenderMode
   Client::UI::AddonTeleport:
     inherits_from: Component::GUI::AtkUnitBase
     vtbl: 0x14180A2F8

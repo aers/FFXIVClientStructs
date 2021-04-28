@@ -11,6 +11,7 @@ struct Common::Configuration::ConfigBase;
 struct Common::Configuration::SystemConfig;
 struct Component::GUI::AgentHudLayout;
 struct Component::GUI::AgentInterface;
+struct Component::GUI::AtkArrayData;
 struct Component::GUI::AtkCollisionNode;
 struct Component::GUI::AtkComponentBase;
 struct Component::GUI::AtkComponentButton;
@@ -18,6 +19,7 @@ struct Component::GUI::AtkComponentCheckBox;
 struct Component::GUI::AtkComponentDragDrop;
 struct Component::GUI::AtkComponentGaugeBar;
 struct Component::GUI::AtkComponentGuildLeveCard;
+struct Component::GUI::AtkComponentHoldButton;
 struct Component::GUI::AtkComponentIcon;
 struct Component::GUI::AtkComponentInputBase;
 struct Component::GUI::AtkComponentJournalCanvas;
@@ -30,7 +32,6 @@ struct Component::GUI::AtkComponentSlider;
 struct Component::GUI::AtkComponentTextInput;
 struct Component::GUI::AtkComponentTextNineGrid;
 struct Component::GUI::AtkComponentTreeList;
-struct Component::GUI::AtkComponentUnknownButton;
 struct Component::GUI::AtkComponentWindow;
 struct Component::GUI::AtkCounterNode;
 struct Component::GUI::AtkEventListener;
@@ -39,13 +40,49 @@ struct Component::GUI::AtkImageNode;
 struct Component::GUI::AtkEventInterface;
 struct Component::GUI::AtkNineGridNode;
 struct Component::GUI::AtkResNode;
-struct Component::GUI::TextureResource;
 struct Component::GUI::AtkStage;
 struct Component::GUI::AtkTextNode;
 struct Component::GUI::AtkTexture;
+struct Component::GUI::AtkTextureResource;
+struct Component::GUI::AtkUldAsset;
+struct Component::GUI::AtkUldComponentDataBase;
+struct Component::GUI::AtkUldComponentDataButton;
+struct Component::GUI::AtkUldComponentDataCheckBox;
+struct Component::GUI::AtkUldComponentDataDragDrop;
+struct Component::GUI::AtkUldComponentDataDropDownList;
+struct Component::GUI::AtkUldComponentDataGaugeBar;
+struct Component::GUI::AtkUldComponentDataGuildLeveCard;
+struct Component::GUI::AtkUldComponentDataIcon;
+struct Component::GUI::AtkUldComponentDataIconText;
+struct Component::GUI::AtkUldComponentDataInputBase;
+struct Component::GUI::AtkUldComponentDataJournalCanvas;
+struct Component::GUI::AtkUldComponentDataList;
+struct Component::GUI::AtkUldComponentDataListItemRenderer;
+struct Component::GUI::AtkUldComponentDataMap;
+struct Component::GUI::AtkUldComponentDataMultipurpose;
+struct Component::GUI::AtkUldComponentDataNumericInput;
+struct Component::GUI::AtkUldComponentDataPreview;
+struct Component::GUI::AtkUldComponentDataRadioButton;
+struct Component::GUI::AtkUldComponentDataScrollBar;
+struct Component::GUI::AtkUldComponentDataSlider;
+struct Component::GUI::AtkUldComponentDataTextInput;
+struct Component::GUI::AtkUldComponentDataTextNineGrid;
+struct Component::GUI::AtkUldComponentDataTreeList;
+struct Component::GUI::AtkUldComponentDataWindow;
+struct Component::GUI::AtkUldComponentInfo;
+struct Component::GUI::AtkUldManager;
+struct Component::GUI::AtkUldObjectInfo;
+struct Component::GUI::AtkUldPart;
+struct Component::GUI::AtkUldPartsList;
+struct Component::GUI::AtkUldWidgetInfo;
 struct Component::GUI::AtkUnitBase;
 struct Component::GUI::AtkUnitList;
 struct Component::GUI::AtkUnitManager;
+struct Component::GUI::AtkValue;
+struct Component::GUI::NumberArrayData;
+struct Component::GUI::StringArrayData;
+struct Component::GUI::ULD::AtkUldComponentDataHoldButton;
+struct Component::GUI::ULD::AtkUldComponentDataTab;
 struct Component::GUI::ULD::ULDComponentDataBase;
 struct Component::GUI::ULD::ULDComponentDataButton;
 struct Component::GUI::ULD::ULDComponentDataCheckBox;
@@ -53,6 +90,7 @@ struct Component::GUI::ULD::ULDComponentDataDragDrop;
 struct Component::GUI::ULD::ULDComponentDataDropDownList;
 struct Component::GUI::ULD::ULDComponentDataGaugeBar;
 struct Component::GUI::ULD::ULDComponentDataGuildLeveCard;
+struct Component::GUI::ULD::ULDComponentDataHoldButton;
 struct Component::GUI::ULD::ULDComponentDataIcon;
 struct Component::GUI::ULD::ULDComponentDataIconText;
 struct Component::GUI::ULD::ULDComponentDataInputBase;
@@ -70,7 +108,6 @@ struct Component::GUI::ULD::ULDComponentDataTab;
 struct Component::GUI::ULD::ULDComponentDataTextInput;
 struct Component::GUI::ULD::ULDComponentDataTextNineGrid;
 struct Component::GUI::ULD::ULDComponentDataTreeList;
-struct Component::GUI::ULD::ULDComponentDataUnknownButton;
 struct Component::GUI::ULD::ULDComponentDataWindow;
 struct Component::GUI::ULD::ULDComponentInfo;
 struct Component::GUI::ULD::ULDData;
@@ -79,19 +116,27 @@ struct Component::GUI::ULD::ULDPart;
 struct Component::GUI::ULD::ULDPartsList;
 struct Component::GUI::ULD::ULDTexture;
 struct Component::GUI::ULD::ULDWidgetInfo;
+struct Client::UI::AddonChatLogPanel;
 struct Client::UI::AddonContextIconMenu;
 struct Client::UI::AddonGathering;
 struct Client::UI::AddonGatheringMasterpiece;
+struct Client::UI::AddonGrandCompanySupplyReward;
 struct Client::UI::AddonGuildLeve;
 struct Client::UI::MoveableAddonInfoStruct;
 struct Client::UI::AddonHudLayoutScreen;
 struct Client::UI::AddonHudLayoutWindow;
+struct Client::UI::AddonItemInspectionList;
+struct Client::UI::AddonItemInspectionResult;
 struct Client::UI::AddonJournalDetail;
 struct Client::UI::AddonJournalResult;
 struct Client::UI::AddonLotteryDaily;
+struct Client::UI::AddonMaterializeDialog;
 struct Client::UI::AddonNamePlate;
 struct Client::UI::AddonRecipeNote;
 struct Client::UI::AddonRequest;
+struct Client::UI::AddonRetainerTaskAsk;
+struct Client::UI::AddonRetainerTaskResult;
+struct Client::UI::AddonSalvageDialog;
 struct Client::UI::AddonSelectIconString;
 struct Client::UI::AddonSelectString;
 struct Client::UI::AddonSelectYesno;
@@ -104,6 +149,8 @@ struct Client::UI::AddonWeeklyPuzzle;
 struct Client::UI::RaptureAtkModule;
 struct Client::UI::RaptureAtkUnitManager;
 struct Client::UI::UIModule;
+struct Client::UI::Agent::AgentHUD;
+struct Client::UI::Agent::AgentModule;
 struct Client::System::String::Utf8String;
 struct Client::System::Resource::Handle::ResourceHandle;
 struct Client::System::Resource::Handle::TextureResourceHandle;
@@ -111,6 +158,9 @@ struct Client::System::Framework::Framework;
 struct Client::System::Configuration::SystemConfig;
 struct Client::Graphics::ByteColor;
 struct Client::Graphics::Matrix44;
+struct Client::Graphics::Quarternion;
+struct Client::Graphics::ReferencedClassBase;
+struct Client::Graphics::Transform;
 struct Client::Graphics::Vector3;
 struct Client::Graphics::Scene::CharacterBase;
 struct Client::Graphics::Scene::DrawObject;
@@ -122,6 +172,11 @@ struct Client::Graphics::Physics::BoneSimulator;
 struct Client::Graphics::Render::Notifier;
 struct Client::Graphics::Render::Texture;
 struct Client::Graphics::Render::OffscreenRenderingManager;
+struct Client::Graphics::Render::RenderTargetManager;
+struct Client::Graphics::Render::Skeleton;
+struct Client::Graphics::Kernel::Device;
+struct Client::Graphics::Kernel::SwapChain;
+struct Client::Game::UI::Telepo;
 struct Client::Game::Object::GameObject;
 struct Client::Game::Character::BattleChara;
 struct Client::Game::Character::Character;
@@ -136,7 +191,10 @@ struct Client::UI::AddonLotteryDaily::LaneTileSelector;
 struct Client::UI::AddonLotteryDaily::GameNumberRow;
 struct Client::UI::AddonLotteryDaily::GameBoardNumbers;
 struct Client::UI::AddonNamePlate::BakePlateRenderer;
+struct Client::UI::AddonNamePlate::BakeData;
 struct Client::UI::AddonNamePlate::NamePlateObject;
+struct Client::UI::AddonSelectIconString::EventThing;
+struct Client::UI::AddonSelectString::PopupMenuDerive;
 struct Client::UI::AddonSynthesize::CraftEffect;
 struct Client::UI::AddonWeeklyPuzzle::RewardPanelItem;
 struct Client::UI::AddonWeeklyPuzzle::GameTileBoard;
@@ -146,6 +204,8 @@ struct Client::UI::RaptureAtkModule::NamePlateInfo;
 struct Client::UI::UIModule::Unk1;
 struct Client::UI::UIModule::Unk2;
 struct Client::UI::UIModule::Unk3;
+struct Client::Game::UI::Telepo::TeleportInfo;
+struct Client::Game::UI::Telepo::SelectUseTicketInvoker;
 
 // Definitions
 struct Group::Buff /* Size=0xC */
@@ -178,17 +238,32 @@ struct Client::Game::Object::GameObject /* Size=0x1A0 */
     /*       */ byte _gap_0x108[0x98];
 };
 
-struct Client::Game::Character::Character /* Size=0x1934 */
+struct Client::Game::Character::Character /* Size=0x19B0 */
 {
     /* 0x0000 */ Client::Game::Object::GameObject GameObject;
-    /*        */ byte _gap_0x1A0[0x1568];
-    /* 0x1708 */ byte EquipSlotData[0x28];
-    /*        */ byte _gap_0x1730[0x88];
-    /* 0x17B8 */ byte CustomizeData[0x1A];
-    /*        */ byte _gap_0x17D2[0x2];
-    /*        */ byte _gap_0x17D4[0x4];
-    /*        */ byte _gap_0x17D8[0x158];
-    /* 0x1930 */ unsigned __int32 OwnerID;
+    /*        */ byte _gap_0x1A0[0xEA0];
+    /* 0x1040 */ byte EquipSlotData[0x28];
+    /*        */ byte _gap_0x1068[0x810];
+    /* 0x1878 */ Client::Game::Character::Companion* CompanionObject;
+    /*        */ byte _gap_0x1880[0x18];
+    /* 0x1898 */ byte CustomizeData[0x1A];
+    /*        */ byte _gap_0x18B2[0x2];
+    /*        */ byte _gap_0x18B4[0x4];
+    /*        */ byte _gap_0x18B8[0x98];
+    /* 0x1950 */ unsigned __int32 CompanionOwnerID;
+    /*        */ byte _gap_0x1954[0x4];
+    /*        */ byte _gap_0x1958[0x48];
+    /* 0x19A0 */ byte StatusFlags;
+    /*        */ byte _gap_0x19A1;
+    /*        */ byte _gap_0x19A2[0x2];
+    /*        */ byte _gap_0x19A4[0x4];
+    /*        */ byte _gap_0x19A8[0x8];
+};
+
+struct Client::Game::Character::Companion /* Size=0x19C0 */
+{
+    /* 0x0000 */ Client::Game::Character::Character Character;
+    /*        */ byte _gap_0x19B0[0x10];
 };
 
 struct Group::BuffList /* Size=0x190 */
@@ -367,10 +442,77 @@ struct Component::GUI::AtkEventInterface /* Size=0x8 */
     /* 0x0 */ void* vtbl;
 };
 
+struct Client::UI::UIModule::Unk1 /* Size=0x8 */
+{
+    union {
+    /* 0x0 */ void* vtbl;
+    /* 0x0 */ void** vfunc;
+    } _union_0x0;
+};
+
+struct Client::UI::UIModule::Unk2 /* Size=0x8 */
+{
+    union {
+    /* 0x0 */ void* vtbl;
+    /* 0x0 */ void** vfunc;
+    } _union_0x0;
+};
+
+struct Client::UI::UIModule::Unk3 /* Size=0x8 */
+{
+    union {
+    /* 0x0 */ void* vtbl;
+    /* 0x0 */ void** vfunc;
+    } _union_0x0;
+};
+
+struct Client::UI::RaptureAtkModule::NamePlateInfo /* Size=0x248 */
+{
+    /* 0x000 */ __int32 ActorID;
+    /*       */ byte _gap_0x4[0x4];
+    /*       */ byte _gap_0x8[0x28];
+    /* 0x030 */ Client::System::String::Utf8String Name;
+    /* 0x098 */ Client::System::String::Utf8String FcName;
+    /* 0x100 */ Client::System::String::Utf8String Title;
+    /* 0x168 */ Client::System::String::Utf8String DisplayTitle;
+    /* 0x1D0 */ Client::System::String::Utf8String LevelText;
+    /*       */ byte _gap_0x238[0x8];
+    /* 0x240 */ __int32 Flags;
+    /*       */ byte _gap_0x244[0x4];
+};
+
+struct Client::UI::RaptureAtkModule /* Size=0x27718 */
+{
+    /* 0x00000 */ void* vtbl;
+    /*         */ byte _gap_0x8[0x1A370];
+    /* 0x1A378 */ Client::UI::RaptureAtkModule::NamePlateInfo NamePlateInfoArray;
+    /*         */ byte _gap_0x1A5C0[0xD158];
+};
+
+struct Client::UI::UIModule /* Size=0xE2070 */
+{
+    union {
+    /* 0x00000 */ void* vtbl;
+    /* 0x00000 */ void** vfunc;
+    } _union_0x0;
+    /* 0x00008 */ Client::UI::UIModule::Unk1 UnkObj1;
+    /* 0x00010 */ Client::UI::UIModule::Unk2 UnkObj2;
+    /* 0x00018 */ Client::UI::UIModule::Unk3 UnkObj3;
+    /* 0x00020 */ void* unk;
+    /* 0x00028 */ void* SystemConfig;
+    /*         */ byte _gap_0x30[0xB7F90];
+    /* 0xB7FC0 */ Client::UI::RaptureAtkModule RaptureAtkModule;
+    /*         */ byte _gap_0xDF6D8[0x2998];
+};
+
 struct Component::GUI::AgentInterface /* Size=0x28 */
 {
     /* 0x00 */ Component::GUI::AtkEventInterface AtkEventInterface;
-    /*      */ byte _gap_0x8[0x20];
+    /*      */ byte _gap_0x8[0x8];
+    /* 0x10 */ Client::UI::UIModule* UiModule;
+    /*      */ byte _gap_0x18[0x8];
+    /* 0x20 */ unsigned __int32 AddonId;
+    /*      */ byte _gap_0x24[0x4];
 };
 
 struct Component::GUI::AgentHudLayout /* Size=0x78 */
@@ -381,6 +523,18 @@ struct Component::GUI::AgentHudLayout /* Size=0x78 */
     /*      */ byte _gap_0x71;
     /*      */ byte _gap_0x72[0x2];
     /*      */ byte _gap_0x74[0x4];
+};
+
+struct Component::GUI::AtkArrayData /* Size=0x20 */
+{
+    /* 0x00 */ void* vtbl;
+    /* 0x08 */ __int32 Size;
+    /*      */ byte _gap_0xC[0x4];
+    /*      */ byte _gap_0x10[0x8];
+    /*      */ byte _gap_0x18[0x4];
+    /* 0x1C */ byte Unk1C;
+    /* 0x1D */ __int16 Unk1D;
+    /* 0x1F */ byte Unk1F;
 };
 
 enum CollisionType: unsigned __int16
@@ -518,7 +672,7 @@ struct Client::Graphics::Render::Texture /* Size=0xA8 */
     /*      */ byte _gap_0x60[0x48];
 };
 
-struct Component::GUI::TextureResource /* Size=0x20 */
+struct Component::GUI::AtkTextureResource /* Size=0x20 */
 {
     /* 0x00 */ unsigned __int32 TexPathHash;
     /* 0x04 */ unsigned __int32 Unk_1;
@@ -541,7 +695,7 @@ struct Component::GUI::AtkTexture /* Size=0x18 */
 {
     /* 0x00 */ void* vtbl;
     union {
-    /* 0x08 */ Component::GUI::TextureResource* Resource;
+    /* 0x08 */ Component::GUI::AtkTextureResource* Resource;
     /* 0x08 */ void* Crest;
     /* 0x08 */ Client::Graphics::Render::Texture* KernelTexture;
     } _union_0x8;
@@ -624,6 +778,79 @@ struct Component::GUI::ULD::ULDData /* Size=0x90 */
     /*      */ byte _gap_0x8C[0x4];
 };
 
+struct Component::GUI::AtkUldAsset /* Size=0x20 */
+{
+    /* 0x00 */ unsigned __int32 Id;
+    /*      */ byte _gap_0x4[0x4];
+    /* 0x08 */ Component::GUI::AtkTexture AtkTexture;
+};
+
+struct Component::GUI::AtkUldPart /* Size=0x10 */
+{
+    /* 0x00 */ Component::GUI::AtkUldAsset* UldAsset;
+    /* 0x08 */ unsigned __int16 U;
+    /* 0x0A */ unsigned __int16 V;
+    /* 0x0C */ unsigned __int16 Width;
+    /* 0x0E */ unsigned __int16 Height;
+};
+
+struct Component::GUI::AtkUldPartsList /* Size=0x10 */
+{
+    /* 0x00 */ unsigned __int32 Id;
+    /* 0x04 */ unsigned __int32 PartCount;
+    /* 0x08 */ Component::GUI::AtkUldPart* Parts;
+};
+
+struct Component::GUI::AtkUldObjectInfo /* Size=0x10 */
+{
+    /* 0x00 */ unsigned __int32 Id;
+    /* 0x04 */ __int32 NodeCount;
+    /* 0x08 */ Component::GUI::AtkResNode** NodeList;
+};
+
+struct Component::GUI::AtkUldComponentDataBase /* Size=0x9 */
+{
+    /* 0x0 */ byte Index;
+    /* 0x1 */ byte Up;
+    /* 0x2 */ byte Down;
+    /* 0x3 */ byte Left;
+    /* 0x4 */ byte Right;
+    /* 0x5 */ byte Cursor;
+    /* 0x6 */ byte OffsetX;
+    /* 0x7 */ byte OffsetY;
+    /* 0x8 */ byte Unk;
+};
+
+struct Component::GUI::AtkUldManager /* Size=0x90 */
+{
+    /* 0x00 */ Component::GUI::AtkUldAsset* Assets;
+    /* 0x08 */ Component::GUI::AtkUldPartsList* PartsList;
+    /* 0x10 */ Component::GUI::AtkUldObjectInfo* Objects;
+    /* 0x18 */ Component::GUI::AtkUldComponentDataBase* ComponentData;
+    /* 0x20 */ unsigned __int16 AssetCount;
+    /* 0x22 */ unsigned __int16 PartsListCount;
+    /* 0x24 */ unsigned __int16 ObjectCount;
+    /*      */ byte _gap_0x26[0x2];
+    /* 0x28 */ void* UldResourceHandle;
+    /*      */ byte _gap_0x30[0x10];
+    /*      */ byte _gap_0x40[0x2];
+    /* 0x42 */ unsigned __int16 NodeListCount;
+    /*      */ byte _gap_0x44[0x4];
+    /* 0x48 */ void* AtkResourceRendererManager;
+    /* 0x50 */ Component::GUI::AtkResNode** NodeList;
+    /*      */ byte _gap_0x58[0x20];
+    /* 0x78 */ Component::GUI::AtkResNode* RootNode;
+    /* 0x80 */ unsigned __int16 RootNodeWidth;
+    /* 0x82 */ unsigned __int16 RootNodeHeight;
+    /*      */ byte _gap_0x84[0x2];
+    /* 0x86 */ byte Flags1;
+    /*      */ byte _gap_0x87;
+    /*      */ byte _gap_0x88;
+    /* 0x89 */ byte LoadedState;
+    /*      */ byte _gap_0x8A[0x2];
+    /*      */ byte _gap_0x8C[0x4];
+};
+
 struct Component::GUI::AtkComponentNode /* Size=0xB0 */
 {
     /* 0x00 */ Component::GUI::AtkResNode AtkResNode;
@@ -633,8 +860,11 @@ struct Component::GUI::AtkComponentNode /* Size=0xB0 */
 struct Component::GUI::AtkComponentBase /* Size=0xC0 */
 {
     /* 0x00 */ Component::GUI::AtkEventListener AtkEventListener;
+    union {
     /* 0x08 */ Component::GUI::ULD::ULDData ULDData;
-    /*      */ byte _gap_0x98[0x10];
+    /* 0x08 */ Component::GUI::AtkUldManager UldManager;
+    } _union_0x8;
+    /*      */ byte _gap_0x10[0x98];
     /* 0xA8 */ Component::GUI::AtkComponentNode* OwnerNode;
     /*      */ byte _gap_0xB0[0x10];
 };
@@ -674,7 +904,7 @@ enum ComponentType: byte
     Multipurpose = 21,
     Map = 22,
     Preview = 23,
-    UnknownButton = 24
+    HoldButton = 24
 };
 
 struct Component::GUI::AtkTextNode /* Size=0x158 */
@@ -711,7 +941,9 @@ struct Component::GUI::AtkComponentButton /* Size=0xF0 */
     /* 0xC6 */ __int16 Bottom;
     /* 0xC8 */ Component::GUI::AtkTextNode* ButtonTextNode;
     /* 0xD0 */ Component::GUI::AtkResNode* ButtonBGNode;
-    /*      */ byte _gap_0xD8[0x18];
+    /*      */ byte _gap_0xD8[0x10];
+    /* 0xE8 */ unsigned __int32 Flags;
+    /*      */ byte _gap_0xEC[0x4];
 };
 
 struct Component::GUI::AtkComponentCheckBox /* Size=0x110 */
@@ -738,10 +970,16 @@ struct Component::GUI::AtkComponentGuildLeveCard /* Size=0xF0 */
     /*      */ byte _gap_0xC0[0x30];
 };
 
+struct Component::GUI::AtkComponentHoldButton /* Size=0x120 */
+{
+    /* 0x000 */ Component::GUI::AtkComponentButton AtkComponentButton;
+    /*       */ byte _gap_0xF0[0x30];
+};
+
 struct Component::GUI::AtkImageNode /* Size=0xB8 */
 {
     /* 0x00 */ Component::GUI::AtkResNode AtkResNode;
-    /* 0xA8 */ Component::GUI::ULD::ULDPartsList* PartsList;
+    /* 0xA8 */ Component::GUI::AtkUldPartsList* PartsList;
     /* 0xB0 */ unsigned __int16 PartId;
     /* 0xB2 */ byte WrapMode;
     /* 0xB3 */ byte Flags;
@@ -763,7 +1001,7 @@ struct Component::GUI::AtkComponentIcon /* Size=0x118 */
 {
     /* 0x000 */ Component::GUI::AtkComponentBase AtkComponentBase;
     /* 0x0C0 */ __int64 IconId;
-    /* 0x0C8 */ Component::GUI::ULD::ULDTexture* Texture;
+    /* 0x0C8 */ Component::GUI::AtkUldAsset* Texture;
     /* 0x0D0 */ Component::GUI::AtkResNode* IconAdditionsContainer;
     /* 0x0D8 */ Component::GUI::AtkResNode* ComboBorder;
     /* 0x0E0 */ Component::GUI::AtkResNode* Frame;
@@ -859,12 +1097,6 @@ struct Component::GUI::AtkComponentTreeList /* Size=0x220 */
     /*       */ byte _gap_0x1A8[0x78];
 };
 
-struct Component::GUI::AtkComponentUnknownButton /* Size=0x120 */
-{
-    /* 0x000 */ Component::GUI::AtkComponentBase AtkComponentBase;
-    /*       */ byte _gap_0xC0[0x60];
-};
-
 struct Component::GUI::AtkComponentWindow /* Size=0x108 */
 {
     /* 0x000 */ Component::GUI::AtkComponentBase AtkComponentBase;
@@ -874,7 +1106,7 @@ struct Component::GUI::AtkComponentWindow /* Size=0x108 */
 struct Component::GUI::AtkCounterNode /* Size=0x128 */
 {
     /* 0x000 */ Component::GUI::AtkResNode AtkResNode;
-    /* 0x0A8 */ Component::GUI::ULD::ULDPartsList* PartsList;
+    /* 0x0A8 */ Component::GUI::AtkUldPartsList* PartsList;
     /* 0x0B0 */ unsigned __int32 PartId;
     /* 0x0B4 */ byte NumberWidth;
     /* 0x0B5 */ byte CommaWidth;
@@ -896,7 +1128,7 @@ enum ImageNodeFlags: __int32
 struct Component::GUI::AtkNineGridNode /* Size=0xC8 */
 {
     /* 0x00 */ Component::GUI::AtkResNode AtkResNode;
-    /* 0xA8 */ Component::GUI::ULD::ULDPartsList* PartsList;
+    /* 0xA8 */ Component::GUI::AtkUldPartsList* PartsList;
     /* 0xB0 */ unsigned __int32 PartID;
     /* 0xB4 */ __int16 TopOffset;
     /* 0xB6 */ __int16 BottomOffset;
@@ -927,8 +1159,11 @@ struct Component::GUI::AtkUnitBase /* Size=0x220 */
 {
     /* 0x000 */ Component::GUI::AtkEventListener AtkEventListener;
     /* 0x008 */ byte Name[0x20];
+    union {
     /* 0x028 */ Component::GUI::ULD::ULDData ULDData;
-    /*       */ byte _gap_0xB8[0x10];
+    /* 0x028 */ Component::GUI::AtkUldManager UldManager;
+    } _union_0x28;
+    /*       */ byte _gap_0x30[0x98];
     /* 0x0C8 */ Component::GUI::AtkResNode* RootNode;
     /*       */ byte _gap_0xD0[0x38];
     /* 0x108 */ Component::GUI::AtkComponentNode* WindowNode;
@@ -944,7 +1179,10 @@ struct Component::GUI::AtkUnitBase /* Size=0x220 */
     /*       */ byte _gap_0x1B8[0x4];
     /* 0x1BC */ __int16 X;
     /* 0x1BE */ __int16 Y;
-    /*       */ byte _gap_0x1C0[0x10];
+    /*       */ byte _gap_0x1C0[0x8];
+    /*       */ byte _gap_0x1C8[0x4];
+    /* 0x1CC */ __int16 ID;
+    /* 0x1CE */ __int16 ParentID;
     /*       */ byte _gap_0x1D0[0x4];
     /*       */ byte _gap_0x1D4;
     /* 0x1D5 */ byte Alpha;
@@ -1021,6 +1259,355 @@ enum TextFlags2: __int32
     Ellipsis = 4
 };
 
+struct Component::GUI::AtkUldComponentDataButton /* Size=0x18 */
+{
+    /* 0x00 */ Component::GUI::AtkUldComponentDataBase Base;
+    /*      */ byte _gap_0x9;
+    /*      */ byte _gap_0xA[0x2];
+    /* 0x0C */ unsigned __int32 Nodes[0x2];
+    /* 0x14 */ unsigned __int32 TextId;
+};
+
+struct Component::GUI::AtkUldComponentDataCheckBox /* Size=0x1C */
+{
+    /* 0x00 */ Component::GUI::AtkUldComponentDataBase Base;
+    /*      */ byte _gap_0x9;
+    /*      */ byte _gap_0xA[0x2];
+    /* 0x0C */ unsigned __int32 Nodes[0x3];
+    /* 0x18 */ unsigned __int32 TextId;
+};
+
+struct Component::GUI::AtkUldComponentDataDragDrop /* Size=0x10 */
+{
+    /* 0x00 */ Component::GUI::AtkUldComponentDataBase Base;
+    /*      */ byte _gap_0x9;
+    /*      */ byte _gap_0xA[0x2];
+    /* 0x0C */ unsigned __int32 Nodes[0x1];
+};
+
+struct Component::GUI::AtkUldComponentDataDropDownList /* Size=0x14 */
+{
+    /* 0x00 */ Component::GUI::AtkUldComponentDataBase Base;
+    /*      */ byte _gap_0x9;
+    /*      */ byte _gap_0xA[0x2];
+    /* 0x0C */ unsigned __int32 Nodes[0x2];
+};
+
+struct Component::GUI::AtkUldComponentDataGaugeBar /* Size=0x3C */
+{
+    /* 0x00 */ Component::GUI::AtkUldComponentDataBase Base;
+    /*      */ byte _gap_0x9;
+    /*      */ byte _gap_0xA[0x2];
+    /* 0x0C */ unsigned __int32 Nodes[0x6];
+    /* 0x24 */ unsigned __int16 MarginV;
+    /* 0x26 */ unsigned __int16 MarginH;
+    /* 0x28 */ byte Vertical;
+    /*      */ byte _gap_0x29;
+    /*      */ byte _gap_0x2A[0x2];
+    /* 0x2C */ __int32 Indicator;
+    /* 0x30 */ __int32 Min;
+    /* 0x34 */ __int32 Max;
+    /* 0x38 */ __int32 Value;
+};
+
+struct Component::GUI::AtkUldComponentDataGuildLeveCard /* Size=0x1C */
+{
+    /* 0x00 */ Component::GUI::AtkUldComponentDataBase Base;
+    /*      */ byte _gap_0x9;
+    /*      */ byte _gap_0xA[0x2];
+    /* 0x0C */ unsigned __int32 Nodes[0x3];
+    /*      */ byte _gap_0x18[0x4];
+};
+
+struct Component::GUI::AtkUldComponentDataIcon /* Size=0x2C */
+{
+    /* 0x00 */ Component::GUI::AtkUldComponentDataBase Base;
+    /*      */ byte _gap_0x9;
+    /*      */ byte _gap_0xA[0x2];
+    /* 0x0C */ unsigned __int32 Nodes[0x8];
+};
+
+struct Component::GUI::AtkUldComponentDataIconText /* Size=0x14 */
+{
+    /* 0x00 */ Component::GUI::AtkUldComponentDataBase Base;
+    /*      */ byte _gap_0x9;
+    /*      */ byte _gap_0xA[0x2];
+    /* 0x0C */ unsigned __int32 Nodes[0x2];
+};
+
+struct Component::GUI::AtkUldComponentDataInputBase /* Size=0x10 */
+{
+    /* 0x00 */ Component::GUI::AtkUldComponentDataBase Base;
+    /*      */ byte _gap_0x9;
+    /*      */ byte _gap_0xA[0x2];
+    /* 0x0C */ Client::Graphics::ByteColor FocusColor;
+};
+
+struct Component::GUI::AtkUldComponentDataJournalCanvas /* Size=0x94 */
+{
+    /* 0x00 */ Component::GUI::AtkUldComponentDataBase Base;
+    /*      */ byte _gap_0x9;
+    /*      */ byte _gap_0xA[0x2];
+    /* 0x0C */ unsigned __int32 Nodes[0x20];
+    /* 0x8C */ unsigned __int16 ItemMargin;
+    /* 0x8E */ unsigned __int16 BasicMargin;
+    /* 0x90 */ unsigned __int16 AnotherMargin;
+    /* 0x92 */ unsigned __int16 Padding;
+};
+
+struct Component::GUI::AtkUldComponentDataList /* Size=0x28 */
+{
+    /* 0x00 */ Component::GUI::AtkUldComponentDataBase Base;
+    /*      */ byte _gap_0x9;
+    /*      */ byte _gap_0xA[0x2];
+    /* 0x0C */ unsigned __int32 Nodes[0x5];
+    /* 0x20 */ byte Wrap;
+    /* 0x21 */ byte Orientation;
+    /* 0x22 */ unsigned __int16 RowNum;
+    /* 0x24 */ unsigned __int16 ColNum;
+    /*      */ byte _gap_0x26[0x2];
+};
+
+struct Component::GUI::AtkUldComponentDataListItemRenderer /* Size=0x20 */
+{
+    /* 0x00 */ Component::GUI::AtkUldComponentDataBase Base;
+    /*      */ byte _gap_0x9;
+    /*      */ byte _gap_0xA[0x2];
+    /* 0x0C */ unsigned __int32 Nodes[0x4];
+    /* 0x1C */ byte CanToggle;
+    /*      */ byte _gap_0x1D;
+    /*      */ byte _gap_0x1E[0x2];
+};
+
+struct Component::GUI::AtkUldComponentDataMap /* Size=0x34 */
+{
+    /* 0x00 */ Component::GUI::AtkUldComponentDataBase Base;
+    /*      */ byte _gap_0x9;
+    /*      */ byte _gap_0xA[0x2];
+    /* 0x0C */ unsigned __int32 Nodes[0xA];
+};
+
+struct Component::GUI::AtkUldComponentDataMultipurpose /* Size=0x18 */
+{
+    /* 0x00 */ Component::GUI::AtkUldComponentDataBase Base;
+    /*      */ byte _gap_0x9;
+    /*      */ byte _gap_0xA[0x2];
+    /* 0x0C */ unsigned __int32 Nodes[0x3];
+};
+
+struct Component::GUI::AtkUldComponentDataNumericInput /* Size=0x3C */
+{
+    /* 0x00 */ Component::GUI::AtkUldComponentDataInputBase InputBase;
+    /* 0x10 */ unsigned __int32 Nodes[0x5];
+    /* 0x24 */ __int32 Value;
+    /* 0x28 */ __int32 Min;
+    /* 0x2C */ __int32 Max;
+    /* 0x30 */ __int32 Add;
+    /* 0x34 */ unsigned __int32 EndLetterId;
+    /* 0x38 */ byte Comma;
+    /*      */ byte _gap_0x39;
+    /*      */ byte _gap_0x3A[0x2];
+};
+
+struct Component::GUI::AtkUldComponentDataPreview /* Size=0x14 */
+{
+    /* 0x00 */ Component::GUI::AtkUldComponentDataBase Base;
+    /*      */ byte _gap_0x9;
+    /*      */ byte _gap_0xA[0x2];
+    /* 0x0C */ unsigned __int32 Nodes[0x2];
+};
+
+struct Component::GUI::AtkUldComponentDataRadioButton /* Size=0x24 */
+{
+    /* 0x00 */ Component::GUI::AtkUldComponentDataBase Base;
+    /*      */ byte _gap_0x9;
+    /*      */ byte _gap_0xA[0x2];
+    /* 0x0C */ unsigned __int32 Nodes[0x4];
+    /* 0x1C */ unsigned __int32 TextId;
+    /* 0x20 */ unsigned __int32 GroupId;
+};
+
+struct Component::GUI::AtkUldComponentDataScrollBar /* Size=0x20 */
+{
+    /* 0x00 */ Component::GUI::AtkUldComponentDataBase Base;
+    /*      */ byte _gap_0x9;
+    /*      */ byte _gap_0xA[0x2];
+    /* 0x0C */ unsigned __int32 Nodes[0x4];
+    /* 0x1C */ unsigned __int16 Margin;
+    /* 0x1E */ byte Vertical;
+    /*      */ byte _gap_0x1F;
+};
+
+struct Component::GUI::AtkUldComponentDataSlider /* Size=0x34 */
+{
+    /* 0x00 */ Component::GUI::AtkUldComponentDataBase Base;
+    /*      */ byte _gap_0x9;
+    /*      */ byte _gap_0xA[0x2];
+    /* 0x0C */ unsigned __int32 Nodes[0x4];
+    /* 0x1C */ __int32 Min;
+    /* 0x20 */ __int32 Max;
+    /* 0x24 */ __int32 Step;
+    /* 0x28 */ __int32 OfffsetL;
+    /* 0x2C */ __int32 OffsetR;
+    /* 0x30 */ byte Vertical;
+    /*      */ byte _gap_0x31;
+    /*      */ byte _gap_0x32[0x2];
+};
+
+enum TextInputFlags1: __int32
+{
+    Capitalize = 1,
+    Mask = 2,
+    EnableDictionary = 4,
+    EnableHistory = 8,
+    EnableIME = 16,
+    EscapeClears = 32,
+    AllowUpperCase = 64,
+    AllowLowerCase = 128
+};
+
+enum TextInputFlags2: __int32
+{
+    AllowNumberInput = 1,
+    AllowSymbolInput = 2,
+    WordWrap = 4,
+    MultiLine = 8,
+    AutoMaxWidth = 16
+};
+
+struct Component::GUI::AtkUldComponentDataTextInput /* Size=0x7C */
+{
+    /* 0x00 */ Component::GUI::AtkUldComponentDataInputBase InputBase;
+    /* 0x10 */ unsigned __int32 Nodes[0x10];
+    /* 0x50 */ Client::Graphics::ByteColor CandidateColor;
+    /* 0x54 */ Client::Graphics::ByteColor IMEColor;
+    /* 0x58 */ unsigned __int32 MaxWidth;
+    /* 0x5C */ unsigned __int32 MaxLine;
+    /* 0x60 */ unsigned __int32 MaxByte;
+    /* 0x64 */ unsigned __int32 MaxChar;
+    /* 0x68 */ unsigned __int16 CharSet;
+    /* 0x6A */ byte Flags1;
+    /* 0x6B */ byte Flags2;
+    /* 0x6C */ byte CharSetExtras[0x10];
+};
+
+struct Component::GUI::AtkUldComponentDataTextNineGrid /* Size=0x18 */
+{
+    /* 0x00 */ Component::GUI::AtkUldComponentDataBase Base;
+    /*      */ byte _gap_0x9;
+    /*      */ byte _gap_0xA[0x2];
+    /* 0x0C */ unsigned __int32 Nodes[0x2];
+    /* 0x14 */ unsigned __int32 TextId;
+};
+
+struct Component::GUI::AtkUldComponentDataTreeList /* Size=0x28 */
+{
+    /* 0x00 */ Component::GUI::AtkUldComponentDataBase Base;
+    /*      */ byte _gap_0x9;
+    /*      */ byte _gap_0xA[0x2];
+    /* 0x0C */ unsigned __int32 Nodes[0x5];
+    /* 0x20 */ byte Wrap;
+    /* 0x21 */ byte Orientation;
+    /* 0x22 */ unsigned __int16 RowNum;
+    /* 0x24 */ unsigned __int16 ColNum;
+    /*      */ byte _gap_0x26[0x2];
+};
+
+struct Component::GUI::AtkUldComponentDataWindow /* Size=0x38 */
+{
+    /* 0x00 */ Component::GUI::AtkUldComponentDataBase Base;
+    /*      */ byte _gap_0x9;
+    /*      */ byte _gap_0xA[0x2];
+    /* 0x0C */ unsigned __int32 Nodes[0x8];
+    /* 0x2C */ unsigned __int32 TitleTextId;
+    /* 0x30 */ unsigned __int32 SubtitleTextId;
+    /* 0x34 */ byte ShowCloseButton;
+    /* 0x35 */ byte ShowConfigButton;
+    /* 0x36 */ byte ShowHelpButton;
+    /* 0x37 */ byte ShowHeader;
+};
+
+struct Component::GUI::AtkUldComponentInfo /* Size=0x18 */
+{
+    /* 0x00 */ Component::GUI::AtkUldObjectInfo ObjectInfo;
+    /* 0x10 */ Component::GUI::ComponentType ComponentType;
+    /*      */ byte _gap_0x11;
+    /*      */ byte _gap_0x12[0x2];
+    /*      */ byte _gap_0x14[0x4];
+};
+
+enum AlignmentType: __int32
+{
+    TopLeft = 0,
+    Top = 1,
+    TopRight = 2,
+    Left = 3,
+    Center = 4,
+    Right = 5,
+    BottomLeft = 6,
+    Bottom = 7,
+    BottomRight = 8
+};
+
+struct Component::GUI::AtkUldWidgetInfo /* Size=0x20 */
+{
+    /* 0x00 */ Component::GUI::AtkUldObjectInfo ObjectInfo;
+    /* 0x10 */ unsigned __int32 AlignmentType;
+    /* 0x14 */ float X;
+    /* 0x18 */ float Y;
+    /*      */ byte _gap_0x1C[0x4];
+};
+
+enum ValueType: __int32
+{
+    Int = 3,
+    UInt = 4,
+    String = 6
+};
+
+struct Component::GUI::AtkValue /* Size=0x10 */
+{
+    /* 0x00 */ Component::GUI::ValueType Type;
+    union {
+    /* 0x04 */ __int32 Int;
+    /* 0x04 */ unsigned __int32 UInt;
+    /* 0x04 */ byte* String;
+    } _union_0x8;
+    /*      */ byte _gap_0xC[0x4];
+};
+
+struct Component::GUI::NumberArrayData /* Size=0x28 */
+{
+    /* 0x00 */ Component::GUI::AtkArrayData AtkArrayData;
+    /* 0x20 */ __int32* IntArray;
+};
+
+struct Component::GUI::StringArrayData /* Size=0x30 */
+{
+    /* 0x00 */ Component::GUI::AtkArrayData AtkArrayData;
+    /* 0x20 */ byte** StringArray;
+    /* 0x28 */ byte* UnkString;
+};
+
+struct Component::GUI::ULD::AtkUldComponentDataHoldButton /* Size=0x20 */
+{
+    /* 0x00 */ Component::GUI::AtkUldComponentDataBase Base;
+    /*      */ byte _gap_0x9;
+    /*      */ byte _gap_0xA[0x2];
+    /* 0x0C */ unsigned __int32 Nodes[0x4];
+    /* 0x1C */ unsigned __int32 TextId;
+};
+
+struct Component::GUI::ULD::AtkUldComponentDataTab /* Size=0x24 */
+{
+    /* 0x00 */ Component::GUI::AtkUldComponentDataBase Base;
+    /*      */ byte _gap_0x9;
+    /*      */ byte _gap_0xA[0x2];
+    /* 0x0C */ unsigned __int32 Nodes[0x4];
+    /* 0x1C */ unsigned __int32 TextId;
+    /* 0x20 */ unsigned __int32 GroupId;
+};
+
 struct Component::GUI::ULD::ULDComponentDataButton /* Size=0x18 */
 {
     /* 0x00 */ Component::GUI::ULD::ULDComponentDataBase Base;
@@ -1079,6 +1666,15 @@ struct Component::GUI::ULD::ULDComponentDataGuildLeveCard /* Size=0x1C */
     /*      */ byte _gap_0xA[0x2];
     /* 0x0C */ unsigned __int32 Nodes[0x3];
     /*      */ byte _gap_0x18[0x4];
+};
+
+struct Component::GUI::ULD::ULDComponentDataHoldButton /* Size=0x20 */
+{
+    /* 0x00 */ Component::GUI::ULD::ULDComponentDataBase Base;
+    /*      */ byte _gap_0x9;
+    /*      */ byte _gap_0xA[0x2];
+    /* 0x0C */ unsigned __int32 Nodes[0x4];
+    /* 0x1C */ unsigned __int32 TextId;
 };
 
 struct Component::GUI::ULD::ULDComponentDataIcon /* Size=0x2C */
@@ -1285,15 +1881,6 @@ struct Component::GUI::ULD::ULDComponentDataTreeList /* Size=0x28 */
     /*      */ byte _gap_0x26[0x2];
 };
 
-struct Component::GUI::ULD::ULDComponentDataUnknownButton /* Size=0x20 */
-{
-    /* 0x00 */ Component::GUI::ULD::ULDComponentDataBase Base;
-    /*      */ byte _gap_0x9;
-    /*      */ byte _gap_0xA[0x2];
-    /* 0x0C */ unsigned __int32 Nodes[0x4];
-    /* 0x1C */ unsigned __int32 TextId;
-};
-
 struct Component::GUI::ULD::ULDComponentDataWindow /* Size=0x38 */
 {
     /* 0x00 */ Component::GUI::ULD::ULDComponentDataBase Base;
@@ -1337,6 +1924,27 @@ struct Component::GUI::ULD::ULDWidgetInfo /* Size=0x20 */
     /* 0x14 */ float X;
     /* 0x18 */ float Y;
     /*      */ byte _gap_0x1C[0x4];
+};
+
+struct Client::UI::AddonChatLogPanel /* Size=0x3D0 */
+{
+    /* 0x000 */ Component::GUI::AtkUnitBase AtkUnitBase;
+    /*       */ byte _gap_0x220[0x90];
+    /*       */ byte _gap_0x2B0[0x4];
+    /* 0x2B4 */ unsigned __int32 FirstLineVisible;
+    /* 0x2B8 */ unsigned __int32 LastLineVisible;
+    /*       */ byte _gap_0x2BC[0x4];
+    /* 0x2C0 */ unsigned __int32 Unknown2C0;
+    /* 0x2C4 */ unsigned __int32 TotalLineCount;
+    /*       */ byte _gap_0x2C8[0x30];
+    /* 0x2F8 */ unsigned __int32 MessagesAboveCurrent;
+    /*       */ byte _gap_0x2FC[0x4];
+    /*       */ byte _gap_0x300[0x40];
+    /*       */ byte _gap_0x340;
+    /* 0x341 */ byte IsScrolledBottom;
+    /*       */ byte _gap_0x342[0x2];
+    /*       */ byte _gap_0x344[0x4];
+    /*       */ byte _gap_0x348[0x88];
 };
 
 struct Client::UI::AddonContextIconMenu /* Size=0x2B0 */
@@ -1399,6 +2007,13 @@ struct Client::UI::AddonGatheringMasterpiece /* Size=0x750 */
     /*       */ byte _gap_0x220[0x168];
     /* 0x388 */ Component::GUI::AtkComponentDragDrop* CollectDragDrop;
     /*       */ byte _gap_0x390[0x3C0];
+};
+
+struct Client::UI::AddonGrandCompanySupplyReward /* Size=0x230 */
+{
+    /* 0x000 */ Component::GUI::AtkUnitBase AtkUnitBase;
+    /* 0x220 */ Component::GUI::AtkComponentButton* DeliverButton;
+    /* 0x228 */ Component::GUI::AtkComponentButton* CancelButton;
 };
 
 struct Client::UI::AddonGuildLeve /* Size=0x17F0 */
@@ -1489,6 +2104,18 @@ struct Client::UI::MoveableAddonInfoStruct /* Size=0x50 */
     /* 0x4D */ byte Slot;
     /*      */ byte _gap_0x4E;
     /* 0x4F */ byte PositionHasChanged;
+};
+
+struct Client::UI::AddonItemInspectionList /* Size=0x1230 */
+{
+    /* 0x0000 */ Component::GUI::AtkUnitBase AtkUnitBase;
+    /*        */ byte _gap_0x220[0x1010];
+};
+
+struct Client::UI::AddonItemInspectionResult /* Size=0x2F8 */
+{
+    /* 0x000 */ Component::GUI::AtkUnitBase AtkUnitBase;
+    /*       */ byte _gap_0x220[0xD8];
 };
 
 struct Client::UI::AddonJournalDetail /* Size=0x2F8 */
@@ -1625,46 +2252,67 @@ struct Client::UI::AddonLotteryDaily /* Size=0x408 */
     /* 0x404 */ __int32 UnkNumber404;
 };
 
-struct Client::UI::AddonNamePlate::BakePlateRenderer /* Size=0x230 */
+struct Client::UI::AddonMaterializeDialog /* Size=0x248 */
 {
-    /*       */ byte _gap_0x0[0x230];
+    /* 0x000 */ Component::GUI::AtkUnitBase AtkUnitBase;
+    /* 0x220 */ Component::GUI::AtkTextNode* Text;
+    /* 0x228 */ Component::GUI::AtkComponentIcon* ItemIcon;
+    /* 0x230 */ Component::GUI::AtkTextNode* ItemName;
+    /* 0x238 */ Component::GUI::AtkComponentButton* YesButton;
+    /* 0x240 */ Component::GUI::AtkComponentButton* NoButton;
 };
 
-struct Client::UI::AddonNamePlate::NamePlateObject /* Size=0x70 */
+struct Client::UI::AddonNamePlate::BakePlateRenderer /* Size=0x240 */
 {
-    /* 0x00 */ Component::GUI::AtkComponentNode* ComponentNode;
-    /* 0x08 */ Component::GUI::AtkResNode* ResNode;
-    /* 0x10 */ Component::GUI::AtkTextNode* TextNode10;
-    /* 0x18 */ Component::GUI::AtkImageNode* IconImageNode;
-    /* 0x20 */ Component::GUI::AtkImageNode* ImageNode2;
-    /* 0x28 */ Component::GUI::AtkImageNode* ImageNode3;
-    /* 0x30 */ Component::GUI::AtkImageNode* ImageNode4;
-    /* 0x38 */ Component::GUI::AtkImageNode* ImageNode5;
-    /* 0x40 */ Component::GUI::AtkCollisionNode* CollisionNode1;
-    /* 0x48 */ Component::GUI::AtkCollisionNode* CollisionNode2;
-    /* 0x50 */ __int32 Layer;
-    /* 0x54 */ __int16 TextW;
-    /* 0x56 */ __int16 TextH;
-    /* 0x58 */ __int16 IconXAdjust;
-    /* 0x5A */ __int16 IconYAdjust;
-    /* 0x5C */ __int16 UnkType;
-    /* 0x5E */ __int16 IsLocalPlayerValue;
-    /* 0x60 */ byte IsVisibleByte;
-    /*      */ byte _gap_0x61;
-    /*      */ byte _gap_0x62[0x2];
-    /*      */ byte _gap_0x64[0x4];
-    /*      */ byte _gap_0x68[0x2];
-    /* 0x6A */ byte ComponentNodeScale;
-    /*      */ byte _gap_0x6B;
-    /*      */ byte _gap_0x6C[0x4];
+    /*       */ byte _gap_0x0[0x240];
 };
 
-struct Client::UI::AddonNamePlate /* Size=0x460 */
+struct Client::UI::AddonNamePlate::BakeData /* Size=0xC */
+{
+    /* 0x0 */ __int16 U;
+    /* 0x2 */ __int16 V;
+    /* 0x4 */ __int16 Width;
+    /* 0x6 */ __int16 Height;
+    /*     */ byte _gap_0x8[0x2];
+    /* 0xA */ byte Alpha;
+    /* 0xB */ byte IsBaked;
+};
+
+struct Client::UI::AddonNamePlate::NamePlateObject /* Size=0x78 */
+{
+    /* 0x00 */ Client::UI::AddonNamePlate::BakeData BakeData;
+    /*      */ byte _gap_0xC[0x4];
+    /* 0x10 */ Component::GUI::AtkComponentNode* ComponentNode;
+    /* 0x18 */ Component::GUI::AtkResNode* ResNode;
+    /* 0x20 */ Component::GUI::AtkTextNode* TextNode10;
+    /* 0x28 */ Component::GUI::AtkImageNode* IconImageNode;
+    /* 0x30 */ Component::GUI::AtkImageNode* ImageNode2;
+    /* 0x38 */ Component::GUI::AtkImageNode* ImageNode3;
+    /* 0x40 */ Component::GUI::AtkImageNode* ImageNode4;
+    /* 0x48 */ Component::GUI::AtkImageNode* ImageNode5;
+    /* 0x50 */ Component::GUI::AtkCollisionNode* CollisionNode1;
+    /* 0x58 */ Component::GUI::AtkCollisionNode* CollisionNode2;
+    /* 0x60 */ __int32 Layer;
+    /* 0x64 */ __int16 TextW;
+    /* 0x66 */ __int16 TextH;
+    /* 0x68 */ __int16 IconXAdjust;
+    /* 0x6A */ __int16 IconYAdjust;
+    /* 0x6C */ byte NameplateKind;
+    /* 0x6D */ byte HasHPBar;
+    /* 0x6E */ byte ClickThrough;
+    /* 0x6F */ byte IsPvpEnemy;
+    /* 0x70 */ byte NeedsToBeBaked;
+    /*      */ byte _gap_0x71;
+    /*      */ byte _gap_0x72[0x2];
+    /*      */ byte _gap_0x74[0x4];
+};
+
+struct Client::UI::AddonNamePlate /* Size=0x470 */
 {
     /* 0x000 */ Component::GUI::AtkUnitBase AtkUnitBase;
     /* 0x220 */ Client::UI::AddonNamePlate::BakePlateRenderer BakePlate;
-    /* 0x450 */ Client::UI::AddonNamePlate::NamePlateObject* NamePlateObjectArray;
-    /*       */ byte _gap_0x458[0x8];
+    /* 0x460 */ Client::UI::AddonNamePlate::NamePlateObject* NamePlateObjectArray;
+    /*       */ byte _gap_0x468[0x8];
 };
 
 struct Client::UI::AddonRecipeNote /* Size=0x21A0 */
@@ -1911,38 +2559,73 @@ struct Client::UI::AddonRequest /* Size=0x2E0 */
     /*       */ byte _gap_0x2D8[0x8];
 };
 
+struct Client::UI::AddonRetainerTaskAsk /* Size=0x2B8 */
+{
+    /* 0x000 */ Component::GUI::AtkUnitBase AtkUnitBase;
+    /*       */ byte _gap_0x220[0x88];
+    /* 0x2A8 */ Component::GUI::AtkComponentButton* AssignButton;
+    /* 0x2B0 */ Component::GUI::AtkComponentButton* ReturnButton;
+};
+
+struct Client::UI::AddonRetainerTaskResult /* Size=0x258 */
+{
+    /* 0x000 */ Component::GUI::AtkUnitBase AtkUnitBase;
+    /*       */ byte _gap_0x220[0x20];
+    /* 0x240 */ Component::GUI::AtkComponentButton* ReassignButton;
+    /* 0x248 */ Component::GUI::AtkComponentButton* ConfirmButton;
+    /*       */ byte _gap_0x250[0x8];
+};
+
+struct Client::UI::AddonSalvageDialog /* Size=0x250 */
+{
+    /* 0x000 */ Component::GUI::AtkUnitBase AtkUnitBase;
+    /*       */ byte _gap_0x220[0x8];
+    /* 0x228 */ Component::GUI::AtkComponentButton* DesynthesizeButton;
+    /* 0x230 */ Component::GUI::AtkComponentCheckBox* CheckBox;
+    /*       */ byte _gap_0x238[0x8];
+    /* 0x240 */ Component::GUI::AtkComponentCheckBox* CheckBox2;
+    /* 0x248 */ bool BulkDesynthEnabled;
+    /*       */ byte _gap_0x249;
+    /*       */ byte _gap_0x24A[0x2];
+    /*       */ byte _gap_0x24C[0x4];
+};
+
+struct Client::UI::AddonSelectIconString::EventThing /* Size=0x68 */
+{
+    /* 0x00 */ void* vtbl;
+    /* 0x08 */ Component::GUI::AtkStage* AtkStage;
+    /*      */ byte _gap_0x10[0x28];
+    /* 0x38 */ Component::GUI::AtkComponentList* AtkComponentList;
+    /* 0x40 */ Client::UI::AddonSelectIconString* Addon;
+    /*      */ byte _gap_0x48[0x20];
+};
+
 struct Client::UI::AddonSelectIconString /* Size=0x2A0 */
 {
     /* 0x000 */ Component::GUI::AtkUnitBase AtkUnitBase;
     /*       */ byte _gap_0x220[0x18];
-    /* 0x238 */ void* vtbl238;
-    /* 0x240 */ Component::GUI::AtkStage* AtkStage;
-    /* 0x248 */ char** SelectStrings;
-    /*       */ byte _gap_0x250[0x8];
-    /* 0x258 */ void* unk258;
-    /*       */ byte _gap_0x260[0x8];
-    /* 0x268 */ Component::GUI::AtkComponentWindow* AtkComponentWindow;
-    /* 0x270 */ Component::GUI::AtkComponentList* AtkComponentList;
-    /* 0x278 */ Client::UI::AddonSelectIconString* this278;
-    /*       */ byte _gap_0x280[0x18];
-    /* 0x298 */ void* unk298;
+    /* 0x238 */ Client::UI::AddonSelectIconString::EventThing SelectIconStringThing;
 };
 
-struct Client::UI::AddonSelectString /* Size=0x28A */
+struct Client::UI::AddonSelectString::PopupMenuDerive /* Size=0x70 */
+{
+    /* 0x00 */ void* vtbl;
+    /* 0x08 */ Component::GUI::AtkStage* AtkStage;
+    /* 0x10 */ byte** EntryNames;
+    /*      */ byte _gap_0x18[0x18];
+    /* 0x30 */ Component::GUI::AtkComponentWindow* Window;
+    /* 0x38 */ Component::GUI::AtkComponentList* List;
+    /* 0x40 */ Component::GUI::AtkUnitBase* Owner;
+    /*      */ byte _gap_0x48[0x4];
+    /* 0x4C */ __int32 EntryCount;
+    /*      */ byte _gap_0x50[0x20];
+};
+
+struct Client::UI::AddonSelectString /* Size=0x2A8 */
 {
     /* 0x000 */ Component::GUI::AtkUnitBase AtkUnitBase;
     /*       */ byte _gap_0x220[0x18];
-    /* 0x238 */ void* vtbl238;
-    /* 0x240 */ Component::GUI::AtkStage* AtkStage;
-    /* 0x248 */ char** SelectStrings;
-    /*       */ byte _gap_0x250[0x8];
-    /* 0x258 */ void* unk258;
-    /*       */ byte _gap_0x260[0x8];
-    /* 0x268 */ Component::GUI::AtkComponentWindow* AtkComponentWindow;
-    /* 0x270 */ Component::GUI::AtkComponentList* AtkComponentList;
-    /* 0x278 */ Client::UI::AddonSelectString* this278;
-    /*       */ byte _gap_0x280[0x8];
-    /*       */ byte _gap_0x288[0x2];
+    /* 0x238 */ Client::UI::AddonSelectString::PopupMenuDerive PopupMenu;
 };
 
 struct Client::UI::AddonSelectYesno /* Size=0x2D0 */
@@ -1951,7 +2634,7 @@ struct Client::UI::AddonSelectYesno /* Size=0x2D0 */
     /* 0x220 */ Component::GUI::AtkTextNode* AtkTextNode220;
     /* 0x228 */ Component::GUI::AtkComponentButton* YesButton;
     /* 0x230 */ Component::GUI::AtkComponentButton* NoButton;
-    /* 0x238 */ Component::GUI::AtkComponentButton* AtkComponentUnknownButton238;
+    /* 0x238 */ Component::GUI::AtkComponentButton* AtkComponentButton238;
     /* 0x240 */ Component::GUI::AtkResNode* AtkResNode240;
     /* 0x248 */ Component::GUI::AtkResNode* AtkResNode248;
     /*       */ byte _gap_0x250[0x8];
@@ -1959,9 +2642,9 @@ struct Client::UI::AddonSelectYesno /* Size=0x2D0 */
     /* 0x260 */ Component::GUI::AtkComponentButton* AtkComponentButton260;
     /* 0x268 */ Component::GUI::AtkComponentButton* AtkComponentButton268;
     /* 0x270 */ Component::GUI::AtkComponentButton* AtkComponentButton270;
-    /* 0x278 */ Component::GUI::AtkComponentUnknownButton* AtkComponentUnknownButton278;
-    /* 0x280 */ Component::GUI::AtkComponentUnknownButton* AtkComponentUnknownButton280;
-    /* 0x288 */ Component::GUI::AtkComponentUnknownButton* AtkComponentUnknownButton288;
+    /* 0x278 */ Component::GUI::AtkComponentHoldButton* AtkComponentHoldButton278;
+    /* 0x280 */ Component::GUI::AtkComponentHoldButton* AtkComponentHoldButton280;
+    /* 0x288 */ Component::GUI::AtkComponentHoldButton* AtkComponentHoldButton288;
     /* 0x290 */ Component::GUI::AtkComponentCheckBox* ConfirmCheckBox;
     /* 0x298 */ Component::GUI::AtkTextNode* AtkTextNode298;
     /* 0x2A0 */ Component::GUI::AtkComponentBase* AtkComponentBase2A0;
@@ -2170,67 +2853,29 @@ struct Client::UI::AddonWeeklyPuzzle /* Size=0xD00 */
     /*       */ byte _gap_0xCE8[0x18];
 };
 
-struct Client::UI::RaptureAtkModule::NamePlateInfo /* Size=0x248 */
+struct Client::UI::Agent::AgentHUD /* Size=0x43A0 */
 {
-    /* 0x000 */ __int32 ActorID;
-    /*       */ byte _gap_0x4[0x4];
-    /*       */ byte _gap_0x8[0x28];
-    /* 0x030 */ Client::System::String::Utf8String Name;
-    /* 0x098 */ Client::System::String::Utf8String FcName;
-    /* 0x100 */ Client::System::String::Utf8String Title;
-    /* 0x168 */ Client::System::String::Utf8String DisplayTitle;
-    /* 0x1D0 */ Client::System::String::Utf8String LevelText;
-    /*       */ byte _gap_0x238[0x8];
-    /* 0x240 */ __int32 Flags;
-    /*       */ byte _gap_0x244[0x4];
+    /* 0x0000 */ Component::GUI::AgentInterface AgentInterface;
+    /*        */ byte _gap_0x28[0x48];
+    /* 0x0070 */ bool NeedToSave;
+    /*        */ byte _gap_0x71;
+    /*        */ byte _gap_0x72[0x2];
+    /*        */ byte _gap_0x74[0x4];
+    /*        */ byte _gap_0x78[0x4328];
 };
 
-struct Client::UI::RaptureAtkModule /* Size=0x275E8 */
+struct Client::UI::Agent::AgentModule /* Size=0xC10 */
 {
-    /* 0x00000 */ void* vtbl;
-    /*         */ byte _gap_0x8[0x1A240];
-    /* 0x1A248 */ Client::UI::RaptureAtkModule::NamePlateInfo NamePlateInfoArray;
-    /*         */ byte _gap_0x1A490[0xD158];
-};
-
-struct Client::UI::UIModule::Unk1 /* Size=0x8 */
-{
-    union {
-    /* 0x0 */ void* vtbl;
-    /* 0x0 */ void** vfunc;
-    } _union_0x0;
-};
-
-struct Client::UI::UIModule::Unk2 /* Size=0x8 */
-{
-    union {
-    /* 0x0 */ void* vtbl;
-    /* 0x0 */ void** vfunc;
-    } _union_0x0;
-};
-
-struct Client::UI::UIModule::Unk3 /* Size=0x8 */
-{
-    union {
-    /* 0x0 */ void* vtbl;
-    /* 0x0 */ void** vfunc;
-    } _union_0x0;
-};
-
-struct Client::UI::UIModule /* Size=0xDE750 */
-{
-    union {
-    /* 0x00000 */ void* vtbl;
-    /* 0x00000 */ void** vfunc;
-    } _union_0x0;
-    /* 0x00008 */ Client::UI::UIModule::Unk1 UnkObj1;
-    /* 0x00010 */ Client::UI::UIModule::Unk2 UnkObj2;
-    /* 0x00018 */ Client::UI::UIModule::Unk3 UnkObj3;
-    /* 0x00020 */ void* unk;
-    /* 0x00028 */ void* SystemConfig;
-    /*         */ byte _gap_0x30[0xB47A0];
-    /* 0xB47D0 */ Client::UI::RaptureAtkModule RaptureAtkModule;
-    /*         */ byte _gap_0xDBDB8[0x2998];
+    /* 0x000 */ void* vtbl;
+    /* 0x008 */ Client::UI::UIModule* UIModule;
+    /* 0x010 */ byte Initialized;
+    /* 0x011 */ byte UnkByte11;
+    /*       */ byte _gap_0x12[0x2];
+    /* 0x014 */ unsigned __int32 FrameCounter;
+    /* 0x018 */ float FrameDelta;
+    /*       */ byte _gap_0x1C[0x4];
+    /* 0x020 */ Component::GUI::AgentInterface* AgentArray;
+    /*       */ byte _gap_0x28[0xBE8];
 };
 
 struct Client::System::Configuration::SystemConfig /* Size=0x450 */
@@ -2252,12 +2897,34 @@ struct Client::Graphics::Matrix44 /* Size=0x40 */
     /* 0x00 */ float Matrix[0x10];
 };
 
+struct Client::Graphics::Quarternion /* Size=0x10 */
+{
+    /* 0x00 */ float X;
+    /* 0x04 */ float Y;
+    /* 0x08 */ float Z;
+    /* 0x0C */ float W;
+};
+
+struct Client::Graphics::ReferencedClassBase /* Size=0x10 */
+{
+    /* 0x00 */ void* vtbl;
+    /* 0x08 */ unsigned __int32 RefCount;
+    /*      */ byte _gap_0xC[0x4];
+};
+
 struct Client::Graphics::Vector3 /* Size=0x10 */
 {
     /* 0x00 */ float X;
     /* 0x04 */ float Y;
     /* 0x08 */ float Z;
     /*      */ byte _gap_0xC[0x4];
+};
+
+struct Client::Graphics::Transform /* Size=0x30 */
+{
+    /* 0x00 */ Client::Graphics::Vector3 Position;
+    /* 0x10 */ Client::Graphics::Quarternion Rotation;
+    /* 0x20 */ Client::Graphics::Vector3 Scale;
 };
 
 struct Client::Graphics::Scene::Object /* Size=0x80 */
@@ -2271,6 +2938,23 @@ struct Client::Graphics::Scene::DrawObject /* Size=0x90 */
 {
     /* 0x00 */ Client::Graphics::Scene::Object Object;
     /*      */ byte _gap_0x80[0x10];
+};
+
+struct Client::Graphics::Render::Skeleton /* Size=0x100 */
+{
+    /* 0x000 */ Client::Graphics::ReferencedClassBase ReferencedClassBase;
+    /* 0x010 */ Client::Graphics::Render::Skeleton* LinkedListPrevious;
+    /* 0x018 */ Client::Graphics::Render::Skeleton* LinkedListNext;
+    /* 0x020 */ Client::Graphics::Transform Transform;
+    /* 0x050 */ unsigned __int16 PartialSkeletonCount;
+    /*       */ byte _gap_0x52[0x2];
+    /*       */ byte _gap_0x54[0x4];
+    /* 0x058 */ void** SKLBArray;
+    /*       */ byte _gap_0x60[0x8];
+    /* 0x068 */ void* PartialSkeletonArray;
+    /*       */ byte _gap_0x70[0x48];
+    /* 0x0B8 */ Client::Graphics::Scene::CharacterBase* Owner;
+    /*       */ byte _gap_0xC0[0x40];
 };
 
 struct Client::Graphics::Physics::BoneSimulator /* Size=0x100 */
@@ -2324,7 +3008,7 @@ struct Client::Graphics::Scene::CharacterBase /* Size=0x8F0 */
     /*       */ byte _gap_0x94[0x4];
     /* 0x098 */ __int32 SlotCount;
     /*       */ byte _gap_0x9C[0x4];
-    /* 0x0A0 */ void* Skeleton;
+    /* 0x0A0 */ Client::Graphics::Render::Skeleton* Skeleton;
     /* 0x0A8 */ void** ModelArray;
     /*       */ byte _gap_0xB0[0x98];
     /* 0x148 */ void* PostBoneDeformer;
@@ -2371,17 +3055,76 @@ struct Client::Graphics::Render::OffscreenRenderingManager /* Size=0x150 */
     /*       */ byte _gap_0xE8[0x68];
 };
 
-struct Client::Game::Character::BattleChara /* Size=0x2B60 */
+struct Client::Graphics::Kernel::SwapChain /* Size=0x70 */
 {
-    /* 0x0000 */ Client::Game::Character::Character Character;
-    /*        */ byte _gap_0x1934[0x4];
-    /*        */ byte _gap_0x1938[0x1228];
+    /*      */ byte _gap_0x0[0x38];
+    /* 0x38 */ unsigned __int32 Width;
+    /* 0x3C */ unsigned __int32 Height;
+    /*      */ byte _gap_0x40[0x18];
+    /* 0x58 */ Client::Graphics::Render::Texture* BackBuffer;
+    /* 0x60 */ Client::Graphics::Render::Texture* DepthStencil;
+    /* 0x68 */ void* DXGISwapChain;
 };
 
-struct Client::Game::Character::Companion /* Size=0x19C0 */
+struct Client::Graphics::Kernel::Device /* Size=0x210 */
+{
+    /*       */ byte _gap_0x0[0x8];
+    /* 0x008 */ void* ContextArray;
+    /* 0x010 */ void* ImmediateContext;
+    /* 0x018 */ void* RenderThread;
+    /*       */ byte _gap_0x20[0x60];
+    /* 0x080 */ Client::Graphics::Kernel::SwapChain* SwapChain;
+    /*       */ byte _gap_0x88[0x8];
+    /*       */ byte _gap_0x90[0x4];
+    /* 0x094 */ __int32 D3DFeatureLevel;
+    /* 0x098 */ void* DXGIFactory;
+    /*       */ byte _gap_0xA0[0x8];
+    /* 0x0A8 */ void* D3D11Device;
+    /* 0x0B0 */ void* D3D11DeviceContext;
+    /*       */ byte _gap_0xB8[0x158];
+};
+
+struct Client::Game::UI::Telepo::TeleportInfo /* Size=0x14 */
+{
+    /* 0x00 */ unsigned __int32 AetheryteId;
+    /* 0x04 */ unsigned __int32 GilCost;
+    /* 0x08 */ unsigned __int16 TerritoryId;
+    /*      */ byte _gap_0xA;
+    /* 0x0B */ byte Ward;
+    /* 0x0C */ byte Plot;
+    /* 0x0D */ byte SubIndex;
+    /* 0x0E */ byte IsFavourite;
+    /*      */ byte _gap_0xF;
+    /*      */ byte _gap_0x10[0x4];
+};
+
+struct Vector::ClientGameUITelepoTeleportInfo /* Size=0x18 */
+{
+    /* 0x00 */ Client::Game::UI::Telepo::TeleportInfo* First;
+    /* 0x08 */ Client::Game::UI::Telepo::TeleportInfo* Last;
+    /* 0x10 */ Client::Game::UI::Telepo::TeleportInfo* End;
+};
+
+struct Client::Game::UI::Telepo::SelectUseTicketInvoker /* Size=0x28 */
+{
+    /* 0x00 */ void* vtbl;
+    /*      */ byte _gap_0x8[0x8];
+    /* 0x10 */ Client::Game::UI::Telepo* Telepo;
+    /*      */ byte _gap_0x18[0x10];
+};
+
+struct Client::Game::UI::Telepo /* Size=0x58 */
+{
+    /* 0x00 */ void* vtbl;
+    /*      */ byte _gap_0x8[0x8];
+    /* 0x10 */ Vector::ClientGameUITelepoTeleportInfo TeleportList;
+    /* 0x28 */ Client::Game::UI::Telepo::SelectUseTicketInvoker UseTicketInvoker;
+    /*      */ byte _gap_0x50[0x8];
+};
+
+struct Client::Game::Character::BattleChara /* Size=0x2C00 */
 {
     /* 0x0000 */ Client::Game::Character::Character Character;
-    /*        */ byte _gap_0x1934[0x4];
-    /*        */ byte _gap_0x1938[0x88];
+    /*        */ byte _gap_0x19B0[0x1250];
 };
 
