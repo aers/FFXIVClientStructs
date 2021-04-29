@@ -208,7 +208,9 @@ classes:
       0x1404DAED0: CreateAtkNode
       0x1404DC2E0: CreateAtkComponent
       0x1404E30E0: GetNodeByIndex
-#
+  Component::GUI::AtkArrayDataHolder:
+    funcs:
+      0x1404AFEB0: ctor
   Client::Game::ActionManager:
     inherits_from: Client::Graphics::Vfx::VfxDataListenner
     vtbl: 0x1416F11C0
@@ -420,6 +422,12 @@ classes:
       0x1401F8020: ctor
       0x1401FD2B0: GetAgentByInternalID
       0x1401FD2C0: GetAgentByInternalID_2 # dupe?
+  Client::UI::Agent::AgentContext:
+    inherits_from: Client::UI::Agent::AgentInterface
+    vtbl: 0x14169C0E0
+    funcs:
+      0x140207660: ClearMenu
+      0x140208600: SetupButtonsForTarget
   Client::UI::Agent::AgentLobby:
     inherits_from: Client::UI::Agent::AgentInterface
     vtbl: 0x14169C678
@@ -1313,6 +1321,7 @@ classes:
     funcs:
       0x14082C2F0: ctor
       0x140831EA0: UpdateParty
+      0x140842D70: OpenContextMenuFromTarget
       0x140845C10: GetMainCommandString # MainCommand exd
       0x140845F50: OpenSystemMenu
   Client::UI::Agent::AgentTryon::TryonCharaView:
