@@ -887,7 +887,6 @@ classes:
     inherits_from: Component::GUI::AtkEventListener
     vtbl: 0x1416C15E8
     vfuncs:
-      0: dtor
       7: SetPosition
       8: SetX
       9: SetY
