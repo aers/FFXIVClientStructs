@@ -106,8 +106,6 @@ classes:
   Client::Game::Control::TargetSystem::ListFeeder:
   Client::Game::InstanceContent::ContentSheetWaiterInterface:
   Client::Game::Object::IGameObjectEventListener:
-  Client::Graphics::Render::RenderObject:
-    inherits_from: Client::Graphics::ReferencedClassBase
   Client::Graphics::RenderObjectList:
   Client::Graphics::Singleton:
   Client::Graphics::Vfx::VfxDataListenner:
@@ -531,6 +529,9 @@ classes:
     vtbl: 0x1416ABCD0
     funcs:
       0x14032CB50: ctor
+  Client::Graphics::Render::RenderObject:
+    inherits_from: Client::Graphics::ReferencedClassBase
+    vtbl: 0x1416ABC50
   Client::Graphics::Render::Model:
     inherits_from: Client::Graphics::Render::RenderObject
     vtbl: 0x1416ABCE0
@@ -887,7 +888,6 @@ classes:
     inherits_from: Component::GUI::AtkEventListener
     vtbl: 0x1416C15E8
     vfuncs:
-      0: dtor
       7: SetPosition
       8: SetX
       9: SetY
