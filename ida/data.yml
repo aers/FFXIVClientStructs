@@ -816,6 +816,7 @@ classes:
       0x1404D1030: GetAsAtkCollisionNode
       0x1404D1050: GetAsAtkComponentNode
       0x1404D1070: GetComponent
+      0x1404D1820: RegisterEvent
       0x1404D1C10: GetPositionFloat
       0x1404D1C30: SetPositionFloat
       0x1404D1C80: GetPositionShort
@@ -838,6 +839,7 @@ classes:
       0x1404D2510: SetColor
       0x1404D2550: SetAddRGB
       0x1404D25A0: SetMultiplyRGB
+      0x1404D25F0: GetPriority
       0x1404D2610: SetPriority
       0x1404D2660: SetVisibility
       0x1404DD600: SetSize
@@ -859,6 +861,8 @@ classes:
       0x1404D5600: SetGlowColour
       0x1404D4820: GetTextDrawSize
       0x1404D54F0: SetFontSize
+      0x1404D5C40: ToggleFixedFontResolution # this stops text from auto scaling, they turned this on for nameplates in 5.5
+      0x1404D6820: ToggleFontCache
   Component::GUI::AtkNineGridNode:
     inherits_from: Component::GUI::AtkResNode
     vtbl: 0x1416C1588
@@ -905,6 +909,8 @@ classes:
       0x1404DF670: SetPosition
       0x1404DF7F0: SetAlpha
       0x1404DF820: GetScale
+      0x1404DFA40: GetGlobalUIScale
+      0x1404DFA50: SetGlobalUIScale
       0x1404DFBF0: SetScale
       0x1404DFF60: CalculateBounds
       0x1404E2210: Draw

@@ -8,7 +8,8 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
         [FieldOffset(0x0)] public void* vtbl;
         [FieldOffset(0x8)] public int Size;
         [FieldOffset(0x1C)] public byte Unk1C;
-        [FieldOffset(0x1D)] public short Unk1D;
+        [FieldOffset(0x1D)] public byte Unk1D;
+        [FieldOffset(0x1E)] public byte HasModifiedData;
         [FieldOffset(0x1F)] public byte Unk1F; // initialized to -1
     }
 }
