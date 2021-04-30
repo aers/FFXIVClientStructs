@@ -9,7 +9,7 @@
     <AssemblyName>FFXIVClientStructs</AssemblyName>
     <AssemblyProduct>FFXIVClientStructs</AssemblyProduct>
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
-    <TargetFramework>net472</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <LangVersion>8.0</LangVersion>
