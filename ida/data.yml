@@ -205,7 +205,7 @@ classes:
       0x1404DA9F0: ReadAHSDAndLoadTextures
       0x1404DAED0: CreateAtkNode
       0x1404DC2E0: CreateAtkComponent
-      0x1404E30E0: GetNodeByIndex
+      0x1404DDDC0: SearchNodeByIndex # this supports indexes greater than the node count, there's something i don't understand going on w/ addons here
   Component::GUI::AtkArrayDataHolder:
     funcs:
       0x1404AFEB0: ctor
@@ -843,10 +843,12 @@ classes:
       0x1404D25F0: GetPriority
       0x1404D2610: SetPriority
       0x1404D2660: SetVisibility
-      0x1404DD600: SetSize
+      0x1404D2A40: GetIsUsingDepthBasedDrawPriority
+      0x1404D2A60: SetUseDepthBasedDrawPriority
       0x1404D2AB0: SetDepth
       0x1404D2E80: Init
       0x1404D3050: SetScale0 # SetScale jumps to this
+      0x1404DD600: SetSize
   Component::GUI::AtkImageNode:
     inherits_from: Component::GUI::AtkResNode
     vtbl: 0x1416C1558
@@ -912,8 +914,9 @@ classes:
       0x1404DFA40: GetGlobalUIScale
       0x1404DFA50: SetGlobalUIScale
       0x1404DFBF0: SetScale
-      0x1404DFF60: CalculateBounds
+      0x1404DFF60: CalculateBounds      
       0x1404E2210: Draw
+      0x1404E30E0: GetNodeByIndex
       0x1404E3500: FireCallback
   Component::GUI::AtkComponentBase:
     inherits_from: Component::GUI::AtkEventListener
@@ -1612,7 +1615,8 @@ classes:
     vtbl: 0x141805CF8
     funcs:
       0x140EF0B20: ctor
-      0x140EF1000: SetPlayerNamePlate
+      0x140EF0DD0: SetCommonNamePlate # x, y, scale, etc
+      0x140EF1000: SetPlayerNamePlate # player specific nodes
       0x140EF39D0: ToggleTextRenderMode
   Client::UI::AddonTeleport:
     inherits_from: Component::GUI::AtkUnitBase

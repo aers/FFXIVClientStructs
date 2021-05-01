@@ -24,6 +24,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
         [FieldOffset(0x220)] public BakePlateRenderer BakePlate;
         [FieldOffset(0x460)] public NamePlateObject* NamePlateObjectArray;  // 0 - 50
         [FieldOffset(0x468)] public byte DoFullUpdate;
+        [FieldOffset(0x46A)] public ushort AlternatePartId;
 
         // Client::UI::AddonNamePlate::BakePlateRenderer
         //   Component::GUI::AtkTextNodeRenderer
