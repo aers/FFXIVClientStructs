@@ -96,6 +96,7 @@ functions:
   0x140A966D0: EventFramework_ProcessDirectorUpdate
   0x140A99D20: EventFramework_GetInstanceContentDirector
   0x141040FF0: Client::UI::AddonHudLayoutScreen::MoveableAddonInfoStruct_UpdateAddonPosition
+  0x14110E9D0: Client::Graphics::Kernel::CreateShader # static function
   0x14131D7F0: crc
   0x141370E34: ThrowException
   0x1413976F4: FreeMemory
@@ -359,6 +360,11 @@ classes:
   Client::System::Resource::Handle::DefaultResourceHandle:
     inherits_from: Client::System::Resource::Handle::ResourceHandle
     vtbl: 0x141693EE8
+  Client::System::Resource::Handle::ShaderPackageResourceHandle:
+    inherits_from: Client::System::Resource::Handle::DefaultResourceHandle
+    vtbl: 0x1416941E8
+    funcs:
+      0x1401A5360: ctor
   Client::System::Resource::Handle::TextureResourceHandle:
     inherits_from: Client::System::Resource::Handle::ResourceHandle
     vtbl: 0x141694368
@@ -1800,6 +1806,23 @@ classes:
   Client::Graphics::Culling::CullingManager:
     inherits_from: Client::Graphics::Singleton
     vtbl: 0x14184C358
+  Client::Graphics::Kernel::CVector_Client::Graphics::Kernel::VertexShaderPtr: # std::vector of Client::Graphics::Kernel::VertexShader*
+    vtbl: 0x14184C8F0
+  Client::Graphics::Kernel::CVector_Client::Graphics::Kernel::PixelShaderPtr: # std::vector of Client::Graphics::Kernel::PixelShader*
+    vtbl: 0x14184C8F8
+  Client::Graphics::Kernel::CVector_Client::Graphics::Kernel::ShaderNodePtr: # std::vector of Client::Graphics::Kernel::ShaderNode*
+    vtbl: 0x14184C900
+  Client::Graphics::Kernel::CBalanceSet_Client::Graphics::Kernel::ShaderPackage::SItem: # pretty sure BalanceSet is a balanced tree, Client::Graphics::Kernel::ShaderPackage::SItem
+    vtbl: 0x14184C908
+  Client::Graphics::Kernel::ShaderPackage:
+    inherits_from: Client::Graphics::ReferencedClassBase
+    vtbl: 0x14184C910
+    funcs:
+      0x14110EFA0: CreateShaderPackage # static function
+      0x14110F740: ctor
+      0x141110B20: VectorResize_PixelShader # these 3 functions are identical, just template-generated functions from std::vectors
+      0x141110C10: VectorResize_ShaderNode
+      0x141110D00: VectorResize_VertexShader
   Client::Game::Character::Companion:
     inherits_from: Client::Game::Character::Character
     vtbl: 0x14184FA60
