@@ -14,6 +14,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
         [FieldOffset(0x20)] public ushort AssetCount;
         [FieldOffset(0x22)] public ushort PartsListCount;
         [FieldOffset(0x24)] public ushort ObjectCount;
+        [FieldOffset(0x26)] public ushort UnknownCount; // not sure what but used alongside object count
         [FieldOffset(0x28)] public void* UldResourceHandle; // addons release this reference, components do not
         [FieldOffset(0x42)] public ushort NodeListCount;
         [FieldOffset(0x48)] public void* AtkResourceRendererManager;

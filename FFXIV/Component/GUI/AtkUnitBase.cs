@@ -33,6 +33,10 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
         [FieldOffset(0x1D8)] public AtkCollisionNode** CollisionNodeList; // seems to be all collision nodes in tree, may be something else though
         [FieldOffset(0x1E0)] public uint CollisionNodeListCount;
 
-        public bool IsVisible => (Flags & 0x20) == 0x20;
+        public bool IsVisible
+        {
+            get => (Flags & 0x20) == 0x20;
+            set => Flags = value ? Flags |= 0x20 : Flags &= 0xDF;
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using FFXIVClientStructs.FFXIV.Client.System.String;
 using System.Runtime.InteropServices;
+using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI
 {
@@ -9,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
     [StructLayout(LayoutKind.Explicit, Size = 0x27718)]
     public unsafe struct RaptureAtkModule
     {
-        [FieldOffset(0x0)] public void* vtbl;
+        [FieldOffset(0x0)] public AtkModule AtkModule;
         [FieldOffset(0x1A378)] public NamePlateInfo NamePlateInfoArray;  // 0-50, &NamePlateInfoArray[i]
 
         [StructLayout(LayoutKind.Explicit, Size = 0x248)]
