@@ -554,8 +554,8 @@ classes:
   Client::Graphics::Render::GeometryInstancingRenderer:
     inherits_from: Client::Graphics::Render::BaseRenderer
     vtbl: 0x1416ABDC8
-  ? Client::Graphics::Render::BGInstancingRenderer_Client::Graphics::JobSystem_CClient::Graphics::Render::tagInstancingContainerRenderInfo
-  : vtbl: 0x1416ABE70
+  Client::Graphics::Render::BGInstancingRenderer_Client::Graphics::JobSystem_CClient::Graphics::Render::tagInstancingContainerRenderInfo
+    vtbl: 0x1416ABE70
   Client::Graphics::Render::BGInstancingRenderer:
     inherits_from: Client::Graphics::Render::GeometryInstancingRenderer
     vtbl: 0x1416ABE78
@@ -572,8 +572,8 @@ classes:
   Client::Graphics::Render::WaterRenderer:
     inherits_from: Client::Graphics::Render::BaseRenderer
     vtbl: 0x1416ABFC8
-  ? Client::Graphics::Render::VerticalFogRenderer_Client::Graphics::JobSystem_Client::Graphics::Render::VerticalFogRenderer::RenderJob
-  : vtbl: 0x1416AC0B0
+  Client::Graphics::Render::VerticalFogRenderer_Client::Graphics::JobSystem_Client::Graphics::Render::VerticalFogRenderer::RenderJob
+    vtbl: 0x1416AC0B0
   Client::Graphics::Render::VerticalFogRenderer:
     inherits_from: Client::Graphics::Render::BaseRenderer
     vtbl: 0x1416AC0B8
@@ -596,8 +596,8 @@ classes:
       0x140369130: ctor
   Client::Graphics::Render::LightingManager::LightShape:
     vtbl: 0x1416AC230
-  ? Client::Graphics::Render::LightingManager::LightingRenderer_Client::Graphics::JobSystem_Client::Graphics::Render::LightingManager::LightingRenderer::RenderJob
-  : vtbl: 0x1416AC238
+  Client::Graphics::Render::LightingManager::LightingRenderer_Client::Graphics::JobSystem_Client::Graphics::Render::LightingManager::LightingRenderer::RenderJob
+   vtbl: 0x1416AC238
   Client::Graphics::Render::LightingManager::LightingRenderer:
     vtbl: 0x1416AC240
     funcs:
@@ -1839,8 +1839,8 @@ classes:
   Client::Graphics::Culling::OcclusionCullingManager:
     inherits_from: Client::Graphics::Singleton
     vtbl: 0x141852780
-  ? Client::Graphics::Streaming::StreamingManager_Client::Graphics::JobSystem_Client::Graphics::Streaming::StreamingManager::StreamingJob
-  : inherits_from: Client::Graphics::Singleton
+  Client::Graphics::Streaming::StreamingManager_Client::Graphics::JobSystem_Client::Graphics::Streaming::StreamingManager::StreamingJob
+    inherits_from: Client::Graphics::Singleton
     vtbl: 0x141852790
   Client::Graphics::Streaming::StreamingManager:
     inherits_from: Client::Graphics::Singleton
