@@ -29,7 +29,13 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
         Clip = 0x40,
         Fill = 0x80,
         HasCollision = 0x100, // set if node type == 8, might be "HasCollision", also set if Unk2 first bit is set (https://github.com/NotAdam/Lumina/blob/714a1d8b9c4e182b411e7c68330d49a5dfccb9bc/src/Lumina/Data/Parsing/Uld/UldRoot.cs#L273)
-        RespondToMouse = 0x200 // this also gets set if the above flag is set
+        RespondToMouse = 0x200, // this also gets set if the above flag is set
+        Focusable = 0x400,
+        Droppable = 0x800,
+        IsTopNode = 0x1000,
+        UnkFlag = 0x2000,
+        UseDepthBasedPriority = 0x4000,
+        UnkFlag2 = 0x8000
     }
 
     // Component::GUI::AtkResNode
@@ -44,6 +50,8 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
     {
         [FieldOffset(0x0)] public AtkEventTarget AtkEventTarget;
         [FieldOffset(0x8)] public uint NodeID;
+        [FieldOffset(0x10)] public void* TimelineObject; // Component::GUI::AtkTimeline???
+        [FieldOffset(0x18)] public void* EventObject; // Component::GUI::AtkEvent???
         // these are all technically union types with a node ID and a pointer but should be replaced by the loader always
         [FieldOffset(0x20)] public AtkResNode* ParentNode;
         [FieldOffset(0x28)] public AtkResNode* PrevSiblingNode;
@@ -83,6 +91,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
         [FieldOffset(0x9C)] public ushort Priority;
         [FieldOffset(0x9E)] public short Flags;
         [FieldOffset(0xA0)] public uint Flags_2; // bit 1 = has changes, ClipCount is bits 10-17, idk its a mess
+        [FieldOffset(0xA0)] public uint DrawFlags;
 
         public bool IsVisible => (Flags & 0x10) == 0x10;
     }

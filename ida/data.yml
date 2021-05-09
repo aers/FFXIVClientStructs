@@ -203,7 +203,7 @@ classes:
     funcs:
       0x1404D83C0: SetupFromULDResourceHandle
       0x1404DA7E0: ReadTPHD
-      0x1404DA9F0: ReadAHSDAndLoadTextures
+      0x1404DA9F0: ReadASHDAndLoadTextures
       0x1404DAED0: CreateAtkNode
       0x1404DC2E0: CreateAtkComponent
       0x1404DDDC0: SearchNodeByIndex # this supports indexes greater than the node count, there's something i don't understand going on w/ addons here
@@ -867,6 +867,7 @@ classes:
       0x140544580: ctor
       0x1404D39B0: SetText
       0x1404D44E0: SetForegroundColour
+      0x1404D5220: SetNumber
       0x1404D5600: SetGlowColour
       0x1404D4820: GetTextDrawSize
       0x1404D54F0: SetFontSize
