@@ -824,6 +824,7 @@ classes:
       0x1404D1050: GetAsAtkComponentNode
       0x1404D1070: GetComponent
       0x1404D1820: RegisterEvent
+      0x1404D1860: UnregisterEvent
       0x1404D1C10: GetPositionFloat
       0x1404D1C30: SetPositionFloat
       0x1404D1C80: GetPositionShort
