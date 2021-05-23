@@ -189,7 +189,7 @@ classes:
       0x1404AF630: GetUInt # these two could be backwards
       0x1404AF650: GetFloat
       0x1404AF670: GetString
-      0x1404AF690: GetUnkPtr # could also be string, returns a pointer size 
+      0x1404AF690: GetUnkPtr # could also be string, returns a pointer size
       0x1404AF6D0: SetString
       0x1404AF760: CopyValue # = operator
       0x1404AF7D0: Equals # == operator
@@ -286,9 +286,10 @@ classes:
     inherits_from: Client::System::Input::TextServiceInterface
     vtbl: 0x141675C48
   Component::Shell::ShellCommandModule:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
     vtbl: 0x141675D40
     funcs:
-      0x140098B90: ExecuteCommand
+      0x140098B90: ExecuteCommandInner
   Component::GUI::AtkEventListener:
     vtbl: 0x14167F708
     vfuncs:
@@ -682,7 +683,7 @@ classes:
       0x140439610: GetSlotEqpFlags
       0x14043AC40: GetEqpDataForAdults
       0x14043AEA0: GetEqpDataForChildren
-      0x14043AFF0: GetEqpDataForOther      
+      0x14043AFF0: GetEqpDataForOther
   Client::Graphics::Scene::CharacterBase:
     inherits_from: Client::Graphics::Scene::DrawObject
     vtbl: 0x1416BC1D8
@@ -922,7 +923,7 @@ classes:
       0x1404DFA40: GetGlobalUIScale
       0x1404DFA50: SetGlobalUIScale
       0x1404DFBF0: SetScale
-      0x1404DFF60: CalculateBounds      
+      0x1404DFF60: CalculateBounds
       0x1404E2210: Draw
       0x1404E30E0: GetNodeByIndex
       0x1404E3500: FireCallback
@@ -1273,15 +1274,350 @@ classes:
     vtbl: 0x1416D8768
   Component::Shell::ShellCommandInterface:
     vtbl: 0x1416EBEB8
+    vfuncs:
+      0: dtor
+      1: ExecuteCommand
+  Component::Shell::DebugCommandInterface:
+    vtbl: 0x1416EBED0
+  Client::UI::Shell::RaptureShellCommandInterface:
+    inherits_from: Component::Shell::ShellCommandInterface
+    vtbl: 0x1416EBEE0
   Client::UI::Shell::RaptureShellModule:
     inherits_from: Component::Shell::ShellCommandModule
     vtbl: 0x1416EBEF8
     funcs:
       0x14070F3D0: ctor
       0x1407136F0: SetChatChannel
+  Client::UI::Shell::ShellCommandWait:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EBF10
+  Client::UI::Shell::ShellCommandBlueAction:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EBF28
   Client::UI::Shell::ShellCommandAction:
-    inherits_from: Component::Shell::ShellCommandInterface
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
     vtbl: 0x1416EBF40
+  Client::UI::Shell::ShellCommandBattleMode:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EBF58
+  Client::UI::Shell::ShellCommandGear:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EBF70
+  Client::UI::Shell::ShellCommandAssist:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EBF88
+  Client::UI::Shell::ShellCommandFollow:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EBFA0
+  Client::UI::Shell::ShellCommandTarget:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EBFB8
+  Client::UI::Shell::ShellCommandTargetPc:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EBFD0
+  Client::UI::Shell::ShellCommandTargetNpc:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EBFE8
+  Client::UI::Shell::ShellCommandTargetEnemy:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EC000
+  Client::UI::Shell::ShellCommandTargetEnemyNext:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EC018
+  Client::UI::Shell::ShellCommandTargetEnemyPrev:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EC030
+  Client::UI::Shell::ShellCommandBattleTarget:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EC048
+  Client::UI::Shell::ShellCommandRecast:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EC060
+  Client::UI::Shell::ShellCommandMarking:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EC080
+  Client::UI::Shell::ShellCommandFaceTarget:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EC098
+  Client::UI::Shell::ShellCommandAddAdditionalAction:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EC0B0
+  Client::UI::Shell::ShellCommandAddPvpAction:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EC0C8
+  Client::UI::Shell::ShellCommandAutoMove:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EC0E0
+  Client::UI::Shell::ShellCommandLockon:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EC0F8
+  Client::UI::Shell::ShellCommandFocus:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EC110
+  Client::UI::Shell::ShellCommandPetAction:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EC128
+  Client::UI::Shell::ShellCommandBuddyAction:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EC140
+  Client::UI::Shell::ShellCommandFaceCamera:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EC158
+  Client::UI::Shell::ShellCommandFieldMarker:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EC170
+  Client::UI::Shell::ShellCommandLevelSync:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EC188
+  Client::UI::Shell::ShellCommandMount:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EC1A0
+  Client::UI::Shell::ShellCommandMinion:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EC1B8
+  Client::UI::Shell::ShellCommandStatusOff:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EC1D0
+  Client::UI::Shell::ShellCommandQuickChat:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EC1E8
+  Client::UI::Shell::ShellCommandBlueSpellbook:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EC200
+  Client::UI::Shell::ShellCommandFashion:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EC218
+  Client::UI::Shell::ShellCommandEcho:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EC230
+  Client::UI::Shell::ShellCommandChatSay:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EC248
+  Client::UI::Shell::ShellCommandChatYell:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EC260
+  Client::UI::Shell::ShellCommandChatShout:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EC278
+  Client::UI::Shell::ShellCommandChatTell:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EC290
+  Client::UI::Shell::ShellCommandChatReply:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EC2B0
+  Client::UI::Shell::ShellCommandChatParty:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EC2E0
+  Client::UI::Shell::ShellCommandChatFC:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EC2F8
+  Client::UI::Shell::ShellCommandChatLinkshell:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EC310
+  Client::UI::Shell::ShellCommandUnknown1416EC328:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EC328
+  Client::UI::Shell::ShellCommandChatAlliance:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EC340
+  Client::UI::Shell::ShellCommandChatNovice:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EC358
+  Client::UI::Shell::ShellCommandChatPvp:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EC370
+  Client::UI::Shell::ShellCommandChatCrossWorldLinkshell:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EC388
+  Client::UI::Shell::ShellCommandParty:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EC3A0
+  Client::UI::Shell::ShellCommandPartyJoin:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EC3B8
+  Client::UI::Shell::ShellCommandPartyDecline:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EC3D0
+  Client::UI::Shell::ShellCommandPartyInvite:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EC3E8
+  Client::UI::Shell::ShellCommandPartyLeave:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EC400
+  Client::UI::Shell::ShellCommandPartyKick:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EC418
+  Client::UI::Shell::ShellCommandPartyLeader:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EC430
+  Client::UI::Shell::ShellCommandFC:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EC448
+  Client::UI::Shell::ShellCommandLinkshell:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EC460
+  Client::UI::Shell::ShellCommandFriendlist:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EC478
+  Client::UI::Shell::ShellCommandBlacklist:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EC498
+  Client::UI::Shell::ShellCommandEmote:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EC4B8
+  Client::UI::Shell::ShellCommandCheck:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EC4D0
+  Client::UI::Shell::ShellCommandSearch:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EC4E8
+  Client::UI::Shell::ShellCommandTrade:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EC500
+  Client::UI::Shell::ShellCommandMateria:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EC518
+  Client::UI::Shell::ShellCommandSalute:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EC530
+  Client::UI::Shell::ShellCommandLookParty:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EC548
+  Client::UI::Shell::ShellCommandComment:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EC568
+  Client::UI::Shell::ShellCommandReadyCheck:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EC580
+  Client::UI::Shell::ShellCommandRandom:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EC598
+  Client::UI::Shell::ShellCommandDice:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EC5B0
+  Client::UI::Shell::ShellCommandClearTellHistory:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EC5C8
+  Client::UI::Shell::ShellCommandLogout:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EC5E0
+  Client::UI::Shell::ShellCommandCommand:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EC610
+  Client::UI::Shell::ShellCommandQuit:
+    inherits_from: Client::UI::Shell::ShellCommandLogout
+    vtbl: 0x1416EC628
+  Client::UI::Shell::ShellCommandFaq:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EC658
+  Client::UI::Shell::ShellCommandGM:
+    inherits_from: Component::Shell::DebugCommandInterface
+    vtbl: 0x1416EC680
+  Client::UI::Shell::ShellCommandReturn:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EE608
+  Client::UI::Shell::ShellCommandLegacy:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EE620
+  Client::UI::Shell::ShellCommandHotbarBase:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EE638
+  Client::UI::Shell::ShellCommandHotbar:
+    inherits_from: Client::UI::Shell::ShellCommandHotbarBase
+    vtbl: 0x1416EE688  # Might be switched with cross
+  Client::UI::Shell::ShellCommandHotbarCross:
+    inherits_from: Client::UI::Shell::ShellCommandHotbarBase
+    vtbl: 0x1416EE6D8
+  Client::UI::Shell::ShellCommandMacroConfig:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EE728
+  Client::UI::Shell::ShellCommandInventory:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EE758
+  Client::UI::Shell::ShellCommandItemSort:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EE770
+  Client::UI::Shell::ShellCommandClearLog:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EE788
+  Client::UI::Shell::ShellCommandInstanceArea:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EE7A0
+  Client::UI::Shell::ShellCommandMacroError:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EE7B8
+  Client::UI::Shell::ShellCommandMacroCancel:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EE7D0
+  Client::UI::Shell::ShellCommandPlayTime:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EE7E8
+  Client::UI::Shell::ShellCommandGroupPose:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EE800
+  Client::UI::Shell::ShellCommandItemSearch:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EE818
+  Client::UI::Shell::ShellCommandIdlingCamera:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EE830
+  Client::UI::Shell::ShellCommandGeneralDutyKey:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EE848
+  Client::UI::Shell::ShellCommandTitle:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EE860
+  Client::UI::Shell::ShellCommandAlarm:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EE878
+  Client::UI::Shell::ShellCommandHud:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EE890
+  Client::UI::Shell::ShellCommandChatLog:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EE8A8
+  Client::UI::Shell::ShellCommandUnk1416EE8C0:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EE8C0
+  Client::UI::Shell::ShellCommandUnk1416EE8D8:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EE8D8
+  Client::UI::Shell::ShellCommandBattleEffect:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EE8F0
+  Client::UI::Shell::ShellCommandHudReset:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EE908
+  Client::UI::Shell::ShellCommandUiReset:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EE920
+  Client::UI::Shell::ShellCommandPartySort:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EE938
+  Client::UI::Shell::ShellCommandUiScale:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EE950
+  Client::UI::Shell::ShellCommandUnk1416EE968:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EE968
+  Client::UI::Shell::ShellCommandUnk1416EE990:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EE990
+  Client::UI::Shell::ShellCommandCrossHotbarType:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EE9A8
+  Client::UI::Shell::ShellCommandEgiGlamour:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EE9C0
+  Client::UI::Shell::ShellCommandBahamutSize:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EE9D8
+  Client::UI::Shell::ShellCommandConfigToggle:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EE9F0
+  Client::UI::Shell::ShellCommandNameplateConfig:
+    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
+    vtbl: 0x1416EEA08
   Client::Game::Character::BattleChara:
     inherits_from: Client::Game::Character::Character
     vtbl: 0x1416EEB18
