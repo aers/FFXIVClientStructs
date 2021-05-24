@@ -523,6 +523,13 @@ class FfxivClassFactory:
         :rtype: None
         """
         self._resolve_parent_classes()
+
+        # We write the vtbl names first for an added check so that
+        # the size finder will not advance past a named offset.
+        for cls in self._classes.values():
+            if cls.vtbl_ea != 0:
+                cls.write_vtbl_name()
+
         for cls in self._classes.values():
             self._finalize_class(cls)
 
@@ -640,6 +647,9 @@ class FfxivClass:
         if self._vtbl_size == 0:
             self._vtbl_size = 1  # Set to 1, skip the first entry
             for ea in itertools.count(self.vtbl_ea + 8, 8):
+                if api.get_addr_name(ea) != '':
+                    break
+
                 if api.is_offset(ea) and api.xrefs_to(ea) == []:
                     self._vtbl_size += 1
                 else:
@@ -765,6 +775,13 @@ class FfxivClass:
 
         return vtbl_builder, struct_names
 
+    def write_vtbl_name(self) -> None:
+        """
+        Write out the vtbl name.
+        :return: None
+        """
+        api.set_addr_name(self.vtbl_ea, api.format_class_name_for_vtbl(self.name))
+
     def _write_vtbl(self, builder):
         """
         Write out the vtbl as defined by _build_vtbl
@@ -773,8 +790,6 @@ class FfxivClass:
         :return: None
         :rtype: None
         """
-        api.set_addr_name(self.vtbl_ea, api.format_class_name_for_vtbl(self.name))
-
         for (func_ea, func_name) in builder:
             api.set_addr_name(func_ea, func_name)
 
