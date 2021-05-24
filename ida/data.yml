@@ -1569,6 +1569,7 @@ classes:
     vtbl: 0x1417FD870
     funcs:
       0x140EA7920: ctor
+      0x140EA80B0: GenerateTooltip
   Client::UI::AddonItemDetail:
     inherits_from: Component::GUI::AtkUnitBase
     vtbl: 0x1417FDCE8
