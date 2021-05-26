@@ -775,7 +775,7 @@ class FfxivClass:
 
         return vtbl_builder, struct_names
 
-    def write_vtbl_name(self) -> None:
+    def write_vtbl_name(self):
         """
         Write out the vtbl name.
         :return: None
