@@ -2,7 +2,6 @@
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI.ULD
 {
-
     [StructLayout(LayoutKind.Explicit, Size = 0x94)]
     public unsafe struct ULDComponentDataJournalCanvas
     {

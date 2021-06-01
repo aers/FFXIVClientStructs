@@ -2,7 +2,6 @@
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI.ULD
 {
-
     [StructLayout(LayoutKind.Explicit, Size = 0x28)]
     public unsafe struct ULDComponentDataList
     {
@@ -12,5 +11,5 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI.ULD
         [FieldOffset(0x21)] public byte Orientation;
         [FieldOffset(0x22)] public ushort RowNum;
         [FieldOffset(0x24)] public ushort ColNum;
-    } 
+    }
 }

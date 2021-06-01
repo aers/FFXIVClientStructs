@@ -12,11 +12,11 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI.ULD
         Right = 0x5,
         BottomLeft = 0x6,
         Bottom = 0x7,
-        BottomRight = 0x8,
+        BottomRight = 0x8
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]
-    public unsafe struct ULDWidgetInfo
+    public struct ULDWidgetInfo
     {
         [FieldOffset(0x0)] public ULDObjectInfo ObjectInfo;
         [FieldOffset(0x10)] public uint AlignmentType;

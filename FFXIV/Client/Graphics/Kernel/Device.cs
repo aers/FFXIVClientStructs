@@ -1,6 +1,4 @@
-﻿
-using System.Runtime.InteropServices;
-
+﻿using System.Runtime.InteropServices;
 
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Kernel
 {

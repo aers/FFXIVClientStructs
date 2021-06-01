@@ -10,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Configuration
     // size = 0x450
     // ctor inlined in Framework ctor
     [StructLayout(LayoutKind.Explicit, Size = 0x450)]
-    public unsafe struct SystemConfig
+    public struct SystemConfig
     {
         [FieldOffset(0x0)] public Common.Configuration.SystemConfig CommonSystemConfig;
     }

@@ -1,5 +1,5 @@
-﻿using FFXIVClientStructs.FFXIV.Client.System.String;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
+using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI
 {
@@ -14,7 +14,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
     // common CreateAtkComponent function 8B FA 33 DB E8 ? ? ? ? 
     // type 7
     [StructLayout(LayoutKind.Explicit, Size = 0x600)]
-    public unsafe struct AtkComponentTextInput
+    public struct AtkComponentTextInput
     {
         [FieldOffset(0x0)] public AtkComponentInputBase AtkComponentInputBase;
         [FieldOffset(0x280)] public Utf8String UnkText1;

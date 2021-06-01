@@ -19,7 +19,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
         [FieldOffset(0x118)] public int ListLength;
 
         [StructLayout(LayoutKind.Explicit, Size = 0x18)]
-        public unsafe struct ListItem
+        public struct ListItem
         {
             [FieldOffset(0x8)] public AtkComponentListItemRenderer* AtkComponentListItemRenderer;
         }

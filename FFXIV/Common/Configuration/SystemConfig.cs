@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Common.Configuration
     // size = 0x450
     // ctor E8 ? ? ? ? 48 8D 05 ? ? ? ? 48 8D 8E ? ? ? ? 48 89 46 10 
     [StructLayout(LayoutKind.Explicit, Size = 0x450)]
-    public unsafe struct SystemConfig
+    public struct SystemConfig
     {
         [FieldOffset(0x0)] public ConfigBase ConfigBase;
     }

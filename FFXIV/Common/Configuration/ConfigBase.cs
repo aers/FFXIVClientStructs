@@ -1,5 +1,5 @@
-﻿using FFXIVClientStructs.FFXIV.Client.System.String;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
+using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Common.Configuration
 {
@@ -70,7 +70,6 @@ namespace FFXIVClientStructs.FFXIV.Common.Configuration
         [FieldOffset(0x0)] public void* vtbl;
         [FieldOffset(0x8)] public ChangeEventInterface* Next;
         [FieldOffset(0x10)] public ConfigBase* Owner;
-
     }
 
     // Common::Configuration::ConfigBase

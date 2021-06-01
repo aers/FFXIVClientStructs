@@ -27,21 +27,21 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
          */
 
         [StructLayout(LayoutKind.Explicit, Size = 0x8)]
-        public unsafe struct Unk1
+        public struct Unk1
         {
             [FieldOffset(0x0)] public void* vtbl;
             [FieldOffset(0x0)] public void** vfunc;
         }
 
         [StructLayout(LayoutKind.Explicit, Size = 0x8)]
-        public unsafe struct Unk2
+        public struct Unk2
         {
             [FieldOffset(0x0)] public void* vtbl;
             [FieldOffset(0x0)] public void** vfunc;
         }
 
-        [StructLayout(LayoutKind.Explicit, Size = 0x8)]  // size?
-        public unsafe struct Unk3
+        [StructLayout(LayoutKind.Explicit, Size = 0x8)] // size?
+        public struct Unk3
         {
             [FieldOffset(0x0)] public void* vtbl;
             [FieldOffset(0x0)] public void** vfunc;

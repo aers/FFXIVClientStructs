@@ -1,5 +1,5 @@
-﻿using FFXIVClientStructs.FFXIV.Client.System.String;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
+using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI
 {
@@ -10,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
     // size = 0x1D8
     // ctor E8 ? ? ? ? 48 8D 05 ? ? ? ? 48 C7 86 ? ? ? ? ? ? ? ? 48 89 06 
     [StructLayout(LayoutKind.Explicit, Size = 0xF0)]
-    public unsafe struct AtkComponentInputBase
+    public struct AtkComponentInputBase
     {
         [FieldOffset(0x0)] public AtkComponentBase AtkComponentBase;
         [FieldOffset(0xE0)] public Utf8String UnkText1;

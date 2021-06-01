@@ -1,5 +1,5 @@
-﻿using FFXIVClientStructs.FFXIV.Client.System.String;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
+using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI
@@ -8,13 +8,13 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
     //   Component::GUI::AtkModule
     //     Component::GUI::AtkModuleInterface
     [StructLayout(LayoutKind.Explicit, Size = 0x27718)]
-    public unsafe struct RaptureAtkModule
+    public struct RaptureAtkModule
     {
         [FieldOffset(0x0)] public AtkModule AtkModule;
-        [FieldOffset(0x1A378)] public NamePlateInfo NamePlateInfoArray;  // 0-50, &NamePlateInfoArray[i]
+        [FieldOffset(0x1A378)] public NamePlateInfo NamePlateInfoArray; // 0-50, &NamePlateInfoArray[i]
 
         [StructLayout(LayoutKind.Explicit, Size = 0x248)]
-        public unsafe struct NamePlateInfo
+        public struct NamePlateInfo
         {
             [FieldOffset(0x00)] public int ActorID;
             [FieldOffset(0x30)] public Utf8String Name;

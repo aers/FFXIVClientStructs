@@ -1,5 +1,5 @@
-﻿using FFXIVClientStructs.STD;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
+using FFXIVClientStructs.STD;
 
 namespace FFXIVClientStructs.FFXIV.Client.Graphics
 {

@@ -1,6 +1,5 @@
 ﻿using System.Runtime.InteropServices;
 
-
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render
 {
     // Client::Graphics::Render::RenderTargetManager
@@ -11,9 +10,12 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render
     public unsafe struct RenderTargetManager
     {
         [FieldOffset(0x0)] public void* vtbl;
+
         [FieldOffset(0x8)] public Notifier Notifier;
+
         // the first 65 fields seem to be render target pointers
         [FieldOffset(0x20)] public fixed byte RenderTargetArray[8 * 65];
+
         // specific ones i can name
         // offscreen renderer is used to render models for UI elements like the character window
         [FieldOffset(0x1E0)] public Texture* OffscreenRenderTarget_1;
@@ -22,7 +24,10 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render
         [FieldOffset(0x1F8)] public Texture* OffscreenRenderTarget_4;
         [FieldOffset(0x200)] public Texture* OffscreenGBuffer;
         [FieldOffset(0x208)] public Texture* OffscreenDepthStencil;
-        [FieldOffset(0x210)] public Texture* OffscreenRenderTarget_Unk1; // these are related to offscreen renderer due to their size
+
+        [FieldOffset(0x210)]
+        public Texture* OffscreenRenderTarget_Unk1; // these are related to offscreen renderer due to their size
+
         [FieldOffset(0x218)] public Texture* OffscreenRenderTarget_Unk2;
         [FieldOffset(0x220)] public Texture* OffscreenRenderTarget_Unk3;
 

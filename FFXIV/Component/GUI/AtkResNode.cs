@@ -1,7 +1,5 @@
-using FFXIVClientStructs.FFXIV;
-using FFXIVClientStructs.FFXIV.Client.Graphics;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using FFXIVClientStructs.FFXIV.Client.Graphics;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI
 {
@@ -12,7 +10,8 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
         Text = 3,
         NineGrid = 4,
         Counter = 5,
-        Collision = 8,
+
+        Collision = 8
         // Component: >=1000
     }
 
@@ -28,7 +27,9 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
         Enabled = 0x20, // this is like, "button can be clicked" etc
         Clip = 0x40,
         Fill = 0x80,
-        HasCollision = 0x100, // set if node type == 8, might be "HasCollision", also set if Unk2 first bit is set (https://github.com/NotAdam/Lumina/blob/714a1d8b9c4e182b411e7c68330d49a5dfccb9bc/src/Lumina/Data/Parsing/Uld/UldRoot.cs#L273)
+
+        HasCollision =
+            0x100, // set if node type == 8, might be "HasCollision", also set if Unk2 first bit is set (https://github.com/NotAdam/Lumina/blob/714a1d8b9c4e182b411e7c68330d49a5dfccb9bc/src/Lumina/Data/Parsing/Uld/UldRoot.cs#L273)
         RespondToMouse = 0x200, // this also gets set if the above flag is set
         Focusable = 0x400,
         Droppable = 0x800,
@@ -51,7 +52,9 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
         [FieldOffset(0x0)] public AtkEventTarget AtkEventTarget;
         [FieldOffset(0x8)] public uint NodeID;
         [FieldOffset(0x10)] public void* TimelineObject; // Component::GUI::AtkTimeline???
+
         [FieldOffset(0x18)] public void* EventObject; // Component::GUI::AtkEvent???
+
         // these are all technically union types with a node ID and a pointer but should be replaced by the loader always
         [FieldOffset(0x20)] public AtkResNode* ParentNode;
         [FieldOffset(0x28)] public AtkResNode* PrevSiblingNode;
@@ -65,7 +68,9 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
         [FieldOffset(0x50)] public float ScaleY;
         [FieldOffset(0x54)] public float Rotation; // radians (file is degrees)
         [FieldOffset(0x58)] public fixed float UnkMatrix[3 * 2];
+
         [FieldOffset(0x70)] public ByteColor Color;
+
         // not sure what the _2s are for, the regular ones are loaded from the file
         [FieldOffset(0x74)] public float Depth;
         [FieldOffset(0x78)] public float Depth_2;
@@ -86,7 +91,9 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
         [FieldOffset(0x90)] public ushort Width;
         [FieldOffset(0x92)] public ushort Height;
         [FieldOffset(0x94)] public float OriginX;
+
         [FieldOffset(0x98)] public float OriginY;
+
         // asm accesses these fields together so this is one 32bit field with priority+flags
         [FieldOffset(0x9C)] public ushort Priority;
         [FieldOffset(0x9E)] public short Flags;

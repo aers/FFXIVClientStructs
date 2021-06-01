@@ -2,7 +2,6 @@
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI.ULD
 {
-
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public unsafe struct ULDComponentDataDragDrop
     {

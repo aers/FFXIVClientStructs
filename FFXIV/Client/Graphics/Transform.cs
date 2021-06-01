@@ -2,7 +2,7 @@
 
 namespace FFXIVClientStructs.FFXIV.Client.Graphics
 {
-    [StructLayout(LayoutKind.Explicit, Size=0x30)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x30)]
     public struct Transform
     {
         [FieldOffset(0x0)] public Vector3 Position;

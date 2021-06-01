@@ -15,7 +15,7 @@ namespace FFXIVClientStructs.STD
             if (First == null || Last == null)
                 return 0;
 
-            return ((ulong)Last - (ulong)First) / (ulong)sizeof(T);
+            return ((ulong) Last - (ulong) First) / (ulong) sizeof(T);
         }
 
         public ulong Capacity()
@@ -23,10 +23,10 @@ namespace FFXIVClientStructs.STD
             if (End == null || First == null)
                 return 0;
 
-            return ((ulong)End - (ulong)First) / (ulong)sizeof(T);
+            return ((ulong) End - (ulong) First) / (ulong) sizeof(T);
         }
 
-        public T Get(ulong index) 
+        public T Get(ulong index)
         {
             if (index >= Size())
                 throw new IndexOutOfRangeException($"Index out of Range: {index}");
@@ -47,7 +47,7 @@ namespace FFXIVClientStructs.STD
             if (First == null || Last == null)
                 return 0;
 
-            return ((ulong)Last - (ulong)First) / 8;
+            return ((ulong) Last - (ulong) First) / 8;
         }
 
         public ulong Capacity()
@@ -55,7 +55,7 @@ namespace FFXIVClientStructs.STD
             if (End == null || First == null)
                 return 0;
 
-            return ((ulong)End - (ulong)First) / 8;
+            return ((ulong) End - (ulong) First) / 8;
         }
 
         public T* Get(ulong index)

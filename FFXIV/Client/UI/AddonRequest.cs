@@ -1,5 +1,5 @@
-﻿using FFXIVClientStructs.FFXIV.Component.GUI;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
+using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI
 {
@@ -22,7 +22,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
         [FieldOffset(0x268)] public AtkComponentDragDrop* AtkComponentDragDrop268;
         [FieldOffset(0x270)] public AtkComponentDragDrop* AtkComponentDragDrop270;
         [FieldOffset(0x278)] public AtkComponentButton* HandOverButton;
+
         [FieldOffset(0x280)] public AtkComponentButton* CancelButton;
+
         // These point to the same icon/dragdrop nodes as before
         [FieldOffset(0x288)] public AtkComponentIcon* AtkComponentIcon288;
         [FieldOffset(0x290)] public AtkComponentIcon* AtkComponentIcon290;

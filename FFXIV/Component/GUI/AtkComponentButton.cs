@@ -13,6 +13,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
     public unsafe struct AtkComponentButton
     {
         [FieldOffset(0x0)] public AtkComponentBase AtkComponentBase;
+
         // based on the text size
         [FieldOffset(0xC0)] public short Left;
         [FieldOffset(0xC2)] public short Top;
@@ -22,6 +23,6 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
         [FieldOffset(0xD0)] public AtkResNode* ButtonBGNode;
         [FieldOffset(0xE8)] public uint Flags;
 
-        public bool IsEnabled => (AtkComponentBase.OwnerNode->AtkResNode.Flags & 1 << 5) != 0;
+        public bool IsEnabled => (AtkComponentBase.OwnerNode->AtkResNode.Flags & (1 << 5)) != 0;
     }
 }

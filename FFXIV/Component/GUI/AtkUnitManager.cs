@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
     // size = 0x9C80 (may be a bit bigger, unimportant)
     // ctor E8 ? ? ? ? C6 83 ? ? ? ? ? 48 8D 8B ? ? ? ? 48 8D 05 ? ? ? ? 
     [StructLayout(LayoutKind.Explicit, Size = 0x9C80)]
-    public unsafe struct AtkUnitManager
+    public struct AtkUnitManager
     {
         [FieldOffset(0x0)] public AtkEventListener AtkEventListener;
         [FieldOffset(0x30)] public AtkUnitList DepthLayerOneList;

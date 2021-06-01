@@ -2,7 +2,7 @@
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI
 {
-    [StructLayout(LayoutKind.Explicit, Size=0x20)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public unsafe struct AtkArrayData
     {
         [FieldOffset(0x0)] public void* vtbl;

@@ -1,6 +1,6 @@
-﻿using FFXIVClientStructs.FFXIV.Client.System.String;
+﻿using System.Runtime.InteropServices;
+using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Component.GUI;
-using System.Runtime.InteropServices;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI
 {
@@ -19,21 +19,21 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
         [FieldOffset(0x248)] public AtkTextNode* CraftedItemName;
         [FieldOffset(0x250)] public AtkResNode* AtkResNode250;
         [FieldOffset(0x258)] public AtkComponentBase* AtkComponentBase258;
-        [FieldOffset(0x260)] public AtkTextNode* Condition;             // "Normal"
-        [FieldOffset(0x268)] public AtkResNode* ConditionResNode;       // ImageNode as a child
-        [FieldOffset(0x270)] public AtkTextNode* CurrentQuality;        // "100"
-        [FieldOffset(0x278)] public AtkTextNode* MaxQuality;            // "200" 
+        [FieldOffset(0x260)] public AtkTextNode* Condition; // "Normal"
+        [FieldOffset(0x268)] public AtkResNode* ConditionResNode; // ImageNode as a child
+        [FieldOffset(0x270)] public AtkTextNode* CurrentQuality; // "100"
+        [FieldOffset(0x278)] public AtkTextNode* MaxQuality; // "200" 
         [FieldOffset(0x280)] public AtkResNode* AtkResNode280;
-        [FieldOffset(0x288)] public AtkTextNode* HQLiteral;             // "HQ"
-        [FieldOffset(0x290)] public AtkTextNode* HQPercentage;          // "0" -> "100"
-        [FieldOffset(0x298)] public AtkTextNode* StepNumber;            // "5"
+        [FieldOffset(0x288)] public AtkTextNode* HQLiteral; // "HQ"
+        [FieldOffset(0x290)] public AtkTextNode* HQPercentage; // "0" -> "100"
+        [FieldOffset(0x298)] public AtkTextNode* StepNumber; // "5"
         [FieldOffset(0x2A0)] public AtkComponentGaugeBar* ProgressGauge;
         [FieldOffset(0x2A8)] public AtkComponentGaugeBar* QualityGauge;
-        [FieldOffset(0x2B0)] public AtkTextNode* CurrentProgress;       // "100"
-        [FieldOffset(0x2B8)] public AtkTextNode* MaxProgress;           // "200"
+        [FieldOffset(0x2B0)] public AtkTextNode* CurrentProgress; // "100"
+        [FieldOffset(0x2B8)] public AtkTextNode* MaxProgress; // "200"
         [FieldOffset(0x2C0)] public AtkResNode* AtkResNode2C0;
-        [FieldOffset(0x2C8)] public AtkTextNode* CurrentDurability;     // "50"
-        [FieldOffset(0x2D0)] public AtkTextNode* StartingDurability;    // "80"
+        [FieldOffset(0x2C8)] public AtkTextNode* CurrentDurability; // "50"
+        [FieldOffset(0x2D0)] public AtkTextNode* StartingDurability; // "80"
         [FieldOffset(0x2D8)] public AtkComponentBase* AtkComponentBase2D8;
         [FieldOffset(0x2E0)] public AtkComponentBase* AtkComponentBase2E0;
         [FieldOffset(0x2E8)] public AtkComponentBase* AtkComponentBase2E8;

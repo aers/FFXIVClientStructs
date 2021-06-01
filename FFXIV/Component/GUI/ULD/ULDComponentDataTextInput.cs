@@ -1,6 +1,5 @@
-﻿using FFXIVClientStructs.FFXIV;
+﻿using System.Runtime.InteropServices;
 using FFXIVClientStructs.FFXIV.Client.Graphics;
-using System.Runtime.InteropServices;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI.ULD
 {

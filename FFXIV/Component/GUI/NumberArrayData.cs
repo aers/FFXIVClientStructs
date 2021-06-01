@@ -11,13 +11,11 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
         public void SetValue(int index, int value)
         {
             if (index < AtkArrayData.Size)
-            {
                 if (IntArray[index] != value)
                 {
                     IntArray[index] = value;
                     AtkArrayData.HasModifiedData = 1;
                 }
-            }
         }
     }
 }

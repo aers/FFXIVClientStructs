@@ -1,8 +1,10 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace FFXIVClientStructs.FFXIV.Client.Game.Object {
+namespace FFXIVClientStructs.FFXIV.Client.Game.Object
+{
     [StructLayout(LayoutKind.Explicit, Size = 0x27E0)]
-    public unsafe struct GameObjectManager {
+    public unsafe struct GameObjectManager
+    {
         [FieldOffset(0x05)] public byte Active;
         [FieldOffset(0x10)] public GameObject** ObjectList; // size 424 * 8
         [FieldOffset(0xD50)] public GameObject** ObjectListFiltered;

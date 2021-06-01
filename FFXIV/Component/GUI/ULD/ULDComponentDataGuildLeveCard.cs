@@ -2,7 +2,6 @@
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI.ULD
 {
-
     [StructLayout(LayoutKind.Explicit, Size = 0x1C)]
     public unsafe struct ULDComponentDataGuildLeveCard
     {

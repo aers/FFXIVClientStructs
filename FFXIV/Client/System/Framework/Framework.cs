@@ -1,4 +1,5 @@
 ﻿using System.Runtime.InteropServices;
+using FFXIVClientStructs.FFXIV.Client.System.Configuration;
 
 namespace FFXIVClientStructs.FFXIV.Client.System.Framework
 {
@@ -9,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Framework
     [StructLayout(LayoutKind.Explicit, Size = 0x2B50)]
     public unsafe struct Framework
     {
-        [FieldOffset(0x10)] public Client.System.Configuration.SystemConfig SystemConfig;
+        [FieldOffset(0x10)] public SystemConfig SystemConfig;
         [FieldOffset(0x29F8)] public void* UIModule;
     }
 }

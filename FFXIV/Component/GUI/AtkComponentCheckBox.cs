@@ -11,7 +11,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
     // common CreateAtkComponent function 8B FA 33 DB E8 ? ? ? ? 
     // type 3
     [StructLayout(LayoutKind.Explicit, Size = 0x110)]
-    public unsafe struct AtkComponentCheckBox
+    public struct AtkComponentCheckBox
     {
         [FieldOffset(0x0)] public AtkComponentButton AtkComponentButton;
 

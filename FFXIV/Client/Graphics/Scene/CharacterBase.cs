@@ -1,5 +1,5 @@
-﻿using FFXIVClientStructs.FFXIV.Client.Graphics.Physics;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
+using FFXIVClientStructs.FFXIV.Client.Graphics.Physics;
 using FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene
@@ -20,16 +20,35 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene
         [FieldOffset(0xA0)] public Skeleton* Skeleton; // Client::Graphics::Render::Skeleton
         [FieldOffset(0xA8)] public void** ModelArray; // array of Client::Graphics::Render::Model ptrs size = SlotCount
         [FieldOffset(0x148)] public void* PostBoneDeformer; // Client::Graphics::Scene::PostBoneDeformer ptr
-        [FieldOffset(0x150)] public BonePhysicsModule* BonePhysicsModule; // Client::Graphics::Physics::BonePhysicsModule ptr
-        [FieldOffset(0x240)] public void* CharacterDataCB; // Client::Graphics::Kernel::ConstantBuffer ptr, this CB includes stuff like hair color
+
+        [FieldOffset(0x150)]
+        public BonePhysicsModule* BonePhysicsModule; // Client::Graphics::Physics::BonePhysicsModule ptr
+
+        [FieldOffset(0x240)]
+        public void*
+            CharacterDataCB; // Client::Graphics::Kernel::ConstantBuffer ptr, this CB includes stuff like hair color
+
         // next few fields are used temporarily when loading the render object and cleared after load
         [FieldOffset(0x2C8)] public uint HasModelInSlotLoaded; // tracks which slots have loaded models into staging
-        [FieldOffset(0x2CC)] public uint HasModelFilesInSlotLoaded; // tracks which slots have loaded materials, etc into staging
+
+        [FieldOffset(0x2CC)]
+        public uint HasModelFilesInSlotLoaded; // tracks which slots have loaded materials, etc into staging
+
         [FieldOffset(0x2D0)] public void* TempData; // struct with temporary data (size = 0x88)
-        [FieldOffset(0x2D8)] public void* TempSlotData; // struct with temporary data for each slot (size = 0x88 * slot count)
+
+        [FieldOffset(0x2D8)]
+        public void* TempSlotData; // struct with temporary data for each slot (size = 0x88 * slot count)
+
         //
-        [FieldOffset(0x2E8)] public void** MaterialArray; // array of Client::Graphics::Render::Material ptrs size = SlotCount * 4 (4 material per model max)
-        [FieldOffset(0x2F0)] public void* EID; // Client::System::Resource::Handle::ElementIdResourceHandle - EID file for base skeleton
-        [FieldOffset(0x2F8)] public void** IMCArray; // array of Client::System::Resource::Handle::ImageChangeDataResourceHandle ptrs size = SlotCount - IMC file for model in slot
+        [FieldOffset(0x2E8)]
+        public void**
+            MaterialArray; // array of Client::Graphics::Render::Material ptrs size = SlotCount * 4 (4 material per model max)
+
+        [FieldOffset(0x2F0)]
+        public void* EID; // Client::System::Resource::Handle::ElementIdResourceHandle - EID file for base skeleton
+
+        [FieldOffset(0x2F8)]
+        public void**
+            IMCArray; // array of Client::System::Resource::Handle::ImageChangeDataResourceHandle ptrs size = SlotCount - IMC file for model in slot
     }
 }

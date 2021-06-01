@@ -2,13 +2,13 @@
 
 namespace FFXIVClientStructs.FFXIV.Group
 {
-
     // there are actually two copies of this back to back in the exe
     // maybe for 48 man raid support since the group manager can only hold 1 alliance worth of party members
     [StructLayout(LayoutKind.Explicit, Size = 0x3D70)]
     public unsafe struct GroupManager
     {
         [FieldOffset(0x0)] public fixed byte PartyMembers[0x230 * 8]; // PartyMember type
+
         // for some reason the alliance array is size 20. it used to be 16 in old versions.
         [FieldOffset(0x1180)] public fixed byte AllianceMembers[0x230 * 20]; // PartyMember type
         [FieldOffset(0x3D40)] public uint Unk_3D40;

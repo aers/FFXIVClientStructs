@@ -1,13 +1,14 @@
 ﻿using System.Runtime.InteropServices;
 using FFXIVClientStructs.STD;
 
-namespace FFXIVClientStructs.FFXIV.Client.Game.UI {
+namespace FFXIVClientStructs.FFXIV.Client.Game.UI
+{
     // Client::Game::UI::Telepo
 
     // size = 0x58
     // ctor E8 ? ? ? ? 89 B3 ? ? ? ? 48 8D 8B ? ? ? ? 48 8D 05
     [StructLayout(LayoutKind.Explicit, Size = 0x58)]
-    public unsafe struct Telepo 
+    public unsafe struct Telepo
     {
         [FieldOffset(0x00)] public void* vtbl;
         [FieldOffset(0x10)] public Vector<TeleportInfo> TeleportList;

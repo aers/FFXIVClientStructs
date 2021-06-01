@@ -15,6 +15,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
     public unsafe struct AtkValue
     {
         [FieldOffset(0x0)] public ValueType Type;
+
         // union field
         [FieldOffset(0x8)] public int Int;
         [FieldOffset(0x8)] public uint UInt;

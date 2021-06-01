@@ -2,7 +2,6 @@
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI
 {
-
     [StructLayout(LayoutKind.Explicit, Size = 0x34)]
     public unsafe struct AtkUldComponentDataMap
     {

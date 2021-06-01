@@ -9,8 +9,14 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
     {
         [FieldOffset(0x00)] public AtkUldAsset* Assets; // array with size AssetCount, "ashd" (asset) header
         [FieldOffset(0x08)] public AtkUldPartsList* PartsList; // array with size PartsListcount, "tphd" header 
-        [FieldOffset(0x10)] public AtkUldObjectInfo* Objects; // cast to AtkUldWidgetInfo or AtkUldComponentInfo depending on base type
-        [FieldOffset(0x18)] public AtkUldComponentDataBase* ComponentData; // need to cast this to the appropriate one for your component type
+
+        [FieldOffset(0x10)]
+        public AtkUldObjectInfo* Objects; // cast to AtkUldWidgetInfo or AtkUldComponentInfo depending on base type
+
+        [FieldOffset(0x18)]
+        public AtkUldComponentDataBase*
+            ComponentData; // need to cast this to the appropriate one for your component type
+
         [FieldOffset(0x20)] public ushort AssetCount;
         [FieldOffset(0x22)] public ushort PartsListCount;
         [FieldOffset(0x24)] public ushort ObjectCount;

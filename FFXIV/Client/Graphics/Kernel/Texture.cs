@@ -2,7 +2,6 @@
 
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render
 {
-
     // there's 20+ of these but these are the ones I've encountered/debugged
     public enum TextureFormat : uint
     {
@@ -23,7 +22,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render
     [StructLayout(LayoutKind.Explicit, Size = 0xA8)]
     public unsafe struct Texture
     {
-        [FieldOffset(0x00)] public void* vtbl; 
+        [FieldOffset(0x00)] public void* vtbl;
         [FieldOffset(0x20)] public Notifier Notifier;
         [FieldOffset(0x38)] public uint Width;
         [FieldOffset(0x3C)] public uint Height;

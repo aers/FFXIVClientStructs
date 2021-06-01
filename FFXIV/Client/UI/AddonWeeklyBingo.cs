@@ -1,6 +1,6 @@
-﻿using FFXIVClientStructs.FFXIV.Component.GUI;
-using System;
+﻿using System;
 using System.Runtime.InteropServices;
+using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI
 {
@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
     //   Component::GUI::AtkUnitBase
     //     Component::GUI::AtkEventListener
     [StructLayout(LayoutKind.Explicit, Size = 0x23C8)]
-    public unsafe struct AddonWeeklyBingo
+    public struct AddonWeeklyBingo
     {
         [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
         [FieldOffset(0x18E8)] public StringThing StringThing;
@@ -20,12 +20,22 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
     public unsafe struct StringThing
     {
         [FieldOffset(0x0)] public void* vtbl;
-        [FieldOffset(0x08)] public byte* FullSealsText;              // No more seals can be applied. Deliver the journal to Khloe Aliapoh to receive your reward.
-        [FieldOffset(0x10)] public byte* OneOrMoreLinesText;         // One or more lines of seals have been completed. Deliver the journal to Khloe Aliapoh to receive your reward or continue adventuring to add more seals.
-        [FieldOffset(0x18)] public byte* SecondChancePointsText;     // Second Chance points can be used to increase your chances of completing lines.
-        [FieldOffset(0x20)] public byte* ReceiveSealCompleteText;    // Select a completed duty to receive a seal.
-        [FieldOffset(0x28)] public byte* ReceiveSealIncompleteText;  // Complete a task to receive a seal.
-        [FieldOffset(0x30)] public byte* SecondChanceRetryText;      // Select a completed duty to be rendered incomplete.
+
+        [FieldOffset(0x08)]
+        public byte*
+            FullSealsText; // No more seals can be applied. Deliver the journal to Khloe Aliapoh to receive your reward.
+
+        [FieldOffset(0x10)]
+        public byte*
+            OneOrMoreLinesText; // One or more lines of seals have been completed. Deliver the journal to Khloe Aliapoh to receive your reward or continue adventuring to add more seals.
+
+        [FieldOffset(0x18)]
+        public byte*
+            SecondChancePointsText; // Second Chance points can be used to increase your chances of completing lines.
+
+        [FieldOffset(0x20)] public byte* ReceiveSealCompleteText; // Select a completed duty to receive a seal.
+        [FieldOffset(0x28)] public byte* ReceiveSealIncompleteText; // Complete a task to receive a seal.
+        [FieldOffset(0x30)] public byte* SecondChanceRetryText; // Select a completed duty to be rendered incomplete.
         [FieldOffset(0x40)] public void* addon;
         [FieldOffset(0x48)] public AtkTextNode* TextNode;
     }
@@ -34,7 +44,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
     public unsafe struct StickerSlotList
     {
         [FieldOffset(0x0)] public void** vtbl;
-        [FieldOffset(0x8)] public void* addon;  // AddonWeeklyBingo*
+        [FieldOffset(0x8)] public void* addon; // AddonWeeklyBingo*
         [FieldOffset(0x10)] public StickerSlot StickerSlot1;
         [FieldOffset(0x68)] public StickerSlot StickerSlot2;
         [FieldOffset(0xC0)] public StickerSlot StickerSlot3;
@@ -52,7 +62,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
         [FieldOffset(0x4E0)] public StickerSlot StickerSlot15;
         [FieldOffset(0x538)] public StickerSlot StickerSlot16;
 
-        public unsafe StickerSlot this[int index] => index switch
+        public StickerSlot this[int index] => index switch
         {
             0 => StickerSlot1,
             1 => StickerSlot2,
@@ -78,9 +88,11 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
     public unsafe struct StickerSlot
     {
         [FieldOffset(0x0)] public void** vtbl;
-        [FieldOffset(0x8)] public void* addon;  // AddonWeeklyBingo*
-        [FieldOffset(0x10)] public int index;   // 1-16
+        [FieldOffset(0x8)] public void* addon; // AddonWeeklyBingo*
+        [FieldOffset(0x10)] public int index; // 1-16
+
         [FieldOffset(0x20)] public AtkComponentButton* Button;
+
         // ComponentBase > ResNode > ImageNode (no ptr)
         [FieldOffset(0x28)] public AtkComponentBase* StickerComponentBase;
         [FieldOffset(0x30)] public AtkComponentBase* StickerShadowComponentBase;

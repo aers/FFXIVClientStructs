@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Runtime.InteropServices;
-using FFXIVClientStructs.FFXIV.Component.GUI.ULD;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI
 {
@@ -27,9 +26,10 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
         [FieldOffset(0x108)] public AtkTextNode* QuantityText;
         [FieldOffset(0x114)] public IconComponentFlags Flags;
     }
-    
+
     [Flags]
-    public enum IconComponentFlags : uint {
+    public enum IconComponentFlags : uint
+    {
         None = 0x00,
         DyeIcon = 0x08,
         Macro = 0x10,

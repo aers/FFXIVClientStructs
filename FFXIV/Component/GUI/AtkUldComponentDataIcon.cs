@@ -2,7 +2,6 @@
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI
 {
-
     [StructLayout(LayoutKind.Explicit, Size = 0x2C)]
     public unsafe struct AtkUldComponentDataIcon
     {

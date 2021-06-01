@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace FFXIVClientStructs.Attributes {
-    public class Addon : Attribute {
-        
-        public IEnumerable<string> AddonIdentifiers { get; }
-        
-        public Addon(params string[] addonIdentifiers) {
+namespace FFXIVClientStructs.Attributes
+{
+    public class Addon : Attribute
+    {
+        public Addon(params string[] addonIdentifiers)
+        {
             AddonIdentifiers = addonIdentifiers;
         }
+
+        public IEnumerable<string> AddonIdentifiers { get; }
     }
 }

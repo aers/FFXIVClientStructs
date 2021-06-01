@@ -1,6 +1,6 @@
-﻿using FFXIVClientStructs.FFXIV.Client.Graphics;
+﻿using System.Runtime.InteropServices;
+using FFXIVClientStructs.FFXIV.Client.Graphics;
 using FFXIVClientStructs.FFXIV.Client.System.String;
-using System.Runtime.InteropServices;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI
 {
@@ -31,19 +31,23 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
     // common CreateAtkNode function E8 ? ? ? ? 48 8B 4E 08 49 8B D5 
     // type 3
     [StructLayout(LayoutKind.Explicit, Size = 0x158)]
-    public unsafe struct AtkTextNode
+    public struct AtkTextNode
     {
         [FieldOffset(0x0)] public AtkResNode AtkResNode;
         [FieldOffset(0xA8)] public uint TextId;
         [FieldOffset(0xAC)] public ByteColor TextColor;
         [FieldOffset(0xB0)] public ByteColor EdgeColor;
         [FieldOffset(0xB4)] public ByteColor BackgroundColor;
+
         [FieldOffset(0xB8)] public Utf8String NodeText;
+
         // if text is "asdf" and you selected "sd" this is 2, 3
         [FieldOffset(0x128)] public uint SelectStart;
         [FieldOffset(0x12C)] public uint SelectEnd;
         [FieldOffset(0x14A)] public byte LineSpacing;
+
         [FieldOffset(0x14B)] public byte CharSpacing;
+
         // alignment bits 0-3 font type bits 4-7
         [FieldOffset(0x14C)] public byte AlignmentFontType;
         [FieldOffset(0x14D)] public byte FontSize;

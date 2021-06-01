@@ -1,6 +1,6 @@
-﻿using FFXIVClientStructs.FFXIV.Component.GUI;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 using FFXIVClientStructs.Attributes;
+using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI
 {
@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
     //     Component::GUI::AtkEventListener
     [StructLayout(LayoutKind.Explicit, Size = 0x3D0)]
     [Addon("ChatLogPanel_0", "ChatLogPanel_1", "ChatLogPanel_2", "ChatLogPanel_3")]
-    public unsafe struct AddonChatLogPanel
+    public struct AddonChatLogPanel
     {
         [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
         [FieldOffset(0x2B4)] public uint FirstLineVisible;

@@ -1,5 +1,4 @@
-﻿using FFXIVClientStructs.FFXIV.Component.GUI.ULD;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI
 {
@@ -20,7 +19,9 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
         [FieldOffset(0xB6)] public short BottomOffset;
         [FieldOffset(0xB8)] public short LeftOffset;
         [FieldOffset(0xBA)] public short RightOffset;
+
         [FieldOffset(0xBC)] public uint BlendMode;
+
         // bit 1 = parts type, bit 2 = render type
         [FieldOffset(0xC0)] public byte PartsTypeRenderType;
     }

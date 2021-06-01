@@ -3,7 +3,7 @@
 namespace FFXIVClientStructs.FFXIV.Client.Graphics
 {
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
-    public unsafe struct Quarternion
+    public struct Quarternion
     {
         [FieldOffset(0x0)] public float X;
         [FieldOffset(0x4)] public float Y;

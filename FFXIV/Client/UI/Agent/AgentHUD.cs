@@ -10,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent
     // size = 0x43A0
     // ctor E8 ? ? ? ? EB 03 49 8B C4 45 33 C9 48 89 46 40 
     [StructLayout(LayoutKind.Explicit, Size = 0x43A0)]
-    public unsafe struct AgentHUD
+    public struct AgentHUD
     {
         [FieldOffset(0x0)] public AgentInterface AgentInterface;
         [FieldOffset(0x70)] public bool NeedToSave;

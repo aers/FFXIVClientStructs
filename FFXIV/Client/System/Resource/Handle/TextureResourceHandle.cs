@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Resource.Handle
     // size = 0x128
     // ctor 40 53 48 83 EC 30 48 8B 44 24 ? 48 8B D9 48 89 44 24 ? 48 8B 44 24 ? 48 89 44 24 ? E8 ? ? ? ? 81 A3 ? ? ? ? ? ? ? ?  
     [StructLayout(LayoutKind.Explicit, Size = 0x128)]
-    public unsafe struct TextureResourceHandle
+    public struct TextureResourceHandle
     {
         [FieldOffset(0x0)] public ResourceHandle ResourceHandle;
     }

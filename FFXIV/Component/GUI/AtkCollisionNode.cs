@@ -1,11 +1,12 @@
 ﻿using System.Runtime.InteropServices;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI
-{    public enum CollisionType : ushort
+{
+    public enum CollisionType : ushort
     {
         Hit = 0x0,
         Focus = 0x1,
-        Move = 0x2,
+        Move = 0x2
     }
 
     // Component::GUI::AtkCollisionNode

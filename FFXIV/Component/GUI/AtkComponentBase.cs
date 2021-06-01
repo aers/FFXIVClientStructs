@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Runtime.InteropServices;
-
 using FFXIVClientStructs.FFXIV.Component.GUI.ULD;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI
@@ -46,8 +45,10 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
     public unsafe struct AtkComponentBase
     {
         [FieldOffset(0x00)] public AtkEventListener AtkEventListener;
-        [Obsolete("Please use UldManager and the AtkUldManager class instead.", false)]
-        [FieldOffset(0x08)] public ULDData ULDData;
+
+        [Obsolete("Please use UldManager and the AtkUldManager class instead.", false)] [FieldOffset(0x08)]
+        public ULDData ULDData;
+
         [FieldOffset(0x08)] public AtkUldManager UldManager;
         [FieldOffset(0xA8)] public AtkComponentNode* OwnerNode;
     }

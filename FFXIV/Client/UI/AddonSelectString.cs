@@ -1,5 +1,5 @@
-﻿using FFXIVClientStructs.FFXIV.Component.GUI;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
+using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI
 {
@@ -14,7 +14,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
 
         // this has a base class but I don't feel like adding it right now
         [StructLayout(LayoutKind.Explicit, Size = 0x70)]
-        public unsafe struct PopupMenuDerive
+        public struct PopupMenuDerive
         {
             [FieldOffset(0x0)] public void* vtbl;
             [FieldOffset(0x8)] public AtkStage* AtkStage;

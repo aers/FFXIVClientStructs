@@ -1,5 +1,5 @@
-﻿using FFXIVClientStructs.FFXIV.Client.Graphics.Render;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
+using FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI
 {
@@ -14,10 +14,11 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
 
     // size = 0x18
     // no explicit ctor
-    [StructLayout(LayoutKind.Explicit, Size=0x18)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public unsafe struct AtkTexture
     {
         [FieldOffset(0x0)] public void* vtbl;
+
         // union type
         [FieldOffset(0x8)] public AtkTextureResource* Resource;
         [FieldOffset(0x8)] public void* Crest;

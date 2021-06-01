@@ -10,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
     // common CreateAtkComponent function 8B FA 33 DB E8 ? ? ? ? 
     // type 2
     [StructLayout(LayoutKind.Explicit, Size = 0x108)]
-    public unsafe struct AtkComponentWindow
+    public struct AtkComponentWindow
     {
         [FieldOffset(0x0)] public AtkComponentBase AtkComponentBase;
     }

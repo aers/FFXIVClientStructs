@@ -10,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
     // common CreateAtkComponent function 8B FA 33 DB E8 ? ? ? ? 
     // type ?
     [StructLayout(LayoutKind.Explicit, Size = 0xD8)]
-    public unsafe struct AtkComponentTextNineGrid
+    public struct AtkComponentTextNineGrid
     {
         [FieldOffset(0x0)] public AtkComponentBase AtkComponentBase;
     }

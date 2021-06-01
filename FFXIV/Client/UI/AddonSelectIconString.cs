@@ -1,5 +1,5 @@
-﻿using FFXIVClientStructs.FFXIV.Component.GUI;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
+using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI
 {
@@ -13,7 +13,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
         [FieldOffset(0x238)] public EventThing SelectIconStringThing;
 
         [StructLayout(LayoutKind.Explicit, Size = 0x68)]
-        public unsafe struct EventThing
+        public struct EventThing
         {
             [FieldOffset(0x0)] public void* vtbl;
             [FieldOffset(0x8)] public AtkStage* AtkStage;

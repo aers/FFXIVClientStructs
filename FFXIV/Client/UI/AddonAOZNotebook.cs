@@ -1,6 +1,6 @@
-﻿using FFXIVClientStructs.FFXIV.Component.GUI;
-using System;
+﻿using System;
 using System.Runtime.InteropServices;
+using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI
 {
@@ -66,7 +66,6 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
             [FieldOffset(0x30)] public AtkResNode* AtkResNode2;
             [FieldOffset(0x38)] public char* Name;
             [FieldOffset(0x40)] public uint ActionID;
-
         }
 
         [StructLayout(LayoutKind.Explicit, Size = 0x20)]
@@ -98,7 +97,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
                 13 => SpellbookBlock14,
                 14 => SpellbookBlock15,
                 15 => SpellbookBlock16,
-                _ => throw new IndexOutOfRangeException("Valid values are 0 through 15 inclusive"),
+                _ => throw new IndexOutOfRangeException("Valid values are 0 through 15 inclusive")
             };
         }
 
@@ -130,7 +129,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
                 21 => ActiveActions22,
                 22 => ActiveActions23,
                 23 => ActiveActions24,
-                _ => throw new IndexOutOfRangeException("Valid values are 0 through 23 inclusive"),
+                _ => throw new IndexOutOfRangeException("Valid values are 0 through 23 inclusive")
             };
         }
     }

@@ -3,7 +3,7 @@
 namespace FFXIVClientStructs.FFXIV.Component.GUI.ULD
 {
     [StructLayout(LayoutKind.Explicit, Size = 0x9)]
-    public unsafe struct ULDComponentDataBase
+    public struct ULDComponentDataBase
     {
         [FieldOffset(0x0)] public byte Index;
         [FieldOffset(0x1)] public byte Up;

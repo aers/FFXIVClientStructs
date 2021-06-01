@@ -1,5 +1,4 @@
 ﻿using System.Runtime.InteropServices;
-
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Character
@@ -7,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character
     // Client::Game::Character::Character
     //   Client::Game::Object::GameObject
     //   Client::Graphics::Vfx::VfxDataListenner
-    
+
     // size = 0x1910
     // ctor E8 ? ? ? ? 0F B7 93 ? ? ? ? 45 33 C9 
     [StructLayout(LayoutKind.Explicit, Size = 0x19B0)]

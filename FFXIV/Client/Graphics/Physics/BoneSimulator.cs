@@ -4,7 +4,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Physics
 {
     // size = 0x100
     // ctor - 33 D2 48 8D 05 ? ? ? ? 48 89 01 48 8B C1 89 51 10 
-    [StructLayout(LayoutKind.Explicit, Size= 0x100)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x100)]
     public unsafe struct BoneSimulator
     {
         [FieldOffset(0x00)] public void* vtbl;

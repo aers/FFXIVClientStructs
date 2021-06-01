@@ -1,12 +1,10 @@
-﻿
-
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI
 {
     // Component::GUI::AtkModule
     //   Component::GUI::AtkModuleInterface
-    [StructLayout(LayoutKind.Explicit, Size=0x81C8)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x81C8)]
     public unsafe struct AtkModule
     {
         [FieldOffset(0x0)] public void* vtbl;

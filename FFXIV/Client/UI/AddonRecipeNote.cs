@@ -1,5 +1,5 @@
-﻿using FFXIVClientStructs.FFXIV.Component.GUI;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
+using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI
 {
@@ -63,15 +63,15 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
         [FieldOffset(0x3E0)] public AtkComponentButton* Unk3E0;
         [FieldOffset(0x3E8)] public AtkResNode* Unk3E8;
         [FieldOffset(0x3F0)] public AtkResNode* Unk3F0;
-        [FieldOffset(0x3F8)] public void* Unk3F8;  // AtkComponentList
-        [FieldOffset(0x400)] public void* Unk400;  // AtkComponentTreeList
-        [FieldOffset(0x408)] public void* Unk408;  // vtbl
+        [FieldOffset(0x3F8)] public void* Unk3F8; // AtkComponentList
+        [FieldOffset(0x400)] public void* Unk400; // AtkComponentTreeList
+        [FieldOffset(0x408)] public void* Unk408; // vtbl
         [FieldOffset(0x410)] public AddonRecipeNote* this410;
-        [FieldOffset(0x418)] public void* Unk418;  // func
-        [FieldOffset(0x420)] public void* Unk420;  // AtkComponentTreeList
-        [FieldOffset(0x428)] public void* Unk428;  // vtbl
+        [FieldOffset(0x418)] public void* Unk418; // func
+        [FieldOffset(0x420)] public void* Unk420; // AtkComponentTreeList
+        [FieldOffset(0x428)] public void* Unk428; // vtbl
         [FieldOffset(0x430)] public AddonRecipeNote* this430;
-        [FieldOffset(0x438)] public void* Unk438;  // func
+        [FieldOffset(0x438)] public void* Unk438; // func
         [FieldOffset(0x440)] public void* Unk440;
         [FieldOffset(0x448)] public void* Unk448;
         [FieldOffset(0x450)] public void* Unk450;
@@ -169,12 +169,12 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
         [FieldOffset(0x780)] public void* Unk780;
         [FieldOffset(0x788)] public void* Unk788;
         [FieldOffset(0x790)] public void* Unk790;
-        [FieldOffset(0x7A8)] public void* Unk7A8;  // vtbl Component::GUI::AtkSimpleTween
+        [FieldOffset(0x7A8)] public void* Unk7A8; // vtbl Component::GUI::AtkSimpleTween
         [FieldOffset(0x800)] public AddonRecipeNote* this800;
         [FieldOffset(0x808)] public AtkStage* Unk808;
         [FieldOffset(0x810)] public AtkComponentTextInput* Unk810;
         [FieldOffset(0x818)] public AddonRecipeNote* this818;
-        
+
         [FieldOffset(0xB50)] public char* UnkB50;
         [FieldOffset(0xB60)] public char* UnkB60;
         [FieldOffset(0xB70)] public char* UnkB70;

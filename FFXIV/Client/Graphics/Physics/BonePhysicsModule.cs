@@ -1,10 +1,10 @@
-﻿using FFXIVClientStructs.STD;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
+using FFXIVClientStructs.STD;
 
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Physics
 {
     [StructLayout(LayoutKind.Explicit, Size = 0x78)]
-    public unsafe struct BoneSimulators
+    public struct BoneSimulators
     {
         [FieldOffset(0x00)] public PointerVector<BoneSimulator> BoneSimulator_1;
         [FieldOffset(0x18)] public PointerVector<BoneSimulator> BoneSimulator_2;
