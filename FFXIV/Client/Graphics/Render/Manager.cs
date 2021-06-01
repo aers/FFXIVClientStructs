@@ -37,6 +37,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render
             OmniShadow22,
             OmniShadow23,
             Environment,
+            View25,
             OffscreenRenderer0,
             OffscreenRenderer1,
             OffscreenRenderer2,
