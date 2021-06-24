@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Group
         [FieldOffset(0x190)] public float X;
         [FieldOffset(0x194)] public float Y;
         [FieldOffset(0x198)] public float Z;
-        [FieldOffset(0x1A0)] public long Unk_1A0;
+        [FieldOffset(0x1A0)] public long ContentID;
         [FieldOffset(0x1A8)] public uint ObjectID;
         [FieldOffset(0x1AC)] public uint Unk_ObjectID_1;
         [FieldOffset(0x1B0)] public uint Unk_ObjectID_2;

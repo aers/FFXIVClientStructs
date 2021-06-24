@@ -2052,6 +2052,9 @@ classes:
   Client::UI::AddonNotification: # _Notification
     inherits_from: Component::GUI::AtkUnitBase
     vtbl: 0x141836180
+  Client::UI::AddonShopCardDialog:
+    inherits_from: Component::GUI::AtkUnitBase
+    vtbl: 0x141847A90
   Client::UI::AddonDTR: # _DTR
     inherits_from: Component::GUI::AtkUnitBase
     vtbl: 0x141836700
