@@ -1829,6 +1829,12 @@ classes:
   Client::UI::AddonContactList:
     inherits_from: Component::GUI::AtkUnitBase
     vtbl: 0x1417D10D8
+  Client::UI::AddonItemSearchResult:
+    inherits_from: Component::GUI::AtkUnitBase
+    vtbl: 0x1417CD9F0
+    funcs:
+      0x140D12690: ctor
+      0x140D13390: UpdateResult
   Client::UI::Addon_CharaSelectWorldServer:
     inherits_from: Component::GUI::AtkUnitBase
     vtbl: 0x1417DFAE8
