@@ -37,9 +37,6 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\FFXIVClientStructs.csproj">
-      <Project>{3dbaee68-9d94-4807-bcb1-e42edd52b489}</Project>
-      <Name>FFXIVClientStructs</Name>
-    </ProjectReference>
+    <ProjectReference Include="..\..\FFXIVClientStructs\FFXIVClientStructs.csproj" />
   </ItemGroup>
 </Project>
