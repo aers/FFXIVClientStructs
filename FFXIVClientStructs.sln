@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FFXIVClientStructs", "FFXIV
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CExporter", "ida\CExporter\CExporter.csproj", "{C204099B-4058-4FCE-A0EC-60DE4ACB1DF9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FFXIVClientStructs.Common", "FFXIVClientStructs.Common\FFXIVClientStructs.Common.csproj", "{C4447C22-6FAD-4FD5-A267-0337903B7396}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FFXIVClientStructs.Generators", "FFXIVClientStructs.Generators\FFXIVClientStructs.Generators.csproj", "{C69A1D91-BCDB-46D7-9708-1EC38282D03E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{C204099B-4058-4FCE-A0EC-60DE4ACB1DF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C204099B-4058-4FCE-A0EC-60DE4ACB1DF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C204099B-4058-4FCE-A0EC-60DE4ACB1DF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4447C22-6FAD-4FD5-A267-0337903B7396}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4447C22-6FAD-4FD5-A267-0337903B7396}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4447C22-6FAD-4FD5-A267-0337903B7396}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4447C22-6FAD-4FD5-A267-0337903B7396}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C69A1D91-BCDB-46D7-9708-1EC38282D03E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C69A1D91-BCDB-46D7-9708-1EC38282D03E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C69A1D91-BCDB-46D7-9708-1EC38282D03E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C69A1D91-BCDB-46D7-9708-1EC38282D03E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

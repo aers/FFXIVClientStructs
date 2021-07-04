@@ -1,4 +1,5 @@
 using System.Runtime.InteropServices;
+using FFXIVClientStructs.Common;
 using FFXIVClientStructs.FFXIV.Client.Graphics;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI
@@ -47,7 +48,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
     // size = 0xA8
     // ctor E9 ? ? ? ? 33 C0 48 83 C4 20 5B C3 66 90 
     [StructLayout(LayoutKind.Explicit, Size = 0xA8)]
-    public unsafe struct AtkResNode
+    public unsafe partial struct AtkResNode
     {
         [FieldOffset(0x0)] public AtkEventTarget AtkEventTarget;
         [FieldOffset(0x8)] public uint NodeID;
@@ -101,5 +102,8 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
         [FieldOffset(0xA0)] public uint DrawFlags;
 
         public bool IsVisible => (Flags & 0x10) == 0x10;
+
+        [MemberFunction("E8 ?? ?? ?? ?? 80 7B 5D 00")]
+        public partial void SetHeight(ushort height);
     }
 }
