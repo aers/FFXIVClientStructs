@@ -26,8 +26,6 @@ namespace FFXIVClientStructs.Generators
         {
             if (!(context.SyntaxContextReceiver is MemberFunctionSyntaxContextReceiver receiver)) return;
 
-            var buffer = new StringBuilder();
-
             foreach (var structObj in receiver.Structs)
             {
                 var filename = structObj.Namespace + structObj.Name + ".generated.cs";
@@ -43,49 +41,41 @@ namespace FFXIVClientStructs.Generators
 
             public void OnVisitSyntaxNode(GeneratorSyntaxContext context)
             {
-                if (context.Node is StructDeclarationSyntax sds)
+                if (context.Node is not StructDeclarationSyntax sds) return;
+                var methods = sds.ChildNodes().OfType<MethodDeclarationSyntax>().Where(m =>
                 {
-                    var methods = sds.ChildNodes().OfType<MethodDeclarationSyntax>().Where(m =>
-                    {
-                        var sm = (IMethodSymbol) context.SemanticModel.GetDeclaredSymbol(m);
-                        return sm != null && sm.GetAttributes()
-                            .Any(a => a.AttributeClass?.Name == "MemberFunctionAttribute");
-                    }).ToList();
+                    var sm = (IMethodSymbol) context.SemanticModel.GetDeclaredSymbol(m);
+                    return sm != null && sm.GetAttributes()
+                        .Any(a => a.AttributeClass?.Name == "MemberFunctionAttribute");
+                }).ToList();
 
-                    if (methods.Any())
+                if (methods.Count > 0)
+                {
+                    if (context.SemanticModel.GetDeclaredSymbol(sds) is not INamedTypeSymbol structType) return;
+                    var structObj = new Struct
                     {
-                        var structType = (INamedTypeSymbol) context.SemanticModel.GetDeclaredSymbol(sds);
-                        if (structType != null)
+                        Name = structType.Name,
+                        Namespace = structType.ContainingNamespace.ToDisplayString(),
+                        MemberFunctions = new List<Function>()
+                    };
+
+                    foreach (var m in methods)
+                    {
+                        if (context.SemanticModel.GetDeclaredSymbol(m) is not IMethodSymbol ms) continue;
+                        var functionObj = new Function
                         {
-                            var structObj = new Struct
-                            {
-                                Name = structType.Name,
-                                Namespace = structType.ContainingNamespace.ToDisplayString(),
-                                MemberFunctions = new()
-                            };
-
-                            foreach (MethodDeclarationSyntax m in methods)
-                            {
-                                var ms = (IMethodSymbol) context.SemanticModel.GetDeclaredSymbol(m);
-                                if (ms != null)
-                                {
-                                    var functionObj = new Function
-                                    {
-                                        Name = ms.Name,
-                                        ReturnType = ms.ReturnType.ToDisplayString(),
-                                        HasReturn = ms.ReturnType.ToDisplayString() != "void", 
-                                        ParamList = string.Join(",",
-                                            ms.Parameters.Select(p => $"{p.Type.ToDisplayString()} {p.Name}")),
-                                        ParamTypeList = string.Join(",", ms.Parameters.Select(p => p.Type.ToDisplayString())),
-                                        ParamNameList = string.Join(",", ms.Parameters.Select(p => p.Name))
-                                    };
-                                    structObj.MemberFunctions.Add(functionObj);
-                                }
-                            }
-
-                            Structs.Add(structObj);
-                        }
+                            Name = ms.Name,
+                            ReturnType = ms.ReturnType.ToDisplayString(),
+                            HasReturn = ms.ReturnType.ToDisplayString() != "void", 
+                            ParamList = string.Join(",",
+                                ms.Parameters.Select(p => $"{p.Type.ToDisplayString()} {p.Name}")),
+                            ParamTypeList = string.Join(",", ms.Parameters.Select(p => p.Type.ToDisplayString())),
+                            ParamNameList = string.Join(",", ms.Parameters.Select(p => p.Name))
+                        };
+                        structObj.MemberFunctions.Add(functionObj);
                     }
+
+                    Structs.Add(structObj);
                 }
             }
         }

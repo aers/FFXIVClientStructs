@@ -7,6 +7,8 @@ namespace FFXIVClientStructs.Generators
     internal static class Templates
     {
         internal static string MemberFunctions = @"
+using System;
+
 namespace {{ struct.namespace }} {
     public unsafe partial struct {{ struct.name }} {
         {{ for mf in struct.member_functions }}
@@ -14,6 +16,10 @@ namespace {{ struct.namespace }} {
 
         public partial {{ mf.return_type }} {{ mf.name }}({{ mf.param_list }})
         {
+            if (fp{{ mf.name }} is null)
+            {
+                throw new InvalidOperationException(""Function pointer for {{ struct.name }}::{{ mf.name }} is null."");
+            }
             fixed({{ struct.name }}* thisPtr = &this)
             {
                 {{ if mf.has_return }}return {{ end }}fp{{ mf.name }}(thisPtr, {{ mf.param_name_list }});
