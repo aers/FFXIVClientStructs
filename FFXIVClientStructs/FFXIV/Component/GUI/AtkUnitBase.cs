@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using FFXIVClientStructs.Common;
 using FFXIVClientStructs.FFXIV.Component.GUI.ULD;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI
@@ -13,7 +14,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
     // ctor E8 ? ? ? ? 83 8B ? ? ? ? ? 33 C0 
 
     [StructLayout(LayoutKind.Explicit, Size = 0x220)]
-    public unsafe struct AtkUnitBase
+    public unsafe partial struct AtkUnitBase
     {
         [FieldOffset(0x0)] public AtkEventListener AtkEventListener;
         [FieldOffset(0x8)] public fixed byte Name[0x20];
@@ -43,5 +44,11 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
             get => (Flags & 0x20) == 0x20;
             set => Flags = value ? Flags |= 0x20 : Flags &= 0xDF;
         }
+
+        [MemberFunction("E8 ?? ?? ?? ?? 0F BF CB 0F 28 F8")]
+        public partial float GetScale();
+
+        [MemberFunction("E8 ?? ?? ?? ?? 0F BF 45 00")]
+        public partial float GetGlobalUIScale();
     }
 }

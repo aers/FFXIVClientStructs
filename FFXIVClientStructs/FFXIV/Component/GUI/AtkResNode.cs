@@ -103,6 +103,21 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
 
         public bool IsVisible => (Flags & 0x10) == 0x10;
 
+        [MemberFunction("E8 ?? ?? ?? ?? D1 EE")]
+        public partial void ToggleVisibility(byte enable);
+
+        [MemberFunction("E8 ?? ?? ?? ?? 66 3B C3 74 13")]
+        public partial ushort GetPriority();
+
+        [MemberFunction("E8 ?? ?? ?? ?? 8D 45 F0")]
+        public partial void SetPriority(ushort priority);
+
+        [MemberFunction("E8 ?? ?? ?? ?? 48 8D 7F 38")]
+        public partial void SetScale(float scaleX, float scaleY);
+
+        [MemberFunction("E8 ?? ?? ?? ?? 8D 56 B5")]
+        public partial void SetPositionShort(short x, short y);
+
         [MemberFunction("E8 ?? ?? ?? ?? 80 7B 5D 00")]
         public partial void SetHeight(ushort height);
     }

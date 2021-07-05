@@ -18,6 +18,8 @@ namespace FFXIVClientStructs
             var scanner = new SigScanner(module);
 
             InitializeMemberFunctions(scanner);
+
+            Initialized = true;
         }
     }
 }

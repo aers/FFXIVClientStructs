@@ -28,7 +28,7 @@ namespace FFXIVClientStructs.Generators
 
             foreach (var structObj in receiver.Structs)
             {
-                var filename = structObj.Namespace + structObj.Name + ".generated.cs";
+                var filename = structObj.Namespace + "." + structObj.Name + ".generated.cs";
                 var source = _codeTemplate.Render(new {Struct = structObj});
                 context.AddSource(filename, SourceText.From(source, Encoding.UTF8));
             }
@@ -77,6 +77,7 @@ namespace FFXIVClientStructs.Generators
                             Name = ms.Name,
                             ReturnType = ms.ReturnType.ToDisplayString(format),
                             HasReturn = ms.ReturnType.ToDisplayString() != "void", 
+                            HasParams = ms.Parameters.Any(),
                             ParamList = string.Join(",",
                                 ms.Parameters.Select(p => $"{p.Type.ToDisplayString(format)} {p.Name}")),
                             ParamTypeList = string.Join(",", ms.Parameters.Select(p => p.Type.ToDisplayString(format))),

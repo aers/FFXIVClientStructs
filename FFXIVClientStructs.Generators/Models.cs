@@ -16,6 +16,7 @@ namespace FFXIVClientStructs.Generators
         public string Name;
         public bool HasReturn;
         public string ReturnType;
+        public bool HasParams;
         public string ParamList;
         public string ParamTypeList;
         public string ParamNameList;
