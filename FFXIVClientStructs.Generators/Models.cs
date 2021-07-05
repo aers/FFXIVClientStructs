@@ -19,5 +19,6 @@ namespace FFXIVClientStructs.Generators
         public string ParamList;
         public string ParamTypeList;
         public string ParamNameList;
+        public string Signature;
     }
 }

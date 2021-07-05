@@ -27,5 +27,28 @@ namespace {{ struct.namespace }} {
         }{{ end }}
     }       
 }";
+
+        internal static string InitializeMemberFunctions = @"
+using System.Collections.Generic;
+
+using Serilog;
+
+namespace FFXIVClientStructs {
+    public unsafe static partial class Resolver {
+        private static void InitializeMemberFunctions(SigScanner s)
+        {
+            {{ for struct in structs }}
+            {{ for mf in struct.member_functions }}
+            try {
+                var address{{ struct.name }}{{ mf.name }} = s.ScanText(""{{ mf.signature }}"");
+                {{ struct.namespace }}.{{ struct.name }}.fp{{ mf.name }} = (delegate* unmanaged[Fastcall] <{{ struct.namespace }}.{{ struct.name }}*,{{ mf.param_type_list }},{{ mf.return_type }}>) address{{ struct.name }}{{ mf.name }};
+            } catch (KeyNotFoundException) {
+                Log.Warning($""[FFXIVClientStructs] function {{ struct.name }}::{{ mf.name }} failed to match signature {{ mf.signature }} and is unavailable"");
+            }
+            {{ end }}
+            {{ end }}
+        }
+    }
+}";
     }
 }

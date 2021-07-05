@@ -33,6 +33,10 @@ namespace FFXIVClientStructs.Generators
                 context.AddSource(filename, SourceText.From(source, Encoding.UTF8));
             }
 
+            var resolverTemplate = Template.Parse(Templates.InitializeMemberFunctions);
+            var resolverSource = resolverTemplate.Render(new {Structs = receiver.Structs});
+            context.AddSource("Resolver.Generated.cs", resolverSource);
+;
         }
 
         class MemberFunctionSyntaxContextReceiver : ISyntaxContextReceiver
@@ -62,15 +66,22 @@ namespace FFXIVClientStructs.Generators
                     foreach (var m in methods)
                     {
                         if (context.SemanticModel.GetDeclaredSymbol(m) is not IMethodSymbol ms) continue;
+                        var attr = ms.GetAttributes().First(a => a.AttributeClass?.Name == "MemberFunctionAttribute");
+                        var sig = (string) attr.ConstructorArguments[0].Value;
+                        var format = new SymbolDisplayFormat(
+                            typeQualificationStyle: SymbolDisplayTypeQualificationStyle
+                                .NameAndContainingTypesAndNamespaces,
+                            miscellaneousOptions: SymbolDisplayMiscellaneousOptions.UseSpecialTypes);
                         var functionObj = new Function
                         {
                             Name = ms.Name,
-                            ReturnType = ms.ReturnType.ToDisplayString(),
+                            ReturnType = ms.ReturnType.ToDisplayString(format),
                             HasReturn = ms.ReturnType.ToDisplayString() != "void", 
                             ParamList = string.Join(",",
-                                ms.Parameters.Select(p => $"{p.Type.ToDisplayString()} {p.Name}")),
-                            ParamTypeList = string.Join(",", ms.Parameters.Select(p => p.Type.ToDisplayString())),
-                            ParamNameList = string.Join(",", ms.Parameters.Select(p => p.Name))
+                                ms.Parameters.Select(p => $"{p.Type.ToDisplayString(format)} {p.Name}")),
+                            ParamTypeList = string.Join(",", ms.Parameters.Select(p => p.Type.ToDisplayString(format))),
+                            ParamNameList = string.Join(",", ms.Parameters.Select(p => p.Name)),
+                            Signature = sig
                         };
                         structObj.MemberFunctions.Add(functionObj);
                     }
