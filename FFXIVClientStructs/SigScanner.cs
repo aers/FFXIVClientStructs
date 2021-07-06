@@ -227,6 +227,8 @@ namespace FFXIVClientStructs
 
         private static (byte[] Needle, bool[] Mask) ParseSignature(string signature)
         {
+            if (signature.Contains(" ? "))
+                signature = signature.Replace("?", "??");
             signature = signature.Replace(" ", string.Empty);
             if (signature.Length % 2 != 0)
                 throw new ArgumentException("Signature without whitespaces must be divisible by two.", nameof(signature));

@@ -103,22 +103,78 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
 
         public bool IsVisible => (Flags & 0x10) == 0x10;
 
+        [MemberFunction("E8 ? ? ? ? 8B 57 6C")]
+        public partial AtkImageNode* GetAsAtkImageNode();
+
+        [MemberFunction("E8 ? ? ? ? 8D 4D 4B")]
+        public partial AtkTextNode* GetAsAtkTextNode();
+
+        [MemberFunction("E8 ? ? ? ? B2 01 48 89 47 08")]
+        public partial AtkNineGridNode* GetAsAtkNineGridNode();
+
+        [MemberFunction("E8 ? ? ? ? 8D 0C BF 03 C9")]
+        public partial AtkCounterNode* GetAsAtkCounterNode();
+
+        [MemberFunction("E8 ? ? ? ? 48 8D 1C 76")]
+        public partial AtkCollisionNode* GetAsAtkCollisionNode();
+
+        [MemberFunction("E8 ? ? ? ? 44 8D 4F 30")]
+        public partial AtkComponentNode* GetAsAtkComponentNode();
+
+        [MemberFunction("E8 ? ? ? ? 8B 4D FC")]
+        public partial AtkComponentBase* GetComponent();
+
+        [MemberFunction("E8 ? ? ? ? C1 E7 0C")]
+        public partial void AddEvent(ushort eventType, uint eventParam, AtkEventListener* listener,
+            AtkResNode* nodeParam, bool isSystemEvent);
+
+        [MemberFunction("E8 ? ? ? ? 44 38 7D 67")]
+        public partial void RemoveEvent(ushort eventType, uint eventParam, AtkEventListener* listener,
+            bool isSystemEvent);
+
+        [MemberFunction("48 85 C9 74 0B 8B 41 44")]
+        public partial void GetPositionFloat(float* outX, float* outY);
+
+        [MemberFunction("E8 ? ? ? ? 8B 45 B8")]
+        public partial void SetPositionFloat(float X, float Y);
+
+        [MemberFunction("E8 ? ? ? ? 49 83 C4 0C")]
+        public partial void GetPositionShort(short* outX, short* outY);
+
+        [MemberFunction("E8 ? ? ? ? 8D 56 B5")]
+        public partial void SetPositionShort(short X, short Y);
+
+        [MemberFunction("48 85 C9 74 0B 8B 41 4C")]
+        public partial void GetScale(float* outX, float* outY);
+
+        [MemberFunction("E8 ? ? ? ? 48 8B CB F3 0F 59 C6")]
+        public partial float GetScaleX();
+
+        [MemberFunction("E8 ? ? ? ? 49 8D 7E 1E")]
+        public partial float GetScaleY();
+
+        [MemberFunction("E8 ? ? ? ? 48 8D 7F 38")]
+        public partial void SetScale(float X, float Y);
+
+        [MemberFunction("E8 ? ? ? ? 66 03 C0")]
+        public partial ushort GetWidth();
+
+        [MemberFunction("E8 ? ? ? ? 8B 54 3B 08")]
+        public partial ushort GetHeight();
+
+        [MemberFunction("E8 ? ? ? ? 66 2B F7")]
+        public partial void SetWidth(ushort width);
+
+        [MemberFunction("E8 ?? ?? ?? ?? 80 7B 5D 00")]
+        public partial void SetHeight(ushort height);
+
         [MemberFunction("E8 ?? ?? ?? ?? D1 EE")]
-        public partial void ToggleVisibility(byte enable);
+        public partial void ToggleVisibility(bool enable);
 
         [MemberFunction("E8 ?? ?? ?? ?? 66 3B C3 74 13")]
         public partial ushort GetPriority();
 
         [MemberFunction("E8 ?? ?? ?? ?? 8D 45 F0")]
         public partial void SetPriority(ushort priority);
-
-        [MemberFunction("E8 ?? ?? ?? ?? 48 8D 7F 38")]
-        public partial void SetScale(float scaleX, float scaleY);
-
-        [MemberFunction("E8 ?? ?? ?? ?? 8D 56 B5")]
-        public partial void SetPositionShort(short x, short y);
-
-        [MemberFunction("E8 ?? ?? ?? ?? 80 7B 5D 00")]
-        public partial void SetHeight(ushort height);
     }
 }

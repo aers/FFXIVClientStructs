@@ -842,6 +842,7 @@ classes:
       0x1404D23C0: SetSize0
       0x1404D2400: GetYFloat
       0x1404D2440: GetYShort
+      0x1404D2610: GetWidth
       0x1404D2630: GetHeight
       0x1404D2870: SetWidth
       0x1404D2890: SetHeight
