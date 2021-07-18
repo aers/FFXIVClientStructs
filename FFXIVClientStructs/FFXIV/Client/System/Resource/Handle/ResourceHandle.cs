@@ -11,6 +11,6 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Resource.Handle
     public unsafe struct ResourceHandle
     {
         [FieldOffset(0x12)] public uint FileType; // "txt" "uld" etc from the header
-        [FieldOffset(0x48)] public FFXIVClientStructs.STD.String FileName;
+        [FieldOffset(0x48)] public FFXIVClientStructs.STD.String FileName; // std::string
     }
 }
