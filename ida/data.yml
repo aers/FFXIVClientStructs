@@ -217,7 +217,7 @@ classes:
       0x1401B71D0: Initialize
   Client::Game::ActionManager:
     inherits_from: Client::Graphics::Vfx::VfxDataListenner
-    vtbl: 0x141D6A220
+    vtbl: 0x1416F04E0
     funcs:
       0x1400A82A0: GetCurrentComboActionId
       0x140803D40: GetActionRange
