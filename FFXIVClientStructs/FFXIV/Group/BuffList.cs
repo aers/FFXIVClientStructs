@@ -1,4 +1,4 @@
-﻿using System.Runtime.InteropServices;
+using System.Runtime.InteropServices;
 using FFXIVClientStructs.FFXIV.Client.Game.Character;
 
 namespace FFXIVClientStructs.FFXIV.Group
@@ -16,7 +16,7 @@ namespace FFXIVClientStructs.FFXIV.Group
             SourceID; // objectID matching the entity that cast the effect - regens will be from the white mage ID etc
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 0x190)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x188)]
     public unsafe struct BuffList
     {
         [FieldOffset(0x0)]

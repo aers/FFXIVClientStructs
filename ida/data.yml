@@ -39,6 +39,7 @@ globals:
   0x141DB7F70: g_ControlSystem_CameraManager # control system, object actually contains target system global below
   0x141DB80C0: g_ControlSystem_TargetSystem
   0x141DBBE00: g_PlayerMoveController
+  0x141DBC388: g_LocalPlayerObjectID
   0x141DBC390: g_LocalPlayer
   0x141DBC400: g_AtkStage
   0x141DBCA58: g_LayoutWorld
@@ -50,9 +51,11 @@ globals:
   0x141DDFEA0: g_GameObjectManager
   0x141DDFEB0: g_GameObjectManager_ObjectList
   0x141DE0BF0: g_GameObjectManager_ObjectListEnd
-  0x141DE2B90: g_Client::Game::UI::UIState # not a pointer
-  0x141DE3F48: g_Client::Game::UI::Telepo # not a pointer
-  0x141DE4D40: g_TrustGroupManager # pointer
+  0x141DE2B90: g_Client::Game::UI::UIState # not a pointer. Client::Game::UI::Hotbar is here since its the first member of UIState
+  0x141DE3F48: g_Client::Game::UI::Telepo # not a pointer. Member of UIState
+  0x141DE44F0: g_Client::Game::UI::BuddyListPtr # Member of UIState.
+  0x141DE4D40: g_Client::Game::UI::SquadronAndTrustListPtr # Member of UIState
+  0x141DE4CE8: g_Client::Game::UI::CompanionStats  # not a pointer. Member of UIState
   0x141DECA28: g_ActiveDirector
   0x141DF0C90: g_MarkingController
   0x141DF0F40: g_LimitBreakController
@@ -170,6 +173,9 @@ classes:
       0x1410F5970: GetPtr # return g_FateTablePtr
       0x1410F5980: ctor
       0x1410F59D0: dtor
+  SquadronAndTrustList:
+    funcs:
+      0x1407C2560: GetMemberByIndex
   InventoryManager:
     funcs:
       0x1406A2780: GetInventoryContainer # (this, containerId)
