@@ -8,6 +8,6 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI
     {
         [FieldOffset(0x0)] public Buddy Companion;
         [FieldOffset(0x198)] public Buddy Pet;
-        [FieldOffset(0x330)] public fixed byte SquadronAndTrustMembers[0x198 * 3];
+        [FieldOffset(0x330)] public fixed byte BattleBuddies[0x198 * 3];
     }
 }
