@@ -53,7 +53,7 @@ globals:
   0x141DE0BF0: g_GameObjectManager_ObjectListEnd
   0x141DE2B90: g_Client::Game::UI::UIState # not a pointer. Client::Game::UI::Hotbar is here since its the first member of UIState
   0x141DE3F48: g_Client::Game::UI::Telepo # not a pointer. Member of UIState
-  0x141DE44F0: g_Client::Game::UI::BuddyListPtr # Member of UIState.
+  0x141DE44F0: g_Client::Game::UI::BuddyList # not a pointer. Member of UIState.
   0x141DE4D40: g_Client::Game::UI::SquadronAndTrustListPtr # Member of UIState
   0x141DE4CE8: g_Client::Game::UI::CompanionStats  # not a pointer. Member of UIState
   0x141DECA28: g_ActiveDirector
