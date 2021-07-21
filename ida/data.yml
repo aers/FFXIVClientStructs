@@ -58,7 +58,7 @@ globals:
   0x141DE4698: g_Client::Game::UI::BuddyPet.BuffList # not a pointer
   0x141DE4CE8: g_Client::Game::UI::CompanionStats  # not a pointer. Member of UIState
   0x141DE4CF0: g_Client::Game::UI::CompanionStats.TimeRemaining  # not a pointer
-  0x141DE4D40: g_Client::Game::UI::SquadronAndTrustListPtr # Member of UIState
+  0x141DE4D40: g_Client::Game::UI::BattleBuddyListPtr # Member of UIState
   0x141DECA28: g_ActiveDirector
   0x141DF0C90: g_MarkingController
   0x141DF0F40: g_LimitBreakController
@@ -176,7 +176,7 @@ classes:
       0x1410F5970: GetPtr # return g_FateTablePtr
       0x1410F5980: ctor
       0x1410F59D0: dtor
-  SquadronAndTrustList:
+  BattleBuddyList:
     funcs:
       0x1407C2560: GetMemberBattleCharaByIndex
   InventoryManager:
