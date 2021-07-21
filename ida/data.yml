@@ -175,7 +175,7 @@ classes:
       0x1410F59D0: dtor
   SquadronAndTrustList:
     funcs:
-      0x1407C2560: GetMemberByIndex
+      0x1407C2560: GetMemberBattleCharaByIndex
   InventoryManager:
     funcs:
       0x1406A2780: GetInventoryContainer # (this, containerId)
