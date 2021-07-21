@@ -3,6 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace FFXIVClientStructs.FFXIV.Fate
 {
+    // This is a struct of some sort, likely part of the FateDirector.
     // Size taken from dtor, no vtbl
     [StructLayout(LayoutKind.Explicit, Size = 0xB0)]
     public unsafe struct FateManager

@@ -5,7 +5,7 @@ using FFXIVClientStructs.FFXIV.Client.System.String;
 namespace FFXIVClientStructs.FFXIV.Fate
 {
     [StructLayout(LayoutKind.Explicit, Size = 0x1000)]
-    public unsafe struct Fate
+    public unsafe struct FateContext
     {
         [FieldOffset(0x18)] public ushort FateId;
         [FieldOffset(0x20)] public int StartTimeEpoch;

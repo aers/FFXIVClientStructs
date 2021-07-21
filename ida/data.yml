@@ -2143,7 +2143,10 @@ classes:
       0x141043690: AddonOverlayMouseClickEvent
       0x141043A90: AddonOverlayMouseReleaseEvent
       0x141045740: _SetAddonScale
-  Client::Game::Event::Fate:
+  Client::Game::Fate::FateDirector:
+    inherits_from: Client::Game::Event::Director
+    vtbl: 0x14184AC88
+  Client::Game::Fate::FateContext:
     vtbl: 0x14184B560
     vfuncs:
       0: dtor
