@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace FFXIVClientStructs.FFXIV.Fate
+namespace FFXIVClientStructs.FFXIV.Client.Game.Fate
 {
     // This is a struct of some sort, likely part of the FateDirector.
     // Size taken from dtor, no vtbl

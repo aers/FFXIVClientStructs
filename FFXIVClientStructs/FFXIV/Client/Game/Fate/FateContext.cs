@@ -1,8 +1,7 @@
 using System.Runtime.InteropServices;
-using FFXIVClientStructs.FFXIV.Client.Game.Character;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 
-namespace FFXIVClientStructs.FFXIV.Fate
+namespace FFXIVClientStructs.FFXIV.Client.Game.Fate
 {
     [StructLayout(LayoutKind.Explicit, Size = 0x1000)]
     public unsafe struct FateContext
@@ -17,6 +16,7 @@ namespace FFXIVClientStructs.FFXIV.Fate
         [FieldOffset(0x450)] public float X;
         [FieldOffset(0x454)] public float Z;
         [FieldOffset(0x458)] public float Y;
+        [FieldOffset(0x464)] public float Radius;
         [FieldOffset(0x74E)] public ushort TerritoryID;
     }
 }
