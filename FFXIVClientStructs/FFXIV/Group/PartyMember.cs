@@ -1,11 +1,12 @@
 ﻿using System.Runtime.InteropServices;
+using FFXIVClientStructs.FFXIV.Client.Game;
 
 namespace FFXIVClientStructs.FFXIV.Group
 {
     [StructLayout(LayoutKind.Explicit, Size = 0x230)]
     public unsafe struct PartyMember
     {
-        [FieldOffset(0x0)] public BuffList BuffList;
+        [FieldOffset(0x0)] public StatusManager StatusManager;
         [FieldOffset(0x190)] public float X;
         [FieldOffset(0x194)] public float Y;
         [FieldOffset(0x198)] public float Z;

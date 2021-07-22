@@ -15,6 +15,6 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI
         // Trust: DawnGrowMember
         [FieldOffset(0xC)] public byte DataID;
         [FieldOffset(0xD)] public byte Synced;
-        [FieldOffset(0x10)] public BuffList BuffList;
+        [FieldOffset(0x10)] public StatusManager StatusManager;
     }
 }
