@@ -14,5 +14,6 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character
     public struct BattleChara
     {
         [FieldOffset(0x0)] public Character Character;
+        [FieldOffset(0x19F0)] public StatusManager StatusManager;
     }
 }
