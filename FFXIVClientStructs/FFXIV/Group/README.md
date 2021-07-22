@@ -1,1 +1,0 @@
-These classes have no vfuncs/rtti so names are made up.

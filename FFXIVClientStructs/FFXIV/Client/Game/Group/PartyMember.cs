@@ -1,7 +1,6 @@
 ﻿using System.Runtime.InteropServices;
-using FFXIVClientStructs.FFXIV.Client.Game;
 
-namespace FFXIVClientStructs.FFXIV.Group
+namespace FFXIVClientStructs.FFXIV.Client.Game.Group
 {
     [StructLayout(LayoutKind.Explicit, Size = 0x230)]
     public unsafe struct PartyMember

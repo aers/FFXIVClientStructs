@@ -1,4 +1,3 @@
-using FFXIVClientStructs.FFXIV.Group;
 using System.Runtime.InteropServices;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.UI
