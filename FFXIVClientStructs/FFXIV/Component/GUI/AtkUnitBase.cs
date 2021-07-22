@@ -18,10 +18,6 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
     {
         [FieldOffset(0x0)] public AtkEventListener AtkEventListener;
         [FieldOffset(0x8)] public fixed byte Name[0x20];
-
-        [Obsolete("Please use UldManager and the AtkUldManager class instead.", false)] [FieldOffset(0x28)]
-        public ULDData ULDData;
-
         [FieldOffset(0x28)] public AtkUldManager UldManager;
         [FieldOffset(0xC8)] public AtkResNode* RootNode;
         [FieldOffset(0x108)] public AtkComponentNode* WindowNode;
