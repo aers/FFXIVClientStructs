@@ -39,6 +39,7 @@ globals:
   0x141DB7F70: g_ControlSystem_CameraManager # control system, object actually contains target system global below
   0x141DB80C0: g_ControlSystem_TargetSystem
   0x141DBBE00: g_PlayerMoveController
+  0x141DBC388: g_LocalPlayerObjectID
   0x141DBC390: g_LocalPlayer
   0x141DBC400: g_AtkStage
   0x141DBCA58: g_LayoutWorld
@@ -50,9 +51,14 @@ globals:
   0x141DDFEA0: g_GameObjectManager
   0x141DDFEB0: g_GameObjectManager_ObjectList
   0x141DE0BF0: g_GameObjectManager_ObjectListEnd
-  0x141DE2B90: g_Client::Game::UI::UIState # not a pointer
-  0x141DE3F48: g_Client::Game::UI::Telepo # not a pointer
-  0x141DE4D40: g_TrustGroupManager # pointer
+  0x141DE2B90: g_Client::Game::UI::UIState # not a pointer. Client::Game::UI::Hotbar is here since its the first member of UIState
+  0x141DE3F48: g_Client::Game::UI::Telepo # not a pointer. Member of UIState
+  0x141DE44F0: g_Client::Game::UI::BuddyList # not a pointer. Member of UIState. Also the Companion Buddy slot.
+  0x141DE4688: g_Client::Game::UI::BuddyPet # not a pointer
+  0x141DE4698: g_Client::Game::UI::BuddyPet.BuffList # not a pointer
+  0x141DE4CE8: g_Client::Game::UI::CompanionStats  # not a pointer. Member of UIState
+  0x141DE4CF0: g_Client::Game::UI::CompanionStats.TimeRemaining  # not a pointer
+  0x141DE4D40: g_Client::Game::UI::BattleBuddyListPtr # Member of UIState
   0x141DECA28: g_ActiveDirector
   0x141DF0C90: g_MarkingController
   0x141DF0F40: g_LimitBreakController
@@ -60,6 +66,7 @@ globals:
   0x141DF0F58: g_TitleList
   0x141DFA828: g_EventFramework
   0x141DFE640: g_GroupManager # not a pointer
+  0x141E06E10: g_FateTablePtr
   0x141E023B0: g_GroupManager_2 # not a pointer
   0x141E06AC0: g_ClientObjectManager
 
@@ -163,6 +170,15 @@ classes:
       0x1407810A0: IsCharacterInPartyByName # (this, char*)
       0x140781120: IsObjectIDInAlliance
       0x140781190: IsObjectIDPartyLeader
+  FateManager:
+    funcs:
+      0x1410F5950: HasValue # g_FateTablePtr != 0
+      0x1410F5970: GetPtr # return g_FateTablePtr
+      0x1410F5980: ctor
+      0x1410F59D0: dtor
+  BattleBuddyList:
+    funcs:
+      0x1407C2560: GetMemberBattleCharaByIndex
   InventoryManager:
     funcs:
       0x1406A2780: GetInventoryContainer # (this, containerId)
@@ -2136,6 +2152,13 @@ classes:
       0x141043690: AddonOverlayMouseClickEvent
       0x141043A90: AddonOverlayMouseReleaseEvent
       0x141045740: _SetAddonScale
+  Client::Game::Fate::FateDirector:
+    inherits_from: Client::Game::Event::Director
+    vtbl: 0x14184AC88
+  Client::Game::Fate::FateContext:
+    vtbl: 0x14184B560
+    vfuncs:
+      0: dtor
   Client::UI::AddonLotteryDaily: # Mini Cactpot
     inherits_from: Component::GUI::AtkUnitBase
     vtbl: 0x1418472F0
