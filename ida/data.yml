@@ -53,12 +53,12 @@ globals:
   0x141DE0BF0: g_GameObjectManager_ObjectListEnd
   0x141DE2B90: g_Client::Game::UI::UIState # not a pointer. Client::Game::UI::Hotbar is here since its the first member of UIState
   0x141DE3F48: g_Client::Game::UI::Telepo # not a pointer. Member of UIState
-  0x141DE44F0: g_Client::Game::UI::BuddyList # not a pointer. Member of UIState. Also the Companion Buddy slot.
-  0x141DE4688: g_Client::Game::UI::BuddyPet # not a pointer
-  0x141DE4698: g_Client::Game::UI::BuddyPet.BuffList # not a pointer
-  0x141DE4CE8: g_Client::Game::UI::CompanionStats  # not a pointer. Member of UIState
-  0x141DE4CF0: g_Client::Game::UI::CompanionStats.TimeRemaining  # not a pointer
-  0x141DE4D40: g_Client::Game::UI::BattleBuddyListPtr # Member of UIState
+  0x141DE44F0: g_Client::Game::UI::Buddy # not a pointer. Member of UIState. Also the Companion Buddy slot.
+  0x141DE4688: g_Client::Game::UI::Buddy.Pet # not a pointer
+  0x141DE4698: g_Client::Game::UI::Buddy.Pet.BuffList # not a pointer
+  0x141DE4CE8: g_Client::Game::UI::Buddy.CompanionStats  # not a pointer. Member of UIState
+  0x141DE4CF0: g_Client::Game::UI::Buddy.CompanionStats.TimeRemaining  # not a pointer
+  0x141DE4D40: g_Client::Game::UI::Buddy.BattleBuddyListPtr # Member of UIState
   0x141DECA28: g_ActiveDirector
   0x141DF0C90: g_MarkingController
   0x141DF0F40: g_LimitBreakController
@@ -159,7 +159,7 @@ classes:
       0x1407429A0: Initialize
       0x140742E80: DeleteAllCharacters
       0x140742F70: LookupBattleCharaByObjectID
-  GroupManager:
+  Client::Game::Group::GroupManager:
     funcs:
       0x140BC81D0: Create
       0x1407800C0: ctor
@@ -231,6 +231,12 @@ classes:
       0x1401B27C0: GetResourceAsync
       0x1401B29F0: GetResourceSync
       0x1401B71D0: Initialize
+  Client::Game::UI::UIState:
+    funcs:
+      0x1407F3010: ctor
+  Client::Game::UI::Buddy:
+    funcs:
+      0x1407C28F0: ctor
   Client::Game::ActionManager:
     inherits_from: Client::Graphics::Vfx::VfxDataListenner
     vtbl: 0x1416F04E0
