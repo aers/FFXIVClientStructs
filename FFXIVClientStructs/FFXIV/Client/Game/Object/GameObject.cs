@@ -1,4 +1,5 @@
 ﻿using System.Runtime.InteropServices;
+using FFXIVClientStructs.FFXIV.Client.Graphics;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Object
 {
@@ -12,8 +13,15 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Object
     {
         [FieldOffset(0x30)] public fixed byte Name[30];
         [FieldOffset(0x74)] public uint ObjectID;
+        [FieldOffset(0x80)] public uint DataID;
+        [FieldOffset(0x84)] public uint OwnerID;
         [FieldOffset(0x8C)] public byte ObjectKind;
+        [FieldOffset(0x8D)] public byte SubKind;
+        [FieldOffset(0xA0)] public Vector3 Position;
+        [FieldOffset(0xB0)] public float Rotation;
+        [FieldOffset(0xC0)] public float HitboxRadius;
         [FieldOffset(0xF0)] public void* DrawObject;
         [FieldOffset(0x104)] public int RenderFlags;
+        [FieldOffset(0x148)] public void* LuaObject;
     }
 }
