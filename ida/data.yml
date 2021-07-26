@@ -1297,6 +1297,9 @@ classes:
   Client::Game::Character::Character:
     inherits_from: Client::Game::Object::GameObject
     vtbl: 0x1416D94E0
+    vfuncs:
+      81: GetCastInfo
+      82: GetCastInfo_2
     funcs:
       0x1406DE230: dtor
       0x1406F1CF0: ctor
