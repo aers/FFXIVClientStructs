@@ -42,8 +42,8 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
         [FieldOffset(0xB8)] public Utf8String NodeText;
 
         // if text is "asdf" and you selected "sd" this is 2, 3
-        [FieldOffset(0x128)] public uint SelectStart;
-        [FieldOffset(0x12C)] public uint SelectEnd;
+        [FieldOffset(0x138)] public uint SelectStart;
+        [FieldOffset(0x13C)] public uint SelectEnd;
         [FieldOffset(0x14A)] public byte LineSpacing;
 
         [FieldOffset(0x14B)] public byte CharSpacing;
