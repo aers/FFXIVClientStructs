@@ -1,4 +1,5 @@
 ﻿using System.Runtime.InteropServices;
+using FFXIVClientStructs.Common;
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Character
@@ -10,7 +11,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character
     // size = 0x1910
     // ctor E8 ? ? ? ? 0F B7 93 ? ? ? ? 45 33 C9 
     [StructLayout(LayoutKind.Explicit, Size = 0x19B0)]
-    public unsafe struct Character
+    public unsafe partial struct Character
     {
         [FieldOffset(0x0)] public GameObject GameObject;
         

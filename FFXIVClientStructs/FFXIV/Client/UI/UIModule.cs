@@ -1,11 +1,13 @@
 ﻿using System.Runtime.InteropServices;
+using FFXIVClientStructs.Common;
+using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI
 {
     // Client::UI::UIModule
     //   Client::UI::UIModuleInterface
     [StructLayout(LayoutKind.Explicit, Size = 0xE2070)]
-    public unsafe struct UIModule
+    public unsafe partial struct UIModule
     {
         [FieldOffset(0x0)] public void* vtbl;
         [FieldOffset(0x0)] public void** vfunc;
@@ -26,6 +28,12 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
             and so on...
          */
 
+        [VirtualFunction(7)]
+        public partial RaptureAtkModule* GetRaptureAtkModule();
+
+        [VirtualFunction(34)]
+        public partial AgentModule* GetAgentModule();
+        
         [StructLayout(LayoutKind.Explicit, Size = 0x8)]
         public struct Unk1
         {
