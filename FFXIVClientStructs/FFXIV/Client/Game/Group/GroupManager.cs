@@ -20,10 +20,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Group
         [FieldOffset(0x3D5E)] public bool IsAlliance;
         [FieldOffset(0x3D5F)] public byte Unk_3D5F; // some sort of count
         [FieldOffset(0x3D60)] public byte Unk_3D60;
-
-        [MemberFunction("E8 ?? ?? ?? ?? 8D 57 DD", IsStatic = true)]
-        public static partial GroupManager* GetGroupManager(byte index = 0);
-
+        
         [MemberFunction("E8 ?? ?? ?? ?? EB B8 E8")]
         public partial bool IsObjectIDInParty(uint objectID);
 
