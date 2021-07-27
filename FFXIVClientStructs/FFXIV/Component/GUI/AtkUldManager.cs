@@ -32,7 +32,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
         [FieldOffset(0x86)] public byte Flags1;
         [FieldOffset(0x89)] public byte LoadedState; // 3 is fully loaded
 
-        [MemberFunction("E8 ? ? ? ? 48 8B C8 3B DD")]
+        [MemberFunction("F6 81 ? ? ? ? ? 44 8B CA")]
         public partial AtkResNode* SearchNodeById(uint id);
 
         [MemberFunction("E8 ? ? ? ? 48 8B 4C 24 ? 48 8B 51 08")]

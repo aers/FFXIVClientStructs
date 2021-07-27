@@ -176,5 +176,8 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
 
         [MemberFunction("E8 ?? ?? ?? ?? 8D 45 F0")]
         public partial void SetPriority(ushort priority);
+
+        [VirtualFunction(1)]
+        public partial void Destroy(bool free);
     }
 }
