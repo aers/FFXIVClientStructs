@@ -21,7 +21,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character
         [FieldOffset(0x1B80)] public CastInfo SpellCastInfo;
 
         [FieldOffset(0x2BF0)] public byte EurekaLevel;
-        [FieldOffset(0x2BF1)] public byte EurekaElement;
+        [FieldOffset(0x2BF1)] public EurekaElement EurekaElement;
 
         [VirtualFunction(82)]
         public partial CastInfo* GetCastInfo();
@@ -30,7 +30,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character
         public struct CastInfo {
             [FieldOffset(0x00)] public byte IsCasting;
             [FieldOffset(0x01)] public byte Interruptible;
-            [FieldOffset(0x02)] public byte ActionType;
+            [FieldOffset(0x02)] public ActionType ActionType;
             [FieldOffset(0x04)] public uint ActionID;
             [FieldOffset(0x08)] public uint Unk_08;
             [FieldOffset(0x10)] public uint CastTargetID;
@@ -39,5 +39,15 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character
             [FieldOffset(0x34)] public float CurrentCastTime;
             [FieldOffset(0x38)] public float TotalCastTime;
         }
+    }
+
+    public enum EurekaElement : byte {
+        None = 0,
+        Fire = 1,
+        Ice = 2,
+        Wind = 3,
+        Earth = 4,
+        Lightning = 5,
+        Water = 6
     }
 }

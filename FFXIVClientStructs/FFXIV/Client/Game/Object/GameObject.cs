@@ -16,7 +16,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Object
         [FieldOffset(0x74)] public uint ObjectID;
         [FieldOffset(0x80)] public uint DataID;
         [FieldOffset(0x84)] public uint OwnerID;
-        [FieldOffset(0x8C)] public byte ObjectKind;
+        [FieldOffset(0x8C)] public ObjectKind ObjectKind;
         [FieldOffset(0x8D)] public byte SubKind;
         [FieldOffset(0xA0)] public Vector3 Position;
         [FieldOffset(0xB0)] public float Rotation;
@@ -29,7 +29,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Object
         public partial uint GetObjectID();
 
         [VirtualFunction(3)]
-        public partial byte GetObjectKind();
+        public partial ObjectKind GetObjectKind();
 
         [VirtualFunction(5)]
         public partial bool GetIsTargetable();
@@ -39,5 +39,23 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Object
 
         [VirtualFunction(50)]
         public partial uint GetNpcID();
+    }
+
+    public enum ObjectKind : byte {
+        None = 0,
+        Pc = 1,
+        BattleNpc = 2,
+        EventNpc = 3,
+        Treasure = 4,
+        Aetheryte = 5,
+        GatheringPoint = 6,
+        EventObj = 7,
+        Mount = 8,
+        Companion = 9,
+        Retainer = 10,
+        AreaObject = 11,
+        HousingEventObject = 12,
+        Cutscene = 13,
+        CardStand = 14
     }
 }
