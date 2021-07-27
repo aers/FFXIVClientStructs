@@ -1,11 +1,12 @@
-﻿using System.Runtime.InteropServices;
+﻿using FFXIVClientStructs.Common;
+using System.Runtime.InteropServices;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI
 {
     // used in both addons (AtkUnitBase derived classes) and components (AtkComponontBase derived classes) to read data from uld files
     // also used to render UI components
     [StructLayout(LayoutKind.Explicit, Size = 0x90)]
-    public unsafe struct AtkUldManager
+    public unsafe partial struct AtkUldManager
     {
         [FieldOffset(0x00)] public AtkUldAsset* Assets; // array with size AssetCount, "ashd" (asset) header
         [FieldOffset(0x08)] public AtkUldPartsList* PartsList; // array with size PartsListcount, "tphd" header 
@@ -30,5 +31,11 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
         [FieldOffset(0x82)] public ushort RootNodeHeight;
         [FieldOffset(0x86)] public byte Flags1;
         [FieldOffset(0x89)] public byte LoadedState; // 3 is fully loaded
+
+        [MemberFunction("E8 ? ? ? ? 48 8B C8 3B DD")]
+        public partial AtkResNode* SearchNodeById(uint id);
+
+        [MemberFunction("E8 ? ? ? ? 48 8B 4C 24 ? 48 8B 51 08")]
+        public partial AtkResNode* CreateNodeByType(uint type);
     }
 }
