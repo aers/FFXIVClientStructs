@@ -11,18 +11,22 @@ namespace FFXIVClientStructs.Generators
 namespace {{ struct.namespace }} {
     public unsafe partial struct {{ struct.name }} {
         {{~ for mf in struct.member_functions ~}}
-        public static delegate* unmanaged[Stdcall] <{{ struct.name }}*,{{ if mf.has_params }}{{ mf.param_type_list }},{{ end }}{{ mf.return_type }}> fp{{ mf.name }} { internal set; get; }
+        public static delegate* unmanaged[Stdcall] <{{ if !mf.is_static }}{{ struct.name }}*,{{ end }}{{ if mf.has_params }}{{ mf.param_type_list }},{{ end }}{{ mf.return_type }}> fp{{ mf.name }} { internal set; get; }
 
-        public partial {{ mf.return_type }} {{ mf.name }}({{ mf.param_list }})
+        public{{ if mf.is_static }} static{{ end }} partial {{ mf.return_type }} {{ mf.name }}({{ mf.param_list }})
         {
             if (fp{{ mf.name }} is null)
             {
                 throw new InvalidOperationException(""Function pointer for {{ struct.name }}::{{ mf.name }} is null."");
             }
+{{ if !mf.is_static }}
             fixed({{ struct.name }}* thisPtr = &this)
             {
-                {{ if mf.has_return }}return {{ end }}fp{{ mf.name }}(thisPtr{{ if mf.has_params }}, {{ mf.param_name_list }}{{ end }});
+{{ end }}
+                {{ if mf.has_return }}return {{ end }}fp{{ mf.name }}({{ if !mf.is_static }}thisPtr{{ end }}{{ if mf.has_params }}{{ if !mf.is_static }}, {{ end }}{{ mf.param_name_list }}{{ end }});
+{{ if !mf.is_static }}
             }
+{{ end }}
         }
         {{~ end ~}}
     }       
@@ -40,7 +44,7 @@ namespace FFXIVClientStructs {
             {{~ for mf in struct.member_functions ~}}
             try {
                 var address{{ struct.name }}{{ mf.name }} = s.ScanText(""{{ mf.signature }}"");
-                {{ struct.namespace }}.{{ struct.name }}.fp{{ mf.name }} = (delegate* unmanaged[Stdcall] <{{ struct.namespace }}.{{ struct.name }}*,{{ if mf.has_params }}{{ mf.param_type_list }},{{ end }}{{ mf.return_type }}>) address{{ struct.name }}{{ mf.name }};
+                {{ struct.namespace }}.{{ struct.name }}.fp{{ mf.name }} = (delegate* unmanaged[Stdcall] <{{ if !mf.is_static }}{{ struct.namespace }}.{{ struct.name }}*,{{ end }}{{ if mf.has_params }}{{ mf.param_type_list }},{{ end }}{{ mf.return_type }}>) address{{ struct.name }}{{ mf.name }};
             } catch (KeyNotFoundException) {
                 Log.Warning($""[FFXIVClientStructs] function {{ struct.name }}::{{ mf.name }} failed to match signature {{ mf.signature }} and is unavailable"");
             }

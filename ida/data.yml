@@ -903,6 +903,8 @@ classes:
     vtbl: 0x1416C2558
     funcs:
       0x1405449B0: ctor
+      0x1404D3B30: LoadIconTexture
+      0x1404D3D30: UnloadTexture
   Component::GUI::AtkTextNode:
     inherits_from: Component::GUI::AtkResNode
     vtbl: 0x1416C2570

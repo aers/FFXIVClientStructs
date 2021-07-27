@@ -23,5 +23,6 @@ namespace FFXIVClientStructs.Generators
         public string ParamNameList;
         public string Signature;
         public int VirtualOffset;
+        public bool IsStatic;
     }
 }

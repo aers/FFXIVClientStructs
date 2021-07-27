@@ -8,6 +8,7 @@ namespace FFXIVClientStructs.Common
     public class MemberFunctionAttribute : Attribute
     {
         public string Signature { get; }
+        public bool IsStatic { get; set; } = false;
 
         public MemberFunctionAttribute(string sig)
         {

@@ -79,37 +79,31 @@ namespace FFXIVClientStructs.Generators
                     foreach (var m in methods)
                     {
                         if (context.SemanticModel.GetDeclaredSymbol(m) is not IMethodSymbol ms) continue;
-                        var sig = "";
-                        int offset = -1;
-                        if (ms.GetAttributes().FirstOrDefault(a => a.AttributeClass?.Name == "MemberFunctionAttribute") is { } memberFuncAttr)
-                        {
-                            sig = (string)memberFuncAttr.ConstructorArguments[0].Value;
-                        }
-                        if (ms.GetAttributes().FirstOrDefault(a => a.AttributeClass?.Name == "VirtualFunctionAttribute") is { } virtualFuncAttr)
-                        {
-                            offset = (int)virtualFuncAttr.ConstructorArguments[0].Value;
-                        }
                         var format = new SymbolDisplayFormat(
-                            typeQualificationStyle: SymbolDisplayTypeQualificationStyle
-                                .NameAndContainingTypesAndNamespaces,
+                            typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces,
                             miscellaneousOptions: SymbolDisplayMiscellaneousOptions.UseSpecialTypes);
                         var functionObj = new Function
                         {
                             Name = ms.Name,
                             ReturnType = ms.ReturnType.ToDisplayString(format),
-                            HasReturn = ms.ReturnType.ToDisplayString() != "void", 
+                            HasReturn = ms.ReturnType.ToDisplayString() != "void",
                             HasParams = ms.Parameters.Any(),
                             ParamList = string.Join(",",
                                 ms.Parameters.Select(p => $"{p.Type.ToDisplayString(format)} {p.Name}")),
                             ParamTypeList = string.Join(",", ms.Parameters.Select(p => p.Type.ToDisplayString(format))),
-                            ParamNameList = string.Join(",", ms.Parameters.Select(p => p.Name)),
-                            Signature = sig,
-                            VirtualOffset = offset
+                            ParamNameList = string.Join(",", ms.Parameters.Select(p => p.Name))
                         };
-                        if (offset != -1)
-                            structObj.VirtualFunctions.Add(functionObj);
-                        else
+                        if (ms.GetAttributes().FirstOrDefault(a => a.AttributeClass?.Name == "MemberFunctionAttribute") is { } memberFuncAttr)
+                        {
+                            functionObj.Signature = (string)memberFuncAttr.ConstructorArguments[0].Value;
+                            functionObj.IsStatic = memberFuncAttr.NamedArguments.Any() ? (bool) memberFuncAttr.NamedArguments[0].Value.Value : false;
                             structObj.MemberFunctions.Add(functionObj);
+                        }
+                        if (ms.GetAttributes().FirstOrDefault(a => a.AttributeClass?.Name == "VirtualFunctionAttribute") is { } virtualFuncAttr)
+                        {
+                            functionObj.VirtualOffset = (int)virtualFuncAttr.ConstructorArguments[0].Value;
+                            structObj.VirtualFunctions.Add(functionObj);
+                        }
                     }
 
                     Structs.Add(structObj);
