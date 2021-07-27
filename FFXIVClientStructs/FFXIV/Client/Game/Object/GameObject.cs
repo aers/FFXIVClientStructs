@@ -16,7 +16,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Object
         [FieldOffset(0x74)] public uint ObjectID;
         [FieldOffset(0x80)] public uint DataID;
         [FieldOffset(0x84)] public uint OwnerID;
-        [FieldOffset(0x8C)] public ObjectKind ObjectKind;
+        [FieldOffset(0x8C)] public byte ObjectKind;
         [FieldOffset(0x8D)] public byte SubKind;
         [FieldOffset(0xA0)] public Vector3 Position;
         [FieldOffset(0xB0)] public float Rotation;
@@ -29,7 +29,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Object
         public partial uint GetObjectID();
 
         [VirtualFunction(3)]
-        public partial ObjectKind GetObjectKind();
+        public partial byte GetObjectKind();
 
         [VirtualFunction(5)]
         public partial bool GetIsTargetable();
