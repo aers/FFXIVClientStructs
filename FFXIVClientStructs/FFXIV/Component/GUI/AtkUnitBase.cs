@@ -46,5 +46,8 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
 
         [MemberFunction("E8 ?? ?? ?? ?? 0F BF 45 00")]
         public partial float GetGlobalUIScale();
+
+        [VirtualFunction(7)]
+        public partial void SetPosition(short x, short y);
     }
 }

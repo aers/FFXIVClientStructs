@@ -11,26 +11,38 @@ using Scriban;
 namespace FFXIVClientStructs.Generators
 {
     [Generator]
-    class MemberFunctionGenerator : ISourceGenerator
+    class FunctionGenerator : ISourceGenerator
     {
-        private Template _codeTemplate;
+        private Template _mfCodeTemplate;
+        private Template _vfCodeTemplate;
 
         public void Initialize(GeneratorInitializationContext context)
         {
-            context.RegisterForSyntaxNotifications(() => new MemberFunctionSyntaxContextReceiver());
+            context.RegisterForSyntaxNotifications(() => new FunctionSyntaxContextReceiver());
 
-            _codeTemplate = Template.Parse(Templates.MemberFunctions);
+            _mfCodeTemplate = Template.Parse(Templates.MemberFunctions);
+            _vfCodeTemplate = Template.Parse(Templates.VirtualFunctions);
         }
 
         public void Execute(GeneratorExecutionContext context)
         {
-            if (!(context.SyntaxContextReceiver is MemberFunctionSyntaxContextReceiver receiver)) return;
+            if (!(context.SyntaxContextReceiver is FunctionSyntaxContextReceiver receiver)) return;
 
             foreach (var structObj in receiver.Structs)
             {
-                var filename = structObj.Namespace + "." + structObj.Name + ".generated.cs";
-                var source = _codeTemplate.Render(new {Struct = structObj});
-                context.AddSource(filename, SourceText.From(source, Encoding.UTF8));
+                if (structObj.MemberFunctions.Any())
+                {
+                    var filename = structObj.Namespace + "." + structObj.Name + ".MemberFunctions.generated.cs";
+                    var source = _mfCodeTemplate.Render(new { Struct = structObj });
+                    context.AddSource(filename, SourceText.From(source, Encoding.UTF8));
+                }
+
+                if (structObj.VirtualFunctions.Any())
+                {
+                    var filename = structObj.Namespace + "." + structObj.Name + ".VirtualFunctions.generated.cs";
+                    var source = _vfCodeTemplate.Render(new { Struct = structObj });
+                    context.AddSource(filename, SourceText.From(source, Encoding.UTF8));
+                }
             }
 
             var resolverTemplate = Template.Parse(Templates.InitializeMemberFunctions);
@@ -39,7 +51,7 @@ namespace FFXIVClientStructs.Generators
 ;
         }
 
-        class MemberFunctionSyntaxContextReceiver : ISyntaxContextReceiver
+        class FunctionSyntaxContextReceiver : ISyntaxContextReceiver
         {
             public List<Struct> Structs { get; } = new();
 
@@ -50,7 +62,7 @@ namespace FFXIVClientStructs.Generators
                 {
                     var sm = (IMethodSymbol) context.SemanticModel.GetDeclaredSymbol(m);
                     return sm != null && sm.GetAttributes()
-                        .Any(a => a.AttributeClass?.Name == "MemberFunctionAttribute");
+                        .Any(a => a.AttributeClass?.Name == "MemberFunctionAttribute" || a.AttributeClass?.Name == "VirtualFunctionAttribute");
                 }).ToList();
 
                 if (methods.Count > 0)
@@ -60,14 +72,23 @@ namespace FFXIVClientStructs.Generators
                     {
                         Name = structType.Name,
                         Namespace = structType.ContainingNamespace.ToDisplayString(),
-                        MemberFunctions = new List<Function>()
+                        MemberFunctions = new List<Function>(),
+                        VirtualFunctions = new List<Function>()
                     };
 
                     foreach (var m in methods)
                     {
                         if (context.SemanticModel.GetDeclaredSymbol(m) is not IMethodSymbol ms) continue;
-                        var attr = ms.GetAttributes().First(a => a.AttributeClass?.Name == "MemberFunctionAttribute");
-                        var sig = (string) attr.ConstructorArguments[0].Value;
+                        var sig = "";
+                        int offset = -1;
+                        if (ms.GetAttributes().FirstOrDefault(a => a.AttributeClass?.Name == "MemberFunctionAttribute") is { } memberFuncAttr)
+                        {
+                            sig = (string)memberFuncAttr.ConstructorArguments[0].Value;
+                        }
+                        if (ms.GetAttributes().FirstOrDefault(a => a.AttributeClass?.Name == "VirtualFunctionAttribute") is { } virtualFuncAttr)
+                        {
+                            offset = (int)virtualFuncAttr.ConstructorArguments[0].Value;
+                        }
                         var format = new SymbolDisplayFormat(
                             typeQualificationStyle: SymbolDisplayTypeQualificationStyle
                                 .NameAndContainingTypesAndNamespaces,
@@ -82,9 +103,13 @@ namespace FFXIVClientStructs.Generators
                                 ms.Parameters.Select(p => $"{p.Type.ToDisplayString(format)} {p.Name}")),
                             ParamTypeList = string.Join(",", ms.Parameters.Select(p => p.Type.ToDisplayString(format))),
                             ParamNameList = string.Join(",", ms.Parameters.Select(p => p.Name)),
-                            Signature = sig
+                            Signature = sig,
+                            VirtualOffset = offset
                         };
-                        structObj.MemberFunctions.Add(functionObj);
+                        if (offset != -1)
+                            structObj.VirtualFunctions.Add(functionObj);
+                        else
+                            structObj.MemberFunctions.Add(functionObj);
                     }
 
                     Structs.Add(structObj);

@@ -9,6 +9,7 @@ namespace FFXIVClientStructs.Generators
         public string Namespace;
         public string Name;
         public List<Function> MemberFunctions;
+        public List<Function> VirtualFunctions;
     }
 
     class Function
@@ -21,5 +22,6 @@ namespace FFXIVClientStructs.Generators
         public string ParamTypeList;
         public string ParamNameList;
         public string Signature;
+        public int VirtualOffset;
     }
 }

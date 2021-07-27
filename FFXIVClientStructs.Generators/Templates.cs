@@ -50,5 +50,32 @@ namespace FFXIVClientStructs {
         }
     }
 }";
+
+        internal static string VirtualFunctions = @"
+using System;
+using System.Runtime.InteropServices;
+
+namespace {{ struct.namespace }} {
+    public unsafe partial struct {{ struct.name }} {
+        [StructLayout(LayoutKind.Explicit)]
+        public unsafe struct {{ struct.name }}VTable {
+            {{ for vf in struct.virtual_functions }}
+            [FieldOffset({{ vf.virtual_offset * 8 }})] public delegate* unmanaged[Stdcall] <{{ struct.name }}*,{{ if vf.has_params }}{{ vf.param_type_list }},{{ end }}{{ vf.return_type }}> {{ vf.name }};
+            {{ end }}
+        }
+
+        [FieldOffset(0x0)] public {{ struct.name }}VTable* VTable;
+
+        {{ for vf in struct.virtual_functions }}
+        public partial {{ vf.return_type }} {{ vf.name}}({{ vf.param_list }})
+        {
+            fixed({{ struct.name }}* thisPtr = &this)
+            {
+                {{ if vf.has_return }}return {{ end }}VTable->{{ vf.name }}(thisPtr{{ if vf.has_params }}, {{ vf.param_name_list }}{{ end }});
+            }
+        }
+        {{ end }}
+    }
+}";
     }
 }
