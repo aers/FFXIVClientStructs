@@ -1,4 +1,5 @@
 ﻿using System.Runtime.InteropServices;
+using FFXIVClientStructs.FFXIV.Client.Graphics;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Character
 {
@@ -15,5 +16,24 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character
     {
         [FieldOffset(0x0)] public Character Character;
         [FieldOffset(0x19F0)] public StatusManager StatusManager;
+        
+        [FieldOffset(0x1B80)] public CastInfo SpellCastInfo;
+
+        [FieldOffset(0x2BF0)] public byte EurekaLevel;
+        [FieldOffset(0x2BF1)] public byte EurekaElement;
+
+        [StructLayout(LayoutKind.Explicit, Size = 0x40)]
+        public struct CastInfo {
+            [FieldOffset(0x00)] public byte IsCasting;
+            [FieldOffset(0x01)] public byte Interruptible;
+            [FieldOffset(0x02)] public byte ActionType;
+            [FieldOffset(0x04)] public uint ActionID;
+            [FieldOffset(0x08)] public uint Unk_08;
+            [FieldOffset(0x10)] public uint CastTargetID;
+            [FieldOffset(0x20)] public Vector3 CastLocation;
+            [FieldOffset(0x30)] public uint Unk_30;
+            [FieldOffset(0x34)] public float CurrentCastTime;
+            [FieldOffset(0x38)] public float TotalCastTime;
+        }
     }
 }

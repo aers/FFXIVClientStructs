@@ -350,7 +350,9 @@ if api is None:
                 return sym.getName(True)
 
             def set_addr_name(self, ea, name):
-                return createLabel(toAddr(ea), name, True).checkIsValid()
+                createLabel(toAddr(ea), name, True)
+                return True
+                # return createLabel(toAddr(ea), name, True).checkIsValid()
 
             def get_comment(self, ea):
                 return getEOLComment(toAddr(ea))

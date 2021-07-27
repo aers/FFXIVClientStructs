@@ -36,6 +36,7 @@ globals:
   0x141DAF9A0: g_JobSystem_ApricotEngineCore # not a pointer
   0x141DB2408: g_InputDeviceManager
   0x141DB26A0: g_GameMain
+  0x141DB3178: g_JobGaugeManager
   0x141DB7F70: g_ControlSystem_CameraManager # control system, object actually contains target system global below
   0x141DB80C0: g_ControlSystem_TargetSystem
   0x141DBBE00: g_PlayerMoveController
@@ -1284,6 +1285,8 @@ classes:
       16: EnableDraw
       17: DisableDraw
       21: SetDrawObject
+      27: GetDrawObject
+      28: GetDrawObject_2
       40: Update
       50: GetNpcID
     funcs:
@@ -1294,6 +1297,9 @@ classes:
   Client::Game::Character::Character:
     inherits_from: Client::Game::Object::GameObject
     vtbl: 0x1416D94E0
+    vfuncs:
+      81: GetCastInfo
+      82: GetCastInfo_2
     funcs:
       0x1406DE230: dtor
       0x1406F1CF0: ctor
