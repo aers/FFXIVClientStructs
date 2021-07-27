@@ -1,4 +1,4 @@
-﻿using System.Runtime.InteropServices;
+using System.Runtime.InteropServices;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Group
 {
@@ -17,12 +17,11 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Group
         [FieldOffset(0x1B8)] public uint MaxHP;
         [FieldOffset(0x1BC)] public ushort CurrentMP;
         [FieldOffset(0x1BE)] public ushort MaxMP;
-        [FieldOffset(0x1C0)] public ushort TerritoryType; // player zone
-        [FieldOffset(0x1C2)] public ushort Unk_1C2; // seems to be 0x63/99, no idea what it is
-        [FieldOffset(0x1C4)] public fixed byte Name[0x40]; // character name string
+        [FieldOffset(0x1C0)] public ushort TerritoryType;
+        [FieldOffset(0x1C2)] public ushort HomeWorld;
+        [FieldOffset(0x1C4)] public fixed byte Name[0x40];
         [FieldOffset(0x204)] public byte Sex;
         [FieldOffset(0x205)] public byte ClassJob;
-
         [FieldOffset(0x206)] public byte Level;
 
         // 0x18 byte struct at 0x208

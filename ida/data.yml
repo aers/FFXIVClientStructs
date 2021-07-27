@@ -22,7 +22,7 @@ globals:
   0x141D95BE8: g_CameraManager
   0x141D95BF0: g_CharacterUtility
   0x141D95BF8: g_ResidentResourceManager
-  0x141D977A0: g_CrossRealmGroupManager # pointer
+  0x141D977A0: g_Client::UI::Info::InfoProxyCrossRealmPtr # pointer
   0x141D97810: g_CullingManager
   0x141D97830: g_TaskManager
   0x141D9C720: g_EnvRenderController # Client::Graphics::Environment::EnvRenderController not a pointer
@@ -349,6 +349,18 @@ classes:
       0x1400C54E0: OnUpdate_Nameplates
       0x1400D3EC0: UpdateNameplates_Task1
       0x1400D6E50: IsUIVisible
+  Client::UI::Info::InfoProxyInterface:
+    vtbl: 0x141680638
+  Client::UI::Info::InfoProxyPageInterface:
+    inherits_from: Client::UI::Info::InfoProxyInterface
+    vtbl: 0x141680690
+  Client::UI::Info::InfoProxyCrossRealm:
+    inherits_from: Client::UI::Info::InfoProxyInterface
+    vtbl: 0x141680F90
+    funcs:
+      0x1400E8E10: ctor
+      0x1400E8EC0: dtor
+      0x1400E8EE0: GetPtr  # Static
   Client::Graphics::Kernel::Notifier:
     vtbl: 0x141688FE8
   Client::System::Crypt::Crc32:
