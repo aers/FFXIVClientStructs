@@ -1,4 +1,5 @@
 ﻿using System.Runtime.InteropServices;
+using FFXIVClientStructs.Common;
 using FFXIVClientStructs.FFXIV.Client.Graphics;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Character
@@ -12,7 +13,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character
     // size = 0x2B60
     // ctor E8 ? ? ? ? 48 8B F8 EB 02 33 FF 8B 86 ? ? ? ? 
     [StructLayout(LayoutKind.Explicit, Size = 0x2C00)]
-    public struct BattleChara
+    public unsafe partial struct BattleChara
     {
         [FieldOffset(0x0)] public Character Character;
         [FieldOffset(0x19F0)] public StatusManager StatusManager;
@@ -21,6 +22,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character
 
         [FieldOffset(0x2BF0)] public byte EurekaLevel;
         [FieldOffset(0x2BF1)] public byte EurekaElement;
+
+        [VirtualFunction(82)]
+        public partial CastInfo* GetCastInfo();
 
         [StructLayout(LayoutKind.Explicit, Size = 0x40)]
         public struct CastInfo {
