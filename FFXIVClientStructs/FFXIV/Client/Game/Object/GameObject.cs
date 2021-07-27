@@ -35,7 +35,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Object
         public partial bool GetIsTargetable();
 
         [VirtualFunction(7)]
-        public partial char* GetName();
+        public partial byte* GetName();
 
         [VirtualFunction(50)]
         public partial uint GetNpcID();
