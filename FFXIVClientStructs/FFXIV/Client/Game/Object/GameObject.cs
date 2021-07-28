@@ -1,4 +1,4 @@
-﻿using System.Runtime.InteropServices;
+using System.Runtime.InteropServices;
 using FFXIVClientStructs.Common;
 using FFXIVClientStructs.FFXIV.Client.Graphics;
 
@@ -18,12 +18,16 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Object
         [FieldOffset(0x84)] public uint OwnerID;
         [FieldOffset(0x8C)] public byte ObjectKind;
         [FieldOffset(0x8D)] public byte SubKind;
+        [FieldOffset(0x90)] public byte YalmDistanceFromPlayerX;
+        [FieldOffset(0x91)] public byte TargetStatus; // Goes from 6 to 2 when selecting a target and flashing a highlight
+        [FieldOffset(0x92)] public byte YalmDistanceFromPlayerZ;
         [FieldOffset(0xA0)] public Vector3 Position;
         [FieldOffset(0xB0)] public float Rotation;
         [FieldOffset(0xC0)] public float HitboxRadius;
         [FieldOffset(0xF0)] public void* DrawObject;
         [FieldOffset(0x104)] public int RenderFlags;
         [FieldOffset(0x148)] public void* LuaObject;
+        [FieldOffset(0x230)] public uint TargetObjectID;
 
         [VirtualFunction(2)]
         public partial uint GetObjectID();
@@ -40,7 +44,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Object
         [VirtualFunction(50)]
         public partial uint GetNpcID();
     }
-
+  
     public enum ObjectKind : byte {
         None = 0,
         Pc = 1,

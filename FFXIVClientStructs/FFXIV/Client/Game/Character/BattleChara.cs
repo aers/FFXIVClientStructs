@@ -1,4 +1,4 @@
-﻿using System.Runtime.InteropServices;
+using System.Runtime.InteropServices;
 using FFXIVClientStructs.Common;
 using FFXIVClientStructs.FFXIV.Client.Graphics;
 
@@ -16,8 +16,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character
     public unsafe partial struct BattleChara
     {
         [FieldOffset(0x0)] public Character Character;
+
         [FieldOffset(0x19F0)] public StatusManager StatusManager;
-        
+
         [FieldOffset(0x1B80)] public CastInfo SpellCastInfo;
 
         [FieldOffset(0x2BF0)] public byte EurekaLevel;
@@ -27,7 +28,8 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character
         public partial CastInfo* GetCastInfo();
 
         [StructLayout(LayoutKind.Explicit, Size = 0x40)]
-        public struct CastInfo {
+        public struct CastInfo
+        {
             [FieldOffset(0x00)] public byte IsCasting;
             [FieldOffset(0x01)] public byte Interruptible;
             [FieldOffset(0x02)] public ActionType ActionType;
@@ -40,14 +42,14 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character
             [FieldOffset(0x38)] public float TotalCastTime;
         }
     }
-
+        
     public enum EurekaElement : byte {
-        None = 0,
-        Fire = 1,
-        Ice = 2,
-        Wind = 3,
-        Earth = 4,
-        Lightning = 5,
-        Water = 6
+      None = 0,
+      Fire = 1,
+      Ice = 2,
+      Wind = 3,
+      Earth = 4,
+      Lightning = 5,
+      Water = 6
     }
 }
