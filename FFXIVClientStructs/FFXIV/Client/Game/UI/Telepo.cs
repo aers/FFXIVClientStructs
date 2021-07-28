@@ -18,16 +18,6 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI
         [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4B 10 84 C0 48 8B 01 74 2C")]
         public partial bool Teleport(uint aetheryteID, byte subIndex);
 
-        [StructLayout(LayoutKind.Explicit, Size = 0x28)]
-        public partial struct SelectUseTicketInvoker {
-            [FieldOffset(0x00)] public void* vtbl;
-            [FieldOffset(0x10)] public Telepo* Telepo;
-
-            //TODO: nested structs borked?
-            //[MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 1B 44 0F B6 CE")]
-            //public partial bool TeleportWithTickets(uint aetheryteID, byte subIndex);
-        }
-
         [StructLayout(LayoutKind.Explicit, Size = 0x14)]
         public struct TeleportInfo
         {
@@ -42,5 +32,14 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI
             public bool IsSharedHouse => Ward > 0 && Plot > 0;
             public bool IsAppartment => SubIndex == 128 && !IsSharedHouse;
         }
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x28)]
+    public unsafe partial struct SelectUseTicketInvoker {
+        [FieldOffset(0x00)] public void* vtbl;
+        [FieldOffset(0x10)] public Telepo* Telepo;
+
+        [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 1B 44 0F B6 CE")]
+        public partial bool TeleportWithTickets(uint aetheryteID, byte subIndex);
     }
 }

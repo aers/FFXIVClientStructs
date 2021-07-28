@@ -12,7 +12,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game {
         public partial bool UseActionLocation(ActionType actionType, uint actionID, uint targetID = 0xE000_0000, Vector3* location = null, uint a4 = 0);
         
         [MemberFunction("E8 ?? ?? ?? ?? 83 BC 24 ?? ?? ?? ?? ?? 8B F0")]
-        public partial bool CanUseAction(ActionType actionType, uint actionID, uint targetID = 0xE000_0000, uint a4 = 1, uint a5 = 1);
+        public partial uint GetActionStatus(ActionType actionType, uint actionID, uint targetID = 0xE000_0000, uint a4 = 1, uint a5 = 1);
 
         [MemberFunction("E8 ?? ?? ?? ?? 8B F8 3B DF")]
         public partial uint GetAdjustedActionId(uint actionID);
@@ -42,7 +42,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game {
         General = 0x05,
         Companion = 0x06,
         Unk_7 = 0x07,
-        Unk_8 = 0x08,
+        Unk_8 = 0x08, //something with Leve?
         CraftAction = 0x09,
         MainCommand = 0x0A,
         PetAction = 0x0B,
