@@ -1,9 +1,12 @@
-﻿using System.Runtime.InteropServices;
+﻿using System;
+using System.Runtime.InteropServices;
+using FFXIVClientStructs.Common;
 using FFXIVClientStructs.FFXIV.Client.Graphics;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI
 {
+    [Flags]
     public enum TextFlags
     {
         Unk = 0x01,
@@ -16,6 +19,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
         MultiLine = 0x80
     }
 
+    [Flags]
     public enum TextFlags2
     {
         Ellipsis = 0x04
@@ -31,7 +35,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
     // common CreateAtkNode function E8 ? ? ? ? 48 8B 4E 08 49 8B D5 
     // type 3
     [StructLayout(LayoutKind.Explicit, Size = 0x158)]
-    public unsafe struct AtkTextNode
+    public unsafe partial struct AtkTextNode
     {
         [FieldOffset(0x0)] public AtkResNode AtkResNode;
         [FieldOffset(0xA8)] public uint TextId;
@@ -57,5 +61,21 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
         [FieldOffset(0x150)] public ushort FontCacheHandle;
         [FieldOffset(0x152)] public byte TextFlags;
         [FieldOffset(0x153)] public byte TextFlags2;
+
+        [MemberFunction("E9 ? ? ? ? 45 33 C9 4C 8B C0 33 D2 B9 ? ? ? ? E8 ? ? ? ? 48 85 C0 0F 84 ? ? ? ? 48 8B C8 48 83 C4 20 5B E9 ? ? ? ? 45 33 C9 4C 8B C0 33 D2 B9 ? ? ? ? E8 ? ? ? ? 48 85 C0 0F 84 ? ? ? ? 48 8B C8 48 83 C4 20 5B E9 ? ? ? ? 45 33 C9 4C 8B C0 33 D2 B9 ? ? ? ? E8 ? ? ? ? 48 85 C0 74 5D")]
+        public partial void Ctor();
+
+        [MemberFunction("E8 ? ? ? ? 49 8B FC")]
+        public partial void SetText(byte* str);
+
+        public void SetText(string str)
+        {
+            var bytes = System.Text.Encoding.UTF8.GetBytes(str);
+            var charPtr = Marshal.AllocHGlobal(bytes.Length + 1);
+            Marshal.Copy(bytes, 0, charPtr, bytes.Length);
+            Marshal.WriteByte(charPtr, bytes.Length, 0);
+            SetText((byte*) charPtr.ToPointer());
+            Marshal.FreeHGlobal(charPtr);
+        }
     }
 }

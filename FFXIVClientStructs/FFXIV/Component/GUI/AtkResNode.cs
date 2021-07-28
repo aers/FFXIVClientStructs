@@ -1,3 +1,4 @@
+using System;
 using System.Runtime.InteropServices;
 using FFXIVClientStructs.Common;
 using FFXIVClientStructs.FFXIV.Client.Graphics;
@@ -18,6 +19,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
 
     // 'visible' will change visibility immediately, the rest rely on other stuff to happen so they dont do anything
     // top and bottom assumed based on a scrollbar, lots of left-aligned text has AnchorLeft set
+    [Flags]
     public enum NodeFlags
     {
         AnchorTop = 0x01,
@@ -102,6 +104,9 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
         [FieldOffset(0xA0)] public uint DrawFlags;
 
         public bool IsVisible => (Flags & 0x10) == 0x10;
+
+        [MemberFunction("E9 ? ? ? ? 33 C0 48 83 C4 20 5B C3 66 90")]
+        public partial void Ctor();
 
         [MemberFunction("E8 ? ? ? ? 8B 57 6C")]
         public partial AtkImageNode* GetAsAtkImageNode();
