@@ -82,6 +82,7 @@ functions:
   0x1402EB190: std::vector_SetSize
   0x140367170: Client::Graphics::Render::RenderManager_ctor
   0x140368350: Client::Graphics::Render::RenderManager_CreateModel
+  0x14042BAD0: GetGameObjectByIndex
   0x140444EE0: PrepareColorSet
   0x1404451B0: ReadStainingTemplate
   0x140478960: Component::Exd::ExdModule_GetEntryByIndex
@@ -250,7 +251,7 @@ classes:
       0x140806FE0: RequestActionLocation
       0x140807DA0: RequestGeneralAction
       0x1408089B0: UseWaymarkAction
-      0x14080C820: CanUseAction
+      0x14080C820: GetActionStatus
       0x14080EA50: GetAdjustedActionId
       0x1408102A0: RequestAction
       0x140810900: RequestComboAction
