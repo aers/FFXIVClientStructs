@@ -1070,6 +1070,9 @@ classes:
       0x140524D10: ctor
   Component::GUI::AtkResourceRendererBase:
     vtbl: 0x1416C3A58
+    vfuncs:
+      1: ShouldRender
+      2: Draw
   Component::GUI::AtkImageNodeRenderer:
     inherits_from: Component::GUI::AtkResourceRendererBase
     vtbl: 0x1416C3A70
