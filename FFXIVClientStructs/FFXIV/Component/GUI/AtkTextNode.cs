@@ -1,4 +1,6 @@
 ﻿using System.Runtime.InteropServices;
+using System.Text;
+using FFXIVClientStructs.Common;
 using FFXIVClientStructs.FFXIV.Client.Graphics;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 
@@ -31,7 +33,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
     // common CreateAtkNode function E8 ? ? ? ? 48 8B 4E 08 49 8B D5 
     // type 3
     [StructLayout(LayoutKind.Explicit, Size = 0x158)]
-    public unsafe struct AtkTextNode
+    public unsafe partial struct AtkTextNode
     {
         [FieldOffset(0x0)] public AtkResNode AtkResNode;
         [FieldOffset(0xA8)] public uint TextId;
@@ -57,5 +59,10 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
         [FieldOffset(0x150)] public ushort FontCacheHandle;
         [FieldOffset(0x152)] public byte TextFlags;
         [FieldOffset(0x153)] public byte TextFlags2;
+
+        [MemberFunction("E8 ? ? ? ? 49 8B FC")]
+        public partial void SetText(string str);
+
+        public void SetText(byte[] bytes) => SetText(Encoding.UTF8.GetString(bytes));
     }
 }
