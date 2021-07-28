@@ -39,9 +39,27 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Object
         public partial bool GetIsTargetable();
 
         [VirtualFunction(7)]
-        public partial char* GetName();
+        public partial byte* GetName();
 
         [VirtualFunction(50)]
         public partial uint GetNpcID();
+    }
+  
+    public enum ObjectKind : byte {
+        None = 0,
+        Pc = 1,
+        BattleNpc = 2,
+        EventNpc = 3,
+        Treasure = 4,
+        Aetheryte = 5,
+        GatheringPoint = 6,
+        EventObj = 7,
+        Mount = 8,
+        Companion = 9,
+        Retainer = 10,
+        AreaObject = 11,
+        HousingEventObject = 12,
+        Cutscene = 13,
+        CardStand = 14
     }
 }

@@ -1,11 +1,12 @@
 ﻿using System.Runtime.InteropServices;
+using FFXIVClientStructs.Common;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Group
 {
     // there are actually two copies of this back to back in the exe
     // maybe for 48 man raid support since the group manager can only hold 1 alliance worth of party members
     [StructLayout(LayoutKind.Explicit, Size = 0x3D70)]
-    public unsafe struct GroupManager
+    public unsafe partial struct GroupManager
     {
         [FieldOffset(0x0)] public fixed byte PartyMembers[0x230 * 8]; // PartyMember type
         [FieldOffset(0x1180)] public fixed byte AllianceMembers[0x230 * 20]; // PartyMember type
@@ -19,5 +20,23 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Group
         [FieldOffset(0x3D5E)] public bool IsAlliance;
         [FieldOffset(0x3D5F)] public byte Unk_3D5F; // some sort of count
         [FieldOffset(0x3D60)] public byte Unk_3D60;
+        
+        [MemberFunction("E8 ?? ?? ?? ?? EB B8 E8")]
+        public partial bool IsObjectIDInParty(uint objectID);
+
+        [MemberFunction("33 C0 44 8B CA F6 81")]
+        public partial bool IsObjectIDInAlliance(uint objectID);
+
+        [MemberFunction("48 63 81 ?? ?? ?? ?? 85 C0 78 14")]
+        public partial bool IsObjectIDPartyLeader(uint objectID);
+
+        [MemberFunction("48 89 5C 24 ?? 48 89 7C 24 ?? 44 0F B6 99")]
+        public partial bool IsCharacterInPartyByName(byte* name);
+
+        [MemberFunction("83 FA 14 72 03")]
+        public partial PartyMember* GetAllianceMemberByIndex(int index);
+
+        [MemberFunction("F6 81 ?? ?? ?? ?? ?? 4C 8B C9 74 1E")]
+        public partial PartyMember* GetAllianceMemberByGroupAndIndex(int group, int index);
     }
 }
