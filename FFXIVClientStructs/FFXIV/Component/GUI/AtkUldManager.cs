@@ -29,6 +29,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
         [FieldOffset(0x78)] public AtkResNode* RootNode;
         [FieldOffset(0x80)] public ushort RootNodeWidth;
         [FieldOffset(0x82)] public ushort RootNodeHeight;
+        [FieldOffset(0x84)] public ushort NodeListSize; // this is the allocated size of nodelist, count is the amount of nodes it has
         [FieldOffset(0x86)] public byte Flags1;
         [FieldOffset(0x89)] public byte LoadedState; // 3 is fully loaded
 
@@ -37,5 +38,8 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
 
         [MemberFunction("E8 ? ? ? ? 48 8B 4C 24 ? 48 8B 51 08")]
         public partial AtkResNode* CreateNodeByType(uint type);
+
+        [MemberFunction("E8 ? ? ? ? 49 8B 4E 10 8B C5")]
+        public partial void UpdateDrawNodeList();
     }
 }
