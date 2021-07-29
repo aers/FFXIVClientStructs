@@ -867,6 +867,7 @@ classes:
       0x1404D1650: GetComponent
       0x1404D1E00: RegisterEvent
       0x1404D1E40: UnregisterEvent
+      0x1404D1E80: DispatchEvent
       0x1404D21F0: GetPositionFloat
       0x1404D2210: SetPositionFloat
       0x1404D2260: GetPositionShort

@@ -68,6 +68,9 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
         [MemberFunction("E8 ? ? ? ? 49 8B FC")]
         public partial void SetText(byte* str);
 
+        [MemberFunction("E8 ? ? ? ? 8D 4E 5A")]
+        public partial void SetNumber(int num, bool showCommaDelimiters = false, bool showPlusSign = false, byte digits = 0, bool addZeroPadding = false);
+
         public void SetText(string str)
         {
             var bytes = System.Text.Encoding.UTF8.GetBytes(str);
