@@ -41,6 +41,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Object
         [VirtualFunction(7)]
         public partial byte* GetName();
 
+        [VirtualFunction(27)]
+        public partial void* GetDrawObject();
+
         [VirtualFunction(50)]
         public partial uint GetNpcID();
     }
