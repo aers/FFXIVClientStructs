@@ -7,7 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI {
     [Addon("_PartyList")]
     [StructLayout(LayoutKind.Explicit, Size = 0xFF8)]
     public unsafe struct AddonPartyList {
-        [FieldOffset(0x000)] public AtkUnitBase ActionBarBase;
+        [FieldOffset(0x000)] public AtkUnitBase AtkUnitBase;
         [FieldOffset(0x220)] public PartyMembers PartyMember;
         [FieldOffset(0x220 + PartyListMemberStruct.Size * 08)] public PartyListMemberStruct Unknown08;
         [FieldOffset(0x220 + PartyListMemberStruct.Size * 09)] public PartyListMemberStruct Unknown09;
