@@ -1,4 +1,5 @@
-﻿using System.Runtime.InteropServices;
+﻿using FFXIVClientStructs.Common;
+using System.Runtime.InteropServices;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI
 {
@@ -8,8 +9,12 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
     //       Component::GUI::AtkEventListener
 
     [StructLayout(LayoutKind.Explicit, Size = 0x338)]
-    public struct AtkComponentNumericInput
+    public partial struct AtkComponentNumericInput
     {
         [FieldOffset(0x0)] public AtkComponentInputBase AtkComponentInputBase;
+        [FieldOffset(0xC8)] public AtkTextNode AtkTextNode;
+
+        [MemberFunction("40 53 48 83 EC 60 8B 81")]
+        public partial void SetValue(int value);
     }
 }
