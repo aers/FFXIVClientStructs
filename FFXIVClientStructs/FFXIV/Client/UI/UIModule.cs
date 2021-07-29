@@ -1,6 +1,7 @@
 ﻿using System.Runtime.InteropServices;
 using FFXIVClientStructs.Common;
 using FFXIVClientStructs.FFXIV.Client.UI.Agent;
+using FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI
 {
@@ -30,6 +31,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
 
         [VirtualFunction(7)]
         public partial RaptureAtkModule* GetRaptureAtkModule();
+
+        [VirtualFunction(11)]
+        public partial RaptureLogModule* GetRaptureLogModule();
 
         [VirtualFunction(34)]
         public partial AgentModule* GetAgentModule();
