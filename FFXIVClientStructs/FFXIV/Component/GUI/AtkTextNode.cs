@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
     [Flags]
     public enum TextFlags
     {
-        Unk = 0x01,
+        AutoAdjustNodeSize = 0x01,
         Bold = 0x02,
         Italic = 0x04,
         Edge = 0x08,
@@ -70,6 +70,12 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
 
         [MemberFunction("E8 ? ? ? ? 8D 4E 5A")]
         public partial void SetNumber(int num, bool showCommaDelimiters = false, bool showPlusSign = false, byte digits = 0, bool addZeroPadding = false);
+
+        [MemberFunction("E8 ? ? ? ? 48 83 C4 28 5F 5D")]
+        public partial void ResizeNodeForCurrentText();
+
+        [MemberFunction("E8 ? ? ? ? 0F B7 6D 08")]
+        public partial void GetTextDrawSize(ushort* outWidth, ushort* outHeight, byte* text = null, int start = 0, int end = -1, bool considerScale = false);
 
         public void SetText(string str)
         {
