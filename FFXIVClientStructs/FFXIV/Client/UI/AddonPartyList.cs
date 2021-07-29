@@ -1,0 +1,99 @@
+﻿using System;
+using System.Runtime.InteropServices;
+using FFXIVClientStructs.Attributes;
+using FFXIVClientStructs.FFXIV.Component.GUI;
+
+namespace FFXIVClientStructs.FFXIV.Client.UI {
+    [Addon("_PartyList")]
+    [StructLayout(LayoutKind.Explicit, Size = 0xFF8)]
+    public unsafe struct AddonPartyList {
+        [FieldOffset(0x000)] public AtkUnitBase AtkUnitBase;
+        [FieldOffset(0x220)] public PartyMembers PartyMember;
+        [FieldOffset(0x220 + PartyListMemberStruct.Size * 08)] public PartyListMemberStruct Unknown08;
+        [FieldOffset(0x220 + PartyListMemberStruct.Size * 09)] public PartyListMemberStruct Unknown09;
+        [FieldOffset(0x220 + PartyListMemberStruct.Size * 10)] public PartyListMemberStruct Unknown10;
+        [FieldOffset(0x220 + PartyListMemberStruct.Size * 11)] public PartyListMemberStruct Unknown11;
+        [FieldOffset(0x220 + PartyListMemberStruct.Size * 12)] public PartyListMemberStruct Unknown12;
+        [FieldOffset(0x220 + PartyListMemberStruct.Size * 13)] public PartyListMemberStruct Unknown13;
+        
+        [FieldOffset(0xFA8)] public void* UnknownFA8;
+        [FieldOffset(0xFB0)] public void* UnknownFB0;
+        [FieldOffset(0xFB8)] public void* UnknownFB8;
+        [FieldOffset(0xFC0)] public void* UnknownFC0;
+        [FieldOffset(0xFC8)] public void* UnknownFC8;
+        [FieldOffset(0xFD0)] public void* UnknownFD0;
+        [FieldOffset(0xFD8)] public void* UnknownFD8;
+        [FieldOffset(0xFE0)] public void* UnknownFE0;
+        [FieldOffset(0xFEC)] public int UnknownFEC;
+        [FieldOffset(0xFE8)] public int UnknownFE8;
+        [FieldOffset(0xFF0)] public short UnknownFF0;
+        [FieldOffset(0xFF2)] public byte UnknownFF2;
+
+        [StructLayout(LayoutKind.Explicit, Size = PartyListMemberStruct.Size * 8)]
+        public struct PartyMembers {
+            [FieldOffset(PartyListMemberStruct.Size * 00)] public PartyListMemberStruct PartyMember0;
+            [FieldOffset(PartyListMemberStruct.Size * 01)] public PartyListMemberStruct PartyMember1;
+            [FieldOffset(PartyListMemberStruct.Size * 02)] public PartyListMemberStruct PartyMember2;
+            [FieldOffset(PartyListMemberStruct.Size * 03)] public PartyListMemberStruct PartyMember3;
+            [FieldOffset(PartyListMemberStruct.Size * 04)] public PartyListMemberStruct PartyMember4;
+            [FieldOffset(PartyListMemberStruct.Size * 05)] public PartyListMemberStruct PartyMember5;
+            [FieldOffset(PartyListMemberStruct.Size * 06)] public PartyListMemberStruct PartyMember6;
+            [FieldOffset(PartyListMemberStruct.Size * 07)] public PartyListMemberStruct PartyMember7;
+
+            public PartyListMemberStruct this[int i] {
+                get {
+                    return i switch {
+                        0 => PartyMember0,
+                        1 => PartyMember1,
+                        2 => PartyMember2,
+                        3 => PartyMember3,
+                        4 => PartyMember4,
+                        5 => PartyMember5,
+                        6 => PartyMember6,
+                        7 => PartyMember7,
+                        _ => throw new IndexOutOfRangeException("Index should be in range of 0-7")
+                    };
+                }
+            }
+        }
+        
+        
+        [StructLayout(LayoutKind.Explicit, Size = Size)]
+        public struct PartyListMemberStruct {
+            public const int Size = 0x100;
+            
+            [FieldOffset(0x00)] public AtkComponentIconText* StatusIcon0;
+            [FieldOffset(0x08)] public AtkComponentIconText* StatusIcon1;
+            [FieldOffset(0x10)] public AtkComponentIconText* StatusIcon2;
+            [FieldOffset(0x18)] public AtkComponentIconText* StatusIcon3;
+            [FieldOffset(0x20)] public AtkComponentIconText* StatusIcon4;
+            [FieldOffset(0x28)] public AtkComponentIconText* StatusIcon5;
+            [FieldOffset(0x30)] public AtkComponentIconText* StatusIcon6;
+            [FieldOffset(0x38)] public AtkComponentIconText* StatusIcon7;
+            [FieldOffset(0x40)] public AtkComponentIconText* StatusIcon8;
+            [FieldOffset(0x48)] public AtkComponentIconText* StatusIcon9;
+            [FieldOffset(0x50)] public AtkComponentBase* PartyMemberComponent;
+            [FieldOffset(0x58)] public AtkTextNode* IconBottomLeftText;
+            [FieldOffset(0x60)] public AtkResNode* NameAndBarsContainer;
+            [FieldOffset(0x68)] public AtkTextNode* GroupSlotIndicator;
+            [FieldOffset(0x70)] public AtkTextNode* Name;
+            [FieldOffset(0x78)] public AtkTextNode* CastingActionName;
+            [FieldOffset(0x80)] public AtkImageNode* CastingProgressBar;
+            [FieldOffset(0x88)] public AtkImageNode* CastingProgressBarBackground;
+            [FieldOffset(0x90)] public AtkResNode* EmnityBarContainer;
+            [FieldOffset(0x98)] public AtkNineGridNode* EmnityBarFill;
+            [FieldOffset(0xA0)] public AtkImageNode* ClassJobIcon;
+            [FieldOffset(0xA8)] public void* UnknownA8;
+            [FieldOffset(0xB0)] public AtkImageNode* UnknownImageB0;
+            [FieldOffset(0xB8)] public void* UnknownB8;
+            [FieldOffset(0xC0)] public AtkComponentBase* HPGaugeComponent;
+            [FieldOffset(0xC8)] public AtkComponentGaugeBar* HPGaugeBar;
+            [FieldOffset(0xD0)] public AtkComponentGaugeBar* MPGaugeBar;
+            [FieldOffset(0xD8)] public AtkResNode* TargetGlowContainer;
+            [FieldOffset(0xE0)] public AtkNineGridNode* ClickFlash;
+            [FieldOffset(0xE8)] public AtkNineGridNode* TargetGlow;
+            [FieldOffset(0xF0)] public AtkCollisionNode* CollisionNode;
+            [FieldOffset(0xF8)] public byte UnknownByte;
+        }
+    }
+}
