@@ -19,6 +19,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Control
         [MemberFunction("E8 ?? ?? ?? ?? 48 3B D8 74 51")]
         public partial uint GetCurrentTargetID();
 
+        [MemberFunction("E8 ?? ?? ?? ?? 48 3B C6 0F 94 C0")]
+        public partial GameObject* GetCurrentTarget();
+
         [MemberFunction("48 85 D2 74 2C 4C 63 89")]
         public partial bool IsObjectInViewRange(GameObject* obj);
     }
