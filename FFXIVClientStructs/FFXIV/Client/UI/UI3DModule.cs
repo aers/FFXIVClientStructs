@@ -38,8 +38,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
             [FieldOffset(0x44)] public float DistanceFromPlayer; // 0 for player
             [FieldOffset(0x48)] public uint Unk_48;
             [FieldOffset(0x4C)] public byte NamePlateScale;
-            [FieldOffset(0x4D)] public byte ObjectKind; // this is the UI object kind not the game object object kind
-            [FieldOffset(0x4E)] public byte Unk_4E;
+            [FieldOffset(0x4D)] public byte NamePlateObjectKind;
+            [FieldOffset(0x4E)] public byte NamePlateIndex; 
             [FieldOffset(0x4F)] public byte Unk_4F;
             [FieldOffset(0x50)] public byte SortPriority;
             // rest unknown
@@ -94,5 +94,6 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
         [FieldOffset(0xBE08)] public int MemberInfoCount;
         [FieldOffset(0xBE10)] public fixed byte UnkInfoArray[30 * 0x40];
         [FieldOffset(0xC590)] public int UnkCount;
+        // there's more after this
     }
 }

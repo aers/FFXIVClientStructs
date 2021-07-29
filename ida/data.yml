@@ -1174,7 +1174,14 @@ classes:
   Client::UI::UI3DModule:
     vtbl: 0x1416D1648
     funcs:
+      0x1405C0A30: CalculateIsInScreen
+      0x1405C0B40: CalculateNamePlatePosition
+      0x1405C0F60: CalculateNamePlateScale
       0x1405C1160: ctor
+      0x1405C1540: Update
+      0x1405C1750: UpdateGameObjects
+      0x1405C1BA0: SetupNamePlateForObjectInfo
+      0x1405C1C50: FinalizeNamePlates
   Client::UI::UIModule:
     inherits_from: Client::UI::UIModuleInterface
     vtbl: 0x1416D1660
@@ -1211,6 +1218,7 @@ classes:
       171: ExecuteMainCommand
     funcs:
       0x1405CA180: ctor
+      0x1405CAFB0: Update
   Client::System::Crypt::SimpleString:
     inherits_from: Client::System::Crypt::CryptInterface
     vtbl: 0x1416D1E70
