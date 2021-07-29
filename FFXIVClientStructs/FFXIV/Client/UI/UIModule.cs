@@ -33,6 +33,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
 
         [VirtualFunction(34)]
         public partial AgentModule* GetAgentModule();
+
+        [VirtualFunction(36)]
+        public partial UI3DModule* GetUI3DModule();
         
         [StructLayout(LayoutKind.Explicit, Size = 0x8)]
         public struct Unk1

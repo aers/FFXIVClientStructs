@@ -1222,6 +1222,10 @@ classes:
   Component::Text::TextChecker:
     inherits_from: Component::Text::MacroDecoder
     vtbl: 0x1416D2EC8
+  Client::System::Data::Bit:
+    vtbl: 0x1416D3860
+    funcs:
+      0x1405F0BC0: ctor
   Client::UI::Misc::ConfigModule:
     inherits_from: Component::GUI::AtkModuleInterface::AtkEventInterface
     vtbl: 0x1416D6428
