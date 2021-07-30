@@ -12,7 +12,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Object
     [StructLayout(LayoutKind.Explicit, Size = 0x1A0)]
     public unsafe partial struct GameObject
     {
-        [FieldOffset(0x30)] public fixed byte Name[30];
+        [FieldOffset(0x30)] public fixed byte Name[64];
         [FieldOffset(0x74)] public uint ObjectID;
         [FieldOffset(0x80)] public uint DataID;
         [FieldOffset(0x84)] public uint OwnerID;
