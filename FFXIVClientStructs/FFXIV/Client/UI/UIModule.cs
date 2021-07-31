@@ -31,6 +31,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
 
         [VirtualFunction(7)]
         public partial RaptureAtkModule* GetRaptureAtkModule();
+        
+        [VirtualFunction(10)]
+        public partial PronounModule* GetPronounModule();
 
         [VirtualFunction(11)]
         public partial RaptureLogModule* GetRaptureLogModule();
