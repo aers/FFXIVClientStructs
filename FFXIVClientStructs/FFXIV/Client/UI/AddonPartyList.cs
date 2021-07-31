@@ -62,16 +62,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI {
         public struct PartyListMemberStruct {
             public const int Size = 0x100;
             
-            [FieldOffset(0x00)] public AtkComponentIconText* StatusIcon0;
-            [FieldOffset(0x08)] public AtkComponentIconText* StatusIcon1;
-            [FieldOffset(0x10)] public AtkComponentIconText* StatusIcon2;
-            [FieldOffset(0x18)] public AtkComponentIconText* StatusIcon3;
-            [FieldOffset(0x20)] public AtkComponentIconText* StatusIcon4;
-            [FieldOffset(0x28)] public AtkComponentIconText* StatusIcon5;
-            [FieldOffset(0x30)] public AtkComponentIconText* StatusIcon6;
-            [FieldOffset(0x38)] public AtkComponentIconText* StatusIcon7;
-            [FieldOffset(0x40)] public AtkComponentIconText* StatusIcon8;
-            [FieldOffset(0x48)] public AtkComponentIconText* StatusIcon9;
+            [FieldOffset(0x00)] public StatusIcons StatusIcon;
             [FieldOffset(0x50)] public AtkComponentBase* PartyMemberComponent;
             [FieldOffset(0x58)] public AtkTextNode* IconBottomLeftText;
             [FieldOffset(0x60)] public AtkResNode* NameAndBarsContainer;
@@ -94,6 +85,38 @@ namespace FFXIVClientStructs.FFXIV.Client.UI {
             [FieldOffset(0xE8)] public AtkNineGridNode* TargetGlow;
             [FieldOffset(0xF0)] public AtkCollisionNode* CollisionNode;
             [FieldOffset(0xF8)] public byte UnknownByte;
+            
+            [StructLayout(LayoutKind.Explicit, Size = 0x50)]
+            public struct StatusIcons {
+                [FieldOffset(0x00)] public AtkComponentIconText* StatusIcon0;
+                [FieldOffset(0x08)] public AtkComponentIconText* StatusIcon1;
+                [FieldOffset(0x10)] public AtkComponentIconText* StatusIcon2;
+                [FieldOffset(0x18)] public AtkComponentIconText* StatusIcon3;
+                [FieldOffset(0x20)] public AtkComponentIconText* StatusIcon4;
+                [FieldOffset(0x28)] public AtkComponentIconText* StatusIcon5;
+                [FieldOffset(0x30)] public AtkComponentIconText* StatusIcon6;
+                [FieldOffset(0x38)] public AtkComponentIconText* StatusIcon7;
+                [FieldOffset(0x40)] public AtkComponentIconText* StatusIcon8;
+                [FieldOffset(0x48)] public AtkComponentIconText* StatusIcon9;
+
+                public AtkComponentIconText* this[int i] {
+                    get {
+                        return i switch {
+                            0 => StatusIcon0,
+                            1 => StatusIcon1,
+                            2 => StatusIcon2,
+                            3 => StatusIcon3,
+                            4 => StatusIcon4,
+                            5 => StatusIcon5,
+                            6 => StatusIcon6,
+                            7 => StatusIcon7,
+                            8 => StatusIcon8,
+                            9 => StatusIcon9,
+                            _ => throw new IndexOutOfRangeException("Index should be in range of 0-9")
+                        };
+                    }
+                }
+            }
         }
     }
 }
