@@ -14,20 +14,27 @@ namespace FFXIVClientStructs.FFXIV.Client.UI {
         [FieldOffset(0x220 + PartyListMemberStruct.Size * 10)] public PartyListMemberStruct Unknown10;
         [FieldOffset(0x220 + PartyListMemberStruct.Size * 11)] public PartyListMemberStruct Unknown11;
         [FieldOffset(0x220 + PartyListMemberStruct.Size * 12)] public PartyListMemberStruct Unknown12;
-        [FieldOffset(0x220 + PartyListMemberStruct.Size * 13)] public PartyListMemberStruct Unknown13;
         
-        [FieldOffset(0xFA8)] public void* UnknownFA8;
-        [FieldOffset(0xFB0)] public void* UnknownFB0;
-        [FieldOffset(0xFB8)] public void* UnknownFB8;
-        [FieldOffset(0xFC0)] public void* UnknownFC0;
-        [FieldOffset(0xFC8)] public void* UnknownFC8;
-        [FieldOffset(0xFD0)] public void* UnknownFD0;
-        [FieldOffset(0xFD8)] public void* UnknownFD8;
+        [FieldOffset(0xF20)] fixed int PartyClassJob[8]; //ClassJob+F294
+
+        [FieldOffset(0xF8A)] public fixed short Edited[12]; //0X11 if edited? Need comfirm
+
+        [FieldOffset(0xFA8)] public AtkNineGridNode* BackgroundNineGridNode; 
+        [FieldOffset(0xFB0)] public AtkTextNode* SoloTextNode; //Solo Light/Full Party
+        [FieldOffset(0xFB8)] public AtkResNode* LeaderMarkResNode; 
+        [FieldOffset(0xFC0)] public AtkResNode* MpBarSpecialResNode; 
+        [FieldOffset(0xFC8)] public AtkTextNode* MpBarSpecialTextNode; 
+        [FieldOffset(0xFD0)] public int MemberCount;
+        [FieldOffset(0xFD4)] public int UnknownCount;
+        [FieldOffset(0xFD8)] public int LeaderNumber; //Starts from 0 ,if no leader : FFFFFFFF
+        [FieldOffset(0xFDC)] public int HideWhenSolo;
+        
         [FieldOffset(0xFE0)] public void* UnknownFE0;
         [FieldOffset(0xFEC)] public int UnknownFEC;
         [FieldOffset(0xFE8)] public int UnknownFE8;
-        [FieldOffset(0xFF0)] public short UnknownFF0;
-        [FieldOffset(0xFF2)] public byte UnknownFF2;
+        [FieldOffset(0xFF0)] public byte UnknownFF0;
+        [FieldOffset(0xFF1)] public byte PetCount; //or PetSummoned?
+        [FieldOffset(0xFF2)] public byte ChocoboCount;//or ChocoboSummoned?
 
         [StructLayout(LayoutKind.Explicit, Size = PartyListMemberStruct.Size * 8)]
         public struct PartyMembers {
@@ -84,7 +91,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI {
             [FieldOffset(0xE0)] public AtkNineGridNode* ClickFlash;
             [FieldOffset(0xE8)] public AtkNineGridNode* TargetGlow;
             [FieldOffset(0xF0)] public AtkCollisionNode* CollisionNode;
-            [FieldOffset(0xF8)] public byte UnknownByte;
+            [FieldOffset(0xF8)] public byte EmnityByte;    //01 or 02 or FF 
             
             [StructLayout(LayoutKind.Explicit, Size = 0x50)]
             public struct StatusIcons {
