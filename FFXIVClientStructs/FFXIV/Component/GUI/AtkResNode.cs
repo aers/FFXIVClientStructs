@@ -13,9 +13,8 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
         NineGrid = 4,
         Counter = 5,
 
-        Collision = 8,
+        Collision = 8
         // Component: >=1000
-        Window = 1004
     }
 
     // 'visible' will change visibility immediately, the rest rely on other stuff to happen so they dont do anything
