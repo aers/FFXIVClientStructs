@@ -15,21 +15,22 @@ namespace FFXIVClientStructs.FFXIV.Client.UI {
         [FieldOffset(0x220 + PartyListMemberStruct.Size * 11)] public PartyListMemberStruct Unknown11;
         [FieldOffset(0x220 + PartyListMemberStruct.Size * 12)] public PartyListMemberStruct Unknown12;
         
-        [FieldOffset(0xF20)] fixed int PartyClassJob[8]; //ClassJob+F294
+        [FieldOffset(0xF20)] public fixed uint PartyClassJobIconId[8];
 
         [FieldOffset(0xF8A)] public fixed short Edited[12]; //0X11 if edited? Need comfirm
 
         [FieldOffset(0xFA8)] public AtkNineGridNode* BackgroundNineGridNode; 
-        [FieldOffset(0xFB0)] public AtkTextNode* SoloTextNode; //Solo Light/Full Party
+        [FieldOffset(0xFB0)] public AtkTextNode* PartyTypeTextNode; //Solo Light/Full Party
         [FieldOffset(0xFB8)] public AtkResNode* LeaderMarkResNode; 
         [FieldOffset(0xFC0)] public AtkResNode* MpBarSpecialResNode; 
         [FieldOffset(0xFC8)] public AtkTextNode* MpBarSpecialTextNode; 
         [FieldOffset(0xFD0)] public int MemberCount;
         [FieldOffset(0xFD4)] public int UnknownCount;
-        [FieldOffset(0xFD8)] public int LeaderNumber; //Starts from 0 ,if no leader : FFFFFFFF
+        [FieldOffset(0xFD8)] public int EnmityLeaderIndex; //Starts from 0 ,if no leader : -1
         [FieldOffset(0xFDC)] public int HideWhenSolo;
         
-        [FieldOffset(0xFE0)] public void* UnknownFE0;
+        [FieldOffset(0xFE0)] public int HoveredIndex;
+        [FieldOffset(0xFE4)] public int TargetedIndex;
         [FieldOffset(0xFEC)] public int UnknownFEC;
         [FieldOffset(0xFE8)] public int UnknownFE8;
         [FieldOffset(0xFF0)] public byte UnknownFF0;
