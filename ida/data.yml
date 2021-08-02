@@ -1917,6 +1917,12 @@ classes:
   Client::UI::AddonRetainerTaskResult:
     inherits_from: Component::GUI::AtkUnitBase
     vtbl: 0x1417EF2C0
+  Client::UI::AddonRetainerSellList:
+    inherits_from: Component::GUI::AtkUnitBase
+    vtbl: 0x1417EDB38
+  Client::UI::AddonRetainerSell:
+    inherits_from: Component::GUI::AtkUnitBase
+    vtbl: 0x1417ED920
   Client::UI::AddonRecipeNote:
     inherits_from: Component::GUI::AtkUnitBase
     vtbl: 0x1417EFDB8
