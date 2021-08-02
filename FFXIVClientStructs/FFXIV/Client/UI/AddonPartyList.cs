@@ -15,7 +15,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI {
         [FieldOffset(0x220 + PartyListMemberStruct.Size * 11)] public PartyListMemberStruct Unknown11;
         [FieldOffset(0x220 + PartyListMemberStruct.Size * 12)] public PartyListMemberStruct Unknown12;
         
-        [FieldOffset(0xF20)] fixed int PartyClassJob[8]; //ClassJob+F294
+        [FieldOffset(0xF20)] public fixed uint PartyClassJobIconId[8];
 
         [FieldOffset(0xF8A)] public fixed short Edited[12]; //0X11 if edited? Need comfirm
 
