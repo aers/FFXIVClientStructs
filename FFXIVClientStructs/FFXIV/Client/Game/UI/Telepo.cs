@@ -18,6 +18,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI
         [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4B 10 84 C0 48 8B 01 74 2C")]
         public partial bool Teleport(uint aetheryteID, byte subIndex);
 
+        [StaticAddress("48 8D 0D ?? ?? ?? ?? 48 8B 12")]
+        public static partial Telepo* Instance();
+
         [StructLayout(LayoutKind.Explicit, Size = 0x14)]
         public struct TeleportInfo
         {
