@@ -24,6 +24,16 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
             [FieldOffset(0x12)] public byte Unk_12;
         }
 
+        // ObjectKind => NamePlateObjectKind
+        // 1 => 0
+        // 2 => SubKind6 = 8, enemy = 3, friendly = 4
+        // 3, 9 => 1
+        // 4 => 6
+        // 5, 7, 12, 16 => 5
+        // 6 => 7
+        // 10 => 2
+        // rest => 9
+        
         // Client::UI::UI3DModule::ObjectInfo
         //   Client::UI::UI3DModule::MapInfo
         // ctor inlined

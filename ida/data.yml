@@ -1178,6 +1178,7 @@ classes:
     funcs:
       0x1405C0A30: CalculateIsInScreen
       0x1405C0B40: CalculateNamePlatePosition
+      0x1405C0E60: GetUIObjectKind
       0x1405C0F60: CalculateNamePlateScale
       0x1405C1160: ctor
       0x1405C1540: Update
