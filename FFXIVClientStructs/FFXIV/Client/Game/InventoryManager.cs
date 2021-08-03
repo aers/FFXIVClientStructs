@@ -1,4 +1,5 @@
-﻿using System.Runtime.InteropServices;
+﻿using System;
+using System.Runtime.InteropServices;
 using FFXIVClientStructs.Common;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game {
@@ -30,11 +31,18 @@ namespace FFXIVClientStructs.FFXIV.Client.Game {
         [FieldOffset(0x0C)] public uint Quantity;
         [FieldOffset(0x10)] public ushort Spiritbond;
         [FieldOffset(0x12)] public ushort Condition;
-        [FieldOffset(0x14)] public byte IsHQ;
+        [FieldOffset(0x14)] public ItemFlags Flags;
         [FieldOffset(0x20)] public fixed ushort Materia[5];
         [FieldOffset(0x2A)] public fixed byte MateriaGrade[5];
         [FieldOffset(0x2F)] public byte Stain;
         [FieldOffset(0x30)] public uint GlamourID;
+
+        [Flags]
+        public enum ItemFlags : byte {
+            None = 0,
+            HQ = 1,
+            Unk_8 = 8
+        }
     }
 
     public enum InventoryType : uint {
@@ -90,8 +98,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Game {
         FreeCompanyGil = 22000,
         FreeCompanyCrystals = 22001,
 
+        HousingExteriorAppearance = 25000,
+        HousingExteriorPlacedItems = 25001,
         HousingInteriorAppearance = 25002,
-
         HousingInteriorPlacedItems1 = 25003,
         HousingInteriorPlacedItems2 = 25004,
         HousingInteriorPlacedItems3 = 25005,
@@ -101,6 +110,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game {
         HousingInteriorPlacedItems7 = 25009,
         HousingInteriorPlacedItems8 = 25010,
 
+        HousingExteriorStoreroom = 27000,
         HousingInteriorStoreroom1 = 27001,
         HousingInteriorStoreroom2 = 27002,
         HousingInteriorStoreroom3 = 27003,
@@ -108,10 +118,6 @@ namespace FFXIVClientStructs.FFXIV.Client.Game {
         HousingInteriorStoreroom5 = 27005,
         HousingInteriorStoreroom6 = 27006,
         HousingInteriorStoreroom7 = 27007,
-        HousingInteriorStoreroom8 = 27008,
-
-        HousingExteriorAppearance = 25000,
-        HousingExteriorPlacedItems = 25001,
-        HousingExteriorStoreroom = 27000
+        HousingInteriorStoreroom8 = 27008
     }
 }
