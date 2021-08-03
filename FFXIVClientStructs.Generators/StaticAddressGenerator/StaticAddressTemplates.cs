@@ -33,7 +33,7 @@ namespace FFXIVClientStructs {
             {{~ for sa in struct.addresses ~}}
             try {
                 var address{{ struct.name }}{{ sa.name }} = s.GetStaticAddressFromSig(""{{ sa.signature }}"", {{ sa.offset }});
-                {{ struct.namespace }}.{{ struct.name }}.p{{ sa.name }} = {{ if !sa.is_pointer }}*{{ end }}({{ sa.type }}{{ if !sa.is_pointer }}*{{ end }})address{{ struct.name }}{{ sa.name }};
+                {{ struct.namespace }}.{{ struct.name }}.p{{ sa.name }} = {{ if sa.is_pointer }}*{{ end }}({{ sa.type }}{{ if sa.is_pointer }}*{{ end }})address{{ struct.name }}{{ sa.name }};
             } catch (KeyNotFoundException) {
                 Log.Warning($""[FFXIVClientStructs] static address {{ struct.name }}::{{ sa.name }} failed to match signature {{ sa.signature }} and is unavailable"");
             }
