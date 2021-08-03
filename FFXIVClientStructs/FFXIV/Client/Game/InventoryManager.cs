@@ -10,6 +10,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Game {
 
         [MemberFunction("E8 ?? ?? ?? ?? 8B 55 BB")]
         public partial InventoryContainer* GetInventoryContainer(InventoryType inventoryType);
+
+        [StaticAddress("BA ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B F8 48 85 C0")]
+        public static partial InventoryManager* Instance();
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x18)]
@@ -32,6 +35,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game {
         [FieldOffset(0x10)] public ushort Spiritbond;
         [FieldOffset(0x12)] public ushort Condition;
         [FieldOffset(0x14)] public ItemFlags Flags;
+        [FieldOffset(0x18)] public ulong CrafterContentID;
         [FieldOffset(0x20)] public fixed ushort Materia[5];
         [FieldOffset(0x2A)] public fixed byte MateriaGrade[5];
         [FieldOffset(0x2F)] public byte Stain;
@@ -41,6 +45,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game {
         public enum ItemFlags : byte {
             None = 0,
             HQ = 1,
+            Relic = 4,
             Collectable = 8
         }
     }

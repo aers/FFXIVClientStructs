@@ -5,6 +5,9 @@ using FFXIVClientStructs.FFXIV.Client.Graphics;
 namespace FFXIVClientStructs.FFXIV.Client.Game {
     [StructLayout(LayoutKind.Explicit, Size = 0x810)]
     public unsafe partial struct ActionManager {
+        [StaticAddress("48 8D 0D ?? ?? ?? ?? 33 C0 89 44 24 30")]
+        public static partial ActionManager* Instance();
+
         [MemberFunction("E8 ?? ?? ?? ?? EB 64 B1 01")]
         public partial bool UseAction(ActionType actionType, uint actionID, uint targetID = 0xE000_0000, uint a4 = 0, uint a5 = 0, uint a6 = 0);
 

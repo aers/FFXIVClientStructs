@@ -16,6 +16,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Control
         [FieldOffset(0x110)] public GameObject* PreviousTarget;
         [FieldOffset(0x140)] public uint TargetObjectId;
 
+        [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 3B C6 0F 95 C0")]
+        public static partial TargetSystem* Instance();
+
         [MemberFunction("E8 ?? ?? ?? ?? 48 3B D8 74 51")]
         public partial uint GetCurrentTargetID();
 
