@@ -41,7 +41,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game {
         public enum ItemFlags : byte {
             None = 0,
             HQ = 1,
-            Unk_8 = 8
+            Collectable = 8
         }
     }
 
