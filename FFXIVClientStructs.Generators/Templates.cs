@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace FFXIVClientStructs.Generators
+﻿namespace FFXIVClientStructs.Generators
 {
     internal static class Templates
     {
-        internal static string MemberFunctions = @"using System;
+        internal const string MemberFunctions = @"using System;
 
 namespace {{ struct.namespace }} {
     public unsafe partial struct {{ struct.name }} {
@@ -32,7 +28,7 @@ namespace {{ struct.namespace }} {
     }       
 }";
 
-        internal static string InitializeMemberFunctions = @"using System.Collections.Generic;
+        internal const string InitializeMemberFunctions = @"using System.Collections.Generic;
 
 using Serilog;
 
@@ -54,7 +50,7 @@ namespace FFXIVClientStructs {
     }
 }";
 
-        internal static string VirtualFunctions = @"using System;
+        internal const string VirtualFunctions = @"using System;
 using System.Runtime.InteropServices;
 
 namespace {{ struct.namespace }} {

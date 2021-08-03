@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.CodeAnalysis;
@@ -11,7 +9,7 @@ using Scriban;
 namespace FFXIVClientStructs.Generators
 {
     [Generator]
-    class FunctionGenerator : ISourceGenerator
+    internal class FunctionGenerator : ISourceGenerator
     {
         private Template _mfCodeTemplate;
         private Template _vfCodeTemplate;
@@ -26,7 +24,7 @@ namespace FFXIVClientStructs.Generators
 
         public void Execute(GeneratorExecutionContext context)
         {
-            if (!(context.SyntaxContextReceiver is FunctionSyntaxContextReceiver receiver)) return;
+            if (context.SyntaxContextReceiver is not FunctionSyntaxContextReceiver receiver) return;
 
             foreach (var structObj in receiver.Structs)
             {
@@ -46,12 +44,11 @@ namespace FFXIVClientStructs.Generators
             }
 
             var resolverTemplate = Template.Parse(Templates.InitializeMemberFunctions);
-            var resolverSource = resolverTemplate.Render(new {Structs = receiver.Structs});
+            var resolverSource = resolverTemplate.Render(new { receiver.Structs});
             context.AddSource("Resolver.Generated.cs", resolverSource);
-;
         }
 
-        class FunctionSyntaxContextReceiver : ISyntaxContextReceiver
+        private class FunctionSyntaxContextReceiver : ISyntaxContextReceiver
         {
             public List<Struct> Structs { get; } = new();
 
@@ -62,52 +59,56 @@ namespace FFXIVClientStructs.Generators
                 {
                     var sm = (IMethodSymbol) context.SemanticModel.GetDeclaredSymbol(m);
                     return sm != null && sm.GetAttributes()
-                        .Any(a => a.AttributeClass?.Name == "MemberFunctionAttribute" || a.AttributeClass?.Name == "VirtualFunctionAttribute");
+                        .Any(a => a.AttributeClass?.Name is "MemberFunctionAttribute" or "VirtualFunctionAttribute");
                 }).ToList();
 
-                if (methods.Count > 0)
-                {
-                    if (context.SemanticModel.GetDeclaredSymbol(sds) is not INamedTypeSymbol structType) return;
-                    var structObj = new Struct
-                    {
-                        Name = structType.Name,
-                        Namespace = structType.ContainingNamespace.ToDisplayString(),
-                        MemberFunctions = new List<Function>(),
-                        VirtualFunctions = new List<Function>()
-                    };
+                if (methods.Count <= 0) return;
 
-                    foreach (var m in methods)
+                if (context.SemanticModel.GetDeclaredSymbol(sds) is not INamedTypeSymbol structType) return;
+                var structObj = new Struct
+                {
+                    Name = structType.Name,
+                    Namespace = structType.ContainingNamespace.ToDisplayString(),
+                    MemberFunctions = new List<Function>(),
+                    VirtualFunctions = new List<Function>()
+                };
+
+                foreach (var m in methods)
+                {
+                    if (context.SemanticModel.GetDeclaredSymbol(m) is not IMethodSymbol ms) continue;
+                    var format = new SymbolDisplayFormat(
+                        typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces,
+                        miscellaneousOptions: SymbolDisplayMiscellaneousOptions.UseSpecialTypes);
+                    var functionObj = new Function
                     {
-                        if (context.SemanticModel.GetDeclaredSymbol(m) is not IMethodSymbol ms) continue;
-                        var format = new SymbolDisplayFormat(
-                            typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces,
-                            miscellaneousOptions: SymbolDisplayMiscellaneousOptions.UseSpecialTypes);
-                        var functionObj = new Function
-                        {
-                            Name = ms.Name,
-                            ReturnType = ms.ReturnType.ToDisplayString(format),
-                            HasReturn = ms.ReturnType.ToDisplayString() != "void",
-                            HasParams = ms.Parameters.Any(),
-                            ParamList = string.Join(",",
-                                ms.Parameters.Select(p => $"{p.Type.ToDisplayString(format)} {p.Name}")),
-                            ParamTypeList = string.Join(",", ms.Parameters.Select(p => p.Type.ToDisplayString(format))),
-                            ParamNameList = string.Join(",", ms.Parameters.Select(p => p.Name))
-                        };
-                        if (ms.GetAttributes().FirstOrDefault(a => a.AttributeClass?.Name == "MemberFunctionAttribute") is { } memberFuncAttr)
-                        {
-                            functionObj.Signature = (string)memberFuncAttr.ConstructorArguments[0].Value;
-                            functionObj.IsStatic = memberFuncAttr.NamedArguments.Any() ? (bool) memberFuncAttr.NamedArguments[0].Value.Value : false;
-                            structObj.MemberFunctions.Add(functionObj);
-                        }
-                        if (ms.GetAttributes().FirstOrDefault(a => a.AttributeClass?.Name == "VirtualFunctionAttribute") is { } virtualFuncAttr)
-                        {
-                            functionObj.VirtualOffset = (int)virtualFuncAttr.ConstructorArguments[0].Value;
-                            structObj.VirtualFunctions.Add(functionObj);
-                        }
+                        Name = ms.Name,
+                        ReturnType = ms.ReturnType.ToDisplayString(format),
+                        HasReturn = ms.ReturnType.ToDisplayString() != "void",
+                        HasParams = ms.Parameters.Any(),
+                        ParamList = string.Join(",",
+                            ms.Parameters.Select(p => $"{p.Type.ToDisplayString(format)} {p.Name}")),
+                        ParamTypeList = string.Join(",", ms.Parameters.Select(p => p.Type.ToDisplayString(format))),
+                        ParamNameList = string.Join(",", ms.Parameters.Select(p => p.Name))
+                    };
+                    if (ms.GetAttributes().FirstOrDefault(a => a.AttributeClass?.Name == "MemberFunctionAttribute") is
+                        { } memberFuncAttr)
+                    {
+                        functionObj.Signature = (string)memberFuncAttr.ConstructorArguments[0].Value;
+                        functionObj.IsStatic = memberFuncAttr.NamedArguments.Any() &&
+                                               (bool)(memberFuncAttr.NamedArguments[0].Value.Value ?? false);
+                        structObj.MemberFunctions.Add(functionObj);
                     }
 
-                    Structs.Add(structObj);
+                    if (ms.GetAttributes().FirstOrDefault(a => a.AttributeClass?.Name == "VirtualFunctionAttribute") is
+                        { } virtualFuncAttr)
+                    {
+                        functionObj.VirtualOffset = (int)(virtualFuncAttr.ConstructorArguments[0].Value ?? 0);
+                        structObj.VirtualFunctions.Add(functionObj);
+                    }
                 }
+
+                Structs.Add(structObj);
+
             }
         }
     }

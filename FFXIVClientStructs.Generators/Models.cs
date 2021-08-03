@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace FFXIVClientStructs.Generators
 {
-    class Struct
+    internal class Struct
     {
         public string Namespace;
         public string Name;
@@ -12,7 +10,7 @@ namespace FFXIVClientStructs.Generators
         public List<Function> VirtualFunctions;
     }
 
-    class Function
+    internal class Function
     {
         public string Name;
         public bool HasReturn;
