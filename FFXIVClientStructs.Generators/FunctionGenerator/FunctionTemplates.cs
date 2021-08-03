@@ -1,4 +1,4 @@
-﻿namespace FFXIVClientStructs.Generators
+﻿namespace FFXIVClientStructs.Generators.FunctionGenerator
 {
     internal static class Templates
     {
@@ -13,7 +13,7 @@ namespace {{ struct.namespace }} {
         {
             if (fp{{ mf.name }} is null)
             {
-                throw new InvalidOperationException(""Function pointer for {{ struct.name }}::{{ mf.name }} is null."");
+                throw new InvalidOperationException(""Function pointer for {{ struct.name }}::{{ mf.name }} is null. Did you forget to call Resolver.Initialize?"");
             }
 {{ if !mf.is_static }}
             fixed({{ struct.name }}* thisPtr = &this)
@@ -75,5 +75,6 @@ namespace {{ struct.namespace }} {
         {{~ end ~}}
     }
 }";
+
     }
 }

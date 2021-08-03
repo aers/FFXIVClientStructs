@@ -16,7 +16,7 @@
 
   <!-- Handle Generator Dependencies -->
   <ItemGroup>
-    <PackageReference Include="Scriban" Version="4.0.1" GeneratePathProperty="true" PrivateAssets="all"/>
+    <PackageReference Include="Scriban" Version="4.0.1" GeneratePathProperty="true" PrivateAssets="all" />
   </ItemGroup>
 
   <PropertyGroup>

@@ -15,6 +15,9 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Framework
         [FieldOffset(0x10)] public SystemConfig SystemConfig;
         [FieldOffset(0x29F8)] public UIModule* UIModule;
 
+        [StaticAddress("44 0F B6 C0 48 8B 0D ? ? ? ?", isPointer: true)]
+        public static partial Framework* Instance();
+
         [MemberFunction("E8 ?? ?? ?? ?? 80 7B 1D 01")]
         public partial UIModule* GetUiModule();
     }

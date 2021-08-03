@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace FFXIVClientStructs.Generators
+namespace FFXIVClientStructs.Generators.FunctionGenerator
 {
     internal class Struct
     {
