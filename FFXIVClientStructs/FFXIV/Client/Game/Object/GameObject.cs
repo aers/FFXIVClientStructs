@@ -1,5 +1,6 @@
 using System.Runtime.InteropServices;
 using FFXIVClientStructs.Common;
+using FFXIVClientStructs.FFXIV.Client.Game.Event;
 using FFXIVClientStructs.FFXIV.Client.Graphics;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Object
@@ -26,7 +27,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Object
         [FieldOffset(0xC0)] public float HitboxRadius;
         [FieldOffset(0xF0)] public void* DrawObject;
         [FieldOffset(0x104)] public int RenderFlags;
-        [FieldOffset(0x148)] public void* LuaObject;
+        [FieldOffset(0x148)] public LuaActor* LuaActor;
         [FieldOffset(0x230)] public uint TargetObjectID;
 
         [VirtualFunction(2)]

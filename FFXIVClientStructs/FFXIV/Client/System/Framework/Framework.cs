@@ -2,6 +2,7 @@
 using FFXIVClientStructs.Common;
 using FFXIVClientStructs.FFXIV.Client.System.Configuration;
 using FFXIVClientStructs.FFXIV.Client.UI;
+using FFXIVClientStructs.FFXIV.Common.Lua;
 
 namespace FFXIVClientStructs.FFXIV.Client.System.Framework
 {
@@ -14,6 +15,7 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Framework
     {
         [FieldOffset(0x10)] public SystemConfig SystemConfig;
         [FieldOffset(0x29F8)] public UIModule* UIModule;
+        [FieldOffset(0x2A60)] public LuaState LuaState;
 
         [StaticAddress("44 0F B6 C0 48 8B 0D ? ? ? ?", isPointer: true)]
         public static partial Framework* Instance();

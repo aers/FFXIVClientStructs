@@ -248,13 +248,13 @@ classes:
       0x1408040E0: GetActionInRangeOrLoS
       0x1408046D0: GetAdjustedCastTime
       0x140804DA0: GetAdjustedRecastTime
-      0x140806FE0: RequestActionLocation
-      0x140807DA0: RequestGeneralAction
+      0x140806FE0: UseActionLocation
+      0x140807DA0: UseGeneralAction
       0x1408089B0: UseWaymarkAction
       0x14080C820: GetActionStatus
       0x14080EA50: GetAdjustedActionId
-      0x1408102A0: RequestAction
-      0x140810900: RequestComboAction
+      0x1408102A0: UseAction
+      0x140810900: UseComboAction
       0x1408111D0: GetRecastTimerActive
       0x140811590: StartCooldown
       0x140811870: GetRecastTimerElapsed
@@ -803,6 +803,48 @@ classes:
   Common::Lua::LuaThread:
     inherits_from: Common::Lua::LuaState
     vtbl: 0x1416BF0D0
+  Client::Game::Event::LuaActor:
+    vtbl: 0x1417104B0
+  Client::Game::Event::LuaPc:
+    inherits_from: Client::Game::Event::LuaActor
+    vtbl: 0x141712E70
+    funcs:
+      0x140ADBD90: ctor
+  Client::Game::Event::LuaAetheryte:
+    inherits_from: Client::Game::Event::LuaActor
+    vtbl: 0x141712608
+    funcs:
+      0x140ADADF0: ctor
+  Client::Game::Event::LuaHousingEventObject:
+    inherits_from: Client::Game::Event::LuaActor
+    vtbl: 0x1417125f8
+    funcs:
+      0x140ADA6A0: ctor
+  Client::Game::Event::LuaEventObject:
+    inherits_from: Client::Game::Event::LuaActor
+    vtbl: 0x1417125E8
+    funcs:
+      0x140AD9D90: ctor
+  Client::Game::Event::LuaCompanion:
+    inherits_from: Client::Game::Event::LuaActor
+    vtbl: 0x1417125D8
+    funcs:
+      0x140AD99E0: ctor
+  Client::Game::Event::LuaRetainer:
+    inherits_from: Client::Game::Event::LuaActor
+    vtbl: 0x1417125C8
+    funcs:
+      0x140AD95A0: ctor
+  Client::Game::Event::LuaBattleNpc:
+    inherits_from: Client::Game::Event::LuaActor
+    vtbl: 0x1417125B8
+    funcs:
+      0x140AD8C60: ctor
+  Client::Game::Event::LuaEventNpc:
+    inherits_from: Client::Game::Event::LuaActor
+    vtbl: 0x1417125A8
+    funcs:
+      0x140AD88B0: ctor
   Client::System::Scheduler::ScheduleManagement:
     inherits_from: Client::System::Framework::Task
     vtbl: 0x1416BF608
