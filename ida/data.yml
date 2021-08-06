@@ -100,10 +100,19 @@ functions:
   0x1406F6350: ExecuteCommand
   0x1408DBF00: CreateSelectYesno
   0x140A91200: EventFramework_GetSingleton
+  0x140A91210: EventFramework_ctor
+  0x140A919D0: EventFramework_dtor
   0x140A99A70: EventFramework_ProcessDirectorUpdate
   0x140A9D0C0: EventFramework_GetInstanceContentDirector
   0x141041920: Client::UI::AddonHudLayoutScreen::MoveableAddonInfoStruct_UpdateAddonPosition
   0x14110F310: Client::Graphics::Kernel::CreateShader # static function
+  0x1411605A0: lua_index2addr
+  0x141160CF0: lua_gettop
+  0x1411610D0: lua_pcall
+  0x141161990: lua_settop
+  0x141161B80: lua_tolstring
+  0x141161D30: lua_type
+  0x141163EF0: luaL_loadbuffer
   0x14131E140: crc
   0x141371784: ThrowException
   0x141398044: FreeMemory
@@ -800,6 +809,11 @@ classes:
     vtbl: 0x1416BECC0
   Common::Lua::LuaState:
     vtbl: 0x1416BF0C8
+    funcs:
+      0x14046D310: ctor
+      0x14046D750: LoadString
+      0x14046D800: LoadFile
+      0x14046DD30: PCall
   Common::Lua::LuaThread:
     inherits_from: Common::Lua::LuaState
     vtbl: 0x1416BF0D0
