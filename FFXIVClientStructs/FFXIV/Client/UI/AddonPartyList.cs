@@ -12,8 +12,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI {
         [FieldOffset(0x220 + PartyListMemberStruct.Size * 08)] public PartyListMemberStruct Unknown08;
         [FieldOffset(0x220 + PartyListMemberStruct.Size * 09)] public PartyListMemberStruct Unknown09;
         [FieldOffset(0x220 + PartyListMemberStruct.Size * 10)] public PartyListMemberStruct Unknown10;
-        [FieldOffset(0x220 + PartyListMemberStruct.Size * 11)] public PartyListMemberStruct Unknown11;
-        [FieldOffset(0x220 + PartyListMemberStruct.Size * 12)] public PartyListMemberStruct Unknown12;
+        [FieldOffset(0x220 + PartyListMemberStruct.Size * 11)] public PartyListMemberStruct Chocobo;
+        [FieldOffset(0x220 + PartyListMemberStruct.Size * 12)] public PartyListMemberStruct Pet;
         
         [FieldOffset(0xF20)] public fixed uint PartyClassJobIconId[8];
 
