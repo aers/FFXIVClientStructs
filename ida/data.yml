@@ -813,6 +813,7 @@ classes:
       0x14046D310: ctor
       0x14046D750: LoadString
       0x14046D800: LoadFile
+      0x14046DD30: PCall
   Common::Lua::LuaThread:
     inherits_from: Common::Lua::LuaState
     vtbl: 0x1416BF0D0
