@@ -899,6 +899,9 @@ classes:
     vtbl: 0x1416C1B38
   Component::GUI::AtkTexture:
     vtbl: 0x1416C1AB8
+    funcs:
+      0x1404B68B0: ReleaseTexture
+      0x1404B6580: LoadIconTexture      
   Component::GUI::AtkStage:
     inherits_from: Component::GUI::AtkEventTarget
     vtbl: 0x1416C1C98

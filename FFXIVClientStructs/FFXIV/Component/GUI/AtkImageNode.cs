@@ -33,7 +33,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
         public partial void Ctor();
 
         [MemberFunction("E8 ? ? ? ? 8D 4D 09")]
-        public partial void LoadIconTexture(int iconId, int layer);
+        public partial void LoadIconTexture(int iconId, int version);
 
         [MemberFunction("E8 ? ? ? ? 85 FF 78 1E")]
         public partial void UnloadTexture();
