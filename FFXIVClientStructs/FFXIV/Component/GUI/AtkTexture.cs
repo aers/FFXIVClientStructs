@@ -36,6 +36,9 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
         [MemberFunction("E8 ? ? ? ? C6 43 10 02")]
         public partial int ReleaseTexture();
 
+        [MemberFunction("80 79 10 01 75 44")]
+        public partial int GetLoadState();
+
         [VirtualFunction(0)]
         public partial void Destroy(bool free);
     }
