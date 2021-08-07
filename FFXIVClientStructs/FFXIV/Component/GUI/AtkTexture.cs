@@ -39,6 +39,12 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
         [MemberFunction("80 79 10 01 75 44")]
         public partial int GetLoadState();
 
+        [MemberFunction("0F B6 41 11 48 8B D1")]
+        public partial bool IsTextureReady();
+
+        [MemberFunction("E8 ? ? ? ? 8B 57 10 4C 8B C0")]
+        public partial Texture* GetKernelTexture();
+
         [VirtualFunction(0)]
         public partial void Destroy(bool free);
     }

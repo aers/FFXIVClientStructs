@@ -902,7 +902,9 @@ classes:
     funcs:
       0x1404B6580: LoadIconTexture   
       0x1404B67A0: GetLoadState
+      0x1404B6800: IsTextureReady
       0x1404B68B0: ReleaseTexture
+      0x1404B69E0: GetKernelTexture
   Component::GUI::AtkStage:
     inherits_from: Component::GUI::AtkEventTarget
     vtbl: 0x1416C1C98
