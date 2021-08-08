@@ -16,6 +16,9 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
         [FieldOffset(0x10)] public UIModule* UiModule;
         [FieldOffset(0x20)] public uint AddonId;
 
+        [VirtualFunction(2)]
+        public partial void Show();
+
         [VirtualFunction(3)]
         public partial void Hide();
 

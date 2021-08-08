@@ -261,6 +261,7 @@ classes:
       0x140807DA0: UseGeneralAction
       0x1408089B0: UseWaymarkAction
       0x14080C820: GetActionStatus
+      0x14080E4F0: CanUseAction
       0x14080EA50: GetAdjustedActionId
       0x1408102A0: UseAction
       0x140810900: UseComboAction
@@ -1793,9 +1794,10 @@ classes:
       1: dtor
     funcs:
       0x1407BB710: ctor
+      0x1407BB8A0: IsSelectUseTicketInactive
+      0x1407BB8D0: UpdatePlayerAetheryteList
       0x1407BBF70: Teleport
       0x1407BD110: TeleportWithTicket
-      0x1407BB8D0: UpdatePlayerAetheryteList
       0x1407BD1A0: InvokeSelectUseTicket
   Client::UI::Agent::AgentHUD:
     inherits_from: Client::UI::Agent::AgentInterface
