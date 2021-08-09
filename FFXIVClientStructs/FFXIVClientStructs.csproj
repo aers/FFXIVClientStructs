@@ -45,7 +45,4 @@
     <ProjectReference Include="..\FFXIVClientStructs.Common\FFXIVClientStructs.Common.csproj" />
     <ProjectReference Include="..\FFXIVClientStructs.Generators\FFXIVClientStructs.Generators.csproj" OutputItemType="Analyzer" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="FFXIV\Client\Game\Gauge\" />
-  </ItemGroup>
 </Project>
