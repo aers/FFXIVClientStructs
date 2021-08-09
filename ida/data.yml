@@ -89,6 +89,7 @@ functions:
   0x140484A30: Client::Game::GameMain_Initialize
   0x140484D30: Client::Game::GameMain_Terminate
   0x140485010: Client::Game::GameMain_Update
+  0x140486D70: Client::Game::GameMain_ctor
   0x140496850: Client::Game::Control::InputManager_GetInputStatus
   0x1404ADAC0: Client::System::Input::InputData_IsInputIDKeyPress
   0x1404ADBD0: Client::System::Input::InputData_IsInputIDClicked
@@ -269,6 +270,69 @@ classes:
       0x140811590: StartCooldown
       0x140811870: GetRecastTimerElapsed
       0x140811920: GetRecastTime
+  Client::Game::JobGaugeManager:
+    funcs:
+      0x14081CE50: ctor
+      0x14081CE80: dtor
+      0x14081D000: Update
+      0x14081D120: ChangeGauge
+  Client::Game::Gauge::JobGauge:
+    vtbl: 0x1416F0530
+    vfuncs:
+      0: dtor
+      1: Init
+      4: SetValues
+  Client::Game::Gauge::PaladinGauge:
+    inherits_from: Client::Game::Gauge::JobGauge
+    vtbl: 0x1416F0570
+  Client::Game::Gauge::MonkGauge:
+    inherits_from: Client::Game::Gauge::JobGauge
+    vtbl: 0x1416F05B0
+  Client::Game::Gauge::WarriorGauge:
+    inherits_from: Client::Game::Gauge::JobGauge
+    vtbl: 0x1416F05F0
+  Client::Game::Gauge::DragoonGauge:
+    inherits_from: Client::Game::Gauge::JobGauge
+    vtbl: 0x1416F0630
+  Client::Game::Gauge::BardGauge:
+    inherits_from: Client::Game::Gauge::JobGauge
+    vtbl: 0x1416F0670
+  Client::Game::Gauge::WhiteMageGauge:
+    inherits_from: Client::Game::Gauge::JobGauge
+    vtbl: 0x1416F06B0
+  Client::Game::Gauge::BlackMageGauge:
+    inherits_from: Client::Game::Gauge::JobGauge
+    vtbl: 0x1416F06F0
+  Client::Game::Gauge::SummonerGauge:
+    inherits_from: Client::Game::Gauge::JobGauge
+    vtbl: 0x1416F0730
+  Client::Game::Gauge::ScholarGauge:
+    inherits_from: Client::Game::Gauge::JobGauge
+    vtbl: 0x1416F0770
+  Client::Game::Gauge::NinjaGauge:
+    inherits_from: Client::Game::Gauge::JobGauge
+    vtbl: 0x1416F07B0
+  Client::Game::Gauge::MachinistGauge:
+    inherits_from: Client::Game::Gauge::JobGauge
+    vtbl: 0x1416F07F0
+  Client::Game::Gauge::DarkKnightGauge:
+    inherits_from: Client::Game::Gauge::JobGauge
+    vtbl: 0x1416F0830
+  Client::Game::Gauge::AstrologianGauge:
+    inherits_from: Client::Game::Gauge::JobGauge
+    vtbl: 0x1416F0870
+  Client::Game::Gauge::SamuraiGauge:
+    inherits_from: Client::Game::Gauge::JobGauge
+    vtbl: 0x1416F08B0
+  Client::Game::Gauge::RedMageGauge:
+    inherits_from: Client::Game::Gauge::JobGauge
+    vtbl: 0x1416F08F0
+  Client::Game::Gauge::DancerGauge:
+    inherits_from: Client::Game::Gauge::JobGauge
+    vtbl: 0x1416F0930
+  Client::Game::Gauge::GunbreakerGauge:
+    inherits_from: Client::Game::Gauge::JobGauge
+    vtbl: 0x1416F0970
   Common::Configuration::ConfigBase:
     inherits_from: Client::System::Common::NonCopyable
     vtbl: 0x1416752C0
