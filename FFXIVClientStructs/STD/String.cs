@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using System.Text;
 
 namespace FFXIVClientStructs.STD
 {
@@ -12,5 +13,23 @@ namespace FFXIVClientStructs.STD
         [FieldOffset(0x0)] public fixed byte Buffer[16];
         [FieldOffset(0x10)] public ulong Length;
         [FieldOffset(0x18)] public ulong Capacity;
+
+        public byte[] GetBytes()
+        {
+            byte[] data = new byte[Length];
+
+            if (Length < 16)
+                for (ulong i = 0; i < Length; i++)
+                    data[i] = Buffer[i];
+            else
+                for (ulong i = 0; i < Length; i++)
+                    data[i] = BufferPtr[i];
+            return data;
+        }
+        
+        public override string ToString()
+        {
+            return Encoding.UTF8.GetString(GetBytes());
+        }
     }
 }
