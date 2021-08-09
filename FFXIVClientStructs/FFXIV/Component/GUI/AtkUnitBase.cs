@@ -48,7 +48,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
         public partial float GetGlobalUIScale();
 
         [VirtualFunction(3)]
-        public partial bool Show(int unknown);
+        public partial bool Show(int unkInt, bool unkBool = false);
         
         [VirtualFunction(4)]
         public partial bool Hide(bool unknown);
