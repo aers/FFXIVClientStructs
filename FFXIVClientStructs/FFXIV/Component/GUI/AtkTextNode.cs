@@ -80,6 +80,11 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
         public void SetText(string str)
         {
             var bytes = System.Text.Encoding.UTF8.GetBytes(str);
+            SetText(bytes);
+        }
+
+        public void SetText(byte[] bytes)
+        {
             var charPtr = Marshal.AllocHGlobal(bytes.Length + 1);
             Marshal.Copy(bytes, 0, charPtr, bytes.Length);
             Marshal.WriteByte(charPtr, bytes.Length, 0);
