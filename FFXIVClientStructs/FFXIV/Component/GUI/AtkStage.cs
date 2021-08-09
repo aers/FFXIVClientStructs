@@ -16,7 +16,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
         [FieldOffset(0x20)] public RaptureAtkUnitManager* RaptureAtkUnitManager;
         [FieldOffset(0x168)] public AtkTooltipManager TooltipManager;
         
-        [MemberFunction("E8 ? ? ? ? 0F BF D5")]
-        public partial AtkStage* GetSingleton();
+        [MemberFunction("E8 ? ? ? ? 0F BF D5", IsStatic = true)]
+        public static partial AtkStage* GetSingleton();
     }
 }
