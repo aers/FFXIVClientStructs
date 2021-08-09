@@ -957,6 +957,15 @@ classes:
   Component::GUI::ExtendArrayData:
     inherits_from: Component::GUI::AtkArrayData
     vtbl: 0x1416C1A28
+  Component::GUI::AtkTooltipManager:
+    inherits_from: Component::GUI::AtkEventListener
+    vtbl: 0x1416C1AF0
+    funcs:
+      0x1404B9F80: ShowTooltip # similar args to attach tooltip
+      0x1404B9A90: AttachTooltip
+      0x1404B9CD0: DetachTooltipNode
+      0x1404B9EF0: ShowNodeTooltip # takes node as argument
+      0x1404BAA30: DetachTooltipAddon
   Component::GUI::AtkEventTarget:
     vtbl: 0x1416C4280
   Component::GUI::AtkSimpleTween:
@@ -1087,6 +1096,8 @@ classes:
       40: LoadUldResourceHandle
       43: OnSetup
       46: OnUpdate
+      56: OnMouseOver
+      57: OnMouseOut
     funcs:
       0x1404DF4F0: ctor
       0x1404DFB60: FireCallbackInt # this creates an int AtkValue and puts its argument into it before calling Callback
