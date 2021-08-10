@@ -18,5 +18,7 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Memory
 
         [VirtualFunction(3)]
         public partial void* Malloc(ulong size, ulong alignment);
+        
+        public void* Malloc<T>(ulong alignment = 8) where T : unmanaged => Malloc((ulong)sizeof(T), alignment);
     }
 }
