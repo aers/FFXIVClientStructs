@@ -85,7 +85,6 @@ functions:
   0x14042BAD0: GetGameObjectByIndex
   0x140444EE0: PrepareColorSet
   0x1404451B0: ReadStainingTemplate
-  0x140478960: Component::Exd::ExdModule_GetEntryByIndex
   0x140484A30: Client::Game::GameMain_Initialize
   0x140484D30: Client::Game::GameMain_Terminate
   0x140485010: Client::Game::GameMain_Update
@@ -383,6 +382,11 @@ classes:
       0x140093460: TaskRenderManagerUpdate
       0x140093480: TaskRenderManagerRender
       0x140093520: TaskUpdateLayoutWorld
+  Component::Exd::ExdModule:
+    vtbl: 0x1416BF5D8
+    funcs:
+      0x1404782F0: ctor
+      0x140478960: GetEntryByIndex
   Component::Excel::ExcelModuleInterface:
     vtbl: 0x1416765A8
   Client::System::Input::TextService:
@@ -486,6 +490,10 @@ classes:
     vtbl: 0x141695368
     funcs:
       0x1401A5A50: ctor
+  Client::System::Resource::ResourceEventListener:
+    vtbl: 0x1416956A8
+    funcs:
+      0x1401AA870: ctor
   Client::System::Resource::Handle::CharaMakeParameterResourceHandle:
     inherits_from: Client::System::Resource::Handle::DefaultResourceHandle
     vtbl: 0x141695B98
@@ -1303,6 +1311,9 @@ classes:
       1: ReadFile
       2: WriteFile
       6: GetFileVersion
+  Client::UI::Misc::UserFileManager:
+    inherits_from: Client::System::Resource::ResourceEventListener
+    vtbl: 0x1416D0CA8
   Client::UI::UI3DModule::MapInfo:
     vtbl: 0x1416D1590
   Client::UI::UI3DModule::ObjectInfo:
