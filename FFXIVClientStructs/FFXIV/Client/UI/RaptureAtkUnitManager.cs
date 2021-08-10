@@ -1,4 +1,5 @@
 ﻿using System.Runtime.InteropServices;
+using FFXIVClientStructs.Common;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI
@@ -11,8 +12,11 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
     // ctor 40 53 48 83 EC 20 48 8B D9 E8 ? ? ? ? C6 83 ? ? ? ? ? 48 8D 8B ? ? ? ?
 
     [StructLayout(LayoutKind.Explicit, Size = 0x9D2C)]
-    public struct RaptureAtkUnitManager
+    public unsafe partial struct RaptureAtkUnitManager
     {
         [FieldOffset(0x0)] public AtkUnitManager AtkUnitManager;
+
+        [MemberFunction("E8 ?? ?? ?? ?? 48 8B F8 41 B0 01")]
+        public partial AtkUnitBase* GetAddonByName(string name, int index = 1);
     }
 }
