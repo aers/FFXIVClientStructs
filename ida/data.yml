@@ -2521,3 +2521,22 @@ classes:
   SQEX::CDev::Engine::Sd::Whiz::WhizManager:
     inherits_from: SQEX::CDev::Engine::Sd::Whiz::IWhizManager
     vtbl: 0x1419C0DB0
+  Client::System::Memory::IMemorySpace:
+    vtbl: 0x14166EBA0
+  Client::System::Memory::IMemoryModule:
+    vtbl: 0x14166ECA8
+  Client::System::Memory::Regular::RegularAllocator:
+    inherits_from: Client::System::Memory::IMemoryModule
+    vtbl: 0x14166EDF0
+  Client::System::Memory::Regular::UIAllocator:
+    inherits_from: Client::System::Memory::Regular::RegularAllocator
+    vtbl: 0x14166EED8
+  Client::System::Memory::Regular::FileAllocator:
+    inherits_from: Client::System::Memory::Regular::RegularAllocator
+    vtbl: 0x14166EF50
+  Client::System::Memory::Regular::SystemAllocator:
+    inherits_from: Client::System::Memory::IMemoryModule
+    vtbl: 0x14166EE68
+  Client::System::Memory::Regular::FixedSpace:
+    inherits_from: Client::System::Memory::IMemorySpace
+    vtbl: 0x14166EFC8
