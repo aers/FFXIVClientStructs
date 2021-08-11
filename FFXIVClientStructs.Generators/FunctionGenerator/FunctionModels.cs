@@ -8,6 +8,7 @@ namespace FFXIVClientStructs.Generators.FunctionGenerator
         public string Name;
         public List<Function> MemberFunctions;
         public List<Function> VirtualFunctions;
+        public bool HasCtor;
     }
 
     internal class Function

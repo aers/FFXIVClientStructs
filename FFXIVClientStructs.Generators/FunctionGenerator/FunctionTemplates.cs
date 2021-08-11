@@ -3,9 +3,10 @@
     internal static class Templates
     {
         internal const string MemberFunctions = @"using System;
+{{ if struct.has_ctor }}using FFXIVClientStructs.FFXIV.Client.System.Memory;{{ end }}
 
 namespace {{ struct.namespace }} {
-    public unsafe partial struct {{ struct.name }} {
+    public unsafe partial struct {{ struct.name }} {{ if struct.has_ctor }}: ICreatable {{ end }}{
         {{~ for mf in struct.member_functions ~}}
         public static delegate* unmanaged[Stdcall] <{{ if !mf.is_static }}{{ struct.name }}*,{{ end }}{{ if mf.has_params }}{{ mf.param_type_list }},{{ end }}{{ mf.return_type }}> fp{{ mf.name }} { internal set; get; }
 

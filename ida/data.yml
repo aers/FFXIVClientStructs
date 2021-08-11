@@ -5,6 +5,12 @@ globals:
   0x141D67560: g_InputManager
   0x141D67588: g_InputManager_MouseButtonHoldState
   0x141D6A220: g_ActionManager
+  0x141D953B0: g_IMemorySpace_DefaultSpace
+  0x141D953B8: g_IMemorySpace_ApricotSpace
+  0x141D953C0: g_IMemorySpace_AnimationSpace
+  0x141D953C8: g_IMemorySpace_UISpace
+  0x141D953D0: g_IMemorySpace_FileSpace
+  0x141D953D8: g_IMemorySpace_SoundSpace
   0x141D93FB8: g_Framework
   0x141D94180: g_KernelDevice
   0x141D95B48: g_GraphicsConfig
@@ -73,6 +79,13 @@ globals:
 
 functions:
   0x140060560: MemoryManager_Alloc
+  0x140061C70: MemoryManager_GetDefaultSpace
+  0x140061D30: MemoryManager_GetApricotSpace
+  0x140061D50: MemoryManager_GetAnimationSpace
+  0x140061D70: MemoryManager_GetUISpace
+  0x140061DF0: MemoryManager_GetFileSpace
+  0x140061D90: MemoryManager_GetSoundSpace_1
+  0x140061DB0: MemoryManager_GetSoundSpace_2
   0x140064FC0: IsMacClient
   0x1400A4250: Client::UI::PlaySoundEffect # this is a static function in the UI namespace, arg1 is the SE
   0x140182400: Client::Graphics::Environment::EnvManager_ctor

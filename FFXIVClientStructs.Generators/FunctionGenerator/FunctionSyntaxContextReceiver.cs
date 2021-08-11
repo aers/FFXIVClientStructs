@@ -27,7 +27,8 @@ namespace FFXIVClientStructs.Generators.FunctionGenerator
                     Name = structType.Name,
                     Namespace = structType.ContainingNamespace.ToDisplayString(),
                     MemberFunctions = new List<Function>(),
-                    VirtualFunctions = new List<Function>()
+                    VirtualFunctions = new List<Function>(),
+                    HasCtor = false
                 };
 
                 foreach (var m in methods)
@@ -54,6 +55,8 @@ namespace FFXIVClientStructs.Generators.FunctionGenerator
                         functionObj.IsStatic = memberFuncAttr.NamedArguments.Any() &&
                                                (bool)(memberFuncAttr.NamedArguments[0].Value.Value ?? false);
                         structObj.MemberFunctions.Add(functionObj);
+                        if (ms.Name == "Ctor")
+                            structObj.HasCtor = true;
                     }
 
                     if (ms.GetAttributes().FirstOrDefault(a => a.AttributeClass?.Name == "VirtualFunctionAttribute") is
