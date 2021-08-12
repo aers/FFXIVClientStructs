@@ -1474,9 +1474,11 @@ classes:
     vfuncs:
       2: GetObjectID
       3: GetObjectKind
+      4: GetObjectType
       5: GetIsTargetable
       7: GetName
       8: GetRadius
+      9: GetHeight
       16: EnableDraw
       17: DisableDraw
       21: SetDrawObject
@@ -1484,6 +1486,9 @@ classes:
       28: GetDrawObject_2
       40: Update
       50: GetNpcID
+      62: Destroy
+      63: IsCharacter
+      70: Initialize
     funcs:
       0x1406CA8A0: GetPosition
       0x1406CA8F0: SetPosition
