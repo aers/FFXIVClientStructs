@@ -1486,6 +1486,7 @@ classes:
       28: GetDrawObject_2
       40: Update
       50: GetNpcID
+      59: IsDead
       62: Destroy
       63: IsCharacter
       70: Initialize
