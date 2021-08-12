@@ -1493,6 +1493,7 @@ classes:
     inherits_from: Client::Game::Object::GameObject
     vtbl: 0x1416D94E0
     vfuncs:
+      79: GetStatusManager
       81: GetCastInfo
       82: GetCastInfo_2
     funcs:
