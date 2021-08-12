@@ -1489,7 +1489,7 @@ classes:
       59: IsDead
       62: Destroy
       63: IsCharacter
-      70: Initialize
+      70: OnInitialize
     funcs:
       0x1406CA8A0: GetPosition
       0x1406CA8F0: SetPosition
