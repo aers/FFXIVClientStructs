@@ -1,5 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 using FFXIVClientStructs.Common;
+using FFXIVClientStructs.FFXIV.Client.Game.Object;
 using FFXIVClientStructs.FFXIV.Client.Graphics;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game {
