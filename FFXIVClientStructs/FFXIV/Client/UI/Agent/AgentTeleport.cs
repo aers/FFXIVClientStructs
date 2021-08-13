@@ -8,6 +8,6 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent {
     public unsafe struct AgentTeleport {
         [FieldOffset(0x0)] public AgentInterface AgentInterface;
         [FieldOffset(0x60)] public int AetheryteCount;
-        [FieldOffset(0x68)] public Vector<Telepo.TeleportInfo>* AetheryteList;
+        [FieldOffset(0x68)] public Vector<TeleportInfo>* AetheryteList;
     }
 }
