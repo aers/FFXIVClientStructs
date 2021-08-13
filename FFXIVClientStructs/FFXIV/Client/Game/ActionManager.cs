@@ -34,6 +34,13 @@ namespace FFXIVClientStructs.FFXIV.Client.Game {
 
         [MemberFunction("E8 ?? ?? ?? ?? 3C 01 74 45")]
         public partial bool IsRecastTimerActive(ActionType actionType, uint actionID);
+
+        [MemberFunction("E8 ?? ?? ?? ?? 8B CD 0F 28 F0", IsStatic = true)]
+        public static partial float GetActionRange(uint actionId);
+        
+        [MemberFunction("E8 ?? ?? ?? ?? 85 C0 75 02 33 C0", IsStatic = true)]
+        public static partial uint GetActionInRangeOrLoS(uint actionId, GameObject* sourceObject, GameObject* targetObject);
+
     }
 
     public enum ActionType : byte {
