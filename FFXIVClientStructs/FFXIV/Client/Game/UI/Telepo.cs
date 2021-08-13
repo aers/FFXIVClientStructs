@@ -20,7 +20,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI {
         public partial bool Teleport(uint aetheryteID, byte subIndex);
 
         [MemberFunction("E8 ?? ?? ?? ?? 48 8B 48 08 48 2B 08")]
-        public partial Vector<TeleportInfo>* UpdateAetheryteList();
+        public partial void* UpdateAetheryteList();
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x14)]
