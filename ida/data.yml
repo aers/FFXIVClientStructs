@@ -171,6 +171,10 @@ classes:
     funcs:
       0x1404A5EF0: Initialize
       0x1404A6160: Update
+  Component::GUI::AtkInputManager:
+    funcs:
+      0x1404F02E0: HandleInput
+      0x1404F2A70: ctor      
   Client::Game::CameraManager:
     funcs:
       0x141133300: PreUpdate
@@ -399,6 +403,10 @@ classes:
     funcs:
       0x14008EB70: ctor
       0x140092010: GetUIModule
+      0x140092ED0: TaskBegin
+      0x140093000: TaskDraw2DBegin
+      0x140093040: TaskUpdateInputDevice
+      0x140093080: TaskUpdateInputUI
       0x140093460: TaskRenderManagerUpdate
       0x140093480: TaskRenderManagerRender
       0x140093520: TaskUpdateLayoutWorld
@@ -971,6 +979,10 @@ classes:
       0x140497C00: ctor
       0x1404A2780: IsActorInViewRange
       0x1404A1A40: GetCurrentTargetId
+  Client::System::Input::InputData:
+    vtbl: 0x1416C00C0
+    funcs:
+      0x1404AD590: ctor
   Component::GUI::AtkArrayData:
     vtbl: 0x1416C19F8
   Component::GUI::NumberArrayData:
@@ -1182,6 +1194,7 @@ classes:
       58: OnUpdate
     funcs:
       0x1405105F0: ctor
+      0x140511410: HandleInput
   Component::GUI::AtkComponentCheckBox:
     inherits_from: Component::GUI::AtkComponentButton
     vtbl: 0x1416C31E0
@@ -1334,6 +1347,17 @@ classes:
   Client::UI::Misc::UserFileManager:
     inherits_from: Client::System::Resource::ResourceEventListener
     vtbl: 0x1416D0CA8
+  Component::GUI::AtkInputData:
+    inherits_from: Client::System::Input::InputData
+    vtbl: 0x1416D0CD0
+  Client::UI::UIInputData:
+    inherits_from: Component::GUI::AtkInputData
+    vtbl: 0x1416D0D60
+    funcs:
+      0x1405BA390: ctor
+  Client::UI::UIInputData_Client::UI::Misc::UserFileManager::UserFileEvent:
+    inherits_from: Client::UI::Misc::UserFileManager::UserFileEvent
+    vtbl: 0x1416D0DF8
   Client::UI::UI3DModule::MapInfo:
     vtbl: 0x1416D1590
   Client::UI::UI3DModule::ObjectInfo:
@@ -1354,6 +1378,13 @@ classes:
       0x1405C1750: UpdateGameObjects
       0x1405C1BA0: SetupNamePlateForObjectInfo
       0x1405C1C50: FinalizeNamePlates
+  Client::UI::UIInputModule:
+    vtbl: 0x1416D1650
+    funcs:
+      0x1405C35E0: ctor
+      0x1405C36D0: HandleInputUpdate
+      0x1405C4800: CheckCastCancel
+      0x1405C7EA0: CheckScreenshotState
   Client::UI::UIModule:
     inherits_from: Client::UI::UIModuleInterface
     vtbl: 0x1416D1660
@@ -1382,6 +1413,7 @@ classes:
       29: GetRaptureTeleportHistory
       34: GetAgentModule
       36: GetUI3DModule
+      53: GetUIInputData
       54: GetUIInputModule
       56: GetLogFilterConfig
       148: ShowText
@@ -1391,6 +1423,7 @@ classes:
     funcs:
       0x1405CA180: ctor
       0x1405CAFB0: Update
+      0x1405CB420: HandleInputUpdate
   Client::System::Crypt::SimpleString:
     inherits_from: Client::System::Crypt::CryptInterface
     vtbl: 0x1416D1E70
