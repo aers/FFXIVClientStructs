@@ -9,11 +9,11 @@ namespace FFXIVClientStructs.FFXIV.Client.UI {
     public unsafe struct AddonPartyList {
         [FieldOffset(0x000)] public AtkUnitBase AtkUnitBase;
         [FieldOffset(0x220)] public PartyMembers PartyMember;
-        [FieldOffset(0xA20)] public PartyListMemberStruct Unknown08;
-        [FieldOffset(0xB20)] public PartyListMemberStruct Unknown09;
-        [FieldOffset(0xC20)] public PartyListMemberStruct Unknown10;
-        [FieldOffset(0xD20)] public PartyListMemberStruct Chocobo;
-        [FieldOffset(0xE20)] public PartyListMemberStruct Pet;
+        [FieldOffset(0x220 + PartyListMemberStruct.Size * 08)] public PartyListMemberStruct Unknown08;
+        [FieldOffset(0x220 + PartyListMemberStruct.Size * 09)] public PartyListMemberStruct Unknown09;
+        [FieldOffset(0x220 + PartyListMemberStruct.Size * 10)] public PartyListMemberStruct Unknown10;
+        [FieldOffset(0x220 + PartyListMemberStruct.Size * 11)] public PartyListMemberStruct Chocobo;
+        [FieldOffset(0x220 + PartyListMemberStruct.Size * 12)] public PartyListMemberStruct Pet;
         
         [FieldOffset(0xF20)] public fixed uint PartyClassJobIconId[8];
 
@@ -37,16 +37,16 @@ namespace FFXIVClientStructs.FFXIV.Client.UI {
         [FieldOffset(0xFF1)] public byte PetCount; //or PetSummoned?
         [FieldOffset(0xFF2)] public byte ChocoboCount;//or ChocoboSummoned?
 
-        [StructLayout(LayoutKind.Explicit, Size = 0x800)]
+        [StructLayout(LayoutKind.Explicit, Size = PartyListMemberStruct.Size * 8)]
         public struct PartyMembers {
-            [FieldOffset(0x000)] public PartyListMemberStruct PartyMember0;
-            [FieldOffset(0x100)] public PartyListMemberStruct PartyMember1;
-            [FieldOffset(0x200)] public PartyListMemberStruct PartyMember2;
-            [FieldOffset(0x300)] public PartyListMemberStruct PartyMember3;
-            [FieldOffset(0x400)] public PartyListMemberStruct PartyMember4;
-            [FieldOffset(0x500)] public PartyListMemberStruct PartyMember5;
-            [FieldOffset(0x600)] public PartyListMemberStruct PartyMember6;
-            [FieldOffset(0x700)] public PartyListMemberStruct PartyMember7;
+            [FieldOffset(PartyListMemberStruct.Size * 00)] public PartyListMemberStruct PartyMember0;
+            [FieldOffset(PartyListMemberStruct.Size * 01)] public PartyListMemberStruct PartyMember1;
+            [FieldOffset(PartyListMemberStruct.Size * 02)] public PartyListMemberStruct PartyMember2;
+            [FieldOffset(PartyListMemberStruct.Size * 03)] public PartyListMemberStruct PartyMember3;
+            [FieldOffset(PartyListMemberStruct.Size * 04)] public PartyListMemberStruct PartyMember4;
+            [FieldOffset(PartyListMemberStruct.Size * 05)] public PartyListMemberStruct PartyMember5;
+            [FieldOffset(PartyListMemberStruct.Size * 06)] public PartyListMemberStruct PartyMember6;
+            [FieldOffset(PartyListMemberStruct.Size * 07)] public PartyListMemberStruct PartyMember7;
 
             public PartyListMemberStruct this[int i] {
                 get {
@@ -66,8 +66,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI {
         }
         
         
-        [StructLayout(LayoutKind.Explicit, Size = 0x100)]
+        [StructLayout(LayoutKind.Explicit, Size = Size)]
         public struct PartyListMemberStruct {
+            public const int Size = 0x100;
             
             [FieldOffset(0x00)] public StatusIcons StatusIcon;
             [FieldOffset(0x50)] public AtkComponentBase* PartyMemberComponent;
