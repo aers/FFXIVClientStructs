@@ -68,7 +68,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
         [FieldOffset(0x760)] public Utf8String CraftEffect8HoverText;
         [FieldOffset(0x7C8)] public Utf8String CraftEffect9HoverText;
 
-        [StructLayout(LayoutKind.Explicit)]
+        [StructLayout(LayoutKind.Explicit, Size=0x20)]
         public struct CraftEffect
         {
             // Manipulation, Innovation, etc.

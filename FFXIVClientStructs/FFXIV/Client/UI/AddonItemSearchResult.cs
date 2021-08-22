@@ -7,7 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
     // Client::UI::AddonItemSearchResult
     //   Component::GUI::AtkUnitBase
     //     Component::GUI::AtkEventListener
-    [StructLayout(LayoutKind.Explicit)]
+    [StructLayout(LayoutKind.Explicit, Size=0x3D0)]
     public unsafe struct AddonItemSearchResult
     {
         [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;

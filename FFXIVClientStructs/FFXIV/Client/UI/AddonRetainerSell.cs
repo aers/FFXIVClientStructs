@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
     // Client::UI::AddonRetainerSell
     //   Component::GUI::AtkUnitBase
     //     Component::GUI::AtkEventListener
-    [StructLayout(LayoutKind.Explicit)]
+    [StructLayout(LayoutKind.Explicit, Size=0x278)]
     public unsafe struct AddonRetainerSell
     {
         [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
