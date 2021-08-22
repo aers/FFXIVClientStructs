@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace FFXIVClientStructs.FFXIV.Component.GUI.ULD
+namespace FFXIVClientStructs.FFXIV.Component.GUI
 {
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public unsafe struct AtkUldComponentDataHoldButton
