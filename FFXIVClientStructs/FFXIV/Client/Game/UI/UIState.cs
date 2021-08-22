@@ -14,5 +14,6 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI
     {
         [FieldOffset(0x1388)] public Telepo Telepo;
         [FieldOffset(0x1960)] public Buddy Buddy;
+        [FieldOffset(0x22E8)] public RelicNote RelicNote;
     }
 }

@@ -66,6 +66,7 @@ globals:
   0x141DE4CE8: g_Client::Game::UI::Buddy.CompanionStats  # not a pointer. Member of UIState
   0x141DE4CF0: g_Client::Game::UI::Buddy.CompanionStats.TimeRemaining  # not a pointer
   0x141DE4D40: g_Client::Game::UI::Buddy.BattleBuddyListPtr # Member of UIState
+  0x141DE4E78: g_Client::Game::UI::RelicNote # not a pointer
   0x141DECA28: g_ActiveDirector
   0x141DF0C90: g_MarkingController
   0x141DF0F40: g_LimitBreakController
@@ -266,6 +267,15 @@ classes:
   Client::Game::UI::Buddy:
     funcs:
       0x1407C28F0: ctor
+  Client::Game::UI::RelicNote:
+    vtbl: 0x1416F0058
+    funcs:
+      0x1407CC980: GetRelicID
+      0x1407CC990: GetRelicNoteID
+      0x1407CC9A0: GetMonsterProgress
+      0x1407CCA40: IsDungeonComplete
+      0x1407CCA80: IsFateComplete
+      0x1407CCAC0: IsLeveComplete
   Client::Game::BattleLog:
     funcs:
       0x1407E43A0: AddLogMessage
