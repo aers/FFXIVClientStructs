@@ -1,4 +1,5 @@
 using System.Runtime.InteropServices;
+using FFXIVClientStructs.Common;
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Character
@@ -26,6 +27,8 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character
         [FieldOffset(0x1E2)] public byte ClassJob;
         [FieldOffset(0x1E3)] public byte Level;
 
+        [FieldOffset(0x230)] public uint PlayerTargetObjectID;
+
         [FieldOffset(0x1040)] public fixed byte EquipSlotData[4 * 10];
         //[FieldOffset(0x17B0)] public void* VfxObject;
         //[FieldOffset(0x17B8)] public void* VfxObject2;
@@ -45,5 +48,8 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character
         [FieldOffset(0x195E)] public ushort HomeWorld;
         [FieldOffset(0x197F)] public byte Icon;
         [FieldOffset(0x19A0)] public byte StatusFlags;
+
+        [MemberFunction("E8 ?? ?? ?? ?? 3B C7 74 45")]
+        public partial uint GetTargetId();
     }
 }
