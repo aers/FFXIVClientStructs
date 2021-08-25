@@ -29,6 +29,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
             and so on...
          */
 
+        [VirtualFunction(6)]
+        public partial RaptureTextModule* GetRaptureTextModule();
+
         [VirtualFunction(7)]
         public partial RaptureAtkModule* GetRaptureAtkModule();
         
