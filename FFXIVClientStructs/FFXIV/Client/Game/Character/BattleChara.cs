@@ -17,6 +17,8 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character
     {
         [FieldOffset(0x0)] public Character Character;
 
+        [FieldOffset(0x18D8)] public uint BattleNpcTargetObjectId;
+
         [FieldOffset(0x19F0)] public StatusManager StatusManager;
 
         [FieldOffset(0x1B80)] public CastInfo SpellCastInfo;
