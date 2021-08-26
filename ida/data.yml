@@ -1159,7 +1159,9 @@ classes:
       0x1404E04A0: SetScale
       0x1404E0810: CalculateBounds
       0x1404E2AC0: Draw
-      0x1404E3990: GetNodeByIndex
+      0x1404E3990: GetNodeById
+      0x1404E3C50: GetTextNodeById
+      0x1404E3CB0: GetImageNodeById
       0x1404E3DB0: FireCallback
   Component::GUI::AtkComponentBase:
     inherits_from: Component::GUI::AtkEventListener
