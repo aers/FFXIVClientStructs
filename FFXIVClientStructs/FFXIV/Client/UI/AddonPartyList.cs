@@ -8,14 +8,15 @@ namespace FFXIVClientStructs.FFXIV.Client.UI {
     [StructLayout(LayoutKind.Explicit, Size = 0xFF8)]
     public unsafe struct AddonPartyList {
         [FieldOffset(0x000)] public AtkUnitBase AtkUnitBase;
-        [FieldOffset(0x220)] public PartyMembers PartyMember;
-        [FieldOffset(0x220 + PartyListMemberStruct.Size * 08)] public PartyListMemberStruct Unknown08;
-        [FieldOffset(0x220 + PartyListMemberStruct.Size * 09)] public PartyListMemberStruct Unknown09;
-        [FieldOffset(0x220 + PartyListMemberStruct.Size * 10)] public PartyListMemberStruct Unknown10;
-        [FieldOffset(0x220 + PartyListMemberStruct.Size * 11)] public PartyListMemberStruct Chocobo;
-        [FieldOffset(0x220 + PartyListMemberStruct.Size * 12)] public PartyListMemberStruct Pet;
+        [FieldOffset(0x220)] public PartyMembers PartyMember; // 8 PartyListMember
+        [FieldOffset(0xA20)] public TrustMembers TrustMember; // 3 PartyListMember
+        [FieldOffset(0xD20)] public PartyListMemberStruct Chocobo;
+        [FieldOffset(0xE20)] public PartyListMemberStruct Pet;
         
         [FieldOffset(0xF20)] public fixed uint PartyClassJobIconId[8];
+        [FieldOffset(0xF40)] public fixed uint TrustClassJobIconId[3];
+        [FieldOffset(0xF4C)] public uint ChocoboIconId;
+        [FieldOffset(0xF50)] public uint PetIconId;
 
         [FieldOffset(0xF8A)] public fixed short Edited[12]; //0X11 if edited? Need comfirm
 
@@ -64,8 +65,24 @@ namespace FFXIVClientStructs.FFXIV.Client.UI {
                 }
             }
         }
-        
-        
+
+        [StructLayout(LayoutKind.Explicit, Size = PartyListMemberStruct.Size * 3)]
+        public struct TrustMembers {
+            [FieldOffset(PartyListMemberStruct.Size * 00)] public PartyListMemberStruct Trust0;
+            [FieldOffset(PartyListMemberStruct.Size * 01)] public PartyListMemberStruct Trust1;
+            [FieldOffset(PartyListMemberStruct.Size * 02)] public PartyListMemberStruct Trust2;
+            public PartyListMemberStruct this[int i] {
+                get {
+                    return i switch {
+                        0 => Trust0,
+                        1 => Trust1,
+                        2 => Trust2,
+                        _ => throw new IndexOutOfRangeException("Index should be in range of 0-2")
+                    };
+                }
+            }
+        }
+
         [StructLayout(LayoutKind.Explicit, Size = Size)]
         public struct PartyListMemberStruct {
             public const int Size = 0x100;
