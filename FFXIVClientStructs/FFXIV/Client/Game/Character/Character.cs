@@ -39,7 +39,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character
 
         [FieldOffset(0x18B2)] public fixed byte FreeCompanyTag[6];
 
-        [FieldOffset(0x18D8)] public uint TargetObjectID;  // Whats the difference with GameObject.TargetObjectID?
+        [FieldOffset(0x18D8)] public uint TargetObjectID;
 
         [FieldOffset(0x1940)] public uint NameID;
 
