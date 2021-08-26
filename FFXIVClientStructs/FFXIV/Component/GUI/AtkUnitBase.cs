@@ -47,6 +47,15 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
         [MemberFunction("E8 ?? ?? ?? ?? 0F BF 45 00")]
         public partial float GetGlobalUIScale();
 
+        [MemberFunction("E8 ?? ?? ?? ?? 8D 56 54")]
+        public partial AtkResNode* GetNodeById(uint nodeId);
+
+        [MemberFunction("E8 ?? ?? ?? ?? 8D 55 1C")]
+        public partial AtkTextNode* GetTextNodeById(uint nodeId);
+
+        [MemberFunction("E8 ?? ?? ?? ?? 8D 55 4D")]
+        public partial AtkImageNode* GetImageNodeById(uint nodeId);
+
         [VirtualFunction(3)]
         public partial bool Show(int unkInt, bool unkBool = false);
         
