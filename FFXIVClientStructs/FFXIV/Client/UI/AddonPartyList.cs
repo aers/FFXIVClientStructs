@@ -26,7 +26,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI {
         [FieldOffset(0xFC0)] public AtkResNode* MpBarSpecialResNode; 
         [FieldOffset(0xFC8)] public AtkTextNode* MpBarSpecialTextNode; 
         [FieldOffset(0xFD0)] public int MemberCount;
-        [FieldOffset(0xFD4)] public int UnknownCount;
+        [FieldOffset(0xFD4)] public int TrustCount;
         [FieldOffset(0xFD8)] public int EnmityLeaderIndex; //Starts from 0 ,if no leader : -1
         [FieldOffset(0xFDC)] public int HideWhenSolo;
         
