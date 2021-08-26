@@ -28,8 +28,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Object
         [FieldOffset(0xF0)] public void* DrawObject;
         [FieldOffset(0x104)] public int RenderFlags;
         [FieldOffset(0x148)] public LuaActor* LuaActor;
-        [FieldOffset(0x230)] public uint TargetObjectID;
-
+        
         [VirtualFunction(2)]
         public partial uint GetObjectID();
 
