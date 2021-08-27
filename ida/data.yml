@@ -291,9 +291,11 @@ classes:
       0x1408043E0: GetActionInRangeOrLoS
       0x1408049D0: GetAdjustedCastTime
       0x1408050A0: GetAdjustedRecastTime
+      0x1408056B0: GetActionCost
       0x1408072E0: UseActionLocation
       0x1408080A0: UseGeneralAction
       0x140808CB0: UseWaymarkAction
+      0x140809770: CheckActionResources
       0x14080CB20: GetActionStatus
       0x14080E7F0: CanUseAction
       0x14080ED50: GetAdjustedActionId
