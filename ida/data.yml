@@ -292,6 +292,7 @@ classes:
       0x1408049D0: GetAdjustedCastTime
       0x1408050A0: GetAdjustedRecastTime
       0x1408056B0: GetActionCost
+      0x140805F90: GetSpellIdForAction
       0x1408072E0: UseActionLocation
       0x1408080A0: UseGeneralAction
       0x140808CB0: UseWaymarkAction
