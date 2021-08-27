@@ -27,6 +27,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent
         public partial AgentInterface* GetAgentByInternalID(uint agentID);
 
         public AgentInterface* GetAgentByInternalId(AgentId agentId) => GetAgentByInternalID((uint)agentId);
+
+        public AgentHUD* GetAgentHUD() => (AgentHUD*)GetAgentByInternalId(AgentId.Hud);
+        public AgentHudLayout* GetAgentHudLayout() => (AgentHudLayout*)GetAgentByInternalId(AgentId.HudLayout);
+        public AgentTeleport* GetAgentTeleport() => (AgentTeleport*)GetAgentByInternalId(AgentId.Teleport);
     }
 
     public enum AgentId : uint {
