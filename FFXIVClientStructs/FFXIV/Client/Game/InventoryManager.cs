@@ -11,6 +11,12 @@ namespace FFXIVClientStructs.FFXIV.Client.Game {
         [MemberFunction("E8 ?? ?? ?? ?? 8B 55 BB")]
         public partial InventoryContainer* GetInventoryContainer(InventoryType inventoryType);
 
+        [MemberFunction("E8 ?? ?? ?? ?? 8B 53 F1")]
+        public partial int GetInventoryItemCount(uint itemId, bool isHq = false, bool checkEquipped = true, bool checkArmory = true, short minCollectability = 0);
+
+        [MemberFunction("E8 ?? ?? ?? ?? 41 8B 2C 24")]
+        public partial int GetItemCountInContainer(uint itemId, InventoryType inventoryType, bool isHq = false, short minCollectability = 0);
+
         [StaticAddress("BA ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B F8 48 85 C0")]
         public static partial InventoryManager* Instance();
     }
