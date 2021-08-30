@@ -31,10 +31,14 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
         [FieldOffset(0x2B0)] public ulong unk2B0;
         [FieldOffset(0x2B8)] public ulong unk2B8;
         [FieldOffset(0x2C0)] public ulong unk2C0;
-        [FieldOffset(0x2C8)] public ulong unk2C8;
-        [FieldOffset(0x2D0)] public ulong unk2D0;
-        [FieldOffset(0x2D8)] public ulong unk2D8;
-        [FieldOffset(0x2E0)] public ulong unk2E0;
+        [FieldOffset(0x2C8)] public uint GatheredItemId1;
+        [FieldOffset(0x2CC)] public uint GatheredItemId2;
+        [FieldOffset(0x2D0)] public uint GatheredItemId3;
+        [FieldOffset(0x2D4)] public uint GatheredItemId4;
+        [FieldOffset(0x2D8)] public uint GatheredItemId5;
+        [FieldOffset(0x2DC)] public uint GatheredItemId6;
+        [FieldOffset(0x2E0)] public uint GatheredItemId7;
+        [FieldOffset(0x2E4)] public uint GatheredItemId8;
         [FieldOffset(0x2E8)] public ulong unk2E8;
         [FieldOffset(0x2F0)] public ulong unk2F0;
         [FieldOffset(0x2F8)] public int unk2F8;
