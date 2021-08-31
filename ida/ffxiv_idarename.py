@@ -320,6 +320,7 @@ if api is None:
         from ghidra.program.model.data import CategoryPath  # noqa
         from ghidra.program.model.data import StructureDataType  # noqa
         from ghidra.program.model.data import PointerDataType  # noqa
+        from ghidra.program.model.symbol import SourceType  # noqa
     except ImportError:
         print("Warning: Unable to load Ghidra")
     else:
@@ -350,7 +351,7 @@ if api is None:
                 return sym.getName(True)
 
             def set_addr_name(self, ea, name):
-                createLabel(toAddr(ea), name, True)
+                createLabel(toAddr(ea), name, True, SourceType.ANALYSIS)
                 return True
                 # return createLabel(toAddr(ea), name, True).checkIsValid()
 
