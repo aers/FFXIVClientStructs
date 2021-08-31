@@ -1,8 +1,12 @@
 ﻿using System.Runtime.InteropServices;
+using FFXIVClientStructs.STD;
 
 namespace FFXIVClientStructs.FFXIV.Client.System.Resource.Handle
 {
-    public enum ResourceCategories
+    using TypeMap = StdMap<uint, ResourceHandlePtr>;
+    using CategoryMap = StdMap<uint, TypeMapPtr>;
+
+    public enum ResourceCategory
     {
         Common = 0,
         BgCommon = 1,
@@ -22,54 +26,26 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Resource.Handle
         MaxCount = 20
         
     }
+
+    public unsafe struct TypeMapPtr
+    {
+        public TypeMap* Address;
+    }
+
+    public unsafe struct ResourceHandlePtr
+    {
+        public ResourceHandle* Address;
+    }
+
     [StructLayout(LayoutKind.Explicit, Size=0xC80)]
     public unsafe struct ResourceGraph
     {
         [StructLayout(LayoutKind.Explicit, Size=0xA0)]
         public struct CategoryContainer
         {
-            [FieldOffset(0x0)] public fixed byte CategoryMaps[0x8 * 0x14];
-        }
+            [FieldOffset(0x0)] public fixed ulong CategoryMaps[0x14];
 
-        // todo: generic std::map
-        // maps types within a category to their type map
-        [StructLayout(LayoutKind.Explicit, Size = 0x10)]
-        public unsafe struct CategoryMap
-        {
-            [StructLayout(LayoutKind.Explicit, Size=0x30)]
-            public unsafe struct CategoryNode
-            {
-                [FieldOffset(0x0)] public CategoryNode* Left;
-                [FieldOffset(0x8)] public CategoryNode* Parent;
-                [FieldOffset(0x10)] public CategoryNode* Right;
-                [FieldOffset(0x16)] public byte Color;
-                [FieldOffset(0x17)] public byte IsNil;
-                [FieldOffset(0x20)] public int Type;
-                [FieldOffset(0x28)] public TypeMap* TypeMap;
-            }
-
-            [FieldOffset(0x0)] public CategoryNode* Root;
-            [FieldOffset(0x8)] public long Size;
-        }
-        
-        // maps hashes to resource handles
-        [StructLayout(LayoutKind.Explicit, Size = 0x10)]
-        public unsafe struct TypeMap
-        {
-            [StructLayout(LayoutKind.Explicit, Size=0x30)]
-            public unsafe struct TypeNode
-            {
-                [FieldOffset(0x0)] public TypeNode* Left;
-                [FieldOffset(0x8)] public TypeNode* Parent;
-                [FieldOffset(0x10)] public TypeNode* Right;
-                [FieldOffset(0x16)] public byte Color;
-                [FieldOffset(0x17)] public byte IsNil;
-                [FieldOffset(0x20)] public int Hash;
-                [FieldOffset(0x28)] public ResourceHandle* Handle;
-            }
-
-            [FieldOffset(0x0)] public TypeNode* Root;
-            [FieldOffset(0x8)] public long Size;
+            [FieldOffset(0x0)] public CategoryMap* MainMap;
         }
 
         [FieldOffset(0x0)] public fixed byte ContainerArray[0xA0 * 0x14];
