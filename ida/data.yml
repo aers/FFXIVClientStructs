@@ -614,6 +614,12 @@ classes:
   Client::UI::Agent::AgentFreeCompanyChest:
     inherits_from: Client::UI::Agent::AgentInterface
     vtbl: 0x14169F1D0
+  Client::UI::Agent::AgentExplorationInterface:
+    inherits_from: Client::UI::Agent::AgentInterface
+    vtbl: 0x14169F860
+  Client::UI::Agent::AgentAirShipExploration:
+    inherits_from: Client::UI::Agent::AgentExplorationInterface
+    vtbl: 0x14169F920
   Client::Graphics::Animation::IAnimationControllerListener:
     vtbl: 0x1416A47D8
   Client::Graphics::Animation::PartialSkeleton:
@@ -1148,6 +1154,7 @@ classes:
       38: Draw
       40: LoadUldResourceHandle
       43: OnSetup
+      45: OnRefresh
       46: OnUpdate
       56: OnMouseOver
       57: OnMouseOut
@@ -2116,6 +2123,9 @@ classes:
   Client::UI::AddonContactList:
     inherits_from: Component::GUI::AtkUnitBase
     vtbl: 0x1417C02E8
+  Client::UI::AddonAirShipExploration:
+    inherits_from: Component::GUI::AtkUnitBase
+    vtbl: 0x1417C46F0
   Client::UI::AddonItemSearchResult:
     inherits_from: Component::GUI::AtkUnitBase
     vtbl: 0x1417BCC00
