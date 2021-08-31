@@ -10,5 +10,6 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Resource.Handle
     [StructLayout(LayoutKind.Explicit, Size = 0x1728)]
     public unsafe struct ResourceManager
     {
+        [FieldOffset(0x8)] public ResourceGraph* ResourceGraph;
     }
 }
