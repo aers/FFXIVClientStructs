@@ -14,5 +14,6 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Resource.Handle
         [FieldOffset(0x0C)] public uint FileType; // "txt" "uld" etc from the header
         [FieldOffset(0x10)] public uint Id;
         [FieldOffset(0x48)] public FFXIVClientStructs.STD.String FileName; // std::string
+        [FieldOffset(0xAC)] public uint RefCount;
     }
 }
