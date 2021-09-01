@@ -258,6 +258,7 @@ classes:
     funcs:
       0x1401B1F40: ctor
       0x1401B2430: CreateSingleton
+      0x1401B2530: Update
       0x1401B2910: GetResourceAsync
       0x1401B2B40: GetResourceSync
       0x1401B7320: Initialize
@@ -423,6 +424,7 @@ classes:
       0x140093460: TaskRenderManagerUpdate
       0x140093480: TaskRenderManagerRender
       0x140093520: TaskUpdateLayoutWorld
+      0x140093540: TaskResourceManagerUpdate
   Component::Exd::ExdModule:
     vtbl: 0x1416BF5D8
     funcs:
