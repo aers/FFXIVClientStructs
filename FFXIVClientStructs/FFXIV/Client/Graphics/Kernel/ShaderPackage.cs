@@ -1,4 +1,5 @@
 ﻿using System.Runtime.InteropServices;
+using FFXIVClientStructs.STD;
 
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Kernel
 {
@@ -24,9 +25,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Kernel
         }
 
         [FieldOffset(0x00)] public ReferencedClassBase ReferencedClassBase;
-        [FieldOffset(0x10)] public CVector<VertexShader> VertexShaders; // std::vector<VertexShader*>
-        [FieldOffset(0x30)] public CVector<PixelShader> PixelShaders; // std::vector<PixelShader*>
-        [FieldOffset(0x50)] public CVector<ShaderNode> ShaderNodes; // std::vector<ShaderNode*>
+        [FieldOffset(0x10)] public CVector<Pointer<VertexShader>> VertexShaders; // std::vector<VertexShader*>
+        [FieldOffset(0x30)] public CVector<Pointer<PixelShader>> PixelShaders; // std::vector<PixelShader*>
+        [FieldOffset(0x50)] public CVector<Pointer<ShaderNode>> ShaderNodes; // std::vector<ShaderNode*>
 
         [FieldOffset(0x70)] public ushort MaterialConstantBufferSize;
 

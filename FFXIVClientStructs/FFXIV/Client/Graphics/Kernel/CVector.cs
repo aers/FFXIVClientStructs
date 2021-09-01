@@ -11,6 +11,6 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Kernel
     public unsafe struct CVector<T> where T : unmanaged
     {
         public void* vtbl;
-        public PointerVector<T> Vector;
+        public StdVector<T> Vector;
     }
 }

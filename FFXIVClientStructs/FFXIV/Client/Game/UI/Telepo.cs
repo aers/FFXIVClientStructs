@@ -10,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI {
     [StructLayout(LayoutKind.Explicit, Size = 0x58)]
     public unsafe partial struct Telepo {
         [FieldOffset(0x00)] public void* vtbl;
-        [FieldOffset(0x10)] public Vector<TeleportInfo> TeleportList;
+        [FieldOffset(0x10)] public StdVector<TeleportInfo> TeleportList;
         [FieldOffset(0x28)] public SelectUseTicketInvoker UseTicketInvoker;
 
         [StaticAddress("48 8D 0D ?? ?? ?? ?? 48 8B 12")]

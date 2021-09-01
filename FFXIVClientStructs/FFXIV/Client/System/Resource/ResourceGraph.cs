@@ -1,10 +1,10 @@
 ﻿using System.Runtime.InteropServices;
+using FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 using FFXIVClientStructs.STD;
 
-namespace FFXIVClientStructs.FFXIV.Client.System.Resource.Handle
+namespace FFXIVClientStructs.FFXIV.Client.System.Resource
 {
-    using TypeMap = StdMap<uint, ResourceHandlePtr>;
-    using CategoryMap = StdMap<uint, TypeMapPtr>;
+    using CategoryMap = StdMap<uint, Pointer<StdMap<uint, Pointer<ResourceHandle>>>>;
 
     public enum ResourceCategory
     {
@@ -24,17 +24,6 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Resource.Handle
         SqpackTest = 18,
         Debug = 19,
         MaxCount = 20
-        
-    }
-
-    public unsafe struct TypeMapPtr
-    {
-        public TypeMap* Address;
-    }
-
-    public unsafe struct ResourceHandlePtr
-    {
-        public ResourceHandle* Address;
     }
 
     [StructLayout(LayoutKind.Explicit, Size=0xC80)]

@@ -6,11 +6,11 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Physics
     [StructLayout(LayoutKind.Explicit, Size = 0x78)]
     public struct BoneSimulators
     {
-        [FieldOffset(0x00)] public PointerVector<BoneSimulator> BoneSimulator_1;
-        [FieldOffset(0x18)] public PointerVector<BoneSimulator> BoneSimulator_2;
-        [FieldOffset(0x30)] public PointerVector<BoneSimulator> BoneSimulator_3;
-        [FieldOffset(0x48)] public PointerVector<BoneSimulator> BoneSimulator_4;
-        [FieldOffset(0x60)] public PointerVector<BoneSimulator> BoneSimulator_5;
+        [FieldOffset(0x00)] public StdVector<Pointer<BoneSimulator>> BoneSimulator_1;
+        [FieldOffset(0x18)] public StdVector<Pointer<BoneSimulator>> BoneSimulator_2;
+        [FieldOffset(0x30)] public StdVector<Pointer<BoneSimulator>> BoneSimulator_3;
+        [FieldOffset(0x48)] public StdVector<Pointer<BoneSimulator>> BoneSimulator_4;
+        [FieldOffset(0x60)] public StdVector<Pointer<BoneSimulator>> BoneSimulator_5;
     }
 
     // Client::Graphics::Physics::BonePhysicsModule
