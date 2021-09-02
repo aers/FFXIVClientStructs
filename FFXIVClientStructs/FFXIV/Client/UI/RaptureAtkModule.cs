@@ -1,4 +1,5 @@
 ﻿using System.Runtime.InteropServices;
+using FFXIVClientStructs.FFXIV.Client.Game.Object;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
@@ -16,7 +17,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
         [StructLayout(LayoutKind.Explicit, Size = 0x248)]
         public struct NamePlateInfo
         {
-            [FieldOffset(0x00)] public int ActorID;
+            [FieldOffset(0x00)] public GameObjectID ObjectID;
             [FieldOffset(0x30)] public Utf8String Name;
             [FieldOffset(0x98)] public Utf8String FcName;
             [FieldOffset(0x100)] public Utf8String Title;

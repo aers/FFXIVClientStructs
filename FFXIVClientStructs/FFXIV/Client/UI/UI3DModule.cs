@@ -77,14 +77,6 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
             // rest unknown
         }
 
-        // unk name
-        [StructLayout(LayoutKind.Explicit, Size = 0x8)]
-        public struct ObjectIdStruct
-        {
-            [FieldOffset(0x0)] public uint ObjectId;
-            [FieldOffset(0x4)] public byte Type; // 0x0 - normal, 0x1 - uses Data ID instead of ObjectID, 0x4 - companion/pet/etc of ObjectId
-        }
-
         [FieldOffset(0x10)] public UIModule* UIModule;
         [FieldOffset(0x20)] public fixed byte ObjectInfoArray[424 * 0x60]; // array of Client::UI::UI3DModule::ObjectInfo
         [FieldOffset(0x9F20)] public fixed byte SortedObjectInfoPointerArray[424 * 0x8]; // array of Client::UI::UI3DModule::ObjectInfo*, distance sorted(?)
@@ -92,7 +84,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
         [FieldOffset(0xAC68)] public fixed byte NamePlateObjectInfoPointerArray[50 * 0x8]; // array of Client::UI::UI3DModule::ObjectInfo* for current nameplates
         [FieldOffset(0xADF8)] public int NamePlateObjectInfoCount;
         // [FieldOffset(0xAE00)] public Bit NamePlateBits; // Client::System::Data::Bit
-        [FieldOffset(0xAE20)] public fixed byte NamePlateObjectIdList[50 * 0x8]; // array of ObjectIdStruct, ObjectId = E0000000 means it is empty, matches the order of nameplate addon objects
+        [FieldOffset(0xAE20)] public fixed byte NamePlateObjectIdList[50 * 0x8]; // array of GameObjectID (see GameObject.cs), ObjectId = E0000000 means it is empty, matches the order of nameplate addon objects
         [FieldOffset(0xAFB0)] public fixed byte NamePlateObjectIdList_2[50 * 0x8]; // seems to contain same data as above, but may be for working data
         [FieldOffset(0xB140)] public fixed byte CharacterObjectInfoPointerArray[50 * 0x8]; // array of Client::UI::UI3DModule::ObjectInfo* for Characters on screen (players, attackable NPCs, etc)
         [FieldOffset(0xB2D0)] public int CharacterObjectInfoCount;

@@ -5,6 +5,18 @@ using FFXIVClientStructs.FFXIV.Client.Graphics;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Object
 {
+    // if (ObjectID == 0xE0000000)
+    //   if (Companion && Companion.HasOwner && Companion.ObjectID == 0xE0000000) ObjectID = Parent.ObjectID, Type = 4
+    //   if (DataID == 0 || (ObjectIndex >= 200 && ObjectIndex < 244)) ObjectID = ObjectIndex, Type = 2
+    //   if (DataID != 0) ObjectID = DataID, Type = 1
+    // else ObjectID = ObjectID, Type = 0
+    [StructLayout(LayoutKind.Explicit, Size = 0x8)]
+    public struct GameObjectID
+    {
+        [FieldOffset(0x0)] public uint ObjectID;
+        [FieldOffset(0x4)] public byte Type;
+    }
+    
     // Client::Game::Object::GameObject
     // base class for game objects in the world
 
@@ -17,6 +29,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Object
         [FieldOffset(0x74)] public uint ObjectID;
         [FieldOffset(0x80)] public uint DataID;
         [FieldOffset(0x84)] public uint OwnerID;
+        [FieldOffset(0x88)] public ushort ObjectIndex; // index in object table
         [FieldOffset(0x8C)] public byte ObjectKind;
         [FieldOffset(0x8D)] public byte SubKind;
         [FieldOffset(0x90)] public byte YalmDistanceFromPlayerX;
@@ -30,7 +43,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Object
         [FieldOffset(0x148)] public LuaActor* LuaActor;
         
         [VirtualFunction(2)]
-        public partial uint GetObjectID();
+        public partial GameObjectID GetObjectID();
 
         [VirtualFunction(3)]
         public partial byte GetObjectKind();
