@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
@@ -25,6 +26,7 @@ namespace FFXIVClientStructs
             this.Module = module;
             this.Is32BitProcess = !Environment.Is64BitProcess;
             this.IsCopy = doCopy;
+            this.OwnsCopy = true;
 
             // Limit the search space to .text section.
             this.SetupSearchSpace(module);
@@ -33,10 +35,26 @@ namespace FFXIVClientStructs
                 this.SetupCopiedSegments();
         }
 
+        public SigScanner(ProcessModule module, IntPtr moduleCopy)
+        {
+            this.Module = module;
+            this.Is32BitProcess = !Environment.Is64BitProcess;
+            this.IsCopy = true;
+            this.OwnsCopy = false;
+
+            // Limit the search space to .text section.
+            this.SetupSearchSpace(module);
+
+            this.moduleCopyPtr = moduleCopy;
+            this.moduleCopyOffset = this.moduleCopyPtr.ToInt64() - this.Module.BaseAddress.ToInt64();
+        }
+
         /// <summary>
         /// Gets a value indicating whether or not the search on this module is performed on a copy.
         /// </summary>
         public bool IsCopy { get; }
+        
+        public bool OwnsCopy { get; }
 
         /// <summary>
         /// Gets a value indicating whether or not the ProcessModule is 32-bit.
@@ -211,7 +229,8 @@ namespace FFXIVClientStructs
         /// </summary>
         public void Dispose()
         {
-            Marshal.FreeHGlobal(this.moduleCopyPtr);
+            if (this.OwnsCopy)
+                Marshal.FreeHGlobal(this.moduleCopyPtr);
         }
 
         /// <summary>

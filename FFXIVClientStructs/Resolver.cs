@@ -22,5 +22,18 @@ namespace FFXIVClientStructs
 
             Initialized = true;
         }
+
+        public static void Initialize(IntPtr moduleCopy)
+        {
+            if (Initialized) return;
+
+            var module = Process.GetCurrentProcess().MainModule;
+            var scanner = new SigScanner(module, moduleCopy);
+
+            InitializeMemberFunctions(scanner);
+            InitializeStaticAddresses(scanner);
+
+            Initialized = true;
+        }
     }
 }
