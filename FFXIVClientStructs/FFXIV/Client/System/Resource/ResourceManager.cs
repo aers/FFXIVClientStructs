@@ -14,7 +14,7 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Resource
     {
         [FieldOffset(0x8)] public ResourceGraph* ResourceGraph;
 
-        [MemberFunction("44 8B 12 4D 8B D8 41 0F B7 C2 49 C1 EA 18")]
+        [MemberFunction("49 8B D5 E8 ?? ?? ?? ?? 48 8B D8")]
         public partial ResourceHandle* FindResourceHandle(ResourceCategory* category, uint* type, uint* hash);
 
         [MemberFunction("E8 ?? ?? 00 00 48 8D 8F ?? ?? 00 00 48 89 87 ?? ?? 00 00")]
