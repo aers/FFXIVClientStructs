@@ -1,11 +1,12 @@
 ﻿using System.Runtime.InteropServices;
+using FFXIVClientStructs.Common;
 
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Kernel
 {
     // Client::Graphics::Kernel::Device
     //   Client::Graphics::Singleton
     [StructLayout(LayoutKind.Explicit, Size = 0x210)]
-    public unsafe struct Device
+    public unsafe partial struct Device
     {
         [FieldOffset(0x8)] public void* ContextArray; // Client::Graphics::Kernel::Context array
         [FieldOffset(0x10)] public void* ImmediateContext; // Client::Graphics::Kernel::Device::ImmediateContext
@@ -15,5 +16,8 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Kernel
         [FieldOffset(0x98)] public void* DXGIFactory; // IDXGIFactory1
         [FieldOffset(0xA8)] public void* D3D11Device; // ID3D11Device1
         [FieldOffset(0xB0)] public void* D3D11DeviceContext; // ID3D11DeviceContext1
+
+        [StaticAddress("48 8B 1D ?? ?? ?? ?? 45 8B D1", isPointer: true)]
+        public static partial Device* Instance();
     }
 }
