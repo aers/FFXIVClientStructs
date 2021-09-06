@@ -2,6 +2,7 @@
 using FFXIVClientStructs.Common;
 using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 using FFXIVClientStructs.FFXIV.Client.UI.Misc;
+using FFXIVClientStructs.FFXIV.Client.UI.Shell;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI
 {
@@ -35,6 +36,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
         [VirtualFunction(7)]
         public partial RaptureAtkModule* GetRaptureAtkModule();
         
+        [VirtualFunction(9)]
+        public partial RaptureShellModule* GetRaptureShellModule();
+
         [VirtualFunction(10)]
         public partial PronounModule* GetPronounModule();
 
