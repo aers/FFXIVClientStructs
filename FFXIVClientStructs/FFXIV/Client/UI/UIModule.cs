@@ -41,6 +41,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
         [VirtualFunction(11)]
         public partial RaptureLogModule* GetRaptureLogModule();
 
+        [VirtualFunction(12)]
+        public partial RaptureMacroModule* GetRaptureMacroModule();
+
         [VirtualFunction(34)]
         public partial AgentModule* GetAgentModule();
 
