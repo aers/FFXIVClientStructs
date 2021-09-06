@@ -376,7 +376,7 @@ if api is None:
                 if any(current_func_name.startswith(name) for name in parent_class_names):
                     return ""
 
-                if any(current_func_name.startswith(prefix) for prefix in ("FUN_", "LAB_", "SUB_", "LOC_")):
+                if any(current_func_name.startswith(prefix) for prefix in ("FUN_", "LAB_", "SUB_", "LOC_", "DAT_")):
                     return "{0}.{1}".format(class_name, proposed_func_name)
 
                 if current_func_name == "_purecall":
@@ -392,7 +392,7 @@ if api is None:
                 if current_func_name == proposed_qualified_func_name:
                     return ""
 
-                if any(current_func_name.startswith(prefix) for prefix in ("FUN_", "LAB_", "SUB_", "LOC_")):
+                if any(current_func_name.startswith(prefix) for prefix in ("FUN_", "LAB_", "SUB_", "LOC_", "DAT_")):
                     return proposed_qualified_func_name
 
                 return None
