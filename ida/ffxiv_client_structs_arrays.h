@@ -211,8 +211,8 @@ struct Client::Game::UI::Telepo::SelectUseTicketInvoker;
 struct Group::Buff /* Size=0xC */
 {
     /* 0x0 */ unsigned __int16 StatusID;
-    /* 0x2 */ byte Param;
-    /* 0x3 */ byte StackCount;
+    /* 0x2 */ byte StackCount;
+    /* 0x3 */ byte Param;
     /* 0x4 */ float RemainingTime;
     /* 0x8 */ unsigned __int32 SourceID;
 };
