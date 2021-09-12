@@ -264,7 +264,15 @@ classes:
       0x1401B7320: Initialize
   Client::Game::UI::UIState:
     funcs:
+      0x1407E2E00: Initialize
       0x1407F3310: ctor
+  Client::Game::UI::PlayerState:
+    funcs:
+      0x140789110: SetCharacterName
+      0x14078CA30: Initialize
+      0x1407F2BF0: ctor
+  Client::Game::UI::Revive:
+    vtbl: 0x1416E6390
   Client::Game::UI::Buddy:
     funcs:
       0x1407C2BF0: ctor
@@ -1935,13 +1943,16 @@ classes:
     vtbl: 0x1416E6368
     vfuncs:
       0: dtor
+  Client::UI::Misc::RaptureHotbarModule::ClearCallback:
+    vtbl: 0x1416E6370
   Client::Game::UI::Hotbar:
+    inherits_from: Client::UI::Misc::RaptureHotbarModule::ClearCallback
     vtbl: 0x1416E63B0
     vfuncs:
       0: dtor
     funcs:
       0x1407E09B0: IsActionUnlocked
-      # 0x1407F3310: ctor # this is probably just the ctor for a container
+      0x1407E22A0: CancelCast
   Client::Game::UI::MarkingController:
     vtbl: 0x1416E6350
     vfuncs:
