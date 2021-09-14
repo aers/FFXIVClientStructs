@@ -1006,8 +1006,12 @@ classes:
     vtbl: 0x1416BFE78
     funcs:
       0x140497D50: ctor
-      0x1404A28D0: IsActorInViewRange
-      0x1404A1B90: GetCurrentTargetId
+      0x1404A1A70: GetHardTargetId
+      0x1404A1A90: GetHardTargetId2
+      0x1404A1B90: GetTargetId
+      0x1404A1C10: GetTargetObject
+      0x1404A1CB0: GetTargetObject2
+      0x1404A28D0: IsObjectInViewRange
   Client::System::Input::InputData:
     vtbl: 0x1416C00C0
     funcs:
