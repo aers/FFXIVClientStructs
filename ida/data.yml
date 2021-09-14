@@ -2028,6 +2028,11 @@ classes:
     vtbl: 0x1416EADE0
     funcs:
       0x1408D10D0: ctor
+  Client::UI::Agent::AgentRevive:
+    inherits_from: Client::UI::Agent::AgentInterface
+    vtbl: 0x1416EAD70
+    funcs:
+      0x1408CF7F0: ctor
   Client::UI::Agent::AgentHudLayout:
     inherits_from: Client::UI::Agent::AgentInterface
     vtbl: 0x1416EB250
