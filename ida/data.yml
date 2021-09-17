@@ -2033,6 +2033,11 @@ classes:
     vtbl: 0x1416EAD70
     funcs:
       0x1408CF7F0: ctor
+  Client::UI::Agent::AgentConfigSystem:
+    inherits_from: Client::UI::Agent::AgentInterface
+    vtbl: 0x14169DBD8
+    funcs:
+      0x14023AAD0: ctor
   Client::UI::Agent::AgentHudLayout:
     inherits_from: Client::UI::Agent::AgentInterface
     vtbl: 0x1416EB250
@@ -2154,6 +2159,9 @@ classes:
     funcs:
       0x140D129D0: ctor
       0x140D136D0: UpdateResult
+  Client::UI::AddonConfigSystem:
+    inherits_from: Component::GUI::AtkUnitBase
+    vtbl: 0x1417C8E10
   Client::UI::Addon_CharaSelectWorldServer:
     inherits_from: Component::GUI::AtkUnitBase
     vtbl: 0x1417CECF8
