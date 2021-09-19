@@ -1,4 +1,5 @@
-﻿using System.Runtime.InteropServices;
+﻿using System.Drawing;
+using System.Runtime.InteropServices;
 
 namespace FFXIVClientStructs.FFXIV.Client.Graphics
 {
@@ -9,5 +10,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics
         [FieldOffset(0x4)] public float Top;
         [FieldOffset(0x8)] public float Right;
         [FieldOffset(0xC)] public float Bottom;
+
+        public static implicit operator RectangleF(Rectangle rect) {
+            return new RectangleF(rect.Left, rect.Top, rect.Right - rect.Left, rect.Bottom - rect.Top);
+        }
     }
 }

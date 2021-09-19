@@ -1,4 +1,5 @@
-﻿using System.Runtime.InteropServices;
+﻿using System.Numerics;
+using System.Runtime.InteropServices;
 using FFXIVClientStructs.STD;
 
 namespace FFXIVClientStructs.FFXIV.Client.Graphics
@@ -24,5 +25,13 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics
         [NoExport] [FieldOffset(0x34)] public float Matrix_4_2;
         [NoExport] [FieldOffset(0x38)] public float Matrix_4_3;
         [NoExport] [FieldOffset(0x3C)] public float Matrix_4_4;
+
+        public static implicit operator Matrix4x4(Matrix44 matrix) {
+            return new Matrix4x4(
+                matrix.Matrix_1_1, matrix.Matrix_1_2, matrix.Matrix_1_3, matrix.Matrix_1_4,
+                matrix.Matrix_2_1, matrix.Matrix_2_2, matrix.Matrix_2_3, matrix.Matrix_2_4,
+                matrix.Matrix_3_1, matrix.Matrix_3_2, matrix.Matrix_3_3, matrix.Matrix_3_4,
+                matrix.Matrix_4_1, matrix.Matrix_4_2, matrix.Matrix_4_3, matrix.Matrix_4_4);
+        }
     }
 }

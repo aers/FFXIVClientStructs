@@ -1,4 +1,5 @@
 ﻿using System.Runtime.InteropServices;
+using NumVector3 = System.Numerics.Vector3;
 
 namespace FFXIVClientStructs.FFXIV.Client.Graphics
 {
@@ -9,5 +10,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics
         [FieldOffset(0x4)] public float Y;
         [FieldOffset(0x8)] public float Z;
         [FieldOffset(0xC)] private readonly uint _padC;
+		
+		public static implicit operator NumVector3(Vector3 vector) {
+			return new NumVector3(vector.X, vector.Y, vector.Z);
+		}
     }
 }
