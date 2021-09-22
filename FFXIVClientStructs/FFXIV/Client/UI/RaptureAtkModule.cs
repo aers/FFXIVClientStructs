@@ -1,4 +1,5 @@
 ﻿using System.Runtime.InteropServices;
+using FFXIVClientStructs.Common;
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Component.GUI;
@@ -9,10 +10,13 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
     //   Component::GUI::AtkModule
     //     Component::GUI::AtkModuleInterface
     [StructLayout(LayoutKind.Explicit, Size = 0x27718)]
-    public struct RaptureAtkModule
+    public unsafe partial struct RaptureAtkModule
     {
         [FieldOffset(0x0)] public AtkModule AtkModule;
         [FieldOffset(0x1A378)] public NamePlateInfo NamePlateInfoArray; // 0-50, &NamePlateInfoArray[i]
+
+        [MemberFunction("E8 ?? ?? ?? ?? 0F B6 44 24 ?? 48 89 9F")]
+        public partial bool ChangeUiMode(uint uiMode);
 
         [StructLayout(LayoutKind.Explicit, Size = 0x248)]
         public struct NamePlateInfo
