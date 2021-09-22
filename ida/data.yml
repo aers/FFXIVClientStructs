@@ -440,6 +440,17 @@ classes:
       0x140478AB0: GetEntryByIndex
   Component::Excel::ExcelModuleInterface:
     vtbl: 0x1416765A8
+    vfuncs:
+      1: GetSheetByIndex
+      2: GetSheetByName
+  Component::Excel::ExcelModule:
+    vtbl: 0x1419B1D00
+    vfuncs:
+      1: GetSheetByIndex
+      2: GetSheetByName
+      3: LoadSheet
+    funcs:
+      0x1416061D0: ctor
   Client::System::Input::TextService:
     inherits_from: Client::System::Input::TextServiceInterface
     vtbl: 0x141676C48
