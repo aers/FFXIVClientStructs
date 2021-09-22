@@ -38,6 +38,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Object
         [FieldOffset(0xA0)] public Vector3 Position;
         [FieldOffset(0xB0)] public float Rotation;
         [FieldOffset(0xC0)] public float HitboxRadius;
+        [FieldOffset(0xE8)] public uint FateId;
         [FieldOffset(0xF0)] public void* DrawObject;
         [FieldOffset(0x104)] public int RenderFlags;
         [FieldOffset(0x148)] public LuaActor* LuaActor;
@@ -54,11 +55,23 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Object
         [VirtualFunction(7)]
         public partial byte* GetName();
 
+        [VirtualFunction(8)]
+        public partial float GetRadius();
+
+        [VirtualFunction(9)]
+        public partial float GetHeight();
+
         [VirtualFunction(27)]
         public partial void* GetDrawObject();
 
         [VirtualFunction(50)]
         public partial uint GetNpcID();
+
+        [VirtualFunction(59)]
+        public partial bool IsDead();
+
+        [VirtualFunction(63)]
+        public partial bool IsCharacter();
     }
   
     public enum ObjectKind : byte {
