@@ -437,6 +437,7 @@ classes:
     vtbl: 0x1416BF5D8
     funcs:
       0x140478440: ctor
+      0x140478A30: GetSheetRowById
       0x140478AB0: GetEntryByIndex
   Component::Excel::ExcelModuleInterface:
     vtbl: 0x1416765A8
