@@ -17,9 +17,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Gauge {
 
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct ScholarGauge {
-        [FieldOffset(0x08)] public short SeraphTimer;
         [FieldOffset(0x0A)] public byte Aetherflow;
         [FieldOffset(0x0B)] public byte FairyGauge;
+        [FieldOffset(0x0C)] public short SeraphTimer;
         [FieldOffset(0x0E)] public byte DismissedFairy;
     }
 
