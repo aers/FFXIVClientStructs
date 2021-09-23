@@ -3,6 +3,8 @@ using FFXIVClientStructs.Common;
 using FFXIVClientStructs.FFXIV.Client.System.Configuration;
 using FFXIVClientStructs.FFXIV.Client.UI;
 using FFXIVClientStructs.FFXIV.Common.Lua;
+using FFXIVClientStructs.FFXIV.Component.Excel;
+using FFXIVClientStructs.FFXIV.Component.Exd;
 
 namespace FFXIVClientStructs.FFXIV.Client.System.Framework
 {
@@ -14,6 +16,10 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Framework
     public unsafe partial struct Framework
     {
         [FieldOffset(0x10)] public SystemConfig SystemConfig;
+        
+        [FieldOffset(0x29C8)] public ExcelModuleInterface* ExcelModuleInterface;
+        [FieldOffset(0x29D0)] public ExdModule* ExdModule;
+
         [FieldOffset(0x29F8)] public UIModule* UIModule;
         [FieldOffset(0x2A60)] public LuaState LuaState;
 

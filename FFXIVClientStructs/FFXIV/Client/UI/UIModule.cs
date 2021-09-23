@@ -3,6 +3,7 @@ using FFXIVClientStructs.Common;
 using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 using FFXIVClientStructs.FFXIV.Client.UI.Misc;
 using FFXIVClientStructs.FFXIV.Client.UI.Shell;
+using FFXIVClientStructs.FFXIV.Component.Excel;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI
 {
@@ -29,6 +30,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
             dq 0                                    ; +0x50
             and so on...
          */
+
+        [VirtualFunction(5)]
+        public partial ExcelModuleInterface* GetExcelModule();
 
         [VirtualFunction(6)]
         public partial RaptureTextModule* GetRaptureTextModule();
