@@ -10,10 +10,11 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
     public unsafe struct AddonSelectIconString
     {
         [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
-        [FieldOffset(0x238)] public EventThing SelectIconStringThing;
+        [FieldOffset(0x238)] public PopupMenuDerive PopupMenu;
 
+        // See AddonSelectString.PopupMenuDerive
         [StructLayout(LayoutKind.Explicit, Size = 0x68)]
-        public struct EventThing
+        public struct PopupMenuDerive
         {
             [FieldOffset(0x0)] public void* vtbl;
             [FieldOffset(0x8)] public AtkStage* AtkStage;
