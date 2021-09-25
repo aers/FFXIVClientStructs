@@ -18,7 +18,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
         {
             [FieldOffset(0x0)] public void* vtbl;
             [FieldOffset(0x8)] public AtkStage* AtkStage;
-            [FieldOffset(0x38)] public AtkComponentList* AtkComponentList;
+            [FieldOffset(0x38)] public AtkComponentList* List;
             [FieldOffset(0x40)] public AddonSelectIconString* Addon;
         }
     }
