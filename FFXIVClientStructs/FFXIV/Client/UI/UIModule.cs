@@ -1,5 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 using FFXIVClientStructs.Common;
+using FFXIVClientStructs.FFXIV.Client.Game;
 using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 using FFXIVClientStructs.FFXIV.Client.UI.Misc;
 using FFXIVClientStructs.FFXIV.Client.UI.Shell;
@@ -52,15 +53,93 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
         [VirtualFunction(12)]
         public partial RaptureMacroModule* GetRaptureMacroModule();
 
+        [VirtualFunction(13)]
+        public partial void* GetRaptureHotbarModule();
+
+        [VirtualFunction(14)]
+        public partial void* GetRaptureGearsetModule();
+
+        [VirtualFunction(15)]
+        public partial void* GetAcquaintanceModule();
+
+        [VirtualFunction(16)]
+        public partial void* GetItemOrderModule();
+
+        [VirtualFunction(17)]
+        public partial void* GetItemFinderModule();
+
         [VirtualFunction(18)]
         public partial ConfigModule* GetConfigModule();
+
+        [VirtualFunction(19)]
+        public partial void* GetAddonConfig();
+
+        [VirtualFunction(20)]
+        public partial void* GetUiSavePackModule();
+
+        [VirtualFunction(21)]
+        public partial void* GetLetterDataModule();
+
+        [VirtualFunction(22)]
+        public partial void* GetRetainerTaskDataModule();
+
+        [VirtualFunction(23)]
+        public partial void* GetFlagStatusModule();
+
+        [VirtualFunction(29)]
+        public partial void* GetRaptureTeleportHistory();
 
         [VirtualFunction(34)]
         public partial AgentModule* GetAgentModule();
 
         [VirtualFunction(36)]
         public partial UI3DModule* GetUI3DModule();
+
+        [VirtualFunction(53)]
+        public partial void* GetUIInputData();
+
+        [VirtualFunction(54)]
+        public partial void* GetUIInputModule();
         
+        [VirtualFunction(56)]
+        public partial void* GetLogFilterConfig();
+        
+        [VirtualFunction(148)]
+        public partial void ShowText(int position, string text, uint iconOrCheck1 = 0, bool playSound = true, uint iconOrCheck2 = 0, bool alsoPlaySound = true);
+
+        [VirtualFunction(149)]
+        public partial void ShowTextChain(int chain, int hqChain = 0);
+
+        [VirtualFunction(150)]
+        public partial void ShowWideText(string text, int layer = 0, bool isTop = true, bool isFast = false, uint logMessageId = 0);
+
+        [VirtualFunction(151)]
+        public partial void ShowPoisonText(string text, int layer = 0);
+
+        [VirtualFunction(152)]
+        public partial void ShowErrorText(string text, bool forceVisible = true);
+
+        [VirtualFunction(153)]
+        public partial void ShowTextClassChange(uint classJobId);
+
+        [VirtualFunction(154)]
+        public partial void ShowGetAction(ActionType actionType, uint actionId);
+
+        [VirtualFunction(155)]
+        public partial void ShowLocationTitle(int territoryId, bool zoomAnim, bool restartAnim, int* language /*-1 = client lang*/);
+
+        [VirtualFunction(159)]
+        public partial void ShowGrandCompany1(uint gc, uint gcRank, bool playSound = true);
+
+        [VirtualFunction(162)]
+        public partial void ShowStreak(int streak, int streakType);
+
+        [VirtualFunction(163)]
+        public partial void ShowAddonKillStreakForManeuvers(int streak, int streakType);
+        
+        [VirtualFunction(171)]
+        public partial void ExecuteMainCommand(uint command);
+
         [StructLayout(LayoutKind.Explicit, Size = 0x8)]
         public struct Unk1
         {
