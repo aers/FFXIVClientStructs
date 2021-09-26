@@ -1464,9 +1464,18 @@ classes:
       53: GetUIInputData
       54: GetUIInputModule
       56: GetLogFilterConfig
+      147: ShowImage
       148: ShowText
+      149: ShowTextChain
       150: ShowWideText
+      151: ShowPoisonText
       152: ShowErrorText
+      153: ShowTextClassChange
+      154: ShowGetAction
+      155: ShowLocationTitle
+      159: ShowGrandCompany1
+      162: ShowStreak
+      163: ShowAddonKillStreakForManeuvers
       171: ExecuteMainCommand
     funcs:
       0x1405CA450: ctor
