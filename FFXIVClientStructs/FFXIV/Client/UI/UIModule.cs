@@ -104,6 +104,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
         [VirtualFunction(56)]
         public partial void* GetLogFilterConfig();
         
+        [VirtualFunction(147)]
+        public partial void ShowImage(uint imageId, bool useLocalePath = false, int displayType = 0, bool playSound = false);
+
         [VirtualFunction(148)]
         public partial void ShowText(int position, string text, uint iconOrCheck1 = 0, bool playSound = true, uint iconOrCheck2 = 0, bool alsoPlaySound = true);
 
