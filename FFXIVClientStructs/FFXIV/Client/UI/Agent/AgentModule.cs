@@ -1,5 +1,5 @@
 ﻿using System.Runtime.InteropServices;
-using FFXIVClientStructs.Common;
+using FFXIVClientStructs.Attributes;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent

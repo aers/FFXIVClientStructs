@@ -8,12 +8,12 @@
     <RootNamespace>FFXIVClientStructs</RootNamespace>
     <AssemblyName>FFXIVClientStructs</AssemblyName>
     <AssemblyProduct>FFXIVClientStructs</AssemblyProduct>
-    <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
-    <LangVersion>9.0</LangVersion>
+    <LangVersion>latest</LangVersion>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <ProduceReferenceAssembly>false</ProduceReferenceAssembly>
     <!--
     <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
     <CompilerGeneratedFilesOutputPath>Generated</CompilerGeneratedFilesOutputPath>
@@ -42,7 +42,6 @@
     <PackageReference Include="Serilog" Version="2.6.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FFXIVClientStructs.Common\FFXIVClientStructs.Common.csproj" />
-    <ProjectReference Include="..\FFXIVClientStructs.Generators\FFXIVClientStructs.Generators.csproj" OutputItemType="Analyzer" />
+    <ProjectReference Include="..\FFXIVClientStructs.Generators\FFXIVClientStructs.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
   </ItemGroup>
 </Project>

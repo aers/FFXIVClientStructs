@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Runtime.InteropServices;
-using FFXIVClientStructs.Common;
+using FFXIVClientStructs.Attributes;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game {
     //ctor i guess 40 53 48 83 EC 20 48 8B D9 45 33 C9 B9

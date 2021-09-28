@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using System.Text;
-using FFXIVClientStructs.Common;
+using FFXIVClientStructs.Attributes;
 
 namespace FFXIVClientStructs.FFXIV.Common.Lua 
 {

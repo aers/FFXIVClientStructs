@@ -1,4 +1,4 @@
-﻿using FFXIVClientStructs.Common;
+﻿using FFXIVClientStructs.Attributes;
 using System.Runtime.InteropServices;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI

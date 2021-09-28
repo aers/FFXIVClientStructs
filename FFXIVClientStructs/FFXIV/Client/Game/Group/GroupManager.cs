@@ -1,5 +1,5 @@
 ﻿using System.Runtime.InteropServices;
-using FFXIVClientStructs.Common;
+using FFXIVClientStructs.Attributes;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Group
 {

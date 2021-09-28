@@ -1,5 +1,5 @@
 ﻿using System.Runtime.InteropServices;
-using FFXIVClientStructs.Common;
+using FFXIVClientStructs.Attributes;
 using FFXIVClientStructs.STD;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.UI {

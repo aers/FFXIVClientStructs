@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FFXIVClientStructs.Common
+namespace FFXIVClientStructs.Attributes
 {
     [AttributeUsage(AttributeTargets.Method)]
     public class StaticAddressAttribute : Attribute

@@ -1,4 +1,4 @@
-﻿using FFXIVClientStructs.Common;
+﻿using FFXIVClientStructs.Attributes;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc
 {

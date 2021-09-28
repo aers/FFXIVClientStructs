@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace FFXIVClientStructs.Common
+namespace FFXIVClientStructs.Attributes
 {
     [AttributeUsage(AttributeTargets.Method)]
     public class VirtualFunctionAttribute : Attribute
