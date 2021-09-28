@@ -1,3 +1,4 @@
+using System.Numerics;
 using System.Runtime.InteropServices;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 
@@ -13,9 +14,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Fate
         [FieldOffset(0x3AC)] public byte State;
         [FieldOffset(0x3B8)] public byte Progress;
         [FieldOffset(0x3F9)] public byte Level;
-        [FieldOffset(0x450)] public float X;
-        [FieldOffset(0x454)] public float Z;
-        [FieldOffset(0x458)] public float Y;
+        [FieldOffset(0x450)] public Vector3 Location;
         [FieldOffset(0x464)] public float Radius;
         [FieldOffset(0x74E)] public ushort TerritoryID;
     }
