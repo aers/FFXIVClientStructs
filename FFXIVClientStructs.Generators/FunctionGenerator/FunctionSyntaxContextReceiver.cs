@@ -41,6 +41,7 @@ namespace FFXIVClientStructs.Generators.FunctionGenerator
                     {
                         Name = ms.Name,
                         ReturnType = ms.ReturnType.ToDisplayString(format),
+                        HasBoolReturn = ms.ReturnType.ToDisplayString() == "bool",
                         HasReturn = ms.ReturnType.ToDisplayString() != "void",
                         HasParams = ms.Parameters.Any(),
                         ParamList = string.Join(",",
