@@ -1,47 +1,20 @@
-<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FFXIVClientStructs</RootNamespace>
-    <AssemblyName>FFXIVClientStructs</AssemblyName>
-    <AssemblyProduct>FFXIVClientStructs</AssemblyProduct>
-    <TargetFramework>net5.0</TargetFramework>
-    <FileAlignment>512</FileAlignment>
-    <Deterministic>true</Deterministic>
-    <LangVersion>latest</LangVersion>
+    <TargetFramework>net5</TargetFramework>
+    <LangVersion>9.0</LangVersion>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <ProduceReferenceAssembly>false</ProduceReferenceAssembly>
-    <!--
-    <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
-    <CompilerGeneratedFilesOutputPath>Generated</CompilerGeneratedFilesOutputPath>
-    -->
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <OutputPath>..\bin\$(Configuration)\</OutputPath>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>..\bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>..\bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DebugSymbols>true</DebugSymbols>
+    <!--
+      <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+      <CompilerGeneratedFilesOutputPath>Generated</CompilerGeneratedFilesOutputPath>
+      -->
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Serilog" Version="2.6.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\FFXIVClientStructs.Generators\FFXIVClientStructs.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\FFXIVClientStructs.Generators\FFXIVClientStructs.Generators.csproj"
+                      OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
   </ItemGroup>
 </Project>
