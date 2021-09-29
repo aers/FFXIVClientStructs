@@ -2246,6 +2246,9 @@ classes:
   Client::UI::AddonMateriaAttachDialog:
     inherits_from: Component::GUI::AtkUnitBase
     vtbl: 0x1417EB910
+  Client::UI::AddonMateriaRetrieveDialog:
+    inherits_from: Component::GUI::AtkUnitBase
+    vtbl: 0x1417EBB30
   Client::UI::AddonMiragePrismMiragePlate:
     inherits_from: Component::GUI::AtkUnitBase
     vtbl: 0x1417ECF70
