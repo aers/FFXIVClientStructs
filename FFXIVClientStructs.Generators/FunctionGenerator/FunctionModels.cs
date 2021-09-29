@@ -15,6 +15,7 @@ namespace FFXIVClientStructs.Generators.FunctionGenerator
     {
         public string Name;
         public bool HasReturn;
+        public bool HasBoolReturn;
         public string ReturnType;
         public bool HasParams;
         public string ParamList;

@@ -8,7 +8,7 @@
 namespace {{ struct.namespace }} {
     public unsafe partial struct {{ struct.name }} {{ if struct.has_ctor }}: ICreatable {{ end }}{
         {{~ for mf in struct.member_functions ~}}
-        public static delegate* unmanaged[Stdcall] <{{ if !mf.is_static }}{{ struct.name }}*,{{ end }}{{ if mf.has_params }}{{ mf.param_type_list }},{{ end }}{{ mf.return_type }}> fp{{ mf.name }} { internal set; get; }
+        public static delegate* unmanaged[Stdcall] <{{ if !mf.is_static }}{{ struct.name }}*,{{ end }}{{ if mf.has_params }}{{ mf.param_type_list }},{{ end }}{{ if mf.has_bool_return }}byte{{ else }}{{ mf.return_type }}{{ end }}> fp{{ mf.name }} { internal set; get; }
 
         public{{ if mf.is_static }} static{{ end }} partial {{ mf.return_type }} {{ mf.name }}({{ mf.param_list }})
         {
@@ -20,7 +20,7 @@ namespace {{ struct.namespace }} {
             fixed({{ struct.name }}* thisPtr = &this)
             {
 {{ end }}
-                {{ if mf.has_return }}return {{ end }}fp{{ mf.name }}({{ if !mf.is_static }}thisPtr{{ end }}{{ if mf.has_params }}{{ if !mf.is_static }}, {{ end }}{{ mf.param_name_list }}{{ end }});
+                {{ if mf.has_return }}return {{ end }}fp{{ mf.name }}({{ if !mf.is_static }}thisPtr{{ end }}{{ if mf.has_params }}{{ if !mf.is_static }}, {{ end }}{{ mf.param_name_list }}{{ end }}){{ if mf.has_bool_return }} != 0{{ end }};
 {{ if !mf.is_static }}
             }
 {{ end }}
@@ -41,7 +41,7 @@ namespace FFXIVClientStructs {
             {{~ for mf in struct.member_functions ~}}
             try {
                 var address{{ struct.name }}{{ mf.name }} = s.ScanText(""{{ mf.signature }}"");
-                {{ struct.namespace }}.{{ struct.name }}.fp{{ mf.name }} = (delegate* unmanaged[Stdcall] <{{ if !mf.is_static }}{{ struct.namespace }}.{{ struct.name }}*,{{ end }}{{ if mf.has_params }}{{ mf.param_type_list }},{{ end }}{{ mf.return_type }}>) address{{ struct.name }}{{ mf.name }};
+                {{ struct.namespace }}.{{ struct.name }}.fp{{ mf.name }} = (delegate* unmanaged[Stdcall] <{{ if !mf.is_static }}{{ struct.namespace }}.{{ struct.name }}*,{{ end }}{{ if mf.has_params }}{{ mf.param_type_list }},{{ end }}{{ if mf.has_bool_return }}byte{{ else }}{{ mf.return_type }}{{ end }}>) address{{ struct.name }}{{ mf.name }};
             } catch (KeyNotFoundException) {
                 Log.Warning($""[FFXIVClientStructs] function {{ struct.name }}::{{ mf.name }} failed to match signature {{ mf.signature }} and is unavailable"");
             }
@@ -59,7 +59,7 @@ namespace {{ struct.namespace }} {
         [StructLayout(LayoutKind.Explicit)]
         public unsafe struct {{ struct.name }}VTable {
             {{~ for vf in struct.virtual_functions ~}}
-            [FieldOffset({{ vf.virtual_offset * 8 }})] public delegate* unmanaged[Stdcall] <{{ struct.name }}*,{{ if vf.has_params }}{{ vf.param_type_list }},{{ end }}{{ vf.return_type }}> {{ vf.name }};
+            [FieldOffset({{ vf.virtual_offset * 8 }})] public delegate* unmanaged[Stdcall] <{{ struct.name }}*,{{ if vf.has_params }}{{ vf.param_type_list }},{{ end }}{{ if vf.has_bool_return }}byte{{ else }}{{ vf.return_type }}{{ end }}> {{ vf.name }};
             {{~ end ~}}
         }
 
@@ -70,7 +70,7 @@ namespace {{ struct.namespace }} {
         {
             fixed({{ struct.name }}* thisPtr = &this)
             {
-                {{ if vf.has_return }}return {{ end }}VTable->{{ vf.name }}(thisPtr{{ if vf.has_params }}, {{ vf.param_name_list }}{{ end }});
+                {{ if vf.has_return }}return {{ end }}VTable->{{ vf.name }}(thisPtr{{ if vf.has_params }}, {{ vf.param_name_list }}{{ end }}){{ if vf.has_bool_return }} != 0{{ end }};
             }
         }
         {{~ end ~}}
