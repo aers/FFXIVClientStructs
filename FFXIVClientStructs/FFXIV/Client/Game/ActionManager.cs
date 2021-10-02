@@ -47,6 +47,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Game {
 
         [MemberFunction("E8 ?? ?? ?? ?? 85 C0 75 8C")]
         public partial uint CheckActionResources(ActionType actionType, uint actionId, void* actionData = null);
+
+        [MemberFunction("E8 ?? ?? ?? ?? 33 DB 8B C8", IsStatic = true)]
+        public static partial ushort GetMaxCharges(uint actionId, uint level); // 0 for current level
     }
 
     public enum ActionType : byte {
