@@ -225,6 +225,8 @@ classes:
       0x140059860: ctor_FromSequence # (FFXIVString, char * str, size_t size)
       0x14005A320: dtor
       0x14005A3A0: SetString
+      0x14005AA70: GetString
+      0x14005C8E0: Clear
   Component::GUI::AtkValue:
     funcs:
       0x1404AFCE0: dtor
