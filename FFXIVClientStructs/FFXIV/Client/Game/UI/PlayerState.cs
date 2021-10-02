@@ -37,6 +37,8 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI {
         [FieldOffset(0x29A)] public fixed byte FavouriteAetheryteArray[4];
         [FieldOffset(0x29E)] public byte FreeAetheryteId;
 
+        [FieldOffset(0x2A0)] public uint BaseRestedExperience;
+
         [FieldOffset(0x420)] public short PlayerCommendations;
     }
 }
