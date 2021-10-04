@@ -644,6 +644,15 @@ classes:
   Client::UI::Agent::AgentAirShipExploration:
     inherits_from: Client::UI::Agent::AgentExplorationInterface
     vtbl: 0x14169F920
+  Client::UI::Agent::AgentSubmersibleExplorationDetail:
+    inherits_from: Client::UI::Agent::AgentExplorationDetailInterface
+    vtbl: 0x14169FCD0
+  Client::UI::Agent::AgentAirShipExplorationDetail:
+    inherits_from: Client::UI::Agent::AgentExplorationDetailInterface
+    vtbl: 0x14169E860
+  Client::UI::Agent::AgentExplorationDetailInterface:
+    inherits_from: Client::UI::Agent::AgentInterface
+    vtbl: 0x14169E788
   Client::Graphics::Animation::IAnimationControllerListener:
     vtbl: 0x1416A47D8
   Client::Graphics::Animation::PartialSkeleton:
@@ -2083,6 +2092,9 @@ classes:
   Client::UI::Agent::AgentMaterialize:
     inherits_from: Client::UI::Agent::AgentInterface
     vtbl: 0x1416EC600
+  Client::UI::Agent::AgentContentsTimer:
+    inherits_from: Client::UI::Agent::AgentInterface
+    vtbl: 0x1416ECA78
   Client::Game::Event::EventHandler:
     vtbl: 0x1416FBFB0
   Client::Game::Event::ModuleBase:
@@ -2101,9 +2113,18 @@ classes:
   Client::Game::Event::EventHandlerModule:
     inherits_from: Client::Game::Event::ModuleBase
     vtbl: 0x141701A40
+    funcs:
+      0x140A747B0: ctor
+  Client::Game::Event::LuaActorModule:
+    inherits_from: Client::Game::Event::ModuleBase
+    vtbl: 0x141701A80
+    funcs:
+      0x140A78650: ctor
   Client::Game::Event::DirectorModule:
     inherits_from: Client::Game::Event::ModuleBase
     vtbl: 0x141701AB8
+    funcs:
+      0x140A78F00: ctor
   Client::Game::Event::LeveDirector:
     inherits_from: Client::Game::Event::Director
     vtbl: 0x141703BE8
