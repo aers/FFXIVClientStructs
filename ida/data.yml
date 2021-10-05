@@ -2097,8 +2097,14 @@ classes:
     vtbl: 0x1416ECA78
   Client::Game::Event::EventHandler:
     vtbl: 0x1416FBFB0
+  Client::Game::Event::LuaScriptLoader_ModuleBase: # LuaScriptLoader<ModuleBase>
+    inherits_from: Client::System::Resource::ResourceEventListener
+    vtbl: 0x1416FC7B8
   Client::Game::Event::ModuleBase:
     vtbl: 0x1416FC7E0
+  Client::Game::Event::LuaScriptLoader_LuaEventHandler: # LuaScriptLoader<LuaEventHandler>
+    inherits_from: Client::System::Resource::ResourceEventListener
+    vtbl: 0x1416FC818
   Client::Game::Event::LuaEventHandler:
     inherits_from: Client::Game::Event::EventHandler
     vtbl: 0x1416FC840
