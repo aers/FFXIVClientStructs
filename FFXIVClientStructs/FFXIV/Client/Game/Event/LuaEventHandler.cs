@@ -7,7 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Event {
     public unsafe struct LuaEventHandler {
         [FieldOffset(0x00)] public EventHandler EventHandler;
         [FieldOffset(0x210)] public LuaState* LuaState;
-        [FieldOffset(0x240)] public Utf8String Unk_240_String;
-        [FieldOffset(0x2A8)] public Utf8String Unk_2A8_String; //LuaKey
+        [FieldOffset(0x240)] public Utf8String LuaClass;
+        [FieldOffset(0x2A8)] public Utf8String LuaKey;
     }
 }
