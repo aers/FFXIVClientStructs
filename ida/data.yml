@@ -1050,6 +1050,11 @@ classes:
   Component::GUI::StringArrayData:
     inherits_from: Component::GUI::AtkArrayData
     vtbl: 0x1416C1A18
+    funcs:
+      0x1404AFA00: SetValueIfDifferentAndNotify
+      0x1404AFA30: SetValueIfDifferentAndNotifyUtf8
+      0x1404AFA70: SetValue
+      0x1404AFAB0: SetValueUtf8
   Component::GUI::ExtendArrayData:
     inherits_from: Component::GUI::AtkArrayData
     vtbl: 0x1416C1A28
