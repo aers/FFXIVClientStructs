@@ -10,6 +10,6 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
     public unsafe struct AddonShopCardDialog
     {
         [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
-        [FieldOffset(0x220)] public AtkComponentNumericInput CardQuantityInput;
+        [FieldOffset(0x220)] public AtkComponentNumericInput* CardQuantityInput;
     }
 }
