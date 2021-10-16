@@ -7,8 +7,11 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
     public enum ValueType
     {
         Int = 0x3,
+        Bool = 0x2,
         UInt = 0x4,
-        String = 0x6
+        Float = 0x5,
+        String = 0x6,
+        Vector = 0x9,
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
@@ -20,5 +23,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
         [FieldOffset(0x8)] public int Int;
         [FieldOffset(0x8)] public uint UInt;
         [FieldOffset(0x8)] public byte* String; // char*
+        [FieldOffset(0x8)] public float Float;
+        [FieldOffset(0x8)] public byte Byte;
     }
 }
