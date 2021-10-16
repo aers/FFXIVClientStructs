@@ -114,6 +114,7 @@ functions:
   0x14061ADD0: ConvertLogMessageIdToCharaLogKind
   0x1406F66A0: ExecuteCommand
   0x1408DC200: CreateSelectYesno
+  0x140A81860: GetBeastTribeAllowance
   0x140A91500: EventFramework_GetSingleton
   0x140A91510: EventFramework_ctor
   0x140A91CD0: EventFramework_dtor
@@ -272,6 +273,9 @@ classes:
     funcs:
       0x140789110: SetCharacterName
       0x14078CA30: Initialize
+      0x14078A6F0: GetBeastTribeRank
+      0x14078A770: GetBeastTribeCurrentRep
+      0x14078A7B0: GetBeastTribeNeededRep
       0x1407F2BF0: ctor
   Client::Game::UI::Revive:
     vtbl: 0x1416E6390
