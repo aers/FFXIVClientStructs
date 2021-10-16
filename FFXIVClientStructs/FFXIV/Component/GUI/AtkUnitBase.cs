@@ -56,6 +56,12 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
         [MemberFunction("E8 ?? ?? ?? ?? 8D 55 4D")]
         public partial AtkImageNode* GetImageNodeById(uint nodeId);
 
+        [MemberFunction("E9 ?? ?? ?? ?? 83 FB 15")]
+        public partial byte FireCallbackInt(int callbackValue);
+
+        [MemberFunction("E8 ?? ?? ?? ?? 8B 44 24 20 C1 E8 05")]
+        public partial void FireCallback(int valueCount, AtkValue* values, void* a4 = null);
+
         [VirtualFunction(3)]
         public partial bool Show(int unkInt, bool unkBool = false);
         
