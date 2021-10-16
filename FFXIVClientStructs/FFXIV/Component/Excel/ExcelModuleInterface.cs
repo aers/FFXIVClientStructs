@@ -8,9 +8,9 @@ namespace FFXIVClientStructs.FFXIV.Component.Excel {
         [FieldOffset(0x08)] public ExdModule* ExdModule;
 
         [VirtualFunction(1)]
-        public partial void* GetSheetByIndex(uint sheetIndex);
+        public partial ExcelSheet* GetSheetByIndex(uint sheetIndex);
 
         [VirtualFunction(2)]
-        public partial void* GetSheetByName(string sheetName);
+        public partial ExcelSheet* GetSheetByName(string sheetName);
     }
 }
