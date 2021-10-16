@@ -113,6 +113,9 @@ functions:
   0x14053B640: Component::GUI::TextModuleInterface::GetTextLabelByID
   0x14061ADD0: ConvertLogMessageIdToCharaLogKind
   0x1406F66A0: ExecuteCommand
+  0x14078A6f0: Client::Game::UI::UIState::PlayerState.GetBeastTribeRank
+  0x14078A770: Client::Game::UI::UIState::PlayerState.GetBeastTribeCurrentRep
+  0x14078A7B0: Client::Game::UI::UIState::PlayerState.GetBeastTribeNeededRep
   0x1408DC200: CreateSelectYesno
   0x140A91500: EventFramework_GetSingleton
   0x140A91510: EventFramework_ctor
