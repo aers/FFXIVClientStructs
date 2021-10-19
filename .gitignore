@@ -354,3 +354,5 @@ MigrationBackup/
 
 # JetBrains
 .idea/
+
+data.mapped.yml
