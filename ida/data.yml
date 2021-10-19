@@ -77,6 +77,8 @@ globals:
   0x141DFDE10: g_FateTablePtr
   0x141DF93B0: g_GroupManager_2 # not a pointer
   0x141DFDAC0: g_ClientObjectManager
+  0x141D93A40: g_SomeOtherRenderingState
+  0x141DA5B94: g_InvSqrt3
 
 functions:
   0x140060560: MemoryManager_Alloc
@@ -133,6 +135,15 @@ functions:
   0x141371A84: ThrowException
   0x141398344: FreeMemory
   0x1413A02A0: _purecall # Ghidra does not have a notation for pure virtual calls
+  0x1400604C0: MemAlloc
+  0x1401DE0D0: MatrixMultiply
+  0x1401DB0E0: MatrixMultiply2
+  0x1401D9E40: MatrixVectorMultiply
+  0x1401DB3E0: MatrixInverse
+  0x1401DBA00: MatrixInverseMaybe
+  0x1401DD3B0: MakeProjectionMatrix
+  0x1401DD640: MakeProjectionMatrix2
+  0x14031AC10: SubmitConstantBufferUpdate
 
 classes:
   # Unknown classes old RTTI data says known classes inherit from
@@ -176,7 +187,7 @@ classes:
   Component::GUI::AtkInputManager:
     funcs:
       0x1404F05B0: HandleInput
-      0x1404F2D40: ctor      
+      0x1404F2D40: ctor
   Client::Game::CameraManager:
     funcs:
       0x141133610: PreUpdate
@@ -676,6 +687,8 @@ classes:
   Client::Graphics::Kernel::SwapChain:
     inherits_from: Client::Graphics::Kernel::Resource
     vtbl: 0x1416A5478
+    funcs:
+      0x140301670: Present
   Client::Graphics::Kernel::Buffer:
     inherits_from: Client::Graphics::Kernel::Resource
     vtbl: 0x1416A54B8
@@ -684,6 +697,9 @@ classes:
     vtbl: 0x1416A56C0
     funcs:
       0x140304440: ctor
+      0x1403047A0: LoadSourcePointer
+      0x140315250: LoadBuffer
+      0x140319A70: Activate
   Client::Graphics::Kernel::Device:
     inherits_from: Client::Graphics::Singleton
     vtbl: 0x1416A5748
@@ -691,8 +707,18 @@ classes:
       0x140304D00: ctor
       0x140304EA0: Initialize
       0x140305A20: CreateTexture2D
+      0x140306610: CreateConstantBuffer
+      0x140306D40: PostTick
+  Client::Graphics::Kernel::Context:
+    funcs:
+      0x1401CAF80: PushBackCommand
+      0x1403166F0: PrepareModel
+      0x1403ADF90: Draw_cmd
   Client::Graphics::Kernel::Device::ImmediateContext:
     vtbl: 0x1416A5750
+    funcs:
+      0x14030FDA0: ProcessCommands
+      0x140310050: PrimeForDraw
   Client::Graphics::Kernel::Device::RenderThread:
     inherits_from: Client::System::Threading::Thread
     vtbl: 0x1416A57A0
@@ -714,6 +740,10 @@ classes:
   Client::Graphics::Render::Camera:
     inherits_from: Client::Graphics::ReferencedClassBase
     vtbl: 0x1416AC9F0
+    funcs:
+      0x140324510: UpdateConstantBuffer
+      0x140324D70: LoadMatrix
+      0x1403281B0: MakeProjectionMatrix
   Client::Graphics::Render::ShadowCamera:
     inherits_from: Client::Graphics::Render::Camera
     vtbl: 0x1416ACA28
@@ -726,6 +756,8 @@ classes:
   Client::Graphics::Render::UnknownCamera3:
     inherits_from: Client::Graphics::Render::Camera
     vtbl: 0x1416ACAE0
+    funcs:
+      0x140328A40: SubmitRenderCameraData
   Client::Graphics::Render::UnknownCamera4:
     inherits_from: Client::Graphics::Render::Camera
     vtbl: 0x1416ACB28
@@ -874,6 +906,8 @@ classes:
     vtbl: 0x1416BCF48
     funcs:
       0x140430760: ctor
+      0x1404318D0: CalculateViewMatrix
+      0x140432050: PrepareRenderCamera
   Client::Graphics::Scene::CameraManager_Client::Graphics::Singleton:
     vtbl: 0x1416BCFA8
   Client::Graphics::Scene::CameraManager:
@@ -1081,7 +1115,7 @@ classes:
   Component::GUI::AtkTexture:
     vtbl: 0x1416C1AB8
     funcs:
-      0x1404B66D0: LoadIconTexture   
+      0x1404B66D0: LoadIconTexture
       0x1404B68F0: GetLoadState
       0x1404B6950: IsTextureReady
       0x1404B6A00: ReleaseTexture
@@ -2593,9 +2627,27 @@ classes:
     funcs:
       0x14112BC60: ctor
       0x141129170: UpdateRotation
+  Client::Game::Camera1:
+    inherits_from: Client::Game::CameraBase
+    vtbl: 0x141847320
+    funcs:
+      0x14112EC90: ctor
+  Client::Game::Camera2:
+    inherits_from: Client::Game::CameraBase
+    vtbl: 0x141847380
+    funcs:
+      0x141133E50: ctor
+  Client::Game::Camera3:
+    inherits_from: Client::Game::CameraBase
+    vtbl: 0x141847480
+    funcs:
+      0x141135A40: ctor
   Client::Graphics::Culling::OcclusionCullingManager:
     inherits_from: Client::Graphics::Singleton
     vtbl: 0x141848CD0
+    funcs:
+      0x141147D80: ctor
+      0x141147E60: Initialize
   Client::Graphics::Streaming::StreamingManager_Client::Graphics::JobSystem_Client::Graphics::Streaming::StreamingManager::StreamingJob:
     inherits_from: Client::Graphics::Singleton
     vtbl: 0x141848CE0
@@ -2706,3 +2758,9 @@ classes:
   Client::System::Memory::Regular::FixedSpace:
     inherits_from: Client::System::Memory::IMemorySpace
     vtbl: 0x14166EFC8
+  Client::Game::ControlSystem::CameraManager:
+    funcs:
+      0x141132910: ctor
+  Vector3:
+    funcs:
+      0x140194A90: Normalize
