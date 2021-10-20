@@ -47,6 +47,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character
         [FieldOffset(0x195C)] public ushort CurrentWorld;
         [FieldOffset(0x195E)] public ushort HomeWorld;
         [FieldOffset(0x197F)] public byte Icon;
+        [FieldOffset(0x1997)] public byte ShieldValue;
         [FieldOffset(0x19A0)] public byte StatusFlags;
 
         [MemberFunction("E8 ?? ?? ?? ?? 3B C7 74 45")]
