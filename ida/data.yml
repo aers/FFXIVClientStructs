@@ -740,8 +740,9 @@ classes:
   Client::Graphics::Render::Camera:
     inherits_from: Client::Graphics::ReferencedClassBase
     vtbl: 0x1416AC9F0
+    vfuncs:
+      5: UpdateConstantBuffer
     funcs:
-      0x140324510: UpdateConstantBuffer
       0x140324D70: LoadMatrix
       0x1403281B0: MakeProjectionMatrix
   Client::Graphics::Render::ShadowCamera:
@@ -2633,12 +2634,12 @@ classes:
     funcs:
       0x14112EC90: ctor
   Client::Game::Camera2:
-    inherits_from: Client::Game::CameraBase
+    inherits_from: Client::Game::Camera
     vtbl: 0x141847380
     funcs:
       0x141133E50: ctor
   Client::Game::Camera3:
-    inherits_from: Client::Game::CameraBase
+    inherits_from: Client::Game::Camera
     vtbl: 0x141847480
     funcs:
       0x141135A40: ctor
