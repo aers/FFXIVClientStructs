@@ -547,6 +547,16 @@ classes:
       5: Run
     funcs:
       0x1401973F0: CreateThread
+  Client::System::File::FileInterface:
+    vtbl: 0x141693590
+  Client::System::File::FileThread:
+    inherits_from: Client::System::Threading::Thread
+    vtbl: 0x1416935B0
+  Client::System::File::FileManager:
+    inherits_from: Client::System::Framework::Task
+    vtbl: 0x1416935E0
+    funcs:
+      0x14019E910: ctor
   Client::System::Resource::Handle::ResourceHandle:
     inherits_from: Client::System::Common::NonCopyable
     vtbl: 0x141694D68
@@ -1452,6 +1462,8 @@ classes:
   Client::UI::Misc::UserFileManager:
     inherits_from: Client::System::Resource::ResourceEventListener
     vtbl: 0x1416D0CA8
+    funcs:
+      0x1406034B0: SaveFile
   Component::GUI::AtkInputData:
     inherits_from: Client::System::Input::InputData
     vtbl: 0x1416D0CD0
