@@ -2307,6 +2307,9 @@ classes:
   Client::UI::Atk2DAreaMap:
     inherits_from: Client::UI::Atk2DMap
     vtbl: 0x1417E7830
+  Client::UI::AddonRelicNoteBook:  
+    inherits_from: Component::GUI::AtkUnitBase
+    vtbl: 0x1417E80F8
   Client::UI::AddonAOZNotebook:
     inherits_from: Component::GUI::AtkUnitBase
     vtbl: 0x1417E9188
