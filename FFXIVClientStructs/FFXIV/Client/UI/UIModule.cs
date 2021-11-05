@@ -54,7 +54,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
         public partial RaptureMacroModule* GetRaptureMacroModule();
 
         [VirtualFunction(13)]
-        public partial void* GetRaptureHotbarModule();
+        public partial RaptureHotbarModule* GetRaptureHotbarModule();
 
         [VirtualFunction(14)]
         public partial void* GetRaptureGearsetModule();
