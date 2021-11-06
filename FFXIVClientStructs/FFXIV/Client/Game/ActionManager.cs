@@ -42,7 +42,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game {
         [MemberFunction("E8 ?? ?? ?? ?? 85 C0 75 02 33 C0", IsStatic = true)]
         public static partial uint GetActionInRangeOrLoS(uint actionId, GameObject* sourceObject, GameObject* targetObject);
 
-        [MemberFunction("E8 ?? ?? ?? ?? 0F B6 55 26", IsStatic = true)]
+        [MemberFunction("E8 ?? ?? ?? ?? 48 8B 5C 24 ?? 48 83 C4 30 5F C3 33 D2", IsStatic = true)]
         public static partial int GetActionCost(ActionType actionType, uint actionId, byte a3, byte a4, byte a5, byte a6);
 
         [MemberFunction("E8 ?? ?? ?? ?? 85 C0 75 8C")]
