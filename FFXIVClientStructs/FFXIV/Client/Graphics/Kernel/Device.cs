@@ -17,7 +17,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Kernel
         [FieldOffset(0xA8)] public void* D3D11Device; // ID3D11Device1
         [FieldOffset(0xB0)] public void* D3D11DeviceContext; // ID3D11DeviceContext1
 
-        [StaticAddress("48 8B 1D ?? ?? ?? ?? 45 8B D1", isPointer: true)]
+        [StaticAddress("48 8B 0D ?? ?? ?? ?? 48 8D 54 24 ?? F3 0F 10 44 24", isPointer: true)]
         public static partial Device* Instance();
     }
 }
