@@ -1,0 +1,485 @@
+#!/usr/bin/env python3
+
+import itertools
+import os
+import sys
+from dataclasses import dataclass, field
+from pathlib import Path
+from typing import Dict, Iterator, List, Optional
+
+import dacite
+import ida_bytes
+import yaml
+
+import idaapi
+import idautils
+import ida_funcs
+import ida_lines
+import ida_search
+import ida_segment
+import idc
+
+SENTINEL = 0xDEAD_BEEF
+
+
+@dataclass
+class GameClass:
+    inherits_from: Optional[str]
+    vtbl: Optional[int]
+    g_instance: Optional[int]
+    g_pointer: Optional[int]
+    funcs: Dict[int, str] = field(default_factory=dict)
+    vfuncs: Dict[int, str] = field(default_factory=dict)
+
+    # These should not be defined in the yaml
+    vtbl_size: Optional[int] = field(default=SENTINEL)
+    func_sigs: Dict[str, str] = field(default_factory=dict)
+    vfunc_sigs: Dict[str, str] = field(default_factory=dict)
+
+
+@dataclass
+class ClientStructsData:
+    version: str
+    globals: Dict[int, str] = field(default_factory=dict)
+    functions: Dict[int, str] = field(default_factory=dict)
+    classes: Dict[str, Optional[GameClass]] = field(default_factory=dict)
+
+
+class IdaApi:
+    @staticmethod
+    def image_base() -> int:
+        return idaapi.get_imagebase()
+
+    @staticmethod
+    def is_offset(ea: int) -> bool:
+        return idc.is_off0(idc.get_full_flags(ea))
+
+    @staticmethod
+    def xrefs_to(ea: int) -> List[int]:
+        return [xref.to for xref in idautils.XrefsTo(ea)]
+
+    @staticmethod
+    def xrefs_from(ea: int) -> List[int]:
+        return [xref.frm for xref in idautils.XrefsTo(ea)]
+
+    @staticmethod
+    def get_qword(ea: int) -> int:
+        return idc.get_qword(ea)
+
+    @staticmethod
+    def get_addr_name(ea: int) -> str:
+        return idc.get_name(ea)
+
+    @staticmethod
+    def set_addr_name(ea: int, name: str) -> bool:
+        result = idc.set_name(ea, name)
+        return bool(result)
+
+    @staticmethod
+    def get_func_name(ea: int) -> str:
+        return ida_funcs.get_func_name(ea)
+
+    @staticmethod
+    def get_comment(ea: int) -> str:
+        return idc.get_cmt(ea, False)
+
+    @staticmethod
+    def set_comment(ea: int, comment: str) -> None:
+        idc.set_cmt(ea, comment, False)
+
+
+api = IdaApi()
+
+
+class SigGen:
+    """
+    Generate a variable instruction length signature on demand from a single address
+    that resides within a function. Maximum sig length is decided by the smaller of
+    the func length or the INSN_TO_SIG variable.
+    """
+    _INSN_TO_SIG = 10  # Max number of instructions to sig
+    _base_addr: int  # base address
+    _max_addr: int  # address of last function instruction
+    _max_index: int  # count of instructions
+    _insn_addr_cache: Dict[int, int]  # index: addr
+    _sig_cache: Dict[int, str]  # index: sig chunk
+
+    def __init__(self, addr: int):
+        """
+        Signature generator
+        :param addr: Base address to start generating signatures from
+        """
+        self._base_addr = addr
+
+        func_items = list(idautils.FuncItems(addr))
+
+        # The last address of the function
+        # Sig-able addresses can be this, but not greater than this
+        self._max_addr = func_items[-1]
+        self._max_index = min(self._INSN_TO_SIG, len(func_items) - 1)
+        self._insn_addr_cache = {i: func_items[i] for i in range(self._max_index)}
+        self._sig_cache = {}
+
+    def __getitem__(self, count: int) -> str:
+        """
+        Get a signature N instructions long
+        :param count: Count of instructions
+        :return: A signature
+        """
+        if count <= 0:
+            raise IndexError('Requested sig size is less than or equal to 0')
+        if count > self._max_index:
+            raise IndexError('Requested sig size is greater than the max allowable')
+
+        chunks = []
+        # Check the cache and fill
+        for i in range(count):
+            chunk = self._sig_cache.get(i, SENTINEL)
+            if chunk == SENTINEL:
+                addr = self._insn_addr_cache[i]
+                chunk = self._sig_cache[i] = self._sig_instruction(addr)
+            chunks.append(chunk)
+
+        return ' '.join(chunks)
+
+    def __iter__(self) -> Iterator[str]:
+        for i in range(self.max_count):
+            yield self[i + 1]
+
+    @property
+    def max_count(self) -> int:
+        return self._max_index
+
+    def __str__(self):
+        return f'<SigGen: {self._base_addr:X}>'
+
+    def __repr__(self):
+        return self.__str__()
+
+    def __eq__(self, other):
+        return isinstance(other, SigGen) and self._base_addr == other._base_addr
+
+    def _sig_instruction(self, addr: int) -> Optional[str]:
+        """
+        Get the bytes for a single instruction with wildcards
+        :param addr: Instruction address
+        :return: A signature chunk
+        """
+        # I'm not sure if either of these checks will ever happen
+        # So let it explode until it does by trying to join None
+        if not idaapi.is_code(idaapi.get_flags(addr)):
+            return None
+
+        if not idaapi.can_decode(addr):
+            return None
+
+        insn = idaapi.insn_t()
+        insn.size = 0
+
+        idaapi.decode_insn(insn, addr)
+        if insn.size == 0:
+            return None
+
+        if insn.size < 5:
+            return self._sig_bytes(insn.ea, insn.size)
+
+        op_size = self._get_current_opcode_size(insn)
+        if op_size == 0:
+            return self._sig_bytes(insn.ea, insn.size)
+
+        operand_size = insn.size - op_size
+        sig = self._sig_bytes(insn.ea, op_size)
+
+        if self._match_operands(insn.ea):
+            sig += ' ' + self._sig_bytes(insn.ea + op_size, operand_size)
+        else:
+            sig += ' ' + self._sig_wildcards(operand_size)
+
+        return sig
+
+    def _sig_wildcards(self, count: int) -> str:
+        """
+        Get a count of wildcard bytes
+        :param count: Number of wildcard entries to generate
+        :return: A signature
+        """
+        return ' '.join('??' for _ in range(count))
+
+    def _sig_bytes(self, addr: int, count: int) -> str:
+        """
+        Get the bytes for a single instruction without wildcards
+        :param addr: Byte start address
+        :param count: Number of bytes to get
+        :return: A signature
+        """
+        return ' '.join(f'{b:02X}' for b in idaapi.get_bytes(addr, count))
+
+    def _get_current_opcode_size(self, insn: idaapi.insn_t) -> int:
+        """
+        Get the size of the opcode associated with an instruction
+        :param insn: Instruction
+        :return: size
+        """
+        for i in range(idaapi.UA_MAXOP):
+            if insn.ops[i].type == idaapi.o_void:
+                return 0
+
+            if insn.ops[i].offb != 0:
+                return insn.ops[i].offb
+
+        return 0
+
+    def _match_operands(self, ea) -> bool:
+        if idaapi.get_first_dref_from(ea) != idaapi.BADADDR:
+            return False
+        elif idaapi.get_first_cref_from(ea) != idaapi.BADADDR:
+            return False
+        else:
+            return True
+
+
+class FfxivSigmaker:
+    DATASTORE: ClientStructsData
+    STANDARD_IMAGE_BASE = 0x1_4000_0000
+    TEXT_SEGMENT: ida_segment.segment_t = ida_segment.get_segm_by_name(".text")
+
+    # Max number of XREFs to search through for each address
+    XREFS_TO_SEARCH = 10
+
+    def _calc_vtbl_size(self, class_name: str, data: GameClass) -> None:
+        """
+        Calculate the size of the vtable.
+        This value is saved in the GameClass instance.
+        :param class_name: Name of the class.
+        :param data: Class data.
+        :return: None
+        """
+        if not data.vtbl:
+            data.vtbl_size = 0
+            return
+
+        # Check if this has been computed before
+        if data.vtbl_size is not SENTINEL:
+            return data.vtbl_size
+
+        # Set to 1, skip the first entry
+        data.vtbl_size = 1
+
+        # Increment for each offset with with no xrefs
+        for ea in itertools.count(data.vtbl + 8, 8):
+            if api.get_addr_name(ea) != "":
+                break
+            if not api.is_offset(ea) or len(api.xrefs_to(ea)) > 0:
+                break
+            data.vtbl_size += 1
+
+        if data.inherits_from:
+            # Verify the parent is not larger than the child
+            # Then each ancestor, so long as they exist
+            parent_name = data.inherits_from
+            parent_data = self.DATASTORE.classes.get(parent_name)
+            while parent_data:
+                # Calculate the parent before continuing
+                if parent_data.vtbl_size == SENTINEL:
+                    self._calc_vtbl_size(parent_name, parent_data)
+
+                if parent_data.vtbl_size > data.vtbl_size > 0:
+                    print("Error: The parent \"{0}\" of \"{1}\" has a larger vtable size: {2} > {3}".format(
+                        parent_name, class_name, parent_data.vtbl_size, data.vtbl_size))
+
+                parent_name = parent_data.inherits_from
+                parent_data = self.DATASTORE.classes.get(parent_name)
+
+    def rebase_datastore(self) -> None:
+        """
+        Rebase all the addresses in the datastore.
+        :return: None
+        """
+        current_image_base = api.image_base()
+        if self.STANDARD_IMAGE_BASE == current_image_base:
+            return
+
+        rebase_offset = current_image_base - self.STANDARD_IMAGE_BASE
+
+        self._rebase_dict(self.DATASTORE.globals, rebase_offset)
+        self._rebase_dict(self.DATASTORE.functions, rebase_offset)
+
+        class_data: GameClass
+        for (class_name, class_data) in self.DATASTORE.classes.items():
+            if not class_data:
+                continue
+
+            self._rebase_dict(class_data.funcs, rebase_offset)
+
+            if class_data.vtbl:
+                class_data.vtbl += rebase_offset
+
+            if class_data.g_pointer:
+                class_data.g_pointer += rebase_offset
+
+            if class_data.g_instance:
+                class_data.g_instance += rebase_offset
+
+    def _rebase_dict(self, mapping: Dict[int, str], rebase_offset: int) -> None:
+        """
+        Rebase all addresses in a [addr, _] mapping
+        :param mapping: Mapping to rebase
+        :param rebase_offset: Rebase offset
+        :return: None
+        """
+        for (addr, name) in list(mapping.items()):
+            mapping[addr + rebase_offset] = mapping.pop(addr)
+
+    def sig_address(self, addr: int, is_func: bool) -> Optional[str]:
+        """
+        Find the best sig available for a given address
+        :param addr: Address to sig the xrefs of
+        :param is_func: Address is a func start
+        :return: A signature, or None
+        """
+        sigs = self._get_xref_sigs(addr, is_func)
+        sig = self._find_best_sig(sigs)
+        return sig
+
+    def _get_xref_sigs(self, addr: int, fail_func: bool) -> Iterator[str]:
+        """
+        Create a signature from a function address
+        XRef sigs are preferred, however if none are available the func itself will be used
+        :param addr: Function address
+        :param fail_func: If no xrefs are available, and this is a function, sig the function itself
+        :return: A series of Dalamud compatible signatures
+        """
+        xref_addrs = api.xrefs_from(addr)
+
+        # This should prune xrefs in places like .pdata by only keeping xrefs in a function
+        xref_addrs = list(filter(api.get_func_name, xref_addrs))
+
+        # No xrefs? Use the func itself
+        if not xref_addrs and fail_func:
+            xref_addrs = [addr]
+
+        # Grab teh first N xrefs
+        xref_addrs = xref_addrs[:self.XREFS_TO_SEARCH]
+
+        for xref_addr in xref_addrs:
+            yield from SigGen(xref_addr)
+
+    def _find_best_sig(self, sigs: Iterator[str]) -> Optional[str]:
+        """
+        Find the shortest signature, with only one match in the .TEXT segment.
+        :param sigs: Signatures to check
+        :return: The shortest signature, or None
+        """
+        chosen_sig = None
+        chosen_sig_size = sys.maxsize
+
+        for sig in sigs:
+            # Already have a sig shorter than this one
+            if len(sig) >= chosen_sig_size:
+                continue
+
+            if self._is_sig_unique(sig):
+                chosen_sig = sig
+                chosen_sig_size = len(sig)
+
+        return chosen_sig
+
+    def _is_sig_unique(self, sig: str) -> bool:
+        """
+        Perform a binary sig search and determine if the signature has one unique match
+        :param sig: Sig to search
+        :return: True if only one address matches
+        """
+        # Expects a byte array
+        fmt_sig = [int(s, 16).to_bytes(1, 'little') if s != '??' else b'\0' for s in sig.split(' ')]
+        fmt_sig = b''.join(fmt_sig)
+        # Another byte array, 0 = ?? wildcard
+        sig_mask = [int(b != '??').to_bytes(1, 'little') for b in sig.split(' ')]
+        sig_mask = b''.join(sig_mask)
+
+        result_count = 0
+        sig_addr = self.TEXT_SEGMENT.start_ea
+        while True:
+            sig_addr = idaapi.bin_search(
+                sig_addr,
+                self.TEXT_SEGMENT.end_ea,
+                fmt_sig, sig_mask,
+                ida_bytes.BIN_SEARCH_FORWARD,
+                ida_bytes.BIN_SEARCH_NOCASE)
+
+            # No more results
+            if sig_addr == idaapi.BADADDR:
+                break
+
+            # We have a match
+            result_count += 1
+
+            # But more than one fails the signature
+            if result_count > 1:
+                return False
+
+            # Starting at the match, returns the same match. So go to the next byte
+            sig_addr += 1
+
+        return True
+
+    def run(self):
+        """
+        Run the sigmaker
+        :return: None
+        """
+        # data_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "data.yml")
+        data_path = r'C:\Users\Raymond\code\FFXIVClientStructs\ida\data.yml'
+        with Path(data_path).open('r') as fd:
+            data_dict = yaml.safe_load(fd)
+            self.DATASTORE = dacite.from_dict(ClientStructsData, data_dict)
+
+        # Rebase
+        self.rebase_datastore()
+
+        ida_segment.get_segm_by_name('.text')
+
+        class_data: GameClass
+        for (class_name, class_data) in self.DATASTORE.classes.items():
+            if not class_data:
+                continue
+
+            self._calc_vtbl_size(class_name, class_data)
+            for (func_ea, func_name) in class_data.funcs.items():
+                sig = self.sig_address(func_ea, True)
+                print(f'{class_name}::{func_name} // {func_ea:X} // {sig}')
+
+            global_ea = class_data.g_pointer
+            if global_ea:
+                sig = self.sig_address(global_ea, False)
+                print(f'{class_name}::gPointer // {global_ea:X} // {sig}')
+
+            global_ea = class_data.g_instance
+            if global_ea:
+                sig = self.sig_address(global_ea, False)
+                print(f'{class_name}::gInstance // {global_ea:X} // {sig}')
+
+            # While we CAN sig (some of) these, should we?
+            # if class_data.vtbl:
+            #     for (vtbl_index, func_name) in class_data.vfuncs.items():
+            #         vfunc_ofs = class_data.vtbl + vtbl_index * 8
+            #         vfunc_ea = ida_bytes.get_qword(vfunc_ofs)
+            #         sig = self.sig_func(vfunc_ea)
+            #         print(f'{class_name}::{func_name}::.vtbl[{vtbl_index}] // {vfunc_ea:X} // {sig}')
+
+        for (func_ea, func_name) in self.DATASTORE.functions.items():
+            sig = self.sig_address(func_ea)
+            print(f'{func_name} // {func_ea:X} // {sig}')
+
+            # class_data.vtbl
+            # class_data.funcs
+            # class_data.vfuncs
+            # class_data.g_instance
+            # class_data.g_pointer
+            # class_data.inherits_from
+
+
+print("Executing")
+sigmaker = FfxivSigmaker()
+sigmaker.run()
+print("Done")
