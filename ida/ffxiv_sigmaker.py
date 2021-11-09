@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
 
-import itertools
+import dataclasses
+import json
+import logging
 import os
 import sys
 from dataclasses import dataclass, field
+from json import JSONEncoder
 from pathlib import Path
-from typing import Dict, Iterator, List, Optional
+from typing import Dict, Iterator, List, Optional, Set
 
 import dacite
 import ida_bytes
@@ -14,27 +17,30 @@ import yaml
 import idaapi
 import idautils
 import ida_funcs
-import ida_lines
-import ida_search
 import ida_segment
-import idc
 
+LOGGING = logging.DEBUG
 SENTINEL = 0xDEAD_BEEF
 
 
 @dataclass
+class ClassVtbl:
+    ea: int
+    base: Optional[str]
+
+
+@dataclass
 class GameClass:
-    inherits_from: Optional[str]
-    vtbl: Optional[int]
     g_instance: Optional[int]
     g_pointer: Optional[int]
+    vtbls: List[ClassVtbl] = field(default_factory=list)
     funcs: Dict[int, str] = field(default_factory=dict)
     vfuncs: Dict[int, str] = field(default_factory=dict)
 
     # These should not be defined in the yaml
-    vtbl_size: Optional[int] = field(default=SENTINEL)
+    g_instance_sig: Optional[str] = field(default=None)
+    g_pointer_sig: Optional[str] = field(default=None)
     func_sigs: Dict[str, str] = field(default_factory=dict)
-    vfunc_sigs: Dict[str, str] = field(default_factory=dict)
 
 
 @dataclass
@@ -45,50 +51,71 @@ class ClientStructsData:
     classes: Dict[str, Optional[GameClass]] = field(default_factory=dict)
 
 
-class IdaApi:
-    @staticmethod
-    def image_base() -> int:
-        return idaapi.get_imagebase()
+class DataclassJSONEncoder(JSONEncoder):
+    """
+    Dataclass serializer
+    """
+
+    def default(self, obj):
+        if dataclasses.is_dataclass(obj):
+            return dataclasses.asdict(obj)
+        return super().default(obj)
+
+
+class Log:
+    """
+    A logger
+    """
 
     @staticmethod
-    def is_offset(ea: int) -> bool:
-        return idc.is_off0(idc.get_full_flags(ea))
+    def _log(level: str, message: str) -> None:
+        """
+        Log a message
+        :param level: Log level
+        :param message: The message
+        :return: None
+        """
+        print(f'[{level}] {message}')
 
     @staticmethod
-    def xrefs_to(ea: int) -> List[int]:
-        return [xref.to for xref in idautils.XrefsTo(ea)]
+    def debug(message: str) -> None:
+        """
+        Log a debug message
+        :param message: The message
+        :return: None
+        """
+        if LOGGING >= logging.DEBUG:
+            Log._log('DBG', message)
 
     @staticmethod
-    def xrefs_from(ea: int) -> List[int]:
-        return [xref.frm for xref in idautils.XrefsTo(ea)]
+    def info(message: str) -> None:
+        """
+        Log an info message
+        :param message: The message
+        :return: None
+        """
+        if LOGGING >= logging.INFO:
+            Log._log('INF', message)
 
     @staticmethod
-    def get_qword(ea: int) -> int:
-        return idc.get_qword(ea)
+    def warn(message: str) -> None:
+        """
+        Log a warning message
+        :param message: The message
+        :return: None
+        """
+        if LOGGING >= logging.WARN:
+            Log._log('WRN', message)
 
     @staticmethod
-    def get_addr_name(ea: int) -> str:
-        return idc.get_name(ea)
-
-    @staticmethod
-    def set_addr_name(ea: int, name: str) -> bool:
-        result = idc.set_name(ea, name)
-        return bool(result)
-
-    @staticmethod
-    def get_func_name(ea: int) -> str:
-        return ida_funcs.get_func_name(ea)
-
-    @staticmethod
-    def get_comment(ea: int) -> str:
-        return idc.get_cmt(ea, False)
-
-    @staticmethod
-    def set_comment(ea: int, comment: str) -> None:
-        idc.set_cmt(ea, comment, False)
-
-
-api = IdaApi()
+    def error(message: str) -> None:
+        """
+        Log an error message
+        :param message: The message
+        :return: None
+        """
+        if LOGGING >= logging.ERROR:
+            Log._log('ERR', message)
 
 
 class SigGen:
@@ -98,6 +125,7 @@ class SigGen:
     the func length or the INSN_TO_SIG variable.
     """
     _INSN_TO_SIG = 10  # Max number of instructions to sig
+
     _base_addr: int  # base address
     _max_addr: int  # address of last function instruction
     _max_index: int  # count of instructions
@@ -111,12 +139,16 @@ class SigGen:
         """
         self._base_addr = addr
 
-        func_items = list(idautils.FuncItems(addr))
+        # FuncItems returns the address of each insn.
+        # The addr can be anywhere inside the func itself.
+        # So this gets all insn addresses >= the addr parameter
+        func_items = [ea for ea in idautils.FuncItems(addr) if ea >= addr]
 
         # The last address of the function
         # Sig-able addresses can be this, but not greater than this
         self._max_addr = func_items[-1]
         self._max_index = min(self._INSN_TO_SIG, len(func_items) - 1)
+
         self._insn_addr_cache = {i: func_items[i] for i in range(self._max_index)}
         self._sig_cache = {}
 
@@ -241,78 +273,100 @@ class SigGen:
 class FfxivSigmaker:
     DATASTORE: ClientStructsData
     STANDARD_IMAGE_BASE = 0x1_4000_0000
+
+    # The ".text" segment, only look for xrefs within this range
     TEXT_SEGMENT: ida_segment.segment_t = ida_segment.get_segm_by_name(".text")
 
     # Max number of XREFs to search through for each address
     XREFS_TO_SEARCH = 10
 
-    def _calc_vtbl_size(self, class_name: str, data: GameClass) -> None:
+    # Sigs that are not unique, cache having to search short sigs multiple times
+    _NOT_UNIQUE_SIGNATURES: Set[str] = set()
+
+    def __init__(self):
+        data_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "data.yml")
+        with Path(data_path).open('r') as fd:
+            data_dict = yaml.safe_load(fd)
+            self.DATASTORE = dacite.from_dict(ClientStructsData, data_dict)
+
+        self._rebase_datastore()
+
+    def run(self) -> None:
         """
-        Calculate the size of the vtable.
-        This value is saved in the GameClass instance.
-        :param class_name: Name of the class.
-        :param data: Class data.
+        Run the sigmaker
         :return: None
         """
-        if not data.vtbl:
-            data.vtbl_size = 0
-            return
+        class_data: GameClass
+        total = len(self.DATASTORE.classes)
+        for (i, (class_name, class_data)) in enumerate(self.DATASTORE.classes.items()):
+            # skip stubs
+            if not class_data:
+                continue
 
-        # Check if this has been computed before
-        if data.vtbl_size is not SENTINEL:
-            return data.vtbl_size
+            status = f'{i}/{total} ({i / total:0.2%})'
 
-        # Set to 1, skip the first entry
-        data.vtbl_size = 1
+            for (func_ea, func_name) in class_data.funcs.items():
+                sig = self._sig_address(func_ea, True)
+                Log.debug(f'{status} // {class_name}::{func_name} // {func_ea:X} // {sig}')
+                if sig:
+                    class_data.func_sigs[func_name] = sig
 
-        # Increment for each offset with with no xrefs
-        for ea in itertools.count(data.vtbl + 8, 8):
-            if api.get_addr_name(ea) != "":
-                break
-            if not api.is_offset(ea) or len(api.xrefs_to(ea)) > 0:
-                break
-            data.vtbl_size += 1
+            global_ea = class_data.g_pointer
+            if global_ea:
+                sig = self._sig_address(global_ea, False)
+                Log.debug(f'{status} // {class_name}::gPointer // {global_ea:X} // {sig}')
+                if sig:
+                    class_data.g_pointer_sig = sig
 
-        if data.inherits_from:
-            # Verify the parent is not larger than the child
-            # Then each ancestor, so long as they exist
-            parent_name = data.inherits_from
-            parent_data = self.DATASTORE.classes.get(parent_name)
-            while parent_data:
-                # Calculate the parent before continuing
-                if parent_data.vtbl_size == SENTINEL:
-                    self._calc_vtbl_size(parent_name, parent_data)
+            global_ea = class_data.g_instance
+            if global_ea:
+                sig = self._sig_address(global_ea, False)
+                Log.debug(f'{status} // {class_name}::gInstance // {global_ea:X} // {sig}')
+                if sig:
+                    class_data.g_instance_sig = sig
 
-                if parent_data.vtbl_size > data.vtbl_size > 0:
-                    print("Error: The parent \"{0}\" of \"{1}\" has a larger vtable size: {2} > {3}".format(
-                        parent_name, class_name, parent_data.vtbl_size, data.vtbl_size))
+        Log.debug(f'{total}/{total} (100.00%)')
 
-                parent_name = parent_data.inherits_from
-                parent_data = self.DATASTORE.classes.get(parent_name)
+    def export(self) -> None:
+        """
+        Export the data.yml with signature data added
+        :return: None
+        """
+        data_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "sigdata.json")
 
-    def rebase_datastore(self) -> None:
+        self._rebase_datastore(undo=True)
+
+        with Path(data_path).open('w') as fd:
+            json.dump(self.DATASTORE, fd, cls=DataclassJSONEncoder, indent=True)
+
+    # region Rebasing
+
+    def _rebase_datastore(self, undo: bool = False) -> None:
         """
         Rebase all the addresses in the datastore.
+        :param undo: Revert a rebasing instead
         :return: None
         """
-        current_image_base = api.image_base()
+        current_image_base = idaapi.get_imagebase()
         if self.STANDARD_IMAGE_BASE == current_image_base:
             return
 
         rebase_offset = current_image_base - self.STANDARD_IMAGE_BASE
+        if undo:
+            rebase_offset *= -1
 
-        self._rebase_dict(self.DATASTORE.globals, rebase_offset)
-        self._rebase_dict(self.DATASTORE.functions, rebase_offset)
+        self.__rebase_dict(self.DATASTORE.globals, rebase_offset)
+        self.__rebase_dict(self.DATASTORE.functions, rebase_offset)
 
         class_data: GameClass
         for (class_name, class_data) in self.DATASTORE.classes.items():
             if not class_data:
                 continue
 
-            self._rebase_dict(class_data.funcs, rebase_offset)
+            self.__rebase_dict(class_data.funcs, rebase_offset)
 
-            if class_data.vtbl:
-                class_data.vtbl += rebase_offset
+            for vtbl in class_data.vtbls:
+                vtbl.ea += rebase_offset
 
             if class_data.g_pointer:
                 class_data.g_pointer += rebase_offset
@@ -320,7 +374,7 @@ class FfxivSigmaker:
             if class_data.g_instance:
                 class_data.g_instance += rebase_offset
 
-    def _rebase_dict(self, mapping: Dict[int, str], rebase_offset: int) -> None:
+    def __rebase_dict(self, mapping: Dict[int, str], rebase_offset: int) -> None:
         """
         Rebase all addresses in a [addr, _] mapping
         :param mapping: Mapping to rebase
@@ -330,41 +384,49 @@ class FfxivSigmaker:
         for (addr, name) in list(mapping.items()):
             mapping[addr + rebase_offset] = mapping.pop(addr)
 
-    def sig_address(self, addr: int, is_func: bool) -> Optional[str]:
+    # endregion
+
+    # region Signature creation
+
+    def _sig_address(self, addr: int, is_func: bool) -> Optional[str]:
         """
         Find the best sig available for a given address
         :param addr: Address to sig the xrefs of
         :param is_func: Address is a func start
         :return: A signature, or None
         """
-        sigs = self._get_xref_sigs(addr, is_func)
-        sig = self._find_best_sig(sigs)
+        sigs = self.__get_xref_sigs(addr, is_func)
+        sig = self.__find_best_sig(sigs)
         return sig
 
-    def _get_xref_sigs(self, addr: int, fail_func: bool) -> Iterator[str]:
+    def __get_xref_sigs(self, addr: int, is_func: bool) -> Iterator[str]:
         """
         Create a signature from a function address
         XRef sigs are preferred, however if none are available the func itself will be used
         :param addr: Function address
-        :param fail_func: If no xrefs are available, and this is a function, sig the function itself
+        :param is_func: Indicates that this address is a func, and can be signatured directly
         :return: A series of Dalamud compatible signatures
         """
-        xref_addrs = api.xrefs_from(addr)
+        xref_addrs = [xref.frm for xref in idautils.XrefsTo(addr)]
+
+        if is_func and not ida_funcs.get_func(addr):
+            Log.warn(f'Address at {addr:X} is identified as a func, but is not in IDA, attempting to make a subroutine')
+            ida_funcs.add_func(addr)
 
         # This should prune xrefs in places like .pdata by only keeping xrefs in a function
-        xref_addrs = list(filter(api.get_func_name, xref_addrs))
+        xref_addrs = list(filter(ida_funcs.get_func_name, xref_addrs))
 
-        # No xrefs? Use the func itself
-        if not xref_addrs and fail_func:
-            xref_addrs = [addr]
-
-        # Grab teh first N xrefs
+        # Grab the first N xrefs
         xref_addrs = xref_addrs[:self.XREFS_TO_SEARCH]
+
+        if is_func:
+            # Try to sig the func itself as well
+            xref_addrs.insert(0, addr)
 
         for xref_addr in xref_addrs:
             yield from SigGen(xref_addr)
 
-    def _find_best_sig(self, sigs: Iterator[str]) -> Optional[str]:
+    def __find_best_sig(self, sigs: Iterator[str]) -> Optional[str]:
         """
         Find the shortest signature, with only one match in the .TEXT segment.
         :param sigs: Signatures to check
@@ -378,31 +440,38 @@ class FfxivSigmaker:
             if len(sig) >= chosen_sig_size:
                 continue
 
-            if self._is_sig_unique(sig):
+            if sig in self._NOT_UNIQUE_SIGNATURES:
+                continue
+
+            if self.__is_sig_unique(sig):
                 chosen_sig = sig
                 chosen_sig_size = len(sig)
+            else:
+                self._NOT_UNIQUE_SIGNATURES.add(sig)
 
         return chosen_sig
 
-    def _is_sig_unique(self, sig: str) -> bool:
+    def __is_sig_unique(self, sig: str) -> bool:
         """
         Perform a binary sig search and determine if the signature has one unique match
         :param sig: Sig to search
         :return: True if only one address matches
         """
+
         # Expects a byte array
         fmt_sig = [int(s, 16).to_bytes(1, 'little') if s != '??' else b'\0' for s in sig.split(' ')]
         fmt_sig = b''.join(fmt_sig)
-        # Another byte array, 0 = ?? wildcard
+
+        # Another byte array, 0 = "??" wildcard
         sig_mask = [int(b != '??').to_bytes(1, 'little') for b in sig.split(' ')]
         sig_mask = b''.join(sig_mask)
 
         result_count = 0
-        sig_addr = self.TEXT_SEGMENT.start_ea
+        sig_addr = self.TEXT_SEGMENT.start_ea  # noqa
         while True:
             sig_addr = idaapi.bin_search(
                 sig_addr,
-                self.TEXT_SEGMENT.end_ea,
+                self.TEXT_SEGMENT.end_ea,  # noqa
                 fmt_sig, sig_mask,
                 ida_bytes.BIN_SEARCH_FORWARD,
                 ida_bytes.BIN_SEARCH_NOCASE)
@@ -423,63 +492,11 @@ class FfxivSigmaker:
 
         return True
 
-    def run(self):
-        """
-        Run the sigmaker
-        :return: None
-        """
-        # data_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "data.yml")
-        data_path = r'C:\Users\Raymond\code\FFXIVClientStructs\ida\data.yml'
-        with Path(data_path).open('r') as fd:
-            data_dict = yaml.safe_load(fd)
-            self.DATASTORE = dacite.from_dict(ClientStructsData, data_dict)
-
-        # Rebase
-        self.rebase_datastore()
-
-        ida_segment.get_segm_by_name('.text')
-
-        class_data: GameClass
-        for (class_name, class_data) in self.DATASTORE.classes.items():
-            if not class_data:
-                continue
-
-            self._calc_vtbl_size(class_name, class_data)
-            for (func_ea, func_name) in class_data.funcs.items():
-                sig = self.sig_address(func_ea, True)
-                print(f'{class_name}::{func_name} // {func_ea:X} // {sig}')
-
-            global_ea = class_data.g_pointer
-            if global_ea:
-                sig = self.sig_address(global_ea, False)
-                print(f'{class_name}::gPointer // {global_ea:X} // {sig}')
-
-            global_ea = class_data.g_instance
-            if global_ea:
-                sig = self.sig_address(global_ea, False)
-                print(f'{class_name}::gInstance // {global_ea:X} // {sig}')
-
-            # While we CAN sig (some of) these, should we?
-            # if class_data.vtbl:
-            #     for (vtbl_index, func_name) in class_data.vfuncs.items():
-            #         vfunc_ofs = class_data.vtbl + vtbl_index * 8
-            #         vfunc_ea = ida_bytes.get_qword(vfunc_ofs)
-            #         sig = self.sig_func(vfunc_ea)
-            #         print(f'{class_name}::{func_name}::.vtbl[{vtbl_index}] // {vfunc_ea:X} // {sig}')
-
-        for (func_ea, func_name) in self.DATASTORE.functions.items():
-            sig = self.sig_address(func_ea)
-            print(f'{func_name} // {func_ea:X} // {sig}')
-
-            # class_data.vtbl
-            # class_data.funcs
-            # class_data.vfuncs
-            # class_data.g_instance
-            # class_data.g_pointer
-            # class_data.inherits_from
+    # endregion
 
 
-print("Executing")
+Log.info("Executing sigmaker")
 sigmaker = FfxivSigmaker()
 sigmaker.run()
-print("Done")
+sigmaker.export()
+Log.info("Done")
