@@ -1,18 +1,18 @@
 ﻿## ffxiv_idarename.py
 Despite the name being a misnomer at this point, this script supports both Ghidra and IDA. 
 This script ingests the `data.yml` file in the same directory, and renames various offsets as globals, functions, vtables and such.
-
-Due to switching to a separate yaml format, it has a dependency on PyYaml. 
  
 #### IDA dependency installation:
-`pip install pyyaml` or `python -m pip install pyyaml` in whichever version of python you are currently using with IDA Pro.
+`pip install pyyaml anytree` or `python -m pip install pyyaml anytree` in whichever version of python you are currently using with IDA Pro.
 If you are familiar with Poetry, the `idarename` extras package will do the same.
 This could be either Python2 or Python3. 
+
+Additionally, you will need to place "idauser.cfg" from this repository in "%AppData%\Hex-Rays\IDA Pro\". IDA doesn't allow you to use certain characters in names and this config changes that.
 
 #### Ghidra dependency installation:
 This is slightly more complicated as Ghidra uses an embedded version of Jython. 
 - Install a copy of Python2 from https://www.python.org/downloads/
-- Execute the following `python.exe -m pip install -t \<YourGhidraFolder\>\Ghidra\Features\Python\data\jython-2.7.2\Lib\site-packages pyyaml`
+- Execute the following `python.exe -m pip install -t \<YourGhidraFolder\>\Ghidra\Features\Python\data\jython-2.7.2\Lib\site-packages pyyaml anytree`
 - Add `FFXIVClientStructs\ida` as a script directory.
 
 ## ffxiv_sigmaker.py

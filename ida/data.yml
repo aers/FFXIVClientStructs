@@ -146,13 +146,12 @@ functions:
   0x14031AC10: SubmitConstantBufferUpdate
 
 classes:
-  # Unknown classes old RTTI data says known classes inherit from
   Client::Game::Control::TargetSystem::ListFeeder:
   Client::Game::InstanceContent::ContentSheetWaiterInterface:
   Client::Game::Object::IGameObjectEventListener:
   Client::Graphics::RenderObjectList:
   Client::Graphics::Singleton:
-  Client::Graphics::Vfx::VfxDataListenner:
+
   Client::System::Common::NonCopyable:
   Client::System::Crypt::CryptInterface:
   Client::System::Input::InputData::InputCodeModifiedInterface:
@@ -179,7 +178,6 @@ classes:
   SQEX::CDev::Engine::Sd::SdMemoryAllocator:
   SQEX::CDev::Engine::Sd::Driver::BankController:
   Client::System::Scheduler::Base::LinkList:
-  # Known classes - no vfunc/vtables
   Client::Game::Control::Control:
     funcs:
       0x1404A6040: Initialize
@@ -195,7 +193,7 @@ classes:
     funcs:
       0x140744080: Update
       0x1407447E0: DeleteAllModels
-      0x1407448F0: DeleteAllObjects # IMPORTANT:: DONT EVER CALL THIS FOR REAL OKAY
+      0x1407448F0: DeleteAllObjects  # IMPORTANT:: DONT EVER CALL THIS FOR REAL OKAY
   Client::Game::Character::CharacterManager:
     funcs:
       0x140742CA0: Initialize
@@ -203,18 +201,18 @@ classes:
       0x140743270: LookupBattleCharaByObjectID
   Client::Game::Group::GroupManager:
     funcs:
-      0x140BC84D0: Create
       0x1407803C0: ctor
       0x140780530: SetPartyEmpty
-      0x1407812C0: GetAllianceMemberByGroupAndIndex # (this, group, index)
+      0x1407812C0: GetAllianceMemberByGroupAndIndex  # (this, group, index)
       0x140781320: GetAllianceMemberByIndex # (this, index)
       0x140781340: IsObjectIDInParty # (this, objectID)
       0x1407813A0: IsCharacterInPartyByName # (this, char*)
       0x140781420: IsObjectIDInAlliance
       0x140781490: IsObjectIDPartyLeader
+      0x140BC84D0: Create
   FateManager:
     funcs:
-      0x1410F5C60: HasValue # g_FateTablePtr != 0
+      0x1410F5C60: HasValue  # g_FateTablePtr != 0
       0x1410F5C80: GetPtr # return g_FateTablePtr
       0x1410F5C90: ctor
       0x1410F5CE0: dtor
@@ -223,15 +221,15 @@ classes:
       0x1407C2860: GetMemberBattleCharaByIndex
   InventoryManager:
     funcs:
-      0x1406A2AD0: GetInventoryContainer # (this, containerId)
+      0x1406A2AD0: GetInventoryContainer  # (this, containerId)
       0x1406AAF40: GetInventoryItemCount # (this, itemId, hq, 1, 1, 0)
       0x1406AB6B0: GetItemCountInContainer # (this, itemId, containerId, hq, 0)
   InventoryContainer:
     funcs:
-      0x1406A1410: GetInventorySlot # (this, slotIndex)
+      0x1406A1410: GetInventorySlot  # (this, slotIndex)
   Client::System::String::Utf8String:
     funcs:
-      0x140059710: ctor # empty string ctor
+      0x140059710: ctor  # empty string ctor
       0x140059750: ctor_copy # copy constructor
       0x1400597D0: ctor_FromCStr # from null-terminated string
       0x140059860: ctor_FromSequence # (FFXIVString, char * str, size_t size)
@@ -244,7 +242,7 @@ classes:
       0x1404AFCE0: dtor
       0x1404AFD20: GetBool
       0x1404AFD40: GetInt
-      0x1404AFD60: GetUInt # these two could be backwards
+      0x1404AFD60: GetUInt  # these two could be backwards
       0x1404AFD80: GetFloat
       0x1404AFDA0: GetString
       0x1404AFDC0: GetUnkPtr # could also be string, returns a pointer size
@@ -252,8 +250,8 @@ classes:
       0x1404AFE90: CopyValue # = operator
       0x1404AFF00: Equals # == operator
       0x1404B0080: CreateArray # uses std::vector for array type (9)
-      0x1404B0530: ReleaseManagedMemory # called by SetString, frees old strings
       0x1404B0320: ChangeType
+      0x1404B0530: ReleaseManagedMemory # called by SetString, frees old strings
   Component::GUI::AtkEvent:
     funcs:
       0x1404B71B0: SetEventIsHandled
@@ -264,7 +262,7 @@ classes:
       0x1404DB2A0: ReadASHDAndLoadTextures
       0x1404DB780: CreateAtkNode
       0x1404DCB90: CreateAtkComponent
-      0x1404DE670: SearchNodeByIndex # this supports indexes greater than the node count, there's something i don't understand going on w/ addons here
+      0x1404DE670: SearchNodeByIndex  # this supports indexes greater than the node count, there's something i don't understand going on w/ addons here
   Component::GUI::AtkArrayDataHolder:
     funcs:
       0x1404B05E0: ctor
@@ -283,18 +281,20 @@ classes:
   Client::Game::UI::PlayerState:
     funcs:
       0x140789110: SetCharacterName
-      0x14078CA30: Initialize
       0x14078A6F0: GetBeastTribeRank
       0x14078A770: GetBeastTribeCurrentRep
       0x14078A7B0: GetBeastTribeNeededRep
+      0x14078CA30: Initialize
       0x1407F2BF0: ctor
   Client::Game::UI::Revive:
-    vtbl: 0x1416E6390
+    vtbls:
+      - ea: 0x1416E6390
   Client::Game::UI::Buddy:
     funcs:
       0x1407C2BF0: ctor
   Client::Game::UI::RelicNote:
-    vtbl: 0x1416E7248
+    vtbls:
+      - ea: 0x1416E7248
     funcs:
       0x1407CCC80: GetRelicID
       0x1407CCC90: GetRelicNoteID
@@ -306,11 +306,12 @@ classes:
     funcs:
       0x1407E46A0: AddLogMessage
       0x1407E5580: AddActionLogMessage
-      0x1407E5C90: AddToScreenLogWithLogMessageId # this converts log message id to screen log kind and calls below function
+      0x1407E5C90: AddToScreenLogWithLogMessageId  # this converts log message id to screen log kind and calls below function
       0x1407E5D70: AddToScreenLogWithScreenLogKind
   Client::Game::ActionManager:
-    inherits_from: Client::Graphics::Vfx::VfxDataListenner
-    vtbl: 0x1416E76D0
+    vtbls:
+      - ea: 0x1416E76D0
+        base: Client::Graphics::Vfx::VfxDataListenner
     funcs:
       0x1400A82A0: GetCurrentComboActionId
       0x140804040: GetActionRange
@@ -339,103 +340,132 @@ classes:
       0x14081D300: Update
       0x14081D420: ChangeGauge
   Client::Game::Gauge::JobGauge:
-    vtbl: 0x1416E7720
+    vtbls:
+      - ea: 0x1416E7720
     vfuncs:
       0: dtor
       1: Init
       4: SetValues
   Client::Game::Gauge::PaladinGauge:
-    inherits_from: Client::Game::Gauge::JobGauge
-    vtbl: 0x1416E7760
+    vtbls:
+      - ea: 0x1416E7760
+        base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::MonkGauge:
-    inherits_from: Client::Game::Gauge::JobGauge
-    vtbl: 0x1416E77A0
+    vtbls:
+      - ea: 0x1416E77A0
+        base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::WarriorGauge:
-    inherits_from: Client::Game::Gauge::JobGauge
-    vtbl: 0x1416E77E0
+    vtbls:
+      - ea: 0x1416E77E0
+        base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::DragoonGauge:
-    inherits_from: Client::Game::Gauge::JobGauge
-    vtbl: 0x1416E7820
+    vtbls:
+      - ea: 0x1416E7820
+        base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::BardGauge:
-    inherits_from: Client::Game::Gauge::JobGauge
-    vtbl: 0x1416E7860
+    vtbls:
+      - ea: 0x1416E7860
+        base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::WhiteMageGauge:
-    inherits_from: Client::Game::Gauge::JobGauge
-    vtbl: 0x1416E78A0
+    vtbls:
+      - ea: 0x1416E78A0
+        base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::BlackMageGauge:
-    inherits_from: Client::Game::Gauge::JobGauge
-    vtbl: 0x1416E78E0
+    vtbls:
+      - ea: 0x1416E78E0
+        base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::SummonerGauge:
-    inherits_from: Client::Game::Gauge::JobGauge
-    vtbl: 0x1416E7920
+    vtbls:
+      - ea: 0x1416E7920
+        base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::ScholarGauge:
-    inherits_from: Client::Game::Gauge::JobGauge
-    vtbl: 0x1416E7960
+    vtbls:
+      - ea: 0x1416E7960
+        base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::NinjaGauge:
-    inherits_from: Client::Game::Gauge::JobGauge
-    vtbl: 0x1416E79A0
+    vtbls:
+      - ea: 0x1416E79A0
+        base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::MachinistGauge:
-    inherits_from: Client::Game::Gauge::JobGauge
-    vtbl: 0x1416E79E0
+    vtbls:
+      - ea: 0x1416E79E0
+        base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::DarkKnightGauge:
-    inherits_from: Client::Game::Gauge::JobGauge
-    vtbl: 0x1416E7A20
+    vtbls:
+      - ea: 0x1416E7A20
+        base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::AstrologianGauge:
-    inherits_from: Client::Game::Gauge::JobGauge
-    vtbl: 0x1416E7A60
+    vtbls:
+      - ea: 0x1416E7A60
+        base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::SamuraiGauge:
-    inherits_from: Client::Game::Gauge::JobGauge
-    vtbl: 0x1416E7AA0
+    vtbls:
+      - ea: 0x1416E7AA0
+        base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::RedMageGauge:
-    inherits_from: Client::Game::Gauge::JobGauge
-    vtbl: 0x1416E7AE0
+    vtbls:
+      - ea: 0x1416E7AE0
+        base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::DancerGauge:
-    inherits_from: Client::Game::Gauge::JobGauge
-    vtbl: 0x1416E7B20
+    vtbls:
+      - ea: 0x1416E7B20
+        base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::GunbreakerGauge:
-    inherits_from: Client::Game::Gauge::JobGauge
-    vtbl: 0x1416E7B60
+    vtbls:
+      - ea: 0x1416E7B60
+        base: Client::Game::Gauge::JobGauge
   Common::Configuration::ConfigBase:
-    inherits_from: Client::System::Common::NonCopyable
-    vtbl: 0x1416752C0
+    vtbls:
+      - ea: 0x1416752C0
+        base: Client::System::Common::NonCopyable
     funcs:
       0x140068CE0: ctor
   Common::Configuration::UIConfig:
-    inherits_from: Common::Configuration::ConfigBase
-    vtbl: 0x1416752E0
+    vtbls:
+      - ea: 0x1416752E0
+        base: Common::Configuration::ConfigBase
   Common::Configuration::UIControlConfig:
-    inherits_from: Common::Configuration::ConfigBase
-    vtbl: 0x141675300
+    vtbls:
+      - ea: 0x141675300
+        base: Common::Configuration::ConfigBase
   Common::Configuration::SystemConfig:
-    inherits_from: Common::Configuration::ConfigBase
-    vtbl: 0x141675320
+    vtbls:
+      - ea: 0x141675320
+        base: Common::Configuration::ConfigBase
     funcs:
       0x140078E90: ctor
   Common::Configuration::DevConfig:
-    inherits_from: Common::Configuration::ConfigBase
-    vtbl: 0x141675340
+    vtbls:
+      - ea: 0x141675340
+        base: Common::Configuration::ConfigBase
     funcs:
       0x14007EB20: ctor
   Client::System::Framework::Task:
-    vtbl: 0x1416764F8
+    vtbls:
+      - ea: 0x1416764F8
     funcs:
-      0x140094840: TaskRunner # task starter which runs the task's function pointer
+      0x140094840: TaskRunner  # task starter which runs the task's function pointer
   Client::System::Framework::TaskManager::RootTask:
-    inherits_from: Client::System::Framework::Task
-    vtbl: 0x141676510
+    vtbls:
+      - ea: 0x141676510
+        base: Client::System::Framework::Task
   Client::System::Framework::TaskManager:
-    vtbl: 0x141676528
+    vtbls:
+      - ea: 0x141676528
     funcs:
       0x140093FF0: ctor
       0x140173A30: SetTask
   Client::System::Configuration::SystemConfig:
-    inherits_from: Common::Configuration::SystemConfig
-    vtbl: 0x141676540
+    vtbls:
+      - ea: 0x141676540
+        base: Common::Configuration::SystemConfig
   Client::System::Configuration::DevConfig:
-    inherits_from: Common::Configuration::DevConfig
-    vtbl: 0x141676560
+    vtbls:
+      - ea: 0x141676560
+        base: Common::Configuration::DevConfig
   Client::System::Framework::Framework:
-    vtbl: 0x141676580
+    vtbls:
+      - ea: 0x141676580
     vfuncs:
       1: Setup
       4: Tick
@@ -450,19 +480,15 @@ classes:
       0x140093480: TaskRenderManagerRender
       0x140093520: TaskUpdateLayoutWorld
       0x140093540: TaskResourceManagerUpdate
-  Component::Exd::ExdModule:
-    vtbl: 0x1416BF5D8
-    funcs:
-      0x140478440: ctor
-      0x140478A30: GetSheetRowById
-      0x140478AB0: GetEntryByIndex
   Component::Excel::ExcelModuleInterface:
-    vtbl: 0x1416765A8
+    vtbls:
+      - ea: 0x1416765A8
     vfuncs:
       1: GetSheetByIndex
       2: GetSheetByName
   Component::Excel::ExcelModule:
-    vtbl: 0x1419B1D00
+    vtbls:
+      - ea: 0x1419B1D00
     vfuncs:
       1: GetSheetByIndex
       2: GetSheetByName
@@ -470,37 +496,44 @@ classes:
     funcs:
       0x1416061D0: ctor
   Client::System::Input::TextService:
-    inherits_from: Client::System::Input::TextServiceInterface
-    vtbl: 0x141676C48
+    vtbls:
+      - ea: 0x141676C48
+        base: Client::System::Input::TextServiceInterface
   Component::Shell::ShellCommandModule:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x141676D40
+    vtbls:
+      - ea: 0x141676D40
+        base: Client::UI::Shell::RaptureShellCommandInterface
     funcs:
       0x140098B90: ExecuteCommandInner
   Component::GUI::AtkEventListener:
-    vtbl: 0x141680708
+    vtbls:
+      - ea: 0x141680708
     vfuncs:
       0: dtor
       1: ReceiveGlobalEvent # this seems to be a common event handler shared by all AtkUnitBase instances, they don't overwrite it
       2: ReceiveEvent
   Component::GUI::AtkUnitList:
-    vtbl: 0x141680740
+    vtbls:
+      - ea: 0x141680740
   Component::GUI::AtkUnitManager:
-    inherits_from: Component::GUI::AtkEventListener
-    vtbl: 0x141680748
+    vtbls:
+      - ea: 0x141680748
+        base: Component::GUI::AtkEventListener
     vfuncs:
       11: UpdateAddonByID
     funcs:
       0x1404EA560: ctor
   Client::UI::RaptureAtkUnitManager:
-    inherits_from: Component::GUI::AtkUnitManager
-    vtbl: 0x1416808A0
+    vtbls:
+      - ea: 0x1416808A0
+        base: Component::GUI::AtkUnitManager
     funcs:
       0x1400AB1F0: ctor
-      0x1404EC010: GetAddonByName # dalamud GetUIObjByName
+      0x1404EC010: GetAddonByName
   Client::UI::RaptureAtkModule:
-    inherits_from: Component::GUI::AtkModule
-    vtbl: 0x141680AF8
+    vtbls:
+      - ea: 0x141680AF8
+        base: Component::GUI::AtkModule
     funcs:
       0x1400B0B70: ctor
       0x1400B2BA0: OpenAddon
@@ -509,57 +542,75 @@ classes:
       0x1400D3EC0: UpdateNameplates_Task1
       0x1400D6E50: IsUIVisible
   Client::UI::Info::InfoProxyInterface:
-    vtbl: 0x141680638
+    vtbls:
+      - ea: 0x141680638
   Client::UI::Info::InfoProxyPageInterface:
-    inherits_from: Client::UI::Info::InfoProxyInterface
-    vtbl: 0x141680690
+    vtbls:
+      - ea: 0x141680690
+        base: Client::UI::Info::InfoProxyInterface
+  Common::Configuration::ConfigBase::ChangeEventInterface:
+    vtbls:
+      - ea: 0x141680DA0
   Client::UI::Info::InfoProxyCrossRealm:
-    inherits_from: Client::UI::Info::InfoProxyInterface
-    vtbl: 0x141680F90
+    vtbls:
+      - ea: 0x141680F90
+        base: Client::UI::Info::InfoProxyInterface
     funcs:
       0x1400E8DB0: ctor
       0x1400E8E60: dtor
       0x1400E8E80: GetPtr  # Static
   Client::Graphics::Kernel::Notifier:
-    vtbl: 0x141688FE8
+    vtbls:
+      - ea: 0x141688FE8
   Client::System::Crypt::Crc32:
-    vtbl: 0x14168CA88
+    vtbls:
+      - ea: 0x14168CA88
   Client::Graphics::ReferencedClassBase:
-    vtbl: 0x141692FE0
+    vtbls:
+      - ea: 0x141692FE0
     vfuncs:
       0: dtor
       1: Cleanup # this is called by DecRef when there are no refs left, before the dtor is called
       2: IncRef
       3: DecRef
   Client::Graphics::Environment::EnvSoundState:
-    vtbl: 0x141693028
+    vtbls:
+      - ea: 0x141693028
   Client::Graphics::Environment::EnvState:
-    vtbl: 0x141693048
+    vtbls:
+      - ea: 0x141693048
   Client::Graphics::Environment::EnvSimulator:
-    vtbl: 0x141693098
+    vtbls:
+      - ea: 0x141693098
   Client::Graphics::Environment::EnvManager:
-    inherits_from: Client::Graphics::Singleton
-    vtbl: 0x1416930A8
+    vtbls:
+      - ea: 0x1416930A8
+        base: Client::Graphics::Singleton
   Client::System::Threading::Thread:
-    inherits_from: Client::System::Common::NonCopyable
-    vtbl: 0x1416934D0
+    vtbls:
+      - ea: 0x1416934D0
+        base: Client::System::Common::NonCopyable
     vfuncs:
       5: Run
     funcs:
       0x1401973F0: CreateThread
   Client::System::File::FileInterface:
-    vtbl: 0x141693590
+    vtbls:
+      - ea: 0x141693590
   Client::System::File::FileThread:
-    inherits_from: Client::System::Threading::Thread
-    vtbl: 0x1416935B0
+    vtbls:
+      - ea: 0x1416935B0
+        base: Client::System::Threading::Thread
   Client::System::File::FileManager:
-    inherits_from: Client::System::Framework::Task
-    vtbl: 0x1416935E0
+    vtbls:
+      - ea: 0x1416935E0
+        base: Client::System::Framework::Task
     funcs:
       0x14019E910: ctor
   Client::System::Resource::Handle::ResourceHandle:
-    inherits_from: Client::System::Common::NonCopyable
-    vtbl: 0x141694D68
+    vtbls:
+      - ea: 0x141694D68
+        base: Client::System::Common::NonCopyable
     vfuncs:
       23: GetData
       33: Load
@@ -568,62 +619,77 @@ classes:
       0x1401A2500: IncRef
       0x1401A26C0: ctor
   Client::System::Resource::Handle::DefaultResourceHandle:
-    inherits_from: Client::System::Resource::Handle::ResourceHandle
-    vtbl: 0x141694EE8
+    vtbls:
+      - ea: 0x141694EE8
+        base: Client::System::Resource::Handle::ResourceHandle
   Client::System::Resource::Handle::ShaderPackageResourceHandle:
-    inherits_from: Client::System::Resource::Handle::DefaultResourceHandle
-    vtbl: 0x1416951E8
+    vtbls:
+      - ea: 0x1416951E8
+        base: Client::System::Resource::Handle::DefaultResourceHandle
     funcs:
       0x1401A5870: ctor
   Client::System::Resource::Handle::TextureResourceHandle:
-    inherits_from: Client::System::Resource::Handle::ResourceHandle
-    vtbl: 0x141695368
+    vtbls:
+      - ea: 0x141695368
+        base: Client::System::Resource::Handle::ResourceHandle
     funcs:
       0x1401A5BA0: ctor
   Client::System::Resource::ResourceEventListener:
-    vtbl: 0x1416956A8
+    vtbls:
+      - ea: 0x1416956A8
     funcs:
       0x1401AA9C0: ctor
   Client::System::Resource::Handle::CharaMakeParameterResourceHandle:
-    inherits_from: Client::System::Resource::Handle::DefaultResourceHandle
-    vtbl: 0x141695B98
+    vtbls:
+      - ea: 0x141695B98
+        base: Client::System::Resource::Handle::DefaultResourceHandle
   Client::System::Resource::Handle::ApricotResourceHandle:
-    inherits_from: Client::System::Resource::Handle::DefaultResourceHandle
-    vtbl: 0x141696E18
+    vtbls:
+      - ea: 0x141696E18
+        base: Client::System::Resource::Handle::DefaultResourceHandle
   Client::System::Resource::Handle::UldResourceHandle:
-    inherits_from: Client::System::Resource::Handle::DefaultResourceHandle
-    vtbl: 0x141699CC8
+    vtbls:
+      - ea: 0x141699CC8
+        base: Client::System::Resource::Handle::DefaultResourceHandle
   Client::System::Resource::Handle::UldResourceHandleFactory:
-    inherits_from: Client::System::Resource::Handle::ResourceHandleFactory
-    vtbl: 0x141699E30
+    vtbls:
+      - ea: 0x141699E30
+        base: Client::System::Resource::Handle::ResourceHandleFactory
   Client::Graphics::Primitive::Manager:
-    inherits_from: Client::Graphics::Singleton
-    vtbl: 0x14169A458
+    vtbls:
+      - ea: 0x14169A458
+        base: Client::Graphics::Singleton
     funcs:
       0x1401D42B0: ctor
   Client::Graphics::DelayedReleaseClassBase:
-    inherits_from: Client::Graphics::ReferencedClassBase
-    vtbl: 0x14169A620
+    vtbls:
+      - ea: 0x14169A620
+        base: Client::Graphics::ReferencedClassBase
     funcs:
       0x1401D6C10: ctor
   Client::Graphics::IAllocator:
-    vtbl: 0x14169A648
+    vtbls:
+      - ea: 0x14169A648
   Client::Graphics::AllocatorLowLevel:
-    inherits_from: Client::Graphics::IAllocator
-    vtbl: 0x14169A798
+    vtbls:
+      - ea: 0x14169A798
+        base: Client::Graphics::IAllocator
   Client::Graphics::AllocatorManager:
-    inherits_from: Client::Graphics::Singleton
-    vtbl: 0x14169A850
+    vtbls:
+      - ea: 0x14169A850
+        base: Client::Graphics::Singleton
     funcs:
       0x1401D9190: ctor
   Client::Network::NetworkModuleProxy:
-    inherits_from: Client::System::Common::NonCopyable
-    vtbl: 0x14169BC68
+    vtbls:
+      - ea: 0x14169BC68
+        base: Client::System::Common::NonCopyable
     funcs:
       0x1401EE450: ctor
   Client::UI::Agent::AgentInterface:
-    inherits_from: Component::GUI::AtkModuleInterface::AtkEventInterface
-    vtbl: 0x14169CC18
+    vtbls:
+      - ea: 0x14169CC18
+        base: Component::GUI::AtkModuleInterface::AtkEventInterface
     vfuncs:
       2: Show
       3: Hide
@@ -632,87 +698,109 @@ classes:
     funcs:
       0x1401F0090: ctor
   Client::UI::Agent::AgentCharaMake:
-    inherits_from: Client::UI::Agent::AgentInterface
-    vtbl: 0x14169CC88
+    vtbls:
+      - ea: 0x14169CC88
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentModule:
-    vtbl: 0x14169D060
+    vtbls:
+      - ea: 0x14169D060
     funcs:
       0x1401F84B0: ctor
       0x1401FD740: GetAgentByInternalID
-      0x1401FD750: GetAgentByInternalID_2 # dupe?
+      0x1401FD750: GetAgentByInternalID_2  # dupe?
   Client::UI::Agent::AgentContext:
-    inherits_from: Client::UI::Agent::AgentInterface
-    vtbl: 0x14169D0F8
+    vtbls:
+      - ea: 0x14169D0F8
+        base: Client::UI::Agent::AgentInterface
     funcs:
       0x140207AF0: ClearMenu
       0x140208A90: SetupButtonsForTarget
   Client::UI::Agent::AgentLobby:
-    inherits_from: Client::UI::Agent::AgentInterface
-    vtbl: 0x14169D690
+    vtbls:
+      - ea: 0x14169D690
+        base: Client::UI::Agent::AgentInterface
     funcs:
       0x140213B10: ctor
   Client::UI::Agent::AgentCursor:
-    inherits_from: Client::UI::Agent::AgentInterface
-    vtbl: 0x14169DDF8
+    vtbls:
+      - ea: 0x14169DDF8
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentCursorLocation:
-    inherits_from: Client::UI::Agent::AgentInterface
-    vtbl: 0x14169DE68
+    vtbls:
+      - ea: 0x14169DE68
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentLetterEdit:
-    inherits_from: Client::UI::Agent::AgentInterface
-    vtbl: 0x14169EE00
+    vtbls:
+      - ea: 0x14169EE00
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentFreeCompanyChest:
-    inherits_from: Client::UI::Agent::AgentInterface
-    vtbl: 0x14169F1D0
+    vtbls:
+      - ea: 0x14169F1D0
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentExplorationInterface:
-    inherits_from: Client::UI::Agent::AgentInterface
-    vtbl: 0x14169F860
+    vtbls:
+      - ea: 0x14169F860
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentAirShipExploration:
-    inherits_from: Client::UI::Agent::AgentExplorationInterface
-    vtbl: 0x14169F920
+    vtbls:
+      - ea: 0x14169F920
+        base: Client::UI::Agent::AgentExplorationInterface
   Client::UI::Agent::AgentSubmersibleExplorationDetail:
-    inherits_from: Client::UI::Agent::AgentExplorationDetailInterface
-    vtbl: 0x14169FCD0
+    vtbls:
+      - ea: 0x14169FCD0
+        base: Client::UI::Agent::AgentExplorationDetailInterface
   Client::UI::Agent::AgentAirShipExplorationDetail:
-    inherits_from: Client::UI::Agent::AgentExplorationDetailInterface
-    vtbl: 0x14169E860
+    vtbls:
+      - ea: 0x14169E860
+        base: Client::UI::Agent::AgentExplorationDetailInterface
   Client::UI::Agent::AgentExplorationDetailInterface:
-    inherits_from: Client::UI::Agent::AgentInterface
-    vtbl: 0x14169E788
+    vtbls:
+      - ea: 0x14169E788
+        base: Client::UI::Agent::AgentInterface
   Client::Graphics::Animation::IAnimationControllerListener:
-    vtbl: 0x1416A47D8
+    vtbls:
+      - ea: 0x1416A47D8
   Client::Graphics::Animation::PartialSkeleton:
-    inherits_from: Client::Graphics::Animation::IAnimationControllerListener
-    vtbl: 0x1416A4820
+    vtbls:
+      - ea: 0x1416A4820
+        base: Client::Graphics::Animation::IAnimationControllerListener
   Client::Graphics::Kernel::Resource:
-    inherits_from: Client::Graphics::DelayedReleaseClassBase
-    vtbl: 0x1416A53E8
+    vtbls:
+      - ea: 0x1416A53E8
+        base: Client::Graphics::DelayedReleaseClassBase
   Client::Graphics::Kernel::Shader:
-    inherits_from: Client::Graphics::Kernel::Resource # its possible shader and buffer are reversed, there's no way to actually tell, not very important
-    vtbl: 0x1416A5410
+    vtbls:
+      - ea: 0x1416A5410
+        base: Client::Graphics::Kernel::Resource
   Client::Graphics::Kernel::Texture:
-    inherits_from: Client::Graphics::Kernel::Resource
-    vtbl: 0x1416A5438
+    vtbls:
+      - ea: 0x1416A5438
+        base: Client::Graphics::Kernel::Resource
     funcs:
       0x1402FD690: ctor
   Client::Graphics::Kernel::SwapChain:
-    inherits_from: Client::Graphics::Kernel::Resource
-    vtbl: 0x1416A5478
+    vtbls:
+      - ea: 0x1416A5478
+        base: Client::Graphics::Kernel::Resource
     funcs:
       0x140301670: Present
   Client::Graphics::Kernel::Buffer:
-    inherits_from: Client::Graphics::Kernel::Resource
-    vtbl: 0x1416A54B8
+    vtbls:
+      - ea: 0x1416A54B8
+        base: Client::Graphics::Kernel::Resource
   Client::Graphics::Kernel::ConstantBuffer:
-    inherits_from: Client::Graphics::Kernel::Buffer
-    vtbl: 0x1416A56C0
+    vtbls:
+      - ea: 0x1416A56C0
+        base: Client::Graphics::Kernel::Buffer
     funcs:
       0x140304440: ctor
       0x1403047A0: LoadSourcePointer
       0x140315250: LoadBuffer
       0x140319A70: Activate
   Client::Graphics::Kernel::Device:
-    inherits_from: Client::Graphics::Singleton
-    vtbl: 0x1416A5748
+    vtbls:
+      - ea: 0x1416A5748
+        base: Client::Graphics::Singleton
     funcs:
       0x140304D00: ctor
       0x140304EA0: Initialize
@@ -725,176 +813,222 @@ classes:
       0x1403166F0: PrepareModel
       0x1403ADF90: Draw_cmd
   Client::Graphics::Kernel::Device::ImmediateContext:
-    vtbl: 0x1416A5750
+    vtbls:
+      - ea: 0x1416A5750
     funcs:
       0x14030FDA0: ProcessCommands
       0x140310050: PrimeForDraw
   Client::Graphics::Kernel::Device::RenderThread:
-    inherits_from: Client::System::Threading::Thread
-    vtbl: 0x1416A57A0
+    vtbls:
+      - ea: 0x1416A57A0
+        base: Client::System::Threading::Thread
   Client::Graphics::Render::Skeleton:
-    inherits_from: Client::Graphics::ReferencedClassBase
-    # also inherits from RenderObjectList<Skeleton>
-    vtbl: 0x1416AC960
+    vtbls:
+      - ea: 0x1416AC960
+        base: Client::Graphics::ReferencedClassBase
     funcs:
       0x14031E7D0: ctor
   Client::Graphics::Kernel::ShaderSceneKey:
-    vtbl: 0x1416AC9C8
+    vtbls:
+      - ea: 0x1416AC9C8
   Client::Graphics::Kernel::ShaderSubViewKey:
-    vtbl: 0x1416AC9D0
+    vtbls:
+      - ea: 0x1416AC9D0
   Client::Graphics::Render::GraphicsConfig:
-    inherits_from: Client::Graphics::Singleton
-    vtbl: 0x1416AC9E8
+    vtbls:
+      - ea: 0x1416AC9E8
+        base: Client::Graphics::Singleton
     funcs:
       0x1403237C0: ctor
   Client::Graphics::Render::Camera:
-    inherits_from: Client::Graphics::ReferencedClassBase
-    vtbl: 0x1416AC9F0
+    vtbls:
+      - ea: 0x1416AC9F0
+        base: Client::Graphics::ReferencedClassBase
     vfuncs:
       5: UpdateConstantBuffer
     funcs:
       0x140324D70: LoadMatrix
       0x1403281B0: MakeProjectionMatrix
   Client::Graphics::Render::ShadowCamera:
-    inherits_from: Client::Graphics::Render::Camera
-    vtbl: 0x1416ACA28
+    vtbls:
+      - ea: 0x1416ACA28
+        base: Client::Graphics::Render::Camera
   Client::Graphics::Render::UnknownCamera1:
-    inherits_from: Client::Graphics::Render::Camera
-    vtbl: 0x1416ACA60
+    vtbls:
+      - ea: 0x1416ACA60
+        base: Client::Graphics::Render::Camera
   Client::Graphics::Render::UnknownCamera2:
-    inherits_from: Client::Graphics::Render::Camera
-    vtbl: 0x1416ACAA0
+    vtbls:
+      - ea: 0x1416ACAA0
+        base: Client::Graphics::Render::Camera
   Client::Graphics::Render::UnknownCamera3:
-    inherits_from: Client::Graphics::Render::Camera
-    vtbl: 0x1416ACAE0
+    vtbls:
+      - ea: 0x1416ACAE0
+        base: Client::Graphics::Render::Camera
     funcs:
       0x140328A40: SubmitRenderCameraData
   Client::Graphics::Render::UnknownCamera4:
-    inherits_from: Client::Graphics::Render::Camera
-    vtbl: 0x1416ACB28
+    vtbls:
+      - ea: 0x1416ACB28
+        base: Client::Graphics::Render::Camera
   Client::Graphics::Render::View:
-    vtbl: 0x1416ACB70
+    vtbls:
+      - ea: 0x1416ACB70
   Client::Graphics::Render::PostBoneDeformerBase:
-    inherits_from: Client::System::Framework::Task
-    vtbl: 0x1416ACBF8
+    vtbls:
+      - ea: 0x1416ACBF8
+        base: Client::System::Framework::Task
   Client::Graphics::Render::OffscreenRenderingManager:
-    vtbl: 0x1416ACC58
+    vtbls:
+      - ea: 0x1416ACC58
     funcs:
       0x14032BDE0: ctor
       0x14032BED0: Initialize
   Client::Graphics::Render::AmbientLight:
-    vtbl: 0x1416ACCE0
+    vtbls:
+      - ea: 0x1416ACCE0
     funcs:
       0x14032D1A0: ctor
   Client::Graphics::Render::RenderObject:
-    inherits_from: Client::Graphics::ReferencedClassBase
-    vtbl: 0x1416ACC60
+    vtbls:
+      - ea: 0x1416ACC60
+        base: Client::Graphics::ReferencedClassBase
   Client::Graphics::Render::Model:
-    inherits_from: Client::Graphics::Render::RenderObject
-    vtbl: 0x1416ACCF0
+    vtbls:
+      - ea: 0x1416ACCF0
+        base: Client::Graphics::Render::RenderObject
     funcs:
       0x14032F110: ctor
       0x14032F260: SetupFromModelResourceHandle
   Client::Graphics::Render::BaseRenderer:
-    vtbl: 0x1416ACD70
-  Client::Graphics::Render::ModelRenderer_Client::Graphics::JobSystem_Client::Graphics::Render::ModelRenderer::RenderJob:
-    vtbl: 0x1416ACDA8
+    vtbls:
+      - ea: 0x1416ACD70
+  Client::Graphics::JobSystem<Client::Graphics::Render::ModelRenderer>:
+    vtbls:
+      - ea: 0x1416ACDA8
   Client::Graphics::Render::ModelRenderer:
-    inherits_from: Client::Graphics::Render::BaseRenderer
-    vtbl: 0x1416ACDB0
+    vtbls:
+      - ea: 0x1416ACDB0
+        base: Client::Graphics::Render::BaseRenderer
   Client::Graphics::Render::GeometryInstancingRenderer:
-    inherits_from: Client::Graphics::Render::BaseRenderer
-    vtbl: 0x1416ACDD8
-  Client::Graphics::Render::BGInstancingRenderer_Client::Graphics::JobSystem_Client::Graphics::Render::tagInstancingContainerRenderInfo:
-    vtbl: 0x1416ACE80
+    vtbls:
+      - ea: 0x1416ACDD8
+        base: Client::Graphics::Render::BaseRenderer
+  Client::Graphics::JobSystem<Client::Graphics::Render::BGInstancingRenderer>:
+    vtbls:
+      - ea: 0x1416ACE80
   Client::Graphics::Render::BGInstancingRenderer:
-    inherits_from: Client::Graphics::Render::GeometryInstancingRenderer
-    vtbl: 0x1416ACE88
-  Client::Graphics::Render::TerrainRenderer_Client::Graphics::JobSystem_Client::Graphics::Render::TerrainRenderer::RenderJob:
-    vtbl: 0x1416ACEF0
+    vtbls:
+      - ea: 0x1416ACE88
+        base: Client::Graphics::Render::GeometryInstancingRenderer
+  Client::Graphics::JobSystem<Client::Graphics::Render::TerrainRenderer>:
+    vtbls:
+      - ea: 0x1416ACEF0
   Client::Graphics::Render::TerrainRenderer:
-    inherits_from: Client::Graphics::Render::BaseRenderer
-    vtbl: 0x1416ACEF8
+    vtbls:
+      - ea: 0x1416ACEF8
+        base: Client::Graphics::Render::BaseRenderer
   Client::Graphics::Render::UnknownRenderer:
-    inherits_from: Client::Graphics::Render::BaseRenderer
-    vtbl: 0x1416ACF68
-  Client::Graphics::Render::WaterRenderer_Client::Graphics::JobSystem_Client::Graphics::Render::WaterRenderer::RenderJob:
-    vtbl: 0x1416ACFD0
+    vtbls:
+      - ea: 0x1416ACF68
+        base: Client::Graphics::Render::BaseRenderer
+  Client::Graphics::JobSystem<Client::Graphics::Render::WaterRenderer>:
+    vtbls:
+      - ea: 0x1416ACFD0
   Client::Graphics::Render::WaterRenderer:
-    inherits_from: Client::Graphics::Render::BaseRenderer
-    vtbl: 0x1416ACFD8
-  Client::Graphics::Render::VerticalFogRenderer_Client::Graphics::JobSystem_Client::Graphics::Render::VerticalFogRenderer::RenderJob:
-    vtbl: 0x1416AD0C0
+    vtbls:
+      - ea: 0x1416ACFD8
+        base: Client::Graphics::Render::BaseRenderer
+  Client::Graphics::JobSystem<Client::Graphics::Render::VerticalFogRenderer>:
+    vtbls:
+      - ea: 0x1416AD0C0
   Client::Graphics::Render::VerticalFogRenderer:
-    inherits_from: Client::Graphics::Render::BaseRenderer
-    vtbl: 0x1416AD0C8
+    vtbls:
+      - ea: 0x1416AD0C8
+        base: Client::Graphics::Render::BaseRenderer
   Client::Graphics::Render::ShadowMaskUnit:
-    vtbl: 0x1416AD1E0
+    vtbls:
+      - ea: 0x1416AD1E0
   Client::Graphics::Render::ShaderManager:
-    vtbl: 0x1416AD1F8
-  Client::Graphics::Render::Manager_Client::Graphics::JobSystem_Client::Graphics::Render::Manager::BoneCollectorJob:
-    vtbl: 0x1416AD208
-  Client::Graphics::Render::Updater_Client::Graphics::Render::PostBoneDeformerBase:
-    vtbl: 0x1416AD210
+    vtbls:
+      - ea: 0x1416AD1F8
+  Client::Graphics::JobSystem<Client::Graphics::Render::Manager>:
+    vtbls:
+      - ea: 0x1416AD208
+  Client::Graphics::Render::Updater<Client::Graphics::Render::PostBoneDeformerBase>:
+    vtbls:
+      - ea: 0x1416AD210
   Client::Graphics::Render::Manager:
-    inherits_from: Client::Graphics::Singleton
-    vtbl: 0x1416AD218
+    vtbls:
+      - ea: 0x1416AD218
+        base: Client::Graphics::Singleton
     funcs:
       0x1403681F0: CreateCamera
   Client::Graphics::Render::ShadowManager:
-    vtbl: 0x1416AD230
+    vtbls:
+      - ea: 0x1416AD230
     funcs:
       0x140369780: ctor
   Client::Graphics::Render::LightingManager::LightShape:
-    vtbl: 0x1416AD240
-  Client::Graphics::Render::LightingManager::LightingRenderer_Client::Graphics::JobSystem_Client::Graphics::Render::LightingManager::LightingRenderer::RenderJob:
-    vtbl: 0x1416AD248
+    vtbls:
+      - ea: 0x1416AD240
+  Client::Graphics::JobSystem<Client::Graphics::Render::LightingManager::LightingRenderer>:
+    vtbls:
+      - ea: 0x1416AD248
   Client::Graphics::Render::LightingManager::LightingRenderer:
-    vtbl: 0x1416AD250
+    vtbls:
+      - ea: 0x1416AD250
     funcs:
       0x14036DDB0: ctor
   Client::Graphics::Render::LightingManager:
-    inherits_from: Client::Graphics::Singleton
-    vtbl: 0x1416AD258
+    vtbls:
+      - ea: 0x1416AD258
+        base: Client::Graphics::Singleton
+      - ea: 0x1416AD260
+        base: Client::Graphics::Kernel::Notifier
     funcs:
       0x140378660: ctor
-  Client::Graphics::Render::LightingManager_Client::Graphics::Kernel::Notifier:
-    inherits_from: Client::Graphics::Kernel::Notifier
-    vtbl: 0x1416AD260
   Client::Graphics::Render::RenderTargetManager:
-    inherits_from: Client::Graphics::Singleton
-    vtbl: 0x1416AD280
+    vtbls:
+      - ea: 0x1416AD280
+        base: Client::Graphics::Singleton
+      - ea: 0x1416AD288
+        base: Client::Graphics::Kernel::Notifier
     funcs:
       0x140378E40: ctor
-  Client::Graphics::Render::RenderTargetManager_Client::Graphics::Kernel::Notifier:
-    inherits_from: Client::Graphics::Kernel::Notifier
-    vtbl: 0x1416AD288
   Client::Graphics::PostEffect::PostEffectChain:
-    vtbl: 0x1416AF910
+    vtbls:
+      - ea: 0x1416AF910
   Client::Graphics::PostEffect::PostEffectRainbow:
-    vtbl: 0x1416AF918
+    vtbls:
+      - ea: 0x1416AF918
   Client::Graphics::PostEffect::PostEffectLensFlare:
-    vtbl: 0x1416AF920
+    vtbls:
+      - ea: 0x1416AF920
   Client::Graphics::PostEffect::PostEffectRoofQuery:
-    vtbl: 0x1416AF928
+    vtbls:
+      - ea: 0x1416AF928
   Client::Graphics::PostEffect::PostEffectManager:
-    inherits_from: Client::Graphics::Singleton
-    vtbl: 0x1416AF938
+    vtbls:
+      - ea: 0x1416AF938
+        base: Client::Graphics::Singleton
+      - ea: 0x1416AF940
+        base: Client::Graphics::Kernel::Notifier
     funcs:
       0x140399BF0: ctor
-  Client::Graphics::PostEffect::PostEffectManager_Client::Graphics::Kernel::Notifier:
-    inherits_from: Client::Graphics::Kernel::Notifier
-    vtbl: 0x1416AF940
-  Client::Graphics::JobSystem(Apricot::Engine::Core_Apricot::Engine::Core::CoreJob_1):
-    vtbl: 0x1416B35B0
+  Client::Graphics::JobSystem<Apricot::Engine::Core>:
+    vtbls:
+      - ea: 0x1416B35B0
     funcs:
       0x1403E12F0: ctor
       0x1403E1520: GetSingleton
   Client::Graphics::Scene::Object:
-    vtbl: 0x1416BCD40
+    vtbls:
+      - ea: 0x1416BCD40
   Client::Graphics::Scene::DrawObject:
-    inherits_from: Client::Graphics::Scene::Object
-    vtbl: 0x1416BCD70
+    vtbls:
+      - ea: 0x1416BCD70
+        base: Client::Graphics::Scene::Object
     vfuncs:
       0: dtor
       1: CleanupRender
@@ -902,32 +1036,37 @@ classes:
       11: UpdateMaterials
     funcs:
       0x14042FEF0: ctor
-  Client::Graphics::Scene::World_Client::Graphics::JobSystem_Client::Graphics::Scene::World::SceneUpdateJob:
-    vtbl: 0x1416BCF08
+  Client::Graphics::JobSystem<Client::Graphics::Scene::World>:
+    vtbls:
+      - ea: 0x1416BCF08
   Client::Graphics::Scene::World:
-    inherits_from: Client::Graphics::Scene::Object
-    vtbl: 0x1416BCF10
+    vtbls:
+      - ea: 0x1416BCF10
+        base: Client::Graphics::Scene::Object
+      - ea: 0x1416BCF40
+        base: Client::Graphics::Singleton
     funcs:
       0x1404304A0: ctor
-  Client::Graphics::Scene::World_Client::Graphics::Singleton:
-    inherits_from: Client::Graphics::Singleton
-    vtbl: 0x1416BCF40
   Client::Graphics::Scene::Camera:
-    inherits_from: Client::Graphics::Scene::Object
-    vtbl: 0x1416BCF48
+    vtbls:
+      - ea: 0x1416BCF48
+        base: Client::Graphics::Scene::Object
     funcs:
       0x140430760: ctor
       0x1404318D0: CalculateViewMatrix
       0x140432050: PrepareRenderCamera
-  Client::Graphics::Scene::CameraManager_Client::Graphics::Singleton:
-    vtbl: 0x1416BCFA8
   Client::Graphics::Scene::CameraManager:
-    vtbl: 0x1416BCFB0
+    vtbls:
+      - ea: 0x1416BCFA8
+        base: Client::Graphics::Singleton
+      - ea: 0x1416BCFB0
+        base: Client::Graphics::Kernel::Notifier
     funcs:
       0x140432230: ctor
   Client::Graphics::Scene::CharacterUtility:
-    inherits_from: Client::Graphics::Singleton
-    vtbl: 0x1416BD178
+    vtbls:
+      - ea: 0x1416BD178
+        base: Client::Graphics::Singleton
     funcs:
       0x140435960: ctor
       0x140435B70: CreateDXRenderObjects
@@ -937,8 +1076,9 @@ classes:
       0x14043B5D0: GetEqpDataForChildren
       0x14043B720: GetEqpDataForOther
   Client::Graphics::Scene::CharacterBase:
-    inherits_from: Client::Graphics::Scene::DrawObject
-    vtbl: 0x1416BD1F8
+    vtbls:
+      - ea: 0x1416BD1F8
+        base: Client::Graphics::Scene::DrawObject
     vfuncs:
       67: FlagSlotForUpdate
       68: GetDataForSlot
@@ -960,7 +1100,6 @@ classes:
       92: CreateRenderModelForMDL
     funcs:
       0x14043CDE0: ctor
-      0x14044EE60: CreateSlotStorage
       0x140440BD0: CreateBonePhysicsModule
       0x140442640: LoadAnimation
       0x140443010: LoadMDLForSlot
@@ -974,11 +1113,13 @@ classes:
       0x140444220: PopulateMaterialsFromStaging
       0x140444370: LoadMDLSubFilesIntoStaging
       0x140444580: LoadMDLSubFilesForSlot
-      0x140464060: dtor2 # Called by base dtor
+      0x14044EE60: CreateSlotStorage
+      0x140464060: dtor2  # Called by base dtor
       0x1406EB120: Create
   Client::Graphics::Scene::Human:
-    inherits_from: Client::Graphics::Scene::CharacterBase
-    vtbl: 0x1416BD508
+    vtbls:
+      - ea: 0x1416BD508
+        base: Client::Graphics::Scene::CharacterBase
     vfuncs:
       58: OnModelLoadComplete
     funcs:
@@ -986,7 +1127,7 @@ classes:
       0x140448290: SetupFromCharacterData
       0x14044C360: UpdateModels
       0x14044C590: CheckSlotsForUnload
-      0x14044C8C0: SetupModelAttributes # wrist, fingers, tail all got inlined here
+      0x14044C8C0: SetupModelAttributes  # wrist, fingers, tail all got inlined here
       0x14044CBA0: SetupHelmetModelAttributes
       0x14044CCF0: SetupTopModelAttributes
       0x14044D0C0: SetupHandModelAttributes
@@ -998,84 +1139,113 @@ classes:
       0x14044DE60: SetupFaceModelAttributes
       0x14044E4A0: SetupConnectorModelAttributes
   Client::Graphics::Scene::ResidentResourceManager::ResourceList:
-    vtbl: 0x1416BEBD0
+    vtbls:
+      - ea: 0x1416BEBD0
   Client::Graphics::Scene::ResidentResourceManager:
-    inherits_from: Client::Graphics::Singleton
-    vtbl: 0x1416BEBE0
+    vtbls:
+      - ea: 0x1416BEBE0
+        base: Client::Graphics::Singleton
     funcs:
       0x1404624B0: ctor
       0x1404624E0: nullsub_1
       0x140462510: LoadDataFiles
   Client::System::Task::SpursJobEntityWorkerThread:
-    inherits_from: Client::System::Threading::Thread
-    vtbl: 0x1416BECC0
+    vtbls:
+      - ea: 0x1416BECC0
+        base: Client::System::Threading::Thread
   Common::Lua::LuaState:
-    vtbl: 0x1416BF0C8
+    vtbls:
+      - ea: 0x1416BF0C8
     funcs:
       0x14046D460: ctor
       0x14046D8A0: LoadString
       0x14046D950: LoadFile
       0x14046DE80: PCall
   Common::Lua::LuaThread:
-    inherits_from: Common::Lua::LuaState
-    vtbl: 0x1416BF0D0
+    vtbls:
+      - ea: 0x1416BF0D0
+        base: Common::Lua::LuaState
   Client::Game::Event::LuaActor:
-    vtbl: 0x1417076A8
+    vtbls:
+      - ea: 0x1417076A8
   Client::Game::Event::LuaPc:
-    inherits_from: Client::Game::Event::LuaActor
-    vtbl: 0x14170A068
+    vtbls:
+      - ea: 0x14170A068
+        base: Client::Game::Event::LuaActor
     funcs:
       0x140ADC090: ctor
   Client::Game::Event::LuaAetheryte:
-    inherits_from: Client::Game::Event::LuaActor
-    vtbl: 0x141709800
+    vtbls:
+      - ea: 0x141709800
+        base: Client::Game::Event::LuaActor
     funcs:
       0x140ADB0F0: ctor
   Client::Game::Event::LuaHousingEventObject:
-    inherits_from: Client::Game::Event::LuaActor
-    vtbl: 0x1417097F0
+    vtbls:
+      - ea: 0x1417097F0
+        base: Client::Game::Event::LuaActor
     funcs:
       0x140ADA9A0: ctor
   Client::Game::Event::LuaEventObject:
-    inherits_from: Client::Game::Event::LuaActor
-    vtbl: 0x1417097E0
+    vtbls:
+      - ea: 0x1417097E0
+        base: Client::Game::Event::LuaActor
     funcs:
       0x140ADA090: ctor
   Client::Game::Event::LuaCompanion:
-    inherits_from: Client::Game::Event::LuaActor
-    vtbl: 0x1417097D0
+    vtbls:
+      - ea: 0x1417097D0
+        base: Client::Game::Event::LuaActor
     funcs:
       0x140AD9CE0: ctor
   Client::Game::Event::LuaRetainer:
-    inherits_from: Client::Game::Event::LuaActor
-    vtbl: 0x1417097C0
+    vtbls:
+      - ea: 0x1417097C0
+        base: Client::Game::Event::LuaActor
     funcs:
       0x140AD98A0: ctor
   Client::Game::Event::LuaBattleNpc:
-    inherits_from: Client::Game::Event::LuaActor
-    vtbl: 0x1417097B0
+    vtbls:
+      - ea: 0x1417097B0
+        base: Client::Game::Event::LuaActor
     funcs:
       0x140AD8F60: ctor
   Client::Game::Event::LuaEventNpc:
-    inherits_from: Client::Game::Event::LuaActor
-    vtbl: 0x1417097A0
+    vtbls:
+      - ea: 0x1417097A0
+        base: Client::Game::Event::LuaActor
     funcs:
       0x140AD8BB0: ctor
+  Component::Exd::ExdModule:
+    vtbls:
+      - ea: 0x1416BF5D8
+    funcs:
+      0x140478440: ctor
+      0x140478A30: GetSheetRowById
+      0x140478AB0: GetEntryByIndex
   Client::System::Scheduler::ScheduleManagement:
-    inherits_from: Client::System::Framework::Task
-    vtbl: 0x1416BF608
+    vtbls:
+      - ea: 0x1416BF608
+        base: Client::System::Framework::Task
+  Client::Graphics::Vfx::VfxDataListenner:
+    vtbls:
+      - ea: 0x1416BFCD8
   Client::Game::Control::TargetSystem::AggroListFeeder:
-    inherits_from: Client::Game::Control::TargetSystem::ListFeeder
-    vtbl: 0x1416BFE08
+    vtbls:
+      - ea: 0x1416BFE08
+        base: Client::Game::Control::TargetSystem::ListFeeder
   Client::Game::Control::TargetSystem::AllianceListFeeder:
-    inherits_from: Client::Game::Control::TargetSystem::ListFeeder
-    vtbl: 0x1416BFE18
+    vtbls:
+      - ea: 0x1416BFE18
+        base: Client::Game::Control::TargetSystem::ListFeeder
   Client::Game::Control::TargetSystem::PartyListFeeder:
-    inherits_from: Client::Game::Control::TargetSystem::ListFeeder
-    vtbl: 0x1416BFE28
+    vtbls:
+      - ea: 0x1416BFE28
+        base: Client::Game::Control::TargetSystem::ListFeeder
   Client::Game::Control::TargetSystem:
-    inherits_from: Client::Game::Object::IGameObjectEventListener
-    vtbl: 0x1416BFE78
+    vtbls:
+      - ea: 0x1416BFE78
+        base: Client::Game::Object::IGameObjectEventListener
     funcs:
       0x140497D50: ctor
       0x1404A1A70: GetHardTargetId
@@ -1085,20 +1255,24 @@ classes:
       0x1404A1CB0: GetTargetObject2
       0x1404A28D0: IsObjectInViewRange
   Client::System::Input::InputData:
-    vtbl: 0x1416C00C0
+    vtbls:
+      - ea: 0x1416C00C0
     funcs:
       0x1404AD6E0: ctor
   Component::GUI::AtkArrayData:
-    vtbl: 0x1416C19F8
+    vtbls:
+      - ea: 0x1416C19F8
   Component::GUI::NumberArrayData:
-    inherits_from: Component::GUI::AtkArrayData
-    vtbl: 0x1416C1A08
+    vtbls:
+      - ea: 0x1416C1A08
+        base: Component::GUI::AtkArrayData
     funcs:
       0x1404AF4B0: SetValueIfDifferentAndNotify
       0x1404AF550: SetValueForced
   Component::GUI::StringArrayData:
-    inherits_from: Component::GUI::AtkArrayData
-    vtbl: 0x1416C1A18
+    vtbls:
+      - ea: 0x1416C1A18
+        base: Component::GUI::AtkArrayData
     funcs:
       0x1404AF7C0: SetValue
       0x1404AF9A0: SetValueUtf8
@@ -1107,24 +1281,29 @@ classes:
       0x1404AFA70: SetValueForced
       0x1404AFAB0: SetValueForcedUtf8
   Component::GUI::ExtendArrayData:
-    inherits_from: Component::GUI::AtkArrayData
-    vtbl: 0x1416C1A28
+    vtbls:
+      - ea: 0x1416C1A28
+        base: Component::GUI::AtkArrayData
   Component::GUI::AtkTooltipManager:
-    inherits_from: Component::GUI::AtkEventListener
-    vtbl: 0x1416C1AF0
+    vtbls:
+      - ea: 0x1416C1AF0
+        base: Component::GUI::AtkEventListener
     funcs:
-      0x1404BA0D0: ShowTooltip # similar args to attach tooltip
       0x1404B9BE0: AttachTooltip
       0x1404B9E20: DetachTooltipNode
-      0x1404BA040: ShowNodeTooltip # takes node as argument
+      0x1404BA040: ShowNodeTooltip  # takes node as argument
+      0x1404BA0D0: ShowTooltip # similar args to attach tooltip
       0x1404BAB80: DetachTooltipAddon
   Component::GUI::AtkEventTarget:
-    vtbl: 0x1416C4280
+    vtbls:
+      - ea: 0x1416C4280
   Component::GUI::AtkSimpleTween:
-    inherits_from: Component::GUI::AtkEventTarget
-    vtbl: 0x1416C1B38
+    vtbls:
+      - ea: 0x1416C1B38
+        base: Component::GUI::AtkEventTarget
   Component::GUI::AtkTexture:
-    vtbl: 0x1416C1AB8
+    vtbls:
+      - ea: 0x1416C1AB8
     funcs:
       0x1404B66D0: LoadIconTexture
       0x1404B68F0: GetLoadState
@@ -1132,16 +1311,18 @@ classes:
       0x1404B6A00: ReleaseTexture
       0x1404B6B30: GetKernelTexture
   Component::GUI::AtkStage:
-    inherits_from: Component::GUI::AtkEventTarget
-    vtbl: 0x1416C1C98
+    vtbls:
+      - ea: 0x1416C1C98
+        base: Component::GUI::AtkEventTarget
     funcs:
       0x1404C0550: ClearFocus
       0x1404C1480: GetNumberArrayData
       0x1404C15B0: ctor
-      0x1404E2F60: GetSingleton1 # dalamud GetBaseUIObject
+      0x1404E2F60: GetSingleton1  # dalamud GetBaseUIObject
   Component::GUI::AtkResNode:
-    inherits_from: Component::GUI::AtkEventTarget
-    vtbl: 0x1416C2540
+    vtbls:
+      - ea: 0x1416C2540
+        base: Component::GUI::AtkEventTarget
     vfuncs:
       1: Destroy
     funcs:
@@ -1186,52 +1367,59 @@ classes:
       0x1404D31E0: SetUseDepthBasedDrawPriority
       0x1404D3230: SetDepth
       0x1404D3600: Init
-      0x1404D37D0: SetScale0 # SetScale jumps to this
+      0x1404D37D0: SetScale0  # SetScale jumps to this
       0x1404DDEB0: SetSize
   Component::GUI::AtkImageNode:
-    inherits_from: Component::GUI::AtkResNode
-    vtbl: 0x1416C2558
+    vtbls:
+      - ea: 0x1416C2558
+        base: Component::GUI::AtkResNode
     funcs:
-      0x140544C80: ctor
       0x1404D3CD0: LoadIconTexture
       0x1404D3ED0: UnloadTexture
+      0x140544C80: ctor
   Component::GUI::AtkTextNode:
-    inherits_from: Component::GUI::AtkResNode
-    vtbl: 0x1416C2570
+    vtbls:
+      - ea: 0x1416C2570
+        base: Component::GUI::AtkResNode
     funcs:
-      0x140544E30: ctor
       0x1404D4130: SetText
       0x1404D4C60: SetForegroundColour
-      0x1404D59A0: SetNumber
-      0x1404D5D80: SetGlowColour
       0x1404D4FA0: GetTextDrawSize
+      0x1404D59A0: SetNumber
       0x1404D5C70: SetFontSize
-      0x1404D63C0: ToggleFixedFontResolution # this stops text from auto scaling, they turned this on for nameplates in 5.5
+      0x1404D5D80: SetGlowColour
+      0x1404D63C0: ToggleFixedFontResolution  # this stops text from auto scaling, they turned this on for nameplates in 5.5
       0x1404D70D0: ToggleFontCache
       0x1404D72C0: ResizeNodeForCurrentText
+      0x140544E30: ctor
   Component::GUI::AtkNineGridNode:
-    inherits_from: Component::GUI::AtkResNode
-    vtbl: 0x1416C2588
+    vtbls:
+      - ea: 0x1416C2588
+        base: Component::GUI::AtkResNode
     funcs:
       0x140544CE0: ctor
   Component::GUI::AtkCounterNode:
-    inherits_from: Component::GUI::AtkResNode
-    vtbl: 0x1416C25A0
+    vtbls:
+      - ea: 0x1416C25A0
+        base: Component::GUI::AtkResNode
     funcs:
       0x140544C00: ctor
   Component::GUI::AtkCollisionNode:
-    inherits_from: Component::GUI::AtkResNode
-    vtbl: 0x1416C25B8
+    vtbls:
+      - ea: 0x1416C25B8
+        base: Component::GUI::AtkResNode
     funcs:
       0x140544B40: ctor
   Component::GUI::AtkComponentNode:
-    inherits_from: Component::GUI::AtkResNode
-    vtbl: 0x1416C25D0
+    vtbls:
+      - ea: 0x1416C25D0
+        base: Component::GUI::AtkResNode
     funcs:
       0x140544BA0: ctor
   Component::GUI::AtkUnitBase:
-    inherits_from: Component::GUI::AtkEventListener
-    vtbl: 0x1416C25E8
+    vtbls:
+      - ea: 0x1416C25E8
+        base: Component::GUI::AtkEventListener
     vfuncs:
       7: SetPosition
       8: SetX
@@ -1253,7 +1441,7 @@ classes:
       57: OnMouseOut
     funcs:
       0x1404DF7C0: ctor
-      0x1404DFE30: FireCallbackInt # this creates an int AtkValue and puts its argument into it before calling Callback
+      0x1404DFE30: FireCallbackInt  # this creates an int AtkValue and puts its argument into it before calling Callback
       0x1404DFF20: SetPosition
       0x1404E00A0: SetAlpha
       0x1404E00D0: GetScale
@@ -1267,8 +1455,9 @@ classes:
       0x1404E3CB0: GetImageNodeById
       0x1404E3DB0: FireCallback
   Component::GUI::AtkComponentBase:
-    inherits_from: Component::GUI::AtkEventListener
-    vtbl: 0x1416C2870
+    vtbls:
+      - ea: 0x1416C2870
+        base: Component::GUI::AtkEventListener
     vfuncs:
       10: SetEnabledState
       17: InitializeFromComponentData
@@ -1276,33 +1465,39 @@ classes:
       0x1404F7710: ctor
       0x1404F79C0: GetOwnerNodePosition
   Component::GUI::AtkComponentButton:
-    inherits_from: Component::GUI::AtkComponentBase
-    vtbl: 0x1416C2910
+    vtbls:
+      - ea: 0x1416C2910
+        base: Component::GUI::AtkComponentBase
     funcs:
       0x1404F8E40: ctor
   Component::GUI::AtkComponentIcon:
-    inherits_from: Component::GUI::AtkComponentBase
-    vtbl: 0x1416C29D8
+    vtbls:
+      - ea: 0x1416C29D8
+        base: Component::GUI::AtkComponentBase
     funcs:
       0x1404FB370: ctor
   Component::GUI::AtkComponentListItemRenderer:
-    inherits_from: Component::GUI::AtkComponentButton
-    vtbl: 0x1416C2AF8
+    vtbls:
+      - ea: 0x1416C2AF8
+        base: Component::GUI::AtkComponentButton
     funcs:
       0x1404FBEB0: ctor
   Component::GUI::AtkComponentList:
-    inherits_from: Component::GUI::AtkComponentBase
-    vtbl: 0x1416C2C68
+    vtbls:
+      - ea: 0x1416C2C68
+        base: Component::GUI::AtkComponentBase
     funcs:
       0x1405072F0: ctor
   Component::GUI::AtkComponentTreeList:
-    inherits_from: Component::GUI::AtkComponentList
-    vtbl: 0x1416C2DD0
+    vtbls:
+      - ea: 0x1416C2DD0
+        base: Component::GUI::AtkComponentList
     funcs:
       0x14050BC40: ctor
   Component::GUI::AtkModule:
-    inherits_from: Component::GUI::AtkModuleInterface
-    vtbl: 0x1416C2F38
+    vtbls:
+      - ea: 0x1416C2F38
+        base: Component::GUI::AtkModuleInterface
     vfuncs:
       17: SetHandlerFunction
       39: SetUIVisibility
@@ -1311,180 +1506,218 @@ classes:
       0x1405108C0: ctor
       0x1405116E0: HandleInput
   Component::GUI::AtkComponentCheckBox:
-    inherits_from: Component::GUI::AtkComponentButton
-    vtbl: 0x1416C31E0
+    vtbls:
+      - ea: 0x1416C31E0
+        base: Component::GUI::AtkComponentButton
     funcs:
       0x1405148A0: ctor
   Component::GUI::AtkComponentGaugeBar:
-    inherits_from: Component::GUI::AtkComponentBase
-    vtbl: 0x1416C32B0
+    vtbls:
+      - ea: 0x1416C32B0
+        base: Component::GUI::AtkComponentBase
     funcs:
       0x1405157D0: ctor
   Component::GUI::AtkComponentSlider:
-    inherits_from: Component::GUI::AtkComponentBase
-    vtbl: 0x1416C3350
+    vtbls:
+      - ea: 0x1416C3350
+        base: Component::GUI::AtkComponentBase
     funcs:
       0x140517900: ctor
   Component::GUI::AtkComponentInputBase:
-    inherits_from: Component::GUI::AtkComponentBase
-    vtbl: 0x1416C33F0
+    vtbls:
+      - ea: 0x1416C33F0
+        base: Component::GUI::AtkComponentBase
     funcs:
       0x140518D10: ctor
   Component::GUI::AtkComponentTextInput:
-    inherits_from: Component::GUI::AtkComponentInputBase
-    vtbl: 0x1416C3490
+    vtbls:
+      - ea: 0x1416C3490
+        base: Component::GUI::AtkComponentInputBase
     funcs:
       0x14051A500: ctor
   Component::GUI::AtkComponentNumericInput:
-    inherits_from: Component::GUI::AtkComponentInputBase
-    vtbl: 0x1416C3590
+    vtbls:
+      - ea: 0x1416C3590
+        base: Component::GUI::AtkComponentInputBase
     funcs:
       0x14051EC10: ctor
   Component::GUI::AtkComponentDropDownList:
-    inherits_from: Component::GUI::AtkComponentBase
-    vtbl: 0x1416C3658
+    vtbls:
+      - ea: 0x1416C3658
+        base: Component::GUI::AtkComponentBase
     funcs:
       0x1405228C0: ctor
   Component::GUI::AtkComponentRadioButton:
-    inherits_from: Component::GUI::AtkComponentButton
-    vtbl: 0x1416C36F8
+    vtbls:
+      - ea: 0x1416C36F8
+        base: Component::GUI::AtkComponentButton
     funcs:
       0x140523DB0: ctor
   Component::GUI::AtkComponentTab:
-    inherits_from: Component::GUI::AtkComponentRadioButton
-    vtbl: 0x1416C3808
+    vtbls:
+      - ea: 0x1416C3808
+        base: Component::GUI::AtkComponentRadioButton
     funcs:
       0x140524680: ctor
   Component::GUI::AtkComponentGuildLeveCard:
-    inherits_from: Component::GUI::AtkComponentBase
-    vtbl: 0x1416C3918
+    vtbls:
+      - ea: 0x1416C3918
+        base: Component::GUI::AtkComponentBase
     funcs:
       0x140524C50: ctor
   Component::GUI::AtkComponentTextNineGrid:
-    inherits_from: Component::GUI::AtkComponentBase
-    vtbl: 0x1416C39B8
+    vtbls:
+      - ea: 0x1416C39B8
+        base: Component::GUI::AtkComponentBase
     funcs:
       0x140524FE0: ctor
   Component::GUI::AtkResourceRendererBase:
-    vtbl: 0x1416C3A58
+    vtbls:
+      - ea: 0x1416C3A58
     vfuncs:
       1: ShouldRender
       2: Draw
   Component::GUI::AtkImageNodeRenderer:
-    inherits_from: Component::GUI::AtkResourceRendererBase
-    vtbl: 0x1416C3A70
+    vtbls:
+      - ea: 0x1416C3A70
+        base: Component::GUI::AtkResourceRendererBase
   Component::GUI::AtkTextNodeRenderer:
-    inherits_from: Component::GUI::AtkResourceRendererBase
-    vtbl: 0x1416C3A88
+    vtbls:
+      - ea: 0x1416C3A88
+        base: Component::GUI::AtkResourceRendererBase
   Component::GUI::AtkNineGridNodeRenderer:
-    inherits_from: Component::GUI::AtkResourceRendererBase
-    vtbl: 0x1416C3AA8
+    vtbls:
+      - ea: 0x1416C3AA8
+        base: Component::GUI::AtkResourceRendererBase
   Component::GUI::AtkCounterNodeRenderer:
-    inherits_from: Component::GUI::AtkResourceRendererBase
-    vtbl: 0x1416C3AC0
+    vtbls:
+      - ea: 0x1416C3AC0
+        base: Component::GUI::AtkResourceRendererBase
   Component::GUI::AtkComponentNodeRenderer:
-    inherits_from: Component::GUI::AtkResourceRendererBase
-    vtbl: 0x1416C3AD8
+    vtbls:
+      - ea: 0x1416C3AD8
+        base: Component::GUI::AtkResourceRendererBase
   Component::GUI::AtkResourceRendererManager:
-    vtbl: 0x1416C3AF0
+    vtbls:
+      - ea: 0x1416C3AF0
     funcs:
       0x140527B80: ctor
       0x140527D80: DrawUldFromData
       0x140527E60: DrawUldFromDataClipped
   Component::GUI::AtkComponentMap:
-    inherits_from: Component::GUI::AtkComponentBase
-    vtbl: 0x1416C3B10
+    vtbls:
+      - ea: 0x1416C3B10
+        base: Component::GUI::AtkComponentBase
     funcs:
       0x14052A4B0: ctor
   Component::GUI::AtkComponentPreview:
-    inherits_from: Component::GUI::AtkComponentBase
-    vtbl: 0x1416C3BB0
+    vtbls:
+      - ea: 0x1416C3BB0
+        base: Component::GUI::AtkComponentBase
     funcs:
       0x14052CE30: ctor
   Component::GUI::AtkComponentScrollBar:
-    inherits_from: Component::GUI::AtkComponentBase
-    vtbl: 0x1416C3C50
+    vtbls:
+      - ea: 0x1416C3C50
+        base: Component::GUI::AtkComponentBase
     funcs:
       0x14052DE90: ctor
   Component::GUI::AtkComponentIconText:
-    inherits_from: Component::GUI::AtkComponentBase
-    vtbl: 0x1416C3CF0
+    vtbls:
+      - ea: 0x1416C3CF0
+        base: Component::GUI::AtkComponentBase
     funcs:
       0x14052F890: ctor
   Component::GUI::AtkComponentDragDrop:
-    inherits_from: Component::GUI::AtkComponentBase
-    vtbl: 0x1416C3D90
+    vtbls:
+      - ea: 0x1416C3D90
+        base: Component::GUI::AtkComponentBase
     funcs:
       0x140530B10: ctor
   Component::GUI::AtkComponentMultipurpose:
-    inherits_from: Component::GUI::AtkComponentBase
-    vtbl: 0x1416C3EB0
+    vtbls:
+      - ea: 0x1416C3EB0
+        base: Component::GUI::AtkComponentBase
     funcs:
       0x140532770: ctor
   Component::GUI::AtkComponentWindow:
-    inherits_from: Component::GUI::AtkComponentBase
-    vtbl: 0x1416C4020
+    vtbls:
+      - ea: 0x1416C4020
+        base: Component::GUI::AtkComponentBase
     funcs:
       0x1405330A0: ctor
   Component::GUI::AtkComponentJournalCanvas:
-    inherits_from: Component::GUI::AtkComponentBase
-    vtbl: 0x1416C40F0
+    vtbls:
+      - ea: 0x1416C40F0
+        base: Component::GUI::AtkComponentBase
     funcs:
       0x140538630: ctor
   Component::GUI::AtkComponentHoldButton:
-    inherits_from: Component::GUI::AtkComponentButton
-    vtbl: 0x1416C4190
+    vtbls:
+      - ea: 0x1416C4190
+        base: Component::GUI::AtkComponentButton
     funcs:
       0x14053C150: ctor
   Client::LayoutEngine::IManagerBase:
-    inherits_from: Client::System::Common::NonCopyable
-    vtbl: 0x1416C50C0
+    vtbls:
+      - ea: 0x1416C50C0
+        base: Client::System::Common::NonCopyable
   Client::LayoutEngine::ILayoutInstance:
-    inherits_from: Client::System::Common::NonCopyable
-    vtbl: 0x1416C50E0
+    vtbls:
+      - ea: 0x1416C50E0
+        base: Client::System::Common::NonCopyable
   Client::LayoutEngine::LayoutWorld:
-    inherits_from: Client::LayoutEngine::IManagerBase
-    vtbl: 0x1416C58F8
+    vtbls:
+      - ea: 0x1416C58F8
+        base: Client::LayoutEngine::IManagerBase
     funcs:
       0x14055F4B0: ctor
       0x14055F740: CreateSingleton
   Client::LayoutEngine::Group::TimeLineLayoutInstance:
-    inherits_from: Client::LayoutEngine::ILayoutInstance
-    vtbl: 0x1416CC8E8 # ctor is inlined
+    vtbls:
+      - ea: 0x1416CC8E8
+        base: Client::LayoutEngine::ILayoutInstance
     vfuncs:
       0: dtor
   Client::UI::Misc::UserFileManager::UserFileEvent:
-    vtbl: 0x1416D0C40
+    vtbls:
+      - ea: 0x1416D0C40
     vfuncs:
       1: ReadFile
       2: WriteFile
       6: GetFileVersion
   Client::UI::Misc::UserFileManager:
-    inherits_from: Client::System::Resource::ResourceEventListener
-    vtbl: 0x1416D0CA8
+    vtbls:
+      - ea: 0x1416D0CA8
+        base: Client::System::Resource::ResourceEventListener
     funcs:
       0x1406034B0: SaveFile
   Component::GUI::AtkInputData:
-    inherits_from: Client::System::Input::InputData
-    vtbl: 0x1416D0CD0
+    vtbls:
+      - ea: 0x1416D0CD0
+        base: Client::System::Input::InputData
   Client::UI::UIInputData:
-    inherits_from: Component::GUI::AtkInputData
-    vtbl: 0x1416D0D60
+    vtbls:
+      - ea: 0x1416D0D60
+        base: Component::GUI::AtkInputData
+      - ea: 0x1416D0DF8
+        base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
       0x1405BA660: ctor
-  Client::UI::UIInputData_Client::UI::Misc::UserFileManager::UserFileEvent:
-    inherits_from: Client::UI::Misc::UserFileManager::UserFileEvent
-    vtbl: 0x1416D0DF8
   Client::UI::UI3DModule::MapInfo:
-    vtbl: 0x1416D1590
+    vtbls:
+      - ea: 0x1416D1590
   Client::UI::UI3DModule::ObjectInfo:
-    inherits_from: Client::UI::UI3DModule::MapInfo
-    vtbl: 0x1416D15B8
+    vtbls:
+      - ea: 0x1416D15B8
+        base: Client::UI::UI3DModule::MapInfo
   Client::UI::UI3DModule::MemberInfo:
-    inherits_from: Client::UI::UI3DModule::MapInfo
-    vtbl: 0x1416D15E8
+    vtbls:
+      - ea: 0x1416D15E8
+        base: Client::UI::UI3DModule::MapInfo
   Client::UI::UI3DModule:
-    vtbl: 0x1416D1648
+    vtbls:
+      - ea: 0x1416D1648
     funcs:
       0x1405C0D00: CalculateIsInScreen
       0x1405C0E10: CalculateNamePlatePosition
@@ -1496,15 +1729,17 @@ classes:
       0x1405C1E70: SetupNamePlateForObjectInfo
       0x1405C1F20: FinalizeNamePlates
   Client::UI::UIInputModule:
-    vtbl: 0x1416D1650
+    vtbls:
+      - ea: 0x1416D1650
     funcs:
       0x1405C38B0: ctor
       0x1405C39A0: HandleInputUpdate
       0x1405C4AD0: CheckCastCancel
       0x1405C8170: CheckScreenshotState
   Client::UI::UIModule:
-    inherits_from: Client::UI::UIModuleInterface
-    vtbl: 0x1416D1660
+    vtbls:
+      - ea: 0x1416D1660
+        base: Client::UI::UIModuleInterface
     vfuncs:
       0: dtor
       4: Abort
@@ -1551,84 +1786,95 @@ classes:
       0x1405CB280: Update
       0x1405CB6F0: HandleInputUpdate
   Client::System::Crypt::SimpleString:
-    inherits_from: Client::System::Crypt::CryptInterface
-    vtbl: 0x1416D1E70
+    vtbls:
+      - ea: 0x1416D1E70
+        base: Client::System::Crypt::CryptInterface
     vfuncs:
       1: Encrypt
       2: Decrypt
   Component::Text::MacroDecoder:
-    vtbl: 0x1416D2D08
+    vtbls:
+      - ea: 0x1416D2D08
   Component::Text::TextChecker:
-    inherits_from: Component::Text::MacroDecoder
-    vtbl: 0x1416D2EC8
+    vtbls:
+      - ea: 0x1416D2EC8
+        base: Component::Text::MacroDecoder
   Client::System::Data::Bit:
-    vtbl: 0x1416D3860
+    vtbls:
+      - ea: 0x1416D3860
     funcs:
       0x1405F0EA0: ctor
   Client::UI::Misc::ConfigModule:
-    inherits_from: Component::GUI::AtkModuleInterface::AtkEventInterface
-    vtbl: 0x1416D6438
+    vtbls:
+      - ea: 0x1416D6438
+        base: Component::GUI::AtkModuleInterface::AtkEventInterface
+      - ea: 0x1416D6448
+        base: Common::Configuration::ConfigBase::ChangeEventInterface
     funcs:
       0x140600D70: ctor
-  Common::Configuration::ConfigBase::ChangeEventInterface:
-    vtbl: 0x141680DA0
-  Client::UI::Misc::ConfigModule_Common::Configuration::ConfigBase::ChangeEventInterface:
-    inherits_from: Common::Configuration::ConfigBase::ChangeEventInterface
-    vtbl: 0x1416D6448
   Client::UI::Misc::RaptureMacroModule:
-    inherits_from: Client::UI::Misc::UserFileManager::UserFileEvent
-    vtbl: 0x1416D6528
+    vtbls:
+      - ea: 0x1416D6528
+        base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
       0x140609950: ctor
   Client::UI::Misc::RaptureTextModule:
-    vtbl: 0x1416D6590
+    vtbls:
+      - ea: 0x1416D6590
     funcs:
       0x14060D4C0: GetAddonText
       0x14060E690: FormatAddonText
       0x14060E940: FormatAddonText2
       0x1406132F0: FormatAddonText3
   Client::UI::Misc::RaptureLogModule:
-    inherits_from: Component::Log::LogModule
-    vtbl: 0x1416D6808
+    vtbls:
+      - ea: 0x1416D6808
+        base: Component::Log::LogModule
     funcs:
       0x14061B880: ctor
       0x14061D010: PrintMessage
       0x14061E3C0: ShowLogMessage
   Client::UI::Misc::RaptureHotbarModule:
-    inherits_from: Client::UI::Misc::UserFileManager::UserFileEvent
-    vtbl: 0x1416D6858
+    vtbls:
+      - ea: 0x1416D6858
+        base: Client::UI::Misc::UserFileManager::UserFileEvent
+      - ea: 0x1416D68C0
+        base: Client::System::Input::InputData::InputCodeModifiedInterface
     funcs:
       0x1406267D0: ctor
-  Client::UI::Misc::RaptureHotbarModule_Client::System::Input::InputCodeModifiedInterface:
-    inherits_from: Client::System::Input::InputData::InputCodeModifiedInterface
-    vtbl: 0x1416D68C0
   Client::UI::Misc::PronounModule:
-    inherits_from: Component::Text::TextChecker::ExecNonMacroFunc
-    vtbl: 0x1416D6938
+    vtbls:
+      - ea: 0x1416D6938
+        base: Component::Text::TextChecker::ExecNonMacroFunc
     funcs:
       0x14062F630: ctor
   Client::UI::Misc::RaptureGearsetModule:
-    inherits_from: Client::UI::Misc::UserFileManager::UserFileEvent
-    vtbl: 0x1416D6948
+    vtbls:
+      - ea: 0x1416D6948
+        base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
       0x140634080: ctor
   Client::UI::Misc::ItemFinderModule:
-    inherits_from: Client::UI::Misc::UserFileManager::UserFileEvent
-    vtbl: 0x1416D69B8
+    vtbls:
+      - ea: 0x1416D69B8
+        base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
       0x1406379C0: ctor
   Client::UI::Misc::ItemOrderModule:
-    inherits_from: Client::UI::Misc::UserFileManager::UserFileEvent
-    vtbl: 0x1416D6B60
+    vtbls:
+      - ea: 0x1416D6B60
+        base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
       0x140646480: ctor
   Client::UI::Misc::RaptureTeleportHistory:
-    inherits_from: Client::UI::Misc::UserFileManager::UserFileEvent
-    vtbl: 0x1416D6C98
+    vtbls:
+      - ea: 0x1416D6C98
+        base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
       0x14064CC90: AddHistoryEntry
   Client::UI::Misc::CharaView:
-    vtbl: 0x1416D7410
+    vtbls:
+      - ea: 0x1416D7410
     vfuncs:
       0: dtor
       1: Initialize
@@ -1636,7 +1882,8 @@ classes:
     funcs:
       0x140657570: ctor
   Client::Game::Object::GameObject:
-    vtbl: 0x1416D8830
+    vtbls:
+      - ea: 0x1416D8830
     vfuncs:
       2: GetObjectID
       3: GetObjectKind
@@ -1662,8 +1909,11 @@ classes:
       0x1406CE400: Initialize
       0x1406CE670: ctor
   Client::Game::Character::Character:
-    inherits_from: Client::Game::Object::GameObject
-    vtbl: 0x1416D94F0
+    vtbls:
+      - ea: 0x1416D94F0
+        base: Client::Game::Object::GameObject
+      - ea: 0x1416D97B0
+        base: Client::Graphics::Vfx::VfxDataListenner
     vfuncs:
       79: GetStatusManager
       81: GetCastInfo
@@ -1671,399 +1921,516 @@ classes:
     funcs:
       0x1406DE580: dtor
       0x1406F2040: ctor
-  Client::Game::Character::Character_Client::Graphics::Vfx::VfxDataListener:
-    inherits_from: Client::Graphics::Vfx::VfxDataListenner
-    vtbl: 0x1416D97B0
   Component::Shell::ShellCommandInterface:
-    vtbl: 0x1416E2400
+    vtbls:
+      - ea: 0x1416E2400
     vfuncs:
       0: dtor
       1: ExecuteCommand
   Component::Shell::DebugCommandInterface:
-    vtbl: 0x1416E2418
+    vtbls:
+      - ea: 0x1416E2418
   Client::UI::Shell::RaptureShellCommandInterface:
-    inherits_from: Component::Shell::ShellCommandInterface
-    vtbl: 0x1416E2428
+    vtbls:
+      - ea: 0x1416E2428
+        base: Component::Shell::ShellCommandInterface
   Client::UI::Shell::RaptureShellModule:
-    inherits_from: Component::Shell::ShellCommandModule
-    vtbl: 0x1416E2440
+    vtbls:
+      - ea: 0x1416E2440
+        base: Component::Shell::ShellCommandModule
+      - ea: 0x1416E2458
+        base: Client::UI::Shell::RaptureShellCommandInterface
     funcs:
       0x14070FCA0: ctor
       0x140713FC0: SetChatChannel
-  Client::UI::Shell::RaptureShellModule_Client::UI::Shell::RaptureShellCommandInterface:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E2458
   Client::UI::Shell::ShellCommandBlueAction:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E2470
+    vtbls:
+      - ea: 0x1416E2470
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandAction:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E2488
+    vtbls:
+      - ea: 0x1416E2488
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandBattleMode:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E24A0
+    vtbls:
+      - ea: 0x1416E24A0
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandGear:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E24B8
+    vtbls:
+      - ea: 0x1416E24B8
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandAssist:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E24D0
+    vtbls:
+      - ea: 0x1416E24D0
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandFollow:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E24E8
+    vtbls:
+      - ea: 0x1416E24E8
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandTarget:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E2500
+    vtbls:
+      - ea: 0x1416E2500
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandTargetPc:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E2518
+    vtbls:
+      - ea: 0x1416E2518
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandTargetNpc:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E2530
+    vtbls:
+      - ea: 0x1416E2530
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandTargetEnemy:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E2548
+    vtbls:
+      - ea: 0x1416E2548
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandTargetEnemyNext:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E2560
+    vtbls:
+      - ea: 0x1416E2560
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandTargetEnemyPrev:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E2578
+    vtbls:
+      - ea: 0x1416E2578
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandBattleTarget:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E2590
+    vtbls:
+      - ea: 0x1416E2590
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandRecast:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E25A8
+    vtbls:
+      - ea: 0x1416E25A8
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandMarking:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E25C8
+    vtbls:
+      - ea: 0x1416E25C8
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandFaceTarget:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E25E0
+    vtbls:
+      - ea: 0x1416E25E0
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandAddAdditionalAction:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E25F8
+    vtbls:
+      - ea: 0x1416E25F8
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandAddPvpAction:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E2610
+    vtbls:
+      - ea: 0x1416E2610
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandAutoMove:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E2628
+    vtbls:
+      - ea: 0x1416E2628
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandLockon:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E2640
+    vtbls:
+      - ea: 0x1416E2640
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandFocus:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E2658
+    vtbls:
+      - ea: 0x1416E2658
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandPetAction:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E2670
+    vtbls:
+      - ea: 0x1416E2670
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandBuddyAction:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E2688
+    vtbls:
+      - ea: 0x1416E2688
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandFaceCamera:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E26A0
+    vtbls:
+      - ea: 0x1416E26A0
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandFieldMarker:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E26B8
+    vtbls:
+      - ea: 0x1416E26B8
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandLevelSync:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E26D0
+    vtbls:
+      - ea: 0x1416E26D0
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandMount:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E26E8
+    vtbls:
+      - ea: 0x1416E26E8
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandMinion:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E2700
+    vtbls:
+      - ea: 0x1416E2700
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandStatusOff:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E2718
+    vtbls:
+      - ea: 0x1416E2718
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandQuickChat:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E2730
+    vtbls:
+      - ea: 0x1416E2730
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandBlueSpellbook:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E2748
+    vtbls:
+      - ea: 0x1416E2748
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandFashion:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E2760
+    vtbls:
+      - ea: 0x1416E2760
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandEcho:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E2778
+    vtbls:
+      - ea: 0x1416E2778
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandChatSay:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E2790
+    vtbls:
+      - ea: 0x1416E2790
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandChatYell:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E27A8
+    vtbls:
+      - ea: 0x1416E27A8
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandChatShout:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E27C0
+    vtbls:
+      - ea: 0x1416E27C0
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandChatTell:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E27D8
+    vtbls:
+      - ea: 0x1416E27D8
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandChatReply:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E27F8
+    vtbls:
+      - ea: 0x1416E27F8
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandChatParty:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E2828
+    vtbls:
+      - ea: 0x1416E2828
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandChatFC:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E2840
+    vtbls:
+      - ea: 0x1416E2840
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandChatLinkshell:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E2858
+    vtbls:
+      - ea: 0x1416E2858
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandUnknown1416EC328:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E2870
+    vtbls:
+      - ea: 0x1416E2870
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandChatAlliance:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E2888
+    vtbls:
+      - ea: 0x1416E2888
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandChatNovice:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E28A0
+    vtbls:
+      - ea: 0x1416E28A0
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandChatPvp:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E28B8
+    vtbls:
+      - ea: 0x1416E28B8
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandChatCrossWorldLinkshell:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E28D0
+    vtbls:
+      - ea: 0x1416E28D0
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandParty:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E28E8
+    vtbls:
+      - ea: 0x1416E28E8
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandPartyJoin:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E2900
+    vtbls:
+      - ea: 0x1416E2900
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandPartyDecline:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E2918
+    vtbls:
+      - ea: 0x1416E2918
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandPartyInvite:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E2930
+    vtbls:
+      - ea: 0x1416E2930
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandPartyLeave:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E2948
+    vtbls:
+      - ea: 0x1416E2948
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandPartyKick:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E2960
+    vtbls:
+      - ea: 0x1416E2960
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandPartyLeader:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E2978
+    vtbls:
+      - ea: 0x1416E2978
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandFC:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E2990
+    vtbls:
+      - ea: 0x1416E2990
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandLinkshell:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E29A8
+    vtbls:
+      - ea: 0x1416E29A8
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandFriendlist:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E29C0
+    vtbls:
+      - ea: 0x1416E29C0
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandBlacklist:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E29E0
+    vtbls:
+      - ea: 0x1416E29E0
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandEmote:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E2A00
+    vtbls:
+      - ea: 0x1416E2A00
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandCheck:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E2A18
+    vtbls:
+      - ea: 0x1416E2A18
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandSearch:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E2A30
+    vtbls:
+      - ea: 0x1416E2A30
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandTrade:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E2A48
+    vtbls:
+      - ea: 0x1416E2A48
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandMateria:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E2A60
+    vtbls:
+      - ea: 0x1416E2A60
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandSalute:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E2A78
+    vtbls:
+      - ea: 0x1416E2A78
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandLookParty:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E2A90
+    vtbls:
+      - ea: 0x1416E2A90
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandComment:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E2AB0
+    vtbls:
+      - ea: 0x1416E2AB0
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandReadyCheck:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E2AC8
+    vtbls:
+      - ea: 0x1416E2AC8
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandRandom:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E2AE0
+    vtbls:
+      - ea: 0x1416E2AE0
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandDice:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E2AF8
+    vtbls:
+      - ea: 0x1416E2AF8
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandClearTellHistory:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E2B10
+    vtbls:
+      - ea: 0x1416E2B10
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandLogout:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E2B28
+    vtbls:
+      - ea: 0x1416E2B28
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandCommand:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E2B58
+    vtbls:
+      - ea: 0x1416E2B58
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandQuit:
-    inherits_from: Client::UI::Shell::ShellCommandLogout
-    vtbl: 0x1416E2B70
+    vtbls:
+      - ea: 0x1416E2B70
+        base: Client::UI::Shell::ShellCommandLogout
   Client::UI::Shell::ShellCommandFaq:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E2BA0
+    vtbls:
+      - ea: 0x1416E2BA0
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandGM:
-    inherits_from: Component::Shell::DebugCommandInterface
-    vtbl: 0x1416E2BC8
+    vtbls:
+      - ea: 0x1416E2BC8
+        base: Component::Shell::DebugCommandInterface
   Client::UI::Shell::ShellCommandReturn:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E4B50
+    vtbls:
+      - ea: 0x1416E4B50
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandLegacy:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E4B68
+    vtbls:
+      - ea: 0x1416E4B68
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandHotbarBase:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E4B80
+    vtbls:
+      - ea: 0x1416E4B80
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandHotbar:
-    inherits_from: Client::UI::Shell::ShellCommandHotbarBase
-    vtbl: 0x1416E4BD0  # Might be switched with cross
+    vtbls:
+      - ea: 0x1416E4BD0
+        base: Client::UI::Shell::ShellCommandHotbarBase
   Client::UI::Shell::ShellCommandHotbarCross:
-    inherits_from: Client::UI::Shell::ShellCommandHotbarBase
-    vtbl: 0x1416E4C20
+    vtbls:
+      - ea: 0x1416E4C20
+        base: Client::UI::Shell::ShellCommandHotbarBase
   Client::UI::Shell::ShellCommandMacroConfig:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E4C70
+    vtbls:
+      - ea: 0x1416E4C70
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandInventory:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E4CA0
+    vtbls:
+      - ea: 0x1416E4CA0
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandItemSort:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E4CB8
+    vtbls:
+      - ea: 0x1416E4CB8
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandClearLog:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E4CD0
+    vtbls:
+      - ea: 0x1416E4CD0
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandInstanceArea:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E4CE8
+    vtbls:
+      - ea: 0x1416E4CE8
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandMacroError:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E4D00
+    vtbls:
+      - ea: 0x1416E4D00
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandMacroCancel:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E4D18
+    vtbls:
+      - ea: 0x1416E4D18
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandPlayTime:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E4D30
+    vtbls:
+      - ea: 0x1416E4D30
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandGroupPose:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E4D48
+    vtbls:
+      - ea: 0x1416E4D48
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandItemSearch:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E4D60
+    vtbls:
+      - ea: 0x1416E4D60
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandIdlingCamera:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E4D78
+    vtbls:
+      - ea: 0x1416E4D78
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandGeneralDutyKey:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E4D90
+    vtbls:
+      - ea: 0x1416E4D90
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandTitle:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E4DA8
+    vtbls:
+      - ea: 0x1416E4DA8
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandAlarm:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E4DC0
+    vtbls:
+      - ea: 0x1416E4DC0
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandHud:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E4DD8
+    vtbls:
+      - ea: 0x1416E4DD8
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandChatLog:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E4DF0
+    vtbls:
+      - ea: 0x1416E4DF0
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandUnk1416EE8C0:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E4E08
+    vtbls:
+      - ea: 0x1416E4E08
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandUnk1416EE8D8:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E4E20
+    vtbls:
+      - ea: 0x1416E4E20
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandBattleEffect:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E4E38
+    vtbls:
+      - ea: 0x1416E4E38
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandHudReset:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E4E50
+    vtbls:
+      - ea: 0x1416E4E50
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandUiReset:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E4E68
+    vtbls:
+      - ea: 0x1416E4E68
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandPartySort:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E4E80
+    vtbls:
+      - ea: 0x1416E4E80
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandUiScale:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E4E98
+    vtbls:
+      - ea: 0x1416E4E98
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandUnk1416EE968:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E4EB0
+    vtbls:
+      - ea: 0x1416E4EB0
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandUnk1416EE990:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E4ED8
+    vtbls:
+      - ea: 0x1416E4ED8
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandCrossHotbarType:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E4EF0
+    vtbls:
+      - ea: 0x1416E4EF0
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandEgiGlamour:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E4F08
+    vtbls:
+      - ea: 0x1416E4F08
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandBahamutSize:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E4F20
+    vtbls:
+      - ea: 0x1416E4F20
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandConfigToggle:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E4F38
+    vtbls:
+      - ea: 0x1416E4F38
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandNameplateConfig:
-    inherits_from: Client::UI::Shell::RaptureShellCommandInterface
-    vtbl: 0x1416E4F50
+    vtbls:
+      - ea: 0x1416E4F50
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::Game::Character::BattleChara:
-    inherits_from: Client::Game::Character::Character
-    vtbl: 0x1416E5060
+    vtbls:
+      - ea: 0x1416E5060
+        base: Client::Game::Character::Character
+      - ea: 0x1416E5320
+        base: Client::Graphics::Vfx::VfxDataListenner
     funcs:
       0x1407437B0: ctor
       0x1407438A0: dtor
-  Client::Game::Character::BattleChara_Client::Graphics::Vfx::VfxDataListener:
-    inherits_from: Client::Game::Character::Character_Client::Graphics::Vfx::VfxDataListener
-    vtbl: 0x1416E5320
   Client::Game::TitleController:
-    vtbl: 0x1416E6360
+    vtbls:
+      - ea: 0x1416E6360
     vfuncs:
       0: dtor
   Client::Game::TitleList:
-    vtbl: 0x1416E6368
+    vtbls:
+      - ea: 0x1416E6368
     vfuncs:
       0: dtor
   Client::UI::Misc::RaptureHotbarModule::ClearCallback:
-    vtbl: 0x1416E6370
+    vtbls:
+      - ea: 0x1416E6370
   Client::Game::UI::Hotbar:
-    inherits_from: Client::UI::Misc::RaptureHotbarModule::ClearCallback
-    vtbl: 0x1416E63B0
+    vtbls:
+      - ea: 0x1416E63B0
+        base: Client::UI::Misc::RaptureHotbarModule::ClearCallback
     vfuncs:
       0: dtor
     funcs:
       0x1407E09B0: IsActionUnlocked
       0x1407E22A0: CancelCast
   Client::Game::UI::MarkingController:
-    vtbl: 0x1416E6350
+    vtbls:
+      - ea: 0x1416E6350
     vfuncs:
       0: dtor
     funcs:
       0x1407AFE80: ClearWaymarks
   Client::Game::LimitBreakController:
-    vtbl: 0x1416E6358
+    vtbls:
+      - ea: 0x1416E6358
     vfuncs:
       0: dtor
   Client::Game::UI::Telepo::SelectUseTicketInvoker:
-    vtbl: 0x1416E6460
+    vtbls:
+      - ea: 0x1416E6460
     vfuncs:
       0: SelectUseTicketResultHandler
       1: dtor
   Client::Game::UI::Telepo:
-    vtbl: 0x1416E6470
+    vtbls:
+      - ea: 0x1416E6470
     vfuncs:
       0: AcceptTeleportOffer
       1: dtor
@@ -2075,507 +2442,652 @@ classes:
       0x1407BD410: TeleportWithTicket
       0x1407BD4A0: InvokeSelectUseTicket
   Client::UI::Agent::AgentHUD:
-    inherits_from: Client::UI::Agent::AgentInterface
-    vtbl: 0x1416E97F0
+    vtbls:
+      - ea: 0x1416E97F0
+        base: Client::UI::Agent::AgentInterface
     funcs:
       0x14082CEC0: ctor
       0x140832A70: UpdateParty
       0x140843940: OpenContextMenuFromTarget
-      0x1408467E0: GetMainCommandString # MainCommand exd
+      0x1408467E0: GetMainCommandString  # MainCommand exd
       0x140846B20: OpenSystemMenu
   Client::UI::Agent::AgentTryon::TryonCharaView:
-    inherits_from: Client::UI::Misc::CharaView
-    vtbl: 0x1416E9AF0
+    vtbls:
+      - ea: 0x1416E9AF0
+        base: Client::UI::Misc::CharaView
   Client::UI::Agent::AgentTryon:
-    inherits_from: Client::UI::Agent::AgentInterface
-    vtbl: 0x1416E9B30
+    vtbls:
+      - ea: 0x1416E9B30
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentItemDetailBase:
-    inherits_from: Client::UI::Agent::AgentInterface
-    vtbl: 0x1416E9BA0
+    vtbls:
+      - ea: 0x1416E9BA0
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentContentsFinderSetting:
-    inherits_from: Client::UI::Agent::AgentInterface
-    vtbl: 0x1416EA070
+    vtbls:
+      - ea: 0x1416EA070
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentContentsFinder:
-    inherits_from: Client::UI::Agent::AgentInterface
-    vtbl: 0x1416EA100
+    vtbls:
+      - ea: 0x1416EA100
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMap::MapMarkerStructSearchName:
-    inherits_from: Client::UI::Agent::AgentMap::MapMarkerStructSearch
-    vtbl: 0x1416EA5D8
+    vtbls:
+      - ea: 0x1416EA5D8
+        base: Client::UI::Agent::AgentMap::MapMarkerStructSearch
     vfuncs:
       1: Evaluate
   Client::UI::Agent::AgentMap:
-    inherits_from: Client::UI::Agent::AgentInterface
-    vtbl: 0x1416EA5E8
+    vtbls:
+      - ea: 0x1416EA5E8
+        base: Client::UI::Agent::AgentInterface
     funcs:
       0x1408A0D80: ctor
   Client::UI::Agent::AgentRecipeNote:
-    inherits_from: Client::UI::Agent::AgentInterface
-    vtbl: 0x1416EA968
+    vtbls:
+      - ea: 0x1416EA968
+        base: Client::UI::Agent::AgentInterface
     funcs:
       0x1408B8120: ctor
   Client::UI::Agent::AgentTeleport:
-    inherits_from: Client::UI::Agent::AgentInterface
-    vtbl: 0x1416EADE0
+    vtbls:
+      - ea: 0x1416EADE0
+        base: Client::UI::Agent::AgentInterface
     funcs:
       0x1408D10D0: ctor
   Client::UI::Agent::AgentRevive:
-    inherits_from: Client::UI::Agent::AgentInterface
-    vtbl: 0x1416EAD70
+    vtbls:
+      - ea: 0x1416EAD70
+        base: Client::UI::Agent::AgentInterface
     funcs:
       0x1408CF7F0: ctor
   Client::UI::Agent::AgentConfigSystem:
-    inherits_from: Client::UI::Agent::AgentInterface
-    vtbl: 0x14169DBD8
+    vtbls:
+      - ea: 0x14169DBD8
+        base: Client::UI::Agent::AgentInterface
     funcs:
       0x14023AAD0: ctor
   Client::UI::Agent::AgentHudLayout:
-    inherits_from: Client::UI::Agent::AgentInterface
-    vtbl: 0x1416EB250
+    vtbls:
+      - ea: 0x1416EB250
+        base: Client::UI::Agent::AgentInterface
     funcs:
       0x1408DB530: ctor
   Client::UI::Agent::AgentItemDetail:
-    inherits_from: Client::UI::Agent::AgentItemDetailBase
-    vtbl: 0x1416EB760
+    vtbls:
+      - ea: 0x1416EB760
+        base: Client::UI::Agent::AgentItemDetailBase
     funcs:
       0x1408EE9A0: ctor
       0x1408EF9A0: OnItemHovered
   Client::UI::Agent::AgentStatus::StatusCharaView:
-    inherits_from: Client::UI::Misc::CharaView
-    vtbl: 0x1416EC060
+    vtbls:
+      - ea: 0x1416EC060
+        base: Client::UI::Misc::CharaView
   Client::UI::Agent::AgentStatus:
-    inherits_from: Client::UI::Agent::AgentInterface
-    vtbl: 0x1416EC098
+    vtbls:
+      - ea: 0x1416EC098
+        base: Client::UI::Agent::AgentInterface
     funcs:
       0x14091EC80: ctor
   Client::UI::Agent::AgentMaterialize:
-    inherits_from: Client::UI::Agent::AgentInterface
-    vtbl: 0x1416EC600
+    vtbls:
+      - ea: 0x1416EC600
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentContentsTimer:
-    inherits_from: Client::UI::Agent::AgentInterface
-    vtbl: 0x1416ECA78
+    vtbls:
+      - ea: 0x1416ECA78
+        base: Client::UI::Agent::AgentInterface
   Client::Game::Event::EventHandler:
-    vtbl: 0x1416FBFB0
-  Client::Game::Event::LuaScriptLoader_ModuleBase: # LuaScriptLoader<ModuleBase>
-    inherits_from: Client::System::Resource::ResourceEventListener
-    vtbl: 0x1416FC7B8
+    vtbls:
+      - ea: 0x1416FBFB0
+  Client::Game::Event::LuaScriptLoader<Client::Game::Event::ModuleBase>:
+    vtbls:
+      - ea: 0x1416FC7B8
+        base: Client::System::Resource::ResourceEventListener
   Client::Game::Event::ModuleBase:
-    vtbl: 0x1416FC7E0
-  Client::Game::Event::LuaScriptLoader_LuaEventHandler: # LuaScriptLoader<LuaEventHandler>
-    inherits_from: Client::System::Resource::ResourceEventListener
-    vtbl: 0x1416FC818
+    vtbls:
+      - ea: 0x1416FC7E0
+  Client::Game::Event::LuaScriptLoader<Client::Game::Event::LuaEventHandler>:
+    vtbls:
+      - ea: 0x1416FC818
+        base: Client::System::Resource::ResourceEventListener
   Client::Game::Event::LuaEventHandler:
-    inherits_from: Client::Game::Event::EventHandler
-    vtbl: 0x1416FC840
+    vtbls:
+      - ea: 0x1416FC840
+        base: Client::Game::Event::EventHandler
   Client::Game::Event::EventSceneModuleImplBase:
-    vtbl: 0x1416FD058
+    vtbls:
+      - ea: 0x1416FD058
   Client::Game::Event::EventSceneModuleUsualImpl:
-    inherits_from: Client::Game::Event::EventSceneModuleImplBase
-    vtbl: 0x1416FD740
+    vtbls:
+      - ea: 0x1416FD740
+        base: Client::Game::Event::EventSceneModuleImplBase
   Client::Game::Event::Director:
-    inherits_from: Client::Game::Event::LuaEventHandler
-    vtbl: 0x1416FF5C0
+    vtbls:
+      - ea: 0x1416FF5C0
+        base: Client::Game::Event::LuaEventHandler
   Client::Game::Event::EventHandlerModule:
-    inherits_from: Client::Game::Event::ModuleBase
-    vtbl: 0x141701A40
+    vtbls:
+      - ea: 0x141701A40
+        base: Client::Game::Event::ModuleBase
     funcs:
       0x140A747B0: ctor
   Client::Game::Event::LuaActorModule:
-    inherits_from: Client::Game::Event::ModuleBase
-    vtbl: 0x141701A80
+    vtbls:
+      - ea: 0x141701A80
+        base: Client::Game::Event::ModuleBase
     funcs:
       0x140A78650: ctor
   Client::Game::Event::DirectorModule:
-    inherits_from: Client::Game::Event::ModuleBase
-    vtbl: 0x141701AB8
+    vtbls:
+      - ea: 0x141701AB8
+        base: Client::Game::Event::ModuleBase
     funcs:
       0x140A78F00: ctor
   Client::Game::Event::LeveDirector:
-    inherits_from: Client::Game::Event::Director
-    vtbl: 0x141703BE8
+    vtbls:
+      - ea: 0x141703BE8
+        base: Client::Game::Event::Director
   Client::Game::Event::BattleLeveDirector:
-    inherits_from: Client::Game::Event::LeveDirector
-    vtbl: 0x1417044C8
+    vtbls:
+      - ea: 0x1417044C8
+        base: Client::Game::Event::LeveDirector
   Client::Game::Gimmick::GimmickBill:
-    inherits_from: Client::Game::Gimmick::GimmickEventHandler
-    vtbl: 0x141711DC0
+    vtbls:
+      - ea: 0x141711DC0
+        base: Client::Game::Gimmick::GimmickEventHandler
   Client::Game::InstanceContent::InstanceContentDirector:
-    inherits_from: Client::Game::Event::Director
-    vtbl: 0x14173CBD8
+    vtbls:
+      - ea: 0x14173CBD8
+        base: Client::Game::Event::Director
   Client::UI::PopupMenu:
-    inherits_from: Component::GUI::AtkEventListener
-    vtbl: 0x1417B5AF0
+    vtbls:
+      - ea: 0x1417B5AF0
+        base: Component::GUI::AtkEventListener
     vfuncs:
       3: OnItemSelected
-  Client::UI::AddonFadeMiddleBack: # Both AddonFadeMiddle and AddonFadeBack
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x1417B61B0
+  Client::UI::AddonFadeMiddleBack:
+    vtbls:
+      - ea: 0x1417B61B0
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonFilter:
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x1417B6828
+    vtbls:
+      - ea: 0x1417B6828
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonOperationGuide:
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x1417B6A58
+    vtbls:
+      - ea: 0x1417B6A58
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonNowLoading:
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x1417B6C88
+    vtbls:
+      - ea: 0x1417B6C88
+        base: Component::GUI::AtkUnitBase
     funcs:
       0x140CE4F90: ctor
   Client::UI::AddonContextMenu:
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x1417B7528
+    vtbls:
+      - ea: 0x1417B7528
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonContextMenuTitle:
-    inherits_from: Client::UI::AddonContextMenu
-    vtbl: 0x1417B7748
+    vtbls:
+      - ea: 0x1417B7748
+        base: Client::UI::AddonContextMenu
   Client::UI::AddonSelectString::PopupMenuDerive:
-    inherits_from: Client::UI::PopupMenu
-    vtbl: 0x1417B7968
+    vtbls:
+      - ea: 0x1417B7968
+        base: Client::UI::PopupMenu
   Client::UI::AddonSelectString:
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x1417B7990
+    vtbls:
+      - ea: 0x1417B7990
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonSelectIconString::PopupMenuDerive:
-    inherits_from: Client::UI::PopupMenu
-    vtbl: 0x1417B7FD8
+    vtbls:
+      - ea: 0x1417B7FD8
+        base: Client::UI::PopupMenu
   Client::UI::AddonSelectIconString:
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x1417B8000
+    vtbls:
+      - ea: 0x1417B8000
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonTooltip:
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x1417B8218
+    vtbls:
+      - ea: 0x1417B8218
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonContextIconMenu:
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x1417B8A90
+    vtbls:
+      - ea: 0x1417B8A90
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonSelectYesno:
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x1417B9748
+    vtbls:
+      - ea: 0x1417B9748
+        base: Component::GUI::AtkUnitBase
     funcs:
       0x140CF09B0: ctor
   Client::UI::AddonSocial:
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x1417BAE50
+    vtbls:
+      - ea: 0x1417BAE50
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonRequest:
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x1417BC188
+    vtbls:
+      - ea: 0x1417BC188
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonContactList:
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x1417C02E8
+    vtbls:
+      - ea: 0x1417C02E8
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonAirShipExploration:
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x1417C46F0
+    vtbls:
+      - ea: 0x1417C46F0
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonItemSearchResult:
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x1417BCC00
+    vtbls:
+      - ea: 0x1417BCC00
+        base: Component::GUI::AtkUnitBase
     funcs:
       0x140D129D0: ctor
       0x140D136D0: UpdateResult
   Client::UI::AddonConfigSystem:
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x1417C8E10
-  Client::UI::Addon_CharaSelectWorldServer:
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x1417CECF8
+    vtbls:
+      - ea: 0x1417C8E10
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonCharaSelectWorldServer:
+    vtbls:
+      - ea: 0x1417CECF8
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonJournalDetail:
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x1417E1090
+    vtbls:
+      - ea: 0x1417E1090
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonJournalResult:
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x1417E18F0
+    vtbls:
+      - ea: 0x1417E18F0
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonGuildLeve:
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x1417E1B28
+    vtbls:
+      - ea: 0x1417E1B28
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonRetainerTaskList:
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x1417E6080
+    vtbls:
+      - ea: 0x1417E6080
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonRetainerTaskAsk:
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x1417E6298
+    vtbls:
+      - ea: 0x1417E6298
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonRetainerTaskResult:
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x1417E64B0
+    vtbls:
+      - ea: 0x1417E64B0
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonRetainerSellList:
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x1417E4D28
+    vtbls:
+      - ea: 0x1417E4D28
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonRetainerSell:
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x1417E4B10
+    vtbls:
+      - ea: 0x1417E4B10
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonRecipeNote:
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x1417E6FA8
+    vtbls:
+      - ea: 0x1417E6FA8
+        base: Component::GUI::AtkUnitBase
     funcs:
       0x140E2DEC0: ReceiveEvent_ClickSynthesizeButton
       0x140E2DF10: ReceiveEvent_ClickQuickSynthesisButton
       0x140E2DF60: ReceiveEvent_ClickTrialSynthesisButton
   Client::UI::Atk2DAreaMap:
-    inherits_from: Client::UI::Atk2DMap
-    vtbl: 0x1417E7830
-  Client::UI::AddonRelicNoteBook:  
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x1417E80F8
+    vtbls:
+      - ea: 0x1417E7830
+        base: Client::UI::Atk2DMap
+  Client::UI::AddonRelicNoteBook:
+    vtbls:
+      - ea: 0x1417E80F8
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonAOZNotebook:
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x1417E9188
+    vtbls:
+      - ea: 0x1417E9188
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonAOZNotebookPresetList:
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x1417E9460
+    vtbls:
+      - ea: 0x1417E9460
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonContentsFinder:
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x1417E9D28
+    vtbls:
+      - ea: 0x1417E9D28
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonContentsFinderSetting:
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x1417EA1C8
+    vtbls:
+      - ea: 0x1417EA1C8
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonRaidFinder:
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x1417EAC50
+    vtbls:
+      - ea: 0x1417EAC50
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonMaterializeDialog:
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x1417EB2C8
+    vtbls:
+      - ea: 0x1417EB2C8
+        base: Component::GUI::AtkUnitBase
     funcs:
       0x140E5D7C0: ctor
   Client::UI::AddonMateriaAttach:
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x1417EB4E0
+    vtbls:
+      - ea: 0x1417EB4E0
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMateriaDialogBase:
+    vtbls:
+      - ea: 0x1417EB6F8
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonMateriaAttachDialog:
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x1417EB910
+    vtbls:
+      - ea: 0x1417EB910
+        base: Client::UI::AddonMateriaDialogBase
   Client::UI::AddonMateriaRetrieveDialog:
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x1417EBB30
+    vtbls:
+      - ea: 0x1417EBB30
+        base: Client::UI::AddonMateriaDialogBase
   Client::UI::AddonMiragePrismMiragePlate:
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x1417ECF70
+    vtbls:
+      - ea: 0x1417ECF70
+        base: Component::GUI::AtkUnitBase
     funcs:
       0x140E67440: ctor
   Client::UI::AddonGrandCompanySupplyReward:
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x1417EEFC0
+    vtbls:
+      - ea: 0x1417EEFC0
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonTalk:
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x1417F2608
+    vtbls:
+      - ea: 0x1417F2608
+        base: Component::GUI::AtkUnitBase
     funcs:
       0x140E94DC0: ctor
   Client::UI::AddonChatLogPanel:
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x1417F3298
+    vtbls:
+      - ea: 0x1417F3298
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonChatLog:
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x1417F34B0
+    vtbls:
+      - ea: 0x1417F34B0
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonActionDetail:
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x1417F3DB0
+    vtbls:
+      - ea: 0x1417F3DB0
+        base: Component::GUI::AtkUnitBase
     funcs:
       0x140EA8560: ctor
       0x140EA8CF0: GenerateTooltip
   Client::UI::AddonItemDetail:
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x1417F4228
+    vtbls:
+      - ea: 0x1417F4228
+        base: Component::GUI::AtkUnitBase
     funcs:
       0x140EA9340: ctor
       0x140EAA860: GenerateTooltip
   Client::UI::AddonSalvageDialog:
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x1417F8AC8
+    vtbls:
+      - ea: 0x1417F8AC8
+        base: Component::GUI::AtkUnitBase
     funcs:
       0x140ECCA10: ctor
   Client::UI::AddonAreaMap:
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x1417FA3E8
+    vtbls:
+      - ea: 0x1417FA3E8
+        base: Component::GUI::AtkUnitBase
     funcs:
       0x140ED6AD0: ctor
   Client::UI::AddonScreenText:
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x1417FA838
+    vtbls:
+      - ea: 0x1417FA838
+        base: Component::GUI::AtkUnitBase
     funcs:
       0x140EE0830: ctor
   Client::UI::AddonPopUpText:
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x1417FAA50
+    vtbls:
+      - ea: 0x1417FAA50
+        base: Component::GUI::AtkUnitBase
     funcs:
       0x140EE0D20: ctor
   Client::UI::AddonFlyText:
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x1417FAC68
+    vtbls:
+      - ea: 0x1417FAC68
+        base: Component::GUI::AtkUnitBase
     funcs:
       0x140EE3110: ctor
   Client::UI::AddonMiniTalk:
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x1417FAE80
+    vtbls:
+      - ea: 0x1417FAE80
+        base: Component::GUI::AtkUnitBase
     funcs:
       0x140EE5AF0: ctor
   Client::UI::AddonGathering:
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x1417FB7A0
+    vtbls:
+      - ea: 0x1417FB7A0
+        base: Component::GUI::AtkUnitBase
     funcs:
       0x140EE8DF0: ctor
       0x140EE9540: ReceiveEvent_ToggleQuickGathering
       0x140EE95F0: ReceiveEvent_Gather
   Client::UI::AddonGatheringMasterpiece:
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x1417FB9B8
+    vtbls:
+      - ea: 0x1417FB9B8
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonNamePlate::BakePlateRenderer:
-    inherits_from: Component::GUI::AtkTextNodeRenderer
-    vtbl: 0x1417FC218
+    vtbls:
+      - ea: 0x1417FC218
+        base: Component::GUI::AtkTextNodeRenderer
   Client::UI::AddonNamePlate:
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x1417FC238
+    vtbls:
+      - ea: 0x1417FC238
+        base: Component::GUI::AtkUnitBase
     funcs:
       0x140EF1760: ctor
-      0x140EF1A10: SetCommonNamePlate # x, y, scale, etc
+      0x140EF1A10: SetCommonNamePlate  # x, y, scale, etc
       0x140EF1C40: SetPlayerNamePlate # player specific nodes
       0x140EF4610: ToggleTextRenderMode
   Client::UI::AddonTeleport:
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x141800838
+    vtbls:
+      - ea: 0x141800838
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonDeepDungeonStatus:
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x14180ACC0
+    vtbls:
+      - ea: 0x14180ACC0
+        base: Component::GUI::AtkUnitBase
     funcs:
       0x140F5D580: ctor
   Client::UI::AddonItemInspectionList:
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x14180D548
+    vtbls:
+      - ea: 0x14180D548
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonItemInspectionResult:
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x14180D978
+    vtbls:
+      - ea: 0x14180D978
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonWeeklyBingo::DutySlot:
-    inherits_from: Component::GUI::AtkEventListener
-    vtbl: 0x141815590
+    vtbls:
+      - ea: 0x141815590
+        base: Component::GUI::AtkEventListener
   Client::UI::AddonWeeklyBingo::DutySlotList:
-    vtbl: 0x1418155A8
+    vtbls:
+      - ea: 0x1418155A8
   Client::UI::AddonWeeklyBingo::StringThing:
-    vtbl: 0x1418155B0
+    vtbls:
+      - ea: 0x1418155B0
   Client::UI::AddonWeeklyBingo::StickerSlot:
-    vtbl: 0x1418155B8
+    vtbls:
+      - ea: 0x1418155B8
   Client::UI::AddonWeeklyBingo::StickerSlotList:
-    vtbl: 0x1418155C0
+    vtbls:
+      - ea: 0x1418155C0
   Client::UI::AddonWeeklyBingo::RewardCategory:
-    inherits_from: Component::GUI::AtkEventListener
-    vtbl: 0x1418155C8
+    vtbls:
+      - ea: 0x1418155C8
+        base: Component::GUI::AtkEventListener
   Client::UI::AddonWeeklyBingo::RewardGuaranteed:
-    inherits_from: Component::GUI::AtkEventListener
-    vtbl: 0x1418155E0
+    vtbls:
+      - ea: 0x1418155E0
+        base: Component::GUI::AtkEventListener
   Client::UI::AddonWeeklyBingo::RewardCategoryList:
-    vtbl: 0x1418155F8
-  Client::UI::AddonWeeklyBingo: # Wondrous Tails
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x141815600
-  Client::UI::AddonWeeklyPuzzle: # Faux Hollows
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x141815C48
+    vtbls:
+      - ea: 0x1418155F8
+  Client::UI::AddonWeeklyBingo:
+    vtbls:
+      - ea: 0x141815600
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonWeeklyPuzzle:
+    vtbls:
+      - ea: 0x141815C48
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonMYCItemBox:
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x1418171E8
-  Client::UI::AddonTargetInfoBase: # Name is a guess
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x14181ACD8
-  Client::UI::AddonTargetInfo: # _TargetInfo
-    inherits_from: Client::UI::AddonTargetInfoBase
-    vtbl: 0x14181AEF0
+    vtbls:
+      - ea: 0x1418171E8
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonTargetInfoBase:
+    vtbls:
+      - ea: 0x14181ACD8
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonTargetInfo:
+    vtbls:
+      - ea: 0x14181AEF0
+        base: Client::UI::AddonTargetInfoBase
   Client::UI::AddonTargetInfoUnknown1:
-    inherits_from: Client::UI::AddonTargetInfoBase
-    vtbl: 0x14181B108
+    vtbls:
+      - ea: 0x14181B108
+        base: Client::UI::AddonTargetInfoBase
   Client::UI::AddonTargetInfoUnknown2:
-    inherits_from: Client::UI::AddonTargetInfoBase
-    vtbl: 0x14181B320
+    vtbls:
+      - ea: 0x14181B320
+        base: Client::UI::AddonTargetInfoBase
   Client::UI::AddonTargetInfoMainTarget:
-    inherits_from: Client::UI::AddonTargetInfoBase
-    vtbl: 0x14181B538
+    vtbls:
+      - ea: 0x14181B538
+        base: Client::UI::AddonTargetInfoBase
   Client::UI::AddonTargetCursor:
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x14181B750
+    vtbls:
+      - ea: 0x14181B750
+        base: Component::GUI::AtkUnitBase
     funcs:
       0x140FE0EF0: ctor
-  Client::UI::AddonBattleTalk: # _BattleTalk
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x14181BB80
-  Client::UI::AddonScreenInfoFrontBack: # Both _ScreenInfoFront and _ScreenInfoBack
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x14181BD98
-  Client::UI::AddonMainCommand: # _MainCommand
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x141823FF0
-  Client::UI::AddonParameterWidget: # _ParameterWidget
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x141824228
-  Client::UI::AddonExp: # _Exp
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x141824440
-  Client::UI::AddonEnemyList: # _EnemyList
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x141824658
-  Client::UI::AddonBagWidget: # _BagWidget
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x141824F50
-  Client::UI::AddonMoney: # _Money
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x141825168
-  Client::UI::AddonNotification: # _Notification
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x141825380
+  Client::UI::AddonBattleTalk:
+    vtbls:
+      - ea: 0x14181BB80
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonScreenInfoFrontBack:
+    vtbls:
+      - ea: 0x14181BD98
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMainCommand:
+    vtbls:
+      - ea: 0x141823FF0
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonParameterWidget:
+    vtbls:
+      - ea: 0x141824228
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonExp:
+    vtbls:
+      - ea: 0x141824440
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonEnemyList:
+    vtbls:
+      - ea: 0x141824658
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonBagWidget:
+    vtbls:
+      - ea: 0x141824F50
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMoney:
+    vtbls:
+      - ea: 0x141825168
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonNotification:
+    vtbls:
+      - ea: 0x141825380
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonShopCardDialog:
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x141836C90
-  Client::UI::AddonDTR: # _DTR
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x141825900
-  Client::UI::AddonCastBar: # _CastBar
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x141825B18
-  Client::UI::AddonNaviMap: # _NaviMap
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x141825D60
-  Client::UI::AddonActionBarBase:  # Name is a guess
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x141825F80
+    vtbls:
+      - ea: 0x141836C90
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonDTR:
+    vtbls:
+      - ea: 0x141825900
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonCastBar:
+    vtbls:
+      - ea: 0x141825B18
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonNaviMap:
+    vtbls:
+      - ea: 0x141825D60
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonActionBarBase:
+    vtbls:
+      - ea: 0x141825F80
+        base: Component::GUI::AtkUnitBase
     vfuncs:
       73: PulseActionBarSlot
-  Client::UI::AddonActionBarX: # _ActionBar01 through _ActionBar09, and _ActionBarEx
-    inherits_from: Client::UI::AddonActionBarBase
-    vtbl: 0x141826220
-  Client::UI::AddonActionBar: # _ActionBar
-    inherits_from: Client::UI::AddonActionBarX
-    vtbl: 0x141826528
-  Client::UI::AddonPartyList: # _PartyList
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x141826AD0
+  Client::UI::AddonActionBarX:
+    vtbls:
+      - ea: 0x141826220
+        base: Client::UI::AddonActionBarBase
+  Client::UI::AddonActionBar:
+    vtbls:
+      - ea: 0x141826528
+        base: Client::UI::AddonActionBarX
+  Client::UI::AddonPartyList:
+    vtbls:
+      - ea: 0x141826AD0
+        base: Component::GUI::AtkUnitBase
     funcs:
       0x14100BA20: ResizeForPartySize
-  Client::UI::AddonAllianceListX: # _AllianceList1 and _AllianceList2
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x141826CF0
-  Client::UI::AddonToDoList: # _ToDoList
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x141827658
-  Client::UI::AddonActionCross: # _ActionCross
-    inherits_from: Client::UI::AddonActionBarBase
-    vtbl: 0x141827E80
-  Client::UI::AddonActionContents: # _ActionContents
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x141828128
-  Client::UI::AddonActionDoubleCrossBase: # Name is a guess
-    inherits_from: Client::UI::AddonActionBarX
-    vtbl: 0x141828350
-  Client::UI::AddonActionDoubleCrossL: # _ActionDoubleCrossL
-    inherits_from: Client::UI::AddonActionDoubleCrossBase
-    vtbl: 0x141828630
-  Client::UI::AddonActionDoubleCrossR: # _ActionDoubleCrossR
-    inherits_from: Client::UI::AddonActionDoubleCrossBase
-    vtbl: 0x141828920
-  Client::UI::AddonFocusTargetInfo: # _FocusTargetInfo
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x141828C00
-  Client::UI::AddonLimitBreak: # _LimitBreak
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x141828E18
-  Client::UI::AddonMainCross: # _MainCross
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x141829068
+  Client::UI::AddonAllianceListX:
+    vtbls:
+      - ea: 0x141826CF0
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonToDoList:
+    vtbls:
+      - ea: 0x141827658
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonActionCross:
+    vtbls:
+      - ea: 0x141827E80
+        base: Client::UI::AddonActionBarBase
+  Client::UI::AddonActionContents:
+    vtbls:
+      - ea: 0x141828128
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonActionDoubleCrossBase:
+    vtbls:
+      - ea: 0x141828350
+        base: Client::UI::AddonActionBarX
+  Client::UI::AddonActionDoubleCrossL:
+    vtbls:
+      - ea: 0x141828630
+        base: Client::UI::AddonActionDoubleCrossBase
+  Client::UI::AddonActionDoubleCrossR:
+    vtbls:
+      - ea: 0x141828920
+        base: Client::UI::AddonActionDoubleCrossBase
+  Client::UI::AddonFocusTargetInfo:
+    vtbls:
+      - ea: 0x141828C00
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonLimitBreak:
+    vtbls:
+      - ea: 0x141828E18
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMainCross:
+    vtbls:
+      - ea: 0x141829068
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonHudLayoutWindow:
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x14182DE10
+    vtbls:
+      - ea: 0x14182DE10
+        base: Component::GUI::AtkUnitBase
     funcs:
       0x14103D870: ctor
   Client::UI::AddonHudLayoutScreen:
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x14182E028
+    vtbls:
+      - ea: 0x14182E028
+        base: Component::GUI::AtkUnitBase
     funcs:
       0x14103EB00: ctor
       0x141043770: AddonOverlayMouseMovedEvent
@@ -2583,197 +3095,255 @@ classes:
       0x141043DA0: AddonOverlayMouseReleaseEvent
       0x141045A50: _SetAddonScale
   Client::Game::Fate::FateDirector:
-    inherits_from: Client::Game::Event::Director
-    vtbl: 0x141841E78
+    vtbls:
+      - ea: 0x141841E78
+        base: Client::Game::Event::Director
   Client::Game::Fate::FateContext:
-    vtbl: 0x141842750
+    vtbls:
+      - ea: 0x141842750
     vfuncs:
       0: dtor
-  Client::UI::AddonLotteryDaily: # Mini Cactpot
-    inherits_from: Component::GUI::AtkUnitBase
-    vtbl: 0x14183E4E0
+  Client::UI::AddonLotteryDaily:
+    vtbls:
+      - ea: 0x14183E4E0
+        base: Component::GUI::AtkUnitBase
   Client::Game::Object::EventObject:
-    inherits_from: Client::Game::Object::GameObject
-    vtbl: 0x141841378
+    vtbls:
+      - ea: 0x141841378
+        base: Client::Game::Object::GameObject
   Client::Game::Object::Treasure:
-    inherits_from: Client::Game::Object::GameObject
-    vtbl: 0x1418415E0
+    vtbls:
+      - ea: 0x1418415E0
+        base: Client::Game::Object::GameObject
   Client::Game::Object::GatheringPointObject:
-    inherits_from: Client::Game::Object::GameObject
-    vtbl: 0x141841918
+    vtbls:
+      - ea: 0x141841918
+        base: Client::Game::Object::GameObject
   Client::Game::Object::AreaObject:
-    inherits_from: Client::Game::Object::GameObject
-    vtbl: 0x141841B80
-  Client::Graphics::Culling::CullingManager_Client::Graphics::JobSystem_Client::Graphics::Culling::CullingJobOpt:
-    vtbl: 0x141842888
-  Client::Graphics::Culling::CullingManager_Client::Graphics::JobSystem_Client::Graphics::Culling::CallbackJobOpt:
-    vtbl: 0x141842890
-  Client::Graphics::Culling::CullingManager_Client::Graphics::JobSystem_Client::Graphics::Culling::RenderCallbackJob:
-    vtbl: 0x141842898
+    vtbls:
+      - ea: 0x141841B80
+        base: Client::Game::Object::GameObject
+  Client::Graphics::JobSystem<Client::Graphics::Culling::CullingManager,Client::Graphics::Culling::CullingJobOpt>:
+    vtbls:
+      - ea: 0x141842888
+  Client::Graphics::JobSystem<Client::Graphics::Culling::CullingManager,Client::Graphics::Culling::CallbackJobOpt>:
+    vtbls:
+      - ea: 0x141842890
+  Client::Graphics::JobSystem<Client::Graphics::Culling::CullingManager,Client::Graphics::Culling::RenderCallbackJob>:
+    vtbls:
+      - ea: 0x141842898
   Client::Graphics::Culling::CullingManager:
-    inherits_from: Client::Graphics::Singleton
-    vtbl: 0x1418428A0
-  Client::Graphics::Kernel::CVector_Client::Graphics::Kernel::VertexShaderPtr: # std::vector of Client::Graphics::Kernel::VertexShader*
-    vtbl: 0x141842E40
-  Client::Graphics::Kernel::CVector_Client::Graphics::Kernel::PixelShaderPtr: # std::vector of Client::Graphics::Kernel::PixelShader*
-    vtbl: 0x141842E48
-  Client::Graphics::Kernel::CVector_Client::Graphics::Kernel::ShaderNodePtr: # std::vector of Client::Graphics::Kernel::ShaderNode*
-    vtbl: 0x141842E50
-  Client::Graphics::Kernel::CBalanceSet_Client::Graphics::Kernel::ShaderPackage::SItem: # pretty sure BalanceSet is a balanced tree, Client::Graphics::Kernel::ShaderPackage::SItem
-    vtbl: 0x141842E58
+    vtbls:
+      - ea: 0x1418428A0
+        base: Client::Graphics::Singleton
+  Client::Graphics::Kernel::CVector<Client::Graphics::Kernel::VertexShader*>:
+    vtbls:
+      - ea: 0x141842E40
+  Client::Graphics::Kernel::CVector<Client::Graphics::Kernel::PixelShader*>:
+    vtbls:
+      - ea: 0x141842E48
+  Client::Graphics::Kernel::CVector<Client::Graphics::Kernel::ShaderNode*>:
+    vtbls:
+      - ea: 0x141842E50
+  Client::Graphics::Kernel::CBalanceSet<Client::Graphics::Kernel::ShaderPackage::SItem>:
+    vtbls:
+      - ea: 0x141842E58
   Client::Graphics::Kernel::ShaderPackage:
-    inherits_from: Client::Graphics::ReferencedClassBase
-    vtbl: 0x141842E60
+    vtbls:
+      - ea: 0x141842E60
+        base: Client::Graphics::ReferencedClassBase
     funcs:
-      0x14110FBF0: CreateShaderPackage # static function
+      0x14110FBF0: CreateShaderPackage  # static function
       0x141110390: ctor
       0x141111770: VectorResize_PixelShader # these 3 functions are identical, just template-generated functions from std::vectors
       0x141111860: VectorResize_ShaderNode
       0x141111950: VectorResize_VertexShader
   Client::Game::Character::Companion:
-    inherits_from: Client::Game::Character::Character
-    vtbl: 0x141845FB0
+    vtbls:
+      - ea: 0x141845FB0
+        base: Client::Game::Character::Character
     funcs:
       0x141123180: ctor
   Client::Game::CameraBase:
-    vtbl: 0x1418471C0
+    vtbls:
+      - ea: 0x1418471C0
   Client::Game::Camera:
-    inherits_from: Client::Game::CameraBase
-    vtbl: 0x141847220
+    vtbls:
+      - ea: 0x141847220
+        base: Client::Game::CameraBase
     funcs:
-      0x14112BC60: ctor
       0x141129170: UpdateRotation
+      0x14112BC60: ctor
   Client::Game::Camera1:
-    inherits_from: Client::Game::CameraBase
-    vtbl: 0x141847320
+    vtbls:
+      - ea: 0x141847320
+        base: Client::Game::CameraBase
     funcs:
       0x14112EC90: ctor
   Client::Game::Camera2:
-    inherits_from: Client::Game::Camera
-    vtbl: 0x141847380
+    vtbls:
+      - ea: 0x141847380
+        base: Client::Game::Camera
     funcs:
       0x141133E50: ctor
   Client::Game::Camera3:
-    inherits_from: Client::Game::Camera
-    vtbl: 0x141847480
+    vtbls:
+      - ea: 0x141847480
+        base: Client::Game::Camera
     funcs:
       0x141135A40: ctor
   Client::Graphics::Culling::OcclusionCullingManager:
-    inherits_from: Client::Graphics::Singleton
-    vtbl: 0x141848CD0
+    vtbls:
+      - ea: 0x141848CD0
+        base: Client::Graphics::Singleton
     funcs:
       0x141147D80: ctor
       0x141147E60: Initialize
-  Client::Graphics::Streaming::StreamingManager_Client::Graphics::JobSystem_Client::Graphics::Streaming::StreamingManager::StreamingJob:
-    inherits_from: Client::Graphics::Singleton
-    vtbl: 0x141848CE0
+  Client::Graphics::JobSystem<Client::Graphics::Streaming::StreamingManager>:
+    vtbls:
+      - ea: 0x141848CE0
+        base: Client::Graphics::Singleton
   Client::Graphics::Streaming::StreamingManager:
-    inherits_from: Client::Graphics::Singleton
-    vtbl: 0x141848CE8
+    vtbls:
+      - ea: 0x141848CE8
+        base: Client::Graphics::Singleton
   Client::Graphics::Physics::BonePhysicsModule:
-    vtbl: 0x14184B2B0
+    vtbls:
+      - ea: 0x14184B2B0
     vfuncs:
       0: dtor
     funcs:
       0x14115A7C0: ctor
       0x14115A940: Initialize
   Client::System::Scheduler::Base::SchedulerState:
-    vtbl: 0x14184F028
+    vtbls:
+      - ea: 0x14184F028
   Client::Graphics::Physics::BoneSimulator:
-    vtbl: 0x14184FA40
+    vtbls:
+      - ea: 0x14184FA40
     funcs:
       0x14117BA20: ctor
   Client::Game::Object::Aetheryte:
-    inherits_from: Client::Game::Object::GameObject
-    vtbl: 0x1418502C0
+    vtbls:
+      - ea: 0x1418502C0
+        base: Client::Game::Object::GameObject
     funcs:
       0x14119FEF0: Create
   Component::Log::LogModule:
-    inherits_from: Client::System::Common::NonCopyable
-    vtbl: 0x141850AC0
+    vtbls:
+      - ea: 0x141850AC0
+        base: Client::System::Common::NonCopyable
     funcs:
       0x1411BA680: ctor
   Client::Game::Object::HousingObject:
-    inherits_from: Client::Game::Object::GameObject
-    vtbl: 0x141887FF0
+    vtbls:
+      - ea: 0x141887FF0
+        base: Client::Game::Object::GameObject
   Client::Game::Gimmick::GimmickEventHandler:
-    inherits_from: Client::Game::Event::LuaEventHandler
-    vtbl: 0x141897690
+    vtbls:
+      - ea: 0x141897690
+        base: Client::Game::Event::LuaEventHandler
   Client::Game::Gimmick::Gimmick_Unk1:
-    inherits_from: Client::Game::Gimmick::GimmickEventHandler
-    vtbl: 0x141897EF8
+    vtbls:
+      - ea: 0x141897EF8
+        base: Client::Game::Gimmick::GimmickEventHandler
   Client::Game::Gimmick::GimmickRect:
-    inherits_from: Client::Game::Gimmick::GimmickEventHandler
-    vtbl: 0x141898760
+    vtbls:
+      - ea: 0x141898760
+        base: Client::Game::Gimmick::GimmickEventHandler
   Client::Game::Object::HousingCombinedObject:
-    inherits_from: Client::Game::Object::HousingObject
-    vtbl: 0x14189BAF8
+    vtbls:
+      - ea: 0x14189BAF8
+        base: Client::Game::Object::HousingObject
   Client::System::Scheduler::Clip::BaseClip:
-    inherits_from: Client::System::Scheduler::Base::SchedulerState
-    vtbl: 0x14189FB50
+    vtbls:
+      - ea: 0x14189FB50
+        base: Client::System::Scheduler::Base::SchedulerState
   Client::System::Scheduler::Clip::HavokAnimationClip:
-    inherits_from: Client::System::Scheduler::Clip::BaseClip
-    vtbl: 0x1418A0D60
+    vtbls:
+      - ea: 0x1418A0D60
+        base: Client::System::Scheduler::Clip::BaseClip
   Client::System::Scheduler::Base::SceneConnectionBlock:
-    inherits_from: Client::System::Scheduler::Base::SchedulerState
-    vtbl: 0x1418ABF40
+    vtbls:
+      - ea: 0x1418ABF40
+        base: Client::System::Scheduler::Base::SchedulerState
   SQEX::CDev::Engine::Sd::Driver::IEffect:
-    inherits_from: SQEX::CDev::Engine::Sd::SdMemoryAllocator
-    vtbl: 0x141967AE0
+    vtbls:
+      - ea: 0x141967AE0
+        base: SQEX::CDev::Engine::Sd::SdMemoryAllocator
   SQEX::CDev::Engine::Sd::Driver::FilterBase:
-    inherits_from: SQEX::CDev::Engine::Sd::Driver::IEffect
-    vtbl: 0x141967B28
+    vtbls:
+      - ea: 0x141967B28
+        base: SQEX::CDev::Engine::Sd::Driver::IEffect
   SQEX::CDev::Engine::Sd::Driver::DynamicValue:
-    inherits_from: SQEX::CDev::Engine::Sd::SdMemoryAllocator
-    vtbl: 0x141968588
+    vtbls:
+      - ea: 0x141968588
+        base: SQEX::CDev::Engine::Sd::SdMemoryAllocator
   SQEX::CDev::Engine::Sd::Driver::ISound:
-    vtbl: 0x1419685C0
+    vtbls:
+      - ea: 0x1419685C0
   SQEX::CDev::Engine::Sd::Driver::RootSound:
-    inherits_from: SQEX::CDev::Engine::Sd::Driver::ISound
-    vtbl: 0x141968930
+    vtbls:
+      - ea: 0x141968930
+        base: SQEX::CDev::Engine::Sd::Driver::ISound
   SQEX::CDev::Engine::Sd::Driver::StreamSoundEx:
-    inherits_from: SQEX::CDev::Engine::Sd::Driver::RootSound
-    vtbl: 0x141969400
+    vtbls:
+      - ea: 0x141969400
+        base: SQEX::CDev::Engine::Sd::Driver::RootSound
   SQEX::CDev::Engine::Sd::Driver::AtomosgearSound:
-    inherits_from: SQEX::CDev::Engine::Sd::Driver::RootSound
-    vtbl: 0x141969798
+    vtbls:
+      - ea: 0x141969798
+        base: SQEX::CDev::Engine::Sd::Driver::RootSound
   SQEX::CDev::Engine::Sd::Driver::Surround4chSound:
-    inherits_from: SQEX::CDev::Engine::Sd::Driver::RootSound
-    vtbl: 0x141969EC8
+    vtbls:
+      - ea: 0x141969EC8
+        base: SQEX::CDev::Engine::Sd::Driver::RootSound
   SQEX::CDev::Engine::Sd::Driver::ISoundDriver:
-    inherits_from: SQEX::CDev::Engine::Sd::SdMemoryAllocator
-    vtbl: 0x1419B7A18
+    vtbls:
+      - ea: 0x1419B7A18
+        base: SQEX::CDev::Engine::Sd::SdMemoryAllocator
   SQEX::CDev::Engine::Sd::Driver::SoundDriver:
-    inherits_from: SQEX::CDev::Engine::Sd::Driver::ISoundDriver
-    vtbl: 0x1419B7C80
+    vtbls:
+      - ea: 0x1419B7C80
+        base: SQEX::CDev::Engine::Sd::Driver::ISoundDriver
   SQEX::CDev::Engine::Sd::Driver::ToolBankController:
-    inherits_from: SQEX::CDev::Engine::Sd::Driver::BankController
-    vtbl: 0x1419B7EE8
+    vtbls:
+      - ea: 0x1419B7EE8
+        base: SQEX::CDev::Engine::Sd::Driver::BankController
   SQEX::CDev::Engine::Sd::Whiz::IWhizManager:
-    inherits_from: SQEX::CDev::Engine::Sd::SdMemoryAllocator
-    vtbl: 0x1419B7F50
+    vtbls:
+      - ea: 0x1419B7F50
+        base: SQEX::CDev::Engine::Sd::SdMemoryAllocator
   SQEX::CDev::Engine::Sd::Whiz::WhizManager:
-    inherits_from: SQEX::CDev::Engine::Sd::Whiz::IWhizManager
-    vtbl: 0x1419B7FA0
+    vtbls:
+      - ea: 0x1419B7FA0
+        base: SQEX::CDev::Engine::Sd::Whiz::IWhizManager
   Client::System::Memory::IMemorySpace:
-    vtbl: 0x14166EBA0
+    vtbls:
+      - ea: 0x14166EBA0
   Client::System::Memory::IMemoryModule:
-    vtbl: 0x14166ECA8
+    vtbls:
+      - ea: 0x14166ECA8
   Client::System::Memory::Regular::RegularAllocator:
-    inherits_from: Client::System::Memory::IMemoryModule
-    vtbl: 0x14166EDF0
+    vtbls:
+      - ea: 0x14166EDF0
+        base: Client::System::Memory::IMemoryModule
   Client::System::Memory::Regular::UIAllocator:
-    inherits_from: Client::System::Memory::Regular::RegularAllocator
-    vtbl: 0x14166EED8
+    vtbls:
+      - ea: 0x14166EED8
+        base: Client::System::Memory::Regular::RegularAllocator
   Client::System::Memory::Regular::FileAllocator:
-    inherits_from: Client::System::Memory::Regular::RegularAllocator
-    vtbl: 0x14166EF50
+    vtbls:
+      - ea: 0x14166EF50
+        base: Client::System::Memory::Regular::RegularAllocator
   Client::System::Memory::Regular::SystemAllocator:
-    inherits_from: Client::System::Memory::IMemoryModule
-    vtbl: 0x14166EE68
+    vtbls:
+      - ea: 0x14166EE68
+        base: Client::System::Memory::IMemoryModule
   Client::System::Memory::Regular::FixedSpace:
-    inherits_from: Client::System::Memory::IMemorySpace
-    vtbl: 0x14166EFC8
+    vtbls:
+      - ea: 0x14166EFC8
+        base: Client::System::Memory::IMemorySpace
   Client::Game::ControlSystem::CameraManager:
     funcs:
       0x141132910: ctor
