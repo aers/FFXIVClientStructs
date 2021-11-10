@@ -2384,7 +2384,7 @@ classes:
       - ea: 0x1416E5060
         base: Client::Game::Character::Character
       - ea: 0x1416E5320
-        base: Client::Game::Character::Character
+        base: Client::Graphics::Vfx::VfxDataListenner
     funcs:
       0x1407437B0: ctor
       0x1407438A0: dtor

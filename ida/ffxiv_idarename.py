@@ -150,10 +150,10 @@ class BaseApi(object):
         return class_name
 
     @abstractmethod
-    def format_vfunc_name(self, ea, current_func_name, proposed_func_name, class_name, parent_class_names):
+    def format_vfunc_name(self, ea, current_func_name, proposed_func_name, class_name, base_class_names):
         """
         Name a function (vfunc) based on how it is currently named, what it is proposed to be named,
-        and the names of the current and parent classes. If None is returned, it is assumed
+        and the names of the current and base classes. If None is returned, it is assumed
         that the current func was named something unexpectedly and will be warned about. Return
         an empty string "" if no renaming should take place.
         :param ea: Func effective address
@@ -164,8 +164,8 @@ class BaseApi(object):
         :type proposed_func_name: str
         :param class_name: Class name
         :type class_name: str
-        :param parent_class_names: Parent class names
-        :type parent_class_names: List[str]
+        :param base_class_names: base class names
+        :type base_class_names: List[str]
         :return: Formatted vfunc name
         :rtype: Optional[str]
         """
@@ -188,6 +188,7 @@ class BaseApi(object):
         :return: Formatted func name
         :rtype: Optional[str]
         """
+
 
 api = None
 
@@ -233,7 +234,7 @@ if api is None:
             def set_comment(self, ea, comment):
                 idc.set_cmt(ea, comment, False)
 
-            def format_vfunc_name(self, ea, current_func_name, proposed_func_name, class_name, parent_class_names):
+            def format_vfunc_name(self, ea, current_func_name, proposed_func_name, class_name, base_class_names):
                 if current_func_name.startswith("j_"):  # jump
                     current_func_name = current_func_name.lstrip("j_")
 
@@ -251,8 +252,8 @@ if api is None:
                     current_class_name = current_func_name.rsplit(".", 1)[0]
                     return "{0}.{1}".format(current_class_name, proposed_func_name)
 
-                # This should have been handled in the parent class
-                if any(current_func_name.startswith(name) for name in parent_class_names):
+                # This should have been handled in the base class
+                if any(current_func_name.startswith(name) for name in base_class_names):
                     return ""
 
                 if current_func_name.startswith("sub_"):
@@ -289,6 +290,7 @@ if api is None:
                     return proposed_qualified_func_name
 
                 return None
+
 
         api = IdaApi()
 
@@ -344,7 +346,7 @@ if api is None:
                 if getEOLComment(toAddr(ea)) is None:
                     setEOLComment(toAddr(ea), comment)
 
-            def format_vfunc_name(self, ea, current_func_name, proposed_func_name, class_name, parent_class_names):
+            def format_vfunc_name(self, ea, current_func_name, proposed_func_name, class_name, base_class_names):
                 if current_func_name.startswith("thunk_"):  # jump
                     current_func_name = current_func_name.lstrip("thunk_")
 
@@ -354,8 +356,8 @@ if api is None:
                     current_class_name = current_func_name.rsplit(".", 1)[0]
                     return "{0}.{1}".format(current_class_name, proposed_func_name)
 
-                # This should have been handled in the parent class
-                if any(current_func_name.startswith(name) for name in parent_class_names):
+                # This should have been handled in the base class
+                if any(current_func_name.startswith(name) for name in base_class_names):
                     return ""
 
                 if any(current_func_name.startswith(prefix) for prefix in ("FUN_", "LAB_", "SUB_", "LOC_", "DAT_")):
@@ -378,6 +380,7 @@ if api is None:
                     return proposed_qualified_func_name
 
                 return None
+
 
         api = GhidraApi()
 
@@ -528,39 +531,17 @@ class FfxivClassFactory:
 
 class Vtbl:
     resolved_base = None  # type: FfxivClass
-    vfunc_base = None # type: FfxivClass
 
-    def __init__(self, ea, base_name=None, index=0):
+    def __init__(self, ea, base_name=None):
         """
         Object representing a class's vtbl
         :param ea: Address of vtbl
         :type ea: int
         :param base_name: Name of the base class this vtbl inherits, if it exists
         :type base_name: str
-        :param index: Index of vtbl in base
-        :type index: int
         """
         self.ea = ea
         self.base_name = base_name
-        self.index = index
-
-    _inheritance_tree = None  # type: Node
-
-    @property
-    def inheritance_tree(self):
-        def recurse_tree(node: Node, current_class: FfxivClass):
-            if current_class.vtbls:
-                for vtbl in current_class.vtbls:
-                    if vtbl.resolved_base is not None:
-                        base_node = Node(vtbl.resolved_base.name, parent=node, resolved_base=vtbl.resolved_base)
-                        recurse_tree(base_node, vtbl.resolved_base)
-
-        if self._inheritance_tree is None and self.resolved_base:
-            self._inheritance_tree = Node(self.resolved_base.name, resolved_base=self.resolved_base)
-            if self.resolved_base is not None:
-                recurse_tree(self._inheritance_tree, self.resolved_base)
-
-        return self._inheritance_tree
 
 
 class FfxivClass:
@@ -582,14 +563,7 @@ class FfxivClass:
         """
         self.name = class_name
         if vtbls:
-            self.vtbls = []
-            index = 0
-            last_base = vtbls[0][1]
-            for (ea, base_name) in vtbls:
-                if last_base != base_name:
-                    index += 1
-                self.vtbls.append(Vtbl(ea, base_name, index))
-                last_base = base_name
+            self.vtbls = [Vtbl(ea, base_name) for (ea, base_name) in vtbls]
         self.vfuncs = vfuncs
         self.funcs = funcs
 
@@ -632,13 +606,30 @@ class FfxivClass:
             if self.vtbls[0].resolved_base and self._main_vtbl_size < self.vtbls[0].resolved_base._main_vtbl_size:
                 print(
                     "Error: The sum of \"{0}\"'s base vtbl sizes ({1}) is greater than the actual class itself ({2})"
-                    .format(self.name, self.vtbls[0].resolved_base._main_vtbl_size, self._main_vtbl_size))
+                        .format(self.name, self.vtbls[0].resolved_base._main_vtbl_size, self._main_vtbl_size))
 
         return self._main_vtbl_size
 
     # endregion
 
+    _inheritance_tree = None
 
+    @property
+    def inheritance_tree(self):
+        def recurse_tree(current_node: Node, current_class: FfxivClass, all_bases: set[str]):
+            if current_class.vtbls:
+                for vtbl in current_class.vtbls:
+                    if vtbl.resolved_base and vtbl.resolved_base.name not in all_bases:
+                        new_node = Node(vtbl.resolved_base.name, parent=current_node)
+                        all_bases.add(vtbl.resolved_base.name)
+                        recurse_tree(new_node, vtbl.resolved_base, all_bases)
+
+        if not self._inheritance_tree:
+            self._inheritance_tree = Node(self.name)
+            base_set = set()
+            recurse_tree(self._inheritance_tree, self, base_set)
+
+        return self._inheritance_tree
 
     # region finalized
 
@@ -688,8 +679,8 @@ class FfxivClass:
 
     def _inherit_func_names_from_main_base(self):
         """
-        A parent is guaranteed to be finalized before the child,
-        so a parent has all the vfunc names of its parent already.
+        A base is guaranteed to be finalized before the child,
+        so a base has all the vfunc names of its base already.
         :return: None
         :rtype: None
         """
@@ -705,21 +696,17 @@ class FfxivClass:
     def _comment_vtbls_with_inheritance_tree(self):
         """
         Adds the inheritance tree as a comment to the start of the vtbl.
-        grandparent_name
-            parent_name
+        grandbase_name
+            base_name
                 self_name
         :return: None
         :rtype: None
         """
         if self.vtbls:
-            for vtbl in self.vtbls:
+            for idx, vtbl in enumerate(self.vtbls):
                 comment = api.get_comment(vtbl.ea) or ""
 
-                if vtbl.inheritance_tree:
-                    tree = Node(self.name, children=[vtbl.inheritance_tree])
-                else:
-                    tree = Node(self.name)
-                for pre, fill, node in RenderTree(tree):
+                for pre, fill, node in RenderTree(self.inheritance_tree):
                     if comment:
                         comment += "\n"
                     comment += pre + api.format_class_name(node.name)
@@ -730,46 +717,10 @@ class FfxivClass:
         Write out the vtbl name.
         :return: None
         """
-        self._populate_vtbl_vfunc_bases()
         api.set_addr_name(self.vtbls[0].ea, api.format_class_name_for_vtbl(self.name))
         for vtbl in self.vtbls[1:]:
-            api.set_addr_name(vtbl.ea, api.format_class_name_for_secondary_vtbl(self.name, vtbl.vfunc_base.name if vtbl.vfunc_base else vtbl.base_name))
-
-    # TODO: do better when I can think
-    def _populate_vtbl_vfunc_bases(self):
-        def recurse_path(cls: FfxivClass):
-            current_index = -1
-            vtbl_paths = []
-
-            if not cls.vtbls:
-                return None
-
-            for idx, path_vtbl in enumerate(cls.vtbls):
-                if path_vtbl.index == current_index:
-                    continue
-                current_index = path_vtbl.index
-                if not path_vtbl.resolved_base:
-                    vtbl_paths.append([])
-                else:
-                    returned_paths = recurse_path(path_vtbl.resolved_base)
-                    if not returned_paths:
-                        vtbl_paths += [[idx]]
-                    else:
-                        vtbl_paths += [[idx] + path for path in returned_paths]
-
-            return vtbl_paths
-
-        if self.vtbls:
-            vtbl_paths = recurse_path(self)
-            for i, _ in enumerate(vtbl_paths):
-                while vtbl_paths[i] and vtbl_paths[i][-1] == 0:
-                    vtbl_paths[i].pop()
-
-            for vtbl_idx, vtbl in enumerate(self.vtbls):
-                vfunc_cls = vtbl.resolved_base
-                for path_idx in vtbl_paths[vtbl_idx][1:]:
-                    vfunc_cls = vfunc_cls.vtbls[path_idx].resolved_base
-                vtbl.vfunc_base = vfunc_cls
+            api.set_addr_name(vtbl.ea, api.format_class_name_for_secondary_vtbl(self.name,
+                                                                                vtbl.base_name))
 
     def _write_vtbl_functions(self):
         """
@@ -778,13 +729,13 @@ class FfxivClass:
         :rtype: None
         """
 
-        def collect_vtbl_functions(ea, size, class_name, _vtbl, vfunc_names):
+        def collect_vtbl_functions(ea, size, class_name, vfunc_names, base_class_names):
             """
             :type ea: int
             :type size: int
             :type class_name: str
-            :type _vtbl: Vtbl
             :type vfunc_names: dict[int, str]
+            :type base_class_names: list[str]
             """
             vtbl_builder = []
             # Iterate through each offset
@@ -795,15 +746,10 @@ class FfxivClass:
                 current_func_name = api.get_addr_name(vfunc_ea)  # type: str
                 proposed_func_name = vfunc_names.get(func_idx, "vf{0}".format(func_idx))
                 formatted_class_name = api.format_class_name(class_name)
-                if _vtbl.inheritance_tree:
-                    formatted_parent_class_names = [api.format_class_name(node.name) for node in
-                                                PreOrderIter(_vtbl.inheritance_tree)]
-                else:
-                    formatted_parent_class_names = []
 
                 formatted_func_name = api.format_vfunc_name(vfunc_ea, current_func_name, proposed_func_name,
                                                             formatted_class_name,
-                                                            formatted_parent_class_names)
+                                                            base_class_names)
 
                 if formatted_func_name == "":
                     pass
@@ -817,12 +763,17 @@ class FfxivClass:
             return vtbl_builder
 
         if self.vtbls:
+            formatted_base_class_names = [api.format_class_name(node.name) for node in
+                                              PreOrderIter(self.inheritance_tree)]
+            formatted_base_class_names.remove(self.name)
             for idx, vtbl in enumerate(self.vtbls):
                 if idx == 0:
-                    funcs = collect_vtbl_functions(vtbl.ea, self.main_vtbl_size, self.name, vtbl, self.vfuncs)
+                    funcs = collect_vtbl_functions(vtbl.ea, self.main_vtbl_size, self.name, self.vfuncs,
+                                                   formatted_base_class_names)
                 else:
-                    funcs = collect_vtbl_functions(vtbl.ea, vtbl.vfunc_base.main_vtbl_size, self.name + "___" + vtbl.vfunc_base.name, vtbl,
-                                                   vtbl.vfunc_base.vfuncs)
+                    funcs = collect_vtbl_functions(vtbl.ea, vtbl.resolved_base.main_vtbl_size,
+                                                   self.name + "___" + vtbl.resolved_base.name,
+                                                   vtbl.resolved_base.vfuncs, formatted_base_class_names)
                 for (func_ea, func_name) in funcs:
                     api.set_addr_name(func_ea, func_name)
 
