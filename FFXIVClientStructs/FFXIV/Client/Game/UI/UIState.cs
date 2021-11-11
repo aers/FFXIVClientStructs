@@ -23,6 +23,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI
         [FieldOffset(0x22E8)] public RelicNote RelicNote;
         [FieldOffset(0x9E98)] public Director* ActiveDirector;
         [FieldOffset(0x9FE0)] public FateDirector* FateDirector;
+        [FieldOffset(0xA128)] public Map Map;
 
         [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B 8B ?? ?? ?? ?? 48 8B 01")]
         public static partial UIState* Instance();
