@@ -1740,6 +1740,12 @@ classes:
     vtbls:
       - ea: 0x1416D1660
         base: Client::UI::UIModuleInterface
+      - ea: 0x1416D1CC8
+        base: Component::GUI::AtkModuleEvent
+      - ea: 0x1416D1CD0
+        base: Component::Excel::ExcelLanguageEvent
+      - ea: 0x1416D1CE0
+        base: Common::Configuration::ConfigBase::ChangeEventInterface
     vfuncs:
       0: dtor
       4: Abort
@@ -3115,6 +3121,13 @@ classes:
     vtbls:
       - ea: 0x1418415E0
         base: Client::Game::Object::GameObject
+  Client::Game::Object::GatheringPointObject::GatheringPointObjectImplBase:
+    vtbls:
+      - ea: 0x141841848
+  Client::Game::Object::GatheringPointObject::GatheringPointObjectImpl:
+    vtbls:
+      - ea: 0x1418418B0
+        base: Client::Game::Object::GatheringPointObject::GatheringPointObjectImplBase
   Client::Game::Object::GatheringPointObject:
     vtbls:
       - ea: 0x141841918
