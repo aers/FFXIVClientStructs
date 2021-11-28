@@ -616,7 +616,7 @@ class FfxivClass:
 
     @property
     def inheritance_tree(self):
-        def recurse_tree(current_node: Node, current_class: FfxivClass, all_bases: set[str]):
+        def recurse_tree(current_node, current_class, all_bases):
             if current_class.vtbls:
                 for vtbl in current_class.vtbls:
                     if vtbl.resolved_base and vtbl.resolved_base.name not in all_bases:
