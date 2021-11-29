@@ -57,7 +57,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
         public partial RaptureHotbarModule* GetRaptureHotbarModule();
 
         [VirtualFunction(14)]
-        public partial void* GetRaptureGearsetModule();
+        public partial RaptureGearsetModule* GetRaptureGearsetModule();
 
         [VirtualFunction(15)]
         public partial void* GetAcquaintanceModule();
