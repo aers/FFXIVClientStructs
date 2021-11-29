@@ -1,6 +1,7 @@
 ﻿using System.Runtime.InteropServices;
 using FFXIVClientStructs.Attributes;
 using FFXIVClientStructs.FFXIV.Client.System.Framework;
+using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc {
     // Client::UI::Misc::ConfigModule
@@ -10,12 +11,21 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc {
         public const int ConfigOptionCount = 674;
         [FieldOffset(0x28)] public UIModule* UIModule;
         [FieldOffset(0x2C8)] private fixed byte options[Option.Size * ConfigOptionCount];
-        [FieldOffset(0xAB60)] private fixed byte values[OptionValue.Size * ConfigOptionCount];
+        [FieldOffset(0xAB58)] private fixed byte values[0x10 * ConfigOptionCount];
 
         public static ConfigModule* Instance() => Framework.Instance()->GetUiModule()->GetConfigModule();
 
         [MemberFunction("E8 ?? ?? ?? ?? C6 47 4D 00")]
-        public partial bool SetOption(uint index, int value, int a4, bool a5, bool a6);
+        public partial bool SetOption(uint index, int value, int a4 = 2, bool a5 = true, bool a6 = false);
+
+        public void SetOptionById(short optionId, int value) {
+            for (uint i = 0; i < ConfigOptionCount; i++) {
+                var o = GetOption(i);
+                if (o->OptionID != optionId) continue;
+                SetOption(i, value);
+                return;
+            }
+        }
 
         public Option* GetOption(uint index) {
             fixed (byte* p = options) {
@@ -33,14 +43,14 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc {
             return null;
         }
 
-        public OptionValue* GetValue(uint index) {
+        public AtkValue* GetValue(uint index) {
             fixed (byte* p = values) {
-                var v = (OptionValue*)p;
+                var v = (AtkValue*)p;
                 return v + index;
             }
         }
 
-        public OptionValue* GetValueById(short optionId) {
+        public AtkValue* GetValueById(short optionId) {
             for (uint i = 0; i < ConfigOptionCount; i++) {
                 var o = GetOption(i);
                 if (o->OptionID == optionId) return GetValue(i);
@@ -58,13 +68,6 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc {
             [FieldOffset(0x14)] public uint Unk14;
             [FieldOffset(0x18)] public uint Unk18;
             [FieldOffset(0x1C)] public ushort Unk1C;
-        }
-
-        [StructLayout(LayoutKind.Explicit, Size = Size)]
-        public struct OptionValue {
-            public const int Size = 0x10;
-            [FieldOffset(0x00)] public ulong Value;
-            [FieldOffset(0x08)] public ulong Unk08;
         }
     }
 }
