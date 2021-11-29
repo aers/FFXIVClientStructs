@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 import dataclasses
-import json
 import logging
 import os
 import sys
@@ -12,7 +11,10 @@ from typing import Dict, Iterator, List, Optional, Set
 
 import dacite
 import ida_bytes
-import yaml
+
+from ruamel.yaml import YAML
+yaml = YAML()
+yaml.width = 4096
 
 import idaapi
 import idautils
@@ -22,6 +24,29 @@ import ida_segment
 LOGGING = logging.DEBUG
 SENTINEL = 0xDEAD_BEEF
 
+@yaml.register_class
+@dataclass
+class GeneratedClass:
+    func_sigs: Dict[str, str] = field(default_factory=dict)
+
+@yaml.register_class
+@dataclass
+class GeneratedData:
+    version: str
+    global_sigs: Dict[str, str] = field(default_factory=dict)
+    classes: Dict[str, Optional[GeneratedClass]] = field(default_factory=dict)
+
+    def get_function_signature(self, cls: str, function: str) -> Optional[str]:
+        if cls in self.classes:
+            if function in self.classes[cls].func_sigs:
+                return self.classes[cls].func_sigs[function]
+
+        return None
+
+    def set_function_signature(self, cls: str, function: str, sig: str) -> None:
+        if cls not in self.classes:
+            self.classes[cls] = GeneratedClass()
+        self.classes[cls].func_sigs[function] = sig
 
 @dataclass
 class ClassVtbl:
@@ -36,12 +61,6 @@ class GameClass:
     vtbls: List[ClassVtbl] = field(default_factory=list)
     funcs: Dict[int, str] = field(default_factory=dict)
     vfuncs: Dict[int, str] = field(default_factory=dict)
-
-    # These should not be defined in the yaml
-    g_instance_sig: Optional[str] = field(default=None)
-    g_pointer_sig: Optional[str] = field(default=None)
-    func_sigs: Dict[str, str] = field(default_factory=dict)
-
 
 @dataclass
 class ClientStructsData:
@@ -124,7 +143,7 @@ class SigGen:
     that resides within a function. Maximum sig length is decided by the smaller of
     the func length or the INSN_TO_SIG variable.
     """
-    _INSN_TO_SIG = 10  # Max number of instructions to sig
+    _INSN_TO_SIG = 30  # Max number of instructions to sig
 
     _base_addr: int  # base address
     _max_addr: int  # address of last function instruction
@@ -272,6 +291,7 @@ class SigGen:
 
 class FfxivSigmaker:
     DATASTORE: ClientStructsData
+    GENERATED_DATASTORE: GeneratedData
     STANDARD_IMAGE_BASE = 0x1_4000_0000
 
     # The ".text" segment, only look for xrefs within this range
@@ -286,16 +306,42 @@ class FfxivSigmaker:
     def __init__(self):
         data_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "data.yml")
         with Path(data_path).open('r') as fd:
-            data_dict = yaml.safe_load(fd)
+            data_dict = yaml.load(fd)
             self.DATASTORE = dacite.from_dict(ClientStructsData, data_dict)
 
         self._rebase_datastore()
+
+        generated_data_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "generated_data.yml")
+        with Path(generated_data_path).open('r') as fd:
+            data_dict = yaml.load(fd)
+            self.GENERATED_DATASTORE = data_dict #dacite.from_dict(GeneratedData, data_dict)
 
     def run(self) -> None:
         """
         Run the sigmaker
         :return: None
         """
+        Log.debug('generating global sigs')
+        total_globals = len(self.DATASTORE.globals)
+        for (i, (global_ea, global_name)) in enumerate(self.DATASTORE.globals.items()):
+            status = f'{i}/{total_globals} ({i / total_globals:0.2%})'
+
+            if global_name in self.GENERATED_DATASTORE.global_sigs:
+                existing_sig = self.GENERATED_DATASTORE.global_sigs[global_name]
+                if existing_sig != "None":
+                    Log.debug(f'{status} // {global_name} // {global_ea:X} // has existing sig: {existing_sig}')
+                else:
+                    Log.debug(f'{status} // {global_name} // {global_ea:X} // failed sig generation on previous run')
+                continue
+
+            sig = self._sig_address(int(global_ea), False)
+            Log.debug(f'{status} // {global_name} // {global_ea:X} // {sig}')
+            if sig:
+                self.GENERATED_DATASTORE.global_sigs[global_name] = sig
+            else:
+                self.GENERATED_DATASTORE.global_sigs[global_name] = "None"
+
+        Log.debug('generating class sigs')
         class_data: GameClass
         total = len(self.DATASTORE.classes)
         for (i, (class_name, class_data)) in enumerate(self.DATASTORE.classes.items()):
@@ -306,38 +352,45 @@ class FfxivSigmaker:
             status = f'{i}/{total} ({i / total:0.2%})'
 
             for (func_ea, func_name) in class_data.funcs.items():
-                sig = self._sig_address(func_ea, True)
+                existing_sig = self.GENERATED_DATASTORE.get_function_signature(class_name, func_name)
+                if existing_sig is not None:
+                    if existing_sig == "None":
+                        Log.debug(f'{status} // {class_name}::{func_name} // {func_ea:X} // failed sig generation on previous run')
+                    else:
+                        Log.debug(f'{status} // {class_name}::{func_name} // {func_ea:X} // has existing sig: {existing_sig}')
+                    continue
+                sig = self._sig_address(int(func_ea), True)
                 Log.debug(f'{status} // {class_name}::{func_name} // {func_ea:X} // {sig}')
                 if sig:
-                    class_data.func_sigs[func_name] = sig
+                    self.GENERATED_DATASTORE.set_function_signature(class_name, func_name, sig)
+                else:
+                    self.GENERATED_DATASTORE.set_function_signature(class_name, func_name, "None")
 
-            global_ea = class_data.g_pointer
-            if global_ea:
-                sig = self._sig_address(global_ea, False)
-                Log.debug(f'{status} // {class_name}::gPointer // {global_ea:X} // {sig}')
-                if sig:
-                    class_data.g_pointer_sig = sig
-
-            global_ea = class_data.g_instance
-            if global_ea:
-                sig = self._sig_address(global_ea, False)
-                Log.debug(f'{status} // {class_name}::gInstance // {global_ea:X} // {sig}')
-                if sig:
-                    class_data.g_instance_sig = sig
+            # global_ea = class_data.g_pointer
+            # if global_ea:
+            #     sig = self._sig_address(global_ea, False)
+            #     Log.debug(f'{status} // {class_name}::gPointer // {global_ea:X} // {sig}')
+            #     if sig:
+            #         class_data.g_pointer_sig = sig
+            #
+            # global_ea = class_data.g_instance
+            # if global_ea:
+            #     sig = self._sig_address(global_ea, False)
+            #     Log.debug(f'{status} // {class_name}::gInstance // {global_ea:X} // {sig}')
+            #     if sig:
+            #         class_data.g_instance_sig = sig
 
         Log.debug(f'{total}/{total} (100.00%)')
 
     def export(self) -> None:
         """
-        Export the data.yml with signature data added
+        Export generated data to json
         :return: None
         """
-        data_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "sigdata.json")
-
-        self._rebase_datastore(undo=True)
+        data_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "generated_data.yml")
 
         with Path(data_path).open('w') as fd:
-            json.dump(self.DATASTORE, fd, cls=DataclassJSONEncoder, indent=True)
+            yaml.dump(self.GENERATED_DATASTORE, fd)
 
     # region Rebasing
 
