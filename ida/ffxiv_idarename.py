@@ -418,11 +418,13 @@ def load_data():
         vtbls = [(vtbl["ea"], vtbl["base"] if "base" in vtbl else None) for vtbl in vtbls_raw]
         vfuncs = class_data.pop("vfuncs", {})
         funcs = class_data.pop("funcs", {})
+        instances_raw = class_data.pop("instances", [])
+        instances = [(instance["ea"], instance["name"] if "name" in instance else "Instance") for instance in instances_raw]
         for leftover in class_data:
             print("Warning: Extra key \"{0}\" present in {1}".format(leftover, class_name))
 
         factory.register(
-            class_name=class_name, vtbls=vtbls, vfuncs=vfuncs, funcs=funcs)
+            class_name=class_name, vtbls=vtbls, vfuncs=vfuncs, funcs=funcs, instances=instances)
 
     factory.finalize()
 
@@ -431,7 +433,7 @@ class FfxivClassFactory:
     _vtbl_addresses = []  # type: List[int]
     _classes = {}  # type: Dict[str, FfxivClass]
 
-    def register(self, class_name, vtbls=None, vfuncs=None, funcs=None):
+    def register(self, class_name, vtbls=None, vfuncs=None, funcs=None, instances=None):
         """
         Register a class
         :param class_name: Class name
@@ -442,6 +444,8 @@ class FfxivClassFactory:
         :type funcs: Dict[int, str]
         :param vfuncs: Mapping of vtbl index to func names
         :type funcs: Dict[int, str]
+        :param instances: List of global instances of the object
+        :type instances: List[(int, str)]
         :return: None
         :rtype: None
         """
@@ -465,8 +469,11 @@ class FfxivClassFactory:
         for (vtbl_ea, _) in vtbls:
             self._vtbl_addresses.append(vtbl_ea)
 
+        if not instances:
+            instances = []
+
         self._classes[class_name] = FfxivClass(
-            class_name=class_name, vtbls=vtbls, vfuncs=vfuncs, funcs=funcs)
+            class_name=class_name, vtbls=vtbls, vfuncs=vfuncs, funcs=funcs, instances=instances)
 
     def finalize(self):
         """
@@ -549,7 +556,7 @@ class FfxivClass:
 
     vtbls = None  # type: list[Vtbl]
 
-    def __init__(self, class_name, vtbls, vfuncs, funcs):
+    def __init__(self, class_name, vtbls, vfuncs, funcs, instances):
         """
         Object representing a class
         :param class_name: Class name
@@ -560,12 +567,15 @@ class FfxivClass:
         :type vfuncs: Dict[int, str]
         :param funcs: Mapping of effective addresses to func names
         :type funcs: Dict[int, str]
+        :param instances: List of global instances of the object
+        :type instances: List[(int, str)]
         """
         self.name = class_name
         if vtbls:
             self.vtbls = [Vtbl(ea, base_name) for (ea, base_name) in vtbls]
         self.vfuncs = vfuncs
         self.funcs = funcs
+        self.instances = instances
 
         # Offset the vtbl and funcs if the program has been rebased
         current_image_base = api.get_image_base()
@@ -674,6 +684,8 @@ class FfxivClass:
 
         self._write_vtbl_functions()
         self._write_funcs()
+
+        self._write_instances()
 
         self.finalized = True
 
@@ -793,6 +805,15 @@ class FfxivClass:
                       .format(func_ea, current_func_name, self.name, proposed_func_name))
             else:
                 api.set_addr_name(func_ea, func_name)
+
+    def _write_instances(self):
+        """
+        Write the names of all instances
+        :return: None
+        """
+        for (instance_ea, instance_name) in self.instances:
+            name = "g_{}_{}".format(self.name, instance_name)
+            api.set_addr_name(instance_ea, name)
 
     # endregion
 
