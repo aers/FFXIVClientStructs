@@ -65,7 +65,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
         [MemberFunction("E9 ? ? ? ? 45 33 C9 4C 8B C0 33 D2 B9 ? ? ? ? E8 ? ? ? ? 48 85 C0 0F 84 ? ? ? ? 48 8B C8 48 83 C4 20 5B E9 ? ? ? ? 45 33 C9 4C 8B C0 33 D2 B9 ? ? ? ? E8 ? ? ? ? 48 85 C0 0F 84 ? ? ? ? 48 8B C8 48 83 C4 20 5B E9 ? ? ? ? 45 33 C9 4C 8B C0 33 D2 B9 ? ? ? ? E8 ? ? ? ? 48 85 C0 74 5D")]
         public partial void Ctor();
 
-        [MemberFunction("E8 ? ? ? ? 49 8B FC")]
+        [MemberFunction("E8 ?? ?? ?? ?? 8D 4E 32")]
         public partial void SetText(byte* str);
 
         [MemberFunction("E8 ? ? ? ? 8D 4E 5A")]
