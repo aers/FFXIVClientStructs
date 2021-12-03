@@ -43,7 +43,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character
 
         [FieldOffset(0x1940)] public uint NameID;
 
-        [FieldOffset(0x1950)] public uint CompanionOwnerID;
+        [FieldOffset(0x19A8)] public uint CompanionOwnerID;
         [FieldOffset(0x195C)] public ushort CurrentWorld;
         [FieldOffset(0x195E)] public ushort HomeWorld;
         [FieldOffset(0x197F)] public byte Icon;
