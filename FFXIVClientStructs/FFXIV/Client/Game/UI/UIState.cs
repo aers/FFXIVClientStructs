@@ -17,14 +17,14 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI
     {
         [FieldOffset(0x00)] public Hotbar Hotbar;
         [FieldOffset(0xA38)] public PlayerState PlayerState;
-        [FieldOffset(0x11C0)] public Revive Revive;
-        [FieldOffset(0x1448)] public Telepo Telepo;
+        [FieldOffset(0x11B0)] public Revive Revive; //+B0
+        [FieldOffset(0x1448)] public Telepo Telepo; //+C0
+        [FieldOffset(0x19F0)] public Buddy Buddy; //+90
+        [FieldOffset(0x29E8)] public RelicNote RelicNote; //+700
 
-        [FieldOffset(0x1960)] public Buddy Buddy;
-        [FieldOffset(0x22E8)] public RelicNote RelicNote;
-        [FieldOffset(0x9E98)] public Director* ActiveDirector;
-        [FieldOffset(0x9FE0)] public FateDirector* FateDirector;
-        [FieldOffset(0xA128)] public Map Map;
+        [FieldOffset(0xA6C0)] public Director* ActiveDirector; //+828?
+        [FieldOffset(0xA808)] public FateDirector* FateDirector; //+828
+        [FieldOffset(0xA950)] public Map Map; //+828
 
         [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B 8B ?? ?? ?? ?? 48 8B 01")]
         public static partial UIState* Instance();
