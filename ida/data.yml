@@ -542,7 +542,7 @@ classes:
       - ea: 0x141715C00
   Client::UI::Info::InfoProxyPageInterface:
     vtbls:
-#fail       - ea: 0x141680690
+      - ea: 0x141715C58
         base: Client::UI::Info::InfoProxyInterface
   Common::Configuration::ConfigBase::ChangeEventInterface:
     vtbls:
@@ -711,7 +711,7 @@ classes:
       0x1401F7E50: ctor
   Client::UI::Agent::AgentCharaMake:
     vtbls:
-#fail       - ea: 0x14169CC88
+      - ea: 0x141732638
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentModule:
     vtbls:
@@ -909,7 +909,7 @@ classes:
       0x14033ADF0: ctor
   Client::Graphics::Render::RenderObject:
     vtbls:
-#fail       - ea: 0x1416ACC60
+      - ea: 0x141742B40
         base: Client::Graphics::ReferencedClassBase
   Client::Graphics::Render::Model:
     vtbls:
@@ -1208,55 +1208,55 @@ classes:
         base: Common::Lua::LuaState
   Client::Game::Event::LuaActor:
     vtbls:
-#fail       - ea: 0x1417076A8
+      - ea: 0x1417A11A0
   Client::Game::Event::LuaPc:
     vtbls:
-#fail       - ea: 0x14170A068
+      - ea: 0x1417A3BB0
         base: Client::Game::Event::LuaActor
     funcs:
-#fail       0x140ADC090: ctor
+      0x140AA5450: ctor
   Client::Game::Event::LuaAetheryte:
     vtbls:
-#fail       - ea: 0x141709800
+      - ea: 0x1417A3338
         base: Client::Game::Event::LuaActor
     funcs:
-#fail       0x140ADB0F0: ctor
+      0x140AA44B0: ctor
   Client::Game::Event::LuaHousingEventObject:
     vtbls:
-#fail       - ea: 0x1417097F0
+      - ea: 1417A3328
         base: Client::Game::Event::LuaActor
     funcs:
-#fail       0x140ADA9A0: ctor
+      0x140AA3D60: ctor
   Client::Game::Event::LuaEventObject:
     vtbls:
-#fail       - ea: 0x1417097E0
+      - ea: 0x1417A3318
         base: Client::Game::Event::LuaActor
     funcs:
-#fail       0x140ADA090: ctor
+      0x140AA3450: ctor
   Client::Game::Event::LuaCompanion:
     vtbls:
-#fail       - ea: 0x1417097D0
+      - ea: 0x1417A3308
         base: Client::Game::Event::LuaActor
     funcs:
-#fail       0x140AD9CE0: ctor
+      0x140AA30A0: ctor
   Client::Game::Event::LuaRetainer:
     vtbls:
-#fail       - ea: 0x1417097C0
+      - ea: 0x1417A32F8
         base: Client::Game::Event::LuaActor
     funcs:
-#fail       0x140AD98A0: ctor
+      0x140AA2C60: ctor
   Client::Game::Event::LuaBattleNpc:
     vtbls:
-#fail       - ea: 0x1417097B0
+      - ea: 0x1417A32E8
         base: Client::Game::Event::LuaActor
     funcs:
-#fail       0x140AD8F60: ctor
+      0x140AA2320: ctor
   Client::Game::Event::LuaEventNpc:
     vtbls:
-#fail       - ea: 0x1417097A0
+      - ea: 0x1417A32D8
         base: Client::Game::Event::LuaActor
     funcs:
-#fail       0x140AD8BB0: ctor
+      0x140AA1F70: ctor
   Component::Exd::ExdModule:
     vtbls:
       - ea: 0x1417554F0
@@ -1270,7 +1270,7 @@ classes:
         base: Client::System::Framework::Task
   Client::Graphics::Vfx::VfxDataListenner:
     vtbls:
-#fail       - ea: 0x1416BFCD8
+      - ea: 0x141715BA0
   Client::Game::Control::TargetSystem::AggroListFeeder:
     vtbls:
       - ea: 0x141755DD8
@@ -2495,9 +2495,9 @@ classes:
       2: dtor
     funcs:
       0x1407934C0: ctor
-#fail       0x1407BBBA0: IsSelectUseTicketInactive
-#fail       0x1407BBBD0: UpdatePlayerAetheryteList
-#fail       0x1407BC270: Teleport
+      0x140793620: IsSelectUseTicketInactive
+#fail       0x1407BBBD0: UpdatePlayerAetheryteList   # this doesn't seem to exist anymore
+      0x1407941F0: Teleport
       0x1407954F0: TeleportWithTicket
       0x140795580: InvokeSelectUseTicket
   Client::UI::Agent::AgentHUD:
@@ -2637,16 +2637,16 @@ classes:
       - ea: 0x14179ABC0
         base: Client::Game::Event::ModuleBase
     funcs:
-     0x140A3E1D0: ctor
+      0x140A3E1D0: ctor
   Client::Game::Event::DirectorModule:
     vtbls:
-#fail       - ea: 0x141701AB8
+      - ea: 0x14179ABF8
         base: Client::Game::Event::ModuleBase
     funcs:
-#fail       0x140A78F00: ctor
+      0x140A78F00: ctor
   Client::Game::Event::LeveDirector:
     vtbls:
-#fail       - ea: 0x141703BE8
+      - ea: 0x14179CD68
         base: Client::Game::Event::Director
   Client::Game::Event::BattleLeveDirector:
     vtbls:
@@ -2658,7 +2658,7 @@ classes:
         base: Client::Game::Gimmick::GimmickEventHandler
   Client::Game::InstanceContent::InstanceContentDirector:
     vtbls:
-#fail       - ea: 0x14173CBD8
+      - ea: 0x1417CA828
         base: Client::Game::Event::Director
   Client::UI::PopupMenu:
     vtbls:
@@ -3259,7 +3259,7 @@ classes:
       - ea: 0x1418DE660
         base: Client::Game::Camera
     funcs:
-#fail       0x141135A40: ctor
+      0x14118B4A0: ctor
   Client::Graphics::Culling::OcclusionCullingManager:
     instances:
       - ea: 0x141E6D4A0
@@ -3341,11 +3341,11 @@ classes:
         base: Client::System::Scheduler::Base::SchedulerState
   SQEX::CDev::Engine::Sd::Driver::IEffect:
     vtbls:
-#fail       - ea: 0x141967AE0
+      - ea: 0x141A1AB98
         base: SQEX::CDev::Engine::Sd::SdMemoryAllocator
   SQEX::CDev::Engine::Sd::Driver::FilterBase:
     vtbls:
-#fail       - ea: 0x141967B28
+      - ea: 0x141A1ABC8
         base: SQEX::CDev::Engine::Sd::Driver::IEffect
   SQEX::CDev::Engine::Sd::Driver::DynamicValue:
     vtbls:
@@ -3433,7 +3433,7 @@ classes:
     instances:
       - ea: 0x141E76900
     funcs:
-#fail       0x141132910: ctor
+      0x14118BF50: ctor
   Vector3:
     funcs:
       0x14019A280: Normalize
