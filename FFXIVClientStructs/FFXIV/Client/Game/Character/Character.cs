@@ -24,8 +24,8 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character
         [FieldOffset(0x1D8)] public ushort CraftingPoints;
         [FieldOffset(0x1DA)] public ushort MaxCraftingPoints;
 
-        [FieldOffset(0x1E2)] public byte ClassJob;
-        [FieldOffset(0x1E3)] public byte Level;
+        [FieldOffset(0x1E0)] public byte ClassJob;
+        [FieldOffset(0x1E1)] public byte Level;
 
         [FieldOffset(0x230)] public uint PlayerTargetObjectID;
 
