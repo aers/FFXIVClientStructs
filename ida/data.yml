@@ -1223,7 +1223,7 @@ classes:
       0x140AA44B0: ctor
   Client::Game::Event::LuaHousingEventObject:
     vtbls:
-      - ea: 1417A3328
+      - ea: 0x1417A3328
         base: Client::Game::Event::LuaActor
     funcs:
       0x140AA3D60: ctor
@@ -2596,7 +2596,7 @@ classes:
   Client::UI::Agent::AgentContentsTimer:
     vtbls:
      - ea: 0x141785338
-        base: Client::UI::Agent::AgentInterface
+       base: Client::UI::Agent::AgentInterface
   Client::Game::Event::EventHandler:
     vtbls:
       - ea: 0x141794FA0
