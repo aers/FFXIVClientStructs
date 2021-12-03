@@ -39,10 +39,10 @@ functions:
   0x140062480: MemoryManager_GetAnimationSpace
   0x1400624A0: MemoryManager_GetUISpace
   0x140062520: MemoryManager_GetFileSpace
-#fail   0x140061D90: MemoryManager_GetSoundSpace_1
+  0x1400624C0: MemoryManager_GetSoundSpace_1
   0x1400624E0: MemoryManager_GetSoundSpace_2
   0x1400656F0: IsMacClient
-#fail   0x1400A4250: Client::UI::PlaySoundEffect # this is a static function in the UI namespace, arg1 is the SE
+  0x1400A5100: Client::UI::PlaySoundEffect # this is a static function in the UI namespace, arg1 is the SE
   0x14019CCE0: j_SleepEx
   0x1401C0C20: Client::System::Resource::Handle::ModelResourceHandle_GetMaterialFileNameBySlot
   0x1402B5070: CountdownPointer
@@ -61,13 +61,13 @@ functions:
   0x140625ED0: ConvertLogMessageIdToCharaLogKind
   0x140705CE0: ExecuteCommand
   0x1408ABF40: CreateSelectYesno
-#fail   0x140A81860: GetBeastTribeAllowance
-#fail   0x140A91500: EventFramework_GetSingleton
-#fail   0x140A91510: EventFramework_ctor
-#fail   0x140A91CD0: EventFramework_dtor
-#fail   0x140A99D70: EventFramework_ProcessDirectorUpdate
-#fail   0x140A9D3C0: EventFramework_GetInstanceContentDirector
-#fail   0x141041C30: Client::UI::AddonHudLayoutScreen::MoveableAddonInfoStruct_UpdateAddonPosition
+  0x140A47380: GetBeastTribeAllowance
+  0x140A575B0: EventFramework_GetSingleton
+  0x140A578A0: EventFramework_ctor
+  0x140A58060: EventFramework_dtor
+  0x140A60360: EventFramework_ProcessDirectorUpdate
+  0x140A63BB0: EventFramework_GetInstanceContentDirector
+  0x141033DE0: Client::UI::AddonHudLayoutScreen::MoveableAddonInfoStruct_UpdateAddonPosition
   0x141124A60: Client::Graphics::Kernel::CreateShader # static function
   0x1411B9250: lua_index2addr
   0x1411B99A0: lua_gettop
