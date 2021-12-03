@@ -150,7 +150,7 @@ classes:
       - ea: 0x141EA0BA0
         pointer: False
     funcs:
-#fail       0x140744080: Update
+      0x140755240: Update
       0x1407559D0: DeleteAllModels
       0x140755AE0: DeleteAllObjects  # IMPORTANT:: DONT EVER CALL THIS FOR REAL OKAY
   Client::Game::Character::CharacterManager:
@@ -177,7 +177,7 @@ classes:
       0x140757DB0: IsCharacterInPartyByName # (this, char*)
       0x140757E30: IsObjectIDInAlliance
       0x140757EA0: IsObjectIDPartyLeader
-#fail       0x140BC84D0: Create
+      0x140B97750: Create
   FateManager:
     funcs:
       0x14110BF70: HasValue  # g_FateTablePtr != 0
@@ -186,7 +186,7 @@ classes:
       0x14110BFF0: dtor
   BattleBuddyList:
     funcs:
-#fail       0x1407C2860: GetMemberBattleCharaByIndex
+      0x14079A9F0: GetMemberBattleCharaByIndex
   InventoryManager:
     instances:
       - ea: 0x141E9C1E0
@@ -1498,7 +1498,7 @@ classes:
       0x1404F2370: GetNodeById
       0x1404F2630: GetTextNodeById
       0x1404F2690: GetImageNodeById
-#fail       0x1404E3DB0: FireCallback
+      0x1404F2790: FireCallback
   Component::GUI::AtkComponentBase:
     vtbls:
       - ea: 0x1417590A0
