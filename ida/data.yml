@@ -1474,16 +1474,16 @@ classes:
       12: GetPosition
       13: SetAlpha
       14: SetScale
-      35: Initialize
-      36: Finalize
-      37: Update
-      38: Draw
-      40: LoadUldResourceHandle
-      43: OnSetup
-      45: OnRefresh
-      46: OnUpdate
-      56: OnMouseOver
-      57: OnMouseOut
+      37: Initialize
+      38: Finalize
+      39: Update
+      40: Draw
+      42: LoadUldResourceHandle
+      45: OnSetup
+      47: OnRefresh
+      48: OnUpdate
+      58: OnMouseOver
+      59: OnMouseOut
     funcs:
       0x1404EE080: ctor
       0x1404EE6F0: FireCallbackInt  # this creates an int AtkValue and puts its argument into it before calling Callback
@@ -1793,7 +1793,7 @@ classes:
         base: Component::Excel::ExcelLanguageEvent
       - ea: 0x1417685C0
         base: Common::Configuration::ConfigBase::ChangeEventInterface
-    vfuncs:
+    vfuncs: # todo: check new vfuncs
       0: dtor
       4: Abort
       5: GetExcelModule
@@ -1937,7 +1937,7 @@ classes:
   Client::Game::Object::GameObject:
     vtbls:
       - ea: 0x14176F1F8
-    vfuncs:
+    vfuncs: # todo: check
       2: GetObjectID
       3: GetObjectKind
       4: GetObjectType
@@ -1972,8 +1972,8 @@ classes:
       81: GetCastInfo
       82: GetCastInfo_2
     funcs:
-#fail       0x1406DE580: dtor
-#fail       0x1406F2040: ctor
+      0x1406F2810: dtor
+      0x1407548A0: ctor
   Component::Shell::ShellCommandInterface:
     vtbls:
       - ea: 0x14177ADB8
@@ -1985,7 +1985,7 @@ classes:
       - ea: 0x14177ADD0
   Client::UI::Shell::RaptureShellCommandInterface:
     vtbls:
-#fail       - ea: 0x1416E2428
+      - ea: 0x14177ADE0  
         base: Component::Shell::ShellCommandInterface
   Client::UI::Shell::RaptureShellModule:
     vtbls:
@@ -2302,7 +2302,7 @@ classes:
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandHotbarBase:
     vtbls:
-#fail       - ea: 0x1416E4B80
+      - ea: 0x14177D620
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandHotbar:
     vtbls:
@@ -2489,12 +2489,12 @@ classes:
       1: dtor
   Client::Game::UI::Telepo:
     vtbls:
-#fail       - ea: 0x1416E6470
+      - ea: 0x14177EB28
     vfuncs:
       0: AcceptTeleportOffer
-      1: dtor
+      2: dtor
     funcs:
-#fail       0x1407BBA10: ctor
+      0x1407934C0: ctor
 #fail       0x1407BBBA0: IsSelectUseTicketInactive
 #fail       0x1407BBBD0: UpdatePlayerAetheryteList
 #fail       0x1407BC270: Teleport
@@ -2520,7 +2520,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentItemDetailBase:
     vtbls:
-#fail       - ea: 0x1416E9BA0
+      - ea: 0x141782540
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentContentsFinderSetting:
     vtbls:
@@ -2550,10 +2550,10 @@ classes:
       0x1408EA7F0: ctor
   Client::UI::Agent::AgentTeleport:
     vtbls:
-#fail       - ea: 0x1416EADE0
+      - ea: 0x1418C9B08
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x1408D10D0: ctor
+      0x14106D860: ctor
   Client::UI::Agent::AgentRevive:
     vtbls:
       - ea: 0x1417835C0
@@ -2588,14 +2588,14 @@ classes:
       - ea: 0x141784AB8
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x14091EC80: ctor
+      0x1408F8B10: ctor
   Client::UI::Agent::AgentMaterialize:
     vtbls:
       - ea: 0x141785000
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentContentsTimer:
     vtbls:
-#fail       - ea: 0x1416ECA78
+     - ea: 0x141785338
         base: Client::UI::Agent::AgentInterface
   Client::Game::Event::EventHandler:
     vtbls:
@@ -2624,20 +2624,20 @@ classes:
         base: Client::Game::Event::EventSceneModuleImplBase
   Client::Game::Event::Director:
     vtbls:
-#fail       - ea: 0x1416FF5C0
+      - ea: 0x1417986B0
         base: Client::Game::Event::LuaEventHandler
   Client::Game::Event::EventHandlerModule:
     vtbls:
-#fail       - ea: 0x141701A40
+      - ea: 0x14179AB80
         base: Client::Game::Event::ModuleBase
     funcs:
-#fail       0x140A747B0: ctor
+      0x140A3A2F0: ctor
   Client::Game::Event::LuaActorModule:
     vtbls:
-#fail       - ea: 0x141701A80
+      - ea: 0x14179ABC0
         base: Client::Game::Event::ModuleBase
     funcs:
-#fail       0x140A78650: ctor
+     0x140A3E1D0: ctor
   Client::Game::Event::DirectorModule:
     vtbls:
 #fail       - ea: 0x141701AB8
