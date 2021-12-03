@@ -19,7 +19,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI {
         [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4B 10 84 C0 48 8B 01 74 2C")]
         public partial bool Teleport(uint aetheryteID, byte subIndex);
 
-        [MemberFunction("E8 ?? ?? ?? ?? 48 8B 48 08 48 2B 08")]
+        [MemberFunction("E8 ?? ?? ?? ?? 48 8B 48 08 8B 11")]
         public partial void* UpdateAetheryteList();
     }
 
@@ -42,7 +42,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI {
         [FieldOffset(0x00)] public void* vtbl;
         [FieldOffset(0x10)] public Telepo* Telepo;
 
-        [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 1B 44 0F B6 CE")]
+        [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 80 79 ?? 00 41 0F B6 F8 8B F2")]
         public partial bool TeleportWithTickets(uint aetheryteID, byte subIndex);
     }
 }
