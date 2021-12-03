@@ -23,15 +23,16 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI {
         public partial void* UpdateAetheryteList();
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 0x14)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public struct TeleportInfo {
         [FieldOffset(0x00)] public uint AetheryteId;
         [FieldOffset(0x04)] public uint GilCost;
         [FieldOffset(0x08)] public ushort TerritoryId;
-        [FieldOffset(0x0B)] public byte Ward;
-        [FieldOffset(0x0C)] public byte Plot;
-        [FieldOffset(0x0D)] public byte SubIndex;
-        [FieldOffset(0x0E)] public byte IsFavourite;
+
+        [FieldOffset(0x18)] public byte Ward;
+        [FieldOffset(0x19)] public byte Plot;
+        [FieldOffset(0x1A)] public byte SubIndex;
+        [FieldOffset(0x1B)] public byte IsFavourite;
 
         public bool IsSharedHouse => Ward > 0 && Plot > 0;
         public bool IsAppartment => SubIndex == 128 && !IsSharedHouse;
