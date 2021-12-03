@@ -295,8 +295,8 @@ classes:
       0x1400A9690: GetCurrentComboActionId
       0x1407DD7F0: GetActionRange
       0x1407DDB90: GetActionInRangeOrLoS
-#fail       0x1408049D0: GetAdjustedCastTime
-#fail       0x1408050A0: GetAdjustedRecastTime
+      0x1407DE1C0: GetAdjustedCastTime
+      0x1407DE990: GetAdjustedRecastTime
       0x1407DF0F0: GetActionCost
       0x1407DF980: GetSpellIdForAction
       0x1407E0EA0: UseActionLocation
@@ -314,7 +314,7 @@ classes:
       0x1407EBB00: GetRecastTime
   Client::Game::JobGaugeManager:
     instances:
-#fail       - ea: 0x141DAA178
+      - ea: 0x141E71B08
         pointer: False
     funcs:
       0x1407FA6D0: ctor
@@ -323,7 +323,7 @@ classes:
       0x1407FA960: ChangeGauge
   Client::Game::Gauge::JobGauge:
     vtbls:
-#fail       - ea: 0x1416E7720
+      - ea: 0x14177FE70
     vfuncs:
       0: dtor
       1: Init
@@ -395,6 +395,14 @@ classes:
   Client::Game::Gauge::GunbreakerGauge:
     vtbls:
       - ea: 0x141780228
+        base: Client::Game::Gauge::JobGauge
+  Client::Game::Gauge::ReaperGauge:
+    vtbls:
+      - ea: 0x141780260
+        base: Client::Game::Gauge::JobGauge
+  Client::Game::Gauge::SageGauge:
+    vtbls:
+      - ea: 0x141780298
         base: Client::Game::Gauge::JobGauge
   Common::Configuration::ConfigBase:
     vtbls:
