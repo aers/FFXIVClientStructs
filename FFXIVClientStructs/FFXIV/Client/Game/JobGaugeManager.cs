@@ -33,7 +33,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game {
 
         [FieldOffset(0x58)] public byte ClassJobID;
 
-        [StaticAddress("48 8B 0D ?? ?? ?? ?? 48 85 C9 74 43")]
+        [StaticAddress("48 8B 3D ?? ?? ?? ?? 48 85 FF 0F 84 ?? ?? ?? ?? 0F B6 05")]
         public static partial JobGaugeManager* Instance();
     }
 }
