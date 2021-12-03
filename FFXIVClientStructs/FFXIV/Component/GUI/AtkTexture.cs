@@ -27,7 +27,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
         [FieldOffset(0x10)] public TextureType TextureType;
         [FieldOffset(0x11)] public byte UnkBool_2;
 
-        [MemberFunction("E8 ? ? ? ? 83 C8 FF 4C 89 BF ? ? ? ?")]
+        [MemberFunction("E8 ?? ?? ?? ?? 48 8B 87 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? 4C 89 BF")]
         public partial void Ctor();
 
         [MemberFunction("E8 ? ? ? ? 41 8D 84 24 ? ? ? ? ")]
