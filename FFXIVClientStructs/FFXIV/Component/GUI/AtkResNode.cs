@@ -140,7 +140,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
         [MemberFunction("48 85 C9 74 0B 8B 41 44")]
         public partial void GetPositionFloat(float* outX, float* outY);
 
-        [MemberFunction("E8 ? ? ? ? 8B 45 B8")]
+        [MemberFunction("E8 ?? ?? ?? ?? 48 83 C5 30")]
         public partial void SetPositionFloat(float X, float Y);
 
         [MemberFunction("E8 ? ? ? ? 49 83 C4 0C")]
