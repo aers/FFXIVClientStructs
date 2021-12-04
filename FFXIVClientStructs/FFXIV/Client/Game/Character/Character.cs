@@ -35,7 +35,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character
         [FieldOffset(0x17E0)] public void* Omen;
 
         [FieldOffset(0x1878)] public Companion* CompanionObject; // minion
-        [FieldOffset(0x1898)] public fixed byte CustomizeData[0x1A];
+        [FieldOffset(0xDD8)] public fixed byte CustomizeData[0x1A];
 
         [FieldOffset(0x18B2)] public fixed byte FreeCompanyTag[6];
 
