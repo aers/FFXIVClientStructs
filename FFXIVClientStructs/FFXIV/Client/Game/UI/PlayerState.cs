@@ -43,6 +43,6 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI {
 
         [FieldOffset(0x6FE)] public fixed ushort DesynthesisLevels[8];
 
-        public float GetDesynthesisLevel(uint classJobId) => classJobId is < 8 or > 15 ? 0 : DesynthesisLevels[classJobId - 8];
+        public float GetDesynthesisLevel(uint classJobId) => classJobId is < 8 or > 15 ? 0 : DesynthesisLevels[classJobId - 8] / 100f;
     }
 }
