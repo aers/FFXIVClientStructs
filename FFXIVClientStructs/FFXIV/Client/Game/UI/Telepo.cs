@@ -19,7 +19,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI {
         [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4B 10 84 C0 48 8B 01 74 2C")]
         public partial bool Teleport(uint aetheryteID, byte subIndex);
 
-        [MemberFunction("E8 ?? ?? ?? ?? 48 8B 48 08 8B 11")]
+        [MemberFunction("E8 ?? ?? ?? ?? 39 43 60 74 29")]
         public partial void* UpdateAetheryteList();
     }
 
