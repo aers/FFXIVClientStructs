@@ -33,6 +33,16 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Gauge {
         public AstrologianSeal[] CurrentSeals => new[] {(AstrologianSeal)Seals[0], (AstrologianSeal)Seals[1], (AstrologianSeal)Seals[2]};
     }
 
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
+    public struct SageGauge {
+        [FieldOffset(0x00)] public short AddersgallTimer;
+        [FieldOffset(0x02)] public byte Addersgall;
+        [FieldOffset(0x03)] public byte Addersting;
+        [FieldOffset(0x04)] public byte Eukrasia;
+
+        public bool EukrasiaActive => this.Eukrasia > 0;
+    }
+
     #endregion
 
     #region MagicDPS
