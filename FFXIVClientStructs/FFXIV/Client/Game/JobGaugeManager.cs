@@ -12,6 +12,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game {
         [FieldOffset(0x08)] public WhiteMageGauge WhiteMage;
         [FieldOffset(0x08)] public ScholarGauge Scholar;
         [FieldOffset(0x08)] public AstrologianGauge Astrologian;
+        [FieldOffset(0x08)] public SageGauge Sage;
 
         [FieldOffset(0x08)] public BardGauge Bard;
         [FieldOffset(0x08)] public MachinistGauge Machinist;
@@ -25,6 +26,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game {
         [FieldOffset(0x08)] public DragoonGauge Dragoon;
         [FieldOffset(0x08)] public NinjaGauge Ninja;
         [FieldOffset(0x08)] public SamuraiGauge Samurai;
+        [FieldOffset(0x08)] public ReaperGauge Reaper;
         
         [FieldOffset(0x08)] public DarkKnightGauge DarkKnight;
         [FieldOffset(0x08)] public PaladinGauge Paladin;
