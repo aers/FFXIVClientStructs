@@ -39,7 +39,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI {
 
         [FieldOffset(0x2A0)] public uint BaseRestedExperience;
 
-        [FieldOffset(0x420)] public short PlayerCommendations;
+        [FieldOffset(0x454)] public short PlayerCommendations;
 
         [FieldOffset(0x6FE)] public fixed ushort DesynthesisLevels[8];
 
