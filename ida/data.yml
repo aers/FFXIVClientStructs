@@ -126,6 +126,8 @@ classes:
   Component::GUI::AtkModuleEvent:
   Component::GUI::AtkModuleInterface:
   Component::GUI::AtkModuleInterface::AtkEventInterface:
+      vtbls:
+      - ea: 0x141715BB0
   Component::GUI::AtkTextInput::AtkTextInputEventInterface:
   Component::Log::LogModuleInterface:
   Component::Text::TextChecker::ExecNonMacroFunc:
@@ -265,6 +267,7 @@ classes:
   Client::Game::UI::Revive:
     vtbls:
       - ea: 0x14177EA18
+        base: Component::GUI::AtkModuleInterface::AtkEventInterface
   Client::Game::UI::Buddy:
     funcs:
       0x14079AD80: ctor
@@ -2484,12 +2487,14 @@ classes:
   Client::Game::UI::Telepo::SelectUseTicketInvoker:
     vtbls:
       - ea: 0x14177EB10
+        base: Component::GUI::AtkModuleInterface::AtkEventInterface
     vfuncs:
       0: SelectUseTicketResultHandler
       1: dtor
   Client::Game::UI::Telepo:
     vtbls:
       - ea: 0x14177EB28
+        base: Component::GUI::AtkModuleInterface::AtkEventInterface
     vfuncs:
       0: AcceptTeleportOffer
       2: dtor
