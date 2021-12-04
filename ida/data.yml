@@ -2690,11 +2690,11 @@ classes:
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonContextMenuTitle:
     vtbls:
-#fail       - ea: 0x1417B7748
+      - ea: 0x141847AE8
         base: Client::UI::AddonContextMenu
   Client::UI::AddonSelectString::PopupMenuDerive:
     vtbls:
-#fail       - ea: 0x1417B7968
+      - ea: 0x141847D18
         base: Client::UI::PopupMenu
   Client::UI::AddonSelectString:
     vtbls:
@@ -2702,11 +2702,11 @@ classes:
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonSelectIconString::PopupMenuDerive:
     vtbls:
-#fail       - ea: 0x1417B7FD8
+      - ea: 0x1418483B8
         base: Client::UI::PopupMenu
   Client::UI::AddonSelectIconString:
     vtbls:
-#fail       - ea: 0x1417B8000
+      - ea: 0x1418483E0
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonTooltip:
     vtbls:
@@ -2714,7 +2714,7 @@ classes:
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonContextIconMenu:
     vtbls:
-#fail       - ea: 0x1417B8A90
+      - ea: 0x141848EC0
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonSelectYesno:
     vtbls:
@@ -2728,7 +2728,7 @@ classes:
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonRequest:
     vtbls:
-#fail       - ea: 0x1417BC188
+      - ea: 0x14184C758
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonContactList:
     vtbls:
@@ -2740,7 +2740,7 @@ classes:
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonItemSearchResult:
     vtbls:
-#fail       - ea: 0x1417BCC00
+      - ea: 0x14184D670
         base: Component::GUI::AtkUnitBase
     funcs:
 #fail       0x140D129D0: ctor
@@ -2795,7 +2795,7 @@ classes:
 #fail       0x140E2DF60: ReceiveEvent_ClickTrialSynthesisButton
   Client::UI::Atk2DAreaMap:
     vtbls:
-#fail       - ea: 0x1417E7830
+      - ea: 0x1418795D0
         base: Client::UI::Atk2DMap
   Client::UI::AddonRelicNoteBook:
     vtbls:
@@ -3382,14 +3382,14 @@ classes:
     vtbls:
       - ea: 0x141A6F350
         base: SQEX::CDev::Engine::Sd::Driver::BankController
-  SQEX::CDev::Engine::Sd::Whiz::IWhizManager:
-    vtbls:
+#  SQEX::CDev::Engine::Sd::Whiz::IWhizManager: commenting these 2 out for now, think they got removed or replaced
+#    vtbls:
 #fail       - ea: 0x1419B7F50
-        base: SQEX::CDev::Engine::Sd::SdMemoryAllocator
-  SQEX::CDev::Engine::Sd::Whiz::WhizManager:
-    vtbls:
+#        base: SQEX::CDev::Engine::Sd::SdMemoryAllocator
+#  SQEX::CDev::Engine::Sd::Whiz::WhizManager:
+#    vtbls:
 #fail       - ea: 0x1419B7FA0
-        base: SQEX::CDev::Engine::Sd::Whiz::IWhizManager
+#        base: SQEX::CDev::Engine::Sd::Whiz::IWhizManager
   Client::System::Memory::IMemorySpace:
     instances:
       - ea: 0x141E53D30
