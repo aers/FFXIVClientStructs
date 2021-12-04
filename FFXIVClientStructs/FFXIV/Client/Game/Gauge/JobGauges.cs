@@ -35,10 +35,10 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Gauge {
 
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct SageGauge {
-        [FieldOffset(0x00)] public short AddersgallTimer;
-        [FieldOffset(0x02)] public byte Addersgall;
-        [FieldOffset(0x03)] public byte Addersting;
-        [FieldOffset(0x04)] public byte Eukrasia;
+        [FieldOffset(0x08)] public short AddersgallTimer;
+        [FieldOffset(0x0A)] public byte Addersgall;
+        [FieldOffset(0x0B)] public byte Addersting;
+        [FieldOffset(0x0C)] public byte Eukrasia;
 
         public bool EukrasiaActive => this.Eukrasia > 0;
     }
@@ -139,6 +139,11 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Gauge {
         [FieldOffset(0x0B)] public byte Kenki;
         [FieldOffset(0x0C)] public byte MeditationStacks;
         [FieldOffset(0x0D)] public byte SenFlags;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
+    public struct ReaperGauge {
+        [FieldOffset(0x08)] public byte Soul;
     }
 
     #endregion
