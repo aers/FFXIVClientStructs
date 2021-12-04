@@ -10,18 +10,18 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Framework
 {
     // Client::System::Framework::Framework
 
-    // size=0x2B50
+    // size=0x35B8
     // ctor E8 ? ? ? ? 48 8B C8 48 89 05 ? ? ? ? EB 0A 48 8B CE 
-    [StructLayout(LayoutKind.Explicit, Size = 0x2B50)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x35B8)]
     public unsafe partial struct Framework
     {
         [FieldOffset(0x10)] public SystemConfig SystemConfig;
         
-        [FieldOffset(0x29C8)] public ExcelModuleInterface* ExcelModuleInterface;
-        [FieldOffset(0x29D0)] public ExdModule* ExdModule;
+        [FieldOffset(0x2B30)] public ExcelModuleInterface* ExcelModuleInterface;
+        [FieldOffset(0x2B38)] public ExdModule* ExdModule;
 
-        [FieldOffset(0x29F8)] public UIModule* UIModule;
-        [FieldOffset(0x2A60)] public LuaState LuaState;
+        [FieldOffset(0x2B60)] public UIModule* UIModule;
+        [FieldOffset(0x2BC8)] public LuaState LuaState;
 
         [StaticAddress("44 0F B6 C0 48 8B 0D ? ? ? ?", isPointer: true)]
         public static partial Framework* Instance();
