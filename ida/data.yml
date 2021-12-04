@@ -2698,7 +2698,7 @@ classes:
         base: Client::UI::PopupMenu
   Client::UI::AddonSelectString:
     vtbls:
-#fail       - ea: 0x1417B7990
+      - ea: 0x141847D40
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonSelectIconString::PopupMenuDerive:
     vtbls:
@@ -2710,7 +2710,7 @@ classes:
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonTooltip:
     vtbls:
-#fail       - ea: 0x1417B8218
+      - ea: 0x141848608
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonContextIconMenu:
     vtbls:
@@ -2718,7 +2718,7 @@ classes:
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonSelectYesno:
     vtbls:
-#fail       - ea: 0x1417B9748
+      - ea: 0x141849BD8
         base: Component::GUI::AtkUnitBase
     funcs:
 #fail       0x140CF09B0: ctor
@@ -2736,7 +2736,7 @@ classes:
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonAirShipExploration:
     vtbls:
-#fail       - ea: 0x1417C46F0
+      - ea: 0x1418554F0
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonItemSearchResult:
     vtbls:
@@ -2747,7 +2747,7 @@ classes:
 #fail       0x140D136D0: UpdateResult
   Client::UI::AddonConfigSystem:
     vtbls:
-#fail       - ea: 0x1417C8E10
+      - ea: 0x141859E20
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonCharaSelectWorldServer:
     vtbls:
@@ -2755,39 +2755,39 @@ classes:
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonJournalDetail:
     vtbls:
-#fail       - ea: 0x1417E1090
+      - ea: 0x141872B30
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonJournalResult:
     vtbls:
-#fail       - ea: 0x1417E18F0
+      - ea: 0x1418733D0
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonGuildLeve:
     vtbls:
-#fail       - ea: 0x1417E1B28
+      - ea: 0x141873618
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonRetainerTaskList:
     vtbls:
-#fail       - ea: 0x1417E6080
+      - ea: 0x141877D70
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonRetainerTaskAsk:
     vtbls:
-#fail       - ea: 0x1417E6298
+      - ea: 0x141877F98
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonRetainerTaskResult:
     vtbls:
-#fail       - ea: 0x1417E64B0
+      - ea: 0x1418781C0
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonRetainerSellList:
     vtbls:
-      - ea: 0x1418916E8
+      - ea: 0x141876988
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonRetainerSell:
     vtbls:
-      - ea: 0x141885130
+      - ea: 0x141876760
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonRecipeNote:
     vtbls:
-#fail       - ea: 0x1417E6FA8
+      - ea: 0x141878D08
         base: Component::GUI::AtkUnitBase
     funcs:
 #fail       0x140E2DEC0: ReceiveEvent_ClickSynthesizeButton
@@ -2799,15 +2799,15 @@ classes:
         base: Client::UI::Atk2DMap
   Client::UI::AddonRelicNoteBook:
     vtbls:
-#fail       - ea: 0x1417E80F8
+      - ea: 0x141879ED8
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonAOZNotebook:
     vtbls:
-#fail       - ea: 0x1417E9188
+      - ea: 0x14187AFD8
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonAOZNotebookPresetList:
     vtbls:
-#fail       - ea: 0x1417E9460
+      - ea: 0x14187B2C0
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonContentsFinder:
     vtbls:
@@ -2815,15 +2815,15 @@ classes:
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonContentsFinderSetting:
     vtbls:
-#fail       - ea: 0x1417EA1C8
+      - ea: 0x14187C088
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonRaidFinder:
     vtbls:
-#fail       - ea: 0x1417EAC50
+      - ea: 0x14187CB60
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonMaterializeDialog:
     vtbls:
-#fail       - ea: 0x1417EB2C8
+      - ea: 0x14187D208
         base: Component::GUI::AtkUnitBase
     funcs:
 #fail       0x140E5D7C0: ctor
@@ -2883,7 +2883,7 @@ classes:
 #fail       0x140EAA860: GenerateTooltip
   Client::UI::AddonSalvageDialog:
     vtbls:
-#fail       - ea: 0x1417F8AC8
+      - ea: 0x14188B268
         base: Component::GUI::AtkUnitBase
     funcs:
 #fail       0x140ECCA10: ctor
@@ -2895,31 +2895,31 @@ classes:
 #fail       0x140ED6AD0: ctor
   Client::UI::AddonScreenText:
     vtbls:
-#fail       - ea: 0x1417FA838
+      - ea: 0x1418B2E18
         base: Component::GUI::AtkUnitBase
     funcs:
 #fail       0x140EE0830: ctor
   Client::UI::AddonPopUpText:
     vtbls:
-#fail       - ea: 0x1417FAA50
+      - ea: 0x14188D2E0
         base: Component::GUI::AtkUnitBase
     funcs:
 #fail       0x140EE0D20: ctor
   Client::UI::AddonFlyText:
     vtbls:
-#fail       - ea: 0x1417FAC68
+      - ea: 0x14188D508
         base: Component::GUI::AtkUnitBase
     funcs:
 #fail       0x140EE3110: ctor
   Client::UI::AddonMiniTalk:
     vtbls:
-#fail       - ea: 0x1417FAE80
+      - ea: 0x14188D730
         base: Component::GUI::AtkUnitBase
     funcs:
 #fail       0x140EE5AF0: ctor
   Client::UI::AddonGathering:
     vtbls:
-#fail       - ea: 0x1417FB7A0
+      - ea: 0x14188E090
         base: Component::GUI::AtkUnitBase
     funcs:
 #fail       0x140EE8DF0: ctor
@@ -2927,7 +2927,7 @@ classes:
 #fail       0x140EE95F0: ReceiveEvent_Gather
   Client::UI::AddonGatheringMasterpiece:
     vtbls:
-#fail       - ea: 0x1417FB9B8
+      - ea: 0x14188E2B8
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonNamePlate::BakePlateRenderer:
     vtbls:
@@ -2935,7 +2935,7 @@ classes:
         base: Component::GUI::AtkTextNodeRenderer
   Client::UI::AddonNamePlate:
     vtbls:
-#fail       - ea: 0x1417FC238
+      - ea: 0x14188EB78
         base: Component::GUI::AtkUnitBase
     funcs:
 #fail       0x140EF1760: ctor
@@ -2944,7 +2944,7 @@ classes:
 #fail       0x140EF4610: ToggleTextRenderMode
   Client::UI::AddonTeleport:
     vtbls:
-#fail       - ea: 0x141800838
+      - ea: 0x141893388
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonDeepDungeonStatus:
     vtbls:
@@ -3039,23 +3039,23 @@ classes:
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonParameterWidget:
     vtbls:
-#fail       - ea: 0x141824228
+      - ea: 0x1418B8468
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonExp:
     vtbls:
-#fail       - ea: 0x141824440
+      - ea: 0x1418B8690
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonEnemyList:
     vtbls:
-#fail       - ea: 0x141824658
+      - ea: 0x1418B88B8
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonBagWidget:
     vtbls:
-#fail       - ea: 0x141824F50
+      - ea: 0x1418B9488
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonMoney:
     vtbls:
-#fail       - ea: 0x141825168
+      - ea: 0x1418B96B0
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonNotification:
     vtbls:
