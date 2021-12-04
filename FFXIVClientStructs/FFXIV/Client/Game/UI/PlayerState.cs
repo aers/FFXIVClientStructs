@@ -40,5 +40,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI {
         [FieldOffset(0x2A0)] public uint BaseRestedExperience;
 
         [FieldOffset(0x420)] public short PlayerCommendations;
+
+        [FieldOffset(0x6FE)] public fixed ushort DesynthesisLevels[8];
+
+        public float GetDesynthesisLevel(uint classJobId) => classJobId is < 8 or > 15 ? 0 : DesynthesisLevels[classJobId - 8];
     }
 }
