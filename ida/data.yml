@@ -703,10 +703,10 @@ classes:
       - ea: 0x1417325C0
         base: Component::GUI::AtkModuleInterface::AtkEventInterface
     vfuncs:
-      2: Show
-      3: Hide
-      4: IsAgentActive
-      5: Update
+      3: Show
+      4: Hide
+      5: IsAgentActive
+      6: Update
     funcs:
       0x1401F7E50: ctor
   Client::UI::Agent::AgentCharaMake:
@@ -2496,7 +2496,7 @@ classes:
     funcs:
       0x1407934C0: ctor
       0x140793620: IsSelectUseTicketInactive
-#fail       0x1407BBBD0: UpdatePlayerAetheryteList   # this doesn't seem to exist anymore
+      0x140793D80: UpdatePlayerAetheryteList
       0x1407941F0: Teleport
       0x1407954F0: TeleportWithTicket
       0x140795580: InvokeSelectUseTicket
