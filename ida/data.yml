@@ -126,7 +126,7 @@ classes:
   Component::GUI::AtkModuleEvent:
   Component::GUI::AtkModuleInterface:
   Component::GUI::AtkModuleInterface::AtkEventInterface:
-      vtbls:
+    vtbls:
       - ea: 0x141715BB0
   Component::GUI::AtkTextInput::AtkTextInputEventInterface:
   Component::Log::LogModuleInterface:
