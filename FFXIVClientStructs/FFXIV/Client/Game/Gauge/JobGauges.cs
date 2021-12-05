@@ -1,4 +1,4 @@
-﻿using System.Runtime.InteropServices;
+using System.Runtime.InteropServices;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Gauge {
     [StructLayout(LayoutKind.Explicit, Size = 0x08)]
@@ -75,6 +75,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Gauge {
     public struct RedMageGauge {
         [FieldOffset(0x08)] public byte WhiteMana;
         [FieldOffset(0x09)] public byte BlackMana;
+        [FieldOffset(0x0A)] public byte ManaStacks;
     }
 
     #endregion
@@ -84,9 +85,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Gauge {
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct BardGauge {
         [FieldOffset(0x08)] public short SongTimer;
-        [FieldOffset(0x0A)] public byte Repertoire;
-        [FieldOffset(0x0B)] public byte SoulVoice;
-        [FieldOffset(0x0C)] public byte Song;
+        [FieldOffset(0x0C)] public byte Repertoire;
+        [FieldOffset(0x0D)] public byte SoulVoice;
+        [FieldOffset(0x0E)] public byte Song;
 
         public BardSong ActiveSong => Song % 5 == 0 ? (BardSong)Song : BardSong.None;
     }
