@@ -140,7 +140,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
         [VirtualFunction(163)]
         public partial void ShowAddonKillStreakForManeuvers(int streak, int streakType);
         
-        [VirtualFunction(171)]
+        [VirtualFunction(175)]
         public partial void ExecuteMainCommand(uint command);
 
         [StructLayout(LayoutKind.Explicit, Size = 0x8)]
