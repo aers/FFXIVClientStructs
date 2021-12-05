@@ -10,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game {
         public static partial ActionManager* Instance();
 
         [MemberFunction("E8 ?? ?? ?? ?? EB 64 B1 01")]
-        public partial bool UseAction(ActionType actionType, uint actionID, uint targetID = 0xE000_0000, uint a4 = 0, uint a5 = 0, uint a6 = 0);
+        public partial bool UseAction(ActionType actionType, uint actionID, uint targetID = 0xE000_0000, uint a4 = 0, uint a5 = 0, uint a6 = 0, void* a7 = null);
 
         [MemberFunction("E8 ?? ?? ?? ?? 3C 01 0F 85 ?? ?? ?? ?? EB 46")]
         public partial bool UseActionLocation(ActionType actionType, uint actionID, uint targetID = 0xE000_0000, Vector3* location = null, uint a4 = 0);
