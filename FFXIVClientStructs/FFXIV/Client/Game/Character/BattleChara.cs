@@ -10,19 +10,19 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character
     //     Client::Graphics::Vfx::VfxDataListenner
     // characters that fight (players, monsters, etc)
 
-    // size = 0x2B60
+    // size = 0x2C40
     // ctor E8 ? ? ? ? 48 8B F8 EB 02 33 FF 8B 86 ? ? ? ? 
-    [StructLayout(LayoutKind.Explicit, Size = 0x2C00)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x2C40)]
     public unsafe partial struct BattleChara
     {
         [FieldOffset(0x0)] public Character Character;
 
         [FieldOffset(0x1A48)] public StatusManager StatusManager;
 
-        [FieldOffset(0x1B80)] public CastInfo SpellCastInfo;
+        [FieldOffset(0x1BC0)] public CastInfo SpellCastInfo;
 
-        [FieldOffset(0x2BF0)] public byte EurekaLevel;
-        [FieldOffset(0x2BF1)] public EurekaElement EurekaElement;
+        [FieldOffset(0x2C30)] public byte EurekaLevel;
+        [FieldOffset(0x2C31)] public EurekaElement EurekaElement;
 
         [VirtualFunction(82)]
         public partial CastInfo* GetCastInfo();
