@@ -1824,19 +1824,19 @@ classes:
       53: GetUIInputData
       54: GetUIInputModule
       56: GetLogFilterConfig
-      147: ShowImage
-      148: ShowText
-      149: ShowTextChain
-      150: ShowWideText
-      151: ShowPoisonText
-      152: ShowErrorText
-      153: ShowTextClassChange
-      154: ShowGetAction
-      155: ShowLocationTitle
-      159: ShowGrandCompany1
-      162: ShowStreak
-      163: ShowAddonKillStreakForManeuvers
-      171: ExecuteMainCommand
+      149: ShowImage
+      150: ShowText
+      151: ShowTextChain
+      152: ShowWideText
+      153: ShowPoisonText
+      154: ShowErrorText
+      155: ShowTextClassChange
+      156: ShowGetAction
+      157: ShowLocationTitle
+      161: ShowGrandCompany1
+      164: ShowStreak
+      165: ShowAddonKillStreakForManeuvers
+      175: ExecuteMainCommand
     funcs:
       0x1405DA420: ctor
       0x1405DB270: Update
