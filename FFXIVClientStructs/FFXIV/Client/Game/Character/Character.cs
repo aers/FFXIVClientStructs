@@ -30,25 +30,25 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character
         [FieldOffset(0x230)] public uint PlayerTargetObjectID;
 
         [FieldOffset(0x1040)] public fixed byte EquipSlotData[4 * 10];
-        //[FieldOffset(0x17B0)] public void* VfxObject;
-        //[FieldOffset(0x17B8)] public void* VfxObject2;
-        [FieldOffset(0x17E0)] public void* Omen;
+        //[FieldOffset(0x1840)] public void* VfxObject;
+        //[FieldOffset(0x1848)] public void* VfxObject2;
+        [FieldOffset(0x1870)] public void* Omen;
 
-        [FieldOffset(0x1878)] public Companion* CompanionObject; // minion
+        [FieldOffset(0x1900)] public Companion* CompanionObject; // minion
+
         [FieldOffset(0xDD8)] public fixed byte CustomizeData[0x1A];
 
-        [FieldOffset(0x18B2)] public fixed byte FreeCompanyTag[6];
+        [FieldOffset(0x1918)] public fixed byte FreeCompanyTag[6];
+        [FieldOffset(0x1940)] public uint TargetObjectID;
 
-        [FieldOffset(0x18D8)] public uint TargetObjectID;
+        [FieldOffset(0x1998)] public uint NameID;
 
-        [FieldOffset(0x1940)] public uint NameID;
-
+        [FieldOffset(0x19B4)] public ushort CurrentWorld;
+        [FieldOffset(0x19B6)] public ushort HomeWorld;
+        [FieldOffset(0x19C2)] public byte Icon;
+        [FieldOffset(0x19D9)] public byte ShieldValue;
+        [FieldOffset(0x19DF)] public byte StatusFlags;
         [FieldOffset(0x19A8)] public uint CompanionOwnerID;
-        [FieldOffset(0x195C)] public ushort CurrentWorld;
-        [FieldOffset(0x195E)] public ushort HomeWorld;
-        [FieldOffset(0x197F)] public byte Icon;
-        [FieldOffset(0x1997)] public byte ShieldValue;
-        [FieldOffset(0x19A0)] public byte StatusFlags;
 
         [MemberFunction("E8 ?? ?? ?? ?? 3B C7 74 45")]
         public partial uint GetTargetId();
