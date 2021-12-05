@@ -9,8 +9,8 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Gauge {
         Spear = 4,
         Ewer = 5,
         Spire = 6,
-        Lord = 112,
-        Lady = 128
+        Lord = 0x70,
+        Lady = 0x80
     }
 
     public enum AstrologianSeal {
