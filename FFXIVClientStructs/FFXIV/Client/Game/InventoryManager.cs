@@ -106,6 +106,8 @@ namespace FFXIVClientStructs.FFXIV.Client.Game {
         FreeCompanyPage1 = 20000,
         FreeCompanyPage2 = 20001,
         FreeCompanyPage3 = 20002,
+        FreeCompanyPage4 = 20003,
+        FreeCompanyPage5 = 20004,
         FreeCompanyGil = 22000,
         FreeCompanyCrystals = 22001,
 
