@@ -10,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
 {
     // Client::UI::UIModule
     //   Client::UI::UIModuleInterface
-    [StructLayout(LayoutKind.Explicit, Size = 0xE2070)]
+    [StructLayout(LayoutKind.Explicit, Size = 0xE32C0)]
     public unsafe partial struct UIModule
     {
         [FieldOffset(0x0)] public void* vtbl;
@@ -104,40 +104,40 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
         [VirtualFunction(56)]
         public partial void* GetLogFilterConfig();
         
-        [VirtualFunction(147)]
+        [VirtualFunction(149)]
         public partial void ShowImage(uint imageId, bool useLocalePath = false, int displayType = 0, bool playSound = false);
 
-        [VirtualFunction(148)]
+        [VirtualFunction(150)]
         public partial void ShowText(int position, string text, uint iconOrCheck1 = 0, bool playSound = true, uint iconOrCheck2 = 0, bool alsoPlaySound = true);
-
-        [VirtualFunction(149)]
+        
+        [VirtualFunction(151)]
         public partial void ShowTextChain(int chain, int hqChain = 0);
 
-        [VirtualFunction(150)]
+        [VirtualFunction(152)] //_AreaText
         public partial void ShowWideText(string text, int layer = 0, bool isTop = true, bool isFast = false, uint logMessageId = 0);
-
-        [VirtualFunction(151)]
+        
+        [VirtualFunction(153)]
         public partial void ShowPoisonText(string text, int layer = 0);
 
-        [VirtualFunction(152)]
+        [VirtualFunction(154)]
         public partial void ShowErrorText(string text, bool forceVisible = true);
 
-        [VirtualFunction(153)]
+        [VirtualFunction(155)]
         public partial void ShowTextClassChange(uint classJobId);
 
-        [VirtualFunction(154)]
+        [VirtualFunction(156)]
         public partial void ShowGetAction(ActionType actionType, uint actionId);
 
-        [VirtualFunction(155)]
+        [VirtualFunction(157)]
         public partial void ShowLocationTitle(int territoryId, bool zoomAnim, bool restartAnim, int* language /*-1 = client lang*/);
 
-        [VirtualFunction(159)]
+        [VirtualFunction(161)]
         public partial void ShowGrandCompany1(uint gc, uint gcRank, bool playSound = true);
 
-        [VirtualFunction(162)]
+        [VirtualFunction(164)]
         public partial void ShowStreak(int streak, int streakType);
 
-        [VirtualFunction(163)]
+        [VirtualFunction(165)]
         public partial void ShowAddonKillStreakForManeuvers(int streak, int streakType);
         
         [VirtualFunction(175)]
