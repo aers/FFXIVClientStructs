@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Gauge {
     public enum AstrologianCard {
@@ -37,10 +37,15 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Gauge {
     [Flags]
     public enum AetherFlags : byte {
         None = 0,
-        AetherFlow1 = 1,
-        AetherFlow2 = 2,
-        Dreadwyrm1 = 4,
-        Dreadwyrm2 = 8,
-        Firebird = 16
+        Aetherflow1 = 1 << 0,
+        Aetherflow2 = 1 << 1,
+        Aetherflow = Aetherflow1 | Aetherflow2,
+        IfritAttuned = 1 << 2,
+        TitanAttuned = 1 << 3,
+        GarudaAttuned = TitanAttuned | IfritAttuned,
+        PhoenixReady = 1 << 4,
+        IfritReady = 1 << 5,
+        TitanReady = 1 << 6,
+        GarudaReady = 1 << 7,
     }
 }

@@ -63,10 +63,12 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Gauge {
 
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct SummonerGauge {
-        [FieldOffset(0x08)] public short TimerRemaining;
-        [FieldOffset(0x0A)] public byte ReturnSummon;
-        [FieldOffset(0x0B)] public byte ReturnSummonGlam;
-        [FieldOffset(0x0C)] public byte AetherFlags;
+        [FieldOffset(0x8)] public ushort SummonTimer; // millis counting down
+        [FieldOffset(0xA)] public ushort AttunementTimer; // millis counting down
+        [FieldOffset(0xC)] public byte ReturnSummon; // Pet sheet (23=Carbuncle, the only option now)
+        [FieldOffset(0xD)] public byte ReturnSummonGlam;  // PetMirage sheet
+        [FieldOffset(0xE)] public byte Attunement;  // Count of "Attunement cost" resource
+        [FieldOffset(0xF)] public AetherFlags AetherFlags; // bitfield
 
         public AetherFlags Flags => (AetherFlags)AetherFlags;
     }
