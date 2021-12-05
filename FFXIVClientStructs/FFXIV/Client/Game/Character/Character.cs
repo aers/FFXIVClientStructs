@@ -8,9 +8,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character
     //   Client::Game::Object::GameObject
     //   Client::Graphics::Vfx::VfxDataListenner
 
-    // size = 0x1910
+    // size = 0x19F0
     // ctor E8 ? ? ? ? 0F B7 93 ? ? ? ? 45 33 C9 
-    [StructLayout(LayoutKind.Explicit, Size = 0x19B0)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x19F0)]
     public unsafe partial struct Character
     {
         [FieldOffset(0x0)] public GameObject GameObject;
