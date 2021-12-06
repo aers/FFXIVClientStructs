@@ -24,6 +24,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character
         [FieldOffset(0x2C30)] public byte EurekaLevel;
         [FieldOffset(0x2C31)] public EurekaElement EurekaElement;
 
+        [VirtualFunction(80)]
+        public partial StatusManager* GetStatusManager();
+
         [VirtualFunction(82)]
         public partial CastInfo* GetCastInfo();
 
