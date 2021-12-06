@@ -1940,7 +1940,7 @@ classes:
   Client::Game::Object::GameObject:
     vtbls:
       - ea: 0x14176F1F8
-    vfuncs: # todo: check
+    vfuncs:
       2: GetObjectID
       3: GetObjectKind
       4: GetObjectType
@@ -1948,17 +1948,17 @@ classes:
       7: GetName
       8: GetRadius
       9: GetHeight
-      16: EnableDraw
-      17: DisableDraw
-      21: SetDrawObject
-      27: GetDrawObject
-      28: GetDrawObject_2
-      40: Update
-      50: GetNpcID
-      59: IsDead
-      62: Destroy
-      63: IsCharacter
-      70: OnInitialize
+      17: EnableDraw
+      18: DisableDraw
+      22: SetDrawObject
+      28: GetDrawObject
+      29: GetDrawObject_2
+      41: Update
+      49: GetNpcID
+      58: IsDead
+      61: Destroy
+      62: IsCharacter
+      69: OnInitialize
     funcs:
       0x1406DF330: GetPosition
       0x1406DF380: SetPosition
@@ -1971,9 +1971,10 @@ classes:
       - ea: 0x1417701C8
         base: Client::Graphics::Vfx::VfxDataListenner
     vfuncs:
-      79: GetStatusManager
-      81: GetCastInfo
-      82: GetCastInfo_2
+      80: GetStatusManager
+      81: GetStatusManager_2
+      82: GetCastInfo
+      83: GetCastInfo_2
     funcs:
       0x1406F2810: dtor
       0x1407548A0: ctor
