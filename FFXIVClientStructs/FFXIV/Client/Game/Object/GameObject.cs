@@ -61,16 +61,16 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Object
         [VirtualFunction(9)]
         public partial float GetHeight();
 
-        [VirtualFunction(27)]
+        [VirtualFunction(28)]
         public partial void* GetDrawObject();
 
-        [VirtualFunction(50)]
+        [VirtualFunction(49)]
         public partial uint GetNpcID();
 
-        [VirtualFunction(59)]
+        [VirtualFunction(58)]
         public partial bool IsDead();
 
-        [VirtualFunction(63)]
+        [VirtualFunction(62)]
         public partial bool IsCharacter();
     }
   
