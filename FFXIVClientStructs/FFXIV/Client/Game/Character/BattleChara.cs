@@ -17,7 +17,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character
     {
         [FieldOffset(0x0)] public Character Character;
 
-        [FieldOffset(0x1A48)] public StatusManager StatusManager;
+        [FieldOffset(0x1A30)] public StatusManager StatusManager;
 
         [FieldOffset(0x1BC0)] public CastInfo SpellCastInfo;
 
