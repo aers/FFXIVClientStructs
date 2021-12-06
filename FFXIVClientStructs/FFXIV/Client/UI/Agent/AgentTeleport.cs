@@ -4,7 +4,7 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 using FFXIVClientStructs.STD;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent {
-    [StructLayout(LayoutKind.Explicit, Size = 0x80)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x90)]
     public unsafe struct AgentTeleport {
         [FieldOffset(0x0)] public AgentInterface AgentInterface;
         [FieldOffset(0x60)] public int AetheryteCount;

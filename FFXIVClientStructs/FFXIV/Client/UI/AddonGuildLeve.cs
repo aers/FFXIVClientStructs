@@ -7,7 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
     // Client::UI::AddonGuildLeve
     //   Component::GUI::AtkUnitBase
     //     Component::GUI::AtkEventListener
-    [StructLayout(LayoutKind.Explicit, Size = 0x17F0)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x18F0)]
     public unsafe struct AddonGuildLeve
     {
         [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;

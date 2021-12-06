@@ -5,7 +5,7 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI {
     [Addon("_PartyList")]
-    [StructLayout(LayoutKind.Explicit, Size = 0xFF8)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x1420)]
     public unsafe struct AddonPartyList {
         [FieldOffset(0x000)] public AtkUnitBase AtkUnitBase;
         [FieldOffset(0x220)] public PartyMembers PartyMember; // 8 PartyListMember

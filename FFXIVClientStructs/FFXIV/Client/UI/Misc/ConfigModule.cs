@@ -6,7 +6,7 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc {
     // Client::UI::Misc::ConfigModule
     // ctor E8 ?? ?? ?? ?? 48 8B 97 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 4C 8B CF
-    [StructLayout(LayoutKind.Explicit, Size = 0xD698)]
+    [StructLayout(LayoutKind.Explicit, Size = 0xD858)]
     public unsafe partial struct ConfigModule {
         public const int ConfigOptionCount = 680;
         [FieldOffset(0x28)] public UIModule* UIModule;

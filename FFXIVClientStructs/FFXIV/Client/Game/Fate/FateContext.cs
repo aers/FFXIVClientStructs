@@ -4,7 +4,7 @@ using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Fate
 {
-    [StructLayout(LayoutKind.Explicit, Size = 0x1000)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x1040)]
     public unsafe struct FateContext
     {
         [FieldOffset(0x18)] public ushort FateId;

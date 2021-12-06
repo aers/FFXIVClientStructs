@@ -1,5 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 using FFXIVClientStructs.Attributes;
+using FFXIVClientStructs.FFXIV.Client.UI.Misc;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent
@@ -8,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent
 
     // size = 0xC10
     // ctor E8 ? ? ? ? 48 8B 85 ? ? ? ? 49 8B CF 48 89 87
-    [StructLayout(LayoutKind.Explicit, Size = 0xC10)]
+    [StructLayout(LayoutKind.Explicit, Size = 0xC28)]
     public unsafe partial struct AgentModule
     {
         [FieldOffset(0x0)] public void* vtbl;
@@ -18,10 +19,11 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent
         [FieldOffset(0x14)] public uint FrameCounter;
         [FieldOffset(0x18)] public float FrameDelta;
 
-        [FieldOffset(0x20)] public AgentInterface* AgentArray; // 380 pointers patch 5.50
-        // why are those 2 here, included for completeness
-        // [FieldOffset(0xC00)] public UIModule* UIModulePtr;
-        // [FieldOffset(0xC08)] public AgentModule* AgentModulePtr;
+        [FieldOffset(0x20)] public AgentInterface* AgentArray; // 383 pointers patch 6.00
+        
+        [FieldOffset(0xC18)] public UIModule* UIModulePtr;
+        [FieldOffset(0xC20)] public AgentModule* AgentModulePtr;
+        [FieldOffset(0xC28)] public RaptureHotbarModule* RaptureHotbarModulePtr;
 
         [MemberFunction("E8 ?? ?? ?? ?? 83 FF 0D")]
         public partial AgentInterface* GetAgentByInternalID(uint agentID);

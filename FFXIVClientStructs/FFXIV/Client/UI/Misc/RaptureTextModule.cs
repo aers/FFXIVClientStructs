@@ -4,7 +4,7 @@ using FFXIVClientStructs.Attributes;
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc {
     // Client::UI::Misc::RaptureTextModule
     // ctor E8 ?? ?? ?? ?? 48 8D B7 ?? ?? ?? ?? 4D 8B C4
-    [StructLayout(LayoutKind.Explicit, Size = 0xD50)]
+    [StructLayout(LayoutKind.Explicit, Size = 0xD58)]
     public unsafe partial struct RaptureTextModule {
 
         [MemberFunction("E9 ?? ?? ?? ?? 80 EA 20")]
