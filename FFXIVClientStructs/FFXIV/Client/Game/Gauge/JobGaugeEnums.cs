@@ -27,6 +27,21 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Gauge {
         Pirouette = 4
     }
 
+    public enum KaeshiAction : byte {
+        Higanbana = 1,
+        Goken = 2,
+        Setsugekka = 3,
+        Namikiri = 4,
+    }
+
+    [Flags]
+    public enum SenFlags : byte {
+        None = 0,
+        Setsu = 1 << 0,
+        Getsu = 1 << 1,
+        Ka = 1 << 2,
+    }
+
     [Flags]
     public enum SongFlags : byte {
         None = 0,

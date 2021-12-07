@@ -137,9 +137,10 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Gauge {
 
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct SamuraiGauge {
+        [FieldOffset(0x0A)] public KaeshiAction Kaeshi;
         [FieldOffset(0x0B)] public byte Kenki;
         [FieldOffset(0x0C)] public byte MeditationStacks;
-        [FieldOffset(0x0D)] public byte SenFlags;
+        [FieldOffset(0x0D)] public SenFlags SenFlags;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
