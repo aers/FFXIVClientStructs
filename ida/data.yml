@@ -2649,7 +2649,7 @@ classes:
       - ea: 0x14179ABF8
         base: Client::Game::Event::ModuleBase
     funcs:
-      0x140A78F00: ctor
+      0x140A3EA80: ctor
   Client::Game::Event::LeveDirector:
     vtbls:
       - ea: 0x14179CD68
