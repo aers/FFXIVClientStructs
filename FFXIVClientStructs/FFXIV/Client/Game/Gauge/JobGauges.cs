@@ -70,7 +70,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Gauge {
         [FieldOffset(0xE)] public byte Attunement;  // Count of "Attunement cost" resource
         [FieldOffset(0xF)] public AetherFlags AetherFlags; // bitfield
 
-        public AetherFlags Flags => (AetherFlags)AetherFlags;
+        public AetherFlags Flags => AetherFlags;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x50)]
@@ -89,9 +89,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Gauge {
         [FieldOffset(0x08)] public ushort SongTimer;
         [FieldOffset(0x0C)] public byte Repertoire;
         [FieldOffset(0x0D)] public byte SoulVoice;
-        [FieldOffset(0x0E)] public byte Song;
-
-        public BardSong ActiveSong => Song % 5 == 0 ? (BardSong)Song : BardSong.None;
+        [FieldOffset(0x0E)] public SongFlags SongFlags; // bitfield
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]

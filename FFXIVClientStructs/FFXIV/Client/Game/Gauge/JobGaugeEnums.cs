@@ -27,11 +27,18 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Gauge {
         Pirouette = 4
     }
 
-    public enum BardSong : byte {
+    [Flags]
+    public enum SongFlags : byte {
         None = 0,
-        MagesBallad = 5,
-        ArmysPaeon = 10,
-        WanderersMinuet = 15
+        MagesBallad = 1 << 0,
+        ArmysPaeon = 1 << 1,
+        WanderersMinuet = MagesBallad | ArmysPaeon,
+        MagesBalladLastPlayed =  1 << 2,
+        ArmysPaeonLastPlayed = 1 << 3,
+        WanderersMinuetLastPlayed = MagesBalladLastPlayed | ArmysPaeonLastPlayed,
+        MagesBalladCoda = 1 << 4,
+        ArmysPaeonCoda = 1 << 5,
+        WanderersMinuetCoda = 1 << 6,
     }
 
     [Flags]
