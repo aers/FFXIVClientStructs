@@ -29,8 +29,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
         // there are 16 more strings here with 0x20 bytes between them
         // might be an array of structs that have Utf8String + other things
 
-        // these still exist but they are part of a different class that's at AddonTalk+E20
-        //[FieldOffset(0xE40)] public AddonTalk* thisE40;
-        //[FieldOffset(0xE48)] public AtkStage* AtkStage;
+        [FieldOffset(0xE18)] public AtkEventTarget AtkEventTarget;
+        [FieldOffset(0xE20)] public AtkEventListenerUnk1 AtkEventListenerUnk;
     }
 }

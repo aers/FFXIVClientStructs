@@ -1343,6 +1343,10 @@ classes:
   Component::GUI::AtkEventTarget:
     vtbls:
       - ea: 0x14175AAB8
+  Component::GUI::AtkEventListenerUnk: # Used in AddonTalk
+    vtbls:
+      - ea: 0x14175AAC0
+        base: Component::GUI::AtkEventListener
   Component::GUI::AtkSimpleTween:
     vtbls:
       - ea: 0x141758358
