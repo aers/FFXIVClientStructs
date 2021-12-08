@@ -27,6 +27,13 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Gauge {
         Pirouette = 4
     }
 
+    [Flags]
+    public enum EnochianFlags : byte {
+        None = 0,
+        Enochian = 1,
+        Paradox = 2,
+    }
+
     public enum KaeshiAction : byte {
         Higanbana = 1,
         Goken = 2,

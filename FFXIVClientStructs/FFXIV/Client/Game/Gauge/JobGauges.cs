@@ -54,12 +54,12 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Gauge {
         [FieldOffset(0x0C)] public sbyte ElementStance;
         [FieldOffset(0x0D)] public byte UmbralHearts;
         [FieldOffset(0x0E)] public byte PolyglotStacks;
-        [FieldOffset(0x0F)] public byte Enochian;
+        [FieldOffset(0x0F)] public EnochianFlags EnochianFlags;
 
         public int UmbralStacks => ElementStance >= 0 ? 0 : ElementStance * -1;
         public int AstralStacks => ElementStance <= 0 ? 0 : ElementStance;
-        public bool EnochianActive => Enochian == 1 || Enochian == 3;
-        public bool ParadoxActive => Enochian > 1;
+        public bool EnochianActive => EnochianFlags.HasFlag(EnochianFlags.Enochian);
+        public bool ParadoxActive => EnochianFlags.HasFlag(EnochianFlags.Paradox);
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
@@ -70,8 +70,6 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Gauge {
         [FieldOffset(0xD)] public byte ReturnSummonGlam;  // PetMirage sheet
         [FieldOffset(0xE)] public byte Attunement;  // Count of "Attunement cost" resource
         [FieldOffset(0xF)] public AetherFlags AetherFlags; // bitfield
-
-        public AetherFlags Flags => AetherFlags;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x50)]
