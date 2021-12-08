@@ -194,6 +194,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent
         // Max,
         WeatherReport = 157,
         GoldSaucerMiniGame = 164,
+        TrippleTriad = 165,
         LotteryDaily = 173,
         LotteryWeekly = 175,
         GoldSaucer = 176,
