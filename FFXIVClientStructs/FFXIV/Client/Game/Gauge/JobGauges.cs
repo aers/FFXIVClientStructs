@@ -145,6 +145,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Gauge {
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct ReaperGauge {
         [FieldOffset(0x08)] public byte Soul;
+        [FieldOffset(0x09)] public byte Shroud;
+        [FieldOffset(0x0A)] public ushort EnshroudedTimeRemaining;
+        [FieldOffset(0x0C)] public byte VoidShroud;
     }
 
     #endregion
