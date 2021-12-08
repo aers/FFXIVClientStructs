@@ -58,8 +58,8 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Gauge {
 
         public int UmbralStacks => ElementStance >= 0 ? 0 : ElementStance * -1;
         public int AstralStacks => ElementStance <= 0 ? 0 : ElementStance;
-        public bool EnochianActive => Enochian != 0;
-        public bool ParadoxActive => Enochian == 3;
+        public bool EnochianActive => Enochian == 1 || Enochian == 3;
+        public bool ParadoxActive => Enochian > 1;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
