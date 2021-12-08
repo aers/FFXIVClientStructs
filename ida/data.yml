@@ -2891,6 +2891,10 @@ classes:
     funcs:
 #fail       0x140EA9340: ctor
 #fail       0x140EAA860: GenerateTooltip
+  Client::UI::AddonCharacterInspect:
+    vtbls:
+      - ea: 0x141887988
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonSalvageDialog:
     vtbls:
       - ea: 0x14188B268
