@@ -558,7 +558,6 @@ classes:
         base: Client::UI::Info::InfoProxyInterface
     funcs:
       0x1400E9F10: ctor
-#fail       0x1400E8E60: dtor
       0x1400E9FF0: GetPtr  # Static
   Client::Graphics::Kernel::Notifier:
     vtbls:
@@ -2693,7 +2692,7 @@ classes:
       - ea: 0x141846FD8
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x140CE4F90: ctor
+      0x140CBB850: ctor
   Client::UI::AddonContextMenu:
     vtbls:
       - ea: 0x1418478B8
@@ -2731,7 +2730,7 @@ classes:
       - ea: 0x141849BD8
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x140CF09B0: ctor
+      0x140CC7270: ctor
   Client::UI::AddonSocial:
     vtbls:
       - ea: 0x141856268
@@ -2753,8 +2752,8 @@ classes:
       - ea: 0x14184D670
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x140D129D0: ctor
-#fail       0x140D136D0: UpdateResult
+      0x140CEC6B0: ctor
+      0x140CED3B0: UpdateResult
   Client::UI::AddonConfigSystem:
     vtbls:
       - ea: 0x141859E20
@@ -2800,9 +2799,9 @@ classes:
       - ea: 0x141878D08
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x140E2DEC0: ReceiveEvent_ClickSynthesizeButton
-#fail       0x140E2DF10: ReceiveEvent_ClickQuickSynthesisButton
-#fail       0x140E2DF60: ReceiveEvent_ClickTrialSynthesisButton
+      0x140E0B840: ReceiveEvent_ClickSynthesizeButton
+      0x140E0B890: ReceiveEvent_ClickQuickSynthesisButton
+      0x140E0B8E0: ReceiveEvent_ClickTrialSynthesisButton
   Client::UI::Atk2DAreaMap:
     vtbls:
       - ea: 0x1418795D0
@@ -2836,7 +2835,7 @@ classes:
       - ea: 0x14187D208
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x140E5D7C0: ctor
+      0x140E3B470: ctor
   Client::UI::AddonMateriaAttach:
     vtbls:
       - ea: 0x14188FAD0
@@ -2858,7 +2857,7 @@ classes:
       - ea: 0x141892640
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x140E67440: ctor
+      0x140EF4FA0: ctor
   Client::UI::AddonGrandCompanySupplyReward:
     vtbls:
       - ea: 0x141897830
@@ -2868,7 +2867,7 @@ classes:
       - ea: 0x141884AB8
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x140E94DC0: ctor
+      0x140E73150: ctor
   Client::UI::AddonChatLogPanel:
     vtbls:
       - ea: 0x1418857A8
@@ -2882,15 +2881,15 @@ classes:
       - ea: 0x141886310
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x140EA8560: ctor
-#fail       0x140EA8CF0: GenerateTooltip
+      0x140E872C0: ctor
+      0x140E87A50: GenerateTooltip
   Client::UI::AddonItemDetail:
     vtbls:
       - ea: 0x1418867A8
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x140EA9340: ctor
-#fail       0x140EAA860: GenerateTooltip
+      0x140E880A0: ctor
+      0x140E895C0: GenerateTooltip
   Client::UI::AddonCharacterInspect:
     vtbls:
       - ea: 0x141887988
@@ -2900,45 +2899,45 @@ classes:
       - ea: 0x14188B268
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x140ECCA10: ctor
+      0x140EAB790: ctor
   Client::UI::AddonAreaMap:
     vtbls:
       - ea: 0x14188CC48
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x140ED6AD0: ctor
+      0x140EB5860: ctor
   Client::UI::AddonScreenText:
     vtbls:
       - ea: 0x1418B2E18
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x140EE0830: ctor
+      0x140FD6480: ctor
   Client::UI::AddonPopUpText:
     vtbls:
       - ea: 0x14188D2E0
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x140EE0D20: ctor
+      0x140EBFA90: ctor
   Client::UI::AddonFlyText:
     vtbls:
       - ea: 0x14188D508
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x140EE3110: ctor
+      0x140EC1E90: ctor
   Client::UI::AddonMiniTalk:
     vtbls:
       - ea: 0x14188D730
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x140EE5AF0: ctor
+      0x140EC48C0: ctor
   Client::UI::AddonGathering:
     vtbls:
       - ea: 0x14188E090
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x140EE8DF0: ctor
+      0x140EC7BC0: ctor
       0x140F884F0: ReceiveEvent_ToggleQuickGathering
-#fail       0x140EE95F0: ReceiveEvent_Gather
+      0x140EC83C0: ReceiveEvent_Gather
   Client::UI::AddonGatheringMasterpiece:
     vtbls:
       - ea: 0x14188E2B8
@@ -2952,10 +2951,10 @@ classes:
       - ea: 0x14188EB78
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x140EF1760: ctor
-#fail       0x140EF1A10: SetCommonNamePlate  # x, y, scale, etc
-#fail       0x140EF1C40: SetPlayerNamePlate # player specific nodes
-#fail       0x140EF4610: ToggleTextRenderMode
+      0x140ED0CA0: ctor
+      0x140ED0F80: SetCommonNamePlate  # x, y, scale, etc
+      0x140ED11B0: SetPlayerNamePlate # player specific nodes
+      0x140ED3B80: ToggleTextRenderMode
   Client::UI::AddonTeleport:
     vtbls:
       - ea: 0x141893388
@@ -2965,7 +2964,7 @@ classes:
       - ea: 0x14189DF08
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x140F5D580: ctor
+      0x140F41480: ctor
   Client::UI::AddonItemInspectionList:
     vtbls:
       - ea: 0x1418A08C0
@@ -3038,7 +3037,7 @@ classes:
       - ea: 0x1418AF370
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x140FE0EF0: ctor
+      0x140FC9640: ctor
   Client::UI::AddonBattleTalk:
     vtbls:
       - ea: 0x1418AF7C0
@@ -3110,7 +3109,7 @@ classes:
       - ea: 0x1418BB0C0
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x14100BA20: ResizeForPartySize
+      0x140FF4C30: ResizeForPartySize
   Client::UI::AddonAllianceListX:
     vtbls:
       - ea: 0x1418BB2F0
@@ -3156,17 +3155,17 @@ classes:
       - ea: 0x1418C3560
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x14103D870: ctor
+      0x14102FA20: ctor
   Client::UI::AddonHudLayoutScreen:
     vtbls:
       - ea: 0x1418C3788
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x14103EB00: ctor
-#fail       0x141043770: AddonOverlayMouseMovedEvent
-#fail       0x1410439A0: AddonOverlayMouseClickEvent
-#fail       0x141043DA0: AddonOverlayMouseReleaseEvent
-#fail       0x141045A50: _SetAddonScale
+      0x141030CB0: ctor
+      0x141035920: AddonOverlayMouseMovedEvent
+      0x141035B50: AddonOverlayMouseClickEvent
+      0x141035F50: AddonOverlayMouseReleaseEvent
+      0x141037C00: _SetAddonScale
   Client::Game::Fate::FateDirector:
     vtbls:
       - ea: 0x1418D8BA8
@@ -3396,14 +3395,6 @@ classes:
     vtbls:
       - ea: 0x141A6F350
         base: SQEX::CDev::Engine::Sd::Driver::BankController
-#  SQEX::CDev::Engine::Sd::Whiz::IWhizManager: commenting these 2 out for now, think they got removed or replaced
-#    vtbls:
-#fail       - ea: 0x1419B7F50
-#        base: SQEX::CDev::Engine::Sd::SdMemoryAllocator
-#  SQEX::CDev::Engine::Sd::Whiz::WhizManager:
-#    vtbls:
-#fail       - ea: 0x1419B7FA0
-#        base: SQEX::CDev::Engine::Sd::Whiz::IWhizManager
   Client::System::Memory::IMemorySpace:
     instances:
       - ea: 0x141E53D30
