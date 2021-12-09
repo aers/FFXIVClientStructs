@@ -1,7 +1,9 @@
 using System;
 
-namespace FFXIVClientStructs.FFXIV.Client.Game.Gauge {
-    public enum AstrologianCard {
+namespace FFXIVClientStructs.FFXIV.Client.Game.Gauge
+{
+    public enum AstrologianCard
+    {
         None = 0,
         Balance = 1,
         Bole = 2,
@@ -13,13 +15,15 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Gauge {
         Lady = 0x80
     }
 
-    public enum AstrologianSeal {
+    public enum AstrologianSeal
+    {
         Solar = 1,
         Lunar = 2,
         Celestial = 3
     }
 
-    public enum DanceStep : byte {
+    public enum DanceStep : byte
+    {
         Finish = 0,
         Emboite = 1,
         Entrechat = 2,
@@ -28,13 +32,15 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Gauge {
     }
 
     [Flags]
-    public enum EnochianFlags : byte {
+    public enum EnochianFlags : byte
+    {
         None = 0,
         Enochian = 1,
         Paradox = 2,
     }
 
-    public enum KaeshiAction : byte {
+    public enum KaeshiAction : byte
+    {
         Higanbana = 1,
         Goken = 2,
         Setsugekka = 3,
@@ -42,7 +48,8 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Gauge {
     }
 
     [Flags]
-    public enum SenFlags : byte {
+    public enum SenFlags : byte
+    {
         None = 0,
         Setsu = 1 << 0,
         Getsu = 1 << 1,
@@ -50,12 +57,13 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Gauge {
     }
 
     [Flags]
-    public enum SongFlags : byte {
+    public enum SongFlags : byte
+    {
         None = 0,
         MagesBallad = 1 << 0,
         ArmysPaeon = 1 << 1,
         WanderersMinuet = MagesBallad | ArmysPaeon,
-        MagesBalladLastPlayed =  1 << 2,
+        MagesBalladLastPlayed = 1 << 2,
         ArmysPaeonLastPlayed = 1 << 3,
         WanderersMinuetLastPlayed = MagesBalladLastPlayed | ArmysPaeonLastPlayed,
         MagesBalladCoda = 1 << 4,
@@ -64,7 +72,8 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Gauge {
     }
 
     [Flags]
-    public enum AetherFlags : byte {
+    public enum AetherFlags : byte
+    {
         None = 0,
         Aetherflow1 = 1 << 0,
         Aetherflow2 = 1 << 1,
@@ -76,5 +85,20 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Gauge {
         IfritReady = 1 << 5,
         TitanReady = 1 << 6,
         GarudaReady = 1 << 7,
+    }
+
+    public enum ChakraType : byte
+    {
+        None = 0,
+        Coeurl = 1,
+        Raptor = 2,
+        OpoOpo = 3,
+    }
+
+    [Flags]
+    public enum NadiFlags : byte
+    {
+        Lunar = 2,
+        Solar = 4,
     }
 }
