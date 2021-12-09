@@ -130,14 +130,14 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Gauge
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct MonkGauge
     {
-        // [FieldOffset(0x08)] public byte Chakra;            // Appears unused, pre-6.0 Chakra value
-        [FieldOffset(0x09)] public ChakraType BeastChakra1;   // CoeurlChakra = 1, RaptorChakra = 2, OpoopoChakra = 3 (only one value)
-        [FieldOffset(0x0A)] public ChakraType BeastChakra2;   // CoeurlChakra = 1, RaptorChakra = 2, OpoopoChakra = 3 (only one value)
-        [FieldOffset(0x0B)] public ChakraType BeastChakra3;   // CoeurlChakra = 1, RaptorChakra = 2, OpoopoChakra = 3 (only one value)
-        [FieldOffset(0x0C)] public NadiFlags Nadi;            // LunarNadi = 2, SolarNadi = 4 (If both then 2+4=6)
-        [FieldOffset(0x0E)] public ushort BlitzTimeRemaining; // 20 seconds
+        [FieldOffset(0x08)] public byte Chakra;                  // Chakra count
+        [FieldOffset(0x09)] public BeastChakraType BeastChakra1; // CoeurlChakra = 1, RaptorChakra = 2, OpoopoChakra = 3 (only one value)
+        [FieldOffset(0x0A)] public BeastChakraType BeastChakra2; // CoeurlChakra = 1, RaptorChakra = 2, OpoopoChakra = 3 (only one value)
+        [FieldOffset(0x0B)] public BeastChakraType BeastChakra3; // CoeurlChakra = 1, RaptorChakra = 2, OpoopoChakra = 3 (only one value)
+        [FieldOffset(0x0C)] public NadiFlags Nadi;               // LunarNadi = 2, SolarNadi = 4 (If both then 2+4=6)
+        [FieldOffset(0x0E)] public ushort BlitzTimeRemaining;    // 20 seconds
 
-        public ChakraType[] CurrentChakra => new[] { BeastChakra1, BeastChakra2, BeastChakra3 };
+        public BeastChakraType[] BeastChakra => new[] { BeastChakra1, BeastChakra2, BeastChakra3 };
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]

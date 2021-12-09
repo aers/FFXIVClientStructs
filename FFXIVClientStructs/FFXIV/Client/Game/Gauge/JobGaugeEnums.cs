@@ -87,7 +87,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Gauge
         GarudaReady = 1 << 7,
     }
 
-    public enum ChakraType : byte
+    public enum BeastChakraType : byte
     {
         None = 0,
         Coeurl = 1,
