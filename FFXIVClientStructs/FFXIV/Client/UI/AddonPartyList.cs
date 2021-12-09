@@ -9,34 +9,37 @@ namespace FFXIVClientStructs.FFXIV.Client.UI {
     public unsafe struct AddonPartyList {
         [FieldOffset(0x000)] public AtkUnitBase AtkUnitBase;
         [FieldOffset(0x220)] public PartyMembers PartyMember; // 8 PartyListMember
-        [FieldOffset(0xA20)] public TrustMembers TrustMember; // 3 PartyListMember
-        [FieldOffset(0xD20)] public PartyListMemberStruct Chocobo;
-        [FieldOffset(0xE20)] public PartyListMemberStruct Pet;
-        
-        [FieldOffset(0xF20)] public fixed uint PartyClassJobIconId[8];
-        [FieldOffset(0xF40)] public fixed uint TrustClassJobIconId[3];
-        [FieldOffset(0xF4C)] public uint ChocoboIconId;
-        [FieldOffset(0xF50)] public uint PetIconId;
+        [FieldOffset(0xA20)] public TrustMembers TrustMember; // 7 PartyListMember
+        [FieldOffset(0x1120)] public PartyListMemberStruct Chocobo;
+        [FieldOffset(0x1220)] public PartyListMemberStruct Pet;
 
-        [FieldOffset(0xF8A)] public fixed short Edited[12]; //0X11 if edited? Need comfirm
+        [FieldOffset(0x1320)] public fixed uint PartyClassJobIconId[8];
+        [FieldOffset(0x1340)] public fixed uint TrustClassJobIconId[7];
+        [FieldOffset(0x135C)] public uint ChocoboIconId;
+        [FieldOffset(0x1360)] public uint PetIconId;
 
-        [FieldOffset(0xFA8)] public AtkNineGridNode* BackgroundNineGridNode; 
-        [FieldOffset(0xFB0)] public AtkTextNode* PartyTypeTextNode; //Solo Light/Full Party
-        [FieldOffset(0xFB8)] public AtkResNode* LeaderMarkResNode; 
-        [FieldOffset(0xFC0)] public AtkResNode* MpBarSpecialResNode; 
-        [FieldOffset(0xFC8)] public AtkTextNode* MpBarSpecialTextNode; 
-        [FieldOffset(0xFD0)] public int MemberCount;
-        [FieldOffset(0xFD4)] public int TrustCount;
-        [FieldOffset(0xFD8)] public int EnmityLeaderIndex; //Starts from 0 ,if no leader : -1
-        [FieldOffset(0xFDC)] public int HideWhenSolo;
+        [FieldOffset(0x13A8)] public fixed short Edited[17]; // 0X11 if edited? Need comfirm
+
+        [FieldOffset(0x13D0)] public AtkNineGridNode* BackgroundNineGridNode;
+        [FieldOffset(0x13D8)] public AtkTextNode* PartyTypeTextNode; // Solo Light/Full Party
+        [FieldOffset(0x13E0)] public AtkResNode* LeaderMarkResNode;
+        [FieldOffset(0x13E8)] public AtkResNode* MpBarSpecialResNode;
+        [FieldOffset(0x13F0)] public AtkTextNode* MpBarSpecialTextNode;
         
-        [FieldOffset(0xFE0)] public int HoveredIndex;
-        [FieldOffset(0xFE4)] public int TargetedIndex;
-        [FieldOffset(0xFEC)] public int UnknownFEC;
-        [FieldOffset(0xFE8)] public int UnknownFE8;
-        [FieldOffset(0xFF0)] public byte UnknownFF0;
-        [FieldOffset(0xFF1)] public byte PetCount; //or PetSummoned?
-        [FieldOffset(0xFF2)] public byte ChocoboCount;//or ChocoboSummoned?
+        [FieldOffset(0x13F8)] public int MemberCount;
+        [FieldOffset(0x13FC)] public int TrustCount;
+        [FieldOffset(0x1400)] public int EnmityLeaderIndex; // Starts from 0 (-1 if no leader)
+        [FieldOffset(0x1404)] public int HideWhenSolo;
+
+        [FieldOffset(0x1408)] public int HoveredIndex;
+        [FieldOffset(0x140C)] public int TargetedIndex;
+
+        [FieldOffset(0x1410)] public int Unknown1410;
+        [FieldOffset(0x1414)] public int Unknown1414;
+        [FieldOffset(0x1418)] public byte Unknown1418;
+
+        [FieldOffset(0x1419)] public byte PetCount; // or PetSummoned?
+        [FieldOffset(0x141A)] public byte ChocoboCount; // or ChocoboSummoned?
 
         [StructLayout(LayoutKind.Explicit, Size = PartyListMemberStruct.Size * 8)]
         public struct PartyMembers {
@@ -66,18 +69,27 @@ namespace FFXIVClientStructs.FFXIV.Client.UI {
             }
         }
 
-        [StructLayout(LayoutKind.Explicit, Size = PartyListMemberStruct.Size * 3)]
+        [StructLayout(LayoutKind.Explicit, Size = PartyListMemberStruct.Size * 7)]
         public struct TrustMembers {
             [FieldOffset(PartyListMemberStruct.Size * 00)] public PartyListMemberStruct Trust0;
             [FieldOffset(PartyListMemberStruct.Size * 01)] public PartyListMemberStruct Trust1;
-            [FieldOffset(PartyListMemberStruct.Size * 02)] public PartyListMemberStruct Trust2;
+            [FieldOffset(PartyListMemberStruct.Size * 03)] public PartyListMemberStruct Trust2;
+            [FieldOffset(PartyListMemberStruct.Size * 04)] public PartyListMemberStruct Trust3;
+            [FieldOffset(PartyListMemberStruct.Size * 05)] public PartyListMemberStruct Trust4;
+            [FieldOffset(PartyListMemberStruct.Size * 06)] public PartyListMemberStruct Trust5;
+            [FieldOffset(PartyListMemberStruct.Size * 07)] public PartyListMemberStruct Trust6;
+
             public PartyListMemberStruct this[int i] {
                 get {
                     return i switch {
                         0 => Trust0,
                         1 => Trust1,
                         2 => Trust2,
-                        _ => throw new IndexOutOfRangeException("Index should be in range of 0-2")
+                        3 => Trust3,
+                        4 => Trust4,
+                        5 => Trust5,
+                        6 => Trust6,
+                        _ => throw new IndexOutOfRangeException("Index should be in range of 0-6")
                     };
                 }
             }
