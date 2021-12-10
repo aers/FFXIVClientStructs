@@ -16,13 +16,13 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
         [FieldOffset(0x10)] public UIModule* UiModule;
         [FieldOffset(0x20)] public uint AddonId;
 
-        [VirtualFunction(2)]
+        [VirtualFunction(3)]
         public partial void Show();
 
-        [VirtualFunction(3)]
+        [VirtualFunction(4)]
         public partial void Hide();
 
-        [VirtualFunction(4)]
+        [VirtualFunction(5)]
         public partial bool IsAgentActive();
 
         [VirtualFunction(7)]
