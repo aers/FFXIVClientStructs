@@ -11,7 +11,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent
     //     Component::GUI::AtkModuleInterface::AtkEventInterface
 
     // size = 0x4600
-    // ctor E8 ? ? ? ? EB 03 49 8B C4 45 33 C9 48 89 46 40 
+    // ctor E8 ? ? ? ? EB 03 49 8B C4 45 33 C9 48 89 46 40
+    [Agent(AgentId.Hud)]
     [StructLayout(LayoutKind.Explicit, Size = 0x4600)]
     public unsafe partial struct AgentHUD
     {

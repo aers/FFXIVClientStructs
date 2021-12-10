@@ -1,8 +1,10 @@
 ﻿using System.Runtime.InteropServices;
+using FFXIVClientStructs.Attributes;
 using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent {
+    [Agent(AgentId.Lobby)]
     [StructLayout(LayoutKind.Explicit, Size = 0xA90)]
     public unsafe struct AgentLobby {
 
