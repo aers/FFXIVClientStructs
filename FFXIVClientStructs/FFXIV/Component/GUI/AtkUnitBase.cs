@@ -71,7 +71,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
         [VirtualFunction(7)]
         public partial void SetPosition(short x, short y);
 
-        [VirtualFunction(46)]
+        [VirtualFunction(48)]
         public partial void OnUpdate(NumberArrayData** numberArrayData, StringArrayData** stringArrayData);
     }
 }
