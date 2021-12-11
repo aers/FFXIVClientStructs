@@ -227,6 +227,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent
         PvpTeam = 279,
         TeleportHousingFriend = 287,
         InventoryBuddy = 289,
+        ContentsReplayPlayer = 290,
         ContentsReplaySetting = 291,
         MiragePrismPrismBox = 292, //Glamour Dresser
         MiragePrismPrismItemDetail = 293,
