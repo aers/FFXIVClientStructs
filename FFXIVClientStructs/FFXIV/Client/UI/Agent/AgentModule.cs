@@ -84,7 +84,6 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent
         TelepotTown = 50, // Aethernet
         ContentsFinder = 51,
         ContentsFinderSetting = 52,
-
         Social = 53,
         SocialBlacklist = 54,
         SocialFriendList = 55,
@@ -93,11 +92,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent
         // PartyInvite,
         SocialSearch = 59,
         SocialDetail = 60,
-
         LetterList = 61,
         LetterView = 62,
         LetterEdit = 63,
-
         ItemDetail = 64,
         ActionDetail = 65,
         Retainer = 66,
@@ -111,7 +108,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent
         // Catch,
         FreeCompany = 75,
         // FreeCompanyOrganizeSheet,
-        FreeCompanyProfile = 76,
+        FreeCompanyProfile = 77,
         // FreeCompanyProfileEdit,
         // FreeCompanyInvite,
         FreeCompanyInputString = 80,
@@ -124,18 +121,14 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent
         HowtoList = 87,
         Cabinet = 88,
         // LegacyItemStorage,
-        
         GrandCompanyRank = 90,
         GrandCompanySupply = 91,
         GrandCompanyExchange = 92,
-
         Gearset = 93,
-        
         SupportMain = 94,
         SupportList = 95,
         SupportView = 96,
         SupportEdit = 97,
-
         Achievement = 98,
         // CrossEditor,
         LicenseViewer = 100,
@@ -165,18 +158,16 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent
         // Salvage,
         LookingForGroup = 125,
         ContentsMvp = 126,
-        // VoteKick,
-        // VoteGiveup,
-        // VoteTreasure,
+        VoteKick = 127,
+        VoteGiveUp = 128,
+        VoteTreasure = 129,
         PvpProfile = 130,
         ContentsNote = 131,
         // ReadyCheck,
         FieldMarker = 133,
         CursorLocation = 135,
-
         RetainerStatus = 136,
         RetainerTask = 137,
-
         RelicNotebook = 139,
         // RelicSphere,
         // TradeMultiple,
@@ -214,12 +205,19 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent
         WebGuidance = 212,
         Orchestrion = 213,
         OrchestrionInn = 218,
+        ContentsFinderMenu = 223,
         RaidFinder = 224,
         GcArmyExpedition = 225,
         GcArmyMemberList = 226,
+        DeepDungeonMap = 229,
+        DeepDungeonStatus = 230,
+        DeepDungeonSaveData = 231,
+        DeepDungeonScore = 232,
         GcArmyMenberProfile = 234,
         CountDownSettingDialog = 240,
         WeeklyBingo = 241, //Wondrous Tails
+        DeepDungeonMenu = 251,
+        ItemAppraisal = 254, //DeepDungeon Appraisal
         ContactList = 257,
         MountSpeed = 263,
         PvpTeam = 279,
@@ -232,6 +230,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent
         CrossWorldLinkShell = 306,
         AozNotebook = 313, //Bluemage Spells
         Emj = 316,
+        WorldTravel = 321,
         EmjSetting = 325,
         RetainerList = 326,
         Dawn = 331, //Trust
