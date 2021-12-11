@@ -2693,6 +2693,10 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x140CBB850: ctor
+  Client::UI::AddonSelectOk:
+    vtbls:
+      - ea: 0x141847668
+        base: Component::GUI::AtkUnitBase      
   Client::UI::AddonContextMenu:
     vtbls:
       - ea: 0x1418478B8
