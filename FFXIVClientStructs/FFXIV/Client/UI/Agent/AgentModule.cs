@@ -71,7 +71,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent
         // NPCTrade,
         Status = 37,
         Map = 38,
-        // Loot,
+        Loot = 39, //NeedGreed
         Repair = 40,
         // Materialize,
         // MateriaAttach,
@@ -200,6 +200,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent
         LovmResult = 201,
         LovmPaletteEdit = 202,
         BeginnersMansionProblem = 208, //Hall of the Novice
+        DpsChallenge = 209, //Stone, Sky, Sea
         PlayGuide = 210,
         WebLauncher = 211,
         WebGuidance = 212,
@@ -225,6 +226,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent
         InventoryBuddy = 289,
         ContentsReplaySetting = 291,
         MiragePrismPrismBox = 292, //Glamour Dresser
+        MiragePrismPrismItemDetail = 293,
         MiragePrismMiragePlate = 294, //Glamour Plates
         Fashion = 298,
         CrossWorldLinkShell = 306,
