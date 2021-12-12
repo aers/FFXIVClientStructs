@@ -1823,6 +1823,7 @@ classes:
       23: GetFlagStatusModule
       29: GetRaptureTeleportHistory
       34: GetAgentModule
+      35: GetInputTimerModule
       36: GetUI3DModule
       53: GetUIInputData
       54: GetUIInputModule
