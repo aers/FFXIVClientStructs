@@ -17,6 +17,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent {
         public static AgentRetainerList* Instance() => (AgentRetainerList*) Framework.Instance()->GetUiModule()->GetAgentModule()->GetAgentByInternalId(AgentId.RetainerList);
 
         [FieldOffset(0x0)] public AgentInterface AgentInterface;
+        [FieldOffset(0x30)] public uint RetainerListOpenedTime;
         [FieldOffset(0x34)] public uint RetainerListSortAddonId;
         [FieldOffset(0x48)] public byte RetainerCount;
         [FieldOffset(0x50)] public RetainerList Retainers;

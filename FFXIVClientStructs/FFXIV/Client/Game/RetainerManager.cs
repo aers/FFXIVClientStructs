@@ -14,6 +14,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Game {
         [FieldOffset(0x2DB)] public byte Ready;
         [FieldOffset(0x2DC)] public byte RetainerCount;
 
+        [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 74 05 4C 39 20")]
+        public partial RetainerList.Retainer* GetRetainerBySortedIndex(uint sortedIndex);
+
         [StructLayout(LayoutKind.Explicit, Size = 0x2D0)]
         public struct RetainerList {
             [FieldOffset(0x00)] private fixed byte Retainers[0x2D0];
