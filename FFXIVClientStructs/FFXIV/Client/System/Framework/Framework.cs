@@ -31,5 +31,8 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Framework
 
         [MemberFunction("E8 ?? ?? ?? ?? 80 7B 1D 01")]
         public partial UIModule* GetUiModule();
+
+        [MemberFunction("E8 ?? ?? ?? ?? 03 07", IsStatic = true)]
+        public static partial long GetServerTime();
     }
 }
