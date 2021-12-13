@@ -222,6 +222,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent
         WeeklyBingo = 241, //Wondrous Tails
         DeepDungeonMenu = 251,
         ItemAppraisal = 254, //DeepDungeon Appraisal
+        ItemInspection = 255, //Lockbox
         ContactList = 257,
         MountSpeed = 263,
         PvpTeam = 279,
@@ -247,6 +248,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent
         CircleList = 338, //Fellowships
         CircleBook = 339,
         McGuffin = 359, //Collection
+        MycInfo = 368, //Bozja Info
+        MycBattleAreaInfo = 372, //Bozja Recruitment
         OrnamentNoteBook = 374, //Accessories
     }
 }
