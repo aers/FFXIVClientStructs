@@ -21,8 +21,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character
 
         [FieldOffset(0x1BC0)] public CastInfo SpellCastInfo;
 
-        [FieldOffset(0x2C30)] public byte EurekaLevel;
-        [FieldOffset(0x2C31)] public EurekaElement EurekaElement;
+        //[FieldOffset(0x1D30)] public fixed byte UnkBattleCharaStruct[0xF00];
+
+        [FieldOffset(0x2C30)] public ForayInfo Foray;
 
         [VirtualFunction(80)]
         public partial StatusManager* GetStatusManager();
@@ -30,7 +31,10 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character
         [VirtualFunction(82)]
         public partial CastInfo* GetCastInfo();
 
-        [StructLayout(LayoutKind.Explicit, Size = 0x40)]
+        [VirtualFunction(86)]
+        public partial ForayInfo* GetForayInfo();
+
+        [StructLayout(LayoutKind.Explicit, Size = 0x170)]
         public struct CastInfo
         {
             [FieldOffset(0x00)] public byte IsCasting;
@@ -43,9 +47,27 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character
             [FieldOffset(0x30)] public uint Unk_30;
             [FieldOffset(0x34)] public float CurrentCastTime;
             [FieldOffset(0x38)] public float TotalCastTime;
+
+            [FieldOffset(0x40)] public uint UsedActionId;
+            [FieldOffset(0x44)] public ActionType UsedActionType;
+            //[FieldOffset(0x4C)] public uint TotalActionCounter?;
+            //[FieldOffset(0x50)] public uint OwnActionCounter?;
+
+            [FieldOffset(0x58)] public fixed long ActionRecipientsObjectIdArray[32];
+            [FieldOffset(0x158)] public int ActionRecipientsCount;
+        }
+        
+        [StructLayout(LayoutKind.Explicit, Size = 2)]
+        public struct ForayInfo {
+            //bozja
+            [FieldOffset(0x00)] public byte ResistanceRank;
+
+            //eureka
+            [FieldOffset(0x00)] public byte ElementalLevel;
+            [FieldOffset(0x01)] public EurekaElement Element; //only on enemies
         }
     }
-        
+    
     public enum EurekaElement : byte {
       None = 0,
       Fire = 1,
