@@ -1951,11 +1951,13 @@ classes:
       7: GetName
       8: GetRadius
       9: GetHeight
+      12: GetGender
       17: EnableDraw
       18: DisableDraw
       22: SetDrawObject
       28: GetDrawObject
       29: GetDrawObject_2
+      30: UpdateRadius
       41: Update
       49: GetNpcID
       58: IsDead
@@ -1974,10 +1976,14 @@ classes:
       - ea: 0x1417701C8
         base: Client::Graphics::Vfx::VfxDataListenner
     vfuncs:
+      77: GetModelChara
       80: GetStatusManager
       81: GetStatusManager_2
       82: GetCastInfo
       83: GetCastInfo_2
+      86: GetForayInfo
+      87: GetForayInfo_2
+      88: IsMount
     funcs:
       0x1406F2810: dtor
       0x1407548A0: ctor
