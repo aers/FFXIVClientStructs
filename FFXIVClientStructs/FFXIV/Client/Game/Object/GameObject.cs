@@ -93,6 +93,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Object
         AreaObject = 11,
         HousingEventObject = 12,
         Cutscene = 13,
-        CardStand = 14
+        CardStand = 14,
+        Unk_15 = 15
     }
 }
