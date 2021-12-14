@@ -36,6 +36,12 @@ namespace FFXIVClientStructs.FFXIV.Client.Game {
         [MemberFunction("E8 ?? ?? ?? ?? 3C 01 74 45")]
         public partial bool IsRecastTimerActive(ActionType actionType, uint actionID);
 
+        [MemberFunction("E8 ?? ?? ?? ?? 8B D0 48 8B CD 8B F0")]
+        public partial int GetRecastGroup(int type, uint actionID);
+
+        [MemberFunction("E8 ?? ?? ?? ?? 0F 57 FF 48 85 C0")]
+        public partial RecastDetail* GetRecastGroupDetail(int recastGroup);
+
         [MemberFunction("E8 ?? ?? ?? ?? F3 0F 11 43 ?? 80 3B 00", IsStatic = true)]
         public static partial float GetActionRange(uint actionId);
         
@@ -50,6 +56,14 @@ namespace FFXIVClientStructs.FFXIV.Client.Game {
 
         [MemberFunction("E8 ?? ?? ?? ?? 33 DB 8B C8", IsStatic = true)]
         public static partial ushort GetMaxCharges(uint actionId, uint level); // 0 for current level
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x14)]
+    public struct RecastDetail {
+        [FieldOffset(0x0)] public byte IsActive;
+        [FieldOffset(0x4)] public uint ActionID;
+        [FieldOffset(0x8)] public float Elapsed;
+        [FieldOffset(0xC)] public float Total;
     }
 
     public enum ActionType : byte {
