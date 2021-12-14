@@ -91,8 +91,8 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Gauge
     {
         None = 0,
         Coeurl = 1,
-        Raptor = 2,
-        OpoOpo = 3,
+        OpoOpo = 2,
+        Raptor = 3,
     }
 
     [Flags]
