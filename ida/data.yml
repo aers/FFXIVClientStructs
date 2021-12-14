@@ -1975,6 +1975,7 @@ classes:
       62: IsCharacter
       69: OnInitialize
     funcs:
+      0x1406DE630: IsMountOrAccessory
       0x1406DF330: GetPosition
       0x1406DF380: SetPosition
       0x1406E2D20: Initialize
@@ -3265,6 +3266,12 @@ classes:
         base: Client::Game::Character::Character
     funcs:
       0x141140650: ctor
+  Client::Game::Character::Accessory:
+    vtbls:
+      - ea: 0x1418DCA40
+        base: Client::Game::Character::Character
+    funcs:
+      0x141140210: ctor
   Client::Game::CameraBase:
     vtbls:
       - ea: 0x1418DE488
