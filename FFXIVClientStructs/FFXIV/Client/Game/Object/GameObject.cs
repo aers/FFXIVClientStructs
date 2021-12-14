@@ -77,7 +77,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Object
         [VirtualFunction(62)]
         public partial bool IsCharacter();
     }
-  
+
     public enum ObjectKind : byte {
         None = 0,
         Pc = 1,
@@ -94,6 +94,6 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Object
         HousingEventObject = 12,
         Cutscene = 13,
         CardStand = 14,
-        Unk_15 = 15
+        Accessory = 15
     }
 }
