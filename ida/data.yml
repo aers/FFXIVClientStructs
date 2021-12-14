@@ -228,6 +228,16 @@ classes:
   Component::GUI::AtkEvent:
     funcs:
       0x1404C5310: SetEventIsHandled
+  Component::GUI::AtkEventManager:
+    funcs:
+      0x1404C5370: RegisterEvent
+      0x1404C5460: UnregisterEvent
+      0x1404C5630: DispatchEvent
+      0x1404C57A0: Cleanup
+  Component::GUI::AtkEventDispatcher:
+    funcs:
+      0x1404C5A90: DispatchEvent
+      0x1404C5D80: RemoveEvent
   Component::GUI::AtkUldManager:
     funcs:
       0x1404E7530: SetupFromULDResourceHandle
