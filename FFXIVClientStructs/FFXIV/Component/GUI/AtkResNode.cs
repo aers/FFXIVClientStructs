@@ -56,7 +56,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
         [FieldOffset(0x8)] public uint NodeID;
         [FieldOffset(0x10)] public void* TimelineObject; // Component::GUI::AtkTimeline???
 
-        [FieldOffset(0x18)] public void* EventObject; // Component::GUI::AtkEvent???
+        [FieldOffset(0x18)] public AtkEventManager AtkEventManager; // holds events registered to this node
 
         // these are all technically union types with a node ID and a pointer but should be replaced by the loader always
         [FieldOffset(0x20)] public AtkResNode* ParentNode;

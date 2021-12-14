@@ -14,12 +14,12 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
         StateChanged = 25,               // sent by AtkButtonComponent (and others?) when button state changes
     }
     
-    [StructLayout(LayoutKind.Explicit, Size=0x2C)]
+    [StructLayout(LayoutKind.Explicit, Size=0x30)]
     public unsafe partial struct AtkEvent
     {
-        [FieldOffset(0x0)] public AtkResNode* Node;
-        [FieldOffset(0x8)] public AtkEventTarget* Target;
-        [FieldOffset(0x10)] public AtkEventListener* Listener;
+        [FieldOffset(0x0)] public AtkResNode* Node; // extra node param, unused a lot
+        [FieldOffset(0x8)] public AtkEventTarget* Target; // target of event (eg clicking a button, target is the button node)
+        [FieldOffset(0x10)] public AtkEventListener* Listener; // listener of event
         [FieldOffset(0x18)] public uint Param; // arg3 of ReceiveEvent
         [FieldOffset(0x20)] public AtkEvent* NextEvent;
         [FieldOffset(0x28)] public byte Type;
