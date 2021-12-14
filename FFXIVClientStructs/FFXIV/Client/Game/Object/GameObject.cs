@@ -94,6 +94,6 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Object
         HousingEventObject = 12,
         Cutscene = 13,
         CardStand = 14,
-        Accessory = 15
+        Ornament = 15
     }
 }
