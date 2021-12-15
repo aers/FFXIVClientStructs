@@ -77,8 +77,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent
         // MateriaAttach,
         // MiragePrism,
         Colorant = 44,
-        // Howto,
-        // HowtoNotice,
+        Howto = 45,
+        HowtoNotice = 46,
         Inspect = 48,
         Teleport = 49,
         TelepotTown = 50, // Aethernet
