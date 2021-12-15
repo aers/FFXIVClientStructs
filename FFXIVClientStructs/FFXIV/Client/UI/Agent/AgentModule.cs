@@ -142,7 +142,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent
         // CloseMessage,
         // CreditPlayer,
         // CreditScroll,
-        // CreditCast,
+        CreditCast = 112,
         // CreditEnd,
         Shop = 113,
         // Bait,
@@ -209,6 +209,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent
         WebGuidance = 212,
         Orchestrion = 213,
         OrchestrionInn = 218,
+        YkwNote = 222, //yokai watch medallium
         ContentsFinderMenu = 223,
         RaidFinder = 224,
         GcArmyExpedition = 225,
@@ -225,6 +226,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent
         ItemAppraisal = 254, //DeepDungeon Appraisal
         ItemInspection = 255, //Lockbox
         ContactList = 257,
+        Snipe = 262,
         MountSpeed = 263,
         PvpTeam = 279,
         TeleportHousingFriend = 287,
@@ -241,6 +243,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent
         AozNotebook = 313, //Bluemage Spells
         Emj = 316,
         WorldTravel = 321,
+        RideShooting = 322, //Airforce One
+        Credit = 324,
         EmjSetting = 325,
         RetainerList = 326,
         Dawn = 331, //Trust
