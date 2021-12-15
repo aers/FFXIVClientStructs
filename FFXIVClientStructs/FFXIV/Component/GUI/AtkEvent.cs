@@ -2,16 +2,30 @@
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI
 {
-    // there's 70+ of these
+    // max known: 79
+    // seems to have generic events followed by component-specific events
     public enum AtkEventType
     {   
         MouseDown = 3,
         MouseUp = 4,
         MouseMove = 5,
-        MouseOver = 6,                   // used for changing the cursor state when you mouseover stuff
+        MouseOver = 6,                  
         MouseOut = 7,
+        MouseClick = 9,                  
         InputReceived = 12,
-        StateChanged = 25,               // sent by AtkButtonComponent (and others?) when button state changes
+        // AtkComponentButt on & children
+        ButtonPress = 23,                // sent on MouseDown on button
+        ButtonRelease = 24,              // sent on MouseUp and MouseOut
+        ButtonClick = 25,                // sent on MouseUp and MouseClick on button     
+        // AtkComponentDragDrop 
+        DragDropRollOver = 52,
+        DragDropRollOut = 53,
+        DragDropUnk54 = 54,
+        DragDropUnk55 = 55,
+        // AtkComponentIconText
+        IconTextRollOver = 56,           
+        IconTextRollOut = 57,
+        IconTextClick = 58
     }
     
     [StructLayout(LayoutKind.Explicit, Size=0x30)]
