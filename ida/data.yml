@@ -3272,6 +3272,12 @@ classes:
         base: Client::Game::Character::Character
     funcs:
       0x141140210: ctor
+  Client::Game::Character::CutsceneCharacter:
+    vtbls:
+      - ea: 0x1419768A0
+        base: Client::Game::Character::Character
+    funcs:
+      0x14133E3A0: ctor
   Client::Game::CameraBase:
     vtbls:
       - ea: 0x1418DE488
