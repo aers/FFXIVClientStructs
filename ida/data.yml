@@ -1849,6 +1849,11 @@ classes:
       161: ShowGrandCompany1
       164: ShowStreak
       165: ShowAddonKillStreakForManeuvers
+      166: ShowBaloonMessage
+      167: ShowBattleTalk
+      168: ShowBattleTalkImage
+      169: ShowBattleTalkUnknown
+      170: ShowBattleTalkSound
       175: ExecuteMainCommand
     funcs:
       0x1405DA420: ctor
