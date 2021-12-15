@@ -39,6 +39,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent
     public enum AgentId : uint {
         Lobby = 0,
         CharaMake = 1,
+        // MovieStaffList = 2, // this is the addon name, no idea what the agent actually is, shows up when playing the EW cutscene in title
         Cursor = 3,
         Hud = 4,
         ChatLog = 5,
@@ -133,7 +134,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent
         // CrossEditor,
         LicenseViewer = 100,
         ContentsTimer = 101,
-        // MovieSubtitle,
+        MovieSubtitle = 102,
         PadMouseMode = 103,
         RecommendList = 104,
         Buddy = 105,
