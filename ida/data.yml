@@ -1188,6 +1188,10 @@ classes:
       0x14045B6C0: SetupHairModelAttributes
       0x14045BA50: SetupFaceModelAttributes
       0x14045C090: SetupConnectorModelAttributes
+  Client::Graphics::Scene::Weapon:
+    vtbls:
+      - ea: 0x141753A08
+        base: Client::Graphics::Scene::CharacterBase
   Client::Graphics::Scene::ResidentResourceManager::ResourceList:
     vtbls:
       - ea: 0x141754AB0
