@@ -106,7 +106,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent
         ItemSearch = 71, //MarketBoard
         GoldSaucerReward = 72,
         FateProgress = 73, //Shared FATE
-        // Catch,
+        Catch = 74,
         FreeCompany = 75,
         // FreeCompanyOrganizeSheet,
         FreeCompanyProfile = 77,
@@ -145,7 +145,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent
         CreditCast = 112,
         // CreditEnd,
         Shop = 113,
-        // Bait,
+        Bait = 114,
         Housing = 115,
         // HousingHarvest,
         HousingSignboard = 117,
