@@ -103,7 +103,16 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
         
         [VirtualFunction(56)]
         public partial void* GetLogFilterConfig();
-        
+
+        [VirtualFunction(138)]
+        public partial void ShowTextRelicAtma(uint itemId);
+
+        [VirtualFunction(142)]
+        public partial void ShowGoldSaucerReward(byte type, uint mgp, uint rewardItemId, uint rewardItemCount);
+
+        [VirtualFunction(143)]
+        public partial void HideGoldSaucerReward();
+
         [VirtualFunction(149)]
         public partial void ShowImage(uint imageId, bool useLocalePath = false, int displayType = 0, bool playSound = false);
 
@@ -139,7 +148,19 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
 
         [VirtualFunction(165)]
         public partial void ShowAddonKillStreakForManeuvers(int streak, int streakType);
-        
+
+        [VirtualFunction(166)]
+        public partial void ShowBalloonMessage(float* worldPosition, byte pz, uint textImage); //121501 -> Nice Shot!
+
+        [VirtualFunction(168)]
+        public partial void ShowBattleTalk(string name, string text, float duration, byte style);
+
+        [VirtualFunction(169)]
+        public partial void ShowBattleTalkImage(string name, string text, float duration, uint image, byte style);
+
+        [VirtualFunction(170)]
+        public partial void ShowBattleTalkSound(string name, string text, float duration, int sound, byte style);
+
         [VirtualFunction(175)]
         public partial void ExecuteMainCommand(uint command);
 
