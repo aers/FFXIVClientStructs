@@ -1837,6 +1837,12 @@ classes:
       53: GetUIInputData
       54: GetUIInputModule
       56: GetLogFilterConfig
+      132: AnnounceHowTo
+      134: HideHowTo
+      137: HideGoldSaucerReward
+      140: HideGoldSaucerReward_2
+      142: ShowGoldSaucerReward
+      143: HideGoldSaucerReward_3
       149: ShowImage
       150: ShowText
       151: ShowTextChain
