@@ -117,7 +117,6 @@ classes:
   Client::System::Resource::Handle::ResourceHandleFactory:
   Client::UI::Agent::AgentMap::MapMarkerStructSearch:
   Client::UI::Atk2DMap:
-  Client::UI::UIModuleInterface:
   Component::Excel::ExcelLanguageEvent:
   Component::GUI::AtkComponentWindowGrab:
   Component::GUI::AtkDragDropInterface:
@@ -1799,16 +1798,9 @@ classes:
       0x1405D38D0: HandleInputUpdate
       0x1405D4AA0: CheckCastCancel
       0x1405D8140: CheckScreenshotState
-  Client::UI::UIModule:
+  Client::UI::UIModuleInterface:
     vtbls:
-      - ea: 0x141767F18
-        base: Client::UI::UIModuleInterface
-      - ea: 0x1417685A8
-        base: Component::GUI::AtkModuleEvent
-      - ea: 0x1417685B0
-        base: Component::Excel::ExcelLanguageEvent
-      - ea: 0x1417685C0
-        base: Common::Configuration::ConfigBase::ChangeEventInterface
+      - ea: 0x1417676E8
     vfuncs: # todo: check new vfuncs
       0: dtor
       4: Abort
@@ -1861,6 +1853,16 @@ classes:
       169: ShowBattleTalkUnknown
       170: ShowBattleTalkSound
       175: ExecuteMainCommand
+  Client::UI::UIModule:
+    vtbls:
+      - ea: 0x141767F18
+        base: Client::UI::UIModuleInterface
+      - ea: 0x1417685A8
+        base: Component::GUI::AtkModuleEvent
+      - ea: 0x1417685B0
+        base: Component::Excel::ExcelLanguageEvent
+      - ea: 0x1417685C0
+        base: Common::Configuration::ConfigBase::ChangeEventInterface
     funcs:
       0x1405DA420: ctor
       0x1405DB270: Update
