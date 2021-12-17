@@ -2,6 +2,7 @@ using System.Runtime.InteropServices;
 using FFXIVClientStructs.Attributes;
 using FFXIVClientStructs.FFXIV.Client.Game.Event;
 using FFXIVClientStructs.FFXIV.Client.Graphics;
+using FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Object
 {
@@ -43,7 +44,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Object
         [FieldOffset(0xBC)] public float VfxScale;
         [FieldOffset(0xC0)] public float HitboxRadius;
         [FieldOffset(0xE8)] public uint FateId;
-        [FieldOffset(0xF0)] public void* DrawObject;
+        [FieldOffset(0xF0)] public DrawObject* DrawObject;
         [FieldOffset(0x104)] public int RenderFlags;
         [FieldOffset(0x148)] public LuaActor* LuaActor;
         
@@ -66,7 +67,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Object
         public partial float GetHeight();
 
         [VirtualFunction(28)]
-        public partial void* GetDrawObject();
+        public partial DrawObject* GetDrawObject();
 
         [VirtualFunction(49)]
         public partial uint GetNpcID();
