@@ -79,6 +79,7 @@ functions:
   0x14138B0B0: crc
   0x1413E0644: ThrowException
   0x141406F04: FreeMemory
+  0x140055A10: FreeMemory_2 # nullsub, gets called together with some AllocatorManager vfunc
   0x14140EE60: _purecall # Ghidra does not have a notation for pure virtual calls
   0x140060BF0: MemAlloc
   0x1401E4910: MatrixMultiply
