@@ -1,6 +1,7 @@
 version: 2021.11.28.0000.0000
 
 globals:
+  0x1417157D0: g_UIColorTable
   0x1417581B8: g_HUDScaleTable
   0x141E215D0: g_InputManager
   0x141E215F8: g_InputManager_MouseButtonHoldState
@@ -43,6 +44,7 @@ functions:
   0x1400624E0: MemoryManager_GetSoundSpace_2
   0x1400656F0: IsMacClient
   0x1400A5100: Client::UI::PlaySoundEffect # this is a static function in the UI namespace, arg1 is the SE
+  0x1400A6BF0: Client::UI::GetUIColor # (idx, &color, &edgeColor)
   0x14019CCE0: j_SleepEx
   0x1401C0C20: Client::System::Resource::Handle::ModelResourceHandle_GetMaterialFileNameBySlot
   0x1402B5070: CountdownPointer
@@ -1515,6 +1517,7 @@ classes:
       0x1404E15E0: SetMultiplyRGB
       0x1404E1630: GetPriority
       0x1404E1650: SetPriority
+      0x1404E1670: IsVisible
       0x1404E16A0: SetVisibility
       0x1404E1A80: GetIsUsingDepthBasedDrawPriority
       0x1404E1AA0: SetUseDepthBasedDrawPriority
@@ -1602,7 +1605,9 @@ classes:
       0x1404EED10: SetGlobalUIScale
       0x1404EEEB0: SetScale
       0x1404EF220: CalculateBounds
+      0x1404EF960: SetFlag
       0x1404F14A0: Draw
+      0x1404F1DF0: SetFocusNode
       0x1404F2370: GetNodeById
       0x1404F2630: GetTextNodeById
       0x1404F2690: GetImageNodeById
@@ -1780,6 +1785,11 @@ classes:
       - ea: 0x14175A528
         base: Component::GUI::AtkComponentBase
     funcs:
+      0x14053E270: LoadIconByID
+      0x14053E2A0: LoadIcon # this takes a struct arg that includes the icon ID and some params
+      0x14053E4A0: SetText
+      0x14053E4C0: SetTextColor
+      0x14053E4E0: SetTextEdgeColor
       0x14053E660: ctor
   Component::GUI::AtkComponentDragDrop:
     vtbls:
