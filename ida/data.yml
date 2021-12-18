@@ -1091,6 +1091,7 @@ classes:
     vfuncs:
       0: dtor
       1: CleanupRender
+      2: GetObjectType
       4: UpdateRender
   Client::Graphics::Scene::DrawObject:
     vtbls:
