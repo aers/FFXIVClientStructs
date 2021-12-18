@@ -718,6 +718,7 @@ classes:
       4: Hide
       5: IsAgentActive
       6: Update
+      8: GetAddonId
     funcs:
       0x1401F7E50: ctor
   Client::UI::Agent::AgentCharaMake:
