@@ -550,7 +550,8 @@ classes:
       0x1400B40B0: OpenAddon
       0x1400B4830: OpenYesNo
       0x1400C6C80: OnUpdate_Nameplates
-      0x1400D5CD0: UpdateNameplates_Task1
+      0x1400D5CD0: UpdateNameplates_BattleChara
+      0x1400D69B0: UpdateNameplates_NPC
       0x1400D8CD0: IsUIVisible
   Client::UI::Info::InfoProxyInterface:
     vtbls:
@@ -2112,6 +2113,7 @@ classes:
       87: GetForayInfo_2
       88: IsMount
     funcs:
+      0x1406EE2D0: GetCompanionOwnerID
       0x1406F2810: dtor
       0x1407548A0: ctor
   Component::Shell::ShellCommandInterface:
