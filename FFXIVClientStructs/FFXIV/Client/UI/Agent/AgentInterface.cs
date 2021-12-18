@@ -25,7 +25,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
         [VirtualFunction(5)]
         public partial bool IsAgentActive();
 
-        [VirtualFunction(7)]
+        [VirtualFunction(8)]
         public partial uint GetAddonID();
     }
 }
