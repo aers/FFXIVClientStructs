@@ -1067,6 +1067,17 @@ classes:
     funcs:
       0x1403EEE30: ctor
       0x1403EF060: GetSingleton
+  Apricot::IInstanceListenner:
+    vtbls:
+      - ea: 0x141748E08
+  Client::Graphics::Scene::CharacterBase::VfxInstanceListenner:
+    vtbls:
+      - ea: 0x141753068
+        base: Apricot::IInstanceListenner
+  Client::Graphics::Scene::Attach:
+    vtbls:
+      - ea: 0x141753028
+        base: Client::Graphics::Render::PostBoneDeformerBase
   Client::Graphics::Scene::Object:
     vtbls:
       - ea: 0x141752C20
@@ -1189,10 +1200,24 @@ classes:
       0x14045B6C0: SetupHairModelAttributes
       0x14045BA50: SetupFaceModelAttributes
       0x14045C090: SetupConnectorModelAttributes
+  Client::Graphics::Scene::Demihuman:
+    vtbls:
+      - ea: 0x1417536F8
+        base: Client::Graphics::Scene::CharacterBase
+    funcs:
+      0x14045CD30: ctor
   Client::Graphics::Scene::Weapon:
     vtbls:
       - ea: 0x141753A08
         base: Client::Graphics::Scene::CharacterBase
+    funcs:
+      0x14045E3E0: ctor
+  Client::Graphics::Scene::Monster:
+    vtbls:
+      - ea: 0x141753D18
+        base: Client::Graphics::Scene::CharacterBase
+    funcs:
+      0x14045F3D0: ctor
   Client::Graphics::Scene::ResidentResourceManager::ResourceList:
     vtbls:
       - ea: 0x141754AB0
