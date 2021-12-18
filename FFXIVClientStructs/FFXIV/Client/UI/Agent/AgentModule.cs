@@ -139,7 +139,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent
         RecommendList = 104,
         Buddy = 105,
         // ColosseumRecord,
-        // CloseMessage,
+        CloseMessage = 107,
         // CreditPlayer,
         // CreditScroll,
         CreditCast = 112,
