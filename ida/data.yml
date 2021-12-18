@@ -1070,6 +1070,10 @@ classes:
   Apricot::IInstanceListenner:
     vtbls:
       - ea: 0x141748E08
+  Apricot::ApricotInstanceListenner:
+    vtbls:
+      - ea: 0x141749090
+        base: Apricot::IInstanceListenner
   Client::Graphics::Scene::CharacterBase::VfxInstanceListenner:
     vtbls:
       - ea: 0x141753068
@@ -1081,14 +1085,15 @@ classes:
   Client::Graphics::Scene::Object:
     vtbls:
       - ea: 0x141752C20
+    vfuncs:
+      0: dtor
+      1: CleanupRender
+      4: UpdateRender
   Client::Graphics::Scene::DrawObject:
     vtbls:
       - ea: 0x141752C50
         base: Client::Graphics::Scene::Object
     vfuncs:
-      0: dtor
-      1: CleanupRender
-      4: UpdateRender
       11: UpdateMaterials
     funcs:
       0x14043DA50: ctor
@@ -1113,14 +1118,17 @@ classes:
       0x14043E2C0: ctor
       0x14043F430: CalculateViewMatrix
       0x14043FBB0: PrepareRenderCamera
+  Client::Graphics::Singleton<Client::Graphics::Scene::CameraManager>:
+    vtbls:
+      - ea: 0x141752E88
+    vfuncs:
+      0: dtor
   Client::Graphics::Scene::CameraManager:
     instances:
       - ea: 0x141E54558
     vtbls:
-      - ea: 0x141752E88
-        base: Client::Graphics::Singleton
       - ea: 0x141752E90
-        base: Client::Graphics::Kernel::Notifier
+        base: Client::Graphics::Singleton<Client::Graphics::Scene::CameraManager>
     funcs:
       0x14043FD90: ctor
   Client::Graphics::Scene::CharacterUtility:
@@ -1218,6 +1226,60 @@ classes:
         base: Client::Graphics::Scene::CharacterBase
     funcs:
       0x14045F3D0: ctor
+  Client::Graphics::Scene::BGManager:
+    vtbls:
+      - ea: 0x1417544D8
+        base: Client::Graphics::Scene::Object
+    funcs:
+      0x140465CD0: ctor
+  Client::Graphics::Vfx::VfxResourceInstanceListenner:
+    vtbls:
+      - ea: 0x141749118
+  Client::Graphics::Scene::VfxObject:
+    vtbls:
+      - ea: 0x141754830
+        base: Client::Graphics::Scene::DrawObject
+      - ea: 0x1417549D0
+        base: Apricot::ApricotInstanceListenner
+      - ea: 0x141754A40
+        base: Client::Graphics::Vfx::VfxResourceInstanceListenner
+    funcs:
+      0x140469A50: ctor
+  Client::Graphics::Scene::Terrain:
+    vtbls:
+      - ea: 0x141754028
+        base: Client::Graphics::Scene::DrawObject
+    funcs:
+      0x1404600F0: ctor
+  Client::Graphics::Scene::Light:
+    vtbls:
+      - ea: 0x141752E98
+        base: Client::Graphics::Scene::DrawObject
+    funcs:
+      0x1404407D0: ctor
+  Client::Graphics::Scene::EnvLocation:
+    vtbls:
+      - ea: 0x141754508
+        base: Client::Graphics::Scene::DrawObject
+    funcs:
+      0x1404662F0: ctor
+  Client::Graphics::Scene::EnvSpace:
+    vtbls:
+      - ea: 0x141754698
+        base: Client::Graphics::Scene::DrawObject
+    funcs:
+      0x140466D10: ctor
+  Client::Graphics::Scene::BGObject:
+    vtbls:
+      - ea: 0x141754348
+        base: Client::Graphics::Scene::DrawObject
+    funcs:
+      0x140463330: ctor
+  Client::Graphics::Scene::EnvScene:
+    vtbls:
+      - ea: 0x141754828
+    funcs:
+      0x140467F90: ctor
   Client::Graphics::Scene::ResidentResourceManager::ResourceList:
     vtbls:
       - ea: 0x141754AB0
