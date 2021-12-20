@@ -133,9 +133,13 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
         public partial void AddEvent(ushort eventType, uint eventParam, AtkEventListener* listener,
             AtkResNode* nodeParam, bool isSystemEvent);
 
+        public void AddEvent(AtkEventType eventType, uint eventParam, AtkEventListener* listener, AtkResNode* nodeParam, bool isSystemEvent) => AddEvent((ushort)eventType, eventParam, listener, nodeParam, isSystemEvent);
+
         [MemberFunction("E8 ? ? ? ? 44 38 7D 67")]
         public partial void RemoveEvent(ushort eventType, uint eventParam, AtkEventListener* listener,
             bool isSystemEvent);
+
+        public void RemoveEvent(AtkEventType eventType, uint eventParam, AtkEventListener* listener, bool isSystemEvent) => RemoveEvent((ushort)eventType, eventParam, listener, isSystemEvent);
 
         [MemberFunction("48 85 C9 74 0B 8B 41 44")]
         public partial void GetPositionFloat(float* outX, float* outY);
