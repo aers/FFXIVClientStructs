@@ -152,10 +152,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
         [VirtualFunction(166)]
         public partial void ShowBalloonMessage(float* worldPosition, byte pz, uint textImage); //121501 -> Nice Shot!
 
-        [VirtualFunction(168)]
+        [VirtualFunction(167)]
         public partial void ShowBattleTalk(string name, string text, float duration, byte style);
 
-        [VirtualFunction(169)]
+        [VirtualFunction(168)]
         public partial void ShowBattleTalkImage(string name, string text, float duration, uint image, byte style);
 
         [VirtualFunction(170)]
