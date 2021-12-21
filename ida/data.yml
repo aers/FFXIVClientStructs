@@ -558,7 +558,7 @@ classes:
       - ea: 0x141712C50
   Client::UI::Info::InfoProxyPageInterface:
     vtbls:
-#fail       - ea: 0x141715C58
+      - ea: 0x141712CA8
         base: Client::UI::Info::InfoProxyInterface
   Common::Configuration::ConfigBase::ChangeEventInterface:
     vtbls:
@@ -925,7 +925,7 @@ classes:
       0x14033B2F0: ctor
   Client::Graphics::Render::RenderObject:
     vtbls:
-#fail       - ea: 0x141742B40
+      - ea: 0x14173FBA0
         base: Client::Graphics::ReferencedClassBase
   Client::Graphics::Render::Model:
     vtbls:
@@ -2128,7 +2128,7 @@ classes:
       - ea: 0x14177FB90
   Client::UI::Shell::RaptureShellCommandInterface:
     vtbls:
-#fail       - ea: 0x14177ADE0  
+      - ea: 0x14177FBA0
         base: Component::Shell::ShellCommandInterface
   Client::UI::Shell::RaptureShellModule:
     vtbls:
@@ -2445,7 +2445,7 @@ classes:
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandHotbarBase:
     vtbls:
-#fail       - ea: 0x14177D620
+      - ea: 0x1417823E0
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandHotbar:
     vtbls:
@@ -3506,11 +3506,11 @@ classes:
         base: Client::System::Scheduler::Base::SchedulerState
   SQEX::CDev::Engine::Sd::Driver::IEffect:
     vtbls:
-#fail       - ea: 0x141A1AB98
+      - ea: 0x141A1F978
         base: SQEX::CDev::Engine::Sd::SdMemoryAllocator
   SQEX::CDev::Engine::Sd::Driver::FilterBase:
     vtbls:
-#fail       - ea: 0x141A1ABC8
+      - ea: 0x141A1F9A8
         base: SQEX::CDev::Engine::Sd::Driver::IEffect
   SQEX::CDev::Engine::Sd::Driver::DynamicValue:
     vtbls:
@@ -3518,7 +3518,7 @@ classes:
         base: SQEX::CDev::Engine::Sd::SdMemoryAllocator
   SQEX::CDev::Engine::Sd::Driver::ISound:
     vtbls:
-#fail       - ea: 0x141A18AC0
+      - ea: 0x141A1D8A0
   SQEX::CDev::Engine::Sd::Driver::RootSound:
     vtbls:
       - ea: 0x141A1DC60
@@ -3529,15 +3529,15 @@ classes:
         base: SQEX::CDev::Engine::Sd::Driver::RootSound
   SQEX::CDev::Engine::Sd::Driver::AtomosgearSound:
     vtbls:
-#fail       - ea: 0x141A19E28
+      - ea: 0x141A1EC08
         base: SQEX::CDev::Engine::Sd::Driver::RootSound
   SQEX::CDev::Engine::Sd::Driver::Surround4chSound:
     vtbls:
-#fail       - ea: 0x141A1A5F8
+      - ea: 0x141A1F3D8
         base: SQEX::CDev::Engine::Sd::Driver::RootSound
   SQEX::CDev::Engine::Sd::Driver::ISoundDriver:
     vtbls:
-#fail       - ea: 0x141A6EF10
+      - ea: 0x141A73C70
         base: SQEX::CDev::Engine::Sd::SdMemoryAllocator
   SQEX::CDev::Engine::Sd::Driver::SoundDriver:
     vtbls:
