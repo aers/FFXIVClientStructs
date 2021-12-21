@@ -40,7 +40,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc {
         public struct GearsetEntry {
             [FieldOffset(0x000)] public byte ID;
             [FieldOffset(0x001)] public fixed byte Name[0x2F];
-
+            [FieldOffset(0x31)] public byte ClassJob;
             [FieldOffset(0x32)] public byte GlamourSetLink;
             [FieldOffset(0x33)] public GearsetFlag Flags;
 
