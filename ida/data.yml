@@ -490,6 +490,7 @@ classes:
       0x140093C80: TaskUpdateInputUI
       0x140094060: TaskRenderManagerUpdate
       0x140094080: TaskRenderManagerRender
+      0x1400940C0: TaskUpdateBonePhysics
       0x140094120: TaskUpdateLayoutWorld
       0x140094140: TaskResourceManagerUpdate
   Component::Excel::ExcelModuleInterface:
@@ -990,6 +991,8 @@ classes:
   Client::Graphics::JobSystem<Client::Graphics::Render::Manager>:
     vtbls:
       - ea: 0x141740148
+    funcs:
+      0x140398F30: Initialize
   Client::Graphics::Render::Updater<Client::Graphics::Render::PostBoneDeformerBase>:
     vtbls:
       - ea: 0x141740150
@@ -1001,6 +1004,8 @@ classes:
         base: Client::Graphics::Singleton
     funcs:
       0x140375410: ctor
+      0x140375850: Initialize
+      0x140375CD0: Terminate
       0x140376340: CreateCamera
       0x1403765F0: CreateModel
   Client::Graphics::Render::ShadowManager:
@@ -3445,6 +3450,25 @@ classes:
     vtbls:
       - ea: 0x1418E4E28
         base: Client::Graphics::Singleton
+  Client::Graphics::JobSystem<Client::Graphics::Physics::BonePhysicsUpdater,Client::Graphics::Physics::BonePhysicsUpdater::CollisionObjectJob>:
+    vtbls:
+      - ea: 0x1418E4E48
+  Client::Graphics::JobSystem<Client::Graphics::Physics::BonePhysicsUpdater,Client::Graphics::Physics::BonePhysicsUpdater::BoneSimulatorJob>:
+    vtbls:
+      - ea: 0x1418E4E50
+  Client::Graphics::JobSystem<Client::Graphics::Physics::BonePhysicsUpdater,Client::Graphics::Physics::BonePhysicsUpdater::TransformUpdaterJob>:
+    vtbls:
+      - ea: 0x1418E4E58
+  Client::Graphics::Physics::BonePhysicsUpdater:
+    instances:
+      - ea: 0x141E72470
+    vtbls:
+      - ea: 0x1418E4E60
+        base: Client::Graphics::Singleton
+    funcs:
+      0x1411A3B30: ctor
+      0x1411A3C50: Initialize
+      0x1411A3FD0: Update
   Client::Graphics::Physics::BonePhysicsModule:
     vtbls:
       - ea: 0x1418E7408
@@ -3461,6 +3485,9 @@ classes:
       - ea: 0x1418EBC98
     funcs:
       0x1411D4980: ctor
+      0x1411D4DF0: Reset
+      0x1411D4E70: Update
+      0x1411D5820: UpdateWithoutIntegration
   Client::Game::Object::Aetheryte:
     vtbls:
       - ea: 0x1418EC5F0
