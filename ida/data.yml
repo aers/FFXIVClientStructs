@@ -197,6 +197,7 @@ classes:
         pointer: False
     funcs:
       0x1406B72D0: GetInventoryContainer  # (this, containerId)
+      0x1406B84B0: MoveItemSlot # (srcContainer, srcSlot, dstContainer, dstSlot, 1)
       0x1406BF470: GetInventoryItemCount # (this, itemId, hq, 1, 1, 0)
       0x1406BFBE0: GetItemCountInContainer # (this, itemId, containerId, hq, 0)
   InventoryContainer:
