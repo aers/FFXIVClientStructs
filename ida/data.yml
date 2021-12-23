@@ -27,7 +27,6 @@ globals:
   0x141EAB1E8: g_Client::Game::UI::RelicNote # not a pointer
   0x141EB73F0: g_TitleController
   0x141EB73F8: g_TitleList
-  0x141EC0F70: g_EventFramework
   0x141ECEA88: g_FateTablePtr
   0x141ECE740: g_ClientObjectManager
   0x141E60340: g_SomeOtherRenderingState
@@ -64,11 +63,6 @@ functions:
   0x1407061B0: ExecuteCommand
   0x1408AC310: CreateSelectYesno
   0x140A47910: GetBeastTribeAllowance
-  0x140A57B40: EventFramework_GetSingleton
-  0x140A57E30: EventFramework_ctor
-  0x140A585F0: EventFramework_dtor
-  0x140A608F0: EventFramework_ProcessDirectorUpdate
-  0x140A64140: EventFramework_GetInstanceContentDirector
   0x141034300: Client::UI::AddonHudLayoutScreen::MoveableAddonInfoStruct_UpdateAddonPosition
   0x141124FB0: Client::Graphics::Kernel::CreateShader # static function
   0x1411B97A0: lua_index2addr
@@ -2777,6 +2771,16 @@ classes:
     vtbls:
       - ea: 0x14179D470
         base: Client::Game::Event::LuaEventHandler
+  Client::Game::Event::EventFramework:
+    instances:
+      - ea: 0x141EC0F70
+        pointer: True
+    funcs:
+      0x140A57B40: GetSingleton
+      0x140A57E30: ctor
+      0x140A585F0: dtor
+      0x140A608F0: ProcessDirectorUpdate
+      0x140A64140: GetInstanceContentDirector
   Client::Game::Event::EventHandlerModule:
     vtbls:
       - ea: 0x14179F940
@@ -2799,7 +2803,15 @@ classes:
     vtbls:
       - ea: 0x1417A1B28
         base: Client::Game::Event::Director
+  Client::Game::Event::GatheringLeveDirector:
+    vtbls:
+      - ea: 0x1417B10D0
+        base: Client::Game::Event::LeveDirector
   Client::Game::Event::BattleLeveDirector:
+    vtbls:
+      - ea: 0x1417A2418
+        base: Client::Game::Event::LeveDirector
+  Client::Game::Event::CompanyLeveDirector:
     vtbls:
       - ea: 0x1417B3A98
         base: Client::Game::Event::LeveDirector
@@ -2807,10 +2819,18 @@ classes:
     vtbls:
       - ea: 0x1417B0858
         base: Client::Game::Gimmick::GimmickEventHandler
+  Client::Game::InstanceContent::ContentDirector:
+    vtbls:
+      - ea: 0x14179DD60
+        base: Client::Game::Event::Director
   Client::Game::InstanceContent::InstanceContentDirector:
     vtbls:
       - ea: 0x1417CF5F0
-        base: Client::Game::Event::Director
+        base: Client::Game::InstanceContent::ContentDirector
+  Client::Game::InstanceContent::PublicContentDirector:
+    vtbls:
+      - ea: 0x141932808
+        base: Client::Game::InstanceContent::ContentDirector
   Client::UI::PopupMenu:
     vtbls:
       - ea: 0x14184AB88
