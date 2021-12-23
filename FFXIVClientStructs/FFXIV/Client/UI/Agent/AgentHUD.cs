@@ -26,7 +26,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent
 
         [FieldOffset(0xBC8)] public int CompanionSummonTimer;
         [FieldOffset(0xBD8)] public fixed byte PartyMemberList[0x20 * 10];
-        [FieldOffset(0xD18)] public int PartyMemberCount;
+        [FieldOffset(0xD18)] public short PartyMemberCount;
         [FieldOffset(0xD20)] public uint PartyTitleAddonId;
         [FieldOffset(0xD24)] public fixed uint RaidMemberIds[40];
         [FieldOffset(0xDC4)] public int RaidGroupSize;
