@@ -14,7 +14,15 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character
     public unsafe partial struct Character
     {
         [FieldOffset(0x0)] public GameObject GameObject;
-        
+
+        #region This is inside a new 0x48 byte class at offset 0x1A8
+
+        [FieldOffset(0x1B0)] public float ModelScale;
+        [FieldOffset(0x1B4)] public int ModelCharaId;
+        [FieldOffset(0x1B8)] public int ModelSkeletonId;
+        [FieldOffset(0x1BC)] public int ModelCharaId_2; // == -1 -> return ModelCharaId
+        [FieldOffset(0x1C0)] public int ModelSkeletonId_2; // == 0 -> return ModelSkeletonId
+
         [FieldOffset(0x1C4)] public uint Health;
         [FieldOffset(0x1C8)] public uint MaxHealth;
         [FieldOffset(0x1CC)] public uint Mana;
@@ -24,20 +32,23 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character
         [FieldOffset(0x1D8)] public ushort CraftingPoints;
         [FieldOffset(0x1DA)] public ushort MaxCraftingPoints;
 
+        [FieldOffset(0x1DC)] public short TransformationId;
+
         [FieldOffset(0x1E0)] public byte ClassJob;
         [FieldOffset(0x1E1)] public byte Level;
 
+        #endregion
+
         [FieldOffset(0x230)] public uint PlayerTargetObjectID;
 
-        [FieldOffset(0x1040)] public fixed byte EquipSlotData[4 * 10];
+        [FieldOffset(0xDB0)] public fixed byte EquipSlotData[4 * 10];
+        [FieldOffset(0xDD8)] public fixed byte CustomizeData[0x1A];
+
         //[FieldOffset(0x1840)] public void* VfxObject;
         //[FieldOffset(0x1848)] public void* VfxObject2;
         [FieldOffset(0x1870)] public void* Omen;
 
         [FieldOffset(0x1900)] public Companion* CompanionObject; // minion
-
-        [FieldOffset(0xDD8)] public fixed byte CustomizeData[0x1A];
-
         [FieldOffset(0x1918)] public fixed byte FreeCompanyTag[6];
         [FieldOffset(0x1940)] public uint TargetObjectID;
 
@@ -52,5 +63,8 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character
 
         [MemberFunction("E8 ?? ?? ?? ?? 3B C7 74 45")]
         public partial uint GetTargetId();
+
+        [VirtualFunction(88)]
+        public partial bool IsMount();
     }
 }
