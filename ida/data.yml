@@ -2992,6 +2992,10 @@ classes:
     vtbls:
       - ea: 0x141880E58
         base: Component::GUI::AtkUnitBase
+  Client::UI::AddonContentsFinderConfirm:
+    vtbls:
+      - ea: 0x1418812A8
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonRaidFinder:
     vtbls:
       - ea: 0x141881930
