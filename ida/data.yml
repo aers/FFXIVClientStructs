@@ -17,8 +17,6 @@ globals:
   0x141EA5B08: g_CharacterManager_CompanionMemoryPtr
   0x141EA5B38: g_GameObjectManager_ObjectList
   0x141EA6878: g_GameObjectManager_ObjectListEnd
-  0x141EA9C48: g_Client::Game::UI::Telepo # not a pointer. Member of UIState
-  0x141EAA1F0: g_Client::Game::UI::Buddy # not a pointer. Member of UIState. Also the Companion Buddy slot.
   0x141EAA388: g_Client::Game::UI::Buddy.Pet # not a pointer
   0x141EAA398: g_Client::Game::UI::Buddy.Pet.BuffList # not a pointer
   0x141EAB048: g_Client::Game::UI::Buddy.CompanionStats  # not a pointer. Member of UIState
@@ -132,6 +130,12 @@ classes:
   SQEX::CDev::Engine::Sd::SdMemoryAllocator:
   SQEX::CDev::Engine::Sd::Driver::BankController:
   Client::System::Scheduler::Base::LinkList:
+  Client::Game::Network::PacketElement:
+    vtbls:
+      - ea: 0x14176D8D0
+  Client::Game::Network::PacketContext:
+    vtbls:
+      - ea: 0x14176D8D8
   Client::Game::Control::Control:
     funcs:
       0x1404B4630: Initialize
@@ -276,6 +280,9 @@ classes:
       - ea: 0x1417837D8
         base: Component::GUI::AtkModuleInterface::AtkEventInterface
   Client::Game::UI::Buddy:
+    instances:
+      - ea: 0x141EAA1F0
+        pointer: False
     funcs:
       0x14079B140: ctor
   Client::Game::UI::RelicNote:
@@ -457,6 +464,13 @@ classes:
     funcs:
       0x140094BF0: ctor
       0x1401792C0: SetTask
+  Common::Game::Time::GameTime:
+    vtbls:
+      - ea: 0x1417088F0
+  Client::System::Timer::ClientTime:
+    vtbls:
+      - ea: 0x1417088F8
+        base: Common::Game::Time::GameTime
   Client::System::Configuration::SystemConfig:
     vtbls:
       - ea: 0x141708900
@@ -881,21 +895,21 @@ classes:
     vtbls:
       - ea: 0x14173F968
         base: Client::Graphics::Render::Camera
-  Client::Graphics::Render::UnknownCamera1:
+  Client::Graphics::Render::Camera_CascadeShadow:
     vtbls:
       - ea: 0x14173F9A0
         base: Client::Graphics::Render::Camera
-  Client::Graphics::Render::UnknownCamera2:
+  Client::Graphics::Render::Camera_SpecialShadow:
     vtbls:
       - ea: 0x14173F9E0
         base: Client::Graphics::Render::Camera
-  Client::Graphics::Render::UnknownCamera3:
+  Client::Graphics::Render::Camera_OmniShadow:
     vtbls:
       - ea: 0x14173FA20
         base: Client::Graphics::Render::Camera
     funcs:
       0x140336B90: SubmitRenderCameraData
-  Client::Graphics::Render::UnknownCamera4:
+  Client::Graphics::Render::Camera_OmniShadow::CameraOmniFace:
     vtbls:
       - ea: 0x14173FA68
         base: Client::Graphics::Render::Camera
@@ -2632,6 +2646,9 @@ classes:
       0: SelectUseTicketResultHandler
       1: dtor
   Client::Game::UI::Telepo:
+    instances:
+      - ea: 0x141EA9C48
+        pointer: False
     vtbls:
       - ea: 0x1417838E8
         base: Component::GUI::AtkModuleInterface::AtkEventInterface
@@ -2741,6 +2758,10 @@ classes:
   Client::UI::Agent::AgentContentsTimer:
     vtbls:
      - ea: 0x14178A0F8
+       base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentGatheringNote:
+    vtbls:
+     - ea: 0x1418CE818
        base: Client::UI::Agent::AgentInterface
   Client::Game::Event::EventHandler:
     vtbls:
@@ -2959,6 +2980,10 @@ classes:
   Client::UI::AddonRetainerSell:
     vtbls:
       - ea: 0x14187B530
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonGatheringNoteBook:
+    vtbls:
+      - ea: 0x14187D890
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonRecipeNote:
     vtbls:
