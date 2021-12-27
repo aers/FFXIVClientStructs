@@ -728,6 +728,7 @@ classes:
       - ea: 0x14172F618
         base: Component::GUI::AtkModuleInterface::AtkEventInterface
     vfuncs:
+      2: dtor
       3: Show
       4: Hide
       5: IsAgentActive
@@ -2672,26 +2673,718 @@ classes:
       0x1408220A0: OpenContextMenuFromTarget
       0x140825010: GetMainCommandString  # MainCommand exd
       0x140825350: OpenSystemMenu
+  Client::UI::Agent::AgentChatLog:
+    vtbls:
+      - ea: 0x141787508
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140842870: ctor
+  Client::UI::Agent::AgentInventory:
+    vtbls:
+      - ea: 0x141786F98
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140826F60: ctor
+  Client::UI::Agent::AgentInventoryContext:
+    vtbls:
+      - ea: 0x14172FAE0
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140207280: ctor
+  Client::UI::Agent::AgentConfigLogColor:
+    vtbls:
+      - ea: 0x141730520
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140238A00: ctor
+  Client::UI::Agent::AgentConfigKey:
+    vtbls:
+      - ea: 0x1417305A0
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x14023B9F0: ctor
+  Client::UI::Agent::AgentConfigPadCustomize:
+    vtbls:
+      - ea: 0x1417308C8
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x14024A100: ctor
+  Client::UI::Agent::AgentEmote:
+    vtbls:
+      - ea: 0x141787BB0
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140878E40: ctor
+  Client::UI::Agent::AgentMacro:
+    vtbls:
+      - ea: 0x141788308
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x14089BCD0: ctor
+  Client::UI::Agent::AgentFishingNote:
+    vtbls:
+      - ea: 0x141787F60
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140891740: ctor
+  Client::UI::Agent::AgentFishGuide:
+    vtbls:
+      - ea: 0x141787FE8
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1408946C0: ctor
+  Client::UI::Agent::AgentFishRecord:
+    vtbls:
+      - ea: 0x141788070
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1408959F0: ctor
+  Client::UI::Agent::AgentQuestJournal:
+    vtbls:
+      - ea: 0x1417877B0
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140858830: ctor
+  Client::UI::Agent::AgentActionMenu:
+    vtbls:
+      - ea: 0x141786C38
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1407FFEB0: ctor
+  Client::UI::Agent::AgentMarker:
+    vtbls:
+      - ea: 0x1417892B8
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1408DDEA0: ctor
+  Client::UI::Agent::AgentTrade:
+    vtbls:
+      - ea: 0x141787110
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140832FA0: ctor
+  Client::UI::Agent::AgentScreenLog:
+    vtbls:
+      - ea: 0x141789A50
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1408FCFC0: ctor
+  Client::UI::Agent::AgentLoot:
+    vtbls:
+      - ea: 0x1417885D8
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1408A1BA0: ctor
+  Client::UI::Agent::AgentRepair:
+    vtbls:
+      - ea: 0x1417897C8
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1408f63e0: ctor
+  Client::UI::Agent::AgentColorant:
+    vtbls:
+      - ea: 0x141789FF8
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x14090c760: ctor
+  Client::UI::Agent::AgentHowTo:
+    vtbls:
+      - ea: 0x141787690
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140853b20: ctor
+  Client::UI::Agent::AgentHowToNotice:
+    vtbls:
+      - ea: 0x141788218
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x14089a4e0: ctor
+  Client::UI::Agent::AgentInspect:
+    vtbls:
+      - ea: 0x141788B50
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1408b5cd0: ctor
+  Client::UI::Agent::AgentTelepotTown:
+    vtbls:
+      - ea: 0x1418CED88
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x14107deb0: ctor
+  Client::UI::Agent::AgentSocial:
+    vtbls:
+      - ea: 0x141731550
+        base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentBlacklist:
+    vtbls:
+      - ea: 0x1417315C8
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1402558D0: ctor
+  Client::UI::Agent::AgentFriendlist:
+    vtbls:
+      - ea: 0x141731640
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140256A20: ctor
+  Client::UI::Agent::AgentPartyMember:
+    vtbls:
+      - ea: 0x1417317B8
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x14025bb90: ctor
+  Client::UI::Agent::AgentLinkshell:
+    vtbls:
+      - ea: 0x1417316B8
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1402595e0: ctor
+  Client::UI::Agent::AgentSearch:
+    vtbls:
+      - ea: 0x1417318B0
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x14025f820: ctor
+  Client::UI::Agent::AgentDetail:
+    vtbls:
+      - ea: 0x141731838
+        base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentLetter:
+    vtbls:
+      - ea: 0x141731930
+        base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentLetterView:
+    vtbls:
+      - ea: 0x1417319C0
+        base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentActionDetail:
+    vtbls:
+      - ea: 0x141789090
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1408d7840: ctor
+  Client::UI::Agent::AgentRetainer:
+    vtbls:
+      - ea: 0x141787088
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x14082c9f0: ctor
+  Client::UI::Agent::AgentCutsceneReplay:
+    vtbls:
+      - ea: 0x14178A6B8
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140924260: ctor
+  Client::UI::Agent::AgentMonsterNote:
+    vtbls:
+      - ea: 0x141789330
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1408de380: ctor
+  Client::UI::Agent::AgentItemSearch:
+    vtbls:
+      - ea: 0x141731AC0
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140267f40: ctor
+  Client::UI::Agent::AgentCatch:
+    vtbls:
+      - ea: 0x14178A5C8
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140922bd0: ctor
+  Client::UI::Agent::AgentFreeCompany:
+    vtbls:
+      - ea: 0x141731B60
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140279920: ctor
+  Client::UI::Agent::AgentFreeCompanyProfile:
+    vtbls:
+      - ea: 0x141731C60
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x14027b7e0: ctor
+  Client::UI::Agent::AgentFreeCompanyInputString:
+    vtbls:
+      - ea: 0x141731DD0
+        base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentFreeCompanyExchange:
+    vtbls:
+      - ea: 0x141731ED8
+        base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentFreeCompanyCrestEditor:
+    vtbls:
+      - ea: 0x141731F58
+        base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentFreeCompanyCrestDecal:
+    vtbls:
+      - ea: 0x141731FD8
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1402854a0: ctor
+  Client::UI::Agent::AgentArmouryBoard:
+    vtbls:
+      - ea: 0x141787010
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140829ec0: ctor
+  Client::UI::Agent::AgentHowToList:
+    vtbls:
+      - ea: 0x141789C30
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140903400: ctor
+  Client::UI::Agent::AgentCabinet:
+    vtbls:
+      - ea: 0x141789CD0
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140905fc0: ctor
+  Client::UI::Agent::AgentGrandCompanyRank:
+    vtbls:
+      - ea: 0x141788BC8
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1408b82e0: ctor
+  Client::UI::Agent::AgentGrandCompanySupply:
+    vtbls:
+      - ea: 0x14178A1F8
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140916fd0: ctor
+  Client::UI::Agent::AgentGrandCompanyExchange:
+    vtbls:
+      - ea: 0x14178A270
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1409193c0: ctor
+  Client::UI::Agent::AgentGearSet:
+    vtbls:
+      - ea: 0x1417871D0
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1408346a0: ctor
+  Client::UI::Agent::AgentSupportMain:
+    vtbls:
+      - ea: 0x141734C40
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1402d4b90: ctor
+  Client::UI::Agent::AgentSupportSubList:
+    vtbls:
+      - ea: 0x141734CB8
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1402d6460: ctor
+  Client::UI::Agent::AgentSupportSubView:
+    vtbls:
+      - ea: 0x141734D38
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1402d71e0: ctor
+  Client::UI::Agent::AgentSupportSubEdit:
+    vtbls:
+      - ea: 0x141734DB8
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1402d8480: ctor
+  Client::UI::Agent::AgentAchievement:
+    vtbls:
+      - ea: 0x141787608
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x14084b960: ctor
+  Client::UI::Agent::AgentLicenseViewer:
+    vtbls:
+      - ea: 0x1417301F8
+        base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentMovieSubtitle:
+    vtbls:
+      - ea: 0x14178A2E8
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140919c00: ctor
+  Client::UI::Agent::AgentPadMouseMode:
+    vtbls:
+      - ea: 0x14178A360
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140919fe0: ctor
+  Client::UI::Agent::AgentRecommendList:
+    vtbls:
+      - ea: 0x1417893E8
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1408e18e0: ctor
+  Client::UI::Agent::AgentBuddy:
+    vtbls:
+      - ea: 0x1417881A0
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140897540: ctor
+  Client::UI::Agent::AgentCloseMessage:
+    vtbls:
+      - ea: 0x141730AB0
+        base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentCreditCast:
+    vtbls:
+      - ea: 0x141730FD8
+        base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentShop:
+    vtbls:
+      - ea: 0x1417889D8
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1408b1ff0: ctor
+  Client::UI::Agent::AgentBait:
+    vtbls:
+      - ea: 0x14178A758
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140926790: ctor
+  Client::UI::Agent::AgentHousing:
+    vtbls:
+      - ea: 0x1418DC2F8
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1410cf7f0: ctor
+  Client::UI::Agent::AgentHousingSignboard:
+    vtbls:
+      - ea: 0x1418DC390
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1410e4380: ctor
+  Client::UI::Agent::AgentHousingPortal:
+    vtbls:
+      - ea: 0x1418DC600
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1410e9f40: ctor
+  Client::UI::Agent::AgentHousingPlant:
+    vtbls:
+      - ea: 0x1418DC570
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1410e88e0: ctor
+  Client::UI::Agent::AgentPersonalRoomPortal:
+    vtbls:
+      - ea: 0x14178ABC0
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140936870: ctor
+  Client::UI::Agent::AgentTreasureHunt:
+    vtbls:
+      - ea: 0x1418DC6F0
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1410ec310: ctor
+  Client::UI::Agent::AgentLookingForGroup:
+    vtbls:
+      - ea: 0x1417320D0
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1402878a0: ctor
+  Client::UI::Agent::AgentContentsMvp:
+    vtbls:
+      - ea: 0x141788560
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1408a1210: ctor
+  Client::UI::Agent::AgentVoteKick:
+    vtbls:
+      - ea: 0x1417884E8
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1408a0a90: ctor
+  Client::UI::Agent::AgentVoteGiveUp:
+    vtbls:
+      - ea: 0x141788470
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1408a0600: ctor
+  Client::UI::Agent::AgentVoteTreasure:
+    vtbls:
+      - ea: 0x1417883F8
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1408a0090: ctor
+  Client::UI::Agent::AgentPvpProfile:
+    vtbls:
+      - ea: 0x14178A7D0
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140927350: ctor
+  Client::UI::Agent::AgentContentsNote:
+    vtbls:
+      - ea: 0x14178A870
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x14092c9a0: ctor
+  Client::UI::Agent::AgentFieldMarker:
+    vtbls:
+      - ea: 0x141787EE8
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x14088fb30: ctor
+  Client::UI::Agent::AgentRetainerStatus:
+    vtbls:
+      - ea: 0x141789950
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1408faa60: ctor
+  Client::UI::Agent::AgentRetainerTask:
+    vtbls:
+      - ea: 0x14178A8E8
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x14092e7d0: ctor
+  Client::UI::Agent::AgentRelicNoteBook:
+    vtbls:
+      - ea: 0x14178AA38
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1409325a0: ctor
+  Client::UI::Agent::AgentMiniGame:
+    vtbls:
+      - ea: 0x141734FB8
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1402dc080: ctor
+  Client::UI::Agent::AgentAdventureNoteBook:
+    vtbls:
+      - ea: 0x141786E98
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140809620: ctor
+  Client::UI::Agent::AgentMinionMountBase:
+    vtbls:
+      - ea: 0x14178AD48
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x14093c180: ctor
+  Client::UI::Agent::AgentMinionNoteBook:
+    vtbls:
+      - ea: 0x14178AEC0
+        base: Client::UI::Agent::AgentMinionMountBase
+    funcs:
+      0x14093ed70: ctor
+  Client::UI::Agent::AgentMountNoteBook:
+    vtbls:
+      - ea: 0x14178B090
+        base: Client::UI::Agent::AgentMinionMountBase
+    funcs:
+      0x140941920: ctor
+  Client::UI::Agent::AgentItemComp:
+    vtbls:
+      - ea: 0x141787388
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x14083cc70: ctor
+  Client::UI::Agent::AgentMobhunt:
+    vtbls:
+      - ea: 0x14178A4D8
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x14091f2e0: ctor
+  Client::UI::Agent::AgentMateriaAttach:
+    vtbls:
+      - ea: 0x141788EA8
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1408c7500: ctor
+  Client::UI::Agent::AgentMiragePrism:
+    vtbls:
+      - ea: 0x141789EA0
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140908d80: ctor
+  Client::UI::Agent::AgentAetherCurrent:
+    vtbls:
+      - ea: 0x141789108
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1408dbe60: ctor
+  Client::UI::Agent::AgentCurrency:
+    vtbls:
+      - ea: 0x141788290
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x14089a870: ctor
+  Client::UI::Agent::AgentLovmParty:
+    vtbls:
+      - ea: 0x1417CDCB8
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140bc4500: ctor
+  Client::UI::Agent::AgentLovmRanking:
+    vtbls:
+      - ea: 0x1417CDD58
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140bca5e0: ctor
+  Client::UI::Agent::AgentLovmNamePlate:
+    vtbls:
+      - ea: 0x1417CDDD0
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140bcad30: ctor
+  Client::UI::Agent::AgentLovmResult:
+    vtbls:
+      - ea: 0x1417CDE48
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140bcb2e0: ctor
+  Client::UI::Agent::AgentLovmPaletteEdit:
+    vtbls:
+      - ea: 0x1417CD658
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140bb8aa0: ctor
+  Client::UI::Agent::AgentDpsChallenge:
+    vtbls:
+      - ea: 0x14178BEE8
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x14094a4c0: ctor
+  Client::UI::Agent::AgentOrchestrion:
+    vtbls:
+      - ea: 0x14178BF88
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x14094c1a0: ctor
+  Client::UI::Agent::AgentOrchestrionInn:
+    vtbls:
+      - ea: 0x14178C0E0
+        base: Client::UI::Agent::AgentOrchestrion
+    funcs:
+      0x140953100: ctor
+  Client::UI::Agent::AgentDeepDungeonMap:
+    vtbls:
+      - ea: 0x141844AC0
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140c22a70: ctor
+  Client::UI::Agent::AgentDeepDungeonStatus:
+    vtbls:
+      - ea: 0x141844B38
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140c23f10: ctor
+  Client::UI::Agent::AgentDeepDungeonSaveData:
+    vtbls:
+      - ea: 0x141844BB0
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140c253d0: ctor
+  Client::UI::Agent::AgentDeepDungeonScore:
+    vtbls:
+      - ea: 0x141844CB8
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140c288f0: ctor
+  Client::UI::Agent::AgentOrchestrionPlayList:
+    vtbls:
+      - ea: 0x14178C048
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x14094f390: ctor
+  Client::UI::Agent::AgentWeeklyBingo:
+    vtbls:
+      - ea: 0x141846930
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140c732f0: ctor
+  Client::UI::Agent::AgentDeepDungeonMenu:
+    vtbls:
+      - ea: 0x141844C28
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140c27800: ctor
+  Client::UI::Agent::AgentItemAppraisal:
+    vtbls:
+      - ea: 0x14178C4C8
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140956ec0: ctor
+  Client::UI::Agent::AgentItemInspection:
+    vtbls:
+      - ea: 0x141788F98
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1408cfe30: ctor
+  Client::UI::Agent::AgentTeleportHousingFriend:
+    vtbls:
+      - ea: 0x14178C870
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x14095bb00: ctor
+  Client::UI::Agent::AgentHousingGuestBook:
+    vtbls:
+      - ea: 0x1418DC920
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1410f3490: ctor
+  Client::UI::Agent::AgentAozNoteBook:
+    vtbls:
+      - ea: 0x14178C978
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x14095e3d0: ctor
+  Client::UI::Agent::AgentWorldTravel:
+    vtbls:
+      - ea: 0x141846258
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140c650f0: ctor
+  Client::UI::Agent::AgentDawn:
+    vtbls:
+      - ea: 0x1418461E0
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140c60a10: ctor
+  Client::UI::Agent::AgentTargetCircle:
+    vtbls:
+      - ea: 0x141789BB8
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140902040: ctor
+  Client::UI::Agent::AgentCraftActionSimulator:
+    vtbls:
+      - ea: 0x14178CC78
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1409694b0: ctor
   Client::UI::Agent::AgentTryon::TryonCharaView:
     vtbls:
       - ea: 0x141787250
         base: Client::UI::Misc::CharaView
+    funcs:
+      0x140838040: ctor
   Client::UI::Agent::AgentTryon:
     vtbls:
       - ea: 0x141787290
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1408387f0: ctor
   Client::UI::Agent::AgentItemDetailBase:
     vtbls:
       - ea: 0x141787308
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x14083b3a0: ctor
   Client::UI::Agent::AgentContentsFinderSetting:
     vtbls:
       - ea: 0x1417878B0
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140864bd0: ctor
   Client::UI::Agent::AgentContentsFinder:
     vtbls:
       - ea: 0x141787958
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1408688f0: ctor
   Client::UI::Agent::AgentMap::MapMarkerStructSearchName:
     vtbls:
       - ea: 0x141787E60
@@ -2722,12 +3415,24 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x14089ED10: ctor
+  Client::UI::Agent::AgentConfigBase:
+    vtbls:
+      - ea: 0x141730628
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x14023DB90: ctor
   Client::UI::Agent::AgentConfigSystem:
     vtbls:
       - ea: 0x141730700
-        base: Client::UI::Agent::AgentInterface
+        base: Client::UI::Agent::AgentConfigBase
     funcs:
       0x140243A20: ctor
+  Client::UI::Agent::AgentConfigCharacter:
+    vtbls:
+      - ea: 0x1417307E0
+        base: Client::UI::Agent::AgentConfigBase
+    funcs:
+      0x140245010: ctor
   Client::UI::Agent::AgentHudLayout:
     vtbls:
       - ea: 0x1417888B8
