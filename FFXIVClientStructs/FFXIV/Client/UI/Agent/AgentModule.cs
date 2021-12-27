@@ -58,7 +58,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent
         Emote = 19,
         Macro = 20,
         // TargetCursor,
-        // TargetCircle,
+        TargetCircle = 21,
         GatheringNote = 22,
         RecipeNote = 23,
         FishingNote = 27,
@@ -74,9 +74,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent
         Map = 38,
         Loot = 39, //NeedGreed
         Repair = 40,
-        // Materialize,
-        // MateriaAttach,
-        // MiragePrism,
+        Materialize = 41,
+        MateriaAttach = 42,
+        MiragePrism = 43,
         Colorant = 44,
         Howto = 45,
         HowtoNotice = 46,
@@ -165,7 +165,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent
         ContentsNote = 131,
         // ReadyCheck,
         FieldMarker = 133,
-        CursorLocation = 135,
+        CursorLocation = 134,
         RetainerStatus = 136,
         RetainerTask = 137,
         RelicNotebook = 139,
@@ -184,6 +184,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent
         // PatchMark,
         // Max,
         WeatherReport = 157,
+        Revive = 160,
         GoldSaucerMiniGame = 164,
         TrippleTriad = 165,
         LotteryDaily = 173,
@@ -193,6 +194,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent
         JournalResult = 180,
         LeveQuest = 181,
         CompanyCraftRecipeNoteBook = 182,
+        AirShipExploration = 184,
+        AirShipExplorationDetail = 186,
+        SubmersibleExplorationDetail = 190,
         CompanyCraftMaterial = 191,
         AetherCurrent = 192,
         FreeCompanyCreditShop = 193,
@@ -253,6 +257,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent
         CircleList = 338, //Fellowships
         CircleBook = 339,
         McGuffin = 359, //Collection
+        CraftActionSimulator = 360,
         MycInfo = 368, //Bozja Info
         MycBattleAreaInfo = 372, //Bozja Recruitment
         OrnamentNoteBook = 374, //Accessories
