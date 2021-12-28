@@ -329,6 +329,9 @@ classes:
       0x1407EBAE0: StartCooldown
       0x1407EBE10: GetRecastTimerElapsed
       0x1407EBEC0: GetRecastTime
+      0x1407F0310: GetMaxCharges
+      0x1407E0FE0: GetRecastGroup
+      0x1407E6220: GetRecastGroupDetail
   Client::Game::JobGaugeManager:
     instances:
       - ea: 0x141E76A88
