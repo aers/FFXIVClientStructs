@@ -11,6 +11,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Control
     {
         [FieldOffset(0x80)] public GameObject* Target;
         [FieldOffset(0x88)] public GameObject* SoftTarget;
+        [FieldOffset(0x98)] public GameObject* GPoseTarget;        
         [FieldOffset(0xD0)] public GameObject* MouseOverTarget;
         [FieldOffset(0xF8)] public GameObject* FocusTarget;
         [FieldOffset(0x110)] public GameObject* PreviousTarget;
