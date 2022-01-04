@@ -939,7 +939,7 @@ classes:
       0x14033B2F0: ctor
   Client::Graphics::Render::RenderObject:
     vtbls:
-      - ea: 0x14173FCC8
+      - ea: 0x14173FCD0
         base: Client::Graphics::ReferencedClassBase
   Client::Graphics::Render::Model:
     vtbls:
