@@ -73,11 +73,11 @@ namespace FFXIVClientStructs.FFXIV.Client.UI {
         public struct TrustMembers {
             [FieldOffset(PartyListMemberStruct.Size * 00)] public PartyListMemberStruct Trust0;
             [FieldOffset(PartyListMemberStruct.Size * 01)] public PartyListMemberStruct Trust1;
-            [FieldOffset(PartyListMemberStruct.Size * 03)] public PartyListMemberStruct Trust2;
-            [FieldOffset(PartyListMemberStruct.Size * 04)] public PartyListMemberStruct Trust3;
-            [FieldOffset(PartyListMemberStruct.Size * 05)] public PartyListMemberStruct Trust4;
-            [FieldOffset(PartyListMemberStruct.Size * 06)] public PartyListMemberStruct Trust5;
-            [FieldOffset(PartyListMemberStruct.Size * 07)] public PartyListMemberStruct Trust6;
+            [FieldOffset(PartyListMemberStruct.Size * 02)] public PartyListMemberStruct Trust2;
+            [FieldOffset(PartyListMemberStruct.Size * 03)] public PartyListMemberStruct Trust3;
+            [FieldOffset(PartyListMemberStruct.Size * 04)] public PartyListMemberStruct Trust4;
+            [FieldOffset(PartyListMemberStruct.Size * 05)] public PartyListMemberStruct Trust5;
+            [FieldOffset(PartyListMemberStruct.Size * 06)] public PartyListMemberStruct Trust6;
 
             public PartyListMemberStruct this[int i] {
                 get {
