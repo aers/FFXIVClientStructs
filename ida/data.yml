@@ -295,6 +295,9 @@ classes:
       0x1407A5700: IsDungeonComplete
       0x1407A5740: IsFateComplete
       0x1407A5780: IsLeveComplete
+  Client::Game::UI::MobHunt:
+    vtbls:
+      - ea: 0x14177ADD0
   Client::Game::BattleLog:
     funcs:
       0x1407BD130: AddLogMessage
@@ -3400,6 +3403,8 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140883D60: ctor
+      0x140880690: AddGatheringMapCircle
+      0x14087F9D0: OpenSpecialMap
   Client::UI::Agent::AgentRecipeNote:
     vtbls:
       - ea: 0x14177FBB8
