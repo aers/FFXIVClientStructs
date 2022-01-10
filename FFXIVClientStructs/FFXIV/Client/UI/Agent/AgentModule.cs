@@ -242,14 +242,16 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent
         MiragePrismMiragePlate = 294, //Glamour Plates
         Fashion = 298,
         HousingGuestBook = 301,
+        ReconstructionBox = 304,
+        ReconstructionBuyback = 305,
         CrossWorldLinkShell = 306,
-        //Description = 308, //Frontline Rules
+        Description = 308, //Frontline/Bozja Description
         AozNotebook = 313, //Bluemage Spells
-        Emj = 316,
+        Emj = 316, //Mahjong
         WorldTravel = 321,
         RideShooting = 322, //Airforce One
         Credit = 324,
-        EmjSetting = 325,
+        EmjSetting = 325, //Mahjong Settings
         RetainerList = 326,
         Dawn = 331, //Trust
         QuestRedo = 335,
@@ -259,6 +261,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent
         McGuffin = 359, //Collection
         CraftActionSimulator = 360,
         MycInfo = 368, //Bozja Info
+        MycItemBox = 369, //Bozja Lost Finds Cache
+        MycItemBag = 370, //Bozja Lost Finds Holster
         MycBattleAreaInfo = 372, //Bozja Recruitment
         OrnamentNoteBook = 374, //Accessories
     }
