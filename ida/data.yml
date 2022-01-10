@@ -84,6 +84,7 @@ functions:
   0x1401E3E90: MakeProjectionMatrix
   0x1401E4120: MakeProjectionMatrix2
   0x140328D20: SubmitConstantBufferUpdate
+  0x1400A8AD0: IsLocalPlayerPartyLeader
 
 classes:
   Client::Game::GameMain:
@@ -179,7 +180,9 @@ classes:
       0x140758250: IsCharacterInPartyByName # (this, char*)
       0x1407582D0: IsObjectIDInAlliance
       0x140758340: IsObjectIDPartyLeader
+      0x140758910: GetPartyMemberByIndex
       0x140B97C90: Create
+      0x140B97BD0: GetGroupManager
   FateManager:
     funcs:
       0x14110C610: HasValue  # g_FateTablePtr != 0
@@ -588,6 +591,20 @@ classes:
     funcs:
       0x1400EA0F0: ctor
       0x1400EA1D0: GetPtr  # Static
+      0x1400ECD50: IsCrossRealmParty # Static
+      0x1400ECDD0: IsCrossRealmPartyLeader # Static
+      0x1400ECDF0: IsAllianceRaid # Static
+      0x1400ECE40: GetCrossRealmPartyMemberCount # Static
+      0x1400ECEA0: GetCrossRealmMemberCount # Static
+      0x1400ECF00: GetCrossRealmGroupMemberCount # Static
+      0x1400ECF90: GetCrossRealmAllianceGroupCount # Static
+      0x1400ECFC0: GetCrossRealmPartyMemberCount_2 # Static
+      0x1400ED000: GetCrossRealmGroupIndex # Static
+      0x1400ED590: IsLocalPlayerInParty # Static
+      0x1400ED5D0: GetCrossRealmMember # Static
+      0x1400ED680: GetCrossRealmMemberByContentId # Static
+      0x1400ED750: GetCrossRealmMemberByObjectId # Static
+      0x1400ED800: IsContentIdInParty # Static
   Client::Graphics::Kernel::Notifier:
     vtbls:
       - ea: 0x14171B7F0
