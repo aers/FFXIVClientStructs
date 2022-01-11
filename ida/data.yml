@@ -2086,6 +2086,7 @@ classes:
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
       0x14064A540: ctor
+      0x14064C4F0: SearchForItem
   Client::UI::Misc::ItemOrderModule:
     vtbls:
       - ea: 0x14176A670
@@ -3205,6 +3206,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x14083CD40: ctor
+      0x14083CED0: CompareItem
   Client::UI::Agent::AgentMobhunt:
     vtbls:
       - ea: 0x141780B28
