@@ -338,6 +338,7 @@ classes:
       0x1407F03D0: GetMaxCharges
       0x1407E10C0: GetRecastGroup
       0x1407E6300: GetRecastGroupDetail
+      0x1407E63D0: Update
   Client::Game::JobGaugeManager:
     instances:
       - ea: 0x141E6DA88
