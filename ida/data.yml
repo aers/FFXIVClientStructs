@@ -85,6 +85,9 @@ functions:
   0x1401E4120: MakeProjectionMatrix2
   0x140328D20: SubmitConstantBufferUpdate
   0x1400A8AD0: IsLocalPlayerPartyLeader
+  0x1400A89E0: IsLocalPlayerInParty
+  0x1400A8B30: IsPartyMemberByNameOrContentId # (name, contentId)
+  0x1400A8C60: GetPartyMemberClassJobByContentId
 
 classes:
   Client::Game::GameMain:
@@ -181,6 +184,8 @@ classes:
       0x1407582D0: IsObjectIDInAlliance
       0x140758340: IsObjectIDPartyLeader
       0x140758910: GetPartyMemberByIndex
+      0x140758990: GetPartyMemberByContentId
+      0x1407588B0: GetPartyMemberByObjectId
       0x140B97C90: Create
       0x140B97BD0: GetGroupManager
   FateManager:
