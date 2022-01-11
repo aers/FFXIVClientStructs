@@ -41,5 +41,14 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Group
 
         [MemberFunction("F6 81 ?? ?? ?? ?? ?? 4C 8B C9 74 1E")]
         public partial PartyMember* GetAllianceMemberByGroupAndIndex(int group, int index);
+
+        [MemberFunction("85 D2 78 19 0F B6 81")]
+        public partial PartyMember* GetPartyMemberByIndex(int index);
+
+        [MemberFunction("E8 ?? ?? ?? ?? 48 8B D8 4C 8B 07")]
+        public partial PartyMember* GetPartyMemberByContentId(ulong contentId);
+
+        [MemberFunction("E8 ?? ?? ?? ?? 83 FF 32")]
+        public partial PartyMember* GetPartyMemberByObjectId(uint objectId);
     }
 }
