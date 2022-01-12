@@ -88,6 +88,7 @@ functions:
   0x1400A89E0: IsLocalPlayerInParty
   0x1400A8B30: IsPartyMemberByNameOrContentId # (name, contentId)
   0x1400A8C60: GetPartyMemberClassJobByContentId
+  0x1406DED10: ObjectIdToPlayerObjectId # returns invalid id if objectid is not a player
 
 classes:
   Client::Game::GameMain:
@@ -99,6 +100,14 @@ classes:
       0x140492FA0: Terminate
       0x140493290: Update
       0x140495080: ctor
+  Client::Game::StatusManager:
+    funcs:
+      0x1406E7BF0: Initialize
+      0x1406E9B90: HasStatus
+      0x1406EAD30: GetStatusIndex
+      0x1406EAB70: GetStatusIdByIndex
+      0x1406EAB90: GetRemainingTimeByIndex
+      0x1406EABC0: GetSourceIdByIndex
   Client::Game::Control::TargetSystem::ListFeeder:
   Client::Game::InstanceContent::ContentSheetWaiterInterface:
   Client::Game::Object::IGameObjectEventListener:
@@ -1443,11 +1452,23 @@ classes:
         base: Client::Game::Object::IGameObjectEventListener
     funcs:
       0x1404A61F0: ctor
-      0x1404AFF80: GetHardTargetId
-      0x1404AFFA0: GetHardTargetId2
-      0x1404B00A0: GetTargetId
+      0x1404AFF80: GetHardTargetObjectId
+      0x1404AFFA0: GetHardTargetId
+      0x1404AFFC0: GetHardTarget
+      0x1404AFFE0: GetSoftTargetObjectId
+      0x1404B0000: GetSoftTargetId
+      0x1404B0020: GetSoftTarget
+      0x1404B0040: GetMouseOverTargetPlayerId
+      0x1404B0080: GetMouseOverTarget
+      0x1404B0090: SetMouseOverEventObj
+      0x1404B00A0: GetTargetObjectId
+      0x1404B00D0: GetTargetPlayerId
       0x1404B0120: GetTargetObject
+      0x1404B0140: GetTargetObjectId2
+      0x1404B0170: GetTargetPlayerId2
       0x1404B01C0: GetTargetObject2
+      0x1404B0470: ClearFocusTarget
+      0x1404B0490: SetFocusTargetByObjectId
       0x1404B0E30: IsObjectInViewRange
   Client::System::Input::InputData:
     vtbls:
