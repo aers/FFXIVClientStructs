@@ -168,12 +168,18 @@ classes:
       0x1407556E0: Update
       0x140755E70: DeleteAllModels
       0x140755F80: DeleteAllObjects  # IMPORTANT:: DONT EVER CALL THIS FOR REAL OKAY
+      0x140755100: GetFilteredObjectById
+      0x1407552D0: UpdateObjectArrays
+      0x140755470: UpdateObjectArraysWrapper
+      0x140755480: UpdateObjectArraysWrapper2
+      0x1407554A0: ClearObjectArrays
   Client::Game::Character::CharacterManager:
     instances:
       - ea: 0x141E9C7E0
         pointer: False
     funcs:
       0x140754080: Initialize
+      0x1407544F0: DeleteCharacterAtIndex
       0x140754590: DeleteAllCharacters
       0x140754680: LookupBattleCharaByObjectID
       0x1407546E0: LookupBattleCharaByName
@@ -1475,6 +1481,7 @@ classes:
       0x1404B0470: ClearFocusTarget
       0x1404B0490: SetFocusTargetByObjectId
       0x1404B0E30: IsObjectInViewRange
+      0x1404B2680: RemoveObjectFromTargets
   Client::System::Input::InputData:
     vtbls:
       - ea: 0x141753220
