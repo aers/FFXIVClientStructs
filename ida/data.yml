@@ -176,6 +176,11 @@ classes:
       0x140754080: Initialize
       0x140754590: DeleteAllCharacters
       0x140754680: LookupBattleCharaByObjectID
+      0x1407546E0: LookupBattleCharaByName
+      0x1407547D0: LookupRetainerByName
+      0x140754870: LookupBuddyByOwnerObject
+      0x1407548F0: LookupPetByOwnerObject
+      0x1407549D0: LookupBattleNpcPartsByObjectId
   Client::Game::Group::GroupManager:
     instances:
       - ea: 0x141EBD260
