@@ -1,9 +1,12 @@
 ﻿using System.Runtime.InteropServices;
+using FFXIVClientStructs.Attributes;
+using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc {
     [StructLayout(LayoutKind.Explicit, Size = 0x27278)]
-    public struct RaptureHotbarModule {
+    public unsafe struct RaptureHotbarModule {
+        [FieldOffset(0x48)] public UIModule* UiModule;
         [FieldOffset(0x90)] public HotBars HotBar;
     }
 
@@ -44,7 +47,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc {
     }
 
     [StructLayout(LayoutKind.Explicit, Size = Size)]
-    public unsafe struct HotBarSlot {
+    public unsafe partial struct HotBarSlot {
         public const int Size = 0xE0;
         [FieldOffset(0x00)] public Utf8String PopUpHelp;
 
@@ -58,6 +61,13 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc {
 
         [FieldOffset(0xCC)] public int Icon;
         [FieldOffset(0xDF)] public byte IsEmpty; // ?
+
+        [MemberFunction("E8 ?? ?? ?? ?? 4C 39 6F 08")]
+        public partial void Set(UIModule* uiModule, HotbarSlotType type, uint id);
+
+        public void Set(HotbarSlotType type, uint id) {
+            this.Set(Framework.Instance()->UIModule, type, id);
+        }
     }
 
     public enum HotbarSlotType : byte {
