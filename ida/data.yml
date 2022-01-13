@@ -621,16 +621,16 @@ classes:
       0x1400ECD50: IsCrossRealmParty # Static
       0x1400ECDD0: IsCrossRealmPartyLeader # Static
       0x1400ECDF0: IsAllianceRaid # Static
-      0x1400ECE40: GetCrossRealmPartyMemberCount # Static
-      0x1400ECEA0: GetCrossRealmMemberCount # Static
-      0x1400ECF00: GetCrossRealmGroupMemberCount # Static
-      0x1400ECF90: GetCrossRealmAllianceGroupCount # Static
-      0x1400ECFC0: GetCrossRealmPartyMemberCount_2 # Static
-      0x1400ED000: GetCrossRealmGroupIndex # Static
+      0x1400ECE40: GetPartyMemberCount # Static
+      0x1400ECEA0: GetTotalMemberCount # Static
+      0x1400ECF00: GetGroupMemberCount # Static
+      0x1400ECF90: GetAllianceGroupCount # Static
+      0x1400ECFC0: GetPartyMemberCount_2 # Static
+      0x1400ED000: GetGroupIndex # Static
       0x1400ED590: IsLocalPlayerInParty # Static
-      0x1400ED5D0: GetCrossRealmMember # Static
-      0x1400ED680: GetCrossRealmMemberByContentId # Static
-      0x1400ED750: GetCrossRealmMemberByObjectId # Static
+      0x1400ED5D0: GetMember # Static
+      0x1400ED680: GetMemberByContentId # Static
+      0x1400ED750: GetMemberByObjectId # Static
       0x1400ED800: IsContentIdInParty # Static
   Client::Graphics::Kernel::Notifier:
     vtbls:
