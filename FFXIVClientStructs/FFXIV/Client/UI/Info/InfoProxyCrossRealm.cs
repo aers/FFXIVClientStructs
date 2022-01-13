@@ -32,19 +32,22 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Info
         public static partial bool IsAllianceRaid();
 
         [MemberFunction("E8 ?? ?? ?? ?? 0F B6 D8 8B CB", IsStatic = true)]
-        public static partial byte GetCrossRealmGroupIndex(byte group);
+        public static partial byte GetGroupIndex(byte group);
+
+        [MemberFunction("E8 ?? ?? ?? ?? 3C 01 77 4B", IsStatic = true)]
+        public static partial byte GetPartyMemberCount();
 
         [MemberFunction("E8 ?? ?? ?? ?? 0F B6 C0 EB 0C", IsStatic = true)]
-        public static partial byte GetCrossRealmGroupMemberCount(int groupIndex);
+        public static partial byte GetGroupMemberCount(int groupIndex);
 
         [MemberFunction("E8 ?? ?? ?? ?? 44 38 60 4B", IsStatic = true)]
-        public static partial CrossRealmMember* GetCrossRealmGroupMember(uint memberIndex, int groupIndex = -1);
+        public static partial CrossRealmMember* GetGroupMember(uint memberIndex, int groupIndex = -1);
         
         [MemberFunction("E8 ?? ?? ?? ?? 48 8B F8 8B 46 10", IsStatic = true)]
-        public static partial CrossRealmMember* GetCrossRealmMemberByContentId(ulong contentId);
+        public static partial CrossRealmMember* GetMemberByContentId(ulong contentId);
 
         [MemberFunction("40 53 4C 8B 05", IsStatic = true)]
-        public static partial CrossRealmMember* GetCrossRealmMemberByObjectId(uint objectId);
+        public static partial CrossRealmMember* GetMemberByObjectId(uint objectId);
 
         [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 2E 0F B6 5E 11", IsStatic = true)]
         public static partial bool IsContentIdInParty(ulong contentId);
