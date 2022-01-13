@@ -18,6 +18,7 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Framework
         [FieldOffset(0x10)] public SystemConfig SystemConfig;
         
         [FieldOffset(0x1680)] public long ServerTime;
+        [FieldOffset(0x16B8)] public float FrameDeltaTime; 
         [FieldOffset(0x1770)] public long EorzeaTime;
 
         [FieldOffset(0x2B30)] public ExcelModuleInterface* ExcelModuleInterface;
