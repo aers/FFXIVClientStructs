@@ -341,6 +341,7 @@ classes:
       - ea: 0x14177B270
         base: Client::Graphics::Vfx::VfxDataListenner
     funcs:
+      0x140048D80: StaticInitializer
       0x1400A96C0: GetCurrentComboActionId
       0x1407DDC90: GetActionRange
       0x1407DE030: GetActionInRangeOrLoS
