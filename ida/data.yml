@@ -136,7 +136,6 @@ classes:
     vtbls:
       - ea: 0x141712C10
   Component::GUI::AtkTextInput::AtkTextInputEventInterface:
-  Component::Log::LogModuleInterface:
   Component::Text::TextChecker::ExecNonMacroFunc:
   Component::Text::TextModule:
   Component::Text::TextModuleInterface:
@@ -4235,7 +4234,7 @@ classes:
     funcs:
       0x141182150: UpdateRotation
       0x141184C50: ctor
-  Client::Game::Camera1:
+  Client::Game::LowCutCamera:
     vtbls:
       - ea: 0x1418D9A18
         base: Client::Game::CameraBase
@@ -4316,10 +4315,13 @@ classes:
         base: Client::Game::Object::GameObject
     funcs:
       0x1411F9550: Create
+  Component::Log::LogModuleInterface:
+    vtbls:
+      - ea: 0x1418E3580
   Component::Log::LogModule:
     vtbls:
       - ea: 0x1418E35D0
-        base: Client::System::Common::NonCopyable
+        base: Component::Log::LogModuleInterface
     funcs:
       0x1412165B0: ctor
   Client::Game::Object::HousingObject:
