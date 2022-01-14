@@ -28,7 +28,7 @@ x86/
 bld/
 [Bb]in/
 [Oo]bj/
-[Ll]og/
+# [Ll]og/ # this ignored one of the FFXIV namespaces
 [Ll]ogs/
 
 # Visual Studio 2015/2017 cache/options directory
