@@ -10,6 +10,15 @@ namespace FFXIVClientStructs.STD
         public T* Last;
         public T* End;
 
+        public ReadOnlySpan<T> Span {
+            get {
+                var size = Size();
+                if (size >= 0x7FEFFFFF)
+                    throw new IndexOutOfRangeException($"Size exceeds max. Array index. (Size={size})");
+                return new ReadOnlySpan<T>(First, (int)size);
+            }
+        }
+
         public ulong Size()
         {
             if (First == null || Last == null)
