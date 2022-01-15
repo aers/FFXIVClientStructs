@@ -8,6 +8,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc {
     public unsafe struct RaptureHotbarModule {
         [FieldOffset(0x48)] public UIModule* UiModule;
         [FieldOffset(0x90)] public HotBars HotBar;
+
+        [FieldOffset(0x11974)] public SavedHotBars SavedClassJob;
     }
 
     [StructLayout(LayoutKind.Sequential, Size = HotBar.Size * 18)]
@@ -69,6 +71,67 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc {
             this.Set(Framework.Instance()->UIModule, type, id);
         }
     }
+
+    #region Saved Bars
+    [StructLayout(LayoutKind.Explicit, Size = 0x5A0 * 61)]
+    public unsafe struct SavedHotBars {
+        [FieldOffset(0x00)] private fixed byte savedHotBars[0x15720];
+
+        public SavedHotBarClassJob* this[int i] {
+            get {
+                if (i is < 0 or > 60) return null;
+                fixed (byte* p = savedHotBars) {
+                    return (SavedHotBarClassJob*)(p + sizeof(SavedHotBarClassJob) * i);
+                }
+            }
+        }
+
+        [StructLayout(LayoutKind.Explicit, Size = 0x5A0)]
+        public unsafe struct SavedHotBarClassJob {
+            [FieldOffset(0x00)] public SavedHotBarClassJobBars Bar;
+
+        }
+
+        [StructLayout(LayoutKind.Explicit, Size = 0x5A0)]
+        public unsafe struct SavedHotBarClassJobBars {
+            [FieldOffset(0x00)] private fixed byte bars[0x5A0];
+
+            public SavedHotBarClassJobBar* this[int i] {
+                get {
+                    if (i is < 0 or > 18) return null;
+                    fixed (byte* p = bars) {
+                        return (SavedHotBarClassJobBar*)(p + sizeof(SavedHotBarClassJobBar) * i);
+                    }
+                }
+            }
+
+            [StructLayout(LayoutKind.Explicit, Size = 0x50)]
+            public unsafe struct SavedHotBarClassJobBar {
+                [FieldOffset(0x00)] public SavedHotBarClassJobSlots Slot;
+            }
+        }
+
+        [StructLayout(LayoutKind.Explicit, Size = 0x50)]
+        public unsafe struct SavedHotBarClassJobSlots {
+            [FieldOffset(0x00)] private fixed byte slots[0x50];
+
+            public SavedHotBarClassJobSlot* this[int i] {
+                get {
+                    if (i is < 0 or > 16) return null;
+                    fixed (byte* p = slots) {
+                        return (SavedHotBarClassJobSlot*)(p + sizeof(SavedHotBarClassJobSlot) * i);
+                    }
+                }
+            }
+
+            [StructLayout(LayoutKind.Explicit, Size = 0x5)]
+            public unsafe struct SavedHotBarClassJobSlot {
+                [FieldOffset(0x00)] public HotbarSlotType Type;
+                [FieldOffset(0x01)] public uint ID;
+            }
+        }
+    }
+    #endregion
 
     public enum HotbarSlotType : byte {
         Empty = 0x00,
