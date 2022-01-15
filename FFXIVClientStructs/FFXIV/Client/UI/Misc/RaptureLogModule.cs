@@ -21,6 +21,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc {
 
         [MemberFunction("E8 ?? ?? ?? ?? 44 03 FB")]
         public partial void ShowLogMessage(uint logMessageID);
+
+        [MemberFunction("4C 8B 81 ?? ?? ?? ?? 4D 85 C0 74 17")]
+        public partial ulong GetContentIdForLogMessage(int index);
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
