@@ -2194,6 +2194,7 @@ classes:
       87: GetForayInfo_2
       88: IsMount
     funcs:
+      0x1406DE0F0: IsCasting
       0x1406EE800: GetCompanionOwnerID
       0x1406F2D40: dtor
       0x140754D40: ctor
@@ -4063,7 +4064,7 @@ classes:
       - ea: 0x1418B5960
         base: Component::GUI::AtkUnitBase
     vfuncs:
-      73: PulseActionBarSlot
+      75: PulseActionBarSlot
   Client::UI::AddonActionBarX:
     vtbls:
       - ea: 0x1418B5C10
