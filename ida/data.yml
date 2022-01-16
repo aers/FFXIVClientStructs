@@ -3783,6 +3783,10 @@ classes:
     vtbls:
       - ea: 0x1418766F0
         base: Component::GUI::AtkUnitBase
+  Client::UI::AddonRepair:
+    vtbls:
+      - ea: 0x141889D60
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonContentsFinder:
     vtbls:
       - ea: 0x14188CF88
@@ -3805,6 +3809,10 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x140E3BA90: ctor
+  Client::UI::AddonSynthesis:
+    vtbls:
+      - ea: 0x141888E48
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonMateriaAttach:
     vtbls:
       - ea: 0x14188AF00
