@@ -56,7 +56,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character
 
         [FieldOffset(0x19B4)] public ushort CurrentWorld;
         [FieldOffset(0x19B6)] public ushort HomeWorld;
-        [FieldOffset(0x19C2)] public byte Icon;
+        [FieldOffset(0x19C2)] public byte OnlineStatus;
         [FieldOffset(0x19D9)] public byte ShieldValue;
         [FieldOffset(0x19DF)] public byte StatusFlags;
         [FieldOffset(0x19A8)] public uint CompanionOwnerID;
