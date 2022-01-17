@@ -155,6 +155,8 @@ classes:
   Component::GUI::AtkInputManager:
     funcs:
       0x1404FF3A0: HandleInput
+      0x140500B60: SetFocus
+      0x140501650: HandleFocus
       0x140501B30: ctor
   Client::Game::CameraManager:
     funcs:
@@ -581,13 +583,14 @@ classes:
       11: UpdateAddonByID
     funcs:
       0x1404F9350: ctor
+      0x1404FAE00: GetAddonByName
+      0x1404FAEB0: GetAddonByNode
   Client::UI::RaptureAtkUnitManager:
     vtbls:
       - ea: 0x141712ED8
         base: Component::GUI::AtkUnitManager
     funcs:
       0x1400AC6A0: ctor
-      0x1404FAE00: GetAddonByName
   Client::UI::RaptureAtkModule:
     vtbls:
       - ea: 0x141713140
@@ -1552,6 +1555,7 @@ classes:
       - ea: 0x141755648
         base: Component::GUI::AtkEventTarget
     funcs:
+      0x1404CEB50: SetFocus
       0x1404CEBB0: ClearFocus
       0x1404CFAE0: GetNumberArrayData
       0x1404CFC10: ctor

@@ -13,7 +13,9 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
         MouseOut = 7,
         MouseClick = 9,                  
         InputReceived = 12,
-        // AtkComponentButt on & children
+        FocusStart = 18,
+        FocusStop = 19,
+        // AtkComponentButton & children
         ButtonPress = 23,                // sent on MouseDown on button
         ButtonRelease = 24,              // sent on MouseUp and MouseOut
         ButtonClick = 25,                // sent on MouseUp and MouseClick on button     
