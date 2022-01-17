@@ -237,6 +237,7 @@ classes:
       0x140059EB0: ctor_FromSequence # (FFXIVString, char * str, size_t size)
       0x14005A970: dtor
       0x14005A9F0: SetString
+      0x14005ABC0: FormatString
       0x14005B0C0: GetString
       0x14005CF30: Clear
   Component::GUI::AtkValue:
@@ -786,6 +787,7 @@ classes:
       8: GetAddonId
     funcs:
       0x1401F8120: ctor
+      0x1401F86D0: GetAgentByInternalId
   Client::UI::Agent::AgentCharaMake:
     vtbls:
       - ea: 0x14172F7C8
@@ -1740,6 +1742,7 @@ classes:
       17: SetHandlerFunction
       39: SetUIVisibility
       58: OnUpdate
+      63: OpenMapWithMapLink
     funcs:
       0x14051F920: ctor
       0x140520780: HandleInput
@@ -2745,6 +2748,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140842940: ctor
+      0x1408479B0: InsertTextCommandParam
   Client::UI::Agent::AgentInventory:
     vtbls:
       - ea: 0x14177D5E0
@@ -3465,7 +3469,9 @@ classes:
     funcs:
       0x140883D60: ctor
       0x140880690: AddGatheringMapCircle
-      0x14087F9D0: OpenSpecialMap
+      0x14087F9D0: OpenMap
+      0x14088AD10: OpenMapByMapId
+      0x1408809E0: SetMapFlagMarker # (this, territoryId, mapId, (float)x, (float)y, iconId)
   Client::UI::Agent::AgentRecipeNote:
     vtbls:
       - ea: 0x14177FBB8
