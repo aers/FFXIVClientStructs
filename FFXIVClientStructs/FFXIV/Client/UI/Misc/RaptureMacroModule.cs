@@ -62,7 +62,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc {
         public partial void AppendMacroLines(Macro* macro, Utf8String* lines);
 
         [MemberFunction("E8 ? ? ? ? 83 F8 0F B9 ? ? ? ?")]
-        public partial void GetLineCount(Macro* macro);
+        public partial uint GetLineCount(Macro* macro);
 
         [MemberFunction("E8 ? ? ? ? 48 8D 4C 24 ? E8 ? ? ? ? 48 8D 8C 24 ? ? ? ? E8 ? ? ? ? 41 FE C7")]
         public partial void SetMacroLines(Macro* macro, int lineStartIndex, Utf8String* lines);
