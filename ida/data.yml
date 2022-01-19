@@ -2090,6 +2090,11 @@ classes:
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
       0x140614F10: ctor
+      0x140615010: GetMacro
+      0x140615050: ReplaceMacroLines # replaces macro with lines stored in string
+      0x140615070: AppendMacroLines # appends lines stored in string to macro
+      0x1406150C0: GetLineCount
+      0x1406167A0: SetMacroLines # function called by replace/append
   Client::UI::Misc::RaptureTextModule:
     vtbls:
       - ea: 0x141769FC8

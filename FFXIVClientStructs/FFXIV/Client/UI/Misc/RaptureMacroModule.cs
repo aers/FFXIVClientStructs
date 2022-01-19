@@ -12,7 +12,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc {
         public static RaptureMacroModule* Instance => Framework.Instance()->GetUiModule()->GetRaptureMacroModule();
 
         [StructLayout(LayoutKind.Sequential, Size = 0x688)]
-        public struct Macro {
+        public struct Macro
+        {
+            public uint IconId;
+            public uint Unk;
             public Utf8String Name;
             public Lines Line;
 
@@ -48,5 +51,20 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc {
 
         [FieldOffset(0x58)] public MacroPage Individual;
         [FieldOffset(0x28D78)] public MacroPage Shared;
+
+        [MemberFunction("E8 ? ? ? ? 32 DB 83 C6 F9")]
+        public partial Macro* GetMacro(uint set, uint index);
+
+        [MemberFunction("E8 ? ? ? ? 48 8D 4C 24 ? E8 ? ? ? ? 44 8B 83 ? ? ? ?")]
+        public partial void ReplaceMacroLines(Macro* macro, Utf8String* lines);
+
+        [MemberFunction("E8 ? ? ? ? 44 8B 87 ? ? ? ? B2 01")]
+        public partial void AppendMacroLines(Macro* macro, Utf8String* lines);
+
+        [MemberFunction("E8 ? ? ? ? 83 F8 0F B9 ? ? ? ?")]
+        public partial void GetLineCount(Macro* macro);
+
+        [MemberFunction("E8 ? ? ? ? 48 8D 4C 24 ? E8 ? ? ? ? 48 8D 8C 24 ? ? ? ? E8 ? ? ? ? 41 FE C7")]
+        public partial void SetMacroLines(Macro* macro, int lineStartIndex, Utf8String* lines);
     }
 }
