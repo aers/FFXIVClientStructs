@@ -47,6 +47,9 @@ namespace FFXIVClientStructs.FFXIV.Client.System.String
         [MemberFunction("E8 ? ? ? ? 44 2B F7")]
         public partial void Ctor();
 
+        [MemberFunction("E8 ? ? ? ? B0 6E")]
+        public partial void Dtor();
+
         [MemberFunction("E8 ? ? ? ? 89 6F 68")]
         public partial void SetString(byte* cStr);
     }
