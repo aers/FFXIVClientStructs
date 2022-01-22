@@ -2103,6 +2103,7 @@ classes:
       0x140619C50: FormatAddonText
       0x140619F00: FormatAddonText2
       0x14061E8B0: FormatAddonText3
+      0x14061EF10: FormatAddonText4
   Client::UI::Misc::RaptureLogModule:
     vtbls:
       - ea: 0x14176A240
