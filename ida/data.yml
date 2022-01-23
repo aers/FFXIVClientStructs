@@ -2104,6 +2104,7 @@ classes:
       0x140619F00: FormatAddonText2
       0x14061E8B0: FormatAddonText3
       0x14061EF10: FormatAddonText4
+      0x140623390: FormatAddonTextApply
   Client::UI::Misc::RaptureLogModule:
     vtbls:
       - ea: 0x14176A240
