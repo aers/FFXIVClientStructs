@@ -23,9 +23,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent {
         
         [FieldOffset(0x37B8)] public FlagMapMarker FlagMapMarker;
 
-        [FieldOffset(0x3800)] public fixed byte UnkArray1[0x38 * 12];
-        [FieldOffset(0x3AA0)] public fixed byte UnkArray2[0x38 * 12];
-        [FieldOffset(0x3E90)] public fixed byte UnkArray3[0x40 * 100];
+        [FieldOffset(0x3800)] public fixed byte UnkArray1[0x38 * 12]; // 12 * MapMarkerBase
+        [FieldOffset(0x3AA0)] public fixed byte UnkArray2[0xA8 * 12];
+        [FieldOffset(0x3E90)] public fixed byte MiniMapMarkerArray[0x40 * 100]; // 100 * MiniMapMarker
 
         [FieldOffset(0x5838)] public float SelectedMapSizeFactorFloat;
         [FieldOffset(0x583C)] public float CurrentMapSizeFactorFloat;
@@ -89,8 +89,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent {
         }
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 0x48)]
-    public unsafe struct FlagMapMarker {
+    [StructLayout(LayoutKind.Explicit, Size = 0x38)]
+    public unsafe struct MapMarkerBase {
         [FieldOffset(0x00)] public byte SubtextOrientation;
         [FieldOffset(0x01)] public byte SubtextStyle;
         [FieldOffset(0x02)] public ushort IconFlags;
@@ -101,7 +101,11 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent {
 
         [FieldOffset(0x2C)] public short X;
         [FieldOffset(0x2E)] public short Y;
+    }
 
+    [StructLayout(LayoutKind.Explicit, Size = 0x48)]
+    public struct FlagMapMarker {
+        [FieldOffset(0x00)] public MapMarkerBase MapMarker;
         [FieldOffset(0x38)] public uint TerritoryId;
         [FieldOffset(0x3C)] public uint MapId;
         [FieldOffset(0x40)] public float XFloat;
@@ -109,18 +113,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent {
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x48)]
-    public unsafe struct MapMarkerInfo {
-        [FieldOffset(0x00)] public byte SubtextOrientation;
-        [FieldOffset(0x01)] public byte SubtextStyle;
-        [FieldOffset(0x02)] public ushort IconFlags;
-        [FieldOffset(0x04)] public uint IconId;
-        [FieldOffset(0x08)] public uint SecondaryIconId;
-        [FieldOffset(0x0C)] public int Scale;
-        [FieldOffset(0x10)] public byte* Subtext;
-        [FieldOffset(0x18)] public byte Index;
-
-        [FieldOffset(0x2C)] public short X;
-        [FieldOffset(0x2E)] public short Y;
+    public struct MapMarkerInfo {
+        [FieldOffset(0x00)] public MapMarkerBase MapMarker;
 
         [FieldOffset(0x3C)] public ushort DataType;
         [FieldOffset(0x3E)] public ushort DataKey;
@@ -129,19 +123,17 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent {
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x108)]
-    public unsafe struct TempMapMarker {
+    public struct TempMapMarker {
         [FieldOffset(0x00)] public Utf8String TooltipText;
-        [FieldOffset(0x68)] public uint Flags;
-        [FieldOffset(0x6C)] public uint IconId;
-        [FieldOffset(0x74)] public int Radius;
-        [FieldOffset(0x78)] public byte* TooltipTextPtr;
-        [FieldOffset(0x80)] public ushort Index;
-
-        [FieldOffset(0x94)] public short X;
-        [FieldOffset(0x96)] public short Y;
+        [FieldOffset(0x68)] public MapMarkerBase MapMarker;
 
         [FieldOffset(0xA8)] public uint StyleFlags;
         [FieldOffset(0xAC)] public uint Type;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x40)]
+    public struct MiniMapMarker {
+        [FieldOffset(0x08)] public MapMarkerBase MapMarker;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0xB8)]
