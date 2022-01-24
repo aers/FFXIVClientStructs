@@ -3484,6 +3484,7 @@ classes:
       0x14087F9D0: OpenMap
       0x14088AD10: OpenMapByMapId
       0x1408809E0: SetFlagMapMarker # (this, territoryId, mapId, (float)x, (float)y, iconId)
+      0x14088EDC0: CanUseTeleport # static
   Client::UI::Agent::AgentRecipeNote:
     vtbls:
       - ea: 0x14177FBB8
