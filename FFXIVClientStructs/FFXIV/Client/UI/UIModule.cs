@@ -10,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
 {
     // Client::UI::UIModule
     //   Client::UI::UIModuleInterface
-    [StructLayout(LayoutKind.Explicit, Size = 0xE32D0)]
+    [StructLayout(LayoutKind.Explicit, Size = 0xE3320)]
     public unsafe partial struct UIModule
     {
         [FieldOffset(0x0)] public void* vtbl;
