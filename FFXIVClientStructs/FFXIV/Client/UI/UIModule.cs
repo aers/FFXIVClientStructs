@@ -1,4 +1,5 @@
 ﻿using System.Runtime.InteropServices;
+using System;
 using FFXIVClientStructs.Attributes;
 using FFXIVClientStructs.FFXIV.Client.Game;
 using FFXIVClientStructs.FFXIV.Client.UI.Agent;
@@ -21,6 +22,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
         [FieldOffset(0x20)] public void* unk;
         [FieldOffset(0x28)] public void* SystemConfig;
 
+        [Obsolete("Use GetRaptureAtkModule", true)]
         [FieldOffset(0xB8ED0)] public RaptureAtkModule RaptureAtkModule; // note: NOT a pointer, the module's a member
 
         /*
