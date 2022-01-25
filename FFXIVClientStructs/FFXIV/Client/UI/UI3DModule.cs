@@ -31,7 +31,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
         // 4 => 6
         // 5, 7, 12, 16 => 5
         // 6 => 7
-        // 10 => 2
+        // 10 => 2              
         // rest => 9
         
         // Client::UI::UI3DModule::ObjectInfo

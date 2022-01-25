@@ -210,6 +210,17 @@ classes:
       0x1407588B0: GetPartyMemberByObjectId
       0x140B97C90: Create
       0x140B97BD0: GetGroupManager
+  Client::Game::Balloon:
+    funcs:
+      0x141238C60: OpenBalloon
+      0x141238CD0: CloseBalloon
+      0x141238DC0: Initialize
+      0x141238E00: SetDefaultId
+      0x141238E10: Reset # this is near identical to Initialize but is called in update instead
+      0x141238E50: Update
+      0x141238FB0: Terminate
+      0x141239000: StartTimerMode # (Balloon* this, float timer, ushort id) if id == 1 use default id else use id
+      0x141239040: StartOtherMode # (Balloon* this, ushort id) id same as above
   FateManager:
     funcs:
       0x14110C610: HasValue  # g_FateTablePtr != 0
@@ -2184,9 +2195,10 @@ classes:
       41: Update
       49: GetNpcID
       58: IsDead
+      60: Terminate
       61: Destroy
       62: IsCharacter
-      69: OnInitialize
+      69: Initialize
     funcs:
       0x1406DEB60: IsMountOrOrnament
       0x1406DF860: GetPosition
@@ -2851,6 +2863,9 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x1408FD090: ctor
+      0x1408FF530: OpenBalloon
+      0x1408FF9E0: CloseBalloon
+      0x1408FFB70: ResetBalloon
   Client::UI::Agent::AgentLoot:
     vtbls:
       - ea: 0x14177EC28
