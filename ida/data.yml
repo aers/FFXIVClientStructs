@@ -3970,6 +3970,9 @@ classes:
     vtbls:
       - ea: 0x14189C6B8
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140EF9F20: ctor
+      0x140EFAB90: ChangeTab
   Client::UI::AddonDeepDungeonStatus:
     vtbls:
       - ea: 0x1418A7238
