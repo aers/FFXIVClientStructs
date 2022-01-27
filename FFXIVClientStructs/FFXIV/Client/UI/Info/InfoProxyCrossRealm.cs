@@ -1,3 +1,4 @@
+using System;
 using System.Runtime.InteropServices;
 using FFXIVClientStructs.Attributes;
 
@@ -21,6 +22,12 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Info
 
         [FieldOffset(0x3A0)] public fixed byte CrossRealmGroupArray[6 * 0x288];
 
+        public ReadOnlySpan<CrossRealmGroup> CrossRealmGroupSpan {
+            get {
+                fixed (byte* gp = CrossRealmGroupArray)
+                    return new ReadOnlySpan<CrossRealmGroup>(gp, GroupCount);
+            }
+        }
 
         [MemberFunction("E8 ?? ?? ?? ?? 80 B8 ?? ?? ?? ?? ?? 74 5C", IsStatic = true)]
         public static partial InfoProxyCrossRealm* Instance();
@@ -57,6 +64,13 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Info
     public unsafe struct CrossRealmGroup {
         [FieldOffset(0x00)] public byte GroupMemberCount;
         [FieldOffset(0x08)] public fixed byte GroupMembers[8 * 0x50];
+
+        public ReadOnlySpan<CrossRealmMember> GroupMemberSpan {
+            get {
+                fixed (byte* gp = GroupMembers)
+                    return new ReadOnlySpan<CrossRealmMember>(gp, GroupMemberCount);
+            }
+        }
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x50)]
