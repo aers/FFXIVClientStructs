@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 
 namespace FFXIVClientStructs.STD
@@ -12,11 +13,25 @@ namespace FFXIVClientStructs.STD
         public ulong MyOff; // offset of current first element
         public ulong MySize; // current length 
 
-        public int BlockSize() => 
+        private int BlockSize() => 
             sizeof(T) <= 1 ? 16 :
             sizeof(T) <= 2 ? 8 :
             sizeof(T) <= 4 ? 4 :
             sizeof(T) <= 8 ? 2 : 
             1;
+
+        private ulong GetBlock(ulong offset) =>
+            (offset / (ulong) BlockSize()) & (MapSize - 1);
+
+        public T Get(ulong index)
+        {
+            if (index >= MySize)
+                throw new IndexOutOfRangeException($"Index out of Range: {index}");
+
+            ulong actualIndex = MyOff + index;
+            ulong block = GetBlock(actualIndex);
+            ulong offset = actualIndex % (ulong) BlockSize();
+            return Map[block][offset];
+        }
     }
 }
