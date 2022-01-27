@@ -35,6 +35,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent
         public AgentTeleport* GetAgentTeleport() => (AgentTeleport*)GetAgentByInternalId(AgentId.Teleport);
         public AgentLobby* GetAgentLobby() => (AgentLobby*)GetAgentByInternalId(AgentId.Lobby);
         public AgentMap* GetAgentMap() => (AgentMap*)GetAgentByInternalId(AgentId.Map);
+        public AgentScreenLog* GetAgentScreenLog() => (AgentScreenLog*)GetAgentByInternalId(AgentId.ScreenLog);
+        public AgentItemSearch* GetAgentItemSearch() => (AgentItemSearch*)GetAgentByInternalId(AgentId.ItemSearch);
+        public AgentRetainerList* GetAgentRetainerList() => (AgentRetainerList*)GetAgentByInternalId(AgentId.RetainerList);
+        public AgentRevive* GetAgentRevive() => (AgentRevive*)GetAgentByInternalId(AgentId.Revive);
     }
 
     public enum AgentId : uint {
@@ -214,6 +218,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent
         WebGuidance = 212,
         Orchestrion = 213,
         OrchestrionInn = 218,
+        HousingEditContainer = 219,
         YkwNote = 222, //yokai watch medallium
         ContentsFinderMenu = 223,
         RaidFinder = 224,
@@ -223,10 +228,15 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent
         DeepDungeonStatus = 230,
         DeepDungeonSaveData = 231,
         DeepDungeonScore = 232,
+        GcArmyTraining = 233,
         GcArmyMenberProfile = 234,
+        //GcArmyExpeditionResult = 235,
+        GcArmyCapture = 236,
+        GcArmyOrder = 237,
         OrchestrionPlayList = 239,
         CountDownSettingDialog = 240,
         WeeklyBingo = 241, //Wondrous Tails
+        AquariumSetting = 249,
         DeepDungeonMenu = 251,
         ItemAppraisal = 254, //DeepDungeon Appraisal
         ItemInspection = 255, //Lockbox
