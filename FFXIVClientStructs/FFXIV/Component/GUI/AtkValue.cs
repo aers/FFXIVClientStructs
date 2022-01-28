@@ -1,4 +1,5 @@
 ﻿using System.Runtime.InteropServices;
+using FFXIVClientStructs.Attributes;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI
 {
@@ -15,7 +16,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
-    public unsafe struct AtkValue
+    public unsafe partial struct AtkValue
     {
         [FieldOffset(0x0)] public ValueType Type;
 
@@ -25,5 +26,11 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
         [FieldOffset(0x8)] public byte* String; // char*
         [FieldOffset(0x8)] public float Float;
         [FieldOffset(0x8)] public byte Byte;
+
+        [MemberFunction("E8 ? ? ? ? 45 84 F6 48 8D 4C 24")]
+        public partial void ChangeType(ValueType type);
+
+        [MemberFunction("E8 ? ? ? ? 41 03 ED")]
+        public partial void SetString(byte* str);
     }
 }
