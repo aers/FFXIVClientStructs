@@ -597,6 +597,7 @@ classes:
       11: UpdateAddonByID
     funcs:
       0x1404F9550: ctor
+      0x1404FAFA0: GetAddonById
       0x1404FB000: GetAddonByName
       0x1404FB0B0: GetAddonByNode
   Client::UI::RaptureAtkUnitManager:
