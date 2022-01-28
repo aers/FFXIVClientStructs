@@ -1567,6 +1567,7 @@ classes:
       - ea: 0x141757678
         base: Component::GUI::AtkEventTarget
     funcs:
+      0x1404CED20: GetFocus
       0x1404CED50: SetFocus
       0x1404CEDB0: ClearFocus
       0x1404CFCE0: GetNumberArrayData
