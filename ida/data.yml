@@ -289,7 +289,9 @@ classes:
       0x1404EA260: ReadASHDAndLoadTextures
       0x1404EA740: CreateAtkNode
       0x1404EBB50: CreateAtkComponent
+      0x1404ED150: DuplicateNode
       0x1404ED630: SearchNodeByIndex  # this supports indexes greater than the node count, there's something i don't understand going on w/ addons here
+      0x1404ED6A0: GetDuplicatedNode
   Component::GUI::AtkArrayDataHolder:
     funcs:
       0x1404BEE40: ctor
@@ -595,6 +597,7 @@ classes:
       11: UpdateAddonByID
     funcs:
       0x1404F9550: ctor
+      0x1404FAFA0: GetAddonById
       0x1404FB000: GetAddonByName
       0x1404FB0B0: GetAddonByNode
   Client::UI::RaptureAtkUnitManager:
@@ -1567,6 +1570,7 @@ classes:
       - ea: 0x141757678
         base: Component::GUI::AtkEventTarget
     funcs:
+      0x1404CED20: GetFocus
       0x1404CED50: SetFocus
       0x1404CEDB0: ClearFocus
       0x1404CFCE0: GetNumberArrayData

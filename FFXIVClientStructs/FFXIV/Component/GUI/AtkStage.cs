@@ -20,6 +20,10 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
         [MemberFunction("E8 ? ? ? ? 0F BF D5", IsStatic = true)]
         public static partial AtkStage* GetSingleton();
 
-        
+        [MemberFunction("E8 ?? ?? ?? ?? 48 3B F0 0F 85")]
+        public partial AtkResNode* GetFocus();
+
+        [MemberFunction("E8 ?? ?? ?? ?? 8B C3 C1 E8 05")]
+        public partial void ClearFocus();
     }
 }
