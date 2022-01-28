@@ -1,6 +1,7 @@
 ﻿using System.Runtime.InteropServices;
 using System.Text;
 using FFXIVClientStructs.Attributes;
+using FFXIVClientStructs.STD;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI
 {
@@ -29,6 +30,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
         [FieldOffset(0x8)] public byte* String; // char*
         [FieldOffset(0x8)] public float Float;
         [FieldOffset(0x8)] public byte Byte;
+        [FieldOffset(0x8)] public StdVector<AtkValue>* Vector;
 
         [MemberFunction("E8 ?? ?? ?? ?? 49 BA")]
         public partial void SetString(byte* value);
@@ -36,6 +38,9 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
         [MemberFunction("E8 ?? ?? ?? ?? F7 DE")]
         public partial void ChangeType(ValueType type);
 
+        [MemberFunction("E8 ?? ?? ?? ?? 33 FF 89 7C 24")]
+        public partial void CreateArray(int size);
+        
         public void SetString(string value) {
             var bytes = Encoding.UTF8.GetBytes(value + '\0');
             fixed(byte* bp = bytes)
