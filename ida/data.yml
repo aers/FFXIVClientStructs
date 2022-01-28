@@ -289,7 +289,9 @@ classes:
       0x1404EA260: ReadASHDAndLoadTextures
       0x1404EA740: CreateAtkNode
       0x1404EBB50: CreateAtkComponent
+      0x1404ED150: DuplicateNode
       0x1404ED630: SearchNodeByIndex  # this supports indexes greater than the node count, there's something i don't understand going on w/ addons here
+      0x1404ED6A0: GetDuplicatedNode
   Component::GUI::AtkArrayDataHolder:
     funcs:
       0x1404BEE40: ctor
