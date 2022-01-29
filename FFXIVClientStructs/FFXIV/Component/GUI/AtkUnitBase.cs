@@ -11,7 +11,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
     // base class for all AddonXXX classes (visible UI objects)
 
     // size = 0x220
-    // ctor E8 ? ? ? ? 83 8B ? ? ? ? ? 33 C0 
+    // ctor E8 ? ? ? ? 83 8B ? ? ? ? ? 33 C0
 
     [StructLayout(LayoutKind.Explicit, Size = 0x220)]
     public unsafe partial struct AtkUnitBase
@@ -25,8 +25,10 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
         [FieldOffset(0x182)] public byte Flags;
         [FieldOffset(0x1BC)] public short X;
         [FieldOffset(0x1BE)] public short Y;
-        [FieldOffset(0x1CC)] public short ID;
-        [FieldOffset(0x1CE)] public short ParentID;
+        [FieldOffset(0x1CC)] public ushort ID;
+        [FieldOffset(0x1CE)] public ushort ParentID;
+        [FieldOffset(ox1D0)] public ushort UnknownID;
+        [FieldOffset(0x1D2)] public ushort ContextMenuParentID;
         [FieldOffset(0x1D5)] public byte Alpha;
 
         [FieldOffset(0x1D8)]
@@ -64,10 +66,10 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
 
         [VirtualFunction(3)]
         public partial bool Show(int unkInt, bool unkBool = false);
-        
+
         [VirtualFunction(4)]
         public partial bool Hide(bool unknown);
-        
+
         [VirtualFunction(7)]
         public partial void SetPosition(short x, short y);
 

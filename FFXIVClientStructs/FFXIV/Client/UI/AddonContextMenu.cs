@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI
 {
-    [StructLayout(LayoutKind.Explicit)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x298)]
     public struct AddonContextMenu
     {
         [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
