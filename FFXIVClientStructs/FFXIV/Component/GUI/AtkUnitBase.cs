@@ -20,6 +20,9 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
         [FieldOffset(0x8)] public fixed byte Name[0x20];
         [FieldOffset(0x28)] public AtkUldManager UldManager;
         [FieldOffset(0xC8)] public AtkResNode* RootNode;
+        [FieldOffset(0xD0)] public AtkCollisionNode* WindowCollisionNode;
+        [FieldOffset(0xD8)] public AtkCollisionNode* WindowHeaderCollisionNode;
+        [FieldOffset(0xE0)] public AtkResNode* CursorTarget; // Likely always AtkCollisionNode
         [FieldOffset(0x108)] public AtkComponentNode* WindowNode;
         [FieldOffset(0x1AC)] public float Scale;
         [FieldOffset(0x182)] public byte Flags;
