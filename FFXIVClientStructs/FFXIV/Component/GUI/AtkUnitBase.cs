@@ -27,7 +27,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
         [FieldOffset(0x1BE)] public short Y;
         [FieldOffset(0x1CC)] public ushort ID;
         [FieldOffset(0x1CE)] public ushort ParentID;
-        [FieldOffset(ox1D0)] public ushort UnknownID;
+        [FieldOffset(0x1D0)] public ushort UnknownID;
         [FieldOffset(0x1D2)] public ushort ContextMenuParentID;
         [FieldOffset(0x1D5)] public byte Alpha;
 
