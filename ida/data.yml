@@ -1125,6 +1125,7 @@ classes:
         base: Client::Graphics::Kernel::Notifier
     funcs:
       0x140387170: ctor
+      0x1403873A0: Initialize
   Client::Graphics::PostEffect::PostEffectChain:
     vtbls:
       - ea: 0x141744968
