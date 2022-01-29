@@ -16,6 +16,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI
     public unsafe partial struct UIState
     {
         [FieldOffset(0x00)] public Hotbar Hotbar;
+        [FieldOffset(0x08)] public Hate Hate;
+        [FieldOffset(0x110)] public Hater Hater;
+        [FieldOffset(0xA18)] public WeaponState WeaponState;
         [FieldOffset(0xA38)] public PlayerState PlayerState;
         [FieldOffset(0x11B0)] public Revive Revive;
         [FieldOffset(0x1448)] public Telepo Telepo;
