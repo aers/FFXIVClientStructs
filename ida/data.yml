@@ -1715,6 +1715,7 @@ classes:
       0x1404F2D30: GetTextNodeById
       0x1404F2D90: GetImageNodeById
       0x1404F2E90: FireCallback
+      0x1404F54D0: ResizeCollisionNodeList
   Component::GUI::AtkComponentBase:
     vtbls:
       - ea: 0x141758260

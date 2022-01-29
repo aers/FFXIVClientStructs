@@ -67,6 +67,9 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
         [MemberFunction("E8 ?? ?? ?? ?? 8B 44 24 20 C1 E8 05")]
         public partial void FireCallback(int valueCount, AtkValue* values, void* a4 = null);
 
+        [MemberFunction("E8 ?? ?? ?? ?? F6 46 40 0F")]
+        public partial void ResizeCollisionNodeList(byte nodeCount);
+
         [VirtualFunction(3)]
         public partial bool Show(int unkInt, bool unkBool = false);
 
