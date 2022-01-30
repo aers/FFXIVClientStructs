@@ -396,37 +396,40 @@ def load_data():
     with open(api.data_file_path, "r") as fd:
         data = yaml.safe_load(fd)
 
-    for ea, name in data["globals"].items():
-        if not isinstance(ea, (int, long)):
-            print('Warning: {0} has an invalid address {1}'.format(name, ea))
-            continue
-        api.set_addr_name(ea, name)
+    if data.get("globals"):
+        for ea, name in data["globals"].items():
+            if not isinstance(ea, (int, long)):
+                print('Warning: {0} has an invalid address {1}'.format(name, ea))
+                continue
+            api.set_addr_name(ea, name)
 
-    for ea, name in data["functions"].items():
-        if not isinstance(ea, (int, long)):
-            print('Warning: {0} has an invalid address {1}'.format(name, ea))
-            continue
-        api.set_addr_name(ea, name)
+    if data.get("functions"):
+        for ea, name in data["functions"].items():
+            if not isinstance(ea, (int, long)):
+                print('Warning: {0} has an invalid address {1}'.format(name, ea))
+                continue
+            api.set_addr_name(ea, name)
 
-    factory = FfxivClassFactory()
 
-    for class_name, class_data in data["classes"].items():
-        if not class_data:
-            class_data = {}
+    if data.get("classes"):
+        factory = FfxivClassFactory()
+        for class_name, class_data in data["classes"].items():
+            if not class_data:
+                class_data = {}
 
-        vtbls_raw = class_data.pop("vtbls", [])
-        vtbls = [(vtbl["ea"], vtbl["base"] if "base" in vtbl else None) for vtbl in vtbls_raw]
-        vfuncs = class_data.pop("vfuncs", {})
-        funcs = class_data.pop("funcs", {})
-        instances_raw = class_data.pop("instances", [])
-        instances = [(instance["ea"], instance["name"] if "name" in instance else "Instance") for instance in instances_raw]
-        for leftover in class_data:
-            print("Warning: Extra key \"{0}\" present in {1}".format(leftover, class_name))
+            vtbls_raw = class_data.pop("vtbls", [])
+            vtbls = [(vtbl["ea"], vtbl["base"] if "base" in vtbl else None) for vtbl in vtbls_raw]
+            vfuncs = class_data.pop("vfuncs", {})
+            funcs = class_data.pop("funcs", {})
+            instances_raw = class_data.pop("instances", [])
+            instances = [(instance["ea"], instance["name"] if "name" in instance else "Instance") for instance in instances_raw]
+            for leftover in class_data:
+                print("Warning: Extra key \"{0}\" present in {1}".format(leftover, class_name))
 
-        factory.register(
-            class_name=class_name, vtbls=vtbls, vfuncs=vfuncs, funcs=funcs, instances=instances)
+            factory.register(
+                class_name=class_name, vtbls=vtbls, vfuncs=vfuncs, funcs=funcs, instances=instances)
 
-    factory.finalize()
+        factory.finalize()
 
 
 class FfxivClassFactory:
