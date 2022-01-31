@@ -28,7 +28,15 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc {
 
         [Flags]
         public enum GearsetFlag : byte {
+            None = 0x00,
             Exists = 0x01,
+            Unknown02 = 0x02,
+            Unknown04 = 0x04,
+            HeadgearVisible = 0x08,
+            WeaponsVisible = 0x10,
+            VisorEnabled = 0x20,
+            Unknown40 = 0x40,
+            Unknown80 = 0x80
         }
 
         [StructLayout(LayoutKind.Sequential, Size = 0x1C)]
