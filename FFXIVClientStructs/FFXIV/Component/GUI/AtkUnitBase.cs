@@ -26,6 +26,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
         [FieldOffset(0x108)] public AtkComponentNode* WindowNode;
         [FieldOffset(0x1AC)] public float Scale;
         [FieldOffset(0x182)] public byte Flags;
+        [FieldOffset(0x1B6)] public byte VisibilityFlags;
         [FieldOffset(0x1BC)] public short X;
         [FieldOffset(0x1BE)] public short Y;
         [FieldOffset(0x1CC)] public ushort ID;
