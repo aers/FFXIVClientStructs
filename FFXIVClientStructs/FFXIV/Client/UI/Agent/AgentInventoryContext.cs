@@ -11,23 +11,25 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent {
         
         [FieldOffset(0x0)] public AgentInterface AgentInterface;
         [FieldOffset(0x28)] public uint BlockingAddonId;
+        
         [FieldOffset(0x2C)] public int ContexItemStartIndex;
         [FieldOffset(0x30)] public int ContextItemCount;
         //TODO check if this is actually correct
-        [FieldOffset(0x38)] public fixed byte ContextItemValueArray[0x10 * 82];
-        [FieldOffset(0x558)] public fixed byte ContextItemActionArray[80];
+        [FieldOffset(0x38)] public fixed byte EventParams[0x10 * 82];
+        [FieldOffset(0x558)] public fixed byte EventIdArray[80];
         [FieldOffset(0x5A8)] public uint ContextItemDisabledMask;
+        [FieldOffset(0x5AC)] public uint ContextItemSubmenuMask;
         
-        public Span<AtkValue> ContextItemValueSpan {
+        public Span<AtkValue> EventParamsSpan {
             get {
-                fixed(byte* ptr = ContextItemValueArray)
+                fixed(byte* ptr = EventParams)
                     return new Span<AtkValue>(ptr, 82);
             }
         }
         
-        public Span<byte> ContextItemActionSpan {
+        public Span<byte> EventIdSpan {
             get {
-                fixed (byte* ptr = ContextItemActionArray)
+                fixed (byte* ptr = EventIdArray)
                     return new Span<byte>(ptr, 80);
             }
         }
