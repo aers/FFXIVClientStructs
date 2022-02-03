@@ -135,6 +135,8 @@ classes:
   Component::GUI::AtkModuleInterface::AtkEventInterface:
     vtbls:
       - ea: 0x141714C40
+    vfuncs:
+      0: ReceiveEvent
   Component::GUI::AtkTextInput::AtkTextInputEventInterface:
   Component::Text::TextChecker::ExecNonMacroFunc:
   Component::Text::TextModule:
@@ -806,6 +808,9 @@ classes:
     funcs:
       0x1401F8270: ctor
       0x1401F8820: GetAgentByInternalId
+      0x1401F88A0: GetAgentInventoryContext
+      0x1401F8880: GetAgentContext
+      0x1401F88F0: GetAddonTextById
   Client::UI::Agent::AgentCharaMake:
     vtbls:
       - ea: 0x1417317E8
@@ -817,13 +822,29 @@ classes:
       0x140200760: ctor
       0x1402059C0: GetAgentByInternalID
       0x1402059D0: GetAgentByInternalID_2  # dupe?
+  Client::UI::Agent::AgentContext::AgentContextUpdateChecker:
+    vtbls:
+      - ea: 0x141731CB8
   Client::UI::Agent::AgentContext:
     vtbls:
       - ea: 0x141731CC0
         base: Client::UI::Agent::AgentInterface
     funcs:
+      0x14020F3B0: ctor
+      0x14020F7F0: OpenContextMenu
+      0x14020FE60: GetOwnerAddonId
       0x14020FE70: ClearMenu
+      0x14020FEC0: SetMenuTitle
+      0x14020FFB0: ResetMenu
+      0x140210070: SetPositionX
+      0x140210090: SetPositionY
+      0x1402100B0: OpenSubMenu
+      0x140213E30: OpenYesNo # (this, char* msgText, uint yesId, uint noId, uint checkboxId, bool setOwner)
       0x140210E10: SetupButtonsForTarget
+      0x140212540: AddMenuItem2 # (this, uint textId, AtkEventInterface* handler, long handlerParam, bool disabled, bool submenu)
+      0x1402125B0: AddMenuItem # (this, char* text, AtkEventInterface* handler, long handlerParam, bool disabled, bool submenu)
+      0x140214200: AddContextMenuItem2 # (this, int eventId, uint textId, bool disabled, bool submenu)
+      0x140214270: AddContextMenuItem # (this, int eventId, char* text, bool disabled, bool submenu, bool copyText)
   Client::UI::Agent::AgentLobby:
     vtbls:
       - ea: 0x1417322B0
@@ -2743,8 +2764,7 @@ classes:
       - ea: 0x141787E10
         base: Component::GUI::AtkModuleInterface::AtkEventInterface
     vfuncs:
-      0: SelectUseTicketResultHandler
-      1: dtor
+      2: dtor
   Client::Game::UI::Telepo:
     instances:
       - ea: 0x141EADC48
@@ -2753,7 +2773,6 @@ classes:
       - ea: 0x141787E28
         base: Component::GUI::AtkModuleInterface::AtkEventInterface
     vfuncs:
-      0: AcceptTeleportOffer
       2: dtor
     funcs:
       0x140793AD0: ctor
@@ -2791,6 +2810,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x1402073D0: ctor
+      0x140208A60: UnblockItemSlot
   Client::UI::Agent::AgentConfigLogColor:
     vtbls:
       - ea: 0x141732678
@@ -2934,6 +2954,8 @@ classes:
     vtbls:
       - ea: 0x141733910
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x141733988
+        base: Client::UI::Agent::AgentContext::AgentContextUpdateChecker
     funcs:
       0x14025BD70: ctor
   Client::UI::Agent::AgentLinkshell:
