@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Runtime.InteropServices;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
@@ -11,9 +11,74 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
     public struct AddonWeeklyBingo
     {
         [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
+        [FieldOffset(0x220)] public DutySlotList DutySlotList;
         [FieldOffset(0x18E8)] public StringThing StringThing;
         [FieldOffset(0x1938)] public StickerSlotList StickerSlotList;
         [FieldOffset(0x1F20)] public uint NumStickersPlaced;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x16C8)]
+    public unsafe struct DutySlotList
+    {
+        [FieldOffset(0x0)] public void** vtbl;
+        [FieldOffset(0x8)] public void* addon; // AddonWeeklyBingo*
+        [FieldOffset(0x24)] public uint NumSecondChances;
+        [FieldOffset(0x28)] public DutySlot DutySlot1;
+        [FieldOffset(0x190)] public DutySlot DutySlot2;
+        [FieldOffset(0x2F8)] public DutySlot DutySlot3;
+        [FieldOffset(0x460)] public DutySlot DutySlot4;
+        [FieldOffset(0x5C8)] public DutySlot DutySlot5;
+        [FieldOffset(0x730)] public DutySlot DutySlot6;
+        [FieldOffset(0x898)] public DutySlot DutySlot7;
+        [FieldOffset(0xA00)] public DutySlot DutySlot8;
+        [FieldOffset(0xB68)] public DutySlot DutySlot9;
+        [FieldOffset(0xCD0)] public DutySlot DutySlot10;
+        [FieldOffset(0xE38)] public DutySlot DutySlot11;
+        [FieldOffset(0xFA0)] public DutySlot DutySlot12;
+        [FieldOffset(0x1108)] public DutySlot DutySlot13;
+        [FieldOffset(0x1270)] public DutySlot DutySlot14;
+        [FieldOffset(0x13D8)] public DutySlot DutySlot15;
+        [FieldOffset(0x1540)] public DutySlot DutySlot16;
+        [FieldOffset(0x18C8)] public AtkComponentButton* SecondChanceButton;
+        [FieldOffset(0x18D0)] public AtkComponentButton* CancelButton;
+        [FieldOffset(0x18D8)] public AtkTextNode* SecondChancesRemaining;
+        [FieldOffset(0x18E0)] public AtkResNode* DutyContainer;
+
+        public DutySlot this[int index] => index switch
+        {
+            0 => DutySlot1,
+            1 => DutySlot2,
+            2 => DutySlot3,
+            3 => DutySlot4,
+            4 => DutySlot5,
+            5 => DutySlot6,
+            6 => DutySlot7,
+            7 => DutySlot8,
+            8 => DutySlot9,
+            9 => DutySlot10,
+            10 => DutySlot11,
+            11 => DutySlot12,
+            12 => DutySlot13,
+            13 => DutySlot14,
+            14 => DutySlot15,
+            15 => DutySlot16,
+            _ => throw new ArgumentOutOfRangeException(nameof(Index), "Valid indexes are 0 through 15 inclusive.")
+        };
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x168)]
+    public unsafe struct DutySlot
+    {
+        [FieldOffset(0x0)] public void** vtbl;
+        [FieldOffset(0x8)] public AddonWeeklyBingo* addon; // AddonWeeklyBingo*
+        [FieldOffset(0x10)] public int index; // 0-15
+
+        [FieldOffset(0x138)] public AtkComponentButton* DutyButton;
+        [FieldOffset(0x140)] public AtkImageNode* DutyImage;
+        [FieldOffset(0x148)] public AtkResNode* DutyResNode;
+        [FieldOffset(0x150)] public AtkResNode* ResNode1;
+        [FieldOffset(0x158)] public AtkTextNode* TextNode;
+        [FieldOffset(0x160)] public AtkResNode* ResNode2;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x50)]
@@ -80,7 +145,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI
             13 => StickerSlot14,
             14 => StickerSlot15,
             15 => StickerSlot16,
-            _ => throw new ArgumentOutOfRangeException("Valid indexes are 0 through 15 inclusive.")
+            _ => throw new ArgumentOutOfRangeException(nameof(index), "Valid indexes are 0 through 15 inclusive.")
         };
     }
 
