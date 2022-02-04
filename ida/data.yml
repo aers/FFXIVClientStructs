@@ -496,6 +496,7 @@ classes:
         base: Common::Configuration::ConfigBase
     funcs:
       0x1400798A0: ctor
+      0x14007EF30: GetLastWorldId
   Common::Configuration::DevConfig:
     vtbls:
       - ea: 0x141709698
