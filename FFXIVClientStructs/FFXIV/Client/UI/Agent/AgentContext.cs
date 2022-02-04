@@ -46,8 +46,11 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent {
         [FieldOffset(0x1741)] public byte OpenAtPosition; // if true menu opens at Position else at cursor location
 
         [MemberFunction("E8 ?? ?? ?? ?? 45 88 7C 24")]
-        public partial void OpenContextMenu(bool setOwner = true, bool closeExisting = true);
+        public partial void OpenContextMenu(bool bindToOwner = true, bool closeExisting = true);
 
+        [MemberFunction("41 0F B6 C0 89 91")]
+        public partial void OpenContextMenuForAddon(uint ownerAddonId, bool bindToOwner = true);
+        
         [MemberFunction("E8 ?? ?? ?? ?? 44 39 A3 ?? ?? ?? ?? 0F 86")]
         public partial bool OpenSubMenu();
 
@@ -90,10 +93,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent {
                 SetMenuTitle(ptr);
         }
 
-        public void OpenYesNo(string text, uint yesId = 576, uint noId = 577, uint checkboxId = 0, bool setOwner = true) {
+        public void OpenYesNo(string text, uint yesId = 576, uint noId = 577, uint checkboxId = 0, bool bindToOwner = true) {
             var str = Encoding.UTF8.GetBytes(text + '\0');
             fixed (byte* ptr = &str[0])
-                OpenYesNo(ptr, yesId, noId, checkboxId, setOwner);
+                OpenYesNo(ptr, yesId, noId, checkboxId, bindToOwner);
         }
 
         public void SetPosition(int x, int y) {
