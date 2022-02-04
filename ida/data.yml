@@ -832,12 +832,15 @@ classes:
     funcs:
       0x14020F3B0: ctor
       0x14020F7F0: OpenContextMenu
+      0x14020F550: OpenContextMenuForAddon
       0x14020FE60: GetOwnerAddonId
       0x14020FE70: ClearMenu
       0x14020FEC0: SetMenuTitle
       0x14020FFB0: ResetMenu
       0x140210070: SetPositionX
       0x140210090: SetPositionY
+      0x140212960: SetUpdateChecker
+      0x140212B80: CloseSubMenu
       0x1402100B0: OpenSubMenu
       0x140213E30: OpenYesNo # (this, char* msgText, uint yesId, uint noId, uint checkboxId, bool setOwner)
       0x140210E10: SetupButtonsForTarget
