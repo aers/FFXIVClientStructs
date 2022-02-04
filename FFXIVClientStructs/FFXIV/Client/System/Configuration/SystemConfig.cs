@@ -1,4 +1,5 @@
 ﻿using System.Runtime.InteropServices;
+using FFXIVClientStructs.Attributes;
 
 namespace FFXIVClientStructs.FFXIV.Client.System.Configuration
 {
@@ -10,8 +11,11 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Configuration
     // size = 0x450
     // ctor inlined in Framework ctor
     [StructLayout(LayoutKind.Explicit, Size = 0x450)]
-    public struct SystemConfig
+    public unsafe partial struct SystemConfig
     {
         [FieldOffset(0x0)] public Common.Configuration.SystemConfig CommonSystemConfig;
+
+        [MemberFunction("E8 ?? ?? ?? ?? 66 85 C0 74 19")]
+        public partial uint GetLastWorldID();
     }
 }
