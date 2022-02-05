@@ -284,6 +284,9 @@ classes:
     funcs:
       0x1404C6190: DispatchEvent
       0x1404C6480: RemoveEvent
+  Component::GUI::AtkTooltipArgs:
+    funcs:
+      0x1404C7D20: ctor
   Component::GUI::AtkUldManager:
     funcs:
       0x1404E7C30: SetupFromULDResourceHandle
