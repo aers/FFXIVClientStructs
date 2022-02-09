@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Runtime.InteropServices;
-using System.Text;
 using FFXIVClientStructs.Attributes;
 
 namespace FFXIVClientStructs.FFXIV.Common.Lua 
@@ -10,46 +9,28 @@ namespace FFXIVClientStructs.FFXIV.Common.Lua
     public unsafe struct LuaState
     {
         [FieldOffset(0x08)] public lua_State* State;
+        [FieldOffset(0x20)] public delegate*<lua_State*, int> db_errorfb;
 
-        public string[] DoString(string code, string name = "?")
-        {
-            //workaround to convert all return values to string
-            code = "local t = \n(function(...)\n\tlocal t = {...}\n\tt.n = select('#', ...)\n\treturn t\nend)((function() " + code + " end)())\nfor i=1, t.n do\n\tt[i] = tostring(t[i])\nend\nreturn unpack(t)";
-            var oldStack = State->lua_gettop();
-            string[] results;
-            try 
-            {
-                var strLen = stackalloc int[1];
-
+        public string[] DoString(string code, string name = null) {
+            var top = State->lua_gettop();
+            try {
                 if (State->luaL_loadbuffer(code, code.Length, name) != 0)
-                {
-                    var error = State->lua_tolstring(-1, strLen);
-                    throw new Exception(Encoding.UTF8.GetString(error, *strLen));
-                }
+                    throw new Exception($"{Marshal.PtrToStringUTF8((nint)State->lua_tolstring(-1, null))}");
 
                 if (State->lua_pcall(0, -1, 0) != 0)
-                {
-                    var error = State->lua_tolstring(-1, strLen);
-                    throw new Exception(Encoding.UTF8.GetString(error, *strLen));
+                    throw new Exception($"{Marshal.PtrToStringUTF8((nint)State->lua_tolstring(-1, null))}");
+
+                var cnt = State->lua_gettop() - top;
+                var results = new string[cnt];
+                for (var i = 0; i < cnt; i++) {
+                    State->luaB_tostring();
+                    results[i] = Marshal.PtrToStringUTF8((nint)State->lua_tolstring(-1, null));
+                    State->lua_remove(1);
                 }
-
-                var returnVals = State->lua_gettop() - oldStack;
-                results = new string[returnVals];
-
-                for (var i = returnVals - 1; i >= 0; i--)
-                {
-                    var str = State->lua_tolstring(-1, strLen);
-                    if (str != null) results[i] = Encoding.UTF8.GetString(str, *strLen);
-                    else results[i] = "null";
-                    State->lua_settop(-2);
-                }
+                return results;
+            } finally {
+                State->lua_settop(top);
             }
-            finally
-            {
-                State->lua_settop(oldStack);
-            }
-
-            return results;
         }
     }
 
@@ -65,17 +46,29 @@ namespace FFXIVClientStructs.FFXIV.Common.Lua
         [MemberFunction("E8 ?? ?? ?? ?? 80 38 23")]
         public partial byte* lua_tolstring(int idx, int* len);
 
+        [MemberFunction("E8 ?? ?? ?? ?? FF CD BA")]
+        public partial void lua_pushvalue(int idx);
+
+        [MemberFunction("E8 ?? ?? ?? ?? 33 C9 40 F6 C6")]
+        public partial void lua_remove(int idx);
+
         [MemberFunction("E8 ?? ?? ?? ?? 8B D8 85 C0 74 6F")]
         public partial int lua_pcall(int nargs, int nresults, int errfunc);
 
         [MemberFunction("48 83 EC 38 48 89 54 24 ?? 48 8D 15")]
-        public partial int luaL_loadbuffer(string buff, int size, string name = "?");
+        public partial int luaL_loadbuffer(string buff, long size, string name = "?");
+
+        [MemberFunction("E8 ?? ?? ?? ?? 8B D8 85 C0 75 ?? 40 84 ED")]
+        public partial int luaL_loadfile(string filename);
 
         [MemberFunction("E8 ?? ?? ?? ?? 85 C0 7E 10")]
         public partial LuaType lua_type(int idx);
 
         [MemberFunction("E8 ?? ?? ?? ?? 41 8B D3")]
-        public partial void* index2addr(int index);
+        public partial void* index2adr(int idx);
+
+        [MemberFunction("40 57 48 83 EC ?? BA ?? ?? ?? ?? 48 8B F9 E8 ?? ?? ?? ?? 4C 8D 05")]
+        public partial int luaB_tostring();
     }
 
     public enum LuaType
@@ -89,6 +82,8 @@ namespace FFXIVClientStructs.FFXIV.Common.Lua
         Table,
         Function,
         UserData,
-        Thread
+        Thread,
+        Proto,
+        Upval
     }
 }
