@@ -66,10 +66,13 @@ functions:
   0x1411B9A50: lua_index2addr
   0x1411BA1A0: lua_gettop
   0x1411BA580: lua_pcall
+  0x1411BA8A0: lua_pushvalue
+  0x1411BAAF0: lua_remove
   0x1411BAE40: lua_settop
   0x1411BB030: lua_tolstring
   0x1411BB1E0: lua_type
   0x1411BD3A0: luaL_loadbuffer
+  0x1411BD3D0: luaL_loadfile
   0x14138BB00: crc
   0x1413E1084: ThrowException
   0x141407944: FreeMemory
@@ -546,6 +549,7 @@ classes:
     vtbls:
       - ea: 0x14170A978
     vfuncs:
+      0: dtor
       1: Setup
       4: Tick
     funcs:
@@ -1419,18 +1423,53 @@ classes:
   Common::Lua::LuaState:
     vtbls:
       - ea: 0x141754158
+    vfuncs:
+      0: dtor
     funcs:
       0x14047B780: ctor
+      0x14047B7B0: ctor_FromState
       0x14047BBC0: LoadString
       0x14047BC70: LoadFile
       0x14047C1A0: PCall
+      0x14047BD00: DestroyGlobalClass
+      0x14047BE80: DecClassRef
+      0x14047BF30: SetNil
+      0x14047E470: LuaError
+      0x14047C240: CallMemberFunction
+      0x14047E1B0: PushGlobal
+      0x14047DFE0: IsFunction
+      0x14047E050: PopBoolean
+      0x14047E0C0: CheckNumber
+      0x14047E0F0: CheckBoolean
+      0x14047E130: CheckString
+      0x14047E150: PushNumber
+      0x14047E180: PushBoolean
+      0x14047E1A0: PushString
+      0x14047E1E0: PushNil
+      0x14047E1F0: IsNil
+      0x14047E210: IsNumber
+      0x14047E230: IsString
+      0x14047E250: IsBoolean
+      0x14047E270: GetBoolean
+      0x14047E290: GetString
+      0x14047E2B0: NewThread
+      0x140AFE9A0: PopByte
+      0x140AFEA00: PopShort
+      0x140AFEA60: PopInteger
+      0x140AFEAC0: PopInteger_2
+      0x140AFEB20: PopInteger_3
   Common::Lua::LuaThread:
     vtbls:
       - ea: 0x141754160
         base: Common::Lua::LuaState
+    funcs:
+      0x14047E670: ctor_FromState
+      0x14047E6C0: ctor
   Client::Game::Event::LuaActor:
     vtbls:
       - ea: 0x1417AA4B0
+    vfuncs:
+      0: dtor
   Client::Game::Event::LuaPc:
     vtbls:
       - ea: 0x1417ACEC0
