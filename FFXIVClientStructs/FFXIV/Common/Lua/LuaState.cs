@@ -15,16 +15,16 @@ namespace FFXIVClientStructs.FFXIV.Common.Lua
             var top = State->lua_gettop();
             try {
                 if (State->luaL_loadbuffer(code, code.Length, name) != 0)
-                    throw new Exception($"{Marshal.PtrToStringUTF8((nint)State->lua_tolstring(-1, null))}");
+                    throw new Exception($"{State->lua_tostring(-1)}");
 
                 if (State->lua_pcall(0, -1, 0) != 0)
-                    throw new Exception($"{Marshal.PtrToStringUTF8((nint)State->lua_tolstring(-1, null))}");
+                    throw new Exception($"{State->lua_tostring(-1)}");
 
                 var cnt = State->lua_gettop() - top;
                 var results = new string[cnt];
                 for (var i = 0; i < cnt; i++) {
                     State->luaB_tostring();
-                    results[i] = Marshal.PtrToStringUTF8((nint)State->lua_tolstring(-1, null));
+                    results[i] = State->lua_tostring(-1);
                     State->lua_remove(1);
                 }
                 return results;
@@ -49,6 +49,15 @@ namespace FFXIVClientStructs.FFXIV.Common.Lua
         [MemberFunction("E8 ?? ?? ?? ?? FF CD BA")]
         public partial void lua_pushvalue(int idx);
 
+        [MemberFunction("E8 ?? ?? ?? ?? 4D 8B 06 41 8B D7")]
+        public partial void lua_pushcclosure(delegate*<lua_State*, int> fn, int n);
+
+        [MemberFunction("E8 ?? ?? ?? ?? 8B 56 ?? 85 D2 0F 88")]
+        public partial void lua_setfield(int idx, string k);
+
+        [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4F ?? 48 85 ED")]
+        public partial void lua_getfield(int idx, string k);
+
         [MemberFunction("E8 ?? ?? ?? ?? 33 C9 40 F6 C6")]
         public partial void lua_remove(int idx);
 
@@ -69,6 +78,16 @@ namespace FFXIVClientStructs.FFXIV.Common.Lua
 
         [MemberFunction("40 57 48 83 EC ?? BA ?? ?? ?? ?? 48 8B F9 E8 ?? ?? ?? ?? 4C 8D 05")]
         public partial int luaB_tostring();
+
+        public void lua_setglobal(string s) => lua_setfield(-10002, s);
+        public void lua_getglobal(string s) => lua_getfield(-10002, s);
+        public void lua_pushcfunction(delegate*<lua_State*, int> f) => lua_pushcclosure(f, 0);
+        public string lua_tostring(int idx) => Marshal.PtrToStringUTF8((nint)lua_tolstring(idx, null));
+        public void lua_pop(int n) => lua_settop(-n - 1);
+        public void lua_register(string n, delegate*<lua_State*, int> f) {
+            lua_pushcfunction(f);
+            lua_setglobal(n);
+        }
     }
 
     public enum LuaType
