@@ -63,16 +63,111 @@ functions:
   0x140A47D30: GetBeastTribeAllowance
   0x1410345B0: Client::UI::AddonHudLayoutScreen::MoveableAddonInfoStruct_UpdateAddonPosition
   0x141125260: Client::Graphics::Kernel::CreateShader # static function
+  0x1411B96D0: lua_close
   0x1411B9A50: lua_index2addr
+  0x1411B9B40: lua_call
+  0x1411B9B90: lua_checkstack
+  0x1411B9C30: lua_concat
+  0x1411B9CC0: lua_cpcall
+  0x1411B9D00: lua_createtable
+  0x1411B9D70: lua_dump
+  0x1411B9DF0: lua_equal
+  0x1411B9E60: lua_gc
+  0x1411BA020: lua_getfenv
+  0x1411BA0A0: lua_getfield
+  0x1411BA110: lua_getmetatable
+  0x1411BA170: lua_gettable
   0x1411BA1A0: lua_gettop
+  0x1411BA250: lua_insert
+  0x1411BA2A0: lua_iscfunction
+  0x1411BA2D0: lua_isnumber
+  0x1411BA300: lua_isstring
+  0x1411BA340: lua_isuserdata
+  0x1411BA370: lua_lessthan
+  0x1411BA3C0: lua_load
+  0x1411BA410: lua_newthread
+  0x1411BA450: lua_newuserdata
+  0x1411BA4C0: lua_next
+  0x1411BA500: lua_objlen
   0x1411BA580: lua_pcall
+  0x1411BA610: lua_pushboolean
+  0x1411BA630: lua_pushcclosure
+  0x1411BA700: lua_pushfstring
+  0x1411BA750: lua_pushinteger
+  0x1411BA770: lua_pushlightuserdata
+  0x1411BA790: lua_pushlstring
+  0x1411BA800: lua_pushnil
+  0x1411BA820: lua_pushnumber
+  0x1411BA840: lua_pushstring
+  0x1411BA870: lua_pushthread
   0x1411BA8A0: lua_pushvalue
+  0x1411BA8D0: lua_pushvfstring
+  0x1411BA920: lua_rawequal
+  0x1411BA970: lua_rawget
+  0x1411BA9B0: lua_rawgeti
+  0x1411BA9F0: lua_rawset
+  0x1411BAA70: lua_rawseti
   0x1411BAAF0: lua_remove
+  0x1411BAB40: lua_replace
+  0x1411BAC30: lua_setfenv
+  0x1411BACD0: lua_setfield
+  0x1411BAD40: lua_setlevel
+  0x1411BAD50: lua_setmetatable
+  0x1411BAE10: lua_settable
   0x1411BAE40: lua_settop
+  0x1411BAFA0: lua_toboolean
+  0x1411BAFD0: lua_tocfunction
+  0x1411BB000: lua_tointeger
   0x1411BB030: lua_tolstring
+  0x1411BB0D0: lua_tonumber
+  0x1411BB110: lua_topointer
+  0x1411BB180: lua_tothread
+  0x1411BB1A0: lua_touserdata
   0x1411BB1E0: lua_type
+  0x1411BB210: lua_typename
+  0x1411BB230: lua_xmove
+  0x1411BC290: lua_yield
+  0x1411BC6C0: luaL_addlstring
+  0x1411BC840: luaL_argerror
+  0x1411BC930: luaL_buffinit
+  0x1411BC950: luaL_callmeta
+  0x1411BC9D0: luaL_checkany
+  0x1411BCA10: luaL_checkinteger
+  0x1411BCA60: luaL_checklstring
+  0x1411BCAF0: luaL_checknumber
+  0x1411BCB50: luaL_checkoption
+  0x1411BCC10: luaL_checkstack
+  0x1411BCC50: luaL_checktype
+  0x1411BCC90: luaL_checkudata
+  0x1411BCD50: luaL_error
+  0x1411BCDB0: luaL_findtable
+  0x1411BCEE0: luaL_getmetafield
   0x1411BD3A0: luaL_loadbuffer
   0x1411BD3D0: luaL_loadfile
+  0x1411BD670: luaL_loadstring
+  0x1411BD6B0: luaL_newmetatable
+  0x1411BD730: luaL_newstate
+  0x1411BD8F0: luaL_optinteger
+  0x1411BD960: luaL_optlstring
+  0x1411BD9E0: luaL_optnumber
+  0x1411BDA50: luaL_prepbuffer
+  0x1411BDAB0: luaL_pushresult
+  0x1411BDB00: luaL_ref
+  0x1411BDBC0: luaL_register
+  0x1411BDBD0: luaL_typerror
+  0x1411BDC30: luaL_unref
+  0x1411BDCB0: luaL_where
+  0x1412A9EA0: lua_getinfo
+  0x1412A9F90: lua_getlocal
+  0x1412AA000: lua_getstack
+  0x1412B2F10: luaopen_base
+  0x1412B3A70: luaopen_table
+  0x1412B4E10: luaopen_io
+  0x1412B5BE0: luaopen_os
+  0x1412B7000: luaopen_string
+  0x1412B8670: luaopen_math
+  0x1412B9700: luaopen_debug
+  0x1412BA1F0: luaopen_package
   0x14138BB00: crc
   0x1413E1084: ThrowException
   0x141407944: FreeMemory
@@ -1428,12 +1523,23 @@ classes:
     funcs:
       0x14047B780: ctor
       0x14047B7B0: ctor_FromState
+      0x14047BAD0: GetTop
+      0x14047BAE0: SetTop
       0x14047BBC0: LoadString
       0x14047BC70: LoadFile
       0x14047C1A0: PCall
       0x14047BD00: DestroyGlobalClass
+      0x14047BDA0: GetGlobalOrNil
+      0x14047BDD0: IncClassRef
       0x14047BE80: DecClassRef
       0x14047BF30: SetNil
+      0x14047BF90: SetStringField
+      0x14047BFE0: SetIntegerField
+      0x14047C030: SetFunctionField
+      0x14047C090: SetNumberField
+      0x14047C0E0: SetNilField
+      0x14047C120: GetField
+      0x14047C130: ClassNameOf
       0x14047E470: LuaError
       0x14047C240: CallMemberFunction
       0x14047E1B0: PushGlobal
