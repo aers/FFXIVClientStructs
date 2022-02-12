@@ -2275,6 +2275,8 @@ classes:
         base: Common::Configuration::ConfigBase::ChangeEventInterface
     funcs:
       0x1406124C0: ctor
+      0x140612880: SetValueByIndex
+      0x140612A50: GetValueByIndex
   Client::UI::Misc::RaptureMacroModule:
     vtbls:
       - ea: 0x14176BF90
