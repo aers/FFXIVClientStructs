@@ -19,6 +19,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc {
         [MemberFunction("E8 ?? ?? ?? ?? C6 47 4D 00")]
         public partial bool SetOption(uint index, int value, int a4 = 2, bool a5 = true, bool a6 = false);
 
+        [MemberFunction("E8 ?? ?? ?? ?? 48 8B 35 ?? ?? ?? ?? 33 DB")]
+        public partial int GetIntValue(uint index, int a3 = 2);
+
         public void SetOption(ConfigOption option, int value) {
             for (uint i = 0; i < ConfigOptionCount; i++) {
                 var o = GetOption(i);
@@ -65,6 +68,16 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc {
         }
 
         public AtkValue* GetValueById(short optionId) => GetValue((ConfigOption)optionId);
+
+        public int GetIntValue(ConfigOption option) {
+            for (uint i = 0; i < ConfigOptionCount; i++) {
+                var o = GetOption(i);
+                if (o->OptionID == option) return GetIntValue(i);
+            }
+            return 0;
+        }
+
+        public int GetIntValue(short optionId) => GetIntValue((ConfigOption)optionId);
 
         [StructLayout(LayoutKind.Explicit, Size = Size)]
         public struct Option {
