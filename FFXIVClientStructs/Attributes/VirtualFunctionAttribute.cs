@@ -1,17 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace FFXIVClientStructs.Attributes
+namespace FFXIVClientStructs.Attributes;
+
+[AttributeUsage(AttributeTargets.Method)]
+public class VirtualFunctionAttribute : Attribute
 {
-    [AttributeUsage(AttributeTargets.Method)]
-    public class VirtualFunctionAttribute : Attribute
+    public VirtualFunctionAttribute(int offset)
     {
-        public int Offset { get; }
-
-        public VirtualFunctionAttribute(int offset)
-        {
-            this.Offset = offset;
-        }
+        Offset = offset;
     }
+
+    public int Offset { get; }
 }

@@ -1,21 +1,23 @@
-﻿using System.Runtime.InteropServices;
+﻿namespace FFXIVClientStructs.STD;
 
-namespace FFXIVClientStructs.STD
+// workaround for C# not supporting pointer types as generic arguments
+[StructLayout(LayoutKind.Sequential, Size = 0x8)]
+public readonly unsafe struct Pointer<T> where T : unmanaged
 {
-    // workaround for C# not supporting pointer types as generic arguments
-    [StructLayout(LayoutKind.Sequential, Size=0x8)]
-    public readonly unsafe struct Pointer<T> where T : unmanaged
+    public T* Value { get; }
+
+    private Pointer(T* p)
     {
-        private readonly T* _value;
+        Value = p;
+    }
 
-        public T* Value => _value;
+    public static implicit operator T*(Pointer<T> p)
+    {
+        return p.Value;
+    }
 
-        Pointer(T* p)
-        {
-            _value = p;
-        }
-
-        public static implicit operator T*(Pointer<T> p) => p._value;
-        public static implicit operator Pointer<T>(T* p) => new(p);
+    public static implicit operator Pointer<T>(T* p)
+    {
+        return new(p);
     }
 }

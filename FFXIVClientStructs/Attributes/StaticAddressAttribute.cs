@@ -1,20 +1,18 @@
 ﻿using System;
 
-namespace FFXIVClientStructs.Attributes
+namespace FFXIVClientStructs.Attributes;
+
+[AttributeUsage(AttributeTargets.Method)]
+public class StaticAddressAttribute : Attribute
 {
-    [AttributeUsage(AttributeTargets.Method)]
-    public class StaticAddressAttribute : Attribute
+    public StaticAddressAttribute(string sig, int offset = 0, bool isPointer = false)
     {
-        public string Signature { get; }
-        public int Offset { get;  } 
-        public bool IsPointer { get; }
-
-        public StaticAddressAttribute(string sig, int offset = 0, bool isPointer = false)
-        {
-            this.Signature = sig;
-            this.Offset = offset;
-            this.IsPointer = isPointer;
-        }
-
+        Signature = sig;
+        Offset = offset;
+        IsPointer = isPointer;
     }
+
+    public string Signature { get; }
+    public int Offset { get; }
+    public bool IsPointer { get; }
 }

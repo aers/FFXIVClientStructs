@@ -1,40 +1,39 @@
-﻿using System.Runtime.InteropServices;
-using FFXIVClientStructs.Attributes;
+﻿namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
-namespace FFXIVClientStructs.FFXIV.Component.GUI {
-    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
-    public partial struct AtkCursor {
-        [FieldOffset(0x00)] public CursorType Type;
-        [FieldOffset(0x0E)] public byte Visible;
+[StructLayout(LayoutKind.Explicit, Size = 0x10)]
+public partial struct AtkCursor
+{
+    [FieldOffset(0x00)] public CursorType Type;
+    [FieldOffset(0x0E)] public byte Visible;
 
-        [MemberFunction("E8 ?? ?? ?? ?? 41 88 9D")]
-        public partial void Hide();
+    [MemberFunction("E8 ?? ?? ?? ?? 41 88 9D")]
+    public partial void Hide();
 
-        [MemberFunction("48 83 EC 58 80 79 0E 00 75 68")]
-        public partial void Show();
+    [MemberFunction("48 83 EC 58 80 79 0E 00 75 68")]
+    public partial void Show();
 
-        [MemberFunction("E8 ?? ?? ?? ?? C6 47 0F 01")]
-        public partial void SetCursorType(CursorType type, byte a3 = 0);
+    [MemberFunction("E8 ?? ?? ?? ?? C6 47 0F 01")]
+    public partial void SetCursorType(CursorType type, byte a3 = 0);
 
-        public enum CursorType : byte {
-            Arrow,
-            Boot,
-            Search,
-            ChatPointer,
-            Interact,
-            Attack,
-            Hand,
-            ResizeWE,
-            ResizeNS,
-            ResizeNWSR,
-            ResizeNESW,
-            Clickable,
-            TextInput,
-            TextClick,
-            Grab,
-            ChatBubble,
-            NoAccess,
-            Hidden,
-        }
+    public enum CursorType : byte
+    {
+        Arrow,
+        Boot,
+        Search,
+        ChatPointer,
+        Interact,
+        Attack,
+        Hand,
+        ResizeWE,
+        ResizeNS,
+        ResizeNWSR,
+        ResizeNESW,
+        Clickable,
+        TextInput,
+        TextClick,
+        Grab,
+        ChatBubble,
+        NoAccess,
+        Hidden
     }
 }

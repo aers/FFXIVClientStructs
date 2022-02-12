@@ -1,19 +1,19 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFramework>net5</TargetFramework>
-    <LangVersion>9.0</LangVersion>
-    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <OutputPath>..\bin\$(Configuration)\</OutputPath>
-    <DebugType>full</DebugType>
-    <DebugSymbols>true</DebugSymbols>
-    <!--
-      <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
-      <CompilerGeneratedFilesOutputPath>Generated</CompilerGeneratedFilesOutputPath>
-      -->
-  </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="Serilog" Version="2.6.0" />
-    <ProjectReference Include="..\FFXIVClientStructs.Generators\FFXIVClientStructs.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
-  </ItemGroup>
+    <PropertyGroup>
+        <TargetFramework>net5</TargetFramework>
+        <LangVersion>10.0</LangVersion>
+        <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <OutputPath>..\bin\$(Configuration)\</OutputPath>
+        <DebugType>full</DebugType>
+        <DebugSymbols>true</DebugSymbols>
+        <!--
+          <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+          <CompilerGeneratedFilesOutputPath>Generated</CompilerGeneratedFilesOutputPath>
+          -->
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="Serilog" Version="2.6.0" />
+        <ProjectReference Include="..\FFXIVClientStructs.Generators\FFXIVClientStructs.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+    </ItemGroup>
 </Project>

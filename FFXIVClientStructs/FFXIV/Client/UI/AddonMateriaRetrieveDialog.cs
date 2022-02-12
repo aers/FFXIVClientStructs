@@ -1,14 +1,12 @@
-﻿using System.Runtime.InteropServices;
-using FFXIVClientStructs.FFXIV.Component.GUI;
+﻿using FFXIVClientStructs.FFXIV.Component.GUI;
 
-namespace FFXIVClientStructs.FFXIV.Client.UI
+namespace FFXIVClientStructs.FFXIV.Client.UI;
+
+// Client::UI::AddonMateriaRetrieveDialog
+//   Component::GUI::AtkUnitBase
+//     Component::GUI::AtkEventListener
+[StructLayout(LayoutKind.Explicit, Size = 0x220)]
+public struct AddonMateriaRetrieveDialog
 {
-    // Client::UI::AddonMateriaRetrieveDialog
-    //   Component::GUI::AtkUnitBase
-    //     Component::GUI::AtkEventListener
-    [StructLayout(LayoutKind.Explicit, Size = 0x220)]
-    public unsafe struct AddonMateriaRetrieveDialog
-    {
-        [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
-    }
+    [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
 }

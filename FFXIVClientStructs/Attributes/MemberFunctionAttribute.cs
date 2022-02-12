@@ -1,18 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace FFXIVClientStructs.Attributes
+namespace FFXIVClientStructs.Attributes;
+
+[AttributeUsage(AttributeTargets.Method)]
+public class MemberFunctionAttribute : Attribute
 {
-    [AttributeUsage(AttributeTargets.Method)]
-    public class MemberFunctionAttribute : Attribute
+    public MemberFunctionAttribute(string sig)
     {
-        public string Signature { get; }
-        public bool IsStatic { get; set; } = false;
-
-        public MemberFunctionAttribute(string sig)
-        {
-            this.Signature = sig;
-        }
+        Signature = sig;
     }
+
+    public string Signature { get; }
+    public bool IsStatic { get; set; } = false;
 }
