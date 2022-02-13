@@ -3785,6 +3785,9 @@ classes:
   Client::Game::Event::ModuleBase:
     vtbls:
       - ea: 0x14179EAF0
+    vfuncs:
+      1: SetupClasses
+      4: SetupClasses_2
   Client::Game::Event::LuaScriptLoader<Client::Game::Event::LuaEventHandler>:
     vtbls:
       - ea: 0x14179EB28
