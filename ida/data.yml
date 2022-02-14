@@ -127,7 +127,11 @@ functions:
   0x1411BB210: lua_typename
   0x1411BB230: lua_xmove
   0x1411BC290: lua_yield
+  0x1411BC4D0: luaL_openlibs
   0x1411BC6C0: luaL_addlstring
+  0x1411BC760: luaL_addstring
+  0x1411BD770: luaL_openlib
+  0x1411BC780: luaL_addvalue
   0x1411BC840: luaL_argerror
   0x1411BC930: luaL_buffinit
   0x1411BC950: luaL_callmeta
@@ -142,6 +146,7 @@ functions:
   0x1411BCD50: luaL_error
   0x1411BCDB0: luaL_findtable
   0x1411BCEE0: luaL_getmetafield
+  0x1411BCF60: luaL_gsub
   0x1411BD3A0: luaL_loadbuffer
   0x1411BD3D0: luaL_loadfile
   0x1411BD670: luaL_loadstring
@@ -1540,9 +1545,19 @@ classes:
       0x14047C0E0: SetNilField
       0x14047C120: GetField
       0x14047C130: ClassNameOf
-      0x14047E470: LuaError
-      0x14047C240: CallMemberFunction
-      0x14047E1B0: PushGlobal
+      0x14047C240: CallMemberFunction # (this, member, class, nresults) => pcall(_G[class][member], _G[class])
+      0x14047C4A0: CallMemberFunction_2 # (this, member, class, (int)arg2, (int)arg3, nresults) => pcall(_G[class][member], _G[class], arg2, arg3)
+      0x14047C5A0: CallMemberFunction_3 # (this, member, class, argName, nresults) => pcall(_G[class][member], _G[class], _G[argName])
+      0x14047C6A0: CallMemberFunction_4 # (this, member, class, argName, (int[])args, argCount nresults): above but with extra int args - used for the next 3
+      0x14047C7D0: CallMemberFunction_5 # (this, member, class, argName, (int)arg3, nresults)
+      0x14047C810: CallMemberFunction_6 # (this, member, class, argName, (int)arg3, (int)arg4, nresults)
+      0x14047C860: CallMemberFunction_7 # (this, member, class, argName, (int)arg3, (int)arg4, (int)arg5, nresults)
+      0x14047C8E0: CallMemberFunction_8 # (this, member, class, argName, (int)arg3, (int)arg4, (int)arg5, (int)arg6, nresults)
+      0x14047C960: CallMemberFunction_9 # (this, member, class, argName, (int)arg3, (int)arg4, (int)arg5, (int)arg6, (int)arg7, nresults)
+      0x14047C9F0: CallMemberFunction_10 # (this, member, class, argName, (int)arg3, (int[])args, argCount, nresults)
+      0x14047CB30: CallMemberFunction_11 # (this, member, class, argName, (int)arg3, (int)arg4, (int[])args, argCount, nresults)
+      0x14047CC80: CallMemberFunction_12 # (this, member, class, argName, (int)arg3, (int)arg4, (bool)arg5, (int[])args, argCount nresults)
+      0x14047CDE0: CallMemberFunction_13 # (this, member, class, argName, argName2, nresults) => pcall(_G[class][member], _G[class], _G[argName], _G[argName2])
       0x14047DFE0: IsFunction
       0x14047E050: PopBoolean
       0x14047E0C0: CheckNumber
@@ -1551,6 +1566,7 @@ classes:
       0x14047E150: PushNumber
       0x14047E180: PushBoolean
       0x14047E1A0: PushString
+      0x14047E1B0: PushGlobal
       0x14047E1E0: PushNil
       0x14047E1F0: IsNil
       0x14047E210: IsNumber
@@ -1558,7 +1574,13 @@ classes:
       0x14047E250: IsBoolean
       0x14047E270: GetBoolean
       0x14047E290: GetString
-      0x14047E2B0: NewThread
+      0x14047E2B0: NewThread # (this, LuaState* other)
+      0x14047E3B0: CloseThread # (this, LuaState* other)
+      0x14047E470: LuaError
+      0x14047E5C0: GC
+      0x14047E5D0: GCStop
+      0x14047E5F0: GCRestart
+      0x14047E650: GCStep # (this, data)
       0x140AFE9A0: PopByte
       0x140AFEA00: PopShort
       0x140AFEA60: PopInteger
@@ -3763,6 +3785,9 @@ classes:
   Client::Game::Event::ModuleBase:
     vtbls:
       - ea: 0x14179EAF0
+    vfuncs:
+      1: SetupClasses
+      4: SetupClasses_2
   Client::Game::Event::LuaScriptLoader<Client::Game::Event::LuaEventHandler>:
     vtbls:
       - ea: 0x14179EB28
