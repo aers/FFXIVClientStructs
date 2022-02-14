@@ -420,6 +420,7 @@ classes:
     funcs:
       0x1407BB9A0: Initialize
       0x1407CC920: ctor
+      0x1407B9510: IsUnlockLinkUnlocked
   Client::Game::UI::PlayerState:
     funcs:
       0x140760280: SetCharacterName
@@ -2915,7 +2916,6 @@ classes:
     vfuncs:
       0: dtor
     funcs:
-      0x1407B9510: IsActionUnlocked
       0x1407BAE00: CancelCast
   Client::Game::UI::MarkingController:
     instances:
