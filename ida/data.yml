@@ -835,6 +835,10 @@ classes:
     vtbls:
       - ea: 0x141729908
         base: Client::System::Resource::Handle::ResourceHandle
+  Client::System::Resource::Handle::MaterialResourceHandle:
+    vtbls:
+      - ea: 0x141729A88
+        base: Client::System::Resource::Handle::DefaultResourceHandle
   Client::System::Resource::Handle::ShaderPackageResourceHandle:
     vtbls:
       - ea: 0x141729C08
