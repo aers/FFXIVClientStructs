@@ -29,7 +29,7 @@ public unsafe partial struct AtkUnitBase
     [FieldOffset(0x1D2)] public ushort ContextMenuParentID;
     [FieldOffset(0x1D5)] public byte Alpha;
 
-    [FieldOffset(0x1D8)] public AtkCollisionNode**
+    [FieldOffset(0x1D8)] public AtkResNode**
         CollisionNodeList; // seems to be all collision nodes in tree, may be something else though
 
     [FieldOffset(0x1E0)] public uint CollisionNodeListCount;
