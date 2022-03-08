@@ -1,34 +1,34 @@
-version: 2022.03.01.0000.0000
+version: 2022.01.25.0000.0000
 
 globals:
   0x141714860: g_UIColorTable
-  0x141757368: g_HUDScaleTable
-  0x141E235D0: g_InputManager
-  0x141E235F8: g_InputManager_MouseButtonHoldState
-  0x141E6F400: g_RenderSkeletonLinkedListStart
-  0x141E6F408: g_RenderSkeletonLinkedListEnd
-  0x141E6F460: g_RenderModelLinkedListStart
-  0x141E6F468: g_RenderModelLinkedListEnd
-  0x141E7C740: g_PlayerMoveController
-  0x141E7CCE8: g_LocalPlayerObjectID
-  0x141E7CCF0: g_LocalPlayer
-  0x141EA2770: g_LastTextCommand
-  0x141EA2B00: g_CharacterManager_BattleCharaMemoryPtr
-  0x141EA2B08: g_CharacterManager_CompanionMemoryPtr
-  0x141EA2B38: g_GameObjectManager_ObjectList
-  0x141EA3878: g_GameObjectManager_ObjectListEnd
-#fail   0x141EAE388: g_Client::Game::UI::Buddy.Pet # not a pointer
-#fail   0x141EAE398: g_Client::Game::UI::Buddy.Pet.BuffList # not a pointer
-  0x141EA8048: g_Client::Game::UI::Buddy.CompanionStats  # not a pointer. Member of UIState
-  0x141EA8050: g_Client::Game::UI::Buddy.CompanionStats.TimeRemaining  # not a pointer
-  0x141EA80A0: g_Client::Game::UI::Buddy.BattleBuddyListPtr # Member of UIState
-  0x141EA81E8: g_Client::Game::UI::RelicNote # not a pointer
-  0x141EB43F0: g_TitleController
-  0x141EB43F8: g_TitleList
-  0x141ECBA88: g_FateTablePtr
-  0x141ECB740: g_ClientObjectManager
-  0x141E5D330: g_SomeOtherRenderingState
-  0x141E6F494: g_InvSqrt3
+  0x141757370: g_HUDScaleTable
+  0x141E2A5D0: g_InputManager
+  0x141E2A5F8: g_InputManager_MouseButtonHoldState
+  0x141E76400: g_RenderSkeletonLinkedListStart
+  0x141E76408: g_RenderSkeletonLinkedListEnd
+  0x141E76460: g_RenderModelLinkedListStart
+  0x141E76468: g_RenderModelLinkedListEnd
+  0x141E83740: g_PlayerMoveController
+  0x141E83CE8: g_LocalPlayerObjectID
+  0x141E83CF0: g_LocalPlayer
+  0x141EA9770: g_LastTextCommand
+  0x141EA9B00: g_CharacterManager_BattleCharaMemoryPtr
+  0x141EA9B08: g_CharacterManager_CompanionMemoryPtr
+  0x141EA9B38: g_GameObjectManager_ObjectList
+  0x141EAA878: g_GameObjectManager_ObjectListEnd
+  0x141EAE388: g_Client::Game::UI::Buddy.Pet # not a pointer
+  0x141EAE398: g_Client::Game::UI::Buddy.Pet.BuffList # not a pointer
+  0x141EAF048: g_Client::Game::UI::Buddy.CompanionStats  # not a pointer. Member of UIState
+  0x141EAF050: g_Client::Game::UI::Buddy.CompanionStats.TimeRemaining  # not a pointer
+  0x141EAF0A0: g_Client::Game::UI::Buddy.BattleBuddyListPtr # Member of UIState
+  0x141EAF1E8: g_Client::Game::UI::RelicNote # not a pointer
+  0x141EBB3F0: g_TitleController
+  0x141EBB3F8: g_TitleList
+  0x141ED2A88: g_FateTablePtr
+  0x141ED2740: g_ClientObjectManager
+  0x141E64330: g_SomeOtherRenderingState
+  0x141E76494: g_InvSqrt3
 
 functions:
   0x140060CC0: MemoryManager_Alloc
@@ -42,175 +42,175 @@ functions:
   0x140065720: IsMacClient
   0x1400A51E0: Client::UI::PlaySoundEffect # this is a static function in the UI namespace, arg1 is the SE
   0x1400A6CD0: Client::UI::GetUIColor # (idx, &color, &edgeColor)
-  0x14019D1C0: j_SleepEx
-  0x1401C1100: Client::System::Resource::Handle::ModelResourceHandle_GetMaterialFileNameBySlot
-  0x1402B57A0: CountdownPointer
-  0x1402F9620: std::vector_SetSize
-  0x140439EB0: GetGameObjectByIndex
-  0x1404532E0: PrepareColorSet
-  0x1404535B0: ReadStainingTemplate
-  0x1404A5070: Client::Game::Control::InputManager_GetInputStatus
-  0x1404BC4A0: Client::System::Input::InputData_IsInputIDKeyPress
-  0x1404BC5B0: Client::System::Input::InputData_IsInputIDClicked
-  0x1404BCEF0: Client::System::Input::InputData_IsMouseCombinationDragged
-  0x1404C6D90: Component::GUI::AtkCursor_SetCursorType # the cursor's icon I believe
-  0x1404EF4E0: GetScaleListEntryFromScale
-  0x1404FDAF0: GetScaleForListOption
-  0x14054AC20: Component::GUI::TextModuleInterface::GetTextLabelByID
-  0x140626690: ConvertLogMessageIdToCharaLogKind
-  0x140706350: ExecuteCommand
-  0x1408AC6E0: CreateSelectYesno
-  0x140A47F10: GetBeastTribeAllowance
-  0x141034790: Client::UI::AddonHudLayoutScreen::MoveableAddonInfoStruct_UpdateAddonPosition
-  0x141125440: Client::Graphics::Kernel::CreateShader # static function
-  0x1411B98C0: lua_close
-  0x1411B9C40: lua_index2addr
-  0x1411B9D30: lua_call
-  0x1411B9D80: lua_checkstack
-  0x1411B9E20: lua_concat
-  0x1411B9EB0: lua_cpcall
-  0x1411B9EF0: lua_createtable
-  0x1411B9F60: lua_dump
-  0x1411B9FE0: lua_equal
-  0x1411BA050: lua_gc
-  0x1411BA210: lua_getfenv
-  0x1411BA290: lua_getfield
-  0x1411BA300: lua_getmetatable
-  0x1411BA360: lua_gettable
-  0x1411BA390: lua_gettop
-  0x1411BA440: lua_insert
-  0x1411BA490: lua_iscfunction
-  0x1411BA4C0: lua_isnumber
-  0x1411BA4F0: lua_isstring
-  0x1411BA530: lua_isuserdata
-  0x1411BA560: lua_lessthan
-  0x1411BA5B0: lua_load
-  0x1411BA600: lua_newthread
-  0x1411BA640: lua_newuserdata
-  0x1411BA6B0: lua_next
-  0x1411BA6F0: lua_objlen
-  0x1411BA770: lua_pcall
-  0x1411BA800: lua_pushboolean
-  0x1411BA820: lua_pushcclosure
-  0x1411BA8F0: lua_pushfstring
-  0x1411BA940: lua_pushinteger
-  0x1411BA960: lua_pushlightuserdata
-  0x1411BA980: lua_pushlstring
-  0x1411BA9F0: lua_pushnil
-  0x1411BAA10: lua_pushnumber
-  0x1411BAA30: lua_pushstring
-  0x1411BAA60: lua_pushthread
-  0x1411BAA90: lua_pushvalue
-  0x1411BAAC0: lua_pushvfstring
-  0x1411BAB10: lua_rawequal
-  0x1411BAB60: lua_rawget
-  0x1411BABA0: lua_rawgeti
-  0x1411BABE0: lua_rawset
-  0x1411BAC60: lua_rawseti
-  0x1411BACE0: lua_remove
-  0x1411BAD30: lua_replace
-  0x1411BAE20: lua_setfenv
-  0x1411BAEC0: lua_setfield
-  0x1411BAF30: lua_setlevel
-  0x1411BAF40: lua_setmetatable
-  0x1411BB000: lua_settable
-  0x1411BB030: lua_settop
-  0x1411BB190: lua_toboolean
-  0x1411BB1C0: lua_tocfunction
-  0x1411BB1F0: lua_tointeger
-  0x1411BB220: lua_tolstring
-  0x1411BB2C0: lua_tonumber
-  0x1411BB300: lua_topointer
-  0x1411BB370: lua_tothread
-  0x1411BB390: lua_touserdata
-  0x1411BB3D0: lua_type
-  0x1411BB400: lua_typename
-  0x1411BB420: lua_xmove
-  0x1411BC480: lua_yield
-  0x1411BC6C0: luaL_openlibs
-  0x1411BC8B0: luaL_addlstring
-#fail   0x1411BC760: luaL_addstring
-  0x1411BD960: luaL_openlib
-  0x1411BC970: luaL_addvalue
-  0x1411BCA30: luaL_argerror
-  0x1411BCB20: luaL_buffinit
-  0x1411BCB40: luaL_callmeta
-  0x1411BCBC0: luaL_checkany
-  0x1411BCC00: luaL_checkinteger
-  0x1411BCC50: luaL_checklstring
-  0x1411BCCE0: luaL_checknumber
-  0x1411BCD40: luaL_checkoption
-  0x1411BCE00: luaL_checkstack
-  0x1411BCE40: luaL_checktype
-  0x1411BCE80: luaL_checkudata
-  0x1411BCF40: luaL_error
-  0x1411BCFA0: luaL_findtable
-  0x1411BD0D0: luaL_getmetafield
-  0x1411BD150: luaL_gsub
-  0x1411BD590: luaL_loadbuffer
-  0x1411BD5C0: luaL_loadfile
-  0x1411BD860: luaL_loadstring
-  0x1411BD8A0: luaL_newmetatable
-  0x1411BD920: luaL_newstate
-  0x1411BDAE0: luaL_optinteger
-  0x1411BDB50: luaL_optlstring
-  0x1411BDBD0: luaL_optnumber
-  0x1411BDC40: luaL_prepbuffer
-  0x1411BDCA0: luaL_pushresult
-  0x1411BDCF0: luaL_ref
-  0x1411BDDB0: luaL_register
-  0x1411BDDC0: luaL_typerror
-  0x1411BDE20: luaL_unref
-  0x1411BDEA0: luaL_where
-  0x1412A9F80: lua_getinfo
-  0x1412AA070: lua_getlocal
-  0x1412AA0E0: lua_getstack
-  0x1412B2FF0: luaopen_base
-  0x1412B3B50: luaopen_table
-  0x1412B4EF0: luaopen_io
-  0x1412B5CC0: luaopen_os
-  0x1412B70E0: luaopen_string
-  0x1412B8750: luaopen_math
-  0x1412B97E0: luaopen_debug
-  0x1412BA2D0: luaopen_package
-  0x14138BBE0: crc
-  0x1413E1174: ThrowException
-  0x141407A34: FreeMemory
+  0x14019D0D0: j_SleepEx
+  0x1401C1010: Client::System::Resource::Handle::ModelResourceHandle_GetMaterialFileNameBySlot
+  0x1402B5750: CountdownPointer
+  0x1402F95D0: std::vector_SetSize
+  0x140439E60: GetGameObjectByIndex
+  0x140453290: PrepareColorSet
+  0x140453560: ReadStainingTemplate
+  0x1404A5020: Client::Game::Control::InputManager_GetInputStatus
+  0x1404BC450: Client::System::Input::InputData_IsInputIDKeyPress
+  0x1404BC560: Client::System::Input::InputData_IsInputIDClicked
+  0x1404BCEA0: Client::System::Input::InputData_IsMouseCombinationDragged
+  0x1404C6D40: Component::GUI::AtkCursor_SetCursorType # the cursor's icon I believe
+  0x1404EF490: GetScaleListEntryFromScale
+  0x1404FDAA0: GetScaleForListOption
+  0x14054ABD0: Component::GUI::TextModuleInterface::GetTextLabelByID
+  0x140626640: ConvertLogMessageIdToCharaLogKind
+  0x140706320: ExecuteCommand
+  0x1408AC500: CreateSelectYesno
+  0x140A47D30: GetBeastTribeAllowance
+  0x1410345B0: Client::UI::AddonHudLayoutScreen::MoveableAddonInfoStruct_UpdateAddonPosition
+  0x141125260: Client::Graphics::Kernel::CreateShader # static function
+  0x1411B96D0: lua_close
+  0x1411B9A50: lua_index2addr
+  0x1411B9B40: lua_call
+  0x1411B9B90: lua_checkstack
+  0x1411B9C30: lua_concat
+  0x1411B9CC0: lua_cpcall
+  0x1411B9D00: lua_createtable
+  0x1411B9D70: lua_dump
+  0x1411B9DF0: lua_equal
+  0x1411B9E60: lua_gc
+  0x1411BA020: lua_getfenv
+  0x1411BA0A0: lua_getfield
+  0x1411BA110: lua_getmetatable
+  0x1411BA170: lua_gettable
+  0x1411BA1A0: lua_gettop
+  0x1411BA250: lua_insert
+  0x1411BA2A0: lua_iscfunction
+  0x1411BA2D0: lua_isnumber
+  0x1411BA300: lua_isstring
+  0x1411BA340: lua_isuserdata
+  0x1411BA370: lua_lessthan
+  0x1411BA3C0: lua_load
+  0x1411BA410: lua_newthread
+  0x1411BA450: lua_newuserdata
+  0x1411BA4C0: lua_next
+  0x1411BA500: lua_objlen
+  0x1411BA580: lua_pcall
+  0x1411BA610: lua_pushboolean
+  0x1411BA630: lua_pushcclosure
+  0x1411BA700: lua_pushfstring
+  0x1411BA750: lua_pushinteger
+  0x1411BA770: lua_pushlightuserdata
+  0x1411BA790: lua_pushlstring
+  0x1411BA800: lua_pushnil
+  0x1411BA820: lua_pushnumber
+  0x1411BA840: lua_pushstring
+  0x1411BA870: lua_pushthread
+  0x1411BA8A0: lua_pushvalue
+  0x1411BA8D0: lua_pushvfstring
+  0x1411BA920: lua_rawequal
+  0x1411BA970: lua_rawget
+  0x1411BA9B0: lua_rawgeti
+  0x1411BA9F0: lua_rawset
+  0x1411BAA70: lua_rawseti
+  0x1411BAAF0: lua_remove
+  0x1411BAB40: lua_replace
+  0x1411BAC30: lua_setfenv
+  0x1411BACD0: lua_setfield
+  0x1411BAD40: lua_setlevel
+  0x1411BAD50: lua_setmetatable
+  0x1411BAE10: lua_settable
+  0x1411BAE40: lua_settop
+  0x1411BAFA0: lua_toboolean
+  0x1411BAFD0: lua_tocfunction
+  0x1411BB000: lua_tointeger
+  0x1411BB030: lua_tolstring
+  0x1411BB0D0: lua_tonumber
+  0x1411BB110: lua_topointer
+  0x1411BB180: lua_tothread
+  0x1411BB1A0: lua_touserdata
+  0x1411BB1E0: lua_type
+  0x1411BB210: lua_typename
+  0x1411BB230: lua_xmove
+  0x1411BC290: lua_yield
+  0x1411BC4D0: luaL_openlibs
+  0x1411BC6C0: luaL_addlstring
+  0x1411BC760: luaL_addstring
+  0x1411BD770: luaL_openlib
+  0x1411BC780: luaL_addvalue
+  0x1411BC840: luaL_argerror
+  0x1411BC930: luaL_buffinit
+  0x1411BC950: luaL_callmeta
+  0x1411BC9D0: luaL_checkany
+  0x1411BCA10: luaL_checkinteger
+  0x1411BCA60: luaL_checklstring
+  0x1411BCAF0: luaL_checknumber
+  0x1411BCB50: luaL_checkoption
+  0x1411BCC10: luaL_checkstack
+  0x1411BCC50: luaL_checktype
+  0x1411BCC90: luaL_checkudata
+  0x1411BCD50: luaL_error
+  0x1411BCDB0: luaL_findtable
+  0x1411BCEE0: luaL_getmetafield
+  0x1411BCF60: luaL_gsub
+  0x1411BD3A0: luaL_loadbuffer
+  0x1411BD3D0: luaL_loadfile
+  0x1411BD670: luaL_loadstring
+  0x1411BD6B0: luaL_newmetatable
+  0x1411BD730: luaL_newstate
+  0x1411BD8F0: luaL_optinteger
+  0x1411BD960: luaL_optlstring
+  0x1411BD9E0: luaL_optnumber
+  0x1411BDA50: luaL_prepbuffer
+  0x1411BDAB0: luaL_pushresult
+  0x1411BDB00: luaL_ref
+  0x1411BDBC0: luaL_register
+  0x1411BDBD0: luaL_typerror
+  0x1411BDC30: luaL_unref
+  0x1411BDCB0: luaL_where
+  0x1412A9EA0: lua_getinfo
+  0x1412A9F90: lua_getlocal
+  0x1412AA000: lua_getstack
+  0x1412B2F10: luaopen_base
+  0x1412B3A70: luaopen_table
+  0x1412B4E10: luaopen_io
+  0x1412B5BE0: luaopen_os
+  0x1412B7000: luaopen_string
+  0x1412B8670: luaopen_math
+  0x1412B9700: luaopen_debug
+  0x1412BA1F0: luaopen_package
+  0x14138BB00: crc
+  0x1413E1084: ThrowException
+  0x141407944: FreeMemory
   0x140055A40: FreeMemory_2 # nullsub, gets called together with some AllocatorManager vfunc
-  0x14140F990: _purecall # Ghidra does not have a notation for pure virtual calls
+  0x14140F8A0: _purecall # Ghidra does not have a notation for pure virtual calls
   0x140060C20: MemAlloc
-  0x1401E4DF0: MatrixMultiply
-  0x1401E1E00: MatrixMultiply2
-  0x1401E0B60: MatrixVectorMultiply
-  0x1401E2100: MatrixInverse
-  0x1401E2720: MatrixInverseMaybe
-  0x1401E40D0: MakeProjectionMatrix
-  0x1401E4360: MakeProjectionMatrix2
-  0x140328F50: SubmitConstantBufferUpdate
+  0x1401E4D00: MatrixMultiply
+  0x1401E1D10: MatrixMultiply2
+  0x1401E0A70: MatrixVectorMultiply
+  0x1401E2010: MatrixInverse
+  0x1401E2630: MatrixInverseMaybe
+  0x1401E3FE0: MakeProjectionMatrix
+  0x1401E4270: MakeProjectionMatrix2
+  0x140328F00: SubmitConstantBufferUpdate
   0x1400A8B80: IsLocalPlayerPartyLeader
   0x1400A8A90: IsLocalPlayerInParty
   0x1400A8BE0: IsPartyMemberByNameOrContentId # (name, contentId)
   0x1400A8D10: GetPartyMemberClassJobByContentId
-  0x1406DEFE0: ObjectIdToPlayerObjectId # returns invalid id if objectid is not a player
+  0x1406DEFB0: ObjectIdToPlayerObjectId # returns invalid id if objectid is not a player
 
 classes:
   Client::Game::GameMain:
     instances:
-      - ea: 0x141E72FB0
+      - ea: 0x141E79FB0
         pointer: False
     funcs:
-      0x140492EC0: Initialize
-      0x1404931D0: Terminate
-      0x1404934C0: Update
-      0x1404952B0: ctor
+      0x140492E70: Initialize
+      0x140493180: Terminate
+      0x140493470: Update
+      0x140495260: ctor
   Client::Game::StatusManager:
     funcs:
-      0x1406E7D30: Initialize
-      0x1406E9CD0: HasStatus
-      0x1406EAE70: GetStatusIndex
-      0x1406EACB0: GetStatusIdByIndex
-      0x1406EACD0: GetRemainingTimeByIndex
-      0x1406EAD00: GetSourceIdByIndex
+      0x1406E7D00: Initialize
+      0x1406E9CA0: HasStatus
+      0x1406EAE40: GetStatusIndex
+      0x1406EAC80: GetStatusIdByIndex
+      0x1406EACA0: GetRemainingTimeByIndex
+      0x1406EACD0: GetSourceIdByIndex
   Client::Game::Control::TargetSystem::ListFeeder:
   Client::Game::InstanceContent::ContentSheetWaiterInterface:
   Client::Game::Object::IGameObjectEventListener:
@@ -224,7 +224,7 @@ classes:
   Client::System::Input::TextServiceInterface::TextServiceEvent:
   Client::System::Input::InputDeviceManager:
     instances:
-      - ea: 0x141E72D18
+      - ea: 0x141E79D18
   Client::System::Resource::Handle::ResourceHandleFactory:
   Client::UI::Agent::AgentMap::MapMarkerStructSearch:
   Client::UI::Atk2DMap:
@@ -249,104 +249,104 @@ classes:
   Client::System::Scheduler::Base::LinkList:
   Client::Game::Network::PacketElement:
     vtbls:
-      - ea: 0x14176FA40
+      - ea: 0x14176FA50
   Client::Game::Network::PacketContext:
     vtbls:
-      - ea: 0x14176FA48
+      - ea: 0x14176FA58
   Client::Game::Control::Control:
     funcs:
-      0x1404B4880: Initialize
-      0x1404B4AF0: Update
+      0x1404B4830: Initialize
+      0x1404B4AA0: Update
   Component::GUI::AtkInputManager:
     funcs:
-      0x1404FF5F0: HandleInput
-      0x140500DB0: SetFocus
-      0x1405018A0: HandleFocus
-      0x140501D80: ctor
+      0x1404FF5A0: HandleInput
+      0x140500D60: SetFocus
+      0x140501850: HandleFocus
+      0x140501D30: ctor
   Client::Game::CameraManager:
     funcs:
-      0x14118D7C0: PreUpdate
+      0x14118D5D0: PreUpdate
   Client::Game::Object::GameObjectManager:
     instances:
-      - ea: 0x141EA2B20
+      - ea: 0x141EA9B20
         pointer: False
     funcs:
-      0x1407559E0: Update
-      0x140756170: DeleteAllModels
-      0x140756280: DeleteAllObjects  # IMPORTANT:: DONT EVER CALL THIS FOR REAL OKAY
-      0x140755400: GetFilteredObjectById
-      0x1407555D0: UpdateObjectArrays
-      0x140755770: UpdateObjectArraysWrapper
-      0x140755780: UpdateObjectArraysWrapper2
-      0x1407557A0: ClearObjectArrays
+      0x140755800: Update
+      0x140755F90: DeleteAllModels
+      0x1407560A0: DeleteAllObjects  # IMPORTANT:: DONT EVER CALL THIS FOR REAL OKAY
+      0x140755220: GetFilteredObjectById
+      0x1407553F0: UpdateObjectArrays
+      0x140755590: UpdateObjectArraysWrapper
+      0x1407555A0: UpdateObjectArraysWrapper2
+      0x1407555C0: ClearObjectArrays
   Client::Game::Character::CharacterManager:
     instances:
-      - ea: 0x141EA27E0
+      - ea: 0x141EA97E0
         pointer: False
     funcs:
-      0x140754380: Initialize
-      0x1407547F0: DeleteCharacterAtIndex
-      0x140754890: DeleteAllCharacters
-      0x140754980: LookupBattleCharaByObjectID
-      0x1407549E0: LookupBattleCharaByName
-      0x140754AD0: LookupRetainerByName
-      0x140754B70: LookupBuddyByOwnerObject
-      0x140754BF0: LookupPetByOwnerObject
-      0x140754CD0: LookupBattleNpcPartsByObjectId
+      0x1407541A0: Initialize
+      0x140754610: DeleteCharacterAtIndex
+      0x1407546B0: DeleteAllCharacters
+      0x1407547A0: LookupBattleCharaByObjectID
+      0x140754800: LookupBattleCharaByName
+      0x1407548F0: LookupRetainerByName
+      0x140754990: LookupBuddyByOwnerObject
+      0x140754A10: LookupPetByOwnerObject
+      0x140754AF0: LookupBattleNpcPartsByObjectId
   Client::Game::Group::GroupManager:
     instances:
-      - ea: 0x141EC3260
+      - ea: 0x141ECA260
         pointer: False
-      - ea: 0x141EC6FD0
+      - ea: 0x141ECDFD0
         name: SecondInstance
         pointer: False
     funcs:
-      0x140757570: ctor
-      0x1407576E0: SetPartyEmpty
-      0x140758470: GetAllianceMemberByGroupAndIndex  # (this, group, index)
-      0x1407584D0: GetAllianceMemberByIndex # (this, index)
-      0x1407584F0: IsObjectIDInParty # (this, objectID)
-      0x140758550: IsCharacterInPartyByName # (this, char*)
-      0x1407585D0: IsObjectIDInAlliance
-      0x140758640: IsObjectIDPartyLeader
-      0x140758900: UpdateAllianceMemberAtIndex
-      0x140758C10: GetPartyMemberByIndex
-      0x140758C90: GetPartyMemberByContentId
-      0x140758BB0: GetPartyMemberByObjectId
-      0x140B97F90: Create
-      0x140B97ED0: GetGroupManager
+      0x140757390: ctor
+      0x140757500: SetPartyEmpty
+      0x140758290: GetAllianceMemberByGroupAndIndex  # (this, group, index)
+      0x1407582F0: GetAllianceMemberByIndex # (this, index)
+      0x140758310: IsObjectIDInParty # (this, objectID)
+      0x140758370: IsCharacterInPartyByName # (this, char*)
+      0x1407583F0: IsObjectIDInAlliance
+      0x140758460: IsObjectIDPartyLeader
+      0x140758720: UpdateAllianceMemberAtIndex
+      0x140758A30: GetPartyMemberByIndex
+      0x140758AB0: GetPartyMemberByContentId
+      0x1407589D0: GetPartyMemberByObjectId
+      0x140B97DB0: Create
+      0x140B97CF0: GetGroupManager
   Client::Game::Balloon:
     funcs:
-      0x141239090: OpenBalloon
-      0x141239100: CloseBalloon
-      0x1412391F0: Initialize
-      0x141239230: SetDefaultId
-      0x141239240: Reset # this is near identical to Initialize but is called in update instead
-      0x141239280: Update
-      0x1412393E0: Terminate
-      0x141239430: StartTimerMode # (Balloon* this, float timer, ushort id) if id == 1 use default id else use id
-      0x141239470: StartOtherMode # (Balloon* this, ushort id) id same as above
+      0x141238FB0: OpenBalloon
+      0x141239020: CloseBalloon
+      0x141239110: Initialize
+      0x141239150: SetDefaultId
+      0x141239160: Reset # this is near identical to Initialize but is called in update instead
+      0x1412391A0: Update
+      0x141239300: Terminate
+      0x141239350: StartTimerMode # (Balloon* this, float timer, ushort id) if id == 1 use default id else use id
+      0x141239390: StartOtherMode # (Balloon* this, ushort id) id same as above
   FateManager:
     funcs:
-      0x14110C950: HasValue  # g_FateTablePtr != 0
-      0x14110C970: GetPtr # return g_FateTablePtr
-      0x14110C980: ctor
-      0x14110C9D0: dtor
+      0x14110C770: HasValue  # g_FateTablePtr != 0
+      0x14110C790: GetPtr # return g_FateTablePtr
+      0x14110C7A0: ctor
+      0x14110C7F0: dtor
   BattleBuddyList:
     funcs:
-      0x14079B1E0: GetMemberBattleCharaByIndex
+      0x14079B000: GetMemberBattleCharaByIndex
   InventoryManager:
     instances:
-      - ea: 0x141E9E160
+      - ea: 0x141EA5160
         pointer: False
     funcs:
-      0x1406B7600: GetInventoryContainer  # (this, containerId)
-      0x1406B87E0: MoveItemSlot # (srcContainer, srcSlot, dstContainer, dstSlot, 1)
-      0x1406BF7A0: GetInventoryItemCount # (this, itemId, hq, 1, 1, 0)
-      0x1406BFF10: GetItemCountInContainer # (this, itemId, containerId, hq, 0)
+      0x1406B75D0: GetInventoryContainer  # (this, containerId)
+      0x1406B87B0: MoveItemSlot # (srcContainer, srcSlot, dstContainer, dstSlot, 1)
+      0x1406BF770: GetInventoryItemCount # (this, itemId, hq, 1, 1, 0)
+      0x1406BFEE0: GetItemCountInContainer # (this, itemId, containerId, hq, 0)
   InventoryContainer:
     funcs:
-      0x1406B5F40: GetInventorySlot  # (this, slotIndex)
+      0x1406B5F10: GetInventorySlot  # (this, slotIndex)
   Client::System::String::Utf8String:
     funcs:
       0x140059D80: ctor  # empty string ctor
@@ -361,227 +361,227 @@ classes:
       0x14005CF50: Clear
   Component::GUI::AtkValue:
     funcs:
-      0x1404BE590: dtor
-      0x1404BE5D0: GetBool
-      0x1404BE5F0: GetInt
-      0x1404BE610: GetUInt  # these two could be backwards
-      0x1404BE630: GetFloat
-      0x1404BE650: GetString
-      0x1404BE670: GetUnkPtr # could also be string, returns a pointer size
-      0x1404BE6B0: SetString
-      0x1404BE740: CopyValue # = operator
-      0x1404BE7B0: Equals # == operator
-      0x1404BE930: CreateArray # uses std::vector for array type (9)
-      0x1404BEBD0: ChangeType
-      0x1404BEDE0: ReleaseManagedMemory # called by SetString, frees old strings
+      0x1404BE540: dtor
+      0x1404BE580: GetBool
+      0x1404BE5A0: GetInt
+      0x1404BE5C0: GetUInt  # these two could be backwards
+      0x1404BE5E0: GetFloat
+      0x1404BE600: GetString
+      0x1404BE620: GetUnkPtr # could also be string, returns a pointer size
+      0x1404BE660: SetString
+      0x1404BE6F0: CopyValue # = operator
+      0x1404BE760: Equals # == operator
+      0x1404BE8E0: CreateArray # uses std::vector for array type (9)
+      0x1404BEB80: ChangeType
+      0x1404BED90: ReleaseManagedMemory # called by SetString, frees old strings
   Component::GUI::AtkEvent:
     funcs:
-      0x1404C5A60: SetEventIsHandled
+      0x1404C5A10: SetEventIsHandled
   Component::GUI::AtkEventManager:
     funcs:
-      0x1404C5AC0: RegisterEvent
-      0x1404C5BB0: UnregisterEvent
-      0x1404C5D80: DispatchEvent
-      0x1404C5EF0: Cleanup
+      0x1404C5A70: RegisterEvent
+      0x1404C5B60: UnregisterEvent
+      0x1404C5D30: DispatchEvent
+      0x1404C5EA0: Cleanup
   Component::GUI::AtkEventDispatcher:
     funcs:
-      0x1404C61E0: DispatchEvent
-      0x1404C64D0: RemoveEvent
+      0x1404C6190: DispatchEvent
+      0x1404C6480: RemoveEvent
   Component::GUI::AtkTooltipArgs:
     funcs:
-      0x1404C7D70: ctor
+      0x1404C7D20: ctor
   Component::GUI::AtkUldManager:
     funcs:
-      0x1404E7C80: SetupFromULDResourceHandle
-      0x1404EA0A0: ReadTPHD
-      0x1404EA2B0: ReadASHDAndLoadTextures
-      0x1404EA790: CreateAtkNode
-      0x1404EBBA0: CreateAtkComponent
-      0x1404ED1A0: DuplicateNode
-      0x1404ED680: SearchNodeByIndex  # this supports indexes greater than the node count, there's something i don't understand going on w/ addons here
-      0x1404ED6F0: GetDuplicatedNode
+      0x1404E7C30: SetupFromULDResourceHandle
+      0x1404EA050: ReadTPHD
+      0x1404EA260: ReadASHDAndLoadTextures
+      0x1404EA740: CreateAtkNode
+      0x1404EBB50: CreateAtkComponent
+      0x1404ED150: DuplicateNode
+      0x1404ED630: SearchNodeByIndex  # this supports indexes greater than the node count, there's something i don't understand going on w/ addons here
+      0x1404ED6A0: GetDuplicatedNode
   Component::GUI::AtkArrayDataHolder:
     funcs:
-      0x1404BEE90: ctor
+      0x1404BEE40: ctor
   Client::System::Resource::ResourceManager:
     instances:
-      - ea: 0x141E5D3B0
+      - ea: 0x141E643B0
     funcs:
-      0x1401B8190: ctor
-      0x1401B8680: CreateSingleton
-      0x1401B8780: Update
-      0x1401B8B60: GetResourceAsync
-      0x1401B8D90: GetResourceSync
-      0x1401BD570: Initialize
+      0x1401B80A0: ctor
+      0x1401B8590: CreateSingleton
+      0x1401B8690: Update
+      0x1401B8A70: GetResourceAsync
+      0x1401B8CA0: GetResourceSync
+      0x1401BD480: Initialize
   Client::Game::UI::UIState:
     instances:
-      - ea: 0x141EA5800
+      - ea: 0x141EAC800
         pointer: False
     funcs:
-      0x1407BBB80: Initialize
-      0x1407CCB00: ctor
-      0x1407B96F0: IsUnlockLinkUnlocked
+      0x1407BB9A0: Initialize
+      0x1407CC920: ctor
+      0x1407B9510: IsUnlockLinkUnlocked
   Client::Game::UI::PlayerState:
     funcs:
-      0x140760460: SetCharacterName
-      0x140761A40: GetBeastTribeRank
-      0x140761AC0: GetBeastTribeCurrentRep
-      0x140761B00: GetBeastTribeNeededRep
-      0x140764390: Initialize
-      0x1407CC2E0: ctor
+      0x140760280: SetCharacterName
+      0x140761860: GetBeastTribeRank
+      0x1407618E0: GetBeastTribeCurrentRep
+      0x140761920: GetBeastTribeNeededRep
+      0x1407641B0: Initialize
+      0x1407CC100: ctor
   Client::Game::UI::Revive:
     vtbls:
-      - ea: 0x141780488
+      - ea: 0x141787D28
         base: Component::GUI::AtkModuleInterface::AtkEventInterface
   Client::Game::UI::Buddy:
     instances:
-      - ea: 0x141EA71F0
+      - ea: 0x141EAE1F0
         pointer: False
     funcs:
-      0x14079B570: ctor
+      0x14079B390: ctor
   Client::Game::UI::RelicNote:
     vtbls:
-      - ea: 0x1417813B0
+      - ea: 0x141788C40
     funcs:
-      0x1407A5940: GetRelicID
-      0x1407A5950: GetRelicNoteID
-      0x1407A5960: GetMonsterProgress
-      0x1407A5A00: IsDungeonComplete
-      0x1407A5A40: IsFateComplete
-      0x1407A5A80: IsLeveComplete
+      0x1407A5760: GetRelicID
+      0x1407A5770: GetRelicNoteID
+      0x1407A5780: GetMonsterProgress
+      0x1407A5820: IsDungeonComplete
+      0x1407A5860: IsFateComplete
+      0x1407A58A0: IsLeveComplete
   Client::Game::UI::MobHunt:
     vtbls:
-      - ea: 0x141781430
+      - ea: 0x141788CC0
   Client::Game::BattleLog:
     funcs:
-      0x1407BD430: AddLogMessage
-      0x1407BE310: AddActionLogMessage
-      0x1407BEA20: AddToScreenLogWithLogMessageId  # this converts log message id to screen log kind and calls below function
-      0x1407BEB00: AddToScreenLogWithScreenLogKind
+      0x1407BD250: AddLogMessage
+      0x1407BE130: AddActionLogMessage
+      0x1407BE840: AddToScreenLogWithLogMessageId  # this converts log message id to screen log kind and calls below function
+      0x1407BE920: AddToScreenLogWithScreenLogKind
   Client::Game::ActionManager:
     instances:
-      - ea: 0x141E26720
+      - ea: 0x141E2D720
         pointer: False
     vtbls:
-      - ea: 0x1417818D0
+      - ea: 0x141789160
         base: Client::Graphics::Vfx::VfxDataListenner
     funcs:
       0x140048D80: StaticInitializer
       0x1400A9770: GetCurrentComboActionId
-      0x1407DDF90: GetActionRange
-      0x1407DE330: GetActionInRangeOrLoS
-      0x1407DE960: GetAdjustedCastTime
-      0x1407DF130: GetAdjustedRecastTime
-      0x1407DF890: GetActionCost
-      0x1407E0120: GetSpellIdForAction
-      0x1407E1640: UseActionLocation
-      0x1407E2460: UseGeneralAction
-      0x1407E30B0: UseWaymarkAction
-      0x1407E3BA0: CheckActionResources
-      0x1407E73A0: GetActionStatus
-      0x1407E9090: CanUseAction
-      0x1407E9850: GetAdjustedActionId
-      0x1407EAA50: UseAction
-      0x1407EB1C0: UseComboAction
-      0x1407EBAE0: GetRecastTimerActive
-      0x1407EBEA0: StartCooldown
-      0x1407EC1D0: GetRecastTimerElapsed
-      0x1407EC280: GetRecastTime
-      0x1407F06D0: GetMaxCharges
-      0x1407E13C0: GetRecastGroup
-      0x1407E6600: GetRecastGroupDetail
-      0x1407E66D0: Update
+      0x1407DDDB0: GetActionRange
+      0x1407DE150: GetActionInRangeOrLoS
+      0x1407DE780: GetAdjustedCastTime
+      0x1407DEF50: GetAdjustedRecastTime
+      0x1407DF6B0: GetActionCost
+      0x1407DFF40: GetSpellIdForAction
+      0x1407E1460: UseActionLocation
+      0x1407E2280: UseGeneralAction
+      0x1407E2ED0: UseWaymarkAction
+      0x1407E39C0: CheckActionResources
+      0x1407E71C0: GetActionStatus
+      0x1407E8EB0: CanUseAction
+      0x1407E9670: GetAdjustedActionId
+      0x1407EA870: UseAction
+      0x1407EAFE0: UseComboAction
+      0x1407EB900: GetRecastTimerActive
+      0x1407EBCC0: StartCooldown
+      0x1407EBFF0: GetRecastTimerElapsed
+      0x1407EC0A0: GetRecastTime
+      0x1407F04F0: GetMaxCharges
+      0x1407E11E0: GetRecastGroup
+      0x1407E6420: GetRecastGroupDetail
+      0x1407E64F0: Update
   Client::Game::JobGaugeManager:
     instances:
-      - ea: 0x141E73A88
+      - ea: 0x141E7AA88
         pointer: False
     funcs:
-      0x1407FAE60: ctor
-      0x1407FAE90: dtor
-      0x1407FAFD0: Update
-      0x1407FB0F0: ChangeGauge
+      0x1407FAC80: ctor
+      0x1407FACB0: dtor
+      0x1407FADF0: Update
+      0x1407FAF10: ChangeGauge
   Client::Game::Gauge::JobGauge:
     vtbls:
-      - ea: 0x1417818E0
+      - ea: 0x141789170
     vfuncs:
       0: dtor
       1: Init
       4: SetValues
   Client::Game::Gauge::PaladinGauge:
     vtbls:
-      - ea: 0x141781918
+      - ea: 0x1417891A8
         base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::MonkGauge:
     vtbls:
-      - ea: 0x141781950
+      - ea: 0x1417891E0
         base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::WarriorGauge:
     vtbls:
-      - ea: 0x141781988
+      - ea: 0x141789218
         base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::DragoonGauge:
     vtbls:
-      - ea: 0x1417819C0
+      - ea: 0x141789250
         base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::BardGauge:
     vtbls:
-      - ea: 0x1417819F8
+      - ea: 0x141789288
         base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::WhiteMageGauge:
     vtbls:
-      - ea: 0x141781A30
+      - ea: 0x1417892C0
         base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::BlackMageGauge:
     vtbls:
-      - ea: 0x141781A68
+      - ea: 0x1417892F8
         base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::SummonerGauge:
     vtbls:
-      - ea: 0x141781AA0
+      - ea: 0x141789330
         base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::ScholarGauge:
     vtbls:
-      - ea: 0x141781AD8
+      - ea: 0x141789368
         base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::NinjaGauge:
     vtbls:
-      - ea: 0x141781B10
+      - ea: 0x1417893A0
         base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::MachinistGauge:
     vtbls:
-      - ea: 0x141781B48
+      - ea: 0x1417893D8
         base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::DarkKnightGauge:
     vtbls:
-      - ea: 0x141781B80
+      - ea: 0x141789410
         base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::AstrologianGauge:
     vtbls:
-      - ea: 0x141781BB8
+      - ea: 0x141789448
         base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::SamuraiGauge:
     vtbls:
-      - ea: 0x141781BF0
+      - ea: 0x141789480
         base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::RedMageGauge:
     vtbls:
-      - ea: 0x141781C28
+      - ea: 0x1417894B8
         base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::DancerGauge:
     vtbls:
-      - ea: 0x141781C60
+      - ea: 0x1417894F0
         base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::GunbreakerGauge:
     vtbls:
-      - ea: 0x141781C98
+      - ea: 0x141789528
         base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::ReaperGauge:
     vtbls:
-      - ea: 0x141781CD0
+      - ea: 0x141789560
         base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::SageGauge:
     vtbls:
-      - ea: 0x141781D08
+      - ea: 0x141789598
         base: Client::Game::Gauge::JobGauge
   Common::Configuration::ConfigBase:
     vtbls:
@@ -621,12 +621,12 @@ classes:
         base: Client::System::Framework::Task
   Client::System::Framework::TaskManager:
     instances:
-      - ea: 0x141E58118
+      - ea: 0x141E5F118
     vtbls:
       - ea: 0x14170A920
     funcs:
       0x140094CA0: ctor
-      0x140179500: SetTask
+      0x140179410: SetTask
   Common::Game::Time::GameTime:
     vtbls:
       - ea: 0x14170A928
@@ -644,8 +644,8 @@ classes:
         base: Common::Configuration::DevConfig
   Client::System::Framework::Framework:
     instances:
-      - ea: 0x141E548A0
-      - ea: 0x141E56448
+      - ea: 0x141E5B8A0
+      - ea: 0x141E5D448
         name: InstancePointer2
     vtbls:
       - ea: 0x14170A978
@@ -673,13 +673,13 @@ classes:
       2: GetSheetByName
   Component::Excel::ExcelModule:
     vtbls:
-      - ea: 0x141A6AC20
+      - ea: 0x141A72460
     vfuncs:
       1: GetSheetByIndex
       2: GetSheetByName
       3: LoadSheet
     funcs:
-      0x14169A550: ctor
+      0x14169A1E0: ctor
   Client::System::Input::TextService:
     vtbls:
       - ea: 0x14170B048
@@ -707,10 +707,10 @@ classes:
     vfuncs:
       11: UpdateAddonByID
     funcs:
-      0x1404F95A0: ctor
-      0x1404FAFF0: GetAddonById
-      0x1404FB050: GetAddonByName
-      0x1404FB100: GetAddonByNode
+      0x1404F9550: ctor
+      0x1404FAFA0: GetAddonById
+      0x1404FB000: GetAddonByName
+      0x1404FB0B0: GetAddonByNode
   Client::UI::RaptureAtkUnitManager:
     vtbls:
       - ea: 0x141714F08
@@ -734,34 +734,34 @@ classes:
       - ea: 0x141714C90
   Client::UI::Info::InfoProxyPageInterface:
     vtbls:
-#fail       - ea: 0x141714CF0
+      - ea: 0x141714CF0
         base: Client::UI::Info::InfoProxyInterface
   Common::Configuration::ConfigBase::ChangeEventInterface:
     vtbls:
       - ea: 0x141715418
   Client::UI::Info::InfoProxyCrossRealm:
     instances:
-      - ea: 0x141E58088
+      - ea: 0x141E5F088
     vtbls:
       - ea: 0x141715620
         base: Client::UI::Info::InfoProxyInterface
     funcs:
-      0x1400EA1F0: ctor
-      0x1400EA2D0: GetPtr  # Static
-      0x1400ECE50: IsCrossRealmParty # Static
-      0x1400ECED0: IsCrossRealmPartyLeader # Static
-      0x1400ECEF0: IsAllianceRaid # Static
-      0x1400ECF40: GetPartyMemberCount # Static
-      0x1400ECFA0: GetTotalMemberCount # Static
-      0x1400ED000: GetGroupMemberCount # Static
-      0x1400ED090: GetAllianceGroupCount # Static
-      0x1400ED0C0: GetPartyMemberCount_2 # Static
-      0x1400ED100: GetGroupIndex # Static
-      0x1400ED690: IsLocalPlayerInParty # Static
-      0x1400ED6D0: GetMember # Static
-      0x1400ED780: GetMemberByContentId # Static
-      0x1400ED850: GetMemberByObjectId # Static
-      0x1400ED900: IsContentIdInParty # Static
+      0x1400EA160: ctor
+      0x1400EA240: GetPtr  # Static
+      0x1400ECDC0: IsCrossRealmParty # Static
+      0x1400ECE40: IsCrossRealmPartyLeader # Static
+      0x1400ECE60: IsAllianceRaid # Static
+      0x1400ECEB0: GetPartyMemberCount # Static
+      0x1400ECF10: GetTotalMemberCount # Static
+      0x1400ECF70: GetGroupMemberCount # Static
+      0x1400ED000: GetAllianceGroupCount # Static
+      0x1400ED030: GetPartyMemberCount_2 # Static
+      0x1400ED070: GetGroupIndex # Static
+      0x1400ED600: IsLocalPlayerInParty # Static
+      0x1400ED640: GetMember # Static
+      0x1400ED6F0: GetMemberByContentId # Static
+      0x1400ED7C0: GetMemberByObjectId # Static
+      0x1400ED870: IsContentIdInParty # Static
   Client::Graphics::Kernel::Notifier:
     vtbls:
       - ea: 0x14171D820
@@ -787,15 +787,15 @@ classes:
       - ea: 0x141727AA8
   Client::Graphics::Environment::EnvManager:
     instances:
-      - ea: 0x141E564C8
+      - ea: 0x141E5D4C8
     vtbls:
       - ea: 0x141727AB8
         base: Client::Graphics::Singleton
     funcs:
-      0x140188020: ctor
+      0x140187F30: ctor
   Client::Graphics::Environment::EnvRenderController:
     instances:
-      - ea: 0x141E5D000
+      - ea: 0x141E64000
         pointer: False
     vtbls:
       - ea: 0x141727AE8
@@ -806,7 +806,7 @@ classes:
     vfuncs:
       5: Run
     funcs:
-      0x14019D0C0: CreateThread
+      0x14019CFD0: CreateThread
   Client::System::File::FileInterface:
     vtbls:
       - ea: 0x141727FA8
@@ -819,7 +819,7 @@ classes:
       - ea: 0x141727FF8
         base: Client::System::Framework::Task
     funcs:
-      0x1401A45E0: ctor
+      0x1401A44F0: ctor
   Client::System::Resource::Handle::ResourceHandle:
     vtbls:
       - ea: 0x141729788
@@ -828,9 +828,9 @@ classes:
       23: GetData
       33: Load
     funcs:
-      0x1401A81A0: DecRef
-      0x1401A81D0: IncRef
-      0x1401A8390: ctor
+      0x1401A80B0: DecRef
+      0x1401A80E0: IncRef
+      0x1401A82A0: ctor
   Client::System::Resource::Handle::DefaultResourceHandle:
     vtbls:
       - ea: 0x141729908
@@ -844,18 +844,18 @@ classes:
       - ea: 0x141729C08
         base: Client::System::Resource::Handle::DefaultResourceHandle
     funcs:
-      0x1401AB550: ctor
+      0x1401AB460: ctor
   Client::System::Resource::Handle::TextureResourceHandle:
     vtbls:
       - ea: 0x141729D88
         base: Client::System::Resource::Handle::ResourceHandle
     funcs:
-      0x1401AB880: ctor
+      0x1401AB790: ctor
   Client::System::Resource::ResourceEventListener:
     vtbls:
       - ea: 0x14172A0C8
     funcs:
-      0x1401B0C10: ctor
+      0x1401B0B20: ctor
   Client::System::Resource::Handle::CharaMakeParameterResourceHandle:
     vtbls:
       - ea: 0x14172A5B8
@@ -874,18 +874,18 @@ classes:
         base: Client::System::Resource::Handle::ResourceHandleFactory
   Client::Graphics::Primitive::Manager:
     instances:
-      - ea: 0x141E56490
+      - ea: 0x141E5D490
     vtbls:
       - ea: 0x14172EE78
         base: Client::Graphics::Singleton
     funcs:
-      0x1401DAFD0: ctor
+      0x1401DAEE0: ctor
   Client::Graphics::DelayedReleaseClassBase:
     vtbls:
       - ea: 0x14172F040
         base: Client::Graphics::ReferencedClassBase
     funcs:
-      0x1401DD930: ctor
+      0x1401DD840: ctor
   Client::Graphics::IAllocator:
     vtbls:
       - ea: 0x14172F068
@@ -895,18 +895,18 @@ classes:
         base: Client::Graphics::IAllocator
   Client::Graphics::AllocatorManager:
     instances:
-      - ea: 0x141E56488
+      - ea: 0x141E5D488
     vtbls:
       - ea: 0x14172F270
         base: Client::Graphics::Singleton
     funcs:
-      0x1401DFEB0: ctor
+      0x1401DFDC0: ctor
   Client::Network::NetworkModuleProxy:
     vtbls:
       - ea: 0x141730780
         base: Client::System::Common::NonCopyable
     funcs:
-      0x1401F6540: ctor
+      0x1401F64F0: ctor
   Client::UI::Agent::AgentInterface:
     vtbls:
       - ea: 0x141731770
@@ -919,11 +919,11 @@ classes:
       6: Update
       8: GetAddonId
     funcs:
-      0x1401F82C0: ctor
-      0x1401F8870: GetAgentByInternalId
-      0x1401F88F0: GetAgentInventoryContext
-      0x1401F88D0: GetAgentContext
-      0x1401F8940: GetAddonTextById
+      0x1401F8270: ctor
+      0x1401F8820: GetAgentByInternalId
+      0x1401F88A0: GetAgentInventoryContext
+      0x1401F8880: GetAgentContext
+      0x1401F88F0: GetAddonTextById
   Client::UI::Agent::AgentCharaMake:
     vtbls:
       - ea: 0x1417317E8
@@ -932,9 +932,9 @@ classes:
     vtbls:
       - ea: 0x141731C20
     funcs:
-      0x1402007B0: ctor
-      0x140205A10: GetAgentByInternalID
-      0x140205A20: GetAgentByInternalID_2  # dupe?
+      0x140200760: ctor
+      0x1402059C0: GetAgentByInternalID
+      0x1402059D0: GetAgentByInternalID_2  # dupe?
   Client::UI::Agent::AgentContext::AgentContextUpdateChecker:
     vtbls:
       - ea: 0x141731CB8
@@ -943,30 +943,30 @@ classes:
       - ea: 0x141731CC0
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x14020F400: ctor
-      0x14020F840: OpenContextMenu
-      0x14020F5A0: OpenContextMenuForAddon
-      0x14020FEB0: GetOwnerAddonId
-      0x14020FEC0: ClearMenu
-      0x14020FF10: SetMenuTitle
-      0x140210000: ResetMenu
-      0x1402100C0: SetPositionX
-      0x1402100E0: SetPositionY
-      0x1402129B0: SetUpdateChecker
-      0x140212BD0: CloseSubMenu
-      0x140210100: OpenSubMenu
-      0x140213E80: OpenYesNo # (this, char* msgText, uint yesId, uint noId, uint checkboxId, bool setOwner)
-      0x140210E60: SetupButtonsForTarget
-      0x140212590: AddMenuItem2 # (this, uint textId, AtkEventInterface* handler, long handlerParam, bool disabled, bool submenu)
-      0x140212600: AddMenuItem # (this, char* text, AtkEventInterface* handler, long handlerParam, bool disabled, bool submenu)
-      0x140214250: AddContextMenuItem2 # (this, int eventId, uint textId, bool disabled, bool submenu)
-      0x1402142C0: AddContextMenuItem # (this, int eventId, char* text, bool disabled, bool submenu, bool copyText)
+      0x14020F3B0: ctor
+      0x14020F7F0: OpenContextMenu
+      0x14020F550: OpenContextMenuForAddon
+      0x14020FE60: GetOwnerAddonId
+      0x14020FE70: ClearMenu
+      0x14020FEC0: SetMenuTitle
+      0x14020FFB0: ResetMenu
+      0x140210070: SetPositionX
+      0x140210090: SetPositionY
+      0x140212960: SetUpdateChecker
+      0x140212B80: CloseSubMenu
+      0x1402100B0: OpenSubMenu
+      0x140213E30: OpenYesNo # (this, char* msgText, uint yesId, uint noId, uint checkboxId, bool setOwner)
+      0x140210E10: SetupButtonsForTarget
+      0x140212540: AddMenuItem2 # (this, uint textId, AtkEventInterface* handler, long handlerParam, bool disabled, bool submenu)
+      0x1402125B0: AddMenuItem # (this, char* text, AtkEventInterface* handler, long handlerParam, bool disabled, bool submenu)
+      0x140214200: AddContextMenuItem2 # (this, int eventId, uint textId, bool disabled, bool submenu)
+      0x140214270: AddContextMenuItem # (this, int eventId, char* text, bool disabled, bool submenu, bool copyText)
   Client::UI::Agent::AgentLobby:
     vtbls:
       - ea: 0x1417322B0
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x14021BFD0: ctor
+      0x14021BF80: ctor
   Client::UI::Agent::AgentCursor:
     vtbls:
       - ea: 0x141732AA0
@@ -1023,13 +1023,13 @@ classes:
       - ea: 0x14173A4A8
         base: Client::Graphics::Kernel::Resource
     funcs:
-      0x14030B9D0: ctor
+      0x14030B980: ctor
   Client::Graphics::Kernel::SwapChain:
     vtbls:
       - ea: 0x14173A4E8
         base: Client::Graphics::Kernel::Resource
     funcs:
-      0x14030F9B0: Present
+      0x14030F960: Present
   Client::Graphics::Kernel::Buffer:
     vtbls:
       - ea: 0x14173A528
@@ -1039,33 +1039,33 @@ classes:
       - ea: 0x14173A730
         base: Client::Graphics::Kernel::Buffer
     funcs:
-      0x140312780: ctor
-      0x140312AE0: LoadSourcePointer
-      0x140323590: LoadBuffer
-      0x140327DB0: Activate
+      0x140312730: ctor
+      0x140312A90: LoadSourcePointer
+      0x140323540: LoadBuffer
+      0x140327D60: Activate
   Client::Graphics::Kernel::Device:
     instances:
-      - ea: 0x141E54A70
+      - ea: 0x141E5BA70
     vtbls:
       - ea: 0x14173A7B8
         base: Client::Graphics::Singleton
     funcs:
-      0x140313040: ctor
-      0x1403131E0: Initialize
-      0x140313D60: CreateTexture2D
-      0x140314950: CreateConstantBuffer
-      0x140315080: PostTick
+      0x140312FF0: ctor
+      0x140313190: Initialize
+      0x140313D10: CreateTexture2D
+      0x140314900: CreateConstantBuffer
+      0x140315030: PostTick
   Client::Graphics::Kernel::Context:
     funcs:
-      0x1401D1CA0: PushBackCommand
-      0x140324A30: PrepareModel
-      0x1403BC170: Draw_cmd
+      0x1401D1BB0: PushBackCommand
+      0x1403249E0: PrepareModel
+      0x1403BC120: Draw_cmd
   Client::Graphics::Kernel::Device::ImmediateContext:
     vtbls:
       - ea: 0x14173A7C0
     funcs:
-      0x14031E0E0: ProcessCommands
-      0x14031E390: PrimeForDraw
+      0x14031E090: ProcessCommands
+      0x14031E340: PrimeForDraw
   Client::Graphics::Kernel::Device::RenderThread:
     vtbls:
       - ea: 0x14173A810
@@ -1075,7 +1075,7 @@ classes:
       - ea: 0x1417419F0
         base: Client::Graphics::ReferencedClassBase
     funcs:
-      0x14032CB10: ctor
+      0x14032CAC0: ctor
   Client::Graphics::Kernel::ShaderSceneKey:
     vtbls:
       - ea: 0x141741A58
@@ -1084,12 +1084,12 @@ classes:
       - ea: 0x141741A60
   Client::Graphics::Render::GraphicsConfig:
     instances:
-      - ea: 0x141E56438
+      - ea: 0x141E5D438
     vtbls:
       - ea: 0x141741A78
         base: Client::Graphics::Singleton
     funcs:
-      0x140331B00: ctor
+      0x140331AB0: ctor
   Client::Graphics::Render::Camera:
     vtbls:
       - ea: 0x141741A80
@@ -1097,8 +1097,8 @@ classes:
     vfuncs:
       5: UpdateConstantBuffer
     funcs:
-      0x1403330F0: LoadMatrix
-      0x140336530: MakeProjectionMatrix
+      0x1403330A0: LoadMatrix
+      0x1403364E0: MakeProjectionMatrix
   Client::Graphics::Render::ShadowCamera:
     vtbls:
       - ea: 0x141741AB8
@@ -1116,7 +1116,7 @@ classes:
       - ea: 0x141741B70
         base: Client::Graphics::Render::Camera
     funcs:
-      0x140336DC0: SubmitRenderCameraData
+      0x140336D70: SubmitRenderCameraData
   Client::Graphics::Render::Camera_OmniShadow::CameraOmniFace:
     vtbls:
       - ea: 0x141741BB8
@@ -1130,28 +1130,28 @@ classes:
         base: Client::System::Framework::Task
   Client::Graphics::Render::RenderObject:
     vtbls:
-#fail       - ea: 0x141741CF0
+      - ea: 0x141741CF0
         base: Client::Graphics::ReferencedClassBase
   Client::Graphics::Render::OffscreenRenderingManager:
     instances:
-      - ea: 0x141E6F458
+      - ea: 0x141E76458
     vtbls:
-#fail       - ea: 0x141741CE8
+      - ea: 0x141741CE8
     funcs:
-      0x14033A160: ctor
-      0x14033A250: Initialize
+      0x14033A110: ctor
+      0x14033A200: Initialize
   Client::Graphics::Render::AmbientLight:
     vtbls:
       - ea: 0x141741D70
     funcs:
-      0x14033B520: ctor
+      0x14033B4D0: ctor
   Client::Graphics::Render::Model:
     vtbls:
       - ea: 0x141741D80
         base: Client::Graphics::Render::RenderObject
     funcs:
-      0x14033D490: ctor
-      0x14033D5E0: SetupFromModelResourceHandle
+      0x14033D440: ctor
+      0x14033D590: SetupFromModelResourceHandle
   Client::Graphics::Render::BaseRenderer:
     vtbls:
       - ea: 0x141741E00
@@ -1208,29 +1208,29 @@ classes:
     vtbls:
       - ea: 0x141742298
     funcs:
-      0x140399160: Initialize
+      0x140399110: Initialize
   Client::Graphics::Render::Updater<Client::Graphics::Render::PostBoneDeformerBase>:
     vtbls:
       - ea: 0x1417422A0
   Client::Graphics::Render::Manager:
     instances:
-      - ea: 0x141E56498
+      - ea: 0x141E5D498
     vtbls:
       - ea: 0x1417422A8
         base: Client::Graphics::Singleton
     funcs:
-      0x140375640: ctor
-      0x140375A80: Initialize
-      0x140375F00: Terminate
-      0x140376570: CreateCamera
-      0x140376820: CreateModel
+      0x1403755F0: ctor
+      0x140375A30: Initialize
+      0x140375EB0: Terminate
+      0x140376520: CreateCamera
+      0x1403767D0: CreateModel
   Client::Graphics::Render::ShadowManager:
     instances:
-      - ea: 0x141E564A0
+      - ea: 0x141E5D4A0
     vtbls:
       - ea: 0x1417422C0
     funcs:
-      0x140377B00: ctor
+      0x140377AB0: ctor
   Client::Graphics::Render::LightingManager::LightShape:
     vtbls:
       - ea: 0x1417422D0
@@ -1241,28 +1241,28 @@ classes:
     vtbls:
       - ea: 0x1417422E0
     funcs:
-      0x14037C130: ctor
+      0x14037C0E0: ctor
   Client::Graphics::Render::LightingManager:
     instances:
-      - ea: 0x141E564A8
+      - ea: 0x141E5D4A8
     vtbls:
       - ea: 0x1417422E8
         base: Client::Graphics::Singleton
       - ea: 0x1417422F0
         base: Client::Graphics::Kernel::Notifier
     funcs:
-      0x1403869E0: ctor
+      0x140386990: ctor
   Client::Graphics::Render::RenderTargetManager:
     instances:
-      - ea: 0x141E564B0
+      - ea: 0x141E5D4B0
     vtbls:
       - ea: 0x141742310
         base: Client::Graphics::Singleton
       - ea: 0x141742318
         base: Client::Graphics::Kernel::Notifier
     funcs:
-      0x1403871C0: ctor
-      0x1403873F0: Initialize
+      0x140387170: ctor
+      0x1403873A0: Initialize
   Client::Graphics::PostEffect::PostEffectChain:
     vtbls:
       - ea: 0x141744968
@@ -1277,23 +1277,23 @@ classes:
       - ea: 0x141744980
   Client::Graphics::PostEffect::PostEffectManager:
     instances:
-      - ea: 0x141E564C0
+      - ea: 0x141E5D4C0
     vtbls:
       - ea: 0x141744990
         base: Client::Graphics::Singleton
       - ea: 0x141744998
         base: Client::Graphics::Kernel::Notifier
     funcs:
-      0x1403A7F70: ctor
+      0x1403A7F20: ctor
   Client::Graphics::JobSystem<Apricot::Engine::Core>:
     instances:
-      - ea: 0x141E702B0
+      - ea: 0x141E772B0
         pointer: False
     vtbls:
       - ea: 0x141748610
     funcs:
-      0x1403EF560: ctor
-      0x1403EF790: GetSingleton
+      0x1403EF510: ctor
+      0x1403EF740: GetSingleton
   Apricot::IInstanceListenner:
     vtbls:
       - ea: 0x141747FB8
@@ -1324,28 +1324,28 @@ classes:
     vfuncs:
       11: UpdateMaterials
     funcs:
-      0x14043E180: ctor
+      0x14043E130: ctor
   Client::Graphics::JobSystem<Client::Graphics::Scene::World>:
     vtbls:
       - ea: 0x141751F98
   Client::Graphics::Scene::World:
     instances:
-      - ea: 0x141E564D0
+      - ea: 0x141E5D4D0
     vtbls:
       - ea: 0x141751FA0
         base: Client::Graphics::Scene::Object
       - ea: 0x141751FD0
         base: Client::Graphics::Singleton
     funcs:
-      0x14043E730: ctor
+      0x14043E6E0: ctor
   Client::Graphics::Scene::Camera:
     vtbls:
       - ea: 0x141751FD8
         base: Client::Graphics::Scene::Object
     funcs:
-      0x14043E9F0: ctor
-      0x14043FB60: CalculateViewMatrix
-      0x1404402E0: PrepareRenderCamera
+      0x14043E9A0: ctor
+      0x14043FB10: CalculateViewMatrix
+      0x140440290: PrepareRenderCamera
   Client::Graphics::Singleton<Client::Graphics::Scene::CameraManager>:
     vtbls:
       - ea: 0x141752038
@@ -1353,26 +1353,26 @@ classes:
       0: dtor
   Client::Graphics::Scene::CameraManager:
     instances:
-      - ea: 0x141E564D8
+      - ea: 0x141E5D4D8
     vtbls:
       - ea: 0x141752040
         base: Client::Graphics::Singleton<Client::Graphics::Scene::CameraManager>
     funcs:
-      0x1404404C0: ctor
+      0x140440470: ctor
   Client::Graphics::Scene::CharacterUtility:
     instances:
-      - ea: 0x141E564E0
+      - ea: 0x141E5D4E0
     vtbls:
       - ea: 0x141752208
         base: Client::Graphics::Singleton
     funcs:
-      0x140443BF0: ctor
-      0x140443E00: CreateDXRenderObjects
-      0x140444250: LoadDataFiles
-      0x140447FD0: GetSlotEqpFlags
-      0x1404495D0: GetEqpDataForAdults
-      0x140449830: GetEqpDataForChildren
-      0x140449980: GetEqpDataForOther
+      0x140443BA0: ctor
+      0x140443DB0: CreateDXRenderObjects
+      0x140444200: LoadDataFiles
+      0x140447F80: GetSlotEqpFlags
+      0x140449580: GetEqpDataForAdults
+      0x1404497E0: GetEqpDataForChildren
+      0x140449930: GetEqpDataForOther
   Client::Graphics::Scene::CharacterBase:
     vtbls:
       - ea: 0x141752288
@@ -1397,23 +1397,23 @@ classes:
       87: GetSkeletonCount
       92: CreateRenderModelForMDL
     funcs:
-      0x14044B060: ctor
-      0x14044EE80: CreateBonePhysicsModule
-      0x1404508F0: LoadAnimation
-      0x1404512C0: LoadMDLForSlot
-      0x1404513B0: LoadIMCForSlot
-      0x140451580: LoadAllMTRLsFromMDLInSlot
-      0x140451720: LoadAllDecalTexFromMDLInSlot
-      0x140451890: LoadPHYBForSlot
-      0x140451AF0: UnloadMDLForSlot
-      0x140452040: CopyIMCForSlot
-      0x1404523B0: CreateStagingArea
-      0x1404524D0: PopulateMaterialsFromStaging
-      0x140452620: LoadMDLSubFilesIntoStaging
-      0x140452830: LoadMDLSubFilesForSlot
-      0x14045D190: CreateSlotStorage
-      0x1404723C0: dtor2  # Called by base dtor
-      0x1406FB3A0: Create
+      0x14044B010: ctor
+      0x14044EE30: CreateBonePhysicsModule
+      0x1404508A0: LoadAnimation
+      0x140451270: LoadMDLForSlot
+      0x140451360: LoadIMCForSlot
+      0x140451530: LoadAllMTRLsFromMDLInSlot
+      0x1404516D0: LoadAllDecalTexFromMDLInSlot
+      0x140451840: LoadPHYBForSlot
+      0x140451AA0: UnloadMDLForSlot
+      0x140451FF0: CopyIMCForSlot
+      0x140452360: CreateStagingArea
+      0x140452480: PopulateMaterialsFromStaging
+      0x1404525D0: LoadMDLSubFilesIntoStaging
+      0x1404527E0: LoadMDLSubFilesForSlot
+      0x14045D140: CreateSlotStorage
+      0x140472370: dtor2  # Called by base dtor
+      0x1406FB370: Create
   Client::Graphics::Scene::Human:
     vtbls:
       - ea: 0x141752598
@@ -1421,45 +1421,45 @@ classes:
     vfuncs:
       58: OnModelLoadComplete
     funcs:
-      0x140456320: ctor
-      0x140456560: SetupFromCharacterData
-      0x14045A680: UpdateModels
-      0x14045A8B0: CheckSlotsForUnload
-      0x14045ABE0: SetupModelAttributes  # wrist, fingers, tail all got inlined here
-      0x14045AEC0: SetupHelmetModelAttributes
-      0x14045B010: SetupTopModelAttributes
-      0x14045B3E0: SetupHandModelAttributes
-      0x14045B540: SetupLegModelAttributes
-      0x14045B850: SetupFeetModelAttributes
-      0x14045BA40: SetupEarringModelAttributes
-      0x14045BB50: SetupNecklaceModelAttributes
-      0x14045BDF0: SetupHairModelAttributes
-      0x14045C180: SetupFaceModelAttributes
-      0x14045C7C0: SetupConnectorModelAttributes
+      0x1404562D0: ctor
+      0x140456510: SetupFromCharacterData
+      0x14045A630: UpdateModels
+      0x14045A860: CheckSlotsForUnload
+      0x14045AB90: SetupModelAttributes  # wrist, fingers, tail all got inlined here
+      0x14045AE70: SetupHelmetModelAttributes
+      0x14045AFC0: SetupTopModelAttributes
+      0x14045B390: SetupHandModelAttributes
+      0x14045B4F0: SetupLegModelAttributes
+      0x14045B800: SetupFeetModelAttributes
+      0x14045B9F0: SetupEarringModelAttributes
+      0x14045BB00: SetupNecklaceModelAttributes
+      0x14045BDA0: SetupHairModelAttributes
+      0x14045C130: SetupFaceModelAttributes
+      0x14045C770: SetupConnectorModelAttributes
   Client::Graphics::Scene::Demihuman:
     vtbls:
       - ea: 0x1417528A8
         base: Client::Graphics::Scene::CharacterBase
     funcs:
-      0x14045D460: ctor
+      0x14045D410: ctor
   Client::Graphics::Scene::Weapon:
     vtbls:
       - ea: 0x141752BB8
         base: Client::Graphics::Scene::CharacterBase
     funcs:
-      0x14045EB10: ctor
+      0x14045EAC0: ctor
   Client::Graphics::Scene::Monster:
     vtbls:
       - ea: 0x141752EC8
         base: Client::Graphics::Scene::CharacterBase
     funcs:
-      0x14045FB00: ctor
+      0x14045FAB0: ctor
   Client::Graphics::Scene::BGManager:
     vtbls:
       - ea: 0x141753688
         base: Client::Graphics::Scene::Object
     funcs:
-      0x140466400: ctor
+      0x1404663B0: ctor
   Client::Graphics::Vfx::VfxResourceInstanceListenner:
     vtbls:
       - ea: 0x1417482C8
@@ -1472,55 +1472,55 @@ classes:
       - ea: 0x141753BF0
         base: Client::Graphics::Vfx::VfxResourceInstanceListenner
     funcs:
-      0x14046A180: ctor
+      0x14046A130: ctor
   Client::Graphics::Scene::Terrain:
     vtbls:
       - ea: 0x1417531D8
         base: Client::Graphics::Scene::DrawObject
     funcs:
-      0x140460820: ctor
+      0x1404607D0: ctor
   Client::Graphics::Scene::Light:
     vtbls:
       - ea: 0x141752048
         base: Client::Graphics::Scene::DrawObject
     funcs:
-      0x140440F00: ctor
+      0x140440EB0: ctor
   Client::Graphics::Scene::EnvLocation:
     vtbls:
       - ea: 0x1417536B8
         base: Client::Graphics::Scene::DrawObject
     funcs:
-      0x140466A20: ctor
+      0x1404669D0: ctor
   Client::Graphics::Scene::EnvSpace:
     vtbls:
       - ea: 0x141753848
         base: Client::Graphics::Scene::DrawObject
     funcs:
-      0x140467440: ctor
+      0x1404673F0: ctor
   Client::Graphics::Scene::BGObject:
     vtbls:
       - ea: 0x1417534F8
         base: Client::Graphics::Scene::DrawObject
     funcs:
-      0x140463A60: ctor
+      0x140463A10: ctor
   Client::Graphics::Scene::EnvScene:
     vtbls:
       - ea: 0x1417539D8
     funcs:
-      0x1404686C0: ctor
+      0x140468670: ctor
   Client::Graphics::Scene::ResidentResourceManager::ResourceList:
     vtbls:
       - ea: 0x141753C60
   Client::Graphics::Scene::ResidentResourceManager:
     instances:
-      - ea: 0x141E564E8
+      - ea: 0x141E5D4E8
     vtbls:
       - ea: 0x141753C70
         base: Client::Graphics::Singleton
     funcs:
-      0x140470810: ctor
-      0x140470840: nullsub_1
-      0x140470870: LoadDataFiles
+      0x1404707C0: ctor
+      0x1404707F0: nullsub_1
+      0x140470820: LoadDataFiles
   Client::System::Task::SpursJobEntityWorkerThread:
     vtbls:
       - ea: 0x141753D50
@@ -1531,133 +1531,133 @@ classes:
     vfuncs:
       0: dtor
     funcs:
-      0x14047B7D0: ctor
-      0x14047B800: ctor_FromState
-      0x14047BB20: GetTop
-      0x14047BB30: SetTop
-      0x14047BC10: LoadString
-      0x14047BCC0: LoadFile
-      0x14047C1F0: PCall
-      0x14047BD50: DestroyGlobalClass
-      0x14047BDF0: GetGlobalOrNil
-      0x14047BE20: IncClassRef
-      0x14047BED0: DecClassRef
-      0x14047BF80: SetNil
-      0x14047BFE0: SetStringField
-      0x14047C030: SetIntegerField
-      0x14047C080: SetFunctionField
-      0x14047C0E0: SetNumberField
-      0x14047C130: SetNilField
-      0x14047C170: GetField
-      0x14047C180: ClassNameOf
-      0x14047C290: CallMemberFunction # (this, member, class, nresults) => pcall(_G[class][member], _G[class])
-      0x14047C4F0: CallMemberFunction_2 # (this, member, class, (int)arg2, (int)arg3, nresults) => pcall(_G[class][member], _G[class], arg2, arg3)
-      0x14047C5F0: CallMemberFunction_3 # (this, member, class, argName, nresults) => pcall(_G[class][member], _G[class], _G[argName])
-      0x14047C6F0: CallMemberFunction_4 # (this, member, class, argName, (int[])args, argCount nresults): above but with extra int args - used for the next 3
-      0x14047C820: CallMemberFunction_5 # (this, member, class, argName, (int)arg3, nresults)
-      0x14047C860: CallMemberFunction_6 # (this, member, class, argName, (int)arg3, (int)arg4, nresults)
-      0x14047C8B0: CallMemberFunction_7 # (this, member, class, argName, (int)arg3, (int)arg4, (int)arg5, nresults)
-      0x14047C930: CallMemberFunction_8 # (this, member, class, argName, (int)arg3, (int)arg4, (int)arg5, (int)arg6, nresults)
-      0x14047C9B0: CallMemberFunction_9 # (this, member, class, argName, (int)arg3, (int)arg4, (int)arg5, (int)arg6, (int)arg7, nresults)
-      0x14047CA40: CallMemberFunction_10 # (this, member, class, argName, (int)arg3, (int[])args, argCount, nresults)
-      0x14047CB80: CallMemberFunction_11 # (this, member, class, argName, (int)arg3, (int)arg4, (int[])args, argCount, nresults)
-      0x14047CCD0: CallMemberFunction_12 # (this, member, class, argName, (int)arg3, (int)arg4, (bool)arg5, (int[])args, argCount nresults)
-      0x14047CE30: CallMemberFunction_13 # (this, member, class, argName, argName2, nresults) => pcall(_G[class][member], _G[class], _G[argName], _G[argName2])
-      0x14047E030: IsFunction
-      0x14047E0A0: PopBoolean
-      0x14047E110: CheckNumber
-      0x14047E140: CheckBoolean
-      0x14047E180: CheckString
-      0x14047E1A0: PushNumber
-      0x14047E1D0: PushBoolean
-      0x14047E1F0: PushString
-      0x14047E200: PushGlobal
-      0x14047E230: PushNil
-      0x14047E240: IsNil
-      0x14047E260: IsNumber
-      0x14047E280: IsString
-      0x14047E2A0: IsBoolean
-      0x14047E2C0: GetBoolean
-      0x14047E2E0: GetString
-      0x14047E300: NewThread # (this, LuaState* other)
-      0x14047E400: CloseThread # (this, LuaState* other)
-      0x14047E4C0: LuaError
-      0x14047E610: GC
-      0x14047E620: GCStop
-      0x14047E640: GCRestart
-      0x14047E6A0: GCStep # (this, data)
-      0x140AFEB80: PopByte
-      0x140AFEBE0: PopShort
-      0x140AFEC40: PopInteger
-      0x140AFECA0: PopInteger_2
-      0x140AFED00: PopInteger_3
+      0x14047B780: ctor
+      0x14047B7B0: ctor_FromState
+      0x14047BAD0: GetTop
+      0x14047BAE0: SetTop
+      0x14047BBC0: LoadString
+      0x14047BC70: LoadFile
+      0x14047C1A0: PCall
+      0x14047BD00: DestroyGlobalClass
+      0x14047BDA0: GetGlobalOrNil
+      0x14047BDD0: IncClassRef
+      0x14047BE80: DecClassRef
+      0x14047BF30: SetNil
+      0x14047BF90: SetStringField
+      0x14047BFE0: SetIntegerField
+      0x14047C030: SetFunctionField
+      0x14047C090: SetNumberField
+      0x14047C0E0: SetNilField
+      0x14047C120: GetField
+      0x14047C130: ClassNameOf
+      0x14047C240: CallMemberFunction # (this, member, class, nresults) => pcall(_G[class][member], _G[class])
+      0x14047C4A0: CallMemberFunction_2 # (this, member, class, (int)arg2, (int)arg3, nresults) => pcall(_G[class][member], _G[class], arg2, arg3)
+      0x14047C5A0: CallMemberFunction_3 # (this, member, class, argName, nresults) => pcall(_G[class][member], _G[class], _G[argName])
+      0x14047C6A0: CallMemberFunction_4 # (this, member, class, argName, (int[])args, argCount nresults): above but with extra int args - used for the next 3
+      0x14047C7D0: CallMemberFunction_5 # (this, member, class, argName, (int)arg3, nresults)
+      0x14047C810: CallMemberFunction_6 # (this, member, class, argName, (int)arg3, (int)arg4, nresults)
+      0x14047C860: CallMemberFunction_7 # (this, member, class, argName, (int)arg3, (int)arg4, (int)arg5, nresults)
+      0x14047C8E0: CallMemberFunction_8 # (this, member, class, argName, (int)arg3, (int)arg4, (int)arg5, (int)arg6, nresults)
+      0x14047C960: CallMemberFunction_9 # (this, member, class, argName, (int)arg3, (int)arg4, (int)arg5, (int)arg6, (int)arg7, nresults)
+      0x14047C9F0: CallMemberFunction_10 # (this, member, class, argName, (int)arg3, (int[])args, argCount, nresults)
+      0x14047CB30: CallMemberFunction_11 # (this, member, class, argName, (int)arg3, (int)arg4, (int[])args, argCount, nresults)
+      0x14047CC80: CallMemberFunction_12 # (this, member, class, argName, (int)arg3, (int)arg4, (bool)arg5, (int[])args, argCount nresults)
+      0x14047CDE0: CallMemberFunction_13 # (this, member, class, argName, argName2, nresults) => pcall(_G[class][member], _G[class], _G[argName], _G[argName2])
+      0x14047DFE0: IsFunction
+      0x14047E050: PopBoolean
+      0x14047E0C0: CheckNumber
+      0x14047E0F0: CheckBoolean
+      0x14047E130: CheckString
+      0x14047E150: PushNumber
+      0x14047E180: PushBoolean
+      0x14047E1A0: PushString
+      0x14047E1B0: PushGlobal
+      0x14047E1E0: PushNil
+      0x14047E1F0: IsNil
+      0x14047E210: IsNumber
+      0x14047E230: IsString
+      0x14047E250: IsBoolean
+      0x14047E270: GetBoolean
+      0x14047E290: GetString
+      0x14047E2B0: NewThread # (this, LuaState* other)
+      0x14047E3B0: CloseThread # (this, LuaState* other)
+      0x14047E470: LuaError
+      0x14047E5C0: GC
+      0x14047E5D0: GCStop
+      0x14047E5F0: GCRestart
+      0x14047E650: GCStep # (this, data)
+      0x140AFE9A0: PopByte
+      0x140AFEA00: PopShort
+      0x140AFEA60: PopInteger
+      0x140AFEAC0: PopInteger_2
+      0x140AFEB20: PopInteger_3
   Common::Lua::LuaThread:
     vtbls:
       - ea: 0x141754160
         base: Common::Lua::LuaState
     funcs:
-      0x14047E6C0: ctor_FromState
-      0x14047E710: ctor
+      0x14047E670: ctor_FromState
+      0x14047E6C0: ctor
   Client::Game::Event::LuaActor:
     vtbls:
-      - ea: 0x1417A2C20
+      - ea: 0x1417AA4B0
     vfuncs:
       0: dtor
   Client::Game::Event::LuaPc:
     vtbls:
-      - ea: 0x1417A5630
+      - ea: 0x1417ACEC0
         base: Client::Game::Event::LuaActor
     funcs:
-      0x140AA5FE0: ctor
+      0x140AA5E00: ctor
   Client::Game::Event::LuaAetheryte:
     vtbls:
-      - ea: 0x1417A4DB8
+      - ea: 0x1417AC648
         base: Client::Game::Event::LuaActor
     funcs:
-      0x140AA5040: ctor
+      0x140AA4E60: ctor
   Client::Game::Event::LuaHousingEventObject:
     vtbls:
-      - ea: 0x1417A4DA8
+      - ea: 0x1417AC638
         base: Client::Game::Event::LuaActor
     funcs:
-      0x140AA48F0: ctor
+      0x140AA4710: ctor
   Client::Game::Event::LuaEventObject:
     vtbls:
-      - ea: 0x1417A4D98
+      - ea: 0x1417AC628
         base: Client::Game::Event::LuaActor
     funcs:
-      0x140AA3FE0: ctor
+      0x140AA3E00: ctor
   Client::Game::Event::LuaCompanion:
     vtbls:
-      - ea: 0x1417A4D88
+      - ea: 0x1417AC618
         base: Client::Game::Event::LuaActor
     funcs:
-      0x140AA3C30: ctor
+      0x140AA3A50: ctor
   Client::Game::Event::LuaRetainer:
     vtbls:
-      - ea: 0x1417A4D78
+      - ea: 0x1417AC608
         base: Client::Game::Event::LuaActor
     funcs:
-      0x140AA37F0: ctor
+      0x140AA3610: ctor
   Client::Game::Event::LuaBattleNpc:
     vtbls:
-      - ea: 0x1417A4D68
+      - ea: 0x1417AC5F8
         base: Client::Game::Event::LuaActor
     funcs:
-      0x140AA2EB0: ctor
+      0x140AA2CD0: ctor
   Client::Game::Event::LuaEventNpc:
     vtbls:
-      - ea: 0x1417A4D58
+      - ea: 0x1417AC5E8
         base: Client::Game::Event::LuaActor
     funcs:
-      0x140AA2B00: ctor
+      0x140AA2920: ctor
   Component::Exd::ExdModule:
     vtbls:
       - ea: 0x1417546A0
     funcs:
-      0x140486790: ctor
-      0x140486D80: GetSheetRowById
-      0x140486E00: GetEntryByIndex
+      0x140486740: ctor
+      0x140486D30: GetSheetRowById
+      0x140486DB0: GetEntryByIndex
   Client::System::Scheduler::ScheduleManagement:
     vtbls:
       - ea: 0x1417546F0
@@ -1679,205 +1679,205 @@ classes:
         base: Client::Game::Control::TargetSystem::ListFeeder
   Client::Game::Control::TargetSystem:
     instances:
-      - ea: 0x141E78A00
+      - ea: 0x141E7FA00
     vtbls:
       - ea: 0x141754FF8
         base: Client::Game::Object::IGameObjectEventListener
     funcs:
-      0x1404A6420: ctor
-      0x1404B01D0: GetHardTargetObjectId
-      0x1404B01F0: GetHardTargetId
-      0x1404B0210: GetHardTarget
-      0x1404B0230: GetSoftTargetObjectId
-      0x1404B0250: GetSoftTargetId
-      0x1404B0270: GetSoftTarget
-      0x1404B0290: GetMouseOverTargetPlayerId
-      0x1404B02D0: GetMouseOverTarget
-      0x1404B02E0: SetMouseOverEventObj
-      0x1404B02F0: GetTargetObjectId
-      0x1404B0320: GetTargetPlayerId
-      0x1404B0370: GetTargetObject
-      0x1404B0390: GetTargetObjectId2
-      0x1404B03C0: GetTargetPlayerId2
-      0x1404B0410: GetTargetObject2
-      0x1404B06C0: ClearFocusTarget
-      0x1404B06E0: SetFocusTargetByObjectId
-      0x1404B1080: IsObjectInViewRange
-      0x1404B28D0: RemoveObjectFromTargets
+      0x1404A63D0: ctor
+      0x1404B0180: GetHardTargetObjectId
+      0x1404B01A0: GetHardTargetId
+      0x1404B01C0: GetHardTarget
+      0x1404B01E0: GetSoftTargetObjectId
+      0x1404B0200: GetSoftTargetId
+      0x1404B0220: GetSoftTarget
+      0x1404B0240: GetMouseOverTargetPlayerId
+      0x1404B0280: GetMouseOverTarget
+      0x1404B0290: SetMouseOverEventObj
+      0x1404B02A0: GetTargetObjectId
+      0x1404B02D0: GetTargetPlayerId
+      0x1404B0320: GetTargetObject
+      0x1404B0340: GetTargetObjectId2
+      0x1404B0370: GetTargetPlayerId2
+      0x1404B03C0: GetTargetObject2
+      0x1404B0670: ClearFocusTarget
+      0x1404B0690: SetFocusTargetByObjectId
+      0x1404B1030: IsObjectInViewRange
+      0x1404B2880: RemoveObjectFromTargets
   Client::System::Input::InputData:
     vtbls:
       - ea: 0x141755240
     funcs:
-      0x1404BBF30: ctor
+      0x1404BBEE0: ctor
   Component::GUI::AtkArrayData:
     vtbls:
-      - ea: 0x1417573C8
+      - ea: 0x1417573D0
   Component::GUI::NumberArrayData:
     vtbls:
-      - ea: 0x1417573D8
+      - ea: 0x1417573E0
         base: Component::GUI::AtkArrayData
     funcs:
-      0x1404BDD60: SetValueIfDifferentAndNotify
-      0x1404BDE00: SetValueForced
+      0x1404BDD10: SetValueIfDifferentAndNotify
+      0x1404BDDB0: SetValueForced
   Component::GUI::StringArrayData:
     vtbls:
-      - ea: 0x1417573E8
+      - ea: 0x1417573F0
         base: Component::GUI::AtkArrayData
     funcs:
-      0x1404BE070: SetValue
-      0x1404BE250: SetValueUtf8
-      0x1404BE2B0: SetValueIfDifferentAndNotify
-      0x1404BE2E0: SetValueIfDifferentAndNotifyUtf8
-      0x1404BE320: SetValueForced
-      0x1404BE360: SetValueForcedUtf8
+      0x1404BE020: SetValue
+      0x1404BE200: SetValueUtf8
+      0x1404BE260: SetValueIfDifferentAndNotify
+      0x1404BE290: SetValueIfDifferentAndNotifyUtf8
+      0x1404BE2D0: SetValueForced
+      0x1404BE310: SetValueForcedUtf8
   Component::GUI::ExtendArrayData:
     vtbls:
-      - ea: 0x1417573F8
+      - ea: 0x141757400
         base: Component::GUI::AtkArrayData
   Component::GUI::AtkTooltipManager:
     vtbls:
-      - ea: 0x1417574C0
+      - ea: 0x1417574D0
         base: Component::GUI::AtkEventListener
     funcs:
-      0x1404C8490: AttachTooltip
-      0x1404C86D0: DetachTooltipNode
-      0x1404C88F0: ShowNodeTooltip  # takes node as argument
-      0x1404C8980: ShowTooltip # similar args to attach tooltip
-      0x1404C9430: DetachTooltipAddon
+      0x1404C8440: AttachTooltip
+      0x1404C8680: DetachTooltipNode
+      0x1404C88A0: ShowNodeTooltip  # takes node as argument
+      0x1404C8930: ShowTooltip # similar args to attach tooltip
+      0x1404C93E0: DetachTooltipAddon
   Component::GUI::AtkEventTarget:
     vtbls:
-      - ea: 0x141759C68
+      - ea: 0x141759C78
   Component::GUI::AtkEventListenerUnk: # Used in AddonTalk
     vtbls:
-      - ea: 0x141759C70
+      - ea: 0x141759C80
         base: Component::GUI::AtkEventListener
   Component::GUI::AtkSimpleTween:
     vtbls:
-      - ea: 0x141757508
+      - ea: 0x141757518
         base: Component::GUI::AtkEventTarget
   Component::GUI::AtkTexture:
     vtbls:
-      - ea: 0x141757488
+      - ea: 0x141757498
     funcs:
-      0x1404C4F80: LoadIconTexture
-      0x1404C51A0: GetLoadState
-      0x1404C5200: IsTextureReady
-      0x1404C52B0: ReleaseTexture
-      0x1404C53E0: GetKernelTexture
+      0x1404C4F30: LoadIconTexture
+      0x1404C5150: GetLoadState
+      0x1404C51B0: IsTextureReady
+      0x1404C5260: ReleaseTexture
+      0x1404C5390: GetKernelTexture
   Component::GUI::AtkStage:
     instances:
-      - ea: 0x141E7CDB0
+      - ea: 0x141E83DB0
     vtbls:
-      - ea: 0x141757668
+      - ea: 0x141757678
         base: Component::GUI::AtkEventTarget
     funcs:
-      0x1404CED70: GetFocus
-      0x1404CEDA0: SetFocus
-      0x1404CEE00: ClearFocus
-      0x1404CFD30: GetNumberArrayData
-      0x1404CFE60: ctor
-      0x1404F2090: GetSingleton1  # dalamud GetBaseUIObject
+      0x1404CED20: GetFocus
+      0x1404CED50: SetFocus
+      0x1404CEDB0: ClearFocus
+      0x1404CFCE0: GetNumberArrayData
+      0x1404CFE10: ctor
+      0x1404F2040: GetSingleton1  # dalamud GetBaseUIObject
   Component::GUI::AtkResNode:
     vtbls:
-      - ea: 0x141757F10
+      - ea: 0x141757F20
         base: Component::GUI::AtkEventTarget
     vfuncs:
       1: Destroy
     funcs:
-      0x1404E05E0: ctor
-      0x1404E0740: GetAsAtkImageNode
-      0x1404E0760: GetAsAtkTextNode
-      0x1404E0780: GetAsAtkNineGridNode
-      0x1404E07A0: GetAsAtkCounterNode
-      0x1404E07C0: GetAsAtkCollisionNode
-      0x1404E07E0: GetAsAtkComponentNode
-      0x1404E0800: GetComponent
-      0x1404E0FB0: RegisterEvent
-      0x1404E0FF0: UnregisterEvent
-      0x1404E1030: DispatchEvent
-      0x1404E13A0: GetPositionFloat
-      0x1404E13C0: SetPositionFloat
-      0x1404E1410: GetPositionShort
-      0x1404E1440: SetPositionShort
-      0x1404E14A0: GetScale
-      0x1404E14C0: GetScaleX
-      0x1404E14E0: GetScaleY
-      0x1404E1500: SetScale
-      0x1404E1620: SetSize0
-      0x1404E1660: GetYFloat
-      0x1404E16A0: GetYShort
-      0x1404E1870: GetWidth
-      0x1404E1890: GetHeight
-      0x1404E1AD0: SetWidth
-      0x1404E1AF0: SetHeight
-      0x1404E1B40: GetRotation
-      0x1404E1B60: SetRotation
-      0x1404E1BD0: GetRotationDegrees
-      0x1404E1C00: SetRotationDegrees
-      0x1404E1C80: GetColor
-      0x1404E1CA0: SetColor
-      0x1404E1CE0: SetAddRGB
-      0x1404E1D30: SetMultiplyRGB
-      0x1404E1D80: GetPriority
-      0x1404E1DA0: SetPriority
-      0x1404E1DC0: IsVisible
-      0x1404E1DF0: SetVisibility
-      0x1404E21D0: GetIsUsingDepthBasedDrawPriority
-      0x1404E21F0: SetUseDepthBasedDrawPriority
-      0x1404E2240: SetDepth
-      0x1404E2610: Init
-      0x1404E27E0: SetScale0  # SetScale jumps to this
-      0x1404ECEC0: SetSize
+      0x1404E0590: ctor
+      0x1404E06F0: GetAsAtkImageNode
+      0x1404E0710: GetAsAtkTextNode
+      0x1404E0730: GetAsAtkNineGridNode
+      0x1404E0750: GetAsAtkCounterNode
+      0x1404E0770: GetAsAtkCollisionNode
+      0x1404E0790: GetAsAtkComponentNode
+      0x1404E07B0: GetComponent
+      0x1404E0F60: RegisterEvent
+      0x1404E0FA0: UnregisterEvent
+      0x1404E0FE0: DispatchEvent
+      0x1404E1350: GetPositionFloat
+      0x1404E1370: SetPositionFloat
+      0x1404E13C0: GetPositionShort
+      0x1404E13F0: SetPositionShort
+      0x1404E1450: GetScale
+      0x1404E1470: GetScaleX
+      0x1404E1490: GetScaleY
+      0x1404E14B0: SetScale
+      0x1404E15D0: SetSize0
+      0x1404E1610: GetYFloat
+      0x1404E1650: GetYShort
+      0x1404E1820: GetWidth
+      0x1404E1840: GetHeight
+      0x1404E1A80: SetWidth
+      0x1404E1AA0: SetHeight
+      0x1404E1AF0: GetRotation
+      0x1404E1B10: SetRotation
+      0x1404E1B80: GetRotationDegrees
+      0x1404E1BB0: SetRotationDegrees
+      0x1404E1C30: GetColor
+      0x1404E1C50: SetColor
+      0x1404E1C90: SetAddRGB
+      0x1404E1CE0: SetMultiplyRGB
+      0x1404E1D30: GetPriority
+      0x1404E1D50: SetPriority
+      0x1404E1D70: IsVisible
+      0x1404E1DA0: SetVisibility
+      0x1404E2180: GetIsUsingDepthBasedDrawPriority
+      0x1404E21A0: SetUseDepthBasedDrawPriority
+      0x1404E21F0: SetDepth
+      0x1404E25C0: Init
+      0x1404E2790: SetScale0  # SetScale jumps to this
+      0x1404ECE70: SetSize
   Component::GUI::AtkImageNode:
     vtbls:
-      - ea: 0x141757F28
+      - ea: 0x141757F38
         base: Component::GUI::AtkResNode
     funcs:
-      0x1404E2CE0: LoadIconTexture
-      0x1404E2EE0: UnloadTexture
-      0x140554260: ctor
+      0x1404E2C90: LoadIconTexture
+      0x1404E2E90: UnloadTexture
+      0x140554210: ctor
   Component::GUI::AtkTextNode:
     vtbls:
-      - ea: 0x141757F40
+      - ea: 0x141757F50
         base: Component::GUI::AtkResNode
     funcs:
-      0x1404E3140: SetText
-      0x1404E3C70: SetForegroundColour
-      0x1404E3FB0: GetTextDrawSize
-      0x1404E49B0: SetNumber
-      0x1404E4C80: SetFontSize
-      0x1404E4D90: SetGlowColour
-      0x1404E53D0: ToggleFixedFontResolution  # this stops text from auto scaling, they turned this on for nameplates in 5.5
-      0x1404E60E0: ToggleFontCache
-      0x1404E62D0: ResizeNodeForCurrentText
-      0x140554410: ctor
+      0x1404E30F0: SetText
+      0x1404E3C20: SetForegroundColour
+      0x1404E3F60: GetTextDrawSize
+      0x1404E4960: SetNumber
+      0x1404E4C30: SetFontSize
+      0x1404E4D40: SetGlowColour
+      0x1404E5380: ToggleFixedFontResolution  # this stops text from auto scaling, they turned this on for nameplates in 5.5
+      0x1404E6090: ToggleFontCache
+      0x1404E6280: ResizeNodeForCurrentText
+      0x1405543C0: ctor
   Component::GUI::AtkNineGridNode:
     vtbls:
-      - ea: 0x141757F58
+      - ea: 0x141757F68
         base: Component::GUI::AtkResNode
     funcs:
-      0x1405542C0: ctor
+      0x140554270: ctor
   Component::GUI::AtkCounterNode:
     vtbls:
-      - ea: 0x141757F70
+      - ea: 0x141757F80
         base: Component::GUI::AtkResNode
     funcs:
-      0x1405541E0: ctor
+      0x140554190: ctor
   Component::GUI::AtkCollisionNode:
     vtbls:
-      - ea: 0x141757F88
+      - ea: 0x141757F98
         base: Component::GUI::AtkResNode
     funcs:
-      0x140554120: ctor
+      0x1405540D0: ctor
   Component::GUI::AtkComponentNode:
     vtbls:
-      - ea: 0x141757FA0
+      - ea: 0x141757FB0
         base: Component::GUI::AtkResNode
     funcs:
-      0x140554180: ctor
+      0x140554130: ctor
   Component::GUI::AtkUnitBase:
     vtbls:
-      - ea: 0x141757FB8
+      - ea: 0x141757FC8
         base: Component::GUI::AtkEventListener
     vfuncs:
       7: SetPosition
@@ -1899,66 +1899,66 @@ classes:
       58: OnMouseOver
       59: OnMouseOut
     funcs:
-      0x1404EE7D0: ctor
-      0x1404EEE40: FireCallbackInt  # this creates an int AtkValue and puts its argument into it before calling Callback
-      0x1404EF080: SetPosition
-      0x1404EF200: SetAlpha
-      0x1404EF230: GetScale
-      0x1404EF450: GetGlobalUIScale
-      0x1404EF460: SetGlobalUIScale
-      0x1404EF600: SetScale
-      0x1404EF970: CalculateBounds
-      0x1404F00B0: SetFlag
-      0x1404F1BF0: Draw
-      0x1404F2540: SetFocusNode
-      0x1404F2AC0: GetNodeById
-      0x1404F2D80: GetTextNodeById
-      0x1404F2DE0: GetImageNodeById
-      0x1404F2EE0: FireCallback
-      0x1404F5520: ResizeCollisionNodeList
+      0x1404EE780: ctor
+      0x1404EEDF0: FireCallbackInt  # this creates an int AtkValue and puts its argument into it before calling Callback
+      0x1404EF030: SetPosition
+      0x1404EF1B0: SetAlpha
+      0x1404EF1E0: GetScale
+      0x1404EF400: GetGlobalUIScale
+      0x1404EF410: SetGlobalUIScale
+      0x1404EF5B0: SetScale
+      0x1404EF920: CalculateBounds
+      0x1404F0060: SetFlag
+      0x1404F1BA0: Draw
+      0x1404F24F0: SetFocusNode
+      0x1404F2A70: GetNodeById
+      0x1404F2D30: GetTextNodeById
+      0x1404F2D90: GetImageNodeById
+      0x1404F2E90: FireCallback
+      0x1404F54D0: ResizeCollisionNodeList
   Component::GUI::AtkComponentBase:
     vtbls:
-      - ea: 0x141758250
+      - ea: 0x141758260
         base: Component::GUI::AtkEventListener
     vfuncs:
       10: SetEnabledState
       17: InitializeFromComponentData
     funcs:
-      0x140506750: ctor
-      0x140506A00: GetOwnerNodePosition
+      0x140506700: ctor
+      0x1405069B0: GetOwnerNodePosition
   Component::GUI::AtkComponentButton:
     vtbls:
-      - ea: 0x1417582F0
+      - ea: 0x141758300
         base: Component::GUI::AtkComponentBase
     funcs:
-      0x140507E80: ctor
+      0x140507E30: ctor
   Component::GUI::AtkComponentIcon:
     vtbls:
-      - ea: 0x1417583B8
+      - ea: 0x1417583C8
         base: Component::GUI::AtkComponentBase
     funcs:
-      0x14050A3F0: ctor
+      0x14050A3A0: ctor
   Component::GUI::AtkComponentListItemRenderer:
     vtbls:
-      - ea: 0x1417584D8
+      - ea: 0x1417584E8
         base: Component::GUI::AtkComponentButton
     funcs:
-      0x14050AFC0: ctor
+      0x14050AF70: ctor
   Component::GUI::AtkComponentList:
     vtbls:
-      - ea: 0x141758648
+      - ea: 0x141758658
         base: Component::GUI::AtkComponentBase
     funcs:
-      0x140516470: ctor
+      0x140516420: ctor
   Component::GUI::AtkComponentTreeList:
     vtbls:
-      - ea: 0x1417587B0
+      - ea: 0x1417587C0
         base: Component::GUI::AtkComponentList
     funcs:
-      0x14051AE20: ctor
+      0x14051ADD0: ctor
   Component::GUI::AtkModule:
     vtbls:
-      - ea: 0x141758920
+      - ea: 0x141758930
         base: Component::GUI::AtkModuleInterface
     vfuncs:
       17: SetHandlerFunction
@@ -1966,249 +1966,249 @@ classes:
       58: OnUpdate
       63: OpenMapWithMapLink
     funcs:
-      0x14051FB70: ctor
-      0x1405209D0: HandleInput
+      0x14051FB20: ctor
+      0x140520980: HandleInput
   Component::GUI::AtkComponentCheckBox:
     vtbls:
-      - ea: 0x141758BC8
+      - ea: 0x141758BD8
         base: Component::GUI::AtkComponentButton
     funcs:
-      0x140523BA0: ctor
+      0x140523B50: ctor
   Component::GUI::AtkComponentGaugeBar:
     vtbls:
-      - ea: 0x141758C98
+      - ea: 0x141758CA8
         base: Component::GUI::AtkComponentBase
     funcs:
-      0x140524AD0: ctor
+      0x140524A80: ctor
   Component::GUI::AtkComponentSlider:
     vtbls:
-      - ea: 0x141758D38
+      - ea: 0x141758D48
         base: Component::GUI::AtkComponentBase
     funcs:
-      0x140526C00: ctor
+      0x140526BB0: ctor
   Component::GUI::AtkComponentInputBase:
     vtbls:
-      - ea: 0x141758DD8
+      - ea: 0x141758DE8
         base: Component::GUI::AtkComponentBase
     funcs:
-      0x140528010: ctor
+      0x140527FC0: ctor
   Component::GUI::AtkComponentTextInput:
     vtbls:
-      - ea: 0x141758E78
+      - ea: 0x141758E88
         base: Component::GUI::AtkComponentInputBase
     funcs:
-      0x140529800: ctor
+      0x1405297B0: ctor
   Component::GUI::AtkComponentNumericInput:
     vtbls:
-      - ea: 0x141758F78
+      - ea: 0x141758F88
         base: Component::GUI::AtkComponentInputBase
     funcs:
-      0x14052DF20: ctor
+      0x14052DED0: ctor
   Component::GUI::AtkComponentDropDownList:
     vtbls:
-      - ea: 0x141759040
+      - ea: 0x141759050
         base: Component::GUI::AtkComponentBase
     funcs:
-      0x140531BD0: ctor
+      0x140531B80: ctor
   Component::GUI::AtkComponentRadioButton:
     vtbls:
-      - ea: 0x1417590E0
+      - ea: 0x1417590F0
         base: Component::GUI::AtkComponentButton
     funcs:
-      0x1405330D0: ctor
+      0x140533080: ctor
   Component::GUI::AtkComponentTab:
     vtbls:
-      - ea: 0x1417591F0
+      - ea: 0x141759200
         base: Component::GUI::AtkComponentRadioButton
     funcs:
-      0x1405339A0: ctor
+      0x140533950: ctor
   Component::GUI::AtkComponentGuildLeveCard:
     vtbls:
-      - ea: 0x141759300
+      - ea: 0x141759310
         base: Component::GUI::AtkComponentBase
     funcs:
-      0x140533F70: ctor
+      0x140533F20: ctor
   Component::GUI::AtkComponentTextNineGrid:
     vtbls:
-      - ea: 0x1417593A0
+      - ea: 0x1417593B0
         base: Component::GUI::AtkComponentBase
     funcs:
-      0x140534300: ctor
+      0x1405342B0: ctor
   Component::GUI::AtkResourceRendererBase:
     vtbls:
-      - ea: 0x141759440
+      - ea: 0x141759450
     vfuncs:
       1: ShouldRender
       2: Draw
   Component::GUI::AtkImageNodeRenderer:
     vtbls:
-      - ea: 0x141759458
+      - ea: 0x141759468
         base: Component::GUI::AtkResourceRendererBase
   Component::GUI::AtkTextNodeRenderer:
     vtbls:
-      - ea: 0x141759470
+      - ea: 0x141759480
         base: Component::GUI::AtkResourceRendererBase
   Component::GUI::AtkNineGridNodeRenderer:
     vtbls:
-      - ea: 0x141759490
+      - ea: 0x1417594A0
         base: Component::GUI::AtkResourceRendererBase
   Component::GUI::AtkCounterNodeRenderer:
     vtbls:
-      - ea: 0x1417594A8
+      - ea: 0x1417594B8
         base: Component::GUI::AtkResourceRendererBase
   Component::GUI::AtkComponentNodeRenderer:
     vtbls:
-      - ea: 0x1417594C0
+      - ea: 0x1417594D0
         base: Component::GUI::AtkResourceRendererBase
   Component::GUI::AtkResourceRendererManager:
     vtbls:
-      - ea: 0x1417594D8
+      - ea: 0x1417594E8
     funcs:
-      0x140536EA0: ctor
-      0x1405370A0: DrawUldFromData
-      0x140537180: DrawUldFromDataClipped
+      0x140536E50: ctor
+      0x140537050: DrawUldFromData
+      0x140537130: DrawUldFromDataClipped
   Component::GUI::AtkComponentMap:
     vtbls:
-      - ea: 0x1417594F8
+      - ea: 0x141759508
         base: Component::GUI::AtkComponentBase
     funcs:
-      0x1405399D0: ctor
+      0x140539980: ctor
   Component::GUI::AtkComponentPreview:
     vtbls:
-      - ea: 0x141759598
+      - ea: 0x1417595A8
         base: Component::GUI::AtkComponentBase
     funcs:
-      0x14053C350: ctor
+      0x14053C300: ctor
   Component::GUI::AtkComponentScrollBar:
     vtbls:
-      - ea: 0x141759638
+      - ea: 0x141759648
         base: Component::GUI::AtkComponentBase
     funcs:
-      0x14053D3B0: ctor
+      0x14053D360: ctor
   Component::GUI::AtkComponentIconText:
     vtbls:
-      - ea: 0x1417596D8
+      - ea: 0x1417596E8
         base: Component::GUI::AtkComponentBase
     funcs:
-      0x14053E9C0: LoadIconByID
-      0x14053E9F0: LoadIcon # this takes a struct arg that includes the icon ID and some params
-      0x14053EBF0: SetText
-      0x14053EC10: SetTextColor
-      0x14053EC30: SetTextEdgeColor
-      0x14053EDB0: ctor
+      0x14053E970: LoadIconByID
+      0x14053E9A0: LoadIcon # this takes a struct arg that includes the icon ID and some params
+      0x14053EBA0: SetText
+      0x14053EBC0: SetTextColor
+      0x14053EBE0: SetTextEdgeColor
+      0x14053ED60: ctor
   Component::GUI::AtkComponentDragDrop:
     vtbls:
-      - ea: 0x141759778
+      - ea: 0x141759788
         base: Component::GUI::AtkComponentBase
     funcs:
-      0x140540030: ctor
+      0x14053FFE0: ctor
   Component::GUI::AtkComponentMultipurpose:
     vtbls:
-      - ea: 0x141759898
+      - ea: 0x1417598A8
         base: Component::GUI::AtkComponentBase
     funcs:
-      0x140541C90: ctor
+      0x140541C40: ctor
   Component::GUI::AtkComponentWindow:
     vtbls:
-      - ea: 0x141759A08
+      - ea: 0x141759A18
         base: Component::GUI::AtkComponentBase
     funcs:
-      0x1405425C0: ctor
+      0x140542570: ctor
   Component::GUI::AtkComponentJournalCanvas:
     vtbls:
-      - ea: 0x141759AD8
+      - ea: 0x141759AE8
         base: Component::GUI::AtkComponentBase
     funcs:
-      0x140547BE0: ctor
+      0x140547B90: ctor
   Component::GUI::AtkComponentHoldButton:
     vtbls:
-      - ea: 0x141759B78
+      - ea: 0x141759B88
         base: Component::GUI::AtkComponentButton
     funcs:
-      0x14054B730: ctor
+      0x14054B6E0: ctor
   Client::LayoutEngine::IManagerBase:
     vtbls:
-      - ea: 0x14175AB08
+      - ea: 0x14175AB18
         base: Client::System::Common::NonCopyable
   Client::LayoutEngine::ILayoutInstance:
     vtbls:
-      - ea: 0x14175AB28
+      - ea: 0x14175AB38
         base: Client::System::Common::NonCopyable
   Client::LayoutEngine::LayoutWorld:
     instances:
-      - ea: 0x141E7D3C0
+      - ea: 0x141E843C0
     vtbls:
-      - ea: 0x14175B340
+      - ea: 0x14175B350
         base: Client::LayoutEngine::IManagerBase
     funcs:
-      0x14056EAC0: ctor
-      0x14056ED50: CreateSingleton
+      0x14056EA70: ctor
+      0x14056ED00: CreateSingleton
   Client::LayoutEngine::Group::TimeLineLayoutInstance:
     vtbls:
-      - ea: 0x141762330
+      - ea: 0x141762340
         base: Client::LayoutEngine::ILayoutInstance
     vfuncs:
       0: dtor
   Client::UI::Misc::UserFileManager::UserFileEvent:
     vtbls:
-      - ea: 0x141766680
+      - ea: 0x141766690
     vfuncs:
       1: ReadFile
       2: WriteFile
       6: GetFileVersion
   Client::UI::Misc::UserFileManager:
     vtbls:
-      - ea: 0x1417666E8
+      - ea: 0x1417666F8
         base: Client::System::Resource::ResourceEventListener
     funcs:
-      0x140614C50: SaveFile
+      0x140614C00: SaveFile
   Component::GUI::AtkInputData:
     vtbls:
-      - ea: 0x141766710
+      - ea: 0x141766720
         base: Client::System::Input::InputData
   Client::UI::UIInputData:
     vtbls:
-      - ea: 0x1417667A0
+      - ea: 0x1417667B0
         base: Component::GUI::AtkInputData
-      - ea: 0x141766838
+      - ea: 0x141766848
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
-      0x1405CAC80: ctor
+      0x1405CAC30: ctor
   Client::UI::UI3DModule::MapInfo:
     vtbls:
-      - ea: 0x141767008
+      - ea: 0x141767018
   Client::UI::UI3DModule::ObjectInfo:
     vtbls:
-      - ea: 0x141767030
+      - ea: 0x141767040
         base: Client::UI::UI3DModule::MapInfo
   Client::UI::UI3DModule::MemberInfo:
     vtbls:
-      - ea: 0x141767060
+      - ea: 0x141767070
         base: Client::UI::UI3DModule::MapInfo
   Client::UI::UI3DModule:
     vtbls:
-      - ea: 0x1417670C0
+      - ea: 0x1417670D0
     funcs:
-      0x1405D1390: CalculateIsInScreen
-      0x1405D14A0: CalculateNamePlatePosition
-      0x1405D17C0: GetUIObjectKind
-      0x1405D18C0: CalculateNamePlateScale
-      0x1405D1AB0: ctor
-      0x1405D1E90: Update
-      0x1405D20A0: UpdateGameObjects
-      0x1405D24F0: SetupNamePlateForObjectInfo
-      0x1405D25A0: FinalizeNamePlates
+      0x1405D1340: CalculateIsInScreen
+      0x1405D1450: CalculateNamePlatePosition
+      0x1405D1770: GetUIObjectKind
+      0x1405D1870: CalculateNamePlateScale
+      0x1405D1A60: ctor
+      0x1405D1E40: Update
+      0x1405D2050: UpdateGameObjects
+      0x1405D24A0: SetupNamePlateForObjectInfo
+      0x1405D2550: FinalizeNamePlates
   Client::UI::UIInputModule:
     vtbls:
-      - ea: 0x1417670C8
+      - ea: 0x1417670D8
     funcs:
-      0x1405D3F30: ctor
-      0x1405D4020: HandleInputUpdate
-      0x1405D5240: CheckCastCancel
-      0x1405D88E0: CheckScreenshotState
+      0x1405D3EE0: ctor
+      0x1405D3FD0: HandleInputUpdate
+      0x1405D51F0: CheckCastCancel
+      0x1405D8890: CheckScreenshotState
   Client::UI::UIModuleInterface:
     vtbls:
-      - ea: 0x1417668A0
+      - ea: 0x1417668B0
     vfuncs: # todo: check new vfuncs
       0: dtor
       4: Abort
@@ -2263,128 +2263,128 @@ classes:
       175: ExecuteMainCommand
   Client::UI::UIModule:
     vtbls:
-      - ea: 0x1417670D8
+      - ea: 0x1417670E8
         base: Client::UI::UIModuleInterface
-      - ea: 0x141767770
+      - ea: 0x141767780
         base: Component::GUI::AtkModuleEvent
-      - ea: 0x141767778
-        base: Component::Excel::ExcelLanguageEvent
       - ea: 0x141767788
+        base: Component::Excel::ExcelLanguageEvent
+      - ea: 0x141767798
         base: Common::Configuration::ConfigBase::ChangeEventInterface
     funcs:
-      0x1405DABC0: ctor
-      0x1405DBA10: Update
-      0x1405DBE80: HandleInputUpdate
+      0x1405DAB70: ctor
+      0x1405DB9C0: Update
+      0x1405DBE30: HandleInputUpdate
   Client::System::Crypt::SimpleString:
     vtbls:
-      - ea: 0x141767920
+      - ea: 0x141767930
         base: Client::System::Crypt::CryptInterface
     vfuncs:
       1: Encrypt
       2: Decrypt
   Component::Text::MacroDecoder:
     vtbls:
-      - ea: 0x1417687E8
+      - ea: 0x1417687F8
   Component::Text::TextChecker:
     vtbls:
-      - ea: 0x1417689A8
+      - ea: 0x1417689B8
         base: Component::Text::MacroDecoder
   Client::System::Data::Bit:
     vtbls:
-      - ea: 0x141769378
+      - ea: 0x141769388
     funcs:
-      0x1406018B0: ctor
+      0x140601860: ctor
   Client::UI::Misc::ConfigModule:
     vtbls:
-      - ea: 0x14176BF58
+      - ea: 0x14176BF68
         base: Component::GUI::AtkModuleInterface::AtkEventInterface
-      - ea: 0x14176BF70
+      - ea: 0x14176BF80
         base: Common::Configuration::ConfigBase::ChangeEventInterface
     funcs:
-      0x140612510: ctor
-      0x1406128D0: SetValueByIndex
-      0x140612AA0: GetValueByIndex
+      0x1406124C0: ctor
+      0x140612880: SetValueByIndex
+      0x140612A50: GetValueByIndex
   Client::UI::Misc::RaptureMacroModule:
     vtbls:
-      - ea: 0x14176BF80
+      - ea: 0x14176BF90
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
-      0x1406151B0: ctor
-      0x1406152B0: GetMacro
-      0x1406152F0: ReplaceMacroLines # replaces macro with lines stored in string
-      0x140615310: AppendMacroLines # appends lines stored in string to macro
-      0x140615360: GetLineCount
-      0x140616A40: SetMacroLines # function called by replace/append
+      0x140615160: ctor
+      0x140615260: GetMacro
+      0x1406152A0: ReplaceMacroLines # replaces macro with lines stored in string
+      0x1406152C0: AppendMacroLines # appends lines stored in string to macro
+      0x140615310: GetLineCount
+      0x1406169F0: SetMacroLines # function called by replace/append
   Client::UI::Misc::RaptureTextModule:
     vtbls:
-      - ea: 0x14176BFE8
+      - ea: 0x14176BFF8
     funcs:
-      0x140618D20: GetAddonText
-      0x140619EF0: FormatAddonText
-      0x14061A1A0: FormatAddonText2
-      0x14061EB50: FormatAddonText3
-      0x14061F1B0: FormatAddonText4
-      0x140623630: FormatAddonTextApply
+      0x140618CD0: GetAddonText
+      0x140619EA0: FormatAddonText
+      0x14061A150: FormatAddonText2
+      0x14061EB00: FormatAddonText3
+      0x14061F160: FormatAddonText4
+      0x1406235E0: FormatAddonTextApply
   Client::UI::Misc::RaptureLogModule:
     vtbls:
-      - ea: 0x14176C260
+      - ea: 0x14176C270
         base: Component::Log::LogModule
     funcs:
-      0x140627150: ctor
-      0x140628910: PrintMessage
-      0x140629CC0: ShowLogMessage
-      0x14062BD60: GetContentIdForLogMessage
+      0x140627100: ctor
+      0x1406288C0: PrintMessage
+      0x140629C70: ShowLogMessage
+      0x14062BD10: GetContentIdForLogMessage
   Client::UI::Misc::RaptureHotbarModule:
     vtbls:
-      - ea: 0x14176C2B0
+      - ea: 0x14176C2C0
         base: Client::UI::Misc::UserFileManager::UserFileEvent
-      - ea: 0x14176C318
+      - ea: 0x14176C328
         base: Client::System::Input::InputData::InputCodeModifiedInterface
     funcs:
-      0x1406320E0: ctor
+      0x140632090: ctor
   Client::UI::Misc::PronounModule:
     vtbls:
-      - ea: 0x14176C460
+      - ea: 0x14176C470
         base: Component::Text::TextChecker::ExecNonMacroFunc
     funcs:
-      0x140642440: ctor
+      0x1406423F0: ctor
   Client::UI::Misc::RaptureGearsetModule:
     vtbls:
-      - ea: 0x14176C470
+      - ea: 0x14176C480
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
-      0x140646EA0: ctor
+      0x140646E50: ctor
   Client::UI::Misc::ItemFinderModule:
     vtbls:
-      - ea: 0x14176C4E8
+      - ea: 0x14176C4F8
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
-      0x14064A7E0: ctor
-      0x14064C790: SearchForItem
+      0x14064A790: ctor
+      0x14064C740: SearchForItem
   Client::UI::Misc::ItemOrderModule:
     vtbls:
-      - ea: 0x14176C690
+      - ea: 0x14176C6A0
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
-      0x140659340: ctor
+      0x1406592F0: ctor
   Client::UI::Misc::RaptureTeleportHistory:
     vtbls:
-      - ea: 0x14176C7C8
+      - ea: 0x14176C7D8
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
-      0x140660360: AddHistoryEntry
+      0x140660310: AddHistoryEntry
   Client::UI::Misc::CharaView:
     vtbls:
-      - ea: 0x14176CF40
+      - ea: 0x14176CF50
     vfuncs:
       0: dtor
       1: Initialize
       2: Finalize
     funcs:
-      0x14066AC60: ctor
+      0x14066AC10: ctor
   Client::Game::Object::GameObject:
     vtbls:
-      - ea: 0x14176E3D8
+      - ea: 0x14176E3E8
     vfuncs:
       2: GetObjectID
       3: GetObjectKind
@@ -2408,16 +2408,16 @@ classes:
       62: IsCharacter
       69: OnInitialize
     funcs:
-      0x1406DEE30: IsMountOrOrnament
-      0x1406DFB30: GetPosition
-      0x1406DFB80: SetPosition
-      0x1406E3520: Initialize
-      0x1406E3790: ctor
+      0x1406DEE00: IsMountOrOrnament
+      0x1406DFB00: GetPosition
+      0x1406DFB50: SetPosition
+      0x1406E34F0: Initialize
+      0x1406E3760: ctor
   Client::Game::Character::Character:
     vtbls:
-      - ea: 0x14176F0E0
+      - ea: 0x14176F0F0
         base: Client::Game::Object::GameObject
-      - ea: 0x14176F3A8
+      - ea: 0x14176F3B8
         base: Client::Graphics::Vfx::VfxDataListenner
     vfuncs:
       77: GetModelChara
@@ -2429,691 +2429,691 @@ classes:
       87: GetForayInfo_2
       88: IsMount
     funcs:
-      0x1406DE3C0: IsCasting
-      0x1406EE940: GetCompanionOwnerID
-      0x1406F2E80: dtor
-      0x140755040: ctor
+      0x1406DE390: IsCasting
+      0x1406EE910: GetCompanionOwnerID
+      0x1406F2E50: dtor
+      0x140754E60: ctor
   Component::Shell::ShellCommandInterface:
     vtbls:
-      - ea: 0x14177C7B0
+      - ea: 0x1417840B0
     vfuncs:
       0: dtor
       1: ExecuteCommand
   Component::Shell::DebugCommandInterface:
     vtbls:
-      - ea: 0x14177C7C8
+      - ea: 0x1417840C8
   Client::UI::Shell::RaptureShellCommandInterface:
     vtbls:
-#fail       - ea: 0x1417840D8
+      - ea: 0x1417840D8
         base: Component::Shell::ShellCommandInterface
   Client::UI::Shell::RaptureShellModule:
     vtbls:
-      - ea: 0x14177C7F0
+      - ea: 0x1417840F0
         base: Component::Shell::ShellCommandModule
-      - ea: 0x14177C808
+      - ea: 0x141784108
         base: Client::UI::Shell::RaptureShellCommandInterface
     funcs:
-      0x1407200C0: ctor
-      0x1407244E0: SetChatChannel
+      0x140720030: ctor
+      0x140724450: SetChatChannel
   Client::UI::Shell::ShellCommandBlueAction:
     vtbls:
-      - ea: 0x14177C820
+      - ea: 0x141784120
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandAction:
     vtbls:
-      - ea: 0x14177C838
+      - ea: 0x141784138
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandBattleMode:
     vtbls:
-      - ea: 0x14177C850
+      - ea: 0x141784150
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandGear:
     vtbls:
-      - ea: 0x14177C868
+      - ea: 0x141784168
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandAssist:
     vtbls:
-      - ea: 0x14177C880
+      - ea: 0x141784180
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandFollow:
     vtbls:
-      - ea: 0x14177C898
+      - ea: 0x141784198
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandTarget:
     vtbls:
-      - ea: 0x14177C8B0
+      - ea: 0x1417841B0
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandTargetPc:
     vtbls:
-      - ea: 0x14177C8C8
+      - ea: 0x1417841C8
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandTargetNpc:
     vtbls:
-      - ea: 0x14177C8E0
+      - ea: 0x1417841E0
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandTargetEnemy:
     vtbls:
-      - ea: 0x14177C8F8
+      - ea: 0x1417841F8
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandTargetEnemyNext:
     vtbls:
-      - ea: 0x14177C910
+      - ea: 0x141784210
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandTargetEnemyPrev:
     vtbls:
-      - ea: 0x14177C928
+      - ea: 0x141784228
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandBattleTarget:
     vtbls:
-      - ea: 0x14177C940
+      - ea: 0x141784240
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandRecast:
     vtbls:
-      - ea: 0x14177C958
+      - ea: 0x141784258
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandMarking:
     vtbls:
-      - ea: 0x14177C978
+      - ea: 0x141784278
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandFaceTarget:
     vtbls:
-      - ea: 0x14177C990
+      - ea: 0x141784290
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandAddAdditionalAction:
     vtbls:
-      - ea: 0x14177C9A8
+      - ea: 0x1417842A8
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandAddPvpAction:
     vtbls:
-      - ea: 0x14177C9C0
+      - ea: 0x1417842C0
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandAutoMove:
     vtbls:
-      - ea: 0x14177C9D8
+      - ea: 0x1417842D8
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandLockon:
     vtbls:
-      - ea: 0x14177C9F0
+      - ea: 0x1417842F0
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandFocus:
     vtbls:
-      - ea: 0x14177CA08
+      - ea: 0x141784308
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandPetAction:
     vtbls:
-      - ea: 0x14177CA20
+      - ea: 0x141784320
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandBuddyAction:
     vtbls:
-      - ea: 0x14177CA38
+      - ea: 0x141784338
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandFaceCamera:
     vtbls:
-      - ea: 0x14177CA50
+      - ea: 0x141784350
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandFieldMarker:
     vtbls:
-      - ea: 0x14177CA68
+      - ea: 0x141784368
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandLevelSync:
     vtbls:
-      - ea: 0x14177CA80
+      - ea: 0x141784380
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandMount:
     vtbls:
-      - ea: 0x14177CA98
+      - ea: 0x141784398
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandMinion:
     vtbls:
-      - ea: 0x14177CAB0
+      - ea: 0x1417843B0
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandStatusOff:
     vtbls:
-      - ea: 0x14177CAC8
+      - ea: 0x1417843C8
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandQuickChat:
     vtbls:
-      - ea: 0x14177CAE0
+      - ea: 0x1417843E0
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandBlueSpellbook:
     vtbls:
-      - ea: 0x14177CAF8
+      - ea: 0x1417843F8
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandFashion:
     vtbls:
-      - ea: 0x14177CB10
+      - ea: 0x141784410
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandEcho:
     vtbls:
-      - ea: 0x14177CB40
+      - ea: 0x141784440
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandChatSay:
     vtbls:
-      - ea: 0x14177CB58
+      - ea: 0x141784458
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandChatYell:
     vtbls:
-      - ea: 0x14177CB70
+      - ea: 0x141784470
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandChatShout:
     vtbls:
-      - ea: 0x14177CB88
+      - ea: 0x141784488
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandChatTell:
     vtbls:
-      - ea: 0x14177CBA0
+      - ea: 0x1417844A0
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandChatReply:
     vtbls:
-      - ea: 0x14177CBC0
+      - ea: 0x1417844C0
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandChatParty:
     vtbls:
-      - ea: 0x14177CBF0
+      - ea: 0x1417844F0
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandChatFC:
     vtbls:
-      - ea: 0x14177CC08
+      - ea: 0x141784508
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandChatLinkshell:
     vtbls:
-      - ea: 0x14177CC20
+      - ea: 0x141784520
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandUnknown1416EC328:
     vtbls:
-      - ea: 0x14177CC38
+      - ea: 0x141784538
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandChatAlliance:
     vtbls:
-      - ea: 0x14177CC50
+      - ea: 0x141784550
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandChatNovice:
     vtbls:
-      - ea: 0x14177CC68
+      - ea: 0x141784568
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandChatPvp:
     vtbls:
-      - ea: 0x14177CC80
+      - ea: 0x141784580
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandChatCrossWorldLinkshell:
     vtbls:
-      - ea: 0x14177CC98
+      - ea: 0x141784598
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandParty:
     vtbls:
-      - ea: 0x14177CCB0
+      - ea: 0x1417845B0
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandPartyJoin:
     vtbls:
-      - ea: 0x14177CCC8
+      - ea: 0x1417845C8
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandPartyDecline:
     vtbls:
-      - ea: 0x14177CCE0
+      - ea: 0x1417845E0
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandPartyInvite:
     vtbls:
-      - ea: 0x14177CCF8
+      - ea: 0x1417845F8
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandPartyLeave:
     vtbls:
-      - ea: 0x14177CD10
+      - ea: 0x141784610
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandPartyKick:
     vtbls:
-      - ea: 0x14177CD28
+      - ea: 0x141784628
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandPartyLeader:
     vtbls:
-      - ea: 0x14177CD40
+      - ea: 0x141784640
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandFC:
     vtbls:
-      - ea: 0x14177CD58
+      - ea: 0x141784658
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandLinkshell:
     vtbls:
-      - ea: 0x14177CD70
+      - ea: 0x141784670
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandFriendlist:
     vtbls:
-      - ea: 0x14177CD88
+      - ea: 0x141784688
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandBlacklist:
     vtbls:
-      - ea: 0x14177CDB0
+      - ea: 0x1417846B0
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandEmote:
     vtbls:
-      - ea: 0x14177CDD8
+      - ea: 0x1417846D8
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandCheck:
     vtbls:
-      - ea: 0x14177CDF0
+      - ea: 0x1417846F0
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandSearch:
     vtbls:
-      - ea: 0x14177CE08
+      - ea: 0x141784708
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandTrade:
     vtbls:
-      - ea: 0x14177CE20
+      - ea: 0x141784720
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandMateria:
     vtbls:
-      - ea: 0x14177CE38
+      - ea: 0x141784738
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandSalute:
     vtbls:
-      - ea: 0x14177CE50
+      - ea: 0x141784750
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandLookParty:
     vtbls:
-      - ea: 0x14177CE68
+      - ea: 0x141784768
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandComment:
     vtbls:
-      - ea: 0x14177CE88
+      - ea: 0x141784788
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandReadyCheck:
     vtbls:
-      - ea: 0x14177CEA0
+      - ea: 0x1417847A0
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandRandom:
     vtbls:
-      - ea: 0x14177CEB8
+      - ea: 0x1417847B8
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandDice:
     vtbls:
-      - ea: 0x14177CED0
+      - ea: 0x1417847D0
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandClearTellHistory:
     vtbls:
-      - ea: 0x14177CEE8
+      - ea: 0x1417847E8
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandLogout:
     vtbls:
-      - ea: 0x14177CF00
+      - ea: 0x141784800
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandCommand:
     vtbls:
-      - ea: 0x14177CF38
+      - ea: 0x141784838
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandQuit:
     vtbls:
-      - ea: 0x14177CF50
+      - ea: 0x141784850
         base: Client::UI::Shell::ShellCommandLogout
   Client::UI::Shell::ShellCommandFaq:
     vtbls:
-      - ea: 0x14177CF88
+      - ea: 0x141784888
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandGM:
     vtbls:
-      - ea: 0x14177CFB0
+      - ea: 0x1417848B0
         base: Component::Shell::DebugCommandInterface
   Client::UI::Shell::ShellCommandReturn:
     vtbls:
-      - ea: 0x14177F058
+      - ea: 0x1417868E8
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandLegacy:
     vtbls:
-      - ea: 0x14177F070
+      - ea: 0x141786900
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandHotbarBase:
     vtbls:
-#fail       - ea: 0x141786918
+      - ea: 0x141786918
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandHotbar:
     vtbls:
-      - ea: 0x14177F0D8
+      - ea: 0x141786968
         base: Client::UI::Shell::ShellCommandHotbarBase
   Client::UI::Shell::ShellCommandHotbarCross:
     vtbls:
-      - ea: 0x14177F128
+      - ea: 0x1417869B8
         base: Client::UI::Shell::ShellCommandHotbarBase
   Client::UI::Shell::ShellCommandMacroConfig:
     vtbls:
-      - ea: 0x14177F178
+      - ea: 0x141786A08
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandInventory:
     vtbls:
-      - ea: 0x14177F1A8
+      - ea: 0x141786A38
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandItemSort:
     vtbls:
-      - ea: 0x14177F1C0
+      - ea: 0x141786A50
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandClearLog:
     vtbls:
-      - ea: 0x14177F1D8
+      - ea: 0x141786A68
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandInstanceArea:
     vtbls:
-      - ea: 0x14177F1F0
+      - ea: 0x141786A80
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandMacroError:
     vtbls:
-      - ea: 0x14177F208
+      - ea: 0x141786A98
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandMacroCancel:
     vtbls:
-      - ea: 0x14177F220
+      - ea: 0x141786AB0
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandPlayTime:
     vtbls:
-      - ea: 0x14177F238
+      - ea: 0x141786AC8
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandGroupPose:
     vtbls:
-      - ea: 0x14177F250
+      - ea: 0x141786AE0
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandItemSearch:
     vtbls:
-      - ea: 0x14177F268
+      - ea: 0x141786AF8
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandIdlingCamera:
     vtbls:
-      - ea: 0x14177F280
+      - ea: 0x141786B10
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandGeneralDutyKey:
     vtbls:
-      - ea: 0x14177F298
+      - ea: 0x141786B28
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandTitle:
     vtbls:
-      - ea: 0x14177F2B0
+      - ea: 0x141786B40
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandAlarm:
     vtbls:
-      - ea: 0x14177F2C8
+      - ea: 0x141786B58
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandHud:
     vtbls:
-      - ea: 0x14177F2F8
+      - ea: 0x141786B88
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandChatLog:
     vtbls:
-      - ea: 0x14177F310
+      - ea: 0x141786BA0
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandUnk1416EE8C0:
     vtbls:
-      - ea: 0x14177F328
+      - ea: 0x141786BB8
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandUnk1416EE8D8:
     vtbls:
-      - ea: 0x14177F340
+      - ea: 0x141786BD0
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandBattleEffect:
     vtbls:
-      - ea: 0x14177F358
+      - ea: 0x141786BE8
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandHudReset:
     vtbls:
-      - ea: 0x14177F370
+      - ea: 0x141786C00
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandUiReset:
     vtbls:
-      - ea: 0x14177F388
+      - ea: 0x141786C18
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandPartySort:
     vtbls:
-      - ea: 0x14177F3A0
+      - ea: 0x141786C30
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandUiScale:
     vtbls:
-      - ea: 0x14177F3B8
+      - ea: 0x141786C48
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandUnk1416EE968:
     vtbls:
-      - ea: 0x14177F3D0
+      - ea: 0x141786C60
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandUnk1416EE990:
     vtbls:
-      - ea: 0x14177F3F8
+      - ea: 0x141786C88
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandCrossHotbarType:
     vtbls:
-      - ea: 0x14177F410
+      - ea: 0x141786CA0
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandEgiGlamour:
     vtbls:
-      - ea: 0x14177F428
+      - ea: 0x141786CB8
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandBahamutSize:
     vtbls:
-      - ea: 0x14177F440
+      - ea: 0x141786CD0
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandConfigToggle:
     vtbls:
-      - ea: 0x14177F460
+      - ea: 0x141786CF0
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandNameplateConfig:
     vtbls:
-      - ea: 0x14177F478
+      - ea: 0x141786D08
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::Game::Character::BattleChara:
     vtbls:
-      - ea: 0x14177F5F0
+      - ea: 0x141786E80
         base: Client::Game::Character::Character
-      - ea: 0x14177F8B8
+      - ea: 0x141787148
         base: Client::Graphics::Vfx::VfxDataListenner
     funcs:
-      0x140754F50: ctor
-      0x1407551B0: dtor
+      0x140754D70: ctor
+      0x140754FD0: dtor
   Client::Game::TitleController:
     vtbls:
-      - ea: 0x141780478
+      - ea: 0x141787D18
     vfuncs:
       0: dtor
   Client::Game::TitleList:
     vtbls:
-      - ea: 0x141780480
+      - ea: 0x141787D20
     vfuncs:
       0: dtor
   Client::UI::Misc::RaptureHotbarModule::ClearCallback:
     vtbls:
-      - ea: 0x1417804A0
+      - ea: 0x141787D40
   Client::Game::UI::Hotbar:
     vtbls:
-      - ea: 0x1417804C0
+      - ea: 0x141787D60
         base: Client::UI::Misc::RaptureHotbarModule::ClearCallback
     vfuncs:
       0: dtor
     funcs:
-      0x1407BAFE0: CancelCast
+      0x1407BAE00: CancelCast
   Client::Game::UI::MarkingController:
     instances:
-      - ea: 0x141EB4130
+      - ea: 0x141EBB130
         pointer: False
     vtbls:
-      - ea: 0x141780468
+      - ea: 0x141787D08
     vfuncs:
       0: dtor
     funcs:
-      0x140787F10: ClearWaymarks
+      0x140787D30: ClearWaymarks
   Client::Game::LimitBreakController:
     instances:
-      - ea: 0x141EB43E0
+      - ea: 0x141EBB3E0
         pointer: False
     vtbls:
-      - ea: 0x141780470
+      - ea: 0x141787D10
     vfuncs:
       0: dtor
   Client::Game::UI::Telepo::SelectUseTicketInvoker:
     vtbls:
-      - ea: 0x141780580
+      - ea: 0x141787E10
         base: Component::GUI::AtkModuleInterface::AtkEventInterface
     vfuncs:
       2: dtor
   Client::Game::UI::Telepo:
     instances:
-      - ea: 0x141EA6C48
+      - ea: 0x141EADC48
         pointer: False
     vtbls:
-      - ea: 0x141780598
+      - ea: 0x141787E28
         base: Component::GUI::AtkModuleInterface::AtkEventInterface
     vfuncs:
       2: dtor
     funcs:
-      0x140793CB0: ctor
-      0x140793E10: IsSelectUseTicketInactive
-      0x140793E40: UpdatePlayerAetheryteList
-      0x1407949E0: Teleport
-      0x140795CE0: TeleportWithTicket
-      0x140795D70: InvokeSelectUseTicket
+      0x140793AD0: ctor
+      0x140793C30: IsSelectUseTicketInactive
+      0x140793C60: UpdatePlayerAetheryteList
+      0x140794800: Teleport
+      0x140795B00: TeleportWithTicket
+      0x140795B90: InvokeSelectUseTicket
   Client::UI::Agent::AgentHUD:
     vtbls:
-      - ea: 0x141783BC8
+      - ea: 0x14178B458
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x14080AE40: ctor
-      0x140810E40: UpdateParty
-      0x140822470: OpenContextMenuFromTarget
-      0x1408253E0: GetMainCommandString  # MainCommand exd
-      0x140825720: OpenSystemMenu
+      0x14080AC60: ctor
+      0x140810C60: UpdateParty
+      0x140822290: OpenContextMenuFromTarget
+      0x140825200: GetMainCommandString  # MainCommand exd
+      0x140825540: OpenSystemMenu
   Client::UI::Agent::AgentChatLog:
     vtbls:
-      - ea: 0x1417841C0
+      - ea: 0x14178BA50
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140842C40: ctor
-      0x140847CB0: InsertTextCommandParam
+      0x140842A60: ctor
+      0x140847AD0: InsertTextCommandParam
   Client::UI::Agent::AgentInventory:
     vtbls:
-      - ea: 0x141783C50
+      - ea: 0x14178B4E0
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140827330: ctor
+      0x140827150: ctor
   Client::UI::Agent::AgentInventoryContext:
     vtbls:
       - ea: 0x141731C38
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140207420: ctor
-      0x140208AB0: UnblockItemSlot
+      0x1402073D0: ctor
+      0x140208A60: UnblockItemSlot
   Client::UI::Agent::AgentConfigLogColor:
     vtbls:
       - ea: 0x141732678
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140238BA0: ctor
+      0x140238B50: ctor
   Client::UI::Agent::AgentConfigKey:
     vtbls:
       - ea: 0x1417326F8
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x14023BB90: ctor
+      0x14023BB40: ctor
   Client::UI::Agent::AgentConfigPadCustomize:
     vtbls:
       - ea: 0x141732A20
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x14024A330: ctor
+      0x14024A2E0: ctor
   Client::UI::Agent::AgentEmote:
     vtbls:
-      - ea: 0x141784868
+      - ea: 0x14178C0F8
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140879210: ctor
+      0x140879030: ctor
   Client::UI::Agent::AgentMacro:
     vtbls:
-      - ea: 0x141784FC8
+      - ea: 0x14178C858
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x14089C0A0: ctor
+      0x14089BEC0: ctor
   Client::UI::Agent::AgentFishingNote:
     vtbls:
-      - ea: 0x141784C20
+      - ea: 0x14178C4B0
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140891B10: ctor
+      0x140891930: ctor
   Client::UI::Agent::AgentFishGuide:
     vtbls:
-      - ea: 0x141784CA8
+      - ea: 0x14178C538
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140894A90: ctor
+      0x1408948B0: ctor
   Client::UI::Agent::AgentFishRecord:
     vtbls:
-      - ea: 0x141784D30
+      - ea: 0x14178C5C0
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140895DC0: ctor
+      0x140895BE0: ctor
   Client::UI::Agent::AgentQuestJournal:
     vtbls:
-      - ea: 0x141784468
+      - ea: 0x14178BCF8
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140858C00: ctor
+      0x140858A20: ctor
   Client::UI::Agent::AgentActionMenu:
     vtbls:
-      - ea: 0x1417838F0
+      - ea: 0x14178B180
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140800280: ctor
+      0x1408000A0: ctor
   Client::UI::Agent::AgentMarker:
     vtbls:
-      - ea: 0x141785F78
+      - ea: 0x14178D808
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x1408DE270: ctor
+      0x1408DE090: ctor
   Client::UI::Agent::AgentTrade:
     vtbls:
-      - ea: 0x141783DC8
+      - ea: 0x14178B658
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140833370: ctor
+      0x140833190: ctor
   Client::UI::Agent::AgentScreenLog:
     vtbls:
-      - ea: 0x141786710
+      - ea: 0x14178DFA0
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x1408FD390: ctor
-      0x1408FF830: OpenBalloon
-      0x1408FFCE0: CloseBalloon
-      0x1408FFE70: ResetBalloon
+      0x1408FD1B0: ctor
+      0x1408FF650: OpenBalloon
+      0x1408FFB00: CloseBalloon
+      0x1408FFC90: ResetBalloon
   Client::UI::Agent::AgentLoot:
     vtbls:
-      - ea: 0x141785298
+      - ea: 0x14178CB28
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x1408A1F70: ctor
+      0x1408A1D90: ctor
   Client::UI::Agent::AgentRepair:
     vtbls:
-      - ea: 0x141786488
+      - ea: 0x14178DD18
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x1408F67B0: ctor
+      0x1408F65D0: ctor
   Client::UI::Agent::AgentColorant:
     vtbls:
-      - ea: 0x141786CB8
+      - ea: 0x14178E548
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x14090CB30: ctor
+      0x14090C950: ctor
   Client::UI::Agent::AgentHowTo:
     vtbls:
-      - ea: 0x141784348
+      - ea: 0x14178BBD8
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140853EF0: ctor
+      0x140853D10: ctor
   Client::UI::Agent::AgentHowToNotice:
     vtbls:
-      - ea: 0x141784ED8
+      - ea: 0x14178C768
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x14089A8B0: ctor
+      0x14089A6D0: ctor
   Client::UI::Agent::AgentInspect:
     vtbls:
-      - ea: 0x141785810
+      - ea: 0x14178D0A0
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x1408B60A0: ctor
+      0x1408B5EC0: ctor
   Client::UI::Agent::AgentTelepotTown:
     vtbls:
-      - ea: 0x1418CBA68
+      - ea: 0x1418D32E8
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x14107E340: ctor
+      0x14107E160: ctor
   Client::UI::Agent::AgentSocial:
     vtbls:
       - ea: 0x1417336A8
@@ -3123,13 +3123,13 @@ classes:
       - ea: 0x141733720
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140255B00: ctor
+      0x140255AB0: ctor
   Client::UI::Agent::AgentFriendlist:
     vtbls:
       - ea: 0x141733798
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140256C50: ctor
+      0x140256C00: ctor
   Client::UI::Agent::AgentPartyMember:
     vtbls:
       - ea: 0x141733910
@@ -3137,19 +3137,19 @@ classes:
       - ea: 0x141733988
         base: Client::UI::Agent::AgentContext::AgentContextUpdateChecker
     funcs:
-      0x14025BDC0: ctor
+      0x14025BD70: ctor
   Client::UI::Agent::AgentLinkshell:
     vtbls:
       - ea: 0x141733810
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140259810: ctor
+      0x1402597C0: ctor
   Client::UI::Agent::AgentSearch:
     vtbls:
       - ea: 0x141733A08
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x14025FA50: ctor
+      0x14025FA00: ctor
   Client::UI::Agent::AgentDetail:
     vtbls:
       - ea: 0x141733990
@@ -3164,52 +3164,52 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentActionDetail:
     vtbls:
-      - ea: 0x141785D50
+      - ea: 0x14178D5E0
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x1408D7C10: ctor
+      0x1408D7A30: ctor
   Client::UI::Agent::AgentRetainer:
     vtbls:
-      - ea: 0x141783D40
+      - ea: 0x14178B5D0
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x14082CDC0: ctor
+      0x14082CBE0: ctor
   Client::UI::Agent::AgentCutsceneReplay:
     vtbls:
-      - ea: 0x141787378
+      - ea: 0x14178EC08
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140924630: ctor
+      0x140924450: ctor
   Client::UI::Agent::AgentMonsterNote:
     vtbls:
-      - ea: 0x141785FF0
+      - ea: 0x14178D880
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x1408DE750: ctor
+      0x1408DE570: ctor
   Client::UI::Agent::AgentItemSearch:
     vtbls:
       - ea: 0x141733C18
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140268170: ctor
+      0x140268120: ctor
   Client::UI::Agent::AgentCatch:
     vtbls:
-      - ea: 0x141787288
+      - ea: 0x14178EB18
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140922FA0: ctor
+      0x140922DC0: ctor
   Client::UI::Agent::AgentFreeCompany:
     vtbls:
       - ea: 0x141733CB8
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140279B50: ctor
+      0x140279B00: ctor
   Client::UI::Agent::AgentFreeCompanyProfile:
     vtbls:
       - ea: 0x141733DB8
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x14027BA10: ctor
+      0x14027B9C0: ctor
   Client::UI::Agent::AgentFreeCompanyInputString:
     vtbls:
       - ea: 0x141733F28
@@ -3227,107 +3227,107 @@ classes:
       - ea: 0x141734130
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x1402856D0: ctor
+      0x140285680: ctor
   Client::UI::Agent::AgentArmouryBoard:
     vtbls:
-      - ea: 0x141783CC8
+      - ea: 0x14178B558
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x14082A290: ctor
+      0x14082A0B0: ctor
   Client::UI::Agent::AgentHowToList:
     vtbls:
-      - ea: 0x1417868F0
+      - ea: 0x14178E180
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x1409037D0: ctor
+      0x1409035F0: ctor
   Client::UI::Agent::AgentCabinet:
     vtbls:
-      - ea: 0x141786990
+      - ea: 0x14178E220
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140906390: ctor
+      0x1409061B0: ctor
   Client::UI::Agent::AgentGrandCompanyRank:
     vtbls:
-      - ea: 0x141785888
+      - ea: 0x14178D118
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x1408B86B0: ctor
+      0x1408B84D0: ctor
   Client::UI::Agent::AgentGrandCompanySupply:
     vtbls:
-      - ea: 0x141786EB8
+      - ea: 0x14178E748
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x1409173A0: ctor
+      0x1409171C0: ctor
   Client::UI::Agent::AgentGrandCompanyExchange:
     vtbls:
-      - ea: 0x141786F30
+      - ea: 0x14178E7C0
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140919790: ctor
+      0x1409195B0: ctor
   Client::UI::Agent::AgentGearSet:
     vtbls:
-      - ea: 0x141783E88
+      - ea: 0x14178B718
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140834A70: ctor
+      0x140834890: ctor
   Client::UI::Agent::AgentSupportMain:
     vtbls:
       - ea: 0x141736D98
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x1402D4DC0: ctor
+      0x1402D4D70: ctor
   Client::UI::Agent::AgentSupportSubList:
     vtbls:
       - ea: 0x141736E10
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x1402D6690: ctor
+      0x1402D6640: ctor
   Client::UI::Agent::AgentSupportSubView:
     vtbls:
       - ea: 0x141736E90
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x1402D7410: ctor
+      0x1402D73C0: ctor
   Client::UI::Agent::AgentSupportSubEdit:
     vtbls:
       - ea: 0x141736F10
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x1402D86B0: ctor
+      0x1402D8660: ctor
   Client::UI::Agent::AgentAchievement:
     vtbls:
-      - ea: 0x1417842C0
+      - ea: 0x14178BB50
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x14084BD30: ctor
+      0x14084BB50: ctor
   Client::UI::Agent::AgentLicenseViewer:
     vtbls:
       - ea: 0x141732350
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMovieSubtitle:
     vtbls:
-      - ea: 0x141786FA8
+      - ea: 0x14178E838
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140919FD0: ctor
+      0x140919DF0: ctor
   Client::UI::Agent::AgentPadMouseMode:
     vtbls:
-      - ea: 0x141787020
+      - ea: 0x14178E8B0
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x14091A3B0: ctor
+      0x14091A1D0: ctor
   Client::UI::Agent::AgentRecommendList:
     vtbls:
-      - ea: 0x1417860A8
+      - ea: 0x14178D938
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x1408E1CB0: ctor
+      0x1408E1AD0: ctor
   Client::UI::Agent::AgentBuddy:
     vtbls:
-      - ea: 0x141784E60
+      - ea: 0x14178C6F0
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140897910: ctor
+      0x140897730: ctor
   Client::UI::Agent::AgentCloseMessage:
     vtbls:
       - ea: 0x141732C08
@@ -3338,1338 +3338,1338 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentShop:
     vtbls:
-      - ea: 0x141785698
+      - ea: 0x14178CF28
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x1408B23C0: ctor
+      0x1408B21E0: ctor
   Client::UI::Agent::AgentBait:
     vtbls:
-      - ea: 0x141787418
+      - ea: 0x14178ECA8
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140926B60: ctor
+      0x140926980: ctor
   Client::UI::Agent::AgentHousing:
     vtbls:
-      - ea: 0x1418D8FD8
+      - ea: 0x1418E0858
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x1410CFC80: ctor
+      0x1410CFAA0: ctor
   Client::UI::Agent::AgentHousingSignboard:
     vtbls:
-      - ea: 0x1418D9070
+      - ea: 0x1418E08F0
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x1410E4810: ctor
+      0x1410E4630: ctor
   Client::UI::Agent::AgentHousingPortal:
     vtbls:
-      - ea: 0x1418D92E0
+      - ea: 0x1418E0B60
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x1410EA3D0: ctor
+      0x1410EA1F0: ctor
   Client::UI::Agent::AgentHousingPlant:
     vtbls:
-      - ea: 0x1418D9250
+      - ea: 0x1418E0AD0
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x1410E8D70: ctor
+      0x1410E8B90: ctor
   Client::UI::Agent::AgentPersonalRoomPortal:
     vtbls:
-      - ea: 0x141787880
+      - ea: 0x14178F110
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140936C40: ctor
+      0x140936A60: ctor
   Client::UI::Agent::AgentTreasureHunt:
     vtbls:
-      - ea: 0x1418D93D0
+      - ea: 0x1418E0C50
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x1410EC7A0: ctor
+      0x1410EC5C0: ctor
   Client::UI::Agent::AgentLookingForGroup:
     vtbls:
       - ea: 0x141734228
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140287AD0: ctor
+      0x140287A80: ctor
   Client::UI::Agent::AgentContentsMvp:
     vtbls:
-      - ea: 0x141785220
+      - ea: 0x14178CAB0
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x1408A15E0: ctor
+      0x1408A1400: ctor
   Client::UI::Agent::AgentVoteKick:
     vtbls:
-      - ea: 0x1417851A8
+      - ea: 0x14178CA38
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x1408A0E60: ctor
+      0x1408A0C80: ctor
   Client::UI::Agent::AgentVoteGiveUp:
     vtbls:
-      - ea: 0x141785130
+      - ea: 0x14178C9C0
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x1408A09D0: ctor
+      0x1408A07F0: ctor
   Client::UI::Agent::AgentVoteTreasure:
     vtbls:
-      - ea: 0x1417850B8
+      - ea: 0x14178C948
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x1408A0460: ctor
+      0x1408A0280: ctor
   Client::UI::Agent::AgentPvpProfile:
     vtbls:
-      - ea: 0x141787490
+      - ea: 0x14178ED20
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140927720: ctor
+      0x140927540: ctor
   Client::UI::Agent::AgentContentsNote:
     vtbls:
-      - ea: 0x141787530
+      - ea: 0x14178EDC0
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x14092CD70: ctor
+      0x14092CB90: ctor
   Client::UI::Agent::AgentFieldMarker:
     vtbls:
-      - ea: 0x141784BA8
+      - ea: 0x14178C438
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x14088FF00: ctor
+      0x14088FD20: ctor
   Client::UI::Agent::AgentRetainerStatus:
     vtbls:
-      - ea: 0x141786610
+      - ea: 0x14178DEA0
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x1408FAE30: ctor
+      0x1408FAC50: ctor
   Client::UI::Agent::AgentRetainerTask:
     vtbls:
-      - ea: 0x1417875A8
+      - ea: 0x14178EE38
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x14092EBA0: ctor
+      0x14092E9C0: ctor
   Client::UI::Agent::AgentRelicNoteBook:
     vtbls:
-      - ea: 0x1417876F8
+      - ea: 0x14178EF88
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140932970: ctor
+      0x140932790: ctor
   Client::UI::Agent::AgentMiniGame:
     vtbls:
       - ea: 0x141737110
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x1402DC2B0: ctor
+      0x1402DC260: ctor
   Client::UI::Agent::AgentAdventureNoteBook:
     vtbls:
-      - ea: 0x141783B50
+      - ea: 0x14178B3E0
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x1408099F0: ctor
+      0x140809810: ctor
   Client::UI::Agent::AgentMinionMountBase:
     vtbls:
-      - ea: 0x141787A08
+      - ea: 0x14178F298
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x14093C550: ctor
+      0x14093C370: ctor
   Client::UI::Agent::AgentMinionNoteBook:
     vtbls:
-      - ea: 0x141787B80
+      - ea: 0x14178F410
         base: Client::UI::Agent::AgentMinionMountBase
     funcs:
-      0x14093F140: ctor
+      0x14093EF60: ctor
   Client::UI::Agent::AgentMountNoteBook:
     vtbls:
-      - ea: 0x141787D50
+      - ea: 0x14178F5E0
         base: Client::UI::Agent::AgentMinionMountBase
     funcs:
-      0x140941CF0: ctor
+      0x140941B10: ctor
   Client::UI::Agent::AgentItemComp:
     vtbls:
-      - ea: 0x141784040
+      - ea: 0x14178B8D0
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x14083D040: ctor
-      0x14083D1D0: CompareItem
+      0x14083CE60: ctor
+      0x14083CFF0: CompareItem
   Client::UI::Agent::AgentMobhunt:
     vtbls:
-      - ea: 0x141787198
+      - ea: 0x14178EA28
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x14091F6B0: ctor
+      0x14091F4D0: ctor
   Client::UI::Agent::AgentMateriaAttach:
     vtbls:
-      - ea: 0x141785B68
+      - ea: 0x14178D3F8
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x1408C78D0: ctor
+      0x1408C76F0: ctor
   Client::UI::Agent::AgentMiragePrism:
     vtbls:
-      - ea: 0x141786B60
+      - ea: 0x14178E3F0
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140909150: ctor
+      0x140908F70: ctor
   Client::UI::Agent::AgentAetherCurrent:
     vtbls:
-      - ea: 0x141785DC8
+      - ea: 0x14178D658
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x1408DC230: ctor
+      0x1408DC050: ctor
   Client::UI::Agent::AgentCurrency:
     vtbls:
-      - ea: 0x141784F50
+      - ea: 0x14178C7E0
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x14089AC40: ctor
+      0x14089AA60: ctor
   Client::UI::Agent::AgentLovmParty:
     vtbls:
-      - ea: 0x1417CA978
+      - ea: 0x1417D2208
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140BC4950: ctor
+      0x140BC4770: ctor
   Client::UI::Agent::AgentLovmRanking:
     vtbls:
-      - ea: 0x1417CAA18
+      - ea: 0x1417D22A8
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140BCAA30: ctor
+      0x140BCA850: ctor
   Client::UI::Agent::AgentLovmNamePlate:
     vtbls:
-      - ea: 0x1417CAA90
+      - ea: 0x1417D2320
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140BCB180: ctor
+      0x140BCAFA0: ctor
   Client::UI::Agent::AgentLovmResult:
     vtbls:
-      - ea: 0x1417CAB08
+      - ea: 0x1417D2398
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140BCB730: ctor
+      0x140BCB550: ctor
   Client::UI::Agent::AgentLovmPaletteEdit:
     vtbls:
-      - ea: 0x1417CA318
+      - ea: 0x1417D1BA8
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140BB8EF0: ctor
+      0x140BB8D10: ctor
   Client::UI::Agent::AgentDpsChallenge:
     vtbls:
-      - ea: 0x141788BA8
+      - ea: 0x141790438
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x14094A890: ctor
+      0x14094A6B0: ctor
   Client::UI::Agent::AgentOrchestrion:
     vtbls:
-      - ea: 0x141788C48
+      - ea: 0x1417904D8
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x14094C570: ctor
+      0x14094C390: ctor
   Client::UI::Agent::AgentOrchestrionInn:
     vtbls:
-      - ea: 0x141788DA0
+      - ea: 0x141790630
         base: Client::UI::Agent::AgentOrchestrion
     funcs:
-      0x1409534D0: ctor
+      0x1409532F0: ctor
   Client::UI::Agent::AgentDeepDungeonMap:
     vtbls:
-      - ea: 0x141841780
+      - ea: 0x141849018
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140C22EC0: ctor
+      0x140C22CE0: ctor
   Client::UI::Agent::AgentDeepDungeonStatus:
     vtbls:
-      - ea: 0x1418417F8
+      - ea: 0x141849090
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140C24360: ctor
+      0x140C24180: ctor
   Client::UI::Agent::AgentDeepDungeonSaveData:
     vtbls:
-      - ea: 0x141841870
+      - ea: 0x141849108
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140C25820: ctor
+      0x140C25640: ctor
   Client::UI::Agent::AgentDeepDungeonScore:
     vtbls:
-      - ea: 0x141841978
+      - ea: 0x141849210
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140C28D40: ctor
+      0x140C28B60: ctor
   Client::UI::Agent::AgentOrchestrionPlayList:
     vtbls:
-      - ea: 0x141788D08
+      - ea: 0x141790598
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x14094F760: ctor
+      0x14094F580: ctor
   Client::UI::Agent::AgentWeeklyBingo:
     vtbls:
-      - ea: 0x1418435F0
+      - ea: 0x14184AE80
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140C73730: ctor
+      0x140C73550: ctor
   Client::UI::Agent::AgentDeepDungeonMenu:
     vtbls:
-      - ea: 0x1418418E8
+      - ea: 0x141849180
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140C27C50: ctor
+      0x140C27A70: ctor
   Client::UI::Agent::AgentItemAppraisal:
     vtbls:
-      - ea: 0x141789188
+      - ea: 0x141790A18
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140957290: ctor
+      0x1409570B0: ctor
   Client::UI::Agent::AgentItemInspection:
     vtbls:
-      - ea: 0x141785C58
+      - ea: 0x14178D4E8
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x1408D0200: ctor
+      0x1408D0020: ctor
   Client::UI::Agent::AgentTeleportHousingFriend:
     vtbls:
-      - ea: 0x141789530
+      - ea: 0x141790DC0
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x14095BED0: ctor
+      0x14095BCF0: ctor
   Client::UI::Agent::AgentHousingGuestBook:
     vtbls:
-      - ea: 0x1418D9600
+      - ea: 0x1418E0E80
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x1410F3920: ctor
+      0x1410F3740: ctor
   Client::UI::Agent::AgentAozNoteBook:
     vtbls:
-      - ea: 0x141789638
+      - ea: 0x141790EC8
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x14095E7A0: ctor
+      0x14095E5C0: ctor
   Client::UI::Agent::AgentWorldTravel:
     vtbls:
-      - ea: 0x141842F18
+      - ea: 0x14184A7A8
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140C65540: ctor
+      0x140C65360: ctor
   Client::UI::Agent::AgentDawn:
     vtbls:
-      - ea: 0x141842EA0
+      - ea: 0x14184A730
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140C60E60: ctor
+      0x140C60C80: ctor
   Client::UI::Agent::AgentTargetCircle:
     vtbls:
-      - ea: 0x141786878
+      - ea: 0x14178E108
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140902410: ctor
+      0x140902230: ctor
   Client::UI::Agent::AgentCraftActionSimulator:
     vtbls:
-      - ea: 0x141789938
+      - ea: 0x1417911C8
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140969880: ctor
+      0x1409696A0: ctor
   Client::UI::Agent::AgentTryon::TryonCharaView:
     vtbls:
-      - ea: 0x141783F08
+      - ea: 0x14178B798
         base: Client::UI::Misc::CharaView
     funcs:
-      0x140838410: ctor
+      0x140838230: ctor
   Client::UI::Agent::AgentTryon:
     vtbls:
-      - ea: 0x141783F48
+      - ea: 0x14178B7D8
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140838BC0: ctor
+      0x1408389E0: ctor
   Client::UI::Agent::AgentItemDetailBase:
     vtbls:
-      - ea: 0x141783FC0
+      - ea: 0x14178B850
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x14083B770: ctor
+      0x14083B590: ctor
   Client::UI::Agent::AgentContentsFinderSetting:
     vtbls:
-      - ea: 0x141784568
+      - ea: 0x14178BDF8
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140864FA0: ctor
+      0x140864DC0: ctor
   Client::UI::Agent::AgentContentsFinder:
     vtbls:
-      - ea: 0x141784610
+      - ea: 0x14178BEA0
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140868CC0: ctor
+      0x140868AE0: ctor
   Client::UI::Agent::AgentMap::MapMarkerStructSearchName:
     vtbls:
-      - ea: 0x141784B20
+      - ea: 0x14178C3B0
         base: Client::UI::Agent::AgentMap::MapMarkerStructSearch
     vfuncs:
       1: Evaluate
   Client::UI::Agent::AgentMap:
     vtbls:
-      - ea: 0x141784B30
+      - ea: 0x14178C3C0
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140884060: ctor
-      0x140880990: AddGatheringTempMapMarker
-      0x14087FCD0: OpenMap
-      0x14088B010: OpenMapByMapId
-      0x140880CE0: SetFlagMapMarker # (this, territoryId, mapId, (float)x, (float)y, iconId)
-      0x14088F0C0: CanUseTeleport # static
+      0x140883E80: ctor
+      0x1408807B0: AddGatheringTempMapMarker
+      0x14087FAF0: OpenMap
+      0x14088AE30: OpenMapByMapId
+      0x140880B00: SetFlagMapMarker # (this, territoryId, mapId, (float)x, (float)y, iconId)
+      0x14088EEE0: CanUseTeleport # static
   Client::UI::Agent::AgentRecipeNote:
     vtbls:
-      - ea: 0x141786228
+      - ea: 0x14178DAB8
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x1408EAFA0: ctor
+      0x1408EADC0: ctor
   Client::UI::Agent::AgentTeleport:
     vtbls:
-      - ea: 0x1418CB5B0
+      - ea: 0x1418D2E30
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x14106E240: ctor
+      0x14106E060: ctor
   Client::UI::Agent::AgentRevive:
     vtbls:
-      - ea: 0x141785040
+      - ea: 0x14178C8D0
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x14089F0E0: ctor
+      0x14089EF00: ctor
   Client::UI::Agent::AgentConfigBase:
     vtbls:
       - ea: 0x141732780
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x14023DD30: ctor
+      0x14023DCE0: ctor
   Client::UI::Agent::AgentConfigSystem:
     vtbls:
       - ea: 0x141732858
         base: Client::UI::Agent::AgentConfigBase
     funcs:
-      0x140243C50: ctor
+      0x140243C00: ctor
   Client::UI::Agent::AgentConfigCharacter:
     vtbls:
       - ea: 0x141732938
         base: Client::UI::Agent::AgentConfigBase
     funcs:
-      0x140245240: ctor
+      0x1402451F0: ctor
   Client::UI::Agent::AgentHudLayout:
     vtbls:
-      - ea: 0x141785578
+      - ea: 0x14178CE08
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x1408ABA00: ctor
+      0x1408AB820: ctor
   Client::UI::Agent::AgentItemDetail:
     vtbls:
-      - ea: 0x141785AE8
+      - ea: 0x14178D378
         base: Client::UI::Agent::AgentItemDetailBase
     funcs:
-      0x1408BF850: ctor
-      0x1408C0880: OnItemHovered
+      0x1408BF670: ctor
+      0x1408C06A0: OnItemHovered
   Client::UI::Agent::AgentStatus::StatusCharaView:
     vtbls:
-      - ea: 0x141786500
+      - ea: 0x14178DD90
         base: Client::UI::Misc::CharaView
   Client::UI::Agent::AgentStatus:
     vtbls:
-      - ea: 0x141786538
+      - ea: 0x14178DDC8
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x1408F92A0: ctor
+      0x1408F90C0: ctor
   Client::UI::Agent::AgentMaterialize:
     vtbls:
-      - ea: 0x141786A80
+      - ea: 0x14178E310
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentContentsTimer:
     vtbls:
-     - ea: 0x141786DB8
+     - ea: 0x14178E648
        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentGatheringNote:
     vtbls:
-     - ea: 0x1418CB4F8
+     - ea: 0x1418D2D78
        base: Client::UI::Agent::AgentInterface
   Client::Game::Event::EventHandler:
     vtbls:
-      - ea: 0x141796A20
+      - ea: 0x14179E2B0
   Client::Game::Event::LuaScriptLoader<Client::Game::Event::ModuleBase>:
     vtbls:
-      - ea: 0x141797238
+      - ea: 0x14179EAC8
         base: Client::System::Resource::ResourceEventListener
   Client::Game::Event::ModuleBase:
     vtbls:
-      - ea: 0x141797260
+      - ea: 0x14179EAF0
     vfuncs:
       1: SetupClasses
       4: SetupClasses_2
   Client::Game::Event::LuaScriptLoader<Client::Game::Event::LuaEventHandler>:
     vtbls:
-      - ea: 0x141797298
+      - ea: 0x14179EB28
         base: Client::System::Resource::ResourceEventListener
   Client::Game::Event::LuaEventHandler:
     vtbls:
-      - ea: 0x1417972C0
+      - ea: 0x14179EB50
         base: Client::Game::Event::EventHandler
   Client::Game::Event::EventSceneModuleImplBase:
     vtbls:
-      - ea: 0x141797AE8
+      - ea: 0x14179F378
   Client::Game::Event::EventSceneModuleUsualImpl:
     vtbls:
-      - ea: 0x141798210
+      - ea: 0x14179FAA0
         base: Client::Game::Event::EventSceneModuleImplBase
   Client::Game::Event::Director:
     vtbls:
-      - ea: 0x14179A130
+      - ea: 0x1417A19C0
         base: Client::Game::Event::LuaEventHandler
   Client::Game::Event::EventFramework:
     instances:
-      - ea: 0x141EBDF70
+      - ea: 0x141EC4FA8
         pointer: True
     funcs:
-      0x140A58140: GetSingleton
-      0x140A58430: ctor
-      0x140A58BF0: dtor
-      0x140A60EF0: ProcessDirectorUpdate
-      0x140A64740: GetInstanceContentDirector
+      0x140A57F60: GetSingleton
+      0x140A58250: ctor
+      0x140A58A10: dtor
+      0x140A60D10: ProcessDirectorUpdate
+      0x140A64560: GetInstanceContentDirector
   Client::Game::Event::EventHandlerModule:
     vtbls:
-      - ea: 0x14179C600
+      - ea: 0x1417A3E90
         base: Client::Game::Event::ModuleBase
     funcs:
-      0x140A3AE80: ctor
+      0x140A3ACA0: ctor
   Client::Game::Event::LuaActorModule:
     vtbls:
-      - ea: 0x14179C640
+      - ea: 0x1417A3ED0
         base: Client::Game::Event::ModuleBase
     funcs:
-      0x140A3ED60: ctor
+      0x140A3EB80: ctor
   Client::Game::Event::DirectorModule:
     vtbls:
-      - ea: 0x14179C678
+      - ea: 0x1417A3F08
         base: Client::Game::Event::ModuleBase
     funcs:
-      0x140A3F610: ctor
+      0x140A3F430: ctor
   Client::Game::Event::LeveDirector:
     vtbls:
-      - ea: 0x14179E7E8
+      - ea: 0x1417A6078
         base: Client::Game::Event::Director
   Client::Game::Event::GatheringLeveDirector:
     vtbls:
-      - ea: 0x1417ADD90
+      - ea: 0x1417B5620
         base: Client::Game::Event::LeveDirector
   Client::Game::Event::BattleLeveDirector:
     vtbls:
-      - ea: 0x14179F0D8
+      - ea: 0x1417A6968
         base: Client::Game::Event::LeveDirector
   Client::Game::Event::CompanyLeveDirector:
     vtbls:
-      - ea: 0x1417B0758
+      - ea: 0x1417B7FE8
         base: Client::Game::Event::LeveDirector
   Client::Game::Gimmick::GimmickBill:
     vtbls:
-      - ea: 0x1417AD518
+      - ea: 0x1417B4DA8
         base: Client::Game::Gimmick::GimmickEventHandler
   Client::Game::InstanceContent::ContentDirector:
     vtbls:
-      - ea: 0x14179AA20
+      - ea: 0x1417A22B0
         base: Client::Game::Event::Director
   Client::Game::InstanceContent::InstanceContentDirector:
     vtbls:
-      - ea: 0x1417CC2A8
+      - ea: 0x1417D3B38
         base: Client::Game::InstanceContent::ContentDirector
   Client::Game::InstanceContent::PublicContentDirector:
     vtbls:
-      - ea: 0x14192F4D8
+      - ea: 0x141936D58
         base: Client::Game::InstanceContent::ContentDirector
   Client::UI::PopupMenu:
     vtbls:
-      - ea: 0x141847868
+      - ea: 0x14184F0F8
         base: Component::GUI::AtkEventListener
     vfuncs:
       3: OnItemSelected
   Client::UI::AddonFadeMiddleBack:
     vtbls:
-      - ea: 0x141847F58
+      - ea: 0x14184F7E8
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonFilter:
     vtbls:
-      - ea: 0x141848600
+      - ea: 0x14184FE90
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonOperationGuide:
     vtbls:
-      - ea: 0x141848840
+      - ea: 0x1418500D0
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonNowLoading:
     vtbls:
-      - ea: 0x141848A80
+      - ea: 0x141850310
         base: Component::GUI::AtkUnitBase
     funcs:
-      0x140CBC080: ctor
+      0x140CBBEA0: ctor
   Client::UI::AddonSelectOk:
     vtbls:
-      - ea: 0x141849110
+      - ea: 0x1418509A0
         base: Component::GUI::AtkUnitBase      
   Client::UI::AddonContextMenu:
     vtbls:
-      - ea: 0x141849360
+      - ea: 0x141850BF0
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonContextMenuTitle:
     vtbls:
-      - ea: 0x141849590
+      - ea: 0x141850E20
         base: Client::UI::AddonContextMenu
   Client::UI::AddonSelectString::PopupMenuDerive:
     vtbls:
-      - ea: 0x1418497C0
+      - ea: 0x141851050
         base: Client::UI::PopupMenu
   Client::UI::AddonSelectString:
     vtbls:
-      - ea: 0x1418497E8
+      - ea: 0x141851078
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonSelectIconString::PopupMenuDerive:
     vtbls:
-      - ea: 0x141849E60
+      - ea: 0x1418516F0
         base: Client::UI::PopupMenu
   Client::UI::AddonSelectIconString:
     vtbls:
-      - ea: 0x141849E88
+      - ea: 0x141851718
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonTooltip:
     vtbls:
-      - ea: 0x14184A0B0
+      - ea: 0x141851940
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonContextIconMenu:
     vtbls:
-      - ea: 0x14184A968
+      - ea: 0x1418521F8
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonSelectYesno:
     vtbls:
-      - ea: 0x14184B680
+      - ea: 0x141852F10
         base: Component::GUI::AtkUnitBase
     funcs:
-      0x140CC7AA0: ctor
+      0x140CC78C0: ctor
   Client::UI::AddonSocial:
     vtbls:
-      - ea: 0x141857D10
+      - ea: 0x14185F5A0
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonRequest:
     vtbls:
-      - ea: 0x14184E200
+      - ea: 0x141855A90
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonContactList:
     vtbls:
-      - ea: 0x1418529A0
+      - ea: 0x14185A230
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonAirShipExploration:
     vtbls:
-      - ea: 0x141856F98
+      - ea: 0x14185E828
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonItemSearchResult:
     vtbls:
-      - ea: 0x14184F118
+      - ea: 0x1418569A8
         base: Component::GUI::AtkUnitBase
     funcs:
-      0x140CECEE0: ctor
-      0x140CEDBE0: UpdateResult
+      0x140CECD00: ctor
+      0x140CEDA00: UpdateResult
   Client::UI::AddonConfigSystem:
     vtbls:
-      - ea: 0x14185B8C8
+      - ea: 0x141863158
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonCharaSelectWorldServer:
     vtbls:
-      - ea: 0x141861A38
+      - ea: 0x1418692C8
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonJournalDetail:
     vtbls:
-      - ea: 0x1418745E0
+      - ea: 0x14187BE60
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonJournalResult:
     vtbls:
-      - ea: 0x141874E80
+      - ea: 0x14187C700
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonGuildLeve:
     vtbls:
-      - ea: 0x1418750C8
+      - ea: 0x14187C948
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonRetainerTaskList:
     vtbls:
-      - ea: 0x141879820
+      - ea: 0x1418810A0
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonRetainerTaskAsk:
     vtbls:
-      - ea: 0x141879A48
+      - ea: 0x1418812C8
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonRetainerTaskResult:
     vtbls:
-      - ea: 0x141879C70
+      - ea: 0x1418814F0
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonRetainerSellList:
     vtbls:
-      - ea: 0x141878438
+      - ea: 0x14187FCB8
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonRetainerSell:
     vtbls:
-      - ea: 0x141878210
+      - ea: 0x14187FA90
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonGatheringNoteBook:
     vtbls:
-      - ea: 0x14187A570
+      - ea: 0x141881DF0
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonRecipeNote:
     vtbls:
-      - ea: 0x14187A7B8
+      - ea: 0x141882038
         base: Component::GUI::AtkUnitBase
     funcs:
-      0x140E0C1A0: ReceiveEvent_ClickSynthesizeButton
-      0x140E0C1F0: ReceiveEvent_ClickQuickSynthesisButton
-      0x140E0C240: ReceiveEvent_ClickTrialSynthesisButton
+      0x140E0BFC0: ReceiveEvent_ClickSynthesizeButton
+      0x140E0C010: ReceiveEvent_ClickQuickSynthesisButton
+      0x140E0C060: ReceiveEvent_ClickTrialSynthesisButton
   Client::UI::Atk2DAreaMap:
     vtbls:
-      - ea: 0x14187B080
+      - ea: 0x141882900
         base: Client::UI::Atk2DMap
   Client::UI::AddonRelicNoteBook:
     vtbls:
-      - ea: 0x14187B988
+      - ea: 0x141883208
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonAOZNotebook:
     vtbls:
-      - ea: 0x14187CA88
+      - ea: 0x141884308
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonAOZNotebookPresetList:
     vtbls:
-      - ea: 0x14187CD70
+      - ea: 0x1418845F0
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonRepair:
     vtbls:
-      - ea: 0x1418903E0
+      - ea: 0x141897C60
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonContentsFinder:
     vtbls:
-      - ea: 0x141893608
+      - ea: 0x14189AE88
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonContentsFinderSetting:
     vtbls:
-      - ea: 0x14187DB38
+      - ea: 0x1418853B8
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonContentsFinderConfirm:
     vtbls:
-      - ea: 0x14187DF88
+      - ea: 0x141885808
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonRaidFinder:
     vtbls:
-      - ea: 0x14187E610
+      - ea: 0x141885E90
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonMaterializeDialog:
     vtbls:
-      - ea: 0x14187ECB8
+      - ea: 0x141886538
         base: Component::GUI::AtkUnitBase
     funcs:
-      0x140E3BDD0: ctor
+      0x140E3BBF0: ctor
   Client::UI::AddonSynthesis:
     vtbls:
-      - ea: 0x14188F4C8
+      - ea: 0x141896D48
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonMateriaAttach:
     vtbls:
-      - ea: 0x141891580
+      - ea: 0x141898E00
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonMateriaDialogBase:
     vtbls:
-      - ea: 0x14187F108
+      - ea: 0x141886988
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonMateriaAttachDialog:
     vtbls:
-      - ea: 0x14187F330
+      - ea: 0x141886BB0
         base: Client::UI::AddonMateriaDialogBase
   Client::UI::AddonMateriaRetrieveDialog:
     vtbls:
-      - ea: 0x14187F560
+      - ea: 0x141886DE0
         base: Client::UI::AddonMateriaDialogBase
   Client::UI::AddonMiragePrismMiragePlate:
     vtbls:
-      - ea: 0x1418940F0
+      - ea: 0x14189B970
         base: Component::GUI::AtkUnitBase
     funcs:
-      0x140EF5900: ctor
+      0x140EF5720: ctor
   Client::UI::AddonGrandCompanySupplyReward:
     vtbls:
-      - ea: 0x1418992E0
+      - ea: 0x1418A0B60
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonTalk:
     vtbls:
-      - ea: 0x141886568
+      - ea: 0x14188DDE8
         base: Component::GUI::AtkUnitBase
     funcs:
-      0x140E73AB0: ctor
+      0x140E738D0: ctor
   Client::UI::AddonChatLogPanel:
     vtbls:
-      - ea: 0x141887258
+      - ea: 0x14188EAD8
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonChatLog:
     vtbls:
-      - ea: 0x141887480
+      - ea: 0x14188ED00
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonActionDetail:
     vtbls:
-      - ea: 0x141887DC0
+      - ea: 0x14188F640
         base: Component::GUI::AtkUnitBase
     funcs:
-      0x140E87C20: ctor
-      0x140E883B0: GenerateTooltip
+      0x140E87A40: ctor
+      0x140E881D0: GenerateTooltip
   Client::UI::AddonItemDetail:
     vtbls:
-      - ea: 0x141888258
+      - ea: 0x14188FAD8
         base: Component::GUI::AtkUnitBase
     funcs:
-      0x140E88A00: ctor
-      0x140E89F20: GenerateTooltip
+      0x140E88820: ctor
+      0x140E89D40: GenerateTooltip
   Client::UI::AddonCharacterInspect:
     vtbls:
-      - ea: 0x141889438
+      - ea: 0x141890CB8
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonSalvageDialog:
     vtbls:
-      - ea: 0x14188CD18
+      - ea: 0x141894598
         base: Component::GUI::AtkUnitBase
     funcs:
-      0x140EAC0F0: ctor
+      0x140EABF10: ctor
   Client::UI::AddonAreaMap:
     vtbls:
-      - ea: 0x14188E6F8
+      - ea: 0x141895F78
         base: Component::GUI::AtkUnitBase
     funcs:
-      0x140EB61C0: ctor
+      0x140EB5FE0: ctor
   Client::UI::AddonScreenText:
     vtbls:
-      - ea: 0x1418B48C0
+      - ea: 0x1418BC140
         base: Component::GUI::AtkUnitBase
     funcs:
-      0x140FD6DE0: ctor
+      0x140FD6C00: ctor
   Client::UI::AddonPopUpText:
     vtbls:
-      - ea: 0x14188ED90
+      - ea: 0x141896610
         base: Component::GUI::AtkUnitBase
     funcs:
-      0x140EC03F0: ctor
+      0x140EC0210: ctor
   Client::UI::AddonFlyText:
     vtbls:
-      - ea: 0x14188EFB8
+      - ea: 0x141896838
         base: Component::GUI::AtkUnitBase
     funcs:
-      0x140EC27F0: ctor
+      0x140EC2610: ctor
   Client::UI::AddonMiniTalk:
     vtbls:
-      - ea: 0x14188F1E0
+      - ea: 0x141896A60
         base: Component::GUI::AtkUnitBase
     funcs:
-      0x140EC5220: ctor
+      0x140EC5040: ctor
   Client::UI::AddonGathering:
     vtbls:
-      - ea: 0x14188FB40
+      - ea: 0x1418973C0
         base: Component::GUI::AtkUnitBase
     funcs:
-      0x140EC8520: ctor
-      0x140F88E50: ReceiveEvent_ToggleQuickGathering
-      0x140EC8D20: ReceiveEvent_Gather
+      0x140EC8340: ctor
+      0x140F88C70: ReceiveEvent_ToggleQuickGathering
+      0x140EC8B40: ReceiveEvent_Gather
   Client::UI::AddonGatheringMasterpiece:
     vtbls:
-      - ea: 0x14188FD68
+      - ea: 0x1418975E8
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonNamePlate::BakePlateRenderer:
     vtbls:
-      - ea: 0x141890608
+      - ea: 0x141897E88
         base: Component::GUI::AtkTextNodeRenderer
   Client::UI::AddonNamePlate:
     vtbls:
-      - ea: 0x141890628
+      - ea: 0x141897EA8
         base: Component::GUI::AtkUnitBase
     funcs:
-      0x140ED1600: ctor
-      0x140ED18E0: SetCommonNamePlate  # x, y, scale, etc
-      0x140ED1B10: SetPlayerNamePlate # player specific nodes
-      0x140ED44E0: ToggleTextRenderMode
+      0x140ED1420: ctor
+      0x140ED1700: SetCommonNamePlate  # x, y, scale, etc
+      0x140ED1930: SetPlayerNamePlate # player specific nodes
+      0x140ED4300: ToggleTextRenderMode
   Client::UI::AddonTeleport:
     vtbls:
-      - ea: 0x141894E38
+      - ea: 0x14189C6B8
         base: Component::GUI::AtkUnitBase
     funcs:
-      0x140EFA100: ctor
-      0x140EFAD70: ChangeTab
+      0x140EF9F20: ctor
+      0x140EFAB90: ChangeTab
   Client::UI::AddonDeepDungeonStatus:
     vtbls:
-      - ea: 0x14189F9B8
+      - ea: 0x1418A7238
         base: Component::GUI::AtkUnitBase
     funcs:
-      0x140F41DE0: ctor
+      0x140F41C00: ctor
   Client::UI::AddonItemInspectionList:
     vtbls:
-      - ea: 0x1418A2370
+      - ea: 0x1418A9BF0
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonItemInspectionResult:
     vtbls:
-      - ea: 0x1418A27C0
+      - ea: 0x1418AA040
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonWeeklyBingo::DutySlot:
     vtbls:
-      - ea: 0x1418AA730
+      - ea: 0x1418B1FB0
         base: Component::GUI::AtkEventListener
   Client::UI::AddonWeeklyBingo::DutySlotList:
     vtbls:
-      - ea: 0x1418AA748
+      - ea: 0x1418B1FC8
   Client::UI::AddonWeeklyBingo::StringThing:
     vtbls:
-      - ea: 0x1418AA750
+      - ea: 0x1418B1FD0
   Client::UI::AddonWeeklyBingo::StickerSlot:
     vtbls:
-      - ea: 0x1418AA758
+      - ea: 0x1418B1FD8
   Client::UI::AddonWeeklyBingo::StickerSlotList:
     vtbls:
-      - ea: 0x1418AA760
+      - ea: 0x1418B1FE0
   Client::UI::AddonWeeklyBingo::RewardCategory:
     vtbls:
-      - ea: 0x1418AA768
+      - ea: 0x1418B1FE8
         base: Component::GUI::AtkEventListener
   Client::UI::AddonWeeklyBingo::RewardGuaranteed:
     vtbls:
-      - ea: 0x1418AA780
+      - ea: 0x1418B2000
         base: Component::GUI::AtkEventListener
   Client::UI::AddonWeeklyBingo::RewardCategoryList:
     vtbls:
-      - ea: 0x1418AA798
+      - ea: 0x1418B2018
   Client::UI::AddonWeeklyBingo:
     vtbls:
-      - ea: 0x1418AA7A0
+      - ea: 0x1418B2020
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonWeeklyPuzzle:
     vtbls:
-      - ea: 0x1418AAE18
+      - ea: 0x1418B2698
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonMYCItemBox:
     vtbls:
-      - ea: 0x1418AC458
+      - ea: 0x1418B3CD8
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonTargetInfoBase:
     vtbls:
-      - ea: 0x1418B0350
+      - ea: 0x1418B7BD0
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonTargetInfo:
     vtbls:
-      - ea: 0x1418B0578
+      - ea: 0x1418B7DF8
         base: Client::UI::AddonTargetInfoBase
   Client::UI::AddonTargetInfoUnknown1:
     vtbls:
-      - ea: 0x1418B07A0
+      - ea: 0x1418B8020
         base: Client::UI::AddonTargetInfoBase
   Client::UI::AddonTargetInfoUnknown2:
     vtbls:
-      - ea: 0x1418B09C8
+      - ea: 0x1418B8248
         base: Client::UI::AddonTargetInfoBase
   Client::UI::AddonTargetInfoMainTarget:
     vtbls:
-      - ea: 0x1418B0BF0
+      - ea: 0x1418B8470
         base: Client::UI::AddonTargetInfoBase
   Client::UI::AddonTargetCursor:
     vtbls:
-      - ea: 0x1418B0E18
+      - ea: 0x1418B8698
         base: Component::GUI::AtkUnitBase
     funcs:
-      0x140FC9FA0: ctor
+      0x140FC9DC0: ctor
   Client::UI::AddonBattleTalk:
     vtbls:
-      - ea: 0x1418B1268
+      - ea: 0x1418B8AE8
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonScreenInfoFrontBack:
     vtbls:
-      - ea: 0x1418B1490
+      - ea: 0x1418B8D10
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonMainCommand:
     vtbls:
-      - ea: 0x1418B9CD0
+      - ea: 0x1418C1550
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonParameterWidget:
     vtbls:
-      - ea: 0x1418B9F18
+      - ea: 0x1418C1798
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonExp:
     vtbls:
-      - ea: 0x1418BA140
+      - ea: 0x1418C19C0
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonEnemyList:
     vtbls:
-      - ea: 0x1418BA368
+      - ea: 0x1418C1BE8
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonBagWidget:
     vtbls:
-      - ea: 0x1418BAF38
+      - ea: 0x1418C27B8
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonMoney:
     vtbls:
-      - ea: 0x1418BB160
+      - ea: 0x1418C29E0
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonNotification:
     vtbls:
-      - ea: 0x1418BB388
+      - ea: 0x1418C2C08
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonShopCardDialog:
     vtbls:
-      - ea: 0x1418CEE50
+      - ea: 0x1418D66D0
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonDTR:
     vtbls:
-      - ea: 0x1418BB930
+      - ea: 0x1418C31B0
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonCastBar:
     vtbls:
-      - ea: 0x1418BBB58
+      - ea: 0x1418C33D8
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonNaviMap:
     vtbls:
-      - ea: 0x1418BBDB0
+      - ea: 0x1418C3630
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonActionBarBase:
     vtbls:
-      - ea: 0x1418BBFE0
+      - ea: 0x1418C3860
         base: Component::GUI::AtkUnitBase
     vfuncs:
       75: PulseActionBarSlot
   Client::UI::AddonActionBarX:
     vtbls:
-      - ea: 0x1418BC290
+      - ea: 0x1418C3B10
         base: Client::UI::AddonActionBarBase
   Client::UI::AddonActionBar:
     vtbls:
-      - ea: 0x1418BC5A8
+      - ea: 0x1418C3E28
         base: Client::UI::AddonActionBarX
   Client::UI::AddonPartyList:
     vtbls:
-      - ea: 0x1418BCB70
+      - ea: 0x1418C43F0
         base: Component::GUI::AtkUnitBase
     funcs:
-      0x140FF5590: ResizeForPartySize
+      0x140FF53B0: ResizeForPartySize
   Client::UI::AddonAllianceListX:
     vtbls:
-      - ea: 0x1418BCDA0
+      - ea: 0x1418C4620
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonToDoList:
     vtbls:
-      - ea: 0x1418BD748
+      - ea: 0x1418C4FC8
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonActionCross:
     vtbls:
-      - ea: 0x1418BDFA0
+      - ea: 0x1418C5820
         base: Client::UI::AddonActionBarBase
   Client::UI::AddonActionContents:
     vtbls:
-      - ea: 0x1418BE258
+      - ea: 0x1418C5AD8
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonActionDoubleCrossBase:
     vtbls:
-      - ea: 0x1418BE490
+      - ea: 0x1418C5D10
         base: Client::UI::AddonActionBarX
   Client::UI::AddonActionDoubleCrossL:
     vtbls:
-      - ea: 0x1418BE780
+      - ea: 0x1418C6000
         base: Client::UI::AddonActionDoubleCrossBase
   Client::UI::AddonActionDoubleCrossR:
     vtbls:
-      - ea: 0x1418BEA80
+      - ea: 0x1418C6300
         base: Client::UI::AddonActionDoubleCrossBase
   Client::UI::AddonFocusTargetInfo:
     vtbls:
-      - ea: 0x1418BED70
+      - ea: 0x1418C65F0
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonLimitBreak:
     vtbls:
-      - ea: 0x1418BEF98
+      - ea: 0x1418C6818
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonMainCross:
     vtbls:
-      - ea: 0x1418BF1F8
+      - ea: 0x1418C6A78
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonHudLayoutWindow:
     vtbls:
-      - ea: 0x1418C5010
+      - ea: 0x1418CC890
         base: Component::GUI::AtkUnitBase
     funcs:
-      0x1410303D0: ctor
+      0x1410301F0: ctor
   Client::UI::AddonHudLayoutScreen:
     vtbls:
-      - ea: 0x1418C5238
+      - ea: 0x1418CCAB8
         base: Component::GUI::AtkUnitBase
     funcs:
-      0x141031660: ctor
-      0x1410362D0: AddonOverlayMouseMovedEvent
-      0x141036500: AddonOverlayMouseClickEvent
-      0x141036900: AddonOverlayMouseReleaseEvent
-      0x1410385B0: _SetAddonScale
+      0x141031480: ctor
+      0x1410360F0: AddonOverlayMouseMovedEvent
+      0x141036320: AddonOverlayMouseClickEvent
+      0x141036720: AddonOverlayMouseReleaseEvent
+      0x1410383D0: _SetAddonScale
   Client::Game::Fate::FateDirector:
     vtbls:
-      - ea: 0x1418DA648
+      - ea: 0x1418E1EC8
         base: Client::Game::Event::Director
   Client::Game::Fate::FateContext:
     vtbls:
-      - ea: 0x1418DAF48
+      - ea: 0x1418E27C8
     vfuncs:
       0: dtor
   Client::UI::AddonLotteryDaily:
     vtbls:
-      - ea: 0x1418D6A30
+      - ea: 0x1418DE2B0
         base: Component::GUI::AtkUnitBase
   Client::Game::Object::EventObject:
     vtbls:
-      - ea: 0x1418D9B10
+      - ea: 0x1418E1390
         base: Client::Game::Object::GameObject
   Client::Game::Object::Treasure:
     vtbls:
-      - ea: 0x1418D9D80
+      - ea: 0x1418E1600
         base: Client::Game::Object::GameObject
   Client::Game::Object::GatheringPointObject::GatheringPointObjectImplBase:
     vtbls:
-      - ea: 0x1418D9FF0
+      - ea: 0x1418E1870
   Client::Game::Object::GatheringPointObject::GatheringPointObjectImpl:
     vtbls:
-      - ea: 0x1418DA058
+      - ea: 0x1418E18D8
         base: Client::Game::Object::GatheringPointObject::GatheringPointObjectImplBase
   Client::Game::Object::GatheringPointObject:
     vtbls:
-      - ea: 0x1418DA0C0
+      - ea: 0x1418E1940
         base: Client::Game::Object::GameObject
   Client::Game::Object::AreaObject:
     vtbls:
-      - ea: 0x1418DA330
+      - ea: 0x1418E1BB0
         base: Client::Game::Object::GameObject
   Client::Graphics::JobSystem<Client::Graphics::Culling::CullingManager,Client::Graphics::Culling::CullingJobOpt>:
     vtbls:
-      - ea: 0x1418DB098
+      - ea: 0x1418E2918
   Client::Graphics::JobSystem<Client::Graphics::Culling::CullingManager,Client::Graphics::Culling::CallbackJobOpt>:
     vtbls:
-      - ea: 0x1418DB0A0
+      - ea: 0x1418E2920
   Client::Graphics::JobSystem<Client::Graphics::Culling::CullingManager,Client::Graphics::Culling::RenderCallbackJob>:
     vtbls:
-      - ea: 0x1418DB0A8
+      - ea: 0x1418E2928
   Client::Graphics::Culling::CullingManager:
     instances:
-      - ea: 0x141E580F8
+      - ea: 0x141E5F0F8
     vtbls:
-      - ea: 0x1418DB0B0
+      - ea: 0x1418E2930
         base: Client::Graphics::Singleton
   Client::Graphics::Kernel::CVector<Client::Graphics::Kernel::VertexShader*>:
     vtbls:
-      - ea: 0x1418DB658
+      - ea: 0x1418E2ED8
   Client::Graphics::Kernel::CVector<Client::Graphics::Kernel::PixelShader*>:
     vtbls:
-      - ea: 0x1418DB660
+      - ea: 0x1418E2EE0
   Client::Graphics::Kernel::CVector<Client::Graphics::Kernel::ShaderNode*>:
     vtbls:
-      - ea: 0x1418DB668
+      - ea: 0x1418E2EE8
   Client::Graphics::Kernel::CBalanceSet<Client::Graphics::Kernel::ShaderPackage::SItem>:
     vtbls:
-      - ea: 0x1418DB670
+      - ea: 0x1418E2EF0
   Client::Graphics::Kernel::ShaderPackage:
     vtbls:
-      - ea: 0x1418DB678
+      - ea: 0x1418E2EF8
         base: Client::Graphics::ReferencedClassBase
     funcs:
-      0x141125A10: CreateShaderPackage  # static function
-      0x1411261B0: ctor
-      0x141127590: VectorResize_PixelShader # these 3 functions are identical, just template-generated functions from std::vectors
-      0x141127680: VectorResize_ShaderNode
-      0x141127770: VectorResize_VertexShader
+      0x141125830: CreateShaderPackage  # static function
+      0x141125FD0: ctor
+      0x1411273B0: VectorResize_PixelShader # these 3 functions are identical, just template-generated functions from std::vectors
+      0x1411274A0: VectorResize_ShaderNode
+      0x141127590: VectorResize_VertexShader
   Client::Game::Character::Companion:
     vtbls:
-      - ea: 0x1418DE7F0
+      - ea: 0x1418E6070
         base: Client::Game::Character::Character
     funcs:
-      0x141141040: ctor
+      0x141140E50: ctor
   Client::Game::Character::Ornament:
     vtbls:
-      - ea: 0x1418DE4E0
+      - ea: 0x1418E5D60
         base: Client::Game::Character::Character
     funcs:
-      0x141140C00: ctor
+      0x141140A10: ctor
   Client::Game::Character::CutsceneCharacter:
     vtbls:
-      - ea: 0x141978330
+      - ea: 0x14197FBB0
         base: Client::Game::Character::Character
     funcs:
-      0x14133EED0: ctor
+      0x14133EDF0: ctor
   Client::Game::CameraBase:
     vtbls:
-      - ea: 0x1418DFF28
+      - ea: 0x1418E77A8
   Client::Game::Camera:
     vtbls:
-      - ea: 0x1418DFF90
+      - ea: 0x1418E7810
         base: Client::Game::CameraBase
     funcs:
-      0x1411824B0: UpdateRotation
-      0x141184FB0: ctor
+      0x1411822C0: UpdateRotation
+      0x141184DC0: ctor
   Client::Game::LowCutCamera:
     vtbls:
-      - ea: 0x1418E0098
+      - ea: 0x1418E7918
         base: Client::Game::CameraBase
     funcs:
-      0x1411881C0: ctor
+      0x141187FD0: ctor
   Client::Game::Camera2:
     vtbls:
-      - ea: 0x1418E0208
+      - ea: 0x1418E7A88
         base: Client::Game::Camera
     funcs:
-      0x14118E1A0: ctor
+      0x14118DFB0: ctor
   Client::Game::Camera3:
     vtbls:
-      - ea: 0x1418E0100
+      - ea: 0x1418E7980
         base: Client::Game::Camera
     funcs:
-      0x14118BE90: ctor
+      0x14118BCA0: ctor
   Client::Graphics::Culling::OcclusionCullingManager:
     instances:
-      - ea: 0x141E6F420
+      - ea: 0x141E76420
     vtbls:
-      - ea: 0x1418E1AF0
+      - ea: 0x1418E9370
         base: Client::Graphics::Singleton
     funcs:
-      0x1411A16E0: ctor
-      0x1411A17C0: Initialize
+      0x1411A14F0: ctor
+      0x1411A15D0: Initialize
   Client::Graphics::JobSystem<Client::Graphics::Streaming::StreamingManager>:
     vtbls:
-      - ea: 0x1418E1B00
+      - ea: 0x1418E9380
         base: Client::Graphics::Singleton
   Client::Graphics::Streaming::StreamingManager:
     instances:
-      - ea: 0x141E564B8
+      - ea: 0x141E5D4B8
     vtbls:
-      - ea: 0x1418E1B08
+      - ea: 0x1418E9388
         base: Client::Graphics::Singleton
   Client::Graphics::JobSystem<Client::Graphics::Physics::BonePhysicsUpdater,Client::Graphics::Physics::BonePhysicsUpdater::CollisionObjectJob>:
     vtbls:
-      - ea: 0x1418E1B28
+      - ea: 0x1418E93A8
   Client::Graphics::JobSystem<Client::Graphics::Physics::BonePhysicsUpdater,Client::Graphics::Physics::BonePhysicsUpdater::BoneSimulatorJob>:
     vtbls:
-      - ea: 0x1418E1B30
+      - ea: 0x1418E93B0
   Client::Graphics::JobSystem<Client::Graphics::Physics::BonePhysicsUpdater,Client::Graphics::Physics::BonePhysicsUpdater::TransformUpdaterJob>:
     vtbls:
-      - ea: 0x1418E1B38
+      - ea: 0x1418E93B8
   Client::Graphics::Physics::BonePhysicsUpdater:
     instances:
-      - ea: 0x141E6F470
+      - ea: 0x141E76470
     vtbls:
-      - ea: 0x1418E1B40
+      - ea: 0x1418E93C0
         base: Client::Graphics::Singleton
     funcs:
-      0x1411A3FD0: ctor
-      0x1411A40F0: Initialize
-      0x1411A4470: Update
+      0x1411A3DE0: ctor
+      0x1411A3F00: Initialize
+      0x1411A4280: Update
   Client::Graphics::Physics::BonePhysicsModule:
     vtbls:
-      - ea: 0x1418E40E8
+      - ea: 0x1418EB968
     vfuncs:
       0: dtor
     funcs:
-      0x1411B4120: ctor
-      0x1411B42A0: Initialize
+      0x1411B3F30: ctor
+      0x1411B40B0: Initialize
   Client::System::Scheduler::Base::SchedulerState:
     vtbls:
-      - ea: 0x1418E7EC0
+      - ea: 0x1418EF740
   Client::Graphics::Physics::BoneSimulator:
     vtbls:
-      - ea: 0x1418E8978
+      - ea: 0x1418F01F8
     funcs:
-      0x1411D4E20: ctor
-      0x1411D5290: Reset
-      0x1411D5310: Update
-      0x1411D5CC0: UpdateWithoutIntegration
+      0x1411D4C30: ctor
+      0x1411D50A0: Reset
+      0x1411D5120: Update
+      0x1411D5AD0: UpdateWithoutIntegration
   Client::Game::Object::Aetheryte:
     vtbls:
-      - ea: 0x1418E92D0
+      - ea: 0x1418F0B50
         base: Client::Game::Object::GameObject
     funcs:
-      0x1411F98B0: Create
+      0x1411F96C0: Create
   Component::Log::LogModuleInterface:
     vtbls:
-      - ea: 0x1418E9C00
+      - ea: 0x1418F1480
   Component::Log::LogModule:
     vtbls:
-      - ea: 0x1418E9C50
+      - ea: 0x1418F14D0
         base: Component::Log::LogModuleInterface
     funcs:
-      0x141216910: ctor
+      0x141216720: ctor
   Client::Game::Object::HousingObject:
     vtbls:
-      - ea: 0x14192DC30
+      - ea: 0x1419354B0
         base: Client::Game::Object::GameObject
   Client::Game::Gimmick::GimmickEventHandler:
     vtbls:
-      - ea: 0x14193E0D0
+      - ea: 0x141945950
         base: Client::Game::Event::LuaEventHandler
   Client::Game::Gimmick::Gimmick_Unk1:
     vtbls:
-      - ea: 0x14193E948
+      - ea: 0x1419461C8
         base: Client::Game::Gimmick::GimmickEventHandler
   Client::Game::Gimmick::GimmickRect:
     vtbls:
-      - ea: 0x14193F1C0
+      - ea: 0x141946A40
         base: Client::Game::Gimmick::GimmickEventHandler
   Client::Game::Object::HousingCombinedObject:
     vtbls:
-      - ea: 0x141942EF0
+      - ea: 0x14194A770
         base: Client::Game::Object::HousingObject
   Client::System::Scheduler::Clip::BaseClip:
     vtbls:
-      - ea: 0x14194F2D0
+      - ea: 0x141956B50
         base: Client::System::Scheduler::Base::SchedulerState
   Client::System::Scheduler::Clip::HavokAnimationClip:
     vtbls:
-      - ea: 0x1419504E0
+      - ea: 0x141957D60
         base: Client::System::Scheduler::Clip::BaseClip
   Client::System::Scheduler::Base::SceneConnectionBlock:
     vtbls:
-      - ea: 0x14195B918
+      - ea: 0x141963198
         base: Client::System::Scheduler::Base::SchedulerState
   SQEX::CDev::Engine::Sd::Driver::IEffect:
     vtbls:
-      - ea: 0x141A1C640
+      - ea: 0x141A23EC0
         base: SQEX::CDev::Engine::Sd::SdMemoryAllocator
   SQEX::CDev::Engine::Sd::Driver::FilterBase:
     vtbls:
-      - ea: 0x141A1C670
+      - ea: 0x141A23EF0
         base: SQEX::CDev::Engine::Sd::Driver::IEffect
   SQEX::CDev::Engine::Sd::Driver::DynamicValue:
     vtbls:
-      - ea: 0x141A1A538
+      - ea: 0x141A21DB8
         base: SQEX::CDev::Engine::Sd::SdMemoryAllocator
   SQEX::CDev::Engine::Sd::Driver::ISound:
     vtbls:
-      - ea: 0x141A1A570
+      - ea: 0x141A21DF0
   SQEX::CDev::Engine::Sd::Driver::RootSound:
     vtbls:
-      - ea: 0x141A1A930
+      - ea: 0x141A221B0
         base: SQEX::CDev::Engine::Sd::Driver::ISound
   SQEX::CDev::Engine::Sd::Driver::StreamSoundEx:
     vtbls:
-      - ea: 0x141A1B4F0
+      - ea: 0x141A22D70
         base: SQEX::CDev::Engine::Sd::Driver::RootSound
   SQEX::CDev::Engine::Sd::Driver::AtomosgearSound:
     vtbls:
-      - ea: 0x141A1B8D8
+      - ea: 0x141A23158
         base: SQEX::CDev::Engine::Sd::Driver::RootSound
   SQEX::CDev::Engine::Sd::Driver::Surround4chSound:
     vtbls:
-      - ea: 0x141A1C0A8
+      - ea: 0x141A23928
         base: SQEX::CDev::Engine::Sd::Driver::RootSound
   SQEX::CDev::Engine::Sd::Driver::ISoundDriver:
     vtbls:
-      - ea: 0x141A70980
+      - ea: 0x141A781C0
         base: SQEX::CDev::Engine::Sd::SdMemoryAllocator
   SQEX::CDev::Engine::Sd::Driver::SoundDriver:
     vtbls:
-      - ea: 0x141A70BA0
+      - ea: 0x141A783E0
         base: SQEX::CDev::Engine::Sd::Driver::ISoundDriver
   SQEX::CDev::Engine::Sd::Driver::ToolBankController:
     vtbls:
-      - ea: 0x141A70DC0
+      - ea: 0x141A78600
         base: SQEX::CDev::Engine::Sd::Driver::BankController
   Client::System::Memory::IMemorySpace:
     instances:
-      - ea: 0x141E55CB0
+      - ea: 0x141E5CCB0
         name: DefaultSpace
-      - ea: 0x141E55CB8
+      - ea: 0x141E5CCB8
         name: ApricotSpace
-      - ea: 0x141E55CC0
+      - ea: 0x141E5CCC0
         name: AnimationSpace
-      - ea: 0x141E55CC8
+      - ea: 0x141E5CCC8
         name: UISpace
-      - ea: 0x141E55CD0
+      - ea: 0x141E5CCD0
         name: FileSpace
-      - ea: 0x141E55CD8
+      - ea: 0x141E5CCD8
         name: SoundSpace
     vtbls:
       - ea: 0x141702DA0
@@ -4698,9 +4698,9 @@ classes:
         base: Client::System::Memory::IMemorySpace
   Client::Game::ControlSystem::CameraManager:
     instances:
-      - ea: 0x141E78880
+      - ea: 0x141E7F880
     funcs:
-      0x14118C940: ctor
+      0x14118C750: ctor
   Vector3:
     funcs:
-      0x14019A760: Normalize
+      0x14019A670: Normalize
