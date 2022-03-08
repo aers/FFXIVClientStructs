@@ -17,8 +17,8 @@ globals:
   0x141EA2B08: g_CharacterManager_CompanionMemoryPtr
   0x141EA2B38: g_GameObjectManager_ObjectList
   0x141EA3878: g_GameObjectManager_ObjectListEnd
-#fail   0x141EAE388: g_Client::Game::UI::Buddy.Pet # not a pointer
-#fail   0x141EAE398: g_Client::Game::UI::Buddy.Pet.BuffList # not a pointer
+  0x141EA7388: g_Client::Game::UI::Buddy.Pet # not a pointer
+  0x141EA7398: g_Client::Game::UI::Buddy.Pet.BuffList # not a pointer
   0x141EA8048: g_Client::Game::UI::Buddy.CompanionStats  # not a pointer. Member of UIState
   0x141EA8050: g_Client::Game::UI::Buddy.CompanionStats.TimeRemaining  # not a pointer
   0x141EA80A0: g_Client::Game::UI::Buddy.BattleBuddyListPtr # Member of UIState
@@ -129,7 +129,7 @@ functions:
   0x1411BC480: lua_yield
   0x1411BC6C0: luaL_openlibs
   0x1411BC8B0: luaL_addlstring
-#fail   0x1411BC760: luaL_addstring
+  0x1411BC950: luaL_addstring
   0x1411BD960: luaL_openlib
   0x1411BC970: luaL_addvalue
   0x1411BCA30: luaL_argerror
@@ -734,7 +734,7 @@ classes:
       - ea: 0x141714C90
   Client::UI::Info::InfoProxyPageInterface:
     vtbls:
-#fail       - ea: 0x141714CF0
+      - ea: 0x141714CF0
         base: Client::UI::Info::InfoProxyInterface
   Common::Configuration::ConfigBase::ChangeEventInterface:
     vtbls:
@@ -1130,13 +1130,13 @@ classes:
         base: Client::System::Framework::Task
   Client::Graphics::Render::RenderObject:
     vtbls:
-#fail       - ea: 0x141741CF0
+      - ea: 0x141741CF0
         base: Client::Graphics::ReferencedClassBase
   Client::Graphics::Render::OffscreenRenderingManager:
     instances:
       - ea: 0x141E6F458
     vtbls:
-#fail       - ea: 0x141741CE8
+      - ea: 0x141741CE8
     funcs:
       0x14033A160: ctor
       0x14033A250: Initialize
@@ -2444,7 +2444,7 @@ classes:
       - ea: 0x14177C7C8
   Client::UI::Shell::RaptureShellCommandInterface:
     vtbls:
-#fail       - ea: 0x1417840D8
+      - ea: 0x14177C7D8
         base: Component::Shell::ShellCommandInterface
   Client::UI::Shell::RaptureShellModule:
     vtbls:
@@ -2761,7 +2761,7 @@ classes:
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandHotbarBase:
     vtbls:
-#fail       - ea: 0x141786918
+      - ea: 0x14177F088
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandHotbar:
     vtbls:
