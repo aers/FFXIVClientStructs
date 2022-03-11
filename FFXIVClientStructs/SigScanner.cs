@@ -1,10 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using Reloaded.Memory.Sigscan;
 
 namespace FFXIVClientStructs
 {
@@ -53,7 +54,7 @@ namespace FFXIVClientStructs
         /// Gets a value indicating whether or not the search on this module is performed on a copy.
         /// </summary>
         public bool IsCopy { get; }
-        
+
         public bool OwnsCopy { get; }
 
         /// <summary>
@@ -207,21 +208,43 @@ namespace FFXIVClientStructs
         /// </summary>
         /// <param name="signature">The signature.</param>
         /// <returns>The real offset of the found signature.</returns>
-        public IntPtr ScanText(string signature)
+        unsafe public IntPtr ScanText(string signature)
         {
-            var mBase = this.IsCopy ? this.moduleCopyPtr : this.TextSectionBase;
+            //var mBase = this.IsCopy ? this.moduleCopyPtr : this.TextSectionBase;
 
-            var scanRet = Scan(mBase, this.TextSectionSize, signature);
+            // Dirty Hacked from here. --BX
 
-            if (this.IsCopy)
-                scanRet = new IntPtr(scanRet.ToInt64() - this.moduleCopyOffset);
+            //var scanRet = Scan(mBase, this.TextSectionSize, signature);
 
-            var insnByte = Marshal.ReadByte(scanRet);
+            try
+            {
+                if (signature.Contains(" ? "))
+                    signature = signature.Replace("?", "??");
+                //var thisProcess = Process.GetCurrentProcess();
+                var scanner = new Scanner((byte*)this.TextSectionBase, this.TextSectionSize);
+                var result = scanner.CompiledFindPattern(signature).Offset;
+                if (result < 0)
+                {
+                    throw (new KeyNotFoundException(signature + " is not found."));
+                }
+                var scanRet = new IntPtr(result+this.TextSectionBase.ToInt64());
 
-            if (insnByte == 0xE8 || insnByte == 0xE9)
-                return ReadCallSig(scanRet);
+                /*
+                if (this.IsCopy)
+                    scanRet = new IntPtr(scanRet.ToInt64() - this.moduleCopyOffset);
+                */
 
-            return scanRet;
+                var insnByte = Marshal.ReadByte(scanRet);
+
+                if (insnByte == 0xE8 || insnByte == 0xE9)
+                    return ReadCallSig(scanRet);
+
+                return scanRet;
+            }
+            catch (System.FormatException)
+            {
+                throw new KeyNotFoundException("something wrong with signature: " + signature);
+            }
         }
 
         /// <summary>

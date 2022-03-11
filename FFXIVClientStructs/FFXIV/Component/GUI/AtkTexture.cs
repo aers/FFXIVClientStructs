@@ -30,7 +30,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI
         [MemberFunction("E8 ? ? ? ? 83 C8 FF 4C 89 BF ? ? ? ?")]
         public partial void Ctor();
 
-        [MemberFunction("E8 ? ? ? ? 41 8D 84 24 ? ? ? ? ")]
+        [MemberFunction("E8 ? ? ? ? 41 8D 84 24 ? ? ? ?")]
         public partial int LoadIconTexture(int iconId, int version);
 
         [MemberFunction("E8 ? ? ? ? C6 43 10 02")]
