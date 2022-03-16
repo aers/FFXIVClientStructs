@@ -24,5 +24,6 @@ namespace FFXIVClientStructs.Generators.FunctionGenerator
         public string Signature;
         public int VirtualOffset;
         public bool IsStatic;
+        public bool IsPrivate;
     }
 }

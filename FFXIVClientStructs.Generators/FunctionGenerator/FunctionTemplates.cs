@@ -10,7 +10,7 @@ namespace {{ struct.namespace }} {
         {{~ for mf in struct.member_functions ~}}
         public static delegate* unmanaged[Stdcall] <{{ if !mf.is_static }}{{ struct.name }}*,{{ end }}{{ if mf.has_params }}{{ mf.param_type_list }},{{ end }}{{ if mf.has_bool_return }}byte{{ else }}{{ mf.return_type }}{{ end }}> fp{{ mf.name }} { internal set; get; }
 
-        public{{ if mf.is_static }} static{{ end }} partial {{ mf.return_type }} {{ mf.name }}({{ mf.param_list }})
+        {{ if mf.is_private }}private{{ else }}public{{ end}}{{ if mf.is_static }} static{{ end }} partial {{ mf.return_type }} {{ mf.name }}({{ mf.param_list }})
         {
             if (fp{{ mf.name }} is null)
             {

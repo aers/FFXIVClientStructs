@@ -12,4 +12,5 @@ public class MemberFunctionAttribute : Attribute
 
     public string Signature { get; }
     public bool IsStatic { get; set; } = false;
+    public bool IsPrivate { get; set; } = false;
 }

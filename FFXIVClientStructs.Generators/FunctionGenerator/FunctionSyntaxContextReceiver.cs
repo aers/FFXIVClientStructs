@@ -53,8 +53,8 @@ namespace FFXIVClientStructs.Generators.FunctionGenerator
                         { } memberFuncAttr)
                     {
                         functionObj.Signature = (string)memberFuncAttr.ConstructorArguments[0].Value;
-                        functionObj.IsStatic = memberFuncAttr.NamedArguments.Any() &&
-                                               (bool)(memberFuncAttr.NamedArguments[0].Value.Value ?? false);
+                        functionObj.IsStatic = memberFuncAttr.NamedArguments.Any(na => na.Value.Value != null && na.Key == "IsStatic" && (bool)na.Value.Value);
+                        functionObj.IsPrivate = memberFuncAttr.NamedArguments.Any(na => na.Value.Value != null && na.Key == "IsPrivate" && (bool) na.Value.Value);
                         structObj.MemberFunctions.Add(functionObj);
                         if (ms.Name == "Ctor")
                             structObj.HasCtor = true;

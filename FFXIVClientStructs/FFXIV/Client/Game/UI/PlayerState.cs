@@ -2,7 +2,7 @@
 
 //ctor 40 53 48 83 EC 20 48 8B D9 48 8D 81 ?? ?? ?? ?? BA
 [StructLayout(LayoutKind.Explicit, Size = 0x778)]
-public unsafe struct PlayerState
+public unsafe partial struct PlayerState
 {
     [FieldOffset(0x00)] public byte IsLoaded;
     [FieldOffset(0x01)] public fixed byte CharacterName[64];
@@ -47,4 +47,18 @@ public unsafe struct PlayerState
     {
         return classJobId is < 8 or > 15 ? 0 : DesynthesisLevels[classJobId - 8] / 100f;
     }
+
+    [MemberFunction("E8 ?? ?? ?? ?? BE ?? ?? ?? ?? 84 C0 75 0C")]
+    public partial byte GetBeastTribeRank(byte beastTribeIndex);
+
+    [MemberFunction("45 33 C9 48 81 C1 ?? ?? ?? ?? 45 8D 51 02", IsStatic = true, IsPrivate = true)]
+    private static partial ulong GetBeastTribeAllowance(void* ptr);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 4C 8B E8 BB", IsStatic = true, IsPrivate = true)]
+    private static partial void* GetBeastTribeAllowancePointer();
+
+    public static ulong GetBeastTribeAllowance() {
+        return GetBeastTribeAllowance(GetBeastTribeAllowancePointer());
+    }
+
 }
