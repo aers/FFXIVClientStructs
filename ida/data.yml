@@ -487,6 +487,7 @@ classes:
       0x1407EBEA0: StartCooldown
       0x1407EC1D0: GetRecastTimerElapsed
       0x1407EC280: GetRecastTime
+      0x1407EC390: UpdateRecastFromNetwork
       0x1407F06D0: GetMaxCharges
       0x1407E13C0: GetRecastGroup
       0x1407E6600: GetRecastGroupDetail
@@ -2342,6 +2343,7 @@ classes:
         base: Client::System::Input::InputData::InputCodeModifiedInterface
     funcs:
       0x1406320E0: ctor
+      0x140634660: IsHotbarEmpty 
   Client::UI::Misc::PronounModule:
     vtbls:
       - ea: 0x14176C460
@@ -2968,6 +2970,7 @@ classes:
     funcs:
       0x14080AE40: ctor
       0x140810E40: UpdateParty
+      0x140814C50: UpdateHotBar
       0x140822470: OpenContextMenuFromTarget
       0x1408253E0: GetMainCommandString  # MainCommand exd
       0x140825720: OpenSystemMenu
