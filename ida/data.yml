@@ -3544,6 +3544,12 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140BCB730: ctor
+  Client::UI::Agent::AgentLotteryWeekly:
+    vtbls:
+      - ea: 0x1417CA228
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140BB0120: ctor
   Client::UI::Agent::AgentLovmPaletteEdit:
     vtbls:
       - ea: 0x1417CA318
