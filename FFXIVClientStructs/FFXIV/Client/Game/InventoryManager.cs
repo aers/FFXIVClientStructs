@@ -60,6 +60,7 @@ public unsafe struct InventoryItem
     {
         None = 0,
         HQ = 1,
+        CompanyCrestApplied = 2,
         Relic = 4,
         Collectable = 8
     }
