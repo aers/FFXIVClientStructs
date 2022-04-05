@@ -3544,6 +3544,12 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140BCB730: ctor
+  Client::UI::Agent::AgentLotteryDaily:
+    vtbls:
+      - ea: 0x1417CA198
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140BAEC80: ctor
   Client::UI::Agent::AgentLotteryWeekly:
     vtbls:
       - ea: 0x1417CA228
