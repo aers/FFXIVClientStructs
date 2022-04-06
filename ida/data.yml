@@ -64,7 +64,9 @@ functions:
   0x141034790: Client::UI::AddonHudLayoutScreen::MoveableAddonInfoStruct_UpdateAddonPosition
   0x141125440: Client::Graphics::Kernel::CreateShader # static function
   0x1411B98C0: lua_close
+  0x1411B9940: lua_newstate
   0x1411B9C40: lua_index2addr
+  0x1411B9D10: lua_atpanic
   0x1411B9D30: lua_call
   0x1411B9D80: lua_checkstack
   0x1411B9E20: lua_concat
@@ -72,12 +74,15 @@ functions:
   0x1411B9EF0: lua_createtable
   0x1411B9F60: lua_dump
   0x1411B9FE0: lua_equal
+  0x1411BA040: lua_error
   0x1411BA050: lua_gc
+  0x1411BA1F0: lua_getallocf
   0x1411BA210: lua_getfenv
   0x1411BA290: lua_getfield
   0x1411BA300: lua_getmetatable
   0x1411BA360: lua_gettable
   0x1411BA390: lua_gettop
+  0x1411BA3A0: lua_setupvalue
   0x1411BA440: lua_insert
   0x1411BA490: lua_iscfunction
   0x1411BA4C0: lua_isnumber
@@ -109,12 +114,15 @@ functions:
   0x1411BAC60: lua_rawseti
   0x1411BACE0: lua_remove
   0x1411BAD30: lua_replace
+  0x1411BAE00: lua_setallocf
   0x1411BAE20: lua_setfenv
   0x1411BAEC0: lua_setfield
   0x1411BAF30: lua_setlevel
   0x1411BAF40: lua_setmetatable
   0x1411BB000: lua_settable
   0x1411BB030: lua_settop
+  0x1411BB090: lua_getupvalue
+  0x1411BB180: lua_status
   0x1411BB190: lua_toboolean
   0x1411BB1C0: lua_tocfunction
   0x1411BB1F0: lua_tointeger
@@ -126,7 +134,16 @@ functions:
   0x1411BB3D0: lua_type
   0x1411BB400: lua_typename
   0x1411BB420: lua_xmove
+  0x1411BC330: lua_resume
   0x1411BC480: lua_yield
+  0x1412A9F50: lua_gethook
+  0x1412A9F60: lua_gethookcount
+  0x1412A9F70: lua_gethookmask
+  0x1412A9F80: lua_getinfo
+  0x1412AA070: lua_getlocal
+  0x1412AA0E0: lua_getstack
+  0x1412AA160: lua_sethook
+  0x1412AA190: lua_setlocal
   0x1411BC6C0: luaL_openlibs
   0x1411BC8B0: luaL_addlstring
   0x1411BC950: luaL_addstring
@@ -2343,7 +2360,7 @@ classes:
         base: Client::System::Input::InputData::InputCodeModifiedInterface
     funcs:
       0x1406320E0: ctor
-      0x140634660: IsHotbarEmpty 
+      0x140634660: IsHotbarEmpty
   Client::UI::Misc::PronounModule:
     vtbls:
       - ea: 0x14176C460
@@ -3907,7 +3924,7 @@ classes:
   Client::UI::AddonSelectOk:
     vtbls:
       - ea: 0x141849110
-        base: Component::GUI::AtkUnitBase      
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonContextMenu:
     vtbls:
       - ea: 0x141849360
