@@ -4012,6 +4012,10 @@ classes:
     vtbls:
       - ea: 0x1418750C8
         base: Component::GUI::AtkUnitBase
+  Client::UI::AddonRetainerList:
+    vtbls:
+      - ea: 0x141879E98
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonRetainerTaskList:
     vtbls:
       - ea: 0x141879820
