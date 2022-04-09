@@ -4116,6 +4116,10 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x140EF5900: ctor
+  Client::UI::AddonMiragePrismPrismBox:
+    vtbls:
+      - ea: 0x141880278
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonGrandCompanySupplyReward:
     vtbls:
       - ea: 0x1418992E0
