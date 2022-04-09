@@ -3811,6 +3811,10 @@ classes:
     vtbls:
      - ea: 0x1418CB4F8
        base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentMcguffin:
+    vtbls:
+      - ea: 0x141843578
+        base: Client::UI::Agent::AgentInterface
   Client::Game::Event::EventHandler:
     vtbls:
       - ea: 0x141796A20
