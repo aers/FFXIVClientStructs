@@ -228,6 +228,12 @@ classes:
       0x1406EACB0: GetStatusIdByIndex
       0x1406EACD0: GetRemainingTimeByIndex
       0x1406EAD00: GetSourceIdByIndex
+  Client::Game::RetainerManager:
+    instances:
+      - ea: 0x141ECADC0
+        pointer: False
+    funcs:
+      0x140CB1B10: GetRetainerBySortedIndex
   Client::Game::Control::TargetSystem::ListFeeder:
   Client::Game::InstanceContent::ContentSheetWaiterInterface:
   Client::Game::Object::IGameObjectEventListener:
