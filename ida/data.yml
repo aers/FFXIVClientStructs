@@ -4068,6 +4068,10 @@ classes:
     vtbls:
       - ea: 0x1418903E0
         base: Component::GUI::AtkUnitBase
+  Client::UI::AddonCabinetWithdraw:
+    vtbls:
+      - ea: 0x1418919D0
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonContentsFinder:
     vtbls:
       - ea: 0x141893608
@@ -4119,6 +4123,10 @@ classes:
   Client::UI::AddonMiragePrismPrismBox:
     vtbls:
       - ea: 0x141880278
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMiragePrismPrismBoxCrystallize:
+    vtbls:
+      - ea: 0x141880598
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonGrandCompanySupplyReward:
     vtbls:
