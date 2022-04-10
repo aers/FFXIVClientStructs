@@ -14,7 +14,7 @@ public unsafe partial struct RaptureMacroModule
     public struct Macro
     {
         public uint IconId;
-        public uint Unk;
+        public uint Unk; // MacroIcon, exclusive of /micon or similar. Oddly, off by one from Lumina's table.
         public Utf8String Name;
         public Lines Line;
 
