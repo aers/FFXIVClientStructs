@@ -2361,6 +2361,14 @@ classes:
     funcs:
       0x1406320E0: ctor
       0x140634660: IsHotbarEmpty
+      0x140637C20: ExecuteSlot
+      0x140632D40: ExecuteSlotById
+  Client::UI::Misc::RaptureHotbarModule::HotbarSlot:
+    funcs:
+      0x140630BA0: Set
+      0x140631EC0: LoadIconFromSlotB
+      0x14062F4D0: GetIconIdForSlot
+      0x14062FDB0: GetDisplayNameForSlot
   Client::UI::Misc::PronounModule:
     vtbls:
       - ea: 0x14176C460
