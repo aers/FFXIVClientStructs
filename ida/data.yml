@@ -4092,7 +4092,7 @@ classes:
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonContentsFinder:
     vtbls:
-      - ea: 0x1418D3B68
+      - ea: 0x1418BD258
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonContentsFinderSetting:
     vtbls:
@@ -4132,7 +4132,7 @@ classes:
     vtbls:
       - ea: 0x1418BF1A8
         base: Client::UI::AddonMateriaDialogBase
-  Client::UI::AddonMiragePrismMiragePlate:
+  Client::UI::AddonMiragePrismMiragePlate: # FittingRoom?
     vtbls:
       - ea: 0x1418D4678
         base: Component::GUI::AtkUnitBase
@@ -4245,7 +4245,7 @@ classes:
       0x140EF6B60: ToggleTextRenderMode
   Client::UI::AddonTeleport:
     vtbls:
-      - ea: 0x1418d53f0
+      - ea: 0x1418D53F0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x140F1CA80: ctor
