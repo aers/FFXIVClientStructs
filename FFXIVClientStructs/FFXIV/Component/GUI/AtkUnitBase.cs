@@ -48,7 +48,7 @@ public unsafe partial struct AtkUnitBase
 
     [MemberFunction("E8 ?? ?? ?? ?? 8D 56 54")]
     public partial AtkResNode* GetNodeById(uint nodeId);
-
+    
     [MemberFunction("E8 ?? ?? ?? ?? 8D 55 1C")]
     public partial AtkTextNode* GetTextNodeById(uint nodeId);
 
@@ -73,6 +73,6 @@ public unsafe partial struct AtkUnitBase
     [VirtualFunction(7)]
     public partial void SetPosition(short x, short y);
 
-    [VirtualFunction(48)]
+    [VirtualFunction(49)]
     public partial void OnUpdate(NumberArrayData** numberArrayData, StringArrayData** stringArrayData);
 }

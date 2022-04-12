@@ -1912,16 +1912,16 @@ classes:
       12: GetPosition
       13: SetAlpha
       14: SetScale
-      37: Initialize
-      38: Finalize
-      39: Update
-      40: Draw
-      42: LoadUldResourceHandle
-      45: OnSetup
-      47: OnRefresh
-      48: OnUpdate
-      58: OnMouseOver
-      59: OnMouseOut
+      38: Initialize
+      39: Finalize
+      40: Update
+      41: Draw
+      43: LoadUldResourceHandle
+      46: OnSetup
+      48: OnRefresh
+      49: OnUpdate
+      59: OnMouseOver
+      60: OnMouseOut
     funcs:
       0x140508300: ctor
       0x140508970: FireCallbackInt  # this creates an int AtkValue and puts its argument into it before calling Callback
