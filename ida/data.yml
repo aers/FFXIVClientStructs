@@ -438,23 +438,23 @@ classes:
       0x1401C4180: Initialize
   Client::Game::UI::UIState:
     instances:
-#fail       - ea: 0x141EA5800
+      - ea: 0x141F679C0
         pointer: False
     funcs:
-#fail       0x1407BBB80: Initialize
-#fail       0x1407CCB00: ctor
-#fail       0x1407B96F0: IsUnlockLinkUnlocked
+      0x140949940: Initialize
+      0x1409594E0: ctor
+      0x1409471C0: IsUnlockLinkUnlocked
   Client::Game::UI::PlayerState:
     funcs:
-#fail       0x140760460: SetCharacterName
-#fail       0x140761A40: GetBeastTribeRank
-#fail       0x140761AC0: GetBeastTribeCurrentRep
-#fail       0x140761B00: GetBeastTribeNeededRep
-#fail       0x140764390: Initialize
-#fail       0x1407CC2E0: ctor
+      0x1408E9880: SetCharacterName
+      0x1408EAF50: GetBeastTribeRank
+      0x1408EAFD0: GetBeastTribeCurrentRep
+      0x1408EB010: GetBeastTribeNeededRep
+      0x1408ED930: Initialize
+      0x140958CC0: ctor
   Client::Game::UI::Revive:
     vtbls:
-#fail       - ea: 0x141780488
+      - ea: 0x141855C18
         base: Component::GUI::AtkModuleInterface::AtkEventInterface
   Client::Game::UI::Buddy:
     instances:
@@ -464,17 +464,17 @@ classes:
 #fail       0x14079B570: ctor
   Client::Game::UI::RelicNote:
     vtbls:
-#fail       - ea: 0x1417813B0
+      - ea: 0x141856AF8
     funcs:
-#fail       0x1407A5940: GetRelicID
-#fail       0x1407A5950: GetRelicNoteID
-#fail       0x1407A5960: GetMonsterProgress
-#fail       0x1407A5A00: IsDungeonComplete
-#fail       0x1407A5A40: IsFateComplete
-#fail       0x1407A5A80: IsLeveComplete
+      0x140930740: GetRelicID
+      0x140930750: GetRelicNoteID
+      0x140930760: GetMonsterProgress
+      0x140930800: IsDungeonComplete
+      0x140930840: IsFateComplete
+      0x140930880: IsLeveComplete
   Client::Game::UI::MobHunt:
     vtbls:
-#fail       - ea: 0x141781430
+      - ea: 0x141856B78
   Client::Game::BattleLog:
     funcs:
 #fail       0x1407BD430: AddLogMessage
