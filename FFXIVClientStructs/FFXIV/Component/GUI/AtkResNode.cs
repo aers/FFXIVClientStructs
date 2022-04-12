@@ -109,7 +109,7 @@ public unsafe partial struct AtkResNode
     [MemberFunction("E8 ? ? ? ? 8B 57 6C")]
     public partial AtkImageNode* GetAsAtkImageNode();
 
-    [MemberFunction("E8 ? ? ? ? 8D 4D 4B")]
+    [MemberFunction("E8 ?? ?? ?? ?? 44 8B 97")]
     public partial AtkTextNode* GetAsAtkTextNode();
 
     [MemberFunction("E8 ? ? ? ? B2 01 48 89 47 08")]

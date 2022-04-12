@@ -14,7 +14,7 @@ public unsafe partial struct StatusManager
     [MemberFunction("E8 ?? ?? ?? ?? 3C 01 74 B7")]
     public partial bool HasStatus(uint statusId, uint sourceId = 0xE0000000);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 85 C0 79 17")]
+    [MemberFunction("E8 ?? ?? ?? ?? 85 C0 79 ?? 48 8B 15")]
     public partial int GetStatusIndex(uint statusId, uint sourceId = 0xE0000000);
 
     [MemberFunction("83 FA 1E 72 04 0F 57 C0")]

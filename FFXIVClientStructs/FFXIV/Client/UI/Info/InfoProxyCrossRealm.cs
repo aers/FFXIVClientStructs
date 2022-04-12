@@ -44,7 +44,7 @@ public unsafe partial struct InfoProxyCrossRealm
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 D8 8B CB", IsStatic = true)]
     public static partial byte GetGroupIndex(byte group);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 3C 01 77 4B", IsStatic = true)]
+    [MemberFunction("E8 ?? ?? ?? ?? 3C ?? 77 ?? C7 43", IsStatic = true)]
     public static partial byte GetPartyMemberCount();
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 C0 EB 0C", IsStatic = true)]

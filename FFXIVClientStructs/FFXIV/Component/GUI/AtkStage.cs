@@ -20,6 +20,6 @@ public unsafe partial struct AtkStage
     [MemberFunction("E8 ?? ?? ?? ?? 48 3B F0 0F 85")]
     public partial AtkResNode* GetFocus();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8B C3 C1 E8 05")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 6C 24 ?? 80 BB")]
     public partial void ClearFocus();
 }

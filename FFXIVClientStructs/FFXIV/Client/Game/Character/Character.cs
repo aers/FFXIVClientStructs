@@ -61,7 +61,7 @@ public unsafe partial struct Character
     [FieldOffset(0x19DF)] public byte StatusFlags;
     [FieldOffset(0x19A8)] public uint CompanionOwnerID;
 
-    [MemberFunction("E8 ?? ?? ?? ?? 3B C7 74 45")]
+    [MemberFunction("E8 ?? ?? ?? ?? 49 3B C7 0F 84")]
     public partial uint GetTargetId();
 
     [VirtualFunction(88)]

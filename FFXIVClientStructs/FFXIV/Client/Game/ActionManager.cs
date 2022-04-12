@@ -24,7 +24,7 @@ public unsafe partial struct ActionManager
     [MemberFunction("E8 ?? ?? ?? ?? 8B F8 3B DF")]
     public partial uint GetAdjustedActionId(uint actionID);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 0F 2F C7 0F 28 7C 24")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8B D6 41 8B CF")]
     public partial float GetRecastTime(ActionType actionType, uint actionID);
 
     [MemberFunction("E8 ?? ?? ?? ?? F3 0F 5C F0 49 8B CD")]
@@ -36,10 +36,10 @@ public unsafe partial struct ActionManager
     [MemberFunction("E8 ?? ?? ?? ?? 8B D0 48 8B CD 8B F0")]
     public partial int GetRecastGroup(int type, uint actionID);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 0F 57 FF 48 85 C0")]
+    [MemberFunction("40 53 48 83 EC ?? 48 63 DA 85 D2")]
     public partial RecastDetail* GetRecastGroupDetail(int recastGroup);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 85 C0 75 75 83 FF 03")]
+    [MemberFunction("E8 ?? ?? ?? ?? 85 C0 75 ?? 83 FF ?? 0F 85")]
     public partial uint CheckActionResources(ActionType actionType, uint actionId, void* actionData = null);
 
     [MemberFunction("E8 ?? ?? ?? ?? F3 0F 11 43 ?? 80 3B 00", IsStatic = true)]
