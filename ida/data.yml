@@ -324,19 +324,19 @@ classes:
         name: SecondInstance
         pointer: False
     funcs:
-#fail       0x140757570: ctor
-#fail       0x1407576E0: SetPartyEmpty
-#fail       0x140758470: GetAllianceMemberByGroupAndIndex  # (this, group, index)
-#fail       0x1407584D0: GetAllianceMemberByIndex # (this, index)
-#fail       0x1407584F0: IsObjectIDInParty # (this, objectID)
-#fail       0x140758550: IsCharacterInPartyByName # (this, char*)
-#fail       0x1407585D0: IsObjectIDInAlliance
-#fail       0x140758640: IsObjectIDPartyLeader
-#fail       0x140758900: UpdateAllianceMemberAtIndex
-#fail       0x140758C10: GetPartyMemberByIndex
-#fail       0x140758C90: GetPartyMemberByContentId
-#fail       0x140758BB0: GetPartyMemberByObjectId
-#fail       0x140B97F90: Create
+      0x1408E0A10: ctor
+      0x1408E0B80: SetPartyEmpty
+      0x1408E1910: GetAllianceMemberByGroupAndIndex  # (this, group, index)
+      0x1408E1970: GetAllianceMemberByIndex # (this, index)
+      0x1408E1990: IsObjectIDInParty # (this, objectID)
+      0x1408E19F0: IsCharacterInPartyByName # (this, char*)
+      0x1408E1A70: IsObjectIDInAlliance
+      0x1408E1AE0: IsObjectIDPartyLeader
+      0x1408E1DA0: UpdateAllianceMemberAtIndex
+      0x1408E20B0: GetPartyMemberByIndex
+      0x1408E2130: GetPartyMemberByContentId
+      0x1408E2050: GetPartyMemberByObjectId
+      0x140BC84A0: Create
       0x140BC83E0: GetGroupManager
   Client::Game::Balloon:
     funcs:
