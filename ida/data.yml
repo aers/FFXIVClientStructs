@@ -483,38 +483,38 @@ classes:
 #fail       0x1407BEB00: AddToScreenLogWithScreenLogKind
   Client::Game::ActionManager:
     instances:
-#fail       - ea: 0x141E26720
+      - ea: 0x141EE57C0
         pointer: False
     vtbls:
-#fail       - ea: 0x1417818D0
+      - ea: 0x141856F28
         base: Client::Graphics::Vfx::VfxDataListenner
     funcs:
       0x140049890: StaticInitializer
       0x1400A9D60: GetCurrentComboActionId
-#fail       0x1407DDF90: GetActionRange
-#fail       0x1407DE330: GetActionInRangeOrLoS
-#fail       0x1407DE960: GetAdjustedCastTime
-#fail       0x1407DF130: GetAdjustedRecastTime
-#fail       0x1407DF890: GetActionCost
-#fail       0x1407E0120: GetSpellIdForAction
-#fail       0x1407E1640: UseActionLocation
-#fail       0x1407E2460: UseGeneralAction
-#fail       0x1407E30B0: UseWaymarkAction
-#fail       0x1407E3BA0: CheckActionResources
-#fail       0x1407E73A0: GetActionStatus
-#fail       0x1407E9090: CanUseAction
-#fail       0x1407E9850: GetAdjustedActionId
-#fail       0x1407EAA50: UseAction
-#fail       0x1407EB1C0: UseComboAction
-#fail       0x1407EBAE0: GetRecastTimerActive
-#fail       0x1407EBEA0: StartCooldown
-#fail       0x1407EC1D0: GetRecastTimerElapsed
-#fail       0x1407EC280: GetRecastTime
-#fail       0x1407EC390: UpdateRecastFromNetwork
-#fail       0x1407F06D0: GetMaxCharges
-#fail       0x1407E13C0: GetRecastGroup
-#fail       0x1407E6600: GetRecastGroupDetail
-#fail       0x1407E66D0: Update
+      0x1409698E0: GetActionRange
+      0x140969CB0: GetActionInRangeOrLoS
+      0x14096A2E0: GetAdjustedCastTime
+      0x14096AAB0: GetAdjustedRecastTime
+      0x14096B250: GetActionCost
+      0x14096BAD0: GetSpellIdForAction
+      0x14096D000: UseActionLocation
+      0x14096DE20: UseGeneralAction
+      0x14096EB10: UseWaymarkAction
+      0x14096F600: CheckActionResources
+      0x140973060: GetActionStatus
+      0x140974DA0: CanUseAction
+      0x140975600: GetAdjustedActionId
+      0x140976840: UseAction
+      0x140976FB0: UseComboAction
+      0x1409778B0: GetRecastTimerActive
+      0x140977C40: StartCooldown
+      0x140977F70: GetRecastTimerElapsed
+      0x14096AAB0: GetRecastTime
+      0x140978130: UpdateRecastFromNetwork
+      0x14097C560: GetMaxCharges
+      0x14096CD80: GetRecastGroup
+      0x140972260: GetRecastGroupDetail
+      0x140972330: Update
   Client::Game::JobGaugeManager:
     instances:
       - ea: 0x141F308B8
