@@ -2935,41 +2935,41 @@ classes:
       0x140778320: dtor
   Client::Game::TitleController:
     vtbls:
-#fail       - ea: 0x141780478
+      - ea: 0x141855BE8
     vfuncs:
       0: dtor
   Client::Game::TitleList:
     vtbls:
-#fail       - ea: 0x141780480
+      - ea: 0x141855BF0
     vfuncs:
       0: dtor
   Client::UI::Misc::RaptureHotbarModule::ClearCallback:
     vtbls:
-#fail       - ea: 0x1417804A0
+      - ea: 0x141855B88
   Client::Game::UI::Hotbar:
     vtbls:
-#fail       - ea: 0x1417804C0
+      - ea: 0x141855BF8
         base: Client::UI::Misc::RaptureHotbarModule::ClearCallback
     vfuncs:
       0: dtor
     funcs:
-#fail       0x1407BAFE0: CancelCast
+      0x140948B70: CancelCast
   Client::Game::UI::MarkingController:
     instances:
-#fail       - ea: 0x141EB4130
+      - ea: 0x141F76460
         pointer: False
     vtbls:
-#fail       - ea: 0x141780468
+      - ea: 0x141855BD8
     vfuncs:
       0: dtor
     funcs:
-#fail       0x140787F10: ClearWaymarks
+      0x140911AE0: ClearWaymarks
   Client::Game::LimitBreakController:
     instances:
-#fail       - ea: 0x141EB43E0
+      - ea: 0x141F76710
         pointer: False
     vtbls:
-#fail       - ea: 0x141780470
+      - ea: 0x141855BE0
     vfuncs:
       0: dtor
   Client::Game::UI::Telepo::SelectUseTicketInvoker:
@@ -3011,7 +3011,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
 #fail       0x140842C40: ctor
-#fail       0x140847CB0: InsertTextCommandParam
+      0x1409D5650: InsertTextCommandParam
   Client::UI::Agent::AgentInventory:
     vtbls:
 #fail       - ea: 0x141783C50
@@ -3831,46 +3831,46 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::Game::Event::EventHandler:
     vtbls:
-#fail       - ea: 0x141796A20
+      - ea: 0x14182FB08
   Client::Game::Event::LuaScriptLoader<Client::Game::Event::ModuleBase>:
     vtbls:
-#fail       - ea: 0x141797238
+      - ea: 0x141830308
         base: Client::System::Resource::ResourceEventListener
   Client::Game::Event::ModuleBase:
     vtbls:
-#fail       - ea: 0x141797260
+      - ea: 0x141830330
     vfuncs:
       1: SetupClasses
       4: SetupClasses_2
   Client::Game::Event::LuaScriptLoader<Client::Game::Event::LuaEventHandler>:
     vtbls:
-#fail       - ea: 0x141797298
+      - ea: 0x141830368
         base: Client::System::Resource::ResourceEventListener
   Client::Game::Event::LuaEventHandler:
     vtbls:
-#fail       - ea: 0x1417972C0
+      - ea: 0x141830390
         base: Client::Game::Event::EventHandler
   Client::Game::Event::EventSceneModuleImplBase:
     vtbls:
-#fail       - ea: 0x141797AE8
+      - ea: 0x141830BA8
   Client::Game::Event::EventSceneModuleUsualImpl:
     vtbls:
-#fail       - ea: 0x141798210
+      - ea: 0x1418312E0
         base: Client::Game::Event::EventSceneModuleImplBase
   Client::Game::Event::Director:
     vtbls:
-#fail       - ea: 0x14179A130
+      - ea: 0x141833220
         base: Client::Game::Event::LuaEventHandler
   Client::Game::Event::EventFramework:
     instances:
-#fail       - ea: 0x141EBDF70
+      - ea: 0x141F62870
         pointer: True
     funcs:
-#fail       0x140A58140: GetSingleton
-#fail       0x140A58430: ctor
-#fail       0x140A58BF0: dtor
-#fail       0x140A60EF0: ProcessDirectorUpdate
-#fail       0x140A64740: GetInstanceContentDirector
+      0x140807420: GetSingleton
+      0x140807710: ctor
+      0x140807ED0: dtor
+      0x140810320: ProcessDirectorUpdate
+      0x140813BB0: GetInstanceContentDirector
   Client::Game::Event::EventHandlerModule:
     vtbls:
       - ea: 0x1418356C8
