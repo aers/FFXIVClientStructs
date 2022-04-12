@@ -136,13 +136,13 @@ functions:
 #fail   0x1411BB420: lua_xmove
 #fail   0x1411BC330: lua_resume
 #fail   0x1411BC480: lua_yield
-#fail   0x1412A9F50: lua_gethook
-#fail   0x1412A9F60: lua_gethookcount
-#fail   0x1412A9F70: lua_gethookmask
+  0x14133D4F0: lua_gethook
+  0x14133D500: lua_gethookcount
+  0x14133D510: lua_gethookmask
   0x14133D520: lua_getinfo
   0x14133D610: lua_getlocal
   0x14133D680: lua_getstack
-#fail   0x1412AA160: lua_sethook
+  0x14133D700: lua_sethook
   0x14133D730: lua_setlocal
 #fail   0x1411BC6C0: luaL_openlibs
 #fail   0x1411BC8B0: luaL_addlstring
@@ -1154,13 +1154,13 @@ classes:
         base: Client::System::Framework::Task
   Client::Graphics::Render::RenderObject:
     vtbls:
-#fail       - ea: 0x141741CF0
+      - ea: 0x1417E1EE0
         base: Client::Graphics::ReferencedClassBase
   Client::Graphics::Render::OffscreenRenderingManager:
     instances:
       - ea: 0x141F2C158
     vtbls:
-#fail       - ea: 0x141741CE8
+      - ea: 0x1417E1ED8
     funcs:
       0x140350990: ctor
       0x140350A90: Initialize
@@ -1563,16 +1563,16 @@ classes:
       0x140494CA0: LoadFile
       0x1404951D0: PCall
       0x140494D30: DestroyGlobalClass
-#fail       0x14047BDF0: GetGlobalOrNil
+      0x140494DD0: GetGlobalOrNil
       0x140494E00: IncClassRef
       0x140494EB0: DecClassRef
-#fail       0x14047BF80: SetNil
-#fail       0x14047BFE0: SetStringField
-#fail       0x14047C030: SetIntegerField
-#fail       0x14047C080: SetFunctionField
-#fail       0x14047C0E0: SetNumberField
-#fail       0x14047C130: SetNilField
-#fail       0x14047C170: GetField
+      0x140494F60: SetNil
+      0x140494FC0: SetStringField
+      0x140495010: SetIntegerField
+      0x140495060: SetFunctionField
+      0x1404950C0: SetNumberField
+      0x140495110: SetNilField
+      0x140495150: GetField
       0x140495160: ClassNameOf
       0x140495270: CallMemberFunction # (this, member, class, nresults) => pcall(_G[class][member], _G[class])
       0x1404954D0: CallMemberFunction_2 # (this, member, class, (int)arg2, (int)arg3, nresults) => pcall(_G[class][member], _G[class], arg2, arg3)
@@ -1587,29 +1587,29 @@ classes:
       0x140495B60: CallMemberFunction_11 # (this, member, class, argName, (int)arg3, (int)arg4, (int[])args, argCount, nresults)
       0x140495CB0: CallMemberFunction_12 # (this, member, class, argName, (int)arg3, (int)arg4, (bool)arg5, (int[])args, argCount nresults)
       0x140495E10: CallMemberFunction_13 # (this, member, class, argName, argName2, nresults) => pcall(_G[class][member], _G[class], _G[argName], _G[argName2])
-#fail       0x14047E030: IsFunction
-#fail       0x14047E0A0: PopBoolean
-#fail       0x14047E110: CheckNumber
+      0x140497010: IsFunction
+      0x140497080: PopBoolean
+      0x1404970F0: CheckNumber
       0x140497120: CheckBoolean
-#fail       0x14047E180: CheckString
-#fail       0x14047E1A0: PushNumber
+      0x140497160: CheckString
+      0x140497180: PushNumber
       0x1404971B0: PushBoolean
       0x1404971D0: PushString
-#fail       0x14047E200: PushGlobal
-#fail       0x14047E230: PushNil
+      0x1404971E0: PushGlobal
+      0x140497210: PushNil
       0x140497220: IsNil
-#fail       0x14047E260: IsNumber
-#fail       0x14047E280: IsString
-#fail       0x14047E2A0: IsBoolean
-#fail       0x14047E2C0: GetBoolean
-#fail       0x14047E2E0: GetString
+      0x140497240: IsNumber
+      0x140497260: IsString
+      0x140497280: IsBoolean
+      0x1404972A0: GetBoolean
+      0x1404972C0: GetString
       0x1404972E0: NewThread # (this, LuaState* other)
       0x1404973E0: CloseThread # (this, LuaState* other)
       0x1404974A0: LuaError
-#fail       0x14047E610: GC
-#fail       0x14047E620: GCStop
+      0x1404975F0: GC
+      0x140497600: GCStop
       0x140497620: GCRestart
-#fail       0x14047E6A0: GCStep # (this, data)
+      0x140497680: GCStep # (this, data)
 #fail       0x140AFEB80: PopByte
 #fail       0x140AFEBE0: PopShort
 #fail       0x140AFEC40: PopInteger
@@ -1624,54 +1624,54 @@ classes:
       0x1404976F0: ctor
   Client::Game::Event::LuaActor:
     vtbls:
-#fail       - ea: 0x1417A2C20
+      - ea: 0x14183BC00
     vfuncs:
       0: dtor
   Client::Game::Event::LuaPc:
     vtbls:
-#fail       - ea: 0x1417A5630
+      - ea: 0x14183E5B0
         base: Client::Game::Event::LuaActor
     funcs:
 #fail       0x140AA5FE0: ctor
   Client::Game::Event::LuaAetheryte:
     vtbls:
-#fail       - ea: 0x1417A4DB8
+      - ea: 0x14183DD48
         base: Client::Game::Event::LuaActor
     funcs:
 #fail       0x140AA5040: ctor
   Client::Game::Event::LuaHousingEventObject:
     vtbls:
-#fail       - ea: 0x1417A4DA8
+      - ea: 0x14183DD38
         base: Client::Game::Event::LuaActor
     funcs:
 #fail       0x140AA48F0: ctor
   Client::Game::Event::LuaEventObject:
     vtbls:
-#fail       - ea: 0x1417A4D98
+      - ea: 0x14183DD28
         base: Client::Game::Event::LuaActor
     funcs:
 #fail       0x140AA3FE0: ctor
   Client::Game::Event::LuaCompanion:
     vtbls:
-#fail       - ea: 0x1417A4D88
+      - ea: 0x14183DD18
         base: Client::Game::Event::LuaActor
     funcs:
 #fail       0x140AA3C30: ctor
   Client::Game::Event::LuaRetainer:
     vtbls:
-#fail       - ea: 0x1417A4D78
+      - ea: 0x14183DD08
         base: Client::Game::Event::LuaActor
     funcs:
 #fail       0x140AA37F0: ctor
   Client::Game::Event::LuaBattleNpc:
     vtbls:
-#fail       - ea: 0x1417A4D68
+      - ea: 0x14183DCF8
         base: Client::Game::Event::LuaActor
     funcs:
 #fail       0x140AA2EB0: ctor
   Client::Game::Event::LuaEventNpc:
     vtbls:
-#fail       - ea: 0x1417A4D58
+      - ea: 0x14183DCE8
         base: Client::Game::Event::LuaActor
     funcs:
 #fail       0x140AA2B00: ctor
@@ -1710,21 +1710,21 @@ classes:
     funcs:
       0x1404BF860: ctor
       0x1404C95F0: GetHardTargetObjectId
-#fail       0x1404B01F0: GetHardTargetId
+      0x1404C9610: GetHardTargetId
       0x1404C9630: GetHardTarget
       0x1404C9650: GetSoftTargetObjectId
-#fail       0x1404B0250: GetSoftTargetId
+      0x1404C9670: GetSoftTargetId
       0x1404C9690: GetSoftTarget
-#fail       0x1404B0290: GetMouseOverTargetPlayerId
+      0x1404C96B0: GetMouseOverTargetPlayerId
       0x1404C96F0: GetMouseOverTarget
       0x1404C9700: SetMouseOverEventObj
       0x1404C9710: GetTargetObjectId
-#fail       0x1404B0320: GetTargetPlayerId
-#fail       0x1404B0370: GetTargetObject
+      0x1404C9740: GetTargetPlayerId
+      0x1404C9790: GetTargetObject
       0x1404C97B0: GetTargetObjectId2
       0x1404C97E0: GetTargetPlayerId2
       0x1404C9830: GetTargetObject2
-#fail       0x1404B06C0: ClearFocusTarget
+      0x1404C9AE0: ClearFocusTarget
       0x1404C9B00: SetFocusTargetByObjectId
       0x1404CA4A0: IsObjectInViewRange
 #fail       0x1404B28D0: RemoveObjectFromTargets
@@ -1834,21 +1834,21 @@ classes:
       0x1404FB2D0: GetHeight
       0x1404FB510: SetWidth
       0x1404FB530: SetHeight
-#fail       0x1404E1B40: GetRotation
+      0x1404FB580: GetRotation
       0x1404FB5A0: SetRotation
       0x1404FB610: GetRotationDegrees
       0x1404FB640: SetRotationDegrees
-#fail       0x1404E1C80: GetColor
+      0x1404FB6C0: GetColor
       0x1404FB6E0: SetColor
       0x1404FB720: SetAddRGB
       0x1404FB770: SetMultiplyRGB
-#fail       0x1404E1D80: GetPriority
-#fail       0x1404E1DA0: SetPriority
+      0x1404FB7C0: GetPriority
+      0x1404FB7E0: SetPriority
       0x1404FB800: IsVisible
       0x1404FB830: SetVisibility
-#fail       0x1404E21D0: GetIsUsingDepthBasedDrawPriority
-#fail       0x1404E21F0: SetUseDepthBasedDrawPriority
-#fail       0x1404E2240: SetDepth
+      0x1404FBC10: GetIsUsingDepthBasedDrawPriority
+      0x1404FBC30: SetUseDepthBasedDrawPriority
+      0x1404FBC80: SetDepth
       0x1404FC050: Init
       0x1404FC220: SetScale0  # SetScale jumps to this
       0x1405069F0: SetSize
@@ -1929,7 +1929,7 @@ classes:
       0x140508E20: SetAlpha
       0x140508E50: GetScale
       0x140509070: GetGlobalUIScale
-#fail       0x1404EF460: SetGlobalUIScale
+      0x140509080: SetGlobalUIScale
       0x140509220: SetScale
       0x140509590: CalculateBounds
       0x140509CD0: SetFlag
@@ -2117,8 +2117,8 @@ classes:
       0x1405586F0: LoadIconByID
       0x140558720: LoadIcon # this takes a struct arg that includes the icon ID and some params
       0x140558920: SetText
-#fail       0x14053EC10: SetTextColor
-#fail       0x14053EC30: SetTextEdgeColor
+      0x140558940: SetTextColor
+      0x140558960: SetTextEdgeColor
       0x140558AE0: ctor
   Component::GUI::AtkComponentDragDrop:
     vtbls:
@@ -2357,7 +2357,7 @@ classes:
       0x140644460: ctor
       0x140645C50: PrintMessage
       0x140647000: ShowLogMessage
-#fail       0x14062BD60: GetContentIdForLogMessage
+      0x1406495C0: GetContentIdForLogMessage
   Client::UI::Misc::RaptureHotbarModule:
     vtbls:
       - ea: 0x14180CA40
@@ -2366,7 +2366,7 @@ classes:
         base: Client::System::Input::InputData::InputCodeModifiedInterface
     funcs:
       0x14064F940: ctor
-#fail       0x140634660: IsHotbarEmpty
+      0x140651F80: IsHotbarEmpty
       0x140655540: ExecuteSlot
       0x1406505A0: ExecuteSlotById
   Client::UI::Misc::RaptureHotbarModule::HotbarSlot:
@@ -2464,7 +2464,7 @@ classes:
     funcs:
       0x140700420: IsCasting
       0x140710EB0: GetCompanionOwnerID
-#fail       0x1406F2E80: dtor
+      0x140714D20: dtor
       0x140778150: ctor
   Component::Shell::ShellCommandInterface:
     vtbls:
@@ -3873,25 +3873,25 @@ classes:
 #fail       0x140A64740: GetInstanceContentDirector
   Client::Game::Event::EventHandlerModule:
     vtbls:
-#fail       - ea: 0x14179C600
+      - ea: 0x1418356C8
         base: Client::Game::Event::ModuleBase
     funcs:
 #fail       0x140A3AE80: ctor
   Client::Game::Event::LuaActorModule:
     vtbls:
-#fail       - ea: 0x14179C640
+      - ea: 0x141835708
         base: Client::Game::Event::ModuleBase
     funcs:
 #fail       0x140A3ED60: ctor
   Client::Game::Event::DirectorModule:
     vtbls:
-#fail       - ea: 0x14179C678
+      - ea: 0x141835740
         base: Client::Game::Event::ModuleBase
     funcs:
 #fail       0x140A3F610: ctor
   Client::Game::Event::LeveDirector:
     vtbls:
-#fail       - ea: 0x14179E7E8
+      - ea: 0x141837858
         base: Client::Game::Event::Director
   Client::Game::Event::GatheringLeveDirector:
     vtbls:
@@ -3899,7 +3899,7 @@ classes:
         base: Client::Game::Event::LeveDirector
   Client::Game::Event::BattleLeveDirector:
     vtbls:
-#fail       - ea: 0x14179F0D8
+      - ea: 0x141838138
         base: Client::Game::Event::LeveDirector
   Client::Game::Event::CompanyLeveDirector:
     vtbls:
@@ -4122,7 +4122,7 @@ classes:
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonMateriaDialogBase:
     vtbls:
-#fail       - ea: 0x14187F108
+      - ea: 0x1418BED40
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonMateriaAttachDialog:
     vtbls:
@@ -4202,7 +4202,7 @@ classes:
 #fail       0x140FD6DE0: ctor
   Client::UI::AddonPopUpText:
     vtbls:
-      - ea: 0x1418CF1E8
+#fail       - ea: 0x14188ED90
         base: Component::GUI::AtkUnitBase
     funcs:
 #fail       0x140EC03F0: ctor
@@ -4258,7 +4258,7 @@ classes:
 #fail       0x140F41DE0: ctor
   Client::UI::AddonItemInspectionList:
     vtbls:
-#fail       - ea: 0x1418A2370
+      - ea: 0x1418E3540
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonItemInspectionResult:
     vtbls:
@@ -4270,30 +4270,30 @@ classes:
         base: Component::GUI::AtkEventListener
   Client::UI::AddonWeeklyBingo::DutySlotList:
     vtbls:
-#fail       - ea: 0x1418AA748
+      - ea: 0x1418EBF58
   Client::UI::AddonWeeklyBingo::StringThing:
     vtbls:
-#fail       - ea: 0x1418AA750
+      - ea: 0x1418EBF60
   Client::UI::AddonWeeklyBingo::StickerSlot:
     vtbls:
-#fail       - ea: 0x1418AA758
+      - ea: 0x1418EBF68
   Client::UI::AddonWeeklyBingo::StickerSlotList:
     vtbls:
-#fail       - ea: 0x1418AA760
+      - ea: 0x1418EBF70
   Client::UI::AddonWeeklyBingo::RewardCategory:
     vtbls:
-#fail       - ea: 0x1418AA768
+      - ea: 0x1418EBF78
         base: Component::GUI::AtkEventListener
   Client::UI::AddonWeeklyBingo::RewardGuaranteed:
     vtbls:
-#fail       - ea: 0x1418AA780
+      - ea: 0x1418EBF90
         base: Component::GUI::AtkEventListener
   Client::UI::AddonWeeklyBingo::RewardCategoryList:
     vtbls:
-#fail       - ea: 0x1418AA798
+      - ea: 0x1418EBFA8
   Client::UI::AddonWeeklyBingo:
     vtbls:
-#fail       - ea: 0x1418AA7A0
+      - ea: 0x1418EBFB0
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonWeeklyPuzzle:
     vtbls:
@@ -4305,33 +4305,33 @@ classes:
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonTargetInfoBase:
     vtbls:
-#fail       - ea: 0x1418B0350
+      - ea: 0x1418F4C08
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonTargetInfo:
     vtbls:
-#fail       - ea: 0x1418B0578
+      - ea: 0x1418F4E38
         base: Client::UI::AddonTargetInfoBase
   Client::UI::AddonTargetInfoUnknown1:
     vtbls:
-#fail       - ea: 0x1418B07A0
+      - ea: 0x1418F5068
         base: Client::UI::AddonTargetInfoBase
   Client::UI::AddonTargetInfoUnknown2:
     vtbls:
-#fail       - ea: 0x1418B09C8
+      - ea: 0x1418F5298
         base: Client::UI::AddonTargetInfoBase
   Client::UI::AddonTargetInfoMainTarget:
     vtbls:
-#fail       - ea: 0x1418B0BF0
+      - ea: 0x1418F54C8
         base: Client::UI::AddonTargetInfoBase
   Client::UI::AddonTargetCursor:
     vtbls:
-#fail       - ea: 0x1418B0E18
+      - ea: 0x1418F56F8
         base: Component::GUI::AtkUnitBase
     funcs:
 #fail       0x140FC9FA0: ctor
   Client::UI::AddonBattleTalk:
     vtbls:
-#fail       - ea: 0x1418B1268
+      - ea: 0x1418F5B58
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonScreenInfoFrontBack:
     vtbls:
@@ -4343,15 +4343,15 @@ classes:
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonParameterWidget:
     vtbls:
-#fail       - ea: 0x1418B9F18
+      - ea: 0x1418FEC50
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonExp:
     vtbls:
-#fail       - ea: 0x1418BA140
+      - ea: 0x1418FEE80
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonEnemyList:
     vtbls:
-#fail       - ea: 0x1418BA368
+      - ea: 0x1418FF0B0
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonBagWidget:
     vtbls:
@@ -4367,7 +4367,7 @@ classes:
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonShopCardDialog:
     vtbls:
-#fail       - ea: 0x1418CEE50
+      - ea: 0x1419133F0
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonDTR:
     vtbls:
@@ -4431,11 +4431,11 @@ classes:
         base: Client::UI::AddonActionDoubleCrossBase
   Client::UI::AddonFocusTargetInfo:
     vtbls:
-#fail       - ea: 0x1418BED70
+      - ea: 0x141903BA0
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonLimitBreak:
     vtbls:
-#fail       - ea: 0x1418BEF98
+      - ea: 0x141903DD0
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonMainCross:
     vtbls:
