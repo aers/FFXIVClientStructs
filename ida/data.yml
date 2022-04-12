@@ -357,7 +357,7 @@ classes:
       0x141162BF0: dtor
   BattleBuddyList:
     funcs:
-#fail       0x14079B1E0: GetMemberBattleCharaByIndex
+      0x1409254F0: GetMemberBattleCharaByIndex
   InventoryManager:
     instances:
       - ea: 0x141F5B1E0
@@ -394,7 +394,7 @@ classes:
       0x1404D7F20: SetString
       0x1404D7FB0: CopyValue # = operator
       0x1404D8020: Equals # == operator
-#fail       0x1404BE930: CreateArray # uses std::vector for array type (9)
+      0x1404D81E0: CreateArray # uses std::vector for array type (9)
       0x1404D8480: ChangeType
       0x1404D8690: ReleaseManagedMemory # called by SetString, frees old strings
   Component::GUI::AtkEvent:
@@ -458,7 +458,7 @@ classes:
         base: Component::GUI::AtkModuleInterface::AtkEventInterface
   Client::Game::UI::Buddy:
     instances:
-#fail       - ea: 0x141EA71F0
+      - ea: 0x141F69420
         pointer: False
     funcs:
 #fail       0x14079B570: ctor
@@ -477,10 +477,10 @@ classes:
       - ea: 0x141856B78
   Client::Game::BattleLog:
     funcs:
-#fail       0x1407BD430: AddLogMessage
-#fail       0x1407BE310: AddActionLogMessage
-#fail       0x1407BEA20: AddToScreenLogWithLogMessageId  # this converts log message id to screen log kind and calls below function
-#fail       0x1407BEB00: AddToScreenLogWithScreenLogKind
+      0x14094B2B0: AddLogMessage
+      0x14094C190: AddActionLogMessage
+      0x14094C8A0: AddToScreenLogWithLogMessageId  # this converts log message id to screen log kind and calls below function
+      0x14094C980: AddToScreenLogWithScreenLogKind
   Client::Game::ActionManager:
     instances:
       - ea: 0x141EE57C0
@@ -526,86 +526,86 @@ classes:
       0x140987660: ChangeGauge
   Client::Game::Gauge::JobGauge:
     vtbls:
-#fail       - ea: 0x1417818E0
+      - ea: 0x141856F38
     vfuncs:
       0: dtor
       1: Init
       4: SetValues
   Client::Game::Gauge::PaladinGauge:
     vtbls:
-#fail       - ea: 0x141781918
+      - ea: 0x141856F70
         base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::MonkGauge:
     vtbls:
-#fail       - ea: 0x141781950
+      - ea: 0x141856FA8
         base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::WarriorGauge:
     vtbls:
-#fail       - ea: 0x141781988
+      - ea: 0x141856FE0
         base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::DragoonGauge:
     vtbls:
-#fail       - ea: 0x1417819C0
+      - ea: 0x141857018
         base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::BardGauge:
     vtbls:
-#fail       - ea: 0x1417819F8
+      - ea: 0x141857050
         base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::WhiteMageGauge:
     vtbls:
-#fail       - ea: 0x141781A30
+      - ea: 0x141857088
         base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::BlackMageGauge:
     vtbls:
-#fail       - ea: 0x141781A68
+      - ea: 0x1418570C0
         base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::SummonerGauge:
     vtbls:
-#fail       - ea: 0x141781AA0
+      - ea: 0x1418570F8
         base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::ScholarGauge:
     vtbls:
-#fail       - ea: 0x141781AD8
+      - ea: 0x141857130
         base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::NinjaGauge:
     vtbls:
-#fail       - ea: 0x141781B10
+      - ea: 0x141857168
         base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::MachinistGauge:
     vtbls:
-#fail       - ea: 0x141781B48
+      - ea: 0x1418571A0
         base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::DarkKnightGauge:
     vtbls:
-#fail       - ea: 0x141781B80
+      - ea: 0x1418571D8
         base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::AstrologianGauge:
     vtbls:
-#fail       - ea: 0x141781BB8
+      - ea: 0x141857210
         base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::SamuraiGauge:
     vtbls:
-#fail       - ea: 0x141781BF0
+      - ea: 0x141857248
         base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::RedMageGauge:
     vtbls:
-#fail       - ea: 0x141781C28
+      - ea: 0x141857280
         base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::DancerGauge:
     vtbls:
-#fail       - ea: 0x141781C60
+      - ea: 0x1418572B8
         base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::GunbreakerGauge:
     vtbls:
-#fail       - ea: 0x141781C98
+      - ea: 0x1418572f0
         base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::ReaperGauge:
     vtbls:
-#fail       - ea: 0x141781CD0
+      - ea: 0x141857328
         base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::SageGauge:
     vtbls:
-#fail       - ea: 0x141781D08
+      - ea: 0x141857360
         base: Client::Game::Gauge::JobGauge
   Common::Configuration::ConfigBase:
     vtbls:
@@ -638,7 +638,7 @@ classes:
     vtbls:
       - ea: 0x1417A99D8
     funcs:
-#fail       0x1400954F0: TaskRunner  # task starter which runs the task's function pointer
+      0x140095820: TaskRunner  # task starter which runs the task's function pointer
   Client::System::Framework::TaskManager::RootTask:
     vtbls:
       - ea: 0x1417A99F0
@@ -758,7 +758,7 @@ classes:
       - ea: 0x1417B4580
   Client::UI::Info::InfoProxyPageInterface:
     vtbls:
-#fail       - ea: 0x141714CF0
+      - ea: 0x1417B45E0
         base: Client::UI::Info::InfoProxyInterface
   Common::Configuration::ConfigBase::ChangeEventInterface:
     vtbls:
@@ -909,7 +909,7 @@ classes:
       - ea: 0x1417CEBF0
         base: Client::Graphics::ReferencedClassBase
     funcs:
-#fail       0x1401DD930: ctor
+      0x1401E4520: ctor
   Client::Graphics::IAllocator:
     vtbls:
       - ea: 0x1417CEC18
@@ -977,7 +977,7 @@ classes:
       0x140217020: SetPositionX
       0x140217040: SetPositionY
       0x140219A50: SetUpdateChecker
-#fail       0x140212BD0: CloseSubMenu
+      0x140219D10: CloseSubMenu
       0x140217060: OpenSubMenu
       0x14021AFF0: OpenYesNo # (this, char* msgText, uint yesId, uint noId, uint checkboxId, bool setOwner)
       0x140217E30: SetupButtonsForTarget
@@ -990,7 +990,7 @@ classes:
       - ea: 0x1417D1FB0
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x14021BFD0: ctor
+      0x140232AD0: ctor
   Client::UI::Agent::AgentCursor:
     vtbls:
       - ea: 0x1417D27A0
@@ -1064,19 +1064,19 @@ classes:
         base: Client::Graphics::Kernel::Buffer
     funcs:
       0x140328000: ctor
-#fail       0x140312AE0: LoadSourcePointer
+      0x140327E30: LoadSourcePointer
       0x140338C40: LoadBuffer
       0x14033E320: Activate
   Client::Graphics::Kernel::Device:
     instances:
       - ea: 0x141F11600
     vtbls:
-#fail       - ea: 0x14173A7B8
+#fail       - ea: 0x1417DA950
         base: Client::Graphics::Singleton
     funcs:
 #fail       0x140313040: ctor
       0x14032A770: Initialize
-#fail       0x140313D60: CreateTexture2D
+      0x14032B3D0: CreateTexture2D
       0x14032BA60: CreateConstantBuffer
       0x14032C010: PostTick
   Client::Graphics::Kernel::Context:
@@ -1558,7 +1558,7 @@ classes:
       0x1404947B0: ctor
       0x1404947E0: ctor_FromState
       0x140494B00: GetTop
-#fail       0x14047BB30: SetTop
+      0x140494B10: SetTop
       0x140494BF0: LoadString
       0x140494CA0: LoadFile
       0x1404951D0: PCall
@@ -1632,49 +1632,49 @@ classes:
       - ea: 0x14183E5B0
         base: Client::Game::Event::LuaActor
     funcs:
-#fail       0x140AA5FE0: ctor
+      0x140855D90: ctor
   Client::Game::Event::LuaAetheryte:
     vtbls:
       - ea: 0x14183DD48
         base: Client::Game::Event::LuaActor
     funcs:
-#fail       0x140AA5040: ctor
+      0x140854DF0: ctor
   Client::Game::Event::LuaHousingEventObject:
     vtbls:
       - ea: 0x14183DD38
         base: Client::Game::Event::LuaActor
     funcs:
-#fail       0x140AA48F0: ctor
+      0x1408546a0: ctor
   Client::Game::Event::LuaEventObject:
     vtbls:
       - ea: 0x14183DD28
         base: Client::Game::Event::LuaActor
     funcs:
-#fail       0x140AA3FE0: ctor
+      0x140853d90: ctor
   Client::Game::Event::LuaCompanion:
     vtbls:
       - ea: 0x14183DD18
         base: Client::Game::Event::LuaActor
     funcs:
-#fail       0x140AA3C30: ctor
+      0x1408539e0: ctor
   Client::Game::Event::LuaRetainer:
     vtbls:
       - ea: 0x14183DD08
         base: Client::Game::Event::LuaActor
     funcs:
-#fail       0x140AA37F0: ctor
+      0x1408535a0: ctor
   Client::Game::Event::LuaBattleNpc:
     vtbls:
       - ea: 0x14183DCF8
         base: Client::Game::Event::LuaActor
     funcs:
-#fail       0x140AA2EB0: ctor
+      0x140852c60: ctor
   Client::Game::Event::LuaEventNpc:
     vtbls:
       - ea: 0x14183DCE8
         base: Client::Game::Event::LuaActor
     funcs:
-#fail       0x140AA2B00: ctor
+      0x1408528b0: ctor
   Component::Exd::ExdModule:
     vtbls:
       - ea: 0x1417F4940
@@ -1727,7 +1727,7 @@ classes:
       0x1404C9AE0: ClearFocusTarget
       0x1404C9B00: SetFocusTargetByObjectId
       0x1404CA4A0: IsObjectInViewRange
-#fail       0x1404B28D0: RemoveObjectFromTargets
+      0x1404CBCE0: RemoveObjectFromTargets
   Client::System::Input::InputData:
     vtbls:
       - ea: 0x1417F5590
@@ -2408,7 +2408,7 @@ classes:
       0x14067F180: AddHistoryEntry
   Client::UI::Misc::CharaView:
     vtbls:
-#fail       - ea: 0x14176CF40
+      - ea: 0x14180D738
     vfuncs:
       0: dtor
       1: Initialize
@@ -2477,7 +2477,7 @@ classes:
       - ea: 0x14181FDD0
   Client::UI::Shell::RaptureShellCommandInterface:
     vtbls:
-#fail       - ea: 0x14177C7D8
+      - ea: 0x14181FDE0
         base: Component::Shell::ShellCommandInterface
   Client::UI::Shell::RaptureShellModule:
     vtbls:
@@ -2794,7 +2794,7 @@ classes:
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandHotbarBase:
     vtbls:
-#fail       - ea: 0x14177F088
+      - ea: 0x1418228B8
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandHotbar:
     vtbls:
@@ -2974,37 +2974,37 @@ classes:
       0: dtor
   Client::Game::UI::Telepo::SelectUseTicketInvoker:
     vtbls:
-#fail       - ea: 0x141780580
+      - ea: 0x141855C90
         base: Component::GUI::AtkModuleInterface::AtkEventInterface
     vfuncs:
       2: dtor
   Client::Game::UI::Telepo:
     instances:
-#fail       - ea: 0x141EA6C48
+      - ea: 0x141F68E58
         pointer: False
     vtbls:
-#fail       - ea: 0x141780598
+      - ea: 0x141855CA8
         base: Component::GUI::AtkModuleInterface::AtkEventInterface
     vfuncs:
       2: dtor
     funcs:
-#fail       0x140793CB0: ctor
-#fail       0x140793E10: IsSelectUseTicketInactive
-#fail       0x140793E40: UpdatePlayerAetheryteList
-#fail       0x1407949E0: Teleport
-#fail       0x140795CE0: TeleportWithTicket
-#fail       0x140795D70: InvokeSelectUseTicket
+      0x14091DFA0: ctor
+      0x14091E100: IsSelectUseTicketInactive
+      0x14091E130: UpdatePlayerAetheryteList
+      0x14091ECD0: Teleport
+      0x14091FFD0: TeleportWithTicket
+      0x140920060: InvokeSelectUseTicket
   Client::UI::Agent::AgentHUD:
     vtbls:
-#fail       - ea: 0x141783BC8
+      - ea: 0x141859278
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x14080AE40: ctor
-#fail       0x140810E40: UpdateParty
-#fail       0x140814C50: UpdateHotBar
-#fail       0x140822470: OpenContextMenuFromTarget
-#fail       0x1408253E0: GetMainCommandString  # MainCommand exd
-#fail       0x140825720: OpenSystemMenu
+      0x140998070: ctor
+      0x14099E450: UpdateParty
+      0x1409A2320: UpdateHotBar
+      0x1409AF380: OpenContextMenuFromTarget
+      0x1409B2370: GetMainCommandString  # MainCommand exd
+      0x1409B26B0: OpenSystemMenu
   Client::UI::Agent::AgentChatLog:
     vtbls:
 #fail       - ea: 0x1417841C0
@@ -3099,13 +3099,13 @@ classes:
 #fail       0x140833370: ctor
   Client::UI::Agent::AgentScreenLog:
     vtbls:
-#fail       - ea: 0x141786710
+      - ea: 0x14185BF30
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x1408FD390: ctor
-#fail       0x1408FF830: OpenBalloon
-#fail       0x1408FFCE0: CloseBalloon
-#fail       0x1408FFE70: ResetBalloon
+      0x140A91A90: ctor
+      0x140A93F30: OpenBalloon
+      0x140A94400: CloseBalloon
+      0x140A94590: ResetBalloon
   Client::UI::Agent::AgentLoot:
     vtbls:
 #fail       - ea: 0x141785298
@@ -3745,15 +3745,15 @@ classes:
       1: Evaluate
   Client::UI::Agent::AgentMap:
     vtbls:
-#fail       - ea: 0x141784B30
+      - ea: 0x14185A240
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x140884060: ctor
-#fail       0x140880990: AddGatheringTempMapMarker
-#fail       0x14087FCD0: OpenMap
-#fail       0x14088B010: OpenMapByMapId
-#fail       0x140880CE0: SetFlagMapMarker # (this, territoryId, mapId, (float)x, (float)y, iconId)
-#fail       0x14088F0C0: CanUseTeleport # static
+      0x140A130F0: ctor
+      0x140A0F630: AddGatheringTempMapMarker
+      0x140A0E970: OpenMap
+      0x140A1A1A0: OpenMapByMapId
+      0x140A0F980: SetFlagMapMarker # (this, territoryId, mapId, (float)x, (float)y, iconId)
+      0x140A1E240: CanUseTeleport # static
   Client::UI::Agent::AgentRecipeNote:
     vtbls:
 #fail       - ea: 0x141786228
@@ -3876,19 +3876,19 @@ classes:
       - ea: 0x1418356C8
         base: Client::Game::Event::ModuleBase
     funcs:
-#fail       0x140A3AE80: ctor
+      0x1407EA240: ctor
   Client::Game::Event::LuaActorModule:
     vtbls:
       - ea: 0x141835708
         base: Client::Game::Event::ModuleBase
     funcs:
-#fail       0x140A3ED60: ctor
+      0x1407EE150: ctor
   Client::Game::Event::DirectorModule:
     vtbls:
       - ea: 0x141835740
         base: Client::Game::Event::ModuleBase
     funcs:
-#fail       0x140A3F610: ctor
+      0x1407EEA00: ctor
   Client::Game::Event::LeveDirector:
     vtbls:
       - ea: 0x141837858
@@ -3915,7 +3915,7 @@ classes:
         base: Client::Game::Event::Director
   Client::Game::InstanceContent::InstanceContentDirector:
     vtbls:
-#fail       - ea: 0x1417CC2A8
+      - ea: 0x14193E0E0
         base: Client::Game::InstanceContent::ContentDirector
   Client::Game::InstanceContent::PublicContentDirector:
     vtbls:
@@ -4092,7 +4092,7 @@ classes:
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonContentsFinder:
     vtbls:
-#fail       - ea: 0x141893608
+      - ea: 0x1418D3B68
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonContentsFinderSetting:
     vtbls:
@@ -4134,10 +4134,10 @@ classes:
         base: Client::UI::AddonMateriaDialogBase
   Client::UI::AddonMiragePrismMiragePlate:
     vtbls:
-#fail       - ea: 0x1418940F0
+      - ea: 0x1418D4678
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x140EF5900: ctor
+      0x140F18290: ctor
   Client::UI::AddonMiragePrismPrismBox:
     vtbls:
       - ea: 0x1418BFEF0
@@ -4184,48 +4184,48 @@ classes:
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonSalvageDialog:
     vtbls:
-#fail       - ea: 0x14188CD18
+      - ea: 0x1418CD0F8
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x140EAC0F0: ctor
+      0x140ECE350: ctor
   Client::UI::AddonAreaMap:
     vtbls:
       - ea: 0x1418CEB38
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x140EB61C0: ctor
+      0x140ED84D0: ctor
   Client::UI::AddonScreenText:
     vtbls:
       - ea: 0x1418F9268
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x140FD6DE0: ctor
+      0x141017E40: ctor
   Client::UI::AddonPopUpText:
     vtbls:
-#fail       - ea: 0x14188ED90
+      - ea: 0x1418CF1E8
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x140EC03F0: ctor
+      0x140EE2700: ctor
   Client::UI::AddonFlyText:
     vtbls:
       - ea: 0x1418CF418
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x140EC27F0: ctor
+      0x140EE4B00: ctor
   Client::UI::AddonMiniTalk:
     vtbls:
       - ea: 0x1418CF648
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x140EC5220: ctor
+      0x140EE7530: ctor
   Client::UI::AddonGathering:
     vtbls:
       - ea: 0x1418CFFC8
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x140EC8520: ctor
-#fail       0x140F88E50: ReceiveEvent_ToggleQuickGathering
-#fail       0x140EC8D20: ReceiveEvent_Gather
+      0x140EEABA0: ctor
+      0x140FB3090: ReceiveEvent_ToggleQuickGathering
+      0x140EEB3A0: ReceiveEvent_Gather
   Client::UI::AddonGatheringMasterpiece:
     vtbls:
       - ea: 0x1418D01F8
@@ -4239,23 +4239,23 @@ classes:
       - ea: 0x1418D0AD8
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x140ED1600: ctor
-#fail       0x140ED18E0: SetCommonNamePlate  # x, y, scale, etc
-#fail       0x140ED1B10: SetPlayerNamePlate # player specific nodes
-#fail       0x140ED44E0: ToggleTextRenderMode
+      0x140EF3C80: ctor
+      0x140EF3F60: SetCommonNamePlate  # x, y, scale, etc
+      0x140EF4190: SetPlayerNamePlate # player specific nodes
+      0x140EF6B60: ToggleTextRenderMode
   Client::UI::AddonTeleport:
     vtbls:
-#fail       - ea: 0x141894E38
+      - ea: 0x1418d53f0
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x140EFA100: ctor
-#fail       0x140EFAD70: ChangeTab
+      0x140F1CA80: ctor
+      0x140F1D6F0: ChangeTab
   Client::UI::AddonDeepDungeonStatus:
     vtbls:
       - ea: 0x1418E01E0
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x140F41DE0: ctor
+      0x140F649C0: ctor
   Client::UI::AddonItemInspectionList:
     vtbls:
       - ea: 0x1418E3540
@@ -4301,7 +4301,7 @@ classes:
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonMYCItemBox:
     vtbls:
-#fail       - ea: 0x1418AC458
+      - ea: 0x1418EDCD0
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonTargetInfoBase:
     vtbls:
@@ -4328,7 +4328,7 @@ classes:
       - ea: 0x1418F56F8
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x140FC9FA0: ctor
+      0x14100AE90: ctor
   Client::UI::AddonBattleTalk:
     vtbls:
       - ea: 0x1418F5B58
@@ -4371,7 +4371,7 @@ classes:
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonDTR:
     vtbls:
-#fail       - ea: 0x1418BB930
+      - ea: 0x1419006C0
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonCastBar:
     vtbls:
@@ -4400,7 +4400,7 @@ classes:
       - ea: 0x141901938
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x140FF5590: ResizeForPartySize
+      0x141036840: ResizeForPartySize
   Client::UI::AddonAllianceListX:
     vtbls:
       - ea: 0x141901B70
@@ -4446,17 +4446,17 @@ classes:
       - ea: 0x141909F58
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x1410303D0: ctor
+      0x141071840: ctor
   Client::UI::AddonHudLayoutScreen:
     vtbls:
       - ea: 0x14190A188
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x141031660: ctor
+      0x141072ad0: ctor
 #fail       0x1410362D0: AddonOverlayMouseMovedEvent
-#fail       0x141036500: AddonOverlayMouseClickEvent
-#fail       0x141036900: AddonOverlayMouseReleaseEvent
-#fail       0x1410385B0: _SetAddonScale
+      0x141077970: AddonOverlayMouseClickEvent
+      0x141077D70: AddonOverlayMouseReleaseEvent
+      0x141079A20: _SetAddonScale
   Client::Game::Fate::FateDirector:
     vtbls:
       - ea: 0x14191FAE8
@@ -4525,23 +4525,23 @@ classes:
       - ea: 0x141921368
         base: Client::Graphics::ReferencedClassBase
     funcs:
-#fail       0x141125A10: CreateShaderPackage  # static function
-#fail       0x1411261B0: ctor
-#fail       0x141127590: VectorResize_PixelShader # these 3 functions are identical, just template-generated functions from std::vectors
-#fail       0x141127680: VectorResize_ShaderNode
-#fail       0x141127770: VectorResize_VertexShader
+      0x14117C470: CreateShaderPackage  # static function
+      0x14117CC10: ctor
+      0x14117DFF0: VectorResize_PixelShader # these 3 functions are identical, just template-generated functions from std::vectors
+      0x14117E0E0: VectorResize_ShaderNode
+      0x14117E1D0: VectorResize_VertexShader
   Client::Game::Character::Companion:
     vtbls:
       - ea: 0x141924CC8
         base: Client::Game::Character::Character
     funcs:
-#fail       0x141141040: ctor
+      0x14119E1A0: ctor
   Client::Game::Character::Ornament:
     vtbls:
       - ea: 0x1419249C0
         base: Client::Game::Character::Character
     funcs:
-#fail       0x141140C00: ctor
+      0x14119DDA0: ctor
   Client::Game::Character::CutsceneCharacter:
     vtbls:
       - ea: 0x141A26F80
@@ -4550,14 +4550,14 @@ classes:
       0x1413D8670: ctor
   Client::Game::CameraBase:
     vtbls:
-#fail       - ea: 0x1418DFF28
+      - ea: 0x1419263F0
   Client::Game::Camera:
     vtbls:
-#fail       - ea: 0x1418DFF90
+      - ea: 0x141926458
         base: Client::Game::CameraBase
     funcs:
-#fail       0x1411824B0: UpdateRotation
-#fail       0x141184FB0: ctor
+      0x1411DFDC0: UpdateRotation
+      0x1411E28C0: ctor
   Client::Game::LowCutCamera:
     vtbls:
 #fail       - ea: 0x1418E0098
@@ -4583,8 +4583,8 @@ classes:
       - ea: 0x141928040
         base: Client::Graphics::Singleton
     funcs:
-#fail       0x1411A16E0: ctor
-#fail       0x1411A17C0: Initialize
+      0x141200920: ctor
+      0x141200A00: Initialize
   Client::Graphics::JobSystem<Client::Graphics::Streaming::StreamingManager>:
     vtbls:
       - ea: 0x141928050
@@ -4611,17 +4611,17 @@ classes:
       - ea: 0x141928090
         base: Client::Graphics::Singleton
     funcs:
-#fail       0x1411A3FD0: ctor
-#fail       0x1411A40F0: Initialize
-#fail       0x1411A4470: Update
+      0x141203210: ctor
+      0x141203330: Initialize
+      0x1412036B0: Update
   Client::Graphics::Physics::BonePhysicsModule:
     vtbls:
       - ea: 0x14192A638
     vfuncs:
       0: dtor
     funcs:
-#fail       0x1411B4120: ctor
-#fail       0x1411B42A0: Initialize
+      0x1412134F0: ctor
+      0x141213670: Initialize
   Client::System::Scheduler::Base::SchedulerState:
     vtbls:
       - ea: 0x14192E430
@@ -4629,25 +4629,25 @@ classes:
     vtbls:
       - ea: 0x14192EED8
     funcs:
-#fail       0x1411D4E20: ctor
-#fail       0x1411D5290: Reset
-#fail       0x1411D5310: Update
-#fail       0x1411D5CC0: UpdateWithoutIntegration
+      0x141234380: ctor
+      0x1412347f0: Reset
+      0x141234870: Update
+      0x141235220: UpdateWithoutIntegration
   Client::Game::Object::Aetheryte:
     vtbls:
       - ea: 0x14192F850
         base: Client::Game::Object::GameObject
     funcs:
-#fail       0x1411F98B0: Create
+      0x141258F40: Create
   Component::Log::LogModuleInterface:
     vtbls:
-#fail       - ea: 0x1418E9C00
+      - ea: 0x141930340
   Component::Log::LogModule:
     vtbls:
-#fail       - ea: 0x1418E9C50
+      - ea: 0x141930390
         base: Component::Log::LogModuleInterface
     funcs:
-#fail       0x141216910: ctor
+      0x1412789C0: ctor
   Client::Game::Object::HousingObject:
     vtbls:
       - ea: 0x1419E1EF0
@@ -4766,7 +4766,7 @@ classes:
     instances:
       - ea: 0x141F356B0
     funcs:
-#fail       0x14118C940: ctor
+      0x1411EA240: ctor
   Vector3:
     funcs:
       0x1401A1420: Normalize
