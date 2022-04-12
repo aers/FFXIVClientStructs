@@ -788,7 +788,7 @@ classes:
       0x1400EEFD0: IsContentIdInParty # Static
   Client::Graphics::Kernel::Notifier:
     vtbls:
-#fail       - ea: 0x14171D820
+      - ea: 0x1417BD390
   Client::System::Crypt::Crc32:
     vtbls:
       - ea: 0x1417C0E50
@@ -4495,18 +4495,18 @@ classes:
         base: Client::Game::Object::GameObject
   Client::Graphics::JobSystem<Client::Graphics::Culling::CullingManager,Client::Graphics::Culling::CullingJobOpt>:
     vtbls:
-#fail       - ea: 0x1418DB098
+      - ea: 0x141920D88
   Client::Graphics::JobSystem<Client::Graphics::Culling::CullingManager,Client::Graphics::Culling::CallbackJobOpt>:
     vtbls:
-#fail       - ea: 0x1418DB0A0
+      - ea: 0x141920D90
   Client::Graphics::JobSystem<Client::Graphics::Culling::CullingManager,Client::Graphics::Culling::RenderCallbackJob>:
     vtbls:
-#fail       - ea: 0x1418DB0A8
+      - ea: 0x141920D98
   Client::Graphics::Culling::CullingManager:
     instances:
       - ea: 0x141F14C88
     vtbls:
-#fail       - ea: 0x1418DB0B0
+      - ea: 0x141920DA0
         base: Client::Graphics::Singleton
   Client::Graphics::Kernel::CVector<Client::Graphics::Kernel::VertexShader*>:
     vtbls:
@@ -4560,22 +4560,22 @@ classes:
       0x1411E28C0: ctor
   Client::Game::LowCutCamera:
     vtbls:
-#fail       - ea: 0x1418E0098
+      - ea: 0x141926560
         base: Client::Game::CameraBase
     funcs:
-#fail       0x1411881C0: ctor
+      0x1411E5AD0: ctor
   Client::Game::Camera2:
     vtbls:
-#fail       - ea: 0x1418E0208
+      - ea: 0x1419266D0
         base: Client::Game::Camera
     funcs:
-#fail       0x14118E1A0: ctor
+      0x1411EBAA0: ctor
   Client::Game::Camera3:
     vtbls:
-#fail       - ea: 0x1418E0100
+      - ea: 0x1419265C8
         base: Client::Game::Camera
     funcs:
-#fail       0x14118BE90: ctor
+      0x1411E9790: ctor
   Client::Graphics::Culling::OcclusionCullingManager:
     instances:
       - ea: 0x141F2C120
