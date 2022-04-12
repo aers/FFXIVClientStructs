@@ -2464,6 +2464,7 @@ classes:
     funcs:
       0x140700420: IsCasting
       0x140710EB0: GetCompanionOwnerID
+      0x140711D90: GetTargetId
       0x140714D20: dtor
       0x140778150: ctor
   Component::Shell::ShellCommandInterface:
