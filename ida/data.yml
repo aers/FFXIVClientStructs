@@ -520,10 +520,10 @@ classes:
       - ea: 0x141F308B8
         pointer: False
     funcs:
-#fail       0x1407FAE60: ctor
-#fail       0x1407FAE90: dtor
-#fail       0x1407FAFD0: Update
-#fail       0x1407FB0F0: ChangeGauge
+      0x1409873D0: ctor
+      0x140987400: dtor
+      0x140987540: Update
+      0x140987660: ChangeGauge
   Client::Game::Gauge::JobGauge:
     vtbls:
 #fail       - ea: 0x1417818E0
