@@ -17,15 +17,15 @@ globals:
   0x141F5FBC8: g_CharacterManager_CompanionMemoryPtr
   0x141F5FBF8: g_GameObjectManager_ObjectList
   0x141F60948: g_GameObjectManager_ObjectListEnd
-#fail   0x141EA7388: g_Client::Game::UI::Buddy.Pet # not a pointer
-#fail   0x141EA7398: g_Client::Game::UI::Buddy.Pet.BuffList # not a pointer
-#fail   0x141EA8048: g_Client::Game::UI::Buddy.CompanionStats  # not a pointer. Member of UIState
-#fail   0x141EA8050: g_Client::Game::UI::Buddy.CompanionStats.TimeRemaining  # not a pointer
-#fail   0x141EA80A0: g_Client::Game::UI::Buddy.BattleBuddyListPtr # Member of UIState
-#fail   0x141EA81E8: g_Client::Game::UI::RelicNote # not a pointer
-#fail   0x141EB43F0: g_TitleController
-#fail   0x141EB43F8: g_TitleList
-#fail   0x141ECBA88: g_FateTablePtr
+  0x141F695B8: g_Client::Game::UI::Buddy.Pet # not a pointer
+  0x141F695C8: g_Client::Game::UI::Buddy.Pet.BuffList # not a pointer
+  0x141F6A278: g_Client::Game::UI::Buddy.CompanionStats  # not a pointer. Member of UIState
+  0x141F6A280: g_Client::Game::UI::Buddy.CompanionStats.TimeRemaining  # not a pointer
+  0x141F6A2D0: g_Client::Game::UI::Buddy.BattleBuddyListPtr # Member of UIState
+  0x141F6A430: g_Client::Game::UI::RelicNote # not a pointer
+  0x141F76720: g_TitleController
+  0x141F76728: g_TitleList
+  0x141F88FA8: g_FateTablePtr
   0x141F88C40: g_ClientObjectManager
   0x141F19EC0: g_SomeOtherRenderingState
   0x141F2C194: g_InvSqrt3
