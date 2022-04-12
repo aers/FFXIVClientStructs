@@ -2256,7 +2256,7 @@ classes:
       22: GetRetainerTaskDataModule
       23: GetFlagStatusModule
       29: GetRaptureTeleportHistory
-      34: GetAgentModule
+      35: GetAgentModule
       36: GetUI3DModule
       53: GetUIInputData
       54: GetUIInputModule
@@ -3008,17 +3008,17 @@ classes:
       0x1409B26B0: OpenSystemMenu
   Client::UI::Agent::AgentChatLog:
     vtbls:
-#fail       - ea: 0x1417841C0
+      - ea: 0x1418598D0
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x140842C40: ctor
+      0x1409D0510: ctor
       0x1409D5650: InsertTextCommandParam
   Client::UI::Agent::AgentInventory:
     vtbls:
-#fail       - ea: 0x141783C50
+      - ea: 0x141859300
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x140827330: ctor
+      0x1409B4280: ctor
   Client::UI::Agent::AgentInventoryContext:
     vtbls:
       - ea: 0x1417D1868
@@ -3046,28 +3046,28 @@ classes:
       0x14025A8C0: ctor
   Client::UI::Agent::AgentEmote:
     vtbls:
-#fail       - ea: 0x141784868
+      - ea: 0x141859F78
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x140879210: ctor
+      0x140A07EA0: ctor
   Client::UI::Agent::AgentMacro:
     vtbls:
-#fail       - ea: 0x141784FC8
+      - ea: 0x14185A6D8
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x14089C0A0: ctor
+      0x140A2C520: ctor
   Client::UI::Agent::AgentFishingNote:
     vtbls:
-#fail       - ea: 0x141784C20
+      - ea: 0x14185A330
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x140891B10: ctor
+      0x140a20F90: ctor
   Client::UI::Agent::AgentFishGuide:
     vtbls:
-#fail       - ea: 0x141784CA8
+      - ea: 0x14185A3B8
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x140894A90: ctor
+      0x140A23EC0: ctor
   Client::UI::Agent::AgentFishRecord:
     vtbls:
 #fail       - ea: 0x141784D30
@@ -3088,10 +3088,10 @@ classes:
 #fail       0x140800280: ctor
   Client::UI::Agent::AgentMarker:
     vtbls:
-#fail       - ea: 0x141785F78
+      - ea: 0x14185B738
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x1408DE270: ctor
+      0x140A72980: ctor
   Client::UI::Agent::AgentTrade:
     vtbls:
 #fail       - ea: 0x141783DC8
@@ -3199,10 +3199,10 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentActionDetail:
     vtbls:
-#fail       - ea: 0x141785D50
+      - ea: 0x14185B518
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x1408D7C10: ctor
+      0x140A6C300: ctor
   Client::UI::Agent::AgentRetainer:
     vtbls:
 #fail       - ea: 0x141783D40
@@ -3217,10 +3217,10 @@ classes:
 #fail       0x140924630: ctor
   Client::UI::Agent::AgentMonsterNote:
     vtbls:
-#fail       - ea: 0x141785FF0
+      - ea: 0x14185B7B0
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x1408DE750: ctor
+      0x140A72E60: ctor
   Client::UI::Agent::AgentItemSearch:
     vtbls:
       - ea: 0x1417D3918
@@ -3271,10 +3271,10 @@ classes:
 #fail       0x14082A290: ctor
   Client::UI::Agent::AgentHowToList:
     vtbls:
-#fail       - ea: 0x1417868F0
+      - ea: 0x14185C098
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x1409037D0: ctor
+      0x140A96850: ctor
   Client::UI::Agent::AgentCabinet:
     vtbls:
 #fail       - ea: 0x141786990
@@ -3328,7 +3328,7 @@ classes:
       - ea: 0x1417D6BE0
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x1402D86B0: ctor
+      0x1402E9570: ctor
   Client::UI::Agent::AgentAchievement:
     vtbls:
 #fail       - ea: 0x1417842C0
@@ -3394,19 +3394,19 @@ classes:
       - ea: 0x14191D830
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x1410E4810: ctor
+      0x141103670: ctor
   Client::UI::Agent::AgentHousingPortal:
     vtbls:
       - ea: 0x14191DAA0
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x1410EA3D0: ctor
+      0x14110A5D0: ctor
   Client::UI::Agent::AgentHousingPlant:
     vtbls:
       - ea: 0x14191DA10
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x1410E8D70: ctor
+      0x141108F70: ctor
   Client::UI::Agent::AgentPersonalRoomPortal:
     vtbls:
 #fail       - ea: 0x141787880
@@ -3418,7 +3418,7 @@ classes:
       - ea: 0x14191DB90
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x1410EC7A0: ctor
+      0x14110CA20: ctor
   Client::UI::Agent::AgentLookingForGroup:
     vtbls:
       - ea: 0x1417D3F28
@@ -3499,22 +3499,22 @@ classes:
 #fail       0x1408099F0: ctor
   Client::UI::Agent::AgentMinionMountBase:
     vtbls:
-#fail       - ea: 0x141787A08
+      - ea: 0x14185D178
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x14093C550: ctor
+      0x140ACD970: ctor
   Client::UI::Agent::AgentMinionNoteBook:
     vtbls:
-#fail       - ea: 0x141787B80
+      - ea: 0x14185D2F0
         base: Client::UI::Agent::AgentMinionMountBase
     funcs:
-#fail       0x14093F140: ctor
+      0x140AD0560: ctor
   Client::UI::Agent::AgentMountNoteBook:
     vtbls:
-#fail       - ea: 0x141787D50
+      - ea: 0x14185D4C0
         base: Client::UI::Agent::AgentMinionMountBase
     funcs:
-#fail       0x140941CF0: ctor
+      0x140AD3110: ctor
   Client::UI::Agent::AgentItemComp:
     vtbls:
 #fail       - ea: 0x141784040
@@ -3757,10 +3757,10 @@ classes:
       0x140A1E240: CanUseTeleport # static
   Client::UI::Agent::AgentRecipeNote:
     vtbls:
-#fail       - ea: 0x141786228
+      - ea: 0x14185B9E8
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x1408EAFA0: ctor
+      0x140A7F6D0: ctor
   Client::UI::Agent::AgentTeleport:
     vtbls:
       - ea: 0x14191E040
