@@ -1282,7 +1282,7 @@ classes:
     vtbls:
       - ea: 0x1417E2500
         base: Client::Graphics::Singleton
-#fail       - ea: 0x141742318
+      - ea: 0x1417E2508
         base: Client::Graphics::Kernel::Notifier
     funcs:
       0x14039EBA0: ctor
