@@ -227,7 +227,7 @@ classes:
       0x14070D130: GetStatusIndex
       0x14070CF70: GetStatusIdByIndex
       0x14070CF90: GetRemainingTimeByIndex
-#fail       0x1406EAD00: GetSourceIdByIndex
+      0x14070CFC0: GetSourceIdByIndex
   Client::Game::RetainerManager:
     instances:
       - ea: 0x141F882B0
@@ -288,7 +288,7 @@ classes:
       0x14051BA50: ctor
   Client::Game::CameraManager:
     funcs:
-#fail       0x14118D7C0: PreUpdate
+      0x1411EB0C0: PreUpdate
   Client::Game::Object::GameObjectManager:
     instances:
       - ea: 0x141F5FBE0
@@ -301,7 +301,7 @@ classes:
       0x1407787A0: UpdateObjectArrays
       0x140778940: UpdateObjectArraysWrapper
       0x140778950: UpdateObjectArraysWrapper2
-#fail       0x1407557A0: ClearObjectArrays
+      0x140778970: ClearObjectArrays
   Client::Game::Character::CharacterManager:
     instances:
       - ea: 0x141F5F8A0
@@ -343,18 +343,18 @@ classes:
       0x1412CBB70: OpenBalloon
       0x1412CBBE0: CloseBalloon
       0x1412CBCD0: Initialize
-#fail       0x141239230: SetDefaultId
+      0x1412CBD10: SetDefaultId
       0x1412CBD20: Reset # this is near identical to Initialize but is called in update instead
       0x1412CBD60: Update
       0x1412CBEC0: Terminate
       0x1412CBF10: StartTimerMode # (Balloon* this, float timer, ushort id) if id == 1 use default id else use id
-#fail       0x141239470: StartOtherMode # (Balloon* this, ushort id) id same as above
+      0x1412CBF50: StartOtherMode # (Balloon* this, ushort id) id same as above
   FateManager:
     funcs:
-#fail       0x14110C950: HasValue  # g_FateTablePtr != 0
-#fail       0x14110C970: GetPtr # return g_FateTablePtr
-#fail       0x14110C980: ctor
-#fail       0x14110C9D0: dtor
+      0x141162B70: HasValue  # g_FateTablePtr != 0
+      0x141162B90: GetPtr # return g_FateTablePtr
+      0x141162BA0: ctor
+      0x141162BF0: dtor
   BattleBuddyList:
     funcs:
 #fail       0x14079B1E0: GetMemberBattleCharaByIndex
