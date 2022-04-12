@@ -1088,7 +1088,7 @@ classes:
     vtbls:
 #fail       - ea: 0x14173A7C0
     funcs:
-#fail       0x14031E0E0: ProcessCommands
+      0x140335760: ProcessCommands
 #fail       0x14031E390: PrimeForDraw
   Client::Graphics::Kernel::Device::RenderThread:
     vtbls:
@@ -4134,10 +4134,10 @@ classes:
         base: Client::UI::AddonMateriaDialogBase
   Client::UI::AddonMiragePrismMiragePlate: # FittingRoom?
     vtbls:
-      - ea: 0x1418D4678
+      - ea: 0x1418C06C0
         base: Component::GUI::AtkUnitBase
     funcs:
-      0x140F18290: ctor
+      0x140E65770: ctor
   Client::UI::AddonMiragePrismPrismBox:
     vtbls:
       - ea: 0x1418BFEF0
