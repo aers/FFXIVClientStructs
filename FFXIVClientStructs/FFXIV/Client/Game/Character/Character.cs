@@ -64,6 +64,6 @@ public unsafe partial struct Character
     [MemberFunction("E8 ?? ?? ?? ?? 49 3B C7 0F 84")]
     public partial uint GetTargetId();
 
-    [VirtualFunction(88)]
+    [VirtualFunction(87)]
     public partial bool IsMount();
 }

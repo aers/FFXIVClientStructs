@@ -2429,27 +2429,27 @@ classes:
     vtbls:
       - ea: 0x14180EC38
     vfuncs:
-      2: GetObjectID
-      3: GetObjectKind
-      4: GetObjectType
-      5: GetIsTargetable
-      7: GetName
-      8: GetRadius
-      9: GetHeight
-      12: GetGender
-      17: EnableDraw
-      18: DisableDraw
-      22: SetDrawObject
-      28: GetDrawObject
-      29: GetDrawObject_2
-      30: UpdateRadius
-      41: Update
-      49: GetNpcID
-      58: IsDead
-      60: Terminate
-      61: Destroy
-      62: IsCharacter
-      69: OnInitialize
+      1: GetObjectID
+      2: GetObjectKind
+      3: GetObjectType
+      4: GetIsTargetable
+      6: GetName
+      7: GetRadius
+      8: GetHeight
+      11: GetGender
+      16: EnableDraw
+      17: DisableDraw
+      21: SetDrawObject
+      27: GetDrawObject
+      28: GetDrawObject_2
+      29: UpdateRadius
+      40: Update
+      48: GetNpcID
+      57: IsDead
+      59: Terminate
+      60: Destroy
+      61: IsCharacter
+      68: OnInitialize
     funcs:
       0x140700E90: IsMountOrOrnament
       0x140701B80: GetPosition
@@ -2463,14 +2463,14 @@ classes:
       - ea: 0x14180F438
         base: Client::Graphics::Vfx::VfxDataListenner
     vfuncs:
-      77: GetModelChara
-      80: GetStatusManager
-      81: GetStatusManager_2
-      82: GetCastInfo
-      83: GetCastInfo_2
-      86: GetForayInfo
-      87: GetForayInfo_2
-      88: IsMount
+      76: GetModelChara
+      79: GetStatusManager
+      80: GetStatusManager_2
+      81: GetCastInfo
+      82: GetCastInfo_2
+      85: GetForayInfo
+      86: GetForayInfo_2
+      87: IsMount
     funcs:
       0x140700420: IsCasting
       0x140710EB0: GetCompanionOwnerID
