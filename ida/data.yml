@@ -1068,13 +1068,21 @@ classes:
       0x140338C40: LoadBuffer
       0x14033E320: Activate
   Client::Graphics::Kernel::Device:
+    vtbls:
+      - ea: 0x1417DA938
+        base: Client::Graphics::Singleton
+  Client::Graphics::Kernel::DeviceWin:
+    vtbls:
+      - ea: 0x1417DA940
+        base: Client::Graphics::Kernel::Device
+  Client::Graphics::Kernel::DeviceDX11:
     instances:
       - ea: 0x141F11600
-#    vtbls:
-#fail       - ea: 0x1417DA950
-#        base: Client::Graphics::Singleton
+    vtbls:
+      - ea: 0x1417DA950
+        base: Client::Graphics::Kernel::DeviceWin
     funcs:
-#fail       0x140313040: ctor
+      0x14032A710: ctor
       0x14032A770: Initialize
       0x14032B3D0: CreateTexture2D
       0x14032BA60: CreateConstantBuffer
@@ -1084,12 +1092,16 @@ classes:
       0x1401D88B0: PushBackCommand
       0x14033A150: PrepareModel
       0x1403D3BE0: Draw_cmd
-  Client::Graphics::Kernel::Device::ImmediateContext:
-#    vtbls:
-#fail       - ea: 0x14173A7C0
+  Client::Graphics::Kernel::Device::ImmediateContextBase:
+    vtbls:
+      - ea: 0x1417DA9E0
+  Client::Graphics::Kernel::Device::ImmediateContextDX11: # unknown name
+    vtbls:
+      - ea: 0x1417DA9E8
+        base: Client::Graphics::Kernel::Device::ImmediateContextBase
     funcs:
       0x140335760: ProcessCommands
-#fail       0x14031E390: PrimeForDraw
+      0x140330BB0: PrimeForDraw
   Client::Graphics::Kernel::Device::RenderThread:
     vtbls:
       - ea: 0x1417DA9F0
