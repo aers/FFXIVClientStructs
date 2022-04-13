@@ -11,5 +11,5 @@ public struct Ornament
 {
     [FieldOffset(0x0)] public Character Character;
 
-    [FieldOffset(0x19F0)] public uint OrnamentId;
+    [FieldOffset(0x1AE0)] public uint OrnamentId;
 }
