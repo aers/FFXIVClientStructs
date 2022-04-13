@@ -2257,34 +2257,32 @@ classes:
       23: GetFlagStatusModule
       29: GetRaptureTeleportHistory
       35: GetAgentModule
-      36: GetUI3DModule
-      53: GetUIInputData
-      54: GetUIInputModule
-      56: GetLogFilterConfig
-      132: AnnounceHowTo
-      134: HideHowTo
-      137: HideGoldSaucerReward
-      140: HideGoldSaucerReward_2
-      142: ShowGoldSaucerReward
-      143: HideGoldSaucerReward_3
-      149: ShowImage
-      150: ShowText
-      151: ShowTextChain
-      152: ShowWideText
-      153: ShowPoisonText
-      154: ShowErrorText
-      155: ShowTextClassChange
-      156: ShowGetAction
-      157: ShowLocationTitle
-      161: ShowGrandCompany1
-      164: ShowStreak
-      165: ShowAddonKillStreakForManeuvers
-      166: ShowBaloonMessage
-      167: ShowBattleTalk
-      168: ShowBattleTalkImage
-      169: ShowBattleTalkUnknown
-      170: ShowBattleTalkSound
-      175: ExecuteMainCommand
+      37: GetUI3DModule
+#fail       53: GetUIInputData
+#fail       54: GetUIInputModule
+#fail       56: GetLogFilterConfig
+      143: AnnounceHowTo
+      145: HideHowTo
+      147: ShowGoldSaucerReward
+      148: HideGoldSaucerReward
+      160: ShowImage
+      161: ShowText
+      162: ShowTextChain
+      163: ShowWideText
+      164: ShowPoisonText
+      165: ShowErrorText
+      166: ShowTextClassChange
+      167: ShowGetAction
+      168: ShowLocationTitle
+      172: ShowGrandCompany1
+      175: ShowStreak
+      176: ShowAddonKillStreakForManeuvers
+      177: ShowBaloonMessage
+      178: ShowBattleTalk
+      179: ShowBattleTalkImage
+      180: ShowBattleTalkUnknown
+      181: ShowBattleTalkSound
+      186: ExecuteMainCommand
   Client::UI::UIModule:
     vtbls:
       - ea: 0x141807590
