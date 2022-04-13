@@ -6,5 +6,5 @@
 public unsafe struct AtkModule
 {
     [FieldOffset(0x0)] public void* vtbl;
-    [FieldOffset(0x1B30)] public AtkArrayDataHolder AtkArrayDataHolder;
+    [FieldOffset(0x1B48)] public AtkArrayDataHolder AtkArrayDataHolder;
 }
