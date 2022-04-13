@@ -1070,9 +1070,9 @@ classes:
   Client::Graphics::Kernel::Device:
     instances:
       - ea: 0x141F11600
-    vtbls:
+#    vtbls:
 #fail       - ea: 0x1417DA950
-        base: Client::Graphics::Singleton
+#        base: Client::Graphics::Singleton
     funcs:
 #fail       0x140313040: ctor
       0x14032A770: Initialize
@@ -1085,7 +1085,7 @@ classes:
       0x14033A150: PrepareModel
       0x1403D3BE0: Draw_cmd
   Client::Graphics::Kernel::Device::ImmediateContext:
-    vtbls:
+#    vtbls:
 #fail       - ea: 0x14173A7C0
     funcs:
       0x140335760: ProcessCommands
