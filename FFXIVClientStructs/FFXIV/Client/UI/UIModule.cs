@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 // Client::UI::UIModule
 //   Client::UI::UIModuleInterface
-[StructLayout(LayoutKind.Explicit, Size = 0xE3320)]
+[StructLayout(LayoutKind.Explicit, Size = 0xE4770)]
 public unsafe partial struct UIModule
 {
     [FieldOffset(0x0)] public void* vtbl;
@@ -20,7 +20,7 @@ public unsafe partial struct UIModule
     [FieldOffset(0x20)] public void* unk;
     [FieldOffset(0x28)] public void* SystemConfig;
 
-    [Obsolete("Use GetRaptureAtkModule", true)] [FieldOffset(0xB8ED0)]
+    [Obsolete("Use GetRaptureAtkModule", true)] [FieldOffset(0xB9AB0)]
     public RaptureAtkModule RaptureAtkModule; // note: NOT a pointer, the module's a member
 
     /*
@@ -89,83 +89,79 @@ public unsafe partial struct UIModule
     [VirtualFunction(29)]
     public partial void* GetRaptureTeleportHistory();
 
-    [VirtualFunction(34)]
+    [VirtualFunction(35)]
     public partial AgentModule* GetAgentModule();
 
-    [VirtualFunction(36)]
+    [VirtualFunction(37)]
     public partial UI3DModule* GetUI3DModule();
 
-    [VirtualFunction(53)]
+    [VirtualFunction(53)] //TODO: fix index
     public partial void* GetUIInputData();
 
-    [VirtualFunction(54)]
+    [VirtualFunction(54)] //TODO: fix index
     public partial void* GetUIInputModule();
 
-    [VirtualFunction(56)]
+    [VirtualFunction(56)] //TODO: fix index
     public partial void* GetLogFilterConfig();
 
     [VirtualFunction(138)]
     public partial void ShowTextRelicAtma(uint itemId);
 
-    [VirtualFunction(142)]
+    [VirtualFunction(147)]
     public partial void ShowGoldSaucerReward(byte type, uint mgp, uint rewardItemId, uint rewardItemCount);
 
-    [VirtualFunction(143)]
+    [VirtualFunction(148)]
     public partial void HideGoldSaucerReward();
 
-    [VirtualFunction(149)]
-    public partial void ShowImage(uint imageId, bool useLocalePath = false, int displayType = 0,
-        bool playSound = false);
-
-    [VirtualFunction(150)]
-    public partial void ShowText(int position, string text, uint iconOrCheck1 = 0, bool playSound = true,
-        uint iconOrCheck2 = 0, bool alsoPlaySound = true);
-
-    [VirtualFunction(151)]
-    public partial void ShowTextChain(int chain, int hqChain = 0);
-
-    [VirtualFunction(152)] //_AreaText
-    public partial void ShowWideText(string text, int layer = 0, bool isTop = true, bool isFast = false,
-        uint logMessageId = 0);
-
-    [VirtualFunction(153)]
-    public partial void ShowPoisonText(string text, int layer = 0);
-
-    [VirtualFunction(154)]
-    public partial void ShowErrorText(string text, bool forceVisible = true);
-
-    [VirtualFunction(155)]
-    public partial void ShowTextClassChange(uint classJobId);
-
-    [VirtualFunction(156)]
-    public partial void ShowGetAction(ActionType actionType, uint actionId);
-
-    [VirtualFunction(157)]
-    public partial void ShowLocationTitle(int territoryId, bool zoomAnim, bool restartAnim,
-        int* language /*-1 = client lang*/);
+    [VirtualFunction(160)]
+    public partial void ShowImage(uint imageId, bool useLocalePath = false, int displayType = 0, bool playSound = false);
 
     [VirtualFunction(161)]
-    public partial void ShowGrandCompany1(uint gc, uint gcRank, bool playSound = true);
+    public partial void ShowText(int position, string text, uint iconOrCheck1 = 0, bool playSound = true, uint iconOrCheck2 = 0, bool alsoPlaySound = true);
+
+    [VirtualFunction(162)]
+    public partial void ShowTextChain(int chain, int hqChain = 0);
+
+    [VirtualFunction(163)] //_AreaText
+    public partial void ShowWideText(string text, int layer = 0, bool isTop = true, bool isFast = false, uint logMessageId = 0);
 
     [VirtualFunction(164)]
-    public partial void ShowStreak(int streak, int streakType);
+    public partial void ShowPoisonText(string text, int layer = 0);
 
     [VirtualFunction(165)]
-    public partial void ShowAddonKillStreakForManeuvers(int streak, int streakType);
+    public partial void ShowErrorText(string text, bool forceVisible = true);
 
     [VirtualFunction(166)]
-    public partial void ShowBalloonMessage(float* worldPosition, byte pz, uint textImage); //121501 -> Nice Shot!
+    public partial void ShowTextClassChange(uint classJobId);
 
     [VirtualFunction(167)]
-    public partial void ShowBattleTalk(string name, string text, float duration, byte style);
+    public partial void ShowGetAction(ActionType actionType, uint actionId);
 
     [VirtualFunction(168)]
-    public partial void ShowBattleTalkImage(string name, string text, float duration, uint image, byte style);
+    public partial void ShowLocationTitle(int territoryId, bool zoomAnim, bool restartAnim, int* language /*-1 = client lang*/);
 
-    [VirtualFunction(170)]
-    public partial void ShowBattleTalkSound(string name, string text, float duration, int sound, byte style);
+    [VirtualFunction(172)]
+    public partial void ShowGrandCompany1(uint gc, uint gcRank, bool playSound = true);
 
     [VirtualFunction(175)]
+    public partial void ShowStreak(int streak, int streakType);
+
+    [VirtualFunction(176)]
+    public partial void ShowAddonKillStreakForManeuvers(int streak, int streakType);
+
+    [VirtualFunction(177)]
+    public partial void ShowBalloonMessage(float* worldPosition, byte pz, uint textImage); //121501 -> Nice Shot!
+
+    [VirtualFunction(178)]
+    public partial void ShowBattleTalk(string name, string text, float duration, byte style);
+
+    [VirtualFunction(179)]
+    public partial void ShowBattleTalkImage(string name, string text, float duration, uint image, byte style);
+
+    [VirtualFunction(181)]
+    public partial void ShowBattleTalkSound(string name, string text, float duration, int sound, byte style);
+
+    [VirtualFunction(186)]
     public partial void ExecuteMainCommand(uint command);
 
     [StructLayout(LayoutKind.Explicit, Size = 0x8)]
