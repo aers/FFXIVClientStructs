@@ -4,7 +4,7 @@
 
 // size = 0x2D6C0
 // ctor 48 89 01 48 8D 59 08 
-[StructLayout(LayoutKind.Explicit, Size = 0x2D6C0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x2D6E0)]
 public unsafe struct Manager
 {
     public enum RenderViews : uint

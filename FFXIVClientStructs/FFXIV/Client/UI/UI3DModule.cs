@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 // Client::UI::UI3DModule
 
 // ctor E8 ? ? ? ? 48 8B 44 24 ? 4C 8D BF ? ? ? ? 
-[StructLayout(LayoutKind.Explicit, Size = 0xD4C0)]
+[StructLayout(LayoutKind.Explicit, Size = 0xD590)]
 public unsafe struct UI3DModule
 {
     // Client::UI::UI3DModule::MapInfo

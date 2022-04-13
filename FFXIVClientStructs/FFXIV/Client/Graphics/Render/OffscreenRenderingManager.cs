@@ -3,7 +3,7 @@
 // renderer responsible for UI character models - tryon, inspect, etc
 
 // size = 0x150
-[StructLayout(LayoutKind.Explicit, Size = 0x150)]
+[StructLayout(LayoutKind.Explicit, Size = 0x160)]
 public unsafe struct OffscreenRenderingManager
 {
     [FieldOffset(0x0)] public void* vtbl;
