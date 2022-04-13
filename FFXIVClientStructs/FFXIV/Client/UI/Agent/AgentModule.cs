@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 // size = 0xC10
 // ctor E8 ? ? ? ? 48 8B 85 ? ? ? ? 49 8B CF 48 89 87
-[StructLayout(LayoutKind.Explicit, Size = 0xC28)]
+[StructLayout(LayoutKind.Explicit, Size = 0xCA0)]
 public unsafe partial struct AgentModule
 {
     [FieldOffset(0x0)] public void* vtbl;
@@ -16,11 +16,10 @@ public unsafe partial struct AgentModule
     [FieldOffset(0x14)] public uint FrameCounter;
     [FieldOffset(0x18)] public float FrameDelta;
 
-    [FieldOffset(0x20)] public AgentInterface* AgentArray; // 383 pointers patch 6.00
+    [FieldOffset(0x20)] public AgentInterface* AgentArray; // 398 pointers patch 6.10
 
-    [FieldOffset(0xC18)] public UIModule* UIModulePtr;
-    [FieldOffset(0xC20)] public AgentModule* AgentModulePtr;
-    [FieldOffset(0xC28)] public RaptureHotbarModule* RaptureHotbarModulePtr;
+    [FieldOffset(0xC90)] public UIModule* UIModulePtr;
+    [FieldOffset(0xC98)] public AgentModule* AgentModulePtr;
 
     [MemberFunction("E8 ?? ?? ?? ?? 83 FF 0D")]
     public partial AgentInterface* GetAgentByInternalID(uint agentID);
@@ -76,8 +75,7 @@ public unsafe partial struct AgentModule
     }
 }
 
-public enum AgentId : uint
-{
+public enum AgentId : uint {
     Lobby = 0,
     CharaMake = 1,
 
@@ -267,72 +265,72 @@ public enum AgentId : uint
     LovmParty = 197,
     LovmRanking = 198,
     LovmNamePlate = 199,
-    LovmResult = 201,
-    LovmPaletteEdit = 202,
-    BeginnersMansionProblem = 208, //Hall of the Novice
-    DpsChallenge = 209, //Stone, Sky, Sea
-    PlayGuide = 210,
-    WebLauncher = 211,
-    WebGuidance = 212,
-    Orchestrion = 213,
-    OrchestrionInn = 218,
-    HousingEditContainer = 219,
-    YkwNote = 222, //yokai watch medallium
-    ContentsFinderMenu = 223,
-    RaidFinder = 224,
-    GcArmyExpedition = 225,
-    GcArmyMemberList = 226,
-    DeepDungeonMap = 229,
-    DeepDungeonStatus = 230,
-    DeepDungeonSaveData = 231,
-    DeepDungeonScore = 232,
-    GcArmyTraining = 233,
-    GcArmyMenberProfile = 234,
+    LovmResult = 202,
+    LovmPaletteEdit = 203,
+    BeginnersMansionProblem = 207, //Hall of the Novice
+    DpsChallenge = 210, //Stone, Sky, Sea
+    PlayGuide = 211,
+    WebLauncher = 212,
+    WebGuidance = 213,
+    Orchestrion = 214,
+    OrchestrionInn = 219,
+    HousingEditContainer = 220,
+    YkwNote = 223, //yokai watch medallium
+    ContentsFinderMenu = 224,
+    RaidFinder = 225,
+    GcArmyExpedition = 226,
+    GcArmyMemberList = 227,
+    DeepDungeonMap = 230,
+    DeepDungeonStatus = 231,
+    DeepDungeonSaveData = 232,
+    DeepDungeonScore = 233,
+    GcArmyTraining = 234,
+    GcArmyMenberProfile = 235,
 
     //GcArmyExpeditionResult = 235,
-    GcArmyCapture = 236,
-    GcArmyOrder = 237,
-    OrchestrionPlayList = 239,
-    CountDownSettingDialog = 240,
-    WeeklyBingo = 241, //Wondrous Tails
-    AquariumSetting = 249,
-    DeepDungeonMenu = 251,
-    ItemAppraisal = 254, //DeepDungeon Appraisal
-    ItemInspection = 255, //Lockbox
-    ContactList = 257,
-    Snipe = 262,
-    MountSpeed = 263,
-    PvpTeam = 279,
-    TeleportHousingFriend = 287,
-    InventoryBuddy = 289,
-    ContentsReplayPlayer = 290,
-    ContentsReplaySetting = 291,
-    MiragePrismPrismBox = 292, //Glamour Dresser
-    MiragePrismPrismItemDetail = 293,
-    MiragePrismMiragePlate = 294, //Glamour Plates
-    Fashion = 298,
-    HousingGuestBook = 301,
-    ReconstructionBox = 304,
-    ReconstructionBuyback = 305,
-    CrossWorldLinkShell = 306,
-    Description = 308, //Frontline/Bozja Description
-    AozNotebook = 313, //Bluemage Spells
-    Emj = 316, //Mahjong
-    WorldTravel = 321,
-    RideShooting = 322, //Airforce One
-    Credit = 324,
-    EmjSetting = 325, //Mahjong Settings
-    RetainerList = 326,
-    Dawn = 331, //Trust
-    QuestRedo = 335,
-    QuestRedoHud = 336,
-    CircleList = 338, //Fellowships
-    CircleBook = 339,
-    McGuffin = 359, //Collection
-    CraftActionSimulator = 360,
-    MycInfo = 368, //Bozja Info
-    MycItemBox = 369, //Bozja Lost Finds Cache
-    MycItemBag = 370, //Bozja Lost Finds Holster
-    MycBattleAreaInfo = 372, //Bozja Recruitment
-    OrnamentNoteBook = 374 //Accessories
+    GcArmyCapture = 237,
+    GcArmyOrder = 238,
+    OrchestrionPlayList = 240,
+    CountDownSettingDialog = 241,
+    WeeklyBingo = 242, //Wondrous Tails
+    AquariumSetting = 250,
+    DeepDungeonMenu = 252,
+    ItemAppraisal = 255, //DeepDungeon Appraisal
+    ItemInspection = 256, //Lockbox
+    ContactList = 258,
+    Snipe = 263,
+    MountSpeed = 264,
+    PvpTeam = 280,
+    TeleportHousingFriend = 288,
+    InventoryBuddy = 290,
+    ContentsReplayPlayer = 291,
+    ContentsReplaySetting = 292,
+    MiragePrismPrismBox = 293, //Glamour Dresser
+    MiragePrismPrismItemDetail = 294,
+    MiragePrismMiragePlate = 295, //Glamour Plates
+    Fashion = 299,
+    HousingGuestBook = 302,
+    ReconstructionBox = 305,
+    ReconstructionBuyback = 306,
+    CrossWorldLinkShell = 307,
+    Description = 309, //Frontline/Bozja Description
+    AozNotebook = 314, //Bluemage Spells
+    Emj = 317, //Mahjong
+    WorldTravel = 322,
+    RideShooting = 323, //Airforce One
+    Credit = 325,
+    EmjSetting = 326, //Mahjong Settings
+    RetainerList = 327,
+    Dawn = 332, //Trust
+    QuestRedo = 337,
+    QuestRedoHud = 338,
+    CircleList = 340, //Fellowships
+    CircleBook = 341,
+    McGuffin = 361, //Collection
+    CraftActionSimulator = 362,
+    MycInfo = 370, //Bozja Info
+    MycItemBox = 371, //Bozja Lost Finds Cache
+    MycItemBag = 372, //Bozja Lost Finds Holster
+    MycBattleAreaInfo = 375, //Bozja Recruitment
+    OrnamentNoteBook = 376 //Accessories
 }
