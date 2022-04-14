@@ -15,29 +15,47 @@ public unsafe struct AddonSynthesis
     [FieldOffset(0x230)] public AtkComponentButton* CalculationsButton;
     [FieldOffset(0x238)] public AtkComponentIcon* AtkComponentIcon238;
     [FieldOffset(0x240)] public AtkCollisionNode* AtkCollisionNode240;
-    [FieldOffset(0x248)] public AtkTextNode* CraftedItemName;
+    // Doesn't seem to contain data anymore as of patch 6.1
+    // The field is still present in the struct, but contains no data.
+    // [FieldOffset(0x248)] public AtkTextNode* CraftedItemName;
+    // Data has moved to this node, which is not directly mapped on the
+    // struct, normally.
+    public AtkTextNode* CraftedItemName => AtkUnitBase.GetTextNodeById(45); 
     [FieldOffset(0x250)] public AtkResNode* AtkResNode250;
     [FieldOffset(0x258)] public AtkComponentBase* AtkComponentBase258;
-    [FieldOffset(0x260)] public AtkTextNode* Condition; // "Normal"
-    [FieldOffset(0x268)] public AtkResNode* ConditionResNode; // ImageNode as a child
-    [FieldOffset(0x270)] public AtkTextNode* CurrentQuality; // "100"
-    [FieldOffset(0x278)] public AtkTextNode* MaxQuality; // "200" 
-    [FieldOffset(0x280)] public AtkResNode* AtkResNode280;
-    [FieldOffset(0x288)] public AtkTextNode* HQLiteral; // "HQ"
-    [FieldOffset(0x290)] public AtkTextNode* HQPercentage; // "0" -> "100"
-    [FieldOffset(0x298)] public AtkTextNode* StepNumber; // "5"
-    [FieldOffset(0x2A0)] public AtkComponentGaugeBar* ProgressGauge;
-    [FieldOffset(0x2A8)] public AtkComponentGaugeBar* QualityGauge;
-    [FieldOffset(0x2B0)] public AtkTextNode* CurrentProgress; // "100"
-    [FieldOffset(0x2B8)] public AtkTextNode* MaxProgress; // "200"
+    [FieldOffset(0x270)] public AtkTextNode* Condition; // "Normal"
+    // Below seems to be missing as of patch 6.1
+    // [FieldOffset(0x268)] public AtkResNode* ConditionResNode; // ImageNode as a child
+    [FieldOffset(0x278)] public AtkTextNode* AtkTextNode278;
+    [FieldOffset(0x288)] public AtkTextNode* CurrentQuality; // "100"
+    [FieldOffset(0x290)] public AtkTextNode* MaxQuality; // "200"
+    // Seems to be related to collectable crafting somehow,
+    // segfault on accessing when not doing collectable crafting
+    [FieldOffset(0x298)] public AtkTextNode* AtkTextNode298; 
+    [FieldOffset(0x2A0)] public AtkResNode* AtkResNode2A0;
+    [FieldOffset(0x2A8)] public AtkResNode* AtkResNode2A8;
+    [FieldOffset(0x2B0)] public AtkTextNode* HQLiteral; // "HQ"
+    [FieldOffset(0x2B8)] public AtkTextNode* HQPercentage; // "0" -> "100"
+    [FieldOffset(0x2C0)] public AtkTextNode* StepNumber; // "5"
+    // These two also seem to be related to collectable
+    // crafting somehow, more segfaults.
+    [FieldOffset(0x2C8)] public AtkTextNode* AtkTextNode2C8;
+    [FieldOffset(0x2D0)] public AtkTextNode* AtkTextNode2D0;
+    // These seem to have changed offsets somewhere as well,
+    // I cannot find exactly where they have gone.
+    // [FieldOffset(0x2A0)] public AtkComponentGaugeBar* ProgressGauge;
+    // [FieldOffset(0x2A8)] public AtkComponentGaugeBar* QualityGauge;
+    [FieldOffset(0x2D8)] public AtkTextNode* CurrentProgress; // "100"
+    [FieldOffset(0x2E0)] public AtkTextNode* MaxProgress; // "200"
     [FieldOffset(0x2C0)] public AtkResNode* AtkResNode2C0;
-    [FieldOffset(0x2C8)] public AtkTextNode* CurrentDurability; // "50"
-    [FieldOffset(0x2D0)] public AtkTextNode* StartingDurability; // "80"
-    [FieldOffset(0x2D8)] public AtkComponentBase* AtkComponentBase2D8;
-    [FieldOffset(0x2E0)] public AtkComponentBase* AtkComponentBase2E0;
-    [FieldOffset(0x2E8)] public AtkComponentBase* AtkComponentBase2E8;
-    [FieldOffset(0x2F0)] public AtkComponentBase* AtkComponentBase2F0;
-    [FieldOffset(0x2F8)] public AtkComponentBase* AtkComponentBase2F8;
+    [FieldOffset(0x2F0)] public AtkTextNode* CurrentDurability; // "50"
+    [FieldOffset(0x2F8)] public AtkTextNode* StartingDurability; // "80"
+    // I cannot confirm any offsets below StartingDurability are correct.
+    // [FieldOffset(0x2D8)] public AtkComponentBase* AtkComponentBase2D8;
+    // [FieldOffset(0x2E0)] public AtkComponentBase* AtkComponentBase2E0;
+    // [FieldOffset(0x2E8)] public AtkComponentBase* AtkComponentBase2E8;
+    // [FieldOffset(0x2F0)] public AtkComponentBase* AtkComponentBase2F0;
+    // [FieldOffset(0x2F8)] public AtkComponentBase* AtkComponentBase2F8;
     [FieldOffset(0x300)] public AtkComponentBase* AtkComponentBase300;
     [FieldOffset(0x308)] public AtkComponentBase* AtkComponentBase308;
     [FieldOffset(0x310)] public AtkComponentBase* AtkComponentBase310;
