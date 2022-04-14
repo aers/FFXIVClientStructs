@@ -9,18 +9,18 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 
 // size = 0x2C40
 // ctor E8 ? ? ? ? 48 8B F8 EB 02 33 FF 8B 86 ? ? ? ? 
-[StructLayout(LayoutKind.Explicit, Size = 0x2C40)]
+[StructLayout(LayoutKind.Explicit, Size = 0x2D30)]
 public unsafe partial struct BattleChara
 {
     [FieldOffset(0x0)] public Character Character;
 
-    [FieldOffset(0x1A30)] public StatusManager StatusManager;
+    [FieldOffset(0x1B20)] public StatusManager StatusManager;
 
-    [FieldOffset(0x1BC0)] public CastInfo SpellCastInfo;
+    [FieldOffset(0x1CB0)] public CastInfo SpellCastInfo;
 
-    //[FieldOffset(0x1D30)] public fixed byte UnkBattleCharaStruct[0xF00];
+    //[FieldOffset(0x1E20)] public fixed byte UnkBattleCharaStruct[0xF00];
 
-    [FieldOffset(0x2C30)] public ForayInfo Foray;
+    [FieldOffset(0x2D20)] public ForayInfo Foray;
 
     [VirtualFunction(80)]
     public partial StatusManager* GetStatusManager();

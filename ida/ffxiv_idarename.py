@@ -225,6 +225,7 @@ if api is None:
                 return idc.get_name(ea)
 
             def set_addr_name(self, ea, name):
+                # print("{0} {1}".format(ea, name))
                 result = idc.set_name(ea, name)
                 return bool(result)
 

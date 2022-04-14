@@ -7,7 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 
 // size = 0x19F0
 // ctor E8 ? ? ? ? 0F B7 93 ? ? ? ? 45 33 C9 
-[StructLayout(LayoutKind.Explicit, Size = 0x19F0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x1AE0)]
 public unsafe partial struct Character
 {
     [FieldOffset(0x0)] public GameObject GameObject;
@@ -36,34 +36,34 @@ public unsafe partial struct Character
 
     #endregion
 
-    [FieldOffset(0x230)] public uint PlayerTargetObjectID;
+    [FieldOffset(0xC50)] public uint PlayerTargetObjectID;
 
-    [FieldOffset(0xDB0)] public fixed byte EquipSlotData[4 * 10];
-    [FieldOffset(0xDD8)] public fixed byte CustomizeData[0x1A];
+    [FieldOffset(0x808)] public fixed byte EquipSlotData[4 * 10];
+    [FieldOffset(0x830)] public fixed byte CustomizeData[0x1A];
 
-    [FieldOffset(0x1620)] public Balloon Balloon;
+    [FieldOffset(0x1760)] public Balloon Balloon;
 
-    //[FieldOffset(0x1840)] public void* VfxObject;
-    //[FieldOffset(0x1848)] public void* VfxObject2;
-    [FieldOffset(0x1870)] public void* Omen;
+    //[FieldOffset(0x1968)] public void* VfxObject;
+    //[FieldOffset(0x1970)] public void* VfxObject2;
+    [FieldOffset(0x1998)] public void* Omen;
 
-    [FieldOffset(0x1900)] public Companion* CompanionObject; // minion
-    [FieldOffset(0x1918)] public fixed byte FreeCompanyTag[6];
-    [FieldOffset(0x1940)] public uint TargetObjectID;
+    [FieldOffset(0x6B0)] public Companion* CompanionObject; // minion
+    [FieldOffset(0x1A30)] public fixed byte FreeCompanyTag[6];
+    [FieldOffset(0x1A50)] public uint TargetObjectID;
 
-    [FieldOffset(0x1998)] public uint NameID;
+    [FieldOffset(0x1A94)] public uint NameID;
 
-    [FieldOffset(0x19B4)] public ushort CurrentWorld;
-    [FieldOffset(0x19B6)] public ushort HomeWorld;
-    [FieldOffset(0x19C0)] public byte EventState; // or something
-    [FieldOffset(0x19C2)] public byte OnlineStatus;
-    [FieldOffset(0x19D9)] public byte ShieldValue;
-    [FieldOffset(0x19DF)] public byte StatusFlags;
-    [FieldOffset(0x19A8)] public uint CompanionOwnerID;
+    [FieldOffset(0x1AB0)] public ushort CurrentWorld;
+    [FieldOffset(0x1AB2)] public ushort HomeWorld;
+    [FieldOffset(0x1ABC)] public byte EventState; // or something
+    [FieldOffset(0x1ABE)] public byte OnlineStatus;
+    [FieldOffset(0x1AD3)] public byte ShieldValue;
+    [FieldOffset(0x1AD6)] public byte StatusFlags;
+    [FieldOffset(0x1AA4)] public uint CompanionOwnerID;
 
     [MemberFunction("E8 ?? ?? ?? ?? 49 3B C7 0F 84")]
     public partial uint GetTargetId();
 
-    [VirtualFunction(88)]
+    [VirtualFunction(87)]
     public partial bool IsMount();
 }
