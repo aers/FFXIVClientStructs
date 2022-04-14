@@ -29,8 +29,8 @@ public struct ScholarGauge
 public unsafe struct AstrologianGauge
 {
     [FieldOffset(0x08)] public short Timer;
-    [FieldOffset(0x0C)] public byte Card;
-    [FieldOffset(0x0D)] public fixed byte Seals[3];
+    [FieldOffset(0x0D)] public byte Card;
+    [FieldOffset(0x0E)] public fixed byte Seals[3];
 
     public AstrologianCard CurrentCard => (AstrologianCard) Card;
 
