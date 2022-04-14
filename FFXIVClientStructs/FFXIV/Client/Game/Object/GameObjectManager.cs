@@ -1,6 +1,6 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game.Object;
 
-[StructLayout(LayoutKind.Explicit, Size = 0x27E0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x2810)]
 public unsafe partial struct GameObjectManager
 {
     [FieldOffset(0x04)] public byte Active;
