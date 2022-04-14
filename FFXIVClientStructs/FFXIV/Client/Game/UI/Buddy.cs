@@ -1,7 +1,7 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
 // ctor E8 ? ? ? ? 48 89 B3 ? ? ? ? 48 8D 05 ? ? ? ? 48 89 B3 ? ? ? ? 
-[StructLayout(LayoutKind.Explicit, Size = 0x860)]
+[StructLayout(LayoutKind.Explicit, Size = 0xED8)]
 public unsafe struct Buddy
 {
     [StructLayout(LayoutKind.Explicit, Size = 0x198)]
@@ -23,21 +23,21 @@ public unsafe struct Buddy
 
     [FieldOffset(0x0)] public BuddyMember Companion;
     [FieldOffset(0x198)] public BuddyMember Pet;
-    [FieldOffset(0x330)] public fixed byte BattleBuddies[0x198 * 3]; // BuddyMember array for Squadron/Trust
-    [FieldOffset(0x7F8)] public BuddyMember* CompanionPtr;
-    [FieldOffset(0x800)] public float TimeLeft;
-    [FieldOffset(0x812)] public fixed byte Name[21];
-    [FieldOffset(0x828)] public uint CurrentXP;
-    [FieldOffset(0x82A)] public byte Rank;
-    [FieldOffset(0x82B)] public byte Stars;
-    [FieldOffset(0x82C)] public byte SkillPoints;
-    [FieldOffset(0x82D)] public byte DefenderLevel;
-    [FieldOffset(0x82E)] public byte AttackerLevel;
-    [FieldOffset(0x82F)] public byte HealerLevel;
-    [FieldOffset(0x830)] public byte ActiveCommand;
-    [FieldOffset(0x831)] public byte FavoriteFeed;
-    [FieldOffset(0x832)] public byte CurrentColorStainId;
-    [FieldOffset(0x833)] public byte Mounted; // bool
-    [FieldOffset(0x840)] public BuddyMember* PetPtr;
-    [FieldOffset(0x850)] public BuddyMember* SquadronTrustPtr;
+    [FieldOffset(0x330)] public fixed byte BattleBuddies[0x198 * 7]; // BuddyMember array for Squadron/Trust
+    [FieldOffset(0xE58)] public BuddyMember* CompanionPtr;
+    [FieldOffset(0xE60)] public float TimeLeft;
+    [FieldOffset(0xE73)] public fixed byte Name[21];
+    [FieldOffset(0xE88)] public uint CurrentXP;
+    [FieldOffset(0xE8C)] public byte Rank;
+    [FieldOffset(0xE8D)] public byte Stars;
+    [FieldOffset(0xE8E)] public byte SkillPoints;
+    [FieldOffset(0xE8F)] public byte DefenderLevel;
+    [FieldOffset(0xE90)] public byte AttackerLevel;
+    [FieldOffset(0xE91)] public byte HealerLevel;
+    [FieldOffset(0xE92)] public byte ActiveCommand;
+    [FieldOffset(0xE93)] public byte FavoriteFeed;
+    [FieldOffset(0xE94)] public byte CurrentColorStainId;
+    [FieldOffset(0xE95)] public byte Mounted; // bool
+    [FieldOffset(0xEA0)] public BuddyMember* PetPtr;
+    [FieldOffset(0xEB0)] public BuddyMember* SquadronTrustPtr;
 }
