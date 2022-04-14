@@ -14,6 +14,7 @@ import ida_bytes
 
 from ruamel.yaml import YAML
 yaml = YAML()
+yaml.allow_duplicate_keys = True
 yaml.width = 4096
 
 import idaapi
