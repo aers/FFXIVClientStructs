@@ -21,9 +21,9 @@ public unsafe struct AgentItemSearch
     }
 
     [FieldOffset(0x0)] public AgentInterface AgentInterface;
-    [FieldOffset(0x3084)] public uint ResultItemID;
-    [FieldOffset(0x308C)] public uint ResultSelectedIndex;
-    [FieldOffset(0x309C)] public uint ResultHoveredIndex;
-    [FieldOffset(0x30A4)] public uint ResultHoveredCount;
-    [FieldOffset(0x30AC)] public byte ResultHoveredHQ;
+    [FieldOffset(0x3304)] public uint ResultItemID;
+    [FieldOffset(0x330C)] public uint ResultSelectedIndex;
+    [FieldOffset(0x301C)] public uint ResultHoveredIndex;
+    [FieldOffset(0x3024)] public uint ResultHoveredCount;
+    [FieldOffset(0x302C)] public byte ResultHoveredHQ;
 }
