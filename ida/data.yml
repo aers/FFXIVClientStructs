@@ -2270,9 +2270,9 @@ classes:
       29: GetRaptureTeleportHistory
       35: GetAgentModule
       37: GetUI3DModule
-#fail       53: GetUIInputData
-#fail       54: GetUIInputModule
-#fail       56: GetLogFilterConfig
+      60: GetUIInputData
+      61: GetUIInputModule
+      62: GetLogFilterConfig
       143: AnnounceHowTo
       145: HideHowTo
       147: ShowGoldSaucerReward
