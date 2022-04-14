@@ -23,7 +23,7 @@ public unsafe struct AgentItemSearch
     [FieldOffset(0x0)] public AgentInterface AgentInterface;
     [FieldOffset(0x3304)] public uint ResultItemID;
     [FieldOffset(0x330C)] public uint ResultSelectedIndex;
-    [FieldOffset(0x301C)] public uint ResultHoveredIndex;
-    [FieldOffset(0x3024)] public uint ResultHoveredCount;
-    [FieldOffset(0x302C)] public byte ResultHoveredHQ;
+    [FieldOffset(0x331C)] public uint ResultHoveredIndex;
+    [FieldOffset(0x3324)] public uint ResultHoveredCount;
+    [FieldOffset(0x332C)] public byte ResultHoveredHQ;
 }
