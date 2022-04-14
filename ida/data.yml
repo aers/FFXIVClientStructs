@@ -3036,6 +3036,7 @@ classes:
     funcs:
       0x14020E2D0: ctor
       0x14020F960: UnblockItemSlot
+      0x14020E4A0: OpenForItemSlot
   Client::UI::Agent::AgentConfigLogColor:
     vtbls:
       - ea: 0x1417D2378
