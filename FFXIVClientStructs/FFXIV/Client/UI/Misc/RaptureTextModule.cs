@@ -8,7 +8,7 @@ public unsafe partial struct RaptureTextModule
     [MemberFunction("E9 ?? ?? ?? ?? 80 EA 20")]
     public partial byte* GetAddonText(uint addonId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? EB 2E 49 8B 4D 10")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B D0 0F B6 44 24")]
     public partial byte* FormatAddonText2(uint addonId, int intParam1, int intParam2);
 
     [MemberFunction("E8 ?? ?? ?? ?? EB 55 FF 50 30")]
