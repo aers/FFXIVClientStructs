@@ -509,7 +509,7 @@ classes:
       0x1409778B0: GetRecastTimerActive
       0x140977C40: StartCooldown
       0x140977F70: GetRecastTimerElapsed
-      0x14096AAB0: GetRecastTime
+      0x140978020: GetRecastTime
       0x140978130: UpdateRecastFromNetwork
       0x14097C560: GetMaxCharges
       0x14096CD80: GetRecastGroup
