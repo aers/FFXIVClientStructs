@@ -5,7 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 [StructLayout(LayoutKind.Explicit)]
 public unsafe partial struct Map
 {
-    [FieldOffset(0x80)] public QuestMarkerArray QuestMarkers;
+    [FieldOffset(0x88)] public QuestMarkerArray QuestMarkers;
 
     [StructLayout(LayoutKind.Sequential, Size = 0x10E0)]
     public struct QuestMarkerArray
