@@ -14,6 +14,7 @@ import ida_bytes
 
 from ruamel.yaml import YAML
 yaml = YAML()
+yaml.allow_duplicate_keys = True
 yaml.width = 4096
 
 import idaapi
@@ -477,7 +478,14 @@ class FfxivSigmaker:
             xref_addrs.insert(0, addr)
 
         for xref_addr in xref_addrs:
-            yield from SigGen(xref_addr)
+            try:
+                sig_gen = SigGen(xref_addr)
+                for v in sig_gen:
+                    yield v
+            except:
+                error_details = traceback.format_exc()
+                Log.error(f"Encountered an exception running SigGen on address: {xref_addr}!")
+                Log.debug(error_details)
 
     def __find_best_sig(self, sigs: Iterator[str]) -> Optional[str]:
         """
