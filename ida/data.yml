@@ -732,6 +732,7 @@ classes:
       11: UpdateAddonByID
     funcs:
       0x140513270: ctor
+      0x140514070: Draw
       0x140514CC0: GetAddonById
       0x140514D20: GetAddonByName
       0x140514DD0: GetAddonByNode
