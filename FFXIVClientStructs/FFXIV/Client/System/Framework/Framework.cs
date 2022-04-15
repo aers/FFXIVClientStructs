@@ -17,6 +17,8 @@ public unsafe partial struct Framework
     [FieldOffset(0x1680)] public long ServerTime;
     [FieldOffset(0x16B8)] public float FrameDeltaTime;
     [FieldOffset(0x1770)] public long EorzeaTime;
+    [FieldOffset(0x17C4)] public float FrameRate;
+    [FieldOffset(0x17D0)] public bool WindowInactive;
 
     [FieldOffset(0x2B30)] public ExcelModuleInterface* ExcelModuleInterface;
     [FieldOffset(0x2B38)] public ExdModule* ExdModule;
