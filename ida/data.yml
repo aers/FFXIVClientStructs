@@ -509,7 +509,7 @@ classes:
       0x1409778B0: GetRecastTimerActive
       0x140977C40: StartCooldown
       0x140977F70: GetRecastTimerElapsed
-      0x14096AAB0: GetRecastTime
+      0x140978020: GetRecastTime
       0x140978130: UpdateRecastFromNetwork
       0x14097C560: GetMaxCharges
       0x14096CD80: GetRecastGroup
@@ -2270,9 +2270,9 @@ classes:
       29: GetRaptureTeleportHistory
       35: GetAgentModule
       37: GetUI3DModule
-#fail       53: GetUIInputData
-#fail       54: GetUIInputModule
-#fail       56: GetLogFilterConfig
+      60: GetUIInputData
+      61: GetUIInputModule
+      62: GetLogFilterConfig
       143: AnnounceHowTo
       145: HideHowTo
       147: ShowGoldSaucerReward
@@ -3036,6 +3036,7 @@ classes:
     funcs:
       0x14020E2D0: ctor
       0x14020F960: UnblockItemSlot
+      0x14020E4A0: OpenForItemSlot
   Client::UI::Agent::AgentConfigLogColor:
     vtbls:
       - ea: 0x1417D2378

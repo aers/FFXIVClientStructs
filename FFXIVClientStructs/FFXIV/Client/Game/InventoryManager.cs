@@ -8,22 +8,19 @@ public unsafe partial struct InventoryManager
 {
     [FieldOffset(0x1E08)] public InventoryContainer* Inventories;
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8B 55 BB")]
+    [MemberFunction("E8 ?? ?? ?? ?? 44 0F BE C7")]
     public partial InventoryContainer* GetInventoryContainer(InventoryType inventoryType);
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B 53 F1")]
-    public partial int GetInventoryItemCount(uint itemId, bool isHq = false, bool checkEquipped = true,
-        bool checkArmory = true, short minCollectability = 0);
+    public partial int GetInventoryItemCount(uint itemId, bool isHq = false, bool checkEquipped = true, bool checkArmory = true, short minCollectability = 0);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 41 8B 2C 24")]
-    public partial int GetItemCountInContainer(uint itemId, InventoryType inventoryType, bool isHq = false,
-        short minCollectability = 0);
+    [MemberFunction("E8 ?? ?? ?? ?? 03 F8 BB")]
+    public partial int GetItemCountInContainer(uint itemId, InventoryType inventoryType, bool isHq = false, short minCollectability = 0);
 
     [MemberFunction("E8 ?? ?? ?? ?? 33 DB 89 1E")]
-    public partial int MoveItemSlot(InventoryType srcContainer, uint srcSlot, InventoryType dstContainer, uint dstSlot,
-        byte unk = 0);
+    public partial int MoveItemSlot(InventoryType srcContainer, uint srcSlot, InventoryType dstContainer, uint dstSlot, byte unk = 0);
 
-    [StaticAddress("BA ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B F8 48 85 C0")]
+    [StaticAddress("48 8D 0D ?? ?? ?? ?? 81 C2")]
     public static partial InventoryManager* Instance();
 }
 

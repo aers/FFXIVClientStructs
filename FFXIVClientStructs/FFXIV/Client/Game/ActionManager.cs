@@ -24,7 +24,7 @@ public unsafe partial struct ActionManager
     [MemberFunction("E8 ?? ?? ?? ?? 8B F8 3B DF")]
     public partial uint GetAdjustedActionId(uint actionID);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8B D6 41 8B CF")]
+    [MemberFunction("E8 ?? ?? ?? ?? 83 7F 4C 01 44 0F 28 C8")]
     public partial float GetRecastTime(ActionType actionType, uint actionID);
 
     [MemberFunction("E8 ?? ?? ?? ?? F3 0F 5C F0 49 8B CD")]

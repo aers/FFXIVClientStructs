@@ -29,13 +29,17 @@ public struct ScholarGauge
 public unsafe struct AstrologianGauge
 {
     [FieldOffset(0x08)] public short Timer;
-    [FieldOffset(0x0C)] public byte Card;
-    [FieldOffset(0x0D)] public fixed byte Seals[3];
+    [FieldOffset(0x0D)] public byte Card;
+    [FieldOffset(0x0E)] public byte Seals; // 6 bits, 0,1-3,1-3,1-3 depending on astrosign
 
     public AstrologianCard CurrentCard => (AstrologianCard) Card;
 
     public AstrologianSeal[] CurrentSeals => new[]
-        {(AstrologianSeal) Seals[0], (AstrologianSeal) Seals[1], (AstrologianSeal) Seals[2]};
+    {
+        (AstrologianSeal)(3 & (this.Seals >> 0)),
+        (AstrologianSeal)(3 & (this.Seals >> 2)),
+        (AstrologianSeal)(3 & (this.Seals >> 4)),
+    };
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]

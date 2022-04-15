@@ -6,7 +6,7 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x678)]
-public unsafe struct AgentInventoryContext
+public unsafe partial struct AgentInventoryContext
 {
     public static AgentInventoryContext* Instance()
     {
@@ -65,6 +65,13 @@ public unsafe struct AgentInventoryContext
     [FieldOffset(0x5D4)] public int BlockedInventorySlotId;
 
     [FieldOffset(0x638)] public InventoryItem DiscardDummyItem;
+
+    [MemberFunction("83 B9 ?? ?? ?? ?? ?? 7E ?? 39 91")]
+    public partial void OpenForItemSlot(uint inventory, int slot, int a4, uint addonId);
+
+    public void OpenForItemSlot(InventoryType inventory, int slot, uint addonId) {
+        OpenForItemSlot((uint)inventory, slot, 0, addonId);
+    }
 
     public bool IsContextItemDisabled(int index)
     {

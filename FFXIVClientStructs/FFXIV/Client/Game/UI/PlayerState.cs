@@ -39,9 +39,9 @@ public unsafe partial struct PlayerState
 
     [FieldOffset(0x2A0)] public uint BaseRestedExperience;
 
-    [FieldOffset(0x454)] public short PlayerCommendations;
+    [FieldOffset(0x458)] public short PlayerCommendations;
 
-    [FieldOffset(0x6FE)] public fixed ushort DesynthesisLevels[8];
+    [FieldOffset(0x70A)] public fixed ushort DesynthesisLevels[8];
 
     public float GetDesynthesisLevel(uint classJobId)
     {

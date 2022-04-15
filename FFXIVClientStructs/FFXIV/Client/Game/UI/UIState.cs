@@ -16,7 +16,7 @@ public unsafe partial struct UIState
     [FieldOffset(0xA38)] public PlayerState PlayerState;
     [FieldOffset(0x11C8)] public Revive Revive;
     [FieldOffset(0x1498)] public Telepo Telepo;
-    [FieldOffset(0x19F0)] public Buddy Buddy;
+    [FieldOffset(0x1A60)] public Buddy Buddy;
     [FieldOffset(0x2A70)] public RelicNote RelicNote;
 
     [FieldOffset(0xA6C0)] public Director* ActiveDirector;

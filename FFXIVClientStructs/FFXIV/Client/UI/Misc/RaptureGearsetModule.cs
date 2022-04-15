@@ -18,7 +18,7 @@ public unsafe struct RaptureGearsetModule
     [StructLayout(LayoutKind.Sequential, Size = 0xAF2C)]
     public struct Gearsets
     {
-        private fixed byte data[0xAF2C];
+        private fixed byte data[0x1C0 * 100];
 
         public GearsetEntry* this[int i]
         {
@@ -47,35 +47,38 @@ public unsafe struct RaptureGearsetModule
         Unknown80 = 0x80
     }
 
-    [StructLayout(LayoutKind.Sequential, Size = 0x1C)]
+    [StructLayout(LayoutKind.Sequential, Size = Size)]
     public struct GearsetItem
     {
+        public const int Size = 0x1C;
         public uint ItemID;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 0x1BC)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x1C0)]
     public struct GearsetEntry
     {
         [FieldOffset(0x000)] public byte ID;
         [FieldOffset(0x001)] public fixed byte Name[0x2F];
         [FieldOffset(0x31)] public byte ClassJob;
         [FieldOffset(0x32)] public byte GlamourSetLink;
-        [FieldOffset(0x33)] public GearsetFlag Flags;
-
-        [FieldOffset(0x34)] public fixed byte ItemsData[0x188];
-        [FieldOffset(0x34)] public GearsetItem MainHand;
-        [FieldOffset(0x50)] public GearsetItem OffHand;
-        [FieldOffset(0x6C)] public GearsetItem Head;
-        [FieldOffset(0x88)] public GearsetItem Body;
-        [FieldOffset(0xA4)] public GearsetItem Hands;
-        [FieldOffset(0xC0)] public GearsetItem Belt;
-        [FieldOffset(0xDC)] public GearsetItem Legs;
-        [FieldOffset(0xF8)] public GearsetItem Feet;
-        [FieldOffset(0x114)] public GearsetItem Ears;
-        [FieldOffset(0x130)] public GearsetItem Neck;
-        [FieldOffset(0x14C)] public GearsetItem Wrists;
-        [FieldOffset(0x168)] public GearsetItem RingRight;
-        [FieldOffset(0x184)] public GearsetItem RightLeft;
-        [FieldOffset(0x1A0)] public GearsetItem SoulStone;
+        [FieldOffset(0x34)] public short ItemLevel;
+        [FieldOffset(0x37)] public GearsetFlag Flags;
+        
+        private const int ItemDataOffset = 0x38;
+        [FieldOffset(ItemDataOffset)] public fixed byte ItemsData[GearsetItem.Size * 14];
+        [FieldOffset(ItemDataOffset + GearsetItem.Size * 00)] public GearsetItem MainHand;
+        [FieldOffset(ItemDataOffset + GearsetItem.Size * 01)] public GearsetItem OffHand;
+        [FieldOffset(ItemDataOffset + GearsetItem.Size * 02)] public GearsetItem Head;
+        [FieldOffset(ItemDataOffset + GearsetItem.Size * 03)] public GearsetItem Body;
+        [FieldOffset(ItemDataOffset + GearsetItem.Size * 04)] public GearsetItem Hands;
+        [FieldOffset(ItemDataOffset + GearsetItem.Size * 05)] public GearsetItem Belt;
+        [FieldOffset(ItemDataOffset + GearsetItem.Size * 06)] public GearsetItem Legs;
+        [FieldOffset(ItemDataOffset + GearsetItem.Size * 07)] public GearsetItem Feet;
+        [FieldOffset(ItemDataOffset + GearsetItem.Size * 08)] public GearsetItem Ears;
+        [FieldOffset(ItemDataOffset + GearsetItem.Size * 09)] public GearsetItem Neck;
+        [FieldOffset(ItemDataOffset + GearsetItem.Size * 10)] public GearsetItem Wrists;
+        [FieldOffset(ItemDataOffset + GearsetItem.Size * 11)] public GearsetItem RingRight;
+        [FieldOffset(ItemDataOffset + GearsetItem.Size * 12)] public GearsetItem RightLeft;
+        [FieldOffset(ItemDataOffset + GearsetItem.Size * 13)] public GearsetItem SoulStone;
     }
 }

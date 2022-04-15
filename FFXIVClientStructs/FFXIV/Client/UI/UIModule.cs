@@ -95,13 +95,13 @@ public unsafe partial struct UIModule
     [VirtualFunction(37)]
     public partial UI3DModule* GetUI3DModule();
 
-    [VirtualFunction(53)] //TODO: fix index
+    [VirtualFunction(60)]
     public partial void* GetUIInputData();
 
-    [VirtualFunction(54)] //TODO: fix index
+    [VirtualFunction(61)]
     public partial void* GetUIInputModule();
 
-    [VirtualFunction(56)] //TODO: fix index
+    [VirtualFunction(62)]
     public partial void* GetLogFilterConfig();
 
     [VirtualFunction(138)]

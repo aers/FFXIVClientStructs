@@ -123,16 +123,16 @@ public enum ConfigOption : short
 {
     Invalid = -1,
     None = 0,
-    CustomResolutionWidth = 17,
-    CustomResolutionHeight = 18,
-    ScreenMode = 19,
-    GamepadMode = 89,
-    LegacyMovement = 304,
-    DisplayItemHelp = 716,
-    DisplayActionHelp = 721,
-    OwnDisplayNameSettings = 443,
-    PartyDisplayNameSettings = 456,
-    AllianceDisplayNameSettings = 465,
-    OtherPCsDisplayNameSettings = 472,
-    FriendsDisplayNameSettings = 517
+    CustomResolutionWidth = 18,
+    CustomResolutionHeight = 19,
+    ScreenMode = 20,
+    GamepadMode = 90,
+    LegacyMovement = 307,
+    DisplayItemHelp = 719,
+    DisplayActionHelp = 724,
+    OwnDisplayNameSettings = 446,
+    PartyDisplayNameSettings = 459,
+    AllianceDisplayNameSettings = 468,
+    OtherPCsDisplayNameSettings = 475,
+    FriendsDisplayNameSettings = 520
 }
