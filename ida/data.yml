@@ -64,78 +64,78 @@ functions:
   0x141075C00: Client::UI::AddonHudLayoutScreen::MoveableAddonInfoStruct_UpdateAddonPosition
   0x14117BEA0: Client::Graphics::Kernel::CreateShader # static function
   0x141218C90: lua_close
-#fail   0x1411B9940: lua_newstate
-#fail   0x1411B9C40: lua_index2addr
+  0x141218D10: lua_newstate
+  0x141219010: lua_index2addr
   0x1412190E0: lua_atpanic
   0x141219100: lua_call
   0x141219150: lua_checkstack
-#fail   0x1411B9E20: lua_concat
+  0x1412191F0: lua_concat
   0x141219280: lua_cpcall
   0x1412192C0: lua_createtable
-#fail   0x1411B9F60: lua_dump
+  0x141219330: lua_dump
   0x1412193B0: lua_equal
   0x141219410: lua_error
-#fail   0x1411BA050: lua_gc
-#fail   0x1411BA1F0: lua_getallocf
+  0x141219420: lua_gc
+  0x1412195C0: lua_getallocf
   0x1412195E0: lua_getfenv
-#fail   0x1411BA290: lua_getfield
+  0x141219660: lua_getfield
   0x1412196D0: lua_getmetatable
   0x141219730: lua_gettable
   0x141219760: lua_gettop
-#fail   0x1411BA3A0: lua_setupvalue
-#fail   0x1411BA440: lua_insert
+  0x141219770: lua_setupvalue
+  0x141219810: lua_insert
   0x141219860: lua_iscfunction
   0x141219890: lua_isnumber
   0x1412198C0: lua_isstring
   0x141219900: lua_isuserdata
   0x141219930: lua_lessthan
-#fail   0x1411BA5B0: lua_load
+  0x141219980: lua_load
   0x1412199D0: lua_newthread
   0x141219A10: lua_newuserdata
-#fail   0x1411BA6B0: lua_next
-#fail   0x1411BA6F0: lua_objlen
+  0x141219A80: lua_next
+  0x141219AC0: lua_objlen
   0x141219B40: lua_pcall
   0x141219BD0: lua_pushboolean
-#fail   0x1411BA820: lua_pushcclosure
+  0x141219BF0: lua_pushcclosure
   0x141219CC0: lua_pushfstring
   0x141219D10: lua_pushinteger
-#fail   0x1411BA960: lua_pushlightuserdata
+  0x141219D30: lua_pushlightuserdata
   0x141219D50: lua_pushlstring
   0x141219DC0: lua_pushnil
   0x141219DE0: lua_pushnumber
-#fail   0x1411BAA30: lua_pushstring
+  0x141219E00: lua_pushstring
   0x141219E30: lua_pushthread
   0x141219E60: lua_pushvalue
   0x141219E90: lua_pushvfstring
   0x141219EE0: lua_rawequal
   0x141219F30: lua_rawget
   0x141219F70: lua_rawgeti
-#fail   0x1411BABE0: lua_rawset
+  0x141219FB0: lua_rawset
   0x14121A030: lua_rawseti
-#fail   0x1411BACE0: lua_remove
-#fail   0x1411BAD30: lua_replace
-#fail   0x1411BAE00: lua_setallocf
-#fail   0x1411BAE20: lua_setfenv
-#fail   0x1411BAEC0: lua_setfield
-#fail   0x1411BAF30: lua_setlevel
+  0x14121A0B0: lua_remove
+  0x14121A100: lua_replace
+  0x14121A1D0: lua_setallocf
+  0x14121A1F0: lua_setfenv
+  0x14121A290: lua_setfield
+  0x14121A300: lua_setlevel
   0x14121A310: lua_setmetatable
   0x14121A3D0: lua_settable
-#fail   0x1411BB030: lua_settop
-#fail   0x1411BB090: lua_getupvalue
-#fail   0x1411BB180: lua_status
+  0x14121A400: lua_settop
+  0x14121A460: lua_getupvalue
+  0x14121A550: lua_status
   0x14121A560: lua_toboolean
-#fail   0x1411BB1C0: lua_tocfunction
+  0x14121A590: lua_tocfunction
   0x14121A5C0: lua_tointeger
   0x14121A5F0: lua_tolstring
   0x14121A690: lua_tonumber
   0x14121A6D0: lua_topointer
   0x14121A740: lua_tothread
   0x14121A760: lua_touserdata
-#fail   0x1411BB3D0: lua_type
+  0x14121A7A0: lua_type
   0x14121A7D0: lua_typename
-#fail   0x1411BB420: lua_xmove
-#fail   0x1411BC330: lua_resume
-#fail   0x1411BC480: lua_yield
+  0x14121A7F0: lua_xmove
+  0x14121B700: lua_resume
+  0x14121B850: lua_yield
   0x14133D4F0: lua_gethook
   0x14133D500: lua_gethookcount
   0x14133D510: lua_gethookmask
@@ -144,12 +144,12 @@ functions:
   0x14133D680: lua_getstack
   0x14133D700: lua_sethook
   0x14133D730: lua_setlocal
-#fail   0x1411BC6C0: luaL_openlibs
+  0x14121BA90: luaL_openlibs
   0x14121BC80: luaL_addlstring
-#fail   0x1411BC950: luaL_addstring
-#fail   0x1411BD960: luaL_openlib
-#fail   0x1411BC970: luaL_addvalue
-#fail   0x1411BCA30: luaL_argerror
+  0x14121BD20: luaL_addstring
+  0x14121CD30: luaL_openlib
+  0x14121BD40: luaL_addvalue
+  0x14121BE00: luaL_argerror
   0x14121BEF0: luaL_buffinit
   0x14121BF10: luaL_callmeta
   0x14121BF90: luaL_checkany
@@ -159,25 +159,25 @@ functions:
   0x14121C110: luaL_checkoption
   0x14121C1D0: luaL_checkstack
   0x14121C210: luaL_checktype
-#fail   0x1411BCE80: luaL_checkudata
+  0x14121C250: luaL_checkudata
   0x14121C310: luaL_error
-#fail   0x1411BCFA0: luaL_findtable
-#fail   0x1411BD0D0: luaL_getmetafield
-#fail   0x1411BD150: luaL_gsub
+  0x14121C370: luaL_findtable
+  0x14121C4A0: luaL_getmetafield
+  0x14121C520: luaL_gsub
   0x14121C960: luaL_loadbuffer
-#fail   0x1411BD5C0: luaL_loadfile
-#fail   0x1411BD860: luaL_loadstring
-#fail   0x1411BD8A0: luaL_newmetatable
+  0x14121C990: luaL_loadfile
+  0x14121CC30: luaL_loadstring
+  0x14121CC70: luaL_newmetatable
   0x14121CCF0: luaL_newstate
   0x14121CEB0: luaL_optinteger
-#fail   0x1411BDB50: luaL_optlstring
+  0x14121CF20: luaL_optlstring
   0x14121CFA0: luaL_optnumber
-#fail   0x1411BDC40: luaL_prepbuffer
-#fail   0x1411BDCA0: luaL_pushresult
-#fail   0x1411BDCF0: luaL_ref
-#fail   0x1411BDDB0: luaL_register
+  0x14121D010: luaL_prepbuffer
+  0x14121D070: luaL_pushresult
+  0x14121D0C0: luaL_ref
+  0x14121D180: luaL_register
   0x14121D190: luaL_typerror
-#fail   0x1411BDE20: luaL_unref
+  0x14121D1F0: luaL_unref
   0x14121D270: luaL_where
   0x14133D520: lua_getinfo
   0x14133D610: lua_getlocal
