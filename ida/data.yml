@@ -209,7 +209,9 @@ functions:
   0x1400A90F0: IsPartyMemberByNameOrContentId # (name, contentId)
   0x1400A9220: GetPartyMemberClassJobByContentId
   0x140701040: ObjectIdToPlayerObjectId # returns invalid id if objectid is not a player
-
+  0x1408E3E10: IsInPvPArea
+  0x1404ADCA0: IsInInstanceArea
+  
 classes:
   Client::Game::GameMain:
     instances:
