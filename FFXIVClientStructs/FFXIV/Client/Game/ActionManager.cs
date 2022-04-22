@@ -10,16 +10,13 @@ public unsafe partial struct ActionManager
     public static partial ActionManager* Instance();
 
     [MemberFunction("E8 ?? ?? ?? ?? EB 64 B1 01")]
-    public partial bool UseAction(ActionType actionType, uint actionID, uint targetID = 0xE000_0000, uint a4 = 0,
-        uint a5 = 0, uint a6 = 0, void* a7 = null);
+    public partial bool UseAction(ActionType actionType, uint actionID, long targetID = 0xE000_0000, uint a4 = 0, uint a5 = 0, uint a6 = 0, void* a7 = null);
 
     [MemberFunction("E8 ?? ?? ?? ?? 3C 01 0F 85 ?? ?? ?? ?? EB 46")]
-    public partial bool UseActionLocation(ActionType actionType, uint actionID, uint targetID = 0xE000_0000,
-        Vector3* location = null, uint a4 = 0);
+    public partial bool UseActionLocation(ActionType actionType, uint actionID, long targetID = 0xE000_0000, Vector3* location = null, uint a4 = 0);
 
     [MemberFunction("E8 ?? ?? ?? ?? 83 BC 24 ?? ?? ?? ?? ?? 8B F0")]
-    public partial uint GetActionStatus(ActionType actionType, uint actionID, uint targetID = 0xE000_0000, uint a4 = 1,
-        uint a5 = 1);
+    public partial uint GetActionStatus(ActionType actionType, uint actionID, long targetID = 0xE000_0000, uint a4 = 1, uint a5 = 1);
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B F8 3B DF")]
     public partial uint GetAdjustedActionId(uint actionID);
