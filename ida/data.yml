@@ -1779,6 +1779,7 @@ classes:
       - ea: 0x1417F7830
         base: Component::GUI::AtkEventListener
     funcs:
+      0x1404E17F0: ctor
       0x1404E1ED0: AttachTooltip
       0x1404E2110: DetachTooltipNode
       0x1404E2330: ShowNodeTooltip  # takes node as argument
