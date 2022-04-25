@@ -67,112 +67,118 @@ public unsafe partial struct HotBarSlot
 {
     public const int Size = 0xE0;
     
-    /// <summary>
-    /// The action name currently loaded into this Hotbar Slot (if any).
-    /// </summary>
+    /// The string that appears when a hotbar slot is hovered over.
+    ///
+    /// Calculated by concatenating GetDisplayNameForSlot with PopUpKeybindHint (in most cases).
     [FieldOffset(0x00)] public Utf8String PopUpHelp;
-
-    /// <summary>
+    
+    /// The "cost text" to display when 0xCB is in mode 2 or 4.
+    ///
+    /// This is generally filled with a flexible MP cost (e.g. "All" for certain BLM spells) or "x 123" for items.
+    [FieldOffset(0x68)] public fixed byte CostText[0x20];
+    
+    /// A human-friendly display of the keybind used for this hotbar slot.
+    ///
+    /// This text will generally lead with a space and have wrapping brackets, e.g. " [Ctrl-3]".
+    [FieldOffset(0x88)] public fixed byte PopUpKeybindHint[0x20];
+    
+    /// A less-friendly version of the keybind used for this hotbar slot.
+    ///
+    /// The actual use of this field is unknown, but it appears to be related to the hint in the top-left of the hotbar
+    /// UI.
+    [FieldOffset(0xA8)] public fixed byte KeybindHint[0x10];
+    
     /// The ID of the action that will be executed when this slot is triggered. Action type is determined by the
     /// CommandType field.
-    /// </summary>
     [FieldOffset(0xB8)] public uint CommandId;
     
-    /// <summary>
     /// UNKNOWN. Appears to be the original action ID associated with this hotbar slot before adjustment.
     ///
     /// Note that this is *not* a reference to an icon ID; it must be combined with IconTypeA.
-    /// </summary>
     [FieldOffset(0xBC)] public uint IconA;
     
-    /// <summary>
     /// Appears to be the action ID that will be used to generate this hotbar slot icon.
     ///
     /// This field exists to allow a hotbar slot to have the appearance of one action, but in reality trigger a
-    /// different action. For example, macros with a set /micon will leverage this field to show a specific action ID.
+    /// different action. For example, PvP combos will use this to track the "active" action.
     ///
     /// Note that this is *not* a reference to an icon directly.
-    /// </summary>
     [FieldOffset(0xC0)] public uint IconB;
     
-    /// <summary>
     /// Unknown field with offset 0xC4 (196), possibly overloaded
     ///
     /// Appears to have relation to the following:
     /// - Lost Finds Items appear to set this value to 1
     /// - In PVP actions, the high byte controls combo icon and the low byte counts which action the combo is on
-    /// </summary>
     [FieldOffset(0xC4)] public ushort UNK_0xC4;
     
-    // 0xC6 (198) does not appear to exist.
-
-    /// <summary>
+    // 0xC6 (198) does not appear to be referenced *anywhere*. Nothing ever reads or writes to it, save for a zero-out
+    // operation. 
+    
     /// The HotbarSlotType of the action that will be executed when this hotbar slot is triggered.
-    /// </summary>
     [FieldOffset(0xC7)] public HotbarSlotType CommandType;
     
-    /// <summary>
     /// UNKNOWN. Appears to be the original action type associated with this hotbar slot before adjustment/loading.
-    /// </summary>
     [FieldOffset(0xC8)] public HotbarSlotType IconTypeA;
     
-    /// <summary>
     /// Appears to be the HotbarSlotType used to determine the icon to display on this hotbar slot.
     ///
     /// See notes on IconB for more information as to how this field is used.
-    /// </summary>
     [FieldOffset(0xC9)] public HotbarSlotType IconTypeB;
     
-    /// <summary>
-    /// Appears to be the "primary cost" of this action, mapping down to 0, 1, 2, 4, 5, 7
-    /// </summary>
+    /// Appears to be the "primary cost" of this action, mapping down to 0, 1, 2, 4, 5, 6, 7.
+    ///
+    /// Controls the color of the displayed cost when 0xCB is 1 or 2:
+    /// - 0: White
+    /// - 1: Green (HP)
+    /// - 2: Light Pink (MP)
+    /// - 3: Orange
+    /// - 4: Pink (DoH - CP)
+    /// - 5: Yellow (DoL - GP)
+    /// - 6: Blue (Job Gauge?)
+    /// - 7: Bright Yellow (Rival Wings - CE)
+    /// - All others: Grey
     [FieldOffset(0xCA)] public byte UNK_0xCA;
     
-    /// <summary>
     /// Appears to control display of the primary cost of the action (0xCA). 
     ///
-    /// - 1: Displays action cost in bottom left for Actions or Craft Actions
-    /// - 2: Appears to display text "all", appears on Actions with PrimaryCost = 4
-    /// - 3: Displays an ID in the bottom right of the slot for Gearsets/UNK_0x17
-    /// - 4: Displays "x {num}" for Items
+    /// - 1: Displays action cost from 0xD0 in bottom left (e.g. for Actions or Craft Actions)
+    /// - 2: Mode 1, but display a custom string from CostText instead (generally "All" on Actions with PrimaryCost = 4)
+    /// - 3: Displays the value of 0xD0 in the bottom right (e.g. for Gearsets/UNK_0x17)
+    /// - 4: Mode 3, but display a custom string from CostText instead (generally "x {count}" for Items)
     /// - 0/255: No display, all other cases
-    /// </summary>
     [FieldOffset(0xCB)] public byte UNK_0xCB;
     
-    /// <summary>
     /// The icon ID that is currently being displayed on this hotbar slot. 
-    /// </summary>
     [FieldOffset(0xCC)] public int Icon;
     
-    // D0-DD appear to be used on recipes in code
-    
-    /// <summary>
     /// UNKNOWN. Appears to be the "cost" of an action.
     ///
     /// For items, this field holds the number of items of that type currently present in inventory.
     ///
     /// For actions that have some cost (MP, job bar, etc.), this appears to be the relevant value shown in the bottom
     /// left of the action.
-    /// </summary>
     [FieldOffset(0xD0)] public uint UNK_0xD0;
     
-    /// <summary>
-    /// UNKNOWN. Appears to be Recipe specific and references the resulting Item ID of the recipe on the hotbar slot.
-    /// </summary>
+    /// UNKNOWN. Appears to be Recipe specific. References the resulting Item ID of the recipe on the hotbar slot.
     [FieldOffset(0xD4)] public uint UNK_0xD4;
     
-    /// <summary>
-    /// UNKNOWN. Appears to be Recipe specific and references the class which can craft the recipe.
-    ///
-    /// Retrieve the ClassJob by adding 10 to this value.
-    ///
-    /// ERRATA: Items that can be crafted by either BSM/ARM show as BSM. 
-    /// </summary>
+    /// UNKNOWN. Appears to be Recipe specific. References the CraftType for the recipe on the hotbar slot
     [FieldOffset(0xD8)] public uint UNK_0xD8;
+    
+    /// UNKNOWN. Appears to be Recipe specific to check if a recipe is valid.
+    ///
+    /// Set to 1 when the recipe results in a nonzero number of items (???).
+    ///
+    /// If 0, the tooltip for this slot will display message noting the recipe is deleted.
+    /// If 1, the tooltip for this slot will display the name and crafting class for that recipe.
     [FieldOffset(0xDC)] public byte UNK_OxDC;
+    
+    /// UNKNOWN. Appears to be Recipe specific.
+    ///
+    /// Always set to 1, apparently? 
     [FieldOffset(0xDD)] public byte UNK_OxDD;
-
-    /// <summary>
+    
     /// UNKNOWN. Appears to control UI display mode (icon and displayed name) in some way
     ///
     /// Known values so far:
@@ -181,7 +187,6 @@ public unsafe partial struct HotBarSlot
     /// - 4: Set on Squadron Order - Disengage, maybe others
     /// - 5: Set for Lost Finds Items (?)
     /// - 0/255: "generic"
-    /// </summary>
     [FieldOffset(0xDE)] public byte UNK_0xDE;
     
     [FieldOffset(0xDF)] public byte IsEmpty; // ?

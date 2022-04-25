@@ -2381,15 +2381,28 @@ classes:
         base: Client::System::Input::InputData::InputCodeModifiedInterface
     funcs:
       0x14064F940: ctor
+      0x14004FB30: dtor
       0x140651F80: IsHotbarEmpty
       0x140655540: ExecuteSlot
       0x1406505A0: ExecuteSlotById
+      0x1406505E0: GetSlotById
   Client::UI::Misc::RaptureHotbarModule::HotbarSlot:
     funcs:
+      # Convention(ish?): Get just returns a value, Load actually mutates the HotbarSlot passed to it
       0x14064E400: Set
       0x14064F720: LoadIconFromSlotB
       0x14064CD30: GetIconIdForSlot
       0x14064D610: GetDisplayNameForSlot
+      0x14064DEB0: GetCostTextForSlot
+      0x15064D470: GetUnkCAForSlot
+      0x14064D570: GetUnkCBForSlot
+      0x14064DC40: GetAdjustedSlotTooltip    # loads in some adjustment things and then calls GetSlotTooltip
+      0x14064DD00: GetUnkD0ForSlot
+      0x14064F260: GetAdjustedIconIdForSlot  # loads in adjustment things and then calls GetIconForIdForSlot
+      0x14064F070: GetRecastTimeFromSlotB    # maybe?
+      0x14064F7E0: LoadUnkCAForSlot
+      0x14064F810: LoadUnkCBForSlot
+      0x14064F170: LoadUnkDEForSlot          # different from all the other loads - this one still needs slotType/ID for things
   Client::UI::Misc::PronounModule:
     vtbls:
       - ea: 0x14180CBF0
