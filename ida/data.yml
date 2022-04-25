@@ -223,6 +223,10 @@ classes:
       0x1404ADCA0: IsInInstanceArea
       0x1408E3D50: IsInPvPInstance
       0x1408E3E10: IsInPvPArea
+  Application::Network::NetworkModule:
+    funcs:
+      0x141410EC0: ctor
+      0x141412350: Initialize
   Client::Game::StatusManager:
     funcs:
       0x14070A040: Initialize
@@ -935,6 +939,40 @@ classes:
         base: Client::System::Common::NonCopyable
     funcs:
       0x1401FCE80: ctor
+      0x1401FCED0: Initialize
+  Application::Network::PacketReceiverCallbackInterface:
+    vtbls:
+      - ea: 0x1417D0330
+    vfuncs:
+      0: dtor
+      1: OnReceiveZonePacket
+      2: OnReceiveChatPacket
+  Client::Network::Protocol::Zone::PacketReceiverCallbackInterface:
+    vtbls:
+      - ea: 0x14180FA78
+    vfuncs:
+      0: dtor
+      1: OnReceivePacket
+  Client::Network::Protocol::Chat::PacketReceiverCallbackInterface:
+    vtbls:
+      - ea: 0x141922990
+    vfuncs:
+      0: dtor
+      1: OnReceivePacket
+  Client::Network::PacketDispatcher:
+    vtbls:
+      - ea: 0x1419229A0
+        base: Client::Network::Protocol::Zone::PacketReceiverCallbackInterface
+      - ea: 0x1419229B0
+        base: Client::Network::Protocol::Chat::PacketReceiverCallbackInterface
+  Client::Network::NetworkModulePacketReceiverCallback: # derives Application::Network::PacketReceiverCallbackInterface & Client::Network::PacketDispatcher
+    vtbls:
+      - ea: 0x1417D0348
+        base: Application::Network::PacketReceiverCallbackInterface
+      - ea: 0x1417D0360
+        base: Client::Network::Protocol::Zone::PacketReceiverCallbackInterface
+      - ea: 0x1417D0370
+        base: Client::Network::Protocol::Chat::PacketReceiverCallbackInterface
   Client::UI::Agent::AgentInterface:
     vtbls:
       - ea: 0x1417D13A0
