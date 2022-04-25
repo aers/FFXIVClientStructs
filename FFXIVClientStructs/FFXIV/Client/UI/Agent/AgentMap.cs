@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Numerics;
+using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
@@ -46,10 +47,13 @@ public unsafe partial struct AgentMap
     [FieldOffset(0x58F8)] public uint SelectedMapMarkerRange;
     [FieldOffset(0x58FC)] public uint SelectedMapDiscoveryFlag;
 
-    [FieldOffset(0x59AD)] public byte TempMapMarkerCount;
-    [FieldOffset(0x59AF)] public byte IsFlagMarkerSet;
-    [FieldOffset(0x59B9)] public byte IsPlayerMoving;
-    [FieldOffset(0x59C1)] public byte IsControlKeyPressed;
+    [FieldOffset(0x59B0)] public byte MapMarkerCount;
+    [FieldOffset(0x59B1)] public byte TempMapMarkerCount;
+    [FieldOffset(0x59B3)] public byte IsFlagMarkerSet;
+    [FieldOffset(0x59BD)] public byte IsPlayerMoving;
+    [FieldOffset(0x59C5)] public byte IsControlKeyPressed;
+
+    public static AgentMap* Instance() => Framework.Instance()->GetUiModule()->GetAgentModule()->GetAgentMap();
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8D 4C 24 ?? E8 ?? ?? ?? ?? 33 ED 48 8D 15")]
     public partial void SetFlagMapMarker(uint territoryId, uint mapId, float mapX, float mapY, uint iconId = 0xEC91);
