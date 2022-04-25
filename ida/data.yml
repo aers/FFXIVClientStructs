@@ -63,6 +63,7 @@ functions:
   0x1407F71B0: GetBeastTribeAllowance
   0x141075C00: Client::UI::AddonHudLayoutScreen::MoveableAddonInfoStruct_UpdateAddonPosition
   0x14117BEA0: Client::Graphics::Kernel::CreateShader # static function
+  0x1411B5E60: Client::Game::Control::InputManager::IsAutoRunning # static function, might belong in a different class.
   0x141218C90: lua_close
   0x141218D10: lua_newstate
   0x141219010: lua_index2addr
