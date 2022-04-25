@@ -134,5 +134,6 @@ public enum ConfigOption : short
     PartyDisplayNameSettings = 459,
     AllianceDisplayNameSettings = 468,
     OtherPCsDisplayNameSettings = 475,
-    FriendsDisplayNameSettings = 520
+    FriendsDisplayNameSettings = 520,
+    DisplayNameSize = 546,
 }
