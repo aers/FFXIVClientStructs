@@ -104,7 +104,7 @@ public unsafe partial struct UIModule
     [VirtualFunction(61)]
     public partial void* GetUIInputModule();
 
-    [VirtualFunction(62)]
+    [VirtualFunction(63)]
     public partial void* GetLogFilterConfig();
 
     [VirtualFunction(138)]
