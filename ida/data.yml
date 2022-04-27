@@ -2317,7 +2317,7 @@ classes:
       56: GetRetainerCommentModule
       60: GetUIInputData
       61: GetUIInputModule
-      62: GetLogFilterConfig
+      63: GetLogFilterConfig
       143: AnnounceHowTo
       145: HideHowTo
       147: ShowGoldSaucerReward
