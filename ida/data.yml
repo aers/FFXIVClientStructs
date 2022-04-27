@@ -2314,6 +2314,7 @@ classes:
       29: GetRaptureTeleportHistory
       35: GetAgentModule
       37: GetUI3DModule
+      56: GetRetainerCommentModule
       60: GetUIInputData
       61: GetUIInputModule
       62: GetLogFilterConfig
@@ -2473,6 +2474,14 @@ classes:
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
       0x14067F410: AddHistoryEntry
+  Client::UI::Misc::RetainerCommentModule:
+    vtbls:
+      - ea: 0x14180D600
+        base: Client::UI::Misc::UserFileManager::UserFileEvent
+    funcs:
+      0x140688F20: ctor
+      0x1406893D0: GetComment
+      0x140689430: SetComment
   Client::UI::Misc::CharaView:
     vtbls:
       - ea: 0x14180D738
