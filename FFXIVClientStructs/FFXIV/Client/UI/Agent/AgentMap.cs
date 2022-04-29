@@ -39,13 +39,14 @@ public unsafe partial struct AgentMap
 
     [FieldOffset(0x58E0)] public uint CurrentTerritoryId;
     [FieldOffset(0x58E4)] public uint CurrentMapId;
-    [FieldOffset(0x58E8)] public uint CurrentMapMarkerRange;
-    [FieldOffset(0x58EC)] public uint CurrentMapDiscoveryFlag;
+    [FieldOffset(0x58EC)] public uint CurrentMapMarkerRange;
+    [FieldOffset(0x58F0)] public uint CurrentMapDiscoveryFlag;
 
-    [FieldOffset(0x58F0)] public uint SelectedTerritoryId;
-    [FieldOffset(0x58F4)] public uint SelectedMapId;
-    [FieldOffset(0x58F8)] public uint SelectedMapMarkerRange;
-    [FieldOffset(0x58FC)] public uint SelectedMapDiscoveryFlag;
+    [FieldOffset(0x58F4)] public uint SelectedTerritoryId;
+    [FieldOffset(0x58F8)] public uint SelectedMapId;
+    [FieldOffset(0x58FC)] public uint SelectedMapMarkerRange;
+    [FieldOffset(0x5900)] public uint SelectedMapDiscoveryFlag;
+    [FieldOffset(0x5904)] public uint SelectedMapSub;
 
     [FieldOffset(0x59B0)] public byte MapMarkerCount;
     [FieldOffset(0x59B1)] public byte TempMapMarkerCount;
