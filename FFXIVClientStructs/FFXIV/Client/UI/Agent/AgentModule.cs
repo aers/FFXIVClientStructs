@@ -332,5 +332,6 @@ public enum AgentId : uint {
     MycItemBox = 371, //Bozja Lost Finds Cache
     MycItemBag = 372, //Bozja Lost Finds Holster
     MycBattleAreaInfo = 375, //Bozja Recruitment
-    OrnamentNoteBook = 376 //Accessories
+    OrnamentNoteBook = 376, //Accessories
+    CharaCard = 393 // AdventurerPlate
 }
