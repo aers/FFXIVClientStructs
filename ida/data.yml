@@ -3304,6 +3304,12 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140278960: ctor
+  Client::UI::Agent::AgentCompanyCraftMaterial:
+    vtbls:
+      - ea: 0x1417D5280
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1402C17B0: ctor
   Client::UI::Agent::AgentCatch:
     vtbls:
       - ea: 0x141868658
@@ -4088,6 +4094,12 @@ classes:
     funcs:
       0x140D05080: ctor
       0x140D05D80: UpdateResult
+  Client::UI::AddonSubmarinePartsMenu:
+    vtbls:
+      - ea: 0x1418A1138
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140D43910: ctor
   Client::UI::AddonConfigSystem:
     vtbls:
       - ea: 0x1418A5470
