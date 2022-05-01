@@ -26,7 +26,6 @@ globals:
   # 0x141F82720: g_TitleController # commented out because it no longer has an xref
   0x141F82728: g_TitleList
   0x141F94FA8: g_FateTablePtr
-  0x141F94C40: g_ClientObjectManager
   0x141F25EC0: g_SomeOtherRenderingState
   0x141F38194: g_InvSqrt3
 
@@ -284,6 +283,17 @@ classes:
   Client::Game::Network::PacketContext:
     vtbls:
       - ea: 0x14180FAC8
+  Client::Game::Network::PacketQue:
+    vtbls:
+      - ea: 0x14180FAD0
+        base: Client::Network::Protocol::Zone::PacketReceiverCallbackInterface
+    funcs:
+      0x14073CAE0: Initialize
+      0x14073D7B0: CreateQueuedBattleChara
+      0x14073D830: OnReceiveCreatePlayerBattleCharaPacket
+      0x14073D960: OnReceiveCreateNonPlayerBattleCharaPacket
+      0x14073DB60: ProcessBattleCharaCreationQueue
+      0x14073F600: AddBattleCharaToCreationQueue
   Client::Game::Control::Control:
     funcs:
       0x1404CE1D0: Initialize
@@ -297,7 +307,7 @@ classes:
   Client::Game::CameraManager:
     funcs:
       0x1411EB400: PreUpdate
-  Client::Game::Object::GameObjectManager:
+  Client::Game::Object::GameObjectManager: # all game objects
     instances:
       - ea: 0x141F6BBE0
         pointer: False
@@ -310,12 +320,21 @@ classes:
       0x140778BA0: UpdateObjectArraysWrapper
       0x140778BB0: UpdateObjectArraysWrapper2
       0x140778BD0: ClearObjectArrays
-  Client::Game::Character::CharacterManager:
+  Client::Game::Object::ClientObjectManager: # non-networked objects
+    instances:
+      - ea: 0x141F94C40
+        pointer: False
+    funcs:
+      0x141159760: Initialize
+      0x141159920: CreateCharacter
+  Client::Game::Character::CharacterManager: # networked characters
     instances:
       - ea: 0x141F6B8A0
         pointer: False
     funcs:
       0x1407776F0: Initialize
+      0x1407779C0: CreateCharacterAtFirstEmptyIndex
+      0x140777A10: CreateCharacterAtIndex
       0x140777B60: DeleteCharacterAtIndex
       0x140777C00: DeleteAllCharacters
       0x140777CF0: LookupBattleCharaByObjectID
@@ -2314,9 +2333,10 @@ classes:
       29: GetRaptureTeleportHistory
       35: GetAgentModule
       37: GetUI3DModule
+      56: GetRetainerCommentModule
       60: GetUIInputData
       61: GetUIInputModule
-      62: GetLogFilterConfig
+      63: GetLogFilterConfig
       143: AnnounceHowTo
       145: HideHowTo
       147: ShowGoldSaucerReward
@@ -2473,6 +2493,14 @@ classes:
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
       0x14067F410: AddHistoryEntry
+  Client::UI::Misc::RetainerCommentModule:
+    vtbls:
+      - ea: 0x14180D600
+        base: Client::UI::Misc::UserFileManager::UserFileEvent
+    funcs:
+      0x140688F20: ctor
+      0x1406893D0: GetComment
+      0x140689430: SetComment
   Client::UI::Misc::CharaView:
     vtbls:
       - ea: 0x14180D738
@@ -3295,6 +3323,12 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140278960: ctor
+  Client::UI::Agent::AgentCompanyCraftMaterial:
+    vtbls:
+      - ea: 0x1417D5280
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1402C17B0: ctor
   Client::UI::Agent::AgentCatch:
     vtbls:
       - ea: 0x141868658
@@ -4079,6 +4113,12 @@ classes:
     funcs:
       0x140D05080: ctor
       0x140D05D80: UpdateResult
+  Client::UI::AddonSubmarinePartsMenu:
+    vtbls:
+      - ea: 0x1418A1138
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140D43910: ctor
   Client::UI::AddonConfigSystem:
     vtbls:
       - ea: 0x1418A5470

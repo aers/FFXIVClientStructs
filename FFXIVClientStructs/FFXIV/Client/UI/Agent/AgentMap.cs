@@ -46,6 +46,7 @@ public unsafe partial struct AgentMap
     [FieldOffset(0x872C)] public uint SelectedMapId;
     [FieldOffset(0x8730)] public uint SelectedMapMarkerRange;
     [FieldOffset(0x8734)] public uint SelectedMapDiscoveryFlag;
+    [FieldOffset(0x8738)] public uint SelectedMapSub;
 
     [FieldOffset(0x87E8)] public byte MapMarkerCount;
     [FieldOffset(0x87E9)] public byte TempMapMarkerCount;

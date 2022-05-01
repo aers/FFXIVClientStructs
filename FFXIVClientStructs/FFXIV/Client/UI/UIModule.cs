@@ -95,13 +95,16 @@ public unsafe partial struct UIModule
     [VirtualFunction(37)]
     public partial UI3DModule* GetUI3DModule();
 
+    [VirtualFunction(56)]
+    public partial RetainerCommentModule* GetRetainerCommentModule();
+
     [VirtualFunction(60)]
     public partial void* GetUIInputData();
 
     [VirtualFunction(61)]
     public partial void* GetUIInputModule();
 
-    [VirtualFunction(62)]
+    [VirtualFunction(63)]
     public partial void* GetLogFilterConfig();
 
     [VirtualFunction(138)]
