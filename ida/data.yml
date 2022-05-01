@@ -26,7 +26,6 @@ globals:
   # 0x141F82720: g_TitleController # commented out because it no longer has an xref
   0x141F82728: g_TitleList
   0x141F94FA8: g_FateTablePtr
-  0x141F94C40: g_ClientObjectManager
   0x141F25EC0: g_SomeOtherRenderingState
   0x141F38194: g_InvSqrt3
 
@@ -284,6 +283,12 @@ classes:
   Client::Game::Network::PacketContext:
     vtbls:
       - ea: 0x14180FAC8
+  Client::Game::Network::PacketQue:
+    vtbls:
+      - ea: 0x14180FAD0
+        base: Client::Network::Protocol::Zone::PacketReceiverCallbackInterface
+    funcs:
+      0x14073CAE0: Initialize
   Client::Game::Control::Control:
     funcs:
       0x1404CE1D0: Initialize
@@ -297,7 +302,7 @@ classes:
   Client::Game::CameraManager:
     funcs:
       0x1411EB400: PreUpdate
-  Client::Game::Object::GameObjectManager:
+  Client::Game::Object::GameObjectManager: # all game objects
     instances:
       - ea: 0x141F6BBE0
         pointer: False
@@ -310,12 +315,21 @@ classes:
       0x140778BA0: UpdateObjectArraysWrapper
       0x140778BB0: UpdateObjectArraysWrapper2
       0x140778BD0: ClearObjectArrays
-  Client::Game::Character::CharacterManager:
+  Client::Game::Object::ClientObjectManager: # non-networked objects
+    instances:
+      - ea: 0x141F94C40
+        pointer: False
+    funcs:
+      0x141159760: Initialize
+      0x141159920: CreateCharacter
+  Client::Game::Character::CharacterManager: # networked characters
     instances:
       - ea: 0x141F6B8A0
         pointer: False
     funcs:
       0x1407776F0: Initialize
+      0x1407779C0: CreateCharacterAtFirstEmptyIndex
+      0x140777A10: CreateCharacterAtIndex
       0x140777B60: DeleteCharacterAtIndex
       0x140777C00: DeleteAllCharacters
       0x140777CF0: LookupBattleCharaByObjectID
