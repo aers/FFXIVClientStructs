@@ -289,6 +289,11 @@ classes:
         base: Client::Network::Protocol::Zone::PacketReceiverCallbackInterface
     funcs:
       0x14073CAE0: Initialize
+      0x14073D7B0: CreateQueuedBattleChara
+      0x14073D830: OnReceiveCreatePlayerBattleCharaPacket
+      0x14073D960: OnReceiveCreateNonPlayerBattleCharaPacket
+      0x14073DB60: ProcessBattleCharaCreationQueue
+      0x14073F600: AddBattleCharaToCreationQueue
   Client::Game::Control::Control:
     funcs:
       0x1404CE1D0: Initialize
