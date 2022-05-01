@@ -16,12 +16,18 @@ public unsafe partial struct AgentContext
         return (AgentContext*) Framework.Instance()->GetUiModule()->GetAgentModule()->GetAgentByInternalId(
             AgentId.Context);
     }
+	
+	[StructLayout(LayoutKind.Explicit, Size = 0xCF0)]
+	public unsafe struct ContextMenus
+	{
+		[FieldOffset(0x00)] public ContextMenu MainContextMenu;
+		[FieldOffset(0x678)] public ContextMenu SubContextMenu;		
+	};
 
     [FieldOffset(0x00)] public AgentInterface AgentInterface;
 
     [FieldOffset(0x28)] public fixed byte ContextMenuArray[0x678 * 2];
-    [FieldOffset(0x28)] public ContextMenu MainContextMenu;
-    [FieldOffset(0x6A0)] public ContextMenu SubContextMenu;
+    [FieldOffset(0x28)] public ContextMenus ContextMenuStruct;
 
     [FieldOffset(0xD18)] public ContextMenu* CurrentContextMenu;
     [FieldOffset(0xD20)] public Utf8String ContextMenuTitle;

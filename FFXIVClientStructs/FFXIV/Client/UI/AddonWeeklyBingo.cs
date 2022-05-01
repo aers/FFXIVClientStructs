@@ -11,9 +11,9 @@ public struct AddonWeeklyBingo
 {
     [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
     [FieldOffset(0x220)] public DutySlotList DutySlotList;
-    [FieldOffset(0x18E8)] public StringThing StringThing;
-    [FieldOffset(0x1938)] public StickerSlotList StickerSlotList;
-    [FieldOffset(0x1F20)] public uint NumStickersPlaced;
+    [FieldOffset(0x1B08)] public StringThing StringThing; // bad offset?
+    [FieldOffset(0x1B58)] public StickerSlotList StickerSlotList; // bad offset?
+    [FieldOffset(0x20E8)] public uint NumStickersPlaced; // bad offset?
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x16C8)]

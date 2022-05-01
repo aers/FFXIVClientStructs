@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import traceback
 import dataclasses
 import logging
 import os
@@ -7,6 +8,7 @@ import sys
 from dataclasses import dataclass, field
 from json import JSONEncoder
 from pathlib import Path
+from types import NoneType
 from typing import Dict, Iterator, List, Optional, Set
 
 import dacite
@@ -190,8 +192,8 @@ class SigGen:
             if chunk == SENTINEL:
                 addr = self._insn_addr_cache[i]
                 chunk = self._sig_cache[i] = self._sig_instruction(addr)
-            chunks.append(chunk)
-
+            if chunk != NoneType:
+                chunks.append(chunk)
         return ' '.join(chunks)
 
     def __iter__(self) -> Iterator[str]:
