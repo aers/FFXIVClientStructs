@@ -113,6 +113,7 @@ public enum AgentId : uint {
     ScreenLog = 35,
 
     // NPCTrade,
+    Request = 36,
     Status = 37,
     Map = 38,
     Loot = 39, //NeedGreed

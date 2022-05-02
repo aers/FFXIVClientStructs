@@ -35,4 +35,6 @@ public unsafe struct AddonRequest
     [FieldOffset(0x2C0)] public AtkComponentDragDrop* AtkComponentDragDrop2C0;
     [FieldOffset(0x2C8)] public AtkComponentDragDrop* AtkComponentDragDrop2C8;
     [FieldOffset(0x2D0)] public AtkComponentDragDrop* AtkComponentDragDrop2D0;
+    
+    [FieldOffset(0x2D8)] public int EntryCount;
 }

@@ -3182,6 +3182,12 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x14098CD80: ctor
+  Client::UI::Agent::AgentRequest:
+    vtbls:
+      - ea: 0x141864CB8
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1409930C0: ctor
   Client::UI::Agent::AgentMarker:
     vtbls:
       - ea: 0x1418673A8
