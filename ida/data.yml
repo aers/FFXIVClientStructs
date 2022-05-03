@@ -4501,7 +4501,7 @@ classes:
       - ea: 0x14190C9F8
         base: Component::GUI::AtkUnitBase
     vfuncs:
-      75: PulseActionBarSlot
+      76: PulseActionBarSlot
   Client::UI::AddonActionBarX:
     vtbls:
       - ea: 0x14190CCB0
