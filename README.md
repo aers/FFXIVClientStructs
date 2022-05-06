@@ -1,6 +1,6 @@
 ## FFXIVClientStructs
 
-This project encapsulates efforts to reverse-engineer the layout of the C++ classes that make up the FFXIV client. This library is intended to be used alongside [Dalamud](https://github.com/goatcorp/Dalamud), and is included with it.
+This project encapsulates efforts to reverse-engineer the layout of the C++ classes that make up the FFXIV client. 
 
 ### IDA/Ghidra
 
