@@ -2,7 +2,7 @@
 
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
-public enum BalloonType : uint
+public enum BalloonType : byte // bad size?  needs to be compatible with BalloonInfo.Type
 {
     Timer = 0, // runs on a simple timer and disappears when the timer ends
     Unknown = 1 // the non-timer mode, not sure what its called or where its used

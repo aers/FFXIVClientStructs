@@ -31,7 +31,7 @@ char __fastcall sub_140CDDA30(__int64 a1)
 3. Set the lookup value to the function address inside the LoadUldResourceHandle method.
 """
 
-LOOKUP_VALUE = 0x14050BB10
+LOOKUP_VALUE = 0x7FF6DDB6BDB0
 VFUNC_INDEX = 43
 
 OUTPUT = sys.stdout

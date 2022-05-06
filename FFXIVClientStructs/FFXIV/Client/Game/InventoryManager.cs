@@ -39,9 +39,10 @@ public unsafe partial struct InventoryContainer
 [StructLayout(LayoutKind.Explicit, Size = 0x38)]
 public unsafe struct InventoryItem
 {
-    [FieldOffset(0x00)] public InventoryType Container;
-    [FieldOffset(0x04)] public short Slot;
-    [FieldOffset(0x08)] public uint ItemID;
+    [FieldOffset(0x00)] public InventoryType Type;
+    [FieldOffset(0x04)] public ushort Slot;
+	[FieldOffset(0x06)] public ItemIDFormat Format;
+    [FieldOffset(0x08)] public ItemIDType ItemID;
     [FieldOffset(0x0C)] public uint Quantity;
     [FieldOffset(0x10)] public ushort Spiritbond;
     [FieldOffset(0x12)] public ushort Condition;
@@ -61,6 +62,27 @@ public unsafe struct InventoryItem
         Relic = 4,
         Collectable = 8
     }
+	
+    [Flags]
+    public enum ItemIDFormat : ushort
+    {
+        Direct = 0,
+		Indirect = 1
+    }
+	
+	[StructLayout(LayoutKind.Explicit, Size = 0x4)]
+	public struct IndirectItemIDFormat
+	{
+		[FieldOffset(0x00)] public ushort Slot;
+		[FieldOffset(0x02)] public ushort Type;
+	}
+	
+	[StructLayout(LayoutKind.Explicit, Size = 0x4)]
+	public struct ItemIDType
+	{
+		[FieldOffset(0x00)] public uint ItemID;
+		[FieldOffset(0x00)] public IndirectItemIDFormat IndirectItemID;	
+	}
 }
 
 public enum InventoryType : uint
