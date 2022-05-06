@@ -64,6 +64,9 @@ public unsafe partial struct AtkUnitBase
     [MemberFunction("E8 ?? ?? ?? ?? F6 46 40 0F")]
     public partial void ResizeCollisionNodeList(byte nodeCount);
 
+    [MemberFunction("E8 ?? ?? ?? ?? 8D 77 02")]
+    public partial bool SetFocusNode(AtkResNode* node, bool a3 = false, uint a4 = 0);
+
     [VirtualFunction(3)]
     public partial bool Show(int unkInt, bool unkBool = false);
 
