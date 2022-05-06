@@ -18,7 +18,7 @@ public unsafe partial struct AtkUnitBase
     [FieldOffset(0xD8)] public AtkCollisionNode* WindowHeaderCollisionNode;
     [FieldOffset(0xE0)] public AtkResNode* CursorTarget; // Likely always AtkCollisionNode
     [FieldOffset(0x108)] public AtkComponentNode* WindowNode;
-    [FieldOffset(0x160)] public unsafe AtkValue* AtkValues;
+    [FieldOffset(0x160)] public AtkValue* AtkValues;
     [FieldOffset(0x1CA)] public ushort AtkValuesCount;
     [FieldOffset(0x1AC)] public float Scale;
     [FieldOffset(0x182)] public byte Flags;
