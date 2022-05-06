@@ -6,6 +6,6 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 public struct AddonContextMenu
 {
     [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
-    [FieldOffset(0x220)] public unsafe AtkValue* AtkValues; // bad offset?
-    [FieldOffset(0x228)] public ushort AtkValuesCount; // bad offset?
+    [FieldOffset(0x160)] public unsafe AtkValue* AtkValues;
+    [FieldOffset(0x1CA)] public ushort AtkValuesCount;
 }

@@ -122,18 +122,13 @@ namespace CExporter
             if (type == typeof(void))
                 return;
 
-            var name = type.Name;
-
             Debug.WriteLine($"Processing Struct:  {type.FullName}");
 
             KnownTypes.Add(type);
 
             int structSize;
             if (type.IsGenericType)
-                if (!type.ContainsGenericParameters)
-                    structSize = Marshal.SizeOf(Activator.CreateInstance(type));
-                else
-                    structSize = 0;  // Generic types are ignored if they cannot be instantiated
+                structSize = Marshal.SizeOf(Activator.CreateInstance(type));
             else
                 structSize = Marshal.SizeOf(type);
 
@@ -141,109 +136,99 @@ namespace CExporter
             var padFill = new string(' ', pad + 2);
 
             StringBuilder sb = new StringBuilder();
-            var label = (structSize == 0) ? "Size=unknown due to generic type with parameters" : $"Size=0x{structSize:X}";
-            sb.AppendLine($"struct {FixFullName(type)} /* {label} */");
+            sb.AppendLine($"struct {FixFullName(type)} /* Size=0x{structSize:X} */");
             sb.AppendLine("{");
 
-            if (structSize > 0)
+            var offset = 0;
+            var fieldGroupings = type.GetFields()
+                .Where(finfo => !Attribute.IsDefined(finfo, typeof(NoExportAttribute)))
+                .OrderBy(finfo => finfo.GetFieldOffset())
+                .GroupBy(finfo => finfo.GetFieldOffset());
+            foreach (var grouping in fieldGroupings)
             {
-                var offset = 0;
-                var fieldGroupings = type.GetFields()
-                    .Where(finfo => !Attribute.IsDefined(finfo, typeof(NoExportAttribute)))
-                    .OrderBy(finfo => finfo.GetFieldOffset())
-                    .GroupBy(finfo => finfo.GetFieldOffset());
-                foreach (var grouping in fieldGroupings)
+                var fieldOffset = grouping.Key;
+                var finfos = grouping.ToList();
+
+                int unionMaxSize = 0;
+                var isUnion = finfos.Count > 1;
+                if (isUnion)
                 {
-                    var fieldOffset = grouping.Key;
-                    if (fieldOffset >= 0) // fieldOffset < 0 means GetFieldOffset encountered something without an offset
-                    {
-                        var finfos = grouping.ToList();
-
-                        int unionMaxSize = 0;
-                        var isUnion = finfos.Count > 1;
-                        if (isUnion)
-                        {
-                            sb.AppendLine("    union {");
-                        }
-
-                        for (int i = 0; i < finfos.Count; i++)
-                        {
-                            var finfo = finfos[i];
-                            var fieldType = finfo.FieldType;
-                            int fieldSize = 0;
-
-                            if (!isUnion)
-                                offset = FillGaps(offset, fieldOffset, padFill, sb);
-
-                            if (offset > fieldOffset)
-                            {
-                                Debug.WriteLine($"Current offset exceeded the next field's offset (0x{offset:X} > 0x{fieldOffset:X}): {FixFullName(type)}.{FixTypeName(fieldType)}");
-                                return;
-                            }
-
-                            if (finfo.IsFixed())
-                            {
-                                var fixedType = finfo.GetFixedType();
-                                var fixedSize = finfo.GetFixedSize();
-                                ProcessType(fixedType, header);
-
-                                sb.AppendLine(string.Format($"    /* 0x{{0:X{pad}}} */ {FixTypeName(fixedType)} {finfo.Name}[0x{fixedSize:X}];", offset));
-
-                                fieldSize = Marshal.SizeOf(fixedType) * fixedSize;
-                            }
-                            else if (fieldType.IsPointer)
-                            {
-                                var elemType = fieldType.GetElementType();
-                                var levels = 1;
-                                while (elemType.IsPointer)
-                                {
-                                    levels++;
-                                    elemType = elemType.GetElementType();
-                                }
-                                ProcessType(elemType, header);
-                                var asterisks = new String('*', levels);
-                                sb.AppendLine(string.Format($"    /* 0x{{0:X{pad}}} */ {FixTypeName(elemType)}{asterisks} {finfo.Name};", offset));
-
-                                fieldSize = 8;
-                            }
-                            else if (fieldType.IsEnum)
-                            {
-                                ProcessType(fieldType, header);
-
-                                sb.AppendLine(string.Format($"    /* 0x{{0:X{pad}}} */ {FixTypeName(fieldType)} {finfo.Name};", offset));
-
-                                fieldSize = Marshal.SizeOf(Enum.GetUnderlyingType(fieldType));
-                            }
-                            else
-                            {
-                                ProcessType(fieldType, header);
-
-                                sb.AppendLine(string.Format($"    /* 0x{{0:X{pad}}} */ {FixTypeName(fieldType)} {finfo.Name};", offset));
-
-                                if (fieldType == typeof(bool))
-                                    fieldSize = 1;
-                                else if (fieldType.IsGenericType)
-                                    fieldSize = Marshal.SizeOf(Activator.CreateInstance(fieldType));
-                                else
-                                    fieldSize = Marshal.SizeOf(fieldType);
-                            }
-
-                            if (!isUnion)
-                                offset += fieldSize;
-                            else
-                                unionMaxSize = Math.Max(unionMaxSize, fieldSize);
-                        }
-
-                        if (isUnion)
-                        {
-                            offset += unionMaxSize;
-                            sb.AppendLine($"    }} _union_0x{fieldOffset:X};");
-                        }
-                    }
+                    sb.AppendLine("    union {");
                 }
 
-                FillGaps(offset, structSize, padFill, sb);
+                for (int i = 0; i < finfos.Count; i++)
+                {
+                    var finfo = finfos[i];
+                    var fieldType = finfo.FieldType;
+                    int fieldSize = 0;
+
+                    if (!isUnion)
+                        offset = FillGaps(offset, fieldOffset, padFill, sb);
+
+                    if (offset > fieldOffset)
+                    {
+                        Debug.WriteLine($"Current offset exceeded the next field's offset (0x{offset:X} > 0x{fieldOffset:X}): {FixFullName(type)}.{FixTypeName(fieldType)}");
+                        return;
+                    }
+
+                    if (finfo.IsFixed())
+                    {
+                        var fixedType = finfo.GetFixedType();
+                        var fixedSize = finfo.GetFixedSize();
+                        ProcessType(fixedType, header);
+
+                        sb.AppendLine(string.Format($"    /* 0x{{0:X{pad}}} */ {FixTypeName(fixedType)} {finfo.Name}[0x{fixedSize:X}];", offset));
+
+                        fieldSize = Marshal.SizeOf(fixedType) * fixedSize;
+                    }
+                    else if (fieldType.IsPointer)
+                    {
+                        var elemType = fieldType.GetElementType();
+                        while (elemType.IsPointer)
+                            elemType = elemType.GetElementType();
+                        ProcessType(elemType, header);
+
+                        sb.AppendLine(string.Format($"    /* 0x{{0:X{pad}}} */ {FixTypeName(fieldType)} {finfo.Name};", offset));
+
+                        fieldSize = 8;
+
+                    }
+                    else if (fieldType.IsEnum)
+                    {
+                        ProcessType(fieldType, header);
+
+                        sb.AppendLine(string.Format($"    /* 0x{{0:X{pad}}} */ {FixTypeName(fieldType)} {finfo.Name};", offset));
+
+                        fieldSize = Marshal.SizeOf(Enum.GetUnderlyingType(fieldType));
+                    }
+                    else
+                    {
+                        ProcessType(fieldType, header);
+
+                        sb.AppendLine(string.Format($"    /* 0x{{0:X{pad}}} */ {FixTypeName(fieldType)} {finfo.Name};", offset));
+
+                        if (fieldType == typeof(bool))
+                            fieldSize = 1;
+                        else if (fieldType.IsGenericType)
+                            fieldSize = Marshal.SizeOf(Activator.CreateInstance(fieldType));
+                        else
+                            fieldSize = Marshal.SizeOf(fieldType);
+                    }
+
+                    if (!isUnion)
+                        offset += fieldSize;
+                    else
+                        unionMaxSize = Math.Max(unionMaxSize, 8);
+                }
+
+                if (isUnion)
+                {
+                    offset += unionMaxSize;
+                    sb.AppendLine($"    }} _union_0x{fieldOffset:X};");
+                }
             }
+
+            FillGaps(offset, structSize, padFill, sb);
 
             sb.AppendLine("};");
 
@@ -300,6 +285,11 @@ namespace CExporter
             {
                 var generic = type.GetGenericTypeDefinition();
                 fullName = generic.FullName.Split('`')[0];
+                foreach (var argType in type.GenericTypeArguments)
+                {
+                    var argTypeFullName = FixFullName(argType).Replace("::", "");
+                    fullName += $"::{argTypeFullName}";
+                }
             }
             else
             {
@@ -316,36 +306,20 @@ namespace CExporter
 
         private string FixTypeName(Type type)
         {
-            if (type == typeof(void))
-                return "void";
-            else if (type == typeof(char) || type == typeof(System.Char))
-                return "char";
-            else if (type == typeof(byte) || type == typeof(System.Byte) || type == typeof(System.SByte))
-                return "byte";
-            else if (type == typeof(bool) || type == typeof(System.Boolean))
-                return "bool";
-            else if (type == typeof(float) || type == typeof(System.Single))
-                return "float";
-            else if (type == typeof(double) || type == typeof(System.Double))
-                return "double";
-            else if (type == typeof(short) || type == typeof(System.Int16))
-                return "__int16";
-            else if (type == typeof(int) || type == typeof(System.Int32))
-                return "__int32";
-            else if (type == typeof(long) || type == typeof(System.Int64))
-                return "__int64";
-            else if (type == typeof(ushort) || type == typeof(System.UInt16))
-                return "unsigned __int16";
-            else if (type == typeof(uint) || type == typeof(System.UInt32))
-                return "unsigned __int32";
-            else if (type == typeof(ulong) || type == typeof(System.UInt64))
-                return "unsigned __int64";
-            else if (type == typeof(System.IntPtr))
-                return "__int32*";
-            else if (type == typeof(System.UIntPtr))
-                return "unsigned __int32*";
-            else return
-                FixFullName(type);
+            if (type == typeof(void) || type == typeof(void*) || type == typeof(void**) ||
+                type == typeof(char) || type == typeof(char*) || type == typeof(char**) ||
+                type == typeof(byte) || type == typeof(byte*) || type == typeof(byte**))
+                return type.Name.ToLower();
+            else if (type == typeof(bool)) return "bool";
+            else if (type == typeof(float)) return "float";
+            else if (type == typeof(double)) return "double";
+            else if (type == typeof(short)) return "__int16";
+            else if (type == typeof(int)) return "__int32";
+            else if (type == typeof(long)) return "__int64";
+            else if (type == typeof(ushort)) return "unsigned __int16";
+            else if (type == typeof(uint)) return "unsigned __int32";
+            else if (type == typeof(ulong)) return "unsigned __int64";
+            else return FixFullName(type);
         }
 
         private int FillGaps(int offset, int maxOffset, string padFill, StringBuilder sb)
@@ -446,16 +420,8 @@ namespace CExporter
             if (attrs.Length != 0)
                 return attrs.Cast<FieldOffsetAttribute>().Single().Value;
 
-            try
-            {
-                // Lets assume this is because it's a LayoutKind.Sequential struct
-                return Marshal.OffsetOf(finfo.DeclaringType, finfo.Name).ToInt32();
-            }
-            catch (Exception)
-            {
-                // assume this is a local static field that isn't required for the c header
-                return -1;
-            }
+            // Lets assume this is because it's a LayoutKind.Sequential struct
+            return Marshal.OffsetOf(finfo.DeclaringType, finfo.Name).ToInt32();
         }
     }
 }
