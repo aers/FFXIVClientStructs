@@ -8,7 +8,6 @@
 public unsafe partial struct AtkComponentNumericInput
 {
     [FieldOffset(0x0)] public AtkComponentInputBase AtkComponentInputBase;
-    [FieldOffset(0xC8)] public AtkTextNode* AtkTextNode;
     [FieldOffset(0x2F8)] public AtkUldComponentDataNumericInput Data;
 
     [MemberFunction("40 53 48 83 EC 60 8B 81")]
