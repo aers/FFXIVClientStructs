@@ -1,4 +1,4 @@
-﻿using FFXIVClientStructs.STD;
+using FFXIVClientStructs.STD;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -184,7 +184,7 @@ namespace CExporter
 
                     if (offset > fieldOffset)
                     {
-                        Debug.WriteLine($"Current offset exceeded the next field's offset (0x{offset:X} > 0x{fieldOffset:X}): {FixFullName(type)}.{FixTypeName(fieldType)}");
+                        Debug.WriteLine($"Current offset exceeded the next field's offset (0x{offset:X} > 0x{fieldOffset:X}): {FixFullName(type)}.{finfo.Name}");
                         return;
                     }
 
