@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 // Client::UI::Agent::AgentMap
 //   Client::UI::Agent::AgentInterface
 //     Component::GUI::AtkModuleInterface::AtkEventInterface
-[StructLayout(LayoutKind.Explicit, Size = 0x87fc)]
+[StructLayout(LayoutKind.Explicit, Size = 0x5D68)]
 public unsafe partial struct AgentMap
 {
     [FieldOffset(0x0)] public AgentInterface AgentInterface;
@@ -26,33 +26,33 @@ public unsafe partial struct AgentMap
 
     [FieldOffset(0x3800)] public fixed byte UnkArray1[0x38 * 12]; // 12 * MapMarkerBase
     [FieldOffset(0x3AA0)] public fixed byte UnkArray2[0xA8 * 12];
-    [FieldOffset(0x4670)] public fixed byte MiniMapMarkerArray[0x40 * 100]; // 100 * MiniMapMarker (bad offset?)
+    [FieldOffset(0x3E90)] public fixed byte MiniMapMarkerArray[0x40 * 100]; // 100 * MiniMapMarker
 
-    [FieldOffset(0x8670)] public float SelectedMapSizeFactorFloat; //bad offset? all these remaining offsets were adjusted to be aligned with previous field
-    [FieldOffset(0x8674)] public float CurrentMapSizeFactorFloat;
-    [FieldOffset(0x8678)] public short SelectedMapSizeFactor;
-    [FieldOffset(0x867A)] public short CurrentMapSizeFactor;
-    [FieldOffset(0x867C)] public short SelectedOffsetX;
-    [FieldOffset(0x867E)] public short SelectedOffsetY;
-    [FieldOffset(0x8680)] public short CurrentOffsetX;
-    [FieldOffset(0x8682)] public short CurrentOffsetY;
+    [FieldOffset(0x5838)] public float SelectedMapSizeFactorFloat;
+    [FieldOffset(0x583C)] public float CurrentMapSizeFactorFloat;
+    [FieldOffset(0x5840)] public short SelectedMapSizeFactor;
+    [FieldOffset(0x5842)] public short CurrentMapSizeFactor;
+    [FieldOffset(0x5844)] public short SelectedOffsetX;
+    [FieldOffset(0x5846)] public short SelectedOffsetY;
+    [FieldOffset(0x5848)] public short CurrentOffsetX;
+    [FieldOffset(0x584A)] public short CurrentOffsetY;
 
-    [FieldOffset(0x8718)] public uint CurrentTerritoryId;
-    [FieldOffset(0x871C)] public uint CurrentMapId;
-    [FieldOffset(0x8720)] public uint CurrentMapMarkerRange;
-    [FieldOffset(0x8724)] public uint CurrentMapDiscoveryFlag;
+    [FieldOffset(0x58E0)] public uint CurrentTerritoryId;
+    [FieldOffset(0x58E4)] public uint CurrentMapId;
+    [FieldOffset(0x58EC)] public uint CurrentMapMarkerRange;
+    [FieldOffset(0x58F0)] public uint CurrentMapDiscoveryFlag;
 
-    [FieldOffset(0x8728)] public uint SelectedTerritoryId;
-    [FieldOffset(0x872C)] public uint SelectedMapId;
-    [FieldOffset(0x8730)] public uint SelectedMapMarkerRange;
-    [FieldOffset(0x8734)] public uint SelectedMapDiscoveryFlag;
-    [FieldOffset(0x8738)] public uint SelectedMapSub;
+    [FieldOffset(0x58F4)] public uint SelectedTerritoryId;
+    [FieldOffset(0x58F8)] public uint SelectedMapId;
+    [FieldOffset(0x58FC)] public uint SelectedMapMarkerRange;
+    [FieldOffset(0x5900)] public uint SelectedMapDiscoveryFlag;
+    [FieldOffset(0x5904)] public uint SelectedMapSub;
 
-    [FieldOffset(0x87E8)] public byte MapMarkerCount;
-    [FieldOffset(0x87E9)] public byte TempMapMarkerCount;
-    [FieldOffset(0x87EB)] public byte IsFlagMarkerSet;
-    [FieldOffset(0x87F3)] public byte IsPlayerMoving;
-    [FieldOffset(0x87FB)] public byte IsControlKeyPressed;
+    [FieldOffset(0x59B0)] public byte MapMarkerCount;
+    [FieldOffset(0x59B1)] public byte TempMapMarkerCount;
+    [FieldOffset(0x59B3)] public byte IsFlagMarkerSet;
+    [FieldOffset(0x59BD)] public byte IsPlayerMoving;
+    [FieldOffset(0x59C5)] public byte IsControlKeyPressed;
 
     public static AgentMap* Instance() => Framework.Instance()->GetUiModule()->GetAgentModule()->GetAgentMap();
 
