@@ -1,4 +1,4 @@
-﻿using FFXIVClientStructs.STD;
+using FFXIVClientStructs.STD;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -122,26 +122,43 @@ namespace CExporter
             if (type == typeof(void))
                 return;
 
-            Debug.WriteLine($"Processing Struct:  {type.FullName}");
+            var name = type.FullName;
+            // Debug.WriteLine($"Processing Struct:  {name}");
 
             KnownTypes.Add(type);
 
             int structSize;
             if (type.IsGenericType)
-                structSize = Marshal.SizeOf(Activator.CreateInstance(type));
+            {
+                if (type.ContainsGenericParameters)
+                {
+                    structSize = 0; // Generic types are ignored if they cannot be instantiated.
+                    header.AppendLine($"struct {FixFullName(type)} /* Size=unknown due to generic type with parameters */");
+                    return;
+                }
+                else
+                {
+                    structSize = Marshal.SizeOf(Activator.CreateInstance(type));
+                }
+            }
             else
+            {
                 structSize = Marshal.SizeOf(type);
+            }
 
             var pad = structSize.ToString("X").Length;
             var padFill = new string(' ', pad + 2);
 
             StringBuilder sb = new StringBuilder();
+
             sb.AppendLine($"struct {FixFullName(type)} /* Size=0x{structSize:X} */");
             sb.AppendLine("{");
 
             var offset = 0;
             var fieldGroupings = type.GetFields()
                 .Where(finfo => !Attribute.IsDefined(finfo, typeof(NoExportAttribute)))
+                .Where(finfo => !finfo.IsLiteral) // not constants
+                .Where(finfi => !finfi.IsStatic)  // not static
                 .OrderBy(finfo => finfo.GetFieldOffset())
                 .GroupBy(finfo => finfo.GetFieldOffset());
             foreach (var grouping in fieldGroupings)
@@ -167,7 +184,7 @@ namespace CExporter
 
                     if (offset > fieldOffset)
                     {
-                        Debug.WriteLine($"Current offset exceeded the next field's offset (0x{offset:X} > 0x{fieldOffset:X}): {FixFullName(type)}.{FixTypeName(fieldType)}");
+                        Debug.WriteLine($"Current offset exceeded the next field's offset (0x{offset:X} > 0x{fieldOffset:X}): {FixFullName(type)}.{finfo.Name}");
                         return;
                     }
 
@@ -242,7 +259,7 @@ namespace CExporter
 
             KnownTypes.Add(type);
 
-            Debug.WriteLine($"Processing Enum:  {type.FullName}");
+            // Debug.WriteLine($"Processing Enum:  {type.FullName}");
 
             var sb = new StringBuilder();
 
@@ -273,7 +290,7 @@ namespace CExporter
             if (KnownTypes.Contains(type))
                 return;
 
-            Debug.WriteLine($"Processing Primitive: {type.FullName}");
+            // Debug.WriteLine($"Processing Primitive: {type.FullName}");
 
             KnownTypes.Add(type);
         }
@@ -354,7 +371,7 @@ namespace CExporter
                 {
                     if (offset % 8 == 0 && gap >= 8)
                     {
-                        var gapDiv = gap - gap % 8;
+                        var gapDiv = gap - (gap % 8);
                         sb.AppendLine($"    /* {padFill} */ byte _gap_0x{offset:X}[0x{gapDiv:X}];");
                         offset += gapDiv;
                     }
