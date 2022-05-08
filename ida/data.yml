@@ -1760,6 +1760,12 @@ classes:
     vtbls:
       - ea: 0x1417F4990
         base: Client::System::Framework::Task
+  Client::Graphics::Vfx::VfxData:
+    vtbls:
+      - ea: 0x1417E84F0
+        base: Apricot::ApricotInstanceListenner
+      - ea: 0x1417E8568
+        base: Client::Graphics::Vfx::VfxResourceInstanceListenner
   Client::Graphics::Vfx::VfxDataListenner:
     vtbls:
       - ea: 0x1417B4520
