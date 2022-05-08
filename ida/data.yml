@@ -4086,6 +4086,10 @@ classes:
     vtbls:
       - ea: 0x141893630
         base: Component::GUI::AtkUnitBase
+  Client::UI::AddonInputNumeric:
+    vtbls:
+      - ea: 0x141893878
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonContextIconMenu:
     vtbls:
       - ea: 0x141893F08
