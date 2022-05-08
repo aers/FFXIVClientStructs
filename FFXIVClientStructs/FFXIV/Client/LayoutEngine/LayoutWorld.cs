@@ -9,5 +9,6 @@ public unsafe partial struct LayoutWorld
     [StaticAddress("48 89 05 ? ? ? ? 48 8B 00", isPointer: true)]
     public static partial LayoutWorld* Instance();
 
+    [FieldOffset(0x20)] public LayoutManager* ActiveLayout;
     [FieldOffset(0x218)] public StdMap<Utf8String, Pointer<byte>>* RsvMap;
 }
