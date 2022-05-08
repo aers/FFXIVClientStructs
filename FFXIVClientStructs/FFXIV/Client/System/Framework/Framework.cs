@@ -22,6 +22,8 @@ public unsafe partial struct Framework
     [FieldOffset(0x17C4)] public float FrameRate;
     [FieldOffset(0x17D0)] public bool WindowInactive;
 
+    [FieldOffset(0x220C)] private fixed char userPath[260]; // WideChar Array
+
     [FieldOffset(0x2B30)] public ExcelModuleInterface* ExcelModuleInterface;
     [FieldOffset(0x2B38)] public ExdModule* ExdModule;
 
@@ -36,4 +38,12 @@ public unsafe partial struct Framework
 
     [MemberFunction("E8 ?? ?? ?? ?? 03 07", IsStatic = true)]
     public static partial long GetServerTime();
+
+    public string UserPath {
+        get {
+            fixed (char* p = userPath) {
+                return new string(p);
+            }
+        }
+    }
 }
