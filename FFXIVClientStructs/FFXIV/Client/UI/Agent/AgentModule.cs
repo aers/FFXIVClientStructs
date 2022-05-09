@@ -323,7 +323,7 @@ public enum AgentId : uint {
     EmjSetting = 326, //Mahjong Settings
     RetainerList = 327,
     Dawn = 332, //Trust
-    HousingPreview = 334,
+    HousingCatalogPreview = 334,
     QuestRedo = 337,
     QuestRedoHud = 338,
     CircleList = 340, //Fellowships
@@ -335,5 +335,7 @@ public enum AgentId : uint {
     MycItemBag = 372, //Bozja Lost Finds Holster
     MycBattleAreaInfo = 375, //Bozja Recruitment
     OrnamentNoteBook = 376, //Accessories
+    BannerList = 389, // Portraits
+    BannerEditor = 390, // Portrait Editor
     CharaCard = 393 // AdventurerPlate
 }
