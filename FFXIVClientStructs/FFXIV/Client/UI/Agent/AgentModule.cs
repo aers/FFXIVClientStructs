@@ -212,8 +212,7 @@ public enum AgentId : uint {
     PersonalRoomPortal = 121,
     HousingBuddyList = 122,
     TreasureHunt = 123,
-
-    // Salvage,
+    Salvage = 124,
     LookingForGroup = 125,
     ContentsMvp = 126,
     VoteKick = 127,
