@@ -4271,6 +4271,10 @@ classes:
     vtbls:
       - ea: 0x1418CBE88
         base: Component::GUI::AtkUnitBase
+  Client::UI::AddonGrandCompanySupplyList:
+    vtbls:
+      - ea: 0x1418CE500
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonGrandCompanySupplyReward:
     vtbls:
       - ea: 0x1418E5600
