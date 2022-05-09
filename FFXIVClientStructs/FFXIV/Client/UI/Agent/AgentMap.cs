@@ -9,6 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 // Client::UI::Agent::AgentMap
 //   Client::UI::Agent::AgentInterface
 //     Component::GUI::AtkModuleInterface::AtkEventInterface
+[Agent(AgentId.Map)]
 [StructLayout(LayoutKind.Explicit, Size = 0x5D68)]
 public unsafe partial struct AgentMap
 {

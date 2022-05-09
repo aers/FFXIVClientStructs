@@ -7,6 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 //Client::UI::Agent::AgentRevive
 //   Client::UI::Agent::AgentInterface
 //     Component::GUI::AtkModuleInterface::AtkEventInterface
+[Agent(AgentId.Revive)]
 [StructLayout(LayoutKind.Explicit, Size = 0xB8)]
 public unsafe struct AgentRevive
 {

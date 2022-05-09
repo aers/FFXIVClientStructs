@@ -5,6 +5,7 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
+[Agent(AgentId.InventoryContext)]
 [StructLayout(LayoutKind.Explicit, Size = 0x678)]
 public unsafe partial struct AgentInventoryContext
 {

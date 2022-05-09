@@ -8,6 +8,7 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
+[Agent(AgentId.Context)]
 [StructLayout(LayoutKind.Explicit, Size = 0x1748)]
 public unsafe partial struct AgentContext
 {

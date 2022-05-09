@@ -32,6 +32,7 @@ public struct BalloonSlot
     [FieldOffset(0x4)] public byte Available; // bool
 }
 
+[Agent(AgentId.ScreenLog)]
 [StructLayout(LayoutKind.Explicit, Size = 0x3F0)]
 public unsafe struct AgentScreenLog
 {
