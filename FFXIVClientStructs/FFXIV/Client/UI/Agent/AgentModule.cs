@@ -191,6 +191,7 @@ public enum AgentId : uint {
     Buddy = 105,
 
     // ColosseumRecord,
+    MKSRecord = 106, // PVP Results
     CloseMessage = 107,
 
     // CreditPlayer,
@@ -294,6 +295,7 @@ public enum AgentId : uint {
     OrchestrionPlayList = 240,
     CountDownSettingDialog = 241,
     WeeklyBingo = 242, //Wondrous Tails
+    PvPHeader = 246,
     AquariumSetting = 250,
     DeepDungeonMenu = 252,
     ItemAppraisal = 255, //DeepDungeon Appraisal
@@ -337,5 +339,8 @@ public enum AgentId : uint {
     OrnamentNoteBook = 376, //Accessories
     BannerList = 389, // Portraits
     BannerEditor = 390, // Portrait Editor
-    CharaCard = 393 // AdventurerPlate
+    PvPMap = 392,
+    CharaCard = 393, // AdventurerPlate
+    
+    Unknown397 = 397, // Final agent in Array
 }
