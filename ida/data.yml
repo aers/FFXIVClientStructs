@@ -453,6 +453,9 @@ classes:
   Component::GUI::AtkArrayDataHolder:
     funcs:
       0x1404D89E0: ctor
+  Component::GUI::AtkRenderer:
+    funcs:
+      0x1404D9BD0: Initialize
   Client::System::Resource::ResourceManager:
     instances:
       - ea: 0x141F25F40
@@ -1838,6 +1841,11 @@ classes:
     vtbls:
       - ea: 0x1417F7768
         base: Component::GUI::AtkArrayData
+  Component::GUI::AtkServer:
+    vtbls:
+      - ea: 0x1417F7778
+    funcs:
+      0x1404DA580: ctor
   Component::GUI::AtkTooltipManager:
     vtbls:
       - ea: 0x1417F7830
@@ -2072,6 +2080,7 @@ classes:
       63: OpenMapWithMapLink
     funcs:
       0x140539AF0: ctor
+      0x14053A560: Initialize
       0x14053A980: HandleInput
   Component::GUI::AtkComponentCheckBox:
     vtbls:
