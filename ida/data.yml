@@ -209,6 +209,7 @@ functions:
   0x1400A90F0: IsPartyMemberByNameOrContentId # (name, contentId)
   0x1400A9220: GetPartyMemberClassJobByContentId
   0x140701290: ObjectIdToPlayerObjectId # returns invalid id if objectid is not a player
+  0x140729CF0: ProcessActorControlPacket
 
 classes:
   Client::Game::GameMain:
