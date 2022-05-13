@@ -16,6 +16,8 @@ public unsafe struct AgentSalvage {
 
     [FieldOffset(0x3B0)] public SalvageResult DesynthItem;
     [FieldOffset(0x3BC)] public uint DesynthItemId;
+    
+    [FixedArray(typeof(SalvageResult), 3)]
     [FieldOffset(0x3C0)] public fixed byte DesynthResult[8 * 3];
 
     public Span<SalvageResult> DesynthResultSpan {
