@@ -1,5 +1,6 @@
 ﻿using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Component.GUI;
+using System.Text;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 // Client::UI::Misc::ConfigModule
@@ -38,6 +39,19 @@ public unsafe partial struct ConfigModule
     public void SetOptionById(short optionId, int value)
     {
         SetOption((ConfigOption) optionId, value);
+    }
+
+    public Option* GetOption(string name) {
+        if (string.IsNullOrEmpty(name)) return null;
+        for (uint i = 0; i < ConfigOptionCount; i++)
+        {
+            var o = GetOption(i);
+            if (o->GetName() == name) {
+                return o;
+            }
+        }
+
+        return null;
     }
 
     public Option* GetOption(uint index)
@@ -116,5 +130,19 @@ public unsafe partial struct ConfigModule
         [FieldOffset(0x14)] public uint Unk14;
         [FieldOffset(0x18)] public uint Unk18;
         [FieldOffset(0x1C)] public ushort Unk1C;
+
+        public string GetName() {
+            if ((short)OptionID < 0) return string.Empty;
+            var sysConfig = Framework.Instance()->SystemConfig;
+            var id = (uint)OptionID;
+            byte* namePtr = null;
+            if (sysConfig.CommonSystemConfig.ConfigBase.ConfigCount > id) namePtr = (sysConfig.CommonSystemConfig.ConfigBase.ConfigEntry + id)->Name;
+            if (namePtr == null && sysConfig.CommonSystemConfig.UiConfig.ConfigCount > id) namePtr = (sysConfig.CommonSystemConfig.UiConfig.ConfigEntry + id)->Name;
+            if (namePtr == null && sysConfig.CommonSystemConfig.UiControlConfig.ConfigCount > id) namePtr = (sysConfig.CommonSystemConfig.UiControlConfig.ConfigEntry + id)->Name;
+            if (namePtr == null) return string.Empty;
+            var l = 0;
+            while (namePtr[l] != 0) l++;
+            return l == 0 ? string.Empty : $"{Encoding.UTF8.GetString(namePtr, l)}";
+        }
     }
 }
