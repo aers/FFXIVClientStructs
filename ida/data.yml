@@ -4389,6 +4389,12 @@ classes:
     funcs:
       0x140F1CDC0: ctor
       0x140F1DA30: ChangeTab
+  Client::UI::AddonPicturePreview:
+    vtbls:
+      - ea: 0x1418E3D90
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140F2DB80: ctor
   Client::UI::AddonDeepDungeonStatus:
     vtbls:
       - ea: 0x1418EBE50
