@@ -128,6 +128,7 @@ public enum ConfigOption : short
     ScreenMode = 20,
     GamepadMode = 90,
     LegacyMovement = 307,
+    HideUnassignedHotbarSlots = 333,
     DisplayItemHelp = 719,
     DisplayActionHelp = 724,
     OwnDisplayNameSettings = 446,
