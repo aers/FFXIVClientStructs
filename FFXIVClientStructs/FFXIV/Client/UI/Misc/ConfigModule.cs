@@ -118,23 +118,3 @@ public unsafe partial struct ConfigModule
         [FieldOffset(0x1C)] public ushort Unk1C;
     }
 }
-
-public enum ConfigOption : short
-{
-    Invalid = -1,
-    None = 0,
-    CustomResolutionWidth = 18,
-    CustomResolutionHeight = 19,
-    ScreenMode = 20,
-    GamepadMode = 90,
-    LegacyMovement = 307,
-    HideUnassignedHotbarSlots = 333,
-    DisplayItemHelp = 719,
-    DisplayActionHelp = 724,
-    OwnDisplayNameSettings = 446,
-    PartyDisplayNameSettings = 459,
-    AllianceDisplayNameSettings = 468,
-    OtherPCsDisplayNameSettings = 475,
-    FriendsDisplayNameSettings = 520,
-    DisplayNameSize = 546,
-}
