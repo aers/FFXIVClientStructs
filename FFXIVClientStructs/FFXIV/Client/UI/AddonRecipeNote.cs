@@ -78,7 +78,7 @@ public unsafe struct AddonRecipeNote
     [FieldOffset(0x460)] public void* Unk460;
     [FieldOffset(0x468)] public void* Unk468;
     [FieldOffset(0x470)] public void* Unk470;
-    [FieldOffset(0x478)] public void* Unk478;
+    [FieldOffset(0x478)] public AtkTextNode* Quality;
     [FieldOffset(0x480)] public void* Unk480;
     [FieldOffset(0x488)] public void* Unk488;
     [FieldOffset(0x490)] public void* Unk490;
