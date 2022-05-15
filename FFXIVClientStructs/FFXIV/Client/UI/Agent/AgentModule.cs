@@ -308,6 +308,9 @@ public enum AgentId : uint {
     Snipe = 263,
     MountSpeed = 264,
     PvpTeam = 280,
+    EurekaElementalHud = 282,
+    EurekaElementalEdit = 283,
+    EurekaChainInfo = 284,
     TeleportHousingFriend = 288,
     InventoryBuddy = 290,
     ContentsReplayPlayer = 291,
@@ -346,5 +349,5 @@ public enum AgentId : uint {
     PvPMap = 392,
     CharaCard = 393, // AdventurerPlate
     
-    Unknown397 = 397, // Final agent in Array
+    PvPMKSIntroduction = 397, // Final agent in Array
 }
