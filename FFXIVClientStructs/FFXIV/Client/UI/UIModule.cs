@@ -107,14 +107,17 @@ public unsafe partial struct UIModule
     [VirtualFunction(63)]
     public partial void* GetLogFilterConfig();
 
-    [VirtualFunction(138)]
-    public partial void ShowTextRelicAtma(uint itemId);
-
     [VirtualFunction(147)]
     public partial void ShowGoldSaucerReward(byte type, uint mgp, uint rewardItemId, uint rewardItemCount);
 
     [VirtualFunction(148)]
     public partial void HideGoldSaucerReward();
+
+    [VirtualFunction(149)]
+    public partial void ShowTextRelicAtma(uint itemId);
+
+    [VirtualFunction(156)]
+    public partial void ShowHousingHarvest(uint itemId, int amount, uint image = 0);
 
     [VirtualFunction(160)]
     public partial void ShowImage(uint imageId, bool useLocalePath = false, int displayType = 0, bool playSound = false);
