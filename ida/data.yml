@@ -2353,10 +2353,35 @@ classes:
       60: GetUIInputData
       61: GetUIInputModule
       63: GetLogFilterConfig
+      65: EnableCutsceneInputMode
+      66: DisableCutsceneInputMode
+      85: ShowEurekaHud
+      86: HideEurekaHud
+      92: OpenMycInfo
+      93: CloseMycInfo
+      94: CloseMiniMap
+      95: OpenMiniMap
+      96: IsGamePadInputActive
+      99: ToggleInputMode
+      101: IsUIHidden
+      107: ShowPvpIntroduction
+      108: IsPvpIntroductionInvisible
+      109: HidePvpIntroduction
+      119: ToggleCursor
+      133: ShowEventFadeIn
+      134: ShowEventFadeOut
+      137: ToggleUi
+      138: ToggleUi_2
+      140: LoadScreenHideUi
+      141: LoadScreenShowUi
       143: AnnounceHowTo
       145: HideHowTo
       147: ShowGoldSaucerReward
       148: HideGoldSaucerReward
+      149: ShowTextRelicAtma
+      151: HideGoldSaucerReward_2
+      156: ShowHousingHarvest
+      159: HideHousingHarvest
       160: ShowImage
       161: ShowText
       162: ShowTextChain
@@ -2366,6 +2391,7 @@ classes:
       166: ShowTextClassChange
       167: ShowGetAction
       168: ShowLocationTitle
+      169: HideLocationTitle
       172: ShowGrandCompany1
       175: ShowStreak
       176: ShowAddonKillStreakForManeuvers
@@ -2374,7 +2400,14 @@ classes:
       179: ShowBattleTalkImage
       180: ShowBattleTalkUnknown
       181: ShowBattleTalkSound
+      183: OpenInventory
+      184: CloseInventory
+      185: IsInventoryOpen
       186: ExecuteMainCommand
+      190: ShowRaceCountdownEnd
+      194: IsDutyRaidFinderOpen
+      218: ShowRaceCountdownStart
+      219: ShowRaceCountdownEnd_2
   Client::UI::UIModule:
     vtbls:
       - ea: 0x141807590
