@@ -1991,7 +1991,7 @@ classes:
         base: Client::Game::Object::IGameObjectEventListener
     funcs:
       0x1404BFB00: ctor
-      0x1404C80C0: AccessObject
+      0x1404C80C0: InteractWithObject
       0x1404C9890: GetHardTargetObjectId
       0x1404C98B0: GetHardTargetId
       0x1404C98D0: GetHardTarget

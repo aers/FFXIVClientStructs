@@ -27,5 +27,5 @@ public unsafe partial struct TargetSystem
     public partial bool IsObjectInViewRange(GameObject* obj);
 
     [MemberFunction("E9 ?? ?? ?? ?? 48 8B 01 FF 50 08")]
-    public partial ulong AccessObject(GameObject* obj, char a3);
+    public partial ulong InteractWithObject(GameObject* obj, bool checkLineOfSight = true);
 }
