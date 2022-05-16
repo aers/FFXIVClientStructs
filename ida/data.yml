@@ -856,7 +856,7 @@ classes:
       0x14173E030: Load_Otherwise  # (ExcelPage* this, ExcelRowDescriptor* pRowDescriptor) -> SheetResource*
       0x14173E740: Parse_0xFFFE  # (ExcelPage* this, SheetResource* pResource, ExcelRowDescriptor* pRowDescriptor)
       0x14173E180: Parse_0xFFFF  # (ExcelPage* this, SheetResource* pResource)
-      0x14173E480: Parse_Otherwise  # (ExcelPage* this, SheetResource* pResource, ExcelRowDescriptor* pRowDescriptor)
+      0x14173E450: Parse_Otherwise  # (ExcelPage* this, SheetResource* pResource, ExcelRowDescriptor* pRowDescriptor)
   Component::Excel::ExcelPageLoader:
     vtbls:
       - ea: 0x141B25AF8
@@ -930,7 +930,7 @@ classes:
   Component::Excel::RingBufferExcelPageRowResolver_RowWrapper:
     vtbls:
       - ea: 0x141B25A50
-        base: Component::Excel::IExcelPageRowResolver
+        base: Component::Excel::IExcelRowWrapper
   Client::System::Input::TextService:
     vtbls:
       - ea: 0x1417AA128
