@@ -729,16 +729,24 @@ classes:
   Common::Component::Excel::ExcelModuleInterface: # these are two different classes
     vtbls:
       - ea: 0x141B25610      
-  Common::Component::Excel::ExcelModule:
-    vtbls:
-      - ea: 0x141B256C0
-        base: Common::Component::Excel::ExcelModuleInterface
     vfuncs:
       1: GetSheetByIndex
       2: GetSheetByName
       3: LoadSheet
       5: ChangeLanguage
       6: GetLanguage
+  Common::Component::Excel::ExcelResourceListener:
+    vtbls:
+      - ea: 0x141B24738
+    vfuncs:
+      0: dtor
+      1: OnResourceLoad
+  Common::Component::Excel::ExcelModule:
+    vtbls:
+      - ea: 0x141B256C0
+        base: Common::Component::Excel::ExcelModuleInterface
+      - ea: 0x141B25750
+        base: Common::Component::Excel::ExcelResourceListener
     funcs:
       0x141738000: ctor
       0x141738D40: ExcelSheetContainerFromData
@@ -791,6 +799,52 @@ classes:
         base: Common::Component::Excel::LinkList<Component::Exd::ExdModuleResourceHandle>
     funcs:
       0x14049F0E0: ctor
+  Common::Component::Excel::LinkList<Common::Component::Excel::ExcelSheet>:
+    vtbls:
+      - ea: 0x141B256B0
+    vfuncs:
+      0: dtor
+  Common::Component::Excel::ExcelSheetInterface:
+    vtbls:
+      - ea: 0x141B258F8
+    vfuncs:
+      1: IsAnyPageBeingLoaded  # (ExcelSheet* this) -> bool
+      2: GetColumnType  # (ExcelSheet* this, int nColumnIndex) -> short
+      3: GetColumnOffset  # (ExcelSheet* this, int nColumnIndex) -> short
+      4: PageRowResolver_Set  # (ExcelSheet* this, int nDesiredCapacityForRingBufferMode, byte bSyncForModeA, bool bForceRecreate)
+      5: RingBufferPageRowResolver_GetLoadedRowCount  # (ExcelSheet* this) -> int
+      6: RingBufferPageRowResolver_Clear  # (ExcelSheet* this)
+      7: HashTablePageRowResolver_GetRowIdByStringKeyColumn  # (ExcelSheet* this, int nColumnIndex, char *pszStringValue, int *pnOutRowId) -> IExcelRowWrapper*
+      8: HashTablePageRowResolver_GetRowDescriptorByStringKeyColumn  # (ExcelSheet* this, int nColumnIndex, char *pszStringValue, ExcelRowDescriptor* pOutRowDescriptor) -> IExcelRowWrapper*
+      9: GetRowById  # (ExcelSheet* this, int nRowId, int *pnOutErrorCode) -> IExcelRowWrapper*
+      10: GetRowByDescriptor  # (ExcelSheet* this, ExcelRowDescriptor* pRowDescriptor, int *pnOutErrorCode) -> IExcelRowWrapper*
+      11: Unknown1_Get  # (ExcelSheet* this) -> short
+      12: Unknown1_Set  # (ExcelSheet* this, short newValue) -> short
+      13: ReturnSecondParameter  # (ExcelSheet* this, int) -> int
+      14: Unknown2_Find  # (ExcelSheet* this, char* pcszName) -> ?
+      15: GetVariant  # (ExcelSheet* this) -> int
+      16: GetColumnCount  # (ExcelSheet* this) -> short
+      17: GetRowCount  # (ExcelSheet* this) -> int
+      18: Unknown3_GetOrLoad_1
+      19: Unknown3_GetOrLoad_2
+      20: Unknown3_Free
+      21: Unknown3_GetLoadedCount
+      22: HashTablePageRowResolver_GetRowWrapperAndIdByIndex  # (ExcelSheet* this, int nRowIndex, int* pnOutRowId) -> IExcelRowWrapper*
+      23: HashTablePageRowResolver_GetRowWrapperAndDescriptorByIndex  # (ExcelSheet* this, int nRowIndex, ExcelRowDescriptor* pOutRowDescriptor) -> IExcelRowWrapper*
+      24: EnumerateRows  # (ExcelSheet* this, void* pCallbackInterface, void* pUserData)
+      25: GetSheetVersion  # (ExcelSheet* this) -> short
+      26: GetName  # (ExcelSheet* this) -> char* (actually, 0x00 char* pszString, 0x08 short nHash, 0x0a bool bIsExternallyAllocated)
+      27: SetLanguage  # (ExcelSheet* this, int nLanguage)
+  Common::Component::Excel::ExcelSheet:
+    vtbls:
+      - ea: 0x141B258E0
+        base: Common::Component::Excel::LinkList<Common::Component::Excel::ExcelSheet>
+      - ea: 0x141B258F8
+        base: Common::Component::Excel::ExcelSheetInterface
+    vfuncs:
+      2: IsColumnValid
+    funcs:
+      0x14173AB70: ctor
   Component::Excel::ExcelPage:
     funcs:
       0x14173D6E0: ctor  # (ExcelPage* this, ExcelDataPagination* exhPageInfo, ExcelSheetContainer* pOwner)
@@ -877,46 +931,6 @@ classes:
     vtbls:
       - ea: 0x141B25A50
         base: Component::Excel::IExcelPageRowResolver
-  Component::Excel::ExcelSheet:
-    vtbls:
-      - ea: 0x141B258F8
-    vfuncs:
-      1: IsAnyPageBeingLoaded  # (ExcelSheet* this) -> bool
-      2: GetColumnType  # (ExcelSheet* this, int nColumnIndex) -> short
-      3: GetColumnOffset  # (ExcelSheet* this, int nColumnIndex) -> short
-      4: PageRowResolver_Set  # (ExcelSheet* this, int nDesiredCapacityForRingBufferMode, byte bSyncForModeA, bool bForceRecreate)
-      5: RingBufferPageRowResolver_GetLoadedRowCount  # (ExcelSheet* this) -> int
-      6: RingBufferPageRowResolver_Clear  # (ExcelSheet* this)
-      7: HashTablePageRowResolver_GetRowIdByStringKeyColumn  # (ExcelSheet* this, int nColumnIndex, char *pszStringValue, int *pnOutRowId) -> IExcelRowWrapper*
-      8: HashTablePageRowResolver_GetRowDescriptorByStringKeyColumn  # (ExcelSheet* this, int nColumnIndex, char *pszStringValue, ExcelRowDescriptor* pOutRowDescriptor) -> IExcelRowWrapper*
-      9: GetRowById  # (ExcelSheet* this, int nRowId, int *pnOutErrorCode) -> IExcelRowWrapper*
-      10: GetRowByDescriptor  # (ExcelSheet* this, ExcelRowDescriptor* pRowDescriptor, int *pnOutErrorCode) -> IExcelRowWrapper*
-      11: Unknown1_Get  # (ExcelSheet* this) -> short
-      12: Unknown1_Set  # (ExcelSheet* this, short newValue) -> short
-      13: ReturnSecondParameter  # (ExcelSheet* this, int) -> int
-      14: Unknown2_Find  # (ExcelSheet* this, char* pcszName) -> ?
-      15: GetVariant  # (ExcelSheet* this) -> int
-      16: GetColumnCount  # (ExcelSheet* this) -> short
-      17: GetRowCount  # (ExcelSheet* this) -> int
-      18: Unknown3_GetOrLoad_1
-      19: Unknown3_GetOrLoad_2
-      20: Unknown3_Free
-      21: Unknown3_GetLoadedCount
-      22: HashTablePageRowResolver_GetRowWrapperAndIdByIndex  # (ExcelSheet* this, int nRowIndex, int* pnOutRowId) -> IExcelRowWrapper*
-      23: HashTablePageRowResolver_GetRowWrapperAndDescriptorByIndex  # (ExcelSheet* this, int nRowIndex, ExcelRowDescriptor* pOutRowDescriptor) -> IExcelRowWrapper*
-      24: EnumerateRows  # (ExcelSheet* this, void* pCallbackInterface, void* pUserData)
-      25: GetSheetVersion  # (ExcelSheet* this) -> short
-      26: GetName  # (ExcelSheet* this) -> char* (actually, 0x00 char* pszString, 0x08 short nHash, 0x0a bool bIsExternallyAllocated)
-      27: SetLanguage  # (ExcelSheet* this, int nLanguage)
-  Component::Excel::ExcelSheetContainer:
-    vtbls:
-      - ea: 0x141B258E0
-      - ea: 0x141B258F8
-        base: Component::Excel::ExcelSheet
-    vfuncs:
-      2: IsColumnValid
-    funcs:
-      0x14173AB70: ctor
   Client::System::Input::TextService:
     vtbls:
       - ea: 0x1417AA128
