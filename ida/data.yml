@@ -806,7 +806,7 @@ classes:
       0: dtor
   Common::Component::Excel::ExcelSheetInterface:
     vtbls:
-      - ea: 0x141B258F8
+      - ea: 0x141B257E8
     vfuncs:
       1: IsAnyPageBeingLoaded  # (ExcelSheet* this) -> bool
       2: GetColumnType  # (ExcelSheet* this, int nColumnIndex) -> short
