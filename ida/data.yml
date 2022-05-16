@@ -726,9 +726,13 @@ classes:
     vfuncs:
       1: GetSheetByIndex
       2: GetSheetByName
-  Component::Excel::ExcelModule:
+  Common::Component::Excel::ExcelModuleInterface: # these are two different classes
+    vtbls:
+      - ea: 0x141B25610      
+  Common::Component::Excel::ExcelModule:
     vtbls:
       - ea: 0x141B256C0
+        base: Common::Component::Excel::ExcelModuleInterface
     vfuncs:
       1: GetSheetByIndex
       2: GetSheetByName
@@ -738,35 +742,55 @@ classes:
     funcs:
       0x141738000: ctor
       0x141738D40: ExcelSheetContainerFromData
-  Component::Excel::SheetResource:
+  Common::Component::Environment::AllocatorInterface:
     vtbls:
-      - ea: 0x1417F4870
-      - ea: 0x1417F48A8
-    funcs:
-      0x14049f0e0: ctor
-  Component::Excel::ExcelResourceManager_Memory:
-    vtbls:
-      - ea: 0x1417F47D8
+      - ea: 0x1417F4448
     vfuncs:
       1: MemAlloc
       2: Free
-  Component::Excel::ExcelResourceManager_File:
+  Common::Component::Environment::ResourceInterface:
     vtbls:
-      - ea: 0x1417F4800
+      - ea: 0x1417F4498
     vfuncs:
-      1: LoadFile  # (ExcelResourceManager_File* this, char* pcszPath, ResourceHandleCreatedCallback *pCreatedCallback, ExcelPageLoader* pPageLoader, int nBegin, int nEnd, bool bSync)
+      1: LoadFile  # (ExcelResourceManager_File* this, char*    pcszPath, ResourceHandleCreatedCallback *pCreatedCallback, ExcelPageLoader* pPageLoader, int nBegin, int nEnd, bool bSync)
       2: UnloadFile  # (ExcelResourceManager_File* this, SheetResource* pResource)
-  Component::Excel::ExcelResourceManager:
+  Common::Component::Environment::DebugInterface:
+    vtbls:
+      - ea: 0x1417F44B0
+  Common::Component::Environment::ResourceInterface::ResourceHandleInterface:
+    vtbls:
+      - ea: 0x1417F4460
+  Common::Component::Excel::LinkList<Component::Exd::ExdModuleResourceHandle>:
+    vtbls:
+      - ea: 0x1417F4868
+  Common::Component::Excel::IExcelListener:
+    vtbls:
+      - ea: 0x1417F47D8
+        base: Common::Component::Environment::AllocatorInterface
+      - ea: 0x1417F4800
+        base: Common::Component::Environment::ResourceInterface
+      - ea: 0x1417F4818 # empty in release
+        base: Common::Component::Environment::DebugInterface
+  Component::Exd::ExdEnvironment:
     vtbls:
       - ea: 0x1417F48B0
-        base: Component::Excel::ExcelResourceManager_Memory
+        base: Common::Component::Excel::IExcelListener # Common::Component::Environment::AllocatorInterface
       - ea: 0x1417F48D8
-        base: Component::Excel::ExcelResourceManager_File
-#      - ea: 0x1417F48F0  # Full of no-ops
+        base: Common::Component::Environment::ResourceInterface
+      - ea: 0x1417F48F0 # empty in release
+        base: Common::Component::Environment::DebugInterface
       - ea: 0x1417F4918
         base: Client::System::Resource::ResourceEventListener
     funcs:
-      0x14049f280: ctor
+      0x14049F280: ctor
+  Component::Exd::ExdModuleResourceHandle:
+    vtbls:
+      - ea: 0x1417F4870
+        base: Common::Component::Environment::ResourceInterface::ResourceHandleInterface
+      - ea: 0x1417F48A8
+        base: Common::Component::Excel::LinkList<Component::Exd::ExdModuleResourceHandle>
+    funcs:
+      0x14049F0E0: ctor
   Component::Excel::ExcelPage:
     funcs:
       0x14173D6E0: ctor  # (ExcelPage* this, ExcelDataPagination* exhPageInfo, ExcelSheetContainer* pOwner)
@@ -801,13 +825,13 @@ classes:
       - ea: 0x141B259F8
         base: Component::Excel::IExcelPageRowResolver
     funcs:
-      0x14173a960: ctor  # (HashTableExcelPageRowResolver* this, int nPageCount)
+      0x14173A960: ctor  # (HashTableExcelPageRowResolver* this, int nPageCount)
   Component::Excel::RingBufferExcelPageRowResolver:
     vtbls:
       - ea: 0x141B25A98
         base: Component::Excel::IExcelPageRowResolver
     funcs:
-      0x14173aa80: ctor  # (RingBufferExcelPageRowResolver* this, int nDesiredCapacity)
+      0x14173AA80: ctor  # (RingBufferExcelPageRowResolver* this, int nDesiredCapacity)
   Component::Excel::ExcelRow:
     # size 0x10
     # 0x00: pDataOrState: void*
@@ -848,7 +872,7 @@ classes:
       - ea: 0x141B25B38
         base: Component::Excel::IExcelRowWrapper
     funcs:
-      0x14173d6a0: ctor  # (HashTableExcelPageRowResolver_RowWrapper* this)
+      0x14173D6A0: ctor  # (HashTableExcelPageRowResolver_RowWrapper* this)
   Component::Excel::RingBufferExcelPageRowResolver_RowWrapper:
     vtbls:
       - ea: 0x141B25A50
@@ -892,7 +916,7 @@ classes:
     vfuncs:
       2: IsColumnValid
     funcs:
-      ctor: 0x14173ab70
+      ctor: 0x14173AB70
   Client::System::Input::TextService:
     vtbls:
       - ea: 0x1417AA128
