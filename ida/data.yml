@@ -916,7 +916,7 @@ classes:
     vfuncs:
       2: IsColumnValid
     funcs:
-      ctor: 0x14173AB70
+      0x14173AB70: ctor
   Client::System::Input::TextService:
     vtbls:
       - ea: 0x1417AA128
