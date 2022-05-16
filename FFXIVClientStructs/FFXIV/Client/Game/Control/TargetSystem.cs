@@ -25,4 +25,7 @@ public unsafe partial struct TargetSystem
 
     [MemberFunction("48 85 D2 74 2C 4C 63 89")]
     public partial bool IsObjectInViewRange(GameObject* obj);
+
+    [MemberFunction("E9 ?? ?? ?? ?? 48 8B 01 FF 50 08")]
+    public partial ulong AccessObject(GameObject* obj, char a3);
 }
