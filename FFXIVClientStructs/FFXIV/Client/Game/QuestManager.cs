@@ -12,6 +12,8 @@ public unsafe partial struct QuestManager
     [MemberFunction("E8 ?? ?? ?? ?? 41 88 84 2C", IsStatic = true)]
     public static partial bool IsQuestComplete(ushort questId);
 
+    public static bool IsQuestComplete(uint questId) => IsQuestComplete((ushort)(questId & 0xFFFF));
+
     [FieldOffset(0x10)] public QuestListArray Quest;
 
     [StructLayout(LayoutKind.Explicit)]
