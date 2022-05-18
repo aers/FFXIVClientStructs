@@ -386,6 +386,14 @@ classes:
   BattleBuddyList:
     funcs:
       0x1409257C0: GetMemberBattleCharaByIndex
+  QuestManager:
+    instances:
+      - ea: 0x141F6A890
+        pointer: False
+    funcs:
+      0x140724FA0: GetSingleton
+      0x1400AA050: IsQuestComplete # static (questId)
+      0x1407F6EC0: IsQuestComplete1 # (this, questId)
   InventoryManager:
     instances:
       - ea: 0x141F671E0

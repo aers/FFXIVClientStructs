@@ -9,6 +9,9 @@ public unsafe partial struct QuestManager
     [MemberFunction("E8 ?? ?? ?? ?? 66 BA 10 0C", IsStatic = true)]
     public static partial QuestManager* Instance();
 
+    [MemberFunction("E8 ?? ?? ?? ?? 41 88 84 2C", IsStatic = true)]
+    public static partial bool IsQuestComplete(ushort questId);
+
     [FieldOffset(0x10)] public QuestListArray Quest;
 
     [StructLayout(LayoutKind.Explicit)]
