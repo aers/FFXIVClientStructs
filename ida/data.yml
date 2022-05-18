@@ -394,6 +394,7 @@ classes:
       0x140724FA0: GetSingleton
       0x1400AA050: IsQuestComplete # static (questId)
       0x1407F6EC0: IsQuestComplete1 # (this, questId)
+      0x1407F7240: IsQuestCurrent # static (questId)
   InventoryManager:
     instances:
       - ea: 0x141F671E0
