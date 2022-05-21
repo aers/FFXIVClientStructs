@@ -404,6 +404,7 @@ classes:
       0x1406D9FC0: MoveItemSlot # (srcContainer, srcSlot, dstContainer, dstSlot, 1)
       0x1406E0F80: GetInventoryItemCount # (this, itemId, hq, 1, 1, 0)
       0x1406E16F0: GetItemCountInContainer # (this, itemId, containerId, hq, 0)
+      0x1400CA330: GetSizeByIndex # static
   InventoryContainer:
     funcs:
       0x1406D7700: GetInventorySlot  # (this, slotIndex)
@@ -1981,6 +1982,7 @@ classes:
       0x14049fad0: GetSheetByIndex  # (ExdModule* this, int nSheetIndex) -> ExcelSheet*
       0x14049fab0: GetSheetByName  # (ExdModule* this, char* pcszName) -> ExcelSheet*
       0x140640940: IsColumnRsv  # (ExdModule* this, int nSheetIndex, int nRowId, int nSubRowId, int nColumnIndex) -> bool
+      0x1406AD070: GetItemRow # static (uint itemId)
   Client::System::Scheduler::ScheduleManagement:
     vtbls:
       - ea: 0x1417F4990
@@ -3793,6 +3795,16 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140AC8380: ctor
+  Client::UI::Agent::AgentSalvage:
+    vtbls:
+      - ea: 0x141868CF8
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140ACA930: ItemListRefresh # Clears item list and signals agent to update it next frame
+      0x140ACB600: ItemListPopulate
+      0x140ACB740: ItemListPopulateFromContainer
+      0x140ACB910: ItemListPopulateEquipped
+      0x140ACBC80: ItemListAdd # (this, meetLevel, containerId, slotIndex, itemId, exdRow, quantity)
   Client::UI::Agent::AgentTreasureHunt:
     vtbls:
       - ea: 0x141929800
