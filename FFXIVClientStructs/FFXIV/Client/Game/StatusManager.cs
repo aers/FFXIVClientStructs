@@ -1,6 +1,6 @@
 ﻿namespace FFXIVClientStructs.FFXIV.Client.Game;
 
-[StructLayout(LayoutKind.Explicit, Size = 0x190)]
+[StructLayout(LayoutKind.Explicit, Size = 0x188)]
 public unsafe partial struct StatusManager
 {
     // This field is often null and cannot be relied on to retrieve the owning Character object
