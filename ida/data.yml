@@ -2130,6 +2130,7 @@ classes:
       0x1404FA4A0: GetAsAtkCollisionNode
       0x1404FA4C0: GetAsAtkComponentNode
       0x1404FA4E0: GetComponent
+      0x14054CDB0: GetComponentDropDownList
       0x1404FAC90: RegisterEvent
       0x1404FACD0: UnregisterEvent
       0x1404FAD10: DispatchEvent
