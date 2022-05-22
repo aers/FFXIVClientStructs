@@ -104,11 +104,19 @@ public unsafe partial struct Character
     [StructLayout(LayoutKind.Explicit, Size = 2)]
     public struct ForayInfo
     {
+        [FieldOffset(0x00)] public byte ForayRank;
+        
         //bozja
-        [FieldOffset(0x00)] public byte ResistanceRank;
+        public byte ResistanceRank {
+            get => ForayRank;
+            set => ForayRank = value;
+        }
 
         //eureka
-        [FieldOffset(0x00)] public byte ElementalLevel;
+        public byte ElementalLevel  {
+            get => ForayRank;
+            set => ForayRank = value;
+        }
         [FieldOffset(0x01)] public EurekaElement Element; //only on enemies
     }
     
