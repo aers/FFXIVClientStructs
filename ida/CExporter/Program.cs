@@ -133,7 +133,7 @@ namespace CExporter
                 if (type.ContainsGenericParameters)
                 {
                     structSize = 0; // Generic types are ignored if they cannot be instantiated.
-                    header.AppendLine($"struct {FixFullName(type)} /* Size=unknown due to generic type with parameters */");
+                    header.AppendLine($"struct {FixFullName(type)}; /* Size=unknown due to generic type with parameters */");
                     return;
                 }
                 else
@@ -318,6 +318,14 @@ namespace CExporter
             if (fullName.Contains(STDNamespacePrefix))
                 fullName = fullName.Remove(0, STDNamespacePrefix.Length);
 
+            if (fullName.Contains("FFXIVClientStructs, Version")) {
+                if (fullName.EndsWith("*")) {
+                    fullName = "void*";
+                } else {
+                    throw new Exception($"Failed to fix name: {fullName}");
+                }
+            }
+            
             return fullName.Replace(".", "::").Replace("+", "::");
         }
 
@@ -336,6 +344,12 @@ namespace CExporter
             else if (type == typeof(ushort)) return "unsigned __int16";
             else if (type == typeof(uint)) return "unsigned __int32";
             else if (type == typeof(ulong)) return "unsigned __int64";
+            else if (type == typeof(sbyte)) return "signed __int8";
+            else if (type == typeof(System.IntPtr)) return "__int64";
+            else if (type == typeof(short*)) return "__int16*";
+            else if (type == typeof(ushort*)) return "unsigned __int16*";
+            else if (type == typeof(int*)) return "__int32*";
+            else if (type == typeof(uint*)) return "unsigned __int32*";
             else return FixFullName(type);
         }
 
