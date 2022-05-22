@@ -11,6 +11,7 @@ public enum ValueType
     UInt = 0x4,
     Float = 0x5,
     String = 0x6,
+    String8 = 0x8,
     Vector = 0x9,
     AllocatedString = 0x26,
     AllocatedVector = 0x29

@@ -4589,6 +4589,10 @@ classes:
     vtbls:
       - ea: 0x1418D4F20
         base: Component::GUI::AtkUnitBase
+  Client::UI::AddonSalvageItemSelector:
+    vtbls:
+      - ea: 0x1418D8908
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonSalvageDialog:
     vtbls:
       - ea: 0x1418D8D68
