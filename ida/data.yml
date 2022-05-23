@@ -3,6 +3,7 @@ version: 2022.04.20.0000.0000
 globals:
   0x1417B4150: g_UIColorTable
   0x1417F76D0: g_HUDScaleTable
+  0x141D60380: g_ClientInstanceLimit
   0x141EEC5F0: g_InputManager
   0x141EEC618: g_InputManager_MouseButtonHoldState
   0x141F38100: g_RenderSkeletonLinkedListStart
