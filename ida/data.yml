@@ -4490,6 +4490,10 @@ classes:
     vtbls:
       - ea: 0x1418DC4F8
         base: Component::GUI::AtkUnitBase
+  Client::UI::AddonArmouryBoard:
+    vtbls:
+      - ea: 0x1418DCDD8
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonCabinetWithdraw:
     vtbls:
       - ea: 0x1418DDB38
