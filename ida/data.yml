@@ -704,10 +704,14 @@ classes:
     vtbls:
       - ea: 0x1417A9A20
         base: Common::Configuration::SystemConfig
+    funcs:
+      0x140079B20: BuildConfigList
   Client::System::Configuration::DevConfig:
     vtbls:
       - ea: 0x1417A9A40
         base: Common::Configuration::DevConfig
+    funcs:
+      0x14007F840: BuildConfigList
   Client::System::Framework::Framework:
     instances:
       - ea: 0x141F1D438
@@ -3689,6 +3693,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x1409C23C0: ctor
+      0x1409C2F20: OpenRegistGearSetList # (this, InventoryItem*, ushort)
   Client::UI::Agent::AgentSupportMain:
     vtbls:
       - ea: 0x1417D6A68
@@ -3802,6 +3807,8 @@ classes:
       - ea: 0x141868CF8
         base: Client::UI::Agent::AgentInterface
     funcs:
+      0x140ACA490: SalvageItem # (this, InventoryItem* ushort, byte)
+      0x140ACAD00: LoadCategoryNames
       0x140ACA930: ItemListRefresh # Clears item list and signals agent to update it next frame
       0x140ACB600: ItemListPopulate
       0x140ACB740: ItemListPopulateFromContainer
@@ -4224,6 +4231,11 @@ classes:
     vtbls:
       - ea: 0x14188C920
         base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentCharaCard:
+    vtbls:
+      - ea : 0x14188D488
+    funcs:
+      0x140C9DC00: ctor
   Client::Game::Event::EventHandler:
     vtbls:
       - ea: 0x14183B770
