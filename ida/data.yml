@@ -225,6 +225,7 @@ classes:
       0x1404ADE80: IsInInstanceArea
       0x1408E4320: IsInPvPInstance
       0x1408E43E0: IsInPvPArea
+      0x1400A6E40: IsInSanctuary # static, more likely Client::UI::IsInSanctuary but it fits here just fine
   Application::Network::NetworkModule:
     funcs:
       0x1414113F0: ctor

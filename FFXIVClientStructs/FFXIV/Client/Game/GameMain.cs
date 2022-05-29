@@ -14,4 +14,8 @@ public unsafe partial struct GameMain {
 
 	[MemberFunction("40 53 48 83 EC ?? 48 8B 1D ?? ?? ?? ?? 48 85 DB 75 ?? 32 C0 48 83 C4 ?? 5B C3 48 8D 0D", IsStatic = true)]
 	public static partial bool IsInPvPInstance();
+
+	[MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 21 48 8B 4F 10", IsStatic = true)]
+	public static partial bool IsInSanctuary();
+
 }
