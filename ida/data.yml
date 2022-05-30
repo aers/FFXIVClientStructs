@@ -945,7 +945,7 @@ classes:
       0x14173D7E0: ctor  # (HashTableExcelPageRowResolver_RowWrapper* this)
   Component::Excel::RingBufferExcelPageRowResolver_RowWrapper:
     vtbls:
-      - ea: 0x141B10A30
+      - ea: 0x141B10A50
         base: Component::Excel::IExcelRowWrapper
   Client::System::Input::TextService:
     vtbls:
