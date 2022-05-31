@@ -52,6 +52,9 @@ public unsafe partial struct lua_State
     [MemberFunction("E8 ?? ?? ?? ?? 80 38 23")]
     public partial byte* lua_tolstring(int idx, int* len);
 
+    [MemberFunction("E8 ?? ?? ?? ?? 0F 28 D0 48 8D 15")]
+    public partial double lua_tonumber(int idx);
+
     [MemberFunction("E8 ?? ?? ?? ?? FF CD BA")]
     public partial void lua_pushvalue(int idx);
 
@@ -85,6 +88,15 @@ public unsafe partial struct lua_State
     [MemberFunction("40 57 48 83 EC ?? BA ?? ?? ?? ?? 48 8B F9 E8 ?? ?? ?? ?? 4C 8D 05")]
     public partial int luaB_tostring();
 
+    [MemberFunction("E8 ?? ?? ?? ?? 85 C0 75 ?? 0F 28 CE")]
+    public partial int lua_next(int idx);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 41 2B ED")]
+    public partial void lua_pushnil();
+
+    [MemberFunction("E8 ?? ?? ?? ?? 85 C0 74 ?? 4C 8B C5")]
+    public partial int lua_getmetatable(int idx);
+    
     public void lua_setglobal(string s)
     {
         lua_setfield(-10002, s);

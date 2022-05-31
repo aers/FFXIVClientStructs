@@ -1,5 +1,6 @@
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
 using FFXIVClientStructs.FFXIV.Client.Graphics;
+using FFXIVClientStructs.FFXIV.Client.Graphics.Vfx;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 // Client::Game::Character::Character
@@ -44,9 +45,9 @@ public unsafe partial struct Character
 
     [FieldOffset(0x1760)] public Balloon Balloon;
 
-    //[FieldOffset(0x1968)] public void* VfxObject;
-    //[FieldOffset(0x1970)] public void* VfxObject2;
-    [FieldOffset(0x1998)] public void* Omen;
+    [FieldOffset(0x1968)] public VfxData* VfxData;
+    [FieldOffset(0x1970)] public VfxData* VfxData2;
+    [FieldOffset(0x1998)] public VfxData* Omen;
 
     [FieldOffset(0x6B0)] public Companion* CompanionObject; // minion
     [FieldOffset(0x1A30)] public fixed byte FreeCompanyTag[6];
