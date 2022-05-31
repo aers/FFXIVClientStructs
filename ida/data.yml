@@ -18,6 +18,7 @@ globals:
   0x141F56BC8: g_CharacterManager_CompanionMemoryPtr
   0x141F56BF8: g_GameObjectManager_ObjectList
   0x141F57948: g_GameObjectManager_ObjectListEnd
+  0x141F5F450: g_LocalContentId
   0x141F605B8: g_Client::Game::UI::Buddy.Pet # not a pointer
   0x141F605C8: g_Client::Game::UI::Buddy.Pet.BuffList # not a pointer
   0x141F61278: g_Client::Game::UI::Buddy.CompanionStats  # not a pointer. Member of UIState
@@ -2103,6 +2104,7 @@ classes:
     vtbls:
       - ea: 0x1417F7818
     funcs:
+      0x1404DE9F0: LoadTexture # (this, texturePath, version)
       0x1404DEBA0: LoadIconTexture
       0x1404DEDC0: GetLoadState
       0x1404DEE20: IsTextureReady
@@ -2178,6 +2180,7 @@ classes:
       - ea: 0x1417F82B8
         base: Component::GUI::AtkResNode
     funcs:
+      0x1404FC8A0: LoadTexture # (this, texturePath, version)
       0x1404FC960: LoadIconTexture
       0x1404FCB60: UnloadTexture
       0x14056EA40: ctor
@@ -4238,6 +4241,8 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140C9DF00: ctor
+      0x140C9E040: OpenCharaCardByContentId
+      0x140C9E0C0: OpenCharaCardForObject
   Client::Game::Event::EventHandler:
     vtbls:
       - ea: 0x141826750
