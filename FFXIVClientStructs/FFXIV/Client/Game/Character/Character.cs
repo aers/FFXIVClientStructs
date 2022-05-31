@@ -90,6 +90,7 @@ public unsafe partial struct Character
         [FieldOffset(0x30)] public uint Unk_30;
         [FieldOffset(0x34)] public float CurrentCastTime;
         [FieldOffset(0x38)] public float TotalCastTime;
+        [FieldOffset(0x3C)] public float AdjustedTotalCastTime;
 
         [FieldOffset(0x40)] public uint UsedActionId;
 
