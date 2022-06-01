@@ -10,7 +10,6 @@ globals:
   0x141F23108: g_RenderSkeletonLinkedListEnd
   0x141F23160: g_RenderModelLinkedListStart
   0x141F23168: g_RenderModelLinkedListEnd
-  0x141F305B0: g_PlayerMoveController
   0x141F30B58: g_LocalPlayerObjectID
   0x141F30B60: g_LocalPlayer
   0x141F56830: g_LastTextCommand
@@ -246,8 +245,15 @@ classes:
     funcs:
       0x140CC8DB0: GetRetainerBySortedIndex
   Client::Game::Control::TargetSystem::ListFeeder:
+    vtbls:
+      - ea: 0x1417F52C8
   Client::Game::InstanceContent::ContentSheetWaiterInterface:
   Client::Game::Object::IGameObjectEventListener:
+    vtbls:
+      - ea: 0x14179EE48
+  Client::Game::Object::IFilterCommand:
+    vtbls:
+      - ea: 0x1417F5228
   Client::Graphics::RenderObjectList:
   Client::Graphics::Singleton:
   Client::System::Common::NonCopyable:
@@ -298,19 +304,12 @@ classes:
       0x14073DC70: OnReceiveCreateNonPlayerBattleCharaPacket
       0x14073DE70: ProcessBattleCharaCreationQueue
       0x14073F910: AddBattleCharaToCreationQueue
-  Client::Game::Control::Control:
-    funcs:
-      0x1404CE110: Initialize
-      0x1404CE380: Update
   Component::GUI::AtkInputManager:
     funcs:
       0x1405194A0: HandleInput
       0x14051AC60: SetFocus
       0x14051B750: HandleFocus
       0x14051BC30: ctor
-  Client::Game::CameraManager:
-    funcs:
-      0x1411EB700: PreUpdate
   Client::Game::Object::GameObjectManager: # all game objects
     instances:
       - ea: 0x141F56BE0
@@ -2042,7 +2041,25 @@ classes:
       0x1404C9CC0: ClearFocusTarget
       0x1404C9CE0: SetFocusTargetByObjectId
       0x1404CA680: IsObjectInViewRange
+      0x1404CA7D0: GetMouseOverObject
       0x1404CBEC0: RemoveObjectFromTargets
+  Client::Game::Control::Control:
+    instances:
+      - ea: 0x141F2C6B0
+    funcs:
+      0x1404CE110: Initialize
+      0x1404CE380: Update
+  Client::Game::Control::CameraManager:
+    funcs:
+      0x1411EA880: ctor
+      0x1411EB700: PreUpdate
+  Client::Game::Control::MoveControl::MoveControllerSubMemberForMine:
+    instances:
+      - ea: 0x141F305B0
+    vtbls:
+      - ea: 0x14191BF20
+    funcs:
+      0x1411C1EA0: ctor
   Client::System::Input::InputData:
     vtbls:
       - ea: 0x1417F55A0
@@ -4993,6 +5010,8 @@ classes:
   Client::Game::CameraBase:
     vtbls:
       - ea: 0x14191D040
+    funcs:
+      0x1411DA750: ctor
   Client::Game::Camera:
     vtbls:
       - ea: 0x14191D0A8
@@ -5006,7 +5025,7 @@ classes:
         base: Client::Game::CameraBase
     funcs:
       0x1411E6110: ctor
-  Client::Game::Camera2:
+  Client::Game::LobbyCamera:
     vtbls:
       - ea: 0x14191D320
         base: Client::Game::Camera
@@ -5018,6 +5037,12 @@ classes:
         base: Client::Game::Camera
     funcs:
       0x1411E9DD0: ctor
+  Client::Game::Camera4:
+    vtbls:
+      - ea: 0x1419E4CA8
+        base: Client::Game::CameraBase
+    funcs:
+      0x1412E5A60: ctor
   Client::Graphics::Culling::OcclusionCullingManager:
     instances:
       - ea: 0x141F23120
@@ -5204,11 +5229,6 @@ classes:
     vtbls:
       - ea: 0x1417A2238
         base: Client::System::Memory::IMemorySpace
-  Client::Game::ControlSystem::CameraManager:
-    instances:
-      - ea: 0x141F2C6B0
-    funcs:
-      0x1411EA880: ctor
   Vector3:
     funcs:
       0x1401A1510: Normalize
