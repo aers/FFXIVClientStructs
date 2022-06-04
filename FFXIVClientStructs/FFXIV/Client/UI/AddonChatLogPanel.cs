@@ -7,9 +7,11 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //     Component::GUI::AtkEventListener
 [StructLayout(LayoutKind.Explicit, Size = 0x3D0)]
 [Addon("ChatLogPanel_0", "ChatLogPanel_1", "ChatLogPanel_2", "ChatLogPanel_3")]
-public struct AddonChatLogPanel
+public unsafe struct AddonChatLogPanel
 {
     [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
+    [FieldOffset(0x280)] public AtkTextNode* ChatText;
+    [FieldOffset(0x2B0)] public byte FontSize;
     [FieldOffset(0x2B4)] public uint FirstLineVisible;
     [FieldOffset(0x2B8)] public uint LastLineVisible;
     [FieldOffset(0x2C0)] public uint Unknown2C0;
