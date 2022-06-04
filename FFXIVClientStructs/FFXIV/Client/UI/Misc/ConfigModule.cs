@@ -25,6 +25,17 @@ public unsafe partial struct ConfigModule
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 35 ?? ?? ?? ?? 33 DB")]
     public partial int GetIntValue(uint index, int a3 = 2);
 
+    public uint? GetIndex(ConfigOption option) {
+        for (uint i = 0; i < ConfigOptionCount; i++)
+        {
+            var o = GetOption(i);
+            if (o->OptionID != option) continue;
+            return i;
+        }
+
+        return null;
+    }
+    
     public void SetOption(ConfigOption option, int value)
     {
         for (uint i = 0; i < ConfigOptionCount; i++)
