@@ -79,6 +79,14 @@ public unsafe partial struct AtkTextNode
     public partial void GetTextDrawSize(ushort* outWidth, ushort* outHeight, byte* text = null, int start = 0,
         int end = -1, bool considerScale = false);
 
+    public void SetText(Span<byte> span) {
+        fixed (byte* ptr = span) SetText(ptr);
+    }
+    
+    public void SetText(ReadOnlySpan<byte> span) {
+        fixed (byte* ptr = span) SetText(ptr);
+    }
+    
     public void SetText(string str)
     {
         var bytes = Encoding.UTF8.GetBytes(str);
