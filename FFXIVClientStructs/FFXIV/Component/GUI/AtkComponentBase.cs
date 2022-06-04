@@ -38,9 +38,12 @@ public enum ComponentType : byte
 // common CreateAtkComponent function 8B FA 33 DB E8 ? ? ? ? 
 // type 0
 [StructLayout(LayoutKind.Explicit, Size = 0xC0)]
-public unsafe struct AtkComponentBase
+public unsafe partial struct AtkComponentBase
 {
     [FieldOffset(0x00)] public AtkEventListener AtkEventListener;
     [FieldOffset(0x08)] public AtkUldManager UldManager;
     [FieldOffset(0xA8)] public AtkComponentNode* OwnerNode;
+
+    [VirtualFunction(10)] 
+    public partial void* SetEnabledState(bool enabled);
 }
