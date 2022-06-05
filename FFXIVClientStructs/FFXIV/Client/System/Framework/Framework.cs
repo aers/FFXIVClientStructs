@@ -29,6 +29,12 @@ public unsafe partial struct Framework
 
     [FieldOffset(0x2B60)] public UIModule* UIModule;
     [FieldOffset(0x2BC8)] public LuaState LuaState;
+    
+    [FieldOffset(0x2BF0)] public fixed byte ClientVersion[32];
+    [FieldOffset(0x2CF0)] public fixed byte Ex1Version[32];
+    [FieldOffset(0x2D10)] public fixed byte Ex2Version[32];
+    [FieldOffset(0x2D30)] public fixed byte Ex3Version[32];
+    [FieldOffset(0x2D50)] public fixed byte Ex4Version[32];
 
     [StaticAddress("44 0F B6 C0 48 8B 0D ? ? ? ?", isPointer: true)]
     public static partial Framework* Instance();
