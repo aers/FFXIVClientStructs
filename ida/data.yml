@@ -211,6 +211,7 @@ functions:
   0x1400A9220: GetPartyMemberClassJobByContentId
   0x140701540: ObjectIdToPlayerObjectId # returns invalid id if objectid is not a player
   0x140729FA0: ProcessActorControlPacket
+  0x140499730: Raycast
 
 classes:
   Client::Game::GameMain:
