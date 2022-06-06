@@ -1993,6 +1993,11 @@ classes:
     vtbls:
       - ea: 0x1417F49A0
         base: Client::System::Framework::Task
+    funcs:
+      0x1404A06A0: CreateInstance
+      0x1404A0740: ctor
+    instances:
+      - ea: 0x141F26B70
   Client::Graphics::Vfx::VfxData:
     vtbls:
       - ea: 0x1417E8500
@@ -5135,6 +5140,59 @@ classes:
     vtbls:
       - ea: 0x1419ED498
         base: Client::Game::Object::HousingObject
+  Client::System::Scheduler::Object::ObjectManager:
+    vtbls:
+      - ea: 0x14191ED18
+    funcs:
+      0x141205DA0: CreateInstance
+      0x141205E30: ctor
+    instances:
+      - ea: 0x141F8B068
+  Client::System::Scheduler::ActionTimelineManager:
+    vtbls:
+      - ea: 0x14191E9A8
+    funcs:
+      0x1411FC0E0: CreateInstance
+      0x1411FC130: ctor
+    instances:
+      - ea: 0x141F88EE8
+  Client::System::Scheduler::TimelineGroup:
+    funcs:
+      0x14126C3A0: PlayAction
+  Client::System::Scheduler::Base::TimelineControler:
+    vtbls:
+      - ea: 0x1419259B8
+        base: Client::System::Scheduler::Base::SchedulerState
+    funcs:
+      0x141232A50: ctor
+  Client::System::Scheduler::Base::SchedulerTimeline:
+    vtbls:
+      - ea: 0x1419EE978
+        base: Client::System::Scheduler::Base::TimelineControler
+    funcs:
+      0x141319500: ctor
+      0x14131A250: PlayAction
+      0x14131C2D0: LoadTimelineResources
+  Client::System::Scheduler::Resource::SchedulerResourceManagement:
+    instances:
+      - ea: 0x141F8B100
+    vtbls:
+      - ea: 0x141925038
+    funcs:
+      0x1412215C0: CreateInstance
+      0x141221610: ctor
+      0x141221900: LoadActionTmb
+      0x141222A00: CreateScheduleResource
+  Client::System::Scheduler::Base::LinkList<Client::System::Scheduler::Resource::SchedulerResource>:
+  Client::System::Scheduler::Resource::SchedulerResource::ResourceName:
+    vtbls:
+      - ea: 0x1419EEB28
+  Client::System::Scheduler::Resource::SchedulerResource:
+    vtbls:
+      - ea: 0x1419EEB30
+        base: Client::System::Scheduler::Base::LinkList<Client::System::Scheduler::Resource::SchedulerResource>
+    funcs:
+      0x14131E9F0: ctor
   Client::System::Scheduler::Clip::BaseClip:
     vtbls:
       - ea: 0x1419F16D0
