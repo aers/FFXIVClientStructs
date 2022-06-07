@@ -1,4 +1,6 @@
-﻿namespace FFXIVClientStructs.FFXIV.Client.Graphics.Physics;
+﻿using FFXIVClientStructs.FFXIV.Client.Graphics.Render;
+
+namespace FFXIVClientStructs.FFXIV.Client.Graphics.Physics;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x78)]
 public struct BoneSimulators
@@ -22,6 +24,6 @@ public unsafe struct BonePhysicsModule
     [FieldOffset(0x50)] public Matrix44 SkeletonInvWorldMatrix;
     [FieldOffset(0x90)] public float WindScale;
     [FieldOffset(0x94)] public float WindVariation;
-    [FieldOffset(0x98)] public void* Skeleton; // Client::Graphics::Render::Skeleton
+    [FieldOffset(0x98)] public Skeleton* Skeleton; 
     [FieldOffset(0xA0)] public BoneSimulators BoneSimulators;
 }
