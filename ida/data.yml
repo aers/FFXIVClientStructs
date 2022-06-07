@@ -212,6 +212,11 @@ functions:
   0x1407018D0: ObjectIdToPlayerObjectId # returns invalid id if objectid is not a player
   0x14072A330: ProcessActorControlPacket
   0x140499950: Raycast
+  0x14153ECC0: OodleNetwork1_Shared_SetWindow
+  0x14153D920: OodleNetwork1UDP_Train
+  0x141537CC0: OodleNetwork1UDP_Train_State_Counting
+  0x14153CDD0: OodleNetwork1UDP_Decode
+  0x141535DE0: OodleNetwork1UDP_State::Decode
 
 classes:
   Client::Game::GameMain:
