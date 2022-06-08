@@ -29,8 +29,12 @@ globals:
   0x141FB4128: g_FateTablePtr
   0x141F45040: g_SomeOtherRenderingState
   0x141F57314: g_InvSqrt3
+  0x141F21CF8: g_OodleNew
+  0x141F21D00: g_OodleDelete
+  0x141F21D10: g_OodlePrintf
 
 functions:
+  0x140060CC0: MemoryManager_AllocDefaultSpace
   0x140060D50: MemoryManager_Alloc
   0x140062460: MemoryManager_GetDefaultSpace
   0x140062520: MemoryManager_GetApricotSpace
@@ -212,11 +216,25 @@ functions:
   0x1407018D0: ObjectIdToPlayerObjectId # returns invalid id if objectid is not a player
   0x14072A330: ProcessActorControlPacket
   0x140499950: Raycast
-  0x14153ECC0: OodleNetwork1_Shared_SetWindow
-  0x14153D920: OodleNetwork1UDP_Train
+  0x1415334E0: OodleNew # oodle code starts here
+  0x141533550: OodleDelete 
+  0x141533580: rrPrintf_v1 
+  0x141535520: OodleNetwork1UDP_CountingState::Count
+  0x141535DE0: OodleNetwork1UDP_State::Decode
+  0x141536AA0: OodleNetwork1UDP_State::Encode
+  0x141537670: OodleNetwork1UDP_State::Normalize
   0x141537CC0: OodleNetwork1UDP_Train_State_Counting
   0x14153CDD0: OodleNetwork1UDP_Decode
-  0x141535DE0: OodleNetwork1UDP_State::Decode
+  0x14153CE20: OodleNetwork1UDP_Encode
+  0x14153D470: OodleNetwork1UDP_State_Size
+  0x14153D920: OodleNetwork1UDP_Train
+  0x14153ECC0: OodleNetwork1_Shared_SetWindow  
+  0x14153EDF0: OodleNetwork1_Shared_Size
+  0x141542130: rrArithDecodeInit
+  0x1415421D0: rrArithEncodeFlush
+  0x141542310: rrArithEncodeInit
+  0x1415448B0: rrRandStateMod
+  0x141544AC0: rrRandStateSeed
 
 classes:
   Client::Game::GameMain:
