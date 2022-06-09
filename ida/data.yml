@@ -2628,6 +2628,7 @@ classes:
       22: GetRetainerTaskDataModule
       23: GetFlagStatusModule
       29: GetRaptureTeleportHistory
+      31: GetRecommendedEquipModule
       35: GetAgentModule
       37: GetUI3DModule
       56: GetRetainerCommentModule
@@ -2823,6 +2824,11 @@ classes:
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
       0x14067FA70: AddHistoryEntry
+  Client::UI::Misc::RecommendedEquipModule:
+    funcs:
+      0x140680A50: ctor
+      0x140680E70: SetupRecommendationList
+      0x140681010: EquipRecommended
   Client::UI::Misc::RetainerCommentModule:
     vtbls:
       - ea: 0x1418365E0
