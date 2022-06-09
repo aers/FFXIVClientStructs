@@ -281,6 +281,7 @@ public enum AgentId : uint {
     Orchestrion = 214,
     OrchestrionInn = 219,
     HousingEditContainer = 220,
+    RecommendEquip = 222,
     YkwNote = 223, //yokai watch medallium
     ContentsFinderMenu = 224,
     RaidFinder = 225,
