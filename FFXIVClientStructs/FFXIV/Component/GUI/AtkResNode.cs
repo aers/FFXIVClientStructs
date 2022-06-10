@@ -35,7 +35,7 @@ public enum NodeFlags
     Focusable = 0x400,
     Droppable = 0x800,
     IsTopNode = 0x1000,
-    UnkFlag = 0x2000,
+    EmitsEvents = 0x2000,
     UseDepthBasedPriority = 0x4000,
     UnkFlag2 = 0x8000
 }
