@@ -64,7 +64,7 @@ public unsafe partial struct AtkUnitBase
     public partial void FireCallback(int valueCount, AtkValue* values, void* a4 = null);
 
     [MemberFunction("E8 ?? ?? ?? ?? F6 46 40 0F")]
-    public partial void ResizeCollisionNodeList(byte nodeCount);
+    public partial void UpdateCollisionNodeList(bool clearFocus);
 
     [MemberFunction("E8 ?? ?? ?? ?? 8D 77 02")]
     public partial bool SetFocusNode(AtkResNode* node, bool a3 = false, uint a4 = 0);
