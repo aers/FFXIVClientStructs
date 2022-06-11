@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 public unsafe struct AtkTextureResource
 {
     [FieldOffset(0x0)] public uint TexPathHash; // crc32(full path)
-    [FieldOffset(0x4)] public uint Unk_1; // defaults to 0xFFFFFFFF which is -1 so might be signed
+    [FieldOffset(0x4)] public int IconID;
     [FieldOffset(0x8)] public TextureResourceHandle* TexFileResourceHandle;
 
     [FieldOffset(0x10)] public Texture* KernelTextureObject; // Client::Graphics::Kernel::Texture, renderer texture obj
