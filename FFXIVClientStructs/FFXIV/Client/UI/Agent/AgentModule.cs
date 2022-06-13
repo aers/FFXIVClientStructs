@@ -333,6 +333,7 @@ public enum AgentId : uint {
     EmjSetting = 326, //Mahjong Settings
     RetainerList = 327,
     Dawn = 332, //Trust
+    DawnStory = 333, //Duty Support
     HousingCatalogPreview = 334,
     QuestRedo = 337,
     QuestRedoHud = 338,
