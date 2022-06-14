@@ -22,7 +22,9 @@ namespace {{ struct.namespace }} {
     }
 }";
 
-        internal const string InitializeStaticAddresses = @"using System.Collections.Generic;
+        internal const string InitializeStaticAddresses = @"using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Serilog;
 
 namespace FFXIVClientStructs {
@@ -39,6 +41,26 @@ namespace FFXIVClientStructs {
             }
             {{~ end ~}}
             {{~ end ~}}
+        }
+
+        private static void InitializeStaticAddressesParallel(SigScanner s)
+        {
+            var sigActions = new List<Action>
+            {
+            {{~ for struct in structs ~}}
+            {{~ for sa in struct.addresses ~}}
+            () => {
+                try {
+                    var address{{ struct.name }}{{ sa.name }} = s.GetStaticAddressFromSig(""{{ sa.signature }}"", {{ sa.offset }});
+                    {{ struct.namespace }}.{{ struct.name }}.{{ if sa.is_pointer }}p{{ end }}p{{ sa.name }} = ({{ sa.type }}{{ if sa.is_pointer }}*{{ end }})address{{ struct.name }}{{ sa.name }};
+                } catch (KeyNotFoundException) {
+                    Log.Warning($""[FFXIVClientStructs] static address {{ struct.name }}::{{ sa.name }} failed to match signature {{ sa.signature }} and is unavailable"");
+                }
+            },
+            {{~ end ~}}
+            {{~ end ~}}
+            };
+            Parallel.ForEach(sigActions, action => action());
         }
     }
 }";
