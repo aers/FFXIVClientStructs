@@ -32,4 +32,28 @@ public static partial class Resolver
 
         Initialized = true;
     }
+
+    public static void InitializeParallel() {
+        if (Initialized) return;
+
+        var module = Process.GetCurrentProcess().MainModule;
+        var scanner = new SigScanner(module);
+
+        InitializeMemberFunctionsParallel(scanner);
+        InitializeStaticAddressesParallel(scanner);
+
+        Initialized = true;
+    }
+
+    public static void InitializeParallel(IntPtr moduleCopy) {
+        if (Initialized) return;
+
+        var module = Process.GetCurrentProcess().MainModule;
+        var scanner = new SigScanner(module, moduleCopy);
+
+        InitializeMemberFunctionsParallel(scanner);
+        InitializeStaticAddressesParallel(scanner);
+
+        Initialized = true;
+    }
 }

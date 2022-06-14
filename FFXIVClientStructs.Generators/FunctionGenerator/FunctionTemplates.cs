@@ -29,8 +29,9 @@ namespace {{ struct.namespace }} {
     }       
 }";
 
-        internal const string InitializeMemberFunctions = @"using System.Collections.Generic;
-
+        internal const string InitializeMemberFunctions = @"using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Serilog;
 
 namespace FFXIVClientStructs {
@@ -47,6 +48,26 @@ namespace FFXIVClientStructs {
             }
             {{~ end ~}}
             {{~ end ~}}
+        }
+
+        private static void InitializeMemberFunctionsParallel(SigScanner s)
+        {
+            var sigActions = new List<Action>
+            {
+            {{~ for struct in structs ~}}
+            {{~ for mf in struct.member_functions ~}}
+            () => {
+                try {
+                    var address{{ struct.name }}{{ mf.name }} = s.ScanText(""{{ mf.signature }}"");
+                    {{ struct.namespace }}.{{ struct.name }}.fp{{ mf.name }} = (delegate* unmanaged[Stdcall] <{{ if !mf.is_static }}{{ struct.namespace }}.{{ struct.name }}*,{{ end }}{{ if mf.has_params }}{{ mf.param_type_list }},{{ end }}{{ if mf.has_bool_return }}byte{{ else }}{{ mf.return_type }}{{ end }}>) address{{ struct.name }}{{ mf.name }};
+                } catch (KeyNotFoundException) {
+                    Log.Warning($""[FFXIVClientStructs] function {{ struct.name }}::{{ mf.name }} failed to match signature {{ mf.signature }} and is unavailable"");
+                }
+            },
+            {{~ end ~}}
+            {{~ end ~}}
+            };
+            Parallel.ForEach(sigActions, action => action());
         }
     }
 }";
