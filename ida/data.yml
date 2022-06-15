@@ -4530,6 +4530,10 @@ classes:
     vtbls:
       - ea: 0x1418DBD80
         base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMonsterNote:
+    vtbls:
+      - ea: 0x1418DE120
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonGatheringNoteBook:
     vtbls:
       - ea: 0x1418DE390
