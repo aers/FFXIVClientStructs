@@ -131,8 +131,8 @@ public unsafe partial struct UIModule
     [VirtualFunction(162)]
     public partial void ShowTextChain(int chain, int hqChain = 0);
 
-    [VirtualFunction(163)] //_AreaText
-    public partial void ShowWideText(string text, int layer = 0, bool isTop = true, bool isFast = false, uint logMessageId = 0);
+    [VirtualFunction(163)]
+    public partial void ShowAreaText(string text, int layer = 0, bool isTop = true, bool isFast = false, uint logMessageId = 0);
 
     [VirtualFunction(164)]
     public partial void ShowPoisonText(string text, int layer = 0);
