@@ -4218,6 +4218,9 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140A80040: ctor
+      0x140A81350: OpenRecipeByRecipeId
+      0x140A81470: OpenRecipeByItemId
+      0x140A86DE0: SearchRecipe
   Client::UI::Agent::AgentTeleport:
     vtbls:
       - ea: 0x141942790
