@@ -747,6 +747,8 @@ classes:
     vfuncs:
       0: dtor
       1: Setup
+      2: Destroy
+      3: Free
       4: Tick
     funcs:
       0x14008FB40: ctor
