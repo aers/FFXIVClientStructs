@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
+using System.IO;
 using System.Runtime.CompilerServices;
+using System.Text.Json;
 
 namespace FFXIVClientStructs;
 
@@ -13,6 +16,9 @@ public sealed class SigScanner : IDisposable
 {
     private long moduleCopyOffset;
     private IntPtr moduleCopyPtr;
+    private FileInfo? cacheFile;
+    private bool cacheChanged;
+    private ConcurrentDictionary<string, long>? textCache;
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="SigScanner" /> class.
@@ -22,12 +28,15 @@ public sealed class SigScanner : IDisposable
     ///     Whether or not to copy the module upon initialization for search operations to use, as to not get
     ///     disturbed by possible hooks.
     /// </param>
-    public SigScanner(ProcessModule module, bool doCopy = false)
+    public SigScanner(ProcessModule module, bool doCopy = false, FileInfo? cacheFile = null)
     {
         Module = module;
         Is32BitProcess = !Environment.Is64BitProcess;
         IsCopy = doCopy;
         OwnsCopy = true;
+        this.cacheFile = cacheFile;
+        if (this.cacheFile != null)
+            Load();
 
         // Limit the search space to .text section.
         SetupSearchSpace(module);
@@ -36,12 +45,15 @@ public sealed class SigScanner : IDisposable
             SetupCopiedSegments();
     }
 
-    public SigScanner(ProcessModule module, IntPtr moduleCopy)
+    public SigScanner(ProcessModule module, IntPtr moduleCopy, FileInfo? cacheFile = null)
     {
         Module = module;
         Is32BitProcess = !Environment.Is64BitProcess;
         IsCopy = true;
         OwnsCopy = false;
+        this.cacheFile = cacheFile;
+        if (this.cacheFile != null)
+            Load();
 
         // Limit the search space to .text section.
         SetupSearchSpace(module);
@@ -126,6 +138,29 @@ public sealed class SigScanner : IDisposable
     {
         if (OwnsCopy)
             Marshal.FreeHGlobal(moduleCopyPtr);
+    }
+
+    private void Load()
+    {
+        if (cacheFile is not {Exists: true}) {
+            textCache = new ConcurrentDictionary<string, long>();
+            return;
+        }
+
+        var json = File.ReadAllText(cacheFile.FullName);
+        textCache = JsonSerializer.Deserialize<ConcurrentDictionary<string, long>>(json) ?? new ConcurrentDictionary<string, long>();
+    }
+
+    internal void Save()
+    {
+        if (cacheFile == null || textCache == null || cacheChanged == false)
+            return;
+        var json = JsonSerializer.Serialize(textCache, new JsonSerializerOptions {WriteIndented = true});
+        if (string.IsNullOrWhiteSpace(json))
+            return;
+        if (cacheFile.Directory is {Exists: false})
+            Directory.CreateDirectory(cacheFile.Directory.FullName);
+        File.WriteAllText(cacheFile.FullName, json);
     }
 
     /// <summary>
@@ -220,6 +255,9 @@ public sealed class SigScanner : IDisposable
     {
         var mBase = IsCopy ? moduleCopyPtr : TextSectionBase;
 
+        if (textCache != null && textCache.TryGetValue(signature, out var offset))
+            return Module.BaseAddress + (nint)offset;
+
         var scanRet = Scan(mBase, TextSectionSize, signature);
 
         if (IsCopy)
@@ -228,7 +266,10 @@ public sealed class SigScanner : IDisposable
         var insnByte = Marshal.ReadByte(scanRet);
 
         if (insnByte == 0xE8 || insnByte == 0xE9)
-            return ReadCallSig(scanRet);
+            scanRet = ReadCallSig(scanRet);
+
+        if (textCache?.TryAdd(signature, scanRet.ToInt64() - Module.BaseAddress.ToInt64()) == true)
+            cacheChanged = true;
 
         return scanRet;
     }
