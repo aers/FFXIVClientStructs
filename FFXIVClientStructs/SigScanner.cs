@@ -16,9 +16,9 @@ public sealed class SigScanner : IDisposable
 {
     private long moduleCopyOffset;
     private IntPtr moduleCopyPtr;
-    private FileInfo? cacheFile;
+    private readonly FileInfo cacheFile;
     private bool cacheChanged;
-    private ConcurrentDictionary<string, long>? textCache;
+    private ConcurrentDictionary<string, long> textCache;
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="SigScanner" /> class.
@@ -28,7 +28,8 @@ public sealed class SigScanner : IDisposable
     ///     Whether or not to copy the module upon initialization for search operations to use, as to not get
     ///     disturbed by possible hooks.
     /// </param>
-    public SigScanner(ProcessModule module, bool doCopy = false, FileInfo? cacheFile = null)
+    /// <param name="cacheFile">The FileInfo to use as Signature Cache File</param>
+    public SigScanner(ProcessModule module, bool doCopy = false, FileInfo cacheFile = null)
     {
         Module = module;
         Is32BitProcess = !Environment.Is64BitProcess;
@@ -45,7 +46,7 @@ public sealed class SigScanner : IDisposable
             SetupCopiedSegments();
     }
 
-    public SigScanner(ProcessModule module, IntPtr moduleCopy, FileInfo? cacheFile = null)
+    public SigScanner(ProcessModule module, IntPtr moduleCopy, FileInfo cacheFile = null)
     {
         Module = module;
         Is32BitProcess = !Environment.Is64BitProcess;

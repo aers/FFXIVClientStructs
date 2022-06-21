@@ -8,7 +8,27 @@ public static partial class Resolver
 {
     public static bool Initialized;
 
-    public static void Initialize(FileInfo? cacheFile = null)
+    public static void Initialize()
+    {
+        Initialize(null);
+    }
+
+    public static void Initialize(IntPtr moduleCopy)
+    {
+        Initialize(moduleCopy, null);
+    }
+
+    public static void InitializeParallel()
+    {
+        InitializeParallel(null);
+    }
+
+    public static void InitializeParallel(IntPtr moduleCopy)
+    {
+        InitializeParallel(moduleCopy, null);
+    }
+
+    public static void Initialize(FileInfo cacheFile)
     {
         if (Initialized) return;
 
@@ -22,7 +42,7 @@ public static partial class Resolver
         scanner.Save();
     }
 
-    public static void Initialize(IntPtr moduleCopy, FileInfo? cacheFile = null)
+    public static void Initialize(IntPtr moduleCopy, FileInfo cacheFile)
     {
         if (Initialized) return;
 
@@ -36,7 +56,8 @@ public static partial class Resolver
         scanner.Save();
     }
 
-    public static void InitializeParallel(FileInfo? cacheFile = null) {
+    public static void InitializeParallel(FileInfo cacheFile)
+    {
         if (Initialized) return;
 
         var module = Process.GetCurrentProcess().MainModule;
@@ -49,7 +70,8 @@ public static partial class Resolver
         scanner.Save();
     }
 
-    public static void InitializeParallel(IntPtr moduleCopy, FileInfo? cacheFile = null) {
+    public static void InitializeParallel(IntPtr moduleCopy, FileInfo cacheFile)
+    {
         if (Initialized) return;
 
         var module = Process.GetCurrentProcess().MainModule;
