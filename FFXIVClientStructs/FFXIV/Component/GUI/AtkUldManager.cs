@@ -1,4 +1,6 @@
-﻿namespace FFXIVClientStructs.FFXIV.Component.GUI;
+﻿using FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
+
+namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
 // used in both addons (AtkUnitBase derived classes) and components (AtkComponontBase derived classes) to read data from uld files
 // also used to render UI components
@@ -18,7 +20,7 @@ public unsafe partial struct AtkUldManager
     [FieldOffset(0x22)] public ushort PartsListCount;
     [FieldOffset(0x24)] public ushort ObjectCount;
     [FieldOffset(0x26)] public ushort UnknownCount; // not sure what but used alongside object count
-    [FieldOffset(0x28)] public void* UldResourceHandle; // addons release this reference, components do not
+    [FieldOffset(0x28)] public ResourceHandle* UldResourceHandle; // addons release this reference, components do not
     [FieldOffset(0x42)] public ushort NodeListCount;
     [FieldOffset(0x48)] public void* AtkResourceRendererManager;
     [FieldOffset(0x50)] public AtkResNode** NodeList;
@@ -37,7 +39,10 @@ public unsafe partial struct AtkUldManager
 
     [MemberFunction("E8 ? ? ? ? 48 8B 4C 24 ? 48 8B 51 08")]
     public partial AtkResNode* CreateNodeByType(uint type);
-
+    
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B F8 48 85 C0 0F 84 ?? ?? ?? ?? 49 8B 0F")]
+    public partial AtkComponentBase* CreateAtkComponent(ComponentType type); 
+    
     [MemberFunction("E8 ? ? ? ? 49 8B 4E 10 8B C5")]
     public partial void UpdateDrawNodeList();
 }

@@ -80,4 +80,8 @@ public unsafe partial struct AtkUnitBase
 
     [VirtualFunction(49)]
     public partial void OnUpdate(NumberArrayData** numberArrayData, StringArrayData** stringArrayData);
+
+
+    [MemberFunction("E9 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 8D 15")]
+    public partial bool LoadUldByName(string name, byte a3 = 0, uint a4 = 6);
 }

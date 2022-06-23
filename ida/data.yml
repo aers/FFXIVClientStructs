@@ -2284,6 +2284,7 @@ classes:
       12: GetPosition
       13: SetAlpha
       14: SetScale
+      16: CloseAddon
       38: Initialize
       39: Finalize
       40: Update
@@ -4498,6 +4499,10 @@ classes:
   Client::UI::AddonCharaSelectWorldServer:
     vtbls:
       - ea: 0x1418C4210
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonLicenseViewer:
+    vtbls:
+      - ea: 0x1418CFAF8
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonJournalDetail:
     vtbls:

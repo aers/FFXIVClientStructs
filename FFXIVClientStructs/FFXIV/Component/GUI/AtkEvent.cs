@@ -28,7 +28,12 @@ public enum AtkEventType
     // AtkComponentIconText
     IconTextRollOver = 56,
     IconTextRollOut = 57,
-    IconTextClick = 58
+    IconTextClick = 58,
+    
+    // AtkComponentWindow
+    WindowRollOver = 67,
+    WindowRollOut = 68,
+    WindowChangeScale = 69,
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x30)]
