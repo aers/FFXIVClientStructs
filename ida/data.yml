@@ -1286,9 +1286,12 @@ classes:
       0x140219F50: CloseSubMenu
       0x1402172A0: OpenSubMenu
       0x14021B230: OpenYesNo # (this, char* msgText, uint yesId, uint noId, uint checkboxId, bool setOwner)
-      0x140218070: SetupButtonsForTarget
+      0x140218070: SetupButtonsForCharacterTarget
+      0x1402188A0: SetupButtonsForGameObjectTarget # gameobjects that arent characters
       0x140219870: AddMenuItem2 # (this, uint textId, AtkEventInterface* handler, long handlerParam, bool disabled, bool submenu)
       0x1402198E0: AddMenuItem # (this, char* text, AtkEventInterface* handler, long handlerParam, bool disabled, bool submenu)
+      0x140219CB0: IsAllowedToOpenGameObjectTarget
+      0x140219D10: IsAllowedToOpenCharacterTarget
       0x14021B600: AddContextMenuItem2 # (this, int eventId, uint textId, bool disabled, bool submenu)
       0x14021B670: AddContextMenuItem # (this, int eventId, char* text, bool disabled, bool submenu, bool copyText)
   Client::UI::Agent::AgentLobby:
