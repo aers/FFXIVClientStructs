@@ -2280,6 +2280,10 @@ classes:
       - ea: 0x141821318
         base: Component::GUI::AtkEventListener
     vfuncs:
+      3: Open
+      4: Close
+      5: Show
+      6: Hide
       7: SetPosition
       8: SetX
       9: SetY
@@ -2288,7 +2292,10 @@ classes:
       12: GetPosition
       13: SetAlpha
       14: SetScale
-      16: CloseAddon
+      15: GetSizeScaled
+      16: Hide2
+      17: SetScaleToHudLayoutScale
+      18: ShouldCollideWithWindow 
       38: Initialize
       39: Finalize
       40: Update
@@ -2296,7 +2303,7 @@ classes:
       43: LoadUldResourceHandle
       46: OnSetup
       48: OnRefresh
-      49: OnUpdate
+      49: OnRequestedUpdate
       59: OnMouseOver
       60: OnMouseOut
     funcs:
