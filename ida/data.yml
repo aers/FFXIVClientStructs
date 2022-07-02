@@ -579,6 +579,9 @@ classes:
       0x140978910: GetRecastTimerElapsed
       0x1409789C0: GetRecastTime
       0x140978AD0: UpdateRecastFromNetwork
+      0x140979220: AssignBlueMageActionToSlot
+      0x140979410: GetActiveBlueMageActionInSlot
+      0x140979430: SwapBlueMageActionSlots
       0x14097CF00: GetMaxCharges
       0x14096D6A0: GetRecastGroup
       0x140972B80: GetRecastGroupDetail

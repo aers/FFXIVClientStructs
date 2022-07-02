@@ -6,6 +6,8 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 [StructLayout(LayoutKind.Explicit, Size = 0x810)]
 public unsafe partial struct ActionManager
 {
+    [FieldOffset(0x13C)] public fixed uint BlueMageActions[24];
+
     [StaticAddress("48 8D 0D ?? ?? ?? ?? F3 0F 10 13")]
     public static partial ActionManager* Instance();
 
@@ -56,6 +58,15 @@ public unsafe partial struct ActionManager
 
     [MemberFunction("E8 ?? ?? ?? ?? 33 DB 8B C8", IsStatic = true)]
     public static partial ushort GetMaxCharges(uint actionId, uint level); // 0 for current level
+
+    [MemberFunction("48 8B C4 48 89 68 ?? 48 89 70 ?? 41 56 48 83 EC")]
+    public partial void AssignBlueMageActionToSlot(int slot, uint actionId);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 89 06 33 D2")]
+    public partial uint GetActiveBlueMageActionInSlot(int slot);
+
+    [MemberFunction("48 89 6C 24 ?? 48 89 74 24 ?? 41 56 48 83 EC ?? 48 63 EA 4C 8B F1")]
+    public partial void SwapBlueMageActionSlots(int slotA, int slotB);
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x14)]
