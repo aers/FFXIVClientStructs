@@ -26,6 +26,13 @@ globals:
   0x141F955B0: g_Client::Game::UI::RelicNote # not a pointer
   # 0x141FA18A0: g_TitleController # commented out because it no longer has an xref
   0x141FA18A8: g_TitleList
+  0x141FA4640: g_Client::Game::UI::ContentsFinder::LootRules
+  0x141FA4641: g_Client::Game::UI::ContentsFinder::UnrestrictedParty
+  0x141FA4642: g_Client::Game::UI::ContentsFinder::MinimalIL
+  0x141FA4643: g_Client::Game::UI::ContentsFinder::SilenceEcho
+  0x141FA4644: g_Client::Game::UI::ContentsFinder::ExplorerMode
+  0x141FA4645: g_Client::Game::UI::ContentsFinder::LevelSync
+  0x141FA4646: g_Client::Game::UI::ContentsFinder::LimitedLevelingRoulette
   0x141FB4128: g_FateTablePtr
   0x141F45040: g_SomeOtherRenderingState
   0x141F57314: g_InvSqrt3
