@@ -67,6 +67,9 @@ public unsafe partial struct ActionManager
 
     [MemberFunction("48 89 6C 24 ?? 48 89 74 24 ?? 41 56 48 83 EC ?? 48 63 EA 4C 8B F1")]
     public partial void SwapBlueMageActionSlots(int slotA, int slotB);
+
+    [MemberFunction("40 53 55 57 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 33 DB")]
+    public partial bool SetBlueMageActions(uint* actionArray);
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x14)]
