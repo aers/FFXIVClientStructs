@@ -39,7 +39,7 @@ public unsafe partial struct Framework
     [MemberFunction("E8 ?? ?? ?? ?? 80 7B 1D 01")]
     public partial UIModule* GetUiModule();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 03 07", IsStatic = true)]
+    [MemberFunction("E8 ?? ?? ?? ?? 89 47 2C", IsStatic = true)]
     public static partial long GetServerTime();
 
     public string UserPath {
