@@ -431,6 +431,14 @@ classes:
       0x1406E15A0: GetInventoryItemCount # (this, itemId, hq, 1, 1, 0)
       0x1406E1D10: GetItemCountInContainer # (this, itemId, containerId, hq, 0)
       0x1400CA360: GetSizeByIndex # static
+  ExplorationManager:
+    instances:
+      - ea: 0x141FAB710
+        pointer: True
+    funcs:
+      0x140B8FFA0: IsSubmarineExplorationUnlocked # static
+      0x140B8FFE0: IsSubmarineExplorationUnlocked2 # static
+      0x140B90040: GetSurveyDuration
   InventoryContainer:
     funcs:
       0x1406D7D10: GetInventorySlot  # (this, slotIndex)
