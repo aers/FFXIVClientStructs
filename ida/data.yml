@@ -686,6 +686,7 @@ classes:
         base: Client::System::Common::NonCopyable
     funcs:
       0x1400694D0: ctor
+      0x140069820: GetConfigOption
   Common::Configuration::UIConfig:
     vtbls:
       - ea: 0x1417D1738
