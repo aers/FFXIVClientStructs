@@ -1069,6 +1069,8 @@ classes:
   Client::System::Crypt::Crc32:
     vtbls:
       - ea: 0x1417E9E70
+    funcs:
+      0x1401786A0: ctor
   Client::Graphics::ReferencedClassBase:
     vtbls:
       - ea: 0x1417F05D0
