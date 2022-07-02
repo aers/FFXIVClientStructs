@@ -16,5 +16,6 @@ public unsafe struct ContentsFinder {
     [FieldOffset(0x12)] public byte MinimalIL;
     [FieldOffset(0x13)] public byte SilenceEcho;
     [FieldOffset(0x14)] public byte ExplorerMode;
-    [FieldOffset(0x15)] public byte LimitedLevelingRoulette;
+    [FieldOffset(0x15)] public byte LevelSync;
+    [FieldOffset(0x16)] public byte LimitedLevelingRoulette;
 }
