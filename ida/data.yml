@@ -582,10 +582,12 @@ classes:
       0x140979220: AssignBlueMageActionToSlot
       0x140979410: GetActiveBlueMageActionInSlot
       0x140979430: SwapBlueMageActionSlots
+      0x140979540: SetBlueMageActions
       0x14097CF00: GetMaxCharges
       0x14096D6A0: GetRecastGroup
       0x140972B80: GetRecastGroupDetail
       0x140972C50: Update
+      0x1409732B0: Initialize
   Client::Game::JobGaugeManager:
     instances:
       - ea: 0x141F5BA38
