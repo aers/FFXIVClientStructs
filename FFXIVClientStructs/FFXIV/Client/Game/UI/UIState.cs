@@ -22,6 +22,8 @@ public unsafe partial struct UIState
     [FieldOffset(0xA6C0)] public Director* ActiveDirector;
     [FieldOffset(0xA808)] public FateDirector* FateDirector;
     [FieldOffset(0xA950)] public Map Map;
+    
+    [FieldOffset(0x11AF0)] public ContentsFinder ContentsFinder;
 
     [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B 8B ?? ?? ?? ?? 48 8B 01")]
     public static partial UIState* Instance();
