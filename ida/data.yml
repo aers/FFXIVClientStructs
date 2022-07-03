@@ -4853,11 +4853,11 @@ classes:
     vtbls:
       - ea: 0x141919588
         base: Client::UI::AddonTargetInfoBase
-  Client::UI::AddonTargetInfoUnknown1:
+  Client::UI::AddonTargetInfoBuffDebuff:
     vtbls:
       - ea: 0x1419197B8
         base: Client::UI::AddonTargetInfoBase
-  Client::UI::AddonTargetInfoUnknown2:
+  Client::UI::AddonTargetInfoCastBar:
     vtbls:
       - ea: 0x1419199E8
         base: Client::UI::AddonTargetInfoBase
