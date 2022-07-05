@@ -4,7 +4,7 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.Lobby)]
-[StructLayout(LayoutKind.Explicit, Size = 0x1A68)]
+[StructLayout(LayoutKind.Explicit, Size = 0x1A70)]
 public unsafe struct AgentLobby
 {
     public static AgentLobby* Instance()
