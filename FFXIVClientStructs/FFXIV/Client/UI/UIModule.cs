@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using FFXIVClientStructs.FFXIV.Client.Game;
 using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 using FFXIVClientStructs.FFXIV.Client.UI.Misc;
@@ -19,6 +19,14 @@ public unsafe partial struct UIModule
     [FieldOffset(0x18)] public Unk3 UnkObj3;
     [FieldOffset(0x20)] public void* unk;
     [FieldOffset(0x28)] public void* SystemConfig;
+
+    public static void PlayChatSoundEffect(uint effectId)
+    {
+        if (effectId is < 1 or > 16)
+            throw new ArgumentException("Valid chat sfx values are 1 through 16.");
+
+        PlaySound(effectId + 0x24u, 0, 0, 0);
+    }
 
     [Obsolete("Use GetRaptureAtkModule", true)] [FieldOffset(0xB9AB0)]
     public RaptureAtkModule RaptureAtkModule; // note: NOT a pointer, the module's a member
@@ -172,6 +180,9 @@ public unsafe partial struct UIModule
 
     [VirtualFunction(186)]
     public partial void ExecuteMainCommand(uint command);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 4D 39 BE", IsStatic = true)]
+    public static partial bool PlaySound(uint effectId, long a2, long a3, byte a4);
 
     [StructLayout(LayoutKind.Explicit, Size = 0x8)]
     public struct Unk1
