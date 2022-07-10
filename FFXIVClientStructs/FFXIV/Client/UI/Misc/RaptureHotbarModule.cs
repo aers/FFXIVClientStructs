@@ -16,6 +16,25 @@ public unsafe partial struct RaptureHotbarModule
 
     [MemberFunction("83 FA 12 77 28 41 83 F8 10")]
     public partial byte ExecuteSlotById(uint hotbarId, uint slotId);
+
+    /// <summary>
+    /// Retrieve's a hotbar slot's designated appearance (the slot type and slot ID) that will be used for icon display
+    /// purposes. This method will resolve adjusted action IDs as appropriate.
+    /// </summary>
+    /// <remarks>
+    /// The result of this method call will generally be written to IconTypeB/IconB, which is then used to
+    /// look up the exact icon ID to display on the hotbar. This method appears to be run every frame for every
+    /// visible hotbar slot in the game.
+    /// </remarks>
+    /// <param name="actionType">A pointer to where the slot's appearance action type will be written to.</param>
+    /// <param name="actionId">A pointer to where the slot's appearance action ID will be written to.</param>
+    /// <param name="UNK_0xC4">A pointer to where the slot's +C4 offset will be written to.</param>
+    /// <param name="hotbarModule">A reference to the RaptureHotbarModule of the game.</param>
+    /// <param name="slot">A reference to the hotbar slot to calculate the appearance for.</param>
+    /// <returns>Returns the same value present in the actionId param.</returns>
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 54 24 ?? 8B 44 24 30", IsStatic = true)]
+    public static partial uint GetSlotAppearance(HotbarSlotType* actionType, uint* actionId, ushort* UNK_0xC4,
+        RaptureHotbarModule* hotbarModule, HotBarSlot* slot);
 }
 
 [StructLayout(LayoutKind.Sequential, Size = HotBar.Size * 18)]
@@ -172,12 +191,12 @@ public unsafe partial struct HotBarSlot
     ///
     /// If 0, the tooltip for this slot will display message noting the recipe is deleted.
     /// If 1, the tooltip for this slot will display the name and crafting class for that recipe.
-    [FieldOffset(0xDC)] public byte UNK_OxDC;
+    [FieldOffset(0xDC)] public byte UNK_0xDC;
     
     /// UNKNOWN. Appears to be Recipe specific.
     ///
     /// Always set to 1, apparently? 
-    [FieldOffset(0xDD)] public byte UNK_OxDD;
+    [FieldOffset(0xDD)] public byte UNK_0xDD;
     
     /// UNKNOWN. Appears to control UI display mode (icon and displayed name) in some way
     ///
