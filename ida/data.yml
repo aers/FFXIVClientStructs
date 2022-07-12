@@ -445,11 +445,11 @@ classes:
     funcs:
       0x140B90740: IsSubmarineExplorationUnlocked # static
       0x140B90780: IsSubmarineExplorationUnlocked2 # static
-      0x140B907E0: GetSubmarineSurveyDuration
-      0x140B8F740: GetSubmarineVoyageDistance
-      0x140B91CB0: GetSubmarineVoyageTime
-      0x140B84590: GetAirshipVoyageTimeAndDistance
-      0x140B846B0: GetAirshipSurveyDuration
+      0x140B907E0: GetSubmarineSurveyDuration # (unsigned __int8 point, __int16 speed) -> SurveyDuration (return is time in seconds)
+      0x140B91E50: GetSubmarineVoyageDistance # (unsigned __int8 point, unsigned __int8 speed) -> VoyageDistance (return is integer)
+      0x140B91CB0: GetSubmarineVoyageTime # (unsigned __int8 pointA, unsigned __int8 pointB, __int16 speed) -> VoyageTime (return is time in seconds)
+      0x140B84590: GetAirshipVoyageTimeAndDistance # (unsigned __int8 pointA, unsigned __int8 pointB, __int16 speed, _DWORD *voyageTime, int *voyageDistance)
+      0x140B846B0: GetAirshipSurveyDuration # (unsigned __int8 point, __int16 speed) -> SurveyDuration (return is time in seconds)
   InventoryContainer:
     funcs:
       0x1406D83C0: GetInventorySlot  # (this, slotIndex)
