@@ -445,7 +445,11 @@ classes:
     funcs:
       0x140B90740: IsSubmarineExplorationUnlocked # static
       0x140B90780: IsSubmarineExplorationUnlocked2 # static
-      0x140B907E0: GetSurveyDuration
+      0x140B907E0: GetSubmarineSurveyDuration
+      0x140B8F740: GetSubmarineVoyageDistance
+      0x140B91CB0: GetSubmarineVoyageTime
+      0x140B84590: GetAirshipVoyageTimeAndDistance
+      0x140B846B0: GetAirshipSurveyDuration
   InventoryContainer:
     funcs:
       0x1406D83C0: GetInventorySlot  # (this, slotIndex)
@@ -2042,6 +2046,8 @@ classes:
       0x1404A02B0: GetSheetByName  # (ExdModule* this, char* pcszName) -> ExcelSheet*
       0x140641240: IsColumnRsv  # (ExdModule* this, int nSheetIndex, int nRowId, int nSubRowId, int nColumnIndex) -> bool
       0x1406ADD50: GetItemRow # static (uint itemId)
+      0x1406B4590: GetAirshipExplorationPointRow # (uint rowId)
+      0x1406B4690: GetSubmarineExplorationRow # (uint rowid)
   Client::System::Scheduler::ScheduleManagement:
     vtbls:
       - ea: 0x14181EA00
