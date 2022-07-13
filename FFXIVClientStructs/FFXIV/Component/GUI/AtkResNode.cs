@@ -182,7 +182,7 @@ public unsafe partial struct AtkResNode
     [MemberFunction("E8 ?? ?? ?? ?? 80 7B 5D 00")]
     public partial void SetHeight(ushort height);
 
-    [MemberFunction("E8 ?? ?? ?? ?? D1 EE")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 83 C7 08 48 83 EB 01 75 DC")]
     public partial void ToggleVisibility(bool enable);
 
     [MemberFunction("E8 ?? ?? ?? ?? 66 3B C3 74 13")]
