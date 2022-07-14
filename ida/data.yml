@@ -1054,7 +1054,7 @@ classes:
       - ea: 0x1417DE5F0
   Client::UI::Info::InfoProxyPageInterface:
     vtbls:
-#fail       - ea: 0x1417DE650
+      - ea: 0x1417DE650
         base: Client::UI::Info::InfoProxyInterface
   Common::Configuration::ConfigBase::ChangeEventInterface:
     vtbls:
@@ -2953,7 +2953,7 @@ classes:
       - ea: 0x141842970
   Client::UI::Shell::RaptureShellCommandInterface:
     vtbls:
-#fail       - ea: 0x141844220
+      - ea: 0x141842980
         base: Component::Shell::ShellCommandInterface
   Client::UI::Shell::RaptureShellModule:
     vtbls:
@@ -3270,7 +3270,7 @@ classes:
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandHotbarBase:
     vtbls:
-#fail       - ea: 0x141846CF8
+      - ea: 0x141845458
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandHotbar:
     vtbls:
