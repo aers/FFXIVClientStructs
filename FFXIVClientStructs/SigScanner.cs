@@ -148,8 +148,14 @@ public sealed class SigScanner : IDisposable
             return;
         }
 
-        var json = File.ReadAllText(cacheFile.FullName);
-        textCache = JsonSerializer.Deserialize<ConcurrentDictionary<string, long>>(json) ?? new ConcurrentDictionary<string, long>();
+        try
+        {
+            var json = File.ReadAllText(cacheFile.FullName);
+            textCache = JsonSerializer.Deserialize<ConcurrentDictionary<string, long>>(json) ?? new ConcurrentDictionary<string, long>();
+        } catch
+        {
+            textCache = new ConcurrentDictionary<string, long>();
+        }
     }
 
     internal void Save()
