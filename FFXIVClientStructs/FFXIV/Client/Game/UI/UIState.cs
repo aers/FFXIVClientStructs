@@ -30,4 +30,7 @@ public unsafe partial struct UIState
 
     [MemberFunction("E8 ?? ?? ?? ?? 88 45 80")]
     public partial bool IsUnlockLinkUnlocked(uint unlockLink);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 44 22 F0", IsStatic = true)]
+    public static partial bool IsInstanceContentCompleted(uint instanceContentId);
 }

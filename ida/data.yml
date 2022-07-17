@@ -531,6 +531,7 @@ classes:
       0x14094A940: Initialize
       0x14095A4E0: ctor
       0x1409481C0: IsUnlockLinkUnlocked
+      0x1412970E0: IsInstanceContentCompleted
   Client::Game::UI::PlayerState:
     funcs:
       0x1408EA880: SetCharacterName
