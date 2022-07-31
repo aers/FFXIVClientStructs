@@ -20,7 +20,6 @@ globals:
   0x141F915D0: g_LocalContentId
   0x141F92738: g_Client::Game::UI::Buddy.Pet # not a pointer
   0x141F92748: g_Client::Game::UI::Buddy.Pet.BuffList # not a pointer
-  0x141F933F8: g_Client::Game::UI::Buddy.CompanionStats  # not a pointer. Member of UIState
   0x141F93400: g_Client::Game::UI::Buddy.CompanionStats.TimeRemaining  # not a pointer
   0x141F93450: g_Client::Game::UI::Buddy.BattleBuddyListPtr # Member of UIState
   0x141F935B0: g_Client::Game::UI::RelicNote # not a pointer
@@ -550,6 +549,12 @@ classes:
         pointer: False
     funcs:
       0x140926880: ctor
+  Client::Game::UI::Buddy.CompanionStats:
+    instances:
+      - ea: 0x141F933F8
+        pointer: False
+    funcs:
+      0x140925560: IsBuddyEquipUnlocked
   Client::Game::UI::RelicNote:
     vtbls:
       - ea: 0x1418796A0
