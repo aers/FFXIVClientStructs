@@ -231,7 +231,7 @@ public enum AgentId : uint {
     PvpProfile = 130,
     ContentsNote = 131,
 
-    // ReadyCheck,
+    ReadyCheck = 132,
     FieldMarker = 133,
     CursorLocation = 134,
     RetainerStatus = 136,
