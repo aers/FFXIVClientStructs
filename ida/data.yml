@@ -32,6 +32,7 @@ globals:
   0x141FA2644: g_Client::Game::UI::ContentsFinder::ExplorerMode
   0x141FA2645: g_Client::Game::UI::ContentsFinder::LevelSync
   0x141FA2646: g_Client::Game::UI::ContentsFinder::LimitedLevelingRoulette
+  0x141FA7502: g_Client::Game::UI::UnlockedCompanionsMask  # not a pointer
   0x141FB2128: g_FateTablePtr
   0x141F43040: g_SomeOtherRenderingState
   0x141F55314: g_InvSqrt3
@@ -530,13 +531,25 @@ classes:
       0x14094A940: Initialize
       0x14095A4E0: ctor
       0x1409481C0: IsUnlockLinkUnlocked
+      0x1409481F0: IsUnlockLinkUnlockedOrQuestCompleted
+      0x14094A420: IsEmoteUnlocked
       0x1412970E0: IsInstanceContentCompleted
   Client::Game::UI::PlayerState:
+    instances:
+      - ea: 0x141F91578
+        pointer: False
     funcs:
       0x1408EA880: SetCharacterName
       0x1408EBF50: GetBeastTribeRank
       0x1408EBFD0: GetBeastTribeCurrentRep
       0x1408EC010: GetBeastTribeNeededRep
+      0x1408EBA40: IsMountUnlocked
+      0x1408EE740: IsOrnamentUnlocked
+      0x1408ED1B0: IsOrchestrionRollUnlocked
+      0x1408EC370: IsSecretRecipeBookUnlocked # DoH unlockable books
+      0x1408ED0F0: IsFolkloreTomeUnlocked     # DoL unlockable books
+      0x1408EE530: IsMcGuffinUnlocked
+      0x1408EE840: IsFramersKitUnlocked
       0x1408EE930: Initialize
       0x140959CC0: ctor
   Client::Game::UI::Revive:
@@ -555,6 +568,12 @@ classes:
         pointer: False
     funcs:
       0x140925560: IsBuddyEquipUnlocked
+  Client::Game::UI::Cabinet:
+    instances:
+      - ea: 0x141F92030
+        pointer: False
+    funcs:
+      0x140921980: IsItemInCabinet        # item is a cabinet-specific ID, not generic Item.
   Client::Game::UI::RelicNote:
     vtbls:
       - ea: 0x1418796A0

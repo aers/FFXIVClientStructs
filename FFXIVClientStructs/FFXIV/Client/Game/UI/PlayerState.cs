@@ -42,6 +42,9 @@ public unsafe partial struct PlayerState
     [FieldOffset(0x458)] public short PlayerCommendations;
 
     [FieldOffset(0x70A)] public fixed ushort DesynthesisLevels[8];
+    
+    [StaticAddress("48 8D 0D ?? ?? ?? ?? E9 ?? ?? ?? ?? CC 40 53")]
+    public static partial PlayerState* Instance();
 
     public float GetDesynthesisLevel(uint classJobId)
     {
@@ -61,4 +64,65 @@ public unsafe partial struct PlayerState
         return GetBeastTribeAllowance(GetBeastTribeAllowancePointer());
     }
 
+    /// <summary>
+    /// Check if a specific mount has been unlocked by the player.
+    /// </summary>
+    /// <param name="mountId">The ID of the mount to look up.</param>
+    /// <returns>Returns true if the mount has been unlocked.</returns>
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 5C 8B CB")]
+    public partial bool IsMountUnlocked(uint mountId);
+
+    /// <summary>
+    /// Check if a specific ornament (fashion accessory) has been unlocked by the player.
+    /// </summary>
+    /// <param name="ornamentId">The ID of the ornament to look up.</param>
+    /// <returns>Returns true if the ornament has been unlocked.</returns>
+    [MemberFunction("E8 ?? ?? ?? ?? BA ?? ?? ?? ?? 41 0F B6 CE")]
+    public partial bool IsOrnamentUnlocked(uint ornamentId);
+
+    /// <summary>
+    /// Check if a specific orchestrion roll has been unlocked by the player.
+    /// </summary>
+    /// <param name="rollId">The ID of the roll to look up.</param>
+    /// <returns>Returns true if the roll has been unlocked.</returns>
+    [MemberFunction("E8 ?? ?? ?? ?? 88 44 3B 08")]
+    public partial bool IsOrchestrionRollUnlocked(uint rollId);
+
+    /// <summary>
+    /// Check if a Secret Recipe Book (DoH Master Tome) is unlocked and (indirectly) if the player can craft recipes
+    /// from that specific book.
+    /// </summary>
+    /// <param name="tomeId">The ID of the book to check for. Can be retrieved from the SecretRecipeBook sheet.</param>
+    /// <returns>Returns true if the book is unlocked.</returns>
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 4D 9A")]
+    public partial bool IsSecretRecipeBookUnlocked(uint tomeId);
+
+    /// <summary>
+    /// Check if a Folklore Book (DoL Master Tome) is unlocked and (indirectly) if the player can find legendary nodes
+    /// revealed by that book.
+    /// </summary>
+    /// <param name="tomeId">The ID of the book to check for. Can be retrieved from GatheringSubCategory.Division</param>
+    /// <returns></returns>
+    [MemberFunction("E9 ?? ?? ?? ?? 0F B7 57 70")]
+    public partial bool IsFolkloreBookUnlocked(uint tomeId);
+
+    /// <summary>
+    /// Check if a specific McGuffin (Collectible/Curiosity) has been unlocked by the player.
+    /// </summary>
+    /// <param name="mcGuffinId">The ID of the McGuffin to look up, generally from the McGuffin sheet.</param>
+    /// <returns>Returns true if the McGuffin has been unlocked.</returns>
+    [MemberFunction("8D 42 FF 3C ?? 77 44 4C 8B 89")]
+    public partial bool IsMcGuffinUnlocked(uint mcGuffinId);
+
+    /// <summary>
+    /// Check if a particular Framer's Kit is unlocked and can be used.
+    /// </summary>
+    /// <remarks>
+    /// How IDs are located is a bit weird and not necessarily fully understood at time of writing. They appear on Framer
+    /// Kit items in the AdditionalData field, and at +0 in BannerCondition EXDs when +0xE == 9.
+    /// </remarks>
+    /// <param name="kitId">The kit ID to check for.</param>
+    /// <returns></returns>
+    [MemberFunction("4C 8B C9 66 83 FA 28")] // !!! Not happy about this
+    public partial bool IsFramersKitUnlocked(uint kitId);
 }
