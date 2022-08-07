@@ -102,7 +102,7 @@ public unsafe partial struct PlayerState
     /// revealed by that book.
     /// </summary>
     /// <param name="tomeId">The ID of the book to check for. Can be retrieved from GatheringSubCategory.Division</param>
-    /// <returns></returns>
+    /// <returns>Returns true if the book is unlocked.</returns>
     [MemberFunction("E9 ?? ?? ?? ?? 0F B7 57 70")]
     public partial bool IsFolkloreBookUnlocked(uint tomeId);
 
@@ -122,7 +122,7 @@ public unsafe partial struct PlayerState
     /// Kit items in the AdditionalData field, and at +0 in BannerCondition EXDs when +0xE == 9.
     /// </remarks>
     /// <param name="kitId">The kit ID to check for.</param>
-    /// <returns></returns>
+    /// <returns>Returns true if the framer's kit is unlocked.</returns>
     [MemberFunction("4C 8B C9 66 83 FA 28")] // !!! Not happy about this
     public partial bool IsFramersKitUnlocked(uint kitId);
 }
