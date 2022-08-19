@@ -74,6 +74,7 @@ functions:
   0x1407F86B0: GetBeastTribeAllowance
   0x141076E40: Client::UI::AddonHudLayoutScreen::MoveableAddonInfoStruct_UpdateAddonPosition
   0x14117D0F0: Client::Graphics::Kernel::CreateShader # static function
+  0x141189230: NormalizeCustomizeData
   0x1411B70B0: Client::Game::Control::InputManager::IsAutoRunning # static function, might belong in a different class.
   0x141219F10: lua_close
   0x141219F90: lua_newstate
@@ -1795,6 +1796,7 @@ classes:
       92: CreateRenderModelForMDL
     funcs:
       0x140463AE0: ctor
+      0x140463FE0: Initialize
       0x140467B00: CreateBonePhysicsModule
       0x140469570: LoadAnimation
       0x140469F40: LoadMDLForSlot
@@ -1833,6 +1835,7 @@ classes:
       0x140474B30: SetupHairModelAttributes
       0x140474EC0: SetupFaceModelAttributes
       0x140475540: SetupConnectorModelAttributes
+      0x1404758E0: SetupIdsAndVfxScale
   Client::Graphics::Scene::Demihuman:
     vtbls:
       - ea: 0x14181CB48

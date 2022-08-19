@@ -46,8 +46,8 @@ public unsafe struct Human
     [FieldOffset(0x938)] public ushort RaceSexId; // cXXXX ID (0101, 0201, etc)
     [FieldOffset(0x93A)] public ushort HairId; // hXXXX 
     [FieldOffset(0x93C)] public ushort FaceId; // fXXXX ID
-
     [FieldOffset(0x93E)] public ushort TailEarId; // tXXXX/zXXXX(viera)
+    [FieldOffset(0x940)] public ushort FurId;
 
     // see Client::Graphics::Scene::Human_FlagSlotForUpdate(thisPtr, uint slot, EquipSlotData* slotBytes) -> 48 89 5C 24 ? 48 89 74 24 ? 57 48 83 EC 20 8B DA 49 8B F0 48 8B F9 83 FA 0A 
     // array of 10*12 byte storage for changing equipment models

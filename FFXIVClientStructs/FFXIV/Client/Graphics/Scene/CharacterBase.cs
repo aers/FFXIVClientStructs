@@ -22,6 +22,7 @@ public unsafe struct CharacterBase
     [FieldOffset(0x150)]
     public BonePhysicsModule* BonePhysicsModule; // Client::Graphics::Physics::BonePhysicsModule ptr
 
+    [FieldOffset(0x224)] public float VfxScale;
     [FieldOffset(0x240)] public void*
         CharacterDataCB; // Client::Graphics::Kernel::ConstantBuffer ptr, this CB includes stuff like hair color
 
