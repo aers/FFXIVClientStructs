@@ -111,7 +111,7 @@ public unsafe partial struct PlayerState
     /// </summary>
     /// <param name="mcGuffinId">The ID of the McGuffin to look up, generally from the McGuffin sheet.</param>
     /// <returns>Returns true if the McGuffin has been unlocked.</returns>
-    [MemberFunction("8D 42 FF 3C ?? 77 44 4C 8B 89")]
+    [MemberFunction("8D 42 ?? 3C ?? 77 ?? 4C 8B 89")]
     public partial bool IsMcGuffinUnlocked(uint mcGuffinId);
 
     /// <summary>
@@ -123,6 +123,6 @@ public unsafe partial struct PlayerState
     /// </remarks>
     /// <param name="kitId">The kit ID to check for.</param>
     /// <returns>Returns true if the framer's kit is unlocked.</returns>
-    [MemberFunction("4C 8B C9 66 83 FA 28")] // !!! Not happy about this
+    [MemberFunction("4C 8B C9 66 83 FA ?? 73")]
     public partial bool IsFramersKitUnlocked(uint kitId);
 }
