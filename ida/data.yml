@@ -541,6 +541,7 @@ classes:
         pointer: False
     funcs:
       0x1408EA880: SetCharacterName
+      0x1408EB7B0: GetGrandCompanyRank
       0x1408EBF50: GetBeastTribeRank
       0x1408EBFD0: GetBeastTribeCurrentRep
       0x1408EC010: GetBeastTribeNeededRep

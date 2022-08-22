@@ -51,6 +51,9 @@ public unsafe partial struct PlayerState
         return classJobId is < 8 or > 15 ? 0 : DesynthesisLevels[classJobId - 8] / 100f;
     }
 
+    [MemberFunction("E8 ?? ?? ?? ?? 41 3A 86")]
+    public partial byte GetGrandCompanyRank();
+
     [MemberFunction("E8 ?? ?? ?? ?? BE ?? ?? ?? ?? 84 C0 75 0C")]
     public partial byte GetBeastTribeRank(byte beastTribeIndex);
 
