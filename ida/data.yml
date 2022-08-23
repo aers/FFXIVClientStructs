@@ -31,7 +31,7 @@ globals:
   0x142077E63: g_Client::Game::UI::ContentsFinder::SilenceEcho
   0x142077E64: g_Client::Game::UI::ContentsFinder::ExplorerMode
   0x142077E65: g_Client::Game::UI::ContentsFinder::LevelSync
-#fail   0x141FA2646: g_Client::Game::UI::ContentsFinder::LimitedLevelingRoulette
+  0x142077E66: g_Client::Game::UI::ContentsFinder::LimitedLevelingRoulette
   0x14207CDC2: g_Client::Game::UI::UnlockedCompanionsMask  # not a pointer
   0x142087A28: g_FateTablePtr
   0x142016440: g_SomeOtherRenderingState
@@ -257,7 +257,7 @@ classes:
       0x1404B9E50: IsInInstanceArea
       0x1408F9480: IsInPvPInstance
       0x1408F9540: IsInPvPArea
-#fail       0x1400A6F00: IsInSanctuary # static, more likely Client::UI::IsInSanctuary but it fits here just fine
+      0x1400A72D0: IsInSanctuary # static, more likely Client::UI::IsInSanctuary but it fits here just fine
   Application::Network::NetworkModule:
     funcs:
       0x1414C11D0: ctor
@@ -296,7 +296,7 @@ classes:
   Client::System::Input::TextServiceInterface::TextServiceEvent:
   Client::System::Input::InputDeviceManager:
     instances:
-#fail       - ea: 0x141F58CC8
+      - ea: 0x142011208
   Client::System::Resource::Handle::ResourceHandleFactory:
   Client::UI::Agent::AgentMap::MapMarkerStructSearch:
   Client::UI::Atk2DMap:
@@ -398,8 +398,8 @@ classes:
       0x1408F7790: GetPartyMemberByIndex
       0x1408F7810: GetPartyMemberByContentId
       0x1408F7730: GetPartyMemberByObjectId
-#fail       0x140BC9560: Create
-#fail       0x140BC94A0: GetGroupManager
+      0x140C9A880: Create
+      0x140C9A7C0: GetGroupManager
   Client::Game::Balloon:
     funcs:
       0x141364D00: OpenBalloon
@@ -441,7 +441,7 @@ classes:
       0x1400CA900: GetSizeByIndex # static
   ExplorationManager:
     instances:
-#fail       - ea: 0x141FA9710
+      - ea: 0x14207F078
         pointer: True
     funcs:
 #fail       0x140B906F0: IsSubmarineExplorationUnlocked # static
