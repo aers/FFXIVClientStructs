@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 //   Client::Graphics::Vfx::VfxDataListenner
 
 // size = 0x19F0
-// ctor E8 ? ? ? ? 0F B7 93 ? ? ? ? 45 33 C9 
+// ctor E8 ?? ?? ?? ?? 4C 8B D0 4C 63 F7
 [StructLayout(LayoutKind.Explicit, Size = 0x1B00)]
 public unsafe partial struct Character
 {
@@ -40,6 +40,8 @@ public unsafe partial struct Character
 
     [FieldOffset(0xC60)] public uint PlayerTargetObjectID;
 
+    [FieldOffset(0x6D0)] public DrawDataContainer DrawData;
+
     [FieldOffset(0x818)] public fixed byte EquipSlotData[4 * 10];
     [FieldOffset(0x840)] public fixed byte CustomizeData[0x1A];
 
@@ -65,7 +67,12 @@ public unsafe partial struct Character
 
     [MemberFunction("E8 ?? ?? ?? ?? 49 3B C7 0F 84")]
     public partial uint GetTargetId();
-    
+
+    // Seemingly used for cutscenes and GPose.
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 9F ?? ?? ?? ?? 48 8D 8F")]
+    public partial ulong CopyFromCharacter(Character* source, uint unk);
+
+
     [VirtualFunction(79)]
     public partial StatusManager* GetStatusManager();
 

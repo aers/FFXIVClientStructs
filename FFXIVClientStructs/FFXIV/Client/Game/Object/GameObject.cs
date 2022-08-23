@@ -74,6 +74,13 @@ public unsafe partial struct GameObject
     [VirtualFunction(8)]
     public partial float GetHeight();
 
+    [VirtualFunction(16)]
+    public partial void EnableDraw();
+
+    [VirtualFunction(17)]
+    public partial void DisableDraw();
+
+
     [VirtualFunction(27)]
     public partial DrawObject* GetDrawObject();
 
