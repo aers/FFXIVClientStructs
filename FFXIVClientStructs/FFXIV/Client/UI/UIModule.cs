@@ -100,7 +100,7 @@ public unsafe partial struct UIModule
     [VirtualFunction(31)]
     public partial RecommendEquipModule* GetRecommendEquipModule();
 
-    [VirtualFunction(35)]
+    [VirtualFunction(36)]
     public partial AgentModule* GetAgentModule();
 
     [VirtualFunction(37)]
