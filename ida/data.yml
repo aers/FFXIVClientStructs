@@ -222,7 +222,7 @@ functions:
   0x1400A95C0: IsPartyMemberByNameOrContentId # (name, contentId)
   0x1400A96F0: GetPartyMemberClassJobByContentId
   0x140713F60: ObjectIdToPlayerObjectId # returns invalid id if objectid is not a player
-#fail   0x14072AA30: ProcessActorControlPacket
+  0x14073D150: ProcessActorControlPacket
   0x1404A54B0: Raycast
   0x1415E2EC0: OodleNew # oodle code starts here
   0x1415E2F30: OodleDelete 
@@ -617,7 +617,7 @@ classes:
       0x1409855D0: CheckActionResources
       0x140989040: GetActionStatus
       0x14098ADA0: CanUseAction
-#fail       0x140976600: GetAdjustedActionId
+      0x14098B600: GetAdjustedActionId
       0x14098D580: UseAction
       0x14098DD00: UseComboAction
       0x14098E600: GetRecastTimerActive
