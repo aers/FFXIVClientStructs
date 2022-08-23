@@ -2718,9 +2718,9 @@ classes:
       99: IsGamePadInputActive
       102: ToggleInputMode
       104: IsUIHidden
-      110: ShowPvpIntroduction
-      111: IsPvpIntroductionInvisible
-      112: HidePvpIntroduction
+      110: ShowContentIntroduction
+      111: IsContentIntroductionInvisible
+      112: HideContentIntroduction
       122: ToggleCursor
       136: ShowEventFadeIn
       137: ShowEventFadeOut
