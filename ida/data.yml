@@ -4142,7 +4142,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentDeepDungeonMenu:
     vtbls:
-      - ea: 0x141948018
+      - ea: 0x141936D50
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentItemAppraisal:
     vtbls:
