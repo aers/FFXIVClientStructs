@@ -3,7 +3,7 @@ using FFXIVClientStructs.FFXIV.Client.Game.Object;
 namespace FFXIVClientStructs.FFXIV.Client.Game.Control;
 // Client::Game::Control::TargetSystem
 
-[StructLayout(LayoutKind.Explicit, Size = 0x3D50)]
+[StructLayout(LayoutKind.Explicit, Size = 0x5290)]
 public unsafe partial struct TargetSystem
 {
     [FieldOffset(0x80)] public GameObject* Target;
@@ -17,9 +17,9 @@ public unsafe partial struct TargetSystem
 
     [FieldOffset(0x148)] public GameObjectArray ObjectFilterArray0;
 
-    [FieldOffset(0x14B0)] public GameObjectArray ObjectFilterArray1;
-    [FieldOffset(0x2208)] public GameObjectArray ObjectFilterArray2;
-    [FieldOffset(0x2F60)] public GameObjectArray ObjectFilterArray3;
+    [FieldOffset(0x1A00)] public GameObjectArray ObjectFilterArray1;
+    [FieldOffset(0x2758)] public GameObjectArray ObjectFilterArray2;
+    [FieldOffset(0x34B0)] public GameObjectArray ObjectFilterArray3;
 
     [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 3B C6 0F 95 C0")]
     public static partial TargetSystem* Instance();
