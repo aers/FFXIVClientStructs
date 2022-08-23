@@ -53,11 +53,11 @@ public unsafe partial struct Character
     [FieldOffset(0x1A48)] public fixed byte FreeCompanyTag[6];
     [FieldOffset(0x1A50)] public uint TargetObjectID;
 
-    [FieldOffset(0x1A4)] public uint NameID; //??
+    [FieldOffset(0x1AAC)] public uint NameID;
 
     [FieldOffset(0x1AC8)] public ushort CurrentWorld;
     [FieldOffset(0x1ACA)] public ushort HomeWorld;
-    [FieldOffset(0x1AD4)] public byte EventState; // or something //??
+    [FieldOffset(0x1AD4)] public byte EventState; // or something
     [FieldOffset(0x1AD6)] public byte OnlineStatus;
     [FieldOffset(0x1AEB)] public byte ShieldValue;
     [FieldOffset(0x1AEF)] public byte StatusFlags;
