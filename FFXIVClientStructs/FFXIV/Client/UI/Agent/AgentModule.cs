@@ -362,5 +362,10 @@ public enum AgentId : uint {
     PvPMap = 392,
     CharaCard = 394, // AdventurerPlate
 
-    PvPMKSIntroduction = 398
+    PvPMKSIntroduction = 398,
+
+    MJIHud = 399,  // Island Sanctuary
+    MJIPouch = 400,
+    MJIRecipeNoteBook = 401,
+    MJIGatheringNoteBook = 408
 }
