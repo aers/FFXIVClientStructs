@@ -16,21 +16,22 @@ public unsafe partial struct UIState
     [FieldOffset(0x110)] public Hater Hater;
     [FieldOffset(0xA18)] public WeaponState WeaponState;
     [FieldOffset(0xA38)] public PlayerState PlayerState;
-    [FieldOffset(0x11C8)] public Revive Revive;
-    [FieldOffset(0x1498)] public Telepo Telepo;
-    [FieldOffset(0x14F0)] public Cabinet Cabinet;
-    [FieldOffset(0x1A60)] public Buddy Buddy;
-    [FieldOffset(0x2A70)] public RelicNote RelicNote;
+    [FieldOffset(0x11D0)] public Revive Revive;
+    [FieldOffset(0x1468)] public Telepo Telepo;
+    [FieldOffset(0x14C0)] public Cabinet Cabinet;
+    [FieldOffset(0x1A50)] public Buddy Buddy;
+    [FieldOffset(0x2A60)] public RelicNote RelicNote;
 
-    [FieldOffset(0xA6C0)] public Director* ActiveDirector;
-    [FieldOffset(0xA808)] public FateDirector* FateDirector;
-    [FieldOffset(0xA950)] public Map Map;
+    [FieldOffset(0xA828)] public Director* ActiveDirector;
+    [FieldOffset(0xA970)] public FateDirector* FateDirector;
+
+    [FieldOffset(0xA950)] public Map Map; //??
     
-    [FieldOffset(0x11AF0)] public ContentsFinder ContentsFinder;
+    [FieldOffset(0x11AF0)] public ContentsFinder ContentsFinder; //??
     
     // No idea why this isn't its own thing, but I can't find any trace of any member functions or anything worthy of
     // making this its own struct. 
-    [FieldOffset(0x169C2)] public fixed byte UnlockedCompanionsBitmask[0x3A];
+    [FieldOffset(0x169C2)] public fixed byte UnlockedCompanionsBitmask[0x3A]; //??
     
     [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B 8B ?? ?? ?? ?? 48 8B 01")]
     public static partial UIState* Instance();

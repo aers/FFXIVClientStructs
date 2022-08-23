@@ -4,7 +4,7 @@
 /// A struct representing the UIState Cabinet (otherwise known as the "Armoire" in-game) and the bitfield for stores
 /// items.
 /// </summary>
-[StructLayout(LayoutKind.Explicit, Size = 0x45)]
+[StructLayout(LayoutKind.Explicit, Size = 0x48)]
 public unsafe partial struct Cabinet {
     [FieldOffset(0x00)] public int CabinetLoaded; // This becomes 2 for some reason, unsure why or what it means.
     [FieldOffset(0x04)] public fixed byte UnlockedItems[0x41];

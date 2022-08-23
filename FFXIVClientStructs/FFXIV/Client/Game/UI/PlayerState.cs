@@ -1,7 +1,7 @@
 ﻿namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
 //ctor 40 53 48 83 EC 20 48 8B D9 48 8D 81 ?? ?? ?? ?? BA
-[StructLayout(LayoutKind.Explicit, Size = 0x778)]
+[StructLayout(LayoutKind.Explicit, Size = 0x798)]
 public unsafe partial struct PlayerState
 {
     [FieldOffset(0x00)] public byte IsLoaded;
