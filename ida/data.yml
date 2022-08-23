@@ -1189,6 +1189,9 @@ classes:
     vtbls:
       - ea: 0x1418A3E40
         base: Client::System::Resource::Handle::DefaultResourceHandle
+    funcs:
+      0x1401b86c0: LoadTexFiles
+      0x1401b84d0: LoadShpkFiles
   Client::System::Resource::Handle::ShaderPackageResourceHandle:
     vtbls:
       - ea: 0x1418A3FC0
@@ -1837,12 +1840,15 @@ classes:
       0x140480610: SetupFaceModelAttributes
       0x140480C60: SetupConnectorModelAttributes
       0x140481000: SetupIdsAndVfxScale
+      0x14047aad0: UpdateDrawData
+      0x14047e670: SetupVisor
   Client::Graphics::Scene::Demihuman:
     vtbls:
       - ea: 0x1418CD468
         base: Client::Graphics::Scene::CharacterBase
     funcs:
       0x140481AE0: ctor
+      0x140481c00: SetupFromData
   Client::Graphics::Scene::Weapon:
     vtbls:
       - ea: 0x1418CD778
@@ -1855,6 +1861,7 @@ classes:
         base: Client::Graphics::Scene::CharacterBase
     funcs:
       0x140484180: ctor
+      0x1404841e0: SetupFromData
   Client::Graphics::Scene::BGManager:
     vtbls:
       - ea: 0x1418CE248
@@ -2971,6 +2978,17 @@ classes:
       0x140724D10: GetTargetId
       0x140727DF0: dtor
       0x14078BBA0: ctor
+  Client::Game::Character::DrawDataContainer:
+    vtbls:
+      - ea: 0x141839098
+    funcs:
+      0x14118d830: ctor
+      0x14121ef20: LoadWeapon
+  Client::Game::Character::DrawData:
+    vtbls:
+      - ea: 1418ce808
+    funcs:
+      0x140493bd0: ctor
   Component::Shell::ShellCommandInterface:
     vtbls:
       - ea: 0x1418F63C0
@@ -5166,6 +5184,8 @@ classes:
   Client::System::Scheduler::Base::SchedulerState:
     vtbls:
       - ea: 0x141A0DCA8
+    funcs:
+      0x1412b8290: ctor
   Client::Graphics::Physics::BoneSimulator:
     vtbls:
       - ea: 0x141A0E768
@@ -5228,16 +5248,18 @@ classes:
   Client::System::Scheduler::TimelineGroup:
     funcs:
       0x141304660: PlayAction
-  Client::System::Scheduler::Base::TimelineControler:
+  Client::System::Scheduler::Base::TimelineController:
     vtbls:
       - ea: 0x141A0E5F8
         base: Client::System::Scheduler::Base::SchedulerState
+    vfuncs:
+      28: GetOwningGameObjectIndex
     funcs:
       0x1412C7210: ctor
   Client::System::Scheduler::Base::SchedulerTimeline:
     vtbls:
       - ea: 0x141AD84E8
-        base: Client::System::Scheduler::Base::TimelineControler
+        base: Client::System::Scheduler::Base::TimelineController
     funcs:
       0x1413C0150: ctor
       0x1413C0EC0: PlayAction
@@ -5328,8 +5350,8 @@ classes:
       - ea: 0x14200EDC8
         name: UISpace
       - ea: 0x14200EDD0
-        name: FileSpace
       - ea: 0x14200EDD8
+        name: FileSpace
         name: SoundSpace
     vtbls:
       - ea: 0x14187BEE0

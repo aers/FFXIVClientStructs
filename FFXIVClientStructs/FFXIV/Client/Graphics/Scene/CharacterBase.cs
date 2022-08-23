@@ -1,4 +1,5 @@
-﻿using FFXIVClientStructs.FFXIV.Client.Graphics.Physics;
+﻿using FFXIVClientStructs.FFXIV.Client.Game.Character;
+using FFXIVClientStructs.FFXIV.Client.Graphics.Physics;
 using FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
@@ -10,7 +11,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 // size = 0x8F0
 // ctor - E8 ? ? ? ? 48 8D 05 ? ? ? ? 45 33 C0 48 89 03 BA ? ? ? ? 
 [StructLayout(LayoutKind.Explicit, Size = 0x8F0)]
-public unsafe struct CharacterBase
+public unsafe partial struct CharacterBase
 {
     [FieldOffset(0x0)] public DrawObject DrawObject;
     [FieldOffset(0x90)] public byte UnkFlags_01; // bit 8 - has visor
@@ -46,4 +47,24 @@ public unsafe struct CharacterBase
 
     [FieldOffset(0x2F8)] public void**
         IMCArray; // array of Client::System::Resource::Handle::ImageChangeDataResourceHandle ptrs size = SlotCount - IMC file for model in slot
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 74 21 C7 40", IsStatic = true)]
+    public static partial CharacterBase* Create(uint modelId, CustomizeData* customize, EquipmentModelId* equipData /* 10 times, 40 byte */, byte unk);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 40 F6 C7 01 74 3A 40 F6 C7 04 75 27 48 85 DB 74 2F 48 8B 05 ?? ?? ?? ?? 48 8B D3 48 8B 48 30")]
+    public partial void Destroy();
+
+    [VirtualFunction(50)]
+    public partial ModelType GetModelType();
+
+    public enum ModelType : byte
+    {
+        Human = 1,
+        DemiHuman = 2,
+        Monster = 3,
+        Weapon = 4,
+    }
+
+    [VirtualFunction(67)]
+    public partial ulong FlagSlotForUpdate(uint slot, EquipmentModelId* slotBytes);
 }
