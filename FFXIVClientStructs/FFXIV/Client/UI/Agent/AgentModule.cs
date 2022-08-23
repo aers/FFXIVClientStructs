@@ -21,7 +21,7 @@ public unsafe partial struct AgentModule
     [FieldOffset(0xC90)] public UIModule* UIModulePtr;
     [FieldOffset(0xC98)] public AgentModule* AgentModulePtr;
 
-    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 83 F8 06")]
+    [MemberFunction("E8 ?? ?? ?? ?? 83 FE 0D")]
     public partial AgentInterface* GetAgentByInternalID(uint agentID);
 
     public AgentInterface* GetAgentByInternalId(AgentId agentId)
