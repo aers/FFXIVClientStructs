@@ -57,7 +57,7 @@ public unsafe partial struct Character
 
     [FieldOffset(0x1AC8)] public ushort CurrentWorld;
     [FieldOffset(0x1ACA)] public ushort HomeWorld;
-    [FieldOffset(0x1ABC)] public byte EventState; // or something //??
+    [FieldOffset(0x1AD4)] public byte EventState; // or something //??
     [FieldOffset(0x1AD6)] public byte OnlineStatus;
     [FieldOffset(0x1AEB)] public byte ShieldValue;
     [FieldOffset(0x1AEF)] public byte StatusFlags;
