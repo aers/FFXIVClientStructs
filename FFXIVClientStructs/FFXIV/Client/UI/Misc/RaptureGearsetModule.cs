@@ -3,7 +3,7 @@ using FFXIVClientStructs.FFXIV.Client.System.Framework;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
-[StructLayout(LayoutKind.Explicit, Size = 0xB348)]
+[StructLayout(LayoutKind.Explicit, Size = 0xB670)]
 public unsafe struct RaptureGearsetModule
 {
     public static RaptureGearsetModule* Instance()

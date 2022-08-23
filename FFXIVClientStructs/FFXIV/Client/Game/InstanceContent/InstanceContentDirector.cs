@@ -1,6 +1,6 @@
 ﻿namespace FFXIVClientStructs.FFXIV.Client.Game.InstanceContent; 
 
-[StructLayout(LayoutKind.Explicit, Size = 0x1790)]
+[StructLayout(LayoutKind.Explicit, Size = 0x17D0)]
 public unsafe struct InstanceContentDirector
 {
 	[FieldOffset(0x00)] public ContentDirector ContentDirector;

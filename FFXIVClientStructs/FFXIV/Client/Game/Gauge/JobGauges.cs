@@ -160,7 +160,7 @@ public struct DragoonGauge
     [FieldOffset(0x0C)] public byte FirstmindsFocusCount;
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x18)]
+[StructLayout(LayoutKind.Explicit, Size = 0x10)]
 public struct NinjaGauge
 {
     [FieldOffset(0x08)] public int HutonTimer;

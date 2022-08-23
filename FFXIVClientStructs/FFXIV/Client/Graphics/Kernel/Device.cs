@@ -2,7 +2,9 @@
 
 // Client::Graphics::Kernel::Device
 //   Client::Graphics::Singleton
-[StructLayout(LayoutKind.Explicit, Size = 0x220)]
+
+// Client::Graphics::Kernel::DeviceDX11
+[StructLayout(LayoutKind.Explicit, Size = 0x258)]
 public unsafe partial struct Device
 {
     [FieldOffset(0x8)] public void* ContextArray; // Client::Graphics::Kernel::Context array

@@ -2,7 +2,7 @@
 
 // Component::GUI::AtkModule
 //   Component::GUI::AtkModuleInterface
-[StructLayout(LayoutKind.Explicit, Size = 0x8218)]
+[StructLayout(LayoutKind.Explicit, Size = 0x8228)]
 public unsafe partial struct AtkModule
 {
     [FieldOffset(0x0)] public void* vtbl;

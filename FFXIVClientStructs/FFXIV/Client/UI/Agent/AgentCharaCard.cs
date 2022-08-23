@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 //   Client::UI::Agent::AgentInterface
 //     Component::GUI::AtkModuleInterface::AtkEventInterface
 [Agent(AgentId.CharaCard)]
-[StructLayout(LayoutKind.Explicit, Size = 0x38)]
+[StructLayout(LayoutKind.Explicit, Size = 0x920)]
 public unsafe partial struct AgentCharaCard
 {
     public static AgentCharaCard* Instance() => (AgentCharaCard*)Framework.Instance()->GetUiModule()->GetAgentModule()->GetAgentByInternalId(AgentId.CharaCard);

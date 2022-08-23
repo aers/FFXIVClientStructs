@@ -17,7 +17,7 @@ public enum TextureFormat : uint
 
 // size = 0xA8
 // ctor E8 ? ? ? ? 48 8B F8 48 85 C0 74 23 44 8B 43 40 
-[StructLayout(LayoutKind.Explicit, Size = 0xA8)]
+[StructLayout(LayoutKind.Explicit, Size = 0xB0)]
 public unsafe struct Texture
 {
     [FieldOffset(0x00)] public void* vtbl;

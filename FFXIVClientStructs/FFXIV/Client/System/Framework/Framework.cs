@@ -8,9 +8,9 @@ using FFXIVClientStructs.FFXIV.Component.Exd;
 namespace FFXIVClientStructs.FFXIV.Client.System.Framework;
 // Client::System::Framework::Framework
 
-// size=0x35B8
+// size=0x35C8
 // ctor E8 ? ? ? ? 48 8B C8 48 89 05 ? ? ? ? EB 0A 48 8B CE 
-[StructLayout(LayoutKind.Explicit, Size = 0x35B8)]
+[StructLayout(LayoutKind.Explicit, Size = 0x35C8)]
 public unsafe partial struct Framework
 {
     [FieldOffset(0x10)] public SystemConfig SystemConfig;

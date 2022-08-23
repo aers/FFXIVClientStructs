@@ -7,7 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 // Client::UI::RaptureAtkModule
 //   Component::GUI::AtkModule
 //     Component::GUI::AtkModuleInterface
-[StructLayout(LayoutKind.Explicit, Size = 0x281A0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x28770)]
 public partial struct RaptureAtkModule
 {
     [FieldOffset(0x0)] public AtkModule AtkModule;

@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 // Client::UI::Misc::ConfigModule
 // ctor E8 ?? ?? ?? ?? 48 8B 97 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 4C 8B CF
 
-[StructLayout(LayoutKind.Explicit, Size = 0xD948)]
+[StructLayout(LayoutKind.Explicit, Size = 0xD9E8)]
 public unsafe partial struct ConfigModule
 {
     public const int ConfigOptionCount = 683;
