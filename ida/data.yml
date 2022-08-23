@@ -444,13 +444,13 @@ classes:
       - ea: 0x14207F078
         pointer: True
     funcs:
-#fail       0x140B906F0: IsSubmarineExplorationUnlocked # static
-#fail       0x140B90730: IsSubmarineExplorationUnlocked2 # static
-#fail       0x140B90790: GetSubmarineSurveyDuration # (unsigned __int8 point, __int16 speed) -> SurveyDuration (return is time in seconds)
-#fail       0x140B91E00: GetSubmarineVoyageDistance # (unsigned __int8 point, unsigned __int8 speed) -> VoyageDistance (return is integer)
-#fail       0x140B91C60: GetSubmarineVoyageTime # (unsigned __int8 pointA, unsigned __int8 pointB, __int16 speed) -> VoyageTime (return is time in seconds)
-#fail       0x140B84540: GetAirshipVoyageTimeAndDistance # (unsigned __int8 pointA, unsigned __int8 pointB, __int16 speed, _DWORD *voyageTime, int *voyageDistance)
-#fail       0x140B84660: GetAirshipSurveyDuration # (unsigned __int8 point, __int16 speed) -> SurveyDuration (return is time in seconds)
+      0x140C5CBB0: IsSubmarineExplorationUnlocked # static
+      0x140C5CBF0: IsSubmarineExplorationUnlocked2 # static
+      0x140C5CC50: GetSubmarineSurveyDuration # (unsigned __int8 point, __int16 speed) -> SurveyDuration (return is time in seconds)
+      0x140C5E2C0: GetSubmarineVoyageDistance # (unsigned __int8 point, unsigned __int8 speed) -> VoyageDistance (return is integer)
+      0x140C5E120: GetSubmarineVoyageTime # (unsigned __int8 pointA, unsigned __int8 pointB, __int16 speed) -> VoyageTime (return is time in seconds)
+      0x140C50790: GetAirshipVoyageTimeAndDistance # (unsigned __int8 pointA, unsigned __int8 pointB, __int16 speed, _DWORD *voyageTime, int *voyageDistance)
+      0x140C508B0: GetAirshipSurveyDuration # (unsigned __int8 point, __int16 speed) -> SurveyDuration (return is time in seconds)
   InventoryContainer:
     funcs:
       0x1406E9010: GetInventorySlot  # (this, slotIndex)
@@ -556,7 +556,7 @@ classes:
       0x14096EC60: ctor
   Client::Game::UI::Revive:
     vtbls:
-#fail       - ea: 0x1418787C0
+      - ea: 0x14192C7B0
         base: Component::GUI::AtkModuleInterface::AtkEventInterface
   Client::Game::UI::Buddy:
     instances:
@@ -810,7 +810,7 @@ classes:
       0x1400941F0: TaskDraw2DBegin
       0x140094230: TaskUpdateInputDevice
       0x140094270: TaskUpdateInputUI
-#fail       0x140094500: TaskRenderManagerUpdate
+      0x140094650: TaskRenderManagerUpdate
       0x140094670: TaskRenderManagerRender
       0x140094700: TaskUpdateBonePhysics
       0x140094760: TaskUpdateLayoutWorld
@@ -1081,7 +1081,7 @@ classes:
       - ea: 0x14188ED28
   Client::UI::Info::InfoProxyPageInterface:
     vtbls:
-#fail       - ea: 0x1417DE650
+      - ea: 0x14188ED88
         base: Client::UI::Info::InfoProxyInterface
   Common::Configuration::ConfigBase::ChangeEventInterface:
     vtbls:
@@ -1289,7 +1289,7 @@ classes:
         base: Application::Network::PacketReceiverCallbackInterface
       - ea: 0x1418AAB88
         base: Client::Network::Protocol::Zone::PacketReceiverCallbackInterface
-#fail       - ea: 0x1417FA3E0
+      - ea: 0x1418AAB98
         base: Client::Network::Protocol::Chat::PacketReceiverCallbackInterface
   Client::UI::Agent::AgentInterface:
     vtbls:
@@ -1343,7 +1343,7 @@ classes:
       0x14021EE60: SetupButtonsForCharacterTarget
       0x14021F6E0: SetupButtonsForGameObjectTarget # gameobjects that arent characters
       0x1402206C0: AddMenuItem2 # (this, uint textId, AtkEventInterface* handler, long handlerParam, bool disabled, bool submenu)
-#fail       0x1402198B0: AddMenuItem # (this, char* text, AtkEventInterface* handler, long handlerParam, bool disabled, bool submenu)
+      0x140220730: AddMenuItem # (this, char* text, AtkEventInterface* handler, long handlerParam, bool disabled, bool submenu)
       0x140220B70: IsAllowedToOpenGameObjectTarget
       0x140220BD0: IsAllowedToOpenCharacterTarget
       0x1402224C0: AddContextMenuItem2 # (this, int eventId, uint textId, bool disabled, bool submenu)
