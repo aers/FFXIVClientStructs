@@ -27,7 +27,7 @@ public unsafe partial struct AgentRecipeNote
     public void OpenRecipeByRecipeId(uint recipeID)
         => this.OpenRecipeByRecipeIdInternal(recipeID + 0x10_000);
 
-    [MemberFunction("E8 ?? ?? ?? ?? EB 7A 48 83 F8 06")]
+    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 83 F8 06")]
     public partial void OpenRecipeByItemId(uint itemID);
 
     [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 20 83 B9 ?? ?? ?? ?? ?? 8B FA 48 8B D9 0F 85 ?? ?? ?? ??")]

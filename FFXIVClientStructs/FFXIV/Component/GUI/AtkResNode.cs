@@ -106,7 +106,7 @@ public unsafe partial struct AtkResNode
     [MemberFunction("E9 ? ? ? ? 33 C0 48 83 C4 20 5B C3 66 90")]
     public partial void Ctor();
 
-    [MemberFunction("E8 ? ? ? ? 8B 57 6C")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8B 54 FB 04")]
     public partial AtkImageNode* GetAsAtkImageNode();
 
     [MemberFunction("E8 ?? ?? ?? ?? 44 8B 97")]
