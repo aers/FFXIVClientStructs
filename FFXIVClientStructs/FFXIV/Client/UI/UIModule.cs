@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 // Client::UI::UIModule
 //   Client::UI::UIModuleInterface
-[StructLayout(LayoutKind.Explicit, Size = 0xE4780)]
+[StructLayout(LayoutKind.Explicit, Size = 0xE9F30)]
 public unsafe partial struct UIModule
 {
     [FieldOffset(0x0)] public void* vtbl;
@@ -103,82 +103,82 @@ public unsafe partial struct UIModule
     [VirtualFunction(36)]
     public partial AgentModule* GetAgentModule();
 
-    [VirtualFunction(37)]
+    [VirtualFunction(38)]
     public partial UI3DModule* GetUI3DModule();
 
-    [VirtualFunction(56)]
+    [VirtualFunction(57)]
     public partial RetainerCommentModule* GetRetainerCommentModule();
 
-    [VirtualFunction(60)]
+    [VirtualFunction(63)]
     public partial void* GetUIInputData();
 
-    [VirtualFunction(61)]
+    [VirtualFunction(64)]
     public partial void* GetUIInputModule();
 
-    [VirtualFunction(63)]
+    [VirtualFunction(66)]
     public partial void* GetLogFilterConfig();
 
-    [VirtualFunction(147)]
+    [VirtualFunction(150)]
     public partial void ShowGoldSaucerReward(byte type, uint mgp, uint rewardItemId, uint rewardItemCount);
 
-    [VirtualFunction(148)]
+    [VirtualFunction(151)]
     public partial void HideGoldSaucerReward();
 
-    [VirtualFunction(149)]
+    [VirtualFunction(152)]
     public partial void ShowTextRelicAtma(uint itemId);
 
-    [VirtualFunction(156)]
+    [VirtualFunction(159)]
     public partial void ShowHousingHarvest(uint itemId, int amount, uint image = 0);
 
-    [VirtualFunction(160)]
+    [VirtualFunction(163)]
     public partial void ShowImage(uint imageId, bool useLocalePath = false, int displayType = 0, bool playSound = false);
 
-    [VirtualFunction(161)]
+    [VirtualFunction(164)]
     public partial void ShowText(int position, string text, uint iconOrCheck1 = 0, bool playSound = true, uint iconOrCheck2 = 0, bool alsoPlaySound = true);
 
-    [VirtualFunction(162)]
+    [VirtualFunction(165)]
     public partial void ShowTextChain(int chain, int hqChain = 0);
 
-    [VirtualFunction(163)]
+    [VirtualFunction(166)]
     public partial void ShowAreaText(string text, int layer = 0, bool isTop = true, bool isFast = false, uint logMessageId = 0);
 
-    [VirtualFunction(164)]
+    [VirtualFunction(167)]
     public partial void ShowPoisonText(string text, int layer = 0);
 
-    [VirtualFunction(165)]
+    [VirtualFunction(168)]
     public partial void ShowErrorText(string text, bool forceVisible = true);
 
-    [VirtualFunction(166)]
+    [VirtualFunction(169)]
     public partial void ShowTextClassChange(uint classJobId);
 
-    [VirtualFunction(167)]
+    [VirtualFunction(170)]
     public partial void ShowGetAction(ActionType actionType, uint actionId);
 
-    [VirtualFunction(168)]
+    [VirtualFunction(171)]
     public partial void ShowLocationTitle(int territoryId, bool zoomAnim, bool restartAnim, int* language /*-1 = client lang*/);
 
-    [VirtualFunction(172)]
+    [VirtualFunction(175)]
     public partial void ShowGrandCompany1(uint gc, uint gcRank, bool playSound = true);
 
-    [VirtualFunction(175)]
+    [VirtualFunction(178)]
     public partial void ShowStreak(int streak, int streakType);
 
-    [VirtualFunction(176)]
+    [VirtualFunction(179)]
     public partial void ShowAddonKillStreakForManeuvers(int streak, int streakType);
 
-    [VirtualFunction(177)]
+    [VirtualFunction(180)]
     public partial void ShowBalloonMessage(float* worldPosition, byte pz, uint textImage); //121501 -> Nice Shot!
 
-    [VirtualFunction(178)]
+    [VirtualFunction(181)]
     public partial void ShowBattleTalk(string name, string text, float duration, byte style);
 
-    [VirtualFunction(179)]
+    [VirtualFunction(182)]
     public partial void ShowBattleTalkImage(string name, string text, float duration, uint image, byte style);
 
-    [VirtualFunction(181)]
+    [VirtualFunction(184)]
     public partial void ShowBattleTalkSound(string name, string text, float duration, int sound, byte style);
 
-    [VirtualFunction(186)]
+    [VirtualFunction(189)]
     public partial void ExecuteMainCommand(uint command);
 
     [MemberFunction("E8 ?? ?? ?? ?? 4D 39 BE", IsStatic = true)]
