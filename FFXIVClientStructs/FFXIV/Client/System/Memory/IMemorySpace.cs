@@ -21,7 +21,7 @@ public unsafe partial struct IMemorySpace
     [MemberFunction("E8 ? ? ? ? 4C 8B 4C 24 ? 4C 8B C0", IsStatic = true)]
     public static partial IMemorySpace* GetDefaultSpace();
 
-    [MemberFunction("E8 ? ? ? ? 8D 53 47 48 8B C8", IsStatic = true)]
+    [MemberFunction("E8 ?? ?? ?? ?? 8D 57 47", IsStatic = true)]
     public static partial IMemorySpace* GetApricotSpace();
 
     [MemberFunction("E8 ? ? ? ? 48 89 44 24 ? E8 ? ? ? ? 48 89 44 24 ? E8 ? ? ? ? 48 89 44 24 ? E8 ? ? ? ? 33 ED",

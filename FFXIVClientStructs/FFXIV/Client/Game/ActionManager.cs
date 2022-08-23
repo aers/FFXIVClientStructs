@@ -53,7 +53,7 @@ public unsafe partial struct ActionManager
     [MemberFunction("E8 ?? ?? ?? ?? 8B D6 41 8B CF", IsStatic = true)]
     public static partial int GetAdjustedRecastTime(ActionType actionType, uint actionID, byte a3 = 1);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 33 D2 49 8B CE 66 44 0F 6E C0", IsStatic = true)]
+    [MemberFunction("E8 ?? ?? ?? ?? 85 C0 0F 84 ?? ?? ?? ?? 33 C9", IsStatic = true)]
     public static partial int GetAdjustedCastTime(ActionType actionType, uint actionID, byte a3 = 1, byte* a4 = null);
 
     [MemberFunction("E8 ?? ?? ?? ?? 33 DB 8B C8", IsStatic = true)]

@@ -188,7 +188,7 @@ public unsafe partial struct AtkResNode
     [MemberFunction("E8 ?? ?? ?? ?? 66 3B C3 74 13")]
     public partial ushort GetPriority();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8D 45 F0")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8D 56 02 49 8B CD")]
     public partial void SetPriority(ushort priority);
 
     [MemberFunction("E8 ? ? ? ? FF C6 3B F5 72 E5 BA ? ? ? ?")]

@@ -85,7 +85,7 @@ public unsafe partial struct AgentContext
     public partial void AddContextMenuItem(int eventId, byte* text, bool disabled = false, bool submenu = false,
         bool copyText = true);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 49 3B F6 74")]
+    [MemberFunction("E8 ?? ?? ?? ?? 4D 85 F6 74 3F ")]
     public partial void AddContextMenuItem2(int eventId, uint addonTextId, bool disabled = false, bool submenu = false,
         bool copyText = true);
 
