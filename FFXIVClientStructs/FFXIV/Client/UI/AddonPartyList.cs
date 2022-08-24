@@ -9,37 +9,37 @@ public unsafe struct AddonPartyList
 {
     [FieldOffset(0x000)] public AtkUnitBase AtkUnitBase;
     [FieldOffset(0x220)] public PartyMembers PartyMember; // 8 PartyListMember
-    [FieldOffset(0xA20)] public TrustMembers TrustMember; // 7 PartyListMember
-    [FieldOffset(0x1120)] public PartyListMemberStruct Chocobo;
-    [FieldOffset(0x1220)] public PartyListMemberStruct Pet;
+    [FieldOffset(0x9E0)] public TrustMembers TrustMember; // 7 PartyListMember
+    [FieldOffset(0x10A8)] public PartyListMemberStruct Chocobo;
+    [FieldOffset(0x11A0)] public PartyListMemberStruct Pet;
 
-    [FieldOffset(0x1320)] public fixed uint PartyClassJobIconId[8];
-    [FieldOffset(0x1340)] public fixed uint TrustClassJobIconId[7];
-    [FieldOffset(0x135C)] public uint ChocoboIconId;
-    [FieldOffset(0x1360)] public uint PetIconId;
+    [FieldOffset(0x1298)] public fixed uint PartyClassJobIconId[8];
+    [FieldOffset(0x12B8)] public fixed uint TrustClassJobIconId[7];
+    [FieldOffset(0x12D4)] public uint ChocoboIconId;
+    [FieldOffset(0x12D8)] public uint PetIconId;
 
-    [FieldOffset(0x13A8)] public fixed short Edited[17]; // 0X11 if edited? Need comfirm
+    [FieldOffset(0x1360)] public fixed short Edited[17]; // 0X11 if edited? Need comfirm
 
-    [FieldOffset(0x13D0)] public AtkNineGridNode* BackgroundNineGridNode;
-    [FieldOffset(0x13D8)] public AtkTextNode* PartyTypeTextNode; // Solo Light/Full Party
-    [FieldOffset(0x13E0)] public AtkResNode* LeaderMarkResNode;
-    [FieldOffset(0x13E8)] public AtkResNode* MpBarSpecialResNode;
-    [FieldOffset(0x13F0)] public AtkTextNode* MpBarSpecialTextNode;
+    [FieldOffset(0x1388)] public AtkNineGridNode* BackgroundNineGridNode;
+    [FieldOffset(0x1390)] public AtkTextNode* PartyTypeTextNode; // Solo Light/Full Party
+    [FieldOffset(0x1398)] public AtkResNode* LeaderMarkResNode;
+    [FieldOffset(0x13A0)] public AtkResNode* MpBarSpecialResNode;
+    [FieldOffset(0x13A8)] public AtkTextNode* MpBarSpecialTextNode;
 
-    [FieldOffset(0x13F8)] public int MemberCount;
-    [FieldOffset(0x13FC)] public int TrustCount;
-    [FieldOffset(0x1400)] public int EnmityLeaderIndex; // Starts from 0 (-1 if no leader)
-    [FieldOffset(0x1404)] public int HideWhenSolo;
+    [FieldOffset(0x13B0)] public int MemberCount;
+    [FieldOffset(0x13B4)] public int TrustCount;
+    [FieldOffset(0x13B8)] public int EnmityLeaderIndex; // Starts from 0 (-1 if no leader)
+    [FieldOffset(0x13BC)] public int HideWhenSolo;
 
-    [FieldOffset(0x1408)] public int HoveredIndex;
-    [FieldOffset(0x140C)] public int TargetedIndex;
+    [FieldOffset(0x13C0)] public int HoveredIndex;
+    [FieldOffset(0x13C4)] public int TargetedIndex;
 
-    [FieldOffset(0x1410)] public int Unknown1410;
-    [FieldOffset(0x1414)] public int Unknown1414;
-    [FieldOffset(0x1418)] public byte Unknown1418;
+    [FieldOffset(0x13C8)] public int Unknown1410;
+    [FieldOffset(0x13CC)] public int Unknown1414;
+    [FieldOffset(0x13D0)] public byte Unknown1418;
 
-    [FieldOffset(0x1419)] public byte PetCount; // or PetSummoned?
-    [FieldOffset(0x141A)] public byte ChocoboCount; // or ChocoboSummoned?
+    [FieldOffset(0x13D1)] public byte PetCount; // or PetSummoned?
+    [FieldOffset(0x13D2)] public byte ChocoboCount; // or ChocoboSummoned?
 
     [StructLayout(LayoutKind.Explicit, Size = PartyListMemberStruct.Size * 8)]
     public struct PartyMembers
@@ -134,7 +134,7 @@ public unsafe struct AddonPartyList
     [StructLayout(LayoutKind.Explicit, Size = Size)]
     public struct PartyListMemberStruct
     {
-        public const int Size = 0x100;
+        public const int Size = 0xF8;
 
         [FieldOffset(0x00)] public StatusIcons StatusIcon;
         [FieldOffset(0x50)] public AtkComponentBase* PartyMemberComponent;
@@ -150,15 +150,13 @@ public unsafe struct AddonPartyList
         [FieldOffset(0xA0)] public AtkImageNode* ClassJobIcon;
         [FieldOffset(0xA8)] public void* UnknownA8;
         [FieldOffset(0xB0)] public AtkImageNode* UnknownImageB0;
-        [FieldOffset(0xB8)] public void* UnknownB8;
-        [FieldOffset(0xC0)] public AtkComponentBase* HPGaugeComponent;
-        [FieldOffset(0xC8)] public AtkComponentGaugeBar* HPGaugeBar;
-        [FieldOffset(0xD0)] public AtkComponentGaugeBar* MPGaugeBar;
-        [FieldOffset(0xD8)] public AtkResNode* TargetGlowContainer;
-        [FieldOffset(0xE0)] public AtkNineGridNode* ClickFlash;
-        [FieldOffset(0xE8)] public AtkNineGridNode* TargetGlow;
-        [FieldOffset(0xF0)] public AtkCollisionNode* CollisionNode;
-        [FieldOffset(0xF8)] public byte EmnityByte; //01 or 02 or FF 
+        [FieldOffset(0xB8)] public AtkComponentBase* HPGaugeComponent;
+        [FieldOffset(0xC0)] public AtkComponentGaugeBar* HPGaugeBar;
+        [FieldOffset(0xC8)] public AtkComponentGaugeBar* MPGaugeBar;
+        [FieldOffset(0xD0)] public AtkResNode* TargetGlowContainer;
+        [FieldOffset(0xD8)] public AtkNineGridNode* ClickFlash;
+        [FieldOffset(0xE0)] public AtkNineGridNode* TargetGlow;
+        [FieldOffset(0xE8)] public byte EmnityByte; //01 or 02 or FF 
 
         [StructLayout(LayoutKind.Explicit, Size = 0x50)]
         public struct StatusIcons
