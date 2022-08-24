@@ -77,23 +77,23 @@ public unsafe struct UI3DModule
     }
 
     [FieldOffset(0x10)] public UIModule* UIModule;
-    [FieldOffset(0x20)] public fixed byte ObjectInfoArray[426 * 0x60]; // array of Client::UI::UI3DModule::ObjectInfo
-    [FieldOffset(0x9FE0)] public fixed byte SortedObjectInfoPointerArray[426 * 0x8]; // array of Client::UI::UI3DModule::ObjectInfo*, distance sorted(?)
-    [FieldOffset(0xAD30)] public int SortedObjectInfoCount;
-    [FieldOffset(0xAD38)] public fixed byte NamePlateObjectInfoPointerArray[50 * 0x8]; // array of Client::UI::UI3DModule::ObjectInfo* for current nameplates
-    [FieldOffset(0xAEC8)] public int NamePlateObjectInfoCount;
+    [FieldOffset(0x20)] public fixed byte ObjectInfoArray[596 * 0x60]; // array of Client::UI::UI3DModule::ObjectInfo
+    [FieldOffset(0xDFA0)] public fixed byte SortedObjectInfoPointerArray[596 * 0x8]; // array of Client::UI::UI3DModule::ObjectInfo*, distance sorted(?)
+    [FieldOffset(0xF240)] public int SortedObjectInfoCount;
+    [FieldOffset(0xF248)] public fixed byte NamePlateObjectInfoPointerArray[50 * 0x8]; // array of Client::UI::UI3DModule::ObjectInfo* for current nameplates
+    [FieldOffset(0xF3D8)] public int NamePlateObjectInfoCount;
     // [FieldOffset(0xAED0)] public Bit NamePlateBits; // Client::System::Data::Bit
-    [FieldOffset(0xAEF0)] public fixed byte NamePlateObjectIdList[50 * 0x8]; // array of GameObjectID (see GameObject.cs), ObjectId = E0000000 means it is empty, matches the order of nameplate addon objects
-    [FieldOffset(0xB080)] public fixed byte NamePlateObjectIdList_2[50 * 0x8]; // seems to contain same data as above, but may be for working data
-    [FieldOffset(0xB210)] public fixed byte CharacterObjectInfoPointerArray[50 * 0x8]; // array of Client::UI::UI3DModule::ObjectInfo* for Characters on screen (players, attackable NPCs, etc)
-    [FieldOffset(0xB3A0)] public int CharacterObjectInfoCount;
-    [FieldOffset(0xB3A8)] public fixed byte MapObjectInfoPointerArray[68 * 0x8]; // array of Client::UI::UI3DModule::ObjectInfo* for objects displayed on minimap - summoning bells, mailboxes, etc
-    [FieldOffset(0xB5C8)] public int MapObjectInfoCount;
-    [FieldOffset(0xB5D0)] public ObjectInfo* TargetObjectInfo;
-    [FieldOffset(0xB5D8)] public fixed byte MemberInfoArray[48 * 0x28]; // array of Client::UI::UI3DModule::MemberInfo, size = max alliance size
-    [FieldOffset(0xBD58)] public fixed byte MemberInfoPointerArray[48 * 0x8]; // array of Client::UI::UI3DModule::MemberInfo*
-    [FieldOffset(0xBED8)] public int MemberInfoCount;
-    [FieldOffset(0xBEE0)] public fixed byte UnkInfoArray[30 * 0x40];
-    [FieldOffset(0xC660)] public int UnkCount;
+    [FieldOffset(0xF400)] public fixed byte NamePlateObjectIdList[50 * 0x8]; // array of GameObjectID (see GameObject.cs), ObjectId = E0000000 means it is empty, matches the order of nameplate addon objects
+    [FieldOffset(0xF590)] public fixed byte NamePlateObjectIdList_2[50 * 0x8]; // seems to contain same data as above, but may be for working data
+    [FieldOffset(0xF720)] public fixed byte CharacterObjectInfoPointerArray[50 * 0x8]; // array of Client::UI::UI3DModule::ObjectInfo* for Characters on screen (players, attackable NPCs, etc)
+    [FieldOffset(0xF8B0)] public int CharacterObjectInfoCount;
+    [FieldOffset(0xF8B8)] public fixed byte MapObjectInfoPointerArray[68 * 0x8]; // array of Client::UI::UI3DModule::ObjectInfo* for objects displayed on minimap - summoning bells, mailboxes, etc
+    [FieldOffset(0xFAD8)] public int MapObjectInfoCount;
+    [FieldOffset(0xFAE0)] public ObjectInfo* TargetObjectInfo;
+    [FieldOffset(0xFAE8)] public fixed byte MemberInfoArray[48 * 0x28]; // array of Client::UI::UI3DModule::MemberInfo, size = max alliance size
+    [FieldOffset(0x10268)] public fixed byte MemberInfoPointerArray[48 * 0x8]; // array of Client::UI::UI3DModule::MemberInfo*
+    [FieldOffset(0x103E8)] public int MemberInfoCount;
+    [FieldOffset(0x103F0)] public fixed byte UnkInfoArray[30 * 0x40];
+    [FieldOffset(0x10B70)] public int UnkCount;
     // there's more after this
 }
