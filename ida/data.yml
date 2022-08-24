@@ -2980,13 +2980,13 @@ classes:
       0x14078BBA0: ctor
   Client::Game::Character::DrawDataContainer:
     vtbls:
-      - ea: 0x141839098
+      - ea: 0x1418E9AA8
     funcs:
-      0x14118d830: ctor
+      0x14121D8C0: ctor
       0x14121ef20: LoadWeapon
   Client::Game::Character::DrawData:
     vtbls:
-      - ea: 1418ce808
+      - ea: 0x1418ce808
     funcs:
       0x140493bd0: ctor
   Component::Shell::ShellCommandInterface:
@@ -5350,8 +5350,8 @@ classes:
       - ea: 0x14200EDC8
         name: UISpace
       - ea: 0x14200EDD0
-      - ea: 0x14200EDD8
         name: FileSpace
+      - ea: 0x14200EDD8
         name: SoundSpace
     vtbls:
       - ea: 0x14187BEE0
