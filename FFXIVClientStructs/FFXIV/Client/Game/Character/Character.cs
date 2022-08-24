@@ -38,12 +38,12 @@ public unsafe partial struct Character
 
     #endregion
 
-    [FieldOffset(0xC60)] public uint PlayerTargetObjectID;
-
     [FieldOffset(0x6D0)] public DrawDataContainer DrawData;
 
     [FieldOffset(0x818)] public fixed byte EquipSlotData[4 * 10];
     [FieldOffset(0x840)] public fixed byte CustomizeData[0x1A];
+
+    [FieldOffset(0xC60)] public uint PlayerTargetObjectID;
 
     [FieldOffset(0x1770)] public Balloon Balloon;
 
@@ -53,7 +53,7 @@ public unsafe partial struct Character
 
     [FieldOffset(0x1A30)] public Companion* CompanionObject; // minion
     [FieldOffset(0x1A48)] public fixed byte FreeCompanyTag[6];
-    [FieldOffset(0x1A50)] public uint TargetObjectID;
+    [FieldOffset(0x1A60)] public uint TargetObjectID;
 
     [FieldOffset(0x1AAC)] public uint NameID;
 
