@@ -31,7 +31,10 @@ public unsafe partial struct UIState
     
     // No idea why this isn't its own thing, but I can't find any trace of any member functions or anything worthy of
     // making this its own struct. 
-    [FieldOffset(0x169C2)] public fixed byte UnlockedCompanionsBitmask[0x3A]; //??
+    // Ref: g_Client::Game::UI::UnlockedCompanionsMask
+    //      direct ref: 48 8D 0D ?? ?? ?? ?? 0F B6 04 08 84 D0 75 10 B8 ?? ?? ?? ?? 48 8B 5C 24
+    //      relative to uistate: E8 ?? ?? ?? ?? 84 C0 75 A6 32 C0 (case for 0x355)
+    [FieldOffset(0x16A62)] public fixed byte UnlockedCompanionsBitmask[0x3A];
     
     [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B 8B ?? ?? ?? ?? 48 8B 01")]
     public static partial UIState* Instance();
