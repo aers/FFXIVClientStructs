@@ -49,10 +49,13 @@ public unsafe struct AgentMJIPouch {
 [StructLayout(LayoutKind.Explicit, Size = 0x80)]
 public struct PouchInventoryItem {
 	[FieldOffset(0x00)] public uint ItemId;
-
+	[FieldOffset(0x04)] public uint IconId;
 	[FieldOffset(0x08)] public int SlotIndex;
 	[FieldOffset(0x0C)] public int StackSize;
 	[FieldOffset(0x10)] public int MaxStackSize;
+	[FieldOffset(0x14)] public byte InventoryIndex;
+	[FieldOffset(0x15)] public byte ItemCategory;
+	[FieldOffset(0x16)] public byte Undiscovered;
 	
 	[FieldOffset(0x18)] public Utf8String Name;
 }
