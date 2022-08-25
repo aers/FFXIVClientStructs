@@ -163,9 +163,9 @@ public struct DragoonGauge
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
 public struct NinjaGauge
 {
-    [FieldOffset(0x08)] public int HutonTimer;
-    [FieldOffset(0x0C)] public byte Ninki;
-    [FieldOffset(0x0D)] public byte HutonManualCasts;
+    [FieldOffset(0x08)] public ushort HutonTimer;
+    [FieldOffset(0x0A)] public byte Ninki;
+    [FieldOffset(0x0B)] public byte HutonManualCasts;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
