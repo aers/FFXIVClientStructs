@@ -4344,6 +4344,26 @@ classes:
     funcs:
       0x140bFA410: OpenCharaCardByContentId
       0x140BFA490: OpenCharaCardForObject
+  Client::UI::Agent::AgentMJIHud:
+    vtbls:
+      - ea : 0x141939318
+        base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentMJIPouch:
+    vtbls:
+      - ea : 0x141939420
+        base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentMJIGatheringNoteBook:
+    vtbls:
+      - ea : 0x141939588
+        base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentMJIRecipeNoteBook:
+    vtbls:
+      - ea : 0x141939600
+        base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentMJIBuilding:
+    vtbls:
+      - ea : 0x1419396F0
+        base: Client::UI::Agent::AgentInterface
   Client::Game::Event::EventHandler:
     vtbls:
       - ea: 0x141906448
