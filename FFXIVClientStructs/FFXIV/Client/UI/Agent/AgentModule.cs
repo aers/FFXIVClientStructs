@@ -83,6 +83,11 @@ public unsafe partial struct AgentModule
     {
         return (AgentMonsterNote*)GetAgentByInternalId(AgentId.MonsterNote);
     }
+
+    public AgentMJIPouch* GetAgentMJIPouch()
+    {
+        return (AgentMJIPouch*)GetAgentByInternalId(AgentId.MJIPouch);
+    }
 }
 
 public enum AgentId : uint {
