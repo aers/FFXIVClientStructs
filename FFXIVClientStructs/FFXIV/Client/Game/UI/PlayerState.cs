@@ -39,9 +39,9 @@ public unsafe partial struct PlayerState
 
     [FieldOffset(0x2A0)] public uint BaseRestedExperience;
 
-    [FieldOffset(0x458)] public short PlayerCommendations;
+    [FieldOffset(0x45C)] public short PlayerCommendations;
 
-    [FieldOffset(0x70A)] public fixed ushort DesynthesisLevels[8];
+    [FieldOffset(0x712)] public fixed ushort DesynthesisLevels[8];
     
     [StaticAddress("48 8D 0D ?? ?? ?? ?? E9 ?? ?? ?? ?? CC 48 8B C1")]
     public static partial PlayerState* Instance();
