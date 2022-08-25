@@ -53,7 +53,7 @@ public unsafe partial struct Character
 
     [FieldOffset(0x1A30)] public Companion* CompanionObject; // minion
     [FieldOffset(0x1A48)] public fixed byte FreeCompanyTag[6];
-    [FieldOffset(0x1A60)] public uint TargetObjectID;
+    [FieldOffset(0x1A68)] public uint TargetObjectID;
 
     [FieldOffset(0x1AAC)] public uint NameID;
 
