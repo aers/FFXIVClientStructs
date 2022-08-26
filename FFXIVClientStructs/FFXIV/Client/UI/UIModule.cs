@@ -97,7 +97,7 @@ public unsafe partial struct UIModule
     [VirtualFunction(29)]
     public partial void* GetRaptureTeleportHistory();
     
-    [VirtualFunction(31)]
+    [VirtualFunction(32)]
     public partial RecommendEquipModule* GetRecommendEquipModule();
 
     [VirtualFunction(36)]
