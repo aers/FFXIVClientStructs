@@ -156,7 +156,7 @@ public unsafe struct AddonPartyList
         [FieldOffset(0xD0)] public AtkResNode* TargetGlowContainer;
         [FieldOffset(0xD8)] public AtkNineGridNode* ClickFlash;
         [FieldOffset(0xE0)] public AtkNineGridNode* TargetGlow;
-        [FieldOffset(0xE8)] public byte EmnityByte; //01 or 02 or FF 
+        [FieldOffset(0xF0)] public byte EmnityByte; //01 or 02 or FF 
 
         [StructLayout(LayoutKind.Explicit, Size = 0x50)]
         public struct StatusIcons
