@@ -96,7 +96,10 @@ public unsafe partial struct lua_State
 
     [MemberFunction("E8 ?? ?? ?? ?? 85 C0 74 ?? 4C 8B C5")]
     public partial int lua_getmetatable(int idx);
-    
+
+    [MemberFunction("E8 ?? ?? ?? ?? FF C7 3B FE 7E")]
+    public partial void lua_call(int nargs, int nresults);
+
     public void lua_setglobal(string s)
     {
         lua_setfield(-10002, s);
