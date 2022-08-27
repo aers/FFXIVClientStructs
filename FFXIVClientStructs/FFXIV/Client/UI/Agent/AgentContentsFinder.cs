@@ -1,7 +1,5 @@
-﻿using FFXIVClientStructs.FFXIV.Client.Game.Object;
-using FFXIVClientStructs.FFXIV.Client.System.Framework;
+﻿using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Component.GUI;
-using System;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
@@ -17,8 +15,8 @@ public unsafe partial struct AgentContentsFinder
     [FieldOffset(0x0)] public AgentInterface AgentInterface;
 
     [MemberFunction("48 89 6C 24 ?? 48 89 74 24 ?? 57 48 81 EC ?? ?? ?? ?? 48 8B F9 41 0F B6 E8")]
-    public partial IntPtr OpenRegularDuty(uint contentsFinderCondition, byte a2 = 0);
+    public partial void* OpenRegularDuty(uint contentsFinderCondition, byte a2 = 0);
 
     [MemberFunction("E9 ?? ?? ?? ?? 8B 93 ?? ?? ?? ?? 48 83 C4 20")]
-    public partial IntPtr OpenRouletteDuty(byte roulette, byte a2 = 0);
+    public partial void* OpenRouletteDuty(byte roulette, byte a2 = 0);
 }
