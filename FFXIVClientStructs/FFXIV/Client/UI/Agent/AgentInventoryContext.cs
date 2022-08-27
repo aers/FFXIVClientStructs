@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using FFXIVClientStructs.FFXIV.Client.Game;
 using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Component.GUI;
@@ -73,6 +73,9 @@ public unsafe partial struct AgentInventoryContext
     public void OpenForItemSlot(InventoryType inventory, int slot, uint addonId) {
         OpenForItemSlot((uint)inventory, slot, 0, addonId);
     }
+
+    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 41 B0 01 BA 13 00 00 00")]
+    public partial long UseItem(uint itemId, uint inventoryType = 9999, uint itemSlot = 0, short a5 = 0);
 
     public bool IsContextItemDisabled(int index)
     {
