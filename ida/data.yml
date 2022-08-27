@@ -4244,6 +4244,8 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140A08000: ctor
+      0x140A08940: OpenRegularDuty
+      0x140A08B20: OpenRouletteDuty
   Client::UI::Agent::AgentMap::MapMarkerStructSearchName:
     vtbls:
       - ea: 0x141930E80
