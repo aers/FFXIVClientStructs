@@ -24,6 +24,16 @@ public enum TextFlags2
     Ellipsis = 0x04
 }
 
+public enum FontType : byte
+{
+    Axis = 0x0,
+    MiedingerMed = 0x1,
+    Miedinger = 0x2,
+    TrumpGothic = 0x3,
+    Jupiter = 0x4,
+    JupiterLarge = 0x5,
+}
+
 // Component::GUI::AtkTextNode
 //   Component::GUI::AtkResNode
 //     Component::GUI::AtkEventTarget
@@ -78,7 +88,13 @@ public unsafe partial struct AtkTextNode
     [MemberFunction("E8 ? ? ? ? 0F B7 6D 08")]
     public partial void GetTextDrawSize(ushort* outWidth, ushort* outHeight, byte* text = null, int start = 0,
         int end = -1, bool considerScale = false);
+    
+    [MemberFunction("E8 ?? ?? ?? ?? 49 8B 0E 48 8B 9E")]
+    public partial void SetAlignment(AlignmentType alignmentType);
 
+    [MemberFunction("E8 ?? ?? ?? ?? 45 33 C0 B2 18")]
+    public partial void SetFont(FontType fontType);
+    
     public void SetText(Span<byte> span) {
         fixed (byte* ptr = span) SetText(ptr);
     }

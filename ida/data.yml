@@ -2315,6 +2315,8 @@ classes:
       0x14050B6B0: ToggleFixedFontResolution  # this stops text from auto scaling, they turned this on for nameplates in 5.5
       0x14050C420: ToggleFontCache
       0x14050C610: ResizeNodeForCurrentText
+      0x14050AEC0: SetFont
+      0x14050A000: SetAlignment
       0x14057B430: ctor
   Component::GUI::AtkNineGridNode:
     vtbls:
