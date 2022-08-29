@@ -45,7 +45,7 @@ public unsafe partial struct Utf8String : ICreatable
     [MemberFunction("E8 ? ? ? ? 44 2B F7")]
     public partial void Ctor();
 
-    [MemberFunction("E8 ? ? ? ? B0 6E")]
+    [MemberFunction("E8 ?? ?? ?? ?? 49 83 6E")]
     public partial void Dtor();
 
     [MemberFunction("E8 ? ? ? ? 89 6F 68")]
