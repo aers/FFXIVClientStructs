@@ -9,10 +9,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 [StructLayout(LayoutKind.Explicit, Size = 0xD9E8)]
 public unsafe partial struct ConfigModule
 {
-    public const int ConfigOptionCount = 683;
+    public const int ConfigOptionCount = 685;
     [FieldOffset(0x28)] public UIModule* UIModule;
     [FieldOffset(0x2C8)] private fixed byte options[Option.Size * ConfigOptionCount];
-    [FieldOffset(0x5838)] private fixed byte values[0x10 * ConfigOptionCount];
+    [FieldOffset(0x5878)] private fixed byte values[0x10 * ConfigOptionCount];
 
     public static ConfigModule* Instance()
     {
