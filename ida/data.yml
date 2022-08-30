@@ -454,6 +454,16 @@ classes:
   InventoryContainer:
     funcs:
       0x1406E8EA0: GetInventorySlot  # (this, slotIndex)
+  Client::Game::IslandSanctuary::IslandSanctuaryManager:
+    instances:
+      - ea: 0x14208F210
+        pointer: True
+    funcs:
+      0x140C981A0: ctor
+      0x140C98390: dtor
+      0x140C95890: GetSingleton  # static
+      0x140C97510: LoadDemandResearchPacket
+      0x140C97970: IsRecipeUnlocked # (this, recipeId)
   Client::System::String::Utf8String:
     funcs:
       0x140059E60: ctor  # empty string ctor
