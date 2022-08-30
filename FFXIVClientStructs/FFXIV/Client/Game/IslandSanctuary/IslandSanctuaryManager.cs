@@ -46,7 +46,7 @@ public unsafe partial struct IslandSanctuaryManager {
     /// Retrieve an instance of IslandSanctuaryManager for consumption.
     /// </summary>
     /// <returns>Returns a pointer to the game's IslandSanctuaryManager instance.</returns>
-    [StaticAddress("E8 ?? ?? ?? ?? 8B 50 10", isPointer: true)]
+    [MemberFunction("E8 ?? ?? ?? ?? 8B 50 10", IsStatic = true)]
     public static partial IslandSanctuaryManager* Instance();
 
     /// <summary>
