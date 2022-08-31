@@ -372,6 +372,7 @@ public enum AgentId : uint {
     MJIHud = 399,  // Island Sanctuary
     MJIPouch = 400,
     MJIRecipeNoteBook = 401,
+	MJICraftSchedule = 402,
     MJIBuilding = 407,
     MJIGatheringNoteBook = 408
 }
