@@ -1,4 +1,4 @@
-﻿namespace FFXIVClientStructs.FFXIV.Client.Game.IslandSanctuary; 
+﻿namespace FFXIVClientStructs.FFXIV.Client.Game; 
 
 /// <summary>
 /// Manager struct (?) for Island Sanctuary (internally MJI).
