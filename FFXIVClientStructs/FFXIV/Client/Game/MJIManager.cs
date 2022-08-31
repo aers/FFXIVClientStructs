@@ -1,9 +1,25 @@
 ﻿namespace FFXIVClientStructs.FFXIV.Client.Game.IslandSanctuary; 
 
-// Everyone else seems to call these managers, guess I will too.
-// No idea how large this actually is...
+/// <summary>
+/// Manager struct (?) for Island Sanctuary (internally MJI).
+/// </summary>
 [StructLayout(LayoutKind.Explicit, Size = 0x328)]
-public unsafe partial struct IslandSanctuaryManager {
+public unsafe partial struct MJIManager {
+    public enum CraftworkSupply {
+        Nonexistent = 0,
+        Insufficient = 1,
+        Sufficient = 2,
+        Surplus = 3,
+        Overflowing = 4
+    }
+
+    public enum CraftworkDemandShift {
+        Skyrocketing = 0,
+        Increasing = 1,
+        NoChange = 2,  // called None in game, but that's confusing IMO.
+        Decreasing = 3,
+        Plummeting = 4
+    }
 
     /// <summary>
     /// Reports if the player is currently on the Island Sanctuary.
@@ -47,7 +63,7 @@ public unsafe partial struct IslandSanctuaryManager {
     /// </summary>
     /// <returns>Returns a pointer to the game's IslandSanctuaryManager instance.</returns>
     [MemberFunction("E8 ?? ?? ?? ?? 8B 50 10", IsStatic = true)]
-    public static partial IslandSanctuaryManager* Instance();
+    public static partial MJIManager* Instance();
 
     /// <summary>
     /// Check if a specific MJIRecipe is *unlocked*. Does not care if the item has been crafted.
