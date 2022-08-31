@@ -4367,6 +4367,10 @@ classes:
     vtbls:
       - ea : 0x1419494C0
         base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentMJICraftSchedule:
+    vtbls:
+      - ea : 0x1419495B0
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMJIGatheringNoteBook:
     vtbls:
       - ea : 0x141949628
