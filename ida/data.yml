@@ -464,6 +464,7 @@ classes:
       0x140C95890: GetSingleton  # static
       0x140C97510: LoadDemandResearchPacket
       0x140C97970: IsRecipeUnlocked # (this, recipeId)
+      0x140C979A0: IsPouchItemLocked # (this, pouchItemId)
   Client::System::String::Utf8String:
     funcs:
       0x140059E60: ctor  # empty string ctor
@@ -4367,6 +4368,10 @@ classes:
     vtbls:
       - ea : 0x1419494C0
         base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentMJIBuildingMove:
+    vtbls:
+      - ea: 0x141949538
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMJICraftSchedule:
     vtbls:
       - ea : 0x1419495B0
@@ -4379,9 +4384,41 @@ classes:
     vtbls:
       - ea : 0x1419496A0
         base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentMJICraftSales:
+    vtbls:
+      - ea: 0x141949718
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMJIBuilding:
     vtbls:
       - ea : 0x141949790
+        base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentMJIDisposeShop:
+    vtbls:
+      - ea: 0x141949808
+        base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentMJIAnimalManagement:
+    vtbls:
+      - ea: 0x141A0DC80
+        base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentMJIFarmManagement:
+    vtbls:
+      - ea: 0x141A0DCF8
+        base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentMJIEntrance:
+    vtbls:
+      - ea: 0x141A0DF08
+        base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentMJIGatheringHouse:
+    vtbls:
+      - ea: 0x141A0DD70
+        base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentMJIMinionManagement:
+    vtbls:
+      - ea: 0x141A0DE00
+        base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentMJIMinionNoteBook:
+    vtbls:
+      - ea: 0x141A0DE78
         base: Client::UI::Agent::AgentInterface
   Client::Game::Event::EventHandler:
     vtbls:

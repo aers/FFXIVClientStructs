@@ -29,6 +29,16 @@ public unsafe partial struct MJIManager {
     [FieldOffset(0x06)] public bool IsPlayerInSanctuary;
 
     /// <summary>
+    /// The current Sanctuary Rank of the player's island. UNCONFIRMED.
+    /// </summary>
+    [FieldOffset(0x29)] public byte CurrentRank;
+
+    /// <summary>
+    /// The XP earned for the current Sanctuary rank.
+    /// </summary>
+    [FieldOffset(0x2C)] public uint CurrentXP;
+
+    /// <summary>
     /// The current development level of the player's village on their island. Controls what building zones are
     /// available.
     /// </summary>
@@ -36,6 +46,15 @@ public unsafe partial struct MJIManager {
     /// Allowed building locations are part of the MJIBuildingPlace (+0x10) and MJILandmarkPlace (+0x10) Lumina sheets.
     /// </remarks>
     [FieldOffset(0x31)] public byte VillageDevelopmentLevel;
+
+    /// <summary>
+    /// An array of booleans representing if a specific item is (un)locked. Locked/unavailable items are set to true,
+    /// while those that are unlocked are false. This array is indexed by RowID from the MJIItemPouch table.
+    ///
+    /// An item appears to be unlocked upon being gathered or crafted for the first time.
+    /// <seealso cref="IsPouchItemUnlocked"/>
+    /// </summary>
+    [FieldOffset(0x3A)] public fixed bool LockedPouchItems[66];
 
     /// <summary>
     /// A reference to the current set of popularity scores given to craftworks on the player's island. The actual
@@ -72,6 +91,17 @@ public unsafe partial struct MJIManager {
     /// <returns>Returns true if the recipe can be crafted, false otherwise.</returns>
     [MemberFunction("0F B7 C2 80 E2 07")]
     public partial bool IsRecipeUnlocked(ushort recipeId);
+
+    /// <summary>
+    /// Check if a specific item in the Island Pouch is (un)locked.
+    ///
+    /// See <see cref="LockedPouchItems"/> for more information. This method simply looks a value up from that
+    /// array.
+    /// </summary>
+    /// <param name="itemId">The MJIItemPouch row ID to look up.</param>
+    /// <returns>Returns true if the item is locked and/or hidden to the player.</returns>
+    [MemberFunction("0F B7 C2 0F B6 44 08")]
+    public partial bool IsPouchItemLocked(ushort itemId);
 
     /// <summary>
     /// Return the Supply value for a specified craftwork.
