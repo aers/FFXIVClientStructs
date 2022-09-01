@@ -464,6 +464,7 @@ classes:
       0x140C95890: GetSingleton  # static
       0x140C97510: LoadDemandResearchPacket
       0x140C97970: IsRecipeUnlocked # (this, recipeId)
+      0x140C979A0: IsPouchItemLocked # (this, pouchItemId)
   Client::System::String::Utf8String:
     funcs:
       0x140059E60: ctor  # empty string ctor
