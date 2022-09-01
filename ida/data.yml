@@ -4413,6 +4413,10 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMJIMinionManagement:
     vtbls:
+      - ea: 0x141A0DE00
+        base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentMJIMinionNoteBook:
+    vtbls:
       - ea: 0x141A0DE78
         base: Client::UI::Agent::AgentInterface
   Client::Game::Event::EventHandler:

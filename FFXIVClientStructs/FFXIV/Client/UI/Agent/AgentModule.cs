@@ -381,6 +381,7 @@ public enum AgentId : uint {
     MJIGatheringNoteBook = 408,
     MJIDisposeShop = 409,
     MJIMinionManagement = 410,
+    MJIMinionNoteBook = 411, 
     MJIBuildingMove = 412,
     MJIEntrance = 413
 }
