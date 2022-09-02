@@ -110,6 +110,7 @@ public unsafe struct MapMarkerBase
     [FieldOffset(0x08)] public uint SecondaryIconId;
     [FieldOffset(0x0C)] public int Scale;
     [FieldOffset(0x10)] public byte* Subtext;
+    [FieldOffset(0x18)] public byte Index;
 
     [FieldOffset(0x2C)] public short X;
     [FieldOffset(0x2E)] public short Y;
