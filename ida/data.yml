@@ -1786,6 +1786,7 @@ classes:
       0x14046D500: GetEqpDataForAdults
       0x14046D760: GetEqpDataForChildren
       0x14046D8B0: GetEqpDataForOther
+      0x14046c040: GetEvpData
   Client::Graphics::Scene::CharacterBase:
     vtbls:
       - ea: 0x1418CCE48
