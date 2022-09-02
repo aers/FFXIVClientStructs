@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 public unsafe struct AddonSelectYesno
 {
     [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
-    [FieldOffset(0x220)] public AtkTextNode* AtkTextNode220;
+    [FieldOffset(0x220)] public AtkTextNode* PromptText;
     [FieldOffset(0x228)] public AtkComponentButton* YesButton;
     [FieldOffset(0x230)] public AtkComponentButton* NoButton;
     [FieldOffset(0x238)] public AtkComponentButton* AtkComponentButton238;
