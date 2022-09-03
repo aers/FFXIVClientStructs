@@ -49,6 +49,8 @@ public unsafe partial struct AgentMap
     [FieldOffset(0x5900)] public uint SelectedMapDiscoveryFlag;
     [FieldOffset(0x5904)] public uint SelectedMapSub;
 
+    [FieldOffset(0x5914)] public uint UpdateFlags;
+
     [FieldOffset(0x59B0)] public byte MapMarkerCount;
     [FieldOffset(0x59B1)] public byte TempMapMarkerCount;
     [FieldOffset(0x59B3)] public byte IsFlagMarkerSet;
@@ -134,7 +136,7 @@ public struct MapMarkerInfo
     [FieldOffset(0x3C)] public ushort DataType;
     [FieldOffset(0x3E)] public ushort DataKey;
 
-    [FieldOffset(0x44)] public uint MapMarkerSubKey;
+    [FieldOffset(0x44)] public byte MapMarkerSubKey;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x108)]
