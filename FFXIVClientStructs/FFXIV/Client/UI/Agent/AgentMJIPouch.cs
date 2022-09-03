@@ -3,6 +3,7 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent; 
 
+[Agent(AgentId.MJIPouch)]
 [StructLayout(LayoutKind.Explicit, Size = 0x38)]
 public unsafe struct AgentMJIPouch {
 	[FieldOffset(0x00)] public AgentInterface AgentInterface;

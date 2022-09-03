@@ -3,6 +3,7 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent; 
 
+[Agent(AgentId.MonsterNote)]
 [StructLayout(LayoutKind.Explicit, Size = 0x68)]
 public struct AgentMonsterNote
 {

@@ -3,6 +3,7 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
+[Agent(AgentId.ReadyCheck)]
 [StructLayout(LayoutKind.Explicit, Size = 0x3B0)]
 public unsafe struct AgentReadyCheck
 {
