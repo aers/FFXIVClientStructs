@@ -56,7 +56,7 @@ public unsafe partial struct InfoProxyCrossRealm
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B F8 8B 46 10", IsStatic = true)]
     public static partial CrossRealmMember* GetMemberByContentId(ulong contentId);
 
-    [MemberFunction("48 89 5C 24 ?? 48 89 7C 24 ?? 4C 8B 1D", IsStatic = true), Obsolete("This function is bugged, results are not reliable.", false)]
+    [MemberFunction("48 89 5C 24 ?? 48 89 7C 24 ?? 4C 8B 1D", IsStatic = true)]
     public static partial CrossRealmMember* GetMemberByObjectId(uint objectId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 2E 0F B6 5E 11", IsStatic = true)]
