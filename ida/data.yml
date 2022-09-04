@@ -5217,7 +5217,7 @@ classes:
       0x1410CDDF0: _SetAddonScale
   Client::UI::AddonActionMenuReplaceList:
     vtbls:
-      - ea: 0x14105EBB6
+      - ea: 0x1419E1B58
         base: Component::GUI::AtkUnitBase
   Client::Game::Fate::FateDirector:
     vtbls:
