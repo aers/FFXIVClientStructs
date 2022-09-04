@@ -4362,70 +4362,70 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentCharaCard:
     vtbls:
-      - ea : 0x141949BC0
+      - ea: 0x141949BC0
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140BFA290: OpenCharaCardByContentId
       0x140BFA310: OpenCharaCardForObject
   Client::UI::Agent::AgentMJIHud:
     vtbls:
-      - ea : 0x1419493B8
+      - ea: 0x1419493B8
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMJIPouch:
     vtbls:
-      - ea : 0x1419494C0
+      - ea: 0x1419494C0
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMJIBuildingMove:
     vtbls:
-      - ea : 0x141949538
+      - ea: 0x141949538
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMJICraftSchedule:
     vtbls:
-      - ea : 0x1419495B0
+      - ea: 0x1419495B0
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMJIGatheringNoteBook:
     vtbls:
-      - ea : 0x141949628
+      - ea: 0x141949628
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMJIRecipeNoteBook:
     vtbls:
-      - ea : 0x1419496A0
+      - ea: 0x1419496A0
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMJICraftSales:
     vtbls:
-      - ea : 0x141949718
+      - ea: 0x141949718
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMJIBuilding:
     vtbls:
-      - ea : 0x141949790
+      - ea: 0x141949790
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMJIDisposeShop:
     vtbls:
-      - ea : 0x141949808
+      - ea: 0x141949808
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMJIAnimalManagement:
     vtbls:
-      - ea : 0x141A0DC80
+      - ea: 0x141A0DC80
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMJIFarmManagement:
     vtbls:
-      - ea : 0x141A0DCF8
+      - ea: 0x141A0DCF8
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMJIEntrance:
     vtbls:
-      - ea : 0x141A0DF08
+      - ea: 0x141A0DF08
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMJIGatheringHouse:
     vtbls:
-      - ea : 0x141A0DD70
+      - ea: 0x141A0DD70
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMJIMinionManagement:
     vtbls:
-      - ea : 0x141A0DE00
+      - ea: 0x141A0DE00
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMJIMinionNoteBook:
     vtbls:
-      - ea : 0x141A0DE78
+      - ea: 0x141A0DE78
         base: Client::UI::Agent::AgentInterface
   Client::Game::Event::EventHandler:
     vtbls:
