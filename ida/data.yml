@@ -4377,7 +4377,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMJIBuildingMove:
     vtbls:
-      - ea: 0x141949538
+      - ea : 0x141949538
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMJICraftSchedule:
     vtbls:
@@ -4393,7 +4393,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMJICraftSales:
     vtbls:
-      - ea: 0x141949718
+      - ea : 0x141949718
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMJIBuilding:
     vtbls:
@@ -4401,31 +4401,31 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMJIDisposeShop:
     vtbls:
-      - ea: 0x141949808
+      - ea : 0x141949808
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMJIAnimalManagement:
     vtbls:
-      - ea: 0x141A0DC80
+      - ea : 0x141A0DC80
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMJIFarmManagement:
     vtbls:
-      - ea: 0x141A0DCF8
+      - ea : 0x141A0DCF8
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMJIEntrance:
     vtbls:
-      - ea: 0x141A0DF08
+      - ea : 0x141A0DF08
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMJIGatheringHouse:
     vtbls:
-      - ea: 0x141A0DD70
+      - ea : 0x141A0DD70
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMJIMinionManagement:
     vtbls:
-      - ea: 0x141A0DE00
+      - ea : 0x141A0DE00
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMJIMinionNoteBook:
     vtbls:
-      - ea: 0x141A0DE78
+      - ea : 0x141A0DE78
         base: Client::UI::Agent::AgentInterface
   Client::Game::Event::EventHandler:
     vtbls:
@@ -4702,6 +4702,10 @@ classes:
     vtbls:
       - ea: 0x1419E16C8
         base: Component::GUI::AtkUnitBase
+  Client::UI::AddonRepairRequest:
+    vtbls:
+      - ea: 0x1419E18F8
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonArmouryBoard:
     vtbls:
       - ea: 0x1419BB508
@@ -4937,6 +4941,126 @@ classes:
     vtbls:
       - ea: 0x1419D8120
         base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMJIHud:
+    vtbls:
+      - ea: 0x1419DD278
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMJIPouch:
+    vtbls:
+      - ea: 0x1419DD4A8
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMJIRecipeNoteBook:
+    vtbls:
+      - ea: 0x1419DD6D8
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMJIMissionComplete:
+    vtbls:
+      - ea: 0x1419DD908
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMJICraftDemandResearch:
+    vtbls:
+      - ea: 0x1419DDB38
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMJICraftMaterialConfirmation:
+    vtbls:
+      - ea: 0x1419DDD68
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMJICraftSales:
+    vtbls:
+      - ea: 0x1419DDF98
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMJICraftSchedule:
+    vtbls:
+      - ea: 0x1419DE1C8
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMJICraftScheduleMaintenance:
+    vtbls:
+      - ea: 0x1419DE3F8
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMJICraftSchedulePreset:
+    vtbls:
+      - ea: 0x1419DE628
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMJICraftScheduleMaterialList:
+    vtbls:
+      - ea: 0x1419DE858
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMJICraftScheduleSetting:
+    vtbls:
+      - ea: 0x1419DEAA8
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMJIAnimalBreeding:
+    vtbls:
+      - ea: 0x1419DECD8
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMJIAnimalBreedingAutomatic:
+    vtbls:
+      - ea: 0x1419DEF08
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMJIAnimalNameInputString:
+    vtbls:
+      - ea: 0x1419DF138
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMJIFarmManagement:
+    vtbls:
+      - ea: 0x1419DF368
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMJIFarmAutomatic:
+    vtbls:
+      - ea: 0x1419DF598
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMJIGatheringHouse:
+    vtbls:
+      - ea: 0x1419DF7C8
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMJIGatheringHouseExplore:
+    vtbls:
+      - ea: 0x1419DFA18
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMJIBuilding:
+    vtbls:
+      - ea: 0x1419DFC68
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMJIBuildingProgress:
+    vtbls:
+      - ea: 0x1419DFE98
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMJIGatheringNoteBook:
+    vtbls:
+      - ea: 0x1419E00C8
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMJIDisposeShop:
+    vtbls:
+      - ea: 0x1419E02F8
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMJIDisposeShopShipping:
+    vtbls:
+      - ea: 0x1419E0528
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMJIDisposeShopShippingBulk:
+    vtbls:
+      - ea: 0x1419E0758
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMJIMinionManagement:
+    vtbls:
+      - ea: 0x1419E0988
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMJIMinionNoteBook:
+    vtbls:
+      - ea: 0x1419E0BB8
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMJIBuildingMove:
+    vtbls:
+      - ea: 0x1419E0E08
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMJIEntrance:
+    vtbls:
+      - ea: 0x1419E1038
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMJISetting:
+    vtbls:
+      - ea: 0x1419E1268
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonTargetInfoBase:
     vtbls:
       - ea: 0x1419E3698
@@ -5091,6 +5215,10 @@ classes:
       0x1410CBD40: AddonOverlayMouseClickEvent
       0x1410CC140: AddonOverlayMouseReleaseEvent
       0x1410CDDF0: _SetAddonScale
+  Client::UI::AddonActionMenuReplaceList:
+    vtbls:
+      - ea: 0x14105EBB6
+        base: Component::GUI::AtkUnitBase
   Client::Game::Fate::FateDirector:
     vtbls:
       - ea: 0x141A0F218
