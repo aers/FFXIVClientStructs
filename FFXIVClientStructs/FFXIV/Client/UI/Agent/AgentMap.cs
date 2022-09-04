@@ -54,6 +54,7 @@ public unsafe partial struct AgentMap
     [FieldOffset(0x59B0)] public byte MapMarkerCount;
     [FieldOffset(0x59B1)] public byte TempMapMarkerCount;
     [FieldOffset(0x59B3)] public byte IsFlagMarkerSet;
+    [FieldOffset(0x59B5)] public byte MiniMapMarkerCount;
     [FieldOffset(0x59BD)] public byte IsPlayerMoving;
     [FieldOffset(0x59C5)] public byte IsControlKeyPressed;
 
@@ -152,6 +153,9 @@ public struct TempMapMarker
 [StructLayout(LayoutKind.Explicit, Size = 0x40)]
 public struct MiniMapMarker
 {
+    [FieldOffset(0x00)] public ushort DataType;
+    [FieldOffset(0x02)] public ushort DataKey;
+
     [FieldOffset(0x08)] public MapMarkerBase MapMarker;
 }
 

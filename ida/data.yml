@@ -4276,7 +4276,12 @@ classes:
       0x140A2BD90: OpenMapByMapId
       0x140A21500: SetFlagMapMarker # (this, territoryId, mapId, (float)x, (float)y, iconId)
       0x140A28E70: AddMapMarker
+      0x140A29270: AddMiniMapMarker
       0x140A2FE60: CanUseTeleport # static
+      0x140A2B0F0: ResetMapMarkers
+      0x140A2B160: CreateMapMarkers
+      0x140A2B940: ResetMiniMapMarkers
+      0x140A2B980: CreateMiniMapMarkers
   Client::UI::Agent::AgentRecipeNote:
     vtbls:
       - ea: 0x1419426D8
