@@ -12,7 +12,7 @@ Additionally, you will need to place "idauser.cfg" from this repository in "%App
 #### Ghidra dependency installation:
 This is slightly more complicated as Ghidra uses an embedded version of Jython. 
 - Install a copy of Python2 from https://www.python.org/downloads/
-- Execute the following `python.exe -m pip install -t \<YourGhidraFolder\>\Ghidra\Features\Python\data\jython-2.7.2\Lib\site-packages pyyaml anytree`
+- Execute the following `python.exe -m pip install -t \<YourGhidraFolder\>\Ghidra\Features\Python\data\jython-2.7.2\Lib\site-packages pyyaml==5.4.1 anytree`
 - Add `FFXIVClientStructs\ida` as a script directory.
 
 ## ffxiv_sigmaker.py
