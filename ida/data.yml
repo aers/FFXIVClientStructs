@@ -5061,6 +5061,10 @@ classes:
     vtbls:
       - ea: 0x1419E1268
         base: Component::GUI::AtkUnitBase
+  Client::UI::MJIPadGuide:
+    vtbls:
+      - ea: 0x1419E1498
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonTargetInfoBase:
     vtbls:
       - ea: 0x1419E3698
