@@ -25,7 +25,7 @@ public unsafe partial struct AgentMap
 
     [FieldOffset(0x37B8)] public FlagMapMarker FlagMapMarker;
 
-    [FieldOffset(0x3800)] public fixed byte UnkArray1[0x38 * 12]; // 12 * MapMarkerBase
+    [FieldOffset(0x3800)] public fixed byte WarpMarkerArray[0x38 * 12]; // 12 * MapMarkerBase
     [FieldOffset(0x3AA0)] public fixed byte UnkArray2[0xA8 * 6];
     [FieldOffset(0x3E90)] public fixed byte MiniMapMarkerArray[0x40 * 100]; // 100 * MiniMapMarker
 
