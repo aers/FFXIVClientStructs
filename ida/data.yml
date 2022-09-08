@@ -4363,7 +4363,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentCharaCard:
     vtbls:
-      - ea : 0x141949BC0
+      - ea: 0x141949BC0
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140BFA290: OpenCharaCardByContentId
@@ -4374,11 +4374,11 @@ classes:
       0x140c03090: dtor
   Client::UI::Agent::AgentMJIHud:
     vtbls:
-      - ea : 0x1419493B8
+      - ea: 0x1419493B8
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMJIPouch:
     vtbls:
-      - ea : 0x1419494C0
+      - ea: 0x1419494C0
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMJIBuildingMove:
     vtbls:
@@ -4386,15 +4386,15 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMJICraftSchedule:
     vtbls:
-      - ea : 0x1419495B0
+      - ea: 0x1419495B0
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMJIGatheringNoteBook:
     vtbls:
-      - ea : 0x141949628
+      - ea: 0x141949628
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMJIRecipeNoteBook:
     vtbls:
-      - ea : 0x1419496A0
+      - ea: 0x1419496A0
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMJICraftSales:
     vtbls:
@@ -4402,7 +4402,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMJIBuilding:
     vtbls:
-      - ea : 0x141949790
+      - ea: 0x141949790
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMJIDisposeShop:
     vtbls:
@@ -4707,6 +4707,10 @@ classes:
     vtbls:
       - ea: 0x1419E16C8
         base: Component::GUI::AtkUnitBase
+  Client::UI::AddonRepairRequest:
+    vtbls:
+      - ea: 0x1419E18F8
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonArmouryBoard:
     vtbls:
       - ea: 0x1419BB508
@@ -4942,6 +4946,130 @@ classes:
     vtbls:
       - ea: 0x1419D8120
         base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMJIHud:
+    vtbls:
+      - ea: 0x1419DD278
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMJIPouch:
+    vtbls:
+      - ea: 0x1419DD4A8
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMJIRecipeNoteBook:
+    vtbls:
+      - ea: 0x1419DD6D8
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMJIMissionComplete:
+    vtbls:
+      - ea: 0x1419DD908
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMJICraftDemandResearch:
+    vtbls:
+      - ea: 0x1419DDB38
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMJICraftMaterialConfirmation:
+    vtbls:
+      - ea: 0x1419DDD68
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMJICraftSales:
+    vtbls:
+      - ea: 0x1419DDF98
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMJICraftSchedule:
+    vtbls:
+      - ea: 0x1419DE1C8
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMJICraftScheduleMaintenance:
+    vtbls:
+      - ea: 0x1419DE3F8
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMJICraftSchedulePreset:
+    vtbls:
+      - ea: 0x1419DE628
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMJICraftScheduleMaterialList:
+    vtbls:
+      - ea: 0x1419DE858
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMJICraftScheduleSetting:
+    vtbls:
+      - ea: 0x1419DEAA8
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMJIAnimalBreeding:
+    vtbls:
+      - ea: 0x1419DECD8
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMJIAnimalBreedingAutomatic:
+    vtbls:
+      - ea: 0x1419DEF08
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMJIAnimalNameInputString:
+    vtbls:
+      - ea: 0x1419DF138
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMJIFarmManagement:
+    vtbls:
+      - ea: 0x1419DF368
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMJIFarmAutomatic:
+    vtbls:
+      - ea: 0x1419DF598
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMJIGatheringHouse:
+    vtbls:
+      - ea: 0x1419DF7C8
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMJIGatheringHouseExplore:
+    vtbls:
+      - ea: 0x1419DFA18
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMJIBuilding:
+    vtbls:
+      - ea: 0x1419DFC68
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMJIBuildingProgress:
+    vtbls:
+      - ea: 0x1419DFE98
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMJIGatheringNoteBook:
+    vtbls:
+      - ea: 0x1419E00C8
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMJIDisposeShop:
+    vtbls:
+      - ea: 0x1419E02F8
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMJIDisposeShopShipping:
+    vtbls:
+      - ea: 0x1419E0528
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMJIDisposeShopShippingBulk:
+    vtbls:
+      - ea: 0x1419E0758
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMJIMinionManagement:
+    vtbls:
+      - ea: 0x1419E0988
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMJIMinionNoteBook:
+    vtbls:
+      - ea: 0x1419E0BB8
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMJIBuildingMove:
+    vtbls:
+      - ea: 0x1419E0E08
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMJIEntrance:
+    vtbls:
+      - ea: 0x1419E1038
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMJISetting:
+    vtbls:
+      - ea: 0x1419E1268
+        base: Component::GUI::AtkUnitBase
+  Client::UI::MJIPadGuide:
+    vtbls:
+      - ea: 0x1419E1498
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonTargetInfoBase:
     vtbls:
       - ea: 0x1419E3698
@@ -5096,6 +5224,10 @@ classes:
       0x1410CBD40: AddonOverlayMouseClickEvent
       0x1410CC140: AddonOverlayMouseReleaseEvent
       0x1410CDDF0: _SetAddonScale
+  Client::UI::AddonActionMenuReplaceList:
+    vtbls:
+      - ea: 0x1419E1B58
+        base: Component::GUI::AtkUnitBase
   Client::Game::Fate::FateDirector:
     vtbls:
       - ea: 0x141A0F218
