@@ -4368,6 +4368,10 @@ classes:
     funcs:
       0x140BFA290: OpenCharaCardByContentId
       0x140BFA310: OpenCharaCardForObject
+  Client::UI::Agent::AgentCharaCard::Storage:
+    funcs:
+      0x140c152d0: ctor
+      0x140c03090: dtor
   Client::UI::Agent::AgentMJIHud:
     vtbls:
       - ea : 0x1419493B8
