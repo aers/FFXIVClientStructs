@@ -2856,6 +2856,7 @@ classes:
       0x1406538B0: PrintMessage
       0x140654C60: ShowLogMessage
       0x140657220: GetContentIdForLogMessage
+      0x140657D50: GetLogMessage
   Client::UI::Misc::RaptureHotbarModule:
     vtbls:
       - ea: 0x1418E74F0

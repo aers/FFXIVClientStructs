@@ -1,4 +1,6 @@
-﻿using FFXIVClientStructs.FFXIV.Client.System.String;
+﻿using System;
+using System.Text;
+using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Common.Log;
 using FFXIVClientStructs.FFXIV.Component.Excel;
 
@@ -24,6 +26,40 @@ public unsafe partial struct RaptureLogModule
 
     [MemberFunction("4C 8B 81 ?? ?? ?? ?? 4D 85 C0 74 17")]
     public partial ulong GetContentIdForLogMessage(int index);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 ?? 0F B6 85 ?? ?? ?? ?? 48 8D 8D")]
+    public partial bool GetLogMessage(int index, short* logKind, Utf8String* sender, Utf8String* message, uint* timeStamp);
+
+    public bool GetLogMessage(int index, out byte[] sender, out byte[] message, out short logKind, out uint time)
+    {
+        var pMsg = stackalloc Utf8String[1];
+        var pSender = stackalloc Utf8String[1];
+        var pKind = stackalloc short[1];
+        var pTime = stackalloc uint[1];
+
+        pMsg->Ctor();
+        pSender->Ctor();
+
+        var result = GetLogMessage(index, pKind, pSender, pMsg, pTime);
+
+        logKind = *pKind;
+        time = *pTime;
+
+        sender = new Span<byte>(pSender->StringPtr, (int)pSender->BufUsed - 1).ToArray();
+        message = new Span<byte>(pMsg->StringPtr, (int)pMsg->BufUsed - 1).ToArray();
+
+        pMsg->Dtor();
+        pSender->Dtor();
+        return result;
+    }
+
+    public bool GetLogMessage(int index, out string sender, out string message, out short logKind, out uint time)
+    {
+        var result = GetLogMessage(index, out byte[] bSender, out byte[] bMessage, out logKind, out time);
+        sender = Encoding.Latin1.GetString(bSender);
+        message = Encoding.Latin1.GetString(bMessage);
+        return result;
+    }
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
