@@ -2856,7 +2856,8 @@ classes:
       0x1406538B0: PrintMessage
       0x140654C60: ShowLogMessage
       0x140657220: GetContentIdForLogMessage
-      0x140657D50: GetLogMessage
+      0x1406572B0: GetLogMessage
+      0x140657D50: GetLogMessageDetail
   Client::UI::Misc::RaptureHotbarModule:
     vtbls:
       - ea: 0x1418E74F0
@@ -5423,6 +5424,17 @@ classes:
   Component::Log::LogModuleInterface:
     vtbls:
       - ea: 0x141A205A8
+    vfuncs:
+      0: dtor
+      1: ClearLog
+      2: SetContentId
+      3: GetCurrentLogIndex
+      4: GetLogMessageOverflow
+      5: GetLogMessageCount
+      6: AddLogMessageRawString
+      7: AddLogMessageRaw
+      8: GetLogMessageRawString
+      9: GetLogMessageRaw
   Component::Log::LogModule:
     vtbls:
       - ea: 0x141A205F8
