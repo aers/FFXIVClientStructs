@@ -40,6 +40,27 @@ public unsafe partial struct MJIManager {
 	[FieldOffset(0x3A)] public fixed byte LockedPouchItems[66];
 
 	/// <summary>
+	///     Compare MJIBuilding sheet's 2nd column to <see cref="MJIManagerBuilding.BuildinTypeId" />, to find the
+	///     building definition.
+	/// </summary>
+	[FieldOffset(0x1A4)] public MJIManagerBuilding Facility1;
+
+	/// <inheritdoc cref="Facility1"/>
+	[FieldOffset(0x1B4)] public MJIManagerBuilding Facility2;
+
+	/// <inheritdoc cref="Facility1"/>
+	[FieldOffset(0x1C4)] public MJIManagerBuilding Facility3;
+
+	/// <inheritdoc cref="Facility1"/>
+	[FieldOffset(0x1D4)] public MJIManagerBuilding Facility4;
+
+	/// <inheritdoc cref="Facility1"/>
+	[FieldOffset(0x1E4)] public MJIManagerBuilding Facility5;
+
+	/// <inheritdoc cref="Facility1"/>
+	[FieldOffset(0x1F4)] public MJIManagerBuilding Cabin;
+
+	/// <summary>
 	///     A reference to the current set of popularity scores given to craftworks on the player's island. The actual
 	///     popularity scores can be pulled from the MJICraftworksPopularity sheet using this value as a Row ID.
 	/// </summary>
@@ -102,6 +123,15 @@ public unsafe partial struct MJIManager {
 	public CraftworkDemandShift GetDemandShiftForCraftwork(uint itemId) {
 		return (CraftworkDemandShift)(SupplyAndDemandShifts[itemId] & 0x0F);
 	}
+}
+
+[StructLayout(LayoutKind.Explicit, Size = 0x10)]
+public struct MJIManagerBuilding
+{
+	/// <summary>
+	///     Matches a distinct value in the 2nd column of the MJIBuild sheet.
+	/// </summary>
+	[FieldOffset(0x0)] public ushort BuildinTypeId;
 }
 
 public enum CraftworkSupply {
