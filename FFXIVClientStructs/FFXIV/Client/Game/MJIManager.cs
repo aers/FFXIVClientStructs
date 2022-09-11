@@ -134,7 +134,7 @@ public struct MJIBuildingPlacement
 	[FieldOffset(0x0)] public uint PlaceId;
 
 	/// <summary>
-	///     Matches a distinct value in the 2nd column of the MJIBuild sheet.
+	///     Matches a distinct value in the 2nd column of the MJIBuilding sheet.
 	/// </summary>
 	[FieldOffset(0x4)] public ushort BuildingTypeId;
 }
