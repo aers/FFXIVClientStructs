@@ -40,25 +40,25 @@ public unsafe partial struct MJIManager {
 	[FieldOffset(0x3A)] public fixed byte LockedPouchItems[66];
 
 	/// <summary>
-	///     Compare MJIBuilding sheet's 2nd column to <see cref="MJIManagerBuilding.BuildinTypeId" />, to find the
+	///     Compare MJIBuilding sheet's 2nd column to <see cref="MJIBuildingPlacement.BuildingTypeId" />, to find the
 	///     building definition.
 	/// </summary>
-	[FieldOffset(0x1A4)] public MJIManagerBuilding Facility1;
+	[FieldOffset(0x1A0)] public MJIBuildingPlacement Facility1;
 
 	/// <inheritdoc cref="Facility1"/>
-	[FieldOffset(0x1B4)] public MJIManagerBuilding Facility2;
+	[FieldOffset(0x1B0)] public MJIBuildingPlacement Facility2;
 
 	/// <inheritdoc cref="Facility1"/>
-	[FieldOffset(0x1C4)] public MJIManagerBuilding Facility3;
+	[FieldOffset(0x1C0)] public MJIBuildingPlacement Facility3;
 
 	/// <inheritdoc cref="Facility1"/>
-	[FieldOffset(0x1D4)] public MJIManagerBuilding Facility4;
+	[FieldOffset(0x1D0)] public MJIBuildingPlacement Facility4;
 
 	/// <inheritdoc cref="Facility1"/>
-	[FieldOffset(0x1E4)] public MJIManagerBuilding Facility5;
+	[FieldOffset(0x1E0)] public MJIBuildingPlacement Facility5;
 
 	/// <inheritdoc cref="Facility1"/>
-	[FieldOffset(0x1F4)] public MJIManagerBuilding Cabin;
+	[FieldOffset(0x1F0)] public MJIBuildingPlacement Cabin;
 
 	/// <summary>
 	///     A reference to the current set of popularity scores given to craftworks on the player's island. The actual
@@ -126,12 +126,17 @@ public unsafe partial struct MJIManager {
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
-public struct MJIManagerBuilding
+public struct MJIBuildingPlacement
 {
+	/// <summary>
+	///     Should line up with the row ids of the MJIBuildingPlace sheet.
+	/// </summary>
+	[FieldOffset(0x0)] public uint PlaceId;
+
 	/// <summary>
 	///     Matches a distinct value in the 2nd column of the MJIBuild sheet.
 	/// </summary>
-	[FieldOffset(0x0)] public ushort BuildinTypeId;
+	[FieldOffset(0x4)] public ushort BuildingTypeId;
 }
 
 public enum CraftworkSupply {
