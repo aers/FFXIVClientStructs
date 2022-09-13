@@ -834,7 +834,9 @@ classes:
       2: GetSheetByName
   Common::Component::Excel::ExcelModuleInterface: # these are two different classes
     vtbls:
-      - ea: 0x141BFF560      
+      - ea: 0x141BFF560
+      - ea: 0x141BFF5F0
+        base: Common::Component::Excel::ExcelResourceListener
     vfuncs:
       1: GetSheetByIndex
       2: GetSheetByName
@@ -5264,6 +5266,14 @@ classes:
   Client::Game::Object::AreaObject:
     vtbls:
       - ea: 0x1419FDE88
+        base: Client::Game::Object::GameObject
+  Client::Game::Object::MJIObject:
+    vtbls:
+      - ea: 0x141AE8510
+        base: Client::Game::Object::GameObject
+  Client::Game::Object::BKJObject:
+    vtbls:
+      - ea: 0x141AE8B90
         base: Client::Game::Object::GameObject
   Client::Graphics::JobSystem<Client::Graphics::Culling::CullingManager,Client::Graphics::Culling::CullingJobOpt>:
     vtbls:
