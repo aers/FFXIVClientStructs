@@ -26,7 +26,9 @@ public unsafe partial struct UIState
     [FieldOffset(0xA970)] public FateDirector* FateDirector;
 
     [FieldOffset(0xAAB8)] public Map Map;
-    
+
+    [FieldOffset(0xEAA0)] public MarkingController MarkingController;
+
     [FieldOffset(0x11AF0)] public ContentsFinder ContentsFinder;
     
     // No idea why this isn't its own thing, but I can't find any trace of any member functions or anything worthy of
