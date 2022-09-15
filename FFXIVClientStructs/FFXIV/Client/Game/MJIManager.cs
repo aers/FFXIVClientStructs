@@ -298,12 +298,12 @@ public unsafe struct MJIWorkshops {
     public fixed byte PlaceId[MaxWorkshops];
 
     /// <summary>
-    ///     The glamour ID of a particular building. This value refers to a specific sub-row of MJIBuilding.
+    ///     The glamour level of a particular building. This value refers to a specific sub-row of MJIBuilding.
     /// </summary>
     /// <remarks>
     ///     This level is one less than the building's level; Workshop III will report as 2.
     /// </remarks>
-    public fixed byte GlamourId[MaxWorkshops];
+    public fixed byte GlamourLevel[MaxWorkshops];
 
     /// <summary>
     ///     Hours remaining in the construction/upgrade of a building.
@@ -313,9 +313,12 @@ public unsafe struct MJIWorkshops {
     public fixed byte HoursToCompletion[MaxWorkshops];
 
     /// <summary>
-    ///     Unknown, but appears to be related to glamouring/appearances?
+    ///     The true level of a particular building. Like GlamourLevel, also refers to a specific sub-row of MJIBuilding.
     /// </summary>
-    public fixed byte Unk_0x11[MaxWorkshops];
+    /// <remarks>
+    ///     This level is one less than the building's level; Workshop III will report as 2.
+    /// </remarks>
+    public fixed byte BuildingLevel[MaxWorkshops];
 
     /// <summary>
     ///     Report if a specific building is currently under construction.
@@ -331,12 +334,12 @@ public unsafe struct MJIWorkshops {
     ///     Helper method to return all known information about a specific building at once.
     /// </summary>
     /// <param name="idx">The index of the building to retrieve</param>
-    public (byte PlaceId, byte GlamourId, byte HoursToCompletion, byte Unk_0x0F, bool UnderConstruction)
+    public (byte PlaceId, byte GlamourLevel, byte HoursToCompletion, byte BuildingLevel, bool UnderConstruction)
         this[int idx] => (
         this.PlaceId[idx],
-        this.GlamourId[idx],
+        this.GlamourLevel[idx],
         this.HoursToCompletion[idx],
-        this.Unk_0x11[idx],
+        this.BuildingLevel[idx],
         this.UnderConstruction[idx] > 0
     );
 }
@@ -356,24 +359,24 @@ public unsafe struct MJIGranaries {
     /// <inheritdoc cref="MJIWorkshops.PlaceId"/>
     public fixed byte PlaceId[MaxGranaries];
 
-    /// <inheritdoc cref="MJIWorkshops.GlamourId"/>
-    public fixed byte GlamourId[MaxGranaries];
+    /// <inheritdoc cref="MJIWorkshops.GlamourLevel"/>
+    public fixed byte GlamourLevel[MaxGranaries];
 
     /// <inheritdoc cref="MJIWorkshops.HoursToCompletion"/>
     public fixed byte HoursToCompletion[MaxGranaries];
 
-    /// <inheritdoc cref="MJIWorkshops.Unk_0x11"/>
-    public fixed byte Unk_0x0F[MaxGranaries];
+    /// <inheritdoc cref="MJIWorkshops.BuildingLevel"/>
+    public fixed byte BuildingLevel[MaxGranaries];
 
     /// <inheritdoc cref="MJIWorkshops.UnderConstruction"/>
     public fixed byte UnderConstruction[MaxGranaries];
 
-    public (byte PlaceId, byte GlamourId, byte HoursToCompletion, byte Unk_0x0F, bool UnderConstruction)
+    public (byte PlaceId, byte GlamourLevel, byte HoursToCompletion, byte BuildingLevel, bool UnderConstruction)
         this[int idx] => (
         this.PlaceId[idx],
-        this.GlamourId[idx],
+        this.GlamourLevel[idx],
         this.HoursToCompletion[idx],
-        this.Unk_0x0F[idx],
+        this.BuildingLevel[idx],
         this.UnderConstruction[idx] > 0
     );
 }
