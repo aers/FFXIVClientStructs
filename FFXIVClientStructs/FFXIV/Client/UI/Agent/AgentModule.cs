@@ -318,6 +318,7 @@ public enum AgentId : uint {
     DeepDungeonMenu = 254,
     ItemAppraisal = 257, //DeepDungeon Appraisal
     ItemInspection = 258, //Lockbox
+    RecipeItemContext = 259, // context menus for RecipeTree and RecipeList, constructor inlined
     ContactList = 260,
     Snipe = 265,
     MountSpeed = 266,
