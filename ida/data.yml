@@ -4177,6 +4177,10 @@ classes:
     vtbls:
       - ea: 0x141937CF0
         base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentWeeklyPuzzle:
+    vtbls:
+      - ea: 0x141937D80
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentDeepDungeonMenu:
     vtbls:
       - ea: 0x141935D70
