@@ -4197,6 +4197,10 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140A777C0: ctor
+  Client::UI::Agent::AgentRecipeItemContext:
+    vtbls:
+      - ea: 0x1418AE300
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentTeleportHousingFriend:
     vtbls:
       - ea: 0x1419346D0
