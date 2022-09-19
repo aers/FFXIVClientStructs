@@ -4,7 +4,7 @@
 
 // size = 0x9C80 (may be a bit bigger, unimportant)
 // ctor E8 ? ? ? ? C6 83 ? ? ? ? ? 48 8D 8B ? ? ? ? 48 8D 05 ? ? ? ? 
-[StructLayout(LayoutKind.Explicit, Size = 0x9C80)]
+[StructLayout(LayoutKind.Explicit, Size = 0x9C88)]
 public struct AtkUnitManager
 {
     [FieldOffset(0x0)] public AtkEventListener AtkEventListener;

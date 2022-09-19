@@ -12,6 +12,8 @@ public partial struct RaptureAtkModule
 {
     [FieldOffset(0x0)] public AtkModule AtkModule;
 
+    [FieldOffset(0x11408)] public RaptureAtkUnitManager RaptureAtkUnitManager;
+
     [FieldOffset(0x1B390)] public int NameplateInfoCount;
     [FieldOffset(0x1B398)] public NamePlateInfo NamePlateInfoArray; // 0-50, &NamePlateInfoArray[i]
 
