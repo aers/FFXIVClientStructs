@@ -118,6 +118,9 @@ public unsafe partial struct UIModule
     [VirtualFunction(66)]
     public partial void* GetLogFilterConfig();
 
+    [VirtualFunction(140)]
+    public partial void ToggleUi(UiFlags flags, bool enable, bool unknown = true);
+    
     [VirtualFunction(150)]
     public partial void ShowGoldSaucerReward(byte type, uint mgp, uint rewardItemId, uint rewardItemCount);
 
@@ -203,5 +206,17 @@ public unsafe partial struct UIModule
     {
         [FieldOffset(0x0)] public void* vtbl;
         [FieldOffset(0x0)] public void** vfunc;
+    }
+
+    [Flags]
+    public enum UiFlags
+    {
+        Shortcuts = 1, //disable ui shortcuts
+        Hud = 2,
+        Nameplates = 4,
+        Chat = 8,
+        ActionBars = 16,
+        Unk32 = 32, //same as 1 ?
+        TargetInfo = 64 //+disable system menu / ESC key
     }
 }
