@@ -12,7 +12,7 @@ public unsafe partial struct MJIManager {
     /// </summary>
     // Not actually sure about the accuracy of this name. It's a guess based on the fact that the map system and target
     // system appear to change their behavior when this is set to 1, plus verification with how it looks in game.
-    [FieldOffset(0x06)] public bool IsPlayerInSanctuary;
+    [FieldOffset(0x06)] public byte IsPlayerInSanctuary;
 
     /// <summary>
     ///		Represents the currently allowed visitors to the Island Sanctuary.
@@ -146,39 +146,28 @@ public unsafe partial struct MJIManager {
     [FieldOffset(0xC9)] public byte CabinGlamour;
 
     #endregion End sub-struct (0xCF last byte)
-
+    
     /// <summary>
-    ///		A reference to a specific landmark location, as determined by the field name. The exact use of this struct
-    ///		is not immediately apparent, as $DifferingFields appear to contain the "authoritative" record.
+    ///     A struct representing landmark placements on the Island Sanctuary. Each index represents a specific landmark
+    ///     slot directly. Refer to <see cref="MJILandmarkPlacement"/> for more information.
     /// </summary>
     /// <remarks>
-    ///		See +C98B60 for information about how these fields were derived.
+    ///     This field's exact purpose is currently unknown, but seems to be related to either mapping or rendering
+    ///     logic. To that end, this field doesn't actually seem authoritative for determining what's going on - see
+    ///     <see cref="LandmarkIds"/> et al for what seems to be used by system logic.
     /// </remarks>
-    [FieldOffset(0x16C)] public MJILandmarkPlacement Landmark1;
-    [FieldOffset(0x178)] public MJILandmarkPlacement Landmark2;
-    [FieldOffset(0x184)] public MJILandmarkPlacement Landmark3;
-    [FieldOffset(0x190)] public MJILandmarkPlacement Landmark4;
-
+    [FieldOffset(0x16C)] public MJILandmarkPlacements LandmarkPlacements;
+    
     /// <summary>
-    ///     Compare MJIBuilding sheet's 2nd column to <see cref="MJIBuildingPlacement.BuildingTypeId" />, to find the
-    ///     building definition.
+    ///     A struct representing building placements on the Island Sanctuary. Each index represents a specific building
+    ///     slot directly. Refer to <see cref="MJIBuildingPlacement"/> for more information.
     /// </summary>
-    [FieldOffset(0x19C)] public MJIBuildingPlacement Facility1;
-
-    /// <inheritdoc cref="Facility1"/>
-    [FieldOffset(0x1AC)] public MJIBuildingPlacement Facility2;
-
-    /// <inheritdoc cref="Facility1"/>
-    [FieldOffset(0x1BC)] public MJIBuildingPlacement Facility3;
-
-    /// <inheritdoc cref="Facility1"/>
-    [FieldOffset(0x1CC)] public MJIBuildingPlacement Facility4;
-
-    /// <inheritdoc cref="Facility1"/>
-    [FieldOffset(0x1DC)] public MJIBuildingPlacement Facility5;
-
-    /// <inheritdoc cref="Facility1"/>
-    [FieldOffset(0x1EC)] public MJIBuildingPlacement Cabin;
+    /// <remarks>
+    ///     This field's exact purpose is currently unknown, but seems to be related to either mapping or rendering
+    ///     logic. To that end, this field doesn't actually seem authoritative for determining what's going on - see
+    ///     <see cref="Granaries"/> and <see cref="Workshops"/> for what seems to be used by system logic.
+    /// </remarks>
+    [FieldOffset(0x19C)] public MJIBuildingPlacements BuildingPlacements;
     
     /// <summary>
     ///     The current day in the Craftworks cycle, from 0 to 6.
@@ -196,7 +185,7 @@ public unsafe partial struct MJIManager {
     ///     Like CurrentCycleDay, 0 represents Reset Day. 7, likewise, represents the next reset. This field may not be
     ///     populated until the Craftworks have been opened at least once.
     /// </remarks>
-    [FieldOffset(0x27A)] public fixed byte CraftworksRestDays[4];
+    [FieldOffset(0x27B)] public fixed byte CraftworksRestDays[4];
     
     /// <summary>
     ///     The current groove level of the Isleworks.
@@ -204,7 +193,7 @@ public unsafe partial struct MJIManager {
     /// <remarks>
     ///     May not be present until the Isleworks is loaded at least once by the player.
     /// </remarks>
-    [FieldOffset(0x2C8)] public byte CurrentGroove;
+    [FieldOffset(0x2C8)] public uint CurrentGroove;
 
     /// <summary>
     ///     A reference to the current set of popularity scores given to craftworks on the player's island. The actual
@@ -285,8 +274,40 @@ public unsafe partial struct MJIManager {
     }
 }
 
+/// <summary>
+///     A helper struct that wraps an array of structs for <see cref="MJIBuildingPlacement"/>.
+/// </summary>
+[StructLayout(LayoutKind.Sequential, Size = Size)]
+public unsafe struct MJIBuildingPlacements {
+    public const int Slots = 6;  // 5 facilities + one cabin
+    public const int Size = MJIBuildingPlacement.Size * Slots;
+    
+    private fixed byte data[Size];
+
+    /// <summary>
+    ///     Retrieve a specific MJIBuildingPlacement by facility ID.
+    /// </summary>
+    /// <remarks>
+    ///     The facility ID is shown in-game plus one, so Facility III is site ID 2. The Cozy Cabin is present at Site 5.
+    /// </remarks>
+    /// <param name="i">The Building Site ID to pull data for. Valid values are currently 0 to 5.</param>
+    public MJIBuildingPlacement* this[int i] {
+        get {
+            if (i < 0 || i >= Slots) return null;
+            fixed (byte* p = data) {
+                return (MJIBuildingPlacement*) (p + sizeof(MJIBuildingPlacement) * i);
+            }
+        }
+    }
+}
+
+/// <summary>
+///     A record of building population information at a specific Site ID. 
+/// </summary>
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
 public struct MJIBuildingPlacement {
+    public const int Size = 0x10;
+    
     /// <summary>
     ///     At load, the location of this specific building. Will update if a building is changed, but the exact
     ///     mechanism of the update (and why it does such) is not currently known.
@@ -408,8 +429,37 @@ public unsafe struct MJIGranaries {
     );
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0xC)]
+/// <summary>
+///     A helper struct that wraps an array of structs for <see cref="MJILandmarkPlacement"/>.
+/// </summary>
+[StructLayout(LayoutKind.Sequential, Size = Size)]
+public unsafe struct MJILandmarkPlacements {
+    public const int Slots = 4;  // 4 landmarks
+    public const int Size = MJILandmarkPlacement.Size * Slots;
+    
+    private fixed byte data[Size];
+
+    /// <summary>
+    ///     Retrieve a specific MJILandmarkPlacement by site ID.
+    /// </summary>
+    /// <param name="i">The Landmark Site ID to pull data for. Valid values are currently 0 to 3.</param>
+    public MJILandmarkPlacement* this[int i] {
+        get {
+            if (i < 0 || i >= Slots) return null;
+            fixed (byte* p = data) {
+                return (MJILandmarkPlacement*) (p + sizeof(MJILandmarkPlacement) * i);
+            }
+        }
+    }
+}
+
+/// <summary>
+///     A record of landmark population information at a specific Site ID. 
+/// </summary>
+[StructLayout(LayoutKind.Explicit, Size = Size)]
 public struct MJILandmarkPlacement {
+    public const int Size = 0xC;
+    
     /// <summary>
     ///		The RowID of the landmark currently present at the specified location.
     /// </summary>
