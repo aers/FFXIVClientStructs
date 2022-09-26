@@ -179,6 +179,32 @@ public unsafe partial struct MJIManager {
 
     /// <inheritdoc cref="Facility1"/>
     [FieldOffset(0x1EC)] public MJIBuildingPlacement Cabin;
+    
+    /// <summary>
+    ///     The current day in the Craftworks cycle, from 0 to 6.
+    /// </summary>
+    /// <remarks>
+    ///     0 represents reset day (Tuesday).
+    /// </remarks>
+    [FieldOffset(0x27A)] public byte CurrentCycleDay;
+    
+    /// <summary>
+    ///     An array containing the currently-configured rest days for the Isleworks. Contains values 0 - 13, and is
+    ///     always in order.
+    /// </summary>
+    /// <remarks>
+    ///     Like CurrentCycleDay, 0 represents Reset Day. 7, likewise, represents the next reset. This field may not be
+    ///     populated until the Craftworks have been opened at least once.
+    /// </remarks>
+    [FieldOffset(0x27A)] public fixed byte CraftworksRestDays[4];
+    
+    /// <summary>
+    ///     The current groove level of the Isleworks.
+    /// </summary>
+    /// <remarks>
+    ///     May not be present until the Isleworks is loaded at least once by the player.
+    /// </remarks>
+    [FieldOffset(0x2C8)] public byte CurrentGroove;
 
     /// <summary>
     ///     A reference to the current set of popularity scores given to craftworks on the player's island. The actual
@@ -262,7 +288,8 @@ public unsafe partial struct MJIManager {
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
 public struct MJIBuildingPlacement {
     /// <summary>
-    ///     Should line up with the row ids of the MJIBuildingPlace sheet.
+    ///     At load, the location of this specific building. Will update if a building is changed, but the exact
+    ///     mechanism of the update (and why it does such) is not currently known.
     /// </summary>
     [FieldOffset(0x4)] public uint PlaceId;
 
@@ -386,7 +413,7 @@ public struct MJILandmarkPlacement {
     /// <summary>
     ///		The RowID of the landmark currently present at the specified location.
     /// </summary>
-    [FieldOffset(0x5)] public byte LandmarkId;
+    [FieldOffset(0x9)] public byte LandmarkId;
 }
 
 public enum CraftworkSupply {
