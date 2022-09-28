@@ -10,7 +10,7 @@ public struct Camera
     [FieldOffset(0x120)] public float FoV;
     [FieldOffset(0x124)] public float MinFoV;
     [FieldOffset(0x128)] public float MaxFoV;
-
+    [FieldOffset(0x17C)] public float InterpDistance;
     [FieldOffset(0x188)] public float SavedDistance;
 }
 
