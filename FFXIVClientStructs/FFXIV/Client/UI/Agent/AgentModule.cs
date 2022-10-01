@@ -88,6 +88,11 @@ public unsafe partial struct AgentModule
     {
         return (AgentMJIPouch*)GetAgentByInternalId(AgentId.MJIPouch);
     }
+
+    public AgentAozContentBriefing* GetAgentAozContentBriefing()
+    {
+        return (AgentAozContentBriefing*)GetAgentByInternalId(AgentId.AozContentBriefing);
+    }
 }
 
 public enum AgentId : uint {
@@ -375,6 +380,8 @@ public enum AgentId : uint {
     Emj = 319, //Mahjong
 
     EmjIntro = 322,
+    AozContentBriefing = 323, //Masked Carnivale
+    AozContentResult = 324,
 
     WorldTravel = 325,
     RideShooting = 326, //Airforce One

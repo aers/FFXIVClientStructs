@@ -4567,6 +4567,14 @@ classes:
     vtbls:
       - ea: 0x141947A18
         base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentAozContentBriefing:
+    vtbls:
+      - ea: 0x141937390
+        base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentAozContentResult:
+    vtbls:
+      - ea: 0x141937408
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentEmjIntro:
     vtbls:
       - ea: 0x141947C98
