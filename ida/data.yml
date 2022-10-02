@@ -4983,6 +4983,10 @@ classes:
     vtbls:
       - ea: 0x1419FCDF8
         base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentArchiveItem:
+    vtbls:
+      - ea: 0x1419FC640
+        base: Client::UI::Agent::AgentInterface
   Client::Game::Event::EventHandler:
     vtbls:
       - ea: 0x141905478
