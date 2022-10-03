@@ -8,7 +8,7 @@
 // size = 0x920
 // ctor E8 ?? ?? ?? ?? 48 8D 54 24 ?? 48 89 44 3E
 
-
+[StructLayout(LayoutKind.Explicit, Size = 0x920)]
 public struct Weapon {
     [FieldOffset(0x0)] public CharacterBase CharacterBase;
 
