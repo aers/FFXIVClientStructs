@@ -36,7 +36,8 @@ namespace FFXIVClientStructs.Generators.FunctionGenerator
                     if (context.SemanticModel.GetDeclaredSymbol(m) is not IMethodSymbol ms) continue;
                     var format = new SymbolDisplayFormat(
                         typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces,
-                        miscellaneousOptions: SymbolDisplayMiscellaneousOptions.UseSpecialTypes);
+                        miscellaneousOptions: SymbolDisplayMiscellaneousOptions.UseSpecialTypes,
+                        genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters | SymbolDisplayGenericsOptions.IncludeTypeConstraints);
                     var functionObj = new Function
                     {
                         Name = ms.Name,
