@@ -39,6 +39,16 @@ globals:
   0x141FF20D8: g_OodleNew
   0x141FF20E0: g_OodleDelete
   0x141FF20F0: g_OodlePrintf
+  0x1424BC0F0: ?hkaSkeletonMapperClass@@3VhkClass@@B
+  0x1424BC170: ?hkaAnimationContainerClass@@3VhkClass@@B
+  0x1424BE170: ?hkReferencedObjectClass@@3VhkClass@@B
+  0x1424C7940: ?hkMonitorStream__m_instance@@3V?$hkThreadLocalData@PEAVhkMonitorStream@@@@A
+  0x1424C9AB0: ?hkMeshShapeClass@@3VhkClass@@B
+  0x1424CA3E0: ?hkSkinnedRefMeshShapeClass@@3VhkClass@@B
+  0x1424CBFB0: ?hkRootLevelContainerClass@@3VhkClass@@B
+  0x1424CC010: ?s_instance@?$hkSingleton@VhkBuiltinTypeRegistry@@@@2PEAVhkBuiltinTypeRegistry@@EA
+  0x1424CC060: ?s_instance@?$hkSingleton@VhkSerializeDeprecated@@@@2PEAVhkSerializeDeprecated@@EA
+  0x1424CC148: ?s_instance@?$hkSingleton@VhkVtableClassRegistry@@@@2PEAVhkVtableClassRegistry@@EA
 
 functions:
   0x140060D30: MemoryManager_AllocDefaultSpace
@@ -5778,7 +5788,7 @@ classes:
       0x1410CC380: AddonOverlayMouseMovedEvent
       0x1410CC5B0: AddonOverlayMouseClickEvent
       0x1410CC9B0: AddonOverlayMouseReleaseEvent
-      0x1410CE660: _SetAddonScale
+      0x1410CE660: SetAddonScale
   Client::UI::AddonActionMenuReplaceList:
     vtbls:
       - ea: 0x1419D0AD8
@@ -6175,3 +6185,235 @@ classes:
   Vector3:
     funcs:
       0x1401A8050: Normalize
+  # havok
+  hkArrayUtil:
+    funcs:
+      0x1416D9910: ?_reserve@hkArrayUtil@@SA?AUhkResult@@AEAVhkMemoryAllocator@@PEAXHH@Z
+      0x1416D99D0: ?_reserveMore@hkArrayUtil@@SAXAEAVhkMemoryAllocator@@PEAXH@Z
+  hkBinaryTagfileReader:
+    funcs:
+      0x14179DB40: ??0hkBinaryTagfileReader@@QEAA@XZ
+      0x14179DBB0: ?readHeader@hkBinaryTagfileReader@@QEAA?AUhkResult@@PEAVhkStreamReader@@AEAUHeader@hkBinaryTagfile@@@Z
+  hkClass:
+    funcs:
+      0x1416D5D70: ?getName@hkClass@@QEBAPEBDXZ
+      0x1416D5D10: ??0hkClass@@QEAA@PEBDPEBV0@HPEAPEBV0@HPEBVhkClassEnum@@HPEBVhkClassMember@@HPEBXPEBVhkCustomAttributes@@II@Z
+  hkError:
+    funcs:
+      0x1416E3050: ?messageWarning@hkError@@SAHHPEBD0H@Z
+  hkErrStream:
+    funcs:
+      0x1416E41E0: ??0hkErrStream@@QEAA@PEAXH@Z
+      0x1416E42A0: ??1hkErrStream@@UEAA@XZ
+  hkIstream:
+    funcs:
+      0x14186C830: ?getline@hkIstream@@QEAAHPEADHD@Z
+      0x14186C000: ??0hkIstream@@QEAA@PEBD@Z
+      0x14186C170: ??0hkIstream@@QEAA@PEBVhkMemoryTrack@@@Z
+      0x14186BFA0: ??0hkIstream@@QEAA@PEAVhkStreamReader@@@Z
+      0x14186C0A0: ??0hkIstream@@QEAA@PEBXH@Z
+      0x14186C2B0: ?isOk@hkIstream@@QEBA?AVhkBool@@XZ
+      0x14186C230: ??1hkIstream@@UEAA@XZ
+  hkLeakDetectorAllocator:
+    funcs:
+      0x1416F5D90: ?init@hkLeakDetectAllocator@@QEAAXPEAVhkMemoryAllocator@@0P6AXPEBDPEAX@Z2@Z
+  hkLifoAllocator:
+    funcs:
+      0x1416D96B0: ?slowBlockFree@hkLifoAllocator@@IEAAXPEAXH@Z
+  hkLoader:
+    funcs:
+      0x141784A10: load1 # hkStreamReader, hkClass, hkTypeInfoRegistry
+      0x1417848D0: load2 # hkStreamReader, hkTypeInfoRegistry
+      0x141784870: load3 # hkStreamReader    
+  hkMatrix4f:
+    funcs:
+      0x1416F59D0: ?set4x4ColumnMajor@hkMatrix4f@@QEAAXPEBM@Z
+  hkMatrixDecompositionImpl:
+    funcs:
+      0x1416DC0C0: ?decompose4x4ColTransform@?$hkMatrixDecompositionImpl@M@@SAXPEBMAEAUDecomposition@1@@Z
+      0x1416DC0F0: ?decomposeMatrix@?$hkMatrixDecompositionImpl@M@@SAXAEBVhkMatrix4f@@AEAUDecomposition@1@@Z
+  hkMemoryRouter:
+    funcs:
+      0x1416D53B0: ?easyFree@hkMemoryRouter@@SAXAEAVhkMemoryAllocator@@PEAX@Z
+  hkMemoryStreamReader:
+    funcs:
+      0x1416D6FB0: ??0hkMemoryStreamReader@@QEAA@PEBXHW4MemoryType@0@@Z
+      0x1416D7050: ??1hkMemoryStreamReader@@UEAA@XZ
+  hkMemoryTrackStreamReader:
+    funcs:
+      0x141700770: ??0hkMemoryTrackStreamReader@@QEAA@PEBVhkMemoryTrack@@W4MemoryType@0@_N@Z
+  hkMemUtil:
+    funcs:
+      0x1416E54F0: ?memCpy@hkMemUtil@@YAXPEAXPEBXH@Z
+      0x1416E5680: ?memSet@hkMemUtil@@YAXPEAXHH@Z
+  hkNativePackfileUtils:
+    funcs:
+      0x1417ABC90: ?getContentsClassName@hkNativePackfileUtils@@YAPEBDPEBXH@Z
+  hkObjectResource:
+    funcs:
+      0x1417B8850: ?getContentsPointer@hkObjectResource@@UEBAPEAXPEBDPEBVhkTypeInfoRegistry@@@Z
+      0x141798BA0: ?getContentsTypeName@hkObjectResource@@UEBAPEBDXZ
+  hkOStream:
+    funcs:
+      0x1416E35F0: ??6hkOstream@@QEAAAEAV0@PEBD@Z
+      0x1416E3BB0: ??6hkOstream@@QEAAAEAV0@AEBVhkStringPtr@@@Z
+  hkPackfileData:
+    funcs:
+      0x1417B80E0: ?getContentsPointer@hkPackfileData@@UEBAPEAXPEBDPEBVhkTypeInfoRegistry@@@Z
+  hkPackfileHeader:
+    funcs:
+      0x1417AB1E0: ?readHeader@hkPackfileHeader@@SA?AUhkResult@@PEAVhkStreamReader@@AEAV1@@Z
+      0x1417AB0B0: ?readPredicates@hkPackfileHeader@@QEBA?AUhkResult@@PEAVhkStreamReader@@AEAV?$hkArray@GUhkContainerHeapAllocator@@@@@Z
+  hkQsTransformf:
+    funcs:
+      0x1416DBE80: ?fastRenormalizeBatch@hkQsTransformf@@SAXPEAV1@PEAMI@Z
+      0x1416DBEE0: ?fastRenormalizeBatch@hkQsTransformf@@SAXPEAV1@MI@Z
+      0x1416DBF60: ?fastRenormalizeQuaternionBatch@hkQsTransformf@@SAXPEAV1@I@Z
+      0x1416DBBD0: ?get4x4ColumnMajor@hkQsTransformf@@QEBAXPEIAM@Z
+      0x1416DBD60: ?isOk@hkQsTransformf@@QEBA_NM@Z
+      0x1416DBD00: ?set@hkQsTransformf@@QEAA_NAEBVhkMatrix4f@@@Z
+      0x1416DBCA0: ?set4x4ColumnMajor@hkQsTransformf@@QEAA_NPEBM@Z
+      0x1416DB8A0: ?getAngleSr@hkQuaternionf@@QEBA?AVhkSimdFloat32@@XZ
+      0x1416DB9C0: ?isOk@hkQuaternionf@@QEBAIM@Z
+      0x1416D9FC0: ?setAxisAngle@hkQuaternionf@@QEAAXAEBVhkVector4f@@M@Z
+      0x1416DA000: ?setAxisAngle@hkQuaternionf@@QEAAXAEBVhkVector4f@@AEBVhkSimdFloat32@@@Z
+      0x1416DA230: ?setFromEulerAngles@hkQuaternionf@@QEAAXMMM@Z
+      0x1416DA2A0: ?setFromEulerAngles@hkQuaternionf@@QEAAXAEBVhkSimdFloat32@@00@Z
+      0x1416DB050: ?setSlerp@hkQuaternionf@@QEAAXAEBV1@0AEBVhkSimdFloat32@@@Z
+  hkRefVariant:
+    funcs:
+      0x14186BF80: ?getClass@hkRefVariant@@QEBAPEBVhkClass@@XZ
+  hkRootLevelContainer:
+    funcs:
+      0x141787C20: ?findObjectByName@hkRootLevelContainer@@QEBAPEAXPEBDPEBX@Z
+      0x141787B00: ?findObjectByType@hkRootLevelContainer@@QEBAPEAXPEBDPEBX@Z
+  hkSerializeUtil:
+    funcs:
+      0x141784F30: ?load@hkSerializeUtil@@YAPEAVhkResource@@PEBXHPEAUErrorDetails@1@ULoadOptions@1@@Z
+      0x141785B30: ?detectFormat@hkSerializeUtil@@YAXPEAVhkStreamReader@@AEAUFormatDetails@1@PEAUErrorDetails@1@@Z
+  hkSkinnedRefMeshShape:
+    funcs:
+      0x14176C1A0: ?staticClass@hkSkinnedRefMeshShape@@SAAEBVhkClass@@XZ
+  hkString:
+    funcs:
+      0x1416E4EC0: ?memSet@hkString@@YAXPEAXHH@Z
+      0x1416E4660: ?strCmp@hkString@@YAHPEBD0@Z
+  hkStringPtr:
+    funcs:
+      0x1416D58C0: __ZN11hkStringPtrC1Ev
+      0x1416D59A0: ??4hkStringPtr@@QEAAAEAV0@PEBD@Z
+      0x1416D59D0: ??4hkStringPtr@@QEAAAEAV0@AEBV0@@Z
+      0x1416D5980: ??1hkStringPtr@@QEAA@XZ
+  hkVector4f:
+    funcs:
+      0x1416D9C80: ?setRotatedDir@hkVector4f@@QEAAXAEBVhkQuaternionf@@AEBV1@@Z
+      0x1416D9D00: ?setRotatedInverseDir@hkVector4f@@QEAAXAEBVhkQuaternionf@@AEBV1@@Z
+  hkVersionUtil:
+    funcs:
+      0x1417AC920: hkVersionUtil_getCurrentVersion # returns c string
+  hkaAdditiveAnimationUtility:
+    funcs:
+      0x1416BD470: ?applyAdditiveTransform@hkaAdditiveAnimationUtility@@SAXAEBVhkQsTransformf@@0W4BlendHint@hkaAnimationBinding@@AEAV2@@Z
+  hkaAnimatedSkeleton:
+    funcs:
+      0x141698880: ?addAnimationControl@hkaAnimatedSkeleton@@QEAAXPEAVhkaAnimationControl@@@Z
+      0x1416982D0: ?getDeltaReferenceFrame@hkaAnimatedSkeleton@@QEBAXMAEAVhkQsTransformf@@@Z
+      0x141697F50: ??0hkaAnimatedSkeleton@@QEAA@PEBVhkaSkeleton@@@Z
+      0x141698960: ?removeAnimationControl@hkaAnimatedSkeleton@@QEAAXPEAVhkaAnimationControl@@@Z
+      0x141698190: ?sampleAndCombineAnimations@hkaAnimatedSkeleton@@UEBAXPEAVhkQsTransformf@@PEAM@Z
+      0x1416998B0: ?sampleAndCombineIndividual@hkaAnimatedSkeleton@@IEBAXIPEBFPEAVhkQsTransformf@@I0PEAM@Z
+      0x141698270: ?sampleAndCombineIndividualBones@hkaAnimatedSkeleton@@UEBAXPEAVhkQsTransformf@@PEAFI@Z
+      0x1416982A0: ?sampleAndCombineIndividualSlots@hkaAnimatedSkeleton@@UEBAXPEAMPEAFI@Z
+      0x141698C90: ?sampleAndCombineInternal@hkaAnimatedSkeleton@@IEBAXPEAVhkQsTransformf@@IPEAMI_N@Z
+      0x1416981C0: ?sampleAndCombinePartialAnimations@hkaAnimatedSkeleton@@UEBAXPEAVhkQsTransformf@@IPEAMI@Z
+      0x1416980B0: ?stepDeltaTime@hkaAnimatedSkeleton@@UEAAXM@Z
+      0x141697FA0: ??1hkaAnimatedSkeleton@@UEAA@XZ
+  hkaAnimationContainer:
+    funcs:
+      0x1416911F0: ?staticClass@hkaAnimationContainer@@SAAEBVhkClass@@XZ
+  hkaAnimationControl:
+    funcs:
+      0x1416BCCE0: ?removeAnimationControlListener@hkaAnimationControl@@QEAAXPEAVhkaAnimationControlListener@@@Z
+      0x1416BCB70: ?sampleTracks@hkaAnimationControl@@UEBAXPEAVhkQsTransformf@@PEAM@Z
+  hkaBlender:
+    funcs:
+      0x14169B840: ?blend@hkaBlender@@YAXPEIAM0PEIBM111AEBVhkSimdFloat32@@HW4BLEND_MODE@1@@Z
+      0x14169C730: ?blend@hkaBlender@@YAXPEIAVhkQsTransformf@@PEIAMPEIBV2@PEIBM23AEBVhkSimdFloat32@@HW4BLEND_MODE@1@W4ROTATION_MODE@1@@Z
+      0x14169E000: ?modelFromLocal@hkaBlender@@YAXPEAVhkQsTransformf@@0PEBFHAEBV2@@Z
+      0x14169DA20: ?normalize@hkaBlender@@YAXPEAVhkQsTransformf@@H@Z
+  hkaDefaultAnimationControl:
+    funcs:
+      0x141697960: ?getNumberOfTransformTracks@hkaDefaultAnimationControl@@UEBAHXZ
+  hkaLookAtIkSolver:
+    funcs:
+      0x1416A3E50: ?solve@hkaLookAtIkSolver@@SA?AVhkBool@@AEBUSetup@1@AEBVhkVector4f@@MAEAVhkQsTransformf@@PEBURangeLimits@1@@Z
+  hkaMirroredSkeleton:
+    funcs:
+      0x1416CA100: ?inplaceSwap@hkaMirroredSkeleton@@CAXPEAVhkQsTransformf@@PEBFH@Z
+      0x1416C9E70: ?mirrorBonesAdditive@hkaMirroredSkeleton@@SAXPEAVhkQsTransformf@@PEBFPEBVhkQuaternionf@@1H@Z
+      0x1416C9C90: ?mirrorBonesNormal@hkaMirroredSkeleton@@SAXPEAVhkQsTransformf@@PEBFPEBVhkQuaternionf@@1H@Z
+      0x1416C8FE0: ?setAllBoneInvariantsFromReferencePose@hkaMirroredSkeleton@@QEAAXAEBVhkQuaternionf@@M@Z
+      0x1416C92A0: ?setAllBoneInvariantsFromSymmetricPose@hkaMirroredSkeleton@@QEAAXAEBVhkQuaternionf@@MPEBVhkQsTransformf@@@Z
+      0x1416C9250: ?setAllBoneInvariantsFromSymmetricPose@hkaMirroredSkeleton@@QEAAXAEBVhkQuaternionf@@MAEBVhkaPose@@@Z
+      0x1416C95D0: ?setBoneInvariant@hkaMirroredSkeleton@@QEAAXHAEBVhkQuaternionf@@@Z
+  hkaPartitionedAnimationUtility:
+    funcs:
+      0x1416C4CE0: ?mapPartitionPoseToFullPoseWithWeights@hkaPartitionedAnimationUtility@@SAXPEBUPartition@hkaSkeleton@@PEBFHPEBVhkQsTransformf@@PEBMHPEAV4@PEAM@Z
+  hkaPose:
+    funcs:
+      0x140325E40: ??1hkaPose@@QEAA@XZ
+      0x141695750: ??0hkaPose@@QEAA@W4PoseSpace@0@PEBVhkaSkeleton@@AEBV?$hkArrayBase@VhkQsTransformf@@@@@Z
+      0x1416957B0: ??0hkaPose@@QEAA@W4PoseSpace@0@PEBVhkaSkeleton@@PEBVhkQsTransformf@@H@Z
+      0x141695830: ?getSyncedPoseLocalSpace@hkaPose@@QEBAAEBV?$hkArray@VhkQsTransformf@@UhkContainerHeapAllocator@@@@XZ
+      0x141695850: ?getSyncedPoseModelSpace@hkaPose@@QEBAAEBV?$hkArray@VhkQsTransformf@@UhkContainerHeapAllocator@@@@XZ
+      0x141695870: ?setPoseLocalSpace@hkaPose@@QEAAXAEBV?$hkArrayBase@VhkQsTransformf@@@@@Z
+      0x1416958E0: ?setPoseModelSpace@hkaPose@@QEAAXAEBV?$hkArrayBase@VhkQsTransformf@@@@@Z
+      0x141695950: ?syncLocalSpace@hkaPose@@QEBAXXZ
+      0x141695C00: ?syncModelSpace@hkaPose@@QEBAXXZ
+      0x141695DC0: ?accessBoneLocalSpace@hkaPose@@QEAAAEAVhkQsTransformf@@H@Z
+      0x1416962E0: ?accessBoneModelSpace@hkaPose@@QEAAAEAVhkQsTransformf@@HW4PropagateOrNot@1@@Z
+      0x1416966D0: ?accessSyncedPoseLocalSpace@hkaPose@@QEAAAEAV?$hkArray@VhkQsTransformf@@UhkContainerHeapAllocator@@@@XZ
+      0x141696730: ?accessUnsyncedPoseLocalSpace@hkaPose@@QEAAAEAV?$hkArray@VhkQsTransformf@@UhkContainerHeapAllocator@@@@XZ
+      0x141696770: ?accessUnsyncedPoseModelSpace@hkaPose@@QEAAAEAV?$hkArray@VhkQsTransformf@@UhkContainerHeapAllocator@@@@XZ
+      0x1416967B0: ?setToReferencePose@hkaPose@@QEAAXXZ
+      0x141696850: ?enforceSkeletonConstraintsLocalSpace@hkaPose@@QEAAXXZ
+      0x141696920: ?enforceSkeletonConstraintsModelSpace@hkaPose@@QEAAXXZ
+      0x141696AA0: ?getModelSpaceAabb@hkaPose@@QEBAXAEAVhkAabb@@@Z
+      0x141696B40: ?init@hkaPose@@AEAAXW4PoseSpace@1@PEBVhkaSkeleton@@AEBV?$hkArrayBase@VhkQsTransformf@@@@@Z
+      0x141696CD0: ?calculateBoneModelSpace@hkaPose@@AEBAAEBVhkQsTransformf@@H@Z
+      0x141696F20: ?checkPoseValidity@hkaPose@@QEBA?AVhkBool@@XZ
+      0x141696FC0: ?checkPoseTransformsValidity@hkaPose@@QEBA?AVhkBool@@XZ
+  hkaQuantizedAnimation:
+    funcs:
+      0x1416B5340: ?sampleFullPose@hkaQuantizedAnimation@@SAXPEBE00HHPEAVhkQsTransformf@@PEAM22PEBV2@PEBM1122M_NM@Z
+  hkaSampleAndCombineUtils:
+    funcs:
+      0x1416BE210: ?copyReferencePose@hkaSampleAndCombineUtils@@SAXPEAVhkQsTransformf@@PEAMPEBV2@IPEBMI@Z
+  hkaSampleBlendJob:
+    funcs:
+      0x14169E6D0: hkaSampleBlendJob_build # void build(const hkaAnimatedSkeleton* skel, hkQsTransform* bonesOut, hkReal* floatsOut, bool convertToModel = false, int numBones = -1, int numFloats = -1);
+  hkaSkeletonMapper:
+    funcs:
+      0x1416A8110: ?checkMappingLocalSpace@hkaSkeletonMapper@@SAXAEBVhkaSkeletonMapperData@@@Z
+      0x1416A87F0: ?checkTransform@hkaSkeletonMapper@@SA_NW4MappingType@hkaSkeletonMapperData@@AEBVhkQsTransformf@@@Z
+      0x1416A7BD0: j_?combineSparsePoseWithFullPose@hkaSkeletonMapper@@SAXPEBVhkQsTransformf@@0PEBFHHW4BlendHint@hkaAnimationBinding@@PEAV2@@Z
+      0x1416A7DD0: ?combineSparsePoseWithFullPose@hkaSkeletonMapper@@SAXPEBVhkQsTransformf@@0PEBFHHW4BlendHint@hkaAnimationBinding@@PEAV2@@Z
+      0x1416A67D0: ?mapPose@hkaSkeletonMapper@@QEBAXPEBVhkQsTransformf@@0PEAV2@W4ConstraintSource@1@@Z
+      0x1416A7700: ?mapPose@hkaSkeletonMapper@@QEBAXAEBVhkaPose@@AEAV2@W4ConstraintSource@1@@Z
+      0x1416A7530: ?mapPoseLocalSpace@hkaSkeletonMapper@@QEBAXPEBVhkQsTransformf@@PEAV2@W4BlendHint@hkaAnimationBinding@@@Z
+      0x1416A8850: ?mapPoseLocalSpaceInternal@hkaSkeletonMapper@@CAXAEBVhkaSkeletonMapperData@@PEBVhkQsTransformf@@PEAV3@PEBF3AEBV?$hkArray@FUhkContainerHeapAllocator@@@@W4BlendHint@hkaAnimationBinding@@_NPEBMPEAM@Z
+      0x141691100: ?staticClass@hkaSkeletonMapper@@SAAEBVhkClass@@XZ
+  hkaSkeletonUtils:
+    funcs:
+      0x1416950F0: ?calcAabb@hkaSkeletonUtils@@SAXIPEBVhkQsTransformf@@PEBFAEBV2@AEAVhkAabb@@@Z
+      0x141693E50: ?enforcePoseConstraintsModelSpace@hkaSkeletonUtils@@SAXAEBVhkaSkeleton@@PEBVhkQsTransformf@@PEAV3@@Z
+      0x141694870: ?getAncestors@hkaSkeletonUtils@@SAXAEBVhkaSkeleton@@FAEAV?$hkArray@FUhkContainerHeapAllocator@@@@@Z
+      0x141695230: ?hasValidPartitions@hkaSkeletonUtils@@SA?AVhkBool@@AEBVhkaSkeleton@@@Z
+      0x141694900: ?markDescendants@hkaSkeletonUtils@@SAXPEBVhkaSkeleton@@HPEA_N_N@Z
+      0x141692E10: ?transformLocalPoseToModelPose@hkaSkeletonUtils@@SAXHPEBFPEIBVhkQsTransformf@@PEIAV2@@Z
+      0x141693330: ?transformLocalPoseToWorldPose@hkaSkeletonUtils@@SAXHPEBFAEBVhkQsTransformf@@PEIBV2@PEIAV2@@Z
+      0x141692FC0: ?transformModelPoseToLocalPose@hkaSkeletonUtils@@SAXHPEBFPEIBVhkQsTransformf@@PEIAV2@@Z
+      0x141693490: ?transformWorldPoseToLocalPose@hkaSkeletonUtils@@SAXHPEBFAEBVhkQsTransformf@@PEIBV2@PEIAV2@@Z
+  hkaTwoJointsIkSolver:
+    funcs:
+      0x1416C5270: ?solve@hkaTwoJointsIkSolver@@SA?AVhkBool@@AEBUSetup@1@AEAVhkaPose@@@Z

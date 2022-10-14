@@ -283,6 +283,10 @@ if api is None:
                 if current_func_name.startswith("j_"):  # jump
                     current_func_name = current_func_name.lstrip("j_")
 
+                # Mangled func names, thanks IDA
+                if proposed_func_name.startswith("?") or proposed_func_name.startswith("_"):
+                    return proposed_func_name
+
                 proposed_qualified_func_name = "{0}.{1}".format(class_name, proposed_func_name)
                 if current_func_name == proposed_qualified_func_name:
                     return ""
