@@ -1,6 +1,6 @@
 ﻿namespace FFXIVClientStructs.Havok;
 
-public unsafe struct hkaDefaultAnimationControl
+public unsafe partial struct hkaDefaultAnimationControl
 {
 	public enum EaseStatusEnum
 	{
@@ -41,4 +41,7 @@ public unsafe struct hkaDefaultAnimationControl
 	private uint pad2;
 	public hkArray<hkaDefaultAnimationControlListener> DefaultListeners;
 	public hkaDefaultAnimationControlMapperData* Mapper;
+
+	[MemberFunction("48 89 5C 24 ?? 57 48 83 EC 20 48 8B DA 48 8B F9 48 8B 52 38")]
+	public partial void Ctor1(hkaDefaultAnimationControl* other);
 }

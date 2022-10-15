@@ -6333,6 +6333,7 @@ classes:
       0x1416911F0: ?staticClass@hkaAnimationContainer@@SAAEBVhkClass@@XZ
   hkaAnimationControl:
     funcs:
+      0x1416971E0: ??0hkaDefaultAnimationControl@@QEAA@AEBV0@@Z
       0x1416BCCE0: ?removeAnimationControlListener@hkaAnimationControl@@QEAAXPEAVhkaAnimationControlListener@@@Z
       0x1416BCB70: ?sampleTracks@hkaAnimationControl@@UEBAXPEAVhkQsTransformf@@PEAM@Z
   hkaBlender:
