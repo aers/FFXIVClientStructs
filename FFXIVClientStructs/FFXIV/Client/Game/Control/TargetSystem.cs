@@ -36,6 +36,9 @@ public unsafe partial struct TargetSystem
     [MemberFunction("E9 ?? ?? ?? ?? 48 8B 01 FF 50 08")]
     public partial ulong InteractWithObject(GameObject* obj, bool checkLineOfSight = true);
 
+    [MemberFunction("E9 ?? ?? ?? ?? 8B C0 48 8D 0D")]
+    public partial void OpenObjectInteraction(GameObject* obj);
+
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B D8 48 85 DB 74 ?? 48 8B CB")]
     public partial GameObject* GetMouseOverObject(int x, int y, GameObjectArray* objectArray, Camera* camera);
 

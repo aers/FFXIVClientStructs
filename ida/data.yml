@@ -2159,6 +2159,7 @@ classes:
     funcs:
       0x1404CC640: ctor
       0x1404D4D00: InteractWithObject
+      0x1404D8830: OpenObjectInteraction
       0x1404D65E0: GetHardTargetObjectId
       0x1404D6600: GetHardTargetId
       0x1404D6620: GetHardTarget
@@ -5025,6 +5026,14 @@ classes:
     vtbls:
       - ea: 0x141906C70
         base: Client::Game::Event::EventSceneModuleImplBase
+  Client::Game::Event::EventSceneModule:
+    funcs:
+      0x1407D6A40: ctor
+      0x1407D6D10: dtor
+  Client::Game::Event::EventSceneModule::UISkipListener:
+    vtbls:
+      - ea: 0x141908328
+        base: Component::GUI::AtkModuleInterface::AtkEventInterface
   Client::Game::Event::Director:
     vtbls:
       - ea: 0x141908C10
@@ -5057,6 +5066,9 @@ classes:
         base: Client::Game::Event::ModuleBase
     funcs:
       0x1408145B0: ctor
+  Client::Game::Event::EventState:
+    vtbls:
+      - ea: 0x14190B9F8
   Client::Game::Event::LeveDirector:
     vtbls:
       - ea: 0x14190DAF8
