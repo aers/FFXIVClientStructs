@@ -7,5 +7,5 @@ public struct ContentDirector
 {
 	[FieldOffset(0x00)] public Director Director;
 
-	[FieldOffset(0x700)] public float ContentTimeLeft;
+	[FieldOffset(0x740)] public float ContentTimeLeft;
 }
