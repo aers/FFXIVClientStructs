@@ -94,6 +94,9 @@ public unsafe partial struct UIModule
     [VirtualFunction(23)]
     public partial void* GetFlagStatusModule();
 
+    [VirtualFunction(26)] 
+    public partial RaptureUiDataModule* GetRaptureUiDataModule();
+
     [VirtualFunction(30)]
     public partial void* GetRaptureTeleportHistory();
     
