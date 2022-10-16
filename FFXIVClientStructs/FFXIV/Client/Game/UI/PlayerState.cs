@@ -39,6 +39,8 @@ public unsafe partial struct PlayerState
 
     [FieldOffset(0x2A0)] public uint BaseRestedExperience;
 
+    [FieldOffset(0x414)] public uint FishingBait;
+
     [FieldOffset(0x45C)] public short PlayerCommendations;
 
     [FieldOffset(0x712)] public fixed ushort DesynthesisLevels[8];
