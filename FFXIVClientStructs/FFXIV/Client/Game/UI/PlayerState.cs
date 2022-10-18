@@ -45,7 +45,7 @@ public unsafe partial struct PlayerState
 
     [FieldOffset(0x712)] public fixed ushort DesynthesisLevels[8];
     
-    [StaticAddress("48 8D 0D ?? ?? ?? ?? E9 ?? ?? ?? ?? CC 48 8B C1")]
+    [StaticAddress("48 8D 0D ?? ?? ?? ?? 4D 8B F9")]
     public static partial PlayerState* Instance();
 
     public float GetDesynthesisLevel(uint classJobId)

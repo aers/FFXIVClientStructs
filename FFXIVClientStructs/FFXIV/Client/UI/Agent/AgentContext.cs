@@ -67,7 +67,7 @@ public unsafe partial struct AgentContext
     public partial void OpenYesNo(byte* text, uint yesId = 576, uint noId = 577, uint checkboxId = 0,
         bool setOwner = true);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 6B 47")]
+    [MemberFunction("E8 ?? ?? ?? ?? 40 80 F6")]
     public partial void ClearMenu();
 
     [MemberFunction("E8 ?? ?? ?? ?? 41 BF ?? ?? ?? ?? 48 8D 54 24")]
