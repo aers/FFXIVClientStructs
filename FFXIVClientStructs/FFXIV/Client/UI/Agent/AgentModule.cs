@@ -461,5 +461,6 @@ public enum AgentId : uint {
     MJIMinionNoteBook = 411, 
     MJIBuildingMove = 412,
     MJIEntrance = 413,
-    ArchiveItem = 414
+    ArchiveItem = 414,
+    VVDFinder = 416
 }

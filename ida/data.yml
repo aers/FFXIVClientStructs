@@ -5007,6 +5007,10 @@ classes:
     vtbls:
       - ea: 0x141A03840
         base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentVVDFinder:
+    vtbls:
+      - ea: 0x141A04378
+        base: Client::UI::Agent::AgentInterface
   Client::Game::Event::EventHandler:
     vtbls:
       - ea: 0x14190C6D8
