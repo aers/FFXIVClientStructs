@@ -2688,6 +2688,13 @@ classes:
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
       0x1405F26E0: ctor
+  Client::UI::RaptureUiDataModule:
+    vtbls:
+      - ea: 0x1418E2D40
+        base: Client::UI::Misc::UserFileManager::UserFileEvent
+    funcs:
+      0x14060ABA0: ctor
+      0x14068EAA0: MjiCreateWorkshopPreset
   Client::UI::UI3DModule::MapInfo:
     vtbls:
       - ea: 0x1418E2E18
@@ -2745,6 +2752,7 @@ classes:
       21: GetLetterDataModule
       22: GetRetainerTaskDataModule
       23: GetFlagStatusModule
+      26: GetRaptureUiDataModule
       30: GetRaptureTeleportHistory
       32: GetRecommendedEquipModule
       36: GetAgentModule
