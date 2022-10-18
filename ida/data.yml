@@ -1,4 +1,4 @@
-version: 2022.09.07.0000.0000
+version: 2022.10.05.0000.0000
 
 globals:
   0x1418908F0: g_UIColorTable
@@ -845,7 +845,7 @@ classes:
   Common::Component::Excel::ExcelModuleInterface: # these are two different classes
     vtbls:
       - ea: 0x141C06730
-#fail       - ea: 0x141BFF5F0
+      - ea: 0x141C067C0
         base: Common::Component::Excel::ExcelResourceListener
     vfuncs:
       1: GetSheetByIndex
@@ -1104,7 +1104,7 @@ classes:
       - ea: 0x141890D40
   Client::UI::Info::InfoProxyPageInterface:
     vtbls:
-#fail       - ea: 0x14188FD88
+      - ea: 0x141890DA0
         base: Client::UI::Info::InfoProxyInterface
   Common::Configuration::ConfigBase::ChangeEventInterface:
     vtbls:
@@ -2315,7 +2315,7 @@ classes:
       0x1405084A0: SetRotation
       0x140508510: GetRotationDegrees
       0x140508540: SetRotationDegrees
-#fail       0x140508700: GetColor
+      0x1405085C0: GetColor
       0x1405085E0: SetColor
       0x140508620: SetAddRGB
       0x140508670: SetMultiplyRGB
@@ -3050,7 +3050,7 @@ classes:
       - ea: 0x1418FC640
   Client::UI::Shell::RaptureShellCommandInterface:
     vtbls:
-#fail       - ea: 0x1418F5418
+      - ea: 0x1418FC650
         base: Component::Shell::ShellCommandInterface
   Client::UI::Shell::RaptureShellModule:
     vtbls:
@@ -3367,7 +3367,7 @@ classes:
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandHotbarBase:
     vtbls:
-#fail       - ea: 0x1418F8108
+      - ea: 0x1418FF370
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandHotbar:
     vtbls:
@@ -4808,7 +4808,7 @@ classes:
       0x140A317A0: CanUseTeleport # static
       0x140A2CA30: ResetMapMarkers
       0x140A2CAA0: CreateMapMarkers
-#fail       0x140A2C170: ResetMiniMapMarkers
+      0x140A2D280: ResetMiniMapMarkers
       0x140A2D2C0: CreateMiniMapMarkers
   Client::UI::Agent::AgentRecipeNote:
     vtbls:
