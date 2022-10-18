@@ -5007,6 +5007,10 @@ classes:
     vtbls:
       - ea: 0x141A03840
         base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentVVDNotebook:
+    vtbls:
+      - ea: 0x141A0C6A8
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentVVDFinder:
     vtbls:
       - ea: 0x141A04378
