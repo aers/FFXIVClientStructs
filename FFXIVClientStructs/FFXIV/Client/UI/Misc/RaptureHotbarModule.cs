@@ -1,4 +1,5 @@
-﻿using FFXIVClientStructs.FFXIV.Client.System.Framework;
+﻿using System;
+using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
@@ -208,7 +209,24 @@ public unsafe partial struct HotBarSlot
     /// - 0/255: "generic"
     [FieldOffset(0xDE)] public byte UNK_0xDE;
     
-    [FieldOffset(0xDF)] public byte IsEmpty; // ?
+    /// <summary>
+    /// A "boolean" representing if this specific hotbar slot has been fully loaded. False for empty slots and slots
+    /// that have yet to be loaded in the UI.
+    /// </summary>
+    /// <remarks>
+    /// This appears to initialize as 0 and is set to 1 when the hotbar slot appears on a visible hotbar. It will not
+    /// reset if the slot is hidden (and subsequently outdated).
+    /// </remarks>
+    [FieldOffset(0xDF)] public byte IsLoaded; // ?
+
+    /// <summary>
+    /// Check if this hotbar slot is considered "empty" or not.
+    /// </summary>
+    /// <remarks>
+    /// Borrows game logic of checking for a non-zero command ID. Kept as a byte for API compatibility though this
+    /// probably should be a bool instead.
+    /// </remarks>
+    public byte IsEmpty => Convert.ToByte(this.CommandId == 0);
 
     [MemberFunction("E8 ?? ?? ?? ?? 4C 39 6F 08")]
     public partial void Set(UIModule* uiModule, HotbarSlotType type, uint id);

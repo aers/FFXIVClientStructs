@@ -17,6 +17,9 @@ public unsafe partial struct AddonActionBarBase {
     /// <summary>
     /// The ID of the hotbar in RaptureHotbarModule that this ActionBar is currently referencing.
     /// </summary>
+    /// <remarks>
+    /// This field is ignored for WHXBs.
+    /// </remarks>
     [FieldOffset(0x23C)] public byte RaptureHotbarId;
 
     [FieldOffset(0x23E)] public byte SlotCount;

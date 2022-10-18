@@ -2909,6 +2909,7 @@ classes:
       0x14065B9B0: GetUnkCBForSlot
       0x14065C080: GetAdjustedSlotTooltip    # loads in some adjustment things and then calls GetSlotTooltip
       0x14065C140: GetUnkD0ForSlot
+      0x14065CB70: GetItemRowForSlot
       0x14065D6A0: GetAdjustedIconIdForSlot  # loads in adjustment things and then calls GetIconForIdForSlot
       0x14065D4B0: GetRecastTimeFromSlotB    # maybe?
       0x14065DC20: LoadUnkCAForSlot
