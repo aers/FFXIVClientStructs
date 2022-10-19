@@ -9,7 +9,7 @@ public unsafe partial struct PlayerState
     [FieldOffset(0x54)] public uint ObjectId;
     [FieldOffset(0x58)] public ulong ContentId;
 
-    [FieldOffset(0x6A)] public byte CurrentClassJobId;
+    [FieldOffset(0x6E)] public byte CurrentClassJobId;
     [FieldOffset(0x78)] public short CurrentLevel;
 
     [FieldOffset(0x7A)] public fixed short ClassJobLevelArray[30];
