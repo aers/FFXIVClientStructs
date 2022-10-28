@@ -2277,6 +2277,12 @@ classes:
       0x1404F6670: GetNumberArrayData
       0x1404F67A0: ctor
       0x140518BE0: GetSingleton1  # dalamud GetBaseUIObject
+  Component::GUI::AtkDragDropManager:
+    vtbls:
+      - ea: 0x1418D4268
+        base: Component::GUI::AtkEventListener
+    funcs:
+      0x1404F0250: ctor
   Component::GUI::AtkResNode:
     vtbls:
       - ea: 0x1418D4C10
