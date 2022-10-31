@@ -449,6 +449,7 @@ classes:
       0x1406F3C70: GetInventoryItemCount # (this, itemId, hq, 1, 1, 0)
       0x1406F43E0: GetItemCountInContainer # (this, itemId, containerId, hq, 0)
       0x1400CA900: GetSizeByIndex # static
+      0x1406F81C0: GetPermittedGearsetCount
   ExplorationManager:
     instances:
       - ea: 0x142085058
@@ -2941,6 +2942,16 @@ classes:
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
       0x140673F80: ctor
+      0x1406741B0: GetGearset
+      0x1406741D0: IsValidGearset
+      0x140674270: EquipGearset
+      0x140674310: EquipGearsetInternal
+      0x1406749A0: CreateGearset
+      0x140674A30: DeleteGearset
+      0x140675050: LinkGlamourPlate
+      0x140675170: RemoveGlamourPlateLink
+      0x140675180: HasLinkedGlamourPlate
+      0x140675370: GetClassJobIcon
   Client::UI::Misc::ItemFinderModule:
     vtbls:
       - ea: 0x1418E9758

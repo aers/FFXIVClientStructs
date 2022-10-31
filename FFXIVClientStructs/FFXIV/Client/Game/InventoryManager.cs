@@ -20,6 +20,13 @@ public unsafe partial struct InventoryManager
     [MemberFunction("E8 ?? ?? ?? ?? 33 DB 89 1E")]
     public partial int MoveItemSlot(InventoryType srcContainer, uint srcSlot, InventoryType dstContainer, uint dstSlot, byte unk = 0);
 
+    /// <summary>
+    /// Get the number of gearsets the player is permitted to have/use.
+    /// </summary>
+    /// <returns>Returns the number of gearsets the player can use.</returns>
+    [MemberFunction("E8 ?? ?? ?? ?? 42 8B 74 A5")]
+    public partial byte GetPermittedGearsetCount();
+
     [StaticAddress("48 8D 0D ?? ?? ?? ?? 81 C2")]
     public static partial InventoryManager* Instance();
 }
