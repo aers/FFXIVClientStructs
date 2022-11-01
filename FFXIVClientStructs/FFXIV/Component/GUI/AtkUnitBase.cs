@@ -48,7 +48,7 @@ public unsafe partial struct AtkUnitBase
     [MemberFunction("E8 ?? ?? ?? ?? 0F BF 45 00")]
     public partial float GetGlobalUIScale();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8D 56 54")]
+    [MemberFunction("E8 ?? ?? ?? ?? 4C 8D 34 ED")]
     public partial AtkResNode* GetNodeById(uint nodeId);
     
     [MemberFunction("E8 ?? ?? ?? ?? 8D 56 1E")]
