@@ -46,10 +46,11 @@ public unsafe struct UI3DModule
         [FieldOffset(0x48)] public uint Unk_48;
         [FieldOffset(0x4C)] public byte NamePlateScale;
         [FieldOffset(0x4D)] public byte NamePlateObjectKind;
-        [FieldOffset(0x4E)] public byte NamePlateIndex;
-        [FieldOffset(0x4F)] public byte Unk_4F;
+        [FieldOffset(0x4E)] public byte NamePlateObjectKindAdjusted;
+        [FieldOffset(0x4F)] public byte NamePlateIndex;
+        [FieldOffset(0x50)] public byte Unk_50;
 
-        [FieldOffset(0x50)] public byte SortPriority;
+        [FieldOffset(0x51)] public byte SortPriority;
         // rest unknown
     }
 
