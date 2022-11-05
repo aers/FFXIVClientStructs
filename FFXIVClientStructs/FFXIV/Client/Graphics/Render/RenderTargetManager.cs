@@ -1,10 +1,12 @@
-﻿namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
+﻿using System.ComponentModel.Design.Serialization;
+
+namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 // Client::Graphics::Render::RenderTargetManager
 //   Client::Graphics::Singleton
 //   Client::Graphics::Kernel::Notifier
 
 [StructLayout(LayoutKind.Explicit, Size = 0x460)]
-public unsafe struct RenderTargetManager
+public unsafe partial struct RenderTargetManager
 {
     [FieldOffset(0x0)] public void* vtbl;
 
@@ -28,15 +30,19 @@ public unsafe struct RenderTargetManager
     [FieldOffset(0x218)] public Texture* OffscreenRenderTarget_Unk2;
     [FieldOffset(0x220)] public Texture* OffscreenRenderTarget_Unk3;
 
-    [FieldOffset(0x228)] public uint Resolution_Width;
-    [FieldOffset(0x22C)] public uint Resolution_Height;
-    [FieldOffset(0x230)] public uint ShadowMap_Width;
-    [FieldOffset(0x234)] public uint ShadowMap_Height;
-    [FieldOffset(0x238)] public uint NearShadowMap_Width;
-    [FieldOffset(0x23C)] public uint NearShadowMap_Height;
-    [FieldOffset(0x240)] public uint FarShadowMap_Width;
-    [FieldOffset(0x244)] public uint FarShadowMap_Height;
-    [FieldOffset(0x248)] public bool UnkBool_1;
+    [FieldOffset(0x248)] public uint Resolution_Width;
+    [FieldOffset(0x24C)] public uint Resolution_Height;
+    [FieldOffset(0x250)] public uint ShadowMap_Width;
+    [FieldOffset(0x254)] public uint ShadowMap_Height;
+    [FieldOffset(0x258)] public uint NearShadowMap_Width;
+    [FieldOffset(0x25C)] public uint NearShadowMap_Height;
+    [FieldOffset(0x260)] public uint FarShadowMap_Width;
+    [FieldOffset(0x264)] public uint FarShadowMap_Height;
+    [FieldOffset(0x268)] public bool UnkBool_1;
 
     [FieldOffset(0x250)] public fixed byte RenderTargetArray2[8 * 49];
+
+    [StaticAddress("48 8B 0D ? ? ? ? 48 8B B1 ? ? ? ?", isPointer: true)]
+    public static partial RenderTargetManager* Instance();
+    
 }
