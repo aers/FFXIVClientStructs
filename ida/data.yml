@@ -776,6 +776,14 @@ classes:
         base: Common::Configuration::ConfigBase
     funcs:
       0x14007F8D0: ctor
+  Client::System::Framework::EnvironmentManager:
+    vtbls:
+      - ea: 0x1418858A0
+        base: Client::System::Framework::Task
+      - ea: 0x1418858B8
+        base: Common::Configuration::ConfigBase::ChangeEventInterface
+    funcs:
+      0x14008C610: ctor
   Client::System::Framework::Task:
     vtbls:
       - ea: 0x141885BF0
