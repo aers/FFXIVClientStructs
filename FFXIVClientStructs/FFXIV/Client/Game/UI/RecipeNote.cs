@@ -21,5 +21,6 @@ public unsafe partial struct RecipeNote {
     [StructLayout(LayoutKind.Explicit, Size = 0x4F8)]
     public struct RecipeEntry {
         [FieldOffset(0x4E7)] public byte CraftType;
+        [FieldOffset(0x4C2)] public ushort RecipeId;
     }
 }
