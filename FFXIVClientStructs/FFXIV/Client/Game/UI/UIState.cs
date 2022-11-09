@@ -21,6 +21,7 @@ public unsafe partial struct UIState
     [FieldOffset(0x14C0)] public Cabinet Cabinet;
     [FieldOffset(0x1A50)] public Buddy Buddy;
     [FieldOffset(0x2A60)] public RelicNote RelicNote;
+    [FieldOffset(0x3C00)] public RecipeNote RecipeNote;
 
     [FieldOffset(0xA828)] public Director* ActiveDirector;
     [FieldOffset(0xA970)] public FateDirector* FateDirector;
