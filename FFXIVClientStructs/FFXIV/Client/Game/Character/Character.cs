@@ -41,6 +41,7 @@ public unsafe partial struct Character
     [FieldOffset(0x650)] public MountContainer Mount;
     [FieldOffset(0x6B0)] public CompanionContainer Companion;
     [FieldOffset(0x6D0)] public DrawDataContainer DrawData;
+    [FieldOffset(0x860)] public OrnamentContainer Ornament;
 
     [FieldOffset(0x818)] public fixed byte EquipSlotData[4 * 10];
     [FieldOffset(0x840)] public fixed byte CustomizeData[0x1A];
@@ -140,7 +141,6 @@ public unsafe partial struct Character
 	    [FieldOffset(0x1C)] public float DismountTimer;
 	    //1 in dismount animation, 4 = instant delete mount when dismounting (used for npcs and such)
 	    [FieldOffset(0x20)] public byte Flags;
-        //object ids of seated players (mostly a guess from how it's used)
 	    [FieldOffset(0x24)] public fixed uint MountedObjectIds[7];
     }
 
@@ -150,6 +150,13 @@ public unsafe partial struct Character
 	    [FieldOffset(0x10)] public Companion* CompanionObject;
 	    //used if minion is summoned but the object slot is taken by a mount
 	    [FieldOffset(0x18)] public ushort CompanionId;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x28)]
+    public struct OrnamentContainer {
+	    [FieldOffset(0x08)] public BattleChara* OwnerObject;
+	    [FieldOffset(0x10)] public Ornament* OrnamentObject;
+	    [FieldOffset(0x18)] public ushort OrnamentId;
     }
 
     public enum EurekaElement : byte
