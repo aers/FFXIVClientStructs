@@ -32,7 +32,7 @@ public unsafe partial struct Character
     [FieldOffset(0x1DA)] public ushort MaxCraftingPoints;
 
     [FieldOffset(0x1DC)] public short TransformationId;
-
+    [FieldOffset(0x1DE)] public short StatusEffectVFXId;
     [FieldOffset(0x1E0)] public byte ClassJob;
     [FieldOffset(0x1E1)] public byte Level;
 
