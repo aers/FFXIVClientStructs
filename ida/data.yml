@@ -3022,6 +3022,7 @@ classes:
       40: Update
       48: GetNpcID
       57: IsDead
+      58: IsNotMounted
       59: Terminate
       60: Destroy
       61: IsCharacter

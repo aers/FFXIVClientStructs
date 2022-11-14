@@ -90,6 +90,9 @@ public unsafe partial struct GameObject
     [VirtualFunction(57)]
     public partial bool IsDead();
 
+    [VirtualFunction(58)]
+    public partial bool IsNotMounted();
+    
     [VirtualFunction(61)]
     public partial bool IsCharacter();
 }
