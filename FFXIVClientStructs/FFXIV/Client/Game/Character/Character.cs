@@ -75,6 +75,8 @@ public unsafe partial struct Character
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 9F ?? ?? ?? ?? 48 8D 8F")]
     public partial ulong CopyFromCharacter(Character* source, uint unk);
 
+    [MemberFunction("E8 ?? ?? ?? ?? 4C 8B 7F 48")]
+    public partial bool IsMounted();
 
     [VirtualFunction(79)]
     public partial StatusManager* GetStatusManager();

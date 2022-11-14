@@ -3050,6 +3050,7 @@ classes:
       87: IsMount
     funcs:
       0x140714A10: IsCasting
+      0x140723CD0: IsMounted
       0x1407254C0: GetCompanionOwnerID
       0x140726420: GetTargetId
       0x140729500: dtor
