@@ -33,7 +33,7 @@ public unsafe partial struct AtkValue
     [MemberFunction("E8 ?? ?? ?? ?? 41 03 ED")]
     public partial void SetString(byte* value);
 
-    [MemberFunction("E8 ?? ?? ?? ?? B2 34")]
+    [MemberFunction("E8 ?? ?? ?? ?? F7 DE")]
     public partial void ChangeType(ValueType type);
 
     [MemberFunction("E8 ?? ?? ?? ?? 33 FF 89 7C 24")]
