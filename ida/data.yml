@@ -5862,6 +5862,22 @@ classes:
     vtbls:
       - ea: 0x1419FF4E0
         base: Component::GUI::AtkUnitBase
+  Client::UI::AddonAOZContentResult:
+    vtbls:
+      - ea: 0x1419C8F60
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonAOZContentBriefing:
+    vtbls:
+      - ea: 0x1419C8D30
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonGcArmyExpeditionResult:
+    vtbls:
+      - ea: 0x1419BF118
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonGcArmyExpedition:
+    vtbls:
+      - ea: 0x1419BEEE8
+        base: Component::GUI::AtkUnitBase
   Client::Game::Object::EventObject:
     vtbls:
       - ea: 0x141A04008
