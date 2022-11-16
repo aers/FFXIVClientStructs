@@ -450,11 +450,18 @@ classes:
       0x1406F48C0: GetItemCountInContainer # (this, itemId, containerId, hq, 0)
       0x1400CA990: GetSizeByIndex # static
       0x1406F86A0: GetPermittedGearsetCount
-  ExplorationManager:
+  HousingManager:
     instances:
       - ea: 0x14208C058
         pointer: True
     funcs:
+      0x140C37E20: IsOutside
+      0x140C37E30: IsInside
+      0x140C37E40: IsInWorkshop
+      0x140C386C0: HasHousePermissions
+      0x140C37FB0: GetCurrentWard
+      0x140C38010: GetCurrentFloor # 0 - Ground Level, 1 - Upstairs, 10 - Downstairs
+      0x140C380A0: GetInvertedBrightness # 0-5, higher is darker
       0x140C5E9E0: IsSubmarineExplorationUnlocked # static
       0x140C5EA20: IsSubmarineExplorationUnlocked2 # static
       0x140C5EA80: GetSubmarineSurveyDuration # (unsigned __int8 point, __int16 speed) -> SurveyDuration (return is time in seconds)
