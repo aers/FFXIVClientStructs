@@ -29,5 +29,6 @@ public unsafe struct PartyMember
     [FieldOffset(0x214)] public uint Unk_Struct_208__C;
     [FieldOffset(0x218)] public ushort Unk_Struct_208__10;
     [FieldOffset(0x21A)] public ushort Unk_Struct_208__14;
-    [FieldOffset(0x220)] public byte Unk_220;
+
+    [FieldOffset(0x220)] public byte Flags; // 0x01 == set for valid alliance members
 }
