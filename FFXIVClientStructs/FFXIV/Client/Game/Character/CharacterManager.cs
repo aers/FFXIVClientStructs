@@ -3,6 +3,13 @@
 [StructLayout(LayoutKind.Explicit, Size = 0x338)]
 public unsafe partial struct CharacterManager
 {
+	[FieldOffset(0x00)] public fixed long BattleCharaArray[100];
+	[FieldOffset(0x320)] public BattleChara* BattleCharaMemory;
+	[FieldOffset(0x328)] public Companion* CompanionMemory;
+	//used to calculate the minion address in CompanionMemory when adding a BattleChara
+	[FieldOffset(0x330)] public int CompanionClassSize;
+	[FieldOffset(0x334)] public int UpdateIndex;
+
     [StaticAddress("8B D0 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B D8 48 85 C0 74 3A")]
     public static partial CharacterManager* Instance();
 
