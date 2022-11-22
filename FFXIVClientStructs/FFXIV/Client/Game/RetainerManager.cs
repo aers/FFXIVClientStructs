@@ -1,6 +1,6 @@
 ﻿namespace FFXIVClientStructs.FFXIV.Client.Game;
 
-[StructLayout(LayoutKind.Explicit, Size = 0x2C0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x2E8)]
 public unsafe partial struct RetainerManager
 {
     [StaticAddress("48 83 EC 20 48 8D 0D ?? ?? ?? ?? 0F B7 DA")]
@@ -10,6 +10,11 @@ public unsafe partial struct RetainerManager
     [FieldOffset(0x2D0)] public fixed byte DisplayOrder[10];
     [FieldOffset(0x2DA)] public byte Ready;
     [FieldOffset(0x2DB)] public byte RetainerCount;
+
+    /// <summary>
+    /// Contains the Retainer.RetainerId of the last retainer to be selected.
+    /// </summary>
+    [FieldOffset(0x2E0)] public ulong LastSelectedRetainerId;
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 74 05 4C 39 20")]
     public partial RetainerList.Retainer* GetRetainerBySortedIndex(uint sortedIndex);
