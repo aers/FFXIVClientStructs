@@ -1,4 +1,5 @@
-﻿using FFXIVClientStructs.FFXIV.Client.System.String;
+﻿using System.Text;
+using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Common.Configuration;
 
@@ -51,7 +52,7 @@ public unsafe struct ConfigValue
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x38)]
-public unsafe struct ConfigEntry
+public unsafe partial struct ConfigEntry
 {
     [FieldOffset(0x0)] public ConfigProperties Properties;
     [FieldOffset(0x10)] public byte* Name; // null-terminated string
@@ -60,6 +61,25 @@ public unsafe struct ConfigEntry
     [FieldOffset(0x28)] public ConfigBase* Owner;
     [FieldOffset(0x30)] public uint Index;
     [FieldOffset(0x34)] public uint _Padding; // pad to 0x38 to align pointers in array
+    
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 5E 73")]
+    public partial bool SetValueUInt(uint value, uint unk = 1);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 8E ?? ?? ?? ?? 33 DB 38 9F")]
+    public partial bool SetValueFloat(float value);
+    
+    // This will destroy the Utf8String
+    [MemberFunction("E8 ?? ?? ?? ?? EB 46 F3 0F 10 0B")]
+    public partial bool SetValueString(Utf8String* value);
+
+    public bool SetValueString(string value) {
+        var utf8Str = Utf8String.FromString(value);
+        return SetValueString(utf8Str);
+    }
+    
+    public bool SetValue(uint value, uint unk = 1) => SetValueUInt(value, unk);
+    public bool SetValue(float value) => SetValueFloat(value);
+    public bool SetValue(string value) => SetValueString(value);
 }
 
 // implemented by objects that want to listen for config changes - rapture atk module, etc

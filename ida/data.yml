@@ -755,6 +755,11 @@ classes:
     vtbls:
       - ea: 0x14193B370
         base: Client::Game::Gauge::JobGauge
+  Common::Configuration::ConfigEntry:
+    funcs:
+      0x140068780: SetValueUInt
+      0x140068820: SetValueFloat
+      0x140069B80: SetValueString # Destroys Utf8String
   Common::Configuration::ConfigBase:
     vtbls:
       - ea: 0x1418858B8
