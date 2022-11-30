@@ -233,7 +233,6 @@ functions:
   0x1400A9780: GetPartyMemberClassJobByContentId
   0x1407157C0: ObjectIdToPlayerObjectId # returns invalid id if objectid is not a player
   0x14073E9B0: ProcessActorControlPacket
-  0x1404A5FF0: Raycast
   0x1415E5450: OodleNew # oodle code starts here
   0x1415E54C0: OodleDelete 
   0x1415E54F0: rrPrintf_v1 
@@ -904,6 +903,16 @@ classes:
   Common::Component::Environment::DebugInterface:
     vtbls:
       - ea: 0x1418D1F10
+  Common::Component::BGCollision::BGCollisionModule:
+    funcs:
+      0x1404A5A20: ctor
+      0x1404A5B50: Initialize
+      0x1404A5FF0: Raycast
+      0x141233500: Raycast1 # not sure where else to put those two for now
+      0x141233550: Raycast2
+  Common::Component::BGCollision::Object:
+    vtbls:
+      - ea: 0x1418D1FB8
   Common::Component::Environment::ResourceInterface::ResourceHandleInterface:
     vtbls:
       - ea: 0x1418D1EC0
@@ -1802,6 +1811,8 @@ classes:
         base: Client::Graphics::Scene::Object
     funcs:
       0x1404632B0: ctor
+      0x140463F70: ViewportPointToRay
+      0x140464150: ScreenPointToRay
       0x140464420: CalculateViewMatrix
       0x140464BA0: PrepareRenderCamera
   Client::Graphics::Singleton<Client::Graphics::Scene::CameraManager>:

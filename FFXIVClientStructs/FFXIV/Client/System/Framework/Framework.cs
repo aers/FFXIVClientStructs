@@ -1,6 +1,7 @@
 ﻿using System.Text;
 using FFXIVClientStructs.FFXIV.Client.System.Configuration;
 using FFXIVClientStructs.FFXIV.Client.UI;
+using FFXIVClientStructs.FFXIV.Common.Component.BGCollision;
 using FFXIVClientStructs.FFXIV.Common.Lua;
 using FFXIVClientStructs.FFXIV.Component.Excel;
 using FFXIVClientStructs.FFXIV.Component.Exd;
@@ -28,7 +29,7 @@ public unsafe partial struct Framework
 
     [FieldOffset(0x2B30)] public ExcelModuleInterface* ExcelModuleInterface;
     [FieldOffset(0x2B38)] public ExdModule* ExdModule;
-
+    [FieldOffset(0x2B50)] public BGCollisionModule* BGCollisionModule;
     [FieldOffset(0x2B60)] public UIModule* UIModule;
     [FieldOffset(0x2BC8)] public LuaState LuaState;
 
