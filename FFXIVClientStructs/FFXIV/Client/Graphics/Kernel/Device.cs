@@ -13,6 +13,10 @@ public unsafe partial struct Device
     [FieldOffset(0x7A)] public byte RequestResolutionChange;
     [FieldOffset(0x88)] public uint Width;
     [FieldOffset(0x8C)] public uint Height;
+    [FieldOffset(0x90)] public float AspectRatio;
+    [FieldOffset(0x94)] public float GammaCorrection;
+    [FieldOffset(0x98)] public int ColorFilter;
+    [FieldOffset(0x9C)] public float ColorFilterRange;
     [FieldOffset(0x1C0)] public uint NewWidth;
     [FieldOffset(0x1C4)] public uint NewHeight;
     [FieldOffset(0x220)] public int D3DFeatureLevel; // D3D_FEATURE_LEVEL enum
