@@ -14,12 +14,8 @@ public unsafe partial struct CameraManager
 
     [FieldOffset(0x60)] public CameraBase UnkCamera; //not a pointer
 
-    public Camera* ActiveCamera {
-	    get {
-		    fixed (void* ptr = &this)
-			    return ((Camera**)ptr)[ActiveCameraIndex];
-	    }
-    }
+    [MemberFunction("E8 ?? ?? ?? ?? F7 80")]
+    public partial Camera* GetActiveCamera();
 
     [StaticAddress("4C 8D 35 ?? ?? ?? ?? 85 D2")]
     public static partial CameraManager* Instance();
