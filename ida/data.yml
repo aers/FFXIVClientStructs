@@ -231,8 +231,10 @@ functions:
   0x1400A9500: IsLocalPlayerInParty
   0x1400A9650: IsPartyMemberByNameOrContentId # (name, contentId)
   0x1400A9780: GetPartyMemberClassJobByContentId
+  0x14060CF10: WorldToViewportPoint
   0x1407157C0: ObjectIdToPlayerObjectId # returns invalid id if objectid is not a player
   0x14073E9B0: ProcessActorControlPacket
+  0x140C837D0: WorldToScreenPoint
   0x1415E5450: OodleNew # oodle code starts here
   0x1415E54C0: OodleDelete 
   0x1415E54F0: rrPrintf_v1 
@@ -2212,6 +2214,7 @@ classes:
       0x1404D7830: IsObjectInViewRange
       0x1404D7980: GetMouseOverObject
       0x1404D90A0: RemoveObjectFromTargets
+      0x1404D5670: IsObjectOnScreen
   Client::Game::Control::Control:
     instances:
       - ea: 0x14203EAA0
@@ -2222,6 +2225,7 @@ classes:
     funcs:
       0x1412801E0: ctor
       0x141281110: PreUpdate
+      0x1412803B0: GetActiveCamera
   Client::Game::Control::MoveControl::MoveControllerSubMemberForMine:
     instances:
       - ea: 0x142043EE0
@@ -2695,6 +2699,31 @@ classes:
     funcs:
       0x140596670: ctor
       0x140596900: CreateSingleton
+  Client::LayoutEngine::LayoutManager:
+    vtbls:
+      - ea: 0x1418D91B8
+        base: Client::LayoutEngine::IManagerBase
+    funcs:
+      0x14059EA70: ctor
+  Client::LayoutEngine::Streaming::StreamingManager:
+    vtbls:
+      - ea: 0x1418D9198
+        base: Client::LayoutEngine::IManagerBase
+    funcs:
+      0x14059D3F0: ctor
+  Client::LayoutEngine::Environment::LayoutOBSetManager:
+    vtbls:
+      - ea: 0x1418D9200
+    funcs:
+      0x1405AC410: ctor
+  Client::LayoutEngine::Environment::LayoutEnvironment:
+    vtbls:
+      - ea: 0x1418D9228
+  Client::LayoutEngine::CutScenePrefetchResource:
+    vtbls:
+      - ea: 0x1418D91D8
+    funcs:
+      0x1405AB450: ctor
   Client::LayoutEngine::Group::TimeLineLayoutInstance:
     vtbls:
       - ea: 0x1418E0160
