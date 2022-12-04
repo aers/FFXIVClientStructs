@@ -1,4 +1,5 @@
 ﻿using System.Numerics;
+using FFXIVClientStructs.FFXIV.Common.Component.BGCollision;
 
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene; 
 
@@ -23,4 +24,19 @@ public unsafe partial struct Camera
         ScreenPointToRay(pRay, x, y);
         return *pRay;
     }
+
+    public static Vector3 ScreenToWorldPoint(Vector2 screenPoint) {
+	    var ray = CameraManager.Instance()->CurrentCamera->ScreenPointToRay(screenPoint);
+	    BGCollisionModule.Raycast(ray.Origin, ray.Direction, out var hit);
+	    return hit.Point;
+    }
+
+    public static Vector2 WorldToScreenPoint(Vector3 worldPoint) {
+	    var screen = stackalloc float[2];
+	    WorldToScreenPoint(screen, worldPoint);
+	    return *(Vector2*)screen;
+    }
+
+    [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 48 8B E9 48 8B DA 48 8D 0D", IsStatic = true, IsPrivate = true)]
+    private static partial float* WorldToScreenPoint(float* screenPoint, Vector3 worldPoint);
 }

@@ -14,4 +14,9 @@ public struct Vector3
     {
         return new NumVector3(vector.X, vector.Y, vector.Z);
     }
+
+    public static implicit operator Vector3(NumVector3 vector)
+    {
+        return new Vector3 { X = vector.X, Y = vector.Y, Z = vector.Z };
+    }
 }
