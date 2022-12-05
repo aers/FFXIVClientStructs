@@ -100,6 +100,11 @@ public unsafe partial struct AgentModule
     {
         return (AgentAozContentResult*)GetAgentByInternalId(AgentId.AozContentResult);
     }
+
+    public AgentDeepDungeonStatus* GetAgentDeepDungeonStatus()
+    {
+	    return (AgentDeepDungeonStatus*)GetAgentByInternalId(AgentId.DeepDungeonStatus);
+    }
 }
 
 public enum AgentId : uint {
