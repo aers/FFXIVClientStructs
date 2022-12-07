@@ -5143,7 +5143,8 @@ classes:
       0x1408271C0: ctor
       0x140827990: dtor
       0x14082FEC0: ProcessDirectorUpdate
-      0x140833870: GetInstanceContentDirector
+      0x140833640: GetInstanceContentDirector
+      0x140833870: GetContentDirector
   Client::Game::Event::EventHandlerModule:
     vtbls:
       - ea: 0x141919C78

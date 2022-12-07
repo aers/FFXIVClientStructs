@@ -21,5 +21,8 @@ public unsafe partial struct EventFramework
     public static partial EventFramework* Instance();
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B D0 48 85 C0 74 ?? 8D 43")]
+    public partial ContentDirector* GetContentDirector();
+
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 98")]
     public partial InstanceContentDirector* GetInstanceContentDirector();
 }
