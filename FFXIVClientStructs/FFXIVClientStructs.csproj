@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
-        <TargetFramework>net5</TargetFramework>
-        <LangVersion>10.0</LangVersion>
+        <TargetFramework>net6.0</TargetFramework>
+        <LangVersion>latest</LangVersion>
         <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
         <OutputPath>..\bin\$(Configuration)\</OutputPath>
