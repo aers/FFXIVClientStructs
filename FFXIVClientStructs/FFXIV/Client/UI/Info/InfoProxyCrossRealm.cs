@@ -1,5 +1,3 @@
-using System;
-
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x14A0)]

@@ -1,6 +1,4 @@
-﻿using FFXIVClientStructs.FFXIV.Client.System.String;
-
-namespace FFXIVClientStructs.FFXIV.Component.GUI; 
+﻿namespace FFXIVClientStructs.FFXIV.Component.GUI; 
 
 [StructLayout(LayoutKind.Explicit, Size = 0xC8)]
 public unsafe struct AtkDragDropManager {

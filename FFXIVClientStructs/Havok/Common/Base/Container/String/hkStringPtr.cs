@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace FFXIVClientStructs.Havok;
+﻿namespace FFXIVClientStructs.Havok;
 
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct hkStringPtr

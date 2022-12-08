@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace FFXIVClientStructs.FFXIV.Common.Lua;
+﻿namespace FFXIVClientStructs.FFXIV.Common.Lua;
 
 //ctor 48 8D 05 ?? ?? ?? ?? C6 41 10 01 48 89 01 33 C0
 [StructLayout(LayoutKind.Explicit, Size = 0x28)]

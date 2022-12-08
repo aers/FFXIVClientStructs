@@ -1,5 +1,4 @@
-﻿using System.Text;
-using FFXIVClientStructs.FFXIV.Client.System.Configuration;
+﻿using FFXIVClientStructs.FFXIV.Client.System.Configuration;
 using FFXIVClientStructs.FFXIV.Client.UI;
 using FFXIVClientStructs.FFXIV.Common.Component.BGCollision;
 using FFXIVClientStructs.FFXIV.Common.Lua;

@@ -1,5 +1,3 @@
-using FFXIVClientStructs.FFXIV.Client.Graphics;
-
 namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 // Client::Game::Character::BattleChara
 //   Client::Game::Character::Character

@@ -7,6 +7,7 @@
         <OutputPath>..\bin\$(Configuration)\</OutputPath>
         <DebugType>full</DebugType>
         <DebugSymbols>true</DebugSymbols>
+        <ImplicitUsings>enable</ImplicitUsings>
         <!--
           <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
           <CompilerGeneratedFilesOutputPath>Generated</CompilerGeneratedFilesOutputPath>

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace FFXIVClientStructs.STD;
+﻿namespace FFXIVClientStructs.STD;
 
 [StructLayout(LayoutKind.Sequential, Size = 0x28)]
 public unsafe struct StdDeque<T> where T : unmanaged

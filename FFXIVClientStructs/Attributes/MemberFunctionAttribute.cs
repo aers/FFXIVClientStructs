@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace FFXIVClientStructs.Attributes;
+﻿namespace FFXIVClientStructs.Attributes;
 
 [AttributeUsage(AttributeTargets.Method)]
 public class MemberFunctionAttribute : Attribute

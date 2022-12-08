@@ -1,5 +1,3 @@
-using System;
-
 namespace FFXIVClientStructs.FFXIV.Client.Game.Gauge;
 
 public enum AstrologianCard

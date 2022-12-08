@@ -1,6 +1,6 @@
-﻿using FFXIVClientStructs.FFXIV.Client.System.Framework;
+﻿using System.Text;
+using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Component.GUI;
-using System.Text;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 // Client::UI::Misc::ConfigModule

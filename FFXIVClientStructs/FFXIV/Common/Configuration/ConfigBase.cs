@@ -1,5 +1,4 @@
-﻿using System.Text;
-using FFXIVClientStructs.FFXIV.Client.System.String;
+﻿using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Common.Configuration;
 

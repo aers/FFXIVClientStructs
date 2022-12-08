@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.Design.Serialization;
-using FFXIVClientStructs.FFXIV.Client.System.String;
+﻿using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Client.LayoutEngine;
 

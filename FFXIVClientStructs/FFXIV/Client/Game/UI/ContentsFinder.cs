@@ -1,6 +1,4 @@
-﻿using FFXIVClientStructs.FFXIV.Component.GUI;
-
-namespace FFXIVClientStructs.FFXIV.Client.Game.UI; 
+﻿namespace FFXIVClientStructs.FFXIV.Client.Game.UI; 
 
 [StructLayout(LayoutKind.Explicit, Size = 0x40)]
 public unsafe struct ContentsFinder {

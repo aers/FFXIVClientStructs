@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
+﻿namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x908)]
 public unsafe struct Hater
