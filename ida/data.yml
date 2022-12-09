@@ -4794,6 +4794,10 @@ classes:
     vtbls:
       - ea: 0x141942F90
         base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentTourismMenu:
+    vtbls:
+      - ea: 0x141943080
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentStarlightGiftBox:
     vtbls:
       - ea: 0x141946AD0
