@@ -447,7 +447,7 @@ public enum AgentId : uint {
     StarlightGiftBox = 383,
     SpearFishing = 384,
     Omikuji = 385,
-
+    FittingShop = 386,
     AkatsukiNote = 387, //Unending Codex
     ExHotbarEditor = 388,
     BannerList = 389, // Portraits
