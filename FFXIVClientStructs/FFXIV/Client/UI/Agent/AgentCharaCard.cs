@@ -19,12 +19,12 @@ public unsafe partial struct AgentCharaCard
 
     [FieldOffset(0x28)] public Storage* Data;
 
-    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8B 4B 10 48 8D BB", IsPrivate = true)]
+    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8B 4B 10 48 8D BB")]
     private partial void OpenCharaCardForContentId(ulong contentId);
 
     public void OpenCharaCard(ulong contentId) => OpenCharaCardForContentId(contentId);
 
-    [MemberFunction("48 85 D2 74 6D 48 89 5C 24", IsPrivate = true)]
+    [MemberFunction("48 85 D2 74 6D 48 89 5C 24")]
     private partial void OpenCharaCardForObject(GameObject* gameObject);
     public void OpenCharaCard(GameObject* gameObject) => OpenCharaCardForObject(gameObject);
 

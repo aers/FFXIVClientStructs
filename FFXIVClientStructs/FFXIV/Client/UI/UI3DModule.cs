@@ -5,7 +5,7 @@ using FFXIVClientStructs.FFXIV.Client.Graphics;
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 // Client::UI::UI3DModule
 
-// ctor E8 ? ? ? ? 48 8B 44 24 ? 4C 8D BF ? ? ? ? 
+// ctor E8 ?? ?? ?? ?? 48 8B 44 24 ?? 4C 8D BF ?? ?? ?? ?? 
 [StructLayout(LayoutKind.Explicit, Size = 0x11AA0)]
 public unsafe struct UI3DModule
 {

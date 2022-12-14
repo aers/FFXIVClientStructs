@@ -13,6 +13,6 @@ public unsafe partial struct GameObjectManager
     [StaticAddress("48 8D 35 ?? ?? ?? ?? 81 FA")]
     public static partial GameObjectManager* Instance();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B F0 48 85 C0 75 12 48 FF C7", IsStatic = true)]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B F0 48 85 C0 75 12 48 FF C7")]
     public static partial GameObject* GetGameObjectByIndex(int index);
 }

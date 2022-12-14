@@ -7,6 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 [StructLayout(LayoutKind.Explicit, Size = 0xEC8)]
 public unsafe partial struct QuestManager
 {
+    [MemberFunction("E8 ?? ?? ?? ?? 66 BA 10 0C")]
 	[FieldOffset(0x10)] public QuestListArray Quest;
 
 	[FieldOffset(0x10)] public fixed byte NormalQuests[0x18 * 30];
@@ -25,14 +26,14 @@ public unsafe partial struct QuestManager
 	public Span<BeastReputationWork> BeastReputationSpan => new(Unsafe.AsPointer(ref BeastReputation[0]), 16);
 	public Span<LeveWork> LeveQuestSpan => new(Unsafe.AsPointer(ref LeveQuests[0]), 16);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 66 BA 10 0C", IsStatic = true)]
+    [MemberFunction("E8 ?? ?? ?? ?? 66 BA 10 0C")]
     public static partial QuestManager* Instance();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 41 88 84 2C", IsStatic = true)]
+    [MemberFunction("E8 ?? ?? ?? ?? 41 88 84 2C")]
     public static partial bool IsQuestComplete(ushort questId);
     public static bool IsQuestComplete(uint questId) => IsQuestComplete((ushort)(questId & 0xFFFF));
 
-    [MemberFunction("E8 ?? ?? ?? ?? 3A 43 06", IsStatic = true)]
+    [MemberFunction("E8 ?? ?? ?? ?? 3A 43 06")]
     public static partial bool IsQuestCurrent(ushort questId);
     public static bool IsQuestCurrent(uint questId) => IsQuestCurrent((ushort)(questId & 0xFFFF));
 

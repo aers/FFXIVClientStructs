@@ -5,7 +5,7 @@
 // base class for all AddonXXX classes (visible UI objects)
 
 // size = 0x220
-// ctor E8 ? ? ? ? 83 8B ? ? ? ? ? 33 C0
+// ctor E8 ?? ?? ?? ?? 83 8B ?? ?? ?? ?? ?? 33 C0
 
 [StructLayout(LayoutKind.Explicit, Size = 0x220)]
 public unsafe partial struct AtkUnitBase

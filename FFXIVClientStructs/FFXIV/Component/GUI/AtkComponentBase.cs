@@ -35,7 +35,7 @@ public enum ComponentType : byte
 // base class for UI components that are more complicated than a single node
 
 // size = 0xC0
-// common CreateAtkComponent function 8B FA 33 DB E8 ? ? ? ? 
+// common CreateAtkComponent function 8B FA 33 DB E8 ?? ?? ?? ?? 
 // type 0
 [StructLayout(LayoutKind.Explicit, Size = 0xC0)]
 public unsafe partial struct AtkComponentBase

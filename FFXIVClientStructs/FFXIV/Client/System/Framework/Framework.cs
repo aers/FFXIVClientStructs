@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Framework;
 // Client::System::Framework::Framework
 
 // size=0x35C8
-// ctor E8 ? ? ? ? 48 8B C8 48 89 05 ? ? ? ? EB 0A 48 8B CE 
+// ctor E8 ?? ?? ?? ?? 48 8B C8 48 89 05 ?? ?? ?? ?? EB 0A 48 8B CE 
 [StructLayout(LayoutKind.Explicit, Size = 0x35C8)]
 public unsafe partial struct Framework
 {
@@ -36,13 +36,13 @@ public unsafe partial struct Framework
 
     [FieldOffset(0x2BF0)] public GameVersion GameVersion;
     
-    [StaticAddress("44 0F B6 C0 48 8B 0D ? ? ? ?", isPointer: true)]
+    [StaticAddress("44 0F B6 C0 48 8B 0D ?? ?? ?? ?", isPointer: true)]
     public static partial Framework* Instance();
 
     [MemberFunction("E8 ?? ?? ?? ?? 80 7B 1D 01")]
     public partial UIModule* GetUiModule();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 89 47 2C", IsStatic = true)]
+    [MemberFunction("E8 ?? ?? ?? ?? 89 47 2C")]
     public static partial long GetServerTime();
 
     public string UserPath {

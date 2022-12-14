@@ -53,15 +53,15 @@ public unsafe partial struct AtkUldManager
     [FieldOffset(0x86)] public byte Flags1;
     [FieldOffset(0x89)] public AtkLoadState LoadedState; // 3 is fully loaded
 
-    [MemberFunction("F6 81 ? ? ? ? ? 44 8B CA")]
+    [MemberFunction("F6 81 ?? ?? ?? ?? ?? 44 8B CA")]
     public partial AtkResNode* SearchNodeById(uint id);
 
-    [MemberFunction("E8 ? ? ? ? 48 8B 4C 24 ? 48 8B 51 08")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4C 24 ?? 48 8B 51 08")]
     public partial AtkResNode* CreateNodeByType(uint type);
     
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B F8 48 85 C0 0F 84 ?? ?? ?? ?? 49 8B 0F")]
     public partial AtkComponentBase* CreateAtkComponent(ComponentType type); 
     
-    [MemberFunction("E8 ? ? ? ? 49 8B 4E 10 8B C5")]
+    [MemberFunction("E8 ?? ?? ?? ?? 49 8B 4E 10 8B C5")]
     public partial void UpdateDrawNodeList();
 }

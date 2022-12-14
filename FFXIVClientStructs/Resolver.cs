@@ -33,7 +33,7 @@ public static partial class Resolver
         var module = Process.GetCurrentProcess().MainModule;
         var scanner = new SigScanner(module, false, cacheFile);
 
-        InitializeMemberFunctions(scanner);
+        //InitializeMemberFunctions(scanner);
         InitializeStaticAddresses(scanner);
 
         Initialized = true;
@@ -47,7 +47,7 @@ public static partial class Resolver
         var module = Process.GetCurrentProcess().MainModule;
         var scanner = new SigScanner(module, moduleCopy, cacheFile);
 
-        InitializeMemberFunctions(scanner);
+        //InitializeMemberFunctions(scanner);
         InitializeStaticAddresses(scanner);
 
         Initialized = true;
@@ -61,7 +61,7 @@ public static partial class Resolver
         var module = Process.GetCurrentProcess().MainModule;
         var scanner = new SigScanner(module, false, cacheFile);
 
-        InitializeMemberFunctionsParallel(scanner);
+        //InitializeMemberFunctionsParallel(scanner);
         InitializeStaticAddressesParallel(scanner);
 
         Initialized = true;
@@ -75,7 +75,7 @@ public static partial class Resolver
         var module = Process.GetCurrentProcess().MainModule;
         var scanner = new SigScanner(module, moduleCopy, cacheFile);
 
-        InitializeMemberFunctionsParallel(scanner);
+        //InitializeMemberFunctionsParallel(scanner);
         InitializeStaticAddressesParallel(scanner);
 
         Initialized = true;

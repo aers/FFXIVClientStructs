@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 // characters that fight (players, monsters, etc)
 
 // size = 0x2D50
-// ctor E8 ? ? ? ? 48 8B F8 EB 02 33 FF 8B 86 ? ? ? ? 
+// ctor E8 ?? ?? ?? ?? 48 8B F8 EB 02 33 FF 8B 86 ?? ?? ?? ?? 
 [StructLayout(LayoutKind.Explicit, Size = 0x2D50)]
 public unsafe partial struct BattleChara
 {

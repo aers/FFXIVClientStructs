@@ -6,7 +6,7 @@
 // holds an AtkComponentBase derived class
 
 // size = 0xB8
-// common CreateAtkNode function E8 ? ? ? ? 48 8B 4E 08 49 8B D5 
+// common CreateAtkNode function E8 ?? ?? ?? ?? 48 8B 4E 08 49 8B D5 
 // type 10xx where xx is the component type
 [StructLayout(LayoutKind.Explicit, Size = 0xB0)]
 public unsafe struct AtkComponentNode

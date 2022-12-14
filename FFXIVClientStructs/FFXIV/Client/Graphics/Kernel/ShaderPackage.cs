@@ -2,7 +2,7 @@
 // Client::Graphics::Kernel::ShaderPackage
 //   Client::Graphics::ReferencedClassBase
 
-// ctor E8 ? ? ? ? 8B 55 18 48 8B F0
+// ctor E8 ?? ?? ?? ?? 8B 55 18 48 8B F0
 // size = 0x408
 [StructLayout(LayoutKind.Explicit, Size = 0x408)]
 public unsafe struct ShaderPackage

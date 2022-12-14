@@ -1,49 +1,56 @@
-﻿using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Text;
-using Scriban;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace FFXIVClientStructs.Generators.FunctionGenerator
+namespace FFXIVClientStructs.Generators.FunctionGenerator;
+
+[Generator]
+public sealed partial class FunctionGenerator : IIncrementalGenerator
 {
-    [Generator]
-    internal class FunctionGenerator : ISourceGenerator
+    public void Initialize(IncrementalGeneratorInitializationContext context)
     {
-        private Template _mfCodeTemplate;
-        private Template _vfCodeTemplate;
-
-        public void Initialize(GeneratorInitializationContext context)
+        context.RegisterPostInitializationOutput(s =>
         {
-            context.RegisterForSyntaxNotifications(() => new FunctionSyntaxContextReceiver());
+            s.AddSource($"{Attributes.MemberFunctionAttribute.Name}.g.cs",
+                Attributes.MemberFunctionAttribute.Source);
+            s.AddSource($"{Attributes.VirtualFunctionAttribute.Name}.g.cs",
+                Attributes.VirtualFunctionAttribute.Source);
+        });
+        
+        IncrementalValuesProvider<StructDeclarationSyntax> structDeclarations = context.SyntaxProvider
+            .CreateSyntaxProvider(
+                static (s, _) => Parser.IsSyntaxTargetForGeneration(s),
+                static (ctx, _) => Parser.GetSemanticTargetForGeneration(ctx))
+            .Where(static s => s is not null)!;
 
-            _mfCodeTemplate = Template.Parse(Templates.MemberFunctions);
-            _vfCodeTemplate = Template.Parse(Templates.VirtualFunctions);
-        }
+        IncrementalValueProvider<(Compilation, ImmutableArray<StructDeclarationSyntax>)> compilationAndStructs =
+            context.CompilationProvider.Combine(structDeclarations.Collect());
+        
+        context.RegisterSourceOutput(compilationAndStructs, 
+            static (spc, source) 
+                => Execute(source.Item1, source.Item2, spc));
+    }
 
-        public void Execute(GeneratorExecutionContext context)
+    private static void Execute(Compilation compilation, ImmutableArray<StructDeclarationSyntax> structs,
+        SourceProductionContext context)
+    {
+        if (structs.IsDefaultOrEmpty)
+            return;
+
+        IEnumerable<StructDeclarationSyntax> distinctStructs = structs.Distinct();
+
+        var p = new Parser(compilation, context.ReportDiagnostic, context.CancellationToken);
+
+        IReadOnlyList<TargetStruct> targets = p.GetTargetStructs(distinctStructs);
+
+        var renderer = new Renderer();
+        
+        foreach (TargetStruct t in targets)
         {
-            if (context.SyntaxContextReceiver is not FunctionSyntaxContextReceiver receiver) return;
-
-            foreach (var structObj in receiver.Structs)
-            {
-                if (structObj.MemberFunctions.Any())
-                {
-                    var filename = structObj.Namespace + "." + structObj.Name + ".MemberFunctions.generated.cs";
-                    var source = _mfCodeTemplate.Render(new { Struct = structObj });
-                    context.AddSource(filename, SourceText.From(source, Encoding.UTF8));
-                }
-
-                if (structObj.VirtualFunctions.Any())
-                {
-                    var filename = structObj.Namespace + "." + structObj.Name + ".VirtualFunctions.generated.cs";
-                    var source = _vfCodeTemplate.Render(new { Struct = structObj });
-                    context.AddSource(filename, SourceText.From(source, Encoding.UTF8));
-                }
-            }
-
-            var resolverTemplate = Template.Parse(Templates.InitializeMemberFunctions);
-            var resolverSource = resolverTemplate.Render(new { receiver.Structs});
-            context.AddSource("Resolver.MemberFunctions.Generated.cs", resolverSource);
+            var source = renderer.Render(t, context.CancellationToken);
+            context.AddSource($"{t.Namespace}{t.Name}.FunctionGenerator.g.cs", source);
         }
     }
 }

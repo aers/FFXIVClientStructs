@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 //     Component::GUI::AtkEventTarget
 
 // size = 0x128
-// common CreateAtkNode function E8 ? ? ? ? 48 8B 4E 08 49 8B D5 
+// common CreateAtkNode function E8 ?? ?? ?? ?? 48 8B 4E 08 49 8B D5 
 // type 5
 [StructLayout(LayoutKind.Explicit, Size = 0x128)]
 public unsafe struct AtkCounterNode

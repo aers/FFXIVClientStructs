@@ -4,7 +4,7 @@
 //     Component::GUI::AtkEventListener
 
 // size = 0x1A8
-// common CreateAtkComponent function 8B FA 33 DB E8 ? ? ? ? 
+// common CreateAtkComponent function 8B FA 33 DB E8 ?? ?? ?? ?? 
 // type 1
 [StructLayout(LayoutKind.Explicit, Size = 0x1A8)]
 public unsafe struct AtkComponentList

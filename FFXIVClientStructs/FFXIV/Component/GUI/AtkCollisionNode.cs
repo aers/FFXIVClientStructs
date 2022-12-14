@@ -12,7 +12,7 @@ public enum CollisionType : ushort
 //     Component::GUI::AtkEventTarget
 
 // size = 0xB8
-// common CreateAtkNode function E8 ? ? ? ? 48 8B 4E 08 49 8B D5 
+// common CreateAtkNode function E8 ?? ?? ?? ?? 48 8B 4E 08 49 8B D5 
 // type 8
 [StructLayout(LayoutKind.Explicit, Size = 0xB8)]
 public unsafe partial struct AtkCollisionNode

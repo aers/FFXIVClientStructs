@@ -186,7 +186,7 @@ public unsafe partial struct UIModule
     [VirtualFunction(189)]
     public partial void ExecuteMainCommand(uint command);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 4D 39 BE", IsStatic = true)]
+    [MemberFunction("E8 ?? ?? ?? ?? 4D 39 BE")]
     public static partial bool PlaySound(uint effectId, long a2, long a3, byte a4);
 
     [StructLayout(LayoutKind.Explicit, Size = 0x8)]
