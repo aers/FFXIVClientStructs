@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using FFXIVClientStructs.Generators.StaticAddressGenerator;
 
 namespace FFXIVClientStructs.Generators.FunctionGenerator;
 
@@ -29,7 +30,7 @@ public sealed partial class FunctionGenerator
 
             _builder.AppendLine();
             
-            TargetStruct?  parent = targetStruct.ParentStruct;
+            TargetStruct? parent = targetStruct.ParentStruct;
             var parentStructs = new List<string>();
 
             while (parent != null)
@@ -52,6 +53,9 @@ public sealed partial class FunctionGenerator
 
             if (targetStruct.Functions.Any(f => f.Signature is not null))
                 RenderFunctionPointers(targetStruct.Functions, targetStruct.Name);
+
+            _builder.AppendLine();
+            
             if (targetStruct.Functions.Any(f => f.VirtualIndex is not null))
                 RenderVirtualTable(targetStruct.Functions, targetStruct.Name);
             
@@ -61,6 +65,8 @@ public sealed partial class FunctionGenerator
                 cancellationToken.ThrowIfCancellationRequested();
                 if (f.Signature is not null)
                     RenderMemberFunction(f, targetStruct.Name);
+                else if (f.VirtualIndex is not null)
+                    RenderVirtualFunction(f, targetStruct.Name);
             }
 
             _builder.DecrementIndent();
@@ -91,9 +97,10 @@ public sealed partial class FunctionGenerator
                 string parameterTypes =
                     f.Parameters.Any() ? string.Join(", ", f.Parameters.Select(p => p.Type)) + ", " : "";
                 string thisPtrType = f.IsStatic ? "" : structName + "*, ";
+                string returnType = f.ReturnType == "bool" ? "byte" : f.ReturnType;
                 
                 _builder.AppendLine(
-                    $"public static delegate* unmanaged[Stdcall] <{thisPtrType}{parameterTypes}{f.ReturnType}> {f.Name} {{ internal set; get; }}");
+                    $"public static delegate* unmanaged[Stdcall] <{thisPtrType}{parameterTypes}{returnType}> {f.Name} {{ internal set; get; }}");
             }
 
             _builder.DecrementIndent();
@@ -102,7 +109,28 @@ public sealed partial class FunctionGenerator
 
         private void RenderVirtualTable(IEnumerable<Function> functions, string structName)
         {
-            
+            _builder.AppendLine("[StructLayout(LayoutKind.Explicit)]");
+            _builder.AppendLine($"public unsafe struct {structName}VFTable");
+            _builder.AppendLine("{");
+            _builder.Indent();
+            foreach (Function f in functions)
+            {
+                if (f.VirtualIndex is null)
+                    continue;
+                
+                string parameterTypes =
+                    f.Parameters.Any() ? string.Join(", ", f.Parameters.Select(p => p.Type)) + ", " : "";
+                string thisPtrType = structName + "*, ";
+                string returnType = f.ReturnType == "bool" ? "byte" : f.ReturnType;
+
+                _builder.AppendLine(
+                    $"[FieldOffset({f.VirtualIndex * 8})] public delegate* unmanaged[Stdcall] <{thisPtrType}{parameterTypes}{returnType}> {f.Name};");
+            }
+
+            _builder.DecrementIndent();
+            _builder.AppendLine("}");
+            _builder.AppendLine();
+            _builder.AppendLine($"[FieldOffset(0x0)] public {structName}VFTable* VFTable;");
         }
         
         private void RenderMemberFunction(Function f, string structName)
@@ -110,6 +138,7 @@ public sealed partial class FunctionGenerator
             string paramNamesAndTypes = String.Join(", ", f.Parameters.Select(p => $"{p.Type} {p.Name}"));
             string paramNames = String.Join(", ", f.Parameters.Select(p => p.Name));
             string returnString = f.ReturnType == "void" ? "" : "return ";
+            string boolReturn = f.ReturnType == "bool" ? " != 0" : "";
 
             _builder.AppendLine($"{f.Modifiers} {f.ReturnType} {f.Name}({paramNamesAndTypes})");
             _builder.AppendLine("{");
@@ -121,7 +150,7 @@ public sealed partial class FunctionGenerator
             _builder.AppendLine();
             if (f.IsStatic)
             {
-                _builder.AppendLine($"{returnString}FunctionPointers.{f.Name}({paramNames});");
+                _builder.AppendLine($"{returnString}FunctionPointers.{f.Name}({paramNames}){boolReturn};");
             }
             else
             {
@@ -130,10 +159,34 @@ public sealed partial class FunctionGenerator
                 _builder.Indent();
                 if (f.Parameters.Any())
                     paramNames = ", " + paramNames;
-                _builder.AppendLine($"{returnString}FunctionPointers.{f.Name}(thisPtr{paramNames});");
+                _builder.AppendLine($"{returnString}FunctionPointers.{f.Name}(thisPtr{paramNames}){boolReturn};");
                 _builder.DecrementIndent();
                 _builder.AppendLine("}");
             }
+            _builder.DecrementIndent();
+            _builder.AppendLine("}");
+        }
+
+        private void RenderVirtualFunction(Function f, string structName)
+        {
+            string paramNamesAndTypes = String.Join(", ", f.Parameters.Select(p => $"{p.Type} {p.Name}"));
+            string paramNames = String.Join(", ", f.Parameters.Select(p => p.Name));
+            string returnString = f.ReturnType == "void" ? "" : "return ";
+            string boolReturn = f.ReturnType == "bool" ? " != 0" : "";
+            
+            _builder.AppendLine($"{f.Modifiers} {f.ReturnType} {f.Name}({paramNamesAndTypes})");
+            _builder.AppendLine("{");
+            _builder.Indent();
+            
+            _builder.AppendLine($"fixed({structName}* thisPtr = &this)");
+            _builder.AppendLine("{");
+            _builder.Indent();
+            if (f.Parameters.Any())
+                paramNames = ", " + paramNames;
+            _builder.AppendLine($"{returnString}VFTable->{f.Name}(thisPtr{paramNames}){boolReturn};");
+            _builder.DecrementIndent();
+            _builder.AppendLine("}");
+            
             _builder.DecrementIndent();
             _builder.AppendLine("}");
         }
