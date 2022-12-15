@@ -4,10 +4,10 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace FFXIVClientStructs.Generators.FunctionGenerator;
+namespace FFXIVClientStructs.InteropGenerator;
 
 [Generator]
-public sealed partial class FunctionGenerator : IIncrementalGenerator
+public sealed partial class InteropGenerator : IIncrementalGenerator
 {
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {

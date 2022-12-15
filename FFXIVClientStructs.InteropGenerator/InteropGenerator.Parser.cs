@@ -7,64 +7,12 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace FFXIVClientStructs.Generators.FunctionGenerator;
+namespace FFXIVClientStructs.InteropGenerator;
 
-public sealed partial class FunctionGenerator
+public sealed partial class InteropGenerator
 {
     internal sealed class Parser
     {
-        private static DiagnosticDescriptor MultipleAttributes { get; } = new(
-            id: "CSFG0001",
-            title: "Multiple attributes",
-            messageFormat: "Method {0} has multiple function generation attributes",
-            category: "Function Generator",
-            defaultSeverity: DiagnosticSeverity.Error,
-            isEnabledByDefault: true
-        );
-
-        private static DiagnosticDescriptor InvalidSignature { get; } = new(
-            id: "CSFG0002",
-            title: "Invalid signature",
-            messageFormat: "Signature {0} is invalid - use ?? and make sure each byte is 2 characters",
-            category: "Function Generator",
-            defaultSeverity: DiagnosticSeverity.Error,
-            isEnabledByDefault: true
-        );
-
-        private static DiagnosticDescriptor StructMustBePartial { get; } = new(
-            id: "CSFG0003",
-            title: "Struct must be partial",
-            messageFormat: "Struct {0} must be partial",
-            category: "Function Generator",
-            defaultSeverity: DiagnosticSeverity.Error,
-            isEnabledByDefault: true
-        );
-
-        private static DiagnosticDescriptor MethodMustBePartial { get; } = new(
-            id: "CSFG0004",
-            title: "Method must be partial",
-            messageFormat: "Method {0} must be partial",
-            category: "Function Generator",
-            defaultSeverity: DiagnosticSeverity.Error,
-            isEnabledByDefault: true
-        );
-
-        private static DiagnosticDescriptor ReturnsUnmanaged { get; } = new(
-            id: "CSFG0005",
-            title: "Method must return unmanaged",
-            messageFormat: "Method {0} has invalid return type {1} - must be unmanaged type",
-            category: "Function Generator",
-            defaultSeverity: DiagnosticSeverity.Error,
-            isEnabledByDefault: true);
-        
-        private static DiagnosticDescriptor ParamUnmanagedOrString { get; } = new(
-            id: "CSFG0006",
-            title: "Method parameters unmanaged or string",
-            messageFormat: "Parameter {0} has invalid type {1} - must be either unmanaged type or the string type",
-            category: "Function Generator",
-            defaultSeverity: DiagnosticSeverity.Error,
-            isEnabledByDefault: true);
-
         internal static bool IsSyntaxTargetForGeneration(SyntaxNode node)
         {
             return node is MethodDeclarationSyntax { AttributeLists.Count: > 0 };
@@ -130,7 +78,7 @@ public sealed partial class FunctionGenerator
 
                     if (!structDec.Modifiers.Any(m => m.IsKind(SyntaxKind.PartialKeyword)))
                     {
-                        _reportDiagnostic(Diagnostic.Create(StructMustBePartial, structDec.GetLocation(), structName));
+                        _reportDiagnostic(Diagnostic.Create(DiagnosticDescriptors.StructMustBePartial, structDec.GetLocation(), structName));
                     }
 
                     TargetStruct? ts = null;
@@ -162,7 +110,7 @@ public sealed partial class FunctionGenerator
 
                         if (validAttributes.Count() > 1)
                         {
-                            _reportDiagnostic(Diagnostic.Create(MultipleAttributes, method.GetLocation(), methodSymbol.Name));
+                            _reportDiagnostic(Diagnostic.Create(DiagnosticDescriptors.MultipleAttributes, method.GetLocation(), methodSymbol.Name));
                             continue;
                         }
 
@@ -254,7 +202,7 @@ public sealed partial class FunctionGenerator
                             if (signature.Replace(" ", string.Empty).Length % 2 != 0
                                 || signature.Contains(" ? "))
                             {
-                                _reportDiagnostic(Diagnostic.Create(InvalidSignature, method.GetLocation(), signature));
+                                _reportDiagnostic(Diagnostic.Create(DiagnosticDescriptors.InvalidSignature, method.GetLocation(), signature));
                                 continue;
                             }
                         }
@@ -277,7 +225,7 @@ public sealed partial class FunctionGenerator
 
                         if (!isPartial)
                         {
-                            _reportDiagnostic(Diagnostic.Create(MethodMustBePartial, method.GetLocation(), methodSymbol.Name));
+                            _reportDiagnostic(Diagnostic.Create(DiagnosticDescriptors.MethodMustBePartial, method.GetLocation(), methodSymbol.Name));
                             keepFunction = false;
                         }
 
@@ -290,7 +238,7 @@ public sealed partial class FunctionGenerator
                         
                         if (!methodSymbol.ReturnType.IsUnmanagedType)
                         {
-                            _reportDiagnostic(Diagnostic.Create(ReturnsUnmanaged, method.GetLocation(), methodSymbol.Name, returnType));
+                            _reportDiagnostic(Diagnostic.Create(DiagnosticDescriptors.ReturnsUnmanaged, method.GetLocation(), methodSymbol.Name, returnType));
                             keepFunction = false;
                         }
 
@@ -332,7 +280,7 @@ public sealed partial class FunctionGenerator
                             if (!paramTypeSymbol.IsUnmanagedType &&
                                 paramTypeSymbol.SpecialType != SpecialType.System_String)
                             {
-                                _reportDiagnostic(Diagnostic.Create(ParamUnmanagedOrString, method.GetLocation(),
+                                _reportDiagnostic(Diagnostic.Create(DiagnosticDescriptors.ParamUnmanagedOrString, method.GetLocation(),
                                     paramName, typeName));
                                 keepFunction = false;
                                 continue;

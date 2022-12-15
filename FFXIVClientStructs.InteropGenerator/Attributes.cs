@@ -1,4 +1,4 @@
-﻿namespace FFXIVClientStructs.Generators.FunctionGenerator;
+﻿namespace FFXIVClientStructs.InteropGenerator;
 
 public static class Attributes
 {

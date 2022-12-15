@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace FFXIVClientStructs.Generators;
+namespace FFXIVClientStructs.InteropGenerator;
 
 /// <summary>
 ///     <para>

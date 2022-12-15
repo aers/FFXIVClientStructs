@@ -1,4 +1,4 @@
-﻿namespace FFXIVClientStructs.Generators.StaticAddressGenerator
+﻿namespace FFXIVClientStructs.InteropGenerator.StaticAddressGenerator
 {
     internal static class Templates
     {

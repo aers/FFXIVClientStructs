@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace FFXIVClientStructs.Generators.StaticAddressGenerator
+namespace FFXIVClientStructs.InteropGenerator.StaticAddressGenerator
 {
     internal class Struct
     {

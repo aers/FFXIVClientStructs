@@ -3,7 +3,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
 using Scriban;
 
-namespace FFXIVClientStructs.Generators.StaticAddressGenerator
+namespace FFXIVClientStructs.InteropGenerator.StaticAddressGenerator
 {
     [Generator]
     internal class StaticAddressGenerator : ISourceGenerator

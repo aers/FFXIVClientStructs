@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using FFXIVClientStructs.Generators.StaticAddressGenerator;
 
-namespace FFXIVClientStructs.Generators.FunctionGenerator;
+namespace FFXIVClientStructs.InteropGenerator;
 
-public sealed partial class FunctionGenerator
+public sealed partial class InteropGenerator
 {
     internal sealed class Renderer
     {
