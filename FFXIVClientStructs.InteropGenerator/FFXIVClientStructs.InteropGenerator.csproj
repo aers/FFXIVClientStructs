@@ -12,6 +12,10 @@
   <ItemGroup>
     <PackageReference Include="Scriban" Version="5.5.1" GeneratePathProperty="true" PrivateAssets="all" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="EmbeddedSource\**\*.cs" />
+    <EmbeddedResource Include="EmbeddedSource\**\*.cs" />
+  </ItemGroup>
 
   <PropertyGroup>
     <GetTargetPathDependsOn>$(GetTargetPathDependsOn);GetDependencyTargetPaths</GetTargetPathDependsOn>

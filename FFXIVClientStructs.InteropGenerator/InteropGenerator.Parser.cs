@@ -32,8 +32,8 @@ public sealed partial class InteropGenerator
                 var attributeContainingTypeSymbol = attributeSymbol.ContainingType;
                 var fullName = attributeContainingTypeSymbol.ToDisplayString();
 
-                if (fullName == Attributes.MemberFunctionAttribute.FullName ||
-                    fullName == Attributes.VirtualFunctionAttribute.FullName)
+                if (fullName == EmbeddedSources.MemberFunctionAttribute.FullName ||
+                    fullName == EmbeddedSources.VirtualFunctionAttribute.FullName)
                     return methodDeclarationSyntax.Parent as StructDeclarationSyntax;
             }
 
@@ -54,13 +54,13 @@ public sealed partial class InteropGenerator
         public IReadOnlyList<TargetStruct> GetTargetStructs(IEnumerable<StructDeclarationSyntax> structs)
         {
             INamedTypeSymbol? memberFunctionAttribute =
-                _compilation.GetTypeByMetadataName(Attributes.MemberFunctionAttribute.FullName);
+                _compilation.GetTypeByMetadataName(EmbeddedSources.MemberFunctionAttribute.FullName);
 
             if (memberFunctionAttribute == null)
                 return Array.Empty<TargetStruct>();
 
             INamedTypeSymbol? virtualFunctionAttribute =
-                _compilation.GetTypeByMetadataName(Attributes.VirtualFunctionAttribute.FullName);
+                _compilation.GetTypeByMetadataName(EmbeddedSources.VirtualFunctionAttribute.FullName);
 
             if (virtualFunctionAttribute == null)
                 return Array.Empty<TargetStruct>();

@@ -13,10 +13,10 @@ public sealed partial class InteropGenerator : IIncrementalGenerator
     {
         context.RegisterPostInitializationOutput(s =>
         {
-            s.AddSource($"{Attributes.MemberFunctionAttribute.Name}.g.cs",
-                Attributes.MemberFunctionAttribute.Source);
-            s.AddSource($"{Attributes.VirtualFunctionAttribute.Name}.g.cs",
-                Attributes.VirtualFunctionAttribute.Source);
+            s.AddSource($"{EmbeddedSources.MemberFunctionAttribute.FullName}.g.cs",
+                EmbeddedSources.MemberFunctionAttribute.Source);
+            s.AddSource($"{EmbeddedSources.VirtualFunctionAttribute.FullName}.g.cs",
+                EmbeddedSources.VirtualFunctionAttribute.Source);
         });
         
         IncrementalValuesProvider<StructDeclarationSyntax> structDeclarations = context.SyntaxProvider
