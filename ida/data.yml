@@ -330,6 +330,25 @@ classes:
   SQEX::CDev::Engine::Sd::SdMemoryAllocator:
   SQEX::CDev::Engine::Sd::Driver::BankController:
   Client::System::Scheduler::Base::LinkList:
+  Application::Network::WorkDefinitions::Base:
+    vtbls:
+      - ea: 0x1418AF190
+  Application::Network::WorkDefinitions::QuestWork:
+    vtbls:
+      - ea: 0x1418ED640
+        base: Application::Network::WorkDefinitions::Base
+  Application::Network::WorkDefinitions::LeveWork:
+    vtbls:
+      - ea: 0x1418ED648
+        base: Application::Network::WorkDefinitions::Base
+  Application::Network::WorkDefinitions::DailyQuestWork:
+    vtbls:
+      - ea: 0x141B2CB50
+        base: Application::Network::WorkDefinitions::Base
+  Application::Network::WorkDefinitions::TrackingWork:
+    vtbls:
+      - ea: 0x141B2CBD0
+        base: Application::Network::WorkDefinitions::Base
   Client::Game::Network::PacketElement:
     vtbls:
       - ea: 0x1418ED660
@@ -428,6 +447,7 @@ classes:
       0x1411F5180: GetPtr # return g_FateTablePtr
       0x1411F5190: ctor
       0x1411F51E0: dtor
+      0x1411F7C70: GetFateById
   BattleBuddyList:
     funcs:
       0x14093CB80: GetMemberBattleCharaByIndex
@@ -440,6 +460,9 @@ classes:
       0x1400AA5B0: IsQuestComplete # static (questId)
       0x140816610: IsQuestComplete1 # (this, questId)
       0x140816990: IsQuestCurrent # static (questId)
+      0x140816300: GetQuestIndex
+      0x140816A90: GetQuestClassJob
+      0x1408167C0: IsQuestAccepted
   InventoryManager:
     instances:
       - ea: 0x142065B30
@@ -5149,6 +5172,10 @@ classes:
       0x14082FEC0: ProcessDirectorUpdate
       0x140833640: GetInstanceContentDirector
       0x140833870: GetContentDirector
+      0x140837A10: GetEventHandlerById
+      0x1409423C0: GetCurrentContentType
+      0x140942490: GetCurrentContentId
+      0x140943980: GetContentFinderCondition
   Client::Game::Event::EventHandlerModule:
     vtbls:
       - ea: 0x141919C78

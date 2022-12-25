@@ -51,6 +51,7 @@ public unsafe partial struct GameObject
     [FieldOffset(0xB8)] public float Height;
     [FieldOffset(0xBC)] public float VfxScale;
     [FieldOffset(0xC0)] public float HitboxRadius;
+    [FieldOffset(0xE4)] public EventId EventId;
     [FieldOffset(0xE8)] public uint FateId;
     [FieldOffset(0xF0)] public DrawObject* DrawObject;
     [FieldOffset(0x104)] public int RenderFlags;

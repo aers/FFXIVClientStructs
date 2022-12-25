@@ -16,6 +16,26 @@ public unsafe struct StdMap<TKey, TValue>
     public Node* LargestValue
         => Head->Right;
 
+    public Enumerator GetEnumerator() => new(this);
+
+    public ref struct Enumerator {
+	    private readonly Node* _head;
+	    private Node* _current;
+
+	    internal Enumerator(StdMap<TKey, TValue> map) {
+		    _head = _current = map.Head;
+	    }
+
+        public bool MoveNext() {
+            if (_current == null || _current == _head->Right)
+                return false;
+            _current = _current == _head ? _head->Left : _current->Next();
+            return _current != null;
+        }
+
+        public ref readonly StdPair<TKey, TValue> Current => ref _current->KeyValuePair;
+    }
+
     [StructLayout(LayoutKind.Sequential)]
     public struct Node
     {
