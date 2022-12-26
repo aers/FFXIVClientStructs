@@ -5121,6 +5121,9 @@ classes:
     vtbls:
       - ea: 0x141A0B408
         base: Client::UI::Agent::AgentInterface
+  Client::Game::UI::GameEventCallback:
+    vtbls:
+      - ea: 0x1419136F8
   Client::Game::Event::EventHandler:
     vtbls:
       - ea: 0x1419137A8
@@ -5160,6 +5163,14 @@ classes:
   Client::Game::Event::Director:
     vtbls:
       - ea: 0x141916F40
+        base: Client::Game::Event::LuaEventHandler
+  Client::Game::Event::JournalCallback:
+    vtbls:
+      - ea: 0x141919D30
+        base: Client::Game::UI::GameEventCallback
+  Client::Game::Event::QuestEventHandler:
+    vtbls:
+      - ea: 0x141919D40
         base: Client::Game::Event::LuaEventHandler
   Client::Game::Event::EventFramework:
     instances:
