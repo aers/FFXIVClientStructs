@@ -15,11 +15,14 @@ public unsafe partial struct QuestManager
 
 	[FieldOffset(0x650)] public fixed byte TrackedQuests[0x10 * 5];
 
+	[FieldOffset(0xB60)] public fixed byte BeastReputation[0x10 * 16];
+
 	[FieldOffset(0xC60)] public fixed byte LeveQuests[0x18 * 16];
 
 	public Span<QuestWork> QuestSpan => new(Unsafe.AsPointer(ref NormalQuests[0]), 30);
 	public Span<TrackingWork> TrackedQuestSpan => new(Unsafe.AsPointer(ref TrackedQuests[0]), 5);
 	public Span<DailyQuestWork> DailyQuestSpan => new(Unsafe.AsPointer(ref DailyQuests[0]), 12);
+	public Span<BeastReputationWork> BeastReputationSpan => new(Unsafe.AsPointer(ref BeastReputation[0]), 16);
 	public Span<LeveWork> LeveQuestSpan => new(Unsafe.AsPointer(ref LeveQuests[0]), 16);
 
     [MemberFunction("E8 ?? ?? ?? ?? 66 BA 10 0C", IsStatic = true)]
@@ -75,6 +78,14 @@ public unsafe partial struct QuestManager
 	    return null;
     }
 
+    public BeastReputationWork* GetBeastReputationById(uint beastTribeId)
+    {
+	    var index = beastTribeId - 1;
+	    var span = BeastReputationSpan;
+	    if (index >= span.Length) return null; 
+	    return (BeastReputationWork*)Unsafe.AsPointer(ref span[(int)index]);
+    }
+    
     [StructLayout(LayoutKind.Explicit)]
     public struct QuestListArray
     {

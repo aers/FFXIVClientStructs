@@ -349,6 +349,10 @@ classes:
     vtbls:
       - ea: 0x141B2CBD0
         base: Application::Network::WorkDefinitions::Base
+  Application::Network::WorkDefinitions::BeastReputationWork:
+    vtbls:
+      - ea: 0x141B2CBE0
+        base: Application::Network::WorkDefinitions::Base
   Client::Game::Network::PacketElement:
     vtbls:
       - ea: 0x1418ED660

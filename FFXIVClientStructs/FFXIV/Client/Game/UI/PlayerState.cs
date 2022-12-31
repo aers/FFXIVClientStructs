@@ -9,6 +9,11 @@ public unsafe partial struct PlayerState
     [FieldOffset(0x54)] public uint ObjectId;
     [FieldOffset(0x58)] public ulong ContentId;
 
+    [FieldOffset(0x69)] public byte MaxLevel;
+    [FieldOffset(0x6A)] public byte MaxExpansion;
+    [FieldOffset(0x6B)] public byte Sex;
+    [FieldOffset(0x6C)] public byte Race;
+    [FieldOffset(0x6D)] public byte Tribe;
     [FieldOffset(0x6E)] public byte CurrentClassJobId;
     [FieldOffset(0x78)] public short CurrentLevel;
 
@@ -18,6 +23,13 @@ public unsafe partial struct PlayerState
     [FieldOffset(0x130)] public short SyncedLevel;
     [FieldOffset(0x132)] public byte IsLevelSynced;
 
+    [FieldOffset(0x136)] public byte GuardianDeity;
+    [FieldOffset(0x137)] public byte BirthMonth;
+    [FieldOffset(0x138)] public byte BirthDay;
+    [FieldOffset(0x139)] public byte FirstClass;
+    [FieldOffset(0x13A)] public byte StartTown;
+    [FieldOffset(0x13B)] public byte QuestSpecialFlags;
+    
     [FieldOffset(0x154)] public int BaseStrength;
     [FieldOffset(0x158)] public int BaseDexterity;
     [FieldOffset(0x15C)] public int BaseVitality;
@@ -43,10 +55,15 @@ public unsafe partial struct PlayerState
 
     [FieldOffset(0x45C)] public short PlayerCommendations;
 
+    [FieldOffset(0x4E1)] public fixed byte UnlockFlags[44];
+
     [FieldOffset(0x712)] public fixed ushort DesynthesisLevels[8];
     
     [StaticAddress("48 8D 0D ?? ?? ?? ?? 4D 8B F9")]
     public static partial PlayerState* Instance();
+
+    public bool IsLegacy => (QuestSpecialFlags & 1) != 0;
+    public bool IsWarriorOfLight => (QuestSpecialFlags & 2) != 0;
 
     public float GetDesynthesisLevel(uint classJobId)
     {
@@ -130,4 +147,13 @@ public unsafe partial struct PlayerState
     /// <returns>Returns true if the framer's kit is unlocked.</returns>
     [MemberFunction("4C 8B C9 66 83 FA ?? 73")]
     public partial bool IsFramersKitUnlocked(uint kitId);
+
+    public bool IsAetherCurrentUnlocked(uint aetherCurrentId) {
+        if (aetherCurrentId < 0x2B0000)
+            return false;
+        var id = aetherCurrentId - 0x2B0000;
+        var idx = id >> 3;
+	    var flag = 1 << (byte)(id + idx * -8 & 0x1F);
+	    return (UnlockFlags[idx] & flag) != 0;
+    }
 }

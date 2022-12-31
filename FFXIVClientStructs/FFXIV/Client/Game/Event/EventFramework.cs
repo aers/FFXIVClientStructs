@@ -3,7 +3,7 @@ using FFXIVClientStructs.FFXIV.Common.Lua;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 
-[StructLayout(LayoutKind.Explicit, Size = 0x3BA8)]
+[StructLayout(LayoutKind.Explicit, Size = 0x3BB8)]
 public unsafe partial struct EventFramework
 {
     [FieldOffset(0x00)] public EventHandlerModule EventHandlerModule;
