@@ -3,20 +3,22 @@ using FFXIVClientStructs.InteropSourceGenerators.Models;
 using LanguageExt;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using static LanguageExt.Prelude;
+using static FFXIVClientStructs.InteropSourceGenerators.DiagnosticDescriptors;
 
 namespace FFXIVClientStructs.InteropSourceGenerators;
 
 [Generator]
 internal sealed class MemberFunctionGenerator : IIncrementalGenerator
 {
+    private const string AttributeName = "FFXIVClientStructs.Interop.Attributes.MemberFunctionAttribute";
+
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {
         IncrementalValuesProvider<(Validation<DiagnosticInfo, StructInfo> StructInfo,
             Validation<DiagnosticInfo, MemberFunctionInfo> MemberFunctionInfo)> structAndMemberFunctionInfos =
             context.SyntaxProvider
                 .ForAttributeWithMetadataName(
-                    "FFXIVClientStructs.Interop.Attributes.MemberFunctionAttribute",
+                    AttributeName,
                     static (node, _) => node is MethodDeclarationSyntax
                     {
                         Parent : StructDeclarationSyntax, AttributeLists.Count: > 0
@@ -43,7 +45,7 @@ internal sealed class MemberFunctionGenerator : IIncrementalGenerator
                 (item.StructInfo, item.MemberFunctionInfos).Apply(static (si, mfi) =>
                     new StructWithMemberFunctionInfos(si, mfi))
             );
-        
+
         context.RegisterSourceOutput(structWithMemberInfos, (sourceContext, items) =>
         {
             items.Match(
@@ -51,14 +53,17 @@ internal sealed class MemberFunctionGenerator : IIncrementalGenerator
                 {
                     diagnosticInfos.Iter(dInfo => sourceContext.ReportDiagnostic(dInfo.ToDiagnostic()));
                 },
-                Succ: _ =>
-                { 
-                    
+                Succ: structWithMemberInfo =>
+                {
+                    Seq<string> a = structWithMemberInfo.MemberFunctionInfos.Map(mfi =>
+                        $"// {mfi.MethodInfo.Name} - {mfi.SignatureInfo.Signature}");
+                    sourceContext.AddSource($"{structWithMemberInfo.StructInfo.Name}.MemberFunctions.g.cs",
+                        string.Join("\n", a));
                 });
         });
     }
 
-    internal sealed record MemberFunctionInfo(MethodInfo MethodInfo, string Signature)
+    internal sealed record MemberFunctionInfo(MethodInfo MethodInfo, SignatureInfo SignatureInfo)
     {
         public static Validation<DiagnosticInfo, MemberFunctionInfo> GetFromRoslyn(
             MethodDeclarationSyntax methodSyntax, IMethodSymbol methodSymbol)
@@ -66,11 +71,18 @@ internal sealed class MemberFunctionGenerator : IIncrementalGenerator
             Validation<DiagnosticInfo, MethodInfo> validMethodInfo =
                 MethodInfo.GetFromRoslyn(methodSyntax, methodSymbol);
 
-            return validMethodInfo.Bind<MemberFunctionInfo>(methodInfo =>
-                new MemberFunctionInfo(methodInfo, string.Empty));
+            Validation<DiagnosticInfo, SignatureInfo> validSignature =
+                methodSymbol.GetFirstAttributeDataByTypeName(AttributeName)
+                    .Bind(attributeData => attributeData.GetAttributeArgument<string>("Signature", 0))
+                    .ToValidation(DiagnosticInfo.Create(AttributeArgumentInvalid, methodSymbol, AttributeName,
+                        "Signature"))
+                    .Bind(signatureString => SignatureInfo.GetValidatedSignature(signatureString, methodSymbol));
+
+            return (validMethodInfo, validSignature).Apply((methodInfo, signature) =>
+                new MemberFunctionInfo(methodInfo, signature));
         }
     }
 
-    internal sealed record StructWithMemberFunctionInfos(StructInfo StructInfo,
+    private sealed record StructWithMemberFunctionInfos(StructInfo StructInfo,
         Seq<MemberFunctionInfo> MemberFunctionInfos);
 }
