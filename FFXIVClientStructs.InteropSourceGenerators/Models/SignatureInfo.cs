@@ -22,6 +22,6 @@ internal sealed record SignatureInfo(string Signature)
 
     private static bool IsValid(string signature)
     {
-        return signature.Split(' ').Any(subString => subString.Length != 2);
+        return signature.Split(' ').All(subString => subString.Length == 2);
     }
 }
