@@ -1,4 +1,5 @@
 ﻿using System.Collections.Immutable;
+using FFXIVClientStructs.InteropGenerator;
 using FFXIVClientStructs.InteropSourceGenerators.Extensions;
 using LanguageExt;
 using Microsoft.CodeAnalysis;
@@ -44,5 +45,38 @@ internal sealed record MethodInfo(string Name, string Modifiers, string ReturnTy
                 symbol.IsStatic,
                 pInfos.ToImmutableArray()
             ));
+    }
+
+    public string GetParameterTypeString()
+    {
+        return Parameters.Any() ? string.Join(", ", Parameters.Map(p => p.Type)) + ", " : "";
+    }
+
+    public string GetParameterNamesString()
+    {
+        return string.Join(", ", Parameters.Map(p => p.Name));   
+    }
+    
+    public string GetParameterTypesAndNamesString()
+    {
+        return string.Join(", ", Parameters.Map(p => $"{p.Type} {p.Name}"));
+    }
+
+    public string GetReturnString()
+    {
+        return ReturnType == "void" ? "" : "return ";
+    }
+
+    public void RenderStart(IndentedStringBuilder builder)
+    {
+        builder.AppendLine($"{Modifiers} {ReturnType} {Name}({GetParameterTypesAndNamesString()})");
+        builder.AppendLine("{");
+        builder.Indent();
+    }
+
+    public void RenderEnd(IndentedStringBuilder builder)
+    {
+        builder.DecrementIndent();
+        builder.AppendLine("}");
     }
 }

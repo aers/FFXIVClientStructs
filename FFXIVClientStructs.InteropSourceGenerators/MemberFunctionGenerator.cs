@@ -1,9 +1,12 @@
-﻿using FFXIVClientStructs.InteropSourceGenerators.Extensions;
+﻿using System.Reflection;
+using FFXIVClientStructs.InteropGenerator;
+using FFXIVClientStructs.InteropSourceGenerators.Extensions;
 using FFXIVClientStructs.InteropSourceGenerators.Models;
 using LanguageExt;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using static FFXIVClientStructs.InteropSourceGenerators.DiagnosticDescriptors;
+using MethodInfo = FFXIVClientStructs.InteropSourceGenerators.Models.MethodInfo;
 
 namespace FFXIVClientStructs.InteropSourceGenerators;
 
@@ -55,10 +58,7 @@ internal sealed class MemberFunctionGenerator : IIncrementalGenerator
                 },
                 Succ: structWithMemberInfo =>
                 {
-                    Seq<string> a = structWithMemberInfo.MemberFunctionInfos.Map(mfi =>
-                        $"// {mfi.MethodInfo.Name} - {mfi.SignatureInfo.Signature}");
-                    sourceContext.AddSource($"{structWithMemberInfo.StructInfo.Name}.MemberFunctions.g.cs",
-                        string.Join("\n", a));
+                    sourceContext.AddSource(structWithMemberInfo.GetFileName(), structWithMemberInfo.RenderSource());
                 });
         });
     }
@@ -81,8 +81,72 @@ internal sealed class MemberFunctionGenerator : IIncrementalGenerator
             return (validMethodInfo, validSignature).Apply((methodInfo, signature) =>
                 new MemberFunctionInfo(methodInfo, signature));
         }
+
+        public void RenderFunctionPointer(IndentedStringBuilder builder, string structName)
+        {
+            string thisPtrType = MethodInfo.IsStatic ? "" : structName + "*, ";
+
+            builder.AppendLine(
+                $"public static delegate* unmanaged[Stdcall] <{thisPtrType}{MethodInfo.GetParameterTypeString()}{MethodInfo.ReturnType}> {MethodInfo.Name} {{ internal set; get; }}");
+        }
+
+        public void RenderMemberFunction(IndentedStringBuilder builder, string structName)
+        {
+            MethodInfo.RenderStart(builder);
+
+            builder.AppendLine($"if (MemberFunctionPointers.{MethodInfo.Name} is null)");
+            builder.Indent();
+            builder.AppendLine($"throw new InvalidOperationException(\"Function pointer for {structName}.{MethodInfo.Name} is null. The resolver was either uninitialized or failed to resolve address with signature {SignatureInfo.Signature}.\");");
+            builder.DecrementIndent();
+            builder.AppendLine();
+            if (MethodInfo.IsStatic)
+                builder.AppendLine(
+                    $"{MethodInfo.GetReturnString()}MemberFunctionPointers.{MethodInfo.Name}({MethodInfo.GetParameterNamesString()});");
+            else
+            {
+                builder.AppendLine($"fixed({structName}* thisPtr = &this)");
+                builder.AppendLine("{");
+                builder.Indent();
+                string paramNames = MethodInfo.GetParameterNamesString();
+                if (MethodInfo.Parameters.Any())
+                    paramNames = ", " + paramNames;
+                builder.AppendLine(
+                    $"{MethodInfo.GetReturnString()}MemberFunctionPointers.{MethodInfo.Name}(thisPtr{paramNames});");
+                builder.DecrementIndent();
+                builder.AppendLine("}");
+            }
+            
+            MethodInfo.RenderEnd(builder);
+        }
     }
 
     private sealed record StructWithMemberFunctionInfos(StructInfo StructInfo,
-        Seq<MemberFunctionInfo> MemberFunctionInfos);
+        Seq<MemberFunctionInfo> MemberFunctionInfos)
+    {
+        public string RenderSource()
+        {
+            IndentedStringBuilder builder = new();
+
+            StructInfo.RenderStart(builder);
+
+            builder.AppendLine("public unsafe static class MemberFunctionPointers");
+            builder.AppendLine("{");
+            builder.Indent();
+            MemberFunctionInfos.Iter(mfi => mfi.RenderFunctionPointer(builder, StructInfo.Name));
+            builder.DecrementIndent();
+            builder.AppendLine("}");
+
+            foreach (MemberFunctionInfo mfi in MemberFunctionInfos)
+            {
+                builder.AppendLine();
+                mfi.RenderMemberFunction(builder, StructInfo.Name);
+            }
+
+            StructInfo.RenderEnd(builder);
+            
+            return builder.ToString();
+        }
+
+        public string GetFileName() => $"{StructInfo.Namespace}.{StructInfo.Name}.MemberFunctions.g.cs";
+    }
 }
