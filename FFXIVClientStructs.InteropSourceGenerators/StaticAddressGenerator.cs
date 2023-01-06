@@ -99,7 +99,7 @@ internal sealed class StaticAddressGenerator : IIncrementalGenerator
             builder.AppendLine($"if (StaticAddressPointers.{extraPText}p{MethodInfo.Name} is null)");
             builder.Indent();
             builder.AppendLine(
-                $"throw new InvalidOperationException(\"Function pointer for {structName}.{MethodInfo.Name} is null. The resolver was either uninitialized or failed to resolve address with signature {SignatureInfo.Signature}.\");");
+                $"throw new InvalidOperationException(\"Pointer for {structName}.{MethodInfo.Name} is null. The resolver was either uninitialized or failed to resolve address with signature {SignatureInfo.Signature}.\");");
             builder.DecrementIndent();
 
             string pointerReturnText = IsPointer ? "*" : "";
