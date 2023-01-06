@@ -1,4 +1,4 @@
-﻿namespace FFXIVClientStructs.STD;
+﻿namespace FFXIVClientStructs.Interop;
 
 // workaround for C# not supporting pointer types as generic arguments
 [StructLayout(LayoutKind.Sequential, Size = 0x8)]
