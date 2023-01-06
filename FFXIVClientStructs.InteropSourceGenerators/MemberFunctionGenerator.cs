@@ -71,9 +71,7 @@ internal sealed class MemberFunctionGenerator : IIncrementalGenerator
 
             Validation<DiagnosticInfo, SignatureInfo> validSignature =
                 methodSymbol.GetFirstAttributeDataByTypeName(AttributeName)
-                    .Bind(attributeData => attributeData.GetAttributeArgument<string>("Signature", 0))
-                    .ToValidation(DiagnosticInfo.Create(AttributeArgumentInvalid, methodSymbol, AttributeName,
-                        "Signature"))
+                    .GetValidAttributeArgument<string>("Signature", 0, AttributeName, methodSymbol)
                     .Bind(signatureString => SignatureInfo.GetValidatedSignature(signatureString, methodSymbol));
 
             return (validMethodInfo, validSignature).Apply((methodInfo, signature) =>
@@ -82,8 +80,9 @@ internal sealed class MemberFunctionGenerator : IIncrementalGenerator
 
         public void RenderFunctionPointer(IndentedStringBuilder builder, StructInfo structInfo)
         {
+            string thisPtrString = MethodInfo.IsStatic ? "" : structInfo.GetThisPtrTypeString();
             builder.AppendLine(
-                $"public static delegate* unmanaged[Stdcall] <{structInfo.GetThisPtrTypeString()}{MethodInfo.GetParameterTypeString()}{MethodInfo.ReturnType}> {MethodInfo.Name} {{ internal set; get; }}");
+                $"public static delegate* unmanaged[Stdcall] <{thisPtrString}{MethodInfo.GetParameterTypeString()}{MethodInfo.ReturnType}> {MethodInfo.Name} {{ internal set; get; }}");
         }
 
         public void RenderMemberFunction(IndentedStringBuilder builder, string structName)

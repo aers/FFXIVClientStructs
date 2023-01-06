@@ -36,7 +36,7 @@ public unsafe partial struct Framework
 
     [FieldOffset(0x2BF0)] public GameVersion GameVersion;
     
-    [StaticAddress("44 0F B6 C0 48 8B 0D ?? ?? ?? ?", isPointer: true)]
+    [StaticAddress("44 0F B6 C0 48 8B 0D ?? ?? ?? ??", isPointer: true)]
     public static partial Framework* Instance();
 
     [MemberFunction("E8 ?? ?? ?? ?? 80 7B 1D 01")]

@@ -39,6 +39,6 @@ public unsafe partial struct EventFramework
     public partial EventHandler* GetEventHandlerById(uint id);
     public EventHandler* GetEventHandlerById(ushort id) => GetEventHandlerById((uint)(id | 0x10000));
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8B D8 3B 86", IsStatic = true)]
+    [MemberFunction("E8 ?? ?? ?? ?? 8B D8 3B 86")]
     public static partial uint GetCurrentContentId();
 }

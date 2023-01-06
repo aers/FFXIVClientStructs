@@ -38,6 +38,8 @@ public unsafe partial struct RetainerCommentModule {
     [StructLayout(LayoutKind.Sequential, Size = 0x68)]
     public struct RetainerComment {
         public ulong ID;
+        // TODO fix string
+        /*
         public string Comment {
             get {
                 var comment = Instance()->GetComment(ID);
@@ -49,5 +51,6 @@ public unsafe partial struct RetainerCommentModule {
             }
             set => Instance()->SetComment(ID, value);
         }
+        */
     }
 }

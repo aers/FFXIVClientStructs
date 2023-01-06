@@ -9,7 +9,8 @@ public unsafe struct LuaState
     [FieldOffset(0x18)] public long LastGCRestart;
     [FieldOffset(0x20)] public delegate*<lua_State*, int> db_errorfb;
 
-    public string[] DoString(string code, string name = null)
+    // TODO fixup string
+    /*public string[] DoString(string code, string name = null)
     {
         var top = State->lua_gettop();
         try
@@ -35,7 +36,7 @@ public unsafe struct LuaState
         {
             State->lua_settop(top);
         }
-    }
+    }*/
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0xB0)]
@@ -103,6 +104,8 @@ public unsafe partial struct lua_State
     [MemberFunction("E8 ?? ?? ?? ?? FF C7 3B FE 7E")]
     public partial void lua_call(int nargs, int nresults);
 
+    // TODO fixup string
+    /*
     public void lua_setglobal(string s)
     {
         lua_setfield(-10002, s);
@@ -112,6 +115,7 @@ public unsafe partial struct lua_State
     {
         lua_getfield(-10002, s);
     }
+    */
 
     public void lua_pushcfunction(delegate*<lua_State*, int> f)
     {
@@ -128,11 +132,14 @@ public unsafe partial struct lua_State
         lua_settop(-n - 1);
     }
 
+    // TODO fixup string
+    /*
     public void lua_register(string n, delegate*<lua_State*, int> f)
     {
         lua_pushcfunction(f);
         lua_setglobal(n);
     }
+    */
 }
 
 public enum LuaType

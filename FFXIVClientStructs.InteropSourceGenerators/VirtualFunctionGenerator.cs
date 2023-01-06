@@ -44,8 +44,8 @@ internal sealed class VirtualFunctionGenerator : IIncrementalGenerator
         // make sure caching is working
         IncrementalValuesProvider<Validation<DiagnosticInfo, StructWithVirtualFunctionInfos>> structWithVirtualInfos =
             groupedStructInfoWithVirtualInfos.Select(static (item, _) =>
-                (item.StructInfo, item.VirtualFunctionInfos).Apply(static (si, mfi) =>
-                    new StructWithVirtualFunctionInfos(si, mfi))
+                (item.StructInfo, item.VirtualFunctionInfos).Apply(static (si, vfi) =>
+                    new StructWithVirtualFunctionInfos(si, vfi))
             );
 
         context.RegisterSourceOutput(structWithVirtualInfos, (sourceContext, item) =>
@@ -72,9 +72,7 @@ internal sealed class VirtualFunctionGenerator : IIncrementalGenerator
 
             Validation<DiagnosticInfo, uint> validIndex =
                 methodSymbol.GetFirstAttributeDataByTypeName(AttributeName)
-                    .Bind(attributeData => attributeData.GetAttributeArgument<uint>("Index", 0))
-                    .ToValidation(DiagnosticInfo.Create(AttributeArgumentInvalid, methodSymbol, AttributeName,
-                        "Index"));
+                    .GetValidAttributeArgument<uint>("Index", 0, AttributeName, methodSymbol);
 
             return (validMethodInfo, validIndex).Apply((methodInfo, index) =>
                 new VirtualFunctionInfo(methodInfo, index));
