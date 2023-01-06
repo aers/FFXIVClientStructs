@@ -47,25 +47,13 @@ internal sealed record MethodInfo(string Name, string Modifiers, string ReturnTy
             ));
     }
 
-    public string GetParameterTypeString()
-    {
-        return Parameters.Any() ? string.Join(", ", Parameters.Map(p => p.Type)) + ", " : "";
-    }
+    public string GetParameterTypeString() => Parameters.Any() ? string.Join(", ", Parameters.Map(p => p.Type)) + ", " : "";
 
-    public string GetParameterNamesString()
-    {
-        return string.Join(", ", Parameters.Map(p => p.Name));   
-    }
-    
-    public string GetParameterTypesAndNamesString()
-    {
-        return string.Join(", ", Parameters.Map(p => $"{p.Type} {p.Name}"));
-    }
+    public string GetParameterNamesString() => string.Join(", ", Parameters.Map(p => p.Name));
 
-    public string GetReturnString()
-    {
-        return ReturnType == "void" ? "" : "return ";
-    }
+    private string GetParameterTypesAndNamesString() => string.Join(", ", Parameters.Map(p => $"{p.Type} {p.Name}"));
+
+    public string GetReturnString() => ReturnType == "void" ? "" : "return ";
 
     public void RenderStart(IndentedStringBuilder builder)
     {

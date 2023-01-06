@@ -139,19 +139,23 @@ public unsafe partial struct UIModule
     public partial void ShowImage(uint imageId, bool useLocalePath = false, int displayType = 0, bool playSound = false);
 
     [VirtualFunction(164)]
-    public partial void ShowText(int position, string text, uint iconOrCheck1 = 0, bool playSound = true, uint iconOrCheck2 = 0, bool alsoPlaySound = true);
+    // TODO fixup string
+    public partial void ShowText(int position, byte* text, uint iconOrCheck1 = 0, bool playSound = true, uint iconOrCheck2 = 0, bool alsoPlaySound = true);
 
     [VirtualFunction(165)]
     public partial void ShowTextChain(int chain, int hqChain = 0);
 
     [VirtualFunction(166)]
-    public partial void ShowAreaText(string text, int layer = 0, bool isTop = true, bool isFast = false, uint logMessageId = 0);
+    // TODO fixup string
+    public partial void ShowAreaText(byte* text, int layer = 0, bool isTop = true, bool isFast = false, uint logMessageId = 0);
 
     [VirtualFunction(167)]
-    public partial void ShowPoisonText(string text, int layer = 0);
+    // TODO fixup string
+    public partial void ShowPoisonText(byte* text, int layer = 0);
 
     [VirtualFunction(168)]
-    public partial void ShowErrorText(string text, bool forceVisible = true);
+    // TODO fixup string
+    public partial void ShowErrorText(byte* text, bool forceVisible = true);
 
     [VirtualFunction(169)]
     public partial void ShowTextClassChange(uint classJobId);
@@ -175,13 +179,16 @@ public unsafe partial struct UIModule
     public partial void ShowBalloonMessage(float* worldPosition, byte pz, uint textImage); //121501 -> Nice Shot!
 
     [VirtualFunction(181)]
-    public partial void ShowBattleTalk(string name, string text, float duration, byte style);
+    // TODO fixup string
+    public partial void ShowBattleTalk(byte* name, byte* text, float duration, byte style);
 
     [VirtualFunction(182)]
-    public partial void ShowBattleTalkImage(string name, string text, float duration, uint image, byte style);
+    // TODO fixup string
+    public partial void ShowBattleTalkImage(byte* name, byte* text, float duration, uint image, byte style);
 
     [VirtualFunction(184)]
-    public partial void ShowBattleTalkSound(string name, string text, float duration, int sound, byte style);
+    // TODO fixup string
+    public partial void ShowBattleTalkSound(byte* name, byte* text, float duration, int sound, byte style);
 
     [VirtualFunction(189)]
     public partial void ExecuteMainCommand(uint command);

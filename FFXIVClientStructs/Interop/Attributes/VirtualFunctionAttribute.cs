@@ -7,6 +7,6 @@ public class VirtualFunctionAttribute : Attribute
     {
         this.Index = index;
     }
-
+    
     public uint Index { get; }
 }

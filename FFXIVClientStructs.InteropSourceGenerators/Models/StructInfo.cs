@@ -9,7 +9,7 @@ using static LanguageExt.Prelude;
 
 namespace FFXIVClientStructs.InteropSourceGenerators.Models;
 
-internal sealed record StructInfo(string Name, string Namespace, ImmutableArray<string> Hierarchy)
+internal sealed record StructInfo(string Name, string Namespace, Seq<string> Hierarchy)
 {
     public static Validation<DiagnosticInfo, StructInfo> GetFromSyntax(StructDeclarationSyntax structSyntax)
     {
@@ -28,7 +28,7 @@ internal sealed record StructInfo(string Name, string Namespace, ImmutableArray<
             new StructInfo(
                 syntax.GetNameWithTypeDeclarationList(),
                 syntax.GetContainingFileScopedNamespace(),
-                hierarchy.Reverse().ToImmutableArray()));
+                hierarchy.Reverse().ToSeq()));
     }
 
     private static Validation<DiagnosticInfo, Seq<string>> GetHierarchy(StructDeclarationSyntax structSyntax)
@@ -56,10 +56,7 @@ internal sealed record StructInfo(string Name, string Namespace, ImmutableArray<
         return Success<DiagnosticInfo, Seq<string>>(hierarchy);
     }
 
-    private static readonly string GeneratedCodeAttribute =
-        $"global::System.CodeDom.Compiler.GeneratedCodeAttribute(" +
-        $"\"{typeof(StructInfo).Assembly.GetName().Name}\", " +
-        $"\"{typeof(StructInfo).Assembly.GetName().Version}\")";
+    public string GetThisPtrTypeString() => Name + "*, ";
     
     public void RenderStart(IndentedStringBuilder builder)
     {
@@ -79,8 +76,7 @@ internal sealed record StructInfo(string Name, string Namespace, ImmutableArray<
             builder.AppendLine("{");
             builder.Indent();
         }
-
-        builder.AppendLine($"[{GeneratedCodeAttribute}]");
+        
         builder.AppendLine($"unsafe partial struct {Name}");
         builder.AppendLine("{");
         builder.Indent();

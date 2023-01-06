@@ -1,12 +1,10 @@
-﻿using System.Reflection;
-using FFXIVClientStructs.InteropGenerator;
+﻿using FFXIVClientStructs.InteropGenerator;
 using FFXIVClientStructs.InteropSourceGenerators.Extensions;
 using FFXIVClientStructs.InteropSourceGenerators.Models;
 using LanguageExt;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using static FFXIVClientStructs.InteropSourceGenerators.DiagnosticDescriptors;
-using MethodInfo = FFXIVClientStructs.InteropSourceGenerators.Models.MethodInfo;
 
 namespace FFXIVClientStructs.InteropSourceGenerators;
 
@@ -49,9 +47,9 @@ internal sealed class MemberFunctionGenerator : IIncrementalGenerator
                     new StructWithMemberFunctionInfos(si, mfi))
             );
 
-        context.RegisterSourceOutput(structWithMemberInfos, (sourceContext, items) =>
+        context.RegisterSourceOutput(structWithMemberInfos, (sourceContext, item) =>
         {
-            items.Match(
+            item.Match(
                 Fail: diagnosticInfos =>
                 {
                     diagnosticInfos.Iter(dInfo => sourceContext.ReportDiagnostic(dInfo.ToDiagnostic()));
@@ -82,12 +80,10 @@ internal sealed class MemberFunctionGenerator : IIncrementalGenerator
                 new MemberFunctionInfo(methodInfo, signature));
         }
 
-        public void RenderFunctionPointer(IndentedStringBuilder builder, string structName)
+        public void RenderFunctionPointer(IndentedStringBuilder builder, StructInfo structInfo)
         {
-            string thisPtrType = MethodInfo.IsStatic ? "" : structName + "*, ";
-
             builder.AppendLine(
-                $"public static delegate* unmanaged[Stdcall] <{thisPtrType}{MethodInfo.GetParameterTypeString()}{MethodInfo.ReturnType}> {MethodInfo.Name} {{ internal set; get; }}");
+                $"public static delegate* unmanaged[Stdcall] <{structInfo.GetThisPtrTypeString()}{MethodInfo.GetParameterTypeString()}{MethodInfo.ReturnType}> {MethodInfo.Name} {{ internal set; get; }}");
         }
 
         public void RenderMemberFunction(IndentedStringBuilder builder, string structName)
@@ -96,12 +92,15 @@ internal sealed class MemberFunctionGenerator : IIncrementalGenerator
 
             builder.AppendLine($"if (MemberFunctionPointers.{MethodInfo.Name} is null)");
             builder.Indent();
-            builder.AppendLine($"throw new InvalidOperationException(\"Function pointer for {structName}.{MethodInfo.Name} is null. The resolver was either uninitialized or failed to resolve address with signature {SignatureInfo.Signature}.\");");
+            builder.AppendLine(
+                $"throw new InvalidOperationException(\"Function pointer for {structName}.{MethodInfo.Name} is null. The resolver was either uninitialized or failed to resolve address with signature {SignatureInfo.Signature}.\");");
             builder.DecrementIndent();
             builder.AppendLine();
             if (MethodInfo.IsStatic)
+            {
                 builder.AppendLine(
                     $"{MethodInfo.GetReturnString()}MemberFunctionPointers.{MethodInfo.Name}({MethodInfo.GetParameterNamesString()});");
+            }
             else
             {
                 builder.AppendLine($"fixed({structName}* thisPtr = &this)");
@@ -115,7 +114,7 @@ internal sealed class MemberFunctionGenerator : IIncrementalGenerator
                 builder.DecrementIndent();
                 builder.AppendLine("}");
             }
-            
+
             MethodInfo.RenderEnd(builder);
         }
     }
@@ -132,7 +131,7 @@ internal sealed class MemberFunctionGenerator : IIncrementalGenerator
             builder.AppendLine("public unsafe static class MemberFunctionPointers");
             builder.AppendLine("{");
             builder.Indent();
-            MemberFunctionInfos.Iter(mfi => mfi.RenderFunctionPointer(builder, StructInfo.Name));
+            MemberFunctionInfos.Iter(mfi => mfi.RenderFunctionPointer(builder, StructInfo));
             builder.DecrementIndent();
             builder.AppendLine("}");
 
@@ -143,10 +142,13 @@ internal sealed class MemberFunctionGenerator : IIncrementalGenerator
             }
 
             StructInfo.RenderEnd(builder);
-            
+
             return builder.ToString();
         }
 
-        public string GetFileName() => $"{StructInfo.Namespace}.{StructInfo.Name}.MemberFunctions.g.cs";
+        public string GetFileName()
+        {
+            return $"{StructInfo.Namespace}.{StructInfo.Name}.MemberFunctions.g.cs";
+        }
     }
 }

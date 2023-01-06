@@ -7,7 +7,6 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 [StructLayout(LayoutKind.Explicit, Size = 0xEC8)]
 public unsafe partial struct QuestManager
 {
-    [MemberFunction("E8 ?? ?? ?? ?? 66 BA 10 0C")]
 	[FieldOffset(0x10)] public QuestListArray Quest;
 
 	[FieldOffset(0x10)] public fixed byte NormalQuests[0x18 * 30];

@@ -122,6 +122,6 @@ public unsafe partial struct UIState
     [MemberFunction("E8 ?? ?? ?? ?? 44 22 F0")]
     public static partial bool IsInstanceContentCompleted(uint instanceContentId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 7C 24 ?? 3C", IsStatic = true)]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 7C 24 ?? 3C")]
     public static partial bool IsInstanceContentUnlocked(uint instanceContentId);
 }
