@@ -10,7 +10,7 @@ public struct AddonSelectString
 {
     [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
     [FieldOffset(0x220)] public PopupMenuDerive PopupMenu;
-    
+
     [StructLayout(LayoutKind.Explicit, Size = 0x68)]
     public struct PopupMenuDerive
     {
