@@ -5952,6 +5952,10 @@ classes:
     vtbls:
       - ea: 0x1419DED68
         base: Component::GUI::AtkUnitBase
+  Client::UI::AddonChocoboBreedTraining:
+    vtbls:
+      - ea: 0x141A03208
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonRaceChocoboResult:
     vtbls:
       - ea: 0x141A04158
