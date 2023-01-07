@@ -24,4 +24,14 @@ internal sealed record SignatureInfo(string Signature)
     {
         return signature.Split(' ').All(subString => subString.Length == 2);
     }
+
+    public string GetByteArrayString()
+    {
+        return "new byte[] {" + string.Join(", ", Signature.Replace("??", "00").Split().Select(s => "0x" + s)) + "}";
+    }
+
+    public string GetMaskArrayString()
+    {
+        return "new byte[] {" + string.Join(", ", Signature.Split().Select(s => s == "??" ? "0" : "1")) + "}";
+    }
 }
