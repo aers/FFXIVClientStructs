@@ -5439,6 +5439,10 @@ classes:
     vtbls:
       - ea: 0x1419B9478
         base: Component::GUI::AtkUnitBase
+  Client::UI::AddonBank:
+    vtbls:
+      - ea: 0x1419BA838
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonContentsFinder:
     vtbls:
       - ea: 0x1419A4C68
@@ -5947,6 +5951,22 @@ classes:
   Client::UI::AddonActionMenuReplaceList:
     vtbls:
       - ea: 0x1419DED68
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonRaceChocoboResult:
+    vtbls:
+      - ea: 0x141A04158
+        base: Component::GUI::AtkUnitBase
+  Client::UI::Addon_RaceChocoboRanking:
+    vtbls:
+      - ea: 0x141A04388
+        base: Component::GUI::AtkUnitBase
+  Client::UI::Addon_RaceChocoboParameter:
+    vtbls:
+      - ea: 0x141A047f0
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonChocoboRace:
+    vtbls:
+      - ea: 0x141A04a30
         base: Component::GUI::AtkUnitBase
   Client::Game::Fate::FateDirector:
     vtbls:
