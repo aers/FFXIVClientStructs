@@ -1,6 +1,4 @@
-﻿using System;
-using System.Text;
-using FFXIVClientStructs.FFXIV.Client.System.String;
+﻿using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Common.Log;
 using FFXIVClientStructs.FFXIV.Component.Excel;
 

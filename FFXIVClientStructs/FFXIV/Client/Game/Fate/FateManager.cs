@@ -19,4 +19,7 @@ public unsafe partial struct FateManager
 
     [StaticAddress("48 89 01 48 8B 3D ?? ?? ?? ?? 48 8B 87", 3, true)]
     public static partial FateManager* Instance();
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 4C 24 ?? 48 85 C0 75")]
+    public partial FateContext* GetFateById(ushort fateId);
 }

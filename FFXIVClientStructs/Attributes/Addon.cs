@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace FFXIVClientStructs.Attributes;
+﻿namespace FFXIVClientStructs.Attributes;
 
 public class Addon : Attribute
 {

@@ -1,4 +1,3 @@
-using System;
 using FFXIVClientStructs.FFXIV.Client.Graphics;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI;

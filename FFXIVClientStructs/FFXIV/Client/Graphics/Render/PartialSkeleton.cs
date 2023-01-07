@@ -1,5 +1,4 @@
-﻿using System;
-using FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
+﻿using FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 using FFXIVClientStructs.Havok;
 
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;

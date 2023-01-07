@@ -13,7 +13,7 @@ public unsafe partial struct Object
     [FieldOffset(0x30)] public Object* ChildObject; // for humans this is a weapon
 
     [FieldOffset(0x50)] public Vector3 Position;
-    [FieldOffset(0x60)] public Quarternion Rotation;
+    [FieldOffset(0x60)] public Quaternion Rotation;
     [FieldOffset(0x70)] public Vector3 Scale;
 
     [VirtualFunction(2)]

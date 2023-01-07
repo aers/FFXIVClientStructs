@@ -105,6 +105,16 @@ public unsafe partial struct AgentModule
     {
         return (AgentCraftActionSimulator*)GetAgentByInternalId(AgentId.CraftActionSimulator);
     }
+    
+    public AgentDeepDungeonStatus* GetAgentDeepDungeonStatus()
+    {
+	    return (AgentDeepDungeonStatus*)GetAgentByInternalId(AgentId.DeepDungeonStatus);
+    }
+
+    public AgentDeepDungeonMap* GetAgentDeepDungeonMap()
+    {
+	    return (AgentDeepDungeonMap*)GetAgentByInternalId(AgentId.DeepDungeonMap);
+    }
 }
 
 public enum AgentId : uint {
@@ -347,7 +357,7 @@ public enum AgentId : uint {
     CountDownSettingDialog = 243,
     WeeklyBingo = 244, //Wondrous Tails
     WeeklyPuzzle = 245, //Faux Hollows
-
+    CameraSetting = 246,
     PvPDuelRequest = 247,
     PvPHeader = 248,
 
@@ -437,10 +447,12 @@ public enum AgentId : uint {
 
     OrnamentNoteBook = 379, //Accessories
 
+    TourismMenu = 381,
+
     StarlightGiftBox = 383,
     SpearFishing = 384,
     Omikuji = 385,
-
+    FittingShop = 386,
     AkatsukiNote = 387, //Unending Codex
     ExHotbarEditor = 388,
     BannerList = 389, // Portraits

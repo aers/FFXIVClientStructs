@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace FFXIVClientStructs.STD;
+﻿namespace FFXIVClientStructs.STD;
 
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct StdVector<T> where T : unmanaged

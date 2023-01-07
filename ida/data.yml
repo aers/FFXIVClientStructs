@@ -231,9 +231,10 @@ functions:
   0x1400A9500: IsLocalPlayerInParty
   0x1400A9650: IsPartyMemberByNameOrContentId # (name, contentId)
   0x1400A9780: GetPartyMemberClassJobByContentId
+  0x14060CF10: WorldToViewportPoint
   0x1407157C0: ObjectIdToPlayerObjectId # returns invalid id if objectid is not a player
   0x14073E9B0: ProcessActorControlPacket
-  0x1404A5FF0: Raycast
+  0x140C837D0: WorldToScreenPoint
   0x1415E5450: OodleNew # oodle code starts here
   0x1415E54C0: OodleDelete 
   0x1415E54F0: rrPrintf_v1 
@@ -329,6 +330,29 @@ classes:
   SQEX::CDev::Engine::Sd::SdMemoryAllocator:
   SQEX::CDev::Engine::Sd::Driver::BankController:
   Client::System::Scheduler::Base::LinkList:
+  Application::Network::WorkDefinitions::Base:
+    vtbls:
+      - ea: 0x1418AF190
+  Application::Network::WorkDefinitions::QuestWork:
+    vtbls:
+      - ea: 0x1418ED640
+        base: Application::Network::WorkDefinitions::Base
+  Application::Network::WorkDefinitions::LeveWork:
+    vtbls:
+      - ea: 0x1418ED648
+        base: Application::Network::WorkDefinitions::Base
+  Application::Network::WorkDefinitions::DailyQuestWork:
+    vtbls:
+      - ea: 0x141B2CB50
+        base: Application::Network::WorkDefinitions::Base
+  Application::Network::WorkDefinitions::TrackingWork:
+    vtbls:
+      - ea: 0x141B2CBD0
+        base: Application::Network::WorkDefinitions::Base
+  Application::Network::WorkDefinitions::BeastReputationWork:
+    vtbls:
+      - ea: 0x141B2CBE0
+        base: Application::Network::WorkDefinitions::Base
   Client::Game::Network::PacketElement:
     vtbls:
       - ea: 0x1418ED660
@@ -427,6 +451,7 @@ classes:
       0x1411F5180: GetPtr # return g_FateTablePtr
       0x1411F5190: ctor
       0x1411F51E0: dtor
+      0x1411F7C70: GetFateById
   BattleBuddyList:
     funcs:
       0x14093CB80: GetMemberBattleCharaByIndex
@@ -439,6 +464,9 @@ classes:
       0x1400AA5B0: IsQuestComplete # static (questId)
       0x140816610: IsQuestComplete1 # (this, questId)
       0x140816990: IsQuestCurrent # static (questId)
+      0x140816300: GetQuestIndex
+      0x140816A90: GetQuestClassJob
+      0x1408167C0: IsQuestAccepted
   InventoryManager:
     instances:
       - ea: 0x142065B30
@@ -755,6 +783,11 @@ classes:
     vtbls:
       - ea: 0x14193B370
         base: Client::Game::Gauge::JobGauge
+  Common::Configuration::ConfigEntry:
+    funcs:
+      0x140068780: SetValueUInt
+      0x140068820: SetValueFloat
+      0x140069B80: SetValueString # Destroys Utf8String
   Common::Configuration::ConfigBase:
     vtbls:
       - ea: 0x1418858B8
@@ -899,6 +932,16 @@ classes:
   Common::Component::Environment::DebugInterface:
     vtbls:
       - ea: 0x1418D1F10
+  Common::Component::BGCollision::BGCollisionModule:
+    funcs:
+      0x1404A5A20: ctor
+      0x1404A5B50: Initialize
+      0x1404A5FF0: Raycast
+      0x141233500: Raycast1 # not sure where else to put those two for now
+      0x141233550: Raycast2
+  Common::Component::BGCollision::Object:
+    vtbls:
+      - ea: 0x1418D1FB8
   Common::Component::Environment::ResourceInterface::ResourceHandleInterface:
     vtbls:
       - ea: 0x1418D1EC0
@@ -1797,6 +1840,8 @@ classes:
         base: Client::Graphics::Scene::Object
     funcs:
       0x1404632B0: ctor
+      0x140463F70: ViewportPointToRay
+      0x140464150: ScreenPointToRay
       0x140464420: CalculateViewMatrix
       0x140464BA0: PrepareRenderCamera
   Client::Graphics::Singleton<Client::Graphics::Scene::CameraManager>:
@@ -2196,6 +2241,7 @@ classes:
       0x1404D7830: IsObjectInViewRange
       0x1404D7980: GetMouseOverObject
       0x1404D90A0: RemoveObjectFromTargets
+      0x1404D5670: IsObjectOnScreen
   Client::Game::Control::Control:
     instances:
       - ea: 0x14203EAA0
@@ -2206,6 +2252,7 @@ classes:
     funcs:
       0x1412801E0: ctor
       0x141281110: PreUpdate
+      0x1412803B0: GetActiveCamera
   Client::Game::Control::MoveControl::MoveControllerSubMemberForMine:
     instances:
       - ea: 0x142043EE0
@@ -2679,6 +2726,31 @@ classes:
     funcs:
       0x140596670: ctor
       0x140596900: CreateSingleton
+  Client::LayoutEngine::LayoutManager:
+    vtbls:
+      - ea: 0x1418D91B8
+        base: Client::LayoutEngine::IManagerBase
+    funcs:
+      0x14059EA70: ctor
+  Client::LayoutEngine::Streaming::StreamingManager:
+    vtbls:
+      - ea: 0x1418D9198
+        base: Client::LayoutEngine::IManagerBase
+    funcs:
+      0x14059D3F0: ctor
+  Client::LayoutEngine::Environment::LayoutOBSetManager:
+    vtbls:
+      - ea: 0x1418D9200
+    funcs:
+      0x1405AC410: ctor
+  Client::LayoutEngine::Environment::LayoutEnvironment:
+    vtbls:
+      - ea: 0x1418D9228
+  Client::LayoutEngine::CutScenePrefetchResource:
+    vtbls:
+      - ea: 0x1418D91D8
+    funcs:
+      0x1405AB450: ctor
   Client::LayoutEngine::Group::TimeLineLayoutInstance:
     vtbls:
       - ea: 0x1418E0160
@@ -4749,6 +4821,10 @@ classes:
     vtbls:
       - ea: 0x141942F90
         base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentTourismMenu:
+    vtbls:
+      - ea: 0x141943080
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentStarlightGiftBox:
     vtbls:
       - ea: 0x141946AD0
@@ -5049,6 +5125,9 @@ classes:
     vtbls:
       - ea: 0x141A0B408
         base: Client::UI::Agent::AgentInterface
+  Client::Game::UI::GameEventCallback:
+    vtbls:
+      - ea: 0x1419136F8
   Client::Game::Event::EventHandler:
     vtbls:
       - ea: 0x1419137A8
@@ -5089,6 +5168,14 @@ classes:
     vtbls:
       - ea: 0x141916F40
         base: Client::Game::Event::LuaEventHandler
+  Client::Game::Event::JournalCallback:
+    vtbls:
+      - ea: 0x141919D30
+        base: Client::Game::UI::GameEventCallback
+  Client::Game::Event::QuestEventHandler:
+    vtbls:
+      - ea: 0x141919D40
+        base: Client::Game::Event::LuaEventHandler
   Client::Game::Event::EventFramework:
     instances:
       - ea: 0x14206E1E0
@@ -5098,7 +5185,12 @@ classes:
       0x1408271C0: ctor
       0x140827990: dtor
       0x14082FEC0: ProcessDirectorUpdate
-      0x140833870: GetInstanceContentDirector
+      0x140833640: GetInstanceContentDirector
+      0x140833870: GetContentDirector
+      0x140837A10: GetEventHandlerById
+      0x1409423C0: GetCurrentContentType
+      0x140942490: GetCurrentContentId
+      0x140943980: GetContentFinderCondition
   Client::Game::Event::EventHandlerModule:
     vtbls:
       - ea: 0x141919C78
