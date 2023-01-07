@@ -352,7 +352,7 @@ public enum AgentId : uint {
     CountDownSettingDialog = 243,
     WeeklyBingo = 244, //Wondrous Tails
     WeeklyPuzzle = 245, //Faux Hollows
-
+    CameraSetting = 246,
     PvPDuelRequest = 247,
     PvPHeader = 248,
 
