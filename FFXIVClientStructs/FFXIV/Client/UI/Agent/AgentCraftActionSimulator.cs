@@ -26,11 +26,11 @@ public struct ProgressEfficiencyCalculations
     [FieldOffset(0x18)] public ProgressEfficiencyCalculation RapidSynthesis;
     [FieldOffset(0x30)] public ProgressEfficiencyCalculation MuscleMemory;
     [FieldOffset(0x48)] public ProgressEfficiencyCalculation CarefulSynthesis;
-    [FieldOffset(0x78)] public ProgressEfficiencyCalculation FocusedSynthesis;
-    [FieldOffset(0x90)] public ProgressEfficiencyCalculation Groundwork;
-    [FieldOffset(0xA8)] public ProgressEfficiencyCalculation DelicateSynthesis;
-    [FieldOffset(0xC0)] public ProgressEfficiencyCalculation IntensiveSynthesis;
-    [FieldOffset(0xD8)] public ProgressEfficiencyCalculation PrudentSynthesis;
+    [FieldOffset(0x60)] public ProgressEfficiencyCalculation FocusedSynthesis;
+    [FieldOffset(0x78)] public ProgressEfficiencyCalculation Groundwork;
+    [FieldOffset(0x90)] public ProgressEfficiencyCalculation DelicateSynthesis;
+    [FieldOffset(0xA8)] public ProgressEfficiencyCalculation IntensiveSynthesis;
+    [FieldOffset(0xC0)] public ProgressEfficiencyCalculation PrudentSynthesis;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x0138)]
