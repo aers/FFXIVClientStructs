@@ -17,7 +17,7 @@ public sealed partial class Resolver
     
     public static Resolver GetInstance => Instance.Value;
 
-    private readonly List<Address>[] _preResolveArray = new List<Address>[256];
+    private readonly List<Address>?[] _preResolveArray = new List<Address>[256];
     private int _totalBuckets;
 
     private readonly List<Address> _addresses = new();
@@ -43,7 +43,7 @@ public sealed partial class Resolver
 
     public void SetupSearchSpace(nint moduleCopy = 0, FileInfo? cacheFile = null)
     {
-        ProcessModule module = Process.GetCurrentProcess().MainModule;
+        ProcessModule? module = Process.GetCurrentProcess().MainModule;
         if (module == null)
             throw new Exception("[FFXIVClientStructs.Resolver] Unable to access process module.");
         
@@ -160,8 +160,8 @@ public sealed partial class Resolver
             {
                 address.Value = (nuint) (offset + _baseAddress);
                 byte firstByte = (byte)address.Bytes[0];
-                _preResolveArray[firstByte].Remove(address);
-                if (_preResolveArray[firstByte].Count == 0)
+                _preResolveArray[firstByte]!.Remove(address);
+                if (_preResolveArray[firstByte]!.Count == 0)
                 {
                     _preResolveArray[firstByte] = null;
                     _totalBuckets--;
@@ -193,7 +193,7 @@ public sealed partial class Resolver
         {
             if (_preResolveArray[targetSpan[location]] is not null)
             {
-                List<Address> availableAddresses = _preResolveArray[targetSpan[location]];
+                List<Address> availableAddresses = _preResolveArray[targetSpan[location]]!;
                 
                 ReadOnlySpan<ulong> targetLocationAsUlong = MemoryMarshal.Cast<byte, ulong>(targetSpan[location..]);
 
@@ -271,6 +271,6 @@ public sealed partial class Resolver
             _totalBuckets++;
         }
 
-        _preResolveArray[firstByte].Add(address);
+        _preResolveArray[firstByte]!.Add(address);
     }
 }

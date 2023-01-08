@@ -166,9 +166,9 @@ public struct Vector4 : IEquatable<Vector4>, IFormattable {
 		return X.Equals(other.X) && Y.Equals(other.Y) && Z.Equals(other.Z) && W.Equals(other.W);
 	}
 
-	public override bool Equals(object obj) => obj is Vector4 other && Equals(other);
+	public override bool Equals(object? obj) => obj is Vector4 other && Equals(other);
 	public override int GetHashCode() => HashCode.Combine(X, Y, Z, W);
 
 	public override string ToString() => ((global::System.Numerics.Vector4)this).ToString();
-	public string ToString(string format, IFormatProvider formatProvider) => ((global::System.Numerics.Vector4)this).ToString(format, formatProvider);
+	public string ToString(string? format, IFormatProvider? formatProvider) => ((global::System.Numerics.Vector4)this).ToString(format, formatProvider);
 }

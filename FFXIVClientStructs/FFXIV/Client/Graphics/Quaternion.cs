@@ -259,7 +259,7 @@ public struct Quaternion : IEquatable<Quaternion> {
 	    return X.Equals(other.X) && Y.Equals(other.Y) && Z.Equals(other.Z) && W.Equals(other.W);
     }
 
-    public override bool Equals(object obj) => obj is Quaternion other && Equals(other);
+    public override bool Equals(object? obj) => obj is Quaternion other && Equals(other);
     public override int GetHashCode() => HashCode.Combine(X, Y, Z, W);
 
     public override string ToString() => $"{{X:{X} Y:{Y} Z:{Z} W:{W}}}";

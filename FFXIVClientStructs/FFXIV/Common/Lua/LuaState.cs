@@ -122,7 +122,7 @@ public unsafe partial struct lua_State
         lua_pushcclosure(f, 0);
     }
 
-    public string lua_tostring(int idx)
+    public string? lua_tostring(int idx)
     {
         return Marshal.PtrToStringUTF8((nint) lua_tolstring(idx, null));
     }

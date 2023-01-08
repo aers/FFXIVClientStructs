@@ -208,9 +208,9 @@ public struct Vector3 : IEquatable<Vector3>, IFormattable {
 	    return X.Equals(other.X) && Y.Equals(other.Y) && Z.Equals(other.Z);
     }
 
-    public override bool Equals(object obj) => obj is Vector3 vector && Equals(vector);
+    public override bool Equals(object? obj) => obj is Vector3 vector && Equals(vector);
     public override int GetHashCode() => HashCode.Combine(X, Y, Z);
 
     public override string ToString() => ((global::System.Numerics.Vector3)this).ToString();
-    public string ToString(string format, IFormatProvider formatProvider) => ((global::System.Numerics.Vector3)this).ToString(format, formatProvider);
+    public string ToString(string? format, IFormatProvider? formatProvider) => ((global::System.Numerics.Vector3)this).ToString(format, formatProvider);
 }

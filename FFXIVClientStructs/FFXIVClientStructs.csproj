@@ -8,6 +8,7 @@
         <DebugType>full</DebugType>
         <DebugSymbols>true</DebugSymbols>
         <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
         <!--
           <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
           <CompilerGeneratedFilesOutputPath>Generated</CompilerGeneratedFilesOutputPath>
