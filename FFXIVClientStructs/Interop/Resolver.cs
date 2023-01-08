@@ -29,14 +29,11 @@ public sealed partial class Resolver
                 
                 foreach(Address signature in availableSignatures)
                 {
-                    var mask = signature.Mask.AsSpan();
-                    var bytes = signature.Bytes.AsSpan();
-
                     int count;
                     
-                    for (count = bytes.Length - 1; count > -1; count--)
+                    for (count = signature.Bytes.Length - 1; count > -1; count--)
                     {
-                        if (mask[count] && bytes[count] != currentTargetLocation[count])
+                        if (signature.Mask[count] && signature.Bytes[count] != currentTargetLocation[count])
                             break;
                     }
                 
