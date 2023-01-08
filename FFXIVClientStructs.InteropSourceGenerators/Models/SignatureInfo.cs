@@ -11,7 +11,7 @@ internal sealed record SignatureInfo(string Signature)
         IMethodSymbol location)
     {
         return IsValid(signature)
-            ? Success<DiagnosticInfo, SignatureInfo>(new SignatureInfo(signature))
+            ? Success<DiagnosticInfo, SignatureInfo>(new SignatureInfo(PadSignature(signature)))
             : Fail<DiagnosticInfo, SignatureInfo>(
                 DiagnosticInfo.Create(
                     InvalidSignature,
@@ -25,13 +25,45 @@ internal sealed record SignatureInfo(string Signature)
         return signature.Split(' ').All(subString => subString.Length == 2);
     }
 
+    private static string PadSignature(string signature)
+    {
+        int paddingNeeded = 8 - (signature.Length / 3 + 1) % 8;
+        if (paddingNeeded == 0)
+            return signature;
+
+        Span<char> result = new Span<char>(new char[signature.Length + paddingNeeded * 3]);
+        signature.AsSpan().CopyTo(result);
+
+        ReadOnlySpan<char> repeated = " ??".AsSpan();
+        
+        for (int repeatIndex = 0; repeatIndex < paddingNeeded; repeatIndex++)
+        {
+            repeated.CopyTo(result.Slice(signature.Length + repeatIndex * repeated.Length));
+        }
+
+        return result.ToString();
+    }
+
     public string GetByteArrayString()
     {
-        return "new byte[] {" + string.Join(", ", Signature.Replace("??", "00").Split().Select(s => "0x" + s)) + "}";
+        IEnumerable<string> groupedSig = Signature.Replace("??", "00").Split()
+            .Map((i, x) => new {Index = i, Value = x})
+            .GroupBy(x => x.Index / 8 * 3)
+            .Map(x => x.Select(v => v.Value).ToSeq())
+            .Map(x => "0x" + string.Join(string.Empty, x.Reverse()));
+        
+        return "new ulong[] {" + string.Join(", ", groupedSig) + "}";
     }
 
     public string GetMaskArrayString()
     {
-        return "new bool[] {" + string.Join(", ", Signature.Split().Select(s => s == "??" ? "false" : "true")) + "}";
+        IEnumerable<string> groupedSig = Signature.Split()
+            .Map(s => s == "??" ? "00" : "FF")
+            .Map((i, x) => new {Index = i, Value = x})
+            .GroupBy(x => x.Index / 8 * 3)
+            .Map(x => x.Select(v => v.Value).ToSeq())
+            .Map(x => "0x" + string.Join(string.Empty, x.Reverse()));
+        
+        return "new ulong[] {" + string.Join(", ", groupedSig) + "}";
     }
 }

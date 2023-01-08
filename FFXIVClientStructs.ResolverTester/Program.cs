@@ -29,7 +29,7 @@ unsafe
         Console.WriteLine($"Resolved count: {Resolver.GetInstance.Signatures.Count(sig => sig.Value != 0)}");
 
         //foreach(var sig in Resolver.GetInstance.Signatures)
-        //    Console.WriteLine($"{sig.Name} {sig.Value:X16}");
+        //    Console.WriteLine($"{sig.Name} {sig.String} {sig.Value:X16}");
         
     }
 }

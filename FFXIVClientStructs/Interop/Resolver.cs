@@ -19,6 +19,8 @@ public sealed partial class Resolver
     public void ResolveWithTarget(ResolverTarget target)
     {
         ReadOnlySpan<byte> currentTargetLocation = target.AsSpan()[target.TextSectionOffset..];
+        ReadOnlySpan<ulong> targetLocationAsUlong = MemoryMarshal.Cast<byte, ulong>(currentTargetLocation);
+        
         for (int location = 0; location < target.TextSectionSize; location++)
         {
             Address matchedAddress = null;
@@ -31,13 +33,13 @@ public sealed partial class Resolver
                 {
                     int count;
                     
-                    for (count = signature.Bytes.Length - 1; count > -1; count--)
+                    for (count = 0; count < signature.Bytes.Length; count++)
                     {
-                        if (signature.Mask[count] && signature.Bytes[count] != currentTargetLocation[count])
+                        if ((signature.Mask[count] & signature.Bytes[count]) != (signature.Mask[count] & targetLocationAsUlong[count]))
                             break;
                     }
                 
-                    if (count == -1)
+                    if (count == signature.Bytes.Length)
                     {
                         matchedAddress = signature;
                         break;
@@ -59,6 +61,7 @@ public sealed partial class Resolver
             }
         
             currentTargetLocation = currentTargetLocation[1..];
+            targetLocationAsUlong = MemoryMarshal.Cast<byte, ulong>(currentTargetLocation);
         }
     }
     
@@ -66,12 +69,14 @@ public sealed partial class Resolver
     {
         _signatures.Add(address);
 
-        if (_preResolveArray[address.Bytes[0]] is null)
+        byte firstByte = (byte) (address.Bytes[0]);
+
+        if (_preResolveArray[firstByte] is null)
         {
-            _preResolveArray[address.Bytes[0]] = new List<Address>();
+            _preResolveArray[firstByte] = new List<Address>();
             _totalBuckets++;
         }
 
-        _preResolveArray[address.Bytes[0]].Add(address);
+        _preResolveArray[firstByte].Add(address);
     }
 }
