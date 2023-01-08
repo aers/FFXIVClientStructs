@@ -18,20 +18,22 @@ public sealed partial class Resolver
 
     public void ResolveWithTarget(ResolverTarget target)
     {
-        ReadOnlySpan<byte> currentTargetLocation = target.AsSpan()[target.TextSectionOffset..];
-        ReadOnlySpan<ulong> targetLocationAsUlong = MemoryMarshal.Cast<byte, ulong>(currentTargetLocation);
-
-        Address matchedAddress = null;
+        ReadOnlySpan<byte> targetSpan = target.AsSpan()[target.TextSectionOffset..];
 
         for (int location = 0; location < target.TextSectionSize; location++)
         {
-
-            if (_preResolveArray[currentTargetLocation[0]] is not null)
+            if (_preResolveArray[targetSpan[location]] is not null)
             {
-                List<Address> availableSignatures = _preResolveArray[currentTargetLocation[0]];
+                List<Address> availableSignatures = _preResolveArray[targetSpan[location]];
                 
-                foreach(Address signature in availableSignatures)
+                ReadOnlySpan<ulong> targetLocationAsUlong = MemoryMarshal.Cast<byte, ulong>(targetSpan[location..]);
+
+                int avLen = availableSignatures.Count;
+                
+                for(int i = 0; i < avLen; i++)
                 {
+                    Address signature = availableSignatures[i];
+                    
                     int count;
                     int length = signature.Bytes.Length;
 
@@ -40,33 +42,25 @@ public sealed partial class Resolver
                         if ((signature.Mask[count] & signature.Bytes[count]) != (signature.Mask[count] & targetLocationAsUlong[count]))
                             break;
                     }
-                
+
                     if (count == length)
                     {
-                        matchedAddress = signature;
+                        signature.Value = (nuint) (4096 + location); // target.TargetSpace + target.TextSectionOffset + 
+                        availableSignatures.Remove(signature);
+                        if (availableSignatures.Count == 0)
+                        {
+                            _preResolveArray[targetSpan[location]] = null;
+                            _totalBuckets--;
+                            if (_totalBuckets == 0)
+                                goto outLoop;
+                        }
+
                         break;
                     }
                 }
-                
-                if (matchedAddress is not null)
-                {
-                    matchedAddress.Value = (nuint)(4096 + location); // target.TargetSpace + target.TextSectionOffset + 
-                    availableSignatures.Remove(matchedAddress);
-                    if (availableSignatures.Count == 0)
-                    {
-                        _preResolveArray[currentTargetLocation[0]] = null;
-                        _totalBuckets--;
-                        if (_totalBuckets == 0)
-                            break;
-                    }
-
-                    matchedAddress = null;
-                }
             }
-        
-            currentTargetLocation = currentTargetLocation[1..];
-            targetLocationAsUlong = MemoryMarshal.Cast<byte, ulong>(currentTargetLocation);
         }
+        outLoop: ;
     }
     
     private void RegisterAddress(Address address)
