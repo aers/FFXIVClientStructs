@@ -32,6 +32,6 @@ internal sealed record SignatureInfo(string Signature)
 
     public string GetMaskArrayString()
     {
-        return "new byte[] {" + string.Join(", ", Signature.Split().Select(s => s == "??" ? "0" : "1")) + "}";
+        return "new bool[] {" + string.Join(", ", Signature.Split().Select(s => s == "??" ? "false" : "true")) + "}";
     }
 }

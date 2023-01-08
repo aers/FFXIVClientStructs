@@ -1,8 +1,8 @@
 ﻿namespace FFXIVClientStructs.Interop;
 
-public unsafe sealed partial class Resolver
+public sealed partial class Resolver
 {
-    private static readonly Lazy<Resolver> Instance = new Lazy<Resolver>(() => new Resolver());
+    private static readonly Lazy<Resolver> Instance = new(() => new Resolver());
 
     private Resolver()
     {
@@ -10,22 +10,71 @@ public unsafe sealed partial class Resolver
     
     public static Resolver GetInstance => Instance.Value;
 
-    private readonly List<Signature> _signatures = new();
-    private readonly Dictionary<byte, List<Signature>> _preResolveCache = new();
+    private readonly List<Address> _signatures = new();
+    private readonly List<Address>[] _preResolveArray = new List<Address>[256];
+    private int _totalBuckets = 0;
 
-    public IReadOnlyList<Signature> Signatures => _signatures.AsReadOnly();
+    public IReadOnlyList<Address> Signatures => _signatures.AsReadOnly();
 
-    internal void RegisterSignature(Signature signature)
+    public void ResolveWithTarget(ResolverTarget target)
     {
-        _signatures.Add(signature);
-
-        if (!_preResolveCache.TryGetValue(signature.Bytes[0], out List<Signature> cacheList))
+        ReadOnlySpan<byte> currentTargetLocation = target.AsSpan()[target.TextSectionOffset..];
+        for (int location = 0; location < target.TextSectionSize; location++)
         {
-            cacheList = new List<Signature>();
+            Address matchedAddress = null;
             
-            _preResolveCache.Add(signature.Bytes[0], cacheList);
-        }
+            if (_preResolveArray[currentTargetLocation[0]] is not null)
+            {
+                List<Address> availableSignatures = _preResolveArray[currentTargetLocation[0]];
+                
+                foreach(Address signature in availableSignatures)
+                {
+                    var mask = signature.Mask.AsSpan();
+                    var bytes = signature.Bytes.AsSpan();
+
+                    int count;
+                    
+                    for (count = bytes.Length - 1; count > -1; count--)
+                    {
+                        if (mask[count] && bytes[count] != currentTargetLocation[count])
+                            break;
+                    }
+                
+                    if (count == -1)
+                    {
+                        matchedAddress = signature;
+                        break;
+                    }
+                }
+                
+                if (matchedAddress is not null)
+                {
+                    matchedAddress.Value = (nuint)(4096 + location); // target.TargetSpace + target.TextSectionOffset + 
+                    availableSignatures.Remove(matchedAddress);
+                    if (availableSignatures.Count == 0)
+                    {
+                        _preResolveArray[currentTargetLocation[0]] = null;
+                        _totalBuckets--;
+                        if (_totalBuckets == 0)
+                            break;
+                    }
+                }
+            }
         
-        cacheList.Add(signature);
+            currentTargetLocation = currentTargetLocation[1..];
+        }
+    }
+    
+    private void RegisterAddress(Address address)
+    {
+        _signatures.Add(address);
+
+        if (_preResolveArray[address.Bytes[0]] is null)
+        {
+            _preResolveArray[address.Bytes[0]] = new List<Address>();
+            _totalBuckets++;
+        }
+
+        _preResolveArray[address.Bytes[0]].Add(address);
     }
 }
