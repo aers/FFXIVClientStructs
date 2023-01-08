@@ -39,6 +39,8 @@ public sealed partial class Resolver
     private int _rdataSectionOffset;
     private int _rdataSectionSize;
 
+    private bool _hasResolved = false;
+
     public void SetupSearchSpace(nint moduleCopy = 0, FileInfo? cacheFile = null)
     {
         ProcessModule module = Process.GetCurrentProcess().MainModule;
@@ -150,7 +152,7 @@ public sealed partial class Resolver
         File.WriteAllText(_cacheFile.FullName, json);
     }
 
-    public bool ResolveFromCache()
+    private bool ResolveFromCache()
     {
         foreach (Address address in _addresses)
         {
@@ -173,6 +175,9 @@ public sealed partial class Resolver
     // This function is a bit messy, but everything to make it cleaner is slower, so don't bother.
     public unsafe void Resolve()
     {
+        if (_hasResolved)
+            return;
+        
         if (_targetSpace == 0)
             throw new Exception("[FFXIVClientStructs.Resolver] Attempted to call Resolve() without initializing the search space.");
 
@@ -251,6 +256,7 @@ public sealed partial class Resolver
         outLoop: ;
 
         SaveCache();
+        _hasResolved = true;
     }
     
     private void RegisterAddress(Address address)
