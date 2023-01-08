@@ -20,11 +20,12 @@ public sealed partial class Resolver
     {
         ReadOnlySpan<byte> currentTargetLocation = target.AsSpan()[target.TextSectionOffset..];
         ReadOnlySpan<ulong> targetLocationAsUlong = MemoryMarshal.Cast<byte, ulong>(currentTargetLocation);
-        
+
+        Address matchedAddress = null;
+
         for (int location = 0; location < target.TextSectionSize; location++)
         {
-            Address matchedAddress = null;
-            
+
             if (_preResolveArray[currentTargetLocation[0]] is not null)
             {
                 List<Address> availableSignatures = _preResolveArray[currentTargetLocation[0]];
@@ -32,14 +33,15 @@ public sealed partial class Resolver
                 foreach(Address signature in availableSignatures)
                 {
                     int count;
-                    
-                    for (count = 0; count < signature.Bytes.Length; count++)
+                    int length = signature.Bytes.Length;
+
+                    for (count = 0; count < length; count++)
                     {
                         if ((signature.Mask[count] & signature.Bytes[count]) != (signature.Mask[count] & targetLocationAsUlong[count]))
                             break;
                     }
                 
-                    if (count == signature.Bytes.Length)
+                    if (count == length)
                     {
                         matchedAddress = signature;
                         break;
@@ -57,6 +59,8 @@ public sealed partial class Resolver
                         if (_totalBuckets == 0)
                             break;
                     }
+
+                    matchedAddress = null;
                 }
             }
         
