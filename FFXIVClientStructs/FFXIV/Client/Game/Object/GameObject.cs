@@ -45,7 +45,7 @@ public unsafe partial struct GameObject
     [FieldOffset(0x90)] public byte YalmDistanceFromPlayerX;
     [FieldOffset(0x91)] public byte TargetStatus; // Goes from 6 to 2 when selecting a target and flashing a highlight
     [FieldOffset(0x92)] public byte YalmDistanceFromPlayerZ;
-    [FieldOffset(0xA0)] public Vector3 Position;
+    [FieldOffset(0xA0)] public Vec3 Position;
     [FieldOffset(0xB0)] public float Rotation;
     [FieldOffset(0xB4)] public float Scale;
     [FieldOffset(0xB8)] public float Height;

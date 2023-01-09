@@ -6,15 +6,15 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 public unsafe partial struct Camera
 {
     [FieldOffset(0x00)] public Object Object;
-    [FieldOffset(0x80)] public Vector3 LookAtVector;
-    [FieldOffset(0x90)] public Vector3 Vector_1;
-    [FieldOffset(0xA0)] public Matrix44 ViewMatrix;
+    [FieldOffset(0x80)] public Vec3 LookAtVector;
+    [FieldOffset(0x90)] public Vec3 Vector_1;
+    [FieldOffset(0xA0)] public Mat4x4 ViewMatrix;
     [FieldOffset(0xE0)] public Render.Camera* RenderCamera;
 
     [MemberFunction("E8 ?? ?? ?? ?? 4C 8B E0 48 8B EB")]
     public partial void ScreenPointToRay(Ray* ray, int x, int y);
 
-    public Ray ScreenPointToRay(Vector2 screenPoint) {
+    public Ray ScreenPointToRay(Vec2 screenPoint) {
 	    return ScreenPointToRay((int)screenPoint.X, (int)screenPoint.Y);
     }
 
@@ -24,18 +24,18 @@ public unsafe partial struct Camera
         return *pRay;
     }
 
-    public static Vector3 ScreenToWorldPoint(Vector2 screenPoint) {
+    public static Vec3 ScreenToWorldPoint(Vec2 screenPoint) {
 	    var ray = CameraManager.Instance()->CurrentCamera->ScreenPointToRay(screenPoint);
 	    BGCollisionModule.Raycast(ray.Origin, ray.Direction, out var hit);
 	    return hit.Point;
     }
 
-    public static Vector2 WorldToScreenPoint(Vector3 worldPoint) {
+    public static Vec2 WorldToScreenPoint(Vec3 worldPoint) {
 	    var screen = stackalloc float[2];
 	    WorldToScreenPoint(screen, worldPoint);
-	    return *(Vector2*)screen;
+	    return *(Vec2*)screen;
     }
 
     [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 48 8B E9 48 8B DA 48 8D 0D")]
-    private static partial float* WorldToScreenPoint(float* screenPoint, Vector3 worldPoint);
+    private static partial float* WorldToScreenPoint(float* screenPoint, Vec3 worldPoint);
 }

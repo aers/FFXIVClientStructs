@@ -10,7 +10,7 @@ public unsafe struct BoneSimulator
     [FieldOffset(0x00)] public void* vtbl;
     [FieldOffset(0x10)] public uint PhysicsGroup;
     [FieldOffset(0x18)] public Skeleton* Skeleton; // Client::Graphics::Render::Skeleton
-    [FieldOffset(0x20)] public Vector3 CharacterPosition;
-    [FieldOffset(0x30)] public Vector3 Gravity;
-    [FieldOffset(0x40)] public Vector3 Wind;
+    [FieldOffset(0x20)] public Vec3 CharacterPosition;
+    [FieldOffset(0x30)] public Vec3 Gravity;
+    [FieldOffset(0x40)] public Vec3 Wind;
 }

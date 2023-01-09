@@ -99,7 +99,7 @@ public unsafe partial struct Character
         [FieldOffset(0x04)] public uint ActionID;
         [FieldOffset(0x08)] public uint Unk_08;
         [FieldOffset(0x10)] public uint CastTargetID;
-        [FieldOffset(0x20)] public Vector3 CastLocation;
+        [FieldOffset(0x20)] public Vec3 CastLocation;
         [FieldOffset(0x30)] public uint Unk_30;
         [FieldOffset(0x34)] public float CurrentCastTime;
         [FieldOffset(0x38)] public float TotalCastTime;

@@ -12,6 +12,6 @@ public struct Rectangle
 
     public static implicit operator RectangleF(Rectangle rect)
     {
-        return new RectangleF(rect.Left, rect.Top, rect.Right - rect.Left, rect.Bottom - rect.Top);
+	    return new RectangleF(rect.Left, rect.Top, rect.Right - rect.Left, rect.Bottom - rect.Top);
     }
 }
