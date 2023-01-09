@@ -19,6 +19,10 @@ public enum AtkEventType
     ButtonRelease = 24, // sent on MouseUp and MouseOut
     ButtonClick = 25, // sent on MouseUp and MouseClick on button     
 
+    ListItemRollOver = 33,
+    ListItemRollOut = 34,
+    ListItemToggle = 35,
+
     // AtkComponentDragDrop 
     DragDropRollOver = 52,
     DragDropRollOut = 53,
