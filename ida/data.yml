@@ -283,6 +283,10 @@ classes:
       0x140721A60: GetSourceIdByIndex
       0x1407210B0: AddStatus
       0x140721180: RemoveStatus
+  Client::Game::ActionTimelineManager:
+    funcs:
+      0x1404BB500: PlayTimeline
+      0x1404BBEB0: SetSlotSpeed
   Client::Game::RetainerManager:
     instances:
       - ea: 0x142093D10
@@ -3135,6 +3139,7 @@ classes:
       0x140723E20: IsMounted
       0x140725610: GetCompanionOwnerID
       0x140726570: GetTargetId
+      0x140727340: SetMode
       0x140729650: dtor
       0x14078D800: ctor
   Client::Game::Character::DrawDataContainer:

@@ -46,6 +46,8 @@ public unsafe partial struct Character
     [FieldOffset(0x818)] public fixed byte EquipSlotData[4 * 10];
     [FieldOffset(0x840)] public fixed byte CustomizeData[0x1A];
 
+    [FieldOffset(0x8E0)] public ActionTimelineManager ActionTimelineManager;
+
     [FieldOffset(0xC60)] public uint PlayerTargetObjectID;
 
     [FieldOffset(0x1770)] public Balloon Balloon;
@@ -62,7 +64,9 @@ public unsafe partial struct Character
 
     [FieldOffset(0x1AC8)] public ushort CurrentWorld;
     [FieldOffset(0x1ACA)] public ushort HomeWorld;
-    [FieldOffset(0x1AD4)] public byte EventState; // or something
+    [FieldOffset(0x1AD4)] public byte EventState; // Leave for backwards compat. See Mode.
+    [FieldOffset(0x1AD4)] public CharacterModes Mode;
+    [FieldOffset(0x1AD5)] public byte ModeParam; // Different purpose depending on mode. See CharacterModes for more info.
     [FieldOffset(0x1AD6)] public byte OnlineStatus;
     [FieldOffset(0x1AEB)] public byte ShieldValue;
     [FieldOffset(0x1AEF)] public byte StatusFlags;
@@ -77,6 +81,9 @@ public unsafe partial struct Character
 
     [MemberFunction("E8 ?? ?? ?? ?? 4C 8B 7F 48")]
     public partial bool IsMounted();
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4F ?? E8 ?? ?? ?? ?? 48 8B 4C 24 ??")]
+    public partial void SetMode(CharacterModes mode, byte modeParam);
 
     [VirtualFunction(79)]
     public partial StatusManager* GetStatusManager();
@@ -170,5 +177,18 @@ public unsafe partial struct Character
         Earth = 4,
         Lightning = 5,
         Water = 6
+    }
+
+    // Seems similar to ConditionFlag in Dalamud but not all flags are valid on the character
+    public enum CharacterModes : byte 
+    {
+        None = 0, // Mode is never used
+        Normal = 1, // Param always 0
+        EmoteLoop = 3, // Param is an EmoteMode entry
+        Mounted = 4, // Param always 0
+        AnimLock = 8, // Param always 0
+        Carrying = 9, // Param is a Carry entry
+        InPositionLoop = 11, // Param is an EmoteMode entry
+        Performance = 16, // Unknown
     }
 }
