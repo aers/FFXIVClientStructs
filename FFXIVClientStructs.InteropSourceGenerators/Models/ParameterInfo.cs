@@ -6,7 +6,7 @@ using static LanguageExt.Prelude;
 
 namespace FFXIVClientStructs.InteropSourceGenerators.Models;
 
-internal sealed record ParameterInfo(string Name, string Type)
+internal sealed record ParameterInfo(string Name, string Type, Option<string> DefaultValue)
 {
     public static Validation<DiagnosticInfo, ParameterInfo> GetFromSymbol(IParameterSymbol parameterSymbol)
     {
@@ -14,7 +14,8 @@ internal sealed record ParameterInfo(string Name, string Type)
             ? Success<DiagnosticInfo, ParameterInfo>(
                 new ParameterInfo(
                     parameterSymbol.Name,
-                    parameterSymbol.Type.GetFullyQualifiedNameWithGenerics()
+                    parameterSymbol.Type.GetFullyQualifiedNameWithGenerics(),
+                    parameterSymbol.GetDefaultValueString()
                 ))
             : Fail<DiagnosticInfo, ParameterInfo>(
                 DiagnosticInfo.Create(

@@ -66,7 +66,7 @@ internal sealed record MethodInfo(string Name, string Modifiers, string ReturnTy
     {
         string paramString = string.Join(", ", Parameters
             .Map(p => p.Type == origType && p.Name != ignoreArgument ? p with { Type = replaceType } : p)
-            .Map(p => $"{p.Type} {p.Name}"));
+            .Map(p => $"{p.Type} {p.Name}{p.DefaultValue.Match(Some: (p) => $" = {p}", None: "")}"));
         builder.AppendLine($"{Modifiers.Replace(" partial", String.Empty)} {ReturnType} {Name}({paramString})");
         builder.AppendLine("{");
         builder.Indent();
