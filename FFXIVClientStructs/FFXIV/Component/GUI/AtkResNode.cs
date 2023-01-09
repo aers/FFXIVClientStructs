@@ -1,4 +1,5 @@
 using FFXIVClientStructs.FFXIV.Client.Graphics;
+using FFXIVClientStructs.FFXIV.Client.System.Memory;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
@@ -47,7 +48,7 @@ public enum NodeFlags
 // size = 0xA8
 // ctor E9 ?? ?? ?? ?? 33 C0 48 83 C4 20 5B C3 66 90 
 [StructLayout(LayoutKind.Explicit, Size = 0xA8)]
-public unsafe partial struct AtkResNode
+public unsafe partial struct AtkResNode : ICreatable
 {
     [FieldOffset(0x0)] public AtkEventTarget AtkEventTarget;
     [FieldOffset(0x8)] public uint NodeID;

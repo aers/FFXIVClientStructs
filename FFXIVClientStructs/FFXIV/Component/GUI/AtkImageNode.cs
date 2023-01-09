@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using FFXIVClientStructs.FFXIV.Client.System.Memory;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
@@ -20,7 +21,7 @@ public enum ImageNodeFlags
 // common CreateAtkNode function E8 ?? ?? ?? ?? 48 8B 4E 08 49 8B D5 
 // type 2
 [StructLayout(LayoutKind.Explicit, Size = 0xB8)]
-public unsafe partial struct AtkImageNode
+public unsafe partial struct AtkImageNode : ICreatable
 {
     [FieldOffset(0x0)] public AtkResNode AtkResNode;
     [FieldOffset(0xA8)] public AtkUldPartsList* PartsList;

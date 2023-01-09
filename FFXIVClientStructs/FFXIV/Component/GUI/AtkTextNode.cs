@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using FFXIVClientStructs.FFXIV.Client.Graphics;
+using FFXIVClientStructs.FFXIV.Client.System.Memory;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
@@ -43,7 +44,7 @@ public enum FontType : byte
 // common CreateAtkNode function E8 ?? ?? ?? ?? 48 8B 4E 08 49 8B D5 
 // type 3
 [StructLayout(LayoutKind.Explicit, Size = 0x158)]
-public unsafe partial struct AtkTextNode
+public unsafe partial struct AtkTextNode : ICreatable
 {
     [FieldOffset(0x0)] public AtkResNode AtkResNode;
     [FieldOffset(0xA8)] public uint TextId;

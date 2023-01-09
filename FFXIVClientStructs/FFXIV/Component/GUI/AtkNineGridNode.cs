@@ -1,4 +1,6 @@
-﻿namespace FFXIVClientStructs.FFXIV.Component.GUI;
+﻿using FFXIVClientStructs.FFXIV.Client.System.Memory;
+
+namespace FFXIVClientStructs.FFXIV.Component.GUI;
 // Component::GUI::AtkNineGridNode
 //   Component::GUI::AtkResNode
 //     Component::GUI::AtkEventTarget
@@ -7,7 +9,7 @@
 // common CreateAtkNode function E8 ?? ?? ?? ?? 48 8B 4E 08 49 8B D5 
 // type 4
 [StructLayout(LayoutKind.Explicit, Size = 0xC8)]
-public unsafe partial struct AtkNineGridNode
+public unsafe partial struct AtkNineGridNode : ICreatable
 {
     [FieldOffset(0x0)] public AtkResNode AtkResNode;
     [FieldOffset(0xA8)] public AtkUldPartsList* PartsList;

@@ -1,4 +1,6 @@
-﻿namespace FFXIVClientStructs.FFXIV.Component.GUI;
+﻿using FFXIVClientStructs.FFXIV.Client.System.Memory;
+
+namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
 public enum CollisionType : ushort
 {
@@ -15,7 +17,7 @@ public enum CollisionType : ushort
 // common CreateAtkNode function E8 ?? ?? ?? ?? 48 8B 4E 08 49 8B D5 
 // type 8
 [StructLayout(LayoutKind.Explicit, Size = 0xB8)]
-public unsafe partial struct AtkCollisionNode
+public unsafe partial struct AtkCollisionNode : ICreatable
 {
     [FieldOffset(0x0)] public AtkResNode AtkResNode;
     [FieldOffset(0xA8)] public ushort CollisionType;
