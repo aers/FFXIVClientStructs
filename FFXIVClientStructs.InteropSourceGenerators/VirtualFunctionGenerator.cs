@@ -94,7 +94,7 @@ internal sealed class VirtualFunctionGenerator : IIncrementalGenerator
             string paramNames = MethodInfo.GetParameterNamesString();
             if (MethodInfo.Parameters.Any())
                 paramNames = ", " + paramNames;
-            builder.AppendLine($"{MethodInfo.GetReturnString()}VFTable->{MethodInfo.Name}(thisPtr{paramNames});");
+            builder.AppendLine($"{MethodInfo.GetReturnString()}VTable->{MethodInfo.Name}(thisPtr{paramNames});");
             builder.DecrementIndent();
             builder.AppendLine("}");
 
@@ -112,14 +112,14 @@ internal sealed class VirtualFunctionGenerator : IIncrementalGenerator
             StructInfo.RenderStart(builder);
 
             builder.AppendLine("[StructLayout(LayoutKind.Explicit)]");
-            builder.AppendLine($"public unsafe struct {StructInfo.Name}VFTable");
+            builder.AppendLine($"public unsafe struct {StructInfo.Name}VTable");
             builder.AppendLine("{");
             builder.Indent();
             VirtualFunctionInfos.Iter(vfi => vfi.RenderFunctionPointer(builder, StructInfo));
             builder.DecrementIndent();
             builder.AppendLine("}");
             builder.AppendLine();
-            builder.AppendLine($"[FieldOffset(0x0)] public {StructInfo.Name}VFTable* VFTable;");
+            builder.AppendLine($"[FieldOffset(0x0)] public {StructInfo.Name}VTable* VTable;");
             builder.AppendLine();
 
             foreach (VirtualFunctionInfo vfi in VirtualFunctionInfos)
