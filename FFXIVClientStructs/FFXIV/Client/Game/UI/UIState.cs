@@ -30,9 +30,10 @@ public unsafe partial struct UIState
     [FieldOffset(0xEAA0)] public MarkingController MarkingController;
 
     [FieldOffset(0x11AF0)] public ContentsFinder ContentsFinder;
+
+    // Ref: UIState#IsUnlockLinkUnlocked (relative to uistate)
+    [FieldOffset(0x169E4)] public fixed byte UnlockLinkBitmask[0x7E];
     
-    // No idea why this isn't its own thing, but I can't find any trace of any member functions or anything worthy of
-    // making this its own struct. 
     // Ref: g_Client::Game::UI::UnlockedCompanionsMask
     //      direct ref: 48 8D 0D ?? ?? ?? ?? 0F B6 04 08 84 D0 75 10 B8 ?? ?? ?? ?? 48 8B 5C 24
     //      relative to uistate: E8 ?? ?? ?? ?? 84 C0 75 A6 32 C0 (case for 0x355)
@@ -48,11 +49,15 @@ public unsafe partial struct UIState
     /// Checks to see if an unlock link is unlocked, or if the passed value is greater than 0x10000, checks if the quest
     /// is completed.
     /// </summary>
-    /// <param name="unlockLinkOrQuestId">The unlock link or quest ID to check</param>
-    /// <param name="a3">Unknown, but appears to always be 1.</param>
+    /// <remarks>
+    /// Param <c>a3</c> is almost always set to <c>1</c>, except for a couple specific use cases around the Gathering
+    /// Notebook.
+    /// </remarks>
+    /// <param name="unlockLinkOrQuestId">The unlock link or quest ID to check.</param>
+    /// <param name="a3">Respect Unlock Link 245 (ignore quest status?) for quest-based checks.</param>
     /// <returns>Returns true if the unlock link is unlocked or if the quest is completed.</returns>
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 A4")]
-    public partial bool IsUnlockLinkUnlockedOrQuestCompleted(uint unlockLinkOrQuestId, byte a3);
+    public partial bool IsUnlockLinkUnlockedOrQuestCompleted(uint unlockLinkOrQuestId, byte a3 = 1);
     
     /// <summary>
     /// Check an item (by EXD row) to see if the action associated with the item is unlocked or "obtained/registered."
