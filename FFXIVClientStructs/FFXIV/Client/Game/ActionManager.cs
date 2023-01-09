@@ -1,5 +1,5 @@
 ﻿using FFXIVClientStructs.FFXIV.Client.Game.Object;
-using FFXIVClientStructs.FFXIV.Client.Graphics;
+using FFXIVClientStructs.FFXIV.Common.Math;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
@@ -15,7 +15,7 @@ public unsafe partial struct ActionManager
     public partial bool UseAction(ActionType actionType, uint actionID, long targetID = 0xE000_0000, uint a4 = 0, uint a5 = 0, uint a6 = 0, void* a7 = null);
 
     [MemberFunction("E8 ?? ?? ?? ?? 3C 01 0F 85 ?? ?? ?? ?? EB 46")]
-    public partial bool UseActionLocation(ActionType actionType, uint actionID, long targetID = 0xE000_0000, Vec3* location = null, uint a4 = 0);
+    public partial bool UseActionLocation(ActionType actionType, uint actionID, long targetID = 0xE000_0000, Vector3* location = null, uint a4 = 0);
 
     [MemberFunction("E8 ?? ?? ?? ?? 83 BC 24 ?? ?? ?? ?? ?? 8B F0")]
     public partial uint GetActionStatus(ActionType actionType, uint actionID, long targetID = 0xE000_0000, uint a4 = 1, uint a5 = 1);

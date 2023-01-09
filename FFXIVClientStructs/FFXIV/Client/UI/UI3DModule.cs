@@ -1,6 +1,6 @@
 ﻿using FFXIVClientStructs.FFXIV.Client.Game.Character;
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
-using FFXIVClientStructs.FFXIV.Client.Graphics;
+using FFXIVClientStructs.FFXIV.Common.Math;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 // Client::UI::UI3DModule
@@ -39,8 +39,8 @@ public unsafe struct UI3DModule
     {
         [FieldOffset(0x0)] public MapInfo MapInfo;
         [FieldOffset(0x18)] public GameObject* GameObject;
-        [FieldOffset(0x20)] public Vec3 NamePlatePos;
-        [FieldOffset(0x30)] public Vec3 ObjectPosProjectedScreenSpace; // maybe
+        [FieldOffset(0x20)] public Vector3 NamePlatePos;
+        [FieldOffset(0x30)] public Vector3 ObjectPosProjectedScreenSpace; // maybe
         [FieldOffset(0x40)] public float DistanceFromCamera;
         [FieldOffset(0x44)] public float DistanceFromPlayer; // 0 for player
         [FieldOffset(0x48)] public uint Unk_48;

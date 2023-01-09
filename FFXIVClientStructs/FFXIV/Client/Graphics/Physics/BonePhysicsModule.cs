@@ -1,4 +1,5 @@
 ﻿using FFXIVClientStructs.FFXIV.Client.Graphics.Render;
+using FFXIVClientStructs.FFXIV.Common.Math;
 
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Physics;
 
@@ -20,8 +21,8 @@ public struct BoneSimulators
 public unsafe struct BonePhysicsModule
 {
     [FieldOffset(0x00)] public void* vtbl;
-    [FieldOffset(0x10)] public Mat4x4 SkeletonWorldMatrix;
-    [FieldOffset(0x50)] public Mat4x4 SkeletonInvWorldMatrix;
+    [FieldOffset(0x10)] public Matrix4x4 SkeletonWorldMatrix;
+    [FieldOffset(0x50)] public Matrix4x4 SkeletonInvWorldMatrix;
     [FieldOffset(0x90)] public float WindScale;
     [FieldOffset(0x94)] public float WindVariation;
     [FieldOffset(0x98)] public Skeleton* Skeleton; 

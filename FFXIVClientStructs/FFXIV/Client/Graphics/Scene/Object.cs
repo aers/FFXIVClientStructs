@@ -1,4 +1,6 @@
-﻿namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
+﻿using FFXIVClientStructs.FFXIV.Common.Math;
+
+namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 // Client::Graphics::Scene::Object
 // base class for all graphics objects
 
@@ -12,9 +14,9 @@ public unsafe partial struct Object
     [FieldOffset(0x28)] public Object* NextSiblingObject;
     [FieldOffset(0x30)] public Object* ChildObject; // for humans this is a weapon
 
-    [FieldOffset(0x50)] public Vec3 Position;
-    [FieldOffset(0x60)] public Quat Rotation;
-    [FieldOffset(0x70)] public Vec3 Scale;
+    [FieldOffset(0x50)] public Vector3 Position;
+    [FieldOffset(0x60)] public Quaternion Rotation;
+    [FieldOffset(0x70)] public Vector3 Scale;
 
     [VirtualFunction(2)]
     public partial ObjectType GetObjectType();

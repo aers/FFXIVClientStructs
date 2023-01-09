@@ -1,14 +1,16 @@
-﻿namespace FFXIVClientStructs.FFXIV.Client.Graphics;
+﻿using FFXIVClientStructs.FFXIV.Common.Math;
+
+namespace FFXIVClientStructs.FFXIV.Client.Graphics;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x20)]
 public struct Ray {
-	[FieldOffset(0x00)] public Vec3 Origin;
-	[FieldOffset(0x10)] public Vec3 Direction;
+	[FieldOffset(0x00)] public Vector3 Origin;
+	[FieldOffset(0x10)] public Vector3 Direction;
 
-	public Ray(Vec3 origin, Vec3 direction) {
+	public Ray(Vector3 origin, Vector3 direction) {
 		Origin = origin;
 		Direction = direction;
 	}
 
-	public Vec3 GetPoint(float distance) => Origin + Direction * distance;
+	public Vector3 GetPoint(float distance) => Origin + Direction * distance;
 }

@@ -1,4 +1,4 @@
-﻿using FFXIVClientStructs.FFXIV.Client.Graphics;
+﻿using FFXIVClientStructs.FFXIV.Common.Math;
 using FFXIVClientStructs.Havok;
 
 namespace FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
@@ -24,7 +24,7 @@ public unsafe struct SkeletonResourceHandle
 	[FieldOffset(0xD0)] public hkaSkeleton* HavokSkeleton;
 	[FieldOffset(0xD8)] public StdMap<uint, Pointer<hkaSkeletonMapper>> SkeletonMapperDict1;
 	[FieldOffset(0xE8)] public StdMap<uint, Pointer<hkaSkeletonMapper>> SkeletonMapperDict2;
-	[FieldOffset(0xF8)] public Mat4x4* InverseBoneMatrix;
+	[FieldOffset(0xF8)] public Matrix4x4* InverseBoneMatrix;
 	[FieldOffset(0x100)] public hkLoader* HavokLoader;
 	[FieldOffset(0x108)] public SkeletonHeader SkeletonData;
 }
