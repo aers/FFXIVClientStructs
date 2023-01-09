@@ -94,7 +94,7 @@ internal sealed class CStrOverloadsGenerator : IIncrementalGenerator
             foreach (string overloadParamName in overloadParamNames)
             {
                 builder.AppendLine(
-                    $"Span<byte> {overloadParamName}Bytes = new Span<byte>(new byte[{overloadParamName}.Length + 1]);");
+                    $"Span<byte> {overloadParamName}Bytes = {overloadParamName}.Length <= 512 ? stackalloc byte[{overloadParamName}.Length + 1] : new byte[{overloadParamName}.Length + 1];");
                 builder.AppendLine(
                     $"global::System.Text.Encoding.UTF8.GetBytes({overloadParamName}, {overloadParamName}Bytes);");
                 builder.AppendLine($"{overloadParamName}Bytes[{overloadParamName}.Length] = 0;");
