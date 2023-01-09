@@ -52,7 +52,7 @@ public unsafe partial struct RetainerManager
         {
             [FieldOffset(0x00)] public ulong RetainerID;
             [FieldOffset(0x08)] public fixed byte Name[0x20];
-            [FieldOffset(0x28)] public byte Available;
+            [FieldOffset(0x28)] public bool Available;
             [FieldOffset(0x29)] public byte ClassJob;
             [FieldOffset(0x2A)] public byte Level;
             [FieldOffset(0x2B)] public byte ItemCount;
