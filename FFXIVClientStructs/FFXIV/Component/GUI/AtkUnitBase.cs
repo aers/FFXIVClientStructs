@@ -82,6 +82,6 @@ public unsafe partial struct AtkUnitBase
     public partial void OnUpdate(NumberArrayData** numberArrayData, StringArrayData** stringArrayData);
 
     [MemberFunction("E9 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 8D 15")]
-    // TODO fixup string
+    [GenerateCStrOverloads]
     public partial bool LoadUldByName(byte* name, byte a3 = 0, uint a4 = 6);
 }

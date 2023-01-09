@@ -17,7 +17,7 @@ public unsafe partial struct CharacterManager
     public partial BattleChara* LookupBattleCharaByObjectId(int objectId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B F8 48 85 C0 74 3A 0F B7 4C 24")]
-    // TODO fixup string
+    [GenerateCStrOverloads]
     public partial BattleChara* LookupBattleCharaByName(byte* name, bool onlyPlayers = false, short world = -1);
 
     [MemberFunction("E8 ?? ?? ?? ?? 49 8D 4D 20 48 89 44 24")]

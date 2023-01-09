@@ -14,7 +14,7 @@ public unsafe partial struct RaptureAtkUnitManager
     [FieldOffset(0x0)] public AtkUnitManager AtkUnitManager;
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B F8 41 B0 01")]
-    // TODO fixup string
+    [GenerateCStrOverloads]
     public partial AtkUnitBase* GetAddonByName(byte* name, int index = 1);
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B 6B 20")]

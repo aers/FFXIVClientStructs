@@ -62,6 +62,16 @@ internal sealed record MethodInfo(string Name, string Modifiers, string ReturnTy
         builder.Indent();
     }
 
+    public void RenderStartOverload(IndentedStringBuilder builder, string origType, string replaceType, Option<string> ignoreArgument)
+    {
+        string paramString = string.Join(", ", Parameters
+            .Map(p => p.Type == origType && p.Name != ignoreArgument ? p with { Type = replaceType } : p)
+            .Map(p => $"{p.Type} {p.Name}"));
+        builder.AppendLine($"{Modifiers.Replace(" partial", String.Empty)} {ReturnType} {Name}({paramString})");
+        builder.AppendLine("{");
+        builder.Indent();
+    }
+
     public void RenderEnd(IndentedStringBuilder builder)
     {
         builder.DecrementIndent();

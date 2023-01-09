@@ -8,6 +8,6 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 public unsafe partial struct PronounModule
 {
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 5C 24 ?? EB 0C")]
-    // TODO fixup string
+    [GenerateCStrOverloads]
     public partial GameObject* ResolvePlaceholder(byte* placeholder, byte unknown0, byte unknown1);
 }

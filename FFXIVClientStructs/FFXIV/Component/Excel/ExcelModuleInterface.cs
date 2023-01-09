@@ -11,6 +11,6 @@ public unsafe partial struct ExcelModuleInterface
     public partial ExcelSheet* GetSheetByIndex(uint sheetIndex);
 
     [VirtualFunction(2)]
-    // TODO fixup string
+    [GenerateCStrOverloads]
     public partial ExcelSheet* GetSheetByName(byte* sheetName);
 }

@@ -7,10 +7,10 @@ public unsafe partial struct ExcelModule
     public partial ExcelSheet* GetSheetByIndex(uint sheetIndex);
 
     [VirtualFunction(2)]
-    // TODO fixup string
+    [GenerateCStrOverloads]
     public partial ExcelSheet* GetSheetByName(byte* sheetName);
 
     [VirtualFunction(3)]
-    // TODO fixup string
+    [GenerateCStrOverloads]
     public partial void LoadSheet(byte* sheetName, byte a3 = 0, byte a4 = 0);
 }
