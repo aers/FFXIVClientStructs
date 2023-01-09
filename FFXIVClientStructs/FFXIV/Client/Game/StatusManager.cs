@@ -25,4 +25,10 @@ public unsafe partial struct StatusManager
 
     [MemberFunction("E8 ?? ?? ?? ?? 3B 44 24 28")]
     public partial uint GetSourceId(int statusIndex);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 49 8B CE E8 ?? ?? ?? ?? 84 C0 74 4E")]
+    public partial void AddStatus(ushort statusId, ushort param = 0, void* u3 = null);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 83 FF 1E")]
+    public partial void RemoveStatus(int statusIndex, byte u2 = 0); // u2 always appears to be 0
 }

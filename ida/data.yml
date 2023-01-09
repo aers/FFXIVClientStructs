@@ -281,6 +281,8 @@ classes:
       0x140721A10: GetStatusIdByIndex
       0x140721A30: GetRemainingTimeByIndex
       0x140721A60: GetSourceIdByIndex
+      0x1407210B0: AddStatus
+      0x140721180: RemoveStatus
   Client::Game::RetainerManager:
     instances:
       - ea: 0x142093D10
