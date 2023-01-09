@@ -5,7 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.System.String;
 // Client::System::String::Utf8String
 
 // size = 0x68
-// ctor E8 ? ? ? ? 44 2B F7 
+// ctor E8 ?? ?? ?? ?? 44 2B F7 
 [StructLayout(LayoutKind.Explicit, Size = 0x68)]
 public unsafe partial struct Utf8String : ICreatable
 {
@@ -42,7 +42,7 @@ public unsafe partial struct Utf8String : ICreatable
         return Encoding.UTF8.GetString(StringPtr, (int) BufUsed - 1);
     }
 
-    [MemberFunction("E8 ? ? ? ? 44 2B F7")]
+    [MemberFunction("E8 ?? ?? ?? ?? 44 2B F7")]
     public partial void Ctor();
 
     [MemberFunction("E8 ?? ?? ?? ?? 49 83 6E")]

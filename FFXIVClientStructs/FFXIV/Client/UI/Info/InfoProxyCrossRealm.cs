@@ -30,34 +30,34 @@ public unsafe partial struct InfoProxyCrossRealm
         }
     }
 
-    [MemberFunction("E8 ?? ?? ?? ?? 80 B8 ?? ?? ?? ?? ?? 74 5C", IsStatic = true)]
+    [MemberFunction("E8 ?? ?? ?? ?? 80 B8 ?? ?? ?? ?? ?? 74 5C")]
     public static partial InfoProxyCrossRealm* Instance();
 
-    [MemberFunction("E8 ?? ?? ?? ?? F6 D8 1A C0", IsStatic = true)]
+    [MemberFunction("E8 ?? ?? ?? ?? F6 D8 1A C0")]
     public static partial bool IsCrossRealmParty();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 ?? 8B AF", IsStatic = true)]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 ?? 8B AF")]
     public static partial bool IsAllianceRaid();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 D8 8B CB", IsStatic = true)]
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 D8 8B CB")]
     public static partial byte GetGroupIndex(byte group);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 3C ?? 77 ?? C7 43", IsStatic = true)]
+    [MemberFunction("E8 ?? ?? ?? ?? 3C ?? 77 ?? C7 43")]
     public static partial byte GetPartyMemberCount();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 C0 EB 0C", IsStatic = true)]
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 C0 EB 0C")]
     public static partial byte GetGroupMemberCount(int groupIndex);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 44 38 60 4B", IsStatic = true)]
+    [MemberFunction("E8 ?? ?? ?? ?? 44 38 60 4B")]
     public static partial CrossRealmMember* GetGroupMember(uint memberIndex, int groupIndex = -1);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B F8 8B 46 10", IsStatic = true)]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B F8 8B 46 10")]
     public static partial CrossRealmMember* GetMemberByContentId(ulong contentId);
 
-    [MemberFunction("48 89 5C 24 ?? 48 89 7C 24 ?? 4C 8B 1D", IsStatic = true)]
+    [MemberFunction("48 89 5C 24 ?? 48 89 7C 24 ?? 4C 8B 1D")]
     public static partial CrossRealmMember* GetMemberByObjectId(uint objectId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 2E 0F B6 5E 11", IsStatic = true)]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 2E 0F B6 5E 11")]
     public static partial bool IsContentIdInParty(ulong contentId);
 }
 

@@ -36,6 +36,6 @@ public unsafe partial struct Camera
 	    return *(Vector2*)screen;
     }
 
-    [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 48 8B E9 48 8B DA 48 8D 0D", IsStatic = true, IsPrivate = true)]
+    [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 48 8B E9 48 8B DA 48 8D 0D")]
     private static partial float* WorldToScreenPoint(float* screenPoint, Vector3 worldPoint);
 }

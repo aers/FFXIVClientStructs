@@ -41,22 +41,22 @@ public unsafe partial struct ActionManager
     [MemberFunction("E8 ?? ?? ?? ?? 85 C0 75 ?? 83 FF ?? 0F 85")]
     public partial uint CheckActionResources(ActionType actionType, uint actionId, void* actionData = null);
 
-    [MemberFunction("E8 ?? ?? ?? ?? F3 0F 11 43 ?? 80 3B 00", IsStatic = true)]
+    [MemberFunction("E8 ?? ?? ?? ?? F3 0F 11 43 ?? 80 3B 00")]
     public static partial float GetActionRange(uint actionId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 85 C0 75 02 33 C0", IsStatic = true)]
+    [MemberFunction("E8 ?? ?? ?? ?? 85 C0 75 02 33 C0")]
     public static partial uint GetActionInRangeOrLoS(uint actionId, GameObject* sourceObject, GameObject* targetObject);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 5C 24 ?? 48 83 C4 30 5F C3 33 D2", IsStatic = true)]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 5C 24 ?? 48 83 C4 30 5F C3 33 D2")]
     public static partial int GetActionCost(ActionType actionType, uint actionId, byte a3, byte a4, byte a5, byte a6);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8B D6 41 8B CF", IsStatic = true)]
+    [MemberFunction("E8 ?? ?? ?? ?? 8B D6 41 8B CF")]
     public static partial int GetAdjustedRecastTime(ActionType actionType, uint actionID, byte a3 = 1);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 85 C0 0F 84 ?? ?? ?? ?? 33 C9", IsStatic = true)]
+    [MemberFunction("E8 ?? ?? ?? ?? 85 C0 0F 84 ?? ?? ?? ?? 33 C9")]
     public static partial int GetAdjustedCastTime(ActionType actionType, uint actionID, byte a3 = 1, byte* a4 = null);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 33 DB 8B C8", IsStatic = true)]
+    [MemberFunction("E8 ?? ?? ?? ?? 33 DB 8B C8")]
     public static partial ushort GetMaxCharges(uint actionId, uint level); // 0 for current level
 
     [MemberFunction("48 8B C4 48 89 68 ?? 48 89 70 ?? 41 56 48 83 EC")]

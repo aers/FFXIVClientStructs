@@ -151,7 +151,7 @@ public unsafe struct Matrix44 : IEquatable<Matrix44> {
     public static bool operator !=(Matrix44 left, Matrix44 right) => !left.Equals(right);
 
     public bool Equals(Matrix44 other) => ((global::System.Numerics.Matrix4x4)this).Equals(other);
-	public override bool Equals(object obj) => obj is Matrix44 other && Equals(other);
+	public override bool Equals(object? obj) => obj is Matrix44 other && Equals(other);
 
     public override int GetHashCode() {
 	    var hashCode = new HashCode();

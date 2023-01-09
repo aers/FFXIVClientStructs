@@ -45,7 +45,7 @@ public enum NodeFlags
 // base class for all UI "nodes" which represent elements of the UI
 
 // size = 0xA8
-// ctor E9 ? ? ? ? 33 C0 48 83 C4 20 5B C3 66 90 
+// ctor E9 ?? ?? ?? ?? 33 C0 48 83 C4 20 5B C3 66 90 
 [StructLayout(LayoutKind.Explicit, Size = 0xA8)]
 public unsafe partial struct AtkResNode
 {
@@ -101,8 +101,8 @@ public unsafe partial struct AtkResNode
     [FieldOffset(0xA0)] public uint DrawFlags;
 
     public bool IsVisible => (Flags & 0x10) == 0x10;
-
-    [MemberFunction("E9 ? ? ? ? 33 C0 48 83 C4 20 5B C3 66 90")]
+    
+    [MemberFunction("E9 ?? ?? ?? ?? 33 C0 48 83 C4 20 5B C3 66 90")]
     public partial void Ctor();
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B 54 FB 04")]
@@ -111,22 +111,22 @@ public unsafe partial struct AtkResNode
     [MemberFunction("E8 ?? ?? ?? ?? 44 8B 97")]
     public partial AtkTextNode* GetAsAtkTextNode();
 
-    [MemberFunction("E8 ? ? ? ? B2 01 48 89 47 08")]
+    [MemberFunction("E8 ?? ?? ?? ?? B2 01 48 89 47 08")]
     public partial AtkNineGridNode* GetAsAtkNineGridNode();
 
-    [MemberFunction("E8 ? ? ? ? 8D 0C BF 03 C9")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8D 0C BF 03 C9")]
     public partial AtkCounterNode* GetAsAtkCounterNode();
 
-    [MemberFunction("E8 ? ? ? ? 48 8D 1C 76")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 1C 76")]
     public partial AtkCollisionNode* GetAsAtkCollisionNode();
 
-    [MemberFunction("E8 ? ? ? ? 44 8D 4F 30")]
+    [MemberFunction("E8 ?? ?? ?? ?? 44 8D 4F 30")]
     public partial AtkComponentNode* GetAsAtkComponentNode();
 
-    [MemberFunction("E8 ? ? ? ? 8B 4D FC")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8B 4D FC")]
     public partial AtkComponentBase* GetComponent();
 
-    [MemberFunction("E8 ? ? ? ? C1 E7 0C")]
+    [MemberFunction("E8 ?? ?? ?? ?? C1 E7 0C")]
     public partial void AddEvent(ushort eventType, uint eventParam, AtkEventListener* listener,
         AtkResNode* nodeParam, bool isSystemEvent);
 
@@ -135,8 +135,8 @@ public unsafe partial struct AtkResNode
     {
         AddEvent((ushort) eventType, eventParam, listener, nodeParam, isSystemEvent);
     }
-
-    [MemberFunction("E8 ? ? ? ? 44 38 7D 67")]
+    
+    [MemberFunction("E8 ?? ?? ?? ?? 44 38 7D 67")]
     public partial void RemoveEvent(ushort eventType, uint eventParam, AtkEventListener* listener,
         bool isSystemEvent);
 
@@ -151,31 +151,31 @@ public unsafe partial struct AtkResNode
     [MemberFunction("E8 ?? ?? ?? ?? 48 83 C5 30")]
     public partial void SetPositionFloat(float X, float Y);
 
-    [MemberFunction("E8 ? ? ? ? 49 83 C4 0C")]
+    [MemberFunction("E8 ?? ?? ?? ?? 49 83 C4 0C")]
     public partial void GetPositionShort(short* outX, short* outY);
 
-    [MemberFunction("E8 ? ? ? ? 8D 56 B5")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8D 56 B5")]
     public partial void SetPositionShort(short X, short Y);
-
+    
     [MemberFunction("48 85 C9 74 0B 8B 41 4C")]
     public partial void GetScale(float* outX, float* outY);
 
-    [MemberFunction("E8 ? ? ? ? 48 8B CB F3 0F 59 C6")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B CB F3 0F 59 C6")]
     public partial float GetScaleX();
 
-    [MemberFunction("E8 ? ? ? ? 49 8D 7E 1E")]
+    [MemberFunction("E8 ?? ?? ?? ?? 49 8D 7E 1E")]
     public partial float GetScaleY();
 
-    [MemberFunction("E8 ? ? ? ? 48 8D 7F 38")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 7F 38")]
     public partial void SetScale(float X, float Y);
 
-    [MemberFunction("E8 ? ? ? ? 66 03 C0")]
+    [MemberFunction("E8 ?? ?? ?? ?? 66 03 C0")]
     public partial ushort GetWidth();
 
-    [MemberFunction("E8 ? ? ? ? 8B 54 3B 08")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8B 54 3B 08")]
     public partial ushort GetHeight();
 
-    [MemberFunction("E8 ? ? ? ? 66 2B F7")]
+    [MemberFunction("E8 ?? ?? ?? ?? 66 2B F7")]
     public partial void SetWidth(ushort width);
 
     [MemberFunction("E8 ?? ?? ?? ?? 80 7B 5D 00")]
@@ -190,7 +190,7 @@ public unsafe partial struct AtkResNode
     [MemberFunction("E8 ?? ?? ?? ?? 8D 56 02 49 8B CD")]
     public partial void SetPriority(ushort priority);
 
-    [MemberFunction("E8 ? ? ? ? FF C6 3B F5 72 E5 BA ? ? ? ?")]
+    [MemberFunction("E8 ?? ?? ?? ?? FF C6 3B F5 72 E5 BA ?? ?? ?? ??")]
     public partial void SetUseDepthBasedPriority(bool enable);
 
     [VirtualFunction(1)]

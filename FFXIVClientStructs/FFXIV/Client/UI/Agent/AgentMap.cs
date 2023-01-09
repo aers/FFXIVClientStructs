@@ -82,14 +82,14 @@ public unsafe partial struct AgentMap
     }
 
     public void AddGatheringTempMarker(int mapX, int mapY, int radius, uint iconId = 0, uint styleFlags = 4,
-        string tooltip = null)
+        string? tooltip = null)
     {
         var toolTip = Utf8String.FromString(tooltip ?? string.Empty);
         AddGatheringTempMarker(styleFlags, mapX, mapY, iconId, radius, toolTip);
         toolTip->Dtor();
     }
 
-    public void OpenMap(uint mapId, uint territoryId = 0, string windowTitle = null, MapType type = MapType.FlagMarker)
+    public void OpenMap(uint mapId, uint territoryId = 0, string? windowTitle = null, MapType type = MapType.FlagMarker)
     {
         var title = Utf8String.FromString(windowTitle ?? string.Empty);
         var info = stackalloc OpenMapInfo[1];

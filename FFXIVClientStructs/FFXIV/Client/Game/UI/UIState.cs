@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 // this is a large object holding most of the other objects in the Client::Game::UI namespace
 // all data in here is used for UI display
 
-// ctor E8 ? ? ? ? 48 8D 0D ? ? ? ? 48 83 C4 28 E9 ? ? ? ? 48 83 EC 28 33 D2 
+// ctor E8 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? 48 83 C4 28 E9 ?? ?? ?? ?? 48 83 EC 28 33 D2 
 [StructLayout(LayoutKind.Explicit, Size = 0x16AE4)] // its at least this big, may be a few bytes bigger
 public unsafe partial struct UIState
 {
@@ -119,9 +119,9 @@ public unsafe partial struct UIState
         return ((1 << ((int) companionId & 7)) & this.UnlockedCompanionsBitmask[companionId >> 3]) > 0;
     }
 
-    [MemberFunction("E8 ?? ?? ?? ?? 44 22 F0", IsStatic = true)]
+    [MemberFunction("E8 ?? ?? ?? ?? 44 22 F0")]
     public static partial bool IsInstanceContentCompleted(uint instanceContentId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 7C 24 ?? 3C", IsStatic = true)]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 7C 24 ?? 3C")]
     public static partial bool IsInstanceContentUnlocked(uint instanceContentId);
 }

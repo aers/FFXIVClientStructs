@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 //   Client::System::Input::SoftKeyboardDeviceInterface::SoftKeyboardInputInterface
 
 // size = 0x600
-// common CreateAtkComponent function 8B FA 33 DB E8 ? ? ? ? 
+// common CreateAtkComponent function 8B FA 33 DB E8 ?? ?? ?? ?? 
 // type 7
 [StructLayout(LayoutKind.Explicit, Size = 0x600)]
 public struct AtkComponentTextInput

@@ -5,7 +5,7 @@
 // base class for all AddonXXX classes (visible UI objects)
 
 // size = 0x220
-// ctor E8 ? ? ? ? 83 8B ? ? ? ? ? 33 C0
+// ctor E8 ?? ?? ?? ?? 83 8B ?? ?? ?? ?? ?? 33 C0
 
 [StructLayout(LayoutKind.Explicit, Size = 0x220)]
 public unsafe partial struct AtkUnitBase
@@ -81,7 +81,7 @@ public unsafe partial struct AtkUnitBase
     [VirtualFunction(49)]
     public partial void OnUpdate(NumberArrayData** numberArrayData, StringArrayData** stringArrayData);
 
-
     [MemberFunction("E9 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 8D 15")]
-    public partial bool LoadUldByName(string name, byte a3 = 0, uint a4 = 6);
+    [GenerateCStrOverloads]
+    public partial bool LoadUldByName(byte* name, byte a3 = 0, uint a4 = 6);
 }

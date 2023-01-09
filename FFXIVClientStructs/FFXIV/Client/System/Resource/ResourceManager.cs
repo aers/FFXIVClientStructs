@@ -5,7 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Resource;
 // no vtbl
 
 // size = 0x1728
-// ctor E8 ? ? ? ? 48 89 05 ? ? ? ? 48 8B 08
+// ctor E8 ?? ?? ?? ?? 48 89 05 ?? ?? ?? ?? 48 8B 08
 [StructLayout(LayoutKind.Explicit, Size = 0x1728)]
 public unsafe partial struct ResourceManager
 {

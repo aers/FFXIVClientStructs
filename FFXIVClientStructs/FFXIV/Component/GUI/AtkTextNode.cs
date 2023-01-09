@@ -40,7 +40,7 @@ public enum FontType : byte
 // simple text node
 
 // size = 0x158
-// common CreateAtkNode function E8 ? ? ? ? 48 8B 4E 08 49 8B D5 
+// common CreateAtkNode function E8 ?? ?? ?? ?? 48 8B 4E 08 49 8B D5 
 // type 3
 [StructLayout(LayoutKind.Explicit, Size = 0x158)]
 public unsafe partial struct AtkTextNode
@@ -71,20 +71,20 @@ public unsafe partial struct AtkTextNode
     [FieldOffset(0x153)] public byte TextFlags2;
 
     [MemberFunction(
-        "E9 ? ? ? ? 45 33 C9 4C 8B C0 33 D2 B9 ? ? ? ? E8 ? ? ? ? 48 85 C0 0F 84 ? ? ? ? 48 8B C8 48 83 C4 20 5B E9 ? ? ? ? 45 33 C9 4C 8B C0 33 D2 B9 ? ? ? ? E8 ? ? ? ? 48 85 C0 0F 84 ? ? ? ? 48 8B C8 48 83 C4 20 5B E9 ? ? ? ? 45 33 C9 4C 8B C0 33 D2 B9 ? ? ? ? E8 ? ? ? ? 48 85 C0 74 5D")]
+        "E9 ?? ?? ?? ?? 45 33 C9 4C 8B C0 33 D2 B9 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 85 C0 0F 84 ?? ?? ?? ?? 48 8B C8 48 83 C4 20 5B E9 ?? ?? ?? ?? 45 33 C9 4C 8B C0 33 D2 B9 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 85 C0 0F 84 ?? ?? ?? ?? 48 8B C8 48 83 C4 20 5B E9 ?? ?? ?? ?? 45 33 C9 4C 8B C0 33 D2 B9 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 85 C0 74 5D")]
     public partial void Ctor();
 
     [MemberFunction("E8 ?? ?? ?? ?? 8D 4E 32")]
     public partial void SetText(byte* str);
 
-    [MemberFunction("E8 ? ? ? ? 8D 4E 5A")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8D 4E 5A")]
     public partial void SetNumber(int num, bool showCommaDelimiters = false, bool showPlusSign = false, byte digits = 0,
         bool addZeroPadding = false);
 
-    [MemberFunction("E8 ? ? ? ? 48 83 C4 28 5F 5D")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 83 C4 28 5F 5D")]
     public partial void ResizeNodeForCurrentText();
 
-    [MemberFunction("E8 ? ? ? ? 0F B7 6D 08")]
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B7 6D 08")]
     public partial void GetTextDrawSize(ushort* outWidth, ushort* outHeight, byte* text = null, int start = 0,
         int end = -1, bool considerScale = false);
     

@@ -12,7 +12,8 @@ public unsafe partial struct RetainerCommentModule {
     [FieldOffset(0x40)] public RetainerCommentList Retainers;
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B BC 24 ?? ?? ?? ?? 48 8B B4 24 ?? ?? ?? ?? 49 8B 4E 10")]
-    public partial void* SetComment(ulong retainerID, string comment);
+    [GenerateCStrOverloads]
+    public partial void* SetComment(ulong retainerID, byte* comment);
 
     [MemberFunction("4C 8B D9 48 85 D2 74 27")]
     public partial byte* GetComment(ulong retainerId);
@@ -48,5 +49,6 @@ public unsafe partial struct RetainerCommentModule {
             }
             set => Instance()->SetComment(ID, value);
         }
+        
     }
 }

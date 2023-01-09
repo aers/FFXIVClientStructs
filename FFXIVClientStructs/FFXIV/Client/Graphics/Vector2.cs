@@ -141,9 +141,9 @@ public struct Vector2 : IEquatable<Vector2>, IFormattable {
 		return X.Equals(other.X) && Y.Equals(other.Y);
 	}
 
-	public override bool Equals(object obj) => obj is Vector2 other && Equals(other);
+	public override bool Equals(object? obj) => obj is Vector2 other && Equals(other);
 	public override int GetHashCode() => HashCode.Combine(X, Y);
 
 	public override string ToString() => ((global::System.Numerics.Vector2)this).ToString();
-	public string ToString(string format, IFormatProvider formatProvider) => ((global::System.Numerics.Vector2)this).ToString(format, formatProvider);
+	public string ToString(string? format, IFormatProvider? formatProvider) => ((global::System.Numerics.Vector2)this).ToString(format, formatProvider);
 }

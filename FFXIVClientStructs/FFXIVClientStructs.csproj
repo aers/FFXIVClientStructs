@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
+        <TargetFramework>net7.0</TargetFramework>
         <LangVersion>latest</LangVersion>
         <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -8,6 +8,7 @@
         <DebugType>full</DebugType>
         <DebugSymbols>true</DebugSymbols>
         <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
         <!--
           <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
           <CompilerGeneratedFilesOutputPath>Generated</CompilerGeneratedFilesOutputPath>
@@ -15,6 +16,6 @@
     </PropertyGroup>
     <ItemGroup>
         <PackageReference Include="Serilog" Version="2.11.0" />
-        <ProjectReference Include="..\FFXIVClientStructs.Generators\FFXIVClientStructs.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+        <ProjectReference Include="..\FFXIVClientStructs.InteropSourceGenerators\FFXIVClientStructs.InteropSourceGenerators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
     </ItemGroup>
 </Project>

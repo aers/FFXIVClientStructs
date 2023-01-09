@@ -1,6 +1,6 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
-// ctor E8 ? ? ? ? 48 89 B3 ? ? ? ? 48 8D 05 ? ? ? ? 48 89 B3 ? ? ? ? 
+// ctor E8 ?? ?? ?? ?? 48 89 B3 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 B3 ?? ?? ?? ?? 
 [StructLayout(LayoutKind.Explicit, Size = 0xED8)]
 public unsafe partial struct Buddy
 {
@@ -48,6 +48,6 @@ public unsafe partial struct Buddy
         }
     }
     
-    [MemberFunction("E9 ?? ?? ?? ?? 0F B7 50 02 41 B8", IsPrivate = true, IsStatic = true)]
+    [MemberFunction("E9 ?? ?? ?? ?? 0F B7 50 02 41 B8")]
     private static partial bool IsBuddyEquipUnlockedInternal(void* ptr, uint buddyEquipId);
 }

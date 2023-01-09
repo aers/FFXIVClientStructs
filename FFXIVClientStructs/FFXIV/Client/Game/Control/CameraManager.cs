@@ -17,6 +17,5 @@ public unsafe partial struct CameraManager
     [MemberFunction("E8 ?? ?? ?? ?? F7 80")]
     public partial Camera* GetActiveCamera();
 
-    [StaticAddress("4C 8D 35 ?? ?? ?? ?? 85 D2")]
-    public static partial CameraManager* Instance();
+    public static CameraManager* Instance => (CameraManager*) Control.Instance();
 }

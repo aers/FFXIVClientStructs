@@ -2,7 +2,7 @@
 
 [StructLayout(LayoutKind.Explicit, Size = 0xE0)]
 public unsafe partial struct HousingManager {
-    [MemberFunction("E8 ?? ?? ?? ?? 8B 56 7C", IsStatic = true)]
+    [MemberFunction("E8 ?? ?? ?? ?? 8B 56 7C")]
     public static partial HousingManager* Instance();
     
     [FieldOffset(0x00)] public HousingTerritory* CurrentTerritory;
@@ -10,7 +10,7 @@ public unsafe partial struct HousingManager {
     [FieldOffset(0x10)] public HousingTerritory* IndoorTerritory;
     [FieldOffset(0x18)] public HousingTerritory* WorkshopTerritory;
     
-    [MemberFunction("E8 ?? ?? ?? ?? 41 BD ?? ?? ?? ?? 48 8D 4D A0", IsPrivate = true)]
+    [MemberFunction("E8 ?? ?? ?? ?? 41 BD ?? ?? ?? ?? 48 8D 4D A0")]
     private partial byte GetInvertedBrightness();
     public byte GetBrightness() => (byte)(5 - GetInvertedBrightness());
 

@@ -37,12 +37,12 @@ public unsafe partial struct hkQsTransformf
 	// [MemberFunction("")]
 	// bool isApproximatelyEqual(hkQsTransformf* other, float epsilon);
 
-	[MemberFunction("45 85 C0 74 4B 48 8B C1", IsStatic = true)]
+	[MemberFunction("45 85 C0 74 4B 48 8B C1")]
 	public static partial void fastRenormalizeBatch1(hkQsTransformf* poseOut, float* weight, uint numTransforms);
 	
-	[MemberFunction("F3 0F 11 4C 24 ?? 48 83 EC 28 F3 0F 10 44 24", IsStatic = true)]
+	[MemberFunction("F3 0F 11 4C 24 ?? 48 83 EC 28 F3 0F 10 44 24")]
 	public static partial void fastRenormalizeBatch2(hkQsTransformf* poseOut, float weight, uint numTransforms);
 	
-	[MemberFunction("48 83 EC 28 8B C2 C1 E8 02", IsStatic = true)]
+	[MemberFunction("48 83 EC 28 8B C2 C1 E8 02")]
 	public static partial void fastRenormalizeQuaternionBatch(hkQsTransformf* poseOut, uint numTransforms);
 }

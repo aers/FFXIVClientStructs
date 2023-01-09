@@ -40,7 +40,7 @@ public unsafe partial struct RenderTargetManager
 
     [FieldOffset(0x270)] public fixed byte RenderTargetArray2[8 * 49];
 
-    [StaticAddress("48 8B 0D ? ? ? ? 48 8B B1 ? ? ? ?", isPointer: true)]
+    [StaticAddress("48 8B 0D ?? ?? ?? ?? 48 8B B1 ?? ?? ?? ??", isPointer: true)]
     public static partial RenderTargetManager* Instance();
     
 }

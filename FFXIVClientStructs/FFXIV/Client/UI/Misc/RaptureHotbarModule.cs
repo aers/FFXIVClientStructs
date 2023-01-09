@@ -32,7 +32,7 @@ public unsafe partial struct RaptureHotbarModule
     /// <param name="hotbarModule">A reference to the RaptureHotbarModule of the game.</param>
     /// <param name="slot">A reference to the hotbar slot to calculate the appearance for.</param>
     /// <returns>Returns the same value present in the actionId param.</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 54 24 ?? 8B 44 24 30", IsStatic = true)]
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 54 24 ?? 8B 44 24 30")]
     public static partial uint GetSlotAppearance(HotbarSlotType* actionType, uint* actionId, ushort* UNK_0xC4,
         RaptureHotbarModule* hotbarModule, HotBarSlot* slot);
 }

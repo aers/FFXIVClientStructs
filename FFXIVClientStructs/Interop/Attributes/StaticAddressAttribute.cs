@@ -1,11 +1,11 @@
-﻿namespace FFXIVClientStructs.Attributes;
+﻿namespace FFXIVClientStructs.Interop.Attributes;
 
 [AttributeUsage(AttributeTargets.Method)]
 public class StaticAddressAttribute : Attribute
 {
-    public StaticAddressAttribute(string sig, int offset = 0, bool isPointer = false)
+    public StaticAddressAttribute(string signature, int offset = 0, bool isPointer = false)
     {
-        Signature = sig;
+        Signature = signature;
         Offset = offset;
         IsPointer = isPointer;
     }
