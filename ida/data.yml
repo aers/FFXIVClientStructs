@@ -590,6 +590,7 @@ classes:
     funcs:
       0x140961480: Initialize
       0x1409711D0: ctor
+      0x14095EC30: SetUnlockLinkValue
       0x14095ECD0: IsUnlockLinkUnlocked
       0x14095ED00: IsUnlockLinkUnlockedOrQuestCompleted
       0x140960F30: IsEmoteUnlocked
