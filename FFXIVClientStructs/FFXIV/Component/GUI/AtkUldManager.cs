@@ -59,7 +59,7 @@ public unsafe partial struct AtkUldManager
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4C 24 ?? 48 8B 51 08")]
     public partial AtkResNode* CreateNodeByType(uint type);
     
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B F8 48 85 C0 0F 84 ?? ?? ?? ?? 49 8B 0F")]
+    [MemberFunction("48 89 5C 24 ?? 57 48 83 EC ?? 8B FA 33 DB E8")]
     public partial AtkComponentBase* CreateAtkComponent(ComponentType type); 
     
     [MemberFunction("E8 ?? ?? ?? ?? 49 8B 4E 10 8B C5")]

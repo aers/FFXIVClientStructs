@@ -124,7 +124,7 @@ public unsafe partial struct AtkResNode : ICreatable
     [MemberFunction("E8 ?? ?? ?? ?? 44 8D 4F 30")]
     public partial AtkComponentNode* GetAsAtkComponentNode();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8B 4D FC")]
+    [MemberFunction("E8 ?? ?? ?? ?? 44 8D 7F")]
     public partial AtkComponentBase* GetComponent();
 
     [MemberFunction("E8 ?? ?? ?? ?? C1 E7 0C")]

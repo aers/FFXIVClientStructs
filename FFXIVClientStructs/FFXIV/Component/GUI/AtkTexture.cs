@@ -41,7 +41,7 @@ public unsafe partial struct AtkTexture : ICreatable
     [MemberFunction("0F B6 41 11 48 8B D1")]
     public partial bool IsTextureReady();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4B ?? 48 85 C9 74 ?? 48 8B D0")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8B 57 ?? 4C 8B C0 48 8B CB E8 ?? ?? ?? ?? 48 8B 5C 24 ?? B0")]
     public partial Texture* GetKernelTexture();
 
     [VirtualFunction(0)]

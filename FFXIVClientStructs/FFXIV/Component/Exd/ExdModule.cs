@@ -13,6 +13,6 @@ public unsafe partial struct ExdModule
     [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 40 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 44 24 ?? 41 8B F8")]
     public partial void* GetSheetRowById(void* sheet, uint rowId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 41 8B 37")]
+    [MemberFunction("E8 ?? ?? ?? ?? 49 63 DD")]
     public static partial void* GetItemRowById(uint itemId);
 }

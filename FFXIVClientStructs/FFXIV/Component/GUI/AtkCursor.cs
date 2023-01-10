@@ -6,7 +6,7 @@ public partial struct AtkCursor
     [FieldOffset(0x00)] public CursorType Type;
     [FieldOffset(0x0E)] public byte Visible;
 
-    [MemberFunction("E8 ?? ?? ?? ?? 41 88 9D")]
+    [MemberFunction("48 83 EC ?? 80 79 ?? ?? 74 ?? C6 41")]
     public partial void Hide();
 
     [MemberFunction("48 83 EC 58 80 79 0E 00 75 68")]

@@ -119,6 +119,6 @@ public unsafe partial struct hkaPose
 	[MemberFunction("48 89 5C 24 ?? 48 8B 01 45 33 C0")]
 	public partial byte CheckPoseValidity();
 
-	[MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC 30 48 8B 01")]
+	[MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC ?? 48 8B 01 33 FF")]
 	public partial byte CheckPoseTransformsValidity();
 }
