@@ -17,5 +17,5 @@ public unsafe struct AgentLobby
     [FieldOffset(0xEC0)] public ulong SelectedCharacterId;
     [FieldOffset(0xEC8)] public byte DataCenter;
     [FieldOffset(0xECC)] public ushort WorldId;
-    [FieldOffset(0xEE8)] public uint IdleTime;
+    [FieldOffset(0xF98)] public uint IdleTime;
 }
