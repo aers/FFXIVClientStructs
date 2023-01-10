@@ -59,7 +59,7 @@ public unsafe partial struct UIState
 
     /// <returns>Returns true if the unlock link is unlocked or if the quest is completed.</returns>
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 CE")]
-    public partial bool IsUnlockLinkUnlockedOrQuestCompleted(uint unlockLinkOrQuestId, byte a3 = 1, byte a4 = 0);
+    public partial bool IsUnlockLinkUnlockedOrQuestCompleted(uint unlockLinkOrQuestId, byte a3 = 0, byte a4 = 1);
     
     /// <summary>
     /// Check an item (by EXD row) to see if the action associated with the item is unlocked or "obtained/registered."
