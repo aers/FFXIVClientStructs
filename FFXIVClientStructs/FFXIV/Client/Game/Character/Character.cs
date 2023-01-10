@@ -46,7 +46,7 @@ public unsafe partial struct Character
     [FieldOffset(0x818)] public fixed byte EquipSlotData[4 * 10];
     [FieldOffset(0x840)] public fixed byte CustomizeData[0x1A];
 
-    [FieldOffset(0x8E0)] public ActionTimelineManager ActionTimelineManager;
+    [FieldOffset(0x8F0)] public ActionTimelinesContainer ActionTimelines;
 
     [FieldOffset(0xC60)] public uint PlayerTargetObjectID;
 
@@ -166,6 +166,12 @@ public unsafe partial struct Character
 	    [FieldOffset(0x08)] public BattleChara* OwnerObject;
 	    [FieldOffset(0x10)] public Ornament* OrnamentObject;
 	    [FieldOffset(0x18)] public ushort OrnamentId;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x340)]
+    public struct ActionTimelinesContainer
+    {
+        [FieldOffset(0x10)] public ActionTimelineManager ActionTimelineManager;
     }
 
     public enum EurekaElement : byte
