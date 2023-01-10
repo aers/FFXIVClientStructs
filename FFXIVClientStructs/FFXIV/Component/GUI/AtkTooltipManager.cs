@@ -35,7 +35,7 @@ public unsafe partial struct AtkTooltipManager
     [FieldOffset(0x8)] public StdMap<Pointer<AtkResNode>, Pointer<AtkTooltipInfo>> TooltipMap;
     [FieldOffset(0x18)] public AtkStage* AtkStage;
 
-    [MemberFunction("E8 ?? ?? ?? ?? 41 3B ED")]
+    [MemberFunction("E8 ?? ?? ?? ?? 43 88 34 26")]
     public partial void AddTooltip(AtkTooltipType type, ushort parentID, AtkResNode* targetNode,
         AtkTooltipArgs* tooltipArgs);
 

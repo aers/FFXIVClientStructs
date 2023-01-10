@@ -179,13 +179,13 @@ public unsafe partial struct AtkResNode : ICreatable
     [MemberFunction("E8 ?? ?? ?? ?? 66 2B F7")]
     public partial void SetWidth(ushort width);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 80 7B 5D 00")]
+    [MemberFunction("E8 ?? ?? ?? ?? 80 7B 61 00")]
     public partial void SetHeight(ushort height);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 83 C7 08 48 83 EB 01 75 DC")]
     public partial void ToggleVisibility(bool enable);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 66 3B C3 74 13")]
+    [MemberFunction("E8 ?? ?? ?? ?? 66 85 C0 75 48")]
     public partial ushort GetPriority();
 
     [MemberFunction("E8 ?? ?? ?? ?? 8D 56 02 49 8B CD")]

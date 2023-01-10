@@ -17,8 +17,8 @@ public unsafe partial struct ActionManager
     [MemberFunction("E8 ?? ?? ?? ?? 3C 01 0F 85 ?? ?? ?? ?? EB 46")]
     public partial bool UseActionLocation(ActionType actionType, uint actionID, long targetID = 0xE000_0000, Vector3* location = null, uint a4 = 0);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 83 BC 24 ?? ?? ?? ?? ?? 8B F0")]
-    public partial uint GetActionStatus(ActionType actionType, uint actionID, long targetID = 0xE000_0000, uint a4 = 1, uint a5 = 1);
+    [MemberFunction("E8 ?? ?? ?? ?? 3D ?? ?? ?? ?? 74 42")]
+    public partial uint GetActionStatus(ActionType actionType, uint actionID, long targetID = 0xE000_0000, uint a4 = 1, byte a5 = 1, byte a6 = 1, void* a7 = null);
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B F8 3B DF")]
     public partial uint GetAdjustedActionId(uint actionID);
@@ -29,7 +29,7 @@ public unsafe partial struct ActionManager
     [MemberFunction("E8 ?? ?? ?? ?? F3 0F 5C F0 49 8B CD")]
     public partial float GetRecastTimeElapsed(ActionType actionType, uint actionID);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 3C 01 74 45")]
+    [MemberFunction("E8 ?? ?? ?? ?? 3C 01 74 19 FF C3")]
     public partial bool IsRecastTimerActive(ActionType actionType, uint actionID);
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B D0 48 8B CD 8B F0")]

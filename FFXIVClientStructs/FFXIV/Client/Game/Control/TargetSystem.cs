@@ -24,7 +24,7 @@ public unsafe partial struct TargetSystem
     [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 3B C6 0F 95 C0")]
     public static partial TargetSystem* Instance();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 3B D8 74 51")]
+    [MemberFunction("E8 ?? ?? ?? ?? 4C 8B F8 EB 13")]
     public partial uint GetCurrentTargetID();
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 3B C6 0F 94 C0")]

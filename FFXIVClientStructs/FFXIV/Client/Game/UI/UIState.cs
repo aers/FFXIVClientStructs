@@ -54,10 +54,12 @@ public unsafe partial struct UIState
     /// Notebook.
     /// </remarks>
     /// <param name="unlockLinkOrQuestId">The unlock link or quest ID to check.</param>
-    /// <param name="a3">Respect Unlock Link 245 (ignore quest status?) for quest-based checks.</param>
+    /// <param name="a3">Unknown</param>
+    /// <param name="a4">Respect Unlock Link 245 (ignore quest status?) for quest-based checks.</param>
+
     /// <returns>Returns true if the unlock link is unlocked or if the quest is completed.</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 A4")]
-    public partial bool IsUnlockLinkUnlockedOrQuestCompleted(uint unlockLinkOrQuestId, byte a3 = 1);
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 CE")]
+    public partial bool IsUnlockLinkUnlockedOrQuestCompleted(uint unlockLinkOrQuestId, byte a3 = 1, byte a4 = 0);
     
     /// <summary>
     /// Check an item (by EXD row) to see if the action associated with the item is unlocked or "obtained/registered."
