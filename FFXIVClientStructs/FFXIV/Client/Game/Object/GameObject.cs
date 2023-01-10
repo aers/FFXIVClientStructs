@@ -45,17 +45,17 @@ public unsafe partial struct GameObject
     [FieldOffset(0x90)] public byte YalmDistanceFromPlayerX;
     [FieldOffset(0x91)] public byte TargetStatus; // Goes from 6 to 2 when selecting a target and flashing a highlight
     [FieldOffset(0x92)] public byte YalmDistanceFromPlayerZ;
-    [FieldOffset(0xA0)] public Vector3 Position;
-    [FieldOffset(0xB0)] public float Rotation;
-    [FieldOffset(0xB4)] public float Scale;
-    [FieldOffset(0xB8)] public float Height;
-    [FieldOffset(0xBC)] public float VfxScale;
-    [FieldOffset(0xC0)] public float HitboxRadius;
-    [FieldOffset(0xE4)] public EventId EventId;
-    [FieldOffset(0xE8)] public uint FateId;
-    [FieldOffset(0xF0)] public DrawObject* DrawObject;
-    [FieldOffset(0x104)] public int RenderFlags;
-    [FieldOffset(0x148)] public LuaActor* LuaActor;
+    [FieldOffset(0xB0)] public Vector3 Position;
+    [FieldOffset(0xC0)] public float Rotation;
+    [FieldOffset(0xC4)] public float Scale;
+    [FieldOffset(0xC8)] public float Height;
+    [FieldOffset(0xCC)] public float VfxScale;
+    [FieldOffset(0xD0)] public float HitboxRadius;
+    [FieldOffset(0xF4)] public EventId EventId;
+    [FieldOffset(0xF8)] public uint FateId;
+    [FieldOffset(0x100)] public DrawObject* DrawObject;
+    [FieldOffset(0x114)] public int RenderFlags;
+    [FieldOffset(0x158)] public LuaActor* LuaActor;
 
     [VirtualFunction(1)]
     public partial GameObjectID GetObjectID();
@@ -85,16 +85,16 @@ public unsafe partial struct GameObject
     [VirtualFunction(27)]
     public partial DrawObject* GetDrawObject();
 
-    [VirtualFunction(48)]
+    [VirtualFunction(47)]
     public partial uint GetNpcID();
 
-    [VirtualFunction(57)]
+    [VirtualFunction(56)]
     public partial bool IsDead();
 
-    [VirtualFunction(58)]
+    [VirtualFunction(57)]
     public partial bool IsNotMounted();
     
-    [VirtualFunction(61)]
+    [VirtualFunction(60)]
     public partial bool IsCharacter();
 }
 
