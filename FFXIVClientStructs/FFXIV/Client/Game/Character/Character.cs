@@ -46,7 +46,7 @@ public unsafe partial struct Character
     [FieldOffset(0x818)] public fixed byte EquipSlotData[4 * 10];
     [FieldOffset(0x840)] public fixed byte CustomizeData[0x1A];
 
-    [FieldOffset(0x900)] public ActionTimelineManager ActionTimelineManager;
+    [FieldOffset(0x8F0)] public ActionTimelineManager ActionTimelineManager;
 
     [FieldOffset(0xC60)] public uint PlayerTargetObjectID; // offset probably incorrect
 
