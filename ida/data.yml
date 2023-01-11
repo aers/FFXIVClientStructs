@@ -469,7 +469,7 @@ classes:
       0x14075DC40: GetSingleton
       0x1400AAB10: IsQuestComplete # static (questId)
       0x14082C700: IsQuestComplete1 # (this, questId)
-      0x14082CA80: IsQuestCurrent # static (questId)
+      0x14082CA80: GetQuestSequence # static (questId)
       0x14082C3F0: GetQuestIndex
       0x14082CB80: GetQuestClassJob
       0x14082C8B0: IsQuestAccepted
@@ -596,7 +596,7 @@ classes:
       0x14097E3D0: ctor
       0x14096BBA0: SetUnlockLinkValue
       0x14096BC40: IsUnlockLinkUnlocked
-#fail       0x14095ED00: IsUnlockLinkUnlockedOrQuestCompleted
+      0x14096BC70: IsUnlockLinkUnlockedOrQuestCompleted
       0x14096DE60: IsEmoteUnlocked
       0x1413805D0: IsInstanceContentCompleted
   Client::Game::UI::PlayerState:

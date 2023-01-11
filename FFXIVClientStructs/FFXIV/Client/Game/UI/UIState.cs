@@ -49,18 +49,17 @@ public unsafe partial struct UIState
     /// Checks to see if an unlock link is unlocked, or if the passed value is greater than 0x10000, checks if the quest
     /// is completed.
     /// </summary>
-    /// <remarks>
-    /// Param <c>a3</c> is almost always set to <c>1</c>, except for a couple specific use cases around the Gathering
-    /// Notebook.
-    /// </remarks>
     /// <param name="unlockLinkOrQuestId">The unlock link or quest ID to check.</param>
-    /// <param name="a3">Unknown</param>
-    /// <param name="a4">Respect Unlock Link 245 (ignore quest status?) for quest-based checks.</param>
-
+    /// <param name="minQuestProgression">If the quest is not complete, check for <em>at least</em> this level of
+    /// progress in the quest (using <see cref="QuestManager.GetQuestSequence(ushort)"/>. If this parameter is <c>0</c>,
+    /// the quest must have been completed.</param>
+    /// <param name="a4">Exact purpose unknown, but appears to be a flag to respect Unlock Flag 245 (ignore quest
+    /// progression?) for quest-based checks. Virtually always <c>true</c> in game code.</param>
     /// <returns>Returns true if the unlock link is unlocked or if the quest is completed.</returns>
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 CE")]
-    public partial bool IsUnlockLinkUnlockedOrQuestCompleted(uint unlockLinkOrQuestId, byte a3 = 0, byte a4 = 1);
-    
+    public partial bool IsUnlockLinkUnlockedOrQuestCompleted(uint unlockLinkOrQuestId, byte minQuestProgression = 0,
+        bool a4 = true);
+
     /// <summary>
     /// Check an item (by EXD row) to see if the action associated with the item is unlocked or "obtained/registered."
     /// </summary>
