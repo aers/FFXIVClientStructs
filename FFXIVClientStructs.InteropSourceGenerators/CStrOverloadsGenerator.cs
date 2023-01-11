@@ -99,7 +99,7 @@ internal sealed class CStrOverloadsGenerator : IIncrementalGenerator
                     $"Span<byte> {overloadParamName}Bytes = utf8StringLength <= 512 ? stackalloc byte[utf8StringLength + 1] : new byte[utf8StringLength + 1];");
                 builder.AppendLine(
                     $"global::System.Text.Encoding.UTF8.GetBytes({overloadParamName}, {overloadParamName}Bytes);");
-                builder.AppendLine($"{overloadParamName}Bytes[utf8SringLength] = 0;");
+                builder.AppendLine($"{overloadParamName}Bytes[utf8StringLength] = 0;");
                 builder.AppendLine();
             }
 
