@@ -510,13 +510,13 @@ classes:
     instances:
       - ea: 0x14210AA30
         pointer: True
-#    funcs:
-#fail       0x140C9A150: ctor
-#fail       0x140C9A340: dtor
-#fail       0x140C97840: GetSingleton  # static
-#fail       0x140C994C0: LoadDemandResearchPacket
-#fail       0x140C99920: IsRecipeUnlocked # (this, recipeId)
-#fail       0x140C99950: IsPouchItemLocked # (this, pouchItemId)
+    funcs:
+      0x140B724A0: ctor
+      0x140B72700: dtor
+      0x140B6F660: GetSingleton  # static
+      0x140B70B50: LoadDemandResearchPacket
+      0x140B71A70: IsRecipeUnlocked # (this, recipeId)
+      0x140B71AA0: IsPouchItemLocked # (this, pouchItemId)
   Client::System::String::Utf8String:
     funcs:
       0x140059F30: ctor  # empty string ctor
