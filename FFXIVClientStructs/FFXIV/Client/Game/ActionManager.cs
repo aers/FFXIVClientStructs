@@ -1,4 +1,4 @@
-﻿using FFXIVClientStructs.FFXIV.Client.Game.Object;
+using FFXIVClientStructs.FFXIV.Client.Game.Object;
 using FFXIVClientStructs.FFXIV.Common.Math;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game;
@@ -18,7 +18,7 @@ public unsafe partial struct ActionManager
     public partial bool UseActionLocation(ActionType actionType, uint actionID, long targetID = 0xE000_0000, Vector3* location = null, uint a4 = 0);
 
     [MemberFunction("E8 ?? ?? ?? ?? 3D ?? ?? ?? ?? 74 42")]
-    public partial uint GetActionStatus(ActionType actionType, uint actionID, long targetID = 0xE000_0000, uint a4 = 1, byte a5 = 1, byte a6 = 1, void* a7 = null);
+    public partial uint GetActionStatus(ActionType actionType, uint actionID, long targetID = 0xE000_0000, bool checkRecastActive = true, bool checkCastingActive = true, uint* outOptExtraInfo = null);
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B F8 3B DF")]
     public partial uint GetAdjustedActionId(uint actionID);
