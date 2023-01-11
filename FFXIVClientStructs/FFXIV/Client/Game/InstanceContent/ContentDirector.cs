@@ -2,10 +2,10 @@
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
 
-[StructLayout(LayoutKind.Explicit, Size = 0x770)]
+[StructLayout(LayoutKind.Explicit, Size = 0xC38)]
 public struct ContentDirector
 {
 	[FieldOffset(0x00)] public Director Director;
 
-	[FieldOffset(0x740)] public float ContentTimeLeft;
+	[FieldOffset(0xC08)] public float ContentTimeLeft;
 }

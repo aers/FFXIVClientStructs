@@ -20,8 +20,8 @@ public unsafe partial struct AgentModule
 
     [FieldOffset(0x20)] public AgentInterface* AgentArray; // 417 pointers patch 6.20
 
-    [FieldOffset(0xD28)] public UIModule* UIModulePtr;
-    [FieldOffset(0xD30)] public AgentModule* AgentModulePtr;
+    [FieldOffset(0xD68)] public UIModule* UIModulePtr;
+    [FieldOffset(0xD70)] public AgentModule* AgentModulePtr;
 
     [MemberFunction("E8 ?? ?? ?? ?? 83 FE 0D")]
     public partial AgentInterface* GetAgentByInternalID(uint agentID);
