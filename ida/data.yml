@@ -283,7 +283,7 @@ classes:
       0x14072C050: GetSourceIdByIndex
       0x14072B6A0: AddStatus
       0x14072B770: RemoveStatus
-  Client::Game::ActionTimelineManager:
+  Client::Game::ActionTimelineDriver:
     funcs:
       0x1404C3A50: PlayTimeline
       0x1404C4400: SetSlotSpeed
