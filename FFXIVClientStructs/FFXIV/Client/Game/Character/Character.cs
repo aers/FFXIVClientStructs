@@ -48,19 +48,19 @@ public unsafe partial struct Character
 
     [FieldOffset(0x8F0)] public ActionTimelineManager ActionTimelineManager;
 
-    [FieldOffset(0xC60)] public uint PlayerTargetObjectID; // offset probably incorrect
+    [FieldOffset(0xC80)] public uint PlayerTargetObjectID;
 
-    [FieldOffset(0x1770)] public Balloon Balloon; // offset probably incorrect
+    [FieldOffset(0x1790)] public Balloon Balloon;
 
-    [FieldOffset(0x1978)] public VfxData* VfxData; // offset probably incorrect
-    [FieldOffset(0x1980)] public VfxData* VfxData2; // offset probably incorrect
-    [FieldOffset(0x19A8)] public VfxData* Omen; // offset probably incorrect
+    [FieldOffset(0x1998)] public VfxData* VfxData; 
+    [FieldOffset(0x19A0)] public VfxData* VfxData2;
+    [FieldOffset(0x19C8)] public VfxData* Omen; 
 
-    [FieldOffset(0x1A30)] public Companion* CompanionObject; // minion // offset probably incorrect
+    [FieldOffset(0x1A50)] public Companion* CompanionObject; // minion
     [FieldOffset(0x1A68)] public fixed byte FreeCompanyTag[6];
     [FieldOffset(0x1A88)] public ulong TargetObjectID;
 
-    [FieldOffset(0x1AAC)] public uint NameID; // offset probably incorrect
+    [FieldOffset(0x1AD8)] public uint NameID;
 
     [FieldOffset(0x1AF4)] public ushort CurrentWorld;
     [FieldOffset(0x1AF6)] public ushort HomeWorld;
@@ -71,7 +71,7 @@ public unsafe partial struct Character
     [FieldOffset(0x1B03)] public byte Battalion; // used for determining friend/enemy state
     [FieldOffset(0x1B17)] public byte ShieldValue;
     [FieldOffset(0x1B1B)] public byte StatusFlags;
-    [FieldOffset(0x1ABC)] public uint CompanionOwnerID; // offset probably incorrect
+    [FieldOffset(0x1AE8)] public uint CompanionOwnerID;
 
     [MemberFunction("E8 ?? ?? ?? ?? 49 3B C7 0F 84")]
     public partial ulong GetTargetId();
