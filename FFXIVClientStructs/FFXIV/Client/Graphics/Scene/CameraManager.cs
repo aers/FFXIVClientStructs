@@ -1,6 +1,6 @@
 ﻿namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene; 
 
-[StructLayout(LayoutKind.Explicit, Size = 0x100)]
+[StructLayout(LayoutKind.Explicit, Size = 0x120)]
 public unsafe partial struct CameraManager {
 
 	[FieldOffset(0x50)] public int CameraIndex;

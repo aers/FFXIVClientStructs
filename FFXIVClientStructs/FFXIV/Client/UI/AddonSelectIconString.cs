@@ -5,7 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 // Client::UI::AddonSelectIconString
 //   Component::GUI::AtkUnitBase
 //     Component::GUI::AtkEventListener
-[StructLayout(LayoutKind.Explicit, Size = 0x2A0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x2A8)]
 public struct AddonSelectIconString
 {
     [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;

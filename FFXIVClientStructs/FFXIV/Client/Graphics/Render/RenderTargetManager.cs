@@ -3,7 +3,7 @@
 //   Client::Graphics::Singleton
 //   Client::Graphics::Kernel::Notifier
 
-[StructLayout(LayoutKind.Explicit, Size = 0x460)]
+[StructLayout(LayoutKind.Explicit, Size = 0x480)]
 public unsafe partial struct RenderTargetManager
 {
     [FieldOffset(0x0)] public void* vtbl;

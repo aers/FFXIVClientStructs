@@ -3,7 +3,7 @@ using FFXIVClientStructs.FFXIV.Common.Math;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
-[StructLayout(LayoutKind.Explicit, Size = 0x810)]
+[StructLayout(LayoutKind.Explicit, Size = 0x7F0)]
 public unsafe partial struct ActionManager
 {
     [FieldOffset(0x13C)] public fixed uint BlueMageActions[24];

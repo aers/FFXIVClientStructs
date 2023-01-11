@@ -6,7 +6,7 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent; 
 
 [Agent(AgentId.Salvage)]
-[StructLayout(LayoutKind.Explicit, Size = 0x3E0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x3D0)]
 public unsafe partial struct AgentSalvage {
     public static AgentSalvage* Instance() => Framework.Instance()->GetUiModule()->GetAgentModule()->GetAgentSalvage();
     

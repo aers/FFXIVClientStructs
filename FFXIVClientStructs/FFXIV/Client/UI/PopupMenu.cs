@@ -4,7 +4,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 // Client::UI::PopupMenu
 // Used in several addons as inlined derivations
-[StructLayout(LayoutKind.Explicit, Size = 0x60)]
+[StructLayout(LayoutKind.Explicit, Size = 0x68)]
 public unsafe struct PopupMenu
 {
     [FieldOffset(0x0)] public AtkEventListener AtkEventListener;
