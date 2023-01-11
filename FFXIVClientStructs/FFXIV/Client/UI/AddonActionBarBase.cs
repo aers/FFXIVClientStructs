@@ -34,7 +34,7 @@ public unsafe partial struct AddonActionBarBase {
     /// Note that this method *CAN* trigger pulses on hotbar slots that don't have an item in them!
     /// </summary>
     /// <param name="slotIndex">A zero-indexed value of which slot to pulse.</param>
-    [VirtualFunction(76)]
+    [VirtualFunction(77)]
     public partial void PulseActionBarSlot(int slotIndex);
 
 

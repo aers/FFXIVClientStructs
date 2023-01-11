@@ -7,7 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 // all data in here is used for UI display
 
 // ctor E8 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? 48 83 C4 28 E9 ?? ?? ?? ?? 48 83 EC 28 33 D2 
-[StructLayout(LayoutKind.Explicit, Size = 0x16AE4)] // its at least this big, may be a few bytes bigger
+[StructLayout(LayoutKind.Explicit, Size = 0x16BAC)] // its at least this big, may be a few bytes bigger
 public unsafe partial struct UIState
 {
     [FieldOffset(0x00)] public Hotbar Hotbar;
@@ -15,11 +15,11 @@ public unsafe partial struct UIState
     [FieldOffset(0x110)] public Hater Hater;
     [FieldOffset(0xA18)] public WeaponState WeaponState;
     [FieldOffset(0xA38)] public PlayerState PlayerState;
-    [FieldOffset(0x11D0)] public Revive Revive;
+    [FieldOffset(0x1208)] public Revive Revive;
     [FieldOffset(0x1468)] public Telepo Telepo;
     [FieldOffset(0x14C0)] public Cabinet Cabinet;
-    [FieldOffset(0x1A50)] public Buddy Buddy;
-    [FieldOffset(0x2A60)] public RelicNote RelicNote;
+    [FieldOffset(0x1A90)] public Buddy Buddy;
+    [FieldOffset(0x2A98)] public RelicNote RelicNote;
     [FieldOffset(0x3C00)] public RecipeNote RecipeNote;
 
     [FieldOffset(0xA828)] public Director* ActiveDirector;
@@ -27,17 +27,17 @@ public unsafe partial struct UIState
 
     [FieldOffset(0xAAB8)] public Map Map;
 
-    [FieldOffset(0xEAA0)] public MarkingController MarkingController;
+    [FieldOffset(0xEA40)] public MarkingController MarkingController;
 
     [FieldOffset(0x11AF0)] public ContentsFinder ContentsFinder;
 
     // Ref: UIState#IsUnlockLinkUnlocked (relative to uistate)
-    [FieldOffset(0x169E4)] public fixed byte UnlockLinkBitmask[0x7E];
+    [FieldOffset(0x169FC)] public fixed byte UnlockLinkBitmask[0x7E];
     
     // Ref: g_Client::Game::UI::UnlockedCompanionsMask
     //      direct ref: 48 8D 0D ?? ?? ?? ?? 0F B6 04 08 84 D0 75 10 B8 ?? ?? ?? ?? 48 8B 5C 24
     //      relative to uistate: E8 ?? ?? ?? ?? 84 C0 75 A6 32 C0 (case for 0x355)
-    [FieldOffset(0x16A62)] public fixed byte UnlockedCompanionsBitmask[0x3A];
+    [FieldOffset(0x16A7A)] public fixed byte UnlockedCompanionsBitmask[0x3A];
     
     [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B 8B ?? ?? ?? ?? 48 8B 01")]
     public static partial UIState* Instance();
@@ -49,18 +49,17 @@ public unsafe partial struct UIState
     /// Checks to see if an unlock link is unlocked, or if the passed value is greater than 0x10000, checks if the quest
     /// is completed.
     /// </summary>
-    /// <remarks>
-    /// Param <c>a3</c> is almost always set to <c>1</c>, except for a couple specific use cases around the Gathering
-    /// Notebook.
-    /// </remarks>
     /// <param name="unlockLinkOrQuestId">The unlock link or quest ID to check.</param>
-    /// <param name="a3">Unknown</param>
-    /// <param name="a4">Respect Unlock Link 245 (ignore quest status?) for quest-based checks.</param>
-
+    /// <param name="minQuestProgression">If the quest is not complete, check for <em>at least</em> this level of
+    /// progress in the quest (using <see cref="QuestManager.GetQuestSequence(ushort)"/>. If this parameter is <c>0</c>,
+    /// the quest must have been completed.</param>
+    /// <param name="a4">Exact purpose unknown, but appears to be a flag to respect Unlock Flag 245 (ignore quest
+    /// progression?) for quest-based checks. Virtually always <c>true</c> in game code.</param>
     /// <returns>Returns true if the unlock link is unlocked or if the quest is completed.</returns>
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 CE")]
-    public partial bool IsUnlockLinkUnlockedOrQuestCompleted(uint unlockLinkOrQuestId, byte a3 = 0, byte a4 = 1);
-    
+    public partial bool IsUnlockLinkUnlockedOrQuestCompleted(uint unlockLinkOrQuestId, byte minQuestProgression = 0,
+        bool a4 = true);
+
     /// <summary>
     /// Check an item (by EXD row) to see if the action associated with the item is unlocked or "obtained/registered."
     /// </summary>

@@ -31,20 +31,36 @@ public unsafe partial struct QuestManager
     [MemberFunction("E8 ?? ?? ?? ?? 41 88 84 2C")]
     public static partial bool IsQuestComplete(ushort questId);
     public static bool IsQuestComplete(uint questId) => IsQuestComplete((ushort)(questId & 0xFFFF));
-
+    
+    /**
+     * Get the current step in a specific quest. Will return 0 if the quest is not active (even if the quest has been
+     * completed prior).
+     * <param name="questId">The quest ID to check.</param>
+     * <returns>Returns a byte representing the current progression of the specified quest.</returns>
+     */
     [MemberFunction("E8 ?? ?? ?? ?? 3A 43 06")]
-    public static partial bool IsQuestCurrent(ushort questId);
-    public static bool IsQuestCurrent(uint questId) => IsQuestCurrent((ushort)(questId & 0xFFFF));
+    public static partial byte GetQuestSequence(ushort questId);
+    
+    /**
+     * <inheritdoc cref="QuestManager.GetQuestSequence(ushort)"/>
+     * <remarks>This is a helper method to handle trimming uints down to the game-requested ushort.</remarks>
+     */
+    public static byte GetQuestSequence(uint questId) => GetQuestSequence((ushort)(questId & 0xFFFF));
 
-    public byte GetQuestSequence(ushort questId) {
-	    var quest = GetQuestById(questId);
-	    return quest == null ? (byte)0 : quest->Sequence;
-    }
-
-    public bool IsQuestAccepted(ushort questId) {
-	    var quest = GetQuestById(questId);
-	    return quest != null && quest->Sequence != 0;
-    }
+    /**
+     * Checks if a specified quest has been accepted (and is active). This method does not check if the quest has been
+     * completed or not.
+     * <param name="questId">The quest ID to check.</param>
+     * <returns>Returns <c>true</c> if the quest has been accepted, <c>false</c> otherwise.</returns>
+     */
+    [MemberFunction("45 33 C0 48 8D 41 18 66 39 10")]
+    public partial bool IsQuestAccepted(ushort questId);
+    
+    /**
+     * <inheritdoc cref="QuestManager.IsQuestAccepted(ushort)"/>
+     * <remarks>This is a helper method to handle trimming uints down to the game-requested ushort.</remarks>
+     */
+    public bool IsQuestAccepted(uint questId) => this.IsQuestAccepted((ushort) (questId & 0xFFFF));
 
     public bool IsDailyQuestCompleted(ushort questId) {
 	    var quest = GetDailyQuestById(questId);

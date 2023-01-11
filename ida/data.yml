@@ -80,9 +80,9 @@ functions:
   0x14057BF10: Component::GUI::TextModuleInterface::GetTextLabelByID
   0x14065C980: ConvertLogMessageIdToCharaLogKind
   0x140742D70: ExecuteCommand
-#fail   0x140A54E30: CreateSelectYesno
+  0x140C784E0: CreateSelectYesno
   0x14082CD40: GetBeastTribeAllowance
-#fail   0x1410CC080: Client::UI::AddonHudLayoutScreen::MoveableAddonInfoStruct_UpdateAddonPosition
+  0x141184A00: Client::UI::AddonHudLayoutScreen::MoveableAddonInfoStruct_UpdateAddonPosition
   0x14125BEF0: Client::Graphics::Kernel::CreateShader # static function
   0x141268400: NormalizeCustomizeData
   0x141298F60: Client::Game::Control::InputManager::IsAutoRunning # static function, might belong in a different class.
@@ -291,8 +291,8 @@ classes:
     instances:
       - ea: 0x1421125D0
         pointer: False
-#    funcs:
-#fail       0x140CFAD80: GetRetainerBySortedIndex
+    funcs:
+      0x140D956D0: GetRetainerBySortedIndex
   Client::Game::Control::TargetSystem::ListFeeder:
     vtbls:
       - ea: 0x14192F820
@@ -438,8 +438,8 @@ classes:
       0x140906B50: GetPartyMemberByIndex
       0x140906BD0: GetPartyMemberByContentId
       0x140906AF0: GetPartyMemberByObjectId
-#fail       0x140C9C6B0: Create
-#fail       0x140C9C5F0: GetGroupManager
+      0x140B75760: Create
+      0x140B756A0: GetGroupManager
   Client::Game::Balloon:
     funcs:
       0x1413B6460: OpenBalloon
@@ -469,7 +469,7 @@ classes:
       0x14075DC40: GetSingleton
       0x1400AAB10: IsQuestComplete # static (questId)
       0x14082C700: IsQuestComplete1 # (this, questId)
-      0x14082CA80: IsQuestCurrent # static (questId)
+      0x14082CA80: GetQuestSequence # static (questId)
       0x14082C3F0: GetQuestIndex
       0x14082CB80: GetQuestClassJob
       0x14082C8B0: IsQuestAccepted
@@ -488,21 +488,21 @@ classes:
     instances:
       - ea: 0x14210A860
         pointer: True
-#    funcs:
-#fail       0x140C37E20: IsOutside
-#fail       0x140C37E30: IsInside
-#fail       0x140C37E40: IsInWorkshop
-#fail       0x140C386C0: HasHousePermissions
-#fail       0x140C37FB0: GetCurrentWard
-#fail       0x140C38010: GetCurrentFloor # 0 - Ground Level, 1 - Upstairs, 10 - Downstairs
-#fail       0x140C380A0: GetInvertedBrightness # 0-5, higher is darker
-#fail       0x140C5E9E0: IsSubmarineExplorationUnlocked # static
-#fail       0x140C5EA20: IsSubmarineExplorationUnlocked2 # static
-#fail       0x140C5EA80: GetSubmarineSurveyDuration # (unsigned __int8 point, __int16 speed) -> SurveyDuration (return is time in seconds)
-#fail       0x140C600F0: GetSubmarineVoyageDistance # (unsigned __int8 point, unsigned __int8 speed) -> VoyageDistance (return is integer)
-#fail       0x140C5FF50: GetSubmarineVoyageTime # (unsigned __int8 pointA, unsigned __int8 pointB, __int16 speed) -> VoyageTime (return is time in seconds)
-#fail       0x140C525C0: GetAirshipVoyageTimeAndDistance # (unsigned __int8 pointA, unsigned __int8 pointB, __int16 speed, _DWORD *voyageTime, int *voyageDistance)
-#fail       0x140C526E0: GetAirshipSurveyDuration # (unsigned __int8 point, __int16 speed) -> SurveyDuration (return is time in seconds)
+    funcs:
+      0x140B0F920: IsOutside
+      0x140B0F930: IsInside
+      0x140B0F940: IsInWorkshop
+      0x140B101C0: HasHousePermissions
+      0x140B0FAB0: GetCurrentWard
+      0x140B0FB10: GetCurrentFloor # 0 - Ground Level, 1 - Upstairs, 10 - Downstairs
+      0x140B0FBA0: GetInvertedBrightness # 0-5, higher is darker
+      0x140B36790: IsSubmarineExplorationUnlocked # static
+      0x140B367D0: IsSubmarineExplorationUnlocked2 # static
+      0x140B36830: GetSubmarineSurveyDuration # (unsigned __int8 point, __int16 speed) -> SurveyDuration (return is time in seconds)
+      0x140B37EA0: GetSubmarineVoyageDistance # (unsigned __int8 point, unsigned __int8 speed) -> VoyageDistance (return is integer)
+      0x140B37D00: GetSubmarineVoyageTime # (unsigned __int8 pointA, unsigned __int8 pointB, __int16 speed) -> VoyageTime (return is time in seconds)
+      0x140B2A0E0: GetAirshipVoyageTimeAndDistance # (unsigned __int8 pointA, unsigned __int8 pointB, __int16 speed, _DWORD *voyageTime, int *voyageDistance)
+      0x140B2A200: GetAirshipSurveyDuration # (unsigned __int8 point, __int16 speed) -> SurveyDuration (return is time in seconds)
   InventoryContainer:
     funcs:
       0x1406F4630: GetInventorySlot  # (this, slotIndex)
@@ -510,13 +510,13 @@ classes:
     instances:
       - ea: 0x14210AA30
         pointer: True
-#    funcs:
-#fail       0x140C9A150: ctor
-#fail       0x140C9A340: dtor
-#fail       0x140C97840: GetSingleton  # static
-#fail       0x140C994C0: LoadDemandResearchPacket
-#fail       0x140C99920: IsRecipeUnlocked # (this, recipeId)
-#fail       0x140C99950: IsPouchItemLocked # (this, pouchItemId)
+    funcs:
+      0x140B724A0: ctor
+      0x140B72700: dtor
+      0x140B6F660: GetSingleton  # static
+      0x140B70B50: LoadDemandResearchPacket
+      0x140B71A70: IsRecipeUnlocked # (this, recipeId)
+      0x140B71AA0: IsPouchItemLocked # (this, pouchItemId)
   Client::System::String::Utf8String:
     funcs:
       0x140059F30: ctor  # empty string ctor
@@ -596,7 +596,7 @@ classes:
       0x14097E3D0: ctor
       0x14096BBA0: SetUnlockLinkValue
       0x14096BC40: IsUnlockLinkUnlocked
-#fail       0x14095ED00: IsUnlockLinkUnlockedOrQuestCompleted
+      0x14096BC70: IsUnlockLinkUnlockedOrQuestCompleted
       0x14096DE60: IsEmoteUnlocked
       0x1413805D0: IsInstanceContentCompleted
   Client::Game::UI::PlayerState:
@@ -679,7 +679,7 @@ classes:
       0x140992C70: UseGeneralAction
       0x140993950: UseWaymarkAction
       0x140994440: CheckActionResources
-#fail       0x14098ADD0: GetActionStatus
+      0x140997E20: GetActionStatus
       0x140999BF0: CanUseAction
       0x14099A480: GetAdjustedActionId
       0x14099C4A0: UseAction
@@ -694,7 +694,7 @@ classes:
       0x14099E180: SwapBlueMageActionSlots
       0x14099E290: SetBlueMageActions
       0x1409A1D30: GetMaxCharges
-#fail       0x140984AE0: GetRecastGroup
+      0x140991BF0: GetRecastGroup
       0x1409970F0: GetRecastGroupDetail
       0x1409971C0: Update
       0x140997820: Initialize
@@ -943,7 +943,7 @@ classes:
     funcs:
       0x1404ADBF0: ctor
       0x1404ADD20: Initialize
-#fail       0x1404A5FF0: Raycast
+      0x1404AE1C0: Raycast
       0x141281210: Raycast1 # not sure where else to put those two for now
       0x141281260: Raycast2
   Common::Component::BGCollision::Object:
@@ -3674,7 +3674,7 @@ classes:
       2: dtor
     funcs:
       0x140942050: ctor
-#fail       0x140935750: IsSelectUseTicketInactive
+      0x1409421B0: IsSelectUseTicketInactive
       0x140942310: UpdatePlayerAetheryteList
       0x140942EB0: Teleport
       0x1409440F0: TeleportWithTicket
@@ -3683,20 +3683,20 @@ classes:
     vtbls:
       - ea: 0x1419A2D78
         base: Client::UI::Agent::AgentInterface
-#    funcs:
-#fail       0x1409B1BC0: ctor
-#fail       0x1409B8010: UpdateParty
-#fail       0x1409BBFB0: UpdateHotBar
-#fail       0x1409C9110: OpenContextMenuFromTarget
-#fail       0x1409CBF50: GetMainCommandString  # MainCommand exd
-#fail       0x1409CC290: OpenSystemMenu
+    funcs:
+      0x140BD7310: ctor
+      0x140BDD7F0: UpdateParty
+      0x140BE17C0: UpdateHotBar
+      0x140BEEED0: OpenContextMenuFromTarget
+      0x140BF1C90: GetMainCommandString  # MainCommand exd
+      0x140BF1FD0: OpenSystemMenu
   Client::UI::Agent::AgentChatLog:
     vtbls:
       - ea: 0x1419A3340
         base: Client::UI::Agent::AgentInterface
-#    funcs:
-#fail       0x1409E32D0: ctor
-#fail       0x1409E8450: InsertTextCommandParam
+    funcs:
+      0x140C09820: ctor
+      0x140C0E9F0: InsertTextCommandParam
   Client::UI::Agent::AgentInventory:
     vtbls:
       - ea: 0x1419A2E00
@@ -3778,11 +3778,11 @@ classes:
     vtbls:
       - ea: 0x1419A55A0
         base: Client::UI::Agent::AgentInterface
-#    funcs:
-#fail       0x140AA0630: ctor
-#fail       0x140AA2B20: OpenBalloon
-#fail       0x140AA2FF0: CloseBalloon
-#fail       0x140AA3180: ResetBalloon
+    funcs:
+      0x140CC3280: ctor
+      0x140CC5810: OpenBalloon
+      0x140CC5CE0: CloseBalloon
+      0x140CC5E70: ResetBalloon
   Client::UI::Agent::AgentLoot:
     vtbls:
       - ea: 0x1419A4318
@@ -3977,9 +3977,9 @@ classes:
     vtbls:
       - ea: 0x1419A2FE0
         base: Client::UI::Agent::AgentInterface
-#    funcs:
-#fail       0x1409D5070: ctor
-#fail       0x1409D5B30: OpenRegistGearSetList # (this, InventoryItem*, ushort)
+    funcs:
+      0x140BFAF80: ctor
+      0x140BFBA40: OpenRegistGearSetList # (this, InventoryItem*, ushort)
   Client::UI::Agent::AgentSupportMain:
     vtbls:
       - ea: 0x14190EC08
@@ -4094,9 +4094,9 @@ classes:
     vtbls:
       - ea: 0x1419A5A28
         base: Client::UI::Agent::AgentInterface
-#    funcs:
+    funcs:
 #fail       0x140AD88B0: SalvageItem # (this, InventoryItem* ushort, byte)
-#fail       0x140AD8F40: LoadCategoryNames
+      0x140CD1280: LoadCategoryNames
 #fail       0x140AD8D50: ItemListRefresh # Clears item list and signals agent to update it next frame
 #fail       0x140AD9840: ItemListPopulate
 #fail       0x140AD9980: ItemListPopulateFromContainer
@@ -4206,9 +4206,9 @@ classes:
     vtbls:
       - ea: 0x1419A31C0
         base: Client::UI::Agent::AgentInterface
-#    funcs:
-#fail       0x1409DD730: ctor
-#fail       0x1409DD8C0: CompareItem
+    funcs:
+      0x140C03C80: ctor
+      0x140C03E10: CompareItem
   Client::UI::Agent::AgentDailyQuestSupply:
     vtbls:
       - ea: 0x1419A5D90
@@ -4761,10 +4761,10 @@ classes:
     vtbls:
       - ea: 0x1419A3790
         base: Client::UI::Agent::AgentInterface
-#    funcs:
-#fail       0x140A09DD0: ctor
-#fail       0x140A0A710: OpenRegularDuty
-#fail       0x140A0A8F0: OpenRouletteDuty
+    funcs:
+      0x140C30390: ctor
+      0x140C30CE0: OpenRegularDuty
+      0x140C30EC0: OpenRouletteDuty
   Client::UI::Agent::AgentMap::MapMarkerStructSearchName:
     vtbls:
       - ea: 0x1419A3CA0
@@ -4775,28 +4775,28 @@ classes:
     vtbls:
       - ea: 0x1419A3CB0
         base: Client::UI::Agent::AgentInterface
-#    funcs:
-#fail       0x140A26C00: ctor
-#fail       0x140A23100: AddGatheringTempMapMarker
-#fail       0x140A22400: OpenMap
-#fail       0x140A2DCE0: OpenMapByMapId
-#fail       0x140A23450: SetFlagMapMarker # (this, territoryId, mapId, (float)x, (float)y, iconId)
-#fail       0x140A2ADC0: AddMapMarker
-#fail       0x140A2B1C0: AddMiniMapMarker
-#fail       0x140A31DB0: CanUseTeleport # static
-#fail       0x140A2D040: ResetMapMarkers
-#fail       0x140A2D0B0: CreateMapMarkers
-#fail       0x140A2D890: ResetMiniMapMarkers
-#fail       0x140A2D8D0: CreateMiniMapMarkers
+    funcs:
+      0x140C4D2C0: ctor
+      0x140C49410: AddGatheringTempMapMarker
+      0x140C48610: OpenMap
+      0x140C54690: OpenMapByMapId
+      0x140C49750: SetFlagMapMarker # (this, territoryId, mapId, (float)x, (float)y, iconId)
+      0x140C517C0: AddMapMarker
+      0x140C51BC0: AddMiniMapMarker
+      0x140C59430: CanUseTeleport # static
+      0x140C539C0: ResetMapMarkers
+      0x140C53A30: CreateMapMarkers
+      0x140C54210: ResetMiniMapMarkers
+      0x140C54250: CreateMiniMapMarkers
   Client::UI::Agent::AgentRecipeNote:
     vtbls:
       - ea: 0x1419A52D8
         base: Client::UI::Agent::AgentInterface
-#    funcs:
-#fail       0x140A93D90: ctor
-#fail       0x140A95130: OpenRecipeByRecipeId
-#fail       0x140A95250: OpenRecipeByItemId
-#fail       0x140A9ACF0: SearchRecipe
+    funcs:
+      0x140CB69C0: ctor
+      0x140CB7D60: OpenRecipeByRecipeId
+      0x140CB7E80: OpenRecipeByItemId
+      0x140CBD920: SearchRecipe
   Client::UI::Agent::AgentRecipeTree:
     vtbls:
       - ea: 0x1419A5360
@@ -4867,9 +4867,9 @@ classes:
     vtbls:
       - ea: 0x1419A4C10
         base: Client::UI::Agent::AgentItemDetailBase
-#    funcs:
-#fail       0x140A68050: ctor
-#fail       0x140A68FA0: OnItemHovered
+    funcs:
+      0x140C8B7D0: ctor
+      0x140C8C720: OnItemHovered
   Client::UI::Agent::AgentStatus::StatusCharaView:
     vtbls:
       - ea: 0x1419A5628
@@ -4898,9 +4898,9 @@ classes:
     vtbls:
       - ea: 0x141990F48
         base: Client::UI::Agent::AgentInterface
-#    funcs:
-#fail       0x140BFC240: OpenCharaCardByContentId
-#fail       0x140BFC2C0: OpenCharaCardForObject
+    funcs:
+      0x140ADCA10: OpenCharaCardByContentId
+      0x140ADCA90: OpenCharaCardForObject
   Client::UI::Agent::AgentCharaCard::Storage:
     funcs:
       0x140AF5000: ctor
@@ -5190,9 +5190,9 @@ classes:
     vtbls:
       - ea: 0x1419CC7B0
         base: Component::GUI::AtkUnitBase
-#    funcs:
-#fail       0x140D37B20: ctor
-#fail       0x140D38820: UpdateResult
+    funcs:
+      0x140DD3100: ctor
+      0x140DD3E00: UpdateResult
   Client::UI::AddonSubmarinePartsMenu:
     vtbls:
       - ea: 0x1419D5310
@@ -5257,10 +5257,10 @@ classes:
     vtbls:
       - ea: 0x1419FAA40
         base: Component::GUI::AtkUnitBase
-#    funcs:
-#fail       0x140E5D530: ReceiveEvent_ClickSynthesizeButton
-#fail       0x140E5D580: ReceiveEvent_ClickQuickSynthesisButton
-#fail       0x140E5D5D0: ReceiveEvent_ClickTrialSynthesisButton
+    funcs:
+      0x140EF9D20: ReceiveEvent_ClickSynthesizeButton
+      0x140EF9D70: ReceiveEvent_ClickQuickSynthesisButton
+      0x140EF9DC0: ReceiveEvent_ClickTrialSynthesisButton
   Client::UI::Atk2DAreaMap:
     vtbls:
       - ea: 0x1419FB348
@@ -5373,16 +5373,16 @@ classes:
     vtbls:
       - ea: 0x141A08CD0
         base: Component::GUI::AtkUnitBase
-#    funcs:
-#fail       0x140EDC500: ctor
-#fail       0x140EDCC90: GenerateTooltip
+    funcs:
+      0x140F7BE70: ctor
+      0x140F7C600: GenerateTooltip
   Client::UI::AddonItemDetail:
     vtbls:
       - ea: 0x141A09188
         base: Component::GUI::AtkUnitBase
-#    funcs:
-#fail       0x140EDD2E0: ctor
-#fail       0x140EDE810: GenerateTooltip
+    funcs:
+      0x140F7CC50: ctor
+      0x140F7E180: GenerateTooltip
   Client::UI::AddonCharacterInspect:
     vtbls:
       - ea: 0x141A0A3E8
@@ -5419,10 +5419,10 @@ classes:
     vtbls:
       - ea: 0x141A11288
         base: Component::GUI::AtkUnitBase
-#    funcs:
-#fail       0x140F21C10: ctor
-#fail       0x140FE9CA0: ReceiveEvent_ToggleQuickGathering
-#fail       0x140F22410: ReceiveEvent_Gather
+    funcs:
+      0x140FC0540: ctor
+      0x14108BFD0: ReceiveEvent_ToggleQuickGathering
+      0x140FC0D40: ReceiveEvent_Gather
   Client::UI::AddonGatheringMasterpiece:
     vtbls:
       - ea: 0x141A114C0
@@ -5435,18 +5435,18 @@ classes:
     vtbls:
       - ea: 0x141A11B88
         base: Component::GUI::AtkUnitBase
-#    funcs:
-#fail       0x140F29E10: ctor
-#fail       0x140F2A0F0: SetCommonNamePlate  # x, y, scale, etc
-#fail       0x140F2A320: SetPlayerNamePlate # player specific nodes
-#fail       0x140F2CD00: ToggleTextRenderMode
+    funcs:
+      0x140FC8940: ctor
+      0x140FC8C20: SetCommonNamePlate  # x, y, scale, etc
+      0x140FC8E50: SetPlayerNamePlate # player specific nodes
+      0x140FCB830: ToggleTextRenderMode
   Client::UI::AddonTeleport:
     vtbls:
       - ea: 0x141A165A8
         base: Component::GUI::AtkUnitBase
-#    funcs:
-#fail       0x140F52CD0: ctor
-#fail       0x140F53940: ChangeTab
+    funcs:
+      0x140FF1AE0: ctor
+      0x140FF2760: ChangeTab
   Client::UI::AddonPicturePreview:
     vtbls:
       - ea: 0x141A19378
@@ -5720,8 +5720,8 @@ classes:
     vtbls:
       - ea: 0x141A489A8
         base: Component::GUI::AtkUnitBase
-#    funcs:
-#fail       0x14108C9E0: ResizeForPartySize
+    funcs:
+      0x141144B10: ResizeForPartySize
   Client::UI::AddonAllianceListX:
     vtbls:
       - ea: 0x141A48BE8
@@ -5770,12 +5770,12 @@ classes:
     vtbls:
       - ea: 0x141A51380
         base: Component::GUI::AtkUnitBase
-#    funcs:
-#fail       0x1410C8F50: ctor
-#fail       0x1410CDBC0: AddonOverlayMouseMovedEvent
-#fail       0x1410CDDF0: AddonOverlayMouseClickEvent
-#fail       0x1410CE1F0: AddonOverlayMouseReleaseEvent
-#fail       0x1410CFEA0: SetAddonScale
+    funcs:
+      0x1411818D0: ctor
+      0x141186590: AddonOverlayMouseMovedEvent
+      0x1411867C0: AddonOverlayMouseClickEvent
+      0x141186BC0: AddonOverlayMouseReleaseEvent
+      0x141188870: SetAddonScale
   Client::UI::AddonActionMenuReplaceList:
     vtbls:
       - ea: 0x141A3A5F8
