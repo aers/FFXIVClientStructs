@@ -5247,7 +5247,7 @@ classes:
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonMonsterNote:
     vtbls:
-      - ea: 0x1419E3780
+      - ea: 0x1419FA570
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonGatheringNoteBook:
     vtbls:
