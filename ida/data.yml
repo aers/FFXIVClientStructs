@@ -5504,15 +5504,15 @@ classes:
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonMJIHud:
     vtbls:
-      - ea: 0x141A2C730
+      - ea: 0x141A34A70
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonMJIPouch:
     vtbls:
-      - ea: 0x141A2CDD8
+      - ea: 0x141A34CA8
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonMJIRecipeNoteBook:
     vtbls:
-      - ea: 0x141A2AF90
+      - ea: 0x141A34EE0
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonMJIMissionComplete:
     vtbls:
@@ -5692,7 +5692,7 @@ classes:
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonDTR:
     vtbls:
-      - ea: 0x141A34A70
+      - ea: 0x141A476F8
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonCastBar:
     vtbls:
@@ -5819,7 +5819,7 @@ classes:
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonAOZContentBriefing:
     vtbls:
-      - ea: 0x141A1BBE8
+      - ea: 0x141A2A8E8
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonGcArmyExpeditionResult:
     vtbls:
