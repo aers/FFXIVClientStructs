@@ -52,10 +52,10 @@ public unsafe partial struct AgentMap
 
     [FieldOffset(0x59B0)] public byte MapMarkerCount;
     [FieldOffset(0x59B1)] public byte TempMapMarkerCount;
-    [FieldOffset(0x59B3)] public byte IsFlagMarkerSet;
-    [FieldOffset(0x59B5)] public byte MiniMapMarkerCount;
-    [FieldOffset(0x59BD)] public byte IsPlayerMoving;
-    [FieldOffset(0x59C5)] public byte IsControlKeyPressed;
+    [FieldOffset(0x59B5)] public byte IsFlagMarkerSet;
+    [FieldOffset(0x59B7)] public byte MiniMapMarkerCount;
+    [FieldOffset(0x59BF)] public byte IsPlayerMoving;
+    [FieldOffset(0x59C7)] public byte IsControlKeyPressed;
 
     public static AgentMap* Instance() => Framework.Instance()->GetUiModule()->GetAgentModule()->GetAgentMap();
 
