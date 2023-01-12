@@ -13,8 +13,8 @@ public unsafe partial struct Control
     //0x3EF0 Unk 0x560-0x5A0 byte class, movecontroller stuff
     //0x3F00 g_PlayerMoveController (0x3EF0 + 0x10) Client::Game::Control::MoveControl::MoveControllerSubMemberForMine
 
-    [FieldOffset(0x59E8)] public uint LocalPlayerObjectId;
-    [FieldOffset(0x59F0)] public BattleChara* LocalPlayer;
+    [FieldOffset(0x5A48)] public uint LocalPlayerObjectId;
+    [FieldOffset(0x5A50)] public BattleChara* LocalPlayer;
 
     [StaticAddress("4C 8D 35 ?? ?? ?? ?? 85 D2")]
     public static partial Control* Instance();
