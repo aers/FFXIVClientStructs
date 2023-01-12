@@ -13,13 +13,12 @@ public unsafe partial struct TargetSystem
     [FieldOffset(0xE0)] public GameObject* MouseOverNameplateTarget;
     [FieldOffset(0xF8)] public GameObject* FocusTarget;
     [FieldOffset(0x110)] public GameObject* PreviousTarget;
-    [FieldOffset(0x140)] public uint TargetObjectId;
-
+    [FieldOffset(0x140)] public GameObjectID TargetObjectId;
     [FieldOffset(0x148)] public GameObjectArray ObjectFilterArray0;
 
-    [FieldOffset(0x1A00)] public GameObjectArray ObjectFilterArray1;
-    [FieldOffset(0x2CA8)] public GameObjectArray ObjectFilterArray2;
-    [FieldOffset(0x3F50)] public GameObjectArray ObjectFilterArray3;
+    [FieldOffset(0x1A18)] public GameObjectArray ObjectFilterArray1;
+    [FieldOffset(0x2CD8)] public GameObjectArray ObjectFilterArray2;
+    [FieldOffset(0x3F98)] public GameObjectArray ObjectFilterArray3;
 
     [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 3B C6 0F 95 C0")]
     public static partial TargetSystem* Instance();
@@ -53,11 +52,11 @@ public unsafe partial struct TargetSystem
     }
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x12A8)]
+[StructLayout(LayoutKind.Explicit, Size = 0x12C0)]
 public unsafe struct GameObjectArray
 {
     [FieldOffset(0x00)] public int Length;
-    [FieldOffset(0x08)] public fixed long Objects[596];
+    [FieldOffset(0x08)] public fixed long Objects[599];
 
     public GameObject* this[int index]
     {
