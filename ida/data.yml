@@ -4321,14 +4321,18 @@ classes:
     vtbls:
       - ea: 0x14190C3B0
         base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentExplorationResultInterface:
+    vtbls:
+      - ea: 0x14190C678
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentAirShipExplorationResult:
     vtbls:
       - ea: 0x14190C700
-        base: Client::UI::Agent::AgentInterface
+        base: Client::UI::Agent::AgentExplorationResultInterface
   Client::UI::Agent::AgentSubmersibleExplorationResult:
     vtbls:
       - ea: 0x14190CAE0
-        base: Client::UI::Agent::AgentInterface
+        base: Client::UI::Agent::AgentExplorationResultInterface
   Client::UI::Agent::AgentLovmPaletteEdit:
     vtbls:
       - ea: 0x14199FF18
