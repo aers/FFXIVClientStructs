@@ -2910,7 +2910,7 @@ classes:
       186: OpenInventory
       187: CloseInventory
       188: IsInventoryOpen
-      189: ExecuteMainCommand
+      190: ExecuteMainCommand
       193: ShowRaceCountdownEnd
       197: IsDutyRaidFinderOpen
       221: ShowRaceCountdownStart

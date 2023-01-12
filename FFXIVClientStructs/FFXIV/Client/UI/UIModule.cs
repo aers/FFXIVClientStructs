@@ -190,7 +190,7 @@ public unsafe partial struct UIModule
     [GenerateCStrOverloads]
     public partial void ShowBattleTalkSound(byte* name, byte* text, float duration, int sound, byte style);
 
-    [VirtualFunction(189)]
+    [VirtualFunction(190)]
     public partial void ExecuteMainCommand(uint command);
 
     [MemberFunction("E8 ?? ?? ?? ?? 4D 39 BE")]
