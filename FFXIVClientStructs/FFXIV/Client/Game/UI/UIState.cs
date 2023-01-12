@@ -16,20 +16,20 @@ public unsafe partial struct UIState
     [FieldOffset(0xA18)] public WeaponState WeaponState;
     [FieldOffset(0xA38)] public PlayerState PlayerState;
     [FieldOffset(0x1208)] public Revive Revive;
-    [FieldOffset(0x1468)] public Telepo Telepo;
-    [FieldOffset(0x14C0)] public Cabinet Cabinet;
+    [FieldOffset(0x14A0)] public Telepo Telepo;
+    [FieldOffset(0x14F8)] public Cabinet Cabinet;
     [FieldOffset(0x1A90)] public Buddy Buddy;
     [FieldOffset(0x2A98)] public RelicNote RelicNote;
-    [FieldOffset(0x3C00)] public RecipeNote RecipeNote;
+    [FieldOffset(0x3C60)] public RecipeNote RecipeNote;
 
-    [FieldOffset(0xA828)] public Director* ActiveDirector;
-    [FieldOffset(0xA970)] public FateDirector* FateDirector;
+    [FieldOffset(0xA7C8)] public Director* ActiveDirector;
+    [FieldOffset(0xA910)] public FateDirector* FateDirector;
 
-    [FieldOffset(0xAAB8)] public Map Map;
+    [FieldOffset(0xAA58)] public Map Map;
 
     [FieldOffset(0xEA40)] public MarkingController MarkingController;
 
-    [FieldOffset(0x11AF0)] public ContentsFinder ContentsFinder;
+    [FieldOffset(0x11A88)] public ContentsFinder ContentsFinder;
 
     // Ref: UIState#IsUnlockLinkUnlocked (relative to uistate)
     [FieldOffset(0x169FC)] public fixed byte UnlockLinkBitmask[0x7E];
