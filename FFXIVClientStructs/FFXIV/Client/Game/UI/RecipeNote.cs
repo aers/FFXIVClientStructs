@@ -2,7 +2,7 @@
 
 // ctor E8 ?? ?? ?? ?? 48 8D 8B ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 8B ?? ?? ?? ?? E8 ?? ?? ?? ?? B9 ?? ?? ?? ?? 48 89 B3
 
-[StructLayout(LayoutKind.Explicit, Size = 0xB20)]
+[StructLayout(LayoutKind.Explicit, Size = 0x610)]
 public unsafe partial struct RecipeNote {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? 81 FE ?? ?? ?? ?? 75 0F")]
     public static partial RecipeNote* Instance();
@@ -11,10 +11,10 @@ public unsafe partial struct RecipeNote {
         
     [FieldOffset(0xB8)] public RecipeData* RecipeList;
 
-    [StructLayout(LayoutKind.Explicit, Size = 0x380)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x3B0)]
     public struct RecipeData {
         [FieldOffset(0x000)] public RecipeEntry* Recipes;
-        [FieldOffset(0x378)] public ushort SelectedIndex;
+        [FieldOffset(0x3A8)] public ushort SelectedIndex;
         public RecipeEntry* SelectedRecipe => Recipes + SelectedIndex;
     }
         
