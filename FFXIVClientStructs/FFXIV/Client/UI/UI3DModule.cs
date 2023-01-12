@@ -1,4 +1,4 @@
-﻿using FFXIVClientStructs.FFXIV.Client.Game.Character;
+using FFXIVClientStructs.FFXIV.Client.Game.Character;
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
 using FFXIVClientStructs.FFXIV.Common.Math;
 
@@ -78,23 +78,23 @@ public unsafe struct UI3DModule
     }
 
     [FieldOffset(0x10)] public UIModule* UIModule;
-    [FieldOffset(0x20)] public fixed byte ObjectInfoArray[596 * 0x60]; // array of Client::UI::UI3DModule::ObjectInfo
-    [FieldOffset(0xDFA0)] public fixed byte SortedObjectInfoPointerArray[596 * 0x8]; // array of Client::UI::UI3DModule::ObjectInfo*, distance sorted(?)
-    [FieldOffset(0xF240)] public int SortedObjectInfoCount;
+    [FieldOffset(0x20)] public fixed byte ObjectInfoArray[599 * 0x60]; // array of Client::UI::UI3DModule::ObjectInfo
+    [FieldOffset(0xE0C0)] public fixed byte SortedObjectInfoPointerArray[599 * 0x8]; // array of Client::UI::UI3DModule::ObjectInfo*, distance sorted(?)
+    [FieldOffset(0xF378)] public int SortedObjectInfoCount;
     [FieldOffset(0xF380)] public fixed byte NamePlateObjectInfoPointerArray[50 * 0x8]; // array of Client::UI::UI3DModule::ObjectInfo* for current nameplates
-    [FieldOffset(0xF520)] public int NamePlateObjectInfoCount;
-    // [FieldOffset(0xAED0)] public Bit NamePlateBits; // Client::System::Data::Bit
-    [FieldOffset(0xF400)] public fixed byte NamePlateObjectIdList[50 * 0x8]; // array of GameObjectID (see GameObject.cs), ObjectId = E0000000 means it is empty, matches the order of nameplate addon objects
-    [FieldOffset(0xF590)] public fixed byte NamePlateObjectIdList_2[50 * 0x8]; // seems to contain same data as above, but may be for working data
-    [FieldOffset(0xF720)] public fixed byte CharacterObjectInfoPointerArray[50 * 0x8]; // array of Client::UI::UI3DModule::ObjectInfo* for Characters on screen (players, attackable NPCs, etc)
-    [FieldOffset(0xF8B0)] public int CharacterObjectInfoCount;
-    [FieldOffset(0xF8B8)] public fixed byte MapObjectInfoPointerArray[68 * 0x8]; // array of Client::UI::UI3DModule::ObjectInfo* for objects displayed on minimap - summoning bells, mailboxes, etc
-    [FieldOffset(0xFAD8)] public int MapObjectInfoCount;
-    [FieldOffset(0xFAE0)] public ObjectInfo* TargetObjectInfo;
-    [FieldOffset(0xFAE8)] public fixed byte MemberInfoArray[48 * 0x28]; // array of Client::UI::UI3DModule::MemberInfo, size = max alliance size
-    [FieldOffset(0x10268)] public fixed byte MemberInfoPointerArray[48 * 0x8]; // array of Client::UI::UI3DModule::MemberInfo*
-    [FieldOffset(0x103E8)] public int MemberInfoCount;
-    [FieldOffset(0x103F0)] public fixed byte UnkInfoArray[30 * 0x40];
-    [FieldOffset(0x10B70)] public int UnkCount;
+    [FieldOffset(0xF510)] public int NamePlateObjectInfoCount;
+    // [FieldOffset(0xF518)] public Bit NamePlateBits; // Client::System::Data::Bit
+    [FieldOffset(0xF538)] public fixed byte NamePlateObjectIdList[50 * 0x8]; // array of GameObjectID (see GameObject.cs), ObjectId = E0000000 means it is empty, matches the order of nameplate addon objects
+    [FieldOffset(0xF6C8)] public fixed byte NamePlateObjectIdList_2[50 * 0x8]; // seems to contain same data as above, but may be for working data
+    [FieldOffset(0xF858)] public fixed byte CharacterObjectInfoPointerArray[50 * 0x8]; // array of Client::UI::UI3DModule::ObjectInfo* for Characters on screen (players, attackable NPCs, etc)
+    [FieldOffset(0xF9E8)] public int CharacterObjectInfoCount;
+    [FieldOffset(0xF950)] public fixed byte MapObjectInfoPointerArray[68 * 0x8]; // array of Client::UI::UI3DModule::ObjectInfo* for objects displayed on minimap - summoning bells, mailboxes, etc
+    [FieldOffset(0xFC10)] public int MapObjectInfoCount;
+    [FieldOffset(0xFC18)] public ObjectInfo* TargetObjectInfo;
+    [FieldOffset(0xFC20)] public fixed byte MemberInfoArray[48 * 0x28]; // array of Client::UI::UI3DModule::MemberInfo, size = max alliance size
+    [FieldOffset(0x103A0)] public fixed byte MemberInfoPointerArray[48 * 0x8]; // array of Client::UI::UI3DModule::MemberInfo*
+    [FieldOffset(0x10520)] public int MemberInfoCount;
+    [FieldOffset(0x10530)] public fixed byte UnkInfoArray[30 * 0x40];
+    [FieldOffset(0x10CB0)] public int UnkCount;
     // there's more after this
 }
