@@ -81,8 +81,8 @@ public unsafe struct UI3DModule
     [FieldOffset(0x20)] public fixed byte ObjectInfoArray[596 * 0x60]; // array of Client::UI::UI3DModule::ObjectInfo
     [FieldOffset(0xDFA0)] public fixed byte SortedObjectInfoPointerArray[596 * 0x8]; // array of Client::UI::UI3DModule::ObjectInfo*, distance sorted(?)
     [FieldOffset(0xF240)] public int SortedObjectInfoCount;
-    [FieldOffset(0xF248)] public fixed byte NamePlateObjectInfoPointerArray[50 * 0x8]; // array of Client::UI::UI3DModule::ObjectInfo* for current nameplates
-    [FieldOffset(0xF3D8)] public int NamePlateObjectInfoCount;
+    [FieldOffset(0xF380)] public fixed byte NamePlateObjectInfoPointerArray[50 * 0x8]; // array of Client::UI::UI3DModule::ObjectInfo* for current nameplates
+    [FieldOffset(0xF520)] public int NamePlateObjectInfoCount;
     // [FieldOffset(0xAED0)] public Bit NamePlateBits; // Client::System::Data::Bit
     [FieldOffset(0xF400)] public fixed byte NamePlateObjectIdList[50 * 0x8]; // array of GameObjectID (see GameObject.cs), ObjectId = E0000000 means it is empty, matches the order of nameplate addon objects
     [FieldOffset(0xF590)] public fixed byte NamePlateObjectIdList_2[50 * 0x8]; // seems to contain same data as above, but may be for working data
