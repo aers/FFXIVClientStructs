@@ -2909,8 +2909,8 @@ classes:
       184: ShowBattleTalkSound
       186: OpenInventory
       187: CloseInventory
-      188: IsInventoryOpen
-      189: ExecuteMainCommand
+      189: IsInventoryOpen
+      190: ExecuteMainCommand
       193: ShowRaceCountdownEnd
       197: IsDutyRaidFinderOpen
       221: ShowRaceCountdownStart
