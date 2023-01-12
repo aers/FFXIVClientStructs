@@ -57,7 +57,7 @@ public unsafe partial struct PlayerState
 
     [FieldOffset(0x4E1)] public fixed byte UnlockFlags[44];
 
-    [FieldOffset(0x712)] public fixed ushort DesynthesisLevels[8];
+    [FieldOffset(0x738)] public fixed uint DesynthesisLevels[8];
     
     [StaticAddress("48 8D 0D ?? ?? ?? ?? 4D 8B F9")]
     public static partial PlayerState* Instance();
