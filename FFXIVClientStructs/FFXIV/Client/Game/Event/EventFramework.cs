@@ -31,8 +31,13 @@ public unsafe partial struct EventFramework
     public partial PublicContentDirector* GetPublicContentDirector();
 
     public InstanceContentDeepDungeon* GetInstanceContentDeepDungeon() {
-	    var dir = GetInstanceContentDirector();
-	    return dir != null && dir->InstanceContentType == 9 ? (InstanceContentDeepDungeon*)dir : null;
+	    var director = (EventHandler*)GetContentDirector();
+	    if (director == null || director->Info.EventId.Type != EventHandlerType.InstanceContentDirector)
+		    return null;
+	    var instanceDirector = (InstanceContentDirector*)director;
+	    if (instanceDirector->InstanceContentType != 9)
+		    return null;
+	    return (InstanceContentDeepDungeon*)director;
     }
 
     [MemberFunction("E8 ?? ?? ?? ?? 32 C9 0F B6 D9")]
