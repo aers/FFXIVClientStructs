@@ -5021,6 +5021,14 @@ classes:
     vtbls:
       - ea: 0x14198D640
         base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentBannerParty:
+    vtbls:
+      - ea: 0x141A67150
+        base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentBannerMIP:
+    vtbls:
+      - ea: 0x141A67348
+        base: Client::UI::Agent::AgentInterface
   Client::Game::UI::GameEventCallback:
     vtbls:
       - ea: 0x141963108

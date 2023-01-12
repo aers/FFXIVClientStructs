@@ -485,5 +485,8 @@ public enum AgentId : uint {
     ArchiveItem = 418,
     VVDNotebook = 419,
     VVDFinder = 420,
-    TofuList = 421
+    TofuList = 421,
+    
+    BannerParty = 423,
+    BannerMIP = 424
 }
