@@ -4217,6 +4217,10 @@ classes:
     vtbls:
       - ea: 0x1419A60F8
         base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentPatchMark:
+    vtbls:
+      - ea: 0x1419A6D88
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentHousingWithdrawStorage:
     vtbls:
       - ea: 0x141A66EF0
@@ -4312,6 +4316,18 @@ classes:
   Client::UI::Agent::AgentCompanyCraftRecipeNotebook:
     vtbls:
       - ea: 0x14190C788
+        base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentAirShipParts:
+    vtbls:
+      - ea: 0x14190C3B0
+        base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentAirShipExplorationResult:
+    vtbls:
+      - ea: 0x14190C700
+        base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentSubmersibleExplorationResult:
+    vtbls:
+      - ea: 0x14190CAE0
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentLovmPaletteEdit:
     vtbls:
@@ -4452,6 +4468,10 @@ classes:
   Client::UI::Agent::AgentWeeklyPuzzle:
     vtbls:
       - ea: 0x141990650
+        base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentCameraSetting:
+    vtbls:
+      - ea: 0x1419A3670
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentPvPDuelRequest:
     vtbls:
@@ -4713,6 +4733,10 @@ classes:
     vtbls:
       - ea: 0x14198BE18
         base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentFittingShop:
+    vtbls:
+      - ea: 0x14198BE90
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentAkatsukiNote:
     vtbls:
       - ea: 0x14198BF88
@@ -4973,6 +4997,10 @@ classes:
     vtbls:
       - ea: 0x14198D398
         base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentMJISettings:
+    vtbls:
+      - ea: 0x14198CED0
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentArchiveItem:
     vtbls:
       - ea: 0x14198C1A0
@@ -4984,6 +5012,10 @@ classes:
   Client::UI::Agent::AgentVVDFinder:
     vtbls:
       - ea: 0x14198D428
+        base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentTofuList:
+    vtbls:
+      - ea: 0x14198D640
         base: Client::UI::Agent::AgentInterface
   Client::Game::UI::GameEventCallback:
     vtbls:
