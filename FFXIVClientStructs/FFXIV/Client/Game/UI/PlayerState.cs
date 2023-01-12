@@ -1,7 +1,7 @@
 ﻿namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
 //ctor 40 53 48 83 EC 20 48 8B D9 48 8D 81 ?? ?? ?? ?? BA
-[StructLayout(LayoutKind.Explicit, Size = 0x798)]
+[StructLayout(LayoutKind.Explicit, Size = 0x7D0)]
 public unsafe partial struct PlayerState
 {
     [FieldOffset(0x00)] public byte IsLoaded;
@@ -55,7 +55,7 @@ public unsafe partial struct PlayerState
 
     [FieldOffset(0x45C)] public short PlayerCommendations;
 
-    [FieldOffset(0x4E1)] public fixed byte UnlockFlags[44];
+    [FieldOffset(0x501)] public fixed byte UnlockFlags[44];
 
     [FieldOffset(0x738)] public fixed uint DesynthesisLevels[8];
     
