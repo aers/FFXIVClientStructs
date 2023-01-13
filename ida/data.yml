@@ -243,6 +243,10 @@ functions:
   0x141640000: OodleNetwork1UDP_State::Encode
   0x141640BD0: OodleNetwork1UDP_State::Normalize
   0x141641220: OodleNetwork1UDP_Train_State_Counting
+  0x141646190: OodleNetwork1TCP_Decode
+  0x1416461A0: OodleNetwork1TCP_Encode
+  0x1416461E0: OodleNetwork1TCP_Train
+  0x1416461D0: OodleNetwork1TCP_State_Size
   0x141646330: OodleNetwork1UDP_Decode
   0x141646380: OodleNetwork1UDP_Encode
   0x1416469D0: OodleNetwork1UDP_State_Size
