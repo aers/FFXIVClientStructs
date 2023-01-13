@@ -3,7 +3,7 @@ using FFXIVClientStructs.Interop;
 using PeNet;
 using PeNet.Header.Pe;
 
-Memory<byte> file = new Memory<byte>(File.ReadAllBytes(@"F:\xiv-dev\ew-exes\ffxiv_dx11_2022.10.26.0000.0000.exe"));
+Memory<byte> file = new Memory<byte>(File.ReadAllBytes(@"F:\xiv-dev\ew-exes\ffxiv_dx11_2023.01.11.0000.0000.exe"));
 PeFile peHeader = new PeFile(file.Span.ToArray());
 
 ImageSectionHeader textHeader = peHeader.ImageSectionHeaders![0];
@@ -24,7 +24,7 @@ unsafe
 
         Resolver.GetInstance.SetupSearchSpace(new IntPtr(bytes), relocFile.Length, (int) textHeader.VirtualAddress,
             (int) textHeader.VirtualSize, (int) dataHeader.VirtualAddress, (int) dataHeader.VirtualSize,
-            (int) rdataHeader.VirtualAddress, (int) rdataHeader.VirtualSize, new FileInfo("test.json"));
+            (int) rdataHeader.VirtualAddress, (int) rdataHeader.VirtualSize);
         
         var watch = new Stopwatch();
         watch.Start();
@@ -34,7 +34,7 @@ unsafe
 
         Console.WriteLine($"Resolved count: {Resolver.GetInstance.Addresses.Count(sig => sig.Value != 0)}");
 
-        foreach(var address in Resolver.GetInstance.Addresses)
+        foreach(var address in Resolver.GetInstance.Addresses.Where(address => address is StaticAddress))
             Console.WriteLine($"{address.Name} - {address.String} - {address.Value - new UIntPtr(bytes):X16}");
     }
 }

@@ -226,14 +226,25 @@ public sealed partial class Resolver
                         if (address is StaticAddress staticAddress)
                         {
                             int tempLocation = outLocation + staticAddress.Offset;
+                            //outLocation = 0;
 
                             do
                             {
+                                byte currentByte = targetSpan[tempLocation];
+                                byte secondByte = targetSpan[tempLocation + 1];
+                                // REX.W byte will always be there (64 bit addressing)
+                                // second byte should always be mov reg, mem || mov mem, reg || lea reg, mem
+                                if (currentByte is < 0x40 or > 0x4F && secondByte is not 0x89 or 0x8B or 0x8D)
+                                {
+                                    tempLocation++;
+                                    continue;
+                                }
+                                outLocation = BitConverter.ToInt32(targetSpan.Slice(tempLocation + 3, 4)) + tempLocation + 3 + 4;
                                 tempLocation++;
-                                outLocation = BitConverter.ToInt32(targetSpan.Slice(tempLocation, 4)) + tempLocation + 4;
                             }
                             while (!(outLocation >= _dataSectionOffset && outLocation <= _dataSectionOffset + _dataSectionSize)
                                    && !(outLocation >= _rdataSectionOffset && outLocation <= _rdataSectionOffset + _rdataSectionSize));
+
                         }
 
                         address.Value = (nuint) (_baseAddress + _textSectionOffset + outLocation);

@@ -17,7 +17,7 @@ public unsafe partial struct FateManager
     [FieldOffset(0xA8)] public ushort SyncedFateId;
     [FieldOffset(0xAC)] public byte FateJoined;
 
-    [StaticAddress("48 89 01 48 8B 3D ?? ?? ?? ?? 48 8B 87", 3, true)]
+    [StaticAddress("48 89 01 48 8B 3D ?? ?? ?? ?? 48 8B 87", isPointer: true)]
     public static partial FateManager* Instance();
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8D 4C 24 ?? 48 85 C0 75")]
