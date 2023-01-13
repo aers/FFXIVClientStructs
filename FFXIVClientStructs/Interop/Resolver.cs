@@ -234,7 +234,7 @@ public sealed partial class Resolver
                                 byte secondByte = targetSpan[tempLocation + 1];
                                 // REX.W byte will always be there (64 bit addressing)
                                 // second byte should always be mov reg, mem || mov mem, reg || lea reg, mem
-                                if (currentByte is < 0x40 or > 0x4F && secondByte is not 0x89 or 0x8B or 0x8D)
+                                if (currentByte is < 0x40 or > 0x4F && secondByte is not (0x89 or 0x8B or 0x8D))
                                 {
                                     tempLocation++;
                                     continue;
