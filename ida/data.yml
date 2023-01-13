@@ -99,7 +99,7 @@ functions:
   0x1412FCE40: lua_equal
   0x1412FCEA0: lua_error
   0x1412FCEB0: lua_gc
-#fail #fail   0x1412B0410: lua_getallocf
+  0x1412FD050: lua_getallocf
   0x1412FD070: lua_getfenv
   0x1412FD0F0: lua_getfield
   0x1412FD160: lua_getmetatable
@@ -137,7 +137,7 @@ functions:
   0x1412FDAC0: lua_rawseti
   0x1412FDB40: lua_remove
   0x1412FDB90: lua_replace
-#fail #fail   0x1412B1020: lua_setallocf
+  0x1412FDC60: lua_setallocf
   0x1412FDC80: lua_setfenv
   0x1412FDD20: lua_setfield
   0x1412FDD90: lua_setlevel
@@ -169,8 +169,7 @@ functions:
   0x14143A000: lua_setlocal
   0x1412FF520: luaL_openlibs
   0x1412FF710: luaL_addlstring
-#fail #fail   0x1412B2B70: luaL_addstring
-  0x1413007C0: luaL_openlib
+  0x1412FF7B0: luaL_addstring
   0x1412FF7D0: luaL_addvalue
   0x1412FF890: luaL_argerror
   0x1412FF980: luaL_buffinit
@@ -192,6 +191,7 @@ functions:
   0x1413006C0: luaL_loadstring
   0x141300700: luaL_newmetatable
   0x141300780: luaL_newstate
+  0x1413007C0: luaL_openlib
   0x141300940: luaL_optinteger
   0x1413009B0: luaL_optlstring
   0x141300A30: luaL_optnumber
@@ -234,7 +234,7 @@ functions:
   0x140615CC0: WorldToViewportPoint
   0x14071FA90: ObjectIdToPlayerObjectId # returns invalid id if objectid is not a player
   0x140747710: ProcessActorControlPacket
-#fail #fail   0x140C837D0: WorldToScreenPoint
+  0x140B5B4A0: WorldToScreenPoint
   0x14163C920: OodleNew # oodle code starts here
   0x14163C990: OodleDelete 
   0x14163C9C0: rrPrintf_v1 
@@ -518,7 +518,7 @@ classes:
       0x140B723B0: ctor
       0x140B72610: dtor
       0x140B6F570: GetSingleton  # static
-#fail       0x140B70B50: LoadDemandResearchPacket
+      0x140B71410: LoadDemandResearchPacket
       0x140B71980: IsRecipeUnlocked # (this, recipeId)
       0x140B719B0: IsPouchItemLocked # (this, pouchItemId)
   Client::System::String::Utf8String:
@@ -905,7 +905,7 @@ classes:
   Common::Component::Excel::ExcelModuleInterface: # these are two different classes
     vtbls:
       - ea: 0x141C8F620
-#fail       - ea: 0x141C83250
+      - ea: 0x141C8F6B0
         base: Common::Component::Excel::ExcelResourceListener
     vfuncs:
       1: GetSheetByIndex
@@ -1172,7 +1172,7 @@ classes:
       - ea: 0x1418E9F88
   Client::UI::Info::InfoProxyPageInterface:
     vtbls:
-#fail       - ea: 0x1418E9FF0
+      - ea: 0x1418E9FE8
         base: Client::UI::Info::InfoProxyInterface
   Common::Configuration::ConfigBase::ChangeEventInterface:
     vtbls:
@@ -2181,7 +2181,7 @@ classes:
       0x1404B44C0: GetRowBySheetNameAndRowId  # (ExdModule* this, char* pcszSheetName, int nRowId, ExcelSheet **ppOutSheet, IExcelRowWrapper **ppOutRowContainer) -> ExcelRow*
       0x1404B4540: GetRowBySheetNameAndRowIdAndSubRowId  # (ExdModule* this, char* pcszSheetName, int nRowId, short nSubRowId, ExcelSheet **ppOutSheet, IExcelRowWrapper **ppOutRowContainer) -> ExcelRow*
       0x1404B4790: GetRowBySheetNameAndRowIndex  # (ExdModule* this, char* pcszSheetName, int nRowIndex, ExcelSheet **ppOutSheet, IExcelRowWrapper **ppOutRowContainer) -> ExcelRow*
-#fail #fail       0x1404AC910: GetRowCountBySheet  # (ExdModule* this, ExcelSheet* pShet) -> int
+      0x1404B4AB0: GetRowCountBySheet  # (ExdModule* this, ExcelSheet* pShet) -> int
       0x1404B4AD0: GetRowCountBySheetIndex  # (ExdModule* this, int nSheetIndex) -> int
       0x1404B4A50: GetRowCountBySheetName  # (ExdModule* this, char* pcszName) -> int
       0x1404B4480: GetSheetByIndex  # (ExdModule* this, int nSheetIndex) -> ExcelSheet*
@@ -2393,7 +2393,7 @@ classes:
       0x140511060: SetRotation
       0x1405110D0: GetRotationDegrees
       0x140511100: SetRotationDegrees
-#fail #fail       0x140508A90: GetColor
+      0x140511180: GetColor
       0x1405111A0: SetColor
       0x1405111E0: SetAddRGB
       0x140511230: SetMultiplyRGB
@@ -3166,7 +3166,7 @@ classes:
       - ea: 0x14195E970
   Client::UI::Shell::RaptureShellCommandInterface:
     vtbls:
-#fail       - ea: 0x141952E30
+      - ea: 0x14195E980
         base: Component::Shell::ShellCommandInterface
   Client::UI::Shell::RaptureShellModule:
     vtbls:
@@ -3483,7 +3483,7 @@ classes:
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandHotbarBase:
     vtbls:
-#fail       - ea: 0x141955B78
+      - ea: 0x1419616C8
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandHotbar:
     vtbls:
@@ -4099,13 +4099,13 @@ classes:
       - ea: 0x1419B12A8
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x140AD87C0: SalvageItem # (this, InventoryItem* ushort, byte)
+      0x140CD0530: SalvageItem # (this, InventoryItem* ushort, byte)
       0x140CD1190: LoadCategoryNames
-#fail #fail       0x140AD8D50: ItemListRefresh # Clears item list and signals agent to update it next frame
-#fail #fail       0x140AD9840: ItemListPopulate
-#fail #fail       0x140AD9980: ItemListPopulateFromContainer
-#fail #fail       0x140AD9B50: ItemListPopulateEquipped
-#fail #fail       0x140AD9EC0: ItemListAdd # (this, meetLevel, containerId, slotIndex, itemId, exdRow, quantity)
+      0x140CD0930: ItemListRefresh # Clears item list and signals agent to update it next frame
+      0x140CD1B60: ItemListPopulate
+      0x140CD1CA0: ItemListPopulateFromContainer
+      0x140CD1E50: ItemListPopulateEquipped
+      0x140CD2110: ItemListAdd # (this, meetLevel, containerId, slotIndex, itemId, exdRow, quantity)
   Client::UI::Agent::AgentHousingBuddyList:
     vtbls:
       - ea: 0x141A72C08
@@ -4818,7 +4818,7 @@ classes:
       0x140C59340: CanUseTeleport # static
       0x140C538D0: ResetMapMarkers
       0x140C53940: CreateMapMarkers
-#fail       0x140C54210: ResetMiniMapMarkers
+      0x140C54120: ResetMiniMapMarkers
       0x140C54160: CreateMiniMapMarkers
   Client::UI::Agent::AgentRecipeNote:
     vtbls:
