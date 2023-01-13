@@ -1,4 +1,4 @@
-version: 2022.01.11.0000.0000
+version: 2023.01.11.0000.0000
 
 globals:
   0x1418E9B50: g_UIColorTable
@@ -5025,14 +5025,18 @@ classes:
     vtbls:
       - ea: 0x141999180
         base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentBannerInterface:
+    vtbls:
+      - ea: 0x141B58B58
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentBannerParty:
     vtbls:
       - ea: 0x141A73048
-        base: Client::UI::Agent::AgentInterface
+        base: Client::UI::Agent::AgentBannerInterface
   Client::UI::Agent::AgentBannerMIP:
     vtbls:
       - ea: 0x141A73248
-        base: Client::UI::Agent::AgentInterface
+        base: Client::UI::Agent::AgentBannerInterface
   Client::Game::UI::GameEventCallback:
     vtbls:
       - ea: 0x14196EDA0
