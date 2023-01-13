@@ -240,7 +240,7 @@ public sealed partial class Resolver
                                     continue;
                                 }
                                 outLocation = BitConverter.ToInt32(targetSpan.Slice(tempLocation + 3, 4)) + tempLocation + 3 + 4;
-                                tempLocation++;
+                                tempLocation += 7;
                             }
                             while (!(outLocation >= _dataSectionOffset && outLocation <= _dataSectionOffset + _dataSectionSize)
                                    && !(outLocation >= _rdataSectionOffset && outLocation <= _rdataSectionOffset + _rdataSectionSize));
