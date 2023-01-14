@@ -3,7 +3,7 @@
 /// <summary>
 ///     Manager struct (?) for Island Sanctuary (internally MJI).
 /// </summary>
-[StructLayout(LayoutKind.Explicit, Size = 0x328)]
+[StructLayout(LayoutKind.Explicit, Size = 0x378)]
 public unsafe partial struct MJIManager {
     /// <summary>
     ///     Reports if the player is currently on the Island Sanctuary.
@@ -28,29 +28,27 @@ public unsafe partial struct MJIManager {
     /// </summary>
     [FieldOffset(0x1C)] public uint CurrentModeItem;
 
-    // NOTE: At +0x28, there's a sub-structure of size A8 that has a lot of interesting things in it (namely, whatever
-    // happens to be below). For now, this struct is just going to be ignored, as it mostly seems to cause confusion
-    // when referring to the game code. That being said, it's possible to see how the struct is made by  taking a look
-    // at E8 ?? ?? ?? ?? 0F B6 8C 1C, which appears to be some kind of clone function.
-
+    // NOTE: There is a sub-struct present from 0x28 to 0xD7. It has a constructor at 45 33 C0 66 C7 01, and all offsets
+    // below will be relative *to the substruct*, so please do not panic! I'm choosing to not actually make this a
+    // true substruct because I honestly don't see the need and can't think of a good name for it.
     #region sub-struct at 0x28
 
     /// <summary>
     ///     The current Sanctuary Rank of the player's island. Controls what buildings/items/recipes are or aren't
     ///		available to the player, and represented by MJIRank.
     /// </summary>
-    [FieldOffset(0x29)] public byte CurrentRank;
+    [FieldOffset(0x28 + 0x01)] public byte CurrentRank;
 
     /// <summary>
     ///     The XP earned towards the next Island Sanctuary rank. Resets to 0 upon leveling up the Sanctuary. 
     /// </summary>
-    [FieldOffset(0x2C)] public uint CurrentXP;
+    [FieldOffset(0x28 + 0x04)] public uint CurrentXP;
 
     /// <summary>
     ///		The current progress of the player, as represented by MJIProgress. Appears to be bound to the island
     ///		sanctuary "tutorial" more than anything.
     /// </summary>
-    [FieldOffset(0x30)] public byte CurrentProgress;
+    [FieldOffset(0x28 + 0x08)] public byte CurrentProgress;
 
     /// <summary>
     ///     The current development level of the player's village on their island. Controls what building zones are
@@ -60,7 +58,7 @@ public unsafe partial struct MJIManager {
     ///     Allowed building locations are part of the MJIBuildingPlace (+0x10) and MJILandmarkPlace (+0x10) Lumina
     ///		sheets.
     /// </remarks>
-    [FieldOffset(0x31)] public byte VillageDevelopmentLevel;
+    [FieldOffset(0x28 + 0x09)] public byte VillageDevelopmentLevel;
 
     /// <summary>
     ///		A bitfield representing all unlocked key items (MJIKeyItem) for the player. Backing field for
@@ -69,15 +67,13 @@ public unsafe partial struct MJIManager {
     /// <remarks>
     ///		The index of this field will be (RowID - 1), so "Islekeep's Stone Hatchet" appears at position 0.
     /// </remarks>
-    [FieldOffset(0x35)] public ushort UnlockedKeyItems; // bitfield
+    [FieldOffset(0x28 + 0x0D)] public ushort UnlockedKeyItems; // bitfield
 
     /// <summary>
     ///		A bitfield representing if a specific recipe (MJIRecipe) is unlocked. Backing field for
     ///		<see cref="IsRecipeUnlocked"/>, which should be used where possible.
     /// </summary>
-    // This is a weird size for a bitfield, I suppose. It starts at 0x37, spans 17 elements (requiring a minimum of 3
-    // bytes), and is immediately followed by 0x3A. 
-    [FieldOffset(0x37)] public fixed byte UnlockedRecipes[3]; // bitfield
+    [FieldOffset(0x28 + 0x0F)] public fixed byte UnlockedRecipes[3]; // bitfield
 
     /// <summary>
     ///     An array of booleans representing if a specific item is (un)locked. Locked/unavailable items are set to true,
@@ -85,7 +81,7 @@ public unsafe partial struct MJIManager {
     ///     An item appears to be unlocked upon being gathered or crafted for the first time.
     ///     <seealso cref="IsPouchItemLocked" />
     /// </summary>
-    [FieldOffset(0x3A)] public fixed byte LockedPouchItems[67];
+    [FieldOffset(0x28 + 0x12)] public fixed byte LockedPouchItems[75];
 
     /// <summary>
     ///     The current number of hours remaining until a specific Landmark has finished construction.
@@ -95,21 +91,21 @@ public unsafe partial struct MJIManager {
     ///     
     ///     This array is indexed by the RowID of an MJILandmarkPlace.
     /// </summary>
-    [FieldOffset(0x8A)] public fixed byte LandmarkHoursToCompletion[4];
+    [FieldOffset(0x28 + 0x6C)] public fixed byte LandmarkHoursToCompletion[4];
     
     /// <summary>
     ///     The RowID of the MJILandmark present at a specific MJILandmarkPlace.
     ///     
     ///     This array is indexed by the RowID of an MJILandmarkPlace.
     /// </summary>
-    [FieldOffset(0x8E)] public fixed byte LandmarkIds[4];
+    [FieldOffset(0x28 + 0x70)] public fixed byte LandmarkIds[4];
     
     /// <summary>
     ///     The current construction status of a landmark at a specific MJILandmarkPlace.
     ///     
     ///     This array is indexed by the RowID of an MJILandmarkPlace.
     /// </summary>
-    [FieldOffset(0x92)] public fixed byte LandmarkUnderConstruction[4];
+    [FieldOffset(0x28 + 0x74)] public fixed byte LandmarkUnderConstruction[4];
 
     /// <summary>
     ///		A struct representing the current state of workshops present on the island. See the struct documentation
@@ -118,13 +114,13 @@ public unsafe partial struct MJIManager {
     ///     Note that this struct only provides mapping from a workshop ID to other data. If information about a
     ///     building at a specific location is desired, it may be better to use <see cref="Facility1"/> et al.
     /// </summary>
-    [FieldOffset(0x98)] public MJIWorkshops Workshops;
+    [FieldOffset(0x28 + 0x78)] public MJIWorkshops Workshops;
 
     /// <summary>
     ///		A struct representing the current state of granaries present on the island. See the struct documentation
     ///		for more information on how to access this data.
     /// </summary>
-    [FieldOffset(0xB0)] public MJIGranaries Granaries;
+    [FieldOffset(0x28 + 0x90)] public MJIGranaries Granaries;
 
     /// <summary>
     ///		The current level of the Cozy Cabin for the Island Sanctuary.
@@ -133,7 +129,7 @@ public unsafe partial struct MJIManager {
     ///		This field is offset by 1 compared to the level present in MJIBuildings. Cabin Level 3 will actually have
     ///		a value of 3 in this field. This is *probably* because Cabin Level 0 is "nonexistent"..?
     /// </remarks>
-    [FieldOffset(0xC8)] public byte CabinLevel;
+    [FieldOffset(0x28 + 0xA8)] public byte CabinLevel;
 
     /// <summary>
     ///		The current glamour cast on the Cozy Cabin (if any). Relates to the appropriate sub-row in MJIBuilding.
@@ -141,9 +137,10 @@ public unsafe partial struct MJIManager {
     /// <remarks>
     ///		This field is *not* offset by one like CabinLevel; Cabin Level 3 will report here as 2.
     /// </remarks>
-    [FieldOffset(0xC9)] public byte CabinGlamour;
+    [FieldOffset(0x28 + 0xA9)] public byte CabinGlamour;
 
-    #endregion End sub-struct (0xCF last byte)
+    #endregion End sub-struct (0xD7 last byte)
+    
     
     /// <summary>
     ///     A struct representing landmark placements on the Island Sanctuary. Each index represents a specific landmark
@@ -154,7 +151,7 @@ public unsafe partial struct MJIManager {
     ///     logic. To that end, this field doesn't actually seem authoritative for determining what's going on - see
     ///     <see cref="LandmarkIds"/> et al for what seems to be used by system logic.
     /// </remarks>
-    [FieldOffset(0x16C)] public MJILandmarkPlacements LandmarkPlacements;
+    [FieldOffset(0x184)] public MJILandmarkPlacements LandmarkPlacements;
     
     /// <summary>
     ///     A struct representing building placements on the Island Sanctuary. Each index represents a specific building
@@ -165,7 +162,49 @@ public unsafe partial struct MJIManager {
     ///     logic. To that end, this field doesn't actually seem authoritative for determining what's going on - see
     ///     <see cref="Granaries"/> and <see cref="Workshops"/> for what seems to be used by system logic.
     /// </remarks>
-    [FieldOffset(0x19C)] public MJIBuildingPlacements BuildingPlacements;
+    [FieldOffset(0x1B4)] public MJIBuildingPlacements BuildingPlacements;
+
+    /// <summary>
+    ///     A struct representing the cabin's placement, similar to the functionality of
+    ///     <see cref="MJIBuildingPlacements"/>.
+    /// </summary>
+    /// <remarks>
+    ///     Like <c>MJIBuildingPlacements</c>, the purpose of this field is unknown but it at least appears to behave
+    ///     like any other building placement.
+    /// </remarks>
+    [FieldOffset(0x204)] public MJIBuildingPlacement CabinPlacement;
+
+    /// <summary>
+    ///     A struct representing farm (garden/cropland) placements on the current Island Sanctuary.
+    /// </summary>
+    [FieldOffset(0x214)] public MJIFarmPasturePlacements FarmPlacements;
+    
+    /// <summary>
+    ///     A struct representing pasture placements on the current Island Sanctuary. Identical in behavior (hopefully)
+    ///     to that of <see cref="FarmPlacements"/>
+    /// </summary>
+    [FieldOffset(0x238)] public MJIFarmPasturePlacements PasturePlacements;
+
+    /// <summary>
+    ///     A reference to the current set of popularity scores given to craftworks on the player's island. The actual
+    ///     popularity scores can be pulled from the MJICraftworksPopularity sheet using this value as a Row ID.
+    /// </summary>
+    [FieldOffset(0x270)] public byte CurrentPopularity;
+
+    /// <summary>
+    ///     A reference to the next cycle's popularity scores (called "predicted demand" in-game). Follows the same rules
+    ///     as <see cref="CurrentPopularity" />.
+    /// </summary>
+    [FieldOffset(0x271)] public byte NextPopularity;
+
+    /// <summary>
+    ///     An array of bytes representing the current supply and demand shift for each craftwork that the player can
+    ///     create. Information for a specific item can be retrieved by querying the RowID for the item under inspection.
+    ///     <br /><br />
+    ///     The current supply value is stored in the upper half of each byte, while the current demand shift is stored in
+    ///     the lower half.
+    /// </summary>
+    [FieldOffset(0x272)] public fixed byte SupplyAndDemandShifts[71]; // Maybe 72?
     
     /// <summary>
     ///     The current day in the Craftworks cycle, from 0 to 6.
@@ -173,7 +212,7 @@ public unsafe partial struct MJIManager {
     /// <remarks>
     ///     0 represents reset day (Tuesday).
     /// </remarks>
-    [FieldOffset(0x27A)] public byte CurrentCycleDay;
+    [FieldOffset(0x306)] public byte CurrentCycleDay;
     
     /// <summary>
     ///     An array containing the currently-configured rest days for the Isleworks. Contains values 0 - 13, and is
@@ -183,7 +222,7 @@ public unsafe partial struct MJIManager {
     ///     Like CurrentCycleDay, 0 represents Reset Day. 7, likewise, represents the next reset. This field may not be
     ///     populated until the Craftworks have been opened at least once.
     /// </remarks>
-    [FieldOffset(0x27B)] public fixed byte CraftworksRestDays[4];
+    [FieldOffset(0x307)] public fixed byte CraftworksRestDays[4];
     
     /// <summary>
     ///     The current groove level of the Isleworks.
@@ -191,28 +230,7 @@ public unsafe partial struct MJIManager {
     /// <remarks>
     ///     May not be present until the Isleworks is loaded at least once by the player.
     /// </remarks>
-    [FieldOffset(0x2C8)] public uint CurrentGroove;
-
-    /// <summary>
-    ///     A reference to the current set of popularity scores given to craftworks on the player's island. The actual
-    ///     popularity scores can be pulled from the MJICraftworksPopularity sheet using this value as a Row ID.
-    /// </summary>
-    [FieldOffset(0x2E8)] public byte CurrentPopularity;
-
-    /// <summary>
-    ///     A reference to the next cycle's popularity scores (called "predicted demand" in-game). Follows the same rules
-    ///     as <see cref="CurrentPopularity" />.
-    /// </summary>
-    [FieldOffset(0x2E9)] public byte NextPopularity;
-
-    /// <summary>
-    ///     An array of bytes representing the current supply and demand shift for each craftwork that the player can
-    ///     create. Information for a specific item can be retrieved by querying the RowID for the item under inspection.
-    ///     <br /><br />
-    ///     The current supply value is stored in the upper half of each byte, while the current demand shift is stored in
-    ///     the lower half.
-    /// </summary>
-    [FieldOffset(0x2EA)] public fixed byte SupplyAndDemandShifts[62];
+    [FieldOffset(0x354)] public uint CurrentGroove;
 
     /// <summary>
     ///     Retrieve an instance of IslandSanctuaryManager for consumption.
@@ -277,7 +295,7 @@ public unsafe partial struct MJIManager {
 /// </summary>
 [StructLayout(LayoutKind.Sequential, Size = Size)]
 public unsafe struct MJIBuildingPlacements {
-    public const int Slots = 6;  // 5 facilities + one cabin
+    public const int Slots = 5;
     public const int Size = MJIBuildingPlacement.Size * Slots;
     
     private fixed byte data[Size];
@@ -286,9 +304,9 @@ public unsafe struct MJIBuildingPlacements {
     ///     Retrieve a specific MJIBuildingPlacement by facility ID.
     /// </summary>
     /// <remarks>
-    ///     The facility ID is shown in-game plus one, so Facility III is site ID 2. The Cozy Cabin is present at Site 5.
+    ///     The facility ID is shown in-game plus one, so Facility III is site ID 2.
     /// </remarks>
-    /// <param name="i">The Building Site ID to pull data for. Valid values are currently 0 to 5.</param>
+    /// <param name="i">The Building Site ID to pull data for. Valid values are currently 0 to 4.</param>
     public MJIBuildingPlacement* this[int i] {
         get {
             if (i < 0 || i >= Slots) return null;
@@ -313,15 +331,15 @@ public struct MJIBuildingPlacement {
     [FieldOffset(0x4)] public uint PlaceId;
 
     /// <summary>
-    ///		The current model (?) ID of the building present in this slot.
+    ///		The current SGB ID of this particular building.
     ///
     ///		When a building is fully constructed, this will be the value present at offset +0x0C from MJIBuilding. While
     ///		a building is under construction, however, the appropriate model (as determined by progress) will be shown
     ///		from columns +0E, +10, +12, or +14.
     ///
-    ///		Can also be a blank model ID, if nothing is built in that location yet.
+    ///		Can also be zero, if nothing is built in that location yet.
     /// </summary>
-    [FieldOffset(0x8)] public ushort BuildingTypeId;
+    [FieldOffset(0x8)] public ushort SgbId;
 }
 
 /// <summary>
@@ -462,6 +480,40 @@ public struct MJILandmarkPlacement {
     ///		The RowID of the landmark currently present at the specified location.
     /// </summary>
     [FieldOffset(0x9)] public byte LandmarkId;
+}
+
+[StructLayout(LayoutKind.Sequential, Size = Size)]
+public unsafe struct MJIFarmPasturePlacements {
+    public const int Slots = 3;  // three upgrades to each
+    public const int Size = MJIFarmPasturePlacement.Size * Slots;
+    
+    private fixed byte data[Size];
+
+    /// <summary>
+    ///     Retrieve a specific MJIFarmPasturePlacement by site ID.
+    /// </summary>
+    /// <param name="i">The Farm/Pasture Site ID to pull data for. Valid values are currently 0 to 5.</param>
+    public MJIFarmPasturePlacement* this[int i] {
+        get {
+            if (i < 0 || i >= Slots) return null;
+            fixed (byte* p = this.data) {
+                return (MJIFarmPasturePlacement*) (p + sizeof(MJIFarmPasturePlacement) * i);
+            }
+        }
+    }
+}
+
+/// <summary>
+///     A record of landmark population information at a specific Site ID. 
+/// </summary>
+[StructLayout(LayoutKind.Explicit, Size = Size)]
+public struct MJIFarmPasturePlacement {
+    public const int Size = 0xC;
+    
+    /// <summary>
+    ///		The SGB ID of the model to use for this location
+    /// </summary>
+    [FieldOffset(0x8)] public byte SgbId;
 }
 
 public enum CraftworkSupply {
