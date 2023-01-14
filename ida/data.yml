@@ -654,6 +654,16 @@ classes:
       0x140954B50: IsDungeonComplete
       0x140954B90: IsFateComplete
       0x140954BD0: IsLeveComplete
+  Client::Game::UI::AreaInstance:
+    vtbls:
+      - ea: 0x141996508
+    instances:
+      - ea: 0x1421016F8
+        pointer: False
+    funcs:
+      0x140958980: SetInstance
+      0x140958990: GetInstance
+      0x1409589A0: IsInstancedArea
   Client::Game::UI::MobHunt:
     vtbls:
       - ea: 0x141996568
