@@ -6,6 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 [StructLayout(LayoutKind.Explicit, Size = 0x7F0)]
 public unsafe partial struct ActionManager
 {
+    [FieldOffset(0x60)] public ComboDetail Combo;
     [FieldOffset(0x13C)] public fixed uint BlueMageActions[24];
 
     [StaticAddress("48 8D 0D ?? ?? ?? ?? F3 0F 10 13")]
@@ -79,6 +80,12 @@ public struct RecastDetail
     [FieldOffset(0x4)] public uint ActionID;
     [FieldOffset(0x8)] public float Elapsed;
     [FieldOffset(0xC)] public float Total;
+}
+
+[StructLayout(LayoutKind.Explicit, Size = 0x8)]
+public struct ComboDetail {
+    [FieldOffset(0x00)] public float Timer;
+    [FieldOffset(0x04)] public uint Action;
 }
 
 public enum ActionType : byte
