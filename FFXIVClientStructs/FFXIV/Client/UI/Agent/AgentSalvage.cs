@@ -13,7 +13,7 @@ public unsafe partial struct AgentSalvage {
     [FieldOffset(0x00)] public AgentInterface AgentInterface;
 
     [FieldOffset(0x30)] public SalvageItemCategory SelectedCategory;
-    [FieldOffset(0x38)] public void* ItemList; // Maybe?
+    [FieldOffset(0x38)] public SalvageListItem* ItemList;
     [FieldOffset(0x40)] public Utf8String TextCarpenter;
     [FieldOffset(0xA8)] public Utf8String TextBlacksmith;
     [FieldOffset(0x110)] public Utf8String TextArmourer;
@@ -24,13 +24,13 @@ public unsafe partial struct AgentSalvage {
     [FieldOffset(0x318)] public Utf8String TextCulinarian;
     [FieldOffset(0x380)] public uint ItemCount;
 
-    [FieldOffset(0x398)] public InventoryItem* DesynthItemSlot;
+    [FieldOffset(0x390)] public InventoryItem* DesynthItemSlot;
 
-    [FieldOffset(0x3B0)] public SalvageResult DesynthItem;
-    [FieldOffset(0x3BC)] public uint DesynthItemId;
+    [FieldOffset(0x398)] public SalvageResult DesynthItem;
+    [FieldOffset(0x3A4)] public uint DesynthItemId;
     
     [FixedArray(typeof(SalvageResult), 3)]
-    [FieldOffset(0x3C0)] public fixed byte DesynthResult[8 * 3];
+    [FieldOffset(0x3A8)] public fixed byte DesynthResult[8 * 3];
 
     public Span<SalvageResult> DesynthResultSpan {
         get {
@@ -54,6 +54,17 @@ public unsafe partial struct AgentSalvage {
         ArmouryNeckEars,
         ArmouryWristsRings,
         Equipped,
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x88)]
+    public struct SalvageListItem {
+        [FieldOffset(0x00)] public Utf8String Name;
+        [FieldOffset(0x68)] public InventoryType InventoryType;
+        [FieldOffset(0x6C)] public uint InventorySlot;
+        [FieldOffset(0x70)] public uint Quantity;
+        [FieldOffset(0x74)] public uint ItemId;
+        [FieldOffset(0x78)] public uint ClassJob;
+        [FieldOffset(0x7C)] public byte Flags;
     }
 }
 
