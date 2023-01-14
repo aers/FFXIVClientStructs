@@ -3,7 +3,7 @@
 [StructLayout(LayoutKind.Explicit, Size = 0x2E8)]
 public unsafe partial struct RetainerManager
 {
-    [StaticAddress("48 8D 0D ?? ?? ?? ?? 49 89 46")]
+    [StaticAddress("48 8D 0D ?? ?? ?? ?? 49 89 46", 3)]
     public static partial RetainerManager* Instance();
 
     [FieldOffset(0x000)] public RetainerList Retainer;

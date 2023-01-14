@@ -3,7 +3,7 @@
 [AttributeUsage(AttributeTargets.Method)]
 public class StaticAddressAttribute : Attribute
 {
-    public StaticAddressAttribute(string signature, int offset = 0, bool isPointer = false)
+    public StaticAddressAttribute(string signature, int offset, bool isPointer = false)
     {
         Signature = signature;
         Offset = offset;

@@ -11,6 +11,6 @@ public unsafe partial struct Control
     [FieldOffset(0x5A48)] public uint LocalPlayerObjectId;
     [FieldOffset(0x5A50)] public BattleChara* LocalPlayer;
 
-    [StaticAddress("4C 8D 35 ?? ?? ?? ?? 85 D2")]
+    [StaticAddress("4C 8D 35 ?? ?? ?? ?? 85 D2", 3)]
     public static partial Control* Instance();
 }

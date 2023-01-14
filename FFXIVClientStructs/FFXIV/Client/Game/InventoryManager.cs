@@ -25,7 +25,7 @@ public unsafe partial struct InventoryManager
     [MemberFunction("E8 ?? ?? ?? ?? 42 8B 74 A5")]
     public partial byte GetPermittedGearsetCount();
 
-    [StaticAddress("48 8D 0D ?? ?? ?? ?? 81 C2")]
+    [StaticAddress("48 8D 0D ?? ?? ?? ?? 81 C2", 3)]
     public static partial InventoryManager* Instance();
 }
 

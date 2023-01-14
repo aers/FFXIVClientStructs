@@ -11,7 +11,7 @@ public unsafe partial struct RelicNote
     [FieldOffset(0x0A)] public fixed byte MonsterProgress[10];
     [FieldOffset(0x14)] public int ObjectiveProgress;
 
-    [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 84 C0 74 7E")]
+    [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 84 C0 74 7E", 3)]
     public static partial RelicNote* Instance();
 
     public byte GetMonsterProgress(int index)

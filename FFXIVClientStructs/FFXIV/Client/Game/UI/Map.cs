@@ -35,6 +35,6 @@ public unsafe partial struct Map
         [FieldOffset(0x88)] public ushort RecommendedLevel;
     }
 
-    [StaticAddress("48 8D 0D ?? ?? ?? ?? 41 8B D4 66 89 44 24")]
+    [StaticAddress("48 8D 0D ?? ?? ?? ?? 41 8B D4 66 89 44 24", 3)]
     public static partial Map* Instance();
 }

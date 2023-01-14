@@ -26,6 +26,6 @@ public unsafe partial struct Device
     [FieldOffset(0x240)] public void* D3D11DeviceContext; // ID3D11DeviceContext5
     [FieldOffset(0x250)] public void* ImmediateContext; // Client::Graphics::Kernel::Device::ImmediateContext
 
-    [StaticAddress("48 8B 0D ?? ?? ?? ?? 48 8D 54 24 ?? F3 0F 10 44 24", isPointer: true)]
+    [StaticAddress("48 8B 0D ?? ?? ?? ?? 48 8D 54 24 ?? F3 0F 10 44 24", 3, isPointer: true)]
     public static partial Device* Instance();
 }

@@ -3,7 +3,7 @@
 [StructLayout(LayoutKind.Explicit, Size = 0x58D0)]
 public unsafe partial struct GameMain {
 
-	[StaticAddress("48 8D 0D ?? ?? ?? ?? 38 05")]
+	[StaticAddress("48 8D 0D ?? ?? ?? ?? 38 05", 3)]
 	public static partial GameMain* Instance();
 
 	[MemberFunction("E8 ?? ?? ?? ?? 44 8B B3 ?? ?? ?? ?? 33 FF")]

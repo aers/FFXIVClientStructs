@@ -200,11 +200,11 @@ Virtual functions are referenced via the index in the class's virtual table. The
 #### [StaticAddress]
 
 ```csharp
-public StaticAddressAttribute(string signature, int offset = 0, bool isPointer = false)
+public StaticAddressAttribute(string signature, int offset, bool isPointer = false)
 ```
 
 ```csharp
-[StaticAddress("44 0F B6 C0 48 8B 0D ?? ?? ?? ??", isPointer: true)]
+[StaticAddress("44 0F B6 C0 48 8B 0D ?? ?? ?? ??", 7, isPointer: true)]
 public static partial Framework* Instance();
 ```
 
@@ -230,7 +230,7 @@ Note that in this case the static address is a pointer, so the attribute argumen
 
 ##### Static Address Signatures
 
-The resolver reads static addresses by looking for `mov` or `lea` instructions that involve addresses in the binary's data and rdata sections. If you want to sig a static address, find one of these references to it and sig that. Your signature will most likely start with `48 8x` where x is 9, B, or D in these cases. I recommend using the resolver tester to verify static address signatures work as expected; while they should, we could have made an error in the resolver logic.
+Since the instructions resolved from static address signatures are variable length, an offset argument is required to tell the resolver where to read the static address location from in the signature. This offset is usually to the first (0-indexed) ?? in your signature, but could be further away in some situations.
 
 #### [GenerateCStrOverloads]
 

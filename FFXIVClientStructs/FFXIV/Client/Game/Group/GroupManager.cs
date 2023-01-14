@@ -19,7 +19,7 @@ public unsafe partial struct GroupManager
     [FieldOffset(0x3D60)] public byte Unk_3D60;
     [FieldOffset(0x3D61)] public byte AllianceFlags; // 0x01 == is alliance; 0x02 == alliance with 5 4-man groups rather than 2 8-man
 
-    [StaticAddress("33 D2 48 8D 0D ?? ?? ?? ?? 33 DB")]
+    [StaticAddress("33 D2 48 8D 0D ?? ?? ?? ?? 33 DB", 5)]
     public static partial GroupManager* Instance();
 
     [MemberFunction("E8 ?? ?? ?? ?? EB B8 E8")]

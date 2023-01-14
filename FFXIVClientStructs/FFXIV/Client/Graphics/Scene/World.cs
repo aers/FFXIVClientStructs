@@ -5,6 +5,6 @@ public unsafe partial struct World
 {
     [FieldOffset(0x00)] public Object Object;
 
-    [StaticAddress("48 8B 05 ?? ?? ?? ?? 48 8B 50 40", isPointer: true)]
+    [StaticAddress("48 8B 05 ?? ?? ?? ?? 48 8B 50 40", 3, isPointer: true)]
     public static partial World* Instance();
 }

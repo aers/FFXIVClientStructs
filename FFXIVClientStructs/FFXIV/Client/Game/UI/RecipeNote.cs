@@ -4,7 +4,7 @@
 
 [StructLayout(LayoutKind.Explicit, Size = 0x610)]
 public unsafe partial struct RecipeNote {
-    [StaticAddress("48 8D 0D ?? ?? ?? ?? 81 FE ?? ?? ?? ?? 75 0F")]
+    [StaticAddress("48 8D 0D ?? ?? ?? ?? 81 FE ?? ?? ?? ?? 75 0F", 3)]
     public static partial RecipeNote* Instance();
     
     [FieldOffset(0x00)] public fixed uint Jobs[8];  // CraftType -> ClassJob

@@ -59,7 +59,7 @@ public unsafe partial struct PlayerState
 
     [FieldOffset(0x738)] public fixed uint DesynthesisLevels[8];
     
-    [StaticAddress("48 8D 0D ?? ?? ?? ?? 4D 8B F9")]
+    [StaticAddress("48 8D 0D ?? ?? ?? ?? 4D 8B F9", 3)]
     public static partial PlayerState* Instance();
 
     public bool IsLegacy => (QuestSpecialFlags & 1) != 0;

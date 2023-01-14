@@ -9,7 +9,7 @@ public unsafe partial struct ActionManager
     [FieldOffset(0x60)] public ComboDetail Combo;
     [FieldOffset(0x13C)] public fixed uint BlueMageActions[24];
 
-    [StaticAddress("48 8D 0D ?? ?? ?? ?? F3 0F 10 13")]
+    [StaticAddress("48 8D 0D ?? ?? ?? ?? F3 0F 10 13", 3)]
     public static partial ActionManager* Instance();
 
     [MemberFunction("E8 ?? ?? ?? ?? EB 64 B1 01")]

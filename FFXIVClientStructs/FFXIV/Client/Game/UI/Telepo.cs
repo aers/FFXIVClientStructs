@@ -10,7 +10,7 @@ public unsafe partial struct Telepo
     [FieldOffset(0x10)] public StdVector<TeleportInfo> TeleportList;
     [FieldOffset(0x28)] public SelectUseTicketInvoker UseTicketInvoker;
 
-    [StaticAddress("48 8D 0D ?? ?? ?? ?? 48 8B 12")]
+    [StaticAddress("48 8D 0D ?? ?? ?? ?? 48 8B 12", 3)]
     public static partial Telepo* Instance();
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4B 10 84 C0 48 8B 01 74 2C")]

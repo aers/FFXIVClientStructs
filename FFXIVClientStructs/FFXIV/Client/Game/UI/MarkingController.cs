@@ -11,7 +11,7 @@ public unsafe partial struct MarkingController
 
 	[FieldOffset(0x1B0)] public fixed byte FieldMarkerArray[8 * 0x20];
 
-	[StaticAddress("48 8D 0D ?? ?? ?? ?? 4C 8B 85")]
+	[StaticAddress("48 8D 0D ?? ?? ?? ?? 4C 8B 85", 3)]
 	public static partial MarkingController* Instance();
 
 	public Span<FieldMarker> FieldMarkerSpan {

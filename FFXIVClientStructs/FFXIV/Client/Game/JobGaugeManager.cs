@@ -35,6 +35,6 @@ public unsafe partial struct JobGaugeManager
 
     [FieldOffset(0x58)] public byte ClassJobID;
 
-    [StaticAddress("48 8B 3D ?? ?? ?? ?? 33 ED")]
+    [StaticAddress("48 8B 3D ?? ?? ?? ?? 33 ED", 3)]
     public static partial JobGaugeManager* Instance();
 }
