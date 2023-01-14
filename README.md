@@ -162,3 +162,115 @@ public partial void AddEvent(ushort eventType, uint eventParam, global::FFXIVCli
 ```
 
 Note that the wrapper takes care of passing the object instance pointer (known as the `this` pointer) to the function for you. This allows you to call native functions on library struct types as if they were regular C# methods. Static functions do not pass an object instance and the generator will not do this if the method is marked static.
+
+#### [VirtualFunction]
+
+```csharp
+public VirtualFunctionAttribute(uint index)
+```
+```csharp
+[VirtualFunction(78)]
+public partial StatusManager* GetStatusManager();
+```
+
+Used for functions that are virtual members of native classes. 
+
+This will generate the following wrapper:
+
+```csharp
+[StructLayout(LayoutKind.Explicit)]
+public unsafe struct CharacterVTable
+{
+    [FieldOffset(624)] public delegate* unmanaged[Stdcall] <Character*, global::FFXIVClientStructs.FFXIV.Client.Game.StatusManager*> GetStatusManager;
+}
+
+[FieldOffset(0x0)] public CharacterVTable* VTable;
+  
+public partial global::FFXIVClientStructs.FFXIV.Client.Game.StatusManager* GetStatusManager()
+{
+    fixed(Character* thisPtr = &this)
+    {
+        return VTable->GetStatusManager(thisPtr);
+    }
+}
+```
+
+Virtual functions are referenced via the index in the class's virtual table. These cannot be static and always include the object instance pointer. Since these calls resolve the function pointer via the instance object's virtual table they will work the same way they do in native code and call the appropriate virtual overload for the class.
+
+#### [StaticAddress]
+
+```csharp
+public StaticAddressAttribute(string signature, int offset = 0, bool isPointer = false)
+```
+
+```csharp
+[StaticAddress("44 0F B6 C0 48 8B 0D ?? ?? ?? ??", isPointer: true)]
+public static partial Framework* Instance();
+```
+
+Used for returning the location of static objects in the binary. This is mostly used for returning the location of singletons that are accessed directly rather than via a function call. All of these methods should return a pointer.
+
+This will generate the following wrapper:
+
+```csharp
+public unsafe static class StaticAddressPointers
+{
+    public static global::FFXIVClientStructs.FFXIV.Client.System.Framework.Framework** ppInstance => (global::FFXIVClientStructs.FFXIV.Client.System.Framework.Framework**)Framework.Addresses.Instance.Value;
+}
+
+public static partial global::FFXIVClientStructs.FFXIV.Client.System.Framework.Framework* Instance()
+{
+    if (StaticAddressPointers.ppInstance is null)
+        throw new InvalidOperationException("Pointer for Framework.Instance is null. The resolver was either uninitialized or failed to resolve address with signature 44 0F B6 C0 48 8B 0D ?? ?? ?? ?? ?? ?? ?? ?? ??.");
+    return *StaticAddressPointers.ppInstance;
+}
+```
+
+Note that in this case the static address is a pointer, so the attribute argument isPointer is true and our pointer turns into a pointer to a pointer which is handled by the wrapper. Some static locations in the client are static instances which are allocated within the binary (`static GameMain GameMainInstance`) and some are static pointers to instances which are allocated on the heap at runtime (`static Framework* FrameworkInstance`). 
+
+##### Static Address Signatures
+
+The resolver reads static addresses by looking for `mov` or `lea` instructions that involve addresses in the binary's data and rdata sections. If you want to sig a static address, find one of these references to it and sig that. Your signature will most likely start with `48 8x` where x is 9, B, or D in these cases. I recommend using the resolver tester to verify static address signatures work as expected; while they should, we could have made an error in the resolver logic.
+
+#### [GenerateCStrOverloads]
+
+```csharp
+public GenerateCStrOverloadsAttribute(string? ignoreArgument = null)
+```
+
+```csharp
+[MemberFunction("E8 ?? ?? ?? ?? 48 8B F8 41 B0 01")]
+[GenerateCStrOverloads]
+public partial AtkUnitBase* GetAddonByName(byte* name, int index = 1);
+```
+
+Used to generate some useful overload methods for native functions that take C string arguments. C strings are null-terminated char (8-bit) arrays. Since the assembly has marshalling disabled, you cannot use `string` as an argument to function pointers, so all C string arguments must be declared as `byte*`, as mentioned earlier. This has two problems - it makes working with the methods annoying, and hides the fact that the argument is a character array. C# `char` type is 16-bit to match C#'s native UTF16 strings, so it can't be used instead.
+
+This generator will generate the following overloads:
+
+```csharp
+public global::FFXIVClientStructs.FFXIV.Component.GUI.AtkUnitBase* GetAddonByName(string name, int index = 1)
+{
+    int utf8StringLengthname = global::System.Text.Encoding.UTF8.GetByteCount(name);
+    Span<byte> nameBytes = utf8StringLengthname <= 512 ? stackalloc byte[utf8StringLengthname + 1] : new byte[utf8StringLengthname + 1];
+    global::System.Text.Encoding.UTF8.GetBytes(name, nameBytes);
+    nameBytes[utf8StringLengthname] = 0;
+
+    fixed (byte* namePtr = nameBytes)
+    {
+        return GetAddonByName(namePtr, index);
+    }
+}
+
+public global::FFXIVClientStructs.FFXIV.Component.GUI.AtkUnitBase* GetAddonByName(ReadOnlySpan<byte> name, int index = 1)
+{
+    fixed (byte* namePtr = name)
+    {
+        return GetAddonByName(namePtr, index);
+    }
+}
+```
+
+The `string` argument wrapper will take care of converting the string to bytes for you. Obviously, this adds overhead, but the runtime's marshalling would be doing the same thing anyway. The `ReadOnlySpan<byte>` overload mainly exists to allow passing of [UTF-8 string literals](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/proposals/csharp-11.0/utf8-string-literals?source=recommendations).
+
+This attribute is *not* meant to be used for C string returns; those will always return as `byte*` so as not to make assumptions about the memory lifetime of returned pointers.
