@@ -40,9 +40,11 @@ public sealed partial class Resolver
     private int _rdataSectionSize;
 
     private bool _hasResolved = false;
+    private bool _isSetup = false;
 
     public void SetupSearchSpace(nint moduleCopy = 0, FileInfo? cacheFile = null)
     {
+        if (_isSetup) return;
         ProcessModule? module = Process.GetCurrentProcess().MainModule;
         if (module == null)
             throw new Exception("[FFXIVClientStructs.Resolver] Unable to access process module.");
@@ -57,11 +59,13 @@ public sealed partial class Resolver
             LoadCache();
 
         SetupSections();
+        _isSetup = true;
     }
     
     public void SetupSearchSpace(nint memoryPointer, int memorySize, int textSectionOffset, int textSectionSize, 
         int dataSectionOffset, int dataSectionSize, int rdataSectionOffset, int rdataSectionSize, FileInfo? cacheFile = null)
     {
+        if (_isSetup) return;
         _baseAddress = memoryPointer;
         _targetSpace = memoryPointer;
         _targetLength = memorySize;
@@ -75,6 +79,7 @@ public sealed partial class Resolver
         _cacheFile = cacheFile;
         if (_cacheFile is not null)
             LoadCache();
+        _isSetup = true;
     }
 
     // adapted from Dalamud SigScanner
