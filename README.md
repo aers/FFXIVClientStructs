@@ -29,7 +29,7 @@ This project would not be possible without significant work from many members of
 
 ### Signature Resolution
 
-The library uses signatures to resovlve locations at runtime. In order to populate locations from signatures to call functions, you need to initialize the library once at load. However, if you're writing a Dalamud plugin using the built-in copy of the library, you can just reference it in the project and Dalamud will have already initialized it for you. 
+The library uses signatures to resolve locations at runtime. In order to populate locations from signatures to call functions, you need to initialize the library once at load. However, if you're writing a Dalamud plugin using the built-in copy of the library, you can just reference it in the project and Dalamud will have already initialized it for you. 
 
 The following code is only necessary if you are not using Dalamud or using a local copy of the library in your plugin.
 
