@@ -1,6 +1,4 @@
-﻿using FFXIVClientStructs.FFXIV.Client.Graphics.Render;
-
-namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
+﻿namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 // Client::Graphics::Scene::DrawObject
 //   Client::Graphics::Scene::Object
 // base class for all drawn graphics objects
@@ -11,5 +9,4 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 public unsafe struct DrawObject
 {
     [FieldOffset(0x0)] public Object Object;
-    [FieldOffset(0xA0)] public Skeleton* Skeleton;
 }
