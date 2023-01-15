@@ -26,13 +26,16 @@ public unsafe struct Texture
     [FieldOffset(0x3C)] public uint Height;
     [FieldOffset(0x40)] public uint Width2;
     [FieldOffset(0x44)] public uint Height2;
-    [FieldOffset(0x48)] public uint Depth; // for 3d textures like the material tiling texture
-    [FieldOffset(0x4C)] public byte MipLevel;
-    [FieldOffset(0x4D)] public byte Unk_35;
-    [FieldOffset(0x4E)] public byte Unk_36;
-    [FieldOffset(0x4F)] public byte Unk_37;
-    [FieldOffset(0x50)] public TextureFormat TextureFormat;
-    [FieldOffset(0x54)] public uint Flags;
+    [FieldOffset(0x48)] public uint Width3; // new in 6.3
+    [FieldOffset(0x4C)] public uint Height3; // new in 6.3
+    [FieldOffset(0x50)] public uint Depth; // for 3d textures like the material tiling texture
+    [FieldOffset(0x54)] public byte MipLevel;
+    [FieldOffset(0x55)] public byte Unk_55;
+    [FieldOffset(0x56)] public byte Unk_56;
+    [FieldOffset(0x57)] public byte Unk_57;
+    [FieldOffset(0x58)] public TextureFormat TextureFormat;
+    [FieldOffset(0x5C)] public uint Flags;
+    [FieldOffset(0x60)] public byte Unk_60; // new in 6.3, maybe a bool
     [FieldOffset(0x68)] public void* D3D11Texture2D; // ID3D11Texture2D1
     [FieldOffset(0x70)] public void* D3D11ShaderResourceView; // ID3D11ShaderResourceView1
 }
