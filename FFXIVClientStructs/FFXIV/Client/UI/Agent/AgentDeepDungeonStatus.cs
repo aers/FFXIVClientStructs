@@ -1,5 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-using FFXIVClientStructs.FFXIV.Client.System.Framework;
+﻿using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
@@ -22,11 +21,10 @@ public unsafe struct DeepDungeonStatusData {
 	[FieldOffset(0x04)] public uint MaxLevel;
 	[FieldOffset(0x08)] public uint ClassJobId;
 
+	[FixedSizeArray<DeepDungeonStatusItem>(16)]
 	[FieldOffset(0x18)] public fixed byte Pomander[16 * 0x70]; // 16 * DeepDungeonStatusItem
+	[FixedSizeArray<DeepDungeonStatusItem>(4)]
 	[FieldOffset(0x718)] public fixed byte Magicite[4 * 0x70]; // 4 * DeepDungeonStatusItem
-
-	public Span<DeepDungeonStatusItem> PomanderSpan => new(Unsafe.AsPointer(ref Pomander[0]), 16);
-	public Span<DeepDungeonStatusItem> MagiciteSpan => new(Unsafe.AsPointer(ref Magicite[0]), 4);
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x70)]

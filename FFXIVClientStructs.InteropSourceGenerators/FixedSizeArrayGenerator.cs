@@ -107,22 +107,7 @@ internal sealed class FixedSizeArrayGenerator : IIncrementalGenerator
 
         public void RenderFixedSizeArraySpan(IndentedStringBuilder builder)
         {
-            builder.AppendLine($"public Span<{TypeName}> {FieldName}Span");
-            builder.AppendLine("{");
-            builder.Indent();
-            builder.AppendLine("get");
-            builder.AppendLine("{");
-            builder.Indent();
-            builder.AppendLine($"fixed (byte* ptr = {FieldName})");
-            builder.AppendLine("{");
-            builder.Indent();
-            builder.AppendLine($"return new Span<{TypeName}>(ptr, {Count});");
-            builder.DecrementIndent();
-            builder.AppendLine("}");
-            builder.DecrementIndent();
-            builder.AppendLine("}");
-            builder.DecrementIndent();
-            builder.AppendLine("}");
+            builder.AppendLine($"public Span<{TypeName}> {FieldName}Span => new(Unsafe.AsPointer(ref {FieldName}[0]), {Count});");
         }
     }
 
@@ -132,14 +117,13 @@ internal sealed class FixedSizeArrayGenerator : IIncrementalGenerator
         {
             IndentedStringBuilder builder = new();
 
-            StructInfo.RenderStart(builder);
+            builder.AppendLine("using System.Runtime.CompilerServices;");
+
+            StructInfo.RenderStart(builder);            
             
             foreach (FixedSizeArrayInfo fsai in FixedSizeArrayInfos)
-            {
                 fsai.RenderFixedSizeArraySpan(builder);
-                builder.AppendLine();
-            }
-
+            
             StructInfo.RenderEnd(builder);
 
             return builder.ToString();

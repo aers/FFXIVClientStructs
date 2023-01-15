@@ -9,23 +9,18 @@ public unsafe partial struct QuestManager
 {
 	[FieldOffset(0x10)] public QuestListArray Quest;
 
+	[FixedSizeArray<QuestWork>(30)]
 	[FieldOffset(0x10)] public fixed byte NormalQuests[0x18 * 30];
-
+	[FixedSizeArray<DailyQuestWork>(12)]
 	[FieldOffset(0x560)] public fixed byte DailyQuests[0x10 * 12];
-
+	[FixedSizeArray<TrackingWork>(5)]
 	[FieldOffset(0x650)] public fixed byte TrackedQuests[0x10 * 5];
-
+	[FixedSizeArray<BeastReputationWork>(16)]
 	[FieldOffset(0xB60)] public fixed byte BeastReputation[0x10 * 16];
-
+	[FixedSizeArray<LeveWork>(16)]
 	[FieldOffset(0xC60)] public fixed byte LeveQuests[0x18 * 16];
 
-	public Span<QuestWork> QuestSpan => new(Unsafe.AsPointer(ref NormalQuests[0]), 30);
-	public Span<TrackingWork> TrackedQuestSpan => new(Unsafe.AsPointer(ref TrackedQuests[0]), 5);
-	public Span<DailyQuestWork> DailyQuestSpan => new(Unsafe.AsPointer(ref DailyQuests[0]), 12);
-	public Span<BeastReputationWork> BeastReputationSpan => new(Unsafe.AsPointer(ref BeastReputation[0]), 16);
-	public Span<LeveWork> LeveQuestSpan => new(Unsafe.AsPointer(ref LeveQuests[0]), 16);
-
-    [MemberFunction("E8 ?? ?? ?? ?? 66 BA 10 0C")]
+	[MemberFunction("E8 ?? ?? ?? ?? 66 BA 10 0C")]
     public static partial QuestManager* Instance();
 
     [MemberFunction("E8 ?? ?? ?? ?? 41 88 84 2C")]
@@ -68,7 +63,7 @@ public unsafe partial struct QuestManager
     }
 
     public QuestWork* GetQuestById(ushort questId) {
-	    var span = QuestSpan;
+	    var span = NormalQuestsSpan;
 	    for (var i = 0; i < span.Length; i++) {
 		    if (span[i].QuestId == questId)
 			    return (QuestWork*)Unsafe.AsPointer(ref span[i]);
@@ -77,7 +72,7 @@ public unsafe partial struct QuestManager
     }
 
     public DailyQuestWork* GetDailyQuestById(ushort questId) {
-	    var span = DailyQuestSpan;
+	    var span = DailyQuestsSpan;
 	    for (var i = 0; i < span.Length; i++) {
 		    if (span[i].QuestId == questId)
 			    return (DailyQuestWork*)Unsafe.AsPointer(ref span[i]);
@@ -86,7 +81,7 @@ public unsafe partial struct QuestManager
     }
 
     public LeveWork* GetLeveQuestById(ushort leveId) {
-        var span = LeveQuestSpan;
+        var span = LeveQuestsSpan;
 	    for (var i = 0; i < span.Length; i++) {
 		    if (span[i].LeveId == leveId)
 			    return (LeveWork*)Unsafe.AsPointer(ref span[i]);

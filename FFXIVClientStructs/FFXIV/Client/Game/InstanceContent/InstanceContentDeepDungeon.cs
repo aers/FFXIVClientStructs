@@ -1,13 +1,14 @@
-﻿using System.Runtime.CompilerServices;
-
-namespace FFXIVClientStructs.FFXIV.Client.Game.InstanceContent; 
+﻿namespace FFXIVClientStructs.FFXIV.Client.Game.InstanceContent; 
 
 [StructLayout(LayoutKind.Explicit, Size = 0x27D8)]
-public unsafe struct InstanceContentDeepDungeon {
+public unsafe partial struct InstanceContentDeepDungeon {
 	[FieldOffset(0x00)] public InstanceContentDirector InstanceContentDirector;
 
+	[FixedSizeArray<DeepDungeonPartyInfo>(4)]
 	[FieldOffset(0x1D40)] public fixed byte Party[0x08 * 4];
+	[FixedSizeArray<DeepDungeonItemInfo>(16)]
 	[FieldOffset(0x1D60)] public fixed byte Items[0x03 * 16];
+	[FixedSizeArray<DeepDungeonChestInfo>(16)]
 	[FieldOffset(0x1D90)] public fixed byte Chests[0x02 * 16];
 	
 	[FieldOffset(0x1DB8)] public uint BonusLootItemId;
@@ -18,10 +19,6 @@ public unsafe struct InstanceContentDeepDungeon {
 	[FieldOffset(0x1DC0)] public byte WeaponLevel;
 	[FieldOffset(0x1DC1)] public byte ArmorLevel;
 	[FieldOffset(0x1DC3)] public byte HoardCount;
-
-	public Span<DeepDungeonPartyInfo> PartySpan => new(Unsafe.AsPointer(ref Party[0]), 4);
-	public Span<DeepDungeonItemInfo> ItemSpan => new(Unsafe.AsPointer(ref Items[0]), 16);
-	public Span<DeepDungeonChestInfo> ChestSpan => new(Unsafe.AsPointer(ref Chests[0]), 16);
 
 	[StructLayout(LayoutKind.Explicit, Size = 0x08)]
 	public struct DeepDungeonPartyInfo {
