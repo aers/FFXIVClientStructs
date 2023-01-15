@@ -405,7 +405,13 @@ classes:
         pointer: False
     funcs:
       0x1412388C0: Initialize
-      0x141238A80: CreateCharacter
+      0x141238A80: CreateBattleCharacter
+      0x141238BF0: CreateEventObject
+      0x141238CD0: CreateAreaObject
+      0x141238DC0: DeleteObjectByIndex
+      0x141239140: GetObjectByIndex
+      0x141239260: GetIndexByObject
+      0x141239090: CalculateNextAvailableIndex
   Client::Game::Character::CharacterManager: # networked characters
     instances:
       - ea: 0x1420F5B10
