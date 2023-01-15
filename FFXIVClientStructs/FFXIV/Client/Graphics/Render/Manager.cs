@@ -5,7 +5,7 @@
 // size = 0x2D6C0
 // ctor 48 89 01 48 8D 59 08 
 [StructLayout(LayoutKind.Explicit, Size = 0x2D710)]
-public unsafe struct Manager
+public unsafe partial struct Manager
 {
     public enum RenderViews : uint
     {
@@ -66,5 +66,6 @@ public unsafe struct Manager
     }
 
     [FieldOffset(0x0)] public void* Vtbl;
+    [FixedSizeArray<View>(32)]
     [FieldOffset(0x8)] public fixed byte ViewArray[0x5A0 * 0x20]; // 32 Client::Graphics::Render::View
 }

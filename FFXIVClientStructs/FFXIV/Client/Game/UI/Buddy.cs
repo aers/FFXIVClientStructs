@@ -23,6 +23,7 @@ public unsafe partial struct Buddy
 
     [FieldOffset(0x0)] public BuddyMember Companion;
     [FieldOffset(0x198)] public BuddyMember Pet;
+    [FixedSizeArray<BuddyMember>(7)]
     [FieldOffset(0x330)] public fixed byte BattleBuddies[0x198 * 7]; // BuddyMember array for Squadron/Trust
     [FieldOffset(0xE58)] public BuddyMember* CompanionPtr;
     [FieldOffset(0xE58)] private fixed byte BuddyEquipUnlock[1];

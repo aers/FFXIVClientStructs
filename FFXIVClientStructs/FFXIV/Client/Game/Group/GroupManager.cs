@@ -5,7 +5,9 @@
 [StructLayout(LayoutKind.Explicit, Size = 0x3D70)]
 public unsafe partial struct GroupManager
 {
+    [FixedSizeArray<PartyMember>(8)]
     [FieldOffset(0x0)] public fixed byte PartyMembers[0x230 * 8]; // PartyMember type
+    [FixedSizeArray<PartyMember>(20)]
     [FieldOffset(0x1180)] public fixed byte AllianceMembers[0x230 * 20]; // PartyMember type
     [FieldOffset(0x3D40)] public uint Unk_3D40;
     [FieldOffset(0x3D44)] public ushort Unk_3D44;

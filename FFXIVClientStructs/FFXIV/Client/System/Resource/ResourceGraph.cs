@@ -25,16 +25,18 @@ public enum ResourceCategory
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0xC80)]
-public unsafe struct ResourceGraph
+public unsafe partial struct ResourceGraph
 {
     [StructLayout(LayoutKind.Explicit, Size = 0xA0)]
-    public struct CategoryContainer
+    public partial struct CategoryContainer
     {
-        [FieldOffset(0x0)] public fixed ulong CategoryMaps[0x14];
+        [FixedSizeArray<Pointer<CategoryMap>>(0x14)]
+        [FieldOffset(0x0)] public fixed byte CategoryMaps[0x8 * 0x14];
 
         [FieldOffset(0x0)] public CategoryMap* MainMap;
     }
 
+    [FixedSizeArray<CategoryContainer>(0x14)]
     [FieldOffset(0x0)] public fixed byte ContainerArray[0xA0 * 0x14];
 
     [FieldOffset(0x000)] public CategoryContainer CommonContainer;

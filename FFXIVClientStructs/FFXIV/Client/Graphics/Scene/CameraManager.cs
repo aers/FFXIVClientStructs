@@ -4,6 +4,7 @@
 public unsafe partial struct CameraManager {
 
 	[FieldOffset(0x50)] public int CameraIndex;
+	[FixedSizeArray<Pointer<Camera>>(14)]
 	[FieldOffset(0x58)] public fixed byte CameraArray[14 * 8]; //14 * Camera*
 
 	public Camera* CurrentCamera {
