@@ -4921,7 +4921,9 @@ classes:
   Client::UI::Agent::AgentGatheringNote:
     vtbls:
      - ea: 0x141997360
-       base: Client::UI::Agent::AgentInterface
+       base: Client::UI::Agent::AgentGatheringNote
+    funcs:
+      0x1409B47C0: OpenGatherableByItemId
   Client::UI::Agent::AgentMcguffin:
     vtbls:
       - ea: 0x14199BF18
