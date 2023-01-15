@@ -16,7 +16,7 @@ public enum TextureFormat : uint
 // renderer texture object, contains platform specific render objects (DX9/DX11/PS3/PS4)
 
 // size = 0xA8
-// ctor E8 ?? ?? ?? ?? 48 8B F8 48 85 C0 74 23 44 8B 43 40 
+// ctor E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 41 B9 ?? ?? ?? ?? 48 89 07 48 8B CF
 [StructLayout(LayoutKind.Explicit, Size = 0xC0)]
 public unsafe struct Texture
 {
@@ -33,6 +33,6 @@ public unsafe struct Texture
     [FieldOffset(0x4F)] public byte Unk_37;
     [FieldOffset(0x50)] public TextureFormat TextureFormat;
     [FieldOffset(0x54)] public uint Flags;
-    [FieldOffset(0x58)] public void* D3D11Texture2D; // ID3D11Texture2D1
-    [FieldOffset(0x60)] public void* D3D11ShaderResourceView; // ID3D11ShaderResourceView1
+    [FieldOffset(0x68)] public void* D3D11Texture2D; // ID3D11Texture2D1
+    [FieldOffset(0x70)] public void* D3D11ShaderResourceView; // ID3D11ShaderResourceView1
 }
