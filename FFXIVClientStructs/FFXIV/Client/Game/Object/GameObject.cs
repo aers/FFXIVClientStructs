@@ -47,6 +47,7 @@ public unsafe partial struct GameObject
     [FieldOffset(0x90)] public byte YalmDistanceFromPlayerX;
     [FieldOffset(0x91)] public byte TargetStatus; // Goes from 6 to 2 when selecting a target and flashing a highlight
     [FieldOffset(0x92)] public byte YalmDistanceFromPlayerZ;
+    [FieldOffset(0x95)] public ObjectTargetableFlags TargetableStatus; // Determines whether the game object can be targeted by the user
     [FieldOffset(0xB0)] public Vector3 Position;
     [FieldOffset(0xC0)] public float Rotation;
     [FieldOffset(0xC4)] public float Scale;
@@ -118,4 +119,11 @@ public enum ObjectKind : byte
     Cutscene = 13,
     CardStand = 14,
     Ornament = 15
+}
+
+[Flags]
+public enum ObjectTargetableFlags : byte
+{
+    IsTargetable = 2,
+    Unk1 = 4, // This flag is used but purpose is unclear
 }
