@@ -12,5 +12,5 @@ public unsafe partial struct AgentGatheringNote
     [FieldOffset(0x0)] public AgentInterface AgentInterface;
 
     [MemberFunction("E8 ?? ?? ?? ?? EB 63 48 83 F8")]
-    public partial void OpenRecipeByItemId(ushort itemID);
+    public partial void OpenGatherableByItemId(ushort itemID);
 }
