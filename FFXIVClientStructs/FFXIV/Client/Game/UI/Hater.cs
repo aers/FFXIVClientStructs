@@ -1,21 +1,11 @@
 ﻿namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x908)]
-public unsafe struct Hater
+public unsafe partial struct Hater
 {
+    [FixedSizeArray<HaterInfo>(32)]
     [FieldOffset(0x00)] public fixed byte HaterArray[0x48 * 32];
     [FieldOffset(0x900)] public int HaterArrayLength;
-
-    public ReadOnlySpan<HaterInfo> HaterSpan
-    {
-        get
-        {
-            fixed (byte* ptr = HaterArray)
-            {
-                return new ReadOnlySpan<HaterInfo>(ptr, HaterArrayLength);
-            }
-        }
-    }
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x48)]

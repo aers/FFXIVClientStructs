@@ -16,7 +16,7 @@ public unsafe struct AgentDeepDungeonStatus {
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x8D8)]
-public unsafe struct DeepDungeonStatusData {
+public unsafe partial struct DeepDungeonStatusData {
 	[FieldOffset(0x00)] public uint Level;
 	[FieldOffset(0x04)] public uint MaxLevel;
 	[FieldOffset(0x08)] public uint ClassJobId;
