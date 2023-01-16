@@ -30,14 +30,11 @@ public unsafe partial struct MiragePrismPrismBoxData {
 	[FieldOffset(0x1AA70)] public int CrystallizeCategory;
 	[FieldOffset(0x1AA74)] public int CrystallizeItemIndex;
 	[FieldOffset(0x1AA78)] public int CrystallizeItemCount;
-
 	[FixedSizeArray<PrismBoxCrystallizeItem>(140)]
 	[FieldOffset(0x1AA7C)] public fixed byte CrystallizeItems[140 * 0x1C]; // 140 * PrismBoxCrystallizeItem
 	[FieldOffset(0x1B9CC)] public PrismBoxCrystallizeItem CrystallizeSelectedItem;
 
-	[FieldOffset(0x1B9F4)] public byte FilterFlags;
-	[FieldOffset(0x1B9F5)] public byte SortOrder;
-
+	[FieldOffset(0x1B9F4)] public uint FilterFlags;
 	[FieldOffset(0x1B9F8)] public void* AgentCabinet;
 	[FieldOffset(0x1BA00)] public void* AgentMiragePrismMiragePlate;
 	[FieldOffset(0x1BA08)] public byte FilterLevel;
