@@ -120,6 +120,18 @@ public unsafe partial struct UIModule
     [VirtualFunction(66)]
     public partial void* GetLogFilterConfig();
 
+    [VirtualFunction(75)]
+    public partial bool EnterGPose();
+
+    [VirtualFunction(76)]
+    public partial void ExitGPose();
+
+    [VirtualFunction(78)]
+    public partial void EnterIdleCam(byte a1 = 0, ulong focusObject = 0xE0000000);
+
+    [VirtualFunction(79)]
+    public partial void ExitIdleCam();
+
     [VirtualFunction(140)]
     public partial void ToggleUi(UiFlags flags, bool enable, bool unknown = true);
     
