@@ -2883,6 +2883,10 @@ classes:
       66: GetLogFilterConfig
       68: EnableCutsceneInputMode
       69: DisableCutsceneInputMode
+      75: EnterGPose
+      76: ExitGPose
+      78: EnterIdleCam
+      79: ExitIdleCam
       88: ShowEurekaHud
       89: HideEurekaHud
       95: OpenMycInfo
