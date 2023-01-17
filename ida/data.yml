@@ -3896,6 +3896,10 @@ classes:
     vtbls:
       - ea: 0x1419983D0
         base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentRetainerItemTransfer:
+    vtbls:
+      - ea: 0x141A7D868
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentReturn:
     vtbls:
       - ea: 0x1419B0DA8

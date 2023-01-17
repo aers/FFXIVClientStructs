@@ -269,7 +269,9 @@ public enum AgentId : uint {
     RetainerStatus = 137,
     RetainerTask = 138,
     
-    RelicNotebook = 143, //+2
+    RetainerItemTransfer = 141,
+
+    RelicNotebook = 143,
     RelicSphere = 144,
     TradeMultiple = 145,
     RelicSphereUpgrade = 146,
@@ -297,7 +299,7 @@ public enum AgentId : uint {
     GoldSaucerMiniGame = 169,
     TrippleTriad = 170,
 
-    LotteryDaily = 178, //+3
+    LotteryDaily = 178,
     AetherialWheel = 179,
     LotteryWeekly = 180,
     GoldSaucer = 181,
