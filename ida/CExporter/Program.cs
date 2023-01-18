@@ -165,7 +165,6 @@ namespace CExporter
 
             StringBuilder sb = new StringBuilder();
 
-            string fixedName = FixFullName(type);
             sb.AppendLine($"struct {FixFullName(type)} /* Size=0x{structSize:X} */");
             sb.AppendLine("{");
 
@@ -285,8 +284,9 @@ namespace CExporter
             }
             else
             {
+                var underlyingType = type.GetEnumUnderlyingType();
                 var fixedTypeName = FixTypeName(type);
-                sb.AppendLine($"enum {fixedTypeName}");
+                sb.AppendLine($"enum {fixedTypeName} /* Size=0x{Marshal.SizeOf(underlyingType):X} */");
             }
 
             sb.AppendLine("{");
@@ -313,7 +313,7 @@ namespace CExporter
             if (KnownTypes.Contains(type))
                 return;
 
-             // Debug.WriteLine($"Processing Primitive: {type.FullName}");
+            // Debug.WriteLine($"Processing Primitive: {type.FullName}");
 
             KnownTypes.Add(type);
         }
@@ -335,7 +335,6 @@ namespace CExporter
                 fullName = generic.FullName.Split('`')[0];
                 foreach (var argType in type.GenericTypeArguments)
                 {
-                    
                     var argTypeFullName = FixFullName(argType).Replace("::", "");
                     fullName += $"{separator}{argTypeFullName}";
                 }
@@ -352,12 +351,25 @@ namespace CExporter
             if (fullName.Contains(InteropNamespacePrefix))
                 fullName = fullName.Remove(0, InteropNamespacePrefix.Length);
 
-            if (fullName.Contains("FFXIVClientStructs, Version")) {
-                if (fullName.EndsWith("*")) {
+            if (fullName.Contains("FFXIVClientStructs, Version"))
+            {
+                if (fullName.EndsWith("*"))
+                {
                     fullName = "void*";
-                } else {
+                }
+                else
+                {
                     throw new Exception($"Failed to fix name: {fullName}");
                 }
+            }
+
+            // This is a hack because Ghidra doesn't support specifying the enum size
+            // By appending 0x<size> on the enum name, it makes it easier to manually go
+            // in and fix the sizes up after the fact.
+            if (EnvFormat == EnvFormat.Ghidra && type.IsEnum)
+            {
+                var underlyingType = type.GetEnumUnderlyingType();
+                fullName += $"0x{Marshal.SizeOf(underlyingType):X}";
             }
 
             return fullName.Replace(".", separator).Replace("+", separator);
