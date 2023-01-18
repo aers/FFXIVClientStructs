@@ -1,0 +1,6 @@
+mode: ContinuousDeployment
+assembly-file-versioning-format: '{Major}.{Minor}.{Patch}.{CommitsSinceVersionSource}'
+assembly-informational-format: '{Major}.{Minor}.{Patch}.{CommitsSinceVersionSource}'
+branches: {}
+ignore:
+  sha: []
