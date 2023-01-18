@@ -16,6 +16,7 @@
     </PropertyGroup>
     <ItemGroup>
         <PackageReference Include="Serilog" Version="2.11.0" />
+        <PackageReference Include="GitVersion.MsBuild" Version="5.6.10*" PrivateAssets="All" />
         <ProjectReference Include="..\FFXIVClientStructs.InteropSourceGenerators\FFXIVClientStructs.InteropSourceGenerators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
     </ItemGroup>
 </Project>
