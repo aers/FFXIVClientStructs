@@ -3128,13 +3128,13 @@ classes:
       27: GetDrawObject
       28: GetDrawObject_2
       29: UpdateRadius
-      40: Update
-      48: GetNpcID
-      57: IsDead
-      58: IsNotMounted
-      59: Terminate
-      60: Destroy
-      61: IsCharacter
+      39: Update
+      47: GetNpcID
+      56: IsDead
+      57: IsNotMounted
+      58: Terminate
+      59: Destroy
+      60: IsCharacter
       68: OnInitialize
     funcs:
       0x14071F8E0: IsMountOrOrnament

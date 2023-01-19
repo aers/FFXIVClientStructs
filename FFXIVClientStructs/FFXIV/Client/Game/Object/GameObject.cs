@@ -117,8 +117,9 @@ public enum ObjectKind : byte
     AreaObject = 11,
     HousingEventObject = 12,
     Cutscene = 13,
-    CardStand = 14,
-    Ornament = 15
+    MjiObject = 14,
+    Ornament = 15,
+    CardStand = 16
 }
 
 [Flags]
