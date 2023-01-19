@@ -5151,6 +5151,10 @@ classes:
   Client::Game::Event::EventState:
     vtbls:
       - ea: 0x141975540
+  Client::Game::Event::EventGPoseController:
+    funcs:
+      0x1407DD7F0: AddObjectToGPose
+      0x1407DD970: RemoveObjectFromGPose
   Client::Game::Event::LeveDirector:
     vtbls:
       - ea: 0x1419776A8
