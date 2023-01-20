@@ -297,6 +297,12 @@ classes:
         pointer: False
     funcs:
       0x140D955E0: GetRetainerBySortedIndex
+      0x140D95620: GetRetainerByHiredIndex
+      0x140D95680: GetLastSelectedRetainer
+      0x140D956F0: SetLastSelectedRetainerId
+      0x140D95700: SetRetainerObjectId
+      0x140D95710: IsRetainerSummoned
+      0x140D95730: GetRetainerCount
   Client::Game::Control::TargetSystem::ListFeeder:
     vtbls:
       - ea: 0x14192F310

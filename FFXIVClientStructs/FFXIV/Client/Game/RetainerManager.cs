@@ -9,16 +9,32 @@ public unsafe partial struct RetainerManager
     [FieldOffset(0x000)] public RetainerList Retainer;
     [FieldOffset(0x2D0)] public fixed byte DisplayOrder[10];
     [FieldOffset(0x2DA)] public byte Ready;
+    [Obsolete("Use GetRetainerCount() instead.", true)]
     [FieldOffset(0x2DB)] public byte RetainerCount;
+    [FieldOffset(0x2DB)] public byte MaxRetainerEntitlement;
 
     /// <summary>
     /// Contains the Retainer.RetainerId of the last retainer to be selected.
     /// </summary>
     [FieldOffset(0x2E0)] public ulong LastSelectedRetainerId;
+    [FieldOffset(0x2E8)] public uint RetainerObjectId;
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 74 05 4C 39 20")]
     public partial RetainerList.Retainer* GetRetainerBySortedIndex(uint sortedIndex);
 
+    
+    /// <summary>
+    /// Counts the number of Retainers that have an assigned ID.
+    /// </summary>
+    [MemberFunction("E8 ?? ?? ?? ?? BA ?? ?? ?? ?? 48 8D 4C 24 ?? 8B F8 E8 ?? ?? ?? ?? 48 8B 4E 10 89 7C 24 68")]
+    public partial byte GetRetainerCount();
+    
+    /// <summary>
+    /// Will return the Retainer referenced by LastSelectedRetainerId.
+    /// </summary>
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 78 29")]
+    public partial RetainerList.Retainer* GetActiveRetainer();
+    
     [StructLayout(LayoutKind.Explicit, Size = 0x2D0)]
     public struct RetainerList
     {
