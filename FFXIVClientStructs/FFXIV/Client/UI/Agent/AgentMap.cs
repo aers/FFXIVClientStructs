@@ -14,19 +14,23 @@ public unsafe partial struct AgentMap
 {
     [FieldOffset(0x0)] public AgentInterface AgentInterface;
 
+    [FieldOffset(0x118)] public StdMap<uint, uint> SymbolMap; // Icon:MapSymbol
+
     [FieldOffset(0x158)] public Utf8String CurrentMapPath;
     [FieldOffset(0x1C0)] public Utf8String SelectedMapPath;
     [FieldOffset(0x228)] public Utf8String SelectedMapBgPath;
     [FieldOffset(0x290)] public Utf8String CurrentMapBgPath;
+    [FieldOffset(0x2F8), FixedSizeArray<Utf8String>(4)] public fixed byte MapSelectionStrings[4 * 0x68]; // 4 * Utf8String
+    [FieldOffset(0x498)] public Utf8String MapTitleString;
 
-    [FieldOffset(0x638)] public fixed byte MapMarkerInfoArray[0x48 * 132]; // 132 * MapMarkerInfo
-    [FieldOffset(0x2B58)] public fixed byte TempMapMarkerArray[0x108 * 12]; // 12 * TempMapMarker
+    [FieldOffset(0x638), FixedSizeArray<MapMarkerInfo>(132)] public fixed byte MapMarkerInfoArray[0x48 * 132]; // 132 * MapMarkerInfo
+    [FieldOffset(0x2B58), FixedSizeArray<TempMapMarker>(12)] public fixed byte TempMapMarkerArray[0x108 * 12]; // 12 * TempMapMarker
 
     [FieldOffset(0x37B8)] public FlagMapMarker FlagMapMarker;
 
-    [FieldOffset(0x3800)] public fixed byte WarpMarkerArray[0x38 * 12]; // 12 * MapMarkerBase
+    [FieldOffset(0x3800), FixedSizeArray<MapMarkerBase>(12)] public fixed byte WarpMarkerArray[0x38 * 12]; // 12 * MapMarkerBase
     [FieldOffset(0x3AA0)] public fixed byte UnkArray2[0xA8 * 6];
-    [FieldOffset(0x3E90)] public fixed byte MiniMapMarkerArray[0x40 * 100]; // 100 * MiniMapMarker
+    [FieldOffset(0x3E90), FixedSizeArray<MiniMapMarker>(100)] public fixed byte MiniMapMarkerArray[0x40 * 100]; // 100 * MiniMapMarker
 
     [FieldOffset(0x5838)] public float SelectedMapSizeFactorFloat;
     [FieldOffset(0x583C)] public float CurrentMapSizeFactorFloat;
@@ -50,8 +54,8 @@ public unsafe partial struct AgentMap
 
     [FieldOffset(0x5914)] public uint UpdateFlags;
 
-    [FieldOffset(0x59B0)] public byte MapMarkerCount;
-    [FieldOffset(0x59B1)] public byte TempMapMarkerCount;
+    [FieldOffset(0x59B2)] public byte MapMarkerCount;
+    [FieldOffset(0x59B3)] public byte TempMapMarkerCount;
     [FieldOffset(0x59B5)] public byte IsFlagMarkerSet;
     [FieldOffset(0x59B7)] public byte MiniMapMarkerCount;
     [FieldOffset(0x59BF)] public byte IsPlayerMoving;
