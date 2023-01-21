@@ -434,6 +434,23 @@ classes:
       0x140797B20: LookupBuddyByOwnerObject
       0x140797BA0: LookupPetByOwnerObject
       0x140797C80: LookupBattleNpcPartsByObjectId
+  Client::Game::RaceChocoboManager:
+    instances:
+      - ea: 0x142117a20
+        pointer: False
+    funcs:
+      0x140b3c2c0: Initialize
+      0x140b3c2f0: dtor
+      0x140b3ca80: GetAbility #(this,index)
+      0x140b3caa0: GetNamePart
+      0x140b3caf0: GetColor
+      0x140b3cb00: GetGear #(this,index)
+      0x140b3cb20: GetSessionsAvailable
+      0x140b3cb40: HasRank
+      # Not 100 confident what these 2 do
+      #0x140b3d030: GetAbilitySlotIfNotLearned
+      #0x140b3d060: GetAbilityIndexIfLearned
+      0x140b3d090: GetRank
   Client::Game::Group::GroupManager:
     instances:
       - ea: 0x142117AD0
@@ -5218,6 +5235,10 @@ classes:
   Client::UI::AddonSelectOk:
     vtbls:
       - ea: 0x1419D1B30
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonSelectOkTitle:
+    vtbls:
+      - ea: 0x14196DD90
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonContextMenu:
     vtbls:
