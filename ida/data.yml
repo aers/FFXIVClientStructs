@@ -22,6 +22,7 @@ globals:
   0x142100838: g_Client::Game::UI::Buddy.Pet.BuffList # not a pointer
   0x1421014F0: g_Client::Game::UI::Buddy.CompanionStats.TimeRemaining  # not a pointer
   0x142101540: g_Client::Game::UI::Buddy.BattleBuddyListPtr # Member of UIState
+  0x1421015F0: g_Client::Game::UI::ContentsNote
   0x142101698: g_Client::Game::UI::RelicNote # not a pointer
   # 0x14210D900: g_TitleController # commented out because it no longer has an xref
   0x14210D908: g_TitleList
