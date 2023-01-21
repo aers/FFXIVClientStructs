@@ -1218,6 +1218,12 @@ classes:
   Common::Configuration::ConfigBase::ChangeEventInterface:
     vtbls:
       - ea: 0x1418EA710
+  Client::UI::Info::InfoModule:
+    vtbls:
+      - ea: 0x1418EA098
+    funcs:
+      0x1400ABE30: ctor
+      0x1400ACAF0: GetInfoProxyById
   Client::UI::Info::InfoProxyCrossRealm:
     instances:
       - ea: 0x1420AAC98
@@ -2899,6 +2905,7 @@ classes:
       26: GetRaptureUiDataModule
       30: GetRaptureTeleportHistory
       32: GetRecommendedEquipModule
+      34: GetInfoModule
       36: GetAgentModule
       38: GetUI3DModule
       57: GetRetainerCommentModule
