@@ -25,22 +25,22 @@ public unsafe partial struct AgentInspect
     [FieldOffset(0x038)] public Utf8String SearchComment;
     [FieldOffset(0x0a0)] public Utf8String UnkString1;
     [FieldOffset(0x108)] public Utf8String PsnName; //OnlineID: XXXXXXXXX
-    [FieldOffset(0x170)] public Utf8String ChochoboBarding1;
-    [FieldOffset(0x1D8)] public Utf8String ChochoboBarding2;
-    [FieldOffset(0x240)] public Utf8String ChochoboBarding3;
+    [FieldOffset(0x170)] public Utf8String ChocoboBarding1;
+    [FieldOffset(0x1D8)] public Utf8String ChocoboBarding2;
+    [FieldOffset(0x240)] public Utf8String ChocoboBarding3;
     [FixedSizeArray<ItemData>(0xd)]
     [FieldOffset(0x2A8)] public fixed byte Items[0xd * 0x28]; //Size: 0x208
-    [FieldOffset(0x4B0)] public byte Unkown4b0; //Status or bool
+    [FieldOffset(0x4B0)] public byte Unknown4b0; //Status or bool
     [FieldOffset(0x4B0)] public FreeCompanyData FreeCompany;
-    [FieldOffset(0x536)] public short UnkOnbj536; //Maybe part of FC
+    [FieldOffset(0x536)] public short UnkObj536; //Maybe part of FC
     //Status fields
     //0: Nothing to do 1: Fetching Data; 2: Data ready (Fills window) 3: Probably failure
     [FieldOffset(0x538)] public uint FetchCharacterDataStatus;
     [FieldOffset(0x53c)] public uint FetchSearchCommentStatus;
     [FieldOffset(0x540)] public uint FetchFreeCompanyStatus;
-    [FieldOffset(0x544)] public uint UnkOnbj544; //Probably some status/type seen: 0,1 Set in Show : 0
-    [FieldOffset(0x548)] public void* UnkOnbj548; //Param1 to some func to get Searchmessage
-    [FieldOffset(0x550)] public uint UnkOnbj550; //Probably some status/type seen: 0,1 Set in Show : 0
+    [FieldOffset(0x544)] public uint UnkObj544; //Probably some status/type seen: 0,1 Set in Show : 0
+    [FieldOffset(0x548)] public void* UnkObj548; //Param1 to some func to get Searchmessage
+    [FieldOffset(0x550)] public uint UnkObj550; //Probably some status/type seen: 0,1 Set in Show : 0
 
     [StructLayout(LayoutKind.Explicit, Size = 0x86)]
     public struct FreeCompanyData
