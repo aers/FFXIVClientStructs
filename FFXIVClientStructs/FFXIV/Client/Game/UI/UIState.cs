@@ -21,7 +21,8 @@ public unsafe partial struct UIState
     [FieldOffset(0x1A90)] public Buddy Buddy;
     [FieldOffset(0x2A98)] public RelicNote RelicNote;
     [FieldOffset(0x2AF8)] public AreaInstance AreaInstance;
-    
+
+    [FieldOffset(0x29F0)] public ContentsNote ContentsNote;
     [FieldOffset(0x3C60)] public RecipeNote RecipeNote;
 
     [FieldOffset(0xA7C8)] public Director* ActiveDirector;
