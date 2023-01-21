@@ -151,7 +151,8 @@ public unsafe partial struct MJIManager {
     ///     logic. To that end, this field doesn't actually seem authoritative for determining what's going on - see
     ///     <see cref="LandmarkIds"/> et al for what seems to be used by system logic.
     /// </remarks>
-    [FieldOffset(0x184)] public MJILandmarkPlacements LandmarkPlacements;
+    [FixedSizeArray<MJILandmarkPlacement>(4)]
+    [FieldOffset(0x184)] public fixed byte LandmarkPlacements[4 * MJILandmarkPlacement.Size];
     
     /// <summary>
     ///     A struct representing building placements on the Island Sanctuary. Each index represents a specific building
@@ -162,7 +163,8 @@ public unsafe partial struct MJIManager {
     ///     logic. To that end, this field doesn't actually seem authoritative for determining what's going on - see
     ///     <see cref="Granaries"/> and <see cref="Workshops"/> for what seems to be used by system logic.
     /// </remarks>
-    [FieldOffset(0x1B4)] public MJIBuildingPlacements BuildingPlacements;
+    [FixedSizeArray<MJIBuildingPlacement>(5)]
+    [FieldOffset(0x1B4)] public fixed byte BuildingPlacements[5 * MJIBuildingPlacement.Size];
 
     /// <summary>
     ///     A struct representing the cabin's placement, similar to the functionality of
@@ -177,13 +179,15 @@ public unsafe partial struct MJIManager {
     /// <summary>
     ///     A struct representing farm (garden/cropland) placements on the current Island Sanctuary.
     /// </summary>
-    [FieldOffset(0x214)] public MJIFarmPasturePlacements FarmPlacements;
+    [FixedSizeArray<MJIFarmPasturePlacement>(3)]
+    [FieldOffset(0x214)] public fixed byte FarmPlacements[MJIFarmPasturePlacement.Size * 3];
     
     /// <summary>
     ///     A struct representing pasture placements on the current Island Sanctuary. Identical in behavior (hopefully)
     ///     to that of <see cref="FarmPlacements"/>
     /// </summary>
-    [FieldOffset(0x238)] public MJIFarmPasturePlacements PasturePlacements;
+    [FixedSizeArray<MJIFarmPasturePlacement>(3)]
+    [FieldOffset(0x238)] public fixed byte PasturePlacements[MJIFarmPasturePlacement.Size * 3];
 
     /// <summary>
     ///     A reference to the current set of popularity scores given to craftworks on the player's island. The actual
@@ -291,33 +295,6 @@ public unsafe partial struct MJIManager {
 }
 
 /// <summary>
-///     A helper struct that wraps an array of structs for <see cref="MJIBuildingPlacement"/>.
-/// </summary>
-[StructLayout(LayoutKind.Sequential, Size = Size)]
-public unsafe struct MJIBuildingPlacements {
-    public const int Slots = 5;
-    public const int Size = MJIBuildingPlacement.Size * Slots;
-    
-    private fixed byte data[Size];
-
-    /// <summary>
-    ///     Retrieve a specific MJIBuildingPlacement by facility ID.
-    /// </summary>
-    /// <remarks>
-    ///     The facility ID is shown in-game plus one, so Facility III is site ID 2.
-    /// </remarks>
-    /// <param name="i">The Building Site ID to pull data for. Valid values are currently 0 to 4.</param>
-    public MJIBuildingPlacement* this[int i] {
-        get {
-            if (i < 0 || i >= Slots) return null;
-            fixed (byte* p = data) {
-                return (MJIBuildingPlacement*) (p + sizeof(MJIBuildingPlacement) * i);
-            }
-        }
-    }
-}
-
-/// <summary>
 ///     A record of building population information at a specific Site ID. 
 /// </summary>
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
@@ -340,6 +317,32 @@ public struct MJIBuildingPlacement {
     ///		Can also be zero, if nothing is built in that location yet.
     /// </summary>
     [FieldOffset(0x8)] public ushort SgbId;
+}
+
+/// <summary>
+///     A record of landmark population information at a specific Site ID. 
+/// </summary>
+[StructLayout(LayoutKind.Explicit, Size = Size)]
+public struct MJILandmarkPlacement {
+    public const int Size = 0xC;
+    
+    /// <summary>
+    ///		The RowID of the landmark currently present at the specified location.
+    /// </summary>
+    [FieldOffset(0x9)] public byte LandmarkId;
+}
+
+/// <summary>
+///     A record of landmark population information at a specific Site ID. 
+/// </summary>
+[StructLayout(LayoutKind.Explicit, Size = Size)]
+public struct MJIFarmPasturePlacement {
+    public const int Size = 0xC;
+    
+    /// <summary>
+    ///		The SGB ID of the model to use for this location
+    /// </summary>
+    [FieldOffset(0x8)] public byte SgbId;
 }
 
 /// <summary>
@@ -443,77 +446,6 @@ public unsafe struct MJIGranaries {
         this.BuildingLevel[idx],
         this.UnderConstruction[idx] > 0
     );
-}
-
-/// <summary>
-///     A helper struct that wraps an array of structs for <see cref="MJILandmarkPlacement"/>.
-/// </summary>
-[StructLayout(LayoutKind.Sequential, Size = Size)]
-public unsafe struct MJILandmarkPlacements {
-    public const int Slots = 4;  // 4 landmarks
-    public const int Size = MJILandmarkPlacement.Size * Slots;
-    
-    private fixed byte data[Size];
-
-    /// <summary>
-    ///     Retrieve a specific MJILandmarkPlacement by site ID.
-    /// </summary>
-    /// <param name="i">The Landmark Site ID to pull data for. Valid values are currently 0 to 3.</param>
-    public MJILandmarkPlacement* this[int i] {
-        get {
-            if (i < 0 || i >= Slots) return null;
-            fixed (byte* p = data) {
-                return (MJILandmarkPlacement*) (p + sizeof(MJILandmarkPlacement) * i);
-            }
-        }
-    }
-}
-
-/// <summary>
-///     A record of landmark population information at a specific Site ID. 
-/// </summary>
-[StructLayout(LayoutKind.Explicit, Size = Size)]
-public struct MJILandmarkPlacement {
-    public const int Size = 0xC;
-    
-    /// <summary>
-    ///		The RowID of the landmark currently present at the specified location.
-    /// </summary>
-    [FieldOffset(0x9)] public byte LandmarkId;
-}
-
-[StructLayout(LayoutKind.Sequential, Size = Size)]
-public unsafe struct MJIFarmPasturePlacements {
-    public const int Slots = 3;  // three upgrades to each
-    public const int Size = MJIFarmPasturePlacement.Size * Slots;
-    
-    private fixed byte data[Size];
-
-    /// <summary>
-    ///     Retrieve a specific MJIFarmPasturePlacement by site ID.
-    /// </summary>
-    /// <param name="i">The Farm/Pasture Site ID to pull data for. Valid values are currently 0 to 5.</param>
-    public MJIFarmPasturePlacement* this[int i] {
-        get {
-            if (i < 0 || i >= Slots) return null;
-            fixed (byte* p = this.data) {
-                return (MJIFarmPasturePlacement*) (p + sizeof(MJIFarmPasturePlacement) * i);
-            }
-        }
-    }
-}
-
-/// <summary>
-///     A record of landmark population information at a specific Site ID. 
-/// </summary>
-[StructLayout(LayoutKind.Explicit, Size = Size)]
-public struct MJIFarmPasturePlacement {
-    public const int Size = 0xC;
-    
-    /// <summary>
-    ///		The SGB ID of the model to use for this location
-    /// </summary>
-    [FieldOffset(0x8)] public byte SgbId;
 }
 
 public enum CraftworkSupply {
