@@ -674,6 +674,11 @@ classes:
         pointer: False
     funcs:
       0x1409449A0: IsItemInCabinet        # item is a cabinet-specific ID, not generic Item.
+  Client::Game::UI::ContentsNote:
+    vtbls:
+      - ea: 0x1419964E0
+    funcs:
+      0x140954200: IsCategoryUnlocked
   Client::Game::UI::RelicNote:
     vtbls:
       - ea: 0x1419964E8
@@ -5246,8 +5251,8 @@ classes:
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonSelectOkTitle:
     vtbls:
-      - ea: 0x14196DD90
-        base: Component::GUI::AtkUnitBase
+      - ea: 0x1419D3670
+        base: Client::UI::AddonSelectOk
   Client::UI::AddonContextMenu:
     vtbls:
       - ea: 0x1419D1D90
