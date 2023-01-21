@@ -11,6 +11,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 // size = 0x8F0
 // ctor - E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 45 33 C0 48 89 03 BA ?? ?? ?? ?? 
 [StructLayout(LayoutKind.Explicit, Size = 0x8F0)]
+[VTableAddress("48 8d 05 ?? ?? ?? ?? 48 89 07 48 8d 9f d0 00 00 00", 3)]
 public unsafe partial struct CharacterBase
 {
     [FieldOffset(0x0)] public DrawObject DrawObject;

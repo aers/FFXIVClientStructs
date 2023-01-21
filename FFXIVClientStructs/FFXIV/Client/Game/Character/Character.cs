@@ -10,6 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 // size = 0x1B20
 // ctor E8 ?? ?? ?? ?? 4C 8B D0 4C 63 F7
 [StructLayout(LayoutKind.Explicit, Size = 0x1B20)]
+[VTableAddress("48 8d 05 ?? ?? ?? ?? 48 8b d9 48 89 01 48 8d 05 ?? ?? ?? ?? 48 89 81 a0 01 00 00 48 8d 05 ?? ?? ?? ??", 3)]
 public unsafe partial struct Character
 {
     [FieldOffset(0x0)] public GameObject GameObject;

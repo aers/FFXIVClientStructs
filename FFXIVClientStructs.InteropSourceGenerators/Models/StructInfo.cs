@@ -2,6 +2,7 @@
 using FFXIVClientStructs.InteropGenerator;
 using FFXIVClientStructs.InteropSourceGenerators.Extensions;
 using LanguageExt;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using static FFXIVClientStructs.InteropSourceGenerators.DiagnosticDescriptors;
@@ -9,7 +10,7 @@ using static LanguageExt.Prelude;
 
 namespace FFXIVClientStructs.InteropSourceGenerators.Models;
 
-internal sealed record StructInfo(string Name, string Namespace, Seq<string> Hierarchy)
+internal sealed record StructInfo(string Name, string Namespace, Seq<string> Hierarchy, bool HasVTableAddress)
 {
     public static Validation<DiagnosticInfo, StructInfo> GetFromSyntax(StructDeclarationSyntax structSyntax)
     {
@@ -28,7 +29,9 @@ internal sealed record StructInfo(string Name, string Namespace, Seq<string> Hie
             new StructInfo(
                 syntax.GetNameWithTypeDeclarationList(),
                 syntax.GetContainingFileScopedNamespace(),
-                hierarchy.Reverse().ToSeq()));
+                hierarchy.Reverse().ToSeq(),
+                syntax.AttributeLists.Any(al => al.Attributes.Any(a => (a.Name as IdentifierNameSyntax).Identifier.Text == "VTableAddress"))
+                ));
     }
 
     private static Validation<DiagnosticInfo, Seq<string>> GetHierarchy(StructDeclarationSyntax structSyntax)

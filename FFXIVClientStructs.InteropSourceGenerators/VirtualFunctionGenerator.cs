@@ -100,6 +100,11 @@ internal sealed class VirtualFunctionGenerator : IIncrementalGenerator
 
             MethodInfo.RenderEnd(builder);
         }
+
+        public void RenderStaticFunctionPointer(IndentedStringBuilder builder, StructInfo structInfo)
+        {
+            builder.AppendLine($"public static nuint {MethodInfo.Name} => {structInfo.Name}.Addresses.VTable.Value + {Index};");
+        }
     }
 
     private sealed record StructWithVirtualFunctionInfos(StructInfo StructInfo,
@@ -110,6 +115,17 @@ internal sealed class VirtualFunctionGenerator : IIncrementalGenerator
             IndentedStringBuilder builder = new();
 
             StructInfo.RenderStart(builder);
+
+            if (StructInfo.HasVTableAddress)
+            {
+                builder.AppendLine("public unsafe static class VirtualFunctionPointers");
+                builder.AppendLine("{");
+                builder.Indent();
+                VirtualFunctionInfos.Iter(mfi => mfi.RenderStaticFunctionPointer(builder, StructInfo));
+                builder.DecrementIndent();
+                builder.AppendLine("}");
+                builder.AppendLine();
+            }
 
             builder.AppendLine("[StructLayout(LayoutKind.Explicit)]");
             builder.AppendLine($"public unsafe struct {StructInfo.Name}VTable");
