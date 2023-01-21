@@ -84,14 +84,13 @@ public unsafe partial struct AgentInspect
         None = 0,
         Filled = 8,
     }
-    [MemberFunction("40 53 48 83 EC 40 48 8B D9 48 8B 49 10 48 8B 01 FF 90 ?? ?? ?? ?? BA")]
-    public partial void Show();
+
     public void ExamineCharacter(uint objectID)
     {
         RequestObjectID = objectID;
         RequestSearchCommentOID = objectID;
         RequestFreeCompanyOID = objectID;
         CurrentObjectID = 0xE0000000;
-        Show();
+        AgentInterface.Show();
     }
 }
