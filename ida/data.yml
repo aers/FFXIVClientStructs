@@ -545,12 +545,19 @@ classes:
       - ea: 0x142117AC0
         pointer: True
     funcs:
+      0x140B6F4E0: Initialize # static
+      0x140B6F530: Destroy    # static
       0x140B723B0: ctor
       0x140B72610: dtor
       0x140B6F570: GetSingleton  # static
       0x140B71410: LoadDemandResearchPacket
       0x140B71980: IsRecipeUnlocked # (this, recipeId)
       0x140B719B0: IsPouchItemLocked # (this, pouchItemId)
+      0x140B6FD50: IsFunctionLocked # (this, functionId)
+      0x140B6FF80: HandleActorControlPacket
+      0x140B70A60: HandleInboundPacket
+      0x140B71DF0: GetVisibleMinimapIcons
+      0x140B719C0: IsItemLocked
   Client::System::String::Utf8String:
     funcs:
       0x140059F30: ctor  # empty string ctor

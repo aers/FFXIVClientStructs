@@ -61,6 +61,24 @@ public unsafe partial struct MJIManager {
     [FieldOffset(0x28 + 0x09)] public byte VillageDevelopmentLevel;
 
     /// <summary>
+    ///     The glamour ID applied to paths around the Island Sanctuary.
+    ///     Correlates to a subrow in MJIVillageAppearanceUI, row 0.
+    /// </summary>
+    [FieldOffset(0x28 + 0x0A)] public byte PathsGlamourId;
+
+    /// <summary>
+    ///     The glamour ID applied to grounds around the Island Sanctuary.
+    ///     Correlates to a subrow in MJIVillageAppearanceUI, row 2.
+    /// </summary>
+    [FieldOffset(0x28 + 0x0B)] public byte GroundsGlamourId;
+
+    /// <summary>
+    ///     The glamour ID applied to slopes around the Island Sanctuary.
+    ///     Correlates to a subrow in MJIVillageAppeareanceUI, row 1.
+    /// </summary>
+    [FieldOffset(0x28 + 0x0C)] public byte SlopesGlamourId;
+
+    /// <summary>
     ///		A bitfield representing all unlocked key items (MJIKeyItem) for the player. Backing field for
     ///		<see cref="IsKeyItemUnlocked"/>, which should be used where possible.
     /// </summary>
@@ -82,6 +100,16 @@ public unsafe partial struct MJIManager {
     ///     <seealso cref="IsPouchItemLocked" />
     /// </summary>
     [FieldOffset(0x28 + 0x12)] public fixed byte LockedPouchItems[75];
+
+    /// <summary>
+    ///     A sub-struct representing the Farm's (Cropland's) current state
+    /// </summary>
+    [FieldOffset(0x28 + 0x5E)] public MJIFarmPasture Farm;
+    
+    /// <summary>
+    ///     A sub-struct representing the Pasture's current state.
+    /// </summary>
+    [FieldOffset(0x28 + 0x62)] public MJIFarmPasture Pasture;
 
     /// <summary>
     ///     The current number of hours remaining until a specific Landmark has finished construction.
@@ -262,6 +290,36 @@ public unsafe partial struct MJIManager {
     public partial bool IsPouchItemLocked(ushort itemId);
 
     /// <summary>
+    /// Check if an item (by EXD item ID) is locked in Island Sanctuary. This method performs *no validation* that
+    /// the Item passed to it is actually an Island Sanctuary item.
+    /// </summary>
+    /// <remarks>
+    /// This method performs an EXD lookup. If the Item is already known, it is better to query
+    /// <see cref="Game.IslandState.LockedPouchItems" />  by the AdditionalData field of the Item to avoid the
+    /// unnecessary call.
+    /// </remarks>
+    /// <seealso cref="IsPouchItemLocked" />
+    /// <param name="itemId">The Item ID (from EXD) to look up.</param>
+    /// <returns>Returns <c>true</c> if the item is locked, <c>false</c> otherwise.</returns>
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 04 33 ED")]
+    public partial bool IsItemLocked(uint itemId);
+
+    /// <summary>
+    /// Checks if a specific MJIFunction is locked and therefore cannot be used.
+    /// </summary>
+    /// <param name="functionId">The RowID of the MJIFunction to check</param>
+    /// <returns>Returns <c>true</c> if the function is locked, <c>false</c> otherwise.</returns>
+    [MemberFunction("E8 ?? ?? ?? ?? 44 3A F0")]
+    public partial bool IsFunctionLocked(byte functionId);
+
+    /// <summary>
+    /// Get a bitfield representing the currently-displayed minimap icons.
+    /// </summary>
+    /// <returns></returns>
+    [MemberFunction("E8 ?? ?? ?? ?? 85 47 40")]
+    public partial MJIMinimapIcons GetVisibleMinimapIcons();
+
+    /// <summary>
     ///		Check if a specific MJIKeyItem is unlocked by the player.
     /// </summary>
     /// <remarks>
@@ -281,7 +339,7 @@ public unsafe partial struct MJIManager {
     /// <param name="itemId">The Craftwork ID to look up</param>
     /// <returns>Returns an enum value.</returns>
     public CraftworkSupply GetSupplyForCraftwork(uint itemId) {
-        return (CraftworkSupply) ((SupplyAndDemandShifts[itemId] & 0xF0) >> 4);
+        return (CraftworkSupply) ((this.SupplyAndDemandShifts[itemId] & 0xF0) >> 4);
     }
 
     /// <summary>
@@ -290,7 +348,7 @@ public unsafe partial struct MJIManager {
     /// <param name="itemId">The Craftwork ID to look up</param>
     /// <returns>Returns an enum value.</returns>
     public CraftworkDemandShift GetDemandShiftForCraftwork(uint itemId) {
-        return (CraftworkDemandShift) (SupplyAndDemandShifts[itemId] & 0x0F);
+        return (CraftworkDemandShift) (this.SupplyAndDemandShifts[itemId] & 0x0F);
     }
 }
 
@@ -325,11 +383,15 @@ public struct MJIBuildingPlacement {
 [StructLayout(LayoutKind.Explicit, Size = Size)]
 public struct MJILandmarkPlacement {
     public const int Size = 0xC;
+
+    [FieldOffset(0x8)] public byte HoursToCompletion;
     
     /// <summary>
     ///		The RowID of the landmark currently present at the specified location.
     /// </summary>
     [FieldOffset(0x9)] public byte LandmarkId;
+
+    [FieldOffset(0xA)] public ushort UnderConstruction; // ?? unsure if this is actually a ushort...
 }
 
 /// <summary>
@@ -448,6 +510,14 @@ public unsafe struct MJIGranaries {
     );
 }
 
+[StructLayout(LayoutKind.Sequential, Size = 0x04)]
+public struct MJIFarmPasture {
+    public byte Level;
+    public byte HoursToCompletion;
+    public bool UnderConstruction;
+    public byte UNK_0x4;
+}
+
 public enum CraftworkSupply {
     Nonexistent = 0,
     Insufficient = 1,
@@ -469,4 +539,13 @@ public enum MJIAllowedVisitors : byte {
     Friends = 1,
     FreeCompany = 2,
     Party = 4
+}
+
+[Flags]
+public enum MJIMinimapIcons : byte {
+    Trees = 1,
+    Vegetation = 2,
+    Soils = 4,
+    Minerals = 8,
+    Aquatic = 16
 }
