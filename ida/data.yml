@@ -163,9 +163,6 @@ functions:
   0x141439DC0: lua_gethook
   0x141439DD0: lua_gethookcount
   0x141439DE0: lua_gethookmask
-  0x141439DF0: lua_getinfo
-  0x141439EE0: lua_getlocal
-  0x141439F50: lua_getstack
   0x141439FD0: lua_sethook
   0x14143A000: lua_setlocal
   0x1412FF520: luaL_openlibs
@@ -540,16 +537,16 @@ classes:
   InventoryContainer:
     funcs:
       0x1406F4620: GetInventorySlot  # (this, slotIndex)
-  Client::Game::MJIManager:  # Island Sanctuary
+  Client::Game::MJI::MJIManager:  # Island Sanctuary
     instances:
       - ea: 0x142117AC0
         pointer: True
     funcs:
       0x140B6F4E0: Initialize # static
       0x140B6F530: Destroy    # static
+      0x140B6F570: GetSingleton  # static
       0x140B723B0: ctor
       0x140B72610: dtor
-      0x140B6F570: GetSingleton  # static
       0x140B71410: LoadDemandResearchPacket
       0x140B71980: IsRecipeUnlocked # (this, recipeId)
       0x140B719B0: IsPouchItemLocked # (this, pouchItemId)
@@ -558,6 +555,9 @@ classes:
       0x140B70A60: HandleInboundPacket
       0x140B71DF0: GetVisibleMinimapIcons
       0x140B719C0: IsItemLocked
+  Client::Game::MJI::IslandState:
+    funcs:
+      0x140B74AB0: ctor
   Client::System::String::Utf8String:
     funcs:
       0x140059F30: ctor  # empty string ctor
@@ -2229,8 +2229,6 @@ classes:
       - ea: 0x14192DDA0
     funcs:
       0x1404B4280: ctor
-      0x1404B4870: GetSheetRowById
-      0x1404B48F0: GetEntryByIndex
       0x1404B43F0: ChangeLanguage
       0x1404B46E0: GetRowBySheetAndRowId  # (ExdModule* this, ExcelSheet* pSheet, int nRowId) -> ExcelRow*
       0x1404B4870: GetRowBySheetAndRowIndex  # (ExdModule* this, ExcelSheet* pSheet, int nRowIndex) -> ExcelRow*
