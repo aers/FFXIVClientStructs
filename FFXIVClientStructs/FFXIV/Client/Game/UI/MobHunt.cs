@@ -31,7 +31,10 @@ public unsafe partial struct MobHunt
 {
     [FieldOffset(0x8)] public fixed byte unkArray[18];
     [FieldOffset(0x1A)] public fixed byte MarkID[18];
+    
+    [FixedArray(typeof(KillCounts), 18)]
     [FieldOffset(0x2C)] public fixed int CurrentKills[18 * 5];
+    
     [FieldOffset(0x194)] public int ObtainedFlags;
     
     [StaticAddress("48 8D 0D ?? ?? ?? ?? 0F B6 50 08 E8 ?? ?? ?? ?? 84 C0 74 16", 3)]
@@ -42,11 +45,11 @@ public unsafe partial struct MobHunt
         return (ObtainedFlags & 1 << index) != 0;
     }
     
-    public Span<int> GetKillCountsForIndex(int index)
+    [StructLayout(LayoutKind.Explicit, Size = 0x14)]
+    public struct KillCounts
     {
-        fixed (int* ptr = CurrentKills) 
-        {
-            return new Span<int>(ptr + 5 * index, 5);
-        }
+        [FieldOffset(0x00)] public fixed int Counts[5];
+
+        public int this[int index] => Counts[index];
     }
 }
