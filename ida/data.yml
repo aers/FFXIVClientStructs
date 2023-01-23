@@ -3171,7 +3171,7 @@ classes:
       58: Terminate
       59: Destroy
       60: IsCharacter
-      68: OnInitialize
+      67: OnInitialize
     funcs:
       0x14071F8E0: IsMountOrOrnament
       0x140720650: GetPosition
@@ -3185,14 +3185,14 @@ classes:
       - ea: 0x14194AF00
         base: Client::Graphics::Vfx::VfxDataListenner
     vfuncs:
-      76: GetModelChara
-      79: GetStatusManager
-      80: GetStatusManager_2
-      81: GetCastInfo
-      82: GetCastInfo_2
-      85: GetForayInfo
-      86: GetForayInfo_2
-      87: IsMount
+      75: GetModelChara
+      78: GetStatusManager
+      79: GetStatusManager_2
+      80: GetCastInfo
+      81: GetCastInfo_2
+      84: GetForayInfo
+      85: GetForayInfo_2
+      86: IsMount
     funcs:
       0x14071EE30: IsCasting
       0x14072E040: IsMounted
