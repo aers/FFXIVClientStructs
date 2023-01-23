@@ -30,6 +30,9 @@ public unsafe partial struct MJIManager {
 
     [FieldOffset(0x28)] public IslandState IslandState;
     
+    [FieldOffset(0xF0)] public MJIPastureHandler* PastureHandler;
+    [FieldOffset(0xF8)] public MJIFarmState* FarmState;
+    
     /// <summary>
     /// A struct representing landmark placements on the Island Sanctuary. Each index represents a specific landmark
     /// slot directly. Refer to <see cref="MJILandmarkPlacement"/> for more information.
@@ -178,6 +181,19 @@ public unsafe partial struct MJIManager {
     /// <returns></returns>
     [MemberFunction("E8 ?? ?? ?? ?? 85 47 40")]
     public partial MJIMinimapIcons GetVisibleMinimapIcons();
+
+    /// <summary>
+    /// Gets the total number of slots available in the Island Sanctuary pasture.
+    /// </summary>
+    [MemberFunction("E8 ?? ?? ?? ?? 44 0F B6 C0 48 8D 9E")]
+    public partial byte GetPastureSlotCount();
+
+    /// <summary>
+    /// Gets the total number of slots available Island Sanctuary farm.
+    /// </summary>
+    /// <returns></returns>
+    [MemberFunction("E8 ?? ?? ?? ?? 45 33 F6 0F B6 D0")]
+    public partial byte GetFarmSlotCount();
 
     /// <summary>
     /// Check if a specific MJIKeyItem is unlocked by the player.

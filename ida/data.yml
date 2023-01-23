@@ -555,6 +555,8 @@ classes:
       0x140B70A60: HandleInboundPacket
       0x140B71DF0: GetVisibleMinimapIcons
       0x140B719C0: IsItemLocked
+      0x140B71B80: GetPastureSlotCount
+      0x140B71CD0: GetFarmSlotCount
   Client::Game::MJI::IslandState:
     funcs:
       0x140B74AB0: ctor
