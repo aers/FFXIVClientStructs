@@ -703,6 +703,9 @@ classes:
   Client::Game::UI::MobHunt:
     vtbls:
       - ea: 0x141996568
+    instances:
+      - ea: 0x1421107A0
+        pointer: False
   Client::Game::BattleLog:
     funcs:
       0x14096FCA0: AddLogMessage
