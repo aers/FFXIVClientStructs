@@ -11,6 +11,9 @@ public sealed partial class Resolver
 {
     private static readonly Lazy<Resolver> Instance = new(() => new Resolver());
 
+    private static readonly Lazy<uint> version = new (() => uint.Parse(GitVersionInformation.CommitsSinceVersionSource));
+    public static uint Version => version.Value;
+    
     private Resolver()
     {
     }

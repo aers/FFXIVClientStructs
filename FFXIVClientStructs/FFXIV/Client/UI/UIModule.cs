@@ -1,5 +1,6 @@
 using FFXIVClientStructs.FFXIV.Client.Game;
 using FFXIVClientStructs.FFXIV.Client.UI.Agent;
+using FFXIVClientStructs.FFXIV.Client.UI.Info;
 using FFXIVClientStructs.FFXIV.Client.UI.Misc;
 using FFXIVClientStructs.FFXIV.Client.UI.Shell;
 using FFXIVClientStructs.FFXIV.Component.Excel;
@@ -99,6 +100,9 @@ public unsafe partial struct UIModule
     
     [VirtualFunction(32)]
     public partial RecommendEquipModule* GetRecommendEquipModule();
+
+    [VirtualFunction(34)]
+    public partial InfoModule* GetInfoModule();
 
     [VirtualFunction(36)]
     public partial AgentModule* GetAgentModule();
