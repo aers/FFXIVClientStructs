@@ -103,7 +103,7 @@ internal sealed class VirtualFunctionGenerator : IIncrementalGenerator
 
         public void RenderStaticFunctionPointer(IndentedStringBuilder builder, StructInfo structInfo)
         {
-            builder.AppendLine($"public static nuint {MethodInfo.Name} => {structInfo.Name}.Addresses.VTable.Value + {Index};");
+            builder.AppendLine($"public static nuint {MethodInfo.Name} => *((nuint*){structInfo.Name}.Addresses.VTable.Value + {Index});");
         }
     }
 
