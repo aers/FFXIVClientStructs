@@ -78,6 +78,9 @@ public unsafe partial struct AtkUnitBase
     [VirtualFunction(7)]
     public partial void SetPosition(short x, short y);
 
+    [VirtualFunction(47)]
+    public partial void OnSetup(uint a2, AtkValue* atkValues);
+
     [VirtualFunction(49)]
     public partial void OnUpdate(NumberArrayData** numberArrayData, StringArrayData** stringArrayData);
 

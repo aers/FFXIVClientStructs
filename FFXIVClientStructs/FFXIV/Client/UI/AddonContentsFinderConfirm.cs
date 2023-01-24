@@ -6,7 +6,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //   Component::GUI::AtkUnitBase
 //     Component::GUI::AtkEventListener
 [StructLayout(LayoutKind.Explicit, Size = 0x2A0)]
-public unsafe struct AddonContentsFinderConfirm
+[VTableAddress("48 8d 05 ?? ?? ?? ?? 48 89 03 41 b0 01 48 89 8b 20 02 00 00 33 c0 48 89 8b 28 02 00 00 ba 00 00 00 01", 3)]
+public unsafe partial struct AddonContentsFinderConfirm
 {
     [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
 
