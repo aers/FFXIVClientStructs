@@ -3,7 +3,7 @@
 
 // ctor 1413EA840 ? - extends EventHandler
 [StructLayout(LayoutKind.Explicit, Size = 0xAE0)]
-public unsafe struct MJIPastureHandler {
+public unsafe partial struct MJIPastureHandler {
     [FieldOffset(0x0)] public void* vtbl;
     
     [FixedSizeArray<MJIAnimal>(20)]

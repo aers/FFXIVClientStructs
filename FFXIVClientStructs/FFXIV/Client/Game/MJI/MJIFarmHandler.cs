@@ -2,7 +2,7 @@
 
 // vast majority of struct info from E8 ?? ?? ?? ?? 8B 4C 24 24 E8
 [StructLayout(LayoutKind.Explicit, Size = 0x148)]
-public unsafe struct MJIFarmState {
+public unsafe partial struct MJIFarmState {
     [FieldOffset(0x00)] public void* vtbl;
     [FieldOffset(0x08)] public void* vtbl2; // ??
 
