@@ -1285,6 +1285,9 @@ classes:
       - ea: 0x1418FE048
   Client::Graphics::Environment::EnvState:
     vtbls:
+      - ea: 0x1418FE060
+  Client::Graphics::Environment::EnvAnim:
+    vtbls:
       - ea: 0x1418FE068
   Client::Graphics::Environment::EnvSimulator:
     vtbls:
