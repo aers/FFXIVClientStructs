@@ -9,6 +9,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [StructLayout(LayoutKind.Explicit, Size = 0x554)]
 public unsafe partial struct AgentInspect
 {
+    //Notes to INfoProxies:
+    //0xa used for DeepDungeon
+    //0xd
     public static AgentInspect* Instance() =>
         (AgentInspect*)Framework.Instance()->GetUiModule()->GetAgentModule()->GetAgentByInternalId(AgentId.Inspect);
 
@@ -39,8 +42,8 @@ public unsafe partial struct AgentInspect
     [FieldOffset(0x53c)] public uint FetchSearchCommentStatus;
     [FieldOffset(0x540)] public uint FetchFreeCompanyStatus;
     [FieldOffset(0x544)] public uint UnkObj544; //Probably some status/type seen: 0,1 Set in Show : 0
-    [FieldOffset(0x548)] public void* UnkObj548; //Param1 to some func to get Searchmessage
-    [FieldOffset(0x550)] public uint UnkObj550; //Probably some status/type seen: 0,1 Set in Show : 0
+    [FieldOffset(0x548)] public void* UnkObj548; //InfoProxy 0xa Gets SerachComment
+    [FieldOffset(0x550)] public void* UnkObj550; //INfoPRox 0xd Gets FreeCompanyData
 
     [StructLayout(LayoutKind.Explicit, Size = 0x86)]
     public struct FreeCompanyData
