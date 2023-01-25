@@ -232,6 +232,46 @@ Note that in this case the static address is a pointer, so the attribute argumen
 
 Since the instructions resolved from static address signatures are variable length, an offset argument is required to tell the resolver where to read the static address location from in the signature. This offset is usually to the first (0-indexed) ?? in your signature, but could be further away in some situations.
 
+### [VTableAddress]
+
+```csharp
+public VTableAddressAttribute(string signature, int offset, bool isPointer = false)
+```
+
+```csharp
+[VTableAddress("48 8d 05 ?? ?? ?? ?? 48 89 03 48 8d 83 50 02 00 00 48 89 93 20 02 00 00", 3)]
+public unsafe partial struct AddonRetainerTaskAsk
+```
+
+Used on structs for returning the static location of struct VTables in the binary.
+
+This will generate the following wrapper:
+
+```csharp
+public static partial class Addresses
+{
+    public static readonly Address VTable = new StaticAddress("AddonRetainerTaskAsk.VTable", "48 8d 05 ?? ?? ?? ?? 48 89 03 48 8d 83 50 02 00 00 48 89 93 20 02 00 00 ?? ?? ?? ?? ?? ?? ?? ??", new ulong[] {0x4800000000058d48, 0x000250838d480389, 0x0000022093894800, 0x0000000000000000}, new ulong[] {0xFF00000000FFFFFF, 0xFFFFFFFFFFFFFFFF, 0xFFFFFFFFFFFFFFFF, 0x0000000000000000}, 0, 3);
+}
+
+public unsafe static class StaticAddressPointers
+{
+    public static nuint VTable => AddonRetainerTaskAsk.Addresses.VTable.Value;
+}
+```
+
+#### Static Virtual Function Pointers
+
+If a struct is both annotated with `[VTableAddress(...)]` and has functions annotated with `[VirtualFunction(...)]`, we also define static addresses for those functions which can be used for staticly hooking the function call.
+
+This will generate the following wrapper:
+
+```csharp
+public unsafe static class VirtualFunctionPointers
+{
+    public static nuint OnSetup => *((nuint*)AddonRetainerTaskAsk.Addresses.VTable.Value + 47);
+}
+```
+
 #### [GenerateCStrOverloads]
 
 ```csharp
