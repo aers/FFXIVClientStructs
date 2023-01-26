@@ -73,9 +73,42 @@ public unsafe partial struct AgentMap
     public partial void OpenMap(OpenMapInfo* data);
 
     [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 7C 24 ?? 41 54 41 55 41 56 48 83 EC 20")]
-    public partial void AddGatheringTempMarker(uint styleFlags, int mapX, int mapY, uint iconId, int radius,
-        Utf8String* tooltip);
+    public partial void AddGatheringTempMarker(uint styleFlags, int mapX, int mapY, uint iconId, int radius, Utf8String* tooltip);
+    
+    [MemberFunction("40 53 48 83 EC ?? B2 ?? C6 81 ?? ?? ?? ?? ?? 48 8B D9 E8 ?? ?? ?? ?? 33 D2")]
+    public partial void ResetMiniMapMarkers();
 
+    [MemberFunction("40 53 48 83 EC ?? 48 8B D9 C6 81 ?? ?? ?? ?? ?? 48 C7 81")]
+    public partial void ResetMapMarkers();
+
+    public bool AddMiniMapMarker(Vector3 position, uint icon, int scale = 0) {
+	    if (MiniMapMarkerCount >= 100) return false;
+	    var marker = stackalloc MiniMapMarker[1];
+	    marker->MapMarker.Index = MiniMapMarkerCount;
+	    marker->MapMarker.X = (short)(position.X * 16.0f);
+	    marker->MapMarker.Y = (short)(position.Z * 16.0f);
+	    marker->MapMarker.Scale = scale;
+	    marker->MapMarker.IconId = icon;
+	    MiniMapMarkerArraySpan[MiniMapMarkerCount++] = *marker;
+	    return true;
+    }
+
+    public bool AddMapMarker(Vector3 position, uint icon, int scale = 0, byte* text = null, byte textPosition = 3, byte textStyle = 0) {
+	    if (MapMarkerCount >= 132) return false;
+	    if (textPosition is > 0 and < 12)
+		    position *= CurrentMapSizeFactorFloat;
+	    var marker = stackalloc MapMarkerInfo[1];
+	    marker->MapMarker.Index = MapMarkerCount;
+	    marker->MapMarker.X = (short)(position.X * 16.0f);
+	    marker->MapMarker.Y = (short)(position.Z * 16.0f);
+	    marker->MapMarker.Scale = scale;
+	    marker->MapMarker.IconId = icon;
+	    marker->MapMarker.Subtext = text;
+	    marker->MapMarker.SubtextOrientation = textPosition;
+	    marker->MapMarker.SubtextStyle = textStyle;
+	    MapMarkerInfoArraySpan[MapMarkerCount++] = *marker;
+	    return true;
+    }
 
     public void SetFlagMapMarker(uint territoryId, uint mapId, Vector3 worldPosition, uint iconId = 0xEC91)
     {
@@ -85,8 +118,7 @@ public unsafe partial struct AgentMap
         SetFlagMapMarker(territoryId, mapId, mapX, mapY, iconId);
     }
 
-    public void AddGatheringTempMarker(int mapX, int mapY, int radius, uint iconId = 0, uint styleFlags = 4,
-        string? tooltip = null)
+    public void AddGatheringTempMarker(int mapX, int mapY, int radius, uint iconId = 0, uint styleFlags = 4, string? tooltip = null)
     {
         var toolTip = Utf8String.FromString(tooltip ?? string.Empty);
         AddGatheringTempMarker(styleFlags, mapX, mapY, iconId, radius, toolTip);
