@@ -1,6 +1,0 @@
-mode: ContinuousDeployment
-assembly-file-versioning-format: '1.0.0.{CommitsSinceVersionSource}'
-assembly-informational-format: '1.0.0.{CommitsSinceVersionSource}'
-branches: {}
-ignore:
-  sha: []
