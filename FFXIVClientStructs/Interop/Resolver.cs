@@ -10,7 +10,6 @@ namespace FFXIVClientStructs.Interop;
 public sealed partial class Resolver
 {
     private static readonly Lazy<Resolver> Instance = new(() => new Resolver());
-    public static uint Version => 1700; // Manually set for now. https://github.com/aers/FFXIVClientStructs/issues/308
     
     private Resolver()
     {

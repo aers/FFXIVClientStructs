@@ -9,7 +9,7 @@
         <DebugSymbols>true</DebugSymbols>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <Version>1.0.0.1700</Version>
+        <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
         <!--
           <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
           <CompilerGeneratedFilesOutputPath>Generated</CompilerGeneratedFilesOutputPath>
