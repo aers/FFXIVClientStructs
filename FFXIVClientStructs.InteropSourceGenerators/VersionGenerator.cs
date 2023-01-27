@@ -9,14 +9,18 @@ namespace FFXIVClientStructs.InteropSourceGenerators;
 public class VersionGenerator : ISourceGenerator {
     private uint version;
     
-    private string GitCommand(string command) {
+    private string GitCommand(GeneratorExecutionContext context, string command) {
+        var mainSyntaxTree = context.Compilation.SyntaxTrees.First(x => x.HasCompilationUnitRoot);
+        var directory = Path.GetDirectoryName(mainSyntaxTree.FilePath);
+        
         var gitProcess = new Process() {
             StartInfo = new ProcessStartInfo() {
                 CreateNoWindow = true, 
                 RedirectStandardOutput = true,
                 UseShellExecute = false,
                 FileName = "git",
-                Arguments = command
+                Arguments = command,
+                WorkingDirectory = directory
             }
         };
 
@@ -32,14 +36,12 @@ public class VersionGenerator : ISourceGenerator {
         gitProcess.CancelOutputRead();
         return output.ToString();
     }
-    
-    public void Initialize(GeneratorInitializationContext context) {
-        var hash = GitCommand("show -s --format=%H");
-        var count = GitCommand($"rev-list --count {hash}");
-        if (!uint.TryParse(count, out version)) version = 0;
-    }
-
+    public void Initialize(GeneratorInitializationContext context) { }
     public void Execute(GeneratorExecutionContext context) {
+        var hash = GitCommand(context, "show -s --format=%H");
+        var count = GitCommand(context, $"rev-list --count {hash}");
+        if (!uint.TryParse(count, out version)) version = 0;
+        
         var builder = new IndentedStringBuilder();
         builder.AppendLine("using System.Reflection;");
         builder.AppendLine($"[assembly: AssemblyVersion(\"1.0.0.{version}\")]");
