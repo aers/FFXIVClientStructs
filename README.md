@@ -257,19 +257,16 @@ public unsafe static class StaticAddressPointers
 {
     public static nuint VTable => AddonRetainerTaskAsk.Addresses.VTable.Value;
 }
+
+public static AddonRetainerTaskAskVTable StaticVTable => *(AddonRetainerTaskAskVTable*)StaticAddressPointers.VTable;
 ```
 
 #### Static Virtual Function Pointers
 
-If a struct is both annotated with `[VTableAddress(...)]` and has functions annotated with `[VirtualFunction(...)]`, we also define static addresses for those functions which can be used for staticly hooking the function call.
-
-This will generate the following wrapper:
+If a struct is both annotated with `[VTableAddress(...)]` and has functions annotated with `[VirtualFunction(...)]`, the `StaticVTable` can then be used to get static addresses for those functions which can be used for staticly hooking the function call. For example:
 
 ```csharp
-public unsafe static class VirtualFunctionPointers
-{
-    public static nuint OnSetup => *((nuint*)AddonRetainerTaskAsk.Addresses.VTable.Value + 47);
-}
+this.onSetupHook = Hook<OnSetupDelegate>.FromAddress((nint)AddonRetainerTaskAsk.StaticVTable.OnSetup, this.OnSetupDetour);
 ```
 
 #### [GenerateCStrOverloads]

@@ -158,13 +158,20 @@ internal sealed class VTableAddressGenerator : IIncrementalGenerator
             builder.AppendLine("}");
             builder.AppendLine();
             
+            builder.AppendLine($"public partial struct {StructInfo.Name}VTable");
+            builder.AppendLine("{");
+            builder.AppendLine("}");
+            builder.AppendLine();
             builder.AppendLine("public unsafe static class StaticAddressPointers");
             builder.AppendLine("{");
             builder.Indent();
             StaticAddressInfos.Iter(sai => sai.RenderPointer(builder, StructInfo));
             builder.DecrementIndent();
             builder.AppendLine("}");
-            
+            builder.AppendLine();
+            builder.AppendLine($"public static {StructInfo.Name}VTable StaticVTable => *({StructInfo.Name}VTable*)StaticAddressPointers.VTable;");
+            builder.AppendLine();
+
             StructInfo.RenderEnd(builder);
 
             return builder.ToString();
