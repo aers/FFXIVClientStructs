@@ -57,7 +57,7 @@ public unsafe partial struct PlayerState
 
     [FieldOffset(0x501)] public fixed byte UnlockFlags[44];
 
-    [FieldOffset(0x63A)] public WondrousTailsData WondrousTails;
+    [FieldOffset(0x63A)] public WeeklyBingo WeeklyBingo;
 
     [FieldOffset(0x738)] public fixed uint DesynthesisLevels[8];
     
