@@ -1,6 +1,6 @@
 ﻿using System.Numerics;
 
-namespace FFXIVClientStructs.FFXIV.Client.Game;
+namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x26)]
 public unsafe partial struct WondrousTailsData
