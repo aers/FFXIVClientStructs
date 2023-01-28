@@ -661,6 +661,10 @@ classes:
       0x140912440: IsFramersKitUnlocked
       0x140912530: Initialize
       0x14097DB10: ctor
+  Client::Game::UI::WondrousTails:
+    instances:
+      - ea: 0x142104BF2
+        pointer: False
   Client::Game::UI::Revive:
     vtbls:
       - ea: 0x141999BB8
