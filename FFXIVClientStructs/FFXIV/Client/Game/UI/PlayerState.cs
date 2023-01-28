@@ -1,4 +1,6 @@
-﻿namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
+using System.Numerics;
+
+namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
 //ctor 40 53 48 83 EC 20 48 8B D9 48 8D 81 ?? ?? ?? ?? BA
 [StructLayout(LayoutKind.Explicit, Size = 0x7D0)]
@@ -56,6 +58,28 @@ public unsafe partial struct PlayerState
     [FieldOffset(0x45C)] public short PlayerCommendations;
 
     [FieldOffset(0x501)] public fixed byte UnlockFlags[44];
+
+    #region Weekly Bonus/Weekly Bingo/Wondrous Tails Fields
+
+    // packet reader sig: "4C 8B D2 48 8D 81"
+
+    /// <summary>RowIds of WeeklyBingoOrderData sheet</summary>
+    [FieldOffset(0x640)] public fixed byte WeeklyBingoOrderData[16];
+    /// <summary>RowIds of WeeklyBingoRewardData sheet</summary>
+    [FieldOffset(0x650)] public fixed byte WeeklyBingoRewardData[4];
+    /// <summary>Bitflags of placed stickers.</summary>
+    /// <remarks>Use IsWeeklyBingoStickerPlaced(index) and WeeklyBingoNumPlacedStickers instead.</remarks>
+    [FieldOffset(0x654)] private readonly ushort _weeklyBingoStickers;
+
+    /// <remarks>Use GetWeeklyBingoExpireUnixTimestamp(), WeeklyBingoNumSecondChancePoints and HasWeeklyBingoJournal instead</remarks>
+    [FieldOffset(0x658)] private readonly uint _weeklyBonusFlags;
+    [FieldOffset(0x65C)] private fixed byte _weeklyBingoTaskStatus[4];
+    [FieldOffset(0x660)] public byte WeeklyBingoRequestOpenBingoNo;
+
+    [FieldOffset(0x69C)] public byte WeeklyBingoExpMultiplier;
+    [FieldOffset(0x69D)] public bool WeeklyBingoUnk63;
+
+    #endregion
 
     [FieldOffset(0x738)] public fixed uint DesynthesisLevels[8];
     
@@ -156,4 +180,62 @@ public unsafe partial struct PlayerState
 	    var flag = 1 << (byte)(id + idx * -8 & 0x1F);
 	    return (UnlockFlags[idx] & flag) != 0;
     }
+
+    #region Weekly Bonus/Weekly Bingo/Wondrous Tails
+
+    public enum WeeklyBingoTaskStatus
+    {
+        /// <summary>Incomplete task.</summary>
+        Open,
+        /// <summary>Completed task, but sticker not placed.</summary>
+        Claimable,
+        /// <summary>Completed task and sticker placed.</summary>
+        Claimed,
+    }
+
+    /// <summary>Returns the value of the requested flag.</summary>
+    /// <param name="mode">
+    /// The following modes have been found:<br/>
+    /// 3 = second chance points<br/>
+    /// 5 = whether player is in possession of the journal
+    /// </param>
+    [MemberFunction("E8 ?? ?? ?? ?? 3B C3 0F 93 C0")]
+    private partial uint _getWeeklyBingoFlagsValue(uint mode);
+
+    /// <summary>Returns whether the Wondrous Tails Journal has expired or not.</summary>
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 1D 48 8B 4B 10")]
+    public partial bool IsWeeklyBingoExpired();
+
+    /// <summary>Returns the expiration of the players Wondrous Tails Journal as a unix timestamp.</summary>
+    [MemberFunction("8B 81 ?? ?? ?? ?? C1 E8 04 25")]
+    public partial uint GetWeeklyBingoExpireUnixTimestamp();
+
+    /// <summary>Returns whether the task is complete or not.</summary>
+    /// <param name="index">Task index, starting at 1.</param>
+    [MemberFunction("E8 ?? ?? ?? ?? 41 8B D7 88 06")]
+    public partial bool IsWeeklyBingoStickerPlaced(int index);
+
+    /// <summary>Returns the stored state of the indexed task.</summary>
+    /// <param name="index">Task index, starting at 0.</param>
+    [MemberFunction("48 8B C1 83 FA 10")]
+    public partial WeeklyBingoTaskStatus GetWeeklyBingoTaskStatus(int index);
+
+    /// <summary>Returns the experience multiplier.</summary>
+    /// <remarks>The experience reward is being calculated as: Current Job Experience / 100 * WeeklyBingoExpMultiplier</remarks>
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 C0 0F AF C3")]
+    public partial uint GetWeeklyBingoExpMultiplier();
+
+    /// <summary>Returns the expiration of the players Wondrous Tails Journal as UTC DateTime.</summary>
+    public DateTime WeeklyBingoExpireDateTime => DateTime.UnixEpoch.AddSeconds(GetWeeklyBingoExpireUnixTimestamp());
+
+    /// <summary>Returns the current number of second chance points.</summary>
+    public uint WeeklyBingoNumSecondChancePoints => _getWeeklyBingoFlagsValue(3);
+
+    /// <summary>Returns whether the player is in possession of the journal or not.</summary>
+    public bool HasWeeklyBingoJournal => _getWeeklyBingoFlagsValue(5) != 0;
+
+    /// <summary>Returns the number of placed stickers.</summary>
+    public int WeeklyBingoNumPlacedStickers => BitOperations.PopCount(_weeklyBingoStickers);
+
+    #endregion
 }
