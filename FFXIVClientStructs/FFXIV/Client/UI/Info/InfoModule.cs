@@ -14,6 +14,11 @@ public unsafe struct InfoModule
 }
 public enum InfoProxyId
 {
+    Party = 0,
+    FriendList = 6,
+    Mail = 8,
     SearchComment = 10, //0xa
     FreeCompany = 13, //0xd
+    CrossRealmParty = 19, //0x13
+    CrossWorldLinkShell = 29, //0x1D
 }

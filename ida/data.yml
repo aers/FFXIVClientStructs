@@ -1261,6 +1261,8 @@ classes:
   Client::UI::Info::InfoProxyInterface:
     vtbls:
       - ea: 0x1418EA658
+    vfuncs:
+      0: dtor
   Client::UI::Info::InfoProxyPageInterface:
     vtbls:
       - ea: 0x1418EA6B8
@@ -1274,6 +1276,22 @@ classes:
     funcs:
       0x1400ABE40: ctor
       0x1400ACB00: GetInfoProxyById
+  Client::UI::Info::InfoProxyParty:
+    vtbls:
+      - ea: 0x1418ea430
+        base: Client::UI::Info::InfoProxyInterface
+  Client::UI::Info::InfoProxyFriendList:
+    vtbls:
+      - ea: 0x1418ebb60
+        base: Client::UI::Info::InfoProxyInterface
+  Client::UI::Info::InfoProxyMail:
+    vtbls:
+      - ea: 0x1418ebc70
+        base: Client::UI::Info::InfoProxyInterface
+  Client::UI::Info::InfoProxyFreeCompany:
+    vtbls:
+      - ea: 0x1418ebc70
+        base: Client::UI::Info::InfoProxyInterface
   Client::UI::Info::InfoProxyCrossRealm:
     instances:
       - ea: 0x142095718
@@ -1297,6 +1315,10 @@ classes:
       0x1400F0C80: GetMemberByContentId # Static
       0x1400F0D50: GetMemberByObjectId # Static
       0x1400F0E00: IsContentIdInParty # Static
+  Client::UI::Info::InfoProxyCrossWorldLinkShell:
+    vtbls:
+      - ea: 0x1418ec650
+        base: Client::UI::Info::InfoProxyInterface
   Client::Graphics::Kernel::Notifier:
     vtbls:
       - ea: 0x1418F3680
