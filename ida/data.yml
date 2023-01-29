@@ -3052,6 +3052,7 @@ classes:
       0x140650160: FormatAddonText2
       0x140654B10: FormatAddonText3
       0x140655170: FormatAddonText4
+      0x140657820: FormatTimeSpan
       0x140659690: FormatAddonTextApply
   Client::UI::Misc::RaptureLogModule:
     vtbls:
