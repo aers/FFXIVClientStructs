@@ -7,6 +7,13 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 public unsafe partial struct ActionManager
 {
     [FieldOffset(0x60)] public ComboDetail Combo;
+
+    [FieldOffset(0x68)] public bool ActionQueued;
+    [FieldOffset(0x6C)] public ActionType QueuedActionType;
+    [FieldOffset(0x70)] public uint QueuedActionId;
+    [FieldOffset(0x78)] public GameObjectID QueuedTargetId;
+    [FieldOffset(0x80)] public uint QueueType;
+
     [FieldOffset(0x13C)] public fixed uint BlueMageActions[24];
 
     [StaticAddress("48 8D 0D ?? ?? ?? ?? F3 0F 10 13", 3)]
