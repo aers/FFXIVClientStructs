@@ -53,7 +53,7 @@ public unsafe partial struct PlayerState
 
     [FieldOffset(0x414)] public uint FishingBait;
 
-    [FieldOffset(0x45C)] public short PlayerCommendations;
+    [FieldOffset(0x478)] public short PlayerCommendations;
 
     [FieldOffset(0x501)] public fixed byte UnlockFlags[44];
 
