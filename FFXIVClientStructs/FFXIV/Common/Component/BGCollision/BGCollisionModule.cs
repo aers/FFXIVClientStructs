@@ -16,17 +16,17 @@ public unsafe partial struct BGCollisionModule {
 
 	public static bool Raycast(Vector3 origin, Vector3 direction, out RaycastHit hitInfo, float maxDistance = 1000000f) {
 		var flags = stackalloc int[] { 0x4000, 0, 0x4000 , 0};
-		var hit = stackalloc RaycastHit[1];
-		var result = Raycast(origin, direction, maxDistance, hit, flags);
-		hitInfo = *hit;
+		var hit = new RaycastHit();
+		var result = Raycast(origin, direction, maxDistance, &hit, flags);
+		hitInfo = hit;
 		return result;
 	}
 
 	public static bool Raycast2(Vector3 origin, Vector3 direction, out RaycastHit hitInfo, float maxDistance = 1000000f) {
 		var flags = stackalloc int[] { 0x4000, 0, 0x4000 , 0};
-		var hit = stackalloc RaycastHit[1];
-		var result = Raycast2(origin, direction, maxDistance, hit, flags);
-		hitInfo = *hit;
+		var hit = new RaycastHit();
+		var result = Raycast2(origin, direction, maxDistance, &hit, flags);
+		hitInfo = hit;
 		return result;
 	}
 }
