@@ -313,7 +313,8 @@ public enum AgentId : uint {
     AirShipExploration = 189,
     AirShipExplorationResult = 190,
     AirShipExplorationDetail = 191,
-    
+    SubmersibleParts = 192,
+    SubmersibleExploration = 193,
     SubmersibleExplorationResult = 194,
     SubmersibleExplorationDetail = 195,
     CompanyCraftMaterial = 196,
