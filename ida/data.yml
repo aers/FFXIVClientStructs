@@ -1551,6 +1551,10 @@ classes:
     vtbls:
       - ea: 0x14190B8C0
         base: Client::UI::Agent::AgentExplorationInterface
+  Client::UI::Agent::AgentSubmersibleExploration:
+    vtbls:
+      - ea: 0x14190BD28
+        base: Client::UI::Agent::AgentExplorationInterface
   Client::UI::Agent::AgentSubmersibleExplorationDetail:
     vtbls:
       - ea: 0x14190BC98
@@ -4396,10 +4400,18 @@ classes:
     vtbls:
       - ea: 0x14190BA98
         base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentExplorationPartsInterface:
+    vtbls:
+      - ea: 0x14190B588
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentAirShipParts:
     vtbls:
       - ea: 0x14190B6C0
-        base: Client::UI::Agent::AgentInterface
+        base: Client::UI::Agent::AgentExplorationPartsInterface
+  Client::UI::Agent::AgentSubmersibleParts:
+    vtbls:
+      - ea: 0x14190BB10
+        base: Client::UI::Agent::AgentExplorationPartsInterface
   Client::UI::Agent::AgentExplorationResultInterface:
     vtbls:
       - ea: 0x14190B988
