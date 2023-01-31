@@ -426,6 +426,7 @@ public enum AgentId : uint {
     DawnStory = 339, //Duty Support
     HousingCatalogPreview = 340,
 
+    SubmersibleExplorationMapSelect = 342,
     QuestRedo = 343,
     QuestRedoHud = 344,
 
