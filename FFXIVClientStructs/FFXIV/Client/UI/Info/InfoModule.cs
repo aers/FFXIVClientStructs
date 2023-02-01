@@ -3,7 +3,7 @@
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x1C70)]
-public unsafe struct InfoModule
+public unsafe partial struct InfoModule
 {
     [FieldOffset(0x1978)] public fixed long InfoProxyArray[34];
     [FieldOffset(0x1A88)] public ulong LocalContentId;
@@ -11,8 +11,14 @@ public unsafe struct InfoModule
     [FieldOffset(0x1AF8)] public Utf8String UnkString1;
     [FieldOffset(0x1B60)] public Utf8String UnkString2;
     [FieldOffset(0x1BC8)] public Utf8String UnkString3;
+
+    public InfoProxyInterface* GetInfoProxyById(InfoProxyId id)
+        => GetInfoProxyById((uint)id);
+
+    [MemberFunction("e8 7e 7c e8 ff")]
+    public partial InfoProxyInterface* GetInfoProxyById(uint ID);
 }
-public enum InfoProxyId
+public enum InfoProxyId : uint
 {
     Party = 0,
     FriendList = 6,
