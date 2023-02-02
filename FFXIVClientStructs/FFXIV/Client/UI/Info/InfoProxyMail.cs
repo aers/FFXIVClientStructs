@@ -1,13 +1,12 @@
 ﻿namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
-
+[InfoProxy(InfoProxyId.Mail)]
 [StructLayout(LayoutKind.Explicit, Size = 5170)]
 public unsafe partial struct InfoProxyMail
 {
     [FieldOffset(0x00)] public InfoProxyInterface InfoProxyInterface;
-    [FieldOffset(0x10)] public byte NumLetters;
-    [FieldOffset(0x18)] public void* Unk18; //Local pointer (lower) maybe, but not aligned to 8?
-    //VAlues: 000001E1C6BB0102 (AllocBase: 000001E1C6530000) = +680102
-
+    [FieldOffset(0x10)] public uint NumEntries;
+    [FieldOffset(0x18)] public byte Unk18; //INcrements each time I open Mail Window
+    [FieldOffset(0x19)] public byte Unk19; //INcrements each time I open Mail Window
     [FieldOffset(0x24)] public byte NumAtachments;
     [FieldOffset(0x27)] public byte NumLettersFromFriends;
     [FieldOffset(0x28)] public byte NumPurchases;

@@ -2,6 +2,7 @@
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
+[InfoProxy(InfoProxyId.CrossWorldLinkShell)]
 [StructLayout(LayoutKind.Explicit, Size = 530)]
 public unsafe partial struct InfoProxyCrossWorldLinkShell
 {

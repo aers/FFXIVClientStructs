@@ -30,7 +30,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent
         [FieldOffset(0x060)] public short MemberCount;
         [FieldOffset(0x062)] public short MembersOnline;
         [FieldOffset(0x064)] public FCProfile Profile;
-        [FieldOffset(0x06A)] public byte GrandCompany;
+        [FieldOffset(0x06A)] public GrandCompany GrandCompany;
         [FieldOffset(0x06C)] public byte Rank;
         [FieldOffset(0x06D)] public byte Reputation;
         //2 byte unkown
@@ -89,6 +89,13 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent
                 Provisional = 2,
             }
         }
+    }
+    public enum GrandCompany : byte
+    {
+        None = 0,
+        Maelstrom = 1,
+        TwinAdder = 2,
+        ImmortalFlames = 3,
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x8)]

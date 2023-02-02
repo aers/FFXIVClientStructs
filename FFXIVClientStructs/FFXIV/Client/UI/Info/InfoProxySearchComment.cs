@@ -1,6 +1,7 @@
 ﻿using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
+[InfoProxy(InfoProxyId.SearchComment)]
 [StructLayout(LayoutKind.Explicit)]
 public unsafe partial struct InfoProxySearchComment
 {
