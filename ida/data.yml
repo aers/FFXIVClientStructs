@@ -34,7 +34,6 @@ globals:
   0x142115625: g_Client::Game::UI::ContentsFinder::LevelSync
   0x142115626: g_Client::Game::UI::ContentsFinder::LimitedLevelingRoulette
   0x14211A5FA: g_Client::Game::UI::UnlockedCompanionsMask  # not a pointer
-  0x142125310: g_FateTablePtr
   0x1420B4ED0: g_SomeOtherRenderingState
   0x1420C7214: g_InvSqrt3
   0x142091B08: g_OodleNew
@@ -482,11 +481,15 @@ classes:
       0x1413B6A50: Terminate
       0x1413B6AA0: StartTimerMode # (Balloon* this, float timer, ushort id) if id == 1 use default id else use id
       0x1413B6AE0: StartOtherMode # (Balloon* this, ushort id) id same as above
-  FateManager:
+  Client::Game::Fate::FateManager:
+    instances:
+      - ea: 0x142125310
+        pointer: True
     funcs:
       0x141242090: HasValue  # g_FateTablePtr != 0
-      0x1412420B0: GetPtr # return g_FateTablePtr
-      0x1412420C0: ctor
+      0x1412420B0: GetSingleton
+      0x1412420C0: Initialize
+      0x141242890: ctor
       0x141242110: dtor
       0x141244B50: GetFateById
   BattleBuddyList:
@@ -5182,6 +5185,7 @@ classes:
       - ea: 0x1420FEA90
         pointer: True
     funcs:
+      0x14083D430: Initialize
       0x14083D4E0: GetSingleton
       0x14083D7D0: ctor
       0x14083DFB0: dtor
