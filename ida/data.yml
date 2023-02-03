@@ -5263,6 +5263,10 @@ classes:
     vtbls:
       - ea: 0x1419D60A0
         base: Component::GUI::AtkUnitBase
+  Client::UI::AddonFateReward:
+    vtbls:
+      - ea: 0x141A22280
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonOperationGuide:
     vtbls:
       - ea: 0x1419D62F0
