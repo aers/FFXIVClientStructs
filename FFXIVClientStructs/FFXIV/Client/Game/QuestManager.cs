@@ -4,7 +4,7 @@ using FFXIVClientStructs.FFXIV.Application.Network.WorkDefinitions;
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
 // idk if this is a manager, but I don't know what else to call it
-[StructLayout(LayoutKind.Explicit, Size = 0xEC8)]
+[StructLayout(LayoutKind.Explicit, Size = 0xEE8)]
 public unsafe partial struct QuestManager
 {
 	[FieldOffset(0x10)] public QuestListArray Quest;
@@ -12,13 +12,13 @@ public unsafe partial struct QuestManager
 	[FixedSizeArray<QuestWork>(30)]
 	[FieldOffset(0x10)] public fixed byte NormalQuests[0x18 * 30];
 	[FixedSizeArray<DailyQuestWork>(12)]
-	[FieldOffset(0x560)] public fixed byte DailyQuests[0x10 * 12];
+	[FieldOffset(0x568)] public fixed byte DailyQuests[0x10 * 12];
 	[FixedSizeArray<TrackingWork>(5)]
-	[FieldOffset(0x650)] public fixed byte TrackedQuests[0x10 * 5];
-	[FixedSizeArray<BeastReputationWork>(16)]
-	[FieldOffset(0xB60)] public fixed byte BeastReputation[0x10 * 16];
+	[FieldOffset(0x658)] public fixed byte TrackedQuests[0x10 * 5];
+	[FixedSizeArray<BeastReputationWork>(17)]
+	[FieldOffset(0xB70)] public fixed byte BeastReputation[0x10 * 17];
 	[FixedSizeArray<LeveWork>(16)]
-	[FieldOffset(0xC60)] public fixed byte LeveQuests[0x18 * 16];
+	[FieldOffset(0xC80)] public fixed byte LeveQuests[0x18 * 16];
 
 	[MemberFunction("E8 ?? ?? ?? ?? 66 BA 10 0C")]
     public static partial QuestManager* Instance();

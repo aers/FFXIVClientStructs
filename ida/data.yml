@@ -357,7 +357,7 @@ classes:
         base: Application::Network::WorkDefinitions::Base
   Application::Network::WorkDefinitions::DailyQuestWork:
     vtbls:
-      - ea: 0x141BB3AA8
+      - ea: 0x141BB38B8
         base: Application::Network::WorkDefinitions::Base
   Application::Network::WorkDefinitions::TrackingWork:
     vtbls:
