@@ -76,14 +76,9 @@ public unsafe partial struct PlayerState
     [MemberFunction("E8 ?? ?? ?? ?? BE ?? ?? ?? ?? 84 C0 75 0C")]
     public partial byte GetBeastTribeRank(byte beastTribeIndex);
 
-    [MemberFunction("45 33 C9 48 81 C1 ?? ?? ?? ?? 45 8D 51 02")]
-    private static partial ulong GetBeastTribeAllowance(void* ptr);
-
-    [MemberFunction("E8 ?? ?? ?? ?? 4C 8B E8 BB")]
-    private static partial void* GetBeastTribeAllowancePointer();
-
+    [Obsolete("Use QuestManager.Instance()->GetBeastTribeAllowance() instead.", true)]
     public static ulong GetBeastTribeAllowance() {
-        return GetBeastTribeAllowance(GetBeastTribeAllowancePointer());
+        return QuestManager.Instance()->GetBeastTribeAllowance();
     }
 
     /// <summary>

@@ -81,7 +81,6 @@ functions:
   0x14065C8C0: ConvertLogMessageIdToCharaLogKind
   0x140742CA0: ExecuteCommand
   0x140C78710: CreateSelectYesno
-  0x14082CDA0: GetBeastTribeAllowance
   0x141184CB0: Client::UI::AddonHudLayoutScreen::MoveableAddonInfoStruct_UpdateAddonPosition
   0x14125C1A0: Client::Graphics::Kernel::CreateShader # static function
   0x1412686A0: NormalizeCustomizeData
@@ -507,6 +506,7 @@ classes:
       0x14082C450: GetQuestIndex
       0x14082CBE0: GetQuestClassJob
       0x14082C910: IsQuestAccepted
+      0x14082CDA0: GetBeastTribeAllowance
   InventoryManager:
     instances:
       - ea: 0x1420F6370
