@@ -333,6 +333,10 @@ namespace CExporter
             {
                 var generic = type.GetGenericTypeDefinition();
                 fullName = generic.FullName.Split('`')[0];
+                if (type.IsNested)
+                {
+                    fullName += '+' + generic.FullName.Split('+')[1].Split('[')[0];
+                }
                 foreach (var argType in type.GenericTypeArguments)
                 {
                     var argTypeFullName = FixFullName(argType).Replace("::", "");
