@@ -348,11 +348,11 @@ namespace CExporter
                 fullName = type.FullName;
             }
 
-            if (fullName.Contains(FFXIVNamespacePrefix))
+            if (fullName.StartsWith(FFXIVNamespacePrefix))
                 fullName = fullName.Remove(0, FFXIVNamespacePrefix.Length);
-            if (fullName.Contains(STDNamespacePrefix))
+            if (fullName.StartsWith(STDNamespacePrefix))
                 fullName = fullName.Remove(0, STDNamespacePrefix.Length);
-            if (fullName.Contains(InteropNamespacePrefix))
+            if (fullName.StartsWith(InteropNamespacePrefix))
                 fullName = fullName.Remove(0, InteropNamespacePrefix.Length);
 
             if (fullName.Contains("FFXIVClientStructs, Version"))
