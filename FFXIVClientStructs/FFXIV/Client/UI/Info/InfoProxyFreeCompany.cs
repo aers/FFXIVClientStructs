@@ -25,6 +25,11 @@ public unsafe partial struct InfoProxyFreeCompany
     [FixedSizeArray<RankData>(14)]
     [FieldOffset(0x198)] public fixed byte RankArray[14 * 0x58];
 
+    //0x100fc0d0
+    //40 53 48 81 EC 80 0F 00 00 48 8B 05 E0 47 F9 01 48 33 C4 48 89 84 24 70 0F 00 00 48 8B 0D E6 1E FB 01 8B DA
+    [MemberFunction("e8 dc 99 47 ff")]
+    public partial void RequestDataForCharacter(uint objectID);
+
     [StructLayout(LayoutKind.Explicit, Size = 0x58)]
     public partial struct RankData
     {

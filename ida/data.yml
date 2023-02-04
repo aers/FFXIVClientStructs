@@ -977,6 +977,7 @@ classes:
       4: Tick
     funcs:
       0x140090030: ctor
+      # 0x140093540: GetNetworkModuleProxy
       0x140093570: GetUIModule
       0x140094440: TaskBegin
       0x140094570: TaskDraw2DBegin
@@ -1288,10 +1289,15 @@ classes:
     vtbls:
       - ea: 0x1418ebc70
         base: Client::UI::Info::InfoProxyInterface
+  Client::UI::Info::InfoProxySearchComment:      
+    funcs:
+      0x1400f7c30: RequestData
   Client::UI::Info::InfoProxyFreeCompany:
     vtbls:
       - ea: 0x1418ebc70
         base: Client::UI::Info::InfoProxyInterface
+    funcs:
+      0x100fc0d0: RequestDataForCharacter
   Client::UI::Info::InfoProxyCrossRealm:
     instances:
       - ea: 0x142095718
