@@ -1,4 +1,3 @@
-using FFXIVClientStructs.STD;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -329,19 +328,23 @@ namespace CExporter
                 throw new Exception($"Unknown EnvFormat: {EnvFormat}");
 
             string fullName;
-            if (type.IsGenericType)
+            if (type.IsGenericType || (type.IsPointer && type.GetElementType().IsGenericType))
             {
-                var generic = type.GetGenericTypeDefinition();
+                bool isPointer = type.IsPointer;
+                var dereferenced = isPointer ? type.GetElementType() : type;
+                var generic = dereferenced.GetGenericTypeDefinition();
                 fullName = generic.FullName.Split('`')[0];
-                if (type.IsNested)
+                if (dereferenced.IsNested)
                 {
                     fullName += '+' + generic.FullName.Split('+')[1].Split('[')[0];
                 }
-                foreach (var argType in type.GenericTypeArguments)
+                foreach (var argType in dereferenced.GenericTypeArguments)
                 {
                     var argTypeFullName = FixFullName(argType).Replace("::", "");
                     fullName += $"{separator}{argTypeFullName}";
                 }
+                if (isPointer)
+                    fullName += '*';
             }
             else
             {
