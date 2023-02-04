@@ -409,6 +409,7 @@ public enum AgentId : uint {
 
     Description = 314, //Frontline/Bozja Description
     AozNotebook = 319, //Bluemage Spells
+    RhythmAction = 320,
 
     Emj = 322, //Mahjong
 
