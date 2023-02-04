@@ -21,6 +21,7 @@ public unsafe partial struct InfoModule
 public enum InfoProxyId : uint
 {
     Party = 0,
+    Blacklsit = 5,
     FriendList = 6,
     Mail = 8,
     SearchComment = 10, //0xa

@@ -1281,6 +1281,10 @@ classes:
     vtbls:
       - ea: 0x1418ea430
         base: Client::UI::Info::InfoProxyInterface
+  Client::UI::Info::InfoProxyBlacklist:
+    vtbls:
+      - ea: 0x1418E9E20
+        base: Client::UI::Info::InfoProxyInterface
   Client::UI::Info::InfoProxyFriendList:
     vtbls:
       - ea: 0x1418ebb60
