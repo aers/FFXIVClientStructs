@@ -2,9 +2,9 @@
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
-[InfoProxy(InfoProxyId.Blacklsit)]
+[InfoProxy(InfoProxyId.Blacklist)]
 [StructLayout(LayoutKind.Explicit, Size = 0x1a00)]
-public unsafe partial struct InfoProxyBlacklsit
+public unsafe partial struct InfoProxyBlacklist
 {
     [FieldOffset(0x00)] public InfoProxyInterface InfoProxyInterface;
     [FieldOffset(0x20)] public fixed long ContentIdArray[200];

@@ -2,7 +2,7 @@
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 [InfoProxy(InfoProxyId.SearchComment)]
-[StructLayout(LayoutKind.Explicit)]
+[StructLayout(LayoutKind.Explicit, Size = 0x240)]
 public unsafe partial struct InfoProxySearchComment
 {
     [FieldOffset(0x00)] public InfoProxyInterface InfoProxyInterface;
@@ -13,5 +13,4 @@ public unsafe partial struct InfoProxySearchComment
     [FieldOffset(0x168)] public Utf8String UnkString1;
     [FieldOffset(0x1D0)] public Utf8String UnkString2;
     //8 bytes
-    [FieldOffset(0x240)] public void* Unk240; //local pointer
 }

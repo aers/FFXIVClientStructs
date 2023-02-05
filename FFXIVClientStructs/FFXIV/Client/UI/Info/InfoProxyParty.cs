@@ -1,16 +1,16 @@
-﻿using FFXIVClientStructs.FFXIV.Client.System.String;
-using FFXIVClientStructs.FFXIV.Client.UI.Agent;
+﻿using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 [InfoProxy(InfoProxyId.Party)]
-[StructLayout(LayoutKind.Explicit, Size = 0x108)]
+[StructLayout(LayoutKind.Explicit, Size = 0x348)]
 public unsafe partial struct InfoProxyParty
 {
-    [FieldOffset(0x00)] public InfoProxyInterface InfoProxyInterface;
-    [FieldOffset(0x20)] public Utf8String Unk20;
+    [FieldOffset(0x00)] public InfoProxyUnkInterface InfoProxyInterface;
     [FieldOffset(0x98)] public MemberData* Members;
     [FieldOffset(0xE8)] public void* UnkE8;
     [FieldOffset(0x100)] public void* Unk100;
+    //Classes/Structs seen in Ghidra at:
+    //+118, 100, B8/C8 + D0/E0 mabybe some start/end pointers of Arrays with entry size 0x18
 
     [StructLayout(LayoutKind.Explicit, Size = 0x318)]
     public unsafe partial struct MemberData

@@ -16,16 +16,30 @@ public unsafe partial struct InfoModule
         => GetInfoProxyById((uint)id);
 
     [MemberFunction("e8 7e 7c e8 ff")]
-    public partial InfoProxyInterface* GetInfoProxyById(uint ID);
+    public partial InfoProxyInterface* GetInfoProxyById(uint id);
 }
 public enum InfoProxyId : uint
 {
+    //ShellCommandChatLinkShell = 3,18
+    //Party Decline, PartyInv,PArtyJoin,  = 2
+    //ShellCommandDice = FC, 0x18, 3, 0x12
+    //AgentChatLogvf9 = 0x12
+    //15 and 16 are the same class
     Party = 0,
-    Blacklsit = 5,
+    Party2 = 1,
+    Blacklist = 5,
     FriendList = 6,
+    FriendList2 = 6,
     Mail = 8,
     SearchComment = 10, //0xa
+    Retainer = 11, //0xb or List
     FreeCompany = 13, //0xd
+    OTherFCStuff = 17, //0x11
     CrossRealmParty = 19, //0x13
-    CrossWorldLinkShell = 29, //0x1D
+    CrossWorldLinkShellList = 29, //0x1D
+    CrossWorldLinkShell = 30, //0x1E
+    CircleList = 31,
+    Circle = 32,
+    CircleFinder = 33,
+
 }

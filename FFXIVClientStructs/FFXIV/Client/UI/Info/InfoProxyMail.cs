@@ -1,10 +1,9 @@
 ﻿namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 [InfoProxy(InfoProxyId.Mail)]
-[StructLayout(LayoutKind.Explicit, Size = 5170)]
+[StructLayout(LayoutKind.Explicit, Size = 0x5250)]
 public unsafe partial struct InfoProxyMail
 {
     [FieldOffset(0x00)] public InfoProxyInterface InfoProxyInterface;
-    [FieldOffset(0x10)] public uint NumEntries;
     [FieldOffset(0x18)] public byte Unk18; //INcrements each time I open Mail Window
     [FieldOffset(0x19)] public byte Unk19; //INcrements each time I open Mail Window
     [FieldOffset(0x24)] public byte NumAtachments;
@@ -13,6 +12,7 @@ public unsafe partial struct InfoProxyMail
     [FixedSizeArray<Entry>(130)]
     [FieldOffset(0x30)] public fixed byte List[130 * 0xa0];
     //0xCC0 After
+
 
     [StructLayout(LayoutKind.Explicit, Size = 0xA0)]
     public unsafe partial struct Entry

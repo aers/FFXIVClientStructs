@@ -1,13 +1,10 @@
 ﻿using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
-[StructLayout(LayoutKind.Explicit, Size = 0x3478)]
+[StructLayout(LayoutKind.Explicit, Size = 0x3AD0)]
 public unsafe partial struct InfoProxyFriendList
 {
-    [FieldOffset(0x00)] public InfoProxyInterface InfoProxyInterface;
-    //8 bytes
-    //set when selecting a player from (own home world or curretn world) unsure
-    [FieldOffset(0x020)] public Utf8String Str1;
+    [FieldOffset(0x00)] public InfoProxyUnkInterface InfoProxyUnkInterface;
     [FieldOffset(0x0D8)] public Utf8String Str2;
     [FieldOffset(0x140)] public Utf8String Str3;
     //NExt 2: Set when seleccting a player (Name + 02 12 02 59 03 + WorldName)
