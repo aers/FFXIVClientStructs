@@ -20,6 +20,8 @@ public unsafe partial struct InfoModule
 }
 public enum InfoProxyId : uint
 {
+    //21+22 coudl be not used anymore
+    //3 refs AgentChatLog
     //ShellCommandChatLinkShell = 3,18
     //Party Decline, PartyInv,PArtyJoin,  = 2
     //ShellCommandDice = FC, 0x18, 3, 0x12
@@ -29,7 +31,7 @@ public enum InfoProxyId : uint
     Party2 = 1,
     Blacklist = 5,
     FriendList = 6,
-    FriendList2 = 6,
+    FriendList2 = 7,
     Mail = 8,
     SearchComment = 10, //0xa
     Retainer = 11, //0xb or List

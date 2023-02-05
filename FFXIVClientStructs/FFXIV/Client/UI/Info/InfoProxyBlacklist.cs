@@ -3,7 +3,7 @@
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
 [InfoProxy(InfoProxyId.Blacklist)]
-[StructLayout(LayoutKind.Explicit, Size = 0x1a00)]
+[StructLayout(LayoutKind.Explicit, Size = 0x1A00)]
 public unsafe partial struct InfoProxyBlacklist
 {
     [FieldOffset(0x00)] public InfoProxyInterface InfoProxyInterface;

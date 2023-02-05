@@ -1292,6 +1292,7 @@ classes:
         base: Client::UI::Info::InfoProxyInterface
     funcs:
       0x1400F7C30: RequestData
+      0x14016DAD0: dtor2
   Client::UI::Info::InfoProxyCrossRealm:
     instances:
       - ea: 0x142095718
@@ -1341,6 +1342,8 @@ classes:
     vtbls:
       - ea: 0x1418EB698
         base: Client::UI::Info::InfoProxyInterface
+    funcs:
+      0x1400FF460: dtor2
   Client::UI::Info::InfoProxy2:
     vtbls:
       - ea: 0x1418EB958
@@ -1365,6 +1368,8 @@ classes:
     vtbls:
       - ea: 0x1418EBCD8
         base: Client::UI::Info::InfoProxyUnkInterface
+    funcs:
+      0x1400ff460: dtor2
   Client::UI::Info::InfoProxy12:
     vtbls:
       - ea: 0x1418EBDD0
@@ -1405,22 +1410,28 @@ classes:
     vtbls:
       - ea: 0x1418EC478
         base: Client::UI::Info::InfoProxyInterface
+    funcs:
+      0x14010FB10: dtor2
   Client::UI::Info::InfoProxy26:
     vtbls:
       - ea: 0x1418EC508
         base: Client::UI::Info::InfoProxyInterface
   Client::UI::Info::InfoProxy27:
     vtbls:
-      - ea: 0x1418EC578
+      - ea: 0x1418EC570
         base: Client::UI::Info::InfoProxyInterface
   Client::UI::Info::InfoProxy28:
     vtbls:
       - ea: 0x1418EC5D8
         base: Client::UI::Info::InfoProxyInterface
+    funcs:
+      0x140112450: dtor2
   Client::UI::Info::InfoProxyCrossWorldLinkShellList:
     vtbls:
       - ea: 0x1418EC650
         base: Client::UI::Info::InfoProxyInterface
+    funcs:
+      0x14016da00: dtor2
   Client::UI::Info::InfoProxyCrossWorldLinkShell:
     vtbls:
       - ea: 0x1418EC6C8
@@ -1429,10 +1440,14 @@ classes:
     vtbls:
       - ea: 0x1418EC7D8
         base: Client::UI::Info::InfoProxyInterface
+    funcs:
+      0x14016d980: dtor2
   Client::UI::Info::InfoProxyCircle:
     vtbls:
       - ea: 0x1418EC868
         base: Client::UI::Info::InfoProxyInterface
+    funcs:
+      0x14016d7a0: dtor2
   Client::UI::Info::InfoProxyCircleFinder:
     vtbls:
       - ea: 0x1418EC8C8
