@@ -87,8 +87,6 @@ public unsafe partial struct AgentInspect
         None = 0,
         Filled = 8,
     }
-    [MemberFunction("40 53 48 83 EC 20 81 79 34 00 00 00 E0 48 8B D9 ?? ?? BA 4E 00 00 00 ?? ?? ?? ?? ?? 48 85 C0 ?? ?? 48")]
-    public partial void SomethingFreeCompany();
 
     public void ExamineCharacter(uint objectID)
     {
