@@ -1271,9 +1271,13 @@ classes:
   Client::UI::Info::InfoModule:
     vtbls:
       - ea: 0x1418EA768
+    vfuncs:
+      0: dtor
     funcs:
       0x1400ABE40: ctor
+      # 0x1400ACA40: dtor2
       0x1400ACB00: GetInfoProxyById
+      # 0x1400ACB10: GetLocalCharacterName
       # 0x1400acb90: GetLocalContentID
   Client::UI::Info::InfoProxyBlacklist:
     vtbls:

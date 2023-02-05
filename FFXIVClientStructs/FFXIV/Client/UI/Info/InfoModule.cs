@@ -7,7 +7,7 @@ public unsafe partial struct InfoModule
 {
     [FieldOffset(0x1978)] public fixed long InfoProxyArray[34];
     [FieldOffset(0x1A88)] public ulong LocalContentId;
-    [FieldOffset(0x1A90)] public Utf8String UnkString0;
+    [FieldOffset(0x1A90)] public Utf8String LocalCharName;
     [FieldOffset(0x1AF8)] public Utf8String UnkString1;
     [FieldOffset(0x1B60)] public Utf8String UnkString2;
     [FieldOffset(0x1BC8)] public Utf8String UnkString3;
@@ -20,12 +20,11 @@ public unsafe partial struct InfoModule
 }
 public enum InfoProxyId : uint
 {
-    //21+22 coudl be not used anymore
-    //3 refs AgentChatLog
-    //ShellCommandChatLinkShell = 3,18
-    //Party Decline, PartyInv,PArtyJoin,  = 2
-    //ShellCommandDice = FC, 0x18, 3, 0x12
-    //AgentChatLogvf9 = 0x12
+    //3 refers to AgentChatLog
+    //ShellCommandChatLinkShell refers to 3,18
+    //Party Decline, PartyInv,PartyJoin  refer to 2
+    //ShellCommandDice refers to  3, 13(Fc), 18 ,24
+    //AgentChatLogvf9 refers to 18
     //15 and 16 are the same class
     Party = 0,
     Party2 = 1,
@@ -34,12 +33,12 @@ public enum InfoProxyId : uint
     FriendList2 = 7,
     Mail = 8,
     SearchComment = 10, //0xa
-    Retainer = 11, //0xb or List
-    FreeCompany = 13, //0xd
-    OTherFCStuff = 17, //0x11
-    CrossRealmParty = 19, //0x13
-    CrossWorldLinkShellList = 29, //0x1D
-    CrossWorldLinkShell = 30, //0x1E
+    //Maybe Retainer(List) = 11, or gets something needed there
+    FreeCompany = 13,
+    OTherFCStuff = 17,
+    CrossRealmParty = 19,
+    CrossWorldLinkShellList = 29,
+    CrossWorldLinkShell = 30,
     CircleList = 31,
     Circle = 32,
     CircleFinder = 33,
