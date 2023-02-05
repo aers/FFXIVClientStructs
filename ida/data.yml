@@ -1268,40 +1268,30 @@ classes:
     vtbls:
       - ea: 0x1418EA6B8
         base: Client::UI::Info::InfoProxyInterface
-  Common::Configuration::ConfigBase::ChangeEventInterface:
-    vtbls:
-      - ea: 0x1418EADE0
   Client::UI::Info::InfoModule:
     vtbls:
       - ea: 0x1418EA768
     funcs:
       0x1400ABE40: ctor
       0x1400ACB00: GetInfoProxyById
-  Client::UI::Info::InfoProxyParty:
-    vtbls:
-      - ea: 0x1418ea430
-        base: Client::UI::Info::InfoProxyInterface
+      # 0x1400acb90: GetLocalContentID
   Client::UI::Info::InfoProxyBlacklist:
     vtbls:
       - ea: 0x1418E9E20
         base: Client::UI::Info::InfoProxyInterface
-  Client::UI::Info::InfoProxyFriendList:
+  Common::Configuration::ConfigBase::ChangeEventInterface:
     vtbls:
-      - ea: 0x1418ebb60
+      - ea: 0x1418EADE0
+  Client::UI::Info::InfoProxyUnkInterface:
+    vtbls:
+      - ea: 0x1418EA2C0
         base: Client::UI::Info::InfoProxyInterface
-  Client::UI::Info::InfoProxyMail:
+  Client::UI::Info::InfoProxySearchComment:
     vtbls:
-      - ea: 0x1418ebc70
-        base: Client::UI::Info::InfoProxyInterface
-  Client::UI::Info::InfoProxySearchComment:      
-    funcs:
-      0x1400f7c30: RequestData
-  Client::UI::Info::InfoProxyFreeCompany:
-    vtbls:
-      - ea: 0x1418ebc70
+      - ea: 0x1418EAB40
         base: Client::UI::Info::InfoProxyInterface
     funcs:
-      0x100fc0d0: RequestDataForCharacter
+      0x1400F7C30: RequestData
   Client::UI::Info::InfoProxyCrossRealm:
     instances:
       - ea: 0x142095718
@@ -1325,9 +1315,127 @@ classes:
       0x1400F0C80: GetMemberByContentId # Static
       0x1400F0D50: GetMemberByObjectId # Static
       0x1400F0E00: IsContentIdInParty # Static
+  Client::UI::Info::InfoProxyParty:
+    vtbls:
+      - ea: 0x1418EA430
+        base: Client::UI::Info::InfoProxyUnkInterface
+  Client::UI::Info::InfoProxy20:
+    vtbls:
+      - ea: 0x1418EABA0
+        base: Client::UI::Info::InfoProxyInterface
+  Client::UI::Info::InfoProxyFreeCompany:
+    vtbls:
+      - ea: 0x1418EB548
+        base: Client::UI::Info::InfoProxyInterface
+    funcs:
+      0x1400fc0d0: RequestDataForCharacter
+  Client::UI::Info::InfoProxyUnk3Interface:
+    vtbls:
+      - ea: 0x1418EB5A8
+        base: Client::UI::Info::InfoProxyInterface
+  Client::UI::Info::InfoProxy17:
+    vtbls:
+      - ea: 0x1418EB620
+        base: Client::UI::Info::InfoProxyInterface
+  Client::UI::Info::InfoProxy11:
+    vtbls:
+      - ea: 0x1418EB698
+        base: Client::UI::Info::InfoProxyInterface
+  Client::UI::Info::InfoProxy2:
+    vtbls:
+      - ea: 0x1418EB958
+        base: Client::UI::Info::InfoProxyUnk3Interface
+  Client::UI::Info::InfoProxy3:
+    vtbls:
+      - ea: 0x1418EB9E8
+        base: Client::UI::Info::InfoProxyInterface
+  Client::UI::Info::InfoProxy4:
+    vtbls:
+      - ea: 0x1418EBA68
+        base: Client::UI::Info::InfoProxyUnkInterface
+  Client::UI::Info::InfoProxyFriendList:
+    vtbls:
+      - ea: 0x1418EBB60
+        base: Client::UI::Info::InfoProxyUnkInterface
+  Client::UI::Info::InfoProxyMail:
+    vtbls:
+      - ea: 0x1418EBC70
+        base: Client::UI::Info::InfoProxyInterface
+  Client::UI::Info::InfoProxy9:
+    vtbls:
+      - ea: 0x1418EBCD8
+        base: Client::UI::Info::InfoProxyUnkInterface
+  Client::UI::Info::InfoProxy12:
+    vtbls:
+      - ea: 0x1418EBDD0
+        base: Client::UI::Info::InfoProxyInterface
+  Client::UI::Info::InfoProxy14:
+    vtbls:
+      - ea: 0x1418EBE38
+        base: Client::UI::Info::InfoProxyUnk3Interface
+  Client::UI::Info::InfoProxy15:
+    vtbls:
+      - ea: 0x1418EBEC8
+        base: Client::UI::Info::InfoProxyUnkInterface
+  Client::UI::Info::InfoProxy18:
+    vtbls:
+      - ea: 0x1418EBFC0
+        base: Client::UI::Info::InfoProxyInterface
+  Client::UI::Info::InfoProxyUnk2Interface:
+    vtbls:
+      - ea: 0x1418EC020
+        base: Client::UI::Info::InfoProxyUnkInterface
+  Client::UI::Info::InfoProxy21:
+    vtbls:
+      - ea: 0x1418EC118
+        base: Client::UI::Info::InfoProxyUnk2Interface
+  Client::UI::Info::InfoProxy22:
+    vtbls:
+      - ea: 0x1418EC210
+        base: Client::UI::Info::InfoProxyUnk2Interface
+  Client::UI::Info::InfoProxy23:
+    vtbls:
+      - ea: 0x1418EC308
+        base: Client::UI::Info::InfoProxyUnkInterface
+  Client::UI::Info::InfoProxy24:
+    vtbls:
+      - ea: 0x1418EC400
+        base: Client::UI::Info::InfoProxyInterface
+  Client::UI::Info::InfoProxy25:
+    vtbls:
+      - ea: 0x1418EC478
+        base: Client::UI::Info::InfoProxyInterface
+  Client::UI::Info::InfoProxy26:
+    vtbls:
+      - ea: 0x1418EC508
+        base: Client::UI::Info::InfoProxyInterface
+  Client::UI::Info::InfoProxy27:
+    vtbls:
+      - ea: 0x1418EC578
+        base: Client::UI::Info::InfoProxyInterface
+  Client::UI::Info::InfoProxy28:
+    vtbls:
+      - ea: 0x1418EC5D8
+        base: Client::UI::Info::InfoProxyInterface
+  Client::UI::Info::InfoProxyCrossWorldLinkShellList:
+    vtbls:
+      - ea: 0x1418EC650
+        base: Client::UI::Info::InfoProxyInterface
   Client::UI::Info::InfoProxyCrossWorldLinkShell:
     vtbls:
-      - ea: 0x1418ec650
+      - ea: 0x1418EC6C8
+        base: Client::UI::Info::InfoProxyUnkInterface
+  Client::UI::Info::InfoProxyCircleList:
+    vtbls:
+      - ea: 0x1418EC7D8
+        base: Client::UI::Info::InfoProxyInterface
+  Client::UI::Info::InfoProxyCircle:
+    vtbls:
+      - ea: 0x1418EC868
+        base: Client::UI::Info::InfoProxyInterface
+  Client::UI::Info::InfoProxyCircleFinder:
+    vtbls:
+      - ea: 0x1418EC8C8
         base: Client::UI::Info::InfoProxyInterface
   Client::Graphics::Kernel::Notifier:
     vtbls:
