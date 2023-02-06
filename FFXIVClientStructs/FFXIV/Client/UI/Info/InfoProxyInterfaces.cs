@@ -1,6 +1,4 @@
-﻿using FFXIVClientStructs.FFXIV.Client.System.String;
-
-namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
+﻿namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x18)]
 public unsafe partial struct InfoProxyInterface
@@ -16,25 +14,16 @@ public unsafe partial struct InfoProxyInterface
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x28)]
-public unsafe partial struct InfoProxyUnk3Interface
+public unsafe partial struct InfoProxyInvitedInterface
 {
     [FieldOffset(0x0)] public InfoProxyInterface InfoProxynterface;
     //There seems to be a pointer to data at 0x20
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0xB8)]
-public unsafe partial struct InfoProxyUnkInterface
-{
-    [FieldOffset(0x0)] public InfoProxyInterface InfoProxyInterface;
-    [FieldOffset(0x20)] public Utf8String Unk20;
-    //0x88
-    //[FieldOffset(0x98)] Pointer to Array of Data 
-}
-
 [StructLayout(LayoutKind.Explicit, Size = 0xC8)]
-public unsafe partial struct InfoProxyUnk2Interface
+public unsafe partial struct InfoProxyCommonListInvitedInterface
 {
-    [FieldOffset(0x0)] public InfoProxyUnkInterface InfoProxyUnkInterface;
+    [FieldOffset(0x0)] public InfoProxyCommonList InfoProxyCommonList;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x20)]

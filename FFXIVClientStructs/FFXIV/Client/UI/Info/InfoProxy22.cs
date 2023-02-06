@@ -3,6 +3,6 @@
 [StructLayout(LayoutKind.Explicit, Size = 0xC8)]
 public unsafe partial struct InfoProxy22
 {
-    [FieldOffset(0x00)] public InfoProxyUnk2Interface InfoProxyUnk2Interface;
+    [FieldOffset(0x00)] public InfoProxyCommonListInvitedInterface InfoProxyUnk2Interface;
 
 }

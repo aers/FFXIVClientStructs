@@ -1,21 +1,23 @@
-﻿namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
-[InfoProxy(InfoProxyId.Mail)]
+﻿using FFXIVClientStructs.FFXIV.Client.System.String;
+
+namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
+[InfoProxy(InfoProxyId.Letter)]
 [StructLayout(LayoutKind.Explicit, Size = 0x5250)]
-public unsafe partial struct InfoProxyMail
+public unsafe partial struct InfoProxyLetter
 {
-    [FieldOffset(0x00)] public InfoProxyInterface InfoProxyInterface;
-    [FieldOffset(0x18)] public byte Unk18; //INcrements each time I open Mail Window
-    [FieldOffset(0x19)] public byte Unk19; //INcrements each time I open Mail Window
+    [FieldOffset(0x00)] public InfoProxyPageInterface InfoProxyPageInterface;
     [FieldOffset(0x24)] public byte NumAtachments;
     [FieldOffset(0x27)] public byte NumLettersFromFriends;
     [FieldOffset(0x28)] public byte NumPurchases;
-    [FixedSizeArray<Entry>(130)]
-    [FieldOffset(0x30)] public fixed byte List[130 * 0xa0];
+    [FixedSizeArray<Letter>(130)]
+    [FieldOffset(0x30)] public fixed byte Letters[130 * 0xa0];
     //0xCC0 After
+    [FieldOffset(0x5178)] public Utf8String UnkString0;
+    [FieldOffset(0x51E0)] public Utf8String UnkString1;
 
 
     [StructLayout(LayoutKind.Explicit, Size = 0xA0)]
-    public unsafe partial struct Entry
+    public unsafe partial struct Letter
     {
         [FieldOffset(0x00)] public long SenderContentID;// 0xFFFFFFFF for Store
         [FieldOffset(0x08)] public uint Timestamp;

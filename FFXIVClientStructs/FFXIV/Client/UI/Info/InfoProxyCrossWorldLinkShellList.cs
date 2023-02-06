@@ -2,11 +2,11 @@
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
-[InfoProxy(InfoProxyId.CrossWorldLinkShellList)]
+[InfoProxy(InfoProxyId.CrossWorldLinkShell)]
 [StructLayout(LayoutKind.Explicit, Size = 0x558)]
-public unsafe partial struct InfoProxyCrossWorldLinkShellList
+public unsafe partial struct InfoProxyCrossWorldLinkShell
 {
-    [FieldOffset(0x00)] public InfoProxyInterface InfoProxyInterface;
+    [FieldOffset(0x00)] public InfoProxyInvitedInterface InfoProxyInvitedInterface;
 
     [FieldOffset(0x38)] public Utf8String UnkString0;
     [FieldOffset(0xA0)] public Utf8String UnkString1;
@@ -18,6 +18,7 @@ public unsafe partial struct InfoProxyCrossWorldLinkShellList
     public partial struct CWLSEntry
     {
         [FieldOffset(0x00)] public Utf8String Name;
+        //0x10 bytes
         [FieldOffset(0x78)] public uint FoundationTime;
         [FieldOffset(0x84)] public ushort MembershipType; //1 = Memeber, 2= Leader, 3=Master
 
