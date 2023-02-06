@@ -5,7 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 // Client::UI::AddonContentsFinder
 //   Component::GUI::AtkUnitBase
 //     Component::GUI::AtkEventListener
-[StructLayout(LayoutKind.Explicit, Size = 0x2C8)]
+[StructLayout(LayoutKind.Explicit, Size = 0x16C8)]
 public unsafe struct AddonContentsFinder
 {
     [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
@@ -23,4 +23,8 @@ public unsafe struct AddonContentsFinder
     [FieldOffset(0x300)] public AtkComponentRadioButton* Raids2RadioButton;
     [FieldOffset(0x308)] public AtkComponentRadioButton* PvpRadioButton;
     [FieldOffset(0x310)] public AtkComponentRadioButton* GoldSaucerRadioButton;
+
+    [FieldOffset(0x16A8)] public uint SelectedRadioButton; // Index of the selected radio button
+    [FieldOffset(0x16B4)] public uint SelectedRow; // Index of the currently highlighted row, index does include headers that can't be clicked on, and collapsible headers
+    [FieldOffset(0x16B8)] public uint NumEntries; // Number of entries the selected tab has, includes headers such as "High-end Trials (Endwalker)"
 }
