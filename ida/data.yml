@@ -2517,6 +2517,9 @@ classes:
         base: Component::GUI::AtkResNode
     funcs:
       0x1405843C0: ctor
+      0x140515C50: SetText
+      0x140515C90: SetNumber
+      0x140515DF0: UpdateWidth
   Component::GUI::AtkCollisionNode:
     vtbls:
       - ea: 0x141931618
@@ -5540,6 +5543,10 @@ classes:
     funcs:
       0x140F7CE80: ctor
       0x140F7E3B0: GenerateTooltip
+  Client::UI::AddonItemFinder:
+    vtbls:
+      - ea: 0x141A19FE8
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonCharacterInspect:
     vtbls:
       - ea: 0x141A1AD38

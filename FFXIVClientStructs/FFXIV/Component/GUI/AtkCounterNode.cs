@@ -24,4 +24,14 @@ public unsafe partial struct AtkCounterNode : ICreatable
     
     [MemberFunction("E9 ?? ?? ?? ?? 45 33 C9 4C 8B C0 33 D2 B9 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 85 C0 74 5D")]
     public partial void Ctor();
+    
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 0E 8D 04 9B")]
+    public partial void SetNumber(int number);
+
+    [GenerateCStrOverloads]
+    [MemberFunction("E8 ?? ?? ?? ?? 41 FF C5 49 83 C4 10")]
+    public partial void SetText(byte* text);
+
+    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 8D 42 FA")]
+    public partial void UpdateWidth();
 }
