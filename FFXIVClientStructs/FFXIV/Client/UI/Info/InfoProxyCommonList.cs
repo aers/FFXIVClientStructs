@@ -62,7 +62,7 @@ public unsafe partial struct InfoProxyCommonList
             /// <summary>
             /// Values in Hex
             /// 01 = New Adventurer
-            /// 10 = Leader
+            /// 10 = PartyLeader
             /// 20 = PartyMember
             /// 40 = Recruiting Memebers
             /// 80 = Party Member (Cross World)

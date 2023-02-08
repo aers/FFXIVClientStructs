@@ -10,7 +10,12 @@ public unsafe partial struct InfoProxyCircleList
     //0x20 bytes
     [FieldOffset(0x038)] public Utf8String UnkString0;
     [FieldOffset(0x0A0)] public Utf8String UnkString1;
-    //0x20 bytes
+    [FieldOffset(0x108)] public void* UnkObj108;
+    //0x18 bytes
     [FieldOffset(0x128)] public Utf8String UnkString2;
-    //0x50 bytes
+    // 8 bytes
+    [FieldOffset(0x198)] public void* UnkObj198;
+    //8 bytes
+    [FieldOffset(0x1A8)] public void* UnkObj1A8;
+    //0x30 bytes
 }
