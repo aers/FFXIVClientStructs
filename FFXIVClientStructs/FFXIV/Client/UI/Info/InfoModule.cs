@@ -20,7 +20,6 @@ public unsafe partial struct InfoModule
 }
 public enum InfoProxyId : uint
 {
-    //3 refers to AgentChatLog
     //ShellCommandChatLinkShell refers to 3,18
     //Party Decline, PartyInv,PartyJoin  refer to 2
     //ShellCommandDice refers to  3, 13(Fc), 18 ,24
@@ -29,6 +28,7 @@ public enum InfoProxyId : uint
     Party = 0,
     Party2 = 1,
     PartyInvite = 2,
+    LinkShell = 3,
     LinkShellMember = 4,
     Blacklist = 5,
     FriendList = 6,
@@ -43,6 +43,7 @@ public enum InfoProxyId : uint
     FreeCompanyMember = 15,
     FreeCompanyMember2 = 16,
     //OTherFCStuff = 17,
+    LinkShellChat = 18,
     CrossRealmParty = 19,
     CrossWorldLinkShell = 29,
     CrossWorldLinkShellMember = 30,
