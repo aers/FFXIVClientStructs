@@ -48,7 +48,10 @@ public unsafe partial struct InfoProxyFreeCompany
         public ChestAccess Items5 => (ChestAccess)(((Permissions[3] & 0x38) >> 3) + (Permissions[5] % 0x01 << 3));
         public ChestAccess Crystals => (ChestAccess)(((Permissions[4] & 1) << 2) + ((Permissions[3] & 0xC0) >> 6) + (Permissions[5] % 0x02 << 2));
         public ChestAccess Gil => (ChestAccess)(((Permissions[4] & 0x0E) >> 1) + (Permissions[5] % 0x04 << 1));
-        public HousingAccess Housing => (HousingAccess)((uint)(Permissions[5] >> 3) + (((uint)Permissions[6]) << 5) + (((uint)Permissions[6] & 0x0F) << 13));
+        public HousingAccess Housing => (HousingAccess)
+            ((uint)(Permissions[5] >> 3) + (((uint)Permissions[6]) << 5) + (((uint)Permissions[7] & 0x0F) << 13) + (((uint)Permissions[9] & 0x08) << 14));
+        public WorkshopAccess Workshop =>
+            (WorkshopAccess)(((Permissions[7] & 0xC0) >> 6) + (((uint)Permissions[8]) << 2) + (((uint)Permissions[9] & 0x07) << 10));
         public enum BasicSettings : ushort
         {
             None = 0,
@@ -74,7 +77,7 @@ public unsafe partial struct InfoProxyFreeCompany
             NoAccess = 1,
             ViewOnly = 2,
             FullAccess = 4,
-            DepositOnly
+            DepositOnly = 8,
         }
         public enum HousingAccess : uint
         {
@@ -95,6 +98,25 @@ public unsafe partial struct InfoProxyFreeCompany
             CropDisposal = 16384,
             ChocoboStabling = 32768,
             TrainingChocobo = 65536,
+            OrchestrionOperation = 131072,
+
+        }
+        public enum WorkshopAccess : ushort
+        {
+            CosntructionRemoval = 1,
+            ProjCommenceDisc = 2,
+            ProjMatDelivery = 4,
+            ProjectProgression = 8,
+            ProjectItemCollection = 16,
+            PrototypeCreation = 32,
+            //Airship
+            RegistrationDismantling = 64,
+            Outfitting = 128,
+            ColorCustomization = 256,
+            Unk = 512,
+            Renaming = 1024,
+            VoyageDeploymentRecall = 2048,
+            VoyageFinalization = 4096,
         }
     }
 }
