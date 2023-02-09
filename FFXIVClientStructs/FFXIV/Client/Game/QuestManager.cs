@@ -57,6 +57,9 @@ public unsafe partial struct QuestManager
      */
     public bool IsQuestAccepted(uint questId) => this.IsQuestAccepted((ushort) (questId & 0xFFFF));
 
+    [MemberFunction("45 33 C9 48 81 C1 ?? ?? ?? ?? 45 8D 51 02")]
+    public partial uint GetBeastTribeAllowance();
+
     public bool IsDailyQuestCompleted(ushort questId) {
 	    var quest = GetDailyQuestById(questId);
 	    return quest != null && (quest->Flags & 1) != 0;
