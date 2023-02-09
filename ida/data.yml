@@ -507,6 +507,8 @@ classes:
       0x1408281D0: GetQuestClassJob
       0x140827F00: IsQuestAccepted
       0x140828390: GetBeastTribeAllowance
+      0x140868B40: IsLevequestComplete
+      0x14090F810: GetNextLeveAllowancesTimestamp # multiply by 60 for unix timestamp
   InventoryManager:
     instances:
       - ea: 0x1420DBE80
