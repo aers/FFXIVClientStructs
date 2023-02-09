@@ -20,12 +20,6 @@ public unsafe partial struct InfoProxyInvitedInterface
     //There seems to be a pointer to data at 0x20
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0xC8)]
-public unsafe partial struct InfoProxyCommonListInvitedInterface
-{
-    [FieldOffset(0x0)] public InfoProxyCommonList InfoProxyCommonList;
-}
-
 [StructLayout(LayoutKind.Explicit, Size = 0x20)]
 public unsafe partial struct InfoProxyPageInterface
 {
