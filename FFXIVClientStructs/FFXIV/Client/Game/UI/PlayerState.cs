@@ -22,6 +22,7 @@ public unsafe partial struct PlayerState
 
     [FieldOffset(0x130)] public short SyncedLevel;
     [FieldOffset(0x132)] public byte IsLevelSynced;
+    [FieldOffset(0x133)] public bool HasPremiumSaddlebag;
 
     [FieldOffset(0x136)] public byte GuardianDeity;
     [FieldOffset(0x137)] public byte BirthMonth;
