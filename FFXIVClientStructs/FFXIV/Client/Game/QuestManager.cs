@@ -19,6 +19,7 @@ public unsafe partial struct QuestManager
 	[FieldOffset(0xB70)] public fixed byte BeastReputation[0x10 * 17];
 	[FixedSizeArray<LeveWork>(16)]
 	[FieldOffset(0xC80)] public fixed byte LeveQuests[0x18 * 16];
+    [FieldOffset(0xE00)] public byte NumLeveAllowances;
 
 	[MemberFunction("E8 ?? ?? ?? ?? 66 BA 10 0C")]
     public static partial QuestManager* Instance();
@@ -56,6 +57,36 @@ public unsafe partial struct QuestManager
      * <remarks>This is a helper method to handle trimming uints down to the game-requested ushort.</remarks>
      */
     public bool IsQuestAccepted(uint questId) => this.IsQuestAccepted((ushort) (questId & 0xFFFF));
+
+    /// <summary>
+    /// Check if a specific levequest has been completed.
+    /// </summary>
+    /// <param name="levequestId">The RowId of the Leve Sheet.</param>
+    /// <returns>Returns <c>true</c> if the levequest has been completed, <c>false</c> otherwise.</returns>
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 0D ?? ?? ?? ?? 88 45 80")]
+    public partial bool IsLevequestComplete(ushort levequestId);
+
+    /// <summary>
+    /// Get the time when the player will receive new leve allowances.
+    /// </summary>
+    /// <remarks>
+    /// Has to be multiplied by 60 for a unix timestamp.<br/>
+    /// Use <see cref="GetNextLeveAllowancesUnixTimestamp"/> or <see cref="GetNextLeveAllowancesDateTime"/> instead.
+    /// </remarks>
+    [MemberFunction("E8 ?? ?? ?? ?? 41 8D 75 01")]
+    private static partial uint GetNextLeveAllowancesTimestamp();
+
+    /// <summary>
+    /// Get the time when the player will receive new leve allowances.
+    /// </summary>
+    /// <returns>A unix timestamp as <see cref="uint"/>.</returns>
+    public static uint GetNextLeveAllowancesUnixTimestamp() => GetNextLeveAllowancesTimestamp() * 60;
+
+    /// <summary>
+    /// Get the time when the player will receive new leve allowances.
+    /// </summary>
+    /// <returns>A <see cref="DateTime"/> in the local time zone.</returns>
+    public static DateTime GetNextLeveAllowancesDateTime() => DateTime.UnixEpoch.AddSeconds(GetNextLeveAllowancesUnixTimestamp()).ToLocalTime();
 
     [MemberFunction("45 33 C9 48 81 C1 ?? ?? ?? ?? 45 8D 51 02")]
     public partial uint GetBeastTribeAllowance();
