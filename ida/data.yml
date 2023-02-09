@@ -665,6 +665,12 @@ classes:
       0x140910CF0: IsFolkloreTomeUnlocked     # DoL unlockable books
       0x140912140: IsMcGuffinUnlocked
       0x140912440: IsFramersKitUnlocked
+      0x1409111E0: GetWeeklyBonusFlagsValue
+      0x140911100: IsWeeklyBonusExpired
+      0x140911150: GetWeeklyBonusExpireUnixTimestamp
+      0x1409111A0: IsWeeklyBonusStickerPlaced
+      0x1409111C0: GetWeeklyBonusTaskStatus
+      0x140911400: GetWeeklyBonusExpMultiplier
       0x140912530: Initialize
       0x14097DB10: ctor
   Client::Game::UI::Revive:
