@@ -620,6 +620,9 @@ classes:
   Component::GUI::AtkArrayDataHolder:
     funcs:
       0x1404EE0F0: ctor
+      0x1404EE890: GetNumberArrayData
+      0x1404EE930: GetStringArrayData
+      0x1404EE9D0: GetExtendArrayData
   Component::GUI::AtkRenderer:
     funcs:
       0x1404EF2D0: Initialize
@@ -2626,6 +2629,9 @@ classes:
       - ea: 0x141931FC0
         base: Component::GUI::AtkModuleInterface
     vfuncs:
+      9: GetNumberArrayData
+      10: GetStringArrayData
+      11: GetExtendArrayData
       17: SetHandlerFunction
       39: SetUIVisibility
       58: OnUpdate
