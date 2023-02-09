@@ -689,6 +689,25 @@ classes:
         pointer: False
     funcs:
       0x140948640: IsBuddyEquipUnlocked
+  Client::Game::UI::PvPProfile:
+    instances:
+      - ea: 0x1421064EC
+        pointer: False
+    funcs:
+      0x14094BC40: GetRank
+      0x14094BB40: GetCurrentRankExperience
+      0x14094BBB0: GetCurrentRankNeededExperience
+      0x14094BBD0: GetTotalExperience
+      0x14094C280: SetSeriesCurrentRank
+      0x14094C290: GetSeriesCurrentRank
+      0x14094C2A0: SetSeriesClaimedRank
+      0x14094C2B0: GetSeriesClaimedRank
+      0x14094C2D0: GetSeriesExperience
+      0x14094C2E0: SetPreviousSeriesClaimedRank
+      0x14094C2F0: GetPreviousSeriesClaimedRank
+      0x14094C300: SetPreviousSeriesRank
+      0x14094C310: GetPreviousSeriesRank
+      0x14094C320: HasPreviousSeriesRank
   Client::Game::UI::Cabinet:
     instances:
       - ea: 0x142105078
