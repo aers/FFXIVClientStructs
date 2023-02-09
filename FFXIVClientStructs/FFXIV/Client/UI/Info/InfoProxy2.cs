@@ -4,7 +4,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
 [InfoProxy(InfoProxyId.PartyInvite)]
 [StructLayout(LayoutKind.Explicit, Size = 0x148)]
-public unsafe partial struct InfoProxyPartyInvite
+public unsafe partial struct InfoProxy2
 {
     [FieldOffset(0x000)] public InfoProxyInvitedInterface InfoProxyInvitedInterface;
 

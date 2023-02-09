@@ -1290,11 +1290,14 @@ classes:
     vtbls:
       - ea: 0x1418EAEE0
         base: Client::UI::Info::InfoProxyPageInterface
+    funcs:
+      0x1400EA450: ctor
   Client::UI::Info::InfoProxySearchComment:
     vtbls:
       - ea: 0x1418EB760
         base: Client::UI::Info::InfoProxyInterface
     funcs:
+      0x1400F6740: ctor
       0x1400F7C90: RequestData
       0x14016DB40: dtor2
   Client::UI::Info::InfoProxyCrossRealm:
@@ -1325,6 +1328,7 @@ classes:
       - ea: 0x1418EB050
         base: Client::UI::Info::InfoProxyCommonlist
     funcs:
+      0x1400F0F80: ctor
       0x14016DD00: dtor2
   Client::UI::Info::InfoProxy20:
     vtbls:
@@ -1332,9 +1336,10 @@ classes:
         base: Client::UI::Info::InfoProxyInterface
   Client::UI::Info::InfoProxyFreeCompany:
     vtbls:
-      - ea: 0x1418EC5E8
+      - ea: 0x14016FDB0
         base: Client::UI::Info::InfoProxyInterface
     funcs:
+      0x1400F8530: ctor
       0x1400FC130: RequestDataForCharacter
   Client::UI::Info::InfoProxyInvitedInterface:
     vtbls:
@@ -1344,20 +1349,27 @@ classes:
     vtbls:
       - ea: 0x1418EC240
         base: Client::UI::Info::InfoProxyInterface
+    funcs:
+      0x1400FDDA0: ctor
   Client::UI::Info::InfoProxy11:
     vtbls:
       - ea: 0x1418EC2B8
         base: Client::UI::Info::InfoProxyPageInterface
     funcs:
+      0x1400FF320: ctor
       0x1400FF4C0: dtor2
   Client::UI::Info::InfoProxy2:
     vtbls:
       - ea: 0x1418EC578
         base: Client::UI::Info::InfoProxyInvitedInterface
+    funcs:
+      0x1401101AA0: ctor
   Client::UI::Info::InfoProxyLinkShell:
     vtbls:
       - ea: 0x1418EC608
         base: Client::UI::Info::InfoProxyPageInterface
+    funcs:
+      0x140102340: ctor
   Client::UI::Info::InfoProxyLinkshellMember:
     vtbls:
       - ea: 0x1418EC688
@@ -1366,6 +1378,8 @@ classes:
     vtbls:
       - ea: 0x1418EC780
         base: Client::UI::Info::InfoProxyCommonlist
+    funcs:
+      0x140104d40: ctor
   Client::UI::Info::InfoProxyLetter:
     vtbls:
       - ea: 0x1418EC890
@@ -1374,14 +1388,20 @@ classes:
     vtbls:
       - ea: 0x1418EC8F8
         base: Client::UI::Info::InfoProxyCommonlist
+    funcs:
+      0x1401095C0: ctor
   Client::UI::Info::InfoProxyItemSearch:
     vtbls:
       - ea: 0x1418EC9F0
         base: Client::UI::Info::InfoProxyPageInterface
+    funcs:
+      0x140109C50: ctor
   Client::UI::Info::InfoProxyFreeCompanyCreate:
     vtbls:
       - ea: 0x1418ECA58
         base: Client::UI::Info::InfoProxyInvitedInterface
+    funcs:
+      0x14010A6E0: ctor
   Client::UI::Info::InfoProxyFreeCompanyMember:
     vtbls:
       - ea: 0x1418ECAE8
@@ -1406,15 +1426,20 @@ classes:
     vtbls:
       - ea: 0x1418ECF28
         base: Client::UI::Info::InfoProxyCommonlist
+    funcs:
+      0x14010CD00: ctor
   Client::UI::Info::InfoProxy24:
     vtbls:
       - ea: 0x1418ED020
         base: Client::UI::Info::InfoProxyInterface
+    funcs:
+      0x14010DBE0: ctor
   Client::UI::Info::InfoProxy25:
     vtbls:
       - ea: 0x1418ED098
         base: Client::UI::Info::InfoProxyInterface
     funcs:
+      0x14010F980: ctor
       0x14010FA80: dtor2
   Client::UI::Info::InfoProxy26:
     vtbls:
@@ -1429,33 +1454,41 @@ classes:
       - ea: 0x1418ED1F8
         base: Client::UI::Info::InfoProxyInterface
     funcs:
+      0x1401122F0: ctor
       0x1401123C0: dtor2
   Client::UI::Info::InfoProxyCrossWorldLinkShell:
     vtbls:
       - ea: 0x1418ED270
         base: Client::UI::Info::InfoProxyInterface
     funcs:
+      0x140113BE0: ctor
       0x14016dA70: dtor2
   Client::UI::Info::InfoProxyCrossWorldLinkShellMember:
     vtbls:
       - ea: 0x1418ED2E8
         base: Client::UI::Info::InfoProxyCommonlist
+    funcs:
+      0x140115EC0: ctor
   Client::UI::Info::InfoProxyCircleList:
     vtbls:
       - ea: 0x1418ED3F8
         base: Client::UI::Info::InfoProxyInterface
     funcs:
+      0x1401176D0: ctor
       0x14016d9F0: dtor2
   Client::UI::Info::InfoProxyCircle:
     vtbls:
       - ea: 0x1418ED488
         base: Client::UI::Info::InfoProxyInterface
     funcs:
+      0x140119200: ctor
       0x14016D810: dtor2
   Client::UI::Info::InfoProxyCircleFinder:
     vtbls:
       - ea: 0x1418ED4E8
         base: Client::UI::Info::InfoProxyInterface
+    funcs:
+      0x14011E6F0: ctor
   Client::Graphics::Kernel::Notifier:
     vtbls:
       - ea: 0x1418F3680
