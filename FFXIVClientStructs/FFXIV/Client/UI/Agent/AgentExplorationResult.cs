@@ -11,10 +11,10 @@ public unsafe struct AgentAirshipExplorationResult {
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x38)]
-public unsafe struct AgentSubmeribleExplorationResult {
+public unsafe struct AgentSubmersibleExplorationResult {
 	[FieldOffset(0x00)] public AgentExplorationResultInterface Interface;
 
-	public static AgentSubmeribleExplorationResult* Instance() => (AgentSubmeribleExplorationResult*)AgentModule.Instance()->GetAgentByInternalId(AgentId.SubmersibleExplorationResult);
+	public static AgentSubmersibleExplorationResult* Instance() => (AgentSubmersibleExplorationResult*)AgentModule.Instance()->GetAgentByInternalId(AgentId.SubmersibleExplorationResult);
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x38)]
