@@ -1,6 +1,6 @@
 ﻿namespace FFXIVClientStructs.FFXIV.Client.UI;
 
-[StructLayout(LayoutKind.Explicit, Size = 0x290)]
+[StructLayout(LayoutKind.Explicit, Size = 0x598)]
 public unsafe struct AddonFieldMarker
 {
     [FieldOffset(0x190)] public int Collapsed;
