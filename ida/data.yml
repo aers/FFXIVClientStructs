@@ -3081,11 +3081,13 @@ classes:
   Client::UI::Misc::FieldMarkerModule:
     vtbls:
       - ea: 0x141947428
+        base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
       0x1406A1900: ctor
   Client::UI::Misc::UiSavePackModule:
     vtbls:
       - ea: 0x1419465F8
+        base: Client::UI::Misc::UserFileManager::UserFileEvent
     vfuncs:
       13: GetSegment
   Client::UI::Misc::RaptureMacroModule:
