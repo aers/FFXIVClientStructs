@@ -1,4 +1,5 @@
 ﻿using FFXIVClientStructs.FFXIV.Client.System.String;
+using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
@@ -6,6 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [StructLayout(LayoutKind.Explicit, Size = 0xCD8)]
 public unsafe partial struct AgentFieldMarker
 {
+    [FieldOffset(0x00)] public AgentInterface AgentInterface;
     [FieldOffset(0x34)] public byte ActiveMarkerFlags;
     [FieldOffset(0x38)] public int PageIndexOffset; //0 on page 1, 5 on page 2, 10 on page 3 etc.
 
