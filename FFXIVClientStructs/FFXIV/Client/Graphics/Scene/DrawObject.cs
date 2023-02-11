@@ -9,4 +9,5 @@
 public unsafe struct DrawObject
 {
     [FieldOffset(0x0)] public Object Object;
+    [FieldOffset(0x88)] public byte Flags; // 0x10 is set when it is raining but the draw object is covered by something
 }
