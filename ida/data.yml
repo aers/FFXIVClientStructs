@@ -3075,6 +3075,11 @@ classes:
       0x140645750: ctor
       0x140645B10: SetValueByIndex
       0x140645CE0: GetValueByIndex
+  Client::UI::Misc::FieldMarkerModule:
+    vtbls:
+      - ea: 0x141947428
+    funcs:
+      0x1406A1900: ctor
   Client::UI::Misc::RaptureMacroModule:
     vtbls:
       - ea: 0x141946738
