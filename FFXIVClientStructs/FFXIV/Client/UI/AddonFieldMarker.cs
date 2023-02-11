@@ -1,7 +1,7 @@
 ﻿namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x598)]
-public unsafe struct AddonFieldMarker
+public unsafe partial struct AddonFieldMarker
 {
     [FieldOffset(0x190)] public int Collapsed;
     [FieldOffset(0x230)] public int HoveredButtonIndex; // Index 0-8 of the currently moused over button (A-D, 1-4, Clear)
