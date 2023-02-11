@@ -80,7 +80,7 @@ public unsafe partial struct UIModule
     public partial void* GetAddonConfig();
 
     [VirtualFunction(20)]
-    public partial UISaveModule* GetUiSavePackModule();
+    public partial UiSavePackModule* GetUiSavePackModule();
 
     [VirtualFunction(21)]
     public partial void* GetLetterDataModule();
