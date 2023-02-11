@@ -1990,6 +1990,8 @@ classes:
       - ea: 0x14192AE98
         base: Client::Graphics::Scene::DrawObject
     vfuncs:
+      51: ForceWetness
+      52: ResetWetness
       67: FlagSlotForUpdate
       68: GetDataForSlot
       71: ResolveRootPath
@@ -2024,6 +2026,7 @@ classes:
       0x14047F380: PopulateMaterialsFromStaging
       0x14047F4D0: LoadMDLSubFilesIntoStaging
       0x14047F6E0: LoadMDLSubFilesForSlot
+      0x140482c00: UpdateWetness
       0x14048A2B0: CreateSlotStorage
       0x14049F6C0: dtor2  # Called by base dtor
       0x14073A3B0: Create
