@@ -3083,6 +3083,11 @@ classes:
       - ea: 0x141947428
     funcs:
       0x1406A1900: ctor
+  Client::UI::Misc::UiSavePackModule:
+    vtbls:
+      - ea: 0x1419465F8
+    vfuncs:
+      13: GetSegment
   Client::UI::Misc::RaptureMacroModule:
     vtbls:
       - ea: 0x141946738
