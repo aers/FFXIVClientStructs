@@ -25,16 +25,6 @@ public unsafe partial struct ConfigModule
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 35 ?? ?? ?? ?? 33 DB")]
     public partial int GetIntValue(uint index, int a3 = 2);
 
-    [MemberFunction("40 53 48 83 EC 20 48 8B 0D ?? ?? ?? ?? 0F B7 DA E8 ?? ?? ?? ?? 4C 8B C0")]
-    public partial nint GetUISaveSegment(byte segment);
-
-    public nint GetUISaveSegment(DataSegment segment) => GetUISaveSegment((byte) segment);
-
-    public enum DataSegment : byte
-    {
-        FMARKER = 0x11,
-    }
-
     public uint? GetIndex(ConfigOption option) {
         for (uint i = 0; i < ConfigOptionCount; i++)
         {
