@@ -15,6 +15,8 @@ public unsafe partial struct CharacterBase
 {
     [FieldOffset(0x0)] public DrawObject DrawObject;
     [FieldOffset(0x90)] public byte UnkFlags_01; // bit 8 - has visor
+    [FieldOffset(0x91)] public byte UnkFlags_02;
+    [FieldOffset(0x92)] public byte UnkFlags_03; // bit 1 - has umbrella
     [FieldOffset(0x98)] public int SlotCount; // model slots
     [FieldOffset(0xA0)] public Skeleton* Skeleton; // Client::Graphics::Render::Skeleton
     [FieldOffset(0xA8)] public void** ModelArray; // array of Client::Graphics::Render::Model ptrs size = SlotCount
@@ -26,6 +28,11 @@ public unsafe partial struct CharacterBase
     [FieldOffset(0x224)] public float VfxScale;
     [FieldOffset(0x240)] public void*
         CharacterDataCB; // Client::Graphics::Kernel::ConstantBuffer ptr, this CB includes stuff like hair color
+
+    [FieldOffset(0x2B0)] public float WeatherWetness;  // Set to 1.0f when raining and not covered or umbrella'd
+    [FieldOffset(0x2B4)] public float SwimmingWetness; // Set to 1.0f when in water
+    [FieldOffset(0x2B8)] public float WetnessDepth;    // Set to ~character height in GPose and higher values when swimming or diving.
+    [FieldOffset(0x2BC)] public float ForcedWetness;   // Set by vfunc 51 when using GPose, gets set to 0 in UpdateWetness every frame.
 
     // next few fields are used temporarily when loading the render object and cleared after load
     [FieldOffset(0x2C8)] public uint HasModelInSlotLoaded; // tracks which slots have loaded models into staging
