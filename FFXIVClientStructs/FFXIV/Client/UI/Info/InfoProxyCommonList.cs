@@ -9,6 +9,7 @@ public unsafe partial struct InfoProxyCommonList
     [FieldOffset(0x0)] public InfoProxyPageInterface InfoProxyPageInterface;
     [FieldOffset(0x20)] public Utf8String Unk20;
     //0x88
+    [FieldOffset(0x90)] public ushort Size; //??
     [FieldOffset(0x98)] public CharacterArray* Data;
     [FieldOffset(0xA0)] public CharacterDict* Dict;
 

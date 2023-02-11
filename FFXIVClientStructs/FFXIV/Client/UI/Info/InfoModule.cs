@@ -15,7 +15,7 @@ public unsafe partial struct InfoModule
     public InfoProxyInterface* GetInfoProxyById(InfoProxyId id)
         => GetInfoProxyById((uint)id);
 
-    [MemberFunction("e8 7e 7c e8 ff")]
+    [MemberFunction("e8 ec 8f e8 ff")]
     public partial InfoProxyInterface* GetInfoProxyById(uint id);
 }
 public enum InfoProxyId : uint
