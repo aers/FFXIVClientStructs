@@ -5651,6 +5651,10 @@ classes:
     vtbls:
       - ea: 0x141A1DD48
         base: Component::GUI::AtkUnitBase
+  Client::UI::AddonFieldMarker:
+    vtbls:
+      - ea: 0x141A210D0
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonDeepDungeonStatus:
     vtbls:
       - ea: 0x141A26230
