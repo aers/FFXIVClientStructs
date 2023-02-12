@@ -381,6 +381,7 @@ public enum AgentId : uint {
     RecipeItemContext = 262, // context menus for RecipeTree and RecipeList, constructor inlined
     ContactList = 263,
 
+    SatisfactionSupply = 266,
     Snipe = 268,
     MountSpeed = 269,
 
