@@ -520,6 +520,10 @@ classes:
       0x1406FE850: GetItemCountInContainer # (this, itemId, containerId, hq, 0)
       0x1400CB080: GetSizeByIndex # static
       0x140702640: GetPermittedGearsetCount
+  Client::Game::MonsterNoteManager:
+    instances:
+      - ea: 0x1420E9210
+        pointer: False
   HousingManager:
     instances:
       - ea: 0x142102360
