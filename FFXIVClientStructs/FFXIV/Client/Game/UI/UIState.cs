@@ -45,6 +45,9 @@ public unsafe partial struct UIState
     //      relative to uistate: E8 ?? ?? ?? ?? 84 C0 75 A6 32 C0 (case for 0x355)
     [FieldOffset(0x16A7A)] public fixed byte UnlockedCompanionsBitmask[0x3A];
     
+    // 42 0F B6 04 30 44 84 C0
+    [FieldOffset(0x16AB6)] public fixed byte ChocoboTaxiStandsBitmask[0x26];
+    
     [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B 8B ?? ?? ?? ?? 48 8B 01", 3)]
     public static partial UIState* Instance();
 
@@ -129,6 +132,10 @@ public unsafe partial struct UIState
         // replicate this upper bound here as that'll just be something we need to change with alarming regularity.
         
         return ((1 << ((int) companionId & 7)) & this.UnlockedCompanionsBitmask[companionId >> 3]) > 0;
+    }
+    
+    public bool IsChocoboTaxiStandUnlocked(uint chocoboTaxiStandId) {
+        return ((1 << ((ushort)chocoboTaxiStandId & 7)) & this.ChocoboTaxiStandsBitmask[(ushort)chocoboTaxiStandId >> 3]) > 0;
     }
 
     [MemberFunction("E8 ?? ?? ?? ?? 44 22 F0")]
