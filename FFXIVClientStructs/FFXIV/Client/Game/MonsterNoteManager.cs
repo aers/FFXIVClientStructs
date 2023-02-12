@@ -6,8 +6,8 @@ public unsafe partial struct MonsterNoteManager
     [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 84 C0 E9", 3)]
     public static partial MonsterNoteManager* Instance();
     
-    [FixedSizeArray<MonsterNoteRankInfo>(11)]
-    [FieldOffset(0x00)] public fixed byte RankDataArray[0x38 * 11];
+    [FixedSizeArray<MonsterNoteRankInfo>(12)]
+    [FieldOffset(0x00)] public fixed byte RankDataArray[0x38 * 12];
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x38)]
