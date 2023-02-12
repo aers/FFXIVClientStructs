@@ -73,7 +73,7 @@ public unsafe partial struct PlayerState
     [FieldOffset(0x654)] private readonly ushort _weeklyBingoStickers;
 
     /// <remarks>Use GetWeeklyBingoExpireUnixTimestamp(), WeeklyBingoNumSecondChancePoints and HasWeeklyBingoJournal instead</remarks>
-    [FieldOffset(0x658)] private readonly uint _weeklyBonusFlags;
+    [FieldOffset(0x658)] private readonly uint _weeklyBingoFlags;
     [FieldOffset(0x65C)] private fixed byte _weeklyBingoTaskStatus[4];
     [FieldOffset(0x660)] public byte WeeklyBingoRequestOpenBingoNo;
 
