@@ -38,6 +38,12 @@ public unsafe partial struct AirshipData
     [FieldOffset(0x42)] public fixed byte Route[5]; // AirshipExplorationPoint Key
 
     [FieldOffset(0x3F)] public fixed byte Name[20];
+
+    /// <summary>Gets the registered time as a <see cref="DateTime"/> object</summary>
+    public DateTime GetRegisterTime() => DateTime.UnixEpoch.AddSeconds(RegisterTime);
+
+    /// <summary>Gets the return time as a <see cref="DateTime"/> object</summary>
+    public DateTime GetReturnTime() => DateTime.UnixEpoch.AddSeconds(ReturnTime);
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x2320)]
@@ -69,4 +75,9 @@ public unsafe partial struct SubmersibleData
     [FieldOffset(0x5A)] public ushort RangeBonus;
     [FieldOffset(0x5C)] public ushort FavorBonus;
 
+    /// <summary>Gets the registered time as a <see cref="DateTime"/> object</summary>
+    public DateTime GetRegisterTime() => DateTime.UnixEpoch.AddSeconds(RegisterTime);
+
+    /// <summary>Gets the return time as a <see cref="DateTime"/> object</summary>
+    public DateTime GetReturnTime() => DateTime.UnixEpoch.AddSeconds(ReturnTime);
 }
