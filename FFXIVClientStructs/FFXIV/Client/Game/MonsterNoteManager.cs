@@ -11,7 +11,7 @@ public unsafe partial struct MonsterNoteManager
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x38)]
-public unsafe struct MonsterNoteRankInfo
+public unsafe partial struct MonsterNoteRankInfo
 {
     [FixedSizeArray<RankData>(10)]
     [FieldOffset(0x00)] public fixed byte RankDataArray[0x08 * 10];
