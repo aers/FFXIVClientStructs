@@ -5231,6 +5231,10 @@ classes:
     vtbls:
       - ea: 0x14196E928
         base: Client::Game::Event::LuaEventHandler
+  Client::Game::ReconstructionBoxManager:
+    instances:
+      - ea: 0x1420E4538
+        pointer: False
   Client::Game::Event::EventFramework:
     instances:
       - ea: 0x1420E4548
@@ -5678,6 +5682,10 @@ classes:
   Client::UI::AddonItemInspectionResult:
     vtbls:
       - ea: 0x141A29B60
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonReconstructionBox:
+    vtbls:
+      - ea: 0x141A2E7A0
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonWeeklyBingo::DutySlot:
     vtbls:
