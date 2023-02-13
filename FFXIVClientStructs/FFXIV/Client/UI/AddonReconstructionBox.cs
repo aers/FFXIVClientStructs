@@ -3,7 +3,7 @@
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x440)]
-public unsafe struct AddonReconstructionBox
+public unsafe partial struct AddonReconstructionBox
 {
     [FieldOffset(0x00)] public AtkUnitBase AtkUnitBase;
 
