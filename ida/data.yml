@@ -5156,6 +5156,10 @@ classes:
     vtbls:
       - ea: 0x1419910B0
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1409D6A60: ctor
+      0x1409D6A90: dtor2
+      0x1409D6AF0: ViewArchiveItem  
   Client::UI::Agent::AgentVVDNotebook:
     vtbls:
       - ea: 0x1419923B0
