@@ -3,7 +3,7 @@
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
 public unsafe partial struct ReconstructionBoxManager
 {
-    [StaticAddress("0F 85 ?? ?? ?? ?? 45 33 C0 48 89 5C 24", 3)]
+    [StaticAddress("48 8B 15 ?? ?? ?? ?? 48 8B C8 48 8B 5C 24", 3)]
     public static partial ReconstructionBoxManager* Instance();
     
     [FieldOffset(0x00)] public ReconstructionBoxData* ReconstructionBoxData;
