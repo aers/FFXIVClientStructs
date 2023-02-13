@@ -7,18 +7,20 @@ public unsafe partial struct MonsterNoteManager
     public static partial MonsterNoteManager* Instance();
     
     [FixedSizeArray<MonsterNoteRankInfo>(12)]
-    [FieldOffset(0x00)] public fixed byte RankDataArray[0x38 * 12];
+    [FieldOffset(0x00)] public fixed byte RankDataArray[0x40 * 12];
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x38)]
+[StructLayout(LayoutKind.Explicit, Size = 0x40)]
 public unsafe partial struct MonsterNoteRankInfo
 {
     [FixedSizeArray<RankData>(10)]
     [FieldOffset(0x00)] public fixed byte RankDataArray[0x08 * 10];
 
     [FieldOffset(0x28)] public long Flags;
-    [FieldOffset(0x30)] public int Unknown1;
+    [FieldOffset(0x30)] public int Rank;
     [FieldOffset(0x34)] public int Unknown2; // Suspected to be some kind of flags?
+    [FieldOffset(0x38)] public int Index;
+    [FieldOffset(0x3C)] public int Unknown3; // Seems to be zero padding
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x08)]
