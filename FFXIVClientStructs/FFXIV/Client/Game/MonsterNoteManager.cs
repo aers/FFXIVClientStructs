@@ -14,7 +14,7 @@ public unsafe partial struct MonsterNoteManager
 public unsafe partial struct MonsterNoteRankInfo
 {
     [FixedSizeArray<RankData>(10)]
-    [FieldOffset(0x00)] public fixed byte RankDataArray[0x08 * 10];
+    [FieldOffset(0x00)] public fixed byte RankDataArray[0x04 * 10];
 
     [FieldOffset(0x28)] public long Flags;
     [FieldOffset(0x30)] public int Rank;
@@ -23,7 +23,7 @@ public unsafe partial struct MonsterNoteRankInfo
     [FieldOffset(0x3C)] public int Unknown3; // Seems to be zero padding
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x08)]
+[StructLayout(LayoutKind.Explicit, Size = 0x04)]
 public unsafe struct RankData
 {
     [FieldOffset(0x00)] public fixed byte Counts[4];
