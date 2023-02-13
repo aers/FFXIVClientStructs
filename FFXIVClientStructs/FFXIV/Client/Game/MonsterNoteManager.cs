@@ -1,6 +1,6 @@
 ﻿namespace FFXIVClientStructs.FFXIV.Client.Game;
 
-[StructLayout(LayoutKind.Explicit, Size = 0x3BC)]
+[StructLayout(LayoutKind.Explicit, Size = 0x460)]
 public unsafe partial struct MonsterNoteManager
 {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 84 C0 E9", 3)]
