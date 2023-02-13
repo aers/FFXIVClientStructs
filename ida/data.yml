@@ -5493,6 +5493,10 @@ classes:
     vtbls:
       - ea: 0x141A3E400
         base: Component::GUI::AtkUnitBase
+  Client::UI::AddonArchiveItem:
+    vtbls:
+      - ea: 0x141A37878
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonArmouryBoard:
     vtbls:
       - ea: 0x141A16C00
