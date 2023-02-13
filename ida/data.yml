@@ -520,6 +520,9 @@ classes:
       0x1406FE850: GetItemCountInContainer # (this, itemId, containerId, hq, 0)
       0x1400CB080: GetSizeByIndex # static
       0x140702640: GetPermittedGearsetCount
+      0x14070C9B0: GetLimitedTomestoneCount
+      0x1413650C0: GetSpecialItemId #static
+      0x14070CA20: GetLimitedTomestoneWeeklyLimit #static
   Client::Game::MonsterNoteManager:
     instances:
       - ea: 0x1420E9210
@@ -751,6 +754,18 @@ classes:
       - ea: 0x14198F690
     instances:
       - ea: 0x1420FB220
+        pointer: False
+  Client::Game::UI::RouletteController:
+    vtbls:
+      - ea: 0x14198F600
+    instances:
+      - ea: 0x1420FB038
+        pointer: False
+  Client::Game::UI::ContentsFinder:
+    vtbls:
+      - ea: 0x14198F670
+    instances:
+      - ea: 0x1420FB108
         pointer: False
   Client::Game::BattleLog:
     funcs:
