@@ -3887,6 +3887,8 @@ classes:
     vtbls:
       - ea: 0x1419913B0
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1409DD680: OpenForItemId
   Client::UI::Agent::AgentFishRecord:
     vtbls:
       - ea: 0x1419A8968
