@@ -4,7 +4,7 @@ using FFXIVClientStructs.FFXIV.Application.Network.WorkDefinitions;
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
 // idk if this is a manager, but I don't know what else to call it
-[StructLayout(LayoutKind.Explicit, Size = 0xEE8)]
+[StructLayout(LayoutKind.Explicit, Size = 0xF10)]
 public unsafe partial struct QuestManager
 {
 	[FieldOffset(0x10)] public QuestListArray Quest;
