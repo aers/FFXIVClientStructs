@@ -5,7 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.AozContentBriefing)]
 [StructLayout(LayoutKind.Explicit, Size = 0x1A0)]
-public unsafe struct AgentAozContentBriefing {
+public unsafe partial struct AgentAozContentBriefing {
 	[FieldOffset(0x00)] public AgentInterface AgentInterface;
 	[FieldOffset(0x28)] public AozContentData* AozContentData;
 	[FieldOffset(0x30)] public Utf8String WeeklyNoviceTitle;
@@ -21,6 +21,11 @@ public unsafe struct AgentAozContentBriefing {
 	[FieldOffset(0x180)] public byte* ModerateRequirements;
 	[FieldOffset(0x188)] public byte* AdvancedRequirements;
 	[FieldOffset(0x190)] private byte _UnkFlags;
+	
+	[MemberFunction("4C 8B C1 80 FA 03")]
+	public partial bool IsWeeklyChallengeComplete(byte challenge);
+
+	public bool IsWeeklyChallengeComplete(AozWeeklyChallenge challenge) => IsWeeklyChallengeComplete((byte) challenge);
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x380)]
@@ -72,4 +77,11 @@ public enum AozWeeklyFlags : byte {
 	Novice = 2,
 	Moderate = 4,
 	Advanced = 8
+}
+
+public enum AozWeeklyChallenge
+{
+	Novice = 0,
+	Moderate = 1,
+	Advanced = 2,
 }
