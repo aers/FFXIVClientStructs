@@ -1297,7 +1297,7 @@ classes:
         base: Client::UI::Info::InfoProxyPageInterface
     funcs:
       0x1400EA450: ctor
-      0x14016DAE0: dtor2
+      0x1400EA570: dtor2
   Client::UI::Info::InfoProxySearchComment:
     vtbls:
       - ea: 0x1418EB760
