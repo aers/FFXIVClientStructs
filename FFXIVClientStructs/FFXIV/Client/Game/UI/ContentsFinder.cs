@@ -18,6 +18,8 @@ public unsafe struct ContentsFinder
     [FieldOffset(0x7C)] public byte PositionInQueue;
     [FieldOffset(0x87)] public byte AverageWaitTime; // In minutes
     
+    public DateTime GetEnteredQueueDateTime() => DateTime.UnixEpoch.AddSeconds(EnteredQueueTimestamp);
+    
     public enum LootRule : byte 
     {
         Normal = 0,
