@@ -38,7 +38,7 @@ public unsafe partial struct UIInputData
     [FieldOffset(0x4EC)] public int CursorYDelta; // Delta since last frame
 
     // At least this is what it seems to be
-    [FieldOffset(0x4F4)] public byte IsGameWindowFocused;
+    [FieldOffset(0x4F4)] public bool IsGameWindowFocused;
 
     /*
      * All the following keyboard keys states are not triggered if the chat input is active
