@@ -1,11 +1,11 @@
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
+[InfoProxy(InfoProxyId.CrossRealmParty)]
 [StructLayout(LayoutKind.Explicit, Size = 0x14A0)]
 public unsafe partial struct InfoProxyCrossRealm
 {
-    [FieldOffset(0x00)] public void** Vtbl;
+    [FieldOffset(0x00)] public InfoProxyInterface InfoProxyInterface;
 
-    [FieldOffset(0x08)] public UIModule* UiModule;
     // memset((void *)(a1 + 0x30),  0, 0x358ui64);
     // memset((void *)(a1 + 0x3A0), 0, 0xF30ui64);
 

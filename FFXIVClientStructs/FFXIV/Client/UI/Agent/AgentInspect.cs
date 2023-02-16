@@ -1,6 +1,7 @@
 ﻿using FFXIVClientStructs.FFXIV.Client.Game;
 using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Client.System.String;
+using FFXIVClientStructs.FFXIV.Client.UI.Info;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
@@ -9,6 +10,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [StructLayout(LayoutKind.Explicit, Size = 0x554)]
 public unsafe partial struct AgentInspect
 {
+    //Notes to INfoProxies:
+    //0xa used for DeepDungeon
+    //0xd
     public static AgentInspect* Instance() =>
         (AgentInspect*)Framework.Instance()->GetUiModule()->GetAgentModule()->GetAgentByInternalId(AgentId.Inspect);
 
@@ -30,7 +34,6 @@ public unsafe partial struct AgentInspect
     [FieldOffset(0x240)] public Utf8String ChocoboBarding3;
     [FixedSizeArray<ItemData>(0xd)]
     [FieldOffset(0x2A8)] public fixed byte Items[0xd * 0x28]; //Size: 0x208
-    [FieldOffset(0x4B0)] public byte Unknown4b0; //Status or bool
     [FieldOffset(0x4B0)] public FreeCompanyData FreeCompany;
     [FieldOffset(0x536)] public short UnkObj536; //Maybe part of FC
     //Status fields
@@ -39,8 +42,8 @@ public unsafe partial struct AgentInspect
     [FieldOffset(0x53c)] public uint FetchSearchCommentStatus;
     [FieldOffset(0x540)] public uint FetchFreeCompanyStatus;
     [FieldOffset(0x544)] public uint UnkObj544; //Probably some status/type seen: 0,1 Set in Show : 0
-    [FieldOffset(0x548)] public void* UnkObj548; //Param1 to some func to get Searchmessage
-    [FieldOffset(0x550)] public uint UnkObj550; //Probably some status/type seen: 0,1 Set in Show : 0
+    [FieldOffset(0x548)] public InfoProxySearchComment* InfoProxySearchComment;
+    [FieldOffset(0x550)] public InfoProxyFreeCompany* InfoProxyFreeCompany;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x86)]
     public struct FreeCompanyData

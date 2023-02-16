@@ -1,5 +1,6 @@
 ﻿using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Client.System.String;
+using FFXIVClientStructs.FFXIV.Client.UI.Info;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
@@ -25,9 +26,10 @@ public unsafe partial struct AgentDeepDungeonInspect
     {
         [FieldOffset(0x00)] public uint RequestObjectID;
         [FieldOffset(0x04)] public uint CurrentObjectID;
-        [FieldOffset(0x08)] public long Unk08; //Always 0 (solo in PotD)
+        [FieldOffset(0x08)] public uint StatusSearchComment;
+        [FieldOffset(0x0C)] public uint Unk0C;
         [FieldOffset(0x10)] public Utf8String SearchComment;
-        [FieldOffset(0x78)] public Unk78* Unk78;
+        [FieldOffset(0x78)] public InfoProxySearchComment* InfoProxySearchComment; //InfoPRoxy 0xa
         [FieldOffset(0x80)] public byte Title;
         [FieldOffset(0x81)] public byte Unk81; //Always 0 (solo in PotD)
         [FieldOffset(0x82)] public byte WorldID;
@@ -39,12 +41,6 @@ public unsafe partial struct AgentDeepDungeonInspect
         [FieldOffset(0x88)] public byte AetherPoolArmorLvl;
         [FieldOffset(0x90)] public Utf8String Name;
         [FieldOffset(0xF8)] public Utf8String UnkF8; //Never seen a value here. Type taken from Constructor
-    }
-    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
-    public unsafe partial struct Unk78
-    {
-        [FieldOffset(0x00)] public void** vtbl; //Seems to point ot a functiontable
-        [FieldOffset(0x08)] public void* Unk08; //Points to local memory. Probably another class
     }
 }
 
