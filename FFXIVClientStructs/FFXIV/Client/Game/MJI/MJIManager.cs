@@ -168,12 +168,12 @@ public unsafe partial struct MJIManager {
     public partial bool IsItemLocked(uint itemId);
 
     /// <summary>
-    /// Checks if a specific MJIFunction is locked and therefore cannot be used.
+    /// Checks if a specific MJIFunction is unlocked and able to be used
     /// </summary>
     /// <param name="functionId">The RowID of the MJIFunction to check</param>
-    /// <returns>Returns <c>true</c> if the function is locked, <c>false</c> otherwise.</returns>
+    /// <returns>Returns <c>true</c> if the function is unlocked, <c>false</c> otherwise.</returns>
     [MemberFunction("E8 ?? ?? ?? ?? 44 3A F0")]
-    public partial bool IsFunctionLocked(byte functionId);
+    public partial bool IsFunctionUnlocked(byte functionId);
 
     /// <summary>
     /// Get a bitfield representing the currently-displayed minimap icons.
