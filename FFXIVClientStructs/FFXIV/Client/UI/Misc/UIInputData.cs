@@ -70,7 +70,14 @@ public unsafe partial struct UIInputData
 
     //[FieldOffset(0x77C)] public byte UnkFlag;
     [FieldOffset(0x77D)] public byte KeyHeldKeycode;
-    [FieldOffset(0x788)] public char LastKeyChar; // (actual character made by key combination, not reset after key is pressed)
+
+    /*
+     * Those two seem unreliable in how they're set. They work well on keypress
+     * but one or the other will get nulled after a few ms when the key is held
+     * or won't have their value changed on release.
+     */
+    [FieldOffset(0x780)] public byte LastKeyCharKeyCode; // (key code of the character just below, ie `97` for a lowercase `a`)
+    [FieldOffset(0x788)] public char LastKeyChar; // (actual character made by key combination, ie `a` or `A`)
 
 }
 
