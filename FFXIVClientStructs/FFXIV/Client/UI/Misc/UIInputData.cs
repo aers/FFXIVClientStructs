@@ -5,6 +5,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 [StructLayout(LayoutKind.Explicit, Size = 0xA20)]
 public unsafe partial struct UIInputData
 {
+    public static UIInputData* Instance() => Framework.Instance()->UIModule->GetUIInputData();
+
     /*
      * UIFiltered means those are not set if 
      * - the game window is focused and
