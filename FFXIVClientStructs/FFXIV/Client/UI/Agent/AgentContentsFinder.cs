@@ -20,8 +20,8 @@ public unsafe partial struct AgentContentsFinder
     [FieldOffset(0x408)] public ContentsFinderRewards BonusReward;
     
     // These seem to be duplicates of the above reward structs
-    // [FieldOffset(0x5C8)] public ContentsFinderRewards Reward2;
-    // [FieldOffset(0x810)] public ContentsFinderRewards BonusReward2;
+    [FieldOffset(0x5C8)] public ContentsFinderRewards Reward2;
+    [FieldOffset(0x810)] public ContentsFinderRewards BonusReward2;
 
     [FixedSizeArray<ItemReward>(35)] 
     [FieldOffset(0x890)] public fixed byte ItemRewardArray[0x130 * 35];
@@ -61,7 +61,7 @@ public struct ItemReward
     [FieldOffset(0x44)] public int ItemId;
     [FieldOffset(0x48)] public int Quantity;
     [FieldOffset(0x58)] public Utf8String TooltipString;
-    [FieldOffset(0x78)] public Utf8String UnkString;
+    [FieldOffset(0x78)] public Utf8String UnkString; // This string seems to be unused?
 }
 
 
