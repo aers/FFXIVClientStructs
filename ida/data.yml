@@ -300,6 +300,13 @@ classes:
       0x140D95C00: SetRetainerObjectId
       0x140D95C10: IsRetainerSummoned
       0x140D95C30: GetRetainerCount
+  Client::Game::SatisfactionSupplyManager:
+    instances:
+      - ea: 0x1420E4650
+        pointer: False
+    funcs:
+      0x140892C80: GetUsedAllowances
+      0x140892CD0: GetResetTimestamp
   Client::Game::Control::TargetSystem::ListFeeder:
     vtbls:
       - ea: 0x14192E750
@@ -4534,6 +4541,10 @@ classes:
     vtbls:
       - ea: 0x141990A58
         base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentSatisfactionSupply:
+    vtbls:
+      - ea: 0x141990AE8
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMiniGame:
     vtbls:
       - ea: 0x14190EE90
@@ -5896,6 +5907,10 @@ classes:
     vtbls:
       - ea: 0x141A1DD48
         base: Component::GUI::AtkUnitBase
+  Client::UI::AddonSatisfactionSupply:
+    vtbls:
+      - ea: 0x141A1DF80
+        base: Componet::GUI::AtkUnitBase
   Client::UI::AddonFieldMarker:
     vtbls:
       - ea: 0x141A210D0
