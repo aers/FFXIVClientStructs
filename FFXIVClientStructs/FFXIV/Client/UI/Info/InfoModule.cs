@@ -8,9 +8,9 @@ public unsafe struct InfoModule
 {
 	public static InfoModule* Instance() => Framework.Instance()->UIModule->GetInfoModule();
 
-	[FieldOffset(0x19E0)] public FreeCompanyInfo FreeCompanyInfo;
-	
 	[FieldOffset(0x1978)] public fixed long InfoProxyArray[34];
+	[FieldOffset(0x19E0)] public FreeCompanyInfo* FreeCompanyInfo; // Contained Within InfoProxyArray
+	
 	[FieldOffset(0x1A88)] public ulong LocalContentId;
 	[FieldOffset(0x1A90)] public Utf8String UnkString0;
 	[FieldOffset(0x1AF8)] public Utf8String UnkString1;
