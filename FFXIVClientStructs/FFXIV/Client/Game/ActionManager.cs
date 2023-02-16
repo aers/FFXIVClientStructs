@@ -78,6 +78,9 @@ public unsafe partial struct ActionManager
 
     [MemberFunction("40 53 55 57 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 33 DB")]
     public partial bool SetBlueMageActions(uint* actionArray);
+    
+    [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 20 48 8B DA 8B F9 E8 ?? ?? ?? ?? 4C 8B C3")]
+    public static partial bool CanUseActionOnTarget(uint actionId, GameObject* target);
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x14)]
