@@ -61,6 +61,7 @@ public struct ItemReward
     [FieldOffset(0x44)] public int ItemId;
     [FieldOffset(0x48)] public int Quantity;
     [FieldOffset(0x58)] public Utf8String TooltipString;
+    [FieldOffset(0x78)] public Utf8String UnkString;
 }
 
 
