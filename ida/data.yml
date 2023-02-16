@@ -5931,7 +5931,7 @@ classes:
   Client::UI::AddonSatisfactionSupply:
     vtbls:
       - ea: 0x141A1DF80
-        base: Componet::GUI::AtkUnitBase
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonFieldMarker:
     vtbls:
       - ea: 0x141A210D0
