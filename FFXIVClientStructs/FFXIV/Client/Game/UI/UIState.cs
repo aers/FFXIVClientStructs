@@ -144,4 +144,15 @@ public unsafe partial struct UIState
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 7C 24 ?? 3C")]
     public static partial bool IsInstanceContentUnlocked(uint instanceContentId);
+
+    // Only valid after the timers window has been opened, returns -1 otherwise.
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B F8 E8 ?? ?? ?? ?? 49 8D 9F")]
+    public partial int GetNextMapAllowanceTimestamp();
+
+    // Only valid after the timers window has been opened, returns DateTime.MinValue otherwise.
+    public DateTime GetNextMapAllowanceDateTime()
+    {
+        var timeStamp = GetNextMapAllowanceTimestamp();
+        return timeStamp > 0 ? DateTime.UnixEpoch.AddSeconds(timeStamp) : DateTime.MinValue;
+    }
 }
