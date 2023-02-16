@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //   Component::GUI::AtkUnitBase
 //     Component::GUI::AtkEventListener
 [StructLayout(LayoutKind.Explicit, Size = 0x16C8)]
-public unsafe struct AddonContentsFinder
+public unsafe partial struct AddonContentsFinder
 {
     [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
 
