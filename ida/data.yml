@@ -1265,6 +1265,10 @@ classes:
     vtbls:
       - ea: 0x1418EA6B8
         base: Client::UI::Info::InfoProxyInterface
+  Client::UI::Info::FreeCompanyInfo:
+    vtbls:
+      - ea: 0x1418EC168
+        base: Client::UI::Info::InfoProxyInterface
   Common::Configuration::ConfigBase::ChangeEventInterface:
     vtbls:
       - ea: 0x1418EADE0
