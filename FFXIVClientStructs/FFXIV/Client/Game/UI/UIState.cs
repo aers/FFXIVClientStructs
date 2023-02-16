@@ -35,6 +35,7 @@ public unsafe partial struct UIState
     [FieldOffset(0xEA40)] public MarkingController MarkingController;
     [FieldOffset(0xECF0)] public LimitBreakController LimitBreakController;
 
+    [FieldOffset(0x119B8)] public RouletteController RouletteController;
     [FieldOffset(0x11A88)] public ContentsFinder ContentsFinder;
 
     // Ref: UIState#IsUnlockLinkUnlocked (relative to uistate)
