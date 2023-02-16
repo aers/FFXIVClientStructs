@@ -15,18 +15,17 @@ public unsafe partial struct AgentContentsFinder
     [FieldOffset(0x0)] public AgentInterface AgentInterface;
 
     [FieldOffset(0x86)] public byte* DescriptionString; // null-terminated cstring representing the currently displayed duty description
+    
+    [FieldOffset(0x1B8)] public ContentsFinderRewards Reward;
+    [FieldOffset(0x408)] public ContentsFinderRewards BonusReward;
+    
+    // These seem to be duplicates of the above reward structs
+    // [FieldOffset(0x5C8)] public ContentsFinderRewards Reward2;
+    // [FieldOffset(0x810)] public ContentsFinderRewards BonusReward2;
 
-    // Reward values for the currently selected duty
-    // Will be -1 or 0xFFFFFFFF if the UI displays an "up arrow" icon instead of a value
-    [FieldOffset(0x1B8)] public int ExpReward;
-    [FieldOffset(0x1BC)] public int GilReward;
-    [FieldOffset(0x1C0)] public int SealReward;
-    [FieldOffset(0x1C4)] public int PoeticReward;
-    [FieldOffset(0x1C8)] public int NonLimitedTomestoneReward; // As of 6.3 this is Astronomy
-    [FieldOffset(0x1CC)] public int LimitedTomestoneRward; // As of 6.3 this is Causality
-    [FieldOffset(0x1D0)] public int PvPExpReward;
-    [FieldOffset(0x1D4)] public int WolfMarkReward;
-
+    [FixedSizeArray<ItemReward>(35)] 
+    [FieldOffset(0x890)] public fixed byte ItemRewardArray[0x130 * 35];
+    
     [FieldOffset(0x1B4C)] public int SelectedDutyId; // ContentFinderCondition rowId for duties, ContentRoulette rowId for roulette
     [FieldOffset(0x1B58)] public byte NumCollectedRewards; // Value used for "Reward already received"
 
@@ -42,3 +41,26 @@ public unsafe partial struct AgentContentsFinder
     [MemberFunction("E9 ?? ?? ?? ?? 8B 93 ?? ?? ?? ?? 48 83 C4 20")]
     public partial void* OpenRouletteDuty(byte roulette, byte a2 = 0);
 }
+
+[StructLayout(LayoutKind.Explicit, Size = 0x20)]
+public struct ContentsFinderRewards
+{
+    [FieldOffset(0x00)] public int ExpReward;
+    [FieldOffset(0x00)] public int GilReward;
+    [FieldOffset(0x00)] public int SealReward;
+    [FieldOffset(0x00)] public int PoeticReward;
+    [FieldOffset(0x00)] public int NonLimitedTomestoneReward;
+    [FieldOffset(0x00)] public int LimitedTomestoneRward;
+    [FieldOffset(0x00)] public int PvPExpReward;
+    [FieldOffset(0x00)] public int WolfMarkReward;
+}
+
+[StructLayout(LayoutKind.Explicit, Size = 0x130)]
+public struct ItemReward
+{
+    [FieldOffset(0x44)] public int ItemId;
+    [FieldOffset(0x48)] public int Quantity;
+    [FieldOffset(0x58)] public Utf8String TooltipString;
+}
+
+
