@@ -3,7 +3,7 @@
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.FishGuide)]
-[StructLayout(LayoutKind.Explicit, Size = 0x158)]
+[StructLayout(LayoutKind.Explicit, Size = 0x1A8)]
 public unsafe partial struct AgentFishGuide
 {
     [FieldOffset(0x00)] public AgentInterface AgentInterface;
