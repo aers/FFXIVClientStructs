@@ -6600,6 +6600,7 @@ classes:
         base: Client::System::Scheduler::Base::LinkList<Client::System::Scheduler::Resource::SchedulerResource>
     funcs:
       0x14141B250: ctor
+      0x14141b7a0: GetResourceData
   Client::System::Scheduler::Clip::BaseClip:
     vtbls:
       - ea: 0x141B4E4E8
