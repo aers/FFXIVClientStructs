@@ -5425,6 +5425,14 @@ classes:
     vtbls:
       - ea: 0x141B4B0D0
         base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentBannerInterface::Storage:
+    funcs:
+      0x14140bde0: Update
+  Client::UI::Agent::AgentBannerInterface::Storage::CharacterData:
+    vtbls:
+      - ea: 0x141b84d48
+    funcs:
+      0x1414d39d0: dtor
   Client::UI::Agent::AgentBannerParty:
     vtbls:
       - ea: 0x141A6B840
