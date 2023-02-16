@@ -580,6 +580,12 @@ classes:
   Client::Game::MJI::IslandState:
     funcs:
       0x140B74FD0: ctor
+  Client::Game::MJI::PastureHandler:
+    funcs:
+      0x1413ED140: GetCurrentRoamingMinionCount
+      0x1413ED2B0: SetMinionPlaceStatus  # (this, minionId, isPlaced)
+      0x1413ECE80: ExecuteReleaseMinion  # (this, minionId, areaId)
+      0x1413ECFC0: ExecuteRecallMinion   # (this, minionId)
   Client::System::String::Utf8String:
     funcs:
       0x140059F40: ctor  # empty string ctor
