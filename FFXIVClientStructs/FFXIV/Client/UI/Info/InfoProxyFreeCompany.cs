@@ -11,7 +11,7 @@ public unsafe partial struct InfoProxyFreeCompany
     [FieldOffset(0x20)] public void* Unk20; //Low adress probably high in hierarchy
     [FieldOffset(0x30)] public ulong ID;
     [FieldOffset(0x44)] public GrandCompany GrandCompany;
-    [FieldOffset(0x46)] public uint HomeWorldID;
+    [FieldOffset(0x46)] public ushort HomeWorldID;
     [FieldOffset(0x59)] public byte Rank;
     [FieldOffset(0x70)] public CrestData Crest;
     [FieldOffset(0x78)] public ushort OnlineMembers;
