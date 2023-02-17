@@ -6,12 +6,15 @@
 public unsafe partial struct MJIPastureHandler {
     [FieldOffset(0x0)] public void* vtbl;
     
+    /// <summary>
+    /// An array representing all animals currently present in the pastures on the Island. 
+    /// </summary>
     [FixedSizeArray<MJIAnimal>(20)]
     [FieldOffset(0x2E8)] public fixed byte MJIAnimals[MJIAnimal.Size * 20];
 
     /// <summary>
-    /// An array representing which minions are currently out roaming the Island.
-    /// See <see cref="MinionSlots"/> if information about minion locations is required.
+    /// An array representing which minions are currently out roaming the Island. This array is indexed by row ID from
+    /// the Companion EXD sheet. See <see cref="MinionSlots"/> if information about minion locations is required.
     /// </summary>
     // Warning: This array will change size every time new minions are added!!
     [FixedSizeArray<bool>(480)]
@@ -48,7 +51,14 @@ public struct MJIAnimal {
 public struct MJIMinionSlot {
     public const int Size = 0xC;
 
+    /// <summary>
+    /// An internal ID used to track minion slots.
+    /// </summary>
+    /// <remarks>
+    /// May be set to 40 if the slot is currently empty or uninitialized.
+    /// </remarks>
     [FieldOffset(0x0)] public byte SlotId;
+    
     [FieldOffset(0x4)] public uint ObjectId;
     [FieldOffset(0x8)] public ushort MinionId;
     
@@ -56,4 +66,10 @@ public struct MJIMinionSlot {
     /// The MJIMinionPopAreaId that this minion currently resides in.
     /// </summary>
     [FieldOffset(0xA)] public byte PopAreaId;
+
+    /// <summary>
+    /// Check if this specific Minion Slot contains a minion or not.
+    /// </summary>
+    /// <returns>Returns <c>true</c> if a minion is present, <c>false</c> otherwise.</returns>
+    public bool IsSlotPopulated() => this.MinionId != 0;
 }
