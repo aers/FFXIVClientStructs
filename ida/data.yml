@@ -670,7 +670,11 @@ classes:
       0x14096BDF0: IsUnlockLinkUnlocked
       0x14096BE20: IsUnlockLinkUnlockedOrQuestCompleted
       0x14096E010: IsEmoteUnlocked
-      0x141380B20: IsInstanceContentCompleted
+      0x14096E180: IsItemActionUnlocked
+      0x14096C290: IsTripleTriadCardUnlocked
+      0x14096D890: GetNextMapAllowanceTimestamp
+      0x141380840: IsInstanceContentUnlocked   # static
+      0x141380B20: IsInstanceContentCompleted  # static
   Client::Game::UI::PlayerState:
     instances:
       - ea: 0x1420EA0B8
