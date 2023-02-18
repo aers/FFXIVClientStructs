@@ -1,6 +1,7 @@
 ﻿using FFXIVClientStructs.FFXIV.Client.Game.Object;
 using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Client.System.String;
+using FFXIVClientStructs.FFXIV.Client.UI.Misc;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
@@ -53,6 +54,6 @@ public unsafe partial struct AgentCharaCard
         [FieldOffset(0x480)] public uint       Activity6IconId;
         [FieldOffset(0x488)] public Utf8String Activity6Name;
 
-        [FieldOffset(0x540)] public void* CharaView; // size >= 0x390
+        [FieldOffset(0x540)] public CharaView CharaView; // size >= 0x390
     }
 }

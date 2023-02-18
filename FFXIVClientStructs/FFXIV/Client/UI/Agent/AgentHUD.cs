@@ -22,7 +22,10 @@ public unsafe partial struct AgentHUD
     //[FieldOffset(0x9DC)] public uint CurrentBattleCharaTargetLevel;
 
     [FieldOffset(0xCB8)] public int CompanionSummonTimer;
+    
+    [FixedSizeArray<HudPartyMember>(10)]
     [FieldOffset(0xCC8)] public fixed byte PartyMemberList[0x20 * 10];
+    
     [FieldOffset(0x12B8)] public short PartyMemberCount;
     [FieldOffset(0x12C0)] public uint PartyTitleAddonId;
     [FieldOffset(0x12C4)] public fixed uint RaidMemberIds[40];

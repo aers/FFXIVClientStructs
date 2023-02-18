@@ -19,11 +19,12 @@ public unsafe partial struct UIState
     [FieldOffset(0x14A0)] public Telepo Telepo;
     [FieldOffset(0x14F8)] public Cabinet Cabinet;
     [FieldOffset(0x1A90)] public Buddy Buddy;
+    [FieldOffset(0x296C)] public PvPProfile PvPProfile;
+    [FieldOffset(0x29F0)] public ContentsNote ContentsNote;
     [FieldOffset(0x2A98)] public RelicNote RelicNote;
     [FieldOffset(0x2AF8)] public AreaInstance AreaInstance;
     [FieldOffset(0x2B34)] public MobHunt MobHunt;
 
-    [FieldOffset(0x29F0)] public ContentsNote ContentsNote;
     [FieldOffset(0x3C60)] public RecipeNote RecipeNote;
 
     [FieldOffset(0xA7C8)] public Director* ActiveDirector;
@@ -32,7 +33,9 @@ public unsafe partial struct UIState
     [FieldOffset(0xAA58)] public Map Map;
 
     [FieldOffset(0xEA40)] public MarkingController MarkingController;
+    [FieldOffset(0xECF0)] public LimitBreakController LimitBreakController;
 
+    [FieldOffset(0x119B8)] public RouletteController RouletteController;
     [FieldOffset(0x11A88)] public ContentsFinder ContentsFinder;
 
     // Ref: UIState#IsUnlockLinkUnlocked (relative to uistate)
@@ -42,6 +45,9 @@ public unsafe partial struct UIState
     //      direct ref: 48 8D 0D ?? ?? ?? ?? 0F B6 04 08 84 D0 75 10 B8 ?? ?? ?? ?? 48 8B 5C 24
     //      relative to uistate: E8 ?? ?? ?? ?? 84 C0 75 A6 32 C0 (case for 0x355)
     [FieldOffset(0x16A7A)] public fixed byte UnlockedCompanionsBitmask[0x3A];
+    
+    // 42 0F B6 04 30 44 84 C0
+    [FieldOffset(0x16AB6)] public fixed byte ChocoboTaxiStandsBitmask[0x26];
     
     [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B 8B ?? ?? ?? ?? 48 8B 01", 3)]
     public static partial UIState* Instance();
@@ -68,21 +74,17 @@ public unsafe partial struct UIState
     /// Check an item (by EXD row) to see if the action associated with the item is unlocked or "obtained/registered."
     /// </summary>
     /// <remarks>
-    /// This method populates offset 324 of *something*, which is then used in turn to display the "checked" flag on
-    /// unlockable items. It's used in a few other places, but this appears to be the primary use.
-    /// <br /><br />
-    /// This method **will** call EXD, so the usual caveats there apply. Where possible, use a by-ID check as they're
-    /// generally faster or rely less on EXD.
+    /// This method <b>will</b> call EXD, so the usual caveats there apply. Where possible, use a by-ID check as
+    /// they're generally faster and/or rely less on EXD.
     /// </remarks>
     /// <param name="itemExdPtr">A pointer to an EXD row for an item, generally retrieved from <see cref="ExdModule.GetItemRowById"/>.</param>
-    /// <returns>Returns a number (byte?) based on the item's unlock status. For reasons unknown, this is a long but
-    /// no value above 4 has ever been noted.
+    /// <returns>Returns a value denoting this item's unlock status from the below table:
     /// <list type="table">
     /// <listheader><term>Value</term><description>Meaning</description></listheader>
     /// <item><term>1</term><description>The item is unlocked/registered.</description></item>
     /// <item><term>2</term><description>The item is not unlocked/registered, but can be.</description></item>
-    /// <item><term>3</term><description>Can be returned, but not clear as to when.</description></item>
-    /// <item><term>4</term><description>The item has no unlock action, or an unlock action was not found.</description></item>
+    /// <item><term>3</term><description>Unknown, possibly "information not loaded yet."</description></item>
+    /// <item><term>4</term><description>The item does not have an unlock status.</description></item>
     /// </list>
     /// </returns>
     [MemberFunction("E8 ?? ?? ?? ?? 83 F8 01 75 03")]
@@ -128,10 +130,25 @@ public unsafe partial struct UIState
         
         return ((1 << ((int) companionId & 7)) & this.UnlockedCompanionsBitmask[companionId >> 3]) > 0;
     }
+    
+    public bool IsChocoboTaxiStandUnlocked(uint chocoboTaxiStandId) {
+        return ((1 << ((ushort)chocoboTaxiStandId & 7)) & this.ChocoboTaxiStandsBitmask[(ushort)chocoboTaxiStandId >> 3]) > 0;
+    }
 
     [MemberFunction("E8 ?? ?? ?? ?? 44 22 F0")]
     public static partial bool IsInstanceContentCompleted(uint instanceContentId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 7C 24 ?? 3C")]
     public static partial bool IsInstanceContentUnlocked(uint instanceContentId);
+
+    // Only valid after the timers window has been opened, returns -1 otherwise.
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B F8 E8 ?? ?? ?? ?? 49 8D 9F")]
+    public partial int GetNextMapAllowanceTimestamp();
+
+    // Only valid after the timers window has been opened, returns DateTime.MinValue otherwise.
+    public DateTime GetNextMapAllowanceDateTime()
+    {
+        var timeStamp = GetNextMapAllowanceTimestamp();
+        return timeStamp > 0 ? DateTime.UnixEpoch.AddSeconds(timeStamp) : DateTime.MinValue;
+    }
 }

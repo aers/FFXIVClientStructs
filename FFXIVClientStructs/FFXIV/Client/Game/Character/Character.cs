@@ -72,6 +72,7 @@ public unsafe partial struct Character
     [FieldOffset(0x1B03)] public byte Battalion; // used for determining friend/enemy state
     [FieldOffset(0x1B17)] public byte ShieldValue;
     [FieldOffset(0x1B1B)] public byte StatusFlags;
+    [FieldOffset(0x1B1F)] public byte StatusFlags4; // 0x80 flagged when permanent wetness in GPose is toggled.
     [FieldOffset(0x1AE8)] public uint CompanionOwnerID;
 
     [MemberFunction("E8 ?? ?? ?? ?? 49 3B C7 0F 84")]

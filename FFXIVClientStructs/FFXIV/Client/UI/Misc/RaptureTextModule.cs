@@ -13,4 +13,13 @@ public unsafe partial struct RaptureTextModule
 
     [MemberFunction("E8 ?? ?? ?? ?? EB 55 FF 50 30")]
     public partial byte* FormatAddonText3(uint addonId, int intParam1, int intParam2, int intParam3);
+    
+    /// <summary>
+    /// Display a timespan as hours, minutes or seconds with only the largest non zero unit.
+    /// </summary>
+    /// <param name="seconds"></param>
+    /// <param name="alternativeMinutesGlyph">Use U+E028 for minutes</param>
+    /// <returns>string containing one of 23h, 59m, 59s</returns>
+    [MemberFunction("E8 ?? ?? ?? ?? 4C 8B C0 48 8B 4D 88")]
+    public partial byte* FormatTimeSpan(uint seconds, bool alternativeMinutesGlyph = false);
 }

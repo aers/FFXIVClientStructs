@@ -58,6 +58,7 @@ public enum EventHandlerType : ushort {
 	InstanceContentGuide = 0x001D,
 	HousingAethernet = 0x001E,
 	FcTalk = 0x001F,
+	MobHunt = 0x0020,
 	Adventure = 0x0021,
 	DailyQuestSupply = 0x0022,
 	TripleTriad = 0x0023,

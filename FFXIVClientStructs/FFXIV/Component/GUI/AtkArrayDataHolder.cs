@@ -2,7 +2,7 @@
 
 // ctor E8 ?? ?? ?? ?? 48 8D 8E ?? ?? ?? ?? 48 89 BE ?? ?? ?? ?? 48 8B C7 
 [StructLayout(LayoutKind.Explicit, Size = 0x50)]
-public unsafe struct AtkArrayDataHolder
+public unsafe partial struct AtkArrayDataHolder
 {
     [FieldOffset(0x0)]
     public short NumberArrayCount; // these are total counts - some of the slots can be (and are) empty
@@ -23,4 +23,13 @@ public unsafe struct AtkArrayDataHolder
     [FieldOffset(0x38)] public short* ExtendArrayKeys;
     [FieldOffset(0x40)] public ExtendArrayData** _ExtendArrays;
     [FieldOffset(0x48)] public ExtendArrayData** ExtendArrays;
+
+    [MemberFunction("E8 ?? ?? ?? ?? EB 47 33 F6 8B CE 48 8B 47 18")]
+    public partial NumberArrayData* GetNumberArrayData(int index);
+
+    [MemberFunction("E8 ?? ?? ?? ?? EB 47 33 F6 8B CE 48 8B 47 30")]
+    public partial StringArrayData* GetStringArrayData(int index);
+
+    [MemberFunction("E8 ?? ?? ?? ?? EB 3C 33 FF")]
+    public partial ExtendArrayData* GetExtendArrayData(int index);
 }

@@ -1,4 +1,3 @@
-using FFXIVClientStructs.STD;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -329,26 +328,34 @@ namespace CExporter
                 throw new Exception($"Unknown EnvFormat: {EnvFormat}");
 
             string fullName;
-            if (type.IsGenericType)
+            if (type.IsGenericType || (type.IsPointer && type.GetElementType().IsGenericType))
             {
-                var generic = type.GetGenericTypeDefinition();
+                bool isPointer = type.IsPointer;
+                var dereferenced = isPointer ? type.GetElementType() : type;
+                var generic = dereferenced.GetGenericTypeDefinition();
                 fullName = generic.FullName.Split('`')[0];
-                foreach (var argType in type.GenericTypeArguments)
+                if (dereferenced.IsNested)
+                {
+                    fullName += '+' + generic.FullName.Split('+')[1].Split('[')[0];
+                }
+                foreach (var argType in dereferenced.GenericTypeArguments)
                 {
                     var argTypeFullName = FixFullName(argType).Replace("::", "");
                     fullName += $"{separator}{argTypeFullName}";
                 }
+                if (isPointer)
+                    fullName += '*';
             }
             else
             {
                 fullName = type.FullName;
             }
 
-            if (fullName.Contains(FFXIVNamespacePrefix))
+            if (fullName.StartsWith(FFXIVNamespacePrefix))
                 fullName = fullName.Remove(0, FFXIVNamespacePrefix.Length);
-            if (fullName.Contains(STDNamespacePrefix))
+            if (fullName.StartsWith(STDNamespacePrefix))
                 fullName = fullName.Remove(0, STDNamespacePrefix.Length);
-            if (fullName.Contains(InteropNamespacePrefix))
+            if (fullName.StartsWith(InteropNamespacePrefix))
                 fullName = fullName.Remove(0, InteropNamespacePrefix.Length);
 
             if (fullName.Contains("FFXIVClientStructs, Version"))

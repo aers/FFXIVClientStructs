@@ -81,7 +81,7 @@ public unsafe partial struct UIModule
     public partial void* GetAddonConfig();
 
     [VirtualFunction(20)]
-    public partial void* GetUiSavePackModule();
+    public partial UiSavePackModule* GetUiSavePackModule();
 
     [VirtualFunction(21)]
     public partial void* GetLetterDataModule();
@@ -109,6 +109,9 @@ public unsafe partial struct UIModule
 
     [VirtualFunction(38)]
     public partial UI3DModule* GetUI3DModule();
+
+    [VirtualFunction(49)]
+    public partial FieldMarkerModule* GetFieldMarkerModule();
 
     [VirtualFunction(57)]
     public partial RetainerCommentModule* GetRetainerCommentModule();

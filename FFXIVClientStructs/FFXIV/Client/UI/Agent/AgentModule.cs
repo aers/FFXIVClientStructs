@@ -313,7 +313,8 @@ public enum AgentId : uint {
     AirShipExploration = 189,
     AirShipExplorationResult = 190,
     AirShipExplorationDetail = 191,
-    
+    SubmersibleParts = 192,
+    SubmersibleExploration = 193,
     SubmersibleExplorationResult = 194,
     SubmersibleExplorationDetail = 195,
     CompanyCraftMaterial = 196,
@@ -380,6 +381,7 @@ public enum AgentId : uint {
     RecipeItemContext = 262, // context menus for RecipeTree and RecipeList, constructor inlined
     ContactList = 263,
 
+    SatisfactionSupply = 266,
     Snipe = 268,
     MountSpeed = 269,
 
@@ -408,6 +410,7 @@ public enum AgentId : uint {
 
     Description = 314, //Frontline/Bozja Description
     AozNotebook = 319, //Bluemage Spells
+    RhythmAction = 320,
 
     Emj = 322, //Mahjong
 
@@ -425,6 +428,7 @@ public enum AgentId : uint {
     DawnStory = 339, //Duty Support
     HousingCatalogPreview = 340,
 
+    SubmersibleExplorationMapSelect = 342,
     QuestRedo = 343,
     QuestRedoHud = 344,
 
