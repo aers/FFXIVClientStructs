@@ -85,6 +85,24 @@ public unsafe struct IslandState {
     [FieldOffset(0x62)] public MJIFarmPasture Pasture;
 
     /// <summary>
+    /// Appears to be set if the pasture in it has any animal currently under care.
+    /// </summary>
+    [FieldOffset(0x66)] public bool PastureUnderCare; // ??
+    
+    // Note: 0x68 to the game is treated as a single DWORD, but the actual values are only used in the context of
+    // LOWORD or HIWORD, so we'll split these fields.
+    
+    /// <summary>
+    /// The current daily care fee paid to the Creature Comforter for the pasture.
+    /// </summary>
+    [FieldOffset(0x68)] public ushort PastureDailyCareFee;
+    
+    /// <summary>
+    /// The current daily care fee paid to the Produce Producer for the farm.
+    /// </summary>
+    [FieldOffset(0x6A)] public ushort FarmDailyCareFee;
+    
+    /// <summary>
     /// The current number of hours remaining until a specific Landmark has finished construction.
     /// 
     /// This value may be zero when there is either no construction or if construction is finished and the landmark
