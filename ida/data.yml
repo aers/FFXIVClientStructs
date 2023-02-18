@@ -5187,6 +5187,8 @@ classes:
       0x140C307A0: ctor
       0x140C310F0: OpenRegularDuty
       0x140C312D0: OpenRouletteDuty
+      0x140C316E0: SetContentRouletteRoleBonus
+      0x140C345A0: GetInstance
   Client::UI::Agent::AgentMap::MapMarkerStructSearchName:
     vtbls:
       - ea: 0x1419A87E0
