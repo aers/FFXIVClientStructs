@@ -6320,6 +6320,10 @@ classes:
     vtbls:
       - ea: 0x141A2F2B8
         base: Component::GUI::AtkUnitBase
+  Client::UI::AddonGcArmyMemberList:
+    vtbls:
+      - ea: 0x141A24068
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonGcArmyExpeditionResult:
     vtbls:
       - ea: 0x141A25498
