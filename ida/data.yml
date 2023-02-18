@@ -570,7 +570,7 @@ classes:
       0x140B71910: LoadDemandResearchPacket
       0x140B71E80: IsRecipeUnlocked # (this, recipeId)
       0x140B71EB0: IsPouchItemLocked # (this, pouchItemId)
-      0x140B70250: IsFunctionLocked # (this, functionId)
+      0x140B70250: IsFunctionUnlocked # (this, functionId)
       0x140B70480: HandleActorControlPacket
       0x140B70F60: HandleInboundPacket
       0x140B722F0: GetVisibleMinimapIcons

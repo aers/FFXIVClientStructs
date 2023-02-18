@@ -2,6 +2,10 @@
 
 [StructLayout(LayoutKind.Explicit, Size = 0xB0)]
 public unsafe struct IslandState {
+    // Unknown!! This flag *appears* to control island state for quite a few things and is read *a lot* by Lua, but I
+    // haven't been able to tack this down quite yet. 
+    [FieldOffset(0x00)] public bool CanEditIsland;
+    
     /// <summary>
     /// The current Sanctuary Rank of the player's island. Controls what buildings/items/recipes are or aren't
     /// available to the player, and represented by MJIRank.
