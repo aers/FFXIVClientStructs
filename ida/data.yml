@@ -570,7 +570,7 @@ classes:
       0x140B71910: LoadDemandResearchPacket
       0x140B71E80: IsRecipeUnlocked # (this, recipeId)
       0x140B71EB0: IsPouchItemLocked # (this, pouchItemId)
-      0x140B70250: IsFunctionLocked # (this, functionId)
+      0x140B70250: IsFunctionUnlocked # (this, functionId)
       0x140B70480: HandleActorControlPacket
       0x140B70F60: HandleInboundPacket
       0x140B722F0: GetVisibleMinimapIcons
@@ -580,6 +580,12 @@ classes:
   Client::Game::MJI::IslandState:
     funcs:
       0x140B74FD0: ctor
+  Client::Game::MJI::MJIPastureHandler:
+    funcs:
+      0x1413ED140: GetCurrentRoamingMinionCount
+      0x1413ED2B0: SetMinionPlaceStatus  # (this, minionId, isPlaced)
+      0x1413ECE80: ExecuteReleaseMinion  # (this, minionId, areaId)
+      0x1413ECFC0: ExecuteRecallMinion   # (this, minionId)
   Client::System::String::Utf8String:
     funcs:
       0x140059F40: ctor  # empty string ctor
@@ -664,7 +670,11 @@ classes:
       0x14096BDF0: IsUnlockLinkUnlocked
       0x14096BE20: IsUnlockLinkUnlockedOrQuestCompleted
       0x14096E010: IsEmoteUnlocked
-      0x141380B20: IsInstanceContentCompleted
+      0x14096E180: IsItemActionUnlocked
+      0x14096C290: IsTripleTriadCardUnlocked
+      0x14096D890: GetNextMapAllowanceTimestamp
+      0x141380840: IsInstanceContentUnlocked   # static
+      0x141380B20: IsInstanceContentCompleted  # static
   Client::Game::UI::PlayerState:
     instances:
       - ea: 0x1420EA0B8

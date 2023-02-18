@@ -74,21 +74,17 @@ public unsafe partial struct UIState
     /// Check an item (by EXD row) to see if the action associated with the item is unlocked or "obtained/registered."
     /// </summary>
     /// <remarks>
-    /// This method populates offset 324 of *something*, which is then used in turn to display the "checked" flag on
-    /// unlockable items. It's used in a few other places, but this appears to be the primary use.
-    /// <br /><br />
-    /// This method **will** call EXD, so the usual caveats there apply. Where possible, use a by-ID check as they're
-    /// generally faster or rely less on EXD.
+    /// This method <b>will</b> call EXD, so the usual caveats there apply. Where possible, use a by-ID check as
+    /// they're generally faster and/or rely less on EXD.
     /// </remarks>
     /// <param name="itemExdPtr">A pointer to an EXD row for an item, generally retrieved from <see cref="ExdModule.GetItemRowById"/>.</param>
-    /// <returns>Returns a number (byte?) based on the item's unlock status. For reasons unknown, this is a long but
-    /// no value above 4 has ever been noted.
+    /// <returns>Returns a value denoting this item's unlock status from the below table:
     /// <list type="table">
     /// <listheader><term>Value</term><description>Meaning</description></listheader>
     /// <item><term>1</term><description>The item is unlocked/registered.</description></item>
     /// <item><term>2</term><description>The item is not unlocked/registered, but can be.</description></item>
-    /// <item><term>3</term><description>Can be returned, but not clear as to when.</description></item>
-    /// <item><term>4</term><description>The item has no unlock action, or an unlock action was not found.</description></item>
+    /// <item><term>3</term><description>Unknown, possibly "information not loaded yet."</description></item>
+    /// <item><term>4</term><description>The item does not have an unlock status.</description></item>
     /// </list>
     /// </returns>
     [MemberFunction("E8 ?? ?? ?? ?? 83 F8 01 75 03")]
