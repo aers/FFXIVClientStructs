@@ -2889,6 +2889,8 @@ classes:
         base: Component::GUI::AtkComponentBase
     funcs:
       0x140539C80: ctor
+      0x140539340: LoadIconById
+      0x140539370: LoadIcon
   Component::GUI::AtkComponentListItemRenderer:
     vtbls:
       - ea: 0x141931F68
@@ -3058,6 +3060,9 @@ classes:
         base: Component::GUI::AtkComponentBase
     funcs:
       0x14056F980: ctor
+      0x14056F0D0: LoadIconById
+      0x14056F110: GetIconId
+      0x14056F540: AttachTooltip
   Component::GUI::AtkComponentMultipurpose:
     vtbls:
       - ea: 0x141933328
@@ -5869,6 +5874,10 @@ classes:
     funcs:
       0x140F7C280: ctor
       0x140F7CA10: GenerateTooltip
+  Client::UI::AddonMacro:
+    vtbls:
+      - ea: 0x141A0CFE0
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonItemDetail:
     vtbls:
       - ea: 0x141A0DB58
