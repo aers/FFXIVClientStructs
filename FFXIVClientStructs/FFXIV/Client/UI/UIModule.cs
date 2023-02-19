@@ -71,7 +71,7 @@ public unsafe partial struct UIModule
     public partial void* GetItemOrderModule();
 
     [VirtualFunction(17)]
-    public partial void* GetItemFinderModule();
+    public partial ItemFinderModule* GetItemFinderModule();
 
     [VirtualFunction(18)]
     public partial ConfigModule* GetConfigModule();
