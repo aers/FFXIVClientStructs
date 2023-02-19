@@ -5447,7 +5447,8 @@ classes:
       0x14140bde0: Update
   Client::UI::Agent::AgentBannerInterface::Storage::CharacterData:
     vtbls:
-      - ea: 0x141b84d48
+      - ea: 0x141B84D48
+        base: Component::GUI::AtkModuleInterface::AtkEventInterface
     funcs:
       0x1414d39d0: dtor
   Client::UI::Agent::AgentBannerParty:
