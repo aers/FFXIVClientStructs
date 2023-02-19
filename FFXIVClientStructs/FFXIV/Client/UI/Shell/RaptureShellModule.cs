@@ -15,4 +15,8 @@ public unsafe partial struct RaptureShellModule
 
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8D 4D 28")]
     public partial void ExecuteMacro(RaptureMacroModule.Macro* macro);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 0F 84 ?? ?? ?? ?? 48 8B 4C 24 ?? 48 B8")]
+    public partial bool TryGetMacroIconCommand(RaptureMacroModule.Macro* macro, void* resultsOut);
 }
+
