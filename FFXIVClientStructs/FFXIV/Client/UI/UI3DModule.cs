@@ -92,7 +92,7 @@ public unsafe partial struct UI3DModule
     [FieldOffset(0xF858)] public fixed byte CharacterObjectInfoPointerArray[50 * 0x8]; // array of Client::UI::UI3DModule::ObjectInfo* for Characters on screen (players, attackable NPCs, etc)
     [FieldOffset(0xF9E8)] public int CharacterObjectInfoCount;
     [FixedSizeArray<Pointer<ObjectInfo>>(68)]
-    [FieldOffset(0xF950)] public fixed byte MapObjectInfoPointerArray[68 * 0x8]; // array of Client::UI::UI3DModule::ObjectInfo* for objects displayed on minimap - summoning bells, mailboxes, etc
+    [FieldOffset(0xF9F0)] public fixed byte MapObjectInfoPointerArray[68 * 0x8]; // array of Client::UI::UI3DModule::ObjectInfo* for objects displayed on minimap - summoning bells, mailboxes, etc
     [FieldOffset(0xFC10)] public int MapObjectInfoCount;
     [FieldOffset(0xFC18)] public ObjectInfo* TargetObjectInfo;
     [FixedSizeArray<MemberInfo>(48)]
