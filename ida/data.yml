@@ -540,11 +540,15 @@ classes:
       - ea: 0x142102360
         pointer: True
     funcs:
+      0x140B0CA50: GetInstance
       0x140B0FD20: IsOutside
       0x140B0FD30: IsInside
       0x140B0FD40: IsInWorkshop
       0x140B105C0: HasHousePermissions
+      0x140B0FE00: GetCurrentPlot
       0x140B0FEB0: GetCurrentWard
+      0x140B106C0: GetIndoorTerritoryHouseId
+      0x140B10990: GetCurrentRoom
       0x140B0FF10: GetCurrentFloor # 0 - Ground Level, 1 - Upstairs, 10 - Downstairs
       0x140B0FFA0: GetInvertedBrightness # 0-5, higher is darker
       0x140B36B90: IsSubmarineExplorationUnlocked # static
