@@ -205,7 +205,7 @@ public unsafe partial struct AtkResNode : ICreatable
 public struct Matrix2x2
 {
     [FieldOffset(0x0)] public float X1;
-    [FieldOffset(0x4)] public float Y1;
-    [FieldOffset(0x8)] public float X2;
+    [FieldOffset(0x4)] public float X2;
+    [FieldOffset(0x8)] public float Y1;
     [FieldOffset(0xC)] public float Y2;
 }
