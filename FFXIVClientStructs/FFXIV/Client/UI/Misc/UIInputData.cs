@@ -7,6 +7,38 @@ public unsafe partial struct UIInputData
 {
     public static UIInputData* Instance() => Framework.Instance()->UIModule->GetUIInputData();
 
+    [FieldOffset(0x8)] public int GamepadLeftStickX; // from -99 (Right) to 99 (Left)
+    [FieldOffset(0xC)] public int GamepadLeftStickY; // from -99 (Down) to 99 (Up)
+    [FieldOffset(0x10)] public int GamepadRightStickX; // from -99 (Right) to 99 (Left)
+    [FieldOffset(0x14)] public int GamepadRightStickY; // from -99 (Down) to 99 (Up)
+    [FieldOffset(0x18)] public GamepadButtons1Flags GamepadButtons1; // Not always set if UI is focused
+    [FieldOffset(0x19)] public GamepadButtons2Flags GamepadButtons2; // Not always set if UI is focused
+
+    [FieldOffset(0x2C)] public float Start;
+    [FieldOffset(0x30)] public float Select;
+    [FieldOffset(0x34)] public float L3;
+    [FieldOffset(0x38)] public float R3;
+    [FieldOffset(0x3C)] public float L1;
+    [FieldOffset(0x40)] public float R1;
+    [FieldOffset(0x44)] public float Cross;
+    [FieldOffset(0x48)] public float Circle;
+    [FieldOffset(0x4C)] public float Square;
+    [FieldOffset(0x50)] public float Triangle;
+    [FieldOffset(0xAC)] public float DPadLeft;
+    [FieldOffset(0xB0)] public float DPadRight;
+    [FieldOffset(0xB4)] public float DPadUp;
+    [FieldOffset(0xB8)] public float DPadDown;
+    [FieldOffset(0xBC)] public float GamepadLeftStickLeft;
+    [FieldOffset(0xC0)] public float GamepadLeftStickRight;
+    [FieldOffset(0xC4)] public float GamepadLeftStickUp;
+    [FieldOffset(0xC8)] public float GamepadLeftStickDown;
+    [FieldOffset(0xCC)] public float GamepadRightStickLeft;
+    [FieldOffset(0xD0)] public float GamepadRightStickRight;
+    [FieldOffset(0xD4)] public float GamepadRightStickUp;
+    [FieldOffset(0xD8)] public float GamepadRightStickDown;
+    [FieldOffset(0xE0)] public float L2;
+    [FieldOffset(0xE8)] public float R2;
+    
     /*
      * UIFiltered means those are not set if 
      * - the game window is focused and
@@ -81,6 +113,34 @@ public unsafe partial struct UIInputData
     [FieldOffset(0x780)] public byte LastKeyCharKeyCode; // (key code of the character just below, ie `97` for a lowercase `a`)
     [FieldOffset(0x788)] public char LastKeyChar; // (actual character made by key combination, ie `a` or `A`)
 
+}
+
+[Flags]
+public enum GamepadButtons1Flags : byte
+{
+    None = 0,
+    DPadUp = 1,
+    DPadDown = 2,
+    DPadLeft = 4,
+    DPadRight = 8,
+    Triangle = 16,
+    Cross = 32,
+    Square = 64,
+    Circle = 128,
+}
+
+[Flags]
+public enum GamepadButtons2Flags : byte
+{
+    None = 0,
+    L1 = 1,
+    L2 = 2,
+    L3 = 4,
+    R1 = 8,
+    R2 = 16,
+    R3 = 32,
+    Select = 64,
+    Start = 128,
 }
 
 [Flags]
