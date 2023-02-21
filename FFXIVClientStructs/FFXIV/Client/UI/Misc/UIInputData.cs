@@ -11,8 +11,7 @@ public unsafe partial struct UIInputData
     [FieldOffset(0xC)] public int GamepadLeftStickY; // from -99 (Down) to 99 (Up)
     [FieldOffset(0x10)] public int GamepadRightStickX; // from -99 (Right) to 99 (Left)
     [FieldOffset(0x14)] public int GamepadRightStickY; // from -99 (Down) to 99 (Up)
-    [FieldOffset(0x18)] public GamepadButtons1Flags GamepadButtons1; // Not always set if UI is focused
-    [FieldOffset(0x19)] public GamepadButtons2Flags GamepadButtons2; // Not always set if UI is focused
+    [FieldOffset(0x18)] public GamepadButtonsFlags GamepadButtons; // Not always set if UI is focused
 
     [FieldOffset(0x2C)] public float Start;
     [FieldOffset(0x30)] public float Select;
@@ -116,7 +115,7 @@ public unsafe partial struct UIInputData
 }
 
 [Flags]
-public enum GamepadButtons1Flags : byte
+public enum GamepadButtonsFlags : ushort
 {
     None = 0,
     DPadUp = 1,
@@ -127,20 +126,14 @@ public enum GamepadButtons1Flags : byte
     Cross = 32,
     Square = 64,
     Circle = 128,
-}
-
-[Flags]
-public enum GamepadButtons2Flags : byte
-{
-    None = 0,
-    L1 = 1,
-    L2 = 2,
-    L3 = 4,
-    R1 = 8,
-    R2 = 16,
-    R3 = 32,
-    Select = 64,
-    Start = 128,
+    L1 = 256,
+    L2 = 512,
+    L3 = 1024,
+    R1 = 2048,
+    R2 = 4096,
+    R3 = 8192,
+    Select = 16384,
+    Start = 32768,
 }
 
 [Flags]
