@@ -1,4 +1,6 @@
-﻿[StructLayout(LayoutKind.Explicit, Size = 0x10)]
+﻿namespace FFXIVClientStructs.FFXIV.Common.Math; 
+
+[StructLayout(LayoutKind.Explicit, Size = 0x10)]
 public unsafe struct Matrix2x2 : IEquatable<Matrix2x2>
 {
     [FieldOffset(0x0)] public fixed float Matrix[4];
