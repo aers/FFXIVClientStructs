@@ -68,7 +68,10 @@ public unsafe partial struct AtkResNode : ICreatable
     [FieldOffset(0x4C)] public float ScaleX;
     [FieldOffset(0x50)] public float ScaleY;
     [FieldOffset(0x54)] public float Rotation; // radians (file is degrees)
-    [FieldOffset(0x58)] public fixed float UnkMatrix[3 * 2];
+    [FieldOffset(0x58), Obsolete] public fixed float UnkMatrix[3 * 2];
+    [FieldOffset(0x58)] public Matrix2x2 Transform;
+    [FieldOffset(0x68)] public float ScreenX;
+    [FieldOffset(0x6C)] public float ScreenY;
 
     [FieldOffset(0x70)] public ByteColor Color;
 
