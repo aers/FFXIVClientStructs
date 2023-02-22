@@ -540,11 +540,15 @@ classes:
       - ea: 0x142102360
         pointer: True
     funcs:
+      0x140B0CA50: GetInstance
       0x140B0FD20: IsOutside
       0x140B0FD30: IsInside
       0x140B0FD40: IsInWorkshop
       0x140B105C0: HasHousePermissions
+      0x140B0FE00: GetCurrentPlot
       0x140B0FEB0: GetCurrentWard
+      0x140B106C0: GetIndoorTerritoryHouseId
+      0x140B10990: GetCurrentRoom
       0x140B0FF10: GetCurrentFloor # 0 - Ground Level, 1 - Upstairs, 10 - Downstairs
       0x140B0FFA0: GetInvertedBrightness # 0-5, higher is darker
       0x140B36B90: IsSubmarineExplorationUnlocked # static
@@ -2889,6 +2893,8 @@ classes:
         base: Component::GUI::AtkComponentBase
     funcs:
       0x140539C80: ctor
+      0x140539340: LoadIconById
+      0x140539370: LoadIcon
   Component::GUI::AtkComponentListItemRenderer:
     vtbls:
       - ea: 0x141931F68
@@ -3058,6 +3064,9 @@ classes:
         base: Component::GUI::AtkComponentBase
     funcs:
       0x14056F980: ctor
+      0x14056F0D0: LoadIconById
+      0x14056F110: GetIconId
+      0x14056F540: AttachTooltip
   Component::GUI::AtkComponentMultipurpose:
     vtbls:
       - ea: 0x141933328
@@ -5442,7 +5451,8 @@ classes:
       0x14140bde0: Update
   Client::UI::Agent::AgentBannerInterface::Storage::CharacterData:
     vtbls:
-      - ea: 0x141b84d48
+      - ea: 0x141B84D48
+        base: Component::GUI::AtkModuleInterface::AtkEventInterface
     funcs:
       0x1414d39d0: dtor
   Client::UI::Agent::AgentBannerParty:
@@ -5869,6 +5879,10 @@ classes:
     funcs:
       0x140F7C280: ctor
       0x140F7CA10: GenerateTooltip
+  Client::UI::AddonMacro:
+    vtbls:
+      - ea: 0x141A0CFE0
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonItemDetail:
     vtbls:
       - ea: 0x141A0DB58
