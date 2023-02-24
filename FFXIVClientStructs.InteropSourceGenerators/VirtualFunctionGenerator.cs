@@ -112,7 +112,7 @@ internal sealed class VirtualFunctionGenerator : IIncrementalGenerator
             StructInfo.RenderStart(builder);
 
             builder.AppendLine("[StructLayout(LayoutKind.Explicit)]");
-            builder.AppendLine($"public unsafe struct {StructInfo.Name}VTable");
+            builder.AppendLine($"public unsafe partial struct {StructInfo.Name}VTable");
             builder.AppendLine("{");
             builder.Indent();
             VirtualFunctionInfos.Iter(vfi => vfi.RenderFunctionPointer(builder, StructInfo));

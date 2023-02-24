@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.InteropSourceGenerators.Models;
 internal sealed record SignatureInfo(string Signature)
 {
     public static Validation<DiagnosticInfo, SignatureInfo> GetValidatedSignature(string signature,
-        IMethodSymbol location)
+        ISymbol location)
     {
         return IsValid(signature)
             ? Success<DiagnosticInfo, SignatureInfo>(new SignatureInfo(PadSignature(signature)))
