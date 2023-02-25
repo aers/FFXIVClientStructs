@@ -18,7 +18,7 @@ public unsafe partial struct HousingWorkshopTerritory
 public unsafe partial struct AirshipData
 {
     [FieldOffset(0x0)] public fixed byte Data[0x1C0];
-    [FieldOffset(0x4)] public int RegisterTime; // currently a theory will confirm on a later point when i craft a 2nd airship
+    [FieldOffset(0x4)] public int RegisterTime;
     [FieldOffset(0xC)] public byte RankId;
     [FieldOffset(0x10)] public int ReturnTime;
     [FieldOffset(0x14)] public uint CurrentExp;
