@@ -18,6 +18,7 @@ public unsafe partial struct HousingWorkshopTerritory
 [StructLayout(LayoutKind.Explicit, Size = 0x1C0)]
 public unsafe partial struct AirshipData
 {
+    [FieldOffset(0x0)] public fixed byte Data[0x1C0];
     [FieldOffset(0x4)] public int RegisterTime; // currently a theory will confirm on a later point when i craft a 2nd airship
     [FieldOffset(0xC)] public byte RankId;
     [FieldOffset(0x10)] public int ReturnTime;
@@ -37,11 +38,28 @@ public unsafe partial struct AirshipData
 
     [FieldOffset(0x37)] public fixed byte Name[20];
 
+    [FixedSizeArray<AirshipItemData>(5)]
+    [FieldOffset(0x5C)] public fixed byte ItemData[0x38 * 5];
+
     /// <summary>Gets the registered time as a <see cref="DateTime"/> object</summary>
     public DateTime GetRegisterTime() => DateTime.UnixEpoch.AddSeconds(RegisterTime);
 
     /// <summary>Gets the return time as a <see cref="DateTime"/> object</summary>
     public DateTime GetReturnTime() => DateTime.UnixEpoch.AddSeconds(ReturnTime);
+}
+
+[StructLayout(LayoutKind.Explicit, Size = 0x38)]
+public unsafe partial struct AirshipItemData
+{
+    [FieldOffset(0x0)] public fixed byte Data[0x38];
+
+    [FieldOffset(0x4)] public uint ItemId1;
+    [FieldOffset(0x8)] public uint ItemId2;
+    [FieldOffset(0xC)] public ushort ItemCount1;
+    [FieldOffset(0xE)] public ushort ItemCount2;
+
+    [FieldOffset(0x2A)] public bool ItemValid1;
+    [FieldOffset(0x2B)] public bool ItemValid2;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x2320)]
