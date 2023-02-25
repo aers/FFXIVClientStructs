@@ -1,7 +1,7 @@
 ﻿namespace FFXIVClientStructs.FFXIV.Client.Game.UI; 
 
 [StructLayout(LayoutKind.Explicit, Size = 0xB0)]
-public unsafe struct ContentsFinder
+public unsafe partial struct ContentsFinder
 {
     public static ContentsFinder* Instance() => &UIState.Instance()->ContentsFinder;
     
@@ -9,34 +9,37 @@ public unsafe struct ContentsFinder
     [FieldOffset(0x10)] public LootRule LootRules;
     
     [Obsolete("Use IsUnrestrictedParty boolean property instead", true)] 
-    [FieldOffset(0x11)] public byte UnrestrictedParty;
+    [FieldOffset(0x19)] public byte UnrestrictedParty;
     
     [Obsolete("Use IsMinimalIL boolean property instead", true)]
-    [FieldOffset(0x12)] public byte MinimalIL;
+    [FieldOffset(0x1A)] public byte MinimalIL;
     
     [Obsolete("Use IsSilenceEcho boolean property instead", true)]
-    [FieldOffset(0x13)] public byte SilenceEcho;
+    [FieldOffset(0x1B)] public byte SilenceEcho;
     
     [Obsolete("Use IsExplorerMode boolean property instead", true)]
-    [FieldOffset(0x14)] public byte ExplorerMode;
+    [FieldOffset(0x1C)] public byte ExplorerMode;
     
     [Obsolete("Use IsLevelSync boolean property instead", true)]
-    [FieldOffset(0x15)] public byte LevelSync;
+    [FieldOffset(0x1D)] public byte LevelSync;
     
     [Obsolete("Use IsLimitedLevelingRoulette boolean property instead", true)]
-    [FieldOffset(0x16)] public byte LimitedLevelingRoulette;
+    [FieldOffset(0x1E)] public byte LimitedLevelingRoulette;
     
-    [FieldOffset(0x11)] public bool IsUnrestrictedParty;
-    [FieldOffset(0x12)] public bool IsMinimalIL;
-    [FieldOffset(0x13)] public bool IsSilenceEcho;
-    [FieldOffset(0x14)] public bool IsExplorerMode;
-    [FieldOffset(0x15)] public bool IsLevelSync;
-    [FieldOffset(0x16)] public bool IsLimitedLevelingRoulette;
+    [FieldOffset(0x19)] public bool IsUnrestrictedParty;
+    [FieldOffset(0x1A)] public bool IsMinimalIL;
+    [FieldOffset(0x1B)] public bool IsSilenceEcho;
+    [FieldOffset(0x1C)] public bool IsExplorerMode;
+    [FieldOffset(0x1D)] public bool IsLevelSync;
+    [FieldOffset(0x1E)] public bool IsLimitedLevelingRoulette;
 
     [FieldOffset(0x60)] public int EnteredQueueTimestamp;
     [FieldOffset(0x7C)] public byte PositionInQueue;
     [FieldOffset(0x87)] public byte AverageWaitTime; // In minutes
-    
+
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 53 06 49 8B CE")]
+    public partial uint SetJoinInProgress(bool isUnrestrictedParty);
+
     public DateTime GetEnteredQueueDateTime() => DateTime.UnixEpoch.AddSeconds(EnteredQueueTimestamp);
     
     public enum LootRule : byte 
