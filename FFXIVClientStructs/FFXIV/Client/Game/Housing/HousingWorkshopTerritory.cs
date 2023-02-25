@@ -1,12 +1,18 @@
-﻿[StructLayout(LayoutKind.Explicit, Size = 0xB8C0)]
+using FFXIVClientStructs.FFXIV.Client.System.String;
+
+namespace FFXIVClientStructs.FFXIV.Client.Game.Housing;
+
+[StructLayout(LayoutKind.Explicit, Size = 0xB8C0)]
 public unsafe partial struct HousingWorkshopTerritory
 {
     [FixedSizeArray<AirshipData>(4)]
-    [FieldOffset(0x60)] public fixed byte AirshipDataList[0x1C8 * 4];
+    [FieldOffset(0x68)] public fixed byte AirshipDataList[0x1C0 * 4];
     
     [FieldOffset(0x7D8)] public byte ActiveAirshipId; // 0-3, 255 if none
     [FieldOffset(0x7D9)] public byte AirshipCount;
-    [FieldOffset(0x7DA)] public byte AirshipMax; // Unsure but seems to always say 4 for it so probably how many you are allowed to own
+
+    [FixedSizeArray<Utf8String>(82)]
+    [FieldOffset(0x7E0)] public fixed byte AirshipLogList[0x68 * 82];
 
     [FixedSizeArray<SubmersibleData>(4)]
     [FieldOffset(0x2960)] public fixed byte SubmersibleDataList[0x2320 * 4];
@@ -15,29 +21,37 @@ public unsafe partial struct HousingWorkshopTerritory
     [FieldOffset(0xB5E0)] public fixed byte SubmersibleDataPointerList[0x8 * 5]; // 0-3 is the same as SubmersibleDataList, 4 is the one you are currently using
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x1C8)]
+[StructLayout(LayoutKind.Explicit, Size = 0x1C0)]
 public unsafe partial struct AirshipData
 {
-    [FieldOffset(0xC)] public int RegisterTime; // currently a theory will confirm on a later point when i craft a 2nd airship
-    [FieldOffset(0x14)] public byte RankId;
-    [FieldOffset(0x18)] public int ReturnTime;
-    [FieldOffset(0x1C)] public uint CurrentExp;
-    [FieldOffset(0x20)] public uint NextLevelExp;
+    [FieldOffset(0x0)] public fixed byte Data[0x1C0];
+    [FieldOffset(0x4)] public uint RegisterTime;
+    [FieldOffset(0xC)] public byte RankId;
+    [FieldOffset(0x10)] public uint ReturnTime;
+    [FieldOffset(0x14)] public uint CurrentExp;
+    [FieldOffset(0x18)] public uint NextLevelExp;
 
-    [FieldOffset(0x28)] public ushort HullId; // AirshipExplorationPart Key
-    [FieldOffset(0x30)] public ushort SternId; // AirshipExplorationPart Key
-    [FieldOffset(0x32)] public ushort BowId; // AirshipExplorationPart Key
-    [FieldOffset(0x34)] public ushort BridgeId; // AirshipExplorationPart Key
+    [FieldOffset(0x20)] public ushort HullId; // AirshipExplorationPart Key
+    [FieldOffset(0x22)] public ushort SternId; // AirshipExplorationPart Key
+    [FieldOffset(0x24)] public ushort BowId; // AirshipExplorationPart Key
+    [FieldOffset(0x26)] public ushort BridgeId; // AirshipExplorationPart Key
 
-    [FieldOffset(0x36)] public ushort Surveillance;
-    [FieldOffset(0x38)] public ushort Retrieval;
-    [FieldOffset(0x40)] public ushort Speed;
-    [FieldOffset(0x42)] public ushort Range;
-    [FieldOffset(0x44)] public ushort Favor;
+    [FieldOffset(0x28)] public ushort Surveillance;
+    [FieldOffset(0x30)] public ushort Retrieval;
+    [FieldOffset(0x32)] public ushort Speed;
+    [FieldOffset(0x34)] public ushort Range;
+    [FieldOffset(0x36)] public ushort Favor;
 
-    [FieldOffset(0x42)] public fixed byte Route[5]; // AirshipExplorationPoint Key
+    [FieldOffset(0x37)] public fixed byte Name[20];
 
-    [FieldOffset(0x3F)] public fixed byte Name[20];
+    [FixedSizeArray<GatheredData>(5)]
+    [FieldOffset(0x54)] public fixed byte GatheredData[0x38 * 5];
+
+    /// <summary>
+    /// Points to <see cref="HousingWorkshopTerritory.AirshipLogList"/>
+    /// Max 82 in the array
+    /// </summary>
+    [FieldOffset(0x1A0)] public Utf8String* Log;
 
     /// <summary>Gets the registered time as a <see cref="DateTime"/> object</summary>
     public DateTime GetRegisterTime() => DateTime.UnixEpoch.AddSeconds(RegisterTime);
@@ -46,13 +60,31 @@ public unsafe partial struct AirshipData
     public DateTime GetReturnTime() => DateTime.UnixEpoch.AddSeconds(ReturnTime);
 }
 
+[StructLayout(LayoutKind.Explicit, Size = 0x38)]
+public unsafe partial struct GatheredData
+{
+    [FieldOffset(0x0)] public uint ExpGained;
+
+    [FieldOffset(0xC)] public uint ItemIdPrimary;
+    [FieldOffset(0x10)] public uint ItemIdAdditional;
+    [FieldOffset(0x14)] public ushort ItemCountPrimary;
+    [FieldOffset(0x16)] public ushort ItemCountAdditional;
+
+    [FieldOffset(0x32)] public bool AirshipItemValidPrimary;
+    [FieldOffset(0x33)] public bool AirshipItemValidAdditional;
+    public bool SubmarineItemValidPrimary => !AirshipItemValidPrimary;
+    public bool SubmarineItemValidAdditional => !AirshipItemValidAdditional;
+}
+
 [StructLayout(LayoutKind.Explicit, Size = 0x2320)]
 public unsafe partial struct SubmersibleData
 {
     [FieldOffset(0x0)] public SubmersibleData* Self;
-    [FieldOffset(0x0E)] public byte RankId;
-    [FieldOffset(0x10)] public int RegisterTime;
-    [FieldOffset(0x14)] public int ReturnTime;
+    [FieldOffset(0xE)] public byte RankId;
+    [FieldOffset(0x10)] public uint RegisterTime;
+    [FieldOffset(0x14)] public uint ReturnTime;
+    [FieldOffset(0x18)] public uint CurrentExp;
+    [FieldOffset(0x1C)] public uint NextLevelExp;
 
     [FieldOffset(0x22)] public fixed byte Name[20];
 
@@ -61,7 +93,7 @@ public unsafe partial struct SubmersibleData
     [FieldOffset(0x3E)] public ushort BowId; // SubmarinePart Key
     [FieldOffset(0x40)] public ushort BridgeId; // SubmarinePart Key
 
-    [FieldOffset(0x42)] public fixed byte Route[5]; // SubmarineExploration Key
+    [FieldOffset(0x42)] public fixed byte CurrentExplorationPoints[5];
 
     [FieldOffset(0x4A)] public ushort SurveillanceBase;
     [FieldOffset(0x4C)] public ushort RetrievalBase;
@@ -74,6 +106,12 @@ public unsafe partial struct SubmersibleData
     [FieldOffset(0x58)] public ushort SpeedBonus;
     [FieldOffset(0x5A)] public ushort RangeBonus;
     [FieldOffset(0x5C)] public ushort FavorBonus;
+
+    [FixedSizeArray<GatheredData>(5)]
+    [FieldOffset(0x70)] public fixed byte GatheredData[0x38 * 5];
+
+    [FixedSizeArray<Utf8String>(82)]
+    [FieldOffset(0x1B0)] public fixed byte LogList[0x68 * 82];
 
     /// <summary>Gets the registered time as a <see cref="DateTime"/> object</summary>
     public DateTime GetRegisterTime() => DateTime.UnixEpoch.AddSeconds(RegisterTime);
