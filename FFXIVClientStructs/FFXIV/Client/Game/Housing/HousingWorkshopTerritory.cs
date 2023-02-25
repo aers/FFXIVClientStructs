@@ -53,13 +53,13 @@ public unsafe partial struct AirshipItemData
 {
     [FieldOffset(0x0)] public fixed byte Data[0x38];
 
-    [FieldOffset(0x4)] public uint ItemId1;
-    [FieldOffset(0x8)] public uint ItemId2;
-    [FieldOffset(0xC)] public ushort ItemCount1;
-    [FieldOffset(0xE)] public ushort ItemCount2;
+    [FieldOffset(0x4)] public uint ItemIdPrimary;
+    [FieldOffset(0x8)] public uint ItemIdAdditional;
+    [FieldOffset(0xC)] public ushort ItemCountPrimary;
+    [FieldOffset(0xE)] public ushort ItemCountAdditional;
 
-    [FieldOffset(0x2A)] public bool ItemValid1;
-    [FieldOffset(0x2B)] public bool ItemValid2;
+    [FieldOffset(0x2A)] public bool ItemValidPrimary;
+    [FieldOffset(0x2B)] public bool ItemValidAdditional;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x2320)]
