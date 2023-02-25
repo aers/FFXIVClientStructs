@@ -38,8 +38,8 @@ public unsafe partial struct AirshipData
 
     [FieldOffset(0x37)] public fixed byte Name[20];
 
-    [FixedSizeArray<AirshipItemData>(5)]
-    [FieldOffset(0x5C)] public fixed byte ItemData[0x38 * 5];
+    [FixedSizeArray<AirshipGatheredData>(5)]
+    [FieldOffset(0x54)] public fixed byte GatheredData[0x38 * 5];
 
     /// <summary>Gets the registered time as a <see cref="DateTime"/> object</summary>
     public DateTime GetRegisterTime() => DateTime.UnixEpoch.AddSeconds(RegisterTime);
@@ -49,17 +49,17 @@ public unsafe partial struct AirshipData
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x38)]
-public unsafe partial struct AirshipItemData
+public unsafe partial struct AirshipGatheredData
 {
-    [FieldOffset(0x0)] public fixed byte Data[0x38];
+    [FieldOffset(0x0)] public uint ExpGained;
 
-    [FieldOffset(0x4)] public uint ItemIdPrimary;
-    [FieldOffset(0x8)] public uint ItemIdAdditional;
-    [FieldOffset(0xC)] public ushort ItemCountPrimary;
-    [FieldOffset(0xE)] public ushort ItemCountAdditional;
+    [FieldOffset(0xC)] public uint ItemIdPrimary;
+    [FieldOffset(0x10)] public uint ItemIdAdditional;
+    [FieldOffset(0x14)] public ushort ItemCountPrimary;
+    [FieldOffset(0x16)] public ushort ItemCountAdditional;
 
-    [FieldOffset(0x2A)] public bool ItemValidPrimary;
-    [FieldOffset(0x2B)] public bool ItemValidAdditional;
+    [FieldOffset(0x32)] public bool ItemValidPrimary;
+    [FieldOffset(0x33)] public bool ItemValidAdditional;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x2320)]
