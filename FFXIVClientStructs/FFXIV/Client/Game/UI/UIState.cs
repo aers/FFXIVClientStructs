@@ -24,6 +24,7 @@ public unsafe partial struct UIState
     [FieldOffset(0x2A98)] public RelicNote RelicNote;
     [FieldOffset(0x2AF8)] public AreaInstance AreaInstance;
     [FieldOffset(0x2B34)] public MobHunt MobHunt;
+    [FieldOffset(0x2FC0)] public Loot Loot;
 
     [FieldOffset(0x3C60)] public RecipeNote RecipeNote;
 
