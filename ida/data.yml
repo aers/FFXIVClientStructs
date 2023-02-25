@@ -789,6 +789,12 @@ classes:
     instances:
       - ea: 0x1420FB108
         pointer: False
+  Client::Game::UI::Loot:
+    vtbls:
+      - ea: 0x14198F678
+    instances:
+      - ea: 0x1420EC640
+        pointer: False
   Client::Game::BattleLog:
     funcs:
       0x14096FF50: AddLogMessage
@@ -5608,6 +5614,10 @@ classes:
   Client::UI::AddonFateReward:
     vtbls:
       - ea: 0x141A16300
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonNeedGreed:
+    vtbls:
+      - ea: 0x141A169C8
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonOperationGuide:
     vtbls:
