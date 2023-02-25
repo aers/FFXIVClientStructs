@@ -1,3 +1,7 @@
+using FFXIVClientStructs.FFXIV.Client.System.String;
+
+namespace FFXIVClientStructs.FFXIV.Client.Game.Housing;
+
 [StructLayout(LayoutKind.Explicit, Size = 0xB8C0)]
 public unsafe partial struct HousingWorkshopTerritory
 {
@@ -6,6 +10,9 @@ public unsafe partial struct HousingWorkshopTerritory
     
     [FieldOffset(0x7D8)] public byte ActiveAirshipId; // 0-3, 255 if none
     [FieldOffset(0x7D9)] public byte AirshipCount;
+
+    [FixedSizeArray<Utf8String>(82)]
+    [FieldOffset(0x7E0)] public fixed byte AirshipLogList[0x68 * 82];
 
     [FixedSizeArray<SubmersibleData>(4)]
     [FieldOffset(0x2960)] public fixed byte SubmersibleDataList[0x2320 * 4];
@@ -37,8 +44,14 @@ public unsafe partial struct AirshipData
 
     [FieldOffset(0x37)] public fixed byte Name[20];
 
-    [FixedSizeArray<AirshipGatheredData>(5)]
+    [FixedSizeArray<GatheredData>(5)]
     [FieldOffset(0x54)] public fixed byte GatheredData[0x38 * 5];
+
+    /// <summary>
+    /// Points to <see cref="HousingWorkshopTerritory.AirshipLogList"/>
+    /// Max 82 in the array
+    /// </summary>
+    [FieldOffset(0x1A0)] public Utf8String* Log;
 
     /// <summary>Gets the registered time as a <see cref="DateTime"/> object</summary>
     public DateTime GetRegisterTime() => DateTime.UnixEpoch.AddSeconds(RegisterTime);
@@ -48,7 +61,7 @@ public unsafe partial struct AirshipData
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x38)]
-public unsafe partial struct AirshipGatheredData
+public unsafe partial struct GatheredData
 {
     [FieldOffset(0x0)] public uint ExpGained;
 
@@ -57,17 +70,21 @@ public unsafe partial struct AirshipGatheredData
     [FieldOffset(0x14)] public ushort ItemCountPrimary;
     [FieldOffset(0x16)] public ushort ItemCountAdditional;
 
-    [FieldOffset(0x32)] public bool ItemValidPrimary;
-    [FieldOffset(0x33)] public bool ItemValidAdditional;
+    [FieldOffset(0x32)] public bool AirshipItemValidPrimary;
+    [FieldOffset(0x33)] public bool AirshipItemValidAdditional;
+    public bool SubmarineItemValidPrimary => !AirshipItemValidPrimary;
+    public bool SubmarineItemValidAdditional => !AirshipItemValidAdditional;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x2320)]
 public unsafe partial struct SubmersibleData
 {
     [FieldOffset(0x0)] public SubmersibleData* Self;
-    [FieldOffset(0x0E)] public byte RankId;
+    [FieldOffset(0xE)] public byte RankId;
     [FieldOffset(0x10)] public uint RegisterTime;
     [FieldOffset(0x14)] public uint ReturnTime;
+    [FieldOffset(0x18)] public uint CurrentExp;
+    [FieldOffset(0x1C)] public uint NextLevelExp;
 
     [FieldOffset(0x22)] public fixed byte Name[20];
 
@@ -76,7 +93,7 @@ public unsafe partial struct SubmersibleData
     [FieldOffset(0x3E)] public ushort BowId; // SubmarinePart Key
     [FieldOffset(0x40)] public ushort BridgeId; // SubmarinePart Key
 
-    [FieldOffset(0x42)] public fixed byte Route[5]; // SubmarineExploration Key
+    [FieldOffset(0x42)] public fixed byte CurrentExplorationPoints[5];
 
     [FieldOffset(0x4A)] public ushort SurveillanceBase;
     [FieldOffset(0x4C)] public ushort RetrievalBase;
@@ -89,6 +106,12 @@ public unsafe partial struct SubmersibleData
     [FieldOffset(0x58)] public ushort SpeedBonus;
     [FieldOffset(0x5A)] public ushort RangeBonus;
     [FieldOffset(0x5C)] public ushort FavorBonus;
+
+    [FixedSizeArray<GatheredData>(5)]
+    [FieldOffset(0x70)] public fixed byte GatheredData[0x38 * 5];
+
+    [FixedSizeArray<Utf8String>(82)]
+    [FieldOffset(0x1B0)] public fixed byte LogList[0x68 * 82];
 
     /// <summary>Gets the registered time as a <see cref="DateTime"/> object</summary>
     public DateTime GetRegisterTime() => DateTime.UnixEpoch.AddSeconds(RegisterTime);
