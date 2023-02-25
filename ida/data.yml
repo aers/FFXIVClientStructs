@@ -5804,6 +5804,14 @@ classes:
     vtbls:
       - ea: 0x141A02AC0
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x14095A0A0: SetJoinInProgress
+      0x14095A0F0: SetIsUnrestrictedParty
+      0x14095A130: SetIsMinimalIL
+      0x14095A110: SetIsSilenceEcho
+      0x14095A150: SetIsExplorerMode
+      0x14095A1A0: SetIsLevelSync
+      0x14095A1C0: SetIsLimitedLevelingRoulette
   Client::UI::AddonContentsFinderSetting:
     vtbls:
       - ea: 0x141A02F98
