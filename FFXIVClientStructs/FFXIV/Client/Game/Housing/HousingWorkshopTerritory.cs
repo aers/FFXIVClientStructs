@@ -1,4 +1,4 @@
-﻿[StructLayout(LayoutKind.Explicit, Size = 0xB8C0)]
+[StructLayout(LayoutKind.Explicit, Size = 0xB8C0)]
 public unsafe partial struct HousingWorkshopTerritory
 {
     [FixedSizeArray<AirshipData>(4)]
@@ -6,7 +6,6 @@ public unsafe partial struct HousingWorkshopTerritory
     
     [FieldOffset(0x7D8)] public byte ActiveAirshipId; // 0-3, 255 if none
     [FieldOffset(0x7D9)] public byte AirshipCount;
-    [FieldOffset(0x7DA)] public byte AirshipMax; // Unsure but seems to always say 4 for it so probably how many you are allowed to own
 
     [FixedSizeArray<SubmersibleData>(4)]
     [FieldOffset(0x2960)] public fixed byte SubmersibleDataList[0x2320 * 4];
