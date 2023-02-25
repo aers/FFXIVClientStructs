@@ -7,12 +7,24 @@ public unsafe struct ContentsFinder
     
     [FieldOffset(0x00)] public void* vtbl;
     [FieldOffset(0x10)] public LootRule LootRules;
-    [Obsolete("Use Is[propertyName] boolean property instead", true)][FieldOffset(0x11)] public byte UnrestrictedParty;
-    [Obsolete("Use Is[propertyName] boolean property instead", true)][FieldOffset(0x12)] public byte MinimalIL;
-    [Obsolete("Use Is[propertyName] boolean property instead", true)][FieldOffset(0x13)] public byte SilenceEcho;
-    [Obsolete("Use Is[propertyName] boolean property instead", true)][FieldOffset(0x14)] public byte ExplorerMode;
-    [Obsolete("Use Is[propertyName] boolean property instead", true)][FieldOffset(0x15)] public byte LevelSync;
-    [Obsolete("Use Is[propertyName] boolean property instead", true)][FieldOffset(0x16)] public byte LimitedLevelingRoulette;
+    
+    [Obsolete("Use IsUnrestrictedParty boolean property instead", true)] 
+    [FieldOffset(0x11)] public byte UnrestrictedParty;
+    
+    [Obsolete("Use IsMinimalIL boolean property instead", true)]
+    [FieldOffset(0x12)] public byte MinimalIL;
+    
+    [Obsolete("Use IsSilenceEcho boolean property instead", true)]
+    [FieldOffset(0x13)] public byte SilenceEcho;
+    
+    [Obsolete("Use IsExplorerMode boolean property instead", true)]
+    [FieldOffset(0x14)] public byte ExplorerMode;
+    
+    [Obsolete("Use IsLevelSync boolean property instead", true)]
+    [FieldOffset(0x15)] public byte LevelSync;
+    
+    [Obsolete("Use IsLimitedLevelingRoulette boolean property instead", true)]
+    [FieldOffset(0x16)] public byte LimitedLevelingRoulette;
     
     [FieldOffset(0x11)] public bool IsUnrestrictedParty;
     [FieldOffset(0x12)] public bool IsMinimalIL;
