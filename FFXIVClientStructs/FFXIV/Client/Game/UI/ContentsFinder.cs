@@ -38,11 +38,11 @@ public unsafe struct ContentsFinder
     [FieldOffset(0x87)] public byte AverageWaitTime; // In minutes
     
     public DateTime GetEnteredQueueDateTime() => DateTime.UnixEpoch.AddSeconds(EnteredQueueTimestamp);
-}
-
-public enum LootRule : byte 
-{
-    Normal = 0,
-    GreedOnly = 1,
-    Lootmaster = 2
+    
+    public enum LootRule : byte 
+    {
+        Normal = 0,
+        GreedOnly = 1,
+        Lootmaster = 2
+    }
 }
