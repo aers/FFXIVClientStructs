@@ -18,9 +18,9 @@ public unsafe partial struct HousingWorkshopTerritory
 public unsafe partial struct AirshipData
 {
     [FieldOffset(0x0)] public fixed byte Data[0x1C0];
-    [FieldOffset(0x4)] public int RegisterTime;
+    [FieldOffset(0x4)] public uint RegisterTime;
     [FieldOffset(0xC)] public byte RankId;
-    [FieldOffset(0x10)] public int ReturnTime;
+    [FieldOffset(0x10)] public uint ReturnTime;
     [FieldOffset(0x14)] public uint CurrentExp;
     [FieldOffset(0x18)] public uint NextLevelExp;
 
@@ -66,8 +66,8 @@ public unsafe partial struct SubmersibleData
 {
     [FieldOffset(0x0)] public SubmersibleData* Self;
     [FieldOffset(0x0E)] public byte RankId;
-    [FieldOffset(0x10)] public int RegisterTime;
-    [FieldOffset(0x14)] public int ReturnTime;
+    [FieldOffset(0x10)] public uint RegisterTime;
+    [FieldOffset(0x14)] public uint ReturnTime;
 
     [FieldOffset(0x22)] public fixed byte Name[20];
 
