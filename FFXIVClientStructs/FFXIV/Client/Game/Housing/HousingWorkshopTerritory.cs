@@ -14,7 +14,7 @@ public unsafe partial struct HousingWorkshopTerritory
 public unsafe partial struct HousingWorkshopAirshipData
 {
     [FixedSizeArray<HousingWorkshopAirshipSubData>(4)]
-    [FieldOffset(0x0)] public fixed byte AirshipDataList[0x1C0 * 4];
+    [FieldOffset(0x0)] public fixed byte DataList[0x1C0 * 4];
     
     [FieldOffset(0x770)] public byte ActiveAirshipId; // 0-3, 255 if none
     [FieldOffset(0x771)] public byte AirshipCount;
@@ -27,10 +27,10 @@ public unsafe partial struct HousingWorkshopAirshipData
 public unsafe partial struct HousingWorkshopSubmersibleData
 {
     [FixedSizeArray<HousingWorkshopSubmersibleSubData>(4)]
-    [FieldOffset(0x0)] public fixed byte SubmersibleDataList[0x2320 * 4];
+    [FieldOffset(0x0)] public fixed byte DataList[0x2320 * 4];
 
     [FixedSizeArray<Pointer<HousingWorkshopSubmersibleSubData>>(5)]
-    [FieldOffset(0x8C80)] public fixed byte SubmersibleDataPointerList[0x8 * 5]; // 0-3 is the same as SubmersibleDataList, 4 is the one you are currently using
+    [FieldOffset(0x8C80)] public fixed byte DataPointerList[0x8 * 5]; // 0-3 is the same as SubmersibleDataList, 4 is the one you are currently using
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x1C0)]
