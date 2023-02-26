@@ -23,7 +23,7 @@ public unsafe partial struct HousingWorkshopAirshipData
     [FieldOffset(0x778)] public fixed byte AirshipLogList[0x68 * 82];
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x8F14)]
+[StructLayout(LayoutKind.Explicit, Size = 0x8F40)]
 public unsafe partial struct HousingWorkshopSubmersibleData
 {
     [FixedSizeArray<HousingWorkshopSubmersibleSubData>(4)]
