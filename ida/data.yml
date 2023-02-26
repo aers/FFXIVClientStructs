@@ -5928,9 +5928,17 @@ classes:
     vtbls:
       - ea: 0x141A14780
         base: Component::GUI::AtkUnitBase
+  Client::UI::AddonImage:
+    vtbls:
+      - ea: 0x141A43030
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonScreenText:
     vtbls:
       - ea: 0x141A45270
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonImage3:
+    vtbls:
+      - ea: 0x141A49960
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonPopUpText:
     vtbls:
