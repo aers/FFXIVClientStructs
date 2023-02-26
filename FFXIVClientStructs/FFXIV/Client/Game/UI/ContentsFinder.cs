@@ -6,7 +6,7 @@ public unsafe partial struct ContentsFinder
     public static ContentsFinder* Instance() => &UIState.Instance()->ContentsFinder;
     
     [FieldOffset(0x00)] public void* vtbl;
-    [FieldOffset(0x10)] public LootRule LootRules;
+    [FieldOffset(0x18)] public LootRule LootRules;
     
     [Obsolete("Use IsUnrestrictedParty boolean property instead", true)] 
     [FieldOffset(0x19)] public byte UnrestrictedParty;
