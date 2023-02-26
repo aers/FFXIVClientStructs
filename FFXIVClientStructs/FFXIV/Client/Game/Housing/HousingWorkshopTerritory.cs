@@ -7,11 +7,7 @@ public unsafe partial struct HousingWorkshopTerritory
 {
     [FieldOffset(0x68)] public HousingWorkshopAirshipData Airship;
 
-    [FixedSizeArray<HousingWorkshopSubmersibleData>(4)]
-    [FieldOffset(0x2960)] public fixed byte SubmersibleDataList[0x2320 * 4];
-
-    [FixedSizeArray<Pointer<HousingWorkshopSubmersibleData>>(5)]
-    [FieldOffset(0xB5E0)] public fixed byte SubmersibleDataPointerList[0x8 * 5]; // 0-3 is the same as SubmersibleDataList, 4 is the one you are currently using
+    [FieldOffset(0x2960)] public HousingWorkshopSubmersibleData Submersible;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x28F8)]
@@ -25,6 +21,16 @@ public unsafe partial struct HousingWorkshopAirshipData
 
     [FixedSizeArray<Utf8String>(82)]
     [FieldOffset(0x778)] public fixed byte AirshipLogList[0x68 * 82];
+}
+
+[StructLayout(LayoutKind.Explicit, Size = 0x8F14)]
+public unsafe partial struct HousingWorkshopSubmersibleData
+{
+    [FixedSizeArray<HousingWorkshopSubmersibleSubData>(4)]
+    [FieldOffset(0x0)] public fixed byte SubmersibleDataList[0x2320 * 4];
+
+    [FixedSizeArray<Pointer<HousingWorkshopSubmersibleSubData>>(5)]
+    [FieldOffset(0x8C80)] public fixed byte SubmersibleDataPointerList[0x8 * 5]; // 0-3 is the same as SubmersibleDataList, 4 is the one you are currently using
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x1C0)]
@@ -83,9 +89,9 @@ public unsafe partial struct HousingWorkshopGatheredData
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x2320)]
-public unsafe partial struct HousingWorkshopSubmersibleData // possibly a substructure as well need to figure out
+public unsafe partial struct HousingWorkshopSubmersibleSubData
 {
-    [FieldOffset(0x0)] public HousingWorkshopSubmersibleData* Self;
+    [FieldOffset(0x0)] public HousingWorkshopSubmersibleSubData* Self;
     [FieldOffset(0xE)] public byte RankId;
     [FieldOffset(0x10)] public uint RegisterTime;
     [FieldOffset(0x14)] public uint ReturnTime;
