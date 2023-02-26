@@ -1,28 +1,34 @@
-using FFXIVClientStructs.FFXIV.Client.System.String;
+﻿using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Housing;
 
 [StructLayout(LayoutKind.Explicit, Size = 0xB8C0)]
 public unsafe partial struct HousingWorkshopTerritory
 {
-    [FixedSizeArray<AirshipData>(4)]
-    [FieldOffset(0x68)] public fixed byte AirshipDataList[0x1C0 * 4];
-    
-    [FieldOffset(0x7D8)] public byte ActiveAirshipId; // 0-3, 255 if none
-    [FieldOffset(0x7D9)] public byte AirshipCount;
+    [FieldOffset(0x68)] public HousingWorkshopAirshipData Airship;
 
-    [FixedSizeArray<Utf8String>(82)]
-    [FieldOffset(0x7E0)] public fixed byte AirshipLogList[0x68 * 82];
-
-    [FixedSizeArray<SubmersibleData>(4)]
+    [FixedSizeArray<HousingWorkshopSubmersibleData>(4)]
     [FieldOffset(0x2960)] public fixed byte SubmersibleDataList[0x2320 * 4];
 
-    [FixedSizeArray<Pointer<SubmersibleData>>(5)]
+    [FixedSizeArray<Pointer<HousingWorkshopSubmersibleData>>(5)]
     [FieldOffset(0xB5E0)] public fixed byte SubmersibleDataPointerList[0x8 * 5]; // 0-3 is the same as SubmersibleDataList, 4 is the one you are currently using
 }
 
+[StructLayout(LayoutKind.Explicit, Size = 0x28F8)]
+public unsafe partial struct HousingWorkshopAirshipData
+{
+    [FixedSizeArray<HousingWorkshopAirshipSubData>(4)]
+    [FieldOffset(0x0)] public fixed byte AirshipDataList[0x1C0 * 4];
+    
+    [FieldOffset(0x770)] public byte ActiveAirshipId; // 0-3, 255 if none
+    [FieldOffset(0x771)] public byte AirshipCount;
+
+    [FixedSizeArray<Utf8String>(82)]
+    [FieldOffset(0x778)] public fixed byte AirshipLogList[0x68 * 82];
+}
+
 [StructLayout(LayoutKind.Explicit, Size = 0x1C0)]
-public unsafe partial struct AirshipData
+public unsafe partial struct HousingWorkshopAirshipSubData
 {
     [FieldOffset(0x0)] public fixed byte Data[0x1C0];
     [FieldOffset(0x4)] public uint RegisterTime;
@@ -44,11 +50,11 @@ public unsafe partial struct AirshipData
 
     [FieldOffset(0x37)] public fixed byte Name[20];
 
-    [FixedSizeArray<GatheredData>(5)]
+    [FixedSizeArray<HousingWorkshopGatheredData>(5)]
     [FieldOffset(0x54)] public fixed byte GatheredData[0x38 * 5];
 
     /// <summary>
-    /// Points to <see cref="HousingWorkshopTerritory.AirshipLogList"/>
+    /// Points to <see cref="HousingWorkshopAirshipData.AirshipLogList"/>
     /// Max 82 in the array
     /// </summary>
     [FieldOffset(0x1A0)] public Utf8String* Log;
@@ -61,7 +67,7 @@ public unsafe partial struct AirshipData
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x38)]
-public unsafe partial struct GatheredData
+public unsafe partial struct HousingWorkshopGatheredData
 {
     [FieldOffset(0x0)] public uint ExpGained;
 
@@ -77,9 +83,9 @@ public unsafe partial struct GatheredData
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x2320)]
-public unsafe partial struct SubmersibleData
+public unsafe partial struct HousingWorkshopSubmersibleData // possibly a substructure as well need to figure out
 {
-    [FieldOffset(0x0)] public SubmersibleData* Self;
+    [FieldOffset(0x0)] public HousingWorkshopSubmersibleData* Self;
     [FieldOffset(0xE)] public byte RankId;
     [FieldOffset(0x10)] public uint RegisterTime;
     [FieldOffset(0x14)] public uint ReturnTime;
@@ -107,7 +113,7 @@ public unsafe partial struct SubmersibleData
     [FieldOffset(0x5A)] public ushort RangeBonus;
     [FieldOffset(0x5C)] public ushort FavorBonus;
 
-    [FixedSizeArray<GatheredData>(5)]
+    [FixedSizeArray<HousingWorkshopGatheredData>(5)]
     [FieldOffset(0x70)] public fixed byte GatheredData[0x38 * 5];
 
     [FixedSizeArray<Utf8String>(82)]
