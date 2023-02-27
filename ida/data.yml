@@ -3299,6 +3299,7 @@ classes:
       188: CloseInventory
       189: IsInventoryOpen
       190: ExecuteMainCommand
+      191: IsMainCommandUnlocked
       194: ShowRaceCountdownEnd
       198: IsDutyRaidFinderOpen
       223: ShowRaceCountdownStart

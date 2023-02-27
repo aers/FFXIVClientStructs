@@ -209,6 +209,9 @@ public unsafe partial struct UIModule
 
     [VirtualFunction(190)]
     public partial void ExecuteMainCommand(uint command);
+    
+    [VirtualFunction(191)]
+    public partial bool IsMainCommandUnlocked(uint command);
 
     [VirtualFunction(205)]
     public partial void Test205(nint a1,nint a2,nint a3,nint a4);
