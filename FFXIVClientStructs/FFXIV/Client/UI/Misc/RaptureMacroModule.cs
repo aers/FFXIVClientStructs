@@ -75,4 +75,12 @@ public unsafe partial struct RaptureMacroModule
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8D 4C 24 ?? E8 ?? ?? ?? ?? 48 8D 8C 24 ?? ?? ?? ?? E8 ?? ?? ?? ?? 41 FE C7")]
     public partial void SetMacroLines(Macro* macro, int lineStartIndex, Utf8String* lines);
+
+    /// <summary>
+    /// Sets a flag to mark the macro file as needing a save. Fires on any macro update, generally prior to saving.
+    /// </summary>
+    /// <param name="needsSave">A boolean denoting if the specified set needs to be saved.</param>
+    /// <param name="set">The macro page ID that needs saving.</param>
+    [MemberFunction("45 85 C0 75 04 88 51 3D")]
+    public partial void SetSavePendingFlag(bool needsSave, uint set);
 }

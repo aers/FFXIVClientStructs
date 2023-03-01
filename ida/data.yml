@@ -3370,6 +3370,7 @@ classes:
       0x14064B1B0: AppendMacroLines # appends lines stored in string to macro
       0x14064B200: GetLineCount
       0x14064C910: SetMacroLines # function called by replace/append
+      0x14064C370: SetSavePendingFlag
   Client::UI::Misc::RaptureTextModule:
     vtbls:
       - ea: 0x1419467A0
