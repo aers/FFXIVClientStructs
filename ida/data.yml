@@ -3243,7 +3243,7 @@ classes:
       23: GetFlagStatusModule
       26: GetRaptureUiDataModule
       30: GetRaptureTeleportHistory
-      32: GetRecommendedEquipModule
+      32: GetRecommendEquipModule
       34: GetInfoModule
       36: GetAgentModule
       38: GetUI3DModule
@@ -3473,7 +3473,7 @@ classes:
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
       0x140699910: AddHistoryEntry
-  Client::UI::Misc::RecommendedEquipModule:
+  Client::UI::Misc::RecommendEquipModule:
     funcs:
       0x14069A900: ctor
       0x14069AD20: SetupRecommendationList
