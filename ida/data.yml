@@ -3151,7 +3151,14 @@ classes:
     vfuncs:
       1: ReadFile
       2: WriteFile
+      4: GetFileSize
+      5: GetDataSize
       6: GetFileVersion
+      7: GetFileType
+      9: GetHasChanges
+      10: GetIsSavePending
+      11: SetCharacterContentId
+      12: SaveFile
   Client::UI::Misc::UserFileManager:
     vtbls:
       - ea: 0x1419404D8
