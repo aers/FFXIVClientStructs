@@ -1,4 +1,5 @@
-﻿using FFXIVClientStructs.FFXIV.Client.System.Framework;
+using FFXIVClientStructs.FFXIV.Client.System.Framework;
+using FFXIVClientStructs.FFXIV.Client.UI.Misc.UserFileManager;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
@@ -6,7 +7,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 public unsafe partial struct FieldMarkerModule
 {
     public static FieldMarkerModule* Instance() => Framework.Instance()->UIModule->GetFieldMarkerModule();
-    
+
+    [FieldOffset(0)] public UserFileEvent UserFileEvent;
     [FixedSizeArray<FieldMarkerPreset>(30)]
     [FieldOffset(0x40)] public fixed byte PresetArray[30 * 0x68];
 }

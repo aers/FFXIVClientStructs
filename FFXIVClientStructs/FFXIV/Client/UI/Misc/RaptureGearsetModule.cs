@@ -1,4 +1,5 @@
-﻿using FFXIVClientStructs.FFXIV.Client.System.Framework;
+using FFXIVClientStructs.FFXIV.Client.System.Framework;
+using FFXIVClientStructs.FFXIV.Client.UI.Misc.UserFileManager;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
@@ -10,7 +11,9 @@ public unsafe partial struct RaptureGearsetModule
         return Framework.Instance()->GetUiModule()->GetRaptureGearsetModule();
     }
 
+    [FieldOffset(0)] public UserFileEvent UserFileEvent;
     [FieldOffset(0x0000)] public void* vtbl;
+    [Obsolete("Use UserFileEvent.FileName instead", true)]
     [FieldOffset(0x0030)] public fixed byte ModuleName[16];
     [FieldOffset(0x0048)] public Gearsets Gearset;
 

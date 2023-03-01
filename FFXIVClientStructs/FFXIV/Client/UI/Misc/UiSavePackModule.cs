@@ -1,4 +1,5 @@
-﻿using FFXIVClientStructs.FFXIV.Client.System.Framework;
+using FFXIVClientStructs.FFXIV.Client.System.Framework;
+using FFXIVClientStructs.FFXIV.Client.UI.Misc.UserFileManager;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
@@ -6,7 +7,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 public unsafe partial struct UiSavePackModule
 {
     public static UiSavePackModule* Instance() => Framework.Instance()->UIModule->GetUiSavePackModule();
-    
+
+    [FieldOffset(0)] public UserFileEvent UserFileEvent;
+
     [VirtualFunction(13)]
     public partial nint GetSegment(byte segment);
 

@@ -1,9 +1,11 @@
-﻿using FFXIVClientStructs.FFXIV.Client.System.Framework;
+using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Client.System.String;
+using FFXIVClientStructs.FFXIV.Client.UI.Misc.UserFileManager;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
 // Client::UI::Misc::RaptureMacroModule
+//   Client::UI::Misc::UserFileManager::UserFileEvent
 // ctor E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 4C 8B C7 49 8B D5 E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 4C 8B C7
 [StructLayout(LayoutKind.Explicit, Size = 0x51AA8)]
 public unsafe partial struct RaptureMacroModule
@@ -58,6 +60,7 @@ public unsafe partial struct RaptureMacroModule
         }
     }
 
+    [FieldOffset(0)] public UserFileEvent UserFileEvent;
     [FieldOffset(0x58)] public MacroPage Individual;
     [FieldOffset(0x28D78)] public MacroPage Shared;
 

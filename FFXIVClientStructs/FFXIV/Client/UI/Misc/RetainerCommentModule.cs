@@ -1,5 +1,6 @@
-﻿using System.Text;
+using System.Text;
 using FFXIVClientStructs.FFXIV.Client.System.Framework;
+using FFXIVClientStructs.FFXIV.Client.UI.Misc.UserFileManager;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
@@ -8,7 +9,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 [StructLayout(LayoutKind.Explicit, Size = 0x450)]
 public unsafe partial struct RetainerCommentModule {
     public static RetainerCommentModule* Instance() => Framework.Instance()->GetUiModule()->GetRetainerCommentModule();
-    
+
+    [FieldOffset(0)] public UserFileEvent UserFileEvent;
     [FieldOffset(0x40)] public RetainerCommentList Retainers;
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B BC 24 ?? ?? ?? ?? 48 8B B4 24 ?? ?? ?? ?? 49 8B 4E 10")]
