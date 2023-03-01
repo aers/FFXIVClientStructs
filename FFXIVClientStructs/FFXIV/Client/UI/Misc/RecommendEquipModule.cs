@@ -1,11 +1,13 @@
-﻿using FFXIVClientStructs.FFXIV.Client.Game;
+using FFXIVClientStructs.FFXIV.Client.Game;
+using FFXIVClientStructs.FFXIV.Client.System.Framework;
 
-namespace FFXIVClientStructs.FFXIV.Client.UI.Misc; 
+namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
-// ctor 48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC 20 33 ED 48 8D 59 08 4C 8B F1
-
+// Client::UI::RecommendEquipModule
+// ctor "48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC 20 33 ED 48 8D 59 08 4C 8B F1"
 [StructLayout(LayoutKind.Explicit, Size = 0x80)]
-public unsafe partial struct RecommendEquipModule {
+public unsafe partial struct RecommendEquipModule
+{
     [FieldOffset(0x00)] public uint Unk00;
     [FieldOffset(0x04)] public uint SlotCount; // maybe?
 
@@ -30,10 +32,10 @@ public unsafe partial struct RecommendEquipModule {
     [FieldOffset(0x7C)] public byte ClassJob;
     [FieldOffset(0x7D)] public byte Unk7D;
     [FieldOffset(0x7E)] public byte Unk7E;
-    
+
     [MemberFunction("E8 ?? ?? ?? ?? BB ?? ?? ?? ?? 41 C6 46")]
     public partial bool SetupRecommendedGear();
-    
+
     [MemberFunction("E8 ?? ?? ?? ?? EB 07 C7 43 ?? ?? ?? ?? ?? 48 8B 03")]
     public partial void EquipRecommendedGear();
 }

@@ -1,13 +1,15 @@
-using System.Text;
+﻿using System.Text;
 using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Client.UI.Misc.UserFileManager;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
-// Client::UI::Misc::RetainerModule
-// ctor 48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 33 ED 48 89 51 10 48 8D 05 ?? ?? ?? ?? 48 89 69 08 48 8B F1
+// Client::UI::Misc::RetainerCommentModule
+//   Client::UI::Misc::UserFileManager::UserFileEvent
+// ctor "48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 33 ED 48 89 51 10 48 8D 05 ?? ?? ?? ?? 48 89 69 08 48 8B F1"
 [StructLayout(LayoutKind.Explicit, Size = 0x450)]
-public unsafe partial struct RetainerCommentModule {
+public unsafe partial struct RetainerCommentModule
+{
     public static RetainerCommentModule* Instance() => Framework.Instance()->GetUiModule()->GetRetainerCommentModule();
 
     [FieldOffset(0)] public UserFileEvent UserFileEvent;

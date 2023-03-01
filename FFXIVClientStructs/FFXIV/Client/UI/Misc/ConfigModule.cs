@@ -1,15 +1,14 @@
-﻿using System.Text;
+using System.Text;
 using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
+
 // Client::UI::Misc::ConfigModule
-// ctor E8 ?? ?? ?? ?? 48 8B 97 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 4C 8B CF
-
+// ctor "E8 ?? ?? ?? ?? 48 8B 97 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 4C 8B CF"
 // For updating offsets:
-//  48 8B CB E8 ?? ?? ?? ?? 48 8B 7C 24 ?? 33 C0 48 8B 5C 24
+//  "48 8B CB E8 ?? ?? ?? ?? 48 8B 7C 24 ?? 33 C0 48 8B 5C 24"
 //    16 * (v6 + ConfigOptionCount * a6) + a1 + {ValuesFieldOffset}
-
 [StructLayout(LayoutKind.Explicit, Size = 0xD9E8)]
 public unsafe partial struct ConfigModule
 {
