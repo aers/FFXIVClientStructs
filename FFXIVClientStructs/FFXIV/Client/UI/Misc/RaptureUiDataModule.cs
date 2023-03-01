@@ -1,3 +1,4 @@
+﻿using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Client.UI.Misc.UserFileManager;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
@@ -8,6 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 [StructLayout(LayoutKind.Explicit, Size = 0x5958)]
 public unsafe partial struct RaptureUiDataModule
 {
+    public static RaptureUiDataModule* Instance() => Framework.Instance()->GetUiModule()->GetRaptureUiDataModule();
 
     [FieldOffset(0)] public UserFileEvent UserFileEvent;
 

@@ -1,4 +1,4 @@
-using System.Text;
+﻿using System.Text;
 using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
@@ -12,15 +12,12 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 [StructLayout(LayoutKind.Explicit, Size = 0xD9E8)]
 public unsafe partial struct ConfigModule
 {
+    public static ConfigModule* Instance() => Framework.Instance()->GetUiModule()->GetConfigModule();
+
     public const int ConfigOptionCount = 693;
     [FieldOffset(0x28)] public UIModule* UIModule;
     [FieldOffset(0x2C8)] private fixed byte options[Option.Size * ConfigOptionCount];
     [FieldOffset(0x5978)] private fixed byte values[0x10 * ConfigOptionCount];
-
-    public static ConfigModule* Instance()
-    {
-        return Framework.Instance()->GetUiModule()->GetConfigModule();
-    }
 
     [MemberFunction("E8 ?? ?? ?? ?? C6 47 4D 00")]
     public partial bool SetOption(uint index, int value, int a4 = 2, bool a5 = true, bool a6 = false);

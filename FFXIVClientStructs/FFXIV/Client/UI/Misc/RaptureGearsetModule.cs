@@ -1,4 +1,4 @@
-using FFXIVClientStructs.FFXIV.Client.System.Framework;
+﻿using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Client.UI.Misc.UserFileManager;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
@@ -9,10 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 [StructLayout(LayoutKind.Explicit, Size = 0xB670)]
 public unsafe partial struct RaptureGearsetModule
 {
-    public static RaptureGearsetModule* Instance()
-    {
-        return Framework.Instance()->GetUiModule()->GetRaptureGearsetModule();
-    }
+    public static RaptureGearsetModule* Instance() => Framework.Instance()->GetUiModule()->GetRaptureGearsetModule();
 
     [FieldOffset(0)] public UserFileEvent UserFileEvent;
     [FieldOffset(0x0000)] public void* vtbl;

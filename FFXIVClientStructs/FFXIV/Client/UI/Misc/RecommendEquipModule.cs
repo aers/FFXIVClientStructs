@@ -1,4 +1,4 @@
-using FFXIVClientStructs.FFXIV.Client.Game;
+﻿using FFXIVClientStructs.FFXIV.Client.Game;
 using FFXIVClientStructs.FFXIV.Client.System.Framework;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
@@ -8,6 +8,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 [StructLayout(LayoutKind.Explicit, Size = 0x80)]
 public unsafe partial struct RecommendEquipModule
 {
+    public static RecommendEquipModule* Instance() => Framework.Instance()->GetUiModule()->GetRecommendEquipModule();
+
     [FieldOffset(0x00)] public uint Unk00;
     [FieldOffset(0x04)] public uint SlotCount; // maybe?
 

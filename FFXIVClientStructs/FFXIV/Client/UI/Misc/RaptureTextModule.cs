@@ -1,3 +1,5 @@
+﻿using FFXIVClientStructs.FFXIV.Client.System.Framework;
+
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
 // Client::UI::Misc::RaptureTextModule
@@ -5,6 +7,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 [StructLayout(LayoutKind.Explicit, Size = 0xE58)]
 public unsafe partial struct RaptureTextModule
 {
+    public static RaptureTextModule* Instance() => Framework.Instance()->GetUiModule()->GetRaptureTextModule();
+
     [MemberFunction("E9 ?? ?? ?? ?? 80 EA 20")]
     public partial byte* GetAddonText(uint addonId);
 
