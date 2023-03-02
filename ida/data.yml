@@ -702,6 +702,17 @@ classes:
       0x1409113B0: IsWeeklyBingoStickerPlaced
       0x1409113D0: GetWeeklyBingoTaskStatus
       0x140911610: GetWeeklyBingoExpMultiplier
+      0x14090FFD0: IsNoviceNetworkFlagSet
+      0x140910010: IsNovice
+      0x140910030: IsReturner
+      0x140910090: IsMentor
+      0x1409100B0: IsBattleMentor
+      0x1409100D0: IsTradeMentor
+      0x1409107C0: IsAetherCurrentZoneComplete
+      0x140910900: IsMeisterFlagAndHasSoulStoneEquipped
+      0x1409109A0: IsMeisterFlag
+      0x140910A10: IsMeisterFlagMaxCount
+      0x140912440: GetDesynthesisLevelForClassJob
       0x140912740: Initialize
       0x14097DD20: ctor
   Client::Game::UI::Revive:
@@ -783,6 +794,9 @@ classes:
     instances:
       - ea: 0x1420FB038
         pointer: False
+    funcs:
+      0x140950470: GetPenaltyRemainingInMinutes
+      0x140952A80: IsRouletteIncomplete
   Client::Game::UI::ContentsFinder:
     vtbls:
       - ea: 0x14198F670
