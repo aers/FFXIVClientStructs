@@ -5700,6 +5700,10 @@ classes:
     funcs:
       0x140DD3510: ctor
       0x140DD4210: UpdateResult
+  Client::UI::AddonLookingForGroupDetail:
+    vtbls:
+      - ea : 0x1419D1EE8
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonSubmarinePartsMenu:
     vtbls:
       - ea: 0x1419D9CF8
