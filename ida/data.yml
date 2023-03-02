@@ -2750,6 +2750,8 @@ classes:
       0x140510960: GetScaleX
       0x140510980: GetScaleY
       0x1405109A0: SetScale
+      0x1405109B0: SetScaleX
+      0x140510A20: SetScaleY
       0x140510AC0: SetSize0
       0x140510B00: GetYFloat
       0x140510B40: GetYShort
@@ -2798,6 +2800,7 @@ classes:
       0x140514880: ToggleFixedFontResolution  # this stops text from auto scaling, they turned this on for nameplates in 5.5
       0x1405155F0: ToggleFontCache
       0x1405157E0: ResizeNodeForCurrentText
+      0x140514050: GetString
       0x140514090: SetFont
       0x1405131D0: SetAlignment
       0x140584660: ctor

@@ -174,6 +174,12 @@ public unsafe partial struct AtkResNode : ICreatable
     [MemberFunction("E8 ?? ?? ?? ?? 48 8D 7F 38")]
     public partial void SetScale(float X, float Y);
 
+    [MemberFunction("E9 ?? ?? ?? ?? F3 0F 5E CA")]
+    public partial void SetScaleX(float x);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B7 D5 48 8B CF")]
+    public partial void SetScaleY(float y);
+    
     [MemberFunction("E8 ?? ?? ?? ?? 66 03 C0")]
     public partial ushort GetWidth();
 
