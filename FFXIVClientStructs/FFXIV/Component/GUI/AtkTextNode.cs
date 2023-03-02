@@ -75,11 +75,12 @@ public unsafe partial struct AtkTextNode : ICreatable
         "E9 ?? ?? ?? ?? 45 33 C9 4C 8B C0 33 D2 B9 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 85 C0 0F 84 ?? ?? ?? ?? 48 8B C8 48 83 C4 20 5B E9 ?? ?? ?? ?? 45 33 C9 4C 8B C0 33 D2 B9 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 85 C0 0F 84 ?? ?? ?? ?? 48 8B C8 48 83 C4 20 5B E9 ?? ?? ?? ?? 45 33 C9 4C 8B C0 33 D2 B9 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 85 C0 74 5D")]
     public partial void Ctor();
 
+    [GenerateCStrOverloads]
     [MemberFunction("E8 ?? ?? ?? ?? 8D 4E 32")]
     public partial void SetText(byte* str);
 
     [MemberFunction("E8 ?? ?? ?? ?? 80 38 00 74 27")]
-    public partial Utf8String GetString();
+    public partial byte* GetText();
 
     [MemberFunction("E8 ?? ?? ?? ?? 8D 4E 5A")]
     public partial void SetNumber(int num, bool showCommaDelimiters = false, bool showPlusSign = false, byte digits = 0,
@@ -98,20 +99,6 @@ public unsafe partial struct AtkTextNode : ICreatable
     [MemberFunction("E8 ?? ?? ?? ?? 45 33 C0 B2 18")]
     public partial void SetFont(FontType fontType);
     
-    public void SetText(Span<byte> span) {
-        fixed (byte* ptr = span) SetText(ptr);
-    }
-    
-    public void SetText(ReadOnlySpan<byte> span) {
-        fixed (byte* ptr = span) SetText(ptr);
-    }
-    
-    public void SetText(string str)
-    {
-        var bytes = Encoding.UTF8.GetBytes(str);
-        SetText(bytes);
-    }
-
     public void SetText(byte[] bytes)
     {
         var charPtr = Marshal.AllocHGlobal(bytes.Length + 1);
