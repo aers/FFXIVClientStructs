@@ -1,12 +1,20 @@
 ﻿namespace FFXIVClientStructs.FFXIV.Client.Game; 
 
 [StructLayout(LayoutKind.Explicit, Size = 0x58D0)]
-public unsafe partial struct GameMain {
-	[FieldOffset(0x0)]
-	public fixed uint ActiveFestivals[4];
+public unsafe partial struct GameMain
+{
+	[FieldOffset(0x0)] public fixed uint ActiveFestivals[4];
 
-	[FieldOffset(0x40)]
-	public fixed uint QueuedFestivals[4];
+	[FieldOffset(0x40)] public fixed uint QueuedFestivals[4];
+
+	[FieldOffset(0xAD8)] public JobGaugeManager JobGaugeManager;
+
+	[FieldOffset(0x4010)] public uint CurrentTerritoryTypeId; // can be 0 during loading screens
+	[FieldOffset(0x4014)] public uint CurrentTerritoryIntendedUseId;
+
+	[FieldOffset(0x401C)] public ushort CurrentContentFinderConditionId;
+
+	[FieldOffset(0x4028)] public uint CurrentMapId;
 
 	[StaticAddress("48 8D 0D ?? ?? ?? ?? 38 05", 3)]
 	public static partial GameMain* Instance();

@@ -61,6 +61,7 @@ functions:
   0x1400626D0: MemoryManager_GetSoundSpace_1
   0x1400626F0: MemoryManager_GetSoundSpace_2
   0x140065900: IsMacClient
+  0x1400A5EA0: GetCurrentUnixTimestamp # in seconds
   0x1400A5FD0: Client::UI::PlaySoundEffect # this is a static function in the UI namespace, arg1 is the SE
   0x1400A7C40: Client::UI::GetUIColor # (idx, &color, &edgeColor)
   0x1401AFC90: j_SleepEx
@@ -231,6 +232,7 @@ functions:
   0x140615C60: WorldToViewportPoint
   0x14071FBA0: ObjectIdToPlayerObjectId # returns invalid id if objectid is not a player
   0x140747830: ProcessActorControlPacket
+  0x140B08590: IsInMordionGaol # if this returns true, i'm sorry for you
   0x140B5B990: WorldToScreenPoint
   0x14163CE30: OodleNew # oodle code starts here
   0x14163CEA0: OodleDelete 
