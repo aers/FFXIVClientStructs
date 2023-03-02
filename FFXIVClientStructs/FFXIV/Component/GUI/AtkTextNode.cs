@@ -99,6 +99,10 @@ public unsafe partial struct AtkTextNode : ICreatable
     [MemberFunction("E8 ?? ?? ?? ?? 45 33 C0 B2 18")]
     public partial void SetFont(FontType fontType);
     
+    public void SetText(Span<byte> span) {
+        fixed (byte* ptr = span) SetText(ptr);
+    }
+    
     public void SetText(byte[] bytes)
     {
         var charPtr = Marshal.AllocHGlobal(bytes.Length + 1);
