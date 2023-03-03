@@ -2738,6 +2738,8 @@ classes:
       0x14050FC60: GetAsAtkCollisionNode
       0x14050FC80: GetAsAtkComponentNode
       0x14050FCA0: GetComponent
+      0x140536200: GetComponent_2
+      0x140547D80: GetComponentList
       0x140562730: GetComponentDropDownList
       0x140510450: RegisterEvent
       0x140510490: UnregisterEvent
