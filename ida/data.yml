@@ -2876,6 +2876,7 @@ classes:
       0x1405212B0: Draw
       0x140521C00: SetFocusNode
       0x140522180: GetNodeById
+      0x1405222B0: GetButtonNodeById
       0x1405224F0: GetTextNodeById
       0x140522550: GetImageNodeById
       0x140522650: FireCallback
