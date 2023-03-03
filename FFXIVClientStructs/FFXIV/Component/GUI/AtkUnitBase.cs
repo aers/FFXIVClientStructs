@@ -45,6 +45,15 @@ public unsafe partial struct AtkUnitBase
     [MemberFunction("E8 ?? ?? ?? ?? 0F BF CB 0F 28 F8")]
     public partial float GetScale();
 
+    [MemberFunction("E8 ?? ?? ?? ?? F2 0F 10 77")]
+    public partial void SetSize(ushort width, ushort height);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 40 2A C7")]
+    public partial float GetScaledWidth(bool getScaledWidth); // False returns unscaled width
+
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B7 57 5A")]
+    public partial float GetScaledHeight(bool getScaledHeight); // False returns unscaled height
+
     [MemberFunction("E8 ?? ?? ?? ?? 0F BF 45 00")]
     public partial float GetGlobalUIScale();
 

@@ -2871,6 +2871,9 @@ classes:
       0x14051EA80: GetGlobalUIScale
       0x14051EA90: SetGlobalUIScale
       0x14051EC30: SetScale
+      0x14051EE40: SetSize
+      0x14051EF20: GetScaledWidth
+      0x14051EF60: GetScaledHeight
       0x14051EFA0: CalculateBounds
       0x14051F770: SetFlag
       0x1405212B0: Draw
