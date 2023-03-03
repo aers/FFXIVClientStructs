@@ -2739,8 +2739,8 @@ classes:
       0x14050FC80: GetAsAtkComponentNode
       0x14050FCA0: GetComponent
       0x140536200: GetComponent_2
-      0x140547D80: GetComponentList
-      0x140562730: GetComponentDropDownList
+      0x140547D80: GetAsComponentList
+      0x140562730: GetAsComponentDropDownList
       0x140510450: RegisterEvent
       0x140510490: UnregisterEvent
       0x1405104D0: DispatchEvent
@@ -2882,6 +2882,7 @@ classes:
       0x140521C00: SetFocusNode
       0x140522180: GetNodeById
       0x1405222B0: GetButtonNodeById
+      0x140522450: GetComponentListById
       0x1405224F0: GetTextNodeById
       0x140522550: GetImageNodeById
       0x140522650: FireCallback

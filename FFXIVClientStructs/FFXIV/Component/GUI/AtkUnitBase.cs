@@ -69,6 +69,9 @@ public unsafe partial struct AtkUnitBase
     [MemberFunction("E8 ?? ?? ?? ?? 8D 53 1B")]
     public partial AtkComponentButton* GetButtonNodeById(uint nodeId);
 
+    [MemberFunction("E8 ?? ?? ?? ?? 41 B1 01 48 89 87")]
+    public partial AtkComponentList* GetComponentListById(uint nodeId);
+
     [MemberFunction("E9 ?? ?? ?? ?? 83 FB 15")]
     public partial byte FireCallbackInt(int callbackValue);
 
