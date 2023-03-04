@@ -83,9 +83,9 @@ public unsafe partial struct PlayerState
     /// 6 = Accessorie Pose: Glasses, Wings
     /// </remarks>
     [FieldOffset(0x47A)] public fixed byte SelectedPoses[7];
-    [FieldOffset(0x481)] public byte NoviceNetworkFlags1;
-    [FieldOffset(0x482)] public byte NoviceNetworkFlags2;
-    [FieldOffset(0x483)] public byte NoviceNetworkFlags3;
+    [FieldOffset(0x481)] public byte PlayerStateFlags1;
+    [FieldOffset(0x482)] public byte PlayerStateFlags2;
+    [FieldOffset(0x483)] public byte PlayerStateFlags3;
 
     [FieldOffset(0x501)] public fixed byte UnlockFlags[44];
 
@@ -344,16 +344,16 @@ public unsafe partial struct PlayerState
     public partial bool IsReturner();
 
     /// <summary>
-    /// Returns whether the specified NoviceNetworkFlag is set for the player.
+    /// Returns whether the specified PlayerStateFlag is set.
     /// </summary>
-    /// <param name="flag">The NoviceNetworkFlag to check.</param>
+    /// <param name="flag">The PlayerStateFlag to check.</param>
     [MemberFunction("E8 ?? ?? ?? ?? 3A D8 75 2E")]
-    public partial bool IsNoviceNetworkFlagSet(NoviceNetworkFlag flag);
+    public partial bool IsPlayerStateFlagSet(PlayerStateFlag flag);
 
     #endregion
 }
 
-public enum NoviceNetworkFlag : uint
+public enum PlayerStateFlag : uint
 {
     IsLoginSecurityToken = 1,
     IsBuddyInStable = 2,
