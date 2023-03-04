@@ -792,6 +792,7 @@ classes:
   Client::Game::UI::Loot:
     vtbls:
       - ea: 0x14198F678
+        base: Component::GUI::AtkModuleInterface::AtkEventInterface
     instances:
       - ea: 0x1420EC640
         pointer: False
@@ -5930,18 +5931,22 @@ classes:
     vtbls:
       - ea: 0x141A14780
         base: Component::GUI::AtkUnitBase
+  Client::UI::AddonScreenInfoChild:
+    vtbls:
+      - ea: 0x141A41F20
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonImage:
     vtbls:
       - ea: 0x141A43030
-        base: Component::GUI::AtkUnitBase
+        base: Client::UI::AddonScreenInfoChild
   Client::UI::AddonScreenText:
     vtbls:
       - ea: 0x141A45270
-        base: Component::GUI::AtkUnitBase
+        base: Client::UI::AddonScreenInfoChild
   Client::UI::AddonImage3:
     vtbls:
       - ea: 0x141A49960
-        base: Component::GUI::AtkUnitBase
+        base: Client::UI::AddonScreenInfoChild
   Client::UI::AddonPopUpText:
     vtbls:
       - ea: 0x141A14E48
