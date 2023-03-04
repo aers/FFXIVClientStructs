@@ -3,7 +3,7 @@
 [StructLayout(LayoutKind.Explicit, Size = 0x31F)]
 public unsafe partial struct SatisfactionSupplyManager
 {
-    [StaticAddress("66 C7 05 ?? ?? ?? ?? ?? ?? 33 C9", 3)]
+    [StaticAddress("48 8D 0D ?? ?? ?? ?? 45 33 C0 66 89 43 60", 3)]
     public static partial SatisfactionSupplyManager* Instance();
 
     [FieldOffset(0x14)] public fixed byte SatisfactionRankArray[9]; // 1-5 indicating each NPC's "Satisfaction" value (the hearts in the UI)
