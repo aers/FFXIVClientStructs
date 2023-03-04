@@ -2803,7 +2803,7 @@ classes:
       0x140514880: ToggleFixedFontResolution  # this stops text from auto scaling, they turned this on for nameplates in 5.5
       0x1405155F0: ToggleFontCache
       0x1405157E0: ResizeNodeForCurrentText
-      0x140514050: GetString
+      0x140514050: GetText
       0x140514090: SetFont
       0x1405131D0: SetAlignment
       0x140584660: ctor
