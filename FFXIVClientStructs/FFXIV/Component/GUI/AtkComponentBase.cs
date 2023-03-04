@@ -44,6 +44,12 @@ public unsafe partial struct AtkComponentBase
     [FieldOffset(0x08)] public AtkUldManager UldManager;
     [FieldOffset(0xA8)] public AtkComponentNode* OwnerNode;
 
+    [MemberFunction("E8 ?? ?? ?? ?? 8D 73 01")]
+    public partial AtkTextNode* GetTextNodeById(uint id);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 8D 56 9C")]
+    public partial AtkImageNode* GetImageNodeById(uint id);
+    
     [VirtualFunction(10)] 
     public partial void* SetEnabledState(bool enabled);
 }

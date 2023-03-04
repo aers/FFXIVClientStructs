@@ -2898,6 +2898,8 @@ classes:
     funcs:
       0x140535F80: ctor
       0x140536230: GetOwnerNodePosition
+      0x140536660: GetTextNodeById
+      0x1405366C0: GetImageNodeById
   Component::GUI::AtkComponentButton:
     vtbls:
       - ea: 0x141931D80
