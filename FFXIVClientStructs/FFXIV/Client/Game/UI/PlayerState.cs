@@ -83,7 +83,9 @@ public unsafe partial struct PlayerState
     /// 6 = Accessorie Pose: Glasses, Wings
     /// </remarks>
     [FieldOffset(0x47A)] public fixed byte SelectedPoses[7];
-    [FieldOffset(0x481)] public fixed byte NoviceNetworkFlags[3];
+    [FieldOffset(0x481)] public byte NoviceNetworkFlags1;
+    [FieldOffset(0x482)] public byte NoviceNetworkFlags2;
+    [FieldOffset(0x483)] public byte NoviceNetworkFlags3;
 
     [FieldOffset(0x501)] public fixed byte UnlockFlags[44];
 
