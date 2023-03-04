@@ -2651,7 +2651,8 @@ classes:
       - ea: 0x141930EE0
         base: Component::GUI::AtkArrayData
     funcs:
-      0x1404ECFF0: SetValueIfDifferentAndNotify
+      0x1404ED050: SetValue
+      0x1404ECFF0: SetValueIfDifferent
       0x1404ED090: SetValueForced
   Component::GUI::StringArrayData:
     vtbls:
@@ -2660,8 +2661,8 @@ classes:
     funcs:
       0x1404ED300: SetValue
       0x1404ED4E0: SetValueUtf8
-      0x1404ED540: SetValueIfDifferentAndNotify
-      0x1404ED570: SetValueIfDifferentAndNotifyUtf8
+      0x1404ED540: SetValueIfDifferent
+      0x1404ED570: SetValueIfDifferentUtf8
       0x1404ED5B0: SetValueForced
       0x1404ED5F0: SetValueForcedUtf8
   Component::GUI::ExtendArrayData:
