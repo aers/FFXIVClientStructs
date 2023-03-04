@@ -2742,6 +2742,7 @@ classes:
       0x140547D80: GetAsComponentList
       0x140562730: GetAsComponentDropDownList
       0x140562EE0: GetAsComponentRadioButton
+      0x14056D5D0: GetAsComponentScrollBar
       0x140510450: RegisterEvent
       0x140510490: UnregisterEvent
       0x1405104D0: DispatchEvent
@@ -2898,6 +2899,7 @@ classes:
     funcs:
       0x140535F80: ctor
       0x140536230: GetOwnerNodePosition
+      0x140536560: GetScrollBarById
       0x140536660: GetTextNodeById
       0x1405366C0: GetImageNodeById
   Component::GUI::AtkComponentButton:

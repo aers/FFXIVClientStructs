@@ -45,10 +45,13 @@ public unsafe partial struct AtkComponentBase
     [FieldOffset(0xA8)] public AtkComponentNode* OwnerNode;
 
     [MemberFunction("E8 ?? ?? ?? ?? 8D 73 01")]
-    public partial AtkTextNode* GetTextNodeById(uint id);
+    public partial AtkResNode* GetTextNodeById(uint id);
 
     [MemberFunction("E8 ?? ?? ?? ?? 8D 56 9C")]
-    public partial AtkImageNode* GetImageNodeById(uint id);
+    public partial AtkResNode* GetImageNodeById(uint id);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 8B 53 FC")]
+    public partial AtkResNode* GetScrollBarNodeById(uint id);
     
     [VirtualFunction(10)] 
     public partial void* SetEnabledState(bool enabled);
