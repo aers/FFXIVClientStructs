@@ -6084,10 +6084,7 @@ classes:
     vtbls:
       - ea: 0x141A56B18
         base: Component::GUI::AtkUnitBase
-  Client::UI::AddonSocial: # 105
-    vtbls:
-      - ea: 0x1419DA3B8
-        base: Component::GUI::AtkUnitBase
+# Client::UI::AddonSocial: # 105, same vtbl as AddonPvPTeam
   Client::UI::AddonConfigLog: # 106
     vtbls:
       - ea: 0x1419DD840
@@ -7923,7 +7920,10 @@ classes:
     vtbls:
       - ea: 0x141A09D88
         base: Component::GUI::AtkUnitBase
-# Client::UI::AddonPvPTeam: # 594, same vtbl as AddonSocial
+  Client::UI::AddonPvPTeam: # 594
+    vtbls:
+      - ea: 0x1419DA3B8
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonPvPTeamInputString: # 595
     vtbls:
       - ea: 0x1419DA5F0
