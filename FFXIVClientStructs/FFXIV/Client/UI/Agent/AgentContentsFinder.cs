@@ -35,6 +35,9 @@ public unsafe partial struct AgentContentsFinder
     [FixedSizeArray<ContentsRouletteRole>(11)]
     [FieldOffset(0x2007)] public fixed byte ContentRouletteRoleBonus[11];
     
+    [FieldOffset(0x2014)] public uint DutyPenaltyMinutes;
+    [FieldOffset(0x2018)] public uint UnkPenaltyMinutes;
+
     [FieldOffset(0x204C)] public int CurrentTimestamp;
     [FieldOffset(0x2058)] public byte SelectedTab;
 
@@ -73,4 +76,3 @@ public enum ContentsRouletteRole : byte {
     DPS = 2,
     None = 3,
 }
-
