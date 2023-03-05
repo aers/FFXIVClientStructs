@@ -2739,7 +2739,12 @@ classes:
       0x14050FC60: GetAsAtkCollisionNode
       0x14050FC80: GetAsAtkComponentNode
       0x14050FCA0: GetComponent
-      0x140562730: GetComponentDropDownList
+      0x140536200: GetComponent_2
+      0x140547D80: GetAsComponentList
+      0x140562730: GetAsComponentDropDownList
+      0x140562EE0: GetAsComponentRadioButton
+      0x14056D5D0: GetAsComponentScrollBar
+      0x140578FE0: GetAsJournalCanvas
       0x140510450: RegisterEvent
       0x140510490: UnregisterEvent
       0x1405104D0: DispatchEvent
@@ -2751,6 +2756,8 @@ classes:
       0x140510960: GetScaleX
       0x140510980: GetScaleY
       0x1405109A0: SetScale
+      0x1405109B0: SetScaleX
+      0x140510A20: SetScaleY
       0x140510AC0: SetSize0
       0x140510B00: GetYFloat
       0x140510B40: GetYShort
@@ -2799,6 +2806,7 @@ classes:
       0x140514880: ToggleFixedFontResolution  # this stops text from auto scaling, they turned this on for nameplates in 5.5
       0x1405155F0: ToggleFontCache
       0x1405157E0: ResizeNodeForCurrentText
+      0x140514050: GetText
       0x140514090: SetFont
       0x1405131D0: SetAlignment
       0x140584660: ctor
@@ -2869,11 +2877,16 @@ classes:
       0x14051EA80: GetGlobalUIScale
       0x14051EA90: SetGlobalUIScale
       0x14051EC30: SetScale
+      0x14051EE40: SetSize
+      0x14051EF20: GetScaledWidth
+      0x14051EF60: GetScaledHeight
       0x14051EFA0: CalculateBounds
       0x14051F770: SetFlag
       0x1405212B0: Draw
       0x140521C00: SetFocusNode
       0x140522180: GetNodeById
+      0x1405222B0: GetButtonNodeById
+      0x140522450: GetComponentListById
       0x1405224F0: GetTextNodeById
       0x140522550: GetImageNodeById
       0x140522650: FireCallback
@@ -2888,6 +2901,9 @@ classes:
     funcs:
       0x140535F80: ctor
       0x140536230: GetOwnerNodePosition
+      0x140536560: GetScrollBarById
+      0x140536660: GetTextNodeById
+      0x1405366C0: GetImageNodeById
   Component::GUI::AtkComponentButton:
     vtbls:
       - ea: 0x141931D80

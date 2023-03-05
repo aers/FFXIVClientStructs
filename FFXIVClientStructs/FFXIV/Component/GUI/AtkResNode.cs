@@ -131,6 +131,21 @@ public unsafe partial struct AtkResNode : ICreatable
     [MemberFunction("E8 ?? ?? ?? ?? 44 8D 7F")]
     public partial AtkComponentBase* GetComponent();
 
+    [MemberFunction("E8 ?? ?? ?? ?? 41 B1 08")]
+    public partial AtkComponentList* GetAsAtkComponentList();
+
+    [MemberFunction("E8 ?? ?? ?? ?? 41 8D 55 56")]
+    public partial AtkComponentDropDownList* GetAsAtkComponentDropdownList();
+
+    [MemberFunction("E8 ?? ?? ?? ?? 8D 56 F1")]
+    public partial AtkComponentRadioButton* GetAsAtkComponentRadioButton();
+
+    [MemberFunction("E8 ?? ?? ?? ?? 8D 56 9C")]
+    public partial AtkComponentScrollBar* GetAsAtkComponentScrollBar();
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 0B 41 B8 ?? ?? ?? ?? 48 89 83")]
+    public partial AtkComponentJournalCanvas* GetAsAtkJournalCanvas();
+
     [MemberFunction("E8 ?? ?? ?? ?? C1 E7 0C")]
     public partial void AddEvent(ushort eventType, uint eventParam, AtkEventListener* listener,
         AtkResNode* nodeParam, bool isSystemEvent);
@@ -174,6 +189,12 @@ public unsafe partial struct AtkResNode : ICreatable
     [MemberFunction("E8 ?? ?? ?? ?? 48 8D 7F 38")]
     public partial void SetScale(float X, float Y);
 
+    [MemberFunction("E9 ?? ?? ?? ?? F3 0F 5E CA")]
+    public partial void SetScaleX(float x);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B7 D5 48 8B CF")]
+    public partial void SetScaleY(float y);
+    
     [MemberFunction("E8 ?? ?? ?? ?? 66 03 C0")]
     public partial ushort GetWidth();
 
