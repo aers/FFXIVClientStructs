@@ -6433,6 +6433,10 @@ classes:
     vtbls:
       - ea: 0x141A25260
         base: Component::GUI::AtkUnitBase
+  Client::UI::AddonGcArmyCapture:
+    vtbls:
+      - ea: 0x141A25918
+        base: Component::GUI::AtkUnitBase
   Client::Game::Object::EventObject:
     vtbls:
       - ea: 0x141A6C018
