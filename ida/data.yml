@@ -5791,7 +5791,10 @@ classes:
       - ea: 0x1419CC130
         base: Component::GUI::AtkUnitBase
 # Client::UI::AddonListMulti: # 34, unknown vtbl
-# Client::UI::AddonListIcon: # 35, same vtbl as AddonMarker
+  Client::UI::AddonListIcon: # 35
+    vtbls:
+      - ea: 0x1419CB810
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonTalk: # 36
     vtbls:
       - ea: 0x141A0BD98
@@ -6630,11 +6633,8 @@ classes:
     vtbls:
       - ea: 0x141A19698
         base: Component::GUI::AtkUnitBase
-  Client::UI::AddonMarker: # 241
-    vtbls:
-      - ea: 0x1419CB810
-        base: Component::GUI::AtkUnitBase
-# Client::UI::AddonBait: # 242, same vtbl as AddonMarker
+# Client::UI::AddonMarker: # 241, same vtbl as AddonListIcon
+# Client::UI::AddonBait: # 242, same vtbl as AddonListIcon
 # Client::UI::AddonSystemMenu: # 243, same vtbl as AddonSelectString
   Client::UI::AddonHousingHarvest: # 244
     vtbls:
