@@ -3,6 +3,7 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent; 
 
+[Agent(AgentId.AirShipExplorationResult)]
 [StructLayout(LayoutKind.Explicit, Size = 0x38)]
 public unsafe struct AgentAirshipExplorationResult {
 	[FieldOffset(0x00)] public AgentExplorationResultInterface Interface;
@@ -10,6 +11,7 @@ public unsafe struct AgentAirshipExplorationResult {
 	public static AgentAirshipExplorationResult* Instance() => (AgentAirshipExplorationResult*)AgentModule.Instance()->GetAgentByInternalId(AgentId.AirShipExplorationResult);
 }
 
+[Agent(AgentId.SubmersibleExplorationResult)]
 [StructLayout(LayoutKind.Explicit, Size = 0x38)]
 public unsafe struct AgentSubmersibleExplorationResult {
 	[FieldOffset(0x00)] public AgentExplorationResultInterface Interface;
