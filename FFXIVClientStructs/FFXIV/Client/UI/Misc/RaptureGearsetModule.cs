@@ -1,16 +1,19 @@
 ﻿using FFXIVClientStructs.FFXIV.Client.System.Framework;
+using FFXIVClientStructs.FFXIV.Client.UI.Misc.UserFileManager;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
+// Client::UI::Misc::RaptureGearsetModule
+//   Client::UI::Misc::UserFileManager::UserFileEvent
+// ctor "48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC 20 45 33 F6 48 89 51 10 48 8D 05 ?? ?? ?? ?? 4C 89 71 08 49 8B D8"
 [StructLayout(LayoutKind.Explicit, Size = 0xB670)]
 public unsafe partial struct RaptureGearsetModule
 {
-    public static RaptureGearsetModule* Instance()
-    {
-        return Framework.Instance()->GetUiModule()->GetRaptureGearsetModule();
-    }
+    public static RaptureGearsetModule* Instance() => Framework.Instance()->GetUiModule()->GetRaptureGearsetModule();
 
+    [FieldOffset(0)] public UserFileEvent UserFileEvent;
     [FieldOffset(0x0000)] public void* vtbl;
+    [Obsolete("Use UserFileEvent.FileName instead", true)]
     [FieldOffset(0x0030)] public fixed byte ModuleName[16];
     [FieldOffset(0x0048)] public Gearsets Gearset;
 

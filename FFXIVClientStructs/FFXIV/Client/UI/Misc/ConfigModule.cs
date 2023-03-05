@@ -3,25 +3,21 @@ using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
+
 // Client::UI::Misc::ConfigModule
-// ctor E8 ?? ?? ?? ?? 48 8B 97 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 4C 8B CF
-
+// ctor "E8 ?? ?? ?? ?? 48 8B 97 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 4C 8B CF"
 // For updating offsets:
-//  48 8B CB E8 ?? ?? ?? ?? 48 8B 7C 24 ?? 33 C0 48 8B 5C 24
+//  "48 8B CB E8 ?? ?? ?? ?? 48 8B 7C 24 ?? 33 C0 48 8B 5C 24"
 //    16 * (v6 + ConfigOptionCount * a6) + a1 + {ValuesFieldOffset}
-
 [StructLayout(LayoutKind.Explicit, Size = 0xD9E8)]
 public unsafe partial struct ConfigModule
 {
+    public static ConfigModule* Instance() => Framework.Instance()->GetUiModule()->GetConfigModule();
+
     public const int ConfigOptionCount = 693;
     [FieldOffset(0x28)] public UIModule* UIModule;
     [FieldOffset(0x2C8)] private fixed byte options[Option.Size * ConfigOptionCount];
     [FieldOffset(0x5978)] private fixed byte values[0x10 * ConfigOptionCount];
-
-    public static ConfigModule* Instance()
-    {
-        return Framework.Instance()->GetUiModule()->GetConfigModule();
-    }
 
     [MemberFunction("E8 ?? ?? ?? ?? C6 47 4D 00")]
     public partial bool SetOption(uint index, int value, int a4 = 2, bool a5 = true, bool a6 = false);

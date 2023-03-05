@@ -1,11 +1,18 @@
 ﻿using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Client.System.String;
+using FFXIVClientStructs.FFXIV.Client.UI.Misc.UserFileManager;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
+// Client::UI::Misc::RaptureHotbarModule
+//   Client::UI::Misc::UserFileManager::UserFileEvent
+// ctor "E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 4C 8B C7 49 8B D4 E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 49 8B D4"
 [StructLayout(LayoutKind.Explicit, Size = 0x27278)]
 public unsafe partial struct RaptureHotbarModule
 {
+    public static RaptureHotbarModule* Instance() => Framework.Instance()->GetUiModule()->GetRaptureHotbarModule();
+
+    [FieldOffset(0)] public UserFileEvent UserFileEvent;
     [FieldOffset(0x48)] public UIModule* UiModule;
     [FieldOffset(0x90)] public HotBars HotBar;
 
