@@ -3623,7 +3623,10 @@ classes:
         base: Client::UI::Shell::RaptureShellCommandInterface
     funcs:
       0x140760720: ctor
+      0x140764090: ExecuteMacro
+      0x140764170: TryGetMacroIconCommand
       0x140764F80: SetChatChannel
+      0x140765300: SetFlags
   Client::UI::Shell::ShellCommandBlueAction:
     vtbls:
       - ea: 0x141958188
