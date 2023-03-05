@@ -5,7 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 [Addon("LookingForGroupDetail")]
 [StructLayout(LayoutKind.Explicit, Size = 0x3E8)]
-public unsafe struct AddonLookingForGroupDetail
+public unsafe partial struct AddonLookingForGroupDetail
 {
     [FieldOffset(0x00)] public AtkUnitBase AtkUnitBase;
 

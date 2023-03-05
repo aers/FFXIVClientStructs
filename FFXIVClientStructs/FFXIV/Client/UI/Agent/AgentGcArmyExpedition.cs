@@ -15,13 +15,13 @@ public unsafe struct AgentGcArmyExpedition
     [FieldOffset(0x44)] public int SelectedRow;
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x920)]
-public unsafe struct GcArmyExpeditionData
+[StructLayout(LayoutKind.Explicit, Size = 0x1998)]
+public unsafe partial struct GcArmyExpeditionData
 {
     [FieldOffset(0x10)] public int NumEntries;
     
-    [FixedSizeArray<MissionInfo>(34)]
-    [FieldOffset(0x18)] public fixed byte MissionInfoArray[0x78 * 34];
+    [FixedSizeArray<MissionInfo>(50)]
+    [FieldOffset(0x18)] public fixed byte MissionInfoArray[0x78 * 50];
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x78)]
