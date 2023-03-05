@@ -5,6 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 // Client::UI::AddonSelectYesNo
 //   Component::GUI::AtkUnitBase
 //     Component::GUI::AtkEventListener
+[Addon("SelectYesNo")]
 [StructLayout(LayoutKind.Explicit, Size = 0x2D0)]
 public unsafe struct AddonSelectYesno
 {

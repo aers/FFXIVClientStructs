@@ -5,6 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 // Client::UI::AddonExp
 //   Component::GUI::AtkUnitBase
 //     Component::GUI::AtkEventListener
+[Addon("_Exp")]
 [StructLayout(LayoutKind.Explicit, Size = 0x290)]
 public struct AddonExp
 {

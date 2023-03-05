@@ -5,6 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 // Client::UI::AddonGathering
 //   Component::GUI::AtkUnitBase
 //     Component::GUI::AtkEventListener
+[Addon("Gathering")]
 [StructLayout(LayoutKind.Explicit, Size = 0x300)]
 public unsafe struct AddonGathering
 {

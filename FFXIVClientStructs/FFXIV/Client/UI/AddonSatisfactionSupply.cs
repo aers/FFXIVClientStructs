@@ -2,6 +2,7 @@
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
+[Addon("SatisfactionSupply")]
 [StructLayout(LayoutKind.Explicit, Size = 0x670)]
 public unsafe partial struct AddonSatisfactionSupply
 {

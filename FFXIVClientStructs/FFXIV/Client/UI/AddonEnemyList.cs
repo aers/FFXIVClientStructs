@@ -5,6 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 // Client::UI::AddonEnemyList
 //   Component::GUI::AtkUnitBase
 //     Component::GUI::AtkEventListener
+[Addon("_EnemyList")]
 [StructLayout(LayoutKind.Explicit, Size = 0x278)]
 public unsafe struct AddonEnemyList
 {

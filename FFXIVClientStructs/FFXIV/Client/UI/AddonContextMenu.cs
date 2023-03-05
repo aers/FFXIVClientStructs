@@ -2,6 +2,7 @@
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
+[Addon("ContextMenu")]
 [StructLayout(LayoutKind.Explicit, Size = 0x2A0)]
 public struct AddonContextMenu
 {

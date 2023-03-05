@@ -5,6 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 // Client::UI::AddonRecipeNote
 //   Component::GUI::AtkUnitBase
 //     Component::GUI::AtkEventListener
+[Addon("RecipeNote")]
 [StructLayout(LayoutKind.Explicit, Size = 0x22D0)]
 public unsafe struct AddonRecipeNote
 {

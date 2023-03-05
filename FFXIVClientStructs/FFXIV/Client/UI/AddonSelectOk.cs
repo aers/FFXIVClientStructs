@@ -5,6 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 // Client::UI::AddonSelectOk
 //   Component::GUI::AtkUnitBase
 //     Component::GUI::AtkEventListener
+[Addon("SelectOk")]
 [StructLayout(LayoutKind.Explicit, Size = 0x2A8)]
 public unsafe struct AddonSelectOk
 {

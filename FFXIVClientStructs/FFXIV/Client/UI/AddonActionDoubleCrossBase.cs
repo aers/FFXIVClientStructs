@@ -2,8 +2,8 @@
 
 namespace FFXIVClientStructs.FFXIV.Client.UI; 
 
-[StructLayout(LayoutKind.Explicit, Size = 0x2F8)]
 [Addon("_ActionDoubleCrossL", "_ActionDoubleCrossR")]
+[StructLayout(LayoutKind.Explicit, Size = 0x2F8)]
 public struct AddonActionDoubleCrossBase {
     [FieldOffset(0x000)] public AddonActionBarBase ActionBarBase;
 

@@ -6,6 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 // Client::UI::AddonFateReward
 //   Component::GUI::AtkUnitBase
 //     Component::GUI::AtkEventListener
+[Addon("FateReward")]
 [StructLayout(LayoutKind.Explicit, Size = 0x570)]
 public unsafe struct AddonFateReward
 {

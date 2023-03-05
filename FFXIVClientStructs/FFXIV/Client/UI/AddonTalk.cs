@@ -6,6 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 // Client::UI::AddonTalk
 //   Component::GUI::AtkUnitBase
 //     Component::GUI::AtkEventListener
+[Addon("Talk")]
 [StructLayout(LayoutKind.Explicit, Size = 0xE80)]
 public unsafe struct AddonTalk
 {

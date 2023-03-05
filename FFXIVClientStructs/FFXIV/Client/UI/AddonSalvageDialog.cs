@@ -5,6 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 // Client::UI::AddonSalvageDialog
 //   Component::GUI::AtkUnitBase
 //     Component::GUI::AtkEventListener
+[Addon("SalvageDialog")]
 [StructLayout(LayoutKind.Explicit, Size = 0x250)]
 public unsafe struct AddonSalvageDialog
 {

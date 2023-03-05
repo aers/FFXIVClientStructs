@@ -2,7 +2,7 @@
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
-[Addon("_Image")]
+[Addon("_Image, _Image3")]
 [StructLayout(LayoutKind.Explicit, Size = 0x290)]
 public unsafe struct AddonImage
 {
