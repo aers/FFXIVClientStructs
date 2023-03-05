@@ -3152,7 +3152,14 @@ classes:
     vfuncs:
       1: ReadFile
       2: WriteFile
+      4: GetFileSize
+      5: GetDataSize
       6: GetFileVersion
+      7: GetFileType
+      9: GetHasChanges
+      10: GetIsSavePending
+      11: SetCharacterContentId
+      12: SaveFile
   Client::UI::Misc::UserFileManager:
     vtbls:
       - ea: 0x1419404D8
@@ -3237,7 +3244,7 @@ classes:
       23: GetFlagStatusModule
       26: GetRaptureUiDataModule
       30: GetRaptureTeleportHistory
-      32: GetRecommendedEquipModule
+      32: GetRecommendEquipModule
       34: GetInfoModule
       36: GetAgentModule
       38: GetUI3DModule
@@ -3467,7 +3474,7 @@ classes:
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
       0x140699910: AddHistoryEntry
-  Client::UI::Misc::RecommendedEquipModule:
+  Client::UI::Misc::RecommendEquipModule:
     funcs:
       0x14069A900: ctor
       0x14069AD20: SetupRecommendationList
