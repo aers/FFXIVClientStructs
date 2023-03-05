@@ -2969,6 +2969,7 @@ classes:
       10: GetStringArrayData
       11: GetExtendArrayData
       17: SetHandlerFunction
+      26: IsAddonReady
       39: SetUIVisibility
       58: OnUpdate
       63: OpenMapWithMapLink
