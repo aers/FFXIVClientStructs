@@ -1,3 +1,4 @@
+using System.Text;
 using FFXIVClientStructs.FFXIV.Client.Game;
 using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 using FFXIVClientStructs.FFXIV.Client.UI.Info;
@@ -28,7 +29,7 @@ public unsafe partial struct UIModule
 
         PlaySound(effectId + 0x24u, 0, 0, 0);
     }
-    
+
     /*
         dq 0                                    ; +0x30
         dq 23000000000h                         ; +0x38
@@ -218,6 +219,10 @@ public unsafe partial struct UIModule
 
     [MemberFunction("E8 ?? ?? ?? ?? 4D 39 BE")]
     public static partial bool PlaySound(uint effectId, long a2, long a3, byte a4);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 BF 4C 8B CB")]
+    [GenerateCStrOverloads]
+    public static partial bool IsPlayerCharacterName(byte* name);
 
     [StructLayout(LayoutKind.Explicit, Size = 0x8)]
     public struct Unk1
