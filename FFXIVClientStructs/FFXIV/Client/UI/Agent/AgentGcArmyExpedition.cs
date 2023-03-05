@@ -19,9 +19,10 @@ public unsafe struct AgentGcArmyExpedition
 public unsafe struct GcArmyExpeditionData
 {
     [FieldOffset(0x10)] public int NumEntries;
-    
-    [FixedSizeArray<MissionInfo>(18)]
-    [FieldOffset(0x18)] public fixed byte MissionInfoArray[0x78 * 18];
+
+    [FieldOffset(0x18)] public MissionInfo* MissionInfoArray;
+
+    public Span<MissionInfo> MissionInfoSpan => new(MissionInfoArray, NumEntries);
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x78)]
