@@ -2,7 +2,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
 // max known: 79
 // seems to have generic events followed by component-specific events
-public enum AtkEventType
+public enum AtkEventType : byte
 {
     MouseDown = 3,
     MouseUp = 4,
@@ -44,17 +44,14 @@ public enum AtkEventType
 public unsafe partial struct AtkEvent
 {
     [FieldOffset(0x0)] public AtkResNode* Node; // extra node param, unused a lot
-
-    [FieldOffset(0x8)]
-    public AtkEventTarget* Target; // target of event (eg clicking a button, target is the button node)
-
+    [FieldOffset(0x8)] public AtkEventTarget* Target; // target of event (eg clicking a button, target is the button node)
     [FieldOffset(0x10)] public AtkEventListener* Listener; // listener of event
     [FieldOffset(0x18)] public uint Param; // arg3 of ReceiveEvent
     [FieldOffset(0x20)] public AtkEvent* NextEvent;
-    [FieldOffset(0x28)] public byte Type;
+    [FieldOffset(0x28)] public AtkEventType Type;
     [FieldOffset(0x29)] public byte Unk29;
     [FieldOffset(0x30)] public byte Flags; // 0: handled, 5: force handled (see AtkEvent::SetEventIsHandled)
-
+  
     [MemberFunction("E8 ?? ?? ?? ?? 8D 53 9C")]
     public partial void SetEventIsHandled(bool forced = false);
 }
