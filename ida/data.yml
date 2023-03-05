@@ -34,6 +34,7 @@ globals:
   0x1420FB125: g_Client::Game::UI::ContentsFinder::LevelSync
   0x1420FB126: g_Client::Game::UI::ContentsFinder::LimitedLevelingRoulette
   0x1421000FA: g_Client::Game::UI::UnlockedCompanionsMask  # not a pointer
+  0x1421022E0: g_Conditions # bool array, size is Condition sheet row count
   0x14209A9D0: g_SomeOtherRenderingState
   0x1420ACD14: g_InvSqrt3
   0x142077638: g_OodleNew
@@ -80,6 +81,12 @@ functions:
   0x14057BEB0: Component::GUI::TextModuleInterface::GetTextLabelByID
   0x14065C930: ConvertLogMessageIdToCharaLogKind
   0x140742E80: ExecuteCommand
+  0x1400A7630: InDeepDungeon
+  0x1400A7860: IsUnconscious
+  0x1400A7870: IsRolePlaying
+  0x140B08900: SetCondition
+  0x140B08C40: SetConditionByPermissionAndLog
+  0x140B09110: IsLocalPlayerLalafell
   0x140C788F0: CreateSelectYesno
   0x141184E60: Client::UI::AddonHudLayoutScreen::MoveableAddonInfoStruct_UpdateAddonPosition
   0x14125C350: Client::Graphics::Kernel::CreateShader # static function
