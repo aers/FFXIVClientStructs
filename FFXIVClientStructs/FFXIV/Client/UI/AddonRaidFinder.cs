@@ -21,7 +21,9 @@ public unsafe partial struct AddonRaidFinder
     [FieldOffset(0x3E0)] public Utf8String TrialsTooltipString;
     [FieldOffset(0x448)] public Utf8String UltimatesTooltipString;
     
-    [FieldOffset(0x4D4)] public int SelectedRow;
+    [FieldOffset(0x4D4)] public int HighlightedRow;
+    [FieldOffset(0x4DC)] public int NumDisplayedEntries; // Use to index into EntryInfoArray
+    [FieldOffset(0x4E0)] public int SelectedTab;
 
     [FixedSizeArray<RaidFinderDutyEntry>(8)]
     [FieldOffset(0x4E8)] public fixed byte EntryInfoArray[0x140 * 8];
@@ -34,5 +36,18 @@ public struct RaidFinderDutyEntry
     [FieldOffset(0x68)] public Utf8String DutyLevel;
     [FieldOffset(0xD0)] public Utf8String CurrentlyRecruitingPartiesCount;
     
+    [FieldOffset(0x138)] public RaidFinderEntryFlags Flags;
     // There are 8 bytes worth of additional data at the end, not sure what exactly they mean
+}
+
+[Flags]
+public enum RaidFinderEntryFlags : byte
+{
+    AvailableForSelection = 0x01, // Checkbox is available and can be checked
+    Selected = 0x02, 
+    Locked = 0x04, // Unable to select duty due to not meeting conditions
+    
+    Ultimate = 0x08,
+    Unreal = 0x20,
+    Extreme = 0x40,
 }
