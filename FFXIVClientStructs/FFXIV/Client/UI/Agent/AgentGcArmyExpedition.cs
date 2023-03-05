@@ -20,8 +20,8 @@ public unsafe struct GcArmyExpeditionData
 {
     [FieldOffset(0x10)] public int NumEntries;
     
-    [FixedSizeArray<MissionInfo>(18)]
-    [FieldOffset(0x18)] public fixed byte MissionInfoArray[0x78 * 18];
+    [FixedSizeArray<MissionInfo>(34)]
+    [FieldOffset(0x18)] public fixed byte MissionInfoArray[0x78 * 34];
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x78)]
