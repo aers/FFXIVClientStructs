@@ -4,6 +4,7 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI; 
 
+[Addon("SalvageItemSelector")]
 [StructLayout(LayoutKind.Explicit, Size = 0x1CB0)]
 public unsafe struct AddonSalvageItemSelector {
     [FieldOffset(0x0000)] public AtkUnitBase AtkUnitBase;

@@ -5,6 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 // Client::UI::AddonRepair
 //   Component::GUI::AtkUnitBase
 //     Component::GUI::AtkEventListener
+[Addon("Repair")]
 [StructLayout(LayoutKind.Explicit, Size = 0xF7A0)]
 public unsafe struct AddonRepair
 {

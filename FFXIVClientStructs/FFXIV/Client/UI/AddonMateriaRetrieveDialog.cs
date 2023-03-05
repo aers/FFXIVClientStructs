@@ -5,6 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 // Client::UI::AddonMateriaRetrieveDialog
 //   Component::GUI::AtkUnitBase
 //     Component::GUI::AtkEventListener
+[Addon("MateriaRetrieveDialog")]
 [StructLayout(LayoutKind.Explicit, Size = 0x220)]
 public struct AddonMateriaRetrieveDialog
 {

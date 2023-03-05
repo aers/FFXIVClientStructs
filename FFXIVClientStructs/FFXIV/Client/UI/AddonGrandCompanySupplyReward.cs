@@ -5,6 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 // Client::UI::AddonGrandCompanySupplyReward
 //   Component::GUI::AtkUnitBase
 //     Component::GUI::AtkEventListener
+[Addon("GrandCompanySupplyReward")]
 [StructLayout(LayoutKind.Explicit, Size = 0x230)]
 public unsafe struct AddonGrandCompanySupplyReward
 {

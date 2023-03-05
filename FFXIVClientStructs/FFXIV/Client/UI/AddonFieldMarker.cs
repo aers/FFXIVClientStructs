@@ -2,6 +2,7 @@
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
+[Addon("FieldMarker")]
 [StructLayout(LayoutKind.Explicit, Size = 0x598)]
 public unsafe partial struct AddonFieldMarker
 {

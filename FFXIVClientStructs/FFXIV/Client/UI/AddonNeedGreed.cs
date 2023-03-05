@@ -2,9 +2,7 @@
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
-// This struct is annoying to work out in realtime,
-// You need another player in the instance,
-// and have limited time fore the items are auto-rolled
+[Addon("NeedGreed")]
 [StructLayout(LayoutKind.Explicit, Size = 0x2B8)]
 public unsafe partial struct AddonNeedGreed
 {

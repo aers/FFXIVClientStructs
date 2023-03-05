@@ -5,6 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 // Client::UI::AddonJournalResult
 //   Component::GUI::AtkUnitBase
 //     Component::GUI::AtkEventListener
+[Addon("JournalResult")]
 [StructLayout(LayoutKind.Explicit, Size = 0x288)]
 public unsafe struct AddonJournalResult
 {

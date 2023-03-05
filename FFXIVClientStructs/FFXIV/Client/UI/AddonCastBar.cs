@@ -3,8 +3,8 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI; 
 
-[StructLayout(LayoutKind.Explicit, Size = 1280)]
 [Addon("_CastBar")]
+[StructLayout(LayoutKind.Explicit, Size = 1280)]
 public struct AddonCastBar {
     [FieldOffset(0x000)] public AtkUnitBase AtkUnitBase;
     [FieldOffset(0x220)] public Utf8String CastName;

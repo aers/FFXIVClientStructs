@@ -15,6 +15,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 // Client::UI::AddonNamePlate
 //   Component::GUI::AtkUnitBase
 //     Component::GUI::AtkEventListener
+[Addon("NamePlate")]
 [StructLayout(LayoutKind.Explicit, Size = 0x470)]
 public unsafe struct AddonNamePlate
 {

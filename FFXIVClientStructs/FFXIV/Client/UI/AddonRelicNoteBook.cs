@@ -5,6 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 // Client::UI::AddonRelicNoteBook
 //   Component::GUI::AtkUnitBase
 //     Component::GUI::AtkEventListener
+[Addon("RelicNoteBook")]
 [StructLayout(LayoutKind.Explicit, Size = 0xAA8)]
 public unsafe struct AddonRelicNoteBook
 {

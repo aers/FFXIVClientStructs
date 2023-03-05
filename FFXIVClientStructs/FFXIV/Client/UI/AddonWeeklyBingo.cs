@@ -5,6 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 // Component::GUI::AddonWeeklyBingo
 //   Component::GUI::AtkUnitBase
 //     Component::GUI::AtkEventListener
+[Addon("WeeklyBingo")]
 [StructLayout(LayoutKind.Explicit, Size = 0x23C8)]
 public struct AddonWeeklyBingo
 {
