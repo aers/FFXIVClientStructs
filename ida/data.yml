@@ -6032,7 +6032,7 @@ classes:
   Client::UI::AddonImage3:
     vtbls:
       - ea: 0x141A4C7F8
-        base: Client::UI::AddonScreenInfoChild
+        base: Client::UI::AddonImage
   Client::UI::AddonPopUpText:
     vtbls:
       - ea: 0x141A17A48
