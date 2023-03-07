@@ -75,7 +75,7 @@ public unsafe partial struct AgentInspect
             [FieldOffset(0x1)] public byte G;
             [FieldOffset(0x2)] public byte R;
         }
-        public enum IconFlagsTopRight
+        public enum IconFlagsTopRight : byte
         {
             None = 0,
             Dyeable = 1,

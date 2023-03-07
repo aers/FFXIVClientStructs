@@ -42,10 +42,12 @@ public unsafe partial struct Character
     [FieldOffset(0x650)] public MountContainer Mount;
     [FieldOffset(0x6B0)] public CompanionContainer Companion;
     [FieldOffset(0x6D0)] public DrawDataContainer DrawData;
-    [FieldOffset(0x860)] public OrnamentContainer Ornament;
 
+    [Obsolete("Use DrawData.Head... instead.", true)]
     [FieldOffset(0x818)] public fixed byte EquipSlotData[4 * 10];
+    [Obsolete("Use DrawData.CustomizeData instead.", true)]
     [FieldOffset(0x840)] public fixed byte CustomizeData[0x1A];
+    [FieldOffset(0x860)] public OrnamentContainer Ornament;
 
     [FieldOffset(0x8F0)] public ActionTimelineManager ActionTimelineManager;
 

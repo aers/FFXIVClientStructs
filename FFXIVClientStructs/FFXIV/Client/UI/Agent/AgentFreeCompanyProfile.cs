@@ -45,7 +45,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent
         [FieldOffset(0x27A)] public byte Unk27A;
         [FieldOffset(0x27B)] public byte Unk27B;
 
-        [StructLayout(LayoutKind.Explicit, Size = 0x7)]
+        [StructLayout(LayoutKind.Explicit, Size = 0x6)]
         public struct FCProfile
         {
             //the bit offsets represents RowID in FCPRofile (like in 1st bit set = row 0, 2nd bit set = row 1,...)
@@ -82,7 +82,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent
                 Weekdays = 1,
                 Weekends = 2,
             }
-            public enum RecruitmentType
+            public enum RecruitmentType : byte
             {
                 None = 0,
                 Full = 1,
