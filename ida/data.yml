@@ -264,7 +264,6 @@ functions:
   0x14164BC60: rrArithEncodeInit
   0x14164E200: rrRandStateMod
   0x14164E410: rrRandStateSeed
-  0x1406c9bb0: GetRowForSheetIndex59ByRowIndex # (int RowIndex)
 
 classes:
   Client::Game::UI::RecipeNote:
@@ -3243,6 +3242,7 @@ classes:
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
       0x140614B00: ctor
+      0x140695130: ctor_FromUserFileManager
       0x1406995C0: MjiCreateWorkshopPreset
   Client::UI::UI3DModule::MapInfo:
     vtbls:
@@ -3471,8 +3471,8 @@ classes:
       - ea: 0x141946AD0
         base: Client::System::Input::InputData::InputCodeModifiedInterface
     funcs:
-      0x140668800: ctor
-      0x1406689F0: dtor
+      0x140668800: ctor_FromFileManagerUiManager
+      0x1406689F0: ctor
       0x14066AE90: IsHotbarEmpty
       0x14066E450: ExecuteSlot
       0x140669460: ExecuteSlotById
