@@ -31,7 +31,7 @@ public unsafe partial struct GameMain
 	[MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 21 48 8B 4F 10")]
 	public static partial bool IsInSanctuary();
 
-	[MemberFunction("E8 ?? ?? ?? ?? E9 08 29 00 00")]
+	[MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 8B 44 24 60 48 8D 8D")]
 	public partial void QueueActiveFestivals(uint festival1, uint festival2, uint festival3, uint festival4); // Applies once the current "event" is done (GPose, Cutscene etc)
 
 	[MemberFunction("E8 ?? ?? ?? ?? 80 63 50 FE")]
