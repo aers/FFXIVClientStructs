@@ -146,6 +146,12 @@ public unsafe partial struct AtkResNode : ICreatable
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 0B 41 B8 ?? ?? ?? ?? 48 89 83")]
     public partial AtkComponentJournalCanvas* GetAsAtkJournalCanvas();
 
+    [MemberFunction("E8 ?? ?? ?? ?? 48 89 43 D0")]
+    public partial AtkComponentButton* GetAsAtkComponentButton();
+
+    [MemberFunction("E8 ?? ?? ?? ?? 8D 55 1E")]
+    public partial AtkComponentCheckBox* GetAsAtkComponentCheckBox();
+
     [MemberFunction("E8 ?? ?? ?? ?? C1 E7 0C")]
     public partial void AddEvent(ushort eventType, uint eventParam, AtkEventListener* listener,
         AtkResNode* nodeParam, bool isSystemEvent);
