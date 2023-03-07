@@ -266,6 +266,20 @@ functions:
   0x14164E410: rrRandStateSeed
 
 classes:
+  Client::Game::UI::RecipeNote:
+    instances:
+      - ea: 0x1420ed2e0
+        pointer: False
+    funcs:
+      0x140917dd0: CancelCrafting
+      0x140918d30: IsRecipeUnlocked # (this, recipeId)
+      0x1409192a0: FirstRecipeIndex
+      0x140919260: GetRecipeByIndex # (this, index)
+      0x1409192e0: GetSelectedRecipe
+      0x140919e40: Initialize
+      0x14091c040: CancelCraftingPassthrough
+      0x14091c140: InitializeStructs
+      0x14091cd90: ClearFunctionPointers
   Client::Game::GameMain:
     instances:
       - ea: 0x1420B0CF8
@@ -611,6 +625,7 @@ classes:
       0x14005ADA0: FormatString
       0x14005B2A0: GetString
       0x14005D130: Clear
+      0x14005b3d0: GetSize
   Component::GUI::AtkValue:
     funcs:
       0x1404ED820: dtor
@@ -688,6 +703,7 @@ classes:
       0x14096D890: GetNextMapAllowanceTimestamp
       0x141380840: IsInstanceContentUnlocked   # static
       0x141380B20: IsInstanceContentCompleted  # static
+      0x14096eaf0: Terminate
   Client::Game::UI::PlayerState:
     instances:
       - ea: 0x1420EA0B8
@@ -724,6 +740,7 @@ classes:
       0x140912440: GetDesynthesisLevelForClassJob
       0x140912740: Initialize
       0x14097DD20: ctor
+      0x140913480: GetAttributeByIndex # (this, index)
   Client::Game::UI::Revive:
     vtbls:
       - ea: 0x14198E580
@@ -3193,6 +3210,7 @@ classes:
     vtbls:
       - ea: 0x141940470
     vfuncs:
+      0: dtor
       1: ReadFile
       2: WriteFile
       4: GetFileSize
@@ -3227,6 +3245,7 @@ classes:
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
       0x140614B00: ctor
+      0x140695130: ctor_FromUserFileManager
       0x1406995C0: MjiCreateWorkshopPreset
   Client::UI::UI3DModule::MapInfo:
     vtbls:
@@ -3410,6 +3429,8 @@ classes:
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     vfuncs:
       13: GetSegment
+    funcs:
+      0x1406490d0: ctor
   Client::UI::Misc::RaptureMacroModule:
     vtbls:
       - ea: 0x141946738
@@ -3425,6 +3446,8 @@ classes:
   Client::UI::Misc::RaptureTextModule:
     vtbls:
       - ea: 0x1419467A0
+    vfuncs:
+      0: dtor
     funcs:
       0x14064ED50: GetAddonText
       0x14064FF20: FormatAddonText
@@ -3451,8 +3474,8 @@ classes:
       - ea: 0x141946AD0
         base: Client::System::Input::InputData::InputCodeModifiedInterface
     funcs:
-      0x140668800: ctor
-      0x1406689F0: dtor
+      0x140668800: ctor_FromFileManagerUiManager
+      0x1406689F0: ctor
       0x14066AE90: IsHotbarEmpty
       0x14066E450: ExecuteSlot
       0x140669460: ExecuteSlotById
@@ -3516,6 +3539,7 @@ classes:
       - ea: 0x141946F98
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
+      0x1406996a0: ctor
       0x140699910: AddHistoryEntry
   Client::UI::Misc::RecommendEquipModule:
     funcs:
@@ -3527,7 +3551,8 @@ classes:
       - ea: 0x141947630
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
-      0x1406A3EF0: ctor
+      0x1406A3EF0: ctor_FromUserFileEvent # (this, UserFileEvent*)
+      0x1406A3FA0: ctor # (this)
       0x1406A43A0: GetComment
       0x1406A4400: SetComment
   Client::UI::Misc::CharaView:
@@ -5695,6 +5720,8 @@ classes:
     vtbls:
       - ea: 0x1419CAEF8
         base: Component::GUI::AtkUnitBase
+    vfuncs:
+        71: Selected
   Client::UI::AddonContextMenuTitle:
     vtbls:
       - ea: 0x1419CB138
@@ -5723,6 +5750,8 @@ classes:
     vtbls:
       - ea: 0x1419CBEF8
         base: Component::GUI::AtkUnitBase
+    funcs:
+        0x140da6990: ctor
   Client::UI::AddonContextIconMenu:
     vtbls:
       - ea: 0x1419CC5A0
