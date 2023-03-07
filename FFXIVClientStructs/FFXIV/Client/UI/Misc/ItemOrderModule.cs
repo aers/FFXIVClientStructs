@@ -29,7 +29,7 @@ public unsafe partial struct ItemOrderModule
     [FieldOffset(0x98)] public ItemOrderModuleSorter* ArmouryRingsSorter;
     [FieldOffset(0xA0)] public ItemOrderModuleSorter* ArmourySoulCrystalSorter;
     [FieldOffset(0xA8)] public ItemOrderModuleSorter* ArmouryWaistSorter; // no longer used
-    [FieldOffset(0xB8)] public ulong ActiveRetainerId;
+    [FieldOffset(0xB0)] public ulong ActiveRetainerId;
     [FieldOffset(0xB8)] public StdVector<ItemOrderModuleSorterRetainerEntry>* RetainerSorter;
     [FieldOffset(0xC0)] public long RetainerSorterCount;
     [FieldOffset(0xC8)] public ItemOrderModuleSorter* SaddleBagSorter;
@@ -42,7 +42,7 @@ public unsafe struct ItemOrderModuleSorter
     [FieldOffset(0x00)] public InventoryType InventoryType;
 
     [FieldOffset(0x08)] public StdVector<ItemOrderModuleSorterItemEntry> Items;
-    [FieldOffset(0x58)] public ItemOrderModuleSorterItemEntry* UnkItemsArray;
+
     [FieldOffset(0x28)] public int ItemsPerPage;
 
     [FieldOffset(0x38)] public int SortFunctionIndex; // set to -1 if done
