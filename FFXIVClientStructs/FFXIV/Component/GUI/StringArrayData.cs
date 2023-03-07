@@ -26,5 +26,21 @@ public unsafe partial struct StringArrayData
     /// <param name="silent">If <c>false</c> and the value was changed, HasModifiedData will be set to <c>true</c>.</param>
     [MemberFunction("E8 ?? ?? ?? ?? F6 47 14 08")]
     [GenerateCStrOverloads]
-    public partial void SetValue(int index, byte* value, bool readBeforeWrite = true, bool managed = true, bool silent = false);
+    public partial void SetValue(int index, byte* value, bool readBeforeWrite, bool managed, bool silent);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4F 10 41 0F B6 9F")]
+    [GenerateCStrOverloads]
+    public partial void SetValueForced(int index, byte* value, bool notify);
+
+    public void SetValue(int index, byte* value, bool notify) {
+	    SetValueForced(index, value, notify);
+    }
+
+    public void SetValue(int index, string value, bool notify) {
+	    SetValueForced(index, value, notify);
+    }
+
+    public void SetValue(int index, byte[] value, bool notify) {
+	    SetValueForced(index, value, notify);
+    }
 }
