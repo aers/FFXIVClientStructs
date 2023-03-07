@@ -2596,9 +2596,6 @@ classes:
       0x1404B5E60: GetSheetByIndex  # (ExdModule* this, int nSheetIndex) -> ExcelSheet*
       0x1404B5E40: GetSheetByName  # (ExdModule* this, char* pcszName) -> ExcelSheet*
       0x14065B260: IsColumnRsv  # (ExdModule* this, int nSheetIndex, int nRowId, int nSubRowId, int nColumnIndex) -> bool
-      0x1406CC1A0: GetItemRow # static (uint itemId)
-      0x1406D2B50: GetAirshipExplorationPointRow # (uint rowId)
-      0x1406D2C50: GetSubmarineExplorationRow # (uint rowId)
   Client::System::Scheduler::ScheduleManagement:
     vtbls:
       - ea: 0x14192FB50
