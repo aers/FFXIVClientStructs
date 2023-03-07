@@ -449,6 +449,16 @@ def do_pattern(pattern, suffix = ""):
 
             fnName = "Component::Exd::ExdModule_Get%s%s" % (exd_map[sheetIdx], suffix)
 
+            uniquifier = 0
+            while True:
+                uniqueName = fnName + (f"_{uniquifier}" if uniquifier > 0 else "")
+
+                if(idc.get_name_ea_simple(uniqueName) == idc.BADADDR):
+                    fnName = uniqueName
+                    break
+                
+                uniquifier += 1
+
             print("found exd func @ %x -> mapped to %s (%i)" % (ea, sheetName, sheetIdx))
 
             idc.set_name(ea, fnName)
