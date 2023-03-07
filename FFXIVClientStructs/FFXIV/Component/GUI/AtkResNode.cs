@@ -140,7 +140,7 @@ public unsafe partial struct AtkResNode : ICreatable
     [MemberFunction("E8 ?? ?? ?? ?? 8D 56 F1")]
     public partial AtkComponentRadioButton* GetAsAtkComponentRadioButton();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8D 56 9C")]
+    [MemberFunction("E8 ?? ?? ?? ?? 42 8B 14 3B")]
     public partial AtkComponentScrollBar* GetAsAtkComponentScrollBar();
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 0B 41 B8 ?? ?? ?? ?? 48 89 83")]
