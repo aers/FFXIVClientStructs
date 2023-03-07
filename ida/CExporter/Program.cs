@@ -156,7 +156,7 @@ namespace CExporter
             }
             else
             {
-                structSize = Marshal.SizeOf(type);
+                structSize = SizeOf(type);
             }
 
             var pad = structSize.ToString("X").Length;
@@ -169,7 +169,7 @@ namespace CExporter
 
             var offset = 0;
             var fieldGroupings = type.GetFields()
-                //.Where(finfo => !Attribute.IsDefined(finfo, typeof(NoExportAttribute)))
+                .Where(finfo => !Attribute.IsDefined(finfo, typeof(ObsoleteAttribute)))
                 .Where(finfo => !finfo.IsLiteral) // not constants
                 .Where(finfi => !finfi.IsStatic)  // not static
                 .OrderBy(finfo => finfo.GetFieldOffset())
@@ -209,7 +209,7 @@ namespace CExporter
 
                         sb.AppendLine(string.Format($"    /* 0x{{0:X{pad}}} */ {FixTypeName(fixedType)} {finfo.Name}[0x{fixedSize:X}];", offset));
 
-                        fieldSize = Marshal.SizeOf(fixedType) * fixedSize;
+                        fieldSize = SizeOf(fixedType) * fixedSize;
                     }
                     else if (fieldType.IsPointer)
                     {
@@ -229,7 +229,7 @@ namespace CExporter
 
                         sb.AppendLine(string.Format($"    /* 0x{{0:X{pad}}} */ {FixTypeName(fieldType)} {finfo.Name};", offset));
 
-                        fieldSize = Marshal.SizeOf(Enum.GetUnderlyingType(fieldType));
+                        fieldSize = SizeOf(Enum.GetUnderlyingType(fieldType));
                     }
                     else
                     {
@@ -242,7 +242,7 @@ namespace CExporter
                         else if (fieldType.IsGenericType)
                             fieldSize = Marshal.SizeOf(Activator.CreateInstance(fieldType));
                         else
-                            fieldSize = Marshal.SizeOf(fieldType);
+                            fieldSize = SizeOf(fieldType);
                     }
 
                     if (!isUnion)
@@ -265,6 +265,12 @@ namespace CExporter
             header.AppendLine(sb.ToString());
         }
 
+        private int SizeOf(Type type)
+        {
+            // Marshal.SizeOf doesn't work correctly because the assembly is unmarshaled, and more specifically, it sets bools as 4 bytes long...
+            return (int?)typeof(Unsafe).GetMethod("SizeOf")?.MakeGenericMethod(type).Invoke(null, null) ?? 0;
+        }
+
         private void ProcessEnum(Type type, StringBuilder header)
         {
             if (KnownTypes.Contains(type))
@@ -285,7 +291,7 @@ namespace CExporter
             {
                 var underlyingType = type.GetEnumUnderlyingType();
                 var fixedTypeName = FixTypeName(type);
-                sb.AppendLine($"enum {fixedTypeName} /* Size=0x{Marshal.SizeOf(underlyingType):X} */");
+                sb.AppendLine($"enum {fixedTypeName} /* Size=0x{SizeOf(underlyingType):X} */");
             }
 
             sb.AppendLine("{");
@@ -376,7 +382,7 @@ namespace CExporter
             if (EnvFormat == EnvFormat.Ghidra && type.IsEnum)
             {
                 var underlyingType = type.GetEnumUnderlyingType();
-                fullName += $"0x{Marshal.SizeOf(underlyingType):X}";
+                fullName += $"0x{SizeOf(underlyingType):X}";
             }
 
             return fullName.Replace(".", separator).Replace("+", separator);
