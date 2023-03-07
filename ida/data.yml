@@ -2764,7 +2764,9 @@ classes:
       0x14050FC80: GetAsAtkComponentNode
       0x14050FCA0: GetComponent
       0x140536200: GetComponent_2
+      0x1405388E0: GetAsComponentButton
       0x140547D80: GetAsComponentList
+      0x140553D80: GetAsComponentCheckBox
       0x140562730: GetAsComponentDropDownList
       0x140562EE0: GetAsComponentRadioButton
       0x14056D5D0: GetAsComponentScrollBar
