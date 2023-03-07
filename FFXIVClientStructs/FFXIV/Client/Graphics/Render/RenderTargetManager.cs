@@ -17,18 +17,16 @@ public unsafe partial struct RenderTargetManager
 
     // specific ones i can name
     // offscreen renderer is used to render models for UI elements like the character window
-    [FieldOffset(0x1E0)] public Texture* OffscreenRenderTarget_1;
-    [FieldOffset(0x1E8)] public Texture* OffscreenRenderTarget_2;
-    [FieldOffset(0x1F0)] public Texture* OffscreenRenderTarget_3;
-    [FieldOffset(0x1F8)] public Texture* OffscreenRenderTarget_4;
-    [FieldOffset(0x200)] public Texture* OffscreenGBuffer;
-    [FieldOffset(0x208)] public Texture* OffscreenDepthStencil;
+    public Texture* OffscreenRenderTarget_1 => RenderTargetArraySpan[56];
+    public Texture* OffscreenRenderTarget_2 => RenderTargetArraySpan[56];
+    public Texture* OffscreenRenderTarget_3 => RenderTargetArraySpan[57];
+    public Texture* OffscreenRenderTarget_4 => RenderTargetArraySpan[58];
+    public Texture* OffscreenGBuffer => RenderTargetArraySpan[59];
+    public Texture* OffscreenDepthStencil => RenderTargetArraySpan[60];
 
-    [FieldOffset(0x210)]
-    public Texture* OffscreenRenderTarget_Unk1; // these are related to offscreen renderer due to their size
-
-    [FieldOffset(0x218)] public Texture* OffscreenRenderTarget_Unk2;
-    [FieldOffset(0x220)] public Texture* OffscreenRenderTarget_Unk3;
+    public Texture* OffscreenRenderTarget_Unk1 => RenderTargetArraySpan[62]; // these are related to offscreen renderer due to their size
+    public Texture* OffscreenRenderTarget_Unk2 => RenderTargetArraySpan[63];
+    public Texture* OffscreenRenderTarget_Unk3 => RenderTargetArraySpan[64];
 
     [FieldOffset(0x248)] public uint Resolution_Width;
     [FieldOffset(0x24C)] public uint Resolution_Height;
