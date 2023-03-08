@@ -2784,6 +2784,7 @@ classes:
       0x140564150: GetAsComponentDropDownList
       0x140564900: GetAsComponentRadioButton
       0x14056EFF0: GetAsComponentScrollBar
+      0x140565B20: GetAsTextNineGridComponent
       0x14057AA00: GetAsJournalCanvas
       0x140511E70: RegisterEvent
       0x140511EB0: UnregisterEvent
@@ -2958,6 +2959,7 @@ classes:
       0x14053B6A0: ctor
       0x14053AD60: LoadIconById
       0x14053AD90: LoadIcon
+      0x140570DB0: SetDisabledColor
   Component::GUI::AtkComponentListItemRenderer:
     vtbls:
       - ea: 0x1419345D8
@@ -6455,6 +6457,10 @@ classes:
   Client::UI::AddonAOZContentResult:
     vtbls:
       - ea: 0x141A320F0
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonCutSceneSelectString:
+    vtbls:
+      - ea: 0x141A32560
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonAOZContentBriefing:
     vtbls:
