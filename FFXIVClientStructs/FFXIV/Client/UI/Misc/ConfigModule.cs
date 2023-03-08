@@ -14,10 +14,11 @@ public unsafe partial struct ConfigModule
 {
     public static ConfigModule* Instance() => Framework.Instance()->GetUiModule()->GetConfigModule();
 
-    public const int ConfigOptionCount = 693;
+    public const int ConfigOptionCount = 701;
     [FieldOffset(0x28)] public UIModule* UIModule;
     [FieldOffset(0x2C8)] private fixed byte options[Option.Size * ConfigOptionCount];
-    [FieldOffset(0x5978)] private fixed byte values[0x10 * ConfigOptionCount];
+    
+    [FieldOffset(0x5A78)] private fixed byte values[0x10 * ConfigOptionCount];
 
     [MemberFunction("E8 ?? ?? ?? ?? C6 47 4D 00")]
     public partial bool SetOption(uint index, int value, int a4 = 2, bool a5 = true, bool a6 = false);
