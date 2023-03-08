@@ -21,14 +21,6 @@ public unsafe partial struct AtkComponentIcon
     [FieldOffset(0x100)] public AtkImageNode* UnknownImageNode;
     [FieldOffset(0x108)] public AtkTextNode* QuantityText;
     [FieldOffset(0x114)] public IconComponentFlags Flags;
-
-    /// <summary>
-    /// Sets multiply RGB to 50 if true, 100 if false
-    /// </summary>
-    /// <param name="disable">true - set multiply RGB to 50 false - set multiply RGB to 100</param>
-    /// <returns>*(AtkImageNode + 0xF0)</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 17 B8")]
-    public partial nint SetDisabledColor(bool disable);
 }
 
 [Flags]
