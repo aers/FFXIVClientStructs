@@ -1,4 +1,5 @@
 ﻿using FFXIVClientStructs.FFXIV.Client.System.String;
+using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent; 
 
@@ -6,6 +7,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [StructLayout(LayoutKind.Explicit, Size = 0x2E8)]
 public unsafe partial struct AgentActionMenu {
 	public static AgentActionMenu* Instance() => (AgentActionMenu*)AgentModule.Instance()->GetAgentByInternalId(AgentId.ActionMenu);
+
+	[FieldOffset(0x00)] public AgentInterface AgentInterface;
 
 	[FieldOffset(0x30)] public uint JobIconId;
 	[FieldOffset(0x34)] public uint Level;
