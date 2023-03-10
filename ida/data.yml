@@ -6417,6 +6417,18 @@ classes:
       0x1411889E0: AddonOverlayMouseClickEvent
       0x141188DE0: AddonOverlayMouseReleaseEvent
       0x14118AA90: SetAddonScale
+  Client::UI::AddonRetainerItemTransferList:
+    vtbls:
+      - ea: 0x141A5A088
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x14119DF20: ctor
+  Client::UI::AddonRetainerItemTransferProgress:
+    vtbls:
+      - ea: 0x141A5A430
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x14119E5F0: ctor
   Client::UI::AddonActionMenuReplaceList:
     vtbls:
       - ea: 0x141A41D08
