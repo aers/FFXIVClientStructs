@@ -26,7 +26,7 @@ public partial struct RaptureAtkModule
     public partial void SetUiVisibility(bool uiVisible);
 
     public bool IsUiVisible {
-        get => Flags.HasFlag(RaptureAtkModuleFlags.UiVisible);
+        get => !Flags.HasFlag(RaptureAtkModuleFlags.UiHidden);
         set => SetUiVisibility(value);
     }
     
@@ -50,7 +50,7 @@ public enum RaptureAtkModuleFlags : byte {
     None = 0x00,
     Unk01 = 0x01,
     Unk02 = 0x02,
-    UiVisible = 0x04,
+    UiHidden = 0x04,
     Unk08 = 0x08,
     Unk10 = 0x10,
     Unk20 = 0x20,
