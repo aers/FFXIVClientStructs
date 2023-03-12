@@ -70,6 +70,7 @@ public unsafe partial struct Character
     [FieldOffset(0x1B01)] public byte ModeParam; // Different purpose depending on mode. See CharacterModes for more info.
     [FieldOffset(0x1B02)] public byte OnlineStatus;
     [FieldOffset(0x1B03)] public byte Battalion; // used for determining friend/enemy state
+    [FieldOffset(0x1B0A)] public byte ModelID;
     [FieldOffset(0x1B17)] public byte ShieldValue;
     [FieldOffset(0x1B1B)] public byte StatusFlags;
     [FieldOffset(0x1B1F)] public byte StatusFlags4; // 0x80 flagged when permanent wetness in GPose is toggled.
