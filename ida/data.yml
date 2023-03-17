@@ -85,6 +85,7 @@ functions:
   0x1400A77E0: InDeepDungeon
   0x1400A7A10: IsUnconscious
   0x1400A7A20: IsRolePlaying
+  0x140973490: GetTeleportCost
   0x140B0A530: SetCondition
   0x140B0A870: SetConditionByPermissionAndLog
   0x140B0AD40: IsLocalPlayerLalafell
