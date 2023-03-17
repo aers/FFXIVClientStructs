@@ -4667,6 +4667,11 @@ classes:
     vtbls:
       - ea: 0x141993020
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1409c4510: ctor
+      0x1409c7110: UpdateTimeRemaining # (this, resetTimestamp) returns true if an update occurred
+      0x1409c71b0: UpdateAddon # at least the TimeRemaining
+      0x1409c7460: UpdateClassJobLevel
   Client::UI::Agent::AgentMiniGame:
     vtbls:
       - ea: 0x141910E40
