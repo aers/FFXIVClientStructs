@@ -2787,6 +2787,7 @@ classes:
       0x14056EFF0: GetAsComponentScrollBar
       0x140565B20: GetAsTextNineGridComponent
       0x14057AA00: GetAsJournalCanvas
+      0x14057D170: GetAsHoldButton
       0x140511E70: RegisterEvent
       0x140511EB0: UnregisterEvent
       0x140511EF0: DispatchEvent
