@@ -52,8 +52,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent
             [FieldOffset(0x0)] public FocusType Focus;
             [FieldOffset(0x2)] public SeekingType Seeking;
             [FieldOffset(0x4)] public ActiveType Active;
-            [FieldOffset(0x6)] public RecruitmentType Recruitment;
+            [FieldOffset(0x5)] public RecruitmentType Recruitment;
 
+            [Flags]
             public enum SeekingType : ushort
             {
                 None = 0,
@@ -63,6 +64,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent
                 Crafter = 8,
                 Gatherer = 16,
             }
+
+            [Flags]
             public enum FocusType : ushort
             {
                 None = 0,
@@ -76,17 +79,20 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent
                 Raids = 128,
                 PvP = 256,
             }
+
+            [Flags]
             public enum ActiveType : byte
             {
-                Always = 0,
+                NotSpecified = 0,
                 Weekdays = 1,
                 Weekends = 2,
+                Always = 3, // Aka both the above
             }
-            public enum RecruitmentType : byte
+
+            public enum RecruitmentType
             {
-                None = 0,
-                Full = 1,
-                Provisional = 2,
+                Closed = 0,
+                Open = 1,
             }
         }
     }
