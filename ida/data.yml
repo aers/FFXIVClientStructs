@@ -1383,9 +1383,16 @@ classes:
     vtbls:
       - ea: 0x1418EC680
         base: Client::UI::Info::InfoProxyPageInterface
+    vfuncs:
+      29: CompareHomeworld
     funcs:
       0x1400EA600: ctor
       0x1400EA720: dtor2
+      0x1400EB4D0: GetContentIDForEntry
+      0x1400EB500: SearchEntryByName
+      0x1400EB5E0: GetEntry
+      0x1400EBC40: SearchEntryByContenID
+      0x1400EBEA0: SwapData
   Client::UI::Info::InfoProxySearchComment:
     vtbls:
       - ea: 0x1418ECF00
