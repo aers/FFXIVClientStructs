@@ -6458,6 +6458,10 @@ classes:
     vtbls:
       - ea: 0x141A320F0
         base: Component::GUI::AtkUnitBase
+  Client::UI::AddonCutSceneSelectString:
+    vtbls:
+      - ea: 0x141A32560
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonAOZContentBriefing:
     vtbls:
       - ea: 0x141A31EB8
