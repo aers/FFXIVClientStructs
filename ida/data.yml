@@ -77,6 +77,7 @@ functions:
   0x1404ED260: Client::System::Input::InputData_IsInputIDClicked
   0x1404EDBA0: Client::System::Input::InputData_IsMouseCombinationDragged
   0x1404F7C50: Component::GUI::AtkCursor_SetCursorType # the cursor's icon I believe
+  0x1404F6F00: RemoveFromList # (AtkEvent**, AtkEvent*) Finds and removes param2 from the param1 list
   0x140520530: GetScaleListEntryFromScale
   0x14052ECE0: GetScaleForListOption
   0x14057D8D0: Component::GUI::TextModuleInterface::GetTextLabelByID
@@ -2756,7 +2757,9 @@ classes:
       - ea: 0x1420C9CC0
     vtbls:
       - ea: 0x141933758
-        base: Component::GUI::AtkEventTarget
+        base: Component::GUI::AtkEventTarget # This doesn't look right...'
+    vfuncs:
+      1: dtor
     funcs:
       0x1404FFC30: GetFocus
       0x1404FFC60: SetFocus
@@ -2764,6 +2767,7 @@ classes:
       0x140500BF0: GetNumberArrayData
       0x140500D20: ctor
       0x140523170: GetSingleton1  # dalamud GetBaseUIObject
+      0x140500ac0: RemoveAllEvents # (this, AtkComponentBase)
   Component::GUI::AtkDragDropManager:
     vtbls:
       - ea: 0x141933658
@@ -2947,6 +2951,7 @@ classes:
         base: Component::GUI::AtkEventListener
     vfuncs:
       10: SetEnabledState
+      14: GetAtkResNode
       17: InitializeFromComponentData
     funcs:
       0x1405379A0: ctor
@@ -2960,6 +2965,7 @@ classes:
         base: Component::GUI::AtkComponentBase
     funcs:
       0x140539130: ctor
+      0x14058a1a0: GetOwnerNode
   Component::GUI::AtkComponentIcon:
     vtbls:
       - ea: 0x1419344B8
@@ -2973,12 +2979,17 @@ classes:
     vtbls:
       - ea: 0x1419345D8
         base: Component::GUI::AtkComponentButton
+    vfuncs:
+      15: GetAtkResNode
     funcs:
       0x14053C270: ctor
+      0x140540070: RemoveAllEvents # Removes all events this component is listening to
   Component::GUI::AtkComponentList:
     vtbls:
       - ea: 0x141934748
         base: Component::GUI::AtkComponentBase
+    vfuncs:
+      24: GetAtkComponentListItemRenderer # (this, listItemIndex)
     funcs:
       0x1405477A0: ctor
   Component::GUI::AtkComponentTreeList:

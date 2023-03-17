@@ -11,4 +11,5 @@
 public struct AtkComponentListItemRenderer
 {
     [FieldOffset(0x0)] public AtkComponentButton AtkComponentButton;
+    [FieldOffset(0x184)] public int ListItemIndex;
 }
