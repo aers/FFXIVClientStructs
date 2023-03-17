@@ -6422,6 +6422,34 @@ classes:
     vtbls:
       - ea: 0x141A41D08
         base: Component::GUI::AtkUnitBase
+  Client::UI::AddonGoldSaucerInfo:
+    vtbls:
+      - ea: 0x141A64FC0
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonGSInfoGeneral:
+    vtbls:
+      - ea: 0x141A651F8
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonGSInfoChocoboParam:
+    vtbls:
+      - ea: 0x141A65430
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonGSInfoCardList:
+    vtbls:
+      - ea: 0x141A65AD8
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonGSInfoCardDeck:
+    vtbls:
+      - ea: 0x141A65D10
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonGSInfoMinionBattle:
+    vtbls:
+      - ea: 0x141A65F48
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonGSInfoEmj:
+    vtbls:
+      - ea: 0x141A66180
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonChocoboBreedTraining:
     vtbls:
       - ea: 0x141A677D0
