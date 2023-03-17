@@ -7,17 +7,17 @@
 // common CreateAtkComponent function 8B FA 33 DB E8 ?? ?? ?? ?? 
 // type 15
 [StructLayout(LayoutKind.Explicit, Size = 0x118)]
-public unsafe struct AtkComponentIcon
+public unsafe partial struct AtkComponentIcon
 {
-    [FieldOffset(0x0)] public AtkComponentBase AtkComponentBase;
-    [FieldOffset(0x0C0)] public long IconId;
-    [FieldOffset(0x0C8)] public AtkUldAsset* Texture;
-    [FieldOffset(0x0D0)] public AtkResNode* IconAdditionsContainer;
-    [FieldOffset(0x0D8)] public AtkResNode* ComboBorder;
-    [FieldOffset(0x0E0)] public AtkResNode* Frame;
-    [FieldOffset(232)] public long Unknown0E8;
-    [FieldOffset(0x0F0)] public AtkImageNode* IconImage;
-    [FieldOffset(0x0F8)] public AtkImageNode* FrameIcon;
+    [FieldOffset(0x00)] public AtkComponentBase AtkComponentBase;
+    [FieldOffset(0xC0)] public long IconId;
+    [FieldOffset(0xC8)] public AtkUldAsset* Texture;
+    [FieldOffset(0xD0)] public AtkResNode* IconAdditionsContainer;
+    [FieldOffset(0xD8)] public AtkResNode* ComboBorder;
+    [FieldOffset(0xE0)] public AtkResNode* Frame;
+    [FieldOffset(0xE8)] public long Unknown0E8;
+    [FieldOffset(0xF0)] public AtkImageNode* IconImage;
+    [FieldOffset(0xF8)] public AtkImageNode* FrameIcon;
     [FieldOffset(0x100)] public AtkImageNode* UnknownImageNode;
     [FieldOffset(0x108)] public AtkTextNode* QuantityText;
     [FieldOffset(0x114)] public IconComponentFlags Flags;

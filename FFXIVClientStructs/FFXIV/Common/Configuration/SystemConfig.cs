@@ -11,4 +11,5 @@ public struct SystemConfig
     [FieldOffset(0x0)] public ConfigBase ConfigBase;
     [FieldOffset(0x118)] public ConfigBase UiConfig;
     [FieldOffset(0x228)] public ConfigBase UiControlConfig;
+    [FieldOffset(0x338)] public ConfigBase UiControlGamepadConfig;
 }
