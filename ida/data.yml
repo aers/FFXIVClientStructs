@@ -77,6 +77,7 @@ functions:
   0x1404ED260: Client::System::Input::InputData_IsInputIDClicked
   0x1404EDBA0: Client::System::Input::InputData_IsMouseCombinationDragged
   0x1404F7C50: Component::GUI::AtkCursor_SetCursorType # the cursor's icon I believe
+  0x1404F6F00: RemoveFromList # (AtkEvent**, AtkEvent*) Finds and removes param2 from the param1 list
   0x140520530: GetScaleListEntryFromScale
   0x14052ECE0: GetScaleForListOption
   0x14057D8D0: Component::GUI::TextModuleInterface::GetTextLabelByID
@@ -85,6 +86,7 @@ functions:
   0x1400A77E0: InDeepDungeon
   0x1400A7A10: IsUnconscious
   0x1400A7A20: IsRolePlaying
+  0x140973490: GetTeleportCost
   0x140B0A530: SetCondition
   0x140B0A870: SetConditionByPermissionAndLog
   0x140B0AD40: IsLocalPlayerLalafell
@@ -1382,9 +1384,16 @@ classes:
     vtbls:
       - ea: 0x1418EC680
         base: Client::UI::Info::InfoProxyPageInterface
+    vfuncs:
+      29: CompareHomeworld
     funcs:
       0x1400EA600: ctor
       0x1400EA720: dtor2
+      0x1400EB4D0: GetContentIDForEntry
+      0x1400EB500: SearchEntryByName
+      0x1400EB5E0: GetEntry
+      0x1400EBC40: SearchEntryByContenID
+      0x1400EBEA0: SwapData
   Client::UI::Info::InfoProxySearchComment:
     vtbls:
       - ea: 0x1418ECF00
@@ -2748,7 +2757,9 @@ classes:
       - ea: 0x1420C9CC0
     vtbls:
       - ea: 0x141933758
-        base: Component::GUI::AtkEventTarget
+        base: Component::GUI::AtkEventTarget # This doesn't look right...'
+    vfuncs:
+      1: dtor
     funcs:
       0x1404FFC30: GetFocus
       0x1404FFC60: SetFocus
@@ -2756,6 +2767,7 @@ classes:
       0x140500BF0: GetNumberArrayData
       0x140500D20: ctor
       0x140523170: GetSingleton1  # dalamud GetBaseUIObject
+      0x140500ac0: RemoveAllEvents # (this, AtkComponentBase)
   Component::GUI::AtkDragDropManager:
     vtbls:
       - ea: 0x141933658
@@ -2786,6 +2798,7 @@ classes:
       0x14056EFF0: GetAsComponentScrollBar
       0x140565B20: GetAsTextNineGridComponent
       0x14057AA00: GetAsJournalCanvas
+      0x14057D170: GetAsHoldButton
       0x140511E70: RegisterEvent
       0x140511EB0: UnregisterEvent
       0x140511EF0: DispatchEvent
@@ -2938,6 +2951,7 @@ classes:
         base: Component::GUI::AtkEventListener
     vfuncs:
       10: SetEnabledState
+      14: GetAtkResNode
       17: InitializeFromComponentData
     funcs:
       0x1405379A0: ctor
@@ -2951,6 +2965,7 @@ classes:
         base: Component::GUI::AtkComponentBase
     funcs:
       0x140539130: ctor
+      0x14058a1a0: GetOwnerNode
   Component::GUI::AtkComponentIcon:
     vtbls:
       - ea: 0x1419344B8
@@ -2964,12 +2979,17 @@ classes:
     vtbls:
       - ea: 0x1419345D8
         base: Component::GUI::AtkComponentButton
+    vfuncs:
+      15: GetAtkResNode
     funcs:
       0x14053C270: ctor
+      0x140540070: RemoveAllEvents # Removes all events this component is listening to
   Component::GUI::AtkComponentList:
     vtbls:
       - ea: 0x141934748
         base: Component::GUI::AtkComponentBase
+    vfuncs:
+      24: GetAtkComponentListItemRenderer # (this, listItemIndex)
     funcs:
       0x1405477A0: ctor
   Component::GUI::AtkComponentTreeList:
@@ -4667,6 +4687,11 @@ classes:
     vtbls:
       - ea: 0x141993020
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1409c4510: ctor
+      0x1409c7110: UpdateTimeRemaining # (this, resetTimestamp) returns true if an update occurred
+      0x1409c71b0: UpdateAddon # at least the TimeRemaining
+      0x1409c7460: UpdateClassJobLevel
   Client::UI::Agent::AgentMiniGame:
     vtbls:
       - ea: 0x141910E40
@@ -6417,9 +6442,49 @@ classes:
       0x1411889E0: AddonOverlayMouseClickEvent
       0x141188DE0: AddonOverlayMouseReleaseEvent
       0x14118AA90: SetAddonScale
+  Client::UI::AddonRetainerItemTransferList:
+    vtbls:
+      - ea: 0x141A5A088
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x14119DF20: ctor
+  Client::UI::AddonRetainerItemTransferProgress:
+    vtbls:
+      - ea: 0x141A5A430
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x14119E5F0: ctor
   Client::UI::AddonActionMenuReplaceList:
     vtbls:
       - ea: 0x141A41D08
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonGoldSaucerInfo:
+    vtbls:
+      - ea: 0x141A64FC0
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonGSInfoGeneral:
+    vtbls:
+      - ea: 0x141A651F8
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonGSInfoChocoboParam:
+    vtbls:
+      - ea: 0x141A65430
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonGSInfoCardList:
+    vtbls:
+      - ea: 0x141A65AD8
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonGSInfoCardDeck:
+    vtbls:
+      - ea: 0x141A65D10
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonGSInfoMinionBattle:
+    vtbls:
+      - ea: 0x141A65F48
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonGSInfoEmj:
+    vtbls:
+      - ea: 0x141A66180
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonChocoboBreedTraining:
     vtbls:
@@ -6457,6 +6522,10 @@ classes:
   Client::UI::AddonAOZContentResult:
     vtbls:
       - ea: 0x141A320F0
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonCutSceneSelectString:
+    vtbls:
+      - ea: 0x141A32560
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonAOZContentBriefing:
     vtbls:

@@ -85,9 +85,15 @@ public unsafe partial struct AtkUnitBase
     public partial bool SetFocusNode(AtkResNode* node, bool a3 = false, uint a4 = 0);
 
     [VirtualFunction(3)]
-    public partial bool Show(int unkInt, bool unkBool = false);
+    public partial bool Open(uint uknUint);
 
     [VirtualFunction(4)]
+    public partial bool Close(bool unknown);
+
+    [VirtualFunction(5)]
+    public partial bool Show(int unkInt, bool unkBool = false);
+
+    [VirtualFunction(6)]
     public partial bool Hide(bool unknown);
 
     [VirtualFunction(7)]
