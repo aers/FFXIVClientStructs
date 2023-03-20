@@ -1909,6 +1909,426 @@ classes:
     vtbls:
       - ea: 0x14190D1D0
         base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent30:
+    vtbls:
+    - ea: 0x1419AB318
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent41:
+    vtbls:
+    - ea: 0x141994A10
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent59:
+    vtbls:
+    - ea: 0x14190D5B0
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent77:
+    vtbls:
+    - ea: 0x14190DA60
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent80:
+    vtbls:
+    - ea: 0x14190DBC8
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent86:
+    vtbls:
+    - ea: 0x14190DED0
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent100:
+    vtbls:
+    - ea: 0x1419ACFE8
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent139:
+    vtbls:
+    - ea: 0x141993F40
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent140:
+    vtbls:
+    - ea: 0x141993FB8
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent142:
+    vtbls:
+    - ea: 0x1419AD970
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent147:
+    vtbls:
+    - ea: 0x141992E88
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent148:
+    vtbls:
+    - ea: 0x141992F00
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent163:
+    vtbls:
+    - ea: 0x1419AE250
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent166:
+    vtbls:
+    - ea: 0x1419A6F30
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent168:
+    vtbls:
+    - ea: 0x1419A7920
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent171:
+    vtbls:
+    - ea: 0x1419A81A8
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent172:
+    vtbls:
+    - ea: 0x1419A8220
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent173:
+    vtbls:
+    - ea: 0x1419A8298
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent174:
+    vtbls:
+    - ea: 0x1419A74B0
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent175:
+    vtbls:
+    - ea: 0x1419A8310
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent176:
+    vtbls:
+    - ea: 0x1419A70B0
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent177:
+    vtbls:
+    - ea: 0x1419A8388
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent201:
+    vtbls:
+    - ea: 0x1419AEBE0
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent211:
+    vtbls:
+    - ea: 0x1419AED08
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent212:
+    vtbls:
+    - ea: 0x1419AED80
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent221:
+    vtbls:
+    - ea: 0x14190FC50
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent222:
+    vtbls:
+    - ea: 0x14190FCC8
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent233:
+    vtbls:
+    - ea: 0x14190D340
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent252:
+    vtbls:
+    - ea: 0x141996B60
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent253:
+    vtbls:
+    - ea: 0x141996BD8
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent254:
+    vtbls:
+    - ea: 0x141996D20
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent256:
+    vtbls:
+    - ea: 0x141992BF0
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent258:
+    vtbls:
+    - ea: 0x14190CA18
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent259:
+    vtbls:
+    - ea: 0x141995640
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent264:
+    vtbls:
+    - ea: 0x1419AA818
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent265:
+    vtbls:
+    - ea: 0x14190FE30
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent267:
+    vtbls:
+    - ea: 0x1419930A8
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent270:
+    vtbls:
+    - ea: 0x1419AF4F0
+      base: Component::GUI::AtkModuleInterface::AtkEventInterface2
+  Client::UI::Agent::Agent271:
+    vtbls:
+    - ea: 0x1419AF2D8
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent272:
+    vtbls:
+    - ea: 0x1419AF350
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent273:
+    vtbls:
+    - ea: 0x1419AF608
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent274:
+    vtbls:
+    - ea: 0x1419AC158
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent275:
+    vtbls:
+    - ea: 0x1419AF680
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent276:
+    vtbls:
+    - ea: 0x1419AD4B0
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent277:
+    vtbls:
+    - ea: 0x1419AF6F8
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent278:
+    vtbls:
+    - ea: 0x14190FFA0
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent279:
+    vtbls:
+    - ea: 0x141910018
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentUnknown:
+    vtbls:
+    - ea: 0x14190ff20
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent280:
+    vtbls:
+    - ea: 0x141910090
+      base: Client::UI::Agent::AgentUnknown
+  Client::UI::Agent::Agent281:
+    vtbls:
+    - ea: 0x141910110
+      base: Client::UI::Agent::AgentUnknown
+  Client::UI::Agent::Agent282:
+    vtbls:
+    - ea: 0x141910190
+      base: Client::UI::Agent::AgentUnknown
+  Client::UI::Agent::Agent283:
+    vtbls:
+    - ea: 0x141910210
+      base: Client::UI::Agent::AgentUnknown
+  Client::UI::Agent::Agent284:
+    vtbls:
+    - ea: 0x141910290
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent286:
+    vtbls:
+    - ea: 0x141910408
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent290:
+    vtbls:
+    - ea: 0x141995E68
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent291:
+    vtbls:
+    - ea: 0x141996018
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent292:
+    vtbls:
+    - ea: 0x141996090
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent301:
+    vtbls:
+    - ea: 0x1419963D0
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent302:
+    vtbls:
+    - ea: 0x141996458
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent303:
+    vtbls:
+    - ea: 0x14190E048
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent305:
+    vtbls:
+    - ea: 0x141910480
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent306:
+    vtbls:
+    - ea: 0x141996110
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent308:
+    vtbls:
+    - ea: 0x14190CB08
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent309:
+    vtbls:
+    - ea: 0x14190CB80
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent313:
+    vtbls:
+    - ea: 0x1419981A0
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent315:
+    vtbls:
+    - ea: 0x1419ABA48
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent316:
+    vtbls:
+    - ea: 0x1419A7CB0
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent317:
+    vtbls:
+    - ea: 0x1419AC250
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent318:
+    vtbls:
+    - ea: 0x1419AD6B0
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentRhythmAction:
+    vtbls:
+    - ea: 0x141910EB8
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent321:
+    vtbls:
+    - ea: 0x1419AB858
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent323:
+    vtbls:
+    - ea: 0x1419A7E40
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent324:
+    vtbls:
+    - ea: 0x1419A7DA0
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent330:
+    vtbls:
+    - ea: 0x1419A8120
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent334:
+    vtbls:
+    - ea: 0x141993708
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent335:
+    vtbls:
+    - ea: 0x1419ABFB0
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent336:
+    vtbls:
+    - ea: 0x1419AF930
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent337:
+    vtbls:
+    - ea: 0x141993120
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent341:
+    vtbls:
+    - ea: 0x1419AA0B0
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentSubmersibleExplorationMapSelect:
+    vtbls:
+    - ea: 0x14190EA28
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent345:
+    vtbls:
+    - ea: 0x141910588
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent348:
+    vtbls:
+    - ea: 0x1419107C8
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent349:
+    vtbls:
+    - ea: 0x141910848
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent350:
+    vtbls:
+    - ea: 0x1419108C8
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent351:
+    vtbls:
+    - ea: 0x141910948
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent353:
+    vtbls:
+    - ea: 0x141910A40
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent357:
+    vtbls:
+    - ea: 0x1419965D0
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent359:
+    vtbls:
+    - ea: 0x141997328
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent360:
+    vtbls:
+    - ea: 0x141997428
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent361:
+    vtbls:
+    - ea: 0x1419974B0
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent363:
+    vtbls:
+    - ea: 0x1419975B0
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent365:
+    vtbls:
+    - ea: 0x1419976B0
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent369:
+    vtbls:
+    - ea: 0x1419979A8
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent370:
+    vtbls:
+    - ea: 0x141997A28
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent371:
+    vtbls:
+    - ea: 0x141997AA8
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent372:
+    vtbls:
+    - ea: 0x141997B20
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent373:
+    vtbls:
+    - ea: 0x1419AFB18
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent374:
+    vtbls:
+    - ea: 0x1419AFBC8
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent379:
+    vtbls:
+    - ea: 0x141997DD0
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent381:
+    vtbls:
+    - ea: 0x141997E60
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent383:
+    vtbls:
+    - ea: 0x141993690
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent385:
+    vtbls:
+    - ea: 0x1419AFDE0
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent396:
+    vtbls:
+    - ea: 0x141996C68
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent400:
+    vtbls:
+    - ea: 0x141995730
+      base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::Agent422:
+    vtbls:
+    - ea: 0x141994B00
+      base: Client::UI::Agent::AgentInterface
   Client::Graphics::Animation::IAnimationControllerListener:
     vtbls:
       - ea: 0x1419136E0
