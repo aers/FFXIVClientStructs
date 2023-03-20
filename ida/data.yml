@@ -368,7 +368,6 @@ classes:
       - ea: 0x1418EBDA8
     vfuncs:
       0: ReceiveEvent
-      1: dtor
   Component::GUI::AtkTextInput::AtkTextInputEventInterface:
   Component::Text::TextChecker::ExecNonMacroFunc:
   Component::Text::TextModule:
@@ -1804,6 +1803,7 @@ classes:
       - ea: 0x14190B300
         base: Component::GUI::AtkModuleInterface::AtkEventInterface
     vfuncs:
+      2: dtor
       3: Show
       4: Hide
       5: IsAgentActive
@@ -4582,6 +4582,8 @@ classes:
     vtbls:
       - ea: 0x141990BC8
         base: Component::GUI::AtkModuleInterface::AtkEventInterface
+    vfuncs:
+      2: dtor
   Client::Game::UI::Telepo:
     instances:
       - ea: 0x1420F9FA0
@@ -4589,6 +4591,8 @@ classes:
     vtbls:
       - ea: 0x141990BE0
         base: Component::GUI::AtkModuleInterface::AtkEventInterface
+    vfuncs:
+      2: dtor
     funcs:
       0x140943DB0: ctor
       0x140943F10: IsSelectUseTicketInactive
