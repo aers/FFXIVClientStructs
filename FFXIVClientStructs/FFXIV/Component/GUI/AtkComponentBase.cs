@@ -42,6 +42,7 @@ public unsafe partial struct AtkComponentBase
 {
     [FieldOffset(0x00)] public AtkEventListener AtkEventListener;
     [FieldOffset(0x08)] public AtkUldManager UldManager;
+    [FieldOffset(0xA0)] public AtkResNode* AtkResNode;
     [FieldOffset(0xA8)] public AtkComponentNode* OwnerNode;
 
     [MemberFunction("E8 ?? ?? ?? ?? 8D 73 01")]

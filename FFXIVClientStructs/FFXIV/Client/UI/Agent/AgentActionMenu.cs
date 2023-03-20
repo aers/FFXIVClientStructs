@@ -53,6 +53,7 @@ public struct ActionData {
 	[FieldOffset(0x70)] public uint ActionCategoryId;
 	[FieldOffset(0x74)] public uint IconId;
 	[FieldOffset(0x78)] public uint Level; // or flags?
+	[FieldOffset(0x81)] public bool IsSlotable;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0xE0)]
