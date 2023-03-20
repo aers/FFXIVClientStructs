@@ -368,12 +368,7 @@ classes:
       - ea: 0x1418EBDA8
     vfuncs:
       0: ReceiveEvent
-  Component::GUI::AtkModuleInterface::AtkEventInterface2:
-    vtbls:
-      - ea: 0x1418eed90
-        base: Component::GUI::AtkModuleInterface::AtkEventInterface
-    vfuncs:
-      2: dtor
+      1: dtor
   Component::GUI::AtkTextInput::AtkTextInputEventInterface:
   Component::Text::TextChecker::ExecNonMacroFunc:
   Component::Text::TextModule:
@@ -752,7 +747,7 @@ classes:
   Client::Game::UI::Revive:
     vtbls:
       - ea: 0x141990AC0
-        base: Component::GUI::AtkModuleInterface::AtkEventInterface2
+        base: Component::GUI::AtkModuleInterface::AtkEventInterface
   Client::Game::UI::Buddy:
     instances:
       - ea: 0x1420FA590
@@ -808,7 +803,7 @@ classes:
   Client::Game::UI::AreaInstance:
     vtbls:
       - ea: 0x141991B70
-        base: Component::GUI::AtkModuleInterface::AtkEventInterface2
+        base: Component::GUI::AtkModuleInterface::AtkEventInterface
     instances:
       - ea: 0x1420FB5F8
         pointer: False
@@ -840,7 +835,7 @@ classes:
   Client::Game::UI::Loot:
     vtbls:
       - ea: 0x141991BB8
-        base: Component::GUI::AtkModuleInterface::AtkEventInterface2
+        base: Component::GUI::AtkModuleInterface::AtkEventInterface
     instances:
       - ea: 0x1420FBAC0
         pointer: False
@@ -1807,7 +1802,7 @@ classes:
   Client::UI::Agent::AgentInterface:
     vtbls:
       - ea: 0x14190B300
-        base: Component::GUI::AtkModuleInterface::AtkEventInterface2
+        base: Component::GUI::AtkModuleInterface::AtkEventInterface
     vfuncs:
       3: Show
       4: Hide
@@ -2069,7 +2064,7 @@ classes:
   Client::UI::Agent::Agent270:
     vtbls:
     - ea: 0x1419AF4F0
-      base: Component::GUI::AtkModuleInterface::AtkEventInterface2
+      base: Component::GUI::AtkModuleInterface::AtkEventInterface
   Client::UI::Agent::Agent271:
     vtbls:
     - ea: 0x1419AF2D8
@@ -3854,7 +3849,7 @@ classes:
   Client::UI::Misc::ConfigModule:
     vtbls:
       - ea: 0x141948E18
-        base: Component::GUI::AtkModuleInterface::AtkEventInterface2
+        base: Component::GUI::AtkModuleInterface::AtkEventInterface
       - ea: 0x141948E30
         base: Common::Configuration::ConfigBase::ChangeEventInterface
     funcs:
@@ -4586,14 +4581,14 @@ classes:
   Client::Game::UI::Telepo::SelectUseTicketInvoker:
     vtbls:
       - ea: 0x141990BC8
-        base: Component::GUI::AtkModuleInterface::AtkEventInterface2
+        base: Component::GUI::AtkModuleInterface::AtkEventInterface
   Client::Game::UI::Telepo:
     instances:
       - ea: 0x1420F9FA0
         pointer: False
     vtbls:
       - ea: 0x141990BE0
-        base: Component::GUI::AtkModuleInterface::AtkEventInterface2
+        base: Component::GUI::AtkModuleInterface::AtkEventInterface
     funcs:
       0x140943DB0: ctor
       0x140943F10: IsSelectUseTicketInactive
@@ -5984,7 +5979,7 @@ classes:
   Client::UI::Agent::AgentBannerInterface::Storage::CharacterData:
     vtbls:
       - ea: 0x141B92EF8
-        base: Component::GUI::AtkModuleInterface::AtkEventInterface2
+        base: Component::GUI::AtkModuleInterface::AtkEventInterface
     funcs:
       0x1414D55E0: dtor
   Client::UI::Agent::AgentBannerParty:
@@ -6033,7 +6028,7 @@ classes:
   Client::Game::Event::EventSceneModule::UISkipListener:
     vtbls:
       - ea: 0x14196D5A0
-        base: Component::GUI::AtkModuleInterface::AtkEventInterface2
+        base: Component::GUI::AtkModuleInterface::AtkEventInterface
   Client::Game::Event::Director:
     vtbls:
       - ea: 0x14196DEA0
