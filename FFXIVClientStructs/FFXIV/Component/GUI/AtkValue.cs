@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
@@ -13,6 +14,7 @@ public enum ValueType
     String = 0x6,
     String8 = 0x8,
     Vector = 0x9,
+    Texture = 0xA,
     AllocatedString = 0x26,
     AllocatedVector = 0x29
 }
@@ -29,8 +31,10 @@ public unsafe partial struct AtkValue
     [FieldOffset(0x8)] public float Float;
     [FieldOffset(0x8)] public byte Byte;
     [FieldOffset(0x8)] public StdVector<AtkValue>* Vector;
+    [FieldOffset(0x8)] public Texture* Texture;
 
     [MemberFunction("E8 ?? ?? ?? ?? 41 03 ED")]
+    [GenerateCStrOverloads]
     public partial void SetString(byte* value);
 
     [MemberFunction("E8 ?? ?? ?? ?? F7 DE")]
@@ -38,13 +42,4 @@ public unsafe partial struct AtkValue
 
     [MemberFunction("E8 ?? ?? ?? ?? 33 FF 89 7C 24")]
     public partial void CreateArray(int size);
-
-    public void SetString(string value)
-    {
-        var bytes = Encoding.UTF8.GetBytes(value + '\0');
-        fixed (byte* bp = bytes)
-        {
-            SetString(bp);
-        }
-    }
 }
