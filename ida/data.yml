@@ -5790,7 +5790,7 @@ classes:
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonSocial:
     vtbls:
-      - ea: 0x1419DCE28
+      - ea: 0x1419D1828
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonRequest:
     vtbls:
