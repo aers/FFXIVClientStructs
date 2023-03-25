@@ -11,4 +11,5 @@ public unsafe partial struct AddonMobHunt
     [FieldOffset(0x220)] public AtkComponentButton* NextPageButton;
     [FieldOffset(0x228)] public AtkComponentButton* PreviousPageButton;
     [FieldOffset(0x230)] public AtkComponentButton* OpenMapButton;
+    [FieldOffset(0x238)] public int CurrentPage;
 }
