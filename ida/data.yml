@@ -5987,6 +5987,10 @@ classes:
     vtbls:
       - ea: 0x141A084F8
         base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMobHunt:
+    vtbls:
+      - ea: 0x141A0A060
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonGrandCompanySupplyList:
     vtbls:
       - ea: 0x141A0AE30
