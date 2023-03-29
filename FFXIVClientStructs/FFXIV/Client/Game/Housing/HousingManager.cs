@@ -98,4 +98,20 @@ public unsafe partial struct HousingManager
     /// <returns>Survey Duration</returns>
     [MemberFunction("E8 ?? ?? ?? ?? 01 43 10 8B CD")]
     public static partial uint GetSubmarineSurveyDuration(byte point, short speed);
+
+    /// <summary>
+    /// Gets if the point is unlocked
+    /// </summary>
+    /// <param name="point">The point to check is unlocked or not</param>
+    /// <returns>True or False</returns>
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 4F 49 8B 57 38")]
+    public static partial bool IsSubmarineExplorationUnlocked(byte point);
+
+    /// <summary>
+    /// Gets if the point is unlocked
+    /// </summary>
+    /// <param name="point">The point to check is explored or not</param>
+    /// <returns>True or False</returns>
+    [MemberFunction("E8 ?? ?? ?? ?? 88 45 38")]
+    public static partial bool IsSubmarineExplorationExplored(byte point);
 }

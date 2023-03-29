@@ -56,7 +56,7 @@ public unsafe partial struct HousingWorkshopAirshipSubData
 
     [FieldOffset(0x37)] public fixed byte Name[20];
 
-    [FixedSizeArray<HousingWorkshopGatheredData>(5)]
+    [FixedSizeArray<HousingWorkshopAirshipGathered>(5)]
     [FieldOffset(0x54)] public fixed byte GatheredData[0x38 * 5];
 
     /// <summary>
@@ -73,7 +73,7 @@ public unsafe partial struct HousingWorkshopAirshipSubData
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x38)]
-public unsafe partial struct HousingWorkshopGatheredData
+public unsafe partial struct HousingWorkshopAirshipGathered
 {
     [FieldOffset(0x0)] public uint ExpGained;
 
@@ -81,11 +81,16 @@ public unsafe partial struct HousingWorkshopGatheredData
     [FieldOffset(0x10)] public uint ItemIdAdditional;
     [FieldOffset(0x14)] public ushort ItemCountPrimary;
     [FieldOffset(0x16)] public ushort ItemCountAdditional;
+    [FieldOffset(0x18)] public uint Unk1Primary;
+    [FieldOffset(0x1C)] public uint Unk1Additional;
+    [FieldOffset(0x20)] public uint Unk2Primary;
+    [FieldOffset(0x24)] public uint Unk2Additional;
+    [FieldOffset(0x28)] public uint Unk3Primary;
+    [FieldOffset(0x2C)] public uint Unk3Additional;
 
+    //these might actually be HQ indicators
     [FieldOffset(0x32)] public bool AirshipItemValidPrimary;
     [FieldOffset(0x33)] public bool AirshipItemValidAdditional;
-    public bool SubmarineItemValidPrimary => !AirshipItemValidPrimary;
-    public bool SubmarineItemValidAdditional => !AirshipItemValidAdditional;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x2320)]
