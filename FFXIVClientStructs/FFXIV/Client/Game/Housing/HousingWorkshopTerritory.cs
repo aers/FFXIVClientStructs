@@ -49,10 +49,10 @@ public unsafe partial struct HousingWorkshopAirshipSubData
     [FieldOffset(0x26)] public ushort BridgeId; // AirshipExplorationPart Key
 
     [FieldOffset(0x28)] public ushort Surveillance;
-    [FieldOffset(0x30)] public ushort Retrieval;
-    [FieldOffset(0x32)] public ushort Speed;
-    [FieldOffset(0x34)] public ushort Range;
-    [FieldOffset(0x36)] public ushort Favor;
+    [FieldOffset(0x2A)] public ushort Retrieval;
+    [FieldOffset(0x2C)] public ushort Speed;
+    [FieldOffset(0x2E)] public ushort Range;
+    [FieldOffset(0x30)] public ushort Favor;
 
     [FieldOffset(0x37)] public fixed byte Name[20];
 
