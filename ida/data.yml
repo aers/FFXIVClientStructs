@@ -5784,9 +5784,13 @@ classes:
     vtbls:
       - ea: 0x1419CFD88
         base: Component::GUI::AtkUnitBase
+  Client::UI::AddonFriendList:
+    vtbls:
+      - ea: 0x1419D1CA8
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonSocial:
     vtbls:
-      - ea: 0x1419DCE28
+      - ea: 0x1419D1828
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonRequest:
     vtbls:
@@ -5982,6 +5986,10 @@ classes:
   Client::UI::AddonMiragePrismPrismBoxCrystallize:
     vtbls:
       - ea: 0x141A084F8
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMobHunt:
+    vtbls:
+      - ea: 0x141A0A060
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonGrandCompanySupplyList:
     vtbls:
