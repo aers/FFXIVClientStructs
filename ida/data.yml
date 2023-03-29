@@ -560,7 +560,7 @@ classes:
     instances:
       - ea: 0x1420F8690
         pointer: False
-  HousingManager:
+  Client::Game::Housing::HousingManager:
     instances:
       - ea: 0x1421117E0
         pointer: True
@@ -577,7 +577,7 @@ classes:
       0x140B11B40: GetCurrentFloor # 0 - Ground Level, 1 - Upstairs, 10 - Downstairs
       0x140B11BD0: GetInvertedBrightness # 0-5, higher is darker
       0x140B387C0: IsSubmarineExplorationUnlocked # static
-      0x140B38800: IsSubmarineExplorationUnlocked2 # static
+      0x140B38800: IsSubmarineExplorationExplored # static
       0x140B38860: GetSubmarineSurveyDuration # (unsigned __int8 point, __int16 speed) -> SurveyDuration (return is time in seconds)
       0x140B39ED0: GetSubmarineVoyageDistance # (unsigned __int8 point, unsigned __int8 speed) -> VoyageDistance (return is integer)
       0x140B39D30: GetSubmarineVoyageTime # (unsigned __int8 pointA, unsigned __int8 pointB, __int16 speed) -> VoyageTime (return is time in seconds)
