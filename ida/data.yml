@@ -2769,10 +2769,13 @@ classes:
       0x1404FFC30: GetFocus
       0x1404FFC60: SetFocus
       0x1404FFCC0: ClearFocus
+      0x140500AC0: RemoveAllEvents # (this, AtkComponentBase)
       0x140500BF0: GetNumberArrayData
+      0x140500C00: GetStringArrayData
+      0x140500C10: GetExtendArrayData
       0x140500D20: ctor
-      0x140523170: GetSingleton1  # dalamud GetBaseUIObject
-      0x140500ac0: RemoveAllEvents # (this, AtkComponentBase)
+      0x140523170: GetSingleton
+      0x140523180: GetSingleton2
   Component::GUI::AtkDragDropManager:
     vtbls:
       - ea: 0x141933658
