@@ -560,7 +560,7 @@ classes:
     instances:
       - ea: 0x1420F8690
         pointer: False
-  HousingManager:
+  Client::Game::Housing::HousingManager:
     instances:
       - ea: 0x1421117E0
         pointer: True
@@ -577,7 +577,7 @@ classes:
       0x140B11B40: GetCurrentFloor # 0 - Ground Level, 1 - Upstairs, 10 - Downstairs
       0x140B11BD0: GetInvertedBrightness # 0-5, higher is darker
       0x140B387C0: IsSubmarineExplorationUnlocked # static
-      0x140B38800: IsSubmarineExplorationUnlocked2 # static
+      0x140B38800: IsSubmarineExplorationExplored # static
       0x140B38860: GetSubmarineSurveyDuration # (unsigned __int8 point, __int16 speed) -> SurveyDuration (return is time in seconds)
       0x140B39ED0: GetSubmarineVoyageDistance # (unsigned __int8 point, unsigned __int8 speed) -> VoyageDistance (return is integer)
       0x140B39D30: GetSubmarineVoyageTime # (unsigned __int8 pointA, unsigned __int8 pointB, __int16 speed) -> VoyageTime (return is time in seconds)
@@ -666,8 +666,13 @@ classes:
       0x14051B1E0: ReadASHDAndLoadTextures
       0x14051B6C0: CreateAtkNode
       0x14051CAD0: CreateAtkComponent
+      0x14051D560: Update
+      0x14051E240: SortNodeListByPriority
+      0x14051E310: SwapNodeListIndex
       0x14051E100: SetDuplicateNodeInfo
+      0x14051E3E0: ExpandNodeListSize
       0x14051EA40: DuplicateComponentNode
+      0x14051E580: SeardNodeById
       0x14051E5E0: SearchNodeByIndex 
       0x14051E650: GetDuplicatedNode
   Component::GUI::AtkArrayDataHolder:
@@ -5784,9 +5789,13 @@ classes:
     vtbls:
       - ea: 0x1419CFD88
         base: Component::GUI::AtkUnitBase
+  Client::UI::AddonFriendList:
+    vtbls:
+      - ea: 0x1419D1CA8
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonSocial:
     vtbls:
-      - ea: 0x1419DCE28
+      - ea: 0x1419D1828
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonRequest:
     vtbls:
@@ -5982,6 +5991,10 @@ classes:
   Client::UI::AddonMiragePrismPrismBoxCrystallize:
     vtbls:
       - ea: 0x141A084F8
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMobHunt:
+    vtbls:
+      - ea: 0x141A0A060
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonGrandCompanySupplyList:
     vtbls:
