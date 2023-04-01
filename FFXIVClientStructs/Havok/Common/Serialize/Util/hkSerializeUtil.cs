@@ -49,8 +49,8 @@ public unsafe partial struct hkSerializeUtil
 	public struct LoadOptions
 	{
 		[FieldOffset(0x0)] public hkFlags<LoadOptionBits, int> Flags;
-		[FieldOffset(0x8)] public hkClassNameRegistry* m_classNameReg;
-		[FieldOffset(0x10)] public hkTypeInfoRegistry* m_typeInfoReg;
+		[FieldOffset(0x8)] public hkClassNameRegistry* ClassNameRegistry;
+		[FieldOffset(0x10)] public hkTypeInfoRegistry* TypeInfoRegistry;
 	}
 
 	[MemberFunction("E8 ?? ?? ?? ?? 48 8B F0 48 85 C0 74 51 48 8B 18")]
