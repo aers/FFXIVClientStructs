@@ -25,7 +25,8 @@ public unsafe partial struct hkIstream
 	public partial byte isOk();
 	
 	[MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 54 41 56 41 57 48 83 EC 20 48 8B E9")]
-	public partial int getline(char* str, int maxsize, char delim = '\n');
+	[GenerateCStrOverloads]
+	public partial int getline(byte* str, int maxsize, byte delim = 0x0A); // delim character is \n
 
 	// [MemberFunction("")]
 	// public partial hkIstream* get(char& c);
