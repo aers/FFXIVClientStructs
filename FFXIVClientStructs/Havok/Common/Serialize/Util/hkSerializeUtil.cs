@@ -23,6 +23,7 @@ public unsafe partial struct hkSerializeUtil
 		[FieldOffset(0x8)] public hkStringPtr DefaultMessage;
 	}
 
+	[Flags]
 	public enum SaveOptionBits : int
 	{
 		Default = 0x00,
@@ -38,6 +39,7 @@ public unsafe partial struct hkSerializeUtil
 		[FieldOffset(0x00)] public hkFlags<SaveOptionBits, int> Flags;
 	}
 
+	[Flags]
 	public enum LoadOptionBits : int
 	{
 		Default = 0x00,
@@ -56,12 +58,15 @@ public unsafe partial struct hkSerializeUtil
 	[MemberFunction("E8 ?? ?? ?? ?? 48 8B F0 48 85 C0 74 51 48 8B 18")]
 	public static partial hkResource* Load(hkStreamReader* streamReader, ErrorDetails* errorResult, LoadOptions* loadOptions);
 
+	[MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 81 EC ?? ?? ?? ?? 49 8B E8")]
+	public static partial hkResource* LoadFromBuffer(void* buf, int bufLen, ErrorDetails* errorResult, LoadOptions* loadOptions);
+
 	[MemberFunction("40 53 48 83 EC 30 8B 44 24 60 48 8B D9 89 44 24 28")]
 	public static partial hkResult* Save(hkResult* result, void* hkObject, hkClass* klass, hkStreamWriter* writer,
 		SaveOptions options);
 
 	// there's a function that does this in the game but unfortunately its not siggable safely, so we'll just replicate what the function does here
-	public static hkResource* Load(byte* fileName, ErrorDetails* errorResult, LoadOptions* loadOptions)
+	public static hkResource* LoadFromFile(byte* fileName, ErrorDetails* errorResult, LoadOptions* loadOptions)
 	{
 		hkIstream* inputStream = stackalloc hkIstream[1];
 		inputStream->Ctor2(fileName);
@@ -73,10 +78,10 @@ public unsafe partial struct hkSerializeUtil
 		return resource;
 	}
 
-	public static hkResource* Load(ReadOnlySpan<byte> fileName, ErrorDetails* errorResult, LoadOptions* loadOptions)
+	public static hkResource* LoadFromFile(ReadOnlySpan<byte> fileName, ErrorDetails* errorResult, LoadOptions* loadOptions)
 	{
 		fixed (byte* n = fileName)
-			return Load(n, errorResult, loadOptions);
+			return LoadFromFile(n, errorResult, loadOptions);
 	}
 }
 
