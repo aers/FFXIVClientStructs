@@ -1,64 +1,80 @@
-﻿// namespace FFXIVClientStructs.Havok;
-//
-// public unsafe struct hkSerializeUtil
-// {
-// 	public struct ErrorDetails
-// 	{
-// 		public enum ErrorID
-// 		{
-// 			None,
-// 			ReadFailed,
-// 			UnsupportedFormat,
-// 			PackfilePlatform,
-// 			VersioningFailed,
-// 			NonHeapObject,
-// 			LoadFailed,
-// 			DeprecatedNotInitialized,
-// 			MaxId,
-// 		};
-//
-// 		hkEnum<ErrorID, int> Id;
-// 		hkStringPtr DefaultMessage;
-// 	};
-//
-// 	public enum SaveOptionBits
-// 	{
-// 		Default = 0x00,
-// 		TextFormat = 0x01,
-// 		SerializeIgnoredMembers = 0x02,
-// 		WriteAttributes = 0x04,
-// 		Concise = 0x08,
-// 	};
-// 	
-// 	public struct SaveOptions
-// 	{
-// 		public hkFlags<SaveOptionBits, int> Flags;
-// 	};
-// 		
-// 	enum LoadOptionBits
-// 	{
-// 		Default = 0x00,
-// 		FailIfVersioning = 0x01,
-// 		Forced = 0x02,
-// 	};
-// 	
-// 	struct LoadOptions// : 
-// 	{
-// 		public hkFlags<LoadOptionBits, int> Flags;
-// 		//
-// 		// public:
-// 		// 	HK_DECLARE_NONVIRTUAL_CLASS_ALLOCATOR(0,LoadOptions);
-// 		// 	LoadOptions(LoadOptionBits b=LOAD_DEFAULT) : hkFlags<LoadOptionBits,int>(b), m_classNameReg(HK_NULL), m_typeInfoReg(HK_NULL) {}
-// 		// 	LoadOptions& useClassNameRegistry(const hkClassNameRegistry* creg) { m_classNameReg = creg; return *this; }
-// 		// 	LoadOptions& useTypeInfoRegistry(const hkTypeInfoRegistry* treg) { m_typeInfoReg = treg; return *this; }
-// 		//
-// 		// 	const hkClassNameRegistry* getClassNameRegistry() const;
-// 		// 	const hkTypeInfoRegistry* getTypeInfoRegistry() const;
-// 		//
-// 		// protected:
-// 		// 	const hkClassNameRegistry* m_classNameReg;
-// 		// 	const hkTypeInfoRegistry* m_typeInfoReg;
-// 	};
+﻿namespace FFXIVClientStructs.Havok;
+
+public unsafe partial struct hkSerializeUtil
+{
+	
+	[StructLayout(LayoutKind.Explicit, Size=0x10)]
+	public struct ErrorDetails
+	{
+		public enum ErrorID : int
+		{
+			None = 0x00,
+			ReadFailed,
+			UnsupportedFormat,
+			PackfilePlatform,
+			VersioningFailed,
+			NonHeapObject,
+			LoadFailed,
+			DeprecatedNotInitialized,
+			MaxId,
+		}
+
+		[FieldOffset(0x0)] hkEnum<ErrorID, int> Id;
+		[FieldOffset(0x8)] hkStringPtr DefaultMessage;
+	}
+
+	public enum SaveOptionBits : int
+	{
+		Default = 0x00,
+		TextFormat = 0x01,
+		SerializeIgnoredMembers = 0x02,
+		WriteAttributes = 0x04,
+		Concise = 0x08,
+	}
+
+	[StructLayout(LayoutKind.Explicit, Size = 0x4)]
+	public struct SaveOptions
+	{
+		[FieldOffset(0x00)] public hkFlags<SaveOptionBits, int> Flags;
+	}
+
+	public enum LoadOptionBits : int
+	{
+		Default = 0x00,
+		FailIfVersioning = 0x01,
+		Forced = 0x02,
+	}
+	
+	[StructLayout(LayoutKind.Explicit, Size = 0x18)]
+	public struct LoadOptions
+	{
+		[FieldOffset(0x0)] public hkFlags<LoadOptionBits, int> Flags;
+		[FieldOffset(0x8)] public hkClassNameRegistry* m_classNameReg;
+		[FieldOffset(0x10)] public hkTypeInfoRegistry* m_typeInfoReg;
+	}
+
+	[MemberFunction("E8 ?? ?? ?? ?? 48 8B F0 48 85 C0 74 51 48 8B 18")]
+	public static partial hkResource* Load(hkStreamReader* streamReader, ErrorDetails* errorResult, LoadOptions* loadOptions);
+
+	[MemberFunction("40 53 48 83 EC 30 8B 44 24 60 48 8B D9 89 44 24 28")]
+	public static partial hkResult* Save(hkResult* result, void* hkObject, hkClass* klass, hkStreamWriter* writer,
+		SaveOptions options);
+
+	// there's a function that does this in the game but unfortunately its not siggable safely, so we'll just replicate what the function does here
+	public static hkResource* Load(byte* fileName, ErrorDetails* errorResult, LoadOptions* loadOptions)
+	{
+		hkIstream* inputStream = stackalloc hkIstream[1];
+		inputStream->Ctor2(fileName);
+
+		hkResource* resource = Load(inputStream->StreamReader.ptr, errorResult, loadOptions);
+
+		inputStream->Dtor();
+
+		return resource;
+	}
+}
+
+
 //
 //
 // 		/// Load serialized objects from stream and return pointer

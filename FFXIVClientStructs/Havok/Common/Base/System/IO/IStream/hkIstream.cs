@@ -10,6 +10,7 @@ public unsafe partial struct hkIstream
 	public partial void Ctor1(hkStreamReader* sr);
 
 	[MemberFunction("E8 ?? ?? ?? ?? 4C 8B C3 48 8B D7 48 8B 48 10")]
+	[GenerateCStrOverloads]
 	public partial void Ctor2(byte* filename);
 
 	[MemberFunction("E8 ?? ?? ?? ?? 48 8B 0D ?? ?? ?? ?? 4C 8B CF")]
