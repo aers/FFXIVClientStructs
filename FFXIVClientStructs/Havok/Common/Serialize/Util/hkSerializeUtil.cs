@@ -19,8 +19,8 @@ public unsafe partial struct hkSerializeUtil
 			MaxId,
 		}
 
-		[FieldOffset(0x0)] hkEnum<ErrorID, int> Id;
-		[FieldOffset(0x8)] hkStringPtr DefaultMessage;
+		[FieldOffset(0x0)] public hkEnum<ErrorID, int> Id;
+		[FieldOffset(0x8)] public hkStringPtr DefaultMessage;
 	}
 
 	public enum SaveOptionBits : int
@@ -71,6 +71,12 @@ public unsafe partial struct hkSerializeUtil
 		inputStream->Dtor();
 
 		return resource;
+	}
+
+	public static hkResource* Load(ReadOnlySpan<byte> fileName, ErrorDetails* errorResult, LoadOptions* loadOptions)
+	{
+		fixed (byte* n = fileName)
+			return Load(n, errorResult, loadOptions);
 	}
 }
 

@@ -1,6 +1,9 @@
 ﻿namespace FFXIVClientStructs.Havok;
 
-public struct hkResource
+[StructLayout(LayoutKind.Explicit)]
+public unsafe partial struct hkResource
 {
-	// TODO
+	[VirtualFunction(7)]
+	[GenerateCStrOverloads]
+	public partial void* GetContentsPointer(byte* className, hkTypeInfoRegistry* typeInfoRegistry);
 }
