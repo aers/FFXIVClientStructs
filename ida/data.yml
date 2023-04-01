@@ -821,6 +821,12 @@ classes:
     instances:
       - ea: 0x14210A6A0
         pointer: False
+    funcs:
+      0x140961FD0: GetKillCount
+      0x140961F10: GetObtainedMobHuntOrderRowId
+      0x140961EA0: GetAvailableMobHuntOrderRowId
+      0x140962740: GetMarkIndexFromItemId
+      0x140962790: IsMarkBillUnlocked
   Client::Game::UI::RouletteController:
     vtbls:
       - ea: 0x141991B40
