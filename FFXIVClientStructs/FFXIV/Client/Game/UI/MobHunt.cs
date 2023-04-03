@@ -29,9 +29,15 @@
 [StructLayout(LayoutKind.Explicit, Size = 0x198)]
 public unsafe partial struct MobHunt
 {
+    [Obsolete("Use AvailableMarkId instead", true)]
     [FieldOffset(0x8)] public fixed byte unkArray[18];
+    
+    [Obsolete("Use ObtainedMarkId instead", true)]
     [FieldOffset(0x1A)] public fixed byte MarkID[18];
     
+    [FieldOffset(0x08)] public fixed byte AvailableMarkId[18];
+    [FieldOffset(0x1A)] public fixed byte ObtainedMarkId[18];
+
     [FixedSizeArray<KillCounts>(18)]
     [FieldOffset(0x2C)] public fixed byte CurrentKills[18 * 0x14];
     
@@ -39,6 +45,28 @@ public unsafe partial struct MobHunt
     
     [StaticAddress("48 8D 0D ?? ?? ?? ?? 0F B6 50 08 E8 ?? ?? ?? ?? 84 C0 74 16", 3)]
     public static partial MobHunt* Instance();
+
+    /// <param name="markIndex">Mark Bill Index 0-18</param>
+    /// <param name="mobIndex">Mob Index 0-4</param>
+    /// <returns>Current kill count</returns>
+    [MemberFunction("4C 8B C9 80 FA 12")]
+    public partial int GetKillCount(byte markIndex, byte mobIndex);
+    
+    /// <param name="markIndex">Mark Bill Index 0-18</param>
+    /// <returns>MobHuntOrder Primary Row Id</returns>
+    [MemberFunction("E8 ?? ?? ?? ?? 89 44 24 38 45 33 FF")]
+    public partial int GetObtainedHuntOrderRowId(byte markIndex);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 57 28 48 8D 0D")]
+    public partial int GetAvailableHuntOrderRowId(byte markIndex);
+
+    /// <param name="itemId">Mark Bill ItemId</param>
+    /// <returns>18 Indicates Not Found</returns>
+    [MemberFunction("E8 ?? ?? ?? ?? 44 0F B6 E0 3C 12")]
+    public partial int GetMarkIndexFromItemId(int itemId);
+
+    [MemberFunction("48 89 5C 24 ?? 56 48 83 EC 20 40 32 F6")]
+    public partial bool IsMarkBillUnlocked(byte markIndex);
 
     public bool IsMarkBillObtained(int index)
     {
