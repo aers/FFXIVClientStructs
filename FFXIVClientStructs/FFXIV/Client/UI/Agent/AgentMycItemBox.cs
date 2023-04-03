@@ -8,11 +8,14 @@ public unsafe struct AgentMycItemBox
 {
     [FieldOffset(0x00)] public AgentInterface AgentInterface;
 
-    [FieldOffset(0x40)] public MycLostFindsCache* LostFindsCache;
+    /// <remarks>
+    /// Contains how many of each item the player has in both the cache and the holster
+    /// </remarks>
+    [FieldOffset(0x40)] public MycItemBoxData* ItemBoxData;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x1580)]
-public unsafe partial struct MycLostFindsCache
+public unsafe partial struct MycItemBoxData
 {
     [FixedSizeArray<MycItemCategory>(7)] 
     [FieldOffset(0x08)] public fixed byte ItemCacheArray[7 * 0x184];
