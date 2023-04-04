@@ -183,7 +183,7 @@ public unsafe partial struct AtkResNode : ICreatable
     [MemberFunction("E8 ?? ?? ?? ?? 48 83 C5 30")]
     public partial void SetPositionFloat(float X, float Y);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 49 83 C4 0C")]
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B7 03 4C 8D 44 24")]
     public partial void GetPositionShort(short* outX, short* outY);
 
     [MemberFunction("E8 ?? ?? ?? ?? 8D 56 B5")]
