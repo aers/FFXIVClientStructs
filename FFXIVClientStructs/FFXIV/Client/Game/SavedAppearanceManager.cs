@@ -11,11 +11,11 @@ public unsafe partial struct SavedAppearanceManager {
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x140)]
-public unsafe struct SavedAppearanceSlot {
+public unsafe partial struct SavedAppearanceSlot {
     [FieldOffset(0x00)] public uint Magic; // Should be 0x2013_FF14
     [FieldOffset(0x04)] public uint Version;
     [FieldOffset(0x10)] public fixed byte Customize[0x1A];
-    [FieldOffset(0x30)] public fixed byte Label[0x40];
+    [FieldOffset(0x30), FixedString("Label")] public fixed byte LabelBytes[0x40];
     [FieldOffset(0x134)] public bool IsCreated;
     [FieldOffset(0x13C)] public byte SlotIndex;
 }
