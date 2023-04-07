@@ -332,7 +332,8 @@ public enum AgentId : uint {
     LovmPaletteEdit = 208,
     SkyIslandFinder = 209, //Exploratory Missions
     SkyIslandFinderSetting = 210,
-
+    SkyIslandResult = 211,
+    SkyIsland2Result = 212,
     ItemContextCustomize = 213,
     BeginnersMansionProblem = 214, //Hall of the Novice
     DpsChallenge = 215, //Stone, Sky, Sea
@@ -376,15 +377,22 @@ public enum AgentId : uint {
 
     DeepDungeonMenu = 257,
 
+    DeepDungeonResult = 259,
     ItemAppraisal = 260, //DeepDungeon Appraisal
     ItemInspection = 261, //Lockbox
     RecipeItemContext = 262, // context menus for RecipeTree and RecipeList, constructor inlined
     ContactList = 263,
 
     SatisfactionSupply = 266,
+    SatisfactionSupplyResult = 267,
     Snipe = 268,
     MountSpeed = 269,
-
+    HarpoonTip = 270,
+    PvpScreenInformationHotBar = 271,
+    PvpWelcome = 272,
+    UserPolicyPerformance = 277,
+    PvpTeamInputString = 279,
+    PvpTeamCrestEditor = 284,
     PvpTeam = 285,
 
     EurekaElementalHud = 287,
@@ -399,18 +407,23 @@ public enum AgentId : uint {
     MiragePrismPrismBox = 298, //Glamour Dresser
     MiragePrismPrismItemDetail = 299,
     MiragePrismMiragePlate = 300, //Glamour Plates
-
+    PerformanceMode = 301,
     Fashion = 304,
 
+    SelectYesno = 306,
     HousingGuestBook = 307,
 
     ReconstructionBox = 310,
     ReconstructionBuyback = 311,
     CrossWorldLinkShell = 312,
-
+    MiragePrismENpcSatisfaction = 313,
     Description = 314, //Frontline/Bozja Description
+    Alarm = 315,
+    
+    FreeShop = 318,
     AozNotebook = 319, //Bluemage Spells
     RhythmAction = 320,
+    WeddingNotification = 321,
 
     Emj = 322, //Mahjong
 
@@ -423,6 +436,7 @@ public enum AgentId : uint {
     Credit = 331,
     EmjSetting = 332, //Mahjong Settings
     RetainerList = 333,
+    QIBCStatus = 334,
 
     Dawn = 338, //Trust
     DawnStory = 339, //Duty Support
