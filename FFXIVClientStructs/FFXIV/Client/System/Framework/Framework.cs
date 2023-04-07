@@ -1,5 +1,6 @@
 ﻿using FFXIVClientStructs.FFXIV.Client.System.Configuration;
 using FFXIVClientStructs.FFXIV.Client.UI;
+using FFXIVClientStructs.FFXIV.Client.Game;
 using FFXIVClientStructs.FFXIV.Common.Component.BGCollision;
 using FFXIVClientStructs.FFXIV.Common.Lua;
 using FFXIVClientStructs.FFXIV.Component.Excel;
@@ -16,6 +17,8 @@ public unsafe partial struct Framework
     [FieldOffset(0x10)] public SystemConfig SystemConfig;
     [FieldOffset(0x460)] public DevConfig DevConfig;
 
+    [FieldOffset(0x570)] public SavedAppearanceManager* SavedAppearanceData;
+    
     [FieldOffset(0x1678)] public bool IsNetworkModuleInitialized;
     [FieldOffset(0x1679)] public bool EnableNetworking;
     [FieldOffset(0x1680)] public long ServerTime;

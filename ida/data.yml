@@ -3597,6 +3597,14 @@ classes:
       2: Finalize
     funcs:
       0x1406A68A0: ctor
+  Client::Game::SavedAppearanceManager:
+    vtbls:
+      - ea: 0x14194A628
+    vfuncs:
+      0: dtor
+      1: IsSlotCreated
+      2: GetSlot
+      6: GetSlotCount
   Client::Game::Object::GameObject:
     vtbls:
       - ea: 0x14194B458
