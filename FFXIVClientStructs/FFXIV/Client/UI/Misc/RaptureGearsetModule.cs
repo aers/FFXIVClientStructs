@@ -17,6 +17,8 @@ public unsafe partial struct RaptureGearsetModule
     [FieldOffset(0x0030)] public fixed byte ModuleName[16];
     [FieldOffset(0x0048)] public Gearsets Gearset;
 
+    [FieldOffset(0xB434)] public int CurrentGearsetIndex;
+    
     /// <summary>
     /// Return a pointer to a <see cref="GearsetEntry"/> by index/ID.
     /// </summary>
