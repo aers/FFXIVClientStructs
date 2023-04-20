@@ -63,6 +63,13 @@ public unsafe partial struct RaptureGearsetModule
     public partial void DeleteGearset(int gearsetId);
 
     /// <summary>
+    /// Update the gearset at the specified ID with the currently equipped items.
+    /// </summary>
+    /// <param name="gearsetId">The gearset ID to delete.</param>
+    [MemberFunction("E8 ?? ?? ?? ?? 8B E8 83 F8 ?? 0F 8E ?? ?? ?? ?? 80 BE")]
+    public partial void UpdateGearset(int gearsetId);
+
+    /// <summary>
     /// Link a glamour plate to a specific gearset.
     /// </summary>
     /// <param name="gearsetId">The gearset ID to link a glamour plate to </param>
