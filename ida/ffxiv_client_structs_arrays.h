@@ -2864,7 +2864,7 @@ struct Client::UI::AddonContentsFinder /* Size=0x16C8 */
     /* 0x0300 */ Component::GUI::AtkComponentRadioButton* Raids2RadioButton;
     /* 0x0308 */ Component::GUI::AtkComponentRadioButton* PvpRadioButton;
     /* 0x0310 */ Component::GUI::AtkComponentRadioButton* GoldSaucerRadioButton;
-    /* 0x0318 */ byte SelectedDutyTextNode[0x28];
+    /* 0x0318 */ Component::GUI::AtkTextNode* SelectedDutyTextNode[0x5];
     /* 0x0340 */ Component::GUI::AtkComponentTreeList* DutyList;
     /* 0x0348 */ Component::GUI::AtkComponentDropDownList* OrderByButton;
     /* 0x0350 */ Component::GUI::AtkComponentButton* RefreshButton;
@@ -2882,7 +2882,7 @@ struct Client::UI::AddonContentsFinder /* Size=0x16C8 */
     /* 0x03B0 */ Component::GUI::AtkResNode* RoleIconResNode;
     /* 0x03B8 */ Component::GUI::AtkImageNode* RoleIconImageNode;
     /* 0x03C0 */ Component::GUI::AtkResNode* NumOtherPartiesRecruitingResNode;
-    /* 0x03C8 */ byte SettingsButton[0x40];
+    /* 0x03C8 */ Component::GUI::AtkComponentButton* SettingsButton[0x8];
     /*        */ byte _gap_0x408[0x12A0];
     /* 0x16A8 */ unsigned __int32 SelectedRadioButton;
     /*        */ byte _gap_0x16AC[0x4];
@@ -2997,13 +2997,22 @@ struct Client::UI::AddonFateReward /* Size=0x570 */
     /*       */ byte _gap_0x56C[0x4];
 };
 
+struct Client::UI::AddonWaymarkInfo /* Size=0x18 */
+{
+    /* 0x00 */ __int32 IconId;
+    /* 0x04 */ __int32 Active;
+    /* 0x08 */ byte* TooltipString;
+    /* 0x10 */ __int32 Slot;
+    /*      */ byte _gap_0x14[0x4];
+};
+
 struct Client::UI::AddonFieldMarker /* Size=0x598 */
 {
     /* 0x000 */ Component::GUI::AtkUnitBase AtkUnitBase;
     /*       */ byte _gap_0x220[0x10];
     /* 0x230 */ __int32 HoveredButtonIndex;
     /*       */ byte _gap_0x234[0x4];
-    /* 0x238 */ byte WaymarkInfo[0xC0];
+    /* 0x238 */ Client::UI::AddonWaymarkInfo WaymarkInfo[0x8];
     /*       */ byte _gap_0x2F8[0x280];
     /*       */ byte _gap_0x578[0x4];
     /* 0x57C */ __int32 HoveredPresetIndex;
@@ -3012,15 +3021,6 @@ struct Client::UI::AddonFieldMarker /* Size=0x598 */
     /*       */ byte _gap_0x582[0x2];
     /*       */ byte _gap_0x584[0x4];
     /*       */ byte _gap_0x588[0x10];
-};
-
-struct Client::UI::AddonWaymarkInfo /* Size=0x18 */
-{
-    /* 0x00 */ __int32 IconId;
-    /* 0x04 */ __int32 Active;
-    /* 0x08 */ byte* TooltipString;
-    /* 0x10 */ __int32 Slot;
-    /*      */ byte _gap_0x14[0x4];
 };
 
 struct Client::UI::AddonFriendList /* Size=0x380 */
@@ -3138,8 +3138,8 @@ struct Client::UI::AddonGoldSaucerInfo /* Size=0x310 */
     /* 0x220 */ __int32 SelectedCategory;
     /* 0x224 */ __int32 SelectedSubCategory;
     /*       */ byte _gap_0x228[0x78];
-    /* 0x2A0 */ byte CategoryRadioButtons[0x30];
-    /* 0x2D0 */ byte ChocoboRadioButtons[0x18];
+    /* 0x2A0 */ Component::GUI::AtkComponentRadioButton* CategoryRadioButtons[0x6];
+    /* 0x2D0 */ Component::GUI::AtkComponentRadioButton* ChocoboRadioButtons[0x3];
     /* 0x2E8 */ Component::GUI::AtkCollisionNode* ContentsSection;
     /*       */ byte _gap_0x2F0[0x8];
     /* 0x2F8 */ Component::GUI::AtkResNode* ChocoboPetInfo;
@@ -3197,11 +3197,11 @@ struct Client::UI::AddonGSInfoCardList /* Size=0x540 */
     /* 0x000 */ Component::GUI::AtkUnitBase AtkUnitBase;
     /*       */ byte _gap_0x220[0x128];
     /* 0x348 */ Component::GUI::AtkResNode* PageSelection;
-    /* 0x350 */ byte PageButtons[0x48];
+    /* 0x350 */ Component::GUI::AtkComponentButton* PageButtons[0x9];
     /* 0x398 */ Component::GUI::AtkComponentButton* GotoFirstPageButton;
     /* 0x3A0 */ Component::GUI::AtkComponentButton* GotoLastPageButton;
     /*       */ byte _gap_0x3A8[0x10];
-    /* 0x3B8 */ byte CardButtons[0xF0];
+    /* 0x3B8 */ Component::GUI::AtkComponentButton* CardButtons[0x1E];
     /* 0x4A8 */ Component::GUI::AtkTextNode* TotalTextNode;
     /* 0x4B0 */ Component::GUI::AtkImageNode* SelectedButtonBorderImage;
     /* 0x4B8 */ Component::GUI::AtkComponentDropDownList* CardDisplayFilter;
@@ -3442,7 +3442,7 @@ struct Client::UI::AddonLookingForGroupDetail /* Size=0x3E8 */
     /* 0x000 */ Component::GUI::AtkUnitBase AtkUnitBase;
     /*       */ byte _gap_0x220[0x28];
     /* 0x248 */ Component::GUI::AtkComponentButton* JoinPartyButton;
-    /* 0x250 */ byte JoinAllianceButtons[0x30];
+    /* 0x250 */ Component::GUI::AtkComponentButton* JoinAllianceButtons[0x6];
     /* 0x280 */ Component::GUI::AtkComponentButton* SendTellButton;
     /* 0x288 */ Component::GUI::AtkComponentButton* AllianceBackButton;
     /* 0x290 */ Component::GUI::AtkComponentButton* BackButton;
@@ -3557,14 +3557,14 @@ struct Client::UI::AddonMacro /* Size=0x30B0 */
 {
     /* 0x0000 */ Component::GUI::AtkUnitBase AtkUnitBase;
     /*        */ byte _gap_0x220[0x98];
-    /* 0x02B8 */ byte DragDropComponent[0x320];
+    /* 0x02B8 */ Component::GUI::AtkComponentDragDrop* DragDropComponent[0x64];
     /*        */ byte _gap_0x5D8[0x8];
     /* 0x05E0 */ __int32 DefaultIcon;
     /*        */ byte _gap_0x5E4[0x4];
     /*        */ byte _gap_0x5E8[0x4];
     /* 0x05EC */ __int32 MacroSetIcon[0x64];
     /*        */ byte _gap_0x77C[0x4];
-    /* 0x0780 */ byte MacroName[0x28A0];
+    /* 0x0780 */ Client::System::String::Utf8String MacroName[0x64];
     /* 0x3020 */ bool MacroCreated[0x64];
     /*        */ byte _gap_0x3084[0x4];
     /*        */ byte _gap_0x3088[0x18];
@@ -3661,11 +3661,18 @@ struct Client::UI::AddonNamePlate /* Size=0x470 */
     /*       */ byte _gap_0x46C[0x4];
 };
 
+struct Client::UI::AddonNeedGreed::LootItemInfo /* Size=0x28 */
+{
+    /* 0x00 */ unsigned __int32 ItemId;
+    /*      */ byte _gap_0x4[0x4];
+    /*      */ byte _gap_0x8[0x20];
+};
+
 struct Client::UI::AddonNeedGreed /* Size=0x728 */
 {
     /* 0x000 */ Component::GUI::AtkUnitBase AtkUnitBase;
     /*       */ byte _gap_0x220[0x8];
-    /* 0x228 */ byte Items[0x500];
+    /* 0x228 */ Client::UI::AddonNeedGreed::LootItemInfo Items[0x20];
 };
 
 struct Client::UI::AddonPartyList::PartyListMemberStruct::StatusIcons /* Size=0x50 */
@@ -3778,6 +3785,27 @@ struct Client::UI::AddonRaceChocoboResult /* Size=0x2C8 */
     /*       */ byte _gap_0x270[0x58];
 };
 
+enum RaidFinderEntryFlags: byte
+{
+    AvailableForSelection = 1,
+    Selected = 2,
+    Locked = 4,
+    Ultimate = 8,
+    Unreal = 32,
+    Extreme = 64
+};
+
+struct Client::UI::RaidFinderDutyEntry /* Size=0x140 */
+{
+    /* 0x000 */ Client::System::String::Utf8String DutyName;
+    /* 0x068 */ Client::System::String::Utf8String DutyLevel;
+    /* 0x0D0 */ Client::System::String::Utf8String CurrentlyRecruitingPartiesCount;
+    /* 0x138 */ Client::UI::RaidFinderEntryFlags Flags;
+    /*       */ byte _gap_0x139;
+    /*       */ byte _gap_0x13A[0x2];
+    /*       */ byte _gap_0x13C[0x4];
+};
+
 struct Client::UI::AddonRaidFinder /* Size=0xEF0 */
 {
     /* 0x000 */ Component::GUI::AtkUnitBase AtkUnitBase;
@@ -3800,29 +3828,8 @@ struct Client::UI::AddonRaidFinder /* Size=0xEF0 */
     /* 0x4DC */ __int32 NumDisplayedEntries;
     /* 0x4E0 */ __int32 SelectedTab;
     /*       */ byte _gap_0x4E4[0x4];
-    /* 0x4E8 */ byte EntryInfoArray[0xA00];
+    /* 0x4E8 */ Client::UI::RaidFinderDutyEntry EntryInfoArray[0x8];
     /*       */ byte _gap_0xEE8[0x8];
-};
-
-enum RaidFinderEntryFlags: byte
-{
-    AvailableForSelection = 1,
-    Selected = 2,
-    Locked = 4,
-    Ultimate = 8,
-    Unreal = 32,
-    Extreme = 64
-};
-
-struct Client::UI::RaidFinderDutyEntry /* Size=0x140 */
-{
-    /* 0x000 */ Client::System::String::Utf8String DutyName;
-    /* 0x068 */ Client::System::String::Utf8String DutyLevel;
-    /* 0x0D0 */ Client::System::String::Utf8String CurrentlyRecruitingPartiesCount;
-    /* 0x138 */ Client::UI::RaidFinderEntryFlags Flags;
-    /*       */ byte _gap_0x139;
-    /*       */ byte _gap_0x13A[0x2];
-    /*       */ byte _gap_0x13C[0x4];
 };
 
 struct Client::UI::AddonRecipeNote /* Size=0x22D0 */
@@ -4040,15 +4047,6 @@ struct Client::UI::AddonRecipeNote /* Size=0x22D0 */
     /*        */ byte _gap_0x2180[0x150];
 };
 
-struct Client::UI::AddonReconstructionBox /* Size=0x440 */
-{
-    /* 0x000 */ Component::GUI::AtkUnitBase AtkUnitBase;
-    /*       */ byte _gap_0x220[0x38];
-    /* 0x258 */ byte DonationInfoArray[0x1E0];
-    /* 0x438 */ __int32 ItemHovered;
-    /*       */ byte _gap_0x43C[0x4];
-};
-
 struct Client::UI::AddonItemDonationInfo /* Size=0x30 */
 {
     /* 0x00 */ void* UnkPtr1;
@@ -4058,6 +4056,15 @@ struct Client::UI::AddonItemDonationInfo /* Size=0x30 */
     /* 0x20 */ void* UnkPtr5;
     /*      */ byte _gap_0x28[0x4];
     /* 0x2C */ __int32 UnkValue1;
+};
+
+struct Client::UI::AddonReconstructionBox /* Size=0x440 */
+{
+    /* 0x000 */ Component::GUI::AtkUnitBase AtkUnitBase;
+    /*       */ byte _gap_0x220[0x38];
+    /* 0x258 */ Client::UI::AddonItemDonationInfo DonationInfoArray[0xA];
+    /* 0x438 */ __int32 ItemHovered;
+    /*       */ byte _gap_0x43C[0x4];
 };
 
 struct Client::UI::AddonRelicNoteBook::TargetNode /* Size=0x28 */
@@ -4295,21 +4302,21 @@ struct Client::UI::AddonSalvageItemSelector /* Size=0x1CB0 */
     /* 0x1CAC */ unsigned __int32 ItemCount;
 };
 
+struct Client::UI::AddonDeliveryItemInfo /* Size=0x68 */
+{
+    /* 0x00 */ unsigned __int32 ItemId;
+    /*      */ byte _gap_0x4[0x4];
+    /*      */ byte _gap_0x8[0x60];
+};
+
 struct Client::UI::AddonSatisfactionSupply /* Size=0x670 */
 {
     /* 0x000 */ Component::GUI::AtkUnitBase AtkUnitBase;
     /*       */ byte _gap_0x220[0x4];
     /* 0x224 */ __int32 HoveredElementIndex;
     /*       */ byte _gap_0x228[0xE0];
-    /* 0x308 */ byte DeliveryInfo[0x138];
+    /* 0x308 */ Client::UI::AddonDeliveryItemInfo DeliveryInfo[0x3];
     /*       */ byte _gap_0x440[0x230];
-};
-
-struct Client::UI::AddonDeliveryItemInfo /* Size=0x68 */
-{
-    /* 0x00 */ unsigned __int32 ItemId;
-    /*      */ byte _gap_0x4[0x4];
-    /*      */ byte _gap_0x8[0x60];
 };
 
 struct Client::UI::PopupMenu /* Size=0x68 */
@@ -4912,6 +4919,441 @@ struct Client::UI::UI3DModule::ObjectInfo /* Size=0x60 */
     /*      */ byte _gap_0x58[0x8];
 };
 
+struct Client::Game::Object::GameObjectID /* Size=0x8 */
+{
+    /* 0x0 */ unsigned __int32 ObjectID;
+    /* 0x4 */ byte Type;
+    /*     */ byte _gap_0x5;
+    /*     */ byte _gap_0x6[0x2];
+};
+
+struct Client::Game::Character::Character::CharacterVTable /* Size=0x2B8 */
+{
+    /*       */ byte _gap_0x0[0x270];
+    /* 0x270 */ __int64 GetStatusManager;
+    /*       */ byte _gap_0x278[0x8];
+    /* 0x280 */ __int64 GetCastInfo;
+    /*       */ byte _gap_0x288[0x18];
+    /* 0x2A0 */ __int64 GetForayInfo;
+    /*       */ byte _gap_0x2A8[0x8];
+    /* 0x2B0 */ __int64 IsMount;
+};
+
+struct Client::Game::Character::Character::MountContainer /* Size=0x60 */
+{
+    /*      */ byte _gap_0x0[0x8];
+    /* 0x08 */ Client::Game::Character::BattleChara* OwnerObject;
+    /* 0x10 */ Client::Game::Character::Character* MountObject;
+    /* 0x18 */ unsigned __int16 MountId;
+    /*      */ byte _gap_0x1A[0x2];
+    /* 0x1C */ float DismountTimer;
+    /* 0x20 */ byte Flags;
+    /*      */ byte _gap_0x21;
+    /*      */ byte _gap_0x22[0x2];
+    /* 0x24 */ unsigned __int32 MountedObjectIds[0x7];
+    /*      */ byte _gap_0x40[0x20];
+};
+
+struct Client::Game::Character::Companion /* Size=0x1BE0 */
+{
+    /* 0x0000 */ Client::Game::Character::Character Character;
+    /*        */ byte _gap_0x1B20[0xC0];
+};
+
+struct Client::Game::Character::Character::CompanionContainer /* Size=0x20 */
+{
+    /*      */ byte _gap_0x0[0x8];
+    /* 0x08 */ Client::Game::Character::BattleChara* OwnerObject;
+    /* 0x10 */ Client::Game::Character::Companion* CompanionObject;
+    /* 0x18 */ unsigned __int16 CompanionId;
+    /*      */ byte _gap_0x1A[0x2];
+    /*      */ byte _gap_0x1C[0x4];
+};
+
+struct Client::Game::Character::WeaponModelId /* Size=0x8 */
+{
+    /* 0x0 */ unsigned __int16 Type;
+    /* 0x2 */ unsigned __int16 Id;
+    /* 0x4 */ unsigned __int16 Variant;
+    /* 0x6 */ byte Stain;
+    /*     */ byte _gap_0x7;
+};
+
+struct Client::Game::Character::DrawObjectData /* Size=0x44 */
+{
+    /*      */ byte _gap_0x0[0x40];
+    /*      */ byte _gap_0x40[0x4];
+};
+
+struct Client::Game::Character::EquipmentModelId /* Size=0x4 */
+{
+    /* 0x0 */ unsigned __int16 Id;
+    /* 0x2 */ byte Variant;
+    /* 0x3 */ byte Stain;
+};
+
+struct Client::Game::Character::CustomizeData /* Size=0x1A */
+{
+    /* 0x00 */ byte Race;
+    /* 0x01 */ byte Sex;
+    /* 0x02 */ byte BodyType;
+    /*      */ byte _gap_0x3;
+    /* 0x04 */ byte Clan;
+    /*      */ byte _gap_0x5;
+    /*      */ byte _gap_0x6[0x2];
+    /*      */ byte _gap_0x8[0x8];
+    /*      */ byte _gap_0x10[0x4];
+    /* 0x14 */ byte LipColorFurPattern;
+    /*      */ byte _gap_0x15;
+    /*      */ byte _gap_0x16[0x2];
+    /*      */ byte _gap_0x18[0x2];
+};
+
+struct Client::Game::Character::DrawDataContainer /* Size=0x190 */
+{
+    /* 0x000 */ void** Vtable;
+    /* 0x008 */ void* Unk8;
+    /* 0x010 */ Client::Game::Character::WeaponModelId MainHandModel;
+    /*       */ byte _gap_0x18[0x8];
+    /* 0x020 */ Client::Game::Character::DrawObjectData MainHand;
+    /*       */ byte _gap_0x64[0x4];
+    /*       */ byte _gap_0x68[0x8];
+    /*       */ byte _gap_0x70[0x2];
+    /* 0x072 */ unsigned __int16 MainHandFlags1;
+    /* 0x074 */ byte MainHandFlags2;
+    /*       */ byte _gap_0x75;
+    /*       */ byte _gap_0x76[0x2];
+    /* 0x078 */ Client::Game::Character::WeaponModelId OffHandModel;
+    /*       */ byte _gap_0x80[0x8];
+    /* 0x088 */ Client::Game::Character::DrawObjectData OffHand;
+    /*       */ byte _gap_0xCC[0x4];
+    /*       */ byte _gap_0xD0[0x8];
+    /*       */ byte _gap_0xD8[0x2];
+    /* 0x0DA */ unsigned __int16 OffHandFlags1;
+    /* 0x0DC */ byte OffHandFlags2;
+    /*       */ byte _gap_0xDD;
+    /*       */ byte _gap_0xDE[0x2];
+    /* 0x0E0 */ Client::Game::Character::WeaponModelId UnkE0Model;
+    /*       */ byte _gap_0xE8[0x8];
+    /* 0x0F0 */ Client::Game::Character::DrawObjectData UnkF0;
+    /*       */ byte _gap_0x134[0x4];
+    /*       */ byte _gap_0x138[0x8];
+    /*       */ byte _gap_0x140[0x2];
+    /* 0x142 */ unsigned __int16 Unk144Flags1;
+    /* 0x144 */ byte Unk144Flags2;
+    /*       */ byte _gap_0x145;
+    /*       */ byte _gap_0x146[0x2];
+    /* 0x148 */ Client::Game::Character::EquipmentModelId Head;
+    /* 0x14C */ Client::Game::Character::EquipmentModelId Top;
+    /* 0x150 */ Client::Game::Character::EquipmentModelId Arms;
+    /* 0x154 */ Client::Game::Character::EquipmentModelId Legs;
+    /* 0x158 */ Client::Game::Character::EquipmentModelId Feet;
+    /* 0x15C */ Client::Game::Character::EquipmentModelId Ear;
+    /* 0x160 */ Client::Game::Character::EquipmentModelId Neck;
+    /* 0x164 */ Client::Game::Character::EquipmentModelId Wrist;
+    /* 0x168 */ Client::Game::Character::EquipmentModelId RFinger;
+    /* 0x16C */ Client::Game::Character::EquipmentModelId LFinger;
+    /* 0x170 */ Client::Game::Character::CustomizeData CustomizeData;
+    /* 0x18A */ unsigned __int32 Unk18A;
+    /* 0x18E */ byte Flags1;
+    /* 0x18F */ byte Flags2;
+};
+
+struct Client::Game::Character::Ornament /* Size=0x1B40 */
+{
+    /* 0x0000 */ Client::Game::Character::Character Character;
+    /* 0x1B20 */ unsigned __int32 OrnamentId;
+    /* 0x1B24 */ byte AttachmentPoint;
+    /*        */ byte _gap_0x1B25;
+    /*        */ byte _gap_0x1B26[0x2];
+    /*        */ byte _gap_0x1B28[0x18];
+};
+
+struct Client::Game::Character::Character::OrnamentContainer /* Size=0x28 */
+{
+    /*      */ byte _gap_0x0[0x8];
+    /* 0x08 */ Client::Game::Character::BattleChara* OwnerObject;
+    /* 0x10 */ Client::Game::Character::Ornament* OrnamentObject;
+    /* 0x18 */ unsigned __int16 OrnamentId;
+    /*      */ byte _gap_0x1A[0x2];
+    /*      */ byte _gap_0x1C[0x4];
+    /*      */ byte _gap_0x20[0x8];
+};
+
+struct Client::Game::ActionTimelineDriver /* Size=0x1F0 */
+{
+    /*       */ byte _gap_0x0[0xE0];
+    /* 0x0E0 */ unsigned __int16 TimelineIds[0xD];
+    /*       */ byte _gap_0xFA[0x2];
+    /*       */ byte _gap_0xFC[0x4];
+    /*       */ byte _gap_0x100[0x50];
+    /*       */ byte _gap_0x150[0x4];
+    /* 0x154 */ float TimelineSpeeds[0xD];
+    /*       */ byte _gap_0x188[0x68];
+};
+
+struct Client::Game::ActionTimelineManager /* Size=0x340 */
+{
+    /*       */ byte _gap_0x0[0x10];
+    /* 0x010 */ Client::Game::ActionTimelineDriver Driver;
+    /*       */ byte _gap_0x200[0xC0];
+    /* 0x2C0 */ float OverallSpeed;
+    /*       */ byte _gap_0x2C4[0x4];
+    /*       */ byte _gap_0x2C8[0x10];
+    /*       */ byte _gap_0x2D8[0x4];
+    /* 0x2DC */ unsigned __int16 BaseOverride;
+    /* 0x2DE */ unsigned __int16 LipsOverride;
+    /*       */ byte _gap_0x2E0[0x60];
+};
+
+enum BalloonType: unsigned __int32
+{
+    Timer = 0,
+    Unknown = 1
+};
+
+enum BalloonState: unsigned __int32
+{
+    Waiting = 0,
+    Active = 1,
+    Closing = 2,
+    Inactive = 3
+};
+
+struct Client::Game::Balloon /* Size=0x80 */
+{
+    /* 0x00 */ unsigned __int16 DefaultBalloonId;
+    /* 0x02 */ unsigned __int16 NowPlayingBalloonId;
+    /* 0x04 */ float PlayTimer;
+    /* 0x08 */ Client::Game::BalloonType Type;
+    /* 0x0C */ Client::Game::BalloonState State;
+    /* 0x10 */ Client::System::String::Utf8String Text;
+    /* 0x78 */ byte UnkBool;
+    /*      */ byte _gap_0x79;
+    /*      */ byte _gap_0x7A[0x2];
+    /*      */ byte _gap_0x7C[0x4];
+};
+
+struct Client::Graphics::Vfx::VfxData /* Size=0x1D0 */
+{
+    /*       */ byte _gap_0x0[0x1D0];
+};
+
+enum CharacterModes: byte
+{
+    None = 0,
+    Normal = 1,
+    EmoteLoop = 3,
+    Mounted = 4,
+    AnimLock = 8,
+    Carrying = 9,
+    InPositionLoop = 11,
+    Performance = 16
+};
+
+struct Client::Game::Character::Character /* Size=0x1B20 */
+{
+    union {
+    /* 0x0000 */ Client::Game::Object::GameObject GameObject;
+    /* 0x0000 */ Client::Game::Character::Character::CharacterVTable* VTable;
+    } _union_0x0;
+    /*        */ byte _gap_0x1A0[0x10];
+    /* 0x01B0 */ float ModelScale;
+    /* 0x01B4 */ __int32 ModelCharaId;
+    /* 0x01B8 */ __int32 ModelSkeletonId;
+    /* 0x01BC */ __int32 ModelCharaId_2;
+    /* 0x01C0 */ __int32 ModelSkeletonId_2;
+    /* 0x01C4 */ unsigned __int32 Health;
+    /* 0x01C8 */ unsigned __int32 MaxHealth;
+    /* 0x01CC */ unsigned __int32 Mana;
+    /* 0x01D0 */ unsigned __int32 MaxMana;
+    /* 0x01D4 */ unsigned __int16 GatheringPoints;
+    /* 0x01D6 */ unsigned __int16 MaxGatheringPoints;
+    /* 0x01D8 */ unsigned __int16 CraftingPoints;
+    /* 0x01DA */ unsigned __int16 MaxCraftingPoints;
+    /* 0x01DC */ __int16 TransformationId;
+    /* 0x01DE */ __int16 StatusEffectVFXId;
+    /* 0x01E0 */ byte ClassJob;
+    /* 0x01E1 */ byte Level;
+    /*        */ byte _gap_0x1E2[0x2];
+    /*        */ byte _gap_0x1E4[0x4];
+    /*        */ byte _gap_0x1E8[0x468];
+    /* 0x0650 */ Client::Game::Character::Character::MountContainer Mount;
+    /* 0x06B0 */ Client::Game::Character::Character::CompanionContainer Companion;
+    /* 0x06D0 */ Client::Game::Character::DrawDataContainer DrawData;
+    /* 0x0860 */ Client::Game::Character::Character::OrnamentContainer Ornament;
+    /*        */ byte _gap_0x888[0x68];
+    /* 0x08F0 */ Client::Game::ActionTimelineManager ActionTimelineManager;
+    /*        */ byte _gap_0xC30[0x50];
+    /* 0x0C80 */ unsigned __int32 PlayerTargetObjectID;
+    /*        */ byte _gap_0xC84[0x4];
+    /*        */ byte _gap_0xC88[0xB08];
+    /* 0x1790 */ Client::Game::Balloon Balloon;
+    /*        */ byte _gap_0x1810[0x188];
+    /* 0x1998 */ Client::Graphics::Vfx::VfxData* VfxData;
+    /* 0x19A0 */ Client::Graphics::Vfx::VfxData* VfxData2;
+    /*        */ byte _gap_0x19A8[0x20];
+    /* 0x19C8 */ Client::Graphics::Vfx::VfxData* Omen;
+    /*        */ byte _gap_0x19D0[0x80];
+    /* 0x1A50 */ Client::Game::Character::Companion* CompanionObject;
+    /*        */ byte _gap_0x1A58[0x10];
+    /* 0x1A68 */ byte FreeCompanyTag[0x6];
+    /*        */ byte _gap_0x1A6E[0x2];
+    /*        */ byte _gap_0x1A70[0x18];
+    /* 0x1A88 */ unsigned __int64 TargetObjectID;
+    /*        */ byte _gap_0x1A90[0x48];
+    /* 0x1AD8 */ unsigned __int32 NameID;
+    /*        */ byte _gap_0x1ADC[0x4];
+    /*        */ byte _gap_0x1AE0[0x8];
+    /* 0x1AE8 */ unsigned __int32 CompanionOwnerID;
+    /*        */ byte _gap_0x1AEC[0x4];
+    /*        */ byte _gap_0x1AF0[0x4];
+    /* 0x1AF4 */ unsigned __int16 CurrentWorld;
+    /* 0x1AF6 */ unsigned __int16 HomeWorld;
+    /* 0x1AF8 */ unsigned __int16 TitleID;
+    union {
+    /* 0x1AFA */ byte EventState;
+    /* 0x1AFA */ Client::Game::Character::Character::CharacterModes Mode;
+    } _union_0x1B00;
+    /*        */ byte _gap_0x1AFB;
+    /*        */ byte _gap_0x1AFC[0x4];
+    /*        */ byte _gap_0x1B00;
+    /* 0x1B01 */ byte ModeParam;
+    /* 0x1B02 */ byte OnlineStatus;
+    /* 0x1B03 */ byte Battalion;
+    /*        */ byte _gap_0x1B04[0x4];
+    /*        */ byte _gap_0x1B08[0x8];
+    /*        */ byte _gap_0x1B10[0x4];
+    /*        */ byte _gap_0x1B14[0x2];
+    /*        */ byte _gap_0x1B16;
+    /* 0x1B17 */ byte ShieldValue;
+    /*        */ byte _gap_0x1B18[0x2];
+    /*        */ byte _gap_0x1B1A;
+    /* 0x1B1B */ byte StatusFlags;
+    /*        */ byte _gap_0x1B1C[0x2];
+    /*        */ byte _gap_0x1B1E;
+    /* 0x1B1F */ byte StatusFlags4;
+};
+
+struct Client::Game::Status /* Size=0xC */
+{
+    /* 0x0 */ unsigned __int16 StatusID;
+    union {
+    /* 0x2 */ unsigned __int16 Param;
+    /* 0x2 */ byte StackCount;
+    } _union_0x2;
+    /* 0x4 */ float RemainingTime;
+    /* 0x8 */ unsigned __int32 SourceID;
+};
+
+struct Client::Game::StatusManager /* Size=0x188 */
+{
+    /* 0x000 */ Client::Game::Character::Character* Owner;
+    /* 0x008 */ Client::Game::Status Status[0x1E];
+    /* 0x170 */ unsigned __int32 Unk_170;
+    /* 0x174 */ unsigned __int16 Unk_174;
+    /*       */ byte _gap_0x176[0x2];
+    /* 0x178 */ __int64 Unk_178;
+    /* 0x180 */ byte Unk_180;
+    /*       */ byte _gap_0x181;
+    /*       */ byte _gap_0x182[0x2];
+    /*       */ byte _gap_0x184[0x4];
+};
+
+enum ActionType: byte
+{
+    None = 0,
+    Spell = 1,
+    Item = 2,
+    KeyItem = 3,
+    Ability = 4,
+    General = 5,
+    Companion = 6,
+    Unk_7 = 7,
+    Unk_8 = 8,
+    CraftAction = 9,
+    MainCommand = 10,
+    PetAction = 11,
+    Unk_12 = 12,
+    Mount = 13,
+    PvPAction = 14,
+    Waymark = 15,
+    ChocoboRaceAbility = 16,
+    ChocoboRaceItem = 17,
+    Unk_18 = 18,
+    SquadronAction = 19,
+    Accessory = 20
+};
+
+struct Client::Game::Character::Character::CastInfo /* Size=0x170 */
+{
+    /* 0x000 */ byte IsCasting;
+    /* 0x001 */ byte Interruptible;
+    /* 0x002 */ Client::Game::ActionType ActionType;
+    /*       */ byte _gap_0x3;
+    /* 0x004 */ unsigned __int32 ActionID;
+    /* 0x008 */ unsigned __int32 Unk_08;
+    /*       */ byte _gap_0xC[0x4];
+    /* 0x010 */ unsigned __int32 CastTargetID;
+    /*       */ byte _gap_0x14[0x4];
+    /*       */ byte _gap_0x18[0x8];
+    /* 0x020 */ Common::Math::Vector3 CastLocation;
+    /* 0x030 */ unsigned __int32 Unk_30;
+    /* 0x034 */ float CurrentCastTime;
+    /* 0x038 */ float TotalCastTime;
+    /* 0x03C */ float AdjustedTotalCastTime;
+    /* 0x040 */ unsigned __int32 UsedActionId;
+    /* 0x044 */ Client::Game::ActionType UsedActionType;
+    /*       */ byte _gap_0x45;
+    /*       */ byte _gap_0x46[0x2];
+    /*       */ byte _gap_0x48[0x10];
+    /* 0x058 */ __int64 ActionRecipientsObjectIdArray[0x20];
+    /* 0x158 */ __int32 ActionRecipientsCount;
+    /*       */ byte _gap_0x15C[0x4];
+    /*       */ byte _gap_0x160[0x10];
+};
+
+enum EurekaElement: byte
+{
+    None = 0,
+    Fire = 1,
+    Ice = 2,
+    Wind = 3,
+    Earth = 4,
+    Lightning = 5,
+    Water = 6
+};
+
+struct Client::Game::Character::Character::ForayInfo /* Size=0x2 */
+{
+    /* 0x0 */ byte ForayRank;
+    /* 0x1 */ Client::Game::Character::Character::EurekaElement Element;
+};
+
+struct Client::Game::Character::BattleChara /* Size=0x2D70 */
+{
+    /* 0x0000 */ Client::Game::Character::Character Character;
+    /*        */ byte _gap_0x1B20[0x40];
+    /* 0x1B60 */ Client::Game::StatusManager StatusManager;
+    /*        */ byte _gap_0x1CE8[0x8];
+    /* 0x1CF0 */ Client::Game::Character::Character::CastInfo SpellCastInfo;
+    /*        */ byte _gap_0x1E60[0xF00];
+    /* 0x2D60 */ Client::Game::Character::Character::ForayInfo Foray;
+    /*        */ byte _gap_0x2D62[0x2];
+    /*        */ byte _gap_0x2D64[0x4];
+    /*        */ byte _gap_0x2D68[0x8];
+};
+
+struct Client::UI::UI3DModule::MemberInfo /* Size=0x28 */
+{
+    /* 0x00 */ Client::UI::UI3DModule::MapInfo MapInfo;
+    /* 0x18 */ Client::Game::Character::BattleChara* BattleChara;
+    /* 0x20 */ byte Unk_20;
+    /*      */ byte _gap_0x21;
+    /*      */ byte _gap_0x22[0x2];
+    /*      */ byte _gap_0x24[0x4];
+};
+
 struct Client::UI::UI3DModule /* Size=0x11BE0 */
 {
     /*         */ byte _gap_0x0[0x10];
@@ -4921,21 +5363,21 @@ struct Client::UI::UI3DModule /* Size=0x11BE0 */
     /* 0x0E0C0 */ byte SortedObjectInfoPointerArray[0x12B8];
     /* 0x0F378 */ __int32 SortedObjectInfoCount;
     /*         */ byte _gap_0xF37C[0x4];
-    /* 0x0F380 */ byte NamePlateObjectInfoPointerArray[0x190];
+    /* 0x0F380 */ Client::UI::UI3DModule::ObjectInfo* NamePlateObjectInfoPointerArray[0x32];
     /* 0x0F510 */ __int32 NamePlateObjectInfoCount;
     /*         */ byte _gap_0xF514[0x4];
     /*         */ byte _gap_0xF518[0x20];
-    /* 0x0F538 */ byte NamePlateObjectIdList[0x190];
+    /* 0x0F538 */ Client::Game::Object::GameObjectID NamePlateObjectIdList[0x32];
     /* 0x0F6C8 */ byte NamePlateObjectIdList_2[0x190];
-    /* 0x0F858 */ byte CharacterObjectInfoPointerArray[0x190];
+    /* 0x0F858 */ Client::UI::UI3DModule::ObjectInfo* CharacterObjectInfoPointerArray[0x32];
     /* 0x0F9E8 */ __int32 CharacterObjectInfoCount;
     /*         */ byte _gap_0xF9EC[0x4];
-    /* 0x0F9F0 */ byte MapObjectInfoPointerArray[0x220];
+    /* 0x0F9F0 */ Client::UI::UI3DModule::ObjectInfo* MapObjectInfoPointerArray[0x44];
     /* 0x0FC10 */ __int32 MapObjectInfoCount;
     /*         */ byte _gap_0xFC14[0x4];
     /* 0x0FC18 */ Client::UI::UI3DModule::ObjectInfo* TargetObjectInfo;
-    /* 0x0FC20 */ byte MemberInfoArray[0x780];
-    /* 0x103A0 */ byte MemberInfoPointerArray[0x180];
+    /* 0x0FC20 */ Client::UI::UI3DModule::MemberInfo MemberInfoArray[0x30];
+    /* 0x103A0 */ Client::UI::UI3DModule::MemberInfo* MemberInfoPointerArray[0x30];
     /* 0x10520 */ __int32 MemberInfoCount;
     /*         */ byte _gap_0x10524[0x4];
     /*         */ byte _gap_0x10528[0x8];
@@ -5931,13 +6373,6 @@ struct Client::UI::Misc::UserFileManager::UserFileEvent /* Size=0x40 */
     /* 0x3F */ bool IsVirtual;
 };
 
-struct Client::UI::Misc::FieldMarkerModule /* Size=0xC78 */
-{
-    /* 0x000 */ Client::UI::Misc::UserFileManager::UserFileEvent UserFileEvent;
-    /* 0x040 */ byte PresetArray[0xC30];
-    /*       */ byte _gap_0xC70[0x8];
-};
-
 struct Client::UI::Misc::GamePresetPoint /* Size=0xC */
 {
     /* 0x0 */ __int32 X;
@@ -5959,6 +6394,13 @@ struct Client::UI::Misc::FieldMarkerPreset /* Size=0x68 */
     /* 0x61 */ byte Reserved;
     /* 0x62 */ unsigned __int16 ContentFinderConditionId;
     /* 0x64 */ __int32 Timestamp;
+};
+
+struct Client::UI::Misc::FieldMarkerModule /* Size=0xC78 */
+{
+    /* 0x000 */ Client::UI::Misc::UserFileManager::UserFileEvent UserFileEvent;
+    /* 0x040 */ Client::UI::Misc::FieldMarkerPreset PresetArray[0x1E];
+    /*       */ byte _gap_0xC70[0x8];
 };
 
 struct Client::UI::Misc::ItemFinderModuleRetainerResult /* Size=0x80 */
@@ -6757,6 +7199,14 @@ struct Client::UI::Info::InfoProxyBlacklist /* Size=0x1A00 */
     /*        */ byte _gap_0x730[0x12D0];
 };
 
+struct Client::UI::Info::InfoProxyCircle::Unk1 /* Size=0xF0 */
+{
+    /* 0x00 */ Client::System::String::Utf8String String0;
+    /*      */ byte _gap_0x68[0x18];
+    /* 0x80 */ Client::System::String::Utf8String String1;
+    /*      */ byte _gap_0xE8[0x8];
+};
+
 struct Client::UI::Info::InfoProxyCircleFinder /* Size=0x1C8 */
 {
     /* 0x000 */ Client::UI::Info::InfoProxyInterface InfoProxyInterface;
@@ -6849,6 +7299,17 @@ struct Client::UI::Info::InfoProxyInvitedInterface /* Size=0x28 */
     /* 0x18 */ Client::UI::Info::InfoProxyInvitedInterface::Unk18 Unk18Obj;
 };
 
+struct Client::UI::Info::InfoProxyCrossWorldLinkShell::CWLSEntry /* Size=0x88 */
+{
+    /* 0x00 */ Client::System::String::Utf8String Name;
+    /*      */ byte _gap_0x68[0x10];
+    /* 0x78 */ unsigned __int32 FoundationTime;
+    /*      */ byte _gap_0x7C[0x4];
+    /*      */ byte _gap_0x80[0x4];
+    /* 0x84 */ unsigned __int16 MembershipType;
+    /*      */ byte _gap_0x86[0x2];
+};
+
 struct Client::UI::Info::InfoProxyCrossWorldLinkShell /* Size=0x558 */
 {
     /* 0x000 */ Client::UI::Info::InfoProxyInvitedInterface InfoProxyInvitedInterface;
@@ -6860,7 +7321,7 @@ struct Client::UI::Info::InfoProxyCrossWorldLinkShell /* Size=0x558 */
     /*       */ byte _gap_0x34[0x4];
     /* 0x038 */ Client::System::String::Utf8String InvitedName;
     /* 0x0A0 */ Client::System::String::Utf8String UnkString0;
-    /* 0x108 */ byte CWLSArray[0x440];
+    /* 0x108 */ Client::UI::Info::InfoProxyCrossWorldLinkShell::CWLSEntry CWLSArray[0x8];
     /*       */ byte _gap_0x548[0x10];
 };
 
@@ -6873,6 +7334,20 @@ struct Client::UI::Info::InfoProxyCrossWorldLinkShellMember /* Size=0xD0 */
 struct Client::UI::Agent::CrestData /* Size=0x8 */
 {
     /* 0x0 */ unsigned __int64 Data;
+};
+
+struct Client::UI::Info::InfoProxyFreeCompany::RankData /* Size=0x58 */
+{
+    /* 0x00 */ byte Permissions[0xA];
+    /*      */ byte _gap_0xA[0x2];
+    /*      */ byte _gap_0xC[0x4];
+    /*      */ byte _gap_0x10[0x10];
+    /* 0x20 */ unsigned __int16 MemberCount;
+    /* 0x22 */ byte RankNumber;
+    /* 0x23 */ byte Name[0x10];
+    /*      */ byte _gap_0x33;
+    /*      */ byte _gap_0x34[0x4];
+    /*      */ byte _gap_0x38[0x20];
 };
 
 struct Client::UI::Info::InfoProxyFreeCompany /* Size=0x6E8 */
@@ -6907,7 +7382,7 @@ struct Client::UI::Info::InfoProxyFreeCompany /* Size=0x6E8 */
     /* 0x13E */ byte InfoTabIndex;
     /*       */ byte _gap_0x13F;
     /*       */ byte _gap_0x140[0x38];
-    /* 0x178 */ byte RankArray[0x4D0];
+    /* 0x178 */ Client::UI::Info::InfoProxyFreeCompany::RankData RankArray[0xE];
     /*       */ byte _gap_0x648[0xA0];
 };
 
@@ -6926,6 +7401,11 @@ struct Client::UI::Info::InfoProxyFreeCompanyMember /* Size=0xD0 */
     /*      */ byte _gap_0xC0[0x10];
 };
 
+struct Client::UI::Info::InfoProxyFriendList::StrBuf /* Size=0x40 */
+{
+    /* 0x00 */ byte Data[0x40];
+};
+
 struct Client::UI::Info::InfoProxyFriendList /* Size=0x3AD0 */
 {
     /* 0x0000 */ Client::UI::Info::InfoProxyCommonList InfoProxyCommonList;
@@ -6934,10 +7414,16 @@ struct Client::UI::Info::InfoProxyFriendList /* Size=0x3AD0 */
     /* 0x0140 */ Client::System::String::Utf8String Str3;
     /* 0x01A8 */ Client::System::String::Utf8String Str4;
     /* 0x0210 */ Client::System::String::Utf8String Str5;
-    /* 0x0278 */ byte Names[0x3200];
+    /* 0x0278 */ Client::UI::Info::InfoProxyFriendList::StrBuf Names[0xC8];
     /*        */ byte _gap_0x3478[0x320];
     /* 0x3798 */ byte Unk3798[0x320];
     /*        */ byte _gap_0x3AB8[0x18];
+};
+
+struct Client::UI::Info::InfoProxyItemSearch::Entry /* Size=0x8 */
+{
+    /* 0x0 */ unsigned __int32 ItemID;
+    /* 0x4 */ unsigned __int32 Count;
 };
 
 struct Client::UI::Info::InfoProxyItemSearch /* Size=0x3C8 */
@@ -6945,8 +7431,29 @@ struct Client::UI::Info::InfoProxyItemSearch /* Size=0x3C8 */
     /* 0x000 */ Client::UI::Info::InfoProxyPageInterface InfoProxyPageInterface;
     /*       */ byte _gap_0x20[0x8];
     /* 0x028 */ Client::System::String::Utf8String Query;
-    /* 0x090 */ byte Entries[0xA0];
+    /* 0x090 */ Client::UI::Info::InfoProxyItemSearch::Entry Entries[0x14];
     /*       */ byte _gap_0x130[0x298];
+};
+
+struct Client::UI::Info::InfoProxyLetter::Letter::ItemAttachment /* Size=0x8 */
+{
+    /* 0x0 */ unsigned __int32 ItemID;
+    /* 0x4 */ unsigned __int32 Count;
+};
+
+struct Client::UI::Info::InfoProxyLetter::Letter /* Size=0xA0 */
+{
+    /* 0x00 */ __int64 SenderContentID;
+    /* 0x08 */ unsigned __int32 Timestamp;
+    /* 0x0C */ Client::UI::Info::InfoProxyLetter::Letter::ItemAttachment Attachments[0x5];
+    /*      */ byte _gap_0x34[0x4];
+    /* 0x38 */ unsigned __int32 Gil;
+    /* 0x3C */ bool Read;
+    /*      */ byte _gap_0x3D;
+    /*      */ byte _gap_0x3E;
+    /* 0x3F */ byte Sender[0x20];
+    /* 0x5F */ byte MessagePreview[0x40];
+    /*      */ byte _gap_0x9F;
 };
 
 struct Client::UI::Info::InfoProxyLetter /* Size=0x5250 */
@@ -6961,11 +7468,16 @@ struct Client::UI::Info::InfoProxyLetter /* Size=0x5250 */
     /*        */ byte _gap_0x29;
     /*        */ byte _gap_0x2A[0x2];
     /*        */ byte _gap_0x2C[0x4];
-    /* 0x0030 */ byte Letters[0x5140];
+    /* 0x0030 */ Client::UI::Info::InfoProxyLetter::Letter Letters[0x82];
     /*        */ byte _gap_0x5170[0x8];
     /* 0x5178 */ Client::System::String::Utf8String UnkString0;
     /* 0x51E0 */ Client::System::String::Utf8String UnkString1;
     /*        */ byte _gap_0x5248[0x8];
+};
+
+struct Client::UI::Info::InfoProxyLinkShell::Entry /* Size=0x18 */
+{
+    /*      */ byte _gap_0x0[0x18];
 };
 
 struct Client::UI::Info::InfoProxyLinkShell /* Size=0x1E8 */
@@ -6974,7 +7486,7 @@ struct Client::UI::Info::InfoProxyLinkShell /* Size=0x1E8 */
     /*       */ byte _gap_0x18[0x20];
     /* 0x038 */ Client::System::String::Utf8String UnkString0;
     /* 0x0A0 */ Client::System::String::Utf8String UnkString1;
-    /* 0x108 */ byte LinkShells[0xC0];
+    /* 0x108 */ Client::UI::Info::InfoProxyLinkShell::Entry LinkShells[0x8];
     /*       */ byte _gap_0x1C8[0x20];
 };
 
@@ -7224,6 +7736,31 @@ struct Client::UI::Agent::AgentArchiveItem /* Size=0x30 */
     /* 0x28 */ Client::UI::Agent::ArchiveItem* ArchiveItem;
 };
 
+struct Client::UI::Agent::AgentBannerInterface::Storage::CharacterData /* Size=0x760 */
+{
+    /* 0x000 */ void** VTable;
+    /*       */ byte _gap_0x8[0x10];
+    /* 0x018 */ Client::System::String::Utf8String Name1;
+    /* 0x080 */ Client::System::String::Utf8String Name2;
+    /* 0x0E8 */ Client::System::String::Utf8String UnkString1;
+    /* 0x150 */ Client::System::String::Utf8String UnkString2;
+    /*       */ byte _gap_0x1B8[0x8];
+    /* 0x1C0 */ Client::System::String::Utf8String Job;
+    /*       */ byte _gap_0x228[0x10];
+    /* 0x238 */ unsigned __int32 WorldId;
+    /*       */ byte _gap_0x23C[0x4];
+    /* 0x240 */ Client::System::String::Utf8String UnkString3;
+    /*       */ byte _gap_0x2A8[0x8];
+    /* 0x2B0 */ void* CharaView;
+    /*       */ byte _gap_0x2B8[0x318];
+    /* 0x5D0 */ Component::GUI::AtkTexture AtkTexture;
+    /*       */ byte _gap_0x5E8[0xF8];
+    /* 0x6E0 */ Client::System::String::Utf8String Title;
+    /*       */ byte _gap_0x748[0x8];
+    /* 0x750 */ void* SomePointer;
+    /*       */ byte _gap_0x758[0x8];
+};
+
 struct Client::UI::Agent::AgentBannerInterface /* Size=0x30 */
 {
     /* 0x00 */ Component::GUI::AgentInterface AgentInterface;
@@ -7366,14 +7903,6 @@ struct Client::UI::Agent::ContextMenuTarget /* Size=0x60 */
     /* 0x42 */ byte FcName[0xE];
     /* 0x50 */ void* Unk_Info_Ptr;
     /*      */ byte _gap_0x58[0x8];
-};
-
-struct Client::Game::Object::GameObjectID /* Size=0x8 */
-{
-    /* 0x0 */ unsigned __int32 ObjectID;
-    /* 0x4 */ byte Type;
-    /*     */ byte _gap_0x5;
-    /*     */ byte _gap_0x6[0x2];
 };
 
 struct Client::UI::Agent::AgentContext /* Size=0x1748 */
@@ -7541,6 +8070,13 @@ struct Client::UI::Agent::AgentDeepDungeonMap /* Size=0x30 */
     /* 0x28 */ Client::UI::Agent::AgentDeepDungeonMapData* Data;
 };
 
+struct Client::UI::Agent::DeepDungeonStatusItem /* Size=0x70 */
+{
+    /* 0x00 */ unsigned __int32 ItemId;
+    /* 0x04 */ unsigned __int32 Icon;
+    /* 0x08 */ Client::System::String::Utf8String Name;
+};
+
 struct Client::UI::Agent::DeepDungeonStatusData /* Size=0x8D8 */
 {
     /* 0x000 */ unsigned __int32 Level;
@@ -7548,8 +8084,8 @@ struct Client::UI::Agent::DeepDungeonStatusData /* Size=0x8D8 */
     /* 0x008 */ unsigned __int32 ClassJobId;
     /*       */ byte _gap_0xC[0x4];
     /*       */ byte _gap_0x10[0x8];
-    /* 0x018 */ byte Pomander[0x700];
-    /* 0x718 */ byte Magicite[0x1C0];
+    /* 0x018 */ Client::UI::Agent::DeepDungeonStatusItem Pomander[0x10];
+    /* 0x718 */ Client::UI::Agent::DeepDungeonStatusItem Magicite[0x4];
 };
 
 struct Client::UI::Agent::AgentDeepDungeonStatus /* Size=0x30 */
@@ -7558,26 +8094,26 @@ struct Client::UI::Agent::AgentDeepDungeonStatus /* Size=0x30 */
     /* 0x28 */ Client::UI::Agent::DeepDungeonStatusData* Data;
 };
 
-struct Client::UI::Agent::DeepDungeonStatusItem /* Size=0x70 */
+struct Client::UI::Agent::ExplorationResultDataItemReturn /* Size=0xB0 */
 {
     /* 0x00 */ unsigned __int32 ItemId;
-    /* 0x04 */ unsigned __int32 Icon;
-    /* 0x08 */ Client::System::String::Utf8String Name;
+    /* 0x04 */ unsigned __int32 Quantity;
+    /* 0x08 */ byte UnknownBytes[0xA8];
 };
 
 struct Client::UI::Agent::ExplorationResultData /* Size=0x3CB0 */
 {
-    /* 0x0000 */ byte ValueArray[0x970];
+    /* 0x0000 */ Component::GUI::AtkValue ValueArray[0x97];
     /*        */ byte _gap_0x970[0x18];
     /* 0x0988 */ Client::System::String::Utf8String Rating;
     /*        */ byte _gap_0x9F0[0x10];
-    /* 0x0A00 */ byte ItemReturn[0x6E0];
+    /* 0x0A00 */ Client::UI::Agent::ExplorationResultDataItemReturn ItemReturn[0xA];
     /* 0x10E0 */ byte ItemReturnListCount;
     /*        */ byte _gap_0x10E1;
     /*        */ byte _gap_0x10E2[0x2];
     /*        */ byte _gap_0x10E4[0x4];
-    /* 0x10E8 */ byte StringArray[0x28A0];
-    /* 0x3988 */ byte StringPointerArray[0x320];
+    /* 0x10E8 */ Client::System::String::Utf8String StringArray[0x64];
+    /* 0x3988 */ Client::System::String::Utf8String* StringPointerArray[0x64];
     /* 0x3CA8 */ byte StringPointerListCount;
     /*        */ byte _gap_0x3CA9;
     /*        */ byte _gap_0x3CAA[0x2];
@@ -7600,13 +8136,6 @@ struct Client::UI::Agent::AgentAirshipExplorationResult /* Size=0x38 */
 struct Client::UI::Agent::AgentSubmersibleExplorationResult /* Size=0x38 */
 {
     /* 0x00 */ Client::UI::Agent::AgentExplorationResultInterface Interface;
-};
-
-struct Client::UI::Agent::ExplorationResultDataItemReturn /* Size=0xB0 */
-{
-    /* 0x00 */ unsigned __int32 ItemId;
-    /* 0x04 */ unsigned __int32 Quantity;
-    /* 0x08 */ byte UnknownBytes[0xA8];
 };
 
 enum WaymarkIndex: __int32
@@ -7714,24 +8243,6 @@ struct Client::UI::Agent::AgentGatheringNote /* Size=0x178 */
     /*       */ byte _gap_0x28[0x150];
 };
 
-struct Client::UI::Agent::GcArmyExpeditionData /* Size=0x1998 */
-{
-    /*        */ byte _gap_0x0[0x10];
-    /* 0x0010 */ __int32 NumEntries;
-    /*        */ byte _gap_0x14[0x4];
-    /* 0x0018 */ byte MissionInfoArray[0x1770];
-    /*        */ byte _gap_0x1788[0x210];
-};
-
-struct Client::UI::Agent::AgentGcArmyExpedition /* Size=0x48 */
-{
-    /* 0x00 */ Component::GUI::AgentInterface AgentInterface;
-    /* 0x28 */ Client::UI::Agent::GcArmyExpeditionData* ExpeditionData;
-    /*      */ byte _gap_0x30[0x10];
-    /* 0x40 */ __int32 SelectedTab;
-    /* 0x44 */ __int32 SelectedRow;
-};
-
 struct Client::UI::Agent::MissionInfo /* Size=0x78 */
 {
     /* 0x00 */ Client::System::String::Utf8String Name;
@@ -7743,6 +8254,24 @@ struct Client::UI::Agent::MissionInfo /* Size=0x78 */
     /*      */ byte _gap_0x71;
     /*      */ byte _gap_0x72[0x2];
     /*      */ byte _gap_0x74[0x4];
+};
+
+struct Client::UI::Agent::GcArmyExpeditionData /* Size=0x1998 */
+{
+    /*        */ byte _gap_0x0[0x10];
+    /* 0x0010 */ __int32 NumEntries;
+    /*        */ byte _gap_0x14[0x4];
+    /* 0x0018 */ Client::UI::Agent::MissionInfo MissionInfoArray[0x32];
+    /*        */ byte _gap_0x1788[0x210];
+};
+
+struct Client::UI::Agent::AgentGcArmyExpedition /* Size=0x48 */
+{
+    /* 0x00 */ Component::GUI::AgentInterface AgentInterface;
+    /* 0x28 */ Client::UI::Agent::GcArmyExpeditionData* ExpeditionData;
+    /*      */ byte _gap_0x30[0x10];
+    /* 0x40 */ __int32 SelectedTab;
+    /* 0x44 */ __int32 SelectedRow;
 };
 
 struct Client::UI::Agent::AgentGoldSaucer /* Size=0x210 */
@@ -7761,11 +8290,29 @@ struct Client::UI::Agent::AgentGoldSaucer /* Size=0x210 */
     /*       */ byte _gap_0x110[0x100];
 };
 
+struct Client::UI::Agent::SupplyProvisioningItem /* Size=0xA8 */
+{
+    /* 0x00 */ __int32 ItemId;
+    /* 0x04 */ __int32 ExpReward;
+    /* 0x08 */ __int32 SealReward;
+    /*      */ byte _gap_0xC[0x4];
+    /*      */ byte _gap_0x10[0x8];
+    /*      */ byte _gap_0x18[0x2];
+    /* 0x1A */ byte NumRequested;
+    /*      */ byte _gap_0x1B;
+    /*      */ byte _gap_0x1C[0x4];
+    /*      */ byte _gap_0x20[0x8];
+    /* 0x28 */ Client::System::String::Utf8String ItemName;
+    /* 0x90 */ __int32 ItemCategoryIconId;
+    /*      */ byte _gap_0x94[0x4];
+    /*      */ byte _gap_0x98[0x10];
+};
+
 struct Client::UI::Agent::SupplyProvisioningData /* Size=0x790 */
 {
     /*       */ byte _gap_0x0[0x40];
-    /* 0x040 */ byte SupplyData[0x540];
-    /* 0x580 */ byte ProvisioningData[0x1F8];
+    /* 0x040 */ Client::UI::Agent::SupplyProvisioningItem SupplyData[0x8];
+    /* 0x580 */ Client::UI::Agent::SupplyProvisioningItem ProvisioningData[0x3];
     /*       */ byte _gap_0x778[0x18];
 };
 
@@ -7802,22 +8349,13 @@ struct Client::UI::Agent::AgentGrandCompanySupply /* Size=0x98 */
     /*      */ byte _gap_0x94[0x4];
 };
 
-struct Client::UI::Agent::SupplyProvisioningItem /* Size=0xA8 */
+struct Client::UI::Agent::HudPartyMember /* Size=0x20 */
 {
-    /* 0x00 */ __int32 ItemId;
-    /* 0x04 */ __int32 ExpReward;
-    /* 0x08 */ __int32 SealReward;
-    /*      */ byte _gap_0xC[0x4];
-    /*      */ byte _gap_0x10[0x8];
-    /*      */ byte _gap_0x18[0x2];
-    /* 0x1A */ byte NumRequested;
-    /*      */ byte _gap_0x1B;
+    /* 0x00 */ Client::Game::Character::BattleChara* Object;
+    /* 0x08 */ byte* Name;
+    /* 0x10 */ unsigned __int64 ContentId;
+    /* 0x18 */ unsigned __int32 ObjectId;
     /*      */ byte _gap_0x1C[0x4];
-    /*      */ byte _gap_0x20[0x8];
-    /* 0x28 */ Client::System::String::Utf8String ItemName;
-    /* 0x90 */ __int32 ItemCategoryIconId;
-    /*      */ byte _gap_0x94[0x4];
-    /*      */ byte _gap_0x98[0x10];
 };
 
 struct Client::UI::Agent::HudPartyMemberEnmity /* Size=0xC */
@@ -7834,7 +8372,7 @@ struct Client::UI::Agent::AgentHUD /* Size=0x4BA0 */
     /* 0x0CB8 */ __int32 CompanionSummonTimer;
     /*        */ byte _gap_0xCBC[0x4];
     /*        */ byte _gap_0xCC0[0x8];
-    /* 0x0CC8 */ byte PartyMemberList[0x140];
+    /* 0x0CC8 */ Client::UI::Agent::HudPartyMember PartyMemberList[0xA];
     /*        */ byte _gap_0xE08[0x4B0];
     /* 0x12B8 */ __int16 PartyMemberCount;
     /*        */ byte _gap_0x12BA[0x2];
@@ -7847,419 +8385,32 @@ struct Client::UI::Agent::AgentHUD /* Size=0x4BA0 */
     /*        */ byte _gap_0x13F8[0x37A8];
 };
 
-struct Client::Game::Character::Character::CharacterVTable /* Size=0x2B8 */
-{
-    /*       */ byte _gap_0x0[0x270];
-    /* 0x270 */ __int64 GetStatusManager;
-    /*       */ byte _gap_0x278[0x8];
-    /* 0x280 */ __int64 GetCastInfo;
-    /*       */ byte _gap_0x288[0x18];
-    /* 0x2A0 */ __int64 GetForayInfo;
-    /*       */ byte _gap_0x2A8[0x8];
-    /* 0x2B0 */ __int64 IsMount;
-};
-
-struct Client::Game::Character::Character::MountContainer /* Size=0x60 */
-{
-    /*      */ byte _gap_0x0[0x8];
-    /* 0x08 */ Client::Game::Character::BattleChara* OwnerObject;
-    /* 0x10 */ Client::Game::Character::Character* MountObject;
-    /* 0x18 */ unsigned __int16 MountId;
-    /*      */ byte _gap_0x1A[0x2];
-    /* 0x1C */ float DismountTimer;
-    /* 0x20 */ byte Flags;
-    /*      */ byte _gap_0x21;
-    /*      */ byte _gap_0x22[0x2];
-    /* 0x24 */ unsigned __int32 MountedObjectIds[0x7];
-    /*      */ byte _gap_0x40[0x20];
-};
-
-struct Client::Game::Character::Companion /* Size=0x1BE0 */
-{
-    /* 0x0000 */ Client::Game::Character::Character Character;
-    /*        */ byte _gap_0x1B20[0xC0];
-};
-
-struct Client::Game::Character::Character::CompanionContainer /* Size=0x20 */
-{
-    /*      */ byte _gap_0x0[0x8];
-    /* 0x08 */ Client::Game::Character::BattleChara* OwnerObject;
-    /* 0x10 */ Client::Game::Character::Companion* CompanionObject;
-    /* 0x18 */ unsigned __int16 CompanionId;
-    /*      */ byte _gap_0x1A[0x2];
-    /*      */ byte _gap_0x1C[0x4];
-};
-
-struct Client::Game::Character::WeaponModelId /* Size=0x8 */
-{
-    /* 0x0 */ unsigned __int16 Type;
-    /* 0x2 */ unsigned __int16 Id;
-    /* 0x4 */ unsigned __int16 Variant;
-    /* 0x6 */ byte Stain;
-    /*     */ byte _gap_0x7;
-};
-
-struct Client::Game::Character::DrawObjectData /* Size=0x44 */
-{
-    /*      */ byte _gap_0x0[0x40];
-    /*      */ byte _gap_0x40[0x4];
-};
-
-struct Client::Game::Character::EquipmentModelId /* Size=0x4 */
-{
-    /* 0x0 */ unsigned __int16 Id;
-    /* 0x2 */ byte Variant;
-    /* 0x3 */ byte Stain;
-};
-
-struct Client::Game::Character::CustomizeData /* Size=0x1A */
-{
-    /* 0x00 */ byte Race;
-    /* 0x01 */ byte Sex;
-    /* 0x02 */ byte BodyType;
-    /*      */ byte _gap_0x3;
-    /* 0x04 */ byte Clan;
-    /*      */ byte _gap_0x5;
-    /*      */ byte _gap_0x6[0x2];
-    /*      */ byte _gap_0x8[0x8];
-    /*      */ byte _gap_0x10[0x4];
-    /* 0x14 */ byte LipColorFurPattern;
-    /*      */ byte _gap_0x15;
-    /*      */ byte _gap_0x16[0x2];
-    /*      */ byte _gap_0x18[0x2];
-};
-
-struct Client::Game::Character::DrawDataContainer /* Size=0x190 */
-{
-    /* 0x000 */ void** Vtable;
-    /* 0x008 */ void* Unk8;
-    /* 0x010 */ Client::Game::Character::WeaponModelId MainHandModel;
-    /*       */ byte _gap_0x18[0x8];
-    /* 0x020 */ Client::Game::Character::DrawObjectData MainHand;
-    /*       */ byte _gap_0x64[0x4];
-    /*       */ byte _gap_0x68[0x8];
-    /*       */ byte _gap_0x70[0x2];
-    /* 0x072 */ unsigned __int16 MainHandFlags1;
-    /* 0x074 */ byte MainHandFlags2;
-    /*       */ byte _gap_0x75;
-    /*       */ byte _gap_0x76[0x2];
-    /* 0x078 */ Client::Game::Character::WeaponModelId OffHandModel;
-    /*       */ byte _gap_0x80[0x8];
-    /* 0x088 */ Client::Game::Character::DrawObjectData OffHand;
-    /*       */ byte _gap_0xCC[0x4];
-    /*       */ byte _gap_0xD0[0x8];
-    /*       */ byte _gap_0xD8[0x2];
-    /* 0x0DA */ unsigned __int16 OffHandFlags1;
-    /* 0x0DC */ byte OffHandFlags2;
-    /*       */ byte _gap_0xDD;
-    /*       */ byte _gap_0xDE[0x2];
-    /* 0x0E0 */ Client::Game::Character::WeaponModelId UnkE0Model;
-    /*       */ byte _gap_0xE8[0x8];
-    /* 0x0F0 */ Client::Game::Character::DrawObjectData UnkF0;
-    /*       */ byte _gap_0x134[0x4];
-    /*       */ byte _gap_0x138[0x8];
-    /*       */ byte _gap_0x140[0x2];
-    /* 0x142 */ unsigned __int16 Unk144Flags1;
-    /* 0x144 */ byte Unk144Flags2;
-    /*       */ byte _gap_0x145;
-    /*       */ byte _gap_0x146[0x2];
-    /* 0x148 */ Client::Game::Character::EquipmentModelId Head;
-    /* 0x14C */ Client::Game::Character::EquipmentModelId Top;
-    /* 0x150 */ Client::Game::Character::EquipmentModelId Arms;
-    /* 0x154 */ Client::Game::Character::EquipmentModelId Legs;
-    /* 0x158 */ Client::Game::Character::EquipmentModelId Feet;
-    /* 0x15C */ Client::Game::Character::EquipmentModelId Ear;
-    /* 0x160 */ Client::Game::Character::EquipmentModelId Neck;
-    /* 0x164 */ Client::Game::Character::EquipmentModelId Wrist;
-    /* 0x168 */ Client::Game::Character::EquipmentModelId RFinger;
-    /* 0x16C */ Client::Game::Character::EquipmentModelId LFinger;
-    /* 0x170 */ Client::Game::Character::CustomizeData CustomizeData;
-    /* 0x18A */ unsigned __int32 Unk18A;
-    /* 0x18E */ byte Flags1;
-    /* 0x18F */ byte Flags2;
-};
-
-struct Client::Game::Character::Ornament /* Size=0x1B40 */
-{
-    /* 0x0000 */ Client::Game::Character::Character Character;
-    /* 0x1B20 */ unsigned __int32 OrnamentId;
-    /* 0x1B24 */ byte AttachmentPoint;
-    /*        */ byte _gap_0x1B25;
-    /*        */ byte _gap_0x1B26[0x2];
-    /*        */ byte _gap_0x1B28[0x18];
-};
-
-struct Client::Game::Character::Character::OrnamentContainer /* Size=0x28 */
-{
-    /*      */ byte _gap_0x0[0x8];
-    /* 0x08 */ Client::Game::Character::BattleChara* OwnerObject;
-    /* 0x10 */ Client::Game::Character::Ornament* OrnamentObject;
-    /* 0x18 */ unsigned __int16 OrnamentId;
-    /*      */ byte _gap_0x1A[0x2];
-    /*      */ byte _gap_0x1C[0x4];
-    /*      */ byte _gap_0x20[0x8];
-};
-
-struct Client::Game::ActionTimelineDriver /* Size=0x1F0 */
-{
-    /*       */ byte _gap_0x0[0xE0];
-    /* 0x0E0 */ unsigned __int16 TimelineIds[0xD];
-    /*       */ byte _gap_0xFA[0x2];
-    /*       */ byte _gap_0xFC[0x4];
-    /*       */ byte _gap_0x100[0x50];
-    /*       */ byte _gap_0x150[0x4];
-    /* 0x154 */ float TimelineSpeeds[0xD];
-    /*       */ byte _gap_0x188[0x68];
-};
-
-struct Client::Game::ActionTimelineManager /* Size=0x340 */
-{
-    /*       */ byte _gap_0x0[0x10];
-    /* 0x010 */ Client::Game::ActionTimelineDriver Driver;
-    /*       */ byte _gap_0x200[0xC0];
-    /* 0x2C0 */ float OverallSpeed;
-    /*       */ byte _gap_0x2C4[0x4];
-    /*       */ byte _gap_0x2C8[0x10];
-    /*       */ byte _gap_0x2D8[0x4];
-    /* 0x2DC */ unsigned __int16 BaseOverride;
-    /* 0x2DE */ unsigned __int16 LipsOverride;
-    /*       */ byte _gap_0x2E0[0x60];
-};
-
-enum BalloonType: unsigned __int32
-{
-    Timer = 0,
-    Unknown = 1
-};
-
-enum BalloonState: unsigned __int32
-{
-    Waiting = 0,
-    Active = 1,
-    Closing = 2,
-    Inactive = 3
-};
-
-struct Client::Game::Balloon /* Size=0x80 */
-{
-    /* 0x00 */ unsigned __int16 DefaultBalloonId;
-    /* 0x02 */ unsigned __int16 NowPlayingBalloonId;
-    /* 0x04 */ float PlayTimer;
-    /* 0x08 */ Client::Game::BalloonType Type;
-    /* 0x0C */ Client::Game::BalloonState State;
-    /* 0x10 */ Client::System::String::Utf8String Text;
-    /* 0x78 */ byte UnkBool;
-    /*      */ byte _gap_0x79;
-    /*      */ byte _gap_0x7A[0x2];
-    /*      */ byte _gap_0x7C[0x4];
-};
-
-struct Client::Graphics::Vfx::VfxData /* Size=0x1D0 */
-{
-    /*       */ byte _gap_0x0[0x1D0];
-};
-
-enum CharacterModes: byte
+enum IconFlagsTopRight: byte
 {
     None = 0,
-    Normal = 1,
-    EmoteLoop = 3,
-    Mounted = 4,
-    AnimLock = 8,
-    Carrying = 9,
-    InPositionLoop = 11,
-    Performance = 16
+    Dyeable = 1,
+    Glamoured = 4
 };
 
-struct Client::Game::Character::Character /* Size=0x1B20 */
+struct Client::UI::Agent::AgentInspect::ItemData::ColorRGB /* Size=0x3 */
 {
-    union {
-    /* 0x0000 */ Client::Game::Object::GameObject GameObject;
-    /* 0x0000 */ Client::Game::Character::Character::CharacterVTable* VTable;
-    } _union_0x0;
-    /*        */ byte _gap_0x1A0[0x10];
-    /* 0x01B0 */ float ModelScale;
-    /* 0x01B4 */ __int32 ModelCharaId;
-    /* 0x01B8 */ __int32 ModelSkeletonId;
-    /* 0x01BC */ __int32 ModelCharaId_2;
-    /* 0x01C0 */ __int32 ModelSkeletonId_2;
-    /* 0x01C4 */ unsigned __int32 Health;
-    /* 0x01C8 */ unsigned __int32 MaxHealth;
-    /* 0x01CC */ unsigned __int32 Mana;
-    /* 0x01D0 */ unsigned __int32 MaxMana;
-    /* 0x01D4 */ unsigned __int16 GatheringPoints;
-    /* 0x01D6 */ unsigned __int16 MaxGatheringPoints;
-    /* 0x01D8 */ unsigned __int16 CraftingPoints;
-    /* 0x01DA */ unsigned __int16 MaxCraftingPoints;
-    /* 0x01DC */ __int16 TransformationId;
-    /* 0x01DE */ __int16 StatusEffectVFXId;
-    /* 0x01E0 */ byte ClassJob;
-    /* 0x01E1 */ byte Level;
-    /*        */ byte _gap_0x1E2[0x2];
-    /*        */ byte _gap_0x1E4[0x4];
-    /*        */ byte _gap_0x1E8[0x468];
-    /* 0x0650 */ Client::Game::Character::Character::MountContainer Mount;
-    /* 0x06B0 */ Client::Game::Character::Character::CompanionContainer Companion;
-    /* 0x06D0 */ Client::Game::Character::DrawDataContainer DrawData;
-    /* 0x0860 */ Client::Game::Character::Character::OrnamentContainer Ornament;
-    /*        */ byte _gap_0x888[0x68];
-    /* 0x08F0 */ Client::Game::ActionTimelineManager ActionTimelineManager;
-    /*        */ byte _gap_0xC30[0x50];
-    /* 0x0C80 */ unsigned __int32 PlayerTargetObjectID;
-    /*        */ byte _gap_0xC84[0x4];
-    /*        */ byte _gap_0xC88[0xB08];
-    /* 0x1790 */ Client::Game::Balloon Balloon;
-    /*        */ byte _gap_0x1810[0x188];
-    /* 0x1998 */ Client::Graphics::Vfx::VfxData* VfxData;
-    /* 0x19A0 */ Client::Graphics::Vfx::VfxData* VfxData2;
-    /*        */ byte _gap_0x19A8[0x20];
-    /* 0x19C8 */ Client::Graphics::Vfx::VfxData* Omen;
-    /*        */ byte _gap_0x19D0[0x80];
-    /* 0x1A50 */ Client::Game::Character::Companion* CompanionObject;
-    /*        */ byte _gap_0x1A58[0x10];
-    /* 0x1A68 */ byte FreeCompanyTag[0x6];
-    /*        */ byte _gap_0x1A6E[0x2];
-    /*        */ byte _gap_0x1A70[0x18];
-    /* 0x1A88 */ unsigned __int64 TargetObjectID;
-    /*        */ byte _gap_0x1A90[0x48];
-    /* 0x1AD8 */ unsigned __int32 NameID;
-    /*        */ byte _gap_0x1ADC[0x4];
-    /*        */ byte _gap_0x1AE0[0x8];
-    /* 0x1AE8 */ unsigned __int32 CompanionOwnerID;
-    /*        */ byte _gap_0x1AEC[0x4];
-    /*        */ byte _gap_0x1AF0[0x4];
-    /* 0x1AF4 */ unsigned __int16 CurrentWorld;
-    /* 0x1AF6 */ unsigned __int16 HomeWorld;
-    /* 0x1AF8 */ unsigned __int16 TitleID;
-    union {
-    /* 0x1AFA */ byte EventState;
-    /* 0x1AFA */ Client::Game::Character::Character::CharacterModes Mode;
-    } _union_0x1B00;
-    /*        */ byte _gap_0x1AFB;
-    /*        */ byte _gap_0x1AFC[0x4];
-    /*        */ byte _gap_0x1B00;
-    /* 0x1B01 */ byte ModeParam;
-    /* 0x1B02 */ byte OnlineStatus;
-    /* 0x1B03 */ byte Battalion;
-    /*        */ byte _gap_0x1B04[0x4];
-    /*        */ byte _gap_0x1B08[0x8];
-    /*        */ byte _gap_0x1B10[0x4];
-    /*        */ byte _gap_0x1B14[0x2];
-    /*        */ byte _gap_0x1B16;
-    /* 0x1B17 */ byte ShieldValue;
-    /*        */ byte _gap_0x1B18[0x2];
-    /*        */ byte _gap_0x1B1A;
-    /* 0x1B1B */ byte StatusFlags;
-    /*        */ byte _gap_0x1B1C[0x2];
-    /*        */ byte _gap_0x1B1E;
-    /* 0x1B1F */ byte StatusFlags4;
+    /* 0x0 */ byte B;
+    /* 0x1 */ byte G;
+    /* 0x2 */ byte R;
 };
 
-struct Client::Game::StatusManager /* Size=0x188 */
+struct Client::UI::Agent::AgentInspect::ItemData /* Size=0x28 */
 {
-    /* 0x000 */ Client::Game::Character::Character* Owner;
-    /* 0x008 */ byte Status[0x168];
-    /* 0x170 */ unsigned __int32 Unk_170;
-    /* 0x174 */ unsigned __int16 Unk_174;
-    /*       */ byte _gap_0x176[0x2];
-    /* 0x178 */ __int64 Unk_178;
-    /* 0x180 */ byte Unk_180;
-    /*       */ byte _gap_0x181;
-    /*       */ byte _gap_0x182[0x2];
-    /*       */ byte _gap_0x184[0x4];
-};
-
-enum ActionType: byte
-{
-    None = 0,
-    Spell = 1,
-    Item = 2,
-    KeyItem = 3,
-    Ability = 4,
-    General = 5,
-    Companion = 6,
-    Unk_7 = 7,
-    Unk_8 = 8,
-    CraftAction = 9,
-    MainCommand = 10,
-    PetAction = 11,
-    Unk_12 = 12,
-    Mount = 13,
-    PvPAction = 14,
-    Waymark = 15,
-    ChocoboRaceAbility = 16,
-    ChocoboRaceItem = 17,
-    Unk_18 = 18,
-    SquadronAction = 19,
-    Accessory = 20
-};
-
-struct Client::Game::Character::Character::CastInfo /* Size=0x170 */
-{
-    /* 0x000 */ byte IsCasting;
-    /* 0x001 */ byte Interruptible;
-    /* 0x002 */ Client::Game::ActionType ActionType;
-    /*       */ byte _gap_0x3;
-    /* 0x004 */ unsigned __int32 ActionID;
-    /* 0x008 */ unsigned __int32 Unk_08;
-    /*       */ byte _gap_0xC[0x4];
-    /* 0x010 */ unsigned __int32 CastTargetID;
-    /*       */ byte _gap_0x14[0x4];
-    /*       */ byte _gap_0x18[0x8];
-    /* 0x020 */ Common::Math::Vector3 CastLocation;
-    /* 0x030 */ unsigned __int32 Unk_30;
-    /* 0x034 */ float CurrentCastTime;
-    /* 0x038 */ float TotalCastTime;
-    /* 0x03C */ float AdjustedTotalCastTime;
-    /* 0x040 */ unsigned __int32 UsedActionId;
-    /* 0x044 */ Client::Game::ActionType UsedActionType;
-    /*       */ byte _gap_0x45;
-    /*       */ byte _gap_0x46[0x2];
-    /*       */ byte _gap_0x48[0x10];
-    /* 0x058 */ __int64 ActionRecipientsObjectIdArray[0x20];
-    /* 0x158 */ __int32 ActionRecipientsCount;
-    /*       */ byte _gap_0x15C[0x4];
-    /*       */ byte _gap_0x160[0x10];
-};
-
-enum EurekaElement: byte
-{
-    None = 0,
-    Fire = 1,
-    Ice = 2,
-    Wind = 3,
-    Earth = 4,
-    Lightning = 5,
-    Water = 6
-};
-
-struct Client::Game::Character::Character::ForayInfo /* Size=0x2 */
-{
-    /* 0x0 */ byte ForayRank;
-    /* 0x1 */ Client::Game::Character::Character::EurekaElement Element;
-};
-
-struct Client::Game::Character::BattleChara /* Size=0x2D70 */
-{
-    /* 0x0000 */ Client::Game::Character::Character Character;
-    /*        */ byte _gap_0x1B20[0x40];
-    /* 0x1B60 */ Client::Game::StatusManager StatusManager;
-    /*        */ byte _gap_0x1CE8[0x8];
-    /* 0x1CF0 */ Client::Game::Character::Character::CastInfo SpellCastInfo;
-    /*        */ byte _gap_0x1E60[0xF00];
-    /* 0x2D60 */ Client::Game::Character::Character::ForayInfo Foray;
-    /*        */ byte _gap_0x2D62[0x2];
-    /*        */ byte _gap_0x2D64[0x4];
-    /*        */ byte _gap_0x2D68[0x8];
-};
-
-struct Client::UI::Agent::HudPartyMember /* Size=0x20 */
-{
-    /* 0x00 */ Client::Game::Character::BattleChara* Object;
-    /* 0x08 */ byte* Name;
-    /* 0x10 */ unsigned __int64 ContentId;
-    /* 0x18 */ unsigned __int32 ObjectId;
-    /*      */ byte _gap_0x1C[0x4];
+    /* 0x00 */ unsigned __int32 IconID;
+    /* 0x04 */ Client::UI::Agent::AgentInspect::ItemData::IconFlagsTopRight IconFlags1;
+    /* 0x05 */ Client::UI::Agent::AgentInspect::ItemData::ColorRGB Color;
+    /* 0x08 */ bool Filled;
+    /* 0x09 */ bool IsILevelSynced;
+    /*      */ byte _gap_0xA[0x2];
+    /*      */ byte _gap_0xC[0x4];
+    /* 0x10 */ __int16 ModelMain[0x4];
+    /* 0x18 */ __int16 ModelSub[0x4];
+    /* 0x20 */ Client::Game::InventoryItem* Item;
 };
 
 struct Client::UI::Agent::AgentInspect::FreeCompanyData /* Size=0x86 */
@@ -8289,7 +8440,7 @@ struct Client::UI::Agent::AgentInspect /* Size=0x558 */
     /* 0x170 */ Client::System::String::Utf8String ChocoboBarding1;
     /* 0x1D8 */ Client::System::String::Utf8String ChocoboBarding2;
     /* 0x240 */ Client::System::String::Utf8String ChocoboBarding3;
-    /* 0x2A8 */ byte Items[0x208];
+    /* 0x2A8 */ Client::UI::Agent::AgentInspect::ItemData Items[0xD];
     /* 0x4B0 */ Client::UI::Agent::AgentInspect::FreeCompanyData FreeCompany;
     /* 0x536 */ __int16 UnkObj536;
     /* 0x538 */ unsigned __int32 FetchCharacterDataStatus;
@@ -8437,6 +8588,28 @@ struct Client::UI::Agent::MapMarkerBase /* Size=0x38 */
     /*      */ byte _gap_0x30[0x8];
 };
 
+struct Client::UI::Agent::MapMarkerInfo /* Size=0x48 */
+{
+    /* 0x00 */ Client::UI::Agent::MapMarkerBase MapMarker;
+    /*      */ byte _gap_0x38[0x4];
+    /* 0x3C */ unsigned __int16 DataType;
+    /* 0x3E */ unsigned __int16 DataKey;
+    /*      */ byte _gap_0x40[0x4];
+    /* 0x44 */ byte MapMarkerSubKey;
+    /*      */ byte _gap_0x45;
+    /*      */ byte _gap_0x46[0x2];
+};
+
+struct Client::UI::Agent::TempMapMarker /* Size=0x108 */
+{
+    /* 0x000 */ Client::System::String::Utf8String TooltipText;
+    /* 0x068 */ Client::UI::Agent::MapMarkerBase MapMarker;
+    /*       */ byte _gap_0xA0[0x8];
+    /* 0x0A8 */ unsigned __int32 StyleFlags;
+    /* 0x0AC */ unsigned __int32 Type;
+    /*       */ byte _gap_0xB0[0x58];
+};
+
 struct Client::UI::Agent::FlagMapMarker /* Size=0x48 */
 {
     /* 0x00 */ Client::UI::Agent::MapMarkerBase MapMarker;
@@ -8444,6 +8617,14 @@ struct Client::UI::Agent::FlagMapMarker /* Size=0x48 */
     /* 0x3C */ unsigned __int32 MapId;
     /* 0x40 */ float XFloat;
     /* 0x44 */ float YFloat;
+};
+
+struct Client::UI::Agent::MiniMapMarker /* Size=0x40 */
+{
+    /* 0x00 */ unsigned __int16 DataType;
+    /* 0x02 */ unsigned __int16 DataKey;
+    /*      */ byte _gap_0x4[0x4];
+    /* 0x08 */ Client::UI::Agent::MapMarkerBase MapMarker;
 };
 
 struct Client::UI::Agent::AgentMap /* Size=0x68A8 */
@@ -8456,15 +8637,15 @@ struct Client::UI::Agent::AgentMap /* Size=0x68A8 */
     /* 0x01C0 */ Client::System::String::Utf8String SelectedMapPath;
     /* 0x0228 */ Client::System::String::Utf8String SelectedMapBgPath;
     /* 0x0290 */ Client::System::String::Utf8String CurrentMapBgPath;
-    /* 0x02F8 */ byte MapSelectionStrings[0x1A0];
+    /* 0x02F8 */ Client::System::String::Utf8String MapSelectionStrings[0x4];
     /* 0x0498 */ Client::System::String::Utf8String MapTitleString;
     /*        */ byte _gap_0x500[0x138];
-    /* 0x0638 */ byte MapMarkerInfoArray[0x2520];
-    /* 0x2B58 */ byte TempMapMarkerArray[0xC60];
+    /* 0x0638 */ Client::UI::Agent::MapMarkerInfo MapMarkerInfoArray[0x84];
+    /* 0x2B58 */ Client::UI::Agent::TempMapMarker TempMapMarkerArray[0xC];
     /* 0x37B8 */ Client::UI::Agent::FlagMapMarker FlagMapMarker;
-    /* 0x3800 */ byte WarpMarkerArray[0x2A0];
+    /* 0x3800 */ Client::UI::Agent::MapMarkerBase WarpMarkerArray[0xC];
     /* 0x3AA0 */ byte UnkArray2[0x3F0];
-    /* 0x3E90 */ byte MiniMapMarkerArray[0x1900];
+    /* 0x3E90 */ Client::UI::Agent::MiniMapMarker MiniMapMarkerArray[0x64];
     /*        */ byte _gap_0x5790[0xA8];
     /* 0x5838 */ float SelectedMapSizeFactorFloat;
     /* 0x583C */ float CurrentMapSizeFactorFloat;
@@ -8506,36 +8687,6 @@ struct Client::UI::Agent::AgentMap /* Size=0x68A8 */
     /*        */ byte _gap_0x59C6;
     /* 0x59C7 */ byte IsControlKeyPressed;
     /*        */ byte _gap_0x59C8[0xEE0];
-};
-
-struct Client::UI::Agent::MapMarkerInfo /* Size=0x48 */
-{
-    /* 0x00 */ Client::UI::Agent::MapMarkerBase MapMarker;
-    /*      */ byte _gap_0x38[0x4];
-    /* 0x3C */ unsigned __int16 DataType;
-    /* 0x3E */ unsigned __int16 DataKey;
-    /*      */ byte _gap_0x40[0x4];
-    /* 0x44 */ byte MapMarkerSubKey;
-    /*      */ byte _gap_0x45;
-    /*      */ byte _gap_0x46[0x2];
-};
-
-struct Client::UI::Agent::TempMapMarker /* Size=0x108 */
-{
-    /* 0x000 */ Client::System::String::Utf8String TooltipText;
-    /* 0x068 */ Client::UI::Agent::MapMarkerBase MapMarker;
-    /*       */ byte _gap_0xA0[0x8];
-    /* 0x0A8 */ unsigned __int32 StyleFlags;
-    /* 0x0AC */ unsigned __int32 Type;
-    /*       */ byte _gap_0xB0[0x58];
-};
-
-struct Client::UI::Agent::MiniMapMarker /* Size=0x40 */
-{
-    /* 0x00 */ unsigned __int16 DataType;
-    /* 0x02 */ unsigned __int16 DataKey;
-    /*      */ byte _gap_0x4[0x4];
-    /* 0x08 */ Client::UI::Agent::MapMarkerBase MapMarker;
 };
 
 enum MapType: unsigned __int32
@@ -8590,7 +8741,7 @@ struct Client::UI::Agent::PrismBoxCrystallizeItem /* Size=0x1C */
 struct Client::UI::Agent::MiragePrismPrismBoxData /* Size=0x1BAE0 */
 {
     /*         */ byte _gap_0x0[0x8];
-    /* 0x00008 */ byte PrismBoxItems[0x1A900];
+    /* 0x00008 */ Client::UI::Agent::PrismBoxItem PrismBoxItems[0x320];
     /* 0x1A908 */ Client::UI::Agent::PrismBoxItem TempContextItem;
     /* 0x1A990 */ __int32 PageItemIndexArray[0x32];
     /* 0x1AA58 */ __int32 TempContextItemIndex;
@@ -8601,7 +8752,7 @@ struct Client::UI::Agent::MiragePrismPrismBoxData /* Size=0x1BAE0 */
     /* 0x1AA70 */ __int32 CrystallizeCategory;
     /* 0x1AA74 */ __int32 CrystallizeItemIndex;
     /* 0x1AA78 */ __int32 CrystallizeItemCount;
-    /* 0x1AA7C */ byte CrystallizeItems[0xF50];
+    /* 0x1AA7C */ Client::UI::Agent::PrismBoxCrystallizeItem CrystallizeItems[0x8C];
     /* 0x1B9CC */ Client::UI::Agent::PrismBoxCrystallizeItem CrystallizeSelectedItem;
     /*         */ byte _gap_0x1B9E8[0x8];
     /*         */ byte _gap_0x1B9F0[0x4];
@@ -8708,7 +8859,7 @@ struct Client::UI::Agent::AgentModule /* Size=0xD78 */
     /* 0x014 */ unsigned __int32 FrameCounter;
     /* 0x018 */ float FrameDelta;
     /*       */ byte _gap_0x1C[0x4];
-    /* 0x020 */ byte Agents[0xD48];
+    /* 0x020 */ Component::GUI::AgentInterface* Agents[0x1A9];
     /* 0xD68 */ Client::UI::UIModule* UIModulePtr;
     /* 0xD70 */ Client::UI::Agent::AgentModule* AgentModulePtr;
 };
@@ -9078,9 +9229,15 @@ struct Client::UI::Agent::AgentMonsterNote /* Size=0x68 */
     /*      */ byte _gap_0x60[0x8];
 };
 
+struct Client::UI::Agent::MycItem /* Size=0x8 */
+{
+    /* 0x0 */ __int32 ActionId;
+    /* 0x4 */ __int32 Count;
+};
+
 struct Client::UI::Agent::MycItemCategory /* Size=0x184 */
 {
-    /* 0x000 */ byte ItemArray[0x180];
+    /* 0x000 */ Client::UI::Agent::MycItem ItemArray[0x30];
     /* 0x180 */ __int32 ItemCount;
 };
 
@@ -9117,12 +9274,6 @@ struct Client::UI::Agent::AgentMycItemBox /* Size=0x58 */
     /*      */ byte _gap_0x48[0x10];
 };
 
-struct Client::UI::Agent::MycItem /* Size=0x8 */
-{
-    /* 0x0 */ __int32 ActionId;
-    /* 0x4 */ __int32 Count;
-};
-
 struct Client::UI::Agent::AgentReadyCheck /* Size=0x3B0 */
 {
     /* 0x000 */ Component::GUI::AgentInterface AgentInterface;
@@ -9142,24 +9293,24 @@ struct Client::UI::Agent::AgentRecipeNote /* Size=0x560 */
     /*       */ byte _gap_0x3D8[0x188];
 };
 
+struct Client::UI::Agent::AgentItemDonationInfo /* Size=0x18 */
+{
+    /* 0x00 */ void* UnkPtr1;
+    /* 0x08 */ void* UnkPtr2;
+    /* 0x10 */ void* UnkPtr3;
+};
+
 struct Client::UI::Agent::AgentReconstructionBox /* Size=0x240 */
 {
     /* 0x000 */ Component::GUI::AgentInterface AgentInterface;
     /*       */ byte _gap_0x28[0x28];
-    /* 0x050 */ byte ItemDonationArray[0xF0];
+    /* 0x050 */ Client::UI::Agent::AgentItemDonationInfo ItemDonationArray[0xA];
     union {
     /* 0x140 */ __int32 LimitedTotal;
     /* 0x140 */ __int32 UnlimitedTotal;
     } _union_0x21C;
     /*       */ byte _gap_0x144[0x4];
     /*       */ byte _gap_0x148[0xF8];
-};
-
-struct Client::UI::Agent::AgentItemDonationInfo /* Size=0x18 */
-{
-    /* 0x00 */ void* UnkPtr1;
-    /* 0x08 */ void* UnkPtr2;
-    /* 0x10 */ void* UnkPtr3;
 };
 
 struct Client::UI::Agent::AgentRequest /* Size=0x460 */
@@ -9177,12 +9328,25 @@ struct Client::UI::Agent::AgentRequest /* Size=0x460 */
     /*       */ byte _gap_0x128[0x338];
 };
 
+struct Client::UI::Agent::AgentRetainerItemTransferData::DuplicateItemEntry /* Size=0x78 */
+{
+    /* 0x00 */ Client::System::String::Utf8String Name;
+    /* 0x68 */ bool Exists;
+    /*      */ byte _gap_0x69;
+    /*      */ byte _gap_0x6A[0x2];
+    /* 0x6C */ bool IsEnabled;
+    /*      */ byte _gap_0x6D;
+    /*      */ byte _gap_0x6E[0x2];
+    /* 0x70 */ unsigned __int32 ItemId;
+    /* 0x74 */ unsigned __int32 UiCategoryIconId;
+};
+
 struct Client::UI::Agent::AgentRetainerItemTransferData /* Size=0x41E8 */
 {
     /* 0x0000 */ __int32 ItemCount;
     /*        */ byte _gap_0x4[0x4];
     /*        */ byte _gap_0x8[0x8];
-    /* 0x0010 */ byte DuplicateItem[0x41A0];
+    /* 0x0010 */ Client::UI::Agent::AgentRetainerItemTransferData::DuplicateItemEntry DuplicateItem[0x8C];
     /*        */ byte _gap_0x41B0[0x38];
 };
 
@@ -9318,6 +9482,27 @@ struct Client::UI::Agent::AgentSatisfactionSupply::SatisfactionSupplyNpcInfo /* 
     /* 0x19 */ byte IsQuestSomething;
 };
 
+struct Client::UI::Agent::AgentSatisfactionSupply::ItemInfo /* Size=0x3C */
+{
+    /* 0x00 */ unsigned __int32 Id;
+    /* 0x04 */ unsigned __int16 Collectability1;
+    /* 0x06 */ unsigned __int16 Collectability2;
+    /* 0x08 */ unsigned __int16 Collectability3;
+    /* 0x0A */ unsigned __int16 Bonus;
+    /* 0x0C */ unsigned __int32 Reward1Id;
+    /* 0x10 */ unsigned __int32 Reward2Id;
+    /*      */ byte _gap_0x14[0x4];
+    /*      */ byte _gap_0x18[0x20];
+    /* 0x38 */ unsigned __int16 FishingSpotId;
+    /* 0x3A */ unsigned __int16 SpearFishingSpotId;
+};
+
+struct Client::UI::Agent::AgentDeliveryItemInfo /* Size=0x108 */
+{
+    /*       */ byte _gap_0x0[0xA0];
+    /* 0x0A0 */ Client::System::String::Utf8String ItemName;
+};
+
 struct Client::UI::Agent::AgentSatisfactionSupply /* Size=0x500 */
 {
     /* 0x000 */ Component::GUI::AgentInterface AgentInterface;
@@ -9335,13 +9520,13 @@ struct Client::UI::Agent::AgentSatisfactionSupply /* Size=0x500 */
     /* 0x07C */ byte CanGlamour;
     /*       */ byte _gap_0x7D;
     /*       */ byte _gap_0x7E[0x2];
-    /* 0x080 */ byte Item[0xB4];
+    /* 0x080 */ Client::UI::Agent::AgentSatisfactionSupply::ItemInfo Item[0x3];
     /*       */ byte _gap_0x134[0x4];
     /* 0x138 */ void* ENpcResidentRow;
     /* 0x140 */ void* Item1Row;
     /* 0x148 */ void* Item2Row;
     /* 0x150 */ void* Item3Row;
-    /* 0x158 */ byte DeliveryInfo[0x318];
+    /* 0x158 */ Client::UI::Agent::AgentDeliveryItemInfo DeliveryInfo[0x3];
     /* 0x470 */ void* Item1Reward1Row;
     /* 0x478 */ void* Item2Reward1Row;
     /* 0x480 */ void* Item3Reward1Row;
@@ -9362,12 +9547,6 @@ struct Client::UI::Agent::AgentSatisfactionSupply /* Size=0x500 */
     /* 0x4E8 */ unsigned __int32 TimeRemainingHours;
     /* 0x4EC */ unsigned __int32 TimeRemainingMinutes;
     /*       */ byte _gap_0x4F0[0x10];
-};
-
-struct Client::UI::Agent::AgentDeliveryItemInfo /* Size=0x108 */
-{
-    /*       */ byte _gap_0x0[0xA0];
-    /* 0x0A0 */ Client::System::String::Utf8String ItemName;
 };
 
 struct Client::UI::Agent::BalloonSlot /* Size=0x8 */
@@ -9533,7 +9712,7 @@ struct StdMap::SystemUInt32::PointerStdMapSystemUInt32PointerClientSystemResourc
 struct Client::System::Resource::ResourceGraph::CategoryContainer /* Size=0xA0 */
 {
     union {
-    /* 0x00 */ byte CategoryMaps[0xA0];
+    /* 0x00 */ StdMap::SystemUInt32::PointerStdMapSystemUInt32PointerClientSystemResourceHandleResourceHandle* CategoryMaps[0x14];
     /* 0x00 */ StdMap::SystemUInt32::PointerStdMapSystemUInt32PointerClientSystemResourceHandleResourceHandle* MainMap;
     } _union_0x0;
 };
@@ -9825,10 +10004,30 @@ struct Client::Game::SavedAppearanceManager::SavedAppearanceManagerVTable /* Siz
     /* 0x30 */ __int64 GetSlotCount;
 };
 
+struct Client::Game::SavedAppearanceSlot /* Size=0x140 */
+{
+    /* 0x000 */ unsigned __int32 Magic;
+    /* 0x004 */ unsigned __int32 Version;
+    /*       */ byte _gap_0x8[0x8];
+    /* 0x010 */ byte Customize[0x1A];
+    /*       */ byte _gap_0x2A[0x2];
+    /*       */ byte _gap_0x2C[0x4];
+    /* 0x030 */ byte LabelBytes[0x40];
+    /*       */ byte _gap_0x70[0xC0];
+    /*       */ byte _gap_0x130[0x4];
+    /* 0x134 */ bool IsCreated;
+    /*       */ byte _gap_0x135;
+    /*       */ byte _gap_0x136[0x2];
+    /*       */ byte _gap_0x138[0x4];
+    /* 0x13C */ byte SlotIndex;
+    /*       */ byte _gap_0x13D;
+    /*       */ byte _gap_0x13E[0x2];
+};
+
 struct Client::Game::SavedAppearanceManager /* Size=0x9EB8 */
 {
     /* 0x0000 */ Client::Game::SavedAppearanceManager::SavedAppearanceManagerVTable* VTable;
-    /* 0x0008 */ byte Slot[0x3200];
+    /* 0x0008 */ Client::Game::SavedAppearanceSlot Slot[0x28];
     /*        */ byte _gap_0x3208[0x6CB0];
 };
 
@@ -10005,7 +10204,7 @@ struct Client::Graphics::Scene::CameraManager /* Size=0x120 */
     /*       */ byte _gap_0x0[0x50];
     /* 0x050 */ __int32 CameraIndex;
     /*       */ byte _gap_0x54[0x4];
-    /* 0x058 */ byte CameraArray[0x70];
+    /* 0x058 */ Client::Graphics::Scene::Camera* CameraArray[0xE];
     /*       */ byte _gap_0xC8[0x58];
 };
 
@@ -10022,11 +10221,126 @@ struct Client::Graphics::Animation::AnimationResourceHandle /* Size=0x1 */
     /*     */ byte _gap_0x0;
 };
 
+struct FFXIVClientStructs::Havok::hkEnum::FFXIVClientStructsHavokhkJobhkJobType::SystemByte /* Size=0x1 */
+{
+    /* 0x0 */ byte Storage;
+};
+
+struct FFXIVClientStructs::Havok::hkEnum::FFXIVClientStructsHavokhkJobhkJobSpuType::SystemByte /* Size=0x1 */
+{
+    /* 0x0 */ byte Storage;
+};
+
+struct FFXIVClientStructs::Havok::hkJob /* Size=0x8 */
+{
+    /* 0x0 */ byte JobSubType;
+    /* 0x1 */ FFXIVClientStructs::Havok::hkEnum::FFXIVClientStructsHavokhkJobhkJobType::SystemByte JobType;
+    /* 0x2 */ FFXIVClientStructs::Havok::hkEnum::FFXIVClientStructsHavokhkJobhkJobSpuType::SystemByte SpuType;
+    /*     */ byte _gap_0x3;
+    /* 0x4 */ unsigned __int16 Size;
+    /* 0x6 */ __int16 ThreadAffinity;
+};
+
+struct FFXIVClientStructs::Havok::hkaAnimationControlListener /* Size=0x8 */
+{
+    /* 0x0 */ void* VTable;
+};
+
+struct Pointer::FFXIVClientStructsHavokhkaDefaultAnimationControl /* Size=0x8 */
+{
+    /*     */ byte _gap_0x0[0x8];
+};
+
+struct FFXIVClientStructs::Havok::hkArray::PointerFFXIVClientStructsHavokhkaDefaultAnimationControl /* Size=0x10 */
+{
+    /* 0x00 */ Pointer::FFXIVClientStructsHavokhkaDefaultAnimationControl* Data;
+    /* 0x08 */ __int32 Length;
+    /* 0x0C */ __int32 CapacityAndFlags;
+};
+
+struct FFXIVClientStructs::Havok::hkaAnimatedSkeleton /* Size=0x40 */
+{
+    /* 0x00 */ FFXIVClientStructs::Havok::hkReferencedObject hkReferencedObject;
+    /* 0x10 */ FFXIVClientStructs::Havok::hkaAnimationControlListener hkaAnimationControlListener;
+    /*      */ byte _gap_0x18[0x8];
+    /* 0x20 */ FFXIVClientStructs::Havok::hkArray::PointerFFXIVClientStructsHavokhkaDefaultAnimationControl AnimationControls;
+    /* 0x30 */ FFXIVClientStructs::Havok::hkaSkeleton* Skeleton;
+    /* 0x38 */ float ReferencePoseWeightThreshold;
+    /* 0x3C */ __int32 NumQuantizedAnimations;
+};
+
+enum AnimationType: __int32
+{
+    UnknownAnimation = 0,
+    InterleavedAnimation = 1,
+    MirroredAnimation = 2,
+    SplineCompressedAnimation = 3,
+    QuantizedCompressedAnimation = 4,
+    PredictiveCompressedAnimation = 5,
+    ReferencePoseAnimation = 6
+};
+
+struct FFXIVClientStructs::Havok::hkFlags::FFXIVClientStructsHavokhkaSampleBlendJobSingleAnimationSampleFlags::SystemInt32 /* Size=0x4 */
+{
+    /* 0x0 */ __int32 Storage;
+};
+
+struct FFXIVClientStructs::Havok::hkaSampleBlendJob::SingleAnimation /* Size=0x190 */
+{
+    /* 0x000 */ unsigned __int32 FrameIndex;
+    /* 0x004 */ float FrameDelta;
+    /* 0x008 */ float Weight;
+    /* 0x00C */ FFXIVClientStructs::Havok::hkaAnimation::AnimationType Type;
+    /* 0x010 */ byte Chunks[0x150];
+    /* 0x160 */ __int32 NumChunks;
+    /* 0x164 */ FFXIVClientStructs::Havok::hkFlags::FFXIVClientStructsHavokhkaSampleBlendJobSingleAnimationSampleFlags::SystemInt32 Flags;
+    /* 0x168 */ __int32 NumBones;
+    /* 0x16C */ __int32 NumFloats;
+    /* 0x170 */ FFXIVClientStructs::Havok::hkQsTransformf* BonesOut;
+    /* 0x178 */ float* FloatsOut;
+    /* 0x180 */ FFXIVClientStructs::Havok::hkaSkeleton::Partition* PartitionArray;
+    /* 0x188 */ __int16 NumPartitions;
+    /*       */ byte _gap_0x18A[0x2];
+    /*       */ byte _gap_0x18C[0x4];
+};
+
+struct FFXIVClientStructs::Havok::hkaJobDoneNotifier /* Size=0x10 */
+{
+    /* 0x00 */ void* hkSemaphore;
+    /* 0x08 */ unsigned __int32* Flag;
+};
+
+struct FFXIVClientStructs::Havok::hkaSampleBlendJob /* Size=0x70 */
+{
+    /* 0x00 */ FFXIVClientStructs::Havok::hkJob hkJob;
+    /* 0x08 */ FFXIVClientStructs::Havok::hkaAnimatedSkeleton* Skeleton;
+    /* 0x10 */ FFXIVClientStructs::Havok::hkQsTransformf* ReferenceBones;
+    /* 0x18 */ float* ReferenceFloats;
+    /* 0x20 */ FFXIVClientStructs::Havok::hkaBone* Bones;
+    /* 0x28 */ __int16* ParentIndices;
+    /* 0x30 */ FFXIVClientStructs::Havok::hkaSampleBlendJob::SingleAnimation* Animations;
+    /* 0x38 */ FFXIVClientStructs::Havok::hkQsTransformf* BonesOut;
+    /* 0x40 */ float* FloatsOut;
+    /* 0x48 */ FFXIVClientStructs::Havok::hkaJobDoneNotifier JobDoneNotifier;
+    /* 0x58 */ __int16 NumBones;
+    /* 0x5A */ __int16 NumSkeletonBones;
+    /* 0x5C */ __int32 NumFloats;
+    /* 0x60 */ __int32 ChunkBufferSize;
+    /* 0x64 */ float ReferencePoseWeightThreshold;
+    /* 0x68 */ unsigned __int16 NumAnimationsAllocated;
+    /* 0x6A */ unsigned __int16 NumAnims;
+    /* 0x6C */ byte ConvertToModel;
+    /* 0x6D */ byte SampleOnly;
+    /* 0x6E */ byte UseSlerpForQuantized;
+    /*      */ byte _gap_0x6F;
+};
+
 struct Client::Graphics::Render::PartialSkeleton /* Size=0x1C0 */
 {
     /* 0x000 */ void* VTable;
     /*       */ byte _gap_0x8[0x18];
-    /* 0x020 */ byte Jobs[0x100];
+    /* 0x020 */ FFXIVClientStructs::Havok::hkaSampleBlendJob Jobs[0x2];
+    /*       */ byte _gap_0x100[0x20];
     /* 0x120 */ __int16 ConnectedParentBoneIndex;
     /* 0x122 */ __int16 ConnectedBoneIndex;
     /*       */ byte _gap_0x124[0x4];
@@ -10143,19 +10457,19 @@ struct Client::Graphics::Scene::EnvLocation /* Size=0xB0 */
     /*      */ byte _gap_0x90[0x20];
 };
 
-struct Client::Graphics::Scene::EnvScene /* Size=0x790 */
-{
-    /*       */ byte _gap_0x0[0xB0];
-    /* 0x0B0 */ byte EnvSpaces[0x680];
-    /*       */ byte _gap_0x730[0x60];
-};
-
 struct Client::Graphics::Scene::EnvSpace /* Size=0xD0 */
 {
     /* 0x00 */ Client::Graphics::Scene::DrawObject DrawObject;
     /*      */ byte _gap_0x90[0x20];
     /* 0xB0 */ Client::Graphics::Scene::EnvLocation* EnvLocation;
     /*      */ byte _gap_0xB8[0x18];
+};
+
+struct Client::Graphics::Scene::EnvScene /* Size=0x790 */
+{
+    /*       */ byte _gap_0x0[0xB0];
+    /* 0x0B0 */ Client::Graphics::Scene::EnvSpace EnvSpaces[0x8];
+    /*       */ byte _gap_0x730[0x60];
 };
 
 struct Client::Graphics::Scene::Human /* Size=0xA80 */
@@ -10241,62 +10555,6 @@ struct Client::Graphics::Physics::BoneSimulator /* Size=0x100 */
     /*       */ byte _gap_0x50[0xB0];
 };
 
-struct Client::Graphics::Render::Manager /* Size=0x2D710 */
-{
-    /* 0x00000 */ void* Vtbl;
-    /* 0x00008 */ byte ViewArray[0xB400];
-    /*         */ byte _gap_0xB408[0x22308];
-};
-
-struct Client::Graphics::Render::OffscreenRenderingManager /* Size=0x190 */
-{
-    /* 0x000 */ void* VTable;
-    /* 0x008 */ void* JobSystem_vtbl;
-    /*       */ byte _gap_0x10[0xB8];
-    /* 0x0C8 */ void* Camera_1;
-    /* 0x0D0 */ void* Camera_2;
-    /* 0x0D8 */ void* Camera_3;
-    /* 0x0E0 */ void* Camera_4;
-    /*       */ byte _gap_0xE8[0xA8];
-};
-
-struct Client::Graphics::Render::RenderTargetManager /* Size=0x480 */
-{
-    /* 0x000 */ void* VTable;
-    /* 0x008 */ Client::Graphics::Render::Notifier Notifier;
-    /* 0x020 */ byte RenderTargetArray[0x1C0];
-    /* 0x1E0 */ Client::Graphics::Render::Texture* OffscreenRenderTarget_1;
-    /* 0x1E8 */ Client::Graphics::Render::Texture* OffscreenRenderTarget_2;
-    /* 0x1F0 */ Client::Graphics::Render::Texture* OffscreenRenderTarget_3;
-    /* 0x1F8 */ Client::Graphics::Render::Texture* OffscreenRenderTarget_4;
-    /* 0x200 */ Client::Graphics::Render::Texture* OffscreenGBuffer;
-    /* 0x208 */ Client::Graphics::Render::Texture* OffscreenDepthStencil;
-    /* 0x210 */ Client::Graphics::Render::Texture* OffscreenRenderTarget_Unk1;
-    /* 0x218 */ Client::Graphics::Render::Texture* OffscreenRenderTarget_Unk2;
-    /* 0x220 */ Client::Graphics::Render::Texture* OffscreenRenderTarget_Unk3;
-    /*       */ byte _gap_0x228[0x20];
-    /* 0x248 */ unsigned __int32 Resolution_Width;
-    /* 0x24C */ unsigned __int32 Resolution_Height;
-    /* 0x250 */ unsigned __int32 ShadowMap_Width;
-    /* 0x254 */ unsigned __int32 ShadowMap_Height;
-    /* 0x258 */ unsigned __int32 NearShadowMap_Width;
-    /* 0x25C */ unsigned __int32 NearShadowMap_Height;
-    /* 0x260 */ unsigned __int32 FarShadowMap_Width;
-    /* 0x264 */ unsigned __int32 FarShadowMap_Height;
-    /* 0x268 */ bool UnkBool_1;
-    /*       */ byte _gap_0x269;
-    /*       */ byte _gap_0x26A[0x2];
-    /*       */ byte _gap_0x26C[0x4];
-    /* 0x270 */ byte RenderTargetArray2[0x188];
-    /*       */ byte _gap_0x3F8[0x88];
-};
-
-struct Client::Graphics::Render::ShadowCamera /* Size=0x150 */
-{
-    /* 0x000 */ Client::Graphics::Render::Camera Camera;
-    /*       */ byte _gap_0x130[0x20];
-};
-
 struct Client::Graphics::Render::SubView /* Size=0x58 */
 {
     /* 0x00 */ void* Vtbl;
@@ -10319,7 +10577,63 @@ struct Client::Graphics::Render::View /* Size=0x5A0 */
     /* 0x008 */ unsigned __int32 Flags;
     /*       */ byte _gap_0xC[0x4];
     /* 0x010 */ Common::Math::Rectangle CanvasRegion;
-    /* 0x020 */ byte SubViewArray[0x580];
+    /* 0x020 */ Client::Graphics::Render::SubView SubViewArray[0x10];
+};
+
+struct Client::Graphics::Render::Manager /* Size=0x2D710 */
+{
+    /* 0x00000 */ void* Vtbl;
+    /* 0x00008 */ Client::Graphics::Render::View ViewArray[0x20];
+    /*         */ byte _gap_0xB408[0x22308];
+};
+
+struct Client::Graphics::Render::OffscreenRenderingManager /* Size=0x190 */
+{
+    /* 0x000 */ void* VTable;
+    /* 0x008 */ void* JobSystem_vtbl;
+    /*       */ byte _gap_0x10[0xB8];
+    /* 0x0C8 */ void* Camera_1;
+    /* 0x0D0 */ void* Camera_2;
+    /* 0x0D8 */ void* Camera_3;
+    /* 0x0E0 */ void* Camera_4;
+    /*       */ byte _gap_0xE8[0xA8];
+};
+
+struct Client::Graphics::Render::RenderTargetManager /* Size=0x480 */
+{
+    /* 0x000 */ void* VTable;
+    /* 0x008 */ Client::Graphics::Render::Notifier Notifier;
+    /* 0x020 */ Client::Graphics::Render::Texture* RenderTargetArray[0x38];
+    /* 0x1E0 */ Client::Graphics::Render::Texture* OffscreenRenderTarget_1;
+    /* 0x1E8 */ Client::Graphics::Render::Texture* OffscreenRenderTarget_2;
+    /* 0x1F0 */ Client::Graphics::Render::Texture* OffscreenRenderTarget_3;
+    /* 0x1F8 */ Client::Graphics::Render::Texture* OffscreenRenderTarget_4;
+    /* 0x200 */ Client::Graphics::Render::Texture* OffscreenGBuffer;
+    /* 0x208 */ Client::Graphics::Render::Texture* OffscreenDepthStencil;
+    /* 0x210 */ Client::Graphics::Render::Texture* OffscreenRenderTarget_Unk1;
+    /* 0x218 */ Client::Graphics::Render::Texture* OffscreenRenderTarget_Unk2;
+    /* 0x220 */ Client::Graphics::Render::Texture* OffscreenRenderTarget_Unk3;
+    /*       */ byte _gap_0x228[0x20];
+    /* 0x248 */ unsigned __int32 Resolution_Width;
+    /* 0x24C */ unsigned __int32 Resolution_Height;
+    /* 0x250 */ unsigned __int32 ShadowMap_Width;
+    /* 0x254 */ unsigned __int32 ShadowMap_Height;
+    /* 0x258 */ unsigned __int32 NearShadowMap_Width;
+    /* 0x25C */ unsigned __int32 NearShadowMap_Height;
+    /* 0x260 */ unsigned __int32 FarShadowMap_Width;
+    /* 0x264 */ unsigned __int32 FarShadowMap_Height;
+    /* 0x268 */ bool UnkBool_1;
+    /*       */ byte _gap_0x269;
+    /*       */ byte _gap_0x26A[0x2];
+    /*       */ byte _gap_0x26C[0x4];
+    /* 0x270 */ Client::Graphics::Render::Texture* RenderTargetArray2[0x31];
+    /*       */ byte _gap_0x3F8[0x88];
+};
+
+struct Client::Graphics::Render::ShadowCamera /* Size=0x150 */
+{
+    /* 0x000 */ Client::Graphics::Render::Camera Camera;
+    /*       */ byte _gap_0x130[0x20];
 };
 
 struct Client::Graphics::Kernel::CVector; /* Size=unknown due to generic type with parameters */
@@ -10964,15 +11278,14 @@ struct Client::Game::InventoryManager /* Size=0x3620 */
     /*        */ byte _gap_0x1E10[0x1810];
 };
 
-struct Client::Game::MonsterNoteManager /* Size=0x460 */
+struct Client::Game::RankData /* Size=0x4 */
 {
-    /* 0x000 */ byte RankDataArray[0x300];
-    /*       */ byte _gap_0x300[0x160];
+    /* 0x0 */ byte Counts[0x4];
 };
 
 struct Client::Game::MonsterNoteRankInfo /* Size=0x40 */
 {
-    /* 0x00 */ byte RankDataArray[0x28];
+    /* 0x00 */ Client::Game::RankData RankDataArray[0xA];
     /* 0x28 */ __int64 Flags;
     /* 0x30 */ __int32 Rank;
     /* 0x34 */ __int32 Unknown2;
@@ -10980,9 +11293,10 @@ struct Client::Game::MonsterNoteRankInfo /* Size=0x40 */
     /* 0x3C */ __int32 Unknown3;
 };
 
-struct Client::Game::RankData /* Size=0x4 */
+struct Client::Game::MonsterNoteManager /* Size=0x460 */
 {
-    /* 0x0 */ byte Counts[0x4];
+    /* 0x000 */ Client::Game::MonsterNoteRankInfo RankDataArray[0xC];
+    /*       */ byte _gap_0x300[0x160];
 };
 
 struct Client::Game::QuestManager::QuestListArray /* Size=0x2D0 */
@@ -10990,19 +11304,72 @@ struct Client::Game::QuestManager::QuestListArray /* Size=0x2D0 */
     /*       */ byte _gap_0x0[0x2D0];
 };
 
+struct Application::Network::WorkDefinitions::QuestWork /* Size=0x18 */
+{
+    /*      */ byte _gap_0x0[0x8];
+    /* 0x08 */ unsigned __int16 QuestId;
+    /* 0x0A */ byte Sequence;
+    /* 0x0B */ byte Flags;
+    /* 0x0C */ byte Variables[0x6];
+    /* 0x12 */ byte AcceptClassJob;
+    /*      */ byte _gap_0x13;
+    /*      */ byte _gap_0x14[0x4];
+};
+
+struct Application::Network::WorkDefinitions::DailyQuestWork /* Size=0x10 */
+{
+    /*      */ byte _gap_0x0[0x8];
+    /* 0x08 */ unsigned __int16 QuestId;
+    /* 0x0A */ byte Flags;
+    /*      */ byte _gap_0xB;
+    /*      */ byte _gap_0xC[0x4];
+};
+
+struct Application::Network::WorkDefinitions::TrackingWork /* Size=0x10 */
+{
+    /*      */ byte _gap_0x0[0x8];
+    /* 0x08 */ byte QuestType;
+    /* 0x09 */ byte Index;
+    /*      */ byte _gap_0xA[0x2];
+    /*      */ byte _gap_0xC[0x4];
+};
+
+struct Application::Network::WorkDefinitions::BeastReputationWork /* Size=0x10 */
+{
+    /*      */ byte _gap_0x0[0x8];
+    /* 0x08 */ byte Rank;
+    /*      */ byte _gap_0x9;
+    /* 0x0A */ unsigned __int16 Value;
+    /*      */ byte _gap_0xC[0x4];
+};
+
+struct Application::Network::WorkDefinitions::LeveWork /* Size=0x18 */
+{
+    /*      */ byte _gap_0x0[0x8];
+    /* 0x08 */ unsigned __int16 LeveId;
+    /* 0x0A */ byte Sequence;
+    /*      */ byte _gap_0xB;
+    /* 0x0C */ unsigned __int16 Flags;
+    /* 0x0E */ unsigned __int16 LeveSeed;
+    /* 0x10 */ byte ClearClass;
+    /*      */ byte _gap_0x11;
+    /*      */ byte _gap_0x12[0x2];
+    /*      */ byte _gap_0x14[0x4];
+};
+
 struct Client::Game::QuestManager /* Size=0xF00 */
 {
     union {
     /* 0x000 */ Client::Game::QuestManager::QuestListArray Quest;
-    /* 0x000 */ byte NormalQuests[0x2D0];
+    /* 0x000 */ Application::Network::WorkDefinitions::QuestWork NormalQuests[0x1E];
     } _union_0x10;
     /*       */ byte _gap_0x2D0[0x298];
-    /* 0x568 */ byte DailyQuests[0xC0];
+    /* 0x568 */ Application::Network::WorkDefinitions::DailyQuestWork DailyQuests[0xC];
     /*       */ byte _gap_0x628[0x30];
-    /* 0x658 */ byte TrackedQuests[0x50];
+    /* 0x658 */ Application::Network::WorkDefinitions::TrackingWork TrackedQuests[0x5];
     /*       */ byte _gap_0x6A8[0x4C8];
-    /* 0xB70 */ byte BeastReputation[0x110];
-    /* 0xC80 */ byte LeveQuests[0x180];
+    /* 0xB70 */ Application::Network::WorkDefinitions::BeastReputationWork BeastReputation[0x11];
+    /* 0xC80 */ Application::Network::WorkDefinitions::LeveWork LeveQuests[0x10];
     /* 0xE00 */ byte NumLeveAllowances;
     /*       */ byte _gap_0xE01;
     /*       */ byte _gap_0xE02[0x2];
@@ -11142,37 +11509,6 @@ enum SatisfactionSupplyNpc: __int32
     Anden = 9
 };
 
-struct Client::Game::SavedAppearanceSlot /* Size=0x140 */
-{
-    /* 0x000 */ unsigned __int32 Magic;
-    /* 0x004 */ unsigned __int32 Version;
-    /*       */ byte _gap_0x8[0x8];
-    /* 0x010 */ byte Customize[0x1A];
-    /*       */ byte _gap_0x2A[0x2];
-    /*       */ byte _gap_0x2C[0x4];
-    /* 0x030 */ byte LabelBytes[0x40];
-    /*       */ byte _gap_0x70[0xC0];
-    /*       */ byte _gap_0x130[0x4];
-    /* 0x134 */ bool IsCreated;
-    /*       */ byte _gap_0x135;
-    /*       */ byte _gap_0x136[0x2];
-    /*       */ byte _gap_0x138[0x4];
-    /* 0x13C */ byte SlotIndex;
-    /*       */ byte _gap_0x13D;
-    /*       */ byte _gap_0x13E[0x2];
-};
-
-struct Client::Game::Status /* Size=0xC */
-{
-    /* 0x0 */ unsigned __int16 StatusID;
-    union {
-    /* 0x2 */ unsigned __int16 Param;
-    /* 0x2 */ byte StackCount;
-    } _union_0x2;
-    /* 0x4 */ float RemainingTime;
-    /* 0x8 */ unsigned __int32 SourceID;
-};
-
 struct Client::Game::UI::AreaInstance /* Size=0x28 */
 {
     /*      */ byte _gap_0x0[0x10];
@@ -11197,7 +11533,7 @@ struct Client::Game::UI::Buddy /* Size=0xED8 */
 {
     /* 0x000 */ Client::Game::UI::Buddy::BuddyMember Companion;
     /* 0x198 */ Client::Game::UI::Buddy::BuddyMember Pet;
-    /* 0x330 */ byte BattleBuddies[0xB28];
+    /* 0x330 */ Client::Game::UI::Buddy::BuddyMember BattleBuddies[0x7];
     /* 0xE58 */ Client::Game::UI::Buddy::BuddyMember* CompanionPtr;
     /* 0xE60 */ float TimeLeft;
     /*       */ byte _gap_0xE64[0x4];
@@ -11280,24 +11616,17 @@ struct Client::Game::UI::ContentsNote /* Size=0xA8 */
     /* 0x64 */ __int32 DisplayStatus[0x11];
 };
 
-struct Client::Game::UI::Hate /* Size=0x108 */
-{
-    /* 0x000 */ byte HateArray[0x100];
-    /* 0x100 */ __int32 HateArrayLength;
-    /* 0x104 */ unsigned __int32 HateTargetId;
-};
-
 struct Client::Game::UI::HateInfo /* Size=0x8 */
 {
     /* 0x0 */ unsigned __int32 ObjectId;
     /* 0x4 */ __int32 Enmity;
 };
 
-struct Client::Game::UI::Hater /* Size=0x908 */
+struct Client::Game::UI::Hate /* Size=0x108 */
 {
-    /* 0x000 */ byte HaterArray[0x900];
-    /* 0x900 */ __int32 HaterArrayLength;
-    /*       */ byte _gap_0x904[0x4];
+    /* 0x000 */ Client::Game::UI::HateInfo HateArray[0x20];
+    /* 0x100 */ __int32 HateArrayLength;
+    /* 0x104 */ unsigned __int32 HateTargetId;
 };
 
 struct Client::Game::UI::HaterInfo /* Size=0x48 */
@@ -11305,6 +11634,13 @@ struct Client::Game::UI::HaterInfo /* Size=0x48 */
     /* 0x00 */ byte Name[0x40];
     /* 0x40 */ unsigned __int32 ObjectId;
     /* 0x44 */ __int32 Enmity;
+};
+
+struct Client::Game::UI::Hater /* Size=0x908 */
+{
+    /* 0x000 */ Client::Game::UI::HaterInfo HaterArray[0x20];
+    /* 0x900 */ __int32 HaterArrayLength;
+    /*       */ byte _gap_0x904[0x4];
 };
 
 struct Client::Game::UI::Hotbar /* Size=0x8 */
@@ -11319,20 +11655,6 @@ struct Client::Game::UI::LimitBreakController /* Size=0x10 */
     /*      */ byte _gap_0x9;
     /* 0x0A */ unsigned __int16 CurrentValue;
     /* 0x0C */ unsigned __int32 BarValue;
-};
-
-struct Client::Game::UI::Loot /* Size=0x6A0 */
-{
-    /*       */ byte _gap_0x0[0x10];
-    /* 0x010 */ byte ItemArray[0x400];
-    /* 0x410 */ __int32 SelectedIndex;
-    /*       */ byte _gap_0x414[0x4];
-    /* 0x418 */ unsigned __int32 UnkObjectId;
-    /*       */ byte _gap_0x41C[0x4];
-    /*       */ byte _gap_0x420[0x258];
-    /* 0x678 */ unsigned __int32 UnkObjectId2;
-    /*       */ byte _gap_0x67C[0x4];
-    /*       */ byte _gap_0x680[0x20];
 };
 
 enum RollState: __int32
@@ -11381,6 +11703,20 @@ struct Client::Game::UI::LootItem /* Size=0x40 */
     /*      */ byte _gap_0x3C[0x4];
 };
 
+struct Client::Game::UI::Loot /* Size=0x6A0 */
+{
+    /*       */ byte _gap_0x0[0x10];
+    /* 0x010 */ Client::Game::UI::LootItem ItemArray[0x10];
+    /* 0x410 */ __int32 SelectedIndex;
+    /*       */ byte _gap_0x414[0x4];
+    /* 0x418 */ unsigned __int32 UnkObjectId;
+    /*       */ byte _gap_0x41C[0x4];
+    /*       */ byte _gap_0x420[0x258];
+    /* 0x678 */ unsigned __int32 UnkObjectId2;
+    /*       */ byte _gap_0x67C[0x4];
+    /*       */ byte _gap_0x680[0x20];
+};
+
 struct Client::Game::UI::Map::QuestMarkerArray /* Size=0x10E0 */
 {
     /*        */ byte _gap_0x0[0x10E0];
@@ -11390,16 +11726,6 @@ struct Client::Game::UI::Map /* Size=0x1168 */
 {
     /*        */ byte _gap_0x0[0x88];
     /* 0x0088 */ Client::Game::UI::Map::QuestMarkerArray QuestMarkers;
-};
-
-struct Client::Game::UI::MarkingController /* Size=0x2B0 */
-{
-    /*       */ byte _gap_0x0[0x10];
-    /* 0x010 */ __int64 MarkerArray[0xE];
-    /* 0x080 */ unsigned __int32 LetterMarkerArray[0x1A];
-    /* 0x0E8 */ __int64 MarkerTimeArray[0xE];
-    /*       */ byte _gap_0x158[0x58];
-    /* 0x1B0 */ byte FieldMarkerArray[0x100];
 };
 
 struct Client::Game::UI::FieldMarker /* Size=0x20 */
@@ -11414,12 +11740,27 @@ struct Client::Game::UI::FieldMarker /* Size=0x20 */
     /*      */ byte _gap_0x1E[0x2];
 };
 
+struct Client::Game::UI::MarkingController /* Size=0x2B0 */
+{
+    /*       */ byte _gap_0x0[0x10];
+    /* 0x010 */ __int64 MarkerArray[0xE];
+    /* 0x080 */ unsigned __int32 LetterMarkerArray[0x1A];
+    /* 0x0E8 */ __int64 MarkerTimeArray[0xE];
+    /*       */ byte _gap_0x158[0x58];
+    /* 0x1B0 */ Client::Game::UI::FieldMarker FieldMarkerArray[0x8];
+};
+
+struct Client::Game::UI::MobHunt::KillCounts /* Size=0x14 */
+{
+    /* 0x00 */ __int32 Counts[0x5];
+};
+
 struct Client::Game::UI::MobHunt /* Size=0x198 */
 {
     /*       */ byte _gap_0x0[0x8];
     /* 0x008 */ byte AvailableMarkId[0x12];
     /* 0x01A */ byte ObtainedMarkId[0x12];
-    /* 0x02C */ byte CurrentKills[0x168];
+    /* 0x02C */ Client::Game::UI::MobHunt::KillCounts CurrentKills[0x12];
     /* 0x194 */ __int32 ObtainedFlags;
 };
 
@@ -11973,6 +12314,14 @@ struct Client::Game::MJI::IslandState /* Size=0xB0 */
     /*      */ byte _gap_0xAC[0x4];
 };
 
+enum FarmSlotFlags: byte
+{
+    UnderCare = 1,
+    WasUnderCare = 2,
+    CareHalted = 4,
+    Flag8 = 8
+};
+
 struct Client::Game::MJI::MJIFarmState /* Size=0x148 */
 {
     /* 0x000 */ void* VTable;
@@ -11982,17 +12331,9 @@ struct Client::Game::MJI::MJIFarmState /* Size=0x148 */
     /* 0x034 */ byte GrowthLevel[0x14];
     /* 0x048 */ byte WaterLevel[0x14];
     /* 0x05C */ byte GardenerYield[0x14];
-    /* 0x070 */ byte FarmSlotFlags[0x14];
+    /* 0x070 */ Client::Game::MJI::FarmSlotFlags FarmSlotFlags[0x14];
     /*       */ byte _gap_0x84[0x4];
     /*       */ byte _gap_0x88[0xC0];
-};
-
-enum FarmSlotFlags: byte
-{
-    UnderCare = 1,
-    WasUnderCare = 2,
-    CareHalted = 4,
-    Flag8 = 8
 };
 
 enum MJIAllowedVisitors: byte
@@ -12002,6 +12343,34 @@ enum MJIAllowedVisitors: byte
     Party = 4
 };
 
+struct Client::Game::MJI::MJIAnimal /* Size=0x34 */
+{
+    /* 0x00 */ byte SlotId;
+    /*      */ byte _gap_0x1;
+    /*      */ byte _gap_0x2[0x2];
+    /*      */ byte _gap_0x4[0x4];
+    /*      */ byte _gap_0x8[0x10];
+    /*      */ byte _gap_0x18[0x4];
+    /* 0x1C */ unsigned __int32 BNPCNameId;
+    /* 0x20 */ unsigned __int32 ObjectId;
+    /* 0x24 */ byte AnimalType;
+    /* 0x25 */ byte FoodLevel;
+    /* 0x26 */ byte Mood;
+    /* 0x27 */ unsigned __int16 Leavings;
+    /*      */ byte _gap_0x29;
+    /*      */ byte _gap_0x2A[0x2];
+    /*      */ byte _gap_0x2C[0x4];
+    /*      */ byte _gap_0x30[0x4];
+};
+
+struct Client::Game::MJI::MJILandmarkPlacement /* Size=0xC */
+{
+    /*     */ byte _gap_0x0[0x8];
+    /* 0x8 */ byte HoursToCompletion;
+    /* 0x9 */ byte LandmarkId;
+    /* 0xA */ unsigned __int16 UnderConstruction;
+};
+
 struct Client::Game::MJI::MJIBuildingPlacement /* Size=0x10 */
 {
     /*      */ byte _gap_0x0[0x4];
@@ -12009,6 +12378,14 @@ struct Client::Game::MJI::MJIBuildingPlacement /* Size=0x10 */
     /* 0x08 */ unsigned __int16 SgbId;
     /*      */ byte _gap_0xA[0x2];
     /*      */ byte _gap_0xC[0x4];
+};
+
+struct Client::Game::MJI::MJIFarmPasturePlacement /* Size=0xC */
+{
+    /*     */ byte _gap_0x0[0x8];
+    /* 0x8 */ byte SgbId;
+    /*     */ byte _gap_0x9;
+    /*     */ byte _gap_0xA[0x2];
 };
 
 struct Client::Game::MJI::MJIManager /* Size=0x378 */
@@ -12032,11 +12409,11 @@ struct Client::Game::MJI::MJIManager /* Size=0x378 */
     /* 0x0F8 */ Client::Game::MJI::MJIFarmState* FarmState;
     /*       */ byte _gap_0x100[0x80];
     /*       */ byte _gap_0x180[0x4];
-    /* 0x184 */ byte LandmarkPlacements[0x30];
-    /* 0x1B4 */ byte BuildingPlacements[0x50];
+    /* 0x184 */ Client::Game::MJI::MJILandmarkPlacement LandmarkPlacements[0x4];
+    /* 0x1B4 */ Client::Game::MJI::MJIBuildingPlacement BuildingPlacements[0x5];
     /* 0x204 */ Client::Game::MJI::MJIBuildingPlacement CabinPlacement;
-    /* 0x214 */ byte FarmPlacements[0x24];
-    /* 0x238 */ byte PasturePlacements[0x24];
+    /* 0x214 */ Client::Game::MJI::MJIFarmPasturePlacement FarmPlacements[0x3];
+    /* 0x238 */ Client::Game::MJI::MJIFarmPasturePlacement PasturePlacements[0x3];
     /*       */ byte _gap_0x25C[0x4];
     /*       */ byte _gap_0x260[0x10];
     /* 0x270 */ byte CurrentPopularity;
@@ -12056,22 +12433,6 @@ struct Client::Game::MJI::MJIManager /* Size=0x378 */
     /*       */ byte _gap_0x350[0x4];
     /* 0x354 */ unsigned __int32 CurrentGroove;
     /*       */ byte _gap_0x358[0x20];
-};
-
-struct Client::Game::MJI::MJILandmarkPlacement /* Size=0xC */
-{
-    /*     */ byte _gap_0x0[0x8];
-    /* 0x8 */ byte HoursToCompletion;
-    /* 0x9 */ byte LandmarkId;
-    /* 0xA */ unsigned __int16 UnderConstruction;
-};
-
-struct Client::Game::MJI::MJIFarmPasturePlacement /* Size=0xC */
-{
-    /*     */ byte _gap_0x0[0x8];
-    /* 0x8 */ byte SgbId;
-    /*     */ byte _gap_0x9;
-    /*     */ byte _gap_0xA[0x2];
 };
 
 enum CraftworkSupply: __int32
@@ -12099,26 +12460,6 @@ enum MJIMinimapIcons: byte
     Soils = 4,
     Minerals = 8,
     Aquatic = 16
-};
-
-struct Client::Game::MJI::MJIAnimal /* Size=0x34 */
-{
-    /* 0x00 */ byte SlotId;
-    /*      */ byte _gap_0x1;
-    /*      */ byte _gap_0x2[0x2];
-    /*      */ byte _gap_0x4[0x4];
-    /*      */ byte _gap_0x8[0x10];
-    /*      */ byte _gap_0x18[0x4];
-    /* 0x1C */ unsigned __int32 BNPCNameId;
-    /* 0x20 */ unsigned __int32 ObjectId;
-    /* 0x24 */ byte AnimalType;
-    /* 0x25 */ byte FoodLevel;
-    /* 0x26 */ byte Mood;
-    /* 0x27 */ unsigned __int16 Leavings;
-    /*      */ byte _gap_0x29;
-    /*      */ byte _gap_0x2A[0x2];
-    /*      */ byte _gap_0x2C[0x4];
-    /*      */ byte _gap_0x30[0x4];
 };
 
 struct Client::Game::MJI::MJIMinionSlot /* Size=0xC */
@@ -12152,13 +12493,34 @@ struct Client::Game::InstanceContent::InstanceContentDirector /* Size=0x1CA0 */
     /*        */ byte _gap_0xCD8[0xFC8];
 };
 
+struct Client::Game::InstanceContent::InstanceContentDeepDungeon::DeepDungeonPartyInfo /* Size=0x8 */
+{
+    /* 0x0 */ unsigned __int32 ObjectId;
+    /* 0x4 */ signed __int8 RoomIndex;
+    /*     */ byte _gap_0x5;
+    /*     */ byte _gap_0x6[0x2];
+};
+
+struct Client::Game::InstanceContent::InstanceContentDeepDungeon::DeepDungeonItemInfo /* Size=0x3 */
+{
+    /* 0x0 */ byte ItemId;
+    /* 0x1 */ byte Count;
+    /* 0x2 */ byte Flags;
+};
+
+struct Client::Game::InstanceContent::InstanceContentDeepDungeon::DeepDungeonChestInfo /* Size=0x2 */
+{
+    /* 0x0 */ byte ChestType;
+    /* 0x1 */ signed __int8 RoomIndex;
+};
+
 struct Client::Game::InstanceContent::InstanceContentDeepDungeon /* Size=0x27D8 */
 {
     /* 0x0000 */ Client::Game::InstanceContent::InstanceContentDirector InstanceContentDirector;
     /*        */ byte _gap_0x1CA0[0xA0];
-    /* 0x1D40 */ byte Party[0x20];
-    /* 0x1D60 */ byte Items[0x30];
-    /* 0x1D90 */ byte Chests[0x20];
+    /* 0x1D40 */ Client::Game::InstanceContent::InstanceContentDeepDungeon::DeepDungeonPartyInfo Party[0x4];
+    /* 0x1D60 */ Client::Game::InstanceContent::InstanceContentDeepDungeon::DeepDungeonItemInfo Items[0x10];
+    /* 0x1D90 */ Client::Game::InstanceContent::InstanceContentDeepDungeon::DeepDungeonChestInfo Chests[0x10];
     /*        */ byte _gap_0x1DB0[0x8];
     /* 0x1DB8 */ unsigned __int32 BonusLootItemId;
     /* 0x1DBC */ byte Floor;
@@ -12185,40 +12547,25 @@ struct Client::Game::Housing::HousingTerritory /* Size=0x96A4 */
     /* 0x96A0 */ unsigned __int32 HouseID;
 };
 
-struct Client::Game::Housing::HousingWorkshopAirshipData /* Size=0x28F8 */
+struct Client::Game::Housing::HousingWorkshopAirshipGathered /* Size=0x38 */
 {
-    /* 0x0000 */ byte DataList[0x700];
-    /*        */ byte _gap_0x700[0x70];
-    /* 0x0770 */ byte ActiveAirshipId;
-    /* 0x0771 */ byte AirshipCount;
-    /*        */ byte _gap_0x772[0x2];
-    /*        */ byte _gap_0x774[0x4];
-    /* 0x0778 */ byte AirshipLogList[0x2150];
-    /*        */ byte _gap_0x28C8[0x30];
-};
-
-struct Client::Game::Housing::HousingWorkshopSubmersibleData /* Size=0x8F40 */
-{
-    /* 0x0000 */ byte DataList[0x8C80];
-    /* 0x8C80 */ byte DataPointerList[0x28];
-    /*        */ byte _gap_0x8CA8[0x298];
-};
-
-struct Client::Game::Housing::HousingWorkshopTerritory /* Size=0xB8C0 */
-{
-    /*        */ byte _gap_0x0[0x68];
-    /* 0x0068 */ Client::Game::Housing::HousingWorkshopAirshipData Airship;
-    /* 0x2960 */ Client::Game::Housing::HousingWorkshopSubmersibleData Submersible;
-    /*        */ byte _gap_0xB8A0[0x20];
-};
-
-struct Client::Game::Housing::HousingManager /* Size=0xE0 */
-{
-    /* 0x00 */ Client::Game::Housing::HousingTerritory* CurrentTerritory;
-    /* 0x08 */ Client::Game::Housing::HousingTerritory* OutdoorTerritory;
-    /* 0x10 */ Client::Game::Housing::HousingTerritory* IndoorTerritory;
-    /* 0x18 */ Client::Game::Housing::HousingWorkshopTerritory* WorkshopTerritory;
-    /*      */ byte _gap_0x20[0xC0];
+    /* 0x00 */ unsigned __int32 ExpGained;
+    /*      */ byte _gap_0x4[0x4];
+    /*      */ byte _gap_0x8[0x4];
+    /* 0x0C */ unsigned __int32 ItemIdPrimary;
+    /* 0x10 */ unsigned __int32 ItemIdAdditional;
+    /* 0x14 */ unsigned __int16 ItemCountPrimary;
+    /* 0x16 */ unsigned __int16 ItemCountAdditional;
+    /* 0x18 */ unsigned __int32 Unk1Primary;
+    /* 0x1C */ unsigned __int32 Unk1Additional;
+    /* 0x20 */ unsigned __int32 Unk2Primary;
+    /* 0x24 */ unsigned __int32 Unk2Additional;
+    /* 0x28 */ unsigned __int32 Unk3Primary;
+    /* 0x2C */ unsigned __int32 Unk3Additional;
+    /*      */ byte _gap_0x30[0x2];
+    /* 0x32 */ bool AirshipItemValidPrimary;
+    /* 0x33 */ bool AirshipItemValidAdditional;
+    /*      */ byte _gap_0x34[0x4];
 };
 
 struct Client::Game::Housing::HousingWorkshopAirshipSubData /* Size=0x1C0 */
@@ -12249,32 +12596,46 @@ struct Client::Game::Housing::HousingWorkshopAirshipSubData /* Size=0x1C0 */
     /*       */ byte _gap_0x4B;
     /*       */ byte _gap_0x4C[0x4];
     /*       */ byte _gap_0x50[0x4];
-    /* 0x054 */ byte GatheredData[0x118];
+    /* 0x054 */ Client::Game::Housing::HousingWorkshopAirshipGathered GatheredData[0x5];
     /*       */ byte _gap_0x16C[0x4];
     /*       */ byte _gap_0x170[0x30];
     /* 0x1A0 */ Client::System::String::Utf8String* Log;
     /*       */ byte _gap_0x1A8[0x18];
 };
 
-struct Client::Game::Housing::HousingWorkshopAirshipGathered /* Size=0x38 */
+struct Client::Game::Housing::HousingWorkshopAirshipData /* Size=0x28F8 */
 {
-    /* 0x00 */ unsigned __int32 ExpGained;
+    /* 0x0000 */ Client::Game::Housing::HousingWorkshopAirshipSubData DataList[0x4];
+    /*        */ byte _gap_0x700[0x70];
+    /* 0x0770 */ byte ActiveAirshipId;
+    /* 0x0771 */ byte AirshipCount;
+    /*        */ byte _gap_0x772[0x2];
+    /*        */ byte _gap_0x774[0x4];
+    /* 0x0778 */ Client::System::String::Utf8String AirshipLogList[0x52];
+    /*        */ byte _gap_0x28C8[0x30];
+};
+
+struct Client::Game::Housing::HousingWorkshopSubmarineGathered /* Size=0x38 */
+{
+    /* 0x00 */ byte Point;
+    /*      */ byte _gap_0x1;
+    /*      */ byte _gap_0x2[0x2];
     /*      */ byte _gap_0x4[0x4];
     /*      */ byte _gap_0x8[0x4];
-    /* 0x0C */ unsigned __int32 ItemIdPrimary;
-    /* 0x10 */ unsigned __int32 ItemIdAdditional;
-    /* 0x14 */ unsigned __int16 ItemCountPrimary;
-    /* 0x16 */ unsigned __int16 ItemCountAdditional;
-    /* 0x18 */ unsigned __int32 Unk1Primary;
-    /* 0x1C */ unsigned __int32 Unk1Additional;
-    /* 0x20 */ unsigned __int32 Unk2Primary;
-    /* 0x24 */ unsigned __int32 Unk2Additional;
-    /* 0x28 */ unsigned __int32 Unk3Primary;
-    /* 0x2C */ unsigned __int32 Unk3Additional;
-    /*      */ byte _gap_0x30[0x2];
-    /* 0x32 */ bool AirshipItemValidPrimary;
-    /* 0x33 */ bool AirshipItemValidAdditional;
-    /*      */ byte _gap_0x34[0x4];
+    /* 0x0C */ unsigned __int32 ExpGained;
+    /* 0x10 */ unsigned __int32 ItemIdPrimary;
+    /* 0x14 */ unsigned __int32 ItemIdAdditional;
+    /* 0x18 */ unsigned __int16 ItemCountPrimary;
+    /* 0x1A */ unsigned __int16 ItemCountAdditional;
+    /* 0x1C */ bool ItemHQPrimary;
+    /* 0x1D */ bool ItemHQAdditional;
+    /*      */ byte _gap_0x1E[0x2];
+    /* 0x20 */ unsigned __int32 UnknownPrimary1;
+    /* 0x24 */ unsigned __int32 UnknownAdditional1;
+    /* 0x28 */ unsigned __int32 UnknownPrimary2;
+    /* 0x2C */ unsigned __int32 UnknownAdditional2;
+    /* 0x30 */ unsigned __int32 UnknownPrimary3;
+    /* 0x34 */ unsigned __int32 UnknownAdditional3;
 };
 
 struct Client::Game::Housing::HousingWorkshopSubmersibleSubData /* Size=0x2320 */
@@ -12313,55 +12674,35 @@ struct Client::Game::Housing::HousingWorkshopSubmersibleSubData /* Size=0x2320 *
     /* 0x0060 */ byte Rating;
     /*        */ byte _gap_0x61;
     /*        */ byte _gap_0x62[0x2];
-    /* 0x0064 */ byte GatheredData[0x118];
+    /* 0x0064 */ Client::Game::Housing::HousingWorkshopSubmarineGathered GatheredData[0x5];
     /*        */ byte _gap_0x17C[0x4];
     /*        */ byte _gap_0x180[0x30];
-    /* 0x01B0 */ byte LogList[0x2150];
+    /* 0x01B0 */ Client::System::String::Utf8String LogList[0x52];
     /*        */ byte _gap_0x2300[0x20];
 };
 
-struct Client::Game::Housing::HousingWorkshopSubmarineGathered /* Size=0x38 */
+struct Client::Game::Housing::HousingWorkshopSubmersibleData /* Size=0x8F40 */
 {
-    /* 0x00 */ byte Point;
-    /*      */ byte _gap_0x1;
-    /*      */ byte _gap_0x2[0x2];
-    /*      */ byte _gap_0x4[0x4];
-    /*      */ byte _gap_0x8[0x4];
-    /* 0x0C */ unsigned __int32 ExpGained;
-    /* 0x10 */ unsigned __int32 ItemIdPrimary;
-    /* 0x14 */ unsigned __int32 ItemIdAdditional;
-    /* 0x18 */ unsigned __int16 ItemCountPrimary;
-    /* 0x1A */ unsigned __int16 ItemCountAdditional;
-    /* 0x1C */ bool ItemHQPrimary;
-    /* 0x1D */ bool ItemHQAdditional;
-    /*      */ byte _gap_0x1E[0x2];
-    /* 0x20 */ unsigned __int32 UnknownPrimary1;
-    /* 0x24 */ unsigned __int32 UnknownAdditional1;
-    /* 0x28 */ unsigned __int32 UnknownPrimary2;
-    /* 0x2C */ unsigned __int32 UnknownAdditional2;
-    /* 0x30 */ unsigned __int32 UnknownPrimary3;
-    /* 0x34 */ unsigned __int32 UnknownAdditional3;
+    /* 0x0000 */ Client::Game::Housing::HousingWorkshopSubmersibleSubData DataList[0x4];
+    /* 0x8C80 */ Client::Game::Housing::HousingWorkshopSubmersibleSubData* DataPointerList[0x5];
+    /*        */ byte _gap_0x8CA8[0x298];
 };
 
-struct Client::Game::Group::GroupManager /* Size=0x3D70 */
+struct Client::Game::Housing::HousingWorkshopTerritory /* Size=0xB8C0 */
 {
-    /* 0x0000 */ byte PartyMembers[0x1180];
-    /* 0x1180 */ byte AllianceMembers[0x2BC0];
-    /* 0x3D40 */ unsigned __int32 Unk_3D40;
-    /* 0x3D44 */ unsigned __int16 Unk_3D44;
-    /*        */ byte _gap_0x3D46[0x2];
-    /* 0x3D48 */ __int64 PartyId;
-    /* 0x3D50 */ __int64 PartyId_2;
-    /* 0x3D58 */ unsigned __int32 PartyLeaderIndex;
-    /* 0x3D5C */ byte MemberCount;
-    /* 0x3D5D */ byte Unk_3D5D;
-    /*        */ byte _gap_0x3D5E;
-    /* 0x3D5F */ byte Unk_3D5F;
-    /* 0x3D60 */ byte Unk_3D60;
-    /* 0x3D61 */ byte AllianceFlags;
-    /*        */ byte _gap_0x3D62[0x2];
-    /*        */ byte _gap_0x3D64[0x4];
-    /*        */ byte _gap_0x3D68[0x8];
+    /*        */ byte _gap_0x0[0x68];
+    /* 0x0068 */ Client::Game::Housing::HousingWorkshopAirshipData Airship;
+    /* 0x2960 */ Client::Game::Housing::HousingWorkshopSubmersibleData Submersible;
+    /*        */ byte _gap_0xB8A0[0x20];
+};
+
+struct Client::Game::Housing::HousingManager /* Size=0xE0 */
+{
+    /* 0x00 */ Client::Game::Housing::HousingTerritory* CurrentTerritory;
+    /* 0x08 */ Client::Game::Housing::HousingTerritory* OutdoorTerritory;
+    /* 0x10 */ Client::Game::Housing::HousingTerritory* IndoorTerritory;
+    /* 0x18 */ Client::Game::Housing::HousingWorkshopTerritory* WorkshopTerritory;
+    /*      */ byte _gap_0x20[0xC0];
 };
 
 struct Client::Game::Group::PartyMember /* Size=0x230 */
@@ -12402,6 +12743,27 @@ struct Client::Game::Group::PartyMember /* Size=0x230 */
     /*       */ byte _gap_0x222[0x2];
     /*       */ byte _gap_0x224[0x4];
     /*       */ byte _gap_0x228[0x8];
+};
+
+struct Client::Game::Group::GroupManager /* Size=0x3D70 */
+{
+    /* 0x0000 */ Client::Game::Group::PartyMember PartyMembers[0x8];
+    /* 0x1180 */ Client::Game::Group::PartyMember AllianceMembers[0x14];
+    /* 0x3D40 */ unsigned __int32 Unk_3D40;
+    /* 0x3D44 */ unsigned __int16 Unk_3D44;
+    /*        */ byte _gap_0x3D46[0x2];
+    /* 0x3D48 */ __int64 PartyId;
+    /* 0x3D50 */ __int64 PartyId_2;
+    /* 0x3D58 */ unsigned __int32 PartyLeaderIndex;
+    /* 0x3D5C */ byte MemberCount;
+    /* 0x3D5D */ byte Unk_3D5D;
+    /*        */ byte _gap_0x3D5E;
+    /* 0x3D5F */ byte Unk_3D5F;
+    /* 0x3D60 */ byte Unk_3D60;
+    /* 0x3D61 */ byte AllianceFlags;
+    /*        */ byte _gap_0x3D62[0x2];
+    /*        */ byte _gap_0x3D64[0x4];
+    /*        */ byte _gap_0x3D68[0x8];
 };
 
 enum AstrologianCard: __int32
@@ -12759,59 +13121,6 @@ struct Client::Game::Character::CharacterManager /* Size=0x338 */
     /* 0x334 */ __int32 UpdateIndex;
 };
 
-struct Application::Network::WorkDefinitions::BeastReputationWork /* Size=0x10 */
-{
-    /*      */ byte _gap_0x0[0x8];
-    /* 0x08 */ byte Rank;
-    /*      */ byte _gap_0x9;
-    /* 0x0A */ unsigned __int16 Value;
-    /*      */ byte _gap_0xC[0x4];
-};
-
-struct Application::Network::WorkDefinitions::DailyQuestWork /* Size=0x10 */
-{
-    /*      */ byte _gap_0x0[0x8];
-    /* 0x08 */ unsigned __int16 QuestId;
-    /* 0x0A */ byte Flags;
-    /*      */ byte _gap_0xB;
-    /*      */ byte _gap_0xC[0x4];
-};
-
-struct Application::Network::WorkDefinitions::LeveWork /* Size=0x18 */
-{
-    /*      */ byte _gap_0x0[0x8];
-    /* 0x08 */ unsigned __int16 LeveId;
-    /* 0x0A */ byte Sequence;
-    /*      */ byte _gap_0xB;
-    /* 0x0C */ unsigned __int16 Flags;
-    /* 0x0E */ unsigned __int16 LeveSeed;
-    /* 0x10 */ byte ClearClass;
-    /*      */ byte _gap_0x11;
-    /*      */ byte _gap_0x12[0x2];
-    /*      */ byte _gap_0x14[0x4];
-};
-
-struct Application::Network::WorkDefinitions::QuestWork /* Size=0x18 */
-{
-    /*      */ byte _gap_0x0[0x8];
-    /* 0x08 */ unsigned __int16 QuestId;
-    /* 0x0A */ byte Sequence;
-    /* 0x0B */ byte Flags;
-    /* 0x0C */ byte Variables[0x6];
-    /* 0x12 */ byte AcceptClassJob;
-    /*      */ byte _gap_0x13;
-    /*      */ byte _gap_0x14[0x4];
-};
-
-struct Application::Network::WorkDefinitions::TrackingWork /* Size=0x10 */
-{
-    /*      */ byte _gap_0x0[0x8];
-    /* 0x08 */ byte QuestType;
-    /* 0x09 */ byte Index;
-    /*      */ byte _gap_0xA[0x2];
-    /*      */ byte _gap_0xC[0x4];
-};
-
 struct Component::GUI::AtkLinkedList::Node; /* Size=unknown due to generic type with parameters */
 enum AtkTooltipType: byte
 {
@@ -12857,13 +13166,6 @@ struct Client::UI::AddonContentsFinderConfirm::AddonContentsFinderConfirmVTable 
     /*     */ byte _gap_0x0;
 };
 
-struct Client::UI::AddonNeedGreed::LootItemInfo /* Size=0x28 */
-{
-    /* 0x00 */ unsigned __int32 ItemId;
-    /*      */ byte _gap_0x4[0x4];
-    /*      */ byte _gap_0x8[0x20];
-};
-
 struct Client::UI::AddonRaceChocoboResult::AddonRaceChocoboResultVTable /* Size=0x1 */
 {
     /*     */ byte _gap_0x0;
@@ -12907,16 +13209,6 @@ struct Client::UI::RaptureAtkModule::NamePlateInfo /* Size=0x248 */
     /*       */ byte _gap_0x238[0x8];
     /* 0x240 */ __int32 Flags;
     /*       */ byte _gap_0x244[0x4];
-};
-
-struct Client::UI::UI3DModule::MemberInfo /* Size=0x28 */
-{
-    /* 0x00 */ Client::UI::UI3DModule::MapInfo MapInfo;
-    /* 0x18 */ Client::Game::Character::BattleChara* BattleChara;
-    /* 0x20 */ byte Unk_20;
-    /*      */ byte _gap_0x21;
-    /*      */ byte _gap_0x22[0x2];
-    /*      */ byte _gap_0x24[0x4];
 };
 
 struct Client::UI::UI3DModule::UnkInfo /* Size=0x40 */
@@ -13034,106 +13326,48 @@ struct Client::UI::Misc::RetainerCommentModule::RetainerComment /* Size=0x68 */
     /*      */ byte _gap_0x8[0x60];
 };
 
-struct Client::UI::Info::InfoProxyCircle::Unk1 /* Size=0xF0 */
+struct Client::UI::Info::InfoProxyCommonList::CharacterDict::Entry /* Size=0x10 */
 {
-    /* 0x00 */ Client::System::String::Utf8String String0;
-    /*      */ byte _gap_0x68[0x18];
-    /* 0x80 */ Client::System::String::Utf8String String1;
-    /*      */ byte _gap_0xE8[0x8];
+    /* 0x00 */ unsigned __int64 ContentID;
+    /*      */ byte _gap_0x8[0x2];
+    /* 0x0A */ unsigned __int16 HomeWorld;
+    /*      */ byte _gap_0xC[0x4];
 };
 
 struct Client::UI::Info::InfoProxyCommonList::CharacterDict /* Size=0x2000 */
 {
-    /* 0x0000 */ byte Entries[0x2000];
+    /* 0x0000 */ Client::UI::Info::InfoProxyCommonList::CharacterDict::Entry Entries[0x200];
+};
+
+struct Client::UI::Info::InfoProxyCommonList::CharacterArray::Entry /* Size=0x60 */
+{
+    /* 0x00 */ unsigned __int64 ContentId;
+    /*      */ byte _gap_0x8;
+    /* 0x09 */ unsigned __int16 OnlineStatus;
+    /* 0x0B */ byte MentorState;
+    /* 0x0C */ byte PartyStatus;
+    /* 0x0D */ byte DutyStatus;
+    /*      */ byte _gap_0xE[0x2];
+    /*      */ byte _gap_0x10[0x4];
+    /* 0x14 */ byte DictIndex;
+    /*      */ byte _gap_0x15;
+    /* 0x16 */ unsigned __int16 CurrentWorld;
+    /* 0x18 */ unsigned __int16 HomeWorld;
+    /* 0x1A */ unsigned __int16 Location;
+    /* 0x1C */ Client::UI::Agent::GrandCompany GrandCompany;
+    /* 0x1D */ byte MainLanguage;
+    /* 0x1E */ byte AvailableLanguages;
+    /*      */ byte _gap_0x1F;
+    /*      */ byte _gap_0x20;
+    /* 0x21 */ byte Job;
+    /* 0x22 */ byte Name[0x20];
+    /* 0x42 */ byte FCTag[0x6];
+    /*      */ byte _gap_0x48[0x18];
 };
 
 struct Client::UI::Info::InfoProxyCommonList::CharacterArray /* Size=0x4B00 */
 {
-    /* 0x0000 */ byte Entries[0x4B00];
-};
-
-struct Client::UI::Info::InfoProxyCrossWorldLinkShell::CWLSEntry /* Size=0x88 */
-{
-    /* 0x00 */ Client::System::String::Utf8String Name;
-    /*      */ byte _gap_0x68[0x10];
-    /* 0x78 */ unsigned __int32 FoundationTime;
-    /*      */ byte _gap_0x7C[0x4];
-    /*      */ byte _gap_0x80[0x4];
-    /* 0x84 */ unsigned __int16 MembershipType;
-    /*      */ byte _gap_0x86[0x2];
-};
-
-struct Client::UI::Info::InfoProxyFreeCompany::RankData /* Size=0x58 */
-{
-    /* 0x00 */ byte Permissions[0xA];
-    /*      */ byte _gap_0xA[0x2];
-    /*      */ byte _gap_0xC[0x4];
-    /*      */ byte _gap_0x10[0x10];
-    /* 0x20 */ unsigned __int16 MemberCount;
-    /* 0x22 */ byte RankNumber;
-    /* 0x23 */ byte Name[0x10];
-    /*      */ byte _gap_0x33;
-    /*      */ byte _gap_0x34[0x4];
-    /*      */ byte _gap_0x38[0x20];
-};
-
-struct Client::UI::Info::InfoProxyFriendList::StrBuf /* Size=0x40 */
-{
-    /* 0x00 */ byte Data[0x40];
-};
-
-struct Client::UI::Info::InfoProxyItemSearch::Entry /* Size=0x8 */
-{
-    /* 0x0 */ unsigned __int32 ItemID;
-    /* 0x4 */ unsigned __int32 Count;
-};
-
-struct Client::UI::Info::InfoProxyLetter::Letter /* Size=0xA0 */
-{
-    /* 0x00 */ __int64 SenderContentID;
-    /* 0x08 */ unsigned __int32 Timestamp;
-    /* 0x0C */ byte Attachments[0x28];
-    /*      */ byte _gap_0x34[0x4];
-    /* 0x38 */ unsigned __int32 Gil;
-    /* 0x3C */ bool Read;
-    /*      */ byte _gap_0x3D;
-    /*      */ byte _gap_0x3E;
-    /* 0x3F */ byte Sender[0x20];
-    /* 0x5F */ byte MessagePreview[0x40];
-    /*      */ byte _gap_0x9F;
-};
-
-struct Client::UI::Info::InfoProxyLinkShell::Entry /* Size=0x18 */
-{
-    /*      */ byte _gap_0x0[0x18];
-};
-
-enum IconFlagsTopRight: byte
-{
-    None = 0,
-    Dyeable = 1,
-    Glamoured = 4
-};
-
-struct Client::UI::Agent::AgentInspect::ItemData::ColorRGB /* Size=0x3 */
-{
-    /* 0x0 */ byte B;
-    /* 0x1 */ byte G;
-    /* 0x2 */ byte R;
-};
-
-struct Client::UI::Agent::AgentInspect::ItemData /* Size=0x28 */
-{
-    /* 0x00 */ unsigned __int32 IconID;
-    /* 0x04 */ Client::UI::Agent::AgentInspect::ItemData::IconFlagsTopRight IconFlags1;
-    /* 0x05 */ Client::UI::Agent::AgentInspect::ItemData::ColorRGB Color;
-    /* 0x08 */ bool Filled;
-    /* 0x09 */ bool IsILevelSynced;
-    /*      */ byte _gap_0xA[0x2];
-    /*      */ byte _gap_0xC[0x4];
-    /* 0x10 */ __int16 ModelMain[0x4];
-    /* 0x18 */ __int16 ModelSub[0x4];
-    /* 0x20 */ Client::Game::InventoryItem* Item;
+    /* 0x0000 */ Client::UI::Info::InfoProxyCommonList::CharacterArray::Entry Entries[0xC8];
 };
 
 enum ItemDataFlags: __int32
@@ -13158,34 +13392,6 @@ struct Client::UI::Agent::AgentReadyCheck::ReadyCheckEntry /* Size=0x10 */
     /*      */ byte _gap_0x9;
     /*      */ byte _gap_0xA[0x2];
     /*      */ byte _gap_0xC[0x4];
-};
-
-struct Client::UI::Agent::AgentRetainerItemTransferData::DuplicateItemEntry /* Size=0x78 */
-{
-    /* 0x00 */ Client::System::String::Utf8String Name;
-    /* 0x68 */ bool Exists;
-    /*      */ byte _gap_0x69;
-    /*      */ byte _gap_0x6A[0x2];
-    /* 0x6C */ bool IsEnabled;
-    /*      */ byte _gap_0x6D;
-    /*      */ byte _gap_0x6E[0x2];
-    /* 0x70 */ unsigned __int32 ItemId;
-    /* 0x74 */ unsigned __int32 UiCategoryIconId;
-};
-
-struct Client::UI::Agent::AgentSatisfactionSupply::ItemInfo /* Size=0x3C */
-{
-    /* 0x00 */ unsigned __int32 Id;
-    /* 0x04 */ unsigned __int16 Collectability1;
-    /* 0x06 */ unsigned __int16 Collectability2;
-    /* 0x08 */ unsigned __int16 Collectability3;
-    /* 0x0A */ unsigned __int16 Bonus;
-    /* 0x0C */ unsigned __int32 Reward1Id;
-    /* 0x10 */ unsigned __int32 Reward2Id;
-    /*      */ byte _gap_0x14[0x4];
-    /*      */ byte _gap_0x18[0x20];
-    /* 0x38 */ unsigned __int16 FishingSpotId;
-    /* 0x3A */ unsigned __int16 SpearFishingSpotId;
 };
 
 enum ModelType: byte
@@ -13266,37 +13472,11 @@ struct Client::Game::UI::Map::MapMarkerInfo /* Size=0x90 */
     /*      */ byte _gap_0x8C[0x4];
 };
 
-struct Client::Game::UI::MobHunt::KillCounts /* Size=0x14 */
-{
-    /* 0x00 */ __int32 Counts[0x5];
-};
-
 enum WeeklyBingoTaskStatus: __int32
 {
     Open = 0,
     Claimable = 1,
     Claimed = 2
-};
-
-struct Client::Game::InstanceContent::InstanceContentDeepDungeon::DeepDungeonPartyInfo /* Size=0x8 */
-{
-    /* 0x0 */ unsigned __int32 ObjectId;
-    /* 0x4 */ signed __int8 RoomIndex;
-    /*     */ byte _gap_0x5;
-    /*     */ byte _gap_0x6[0x2];
-};
-
-struct Client::Game::InstanceContent::InstanceContentDeepDungeon::DeepDungeonItemInfo /* Size=0x3 */
-{
-    /* 0x0 */ byte ItemId;
-    /* 0x1 */ byte Count;
-    /* 0x2 */ byte Flags;
-};
-
-struct Client::Game::InstanceContent::InstanceContentDeepDungeon::DeepDungeonChestInfo /* Size=0x2 */
-{
-    /* 0x0 */ byte ChestType;
-    /* 0x1 */ signed __int8 RoomIndex;
 };
 
 enum WeaponSlot: unsigned __int32
@@ -13315,40 +13495,6 @@ struct Client::UI::Misc::SavedHotBars::SavedHotBarClassJobSlots::SavedHotBarClas
 {
     /* 0x0 */ Client::UI::Misc::HotbarSlotType Type;
     /* 0x1 */ unsigned __int32 ID;
-};
-
-struct Client::UI::Info::InfoProxyCommonList::CharacterDict::Entry /* Size=0x10 */
-{
-    /* 0x00 */ unsigned __int64 ContentID;
-    /*      */ byte _gap_0x8[0x2];
-    /* 0x0A */ unsigned __int16 HomeWorld;
-    /*      */ byte _gap_0xC[0x4];
-};
-
-struct Client::UI::Info::InfoProxyCommonList::CharacterArray::Entry /* Size=0x60 */
-{
-    /* 0x00 */ unsigned __int64 ContentId;
-    /*      */ byte _gap_0x8;
-    /* 0x09 */ unsigned __int16 OnlineStatus;
-    /* 0x0B */ byte MentorState;
-    /* 0x0C */ byte PartyStatus;
-    /* 0x0D */ byte DutyStatus;
-    /*      */ byte _gap_0xE[0x2];
-    /*      */ byte _gap_0x10[0x4];
-    /* 0x14 */ byte DictIndex;
-    /*      */ byte _gap_0x15;
-    /* 0x16 */ unsigned __int16 CurrentWorld;
-    /* 0x18 */ unsigned __int16 HomeWorld;
-    /* 0x1A */ unsigned __int16 Location;
-    /* 0x1C */ Client::UI::Agent::GrandCompany GrandCompany;
-    /* 0x1D */ byte MainLanguage;
-    /* 0x1E */ byte AvailableLanguages;
-    /*      */ byte _gap_0x1F;
-    /*      */ byte _gap_0x20;
-    /* 0x21 */ byte Job;
-    /* 0x22 */ byte Name[0x20];
-    /* 0x42 */ byte FCTag[0x6];
-    /*      */ byte _gap_0x48[0x18];
 };
 
 enum BasicSettings: unsigned __int16
@@ -13413,37 +13559,6 @@ enum WorkshopAccess: unsigned __int16
     Renaming = 1024,
     VoyageDeploymentRecall = 2048,
     VoyageFinalization = 4096
-};
-
-struct Client::UI::Info::InfoProxyLetter::Letter::ItemAttachment /* Size=0x8 */
-{
-    /* 0x0 */ unsigned __int32 ItemID;
-    /* 0x4 */ unsigned __int32 Count;
-};
-
-struct Client::UI::Agent::AgentBannerInterface::Storage::CharacterData /* Size=0x760 */
-{
-    /* 0x000 */ void** VTable;
-    /*       */ byte _gap_0x8[0x10];
-    /* 0x018 */ Client::System::String::Utf8String Name1;
-    /* 0x080 */ Client::System::String::Utf8String Name2;
-    /* 0x0E8 */ Client::System::String::Utf8String UnkString1;
-    /* 0x150 */ Client::System::String::Utf8String UnkString2;
-    /*       */ byte _gap_0x1B8[0x8];
-    /* 0x1C0 */ Client::System::String::Utf8String Job;
-    /*       */ byte _gap_0x228[0x10];
-    /* 0x238 */ unsigned __int32 WorldId;
-    /*       */ byte _gap_0x23C[0x4];
-    /* 0x240 */ Client::System::String::Utf8String UnkString3;
-    /*       */ byte _gap_0x2A8[0x8];
-    /* 0x2B0 */ void* CharaView;
-    /*       */ byte _gap_0x2B8[0x318];
-    /* 0x5D0 */ Component::GUI::AtkTexture AtkTexture;
-    /*       */ byte _gap_0x5E8[0xF8];
-    /* 0x6E0 */ Client::System::String::Utf8String Title;
-    /*       */ byte _gap_0x748[0x8];
-    /* 0x750 */ void* SomePointer;
-    /*       */ byte _gap_0x758[0x8];
 };
 
 enum QuestFlags: byte

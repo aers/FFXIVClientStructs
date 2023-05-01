@@ -1,4 +1,6 @@
 using FFXIVClientStructs.Attributes;
+using FFXIVClientStructs.Interop;
+using FFXIVClientStructs.Interop.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -210,10 +212,28 @@ namespace CExporter
                         var fixedType = finfo.GetFixedType();
                         var fixedSize = finfo.GetFixedSize();
                         ProcessType(fixedType, header);
+                        fieldSize = SizeOf(fixedType) * fixedSize;
+
+                        var typeDataAttr = finfo.GetCustomAttribute(typeof(FixedSizeArrayAttribute<>));
+                        if (typeDataAttr != null)
+                        {
+                            fixedSize = (int)typeDataAttr.GetType().GetProperty("Count", BindingFlags.Instance | BindingFlags.Public).GetValue(typeDataAttr);
+                            fixedType = typeDataAttr.GetType().GetGenericArguments()[0];
+                            if (fixedType.IsGenericType && fixedType.GetGenericTypeDefinition() == typeof(Pointer<>))
+                            {
+                                fixedType = fixedType.GetGenericArguments()[0].MakePointerType();
+                            }
+
+                            ProcessType(fixedType.IsPointer ? fixedType.GetElementType() : fixedType, header);
+                            var rawSize = fieldSize;
+                            fieldSize = (fixedType.IsPointer ? 8 : SizeOf(fixedType)) * fixedSize;
+                            if (rawSize != fieldSize)
+                            {
+                                Debug.WriteLine($"Array size mismatch for {FixFullName(type)}.{finfo.Name}: raw is {FixTypeName(finfo.GetFixedType())}[0x{finfo.GetFixedSize():X}] (0x{rawSize:X}), typed is {FixTypeName(fixedType)}[0x{fixedSize:X}] (0x{fieldSize:X})");
+                            }
+                        }
 
                         sb.AppendLine(string.Format($"    /* 0x{{0:X{pad}}} */ {FixTypeName(fixedType)} {finfo.Name}[0x{fixedSize:X}];", offset));
-
-                        fieldSize = SizeOf(fixedType) * fixedSize;
                     }
                     else if (fieldType.IsPointer)
                     {
