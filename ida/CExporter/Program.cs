@@ -54,6 +54,7 @@ namespace CExporter
 
         private EnvFormat EnvFormat;
 
+        private readonly List<Type> TypesToExport = new List<Type>();
         private readonly HashSet<Type> KnownTypes = new HashSet<Type>();
 
         private readonly string FFXIVNamespacePrefix = string.Join(".", new string[] { nameof(FFXIVClientStructs), nameof(FFXIVClientStructs.FFXIV), "" });
@@ -62,7 +63,7 @@ namespace CExporter
 
         private bool IsGeneratedType(Type t) => t.DeclaringType != null && (t.Name == "Addresses" || t.Name == "MemberFunctionPointers" || t.Name == "StaticAddressPointers");
 
-        private Type[] GetExportableTypes(string assemblyName)
+        private IEnumerable<Type> GetExportableTypes(string assemblyName)
         {
             var assembly = AppDomain.CurrentDomain.Load(assemblyName);
 
@@ -76,7 +77,7 @@ namespace CExporter
                 definedTypes = ex.Types.Where(t => t != null).ToArray();
             }
 
-            return definedTypes.Where(t => t.FullName.StartsWith(FFXIVNamespacePrefix) && !IsGeneratedType(t)).ToArray();
+            return definedTypes.Where(t => t.FullName.StartsWith(FFXIVNamespacePrefix) && !IsGeneratedType(t));
         }
 
         public string Export(GapStrategy strategy, EnvFormat envFormat)
@@ -84,29 +85,40 @@ namespace CExporter
             GapStrategy = strategy;
             EnvFormat = envFormat;
             KnownTypes.Clear();
+            TypesToExport.Clear();
+            TypesToExport.AddRange(GetExportableTypes(nameof(FFXIVClientStructs)));
 
-            var header = new StringBuilder();
-
-            var definedTypes = GetExportableTypes(nameof(FFXIVClientStructs));
+            var definitions = new StringBuilder();
+            for (int i = 0; i < TypesToExport.Count; ++i) // note: new types could be added while exporting
+            {
+                ProcessType(TypesToExport[i], definitions);
+            }
 
             // Make forward references for everything, cycles are bad, detecting them is harder.
+            var header = new StringBuilder();
             header.AppendLine("// Forward References");
-            foreach (var type in definedTypes)
+            foreach (var type in KnownTypes)
                 if (type.IsStruct() && !type.IsFixedBuffer())
                     header.AppendLine($"struct {FixFullName(type)};");
 
             header.AppendLine();
             header.AppendLine("// Definitions");
-            foreach (var type in definedTypes)
-            {
-                ProcessType(type, header);
-            }
-
+            header.Append(definitions);
             return header.ToString();
         }
 
         private void ProcessType(Type type, StringBuilder header)
         {
+            if (type.IsPointer)
+            {
+                // make sure we export pointed-to type, but don't do it immediately - otherwise we might end up adding definition for a structure X containing member of type Y before Y, if Y has X* member
+                var elemType = type.GetElementType();
+                while (elemType.IsPointer)
+                    elemType = elemType.GetElementType();
+                TypesToExport.Add(elemType);
+                return;
+            }
+
             if (KnownTypes.Contains(type))
                 return;
 
@@ -224,9 +236,9 @@ namespace CExporter
                                 fixedType = fixedType.GetGenericArguments()[0].MakePointerType();
                             }
 
-                            ProcessType(fixedType.IsPointer ? fixedType.GetElementType() : fixedType, header);
+                            ProcessType(fixedType, header);
                             var rawSize = fieldSize;
-                            fieldSize = (fixedType.IsPointer ? 8 : SizeOf(fixedType)) * fixedSize;
+                            fieldSize = SizeOf(fixedType) * fixedSize;
                             if (rawSize != fieldSize)
                             {
                                 Debug.WriteLine($"Array size mismatch for {FixFullName(type)}.{finfo.Name}: raw is {FixTypeName(finfo.GetFixedType())}[0x{finfo.GetFixedSize():X}] (0x{rawSize:X}), typed is {FixTypeName(fixedType)}[0x{fixedSize:X}] (0x{fieldSize:X})");
@@ -237,15 +249,9 @@ namespace CExporter
                     }
                     else if (fieldType.IsPointer)
                     {
-                        var elemType = fieldType.GetElementType();
-                        while (elemType.IsPointer)
-                            elemType = elemType.GetElementType();
-                        ProcessType(elemType, header);
-
+                        ProcessType(fieldType, header);
                         sb.AppendLine(string.Format($"    /* 0x{{0:X{pad}}} */ {FixTypeName(fieldType)} {finfo.Name};", offset));
-
                         fieldSize = 8;
-
                     }
                     else if (fieldType.IsEnum)
                     {
@@ -296,6 +302,8 @@ namespace CExporter
 
         private int SizeOf(Type type)
         {
+            if (type.IsPointer)
+                return 8; // assume 64-bit
             // Marshal.SizeOf doesn't work correctly because the assembly is unmarshaled, and more specifically, it sets bools as 4 bytes long...
             return (int?)typeof(Unsafe).GetMethod("SizeOf")?.MakeGenericMethod(type).Invoke(null, null) ?? 0;
         }
