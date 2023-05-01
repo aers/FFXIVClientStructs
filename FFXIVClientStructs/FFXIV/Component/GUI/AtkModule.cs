@@ -5,8 +5,6 @@
 [StructLayout(LayoutKind.Explicit, Size = 0x8240)]
 public unsafe partial struct AtkModule
 {
-    [FieldOffset(0x0)] public void* vtbl;
-
     [FieldOffset(0x1B10)] public AtkUnitBase* IntersectingAddon;
     [FieldOffset(0x1B18)] public AtkCollisionNode* IntersectingCollisionNode;
 

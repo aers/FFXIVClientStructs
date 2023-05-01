@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Physics;
 [StructLayout(LayoutKind.Explicit, Size = 0x100)]
 public unsafe struct BoneSimulator
 {
-    [FieldOffset(0x00)] public void* vtbl;
+    [FieldOffset(0x00)] public void* VTable;
     [FieldOffset(0x10)] public uint PhysicsGroup;
     [FieldOffset(0x18)] public Skeleton* Skeleton; // Client::Graphics::Render::Skeleton
     [FieldOffset(0x20)] public Vector3 CharacterPosition;

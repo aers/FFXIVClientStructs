@@ -7,7 +7,7 @@
 [StructLayout(LayoutKind.Explicit, Size = 0x480)]
 public unsafe partial struct RenderTargetManager
 {
-    [FieldOffset(0x0)] public void* vtbl;
+    [FieldOffset(0x0)] public void* VTable;
 
     [FieldOffset(0x8)] public Notifier Notifier;
 

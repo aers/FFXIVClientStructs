@@ -85,7 +85,7 @@ public unsafe partial struct ConfigEntry
 [StructLayout(LayoutKind.Explicit, Size = 0x18)]
 public unsafe struct ChangeEventInterface
 {
-    [FieldOffset(0x0)] public void* vtbl;
+    [FieldOffset(0x0)] public void* VTable;
     [FieldOffset(0x8)] public ChangeEventInterface* Next;
     [FieldOffset(0x10)] public ConfigBase* Owner;
 }
@@ -98,7 +98,7 @@ public unsafe struct ChangeEventInterface
 [StructLayout(LayoutKind.Explicit, Size = 0x110)]
 public unsafe struct ConfigBase
 {
-    [FieldOffset(0x0)] public void* vtbl;
+    [FieldOffset(0x0)] public void* VTable;
     [FieldOffset(0x8)] public ChangeEventInterface* Listener;
     [FieldOffset(0x14)] public uint ConfigCount;
     [FieldOffset(0x18)] public ConfigEntry* ConfigEntry; // array

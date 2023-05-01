@@ -2,9 +2,7 @@
 
 [StructLayout(LayoutKind.Explicit, Size = 0x18)]
 public unsafe partial struct InfoProxyInterface
-
 {
-    [FieldOffset(0x0)] public void** vtbl;
     [FieldOffset(0x8)] public UIModule* UiModule;
     //For Proxies with a fixed count this is apparently 0
     [FieldOffset(0x10)] public uint EntryCount;
@@ -23,7 +21,7 @@ public unsafe partial struct InfoProxyInvitedInterface
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct Unk18
     {
-        [FieldOffset(0x0)] public void* vtbl;
+        [FieldOffset(0x0)] public void* VTable;
         [FieldOffset(0x8)] public void* Data;
     }
 }

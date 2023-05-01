@@ -14,8 +14,6 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [VTableAddress("48 8d 05 ?? ?? ?? ?? 4c 89 44 24 78 48 89 01", 3)]
 public unsafe partial struct UIModule
 {
-    [FieldOffset(0x0)] public void* vtbl;
-    [FieldOffset(0x0)] public void** vfunc;
     [FieldOffset(0x8)] public Unk1 UnkObj1;
     [FieldOffset(0x10)] public Unk2 UnkObj2;
     [FieldOffset(0x18)] public Unk3 UnkObj3;
@@ -227,22 +225,19 @@ public unsafe partial struct UIModule
     [StructLayout(LayoutKind.Explicit, Size = 0x8)]
     public struct Unk1
     {
-        [FieldOffset(0x0)] public void* vtbl;
-        [FieldOffset(0x0)] public void** vfunc;
+        [FieldOffset(0x0)] public void* VTable;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x8)]
     public struct Unk2
     {
-        [FieldOffset(0x0)] public void* vtbl;
-        [FieldOffset(0x0)] public void** vfunc;
+        [FieldOffset(0x0)] public void* VTable;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x8)] // size?
     public struct Unk3
     {
-        [FieldOffset(0x0)] public void* vtbl;
-        [FieldOffset(0x0)] public void** vfunc;
+        [FieldOffset(0x0)] public void* VTable;
     }
 
     [Flags]

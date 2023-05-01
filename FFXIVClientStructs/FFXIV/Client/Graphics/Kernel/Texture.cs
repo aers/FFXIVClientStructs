@@ -20,7 +20,7 @@ public enum TextureFormat : uint
 [StructLayout(LayoutKind.Explicit, Size = 0xC0)]
 public unsafe struct Texture
 {
-    [FieldOffset(0x00)] public void* vtbl;
+    [FieldOffset(0x00)] public void* VTable;
     [FieldOffset(0x20)] public Notifier Notifier;
     [FieldOffset(0x38)] public uint Width;
     [FieldOffset(0x3C)] public uint Height;

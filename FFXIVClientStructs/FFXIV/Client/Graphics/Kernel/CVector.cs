@@ -6,6 +6,6 @@
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct CVector<T> where T : unmanaged
 {
-    public void* vtbl;
+    public void* VTable;
     public StdVector<T> Vector;
 }

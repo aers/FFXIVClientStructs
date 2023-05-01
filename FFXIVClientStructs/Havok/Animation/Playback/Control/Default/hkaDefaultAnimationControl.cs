@@ -12,7 +12,7 @@ public unsafe partial struct hkaDefaultAnimationControl
 
 	public struct hkaDefaultAnimationControlListener
 	{
-		public void* vtbl;
+		public void* VTable;
 	}
 
 	public struct hkaDefaultAnimationControlMapperData

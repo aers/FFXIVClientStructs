@@ -6,7 +6,7 @@
 [StructLayout(LayoutKind.Explicit, Size = 0x190)]
 public unsafe struct OffscreenRenderingManager
 {
-    [FieldOffset(0x0)] public void* vtbl;
+    [FieldOffset(0x0)] public void* VTable;
 
     // OffscreenRenderingManager::RenderJobSystem - size is at least 0xB8
     [FieldOffset(0x8)] public void* JobSystem_vtbl;

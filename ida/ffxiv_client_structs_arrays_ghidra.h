@@ -934,14 +934,14 @@ struct Common_Configuration_ConfigValue /* Size=0x8 */
 
 struct Common_Configuration_ChangeEventInterface /* Size=0x18 */
 {
-    /* 0x00 */ void* vtbl;
+    /* 0x00 */ void* VTable;
     /* 0x08 */ Common_Configuration_ChangeEventInterface* Next;
     /* 0x10 */ Common_Configuration_ConfigBase* Owner;
 };
 
 struct Common_Configuration_ConfigBase /* Size=0x110 */
 {
-    /* 0x000 */ void* vtbl;
+    /* 0x000 */ void* VTable;
     /* 0x008 */ Common_Configuration_ChangeEventInterface* Listener;
     /*       */ byte _gap_0x10[0x4];
     /* 0x014 */ unsigned __int32 ConfigCount;
@@ -1043,10 +1043,7 @@ struct Component_Excel_ExcelModuleInterface /* Size=0x10 */
 
 struct Component_Excel_ExcelSheet /* Size=0x110 */
 {
-    union {
-    /* 0x000 */ void* vtbl;
-    /* 0x000 */ void** vfunc;
-    } _union_0x0;
+    /* 0x000 */ void* VTable;
     /*       */ byte _gap_0x8[0x8];
     /* 0x010 */ byte* SheetName;
     /*       */ byte _gap_0x18[0x8];
@@ -1057,7 +1054,7 @@ struct Component_Excel_ExcelSheet /* Size=0x110 */
 
 struct Component_GUI_AtkEventInterface /* Size=0x8 */
 {
-    /* 0x0 */ void** vtbl;
+    /* 0x0 */ void** VTable;
 };
 
 struct Component_GUI_AgentInterface_AgentInterfaceVTable /* Size=0x48 */
@@ -1157,35 +1154,22 @@ struct Client_UI_UIModule_UIModuleVTable /* Size=0x670 */
 
 struct Client_UI_UIModule_Unk1 /* Size=0x8 */
 {
-    union {
-    /* 0x0 */ void* vtbl;
-    /* 0x0 */ void** vfunc;
-    } _union_0x0;
+    /* 0x0 */ void* VTable;
 };
 
 struct Client_UI_UIModule_Unk2 /* Size=0x8 */
 {
-    union {
-    /* 0x0 */ void* vtbl;
-    /* 0x0 */ void** vfunc;
-    } _union_0x0;
+    /* 0x0 */ void* VTable;
 };
 
 struct Client_UI_UIModule_Unk3 /* Size=0x8 */
 {
-    union {
-    /* 0x0 */ void* vtbl;
-    /* 0x0 */ void** vfunc;
-    } _union_0x0;
+    /* 0x0 */ void* VTable;
 };
 
 struct Client_UI_UIModule /* Size=0xEB400 */
 {
-    union {
-    /* 0x00000 */ void* vtbl;
-    /* 0x00000 */ void** vfunc;
     /* 0x00000 */ Client_UI_UIModule_UIModuleVTable* VTable;
-    } _union_0x0;
     /* 0x00008 */ Client_UI_UIModule_Unk1 UnkObj1;
     /* 0x00010 */ Client_UI_UIModule_Unk2 UnkObj2;
     /* 0x00018 */ Client_UI_UIModule_Unk3 UnkObj3;
@@ -1219,7 +1203,7 @@ struct Component_GUI_AgentHudLayout /* Size=0x78 */
 
 struct Component_GUI_AtkArrayData /* Size=0x20 */
 {
-    /* 0x00 */ void* vtbl;
+    /* 0x00 */ void* VTable;
     /* 0x08 */ __int32 Size;
     /*      */ byte _gap_0xC[0x4];
     /*      */ byte _gap_0x10[0x8];
@@ -1275,10 +1259,7 @@ enum Component_GUI_CollisionType0x2 /* Size=0x2 */
 
 struct Component_GUI_AtkEventTarget /* Size=0x8 */
 {
-    union {
-    /* 0x0 */ void* vtbl;
-    /* 0x0 */ void** vfunc;
-    } _union_0x0;
+    /* 0x0 */ void* VTable;
 };
 
 struct Component_GUI_AtkResNode_AtkResNodeVTable /* Size=0x10 */
@@ -1289,10 +1270,7 @@ struct Component_GUI_AtkResNode_AtkResNodeVTable /* Size=0x10 */
 
 struct Component_GUI_AtkEventListener /* Size=0x8 */
 {
-    union {
-    /* 0x0 */ void* vtbl;
-    /* 0x0 */ void** vfunc;
-    } _union_0x0;
+    /* 0x0 */ void* VTable;
 };
 
 enum Component_GUI_AtkEventType0x1 /* Size=0x1 */
@@ -1459,10 +1437,7 @@ struct StdString /* Size=0x20 */
 
 struct Client_System_Resource_Handle_ResourceHandle /* Size=0xB0 */
 {
-    union {
-    /* 0x00 */ void* vtbl;
-    /* 0x00 */ void** vfunc;
-    } _union_0x0;
+    /* 0x00 */ void* VTable;
     /* 0x08 */ Client_System_Resource_ResourceCategory0x4 Category;
     /* 0x0C */ unsigned __int32 FileType;
     /* 0x10 */ unsigned __int32 Id;
@@ -1487,7 +1462,7 @@ struct Client_System_Resource_Handle_TextureResourceHandle /* Size=0x140 */
 
 struct Client_Graphics_Render_Notifier /* Size=0x18 */
 {
-    /* 0x00 */ void* vtbl;
+    /* 0x00 */ void* VTable;
     /* 0x08 */ Client_Graphics_Render_Notifier* Next;
     /* 0x10 */ Client_Graphics_Render_Notifier* Prev;
 };
@@ -1500,7 +1475,7 @@ enum Client_Graphics_Render_TextureFormat0x4 /* Size=0x4 */
 
 struct Client_Graphics_Render_Texture /* Size=0xC0 */
 {
-    /* 0x00 */ void* vtbl;
+    /* 0x00 */ void* VTable;
     /*      */ byte _gap_0x8[0x18];
     /* 0x20 */ Client_Graphics_Render_Notifier Notifier;
     /* 0x38 */ unsigned __int32 Width;
@@ -1546,10 +1521,7 @@ enum Component_GUI_TextureType0x1 /* Size=0x1 */
 
 struct Component_GUI_AtkTexture /* Size=0x18 */
 {
-    union {
-    /* 0x00 */ void* vtbl;
     /* 0x00 */ Component_GUI_AtkTexture_AtkTextureVTable* VTable;
-    } _union_0x0;
     union {
     /* 0x08 */ Component_GUI_AtkTextureResource* Resource;
     /* 0x08 */ void* Crest;
@@ -2141,7 +2113,7 @@ struct Component_GUI_AtkUnitBase /* Size=0x220 */
 
 struct Component_GUI_AtkUnitList /* Size=0x810 */
 {
-    /* 0x000 */ void* vtbl;
+    /* 0x000 */ void* VTable;
     /* 0x008 */ Component_GUI_AtkUnitBase* AtkUnitEntries;
     /*       */ byte _gap_0x10[0x7F8];
     /* 0x808 */ unsigned __int32 Count;
@@ -2263,10 +2235,7 @@ struct Component_GUI_AtkDragDropManager /* Size=0xC8 */
 
 struct Component_GUI_AtkEventListenerUnk1 /* Size=0x60 */
 {
-    union {
-    /* 0x00 */ void* vtbl;
-    /* 0x00 */ void** vfunc;
-    } _union_0x0;
+    /* 0x00 */ void* VTable;
     /* 0x08 */ void* Unk;
     /*      */ byte _gap_0x10[0x10];
     /* 0x20 */ Component_GUI_AtkUnitBase* AtkUnitBase;
@@ -2294,10 +2263,7 @@ struct Component_GUI_AtkModule_AtkModuleVTable /* Size=0xD8 */
 
 struct Component_GUI_AtkModule /* Size=0x8240 */
 {
-    union {
-    /* 0x0000 */ void* vtbl;
     /* 0x0000 */ Component_GUI_AtkModule_AtkModuleVTable* VTable;
-    } _union_0x0;
     /*        */ byte _gap_0x8[0x1B08];
     /* 0x1B10 */ Component_GUI_AtkUnitBase* IntersectingAddon;
     /* 0x1B18 */ Component_GUI_AtkCollisionNode* IntersectingCollisionNode;
@@ -4562,7 +4528,7 @@ struct Client_UI_AddonTeleport /* Size=0x2D8 */
 
 struct Client_UI_DutySlot /* Size=0x168 */
 {
-    /* 0x000 */ void** vtbl;
+    /* 0x000 */ void** VTable;
     /* 0x008 */ Client_UI_AddonWeeklyBingo* addon;
     /* 0x010 */ __int32 index;
     /*       */ byte _gap_0x14[0x4];
@@ -4577,7 +4543,7 @@ struct Client_UI_DutySlot /* Size=0x168 */
 
 struct Client_UI_DutySlotList /* Size=0x18E8 */
 {
-    /* 0x0000 */ void** vtbl;
+    /* 0x0000 */ void** VTable;
     /* 0x0008 */ void* addon;
     /*        */ byte _gap_0x10[0x10];
     /*        */ byte _gap_0x20[0x4];
@@ -4607,7 +4573,7 @@ struct Client_UI_DutySlotList /* Size=0x18E8 */
 
 struct Client_UI_StringThing /* Size=0x50 */
 {
-    /* 0x00 */ void* vtbl;
+    /* 0x00 */ void* VTable;
     /* 0x08 */ byte* FullSealsText;
     /* 0x10 */ byte* OneOrMoreLinesText;
     /* 0x18 */ byte* SecondChancePointsText;
@@ -4621,7 +4587,7 @@ struct Client_UI_StringThing /* Size=0x50 */
 
 struct Client_UI_StickerSlot /* Size=0x58 */
 {
-    /* 0x00 */ void** vtbl;
+    /* 0x00 */ void** VTable;
     /* 0x08 */ void* addon;
     /* 0x10 */ __int32 index;
     /*      */ byte _gap_0x14[0x4];
@@ -4637,7 +4603,7 @@ struct Client_UI_StickerSlot /* Size=0x58 */
 
 struct Client_UI_StickerSlotList /* Size=0x590 */
 {
-    /* 0x000 */ void** vtbl;
+    /* 0x000 */ void** VTable;
     /* 0x008 */ void* addon;
     /* 0x010 */ Client_UI_StickerSlot StickerSlot1;
     /* 0x068 */ Client_UI_StickerSlot StickerSlot2;
@@ -4996,7 +4962,7 @@ struct Client_UI_Shell_RaptureShellModule /* Size=0x1208 */
 
 struct Client_Graphics_ReferencedClassBase /* Size=0x10 */
 {
-    /* 0x00 */ void* vtbl;
+    /* 0x00 */ void* VTable;
     /* 0x08 */ unsigned __int32 RefCount;
     /*      */ byte _gap_0xC[0x4];
 };
@@ -5028,7 +4994,7 @@ struct Client_Graphics_Scene_Camera /* Size=0xF0 */
 
 struct Client_Game_CameraBase /* Size=0x110 */
 {
-    /* 0x000 */ void** vtbl;
+    /* 0x000 */ void** VTable;
     /*       */ byte _gap_0x8[0x8];
     /* 0x010 */ Client_Graphics_Scene_Camera SceneCamera;
     /* 0x100 */ unsigned __int32 UnkUInt;
@@ -6285,7 +6251,7 @@ struct Client_UI_Misc_RaptureGearsetModule /* Size=0xB670 */
 {
     union {
     /* 0x0000 */ Client_UI_Misc_UserFileManager_UserFileEvent UserFileEvent;
-    /* 0x0000 */ void* vtbl;
+    /* 0x0000 */ void* VTable;
     } _union_0x0;
     /*        */ byte _gap_0x40[0x8];
     /* 0x0048 */ Client_UI_Misc_RaptureGearsetModule_Gearsets Gearset;
@@ -6623,10 +6589,7 @@ struct Client_UI_Info_InfoProxyInterface_InfoProxyInterfaceVTable /* Size=0x40 *
 
 struct Client_UI_Info_InfoProxyInterface /* Size=0x18 */
 {
-    union {
-    /* 0x00 */ void** vtbl;
     /* 0x00 */ Client_UI_Info_InfoProxyInterface_InfoProxyInterfaceVTable* VTable;
-    } _union_0x0;
     /* 0x08 */ Client_UI_UIModule* UiModule;
     /* 0x10 */ unsigned __int32 EntryCount;
     /*      */ byte _gap_0x14[0x4];
@@ -6876,7 +6839,7 @@ struct Client_UI_Info_CrossRealmMember /* Size=0x50 */
 
 struct Client_UI_Info_InfoProxyInvitedInterface_Unk18 /* Size=0x10 */
 {
-    /* 0x00 */ void* vtbl;
+    /* 0x00 */ void* VTable;
     /* 0x08 */ void* Data;
 };
 
@@ -8737,7 +8700,7 @@ struct Client_UI_Agent_AgentMJIPouch /* Size=0x38 */
 
 struct Client_UI_Agent_AgentModule /* Size=0xD78 */
 {
-    /* 0x000 */ void* vtbl;
+    /* 0x000 */ void* VTable;
     /* 0x008 */ Client_UI_UIModule* UIModule;
     /* 0x010 */ byte Initialized;
     /* 0x011 */ byte Unk_11;
@@ -10061,7 +10024,7 @@ struct Client_Graphics_Animation_AnimationResourceHandle /* Size=0x1 */
 
 struct Client_Graphics_Render_PartialSkeleton /* Size=0x1C0 */
 {
-    /* 0x000 */ void* vtbl;
+    /* 0x000 */ void* VTable;
     /*       */ byte _gap_0x8[0x18];
     /* 0x020 */ byte Jobs[0x100];
     /* 0x120 */ __int16 ConnectedParentBoneIndex;
@@ -10117,7 +10080,7 @@ struct Client_Graphics_Physics_BoneSimulators /* Size=0x78 */
 
 struct Client_Graphics_Physics_BonePhysicsModule /* Size=0x1C0 */
 {
-    /* 0x000 */ void* vtbl;
+    /* 0x000 */ void* VTable;
     /*       */ byte _gap_0x8[0x8];
     /* 0x010 */ Common_Math_Matrix4x4 SkeletonWorldMatrix;
     /* 0x050 */ Common_Math_Matrix4x4 SkeletonInvWorldMatrix;
@@ -10267,7 +10230,7 @@ struct Client_Graphics_Scene_World /* Size=0x160 */
 
 struct Client_Graphics_Physics_BoneSimulator /* Size=0x100 */
 {
-    /* 0x000 */ void* vtbl;
+    /* 0x000 */ void* VTable;
     /*       */ byte _gap_0x8[0x8];
     /* 0x010 */ unsigned __int32 PhysicsGroup;
     /*       */ byte _gap_0x14[0x4];
@@ -10287,7 +10250,7 @@ struct Client_Graphics_Render_Manager /* Size=0x2D710 */
 
 struct Client_Graphics_Render_OffscreenRenderingManager /* Size=0x190 */
 {
-    /* 0x000 */ void* vtbl;
+    /* 0x000 */ void* VTable;
     /* 0x008 */ void* JobSystem_vtbl;
     /*       */ byte _gap_0x10[0xB8];
     /* 0x0C8 */ void* Camera_1;
@@ -10299,7 +10262,7 @@ struct Client_Graphics_Render_OffscreenRenderingManager /* Size=0x190 */
 
 struct Client_Graphics_Render_RenderTargetManager /* Size=0x480 */
 {
-    /* 0x000 */ void* vtbl;
+    /* 0x000 */ void* VTable;
     /* 0x008 */ Client_Graphics_Render_Notifier Notifier;
     /* 0x020 */ byte RenderTargetArray[0x1C0];
     /* 0x1E0 */ Client_Graphics_Render_Texture* OffscreenRenderTarget_1;
@@ -10422,7 +10385,7 @@ struct StdVector_Pointer_Client_Graphics_Kernel_VertexShader /* Size=0x18 */
 
 struct Client_Graphics_Kernel_CVector_Pointer_Client_Graphics_Kernel_VertexShader /* Size=0x20 */
 {
-    /* 0x00 */ void* vtbl;
+    /* 0x00 */ void* VTable;
     /* 0x08 */ StdVector_Pointer_Client_Graphics_Kernel_VertexShader Vector;
 };
 
@@ -10440,7 +10403,7 @@ struct StdVector_Pointer_Client_Graphics_Kernel_PixelShader /* Size=0x18 */
 
 struct Client_Graphics_Kernel_CVector_Pointer_Client_Graphics_Kernel_PixelShader /* Size=0x20 */
 {
-    /* 0x00 */ void* vtbl;
+    /* 0x00 */ void* VTable;
     /* 0x08 */ StdVector_Pointer_Client_Graphics_Kernel_PixelShader Vector;
 };
 
@@ -10458,7 +10421,7 @@ struct StdVector_Pointer_Client_Graphics_Kernel_ShaderNode /* Size=0x18 */
 
 struct Client_Graphics_Kernel_CVector_Pointer_Client_Graphics_Kernel_ShaderNode /* Size=0x20 */
 {
-    /* 0x00 */ void* vtbl;
+    /* 0x00 */ void* VTable;
     /* 0x08 */ StdVector_Pointer_Client_Graphics_Kernel_ShaderNode Vector;
 };
 
@@ -10521,7 +10484,7 @@ struct Client_Graphics_Kernel_ShaderNode_ShaderPass /* Size=0x8 */
 
 struct Client_Graphics_Kernel_ShaderNode /* Size=0x38 */
 {
-    /* 0x00 */ void* vtbl;
+    /* 0x00 */ void* VTable;
     /* 0x08 */ Client_Graphics_Kernel_ShaderPackage* OwnerPackage;
     /* 0x10 */ unsigned __int32 PassNum;
     /* 0x14 */ byte PassIndices[0x10];
@@ -11278,7 +11241,7 @@ enum Client_Game_UI_ContentsFinder_LootRule0x1 /* Size=0x1 */
 
 struct Client_Game_UI_ContentsFinder /* Size=0xB0 */
 {
-    /* 0x00 */ void* vtbl;
+    /* 0x00 */ void* VTable;
     /*      */ byte _gap_0x8[0x10];
     /* 0x18 */ Client_Game_UI_ContentsFinder_LootRule0x1 LootRules;
     /* 0x19 */ bool IsUnrestrictedParty;
@@ -11687,7 +11650,7 @@ struct Client_Game_UI_RouletteController /* Size=0x70 */
 
 struct Client_Game_UI_SelectUseTicketInvoker /* Size=0x28 */
 {
-    /* 0x00 */ void* vtbl;
+    /* 0x00 */ void* VTable;
     /*      */ byte _gap_0x8[0x8];
     /* 0x10 */ Client_Game_UI_Telepo* Telepo;
     /*      */ byte _gap_0x18[0x10];
@@ -11695,7 +11658,7 @@ struct Client_Game_UI_SelectUseTicketInvoker /* Size=0x28 */
 
 struct Client_Game_UI_Telepo /* Size=0x58 */
 {
-    /* 0x00 */ void* vtbl;
+    /* 0x00 */ void* VTable;
     /*      */ byte _gap_0x8[0x8];
     /* 0x10 */ StdVector_Client_Game_UI_TeleportInfo TeleportList;
     /* 0x28 */ Client_Game_UI_SelectUseTicketInvoker UseTicketInvoker;
@@ -11960,7 +11923,7 @@ struct Client_Game_MJI_MJIFarmPasture /* Size=0x4 */
 
 struct Client_Game_MJI_MJIWorkshops /* Size=0x17 */
 {
-    /* 0x00 */ void* vtbl;
+    /* 0x00 */ void* VTable;
     /* 0x08 */ byte PlaceId[0x3];
     /* 0x0B */ byte GlamourLevel[0x3];
     /* 0x0E */ byte HoursToCompletion[0x3];
@@ -11970,7 +11933,7 @@ struct Client_Game_MJI_MJIWorkshops /* Size=0x17 */
 
 struct Client_Game_MJI_MJIGranaries /* Size=0x12 */
 {
-    /* 0x00 */ void* vtbl;
+    /* 0x00 */ void* VTable;
     /* 0x08 */ byte PlaceId[0x2];
     /* 0x0A */ byte GlamourLevel[0x2];
     /* 0x0C */ byte HoursToCompletion[0x2];
@@ -12015,7 +11978,7 @@ struct Client_Game_MJI_IslandState /* Size=0xB0 */
 
 struct Client_Game_MJI_MJIFarmState /* Size=0x148 */
 {
-    /* 0x000 */ void* vtbl;
+    /* 0x000 */ void* VTable;
     /* 0x008 */ void* vtbl2;
     /*       */ byte _gap_0x10[0x10];
     /* 0x020 */ byte SeedType[0x14];

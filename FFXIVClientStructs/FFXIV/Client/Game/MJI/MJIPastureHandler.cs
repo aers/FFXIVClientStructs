@@ -4,7 +4,7 @@
 // ctor 1413EA840 ? - extends EventHandler
 [StructLayout(LayoutKind.Explicit, Size = 0xAE0)]
 public unsafe partial struct MJIPastureHandler {
-    [FieldOffset(0x0)] public void* vtbl;
+    [FieldOffset(0x0)] public void* VTable;
     
     /// <summary>
     /// An array representing all animals currently present in the pastures on the Island. 

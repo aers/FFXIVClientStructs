@@ -20,7 +20,7 @@ public struct BoneSimulators
 [StructLayout(LayoutKind.Explicit, Size = 0x1C0)]
 public unsafe struct BonePhysicsModule
 {
-    [FieldOffset(0x00)] public void* vtbl;
+    [FieldOffset(0x00)] public void* VTable;
     [FieldOffset(0x10)] public Matrix4x4 SkeletonWorldMatrix;
     [FieldOffset(0x50)] public Matrix4x4 SkeletonInvWorldMatrix;
     [FieldOffset(0x90)] public float WindScale;

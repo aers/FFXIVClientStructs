@@ -934,14 +934,14 @@ struct Common::Configuration::ConfigValue /* Size=0x8 */
 
 struct Common::Configuration::ChangeEventInterface /* Size=0x18 */
 {
-    /* 0x00 */ void* vtbl;
+    /* 0x00 */ void* VTable;
     /* 0x08 */ Common::Configuration::ChangeEventInterface* Next;
     /* 0x10 */ Common::Configuration::ConfigBase* Owner;
 };
 
 struct Common::Configuration::ConfigBase /* Size=0x110 */
 {
-    /* 0x000 */ void* vtbl;
+    /* 0x000 */ void* VTable;
     /* 0x008 */ Common::Configuration::ChangeEventInterface* Listener;
     /*       */ byte _gap_0x10[0x4];
     /* 0x014 */ unsigned __int32 ConfigCount;
@@ -1043,10 +1043,7 @@ struct Component::Excel::ExcelModuleInterface /* Size=0x10 */
 
 struct Component::Excel::ExcelSheet /* Size=0x110 */
 {
-    union {
-    /* 0x000 */ void* vtbl;
-    /* 0x000 */ void** vfunc;
-    } _union_0x0;
+    /* 0x000 */ void* VTable;
     /*       */ byte _gap_0x8[0x8];
     /* 0x010 */ byte* SheetName;
     /*       */ byte _gap_0x18[0x8];
@@ -1057,7 +1054,7 @@ struct Component::Excel::ExcelSheet /* Size=0x110 */
 
 struct Component::GUI::AtkEventInterface /* Size=0x8 */
 {
-    /* 0x0 */ void** vtbl;
+    /* 0x0 */ void** VTable;
 };
 
 struct Component::GUI::AgentInterface::AgentInterfaceVTable /* Size=0x48 */
@@ -1157,35 +1154,22 @@ struct Client::UI::UIModule::UIModuleVTable /* Size=0x670 */
 
 struct Client::UI::UIModule::Unk1 /* Size=0x8 */
 {
-    union {
-    /* 0x0 */ void* vtbl;
-    /* 0x0 */ void** vfunc;
-    } _union_0x0;
+    /* 0x0 */ void* VTable;
 };
 
 struct Client::UI::UIModule::Unk2 /* Size=0x8 */
 {
-    union {
-    /* 0x0 */ void* vtbl;
-    /* 0x0 */ void** vfunc;
-    } _union_0x0;
+    /* 0x0 */ void* VTable;
 };
 
 struct Client::UI::UIModule::Unk3 /* Size=0x8 */
 {
-    union {
-    /* 0x0 */ void* vtbl;
-    /* 0x0 */ void** vfunc;
-    } _union_0x0;
+    /* 0x0 */ void* VTable;
 };
 
 struct Client::UI::UIModule /* Size=0xEB400 */
 {
-    union {
-    /* 0x00000 */ void* vtbl;
-    /* 0x00000 */ void** vfunc;
     /* 0x00000 */ Client::UI::UIModule::UIModuleVTable* VTable;
-    } _union_0x0;
     /* 0x00008 */ Client::UI::UIModule::Unk1 UnkObj1;
     /* 0x00010 */ Client::UI::UIModule::Unk2 UnkObj2;
     /* 0x00018 */ Client::UI::UIModule::Unk3 UnkObj3;
@@ -1219,7 +1203,7 @@ struct Component::GUI::AgentHudLayout /* Size=0x78 */
 
 struct Component::GUI::AtkArrayData /* Size=0x20 */
 {
-    /* 0x00 */ void* vtbl;
+    /* 0x00 */ void* VTable;
     /* 0x08 */ __int32 Size;
     /*      */ byte _gap_0xC[0x4];
     /*      */ byte _gap_0x10[0x8];
@@ -1275,10 +1259,7 @@ enum CollisionType: unsigned __int16
 
 struct Component::GUI::AtkEventTarget /* Size=0x8 */
 {
-    union {
-    /* 0x0 */ void* vtbl;
-    /* 0x0 */ void** vfunc;
-    } _union_0x0;
+    /* 0x0 */ void* VTable;
 };
 
 struct Component::GUI::AtkResNode::AtkResNodeVTable /* Size=0x10 */
@@ -1289,10 +1270,7 @@ struct Component::GUI::AtkResNode::AtkResNodeVTable /* Size=0x10 */
 
 struct Component::GUI::AtkEventListener /* Size=0x8 */
 {
-    union {
-    /* 0x0 */ void* vtbl;
-    /* 0x0 */ void** vfunc;
-    } _union_0x0;
+    /* 0x0 */ void* VTable;
 };
 
 enum AtkEventType: byte
@@ -1459,10 +1437,7 @@ struct StdString /* Size=0x20 */
 
 struct Client::System::Resource::Handle::ResourceHandle /* Size=0xB0 */
 {
-    union {
-    /* 0x00 */ void* vtbl;
-    /* 0x00 */ void** vfunc;
-    } _union_0x0;
+    /* 0x00 */ void* VTable;
     /* 0x08 */ Client::System::Resource::ResourceCategory Category;
     /* 0x0C */ unsigned __int32 FileType;
     /* 0x10 */ unsigned __int32 Id;
@@ -1487,7 +1462,7 @@ struct Client::System::Resource::Handle::TextureResourceHandle /* Size=0x140 */
 
 struct Client::Graphics::Render::Notifier /* Size=0x18 */
 {
-    /* 0x00 */ void* vtbl;
+    /* 0x00 */ void* VTable;
     /* 0x08 */ Client::Graphics::Render::Notifier* Next;
     /* 0x10 */ Client::Graphics::Render::Notifier* Prev;
 };
@@ -1500,7 +1475,7 @@ enum TextureFormat: unsigned __int32
 
 struct Client::Graphics::Render::Texture /* Size=0xC0 */
 {
-    /* 0x00 */ void* vtbl;
+    /* 0x00 */ void* VTable;
     /*      */ byte _gap_0x8[0x18];
     /* 0x20 */ Client::Graphics::Render::Notifier Notifier;
     /* 0x38 */ unsigned __int32 Width;
@@ -1546,10 +1521,7 @@ enum TextureType: byte
 
 struct Component::GUI::AtkTexture /* Size=0x18 */
 {
-    union {
-    /* 0x00 */ void* vtbl;
     /* 0x00 */ Component::GUI::AtkTexture::AtkTextureVTable* VTable;
-    } _union_0x0;
     union {
     /* 0x08 */ Component::GUI::AtkTextureResource* Resource;
     /* 0x08 */ void* Crest;
@@ -2141,7 +2113,7 @@ struct Component::GUI::AtkUnitBase /* Size=0x220 */
 
 struct Component::GUI::AtkUnitList /* Size=0x810 */
 {
-    /* 0x000 */ void* vtbl;
+    /* 0x000 */ void* VTable;
     /* 0x008 */ Component::GUI::AtkUnitBase* AtkUnitEntries;
     /*       */ byte _gap_0x10[0x7F8];
     /* 0x808 */ unsigned __int32 Count;
@@ -2263,10 +2235,7 @@ struct Component::GUI::AtkDragDropManager /* Size=0xC8 */
 
 struct Component::GUI::AtkEventListenerUnk1 /* Size=0x60 */
 {
-    union {
-    /* 0x00 */ void* vtbl;
-    /* 0x00 */ void** vfunc;
-    } _union_0x0;
+    /* 0x00 */ void* VTable;
     /* 0x08 */ void* Unk;
     /*      */ byte _gap_0x10[0x10];
     /* 0x20 */ Component::GUI::AtkUnitBase* AtkUnitBase;
@@ -2294,10 +2263,7 @@ struct Component::GUI::AtkModule::AtkModuleVTable /* Size=0xD8 */
 
 struct Component::GUI::AtkModule /* Size=0x8240 */
 {
-    union {
-    /* 0x0000 */ void* vtbl;
     /* 0x0000 */ Component::GUI::AtkModule::AtkModuleVTable* VTable;
-    } _union_0x0;
     /*        */ byte _gap_0x8[0x1B08];
     /* 0x1B10 */ Component::GUI::AtkUnitBase* IntersectingAddon;
     /* 0x1B18 */ Component::GUI::AtkCollisionNode* IntersectingCollisionNode;
@@ -4562,7 +4528,7 @@ struct Client::UI::AddonTeleport /* Size=0x2D8 */
 
 struct Client::UI::DutySlot /* Size=0x168 */
 {
-    /* 0x000 */ void** vtbl;
+    /* 0x000 */ void** VTable;
     /* 0x008 */ Client::UI::AddonWeeklyBingo* addon;
     /* 0x010 */ __int32 index;
     /*       */ byte _gap_0x14[0x4];
@@ -4577,7 +4543,7 @@ struct Client::UI::DutySlot /* Size=0x168 */
 
 struct Client::UI::DutySlotList /* Size=0x18E8 */
 {
-    /* 0x0000 */ void** vtbl;
+    /* 0x0000 */ void** VTable;
     /* 0x0008 */ void* addon;
     /*        */ byte _gap_0x10[0x10];
     /*        */ byte _gap_0x20[0x4];
@@ -4607,7 +4573,7 @@ struct Client::UI::DutySlotList /* Size=0x18E8 */
 
 struct Client::UI::StringThing /* Size=0x50 */
 {
-    /* 0x00 */ void* vtbl;
+    /* 0x00 */ void* VTable;
     /* 0x08 */ byte* FullSealsText;
     /* 0x10 */ byte* OneOrMoreLinesText;
     /* 0x18 */ byte* SecondChancePointsText;
@@ -4621,7 +4587,7 @@ struct Client::UI::StringThing /* Size=0x50 */
 
 struct Client::UI::StickerSlot /* Size=0x58 */
 {
-    /* 0x00 */ void** vtbl;
+    /* 0x00 */ void** VTable;
     /* 0x08 */ void* addon;
     /* 0x10 */ __int32 index;
     /*      */ byte _gap_0x14[0x4];
@@ -4637,7 +4603,7 @@ struct Client::UI::StickerSlot /* Size=0x58 */
 
 struct Client::UI::StickerSlotList /* Size=0x590 */
 {
-    /* 0x000 */ void** vtbl;
+    /* 0x000 */ void** VTable;
     /* 0x008 */ void* addon;
     /* 0x010 */ Client::UI::StickerSlot StickerSlot1;
     /* 0x068 */ Client::UI::StickerSlot StickerSlot2;
@@ -4996,7 +4962,7 @@ struct Client::UI::Shell::RaptureShellModule /* Size=0x1208 */
 
 struct Client::Graphics::ReferencedClassBase /* Size=0x10 */
 {
-    /* 0x00 */ void* vtbl;
+    /* 0x00 */ void* VTable;
     /* 0x08 */ unsigned __int32 RefCount;
     /*      */ byte _gap_0xC[0x4];
 };
@@ -5028,7 +4994,7 @@ struct Client::Graphics::Scene::Camera /* Size=0xF0 */
 
 struct Client::Game::CameraBase /* Size=0x110 */
 {
-    /* 0x000 */ void** vtbl;
+    /* 0x000 */ void** VTable;
     /*       */ byte _gap_0x8[0x8];
     /* 0x010 */ Client::Graphics::Scene::Camera SceneCamera;
     /* 0x100 */ unsigned __int32 UnkUInt;
@@ -6285,7 +6251,7 @@ struct Client::UI::Misc::RaptureGearsetModule /* Size=0xB670 */
 {
     union {
     /* 0x0000 */ Client::UI::Misc::UserFileManager::UserFileEvent UserFileEvent;
-    /* 0x0000 */ void* vtbl;
+    /* 0x0000 */ void* VTable;
     } _union_0x0;
     /*        */ byte _gap_0x40[0x8];
     /* 0x0048 */ Client::UI::Misc::RaptureGearsetModule::Gearsets Gearset;
@@ -6623,10 +6589,7 @@ struct Client::UI::Info::InfoProxyInterface::InfoProxyInterfaceVTable /* Size=0x
 
 struct Client::UI::Info::InfoProxyInterface /* Size=0x18 */
 {
-    union {
-    /* 0x00 */ void** vtbl;
     /* 0x00 */ Client::UI::Info::InfoProxyInterface::InfoProxyInterfaceVTable* VTable;
-    } _union_0x0;
     /* 0x08 */ Client::UI::UIModule* UiModule;
     /* 0x10 */ unsigned __int32 EntryCount;
     /*      */ byte _gap_0x14[0x4];
@@ -6876,7 +6839,7 @@ struct Client::UI::Info::CrossRealmMember /* Size=0x50 */
 
 struct Client::UI::Info::InfoProxyInvitedInterface::Unk18 /* Size=0x10 */
 {
-    /* 0x00 */ void* vtbl;
+    /* 0x00 */ void* VTable;
     /* 0x08 */ void* Data;
 };
 
@@ -8737,7 +8700,7 @@ struct Client::UI::Agent::AgentMJIPouch /* Size=0x38 */
 
 struct Client::UI::Agent::AgentModule /* Size=0xD78 */
 {
-    /* 0x000 */ void* vtbl;
+    /* 0x000 */ void* VTable;
     /* 0x008 */ Client::UI::UIModule* UIModule;
     /* 0x010 */ byte Initialized;
     /* 0x011 */ byte Unk_11;
@@ -10061,7 +10024,7 @@ struct Client::Graphics::Animation::AnimationResourceHandle /* Size=0x1 */
 
 struct Client::Graphics::Render::PartialSkeleton /* Size=0x1C0 */
 {
-    /* 0x000 */ void* vtbl;
+    /* 0x000 */ void* VTable;
     /*       */ byte _gap_0x8[0x18];
     /* 0x020 */ byte Jobs[0x100];
     /* 0x120 */ __int16 ConnectedParentBoneIndex;
@@ -10117,7 +10080,7 @@ struct Client::Graphics::Physics::BoneSimulators /* Size=0x78 */
 
 struct Client::Graphics::Physics::BonePhysicsModule /* Size=0x1C0 */
 {
-    /* 0x000 */ void* vtbl;
+    /* 0x000 */ void* VTable;
     /*       */ byte _gap_0x8[0x8];
     /* 0x010 */ Common::Math::Matrix4x4 SkeletonWorldMatrix;
     /* 0x050 */ Common::Math::Matrix4x4 SkeletonInvWorldMatrix;
@@ -10267,7 +10230,7 @@ struct Client::Graphics::Scene::World /* Size=0x160 */
 
 struct Client::Graphics::Physics::BoneSimulator /* Size=0x100 */
 {
-    /* 0x000 */ void* vtbl;
+    /* 0x000 */ void* VTable;
     /*       */ byte _gap_0x8[0x8];
     /* 0x010 */ unsigned __int32 PhysicsGroup;
     /*       */ byte _gap_0x14[0x4];
@@ -10287,7 +10250,7 @@ struct Client::Graphics::Render::Manager /* Size=0x2D710 */
 
 struct Client::Graphics::Render::OffscreenRenderingManager /* Size=0x190 */
 {
-    /* 0x000 */ void* vtbl;
+    /* 0x000 */ void* VTable;
     /* 0x008 */ void* JobSystem_vtbl;
     /*       */ byte _gap_0x10[0xB8];
     /* 0x0C8 */ void* Camera_1;
@@ -10299,7 +10262,7 @@ struct Client::Graphics::Render::OffscreenRenderingManager /* Size=0x190 */
 
 struct Client::Graphics::Render::RenderTargetManager /* Size=0x480 */
 {
-    /* 0x000 */ void* vtbl;
+    /* 0x000 */ void* VTable;
     /* 0x008 */ Client::Graphics::Render::Notifier Notifier;
     /* 0x020 */ byte RenderTargetArray[0x1C0];
     /* 0x1E0 */ Client::Graphics::Render::Texture* OffscreenRenderTarget_1;
@@ -10422,7 +10385,7 @@ struct StdVector::PointerClientGraphicsKernelVertexShader /* Size=0x18 */
 
 struct Client::Graphics::Kernel::CVector::PointerClientGraphicsKernelVertexShader /* Size=0x20 */
 {
-    /* 0x00 */ void* vtbl;
+    /* 0x00 */ void* VTable;
     /* 0x08 */ StdVector::PointerClientGraphicsKernelVertexShader Vector;
 };
 
@@ -10440,7 +10403,7 @@ struct StdVector::PointerClientGraphicsKernelPixelShader /* Size=0x18 */
 
 struct Client::Graphics::Kernel::CVector::PointerClientGraphicsKernelPixelShader /* Size=0x20 */
 {
-    /* 0x00 */ void* vtbl;
+    /* 0x00 */ void* VTable;
     /* 0x08 */ StdVector::PointerClientGraphicsKernelPixelShader Vector;
 };
 
@@ -10458,7 +10421,7 @@ struct StdVector::PointerClientGraphicsKernelShaderNode /* Size=0x18 */
 
 struct Client::Graphics::Kernel::CVector::PointerClientGraphicsKernelShaderNode /* Size=0x20 */
 {
-    /* 0x00 */ void* vtbl;
+    /* 0x00 */ void* VTable;
     /* 0x08 */ StdVector::PointerClientGraphicsKernelShaderNode Vector;
 };
 
@@ -10521,7 +10484,7 @@ struct Client::Graphics::Kernel::ShaderNode::ShaderPass /* Size=0x8 */
 
 struct Client::Graphics::Kernel::ShaderNode /* Size=0x38 */
 {
-    /* 0x00 */ void* vtbl;
+    /* 0x00 */ void* VTable;
     /* 0x08 */ Client::Graphics::Kernel::ShaderPackage* OwnerPackage;
     /* 0x10 */ unsigned __int32 PassNum;
     /* 0x14 */ byte PassIndices[0x10];
@@ -11278,7 +11241,7 @@ enum LootRule: byte
 
 struct Client::Game::UI::ContentsFinder /* Size=0xB0 */
 {
-    /* 0x00 */ void* vtbl;
+    /* 0x00 */ void* VTable;
     /*      */ byte _gap_0x8[0x10];
     /* 0x18 */ Client::Game::UI::ContentsFinder::LootRule LootRules;
     /* 0x19 */ bool IsUnrestrictedParty;
@@ -11687,7 +11650,7 @@ struct Client::Game::UI::RouletteController /* Size=0x70 */
 
 struct Client::Game::UI::SelectUseTicketInvoker /* Size=0x28 */
 {
-    /* 0x00 */ void* vtbl;
+    /* 0x00 */ void* VTable;
     /*      */ byte _gap_0x8[0x8];
     /* 0x10 */ Client::Game::UI::Telepo* Telepo;
     /*      */ byte _gap_0x18[0x10];
@@ -11695,7 +11658,7 @@ struct Client::Game::UI::SelectUseTicketInvoker /* Size=0x28 */
 
 struct Client::Game::UI::Telepo /* Size=0x58 */
 {
-    /* 0x00 */ void* vtbl;
+    /* 0x00 */ void* VTable;
     /*      */ byte _gap_0x8[0x8];
     /* 0x10 */ StdVector::ClientGameUITeleportInfo TeleportList;
     /* 0x28 */ Client::Game::UI::SelectUseTicketInvoker UseTicketInvoker;
@@ -11960,7 +11923,7 @@ struct Client::Game::MJI::MJIFarmPasture /* Size=0x4 */
 
 struct Client::Game::MJI::MJIWorkshops /* Size=0x17 */
 {
-    /* 0x00 */ void* vtbl;
+    /* 0x00 */ void* VTable;
     /* 0x08 */ byte PlaceId[0x3];
     /* 0x0B */ byte GlamourLevel[0x3];
     /* 0x0E */ byte HoursToCompletion[0x3];
@@ -11970,7 +11933,7 @@ struct Client::Game::MJI::MJIWorkshops /* Size=0x17 */
 
 struct Client::Game::MJI::MJIGranaries /* Size=0x12 */
 {
-    /* 0x00 */ void* vtbl;
+    /* 0x00 */ void* VTable;
     /* 0x08 */ byte PlaceId[0x2];
     /* 0x0A */ byte GlamourLevel[0x2];
     /* 0x0C */ byte HoursToCompletion[0x2];
@@ -12015,7 +11978,7 @@ struct Client::Game::MJI::IslandState /* Size=0xB0 */
 
 struct Client::Game::MJI::MJIFarmState /* Size=0x148 */
 {
-    /* 0x000 */ void* vtbl;
+    /* 0x000 */ void* VTable;
     /* 0x008 */ void* vtbl2;
     /*       */ byte _gap_0x10[0x10];
     /* 0x020 */ byte SeedType[0x14];

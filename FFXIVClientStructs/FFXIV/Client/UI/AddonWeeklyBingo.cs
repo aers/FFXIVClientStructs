@@ -19,7 +19,7 @@ public struct AddonWeeklyBingo
 [StructLayout(LayoutKind.Explicit, Size = 0x16C8)]
 public unsafe struct DutySlotList
 {
-    [FieldOffset(0x0)] public void** vtbl;
+    [FieldOffset(0x0)] public void** VTable;
     [FieldOffset(0x8)] public void* addon; // AddonWeeklyBingo*
     [FieldOffset(0x24)] public uint NumSecondChances;
     [FieldOffset(0x28)] public DutySlot DutySlot1;
@@ -68,7 +68,7 @@ public unsafe struct DutySlotList
 [StructLayout(LayoutKind.Explicit, Size = 0x168)]
 public unsafe struct DutySlot
 {
-    [FieldOffset(0x0)] public void** vtbl;
+    [FieldOffset(0x0)] public void** VTable;
     [FieldOffset(0x8)] public AddonWeeklyBingo* addon; // AddonWeeklyBingo*
     [FieldOffset(0x10)] public int index; // 0-15
 
@@ -83,7 +83,7 @@ public unsafe struct DutySlot
 [StructLayout(LayoutKind.Explicit, Size = 0x50)]
 public unsafe struct StringThing
 {
-    [FieldOffset(0x0)] public void* vtbl;
+    [FieldOffset(0x0)] public void* VTable;
 
     [FieldOffset(0x08)] public byte*
         FullSealsText; // No more seals can be applied. Deliver the journal to Khloe Aliapoh to receive your reward.
@@ -104,7 +104,7 @@ public unsafe struct StringThing
 [StructLayout(LayoutKind.Explicit, Size = 0x590)]
 public unsafe struct StickerSlotList
 {
-    [FieldOffset(0x0)] public void** vtbl;
+    [FieldOffset(0x0)] public void** VTable;
     [FieldOffset(0x8)] public void* addon; // AddonWeeklyBingo*
     [FieldOffset(0x10)] public StickerSlot StickerSlot1;
     [FieldOffset(0x68)] public StickerSlot StickerSlot2;
@@ -148,7 +148,7 @@ public unsafe struct StickerSlotList
 [StructLayout(LayoutKind.Explicit, Size = 0x58)]
 public unsafe struct StickerSlot
 {
-    [FieldOffset(0x0)] public void** vtbl;
+    [FieldOffset(0x0)] public void** VTable;
     [FieldOffset(0x8)] public void* addon; // AddonWeeklyBingo*
     [FieldOffset(0x10)] public int index; // 1-16
 

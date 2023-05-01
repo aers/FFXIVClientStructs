@@ -2,5 +2,5 @@
 
 public unsafe struct hkaAnimationControlListener
 {
-	public void* vtbl;
+	public void* VTable;
 }

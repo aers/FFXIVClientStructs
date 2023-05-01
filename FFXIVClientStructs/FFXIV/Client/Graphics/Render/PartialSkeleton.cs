@@ -5,7 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x1C0)]
 public unsafe partial struct PartialSkeleton {
-	[FieldOffset(0x0)] public void* vtbl;
+	[FieldOffset(0x0)] public void* VTable;
 	[FixedSizeArray<hkaSampleBlendJob>(2)]
 	[FieldOffset(0x20)] public fixed byte Jobs[2 * 0x80]; // 2 * hkaSampleBlendJob
 	[FieldOffset(0x120)] public short ConnectedParentBoneIndex;

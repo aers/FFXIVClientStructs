@@ -11,7 +11,7 @@ public unsafe partial struct AgentModule
 {
     public static AgentModule* Instance() => Framework.Instance()->GetUiModule()->GetAgentModule();
     
-    [FieldOffset(0x0)] public void* vtbl;
+    [FieldOffset(0x0)] public void* VTable;
     [FieldOffset(0x8)] public UIModule* UIModule;
     [FieldOffset(0x10)] public byte Initialized;
     [FieldOffset(0x11)] public byte Unk_11;

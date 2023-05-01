@@ -12,7 +12,7 @@ public unsafe partial struct RaptureGearsetModule
     public static RaptureGearsetModule* Instance() => Framework.Instance()->GetUiModule()->GetRaptureGearsetModule();
 
     [FieldOffset(0)] public UserFileEvent UserFileEvent;
-    [FieldOffset(0x0000)] public void* vtbl;
+    [FieldOffset(0x0000)] public void* VTable;
     [Obsolete("Use UserFileEvent.FileName instead", true)]
     [FieldOffset(0x0030)] public fixed byte ModuleName[16];
     [FieldOffset(0x0048)] public Gearsets Gearset;
