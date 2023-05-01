@@ -261,10 +261,10 @@ public unsafe struct MJIGranaries {
     );
 }
 
-[StructLayout(LayoutKind.Sequential, Size = 0x04)]
+[StructLayout(LayoutKind.Explicit, Size = 0x04)]
 public struct MJIFarmPasture {
-    public byte Level;
-    public byte HoursToCompletion;
-    public bool UnderConstruction;
-    public byte UNK_0x4;
+    [FieldOffset(0x0)] public byte Level;
+    [FieldOffset(0x1)] public byte HoursToCompletion;
+    [FieldOffset(0x2)] public bool UnderConstruction;
+    [FieldOffset(0x3)] public byte UNK_0x4;
 }

@@ -266,6 +266,11 @@ namespace CExporter
 
             sb.AppendLine("};");
 
+            if (offset > structSize)
+            {
+                Debug.WriteLine($"Structure size mismatch: 0x{offset:X} > 0x{structSize:X} for {FixFullName(type)}");
+            }
+
             header.AppendLine(sb.ToString());
         }
 

@@ -11914,11 +11914,8 @@ struct Client_Game_MJI_MJIFarmPasture /* Size=0x4 */
 {
     /* 0x0 */ byte Level;
     /* 0x1 */ byte HoursToCompletion;
-    /*     */ byte _gap_0x2[0x2];
-    /* 0x4 */ bool UnderConstruction;
-    /*     */ byte _gap_0x5;
-    /*     */ byte _gap_0x6[0x2];
-    /* 0x8 */ byte UNK_0x4;
+    /* 0x2 */ bool UnderConstruction;
+    /* 0x3 */ byte UNK_0x4;
 };
 
 struct Client_Game_MJI_MJIWorkshops /* Size=0x17 */
