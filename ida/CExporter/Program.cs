@@ -4,6 +4,7 @@ using FFXIVClientStructs.Interop.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -62,6 +63,7 @@ namespace CExporter
         private readonly string InteropNamespacePrefix = string.Join(".", new string[] { nameof(FFXIVClientStructs), nameof(FFXIVClientStructs.Interop), "" });
 
         private bool IsGeneratedType(Type t) => t.DeclaringType != null && (t.Name == "Addresses" || t.Name == "MemberFunctionPointers" || t.Name == "StaticAddressPointers");
+        private bool IsVTable(Type t) => t.DeclaringType != null && t.Name == t.DeclaringType.Name + "VTable";
 
         private IEnumerable<Type> GetExportableTypes(string assemblyName)
         {
@@ -132,7 +134,14 @@ namespace CExporter
             }
             else if (type.IsStruct())
             {
-                ProcessStruct(type, header);
+                if (IsVTable(type))
+                {
+                    ProcessVTable(type, header);
+                }
+                else
+                {
+                    ProcessStruct(type, header);
+                }
             }
             else if (type.IsPrimitive)
             {
@@ -182,9 +191,10 @@ namespace CExporter
             StringBuilder sb = new StringBuilder();
 
             sb.AppendLine($"struct {FixFullName(type)} /* Size=0x{structSize:X} */");
-            sb.AppendLine("{");
 
+            var numBases = 0;
             var offset = 0;
+            bool startedBody = false;
             var fieldGroupings = type.GetFields()
                 .Where(finfo => finfo.GetCustomAttribute<IDAIgnoreAttribute>() == null) // not ignored for exporter
                 .Where(finfo => !Attribute.IsDefined(finfo, typeof(ObsoleteAttribute)))
@@ -197,6 +207,32 @@ namespace CExporter
                 var fieldOffset = grouping.Key;
                 var finfos = grouping.ToList();
 
+                var baseClass = startedBody ? null : GetBaseClass(finfos, fieldOffset);
+                if (baseClass != null)
+                {
+                    if (fieldOffset != offset)
+                    {
+                        Debug.WriteLine($"Field {FixFullName(type)}+0x{fieldOffset:X} can't be a base due to a gap (expected offset 0x{offset:X})");
+                    }
+                    else
+                    {
+                        ProcessType(baseClass, header);
+                        var size = SizeOf(baseClass);
+                        sb.AppendLine(string.Format($"    {(numBases > 0 ? "," : ":")} /* 0x{{0:X{pad}}} */ {FixFullName(baseClass)} /* size=0x{size:X} */", offset));
+                        ++numBases;
+                        offset += size;
+                        continue;
+                    }
+                }
+
+                if (!startedBody)
+                {
+                    sb.AppendLine("{");
+                    startedBody = true;
+                }
+
+                offset = FillGaps(offset, fieldOffset, padFill, sb);
+
                 int unionMaxSize = 0;
                 var isUnion = finfos.Count > 1;
                 if (isUnion)
@@ -207,16 +243,36 @@ namespace CExporter
                 for (int i = 0; i < finfos.Count; i++)
                 {
                     var finfo = finfos[i];
+                    var fieldName = finfo.Name;
                     var fieldType = finfo.FieldType;
                     int fieldSize = 0;
 
-                    if (!isUnion)
-                        offset = FillGaps(offset, fieldOffset, padFill, sb);
-
                     if (offset > fieldOffset)
                     {
-                        Debug.WriteLine($"Current offset exceeded the next field's offset (0x{offset:X} > 0x{fieldOffset:X}): {FixFullName(type)}.{finfo.Name}");
+                        Debug.WriteLine($"Current offset exceeded the next field's offset (0x{offset:X} > 0x{fieldOffset:X}): {FixFullName(type)}.{fieldName}");
                         return;
+                    }
+
+                    // vtable pointer requires special handling
+                    if (fieldName == "VTable")
+                    {
+                        if (!fieldType.IsPointer)
+                        {
+                            Debug.WriteLine($"Unexpected type of {FixFullName(type)}.{fieldName} (0x{offset:X}): expected some pointer, got {FixFullName(fieldType)}");
+                        }
+                        else if (offset != 0)
+                        {
+                            Debug.WriteLine($"Unexpected vtable offset of {FixFullName(type)}.{fieldName}: expected 0, got (0x{offset:X})");
+                        }
+                        else if (isUnion)
+                        {
+                            Debug.WriteLine($"VTable pointer {FixFullName(type)}.{fieldName} should not be part of a union - base class probably not marked as such");
+                        }
+                        else
+                        {
+                            // hexrays assumes special naming convention for vtables
+                            fieldName = "__vftable";
+                        }
                     }
 
                     if (finfo.IsFixed())
@@ -241,23 +297,23 @@ namespace CExporter
                             fieldSize = SizeOf(fixedType) * fixedSize;
                             if (rawSize != fieldSize)
                             {
-                                Debug.WriteLine($"Array size mismatch for {FixFullName(type)}.{finfo.Name}: raw is {FixTypeName(finfo.GetFixedType())}[0x{finfo.GetFixedSize():X}] (0x{rawSize:X}), typed is {FixTypeName(fixedType)}[0x{fixedSize:X}] (0x{fieldSize:X})");
+                                Debug.WriteLine($"Array size mismatch for {FixFullName(type)}.{fieldName}: raw is {FixTypeName(finfo.GetFixedType())}[0x{finfo.GetFixedSize():X}] (0x{rawSize:X}), typed is {FixTypeName(fixedType)}[0x{fixedSize:X}] (0x{fieldSize:X})");
                             }
                         }
 
-                        sb.AppendLine(string.Format($"    /* 0x{{0:X{pad}}} */ {FixTypeName(fixedType)} {finfo.Name}[0x{fixedSize:X}];", offset));
+                        sb.AppendLine(string.Format($"    /* 0x{{0:X{pad}}} */ {FixTypeName(fixedType)} {fieldName}[0x{fixedSize:X}];", offset));
                     }
                     else if (fieldType.IsPointer)
                     {
                         ProcessType(fieldType, header);
-                        sb.AppendLine(string.Format($"    /* 0x{{0:X{pad}}} */ {FixTypeName(fieldType)} {finfo.Name};", offset));
+                        sb.AppendLine(string.Format($"    /* 0x{{0:X{pad}}} */ {FixTypeName(fieldType)} {fieldName};", offset));
                         fieldSize = 8;
                     }
                     else if (fieldType.IsEnum)
                     {
                         ProcessType(fieldType, header);
 
-                        sb.AppendLine(string.Format($"    /* 0x{{0:X{pad}}} */ {FixTypeName(fieldType)} {finfo.Name};", offset));
+                        sb.AppendLine(string.Format($"    /* 0x{{0:X{pad}}} */ {FixTypeName(fieldType)} {fieldName};", offset));
 
                         fieldSize = SizeOf(Enum.GetUnderlyingType(fieldType));
                     }
@@ -265,7 +321,7 @@ namespace CExporter
                     {
                         ProcessType(fieldType, header);
 
-                        sb.AppendLine(string.Format($"    /* 0x{{0:X{pad}}} */ {FixTypeName(fieldType)} {finfo.Name};", offset));
+                        sb.AppendLine(string.Format($"    /* 0x{{0:X{pad}}} */ {FixTypeName(fieldType)} {fieldName};", offset));
 
                         if (fieldType == typeof(bool))
                             fieldSize = 1;
@@ -288,6 +344,12 @@ namespace CExporter
                 }
             }
 
+            if (!startedBody)
+            {
+                sb.AppendLine("{");
+                startedBody = true;
+            }
+
             FillGaps(offset, structSize, padFill, sb);
 
             sb.AppendLine("};");
@@ -297,6 +359,59 @@ namespace CExporter
                 Debug.WriteLine($"Structure size mismatch: 0x{offset:X} > 0x{structSize:X} for {FixFullName(type)}");
             }
 
+            header.AppendLine(sb.ToString());
+        }
+
+        private void ProcessVTable(Type type, StringBuilder header)
+        {
+            if (KnownTypes.Contains(type))
+                return;
+
+            KnownTypes.Add(type);
+
+            var name = type.FullName;
+            // Debug.WriteLine($"Processing VTable:  {name}");
+
+            int structSize = Math.Max(SizeOf(type), 8); // if vtable has no known functions, assume it has at least one
+
+            var pad = structSize.ToString("X").Length;
+            var padFill = new string(' ', pad + 2);
+
+            // find base class for a vtable
+            var owningType = type.DeclaringType;
+            var owningTypeFieldsAtStart = owningType.GetFields().Where(finfo => !finfo.IsLiteral && !finfo.IsStatic && finfo.GetFieldOffset() == 0).ToList();
+            var owningBase = GetBaseClass(owningTypeFieldsAtStart, 0);
+            var vtableBase = owningBase?.GetNestedType(owningBase.Name + "VTable");
+            var offset = vtableBase != null ? Math.Max(SizeOf(vtableBase), 8) : 0;
+            structSize = Math.Max(structSize, offset); // vtbl can't be smaller than a base
+
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine($"struct {FixFullName(type)} /* Size=0x{structSize:X} */");
+            if (vtableBase != null)
+            {
+                ProcessType(vtableBase, header);
+                sb.AppendLine($"    : {FixFullName(vtableBase)} /* size=0x{offset:X} */");
+            }
+            sb.AppendLine("{");
+
+            var functions = type.GetFields().Where(finfo => !finfo.IsLiteral && !finfo.IsStatic && finfo.GetFieldOffset() >= offset);
+            foreach (var fn in functions)
+            {
+                var fieldOffset = fn.GetFieldOffset();
+                offset = FillVTableGaps(offset, fieldOffset, pad, sb);
+                if (offset > fieldOffset)
+                {
+                    Debug.WriteLine($"Current offset exceeded the next field's offset (0x{offset:X} > 0x{fieldOffset:X}): {FixFullName(type)}.{fn.Name}");
+                    continue;
+                }
+
+                sb.AppendLine(string.Format($"    /* 0x{{0:X{pad}}} */ void* {fn.Name};", offset));
+                offset += 8;
+            }
+
+            FillVTableGaps(offset, structSize, pad, sb);
+            sb.AppendLine("};");
             header.AppendLine(sb.ToString());
         }
 
@@ -360,8 +475,23 @@ namespace CExporter
             KnownTypes.Add(type);
         }
 
+        private string BuildVTableTypeName(Type type) => FixFullName(type.DeclaringType!) + "_vtbl";
+
         private string FixFullName(Type type)
         {
+            // hexrays expect special naming convention for vtables
+            if (type.IsPointer)
+            {
+                var elemType = type.GetElementType();
+                if (IsVTable(elemType))
+                    return BuildVTableTypeName(elemType) + "*";
+            }
+            else
+            {
+                if (IsVTable(type))
+                    return BuildVTableTypeName(type);
+            }
+
             string separator;
             if (EnvFormat == EnvFormat.IDA)
                 separator = "::";
@@ -450,6 +580,41 @@ namespace CExporter
             else return FixFullName(type);
         }
 
+        private Type GetBaseClass(List<FieldInfo> fields, int offset)
+        {
+            Type fieldType = null;
+            foreach (var field in fields)
+            {
+                // do not allow automatic vtables interfere with base class detection
+                if (offset == 0 && field.Name == "VTable" && field.FieldType.IsPointer)
+                    continue;
+
+                if (fieldType != null)
+                    return null; // union, can't be a base class
+
+                fieldType = field.FieldType;
+                if (!fieldType.IsStruct())
+                    return null; // non-struct can't be a base class
+
+                var customAttr = fieldType.GetCustomAttribute<IDABaseClassAttribute>();
+                if (customAttr != null)
+                {
+                    if (!customAttr.IsBase)
+                        return null; // explicitly marked as not a base
+                    // otherwise: explicitly marked as base
+                }
+                else
+                {
+                    if (offset != 0)
+                        return null; // implicit base logic: only consider single inheritance
+                    if (fieldType.Name != field.Name)
+                        return null; // implicit base logic: only consider fields with name matching class name
+                    // otherwise: implicit base
+                }
+            }
+            return fieldType;
+        }
+
         private int FillGaps(int offset, int maxOffset, string padFill, StringBuilder sb)
         {
             int gap;
@@ -506,6 +671,19 @@ namespace CExporter
                 {
                     throw new Exception($"Unknown GapStrategy {GapStrategy}");
                 }
+            }
+            return offset;
+        }
+
+        private int FillVTableGaps(int offset, int maxOffset, int pad, StringBuilder sb)
+        {
+            if (offset % 8 != 0 || maxOffset % 8 != 0)
+                throw new Exception($"Invalid vtable layout: offset=0x{offset:X}, max-offset=0x{maxOffset:X}");
+
+            while (offset < maxOffset)
+            {
+                sb.AppendLine(string.Format($"    /* 0x{{0:X{pad}}} */ void* vf{offset / 8};", offset));
+                offset += 8;
             }
             return offset;
         }
