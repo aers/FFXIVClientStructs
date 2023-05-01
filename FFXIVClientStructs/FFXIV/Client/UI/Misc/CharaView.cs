@@ -20,20 +20,21 @@ public unsafe partial struct CharaView
     [FieldOffset(0x030)] public ulong Unk30;
     [FieldOffset(0x038)] public ulong Unk38;
 
-    [FieldOffset(0x0D0)] public UnkStruct UnkD0;
-    [FieldOffset(0x0E0)] public UnkStruct UnkE0;
-    [FieldOffset(0x0F0)] public UnkStruct UnkF0;
-    [FieldOffset(0x100)] public UnkStruct Unk100;
-    [FieldOffset(0x110)] public UnkStruct Unk110;
-    [FieldOffset(0x120)] public UnkStruct Unk120;
-    [FieldOffset(0x130)] public UnkStruct Unk130;
-    [FieldOffset(0x140)] public UnkStruct Unk140;
-    [FieldOffset(0x150)] public UnkStruct Unk150;
-    [FieldOffset(0x160)] public UnkStruct Unk160;
-    [FieldOffset(0x170)] public UnkStruct Unk170;
-    [FieldOffset(0x180)] public UnkStruct Unk180;
-    [FieldOffset(0x190)] public UnkStruct Unk190;
-    [FieldOffset(0x1A0)] public UnkStruct Unk1A0;
+    // fields below can't be correct, they overlap too much - hiding from exporter until this is fixed
+    [FieldOffset(0x0D0)] [IDAIgnore] public UnkStruct UnkD0;
+    [FieldOffset(0x0E0)] [IDAIgnore] public UnkStruct UnkE0;
+    [FieldOffset(0x0F0)] [IDAIgnore] public UnkStruct UnkF0;
+    [FieldOffset(0x100)] [IDAIgnore] public UnkStruct Unk100;
+    [FieldOffset(0x110)] [IDAIgnore] public UnkStruct Unk110;
+    [FieldOffset(0x120)] [IDAIgnore] public UnkStruct Unk120;
+    [FieldOffset(0x130)] [IDAIgnore] public UnkStruct Unk130;
+    [FieldOffset(0x140)] [IDAIgnore] public UnkStruct Unk140;
+    [FieldOffset(0x150)] [IDAIgnore] public UnkStruct Unk150;
+    [FieldOffset(0x160)] [IDAIgnore] public UnkStruct Unk160;
+    [FieldOffset(0x170)] [IDAIgnore] public UnkStruct Unk170;
+    [FieldOffset(0x180)] [IDAIgnore] public UnkStruct Unk180;
+    [FieldOffset(0x190)] [IDAIgnore] public UnkStruct Unk190;
+    [FieldOffset(0x1A0)] [IDAIgnore] public UnkStruct Unk1A0;
 
     [FieldOffset(0x2B8)] public ushort Unk2B8;
     [FieldOffset(0x290)] public ulong Unk290;

@@ -5465,17 +5465,31 @@ struct Client::Game::Camera /* Size=0x2B0 */
     /*       */ byte _gap_0x190[0x120];
 };
 
-struct Client::UI::Misc::CharaView::UnkStruct /* Size=0x20 */
+struct Client::UI::Misc::CharaView /* Size=0x2C8 */
 {
-    /* 0x00 */ unsigned __int16 Unk0;
-    /*      */ byte _gap_0x2;
-    /* 0x03 */ byte Unk1;
-    /* 0x04 */ byte Unk2;
-    /*      */ byte _gap_0x5;
-    /*      */ byte _gap_0x6[0x2];
-    /* 0x08 */ unsigned __int64 Unk3;
-    /* 0x10 */ unsigned __int64 Unk4;
-    /* 0x18 */ unsigned __int64 Unk5;
+    /* 0x000 */ void** VTable;
+    /* 0x008 */ unsigned __int32 Unk8;
+    /* 0x00C */ unsigned __int32 CutsceneActorIndex;
+    /* 0x010 */ unsigned __int32 ScreenActorIndex;
+    /* 0x014 */ unsigned __int32 Unk14;
+    /*       */ byte _gap_0x18[0x8];
+    /* 0x020 */ void* Unk20;
+    /* 0x028 */ Client::Game::Camera* Camera;
+    /* 0x030 */ unsigned __int64 Unk30;
+    /* 0x038 */ unsigned __int64 Unk38;
+    /*       */ byte _gap_0x40[0x80];
+    /* 0x0C0 */ unsigned __int32 UnkC0;
+    /*       */ byte _gap_0xC4[0x4];
+    /*       */ byte _gap_0xC8[0x1C8];
+    /* 0x290 */ unsigned __int64 Unk290;
+    /* 0x298 */ unsigned __int64 Unk298;
+    /* 0x2A0 */ unsigned __int64 Unk2A0;
+    /* 0x2A8 */ unsigned __int64 Unk2A8;
+    /* 0x2B0 */ unsigned __int64 Unk2B0;
+    /* 0x2B8 */ unsigned __int16 Unk2B8;
+    /*       */ byte _gap_0x2BA[0x2];
+    /*       */ byte _gap_0x2BC[0x4];
+    /*       */ byte _gap_0x2C0[0x8];
 };
 
 struct Client::UI::Misc::ConfigModule /* Size=0xDEE8 */
@@ -13226,6 +13240,19 @@ enum UiFlags: __int32
     ActionBars = 16,
     Unk32 = 32,
     TargetInfo = 64
+};
+
+struct Client::UI::Misc::CharaView::UnkStruct /* Size=0x20 */
+{
+    /* 0x00 */ unsigned __int16 Unk0;
+    /*      */ byte _gap_0x2;
+    /* 0x03 */ byte Unk1;
+    /* 0x04 */ byte Unk2;
+    /*      */ byte _gap_0x5;
+    /*      */ byte _gap_0x6[0x2];
+    /* 0x08 */ unsigned __int64 Unk3;
+    /* 0x10 */ unsigned __int64 Unk4;
+    /* 0x18 */ unsigned __int64 Unk5;
 };
 
 struct Client::UI::Misc::ConfigModule::Option /* Size=0x20 */
