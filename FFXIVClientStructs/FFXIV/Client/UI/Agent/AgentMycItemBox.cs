@@ -18,7 +18,7 @@ public unsafe struct AgentMycItemBox
 public unsafe partial struct MycItemBoxData
 {
     [FixedSizeArray<MycItemCategory>(7)] 
-    [FieldOffset(0x08)] public fixed byte ItemCacheArray[7 * 0x184];
+    [FieldOffset(0x08)] [IDAIgnore] public fixed byte ItemCacheArray[7 * 0x184];
 
     [FieldOffset(0x08)] public MycItemCategory OffensiveCache;
     [FieldOffset(0x18C)] public MycItemCategory DefensiveCache;
@@ -29,7 +29,7 @@ public unsafe partial struct MycItemBoxData
     [FieldOffset(0x920)] public MycItemCategory ItemRelatedCache;
     
     [FixedSizeArray<MycItemCategory>(7)] 
-    [FieldOffset(0xAA4)] public fixed byte ItemHolsterArray[7 * 0x184];
+    [FieldOffset(0xAA4)] [IDAIgnore] public fixed byte ItemHolsterArray[7 * 0x184];
     
     [FieldOffset(0xAA4)] public MycItemCategory OffensiveHolster;
     [FieldOffset(0xC28)] public MycItemCategory DefensiveHolster;

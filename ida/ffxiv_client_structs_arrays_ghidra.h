@@ -742,6 +742,34 @@ struct Client_Game_QuestManager_QuestListArray_Quest;
 struct Client_Game_RetainerManager_RetainerList_Retainer;
 
 // Definitions
+struct Common_Math_Matrix2x2 /* Size=0x10 */
+{
+    /* 0x00 */ float M11;
+    /* 0x04 */ float M12;
+    /* 0x08 */ float M21;
+    /* 0x0C */ float M22;
+};
+
+struct Common_Math_Matrix4x4 /* Size=0x40 */
+{
+    /* 0x00 */ float M11;
+    /* 0x04 */ float M12;
+    /* 0x08 */ float M13;
+    /* 0x0C */ float M14;
+    /* 0x10 */ float M21;
+    /* 0x14 */ float M22;
+    /* 0x18 */ float M23;
+    /* 0x1C */ float M24;
+    /* 0x20 */ float M31;
+    /* 0x24 */ float M32;
+    /* 0x28 */ float M33;
+    /* 0x2C */ float M34;
+    /* 0x30 */ float M41;
+    /* 0x34 */ float M42;
+    /* 0x38 */ float M43;
+    /* 0x3C */ float M44;
+};
+
 struct Common_Math_Quaternion /* Size=0x10 */
 {
     /* 0x00 */ float X;
@@ -892,7 +920,7 @@ struct Common_Configuration_ConfigProperties /* Size=0x10 */
     /* 0x00 */ Common_Configuration_ConfigProperties_FloatProperties Float;
     /* 0x00 */ Common_Configuration_ConfigProperties_StringProperties String;
     } _union_0x0;
-    /*      */ byte _gap_0x8[0x8];
+    /*      */ byte _gap_0xC[0x4];
 };
 
 struct Common_Configuration_ConfigValue /* Size=0x8 */
@@ -1385,6 +1413,7 @@ struct Component_GUI_AtkResNode /* Size=0xA8 */
     /* 0xA0 */ unsigned __int32 Flags_2;
     /* 0xA0 */ unsigned __int32 DrawFlags;
     } _union_0xA0;
+    /*      */ byte _gap_0xA4[0x4];
 };
 
 struct Component_GUI_AtkComponentBase_AtkComponentBaseVTable /* Size=0x58 */
@@ -1424,7 +1453,6 @@ struct StdString /* Size=0x20 */
     /* 0x00 */ byte* BufferPtr;
     /* 0x00 */ byte Buffer[0x10];
     } _union_0x0;
-    /*      */ byte _gap_0x8[0x8];
     /* 0x10 */ unsigned __int64 Length;
     /* 0x18 */ unsigned __int64 Capacity;
 };
@@ -2663,7 +2691,6 @@ struct Client_UI_AddonActionBarBase /* Size=0x248 */
     /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonActionBarBase_AddonActionBarBaseVTable* VTable;
     } _union_0x0;
-    /*       */ byte _gap_0x8[0x218];
     /* 0x220 */ Client_UI_ActionBarSlot* ActionBarSlots;
     /*       */ byte _gap_0x228[0x10];
     /* 0x238 */ __int16 CurrentPulsingSlots;
@@ -2799,7 +2826,7 @@ struct Client_UI_AddonBank /* Size=0x298 */
     /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonBank_AddonBankVTable* VTable;
     } _union_0x0;
-    /*       */ byte _gap_0x8[0x290];
+    /*       */ byte _gap_0x220[0x78];
 };
 
 struct Client_UI_AddonCastBar /* Size=0x500 */
@@ -2934,6 +2961,12 @@ struct Client_UI_AddonContextIconMenu /* Size=0x2B0 */
     /* 0x290 */ Component_GUI_AtkComponentRadioButton* AtkComponentRadioButton290;
     /* 0x298 */ Component_GUI_AtkComponentRadioButton* AtkComponentRadioButton298;
     /*       */ byte _gap_0x2A0[0x10];
+};
+
+struct Client_UI_AddonContextMenu /* Size=0x2A0 */
+{
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
+    /*       */ byte _gap_0x220[0x80];
 };
 
 struct Client_UI_AddonCutSceneSelectString /* Size=0x248 */
@@ -3133,6 +3166,22 @@ struct Client_UI_AddonGcArmyExpeditionResult /* Size=0x228 */
     /* 0x220 */ Component_GUI_AtkComponentButton* CompleteButton;
 };
 
+struct Client_UI_AddonGoldSaucerInfo /* Size=0x310 */
+{
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
+    /* 0x220 */ __int32 SelectedCategory;
+    /* 0x224 */ __int32 SelectedSubCategory;
+    /*       */ byte _gap_0x228[0x78];
+    /* 0x2A0 */ byte CategoryRadioButtons[0x30];
+    /* 0x2D0 */ byte ChocoboRadioButtons[0x18];
+    /* 0x2E8 */ Component_GUI_AtkCollisionNode* ContentsSection;
+    /*       */ byte _gap_0x2F0[0x8];
+    /* 0x2F8 */ Component_GUI_AtkResNode* ChocoboPetInfo;
+    /* 0x300 */ Component_GUI_AtkNineGridNode* ChocoboPetExpBar;
+    /* 0x308 */ __int32 ChocoboPetExpBarWidth;
+    /*       */ byte _gap_0x30C[0x4];
+};
+
 struct Client_UI_AddonGrandCompanySupplyList /* Size=0x760 */
 {
     /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
@@ -3277,14 +3326,13 @@ struct Client_UI_AddonGuildLeve /* Size=0x18F0 */
     /* 0x0290 */ Client_System_String_Utf8String MinerString;
     } _union_0x290;
     union {
-    /* 0x0298 */ Client_System_String_Utf8String BlacksmithString;
-    /* 0x0298 */ Client_System_String_Utf8String BotanistString;
+    /* 0x02F8 */ Client_System_String_Utf8String BlacksmithString;
+    /* 0x02F8 */ Client_System_String_Utf8String BotanistString;
     } _union_0x2F8;
     union {
-    /* 0x02A0 */ Client_System_String_Utf8String ArmorerString;
-    /* 0x02A0 */ Client_System_String_Utf8String FisherString;
+    /* 0x0360 */ Client_System_String_Utf8String ArmorerString;
+    /* 0x0360 */ Client_System_String_Utf8String FisherString;
     } _union_0x360;
-    /*        */ byte _gap_0x2A8[0x120];
     /* 0x03C8 */ Client_System_String_Utf8String GoldsmithString;
     /* 0x0430 */ Client_System_String_Utf8String LeatherworkerString;
     /* 0x0498 */ Client_System_String_Utf8String WeaverString;
@@ -4179,7 +4227,6 @@ struct Client_UI_AddonRetainerList /* Size=0x220 */
     /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonRetainerList_AddonRetainerListVTable* VTable;
     } _union_0x0;
-    /*       */ byte _gap_0x8[0x218];
 };
 
 struct Client_UI_AddonRetainerSell /* Size=0x278 */
@@ -4210,7 +4257,7 @@ struct Client_UI_AddonRetainerTaskAsk /* Size=0x2B8 */
     /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonRetainerTaskAsk_AddonRetainerTaskAskVTable* VTable;
     } _union_0x0;
-    /*       */ byte _gap_0x8[0x2A0];
+    /*       */ byte _gap_0x220[0x88];
     /* 0x2A8 */ Component_GUI_AtkComponentButton* AssignButton;
     /* 0x2B0 */ Component_GUI_AtkComponentButton* ReturnButton;
 };
@@ -4227,7 +4274,6 @@ struct Client_UI_AddonRetainerTaskList /* Size=0x220 */
     /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonRetainerTaskList_AddonRetainerTaskListVTable* VTable;
     } _union_0x0;
-    /*       */ byte _gap_0x8[0x218];
 };
 
 struct Client_UI_AddonRetainerTaskResult_AddonRetainerTaskResultVTable /* Size=0x180 */
@@ -4242,7 +4288,7 @@ struct Client_UI_AddonRetainerTaskResult /* Size=0x258 */
     /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonRetainerTaskResult_AddonRetainerTaskResultVTable* VTable;
     } _union_0x0;
-    /*       */ byte _gap_0x8[0x238];
+    /*       */ byte _gap_0x220[0x20];
     /* 0x240 */ Component_GUI_AtkComponentButton* ReassignButton;
     /* 0x248 */ Component_GUI_AtkComponentButton* ConfirmButton;
     /*       */ byte _gap_0x250[0x8];
@@ -4353,7 +4399,6 @@ struct Client_UI_AddonSelectString /* Size=0x2A8 */
     /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonSelectString_AddonSelectStringVTable* VTable;
     } _union_0x0;
-    /*       */ byte _gap_0x8[0x218];
     /* 0x220 */ Client_UI_AddonSelectString_PopupMenuDerive PopupMenu;
     /*       */ byte _gap_0x290[0x18];
 };
@@ -4735,6 +4780,63 @@ enum Client_Game_Object_ObjectTargetableFlags0x1 /* Size=0x1 */
 {
     IsTargetable = 2,
     Unk1 = 4
+};
+
+enum Client_Game_Event_EventHandlerType0x2 /* Size=0x2 */
+{
+    Quest = 1,
+    Warp = 2,
+    GatheringPoint = 3,
+    Shop = 4,
+    Aetheryte = 5,
+    GuildLeveAssignment = 6,
+    DefaultTalk = 9,
+    Craft = 10,
+    CustomTalk = 11,
+    CompanyLeveOfficer = 12,
+    Array = 13,
+    CraftLeve = 14,
+    GimmickAccessor = 15,
+    GimmickBill = 16,
+    GimmickRect = 17,
+    ChocoboTaxiStand = 18,
+    Opening = 19,
+    ExitRange = 20,
+    Fishing = 21,
+    GrandCompanyShop = 22,
+    GuildOrderGuide = 23,
+    GuildOrderOfficer = 24,
+    ContentNpc = 25,
+    Story = 26,
+    SpecialShop = 27,
+    ContentTalk = 28,
+    InstanceContentGuide = 29,
+    HousingAethernet = 30,
+    FcTalk = 31,
+    MobHunt = 32,
+    Adventure = 33,
+    DailyQuestSupply = 34,
+    TripleTriad = 35,
+    GoldSaucerArcadeMachine = 36,
+    LotteryExchangeShop = 52,
+    TripleTriadCompetition = 55,
+    BattleLeveDirector = 32769,
+    GatheringLeveDirector = 32770,
+    InstanceContentDirector = 32771,
+    PublicContentDirector = 32772,
+    QuestBattleDirector = 32774,
+    CompanyLeveDirector = 32775,
+    TreasureHuntDirector = 32777,
+    GoldSaucerDirector = 32778,
+    CompanyCraftDirector = 32779,
+    DpsChallengeDirector = 32781,
+    FateDirector = 32794
+};
+
+struct Client_Game_Event_EventId /* Size=0x4 */
+{
+    /* 0x0 */ unsigned __int16 EntryId;
+    /* 0x2 */ Client_Game_Event_EventHandlerType0x2 Type;
 };
 
 struct Client_Graphics_Scene_Object_ObjectVTable /* Size=0x18 */
@@ -6148,10 +6250,7 @@ struct Client_UI_Misc_ItemOrderModule /* Size=0xD8 */
 {
     /* 0x00 */ Client_UI_Misc_UserFileManager_UserFileEvent UserFileEvent;
     /* 0x40 */ Client_UI_Misc_ItemOrderModuleSorter* InventorySorter;
-    union {
-    /* 0x48 */ byte ArmourySorter[0x60];
     /* 0x48 */ Client_UI_Misc_ItemOrderModuleSorter* ArmouryMainHandSorter;
-    } _union_0x48;
     /* 0x50 */ Client_UI_Misc_ItemOrderModuleSorter* ArmouryHeadSorter;
     /* 0x58 */ Client_UI_Misc_ItemOrderModuleSorter* ArmouryBodySorter;
     /* 0x60 */ Client_UI_Misc_ItemOrderModuleSorter* ArmouryHandsSorter;
@@ -6188,7 +6287,7 @@ struct Client_UI_Misc_RaptureGearsetModule /* Size=0xB670 */
     /* 0x0000 */ Client_UI_Misc_UserFileManager_UserFileEvent UserFileEvent;
     /* 0x0000 */ void* vtbl;
     } _union_0x0;
-    /*        */ byte _gap_0x8[0x40];
+    /*        */ byte _gap_0x40[0x8];
     /* 0x0048 */ Client_UI_Misc_RaptureGearsetModule_Gearsets Gearset;
     /*        */ byte _gap_0xAF74[0x4];
     /*        */ byte _gap_0xAF78[0x6F8];
@@ -6370,6 +6469,33 @@ struct Client_Game_InventoryItem /* Size=0x38 */
     /*      */ byte _gap_0x34[0x4];
 };
 
+struct Client_UI_Misc_RecommendEquipModule /* Size=0x80 */
+{
+    /* 0x00 */ unsigned __int32 Unk00;
+    /* 0x04 */ unsigned __int32 SlotCount;
+    /* 0x08 */ Client_Game_InventoryItem* EquippedMainHand;
+    /* 0x10 */ Client_Game_InventoryItem* EquippedOffHand;
+    /* 0x18 */ Client_Game_InventoryItem* EquippedHead;
+    /* 0x20 */ Client_Game_InventoryItem* EquippedBody;
+    /* 0x28 */ Client_Game_InventoryItem* EquippedHands;
+    /* 0x30 */ Client_Game_InventoryItem* EquippedWaist;
+    /* 0x38 */ Client_Game_InventoryItem* EquippedLegs;
+    /* 0x40 */ Client_Game_InventoryItem* EquippedFeet;
+    /* 0x48 */ Client_Game_InventoryItem* EquippedEars;
+    /* 0x50 */ Client_Game_InventoryItem* EquippedNeck;
+    /* 0x58 */ Client_Game_InventoryItem* EquippedWrist;
+    /* 0x60 */ Client_Game_InventoryItem* EquippedLeftRing;
+    /* 0x68 */ Client_Game_InventoryItem* EquippedRightRing;
+    /* 0x70 */ Client_Game_InventoryItem* EquippedSoulCrystal;
+    /* 0x78 */ unsigned __int16 Level;
+    /* 0x7A */ byte Unk7A;
+    /* 0x7B */ byte Unk7B;
+    /* 0x7C */ byte ClassJob;
+    /* 0x7D */ byte Unk7D;
+    /* 0x7E */ byte Unk7E;
+    /*      */ byte _gap_0x7F;
+};
+
 struct Client_UI_Misc_RetainerCommentModule_RetainerCommentList /* Size=0x410 */
 {
     /*       */ byte _gap_0x0[0x410];
@@ -6398,7 +6524,7 @@ struct Client_UI_Misc_UiSavePackModule /* Size=0x50 */
     /* 0x00 */ Client_UI_Misc_UserFileManager_UserFileEvent UserFileEvent;
     /* 0x00 */ Client_UI_Misc_UiSavePackModule_UiSavePackModuleVTable* VTable;
     } _union_0x0;
-    /*      */ byte _gap_0x8[0x48];
+    /*      */ byte _gap_0x40[0x10];
 };
 
 enum Client_UI_Misc_DataSegment0x1 /* Size=0x1 */
@@ -6781,6 +6907,11 @@ struct Client_UI_Info_InfoProxyCrossWorldLinkShellMember /* Size=0xD0 */
     /*      */ byte _gap_0xB8[0x18];
 };
 
+struct Client_UI_Agent_CrestData /* Size=0x8 */
+{
+    /* 0x0 */ unsigned __int64 Data;
+};
+
 struct Client_UI_Info_InfoProxyFreeCompany /* Size=0x6E8 */
 {
     /* 0x000 */ Client_UI_Info_InfoProxyInterface InfoProxyInterface;
@@ -7050,24 +7181,14 @@ struct Client_UI_Agent_AozContentData /* Size=0x380 */
     /*       */ byte _gap_0x44[0x4];
     /* 0x048 */ byte CurrentActIndex;
     /* 0x049 */ byte CurrentEnemyIndex;
-    union {
-    /* 0x04A */ byte Arrangements[0x16E];
     /* 0x04A */ Client_UI_Agent_AozArrangementData Act1Arrangement;
-    } _union_0x4A;
-    /*       */ byte _gap_0x52[0x2];
-    /*       */ byte _gap_0x54[0x4];
-    /*       */ byte _gap_0x58[0x68];
-    /*       */ byte _gap_0xC0[0x4];
     /* 0x0C4 */ Client_UI_Agent_AozArrangementData Act2Arrangement;
     /* 0x13E */ Client_UI_Agent_AozArrangementData Act3Arrangement;
     /*       */ byte _gap_0x1B8[0x70];
     /* 0x228 */ Client_System_String_Utf8String NoviceString;
     /* 0x290 */ Client_System_String_Utf8String ModerateString;
     /* 0x2F8 */ Client_System_String_Utf8String AdvancedString;
-    union {
-    /* 0x360 */ byte WeeklyRewards[0x18];
     /* 0x360 */ Client_UI_Agent_AozWeeklyReward NoviceRewards;
-    } _union_0x360;
     /* 0x368 */ Client_UI_Agent_AozWeeklyReward ModerateRewards;
     /* 0x370 */ Client_UI_Agent_AozWeeklyReward AdvancedRewards;
     /*       */ byte _gap_0x378[0x8];
@@ -7138,20 +7259,6 @@ struct Client_UI_Agent_AgentArchiveItem /* Size=0x30 */
 {
     /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x28 */ Client_UI_Agent_ArchiveItem* ArchiveItem;
-};
-
-struct Client_UI_Agent_AgentBannerInterface_Storage /* Size=0x3B30 */
-{
-    union {
-    /* 0x0000 */ void* Agent;
-    /* 0x0000 */ byte CharacterArray[0x3B00];
-    } _union_0x0;
-    /* 0x0008 */ Client_UI_UIModule* UiModule;
-    /* 0x0010 */ unsigned __int32 Unk1;
-    /* 0x0014 */ unsigned __int32 Unk2;
-    /*        */ byte _gap_0x18[0x3B08];
-    /* 0x3B20 */ __int64 Unk3;
-    /* 0x3B28 */ __int64 Unk4;
 };
 
 struct Client_UI_Agent_AgentBannerInterface /* Size=0x30 */
@@ -7237,6 +7344,7 @@ struct Client_UI_Agent_ContentsFinderRewards /* Size=0x20 */
     /* 0x00 */ __int32 PvPExpReward;
     /* 0x00 */ __int32 WolfMarkReward;
     } _union_0x0;
+    /*      */ byte _gap_0x4[0x4];
     /*      */ byte _gap_0x8[0x18];
 };
 
@@ -7308,11 +7416,7 @@ struct Client_Game_Object_GameObjectID /* Size=0x8 */
 struct Client_UI_Agent_AgentContext /* Size=0x1748 */
 {
     /* 0x0000 */ Component_GUI_AgentInterface AgentInterface;
-    union {
-    /* 0x0028 */ byte ContextMenuArray[0xCF0];
     /* 0x0028 */ Client_UI_Agent_ContextMenu MainContextMenu;
-    } _union_0x28;
-    /*        */ byte _gap_0x30[0x670];
     /* 0x06A0 */ Client_UI_Agent_ContextMenu SubContextMenu;
     /* 0x0D18 */ Client_UI_Agent_ContextMenu* CurrentContextMenu;
     /* 0x0D20 */ Client_System_String_Utf8String ContextMenuTitle;
@@ -7823,10 +7927,269 @@ struct Client_Game_Character_Character_CompanionContainer /* Size=0x20 */
     /*      */ byte _gap_0x1C[0x4];
 };
 
+struct Client_Game_Character_WeaponModelId /* Size=0x8 */
+{
+    /* 0x0 */ unsigned __int16 Type;
+    /* 0x2 */ unsigned __int16 Id;
+    /* 0x4 */ unsigned __int16 Variant;
+    /* 0x6 */ byte Stain;
+    /*     */ byte _gap_0x7;
+};
+
 struct Client_Game_Character_DrawObjectData /* Size=0x44 */
 {
     /*      */ byte _gap_0x0[0x40];
     /*      */ byte _gap_0x40[0x4];
+};
+
+struct Client_Game_Character_EquipmentModelId /* Size=0x4 */
+{
+    /* 0x0 */ unsigned __int16 Id;
+    /* 0x2 */ byte Variant;
+    /* 0x3 */ byte Stain;
+};
+
+struct Client_Game_Character_CustomizeData /* Size=0x1A */
+{
+    /* 0x00 */ byte Race;
+    /* 0x01 */ byte Sex;
+    /* 0x02 */ byte BodyType;
+    /*      */ byte _gap_0x3;
+    /* 0x04 */ byte Clan;
+    /*      */ byte _gap_0x5;
+    /*      */ byte _gap_0x6[0x2];
+    /*      */ byte _gap_0x8[0x8];
+    /*      */ byte _gap_0x10[0x4];
+    /* 0x14 */ byte LipColorFurPattern;
+    /*      */ byte _gap_0x15;
+    /*      */ byte _gap_0x16[0x2];
+    /*      */ byte _gap_0x18[0x2];
+};
+
+struct Client_Game_Character_DrawDataContainer /* Size=0x190 */
+{
+    /* 0x000 */ void** Vtable;
+    /* 0x008 */ void* Unk8;
+    /* 0x010 */ Client_Game_Character_WeaponModelId MainHandModel;
+    /*       */ byte _gap_0x18[0x8];
+    /* 0x020 */ Client_Game_Character_DrawObjectData MainHand;
+    /*       */ byte _gap_0x64[0x4];
+    /*       */ byte _gap_0x68[0x8];
+    /*       */ byte _gap_0x70[0x2];
+    /* 0x072 */ unsigned __int16 MainHandFlags1;
+    /* 0x074 */ byte MainHandFlags2;
+    /*       */ byte _gap_0x75;
+    /*       */ byte _gap_0x76[0x2];
+    /* 0x078 */ Client_Game_Character_WeaponModelId OffHandModel;
+    /*       */ byte _gap_0x80[0x8];
+    /* 0x088 */ Client_Game_Character_DrawObjectData OffHand;
+    /*       */ byte _gap_0xCC[0x4];
+    /*       */ byte _gap_0xD0[0x8];
+    /*       */ byte _gap_0xD8[0x2];
+    /* 0x0DA */ unsigned __int16 OffHandFlags1;
+    /* 0x0DC */ byte OffHandFlags2;
+    /*       */ byte _gap_0xDD;
+    /*       */ byte _gap_0xDE[0x2];
+    /* 0x0E0 */ Client_Game_Character_WeaponModelId UnkE0Model;
+    /*       */ byte _gap_0xE8[0x8];
+    /* 0x0F0 */ Client_Game_Character_DrawObjectData UnkF0;
+    /*       */ byte _gap_0x134[0x4];
+    /*       */ byte _gap_0x138[0x8];
+    /*       */ byte _gap_0x140[0x2];
+    /* 0x142 */ unsigned __int16 Unk144Flags1;
+    /* 0x144 */ byte Unk144Flags2;
+    /*       */ byte _gap_0x145;
+    /*       */ byte _gap_0x146[0x2];
+    /* 0x148 */ Client_Game_Character_EquipmentModelId Head;
+    /* 0x14C */ Client_Game_Character_EquipmentModelId Top;
+    /* 0x150 */ Client_Game_Character_EquipmentModelId Arms;
+    /* 0x154 */ Client_Game_Character_EquipmentModelId Legs;
+    /* 0x158 */ Client_Game_Character_EquipmentModelId Feet;
+    /* 0x15C */ Client_Game_Character_EquipmentModelId Ear;
+    /* 0x160 */ Client_Game_Character_EquipmentModelId Neck;
+    /* 0x164 */ Client_Game_Character_EquipmentModelId Wrist;
+    /* 0x168 */ Client_Game_Character_EquipmentModelId RFinger;
+    /* 0x16C */ Client_Game_Character_EquipmentModelId LFinger;
+    /* 0x170 */ Client_Game_Character_CustomizeData CustomizeData;
+    /* 0x18A */ unsigned __int32 Unk18A;
+    /* 0x18E */ byte Flags1;
+    /* 0x18F */ byte Flags2;
+};
+
+struct Client_Game_Character_Ornament /* Size=0x1B40 */
+{
+    /* 0x0000 */ Client_Game_Character_Character Character;
+    /* 0x1B20 */ unsigned __int32 OrnamentId;
+    /* 0x1B24 */ byte AttachmentPoint;
+    /*        */ byte _gap_0x1B25;
+    /*        */ byte _gap_0x1B26[0x2];
+    /*        */ byte _gap_0x1B28[0x18];
+};
+
+struct Client_Game_Character_Character_OrnamentContainer /* Size=0x28 */
+{
+    /*      */ byte _gap_0x0[0x8];
+    /* 0x08 */ Client_Game_Character_BattleChara* OwnerObject;
+    /* 0x10 */ Client_Game_Character_Ornament* OrnamentObject;
+    /* 0x18 */ unsigned __int16 OrnamentId;
+    /*      */ byte _gap_0x1A[0x2];
+    /*      */ byte _gap_0x1C[0x4];
+    /*      */ byte _gap_0x20[0x8];
+};
+
+struct Client_Game_ActionTimelineDriver /* Size=0x1F0 */
+{
+    /*       */ byte _gap_0x0[0xE0];
+    /* 0x0E0 */ unsigned __int16 TimelineIds[0xD];
+    /*       */ byte _gap_0xFA[0x2];
+    /*       */ byte _gap_0xFC[0x4];
+    /*       */ byte _gap_0x100[0x50];
+    /*       */ byte _gap_0x150[0x4];
+    /* 0x154 */ float TimelineSpeeds[0xD];
+    /*       */ byte _gap_0x188[0x68];
+};
+
+struct Client_Game_ActionTimelineManager /* Size=0x340 */
+{
+    /*       */ byte _gap_0x0[0x10];
+    /* 0x010 */ Client_Game_ActionTimelineDriver Driver;
+    /*       */ byte _gap_0x200[0xC0];
+    /* 0x2C0 */ float OverallSpeed;
+    /*       */ byte _gap_0x2C4[0x4];
+    /*       */ byte _gap_0x2C8[0x10];
+    /*       */ byte _gap_0x2D8[0x4];
+    /* 0x2DC */ unsigned __int16 BaseOverride;
+    /* 0x2DE */ unsigned __int16 LipsOverride;
+    /*       */ byte _gap_0x2E0[0x60];
+};
+
+enum Client_Game_BalloonType0x4 /* Size=0x4 */
+{
+    Timer = 0,
+    Unknown = 1
+};
+
+enum Client_Game_BalloonState0x4 /* Size=0x4 */
+{
+    Waiting = 0,
+    Active = 1,
+    Closing = 2,
+    Inactive = 3
+};
+
+struct Client_Game_Balloon /* Size=0x80 */
+{
+    /* 0x00 */ unsigned __int16 DefaultBalloonId;
+    /* 0x02 */ unsigned __int16 NowPlayingBalloonId;
+    /* 0x04 */ float PlayTimer;
+    /* 0x08 */ Client_Game_BalloonType0x4 Type;
+    /* 0x0C */ Client_Game_BalloonState0x4 State;
+    /* 0x10 */ Client_System_String_Utf8String Text;
+    /* 0x78 */ byte UnkBool;
+    /*      */ byte _gap_0x79;
+    /*      */ byte _gap_0x7A[0x2];
+    /*      */ byte _gap_0x7C[0x4];
+};
+
+struct Client_Graphics_Vfx_VfxData /* Size=0x1D0 */
+{
+    /*       */ byte _gap_0x0[0x1D0];
+};
+
+enum Client_Game_Character_Character_CharacterModes0x1 /* Size=0x1 */
+{
+    None = 0,
+    Normal = 1,
+    EmoteLoop = 3,
+    Mounted = 4,
+    AnimLock = 8,
+    Carrying = 9,
+    InPositionLoop = 11,
+    Performance = 16
+};
+
+struct Client_Game_Character_Character /* Size=0x1B20 */
+{
+    union {
+    /* 0x0000 */ Client_Game_Object_GameObject GameObject;
+    /* 0x0000 */ Client_Game_Character_Character_CharacterVTable* VTable;
+    } _union_0x0;
+    /*        */ byte _gap_0x1A0[0x10];
+    /* 0x01B0 */ float ModelScale;
+    /* 0x01B4 */ __int32 ModelCharaId;
+    /* 0x01B8 */ __int32 ModelSkeletonId;
+    /* 0x01BC */ __int32 ModelCharaId_2;
+    /* 0x01C0 */ __int32 ModelSkeletonId_2;
+    /* 0x01C4 */ unsigned __int32 Health;
+    /* 0x01C8 */ unsigned __int32 MaxHealth;
+    /* 0x01CC */ unsigned __int32 Mana;
+    /* 0x01D0 */ unsigned __int32 MaxMana;
+    /* 0x01D4 */ unsigned __int16 GatheringPoints;
+    /* 0x01D6 */ unsigned __int16 MaxGatheringPoints;
+    /* 0x01D8 */ unsigned __int16 CraftingPoints;
+    /* 0x01DA */ unsigned __int16 MaxCraftingPoints;
+    /* 0x01DC */ __int16 TransformationId;
+    /* 0x01DE */ __int16 StatusEffectVFXId;
+    /* 0x01E0 */ byte ClassJob;
+    /* 0x01E1 */ byte Level;
+    /*        */ byte _gap_0x1E2[0x2];
+    /*        */ byte _gap_0x1E4[0x4];
+    /*        */ byte _gap_0x1E8[0x468];
+    /* 0x0650 */ Client_Game_Character_Character_MountContainer Mount;
+    /* 0x06B0 */ Client_Game_Character_Character_CompanionContainer Companion;
+    /* 0x06D0 */ Client_Game_Character_DrawDataContainer DrawData;
+    /* 0x0860 */ Client_Game_Character_Character_OrnamentContainer Ornament;
+    /*        */ byte _gap_0x888[0x68];
+    /* 0x08F0 */ Client_Game_ActionTimelineManager ActionTimelineManager;
+    /*        */ byte _gap_0xC30[0x50];
+    /* 0x0C80 */ unsigned __int32 PlayerTargetObjectID;
+    /*        */ byte _gap_0xC84[0x4];
+    /*        */ byte _gap_0xC88[0xB08];
+    /* 0x1790 */ Client_Game_Balloon Balloon;
+    /*        */ byte _gap_0x1810[0x188];
+    /* 0x1998 */ Client_Graphics_Vfx_VfxData* VfxData;
+    /* 0x19A0 */ Client_Graphics_Vfx_VfxData* VfxData2;
+    /*        */ byte _gap_0x19A8[0x20];
+    /* 0x19C8 */ Client_Graphics_Vfx_VfxData* Omen;
+    /*        */ byte _gap_0x19D0[0x80];
+    /* 0x1A50 */ Client_Game_Character_Companion* CompanionObject;
+    /*        */ byte _gap_0x1A58[0x10];
+    /* 0x1A68 */ byte FreeCompanyTag[0x6];
+    /*        */ byte _gap_0x1A6E[0x2];
+    /*        */ byte _gap_0x1A70[0x18];
+    /* 0x1A88 */ unsigned __int64 TargetObjectID;
+    /*        */ byte _gap_0x1A90[0x48];
+    /* 0x1AD8 */ unsigned __int32 NameID;
+    /*        */ byte _gap_0x1ADC[0x4];
+    /*        */ byte _gap_0x1AE0[0x8];
+    /* 0x1AE8 */ unsigned __int32 CompanionOwnerID;
+    /*        */ byte _gap_0x1AEC[0x4];
+    /*        */ byte _gap_0x1AF0[0x4];
+    /* 0x1AF4 */ unsigned __int16 CurrentWorld;
+    /* 0x1AF6 */ unsigned __int16 HomeWorld;
+    /* 0x1AF8 */ unsigned __int16 TitleID;
+    union {
+    /* 0x1AFA */ byte EventState;
+    /* 0x1AFA */ Client_Game_Character_Character_CharacterModes0x1 Mode;
+    } _union_0x1B00;
+    /*        */ byte _gap_0x1AFB;
+    /*        */ byte _gap_0x1AFC[0x4];
+    /*        */ byte _gap_0x1B00;
+    /* 0x1B01 */ byte ModeParam;
+    /* 0x1B02 */ byte OnlineStatus;
+    /* 0x1B03 */ byte Battalion;
+    /*        */ byte _gap_0x1B04[0x4];
+    /*        */ byte _gap_0x1B08[0x8];
+    /*        */ byte _gap_0x1B10[0x4];
+    /*        */ byte _gap_0x1B14[0x2];
+    /*        */ byte _gap_0x1B16;
+    /* 0x1B17 */ byte ShieldValue;
+    /*        */ byte _gap_0x1B18[0x2];
+    /*        */ byte _gap_0x1B1A;
+    /* 0x1B1B */ byte StatusFlags;
+    /*        */ byte _gap_0x1B1C[0x2];
+    /*        */ byte _gap_0x1B1E;
+    /* 0x1B1F */ byte StatusFlags4;
 };
 
 struct Client_Game_StatusManager /* Size=0x188 */
@@ -7994,9 +8357,11 @@ struct Client_UI_Agent_AgentInventoryContext /* Size=0x678 */
     /* 0x5CC */ Client_Game_InventoryType0x4 BlockedInventoryId;
     } _union_0x5D0;
     union {
-    /* 0x5D4 */ __int32 TargetInventorySlotId;
-    /* 0x5D4 */ __int32 BlockedInventorySlotId;
+    /* 0x5D0 */ __int32 TargetInventorySlotId;
+    /* 0x5D0 */ __int32 BlockedInventorySlotId;
     } _union_0x5D4;
+    /*       */ byte _gap_0x5D4[0x4];
+    /*       */ byte _gap_0x5D8[0x4];
     /* 0x5DC */ unsigned __int32 DummyInventoryId;
     /*       */ byte _gap_0x5E0[0x8];
     /* 0x5E8 */ Client_Game_InventoryItem* TargetInventorySlot;
@@ -8758,24 +9123,15 @@ struct Client_UI_Agent_MycItemCategory /* Size=0x184 */
 
 struct Client_UI_Agent_MycItemBoxData /* Size=0x1580 */
 {
-    union {
-    /* 0x0000 */ byte ItemCacheArray[0xA9C];
-    /* 0x0000 */ Client_UI_Agent_MycItemCategory OffensiveCache;
-    } _union_0x8;
-    /*        */ byte _gap_0x8[0x180];
-    /*        */ byte _gap_0x188[0x4];
+    /*        */ byte _gap_0x0[0x8];
+    /* 0x0008 */ Client_UI_Agent_MycItemCategory OffensiveCache;
     /* 0x018C */ Client_UI_Agent_MycItemCategory DefensiveCache;
     /* 0x0310 */ Client_UI_Agent_MycItemCategory RestorativeCache;
     /* 0x0494 */ Client_UI_Agent_MycItemCategory BeneficialCache;
     /* 0x0618 */ Client_UI_Agent_MycItemCategory TacticalCache;
     /* 0x079C */ Client_UI_Agent_MycItemCategory DetrimentalCache;
     /* 0x0920 */ Client_UI_Agent_MycItemCategory ItemRelatedCache;
-    union {
-    /* 0x0AA4 */ byte ItemHolsterArray[0xA9C];
     /* 0x0AA4 */ Client_UI_Agent_MycItemCategory OffensiveHolster;
-    } _union_0xAA4;
-    /*        */ byte _gap_0xAAC[0x4];
-    /*        */ byte _gap_0xAB0[0x178];
     /* 0x0C28 */ Client_UI_Agent_MycItemCategory DefensiveHolster;
     /* 0x0DAC */ Client_UI_Agent_MycItemCategory RestorativeHolster;
     /* 0x0F30 */ Client_UI_Agent_MycItemCategory BeneficialHolster;
@@ -8832,6 +9188,7 @@ struct Client_UI_Agent_AgentReconstructionBox /* Size=0x240 */
     /* 0x140 */ __int32 LimitedTotal;
     /* 0x140 */ __int32 UnlimitedTotal;
     } _union_0x21C;
+    /*       */ byte _gap_0x144[0x4];
     /*       */ byte _gap_0x148[0xF8];
 };
 
@@ -9050,12 +9407,6 @@ struct Client_UI_Agent_AgentDeliveryItemInfo /* Size=0x108 */
     /* 0x0A0 */ Client_System_String_Utf8String ItemName;
 };
 
-enum Client_Game_BalloonType0x4 /* Size=0x4 */
-{
-    Timer = 0,
-    Unknown = 1
-};
-
 struct Client_UI_Agent_BalloonSlot /* Size=0x8 */
 {
     /* 0x0 */ __int32 Id;
@@ -9174,7 +9525,7 @@ struct Client_System_Scheduler_Base_SchedulerTimeline /* Size=0x280 */
     /* 0x000 */ Client_System_Scheduler_Base_TimelineController TimelineController;
     /* 0x000 */ Client_System_Scheduler_Base_SchedulerTimeline_SchedulerTimelineVTable* VTable;
     } _union_0x0;
-    /*       */ byte _gap_0x8[0x180];
+    /*       */ byte _gap_0x80[0x108];
     /*       */ byte _gap_0x188[0x4];
     /* 0x18C */ unsigned __int32 OwningGameObjectIndex;
     /*       */ byte _gap_0x190[0xF0];
@@ -9222,16 +9573,11 @@ struct Client_System_Resource_ResourceGraph_CategoryContainer /* Size=0xA0 */
     /* 0x00 */ byte CategoryMaps[0xA0];
     /* 0x00 */ StdMap_System_UInt32_Pointer_StdMap_System_UInt32_Pointer_Client_System_Resource_Handle_ResourceHandle* MainMap;
     } _union_0x0;
-    /*      */ byte _gap_0x8[0x98];
 };
 
 struct Client_System_Resource_ResourceGraph /* Size=0xC80 */
 {
-    union {
-    /* 0x000 */ byte ContainerArray[0xC80];
     /* 0x000 */ Client_System_Resource_ResourceGraph_CategoryContainer CommonContainer;
-    } _union_0x0;
-    /*       */ byte _gap_0x8[0x98];
     /* 0x0A0 */ Client_System_Resource_ResourceGraph_CategoryContainer BgCommonContainer;
     /* 0x140 */ Client_System_Resource_ResourceGraph_CategoryContainer BgContainer;
     /* 0x1E0 */ Client_System_Resource_ResourceGraph_CategoryContainer CutContainer;
@@ -9691,11 +10037,6 @@ struct Client_Graphics_Transform /* Size=0x30 */
     /* 0x20 */ Common_Math_Vector3 Scale;
 };
 
-struct Client_Graphics_Vfx_VfxData /* Size=0x1D0 */
-{
-    /*       */ byte _gap_0x0[0x1D0];
-};
-
 struct Client_Graphics_Scene_CameraManager /* Size=0x120 */
 {
     /*       */ byte _gap_0x0[0x50];
@@ -9793,7 +10134,6 @@ struct Client_Graphics_Scene_CharacterBase /* Size=0x8F0 */
     /* 0x000 */ Client_Graphics_Scene_DrawObject DrawObject;
     /* 0x000 */ Client_Graphics_Scene_CharacterBase_CharacterBaseVTable* VTable;
     } _union_0x0;
-    /*       */ byte _gap_0x8[0x88];
     /* 0x090 */ byte UnkFlags_01;
     /* 0x091 */ byte UnkFlags_02;
     /* 0x092 */ byte UnkFlags_03;
@@ -9855,9 +10195,32 @@ struct Client_Graphics_Scene_EnvSpace /* Size=0xD0 */
     /*      */ byte _gap_0xB8[0x18];
 };
 
-struct Client_Game_Character_CustomizeData /* Size=0x1A */
+struct Client_Graphics_Scene_Human /* Size=0xA80 */
 {
-    /* 0x00 */ byte Data[0x1A];
+    /* 0x000 */ Client_Graphics_Scene_CharacterBase CharacterBase;
+    /* 0x8F0 */ Client_Game_Character_CustomizeData Customize;
+    /*       */ byte _gap_0x90A[0x2];
+    /* 0x90C */ unsigned __int32 SlotNeedsUpdateBitfield;
+    /* 0x910 */ Client_Game_Character_EquipmentModelId Head;
+    /* 0x914 */ Client_Game_Character_EquipmentModelId Top;
+    /* 0x918 */ Client_Game_Character_EquipmentModelId Arms;
+    /* 0x91C */ Client_Game_Character_EquipmentModelId Legs;
+    /* 0x920 */ Client_Game_Character_EquipmentModelId Feet;
+    /* 0x924 */ Client_Game_Character_EquipmentModelId Ear;
+    /* 0x928 */ Client_Game_Character_EquipmentModelId Neck;
+    /* 0x92C */ Client_Game_Character_EquipmentModelId Wrist;
+    /* 0x930 */ Client_Game_Character_EquipmentModelId RFinger;
+    /* 0x934 */ Client_Game_Character_EquipmentModelId LFinger;
+    /* 0x938 */ unsigned __int16 RaceSexId;
+    /* 0x93A */ unsigned __int16 HairId;
+    /* 0x93C */ unsigned __int16 FaceId;
+    /* 0x93E */ unsigned __int16 TailEarId;
+    /* 0x940 */ unsigned __int16 FurId;
+    /*       */ byte _gap_0x942[0x2];
+    /*       */ byte _gap_0x944[0x4];
+    /*       */ byte _gap_0x948[0xF0];
+    /* 0xA38 */ byte* ChangedEquipData;
+    /*       */ byte _gap_0xA40[0x40];
 };
 
 struct Client_Graphics_Scene_Monster /* Size=0x900 */
@@ -9932,6 +10295,37 @@ struct Client_Graphics_Render_OffscreenRenderingManager /* Size=0x190 */
     /* 0x0D8 */ void* Camera_3;
     /* 0x0E0 */ void* Camera_4;
     /*       */ byte _gap_0xE8[0xA8];
+};
+
+struct Client_Graphics_Render_RenderTargetManager /* Size=0x480 */
+{
+    /* 0x000 */ void* vtbl;
+    /* 0x008 */ Client_Graphics_Render_Notifier Notifier;
+    /* 0x020 */ byte RenderTargetArray[0x1C0];
+    /* 0x1E0 */ Client_Graphics_Render_Texture* OffscreenRenderTarget_1;
+    /* 0x1E8 */ Client_Graphics_Render_Texture* OffscreenRenderTarget_2;
+    /* 0x1F0 */ Client_Graphics_Render_Texture* OffscreenRenderTarget_3;
+    /* 0x1F8 */ Client_Graphics_Render_Texture* OffscreenRenderTarget_4;
+    /* 0x200 */ Client_Graphics_Render_Texture* OffscreenGBuffer;
+    /* 0x208 */ Client_Graphics_Render_Texture* OffscreenDepthStencil;
+    /* 0x210 */ Client_Graphics_Render_Texture* OffscreenRenderTarget_Unk1;
+    /* 0x218 */ Client_Graphics_Render_Texture* OffscreenRenderTarget_Unk2;
+    /* 0x220 */ Client_Graphics_Render_Texture* OffscreenRenderTarget_Unk3;
+    /*       */ byte _gap_0x228[0x20];
+    /* 0x248 */ unsigned __int32 Resolution_Width;
+    /* 0x24C */ unsigned __int32 Resolution_Height;
+    /* 0x250 */ unsigned __int32 ShadowMap_Width;
+    /* 0x254 */ unsigned __int32 ShadowMap_Height;
+    /* 0x258 */ unsigned __int32 NearShadowMap_Width;
+    /* 0x25C */ unsigned __int32 NearShadowMap_Height;
+    /* 0x260 */ unsigned __int32 FarShadowMap_Width;
+    /* 0x264 */ unsigned __int32 FarShadowMap_Height;
+    /* 0x268 */ bool UnkBool_1;
+    /*       */ byte _gap_0x269;
+    /*       */ byte _gap_0x26A[0x2];
+    /*       */ byte _gap_0x26C[0x4];
+    /* 0x270 */ byte RenderTargetArray2[0x188];
+    /*       */ byte _gap_0x3F8[0x88];
 };
 
 struct Client_Graphics_Render_ShadowCamera /* Size=0x150 */
@@ -10146,14 +10540,43 @@ struct Client_Graphics_Environment_EnvState /* Size=0x258 */
     /*       */ byte _gap_0x0[0x258];
 };
 
+struct Client_Graphics_Environment_EnvSoundState /* Size=0x68 */
+{
+    /*      */ byte _gap_0x0[0x68];
+};
+
 struct Client_Graphics_Environment_EnvSimulator /* Size=0x310 */
 {
     /*       */ byte _gap_0x0[0x310];
 };
 
-struct Client_Graphics_Environment_EnvSoundState /* Size=0x68 */
+struct Client_Graphics_Environment_EnvManager /* Size=0x900 */
 {
-    /*      */ byte _gap_0x0[0x68];
+    /*       */ byte _gap_0x0[0x8];
+    /* 0x008 */ Client_Graphics_Scene_EnvScene* EnvScene;
+    /* 0x010 */ float DayTimeSeconds;
+    /* 0x014 */ float ActiveTransitionTime;
+    /* 0x018 */ float CurrentTransitionTime;
+    /* 0x01C */ float TransitionProgress;
+    /*       */ byte _gap_0x20[0x4];
+    /*       */ byte _gap_0x24[0x2];
+    /*       */ byte _gap_0x26;
+    /* 0x027 */ byte ActiveWeather;
+    /* 0x028 */ float TransitionTime;
+    /*       */ byte _gap_0x2C[0x4];
+    /* 0x030 */ Client_Graphics_Scene_EnvSpace* EnvSpace;
+    /*       */ byte _gap_0x38[0x18];
+    /* 0x050 */ Client_Graphics_Environment_EnvState EnvState;
+    /*       */ byte _gap_0x2A8[0xE0];
+    /* 0x388 */ Client_Graphics_Environment_EnvSoundState EnvSoundState;
+    /*       */ byte _gap_0x3F0[0x10];
+    /* 0x400 */ Client_Graphics_Environment_EnvSimulator EnvSimulator;
+    /*       */ byte _gap_0x710[0x40];
+    /* 0x750 */ Client_Graphics_Render_ShadowCamera ShadowCamera;
+    /*       */ byte _gap_0x8A0[0x50];
+    /*       */ byte _gap_0x8F0[0x4];
+    /* 0x8F4 */ unsigned __int32 UnkFlags;
+    /*       */ byte _gap_0x8F8[0x8];
 };
 
 struct Client_Game_ComboDetail /* Size=0x8 */
@@ -10195,32 +10618,6 @@ struct Client_Game_RecastDetail /* Size=0x14 */
     /*      */ byte _gap_0x10[0x4];
 };
 
-struct Client_Game_ActionTimelineDriver /* Size=0x1F0 */
-{
-    /*       */ byte _gap_0x0[0xE0];
-    /* 0x0E0 */ unsigned __int16 TimelineIds[0xD];
-    /*       */ byte _gap_0xFA[0x2];
-    /*       */ byte _gap_0xFC[0x4];
-    /*       */ byte _gap_0x100[0x50];
-    /*       */ byte _gap_0x150[0x4];
-    /* 0x154 */ float TimelineSpeeds[0xD];
-    /*       */ byte _gap_0x188[0x68];
-};
-
-struct Client_Game_ActionTimelineManager /* Size=0x340 */
-{
-    /*       */ byte _gap_0x0[0x10];
-    /* 0x010 */ Client_Game_ActionTimelineDriver Driver;
-    /*       */ byte _gap_0x200[0xC0];
-    /* 0x2C0 */ float OverallSpeed;
-    /*       */ byte _gap_0x2C4[0x4];
-    /*       */ byte _gap_0x2C8[0x10];
-    /*       */ byte _gap_0x2D8[0x4];
-    /* 0x2DC */ unsigned __int16 BaseOverride;
-    /* 0x2DE */ unsigned __int16 LipsOverride;
-    /*       */ byte _gap_0x2E0[0x60];
-};
-
 enum Client_Game_ActionTimelineSlots0x4 /* Size=0x4 */
 {
     Base = 0,
@@ -10233,28 +10630,6 @@ enum Client_Game_ActionTimelineSlots0x4 /* Size=0x4 */
     Parts3 = 10,
     Parts4 = 11,
     Overlay = 12
-};
-
-enum Client_Game_BalloonState0x4 /* Size=0x4 */
-{
-    Waiting = 0,
-    Active = 1,
-    Closing = 2,
-    Inactive = 3
-};
-
-struct Client_Game_Balloon /* Size=0x80 */
-{
-    /* 0x00 */ unsigned __int16 DefaultBalloonId;
-    /* 0x02 */ unsigned __int16 NowPlayingBalloonId;
-    /* 0x04 */ float PlayTimer;
-    /* 0x08 */ Client_Game_BalloonType0x4 Type;
-    /* 0x0C */ Client_Game_BalloonState0x4 State;
-    /* 0x10 */ Client_System_String_Utf8String Text;
-    /* 0x78 */ byte UnkBool;
-    /*      */ byte _gap_0x79;
-    /*      */ byte _gap_0x7A[0x2];
-    /*      */ byte _gap_0x7C[0x4];
 };
 
 struct Client_Game_LobbyCamera /* Size=0x300 */
@@ -10583,7 +10958,6 @@ struct Client_Game_JobGaugeManager /* Size=0x60 */
     /* 0x08 */ Client_Game_Gauge_WarriorGauge Warrior;
     /* 0x08 */ Client_Game_Gauge_GunbreakerGauge Gunbreaker;
     } _union_0x8;
-    /*      */ byte _gap_0x10[0x48];
     /* 0x58 */ byte ClassJobID;
     /*      */ byte _gap_0x59;
     /*      */ byte _gap_0x5A[0x2];
@@ -10659,7 +11033,7 @@ struct Client_Game_QuestManager /* Size=0xF00 */
     /* 0x000 */ Client_Game_QuestManager_QuestListArray Quest;
     /* 0x000 */ byte NormalQuests[0x2D0];
     } _union_0x10;
-    /*       */ byte _gap_0x8[0x560];
+    /*       */ byte _gap_0x2D0[0x298];
     /* 0x568 */ byte DailyQuests[0xC0];
     /*       */ byte _gap_0x628[0x30];
     /* 0x658 */ byte TrackedQuests[0x50];
@@ -10823,6 +11197,17 @@ struct Client_Game_SavedAppearanceSlot /* Size=0x140 */
     /* 0x13C */ byte SlotIndex;
     /*       */ byte _gap_0x13D;
     /*       */ byte _gap_0x13E[0x2];
+};
+
+struct Client_Game_Status /* Size=0xC */
+{
+    /* 0x0 */ unsigned __int16 StatusID;
+    union {
+    /* 0x2 */ unsigned __int16 Param;
+    /* 0x2 */ byte StackCount;
+    } _union_0x2;
+    /* 0x4 */ float RemainingTime;
+    /* 0x8 */ unsigned __int32 SourceID;
 };
 
 struct Client_Game_UI_AreaInstance /* Size=0x28 */
@@ -11876,6 +12261,41 @@ struct Client_Game_Housing_HousingManager /* Size=0xE0 */
     /*      */ byte _gap_0x20[0xC0];
 };
 
+struct Client_Game_Housing_HousingWorkshopAirshipSubData /* Size=0x1C0 */
+{
+    /*       */ byte _gap_0x0[0x4];
+    /* 0x004 */ unsigned __int32 RegisterTime;
+    /*       */ byte _gap_0x8[0x4];
+    /* 0x00C */ byte RankId;
+    /*       */ byte _gap_0xD;
+    /*       */ byte _gap_0xE[0x2];
+    /* 0x010 */ unsigned __int32 ReturnTime;
+    /* 0x014 */ unsigned __int32 CurrentExp;
+    /* 0x018 */ unsigned __int32 NextLevelExp;
+    /*       */ byte _gap_0x1C[0x4];
+    /* 0x020 */ unsigned __int16 HullId;
+    /* 0x022 */ unsigned __int16 SternId;
+    /* 0x024 */ unsigned __int16 BowId;
+    /* 0x026 */ unsigned __int16 BridgeId;
+    /* 0x028 */ unsigned __int16 Surveillance;
+    /* 0x02A */ unsigned __int16 Retrieval;
+    /* 0x02C */ unsigned __int16 Speed;
+    /* 0x02E */ unsigned __int16 Range;
+    /* 0x030 */ unsigned __int16 Favor;
+    /*       */ byte _gap_0x32[0x2];
+    /*       */ byte _gap_0x34[0x2];
+    /*       */ byte _gap_0x36;
+    /* 0x037 */ byte Name[0x14];
+    /*       */ byte _gap_0x4B;
+    /*       */ byte _gap_0x4C[0x4];
+    /*       */ byte _gap_0x50[0x4];
+    /* 0x054 */ byte GatheredData[0x118];
+    /*       */ byte _gap_0x16C[0x4];
+    /*       */ byte _gap_0x170[0x30];
+    /* 0x1A0 */ Client_System_String_Utf8String* Log;
+    /*       */ byte _gap_0x1A8[0x18];
+};
+
 struct Client_Game_Housing_HousingWorkshopAirshipGathered /* Size=0x38 */
 {
     /* 0x00 */ unsigned __int32 ExpGained;
@@ -12307,57 +12727,6 @@ struct Client_Game_Event_EventFramework /* Size=0x3BC0 */
     /*        */ byte _gap_0x3448[0x778];
 };
 
-enum Client_Game_Event_EventHandlerType0x2 /* Size=0x2 */
-{
-    Quest = 1,
-    Warp = 2,
-    GatheringPoint = 3,
-    Shop = 4,
-    Aetheryte = 5,
-    GuildLeveAssignment = 6,
-    DefaultTalk = 9,
-    Craft = 10,
-    CustomTalk = 11,
-    CompanyLeveOfficer = 12,
-    Array = 13,
-    CraftLeve = 14,
-    GimmickAccessor = 15,
-    GimmickBill = 16,
-    GimmickRect = 17,
-    ChocoboTaxiStand = 18,
-    Opening = 19,
-    ExitRange = 20,
-    Fishing = 21,
-    GrandCompanyShop = 22,
-    GuildOrderGuide = 23,
-    GuildOrderOfficer = 24,
-    ContentNpc = 25,
-    Story = 26,
-    SpecialShop = 27,
-    ContentTalk = 28,
-    InstanceContentGuide = 29,
-    HousingAethernet = 30,
-    FcTalk = 31,
-    MobHunt = 32,
-    Adventure = 33,
-    DailyQuestSupply = 34,
-    TripleTriad = 35,
-    GoldSaucerArcadeMachine = 36,
-    LotteryExchangeShop = 52,
-    TripleTriadCompetition = 55,
-    BattleLeveDirector = 32769,
-    GatheringLeveDirector = 32770,
-    InstanceContentDirector = 32771,
-    PublicContentDirector = 32772,
-    QuestBattleDirector = 32774,
-    CompanyLeveDirector = 32775,
-    TreasureHuntDirector = 32777,
-    GoldSaucerDirector = 32778,
-    CompanyCraftDirector = 32779,
-    DpsChallengeDirector = 32781,
-    FateDirector = 32794
-};
-
 struct Client_Game_Control_CameraManager /* Size=0x180 */
 {
     /* 0x000 */ Client_Game_Camera* Camera;
@@ -12428,16 +12797,6 @@ struct Client_Game_Character_CharacterManager /* Size=0x338 */
     /* 0x328 */ Client_Game_Character_Companion* CompanionMemory;
     /* 0x330 */ __int32 CompanionClassSize;
     /* 0x334 */ __int32 UpdateIndex;
-};
-
-struct Client_Game_Character_Ornament /* Size=0x1B40 */
-{
-    /* 0x0000 */ Client_Game_Character_Character Character;
-    /* 0x1B20 */ unsigned __int32 OrnamentId;
-    /* 0x1B24 */ byte AttachmentPoint;
-    /*        */ byte _gap_0x1B25;
-    /*        */ byte _gap_0x1B26[0x2];
-    /*        */ byte _gap_0x1B28[0x18];
 };
 
 struct Application_Network_WorkDefinitions_BeastReputationWork /* Size=0x10 */
@@ -12665,12 +13024,7 @@ struct Client_UI_Misc_RaptureGearsetModule_GearsetEntry /* Size=0x1C0 */
     /* 0x034 */ __int16 ItemLevel;
     /*       */ byte _gap_0x36;
     /* 0x037 */ Client_UI_Misc_RaptureGearsetModule_GearsetFlag0x1 Flags;
-    union {
-    /* 0x038 */ byte ItemsData[0x188];
     /* 0x038 */ Client_UI_Misc_RaptureGearsetModule_GearsetItem MainHand;
-    } _union_0x38;
-    /*       */ byte _gap_0x40[0x10];
-    /*       */ byte _gap_0x50[0x4];
     /* 0x054 */ Client_UI_Misc_RaptureGearsetModule_GearsetItem OffHand;
     /* 0x070 */ Client_UI_Misc_RaptureGearsetModule_GearsetItem Head;
     /* 0x08C */ Client_UI_Misc_RaptureGearsetModule_GearsetItem Body;
@@ -12794,11 +13148,32 @@ struct Client_UI_Info_InfoProxyLinkShell_Entry /* Size=0x18 */
     /*      */ byte _gap_0x0[0x18];
 };
 
-enum Client_UI_Agent_AgentInspect_ItemData_IconFlagsTopRight0x4 /* Size=0x4 */
+enum Client_UI_Agent_AgentInspect_ItemData_IconFlagsTopRight0x1 /* Size=0x1 */
 {
     None = 0,
     Dyeable = 1,
     Glamoured = 4
+};
+
+struct Client_UI_Agent_AgentInspect_ItemData_ColorRGB /* Size=0x3 */
+{
+    /* 0x0 */ byte B;
+    /* 0x1 */ byte G;
+    /* 0x2 */ byte R;
+};
+
+struct Client_UI_Agent_AgentInspect_ItemData /* Size=0x28 */
+{
+    /* 0x00 */ unsigned __int32 IconID;
+    /* 0x04 */ Client_UI_Agent_AgentInspect_ItemData_IconFlagsTopRight0x1 IconFlags1;
+    /* 0x05 */ Client_UI_Agent_AgentInspect_ItemData_ColorRGB Color;
+    /* 0x08 */ bool Filled;
+    /* 0x09 */ bool IsILevelSynced;
+    /*      */ byte _gap_0xA[0x2];
+    /*      */ byte _gap_0xC[0x4];
+    /* 0x10 */ __int16 ModelMain[0x4];
+    /* 0x18 */ __int16 ModelSub[0x4];
+    /* 0x20 */ Client_Game_InventoryItem* Item;
 };
 
 enum Client_UI_Agent_AgentInspect_ItemDataFlags0x4 /* Size=0x4 */
@@ -12964,29 +13339,6 @@ struct Client_Game_InstanceContent_InstanceContentDeepDungeon_DeepDungeonChestIn
     /* 0x1 */ signed __int8 RoomIndex;
 };
 
-struct Client_Game_Character_Character_OrnamentContainer /* Size=0x28 */
-{
-    /*      */ byte _gap_0x0[0x8];
-    /* 0x08 */ Client_Game_Character_BattleChara* OwnerObject;
-    /* 0x10 */ Client_Game_Character_Ornament* OrnamentObject;
-    /* 0x18 */ unsigned __int16 OrnamentId;
-    /*      */ byte _gap_0x1A[0x2];
-    /*      */ byte _gap_0x1C[0x4];
-    /*      */ byte _gap_0x20[0x8];
-};
-
-enum Client_Game_Character_Character_CharacterModes0x1 /* Size=0x1 */
-{
-    None = 0,
-    Normal = 1,
-    EmoteLoop = 3,
-    Mounted = 4,
-    AnimLock = 8,
-    Carrying = 9,
-    InPositionLoop = 11,
-    Performance = 16
-};
-
 enum Client_Game_Character_DrawDataContainer_WeaponSlot0x4 /* Size=0x4 */
 {
     MainHand = 0,
@@ -13132,13 +13484,6 @@ struct Client_UI_Agent_AgentBannerInterface_Storage_CharacterData /* Size=0x760 
     /*       */ byte _gap_0x748[0x8];
     /* 0x750 */ void* SomePointer;
     /*       */ byte _gap_0x758[0x8];
-};
-
-struct Client_UI_Agent_AgentInspect_ItemData_ColorRGB /* Size=0x3 */
-{
-    /* 0x0 */ byte B;
-    /* 0x1 */ byte G;
-    /* 0x2 */ byte R;
 };
 
 enum Client_Game_QuestManager_QuestListArray_Quest_QuestFlags0x1 /* Size=0x1 */

@@ -36,7 +36,7 @@ public unsafe partial struct HousingWorkshopSubmersibleData
 [StructLayout(LayoutKind.Explicit, Size = 0x1C0)]
 public unsafe partial struct HousingWorkshopAirshipSubData
 {
-    [FieldOffset(0x0)] public fixed byte Data[0x1C0];
+    [FieldOffset(0x0)] [IDAIgnore] public fixed byte Data[0x1C0];
     [FieldOffset(0x4)] public uint RegisterTime;
     [FieldOffset(0xC)] public byte RankId;
     [FieldOffset(0x10)] public uint ReturnTime;

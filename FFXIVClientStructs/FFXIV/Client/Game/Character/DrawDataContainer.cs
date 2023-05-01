@@ -26,7 +26,7 @@ public unsafe partial struct DrawDataContainer
     [FieldOffset(0x14C)] public EquipmentModelId Top;
     [FieldOffset(0x150)] public EquipmentModelId Arms;
     [FieldOffset(0x154)] public EquipmentModelId Legs;
-    [FieldOffset(0x148)] public EquipmentModelId Feet;
+    [FieldOffset(0x158)] public EquipmentModelId Feet;
     [FieldOffset(0x15C)] public EquipmentModelId Ear;
     [FieldOffset(0x160)] public EquipmentModelId Neck;
     [FieldOffset(0x164)] public EquipmentModelId Wrist;
@@ -59,12 +59,18 @@ public unsafe partial struct DrawObjectData
 
 }
 
-[StructLayout(LayoutKind.Sequential, Size = Count)]
+[StructLayout(LayoutKind.Explicit, Size = Count)]
 public unsafe partial struct CustomizeData
 {
     private const int Count = 0x1A;
 
-    public fixed byte Data[Count];
+    [FieldOffset(0x00)] [IDAIgnore] public fixed byte Data[Count];
+
+    [FieldOffset(0x00)] public byte Race;
+    [FieldOffset(0x01)] public byte Sex;
+    [FieldOffset(0x02)] public byte BodyType;
+    [FieldOffset(0x04)] public byte Clan;
+    [FieldOffset(0x14)] public byte LipColorFurPattern;
 
     public byte this[int idx]
         => Data[idx];
@@ -83,7 +89,7 @@ public struct WeaponModelId
     [FieldOffset(4)] public ushort Variant;
     [FieldOffset(6)] public byte   Stain;
 
-    [FieldOffset(0)] public ulong  Value;
+    [FieldOffset(0)] [IDAIgnore] public ulong  Value;
 }
 
 [StructLayout(LayoutKind.Explicit, Size=4)]
@@ -93,5 +99,5 @@ public struct EquipmentModelId
     [FieldOffset(2)] public byte   Variant;
     [FieldOffset(3)] public byte   Stain;
 
-    [FieldOffset(0)] public uint   Value;
+    [FieldOffset(0)] [IDAIgnore] public uint   Value;
 }

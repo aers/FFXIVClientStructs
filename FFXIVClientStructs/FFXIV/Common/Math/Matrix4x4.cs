@@ -3,7 +3,7 @@
 [StructLayout(LayoutKind.Explicit, Size = 0x40)]
 public unsafe struct Matrix4x4 : IEquatable<Matrix4x4>
 {
-    [FieldOffset(0x00)] public fixed float Matrix[16];
+    [FieldOffset(0x00)] [IDAIgnore] public fixed float Matrix[16];
 
     [FieldOffset(0x00)] public float M11;
     [FieldOffset(0x04)] public float M12;

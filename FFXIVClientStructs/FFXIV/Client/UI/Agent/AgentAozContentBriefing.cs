@@ -39,7 +39,7 @@ public unsafe struct AozContentData {
 	[FieldOffset(0x48)] public byte CurrentActIndex;
 	[FieldOffset(0x49)] public byte CurrentEnemyIndex;
 	
-	[FieldOffset(0x4A)] public fixed byte Arrangements[3 * 0x7A]; // 3 * AozArrangementData
+	[FieldOffset(0x4A)] [IDAIgnore] public fixed byte Arrangements[3 * 0x7A]; // 3 * AozArrangementData
 	[FieldOffset(0x4A)] public AozArrangementData Act1Arrangement;
 	[FieldOffset(0xC4)] public AozArrangementData Act2Arrangement;
 	[FieldOffset(0x13E)] public AozArrangementData Act3Arrangement;
@@ -48,7 +48,7 @@ public unsafe struct AozContentData {
 	[FieldOffset(0x290)] public Utf8String ModerateString;
 	[FieldOffset(0x2F8)] public Utf8String AdvancedString;
 	
-	[FieldOffset(0x360)] public fixed byte WeeklyRewards[3 * 0x8]; // 3 * AozContentRewards
+	[FieldOffset(0x360)] [IDAIgnore] public fixed byte WeeklyRewards[3 * 0x8]; // 3 * AozContentRewards
 	[FieldOffset(0x360)] public AozWeeklyReward NoviceRewards;
 	[FieldOffset(0x368)] public AozWeeklyReward ModerateRewards;
 	[FieldOffset(0x370)] public AozWeeklyReward AdvancedRewards;

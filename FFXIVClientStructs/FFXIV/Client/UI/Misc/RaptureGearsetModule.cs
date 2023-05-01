@@ -132,7 +132,7 @@ public unsafe partial struct RaptureGearsetModule
         [FieldOffset(0x37)] public GearsetFlag Flags;
 
         private const int ItemDataOffset = 0x38;
-        [FieldOffset(ItemDataOffset)] public fixed byte ItemsData[GearsetItem.Size * 14];
+        [FieldOffset(ItemDataOffset)] [IDAIgnore] public fixed byte ItemsData[GearsetItem.Size * 14];
         [FieldOffset(ItemDataOffset + GearsetItem.Size * 00)] public GearsetItem MainHand;
         [FieldOffset(ItemDataOffset + GearsetItem.Size * 01)] public GearsetItem OffHand;
         [FieldOffset(ItemDataOffset + GearsetItem.Size * 02)] public GearsetItem Head;

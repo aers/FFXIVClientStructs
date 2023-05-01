@@ -14,8 +14,9 @@ public unsafe partial struct ItemOrderModule
 
     [FieldOffset(0)] public UserFileEvent UserFileEvent;
     [FieldOffset(0x40)] public ItemOrderModuleSorter* InventorySorter;
+
     [FixedSizeArray<Pointer<ItemOrderModuleSorter>>(12)]
-    [FieldOffset(0x48)] public fixed byte ArmourySorter[12 * 8];
+    [FieldOffset(0x48)] [IDAIgnore] public fixed byte ArmourySorter[12 * 8];
     [FieldOffset(0x48)] public ItemOrderModuleSorter* ArmouryMainHandSorter;
     [FieldOffset(0x50)] public ItemOrderModuleSorter* ArmouryHeadSorter;
     [FieldOffset(0x58)] public ItemOrderModuleSorter* ArmouryBodySorter;

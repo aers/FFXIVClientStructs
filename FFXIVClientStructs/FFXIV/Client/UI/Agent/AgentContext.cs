@@ -19,7 +19,7 @@ public unsafe partial struct AgentContext
 
     [FieldOffset(0x00)] public AgentInterface AgentInterface;
 
-    [FieldOffset(0x28)] public fixed byte ContextMenuArray[0x678 * 2];
+    [FieldOffset(0x28)] [IDAIgnore] public fixed byte ContextMenuArray[0x678 * 2];
     [FieldOffset(0x28)] public ContextMenu MainContextMenu;
     [FieldOffset(0x6A0)] public ContextMenu SubContextMenu;
 

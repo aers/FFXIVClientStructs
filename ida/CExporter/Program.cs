@@ -1,3 +1,4 @@
+using FFXIVClientStructs.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -57,6 +58,8 @@ namespace CExporter
         private readonly string STDNamespacePrefix = string.Join(".", new string[] { nameof(FFXIVClientStructs), nameof(FFXIVClientStructs.STD), "" });
         private readonly string InteropNamespacePrefix = string.Join(".", new string[] { nameof(FFXIVClientStructs), nameof(FFXIVClientStructs.Interop), "" });
 
+        private bool IsGeneratedType(Type t) => t.DeclaringType != null && (t.Name == "Addresses" || t.Name == "MemberFunctionPointers" || t.Name == "StaticAddressPointers");
+
         private Type[] GetExportableTypes(string assemblyName)
         {
             var assembly = AppDomain.CurrentDomain.Load(assemblyName);
@@ -71,7 +74,7 @@ namespace CExporter
                 definedTypes = ex.Types.Where(t => t != null).ToArray();
             }
 
-            return definedTypes.Where(t => t.FullName.StartsWith(FFXIVNamespacePrefix)).ToArray();
+            return definedTypes.Where(t => t.FullName.StartsWith(FFXIVNamespacePrefix) && !IsGeneratedType(t)).ToArray();
         }
 
         public string Export(GapStrategy strategy, EnvFormat envFormat)
@@ -169,6 +172,7 @@ namespace CExporter
 
             var offset = 0;
             var fieldGroupings = type.GetFields()
+                .Where(finfo => finfo.GetCustomAttribute<IDAIgnoreAttribute>() == null) // not ignored for exporter
                 .Where(finfo => !Attribute.IsDefined(finfo, typeof(ObsoleteAttribute)))
                 .Where(finfo => !finfo.IsLiteral) // not constants
                 .Where(finfi => !finfi.IsStatic)  // not static
@@ -248,7 +252,7 @@ namespace CExporter
                     if (!isUnion)
                         offset += fieldSize;
                     else
-                        unionMaxSize = Math.Max(unionMaxSize, 8);
+                        unionMaxSize = Math.Max(unionMaxSize, fieldSize);
                 }
 
                 if (isUnion)

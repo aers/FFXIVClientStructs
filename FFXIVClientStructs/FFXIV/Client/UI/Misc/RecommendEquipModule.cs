@@ -27,7 +27,6 @@ public unsafe partial struct RecommendEquipModule
     [FieldOffset(0x60)] public InventoryItem* EquippedLeftRing;
     [FieldOffset(0x68)] public InventoryItem* EquippedRightRing;
     [FieldOffset(0x70)] public InventoryItem* EquippedSoulCrystal;
-    [FieldOffset(0x78)] public void* Unk00_15;
     [FieldOffset(0x78)] public ushort Level;
     [FieldOffset(0x7A)] public byte Unk7A;
     [FieldOffset(0x7B)] public byte Unk7B;

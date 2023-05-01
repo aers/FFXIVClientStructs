@@ -37,7 +37,7 @@ public unsafe partial struct ResourceGraph
     }
 
     [FixedSizeArray<CategoryContainer>(0x14)]
-    [FieldOffset(0x0)] public fixed byte ContainerArray[0xA0 * 0x14];
+    [FieldOffset(0x0)] [IDAIgnore] public fixed byte ContainerArray[0xA0 * 0x14];
 
     [FieldOffset(0x000)] public CategoryContainer CommonContainer;
     [FieldOffset(0x0A0)] public CategoryContainer BgCommonContainer;

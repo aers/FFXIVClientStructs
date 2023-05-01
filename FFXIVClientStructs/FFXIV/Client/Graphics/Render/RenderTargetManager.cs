@@ -12,8 +12,8 @@ public unsafe partial struct RenderTargetManager
     [FieldOffset(0x8)] public Notifier Notifier;
 
     // the first 65 fields seem to be render target pointers
-    [FixedSizeArray<Pointer<Texture>>(65)]
-    [FieldOffset(0x20)] public fixed byte RenderTargetArray[8 * 65];
+    [FixedSizeArray<Pointer<Texture>>(56)]
+    [FieldOffset(0x20)] public fixed byte RenderTargetArray[8 * 56];
 
     // specific ones i can name
     // offscreen renderer is used to render models for UI elements like the character window
