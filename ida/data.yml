@@ -1801,6 +1801,8 @@ classes:
         base: Client::Network::Protocol::Zone::PacketReceiverCallbackInterface
       - ea: 0x141A7BF80
         base: Client::Network::Protocol::Chat::PacketReceiverCallbackInterface
+    funcs:
+      0x1413ACED0: HandleSocialPacket
   Client::Network::NetworkModulePacketReceiverCallback: # derives Application::Network::PacketReceiverCallbackInterface & Client::Network::PacketDispatcher
     vtbls:
       - ea: 0x141909AC8
