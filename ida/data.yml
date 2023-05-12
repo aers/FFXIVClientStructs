@@ -3633,6 +3633,7 @@ classes:
       67: OnInitialize
     funcs:
       0x140721530: IsMountOrOrnament
+      0x140721A50: SetDrawOffset
       0x1407222A0: GetPosition
       0x1407222F0: SetPosition
       0x140725D60: Initialize
