@@ -30,7 +30,11 @@ public unsafe partial struct AtkTexture : ICreatable
     public partial void Ctor();
 
     [MemberFunction("E8 ?? ?? ?? ?? 41 8D 84 24 ?? ?? ?? ??")]
-    public partial int LoadIconTexture(int iconId, int version);
+    public partial int LoadIconTexture(int iconId, int version = 1);
+
+    [GenerateCStrOverloads]
+    [MemberFunction("E8 ?? ?? ?? ?? 4C 8B 6C 24 ?? 4C 8B 5C 24")]
+    public partial int LoadTexture(byte* path, int version = 1);
 
     [MemberFunction("E8 ?? ?? ?? ?? C6 43 10 02")]
     public partial int ReleaseTexture();
