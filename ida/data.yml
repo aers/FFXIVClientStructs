@@ -3562,6 +3562,7 @@ classes:
       0x14067FCD0: EquipGearsetInternal
       0x140680360: CreateGearset
       0x1406803F0: DeleteGearset
+      0x1406805c0: UpdateGearset # (this, gearsetIndext)
       0x140680A00: LinkGlamourPlate
       0x140680B20: RemoveGlamourPlateLink
       0x140680B30: HasLinkedGlamourPlate
