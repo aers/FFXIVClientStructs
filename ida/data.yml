@@ -2227,9 +2227,19 @@ classes:
     funcs:
       0x14041D200: ctor
       0x14041D430: GetSingleton
+  Apricot::ApricotListenner:
+    vtbls:
+      - ea: 0x141922390
+        base: Client::System::Threading::Thread
+    funcs:
+      0x1403f8730: SoundPlay
   Apricot::IInstanceListenner:
     vtbls:
       - ea: 0x141922188
+    vfuncs:
+      0: dtor
+      1: GetCaster
+      6: GetTarget
   Apricot::ApricotInstanceListenner:
     vtbls:
       - ea: 0x141922418
