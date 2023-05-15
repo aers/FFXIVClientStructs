@@ -5764,6 +5764,10 @@ classes:
     vtbls:
       - ea: 0x141A1D488
         base: Component::GUI::AtkUnitBase
+  Client::UI::AddonBuddyInspect:
+    vtbls:
+      - ea: 0x141A6C8B8
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonNowLoading:
     vtbls:
       - ea: 0x141A1D6D8
