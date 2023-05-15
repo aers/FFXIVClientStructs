@@ -1411,12 +1411,17 @@ classes:
     funcs:
       0x1400B3EB0: ctor
       0x1400B4B40: dtor
+      0x1400B4EE0: ChangeUiMode
       0x1400B5EE0: OpenAddon
       0x1400B6660: OpenYesNo
       0x1400C9410: OnUpdate_Nameplates
+      0x1400CA8C0: IncRefNumberArrayData
+      0x1400CA910: IncRefStringArrayData
       0x1400D9860: UpdateNameplates_BattleChara
       0x1400DA6B0: UpdateNameplates_NPC
       0x1400DCA20: IsUIVisible
+      0x140558500: DecRefNumberArrayData
+      0x140558560: DecRefStringArrayData
   Client::UI::Info::InfoProxyInterface:
     vtbls:
       - ea: 0x14194E6B8
@@ -3076,6 +3081,8 @@ classes:
       0x140529BA0: CalculateBounds
       0x14052A370: SetFlag
       0x14052BEB0: Draw
+      0x14052C3D0: SubscribeAtkArrayData # handler: 4C 8B D2 48 8B D1 41 83 F9 04
+      0x14052C560: UnsubscribeAtkArrayData # handler: 48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 48 8B FA 48 8B D9 41 83 F9 04
       0x14052C810: SetFocusNode
       0x14052CD90: GetNodeById
       0x14052CEC0: GetButtonNodeById
