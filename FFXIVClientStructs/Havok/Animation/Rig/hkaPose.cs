@@ -113,7 +113,7 @@ public unsafe partial struct hkaPose
 	[MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 56 57 41 56 48 83 EC 30 48 8B 01 49 8B E9")]
 	public partial void Init(PoseSpace space, hkaSkeleton* skeleton, hkArray<hkQsTransformf>* pose);
 
-	[MemberFunction("E8 ?? ?? ?? ?? 0F 28 48 10")]
+	[MemberFunction("E8 ?? ?? ?? ?? 0F 28 2F")]
 	public partial hkQsTransformf* CalculateBoneModelSpace(int boneIdx);
 	
 	[MemberFunction("48 89 5C 24 ?? 48 8B 01 45 33 C0")]

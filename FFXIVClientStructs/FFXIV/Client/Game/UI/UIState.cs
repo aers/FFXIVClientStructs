@@ -15,21 +15,21 @@ public unsafe partial struct UIState
     [FieldOffset(0x110)] public Hater Hater;
     [FieldOffset(0xA18)] public WeaponState WeaponState;
     [FieldOffset(0xA38)] public PlayerState PlayerState;
-    [FieldOffset(0x1208)] public Revive Revive;
-    [FieldOffset(0x14A0)] public Telepo Telepo;
+    [FieldOffset(0x1220)] public Revive Revive;
+    [FieldOffset(0x14B8)] public Telepo Telepo;
     [FieldOffset(0x14F8)] public Cabinet Cabinet;
     [FieldOffset(0x1A90)] public Buddy Buddy;
     [FieldOffset(0x296C)] public PvPProfile PvPProfile;
-    [FieldOffset(0x29F0)] public ContentsNote ContentsNote;
-    [FieldOffset(0x2A98)] public RelicNote RelicNote;
-    [FieldOffset(0x2AF8)] public AreaInstance AreaInstance;
+    [FieldOffset(0x2A10)] public ContentsNote ContentsNote;
+    [FieldOffset(0x2AB8)] public RelicNote RelicNote;
+    [FieldOffset(0x2B28)] public AreaInstance AreaInstance;
     [FieldOffset(0x2B34)] public MobHunt MobHunt;
-    [FieldOffset(0x2FC0)] public Loot Loot;
+    [FieldOffset(0x2FE0)] public Loot Loot;
 
     [FieldOffset(0x3C60)] public RecipeNote RecipeNote;
 
-    [FieldOffset(0xA7C8)] public Director* ActiveDirector;
-    [FieldOffset(0xA910)] public FateDirector* FateDirector;
+    [FieldOffset(0xA800)] public Director* ActiveDirector;
+    [FieldOffset(0xA948)] public FateDirector* FateDirector;
 
     [FieldOffset(0xAA58)] public Map Map;
 

@@ -24,7 +24,7 @@ public unsafe partial struct ActionTimelineDriver
     [MemberFunction("E8 ?? ?? ?? ?? 4C 8B BC 24 ?? ?? ?? ?? 4C 8D 9C 24 ?? ?? ?? ?? 49 8B 5B ??")]
     public partial void PlayTimeline(ushort actionTimelineId, void* a2 = null); // Determines which slot the timeline belongs in and then plays it on that slot
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 43 ?? 48 8B 88 ?? ?? ?? ?? 48 85 C9 74 1D")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 7B 08 48 81 C7")]
     public partial void SetSlotSpeed(uint slot, float speed); // Sets the speed of the animation slot
 }
 

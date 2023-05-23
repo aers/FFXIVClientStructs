@@ -19,7 +19,7 @@ public unsafe partial struct RetainerCommentModule
     [GenerateCStrOverloads]
     public partial void* SetComment(ulong retainerID, byte* comment);
 
-    [MemberFunction("4C 8B D9 48 85 D2 74 27")]
+    [MemberFunction("32 C0 0F 1F 40 00 66 66 0F 1F 84 ?? 00 00 00 00 44 0F B6 C0 4C 8D 51")]
     public partial byte* GetComment(ulong retainerId);
     
     [StructLayout(LayoutKind.Sequential, Size = 0x410)]
