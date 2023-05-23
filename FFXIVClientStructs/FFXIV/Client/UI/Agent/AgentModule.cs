@@ -142,6 +142,7 @@ public enum AgentId : uint {
     ConfigCharacter = 15,
     ConfigPadcustomize = 16,
     ChatConfig = 17,
+    ChatLogNameConfig = 18,
     HudLayout = 19,
     Emote = 20,
     Macro = 21,
@@ -513,7 +514,7 @@ public enum AgentId : uint {
     VVDNotebook = 423,
     VVDFinder = 424,
 
-    TofuList = 425,  // ?? not sure
+    TofuList = 425,
     
     BannerParty = 428,
     BannerMIP = 429,
