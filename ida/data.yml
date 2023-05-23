@@ -1801,6 +1801,8 @@ classes:
         base: Client::Network::Protocol::Zone::PacketReceiverCallbackInterface
       - ea: 0x141A7BF80
         base: Client::Network::Protocol::Chat::PacketReceiverCallbackInterface
+    funcs:
+      0x1413ACED0: HandleSocialPacket
   Client::Network::NetworkModulePacketReceiverCallback: # derives Application::Network::PacketReceiverCallbackInterface & Client::Network::PacketDispatcher
     vtbls:
       - ea: 0x141909AC8
@@ -2227,9 +2229,19 @@ classes:
     funcs:
       0x14041D200: ctor
       0x14041D430: GetSingleton
+  Apricot::ApricotListenner:
+    vtbls:
+      - ea: 0x141922390
+        base: Client::System::Threading::Thread
+    funcs:
+      0x1403f8730: SoundPlay
   Apricot::IInstanceListenner:
     vtbls:
       - ea: 0x141922188
+    vfuncs:
+      0: dtor
+      1: GetCaster
+      6: GetTarget
   Apricot::ApricotInstanceListenner:
     vtbls:
       - ea: 0x141922418
@@ -3550,6 +3562,7 @@ classes:
       0x14067FCD0: EquipGearsetInternal
       0x140680360: CreateGearset
       0x1406803F0: DeleteGearset
+      0x1406805c0: UpdateGearset # (this, gearsetIndext)
       0x140680A00: LinkGlamourPlate
       0x140680B20: RemoveGlamourPlateLink
       0x140680B30: HasLinkedGlamourPlate
@@ -3633,6 +3646,7 @@ classes:
       67: OnInitialize
     funcs:
       0x140721530: IsMountOrOrnament
+      0x140721A50: SetDrawOffset
       0x1407222A0: GetPosition
       0x1407222F0: SetPosition
       0x140725D60: Initialize
