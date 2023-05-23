@@ -55,6 +55,7 @@ public unsafe partial struct GameObject
     [FieldOffset(0xC8)] public float Height;
     [FieldOffset(0xCC)] public float VfxScale;
     [FieldOffset(0xD0)] public float HitboxRadius;
+    [FieldOffset(0xE0)] public Vector3 DrawOffset;
     [FieldOffset(0xF4)] public EventId EventId;
     [FieldOffset(0xF8)] public uint FateId;
     [FieldOffset(0x100)] public DrawObject* DrawObject;
@@ -101,6 +102,9 @@ public unsafe partial struct GameObject
     
     [VirtualFunction(60)]
     public partial bool IsCharacter();
+
+    [MemberFunction("E8 ?? ?? ?? ?? 0F 28 74 24 ?? 80 3D")]
+    public partial void SetDrawOffset(float x, float y, float z);
 }
 
 public enum ObjectKind : byte

@@ -45,7 +45,7 @@ public unsafe partial struct AtkComponentBase
     [FieldOffset(0xA0)] public AtkResNode* AtkResNode;
     [FieldOffset(0xA8)] public AtkComponentNode* OwnerNode;
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8D 73 01")]
+    [MemberFunction("E8 ?? ?? ?? ?? 4C 8B F0 BF")]
     public partial AtkResNode* GetTextNodeById(uint id);
 
     [MemberFunction("E8 ?? ?? ?? ?? 8D 56 9C")]

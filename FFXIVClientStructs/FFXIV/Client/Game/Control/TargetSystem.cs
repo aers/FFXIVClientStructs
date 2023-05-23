@@ -26,7 +26,7 @@ public unsafe partial struct TargetSystem
     [MemberFunction("E8 ?? ?? ?? ?? 4C 8B F8 EB 13")]
     public partial uint GetCurrentTargetID();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 3B C6 0F 94 C0")]
+    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 83 C0 ED")]
     public partial GameObject* GetCurrentTarget();
 
     [MemberFunction("48 85 D2 74 2C 4C 63 89")]

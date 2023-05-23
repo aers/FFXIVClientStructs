@@ -4,7 +4,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
 // Client::Game::UI::PlayerState
 // ctor "48 81 C1 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? C6 83 ?? ?? ?? ?? ??"
-[StructLayout(LayoutKind.Explicit, Size = 0x7D0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x7E8)]
 public unsafe partial struct PlayerState
 {
     [FieldOffset(0x00)] public byte IsLoaded;
@@ -177,7 +177,7 @@ public unsafe partial struct PlayerState
     /// </summary>
     /// <param name="mountId">The ID of the mount to look up.</param>
     /// <returns>Returns true if the mount has been unlocked.</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 5C 8B CB")]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 5D 8B CB")]
     public partial bool IsMountUnlocked(uint mountId);
 
     /// <summary>
