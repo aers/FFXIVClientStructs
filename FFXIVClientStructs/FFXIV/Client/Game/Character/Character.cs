@@ -7,9 +7,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 //   Client::Game::Object::GameObject
 //   Client::Graphics::Vfx::VfxDataListenner
 
-// size = 0x1B20
-// ctor E8 ?? ?? ?? ?? 4C 8B D0 4C 63 F7
-[StructLayout(LayoutKind.Explicit, Size = 0x1B20)]
+// size = 0x1B40
+// ctor E8 ?? ?? ?? ?? 48 8B C8 48 8B 43 08 45 33 C9
+[StructLayout(LayoutKind.Explicit, Size = 0x1B40)]
 [VTableAddress("48 8d 05 ?? ?? ?? ?? 48 8b d9 48 89 01 48 8d 05 ?? ?? ?? ?? 48 89 81 a0 01 00 00 48 8d 05 ?? ?? ?? ??", 3)]
 public unsafe partial struct Character
 {
@@ -34,44 +34,43 @@ public unsafe partial struct Character
 
     [FieldOffset(0x1DC)] public short TransformationId;
     [FieldOffset(0x1DE)] public short StatusEffectVFXId;
-    [FieldOffset(0x1E0)] public byte ClassJob;
-    [FieldOffset(0x1E1)] public byte Level;
+    [FieldOffset(0x1E2)] public byte ClassJob;
+    [FieldOffset(0x1E3)] public byte Level;
 
     #endregion
 
-    [FieldOffset(0x650)] public MountContainer Mount;
-    [FieldOffset(0x6B0)] public CompanionContainer Companion;
-    [FieldOffset(0x6D0)] public DrawDataContainer DrawData;
-    [FieldOffset(0x860)] public OrnamentContainer Ornament;
+    [FieldOffset(0x660)] public MountContainer Mount;
+    [FieldOffset(0x6C8)] public CompanionContainer Companion;
+    [FieldOffset(0x6E8)] public DrawDataContainer DrawData;
 
-    [FieldOffset(0x818)] public fixed byte EquipSlotData[4 * 10];
-    [FieldOffset(0x840)] public fixed byte CustomizeData[0x1A];
+    [Obsolete($"Use {nameof(DrawData)}"), FieldOffset(0x830)] public fixed byte EquipSlotData[4 * 10];
+    [Obsolete($"Use {nameof(DrawData)}.CustomizeData"), FieldOffset(0x858)] public fixed byte CustomizeData[0x1A];
 
+    [FieldOffset(0x878)] public OrnamentContainer Ornament;
     [FieldOffset(0x8F0)] public ActionTimelineManager ActionTimelineManager;
 
-    [FieldOffset(0xC80)] public uint PlayerTargetObjectID;
+    [FieldOffset(0xCB0)] public uint PlayerTargetObjectID;
 
-    [FieldOffset(0x1790)] public Balloon Balloon;
+    [FieldOffset(0x17C0)] public Balloon Balloon;
 
-    [FieldOffset(0x1998)] public VfxData* VfxData; 
-    [FieldOffset(0x19A0)] public VfxData* VfxData2;
-    [FieldOffset(0x19C8)] public VfxData* Omen; 
+    [FieldOffset(0x19C8)] public VfxData* VfxData; 
+    [FieldOffset(0x19D0)] public VfxData* VfxData2;
+    [FieldOffset(0x19F8)] public VfxData* Omen; 
 
-    [FieldOffset(0x1A50)] public Companion* CompanionObject; // minion
-    [FieldOffset(0x1A68)] public fixed byte FreeCompanyTag[6];
-    [FieldOffset(0x1A88)] public ulong TargetObjectID;
+    [FieldOffset(0x1A80)] public Companion* CompanionObject; // minion
+    [FieldOffset(0x1A98)] public fixed byte FreeCompanyTag[6];
+    [FieldOffset(0x1AB8)] public ulong TargetObjectID;
 
-    [FieldOffset(0x1AD8)] public uint NameID;
+    [FieldOffset(0x1B00)] public uint NameID;
 
-    [FieldOffset(0x1AF4)] public ushort CurrentWorld;
-    [FieldOffset(0x1AF6)] public ushort HomeWorld;
-    [FieldOffset(0x1AF8)] public ushort TitleID;
-    [FieldOffset(0x1B00)] public byte EventState; // Leave for backwards compat. See Mode.
-    [FieldOffset(0x1B00)] public CharacterModes Mode;
-    [FieldOffset(0x1B01)] public byte ModeParam; // Different purpose depending on mode. See CharacterModes for more info.
-    [FieldOffset(0x1B02)] public byte OnlineStatus;
-    [FieldOffset(0x1B03)] public byte Battalion; // used for determining friend/enemy state
-    [FieldOffset(0x1B0A)] public byte ModelID;
+    [FieldOffset(0x1B1C)] public ushort CurrentWorld;
+    [FieldOffset(0x1B1E)] public ushort HomeWorld;
+    [FieldOffset(0x1DE)] public ushort TitleID;
+    [FieldOffset(0x1B26)] public byte EventState; // Leave for backwards compat. See Mode.
+    [FieldOffset(0x1B26)] public CharacterModes Mode;
+    [FieldOffset(0x1B27)] public byte ModeParam; // Different purpose depending on mode. See CharacterModes for more info.
+    [FieldOffset(0x1B28)] public byte OnlineStatus;
+    [FieldOffset(0x1B29)] public byte Battalion; // used for determining friend/enemy state
     [FieldOffset(0x1B17)] public byte ShieldValue;
     [FieldOffset(0x1B1B)] public byte StatusFlags;
     [FieldOffset(0x1B1F)] public byte StatusFlags4; // 0x80 flagged when permanent wetness in GPose is toggled.
@@ -90,16 +89,16 @@ public unsafe partial struct Character
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4F ?? E8 ?? ?? ?? ?? 48 8B 4C 24 ??")]
     public partial void SetMode(CharacterModes mode, byte modeParam);
 
-    [VirtualFunction(78)]
+    [VirtualFunction(79)]
     public partial StatusManager* GetStatusManager();
 
-    [VirtualFunction(80)]
+    [VirtualFunction(81)]
     public partial CastInfo* GetCastInfo();
 
-    [VirtualFunction(84)]
+    [VirtualFunction(85)]
     public partial ForayInfo* GetForayInfo();
 
-    [VirtualFunction(86)]
+    [VirtualFunction(87)]
     public partial bool IsMount();
     
     [StructLayout(LayoutKind.Explicit, Size = 0x170)]

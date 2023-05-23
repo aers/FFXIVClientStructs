@@ -31,7 +31,7 @@ public struct GameObjectID
 
 // size = 0x1A0
 // ctor E8 ?? ?? ?? ?? 48 8D 8E ?? ?? ?? ?? 48 89 AE ?? ?? ?? ?? 48 8B D7 
-[StructLayout(LayoutKind.Explicit, Size = 0x1A0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x1C0)]
 [VTableAddress("48 8d 05 ?? ?? ?? ?? c7 81 80 00 00 00 00 00 00 00", 3)]
 public unsafe partial struct GameObject
 {
@@ -94,13 +94,13 @@ public unsafe partial struct GameObject
     [VirtualFunction(47)]
     public partial uint GetNpcID();
 
-    [VirtualFunction(56)]
+    [VirtualFunction(57)]
     public partial bool IsDead();
 
-    [VirtualFunction(57)]
+    [VirtualFunction(58)]
     public partial bool IsNotMounted();
     
-    [VirtualFunction(60)]
+    [VirtualFunction(61)]
     public partial bool IsCharacter();
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F 28 74 24 ?? 80 3D")]
