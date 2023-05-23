@@ -50,7 +50,7 @@ public unsafe partial struct InventoryContainer
     [FieldOffset(0x0C)] public uint Size;
     [FieldOffset(0x10)] public byte Loaded;
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8B 5B 0C")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8B 57 F0")]
     public partial InventoryItem* GetInventorySlot(int index);
 }
 
