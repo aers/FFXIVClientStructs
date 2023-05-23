@@ -177,7 +177,7 @@ public unsafe partial struct PlayerState
     /// </summary>
     /// <param name="mountId">The ID of the mount to look up.</param>
     /// <returns>Returns true if the mount has been unlocked.</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 5C 8B CB")]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 5D 8B CB")]
     public partial bool IsMountUnlocked(uint mountId);
 
     /// <summary>

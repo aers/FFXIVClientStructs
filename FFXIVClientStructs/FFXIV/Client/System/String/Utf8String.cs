@@ -49,6 +49,6 @@ public unsafe partial struct Utf8String : ICreatable
     public partial void Dtor();
 
     [GenerateCStrOverloads]
-    [MemberFunction("E8 ?? ?? ?? ?? 3B DF 7D")]
+    [MemberFunction("E8 ?? ?? ?? ?? EB 30 40 84 F6")]
     public partial void SetString(byte* cStr);
 }
