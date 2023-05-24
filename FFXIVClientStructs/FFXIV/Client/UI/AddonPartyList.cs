@@ -25,20 +25,20 @@ public unsafe struct AddonPartyList
     [FieldOffset(0x13A0)] public AtkResNode* MpBarSpecialResNode;
     [FieldOffset(0x13A8)] public AtkTextNode* MpBarSpecialTextNode;
 
-    [FieldOffset(0x13B0)] public int MemberCount;
-    [FieldOffset(0x13B4)] public int TrustCount;
-    [FieldOffset(0x13B8)] public int EnmityLeaderIndex; // Starts from 0 (-1 if no leader)
-    [FieldOffset(0x13BC)] public int HideWhenSolo;
+    [FieldOffset(0x13B8)] public int MemberCount;
+    [FieldOffset(0x13BC)] public int TrustCount;
+    [FieldOffset(0x13C0)] public int EnmityLeaderIndex; // Starts from 0 (-1 if no leader)
+    [FieldOffset(0x13C4)] public int HideWhenSolo;
 
-    [FieldOffset(0x13C0)] public int HoveredIndex;
-    [FieldOffset(0x13C4)] public int TargetedIndex;
+    [FieldOffset(0x13C8)] public int HoveredIndex;
+    [FieldOffset(0x13CC)] public int TargetedIndex;
 
-    [FieldOffset(0x13C8)] public int Unknown1410;
-    [FieldOffset(0x13CC)] public int Unknown1414;
-    [FieldOffset(0x13D0)] public byte Unknown1418;
+    [FieldOffset(0x13D0)] public int Unknown1410;
+    [FieldOffset(0x13D4)] public int Unknown1414;
+    [FieldOffset(0x13D8)] public byte Unknown1418;
 
-    [FieldOffset(0x13D1)] public byte PetCount; // or PetSummoned?
-    [FieldOffset(0x13D2)] public byte ChocoboCount; // or ChocoboSummoned?
+    [FieldOffset(0x13DA)] public byte PetCount; // or PetSummoned?
+    [FieldOffset(0x13DB)] public byte ChocoboCount; // or ChocoboSummoned?
 
     [StructLayout(LayoutKind.Explicit, Size = PartyListMemberStruct.Size * 8)]
     public struct PartyMembers
