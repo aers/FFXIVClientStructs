@@ -47,7 +47,7 @@ public unsafe partial struct Character
     [Obsolete($"Use {nameof(DrawData)}.CustomizeData"), FieldOffset(0x858)] public fixed byte CustomizeData[0x1A];
 
     [FieldOffset(0x878)] public OrnamentContainer Ornament;
-    [FieldOffset(0x8F0)] public ActionTimelineManager ActionTimelineManager;
+    [FieldOffset(0x920)] public ActionTimelineManager ActionTimelineManager;
 
     [FieldOffset(0xCB0)] public uint PlayerTargetObjectID;
 
