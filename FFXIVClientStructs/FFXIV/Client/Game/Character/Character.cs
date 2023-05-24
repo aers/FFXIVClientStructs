@@ -69,7 +69,7 @@ public unsafe partial struct Character
     [FieldOffset(0x1B26)] public byte EventState; // Leave for backwards compat. See Mode.
     [FieldOffset(0x1B26)] public CharacterModes Mode;
     [FieldOffset(0x1B27)] public byte ModeParam; // Different purpose depending on mode. See CharacterModes for more info.
-    [FieldOffset(0x1B28)] public byte OnlineStatus;
+    [FieldOffset(0x1EF)] public byte OnlineStatus;
     [FieldOffset(0x1B29)] public byte Battalion; // used for determining friend/enemy state
     [FieldOffset(0x1ED)] public byte ShieldValue;
     [FieldOffset(0x1B1B)] public byte StatusFlags;
