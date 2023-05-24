@@ -3565,7 +3565,7 @@ classes:
       0x1406909E0: UpdateGearset # (this, gearsetIndext)
       0x140690E20: LinkGlamourPlate
       0x140690F40: RemoveGlamourPlateLink
-#fail       0x140680B30: HasLinkedGlamourPlate
+      0x140690F50: HasLinkedGlamourPlate
       0x140691140: GetClassJobIcon
   Client::UI::Misc::ItemFinderModule:
     vtbls:
@@ -3597,10 +3597,10 @@ classes:
       - ea: 0x1419ABEE8
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
-#fail       0x1406A5A00: ctor_FromUserFileEvent # (this, UserFileEvent*)
-#fail       0x1406A5AB0: ctor # (this)
-#fail       0x1406A5EB0: GetComment
-#fail       0x1406A5F10: SetComment
+      0x1406B6A70: ctor_FromUserFileEvent # (this, UserFileEvent*)
+      0x1406B6AF0: ctor # (this)
+      0x1406B6F90: GetComment
+      0x1406B6FF0: SetComment
   Client::UI::Misc::CharaView:
     vtbls:
       - ea: 0x1419AC020
@@ -3696,7 +3696,7 @@ classes:
       - ea: 0x1419C3500
   Client::UI::Shell::RaptureShellCommandInterface:
     vtbls:
-#fail       - ea: 0x141962570
+      - ea: 0x1419C34E8
         base: Component::Shell::ShellCommandInterface
   Client::UI::Shell::RaptureShellModule:
     vtbls:
@@ -4008,15 +4008,15 @@ classes:
         base: Component::Shell::DebugCommandInterface
   Client::UI::Shell::ShellCommandReturn:
     vtbls:
-      - ea: 0x1419C62B8
+      - ea: 0x1419C62D0
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandLegacy:
     vtbls:
-      - ea: 0x1419C62D0
+      - ea: 0x1419C62B8
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandHotbarBase:
     vtbls:
-#fail       - ea: 0x1419652C8
+      - ea: 0x1419C62E8
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandHotbar:
     vtbls:
@@ -4157,7 +4157,7 @@ classes:
       0x1407AD1F0: dtor
   Client::Game::TitleController:
     vtbls:
-#fail       - ea: 0x141998B98
+      - ea: 0x1419FA098
     vfuncs:
       0: dtor
   Client::Game::TitleList:
@@ -4170,7 +4170,7 @@ classes:
       - ea: 0x1419FA0E0
   Client::Game::UI::Hotbar:
     vtbls:
-#fail       - ea: 0x141998B18
+      - ea: 0x1419FA100
         base: Client::UI::Misc::RaptureHotbarModule::ClearCallback
     vfuncs:
       0: dtor
@@ -4213,7 +4213,7 @@ classes:
       0x140958E80: ctor
       0x140958FE0: IsSelectUseTicketInactive
       0x140959140: UpdatePlayerAetheryteList
-#fail       0x140944A00: Teleport
+      0x140959CC0: Teleport
       0x14095AF10: TeleportWithTicket
       0x14095AFA0: InvokeSelectUseTicket
   Client::UI::Agent::AgentHUD:
@@ -5846,7 +5846,7 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x140D94B50: ctor
-#fail       0x140DD5C50: UpdateResult
+      0x140D95930: UpdateResult
   Client::UI::AddonLookingForGroupDetail:
     vtbls:
       - ea : 0x141A24FE8
@@ -6119,7 +6119,7 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x140F92730: ctor
-#fail       0x14108DF60: ReceiveEvent_ToggleQuickGathering
+      0x14105F910: ReceiveEvent_ToggleQuickGathering
       0x140F92F30: ReceiveEvent_Gather
   Client::UI::AddonGatheringMasterpiece:
     vtbls:
@@ -6262,39 +6262,39 @@ classes:
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonMJIAnimalBreeding:
     vtbls:
-#fail       - ea: 0x141A45A08
+      - ea: 0x141A8EE80
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonMJIAnimalBreedingAutomatic:
     vtbls:
-#fail       - ea: 0x141A45C40
+      - ea: 0x141A8F0B8
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonMJIAnimalNameInputString:
     vtbls:
-#fail       - ea: 0x141A45E78
+      - ea: 0x141A8F2F0
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonMJIFarmManagement:
     vtbls:
-#fail       - ea: 0x141A460B0
+      - ea: 0x141A8F528
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonMJIFarmAutomatic:
     vtbls:
-#fail       - ea: 0x141A462E8
+      - ea: 0x141A8F760
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonMJIGatheringHouse:
     vtbls:
-#fail       - ea: 0x141A46520
+      - ea: 0x141A8F998
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonMJIGatheringHouseExplore:
     vtbls:
-#fail       - ea: 0x141A46778
+      - ea: 0x141A8FBF0
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonMJIBuilding:
     vtbls:
-#fail       - ea: 0x141A469D0
+      - ea: 0x141A8FE48
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonMJIBuildingProgress:
     vtbls:
-#fail       - ea: 0x141A46C08
+      - ea: 0x141A90080
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonMJIGatheringNoteBook:
     vtbls:
@@ -6330,7 +6330,7 @@ classes:
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonMJISetting:
     vtbls:
-#fail       - ea: 0x141A48258
+      - ea: 0x141A916D0
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonMJIPadGuide:
     vtbls:
@@ -6431,7 +6431,7 @@ classes:
       - ea: 0x141AA27C8
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x141146AF0: ResizeForPartySize
+      0x141126C70: ResizeForPartySize
   Client::UI::AddonAllianceListX:
     vtbls:
       - ea: 0x141AA2A08
@@ -6481,23 +6481,23 @@ classes:
       - ea: 0x141AAB1A0
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x1411838B0: ctor
-#fail       0x141188570: AddonOverlayMouseMovedEvent
-#fail       0x1411887A0: AddonOverlayMouseClickEvent
-#fail       0x141188BA0: AddonOverlayMouseReleaseEvent
-#fail       0x14118A850: SetAddonScale
+      0x141163C10: ctor
+      0x141168B40: AddonOverlayMouseMovedEvent
+      0x141168D70: AddonOverlayMouseClickEvent
+      0x141169170: AddonOverlayMouseReleaseEvent
+      0x14116AE50: SetAddonScale
   Client::UI::AddonRetainerItemTransferList:
     vtbls:
       - ea: 0x141AAC648
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x14119DCE0: ctor
+      0x14117E620: ctor
   Client::UI::AddonRetainerItemTransferProgress:
     vtbls:
       - ea: 0x141AAC9F8
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x14119E3B0: ctor
+      0x14117ECF0: ctor
   Client::UI::AddonActionMenuReplaceList:
     vtbls:
       - ea: 0x141A942B8
@@ -6620,7 +6620,7 @@ classes:
         base: Client::Game::Object::GameObject
   Client::Game::Object::BKJObject:
     vtbls:
-#fail       - ea: 0x141B710C0
+      - ea: 0x141BD8B68
         base: Client::Game::Object::GameObject
   Client::Graphics::JobSystem<Client::Graphics::Culling::CullingManager,Client::Graphics::Culling::CullingJobOpt>:
     vtbls:
