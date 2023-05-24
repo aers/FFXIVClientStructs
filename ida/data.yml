@@ -4271,13 +4271,13 @@ classes:
       0x140275CF0: ctor
   Client::UI::Agent::AgentEmote:
     vtbls:
-#fail       - ea: 0x1419B2D38
+      - ea: 0x141A18248
         base: Client::UI::Agent::AgentInterface
     funcs:
 #fail       0x1409F2E70: ctor
   Client::UI::Agent::AgentMacro:
     vtbls:
-#fail       - ea: 0x14199B758
+      - ea: 0x141A147B0
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentFishingNote:
     vtbls:
@@ -4285,7 +4285,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentFishGuide:
     vtbls:
-#fail       - ea: 0x14199B7D0
+      - ea: 0x141A18510
         base: Client::UI::Agent::AgentInterface
     funcs:
 #fail       0x1409DF010: OpenForItemId
@@ -4295,7 +4295,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentQuestJournal:
     vtbls:
-#fail       - ea: 0x1419B2938
+      - ea: 0x1419FC2C0
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentActionMenu:
     vtbls:
@@ -4307,15 +4307,15 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMarker:
     vtbls:
-#fail       - ea: 0x1419B4378
+      - ea: 0x141A15518
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentTrade:
     vtbls:
-#fail       - ea: 0x1419B2240
+      - ea: 0x1419FE638
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentScreenLog:
     vtbls:
-#fail       - ea: 0x1419B48F0
+      - ea: 0x1419FD5C8
         base: Client::UI::Agent::AgentInterface
     funcs:
 #fail       0x140CC5080: ctor
@@ -4324,7 +4324,7 @@ classes:
 #fail       0x140CC7C70: ResetBalloon
   Client::UI::Agent::AgentLoot:
     vtbls:
-#fail       - ea: 0x1419B3668
+      - ea: 0x141A14828
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentRepair:
     vtbls:
@@ -4340,7 +4340,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentHowToNotice:
     vtbls:
-#fail       - ea: 0x1419B3320
+      - ea: 0x141A14620
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentContentsTutorial:
     vtbls:
@@ -4348,7 +4348,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentInspect:
     vtbls:
-#fail       - ea: 0x1419B3C98
+      - ea: 0x141A14D68
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentTelepotTown:
     vtbls:
@@ -4416,7 +4416,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentReturn:
     vtbls:
-#fail       - ea: 0x1419B4878
+      - ea: 0x1419FD2C8
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentCutscene:
     vtbls:
@@ -4494,7 +4494,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentHowToList:
     vtbls:
-#fail       - ea: 0x1419B4B48
+      - ea: 0x141A14698
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentCabinet:
     vtbls:
@@ -4502,11 +4502,11 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentLegacyItemStorage:
     vtbls:
-#fail       - ea: 0x1419B4C60
+      - ea: 0x141A15150
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentGrandCompanyRank:
     vtbls:
-#fail       - ea: 0x1419B3D10
+      - ea: 0x141A14128
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentGrandCompanySupply:
     vtbls:
@@ -4514,7 +4514,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentGrandCompanyExchange:
     vtbls:
-#fail       - ea: 0x1419B51D0
+      - ea: 0x141A140B0
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentGearSet:
     vtbls:
@@ -4543,7 +4543,7 @@ classes:
       0x140305D60: ctor
   Client::UI::Agent::AgentAchievement:
     vtbls:
-#fail       - ea: 0x1419B2790
+      - ea: 0x141A16AA0
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentLicenseViewer:
     vtbls:
@@ -4551,15 +4551,15 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMovieSubtitle:
     vtbls:
-#fail       - ea: 0x1419B5248
+      - ea: 0x141A15D50
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentPadMouseMode:
     vtbls:
-#fail       - ea: 0x1419B52C0
+      - ea: 0x141A160F8
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentRecommendList:
     vtbls:
-#fail       - ea: 0x1419B44A8
+      - ea: 0x1419FCA30
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentBuddy:
     vtbls:
@@ -4595,7 +4595,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentShop:
     vtbls:
-#fail       - ea: 0x1419B3AF0
+      - ea: 0x1419FC7F8
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentBait:
     vtbls:
@@ -4603,15 +4603,15 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentHousing:
     vtbls:
-#fail       - ea: 0x141A75C78
+      - ea: 0x141AC1270
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentHousingHarvest:
     vtbls:
-#fail       - ea: 0x141A75E78
+      - ea: 0x141AC1480
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentHousingSignboard:
     vtbls:
-#fail       - ea: 0x141A75D10
+      - ea: 0x141AC1308
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentHousingPortal:
     vtbls:
@@ -4623,7 +4623,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentHousingPlant:
     vtbls:
-#fail       - ea: 0x141A75EF0
+      - ea: 0x141AC14F8
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentPersonalRoomPortal:
     vtbls:
@@ -4651,7 +4651,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentTreasureHunt:
     vtbls:
-#fail       - ea: 0x1419B4240
+      - ea: 0x1419FE9A0
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentLookingForGroup:
     vtbls:
@@ -4665,19 +4665,19 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentVoteKick:
     vtbls:
-#fail       - ea: 0x1419B3578
+      - ea: 0x1419FE928
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentVoteGiveUp:
     vtbls:
-#fail       - ea: 0x1419B3500
+      - ea: 0x1419FE8B0
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentVoteTreasure:
     vtbls:
-#fail       - ea: 0x1419B3488
+      - ea: 0x1419FE9A0
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentPvpProfile:
     vtbls:
-#fail       - ea: 0x1419B5740
+      - ea: 0x141A16368
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentContentsNote:
     vtbls:
@@ -4701,19 +4701,19 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentRelicNoteBook:
     vtbls:
-#fail       - ea: 0x1419B5948
+      - ea: 0x1419FCB78
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentRelicSphere:
     vtbls:
-#fail       - ea: 0x1419B59D0
+      - ea: 0x1419FCC00
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentTradeMultiple:
     vtbls:
-#fail       - ea: 0x1419B3E28
+      - ea: 0x1419FE6C0
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentRelicSphereUpgrade:
     vtbls:
-#fail       - ea: 0x1419B5A58
+      - ea: 0x1419FCC88
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentRelic2Glass:
     vtbls:
@@ -4748,11 +4748,11 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMinionNoteBook:
     vtbls:
-#fail       - ea: 0x1419B5D50
+      - ea: 0x141A15830
         base: Client::UI::Agent::AgentMinionMountBase
   Client::UI::Agent::AgentMountNoteBook:
     vtbls:
-#fail       - ea: 0x1419B5F18
+      - ea: 0x141A15B80
         base: Client::UI::Agent::AgentMinionMountBase
   Client::UI::Agent::AgentItemComp:
     vtbls:
@@ -4767,11 +4767,11 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMobhunt:
     vtbls:
-#fail       - ea: 0x1419B5448
+      - ea: 0x141A15A48
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentPatchMark:
     vtbls:
-#fail       - ea: 0x1419B60D8
+      - ea: 0x141A16170
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentHousingWithdrawStorage:
     vtbls:
@@ -4779,7 +4779,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentWeatherReport:
     vtbls:
-#fail       - ea: 0x14199AC80
+      - ea: 0x1419FEA18
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMateriaAttach:
     vtbls:
@@ -4787,7 +4787,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMiragePrism:
     vtbls:
-#fail       - ea: 0x1419B4E30
+      - ea: 0x141A15988
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentAetherCurrent:
     vtbls:
@@ -4803,7 +4803,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentPuryfyItemSelector:
     vtbls:
-#fail       - ea: 0x1419B5B68
+      - ea: 0x141A16278
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentLovmParty:
     vtbls:
@@ -4819,11 +4819,11 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentCharacterTitle:
     vtbls:
-#fail       - ea: 0x14199B3C0
+      - ea: 0x141A176A8
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentCharacterTitleSelect:
     vtbls:
-#fail       - ea: 0x14199B448
+      - ea: 0x141A17730
         base: Client::UI::Agent::AgentCharacterTitle
   Client::UI::Agent::AgentLovmResult:
     vtbls:
@@ -4855,15 +4855,15 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentJournalAccept:
     vtbls:
-#fail       - ea: 0x1419B28A0
+      - ea: 0x1419FC228
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentJournalResult:
     vtbls:
-#fail       - ea: 0x1419B4520
+      - ea: 0x1419FC428
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentLeveQuest:
     vtbls:
-#fail       - ea: 0x1419B45B0
+      - ea: 0x141A143A8
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentCompanyCraftRecipeNotebook:
     vtbls:
@@ -4899,11 +4899,11 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentSkyIslandFinder:
     vtbls:
-#fail       - ea: 0x1419B2B58
+      - ea: 0x1419FD790
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentSkyIslandFinderSetting:
     vtbls:
-#fail       - ea: 0x1419B6B68
+      - ea: 0x1419FD818
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentBeginnersMansionProblem:
     vtbls:
@@ -4911,7 +4911,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentItemContextCustomize:
     vtbls:
-#fail       - ea: 0x1419B6CF8
+      - ea: 0x141A14E58
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentDpsChallenge:
     vtbls:
@@ -4955,11 +4955,11 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentRecommendEquip:
     vtbls:
-#fail       - ea: 0x1419B4A58
+      - ea: 0x1419FC968
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentYkwNote:
     vtbls:
-#fail       - ea: 0x1419B5EA0
+      - ea: 0x1419FEC78
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentContentsFinderMenu:
     vtbls:
@@ -4967,7 +4967,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentRaidFinder:
     vtbls:
-#fail       - ea: 0x1419B2BE0
+      - ea: 0x1419FC5D8
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentGcArmyExpedition:
     vtbls:
@@ -5039,7 +5039,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentPvPDuelRequest:
     vtbls:
-#fail       - ea: 0x14199B6E0
+      - ea: 0x141A162F0
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentPvPHeader:
     vtbls:
@@ -5055,7 +5055,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentItemAppraisal:
     vtbls:
-#fail       - ea: 0x1419B72C8
+      - ea: 0x141A14DE0
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentItemInspection:
     vtbls:
@@ -5071,11 +5071,11 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentSnipe:
     vtbls:
-#fail       - ea: 0x1419B7368
+      - ea: 0x1419FD930
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMountSpeed:
     vtbls:
-#fail       - ea: 0x14199ACF8
+      - ea: 0x141A15CD8
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentPvPTeam:
     vtbls:
@@ -5095,7 +5095,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentTeleportHousingFriend:
     vtbls:
-#fail       - ea: 0x1419B7670
+      - ea: 0x1419FE4D0
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentContentMemberList:
     vtbls:
@@ -5151,7 +5151,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentAozNoteBook:
     vtbls:
-#fail       - ea: 0x1419B7790
+      - ea: 0x141A16EE0
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentEmj:
     vtbls:
@@ -5199,15 +5199,15 @@ classes:
         base: Client::UI::Agent::AgentDawn
   Client::UI::Agent::AgentHousingCatalogPreview:
     vtbls:
-#fail       - ea: 0x141A75D88
+      - ea: 0x141AC1390
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentQuestRedo:
     vtbls:
-#fail       - ea: 0x1419B78E0
+      - ea: 0x1419FC4E8
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentQuestRedoHud:
     vtbls:
-#fail       - ea: 0x1419B3848
+      - ea: 0x1419FC560
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentCircleList:
     vtbls:
@@ -5223,7 +5223,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMentorCondition:
     vtbls:
-#fail       - ea: 0x1419B37D0
+      - ea: 0x141A148A0
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentPerformanceMetronome:
     vtbls:
@@ -5251,7 +5251,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentTargetCircle:
     vtbls:
-#fail       - ea: 0x1419B4AD0
+      - ea: 0x1419FE3E0
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentCraftActionSimulator:
     vtbls:
@@ -5279,11 +5279,11 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentOrnamentNoteBook:
     vtbls:
-#fail       - ea: 0x1419B7B78
+      - ea: 0x141A16080
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentTourismMenu:
     vtbls:
-#fail       - ea: 0x1419B7C68
+      - ea: 0x1419FE5C0
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentStarlightGiftBox:
     vtbls:
@@ -5291,35 +5291,35 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentSpearFishing:
     vtbls:
-#fail       - ea: 0x1419B7D58
+      - ea: 0x1419FD9C8
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentOmikuji:
     vtbls:
-#fail       - ea: 0x14199B148
+      - ea: 0x141A15DD8
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentFittingShop:
     vtbls:
-#fail       - ea: 0x14199B1C0
+      - ea: 0x141A188A0
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentAkatsukiNote:
     vtbls:
-#fail       - ea: 0x14199B2B8
+      - ea: 0x141A16DC8
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentExHotbarEditor:
     vtbls:
-#fail       - ea: 0x14199B348
+      - ea: 0x141A182C0
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentBannerList:
     vtbls:
-#fail       - ea: 0x14199B968
+      - ea: 0x141AC1C18
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentBannerEditor:
     vtbls:
-#fail       - ea: 0x14199B9E0
+      - ea: 0x141AC1BA0
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentBannerUpdateView:
     vtbls:
-#fail       - ea: 0x14199BA58
+      - ea: 0x141AC1D58
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentPvPMap:
     vtbls:
@@ -5335,7 +5335,7 @@ classes:
         base: Client::UI::Misc::CharaView
   Client::UI::Agent::AgentTryon:
     vtbls:
-#fail       - ea: 0x1419B2418
+      - ea: 0x1419FC3B0
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentItemDetailBase:
     vtbls:
@@ -5380,7 +5380,7 @@ classes:
 #fail       0x140C56050: CreateMiniMapMarkers
   Client::UI::Agent::AgentRecipeNote:
     vtbls:
-#fail       - ea: 0x1419B4628
+      - ea: 0x1419FC758
         base: Client::UI::Agent::AgentInterface
     funcs:
 #fail       0x140CB87C0: ctor
@@ -5389,15 +5389,15 @@ classes:
 #fail       0x140CBF720: SearchRecipe
   Client::UI::Agent::AgentRecipeTree:
     vtbls:
-#fail       - ea: 0x1419B46B0
+      - ea: 0x1419FC6E0
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentRecipeMaterialList:
     vtbls:
-#fail       - ea: 0x1419B4728
+      - ea: 0x1419FC668
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentRecipeProductList:
     vtbls:
-#fail       - ea: 0x1419B4800
+      - ea: 0x1419FC8F0
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentTeleport:
     vtbls:
@@ -5405,11 +5405,11 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentLoadingTips:
     vtbls:
-#fail       - ea: 0x1419B6248
+      - ea: 0x141A151C8
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentRevive:
     vtbls:
-#fail       - ea: 0x1419B3410
+      - ea: 0x1419FD340
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentChocoboRace:
     vtbls:
@@ -5462,15 +5462,15 @@ classes:
 #fail       0x140C8E520: OnItemHovered
   Client::UI::Agent::AgentStatus::StatusCharaView:
     vtbls:
-#fail       - ea: 0x1419B4978
+      - ea: 0x1419FCD78
         base: Client::UI::Misc::CharaView
   Client::UI::Agent::AgentStatus:
     vtbls:
-#fail       - ea: 0x1419B49E0
+      - ea: 0x1419FCDE0
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMaterialize:
     vtbls:
-#fail       - ea: 0x1419B4CD8
+      - ea: 0x141A15590
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentContentsTimer:
     vtbls:
@@ -5507,47 +5507,47 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMJIHud:
     vtbls:
-#fail       - ea: 0x14199BF18
+      - ea: 0x141AC2168
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMJIPouch:
     vtbls:
-#fail       - ea: 0x14199C020
+      - ea: 0x141AC1F00
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMJIBuildingMove:
     vtbls:
-#fail       - ea: 0x14199C098
+      - ea: 0x141AC2068
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMJICraftSchedule:
     vtbls:
-#fail       - ea: 0x14199C188
+      - ea: 0x141AC20F0
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMJIGatheringNoteBook:
     vtbls:
-#fail       - ea: 0x14199C278
+      - ea: 0x141AC2480
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMJIRecipeNoteBook:
     vtbls:
-#fail       - ea: 0x14199C2F0
+      - ea: 0x141AC2718
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMJICraftSales:
     vtbls:
-#fail       - ea: 0x14199C368
+      - ea: 0x141AC21F0
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMJIBuilding:
     vtbls:
-#fail       - ea: 0x14199C3E0
+      - ea: 0x141AC1F78
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMJIDisposeShop:
     vtbls:
-#fail       - ea: 0x14199C458
+      - ea: 0x141AC2278
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMJIAnimalManagement:
     vtbls:
-#fail       - ea: 0x14199C4D0
+      - ea: 0x141AC1E78
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMJIFarmManagement:
     vtbls:
-#fail       - ea: 0x14199C548
+      - ea: 0x141AC2368
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMJIEntrance:
     vtbls:
@@ -5555,15 +5555,15 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMJIGatheringHouse:
     vtbls:
-#fail       - ea: 0x14199C5C0
+      - ea: 0x141AC23E0
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMJIMinionManagement:
     vtbls:
-#fail       - ea: 0x14199C650
+      - ea: 0x141AC2600
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMJIMinionNoteBook:
     vtbls:
-#fail       - ea: 0x14199C6C8
+      - ea: 0x141AC2678
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMJISettings:
     vtbls:
@@ -5571,7 +5571,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentArchiveItem:
     vtbls:
-#fail       - ea: 0x14199B4D0
+      - ea: 0x141A170A0
         base: Client::UI::Agent::AgentInterface
     funcs:
 #fail       0x1409D83F0: ctor
@@ -5579,15 +5579,15 @@ classes:
 #fail       0x1409D8480: ViewArchiveItem  
   Client::UI::Agent::AgentVVDNotebook:
     vtbls:
-#fail       - ea: 0x14199C7D0
+      - ea: 0x141AC2970
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentVVDFinder:
     vtbls:
-#fail       - ea: 0x14199C758
+      - ea: 0x141AC28F8
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentTofuList:
     vtbls:
-#fail       - ea: 0x14199C970
+      - ea: 0x141AC2808
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentBannerInterface:
     vtbls:
