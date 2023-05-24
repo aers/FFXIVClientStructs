@@ -3,7 +3,8 @@
 [StructLayout(LayoutKind.Explicit, Size = 0xB0)]
 public unsafe partial struct ContentsFinder
 {
-    public static ContentsFinder* Instance() => &UIState.Instance()->ContentsFinder;
+    [StaticAddress("0F B6 FA 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 80 78 59 02", 6)]
+    public static partial ContentsFinder* Instance();
     
     [FieldOffset(0x00)] public void* vtbl;
     [FieldOffset(0x18)] public LootRule LootRules;
