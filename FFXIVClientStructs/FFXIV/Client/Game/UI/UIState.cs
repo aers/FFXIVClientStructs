@@ -32,7 +32,7 @@ public unsafe partial struct UIState
     [FieldOffset(0xA800)] public Director* ActiveDirector;
     [FieldOffset(0xA948)] public FateDirector* FateDirector;
 
-    [FieldOffset(0xAA58)] public Map Map;
+    [FieldOffset(0xAA90)] public Map Map;
 
     [FieldOffset(0xEA40)] public MarkingController MarkingController;
     [FieldOffset(0xECF0)] public LimitBreakController LimitBreakController;
