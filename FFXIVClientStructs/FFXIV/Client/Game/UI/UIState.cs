@@ -16,6 +16,7 @@ public unsafe partial struct UIState
     [FieldOffset(0xA18)] public WeaponState WeaponState;
     [FieldOffset(0xA38)] public PlayerState PlayerState;
     [FieldOffset(0x1220)] public Revive Revive;
+    [FieldOffset(0x1250)] public Inspect Inspect;
     [FieldOffset(0x14B8)] public Telepo Telepo;
     [FieldOffset(0x14F8)] public Cabinet Cabinet;
     [FieldOffset(0x1A90)] public Buddy Buddy;

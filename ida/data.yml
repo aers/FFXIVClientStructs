@@ -18,8 +18,8 @@ globals:
   0x142169268: g_GameObjectManager_ObjectList
   0x14216A520: g_GameObjectManager_ObjectListEnd
   0x142172A90: g_LocalContentId
-#fail   0x1421057A8: g_Client::Game::UI::Buddy.Pet # not a pointer
-#fail   0x1421057B8: g_Client::Game::UI::Buddy.Pet.BuffList # not a pointer
+  0x142101738: g_Client::Game::UI::Buddy.Pet # not a pointer
+  0x142101748: g_Client::Game::UI::Buddy.Pet.BuffList # not a pointer
   0x142174910: g_Client::Game::UI::Buddy.CompanionStats.TimeRemaining  # not a pointer
   0x142174960: g_Client::Game::UI::Buddy.BattleBuddyListPtr # Member of UIState
   0x142174A10: g_Client::Game::UI::ContentsNote
@@ -4232,8 +4232,8 @@ classes:
       - ea: 0x141A16B38
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x140C0B620: ctor
-#fail       0x140C107F0: InsertTextCommandParam
+      0x140CA9E80: ctor
+      0x140CAF0C0: InsertTextCommandParam
   Client::UI::Agent::AgentInventory:
     vtbls:
       - ea: 0x141A14738
@@ -4274,7 +4274,7 @@ classes:
       - ea: 0x141A18248
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x1409F2E70: ctor
+      0x140D15E60: ctor
   Client::UI::Agent::AgentMacro:
     vtbls:
       - ea: 0x141A147B0
@@ -4288,7 +4288,7 @@ classes:
       - ea: 0x141A18510
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x1409DF010: OpenForItemId
+      0x140D20400: OpenForItemId
   Client::UI::Agent::AgentFishRecord:
     vtbls:
       - ea: 0x141A18610
@@ -4318,10 +4318,10 @@ classes:
       - ea: 0x1419FD5C8
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x140CC5080: ctor
-#fail       0x140CC7610: OpenBalloon
-#fail       0x140CC7AE0: CloseBalloon
-#fail       0x140CC7C70: ResetBalloon
+      0x140A1C6C0: ctor
+      0x140A1EC60: OpenBalloon
+      0x140A1F130: CloseBalloon
+      0x140A1F2C0: ResetBalloon
   Client::UI::Agent::AgentLoot:
     vtbls:
       - ea: 0x141A14828
@@ -4638,13 +4638,13 @@ classes:
       - ea: 0x141A172A8
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x140CD2420: SalvageItem # (this, InventoryItem* ushort, byte)
-#fail       0x140CD30C0: LoadCategoryNames
-#fail       0x140CD2820: ItemListRefresh # Clears item list and signals agent to update it next frame
-#fail       0x140CD3A90: ItemListPopulate
-#fail       0x140CD3BD0: ItemListPopulateFromContainer
-#fail       0x140CD3D80: ItemListPopulateEquipped
-#fail       0x140CD4040: ItemListAdd # (this, meetLevel, containerId, slotIndex, itemId, exdRow, quantity)
+      0x1409FEE60: SalvageItem # (this, InventoryItem* ushort, byte)
+      0x1409FFAD0: LoadCategoryNames
+      0x1409FF260: ItemListRefresh # Clears item list and signals agent to update it next frame
+      0x140A004A0: ItemListPopulate
+      0x140A005E0: ItemListPopulateFromContainer
+      0x140A00790: ItemListPopulateEquipped
+      0x140A00A50: ItemListAdd # (this, meetLevel, containerId, slotIndex, itemId, exdRow, quantity)
   Client::UI::Agent::AgentHousingBuddyList:
     vtbls:
       - ea: 0x141AC1678
@@ -5350,11 +5350,11 @@ classes:
       - ea: 0x141A16F88
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x140C32190: ctor
-#fail       0x140C32AE0: OpenRegularDuty
-#fail       0x140C32CC0: OpenRouletteDuty
-#fail       0x140C330D0: SetContentRouletteRoleBonus
-#fail       0x140C35F90: GetInstance
+      0x140CCD9A0: ctor
+      0x140CCE2F0: OpenRegularDuty
+      0x140CCE4D0: OpenRouletteDuty
+      0x140CCE8E0: SetContentRouletteRoleBonus
+      0x140CD17A0: GetInstance # static
   Client::UI::Agent::AgentMap::MapMarkerStructSearchName:
     vtbls:
       - ea: 0x141A13E78
@@ -5366,27 +5366,27 @@ classes:
       - ea: 0x141A13E88
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x140C4F0C0: ctor
-#fail       0x140C4B210: AddGatheringTempMapMarker
-#fail       0x140C4A410: OpenMap
-#fail       0x140C56490: OpenMapByMapId
-#fail       0x140C4B550: SetFlagMapMarker # (this, territoryId, mapId, (float)x, (float)y, iconId)
-#fail       0x140C535C0: AddMapMarker
-#fail       0x140C539C0: AddMiniMapMarker
-#fail       0x140C5B230: CanUseTeleport # static
-#fail       0x140C557C0: ResetMapMarkers
-#fail       0x140C55830: CreateMapMarkers
-#fail       0x140C56010: ResetMiniMapMarkers
-#fail       0x140C56050: CreateMiniMapMarkers
+      0x140BD76F0: ctor
+      0x140BD3010: AddGatheringTempMapMarker
+      0x140BD2130: OpenMap
+      0x140BDEAF0: OpenMapByMapId
+      0x140BD33A0: SetFlagMapMarker # (this, territoryId, mapId, (float)x, (float)y, iconId)
+      0x140BDBBD0: AddMapMarker
+      0x140BDBFD0: AddMiniMapMarker
+      0x140BE39D0: CanUseTeleport # static
+      0x140BDDE20: ResetMapMarkers
+      0x140BDDE90: CreateMapMarkers
+      0x140BDE670: ResetMiniMapMarkers
+      0x140BDE6B0: CreateMiniMapMarkers
   Client::UI::Agent::AgentRecipeNote:
     vtbls:
       - ea: 0x1419FC758
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x140CB87C0: ctor
-#fail       0x140CB9B60: OpenRecipeByRecipeId
-#fail       0x140CB9C80: OpenRecipeByItemId
-#fail       0x140CBF720: SearchRecipe
+      0x1409E0C20: ctor
+      0x1409E1FC0: OpenRecipeByRecipeId
+      0x1409E20E0: OpenRecipeByItemId
+      0x1409E7B80: SearchRecipe
   Client::UI::Agent::AgentRecipeTree:
     vtbls:
       - ea: 0x1419FC6E0
@@ -5458,8 +5458,8 @@ classes:
       - ea: 0x141A14ED0
         base: Client::UI::Agent::AgentItemDetailBase
     funcs:
-#fail       0x140C8D5D0: ctor
-#fail       0x140C8E520: OnItemHovered
+      0x140C38D70: ctor
+      0x140C39CC0: OnItemHovered
   Client::UI::Agent::AgentStatus::StatusCharaView:
     vtbls:
       - ea: 0x1419FCD78
@@ -5481,7 +5481,7 @@ classes:
      - ea: 0x1419FC758
        base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x1409B6400: OpenGatherableByItemId
+      0x140BCFE00: OpenGatherableByItemId
   Client::UI::Agent::AgentMcguffin:
     vtbls:
       - ea: 0x141A01A08
@@ -5574,9 +5574,9 @@ classes:
       - ea: 0x141A170A0
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x1409D83F0: ctor
-#fail       0x1409D8420: dtor2
-#fail       0x1409D8480: ViewArchiveItem  
+      0x140CDADF0: ctor
+      0x140CDAE20: dtor2
+      0x140CDAE80: ViewArchiveItem  
   Client::UI::Agent::AgentVVDNotebook:
     vtbls:
       - ea: 0x141AC2970
@@ -5763,6 +5763,10 @@ classes:
   Client::UI::AddonOperationGuide:
     vtbls:
       - ea: 0x141A1D488
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonBuddyInspect:
+    vtbls:
+      - ea: 0x141A6C8B8
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonNowLoading:
     vtbls:
