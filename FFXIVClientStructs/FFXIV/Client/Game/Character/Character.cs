@@ -72,9 +72,24 @@ public unsafe partial struct Character
     [FieldOffset(0x1B28)] public byte OnlineStatus;
     [FieldOffset(0x1B29)] public byte Battalion; // used for determining friend/enemy state
     [FieldOffset(0x1ED)] public byte ShieldValue;
-    [FieldOffset(0x1B1B)] public byte StatusFlags;
-    [FieldOffset(0x1B1F)] public byte StatusFlags4; // 0x80 flagged when permanent wetness in GPose is toggled.
     [FieldOffset(0x1AE8)] public uint CompanionOwnerID;
+
+    // Note: These 2 status flags might be just an ushort instead of 2 separate bytes.
+
+    // 0x1, 0x2, 0x4, 0x8 = Unknown
+    // 0x10 = IsHostile
+    // 0x20 = InCombat 
+    [FieldOffset(0x1F2)] public byte StatusFlags;
+
+    // 0x1 = Unknown
+    // 0x2 = Unknown (always on for some reason?)
+    // 0x4 = Unknown
+    // 0x8 = PartyMember
+    // 0x10 = AllianceMember
+    // 0x20 = Friend
+    [FieldOffset(0x1F3)] public byte StatusFlags2;
+    [FieldOffset(0x1B1F)] public byte StatusFlags4; // old - 0x80 flagged when permanent wetness in GPose is toggled.
+
 
     [MemberFunction("E8 ?? ?? ?? ?? 49 3B C7 0F 84")]
     public partial ulong GetTargetId();
