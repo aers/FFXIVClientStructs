@@ -47,7 +47,7 @@ public unsafe partial struct Character
     [Obsolete($"Use {nameof(DrawData)}.CustomizeData"), FieldOffset(0x858)] public fixed byte CustomizeData[0x1A];
 
     [FieldOffset(0x878)] public OrnamentContainer Ornament;
-    [FieldOffset(0x8F0)] public ActionTimelineManager ActionTimelineManager;
+    [FieldOffset(0x920)] public ActionTimelineManager ActionTimelineManager;
 
     [FieldOffset(0xCB0)] public uint PlayerTargetObjectID;
 
@@ -71,7 +71,7 @@ public unsafe partial struct Character
     [FieldOffset(0x1B27)] public byte ModeParam; // Different purpose depending on mode. See CharacterModes for more info.
     [FieldOffset(0x1B28)] public byte OnlineStatus;
     [FieldOffset(0x1B29)] public byte Battalion; // used for determining friend/enemy state
-    [FieldOffset(0x1B17)] public byte ShieldValue;
+    [FieldOffset(0x1ED)] public byte ShieldValue;
     [FieldOffset(0x1B1B)] public byte StatusFlags;
     [FieldOffset(0x1B1F)] public byte StatusFlags4; // 0x80 flagged when permanent wetness in GPose is toggled.
     [FieldOffset(0x1AE8)] public uint CompanionOwnerID;

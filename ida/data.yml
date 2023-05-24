@@ -18,8 +18,8 @@ globals:
   0x142169268: g_GameObjectManager_ObjectList
   0x14216A520: g_GameObjectManager_ObjectListEnd
   0x142172A90: g_LocalContentId
-#fail   0x1421057A8: g_Client::Game::UI::Buddy.Pet # not a pointer
-#fail   0x1421057B8: g_Client::Game::UI::Buddy.Pet.BuffList # not a pointer
+  0x142101738: g_Client::Game::UI::Buddy.Pet # not a pointer
+  0x142101748: g_Client::Game::UI::Buddy.Pet.BuffList # not a pointer
   0x142174910: g_Client::Game::UI::Buddy.CompanionStats.TimeRemaining  # not a pointer
   0x142174960: g_Client::Game::UI::Buddy.BattleBuddyListPtr # Member of UIState
   0x142174A10: g_Client::Game::UI::ContentsNote
@@ -55,7 +55,7 @@ functions:
   0x140060990: MemoryManager_AllocDefaultSpace
   0x140060A20: MemoryManager_Alloc
   0x140062130: MemoryManager_GetDefaultSpace
-#fail   0x140062680: MemoryManager_GetApricotSpace
+  0x1400621F0: MemoryManager_GetApricotSpace
   0x140062210: MemoryManager_GetAnimationSpace
   0x140062230: MemoryManager_GetUISpace
   0x1400622B0: MemoryManager_GetFileSpace
@@ -69,7 +69,7 @@ functions:
   0x1401DE150: Client::System::Resource::Handle::ModelResourceHandle_GetMaterialFileNameBySlot
   0x1402E2FB0: CountdownPointer
   0x14032B480: std::vector_SetSize
-#fail   0x140468120: GetGameObjectByIndex
+  0x140643E70: GetGameObjectByIndex
   0x14048AA50: PrepareColorSet
   0x14048AD20: ReadStainingTemplate
   0x1404DE5D0: Client::Game::Control::InputManager_GetInputStatus
@@ -90,8 +90,8 @@ functions:
   0x140B04D10: SetCondition
   0x140B05050: SetConditionByPermissionAndLog
   0x140B05520: IsLocalPlayerLalafell
-#fail   0x140C7A2E0: CreateSelectYesno
-#fail   0x1411869E0: Client::UI::AddonHudLayoutScreen::MoveableAddonInfoStruct_UpdateAddonPosition
+  0x140C28780: CreateSelectYesno
+  0x141166EA0: Client::UI::AddonHudLayoutScreen::MoveableAddonInfoStruct_UpdateAddonPosition
   0x1412AF2E0: Client::Graphics::Kernel::CreateShader # static function
   0x1412BA5F0: NormalizeCustomizeData
   0x1412EC850: Client::Game::Control::InputManager::IsAutoRunning # static function, might belong in a different class.
@@ -593,17 +593,17 @@ classes:
     funcs:
       0x140B6C400: Initialize # static
       0x140B6C450: Destroy    # static
-#fail       0x140B71440: GetSingleton  # static
+      0x140B6C490: GetSingleton  # static
       0x140B6F8B0: ctor
       0x140B6FB30: dtor
       0x140B6E570: LoadDemandResearchPacket
       0x140B6EAF0: IsRecipeUnlocked # (this, recipeId)
-#fail       0x140B738A0: IsPouchItemLocked # (this, pouchItemId)
-#fail       0x140B71C30: IsFunctionUnlocked # (this, functionId)
+      0x140B6EB20: IsPouchItemLocked # (this, pouchItemId)
+      0x140B6CDF0: IsFunctionUnlocked # (this, functionId)
       0x140B6D020: HandleActorControlPacket
       0x140B6DB50: HandleInboundPacket
-#fail       0x140B73CE0: GetVisibleMinimapIcons
-#fail       0x140B738B0: IsItemLocked
+      0x140B6EFA0: GetVisibleMinimapIcons
+      0x140B6EB30: IsItemLocked
       0x140B6ECF0: GetPastureSlotCount
       0x140B6EE80: GetFarmSlotCount
   Client::Game::MJI::IslandState:
@@ -611,9 +611,9 @@ classes:
       0x140B724B0: ctor
   Client::Game::MJI::MJIPastureHandler:
     funcs:
-#fail       0x1413EEA70: GetCurrentRoamingMinionCount
+      0x141456940: GetCurrentRoamingMinionCount
       0x141456AB0: SetMinionPlaceStatus  # (this, minionId, isPlaced)
-#fail       0x1413EE7B0: ExecuteReleaseMinion  # (this, minionId, areaId)
+      0x141456560: ExecuteReleaseMinion  # (this, minionId, areaId)
       0x1414566F0: ExecuteRecallMinion   # (this, minionId)
   Client::System::String::Utf8String:
     funcs:
@@ -788,7 +788,7 @@ classes:
       - ea: 0x142173510
         pointer: False
     funcs:
-#fail       0x1409465F0: IsItemInCabinet        # item is a cabinet-specific ID, not generic Item.
+      0x14095B8D0: IsItemInCabinet        # item is a cabinet-specific ID, not generic Item.
   Client::Game::UI::ContentsNote:
     vtbls:
       - ea: 0x1419FB100
@@ -1098,7 +1098,7 @@ classes:
   Common::Component::Excel::ExcelModuleInterface: # these are two different classes
     vtbls:
       - ea: 0x141CFBE80
-#fail       - ea: 0x141C90F70
+      - ea: 0x141CFBF20
         base: Common::Component::Excel::ExcelResourceListener
     vfuncs:
       1: GetSheetByIndex
@@ -1368,7 +1368,7 @@ classes:
       0: dtor
   Client::UI::Info::InfoProxyPageInterface:
     vtbls:
-#fail       - ea: 0x1418EBD50
+      - ea: 0x14194E1B8
         base: Client::UI::Info::InfoProxyInterface
   Client::UI::Info::InfoModule:
     vtbls:
@@ -1400,7 +1400,7 @@ classes:
     funcs:
       0x1400EB830: ctor
       0x1400EB950: dtor2
-#fail       0x1400EB4D0: GetContentIDForEntry
+      0x1400EC770: GetContentIDForEntry
       0x1400EC790: SearchEntryByName
       0x1400EC890: GetEntry
       0x1400ECEF0: SearchEntryByContenID
@@ -1433,7 +1433,7 @@ classes:
       0x1400F1BE0: GetGroupIndex # Static
       0x1400F2170: IsLocalPlayerInParty # Static
       0x1400F21B0: GetMember # Static
-#fail       0x1400F0C80: GetMemberByContentId # Static
+      0x1400F2260: GetMemberByContentId # Static
       0x1400F2320: GetMemberByObjectId # Static
       0x1400F23D0: IsContentIdInParty # Static
   Client::UI::Info::InfoProxyParty:
@@ -2036,7 +2036,7 @@ classes:
       0x140371210: MakeProjectionMatrix
   Client::Graphics::Render::ShadowCamera:
     vtbls:
-#fail       - ea: 0x14191B9E8
+      - ea: 0x14197E740
         base: Client::Graphics::Render::Camera
   Client::Graphics::Render::Camera_CascadeShadow:
     vtbls:
@@ -2730,8 +2730,8 @@ classes:
     funcs:
       0x1404F7DB0: SetValue
       0x1404F7F90: SetValueUtf8
-#fail       0x1404EEDF0: SetValueIfDifferent
-#fail       0x1404EEE20: SetValueIfDifferentUtf8
+      0x1404F7FF0: SetValueIfDifferent
+      0x1404F8020: SetValueIfDifferentUtf8
       0x1404F8060: SetValueForced
       0x1404F80A0: SetValueForcedUtf8
   Component::GUI::ExtendArrayData:
@@ -2828,7 +2828,7 @@ classes:
       0x14051AFA0: RegisterEvent
       0x14051AFE0: UnregisterEvent
       0x14051B020: DispatchEvent
-#fail       0x1405120F0: GetPositionFloat
+      0x14051B390: GetPositionFloat
       0x14051B3B0: SetPositionFloat
       0x14051B400: GetPositionShort
       0x14051B430: SetPositionShort
@@ -2853,7 +2853,7 @@ classes:
       0x14051BC90: SetColor
       0x14051BCD0: SetAddRGB
       0x14051BD20: SetMultiplyRGB
-#fail       0x140512AD0: GetPriority
+      0x14051BD70: GetPriority
       0x14051BD90: SetPriority
       0x14051BDB0: IsVisible
       0x14051BDE0: SetVisibility
@@ -2903,7 +2903,7 @@ classes:
     funcs:
       0x14058F260: ctor
       0x140520860: SetText
-#fail       0x1405175B0: SetNumber
+      0x1405208A0: SetNumber
       0x140520A00: UpdateWidth
   Component::GUI::AtkCollisionNode:
     vtbls:
@@ -3507,7 +3507,7 @@ classes:
         base: Component::Log::LogModule
     funcs:
       0x14066DB70: ctor
-#fail       0x140660700: PrintMessage
+      0x14066F410: PrintMessage
       0x1406709E0: ShowLogMessage
       0x1406739D0: GetContentIdForLogMessage
       0x140673A60: GetLogMessage
@@ -3565,7 +3565,7 @@ classes:
       0x1406909E0: UpdateGearset # (this, gearsetIndext)
       0x140690E20: LinkGlamourPlate
       0x140690F40: RemoveGlamourPlateLink
-#fail       0x140680B30: HasLinkedGlamourPlate
+      0x140690F50: HasLinkedGlamourPlate
       0x140691140: GetClassJobIcon
   Client::UI::Misc::ItemFinderModule:
     vtbls:
@@ -3597,10 +3597,10 @@ classes:
       - ea: 0x1419ABEE8
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
-#fail       0x1406A5A00: ctor_FromUserFileEvent # (this, UserFileEvent*)
-#fail       0x1406A5AB0: ctor # (this)
-#fail       0x1406A5EB0: GetComment
-#fail       0x1406A5F10: SetComment
+      0x1406B6A70: ctor_FromUserFileEvent # (this, UserFileEvent*)
+      0x1406B6AF0: ctor # (this)
+      0x1406B6F90: GetComment
+      0x1406B6FF0: SetComment
   Client::UI::Misc::CharaView:
     vtbls:
       - ea: 0x1419AC020
@@ -3696,7 +3696,7 @@ classes:
       - ea: 0x1419C3500
   Client::UI::Shell::RaptureShellCommandInterface:
     vtbls:
-#fail       - ea: 0x141962570
+      - ea: 0x1419C34E8
         base: Component::Shell::ShellCommandInterface
   Client::UI::Shell::RaptureShellModule:
     vtbls:
@@ -4008,15 +4008,15 @@ classes:
         base: Component::Shell::DebugCommandInterface
   Client::UI::Shell::ShellCommandReturn:
     vtbls:
-      - ea: 0x1419C62B8
+      - ea: 0x1419C62D0
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandLegacy:
     vtbls:
-      - ea: 0x1419C62D0
+      - ea: 0x1419C62B8
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandHotbarBase:
     vtbls:
-#fail       - ea: 0x1419652C8
+      - ea: 0x1419C62E8
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandHotbar:
     vtbls:
@@ -4157,7 +4157,7 @@ classes:
       0x1407AD1F0: dtor
   Client::Game::TitleController:
     vtbls:
-#fail       - ea: 0x141998B98
+      - ea: 0x1419FA098
     vfuncs:
       0: dtor
   Client::Game::TitleList:
@@ -4170,7 +4170,7 @@ classes:
       - ea: 0x1419FA0E0
   Client::Game::UI::Hotbar:
     vtbls:
-#fail       - ea: 0x141998B18
+      - ea: 0x1419FA100
         base: Client::UI::Misc::RaptureHotbarModule::ClearCallback
     vfuncs:
       0: dtor
@@ -4213,7 +4213,7 @@ classes:
       0x140958E80: ctor
       0x140958FE0: IsSelectUseTicketInactive
       0x140959140: UpdatePlayerAetheryteList
-#fail       0x140944A00: Teleport
+      0x140959CC0: Teleport
       0x14095AF10: TeleportWithTicket
       0x14095AFA0: InvokeSelectUseTicket
   Client::UI::Agent::AgentHUD:
@@ -4232,8 +4232,8 @@ classes:
       - ea: 0x141A16B38
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x140C0B620: ctor
-#fail       0x140C107F0: InsertTextCommandParam
+      0x140CA9E80: ctor
+      0x140CAF0C0: InsertTextCommandParam
   Client::UI::Agent::AgentInventory:
     vtbls:
       - ea: 0x141A14738
@@ -4271,13 +4271,13 @@ classes:
       0x140275CF0: ctor
   Client::UI::Agent::AgentEmote:
     vtbls:
-#fail       - ea: 0x1419B2D38
+      - ea: 0x141A18248
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x1409F2E70: ctor
+      0x140D15E60: ctor
   Client::UI::Agent::AgentMacro:
     vtbls:
-#fail       - ea: 0x14199B758
+      - ea: 0x141A147B0
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentFishingNote:
     vtbls:
@@ -4285,17 +4285,17 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentFishGuide:
     vtbls:
-#fail       - ea: 0x14199B7D0
+      - ea: 0x141A18510
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x1409DF010: OpenForItemId
+      0x140D20400: OpenForItemId
   Client::UI::Agent::AgentFishRecord:
     vtbls:
       - ea: 0x141A18610
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentQuestJournal:
     vtbls:
-#fail       - ea: 0x1419B2938
+      - ea: 0x1419FC2C0
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentActionMenu:
     vtbls:
@@ -4307,24 +4307,24 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMarker:
     vtbls:
-#fail       - ea: 0x1419B4378
+      - ea: 0x141A15518
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentTrade:
     vtbls:
-#fail       - ea: 0x1419B2240
+      - ea: 0x1419FE638
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentScreenLog:
     vtbls:
-#fail       - ea: 0x1419B48F0
+      - ea: 0x1419FD5C8
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x140CC5080: ctor
-#fail       0x140CC7610: OpenBalloon
-#fail       0x140CC7AE0: CloseBalloon
-#fail       0x140CC7C70: ResetBalloon
+      0x140A1C6C0: ctor
+      0x140A1EC60: OpenBalloon
+      0x140A1F130: CloseBalloon
+      0x140A1F2C0: ResetBalloon
   Client::UI::Agent::AgentLoot:
     vtbls:
-#fail       - ea: 0x1419B3668
+      - ea: 0x141A14828
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentRepair:
     vtbls:
@@ -4340,7 +4340,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentHowToNotice:
     vtbls:
-#fail       - ea: 0x1419B3320
+      - ea: 0x141A14620
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentContentsTutorial:
     vtbls:
@@ -4348,7 +4348,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentInspect:
     vtbls:
-#fail       - ea: 0x1419B3C98
+      - ea: 0x141A14D68
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentTelepotTown:
     vtbls:
@@ -4416,7 +4416,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentReturn:
     vtbls:
-#fail       - ea: 0x1419B4878
+      - ea: 0x1419FD2C8
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentCutscene:
     vtbls:
@@ -4494,7 +4494,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentHowToList:
     vtbls:
-#fail       - ea: 0x1419B4B48
+      - ea: 0x141A14698
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentCabinet:
     vtbls:
@@ -4502,11 +4502,11 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentLegacyItemStorage:
     vtbls:
-#fail       - ea: 0x1419B4C60
+      - ea: 0x141A15150
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentGrandCompanyRank:
     vtbls:
-#fail       - ea: 0x1419B3D10
+      - ea: 0x141A14128
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentGrandCompanySupply:
     vtbls:
@@ -4514,7 +4514,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentGrandCompanyExchange:
     vtbls:
-#fail       - ea: 0x1419B51D0
+      - ea: 0x141A140B0
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentGearSet:
     vtbls:
@@ -4543,7 +4543,7 @@ classes:
       0x140305D60: ctor
   Client::UI::Agent::AgentAchievement:
     vtbls:
-#fail       - ea: 0x1419B2790
+      - ea: 0x141A16AA0
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentLicenseViewer:
     vtbls:
@@ -4551,15 +4551,15 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMovieSubtitle:
     vtbls:
-#fail       - ea: 0x1419B5248
+      - ea: 0x141A15D50
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentPadMouseMode:
     vtbls:
-#fail       - ea: 0x1419B52C0
+      - ea: 0x141A160F8
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentRecommendList:
     vtbls:
-#fail       - ea: 0x1419B44A8
+      - ea: 0x1419FCA30
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentBuddy:
     vtbls:
@@ -4595,7 +4595,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentShop:
     vtbls:
-#fail       - ea: 0x1419B3AF0
+      - ea: 0x1419FC7F8
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentBait:
     vtbls:
@@ -4603,15 +4603,15 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentHousing:
     vtbls:
-#fail       - ea: 0x141A75C78
+      - ea: 0x141AC1270
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentHousingHarvest:
     vtbls:
-#fail       - ea: 0x141A75E78
+      - ea: 0x141AC1480
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentHousingSignboard:
     vtbls:
-#fail       - ea: 0x141A75D10
+      - ea: 0x141AC1308
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentHousingPortal:
     vtbls:
@@ -4623,7 +4623,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentHousingPlant:
     vtbls:
-#fail       - ea: 0x141A75EF0
+      - ea: 0x141AC14F8
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentPersonalRoomPortal:
     vtbls:
@@ -4638,20 +4638,20 @@ classes:
       - ea: 0x141A172A8
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x140CD2420: SalvageItem # (this, InventoryItem* ushort, byte)
-#fail       0x140CD30C0: LoadCategoryNames
-#fail       0x140CD2820: ItemListRefresh # Clears item list and signals agent to update it next frame
-#fail       0x140CD3A90: ItemListPopulate
-#fail       0x140CD3BD0: ItemListPopulateFromContainer
-#fail       0x140CD3D80: ItemListPopulateEquipped
-#fail       0x140CD4040: ItemListAdd # (this, meetLevel, containerId, slotIndex, itemId, exdRow, quantity)
+      0x1409FEE60: SalvageItem # (this, InventoryItem* ushort, byte)
+      0x1409FFAD0: LoadCategoryNames
+      0x1409FF260: ItemListRefresh # Clears item list and signals agent to update it next frame
+      0x140A004A0: ItemListPopulate
+      0x140A005E0: ItemListPopulateFromContainer
+      0x140A00790: ItemListPopulateEquipped
+      0x140A00A50: ItemListAdd # (this, meetLevel, containerId, slotIndex, itemId, exdRow, quantity)
   Client::UI::Agent::AgentHousingBuddyList:
     vtbls:
       - ea: 0x141AC1678
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentTreasureHunt:
     vtbls:
-#fail       - ea: 0x1419B4240
+      - ea: 0x1419FE9A0
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentLookingForGroup:
     vtbls:
@@ -4665,19 +4665,19 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentVoteKick:
     vtbls:
-#fail       - ea: 0x1419B3578
+      - ea: 0x1419FE928
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentVoteGiveUp:
     vtbls:
-#fail       - ea: 0x1419B3500
+      - ea: 0x1419FE8B0
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentVoteTreasure:
     vtbls:
-#fail       - ea: 0x1419B3488
+      - ea: 0x1419FE9A0
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentPvpProfile:
     vtbls:
-#fail       - ea: 0x1419B5740
+      - ea: 0x141A16368
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentContentsNote:
     vtbls:
@@ -4701,19 +4701,19 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentRelicNoteBook:
     vtbls:
-#fail       - ea: 0x1419B5948
+      - ea: 0x1419FCB78
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentRelicSphere:
     vtbls:
-#fail       - ea: 0x1419B59D0
+      - ea: 0x1419FCC00
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentTradeMultiple:
     vtbls:
-#fail       - ea: 0x1419B3E28
+      - ea: 0x1419FE6C0
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentRelicSphereUpgrade:
     vtbls:
-#fail       - ea: 0x1419B5A58
+      - ea: 0x1419FCC88
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentRelic2Glass:
     vtbls:
@@ -4748,11 +4748,11 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMinionNoteBook:
     vtbls:
-#fail       - ea: 0x1419B5D50
+      - ea: 0x141A15830
         base: Client::UI::Agent::AgentMinionMountBase
   Client::UI::Agent::AgentMountNoteBook:
     vtbls:
-#fail       - ea: 0x1419B5F18
+      - ea: 0x141A15B80
         base: Client::UI::Agent::AgentMinionMountBase
   Client::UI::Agent::AgentItemComp:
     vtbls:
@@ -4767,11 +4767,11 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMobhunt:
     vtbls:
-#fail       - ea: 0x1419B5448
+      - ea: 0x141A15A48
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentPatchMark:
     vtbls:
-#fail       - ea: 0x1419B60D8
+      - ea: 0x141A16170
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentHousingWithdrawStorage:
     vtbls:
@@ -4779,7 +4779,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentWeatherReport:
     vtbls:
-#fail       - ea: 0x14199AC80
+      - ea: 0x1419FEA18
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMateriaAttach:
     vtbls:
@@ -4787,7 +4787,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMiragePrism:
     vtbls:
-#fail       - ea: 0x1419B4E30
+      - ea: 0x141A15988
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentAetherCurrent:
     vtbls:
@@ -4803,7 +4803,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentPuryfyItemSelector:
     vtbls:
-#fail       - ea: 0x1419B5B68
+      - ea: 0x141A16278
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentLovmParty:
     vtbls:
@@ -4819,11 +4819,11 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentCharacterTitle:
     vtbls:
-#fail       - ea: 0x14199B3C0
+      - ea: 0x141A176A8
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentCharacterTitleSelect:
     vtbls:
-#fail       - ea: 0x14199B448
+      - ea: 0x141A17730
         base: Client::UI::Agent::AgentCharacterTitle
   Client::UI::Agent::AgentLovmResult:
     vtbls:
@@ -4855,15 +4855,15 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentJournalAccept:
     vtbls:
-#fail       - ea: 0x1419B28A0
+      - ea: 0x1419FC228
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentJournalResult:
     vtbls:
-#fail       - ea: 0x1419B4520
+      - ea: 0x1419FC428
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentLeveQuest:
     vtbls:
-#fail       - ea: 0x1419B45B0
+      - ea: 0x141A143A8
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentCompanyCraftRecipeNotebook:
     vtbls:
@@ -4899,11 +4899,11 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentSkyIslandFinder:
     vtbls:
-#fail       - ea: 0x1419B2B58
+      - ea: 0x1419FD790
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentSkyIslandFinderSetting:
     vtbls:
-#fail       - ea: 0x1419B6B68
+      - ea: 0x1419FD818
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentBeginnersMansionProblem:
     vtbls:
@@ -4911,7 +4911,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentItemContextCustomize:
     vtbls:
-#fail       - ea: 0x1419B6CF8
+      - ea: 0x141A14E58
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentDpsChallenge:
     vtbls:
@@ -4955,11 +4955,11 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentRecommendEquip:
     vtbls:
-#fail       - ea: 0x1419B4A58
+      - ea: 0x1419FC968
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentYkwNote:
     vtbls:
-#fail       - ea: 0x1419B5EA0
+      - ea: 0x1419FEC78
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentContentsFinderMenu:
     vtbls:
@@ -4967,7 +4967,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentRaidFinder:
     vtbls:
-#fail       - ea: 0x1419B2BE0
+      - ea: 0x1419FC5D8
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentGcArmyExpedition:
     vtbls:
@@ -5039,7 +5039,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentPvPDuelRequest:
     vtbls:
-#fail       - ea: 0x14199B6E0
+      - ea: 0x141A162F0
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentPvPHeader:
     vtbls:
@@ -5055,7 +5055,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentItemAppraisal:
     vtbls:
-#fail       - ea: 0x1419B72C8
+      - ea: 0x141A14DE0
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentItemInspection:
     vtbls:
@@ -5071,11 +5071,11 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentSnipe:
     vtbls:
-#fail       - ea: 0x1419B7368
+      - ea: 0x1419FD930
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMountSpeed:
     vtbls:
-#fail       - ea: 0x14199ACF8
+      - ea: 0x141A15CD8
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentPvPTeam:
     vtbls:
@@ -5095,7 +5095,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentTeleportHousingFriend:
     vtbls:
-#fail       - ea: 0x1419B7670
+      - ea: 0x1419FE4D0
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentContentMemberList:
     vtbls:
@@ -5151,7 +5151,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentAozNoteBook:
     vtbls:
-#fail       - ea: 0x1419B7790
+      - ea: 0x141A16EE0
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentEmj:
     vtbls:
@@ -5199,15 +5199,15 @@ classes:
         base: Client::UI::Agent::AgentDawn
   Client::UI::Agent::AgentHousingCatalogPreview:
     vtbls:
-#fail       - ea: 0x141A75D88
+      - ea: 0x141AC1390
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentQuestRedo:
     vtbls:
-#fail       - ea: 0x1419B78E0
+      - ea: 0x1419FC4E8
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentQuestRedoHud:
     vtbls:
-#fail       - ea: 0x1419B3848
+      - ea: 0x1419FC560
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentCircleList:
     vtbls:
@@ -5223,7 +5223,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMentorCondition:
     vtbls:
-#fail       - ea: 0x1419B37D0
+      - ea: 0x141A148A0
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentPerformanceMetronome:
     vtbls:
@@ -5251,7 +5251,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentTargetCircle:
     vtbls:
-#fail       - ea: 0x1419B4AD0
+      - ea: 0x1419FE3E0
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentCraftActionSimulator:
     vtbls:
@@ -5279,11 +5279,11 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentOrnamentNoteBook:
     vtbls:
-#fail       - ea: 0x1419B7B78
+      - ea: 0x141A16080
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentTourismMenu:
     vtbls:
-#fail       - ea: 0x1419B7C68
+      - ea: 0x1419FE5C0
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentStarlightGiftBox:
     vtbls:
@@ -5291,35 +5291,35 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentSpearFishing:
     vtbls:
-#fail       - ea: 0x1419B7D58
+      - ea: 0x1419FD9C8
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentOmikuji:
     vtbls:
-#fail       - ea: 0x14199B148
+      - ea: 0x141A15DD8
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentFittingShop:
     vtbls:
-#fail       - ea: 0x14199B1C0
+      - ea: 0x141A188A0
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentAkatsukiNote:
     vtbls:
-#fail       - ea: 0x14199B2B8
+      - ea: 0x141A16DC8
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentExHotbarEditor:
     vtbls:
-#fail       - ea: 0x14199B348
+      - ea: 0x141A182C0
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentBannerList:
     vtbls:
-#fail       - ea: 0x14199B968
+      - ea: 0x141AC1C18
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentBannerEditor:
     vtbls:
-#fail       - ea: 0x14199B9E0
+      - ea: 0x141AC1BA0
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentBannerUpdateView:
     vtbls:
-#fail       - ea: 0x14199BA58
+      - ea: 0x141AC1D58
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentPvPMap:
     vtbls:
@@ -5335,7 +5335,7 @@ classes:
         base: Client::UI::Misc::CharaView
   Client::UI::Agent::AgentTryon:
     vtbls:
-#fail       - ea: 0x1419B2418
+      - ea: 0x1419FC3B0
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentItemDetailBase:
     vtbls:
@@ -5350,11 +5350,11 @@ classes:
       - ea: 0x141A16F88
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x140C32190: ctor
-#fail       0x140C32AE0: OpenRegularDuty
-#fail       0x140C32CC0: OpenRouletteDuty
-#fail       0x140C330D0: SetContentRouletteRoleBonus
-#fail       0x140C35F90: GetInstance
+      0x140CCD9A0: ctor
+      0x140CCE2F0: OpenRegularDuty
+      0x140CCE4D0: OpenRouletteDuty
+      0x140CCE8E0: SetContentRouletteRoleBonus
+      0x140CD17A0: GetInstance # static
   Client::UI::Agent::AgentMap::MapMarkerStructSearchName:
     vtbls:
       - ea: 0x141A13E78
@@ -5366,38 +5366,38 @@ classes:
       - ea: 0x141A13E88
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x140C4F0C0: ctor
-#fail       0x140C4B210: AddGatheringTempMapMarker
-#fail       0x140C4A410: OpenMap
-#fail       0x140C56490: OpenMapByMapId
-#fail       0x140C4B550: SetFlagMapMarker # (this, territoryId, mapId, (float)x, (float)y, iconId)
-#fail       0x140C535C0: AddMapMarker
-#fail       0x140C539C0: AddMiniMapMarker
-#fail       0x140C5B230: CanUseTeleport # static
-#fail       0x140C557C0: ResetMapMarkers
-#fail       0x140C55830: CreateMapMarkers
-#fail       0x140C56010: ResetMiniMapMarkers
-#fail       0x140C56050: CreateMiniMapMarkers
+      0x140BD76F0: ctor
+      0x140BD3010: AddGatheringTempMapMarker
+      0x140BD2130: OpenMap
+      0x140BDEAF0: OpenMapByMapId
+      0x140BD33A0: SetFlagMapMarker # (this, territoryId, mapId, (float)x, (float)y, iconId)
+      0x140BDBBD0: AddMapMarker
+      0x140BDBFD0: AddMiniMapMarker
+      0x140BE39D0: CanUseTeleport # static
+      0x140BDDE20: ResetMapMarkers
+      0x140BDDE90: CreateMapMarkers
+      0x140BDE670: ResetMiniMapMarkers
+      0x140BDE6B0: CreateMiniMapMarkers
   Client::UI::Agent::AgentRecipeNote:
     vtbls:
-#fail       - ea: 0x1419B4628
+      - ea: 0x1419FC758
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x140CB87C0: ctor
-#fail       0x140CB9B60: OpenRecipeByRecipeId
-#fail       0x140CB9C80: OpenRecipeByItemId
-#fail       0x140CBF720: SearchRecipe
+      0x1409E0C20: ctor
+      0x1409E1FC0: OpenRecipeByRecipeId
+      0x1409E20E0: OpenRecipeByItemId
+      0x1409E7B80: SearchRecipe
   Client::UI::Agent::AgentRecipeTree:
     vtbls:
-#fail       - ea: 0x1419B46B0
+      - ea: 0x1419FC6E0
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentRecipeMaterialList:
     vtbls:
-#fail       - ea: 0x1419B4728
+      - ea: 0x1419FC668
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentRecipeProductList:
     vtbls:
-#fail       - ea: 0x1419B4800
+      - ea: 0x1419FC8F0
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentTeleport:
     vtbls:
@@ -5405,11 +5405,11 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentLoadingTips:
     vtbls:
-#fail       - ea: 0x1419B6248
+      - ea: 0x141A151C8
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentRevive:
     vtbls:
-#fail       - ea: 0x1419B3410
+      - ea: 0x1419FD340
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentChocoboRace:
     vtbls:
@@ -5458,19 +5458,19 @@ classes:
       - ea: 0x141A14ED0
         base: Client::UI::Agent::AgentItemDetailBase
     funcs:
-#fail       0x140C8D5D0: ctor
-#fail       0x140C8E520: OnItemHovered
+      0x140C38D70: ctor
+      0x140C39CC0: OnItemHovered
   Client::UI::Agent::AgentStatus::StatusCharaView:
     vtbls:
-#fail       - ea: 0x1419B4978
+      - ea: 0x1419FCD78
         base: Client::UI::Misc::CharaView
   Client::UI::Agent::AgentStatus:
     vtbls:
-#fail       - ea: 0x1419B49E0
+      - ea: 0x1419FCDE0
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMaterialize:
     vtbls:
-#fail       - ea: 0x1419B4CD8
+      - ea: 0x141A15590
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentContentsTimer:
     vtbls:
@@ -5481,7 +5481,7 @@ classes:
      - ea: 0x1419FC758
        base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x1409B6400: OpenGatherableByItemId
+      0x140BCFE00: OpenGatherableByItemId
   Client::UI::Agent::AgentMcguffin:
     vtbls:
       - ea: 0x141A01A08
@@ -5507,47 +5507,47 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMJIHud:
     vtbls:
-#fail       - ea: 0x14199BF18
+      - ea: 0x141AC2168
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMJIPouch:
     vtbls:
-#fail       - ea: 0x14199C020
+      - ea: 0x141AC1F00
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMJIBuildingMove:
     vtbls:
-#fail       - ea: 0x14199C098
+      - ea: 0x141AC2068
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMJICraftSchedule:
     vtbls:
-#fail       - ea: 0x14199C188
+      - ea: 0x141AC20F0
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMJIGatheringNoteBook:
     vtbls:
-#fail       - ea: 0x14199C278
+      - ea: 0x141AC2480
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMJIRecipeNoteBook:
     vtbls:
-#fail       - ea: 0x14199C2F0
+      - ea: 0x141AC2718
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMJICraftSales:
     vtbls:
-#fail       - ea: 0x14199C368
+      - ea: 0x141AC21F0
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMJIBuilding:
     vtbls:
-#fail       - ea: 0x14199C3E0
+      - ea: 0x141AC1F78
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMJIDisposeShop:
     vtbls:
-#fail       - ea: 0x14199C458
+      - ea: 0x141AC2278
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMJIAnimalManagement:
     vtbls:
-#fail       - ea: 0x14199C4D0
+      - ea: 0x141AC1E78
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMJIFarmManagement:
     vtbls:
-#fail       - ea: 0x14199C548
+      - ea: 0x141AC2368
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMJIEntrance:
     vtbls:
@@ -5555,15 +5555,15 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMJIGatheringHouse:
     vtbls:
-#fail       - ea: 0x14199C5C0
+      - ea: 0x141AC23E0
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMJIMinionManagement:
     vtbls:
-#fail       - ea: 0x14199C650
+      - ea: 0x141AC2600
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMJIMinionNoteBook:
     vtbls:
-#fail       - ea: 0x14199C6C8
+      - ea: 0x141AC2678
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMJISettings:
     vtbls:
@@ -5571,23 +5571,23 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentArchiveItem:
     vtbls:
-#fail       - ea: 0x14199B4D0
+      - ea: 0x141A170A0
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x1409D83F0: ctor
-#fail       0x1409D8420: dtor2
-#fail       0x1409D8480: ViewArchiveItem  
+      0x140CDADF0: ctor
+      0x140CDAE20: dtor2
+      0x140CDAE80: ViewArchiveItem  
   Client::UI::Agent::AgentVVDNotebook:
     vtbls:
-#fail       - ea: 0x14199C7D0
+      - ea: 0x141AC2970
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentVVDFinder:
     vtbls:
-#fail       - ea: 0x14199C758
+      - ea: 0x141AC28F8
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentTofuList:
     vtbls:
-#fail       - ea: 0x14199C970
+      - ea: 0x141AC2808
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentBannerInterface:
     vtbls:
@@ -5764,6 +5764,10 @@ classes:
     vtbls:
       - ea: 0x141A1D488
         base: Component::GUI::AtkUnitBase
+  Client::UI::AddonBuddyInspect:
+    vtbls:
+      - ea: 0x141A6C8B8
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonNowLoading:
     vtbls:
       - ea: 0x141A1D6D8
@@ -5846,7 +5850,7 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x140D94B50: ctor
-#fail       0x140DD5C50: UpdateResult
+      0x140D95930: UpdateResult
   Client::UI::AddonLookingForGroupDetail:
     vtbls:
       - ea : 0x141A24FE8
@@ -6119,7 +6123,7 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x140F92730: ctor
-#fail       0x14108DF60: ReceiveEvent_ToggleQuickGathering
+      0x14105F910: ReceiveEvent_ToggleQuickGathering
       0x140F92F30: ReceiveEvent_Gather
   Client::UI::AddonGatheringMasterpiece:
     vtbls:
@@ -6262,39 +6266,39 @@ classes:
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonMJIAnimalBreeding:
     vtbls:
-#fail       - ea: 0x141A45A08
+      - ea: 0x141A8EE80
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonMJIAnimalBreedingAutomatic:
     vtbls:
-#fail       - ea: 0x141A45C40
+      - ea: 0x141A8F0B8
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonMJIAnimalNameInputString:
     vtbls:
-#fail       - ea: 0x141A45E78
+      - ea: 0x141A8F2F0
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonMJIFarmManagement:
     vtbls:
-#fail       - ea: 0x141A460B0
+      - ea: 0x141A8F528
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonMJIFarmAutomatic:
     vtbls:
-#fail       - ea: 0x141A462E8
+      - ea: 0x141A8F760
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonMJIGatheringHouse:
     vtbls:
-#fail       - ea: 0x141A46520
+      - ea: 0x141A8F998
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonMJIGatheringHouseExplore:
     vtbls:
-#fail       - ea: 0x141A46778
+      - ea: 0x141A8FBF0
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonMJIBuilding:
     vtbls:
-#fail       - ea: 0x141A469D0
+      - ea: 0x141A8FE48
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonMJIBuildingProgress:
     vtbls:
-#fail       - ea: 0x141A46C08
+      - ea: 0x141A90080
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonMJIGatheringNoteBook:
     vtbls:
@@ -6330,7 +6334,7 @@ classes:
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonMJISetting:
     vtbls:
-#fail       - ea: 0x141A48258
+      - ea: 0x141A916D0
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonMJIPadGuide:
     vtbls:
@@ -6431,7 +6435,7 @@ classes:
       - ea: 0x141AA27C8
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x141146AF0: ResizeForPartySize
+      0x141126C70: ResizeForPartySize
   Client::UI::AddonAllianceListX:
     vtbls:
       - ea: 0x141AA2A08
@@ -6481,23 +6485,23 @@ classes:
       - ea: 0x141AAB1A0
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x1411838B0: ctor
-#fail       0x141188570: AddonOverlayMouseMovedEvent
-#fail       0x1411887A0: AddonOverlayMouseClickEvent
-#fail       0x141188BA0: AddonOverlayMouseReleaseEvent
-#fail       0x14118A850: SetAddonScale
+      0x141163C10: ctor
+      0x141168B40: AddonOverlayMouseMovedEvent
+      0x141168D70: AddonOverlayMouseClickEvent
+      0x141169170: AddonOverlayMouseReleaseEvent
+      0x14116AE50: SetAddonScale
   Client::UI::AddonRetainerItemTransferList:
     vtbls:
       - ea: 0x141AAC648
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x14119DCE0: ctor
+      0x14117E620: ctor
   Client::UI::AddonRetainerItemTransferProgress:
     vtbls:
       - ea: 0x141AAC9F8
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x14119E3B0: ctor
+      0x14117ECF0: ctor
   Client::UI::AddonActionMenuReplaceList:
     vtbls:
       - ea: 0x141A942B8
@@ -6620,7 +6624,7 @@ classes:
         base: Client::Game::Object::GameObject
   Client::Game::Object::BKJObject:
     vtbls:
-#fail       - ea: 0x141B710C0
+      - ea: 0x141BD8B68
         base: Client::Game::Object::GameObject
   Client::Graphics::JobSystem<Client::Graphics::Culling::CullingManager,Client::Graphics::Culling::CullingJobOpt>:
     vtbls:
