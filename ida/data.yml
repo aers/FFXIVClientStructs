@@ -55,7 +55,7 @@ functions:
   0x140060990: MemoryManager_AllocDefaultSpace
   0x140060A20: MemoryManager_Alloc
   0x140062130: MemoryManager_GetDefaultSpace
-#fail   0x140062680: MemoryManager_GetApricotSpace
+  0x1400621F0: MemoryManager_GetApricotSpace
   0x140062210: MemoryManager_GetAnimationSpace
   0x140062230: MemoryManager_GetUISpace
   0x1400622B0: MemoryManager_GetFileSpace
@@ -69,7 +69,7 @@ functions:
   0x1401DE150: Client::System::Resource::Handle::ModelResourceHandle_GetMaterialFileNameBySlot
   0x1402E2FB0: CountdownPointer
   0x14032B480: std::vector_SetSize
-#fail   0x140468120: GetGameObjectByIndex
+  0x140643E70: GetGameObjectByIndex
   0x14048AA50: PrepareColorSet
   0x14048AD20: ReadStainingTemplate
   0x1404DE5D0: Client::Game::Control::InputManager_GetInputStatus
@@ -90,8 +90,8 @@ functions:
   0x140B04D10: SetCondition
   0x140B05050: SetConditionByPermissionAndLog
   0x140B05520: IsLocalPlayerLalafell
-#fail   0x140C7A2E0: CreateSelectYesno
-#fail   0x1411869E0: Client::UI::AddonHudLayoutScreen::MoveableAddonInfoStruct_UpdateAddonPosition
+  0x140C28780: CreateSelectYesno
+  0x141166EA0: Client::UI::AddonHudLayoutScreen::MoveableAddonInfoStruct_UpdateAddonPosition
   0x1412AF2E0: Client::Graphics::Kernel::CreateShader # static function
   0x1412BA5F0: NormalizeCustomizeData
   0x1412EC850: Client::Game::Control::InputManager::IsAutoRunning # static function, might belong in a different class.
@@ -593,17 +593,17 @@ classes:
     funcs:
       0x140B6C400: Initialize # static
       0x140B6C450: Destroy    # static
-#fail       0x140B71440: GetSingleton  # static
+      0x140B6C490: GetSingleton  # static
       0x140B6F8B0: ctor
       0x140B6FB30: dtor
       0x140B6E570: LoadDemandResearchPacket
       0x140B6EAF0: IsRecipeUnlocked # (this, recipeId)
-#fail       0x140B738A0: IsPouchItemLocked # (this, pouchItemId)
-#fail       0x140B71C30: IsFunctionUnlocked # (this, functionId)
+      0x140B6EB20: IsPouchItemLocked # (this, pouchItemId)
+      0x140B6CDF0: IsFunctionUnlocked # (this, functionId)
       0x140B6D020: HandleActorControlPacket
       0x140B6DB50: HandleInboundPacket
-#fail       0x140B73CE0: GetVisibleMinimapIcons
-#fail       0x140B738B0: IsItemLocked
+      0x140B6EFA0: GetVisibleMinimapIcons
+      0x140B6EB30: IsItemLocked
       0x140B6ECF0: GetPastureSlotCount
       0x140B6EE80: GetFarmSlotCount
   Client::Game::MJI::IslandState:
@@ -611,9 +611,9 @@ classes:
       0x140B724B0: ctor
   Client::Game::MJI::MJIPastureHandler:
     funcs:
-#fail       0x1413EEA70: GetCurrentRoamingMinionCount
+      0x141456940: GetCurrentRoamingMinionCount
       0x141456AB0: SetMinionPlaceStatus  # (this, minionId, isPlaced)
-#fail       0x1413EE7B0: ExecuteReleaseMinion  # (this, minionId, areaId)
+      0x141456560: ExecuteReleaseMinion  # (this, minionId, areaId)
       0x1414566F0: ExecuteRecallMinion   # (this, minionId)
   Client::System::String::Utf8String:
     funcs:
@@ -788,7 +788,7 @@ classes:
       - ea: 0x142173510
         pointer: False
     funcs:
-#fail       0x1409465F0: IsItemInCabinet        # item is a cabinet-specific ID, not generic Item.
+      0x14095B8D0: IsItemInCabinet        # item is a cabinet-specific ID, not generic Item.
   Client::Game::UI::ContentsNote:
     vtbls:
       - ea: 0x1419FB100
@@ -1098,7 +1098,7 @@ classes:
   Common::Component::Excel::ExcelModuleInterface: # these are two different classes
     vtbls:
       - ea: 0x141CFBE80
-#fail       - ea: 0x141C90F70
+      - ea: 0x141CFBF20
         base: Common::Component::Excel::ExcelResourceListener
     vfuncs:
       1: GetSheetByIndex
@@ -1368,7 +1368,7 @@ classes:
       0: dtor
   Client::UI::Info::InfoProxyPageInterface:
     vtbls:
-#fail       - ea: 0x1418EBD50
+      - ea: 0x14194E1B8
         base: Client::UI::Info::InfoProxyInterface
   Client::UI::Info::InfoModule:
     vtbls:
@@ -1400,7 +1400,7 @@ classes:
     funcs:
       0x1400EB830: ctor
       0x1400EB950: dtor2
-#fail       0x1400EB4D0: GetContentIDForEntry
+      0x1400EC770: GetContentIDForEntry
       0x1400EC790: SearchEntryByName
       0x1400EC890: GetEntry
       0x1400ECEF0: SearchEntryByContenID
@@ -1433,7 +1433,7 @@ classes:
       0x1400F1BE0: GetGroupIndex # Static
       0x1400F2170: IsLocalPlayerInParty # Static
       0x1400F21B0: GetMember # Static
-#fail       0x1400F0C80: GetMemberByContentId # Static
+      0x1400F2260: GetMemberByContentId # Static
       0x1400F2320: GetMemberByObjectId # Static
       0x1400F23D0: IsContentIdInParty # Static
   Client::UI::Info::InfoProxyParty:
@@ -2036,7 +2036,7 @@ classes:
       0x140371210: MakeProjectionMatrix
   Client::Graphics::Render::ShadowCamera:
     vtbls:
-#fail       - ea: 0x14191B9E8
+      - ea: 0x14197E740
         base: Client::Graphics::Render::Camera
   Client::Graphics::Render::Camera_CascadeShadow:
     vtbls:
@@ -2730,8 +2730,8 @@ classes:
     funcs:
       0x1404F7DB0: SetValue
       0x1404F7F90: SetValueUtf8
-#fail       0x1404EEDF0: SetValueIfDifferent
-#fail       0x1404EEE20: SetValueIfDifferentUtf8
+      0x1404F7FF0: SetValueIfDifferent
+      0x1404F8020: SetValueIfDifferentUtf8
       0x1404F8060: SetValueForced
       0x1404F80A0: SetValueForcedUtf8
   Component::GUI::ExtendArrayData:
@@ -2828,7 +2828,7 @@ classes:
       0x14051AFA0: RegisterEvent
       0x14051AFE0: UnregisterEvent
       0x14051B020: DispatchEvent
-#fail       0x1405120F0: GetPositionFloat
+      0x14051B390: GetPositionFloat
       0x14051B3B0: SetPositionFloat
       0x14051B400: GetPositionShort
       0x14051B430: SetPositionShort
@@ -2853,7 +2853,7 @@ classes:
       0x14051BC90: SetColor
       0x14051BCD0: SetAddRGB
       0x14051BD20: SetMultiplyRGB
-#fail       0x140512AD0: GetPriority
+      0x14051BD70: GetPriority
       0x14051BD90: SetPriority
       0x14051BDB0: IsVisible
       0x14051BDE0: SetVisibility
@@ -2903,7 +2903,7 @@ classes:
     funcs:
       0x14058F260: ctor
       0x140520860: SetText
-#fail       0x1405175B0: SetNumber
+      0x1405208A0: SetNumber
       0x140520A00: UpdateWidth
   Component::GUI::AtkCollisionNode:
     vtbls:
@@ -3507,7 +3507,7 @@ classes:
         base: Component::Log::LogModule
     funcs:
       0x14066DB70: ctor
-#fail       0x140660700: PrintMessage
+      0x14066F410: PrintMessage
       0x1406709E0: ShowLogMessage
       0x1406739D0: GetContentIdForLogMessage
       0x140673A60: GetLogMessage
