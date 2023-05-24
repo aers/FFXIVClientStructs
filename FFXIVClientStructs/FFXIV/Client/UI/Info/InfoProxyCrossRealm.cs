@@ -1,7 +1,7 @@
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
 [InfoProxy(InfoProxyId.CrossRealmParty)]
-[StructLayout(LayoutKind.Explicit, Size = 0x14A0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x1620)]
 public unsafe partial struct InfoProxyCrossRealm
 {
     [FieldOffset(0x00)] public InfoProxyInterface InfoProxyInterface;
@@ -17,7 +17,7 @@ public unsafe partial struct InfoProxyCrossRealm
     [FieldOffset(0x392)] public byte IsPartyLeader;
     [FieldOffset(0x393)] public byte IsInCrossRealmParty;
 
-    [FieldOffset(0x3A0)] public fixed byte CrossRealmGroupArray[6 * 0x288];
+    [FieldOffset(0x3A0)] public fixed byte CrossRealmGroupArray[6 * 0x2C8];
 
     public ReadOnlySpan<CrossRealmGroup> CrossRealmGroupSpan
     {
@@ -61,11 +61,11 @@ public unsafe partial struct InfoProxyCrossRealm
     public static partial bool IsContentIdInParty(ulong contentId);
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x288)]
+[StructLayout(LayoutKind.Explicit, Size = 0x2C8)]
 public unsafe struct CrossRealmGroup
 {
     [FieldOffset(0x00)] public byte GroupMemberCount;
-    [FieldOffset(0x08)] public fixed byte GroupMembers[8 * 0x50];
+    [FieldOffset(0x08)] public fixed byte GroupMembers[8 * 0x58];
 
     public ReadOnlySpan<CrossRealmMember> GroupMemberSpan
     {
@@ -79,17 +79,17 @@ public unsafe struct CrossRealmGroup
     }
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x50)]
+[StructLayout(LayoutKind.Explicit, Size = 0x58)]
 public unsafe struct CrossRealmMember
 {
-    [FieldOffset(0x00)] public ulong ContentId;
-    [FieldOffset(0x10)] public uint ObjectId;
-    [FieldOffset(0x18)] public byte Level;
-    [FieldOffset(0x1A)] public short HomeWorld;
-    [FieldOffset(0x1C)] public short CurrentWorld;
-    [FieldOffset(0x1E)] public byte ClassJobId;
-    [FieldOffset(0x22)] public fixed byte Name[30];
-    [FieldOffset(0x48)] public byte MemberIndex;
-    [FieldOffset(0x49)] public byte GroupIndex;
-    [FieldOffset(0x4B)] public byte IsPartyLeader;
+    [FieldOffset(0x08)] public ulong ContentId;
+    [FieldOffset(0x18)] public uint ObjectId;
+    [FieldOffset(0x20)] public byte Level;
+    [FieldOffset(0x22)] public short HomeWorld;
+    [FieldOffset(0x24)] public short CurrentWorld;
+    [FieldOffset(0x26)] public byte ClassJobId;
+    [FieldOffset(0x2B)] public fixed byte Name[30];
+    [FieldOffset(0x50)] public byte MemberIndex;
+    [FieldOffset(0x51)] public byte GroupIndex;
+    [FieldOffset(0x53)] public byte IsPartyLeader;
 }
