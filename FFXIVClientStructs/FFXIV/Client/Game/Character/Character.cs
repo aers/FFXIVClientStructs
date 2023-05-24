@@ -31,11 +31,16 @@ public unsafe partial struct Character
     [FieldOffset(0x1D6)] public ushort MaxGatheringPoints;
     [FieldOffset(0x1D8)] public ushort CraftingPoints;
     [FieldOffset(0x1DA)] public ushort MaxCraftingPoints;
-
     [FieldOffset(0x1DC)] public short TransformationId;
-    [FieldOffset(0x1DE)] public short StatusEffectVFXId;
+    [FieldOffset(0x1DE)] public short StatusEffectVFXId; // outdated since TitleID moved here
+    [FieldOffset(0x1DE)] public ushort TitleID;
+
     [FieldOffset(0x1E2)] public byte ClassJob;
     [FieldOffset(0x1E3)] public byte Level;
+
+    [FieldOffset(0x1ED)] public byte ShieldValue;
+
+    [FieldOffset(0x1EF)] public byte OnlineStatus;
 
     #endregion
 
@@ -65,13 +70,10 @@ public unsafe partial struct Character
 
     [FieldOffset(0x1B1C)] public ushort CurrentWorld;
     [FieldOffset(0x1B1E)] public ushort HomeWorld;
-    [FieldOffset(0x1DE)] public ushort TitleID;
     [FieldOffset(0x1B26)] public byte EventState; // Leave for backwards compat. See Mode.
     [FieldOffset(0x1B26)] public CharacterModes Mode;
     [FieldOffset(0x1B27)] public byte ModeParam; // Different purpose depending on mode. See CharacterModes for more info.
-    [FieldOffset(0x1B28)] public byte OnlineStatus;
     [FieldOffset(0x1B29)] public byte Battalion; // used for determining friend/enemy state
-    [FieldOffset(0x1ED)] public byte ShieldValue;
     [FieldOffset(0x1B1B)] public byte StatusFlags;
     [FieldOffset(0x1B1F)] public byte StatusFlags4; // 0x80 flagged when permanent wetness in GPose is toggled.
     [FieldOffset(0x1AE8)] public uint CompanionOwnerID;
