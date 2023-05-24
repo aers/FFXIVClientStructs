@@ -88,7 +88,6 @@ functions:
   0x1400A7FB0: IsRolePlaying
   0x140988600: GetTeleportCost
   0x140B04D10: SetCondition
-  0x140B05050: SetConditionByPermissionAndLog
   0x140B05520: IsLocalPlayerLalafell
   0x140C28780: CreateSelectYesno
   0x141166EA0: Client::UI::AddonHudLayoutScreen::MoveableAddonInfoStruct_UpdateAddonPosition
@@ -244,8 +243,8 @@ functions:
   0x140B049A0: IsInMordionGaol # if this returns true, i'm sorry for you
   0x140B580D0: WorldToScreenPoint
   0x1416A0AE0: OodleNew # oodle code starts here
-  0x1416A0B50: OodleDelete 
-  0x1416A0B80: rrPrintf_v1 
+  0x1416A0B50: OodleDelete
+  0x1416A0B80: rrPrintf_v1
   0x1416A2B20: OodleNetwork1UDP_CountingState::Count
   0x1416A33E0: OodleNetwork1UDP_State::Decode
   0x1416A40A0: OodleNetwork1UDP_State::Encode
@@ -259,7 +258,7 @@ functions:
   0x1416AA420: OodleNetwork1UDP_Encode
   0x1416AAA70: OodleNetwork1UDP_State_Size
   0x1416AAF20: OodleNetwork1UDP_Train
-  0x1416AC2C0: OodleNetwork1_Shared_SetWindow  
+  0x1416AC2C0: OodleNetwork1_Shared_SetWindow
   0x1416AC3F0: OodleNetwork1_Shared_Size
   0x1416AF730: rrArithDecodeInit
   0x1416AF7D0: rrArithEncodeFlush
@@ -673,7 +672,7 @@ classes:
       0x140527560: ExpandNodeListSize
       0x140527BC0: DuplicateComponentNode
       0x140527700: SeardNodeById
-      0x140527760: SearchNodeByIndex 
+      0x140527760: SearchNodeByIndex
       0x1405277D0: GetDuplicatedNode
   Component::GUI::AtkArrayDataHolder:
     funcs:
@@ -2937,7 +2936,7 @@ classes:
       15: GetSizeScaled
       16: Hide2
       17: SetScaleToHudLayoutScale
-      18: ShouldCollideWithWindow 
+      18: ShouldCollideWithWindow
       39: Initialize
       40: Finalize
       41: Update
@@ -3562,7 +3561,7 @@ classes:
       0x1406900F0: EquipGearsetInternal
       0x140690780: CreateGearset
       0x140690810: DeleteGearset
-      0x1406909E0: UpdateGearset # (this, gearsetIndext)
+      0x1406909E0: UpdateGearset # (this, gearsetIndex)
       0x140690E20: LinkGlamourPlate
       0x140690F40: RemoveGlamourPlateLink
       0x140690F50: HasLinkedGlamourPlate
@@ -5576,7 +5575,7 @@ classes:
     funcs:
       0x140CDADF0: ctor
       0x140CDAE20: dtor2
-      0x140CDAE80: ViewArchiveItem  
+      0x140CDAE80: ViewArchiveItem
   Client::UI::Agent::AgentVVDNotebook:
     vtbls:
       - ea: 0x141AC2970
@@ -7014,7 +7013,7 @@ classes:
     funcs:
       0x1418410C0: load1 # hkStreamReader, hkClass, hkTypeInfoRegistry
       0x141840F80: load2 # hkStreamReader, hkTypeInfoRegistry
-      0x141840F20: load3 # hkStreamReader    
+      0x141840F20: load3 # hkStreamReader
   hkMatrix4f:
     funcs:
       0x1417B2080: ?set4x4ColumnMajor@hkMatrix4f@@QEAAXPEBM@Z
