@@ -3637,12 +3637,12 @@ classes:
       29: UpdateRadius
       39: Update
       47: GetNpcID
-      56: IsDead
-      57: IsNotMounted
-      58: Terminate
-      59: Destroy
-      60: IsCharacter
-      67: OnInitialize
+      57: IsDead
+      58: IsNotMounted
+      59: Terminate
+      60: Destroy
+      61: IsCharacter
+      68: OnInitialize
     funcs:
       0x140734100: IsMountOrOrnament
       0x140734620: SetDrawOffset
@@ -3657,14 +3657,14 @@ classes:
       - ea: 0x1419AE498
         base: Client::Graphics::Vfx::VfxDataListenner
     vfuncs:
-      75: GetModelChara
-      78: GetStatusManager
-      79: GetStatusManager_2
-      80: GetCastInfo
-      81: GetCastInfo_2
-      84: GetForayInfo
-      85: GetForayInfo_2
-      86: IsMount
+      76: GetModelChara
+      79: GetStatusManager
+      80: GetStatusManager_2
+      81: GetCastInfo
+      82: GetCastInfo_2
+      85: GetForayInfo
+      86: GetForayInfo_2
+      87: IsMount
     funcs:
       0x140733650: IsCasting
       0x140742A40: IsMounted
