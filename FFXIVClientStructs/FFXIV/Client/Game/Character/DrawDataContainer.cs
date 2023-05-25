@@ -26,7 +26,7 @@ public unsafe partial struct DrawDataContainer
     [FieldOffset(0x14C)] public EquipmentModelId Top;
     [FieldOffset(0x150)] public EquipmentModelId Arms;
     [FieldOffset(0x154)] public EquipmentModelId Legs;
-    [FieldOffset(0x148)] public EquipmentModelId Feet;
+    [FieldOffset(0x158)] public EquipmentModelId Feet;
     [FieldOffset(0x15C)] public EquipmentModelId Ear;
     [FieldOffset(0x160)] public EquipmentModelId Neck;
     [FieldOffset(0x164)] public EquipmentModelId Wrist;
