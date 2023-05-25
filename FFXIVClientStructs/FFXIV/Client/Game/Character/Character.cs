@@ -90,8 +90,18 @@ public unsafe partial struct Character
     // 0x10 = AllianceMember
     // 0x20 = Friend
     [FieldOffset(0x1F3)] public byte StatusFlags2;
+    // 0x1 = WeaponDrawn
+    // 0x2 = Unknown (Appears to always be set)
+    [FieldOffset(0x1B38)] public byte StatusFlags3;
     [FieldOffset(0x1B1F)] public byte StatusFlags4; // old - 0x80 flagged when permanent wetness in GPose is toggled.
 
+    public bool IsWeaponDrawn => (StatusFlags3 & 0x1) == 0x1;
+    public bool InCombat => (StatusFlags & 0x20) == 0x20;
+    public bool IsHostile => (StatusFlags & 0x10) == 0x10;
+    public bool IsCasting => (GetCastInfo()->IsCasting & 0x1) == 0x1;
+    public bool IsPartyMember => (StatusFlags2 & 0x8) == 0x8;
+    public bool IsAllianceMember => (StatusFlags2 & 0x10) == 0x10;
+    public bool IsFriend => (StatusFlags2 & 0x20) == 0x20;
 
     [MemberFunction("E8 ?? ?? ?? ?? 49 3B C7 0F 84")]
     public partial ulong GetTargetId();
