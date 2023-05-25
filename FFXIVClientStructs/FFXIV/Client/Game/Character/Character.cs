@@ -97,7 +97,7 @@ public unsafe partial struct Character
     [FieldOffset(0x1B1F)] public byte StatusFlags4; // old - 0x80 flagged when permanent wetness in GPose is toggled.
 
     public bool IsWeaponDrawn => (StatusFlags3 & 0x1) == 0x1;
-    public bool OffhandDrawn => (StatusFlags & 0x40) == 0x40;
+    public bool IsOffhandDrawn => (StatusFlags & 0x40) == 0x40;
     public bool InCombat => (StatusFlags & 0x20) == 0x20;
     public bool IsHostile => (StatusFlags & 0x10) == 0x10;
     public bool IsCasting => (GetCastInfo()->IsCasting & 0x1) == 0x1;
