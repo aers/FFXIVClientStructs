@@ -44,6 +44,7 @@ public unsafe partial struct Character
 
     #endregion
 
+    [FieldOffset(0x641)] public byte CPoseState;
     [FieldOffset(0x660)] public MountContainer Mount;
     [FieldOffset(0x6C8)] public CompanionContainer Companion;
     [FieldOffset(0x6E8)] public DrawDataContainer DrawData;
@@ -60,8 +61,9 @@ public unsafe partial struct Character
 
     [FieldOffset(0x19C8)] public VfxData* VfxData; 
     [FieldOffset(0x19D0)] public VfxData* VfxData2;
-    [FieldOffset(0x19F8)] public VfxData* Omen; 
+    [FieldOffset(0x19F8)] public VfxData* Omen;
 
+    [FieldOffset(0x1A4C)] public float Alpha;
     [FieldOffset(0x1A80)] public Companion* CompanionObject; // minion
     [FieldOffset(0x1A98)] public fixed byte FreeCompanyTag[6];
     [FieldOffset(0x1AB8)] public ulong TargetObjectID;
@@ -94,7 +96,8 @@ public unsafe partial struct Character
     // 0x1 = WeaponDrawn
     // 0x2 = Unknown (Appears to always be set)
     [FieldOffset(0x1B38)] public byte StatusFlags3;
-    [FieldOffset(0x1B1F)] public byte StatusFlags4; // old - 0x80 flagged when permanent wetness in GPose is toggled.
+    // 0x20 = GPose wetness toggled
+    [FieldOffset(0x1B3A)] public byte StatusFlags4;
 
     public bool IsWeaponDrawn => (StatusFlags3 & 0x1) == 0x1;
     public bool IsOffhandDrawn => (StatusFlags & 0x40) == 0x40;
@@ -104,6 +107,12 @@ public unsafe partial struct Character
     public bool IsPartyMember => (StatusFlags2 & 0x8) == 0x8;
     public bool IsAllianceMember => (StatusFlags2 & 0x10) == 0x10;
     public bool IsFriend => (StatusFlags2 & 0x20) == 0x20;
+
+    public bool IsGPoseWet
+    {
+        get => (StatusFlags4 & 0x20) == 0x20;
+        set => StatusFlags4 = (byte) (value ? StatusFlags4 | 0x20 : StatusFlags4 & ~0x20);
+    }
 
     [MemberFunction("E8 ?? ?? ?? ?? 49 3B C7 0F 84")]
     public partial ulong GetTargetId();
