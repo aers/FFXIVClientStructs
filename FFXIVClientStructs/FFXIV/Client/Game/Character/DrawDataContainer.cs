@@ -26,7 +26,7 @@ public unsafe partial struct DrawDataContainer
     [FieldOffset(0x14C)] public EquipmentModelId Top;
     [FieldOffset(0x150)] public EquipmentModelId Arms;
     [FieldOffset(0x154)] public EquipmentModelId Legs;
-    [FieldOffset(0x148)] public EquipmentModelId Feet;
+    [FieldOffset(0x158)] public EquipmentModelId Feet;
     [FieldOffset(0x15C)] public EquipmentModelId Ear;
     [FieldOffset(0x160)] public EquipmentModelId Neck;
     [FieldOffset(0x164)] public EquipmentModelId Wrist;
@@ -78,8 +78,8 @@ public unsafe partial struct CustomizeData
 [StructLayout(LayoutKind.Explicit, Size = 8)]
 public struct WeaponModelId
 {
-    [FieldOffset(0)] public ushort Type;
-    [FieldOffset(2)] public ushort Id;
+    [FieldOffset(0)] public ushort Id;
+    [FieldOffset(2)] public ushort Type;
     [FieldOffset(4)] public ushort Variant;
     [FieldOffset(6)] public byte   Stain;
 
