@@ -26,7 +26,7 @@ public unsafe struct AgentExplorationResultInterface {
 	[FieldOffset(0x30)] public ExplorationResultData* Data;
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x3CB0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x4F70)]
 public unsafe partial struct ExplorationResultData {
     [FixedSizeArray<AtkValue>(151)]
     [FieldOffset(0x00)] public fixed byte ValueArray[0x10 * 151];

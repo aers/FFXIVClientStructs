@@ -3,7 +3,7 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
-[StructLayout(LayoutKind.Explicit, Size = 0x3E8)]
+[StructLayout(LayoutKind.Explicit, Size = 0x418)]
 public unsafe partial struct InfoProxy25
 {
     [FieldOffset(0x00)] public InfoProxyInterface InfoProxyInterface;

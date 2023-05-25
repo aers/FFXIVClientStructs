@@ -4,7 +4,7 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.GrandCompanySupply)]
-[StructLayout(LayoutKind.Explicit, Size = 0x98)]
+[StructLayout(LayoutKind.Explicit, Size = 0x2F8)]
 public unsafe struct AgentGrandCompanySupply
 {
     [FieldOffset(0x00)] public AgentInterface AgentInterface;

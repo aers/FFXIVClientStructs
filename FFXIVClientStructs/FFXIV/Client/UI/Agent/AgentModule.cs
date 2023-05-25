@@ -4,9 +4,9 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 // Client::UI::Agent::AgentModule
 
-// size = 0xC10
+// size = 0xDB8
 // ctor E8 ?? ?? ?? ?? 48 8B 85 ?? ?? ?? ?? 49 8B CF 48 89 87
-[StructLayout(LayoutKind.Explicit, Size = 0xD78)]
+[StructLayout(LayoutKind.Explicit, Size = 0xDB8)]
 public unsafe partial struct AgentModule
 {
     public static AgentModule* Instance() => Framework.Instance()->GetUiModule()->GetAgentModule();

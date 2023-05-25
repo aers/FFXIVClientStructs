@@ -4,7 +4,7 @@
 //   Client::Graphics::Kernel::Notifier
 
 // WARNING: THIS IS OUT OF DATE
-[StructLayout(LayoutKind.Explicit, Size = 0x480)]
+[StructLayout(LayoutKind.Explicit, Size = 0x4A0)]
 public unsafe partial struct RenderTargetManager
 {
     [FieldOffset(0x0)] public void* vtbl;
