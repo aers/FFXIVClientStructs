@@ -78,8 +78,8 @@ public unsafe partial struct CustomizeData
 [StructLayout(LayoutKind.Explicit, Size = 8)]
 public struct WeaponModelId
 {
-    [FieldOffset(0)] public ushort Type;
-    [FieldOffset(2)] public ushort Id;
+    [FieldOffset(0)] public ushort Id;
+    [FieldOffset(2)] public ushort Type;
     [FieldOffset(4)] public ushort Variant;
     [FieldOffset(6)] public byte   Stain;
 
