@@ -35,7 +35,7 @@ public unsafe partial struct EventFramework
 	    if (director == null || director->Info.EventId.Type != EventHandlerType.InstanceContentDirector)
 		    return null;
 	    var instanceDirector = (InstanceContentDirector*)director;
-	    if (instanceDirector->InstanceContentType != 9)
+	    if (instanceDirector->InstanceContentType != InstanceContentType.DeepDungeon)
 		    return null;
 	    return (InstanceContentDeepDungeon*)director;
     }
