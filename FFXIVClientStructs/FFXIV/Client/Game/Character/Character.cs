@@ -31,11 +31,16 @@ public unsafe partial struct Character
     [FieldOffset(0x1D6)] public ushort MaxGatheringPoints;
     [FieldOffset(0x1D8)] public ushort CraftingPoints;
     [FieldOffset(0x1DA)] public ushort MaxCraftingPoints;
-
     [FieldOffset(0x1DC)] public short TransformationId;
-    [FieldOffset(0x1DE)] public short StatusEffectVFXId;
+    [FieldOffset(0x1DE)] public short StatusEffectVFXId; // outdated since TitleID moved here
+    [FieldOffset(0x1DE)] public ushort TitleID;
+
     [FieldOffset(0x1E2)] public byte ClassJob;
     [FieldOffset(0x1E3)] public byte Level;
+
+    [FieldOffset(0x1ED)] public byte ShieldValue;
+
+    [FieldOffset(0x1EF)] public byte OnlineStatus;
 
     #endregion
 
@@ -53,9 +58,9 @@ public unsafe partial struct Character
 
     [FieldOffset(0x17C0)] public Balloon Balloon;
 
-    [FieldOffset(0x19C8)] public VfxData* VfxData; 
+    [FieldOffset(0x19C8)] public VfxData* VfxData;
     [FieldOffset(0x19D0)] public VfxData* VfxData2;
-    [FieldOffset(0x19F8)] public VfxData* Omen; 
+    [FieldOffset(0x19F8)] public VfxData* Omen;
 
     [FieldOffset(0x1A80)] public Companion* CompanionObject; // minion
     [FieldOffset(0x1A98)] public fixed byte FreeCompanyTag[6];
@@ -65,14 +70,11 @@ public unsafe partial struct Character
 
     [FieldOffset(0x1B1C)] public ushort CurrentWorld;
     [FieldOffset(0x1B1E)] public ushort HomeWorld;
-    [FieldOffset(0x1DE)] public ushort TitleID;
     [FieldOffset(0x1B26)] public byte EventState; // Leave for backwards compat. See Mode.
     [FieldOffset(0x1B26)] public CharacterModes Mode;
     [FieldOffset(0x1B27)] public byte ModeParam; // Different purpose depending on mode. See CharacterModes for more info.
-    [FieldOffset(0x1B28)] public byte OnlineStatus;
     [FieldOffset(0x1B29)] public byte Battalion; // used for determining friend/enemy state
-    [FieldOffset(0x1ED)] public byte ShieldValue;
-    [FieldOffset(0x1AE8)] public uint CompanionOwnerID;
+    [FieldOffset(0x1B10)] public uint CompanionOwnerID;
 
     // Note: These 2 status flags might be just an ushort instead of 2 separate bytes.
 
@@ -115,7 +117,7 @@ public unsafe partial struct Character
 
     [VirtualFunction(87)]
     public partial bool IsMount();
-    
+
     [StructLayout(LayoutKind.Explicit, Size = 0x170)]
     public struct CastInfo
     {
@@ -145,46 +147,51 @@ public unsafe partial struct Character
     public struct ForayInfo
     {
         [FieldOffset(0x00)] public byte ForayRank;
-        
+
         //bozja
-        public byte ResistanceRank {
+        public byte ResistanceRank
+        {
             get => ForayRank;
             set => ForayRank = value;
         }
 
         //eureka
-        public byte ElementalLevel  {
+        public byte ElementalLevel
+        {
             get => ForayRank;
             set => ForayRank = value;
         }
         [FieldOffset(0x01)] public EurekaElement Element; //only on enemies
     }
-    
+
     //0x10 bytes are from the base class which is just vtable + gameobject ptr (same as Companion-/DrawDataContainer)
     [StructLayout(LayoutKind.Explicit, Size = 0x60)]
-    public struct MountContainer {
-	    [FieldOffset(0x08)] public BattleChara* OwnerObject;
-	    [FieldOffset(0x10)] public Character* MountObject;
-	    [FieldOffset(0x18)] public ushort MountId;
-	    [FieldOffset(0x1C)] public float DismountTimer;
-	    //1 in dismount animation, 4 = instant delete mount when dismounting (used for npcs and such)
-	    [FieldOffset(0x20)] public byte Flags;
-	    [FieldOffset(0x24)] public fixed uint MountedObjectIds[7];
+    public struct MountContainer
+    {
+        [FieldOffset(0x08)] public BattleChara* OwnerObject;
+        [FieldOffset(0x10)] public Character* MountObject;
+        [FieldOffset(0x18)] public ushort MountId;
+        [FieldOffset(0x1C)] public float DismountTimer;
+        //1 in dismount animation, 4 = instant delete mount when dismounting (used for npcs and such)
+        [FieldOffset(0x20)] public byte Flags;
+        [FieldOffset(0x24)] public fixed uint MountedObjectIds[7];
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]
-    public struct CompanionContainer {
-	    [FieldOffset(0x08)] public BattleChara* OwnerObject;
-	    [FieldOffset(0x10)] public Companion* CompanionObject;
-	    //used if minion is summoned but the object slot is taken by a mount
-	    [FieldOffset(0x18)] public ushort CompanionId;
+    public struct CompanionContainer
+    {
+        [FieldOffset(0x08)] public BattleChara* OwnerObject;
+        [FieldOffset(0x10)] public Companion* CompanionObject;
+        //used if minion is summoned but the object slot is taken by a mount
+        [FieldOffset(0x18)] public ushort CompanionId;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x28)]
-    public struct OrnamentContainer {
-	    [FieldOffset(0x08)] public BattleChara* OwnerObject;
-	    [FieldOffset(0x10)] public Ornament* OrnamentObject;
-	    [FieldOffset(0x18)] public ushort OrnamentId;
+    public struct OrnamentContainer
+    {
+        [FieldOffset(0x08)] public BattleChara* OwnerObject;
+        [FieldOffset(0x10)] public Ornament* OrnamentObject;
+        [FieldOffset(0x18)] public ushort OrnamentId;
     }
 
     public enum EurekaElement : byte
@@ -199,7 +206,7 @@ public unsafe partial struct Character
     }
 
     // Seems similar to ConditionFlag in Dalamud but not all flags are valid on the character
-    public enum CharacterModes : byte 
+    public enum CharacterModes : byte
     {
         None = 0, // Mode is never used
         Normal = 1, // Param always 0

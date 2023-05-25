@@ -124,7 +124,7 @@ public unsafe partial struct PlayerState
     [FieldOffset(0x678)] public byte WeeklyBingoRequestOpenBingoNo;
 
     [FieldOffset(0x6B4)] public byte WeeklyBingoExpMultiplier;
-    [FieldOffset(0x69D)] public bool WeeklyBingoUnk63;
+    [FieldOffset(0x6B5)] public bool WeeklyBingoUnk63;
 
     #endregion
 

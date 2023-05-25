@@ -24,42 +24,41 @@ public unsafe partial struct AgentMap
     [FieldOffset(0x498)] public Utf8String MapTitleString;
 
     [FieldOffset(0x638), FixedSizeArray<MapMarkerInfo>(132)] public fixed byte MapMarkerInfoArray[0x48 * 132]; // 132 * MapMarkerInfo
-    [FieldOffset(0x2B58), FixedSizeArray<TempMapMarker>(12)] public fixed byte TempMapMarkerArray[0x108 * 12]; // 12 * TempMapMarker
+    [FieldOffset(0x2B58), FixedSizeArray<TempMapMarker>(12)] public fixed byte TempMapMarkerArray[0x110 * 12]; // 12 * TempMapMarker
 
-    [FieldOffset(0x37B8)] public FlagMapMarker FlagMapMarker;
+    [FieldOffset(0x3818)] public FlagMapMarker FlagMapMarker;
 
-    [FieldOffset(0x3800), FixedSizeArray<MapMarkerBase>(12)] public fixed byte WarpMarkerArray[0x38 * 12]; // 12 * MapMarkerBase
-    [FieldOffset(0x3AA0)] public fixed byte UnkArray2[0xA8 * 6];
-    [FieldOffset(0x3E90), FixedSizeArray<MiniMapMarker>(100)] public fixed byte MiniMapMarkerArray[0x40 * 100]; // 100 * MiniMapMarker
+    [FieldOffset(0x3860), FixedSizeArray<MapMarkerBase>(12)] public fixed byte WarpMarkerArray[0x38 * 12]; // 12 * MapMarkerBase
+    [FieldOffset(0x3B00)] public fixed byte UnkArray2[0xA8 * 6];
+    [FieldOffset(0x3F26), FixedSizeArray<MiniMapMarker>(100)] public fixed byte MiniMapMarkerArray[0x40 * 100]; // 100 * MiniMapMarker
 
-    [FieldOffset(0x5838)] public float SelectedMapSizeFactorFloat;
-    [FieldOffset(0x583C)] public float CurrentMapSizeFactorFloat;
-    [FieldOffset(0x5840)] public short SelectedMapSizeFactor;
-    [FieldOffset(0x5842)] public short CurrentMapSizeFactor;
-    [FieldOffset(0x5844)] public short SelectedOffsetX;
-    [FieldOffset(0x5846)] public short SelectedOffsetY;
-    [FieldOffset(0x5848)] public short CurrentOffsetX;
-    [FieldOffset(0x584A)] public short CurrentOffsetY;
+    [FieldOffset(0x5898)] public float SelectedMapSizeFactorFloat;
+    [FieldOffset(0x589C)] public float CurrentMapSizeFactorFloat;
+    [FieldOffset(0x58A0)] public short SelectedMapSizeFactor;
+    [FieldOffset(0x58A2)] public short CurrentMapSizeFactor;
+    [FieldOffset(0x58A4)] public short SelectedOffsetX;
+    [FieldOffset(0x58A6)] public short SelectedOffsetY;
+    [FieldOffset(0x58A8)] public short CurrentOffsetX;
+    [FieldOffset(0x58AA)] public short CurrentOffsetY;
 
-    [FieldOffset(0x58E0)] public uint CurrentTerritoryId;
-    [FieldOffset(0x58E4)] public uint CurrentMapId;
-    [FieldOffset(0x58EC)] public uint CurrentMapMarkerRange;
-    [FieldOffset(0x58F0)] public uint CurrentMapDiscoveryFlag;
+    [FieldOffset(0x5940)] public uint CurrentTerritoryId;
+    [FieldOffset(0x5944)] public uint CurrentMapId;
+    [FieldOffset(0x594C)] public uint CurrentMapMarkerRange;
+    [FieldOffset(0x5950)] public uint CurrentMapDiscoveryFlag;
+    [FieldOffset(0x5954)] public uint SelectedTerritoryId;
+    [FieldOffset(0x5958)] public uint SelectedMapId;
+    [FieldOffset(0x595C)] public uint SelectedMapMarkerRange;
+    [FieldOffset(0x5960)] public uint SelectedMapDiscoveryFlag;
+    [FieldOffset(0x5964)] public uint SelectedMapSub;
 
-    [FieldOffset(0x58F4)] public uint SelectedTerritoryId;
-    [FieldOffset(0x58F8)] public uint SelectedMapId;
-    [FieldOffset(0x58FC)] public uint SelectedMapMarkerRange;
-    [FieldOffset(0x5900)] public uint SelectedMapDiscoveryFlag;
-    [FieldOffset(0x5904)] public uint SelectedMapSub;
+    [FieldOffset(0x5974)] public uint UpdateFlags;
 
-    [FieldOffset(0x5914)] public uint UpdateFlags;
-
-    [FieldOffset(0x59B2)] public byte MapMarkerCount;
-    [FieldOffset(0x59B3)] public byte TempMapMarkerCount;
-    [FieldOffset(0x59B5)] public byte IsFlagMarkerSet;
-    [FieldOffset(0x59B7)] public byte MiniMapMarkerCount;
-    [FieldOffset(0x59BF)] public byte IsPlayerMoving;
-    [FieldOffset(0x59C7)] public byte IsControlKeyPressed;
+    [FieldOffset(0x5A12)] public byte MapMarkerCount;
+    [FieldOffset(0x5A13)] public byte TempMapMarkerCount;
+    [FieldOffset(0x5A15)] public byte IsFlagMarkerSet;
+    [FieldOffset(0x5A17)] public byte MiniMapMarkerCount;
+    [FieldOffset(0x5A1F)] public byte IsPlayerMoving;
+    [FieldOffset(0x5A27)] public byte IsControlKeyPressed;
 
     public static AgentMap* Instance() => Framework.Instance()->GetUiModule()->GetAgentModule()->GetAgentMap();
 
@@ -74,7 +73,7 @@ public unsafe partial struct AgentMap
 
     [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 7C 24 ?? 41 54 41 55 41 56 48 83 EC 20")]
     public partial void AddGatheringTempMarker(uint styleFlags, int mapX, int mapY, uint iconId, int radius, Utf8String* tooltip);
-    
+
     [MemberFunction("40 53 48 83 EC ?? B2 ?? C6 81 ?? ?? ?? ?? ?? 48 8B D9 E8 ?? ?? ?? ?? 33 D2")]
     public partial void ResetMiniMapMarkers();
 
@@ -82,32 +81,32 @@ public unsafe partial struct AgentMap
     public partial void ResetMapMarkers();
 
     public bool AddMiniMapMarker(Vector3 position, uint icon, int scale = 0) {
-	    if (MiniMapMarkerCount >= 100) return false;
-	    var marker = stackalloc MiniMapMarker[1];
-	    marker->MapMarker.Index = MiniMapMarkerCount;
-	    marker->MapMarker.X = (short)(position.X * 16.0f);
-	    marker->MapMarker.Y = (short)(position.Z * 16.0f);
-	    marker->MapMarker.Scale = scale;
-	    marker->MapMarker.IconId = icon;
-	    MiniMapMarkerArraySpan[MiniMapMarkerCount++] = *marker;
-	    return true;
+        if (MiniMapMarkerCount >= 100) return false;
+        var marker = stackalloc MiniMapMarker[1];
+        marker->MapMarker.Index = MiniMapMarkerCount;
+        marker->MapMarker.X = (short)(position.X * 16.0f);
+        marker->MapMarker.Y = (short)(position.Z * 16.0f);
+        marker->MapMarker.Scale = scale;
+        marker->MapMarker.IconId = icon;
+        MiniMapMarkerArraySpan[MiniMapMarkerCount++] = *marker;
+        return true;
     }
 
     public bool AddMapMarker(Vector3 position, uint icon, int scale = 0, byte* text = null, byte textPosition = 3, byte textStyle = 0) {
-	    if (MapMarkerCount >= 132) return false;
-	    if (textPosition is > 0 and < 12)
-		    position *= CurrentMapSizeFactorFloat;
-	    var marker = stackalloc MapMarkerInfo[1];
-	    marker->MapMarker.Index = MapMarkerCount;
-	    marker->MapMarker.X = (short)(position.X * 16.0f);
-	    marker->MapMarker.Y = (short)(position.Z * 16.0f);
-	    marker->MapMarker.Scale = scale;
-	    marker->MapMarker.IconId = icon;
-	    marker->MapMarker.Subtext = text;
-	    marker->MapMarker.SubtextOrientation = textPosition;
-	    marker->MapMarker.SubtextStyle = textStyle;
-	    MapMarkerInfoArraySpan[MapMarkerCount++] = *marker;
-	    return true;
+        if (MapMarkerCount >= 132) return false;
+        if (textPosition is > 0 and < 12)
+            position *= CurrentMapSizeFactorFloat;
+        var marker = stackalloc MapMarkerInfo[1];
+        marker->MapMarker.Index = MapMarkerCount;
+        marker->MapMarker.X = (short)(position.X * 16.0f);
+        marker->MapMarker.Y = (short)(position.Z * 16.0f);
+        marker->MapMarker.Scale = scale;
+        marker->MapMarker.IconId = icon;
+        marker->MapMarker.Subtext = text;
+        marker->MapMarker.SubtextOrientation = textPosition;
+        marker->MapMarker.SubtextStyle = textStyle;
+        MapMarkerInfoArraySpan[MapMarkerCount++] = *marker;
+        return true;
     }
 
     public void SetFlagMapMarker(uint territoryId, uint mapId, Vector3 worldPosition, uint iconId = 0xEC91)
