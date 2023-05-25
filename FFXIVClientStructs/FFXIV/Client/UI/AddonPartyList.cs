@@ -19,11 +19,11 @@ public unsafe struct AddonPartyList
 
     [FieldOffset(0x1360)] public fixed short Edited[17]; // 0X11 if edited? Need comfirm
 
-    [FieldOffset(0x1388)] public AtkNineGridNode* BackgroundNineGridNode;
-    [FieldOffset(0x1390)] public AtkTextNode* PartyTypeTextNode; // Solo Light/Full Party
-    [FieldOffset(0x1398)] public AtkResNode* LeaderMarkResNode;
-    [FieldOffset(0x13A0)] public AtkResNode* MpBarSpecialResNode;
-    [FieldOffset(0x13A8)] public AtkTextNode* MpBarSpecialTextNode;
+    [FieldOffset(0x1390)] public AtkNineGridNode* BackgroundNineGridNode;
+    [FieldOffset(0x1398)] public AtkTextNode* PartyTypeTextNode; // Solo Light/Full Party
+    [FieldOffset(0x13A0)] public AtkResNode* LeaderMarkResNode;
+    [FieldOffset(0x13A8)] public AtkResNode* MpBarSpecialResNode;
+    [FieldOffset(0x13B0)] public AtkTextNode* MpBarSpecialTextNode;
 
     [FieldOffset(0x13B8)] public int MemberCount;
     [FieldOffset(0x13BC)] public int TrustCount;
