@@ -26,7 +26,7 @@ public unsafe partial struct AgentContentsFinder
     [FixedSizeArray<ItemReward>(35)] 
     [FieldOffset(0x890)] public fixed byte ItemRewardArray[0x130 * 35];
     
-    [FieldOffset(0x1B4C)] public int SelectedDutyId; // ContentFinderCondition rowId for duties, ContentRoulette rowId for roulette
+    [FieldOffset(0x1B6C)] public int SelectedDutyId; // ContentFinderCondition rowId for duties, ContentRoulette rowId for roulette
     [FieldOffset(0x1B78)] public byte NumCollectedRewards; // Value used for "Reward already received"
 
     [FixedSizeArray<Utf8String>(10)] 
