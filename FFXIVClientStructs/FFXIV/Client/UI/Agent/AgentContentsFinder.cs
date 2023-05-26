@@ -27,7 +27,7 @@ public unsafe partial struct AgentContentsFinder
     [FieldOffset(0x890)] public fixed byte ItemRewardArray[0x130 * 35];
     
     [FieldOffset(0x1B4C)] public int SelectedDutyId; // ContentFinderCondition rowId for duties, ContentRoulette rowId for roulette
-    [FieldOffset(0x1B58)] public byte NumCollectedRewards; // Value used for "Reward already received"
+    [FieldOffset(0x1B78)] public byte NumCollectedRewards; // Value used for "Reward already received"
 
     [FixedSizeArray<Utf8String>(10)] 
     [FieldOffset(0x1BA8)] public fixed byte Strings[0x68 * 10]; // Tooltips and Category headers, ie "Gil", "Trials (Endwalker)"
