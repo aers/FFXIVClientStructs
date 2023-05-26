@@ -30,7 +30,7 @@ public unsafe partial struct AgentContentsFinder
     [FieldOffset(0x1B78)] public byte NumCollectedRewards; // Value used for "Reward already received"
 
     [FixedSizeArray<Utf8String>(10)] 
-    [FieldOffset(0x1BA8)] public fixed byte Strings[0x68 * 10]; // Tooltips and Category headers, ie "Gil", "Trials (Endwalker)"
+    [FieldOffset(0x1BC8)] public fixed byte Strings[0x68 * 10]; // Tooltips and Category headers, ie "Gil", "Trials (Endwalker)"
 
     [FixedSizeArray<ContentsRouletteRole>(11)]
     [FieldOffset(0x2007)] public fixed byte ContentRouletteRoleBonus[11];
