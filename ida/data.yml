@@ -908,6 +908,7 @@ classes:
     vfuncs:
       0: dtor
       1: Init
+      3: RecievePacketValues
       4: SetValues
   Client::Game::Gauge::PaladinGauge:
     vtbls:
