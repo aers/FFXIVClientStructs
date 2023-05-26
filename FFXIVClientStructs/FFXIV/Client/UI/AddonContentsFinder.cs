@@ -12,9 +12,9 @@ public unsafe partial struct AddonContentsFinder
 {
     [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
 
-    [FieldOffset(0x2B8)] public AtkComponentButton* ClearSelectionButton; // Both ClearSelection and DutyStatus
-    [FieldOffset(0x2C0)] public AtkComponentButton* JoinButton; // Both Join and Withdraw
-    
+    [FieldOffset(0x2B8)] public AtkComponentButton* JoinButton; // Both Join and Withdraw
+    [FieldOffset(0x2C0)] public AtkComponentButton* ClearSelectionButton; // Both ClearSelection and DutyStatus
+
     [FieldOffset(0x2C8)] public AtkComponentRadioButton* DutyRouletteRadioButton;
     [FieldOffset(0x2D0)] public AtkComponentRadioButton* Dungeons1RadioButton;
     [FieldOffset(0x2D8)] public AtkComponentRadioButton* Dungeons2RadioButton;
