@@ -102,7 +102,7 @@ public unsafe partial struct AtkUnitBase
     [VirtualFunction(47)]
     public partial void OnSetup(uint a2, AtkValue* atkValues);
 
-    [VirtualFunction(49)]
+    [VirtualFunction(50)]
     public partial void OnUpdate(NumberArrayData** numberArrayData, StringArrayData** stringArrayData);
 
     [MemberFunction("E9 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 8D 15")]
