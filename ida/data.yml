@@ -3636,6 +3636,7 @@ classes:
       27: GetDrawObject
       28: GetDrawObject_2
       29: UpdateRadius
+      30: Highlight
       39: Update
       47: GetNpcID
       57: IsDead
