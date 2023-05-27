@@ -29,7 +29,7 @@ public unsafe partial struct InfoProxyCommonList
     [MemberFunction("E8 ?? ?? ?? ?? 48 85 FF 74 55")]
     public partial CharacterData* GetEntry(uint idx);
 
-    [StructLayout(LayoutKind.Explicit, Size = 0x60)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x68)]
     public struct CharacterData
     {
         [FieldOffset(0x00)] public long ContentId;
@@ -72,10 +72,11 @@ public unsafe partial struct InfoProxyCommonList
         //5 bytes
         [FieldOffset(0x13)] public byte Unk13; //Some sort of Status info
         [FieldOffset(0x14)] public byte DictIndex;
-        [FieldOffset(0x16)] public ushort CurrentWorld;
-        [FieldOffset(0x18)] public ushort HomeWorld;
-        [FieldOffset(0x1A)] public ushort Location; //ZoneID
-        [FieldOffset(0x1C)] public GrandCompany GrandCompany;
+        // 9 bytes
+        [FieldOffset(0x1E)] public ushort CurrentWorld;
+        [FieldOffset(0x20)] public ushort HomeWorld;
+        [FieldOffset(0x22)] public ushort Location; //ZoneID
+        [FieldOffset(0x24)] public GrandCompany GrandCompany;
         /// <summary>
         /// Values in Dec
         /// 0 = JP
@@ -83,7 +84,10 @@ public unsafe partial struct InfoProxyCommonList
         /// 2 = DE
         /// 3 = FR
         /// </summary>
-        [FieldOffset(0x1D)] public byte MainLanguage;
+        [Obsolete("Use ClientLanguage")]
+        [FieldOffset(0x25)] public byte MainLanguage;
+        [FieldOffset(0x25)] public Language ClientLanguage;
+        
         /// <summary>
         /// Bitmask, Values in Dec
         /// 1 = JP
@@ -91,10 +95,30 @@ public unsafe partial struct InfoProxyCommonList
         /// 4 = DE
         /// 8 = FR
         /// </summary>
-        [FieldOffset(0x1E)] public byte AvailableLanguages;
-        [FieldOffset(0x21)] public byte Job;
-        [FieldOffset(0x22)] public fixed byte Name[32];
-        [FieldOffset(0x42)] public fixed byte FCTag[6];
+        [Obsolete("Use Languages")]
+        [FieldOffset(0x26)] public byte AvailableLanguages;
+        [FieldOffset(0x26)] public LanguageMask Languages;
+        // 2 bytes
+        [FieldOffset(0x29)] public byte Job;
+        [FieldOffset(0x2A)] public fixed byte Name[32];
+        [FieldOffset(0x4A)] public fixed byte FCTag[6];
+        // 8 bytes
+        [FieldOffset(0x58)] public CharIndexEntry* Index;
+        
+        public enum Language : byte {
+            JP = 0,
+            EN = 1,
+            DE = 2,
+            FR = 3,
+        }
+
+        [Flags]
+        public enum LanguageMask : byte {
+            JP = 1,
+            EN = 2,
+            DE = 4,
+            FR = 8,
+        }
     }
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct CharIndexEntry
