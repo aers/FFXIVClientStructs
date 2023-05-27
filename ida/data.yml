@@ -2839,8 +2839,14 @@ classes:
       0x14051B500: SetScaleX
       0x14051B570: SetScaleY
       0x14051B610: SetSize0
+      0x14051B630: GetXFloat
       0x14051B650: GetYFloat
+      0x14051B670: GetXShort
       0x14051B690: GetYShort
+      0x14051B6B0: SetXFloat
+      0x14051B6E0: SetYFloat
+      0x14051B710: SetXShort
+      0x14051B750: SetYShort
       0x14051B860: GetWidth
       0x14051B880: GetHeight
       0x14051BAC0: SetWidth
