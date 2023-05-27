@@ -87,9 +87,11 @@ public unsafe partial struct GameObject
     [VirtualFunction(17)]
     public partial void DisableDraw();
 
-
     [VirtualFunction(27)]
     public partial DrawObject* GetDrawObject();
+
+    [VirtualFunction(30)]
+    public partial void Highlight(ObjectHighlightColor color);
 
     [VirtualFunction(47)]
     public partial uint GetNpcID();
@@ -133,4 +135,16 @@ public enum ObjectTargetableFlags : byte
 {
     IsTargetable = 2,
     Unk1 = 4, // This flag is used but purpose is unclear
+}
+
+public enum ObjectHighlightColor : byte
+{
+    None = 0,
+    Red = 1,
+    Green = 2,
+    Blue = 3,
+    Yellow = 4,
+    Orange = 5,
+    Magenta = 6,
+    Black = 7
 }
