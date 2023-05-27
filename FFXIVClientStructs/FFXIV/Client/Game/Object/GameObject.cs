@@ -87,10 +87,8 @@ public unsafe partial struct GameObject
     [VirtualFunction(17)]
     public partial void DisableDraw();
 
-
     [VirtualFunction(27)]
     public partial DrawObject* GetDrawObject();
-
 
     [VirtualFunction(30)]
     public partial void Highlight(ObjectHighlightColor color);
