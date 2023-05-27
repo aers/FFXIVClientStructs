@@ -103,7 +103,7 @@ public unsafe partial struct Character
     public bool IsOffhandDrawn => (StatusFlags & 0x40) == 0x40;
     public bool InCombat => (StatusFlags & 0x20) == 0x20;
     public bool IsHostile => (StatusFlags & 0x10) == 0x10;
-    public bool IsCasting => (GetCastInfo()->IsCasting & 0x1) == 0x1;
+    public bool IsCasting => GetCastInfo() != null && (GetCastInfo()->IsCasting & 0x1) == 0x1;
     public bool IsPartyMember => (StatusFlags2 & 0x8) == 0x8;
     public bool IsAllianceMember => (StatusFlags2 & 0x10) == 0x10;
     public bool IsFriend => (StatusFlags2 & 0x20) == 0x20;
@@ -130,6 +130,11 @@ public unsafe partial struct Character
     [VirtualFunction(79)]
     public partial StatusManager* GetStatusManager();
 
+    /// <summary>
+    /// Gets the <see cref="CastInfo"/> struct for this Character.
+    /// May be null for certain Character subclasses, e.g. <see cref="Companion"/>.
+    /// </summary>
+    /// <returns>Returns a pointer to a CastInfo struct, or <c>null</c>.</returns>
     [VirtualFunction(81)]
     public partial CastInfo* GetCastInfo();
 
