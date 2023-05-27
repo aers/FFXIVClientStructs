@@ -16,9 +16,9 @@ public unsafe partial struct TargetSystem
     [FieldOffset(0x140)] public GameObjectID TargetObjectId;
     [FieldOffset(0x148)] public GameObjectArray ObjectFilterArray0;
 
-    [FieldOffset(0x1A18)] public GameObjectArray ObjectFilterArray1;
-    [FieldOffset(0x2CD8)] public GameObjectArray ObjectFilterArray2;
-    [FieldOffset(0x3F98)] public GameObjectArray ObjectFilterArray3;
+    [FieldOffset(0x1A98)] public GameObjectArray ObjectFilterArray1;
+    [FieldOffset(0x2D58)] public GameObjectArray ObjectFilterArray2;
+    [FieldOffset(0x4018)] public GameObjectArray ObjectFilterArray3;
 
     [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 3B C6 0F 95 C0", 3)]
     public static partial TargetSystem* Instance();
