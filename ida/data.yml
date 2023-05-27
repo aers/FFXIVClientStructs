@@ -4247,7 +4247,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentScenarioTree:
     vtbls:
-      - ea: 0x141A16D50
+      - ea: 0x1419FD4B8
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentInventoryContext:
     vtbls:
@@ -4798,7 +4798,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentAetherCurrent:
     vtbls:
-      - ea: 0x1419FD4B8
+      - ea: 0x141A16D50
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentFreeCompanyCreditShop:
     vtbls:
