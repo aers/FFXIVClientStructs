@@ -5836,6 +5836,10 @@ classes:
     vtbls:
       - ea: 0x141A23310
         base: Component::GUI::AtkUnitBase
+  Client::UI::AddonReadyCheck:
+    vtbls:
+      - ea: 0x141A25B28
+        base: Component::GUI::AtkUnitVase
   Client::UI::AddonContactList:
     vtbls:
       - ea: 0x141A27CC0
