@@ -551,6 +551,7 @@ classes:
       0x140712690: GetInventoryItemCount # (this, itemId, hq, 1, 1, 0)
       0x140712E00: GetItemCountInContainer # (this, itemId, containerId, hq, 0)
       0x1400CBD80: GetSizeByIndex # static
+      0x140713AF0: GetEquippedItemIdForSlot
       0x140716BF0: GetPermittedGearsetCount
       0x140720F80: GetLimitedTomestoneCount
       0x1413BF190: GetSpecialItemId #static

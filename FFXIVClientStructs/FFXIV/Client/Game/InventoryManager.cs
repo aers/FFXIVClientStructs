@@ -18,6 +18,9 @@ public unsafe partial struct InventoryManager
     [MemberFunction("E8 ?? ?? ?? ?? 33 DB 89 5E 08")]
     public partial int MoveItemSlot(InventoryType srcContainer, uint srcSlot, InventoryType dstContainer, uint dstSlot, byte unk = 0);
 
+    [MemberFunction("E8 ?? ?? ?? ?? 85 C0 7F 6D")]
+    private partial uint GetEquippedItemIdForSlot(int slotId);
+
     /// <summary>
     /// Get the number of gearsets the player is permitted to have/use.
     /// </summary>
