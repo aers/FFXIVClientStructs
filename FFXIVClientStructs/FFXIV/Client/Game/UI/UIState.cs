@@ -18,7 +18,7 @@ public unsafe partial struct UIState
     [FieldOffset(0x1220)] public Revive Revive;
     [FieldOffset(0x1250)] public Inspect Inspect;
     [FieldOffset(0x14B8)] public Telepo Telepo;
-    [FieldOffset(0x14F8)] public Cabinet Cabinet;
+    [FieldOffset(0x1510)] public Cabinet Cabinet;
     [FieldOffset(0x1AB0)] public Buddy Buddy;
     [FieldOffset(0x298C)] public PvPProfile PvPProfile;
     [FieldOffset(0x2A10)] public ContentsNote ContentsNote;
@@ -26,7 +26,7 @@ public unsafe partial struct UIState
     [FieldOffset(0x2B18)] public AreaInstance AreaInstance; // at vtbl - 0x10
     [FieldOffset(0x2FE0)] public Loot Loot;
 
-    [FieldOffset(0x3C60)] public RecipeNote RecipeNote;
+    [FieldOffset(0x3C80)] public RecipeNote RecipeNote;
 
     [FieldOffset(0xA800)] public Director* ActiveDirector;
     [FieldOffset(0xA948)] public FateDirector* FateDirector;
