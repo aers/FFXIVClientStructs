@@ -18,11 +18,11 @@ public unsafe partial struct AgentModule
     [FieldOffset(0x14)] public uint FrameCounter;
     [FieldOffset(0x18)] public float FrameDelta;
 
-    [FixedSizeArray<Pointer<AgentInterface>>(425)]
-    [FieldOffset(0x20)] public fixed byte Agents[425 * 8];
+    [FixedSizeArray<Pointer<AgentInterface>>(432)]
+    [FieldOffset(0x20)] public fixed byte Agents[432 * 8];
 
-    [FieldOffset(0xD68)] public UIModule* UIModulePtr;
-    [FieldOffset(0xD70)] public AgentModule* AgentModulePtr;
+    [FieldOffset(0xDA8)] public UIModule* UIModulePtr;
+    [FieldOffset(0xDB0)] public AgentModule* AgentModulePtr;
 
     [MemberFunction("E8 ?? ?? ?? ?? 83 FE 0D")]
     public partial AgentInterface* GetAgentByInternalID(uint agentID);
@@ -513,10 +513,10 @@ public enum AgentId : uint {
 
     VVDNotebook = 423,
     VVDFinder = 424,
-
     TofuList = 425,
     
     BannerParty = 428,
     BannerMIP = 429,
+
     PvPMap = 432
 }

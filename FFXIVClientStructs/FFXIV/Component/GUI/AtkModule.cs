@@ -1,4 +1,7 @@
-﻿namespace FFXIVClientStructs.FFXIV.Component.GUI;
+﻿using FFXIVClientStructs.FFXIV.Client.UI;
+using FFXIVClientStructs.FFXIV.Component.Exd;
+
+namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
 // Component::GUI::AtkModule
 //   Component::GUI::AtkModuleInterface
@@ -6,6 +9,12 @@
 public unsafe partial struct AtkModule
 {
     [FieldOffset(0x0)] public void* vtbl;
+
+    [FieldOffset(0x128)] public AtkStage* AtkStage;
+
+    [FieldOffset(0x230)] public ExdModule* ExdModule;
+
+    [FieldOffset(0x268)] public RaptureAtkUnitManager* RaptureAtkUnitManager;
 
     [FieldOffset(0x1B10)] public AtkUnitBase* IntersectingAddon;
     [FieldOffset(0x1B18)] public AtkCollisionNode* IntersectingCollisionNode;

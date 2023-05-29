@@ -1,5 +1,6 @@
-﻿using FFXIVClientStructs.FFXIV.Client.Game.Object;
+using FFXIVClientStructs.FFXIV.Client.Game.Object;
 using FFXIVClientStructs.FFXIV.Client.System.String;
+using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
@@ -8,16 +9,22 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //   Component::GUI::AtkModule
 //     Component::GUI::AtkModuleInterface
 [StructLayout(LayoutKind.Explicit, Size = 0x28C80)]
-public partial struct RaptureAtkModule
+public unsafe partial struct RaptureAtkModule
 {
     [FieldOffset(0x0)] public AtkModule AtkModule;
 
-    [FieldOffset(0x11690)] public RaptureAtkUnitManager RaptureAtkUnitManager;
+    [FieldOffset(0x10A70)] public Utf8String* AddonNames; // pointer to an array of 837 Utf8Strings
 
-    [FieldOffset(0x1B310)] public RaptureAtkModuleFlags Flags;
+    [FieldOffset(0x10B50)] public AgentModule AgentModule;
+
+    [FieldOffset(0x11910)] public RaptureAtkUnitManager RaptureAtkUnitManager;
+
+    [FieldOffset(0x1B590)] public RaptureAtkModuleFlags Flags; // TODO: this is actually at RaptureAtkUnitManager + 0x9C80
     
     [FieldOffset(0x1B8A0)] public int NameplateInfoCount;
     [FieldOffset(0x1B8A8)] public NamePlateInfo NamePlateInfoArray; // 0-50, &NamePlateInfoArray[i]
+
+    [FieldOffset(0x28C38)] public AtkTexture CharaViewDefaultBackgroundTexture; // "ui/common/CharacterBg.tex" (or _hr1 variant)
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 44 24 ?? 48 89 9F")]
     public partial bool ChangeUiMode(uint uiMode);
