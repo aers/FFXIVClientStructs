@@ -3515,7 +3515,11 @@ classes:
     funcs:
       0x14066DB70: ctor
       0x14066F410: PrintMessage
-      0x1406709E0: ShowLogMessage
+      0x1406709E0: ShowLogMessage # (this, logMessageId)
+      0x140670B70: ShowLogMessage<uint> # (this, logMessageId, IntegerParameter1)
+      0x140670E50: ShowLogMessage<uint,uint> # (this, logMessageId, IntegerParameter1, IntegerParameter2)
+      0x140671250: ShowLogMessage<uint,uint,uint> # (this, logMessageId, IntegerParameter1, IntegerParameter2, IntegerParameter3)
+      0x140671770: ShowLogMessage<string> # (this, logMessageId, StringParameter1)
       0x1406739D0: GetContentIdForLogMessage
       0x140673A60: GetLogMessage
       0x140674550: GetLogMessageDetail
