@@ -46,7 +46,7 @@ public unsafe partial struct UIState
     // Ref: g_Client::Game::UI::UnlockedCompanionsMask
     //      direct ref: 48 8D 0D ?? ?? ?? ?? 0F B6 04 08 84 D0 75 10 B8 ?? ?? ?? ?? 48 8B 5C 24
     //      relative to uistate: E8 ?? ?? ?? ?? 84 C0 75 A6 32 C0 (case for 0x355)
-    [FieldOffset(0x16B70)] public fixed byte UnlockedCompanionsBitmask[0x3A];
+    [FieldOffset(0x16B72)] public fixed byte UnlockedCompanionsBitmask[0x3A];
     
     // 42 0F B6 04 30 44 84 C0
     [FieldOffset(0x16BB0)] public fixed byte ChocoboTaxiStandsBitmask[0x26];
