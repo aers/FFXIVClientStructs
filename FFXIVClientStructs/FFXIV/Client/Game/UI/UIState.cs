@@ -41,15 +41,26 @@ public unsafe partial struct UIState
     [FieldOffset(0x11C10)] public MobHunt MobHunt;
 
     // Ref: UIState#IsUnlockLinkUnlocked (relative to uistate)
-    [FieldOffset(0x16AF4)] public fixed byte UnlockLinkBitmask[0x7E];
+    // Size: Offset of UnlockedAetherytesBitmask - Offset of UnlockLinkBitmask
+    [FieldOffset(0x16AF4)] public fixed byte UnlockLinkBitmask[0x40];
+
+    // Ref: Telepo#UpdateAetheryteList (in the Aetheryte sheet loop)
+    // Size: Number of rows in Aetheryte sheet >> 3
+    [FieldOffset(0x16B34)] public fixed byte UnlockedAetherytesBitmask[200 >> 3];
     
+    // Ref: E8 ?? ?? ?? ?? 48 83 6F ?? ?? 75 06 48 89 77 68
+    // Size: Number of rows in HowTo sheet >> 3
+    [FieldOffset(0x16B4E)] public fixed byte UnlockedHowtoBitmask[288 >> 3];
+
     // Ref: g_Client::Game::UI::UnlockedCompanionsMask
     //      direct ref: 48 8D 0D ?? ?? ?? ?? 0F B6 04 08 84 D0 75 10 B8 ?? ?? ?? ?? 48 8B 5C 24
     //      relative to uistate: E8 ?? ?? ?? ?? 84 C0 75 A6 32 C0 (case for 0x355)
-    [FieldOffset(0x16B72)] public fixed byte UnlockedCompanionsBitmask[0x3A];
+    // Size: Number of rows in Companion sheet >> 3
+    [FieldOffset(0x16B72)] public fixed byte UnlockedCompanionsBitmask[496 >> 3];
     
     // 42 0F B6 04 30 44 84 C0
-    [FieldOffset(0x16BB0)] public fixed byte ChocoboTaxiStandsBitmask[0x26];
+    // Size: Number of rows in ChocoboTaxi sheet >> 3
+    [FieldOffset(0x16BB0)] public fixed byte ChocoboTaxiStandsBitmask[312 >> 3];
     
     [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B 8B ?? ?? ?? ?? 48 8B 01", 3)]
     public static partial UIState* Instance();
@@ -112,6 +123,24 @@ public unsafe partial struct UIState
     /// <returns>Returns true if the emote is unlocked.</returns>
     [MemberFunction("E9 ?? ?? ?? ?? 8B 13 41 B8 ?? ?? ?? ?? 8B CA")]
     public partial bool IsEmoteUnlocked(ushort emoteId);
+
+    /// <summary>
+    /// Check if a aetheryte is unlocked for the current character.
+    /// </summary>
+    /// <param name="aetheryteId">The ID of the aetheryte to check for.</param>
+    /// <returns>Returns true if the specified aetheryte is unlocked.</returns>
+    public bool IsAetheryteUnlocked(uint aetheryteId) {
+        return ((1 << ((int) aetheryteId & 7)) & this.UnlockedAetherytesBitmask[aetheryteId >> 3]) > 0;
+    }
+
+    /// <summary>
+    /// Check if a HowTo is unlocked for the current character.
+    /// </summary>
+    /// <param name="howtoId">The ID of the HowTo to check for.</param>
+    /// <returns>Returns true if the specified HowTo is unlocked.</returns>
+    public bool IsHowToUnlocked(uint howtoId) {
+        return ((1 << ((int) howtoId & 7)) & this.UnlockedHowtoBitmask[howtoId >> 3]) > 0;
+    }
 
     /// <summary>
     /// Check if a companion (minion) is unlocked for the current character.

@@ -33,7 +33,11 @@ globals:
   0x142183B14: g_Client::Game::UI::ContentsFinder::ExplorerMode
   0x142183B15: g_Client::Game::UI::ContentsFinder::LevelSync
   0x142183B16: g_Client::Game::UI::ContentsFinder::LimitedLevelingRoulette
+  0x142188AF4: g_Client::Game::UI::UnlockLinkBitmask  # not a pointer
+  0x142188B34: g_Client::Game::UI::UnlockedAetherytesBitmask  # not a pointer
   0x142188B72: g_Client::Game::UI::UnlockedCompanionsMask  # not a pointer
+  0x142188B4E: g_Client::Game::UI::UnlockedHowToBitmask  # not a pointer
+  0x142188BB0: g_Client::Game::UI::ChocoboTaxiStandsBitmask  # not a pointer
   0x14218ADD0: g_Conditions # bool array, size is Condition sheet row count
   0x142122E70: g_SomeOtherRenderingState
   0x142135194: g_InvSqrt3
@@ -4225,7 +4229,7 @@ classes:
     funcs:
       0x140958E80: ctor
       0x140958FE0: IsSelectUseTicketInactive
-      0x140959140: UpdatePlayerAetheryteList
+      0x140959140: UpdateAetheryteList
       0x140959CC0: Teleport
       0x14095AF10: TeleportWithTicket
       0x14095AFA0: InvokeSelectUseTicket
