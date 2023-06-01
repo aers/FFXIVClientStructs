@@ -70,7 +70,6 @@ functions:
   0x1400A6710: Client::UI::PlaySoundEffect # this is a static function in the UI namespace, arg1 is the SE
   0x1400A8380: Client::UI::GetUIColor # (idx, &color, &edgeColor)
   0x1401B9FF0: j_SleepEx
-  0x1401DE150: Client::System::Resource::Handle::ModelResourceHandle_GetMaterialFileNameBySlot
   0x1402E2FB0: CountdownPointer
   0x14032B480: std::vector_SetSize
   0x140643E70: GetGameObjectByIndex
@@ -1737,6 +1736,14 @@ classes:
     vtbls:
       - ea: 0x141967000
         base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::ModelResourceHandle:
+    vtbls:
+      - ea: 0x141967300
+        base: Client::System::Handle::ResourceHandle
+    funcs:
+      0x1401DE150: GetMaterialFileNameBySlot
+      0x1403D1E80: GetAttributeIndex
+      0x1403D1FF0: GetShapeIndex
   Client::System::Resource::Handle::UldResourceHandle:
     vtbls:
       - ea: 0x14196A030
@@ -2092,6 +2099,12 @@ classes:
     funcs:
       0x140374010: ctor
       0x140374170: SetupFromModelResourceHandle
+      0x140375210: GetAttributeIndex
+      0x1403752A0: GetShapeIndex
+  Client::Graphics::Render::Material:
+    vtbls:
+      - ea: 0x14197E870
+        base: Client::Graphics::ReferencedClassBase
   Client::Graphics::Render::BaseRenderer:
     vtbls:
       - ea: 0x14197EAB0

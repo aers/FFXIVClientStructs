@@ -20,7 +20,10 @@ public unsafe partial struct CharacterBase
     [FieldOffset(0x92)] public byte UnkFlags_03; // bit 1 - has umbrella
     [FieldOffset(0x98)] public int SlotCount; // model slots
     [FieldOffset(0xA0)] public Skeleton* Skeleton; // Client::Graphics::Render::Skeleton
+    
+    [Obsolete("Use Models")]
     [FieldOffset(0xA8)] public void** ModelArray; // array of Client::Graphics::Render::Model ptrs size = SlotCount
+    [FieldOffset(0xA8)] public Model** Models; // size = SlotCount
     [FieldOffset(0x148)] public void* PostBoneDeformer; // Client::Graphics::Scene::PostBoneDeformer ptr
 
     [FieldOffset(0x150)]
