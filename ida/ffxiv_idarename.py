@@ -199,6 +199,18 @@ class BaseApi(object):
         :type type: str
         """
 
+    @abstractmethod
+    def try_set_func_arg_type(self, ea, arg_idx, type):
+        """
+        Attempt to set a type on an argument to a function.
+        :param ea: Address
+        :type ea: int
+        :param arg_idx: Argument index
+        :type arg_idx: int
+        :param type: Type name
+        :type type: str
+        """
+
 
 api = None
 
@@ -209,6 +221,8 @@ if api is None:
         import idaapi  # noqa
         import idc  # noqa
         import idautils  # noqa
+        import ida_typeinf  # noqa
+        import ida_nalt  # noqa
     except ImportError:
         print("Warning: Unable to load IDA")
     else:
@@ -313,6 +327,43 @@ if api is None:
                 decl = idc.parse_decl(name, 0)
                 if decl is not None:
                     idc.apply_type(ea, decl)
+
+            def try_set_func_arg_type(self, ea, arg_idx, type):
+                # Create type info for this function
+                tinfo = idaapi.tinfo_t()
+                if not ida_nalt.get_tinfo(tinfo, ea):
+                    return
+
+                # Get function data from type info
+                funcdata = idaapi.func_type_data_t()
+                if not tinfo.get_func_details(funcdata):
+                    return
+
+                # Get type data for the replacement type
+                type_tinfo = idaapi.tinfo_t()
+                if not type_tinfo.get_named_type(idaapi.get_idati(), type):
+                    return
+
+                # Safety checks
+                if funcdata.size() <= arg_idx:
+                    return
+
+                orig_type = funcdata[arg_idx].type
+                if not orig_type.is_ptr() and not orig_type.is_int64():
+                    return
+
+                # Make it a pointer
+                ptr_tinfo = idaapi.tinfo_t()
+                if not ptr_tinfo.create_ptr(type_tinfo):
+                    return
+
+                # Create a new type info with our applied type
+                funcdata[arg_idx].type = ptr_tinfo
+                new_tinfo = idaapi.tinfo_t()
+                if not new_tinfo.create_func(funcdata):
+                    return
+
+                idaapi.apply_tinfo(ea, new_tinfo, idaapi.TINFO_DEFINITE)
 
         api = IdaApi()
 
@@ -813,6 +864,7 @@ class FfxivClass:
                                                    vtbl.resolved_base.vfuncs, formatted_base_class_names)
                 for (func_ea, func_name) in funcs:
                     api.set_addr_name(func_ea, func_name)
+                    api.try_set_func_arg_type(func_ea, 0, self.name)
 
     def _write_funcs(self):
         """
@@ -824,12 +876,16 @@ class FfxivClass:
 
             func_name = api.format_func_name(func_ea, current_func_name, proposed_func_name, self.name)
             if func_name == "":
+                # Don't set the name, but try applying the type anyways
+                # Mainly here for re-runs of the script
+                api.try_set_func_arg_type(func_ea, 0, self.name)
                 pass
             elif func_name is None:
                 print("Error: Function at 0x{0:X} had unexpected name \"{1}\" during naming of {2}.{3}"
                       .format(func_ea, current_func_name, self.name, proposed_func_name))
             else:
                 api.set_addr_name(func_ea, func_name)
+                api.try_set_func_arg_type(func_ea, 0, self.name)
 
     def _write_instances(self):
         """
