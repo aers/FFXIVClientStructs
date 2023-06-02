@@ -189,6 +189,16 @@ class BaseApi(object):
         :rtype: Optional[str]
         """
 
+    @abstractmethod
+    def try_set_type(self, ea, type):
+        """
+        Attempt to set a type on an address.
+        :param ea: Address
+        :type ea: int
+        :param type: Type name
+        :type type: str
+        """
+
 
 api = None
 
@@ -204,7 +214,6 @@ if api is None:
     else:
         # noinspection PyUnresolvedReferences
         class IdaApi(BaseApi):
-
             @property
             def data_file_path(self):
                 return os.path.join(os.path.dirname(os.path.realpath(__file__)), "data.yml")
@@ -296,6 +305,14 @@ if api is None:
 
                 return None
 
+            def try_set_type(self, ea, name):
+                id = idaapi.get_struc_id(name)
+                if id == idaapi.BADADDR:
+                    return
+
+                decl = idc.parse_decl(name, 0)
+                if decl is not None:
+                    idc.apply_type(ea, decl)
 
         api = IdaApi()
 
@@ -427,7 +444,7 @@ def load_data():
             vfuncs = class_data.pop("vfuncs", {})
             funcs = class_data.pop("funcs", {})
             instances_raw = class_data.pop("instances", [])
-            instances = [(instance["ea"], instance["name"] if "name" in instance else "Instance") for instance in instances_raw]
+            instances = [(instance["ea"], instance["name"] if "name" in instance else "Instance", instance["pointer"] if "pointer" in instance else True) for instance in instances_raw]
             for leftover in class_data:
                 print("Warning: Extra key \"{0}\" present in {1}".format(leftover, class_name))
 
@@ -819,17 +836,17 @@ class FfxivClass:
         Write the names of all instances
         :return: None
         """
-        for (instance_ea, instance_name) in self.instances:
+        for (instance_ea, instance_name, instance_ptr) in self.instances:
             name = "g_{}_{}".format(self.name, instance_name)
             api.set_addr_name(instance_ea, name)
+            type = self.name + (instance_ptr and "*" or "")
+            api.try_set_type(instance_ea, type)
 
     # endregion
 
     def __repr__(self):
         return "<{0}(\"{1}\")>".format(self.__class__.__name__, self.name)
 
-
-# endregion
 
 print("Executing")
 load_data()
