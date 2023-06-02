@@ -597,9 +597,9 @@ classes:
       0x140B6F8B0: ctor
       0x140B6FB30: dtor
       0x140B6E570: LoadDemandResearchPacket
-      0x140B6EAF0: IsRecipeUnlocked # (this, recipeId)
-      0x140B6EB20: IsPouchItemLocked # (this, pouchItemId)
-      0x140B6CDF0: IsFunctionUnlocked # (this, functionId)
+      0x140B6EAF0: IsRecipeUnlocked(Client::Game::MJI::MJIManager* this, _ recipeId) -> bool
+      0x140B6EB20: IsPouchItemLocked(Client::Game::MJI::MJIManager* this, _ pouchItemId) -> bool
+      0x140B6CDF0: IsFunctionUnlocked(Client::Game::MJI::MJIManager* this, _ functionId) -> bool
       0x140B6D020: HandleActorControlPacket
       0x140B6DB50: HandleInboundPacket
       0x140B6EFA0: GetVisibleMinimapIcons

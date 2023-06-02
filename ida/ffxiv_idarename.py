@@ -6,6 +6,7 @@ from __future__ import print_function
 import os
 import yaml
 from anytree import Node, RenderTree, PreOrderIter
+import re
 
 try:
     from typing import Any, Dict, List, Optional, Union  # noqa
@@ -200,7 +201,7 @@ class BaseApi(object):
         """
 
     @abstractmethod
-    def try_set_func_arg_type(self, ea, arg_idx, type):
+    def try_set_func_arg_type(self, ea, arg_idx, type, ptr, name):
         """
         Attempt to set a type on an argument to a function.
         :param ea: Address
@@ -209,6 +210,22 @@ class BaseApi(object):
         :type arg_idx: int
         :param type: Type name
         :type type: str
+        :param ptr: Amount of pointer indirection
+        :type ptr: int
+        :param name: Argument name
+        :type name: Optional[str]
+        """
+
+    @abstractmethod
+    def try_set_func_type(self, ea, args_type, ret_type):
+        """
+        Attempt to overwrite a function's arguments and return type.
+        :param ea: Address
+        :type ea: int
+        :param args_type: Arguments type declaration
+        :type args_type: Optional[str]
+        :param ret_type: Return type declaration
+        :type ret_type: Optional[str]
         """
 
 
@@ -328,7 +345,9 @@ if api is None:
                 if decl is not None:
                     idc.apply_type(ea, decl)
 
-            def try_set_func_arg_type(self, ea, arg_idx, type):
+            def try_set_func_arg_type(self, ea, arg_idx, type, ptr=0, name=None):
+                setting_type = type != "_" and type is not None
+
                 # Create type info for this function
                 tinfo = idaapi.tinfo_t()
                 if not ida_nalt.get_tinfo(tinfo, ea):
@@ -339,31 +358,91 @@ if api is None:
                 if not tinfo.get_func_details(funcdata):
                     return
 
-                # Get type data for the replacement type
-                type_tinfo = idaapi.tinfo_t()
-                if not type_tinfo.get_named_type(idaapi.get_idati(), type):
-                    return
-
                 # Safety checks
                 if funcdata.size() <= arg_idx:
                     return
 
-                orig_type = funcdata[arg_idx].type
-                if not orig_type.is_ptr() and not orig_type.is_int64():
-                    return
+                # Set name if provided
+                if name is not None:
+                    funcdata[arg_idx].name = name
 
-                # Make it a pointer
-                ptr_tinfo = idaapi.tinfo_t()
-                if not ptr_tinfo.create_ptr(type_tinfo):
-                    return
+                type_tinfo = idaapi.tinfo_t()
+                ptr_tinfo = None
+                if setting_type:
+                    if not type_tinfo.get_named_type(idaapi.get_idati(), type):
+                        terminated = type + ";"
+                        if idaapi.parse_decl(type_tinfo, idaapi.get_idati(), terminated, idaapi.PT_SIL) is None:
+                            return
 
-                # Create a new type info with our applied type
-                funcdata[arg_idx].type = ptr_tinfo
+                    # Make it a pointer if specified
+                    if ptr > 0:
+                        ptr_tinfo = idaapi.tinfo_t()
+                        for i in range(ptr):
+                            if not ptr_tinfo.create_ptr(type_tinfo):
+                                return
+                    else:
+                        ptr_tinfo = type_tinfo
+
+                    orig_type = funcdata[arg_idx].type
+                    if orig_type.get_size() < ptr_tinfo.get_size():
+                        print("Error: Type size mismatch for {0} at 0x{1:X} (expected {2:X}, got {3:X})".format(
+                            name, ea, orig_type.get_size(), ptr_tinfo.get_size()))
+                        return
+
+                    funcdata[arg_idx].type = ptr_tinfo
+
                 new_tinfo = idaapi.tinfo_t()
                 if not new_tinfo.create_func(funcdata):
+                    print("Error: Unable to create new function type for {0} at 0x{1:X}".format(name, ea))
                     return
 
                 idaapi.apply_tinfo(ea, new_tinfo, idaapi.TINFO_DEFINITE)
+
+            def try_set_func_type(self, ea, args_type, ret_type):
+                # Set argument types
+                if args_type is not None:
+                    args = args_type.split(",")
+                    for i in range(len(args)):
+                        arg = args[i].strip()
+                        if arg is None:
+                            continue
+
+                        last_space = arg.rfind(" ")
+                        arg_type = arg[:last_space]
+                        arg_name = arg[last_space + 1:]
+                        ptr = arg_type.count("*")
+                        arg_type = arg_type.rstrip("*")
+
+                        self.try_set_func_arg_type(ea, i, arg_type, ptr, arg_name)
+
+                # Attempt to set return type
+                if ret_type is not None:
+                    tinfo = idaapi.tinfo_t()
+                    if not tinfo.get_named_type(idaapi.get_idati(), ret_type):
+                        terminated = ret_type + ";"
+                        if idaapi.parse_decl(tinfo, idaapi.get_idati(), terminated, idaapi.PT_SIL) is None:
+                            return
+
+                    # Get the data from the original function to replace
+                    func_tinfo = idaapi.tinfo_t()
+                    funcdata = idaapi.func_type_data_t()
+                    if not ida_nalt.get_tinfo(func_tinfo, ea):
+                        return
+                    if not func_tinfo.get_func_details(funcdata):
+                        return
+
+                    if funcdata.rettype.get_size() < tinfo.get_size():
+                        print("Error: Return type size mismatch for 0x{0:X} (expected {1:X}, got {2:X})".format(
+                            ea, funcdata.rettype.get_size(), tinfo.get_size()))
+                        return
+
+                    # Create a new type info with our applied type
+                    funcdata.rettype = tinfo
+                    new_tinfo = idaapi.tinfo_t()
+                    if not new_tinfo.create_func(funcdata):
+                        return
+
+                    idaapi.apply_tinfo(ea, new_tinfo, idaapi.TINFO_DEFINITE)
 
         api = IdaApi()
 
@@ -810,6 +889,33 @@ class FfxivClass:
             api.set_addr_name(vtbl.ea, api.format_class_name_for_secondary_vtbl(self.name,
                                                                                 vtbl.base_name))
 
+    def parse_function_name(self, func_name):
+        """
+        Parse a function name to extract its arguments.
+        Valid formats are:
+        - No arguments, no return value: Tick
+        - Arguments, no return value: Tick(Client::System::Framework::Framework* this)
+        - Arguments, return value: Tick(Client::System::Framework::Framework* this) -> byte
+        - No arguments, return value: Tick -> byte
+
+        :param func_name: Function name
+        :type func_name: str
+        :return: Tuple of (func_name, args, ret)
+        :rtype: Tuple[str, Optional[str], Optional[str]]
+        """
+
+        # regex with func_name, args, ret named groups
+        regex = re.compile(r"^(?P<func_name>[a-zA-Z0-9_]+)(?:\((?P<args>.*)\))?(?:\s*->\s*(?P<ret>.*))?$")
+        match = regex.match(func_name)
+        if match:
+            func_name = match.group("func_name")
+            args = match.group("args") or None
+            ret = match.group("ret") or None
+            return func_name, args, ret
+        else:
+            return func_name, None, None
+
+
     def _write_vtbl_functions(self):
         """
         Write out the vtbl function names
@@ -864,28 +970,27 @@ class FfxivClass:
                                                    vtbl.resolved_base.vfuncs, formatted_base_class_names)
                 for (func_ea, func_name) in funcs:
                     api.set_addr_name(func_ea, func_name)
-                    api.try_set_func_arg_type(func_ea, 0, self.name)
+                    api.try_set_func_arg_type(func_ea, 0, self.name, 1)
 
     def _write_funcs(self):
         """
         Write the names of all non-vtbl funcs
         :return: None
         """
-        for func_ea, proposed_func_name in self.funcs.items():
+        for func_ea, proposed_raw_func_name in self.funcs.items():
             current_func_name = api.get_addr_name(func_ea)  # type: str
 
+            (proposed_func_name, func_args, func_ret) = self.parse_function_name(proposed_raw_func_name)
             func_name = api.format_func_name(func_ea, current_func_name, proposed_func_name, self.name)
             if func_name == "":
-                # Don't set the name, but try applying the type anyways
-                # Mainly here for re-runs of the script
-                api.try_set_func_arg_type(func_ea, 0, self.name)
                 pass
             elif func_name is None:
                 print("Error: Function at 0x{0:X} had unexpected name \"{1}\" during naming of {2}.{3}"
                       .format(func_ea, current_func_name, self.name, proposed_func_name))
             else:
                 api.set_addr_name(func_ea, func_name)
-                api.try_set_func_arg_type(func_ea, 0, self.name)
+
+            api.try_set_func_type(func_ea, func_args, func_ret)
 
     def _write_instances(self):
         """
