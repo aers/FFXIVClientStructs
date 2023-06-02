@@ -15,6 +15,7 @@ public unsafe partial struct DrawDataContainer
 
     [FieldOffset(0x078)] public WeaponModelId OffHandModel;
     [FieldOffset(0x088)] public DrawObjectData OffHand;
+    [FieldOffset(0x0D4)] public byte OffHandState;
     [FieldOffset(0x0DA)] public ushort OffHandFlags1;
     [FieldOffset(0x0DC)] public byte OffHandFlags2;
 
@@ -69,10 +70,18 @@ public unsafe partial struct DrawDataContainer
         set => Flags2 = (byte)(value ? Flags2 | 0x08 : Flags2 & ~0x08);
     }
 
+    private const byte WeaponHiddenFlag = 0x02;
+
     public bool IsMainHandHidden
     {
-        get => (MainHandState & 0x02) == 0x02;
-        set => MainHandState = (byte)(value ? MainHandState | 0x02 : MainHandState & ~0x02);
+        get => (MainHandState & WeaponHiddenFlag) == WeaponHiddenFlag;
+        set => MainHandState = (byte)(value ? MainHandState | WeaponHiddenFlag : MainHandState & ~WeaponHiddenFlag);
+    }
+
+    public bool IsOffHandHidden
+    {
+        get => (OffHandState & WeaponHiddenFlag) == WeaponHiddenFlag;
+        set => OffHandState = (byte)(value ? OffHandState | WeaponHiddenFlag : OffHandState & ~WeaponHiddenFlag);
     }
 }
 
