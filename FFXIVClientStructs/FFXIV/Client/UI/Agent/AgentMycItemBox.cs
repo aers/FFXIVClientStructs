@@ -4,7 +4,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.MycItemBox)]
 [StructLayout(LayoutKind.Explicit, Size = 0x58)]
-public unsafe struct AgentMycItemBox {
+public unsafe partial struct AgentMycItemBox {
     [FieldOffset(0x00)] public AgentInterface AgentInterface;
 
     /// <remarks>

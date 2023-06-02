@@ -5,7 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.Shop)]
 [StructLayout(LayoutKind.Explicit, Size = 0x120)]
-public unsafe struct AgentShop {
+public unsafe partial struct AgentShop {
     public static AgentShop* Instance() => (AgentShop*)AgentModule.Instance()->GetAgentByInternalId(AgentId.Shop);
 
     [FieldOffset(0x00)] public AgentInterface AgentInterface;

@@ -5,7 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.RetainerTask)]
 [StructLayout(LayoutKind.Explicit, Size = 0x90)]
-public struct AgentRetainerTask {
+public unsafe partial struct AgentRetainerTask {
     [FieldOffset(0x00)] public AgentInterface AgentInterface;
 
     // 00 - None

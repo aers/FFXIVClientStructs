@@ -5,7 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.GcArmyExpedition)]
 [StructLayout(LayoutKind.Explicit, Size = 0x48)]
-public unsafe struct AgentGcArmyExpedition {
+public unsafe partial struct AgentGcArmyExpedition {
     [FieldOffset(0x00)] public AgentInterface AgentInterface;
 
     [FieldOffset(0x28)] public GcArmyExpeditionData* ExpeditionData;

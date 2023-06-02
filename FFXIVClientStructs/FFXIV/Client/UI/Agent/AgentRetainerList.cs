@@ -11,7 +11,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 // ctor 48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 48 8B F1 E8 ?? ?? ?? ?? 33 C9
 [Agent(AgentId.RetainerList)]
 [StructLayout(LayoutKind.Explicit, Size = 0x5B8)]
-public unsafe struct AgentRetainerList {
+public unsafe partial struct AgentRetainerList {
     public static AgentRetainerList* Instance() {
         return (AgentRetainerList*)Framework.Instance()->GetUiModule()->GetAgentModule()->GetAgentByInternalId(
             AgentId.RetainerList);

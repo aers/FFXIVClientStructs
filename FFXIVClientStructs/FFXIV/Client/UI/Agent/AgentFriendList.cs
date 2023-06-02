@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.SocialFriendList)]
 [StructLayout(LayoutKind.Explicit, Size = 0xC8)]
 // inlined ctor
-public unsafe struct AgentFriendList {
+public unsafe partial struct AgentFriendList {
     public static AgentFriendList* Instance() => (AgentFriendList*)AgentModule.Instance()->GetAgentByInternalId(AgentId.SocialFriendList);
 
     [FieldOffset(0x00)] public AgentInterface AgentInterface;

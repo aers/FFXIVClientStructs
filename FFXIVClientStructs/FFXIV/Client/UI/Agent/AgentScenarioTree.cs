@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x30)]
 [Agent(AgentId.ScenarioTree)]
-public unsafe struct AgentScenarioTree {
+public unsafe partial struct AgentScenarioTree {
     [FieldOffset(0x00)] public AgentInterface AgentInterface;
     [FieldOffset(0x28)] public AgentScenarioTreeData* Data;
 
