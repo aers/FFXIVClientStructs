@@ -181,24 +181,50 @@ namespace CExporter
 
                 int unionMaxSize = 0;
                 var isUnion = finfos.Count > 1;
+                var ignoreSkip = false;
+                // For cases like Matrix2x2 - only union if it doesn't take up the same space
+                if (isUnion) {
+                    int CalcSize(FieldInfo finfo) { 
+                        var fieldType = finfo.FieldType;
+                        var size = 0;
+                        if (finfo.IsFixed()) {
+                            size = finfo.GetFixedSize();
+                        } else if (fieldType.IsPointer) {
+                            size = 8;
+                        } else if (fieldType.IsArray) {
+                            size = SizeOf(fieldType.GetElementType()) * fieldType.GetArrayRank();
+                        } else {
+                            size = SizeOf(fieldType);
+                        }
+                        return size;
+                    }
+                    
+                    var firstSize = CalcSize(finfos[0]);
+                    var otherSize = finfos.Skip(1).Select(CalcSize).Sum();
+                    if (firstSize >= otherSize) {
+                        isUnion = false;
+                        ignoreSkip = true;
+                        finfos = finfos.Take(1).ToList();
+                    }
+                }
+                
                 if (isUnion)
                 {
                     sb.AppendLine("    union {");
                 }
 
-                for (int i = 0; i < finfos.Count; i++)
-                {
+                for (int i = 0; i < finfos.Count; i++) {
                     var finfo = finfos[i];
                     var fieldType = finfo.FieldType;
                     int fieldSize = 0;
 
                     if (!isUnion)
                         offset = FillGaps(offset, fieldOffset, padFill, sb);
-
-                    if (offset > fieldOffset)
+                    
+                    if (offset > fieldOffset && !ignoreSkip)
                     {
                         Debug.WriteLine($"Current offset exceeded the next field's offset (0x{offset:X} > 0x{fieldOffset:X}): {FixFullName(type)}.{finfo.Name}");
-                        return;
+                        continue;
                     }
 
                     if (finfo.IsFixed())
@@ -259,9 +285,8 @@ namespace CExporter
             }
 
             FillGaps(offset, structSize, padFill, sb);
-
+            
             sb.AppendLine("};");
-
             header.AppendLine(sb.ToString());
         }
 
@@ -383,6 +408,14 @@ namespace CExporter
             {
                 var underlyingType = type.GetEnumUnderlyingType();
                 fullName += $"0x{SizeOf(underlyingType):X}";
+            }
+            
+            // IDA doesn't like these names :(
+            var conflictingNames = new[] { "EventHandler" };
+            foreach (var conflictingName in conflictingNames)
+            {
+                if (fullName.Contains(conflictingName))
+                    fullName = fullName.Replace(conflictingName, $"{conflictingName}_");
             }
 
             return fullName.Replace(".", separator).Replace("+", separator);
