@@ -58,26 +58,6 @@ def get_type_from_name(name):
     return tinfo
 
 
-def lookup_size(name):
-    """
-    Lookup the size of a struct or enum.
-    Attempts to use the "Size" field in metadata, falling back to IDA's type system.
-    """
-
-    for struct in data["Structs"]:
-        struct_name = struct["Name"]
-        struct_size = struct["Size"]
-        if struct_name == name and struct_size is not None:
-            return struct_size
-
-    for enum in data["Enums"]:
-        if enum["Name"] == name:
-            type_key = "Type" if "Type" in enum else "UnionType"
-            return get_type_from_name(enum[type_key]).get_size()
-
-    return get_type_from_name(name).get_size()
-
-
 def get_value(name):
     for value in values_to_write:
         if value["data"]["Name"] == name:
@@ -151,7 +131,8 @@ def write_c_struct(struct):
                 hex(last_offset), hex(pad_size)
             )
 
-    for field in struct["Fields"]:
+    for i, field in enumerate(struct["Fields"]):
+        print("ensure_padding start", last_offset, field["Offset"])
         ensure_padding(last_offset, field["Offset"])
         ensure_field_dependency(field)
 
@@ -168,14 +149,12 @@ def write_c_struct(struct):
             struct_str += "[{0}]".format(hex(field["ArraySize"]))
         struct_str += ";\n"
 
-        last_offset = (
-            field["Offset"]
-            + lookup_size(get_name(field[type_key])) * field["ArraySize"]
-        )
+        last_offset = field["Offset"] + (field["Size"] * field["ArraySize"])
 
         # If this is the last field, pad to the end as well
         struct_size = struct["Size"]
-        if field == struct["Fields"][-1] and struct_size is not None:
+        if i == len(struct["Fields"]) - 1:
+            print("ensure_padding end", last_offset, struct_size)
             ensure_padding(last_offset, struct_size)
 
     struct_str += "};"
@@ -298,8 +277,36 @@ def resolve_address(addr_info):
     if type == "MemberFunction":
         return sigscan(addr_info["Signature"], True)
     elif type == "VirtualFunction":
-        # todo
-        return None
+        addr = resolve_vtable(addr_info["VTable"])
+        if addr is not None:
+            pos = addr + (addr_info["Index"] * 8)
+            return ida_bytes.get_qword(pos)
+
+    return None
+
+
+def resolve_vtable(name):
+    """
+    Resolve the VTable address of a class.
+    """
+
+    global structs
+
+    for struct in structs:
+        if struct["Name"] == name and struct["VTableAddress"] is not None:
+            addr = struct["VTableAddress"]
+            sig = addr["Signature"]
+            offset = addr["Offset"]
+
+            if sig is not None:
+                addr = sigscan(sig, False)
+                if addr is None:
+                    print("! failed to resolve vtable for", name)
+                    return None
+
+                access_offset = ida_bytes.get_dword(addr + offset)
+                addr = addr + offset + 4 + access_offset
+                return addr
 
     return None
 

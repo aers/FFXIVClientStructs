@@ -14,6 +14,7 @@ public class MetadataOutput {
 public class MetadataStruct {
     public string Name { get; set; }
     public uint? Size { get; set; }
+    public MetadataStaticAddressInfo? VTableAddress { get; set; }
     public List<MetadataField> Fields { get; set; }
 }
 
@@ -34,6 +35,7 @@ public class MetadataUnion {
 public class MetadataField {
     public string Name { get; set; }
     public uint Offset { get; set; }
+    public uint Size { get; set; }
     public uint PointerIndirection { get; set; }
     public uint ArraySize { get; set; }
 
@@ -66,6 +68,7 @@ public class MetadataMemberFunctionInfo : MetadataAddressInfo {
 }
 
 public class MetadataVirtualFunctionInfo : MetadataAddressInfo {
+    public string VTable { get; set; }
     public uint Index { get; set; }
 }
 

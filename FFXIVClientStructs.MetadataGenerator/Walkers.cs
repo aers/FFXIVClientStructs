@@ -69,10 +69,13 @@ public class ClientStructsSyntaxWalker : CSharpSyntaxWalker {
         if (type.IsPointer) return 8;
         if (type == typeof(void)) return 8; // it's probably a pointer. this is a bad assumption lmfao
 
-        var size = (int?)typeof(Unsafe).GetMethod("SizeOf")?.MakeGenericMethod(type).Invoke(null, null) ?? 0;
+        // Why the hell is it 2
+        if (type == typeof(bool)
+            || type == typeof(char)
+            || type == typeof(byte)
+            || type == typeof(sbyte)) return 1;
 
-        // Divide by array length, we do that elsewhere
-        if (type.IsArray) size /= type.GetArrayRank();
+        var size = (int?)typeof(Unsafe).GetMethod("SizeOf")?.MakeGenericMethod(type).Invoke(null, null) ?? 0;
 
         return (uint)size;
     }
@@ -130,8 +133,20 @@ public class StructWalker : ClientStructsSyntaxWalker {
         this.structType = @struct;
         this.name = NameHelpers.FixTypeName(@struct);
 
-        var structLayout = @struct.GetCustomAttribute<StructLayoutAttribute>();
-        if (structLayout != null) this.size = (uint)structLayout.Size;
+        var structLayout = @struct.StructLayoutAttribute;
+        if (structLayout != null) {
+            this.size = (uint)structLayout.Size;
+        }
+
+        MetadataStaticAddressInfo? vtable = null;
+        var vtableAttr = @struct.GetCustomAttribute<VTableAddressAttribute>();
+        if (vtableAttr != null) {
+            vtable = new MetadataStaticAddressInfo {
+                Signature = vtableAttr.Signature,
+                Offset = vtableAttr.Offset,
+                IsPointer = vtableAttr.IsPointer
+            };
+        }
 
         base.Visit(node);
         this.Unions.AddRange(this.unions.Values);
@@ -139,7 +154,8 @@ public class StructWalker : ClientStructsSyntaxWalker {
         return new MetadataStruct {
             Name = this.name,
             Fields = this.fields,
-            Size = this.size
+            Size = this.size,
+            VTableAddress = vtable
         };
     }
 
@@ -198,9 +214,24 @@ public class StructWalker : ClientStructsSyntaxWalker {
             type = fixedBufferAttribute.ElementType;
         }
 
+        // Copy of GetSizeFromFieldWithUnion's logic because we don't have a constructed field yet
+        if (fieldName == "userPath") {
+            Console.WriteLine("a");
+        }
+
+        var fieldSize = this.GetSize(type);
+        if (ptrIndirection > 0) fieldSize = 8;
+        if (fieldSize == null) {
+            var union = this.unions.GetValueOrDefault((uint)offset);
+            if (union == null) throw new Exception($"Could not find union at offset {(uint)offset}");
+            var unionFirstField = union.Fields[0];
+            fieldSize = this.GetSize(unionFirstField.Type!)!.Value;
+        }
+
         var field = new MetadataField {
             Name = fieldName,
             Type = type,
+            Size = fieldSize.Value,
             Offset = (uint)offset,
             PointerIndirection = (uint)ptrIndirection,
             ArraySize = (uint)arraySize
@@ -209,21 +240,21 @@ public class StructWalker : ClientStructsSyntaxWalker {
         var existingField = this.fields.FirstOrDefault(x => x.Offset == offset);
         var isUnion = existingField != null;
 
-        var usSize = this.GetSizeFromFieldWithUnion(field);
-        this.lastOffset = (uint)(offset + usSize);
+        this.lastOffset = (uint)(offset + fieldSize);
+        var properSize = fieldSize * arraySize;
 
         foreach (var iterField in this.fields) {
             var pos = iterField.Offset;
             var size = this.GetSizeFromFieldWithUnion(iterField);
             var end = pos + size;
 
-            if (pos <= offset && end > offset + usSize) {
+            if (pos <= offset && end > offset + properSize) {
                 return;
             }
         }
 
         // Only union if they're the same size
-        if (isUnion && this.GetSizeFromFieldWithUnion(existingField!) != usSize) {
+        if (isUnion && this.GetSizeFromFieldWithUnion(existingField!) != properSize) {
             return;
         }
 
@@ -242,6 +273,7 @@ public class StructWalker : ClientStructsSyntaxWalker {
                 union.Fields.Add(new MetadataField {
                     Name = existingField!.Name,
                     Type = existingField.Type,
+                    Size = existingField.Size,
                     Offset = 0,
                     PointerIndirection = existingField.PointerIndirection,
                     ArraySize = existingField.ArraySize
@@ -252,6 +284,7 @@ public class StructWalker : ClientStructsSyntaxWalker {
                 this.fields.Add(new MetadataField {
                     Name = unionName,
                     UnionType = unionType,
+                    Size = existingField.Size,
                     Offset = existingField.Offset,
                     // Union isn't a pointer/array, but the contents of it may be
                     PointerIndirection = 0,
@@ -263,6 +296,7 @@ public class StructWalker : ClientStructsSyntaxWalker {
             union.Fields.Add(new MetadataField {
                 Name = fieldName,
                 Type = type,
+                Size = fieldSize.Value,
                 Offset = 0,
                 PointerIndirection = (uint)ptrIndirection,
                 ArraySize = (uint)arraySize
@@ -322,10 +356,12 @@ public class StructWalker : ClientStructsSyntaxWalker {
 
         var vfuncAttr = reflectedMethod.GetCustomAttribute<VirtualFunctionAttribute>();
         if (vfuncAttr != null) {
-            // TODO vfunc addresses in structs
             addressInfo = new MetadataVirtualFunctionInfo {
+                VTable = this.name,
                 Index = vfuncAttr.Index
             };
+
+            args.Insert(0, (this.structType.MakePointerType(), "this"));
         }
 
         if (addressInfo == null) return;
@@ -364,8 +400,8 @@ public class EnumWalker : ClientStructsSyntaxWalker {
             throw new Exception("Expected an enum declaration");
         }
 
-        var typeSymbol = this.model.GetDeclaredSymbol(node!)!;
-        var @enum = this.GetTypeFromSymbol(typeSymbol)!;
+        var typeSymbol = this.model.GetDeclaredSymbol(node)!;
+        var @enum = this.GetTypeFromSymbol(typeSymbol);
         this.enumType = @enum;
 
         base.Visit(node);
