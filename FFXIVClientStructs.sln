@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FFXIVClientStructs.InteropS
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FFXIVClientStructs.ResolverTester", "FFXIVClientStructs.ResolverTester\FFXIVClientStructs.ResolverTester.csproj", "{1830145F-E3E8-4A4F-A2C5-A773B3A583F0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CExporter", "ida\CExporter\CExporter.csproj", "{C204099B-4058-4FCE-A0EC-60DE4ACB1DF9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FFXIVClientStructs.MetadataGenerator", "FFXIVClientStructs.MetadataGenerator\FFXIVClientStructs.MetadataGenerator.csproj", "{B0578916-2766-4116-8D1F-9477F1673D29}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{1830145F-E3E8-4A4F-A2C5-A773B3A583F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1830145F-E3E8-4A4F-A2C5-A773B3A583F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1830145F-E3E8-4A4F-A2C5-A773B3A583F0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C204099B-4058-4FCE-A0EC-60DE4ACB1DF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C204099B-4058-4FCE-A0EC-60DE4ACB1DF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C204099B-4058-4FCE-A0EC-60DE4ACB1DF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C204099B-4058-4FCE-A0EC-60DE4ACB1DF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0578916-2766-4116-8D1F-9477F1673D29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0578916-2766-4116-8D1F-9477F1673D29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0578916-2766-4116-8D1F-9477F1673D29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0578916-2766-4116-8D1F-9477F1673D29}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

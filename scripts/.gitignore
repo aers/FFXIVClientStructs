@@ -1,0 +1,6 @@
+# Generate yourself with FFXIVClientStructs.MetadataGenerator
+metadata.json
+metadata.h
+
+# Created by Python
+__pycache__

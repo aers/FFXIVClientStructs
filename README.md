@@ -1,5 +1,4 @@
-FFXIVClientStructs
-==================
+# FFXIVClientStructs
 
 This library encapsulates community efforts to reverse engineer the object layout of native classes in the game Final Fantasy XIV and provide tools to assist in interop with native objects and functions in the running game. The library is written in C# as the main third party plug-in loader, [Dalamud](https://github.com/goatcorp/Dalamud), is also written in C#.
 
@@ -7,21 +6,24 @@ Interacting with native game code is fundamentally unsafe and the library makes 
 
 We make extensive use of [C# Source Generators](https://learn.microsoft.com/en-us/dotnet/csharp/roslyn-sdk/source-generators-overview) to reduce the boilerplate necessary to call native functions. Rather than marshalled delegates, all functions are represented by [function pointers](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/proposals/csharp-9.0/function-pointers) resolved by the library from signatures and wrapped in a null safety check. From the user standpoint, calling these functions is as simple as calling a native C# method.
 
-### Reverse Engineering Rename Database
+## Reverse Engineering Helper Scripts
 
-A database and script(s) are maintained in the [ida](https://github.com/aers/FFXIVClientStructs/tree/main/ida) folder which can be used to import a large number of location names to IDA or Ghidra. This database is updated with every patch, although keep in mind this is volunteer work and some patches require more effort than others. There is more info in the readme in the folder itself.
+A collection of helper scripts for reverse engineering (particularly static analysis via IDA/Ghidra) are available in the [scripts](https://github.com/aers/FFXIVClientStructs/tree/main/scripts) folder.
 
-### Credits
+**IMPORTANT:** The old import script (`ffxiv_idarename.py`) has been rewritten as `metadata_importer.py`, and `data.yml` no longer exists (all items defined in `data.yml` have been moved into the C# library). Please read the README in the scripts folder for more information.
+
+## Credits
 
 This project would not be possible without significant work from many members of the FFXIV RE/Dalamud communities.
 
-#### Project Maintainers
+### Project Maintainers
+
 * [aers](https://github.com/aers)
 * [pohky](https://github.com/Pohky)
 * [Caraxi](https://github.com/Caraxi)
 * [daemitus](https://github.com/daemitus)
 
-#### Contributors
+### Contributors
 
 [Too many](https://github.com/aers/FFXIVClientStructs/graphs/contributors) to list.
 
@@ -29,7 +31,7 @@ This project would not be possible without significant work from many members of
 
 ### Signature Resolution
 
-The library uses signatures to resolve locations at runtime. In order to populate locations from signatures to call functions, you need to initialize the library once at load. However, if you're writing a Dalamud plugin using the built-in copy of the library, you can just reference it in the project and Dalamud will have already initialized it for you. 
+The library uses signatures to resolve locations at runtime. In order to populate locations from signatures to call functions, you need to initialize the library once at load. However, if you're writing a Dalamud plugin using the built-in copy of the library, you can just reference it in the project and Dalamud will have already initialized it for you.
 
 The following code is only necessary if you are not using Dalamud or using a local copy of the library in your plugin.
 
@@ -46,13 +48,13 @@ Native classes are represented as fixed-offset structs. If you have a pointer or
 
 Many native singletons can be accessed via static instance methods, which should get you started accessing native objects.
 
-#### Caveats
+## Caveats
 
 C# is not C++. There are some constructs that aren't possible to represent properly as well and some rough edges around the interop process.
 
-##### String types
+### String types
 
-The game has a string class, `Utf8String`, which is roughly analogous to `std::string` and is used in most places where strings are stored. However, it also uses C-style strings, aka pointers to null terminated character (UTF-8-encoded) arrays. C# strings are UTF-16 and pointers to them cannot be passed directly to functions requiring these C string pointers. Also, the C# `char` type is 16-bit and cannot be used to represent the arguments. All functions that take C string arguments therefore have `byte*` as the argument type. 
+The game has a string class, `Utf8String`, which is roughly analogous to `std::string` and is used in most places where strings are stored. However, it also uses C-style strings, aka pointers to null terminated character (UTF-8-encoded) arrays. C# strings are UTF-16 and pointers to them cannot be passed directly to functions requiring these C string pointers. Also, the C# `char` type is 16-bit and cannot be used to represent the arguments. All functions that take C string arguments therefore have `byte*` as the argument type.
 
 The library generates overloads for these methods that take `string` and perform the UTF-16 -> UTF-8 byte array conversion for you. Be aware this conversion is happening and consider storing your own copies of UTF-8 converted strings if you are noticing a performance hit from the string conversions. This is unlikely, but could happen.
 
@@ -60,15 +62,15 @@ There are also generated overloads that take `ReadOnlySpan<byte>` arguments. Thi
 
 No functions will ever return a C# `string` type in order to avoid making assumptions about the memory lifetime of pointers returned by the game.
 
-##### Fixed-Size Arrays
+### Fixed-Size Arrays
 
 C# does not support fixed-sized buffers of arbitrary types. While this feature is being worked on for a future version of the language (see the fixed buffer section of [this](https://github.com/dotnet/csharplang/blob/main/proposals/csharp-11.0/low-level-struct-improvements.md)), there is no ETA. All fixed-sized buffers of native types are represented as a buffer of `byte` instead. A future version of the library will support generation of convenience accessors for these, but that is currently not implemented. You will need to cast the type to access the array properly.
 
-##### Generic Pointers
+### Generic Pointers
 
 C# doesn't allow pointer types in generics. This makes it impossible to represent constructs like `std::vector<T*>`. The library uses a wrapper type `Pointer<T>` to get around this. `Pointer<T>` will implicitly convert to `T*` but you might need to do explicit conversions when working with collections of pointers.
 
-##### STD collections
+### STD collections
 
 There are wrappers for accessing data from a handful of C++ std library collections used by the game such as vector and map. These do not support writing to those collections, and you will have to implement that yourself if you want to update them.
 
@@ -92,11 +94,11 @@ Native game classes are represented as explicit layout structs. If the official 
 
 If the struct has unsafe members, mark the struct unsafe rather than the individual members. If you are using a generator, the struct must also be partial. If you are unable to get the exact size, use your best estimate.
 
-##### ICreatable
+### ICreatable
 
 If you give the struct a CTor function and the interface ICreatable it will be creatable using game allocators via convenience methods on IMemorySpace. This is only relevant for objects that you might want to create, which at this point in time is entirely UI objects.
 
-#### Class Fields
+### Class Fields
 
 ```csharp
     [FieldOffset(0x20)] public AtkResNode* ParentNode;
@@ -107,9 +109,9 @@ If you give the struct a CTor function and the interface ICreatable it will be c
 
 Because struct layouts are explicit, all fields are required to have a FieldOffset defined.
 
-Field types can (generally) only be types that the runtime considers [unmanaged](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/unmanaged-types). This boils down to most primitive integer/float types, enums, pointers, fixed-size primitive arrays, and structs that only contain fields meeting the definition. 
+Field types can (generally) only be types that the runtime considers [unmanaged](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/unmanaged-types). This boils down to most primitive integer/float types, enums, pointers, fixed-size primitive arrays, and structs that only contain fields meeting the definition.
 
-##### Arrays
+### Arrays
 
 Native fixed size arrays such as
 
@@ -138,6 +140,7 @@ All native functions are called via C# function pointers and incur the minimum p
 ```csharp
 public MemberFunctionAttribute(string signature)
 ```
+
 ```csharp
 [MemberFunction("E8 ?? ?? ?? ?? C1 E7 0C")]
 public partial void AddEvent(ushort eventType, uint eventParam, AtkEventListener* listener,
@@ -168,12 +171,13 @@ Note that the wrapper takes care of passing the object instance pointer (known a
 ```csharp
 public VirtualFunctionAttribute(uint index)
 ```
+
 ```csharp
 [VirtualFunction(78)]
 public partial StatusManager* GetStatusManager();
 ```
 
-Used for functions that are virtual members of native classes. 
+Used for functions that are virtual members of native classes.
 
 This will generate the following wrapper:
 
@@ -185,7 +189,7 @@ public unsafe struct CharacterVTable
 }
 
 [FieldOffset(0x0)] public CharacterVTable* VTable;
-  
+
 public partial global::FFXIVClientStructs.FFXIV.Client.Game.StatusManager* GetStatusManager()
 {
     fixed(Character* thisPtr = &this)
@@ -226,9 +230,9 @@ public static partial global::FFXIVClientStructs.FFXIV.Client.System.Framework.F
 }
 ```
 
-Note that in this case the static address is a pointer, so the attribute argument isPointer is true and our pointer turns into a pointer to a pointer which is handled by the wrapper. Some static locations in the client are static instances which are allocated within the binary (`static GameMain GameMainInstance`) and some are static pointers to instances which are allocated on the heap at runtime (`static Framework* FrameworkInstance`). 
+Note that in this case the static address is a pointer, so the attribute argument isPointer is true and our pointer turns into a pointer to a pointer which is handled by the wrapper. Some static locations in the client are static instances which are allocated within the binary (`static GameMain GameMainInstance`) and some are static pointers to instances which are allocated on the heap at runtime (`static Framework* FrameworkInstance`).
 
-##### Static Address Signatures
+### Static Address Signatures
 
 Since the instructions resolved from static address signatures are variable length, an offset argument is required to tell the resolver where to read the static address location from in the signature. This offset is usually to the first (0-indexed) ?? in your signature, but could be further away in some situations.
 
