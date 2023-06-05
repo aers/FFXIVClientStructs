@@ -5,7 +5,7 @@
 public unsafe partial struct DrawDataContainer
 {
     [FieldOffset(0x000)] public void** Vtable;
-    [FieldOffset(0x008)] public void*  Unk8;
+    [FieldOffset(0x008)] public Character*  Parent;
 
     [FieldOffset(0x010)] public WeaponModelId MainHandModel;
     [FieldOffset(0x020)] public DrawObjectData MainHand;
