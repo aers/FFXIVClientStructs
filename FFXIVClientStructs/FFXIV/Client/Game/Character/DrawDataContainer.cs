@@ -44,6 +44,28 @@ public unsafe partial struct DrawDataContainer
     [MemberFunction("E8 ?? ?? ?? ?? 33 DB BE")]
     public partial void LoadWeapon(WeaponSlot slot, WeaponModelId weaponData, byte redrawOnEquality, byte unk2, byte skipGameObject, byte unk4);
 
+    /// <summary>
+    /// Called when Hide/Display Weapons when sheathed is toggled or /displayarms is used.
+    /// </summary>
+    /// <param name="hide">When false, weapons will be turned visible, when true, they will be hidden.</param>
+    [MemberFunction("E8 ?? ?? ?? ?? 4C 8B 6C 24 ?? 0F BA E5")]
+    public partial void HideWeapons(bool hide);
+
+    /// <summary>
+    /// Called when Hide/Display Headgear is toggled or /displayhead is used.
+    /// </summary>
+    /// <param name="unk">Almost always 0, but sometimes not?</param>
+    /// <param name="hide">When false, the headgear will be turned visible, when true it will be hidden.</param>
+    [MemberFunction("E8 ?? ?? ?? ?? 49 8B 04 ?? 80 A3")]
+    public partial void HideHeadgear(uint unk, bool hide);
+
+    /// <summary>
+    /// Called when Manually Adjust Visor is toggled or /visor is used.
+    /// </summary>
+    /// <param name="state">When true, visor will be toggled on, when false it will be toggled off.</param>
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 97 ?? ?? ?? ?? 48 8B CF C0 EA")]
+    public partial void SetVisor(bool state);
+
     public enum WeaponSlot : uint
     {
         MainHand = 0,

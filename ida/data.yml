@@ -3679,6 +3679,9 @@ classes:
     funcs:
       0x1412BEE60: ctor
       0x1412C05F0: LoadWeapon
+      0x1412c1350: HideWeapons
+      0x140c02880: HideHeadgear
+      0x1412c1dc0: SetVisor
   Client::Game::Character::DrawData:
     vtbls:
       - ea: 0x141990C90
