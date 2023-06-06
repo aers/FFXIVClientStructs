@@ -41,7 +41,7 @@ public unsafe partial struct CharacterBase
     public bool HasUmbrella
     {
         get => (UnkFlags_03 & 0x01) == 0x01;
-        set => UnkFlags_01 = (byte)(value ? UnkFlags_03 | 0x01 : UnkFlags_03 & ~0x01);
+        set => UnkFlags_03 = (byte)(value ? UnkFlags_03 | 0x01 : UnkFlags_03 & ~0x01);
     }
 
 
