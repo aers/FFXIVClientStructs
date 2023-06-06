@@ -161,7 +161,7 @@ public sealed partial class Resolver
     {
         foreach (Address address in _addresses)
         {
-            if (_textCache!.TryGetValue(address.String, out var offset))
+            if (_textCache!.TryGetValue(address.CacheKey, out var offset))
             {
                 address.Value = (nuint) (offset + _baseAddress);
                 byte firstByte = (byte)address.Bytes[0];
@@ -198,11 +198,11 @@ public sealed partial class Resolver
         {
             if (_preResolveArray[targetSpan[location]] is not null)
             {
-                List<Address> availableAddresses = _preResolveArray[targetSpan[location]]!;
+                Address[] availableAddresses = _preResolveArray[targetSpan[location]]!.ToArray();
                 
                 ReadOnlySpan<ulong> targetLocationAsUlong = MemoryMarshal.Cast<byte, ulong>(targetSpan[location..]);
 
-                int avLen = availableAddresses.Count;
+                int avLen = availableAddresses.Length;
                 
                 for(int i = 0; i < avLen; i++)
                 {
@@ -236,18 +236,18 @@ public sealed partial class Resolver
                         }
 
                         address.Value = (nuint) (_baseAddress + _textSectionOffset + outLocation);
-                        if (_textCache?.TryAdd(address.String, outLocation + _textSectionOffset) == true)
+
+                        if (_textCache?.TryAdd(address.CacheKey, outLocation + _textSectionOffset) == true)
                             _cacheChanged = true;
-                        availableAddresses.Remove(address);
-                        if (availableAddresses.Count == 0)
+
+                        _preResolveArray[targetSpan[location]]!.Remove(address);
+                        if (_preResolveArray[targetSpan[location]]!.Count == 0)
                         {
                             _preResolveArray[targetSpan[location]] = null;
                             _totalBuckets--;
                             if (_totalBuckets == 0)
                                 goto outLoop;
                         }
-
-                        break;
                     }
                 }
             }

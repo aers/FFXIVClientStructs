@@ -9,6 +9,8 @@ public class Address
         this.Bytes = bytes;
         this.Mask = mask;
         this.Value = value;
+
+        this.CacheKey = this.String;
     }
 
     public readonly string Name;
@@ -16,6 +18,7 @@ public class Address
     public readonly ulong[] Bytes;
     public readonly ulong[] Mask;
     public nuint Value;
+    public string CacheKey;
 }
 
 public sealed class StaticAddress : Address
@@ -23,6 +26,8 @@ public sealed class StaticAddress : Address
     public StaticAddress(string name, string @string, ulong[] bytes, ulong[] mask, nuint value, int offset) : base(name, @string, bytes, mask, value)
     {
         this.Offset = offset;
+
+        this.CacheKey = $"{this.String}+0x{this.Offset:X}";
     }
 
     public int Offset;
