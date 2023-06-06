@@ -15,9 +15,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 public unsafe partial struct CharacterBase
 {
     [FieldOffset(0x0)] public DrawObject DrawObject;
-    [FieldOffset(0x90)] public byte UnkFlags_01; // bit 8 - has visor
+    [FieldOffset(0x90)] public byte UnkFlags_01;
     [FieldOffset(0x91)] public byte UnkFlags_02;
-    [FieldOffset(0x92)] public byte UnkFlags_03; // bit 1 - has umbrella
+    [FieldOffset(0x92)] public byte UnkFlags_03;
     [FieldOffset(0x98)] public int SlotCount; // model slots
     [FieldOffset(0xA0)] public Skeleton* Skeleton; // Client::Graphics::Render::Skeleton
     
@@ -25,6 +25,25 @@ public unsafe partial struct CharacterBase
     [FieldOffset(0xA8)] public void** ModelArray; // array of Client::Graphics::Render::Model ptrs size = SlotCount
     [FieldOffset(0xA8)] public Model** Models; // size = SlotCount
     [FieldOffset(0x148)] public void* PostBoneDeformer; // Client::Graphics::Scene::PostBoneDeformer ptr
+
+    public bool IsChangingVisor
+    {
+        get => (UnkFlags_01 & 0x80) == 0x80;
+        set => UnkFlags_01 = (byte) (value ? UnkFlags_01 | 0x80 : UnkFlags_01 & ~0x80);
+    }
+
+    public bool VisorToggled
+    {
+        get => (UnkFlags_01 & 0x40) == 0x40;
+        set => UnkFlags_01 = (byte)(value ? UnkFlags_01 | 0x40 : UnkFlags_01 & ~0x40);
+    }
+
+    public bool HasUmbrella
+    {
+        get => (UnkFlags_03 & 0x01) == 0x01;
+        set => UnkFlags_01 = (byte)(value ? UnkFlags_03 | 0x01 : UnkFlags_03 & ~0x01);
+    }
+
 
     [FieldOffset(0x150)]
     public BonePhysicsModule* BonePhysicsModule; // Client::Graphics::Physics::BonePhysicsModule ptr
