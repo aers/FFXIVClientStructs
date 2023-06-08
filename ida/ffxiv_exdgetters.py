@@ -772,6 +772,9 @@ def do_structs():
             meminfo = ida_struct.get_member_by_name(struct_type, name)
             ida_struct.set_member_tinfo(struct_type, meminfo, 0, get_tinfo_from_type(type), 0)
 
+def search_binary(ea, pattern, flag):
+    return ida_search.find_binary(ea, flag & 1 and ida_ida.cvar.inf.max_ea or ida_ida.cvar.inf.min_ea, pattern, 16, flag)
+
 def do_pattern(pattern, suffix, struct_parsed):
     ea = 0
 
@@ -785,13 +788,13 @@ def do_pattern(pattern, suffix, struct_parsed):
         sub_row_id_arg.name = 'subRowId'
 
     while True:
-        ea = ida_search.find_binary(ea + 1, ida_search.SEARCH_DOWN & 1 and ida_ida.cvar.inf.max_ea or ida_ida.cvar.inf.min_ea, pattern, 16, ida_search.SEARCH_DOWN)
+        ea = search_binary(ea + 1, pattern, ida_search.SEARCH_DOWN)
 
         if ea == 0xFFFFFFFFFFFFFFFF:
             break
 
         # this is mega retarded but it works rofl
-        ins = ida_search.find_binary(ea, ida_search.SEARCH_DOWN & 1 and ida_ida.cvar.inf.max_ea or ida_ida.cvar.inf.min_ea, "BA ? ? ? ?", 16, ida_search.SEARCH_DOWN)
+        ins = search_binary(ea, "BA ? ? ? ?", ida_search.SEARCH_DOWN)
         sheetIdx = idc.get_wide_dword(ins + 1)
 
         origName = idc.get_func_name(ea)
@@ -876,7 +879,89 @@ def run():
 
     if struct_parsed:
         do_structs()
-    
+
+        ea = search_binary(0, '40 53 48 83 EC 20 48 8B 49 20 41 8B D8 48 8B 01 ?? ?? ?? 48 85 C0 74 2F 4C 8B 08 45 33 C0 8B D3 48 8B C8 ?? ?? ?? ?? 48 8B D8 48 85 C0 74 18 48 8B 10 48 8B C8 ?? ?? ?? 48 8B 13 48 8B CB 48 83 C4 20 5B ?? ?? ?? ?? 33 C0 48 83 C4 20 5B C3', ida_search.SEARCH_DOWN)
+        tif, funcdata = ida_typeinf.tinfo_t(), ida_typeinf.func_type_data_t()
+        arg1 = ida_typeinf.funcarg_t()
+        arg1.type = get_tinfo_from_type('__int64')
+        arg1.name = 'a1'
+        arg2 = ida_typeinf.funcarg_t()
+        arg2.type = get_tinfo_from_type('Component::Exd::SheetsEnum')
+        arg2.name = 'sheetIndex'
+        arg3 = ida_typeinf.funcarg_t()
+        arg3.type = get_tinfo_from_type('unsigned int')
+        arg3.name = 'row'
+        arg4 = ida_typeinf.funcarg_t()
+        arg4.type = get_tinfo_from_type('__int16')
+        arg4.name = 'subRow'
+        arg5 = ida_typeinf.funcarg_t()
+        arg5.type = get_tinfo_from_type('__int64 *')
+        arg5.name = 'a5'
+        arg6 = ida_typeinf.funcarg_t()
+        arg6.type = get_tinfo_from_type('__int64 *')
+        arg6.name = 'a6'
+
+        ida_typeinf.guess_tinfo(tif, ea)
+        if not tif.get_func_details(funcdata):
+            print("Failed to get func details for GetRowBySheetIndexAndRowId @ %X" % ea)
+        else:
+            if not funcdata.empty():
+                funcdata.clear()
+            funcdata.push_back(arg1)
+            funcdata.push_back(arg2)
+            funcdata.push_back(arg3)
+
+            funcdata.rettype = get_tinfo_from_type('__int64')
+
+            if not tif.create_func(funcdata):
+                print("! failed to create function type for GetRowBySheetIndexAndRowId")
+                return
+
+            ida_typeinf.apply_tinfo(ea, tif, ida_typeinf.TINFO_DEFINITE)
+        
+        ea = search_binary(0, '40 53 55 56 57 41 56 48 83 EC 40 48 8B 05 ?? ?? ?? 01 48 33 C4 48 89 44 24 38 48 8B 49 20 45 8B F1 48 8B B4 24 90 00 00 00 41 8B E8 48 8B BC 24 98 00 00 00 48 8B 01 FF 50 08 48 8B D8 48 85 F6 74 03 48 89 06 48 85 DB 74 61 48 8D 4C 24 28 E8 ?? ?? ?? 01 41 B9 01 00 00 00 66 44 89 74 24 20 4C 8D 44 24 20 8B D5 48 8D 4C 24 28 E8 ?? ?? ?? 01 48 8B 03 48 8D 54 24 28 45 33 C0 48 8B CB FF 50 50 48 8B D8 48 85 FF 74 03 48 89 07 48 85 DB 74 19 48 85 FF 75 09 48 8B 10 48 8B CB FF 52 08 48 8B 03 48 8B CB FF 50 10 EB 02 33 C0 48 8B 4C 24 38 48 33 CC E8 ?? ?? ?? 01 48 83 C4 40 41 5E 5F 5E 5D 5B C3', ida_search.SEARCH_DOWN)
+
+        ida_typeinf.guess_tinfo(tif, ea)
+        if not tif.get_func_details(funcdata):
+            print("Failed to get func details for GetRowBySheetIndexAndRowIdAndSubId @ %X" % ea)
+        else:
+            if not funcdata.empty():
+                funcdata.clear()
+            funcdata.push_back(arg1)
+            funcdata.push_back(arg2)
+            funcdata.push_back(arg3)
+            funcdata.push_back(arg4)
+            funcdata.push_back(arg5)
+            funcdata.push_back(arg6)
+
+            funcdata.rettype = get_tinfo_from_type('__int64')
+
+            if not tif.create_func(funcdata):
+                print("! failed to create function type for GetRowBySheetIndexAndRowIdAndSubId")
+                return
+
+            ida_typeinf.apply_tinfo(ea, tif, ida_typeinf.TINFO_DEFINITE)
+
+        ea = search_binary(0, '48 89 5C 24 08 57 48 83 EC 20 48 8B F9 41 8B D8 48 8B 49 20 48 8B 01 ?? ?? ?? 44 8B C3 48 8B CF 48 8B D0 48 8B 5C 24 30 48 83 C4 20 5F E9 ?? ?? ?? ??', ida_search.SEARCH_DOWN)
+
+        ida_typeinf.guess_tinfo(tif, ea)
+        if not tif.get_func_details(funcdata):
+            print("Failed to get func details for GetRowBySheetIndexAndRowIndex @ %X" % ea)
+        else:
+            if not funcdata.empty():
+                funcdata.clear()
+            funcdata.push_back(arg1)
+            funcdata.push_back(arg2)
+            funcdata.push_back(arg3)
+
+            funcdata.rettype = get_tinfo_from_type('__int64')
+
+            if not tif.create_func(funcdata):
+                print("! failed to create function type for GetRowBySheetIndexAndRowIndex")
+                return
+
+            ida_typeinf.apply_tinfo(ea, tif, ida_typeinf.TINFO_DEFINITE)
+        
     # todo: this doesnt find all getters, there's a few slightly different ones
     # along with others that call different virts in slightly different ways/different args
     for pattern, suffix in exd_func_patterns.items():
