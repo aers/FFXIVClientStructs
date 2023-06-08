@@ -13,6 +13,7 @@ import ida_kernwin
 import ida_search
 import ida_ida
 import ida_typeinf
+import ida_hexrays
 
 import os
 from io import BufferedReader
@@ -817,7 +818,7 @@ def do_structs():
         struct_name = f'Component::Exd::Sheets::{exd_map[key]}'
         struct_id = ida_struct.add_struc(-1, struct_name)
         struct_type = ida_struct.get_struc(struct_id)
-        exd_struct_map[exd_map[key]] = struct_name
+        exd_struct_map[key] = struct_name
         for index in exd_header:
             [type, name] = exd_header[index]
             ida_struct.add_struc_member(struct_type, name, -1, get_idc_type_from_ida_type(type), None, get_size_from_ida_type(type))
@@ -829,6 +830,12 @@ def do_pattern(pattern, suffix, struct_parsed):
 
     if suffix != None:
         print(f'Finding exd funcs of {suffix}... please wait.')
+        row_id_arg = ida_typeinf.funcarg_t()
+        row_id_arg.type = get_tinfo_from_type('unsigned int')
+        row_id_arg.name = 'rowId'
+        sub_row_id_arg = ida_typeinf.funcarg_t()
+        sub_row_id_arg.type = get_tinfo_from_type('__int16')
+        sub_row_id_arg.name = 'subRowId'
 
     while True:
         ea = ida_search.find_binary(ea + 1, ida_search.SEARCH_DOWN & 1 and ida_ida.cvar.inf.max_ea or ida_ida.cvar.inf.min_ea, pattern, 16, ida_search.SEARCH_DOWN)
@@ -869,32 +876,46 @@ def do_pattern(pattern, suffix, struct_parsed):
             idc.set_name(ea, fnName)
             idc.set_cmt(ins, "Sheet: %s (%i)" % (sheetName, sheetIdx), 0)
 
-        # TODO figure out why this doesn't work
         if struct_parsed:
-            func_info = ida_typeinf.tinfo_t()
-            funcdata = ida_typeinf.func_type_data_t()
-            if not ida_nalt.get_tinfo(func_info, ea):
-                print(func_info.is_funcptr() or func_info.is_func())
-                print("Failed to get tinfo for %s @ %X" % (fnName, ea))
-                continue
+            tif, funcdata = ida_typeinf.tinfo_t(), ida_typeinf.func_type_data_t()
 
-            if not func_info.get_func_details(funcdata):
-                print("Failed to get func details for %s @ %X" % (fnName, ea))
-                continue
+            ida_typeinf.guess_tinfo(tif, ea)
+            if not tif.get_func_details(funcdata):
+                ida_hexrays.decompile(ea)
+                ida_typeinf.guess_tinfo(tif, ea)
+                if not tif.get_func_details(funcdata):
+                    print("Failed to get func details for %s @ %X" % (fnName, ea))
+                    continue
+            
+            # func_info = ida_typeinf.tinfo_t()
+            # funcdata = ida_typeinf.func_type_data_t()
+            # if not ida_nalt.get_tinfo(func_info, ea):
+            #     print(func_info.is_funcptr() or func_info.is_func())
+            #     print("Failed to get tinfo for %s @ %X" % (fnName, ea))
+            #     continue
 
+            # if not func_info.get_func_details(funcdata):
+            #     print("Failed to get func details for %s @ %X" % (fnName, ea))
+            #     continue
+            
             rettype = get_tinfo_from_type(f'{exd_struct_map[sheetIdx]} *')
 
             if rettype == None:
                 print("Failed to get rettype for %s" % exd_struct_map[sheetIdx])
                 continue
 
+            funcdata.push_back(row_id_arg)
+
+            if suffix == 'RowAndSubRowId':
+                funcdata.push_back(sub_row_id_arg)
+
             funcdata.rettype = rettype
 
-            if not func_info.create_func(funcdata):
+            if not tif.create_func(funcdata):
                 print("! failed to create function type for", fnName)
                 return
 
-            idaapi.apply_tinfo(ea, func_info, idaapi.TINFO_DEFINITE)
+            ida_typeinf.apply_tinfo(ea, tif, ida_typeinf.TINFO_DEFINITE)
 
 
 def run():
