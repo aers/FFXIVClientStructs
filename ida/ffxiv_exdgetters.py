@@ -147,9 +147,6 @@ class DatBlockHeader:
         self.block_data_size = int.from_bytes(bytes[8:12], byteorder='little')
         self.dat_block_type = int.from_bytes(bytes[12:16], byteorder='little')
 
-    def __repr__(self):
-        return f'''Size: {self.size} Unknown1: {self.unknown1} DatBlockType: {self.dat_block_type} BlockDataSize: {self.block_data_size}'''
-
 
 class SqPackHeader:
     def __init__(self, file: BufferedReader):
@@ -162,9 +159,6 @@ class SqPackHeader:
             self.type = int.from_bytes(file.read(4), byteorder='little')
         else:
             raise Exception('PS3 is not supported')
-
-    def __repr__(self):
-        return f'''Magic: {self.magic} Platform: {self.platform_id} Size: {self.size} Version: {self.version} Type: {self.type}'''
 
 
 class SqPackIndexHeader:
@@ -188,9 +182,6 @@ class SqPackIndexHeader:
         self.reserved = bytes[304:960]
         self.hash = bytes[960:1024]
 
-    def __repr__(self):
-        return f'''Size: {self.size} Version: {self.version} Index Data Offset: {self.index_data_offset} Index Data Size: {self.index_data_size} Index Data Hash: {self.index_data_hash} Number Of Data File: {self.number_of_data_file} Synonym Data Offset: {self.synonym_data_offset} Synonym Data Size: {self.synonym_data_size} Synonym Data Hash: {self.synonym_data_hash} Empty Block Data Offset: {self.empty_block_data_offset} Empty Block Data Size: {self.empty_block_data_size} Empty Block Data Hash: {self.empty_block_data_hash} Dir Index Data Offset: {self.dir_index_data_offset} Dir Index Data Size: {self.dir_index_data_size} Dir Index Data Hash: {self.dir_index_data_hash} Index Type: {self.index_type} Reserved: {self.reserved} Hash: {self.hash}'''
-
 
 class SqPackIndexHashTable:
     def __init__(self, bytes: bytes):
@@ -206,9 +197,6 @@ class SqPackIndexHashTable:
 
     def data_file_offset(self):
         return (self.data & ~0xF) * 0x08
-
-    def __repr__(self):
-        return f'''Hash: {self.hash} Data: {self.data} Padding: {self.padding} Is Synonym: {self.is_synonym()} Data File ID: {self.data_file_id()} Data File Offset: {self.data_file_offset()}'''
 
 
 class SqPack:
@@ -271,9 +259,6 @@ class SqPack:
                 data.append(zlib.decompress(self.file.read(block_header.block_data_size), wbits=-15))
 
         return data
-    
-    def __repr__(self):
-        return f'''Path: {os.path.join(self.root, 'sqpack', self.path)} Header: {self.header}'''
 
 
 class Repository:
@@ -315,9 +300,6 @@ class Repository:
         id = index.data_file_id()
         offset = index.data_file_offset()
         return SqPack(self.root, sqpack.data_files[id]).read_file(offset)
-    
-    def __repr__(self):
-        return f'''Repository: {self.name} ({self.version}) - {self.expansion_id}'''
 
 
 class GameData:
@@ -343,9 +325,6 @@ class GameData:
 
     def get_file(self, file: 'ParsedFileName'):
         return self.repositories[self.get_repo_index(file.repo)].get_file(file.index)
-
-    def __repr__(self):
-        return f'''Repositories: {self.repositories}'''
 
 
 class ExcelListFile:
@@ -385,9 +364,6 @@ class ExcelHeader:
         self.row_count = int.from_bytes(self.data[20:24], 'big')
         self.unknown4 = [int.from_bytes(self.data[24:28], 'big'), int.from_bytes(self.data[28:32], 'big')]
 
-    def __repr__(self):
-        return f'''Header: {self.magic}, version: {self.version}, data_offset: {self.data_offset}, column_count: {self.column_count}, page_count: {self.page_count}, language_count: {self.language_count}, unknown1: {self.unknown1}, unknown2: {self.unknown2}, variant: {self.variant}, unknown3: {self.unknown3}, row_count: {self.row_count}, unknown4: {self.unknown4}'''
-
 class ExcelColumnDefinition:
     def __init__(self, data: bytes):
         self.data = data
@@ -396,9 +372,6 @@ class ExcelColumnDefinition:
     def parse(self):
         self.type = ExcelColumnDataType(int.from_bytes(self.data[0:2], 'big'))
         self.offset = int.from_bytes(self.data[2:4], 'big')
-
-    def __repr__(self):
-        return f'''[{self.type.name}, {self.offset:x}]'''
     
 class ExcelDataPagination:
     def __init__(self, data: bytes):
@@ -408,9 +381,6 @@ class ExcelDataPagination:
     def parse(self):
         self.start_id = int.from_bytes(self.data[0:2], 'big')
         self.row_count = int.from_bytes(self.data[2:4], 'big')
-    
-    def __repr__(self):
-        return f'''[{self.start_id:x}, {self.row_count}]'''
 
 class ExcelHeaderFile:
     def __init__(self, data: list[bytes]):
@@ -462,9 +432,6 @@ class ExcelHeaderFile:
                     mapped[self.column_definitions[i].offset] = (column_data_type_to_ida_type(self.column_definitions[i].type), names[i])
         mapped = dict(sorted(mapped.items()))
         return [mapped, size]
-    
-    def __repr__(self):
-        return f'''ExcelHeaderFile: {self.header} , {self.column_definitions} , {self.pagination} , {self.languages}'''
 
 
 class ParsedFileName:
@@ -477,9 +444,6 @@ class ParsedFileName:
         self.repo = parts[1]
         if self.repo[0] != 'e' or self.repo[1] != 'x' or not self.repo[2].isdigit():
             self.repo = 'ffxiv'
-    
-    def __repr__(self):
-        return f'''ParsedFileName: {self.path}, category: {self.category}, index: {self.index:X}, index2: {self.index2:X}, repo: {self.repo}'''
 
 
 class Crc32:
@@ -616,9 +580,6 @@ class GroupDefinition:
                 last_key = self.members[i].data['name']
                 defs.extend(self.members[i].flatten(count + i, index + len(defs), append))
         return defs
-    
-    def __repr__(self):
-        return f'''{self.members}'''
         
 
 class RepeatDefinition:
@@ -656,12 +617,6 @@ class RepeatDefinition:
                     defs.append([self.name + '_' + str(i), index + i])
         return defs
 
-    def __repr__(self):
-        if(hasattr(self, 'type')):
-            return f'''{self.type}: {self.count}x {self.sub_definition}'''
-        else:
-            return f'''{self.name}: {self.count}x'''
-
 class Definitions:
     def __init__(self, data: dict[str, str | int]):
         self.data = data
@@ -692,9 +647,6 @@ class Definitions:
         for [name, index] in defs:
             defsOut[index] = name
         return defsOut
-    
-    def __repr__(self):
-        return f'''{self.definitions}'''
 
 class JsonExcelColumnDefinition:
     def __init__(self, name: str, mute: bool = False, supress: bool = False):
@@ -714,11 +666,6 @@ class JsonExcelColumnDefinition:
             return
         self.json = json.loads(self.req.text)
         self.definitions = Definitions(self.json['definitions'])
-        
-    def __repr__(self):
-        if(not hasattr(self, 'definitions')):
-            return f'''{self.name}: None'''
-        return f'''{self.name}: {self.definitions}'''
 
 f = open(os.path.join(os.getenv('APPDATA'), 'XIVLauncher', 'launcherConfigV3.json'), 'r')
 
