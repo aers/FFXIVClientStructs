@@ -526,10 +526,10 @@ classes:
       0x1412950C0: ctor
       0x141294940: dtor
       0x141297380: GetFateById
-  BattleBuddyList:
+  Client::Game::BattleBuddyList:
     funcs:
       0x140960460: GetMemberBattleCharaByIndex
-  QuestManager:
+  Client::Game::QuestManager:
     instances:
       - ea: 0x1421630E0
         pointer: False
@@ -544,7 +544,7 @@ classes:
       0x14083FF40: GetBeastTribeAllowance
       0x1408809C0: IsLevequestComplete
       0x140925D90: GetNextLeveAllowancesTimestamp # multiply by 60 for unix timestamp
-  InventoryManager:
+  Client::Game::InventoryManager:
     instances:
       - ea: 0x14215FA20
         pointer: False
