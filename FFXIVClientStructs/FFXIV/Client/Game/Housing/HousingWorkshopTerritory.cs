@@ -155,7 +155,7 @@ public struct HousingWorkshopSubmarineGathered
     [FieldOffset(0x0)] public byte Point;
     [FieldOffset(0x1)] public SubmarineRating PointRating;
     [FieldOffset(0x2)] public byte UnlockedPoint;
-    [FieldOffset(0x3)] public byte FirstExploration;
+    [FieldOffset(0x3)] public bool FirstExploration;
     [FieldOffset(0x4)] public bool AdditionalSubmarineUnlocked;
     [FieldOffset(0x5)] public bool DoubleDip;
     [FieldOffset(0x6)] public ushort UnknownUshort;
