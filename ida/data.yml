@@ -2771,6 +2771,7 @@ classes:
       0x1405025B0: DetachTooltipNode
       0x1405027D0: ShowNodeTooltip  # takes node as argument
       0x140502860: ShowTooltip # similar args to attach tooltip
+      0x140503000: HideTooltip # (this, addonId, unkBool)
       0x140503310: DetachTooltipAddon
   Component::GUI::AtkEventTarget:
     vtbls:
