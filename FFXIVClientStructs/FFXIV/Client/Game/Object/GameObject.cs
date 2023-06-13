@@ -31,7 +31,7 @@ public struct GameObjectID
 
 // size = 0x1A0
 // ctor E8 ?? ?? ?? ?? 48 8D 8E ?? ?? ?? ?? 48 89 AE ?? ?? ?? ?? 48 8B D7 
-[StructLayout(LayoutKind.Explicit, Size = 0x1C0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x1A0)]
 [VTableAddress("48 8d 05 ?? ?? ?? ?? c7 81 80 00 00 00 00 00 00 00", 3)]
 public unsafe partial struct GameObject
 {
