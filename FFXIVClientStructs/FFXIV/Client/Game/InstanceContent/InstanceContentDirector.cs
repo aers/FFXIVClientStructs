@@ -8,7 +8,7 @@ public unsafe struct InstanceContentDirector
     /// <summary>
     /// The remaining time in seconds for the instance.
     /// </summary>
-    [FieldOffset(0xC08)] public float TimeRemaining;
+    [FieldOffset(0xC08), Obsolete("Use ContentDirector.ContentTimeLeft")] public float TimeRemaining;
     [FieldOffset(0xCDC)] public InstanceContentType InstanceContentType;
 }
 

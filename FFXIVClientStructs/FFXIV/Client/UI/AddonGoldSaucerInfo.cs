@@ -16,7 +16,7 @@ public unsafe partial struct AddonGoldSaucerInfo
 
 
     [FixedSizeArray<Pointer<AtkComponentRadioButton>>(3)]
-    [FieldOffset(0x2D0)] public fixed byte ChocoboRadioButtons[0x80 * 3]; // Parameters/Pedigree/Appearance
+    [FieldOffset(0x2D0)] public fixed byte ChocoboRadioButtons[0x8 * 3]; // Parameters/Pedigree/Appearance
 
     [FieldOffset(0x2E8)] public AtkCollisionNode* ContentsSection;
     [FieldOffset(0x2F8)] public AtkResNode* ChocoboPetInfo;

@@ -19,9 +19,12 @@ public unsafe struct BalloonInfo
 
     [FieldOffset(0xE0)] public float CameraDistance;
     [FieldOffset(0xE4)] public int BalloonId; // matches BalloonCounter when the balloon is made
-    [FieldOffset(0xE8)] public BalloonType Type;
-    [FieldOffset(0xE9)] public byte Slot;
+    [FieldOffset(0xE8)] public ushort ParentBone;
+    [FieldOffset(0xE8), Obsolete("Wrong mapping")] public BalloonType Type;
+    [FieldOffset(0xE9), CExportIgnore] public byte Slot; // Does not exist at current offset or was removed
     [FieldOffset(0xEA)] public byte UnknownByteEA;
+    [FieldOffset(0xEB)] public byte UnknownByteEB;
+    [FieldOffset(0xEC)] public byte UnknownByteEC;
 }
 
 // not sure how this maps to the addon yet, might just be in order though

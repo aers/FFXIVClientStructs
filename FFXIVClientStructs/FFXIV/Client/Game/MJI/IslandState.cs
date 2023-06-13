@@ -64,7 +64,7 @@ public unsafe struct IslandState {
     /// A bitfield representing if a specific recipe (MJIRecipe) is unlocked. Backing field for
     /// <see cref="MJIManager.IsRecipeUnlocked"/>, which should be used where possible.
     /// </summary>
-    [FieldOffset(0x0F)] public fixed byte UnlockedRecipes[3]; // bitfield
+    [FieldOffset(0x10)] public fixed byte UnlockedRecipes[3]; // bitfield
 
     /// <summary>
     /// An array of booleans representing if a specific item is (un)locked. Locked/unavailable items are set to true,

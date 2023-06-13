@@ -7,7 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //     Component::GUI::AtkEventListener
 [Addon("WeeklyBingo")]
 [StructLayout(LayoutKind.Explicit, Size = 0x23C8)]
-public struct AddonWeeklyBingo
+public unsafe struct AddonWeeklyBingo
 {
     [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
     [FieldOffset(0x220)] public DutySlotList DutySlotList;
@@ -38,10 +38,12 @@ public unsafe struct DutySlotList
     [FieldOffset(0x1270)] public DutySlot DutySlot14;
     [FieldOffset(0x13D8)] public DutySlot DutySlot15;
     [FieldOffset(0x1540)] public DutySlot DutySlot16;
-    [FieldOffset(0x18C8)] public AtkComponentButton* SecondChanceButton;
-    [FieldOffset(0x18D0)] public AtkComponentButton* CancelButton;
-    [FieldOffset(0x18D8)] public AtkTextNode* SecondChancesRemaining;
-    [FieldOffset(0x18E0)] public AtkResNode* DutyContainer;
+
+    //These overrun the size and are marked with error obsolete due to it
+    [FieldOffset(0x18C8), Obsolete("Overrun struct size do not use", true)] public AtkComponentButton* SecondChanceButton;
+    [FieldOffset(0x18D0), Obsolete("Overrun struct size do not use", true)] public AtkComponentButton* CancelButton;
+    [FieldOffset(0x18D8), Obsolete("Overrun struct size do not use", true)] public AtkTextNode* SecondChancesRemaining;
+    [FieldOffset(0x18E0), Obsolete("Overrun struct size do not use", true)] public AtkResNode* DutyContainer;
 
     public DutySlot this[int index] => index switch
     {

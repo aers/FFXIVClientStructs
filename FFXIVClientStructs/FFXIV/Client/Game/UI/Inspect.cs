@@ -6,12 +6,15 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 [StructLayout(LayoutKind.Explicit, Size = 0x268)]
 public unsafe struct Inspect
 {
-    [FieldOffset(0xC)] public GameObjectID ObjectId;
+    [FieldOffset(0xC), Obsolete("Improperly mapped use outside variables")] public GameObjectID ObjectId;
 
+    [FieldOffset(0xC)] public uint ObjectID;
+    [FieldOffset(0x10)] public byte Type;
+    [FieldOffset(0x10), Obsolete("Not valid. Use CustomizeData.Sex")] public byte Sex;
     [FieldOffset(0x12)] public short WorldId;
     [FieldOffset(0x14)] public fixed byte Name[64];
+
     [FieldOffset(0x54)] public fixed byte PSNOnlineID[17];
-    [FieldOffset(0x10)] public byte Sex;
     [FieldOffset(0x66)] public byte ClassJobId;
     [FieldOffset(0x67)] public byte Level;
 	[FieldOffset(0x68)] public byte SyncedLevel;

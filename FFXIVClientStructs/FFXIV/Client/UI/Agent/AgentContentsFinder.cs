@@ -14,17 +14,19 @@ public unsafe partial struct AgentContentsFinder
 
     [FieldOffset(0x0)] public AgentInterface AgentInterface;
 
-    [FieldOffset(0x86)] public byte* DescriptionString; // null-terminated cstring representing the currently displayed duty description
+    [FieldOffset(0x38)] public Utf8String Description;
+
+    [FieldOffset(0x86), Obsolete("Use Description instead")] public byte* DescriptionString; // null-terminated cstring representing the currently displayed duty description
     
-    [FieldOffset(0x1B8)] public ContentsFinderRewards Reward;
-    [FieldOffset(0x408)] public ContentsFinderRewards BonusReward;
+    [FieldOffset(0x1B8), Obsolete("Poorly mapped")] public ContentsFinderRewards Reward;
+    [FieldOffset(0x408), Obsolete("Poorly mapped")] public ContentsFinderRewards BonusReward;
     
     // These seem to be duplicates of the above reward structs
-    [FieldOffset(0x5C8)] public ContentsFinderRewards Reward2;
-    [FieldOffset(0x810)] public ContentsFinderRewards BonusReward2;
+    [FieldOffset(0x5C8), Obsolete("Poorly mapped")] public ContentsFinderRewards Reward2;
+    [FieldOffset(0x810), Obsolete("Poorly mapped")] public ContentsFinderRewards BonusReward2;
 
     [FixedSizeArray<ItemReward>(35)] 
-    [FieldOffset(0x890)] public fixed byte ItemRewardArray[0x130 * 35];
+    [FieldOffset(0x890), Obsolete("Poorly mapped, also overflows struct size")] public fixed byte ItemRewardArray[0x130 * 35];
     
     [FieldOffset(0x1B6C)] public int SelectedDutyId; // ContentFinderCondition rowId for duties, ContentRoulette rowId for roulette
     [FieldOffset(0x1B78)] public byte NumCollectedRewards; // Value used for "Reward already received"
@@ -67,7 +69,7 @@ public struct ItemReward
     [FieldOffset(0x44)] public int ItemId;
     [FieldOffset(0x48)] public int Quantity;
     [FieldOffset(0x58)] public Utf8String TooltipString;
-    [FieldOffset(0x78)] public Utf8String UnkString; // This string seems to be unused?
+    [FieldOffset(0x78), Obsolete("Wrongly mapped")] public Utf8String UnkString; // This string seems to be unused?
 }
 
 public enum ContentsRouletteRole : byte {
