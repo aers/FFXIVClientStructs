@@ -124,7 +124,8 @@ public unsafe partial struct HousingWorkshopSubmersibleSubData
     [FieldOffset(0x58)] public ushort SpeedBonus;
     [FieldOffset(0x5A)] public ushort RangeBonus;
     [FieldOffset(0x5C)] public ushort FavorBonus;
-    [FieldOffset(0x60)] public SubmarineRating Rating;
+    [FieldOffset(0x60), Obsolete("Use SubmarineRating", false)] public byte Rating;
+    [FieldOffset(0x60)] public SubmarineRating SubmarineRating;
     [FieldOffset(0x62)] public ushort LogSpeed;
 
     [FixedSizeArray<HousingWorkshopSubmarineGathered>(5)]
@@ -169,6 +170,14 @@ public struct HousingWorkshopSubmarineGathered
     [FieldOffset(0x1D)] public bool ItemHQAdditional;
     [FieldOffset(0x1E)] public byte UnknownPrimary;
     [FieldOffset(0x1F)] public byte UnknownAdditional;
+
+    [FieldOffset(0x20), Obsolete("Use SurveyLinePrimary", false)] public uint UnknownPrimary1;
+    [FieldOffset(0x24), Obsolete("Use SurveyLineAdditional", false)] public uint UnknownAdditional1;
+    [FieldOffset(0x28), Obsolete("Use YieldLinePrimary", false)] public uint UnknownPrimary2;
+    [FieldOffset(0x2C), Obsolete("Use YieldLineAdditional", false)] public uint UnknownAdditional2;
+    [FieldOffset(0x30), Obsolete("Use DiscoveredLinePrimary", false)] public uint UnknownPrimary3;
+    [FieldOffset(0x34), Obsolete("Use DiscoveredLineAdditional", false)] public uint UnknownAdditional3;
+
     [FieldOffset(0x20)] public uint SurveyLinePrimary;
     [FieldOffset(0x24)] public uint SurveyLineAdditional;
     [FieldOffset(0x28)] public uint YieldLinePrimary;
