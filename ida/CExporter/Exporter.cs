@@ -86,6 +86,8 @@ public abstract class ExporterBase
 
     public string Export(GapStrategy gapStrategy)
     {
+        _knownTypes.Clear();
+        
         _gapStrategy = gapStrategy;
 
         var sb = new StringBuilder();
@@ -122,17 +124,12 @@ public abstract class ExporterBase
         }
         else
         {
-            //Debug.WriteLine($"Unhandled type: {type.FullName}");
+            Debug.WriteLine($"Unhandled type: {type.FullName}");
         }
     }
 
     private List<UnionLayout> GetStructLayout(Type type)
     {
-        if(FixFullName(type) == "Client::Game::MJI::IslandState")
-        {
-            var test = 0;
-        }
-
         var fields = type.GetFields()
             .Where(fieldInfo => !Attribute.IsDefined(fieldInfo, typeof(ObsoleteAttribute)))
             .Where(fieldInfo => !Attribute.IsDefined(fieldInfo, typeof(CExportIgnoreAttribute)))
