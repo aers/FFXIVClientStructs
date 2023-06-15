@@ -38,8 +38,10 @@ public unsafe partial struct AgentCharaCard
     {
         [FieldOffset(0x58)]  public Utf8String Name;
         [FieldOffset(0xD8)]  public Utf8String FreeCompany;
-        [FieldOffset(0x140)] public Utf8String UnkString1;
-        [FieldOffset(0x1A8)] public Utf8String UnkString2;
+        [FieldOffset(0x140), Obsolete] public Utf8String UnkString1;
+        [FieldOffset(0x140)] public Utf8String SearchComment1;
+        [FieldOffset(0x1A8), Obsolete] public Utf8String UnkString2;
+        [FieldOffset(0x1A8)] public Utf8String SearchComment2; // One of these is probably the raw one without formatting
 
         [FieldOffset(0x250)] public uint       Activity1IconId;
         [FieldOffset(0x258)] public Utf8String Activity1Name;

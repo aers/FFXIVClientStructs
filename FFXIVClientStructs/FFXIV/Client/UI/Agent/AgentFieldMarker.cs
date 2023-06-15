@@ -14,7 +14,7 @@ public unsafe partial struct AgentFieldMarker
     [FixedSizeArray<Utf8String>(30)]
     [FieldOffset(0x40)] public fixed byte PresetLabels[0x68 * 30];
     
-    [FieldOffset(0x888)] public Utf8String TooltipString;
+    [FieldOffset(0xC70)] public Utf8String TooltipString;
     
     public bool IsWaymarkActive(WaymarkIndex waymark) => (ActiveMarkerFlags & (1 << (int) waymark)) != 0;
     public bool IsWaymarkActive(int index) => (ActiveMarkerFlags & (1 << index)) != 0;
