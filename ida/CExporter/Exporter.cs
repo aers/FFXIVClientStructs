@@ -471,7 +471,6 @@ record StructLayout
         _offset = Objects.Min(t => t.Offset);
     }
 
-    private int _length;
     private int? _size;
     private int? _offset;
 

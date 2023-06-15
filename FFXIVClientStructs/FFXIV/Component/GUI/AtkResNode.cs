@@ -107,7 +107,7 @@ public unsafe partial struct AtkResNode : ICreatable
     [FieldOffset(0xA0)] public uint Flags_2; // bit 1 = has changes, ClipCount is bits 10-17, idk its a mess
     [FieldOffset(0xA0)] public uint DrawFlags;
 
-    public bool IsVisible => (Flags & 0x10) == 0x10;
+    public bool IsVisible => NodeFlags.HasFlag(NodeFlags.Visible);
     
     [MemberFunction("E9 ?? ?? ?? ?? 33 C0 48 83 C4 20 5B C3 66 90")]
     public partial void Ctor();

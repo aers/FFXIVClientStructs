@@ -20,5 +20,5 @@ public unsafe struct AtkComponentButton
     [FieldOffset(0xD0)] public AtkResNode* ButtonBGNode;
     [FieldOffset(0xE8)] public uint Flags;
 
-    public bool IsEnabled => (AtkComponentBase.OwnerNode->AtkResNode.Flags & (1 << 5)) != 0;
+    public bool IsEnabled => AtkComponentBase.OwnerNode->AtkResNode.NodeFlags.HasFlag(NodeFlags.Enabled);
 }
