@@ -10544,7 +10544,9 @@ struct Client_UI_Agent_AgentContentsFinder /* Size=0x2088 */
     /* 0x0000 */ Component_GUI_AgentInterface AgentInterface;
     /*        */ byte _gap_0x28[0x10];
     /* 0x0038 */ Client_System_String_Utf8String Description;
-    /*        */ byte _gap_0xA0[0x1AC8];
+    /*        */ byte _gap_0xA0[0x850];
+    /* 0x08F0 */ byte ItemRewardArray[0x11D0];
+    /*        */ byte _gap_0x1AC0[0xA8];
     /*        */ byte _gap_0x1B68[0x4];
     /* 0x1B6C */ __int32 SelectedDutyId;
     /*        */ byte _gap_0x1B70[0x8];
@@ -12012,14 +12014,17 @@ struct Client_UI_Agent_HudPartyMember /* Size=0x20 */
 
 struct Client_UI_Agent_ItemReward /* Size=0x130 */
 {
-    /*       */ byte _gap_0x0[0x40];
-    /*       */ byte _gap_0x40[0x4];
-    /* 0x044 */ __int32 ItemId;
-    /* 0x048 */ __int32 Quantity;
-    /*       */ byte _gap_0x4C[0x4];
-    /*       */ byte _gap_0x50[0x8];
-    /* 0x058 */ Client_System_String_Utf8String TooltipString;
-    /*       */ byte _gap_0xC0[0x70];
+    /*       */ byte _gap_0x0[0x4];
+    /* 0x004 */ __int32 ItemId;
+    /* 0x008 */ __int32 Quantity;
+    /*       */ byte _gap_0xC[0x4];
+    /* 0x010 */ unsigned __int32 IconId;
+    /*       */ byte _gap_0x14[0x4];
+    /* 0x018 */ Client_System_String_Utf8String TooltipString;
+    /*       */ byte _gap_0x80[0x4];
+    /* 0x084 */ Client_System_String_Utf8String UnkString;
+    /*       */ byte _gap_0xEC[0x4];
+    /*       */ byte _gap_0xF0[0x40];
 };
 
 struct Client_UI_Agent_MapMarkerInfo /* Size=0x48 */
