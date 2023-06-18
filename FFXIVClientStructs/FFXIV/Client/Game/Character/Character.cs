@@ -1,3 +1,4 @@
+using FFXIVClientStructs.FFXIV.Client.Game.Character.Data;
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
 using FFXIVClientStructs.FFXIV.Client.Graphics.Vfx;
 using FFXIVClientStructs.FFXIV.Common.Math;
@@ -15,32 +16,34 @@ public unsafe partial struct Character
 {
     [FieldOffset(0x0)] public GameObject GameObject;
 
+    [FieldOffset(0x1A8)] public CharacterData CharacterData;
+    
     #region This is inside a new 0x48 byte class at offset 0x1A8
+    
+    [FieldOffset(0x1B0), Obsolete("Use CharacterData.ModelScale", false)] public float ModelScale;
+    [FieldOffset(0x1B4), Obsolete("Use CharacterData.ModelCharaId", false)] public int ModelCharaId;
+    [FieldOffset(0x1B8), Obsolete("Use CharacterData.ModelSkeletonId", false)] public int ModelSkeletonId;
+    [FieldOffset(0x1BC), Obsolete("Use CharacterData.ModelCharaId_2", false)] public int ModelCharaId_2; // == -1 -> return ModelCharaId
+    [FieldOffset(0x1C0), Obsolete("Use CharacterData.ModelSkeletonId_2", false)] public int ModelSkeletonId_2; // == 0 -> return ModelSkeletonId
 
-    [FieldOffset(0x1B0)] public float ModelScale;
-    [FieldOffset(0x1B4)] public int ModelCharaId;
-    [FieldOffset(0x1B8)] public int ModelSkeletonId;
-    [FieldOffset(0x1BC)] public int ModelCharaId_2; // == -1 -> return ModelCharaId
-    [FieldOffset(0x1C0)] public int ModelSkeletonId_2; // == 0 -> return ModelSkeletonId
+    [FieldOffset(0x1C4), Obsolete("Use CharacterData.Health", false)] public uint Health;
+    [FieldOffset(0x1C8), Obsolete("Use CharacterData.MaxHealth", false)] public uint MaxHealth;
+    [FieldOffset(0x1CC), Obsolete("Use CharacterData.Mana", false)] public uint Mana;
+    [FieldOffset(0x1D0), Obsolete("Use CharacterData.MaxMana", false)] public uint MaxMana;
+    [FieldOffset(0x1D4), Obsolete("Use CharacterData.GatheringPoints", false)] public ushort GatheringPoints;
+    [FieldOffset(0x1D6), Obsolete("Use CharacterData.MaxGatheringPoints", false)] public ushort MaxGatheringPoints;
+    [FieldOffset(0x1D8), Obsolete("Use CharacterData.CraftingPoints", false)] public ushort CraftingPoints;
+    [FieldOffset(0x1DA), Obsolete("Use CharacterData.MaxCraftingPoints", false)] public ushort MaxCraftingPoints;
+    [FieldOffset(0x1DC), Obsolete("Use CharacterData.TransformationId", false)] public short TransformationId;
+    [FieldOffset(0x1DE), Obsolete("Use CharacterData.StatusEffectVFXId", false)] public short StatusEffectVFXId; // outdated since TitleID moved here
+    [FieldOffset(0x1DE), Obsolete("Use CharacterData.TitleID", false)] public ushort TitleID;
 
-    [FieldOffset(0x1C4)] public uint Health;
-    [FieldOffset(0x1C8)] public uint MaxHealth;
-    [FieldOffset(0x1CC)] public uint Mana;
-    [FieldOffset(0x1D0)] public uint MaxMana;
-    [FieldOffset(0x1D4)] public ushort GatheringPoints;
-    [FieldOffset(0x1D6)] public ushort MaxGatheringPoints;
-    [FieldOffset(0x1D8)] public ushort CraftingPoints;
-    [FieldOffset(0x1DA)] public ushort MaxCraftingPoints;
-    [FieldOffset(0x1DC)] public short TransformationId;
-    [FieldOffset(0x1DE)] public short StatusEffectVFXId; // outdated since TitleID moved here
-    [FieldOffset(0x1DE)] public ushort TitleID;
+    [FieldOffset(0x1E2), Obsolete("Use CharacterData.ClassJob", false)] public byte ClassJob;
+    [FieldOffset(0x1E3), Obsolete("Use CharacterData.Level", false)] public byte Level;
 
-    [FieldOffset(0x1E2)] public byte ClassJob;
-    [FieldOffset(0x1E3)] public byte Level;
+    [FieldOffset(0x1ED), Obsolete("Use CharacterData.ShieldValue", false)] public byte ShieldValue;
 
-    [FieldOffset(0x1ED)] public byte ShieldValue;
-
-    [FieldOffset(0x1EF)] public byte OnlineStatus;
+    [FieldOffset(0x1EF), Obsolete("Use CharacterData.OnlineStatus", false)] public byte OnlineStatus;
 
     #endregion
 
