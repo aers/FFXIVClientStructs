@@ -122,7 +122,10 @@ public unsafe partial struct Character
 
     // Seemingly used for cutscenes and GPose.
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 9F ?? ?? ?? ?? 48 8D 8F")]
-    public partial ulong CopyFromCharacter(Character* source, uint unk);
+    public partial ulong CopyFromCharacter(Character* source, CopyFlags flags);
+    
+    [Obsolete("Use CopyFromCharacter(Character*, CopyFlags)")]
+    public ulong CopyFromCharacter(Character* source, uint flags) => CopyFromCharacter(source, (CopyFlags)flags);
 
     [MemberFunction("E8 ?? ?? ?? ?? 4C 8B 7F 48")]
     public partial bool IsMounted();
@@ -241,4 +244,36 @@ public unsafe partial struct Character
         InPositionLoop = 11, // Param is an EmoteMode entry
         Performance = 16, // Unknown
     }
+    
+    [Flags]
+    public enum CopyFlags : uint {
+        None = 0x00,
+        
+        Mount = 0x2,
+        ClassJob = 0x4,
+        Companion = 0x20,
+        WeaponHiding = 0x80,
+        Target = 0x400,
+        Name = 0x1000,
+        Position = 0x10000, // includes rotation
+        UseSecondaryCharaId = 0x200000,
+        Ornament = 0x400000,
+        
+        // Unknowns included to improve readability of ToString, not to be used.
+        [Obsolete("do not use")] Unk000001 = 0x1,
+        [Obsolete("do not use")] Unk000008 = 0x8, // Copies Character+0x1B24
+        [Obsolete("do not use")] Unk000010 = 0x10,
+        [Obsolete("do not use")] Unk000040 = 0x40,
+        [Obsolete("do not use")] Unk000100 = 0x100,
+        [Obsolete("do not use")] Unk000200 = 0x200,
+        [Obsolete("do not use")] Unk000800 = 0x800,
+        [Obsolete("do not use")] Unk002000 = 0x2000,
+        [Obsolete("do not use")] Unk004000 = 0x4000,
+        [Obsolete("do not use")] Unk008000 = 0x8000, // Copies Character+0xBFC
+        [Obsolete("do not use")] Unk020000 = 0x20000,
+        [Obsolete("do not use")] Unk040000 = 0x40000,
+        [Obsolete("do not use")] Unk080000 = 0x80000,
+        [Obsolete("do not use")] Unk100000 = 0x100000,
+    }
+    
 }
