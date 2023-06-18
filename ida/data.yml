@@ -3704,6 +3704,7 @@ classes:
       0x140745180: GetTargetId
       0x140745EA0: SetMode
       0x1407480C0: dtor
+      0x14074FE60: CopyFromCharacter
       0x1407ACF90: ctor
   Client::Game::Character::DrawDataContainer:
     vtbls:
@@ -3714,6 +3715,32 @@ classes:
       0x1412C1300: HideWeapons
       0x140C02800: HideHeadgear
       0x1412C1D70: SetVisor
+  Client::Game::Character::CompanionContainer:
+    vtbls:
+      - ea: 0x141ABEE08
+    funcs:
+      0x1412BB950: GetCompanionDataID
+      0x1412BB790: SetCompanion
+  Client::Game::Character::OrnamentContainer:
+    vtbls:
+      - ea: 0x1419BBC68
+    funcs:
+      0x1412C22A0: HasOrnament
+  Client::Game::Character::Data::CharacterData:
+    vtbls:
+      - ea: 0x1419AF9D8
+  Client::Game::Character::Data::BattleCharaData:
+    vtbls:
+      - ea: 0x1419BBFE8
+  Client::Game::Character::Data::CompanionData:
+    vtbls:
+      - ea: 0x141ABF438
+  Client::Game::Character::Data::OrnamentData:
+    vtbls:
+      - ea: 0x141ABF128
+  Client::Game::Character::Data::CutsceneCharacterData:
+    vtbls:
+      - ea: 0x141C001C8
   Client::Game::Character::DrawData:
     vtbls:
       - ea: 0x141991080
