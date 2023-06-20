@@ -3732,15 +3732,19 @@ classes:
   Client::Game::Character::Data::BattleCharaData:
     vtbls:
       - ea: 0x1419C0118
+        base: Client::Game::Character::Data::CharacterData
   Client::Game::Character::Data::CompanionData:
     vtbls:
       - ea: 0x141AC3148
+        base: Client::Game::Character::Data::CharacterData
   Client::Game::Character::Data::OrnamentData:
     vtbls:
       - ea: 0x141AC2E38
+        base: Client::Game::Character::Data::CharacterData
   Client::Game::Character::Data::CutsceneCharacterData:
     vtbls:
       - ea: 0x141C00348
+        base: Client::Game::Character::Data::CharacterData
   Client::Game::Character::DrawData:
     vtbls:
       - ea: 0x141990F48
