@@ -1082,7 +1082,7 @@ classes:
       4: Tick
     funcs:
       0x140090210: ctor
-      # 0x140093720: GetNetworkModuleProxy
+      0x140093730: GetNetworkModuleProxy
       0x140093750: GetUIModule
       0x140094620: TaskBegin
       0x140094760: TaskDraw2DBegin
