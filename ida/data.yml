@@ -544,6 +544,19 @@ classes:
       0x1408403F0: GetBeastTribeAllowance
       0x140880E70: IsLevequestComplete
       0x140926000: GetNextLeveAllowancesTimestamp # multiply by 60 for unix timestamp
+  Client::Game::MirageManager:
+    instances:
+      - ea: 0x14215F798
+        pointer: False
+    funcs:
+      0x140730DC0: Ctor
+      0x140730E10: Dtor
+      0x140730E80: HasInstance
+      0x140730EA0: GetInstance
+      0x140730F90: Clear
+      0x140731050: RequestMiragePrismBox
+      0x140731830: RequestGlamourPlates
+      0x140731A90: ApplyGlamourPlate
   Client::Game::InventoryManager:
     instances:
       - ea: 0x14215F7C0
