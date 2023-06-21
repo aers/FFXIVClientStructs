@@ -10,10 +10,10 @@ public unsafe partial struct MirageManager
 
     [FieldOffset(0)] public bool IsApplyingGlamourPlate;
 
-    [FieldOffset(0x4)] public fixed uint MiragePrismBoxItemIds[4 * 800];
-    [FieldOffset(0xC84)] public fixed byte MiragePrismBoxStainIds[800];
-    [FieldOffset(0xFA4)] public bool MiragePrismBoxRequested;
-    [FieldOffset(0xFA5)] public bool MiragePrismBoxLoaded;
+    [FieldOffset(0x4)] public fixed uint PrismBoxItemIds[4 * 800];
+    [FieldOffset(0xC84)] public fixed byte PrismBoxStainIds[800];
+    [FieldOffset(0xFA4)] public bool PrismBoxRequested;
+    [FieldOffset(0xFA5)] public bool PrismBoxLoaded;
 
     [FixedSizeArray<GlamourPlate>(20)]
     [FieldOffset(0xFA8)] public fixed byte GlamourPlates[0x3C * 20];
