@@ -16,11 +16,11 @@ public unsafe partial struct MirageManager
     [FieldOffset(0xFA5)] public bool MiragePrismBoxLoaded;
 
     [FixedSizeArray<GlamourPlate>(20)]
-    [FieldOffset(0xFA8)] public fixed byte GlamourPlates[0x36 * 20];
+    [FieldOffset(0xFA8)] public fixed byte GlamourPlates[0x3C * 20];
     [FieldOffset(0x1458)] public bool GlamourPlatesRequested;
     [FieldOffset(0x1459)] public bool GlamourPlatesLoaded;
 
-    [StructLayout(LayoutKind.Explicit, Size = 0x36)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x3C)]
     public struct GlamourPlate
     {
         [FieldOffset(0x00)] public fixed uint ItemIds[12];
