@@ -5443,6 +5443,7 @@ classes:
       0x140BDE0E0: CreateMapMarkers
       0x140BDE8C0: ResetMiniMapMarkers
       0x140BDE900: CreateMiniMapMarkers
+      0x140BD9640: ShowMap
   Client::UI::Agent::AgentRecipeNote:
     vtbls:
       - ea: 0x1419F5B88
