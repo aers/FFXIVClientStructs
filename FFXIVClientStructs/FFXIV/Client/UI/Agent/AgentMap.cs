@@ -80,6 +80,9 @@ public unsafe partial struct AgentMap
     [MemberFunction("40 53 48 83 EC ?? 48 8B D9 C6 81 ?? ?? ?? ?? ?? 48 C7 81")]
     public partial void ResetMapMarkers();
 
+    [MemberFunction("E8 ?? ?? ?? ?? 40 B6 01 C7 44 24 ?? ?? ?? ?? ?? BA ?? ?? ?? ?? 48 8B CF E8 ?? ?? ?? ?? 84 C0 74 15")]
+    public partial void ShowMap(bool a1, bool a2); // native code calls a1 as true always, a2 is used both true and false
+
     public bool AddMiniMapMarker(Vector3 position, uint icon, int scale = 0) {
         if (MiniMapMarkerCount >= 100) return false;
         var marker = stackalloc MiniMapMarker[1];
