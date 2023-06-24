@@ -239,7 +239,7 @@ public unsafe partial struct HotBarSlot
 
     public void Set(HotbarSlotType type, uint id)
     {
-        Set(Framework.Instance()->UIModule, type, id);
+        Set(Framework.Instance()->GetUiModule(), type, id);
     }
     
     /// <summary>
