@@ -3491,6 +3491,12 @@ classes:
       - ea: 0x1419A86F8
     funcs:
       0x1406441C0: ctor
+  Client::UI::Misc::AcquaintanceModule:
+    vtbls:
+      - ea: 0x1419ABC08
+        base: Client::UI::Misc::UserFileManager::UserFileEvent
+    funcs:
+      0x140688130: ClearTellHistory
   Client::UI::Misc::ConfigModule:
     vtbls:
       - ea: 0x1419AB5C0
