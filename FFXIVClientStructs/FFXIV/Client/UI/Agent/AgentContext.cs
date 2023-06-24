@@ -63,6 +63,7 @@ public unsafe partial struct AgentContext
     public partial bool OpenSubMenu();
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4B ?? 48 8B 01 FF 90 ?? ?? ?? ?? B2 ?? 48 8B 48")]
+    [GenerateCStrOverloads]
     public partial void OpenYesNo(byte* text, uint yesId = 576, uint noId = 577, uint checkboxId = 0,
         bool setOwner = true);
 
@@ -70,9 +71,11 @@ public unsafe partial struct AgentContext
     public partial void ClearMenu();
 
     [MemberFunction("E8 ?? ?? ?? ?? 41 BF ?? ?? ?? ?? 48 8D 44 24 ?? 41 8B D7")]
+    [GenerateCStrOverloads]
     public partial void SetMenuTitle(byte* text);
 
     [MemberFunction("E8 ?? ?? ?? ?? FF CE 48 FF CF")]
+    [GenerateCStrOverloads]
     public partial void AddMenuItem(byte* text, void* handler, long handlerParam, bool disabled = false,
         bool submenu = false);
 
@@ -81,49 +84,13 @@ public unsafe partial struct AgentContext
         bool submenu = false);
 
     [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 48 8B 99 ?? ?? ?? ?? 4C 8B D1")]
+    [GenerateCStrOverloads]
     public partial void AddContextMenuItem(int eventId, byte* text, bool disabled = false, bool submenu = false,
         bool copyText = true);
 
     [MemberFunction("E8 ?? ?? ?? ?? 4D 85 F6 74 3F")]
     public partial void AddContextMenuItem2(int eventId, uint addonTextId, bool disabled = false, bool submenu = false,
         bool copyText = true);
-
-    public void AddMenuItem(string text, void* handler, long handlerParam, bool disabled = false, bool submenu = false)
-    {
-        var str = Encoding.UTF8.GetBytes(text + '\0');
-        fixed (byte* ptr = &str[0])
-        {
-            AddMenuItem(ptr, handler, handlerParam, disabled, submenu);
-        }
-    }
-
-    public void AddContextMenuItem(int eventId, string text, bool disabled = false, bool submenu = false,
-        bool copyText = true)
-    {
-        var str = Encoding.UTF8.GetBytes(text + '\0');
-        fixed (byte* ptr = &str[0])
-        {
-            AddContextMenuItem(eventId, ptr, disabled, submenu, copyText);
-        }
-    }
-
-    public void SetMenuTitle(string text)
-    {
-        var str = Encoding.UTF8.GetBytes(text + '\0');
-        fixed (byte* ptr = &str[0])
-        {
-            SetMenuTitle(ptr);
-        }
-    }
-
-    public void OpenYesNo(string text, uint yesId = 576, uint noId = 577, uint checkboxId = 0, bool bindToOwner = true)
-    {
-        var str = Encoding.UTF8.GetBytes(text + '\0');
-        fixed (byte* ptr = &str[0])
-        {
-            OpenYesNo(ptr, yesId, noId, checkboxId, bindToOwner);
-        }
-    }
 
     public void SetPosition(int x, int y)
     {
