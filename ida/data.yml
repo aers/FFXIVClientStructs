@@ -2229,6 +2229,7 @@ classes:
     funcs:
       0x1403BEE10: ctor
       0x1403BF0D0: Initialize
+      0x1403702C0: GetCharaViewTexture
   Client::Graphics::PostEffect::PostEffectChain:
     vtbls:
       - ea: 0x141981A10
