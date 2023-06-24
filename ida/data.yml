@@ -5415,6 +5415,8 @@ classes:
     vtbls:
       - ea: 0x1419F57E0
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1409D4E60: TryOn # static
   Client::UI::Agent::AgentItemDetailBase:
     vtbls:
       - ea: 0x141A0D300

@@ -121,6 +121,11 @@ public unsafe partial struct AgentModule
     {
         return (AgentMiragePrismPrismBox*)GetAgentByInternalId(AgentId.MiragePrismPrismBox);
     }
+
+    public AgentTryon* GetAgentTryon()
+    {
+        return (AgentTryon*)GetAgentByInternalId(AgentId.Tryon);
+    }
 }
 
 public enum AgentId : uint {
