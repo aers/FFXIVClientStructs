@@ -67,7 +67,7 @@ public unsafe partial struct UIModule
     public partial RaptureGearsetModule* GetRaptureGearsetModule();
 
     [VirtualFunction(15)]
-    public partial void* GetAcquaintanceModule();
+    public partial AcquaintanceModule* GetAcquaintanceModule();
 
     [VirtualFunction(16)]
     public partial ItemOrderModule* GetItemOrderModule();

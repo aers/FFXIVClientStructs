@@ -60,7 +60,7 @@ public enum UserFileType : ushort
     KEYBIND = 0x03,
     LOGFLTR = 0x04,
     GEARSET = 0x05, // RaptureGearsetModule
-    ACQ = 0x06,
+    ACQ = 0x06, // AcquaintanceModule
     ITEMODR = 0x07, // ItemOrderModule
     ITEMFDR = 0x08, // ItemFinderModule
     UISAVE = 0x09, // UiSavePackModule
