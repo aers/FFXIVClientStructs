@@ -312,9 +312,14 @@ classes:
       0x1407401E0: AddStatus
       0x1407402B0: RemoveStatus
   Client::Game::ActionTimelineDriver:
+    vtbls:
+      - ea: 0x141993020
     funcs:
       0x1404CE2A0: PlayTimeline
       0x1404CEC50: SetSlotSpeed
+  Client::Game::ActionTimelineManager:
+    vtbls:
+      - ea: 0x1419AE6C0
   Client::Game::RetainerManager:
     instances:
       - ea: 0x14218DBC0
