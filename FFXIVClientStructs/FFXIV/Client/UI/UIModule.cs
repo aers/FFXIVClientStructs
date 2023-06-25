@@ -1,5 +1,5 @@
-using System.Text;
 using FFXIVClientStructs.FFXIV.Client.Game;
+using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 using FFXIVClientStructs.FFXIV.Client.UI.Info;
 using FFXIVClientStructs.FFXIV.Client.UI.Misc;
@@ -14,6 +14,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [VTableAddress("48 8D 05 ?? ?? ?? ?? 4C 89 61 ?? 4C 8B F2", 3)]
 public unsafe partial struct UIModule
 {
+    public static UIModule* Instance() => Framework.Instance()->GetUiModule();
+
     [FieldOffset(0x0)] public void* vtbl;
     [FieldOffset(0x0)] public void** vfunc;
     [FieldOffset(0x8)] public Unk1 UnkObj1;
