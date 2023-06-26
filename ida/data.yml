@@ -599,6 +599,20 @@ classes:
       0x140B34A10: GetSubmarineVoyageTime # (unsigned __int8 pointA, unsigned __int8 pointB, __int16 speed) -> VoyageTime (return is time in seconds)
       0x140B26DF0: GetAirshipVoyageTimeAndDistance # (unsigned __int8 pointA, unsigned __int8 pointB, __int16 speed, _DWORD *voyageTime, int *voyageDistance)
       0x140B26F10: GetAirshipSurveyDuration # (unsigned __int8 point, __int16 speed) -> SurveyDuration (return is time in seconds)
+      0x1400A8850: GetHouseIcon # static (size, isOpen, isResident, isIndividual, isShared)
+  Client::Game::Housing::OutdoorTerritory:
+    vtbls:
+      - ea: 0x1419FC3F8
+    funcs:
+      0x140B1E010: GetPlotIcon # (this, plotIndex)
+      0x140B1BDA0: IsEstateShared # (this, plotIndex)
+      0x140B1BC70: IsEstateResident # (this, plotIndex)
+  Client::Game::Housing::IndoorTerritory:
+    vtbls:
+      - ea: 0x1419FC460
+  Client::Game::Housing::WorkshopTerritory:
+    vtbls:
+      - ea: 0x1419FC4A0
   InventoryContainer:
     funcs:
       0x140708BB0: GetInventorySlot  # (this, slotIndex)
