@@ -11,6 +11,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [StructLayout(LayoutKind.Explicit, Size = 0x28C80)]
 public unsafe partial struct RaptureAtkModule
 {
+    public static RaptureAtkModule* Instance() => UIModule.Instance()->GetRaptureAtkModule();
+
     [FieldOffset(0x0)] public AtkModule AtkModule;
 
     [FieldOffset(0x10A70)] public Utf8String* AddonNames; // pointer to an array of 837 Utf8Strings

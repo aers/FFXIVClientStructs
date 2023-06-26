@@ -12,6 +12,8 @@ public unsafe partial struct AtkModule
 
     [FieldOffset(0x128)] public AtkStage* AtkStage;
 
+    [FieldOffset(0x228)] public int DefaultTextureVersion; // UiAssetType + 1
+
     [FieldOffset(0x230)] public ExdModule* ExdModule;
 
     [FieldOffset(0x268)] public RaptureAtkUnitManager* RaptureAtkUnitManager;
