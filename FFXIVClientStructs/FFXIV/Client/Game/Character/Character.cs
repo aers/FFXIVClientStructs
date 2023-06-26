@@ -75,6 +75,8 @@ public unsafe partial struct Character
 
     [FieldOffset(0x1B1C)] public ushort CurrentWorld;
     [FieldOffset(0x1B1E)] public ushort HomeWorld;
+
+    [FieldOffset(0x1B24)] public ushort VoiceId;
     [FieldOffset(0x1B26)] public byte EventState; // Leave for backwards compat. See Mode.
     [FieldOffset(0x1B26)] public CharacterModes Mode;
     [FieldOffset(0x1B27)] public byte ModeParam; // Different purpose depending on mode. See CharacterModes for more info.
