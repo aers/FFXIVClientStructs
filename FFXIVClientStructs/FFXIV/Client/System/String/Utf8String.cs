@@ -18,20 +18,12 @@ public unsafe partial struct Utf8String : ICreatable
     [FieldOffset(0x22)] public fixed byte InlineBuffer[0x40]; // inline buffer used until strlen > 0x40
 
     public static Utf8String* FromString(string str)
-    {
-        return FromString(str, IMemorySpace.GetDefaultSpace());
-    }
+        => FromString(str, IMemorySpace.GetDefaultSpace());
 
     public static Utf8String* FromString(string str, IMemorySpace* memorySpace)
     {
         var newString = memorySpace->Create<Utf8String>();
-
-        var strBytes = Encoding.UTF8.GetBytes(str + '\0');
-        fixed (byte* strPointer = strBytes)
-        {
-            newString->SetString(strPointer);
-        }
-
+        newString->SetString(str);
         return newString;
     }
 
