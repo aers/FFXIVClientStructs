@@ -471,6 +471,8 @@ public enum AgentId : uint {
     McGuffin = 368, //Collection
     CraftActionSimulator = 369,
 
+    InclusionShop = 374, //Item Exchange
+
     MycWarResultNotebook = 376,
     MycInfo = 377, //Bozja Info
     MycItemBox = 378, //Bozja Lost Finds Cache
