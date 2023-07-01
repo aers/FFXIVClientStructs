@@ -824,6 +824,17 @@ classes:
         pointer: False
     funcs:
       0x14095BAD0: IsItemInCabinet        # item is a cabinet-specific ID, not generic Item.
+  Client::Game::UI::Achievement:
+    instances:
+      - ea: 0x14216E560
+        pointer: False
+    vtbls:
+      - ea: 0x1419F35E0
+    funcs:
+      0x14095BCC0: Initialize
+      0x14095C0E0: IsAchievementComplete
+    vfuncs:
+      0: dtor
   Client::Game::UI::ContentsNote:
     vtbls:
       - ea: 0x1419F4530

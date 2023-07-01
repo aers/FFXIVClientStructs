@@ -1,12 +1,14 @@
 ﻿namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
 /// <summary>
-/// A struct representing the UIState Cabinet (otherwise known as the "Armoire" in-game) and the bitfield for stores
+/// A struct representing the UIState Cabinet (otherwise known as the "Armoire" in-game) and the bitfield for stored
 /// items.
 /// </summary>
 [StructLayout(LayoutKind.Explicit, Size = 0x48)]
 public unsafe partial struct Cabinet {
+    [Obsolete("Use State.", false)]
     [FieldOffset(0x00)] public int CabinetLoaded; // This becomes 2 for some reason, unsure why or what it means.
+    [FieldOffset(0x00)] public CabinetState State;
     [FieldOffset(0x04)] public fixed byte UnlockedItems[0x41];
 
     /// <summary>
@@ -24,11 +26,17 @@ public unsafe partial struct Cabinet {
     /// <remarks>
     /// The armoire will only load when requested (so, when a player goes to an inn room and chooses to add/remove an
     /// item or performs certain glamour operations). As such, before any check can take place, a developer must first
-    /// validate that the armoire is loaded. Generally, this will be when CabinetLoaded == 1, but for some reason this
-    /// can have a value of 2 as well.
+    /// validate that the armoire is loaded. Generally, this will be when State == CabinetState.Loaded
     /// </remarks>
     /// <returns>Returns true if the armoire has been retrieved.</returns>
-    public bool IsCabinetLoaded() {
-        return this.CabinetLoaded > 0;
+    public bool IsCabinetLoaded()
+        => this.State is CabinetState.Loaded;
+
+    /// <summary> Represents the loaded state of Cabinet </summary>
+    public enum CabinetState : int
+    {
+        Invalid   = 0, // Cabinet is initialized at this state
+        Requested = 1, // This state is set between the client request and receiving the data from the server
+        Loaded    = 2, // Set upon data being received
     }
 }
