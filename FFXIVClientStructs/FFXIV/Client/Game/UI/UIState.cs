@@ -19,6 +19,7 @@ public unsafe partial struct UIState
     [FieldOffset(0x1250)] public Inspect Inspect;
     [FieldOffset(0x14B8)] public Telepo Telepo;
     [FieldOffset(0x1510)] public Cabinet Cabinet;
+    [FieldOffset(0x1560)] public Achievement Achievement;
     [FieldOffset(0x1AB0)] public Buddy Buddy;
     [FieldOffset(0x298C)] public PvPProfile PvPProfile;
     [FieldOffset(0x2A10)] public ContentsNote ContentsNote;
