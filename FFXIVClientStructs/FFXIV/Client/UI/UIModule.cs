@@ -220,7 +220,7 @@ public unsafe partial struct UIModule
     public partial void Test205(nint a1,nint a2,nint a3,nint a4);
 
     [MemberFunction("E8 ?? ?? ?? ?? 4D 39 BE")]
-    public static partial bool PlaySound(uint effectId, long a2, long a3, byte a4);
+    public static partial bool PlaySound(uint effectId, long a2 = 0, long a3 = 0, byte a4 = 0);
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 BF 4C 8B CB")]
     [GenerateCStrOverloads]
