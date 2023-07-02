@@ -12,7 +12,7 @@ public unsafe partial struct Map
     [FieldOffset(0x90)] public fixed byte QuestData[0x90 * 30];
     
     [FixedSizeArray<MapMarkerInfo>(16)]
-    [FieldOffset(0x1170)] public fixed byte LevequestData[0x90 * 30];
+    [FieldOffset(0x1170)] public fixed byte LevequestData[0x90 * 16];
     
     [FieldOffset(0x1AE8)] public StdVector<QuestMarkerInfo> LevequestMarkerData;
     [FieldOffset(0x1B20)] public MapMarkerDataContainer QuestMarkerData;
