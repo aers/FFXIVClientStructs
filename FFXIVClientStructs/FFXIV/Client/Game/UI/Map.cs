@@ -8,8 +8,12 @@ public unsafe partial struct Map
     [Obsolete("Use QuestDataSpan instead", false)]
     [FieldOffset(0x90)] public QuestMarkerArray QuestMarkers;
 
-    [FieldOffset(0x90)] public MapMarkerInfo QuestData;
-    [FieldOffset(0x1170)] public MapMarkerInfo LevequestData;
+    [FixedSizeArray<MapMarkerInfo>(30)]
+    [FieldOffset(0x90)] public fixed byte QuestData[0x90 * 30];
+    
+    [FixedSizeArray<MapMarkerInfo>(16)]
+    [FieldOffset(0x1170)] public fixed byte LevequestData[0x90 * 30];
+    
     [FieldOffset(0x1AE8)] public StdVector<QuestMarkerInfo> LevequestMarkerData;
     [FieldOffset(0x1B20)] public MapMarkerDataContainer QuestMarkerData;
     [FieldOffset(0x1BA0)] public SpecialMarkerContainer GuildOrderGuideMarkerData;
@@ -33,28 +37,6 @@ public unsafe partial struct Map
                 {
                     return (MapMarkerInfo*) (pointer + sizeof(MapMarkerInfo) * index);
                 }
-            }
-        }
-    }
-    
-    public Span<MapMarkerInfo> QuestDataSpan
-    {
-        get
-        {
-            fixed (MapMarkerInfo* pointer = &QuestData)
-            {
-                return new Span<MapMarkerInfo>(pointer, 30);
-            }
-        }
-    }
-
-    public Span<MapMarkerInfo> LevequestDataSpan
-    {
-        get
-        {
-            fixed (MapMarkerInfo* pointer = &LevequestData)
-            {
-                return new Span<MapMarkerInfo>(pointer, 30);
             }
         }
     }
