@@ -23,7 +23,8 @@ public unsafe partial struct Map
     [FieldOffset(0x1B60)] public MapDataContainer<StandardMapMarkerData> GuildLeveAssignmentMarkerData;
     [FieldOffset(0x3EA8)] public MapDataContainer<StandardMapMarkerData> CustomTalkMarkerData;
     [FieldOffset(0x3E90)] public NonstandardMapMarkerContainer TripleTriadMarkerData;
-    
+    [FieldOffset(0x3F50)] public MapDataContainer<StandardMapMarkerData> BicolorGemstoneVendorMarkerData;
+
     [Obsolete("Use QuestDataSpan instead", false)]
     [StructLayout(LayoutKind.Sequential, Size = 0x10E0)]
     public struct QuestMarkerArray
