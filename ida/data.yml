@@ -294,6 +294,7 @@ classes:
       0x1404CBC70: Update
       0x1404CDDC0: ctor
       0x1404CD480: IsInGPose  # (probably) static
+      0x1404CD4C0: IsInIdleCam  # static
       0x1404CD6A0: IsInInstanceArea
       0x14091EF40: IsInPvPInstance
       0x14091F000: IsInPvPArea
@@ -3436,6 +3437,7 @@ classes:
       77: IsInGPose
       78: EnterIdleCam
       79: ExitIdleCam
+      80: IsInIdleCam
       89: ShowEurekaHud
       90: HideEurekaHud
       96: OpenMycInfo

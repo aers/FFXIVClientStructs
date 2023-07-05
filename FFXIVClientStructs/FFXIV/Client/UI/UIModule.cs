@@ -143,6 +143,9 @@ public unsafe partial struct UIModule
     [VirtualFunction(79)]
     public partial void ExitIdleCam();
 
+    [VirtualFunction(80)]
+    public partial bool IsInIdleCam();
+
     [VirtualFunction(141)]
     public partial void ToggleUi(UiFlags flags, bool enable, bool unknown = true);
     
