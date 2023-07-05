@@ -938,6 +938,7 @@ classes:
       0x1409B5210: SwapBlueMageActionSlots
       0x1409B5320: SetBlueMageActions
       0x1409B8DC0: GetMaxCharges
+      0x1409BA070: GetDutyActionId  # (byte dutyActionSlot) -> uint
       0x1409A8C30: GetRecastGroup
       0x1409AE120: GetRecastGroupDetail
       0x1409AE1F0: Update
