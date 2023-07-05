@@ -293,6 +293,7 @@ classes:
       0x1404CB930: Terminate
       0x1404CBC70: Update
       0x1404CDDC0: ctor
+      0x1404CD480: IsInGPose  # (probably) static
       0x1404CD6A0: IsInInstanceArea
       0x14091EF40: IsInPvPInstance
       0x14091F000: IsInPvPArea
@@ -3432,6 +3433,7 @@ classes:
       70: DisableCutsceneInputMode
       75: EnterGPose
       76: ExitGPose
+      77: IsInGPose
       78: EnterIdleCam
       79: ExitIdleCam
       89: ShowEurekaHud

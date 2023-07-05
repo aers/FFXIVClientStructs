@@ -134,6 +134,9 @@ public unsafe partial struct UIModule
     [VirtualFunction(76)]
     public partial void ExitGPose();
 
+    [VirtualFunction(77)]
+    public partial bool IsInGPose();
+
     [VirtualFunction(78)]
     public partial void EnterIdleCam(byte a1 = 0, ulong focusObject = 0xE0000000);
 
