@@ -81,6 +81,14 @@ public unsafe partial struct ActionManager
     
     [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 20 48 8B DA 8B F9 E8 ?? ?? ?? ?? 4C 8B C3")]
     public static partial bool CanUseActionOnTarget(uint actionId, GameObject* target);
+    
+    /// <summary>
+    /// Returns the ID of the action present at the specified Duty Action slot.
+    /// </summary>
+    /// <param name="dutyActionSlot">The Duty Action slot number (0 or 1) to look up.</param>
+    /// <returns>Returns an Action ID.</returns>
+    [MemberFunction("E8 ?? ?? ?? ?? EB 17 33 C9")]
+    public static partial uint GetDutyActionId(ushort dutyActionSlot);
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x14)]
