@@ -57,6 +57,7 @@ public unsafe partial struct Character
     [Obsolete($"Use {nameof(DrawData)}.CustomizeData"), FieldOffset(0x858)] public fixed byte CustomizeData[0x1A];
 
     [FieldOffset(0x878)] public OrnamentContainer Ornament;
+    [FieldOffset(0x8E0)] public ReaperShroudContainer ReaperShroud;
     [FieldOffset(0x920)] public ActionTimelineManager ActionTimelineManager;
 
     [Obsolete($"Use {nameof(LookTargetId)} instead.")]
@@ -280,6 +281,7 @@ public unsafe partial struct Character
     //0x10 bytes are from the base class which is just vtable + gameobject ptr (same as Companion-/DrawDataContainer)
     [StructLayout(LayoutKind.Explicit, Size = 0x60)]
     public partial struct MountContainer {
+	    [FieldOffset(0x00)] public void** ContainerVTable;
 	    [FieldOffset(0x08)] public BattleChara* OwnerObject;
 	    [FieldOffset(0x10)] public Character* MountObject;
 	    [FieldOffset(0x18)] public ushort MountId;
@@ -293,18 +295,42 @@ public unsafe partial struct Character
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]
-    public struct CompanionContainer {
-	    [FieldOffset(0x08)] public BattleChara* OwnerObject;
-	    [FieldOffset(0x10)] public Companion* CompanionObject;
-	    //used if minion is summoned but the object slot is taken by a mount
-	    [FieldOffset(0x18)] public ushort CompanionId;
+    public struct CompanionContainer 
+    {
+        [FieldOffset(0x00)] public void** ContainerVTable;
+        [FieldOffset(0x08)] public BattleChara* OwnerObject;
+        [FieldOffset(0x10)] public Companion* CompanionObject;
+        //used if minion is summoned but the object slot is taken by a mount
+        [FieldOffset(0x18)] public ushort CompanionId;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x28)]
-    public struct OrnamentContainer {
-	    [FieldOffset(0x08)] public BattleChara* OwnerObject;
-	    [FieldOffset(0x10)] public Ornament* OrnamentObject;
-	    [FieldOffset(0x18)] public ushort OrnamentId;
+    public struct OrnamentContainer 
+    {
+        [FieldOffset(0x00)] public void** ContainerVTable;
+        [FieldOffset(0x08)] public BattleChara* OwnerObject;
+        [FieldOffset(0x10)] public Ornament* OrnamentObject;
+        [FieldOffset(0x18)] public ushort OrnamentId;
+    }
+
+    // Reaper Shroud seems to be mostly hardcoded.
+    // It applies a transformation to NpcEquip row 2161 (which only sets the body slot to 8100,1).
+    // It also enables the Vfx in this container, and toggles the 'atr_eye_a' attribute in the model (for the red pupils).
+    [StructLayout(LayoutKind.Explicit, Size = 0x40)]
+    public struct ReaperShroudContainer {
+        [FieldOffset(0x00)] public void** ContainerVTable;
+        [FieldOffset(0x08)] public BattleChara* OwnerObject;
+        [FieldOffset(0x10)] public void** VfxListenerVTable;
+        [FieldOffset(0x20)] public VfxData* Vfx;
+        [FieldOffset(0x2A)] public ShroudFlags Flags;
+        
+        [Flags]
+        public enum ShroudFlags : uint
+        {
+            ShroudAttacking = 0x01, // on when the character is using a skill from reaper shroud, can be on for a short time without shroud itself being on.
+            ShroudActive = 0x02, // On as long as the transformation is enabled.
+            ShroudLoading = 0x0100, // On at the start before the VFX is loaded.
+        }
     }
 
     public enum EurekaElement : byte
@@ -315,7 +341,7 @@ public unsafe partial struct Character
         Wind = 3,
         Earth = 4,
         Lightning = 5,
-        Water = 6
+        Water = 6,
     }
 
     // Seems similar to ConditionFlag in Dalamud but not all flags are valid on the character
