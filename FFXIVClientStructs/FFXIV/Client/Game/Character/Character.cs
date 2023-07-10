@@ -321,13 +321,18 @@ public unsafe partial struct Character
         [FieldOffset(0x00)] public void** ContainerVTable;
         [FieldOffset(0x08)] public BattleChara* OwnerObject;
         [FieldOffset(0x10)] public void** VfxListenerVTable;
-        [FieldOffset(0x20)] public VfxData* Vfx;
-        [FieldOffset(0x2A)] public ShroudFlags Flags;
+        [FieldOffset(0x18)] public ushort StanceChangeId;
+        [FieldOffset(0x1C)] public uint StanceChangeState;
+        [FieldOffset(0x20)] public float Timer;
+        [FieldOffset(0x28)] public void* CopyObject;
+        [FieldOffset(0x30)] public VfxData* Vfx;
+        [FieldOffset(0x38)] public ShroudFlags Flags;
+        [FieldOffset(0x3A)] public uint UnkFlags;
         
         [Flags]
-        public enum ShroudFlags : uint
+        public enum ShroudFlags : ushort
         {
-            ShroudAttacking = 0x01, // on when the character is using a skill from reaper shroud, can be on for a short time without shroud itself being on.
+            ShroudAttacking = 0x01, // On when the character is using a skill from reaper shroud, can be on for a short time without shroud itself being on.
             ShroudActive = 0x02, // On as long as the transformation is enabled.
             ShroudLoading = 0x0100, // On at the start before the VFX is loaded.
         }
