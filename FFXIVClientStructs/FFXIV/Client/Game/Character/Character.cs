@@ -316,6 +316,8 @@ public unsafe partial struct Character
     // Reaper Shroud seems to be mostly hardcoded.
     // It applies a transformation to NpcEquip row 2161 (which only sets the body slot to 8100,1).
     // It also enables the Vfx in this container, and toggles the 'atr_eye_a' attribute in the model (for the red pupils).
+    // We do not actually know where all the other values come in, nothing except Flags and Vfx is actually used by Reaper Shroud (not even NpcEquipId, strangely).
+    // This probably is used by other transformations too, but we have not found any yet.
     [StructLayout(LayoutKind.Explicit, Size = 0x40)]
     public struct ReaperShroudContainer {
         [FieldOffset(0x00)] public void** ContainerVTable;
@@ -327,10 +329,10 @@ public unsafe partial struct Character
         [FieldOffset(0x28)] public void* CopyObject;
         [FieldOffset(0x30)] public VfxData* Vfx;
         [FieldOffset(0x38)] public ShroudFlags Flags;
-        [FieldOffset(0x3A)] public uint UnkFlags;
+        [FieldOffset(0x3C)] public ushort NpcEquipId;
         
         [Flags]
-        public enum ShroudFlags : ushort
+        public enum ShroudFlags : uint
         {
             ShroudAttacking = 0x01, // On when the character is using a skill from reaper shroud, can be on for a short time without shroud itself being on.
             ShroudActive = 0x02, // On as long as the transformation is enabled.
