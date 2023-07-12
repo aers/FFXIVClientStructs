@@ -18,5 +18,8 @@ public class Program
 
         File.WriteAllText($"{outputBase}ffxiv_client_structs_ghidra.h", exporter.Export(GapStrategy.FullSize));
         File.WriteAllText($"{outputBase}ffxiv_client_structs_arrays_ghidra.h", exporter.Export(GapStrategy.ByteArray));
+
+        if (exporter.Errored)
+            throw new Exception("Exporter failed to export all types some error happened");
     }
 }
