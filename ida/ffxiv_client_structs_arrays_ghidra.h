@@ -5,56 +5,86 @@ struct Application_Network_WorkDefinitions_LeveWork;
 struct Application_Network_WorkDefinitions_QuestWork;
 struct Application_Network_WorkDefinitions_TrackingWork;
 struct Client_Game_ActionManager;
+struct Client_Game_ComboDetail;
+struct Client_Game_Object_GameObjectID;
 struct Client_Game_ActionTimelineDriver;
 struct Client_Game_ActionTimelineManager;
 struct Client_Game_Balloon;
+struct Client_System_String_Utf8String;
 struct Client_Game_Camera;
+struct Client_Game_CameraBase;
+struct Client_Graphics_Scene_Camera;
+struct Client_Graphics_Scene_Object;
+struct Common_Math_Vector3;
+struct Common_Math_Quaternion;
+struct Common_Math_Matrix4x4;
 struct Client_Game_Camera3;
 struct Client_Game_Camera4;
-struct Client_Game_CameraBase;
 struct Client_Game_Character_BattleChara;
 struct Client_Game_Character_Character;
-struct Client_Game_Character_Character_CastInfo;
-struct Client_Game_Character_Character_CharacterVTable;
-struct Client_Game_Character_Character_CompanionContainer;
-struct Client_Game_Character_Character_ForayInfo;
-struct Client_Game_Character_Character_MountContainer;
-struct Client_Game_Character_Character_OrnamentContainer;
-struct Client_Game_Character_CharacterManager;
-struct Client_Game_Character_Companion;
-struct Client_Game_Character_CustomizeData;
 struct Client_Game_Character_Data_CharacterData;
+struct Client_Game_Character_Character_MountContainer;
+struct Client_Game_Character_Character_CompanionContainer;
 struct Client_Game_Character_DrawDataContainer;
+struct Client_Game_Character_WeaponModelId;
 struct Client_Game_Character_DrawObjectData;
 struct Client_Game_Character_EquipmentModelId;
+struct Client_Game_Character_CustomizeData;
+struct Client_Game_Character_Character_OrnamentContainer;
+struct Client_Game_Character_Character_CastInfo;
+struct Client_Game_Character_Character_CharacterVTable;
+struct Client_Game_Character_Character_ForayInfo;
+struct Client_Game_Character_CharacterManager;
+struct Client_Game_Character_Companion;
 struct Client_Game_Character_Ornament;
-struct Client_Game_Character_WeaponModelId;
-struct Client_Game_ComboDetail;
 struct Client_Game_Control_CameraManager;
 struct Client_Game_Control_Control;
+struct Client_Game_Control_TargetSystem;
 struct Client_Game_Control_GameObjectArray;
 struct Client_Game_Control_InputManager;
-struct Client_Game_Control_TargetSystem;
 struct Client_Game_Event_Director;
-struct Client_Game_Event_DirectorModule;
-struct Client_Game_Event_EventFramework;
-struct Client_Game_Event_EventGPoseController;
-struct Client_Game_Event_EventHandlerStruct;
-struct Client_Game_Event_EventHandlerStructInfo;
-struct Client_Game_Event_EventHandlerStructModule;
-struct Client_Game_Event_EventId;
-struct Client_Game_Event_EventSceneModule;
-struct Client_Game_Event_EventSceneModuleImplBase;
-struct Client_Game_Event_EventSceneModuleUsualImpl;
-struct Client_Game_Event_EventState;
-struct Client_Game_Event_LuaActor;
-struct Client_Game_Event_LuaActorModule;
 struct Client_Game_Event_LuaEventHandlerStruct;
+struct Client_Game_Event_EventHandlerStruct;
+struct StdSet_PointerClientGameObjectGameObject;
+struct StdSet_Node_PointerClientGameObjectGameObject;
+struct Pointer_ClientGameObjectGameObject;
+struct Client_Game_Event_EventHandlerStructInfo;
+struct Client_Game_Event_EventId;
+struct Client_Game_Event_DirectorModule;
 struct Client_Game_Event_ModuleBase;
+struct StdVector_PointerClientGameEventDirector;
+struct Pointer_ClientGameEventDirector;
+struct StdMap_SystemUInt16_StdPairSystemIntPtrSystemIntPtr;
+struct StdMap_Node_SystemUInt16_StdPairSystemIntPtrSystemIntPtr;
+struct StdPair_SystemUInt16_StdPairSystemIntPtrSystemIntPtr;
+struct StdPair_SystemIntPtr_SystemIntPtr;
+struct Client_Game_Event_EventFramework;
+struct Client_Game_Event_EventHandlerStructModule;
+struct StdMap_SystemUInt32_PointerClientGameEventEventHandlerStruct;
+struct StdMap_Node_SystemUInt32_PointerClientGameEventEventHandlerStruct;
+struct StdPair_SystemUInt32_PointerClientGameEventEventHandlerStruct;
+struct Pointer_ClientGameEventEventHandlerStruct;
+struct Client_Game_Event_LuaActorModule;
+struct StdMap_SystemInt64_ClientGameEventLuaActor;
+struct StdMap_Node_SystemInt64_ClientGameEventLuaActor;
+struct StdPair_SystemInt64_ClientGameEventLuaActor;
+struct Client_Game_Event_LuaActor;
+struct Client_Game_Event_EventSceneModule;
+struct Client_Game_Event_EventSceneModuleUsualImpl;
+struct Client_Game_Event_EventSceneModuleImplBase;
+struct Client_Game_Event_EventGPoseController;
+struct Common_Lua_LuaThread;
+struct Common_Lua_LuaState;
+struct Client_Game_Event_EventState;
 struct Client_Game_Fate_FateContext;
+struct System_Numerics_Vector3;
 struct Client_Game_Fate_FateDirector;
 struct Client_Game_Fate_FateManager;
+struct StdVector_ClientGameObjectGameObjectID;
+struct StdVector_PointerClientGameFateFateContext;
+struct Pointer_ClientGameFateFateContext;
 struct Client_Game_GameMain;
+struct Client_Game_JobGaugeManager;
 struct Client_Game_Gauge_AstrologianGauge;
 struct Client_Game_Gauge_BardGauge;
 struct Client_Game_Gauge_BlackMageGauge;
@@ -77,6 +107,7 @@ struct Client_Game_Gauge_WarriorGauge;
 struct Client_Game_Gauge_WhiteMageGauge;
 struct Client_Game_Group_GroupManager;
 struct Client_Game_Group_PartyMember;
+struct Client_Game_StatusManager;
 struct Client_Game_Housing_HousingManager;
 struct Client_Game_Housing_HousingOutdoorTerritory;
 struct Client_Game_Housing_HousingTerritory;
@@ -90,23 +121,22 @@ struct Client_Game_Housing_HousingWorkshopTerritory;
 struct Client_Game_Housing_PlotDetail;
 struct Client_Game_InstanceContent_ContentDirector;
 struct Client_Game_InstanceContent_InstanceContentDeepDungeon;
+struct Client_Game_InstanceContent_InstanceContentDirector;
 struct Client_Game_InstanceContent_InstanceContentDeepDungeon_DeepDungeonChestInfo;
 struct Client_Game_InstanceContent_InstanceContentDeepDungeon_DeepDungeonItemInfo;
 struct Client_Game_InstanceContent_InstanceContentDeepDungeon_DeepDungeonPartyInfo;
-struct Client_Game_InstanceContent_InstanceContentDirector;
 struct Client_Game_InstanceContent_PublicContentDirector;
 struct Client_Game_InventoryContainer;
 struct Client_Game_InventoryItem;
 struct Client_Game_InventoryManager;
-struct Client_Game_JobGaugeManager;
 struct Client_Game_LobbyCamera;
 struct Client_Game_LowCutCamera;
 struct Client_Game_MirageManager;
 struct Client_Game_MirageManager_GlamourPlate;
 struct Client_Game_MJI_IslandState;
+struct Client_Game_MJI_MJIFarmPasture;
 struct Client_Game_MJI_MJIAnimal;
 struct Client_Game_MJI_MJIBuildingPlacement;
-struct Client_Game_MJI_MJIFarmPasture;
 struct Client_Game_MJI_MJIFarmPasturePlacement;
 struct Client_Game_MJI_MJIFarmState;
 struct Client_Game_MJI_MJIGranaries;
@@ -120,7 +150,6 @@ struct Client_Game_MonsterNoteRankInfo;
 struct Client_Game_Object_ClientObjectManager;
 struct Client_Game_Object_GameObject;
 struct Client_Game_Object_GameObject_GameObjectVTable;
-struct Client_Game_Object_GameObjectID;
 struct Client_Game_Object_GameObjectManager;
 struct Client_Game_QuestManager;
 struct Client_Game_QuestManager_QuestListArray;
@@ -138,7 +167,7 @@ struct Client_Game_SavedAppearanceManager;
 struct Client_Game_SavedAppearanceManager_SavedAppearanceManagerVTable;
 struct Client_Game_SavedAppearanceSlot;
 struct Client_Game_Status;
-struct Client_Game_StatusManager;
+struct Client_Game_UI_Achievement;
 struct Client_Game_UI_AreaInstance;
 struct Client_Game_UI_Buddy;
 struct Client_Game_UI_Buddy_BuddyMember;
@@ -157,8 +186,8 @@ struct Client_Game_UI_LimitBreakController;
 struct Client_Game_UI_Loot;
 struct Client_Game_UI_LootItem;
 struct Client_Game_UI_Map;
-struct Client_Game_UI_Map_MapMarkerInfo;
 struct Client_Game_UI_Map_QuestMarkerArray;
+struct Client_Game_UI_Map_MapMarkerInfo;
 struct Client_Game_UI_MarkingController;
 struct Client_Game_UI_MobHunt;
 struct Client_Game_UI_MobHunt_KillCounts;
@@ -169,9 +198,11 @@ struct Client_Game_UI_RecipeNote_RecipeData;
 struct Client_Game_UI_RecipeNote_RecipeEntry;
 struct Client_Game_UI_RelicNote;
 struct Client_Game_UI_Revive;
+struct Component_GUI_AtkEventInterface;
 struct Client_Game_UI_RouletteController;
 struct Client_Game_UI_SelectUseTicketInvoker;
 struct Client_Game_UI_Telepo;
+struct StdVector_ClientGameUITeleportInfo;
 struct Client_Game_UI_TeleportInfo;
 struct Client_Game_UI_TerritoryInfo;
 struct Client_Game_UI_UIState;
@@ -179,25 +210,37 @@ struct Client_Game_UI_WeaponState;
 struct Client_Graphics_Animation_AnimationResourceHandle;
 struct Client_Graphics_ByteColor;
 struct Client_Graphics_Environment_EnvManager;
-struct Client_Graphics_Environment_EnvSimulator;
-struct Client_Graphics_Environment_EnvSoundState;
 struct Client_Graphics_Environment_EnvState;
+struct Client_Graphics_Environment_EnvSoundState;
+struct Client_Graphics_Environment_EnvSimulator;
+struct Client_Graphics_Render_ShadowCamera;
+struct Client_Graphics_Render_Camera;
+struct Client_Graphics_ReferencedClassBase;
 struct Client_Graphics_Kernel_CVector;
 struct Client_Graphics_Kernel_Device;
 struct Client_Graphics_Kernel_PixelShader;
 struct Client_Graphics_Kernel_ShaderNode;
 struct Client_Graphics_Kernel_ShaderNode_ShaderPass;
 struct Client_Graphics_Kernel_ShaderPackage;
+struct Client_Graphics_Kernel_CVector_PointerClientGraphicsKernelVertexShader;
+struct StdVector_PointerClientGraphicsKernelVertexShader;
+struct Pointer_ClientGraphicsKernelVertexShader;
+struct Client_Graphics_Kernel_CVector_PointerClientGraphicsKernelPixelShader;
+struct StdVector_PointerClientGraphicsKernelPixelShader;
+struct Pointer_ClientGraphicsKernelPixelShader;
+struct Client_Graphics_Kernel_CVector_PointerClientGraphicsKernelShaderNode;
+struct StdVector_PointerClientGraphicsKernelShaderNode;
+struct Pointer_ClientGraphicsKernelShaderNode;
 struct Client_Graphics_Kernel_ShaderPackage_ConstantSamplerUnknown;
 struct Client_Graphics_Kernel_ShaderPackage_MaterialElement;
 struct Client_Graphics_Kernel_SwapChain;
 struct Client_Graphics_Kernel_VertexShader;
 struct Client_Graphics_Physics_BonePhysicsModule;
-struct Client_Graphics_Physics_BoneSimulator;
 struct Client_Graphics_Physics_BoneSimulators;
+struct StdVector_PointerClientGraphicsPhysicsBoneSimulator;
+struct Pointer_ClientGraphicsPhysicsBoneSimulator;
+struct Client_Graphics_Physics_BoneSimulator;
 struct Client_Graphics_Ray;
-struct Client_Graphics_ReferencedClassBase;
-struct Client_Graphics_Render_Camera;
 struct Client_Graphics_Render_Manager;
 struct Client_Graphics_Render_Material;
 struct Client_Graphics_Render_Model;
@@ -205,12 +248,12 @@ struct Client_Graphics_Render_Notifier;
 struct Client_Graphics_Render_OffscreenRenderingManager;
 struct Client_Graphics_Render_PartialSkeleton;
 struct Client_Graphics_Render_RenderTargetManager;
-struct Client_Graphics_Render_ShadowCamera;
 struct Client_Graphics_Render_Skeleton;
+struct Client_Graphics_Transform;
 struct Client_Graphics_Render_SubView;
+struct Common_Math_Rectangle;
 struct Client_Graphics_Render_Texture;
 struct Client_Graphics_Render_View;
-struct Client_Graphics_Scene_Camera;
 struct Client_Graphics_Scene_CameraManager;
 struct Client_Graphics_Scene_CharacterBase;
 struct Client_Graphics_Scene_CharacterBase_CharacterBaseVTable;
@@ -221,26 +264,35 @@ struct Client_Graphics_Scene_EnvScene;
 struct Client_Graphics_Scene_EnvSpace;
 struct Client_Graphics_Scene_Human;
 struct Client_Graphics_Scene_Monster;
-struct Client_Graphics_Scene_Object;
 struct Client_Graphics_Scene_Object_ObjectVTable;
 struct Client_Graphics_Scene_Weapon;
 struct Client_Graphics_Scene_World;
-struct Client_Graphics_Transform;
 struct Client_Graphics_Vfx_VfxData;
 struct Client_LayoutEngine_IndoorAreaLayoutData;
 struct Client_LayoutEngine_IndoorFloorLayoutData;
 struct Client_LayoutEngine_LayoutManager;
 struct Client_LayoutEngine_LayoutWorld;
+struct StdMap_ClientSystemStringUtf8String_PointerSystemByte;
+struct StdMap_Node_ClientSystemStringUtf8String_PointerSystemByte;
+struct StdPair_ClientSystemStringUtf8String_PointerSystemByte;
+struct Pointer_SystemByte;
 struct Client_System_Configuration_DevConfig;
+struct Common_Configuration_DevConfig;
+struct Common_Configuration_ConfigBase;
 struct Client_System_Configuration_SystemConfig;
+struct Common_Configuration_SystemConfig;
 struct Client_System_File_FileDescriptor;
 struct Client_System_Framework_Framework;
 struct Client_System_Framework_GameVersion;
 struct Client_System_Memory_IMemorySpace;
 struct Client_System_Memory_IMemorySpace_IMemorySpaceVTable;
 struct Client_System_Resource_Handle_MaterialResourceHandle;
-struct Client_System_Resource_Handle_ModelResourceHandle;
 struct Client_System_Resource_Handle_ResourceHandle;
+struct StdString;
+struct Client_System_Resource_Handle_ModelResourceHandle;
+struct StdMap_PointerSystemByte_SystemInt16;
+struct StdMap_Node_PointerSystemByte_SystemInt16;
+struct StdPair_PointerSystemByte_SystemInt16;
 struct Client_System_Resource_Handle_SkeletonResourceHandle;
 struct Client_System_Resource_Handle_SkeletonResourceHandle_SkeletonHeader;
 struct Client_System_Resource_Handle_TextureResourceHandle;
@@ -254,17 +306,22 @@ struct Client_System_Scheduler_Base_TimelineController;
 struct Client_System_Scheduler_Resource_SchedulerResource;
 struct Client_System_Scheduler_Resource_SchedulerResource_ResourceName;
 struct Client_System_Scheduler_Resource_SchedulerResourceManagement;
-struct Client_System_String_Utf8String;
 struct Client_UI_ActionBarSlot;
 struct Client_UI_AddonActionBar;
+struct Client_UI_AddonActionBarX;
 struct Client_UI_AddonActionBarBase;
 struct Client_UI_AddonActionBarBase_AddonActionBarBaseVTable;
-struct Client_UI_AddonActionBarX;
 struct Client_UI_AddonActionCross;
 struct Client_UI_AddonActionDoubleCrossBase;
 struct Client_UI_AddonAOZNotebook;
-struct Client_UI_AddonAOZNotebook_ActiveActions;
+struct Component_GUI_AtkUnitBase;
+struct Component_GUI_AtkEventListener;
+struct Component_GUI_AtkUldManager;
+struct StdLinkedList_PointerComponentGUIAtkUldManagerDuplicateObjectList;
+struct StdLinkedList_Node_PointerComponentGUIAtkUldManagerDuplicateObjectList;
+struct Pointer_ComponentGUIAtkUldManagerDuplicateObjectList;
 struct Client_UI_AddonAOZNotebook_SpellbookBlock;
+struct Client_UI_AddonAOZNotebook_ActiveActions;
 struct Client_UI_AddonBank;
 struct Client_UI_AddonBank_AddonBankVTable;
 struct Client_UI_AddonCastBar;
@@ -310,25 +367,25 @@ struct Client_UI_AddonJournalDetail;
 struct Client_UI_AddonJournalResult;
 struct Client_UI_AddonLookingForGroupDetail;
 struct Client_UI_AddonLotteryDaily;
-struct Client_UI_AddonLotteryDaily_GameBoardNumbers;
-struct Client_UI_AddonLotteryDaily_GameNumberRow;
 struct Client_UI_AddonLotteryDaily_GameTileBoard;
 struct Client_UI_AddonLotteryDaily_GameTileRow;
 struct Client_UI_AddonLotteryDaily_LaneTileSelector;
+struct Client_UI_AddonLotteryDaily_GameBoardNumbers;
+struct Client_UI_AddonLotteryDaily_GameNumberRow;
 struct Client_UI_AddonMacro;
 struct Client_UI_AddonMaterializeDialog;
 struct Client_UI_AddonMateriaRetrieveDialog;
 struct Client_UI_AddonMobHunt;
 struct Client_UI_AddonNamePlate;
-struct Client_UI_AddonNamePlate_BakeData;
 struct Client_UI_AddonNamePlate_BakePlateRenderer;
+struct Client_UI_AddonNamePlate_BakeData;
 struct Client_UI_AddonNamePlate_NamePlateObject;
 struct Client_UI_AddonNeedGreed;
 struct Client_UI_AddonNeedGreed_LootItemInfo;
 struct Client_UI_AddonPartyList;
+struct Client_UI_AddonPartyList_PartyMembers;
 struct Client_UI_AddonPartyList_PartyListMemberStruct;
 struct Client_UI_AddonPartyList_PartyListMemberStruct_StatusIcons;
-struct Client_UI_AddonPartyList_PartyMembers;
 struct Client_UI_AddonPartyList_TrustMembers;
 struct Client_UI_AddonRaceChocoboResult;
 struct Client_UI_AddonRaceChocoboResult_AddonRaceChocoboResultVTable;
@@ -358,41 +415,58 @@ struct Client_UI_AddonSalvageItemSelector_SalvageItem;
 struct Client_UI_AddonSatisfactionSupply;
 struct Client_UI_AddonSelectIconString;
 struct Client_UI_AddonSelectIconString_PopupMenuDerive;
+struct Client_UI_PopupMenu;
 struct Client_UI_AddonSelectOk;
 struct Client_UI_AddonSelectString;
-struct Client_UI_AddonSelectString_AddonSelectStringVTable;
 struct Client_UI_AddonSelectString_PopupMenuDerive;
+struct Client_UI_AddonSelectString_AddonSelectStringVTable;
 struct Client_UI_AddonSelectYesno;
 struct Client_UI_AddonShopCardDialog;
 struct Client_UI_AddonSocial;
 struct Client_UI_AddonSynthesis;
 struct Client_UI_AddonSynthesis_CraftEffect;
 struct Client_UI_AddonTalk;
+struct Component_GUI_AtkEventTarget;
+struct Component_GUI_AtkEventListenerUnk1;
 struct Client_UI_AddonTeleport;
 struct Client_UI_AddonWaymarkInfo;
 struct Client_UI_AddonWeeklyBingo;
+struct Client_UI_DutySlotList;
+struct Client_UI_DutySlot;
+struct Client_UI_StringThing;
+struct Client_UI_StickerSlotList;
+struct Client_UI_StickerSlot;
 struct Client_UI_AddonWeeklyPuzzle;
-struct Client_UI_AddonWeeklyPuzzle_GameTileBoard;
-struct Client_UI_AddonWeeklyPuzzle_GameTileItem;
-struct Client_UI_AddonWeeklyPuzzle_GameTileRow;
 struct Client_UI_AddonWeeklyPuzzle_RewardPanelItem;
+struct Client_UI_AddonWeeklyPuzzle_GameTileBoard;
+struct Client_UI_AddonWeeklyPuzzle_GameTileRow;
+struct Client_UI_AddonWeeklyPuzzle_GameTileItem;
 struct Client_UI_Agent_ActionData;
 struct Client_UI_Agent_AgentActionMenu;
+struct Component_GUI_AgentInterface;
+struct StdVector_ClientUIAgentActionData;
+struct StdVector_ClientUIAgentExtraCommandData;
 struct Client_UI_Agent_AgentAirshipExplorationResult;
+struct Client_UI_Agent_AgentExplorationResultInterface;
 struct Client_UI_Agent_AgentAozContentBriefing;
 struct Client_UI_Agent_AgentAozContentResult;
 struct Client_UI_Agent_AgentArchiveItem;
 struct Client_UI_Agent_AgentBannerInterface;
 struct Client_UI_Agent_AgentBannerInterface_Storage;
 struct Client_UI_Agent_AgentBannerInterface_Storage_CharacterData;
+struct Component_GUI_AtkTexture;
 struct Client_UI_Agent_AgentBannerMIP;
 struct Client_UI_Agent_AgentBannerParty;
 struct Client_UI_Agent_AgentCharaCard;
 struct Client_UI_Agent_AgentCharaCard_Storage;
+struct Client_UI_Misc_CharaView;
+struct Client_UI_Misc_CharaView_UnkStruct;
 struct Client_UI_Agent_AgentChatLog;
 struct Client_UI_Agent_AgentCompanyCraftMaterial;
 struct Client_UI_Agent_AgentContentsFinder;
 struct Client_UI_Agent_AgentContext;
+struct System_Drawing_Point;
+struct Client_UI_Agent_ContextMenuTarget;
 struct Client_UI_Agent_AgentCraftActionSimulator;
 struct Client_UI_Agent_AgentDeepDungeonInspect;
 struct Client_UI_Agent_AgentDeepDungeonInspect_AgentDeepDungeonInspectData;
@@ -400,12 +474,12 @@ struct Client_UI_Agent_AgentDeepDungeonMap;
 struct Client_UI_Agent_AgentDeepDungeonMapData;
 struct Client_UI_Agent_AgentDeepDungeonStatus;
 struct Client_UI_Agent_AgentDeliveryItemInfo;
-struct Client_UI_Agent_AgentExplorationResultInterface;
 struct Client_UI_Agent_AgentFieldMarker;
 struct Client_UI_Agent_AgentFishGuide;
 struct Client_UI_Agent_AgentFreeCompany;
 struct Client_UI_Agent_AgentFreeCompany_FreeCompanyActionTimer;
 struct Client_UI_Agent_AgentFreeCompanyCrestEditor;
+struct Client_UI_Agent_CrestData;
 struct Client_UI_Agent_AgentFreeCompanyProfile;
 struct Client_UI_Agent_AgentFreeCompanyProfile_FCProfile;
 struct Client_UI_Agent_AgentFriendList;
@@ -424,10 +498,19 @@ struct Client_UI_Agent_AgentItemSearch;
 struct Client_UI_Agent_AgentLobby;
 struct Client_UI_Agent_AgentLoot;
 struct Client_UI_Agent_AgentMap;
+struct StdMap_SystemUInt32_SystemUInt32;
+struct StdMap_Node_SystemUInt32_SystemUInt32;
+struct StdPair_SystemUInt32_SystemUInt32;
+struct Client_UI_Agent_FlagMapMarker;
+struct Client_UI_Agent_MapMarkerBase;
 struct Client_UI_Agent_AgentMiragePrismPrismBox;
 struct Client_UI_Agent_AgentMJIPouch;
 struct Client_UI_Agent_AgentMJIPouch_PouchIndexInfo;
 struct Client_UI_Agent_AgentMJIPouch_PouchInventoryData;
+struct StdVector_ClientUIAgentPouchInventoryItem;
+struct StdVector_PointerClientUIAgentPouchInventoryItem;
+struct Pointer_ClientUIAgentPouchInventoryItem;
+struct StdVector_ClientSystemStringUtf8String;
 struct Client_UI_Agent_AgentModule;
 struct Client_UI_Agent_AgentMonsterNote;
 struct Client_UI_Agent_AgentMycItemBox;
@@ -440,15 +523,17 @@ struct Client_UI_Agent_AgentRetainerItemTransfer;
 struct Client_UI_Agent_AgentRetainerItemTransferData;
 struct Client_UI_Agent_AgentRetainerItemTransferData_DuplicateItemEntry;
 struct Client_UI_Agent_AgentRetainerList;
-struct Client_UI_Agent_AgentRetainerList_Retainer;
 struct Client_UI_Agent_AgentRetainerList_RetainerList;
+struct Client_UI_Agent_AgentRetainerList_Retainer;
 struct Client_UI_Agent_AgentRevive;
 struct Client_UI_Agent_AgentSalvage;
+struct Client_UI_Agent_SalvageResult;
 struct Client_UI_Agent_AgentSalvage_SalvageListItem;
 struct Client_UI_Agent_AgentSatisfactionSupply;
-struct Client_UI_Agent_AgentSatisfactionSupply_ItemInfo;
 struct Client_UI_Agent_AgentSatisfactionSupply_SatisfactionSupplyNpcInfo;
+struct Client_UI_Agent_AgentSatisfactionSupply_ItemInfo;
 struct Client_UI_Agent_AgentScreenLog;
+struct StdDeque_ClientUIAgentBalloonInfo;
 struct Client_UI_Agent_AgentSubmersibleExplorationResult;
 struct Client_UI_Agent_AgentTeleport;
 struct Client_UI_Agent_AgentTryon;
@@ -462,50 +547,47 @@ struct Client_UI_Agent_BalloonInfo;
 struct Client_UI_Agent_BalloonSlot;
 struct Client_UI_Agent_ContentsFinderRewards;
 struct Client_UI_Agent_ContextMenu;
-struct Client_UI_Agent_ContextMenuTarget;
-struct Client_UI_Agent_CrestData;
 struct Client_UI_Agent_DeepDungeonStatusData;
 struct Client_UI_Agent_DeepDungeonStatusItem;
 struct Client_UI_Agent_EfficiencyCalculation;
 struct Client_UI_Agent_ExplorationResultData;
 struct Client_UI_Agent_ExplorationResultDataItemReturn;
 struct Client_UI_Agent_ExtraCommandData;
-struct Client_UI_Agent_FlagMapMarker;
 struct Client_UI_Agent_GatheringAreaInfo;
+struct Client_UI_Agent_OpenMapInfo;
 struct Client_UI_Agent_GcArmyExpeditionData;
 struct Client_UI_Agent_GrandCompanyItem;
 struct Client_UI_Agent_HudPartyMember;
 struct Client_UI_Agent_HudPartyMemberEnmity;
 struct Client_UI_Agent_ItemReward;
-struct Client_UI_Agent_MapMarkerBase;
 struct Client_UI_Agent_MapMarkerInfo;
 struct Client_UI_Agent_MiniMapMarker;
 struct Client_UI_Agent_MiragePrismPrismBoxData;
+struct Client_UI_Agent_PrismBoxItem;
+struct Client_UI_Agent_PrismBoxCrystallizeItem;
 struct Client_UI_Agent_MissionInfo;
 struct Client_UI_Agent_MycItem;
 struct Client_UI_Agent_MycItemBoxData;
 struct Client_UI_Agent_MycItemCategory;
-struct Client_UI_Agent_OpenMapInfo;
 struct Client_UI_Agent_PouchInventoryItem;
-struct Client_UI_Agent_PrismBoxCrystallizeItem;
-struct Client_UI_Agent_PrismBoxItem;
 struct Client_UI_Agent_ProgressEfficiencyCalculation;
 struct Client_UI_Agent_ProgressEfficiencyCalculations;
 struct Client_UI_Agent_QualityEfficiencyCalculation;
 struct Client_UI_Agent_QualityEfficiencyCalculations;
-struct Client_UI_Agent_SalvageResult;
 struct Client_UI_Agent_SupplyProvisioningData;
 struct Client_UI_Agent_SupplyProvisioningItem;
 struct Client_UI_Agent_TempMapMarker;
-struct Client_UI_DutySlot;
-struct Client_UI_DutySlotList;
 struct Client_UI_Info_CrossRealmGroup;
 struct Client_UI_Info_CrossRealmMember;
 struct Client_UI_Info_InfoModule;
 struct Client_UI_Info_InfoProxy11;
+struct Client_UI_Info_InfoProxyPageInterface;
+struct Client_UI_Info_InfoProxyInterface;
 struct Client_UI_Info_InfoProxy17;
 struct Client_UI_Info_InfoProxy20;
 struct Client_UI_Info_InfoProxy21;
+struct Client_UI_Info_InfoProxyInvitedList;
+struct Client_UI_Info_InfoProxyCommonList;
 struct Client_UI_Info_InfoProxy22;
 struct Client_UI_Info_InfoProxy23;
 struct Client_UI_Info_InfoProxy24;
@@ -518,7 +600,6 @@ struct Client_UI_Info_InfoProxyCircle;
 struct Client_UI_Info_InfoProxyCircle_Unk1;
 struct Client_UI_Info_InfoProxyCircleFinder;
 struct Client_UI_Info_InfoProxyCircleList;
-struct Client_UI_Info_InfoProxyCommonList;
 struct Client_UI_Info_InfoProxyCommonList_CharacterArray;
 struct Client_UI_Info_InfoProxyCommonList_CharacterArray_Entry;
 struct Client_UI_Info_InfoProxyCommonList_CharacterData;
@@ -527,6 +608,8 @@ struct Client_UI_Info_InfoProxyCommonList_CharacterDict_Entry;
 struct Client_UI_Info_InfoProxyCommonList_CharIndexEntry;
 struct Client_UI_Info_InfoProxyCrossRealm;
 struct Client_UI_Info_InfoProxyCrossWorldLinkShell;
+struct Client_UI_Info_InfoProxyInvitedInterface;
+struct Client_UI_Info_InfoProxyInvitedInterface_Unk18;
 struct Client_UI_Info_InfoProxyCrossWorldLinkShell_CWLSEntry;
 struct Client_UI_Info_InfoProxyCrossWorldLinkShellMember;
 struct Client_UI_Info_InfoProxyFreeCompany;
@@ -535,11 +618,7 @@ struct Client_UI_Info_InfoProxyFreeCompanyCreate;
 struct Client_UI_Info_InfoProxyFreeCompanyMember;
 struct Client_UI_Info_InfoProxyFriendList;
 struct Client_UI_Info_InfoProxyFriendList_StrBuf;
-struct Client_UI_Info_InfoProxyInterface;
 struct Client_UI_Info_InfoProxyInterface_InfoProxyInterfaceVTable;
-struct Client_UI_Info_InfoProxyInvitedInterface;
-struct Client_UI_Info_InfoProxyInvitedInterface_Unk18;
-struct Client_UI_Info_InfoProxyInvitedList;
 struct Client_UI_Info_InfoProxyItemSearch;
 struct Client_UI_Info_InfoProxyItemSearch_Entry;
 struct Client_UI_Info_InfoProxyLetter;
@@ -549,30 +628,31 @@ struct Client_UI_Info_InfoProxyLinkShell;
 struct Client_UI_Info_InfoProxyLinkShell_Entry;
 struct Client_UI_Info_InfoProxyLinkShellChat;
 struct Client_UI_Info_InfoProxyLinkshellMember;
-struct Client_UI_Info_InfoProxyPageInterface;
 struct Client_UI_Info_InfoProxyParty;
 struct Client_UI_Info_InfoProxyPartyInvite;
 struct Client_UI_Info_InfoProxySearch;
 struct Client_UI_Info_InfoProxySearchComment;
 struct Client_UI_Misc_AcquaintanceModule;
+struct Client_UI_Misc_UserFileManager_UserFileEvent;
 struct Client_UI_Misc_AcquaintanceModule_Acquaintance;
 struct Client_UI_Misc_AcquaintanceModule_AcquaintanceModuleVTable;
-struct Client_UI_Misc_CharaView;
-struct Client_UI_Misc_CharaView_UnkStruct;
 struct Client_UI_Misc_ConfigModule;
 struct Client_UI_Misc_ConfigModule_Option;
 struct Client_UI_Misc_FieldMarkerModule;
 struct Client_UI_Misc_FieldMarkerPreset;
 struct Client_UI_Misc_GamePresetPoint;
 struct Client_UI_Misc_HotBar;
+struct Client_UI_Misc_HotBarSlots;
 struct Client_UI_Misc_HotBars;
 struct Client_UI_Misc_HotBarSlot;
-struct Client_UI_Misc_HotBarSlots;
 struct Client_UI_Misc_ItemFinderModule;
 struct Client_UI_Misc_ItemFinderModuleResult;
 struct Client_UI_Misc_ItemFinderModuleRetainerResult;
 struct Client_UI_Misc_ItemOrderModule;
+struct StdVector_ClientUIMiscItemOrderModuleSorterRetainerEntry;
 struct Client_UI_Misc_ItemOrderModuleSorter;
+struct StdVector_ClientUIMiscItemOrderModuleSorterItemEntry;
+struct StdVector_ClientUIMiscItemOrderModuleSorterSortFunctionEntry;
 struct Client_UI_Misc_ItemOrderModuleSorterItemEntry;
 struct Client_UI_Misc_ItemOrderModuleSorterPreviousOrderEntry;
 struct Client_UI_Misc_ItemOrderModuleSorterRetainerEntry;
@@ -580,23 +660,26 @@ struct Client_UI_Misc_ItemOrderModuleSorterSortFunctionEntry;
 struct Client_UI_Misc_LogMessageSource;
 struct Client_UI_Misc_PronounModule;
 struct Client_UI_Misc_RaptureGearsetModule;
+struct Client_UI_Misc_RaptureGearsetModule_Gearsets;
 struct Client_UI_Misc_RaptureGearsetModule_GearsetEntry;
 struct Client_UI_Misc_RaptureGearsetModule_GearsetItem;
-struct Client_UI_Misc_RaptureGearsetModule_Gearsets;
 struct Client_UI_Misc_RaptureHotbarModule;
+struct Client_UI_Misc_SavedHotBars;
 struct Client_UI_Misc_RaptureLogModule;
+struct Common_Log_LogModule;
+struct StdVector_SystemInt32;
+struct StdVector_SystemByte;
 struct Client_UI_Misc_RaptureLogModuleTab;
 struct Client_UI_Misc_RaptureMacroModule;
+struct Client_UI_Misc_RaptureMacroModule_MacroPage;
 struct Client_UI_Misc_RaptureMacroModule_Macro;
 struct Client_UI_Misc_RaptureMacroModule_Macro_Lines;
-struct Client_UI_Misc_RaptureMacroModule_MacroPage;
 struct Client_UI_Misc_RaptureTextModule;
 struct Client_UI_Misc_RaptureUiDataModule;
 struct Client_UI_Misc_RecommendEquipModule;
 struct Client_UI_Misc_RetainerCommentModule;
-struct Client_UI_Misc_RetainerCommentModule_RetainerComment;
 struct Client_UI_Misc_RetainerCommentModule_RetainerCommentList;
-struct Client_UI_Misc_SavedHotBars;
+struct Client_UI_Misc_RetainerCommentModule_RetainerComment;
 struct Client_UI_Misc_SavedHotBars_SavedHotBarClassJob;
 struct Client_UI_Misc_SavedHotBars_SavedHotBarClassJobBars;
 struct Client_UI_Misc_SavedHotBars_SavedHotBarClassJobBars_SavedHotBarClassJobBar;
@@ -605,53 +688,38 @@ struct Client_UI_Misc_SavedHotBars_SavedHotBarClassJobSlots_SavedHotBarClassJobS
 struct Client_UI_Misc_ScreenLog;
 struct Client_UI_Misc_UiSavePackModule;
 struct Client_UI_Misc_UiSavePackModule_UiSavePackModuleVTable;
-struct Client_UI_Misc_UserFileManager_UserFileEvent;
 struct Client_UI_Misc_UserFileManager_UserFileEvent_UserFileEventVTable;
 struct Client_UI_MoveableAddonInfoStruct;
-struct Client_UI_PopupMenu;
 struct Client_UI_RaidFinderDutyEntry;
 struct Client_UI_RaptureAtkModule;
+struct Client_UI_RaptureAtkUnitManager;
 struct Client_UI_RaptureAtkModule_NamePlateInfo;
 struct Client_UI_RaptureAtkModule_RaptureAtkModuleVTable;
-struct Client_UI_RaptureAtkUnitManager;
 struct Client_UI_RaptureAtkUnitManager_RaptureAtkUnitManagerVTable;
 struct Client_UI_Shell_RaptureShellModule;
-struct Client_UI_StickerSlot;
-struct Client_UI_StickerSlotList;
-struct Client_UI_StringThing;
 struct Client_UI_UI3DModule;
 struct Client_UI_UI3DModule_MapInfo;
 struct Client_UI_UI3DModule_MemberInfo;
 struct Client_UI_UI3DModule_ObjectInfo;
 struct Client_UI_UI3DModule_UnkInfo;
 struct Client_UI_UIModule;
-struct Client_UI_UIModule_UIModuleVTable;
 struct Client_UI_UIModule_Unk1;
 struct Client_UI_UIModule_Unk2;
 struct Client_UI_UIModule_Unk3;
+struct Client_UI_UIModule_UIModuleVTable;
 struct Common_Component_BGCollision_BGCollisionModule;
 struct Common_Component_BGCollision_Object;
 struct Common_Component_BGCollision_RaycastHit;
 struct Common_Configuration_ChangeEventInterface;
-struct Common_Configuration_ConfigBase;
 struct Common_Configuration_ConfigEntry;
 struct Common_Configuration_ConfigProperties;
+struct Common_Configuration_ConfigValue;
 struct Common_Configuration_ConfigProperties_FloatProperties;
 struct Common_Configuration_ConfigProperties_StringProperties;
 struct Common_Configuration_ConfigProperties_UIntProperties;
-struct Common_Configuration_ConfigValue;
-struct Common_Configuration_DevConfig;
-struct Common_Configuration_SystemConfig;
-struct Common_Log_LogModule;
 struct Common_Lua_lua_State;
-struct Common_Lua_LuaState;
-struct Common_Lua_LuaThread;
 struct Common_Math_Matrix2x2;
-struct Common_Math_Matrix4x4;
-struct Common_Math_Quaternion;
-struct Common_Math_Rectangle;
 struct Common_Math_Vector2;
-struct Common_Math_Vector3;
 struct Common_Math_Vector4;
 struct Component_Excel_ExcelModule;
 struct Component_Excel_ExcelModule_ExcelModuleVTable;
@@ -660,11 +728,12 @@ struct Component_Excel_ExcelModuleInterface_ExcelModuleInterfaceVTable;
 struct Component_Excel_ExcelSheet;
 struct Component_Exd_ExdModule;
 struct Component_GUI_AgentHudLayout;
-struct Component_GUI_AgentInterface;
 struct Component_GUI_AgentInterface_AgentInterfaceVTable;
 struct Component_GUI_AtkArrayData;
 struct Component_GUI_AtkArrayDataHolder;
 struct Component_GUI_AtkCollisionNode;
+struct Component_GUI_AtkResNode;
+struct Component_GUI_AtkEventManager;
 struct Component_GUI_AtkComponentBase;
 struct Component_GUI_AtkComponentBase_AtkComponentBaseVTable;
 struct Component_GUI_AtkComponentButton;
@@ -683,6 +752,9 @@ struct Component_GUI_AtkComponentList_ListItem;
 struct Component_GUI_AtkComponentListItemRenderer;
 struct Component_GUI_AtkComponentNode;
 struct Component_GUI_AtkComponentNumericInput;
+struct Component_GUI_AtkUldComponentDataNumericInput;
+struct Component_GUI_AtkUldComponentDataInputBase;
+struct Component_GUI_AtkUldComponentDataBase;
 struct Component_GUI_AtkComponentRadioButton;
 struct Component_GUI_AtkComponentScrollBar;
 struct Component_GUI_AtkComponentSlider;
@@ -694,30 +766,27 @@ struct Component_GUI_AtkCounterNode;
 struct Component_GUI_AtkCursor;
 struct Component_GUI_AtkDragDropManager;
 struct Component_GUI_AtkEvent;
-struct Component_GUI_AtkEventInterface;
-struct Component_GUI_AtkEventListener;
-struct Component_GUI_AtkEventListenerUnk1;
-struct Component_GUI_AtkEventManager;
-struct Component_GUI_AtkEventTarget;
 struct Component_GUI_AtkImageNode;
 struct Component_GUI_AtkLinkedList;
 struct Component_GUI_AtkLinkedList_Node;
 struct Component_GUI_AtkModule;
 struct Component_GUI_AtkModule_AtkModuleVTable;
 struct Component_GUI_AtkNineGridNode;
-struct Component_GUI_AtkResNode;
 struct Component_GUI_AtkResNode_AtkResNodeVTable;
 struct Component_GUI_AtkStage;
+struct Component_GUI_AtkTooltipManager;
+struct StdMap_PointerComponentGUIAtkResNode_PointerComponentGUIAtkTooltipManagerAtkTooltipInfo;
+struct StdMap_Node_PointerComponentGUIAtkResNode_PointerComponentGUIAtkTooltipManagerAtkTooltipInfo;
+struct StdPair_PointerComponentGUIAtkResNode_PointerComponentGUIAtkTooltipManagerAtkTooltipInfo;
+struct Pointer_ComponentGUIAtkResNode;
+struct Pointer_ComponentGUIAtkTooltipManagerAtkTooltipInfo;
 struct Component_GUI_AtkTextNode;
-struct Component_GUI_AtkTexture;
 struct Component_GUI_AtkTexture_AtkTextureVTable;
 struct Component_GUI_AtkTextureResource;
 struct Component_GUI_AtkTimelineManager;
-struct Component_GUI_AtkTooltipManager;
 struct Component_GUI_AtkTooltipManager_AtkTooltipArgs;
 struct Component_GUI_AtkTooltipManager_AtkTooltipInfo;
 struct Component_GUI_AtkUldAsset;
-struct Component_GUI_AtkUldComponentDataBase;
 struct Component_GUI_AtkUldComponentDataButton;
 struct Component_GUI_AtkUldComponentDataCheckBox;
 struct Component_GUI_AtkUldComponentDataDragDrop;
@@ -727,13 +796,11 @@ struct Component_GUI_AtkUldComponentDataGuildLeveCard;
 struct Component_GUI_AtkUldComponentDataHoldButton;
 struct Component_GUI_AtkUldComponentDataIcon;
 struct Component_GUI_AtkUldComponentDataIconText;
-struct Component_GUI_AtkUldComponentDataInputBase;
 struct Component_GUI_AtkUldComponentDataJournalCanvas;
 struct Component_GUI_AtkUldComponentDataList;
 struct Component_GUI_AtkUldComponentDataListItemRenderer;
 struct Component_GUI_AtkUldComponentDataMap;
 struct Component_GUI_AtkUldComponentDataMultipurpose;
-struct Component_GUI_AtkUldComponentDataNumericInput;
 struct Component_GUI_AtkUldComponentDataPreview;
 struct Component_GUI_AtkUldComponentDataRadioButton;
 struct Component_GUI_AtkUldComponentDataScrollBar;
@@ -743,14 +810,12 @@ struct Component_GUI_AtkUldComponentDataTextNineGrid;
 struct Component_GUI_AtkUldComponentDataTreeList;
 struct Component_GUI_AtkUldComponentDataWindow;
 struct Component_GUI_AtkUldComponentInfo;
-struct Component_GUI_AtkUldManager;
+struct Component_GUI_AtkUldObjectInfo;
 struct Component_GUI_AtkUldManager_DuplicateNodeInfo;
 struct Component_GUI_AtkUldManager_DuplicateObjectList;
-struct Component_GUI_AtkUldObjectInfo;
 struct Component_GUI_AtkUldPart;
 struct Component_GUI_AtkUldPartsList;
 struct Component_GUI_AtkUldWidgetInfo;
-struct Component_GUI_AtkUnitBase;
 struct Component_GUI_AtkUnitBase_AtkUnitBaseVTable;
 struct Component_GUI_AtkUnitList;
 struct Component_GUI_AtkUnitManager;
@@ -1255,6 +1320,20 @@ enum Client_Game_SatisfactionSupplyNpc /* Size=0x4 */
     Charlemend = 7,
     Ameliance = 8,
     Anden = 9
+};
+
+enum Client_Game_UI_Achievement_AchievementState /* Size=0x4 */
+{
+    Invalid = 0,
+    Requested = 1,
+    Loaded = 2
+};
+
+enum Client_Game_UI_Cabinet_CabinetState /* Size=0x4 */
+{
+    Invalid = 0,
+    Requested = 1,
+    Loaded = 2
 };
 
 enum Client_Game_UI_ContentsFinder_LootRule /* Size=0x1 */
@@ -3208,7 +3287,7 @@ enum Component_GUI_ImageNodeFlags /* Size=0x4 */
     AutoFit = 128
 };
 
-enum Component_GUI_NodeFlags /* Size=0x4 */
+enum Component_GUI_NodeFlags /* Size=0x2 */
 {
     AnchorTop = 1,
     AnchorLeft = 2,
@@ -3885,6 +3964,29 @@ struct Client_Game_Control_InputManager /* Size=0x8 */
     /*     */ byte _gap_0x0[0x8];
 };
 
+struct Pointer_ClientGameObjectGameObject /* Size=0x8 */
+{
+    /* 0x0 */ Client_Game_Object_GameObject* Value;
+};
+
+struct StdSet_Node_PointerClientGameObjectGameObject /* Size=0x30 */
+{
+    /* 0x00 */ StdSet_Node_PointerClientGameObjectGameObject* Left;
+    /* 0x08 */ StdSet_Node_PointerClientGameObjectGameObject* Parent;
+    /* 0x10 */ StdSet_Node_PointerClientGameObjectGameObject* Right;
+    /* 0x18 */ byte Color;
+    /*      */ byte _gap_0x19;
+    /*      */ byte _gap_0x1A[0x2];
+    /* 0x1C */ bool IsNil;
+    /*      */ byte _gap_0x1D;
+    /*      */ byte _gap_0x1E[0x2];
+    /* 0x20 */ byte _18;
+    /* 0x21 */ byte _19;
+    /*      */ byte _gap_0x22[0x2];
+    /*      */ byte _gap_0x24[0x4];
+    /* 0x28 */ Pointer_ClientGameObjectGameObject Key;
+};
+
 struct StdSet_PointerClientGameObjectGameObject /* Size=0x10 */
 {
     /* 0x00 */ StdSet_Node_PointerClientGameObjectGameObject* Head;
@@ -3953,11 +4055,48 @@ struct Client_Game_Event_ModuleBase /* Size=0x40 */
     /*      */ byte _gap_0x10[0x30];
 };
 
+struct Pointer_ClientGameEventDirector /* Size=0x8 */
+{
+    /* 0x0 */ Client_Game_Event_Director* Value;
+};
+
 struct StdVector_PointerClientGameEventDirector /* Size=0x18 */
 {
     /* 0x00 */ Pointer_ClientGameEventDirector* First;
     /* 0x08 */ Pointer_ClientGameEventDirector* Last;
     /* 0x10 */ Pointer_ClientGameEventDirector* End;
+};
+
+struct StdPair_SystemIntPtr_SystemIntPtr /* Size=0x10 */
+{
+    /* 0x00 */ __int64 Item1;
+    /* 0x08 */ __int64 Item2;
+};
+
+struct StdPair_SystemUInt16_StdPairSystemIntPtrSystemIntPtr /* Size=0x18 */
+{
+    /* 0x00 */ unsigned __int16 Item1;
+    /*      */ byte _gap_0x2[0x2];
+    /*      */ byte _gap_0x4[0x4];
+    /* 0x08 */ StdPair_SystemIntPtr_SystemIntPtr Item2;
+};
+
+struct StdMap_Node_SystemUInt16_StdPairSystemIntPtrSystemIntPtr /* Size=0x40 */
+{
+    /* 0x00 */ StdMap_Node_SystemUInt16_StdPairSystemIntPtrSystemIntPtr* Left;
+    /* 0x08 */ StdMap_Node_SystemUInt16_StdPairSystemIntPtrSystemIntPtr* Parent;
+    /* 0x10 */ StdMap_Node_SystemUInt16_StdPairSystemIntPtrSystemIntPtr* Right;
+    /* 0x18 */ byte Color;
+    /*      */ byte _gap_0x19;
+    /*      */ byte _gap_0x1A[0x2];
+    /* 0x1C */ bool IsNil;
+    /*      */ byte _gap_0x1D;
+    /*      */ byte _gap_0x1E[0x2];
+    /* 0x20 */ byte _18;
+    /* 0x21 */ byte _19;
+    /*      */ byte _gap_0x22[0x2];
+    /*      */ byte _gap_0x24[0x4];
+    /* 0x28 */ StdPair_SystemUInt16_StdPairSystemIntPtrSystemIntPtr KeyValuePair;
 };
 
 struct StdMap_SystemUInt16_StdPairSystemIntPtrSystemIntPtr /* Size=0x10 */
@@ -3975,18 +4114,80 @@ struct Client_Game_Event_DirectorModule /* Size=0xA0 */
     /* 0x98 */ Client_Game_InstanceContent_ContentDirector* ActiveContentDirector;
 };
 
-struct StdMap_SystemUInt32_PointerClientGameEventEventHandlerStructStructStruct /* Size=0x10 */
+struct Pointer_ClientGameEventEventHandlerStruct /* Size=0x8 */
 {
-    /* 0x00 */ StdMap_Node_SystemUInt32_PointerClientGameEventEventHandlerStructStructStruct* Head;
+    /* 0x0 */ Client_Game_Event_EventHandlerStruct* Value;
+};
+
+struct StdPair_SystemUInt32_PointerClientGameEventEventHandlerStruct /* Size=0x10 */
+{
+    /* 0x00 */ unsigned __int32 Item1;
+    /*      */ byte _gap_0x4[0x4];
+    /* 0x08 */ Pointer_ClientGameEventEventHandlerStruct Item2;
+};
+
+struct StdMap_Node_SystemUInt32_PointerClientGameEventEventHandlerStruct /* Size=0x38 */
+{
+    /* 0x00 */ StdMap_Node_SystemUInt32_PointerClientGameEventEventHandlerStruct* Left;
+    /* 0x08 */ StdMap_Node_SystemUInt32_PointerClientGameEventEventHandlerStruct* Parent;
+    /* 0x10 */ StdMap_Node_SystemUInt32_PointerClientGameEventEventHandlerStruct* Right;
+    /* 0x18 */ byte Color;
+    /*      */ byte _gap_0x19;
+    /*      */ byte _gap_0x1A[0x2];
+    /* 0x1C */ bool IsNil;
+    /*      */ byte _gap_0x1D;
+    /*      */ byte _gap_0x1E[0x2];
+    /* 0x20 */ byte _18;
+    /* 0x21 */ byte _19;
+    /*      */ byte _gap_0x22[0x2];
+    /*      */ byte _gap_0x24[0x4];
+    /* 0x28 */ StdPair_SystemUInt32_PointerClientGameEventEventHandlerStruct KeyValuePair;
+};
+
+struct StdMap_SystemUInt32_PointerClientGameEventEventHandlerStruct /* Size=0x10 */
+{
+    /* 0x00 */ StdMap_Node_SystemUInt32_PointerClientGameEventEventHandlerStruct* Head;
     /* 0x08 */ unsigned __int64 Count;
 };
 
 struct Client_Game_Event_EventHandlerStructModule /* Size=0xC0 */
 {
     /* 0x00 */ Client_Game_Event_ModuleBase ModuleBase;
-    /* 0x40 */ StdMap_SystemUInt32_PointerClientGameEventEventHandlerStructStructStruct EventHandlerMap;
+    /* 0x40 */ StdMap_SystemUInt32_PointerClientGameEventEventHandlerStruct EventHandlerMap;
     /* 0x50 */ StdMap_SystemUInt16_StdPairSystemIntPtrSystemIntPtr EventHandlerFactories;
     /*      */ byte _gap_0x60[0x60];
+};
+
+struct Client_Game_Event_LuaActor /* Size=0x80 */
+{
+    /*      */ byte _gap_0x0[0x8];
+    /* 0x08 */ Client_Game_Object_GameObject* Object;
+    /* 0x10 */ Client_System_String_Utf8String LuaString;
+    /* 0x78 */ Common_Lua_LuaState* LuaState;
+};
+
+struct StdPair_SystemInt64_ClientGameEventLuaActor /* Size=0x88 */
+{
+    /* 0x00 */ __int64 Item1;
+    /* 0x08 */ Client_Game_Event_LuaActor Item2;
+};
+
+struct StdMap_Node_SystemInt64_ClientGameEventLuaActor /* Size=0xB0 */
+{
+    /* 0x00 */ StdMap_Node_SystemInt64_ClientGameEventLuaActor* Left;
+    /* 0x08 */ StdMap_Node_SystemInt64_ClientGameEventLuaActor* Parent;
+    /* 0x10 */ StdMap_Node_SystemInt64_ClientGameEventLuaActor* Right;
+    /* 0x18 */ byte Color;
+    /*      */ byte _gap_0x19;
+    /*      */ byte _gap_0x1A[0x2];
+    /* 0x1C */ bool IsNil;
+    /*      */ byte _gap_0x1D;
+    /*      */ byte _gap_0x1E[0x2];
+    /* 0x20 */ byte _18;
+    /* 0x21 */ byte _19;
+    /*      */ byte _gap_0x22[0x2];
+    /*      */ byte _gap_0x24[0x4];
+    /* 0x28 */ StdPair_SystemInt64_ClientGameEventLuaActor KeyValuePair;
 };
 
 struct StdMap_SystemInt64_ClientGameEventLuaActor /* Size=0x10 */
@@ -4067,14 +4268,6 @@ struct Client_Game_Event_EventFramework /* Size=0x3BC0 */
     /*        */ byte _gap_0x3448[0x778];
 };
 
-struct Client_Game_Event_LuaActor /* Size=0x80 */
-{
-    /*      */ byte _gap_0x0[0x8];
-    /* 0x08 */ Client_Game_Object_GameObject* Object;
-    /* 0x10 */ Client_System_String_Utf8String LuaString;
-    /* 0x78 */ Common_Lua_LuaState* LuaState;
-};
-
 struct System_Numerics_Vector3 /* Size=0x0 */
 {
     /* 0x0 */ float X;
@@ -4108,7 +4301,11 @@ struct Client_Game_Fate_FateContext /* Size=0x1040 */
     /*        */ byte _gap_0x3B9;
     /*        */ byte _gap_0x3BA[0x2];
     /*        */ byte _gap_0x3BC[0x4];
-    /*        */ byte _gap_0x3C0[0x18];
+    /*        */ byte _gap_0x3C0[0x4];
+    /* 0x03C4 */ bool IsExpBonus;
+    /*        */ byte _gap_0x3C5;
+    /*        */ byte _gap_0x3C6[0x2];
+    /*        */ byte _gap_0x3C8[0x10];
     /* 0x03D8 */ unsigned __int32 IconId;
     /*        */ byte _gap_0x3DC[0x4];
     /*        */ byte _gap_0x3E0[0x18];
@@ -4122,14 +4319,14 @@ struct Client_Game_Fate_FateContext /* Size=0x1040 */
     /*        */ byte _gap_0x450[0x10];
     /*        */ byte _gap_0x460[0x4];
     /* 0x0464 */ float Radius;
-    /*        */ byte _gap_0x468[0x2B8];
-    /* 0x0720 */ unsigned __int32 MapIconId;
-    /*        */ byte _gap_0x724[0x4];
-    /*        */ byte _gap_0x728[0x20];
-    /*        */ byte _gap_0x748[0x4];
-    /*        */ byte _gap_0x74C[0x2];
-    /* 0x074E */ unsigned __int16 TerritoryId;
-    /*        */ byte _gap_0x750[0x8F0];
+    /*        */ byte _gap_0x468[0x2F8];
+    /* 0x0760 */ unsigned __int32 MapIconId;
+    /*        */ byte _gap_0x764[0x4];
+    /*        */ byte _gap_0x768[0x20];
+    /*        */ byte _gap_0x788[0x4];
+    /*        */ byte _gap_0x78C[0x2];
+    /* 0x078E */ unsigned __int16 TerritoryId;
+    /*        */ byte _gap_0x790[0x8B0];
 };
 
 struct Client_Game_Fate_FateDirector /* Size=0x4F8 */
@@ -4152,6 +4349,11 @@ struct StdVector_ClientGameObjectGameObjectID /* Size=0x18 */
     /* 0x00 */ Client_Game_Object_GameObjectID* First;
     /* 0x08 */ Client_Game_Object_GameObjectID* Last;
     /* 0x10 */ Client_Game_Object_GameObjectID* End;
+};
+
+struct Pointer_ClientGameFateFateContext /* Size=0x8 */
+{
+    /* 0x0 */ Client_Game_Fate_FateContext* Value;
 };
 
 struct StdVector_PointerClientGameFateFateContext /* Size=0x18 */
@@ -5309,6 +5511,14 @@ struct Client_Game_Status /* Size=0xC */
     /* 0x8 */ unsigned __int32 SourceID;
 };
 
+struct Client_Game_UI_Achievement /* Size=0x550 */
+{
+    /* 0x000 */ void** VTable;
+    /* 0x008 */ Client_Game_UI_Achievement_AchievementState State;
+    /* 0x00C */ byte CompletedAchievements[0x1AC];
+    /*       */ byte _gap_0x1B8[0x398];
+};
+
 struct Client_Game_UI_AreaInstance /* Size=0x28 */
 {
     /*      */ byte _gap_0x0[0x10];
@@ -5362,7 +5572,7 @@ struct Client_Game_UI_Buddy /* Size=0xED8 */
 
 struct Client_Game_UI_Cabinet /* Size=0x48 */
 {
-    /* 0x00 */ __int32 CabinetLoaded;
+    /* 0x00 */ Client_Game_UI_Cabinet_CabinetState State;
     /* 0x04 */ byte UnlockedItems[0x41];
     /*      */ byte _gap_0x45;
     /*      */ byte _gap_0x46[0x2];
@@ -5903,7 +6113,8 @@ struct Client_Game_UI_UIState /* Size=0x16BAC */
     /* 0x01250 */ Client_Game_UI_Inspect Inspect;
     /* 0x014B8 */ Client_Game_UI_Telepo Telepo;
     /* 0x01510 */ Client_Game_UI_Cabinet Cabinet;
-    /*         */ byte _gap_0x1558[0x558];
+    /*         */ byte _gap_0x1558[0x8];
+    /* 0x01560 */ Client_Game_UI_Achievement Achievement;
     /* 0x01AB0 */ Client_Game_UI_Buddy Buddy;
     /*         */ byte _gap_0x2988[0x4];
     /* 0x0298C */ Client_Game_UI_PvPProfile PvPProfile;
@@ -6083,6 +6294,11 @@ struct Client_Graphics_Kernel_ShaderNode_ShaderPass /* Size=0x8 */
     /* 0x4 */ unsigned __int32 PixelShader;
 };
 
+struct Pointer_ClientGraphicsKernelVertexShader /* Size=0x8 */
+{
+    /* 0x0 */ Client_Graphics_Kernel_VertexShader* Value;
+};
+
 struct StdVector_PointerClientGraphicsKernelVertexShader /* Size=0x18 */
 {
     /* 0x00 */ Pointer_ClientGraphicsKernelVertexShader* First;
@@ -6096,6 +6312,11 @@ struct Client_Graphics_Kernel_CVector_PointerClientGraphicsKernelVertexShader /*
     /* 0x08 */ StdVector_PointerClientGraphicsKernelVertexShader Vector;
 };
 
+struct Pointer_ClientGraphicsKernelPixelShader /* Size=0x8 */
+{
+    /* 0x0 */ Client_Graphics_Kernel_PixelShader* Value;
+};
+
 struct StdVector_PointerClientGraphicsKernelPixelShader /* Size=0x18 */
 {
     /* 0x00 */ Pointer_ClientGraphicsKernelPixelShader* First;
@@ -6107,6 +6328,11 @@ struct Client_Graphics_Kernel_CVector_PointerClientGraphicsKernelPixelShader /* 
 {
     /* 0x00 */ void* vtbl;
     /* 0x08 */ StdVector_PointerClientGraphicsKernelPixelShader Vector;
+};
+
+struct Pointer_ClientGraphicsKernelShaderNode /* Size=0x8 */
+{
+    /* 0x0 */ Client_Graphics_Kernel_ShaderNode* Value;
 };
 
 struct StdVector_PointerClientGraphicsKernelShaderNode /* Size=0x18 */
@@ -6187,6 +6413,11 @@ struct Client_Graphics_Kernel_SwapChain /* Size=0x70 */
 struct Client_Graphics_Kernel_VertexShader /* Size=0x1 */
 {
     /*     */ byte _gap_0x0;
+};
+
+struct Pointer_ClientGraphicsPhysicsBoneSimulator /* Size=0x8 */
+{
+    /* 0x0 */ Client_Graphics_Physics_BoneSimulator* Value;
 };
 
 struct StdVector_PointerClientGraphicsPhysicsBoneSimulator /* Size=0x18 */
@@ -6610,6 +6841,41 @@ struct Client_LayoutEngine_LayoutManager /* Size=0x98 */
     /* 0x90 */ Client_LayoutEngine_IndoorAreaLayoutData* IndoorAreaData;
 };
 
+struct Pointer_SystemByte /* Size=0x8 */
+{
+    /* 0x0 */ byte* Value;
+};
+
+struct StdPair_ClientSystemStringUtf8String_PointerSystemByte /* Size=0x70 */
+{
+    /* 0x00 */ Client_System_String_Utf8String Item1;
+    /* 0x68 */ Pointer_SystemByte Item2;
+};
+
+struct StdMap_Node_ClientSystemStringUtf8String_PointerSystemByte /* Size=0x98 */
+{
+    /* 0x00 */ StdMap_Node_ClientSystemStringUtf8String_PointerSystemByte* Left;
+    /* 0x08 */ StdMap_Node_ClientSystemStringUtf8String_PointerSystemByte* Parent;
+    /* 0x10 */ StdMap_Node_ClientSystemStringUtf8String_PointerSystemByte* Right;
+    /* 0x18 */ byte Color;
+    /*      */ byte _gap_0x19;
+    /*      */ byte _gap_0x1A[0x2];
+    /* 0x1C */ bool IsNil;
+    /*      */ byte _gap_0x1D;
+    /*      */ byte _gap_0x1E[0x2];
+    /* 0x20 */ byte _18;
+    /* 0x21 */ byte _19;
+    /*      */ byte _gap_0x22[0x2];
+    /*      */ byte _gap_0x24[0x4];
+    /* 0x28 */ StdPair_ClientSystemStringUtf8String_PointerSystemByte KeyValuePair;
+};
+
+struct StdMap_ClientSystemStringUtf8String_PointerSystemByte /* Size=0x10 */
+{
+    /* 0x00 */ StdMap_Node_ClientSystemStringUtf8String_PointerSystemByte* Head;
+    /* 0x08 */ unsigned __int64 Count;
+};
+
 struct Client_LayoutEngine_LayoutWorld /* Size=0x228 */
 {
     /*       */ byte _gap_0x0[0x20];
@@ -6769,6 +7035,32 @@ struct Client_System_Resource_Handle_MaterialResourceHandle /* Size=0x108 */
     /*       */ byte _gap_0xB0[0x58];
 };
 
+struct StdPair_PointerSystemByte_SystemInt16 /* Size=0x10 */
+{
+    /* 0x00 */ Pointer_SystemByte Item1;
+    /* 0x08 */ __int16 Item2;
+    /*      */ byte _gap_0xA[0x2];
+    /*      */ byte _gap_0xC[0x4];
+};
+
+struct StdMap_Node_PointerSystemByte_SystemInt16 /* Size=0x38 */
+{
+    /* 0x00 */ StdMap_Node_PointerSystemByte_SystemInt16* Left;
+    /* 0x08 */ StdMap_Node_PointerSystemByte_SystemInt16* Parent;
+    /* 0x10 */ StdMap_Node_PointerSystemByte_SystemInt16* Right;
+    /* 0x18 */ byte Color;
+    /*      */ byte _gap_0x19;
+    /*      */ byte _gap_0x1A[0x2];
+    /* 0x1C */ bool IsNil;
+    /*      */ byte _gap_0x1D;
+    /*      */ byte _gap_0x1E[0x2];
+    /* 0x20 */ byte _18;
+    /* 0x21 */ byte _19;
+    /*      */ byte _gap_0x22[0x2];
+    /*      */ byte _gap_0x24[0x4];
+    /* 0x28 */ StdPair_PointerSystemByte_SystemInt16 KeyValuePair;
+};
+
 struct StdMap_PointerSystemByte_SystemInt16 /* Size=0x10 */
 {
     /* 0x00 */ StdMap_Node_PointerSystemByte_SystemInt16* Head;
@@ -6783,12 +7075,6 @@ struct Client_System_Resource_Handle_ModelResourceHandle /* Size=0x260 */
     /*       */ byte _gap_0x218[0x10];
     /* 0x228 */ StdMap_PointerSystemByte_SystemInt16 Shapes;
     /*       */ byte _gap_0x238[0x28];
-};
-
-struct StdMap_SystemUInt32_PointerFFXIVClientStructsHavokhkaSkeletonMapper /* Size=0x10 */
-{
-    /* 0x00 */ StdMap_Node_SystemUInt32_PointerFFXIVClientStructsHavokhkaSkeletonMapper* Head;
-    /* 0x08 */ unsigned __int64 Count;
 };
 
 struct Client_System_Resource_Handle_SkeletonResourceHandle_SkeletonHeader /* Size=0x30 */
@@ -6810,11 +7096,9 @@ struct Client_System_Resource_Handle_SkeletonResourceHandle /* Size=0x0 */
     /*     */ byte _gap_0xB0[0x18];
     /* 0xC8 */ unsigned __int32 BoneCount;
     /*     */ byte _gap_0xCC[0x4];
-    /* 0xD0 */ FFXIVClientStructs_Havok_hkaSkeleton* HavokSkeleton;
-    /* 0xD8 */ StdMap_SystemUInt32_PointerFFXIVClientStructsHavokhkaSkeletonMapper SkeletonMapperDict1;
-    /* 0xE8 */ StdMap_SystemUInt32_PointerFFXIVClientStructsHavokhkaSkeletonMapper SkeletonMapperDict2;
+    /*     */ byte _gap_0xD0[0x28];
     /* 0xF8 */ Common_Math_Matrix4x4* InverseBoneMatrix;
-    /* 0x100 */ FFXIVClientStructs_Havok_hkLoader* HavokLoader;
+    /*     */ byte _gap_0x100[0x8];
     /* 0x108 */ Client_System_Resource_Handle_SkeletonResourceHandle_SkeletonHeader SkeletonData;
 };
 
@@ -6981,10 +7265,22 @@ struct Component_GUI_AtkEventListener /* Size=0x8 */
     } _union_0x0;
 };
 
-struct Component_GUI_AtkLinkedList_PointerComponentGUIAtkUldManagerDuplicateObjectList /* Size=0x18 */
+struct Pointer_ComponentGUIAtkUldManagerDuplicateObjectList /* Size=0x8 */
 {
-    /* 0x00 */ Component_GUI_AtkLinkedList_Node_PointerComponentGUIAtkUldManagerDuplicateObjectList* End;
-    /* 0x08 */ Component_GUI_AtkLinkedList_Node_PointerComponentGUIAtkUldManagerDuplicateObjectList* Start;
+    /* 0x0 */ Component_GUI_AtkUldManager_DuplicateObjectList* Value;
+};
+
+struct StdLinkedList_Node_PointerComponentGUIAtkUldManagerDuplicateObjectList /* Size=0x18 */
+{
+    /* 0x00 */ Pointer_ComponentGUIAtkUldManagerDuplicateObjectList Value;
+    /* 0x08 */ StdLinkedList_Node_PointerComponentGUIAtkUldManagerDuplicateObjectList* Next;
+    /* 0x10 */ StdLinkedList_Node_PointerComponentGUIAtkUldManagerDuplicateObjectList* Previous;
+};
+
+struct StdLinkedList_PointerComponentGUIAtkUldManagerDuplicateObjectList /* Size=0x18 */
+{
+    /* 0x00 */ StdLinkedList_Node_PointerComponentGUIAtkUldManagerDuplicateObjectList* End;
+    /* 0x08 */ StdLinkedList_Node_PointerComponentGUIAtkUldManagerDuplicateObjectList* Start;
     /* 0x10 */ unsigned __int32 Count;
     /*      */ byte _gap_0x14[0x4];
 };
@@ -7007,7 +7303,7 @@ struct Component_GUI_AtkUldManager /* Size=0x90 */
     /*      */ byte _gap_0x44[0x4];
     /* 0x48 */ void* AtkResourceRendererManager;
     /* 0x50 */ Component_GUI_AtkResNode** NodeList;
-    /* 0x58 */ Component_GUI_AtkLinkedList_PointerComponentGUIAtkUldManagerDuplicateObjectList DuplicateObjects;
+    /* 0x58 */ StdLinkedList_PointerComponentGUIAtkUldManagerDuplicateObjectList DuplicateObjects;
     /*      */ byte _gap_0x70[0x8];
     /* 0x78 */ Component_GUI_AtkResNode* RootNode;
     /* 0x80 */ unsigned __int16 RootNodeWidth;
@@ -9852,6 +10148,30 @@ struct Client_UI_Agent_AgentLoot /* Size=0x90 */
     /*      */ byte _gap_0x80[0x10];
 };
 
+struct StdPair_SystemUInt32_SystemUInt32 /* Size=0x8 */
+{
+    /* 0x0 */ unsigned __int32 Item1;
+    /* 0x4 */ unsigned __int32 Item2;
+};
+
+struct StdMap_Node_SystemUInt32_SystemUInt32 /* Size=0x30 */
+{
+    /* 0x00 */ StdMap_Node_SystemUInt32_SystemUInt32* Left;
+    /* 0x08 */ StdMap_Node_SystemUInt32_SystemUInt32* Parent;
+    /* 0x10 */ StdMap_Node_SystemUInt32_SystemUInt32* Right;
+    /* 0x18 */ byte Color;
+    /*      */ byte _gap_0x19;
+    /*      */ byte _gap_0x1A[0x2];
+    /* 0x1C */ bool IsNil;
+    /*      */ byte _gap_0x1D;
+    /*      */ byte _gap_0x1E[0x2];
+    /* 0x20 */ byte _18;
+    /* 0x21 */ byte _19;
+    /*      */ byte _gap_0x22[0x2];
+    /* 0x24 */ StdPair_SystemUInt32_SystemUInt32 KeyValuePair;
+    /*      */ byte _gap_0x2C[0x4];
+};
+
 struct StdMap_SystemUInt32_SystemUInt32 /* Size=0x10 */
 {
     /* 0x00 */ StdMap_Node_SystemUInt32_SystemUInt32* Head;
@@ -9985,6 +10305,11 @@ struct StdVector_ClientUIAgentPouchInventoryItem /* Size=0x18 */
     /* 0x00 */ Client_UI_Agent_PouchInventoryItem* First;
     /* 0x08 */ Client_UI_Agent_PouchInventoryItem* Last;
     /* 0x10 */ Client_UI_Agent_PouchInventoryItem* End;
+};
+
+struct Pointer_ClientUIAgentPouchInventoryItem /* Size=0x8 */
+{
+    /* 0x0 */ Client_UI_Agent_PouchInventoryItem* Value;
 };
 
 struct StdVector_PointerClientUIAgentPouchInventoryItem /* Size=0x18 */
@@ -11713,6 +12038,13 @@ struct Client_UI_Misc_ItemFinderModuleRetainerResult /* Size=0x0 */
     /* 0x78 */ __int32 Page5CountCollectible;
 };
 
+struct StdVector_ClientUIMiscItemOrderModuleSorterRetainerEntry /* Size=0x18 */
+{
+    /* 0x00 */ Client_UI_Misc_ItemOrderModuleSorterRetainerEntry* First;
+    /* 0x08 */ Client_UI_Misc_ItemOrderModuleSorterRetainerEntry* Last;
+    /* 0x10 */ Client_UI_Misc_ItemOrderModuleSorterRetainerEntry* End;
+};
+
 struct Client_UI_Misc_ItemOrderModule /* Size=0xD8 */
 {
     /* 0x00 */ Client_UI_Misc_UserFileManager_UserFileEvent UserFileEvent;
@@ -12305,10 +12637,11 @@ struct Client_UI_UIModule_UIModuleVTable /* Size=0x0 */
     /*     */ byte _gap_0x220[0x38];
     /* 0x258 */ __int64 EnterGPose;
     /* 0x260 */ __int64 ExitGPose;
-    /*     */ byte _gap_0x268[0x8];
+    /* 0x268 */ __int64 IsInGPose;
     /* 0x270 */ __int64 EnterIdleCam;
     /* 0x278 */ __int64 ExitIdleCam;
-    /*     */ byte _gap_0x280[0x1E8];
+    /* 0x280 */ __int64 IsInIdleCam;
+    /*     */ byte _gap_0x288[0x1E0];
     /* 0x468 */ __int64 ToggleUi;
     /*     */ byte _gap_0x470[0x48];
     /* 0x4B8 */ __int64 ShowGoldSaucerReward;
@@ -12549,6 +12882,60 @@ struct Component_GUI_AtkArrayDataHolder /* Size=0x50 */
 struct Component_GUI_AtkEventManager /* Size=0x8 */
 {
     /* 0x0 */ Component_GUI_AtkEvent* Event;
+};
+
+struct Component_GUI_AtkResNode /* Size=0xA8 */
+{
+    union {
+    /* 0x00 */ Component_GUI_AtkEventTarget AtkEventTarget;
+    /* 0x00 */ Component_GUI_AtkResNode_AtkResNodeVTable* VTable;
+    } _union_0x0;
+    /* 0x08 */ unsigned __int32 NodeID;
+    /*      */ byte _gap_0xC[0x4];
+    /* 0x10 */ void* TimelineObject;
+    /* 0x18 */ Component_GUI_AtkEventManager AtkEventManager;
+    /* 0x20 */ Component_GUI_AtkResNode* ParentNode;
+    /* 0x28 */ Component_GUI_AtkResNode* PrevSiblingNode;
+    /* 0x30 */ Component_GUI_AtkResNode* NextSiblingNode;
+    /* 0x38 */ Component_GUI_AtkResNode* ChildNode;
+    /* 0x40 */ Component_GUI_NodeType Type;
+    /* 0x42 */ unsigned __int16 ChildCount;
+    /* 0x44 */ float X;
+    /* 0x48 */ float Y;
+    /* 0x4C */ float ScaleX;
+    /* 0x50 */ float ScaleY;
+    /* 0x54 */ float Rotation;
+    /* 0x58 */ Common_Math_Matrix2x2 Transform;
+    /* 0x68 */ float ScreenX;
+    /* 0x6C */ float ScreenY;
+    /* 0x70 */ Client_Graphics_ByteColor Color;
+    /* 0x74 */ float Depth;
+    /* 0x78 */ float Depth_2;
+    /* 0x7C */ unsigned __int16 AddRed;
+    /* 0x7E */ unsigned __int16 AddGreen;
+    /* 0x80 */ unsigned __int16 AddBlue;
+    /* 0x82 */ unsigned __int16 AddRed_2;
+    /* 0x84 */ unsigned __int16 AddGreen_2;
+    /* 0x86 */ unsigned __int16 AddBlue_2;
+    /* 0x88 */ byte MultiplyRed;
+    /* 0x89 */ byte MultiplyGreen;
+    /* 0x8A */ byte MultiplyBlue;
+    /* 0x8B */ byte MultiplyRed_2;
+    /* 0x8C */ byte MultiplyGreen_2;
+    /* 0x8D */ byte MultiplyBlue_2;
+    /* 0x8E */ byte Alpha_2;
+    /* 0x8F */ byte UnkByte_1;
+    /* 0x90 */ unsigned __int16 Width;
+    /* 0x92 */ unsigned __int16 Height;
+    /* 0x94 */ float OriginX;
+    /* 0x98 */ float OriginY;
+    /* 0x9C */ unsigned __int16 Priority;
+    /* 0x9E */ Component_GUI_NodeFlags NodeFlags;
+    union {
+    /* 0xA0 */ unsigned __int32 Flags_2;
+    /* 0xA0 */ unsigned __int32 DrawFlags;
+    } _union_0xA0;
+    /*      */ byte _gap_0xA4[0x4];
 };
 
 struct Component_GUI_AtkCollisionNode /* Size=0xB8 */
@@ -12927,6 +13314,40 @@ struct Component_GUI_AtkResNode_AtkResNodeVTable /* Size=0x0 */
 {
     /*     */ byte _gap_0x0[0x8];
     /* 0x8 */ __int64 Destroy;
+};
+
+struct Pointer_ComponentGUIAtkResNode /* Size=0x8 */
+{
+    /* 0x0 */ Component_GUI_AtkResNode* Value;
+};
+
+struct Pointer_ComponentGUIAtkTooltipManagerAtkTooltipInfo /* Size=0x8 */
+{
+    /* 0x0 */ Component_GUI_AtkTooltipManager_AtkTooltipInfo* Value;
+};
+
+struct StdPair_PointerComponentGUIAtkResNode_PointerComponentGUIAtkTooltipManagerAtkTooltipInfo /* Size=0x10 */
+{
+    /* 0x00 */ Pointer_ComponentGUIAtkResNode Item1;
+    /* 0x08 */ Pointer_ComponentGUIAtkTooltipManagerAtkTooltipInfo Item2;
+};
+
+struct StdMap_Node_PointerComponentGUIAtkResNode_PointerComponentGUIAtkTooltipManagerAtkTooltipInfo /* Size=0x38 */
+{
+    /* 0x00 */ StdMap_Node_PointerComponentGUIAtkResNode_PointerComponentGUIAtkTooltipManagerAtkTooltipInfo* Left;
+    /* 0x08 */ StdMap_Node_PointerComponentGUIAtkResNode_PointerComponentGUIAtkTooltipManagerAtkTooltipInfo* Parent;
+    /* 0x10 */ StdMap_Node_PointerComponentGUIAtkResNode_PointerComponentGUIAtkTooltipManagerAtkTooltipInfo* Right;
+    /* 0x18 */ byte Color;
+    /*      */ byte _gap_0x19;
+    /*      */ byte _gap_0x1A[0x2];
+    /* 0x1C */ bool IsNil;
+    /*      */ byte _gap_0x1D;
+    /*      */ byte _gap_0x1E[0x2];
+    /* 0x20 */ byte _18;
+    /* 0x21 */ byte _19;
+    /*      */ byte _gap_0x22[0x2];
+    /*      */ byte _gap_0x24[0x4];
+    /* 0x28 */ StdPair_PointerComponentGUIAtkResNode_PointerComponentGUIAtkTooltipManagerAtkTooltipInfo KeyValuePair;
 };
 
 struct StdMap_PointerComponentGUIAtkResNode_PointerComponentGUIAtkTooltipManagerAtkTooltipInfo /* Size=0x10 */

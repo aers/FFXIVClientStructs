@@ -5,56 +5,86 @@ struct Application::Network::WorkDefinitions::LeveWork;
 struct Application::Network::WorkDefinitions::QuestWork;
 struct Application::Network::WorkDefinitions::TrackingWork;
 struct Client::Game::ActionManager;
+struct Client::Game::ComboDetail;
+struct Client::Game::Object::GameObjectID;
 struct Client::Game::ActionTimelineDriver;
 struct Client::Game::ActionTimelineManager;
 struct Client::Game::Balloon;
+struct Client::System::String::Utf8String;
 struct Client::Game::Camera;
+struct Client::Game::CameraBase;
+struct Client::Graphics::Scene::Camera;
+struct Client::Graphics::Scene::Object;
+struct Common::Math::Vector3;
+struct Common::Math::Quaternion;
+struct Common::Math::Matrix4x4;
 struct Client::Game::Camera3;
 struct Client::Game::Camera4;
-struct Client::Game::CameraBase;
 struct Client::Game::Character::BattleChara;
 struct Client::Game::Character::Character;
-struct Client::Game::Character::Character::CastInfo;
-struct Client::Game::Character::Character::CharacterVTable;
-struct Client::Game::Character::Character::CompanionContainer;
-struct Client::Game::Character::Character::ForayInfo;
-struct Client::Game::Character::Character::MountContainer;
-struct Client::Game::Character::Character::OrnamentContainer;
-struct Client::Game::Character::CharacterManager;
-struct Client::Game::Character::Companion;
-struct Client::Game::Character::CustomizeData;
 struct Client::Game::Character::Data::CharacterData;
+struct Client::Game::Character::Character::MountContainer;
+struct Client::Game::Character::Character::CompanionContainer;
 struct Client::Game::Character::DrawDataContainer;
+struct Client::Game::Character::WeaponModelId;
 struct Client::Game::Character::DrawObjectData;
 struct Client::Game::Character::EquipmentModelId;
+struct Client::Game::Character::CustomizeData;
+struct Client::Game::Character::Character::OrnamentContainer;
+struct Client::Game::Character::Character::CastInfo;
+struct Client::Game::Character::Character::CharacterVTable;
+struct Client::Game::Character::Character::ForayInfo;
+struct Client::Game::Character::CharacterManager;
+struct Client::Game::Character::Companion;
 struct Client::Game::Character::Ornament;
-struct Client::Game::Character::WeaponModelId;
-struct Client::Game::ComboDetail;
 struct Client::Game::Control::CameraManager;
 struct Client::Game::Control::Control;
+struct Client::Game::Control::TargetSystem;
 struct Client::Game::Control::GameObjectArray;
 struct Client::Game::Control::InputManager;
-struct Client::Game::Control::TargetSystem;
 struct Client::Game::Event::Director;
-struct Client::Game::Event::DirectorModule;
-struct Client::Game::Event::EventFramework;
-struct Client::Game::Event::EventGPoseController;
-struct Client::Game::Event::EventHandlerStruct;
-struct Client::Game::Event::EventHandlerStructInfo;
-struct Client::Game::Event::EventHandlerStructModule;
-struct Client::Game::Event::EventId;
-struct Client::Game::Event::EventSceneModule;
-struct Client::Game::Event::EventSceneModuleImplBase;
-struct Client::Game::Event::EventSceneModuleUsualImpl;
-struct Client::Game::Event::EventState;
-struct Client::Game::Event::LuaActor;
-struct Client::Game::Event::LuaActorModule;
 struct Client::Game::Event::LuaEventHandlerStruct;
+struct Client::Game::Event::EventHandlerStruct;
+struct StdSet::PointerClientGameObjectGameObject;
+struct StdSet::Node::PointerClientGameObjectGameObject;
+struct Pointer::ClientGameObjectGameObject;
+struct Client::Game::Event::EventHandlerStructInfo;
+struct Client::Game::Event::EventId;
+struct Client::Game::Event::DirectorModule;
 struct Client::Game::Event::ModuleBase;
+struct StdVector::PointerClientGameEventDirector;
+struct Pointer::ClientGameEventDirector;
+struct StdMap::SystemUInt16::StdPairSystemIntPtrSystemIntPtr;
+struct StdMap::Node::SystemUInt16::StdPairSystemIntPtrSystemIntPtr;
+struct StdPair::SystemUInt16::StdPairSystemIntPtrSystemIntPtr;
+struct StdPair::SystemIntPtr::SystemIntPtr;
+struct Client::Game::Event::EventFramework;
+struct Client::Game::Event::EventHandlerStructModule;
+struct StdMap::SystemUInt32::PointerClientGameEventEventHandlerStruct;
+struct StdMap::Node::SystemUInt32::PointerClientGameEventEventHandlerStruct;
+struct StdPair::SystemUInt32::PointerClientGameEventEventHandlerStruct;
+struct Pointer::ClientGameEventEventHandlerStruct;
+struct Client::Game::Event::LuaActorModule;
+struct StdMap::SystemInt64::ClientGameEventLuaActor;
+struct StdMap::Node::SystemInt64::ClientGameEventLuaActor;
+struct StdPair::SystemInt64::ClientGameEventLuaActor;
+struct Client::Game::Event::LuaActor;
+struct Client::Game::Event::EventSceneModule;
+struct Client::Game::Event::EventSceneModuleUsualImpl;
+struct Client::Game::Event::EventSceneModuleImplBase;
+struct Client::Game::Event::EventGPoseController;
+struct Common::Lua::LuaThread;
+struct Common::Lua::LuaState;
+struct Client::Game::Event::EventState;
 struct Client::Game::Fate::FateContext;
+struct System::Numerics::Vector3;
 struct Client::Game::Fate::FateDirector;
 struct Client::Game::Fate::FateManager;
+struct StdVector::ClientGameObjectGameObjectID;
+struct StdVector::PointerClientGameFateFateContext;
+struct Pointer::ClientGameFateFateContext;
 struct Client::Game::GameMain;
+struct Client::Game::JobGaugeManager;
 struct Client::Game::Gauge::AstrologianGauge;
 struct Client::Game::Gauge::BardGauge;
 struct Client::Game::Gauge::BlackMageGauge;
@@ -77,6 +107,7 @@ struct Client::Game::Gauge::WarriorGauge;
 struct Client::Game::Gauge::WhiteMageGauge;
 struct Client::Game::Group::GroupManager;
 struct Client::Game::Group::PartyMember;
+struct Client::Game::StatusManager;
 struct Client::Game::Housing::HousingManager;
 struct Client::Game::Housing::HousingOutdoorTerritory;
 struct Client::Game::Housing::HousingTerritory;
@@ -90,23 +121,22 @@ struct Client::Game::Housing::HousingWorkshopTerritory;
 struct Client::Game::Housing::PlotDetail;
 struct Client::Game::InstanceContent::ContentDirector;
 struct Client::Game::InstanceContent::InstanceContentDeepDungeon;
+struct Client::Game::InstanceContent::InstanceContentDirector;
 struct Client::Game::InstanceContent::InstanceContentDeepDungeon::DeepDungeonChestInfo;
 struct Client::Game::InstanceContent::InstanceContentDeepDungeon::DeepDungeonItemInfo;
 struct Client::Game::InstanceContent::InstanceContentDeepDungeon::DeepDungeonPartyInfo;
-struct Client::Game::InstanceContent::InstanceContentDirector;
 struct Client::Game::InstanceContent::PublicContentDirector;
 struct Client::Game::InventoryContainer;
 struct Client::Game::InventoryItem;
 struct Client::Game::InventoryManager;
-struct Client::Game::JobGaugeManager;
 struct Client::Game::LobbyCamera;
 struct Client::Game::LowCutCamera;
 struct Client::Game::MirageManager;
 struct Client::Game::MirageManager::GlamourPlate;
 struct Client::Game::MJI::IslandState;
+struct Client::Game::MJI::MJIFarmPasture;
 struct Client::Game::MJI::MJIAnimal;
 struct Client::Game::MJI::MJIBuildingPlacement;
-struct Client::Game::MJI::MJIFarmPasture;
 struct Client::Game::MJI::MJIFarmPasturePlacement;
 struct Client::Game::MJI::MJIFarmState;
 struct Client::Game::MJI::MJIGranaries;
@@ -120,7 +150,6 @@ struct Client::Game::MonsterNoteRankInfo;
 struct Client::Game::Object::ClientObjectManager;
 struct Client::Game::Object::GameObject;
 struct Client::Game::Object::GameObject::GameObjectVTable;
-struct Client::Game::Object::GameObjectID;
 struct Client::Game::Object::GameObjectManager;
 struct Client::Game::QuestManager;
 struct Client::Game::QuestManager::QuestListArray;
@@ -138,7 +167,7 @@ struct Client::Game::SavedAppearanceManager;
 struct Client::Game::SavedAppearanceManager::SavedAppearanceManagerVTable;
 struct Client::Game::SavedAppearanceSlot;
 struct Client::Game::Status;
-struct Client::Game::StatusManager;
+struct Client::Game::UI::Achievement;
 struct Client::Game::UI::AreaInstance;
 struct Client::Game::UI::Buddy;
 struct Client::Game::UI::Buddy::BuddyMember;
@@ -157,8 +186,8 @@ struct Client::Game::UI::LimitBreakController;
 struct Client::Game::UI::Loot;
 struct Client::Game::UI::LootItem;
 struct Client::Game::UI::Map;
-struct Client::Game::UI::Map::MapMarkerInfo;
 struct Client::Game::UI::Map::QuestMarkerArray;
+struct Client::Game::UI::Map::MapMarkerInfo;
 struct Client::Game::UI::MarkingController;
 struct Client::Game::UI::MobHunt;
 struct Client::Game::UI::MobHunt::KillCounts;
@@ -169,9 +198,11 @@ struct Client::Game::UI::RecipeNote::RecipeData;
 struct Client::Game::UI::RecipeNote::RecipeEntry;
 struct Client::Game::UI::RelicNote;
 struct Client::Game::UI::Revive;
+struct Component::GUI::AtkEventInterface;
 struct Client::Game::UI::RouletteController;
 struct Client::Game::UI::SelectUseTicketInvoker;
 struct Client::Game::UI::Telepo;
+struct StdVector::ClientGameUITeleportInfo;
 struct Client::Game::UI::TeleportInfo;
 struct Client::Game::UI::TerritoryInfo;
 struct Client::Game::UI::UIState;
@@ -179,25 +210,37 @@ struct Client::Game::UI::WeaponState;
 struct Client::Graphics::Animation::AnimationResourceHandle;
 struct Client::Graphics::ByteColor;
 struct Client::Graphics::Environment::EnvManager;
-struct Client::Graphics::Environment::EnvSimulator;
-struct Client::Graphics::Environment::EnvSoundState;
 struct Client::Graphics::Environment::EnvState;
+struct Client::Graphics::Environment::EnvSoundState;
+struct Client::Graphics::Environment::EnvSimulator;
+struct Client::Graphics::Render::ShadowCamera;
+struct Client::Graphics::Render::Camera;
+struct Client::Graphics::ReferencedClassBase;
 struct Client::Graphics::Kernel::CVector;
 struct Client::Graphics::Kernel::Device;
 struct Client::Graphics::Kernel::PixelShader;
 struct Client::Graphics::Kernel::ShaderNode;
 struct Client::Graphics::Kernel::ShaderNode::ShaderPass;
 struct Client::Graphics::Kernel::ShaderPackage;
+struct Client::Graphics::Kernel::CVector::PointerClientGraphicsKernelVertexShader;
+struct StdVector::PointerClientGraphicsKernelVertexShader;
+struct Pointer::ClientGraphicsKernelVertexShader;
+struct Client::Graphics::Kernel::CVector::PointerClientGraphicsKernelPixelShader;
+struct StdVector::PointerClientGraphicsKernelPixelShader;
+struct Pointer::ClientGraphicsKernelPixelShader;
+struct Client::Graphics::Kernel::CVector::PointerClientGraphicsKernelShaderNode;
+struct StdVector::PointerClientGraphicsKernelShaderNode;
+struct Pointer::ClientGraphicsKernelShaderNode;
 struct Client::Graphics::Kernel::ShaderPackage::ConstantSamplerUnknown;
 struct Client::Graphics::Kernel::ShaderPackage::MaterialElement;
 struct Client::Graphics::Kernel::SwapChain;
 struct Client::Graphics::Kernel::VertexShader;
 struct Client::Graphics::Physics::BonePhysicsModule;
-struct Client::Graphics::Physics::BoneSimulator;
 struct Client::Graphics::Physics::BoneSimulators;
+struct StdVector::PointerClientGraphicsPhysicsBoneSimulator;
+struct Pointer::ClientGraphicsPhysicsBoneSimulator;
+struct Client::Graphics::Physics::BoneSimulator;
 struct Client::Graphics::Ray;
-struct Client::Graphics::ReferencedClassBase;
-struct Client::Graphics::Render::Camera;
 struct Client::Graphics::Render::Manager;
 struct Client::Graphics::Render::Material;
 struct Client::Graphics::Render::Model;
@@ -205,12 +248,12 @@ struct Client::Graphics::Render::Notifier;
 struct Client::Graphics::Render::OffscreenRenderingManager;
 struct Client::Graphics::Render::PartialSkeleton;
 struct Client::Graphics::Render::RenderTargetManager;
-struct Client::Graphics::Render::ShadowCamera;
 struct Client::Graphics::Render::Skeleton;
+struct Client::Graphics::Transform;
 struct Client::Graphics::Render::SubView;
+struct Common::Math::Rectangle;
 struct Client::Graphics::Render::Texture;
 struct Client::Graphics::Render::View;
-struct Client::Graphics::Scene::Camera;
 struct Client::Graphics::Scene::CameraManager;
 struct Client::Graphics::Scene::CharacterBase;
 struct Client::Graphics::Scene::CharacterBase::CharacterBaseVTable;
@@ -221,26 +264,35 @@ struct Client::Graphics::Scene::EnvScene;
 struct Client::Graphics::Scene::EnvSpace;
 struct Client::Graphics::Scene::Human;
 struct Client::Graphics::Scene::Monster;
-struct Client::Graphics::Scene::Object;
 struct Client::Graphics::Scene::Object::ObjectVTable;
 struct Client::Graphics::Scene::Weapon;
 struct Client::Graphics::Scene::World;
-struct Client::Graphics::Transform;
 struct Client::Graphics::Vfx::VfxData;
 struct Client::LayoutEngine::IndoorAreaLayoutData;
 struct Client::LayoutEngine::IndoorFloorLayoutData;
 struct Client::LayoutEngine::LayoutManager;
 struct Client::LayoutEngine::LayoutWorld;
+struct StdMap::ClientSystemStringUtf8String::PointerSystemByte;
+struct StdMap::Node::ClientSystemStringUtf8String::PointerSystemByte;
+struct StdPair::ClientSystemStringUtf8String::PointerSystemByte;
+struct Pointer::SystemByte;
 struct Client::System::Configuration::DevConfig;
+struct Common::Configuration::DevConfig;
+struct Common::Configuration::ConfigBase;
 struct Client::System::Configuration::SystemConfig;
+struct Common::Configuration::SystemConfig;
 struct Client::System::File::FileDescriptor;
 struct Client::System::Framework::Framework;
 struct Client::System::Framework::GameVersion;
 struct Client::System::Memory::IMemorySpace;
 struct Client::System::Memory::IMemorySpace::IMemorySpaceVTable;
 struct Client::System::Resource::Handle::MaterialResourceHandle;
-struct Client::System::Resource::Handle::ModelResourceHandle;
 struct Client::System::Resource::Handle::ResourceHandle;
+struct StdString;
+struct Client::System::Resource::Handle::ModelResourceHandle;
+struct StdMap::PointerSystemByte::SystemInt16;
+struct StdMap::Node::PointerSystemByte::SystemInt16;
+struct StdPair::PointerSystemByte::SystemInt16;
 struct Client::System::Resource::Handle::SkeletonResourceHandle;
 struct Client::System::Resource::Handle::SkeletonResourceHandle::SkeletonHeader;
 struct Client::System::Resource::Handle::TextureResourceHandle;
@@ -254,17 +306,22 @@ struct Client::System::Scheduler::Base::TimelineController;
 struct Client::System::Scheduler::Resource::SchedulerResource;
 struct Client::System::Scheduler::Resource::SchedulerResource::ResourceName;
 struct Client::System::Scheduler::Resource::SchedulerResourceManagement;
-struct Client::System::String::Utf8String;
 struct Client::UI::ActionBarSlot;
 struct Client::UI::AddonActionBar;
+struct Client::UI::AddonActionBarX;
 struct Client::UI::AddonActionBarBase;
 struct Client::UI::AddonActionBarBase::AddonActionBarBaseVTable;
-struct Client::UI::AddonActionBarX;
 struct Client::UI::AddonActionCross;
 struct Client::UI::AddonActionDoubleCrossBase;
 struct Client::UI::AddonAOZNotebook;
-struct Client::UI::AddonAOZNotebook::ActiveActions;
+struct Component::GUI::AtkUnitBase;
+struct Component::GUI::AtkEventListener;
+struct Component::GUI::AtkUldManager;
+struct StdLinkedList::PointerComponentGUIAtkUldManagerDuplicateObjectList;
+struct StdLinkedList::Node::PointerComponentGUIAtkUldManagerDuplicateObjectList;
+struct Pointer::ComponentGUIAtkUldManagerDuplicateObjectList;
 struct Client::UI::AddonAOZNotebook::SpellbookBlock;
+struct Client::UI::AddonAOZNotebook::ActiveActions;
 struct Client::UI::AddonBank;
 struct Client::UI::AddonBank::AddonBankVTable;
 struct Client::UI::AddonCastBar;
@@ -310,25 +367,25 @@ struct Client::UI::AddonJournalDetail;
 struct Client::UI::AddonJournalResult;
 struct Client::UI::AddonLookingForGroupDetail;
 struct Client::UI::AddonLotteryDaily;
-struct Client::UI::AddonLotteryDaily::GameBoardNumbers;
-struct Client::UI::AddonLotteryDaily::GameNumberRow;
 struct Client::UI::AddonLotteryDaily::GameTileBoard;
 struct Client::UI::AddonLotteryDaily::GameTileRow;
 struct Client::UI::AddonLotteryDaily::LaneTileSelector;
+struct Client::UI::AddonLotteryDaily::GameBoardNumbers;
+struct Client::UI::AddonLotteryDaily::GameNumberRow;
 struct Client::UI::AddonMacro;
 struct Client::UI::AddonMaterializeDialog;
 struct Client::UI::AddonMateriaRetrieveDialog;
 struct Client::UI::AddonMobHunt;
 struct Client::UI::AddonNamePlate;
-struct Client::UI::AddonNamePlate::BakeData;
 struct Client::UI::AddonNamePlate::BakePlateRenderer;
+struct Client::UI::AddonNamePlate::BakeData;
 struct Client::UI::AddonNamePlate::NamePlateObject;
 struct Client::UI::AddonNeedGreed;
 struct Client::UI::AddonNeedGreed::LootItemInfo;
 struct Client::UI::AddonPartyList;
+struct Client::UI::AddonPartyList::PartyMembers;
 struct Client::UI::AddonPartyList::PartyListMemberStruct;
 struct Client::UI::AddonPartyList::PartyListMemberStruct::StatusIcons;
-struct Client::UI::AddonPartyList::PartyMembers;
 struct Client::UI::AddonPartyList::TrustMembers;
 struct Client::UI::AddonRaceChocoboResult;
 struct Client::UI::AddonRaceChocoboResult::AddonRaceChocoboResultVTable;
@@ -358,41 +415,58 @@ struct Client::UI::AddonSalvageItemSelector::SalvageItem;
 struct Client::UI::AddonSatisfactionSupply;
 struct Client::UI::AddonSelectIconString;
 struct Client::UI::AddonSelectIconString::PopupMenuDerive;
+struct Client::UI::PopupMenu;
 struct Client::UI::AddonSelectOk;
 struct Client::UI::AddonSelectString;
-struct Client::UI::AddonSelectString::AddonSelectStringVTable;
 struct Client::UI::AddonSelectString::PopupMenuDerive;
+struct Client::UI::AddonSelectString::AddonSelectStringVTable;
 struct Client::UI::AddonSelectYesno;
 struct Client::UI::AddonShopCardDialog;
 struct Client::UI::AddonSocial;
 struct Client::UI::AddonSynthesis;
 struct Client::UI::AddonSynthesis::CraftEffect;
 struct Client::UI::AddonTalk;
+struct Component::GUI::AtkEventTarget;
+struct Component::GUI::AtkEventListenerUnk1;
 struct Client::UI::AddonTeleport;
 struct Client::UI::AddonWaymarkInfo;
 struct Client::UI::AddonWeeklyBingo;
+struct Client::UI::DutySlotList;
+struct Client::UI::DutySlot;
+struct Client::UI::StringThing;
+struct Client::UI::StickerSlotList;
+struct Client::UI::StickerSlot;
 struct Client::UI::AddonWeeklyPuzzle;
-struct Client::UI::AddonWeeklyPuzzle::GameTileBoard;
-struct Client::UI::AddonWeeklyPuzzle::GameTileItem;
-struct Client::UI::AddonWeeklyPuzzle::GameTileRow;
 struct Client::UI::AddonWeeklyPuzzle::RewardPanelItem;
+struct Client::UI::AddonWeeklyPuzzle::GameTileBoard;
+struct Client::UI::AddonWeeklyPuzzle::GameTileRow;
+struct Client::UI::AddonWeeklyPuzzle::GameTileItem;
 struct Client::UI::Agent::ActionData;
 struct Client::UI::Agent::AgentActionMenu;
+struct Component::GUI::AgentInterface;
+struct StdVector::ClientUIAgentActionData;
+struct StdVector::ClientUIAgentExtraCommandData;
 struct Client::UI::Agent::AgentAirshipExplorationResult;
+struct Client::UI::Agent::AgentExplorationResultInterface;
 struct Client::UI::Agent::AgentAozContentBriefing;
 struct Client::UI::Agent::AgentAozContentResult;
 struct Client::UI::Agent::AgentArchiveItem;
 struct Client::UI::Agent::AgentBannerInterface;
 struct Client::UI::Agent::AgentBannerInterface::Storage;
 struct Client::UI::Agent::AgentBannerInterface::Storage::CharacterData;
+struct Component::GUI::AtkTexture;
 struct Client::UI::Agent::AgentBannerMIP;
 struct Client::UI::Agent::AgentBannerParty;
 struct Client::UI::Agent::AgentCharaCard;
 struct Client::UI::Agent::AgentCharaCard::Storage;
+struct Client::UI::Misc::CharaView;
+struct Client::UI::Misc::CharaView::UnkStruct;
 struct Client::UI::Agent::AgentChatLog;
 struct Client::UI::Agent::AgentCompanyCraftMaterial;
 struct Client::UI::Agent::AgentContentsFinder;
 struct Client::UI::Agent::AgentContext;
+struct System::Drawing::Point;
+struct Client::UI::Agent::ContextMenuTarget;
 struct Client::UI::Agent::AgentCraftActionSimulator;
 struct Client::UI::Agent::AgentDeepDungeonInspect;
 struct Client::UI::Agent::AgentDeepDungeonInspect::AgentDeepDungeonInspectData;
@@ -400,12 +474,12 @@ struct Client::UI::Agent::AgentDeepDungeonMap;
 struct Client::UI::Agent::AgentDeepDungeonMapData;
 struct Client::UI::Agent::AgentDeepDungeonStatus;
 struct Client::UI::Agent::AgentDeliveryItemInfo;
-struct Client::UI::Agent::AgentExplorationResultInterface;
 struct Client::UI::Agent::AgentFieldMarker;
 struct Client::UI::Agent::AgentFishGuide;
 struct Client::UI::Agent::AgentFreeCompany;
 struct Client::UI::Agent::AgentFreeCompany::FreeCompanyActionTimer;
 struct Client::UI::Agent::AgentFreeCompanyCrestEditor;
+struct Client::UI::Agent::CrestData;
 struct Client::UI::Agent::AgentFreeCompanyProfile;
 struct Client::UI::Agent::AgentFreeCompanyProfile::FCProfile;
 struct Client::UI::Agent::AgentFriendList;
@@ -424,10 +498,19 @@ struct Client::UI::Agent::AgentItemSearch;
 struct Client::UI::Agent::AgentLobby;
 struct Client::UI::Agent::AgentLoot;
 struct Client::UI::Agent::AgentMap;
+struct StdMap::SystemUInt32::SystemUInt32;
+struct StdMap::Node::SystemUInt32::SystemUInt32;
+struct StdPair::SystemUInt32::SystemUInt32;
+struct Client::UI::Agent::FlagMapMarker;
+struct Client::UI::Agent::MapMarkerBase;
 struct Client::UI::Agent::AgentMiragePrismPrismBox;
 struct Client::UI::Agent::AgentMJIPouch;
 struct Client::UI::Agent::AgentMJIPouch::PouchIndexInfo;
 struct Client::UI::Agent::AgentMJIPouch::PouchInventoryData;
+struct StdVector::ClientUIAgentPouchInventoryItem;
+struct StdVector::PointerClientUIAgentPouchInventoryItem;
+struct Pointer::ClientUIAgentPouchInventoryItem;
+struct StdVector::ClientSystemStringUtf8String;
 struct Client::UI::Agent::AgentModule;
 struct Client::UI::Agent::AgentMonsterNote;
 struct Client::UI::Agent::AgentMycItemBox;
@@ -440,15 +523,17 @@ struct Client::UI::Agent::AgentRetainerItemTransfer;
 struct Client::UI::Agent::AgentRetainerItemTransferData;
 struct Client::UI::Agent::AgentRetainerItemTransferData::DuplicateItemEntry;
 struct Client::UI::Agent::AgentRetainerList;
-struct Client::UI::Agent::AgentRetainerList::Retainer;
 struct Client::UI::Agent::AgentRetainerList::RetainerList;
+struct Client::UI::Agent::AgentRetainerList::Retainer;
 struct Client::UI::Agent::AgentRevive;
 struct Client::UI::Agent::AgentSalvage;
+struct Client::UI::Agent::SalvageResult;
 struct Client::UI::Agent::AgentSalvage::SalvageListItem;
 struct Client::UI::Agent::AgentSatisfactionSupply;
-struct Client::UI::Agent::AgentSatisfactionSupply::ItemInfo;
 struct Client::UI::Agent::AgentSatisfactionSupply::SatisfactionSupplyNpcInfo;
+struct Client::UI::Agent::AgentSatisfactionSupply::ItemInfo;
 struct Client::UI::Agent::AgentScreenLog;
+struct StdDeque::ClientUIAgentBalloonInfo;
 struct Client::UI::Agent::AgentSubmersibleExplorationResult;
 struct Client::UI::Agent::AgentTeleport;
 struct Client::UI::Agent::AgentTryon;
@@ -462,50 +547,47 @@ struct Client::UI::Agent::BalloonInfo;
 struct Client::UI::Agent::BalloonSlot;
 struct Client::UI::Agent::ContentsFinderRewards;
 struct Client::UI::Agent::ContextMenu;
-struct Client::UI::Agent::ContextMenuTarget;
-struct Client::UI::Agent::CrestData;
 struct Client::UI::Agent::DeepDungeonStatusData;
 struct Client::UI::Agent::DeepDungeonStatusItem;
 struct Client::UI::Agent::EfficiencyCalculation;
 struct Client::UI::Agent::ExplorationResultData;
 struct Client::UI::Agent::ExplorationResultDataItemReturn;
 struct Client::UI::Agent::ExtraCommandData;
-struct Client::UI::Agent::FlagMapMarker;
 struct Client::UI::Agent::GatheringAreaInfo;
+struct Client::UI::Agent::OpenMapInfo;
 struct Client::UI::Agent::GcArmyExpeditionData;
 struct Client::UI::Agent::GrandCompanyItem;
 struct Client::UI::Agent::HudPartyMember;
 struct Client::UI::Agent::HudPartyMemberEnmity;
 struct Client::UI::Agent::ItemReward;
-struct Client::UI::Agent::MapMarkerBase;
 struct Client::UI::Agent::MapMarkerInfo;
 struct Client::UI::Agent::MiniMapMarker;
 struct Client::UI::Agent::MiragePrismPrismBoxData;
+struct Client::UI::Agent::PrismBoxItem;
+struct Client::UI::Agent::PrismBoxCrystallizeItem;
 struct Client::UI::Agent::MissionInfo;
 struct Client::UI::Agent::MycItem;
 struct Client::UI::Agent::MycItemBoxData;
 struct Client::UI::Agent::MycItemCategory;
-struct Client::UI::Agent::OpenMapInfo;
 struct Client::UI::Agent::PouchInventoryItem;
-struct Client::UI::Agent::PrismBoxCrystallizeItem;
-struct Client::UI::Agent::PrismBoxItem;
 struct Client::UI::Agent::ProgressEfficiencyCalculation;
 struct Client::UI::Agent::ProgressEfficiencyCalculations;
 struct Client::UI::Agent::QualityEfficiencyCalculation;
 struct Client::UI::Agent::QualityEfficiencyCalculations;
-struct Client::UI::Agent::SalvageResult;
 struct Client::UI::Agent::SupplyProvisioningData;
 struct Client::UI::Agent::SupplyProvisioningItem;
 struct Client::UI::Agent::TempMapMarker;
-struct Client::UI::DutySlot;
-struct Client::UI::DutySlotList;
 struct Client::UI::Info::CrossRealmGroup;
 struct Client::UI::Info::CrossRealmMember;
 struct Client::UI::Info::InfoModule;
 struct Client::UI::Info::InfoProxy11;
+struct Client::UI::Info::InfoProxyPageInterface;
+struct Client::UI::Info::InfoProxyInterface;
 struct Client::UI::Info::InfoProxy17;
 struct Client::UI::Info::InfoProxy20;
 struct Client::UI::Info::InfoProxy21;
+struct Client::UI::Info::InfoProxyInvitedList;
+struct Client::UI::Info::InfoProxyCommonList;
 struct Client::UI::Info::InfoProxy22;
 struct Client::UI::Info::InfoProxy23;
 struct Client::UI::Info::InfoProxy24;
@@ -518,7 +600,6 @@ struct Client::UI::Info::InfoProxyCircle;
 struct Client::UI::Info::InfoProxyCircle::Unk1;
 struct Client::UI::Info::InfoProxyCircleFinder;
 struct Client::UI::Info::InfoProxyCircleList;
-struct Client::UI::Info::InfoProxyCommonList;
 struct Client::UI::Info::InfoProxyCommonList::CharacterArray;
 struct Client::UI::Info::InfoProxyCommonList::CharacterArray::Entry;
 struct Client::UI::Info::InfoProxyCommonList::CharacterData;
@@ -527,6 +608,8 @@ struct Client::UI::Info::InfoProxyCommonList::CharacterDict::Entry;
 struct Client::UI::Info::InfoProxyCommonList::CharIndexEntry;
 struct Client::UI::Info::InfoProxyCrossRealm;
 struct Client::UI::Info::InfoProxyCrossWorldLinkShell;
+struct Client::UI::Info::InfoProxyInvitedInterface;
+struct Client::UI::Info::InfoProxyInvitedInterface::Unk18;
 struct Client::UI::Info::InfoProxyCrossWorldLinkShell::CWLSEntry;
 struct Client::UI::Info::InfoProxyCrossWorldLinkShellMember;
 struct Client::UI::Info::InfoProxyFreeCompany;
@@ -535,11 +618,7 @@ struct Client::UI::Info::InfoProxyFreeCompanyCreate;
 struct Client::UI::Info::InfoProxyFreeCompanyMember;
 struct Client::UI::Info::InfoProxyFriendList;
 struct Client::UI::Info::InfoProxyFriendList::StrBuf;
-struct Client::UI::Info::InfoProxyInterface;
 struct Client::UI::Info::InfoProxyInterface::InfoProxyInterfaceVTable;
-struct Client::UI::Info::InfoProxyInvitedInterface;
-struct Client::UI::Info::InfoProxyInvitedInterface::Unk18;
-struct Client::UI::Info::InfoProxyInvitedList;
 struct Client::UI::Info::InfoProxyItemSearch;
 struct Client::UI::Info::InfoProxyItemSearch::Entry;
 struct Client::UI::Info::InfoProxyLetter;
@@ -549,30 +628,31 @@ struct Client::UI::Info::InfoProxyLinkShell;
 struct Client::UI::Info::InfoProxyLinkShell::Entry;
 struct Client::UI::Info::InfoProxyLinkShellChat;
 struct Client::UI::Info::InfoProxyLinkshellMember;
-struct Client::UI::Info::InfoProxyPageInterface;
 struct Client::UI::Info::InfoProxyParty;
 struct Client::UI::Info::InfoProxyPartyInvite;
 struct Client::UI::Info::InfoProxySearch;
 struct Client::UI::Info::InfoProxySearchComment;
 struct Client::UI::Misc::AcquaintanceModule;
+struct Client::UI::Misc::UserFileManager::UserFileEvent;
 struct Client::UI::Misc::AcquaintanceModule::Acquaintance;
 struct Client::UI::Misc::AcquaintanceModule::AcquaintanceModuleVTable;
-struct Client::UI::Misc::CharaView;
-struct Client::UI::Misc::CharaView::UnkStruct;
 struct Client::UI::Misc::ConfigModule;
 struct Client::UI::Misc::ConfigModule::Option;
 struct Client::UI::Misc::FieldMarkerModule;
 struct Client::UI::Misc::FieldMarkerPreset;
 struct Client::UI::Misc::GamePresetPoint;
 struct Client::UI::Misc::HotBar;
+struct Client::UI::Misc::HotBarSlots;
 struct Client::UI::Misc::HotBars;
 struct Client::UI::Misc::HotBarSlot;
-struct Client::UI::Misc::HotBarSlots;
 struct Client::UI::Misc::ItemFinderModule;
 struct Client::UI::Misc::ItemFinderModuleResult;
 struct Client::UI::Misc::ItemFinderModuleRetainerResult;
 struct Client::UI::Misc::ItemOrderModule;
+struct StdVector::ClientUIMiscItemOrderModuleSorterRetainerEntry;
 struct Client::UI::Misc::ItemOrderModuleSorter;
+struct StdVector::ClientUIMiscItemOrderModuleSorterItemEntry;
+struct StdVector::ClientUIMiscItemOrderModuleSorterSortFunctionEntry;
 struct Client::UI::Misc::ItemOrderModuleSorterItemEntry;
 struct Client::UI::Misc::ItemOrderModuleSorterPreviousOrderEntry;
 struct Client::UI::Misc::ItemOrderModuleSorterRetainerEntry;
@@ -580,23 +660,26 @@ struct Client::UI::Misc::ItemOrderModuleSorterSortFunctionEntry;
 struct Client::UI::Misc::LogMessageSource;
 struct Client::UI::Misc::PronounModule;
 struct Client::UI::Misc::RaptureGearsetModule;
+struct Client::UI::Misc::RaptureGearsetModule::Gearsets;
 struct Client::UI::Misc::RaptureGearsetModule::GearsetEntry;
 struct Client::UI::Misc::RaptureGearsetModule::GearsetItem;
-struct Client::UI::Misc::RaptureGearsetModule::Gearsets;
 struct Client::UI::Misc::RaptureHotbarModule;
+struct Client::UI::Misc::SavedHotBars;
 struct Client::UI::Misc::RaptureLogModule;
+struct Common::Log::LogModule;
+struct StdVector::SystemInt32;
+struct StdVector::SystemByte;
 struct Client::UI::Misc::RaptureLogModuleTab;
 struct Client::UI::Misc::RaptureMacroModule;
+struct Client::UI::Misc::RaptureMacroModule::MacroPage;
 struct Client::UI::Misc::RaptureMacroModule::Macro;
 struct Client::UI::Misc::RaptureMacroModule::Macro::Lines;
-struct Client::UI::Misc::RaptureMacroModule::MacroPage;
 struct Client::UI::Misc::RaptureTextModule;
 struct Client::UI::Misc::RaptureUiDataModule;
 struct Client::UI::Misc::RecommendEquipModule;
 struct Client::UI::Misc::RetainerCommentModule;
-struct Client::UI::Misc::RetainerCommentModule::RetainerComment;
 struct Client::UI::Misc::RetainerCommentModule::RetainerCommentList;
-struct Client::UI::Misc::SavedHotBars;
+struct Client::UI::Misc::RetainerCommentModule::RetainerComment;
 struct Client::UI::Misc::SavedHotBars::SavedHotBarClassJob;
 struct Client::UI::Misc::SavedHotBars::SavedHotBarClassJobBars;
 struct Client::UI::Misc::SavedHotBars::SavedHotBarClassJobBars::SavedHotBarClassJobBar;
@@ -605,53 +688,38 @@ struct Client::UI::Misc::SavedHotBars::SavedHotBarClassJobSlots::SavedHotBarClas
 struct Client::UI::Misc::ScreenLog;
 struct Client::UI::Misc::UiSavePackModule;
 struct Client::UI::Misc::UiSavePackModule::UiSavePackModuleVTable;
-struct Client::UI::Misc::UserFileManager::UserFileEvent;
 struct Client::UI::Misc::UserFileManager::UserFileEvent::UserFileEventVTable;
 struct Client::UI::MoveableAddonInfoStruct;
-struct Client::UI::PopupMenu;
 struct Client::UI::RaidFinderDutyEntry;
 struct Client::UI::RaptureAtkModule;
+struct Client::UI::RaptureAtkUnitManager;
 struct Client::UI::RaptureAtkModule::NamePlateInfo;
 struct Client::UI::RaptureAtkModule::RaptureAtkModuleVTable;
-struct Client::UI::RaptureAtkUnitManager;
 struct Client::UI::RaptureAtkUnitManager::RaptureAtkUnitManagerVTable;
 struct Client::UI::Shell::RaptureShellModule;
-struct Client::UI::StickerSlot;
-struct Client::UI::StickerSlotList;
-struct Client::UI::StringThing;
 struct Client::UI::UI3DModule;
 struct Client::UI::UI3DModule::MapInfo;
 struct Client::UI::UI3DModule::MemberInfo;
 struct Client::UI::UI3DModule::ObjectInfo;
 struct Client::UI::UI3DModule::UnkInfo;
 struct Client::UI::UIModule;
-struct Client::UI::UIModule::UIModuleVTable;
 struct Client::UI::UIModule::Unk1;
 struct Client::UI::UIModule::Unk2;
 struct Client::UI::UIModule::Unk3;
+struct Client::UI::UIModule::UIModuleVTable;
 struct Common::Component::BGCollision::BGCollisionModule;
 struct Common::Component::BGCollision::Object;
 struct Common::Component::BGCollision::RaycastHit;
 struct Common::Configuration::ChangeEventInterface;
-struct Common::Configuration::ConfigBase;
 struct Common::Configuration::ConfigEntry;
 struct Common::Configuration::ConfigProperties;
+struct Common::Configuration::ConfigValue;
 struct Common::Configuration::ConfigProperties::FloatProperties;
 struct Common::Configuration::ConfigProperties::StringProperties;
 struct Common::Configuration::ConfigProperties::UIntProperties;
-struct Common::Configuration::ConfigValue;
-struct Common::Configuration::DevConfig;
-struct Common::Configuration::SystemConfig;
-struct Common::Log::LogModule;
 struct Common::Lua::lua_State;
-struct Common::Lua::LuaState;
-struct Common::Lua::LuaThread;
 struct Common::Math::Matrix2x2;
-struct Common::Math::Matrix4x4;
-struct Common::Math::Quaternion;
-struct Common::Math::Rectangle;
 struct Common::Math::Vector2;
-struct Common::Math::Vector3;
 struct Common::Math::Vector4;
 struct Component::Excel::ExcelModule;
 struct Component::Excel::ExcelModule::ExcelModuleVTable;
@@ -660,11 +728,12 @@ struct Component::Excel::ExcelModuleInterface::ExcelModuleInterfaceVTable;
 struct Component::Excel::ExcelSheet;
 struct Component::Exd::ExdModule;
 struct Component::GUI::AgentHudLayout;
-struct Component::GUI::AgentInterface;
 struct Component::GUI::AgentInterface::AgentInterfaceVTable;
 struct Component::GUI::AtkArrayData;
 struct Component::GUI::AtkArrayDataHolder;
 struct Component::GUI::AtkCollisionNode;
+struct Component::GUI::AtkResNode;
+struct Component::GUI::AtkEventManager;
 struct Component::GUI::AtkComponentBase;
 struct Component::GUI::AtkComponentBase::AtkComponentBaseVTable;
 struct Component::GUI::AtkComponentButton;
@@ -683,6 +752,9 @@ struct Component::GUI::AtkComponentList::ListItem;
 struct Component::GUI::AtkComponentListItemRenderer;
 struct Component::GUI::AtkComponentNode;
 struct Component::GUI::AtkComponentNumericInput;
+struct Component::GUI::AtkUldComponentDataNumericInput;
+struct Component::GUI::AtkUldComponentDataInputBase;
+struct Component::GUI::AtkUldComponentDataBase;
 struct Component::GUI::AtkComponentRadioButton;
 struct Component::GUI::AtkComponentScrollBar;
 struct Component::GUI::AtkComponentSlider;
@@ -694,30 +766,27 @@ struct Component::GUI::AtkCounterNode;
 struct Component::GUI::AtkCursor;
 struct Component::GUI::AtkDragDropManager;
 struct Component::GUI::AtkEvent;
-struct Component::GUI::AtkEventInterface;
-struct Component::GUI::AtkEventListener;
-struct Component::GUI::AtkEventListenerUnk1;
-struct Component::GUI::AtkEventManager;
-struct Component::GUI::AtkEventTarget;
 struct Component::GUI::AtkImageNode;
 struct Component::GUI::AtkLinkedList;
 struct Component::GUI::AtkLinkedList::Node;
 struct Component::GUI::AtkModule;
 struct Component::GUI::AtkModule::AtkModuleVTable;
 struct Component::GUI::AtkNineGridNode;
-struct Component::GUI::AtkResNode;
 struct Component::GUI::AtkResNode::AtkResNodeVTable;
 struct Component::GUI::AtkStage;
+struct Component::GUI::AtkTooltipManager;
+struct StdMap::PointerComponentGUIAtkResNode::PointerComponentGUIAtkTooltipManagerAtkTooltipInfo;
+struct StdMap::Node::PointerComponentGUIAtkResNode::PointerComponentGUIAtkTooltipManagerAtkTooltipInfo;
+struct StdPair::PointerComponentGUIAtkResNode::PointerComponentGUIAtkTooltipManagerAtkTooltipInfo;
+struct Pointer::ComponentGUIAtkResNode;
+struct Pointer::ComponentGUIAtkTooltipManagerAtkTooltipInfo;
 struct Component::GUI::AtkTextNode;
-struct Component::GUI::AtkTexture;
 struct Component::GUI::AtkTexture::AtkTextureVTable;
 struct Component::GUI::AtkTextureResource;
 struct Component::GUI::AtkTimelineManager;
-struct Component::GUI::AtkTooltipManager;
 struct Component::GUI::AtkTooltipManager::AtkTooltipArgs;
 struct Component::GUI::AtkTooltipManager::AtkTooltipInfo;
 struct Component::GUI::AtkUldAsset;
-struct Component::GUI::AtkUldComponentDataBase;
 struct Component::GUI::AtkUldComponentDataButton;
 struct Component::GUI::AtkUldComponentDataCheckBox;
 struct Component::GUI::AtkUldComponentDataDragDrop;
@@ -727,13 +796,11 @@ struct Component::GUI::AtkUldComponentDataGuildLeveCard;
 struct Component::GUI::AtkUldComponentDataHoldButton;
 struct Component::GUI::AtkUldComponentDataIcon;
 struct Component::GUI::AtkUldComponentDataIconText;
-struct Component::GUI::AtkUldComponentDataInputBase;
 struct Component::GUI::AtkUldComponentDataJournalCanvas;
 struct Component::GUI::AtkUldComponentDataList;
 struct Component::GUI::AtkUldComponentDataListItemRenderer;
 struct Component::GUI::AtkUldComponentDataMap;
 struct Component::GUI::AtkUldComponentDataMultipurpose;
-struct Component::GUI::AtkUldComponentDataNumericInput;
 struct Component::GUI::AtkUldComponentDataPreview;
 struct Component::GUI::AtkUldComponentDataRadioButton;
 struct Component::GUI::AtkUldComponentDataScrollBar;
@@ -743,14 +810,12 @@ struct Component::GUI::AtkUldComponentDataTextNineGrid;
 struct Component::GUI::AtkUldComponentDataTreeList;
 struct Component::GUI::AtkUldComponentDataWindow;
 struct Component::GUI::AtkUldComponentInfo;
-struct Component::GUI::AtkUldManager;
+struct Component::GUI::AtkUldObjectInfo;
 struct Component::GUI::AtkUldManager::DuplicateNodeInfo;
 struct Component::GUI::AtkUldManager::DuplicateObjectList;
-struct Component::GUI::AtkUldObjectInfo;
 struct Component::GUI::AtkUldPart;
 struct Component::GUI::AtkUldPartsList;
 struct Component::GUI::AtkUldWidgetInfo;
-struct Component::GUI::AtkUnitBase;
 struct Component::GUI::AtkUnitBase::AtkUnitBaseVTable;
 struct Component::GUI::AtkUnitList;
 struct Component::GUI::AtkUnitManager;
@@ -761,7 +826,7 @@ struct Component::GUI::StringArrayData;
 struct Component::GUI::ULD::AtkUldComponentDataTab;
 
 // Enum Definitions
-enum ActionTimelineSlots: __int32
+enum Client::Game::ActionTimelineSlots: __int32
 {
     Base = 0,
     UpperBody = 1,
@@ -775,7 +840,7 @@ enum ActionTimelineSlots: __int32
     Overlay = 12
 };
 
-enum ActionType: byte
+enum Client::Game::ActionType: byte
 {
     None = 0,
     Spell = 1,
@@ -800,7 +865,7 @@ enum ActionType: byte
     Accessory = 20
 };
 
-enum BalloonState: unsigned __int32
+enum Client::Game::BalloonState: unsigned __int32
 {
     Waiting = 0,
     Active = 1,
@@ -808,13 +873,13 @@ enum BalloonState: unsigned __int32
     Inactive = 3
 };
 
-enum BalloonType: unsigned __int32
+enum Client::Game::BalloonType: unsigned __int32
 {
     Timer = 0,
     Unknown = 1
 };
 
-enum CharacterModes: byte
+enum Client::Game::Character::Character::CharacterModes: byte
 {
     None = 0,
     Normal = 1,
@@ -826,7 +891,7 @@ enum CharacterModes: byte
     Performance = 16
 };
 
-enum CopyFlags: unsigned __int32
+enum Client::Game::Character::Character::CopyFlags: unsigned __int32
 {
     None = 0,
     Unk000001 = 1,
@@ -854,7 +919,7 @@ enum CopyFlags: unsigned __int32
     Ornament = 4194304
 };
 
-enum EurekaElement: byte
+enum Client::Game::Character::Character::EurekaElement: byte
 {
     None = 0,
     Fire = 1,
@@ -865,14 +930,14 @@ enum EurekaElement: byte
     Water = 6
 };
 
-enum WeaponSlot: unsigned __int32
+enum Client::Game::Character::DrawDataContainer::WeaponSlot: unsigned __int32
 {
     MainHand = 0,
     OffHand = 1,
     Unk = 2
 };
 
-enum EventHandlerType: unsigned __int16
+enum Client::Game::Event::EventHandlerStructType: unsigned __int16
 {
     Quest = 1,
     Warp = 2,
@@ -923,7 +988,7 @@ enum EventHandlerType: unsigned __int16
     FateDirector = 32794
 };
 
-enum AetherFlags: byte
+enum Client::Game::Gauge::AetherFlags: byte
 {
     None = 0,
     Aetherflow1 = 1,
@@ -938,7 +1003,7 @@ enum AetherFlags: byte
     GarudaReady = 128
 };
 
-enum AstrologianCard: __int32
+enum Client::Game::Gauge::AstrologianCard: __int32
 {
     None = 0,
     Balance = 1,
@@ -951,14 +1016,14 @@ enum AstrologianCard: __int32
     Lady = 128
 };
 
-enum AstrologianSeal: __int32
+enum Client::Game::Gauge::AstrologianSeal: __int32
 {
     Solar = 1,
     Lunar = 2,
     Celestial = 3
 };
 
-enum BeastChakraType: byte
+enum Client::Game::Gauge::BeastChakraType: byte
 {
     None = 0,
     Coeurl = 1,
@@ -966,7 +1031,7 @@ enum BeastChakraType: byte
     Raptor = 3
 };
 
-enum DanceStep: byte
+enum Client::Game::Gauge::DanceStep: byte
 {
     Finish = 0,
     Emboite = 1,
@@ -975,14 +1040,14 @@ enum DanceStep: byte
     Pirouette = 4
 };
 
-enum EnochianFlags: byte
+enum Client::Game::Gauge::EnochianFlags: byte
 {
     None = 0,
     Enochian = 1,
     Paradox = 2
 };
 
-enum KaeshiAction: byte
+enum Client::Game::Gauge::KaeshiAction: byte
 {
     Higanbana = 1,
     Goken = 2,
@@ -990,13 +1055,13 @@ enum KaeshiAction: byte
     Namikiri = 4
 };
 
-enum NadiFlags: byte
+enum Client::Game::Gauge::NadiFlags: byte
 {
     Lunar = 2,
     Solar = 4
 };
 
-enum SenFlags: byte
+enum Client::Game::Gauge::SenFlags: byte
 {
     None = 0,
     Setsu = 1,
@@ -1004,7 +1069,7 @@ enum SenFlags: byte
     Ka = 4
 };
 
-enum SongFlags: byte
+enum Client::Game::Gauge::SongFlags: byte
 {
     None = 0,
     MagesBallad = 1,
@@ -1018,27 +1083,27 @@ enum SongFlags: byte
     WanderersMinuetCoda = 64
 };
 
-enum ApartmentBuildingState: byte
+enum Client::Game::Housing::ApartmentBuildingState: byte
 {
     None = 0,
     IsFull = 1,
     IsOwn = 2
 };
 
-enum PlotOwnerType: unsigned __int32
+enum Client::Game::Housing::PlotOwnerType: unsigned __int32
 {
     FreeCompany = 0,
     Individual = 2
 };
 
-enum PlotSize: byte
+enum Client::Game::Housing::PlotSize: byte
 {
     Small = 0,
     Medium = 1,
     Large = 2
 };
 
-enum PlotState: byte
+enum Client::Game::Housing::PlotState: byte
 {
     None = 0,
     UnownedLand = 1,
@@ -1046,7 +1111,7 @@ enum PlotState: byte
     OwnedEstate = 3
 };
 
-enum SubmarineRating: byte
+enum Client::Game::Housing::SubmarineRating: byte
 {
     SS = 0,
     S = 1,
@@ -1055,7 +1120,7 @@ enum SubmarineRating: byte
     C = 4
 };
 
-enum InstanceContentType: byte
+enum Client::Game::InstanceContent::InstanceContentType: byte
 {
     Raid = 1,
     Dungeon = 2,
@@ -1065,7 +1130,7 @@ enum InstanceContentType: byte
     DeepDungeon = 9
 };
 
-enum ItemFlags: byte
+enum Client::Game::InventoryItem::ItemFlags: byte
 {
     None = 0,
     HQ = 1,
@@ -1074,7 +1139,7 @@ enum ItemFlags: byte
     Collectable = 8
 };
 
-enum InventoryType: unsigned __int32
+enum Client::Game::InventoryType: unsigned __int32
 {
     Inventory1 = 0,
     Inventory2 = 1,
@@ -1145,7 +1210,7 @@ enum InventoryType: unsigned __int32
     HousingInteriorStoreroom8 = 27008
 };
 
-enum CraftworkDemandShift: __int32
+enum Client::Game::MJI::CraftworkDemandShift: __int32
 {
     Skyrocketing = 0,
     Increasing = 1,
@@ -1154,7 +1219,7 @@ enum CraftworkDemandShift: __int32
     Plummeting = 4
 };
 
-enum CraftworkSupply: __int32
+enum Client::Game::MJI::CraftworkSupply: __int32
 {
     Nonexistent = 0,
     Insufficient = 1,
@@ -1163,7 +1228,7 @@ enum CraftworkSupply: __int32
     Overflowing = 4
 };
 
-enum FarmSlotFlags: byte
+enum Client::Game::MJI::FarmSlotFlags: byte
 {
     UnderCare = 1,
     WasUnderCare = 2,
@@ -1171,14 +1236,14 @@ enum FarmSlotFlags: byte
     Flag8 = 8
 };
 
-enum MJIAllowedVisitors: byte
+enum Client::Game::MJI::MJIAllowedVisitors: byte
 {
     Friends = 1,
     FreeCompany = 2,
     Party = 4
 };
 
-enum MJIMinimapIcons: byte
+enum Client::Game::MJI::MJIMinimapIcons: byte
 {
     Trees = 1,
     Vegetation = 2,
@@ -1187,7 +1252,7 @@ enum MJIMinimapIcons: byte
     Aquatic = 16
 };
 
-enum ObjectHighlightColor: byte
+enum Client::Game::Object::ObjectHighlightColor: byte
 {
     None = 0,
     Red = 1,
@@ -1199,7 +1264,7 @@ enum ObjectHighlightColor: byte
     Black = 7
 };
 
-enum ObjectKind: byte
+enum Client::Game::Object::ObjectKind: byte
 {
     None = 0,
     Pc = 1,
@@ -1220,20 +1285,20 @@ enum ObjectKind: byte
     CardStand = 16
 };
 
-enum ObjectTargetableFlags: byte
+enum Client::Game::Object::ObjectTargetableFlags: byte
 {
     IsTargetable = 2,
     Unk1 = 4
 };
 
-enum QuestFlags: byte
+enum Client::Game::QuestManager::QuestListArray::Quest::QuestFlags: byte
 {
     None = 0,
     Priority = 1,
     Hidden = 8
 };
 
-enum RetainerTown: byte
+enum Client::Game::RetainerManager::RetainerList::RetainerTown: byte
 {
     LimsaLominsa = 1,
     Gridania = 2,
@@ -1244,7 +1309,7 @@ enum RetainerTown: byte
     OldSharlayan = 12
 };
 
-enum SatisfactionSupplyNpc: __int32
+enum Client::Game::SatisfactionSupplyNpc: __int32
 {
     ZholeAliapoh = 1,
     Mnaago = 2,
@@ -1257,14 +1322,28 @@ enum SatisfactionSupplyNpc: __int32
     Anden = 9
 };
 
-enum LootRule: byte
+enum Client::Game::UI::Achievement::AchievementState: __int32
+{
+    Invalid = 0,
+    Requested = 1,
+    Loaded = 2
+};
+
+enum Client::Game::UI::Cabinet::CabinetState: __int32
+{
+    Invalid = 0,
+    Requested = 1,
+    Loaded = 2
+};
+
+enum Client::Game::UI::ContentsFinder::LootRule: byte
 {
     Normal = 0,
     GreedOnly = 1,
     Lootmaster = 2
 };
 
-enum LootMode: __int32
+enum Client::Game::UI::LootMode: __int32
 {
     Normal = 0,
     GreedOnly = 1,
@@ -1273,14 +1352,14 @@ enum LootMode: __int32
     Unknown = 4
 };
 
-enum WeeklyBingoTaskStatus: __int32
+enum Client::Game::UI::PlayerState::WeeklyBingoTaskStatus: __int32
 {
     Open = 0,
     Claimable = 1,
     Claimed = 2
 };
 
-enum PlayerStateFlag: unsigned __int32
+enum Client::Game::UI::PlayerStateFlag: unsigned __int32
 {
     IsLoginSecurityToken = 1,
     IsBuddyInStable = 2,
@@ -1292,7 +1371,7 @@ enum PlayerStateFlag: unsigned __int32
     Unknown14 = 14
 };
 
-enum RollResult: __int32
+enum Client::Game::UI::RollResult: __int32
 {
     UnAwarded = 0,
     Needed = 1,
@@ -1302,7 +1381,7 @@ enum RollResult: __int32
     Unknown = 7
 };
 
-enum RollState: __int32
+enum Client::Game::UI::RollState: __int32
 {
     UpToNeed = 0,
     UpToGreed = 1,
@@ -1312,7 +1391,7 @@ enum RollState: __int32
     Unknown = 28
 };
 
-enum RenderSubViews: unsigned __int32
+enum Client::Graphics::Render::Manager::RenderSubViews: unsigned __int32
 {
     Shadow0 = 0,
     Shadow1 = 1,
@@ -1334,7 +1413,7 @@ enum RenderSubViews: unsigned __int32
     Hud = 17
 };
 
-enum RenderViews: unsigned __int32
+enum Client::Graphics::Render::Manager::RenderViews: unsigned __int32
 {
     OmniShadow0 = 0,
     OmniShadow1 = 1,
@@ -1370,13 +1449,13 @@ enum RenderViews: unsigned __int32
     Unused = 31
 };
 
-enum TextureFormat: unsigned __int32
+enum Client::Graphics::Render::TextureFormat: unsigned __int32
 {
     R8G8B8A8 = 5200,
     D24S8 = 16976
 };
 
-enum ModelType: byte
+enum Client::Graphics::Scene::CharacterBase::ModelType: byte
 {
     Human = 1,
     DemiHuman = 2,
@@ -1384,7 +1463,7 @@ enum ModelType: byte
     Weapon = 4
 };
 
-enum ObjectType: __int32
+enum Client::Graphics::Scene::ObjectType: __int32
 {
     Object = 0,
     Terrain = 1,
@@ -1398,7 +1477,7 @@ enum ObjectType: __int32
     Unk_Type9 = 9
 };
 
-enum FileMode: unsigned __int32
+enum Client::System::File::FileMode: unsigned __int32
 {
     LoadUnpackedResource = 0,
     LoadFileResource = 1,
@@ -1407,7 +1486,7 @@ enum FileMode: unsigned __int32
     LoadSqPackResource = 11
 };
 
-enum ResourceCategory: __int32
+enum Client::System::Resource::ResourceCategory: __int32
 {
     Common = 0,
     BgCommon = 1,
@@ -1427,14 +1506,14 @@ enum ResourceCategory: __int32
     MaxCount = 20
 };
 
-enum ActionStatus: byte
+enum Client::UI::Agent::ActionStatus: byte
 {
     Available = 0,
     NotYetAvailable = 1,
     NotCurrentlyAvailable = 3
 };
 
-enum ActiveType: byte
+enum Client::UI::Agent::AgentFreeCompanyProfile::FCProfile::ActiveType: byte
 {
     None = 0,
     Weekdays = 1,
@@ -1442,7 +1521,7 @@ enum ActiveType: byte
     Always = 3
 };
 
-enum FocusType: unsigned __int16
+enum Client::UI::Agent::AgentFreeCompanyProfile::FCProfile::FocusType: unsigned __int16
 {
     None = 0,
     RolePlaying = 1,
@@ -1456,13 +1535,13 @@ enum FocusType: unsigned __int16
     PvP = 256
 };
 
-enum RecruitmentType: byte
+enum Client::UI::Agent::AgentFreeCompanyProfile::FCProfile::RecruitmentType: byte
 {
     Closed = 0,
     Open = 1
 };
 
-enum SeekingType: unsigned __int16
+enum Client::UI::Agent::AgentFreeCompanyProfile::FCProfile::SeekingType: unsigned __int16
 {
     None = 0,
     Tank = 1,
@@ -1472,7 +1551,7 @@ enum SeekingType: unsigned __int16
     Gatherer = 16
 };
 
-enum AgentId: unsigned __int32
+enum Client::UI::Agent::AgentId: unsigned __int32
 {
     Lobby = 0,
     CharaMake = 1,
@@ -1818,20 +1897,20 @@ enum AgentId: unsigned __int32
     PvPMap = 432
 };
 
-enum IconFlagsTopRight: byte
+enum Client::UI::Agent::AgentInspect::ItemData::IconFlagsTopRight: byte
 {
     None = 0,
     Dyeable = 1,
     Glamoured = 4
 };
 
-enum ItemDataFlags: __int32
+enum Client::UI::Agent::AgentInspect::ItemDataFlags: __int32
 {
     None = 0,
     Filled = 8
 };
 
-enum ReadyCheckStatus: byte
+enum Client::UI::Agent::AgentReadyCheck::ReadyCheckStatus: byte
 {
     Unknown = 0,
     AwaitingResponse = 1,
@@ -1840,7 +1919,7 @@ enum ReadyCheckStatus: byte
     MemberNotPresent = 4
 };
 
-enum SalvageItemCategory: __int32
+enum Client::UI::Agent::AgentSalvage::SalvageItemCategory: __int32
 {
     InventoryEquipment = 0,
     InventoryHousing = 1,
@@ -1852,14 +1931,14 @@ enum SalvageItemCategory: __int32
     Equipped = 7
 };
 
-enum AozWeeklyChallenge: __int32
+enum Client::UI::Agent::AozWeeklyChallenge: __int32
 {
     Novice = 0,
     Moderate = 1,
     Advanced = 2
 };
 
-enum AozWeeklyFlags: byte
+enum Client::UI::Agent::AozWeeklyFlags: byte
 {
     None = 0,
     Unknown = 1,
@@ -1868,14 +1947,14 @@ enum AozWeeklyFlags: byte
     Advanced = 8
 };
 
-enum ChatChannel: __int32
+enum Client::UI::Agent::ChatChannel: __int32
 {
     Say = 1,
     Party = 2,
     Alliance = 3
 };
 
-enum ContentsRouletteRole: byte
+enum Client::UI::Agent::ContentsRouletteRole: byte
 {
     Tank = 0,
     Healer = 1,
@@ -1883,7 +1962,7 @@ enum ContentsRouletteRole: byte
     None = 3
 };
 
-enum GrandCompany: byte
+enum Client::UI::Agent::GrandCompany: byte
 {
     None = 0,
     Maelstrom = 1,
@@ -1891,7 +1970,7 @@ enum GrandCompany: byte
     ImmortalFlames = 3
 };
 
-enum MapType: unsigned __int32
+enum Client::UI::Agent::MapType: unsigned __int32
 {
     SharedFate = 0,
     FlagMarker = 1,
@@ -1905,7 +1984,7 @@ enum MapType: unsigned __int32
     Bozja = 9
 };
 
-enum WaymarkIndex: __int32
+enum Client::UI::Agent::WaymarkIndex: __int32
 {
     A = 0,
     B = 1,
@@ -1917,14 +1996,14 @@ enum WaymarkIndex: __int32
     Four = 7
 };
 
-enum GSInfoCardListFilterMode: __int32
+enum Client::UI::GSInfoCardListFilterMode: __int32
 {
     DisplayOwnedCards = 6,
     DisplayUnownedCards = 9,
     DisplayAllCards = 14
 };
 
-enum Language: byte
+enum Client::UI::Info::InfoProxyCommonList::CharacterData::Language: byte
 {
     JP = 0,
     EN = 1,
@@ -1932,7 +2011,7 @@ enum Language: byte
     FR = 3
 };
 
-enum LanguageMask: byte
+enum Client::UI::Info::InfoProxyCommonList::CharacterData::LanguageMask: byte
 {
     JP = 1,
     EN = 2,
@@ -1940,7 +2019,7 @@ enum LanguageMask: byte
     FR = 8
 };
 
-enum BasicSettings: unsigned __int16
+enum Client::UI::Info::InfoProxyFreeCompany::RankData::BasicSettings: unsigned __int16
 {
     None = 0,
     CompanyProfile = 1,
@@ -1957,7 +2036,7 @@ enum BasicSettings: unsigned __int16
     DiscardingActions = 16384
 };
 
-enum ChestAccess: byte
+enum Client::UI::Info::InfoProxyFreeCompany::RankData::ChestAccess: byte
 {
     NoAccess = 1,
     ViewOnly = 2,
@@ -1965,7 +2044,7 @@ enum ChestAccess: byte
     DepositOnly = 8
 };
 
-enum HousingAccess: unsigned __int32
+enum Client::UI::Info::InfoProxyFreeCompany::RankData::HousingAccess: unsigned __int32
 {
     EstateHallAccess = 1,
     EstateRenameing = 2,
@@ -1987,7 +2066,7 @@ enum HousingAccess: unsigned __int32
     OrchestrionOperation = 131072
 };
 
-enum WorkshopAccess: unsigned __int16
+enum Client::UI::Info::InfoProxyFreeCompany::RankData::WorkshopAccess: unsigned __int16
 {
     CosntructionRemoval = 1,
     ProjCommenceDisc = 2,
@@ -2004,7 +2083,7 @@ enum WorkshopAccess: unsigned __int16
     VoyageFinalization = 4096
 };
 
-enum InfoProxyId: unsigned __int32
+enum Client::UI::Info::InfoProxyId: unsigned __int32
 {
     Party = 0,
     Party2 = 1,
@@ -2031,7 +2110,7 @@ enum InfoProxyId: unsigned __int32
     CircleFinder = 33
 };
 
-enum ConfigOption: __int16
+enum Client::UI::Misc::ConfigOption: __int16
 {
     None = 0,
     GuidVersion = 2,
@@ -2909,7 +2988,7 @@ enum ConfigOption: __int16
     Invalid = -1
 };
 
-enum DataSegment: byte
+enum Client::UI::Misc::DataSegment: byte
 {
     LETTER = 0,
     RETTASK = 1,
@@ -2942,7 +3021,7 @@ enum DataSegment: byte
     TOFU = 28
 };
 
-enum HotbarSlotType: byte
+enum Client::UI::Misc::HotbarSlotType: byte
 {
     Empty = 0,
     Action = 1,
@@ -2975,7 +3054,7 @@ enum HotbarSlotType: byte
     LostFindsItem = 32
 };
 
-enum GearsetFlag: byte
+enum Client::UI::Misc::RaptureGearsetModule::GearsetFlag: byte
 {
     None = 0,
     Exists = 1,
@@ -2988,7 +3067,7 @@ enum GearsetFlag: byte
     Unknown80 = 128
 };
 
-enum UserFileType: unsigned __int16
+enum Client::UI::Misc::UserFileManager::UserFileType: unsigned __int16
 {
     ADDON = 0,
     MACRO = 1,
@@ -3004,7 +3083,7 @@ enum UserFileType: unsigned __int16
     CONTROL = 13
 };
 
-enum RaidFinderEntryFlags: byte
+enum Client::UI::RaidFinderEntryFlags: byte
 {
     AvailableForSelection = 1,
     Selected = 2,
@@ -3014,7 +3093,7 @@ enum RaidFinderEntryFlags: byte
     Extreme = 64
 };
 
-enum RaptureAtkModuleFlags: byte
+enum Client::UI::RaptureAtkModuleFlags: byte
 {
     None = 0,
     Unk01 = 1,
@@ -3027,7 +3106,7 @@ enum RaptureAtkModuleFlags: byte
     Unk80 = 128
 };
 
-enum UiFlags: __int32
+enum Client::UI::UIModule::UiFlags: __int32
 {
     Shortcuts = 1,
     Hud = 2,
@@ -3038,7 +3117,7 @@ enum UiFlags: __int32
     TargetInfo = 64
 };
 
-enum ConfigType: __int32
+enum Common::Configuration::ConfigType: __int32
 {
     Unused = 0,
     Category = 1,
@@ -3047,7 +3126,7 @@ enum ConfigType: __int32
     String = 4
 };
 
-enum LuaType: __int32
+enum Common::Lua::LuaType: __int32
 {
     Nil = 0,
     Boolean = 1,
@@ -3063,7 +3142,7 @@ enum LuaType: __int32
     None = -1
 };
 
-enum AlignmentType: __int32
+enum Component::GUI::AlignmentType: __int32
 {
     TopLeft = 0,
     Top = 1,
@@ -3076,7 +3155,7 @@ enum AlignmentType: __int32
     BottomRight = 8
 };
 
-enum CursorType: byte
+enum Component::GUI::AtkCursor::CursorType: byte
 {
     Arrow = 0,
     Boot = 1,
@@ -3098,7 +3177,7 @@ enum CursorType: byte
     Hidden = 17
 };
 
-enum AtkEventType: byte
+enum Component::GUI::AtkEventType: byte
 {
     MouseDown = 3,
     MouseUp = 4,
@@ -3127,7 +3206,7 @@ enum AtkEventType: byte
     WindowChangeScale = 69
 };
 
-enum AtkLoadState: byte
+enum Component::GUI::AtkLoadState: byte
 {
     Unloaded = 0,
     ResourceLoading = 1,
@@ -3136,7 +3215,7 @@ enum AtkLoadState: byte
     LoadError = 4
 };
 
-enum AtkTooltipType: byte
+enum Component::GUI::AtkTooltipManager::AtkTooltipType: byte
 {
     Text = 1,
     Item = 2,
@@ -3144,14 +3223,14 @@ enum AtkTooltipType: byte
     Action = 4
 };
 
-enum CollisionType: unsigned __int16
+enum Component::GUI::CollisionType: unsigned __int16
 {
     Hit = 0,
     Focus = 1,
     Move = 2
 };
 
-enum ComponentType: byte
+enum Component::GUI::ComponentType: byte
 {
     Base = 0,
     Button = 1,
@@ -3180,7 +3259,7 @@ enum ComponentType: byte
     HoldButton = 24
 };
 
-enum FontType: byte
+enum Component::GUI::FontType: byte
 {
     Axis = 0,
     MiedingerMed = 1,
@@ -3190,7 +3269,7 @@ enum FontType: byte
     JupiterLarge = 5
 };
 
-enum IconComponentFlags: unsigned __int32
+enum Component::GUI::IconComponentFlags: unsigned __int32
 {
     None = 0,
     DyeIcon = 8,
@@ -3201,14 +3280,14 @@ enum IconComponentFlags: unsigned __int32
     InventoryItem = 2048
 };
 
-enum ImageNodeFlags: __int32
+enum Component::GUI::ImageNodeFlags: __int32
 {
     FlipH = 1,
     FlipV = 2,
     AutoFit = 128
 };
 
-enum NodeFlags: __int32
+enum Component::GUI::NodeFlags: unsigned __int16
 {
     AnchorTop = 1,
     AnchorLeft = 2,
@@ -3228,7 +3307,7 @@ enum NodeFlags: __int32
     UnkFlag2 = 32768
 };
 
-enum NodeType: unsigned __int16
+enum Component::GUI::NodeType: unsigned __int16
 {
     Res = 1,
     Image = 2,
@@ -3238,7 +3317,7 @@ enum NodeType: unsigned __int16
     Collision = 8
 };
 
-enum TextFlags: __int32
+enum Component::GUI::TextFlags: __int32
 {
     AutoAdjustNodeSize = 1,
     Bold = 2,
@@ -3250,12 +3329,12 @@ enum TextFlags: __int32
     MultiLine = 128
 };
 
-enum TextFlags2: __int32
+enum Component::GUI::TextFlags2: __int32
 {
     Ellipsis = 4
 };
 
-enum TextInputFlags1: __int32
+enum Component::GUI::TextInputFlags1: __int32
 {
     Capitalize = 1,
     Mask = 2,
@@ -3267,7 +3346,7 @@ enum TextInputFlags1: __int32
     AllowLowerCase = 128
 };
 
-enum TextInputFlags2: __int32
+enum Component::GUI::TextInputFlags2: __int32
 {
     AllowNumberInput = 1,
     AllowSymbolInput = 2,
@@ -3276,14 +3355,14 @@ enum TextInputFlags2: __int32
     AutoMaxWidth = 16
 };
 
-enum TextureType: byte
+enum Component::GUI::TextureType: byte
 {
     Resource = 1,
     Crest = 2,
     KernelTexture = 3
 };
 
-enum ValueType: __int32
+enum Component::GUI::ValueType: __int32
 {
     Bool = 2,
     Int = 3,
@@ -3885,6 +3964,29 @@ struct Client::Game::Control::InputManager /* Size=0x8 */
     /*     */ byte _gap_0x0[0x8];
 };
 
+struct Pointer::ClientGameObjectGameObject /* Size=0x8 */
+{
+    /* 0x0 */ Client::Game::Object::GameObject* Value;
+};
+
+struct StdSet::Node::PointerClientGameObjectGameObject /* Size=0x30 */
+{
+    /* 0x00 */ StdSet::Node::PointerClientGameObjectGameObject* Left;
+    /* 0x08 */ StdSet::Node::PointerClientGameObjectGameObject* Parent;
+    /* 0x10 */ StdSet::Node::PointerClientGameObjectGameObject* Right;
+    /* 0x18 */ byte Color;
+    /*      */ byte _gap_0x19;
+    /*      */ byte _gap_0x1A[0x2];
+    /* 0x1C */ bool IsNil;
+    /*      */ byte _gap_0x1D;
+    /*      */ byte _gap_0x1E[0x2];
+    /* 0x20 */ byte _18;
+    /* 0x21 */ byte _19;
+    /*      */ byte _gap_0x22[0x2];
+    /*      */ byte _gap_0x24[0x4];
+    /* 0x28 */ Pointer::ClientGameObjectGameObject Key;
+};
+
 struct StdSet::PointerClientGameObjectGameObject /* Size=0x10 */
 {
     /* 0x00 */ StdSet::Node::PointerClientGameObjectGameObject* Head;
@@ -3953,11 +4055,48 @@ struct Client::Game::Event::ModuleBase /* Size=0x40 */
     /*      */ byte _gap_0x10[0x30];
 };
 
+struct Pointer::ClientGameEventDirector /* Size=0x8 */
+{
+    /* 0x0 */ Client::Game::Event::Director* Value;
+};
+
 struct StdVector::PointerClientGameEventDirector /* Size=0x18 */
 {
     /* 0x00 */ Pointer::ClientGameEventDirector* First;
     /* 0x08 */ Pointer::ClientGameEventDirector* Last;
     /* 0x10 */ Pointer::ClientGameEventDirector* End;
+};
+
+struct StdPair::SystemIntPtr::SystemIntPtr /* Size=0x10 */
+{
+    /* 0x00 */ __int64 Item1;
+    /* 0x08 */ __int64 Item2;
+};
+
+struct StdPair::SystemUInt16::StdPairSystemIntPtrSystemIntPtr /* Size=0x18 */
+{
+    /* 0x00 */ unsigned __int16 Item1;
+    /*      */ byte _gap_0x2[0x2];
+    /*      */ byte _gap_0x4[0x4];
+    /* 0x08 */ StdPair::SystemIntPtr::SystemIntPtr Item2;
+};
+
+struct StdMap::Node::SystemUInt16::StdPairSystemIntPtrSystemIntPtr /* Size=0x40 */
+{
+    /* 0x00 */ StdMap::Node::SystemUInt16::StdPairSystemIntPtrSystemIntPtr* Left;
+    /* 0x08 */ StdMap::Node::SystemUInt16::StdPairSystemIntPtrSystemIntPtr* Parent;
+    /* 0x10 */ StdMap::Node::SystemUInt16::StdPairSystemIntPtrSystemIntPtr* Right;
+    /* 0x18 */ byte Color;
+    /*      */ byte _gap_0x19;
+    /*      */ byte _gap_0x1A[0x2];
+    /* 0x1C */ bool IsNil;
+    /*      */ byte _gap_0x1D;
+    /*      */ byte _gap_0x1E[0x2];
+    /* 0x20 */ byte _18;
+    /* 0x21 */ byte _19;
+    /*      */ byte _gap_0x22[0x2];
+    /*      */ byte _gap_0x24[0x4];
+    /* 0x28 */ StdPair::SystemUInt16::StdPairSystemIntPtrSystemIntPtr KeyValuePair;
 };
 
 struct StdMap::SystemUInt16::StdPairSystemIntPtrSystemIntPtr /* Size=0x10 */
@@ -3975,18 +4114,80 @@ struct Client::Game::Event::DirectorModule /* Size=0xA0 */
     /* 0x98 */ Client::Game::InstanceContent::ContentDirector* ActiveContentDirector;
 };
 
-struct StdMap::SystemUInt32::PointerClientGameEventEventHandlerStructStructStruct /* Size=0x10 */
+struct Pointer::ClientGameEventEventHandlerStruct /* Size=0x8 */
 {
-    /* 0x00 */ StdMap::Node::SystemUInt32::PointerClientGameEventEventHandlerStructStructStruct* Head;
+    /* 0x0 */ Client::Game::Event::EventHandlerStruct* Value;
+};
+
+struct StdPair::SystemUInt32::PointerClientGameEventEventHandlerStruct /* Size=0x10 */
+{
+    /* 0x00 */ unsigned __int32 Item1;
+    /*      */ byte _gap_0x4[0x4];
+    /* 0x08 */ Pointer::ClientGameEventEventHandlerStruct Item2;
+};
+
+struct StdMap::Node::SystemUInt32::PointerClientGameEventEventHandlerStruct /* Size=0x38 */
+{
+    /* 0x00 */ StdMap::Node::SystemUInt32::PointerClientGameEventEventHandlerStruct* Left;
+    /* 0x08 */ StdMap::Node::SystemUInt32::PointerClientGameEventEventHandlerStruct* Parent;
+    /* 0x10 */ StdMap::Node::SystemUInt32::PointerClientGameEventEventHandlerStruct* Right;
+    /* 0x18 */ byte Color;
+    /*      */ byte _gap_0x19;
+    /*      */ byte _gap_0x1A[0x2];
+    /* 0x1C */ bool IsNil;
+    /*      */ byte _gap_0x1D;
+    /*      */ byte _gap_0x1E[0x2];
+    /* 0x20 */ byte _18;
+    /* 0x21 */ byte _19;
+    /*      */ byte _gap_0x22[0x2];
+    /*      */ byte _gap_0x24[0x4];
+    /* 0x28 */ StdPair::SystemUInt32::PointerClientGameEventEventHandlerStruct KeyValuePair;
+};
+
+struct StdMap::SystemUInt32::PointerClientGameEventEventHandlerStruct /* Size=0x10 */
+{
+    /* 0x00 */ StdMap::Node::SystemUInt32::PointerClientGameEventEventHandlerStruct* Head;
     /* 0x08 */ unsigned __int64 Count;
 };
 
 struct Client::Game::Event::EventHandlerStructModule /* Size=0xC0 */
 {
     /* 0x00 */ Client::Game::Event::ModuleBase ModuleBase;
-    /* 0x40 */ StdMap::SystemUInt32::PointerClientGameEventEventHandlerStructStructStruct EventHandlerMap;
+    /* 0x40 */ StdMap::SystemUInt32::PointerClientGameEventEventHandlerStruct EventHandlerMap;
     /* 0x50 */ StdMap::SystemUInt16::StdPairSystemIntPtrSystemIntPtr EventHandlerFactories;
     /*      */ byte _gap_0x60[0x60];
+};
+
+struct Client::Game::Event::LuaActor /* Size=0x80 */
+{
+    /*      */ byte _gap_0x0[0x8];
+    /* 0x08 */ Client::Game::Object::GameObject* Object;
+    /* 0x10 */ Client::System::String::Utf8String LuaString;
+    /* 0x78 */ Common::Lua::LuaState* LuaState;
+};
+
+struct StdPair::SystemInt64::ClientGameEventLuaActor /* Size=0x88 */
+{
+    /* 0x00 */ __int64 Item1;
+    /* 0x08 */ Client::Game::Event::LuaActor Item2;
+};
+
+struct StdMap::Node::SystemInt64::ClientGameEventLuaActor /* Size=0xB0 */
+{
+    /* 0x00 */ StdMap::Node::SystemInt64::ClientGameEventLuaActor* Left;
+    /* 0x08 */ StdMap::Node::SystemInt64::ClientGameEventLuaActor* Parent;
+    /* 0x10 */ StdMap::Node::SystemInt64::ClientGameEventLuaActor* Right;
+    /* 0x18 */ byte Color;
+    /*      */ byte _gap_0x19;
+    /*      */ byte _gap_0x1A[0x2];
+    /* 0x1C */ bool IsNil;
+    /*      */ byte _gap_0x1D;
+    /*      */ byte _gap_0x1E[0x2];
+    /* 0x20 */ byte _18;
+    /* 0x21 */ byte _19;
+    /*      */ byte _gap_0x22[0x2];
+    /*      */ byte _gap_0x24[0x4];
+    /* 0x28 */ StdPair::SystemInt64::ClientGameEventLuaActor KeyValuePair;
 };
 
 struct StdMap::SystemInt64::ClientGameEventLuaActor /* Size=0x10 */
@@ -4067,14 +4268,6 @@ struct Client::Game::Event::EventFramework /* Size=0x3BC0 */
     /*        */ byte _gap_0x3448[0x778];
 };
 
-struct Client::Game::Event::LuaActor /* Size=0x80 */
-{
-    /*      */ byte _gap_0x0[0x8];
-    /* 0x08 */ Client::Game::Object::GameObject* Object;
-    /* 0x10 */ Client::System::String::Utf8String LuaString;
-    /* 0x78 */ Common::Lua::LuaState* LuaState;
-};
-
 struct System::Numerics::Vector3 /* Size=0x0 */
 {
     /* 0x0 */ float X;
@@ -4108,7 +4301,11 @@ struct Client::Game::Fate::FateContext /* Size=0x1040 */
     /*        */ byte _gap_0x3B9;
     /*        */ byte _gap_0x3BA[0x2];
     /*        */ byte _gap_0x3BC[0x4];
-    /*        */ byte _gap_0x3C0[0x18];
+    /*        */ byte _gap_0x3C0[0x4];
+    /* 0x03C4 */ bool IsExpBonus;
+    /*        */ byte _gap_0x3C5;
+    /*        */ byte _gap_0x3C6[0x2];
+    /*        */ byte _gap_0x3C8[0x10];
     /* 0x03D8 */ unsigned __int32 IconId;
     /*        */ byte _gap_0x3DC[0x4];
     /*        */ byte _gap_0x3E0[0x18];
@@ -4122,14 +4319,14 @@ struct Client::Game::Fate::FateContext /* Size=0x1040 */
     /*        */ byte _gap_0x450[0x10];
     /*        */ byte _gap_0x460[0x4];
     /* 0x0464 */ float Radius;
-    /*        */ byte _gap_0x468[0x2B8];
-    /* 0x0720 */ unsigned __int32 MapIconId;
-    /*        */ byte _gap_0x724[0x4];
-    /*        */ byte _gap_0x728[0x20];
-    /*        */ byte _gap_0x748[0x4];
-    /*        */ byte _gap_0x74C[0x2];
-    /* 0x074E */ unsigned __int16 TerritoryId;
-    /*        */ byte _gap_0x750[0x8F0];
+    /*        */ byte _gap_0x468[0x2F8];
+    /* 0x0760 */ unsigned __int32 MapIconId;
+    /*        */ byte _gap_0x764[0x4];
+    /*        */ byte _gap_0x768[0x20];
+    /*        */ byte _gap_0x788[0x4];
+    /*        */ byte _gap_0x78C[0x2];
+    /* 0x078E */ unsigned __int16 TerritoryId;
+    /*        */ byte _gap_0x790[0x8B0];
 };
 
 struct Client::Game::Fate::FateDirector /* Size=0x4F8 */
@@ -4152,6 +4349,11 @@ struct StdVector::ClientGameObjectGameObjectID /* Size=0x18 */
     /* 0x00 */ Client::Game::Object::GameObjectID* First;
     /* 0x08 */ Client::Game::Object::GameObjectID* Last;
     /* 0x10 */ Client::Game::Object::GameObjectID* End;
+};
+
+struct Pointer::ClientGameFateFateContext /* Size=0x8 */
+{
+    /* 0x0 */ Client::Game::Fate::FateContext* Value;
 };
 
 struct StdVector::PointerClientGameFateFateContext /* Size=0x18 */
@@ -5309,6 +5511,14 @@ struct Client::Game::Status /* Size=0xC */
     /* 0x8 */ unsigned __int32 SourceID;
 };
 
+struct Client::Game::UI::Achievement /* Size=0x550 */
+{
+    /* 0x000 */ void** VTable;
+    /* 0x008 */ Client::Game::UI::Achievement::AchievementState State;
+    /* 0x00C */ byte CompletedAchievements[0x1AC];
+    /*       */ byte _gap_0x1B8[0x398];
+};
+
 struct Client::Game::UI::AreaInstance /* Size=0x28 */
 {
     /*      */ byte _gap_0x0[0x10];
@@ -5362,7 +5572,7 @@ struct Client::Game::UI::Buddy /* Size=0xED8 */
 
 struct Client::Game::UI::Cabinet /* Size=0x48 */
 {
-    /* 0x00 */ __int32 CabinetLoaded;
+    /* 0x00 */ Client::Game::UI::Cabinet::CabinetState State;
     /* 0x04 */ byte UnlockedItems[0x41];
     /*      */ byte _gap_0x45;
     /*      */ byte _gap_0x46[0x2];
@@ -5903,7 +6113,8 @@ struct Client::Game::UI::UIState /* Size=0x16BAC */
     /* 0x01250 */ Client::Game::UI::Inspect Inspect;
     /* 0x014B8 */ Client::Game::UI::Telepo Telepo;
     /* 0x01510 */ Client::Game::UI::Cabinet Cabinet;
-    /*         */ byte _gap_0x1558[0x558];
+    /*         */ byte _gap_0x1558[0x8];
+    /* 0x01560 */ Client::Game::UI::Achievement Achievement;
     /* 0x01AB0 */ Client::Game::UI::Buddy Buddy;
     /*         */ byte _gap_0x2988[0x4];
     /* 0x0298C */ Client::Game::UI::PvPProfile PvPProfile;
@@ -6083,6 +6294,11 @@ struct Client::Graphics::Kernel::ShaderNode::ShaderPass /* Size=0x8 */
     /* 0x4 */ unsigned __int32 PixelShader;
 };
 
+struct Pointer::ClientGraphicsKernelVertexShader /* Size=0x8 */
+{
+    /* 0x0 */ Client::Graphics::Kernel::VertexShader* Value;
+};
+
 struct StdVector::PointerClientGraphicsKernelVertexShader /* Size=0x18 */
 {
     /* 0x00 */ Pointer::ClientGraphicsKernelVertexShader* First;
@@ -6096,6 +6312,11 @@ struct Client::Graphics::Kernel::CVector::PointerClientGraphicsKernelVertexShade
     /* 0x08 */ StdVector::PointerClientGraphicsKernelVertexShader Vector;
 };
 
+struct Pointer::ClientGraphicsKernelPixelShader /* Size=0x8 */
+{
+    /* 0x0 */ Client::Graphics::Kernel::PixelShader* Value;
+};
+
 struct StdVector::PointerClientGraphicsKernelPixelShader /* Size=0x18 */
 {
     /* 0x00 */ Pointer::ClientGraphicsKernelPixelShader* First;
@@ -6107,6 +6328,11 @@ struct Client::Graphics::Kernel::CVector::PointerClientGraphicsKernelPixelShader
 {
     /* 0x00 */ void* vtbl;
     /* 0x08 */ StdVector::PointerClientGraphicsKernelPixelShader Vector;
+};
+
+struct Pointer::ClientGraphicsKernelShaderNode /* Size=0x8 */
+{
+    /* 0x0 */ Client::Graphics::Kernel::ShaderNode* Value;
 };
 
 struct StdVector::PointerClientGraphicsKernelShaderNode /* Size=0x18 */
@@ -6187,6 +6413,11 @@ struct Client::Graphics::Kernel::SwapChain /* Size=0x70 */
 struct Client::Graphics::Kernel::VertexShader /* Size=0x1 */
 {
     /*     */ byte _gap_0x0;
+};
+
+struct Pointer::ClientGraphicsPhysicsBoneSimulator /* Size=0x8 */
+{
+    /* 0x0 */ Client::Graphics::Physics::BoneSimulator* Value;
 };
 
 struct StdVector::PointerClientGraphicsPhysicsBoneSimulator /* Size=0x18 */
@@ -6610,6 +6841,41 @@ struct Client::LayoutEngine::LayoutManager /* Size=0x98 */
     /* 0x90 */ Client::LayoutEngine::IndoorAreaLayoutData* IndoorAreaData;
 };
 
+struct Pointer::SystemByte /* Size=0x8 */
+{
+    /* 0x0 */ byte* Value;
+};
+
+struct StdPair::ClientSystemStringUtf8String::PointerSystemByte /* Size=0x70 */
+{
+    /* 0x00 */ Client::System::String::Utf8String Item1;
+    /* 0x68 */ Pointer::SystemByte Item2;
+};
+
+struct StdMap::Node::ClientSystemStringUtf8String::PointerSystemByte /* Size=0x98 */
+{
+    /* 0x00 */ StdMap::Node::ClientSystemStringUtf8String::PointerSystemByte* Left;
+    /* 0x08 */ StdMap::Node::ClientSystemStringUtf8String::PointerSystemByte* Parent;
+    /* 0x10 */ StdMap::Node::ClientSystemStringUtf8String::PointerSystemByte* Right;
+    /* 0x18 */ byte Color;
+    /*      */ byte _gap_0x19;
+    /*      */ byte _gap_0x1A[0x2];
+    /* 0x1C */ bool IsNil;
+    /*      */ byte _gap_0x1D;
+    /*      */ byte _gap_0x1E[0x2];
+    /* 0x20 */ byte _18;
+    /* 0x21 */ byte _19;
+    /*      */ byte _gap_0x22[0x2];
+    /*      */ byte _gap_0x24[0x4];
+    /* 0x28 */ StdPair::ClientSystemStringUtf8String::PointerSystemByte KeyValuePair;
+};
+
+struct StdMap::ClientSystemStringUtf8String::PointerSystemByte /* Size=0x10 */
+{
+    /* 0x00 */ StdMap::Node::ClientSystemStringUtf8String::PointerSystemByte* Head;
+    /* 0x08 */ unsigned __int64 Count;
+};
+
 struct Client::LayoutEngine::LayoutWorld /* Size=0x228 */
 {
     /*       */ byte _gap_0x0[0x20];
@@ -6769,6 +7035,32 @@ struct Client::System::Resource::Handle::MaterialResourceHandle /* Size=0x108 */
     /*       */ byte _gap_0xB0[0x58];
 };
 
+struct StdPair::PointerSystemByte::SystemInt16 /* Size=0x10 */
+{
+    /* 0x00 */ Pointer::SystemByte Item1;
+    /* 0x08 */ __int16 Item2;
+    /*      */ byte _gap_0xA[0x2];
+    /*      */ byte _gap_0xC[0x4];
+};
+
+struct StdMap::Node::PointerSystemByte::SystemInt16 /* Size=0x38 */
+{
+    /* 0x00 */ StdMap::Node::PointerSystemByte::SystemInt16* Left;
+    /* 0x08 */ StdMap::Node::PointerSystemByte::SystemInt16* Parent;
+    /* 0x10 */ StdMap::Node::PointerSystemByte::SystemInt16* Right;
+    /* 0x18 */ byte Color;
+    /*      */ byte _gap_0x19;
+    /*      */ byte _gap_0x1A[0x2];
+    /* 0x1C */ bool IsNil;
+    /*      */ byte _gap_0x1D;
+    /*      */ byte _gap_0x1E[0x2];
+    /* 0x20 */ byte _18;
+    /* 0x21 */ byte _19;
+    /*      */ byte _gap_0x22[0x2];
+    /*      */ byte _gap_0x24[0x4];
+    /* 0x28 */ StdPair::PointerSystemByte::SystemInt16 KeyValuePair;
+};
+
 struct StdMap::PointerSystemByte::SystemInt16 /* Size=0x10 */
 {
     /* 0x00 */ StdMap::Node::PointerSystemByte::SystemInt16* Head;
@@ -6783,12 +7075,6 @@ struct Client::System::Resource::Handle::ModelResourceHandle /* Size=0x260 */
     /*       */ byte _gap_0x218[0x10];
     /* 0x228 */ StdMap::PointerSystemByte::SystemInt16 Shapes;
     /*       */ byte _gap_0x238[0x28];
-};
-
-struct StdMap::SystemUInt32::PointerFFXIVClientStructsHavokhkaSkeletonMapper /* Size=0x10 */
-{
-    /* 0x00 */ StdMap::Node::SystemUInt32::PointerFFXIVClientStructsHavokhkaSkeletonMapper* Head;
-    /* 0x08 */ unsigned __int64 Count;
 };
 
 struct Client::System::Resource::Handle::SkeletonResourceHandle::SkeletonHeader /* Size=0x30 */
@@ -6810,11 +7096,9 @@ struct Client::System::Resource::Handle::SkeletonResourceHandle /* Size=0x0 */
     /*     */ byte _gap_0xB0[0x18];
     /* 0xC8 */ unsigned __int32 BoneCount;
     /*     */ byte _gap_0xCC[0x4];
-    /* 0xD0 */ FFXIVClientStructs::Havok::hkaSkeleton* HavokSkeleton;
-    /* 0xD8 */ StdMap::SystemUInt32::PointerFFXIVClientStructsHavokhkaSkeletonMapper SkeletonMapperDict1;
-    /* 0xE8 */ StdMap::SystemUInt32::PointerFFXIVClientStructsHavokhkaSkeletonMapper SkeletonMapperDict2;
+    /*     */ byte _gap_0xD0[0x28];
     /* 0xF8 */ Common::Math::Matrix4x4* InverseBoneMatrix;
-    /* 0x100 */ FFXIVClientStructs::Havok::hkLoader* HavokLoader;
+    /*     */ byte _gap_0x100[0x8];
     /* 0x108 */ Client::System::Resource::Handle::SkeletonResourceHandle::SkeletonHeader SkeletonData;
 };
 
@@ -6981,10 +7265,22 @@ struct Component::GUI::AtkEventListener /* Size=0x8 */
     } _union_0x0;
 };
 
-struct Component::GUI::AtkLinkedList::PointerComponentGUIAtkUldManagerDuplicateObjectList /* Size=0x18 */
+struct Pointer::ComponentGUIAtkUldManagerDuplicateObjectList /* Size=0x8 */
 {
-    /* 0x00 */ Component::GUI::AtkLinkedList::Node::PointerComponentGUIAtkUldManagerDuplicateObjectList* End;
-    /* 0x08 */ Component::GUI::AtkLinkedList::Node::PointerComponentGUIAtkUldManagerDuplicateObjectList* Start;
+    /* 0x0 */ Component::GUI::AtkUldManager::DuplicateObjectList* Value;
+};
+
+struct StdLinkedList::Node::PointerComponentGUIAtkUldManagerDuplicateObjectList /* Size=0x18 */
+{
+    /* 0x00 */ Pointer::ComponentGUIAtkUldManagerDuplicateObjectList Value;
+    /* 0x08 */ StdLinkedList::Node::PointerComponentGUIAtkUldManagerDuplicateObjectList* Next;
+    /* 0x10 */ StdLinkedList::Node::PointerComponentGUIAtkUldManagerDuplicateObjectList* Previous;
+};
+
+struct StdLinkedList::PointerComponentGUIAtkUldManagerDuplicateObjectList /* Size=0x18 */
+{
+    /* 0x00 */ StdLinkedList::Node::PointerComponentGUIAtkUldManagerDuplicateObjectList* End;
+    /* 0x08 */ StdLinkedList::Node::PointerComponentGUIAtkUldManagerDuplicateObjectList* Start;
     /* 0x10 */ unsigned __int32 Count;
     /*      */ byte _gap_0x14[0x4];
 };
@@ -7007,7 +7303,7 @@ struct Component::GUI::AtkUldManager /* Size=0x90 */
     /*      */ byte _gap_0x44[0x4];
     /* 0x48 */ void* AtkResourceRendererManager;
     /* 0x50 */ Component::GUI::AtkResNode** NodeList;
-    /* 0x58 */ Component::GUI::AtkLinkedList::PointerComponentGUIAtkUldManagerDuplicateObjectList DuplicateObjects;
+    /* 0x58 */ StdLinkedList::PointerComponentGUIAtkUldManagerDuplicateObjectList DuplicateObjects;
     /*      */ byte _gap_0x70[0x8];
     /* 0x78 */ Component::GUI::AtkResNode* RootNode;
     /* 0x80 */ unsigned __int16 RootNodeWidth;
@@ -9852,6 +10148,30 @@ struct Client::UI::Agent::AgentLoot /* Size=0x90 */
     /*      */ byte _gap_0x80[0x10];
 };
 
+struct StdPair::SystemUInt32::SystemUInt32 /* Size=0x8 */
+{
+    /* 0x0 */ unsigned __int32 Item1;
+    /* 0x4 */ unsigned __int32 Item2;
+};
+
+struct StdMap::Node::SystemUInt32::SystemUInt32 /* Size=0x30 */
+{
+    /* 0x00 */ StdMap::Node::SystemUInt32::SystemUInt32* Left;
+    /* 0x08 */ StdMap::Node::SystemUInt32::SystemUInt32* Parent;
+    /* 0x10 */ StdMap::Node::SystemUInt32::SystemUInt32* Right;
+    /* 0x18 */ byte Color;
+    /*      */ byte _gap_0x19;
+    /*      */ byte _gap_0x1A[0x2];
+    /* 0x1C */ bool IsNil;
+    /*      */ byte _gap_0x1D;
+    /*      */ byte _gap_0x1E[0x2];
+    /* 0x20 */ byte _18;
+    /* 0x21 */ byte _19;
+    /*      */ byte _gap_0x22[0x2];
+    /* 0x24 */ StdPair::SystemUInt32::SystemUInt32 KeyValuePair;
+    /*      */ byte _gap_0x2C[0x4];
+};
+
 struct StdMap::SystemUInt32::SystemUInt32 /* Size=0x10 */
 {
     /* 0x00 */ StdMap::Node::SystemUInt32::SystemUInt32* Head;
@@ -9985,6 +10305,11 @@ struct StdVector::ClientUIAgentPouchInventoryItem /* Size=0x18 */
     /* 0x00 */ Client::UI::Agent::PouchInventoryItem* First;
     /* 0x08 */ Client::UI::Agent::PouchInventoryItem* Last;
     /* 0x10 */ Client::UI::Agent::PouchInventoryItem* End;
+};
+
+struct Pointer::ClientUIAgentPouchInventoryItem /* Size=0x8 */
+{
+    /* 0x0 */ Client::UI::Agent::PouchInventoryItem* Value;
 };
 
 struct StdVector::PointerClientUIAgentPouchInventoryItem /* Size=0x18 */
@@ -11713,6 +12038,13 @@ struct Client::UI::Misc::ItemFinderModuleRetainerResult /* Size=0x0 */
     /* 0x78 */ __int32 Page5CountCollectible;
 };
 
+struct StdVector::ClientUIMiscItemOrderModuleSorterRetainerEntry /* Size=0x18 */
+{
+    /* 0x00 */ Client::UI::Misc::ItemOrderModuleSorterRetainerEntry* First;
+    /* 0x08 */ Client::UI::Misc::ItemOrderModuleSorterRetainerEntry* Last;
+    /* 0x10 */ Client::UI::Misc::ItemOrderModuleSorterRetainerEntry* End;
+};
+
 struct Client::UI::Misc::ItemOrderModule /* Size=0xD8 */
 {
     /* 0x00 */ Client::UI::Misc::UserFileManager::UserFileEvent UserFileEvent;
@@ -12305,10 +12637,11 @@ struct Client::UI::UIModule::UIModuleVTable /* Size=0x0 */
     /*     */ byte _gap_0x220[0x38];
     /* 0x258 */ __int64 EnterGPose;
     /* 0x260 */ __int64 ExitGPose;
-    /*     */ byte _gap_0x268[0x8];
+    /* 0x268 */ __int64 IsInGPose;
     /* 0x270 */ __int64 EnterIdleCam;
     /* 0x278 */ __int64 ExitIdleCam;
-    /*     */ byte _gap_0x280[0x1E8];
+    /* 0x280 */ __int64 IsInIdleCam;
+    /*     */ byte _gap_0x288[0x1E0];
     /* 0x468 */ __int64 ToggleUi;
     /*     */ byte _gap_0x470[0x48];
     /* 0x4B8 */ __int64 ShowGoldSaucerReward;
@@ -12549,6 +12882,60 @@ struct Component::GUI::AtkArrayDataHolder /* Size=0x50 */
 struct Component::GUI::AtkEventManager /* Size=0x8 */
 {
     /* 0x0 */ Component::GUI::AtkEvent* Event;
+};
+
+struct Component::GUI::AtkResNode /* Size=0xA8 */
+{
+    union {
+    /* 0x00 */ Component::GUI::AtkEventTarget AtkEventTarget;
+    /* 0x00 */ Component::GUI::AtkResNode::AtkResNodeVTable* VTable;
+    } _union_0x0;
+    /* 0x08 */ unsigned __int32 NodeID;
+    /*      */ byte _gap_0xC[0x4];
+    /* 0x10 */ void* TimelineObject;
+    /* 0x18 */ Component::GUI::AtkEventManager AtkEventManager;
+    /* 0x20 */ Component::GUI::AtkResNode* ParentNode;
+    /* 0x28 */ Component::GUI::AtkResNode* PrevSiblingNode;
+    /* 0x30 */ Component::GUI::AtkResNode* NextSiblingNode;
+    /* 0x38 */ Component::GUI::AtkResNode* ChildNode;
+    /* 0x40 */ Component::GUI::NodeType Type;
+    /* 0x42 */ unsigned __int16 ChildCount;
+    /* 0x44 */ float X;
+    /* 0x48 */ float Y;
+    /* 0x4C */ float ScaleX;
+    /* 0x50 */ float ScaleY;
+    /* 0x54 */ float Rotation;
+    /* 0x58 */ Common::Math::Matrix2x2 Transform;
+    /* 0x68 */ float ScreenX;
+    /* 0x6C */ float ScreenY;
+    /* 0x70 */ Client::Graphics::ByteColor Color;
+    /* 0x74 */ float Depth;
+    /* 0x78 */ float Depth_2;
+    /* 0x7C */ unsigned __int16 AddRed;
+    /* 0x7E */ unsigned __int16 AddGreen;
+    /* 0x80 */ unsigned __int16 AddBlue;
+    /* 0x82 */ unsigned __int16 AddRed_2;
+    /* 0x84 */ unsigned __int16 AddGreen_2;
+    /* 0x86 */ unsigned __int16 AddBlue_2;
+    /* 0x88 */ byte MultiplyRed;
+    /* 0x89 */ byte MultiplyGreen;
+    /* 0x8A */ byte MultiplyBlue;
+    /* 0x8B */ byte MultiplyRed_2;
+    /* 0x8C */ byte MultiplyGreen_2;
+    /* 0x8D */ byte MultiplyBlue_2;
+    /* 0x8E */ byte Alpha_2;
+    /* 0x8F */ byte UnkByte_1;
+    /* 0x90 */ unsigned __int16 Width;
+    /* 0x92 */ unsigned __int16 Height;
+    /* 0x94 */ float OriginX;
+    /* 0x98 */ float OriginY;
+    /* 0x9C */ unsigned __int16 Priority;
+    /* 0x9E */ Component::GUI::NodeFlags NodeFlags;
+    union {
+    /* 0xA0 */ unsigned __int32 Flags_2;
+    /* 0xA0 */ unsigned __int32 DrawFlags;
+    } _union_0xA0;
+    /*      */ byte _gap_0xA4[0x4];
 };
 
 struct Component::GUI::AtkCollisionNode /* Size=0xB8 */
@@ -12927,6 +13314,40 @@ struct Component::GUI::AtkResNode::AtkResNodeVTable /* Size=0x0 */
 {
     /*     */ byte _gap_0x0[0x8];
     /* 0x8 */ __int64 Destroy;
+};
+
+struct Pointer::ComponentGUIAtkResNode /* Size=0x8 */
+{
+    /* 0x0 */ Component::GUI::AtkResNode* Value;
+};
+
+struct Pointer::ComponentGUIAtkTooltipManagerAtkTooltipInfo /* Size=0x8 */
+{
+    /* 0x0 */ Component::GUI::AtkTooltipManager::AtkTooltipInfo* Value;
+};
+
+struct StdPair::PointerComponentGUIAtkResNode::PointerComponentGUIAtkTooltipManagerAtkTooltipInfo /* Size=0x10 */
+{
+    /* 0x00 */ Pointer::ComponentGUIAtkResNode Item1;
+    /* 0x08 */ Pointer::ComponentGUIAtkTooltipManagerAtkTooltipInfo Item2;
+};
+
+struct StdMap::Node::PointerComponentGUIAtkResNode::PointerComponentGUIAtkTooltipManagerAtkTooltipInfo /* Size=0x38 */
+{
+    /* 0x00 */ StdMap::Node::PointerComponentGUIAtkResNode::PointerComponentGUIAtkTooltipManagerAtkTooltipInfo* Left;
+    /* 0x08 */ StdMap::Node::PointerComponentGUIAtkResNode::PointerComponentGUIAtkTooltipManagerAtkTooltipInfo* Parent;
+    /* 0x10 */ StdMap::Node::PointerComponentGUIAtkResNode::PointerComponentGUIAtkTooltipManagerAtkTooltipInfo* Right;
+    /* 0x18 */ byte Color;
+    /*      */ byte _gap_0x19;
+    /*      */ byte _gap_0x1A[0x2];
+    /* 0x1C */ bool IsNil;
+    /*      */ byte _gap_0x1D;
+    /*      */ byte _gap_0x1E[0x2];
+    /* 0x20 */ byte _18;
+    /* 0x21 */ byte _19;
+    /*      */ byte _gap_0x22[0x2];
+    /*      */ byte _gap_0x24[0x4];
+    /* 0x28 */ StdPair::PointerComponentGUIAtkResNode::PointerComponentGUIAtkTooltipManagerAtkTooltipInfo KeyValuePair;
 };
 
 struct StdMap::PointerComponentGUIAtkResNode::PointerComponentGUIAtkTooltipManagerAtkTooltipInfo /* Size=0x10 */
