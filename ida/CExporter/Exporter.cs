@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -56,7 +56,7 @@ public class ExporterIDA : ExporterBase
 
     protected override string GetEnumName(Type type)
     {
-        return $"enum {type.Name}: {type.GetEnumUnderlyingType().FixTypeName(FixFullName)}";
+        return $"enum {type.FixTypeName(FixFullName)}: {type.GetEnumUnderlyingType().FixTypeName(FixFullName)}";
     }
 }
 
@@ -130,7 +130,7 @@ public abstract class ExporterBase
             ProcessType(definitions[index], sb);
         }
 
-        return sb.ToString().Replace("__{0}__", string.Join(Environment.NewLine, _knownTypes.Select(t => $"struct {FixFullName(t)};")));
+        return sb.ToString().Replace("__{0}__", string.Join(Environment.NewLine, _knownTypes.Where(t => !t.IsEnum).Select(t => $"struct {FixFullName(t)};")));
     }
 
     private void ProcessType(Type type, StringBuilder header)
