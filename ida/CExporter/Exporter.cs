@@ -6,6 +6,9 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using FFXIVClientStructs;
+using FFXIVClientStructs.FFXIV.Client.Game.Event;
+using FFXIVClientStructs.STD;
+using Microsoft.VisualBasic.FileIO;
 
 namespace CExporter;
 
@@ -24,6 +27,8 @@ public static class ExporterStatics
     public static string FFXIVNamespacePrefix = string.Join(".", nameof(FFXIVClientStructs), nameof(FFXIVClientStructs.FFXIV), "");
     public static string StdNamespacePrefix = string.Join(".", nameof(FFXIVClientStructs), nameof(FFXIVClientStructs.STD), "");
     public static string InteropNamespacePrefix = string.Join(".", nameof(FFXIVClientStructs), nameof(FFXIVClientStructs.Interop), "");
+
+    public static string[] IgnoredTypeNames = { "MemberFunctionPointers", "StaticAddressPointers", "Addresses" };
 
     private static Type[] GetExportableTypes()
     {
@@ -71,7 +76,7 @@ public class ExporterGhidra : ExporterBase
 public abstract class ExporterBase
 {
     private readonly string _separator;
-    
+
     private readonly Dictionary<string, string> _nameOverride = new() { { "EventHandler", "EventHandlerStruct" } };
 
     private GapStrategy _gapStrategy;
@@ -96,7 +101,8 @@ public abstract class ExporterBase
         var definedTypes = ExporterStatics.DefinedTypes.OrderBy(t => t.FullName).ToArray();
 
         sb.AppendLine("// Forward References");
-        definedTypes.Where(t => t.IsStruct() && !t.IsFixedBuffer()).Select(t => $"struct {FixFullName(t)};").ToList().ForEach(t => sb.AppendLine(t));
+        sb.AppendLine("__{0}__");
+        //definedTypes.Where(t => t.IsStruct() && !t.IsFixedBuffer()).Select(t => $"struct {FixFullName(t)};").ToList().ForEach(t => sb.AppendLine(t));
 
         sb.AppendLine();
         sb.AppendLine("// Enum Definitions");
@@ -124,12 +130,12 @@ public abstract class ExporterBase
             ProcessType(definitions[index], sb);
         }
 
-        return sb.ToString();
+        return sb.ToString().Replace("__{0}__", string.Join(Environment.NewLine, _knownTypes.Select(t => $"struct {FixFullName(t)};")));
     }
 
     private void ProcessType(Type type, StringBuilder header)
     {
-        if (_knownTypes.Contains(type) || type.IsPrimitive)
+        if (_knownTypes.Contains(type) || type.IsPrimitive || type.IsInterface)
             return;
 
         if (type.IsFixedBuffer())
@@ -139,11 +145,15 @@ public abstract class ExporterBase
 
         if (type.IsStruct())
         {
-            ProcessStruct(type, header);
+            if (type.Namespace!.StartsWith(ExporterStatics.StdNamespacePrefix[..^1]))
+                ProcessStdStruct(type, header);
+            else
+                ProcessStruct(type, header);
         }
         else
         {
-            Debug.WriteLine($"Unhandled type: {type.FullName}");
+            if (!ExporterStatics.IgnoredTypeNames.Any(type.FullName!.EndsWith))
+                Debug.WriteLine($"Unhandled type: {type.FullName}");
         }
     }
 
@@ -197,6 +207,56 @@ public abstract class ExporterBase
         return fields;
     }
 
+    private void ProcessStdStruct(Type type, StringBuilder header)
+    {
+        if (_knownTypes.Contains(type))
+            return;
+
+        _knownTypes.Add(type);
+
+        var typeName = type.Name.IndexOf('`') > 0 ? type.Name[..type.Name.IndexOf('`')] : type.Name;
+
+        if (typeName == "StdString")
+        {
+            _knownTypes.Remove(type);
+            ProcessStruct(type, header);
+            return;
+        }
+
+        var sb = new StringBuilder();
+        if (type.ContainsGenericParameters)
+        {
+            header.AppendLine($"struct {FixFullName(type)}; /* Size=unknown due to generic type with parameters */");
+            return;
+        }
+
+        var structSize = Marshal.SizeOf(Activator.CreateInstance(type)!);
+        var offset = 0;
+        var pad = structSize.ToString("X").Length;
+        var padFill = new string(' ', pad + 2);
+
+        var fields = type.GetFields().Where(fieldInfo => !Attribute.IsDefined(fieldInfo, typeof(ObsoleteAttribute)))
+            .Where(fieldInfo => !Attribute.IsDefined(fieldInfo, typeof(CExportIgnoreAttribute)))
+            .Where(fieldInfo => !fieldInfo.IsLiteral) // not constants
+            .Where(fieldInfo => !fieldInfo.IsStatic) // not static
+            .OrderBy(fieldInfo => fieldInfo.GetFieldOffset());
+
+        sb.AppendLine($"struct {FixFullName(type)} /* Size=0x{structSize:X} */");
+        sb.AppendLine("{");
+
+        foreach (var fieldInfo in fields)
+        {
+            if (SetProperty(type, header, fieldInfo, false, fieldInfo.GetFieldOffset(), padFill, sb, pad, ref offset))
+                return;
+        }
+
+        FillGaps(ref offset, structSize, padFill, sb);
+
+        sb.AppendLine("};");
+
+        header.AppendLine(sb.ToString());
+    }
+
     private void ProcessStruct(Type type, StringBuilder header)
     {
         if (_knownTypes.Contains(type))
@@ -204,8 +264,6 @@ public abstract class ExporterBase
 
         if (type == typeof(void))
             return;
-
-        var name = type.FullName;
 
         _knownTypes.Add(type);
 
@@ -235,6 +293,32 @@ public abstract class ExporterBase
 
         var offset = 0;
         var fields = GetStructLayout(type);
+
+        if (fields.Count == 0 && type.Name == "Pointer`1")
+        {
+            var allFields = type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+            fields = new List<UnionLayout>
+            {
+                new()
+                {
+                    Layouts = new List<StructLayout>
+                    {
+                        new()
+                        {
+                            Objects = new List<StructObject>
+                            {
+                                new()
+                                {
+                                    Offset = 0,
+                                    Size = 8,
+                                    Info = allFields[0]
+                                }
+                            }
+                        }
+                    }
+                }
+            };
+        }
 
         foreach (var grouping in fields)
         {
@@ -307,12 +391,15 @@ public abstract class ExporterBase
         }
         else if (fieldType.IsPointer)
         {
-            //var elemType = fieldType.GetElementType()!;
-            //while (elemType.IsPointer)
-            //    elemType = elemType.GetElementType()!;
-            //ProcessType(elemType, header);
-
-            sb.AppendLine(string.Format($"    /* 0x{{0:X{pad}}} */ {fieldType.FixTypeName(FixFullName)} {fieldInfo.Name};", fieldOffset));
+            var elemType = fieldType.GetElementType()!;
+            if (elemType.Namespace!.StartsWith(ExporterStatics.InteropNamespacePrefix[..^1]) || elemType.Namespace!.StartsWith(ExporterStatics.StdNamespacePrefix[..^1]))
+            {
+                while (elemType.IsPointer)
+                    elemType = elemType.GetElementType()!;
+                ProcessType(elemType, header);
+            }
+            
+            sb.AppendLine(string.Format($"    /* 0x{{0:X{pad}}} */ {fieldType.FixTypeName(FixFullName)} {(fieldInfo.Name.EndsWith("k__BackingField") ? "Value" : fieldInfo.Name)};", fieldOffset));
 
             fieldSize = 8;
         }
@@ -422,9 +509,9 @@ public abstract class ExporterBase
         }
 
         var (oldName, newName) = _nameOverride.FirstOrDefault(t => fullName!.Contains(t.Key));
-        if (string.IsNullOrWhiteSpace(oldName)) 
+        if (string.IsNullOrWhiteSpace(oldName) || fullName.Replace("*", "").EndsWith("Struct"))
             return fullName.Replace(".", _separator).Replace("+", _separator);
-        Debug.WriteLine($"Found name override: {oldName} -> {newName} on: {fullName}");
+
         return fullName.Replace(".", _separator).Replace("+", _separator).Replace(oldName, newName);
     }
 
