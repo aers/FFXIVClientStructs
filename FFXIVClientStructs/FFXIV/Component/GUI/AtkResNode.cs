@@ -19,7 +19,7 @@ public enum NodeType : ushort
 // 'visible' will change visibility immediately, the rest rely on other stuff to happen so they dont do anything
 // top and bottom assumed based on a scrollbar, lots of left-aligned text has AnchorLeft set
 [Flags]
-public enum NodeFlags
+public enum NodeFlags : ushort
 {
     AnchorTop = 0x01,
     AnchorLeft = 0x02,
