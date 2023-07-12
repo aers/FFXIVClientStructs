@@ -6,9 +6,6 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using FFXIVClientStructs;
-using FFXIVClientStructs.FFXIV.Client.Game.Event;
-using FFXIVClientStructs.STD;
-using Microsoft.VisualBasic.FileIO;
 
 namespace CExporter;
 
