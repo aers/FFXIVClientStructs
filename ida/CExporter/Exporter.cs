@@ -3,12 +3,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Threading.Tasks;
 using FFXIVClientStructs;
-using FFXIVClientStructs.FFXIV.Client.Game.Event;
 
 namespace CExporter;
 
@@ -74,10 +71,14 @@ public class ExporterGhidra : ExporterBase
 public abstract class ExporterBase
 {
     private readonly string _separator;
+    
+    private readonly Dictionary<string, string> _nameOverride = new() { { "EventHandler", "EventHandlerStruct" } };
 
     private GapStrategy _gapStrategy;
 
     private readonly HashSet<Type> _knownTypes = new();
+
+    public bool Errored { get; private set; }
 
     protected ExporterBase(string separator)
     {
@@ -87,7 +88,7 @@ public abstract class ExporterBase
     public string Export(GapStrategy gapStrategy)
     {
         _knownTypes.Clear();
-        
+
         _gapStrategy = gapStrategy;
 
         var sb = new StringBuilder();
@@ -103,8 +104,8 @@ public abstract class ExporterBase
         Console.Clear();
         for (var index = 0; index < enums.Count; index++)
         {
-            var processPercent = index / (float) enums.Count;
-            Console.SetCursorPosition(0,0);
+            var processPercent = index / (float)enums.Count;
+            Console.SetCursorPosition(0, 0);
             Console.WriteLine($"GapStrategy: {_gapStrategy}, Type: {GetType().Name}");
             Console.WriteLine($"Processing Structs: {processPercent:P}");
             ProcessEnum(enums[index], sb);
@@ -116,8 +117,8 @@ public abstract class ExporterBase
         Console.Clear();
         for (var index = 0; index < definitions.Count; index++)
         {
-            var processPercent = index / (float) definitions.Count;
-            Console.SetCursorPosition(0,0);
+            var processPercent = index / (float)definitions.Count;
+            Console.SetCursorPosition(0, 0);
             Console.WriteLine($"GapStrategy: {_gapStrategy}, Type: {GetType().Name}");
             Console.WriteLine($"Processing Structs: {processPercent:P}");
             ProcessType(definitions[index], sb);
@@ -290,6 +291,7 @@ public abstract class ExporterBase
             var k = sb.ToString();
             Debug.WriteLine($"Current offset exceeded the next field's offset (0x{offset:X} > 0x{fieldOffset:X}): {FixFullName(type)}.{fieldInfo.Name}");
             Console.WriteLine($"Current offset exceeded the next field's offset (0x{offset:X} > 0x{fieldOffset:X}): {FixFullName(type)}.{fieldInfo.Name}");
+            Errored = true;
             return true;
         }
 
@@ -305,10 +307,10 @@ public abstract class ExporterBase
         }
         else if (fieldType.IsPointer)
         {
-            var elemType = fieldType.GetElementType()!;
-            while (elemType.IsPointer)
-                elemType = elemType.GetElementType()!;
-            ProcessType(elemType, header);
+            //var elemType = fieldType.GetElementType()!;
+            //while (elemType.IsPointer)
+            //    elemType = elemType.GetElementType()!;
+            //ProcessType(elemType, header);
 
             sb.AppendLine(string.Format($"    /* 0x{{0:X{pad}}} */ {fieldType.FixTypeName(FixFullName)} {fieldInfo.Name};", fieldOffset));
 
@@ -419,7 +421,11 @@ public abstract class ExporterBase
             }
         }
 
-        return fullName.Replace(".", _separator).Replace("+", _separator);
+        var (oldName, newName) = _nameOverride.FirstOrDefault(t => fullName!.Contains(t.Key));
+        if (string.IsNullOrWhiteSpace(oldName)) 
+            return fullName.Replace(".", _separator).Replace("+", _separator);
+        Debug.WriteLine($"Found name override: {oldName} -> {newName} on: {fullName}");
+        return fullName.Replace(".", _separator).Replace("+", _separator).Replace(oldName, newName);
     }
 
     private void FillGaps(ref int offset, int maxOffset, string padFill, StringBuilder sb)
