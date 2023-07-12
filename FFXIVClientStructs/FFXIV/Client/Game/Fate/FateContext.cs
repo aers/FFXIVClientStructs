@@ -17,6 +17,7 @@ public struct FateContext
     [FieldOffset(0x3AC)] public byte State;
     [FieldOffset(0x3AF)] public byte HandInCount;
     [FieldOffset(0x3B8)] public byte Progress;
+    [FieldOffset(0x3C4)] public bool IsExpBonus;
     [FieldOffset(0x3D8)] public uint IconId;
     [FieldOffset(0x3F9)] public byte Level;
     [FieldOffset(0x3FA)] public byte MaxLevel;
