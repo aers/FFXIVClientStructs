@@ -23,6 +23,6 @@ public struct FateContext
     [FieldOffset(0x450)] public Vector3 Location;
     [FieldOffset(0x464)] public float Radius;
 
-    [FieldOffset(0x720)] public uint MapIconId;
-    [FieldOffset(0x74E)] public ushort TerritoryId;
+    [FieldOffset(0x760)] public uint MapIconId;
+    [FieldOffset(0x78E)] public ushort TerritoryId;
 }
