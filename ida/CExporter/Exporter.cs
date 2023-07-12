@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -157,6 +157,22 @@ public abstract class ExporterBase
         }
     }
 
+    private bool IsNotHavok(FieldInfo fieldInfo)
+    {
+        var type = fieldInfo.FieldType;
+        if (type.IsPointer)
+            type = type.GetElementType()!;
+        return !(type.GenericTypeArguments.Any(IsHavok) || IsHavok(type));
+    }
+
+    private bool IsHavok(Type type)
+    {
+        //check if fieldInfo is either a Havok type or a recursive pointer to a Havok type or generic type
+        if(type.IsPointer)
+            type = type.GetElementType()!;
+        return type.GenericTypeArguments.Any(IsHavok) || type.Namespace!.StartsWith("FFXIVClientStructs.Havok");
+    }
+
     private List<UnionLayout> GetStructLayout(Type type)
     {
         var fields = type.GetFields()
@@ -164,6 +180,7 @@ public abstract class ExporterBase
             .Where(fieldInfo => !Attribute.IsDefined(fieldInfo, typeof(CExportIgnoreAttribute)))
             .Where(fieldInfo => !fieldInfo.IsLiteral) // not constants
             .Where(fieldInfo => !fieldInfo.IsStatic) // not static
+            .Where(IsNotHavok) // Don't export Havok types
             .OrderBy(fieldInfo => fieldInfo.GetFieldOffset())
             .Select(fieldInfo =>
                 new StructObject
@@ -398,7 +415,7 @@ public abstract class ExporterBase
                     elemType = elemType.GetElementType()!;
                 ProcessType(elemType, header);
             }
-            
+
             sb.AppendLine(string.Format($"    /* 0x{{0:X{pad}}} */ {fieldType.FixTypeName(FixFullName)} {(fieldInfo.Name.EndsWith("k__BackingField") ? "Value" : fieldInfo.Name)};", fieldOffset));
 
             fieldSize = 8;
