@@ -41,7 +41,7 @@ public unsafe struct ItemOrderModuleSorter
 {
     [FieldOffset(0x00)] public InventoryType InventoryType;
 
-    [FieldOffset(0x08)] public StdVector<ItemOrderModuleSorterItemEntry> Items;
+    [FieldOffset(0x08)] public StdVector<Pointer<ItemOrderModuleSorterItemEntry>> Items;
 
     [FieldOffset(0x28)] public int ItemsPerPage;
 
