@@ -51,7 +51,7 @@ public class VersionGenerator : ISourceGenerator {
         builder.AppendLine("namespace FFXIVClientStructs.Interop;");
         builder.AppendLine("public partial class Resolver {");
         using (builder.Indent()) {
-            builder.AppendLine($"public const uint Version = {version};");
+            builder.AppendLine($"public static readonly uint Version = {version};");
         }
 
         builder.AppendLine("}");
