@@ -2620,6 +2620,12 @@ classes:
     funcs:
       0x1404B6AD0: ctor_FromState
       0x1404B6B20: ctor
+  Client::Game::Event::CustomTalkEventHandler:
+    vtbls:
+      - ea: 0x1419D2A98
+        base: Client::Game::Event::LuaEventHandler
+    funcs:
+      0x140827410: ctor
   Client::Game::Event::LuaActor:
     vtbls:
       - ea: 0x1419D9A28
