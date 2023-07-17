@@ -3774,6 +3774,7 @@ classes:
       0x1412BF0F0: ctor
       0x1412C0880: LoadWeapon
       0x1412C15E0: HideWeapons
+      0x1412C1DA0: LoadEquipment
       0x1412C1F00: HideHeadgear
       0x1412C2050: SetVisor
   Client::Game::Character::CompanionContainer:
