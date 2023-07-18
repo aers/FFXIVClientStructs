@@ -40,7 +40,10 @@ public unsafe partial struct DrawDataContainer
     [FieldOffset(0x18A)] public uint Unk18A;
     [FieldOffset(0x18E)] public byte Flags1;
     [FieldOffset(0x18F)] public byte Flags2;
-    
+
+    [MemberFunction("E8 ?? ?? ?? ?? 41 B5 ?? FF C6")]
+    public partial void LoadEquipment(EquipmentSlot slot, EquipmentModelId modelId, bool force);
+
 
     [MemberFunction("E8 ?? ?? ?? ?? 33 DB BE")]
     public partial void LoadWeapon(WeaponSlot slot, WeaponModelId weaponData, byte redrawOnEquality, byte unk2, byte skipGameObject, byte unk4);
@@ -66,6 +69,20 @@ public unsafe partial struct DrawDataContainer
     /// <param name="state">When true, visor will be toggled on, when false it will be toggled off.</param>
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 97 ?? ?? ?? ?? 48 8B CF C0 EA")]
     public partial void SetVisor(bool state);
+
+    public enum EquipmentSlot : uint
+    {
+        Head = 0,
+        Body = 1,
+        Hands = 2,
+        Legs = 3,
+        Feet = 4,
+        Ears = 5,
+        Neck = 6,
+        Wrists  = 7,
+        RFinger = 8,
+        LFinger = 9,
+    }
 
     public enum WeaponSlot : uint
     {
