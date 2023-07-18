@@ -218,7 +218,7 @@ public unsafe partial struct AtkResNode : ICreatable
     [MemberFunction("E8 ?? ?? ?? ?? 0F BF 07")]
     public partial void SetX(float x);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8D 4D 30")]
+    [MemberFunction("E8 ?? ?? ?? ?? 66 03 BE")]
     public partial void SetY(float y);
 
     [MemberFunction("E8 ?? ?? ?? ?? 66 03 C0")]
