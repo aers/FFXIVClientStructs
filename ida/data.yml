@@ -1515,7 +1515,7 @@ classes:
     funcs:
       0x140100BA0: ctor
       0x140100C40: dtor2
-  Client::UI::Info::InfoProxy11:
+  Client::UI::Info::InfoProxyItemSearch:
     vtbls:
       - ea: 0x141950338
         base: Client::UI::Info::InfoProxyPageInterface
@@ -1561,7 +1561,7 @@ classes:
         base: Client::UI::Info::InfoProxyCommonlist
     funcs:
       0x14010C040: ctor
-  Client::UI::Info::InfoProxyItemSearch:
+  Client::UI::Info::InfoProxyCatalogSearch:
     vtbls:
       - ea: 0x141950A10
         base: Client::UI::Info::InfoProxyPageInterface
