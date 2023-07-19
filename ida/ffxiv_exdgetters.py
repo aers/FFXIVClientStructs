@@ -5,7 +5,14 @@
 
 from urllib.request import urlopen, Request
 from urllib.error import HTTPError, URLError
+from io import BufferedReader
+from enum import IntEnum
+from zlib import decompress
 from json import load, loads
+from re import sub
+from os import listdir, walk, getenv
+from os.path import isdir, join
+
 import idaapi
 import idc
 import ida_bytes
@@ -18,15 +25,8 @@ import ida_ida
 import ida_typeinf
 import ida_hexrays
 
-import os
-from io import BufferedReader
-import enum
-import zlib
-import json
-import re
 
-
-class SqPackCatergories(enum.IntEnum):
+class SqPackCatergories(IntEnum):
     COMMON = 0x0
     BGCOMMON = 0x1
     BG = 0x2
@@ -44,24 +44,24 @@ class SqPackCatergories(enum.IntEnum):
     DEBUG = 0x13
 
 
-class SqPackPlatformId(enum.IntEnum):
+class SqPackPlatformId(IntEnum):
     Win32 = 0x0
     PS3 = 0x1
     PS4 = 0x2
 
 
-class SqPackFileType(enum.IntEnum):
+class SqPackFileType(IntEnum):
     Empty = 1,
     Standard = 2,
     Model = 3,
     Texture = 4,
 
 
-class DatBlockType(enum.IntEnum):
+class DatBlockType(IntEnum):
     Compressed = 4713,
     Uncompressed = 32000,
 
-class ExcelColumnDataType(enum.IntEnum):
+class ExcelColumnDataType(IntEnum):
     String = 0x0,
     Bool = 0x1,
     Int8 = 0x2,
@@ -271,7 +271,7 @@ class SqPack:
             if(block_header.dat_block_type == 32000):
                 data.append(self.file.read(block_header.block_data_size))
             else:
-                data.append(zlib.decompress(self.file.read(block_header.block_data_size), wbits=-15))
+                data.append(decompress(self.file.read(block_header.block_data_size), wbits=-15))
 
         return data
 
@@ -292,9 +292,9 @@ class Repository:
     def parse_version(self):
         versionPath = ""
         if (self.name == 'ffxiv'):
-            versionPath = os.path.join(self.root, 'ffxivgame.ver')
+            versionPath = join(self.root, 'ffxivgame.ver')
         else:
-            versionPath = os.path.join(self.root, 'sqpack', self.name, self.name + '.ver')
+            versionPath = join(self.root, 'sqpack', self.name, self.name + '.ver')
         with open(versionPath, 'r') as f:
             self.version = f.read().strip()
 
@@ -516,34 +516,34 @@ crc = Crc32()
 
 
 def get_game_data_folders(root: str):
-    for folder in os.listdir(os.path.join(root, 'sqpack')):
-        if (os.path.isdir(os.path.join(root, 'sqpack', folder))):
+    for folder in listdir(join(root, 'sqpack')):
+        if (isdir(join(root, 'sqpack', folder))):
             yield folder
 
 
 def get_files(path):
     files: list[bytes] = []
-    for (dir_path, dir_names, file_names) in os.walk(path):
-        files.extend(os.path.join(dir_path, file) for file in file_names)
+    for (dir_path, dir_names, file_names) in walk(path):
+        files.extend(join(dir_path, file) for file in file_names)
 
     return files
 
 
 def get_sqpack_files(root: str, path: str):
-    for file in get_files(os.path.join(root, 'sqpack', path)):
+    for file in get_files(join(root, 'sqpack', path)):
         ext = file.split('.')[-1]
         if (ext.startswith('dat')):
             yield file
 
 
 def get_sqpack_index(root: str, path: str):
-    for file in get_files(os.path.join(root, 'sqpack', path)):
+    for file in get_files(join(root, 'sqpack', path)):
         if (file.endswith('.index')):
             yield file
 
 
 def get_sqpack_index2(root: str, path: str):
-    for file in get_files(os.path.join(root, 'sqpack', path)):
+    for file in get_files(join(root, 'sqpack', path)):
         if (file.endswith('.index2')):
             yield file
 
@@ -560,7 +560,7 @@ def get_definition_from_type(type: str, data: dict[str, str | int]):
         raise Exception('Unknown type: ' + type)
     
 def purge_name(name: str):
-    return re.sub(r'[^a-zA-Z0-9_]', '', name)
+    return sub(r'[^a-zA-Z0-9_]', '', name)
 
 class GroupDefinition:
     def __init__(self, data: dict[str, str | int]):
@@ -682,13 +682,13 @@ class JsonExcelColumnDefinition:
         self.json = loads(self.req)
         self.definitions = Definitions(self.json['definitions'])
 
-f = open(os.path.join(os.getenv('APPDATA'), 'XIVLauncher', 'launcherConfigV3.json'), 'r')
+f = open(join(getenv('APPDATA'), 'XIVLauncher', 'launcherConfigV3.json'), 'r')
 
 config = load(f)
 
 f.close()
 
-game_data = GameData(os.path.join(config['GamePath'], 'game'))
+game_data = GameData(join(config['GamePath'], 'game'))
 
 # nb: "pattern": "func suffix" OR None
 exd_func_patterns = {
