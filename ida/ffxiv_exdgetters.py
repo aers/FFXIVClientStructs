@@ -3,6 +3,9 @@
 # Automagically labels most exd getter functions along with a hint indicating which sheet/sheet id its fetching from
 #
 
+from urllib.request import urlopen, Request
+from urllib.error import HTTPError, URLError
+from json import load, loads
 import idaapi
 import idc
 import ida_bytes
@@ -20,7 +23,6 @@ from io import BufferedReader
 import enum
 import zlib
 import json
-import requests
 import re
 
 
@@ -86,6 +88,19 @@ class ExcelColumnDataType(enum.IntEnum):
     PackedBool6 = 0x1F,
     PackedBool7 = 0x20
 
+def get_url(url: str, supress: bool = False) -> bytes | None:
+    req = Request(url)
+    try:
+        resp = urlopen(req)
+        return resp.read()
+    except HTTPError as e:
+        if not supress:
+            print('HTTP Error code: ', e.code, ' for url: ', url)
+        return None
+    except URLError as e:
+        if not supress:
+            print('HTTP Reason: ', e.reason, ' for url: ', url)
+        return None
 
 def column_data_type_to_ida_type(column_data_type: ExcelColumnDataType) -> str:
     if(column_data_type == ExcelColumnDataType.Bool):
@@ -658,18 +673,18 @@ class JsonExcelColumnDefinition:
     def parse(self):
         if(self.mute == False):
             print("parsing " + self.name)
-        self.req = requests.get(f'''https://raw.githubusercontent.com/xivapi/SaintCoinach/master/SaintCoinach/Definitions/{self.name}.json''')
-        if(self.req.ok != True):
-            if(self.supress == False):
-                print("failed to get " + self.name)
+        self.req = get_url(f'''https://raw.githubusercontent.com/xivapi/SaintCoinach/master/SaintCoinach/Definitions/{self.name}.json''', self.supress)
+        if(self.req == None):
             self.definitions = Definitions([])
             return
-        self.json = json.loads(self.req.text)
+        if(self.req[0:3] == b'\xef\xbb\xbf'):
+            self.req = self.req[3:]
+        self.json = loads(self.req)
         self.definitions = Definitions(self.json['definitions'])
 
 f = open(os.path.join(os.getenv('APPDATA'), 'XIVLauncher', 'launcherConfigV3.json'), 'r')
 
-config = json.load(f)
+config = load(f)
 
 f.close()
 
@@ -869,7 +884,7 @@ def do_pattern(pattern, suffix, struct_parsed):
 
 
 def run():
-    sc_ver = requests.get('https://raw.githubusercontent.com/xivapi/SaintCoinach/master/SaintCoinach/Definitions/game.ver').text
+    sc_ver = get_url('https://raw.githubusercontent.com/xivapi/SaintCoinach/master/SaintCoinach/Definitions/game.ver').decode('utf-8')
     struct_parsed = True
 
     if sc_ver != game_data.repositories[0].version:
