@@ -1416,10 +1416,17 @@ classes:
       - ea: 0x14194E6B8
     vfuncs:
       0: dtor
+      1: AddData
+      2: RemoveData
+      3: ClearData
+      5: RequestData
+      6: EndRequest
   Client::UI::Info::InfoProxyPageInterface:
     vtbls:
       - ea: 0x14194E718
         base: Client::UI::Info::InfoProxyInterface
+    vfuncs:
+      12: AddPage
   Client::UI::Info::InfoModule:
     vtbls:
       - ea: 0x14194E7C8
@@ -1522,6 +1529,9 @@ classes:
     funcs:
       0x140102120: ctor
       0x1401022C0: dtor2
+      0x1401028B0: ProcessRequestResult
+      0x140102B80: ProcessItemHistory
+      0x140102BD0: ProcessItemHistory_Internal
   Client::UI::Info::InfoProxyPartyInvite:
     vtbls:
       - ea: 0x141950598
