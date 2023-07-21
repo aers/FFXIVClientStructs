@@ -180,7 +180,7 @@ internal sealed class StaticAddressGenerator : IIncrementalGenerator
             builder.AppendLine("}");
             builder.AppendLine();
             
-            builder.AppendLine("public unsafe static class StaticAddressPointers");
+            builder.AppendLine("public unsafe static partial class StaticAddressPointers");
             builder.AppendLine("{");
             builder.Indent();
             StaticAddressInfos.Iter(sai => sai.RenderPointer(builder, StructInfo));
