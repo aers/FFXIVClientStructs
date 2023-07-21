@@ -26,4 +26,13 @@ public unsafe partial struct RaptureTextModule
     /// <returns>string containing one of 23h, 59m, 59s</returns>
     [MemberFunction("E8 ?? ?? ?? ?? 4C 8B C0 48 8B 4D 88")]
     public partial byte* FormatTimeSpan(uint seconds, bool alternativeMinutesGlyph = false);
+
+    /// <summary>
+    /// Returns the name of a GatheringPoint.
+    /// </summary>
+    /// <param name="gatheringTypeId">RowId of GatheringType sheet (Use ExportedGatheringPoint.GatheringType.Row)</param>
+    /// <param name="gatheringPointType">The GatheringPointType (Use ExportedGatheringPoint.GatheringPointType)</param>
+    /// <returns>A string with the name</returns>
+    [MemberFunction("E8 ?? ?? ?? ?? 4C 8B 05 ?? ?? ?? ?? 48 8D 8C 24 ?? ?? ?? ?? 48 8B D0 E8 ?? ?? ?? ?? 8B 4E 08")]
+    public partial byte* GetGatheringPointName(byte gatheringTypeId, byte gatheringPointType);
 }
