@@ -28,17 +28,7 @@ public unsafe partial struct Map
     [FieldOffset(0x3EA8)] public SimpleMapMarkerContainer SimpleCustomTalkMarkerData;
     [FieldOffset(0x3F48)] public MapMarkerContainer GemstoneTraderMarkerData;
     [FieldOffset(0x3F50)] public SimpleMapMarkerContainer SimpleGemstoneTraderMarkerData;
-
-    /// <summary>
-    /// Returns a span that only includes the number of quests that are actually accepted.
-    /// </summary>
-    public Span<MarkerInfo> SizedQuestData => new(Unsafe.AsPointer(ref QuestData[0]), QuestManager.Instance()->NumAcceptedQuests);
     
-    /// <summary>
-    /// Returns a span that only includes the number of levequests that are actually accepted.
-    /// </summary>
-    public Span<MarkerInfo> SizedLevequestData => new(Unsafe.AsPointer(ref LevequestData[0]), QuestManager.Instance()->NumAcceptedLeveQuests);
-
     [Obsolete("Use QuestDataSpan instead", false)]
     [StructLayout(LayoutKind.Sequential, Size = 0x10E0)]
     public struct QuestMarkerArray
