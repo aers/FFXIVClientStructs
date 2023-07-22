@@ -2923,6 +2923,9 @@ classes:
       0x140583DF0: GetAsComponentJournalCanvas
       0x140586560: GetAsComponentHoldButton
       0x140586C50: GetAsComponent25 # enum missing name 
+      0x14058C4B0: GetAsComponentDragDrop2
+      0x14058C720: GetAsComponentIcon2
+      0x14058CAA0: GetAsComponentListItemRenderer2
       0x14051AF80: RegisterEvent
       0x14051AFC0: UnregisterEvent
       0x14051B000: DispatchEvent
