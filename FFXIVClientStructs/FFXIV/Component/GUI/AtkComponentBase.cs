@@ -26,7 +26,8 @@ public enum ComponentType : byte
     Multipurpose = 21,
     Map = 22,
     Preview = 23,
-    HoldButton = 24
+    HoldButton = 24,
+    Portrait = 25,
 }
 
 // Component::GUI::AtkComponentBase
