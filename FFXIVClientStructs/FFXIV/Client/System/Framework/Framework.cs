@@ -5,6 +5,7 @@ using FFXIVClientStructs.FFXIV.Common.Component.BGCollision;
 using FFXIVClientStructs.FFXIV.Common.Lua;
 using FFXIVClientStructs.FFXIV.Component.Excel;
 using FFXIVClientStructs.FFXIV.Component.Exd;
+using FFXIVClientStructs.FFXIV.Client.Network;
 
 namespace FFXIVClientStructs.FFXIV.Client.System.Framework;
 // Client::System::Framework::Framework
@@ -18,6 +19,7 @@ public unsafe partial struct Framework {
 
     [FieldOffset(0x570)] public SavedAppearanceManager* SavedAppearanceData;
 
+    [FieldOffset(0x1670)] public NetworkModuleProxy* NetworkModuleProxy;
     [FieldOffset(0x1678)] public bool IsNetworkModuleInitialized;
     [FieldOffset(0x1679)] public bool EnableNetworking;
     [FieldOffset(0x1680)] public long ServerTime;
@@ -50,12 +52,18 @@ public unsafe partial struct Framework {
     [MemberFunction("E8 ?? ?? ?? ?? 4C 8B 44 24 ?? 48 8B C8 48 8B D3")]
     public partial UIClipboard* GetUIClipboard();
 
+    [MemberFunction("80 B9 ?? ?? ?? ?? 00 74 ?? 48 8B 81 ?? ?? ?? ?? C3")]
+    public partial NetworkModuleProxy* GetNetworkModuleProxy();
+
     [MemberFunction("E8 ?? ?? ?? ?? 89 47 2C")]
     public static partial long GetServerTime();
 
-    public string UserPath {
-        get {
-            fixed (char* p = userPath) {
+    public string UserPath
+    {
+        get
+        {
+            fixed (char* p = userPath)
+            {
                 return new string(p);
             }
         }

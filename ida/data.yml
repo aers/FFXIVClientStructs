@@ -6,6 +6,8 @@ globals:
   0x141FE5380: g_ClientInstanceLimit
   0x142171820: g_InputManager
   0x142171848: g_InputManager_MouseButtonHoldState
+  #fail  0x142106BE0: g_StackCookie
+  #fail  0x1421244B0: g_WinVersion
   0x1421AC368: g_CurrentCharaSelectCharacter # Client::Game::Character::Character*
   0x1421AC540: g_CharaSelectCharacterList # see Client::UI::Agent::AgentLobby::CharaSelectCharacterList
   0x1421BE480: g_RenderSkeletonLinkedListStart
@@ -73,6 +75,7 @@ functions:
   0x1400622D0: MemoryManager_GetSoundSpace_2
   0x140060AB0: MemoryManager_SpaceAlloc
   0x1400654E0: IsMacClient
+  #fail  0x140094DB0: GetWinVersion
   0x1400A6BD0: GetCurrentUnixTimestamp # in seconds
   0x1400A6D00: Client::UI::PlaySoundEffect # this is a static function in the UI namespace, arg1 is the SE
   0x1400A8990: Client::UI::GetUIColor # (idx, &color, &edgeColor)
@@ -236,11 +239,13 @@ functions:
   0x141545CD0: luaopen_math
   0x141546D60: luaopen_debug
   0x141547850: luaopen_package
+  #fail   0x141585220: std::vector.dtor
   0x1415FF170: crc
   0x141659E24: ThrowException
   0x1416806E4: FreeMemory
   0x1400557E0: FreeMemory_2 # nullsub, gets called together with some AllocatorManager vfunc
   0x141688640: _purecall # Ghidra does not have a notation for pure virtual calls
+  #fail   0x14161BA70: MemCpy
   0x141688D10: MemSet
   0x1400609E0: MemAlloc
   0x140209A10: MatrixMultiply
@@ -1376,6 +1381,7 @@ classes:
       0x140093B20: GetNetworkModuleProxy
       0x140093B40: GetUIModule
       0x140093B60: GetUIClipboard
+      #fail  0x140094220: InitNetworking
       0x140094A20: TaskBegin
       0x140094B60: TaskDraw2DBegin
       0x140094BA0: TaskUpdateInputDevice
@@ -2430,6 +2436,7 @@ classes:
       - ea: 0x141B40F60
         base: Client::Network::Protocol::Chat::PacketReceiverCallbackInterface
     funcs:
+      #fail 0x141295860: ReceiveEvent
       0x14149A240: HandleSocialPacket
       0x14149D8B0: HandleMarketBoardOfferingsPacket
       0x14149D970: HandleMarketBoardPurchasePacket
