@@ -2899,14 +2899,30 @@ classes:
       0x14051A7D0: GetComponent
       0x140540EA0: GetComponent_2
       0x140543580: GetAsComponentButton
+      0x1405451D0: GetAsComponentIcon
+      0x140546BD0: GetAsComponentListItemRenderer
       0x140552A30: GetAsComponentList
+      0x140556D20: GetAsComponentTreeList
       0x14055EB40: GetAsComponentCheckBox
+      0x14055F910: GetAsComponentGaugeBar
+      0x1405618A0: GetAsComponentSlider
+      0x140565F20: GetAsComponentTextInput
+      0x140569CF0: GetAsComponentNumericInput
       0x14056D510: GetAsComponentDropDownList
       0x14056DCC0: GetAsComponentRadioButton
+      0x14056E440: GetAsComponentTab
+      0x14056E9E0: GetAsComponentGuildLeveCard
+      0x14056EEE0: GetAsComponentTextNineGrid
+      0x1405754A0: GetAsComponentMap
+      0x140576BF0: GetAsComponentPreview
       0x1405783C0: GetAsComponentScrollBar
-      0x14056EEE0: GetAsTextNineGridComponent
-      0x140583DF0: GetAsJournalCanvas
-      0x140586560: GetAsHoldButton
+      0x140579BC0: GetAsComponentIconText
+      0x14057B6B0: GetAsComponentDragDrop
+      0x14057C530: GetAsComponentMultipurpose
+      0x14057D650: GetAsComponentWindow
+      0x140583DF0: GetAsComponentJournalCanvas
+      0x140586560: GetAsComponentHoldButton
+      0x140586C50: GetAsComponent25 # enum missing name 
       0x14051AF80: RegisterEvent
       0x14051AFC0: UnregisterEvent
       0x14051B000: DispatchEvent
