@@ -111,4 +111,14 @@ public unsafe partial struct AtkTextNode : ICreatable
         SetText((byte*) charPtr.ToPointer());
         Marshal.FreeHGlobal(charPtr);
     }
+    
+    public AlignmentType AlignmentType {
+        get => (AlignmentType)(AlignmentFontType & 0x0F);
+        set => SetAlignment(value);
+    }
+
+    public FontType FontType {
+        get => (FontType)((AlignmentFontType & 0xF0) >> 4);
+        set => SetFont(value);
+    }
 }
