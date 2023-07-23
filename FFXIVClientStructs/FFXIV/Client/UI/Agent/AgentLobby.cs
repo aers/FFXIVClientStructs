@@ -14,6 +14,7 @@ public unsafe struct AgentLobby
     }
 
     [FieldOffset(0x0)] public AgentInterface AgentInterface;
+    [FieldOffset(0x10E0)] public sbyte ServiceAccountIndex;
     [FieldOffset(0x10E8)] public ulong SelectedCharacterId;
     [FieldOffset(0x10F0)] public byte DataCenter;
     [FieldOffset(0x10F4)] public ushort WorldId;
