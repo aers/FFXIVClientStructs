@@ -37,7 +37,7 @@ public struct BalloonSlot
 
 [Agent(AgentId.ScreenLog)]
 [StructLayout(LayoutKind.Explicit, Size = 0x3F0)]
-public unsafe struct AgentScreenLog
+public unsafe partial struct AgentScreenLog
 {
     [FieldOffset(0x0)] public AgentInterface AgentInterface;
 
@@ -49,5 +49,6 @@ public unsafe struct AgentScreenLog
     [FieldOffset(0x37C)]
     public int BalloonCounter; // count of all balloons since game launch, used as unique balloon ID
 
+    [FixedSizeArray<BalloonSlot>(10)]
     [FieldOffset(0x390)] public fixed byte BalloonSlots[10 * 0x8]; // type BalloonSlot array
 }
