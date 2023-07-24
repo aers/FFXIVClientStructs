@@ -12,7 +12,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 public unsafe partial struct Human
 {
     [FieldOffset(0x0)] public CharacterBase CharacterBase;
-    [FieldOffset(0x8F0)] public fixed byte CustomizeData[0x1A];
+    [FieldOffset(0x8F0), Obsolete("Use Customize.Data")] public fixed byte CustomizeData[0x1A];
     [FieldOffset(0x8F0)] public CustomizeData Customize;
     [FieldOffset(0x8F0), Obsolete("Use Customize.Race")] public byte Race;
     [FieldOffset(0x8F1), Obsolete("Use Customize.Sex")] public byte Sex;
