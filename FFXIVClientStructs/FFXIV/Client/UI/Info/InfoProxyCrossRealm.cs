@@ -17,8 +17,10 @@ public unsafe partial struct InfoProxyCrossRealm
     [FieldOffset(0x392)] public byte IsPartyLeader;
     [FieldOffset(0x393)] public byte IsInCrossRealmParty;
 
+    [FixedSizeArray<CrossRealmGroup>(6)]
     [FieldOffset(0x3A0)] public fixed byte CrossRealmGroupArray[6 * 0x2C8];
 
+    [Obsolete("Use CrossRealmGroupArraySpan")]
     public ReadOnlySpan<CrossRealmGroup> CrossRealmGroupSpan
     {
         get
