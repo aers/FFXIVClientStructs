@@ -18,7 +18,8 @@ public unsafe partial struct RaptureLogModule
     [FieldOffset(0xE8)] public ExcelModuleInterface* ExcelModuleInterface;
     [FieldOffset(0xF0)] public RaptureTextModule* RaptureTextModule;
 
-    [FieldOffset(0x528)] public fixed byte ChatTabs[5 * 0x928]; // array of 5 RaptureLogModuleTab
+    [FixedSizeArray<RaptureLogModuleTab>(5)]
+    [FieldOffset(0x528)] public fixed byte ChatTabs[5 * 0x928];
 
     [FieldOffset(0x3470)] public LogMessageSource* MsgSourceArray;
     [FieldOffset(0x3478)] public int MsgSourceArrayLength;
