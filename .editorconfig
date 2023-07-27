@@ -22,6 +22,9 @@ insert_final_newline = true
 # .NET Coding Conventions     #
 ###############################
 
+# Organize usings
+dotnet_sort_system_directives_first = true
+
 # Parentheses preferences
 dotnet_style_parentheses_in_arithmetic_binary_operators = never_if_unnecessary
 dotnet_style_parentheses_in_relational_binary_operators = never_if_unnecessary
