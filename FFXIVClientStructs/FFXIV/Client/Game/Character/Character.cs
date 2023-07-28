@@ -288,8 +288,8 @@ public unsafe partial struct Character
 	    [FieldOffset(0x20)] public byte Flags;
 	    [FieldOffset(0x24)] public fixed uint MountedObjectIds[7];
 
-        [MemberFunction("E8 ?? ?? ?? ?? 48 8B 43 ?? 80 B8 ?? ?? ?? ?? ?? 74 ?? 0F B6 90")]
-        partial void SetupMount(short mountId, uint unk1, uint unk2, uint unk3, byte unk4);
+            [MemberFunction("E8 ?? ?? ?? ?? 48 8B 43 ?? 80 B8 ?? ?? ?? ?? ?? 74 ?? 0F B6 90")]
+            public partial void SetupMount(short mountId, uint buddyModelTop, uint buddyModelBody, uint buddyModelLegs, byte buddyStain);
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]
