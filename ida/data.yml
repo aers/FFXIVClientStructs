@@ -38,6 +38,8 @@ globals:
   0x142190F62: g_Client::Game::UI::UnlockedCompanionsMask  # not a pointer
   0x142190F3E: g_Client::Game::UI::UnlockedHowToBitmask  # not a pointer
   0x142190FA0: g_Client::Game::UI::ChocoboTaxiStandsBitmask  # not a pointer
+  0x14217AE08: g_Client::Game::UI::Chain.RemainingTime # not a pointer
+  0x14217AE0C: g_Client::Game::UI::Chain.MaxTime # not a pointer
   0x142193150: g_Conditions # bool array, size is Condition sheet row count
   0x14212B1F0: g_SomeOtherRenderingState
   0x14213D514: g_InvSqrt3
@@ -785,6 +787,10 @@ classes:
       0x140929090: Initialize
       0x140994CF0: ctor
       0x140929DE0: GetAttributeByIndex # (this, index)
+  Client::Game::UI::WeaponState:
+    instances:
+      - ea: 0x14217AE10
+        pointer: False
   Client::Game::UI::Revive:
     vtbls:
       - ea: 0x1419F9580
