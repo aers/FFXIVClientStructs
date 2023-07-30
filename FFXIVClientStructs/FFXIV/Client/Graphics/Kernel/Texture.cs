@@ -35,7 +35,7 @@ public unsafe struct Texture
     [FieldOffset(0x57)] public byte Unk_57;
     [FieldOffset(0x58)] public TextureFormat TextureFormat;
     [FieldOffset(0x5C)] public uint Flags;
-    [FieldOffset(0x60)] public byte Unk_60; // new in 6.3, maybe a bool
+    [FieldOffset(0x60)] public byte ArraySize; // new in 6.3
     [FieldOffset(0x68)] public void* D3D11Texture2D; // ID3D11Texture2D1
     [FieldOffset(0x70)] public void* D3D11ShaderResourceView; // ID3D11ShaderResourceView1
 }
