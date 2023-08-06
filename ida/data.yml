@@ -944,7 +944,8 @@ classes:
       0x1409B52F0: GetActiveBlueMageActionInSlot
       0x1409B5310: SwapBlueMageActionSlots
       0x1409B5420: SetBlueMageActions
-      0x1409B8EC0: GetMaxCharges
+      0x1409B8EC0: GetMaxCharges    # static
+      0x1409B8650: GetMaxCharges2   # not static - calls static
       0x1409BA170: GetDutyActionId  # (byte dutyActionSlot) -> uint
       0x1409A8D30: GetRecastGroup
       0x1409AE220: GetRecastGroupDetail
@@ -3670,9 +3671,10 @@ classes:
       0x140678120: GetUnkCBForSlot
       0x140678700: GetAdjustedSlotTooltip    # loads in some adjustment things and then calls GetSlotTooltip
       0x1406787C0: GetUnkD0ForSlot
+      0x1406790F0: GetActionTypeForSlotType
       0x1406791F0: GetItemRowForSlot
       0x140679D20: GetAdjustedIconIdForSlot  # loads in adjustment things and then calls GetIconForIdForSlot
-      0x140679B30: GetRecastTimeFromSlotB    # maybe?
+      0x140679B30: GetRecastTimeFromSlotB
       0x14067A2A0: LoadUnkCAForSlot
       0x14067A2D0: LoadUnkCBForSlot
       0x140679C30: LoadUnkDEForSlot          # different from all the other loads - this one still needs slotType/ID for things
