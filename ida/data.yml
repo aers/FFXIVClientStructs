@@ -938,6 +938,7 @@ classes:
       0x1409B4B50: StartCooldown
       0x1409B4F00: GetRecastTimerElapsed
       0x1409B4FB0: GetRecastTime
+      0x1409B5040: GetRecastTimeForGroup  # (this, groupId) -> float
       0x1409B50C0: UpdateRecastFromNetwork
       0x1409B5100: AssignBlueMageActionToSlot
       0x1409B52F0: GetActiveBlueMageActionInSlot

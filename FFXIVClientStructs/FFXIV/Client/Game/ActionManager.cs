@@ -34,6 +34,18 @@ public unsafe partial struct ActionManager
     [MemberFunction("E8 ?? ?? ?? ?? 83 7F 4C 01 44 0F 28 C8")]
     public partial float GetRecastTime(ActionType actionType, uint actionID);
 
+    /// <summary>
+    /// Gets the recast time (see <see cref="RecastDetail.Total"/> for a specific recast group.
+    /// </summary>
+    /// <remarks>
+    /// Compared to reading the struct directly, this method will correct cases where multi-charge actions are still
+    /// locked to a single charge at the player's current level.
+    /// </remarks>
+    /// <param name="recastGroupId">The recast group ID to get the recast time for.</param>
+    /// <returns>Returns the time until this action is "fully charged."</returns>
+    [MemberFunction("E8 ?? ?? ?? ?? 0F 28 F8 F3 0F 5C FE")]
+    public partial float GetRecastTimeForGroup(int recastGroupId);
+
     [MemberFunction("E8 ?? ?? ?? ?? F3 0F 5C F0 49 8B CD")]
     public partial float GetRecastTimeElapsed(ActionType actionType, uint actionID);
 
@@ -48,6 +60,20 @@ public unsafe partial struct ActionManager
 
     [MemberFunction("E8 ?? ?? ?? ?? 85 C0 75 ?? 83 FF ?? 0F 85")]
     public partial uint CheckActionResources(ActionType actionType, uint actionId, void* actionData = null);
+
+    /// <summary>
+    /// Start a cooldown cycle for the specified action. Upon calling, the game will begin to track state in the
+    /// relevant <see cref="RecastDetail"/>, which can be retrieved separately. Consult that struct's documentation for
+    /// more information.
+    /// </summary>
+    /// <remarks>
+    /// This method should not be called by developers and is instead provided for hooking and API completeness.
+    /// </remarks>
+    /// <param name="actionType">The type of action (generally, Spell) to trigger a cooldown for.</param>
+    /// <param name="actionId">The ID of the action to trigger a cooldown for.</param>
+    /// <returns>Unknown.</returns>
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? FF 50 18")]
+    public partial nint StartCooldown(ActionType actionType, uint actionId);
 
     [MemberFunction("E8 ?? ?? ?? ?? F3 0F 11 43 ?? 80 3B 00")]
     public static partial float GetActionRange(uint actionId);
@@ -91,12 +117,56 @@ public unsafe partial struct ActionManager
     public static partial uint GetDutyActionId(ushort dutyActionSlot);
 }
 
+/// <summary>
+/// A struct representing information about recast timers/cooldowns for a specific RecastGroup. A recast group may be
+/// shared between one (or more) actions, depending on the group in question.
+/// </summary>
 [StructLayout(LayoutKind.Explicit, Size = 0x14)]
 public struct RecastDetail
 {
+    /// <summary>
+    /// A byte representing if this recast group is currently "active." When this is a non-zero value (true), this
+    /// recast group is actively in cooldown.
+    /// </summary>
     [FieldOffset(0x0)] public byte IsActive;
+    
+    /// <summary>
+    /// The last Action ID that triggered an update for this recast group. 
+    /// </summary>
     [FieldOffset(0x4)] public uint ActionID;
+    
+    /// <summary>
+    /// The current "elapsed" time of this action's recharge. For most actions, this value will be set to zero when the
+    /// action is used. For actions with multiple charges, this value will give "credit" for unspent actions.
+    /// </summary>
+    /// <remarks>
+    /// For multi-charge actions, it helps to think of this field as representing the current value of a resource gauge.
+    /// This value represents the "current level" of the resource gauge, with each second adding 1 unit to the gauge up
+    /// until the maximum as defined in the <see cref="Total"/> field.
+    /// <para />
+    /// When a normal action is cast, this gauge is "depleted" to zero. When a multi-charge action is cast, however,
+    /// the appropriate value (defined by the action, but generally the recharge time) is subtracted from this value.
+    /// </remarks>
     [FieldOffset(0x8)] public float Elapsed;
+    
+    /// <summary>
+    /// The total number of seconds this recast group takes to go from "fully exhausted" to "fully charged." For most
+    /// actions, this will simply be the adjusted recast time from <see cref="ActionManager.GetAdjustedRecastTime"/>
+    /// (which displays in the tooltip UI as the "recast time"). Multi-charge actions such as Ninja's Mudra will show
+    /// the total charge time (the Adjusted Recast Time multiplied by the number of charges this action has at max
+    /// level).
+    /// </summary>
+    /// <remarks>
+    /// Note that the total value shown here depends on the last action used. For example, if a specific action is
+    /// bound to the GCD but is faster/slower than the normal GCD, this value will be set accordingly.
+    /// <para />
+    /// Continuing the resource gauge analogy from <see cref="Elapsed"/>, this field would represent the "cap" of the
+    /// resource gauge. For normal actions, the resource gauge must be completely filled before the action can be used
+    /// again. Multi-charge actions will instead allow the gauge to charge to the maximum number of actions allowed.
+    /// <para />
+    /// It is recommended to use <see cref="ActionManager.GetRecastTime"/> over this field, as it handles an edge case
+    /// in charge management.
+    /// </remarks>
     [FieldOffset(0xC)] public float Total;
 }
 
