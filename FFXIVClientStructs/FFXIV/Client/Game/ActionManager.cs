@@ -55,6 +55,18 @@ public unsafe partial struct ActionManager
     [MemberFunction("E8 ?? ?? ?? ?? 8B D0 48 8B CD 8B F0")]
     public partial int GetRecastGroup(int type, uint actionID);
 
+    /// <summary>
+    /// Gets the additional recast group for a specific action.
+    /// </summary>
+    /// <remarks>
+    /// Appears to be used for actions that both have their own cooldown in addition to adhering to GCD.
+    /// </remarks>
+    /// <param name="actionType">The action type to look up.</param>
+    /// <param name="actionId">The action ID to look up.</param>
+    /// <returns>A cooldown group ID, or -1 if invalid.</returns>
+    [MemberFunction("E8 ?? ?? ?? ?? 8B 4F 44 33 D2")]
+    public partial int GetAdditionalRecastGroup(ActionType actionType, uint actionId);
+
     [MemberFunction("40 53 48 83 EC ?? 48 63 DA 85 D2")]
     public partial RecastDetail* GetRecastGroupDetail(int recastGroup);
 
@@ -138,7 +150,7 @@ public struct RecastDetail
     /// <summary>
     /// The current "elapsed" time of this action's recharge. For most actions, this value will be set to zero when the
     /// action is used. For actions with multiple charges, this value will give "credit" for unspent actions.
-    /// </summary>
+    /// </summary>  
     /// <remarks>
     /// For multi-charge actions, it helps to think of this field as representing the current value of a resource gauge.
     /// This value represents the "current level" of the resource gauge, with each second adding 1 unit to the gauge up

@@ -949,6 +949,7 @@ classes:
       0x1409BA170: GetDutyActionId  # (byte dutyActionSlot) -> uint
       0x1409A8D30: GetRecastGroup
       0x1409AE220: GetRecastGroupDetail
+      0x1409B4E60: GetAdditionalRecastGroup
       0x1409AE2F0: Update
       0x1409AE950: Initialize
   Client::Game::JobGaugeManager:
