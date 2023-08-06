@@ -87,6 +87,16 @@ public unsafe partial struct ActionManager
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? FF 50 18")]
     public partial nint StartCooldown(ActionType actionType, uint actionId);
 
+    /// <summary>
+    /// Check if a specific action is "off cooldown" and can be used again. This method will account for the slidecast
+    /// window.
+    /// </summary>
+    /// <param name="actionType">The type of action to check.</param>
+    /// <param name="actionId">The ID of the action to check.</param>
+    /// <returns>Returns true if the action is off-cooldown or slidecastable.</returns>
+    [MemberFunction("77 49 80 3B 00")]
+    public partial bool IsActionOffCooldown(ActionType actionType, uint actionId);
+
     [MemberFunction("E8 ?? ?? ?? ?? F3 0F 11 43 ?? 80 3B 00")]
     public static partial float GetActionRange(uint actionId);
 

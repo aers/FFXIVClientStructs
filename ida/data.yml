@@ -937,6 +937,8 @@ classes:
       0x1409B47C0: GetRecastTimerActive
       0x1409B4B50: StartCooldown
       0x1409B4F00: GetRecastTimerElapsed
+      0x1409B4F40: GetRecastTimerElapsedForGroup # (this, groupId) -> float
+      0x1409B4F70: SetRecastTimerElapsed # (this, actionType, actionId, newElapsed) -> *RecastDetail
       0x1409B4FB0: GetRecastTime
       0x1409B5040: GetRecastTimeForGroup  # (this, groupId) -> float
       0x1409B50C0: UpdateRecastFromNetwork
@@ -950,6 +952,11 @@ classes:
       0x1409A8D30: GetRecastGroup
       0x1409AE220: GetRecastGroupDetail
       0x1409B4E60: GetAdditionalRecastGroup
+      0x1409B46D0: IsActionOffCooldown
+      0x1409B4AE0: SetCooldown          # (this, actionType, actionId, newElapsed, newTotal) -> *RecastDetail
+      0x1409B4CC0: SetCooldownForGroup  # (this, groupId, newElapsed, newTotal) -> *RecastDetail
+      0x1409B4D00: SkewCooldownForGroup # (this, groupId, skew) -> *RecastDetail
+      0x1409B4D50: ResetCooldownForGroup
       0x1409AE2F0: Update
       0x1409AE950: Initialize
   Client::Game::JobGaugeManager:
