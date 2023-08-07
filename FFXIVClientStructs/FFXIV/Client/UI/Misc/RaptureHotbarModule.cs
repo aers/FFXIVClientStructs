@@ -88,6 +88,7 @@ public unsafe partial struct RaptureHotbarModule
         RaptureHotbarModule* hotbarModule, HotBarSlot* slot);
 }
 
+[Obsolete("Replaced with FixedSizeArray")]
 [StructLayout(LayoutKind.Sequential, Size = HotBar.Size * 18)]
 public unsafe struct HotBars
 {
@@ -106,14 +107,19 @@ public unsafe struct HotBars
     }
 }
 
-[StructLayout(LayoutKind.Sequential, Size = Size)]
-public struct HotBar
+[StructLayout(LayoutKind.Explicit, Size = Size)]
+public unsafe struct HotBar
 {
     public const int Size = HotBarSlot.Size * 16;
 
-    public HotBarSlots Slot;
+    [Obsolete("Use Slots instead.")]
+    [FieldOffset(0x00)] public HotBarSlots Slot;
+
+    [FixedSizeArray<HotBarSlot>(16)]
+    [FieldOffset(0x00)] public fixed byte Slots[16 * HotBarSlot.Size];
 }
 
+[Obsolete("Replaced with FixedSizeArray")]
 [StructLayout(LayoutKind.Sequential, Size = HotBarSlot.Size * 16)]
 public unsafe struct HotBarSlots
 {
@@ -328,6 +334,7 @@ public unsafe partial struct HotBarSlot
 
 #region Saved Bars
 
+[Obsolete("Replaced with FixedSizeArray")]
 [StructLayout(LayoutKind.Explicit, Size = 0x5A0 * 61)]
 public unsafe struct SavedHotBars
 {
