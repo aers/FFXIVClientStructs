@@ -102,6 +102,20 @@ public unsafe partial struct RaptureHotbarModule {
     public bool IsHotbarShared(uint hotbarId) {
         return ((1 << ((int) hotbarId & 7)) & this.HotbarShareStateBitmask[hotbarId >> 3]) > 0;
     }
+
+    /// <summary>
+    /// Finalizes a save to an active hotbar slot (i.e. copies to the appropriate SavedClassJob and triggers a
+    /// UserFile change
+    /// </summary>
+    /// <param name="classJob">A reference to the characters' current classJob ID.</param>
+    /// <param name="hotbarIdx">A reference to the index of the changed hotbar number.</param>
+    /// <param name="slotIdx">A reference to the index of the changed slot number.</param>
+    /// <param name="slot">A reference to the hotbar slot to calculate the appearance for.</param>
+    /// <param name="UNK">Unknown, typically false.</param>
+    /// <param name="isPvpSlot">A reference to if the hotbar slot is a PvP slot.</param>
+    [MemberFunction("E8 ?? ?? ?? ?? EB 57 48 8D 9F ?? ?? ?? ??")]
+    public partial void SaveSlot(int classJob, uint hotbarIdx, uint slotIdx, HotBarSlot* slot, bool UNK,
+        bool isPvpSlot);
 }
 
 [Obsolete("Replaced with FixedSizeArray")]
