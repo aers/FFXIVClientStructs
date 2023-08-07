@@ -149,8 +149,12 @@ public unsafe partial struct AtkUnitBase
     [VirtualFunction(39)]
     public partial void Initialize();
 
+    /// <remarks>
+    /// The name "Finalizer" is used instead of "Finalize" to avoid conflicts
+    /// with the <see cref="System.Object.Finalize"/> method.
+    /// </remarks>
     [VirtualFunction(40)]
-    public partial void FinalizeAtkUnitBase();
+    public partial void Finalizer();
 
     [VirtualFunction(41)]
     public partial void Update();
