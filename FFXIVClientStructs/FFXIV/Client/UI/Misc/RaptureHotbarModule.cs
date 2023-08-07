@@ -22,7 +22,7 @@ public unsafe partial struct RaptureHotbarModule {
     /// <summary>
     /// A bitfield representing whether a specific hotbar is to be considered "shared" or not.
     /// </summary>
-    [FieldOffset(0x78)] public fixed byte HotbarSharingState[4];
+    [FieldOffset(0x78)] public fixed byte HotbarShareStateBitmask[4];
 
     [Obsolete("Deprecated in favor of HotBars.")] [FieldOffset(0x90)]
     public HotBars HotBar;
@@ -89,6 +89,19 @@ public unsafe partial struct RaptureHotbarModule {
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 54 24 ?? 8B 44 24 30")]
     public static partial uint GetSlotAppearance(HotbarSlotType* actionType, uint* actionId, ushort* UNK_0xC4,
         RaptureHotbarModule* hotbarModule, HotBarSlot* slot);
+
+    /// <summary>
+    /// Helper method to check if a specific hotbar is to be shared between all classes or not.
+    /// </summary>
+    /// <remarks>
+    /// This method does not enforce bounding on the <c>hotbarId</c> field, consumers are responsible for this
+    /// themselves.
+    /// </remarks>
+    /// <param name="hotbarId">The hotbar ID (bounded between 0 and 17) to check.</param>
+    /// <returns>Returns true if the hotbar is shared, false otherwise.</returns>
+    public bool IsHotbarShared(uint hotbarId) {
+        return ((1 << ((int) hotbarId & 7)) & this.HotbarShareStateBitmask[hotbarId >> 3]) > 0;
+    }
 }
 
 [Obsolete("Replaced with FixedSizeArray")]
