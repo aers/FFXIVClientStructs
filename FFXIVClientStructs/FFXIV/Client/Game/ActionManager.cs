@@ -115,6 +115,15 @@ public unsafe partial struct ActionManager
     [MemberFunction("E8 ?? ?? ?? ?? 33 DB 8B C8")]
     public static partial ushort GetMaxCharges(uint actionId, uint level); // 0 for current level
 
+    /// <summary>
+    /// Gets the number of charges currently accessible to the player for the specified action. For actions that do not
+    /// use charges, this method will cap at 1.
+    /// </summary>
+    /// <param name="actionId">The Action ID to check against.</param>
+    /// <returns>Returns a uint.</returns>
+    [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ? 57 48 83 EC 50 8B FA 44 8B C2")]
+    public partial uint GetCurrentCharges(uint actionId);
+
     [MemberFunction("48 8B C4 48 89 68 ?? 48 89 70 ?? 41 56 48 83 EC")]
     public partial void AssignBlueMageActionToSlot(int slot, uint actionId);
 

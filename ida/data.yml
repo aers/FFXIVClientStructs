@@ -932,6 +932,7 @@ classes:
       0x1409AEF50: GetActionStatus
       0x1409B0CF0: CanUseAction
       0x1409B1580: GetAdjustedActionId
+      0x1409AEDC0: CanPlayerClassUseAction
       0x1409B35A0: UseAction
       0x1409B3E20: UseComboAction
       0x1409B47C0: GetRecastTimerActive
@@ -946,13 +947,16 @@ classes:
       0x1409B52F0: GetActiveBlueMageActionInSlot
       0x1409B5310: SwapBlueMageActionSlots
       0x1409B5420: SetBlueMageActions
-      0x1409B8EC0: GetMaxCharges    # static
-      0x1409B8650: GetMaxCharges2   # not static - calls static
-      0x1409BA170: GetDutyActionId  # (byte dutyActionSlot) -> uint
+      0x1409B8EC0: GetMaxCharges              # static
+      0x1409B8650: GetMaxCharges2             # not static - calls static
+      0x1409B8560: GetCurrentCharges          # (this, actionId) -> uint
+      0x1409BA170: GetDutyActionId            # (byte dutyActionSlot) -> uint
       0x1409A8D30: GetRecastGroup
       0x1409AE220: GetRecastGroupDetail
       0x1409B4E60: GetAdditionalRecastGroup
       0x1409B46D0: IsActionOffCooldown
+      0x1409B4850: IsChargeExhausted    # (this, groupId, additionalGroupId, maxLevelMaxCharges) -> byte
+      0x1409B48E0: IsActionCharging     # (this, actionType, actionId) -> byte
       0x1409B4AE0: SetCooldown          # (this, actionType, actionId, newElapsed, newTotal) -> *RecastDetail
       0x1409B4CC0: SetCooldownForGroup  # (this, groupId, newElapsed, newTotal) -> *RecastDetail
       0x1409B4D00: SkewCooldownForGroup # (this, groupId, skew) -> *RecastDetail
@@ -3683,6 +3687,7 @@ classes:
       0x1406791F0: GetItemRowForSlot
       0x140679D20: GetAdjustedIconIdForSlot  # loads in adjustment things and then calls GetIconForIdForSlot
       0x140679B30: GetRecastTimeFromSlotB
+      0x140679A30: GetRecastChargesFromSlotB  # (this) -> uint
       0x14067A2A0: LoadUnkCAForSlot
       0x14067A2D0: LoadUnkCBForSlot
       0x140679C30: LoadUnkDEForSlot          # different from all the other loads - this one still needs slotType/ID for things

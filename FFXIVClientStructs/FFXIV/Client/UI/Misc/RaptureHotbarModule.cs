@@ -286,6 +286,14 @@ public unsafe partial struct HotBarSlot
     /// <returns>Returns an ActionType if found, else 0xFFFFFFFF.</returns>
     [MemberFunction("FF CA 83 FA 1E")]
     public partial ActionType GetActionTypeForSlotType(HotbarSlotType type);
+
+    /// <summary>
+    /// Gets the number of charges currently available for the specified hotbar slot (based on the icon present in
+    /// IconB). If this hotbar slot references an action that does not use charges, this will return either 0 or 1.
+    /// </summary>
+    /// <returns>Returns a uint.</returns>
+    [MemberFunction("40 53 48 83 EC 40 8B 99 ?? ?? ?? ??")]
+    public partial uint GetRecastChargesFromSlotB();
 }
 
 #region Saved Bars
