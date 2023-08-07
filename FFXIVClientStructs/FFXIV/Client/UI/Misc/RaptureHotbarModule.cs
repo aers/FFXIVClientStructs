@@ -16,9 +16,9 @@ public unsafe partial struct RaptureHotbarModule
     [FieldOffset(0x48)] public UIModule* UiModule;
 
     /// <summary>
-    /// The index of the currently-active saved hotbar for use in <see cref="SavedHotBars" />.
+    /// The ID of the ClassJob associated with the currently-active hotbars.
     /// </summary>
-    [FieldOffset(0x51)] public byte ActiveSavedHotBar;
+    [FieldOffset(0x51)] public byte ActiveHotbarClassJobId;
     
     /// <summary>
     /// A bitfield representing whether a specific hotbar is to be considered "shared" or not.
@@ -59,7 +59,7 @@ public unsafe partial struct RaptureHotbarModule
     /// </list>
     /// This field tracks both normal and cross hotbars, at their appropriate sub-indices.
     /// </summary>
-    [FixedSizeArray<SavedHotBarGroup>(61)] 
+    [FixedSizeArray<SavedHotBarGroup>(61)] // 2 + class_count + job_count (excl. blue mage)
     [FieldOffset(0x11974)] public fixed byte SavedHotBars[61 * SavedHotBarGroup.Size];
 
     [MemberFunction("E9 ?? ?? ?? ?? 48 8D 91 ?? ?? ?? ?? E9")]
