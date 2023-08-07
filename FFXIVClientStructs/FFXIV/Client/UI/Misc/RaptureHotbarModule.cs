@@ -108,7 +108,7 @@ public unsafe struct HotBars
 }
 
 [StructLayout(LayoutKind.Explicit, Size = Size)]
-public unsafe struct HotBar
+public unsafe partial struct HotBar
 {
     public const int Size = HotBarSlot.Size * 16;
 
@@ -409,7 +409,7 @@ public unsafe struct SavedHotBars
 }
 
 [StructLayout(LayoutKind.Explicit, Size = Size)]
-public unsafe struct SavedHotBarGroup {
+public unsafe partial struct SavedHotBarGroup {
     public const int Size = SavedHotBar.Size * 18;
     
     [FixedSizeArray<SavedHotBar>(18)]
@@ -417,7 +417,7 @@ public unsafe struct SavedHotBarGroup {
 }
 
 [StructLayout(LayoutKind.Explicit, Size = Size)]
-public unsafe struct SavedHotBar {
+public unsafe partial struct SavedHotBar {
     public const int Size = SavedHotBarSlot.Size * 16;
 
     [FixedSizeArray<SavedHotBarSlot>(16)]
