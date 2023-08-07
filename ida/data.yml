@@ -3781,6 +3781,7 @@ classes:
       0x1407347E0: SetDrawOffset
       0x140735030: GetPosition
       0x140735080: SetPosition
+      0x140735130: SetRotation
       0x140738BC0: Initialize
       0x140738E20: ctor
   Client::Game::Character::Character:
@@ -3806,6 +3807,7 @@ classes:
       0x1407453F0: GetTargetId
       0x140746110: SetMode
       0x140748330: dtor
+      0x14074F4C0: SetupBNpc
       0x1407500D0: CopyFromCharacter
       0x1407AD250: ctor
   Client::Game::Character::DrawDataContainer:

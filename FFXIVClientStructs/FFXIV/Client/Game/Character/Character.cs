@@ -135,6 +135,9 @@ public unsafe partial struct Character
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4F ?? E8 ?? ?? ?? ?? 48 8B 4C 24 ??")]
     public partial void SetMode(CharacterModes mode, byte modeParam);
 
+    [MemberFunction("E8 ?? ?? ?? ?? 45 0F B6 86 ?? ?? ?? ?? 33 D2")]
+    public partial void SetupBNpc(uint bNpcBaseId, uint bNpcNameId = 0);
+
     [VirtualFunction(79)]
     public partial StatusManager* GetStatusManager();
 
