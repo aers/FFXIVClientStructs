@@ -471,6 +471,11 @@ public enum AgentId : uint {
     McGuffin = 368, //Collection
     CraftActionSimulator = 369,
 
+    IKDSchedule = 370,
+    IKDFishingLog = 371,
+    IKDResult = 372,
+    IKDMission = 373,
+
     InclusionShop = 374, //Item Exchange
 
     MycWarResultNotebook = 376,

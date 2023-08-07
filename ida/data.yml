@@ -5457,6 +5457,22 @@ classes:
     vtbls:
       - ea: 0x141A17738
         base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentIKDSchedule:
+    vtbls:
+      - ea: 0x141A010A8
+        base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentIKDFishingLog:
+    vtbls:
+      - ea: 0x141A01128
+        base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentIKDResult:
+    vtbls:
+      - ea: 0x141A011B8
+        base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentIKDMission:
+    vtbls:
+      - ea: 0x141A01230
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMycWarResultNotebook:
     vtbls:
       - ea: 0x141A00E90
