@@ -16,7 +16,7 @@ public unsafe partial struct RaptureHotbarModule
     [FieldOffset(0x48)] public UIModule* UiModule;
 
     /// <summary>
-    /// The index of the currently-active saved hotbar for use in <see cref="SavedClassJob"/>.
+    /// The index of the currently-active saved hotbar for use in <see cref="SavedHotBars" />.
     /// </summary>
     [FieldOffset(0x51)] public byte ActiveSavedHotBar;
     
@@ -63,7 +63,21 @@ public unsafe partial struct RaptureHotbarModule
     /// </summary>
     [FieldOffset(0x11890)] public HotBarSlot ScratchSlot;
     
+    [Obsolete("Use the SavedHotBars field instead.")]
     [FieldOffset(0x11974)] public SavedHotBars SavedClassJob;
+
+    /// <summary>
+    /// A field containing all saved hotbars, as persisted to disk. Index values are based on the following:
+    /// <list type="bullet">
+    ///   <item>Index 0 is the set of shared hotbars between all PvE classes.</item>
+    ///   <item>Indices 1 to 40 are per-class hotbars for PvE, where the index matches the ClassJob's ID in EXD.</item>
+    ///   <item>Index 41 is the set of shared hotbars between all PvP jobs.</item>
+    ///   <item>Indices 42 to 60 are per-class hotbars for PvP, where the index matches the ClassJob's JobIndex + 41.</item>
+    /// </list>
+    /// This field tracks both normal and cross hotbars, at their appropriate sub-indices.
+    /// </summary>
+    [FixedSizeArray<SavedHotBarsNew>(61)] 
+    [FieldOffset(0x11974)] public fixed byte SavedHotBars[61 * SavedHotBarsNew.Size];
 
     [MemberFunction("E9 ?? ?? ?? ?? 48 8D 91 ?? ?? ?? ?? E9")]
     public partial byte ExecuteSlot(HotBarSlot* hotbarSlot);
@@ -402,6 +416,30 @@ public unsafe struct SavedHotBars
             [FieldOffset(0x01)] public uint ID;
         }
     }
+}
+
+[StructLayout(LayoutKind.Explicit, Size = Size)]
+public unsafe struct SavedHotBarsNew {
+    public const int Size = SavedHotBar.Size * 18;
+    
+    [FixedSizeArray<SavedHotBar>(18)]
+    [FieldOffset(0x00)] public fixed byte HotBars[SavedHotBar.Size * 18];
+}
+
+[StructLayout(LayoutKind.Explicit, Size = Size)]
+public unsafe struct SavedHotBar {
+    public const int Size = SavedHotBarSlot.Size * 16;
+
+    [FixedSizeArray<SavedHotBarSlot>(16)]
+    [FieldOffset(0x00)] public fixed byte Slots[SavedHotBarSlot.Size * 16];
+}
+
+[StructLayout(LayoutKind.Explicit, Size = Size)]
+public unsafe struct SavedHotBarSlot {
+    public const int Size = 0x05;
+
+    [FieldOffset(0x00)] public HotbarSlotType CommandType;
+    [FieldOffset(0x01)] public uint CommandId;
 }
 
 #endregion
