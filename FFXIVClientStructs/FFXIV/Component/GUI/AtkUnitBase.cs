@@ -59,7 +59,7 @@ public unsafe partial struct AtkUnitBase
 
     [MemberFunction("E8 ?? ?? ?? ?? 4C 8D 34 ED")]
     public partial AtkResNode* GetNodeById(uint nodeId);
-    
+
     [MemberFunction("E8 ?? ?? ?? ?? 8D 56 1E")]
     public partial AtkTextNode* GetTextNodeById(uint nodeId);
 
@@ -95,6 +95,9 @@ public unsafe partial struct AtkUnitBase
     [MemberFunction("E8 ?? ?? ?? ?? 45 33 C9 8D 56 01")]
     public partial void UnsubscribeAtkArrayData(byte arrayType, byte arrayIndex, bool clean = false);
 
+    [VirtualFunction(2)]
+    public partial void ReceiveEvent(AtkEventType eventType, int eventParam, AtkEvent* atkEvent, nint a5 = 0);
+
     [VirtualFunction(3)]
     public partial bool Open(uint uknUint);
 
@@ -110,11 +113,65 @@ public unsafe partial struct AtkUnitBase
     [VirtualFunction(7)]
     public partial void SetPosition(short x, short y);
 
+    [VirtualFunction(8)]
+    public partial void SetX(short value);
+
+    [VirtualFunction(9)]
+    public partial void SetY(short value);
+
+    [VirtualFunction(10)]
+    public partial short GetX();
+
+    [VirtualFunction(11)]
+    public partial short GetY();
+
+    [VirtualFunction(12)]
+    public partial void GetPosition(short* outX, short* outY);
+
+    [VirtualFunction(13)]
+    public partial void SetAlpha(byte alpha);
+
+    [VirtualFunction(14)]
+    public partial void SetScale(float scale, bool a3);
+
+    [VirtualFunction(15)]
+    public partial void GetSize(short* width, short* height, bool scaled);
+
+    [VirtualFunction(16)]
+    public partial void Hide2();
+
+    [VirtualFunction(17)]
+    public partial sbyte SetScaleToHudLayoutScale();
+
+    [VirtualFunction(18)]
+    public partial bool ShouldCollideWithWindow(AtkCollisionNode* collisionNode);
+
+    [VirtualFunction(39)]
+    public partial void Initialize();
+
+    [VirtualFunction(40)]
+    public partial void FinalizeAtkUnitBase();
+
+    [VirtualFunction(41)]
+    public partial void Update();
+
+    [VirtualFunction(42)]
+    public partial void Draw();
+
     [VirtualFunction(47)]
     public partial void OnSetup(uint a2, AtkValue* atkValues);
 
+    [VirtualFunction(49)]
+    public partial void OnRefresh(uint numValues, AtkValue* values);
+
     [VirtualFunction(50)]
     public partial void OnUpdate(NumberArrayData** numberArrayData, StringArrayData** stringArrayData);
+
+    [VirtualFunction(60)]
+    public partial void OnMouseOver();
+
+    [VirtualFunction(61)]
+    public partial void OnMouseOut();
 
     [MemberFunction("E9 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 8D 15")]
     [GenerateCStrOverloads]
