@@ -49,19 +49,18 @@ public unsafe partial struct RaptureHotbarModule {
     public SavedHotBars SavedClassJob;
 
     /// <summary>
-    /// A field containing all saved hotbars, as persisted to disk. Index values are based on the following:
-    /// <list type="bullet">
-    ///   <item>Index 0 is the set of shared hotbars between all PvE classes.</item>
-    ///   <item>Indices 1 to 40 are per-class hotbars for PvE, where the index is the ClassJob's ID in EXD.</item>
-    ///   <item>Index 41 is the set of shared hotbars between all PvP jobs.</item>
-    ///   <item>
-    ///   Indices 42 to 60 are per-class hotbars for PvP, where the index is the ClassJob's JobIndex +41 for all
-    ///   ClassJobs &lt;36, and +40 for all ClassJobs &gt;36 (effectively, pretending like BLU doesn't exist). 
-    ///   </item>
-    /// </list>
-    /// This field tracks both normal and cross hotbars, at their appropriate sub-indices.
+    /// A field containing all saved hotbars, as persisted to disk. This field tracks both normal and cross hotbars, at
+    /// their appropriate sub-indices.
     /// </summary>
-    [FixedSizeArray<SavedHotBarGroup>(61)] // 2 + class_count + job_count (excl. blue mage)
+    /// <remarks>
+    /// Data in this field is stored in the following order: the common PvE hotbar (index 0), each class' PvE hotbar
+    /// based on their ClassJob ID (indices 1-40), the common PvP hotbar (index 41), and each job's PvP hotbar
+    /// (excluding Blue Mage) (indices 42-60).
+    ///
+    /// To calculate a PvP hotbar index, add the ClassJob's <c>JobIndex</c> to 41. If the JobIndex is at or above 16,
+    /// subtract 1 to handle Blue Mage's edge case.
+    /// </remarks>
+    [FixedSizeArray<SavedHotBarGroup>(61)]
     [FieldOffset(0x11974)]
     public fixed byte SavedHotBars[61 * SavedHotBarGroup.Size];
 
