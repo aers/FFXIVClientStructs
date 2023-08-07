@@ -150,7 +150,7 @@ public unsafe struct CharaSelectCharacterInfo
     [FieldOffset(0x6B)] public byte GuardianDeity;
     [FieldOffset(0x6C)] public byte FirstClass;
 
-    [FieldOffset(0x6E)] public ushort ZoneId;
+    // [FieldOffset(0x6E)] public ushort ZoneId;
     [FieldOffset(0x70)] public ushort TerritoryType;
     [FieldOffset(0x72)] public ushort ContentFinderCondition;
     [FieldOffset(0x74)] public CustomizeData CustomizeData;
@@ -170,13 +170,13 @@ public unsafe struct CharaSelectCharacterInfo
     [FieldOffset(0xC8)] public uint MainHandItemId;
     [FieldOffset(0xCC)] public uint OffHandItemId;
     [FieldOffset(0xD0)] public uint SoulstoneItemId;
-    [FieldOffset(0xD4)] public uint RemakeFlag;
+    // [FieldOffset(0xD4)] public uint RemakeFlag;
     [FieldOffset(0xD8)] public CharaSelectCharacterConfigFlags ConfigFlags;
     [FieldOffset(0xDA)] public byte VoiceId;
-    [FieldOffset(0xDB)] public fixed byte WorldName[32]; // always empty?
+    // [FieldOffset(0xDB)] public fixed byte WorldName[32]; // always empty?
 
-    [FieldOffset(0x100)] public ulong LoginStatus;
-    [FieldOffset(0x108)] public byte IsOutTerritory;
+    // [FieldOffset(0x100)] public ulong LoginStatus;
+    // [FieldOffset(0x108)] public byte IsOutTerritory;
 }
 
 [Flags]
