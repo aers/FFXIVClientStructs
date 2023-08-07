@@ -3075,7 +3075,7 @@ classes:
       12: GetPosition
       13: SetAlpha
       14: SetScale
-      15: GetSizeScaled
+      15: GetSize
       16: Hide2
       17: SetScaleToHudLayoutScale
       18: ShouldCollideWithWindow
