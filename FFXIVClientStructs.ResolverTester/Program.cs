@@ -3,7 +3,9 @@ using FFXIVClientStructs.Interop;
 using PeNet;
 using PeNet.Header.Pe;
 
-Memory<byte> file = new Memory<byte>(File.ReadAllBytes(@"F:\xiv-dev\ew-exes\ffxiv_dx11_2023.01.11.0000.0000.exe"));
+var gamePath = args.Length > 0 ? args[0] : @"F:\xiv-dev\ew-exes\ffxiv_dx11_2023.01.11.0000.0000.exe";
+
+Memory<byte> file = new Memory<byte>(File.ReadAllBytes(gamePath));
 PeFile peHeader = new PeFile(file.Span.ToArray());
 
 ImageSectionHeader textHeader = peHeader.ImageSectionHeaders![0];
@@ -18,9 +20,9 @@ file.Slice((int)dataHeader.PointerToRawData, (int)dataHeader.VirtualSize).CopyTo
 
 unsafe
 {
-    fixed (byte* bytes = relocFile.Span)
-    {
-        Console.WriteLine($"Unresolved count: {Resolver.GetInstance.Addresses.Count}");
+    fixed (byte* bytes = relocFile.Span) {
+        var totalSigCount = Resolver.GetInstance.Addresses.Count;
+        Console.WriteLine($"Unresolved count: {totalSigCount}");
 
         Resolver.GetInstance.SetupSearchSpace(new IntPtr(bytes), relocFile.Length, (int) textHeader.VirtualAddress,
             (int) textHeader.VirtualSize, (int) dataHeader.VirtualAddress, (int) dataHeader.VirtualSize,
@@ -32,8 +34,10 @@ unsafe
         watch.Stop();
         Console.WriteLine($"Resolved in {watch.ElapsedMilliseconds}ms");
 
-        Console.WriteLine($"Resolved count: {Resolver.GetInstance.Addresses.Count(sig => sig.Value != 0)}");
+        var resolvedCount = Resolver.GetInstance.Addresses.Count(sig => sig.Value != 0);
+        Console.WriteLine($"Resolved count: {resolvedCount} ({((float) resolvedCount / totalSigCount) * 100}%)");
 
+        Console.WriteLine("\n=== Static Addresses ===");
         foreach(var address in Resolver.GetInstance.Addresses.Where(address => address is StaticAddress))
             Console.WriteLine($"{address.Name} - {address.String} - {address.Value - new UIntPtr(bytes):X16}");
     }
