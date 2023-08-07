@@ -126,6 +126,14 @@ public unsafe partial struct AgentModule
     {
         return (AgentTryon*)GetAgentByInternalId(AgentId.Tryon);
     }
+
+    public AgentIKDFishingLog* GetAgentIKDFishingLog() {
+        return (AgentIKDFishingLog*)GetAgentByInternalId(AgentId.IKDFishingLog);
+    }
+
+    public AgentIKDResult* GetAgentIKDResult() {
+        return (AgentIKDResult*)GetAgentByInternalId(AgentId.IKDResult);
+    }
 }
 
 public enum AgentId : uint {
@@ -471,6 +479,7 @@ public enum AgentId : uint {
     McGuffin = 368, //Collection
     CraftActionSimulator = 369,
 
+    //Ocean Fishing
     IKDSchedule = 370,
     IKDFishingLog = 371,
     IKDResult = 372,

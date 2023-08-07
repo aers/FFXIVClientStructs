@@ -20,4 +20,5 @@ public enum InstanceContentType : byte
     Trial = 4,
     BeginnerTraining = 8,
     Frontlines = 6,
+    OceanFishing = 16
 }
