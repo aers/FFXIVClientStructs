@@ -32,29 +32,12 @@ public unsafe partial struct RaptureHotbarModule
     /// An array of all active hotbars loaded and available to the player. This field tracks both normal hotbars
     /// (indices 0 to 9) and cross hotbars (indices 10 to 17).
     /// </summary>
-    [FixedSizeArray<HotBarSlot>(18)]
+    [FixedSizeArray<HotBar>(18)]
     [FieldOffset(0x90)] public fixed byte HotBars[18 * Misc.HotBar.Size];
+    
+    public Span<HotBar> StandardHotBars => this.HotBarsSpan[..10];
+    public Span<HotBar> CrossHotBars => this.HotBarsSpan[10..];
 
-    /// <summary>
-    /// An array of the active standard hot bars.
-    /// </summary>
-    /// <remarks>
-    /// This is a convenience field, and likely does not exist in the game's code directly. Standard hotbars are
-    /// normally accessed via their normal ID using <see cref="HotBars"/>.
-    /// </remarks>
-    [FixedSizeArray<HotBar>(10)] 
-    [FieldOffset(0x90)] public fixed byte StandardHotBars[10 * Misc.HotBar.Size];
-    
-    /// <summary>
-    /// An array of the active cross hot bars.
-    /// </summary>
-    /// <remarks>
-    /// This is a convenience field, and likely does not exist in the game's code directly. Cross hotbars are normally
-    /// accessed by their raw hotbar ID (10 + crossHotbarId) via the <see cref="HotBars"/> array.
-    /// </remarks>
-    [FixedSizeArray<HotBar>(8)] 
-    [FieldOffset(0x8C90)] public fixed byte CrossHotBars[8 * Misc.HotBar.Size];
-    
     [FieldOffset(0xFC90)] public HotBar PetHotBar;
     [FieldOffset(0x10A90)] public HotBar PetCrossHotBar;
 
@@ -76,8 +59,8 @@ public unsafe partial struct RaptureHotbarModule
     /// </list>
     /// This field tracks both normal and cross hotbars, at their appropriate sub-indices.
     /// </summary>
-    [FixedSizeArray<SavedHotBarsNew>(61)] 
-    [FieldOffset(0x11974)] public fixed byte SavedHotBars[61 * SavedHotBarsNew.Size];
+    [FixedSizeArray<SavedHotBarGroup>(61)] 
+    [FieldOffset(0x11974)] public fixed byte SavedHotBars[61 * SavedHotBarGroup.Size];
 
     [MemberFunction("E9 ?? ?? ?? ?? 48 8D 91 ?? ?? ?? ?? E9")]
     public partial byte ExecuteSlot(HotBarSlot* hotbarSlot);
@@ -419,7 +402,7 @@ public unsafe struct SavedHotBars
 }
 
 [StructLayout(LayoutKind.Explicit, Size = Size)]
-public unsafe struct SavedHotBarsNew {
+public unsafe struct SavedHotBarGroup {
     public const int Size = SavedHotBar.Size * 18;
     
     [FixedSizeArray<SavedHotBar>(18)]
