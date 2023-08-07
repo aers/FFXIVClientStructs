@@ -3,7 +3,10 @@
 [StructLayout(LayoutKind.Explicit, Size = 0x338)]
 public unsafe partial struct CharacterManager
 {
+    [Obsolete("Use BattleCharaListSpan")]
 	[FieldOffset(0x00)] public fixed long BattleCharaArray[100];
+    [FixedSizeArray<Pointer<BattleChara>>(100)]
+    [FieldOffset(0x00)] public fixed byte BattleCharaList[100 * 8];
 	[FieldOffset(0x320)] public BattleChara* BattleCharaMemory;
 	[FieldOffset(0x328)] public Companion* CompanionMemory;
 	//used to calculate the minion address in CompanionMemory when adding a BattleChara
