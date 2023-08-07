@@ -157,7 +157,7 @@ public unsafe partial struct AtkUnitBase
     public partial void Finalizer();
 
     [VirtualFunction(41)]
-    public partial void Update();
+    public partial void Update(float delta);
 
     [VirtualFunction(42)]
     public partial void Draw();
