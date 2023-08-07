@@ -1,4 +1,5 @@
-﻿using FFXIVClientStructs.FFXIV.Client.System.Framework;
+﻿using FFXIVClientStructs.FFXIV.Client.Game;
+using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Client.UI.Misc.UserFileManager;
 
@@ -274,6 +275,25 @@ public unsafe partial struct HotBarSlot
     /// <returns>Returns a string representation of the name to be displayed to the user for this hotbar slot.</returns>
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B CB 48 85 C0 75 12")]
     public partial byte* GetDisplayNameForSlot(HotbarSlotType slotType, uint actionId);
+
+    /// <summary>
+    /// Retrieves a <see cref="ActionType"/> for the specified hotbar slot type.
+    /// </summary>
+    /// <remarks>
+    /// This method doesn't actually read any data from the HotBarSlot it's a member of.
+    /// </remarks>
+    /// <param name="type">A HotbarSlotType to check against.</param>
+    /// <returns>Returns an ActionType if found, else 0xFFFFFFFF.</returns>
+    [MemberFunction("FF CA 83 FA 1E")]
+    public partial ActionType GetActionTypeForSlotType(HotbarSlotType type);
+
+    /// <summary>
+    /// Gets the number of charges currently available for the specified hotbar slot (based on the icon present in
+    /// IconB). If this hotbar slot references an action that does not use charges, this will return either 0 or 1.
+    /// </summary>
+    /// <returns>Returns a uint.</returns>
+    [MemberFunction("40 53 48 83 EC 40 8B 99 ?? ?? ?? ??")]
+    public partial uint GetRecastChargesFromSlotB();
 }
 
 #region Saved Bars
