@@ -1,4 +1,4 @@
-﻿namespace FFXIVClientStructs.FFXIV.Component.GUI;
+namespace FFXIVClientStructs.FFXIV.Component.GUI;
 // Component::GUI::AtkUnitBase
 //   Component::GUI::AtkEventListener
 
@@ -83,6 +83,17 @@ public unsafe partial struct AtkUnitBase
 
     [MemberFunction("E8 ?? ?? ?? ?? 8D 77 02")]
     public partial bool SetFocusNode(AtkResNode* node, bool a3 = false, uint a4 = 0);
+
+    /// <param name="arrayType">0 for StringArrayData or 1 for NumberArrayData</param>
+    /// <param name="arrayIndex">The index in AtkArrayDataHolder</param>
+    [MemberFunction("E8 ?? ?? ?? ?? 44 8D 43 79")]
+    public partial void SubscribeAtkArrayData(byte arrayType, byte arrayIndex);
+
+    /// <param name="arrayType">0 for StringArrayData or 1 for NumberArrayData</param>
+    /// <param name="arrayIndex">The index in AtkArrayDataHolder</param>
+    /// <param name="clean">Resets all values to default, also frees managed strings</param>
+    [MemberFunction("E8 ?? ?? ?? ?? 45 33 C9 8D 56 01")]
+    public partial void UnsubscribeAtkArrayData(byte arrayType, byte arrayIndex, bool clean = false);
 
     [VirtualFunction(3)]
     public partial bool Open(uint uknUint);

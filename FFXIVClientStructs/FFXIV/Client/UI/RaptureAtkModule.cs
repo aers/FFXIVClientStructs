@@ -31,6 +31,18 @@ public unsafe partial struct RaptureAtkModule
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 44 24 ?? 48 89 9F")]
     public partial bool ChangeUiMode(uint uiMode);
 
+    [MemberFunction("E8 ?? ?? ?? ?? 48 39 77 28 0F 84")]
+    public partial bool IncRefNumberArrayData(int index);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 75 28")]
+    public partial bool DecRefNumberArrayData(int index);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 49 83 7E ?? ?? 74 0D")]
+    public partial bool IncRefStringArrayData(int index);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 46 58 48 85 C0")]
+    public partial bool DecRefStringArrayData(int index);
+
     [VirtualFunction(39)]
     public partial void SetUiVisibility(bool uiVisible);
 
