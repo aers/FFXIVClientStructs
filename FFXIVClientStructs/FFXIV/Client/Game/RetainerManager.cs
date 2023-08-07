@@ -6,7 +6,10 @@ public unsafe partial struct RetainerManager
     [StaticAddress("48 8D 0D ?? ?? ?? ?? 48 8B 18", 3)]
     public static partial RetainerManager* Instance();
 
+    [Obsolete("Use Retainers")]
     [FieldOffset(0x000)] public RetainerList Retainer;
+    [FixedSizeArray<RetainerList.Retainer>(10)]
+    [FieldOffset(0x000)] public fixed byte Retainers[0x48 * 10];
     [FieldOffset(0x2D0)] public fixed byte DisplayOrder[10];
     [FieldOffset(0x2DA)] public byte Ready;
     [Obsolete("Use GetRetainerCount() instead.", true)]
