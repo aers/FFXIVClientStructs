@@ -12,10 +12,57 @@ public unsafe partial struct RaptureHotbarModule
 {
     public static RaptureHotbarModule* Instance() => Framework.Instance()->GetUiModule()->GetRaptureHotbarModule();
 
-    [FieldOffset(0)] public UserFileEvent UserFileEvent;
+    [FieldOffset(0)] public UserFileEvent UserFileEvent; // to 0x40
     [FieldOffset(0x48)] public UIModule* UiModule;
-    [FieldOffset(0x90)] public HotBars HotBar;
 
+    /// <summary>
+    /// The index of the currently-active saved hotbar for use in <see cref="SavedClassJob"/>.
+    /// </summary>
+    [FieldOffset(0x51)] public byte ActiveSavedHotBar;
+    
+    /// <summary>
+    /// A bitfield representing whether a specific hotbar is to be considered "shared" or not.
+    /// </summary>
+    [FieldOffset(0x78)] public fixed byte HotbarSharingState[4];
+    
+    [Obsolete("Deprecated in favor of HotBars.")]
+    [FieldOffset(0x90)] public HotBars HotBar;
+    
+    /// <summary>
+    /// An array of all active hotbars loaded and available to the player. This field tracks both normal hotbars
+    /// (indices 0 to 9) and cross hotbars (indices 10 to 17).
+    /// </summary>
+    [FixedSizeArray<HotBarSlot>(18)]
+    [FieldOffset(0x90)] public fixed byte HotBars[18 * Misc.HotBar.Size];
+
+    /// <summary>
+    /// An array of the active standard hot bars.
+    /// </summary>
+    /// <remarks>
+    /// This is a convenience field, and likely does not exist in the game's code directly. Standard hotbars are
+    /// normally accessed via their normal ID using <see cref="HotBars"/>.
+    /// </remarks>
+    [FixedSizeArray<HotBar>(10)] 
+    [FieldOffset(0x90)] public fixed byte StandardHotBars[10 * Misc.HotBar.Size];
+    
+    /// <summary>
+    /// An array of the active cross hot bars.
+    /// </summary>
+    /// <remarks>
+    /// This is a convenience field, and likely does not exist in the game's code directly. Cross hotbars are normally
+    /// accessed by their raw hotbar ID (10 + crossHotbarId) via the <see cref="HotBars"/> array.
+    /// </remarks>
+    [FixedSizeArray<HotBar>(8)] 
+    [FieldOffset(0x8C90)] public fixed byte CrossHotBars[8 * Misc.HotBar.Size];
+    
+    [FieldOffset(0xFC90)] public HotBar PetHotBar;
+    [FieldOffset(0x10A90)] public HotBar PetCrossHotBar;
+
+    /// <summary>
+    /// A scratch hotbar slot used for temporary operations such as saving and temporary rewrites.
+    /// </summary>
+    [FieldOffset(0x11890)] public HotBarSlot ScratchSlot;
+    
     [FieldOffset(0x11974)] public SavedHotBars SavedClassJob;
 
     [MemberFunction("E9 ?? ?? ?? ?? 48 8D 91 ?? ?? ?? ?? E9")]
@@ -47,7 +94,7 @@ public unsafe partial struct RaptureHotbarModule
 [StructLayout(LayoutKind.Sequential, Size = HotBar.Size * 18)]
 public unsafe struct HotBars
 {
-    private fixed byte data[HotBar.Size * 18];
+    private fixed byte data[HotBar.Size * 18]; // 10 normal + 8 cross
 
     public HotBar* this[int i]
     {
@@ -237,6 +284,12 @@ public unsafe partial struct HotBarSlot
     [MemberFunction("E8 ?? ?? ?? ?? 4C 39 6F 08")]
     public partial void Set(UIModule* uiModule, HotbarSlotType type, uint id);
 
+    /// <summary>
+    /// Update the command of this hotbar slot to the specified value. This will not trigger a file save and will only
+    /// update the in-memory struct defined here.
+    /// </summary>
+    /// <param name="type">The <see cref="HotbarSlotType"/> that this slot should trigger.</param>
+    /// <param name="id">The ID of the command that this slot should trigger.</param>
     public void Set(HotbarSlotType type, uint id)
     {
         Set(Framework.Instance()->GetUiModule(), type, id);
