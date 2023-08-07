@@ -3701,7 +3701,7 @@ classes:
       0x14067B060: ExecuteSlotById
       0x14067B0A0: GetSlotById
       0x14067F650: GetSlotAppearance   # static
-      0x140680970: SaveSlot
+      0x140680970: WriteSavedSlot
   Client::UI::Misc::RaptureHotbarModule::HotbarSlot:
     funcs:
       # Convention(ish?): Get just returns a value, Load actually mutates the HotbarSlot passed to it

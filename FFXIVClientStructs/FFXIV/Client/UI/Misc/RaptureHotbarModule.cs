@@ -107,15 +107,15 @@ public unsafe partial struct RaptureHotbarModule {
     /// Finalizes a save to an active hotbar slot (i.e. copies to the appropriate SavedClassJob and triggers a
     /// UserFile change
     /// </summary>
-    /// <param name="classJob">A reference to the characters' current classJob ID.</param>
-    /// <param name="hotbarIdx">A reference to the index of the changed hotbar number.</param>
-    /// <param name="slotIdx">A reference to the index of the changed slot number.</param>
-    /// <param name="slot">A reference to the hotbar slot to calculate the appearance for.</param>
-    /// <param name="UNK">Unknown, typically false.</param>
-    /// <param name="isPvpSlot">A reference to if the hotbar slot is a PvP slot.</param>
+    /// <param name="classJobId">A reference to the classJob ID to save to.</param>
+    /// <param name="hotbarId">A reference to the index of the hotbar number to save to.</param>
+    /// <param name="slotId">A reference to the index of the slot number to save to.</param>
+    /// <param name="slotSource">A reference to the hotbar slot object to save.</param>
+    /// <param name="ignoreSharedHotbars">Unclear use, default to false.</param>
+    /// <param name="isPvpSlot">If true, will save to the classJob's PvP SavedHotBars slots.</param>
     [MemberFunction("E8 ?? ?? ?? ?? EB 57 48 8D 9F ?? ?? ?? ??")]
-    public partial void SaveSlot(int classJob, uint hotbarIdx, uint slotIdx, HotBarSlot* slot, bool UNK,
-        bool isPvpSlot);
+    public partial void WriteSavedSlot(uint classJobId, uint hotbarId, uint slotId, HotBarSlot* slotSource,
+        bool ignoreSharedHotbars, bool isPvpSlot);
 }
 
 [Obsolete("Replaced with FixedSizeArray")]
