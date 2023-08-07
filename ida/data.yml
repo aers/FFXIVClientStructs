@@ -6,6 +6,8 @@ globals:
   0x141F64380: g_ClientInstanceLimit
   0x1420F0830: g_InputManager
   0x1420F0858: g_InputManager_MouseButtonHoldState
+  0x14212B370: g_CurrentCharaSelectCharacter # Client::Game::Character::Character*
+  0x14212B580: g_CharaSelectCharacterList # see Client::UI::Agent::AgentLobby::CharaSelectCharacterList
   0x14213D480: g_RenderSkeletonLinkedListStart
   0x14213D488: g_RenderSkeletonLinkedListEnd
   0x14213D4E0: g_RenderModelLinkedListStart
@@ -73,6 +75,7 @@ functions:
   0x1400A8380: Client::UI::GetUIColor # (idx, &color, &edgeColor)
   0x1401B9F30: j_SleepEx
   0x1402E2F90: CountdownPointer
+  0x14030E920: CleanupCharaSelectCharacters
   0x14032B460: std::vector_SetSize
   0x140643E60: GetGameObjectByIndex
   0x14048AA30: PrepareColorSet
@@ -305,6 +308,11 @@ classes:
     funcs:
       0x14157D030: ctor
       0x14157E550: Initialize
+  Application::Network::LobbyClient::LobbyRequestCallback:
+    vtbls:
+      - ea: 0x141C20948
+    funcs:
+      0x1415ABAD0: ctor
   Client::Game::StatusManager:
     funcs:
       0x14073DA60: Initialize
@@ -1950,12 +1958,23 @@ classes:
       0x140230E20: IsAllowedToOpenCharacterTarget
       0x140232950: AddContextMenuItem2 # (this, int eventId, uint textId, bool disabled, bool submenu)
       0x1402329C0: AddContextMenuItem # (this, int eventId, char* text, bool disabled, bool submenu, bool copyText)
+  Client::UI::Agent::LobbyUIClient:
+    vtbls:
+      - ea: 0x14196E480
+        base: Application::Network::LobbyClient::LobbyRequestCallback
+    funcs:
+      0x140234500: ctor
   Client::UI::Agent::AgentLobby:
     vtbls:
       - ea: 0x14196E9B0
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x14024CEC0: ctor
+      0x140251740: UpdateCharaSelectDisplay
+      0x1402597C0: OpenLoginWaitDialog
+  Client::UI::Agent::AgentLobby::LobbyData:
+    funcs:
+      0x140239980: GetCharacterEntryByIndex
   Client::UI::Agent::AgentCursor:
     vtbls:
       - ea: 0x14196F1B0
