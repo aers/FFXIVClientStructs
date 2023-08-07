@@ -2045,6 +2045,10 @@ classes:
         base: Client::Graphics::Kernel::Resource
     funcs:
       0x14033D920: ctor
+  Client::Graphics::Kernel::TextureDx11:
+    vtbls:
+      - ea: 0x1419771E8
+        base: Client::Graphics::Kernel::Texture
   Client::Graphics::Kernel::SwapChain:
     vtbls:
       - ea: 0x1419772A8
