@@ -7,8 +7,6 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.IKDResult)]
 [StructLayout(LayoutKind.Explicit, Size = 0x30)]
 public unsafe partial struct AgentIKDResult {
-    public static AgentIKDResult* Instance() => Framework.Instance()->GetUiModule()->GetAgentModule()->GetAgentIKDResult();
-
     [FieldOffset(0x00)] public AgentInterface AgentInterface;
     [FieldOffset(0x28)] public ResultData* Data;
 

@@ -5,7 +5,6 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.HousingPlant)]
 [StructLayout(LayoutKind.Explicit, Size = 0x950)]
 public unsafe partial struct AgentHousingPlant {
-    public static AgentHousingPlant* Instance() => (AgentHousingPlant*)AgentModule.Instance()->GetAgentByInternalId(AgentId.HousingPlant);
     [FieldOffset(0x00)] public AgentInterface AgentInterface;
 
     [FieldOffset(0x40)] public uint ContextAddonId;

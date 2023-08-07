@@ -7,16 +7,12 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [StructLayout(LayoutKind.Explicit, Size = 0x38)]
 public unsafe partial struct AgentAirshipExplorationResult {
     [FieldOffset(0x00)] public AgentExplorationResultInterface Interface;
-
-    public static AgentAirshipExplorationResult* Instance() => (AgentAirshipExplorationResult*)AgentModule.Instance()->GetAgentByInternalId(AgentId.AirShipExplorationResult);
 }
 
 [Agent(AgentId.SubmersibleExplorationResult)]
 [StructLayout(LayoutKind.Explicit, Size = 0x38)]
 public unsafe partial struct AgentSubmersibleExplorationResult {
     [FieldOffset(0x00)] public AgentExplorationResultInterface Interface;
-
-    public static AgentSubmersibleExplorationResult* Instance() => (AgentSubmersibleExplorationResult*)AgentModule.Instance()->GetAgentByInternalId(AgentId.SubmersibleExplorationResult);
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x38)]

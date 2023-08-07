@@ -1,4 +1,3 @@
-using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
@@ -12,12 +11,6 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.ItemSearch)]
 [StructLayout(LayoutKind.Explicit, Size = 0x37F0)]
 public unsafe partial struct AgentItemSearch {
-    // Market Board
-    public static AgentItemSearch* Instance() {
-        return (AgentItemSearch*)Framework.Instance()->GetUiModule()->GetAgentModule()->GetAgentByInternalId(
-            AgentId.ItemSearch);
-    }
-
     [FieldOffset(0x0)] public AgentInterface AgentInterface;
     [FieldOffset(0x3304)] public uint ResultItemID;
     [FieldOffset(0x330C)] public uint ResultSelectedIndex;

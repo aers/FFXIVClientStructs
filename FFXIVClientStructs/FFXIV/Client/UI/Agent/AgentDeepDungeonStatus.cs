@@ -1,4 +1,3 @@
-using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
@@ -9,10 +8,6 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 public unsafe partial struct AgentDeepDungeonStatus {
     [FieldOffset(0x00)] public AgentInterface AgentInterface;
     [FieldOffset(0x28)] public DeepDungeonStatusData* Data;
-
-    public static AgentDeepDungeonStatus* Instance() {
-        return Framework.Instance()->GetUiModule()->GetAgentModule()->GetAgentDeepDungeonStatus();
-    }
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x8D8)]

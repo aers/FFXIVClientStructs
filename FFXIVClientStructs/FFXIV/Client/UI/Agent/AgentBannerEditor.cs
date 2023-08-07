@@ -7,8 +7,6 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.BannerEditor)]
 [StructLayout(LayoutKind.Explicit, Size = 0x38)]
 public unsafe partial struct AgentBannerEditor {
-    public static AgentBannerEditor* Instance() => (AgentBannerEditor*)AgentModule.Instance()->GetAgentByInternalId(AgentId.BannerEditor);
-
     [FieldOffset(0)] public AgentInterface AgentInterface;
     [FieldOffset(0x28)] public AgentBannerEditorState* EditorState;
 

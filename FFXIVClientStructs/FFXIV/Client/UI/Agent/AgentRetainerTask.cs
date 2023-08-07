@@ -1,4 +1,3 @@
-using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
@@ -33,7 +32,4 @@ public unsafe partial struct AgentRetainerTask {
 
     // Set when venture in progress
     [FieldOffset(0x84)] public uint XPToReward;
-
-    public static unsafe AgentRetainerTask* Instance() =>
-        Framework.Instance()->GetUiModule()->GetAgentModule()->GetAgentRetainerTask();
 }

@@ -1,7 +1,6 @@
 using System.Drawing;
 using System.Text;
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
-using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
@@ -10,11 +9,6 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.Context)]
 [StructLayout(LayoutKind.Explicit, Size = 0x1750)]
 public unsafe partial struct AgentContext {
-    public static AgentContext* Instance() {
-        return (AgentContext*)Framework.Instance()->GetUiModule()->GetAgentModule()->GetAgentByInternalId(
-            AgentId.Context);
-    }
-
     [FieldOffset(0x00)] public AgentInterface AgentInterface;
 
     [FieldOffset(0x28)] public fixed byte ContextMenuArray[0x678 * 2];

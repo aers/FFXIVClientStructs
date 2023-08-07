@@ -1,5 +1,4 @@
 using FFXIVClientStructs.FFXIV.Client.Game;
-using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
@@ -13,8 +12,6 @@ public unsafe partial struct AgentMiragePrismPrismBox {
     [FieldOffset(0x39)] public byte TabIndex;
     [FieldOffset(0x3A)] public byte PageIndex;
     [FieldOffset(0x48)] public InventoryItem TempDyeItem;
-
-    public static AgentMiragePrismPrismBox* Instance() => Framework.Instance()->GetUiModule()->GetAgentModule()->GetAgentMiragePrismPrismBox();
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x1BAE0)]

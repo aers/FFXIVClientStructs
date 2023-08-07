@@ -6,8 +6,6 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.Shop)]
 [StructLayout(LayoutKind.Explicit, Size = 0x120)]
 public unsafe partial struct AgentShop {
-    public static AgentShop* Instance() => (AgentShop*)AgentModule.Instance()->GetAgentByInternalId(AgentId.Shop);
-
     [FieldOffset(0x00)] public AgentInterface AgentInterface;
 
     [FieldOffset(0x88)] public AtkEventInterface* EventReceiver; // can be an agent or something else

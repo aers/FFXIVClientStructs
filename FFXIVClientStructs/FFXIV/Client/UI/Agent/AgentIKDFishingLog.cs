@@ -6,8 +6,6 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.IKDFishingLog)]
 [StructLayout(LayoutKind.Explicit, Size = 0x460)]
 public unsafe partial struct AgentIKDFishingLog {
-    public static AgentIKDFishingLog* Instance() => Framework.Instance()->GetUiModule()->GetAgentModule()->GetAgentIKDFishingLog();
-
     [FieldOffset(0x00)] public AgentInterface AgentInterface;
 
     [FieldOffset(0x28)] public uint RouteId;

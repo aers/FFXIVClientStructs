@@ -1,14 +1,11 @@
-using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
+
 [Agent(AgentId.FreeCompanyProfile)]
 [StructLayout(LayoutKind.Explicit, Size = 0x27C)]
 public unsafe partial struct AgentFreeCompanyProfile {
-    public static AgentFreeCompanyProfile* Instance() =>
-    (AgentFreeCompanyProfile*)Framework.Instance()->GetUiModule()->GetAgentModule()->GetAgentByInternalId(AgentId.FreeCompanyProfile);
-
     [FieldOffset(0x000)] public AgentInterface AgentInterface;
     //First = 0xe0 00 00 00 00 00 00 00
     //Next were the same as AgentINspect GuildStruct 0x08

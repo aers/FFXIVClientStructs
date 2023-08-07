@@ -9,9 +9,6 @@ public unsafe partial struct AgentMiragePrismMiragePlate {
     [FieldOffset(0x00)] public AgentInterface AgentInterface;
     [FixedSizeArray<MiragePlateItem>(14)]
     [FieldOffset(0x148)] public unsafe fixed byte PlateItems[14 * 0x20]; // 14 * MiragePlateItem
-
-    public static AgentMiragePrismMiragePlate* Instance() =>
-        Framework.Instance()->GetUiModule()->GetAgentModule()->GetAgentMiragePrismMiragePlate();
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x20)]

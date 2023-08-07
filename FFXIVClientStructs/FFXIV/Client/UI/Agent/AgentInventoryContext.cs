@@ -1,6 +1,5 @@
 using System.Runtime.CompilerServices;
 using FFXIVClientStructs.FFXIV.Client.Game;
-using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
@@ -8,8 +7,6 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.InventoryContext)]
 [StructLayout(LayoutKind.Explicit, Size = 0x778)]
 public unsafe partial struct AgentInventoryContext {
-    public static AgentInventoryContext* Instance() => (AgentInventoryContext*)AgentModule.Instance()->GetAgentByInternalId(AgentId.InventoryContext);
-
     [FieldOffset(0x0)] public AgentInterface AgentInterface;
     [FieldOffset(0x28)] public uint BlockingAddonId;
     [FieldOffset(0x2C)] public int ContexItemStartIndex;

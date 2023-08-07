@@ -1,4 +1,3 @@
-using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
@@ -12,11 +11,6 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.RetainerList)]
 [StructLayout(LayoutKind.Explicit, Size = 0x5B8)]
 public unsafe partial struct AgentRetainerList {
-    public static AgentRetainerList* Instance() {
-        return (AgentRetainerList*)Framework.Instance()->GetUiModule()->GetAgentModule()->GetAgentByInternalId(
-            AgentId.RetainerList);
-    }
-
     [FieldOffset(0x0)] public AgentInterface AgentInterface;
     [FieldOffset(0x30)] public uint RetainerListOpenedTime;
     [FieldOffset(0x34)] public uint RetainerListSortAddonId;
