@@ -121,7 +121,7 @@ public unsafe partial struct ActionManager
     /// </summary>
     /// <param name="actionId">The Action ID to check against.</param>
     /// <returns>Returns a uint.</returns>
-    [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ? 57 48 83 EC 50 8B FA 44 8B C2")]
+    [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 50 8B FA 44 8B C2")]
     public partial uint GetCurrentCharges(uint actionId);
 
     [MemberFunction("48 8B C4 48 89 68 ?? 48 89 70 ?? 41 56 48 83 EC")]
