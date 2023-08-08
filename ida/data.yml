@@ -3150,7 +3150,7 @@ classes:
       0x14052A460: SetFlag
       0x14052BFA0: Draw
       0x14052C4C0: SubscribeAtkArrayData # handler: "4C 8B D2 48 8B D1 41 83 F9 04"
-      0x14052C650: UnsubscribeAtkArrayData # handler: "48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 48 8B FA 48 8B D9 41 83 F9 04"
+      0x14052C650: UnsubscribeAtkArrayData # handler: "48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 48 8B DA 48 8B F9 41 83 F9 04"
       0x14052C900: SetFocusNode
       0x14052CE80: GetNodeById
       0x14052CFB0: GetButtonNodeById
