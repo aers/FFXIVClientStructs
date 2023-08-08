@@ -428,6 +428,7 @@ classes:
       - ea: 0x1419AEC10
         base: Client::Network::Protocol::Zone::PacketReceiverCallbackInterface
     funcs:
+      0x14076F460: Finalize
       0x14076F500: Initialize
       0x1407700C0: CreateQueuedBattleChara
       0x140770140: OnReceiveCreatePlayerBattleCharaPacket
@@ -542,6 +543,7 @@ classes:
       0x141295640: Initialize
       0x141295E10: ctor
       0x141295690: dtor
+      0x141295E80: Finalize
       0x1412980D0: GetFateById
   Client::Game::BattleBuddyList:
     funcs:
@@ -642,7 +644,7 @@ classes:
       0x140B6C990: Destroy    # static
       0x140B6C9D0: GetSingleton  # static
       0x140B6FE00: ctor
-      0x140B70080: dtor
+      0x140B70080: Finalize
       0x140B6EAC0: LoadDemandResearchPacket
       0x140B6F040: IsRecipeUnlocked # (this, recipeId)
       0x140B6F070: IsPouchItemLocked # (this, pouchItemId)
@@ -1167,6 +1169,7 @@ classes:
       0x140094C70: TaskUpdateBonePhysics
       0x140094CD0: TaskUpdateLayoutWorld
       0x140094CF0: TaskResourceManagerUpdate
+      0x140095B20: Finalize
   Component::Excel::ExcelModuleInterface:
     vtbls:
       - ea: 0x141942628
@@ -1397,6 +1400,7 @@ classes:
       - ea: 0x1419431B8
         base: Client::UI::Shell::RaptureShellCommandInterface
     funcs:
+      0x140099A90: Finalize
       0x14009A510: ExecuteCommandInner
   Component::GUI::AtkEventListener:
     vtbls:
@@ -1405,6 +1409,8 @@ classes:
       0: dtor
       1: ReceiveGlobalEvent # this seems to be a common event handler shared by all AtkUnitBase instances, they don't overwrite it
       2: ReceiveEvent
+    funcs:
+      0x1404FF9A0: Finalize
   Component::GUI::AtkUnitList:
     vtbls:
       - ea: 0x14194E260
@@ -1415,6 +1421,7 @@ classes:
     vfuncs:
       11: UpdateAddonByID
     funcs:
+      0x140175EF0: Finalize
       0x140533AC0: ctor
       0x1405348C0: Draw
       0x140535510: GetAddonById
@@ -1426,13 +1433,14 @@ classes:
         base: Component::GUI::AtkUnitManager
     funcs:
       0x1400AE230: ctor
+      0x140176A50: Finalize
   Client::UI::RaptureAtkModule:
     vtbls:
       - ea: 0x14194E628
         base: Component::GUI::AtkModule
     funcs:
       0x1400B3EB0: ctor
-      0x1400B4B40: dtor
+      0x1400B4B40: Finalize
       0x1400B4EE0: ChangeUiMode
       0x1400B5EE0: OpenAddon
       0x1400B6660: OpenYesNo
@@ -1467,7 +1475,7 @@ classes:
       0: dtor
     funcs:
       0x1400AC6D0: ctor
-      0x1400AD2E0: dtor2
+      0x1400AD2E0: Finalize
       0x1400AD390: GetInfoProxyById
       0x1400AD3B0: GetLocalCharacterName
       0x1400AD430: GetLocalContentID
@@ -1489,7 +1497,7 @@ classes:
       29: CompareHomeworld
     funcs:
       0x1400EB8F0: ctor
-      0x1400EBA10: dtor2
+      0x1400EBA10: Finalize
       0x1400EC830: GetContentIDForEntry
       0x1400EC850: SearchEntryByName
       0x1400EC950: GetEntry
@@ -1502,7 +1510,7 @@ classes:
     funcs:
       0x1400F7E20: ctor
       0x1400F9370: RequestData
-      0x1401764F0: dtor2
+      0x1401764F0: Finalize
   Client::UI::Info::InfoProxyCrossRealm:
     instances:
       - ea: 0x14211FC38
@@ -1532,7 +1540,7 @@ classes:
         base: Client::UI::Info::InfoProxyCommonlist
     funcs:
       0x1400F2600: ctor
-      0x140176720: dtor2
+      0x140176720: Finalize
   Client::UI::Info::InfoProxy20:
     vtbls:
       - ea: 0x14194F2B0
@@ -1561,7 +1569,7 @@ classes:
         base: Client::UI::Info::InfoProxyPageInterface
     funcs:
       0x140102290: ctor
-      0x140102430: dtor2
+      0x140102430: Finalize
       0x140102A20: ProcessRequestResult
       0x140102CF0: ProcessItemHistory
       0x140102D40: ProcessItemHistory_Internal
@@ -1590,7 +1598,7 @@ classes:
         base: Client::UI::Info::InfoProxyCommonlist
     funcs:
       0x140107AC0: ctor
-      0x140176560: dtor2
+      0x140176560: Finalize
   Client::UI::Info::InfoProxyLetter:
     vtbls:
       - ea: 0x141950340
@@ -1665,7 +1673,7 @@ classes:
         base: Client::UI::Info::InfoProxyInterface
     funcs:
       0x1401125E0: ctor
-      0x1401126E0: dtor2
+      0x1401126E0: Finalize
   Client::UI::Info::InfoProxy26:
     vtbls:
       - ea: 0x141950BD8
@@ -1680,14 +1688,14 @@ classes:
         base: Client::UI::Info::InfoProxyInterface
     funcs:
       0x140114ED0: ctor
-      0x140114FA0: dtor2
+      0x140114FA0: Finalize
   Client::UI::Info::InfoProxyCrossWorldLinkShell:
     vtbls:
       - ea: 0x141950D20
         base: Client::UI::Info::InfoProxyInterface
     funcs:
       0x1401157C0: ctor
-      0x140176420: dtor2
+      0x140176420: Finalize
   Client::UI::Info::InfoProxyCrossWorldLinkShellMember:
     vtbls:
       - ea: 0x141950D98
@@ -1700,14 +1708,14 @@ classes:
         base: Client::UI::Info::InfoProxyInterface
     funcs:
       0x14011A2E0: ctor
-      0x1401763A0: dtor2
+      0x1401763A0: Finalize
   Client::UI::Info::InfoProxyCircle:
     vtbls:
       - ea: 0x141950F38
         base: Client::UI::Info::InfoProxyInterface
     funcs:
       0x14011BE10: ctor
-      0x1401761C0: dtor2
+      0x1401761C0: Finalize
   Client::UI::Info::InfoProxyCircleFinder:
     vtbls:
       - ea: 0x141950F98
@@ -1925,6 +1933,7 @@ classes:
       8: GetAddonId
     funcs:
       0x140215440: ctor
+      0x140215470: Finalize
       0x1402159F0: GetAgentByInternalId
       0x140215A70: GetAgentInventoryContext
       0x140215A50: GetAgentContext
@@ -1977,6 +1986,7 @@ classes:
       0x140231010: IsAllowedToOpenCharacterTarget
       0x140232B40: AddContextMenuItem2 # (this, int eventId, uint textId, bool disabled, bool submenu)
       0x140232BB0: AddContextMenuItem # (this, int eventId, char* text, bool disabled, bool submenu, bool copyText)
+      0x14031E640: Finalize
   Client::UI::Agent::LobbyUIClient:
     vtbls:
       - ea: 0x14196DC88
@@ -1989,6 +1999,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x14024D0B0: ctor
+      0x14024D590: Finalize
       0x140251930: UpdateCharaSelectDisplay
       0x1402599B0: OpenLoginWaitDialog
   Client::UI::Agent::AgentLobby::LobbyData:
@@ -2010,10 +2021,16 @@ classes:
     vtbls:
       - ea: 0x14196FB40
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1402929F0: ctor
+      0x140292AC0: Finalize
   Client::UI::Agent::AgentFreeCompanyChest:
     vtbls:
       - ea: 0x14196FF50
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1402AAD30: ctor
+      0x1402AAEE0: Finalize
   Client::UI::Agent::AgentExplorationInterface:
     vtbls:
       - ea: 0x141970638
@@ -2022,18 +2039,26 @@ classes:
     vtbls:
       - ea: 0x141970700
         base: Client::UI::Agent::AgentExplorationInterface
+    funcs:
+      0x1402D4FD0: Finalize
   Client::UI::Agent::AgentSubmersibleExploration:
     vtbls:
       - ea: 0x141970B68
         base: Client::UI::Agent::AgentExplorationInterface
+    funcs:
+      0x1402DB6E0: Finalize
   Client::UI::Agent::AgentSubmersibleExplorationDetail:
     vtbls:
       - ea: 0x141970AD8
         base: Client::UI::Agent::AgentExplorationDetailInterface
+    funcs:
+      0x1402DB200: Finalize
   Client::UI::Agent::AgentAirShipExplorationDetail:
     vtbls:
       - ea: 0x14196F530
         base: Client::UI::Agent::AgentExplorationDetailInterface
+    funcs:
+      0x140280D20: Finalize
   Client::UI::Agent::AgentExplorationDetailInterface:
     vtbls:
       - ea: 0x14196F450
@@ -2127,6 +2152,7 @@ classes:
         base: Client::Graphics::ReferencedClassBase
     funcs:
       0x1403621C0: ctor
+      0x140362320: Finalize
   Client::Graphics::Kernel::ShaderSceneKey:
     vtbls:
       - ea: 0x14197E568
@@ -2487,7 +2513,7 @@ classes:
       0x14048A060: LoadMDLSubFilesForSlot
       0x14048D590: UpdateWetness
       0x140494C80: CreateSlotStorage
-      0x1404AA0D0: dtor2  # Called by base dtor
+      0x1404AA0D0: Finalize
       0x14074F000: Create
   Client::Graphics::Scene::Human:
     vtbls:
@@ -2772,6 +2798,8 @@ classes:
         base: Apricot::ApricotInstanceListenner
       - ea: 0x141985030
         base: Client::Graphics::Vfx::VfxResourceInstanceListenner
+    funcs:
+      0x140409BF0: Finalize
   Client::Graphics::Vfx::VfxDataListenner:
     vtbls:
       - ea: 0x14194E0E8
@@ -2878,6 +2906,7 @@ classes:
         base: Component::GUI::AtkEventListener
     funcs:
       0x140501E00: ctor
+      0x140501F60: Finalize
       0x1405024E0: AttachTooltip
       0x140502720: DetachTooltipNode
       0x140502940: ShowNodeTooltip  # takes node as argument
@@ -2924,6 +2953,7 @@ classes:
       0x140509EC0: ctor
       0x14052C440: GetSingleton
       0x14052C450: GetSingleton2
+      0x14058FFB0: Finalize
   Component::GUI::AtkDragDropManager:
     vtbls:
       - ea: 0x141995148
@@ -3105,6 +3135,7 @@ classes:
       61: OnMouseOut
     funcs:
       0x1405289E0: ctor
+      0x140528C10: Finalize2
       0x140529050: FireCallbackInt  # this creates an int AtkValue and puts its argument into it before calling Callback
       0x1405293A0: SetPosition
       0x140529520: SetAlpha
@@ -3118,8 +3149,8 @@ classes:
       0x140529C90: CalculateBounds
       0x14052A460: SetFlag
       0x14052BFA0: Draw
-      0x14052C4C0: SubscribeAtkArrayData # handler: 4C 8B D2 48 8B D1 41 83 F9 04
-      0x14052C650: UnsubscribeAtkArrayData # handler: 48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 48 8B FA 48 8B D9 41 83 F9 04
+      0x14052C4C0: SubscribeAtkArrayData # handler: "4C 8B D2 48 8B D1 41 83 F9 04"
+      0x14052C650: UnsubscribeAtkArrayData # handler: "48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 48 8B FA 48 8B D9 41 83 F9 04"
       0x14052C900: SetFocusNode
       0x14052CE80: GetNodeById
       0x14052CFB0: GetButtonNodeById
@@ -3148,6 +3179,7 @@ classes:
         base: Component::GUI::AtkComponentBase
     funcs:
       0x1405424A0: ctor
+      0x14056D900: Finalize
       0x140593680: GetOwnerNode
   Component::GUI::AtkComponentIcon:
     vtbls:
@@ -3166,6 +3198,7 @@ classes:
       15: GetAtkResNode
     funcs:
       0x1405455E0: ctor
+      0x1405456E0: Finalize
       0x1405493E0: RemoveAllEvents # Removes all events this component is listening to
   Component::GUI::AtkComponentList:
     vtbls:
@@ -3181,11 +3214,13 @@ classes:
         base: Component::GUI::AtkComponentList
     funcs:
       0x1405555F0: ctor
+      0x1405556B0: Finalize
   Component::GUI::AtkModule:
     vtbls:
       - ea: 0x141996520
         base: Component::GUI::AtkModuleInterface
     vfuncs:
+      0: dtor
       9: GetNumberArrayData
       10: GetStringArrayData
       11: GetExtendArrayData
@@ -3196,6 +3231,7 @@ classes:
       63: OpenMapWithMapLink
     funcs:
       0x14055A350: ctor
+      0x14055AB60: Finalize
       0x14055ADC0: Initialize
       0x14055B1E0: HandleInput
       0x14055B5E0: IsTextInputActive
@@ -3217,18 +3253,21 @@ classes:
         base: Component::GUI::AtkComponentBase
     funcs:
       0x1405613D0: ctor
+      0x1405614C0: Finalize
   Component::GUI::AtkComponentInputBase:
     vtbls:
       - ea: 0x1419969D8
         base: Component::GUI::AtkComponentBase
     funcs:
       0x1405627E0: ctor
+      0x140562940: Finalize
   Component::GUI::AtkComponentTextInput:
     vtbls:
       - ea: 0x141996A78
         base: Component::GUI::AtkComponentInputBase
     funcs:
       0x140563FD0: ctor
+      0x140564160: Finalize
   Component::GUI::AtkComponentNumericInput:
     vtbls:
       - ea: 0x141996B78
@@ -3304,6 +3343,7 @@ classes:
         base: Component::GUI::AtkComponentBase
     funcs:
       0x140574200: ctor
+      0x1405743A0: Finalize
   Component::GUI::AtkComponentPreview:
     vtbls:
       - ea: 0x141997198
@@ -3336,6 +3376,7 @@ classes:
       0x140579FB0: LoadIconById
       0x140579FF0: GetIconId
       0x14057A420: AttachTooltip
+      0x14057A950: Finalize
   Component::GUI::AtkComponentMultipurpose:
     vtbls:
       - ea: 0x141997498
@@ -3452,8 +3493,8 @@ classes:
       - ea: 0x1419A4F18
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
-      0x140620770: ctor
-      0x1406A7330: ctor_FromUserFileManager
+      0x140620770: Finalize
+      0x1406A7330: ctor
       0x1406AB9B0: MjiCreateWorkshopPreset
   Client::UI::UI3DModule::MapInfo:
     vtbls:
@@ -3596,6 +3637,7 @@ classes:
         base: Common::Configuration::ConfigBase::ChangeEventInterface
     funcs:
       0x140617E80: ctor
+      0x140618870: Finalize
       0x140618FA0: Update
       0x140619420: HandleInputUpdate
   Client::System::Crypt::SimpleString:
@@ -3622,6 +3664,8 @@ classes:
       - ea: 0x1419AB268
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
+      0x140620680: Finalize
+      0x140687E20: ctor
       0x140688330: ClearTellHistory
   Client::UI::Misc::ConfigModule:
     vtbls:
@@ -3653,6 +3697,7 @@ classes:
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
       0x14065B5B0: ctor
+      0x1406208B0: Finalize
       0x14065B6B0: GetMacro
       0x14065B6F0: ReplaceMacroLines # replaces macro with lines stored in string
       0x14065B710: AppendMacroLines # appends lines stored in string to macro
@@ -3665,6 +3710,8 @@ classes:
     vfuncs:
       0: dtor
     funcs:
+      0x14065DD10: ctor
+      0x14065E7F0: Finalize
       0x14065F470: GetAddonText
       0x140660640: FormatAddonText
       0x1406608F0: FormatAddonText2
@@ -3678,6 +3725,7 @@ classes:
         base: Component::Log::LogModule
     funcs:
       0x14066DC50: ctor
+      0x14066DF10: Finalize
       0x14066F4F0: PrintMessage
       0x140670AC0: ShowLogMessage # (this, logMessageId)
       0x140670C50: ShowLogMessage<uint> # (this, logMessageId, IntegerParameter1)
@@ -3694,8 +3742,8 @@ classes:
       - ea: 0x1419AB1F8
         base: Client::System::Input::InputData::InputCodeModifiedInterface
     funcs:
-      0x14067A4F0: ctor_FromFileManagerUiManager
-      0x14067A6E0: ctor
+      0x14067A4F0: ctor
+      0x14067A6E0: Finalize
       0x14067CAA0: IsHotbarEmpty
       0x140680060: ExecuteSlot
       0x14067B150: ExecuteSlotById
@@ -3751,6 +3799,7 @@ classes:
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
       0x140695120: ctor
+      0x1406952E0: Finalize
       0x140697130: SearchForItem
   Client::UI::Misc::ItemOrderModule:
     vtbls:
@@ -3758,6 +3807,7 @@ classes:
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
       0x1406A4890: ctor
+      0x1406A4AF0: Finalize
   Client::UI::Misc::RaptureTeleportHistory:
     vtbls:
       - ea: 0x1419AB6C0
@@ -3775,8 +3825,8 @@ classes:
       - ea: 0x1419ABD58
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
-      0x1406B6B50: ctor_FromUserFileEvent # (this, UserFileEvent*)
-      0x1406B6BD0: ctor # (this)
+      0x1406B6B50: ctor # (this, UserFileEvent*)
+      0x1406B6BD0: Finalize
       0x1406B7070: GetComment
       0x1406B70D0: SetComment
   Client::UI::Misc::CharaView:
@@ -3788,6 +3838,7 @@ classes:
       2: Finalize
     funcs:
       0x1406B7EA0: ctor
+      0x1406B7FC0: Finalize2
   Client::Game::SavedAppearanceManager:
     vtbls:
       - ea: 0x1419AC800
@@ -3820,7 +3871,7 @@ classes:
       57: IsDead
       58: IsNotMounted
       59: Terminate
-      60: Destroy
+      60: Destroy # dtor
       61: IsCharacter
       68: OnInitialize
     funcs:
@@ -3853,7 +3904,7 @@ classes:
       0x140744640: GetCompanionOwnerID
       0x1407455E0: GetTargetId
       0x140746300: SetMode
-      0x140748520: dtor
+      0x140748520: Finalize
       0x14074F6B0: SetupBNpc
       0x1407502C0: CopyFromCharacter
       0x1407AD460: ctor
@@ -3923,6 +3974,7 @@ classes:
         base: Client::UI::Shell::RaptureShellCommandInterface
     funcs:
       0x1407750B0: ctor
+      0x140777C30: Finalize
       0x140778A20: ExecuteMacro
       0x140778B00: TryGetMacroIconCommand
       0x140779910: SetChatChannel
@@ -4371,7 +4423,7 @@ classes:
         base: Client::Graphics::Vfx::VfxDataListenner
     funcs:
       0x1407AD370: ctor
-      0x1407AD650: dtor
+      0x1407AD650: Finalize
   Client::Game::TitleController:
     vtbls:
       - ea: 0x1419F9768
@@ -4439,6 +4491,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140BE60B0: ctor
+      0x140BE6930: Finalize
       0x140BEC570: UpdateParty
       0x140BF05B0: UpdateHotBar
       0x140BFDD10: OpenContextMenuFromTarget
@@ -4450,21 +4503,27 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140CAA430: ctor
+      0x140CAA660: Finalize
       0x140CAF670: InsertTextCommandParam
   Client::UI::Agent::AgentInventory:
     vtbls:
       - ea: 0x141A140C8
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140C1E830: ctor
   Client::UI::Agent::AgentScenarioTree:
     vtbls:
       - ea: 0x1419FCB98
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A1A390: ctor
   Client::UI::Agent::AgentInventoryContext:
     vtbls:
       - ea: 0x14196D9B0
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x1402252D0: ctor
+      0x140225410: Finalize
       0x140226030: UseItem
       0x140226960: UnblockItemSlot
       0x1402254A0: OpenForItemSlot
@@ -4480,62 +4539,87 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x1402674F0: ctor
+      0x1402676D0: Finalize
   Client::UI::Agent::AgentConfigPadCustomize:
     vtbls:
       - ea: 0x14196E938
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140275EC0: ctor
+      0x140275F70: Finalize
   Client::UI::Agent::AgentEmote:
     vtbls:
       - ea: 0x141A17BD8
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140D16410: ctor
+      0x140D44120: Finalize
   Client::UI::Agent::AgentMacro:
     vtbls:
       - ea: 0x141A14140
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140C21AF0: ctor
+      0x140C8F290: Finalize
   Client::UI::Agent::AgentFishingNote:
     vtbls:
       - ea: 0x141A17F18
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140D230C0: ctor
   Client::UI::Agent::AgentFishGuide:
     vtbls:
       - ea: 0x141A17EA0
         base: Client::UI::Agent::AgentInterface
     funcs:
+      0x140D20910: ctor
       0x140D209B0: OpenForItemId
   Client::UI::Agent::AgentFishRecord:
     vtbls:
       - ea: 0x141A17FA0
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140D25F90: ctor
   Client::UI::Agent::AgentQuestJournal:
     vtbls:
       - ea: 0x1419FB9A0
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1409CF0D0: ctor
   Client::UI::Agent::AgentActionMenu:
     vtbls:
       - ea: 0x141A165C8
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140CB60F0: ctor
+      0x140D43FB0: Finalize
   Client::UI::Agent::AgentRequest:
     vtbls:
       - ea: 0x141A135F0
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140BCD2E0: ctor
+      0x140BCD400: Finalize
   Client::UI::Agent::AgentMarker:
     vtbls:
       - ea: 0x141A14EA8
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140C552A0: ctor
   Client::UI::Agent::AgentTrade:
     vtbls:
       - ea: 0x1419FDD18
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A36670: ctor
+      0x140A36740: Finalize
   Client::UI::Agent::AgentScreenLog:
     vtbls:
       - ea: 0x1419FCCA8
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140A1CC70: ctor
+      0x140A51BD0: Finalize
       0x140A1F210: OpenBalloon
       0x140A1F6E0: CloseBalloon
       0x140A1F870: ResetBalloon
@@ -4543,34 +4627,53 @@ classes:
     vtbls:
       - ea: 0x141A141B8
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140C24C20: ctor
   Client::UI::Agent::AgentRepair:
     vtbls:
       - ea: 0x1419FC3E0
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1409FA4D0: ctor
   Client::UI::Agent::AgentColorant:
     vtbls:
       - ea: 0x141A17278
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140CF40A0: ctor
+      0x140CF41B0: Finalize
   Client::UI::Agent::AgentHowTo:
     vtbls:
       - ea: 0x141A13F28
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140C1B660: ctor
+      0x140C1B730: Finalize
   Client::UI::Agent::AgentHowToNotice:
     vtbls:
       - ea: 0x141A13FB0
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140C1C3C0: ctor
   Client::UI::Agent::AgentContentsTutorial:
     vtbls:
       - ea: 0x141A17730
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140D09E30: ctor
   Client::UI::Agent::AgentInspect:
     vtbls:
       - ea: 0x141A146F8
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140C348C0: ctor
+      0x140C8F200: Finalize
   Client::UI::Agent::AgentTelepotTown:
     vtbls:
       - ea: 0x1419FDC28
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A31760: ctor
   Client::UI::Agent::AgentSocial:
     vtbls:
       - ea: 0x14196F648
@@ -4601,12 +4704,14 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x1402865F0: ctor
+      0x140286680: Finalize
   Client::UI::Agent::AgentSearch:
     vtbls:
       - ea: 0x14196F9B8
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x14028C3B0: ctor
+      0x14028C620: Finalize
   Client::UI::Agent::AgentDetail:
     vtbls:
       - ea: 0x14196F930
@@ -4623,44 +4728,65 @@ classes:
     vtbls:
       - ea: 0x141A16550
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140CB1BC0: ctor
   Client::UI::Agent::AgentRetainer:
     vtbls:
       - ea: 0x1419FC650
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A043C0: ctor
+      0x140A045B0: Finalize
   Client::UI::Agent::AgentRetainerItemTransfer:
     vtbls:
       - ea: 0x141ACBC30
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x14132F7D0: ctor
   Client::UI::Agent::AgentReturn:
     vtbls:
       - ea: 0x1419FC9A8
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A14410: ctor
   Client::UI::Agent::AgentCutscene:
     vtbls:
       - ea: 0x141A17920
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140D0E360: ctor
   Client::UI::Agent::AgentCutsceneReplay:
     vtbls:
       - ea: 0x141A179B8
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140D0F3E0: ctor
+      0x140D0F4C0: Finalize
   Client::UI::Agent::AgentMonsterNote:
     vtbls:
       - ea: 0x141A15498
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140C61A70: ctor
   Client::UI::Agent::AgentItemSearch:
     vtbls:
       - ea: 0x14196FBC8
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140294C40: ctor
+      0x140294F50: Finalize
   Client::UI::Agent::AgentGoldSaucerReward:
     vtbls:
       - ea: 0x141A17D50
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140D1C8F0: ctor
   Client::UI::Agent::AgentFateProgress:
     vtbls:
       - ea: 0x141A17CD8
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140D1B6D0: ctor
   Client::UI::Agent::AgentCompanyCraftMaterial:
     vtbls:
       - ea: 0x141971568
@@ -4671,18 +4797,22 @@ classes:
     vtbls:
       - ea: 0x141A16FC0
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140CEE150: ctor
   Client::UI::Agent::AgentFreeCompany:
     vtbls:
       - ea: 0x14196FC68
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x1402A6CD0: ctor
+      0x1402A6F60: Finalize
   Client::UI::Agent::AgentFreeCompanyProfile:
     vtbls:
       - ea: 0x14196FD68
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x1402A8AF0: ctor
+      0x1402A8B40: Finalize
   Client::UI::Agent::AgentFreeCompanyProfileEdit:
     vtbls:
       - ea: 0x14196FDE0
@@ -4699,59 +4829,86 @@ classes:
     vtbls:
       - ea: 0x141970060
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1402B05D0: ctor
   Client::UI::Agent::AgentFreeCompanyCrestDecal:
     vtbls:
       - ea: 0x1419700E0
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x1402B28F0: ctor
+      0x1402B29E0: Finalize
   Client::UI::Agent::AgentArmouryBoard:
     vtbls:
       - ea: 0x141A16AC0
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140CDBFD0: ctor
+      0x140CDC0B0: Finalize
   Client::UI::Agent::AgentHowToList:
     vtbls:
       - ea: 0x141A14028
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140C1CA30: ctor
+      0x140C1CAA0: Finalize
   Client::UI::Agent::AgentCabinet:
     vtbls:
       - ea: 0x141A16F48
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140CEDAC0: ctor
+      0x140CEDB90: Finalize
   Client::UI::Agent::AgentLegacyItemStorage:
     vtbls:
       - ea: 0x141A14AE0
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140C50F30: ctor
   Client::UI::Agent::AgentGrandCompanyRank:
     vtbls:
       - ea: 0x141A13AB8
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140C078C0: ctor
   Client::UI::Agent::AgentGrandCompanySupply:
     vtbls:
       - ea: 0x141A16D50
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140CE38B0: ctor
   Client::UI::Agent::AgentGrandCompanyExchange:
     vtbls:
       - ea: 0x141A13A40
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140C06F80: ctor
   Client::UI::Agent::AgentGearSet:
     vtbls:
       - ea: 0x141A139C0
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140C03050: ctor
+      0x140C03230: Finalize
       0x140C03B50: OpenRegistGearSetList # (this, InventoryItem*, ushort)
   Client::UI::Agent::AgentSupportMain:
     vtbls:
       - ea: 0x141972D88
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140302600: ctor
   Client::UI::Agent::AgentSupportSubList:
     vtbls:
       - ea: 0x141972E00
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140303ED0: ctor
   Client::UI::Agent::AgentSupportSubView:
     vtbls:
       - ea: 0x141972E80
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140304C70: ctor
   Client::UI::Agent::AgentSupportSubEdit:
     vtbls:
       - ea: 0x141972F00
@@ -4762,6 +4919,9 @@ classes:
     vtbls:
       - ea: 0x141A16430
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140CA2220: ctor
+      0x140CA2570: Finalize
   Client::UI::Agent::AgentLicenseViewer:
     vtbls:
       - ea: 0x14196E258
@@ -4770,22 +4930,34 @@ classes:
     vtbls:
       - ea: 0x141A156E0
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140C67140: ctor
   Client::UI::Agent::AgentPadMouseMode:
     vtbls:
       - ea: 0x141A15A88
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140C71DA0: ctor
   Client::UI::Agent::AgentRecommendList:
     vtbls:
       - ea: 0x1419FC110
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1409F02F0: ctor
+      0x1409F03E0: Finalize
   Client::UI::Agent::AgentBuddy:
     vtbls:
       - ea: 0x141A16ED0
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140CE9460: ctor
+      0x140CE9550: Finalize
   Client::UI::Agent::AgentColosseumRecord:
     vtbls:
       - ea: 0x141A17388
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140CFA0D0: ctor
   Client::UI::Agent::AgentCloseMessage:
     vtbls:
       - ea: 0x14196EB20
@@ -4814,47 +4986,69 @@ classes:
     vtbls:
       - ea: 0x1419FBED8
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1409E9C20: ctor
   Client::UI::Agent::AgentBait:
     vtbls:
       - ea: 0x141A16DE0
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140CE6AC0: ctor
   Client::UI::Agent::AgentHousing:
     vtbls:
       - ea: 0x141AC0D60
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1411E8560: ctor
+      0x1411E8AF0: Finalize
   Client::UI::Agent::AgentHousingHarvest:
     vtbls:
       - ea: 0x141AC0F70
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x141202590: ctor
   Client::UI::Agent::AgentHousingSignboard:
     vtbls:
       - ea: 0x141AC0DF8
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1411FD160: ctor
   Client::UI::Agent::AgentHousingPortal:
     vtbls:
       - ea: 0x141AC1078
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x141204400: ctor
   Client::UI::Agent::AgentHousingTravellersNote:
     vtbls:
       - ea: 0x141AC10F0
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x141205CF0: ctor
   Client::UI::Agent::AgentHousingPlant:
     vtbls:
       - ea: 0x141AC0FE8
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x141202D60: ctor
   Client::UI::Agent::AgentPersonalRoomPortal:
     vtbls:
       - ea: 0x141A14CC0
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140C53740: ctor
   Client::UI::Agent::AgentMansionSelectRoom:
     vtbls:
       - ea: 0x141A14D58
         base: Client::UI::Agent::AgentPersonalRoomPortal
+    funcs:
+      0x140C54B50: ctor
   Client::UI::Agent::AgentSalvage:
     vtbls:
       - ea: 0x141A16C38
         base: Client::UI::Agent::AgentInterface
     funcs:
+      0x140CE0310: ctor
       0x1409FF390: SalvageItem # (this, InventoryItem* ushort, byte)
       0x140A00000: LoadCategoryNames
       0x1409FF790: ItemListRefresh # Clears item list and signals agent to update it next frame
@@ -4866,82 +5060,122 @@ classes:
     vtbls:
       - ea: 0x141AC1168
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x141206880: ctor
   Client::UI::Agent::AgentTreasureHunt:
     vtbls:
       - ea: 0x1419FDEA0
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A3A710: ctor
   Client::UI::Agent::AgentLookingForGroup:
     vtbls:
       - ea: 0x1419701D8
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x1402B4D50: ctor
+      0x1402B5090: Finalize
   Client::UI::Agent::AgentContentsMvp:
     vtbls:
       - ea: 0x141A17540
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140D01D10: ctor
   Client::UI::Agent::AgentVoteKick:
     vtbls:
       - ea: 0x1419FE008
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A3C310: ctor
   Client::UI::Agent::AgentVoteGiveUp:
     vtbls:
       - ea: 0x1419FDF90
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A3BE70: ctor
   Client::UI::Agent::AgentVoteTreasure:
     vtbls:
       - ea: 0x1419FE080
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A3C9C0: ctor
   Client::UI::Agent::AgentPvpProfile:
     vtbls:
       - ea: 0x141A15CF8
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140C754B0: ctor
+      0x140C75630: Finalize
   Client::UI::Agent::AgentContentsNote:
     vtbls:
       - ea: 0x141A175B8
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140D02BA0: ctor
   Client::UI::Agent::AgentReadyCheck:
     vtbls:
       - ea: 0x141970260
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1402CA890: ctor
   Client::UI::Agent::AgentFieldMarker:
     vtbls:
       - ea: 0x141A17E28
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140D1EC70: ctor
   Client::UI::Agent::AgentRetainerStatus:
     vtbls:
       - ea: 0x1419FC740
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A0AEC0: ctor
+      0x140A0AFD0: Finalize
   Client::UI::Agent::AgentRetainerTask:
     vtbls:
       - ea: 0x1419FC8B8
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A0DC30: ctor
   Client::UI::Agent::AgentRelicNoteBook:
     vtbls:
       - ea: 0x1419FC258
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1409F61E0: ctor
+      0x1409F6220: Finalize
   Client::UI::Agent::AgentRelicSphere:
     vtbls:
       - ea: 0x1419FC2E0
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1409F79A0: ctor
+      0x1409F79F0: Finalize
   Client::UI::Agent::AgentTradeMultiple:
     vtbls:
       - ea: 0x1419FDDA0
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A377B0: ctor
   Client::UI::Agent::AgentRelicSphereUpgrade:
     vtbls:
       - ea: 0x1419FC368
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1409F9690: ctor
   Client::UI::Agent::AgentRelic2Glass:
     vtbls:
       - ea: 0x1419FC538
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1409FE950: ctor
   Client::UI::Agent::AgentSatisfactionSupply:
     vtbls:
       - ea: 0x1419FCA98
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140A16930: ctor
+      0x140A167D0: ctor
+      0x140A16930: Finalize
       0x140A19550: UpdateTimeRemaining # (this, resetTimestamp) returns true if an update occurred
       0x140A195F0: UpdateAddon # at least the TimeRemaining
       0x140A198A0: UpdateClassJobLevel
@@ -4951,26 +5185,38 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140309B40: ctor
+      0x14031E700: Finalize
   Client::UI::Agent::AgentAdventureNoteBook:
     vtbls:
       - ea: 0x141A16658
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140CBC5E0: ctor
+      0x140CBC690: Finalize
   Client::UI::Agent::AgentArmouryNotebook:
     vtbls:
       - ea: 0x141A16BC0
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140CE0250: ctor
   Client::UI::Agent::AgentMinionMountBase:
     vtbls:
       - ea: 0x141A15048
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140C57CB0: ctor
   Client::UI::Agent::AgentMinionNoteBook:
     vtbls:
       - ea: 0x141A151C0
         base: Client::UI::Agent::AgentMinionMountBase
+    funcs:
+      0x140C5A950: ctor
   Client::UI::Agent::AgentMountNoteBook:
     vtbls:
       - ea: 0x141A15510
         base: Client::UI::Agent::AgentMinionMountBase
+    funcs:
+      0x140C64FC0: ctor
   Client::UI::Agent::AgentItemComp:
     vtbls:
       - ea: 0x141A13E30
@@ -4982,122 +5228,192 @@ classes:
     vtbls:
       - ea: 0x141A176B8
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140D08E30: ctor
   Client::UI::Agent::AgentMobhunt:
     vtbls:
       - ea: 0x141A153D8
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140C5FF20: ctor
   Client::UI::Agent::AgentPatchMark:
     vtbls:
       - ea: 0x141A15B00
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140C72050: ctor
   Client::UI::Agent::AgentHousingWithdrawStorage:
     vtbls:
       - ea: 0x141AC11F0
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x141209690: ctor
   Client::UI::Agent::AgentWeatherReport:
     vtbls:
       - ea: 0x1419FE0F8
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A3CF80: ctor
   Client::UI::Agent::AgentMateriaAttach:
     vtbls:
       - ea: 0x141A148E0
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140C418E0: ctor
   Client::UI::Agent::AgentMiragePrism:
     vtbls:
       - ea: 0x141A15318
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140C5BDF0: ctor
+      0x140C5BED0: Finalize
   Client::UI::Agent::AgentAetherCurrent:
     vtbls:
       - ea: 0x141A166E0
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140CBDF60: ctor
   Client::UI::Agent::AgentFreeCompanyCreditShop:
     vtbls:
       - ea: 0x141971E08
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1402DFE70: ctor
   Client::UI::Agent::AgentCurrency:
     vtbls:
       - ea: 0x141A178A8
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140D0C1F0: ctor
   Client::UI::Agent::AgentPuryfyItemSelector:
     vtbls:
       - ea: 0x141A15C08
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140C72D00: ctor
+      0x140C72DC0: Finalize
   Client::UI::Agent::AgentLovmParty:
     vtbls:
       - ea: 0x141A114A8
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140BA0090: ctor
+      0x140BA00F0: Finalize
   Client::UI::Agent::AgentLovmRanking:
     vtbls:
       - ea: 0x141A11548
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140BA6180: ctor
   Client::UI::Agent::AgentLovmNamePlate:
     vtbls:
       - ea: 0x141A115C0
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140BA68D0: ctor
   Client::UI::Agent::AgentCharacterTitle:
     vtbls:
       - ea: 0x141A17038
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140CEE820: ctor
   Client::UI::Agent::AgentCharacterTitleSelect:
     vtbls:
       - ea: 0x141A170C0
         base: Client::UI::Agent::AgentCharacterTitle
+    funcs:
+      0x140CF00A0: ctor
   Client::UI::Agent::AgentLovmResult:
     vtbls:
       - ea: 0x141A11638
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140BA6E80: ctor
   Client::UI::Agent::AgentLotteryDaily:
     vtbls:
       - ea: 0x141A10CB8
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140B8A1E0: ctor
   Client::UI::Agent::AgentAetherialWheel:
     vtbls:
       - ea: 0x141AC1268
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x14120A230: ctor
+      0x14120A320: Finalize
   Client::UI::Agent::AgentLotteryWeekly:
     vtbls:
       - ea: 0x141A10D48
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140B8B6B0: ctor
   Client::UI::Agent::AgentGoldSaucer:
     vtbls:
       - ea: 0x141A10DC0
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140B8DC80: ctor
+      0x140B8DDE0: Finalize
   Client::UI::Agent::AgentTripleTriadCoinExchange:
     vtbls:
       - ea: 0x141A10F28
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140B96B10: ctor
   Client::UI::Agent::AgentShopExchangeCoin:
     vtbls:
       - ea: 0x141A110F0
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140B9B580: ctor
   Client::UI::Agent::AgentJournalAccept:
     vtbls:
       - ea: 0x1419FB908
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1409CB090: ctor
+      0x1409CB110: Finalize
   Client::UI::Agent::AgentJournalResult:
     vtbls:
       - ea: 0x1419FBB08
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1409D7470: ctor
+      0x1409D74F0: Finalize
   Client::UI::Agent::AgentLeveQuest:
     vtbls:
       - ea: 0x141A13D38
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140C13880: ctor
+      0x140C13930: Finalize
   Client::UI::Agent::AgentCompanyCraftRecipeNotebook:
     vtbls:
       - ea: 0x1419708D8
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1402D67C0: ctor
+      0x1402D6850: Finalize
   Client::UI::Agent::AgentExplorationPartsInterface:
     vtbls:
       - ea: 0x1419703C8
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1402D00F0: ctor
+      0x1402D02E0: Finalize
   Client::UI::Agent::AgentAirShipParts:
     vtbls:
       - ea: 0x141970500
         base: Client::UI::Agent::AgentExplorationPartsInterface
+    funcs:
+      0x1402D1540: ctor
   Client::UI::Agent::AgentSubmersibleParts:
     vtbls:
       - ea: 0x141970950
         base: Client::UI::Agent::AgentExplorationPartsInterface
+    funcs:
+      0x1402D8800: ctor
   Client::UI::Agent::AgentExplorationResultInterface:
     vtbls:
       - ea: 0x1419707C8
@@ -5114,26 +5430,41 @@ classes:
     vtbls:
       - ea: 0x141A10E38
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140B944E0: ctor
+      0x140B94530: Finalize
   Client::UI::Agent::AgentSkyIslandFinder:
     vtbls:
       - ea: 0x1419FCE70
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A223B0: ctor
+      0x140A22410: Finalize
   Client::UI::Agent::AgentSkyIslandFinderSetting:
     vtbls:
       - ea: 0x1419FCEF8
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A24950: ctor
   Client::UI::Agent::AgentBeginnersMansionProblem:
     vtbls:
       - ea: 0x141A16E58
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140CE7680: ctor
+      0x140CE7750: Finalize
   Client::UI::Agent::AgentItemContextCustomize:
     vtbls:
       - ea: 0x141A147E8
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140C37BE0: ctor
   Client::UI::Agent::AgentDpsChallenge:
     vtbls:
       - ea: 0x141A17B28
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140D14200: ctor
   Client::UI::Agent::AgentPlayGuide:
     vtbls:
       - ea: 0x141972F98
@@ -5150,10 +5481,15 @@ classes:
     vtbls:
       - ea: 0x141A157E0
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140C687A0: ctor
+      0x140C68950: Finalize
   Client::UI::Agent::AgentBeginnerChatList:
     vtbls:
       - ea: 0x141971E88
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1402E11C0: ctor
   Client::UI::Agent::AgentReturnerDialog:
     vtbls:
       - ea: 0x141972158
@@ -5162,10 +5498,14 @@ classes:
     vtbls:
       - ea: 0x141A15938
         base: Client::UI::Agent::AgentOrchestrion
+    funcs:
+      0x140C6F6C0: ctor
   Client::UI::Agent::AgentHousingEditContainer:
     vtbls:
       - ea: 0x141AC12F0
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x14120C6E0: ctor
   Client::UI::Agent::AgentConfigPartyListRoleSort:
     vtbls:
       - ea: 0x14196EB98
@@ -5174,74 +5514,116 @@ classes:
     vtbls:
       - ea: 0x1419FC048
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1409EF9D0: ctor
   Client::UI::Agent::AgentYkwNote:
     vtbls:
       - ea: 0x1419FE358
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A3F9E0: ctor
   Client::UI::Agent::AgentContentsFinderMenu:
     vtbls:
       - ea: 0x141A17450
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140CFECD0: ctor
+      0x140CFED60: Finalize
   Client::UI::Agent::AgentRaidFinder:
     vtbls:
       - ea: 0x1419FBCB8
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1409DAE80: ctor
+      0x1409DAF80: Finalize
   Client::UI::Agent::AgentGcArmyExpedition:
     vtbls:
       - ea: 0x1419FF3C8
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A70AF0: ctor
   Client::UI::Agent::AgentGcArmyMemberList:
     vtbls:
       - ea: 0x1419FF298
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A67AC0: ctor
   Client::UI::Agent::AgentDeepDungeonInspect:
     vtbls:
       - ea: 0x1419FEF28
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A5F6E0: ctor
   Client::UI::Agent::AgentDeepDungeonMap:
     vtbls:
       - ea: 0x1419FF018
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A60FF0: ctor
   Client::UI::Agent::AgentDeepDungeonStatus:
     vtbls:
       - ea: 0x1419FF090
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A62490: ctor
   Client::UI::Agent::AgentDeepDungeonSaveData:
     vtbls:
       - ea: 0x1419FF108
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A63AF0: ctor
+      0x140A63BB0: Finalize
   Client::UI::Agent::AgentDeepDungeonScore:
     vtbls:
       - ea: 0x1419FF220
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A67050: ctor
+      0x140A670E0: Finalize
   Client::UI::Agent::AgentGcArmyTraining:
     vtbls:
       - ea: 0x1419FF580
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A75DE0: ctor
+      0x140A75E10: Finalize
   Client::UI::Agent::AgentGcArmyMenberProfile:
     vtbls:
       - ea: 0x1419FF330
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A69710: ctor
   Client::UI::Agent::AgentGcArmyExpeditionResult:
     vtbls:
       - ea: 0x1419FF4B8
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A74880: ctor
   Client::UI::Agent::AgentGcArmyCapture:
     vtbls:
       - ea: 0x1419FF440
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A730A0: ctor
   Client::UI::Agent::AgentGcArmyOrder:
     vtbls:
       - ea: 0x1419FF5F8
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A77140: ctor
   Client::UI::Agent::AgentOrchestrionPlayList:
     vtbls:
       - ea: 0x141A158A0
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140C6B910: ctor
+      0x140C6BA60: Finalize
   Client::UI::Agent::AgentWeeklyBingo:
     vtbls:
       - ea: 0x141A01160
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140AB9050: ctor
   Client::UI::Agent::AgentCountDownSettingDialog:
     vtbls:
       - ea: 0x141971FF0
@@ -5250,18 +5632,27 @@ classes:
     vtbls:
       - ea: 0x141A011F0
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140ABD080: ctor
   Client::UI::Agent::AgentCameraSetting:
     vtbls:
       - ea: 0x141A13BB8
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140C0AAF0: ctor
+      0x140C0AD50: Finalize
   Client::UI::Agent::AgentPvPDuelRequest:
     vtbls:
       - ea: 0x141A15C80
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140C74560: ctor
   Client::UI::Agent::AgentPvPHeader:
     vtbls:
       - ea: 0x141A00370
-        base: Client::UI::Agent::AgentInterface
+        base: Client::UI::Agent::AgentInterface # TODO: incorrect inheritance
+    funcs:
+      0x140A94D30: ctor
   Client::UI::Agent::AgentAquariumSetting:
     vtbls:
       - ea: 0x141A169A0
@@ -5270,14 +5661,21 @@ classes:
     vtbls:
       - ea: 0x1419FF180
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A65F50: ctor
+      0x140A65FC0: Finalize
   Client::UI::Agent::AgentItemAppraisal:
     vtbls:
       - ea: 0x141A14770
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140C36D50: ctor
   Client::UI::Agent::AgentItemInspection:
     vtbls:
       - ea: 0x141A14958
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140C48D70: ctor
   Client::UI::Agent::AgentRecipeItemContext:
     vtbls:
       - ea: 0x14196EC88
@@ -5290,10 +5688,14 @@ classes:
     vtbls:
       - ea: 0x1419FD010
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A25940: ctor
   Client::UI::Agent::AgentMountSpeed:
     vtbls:
       - ea: 0x141A15668
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140C66260: ctor
   Client::UI::Agent::AgentPvPTeam:
     vtbls:
       - ea: 0x141972640
@@ -5302,18 +5704,26 @@ classes:
     vtbls:
       - ea: 0x1419FF670
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A77780: ctor
   Client::UI::Agent::AgentEurekaElementalEdit:
     vtbls:
       - ea: 0x1419FF780
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A7CEF0: ctor
   Client::UI::Agent::AgentEurekaChainInfo:
     vtbls:
       - ea: 0x1419FF810
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A7DDB0: ctor
   Client::UI::Agent::AgentTeleportHousingFriend:
     vtbls:
       - ea: 0x1419FDBB0
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A30E60: ctor
   Client::UI::Agent::AgentContentMemberList:
     vtbls:
       - ea: 0x1419725C0
@@ -5322,78 +5732,123 @@ classes:
     vtbls:
       - ea: 0x141A16B38
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140CDEAA0: ctor
+      0x140CDEB60: Finalize
   Client::UI::Agent::AgentContentsReplayPlayer:
     vtbls:
       - ea: 0x1419FFA08
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A7F7A0: ctor
   Client::UI::Agent::AgentContentsReplaySetting:
     vtbls:
       - ea: 0x1419FFBA8
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A81010: ctor
   Client::UI::Agent::AgentMiragePrismPrismBox:
     vtbls:
       - ea: 0x141A01840
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140ACD470: ctor
   Client::UI::Agent::AgentMiragePrismItemDetail:
     vtbls:
       - ea: 0x141A018B8
         base: Client::UI::Agent::AgentItemDetailBase
+    funcs:
+      0x140AD1230: ctor
   Client::UI::Agent::AgentMiragePrismMiragePlate:
     vtbls:
       - ea: 0x141A019A0
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140AD19A0: ctor
   Client::UI::Agent::AgentFashion:
     vtbls:
       - ea: 0x141A11720
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140BA7D80: ctor
+      0x140BA7EE0: Finalize
   Client::UI::Agent::AgentHousingGuestBook:
     vtbls:
       - ea: 0x141AC1398
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x14120DA80: ctor
+      0x14120DB20: Finalize
   Client::UI::Agent::AgentReconstructionBox:
     vtbls:
       - ea: 0x141A006B0
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A9C430: ctor
   Client::UI::Agent::AgentReconstructionBuyback:
     vtbls:
       - ea: 0x141A00738
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A9E6C0: ctor
   Client::UI::Agent::AgentCrossWorldLinkShell:
     vtbls:
       - ea: 0x1419727A8
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1402EC920: ctor
+      0x1402ECA00: Finalize
   Client::UI::Agent::AgentDescription:
     vtbls:
       - ea: 0x141A17A78
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140D11A20: ctor
   Client::UI::Agent::AgentAozNoteBook:
     vtbls:
       - ea: 0x141A16870
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140CC4260: ctor
+      0x140CC4390: Finalize
   Client::UI::Agent::AgentEmj:
     vtbls:
       - ea: 0x141A11828
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140BA9A60: ctor
   Client::UI::Agent::AgentAozContentBriefing:
     vtbls:
       - ea: 0x141A007B0
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140AA02D0: ctor
   Client::UI::Agent::AgentAozContentResult:
     vtbls:
       - ea: 0x141A00828
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140AA2D40: ctor
   Client::UI::Agent::AgentEmjIntro:
     vtbls:
       - ea: 0x141A11AB8
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140BB19E0: ctor
   Client::UI::Agent::AgentWorldTravel:
     vtbls:
       - ea: 0x141A00A48
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140AAB160: ctor
+      0x140AAB200: Finalize
   Client::UI::Agent::AgentRideShooting:
     vtbls:
       - ea: 0x141A11B48
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140BB2C30: ctor
+      0x140BB2D10: Finalize
   Client::UI::Agent::AgentCredit:
     vtbls:
       - ea: 0x14196F378
@@ -5402,166 +5857,258 @@ classes:
     vtbls:
       - ea: 0x141A10EB0
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140B95DF0: ctor
   Client::UI::Agent::AgentRetainerList:
     vtbls:
       - ea: 0x1419FC840
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A0C6C0: ctor
   Client::UI::Agent::AgentDawn:
     vtbls:
       - ea: 0x141A00948
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140AA4BA0: ctor
+      0x140AA4BE0: Finalize
   Client::UI::Agent::AgentDawnStory:
     vtbls:
       - ea: 0x141A009C8
         base: Client::UI::Agent::AgentDawn
+    funcs:
+      0x140AA7CC0: ctor
   Client::UI::Agent::AgentHousingCatalogPreview:
     vtbls:
       - ea: 0x141AC0E80
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1412001A0: ctor
+      0x141200290: Finalize
   Client::UI::Agent::AgentQuestRedo:
     vtbls:
       - ea: 0x1419FBBC8
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1409D8430: ctor
+      0x1409D84A0: Finalize
   Client::UI::Agent::AgentQuestRedoHud:
     vtbls:
       - ea: 0x1419FBC40
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1409D9E90: ctor
   Client::UI::Agent::AgentCircleList:
     vtbls:
       - ea: 0x1419728C8
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1402F15D0: ctor
   Client::UI::Agent::AgentCircleBook:
     vtbls:
       - ea: 0x141972A08
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1402F78B0: ctor
+      0x1402F7960: Finalize
   Client::UI::Agent::AgentCircleFinder:
     vtbls:
       - ea: 0x141972C88
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1402FDBE0: ctor
+      0x1402FDD60: Finalize
   Client::UI::Agent::AgentMentorCondition:
     vtbls:
       - ea: 0x141A14230
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140C27230: ctor
   Client::UI::Agent::AgentPerformanceMetronome:
     vtbls:
       - ea: 0x1419FFDE8
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A8E3A0: ctor
   Client::UI::Agent::AgentPerformanceGamepadGuide:
     vtbls:
       - ea: 0x1419FFD60
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A8D2E0: ctor
   Client::UI::Agent::AgentPerformanceReadyCheck:
     vtbls:
       - ea: 0x1419FFED8
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A91600: ctor
   Client::UI::Agent::AgentHwdAetherGauge:
     vtbls:
       - ea: 0x141A00DD8
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140AB22F0: ctor
   Client::UI::Agent::AgentHwdScore:
     vtbls:
       - ea: 0x141A00EE8
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140AB5F00: ctor
   Client::UI::Agent::AgentHwdMonument:
     vtbls:
       - ea: 0x141A00FE8
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140AB6F50: ctor
   Client::UI::Agent::AgentTargetCircle:
     vtbls:
       - ea: 0x1419FDAC0
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A2CF40: ctor
   Client::UI::Agent::AgentCraftActionSimulator:
     vtbls:
       - ea: 0x141A177B8
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140D0A900: ctor
+      0x140D0A950: Finalize
   Client::UI::Agent::AgentIKDSchedule:
     vtbls:
       - ea: 0x141A01288
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140AC0770: ctor
   Client::UI::Agent::AgentIKDFishingLog:
     vtbls:
       - ea: 0x141A01308
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140AC1CC0: ctor
   Client::UI::Agent::AgentIKDResult:
     vtbls:
       - ea: 0x141A01398
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140AC3F30: ctor
   Client::UI::Agent::AgentIKDMission:
     vtbls:
       - ea: 0x141A01410
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140AC4E80: ctor
   Client::UI::Agent::AgentMycWarResultNotebook:
     vtbls:
       - ea: 0x141A01070
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140AB7340: ctor
+      0x140AB7590: Finalize
   Client::UI::Agent::AgentMycInfo:
     vtbls:
       - ea: 0x141A01490
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140AC5600: ctor
   Client::UI::Agent::AgentMycItemBox:
     vtbls:
       - ea: 0x141A01628
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140AC8870: ctor
   Client::UI::Agent::AgentMycItemBag:
     vtbls:
       - ea: 0x141A01520
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140AC5DE0: ctor
   Client::UI::Agent::AgentMycBattleAreaInfo:
     vtbls:
       - ea: 0x141A015B0
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140AC72C0: ctor
   Client::UI::Agent::AgentOrnamentNoteBook:
     vtbls:
       - ea: 0x141A15A10
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140C70240: ctor
   Client::UI::Agent::AgentTourismMenu:
     vtbls:
       - ea: 0x1419FDCA0
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A36250: ctor
   Client::UI::Agent::AgentStarlightGiftBox:
     vtbls:
       - ea: 0x141A017C8
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140ACD220: ctor
   Client::UI::Agent::AgentSpearFishing:
     vtbls:
       - ea: 0x1419FD0A8
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A282D0: ctor
+      0x140A28490: Finalize
   Client::UI::Agent::AgentOmikuji:
     vtbls:
       - ea: 0x141A15768
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140C67510: ctor
+      0x140C67600: Finalize
   Client::UI::Agent::AgentFittingShop:
     vtbls:
       - ea: 0x141A18230
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140D2B1F0: ctor
   Client::UI::Agent::AgentAkatsukiNote:
     vtbls:
       - ea: 0x141A16758
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140CBFEB0: ctor
   Client::UI::Agent::AgentExHotbarEditor:
     vtbls:
       - ea: 0x141A17C50
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140D19740: ctor
+      0x140D19870: Finalize
   Client::UI::Agent::AgentBannerList:
     vtbls:
       - ea: 0x141AC1708
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x141215840: ctor
   Client::UI::Agent::AgentBannerEditor:
     vtbls:
       - ea: 0x141AC1690
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1412147E0: ctor
   Client::UI::Agent::AgentBannerUpdateView:
     vtbls:
       - ea: 0x141AC1848
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x141217230: ctor
   Client::UI::Agent::AgentPvPMap:
     vtbls:
       - ea: 0x1419FD9D0
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A2C8C0: ctor
   Client::UI::Agent::AgentPvPMKSIntroduction:
     vtbls:
       - ea: 0x141A00618
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A9A9F0: ctor
   Client::UI::Agent::AgentTryon::TryonCharaView:
     vtbls:
       - ea: 0x141A17208
@@ -5571,21 +6118,27 @@ classes:
       - ea: 0x1419FBA90
         base: Client::UI::Agent::AgentInterface
     funcs:
+      0x1409D4340: ctor
       0x1409D5180: TryOn # static
   Client::UI::Agent::AgentItemDetailBase:
     vtbls:
       - ea: 0x141A13DB0
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140C15900: ctor
   Client::UI::Agent::AgentContentsFinderSetting:
     vtbls:
       - ea: 0x141A174C8
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140D00510: ctor
   Client::UI::Agent::AgentContentsFinder:
     vtbls:
       - ea: 0x141A16918
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140CCDF50: ctor
+      0x140CCE150: Finalize
       0x140CCE8A0: OpenRegularDuty
       0x140CCEA80: OpenRouletteDuty
       0x140CCEE90: SetContentRouletteRoleBonus
@@ -5602,6 +6155,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140BD7C80: ctor
+      0x140BD8370: Finalize
       0x140BD35A0: AddGatheringTempMapMarker
       0x140BD26C0: OpenMap
       0x140BDF080: OpenMapByMapId
@@ -5620,6 +6174,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x1409E1150: ctor
+      0x1409E1400: Finalize
       0x1409E24F0: OpenRecipeByRecipeId
       0x1409E2610: OpenRecipeByItemId
       0x1409E80B0: SearchRecipe
@@ -5627,60 +6182,84 @@ classes:
     vtbls:
       - ea: 0x1419FBDC0
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1409DE660: ctor
   Client::UI::Agent::AgentRecipeMaterialList:
     vtbls:
       - ea: 0x1419FBD48
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1409DDAC0: ctor
   Client::UI::Agent::AgentRecipeProductList:
     vtbls:
       - ea: 0x1419FBFD0
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1409EE2C0: ctor
   Client::UI::Agent::AgentTeleport:
     vtbls:
       - ea: 0x1419FDB38
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A2E990: ctor
   Client::UI::Agent::AgentLoadingTips:
     vtbls:
       - ea: 0x141A14B58
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140C510A0: ctor
   Client::UI::Agent::AgentRevive:
     vtbls:
       - ea: 0x1419FCA20
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A152B0: ctor
   Client::UI::Agent::AgentChocoboRace:
     vtbls:
       - ea: 0x141A11030
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140B99200: ctor
   Client::UI::Agent::AgentGoldSaucerMiniGame:
     vtbls:
       - ea: 0x141A10AA0
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140B7E980: ctor
   Client::UI::Agent::AgentTrippleTriad:
     vtbls:
       - ea: 0x141A10B18
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140B81600: ctor
+      0x140B81880: Finalize
   Client::UI::Agent::AgentConfigBase:
     vtbls:
       - ea: 0x14196E698
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x1402696A0: ctor
+      0x140269730: Finalize
   Client::UI::Agent::AgentConfigSystem:
     vtbls:
       - ea: 0x14196E770
         base: Client::UI::Agent::AgentConfigBase
     funcs:
       0x14026F620: ctor
+      0x14026F7E0: Finalize
   Client::UI::Agent::AgentConfigLog:
     vtbls:
       - ea: 0x14196E518
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140262250: ctor
   Client::UI::Agent::AgentConfigCharacter:
     vtbls:
       - ea: 0x14196E850
         base: Client::UI::Agent::AgentConfigBase
     funcs:
       0x140270C30: ctor
+      0x140270E00: Finalize
   Client::UI::Agent::AgentChatConfig:
     vtbls:
       - ea: 0x14196DAB0
@@ -5689,44 +6268,63 @@ classes:
     vtbls:
       - ea: 0x141A142B8
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140C27FE0: ctor
+      0x140C28040: Finalize
   Client::UI::Agent::AgentItemDetail:
     vtbls:
       - ea: 0x141A14860
         base: Client::UI::Agent::AgentItemDetailBase
     funcs:
       0x140C39320: ctor
+      0x140C39410: Finalize
       0x140C3A270: OnItemHovered
   Client::UI::Agent::AgentStatus::StatusCharaView:
     vtbls:
       - ea: 0x1419FC458
         base: Client::UI::Misc::CharaView
+    funcs:
+      0x1409FC900: ctor
   Client::UI::Agent::AgentStatus:
     vtbls:
       - ea: 0x1419FC4C0
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1409FD090: ctor
   Client::UI::Agent::AgentMaterialize:
     vtbls:
       - ea: 0x141A14F20
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140C55950: ctor
+      0x140C559D0: Finalize
   Client::UI::Agent::AgentContentsTimer:
     vtbls:
      - ea: 0x141A17630
        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140D04FC0: ctor
+      0x140D05150: Finalize
   Client::UI::Agent::AgentGatheringNote:
     vtbls:
      - ea: 0x141A13690
        base: Client::UI::Agent::AgentInterface
     funcs:
+      0x140BCF8E0: ctor
+      0x140BCFA00: Finalize
       0x140BD0390: OpenGatherableByItemId
   Client::UI::Agent::AgentMcguffin:
     vtbls:
       - ea: 0x141A010E8
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140AB8620: ctor
   Client::UI::Agent::AgentCharaCard:
     vtbls:
       - ea: 0x141A01B08
         base: Client::UI::Agent::AgentInterface
     funcs:
+      0x140AD74C0: ctor
       0x140AD7600: OpenCharaCardByContentId
       0x140AD7680: OpenCharaCardForObject
   Client::UI::Agent::AgentCharaCard::Storage:
@@ -5737,74 +6335,114 @@ classes:
     vtbls:
       - ea: 0x141A01B80
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140ADAE70: ctor
   Client::UI::Agent::AgentCharaCardProfileSetting:
     vtbls:
       - ea: 0x141A01BF8
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140ADEE10: ctor
   Client::UI::Agent::AgentMJIHud:
     vtbls:
       - ea: 0x141AC1C58
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x14122B9F0: ctor
   Client::UI::Agent::AgentMJIPouch:
     vtbls:
       - ea: 0x141AC19F0
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x14121BCB0: ctor
   Client::UI::Agent::AgentMJIBuildingMove:
     vtbls:
       - ea: 0x141AC1B58
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x141222180: ctor
   Client::UI::Agent::AgentMJICraftSchedule:
     vtbls:
       - ea: 0x141AC1BE0
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1412242C0: ctor
   Client::UI::Agent::AgentMJIGatheringNoteBook:
     vtbls:
       - ea: 0x141AC1F70
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x141239A30: ctor
   Client::UI::Agent::AgentMJIRecipeNoteBook:
     vtbls:
       - ea: 0x141AC2208
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x141247B30: ctor
   Client::UI::Agent::AgentMJICraftSales:
     vtbls:
       - ea: 0x141AC1CE0
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x14122EC30: ctor
   Client::UI::Agent::AgentMJIBuilding:
     vtbls:
       - ea: 0x141AC1A68
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x14121D8D0: ctor
   Client::UI::Agent::AgentMJIDisposeShop:
     vtbls:
       - ea: 0x141AC1D68
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x14122F9F0: ctor
   Client::UI::Agent::AgentMJIAnimalManagement:
     vtbls:
       - ea: 0x141AC1968
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x141217FB0: ctor
+      0x1412180C0: Finalize
   Client::UI::Agent::AgentMJIFarmManagement:
     vtbls:
       - ea: 0x141AC1E58
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1412332B0: ctor
+      0x1412333B0: Finalize
   Client::UI::Agent::AgentMJIEntrance:
     vtbls:
       - ea: 0x141AC1DE0
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x141232200: ctor
   Client::UI::Agent::AgentMJIGatheringHouse:
     vtbls:
       - ea: 0x141AC1ED0
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x141236F00: ctor
+      0x141236FC0: Finalize
   Client::UI::Agent::AgentMJIMinionManagement:
     vtbls:
       - ea: 0x141AC20F0
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x141240FF0: ctor
+      0x1412411A0: Finalize
   Client::UI::Agent::AgentMJIMinionNoteBook:
     vtbls:
       - ea: 0x141AC2168
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x141244B40: ctor
   Client::UI::Agent::AgentMJISettings:
     vtbls:
       - ea: 0x1419FE2E0
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A3F720: ctor
   Client::UI::Agent::AgentArchiveItem:
     vtbls:
       - ea: 0x141A16A30
@@ -5817,18 +6455,28 @@ classes:
     vtbls:
       - ea: 0x141AC2460
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x141253DA0: ctor
   Client::UI::Agent::AgentVVDFinder:
     vtbls:
       - ea: 0x141AC23E8
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x141252ED0: ctor
+      0x141252F00: Finalize
   Client::UI::Agent::AgentTofuList:
     vtbls:
       - ea: 0x141AC22F8
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1412522C0: ctor
   Client::UI::Agent::AgentBannerInterface:
     vtbls:
       - ea: 0x141BC5B20
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x14146D3D0: ctor
+      0x14146D400: Finalize
   Client::UI::Agent::AgentBannerInterface::Storage:
     funcs:
       0x14146D9B0: Update
@@ -5837,15 +6485,21 @@ classes:
       - ea: 0x141C06E28
         base: Component::GUI::AtkModuleInterface::AtkEventInterface
     funcs:
+      0x141538BF0: ctor
       0x141538CD0: dtor
   Client::UI::Agent::AgentBannerParty:
     vtbls:
       - ea: 0x141AC2538
         base: Client::UI::Agent::AgentBannerInterface
+    funcs:
+      0x14127FB60: ctor
   Client::UI::Agent::AgentBannerMIP:
     vtbls:
       - ea: 0x141AC25E0
         base: Client::UI::Agent::AgentBannerInterface
+    funcs:
+      0x141280D30: ctor
+      0x141280DA0: Finalize
   Client::Game::UI::GameEventCallback:
     vtbls:
       - ea: 0x1419D2CC0
@@ -5909,7 +6563,7 @@ classes:
       0x14084CE20: Initialize
       0x14084CED0: GetSingleton
       0x14084D1C0: ctor
-      0x14084D9E0: dtor
+      0x14084D9E0: Finalize
       0x140855FD0: ProcessDirectorUpdate
       0x1408599E0: GetInstanceContentDirector
       0x140859C10: GetContentDirector
@@ -5980,52 +6634,77 @@ classes:
         base: Component::GUI::AtkEventListener
     vfuncs:
       3: OnItemSelected
+    funcs:
+
+      0x140D57EF0: Finalize
   Client::UI::AddonFadeMiddleBack:
     vtbls:
       - ea: 0x141A1C650
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140D60DF0: ctor
   Client::UI::AddonFilter:
     vtbls:
       - ea: 0x141A1CD28
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140D61BA0: ctor
   Client::UI::AddonFateReward:
     vtbls:
       - ea: 0x141A696D8
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140F9AAC0: ctor
   Client::UI::AddonNeedGreed:
     vtbls:
       - ea: 0x141A69DA0
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140F9ED90: ctor
   Client::UI::AddonOperationGuide:
     vtbls:
       - ea: 0x141A1CF78
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140D61FD0: ctor
   Client::UI::AddonBuddyInspect:
     vtbls:
       - ea: 0x141A6C3A8
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140FB69D0: ctor
   Client::UI::AddonNowLoading:
     vtbls:
       - ea: 0x141A1D1C8
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140D62660: ctor
   Client::UI::AddonSelectOk:
     vtbls:
       - ea: 0x141A1D888
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140D63450: ctor
   Client::UI::AddonSelectOkTitle:
     vtbls:
       - ea: 0x141A1F3C8
         base: Client::UI::AddonSelectOk
+    funcs:
+      0x140D6B970: ctor
   Client::UI::AddonContextMenu:
     vtbls:
       - ea: 0x141A1DAE8
         base: Component::GUI::AtkUnitBase
     vfuncs:
         71: Selected
+    funcs:
+      0x140D63A20: ctor
   Client::UI::AddonContextMenuTitle:
     vtbls:
       - ea: 0x141A1DD28
         base: Client::UI::AddonContextMenu
+    funcs:
+      0x140D645E0: ctor
   Client::UI::AddonSelectString::PopupMenuDerive:
     vtbls:
       - ea: 0x141A1DF68
@@ -6034,6 +6713,8 @@ classes:
     vtbls:
       - ea: 0x141A1DF90
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140D64C50: ctor
   Client::UI::AddonSelectIconString::PopupMenuDerive:
     vtbls:
       - ea: 0x141A1E638
@@ -6042,10 +6723,14 @@ classes:
     vtbls:
       - ea: 0x141A1E660
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140D67510: ctor
   Client::UI::AddonTooltip:
     vtbls:
       - ea: 0x141A1E898
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140D67C00: ctor
   Client::UI::AddonInputNumeric:
     vtbls:
       - ea: 0x141A1EAE8
@@ -6056,34 +6741,50 @@ classes:
     vtbls:
       - ea: 0x141A1F190
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140D6A860: ctor
   Client::UI::AddonSelectYesno:
     vtbls:
       - ea: 0x141A1FF08
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140D6E0E0: ctor
   Client::UI::AddonFriendList:
     vtbls:
       - ea: 0x141A21E28
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140D7C820: ctor
   Client::UI::AddonSocial:
     vtbls:
       - ea: 0x141A219A8
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140D7B8C0: ctor
   Client::UI::AddonRequest:
     vtbls:
       - ea: 0x141A22E00
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140D88770: ctor
   Client::UI::AddonReadyCheck:
     vtbls:
       - ea: 0x141A25618
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140DA4D40: ctor
   Client::UI::AddonContactList:
     vtbls:
       - ea: 0x141A277B0
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140DABB20: ctor
   Client::UI::AddonAirShipExploration:
     vtbls:
       - ea: 0x141A2C1D0
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140DD1040: ctor
   Client::UI::AddonItemSearchResult:
     vtbls:
       - ea: 0x141A23D88
@@ -6095,71 +6796,109 @@ classes:
     vtbls:
       - ea : 0x141A24AD8
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140D99C00: ctor
   Client::UI::AddonSubmarinePartsMenu:
     vtbls:
       - ea: 0x141A2C938
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140DD42D0: ctor
   Client::UI::AddonConfigSystem:
     vtbls:
       - ea: 0x141A30F98
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140DFE220: ctor
+      0x140DFE430: Finalize2
   Client::UI::AddonCharaSelectWorldServer:
     vtbls:
       - ea: 0x141A37628
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140E32010: ctor
+      0x140E32130: Finalize2
   Client::UI::AddonLicenseViewer:
     vtbls:
       - ea: 0x141A435E8
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140E67CE0: ctor
   Client::UI::AddonJournalDetail:
     vtbls:
       - ea: 0x141A4C070
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140E83810: ctor
   Client::UI::AddonJournalResult:
     vtbls:
       - ea: 0x141A4C950
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140E87A50: ctor
   Client::UI::AddonGuildLeve:
     vtbls:
       - ea: 0x141A4CBA8
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140E887C0: ctor
+      0x140E888E0: Finalize2
   Client::UI::AddonRetainerList:
     vtbls:
       - ea: 0x141A52018
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140EB40A0: ctor
   Client::UI::AddonRetainerTaskList:
     vtbls:
       - ea: 0x141A51738
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140EAFED0: ctor
   Client::UI::AddonRetainerTaskAsk:
     vtbls:
       - ea: 0x141A51BA8
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140EB2BE0: ctor
   Client::UI::AddonRetainerTaskResult:
     vtbls:
       - ea: 0x141A51DE0
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140EB3320: ctor
   Client::UI::AddonRetainerSellList:
     vtbls:
       - ea: 0x141A502C0
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140EA28B0: ctor
+      0x140EA29A0: Finalize2
   Client::UI::AddonRetainerSell:
     vtbls:
       - ea: 0x141A50088
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140EA1D50: ctor
   Client::UI::AddonMonsterNote:
     vtbls:
       - ea: 0x141A526E0
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140EB5810: ctor
   Client::UI::AddonGatheringNoteBook:
     vtbls:
       - ea: 0x141A52958
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140EB8090: ctor
+      0x140EB8290: Finalize2
   Client::UI::AddonRecipeNote:
     vtbls:
       - ea: 0x141A52BB0
         base: Component::GUI::AtkUnitBase
     funcs:
+      0x140EBDB00: ctor
       0x140EC3130: ReceiveEvent_ClickSynthesizeButton
       0x140EC3180: ReceiveEvent_ClickQuickSynthesisButton
       0x140EC31D0: ReceiveEvent_ClickTrialSynthesisButton
@@ -6171,47 +6910,70 @@ classes:
     vtbls:
       - ea: 0x141A54038
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140ED3A70: ctor
   Client::UI::AddonAOZNotebook:
     vtbls:
       - ea: 0x141A553E0
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140EE29A0: ctor
   Client::UI::AddonAOZNotebookPresetList:
     vtbls:
       - ea: 0x141A556E0
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140EE74A0: ctor
   Client::UI::AddonRepair:
     vtbls:
       - ea: 0x141A92B50
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1410E3410: ctor
+      0x1410E3540: Finalize2
   Client::UI::AddonRepairRequest:
     vtbls:
       - ea: 0x141A92D88
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1410E5580: ctor
   Client::UI::AddonArchiveItem:
     vtbls:
       - ea: 0x141A8AF68
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1410A8A80: ctor
   Client::UI::AddonArmouryBoard:
     vtbls:
       - ea: 0x141A69FD8
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140FA04E0: ctor
   Client::UI::AddonCabinetWithdraw:
     vtbls:
       - ea: 0x141A6AD68
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140FAD0E0: ctor
   Client::UI::AddonContentsInfoDetail:
     vtbls:
       - ea: 0x141A6B880
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140FB2570: ctor
   Client::UI::AddonBank:
     vtbls:
       - ea: 0x141A6C170
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140FB5EE0: ctor
   Client::UI::AddonContentsFinder:
     vtbls:
       - ea: 0x141A56260
         base: Component::GUI::AtkUnitBase
     funcs:
+      0x140EED180: ctor
+      0x140EED330: Finalize2
       0x140971290: SetJoinInProgress
       0x1409712E0: SetIsUnrestrictedParty
       0x140971320: SetIsMinimalIL
@@ -6223,26 +6985,39 @@ classes:
     vtbls:
       - ea: 0x141A56738
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140EF0A40: ctor
   Client::UI::AddonContentsFinderConfirm:
     vtbls:
       - ea: 0x141A56BA8
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140EF31A0: ctor
   Client::UI::AddonRaidFinder:
     vtbls:
       - ea: 0x141A57260
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140EF4590: ctor
+      0x140EF4720: Finalize2
   Client::UI::AddonMaterializeDialog:
     vtbls:
       - ea: 0x141A57700
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140EF8280: ctor
   Client::UI::AddonSynthesis:
     vtbls:
       - ea: 0x141A68988
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140F90660: ctor
   Client::UI::AddonMateriaAttach:
     vtbls:
       - ea: 0x141A6A8F8
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140FAB3D0: ctor
   Client::UI::AddonMateriaDialogBase:
     vtbls:
       - ea: 0x141A57B70
@@ -6251,46 +7026,71 @@ classes:
     vtbls:
       - ea: 0x141A57DA8
         base: Client::UI::AddonMateriaDialogBase
+    funcs:
+      0x140EFA8F0: ctor
   Client::UI::AddonMateriaRetrieveDialog:
     vtbls:
       - ea: 0x141A57FE8
         base: Client::UI::AddonMateriaDialogBase
-  Client::UI::AddonMiragePrismMiragePlate: # FittingRoom?
+    funcs:
+      0x140EFB8E0: ctor
+  Client::UI::AddonMiragePrismMiragePlate: # FittingRoom
     vtbls:
       - ea: 0x141A59788
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140F037C0: ctor
+      0x140F039F0: Finalize2
   Client::UI::AddonMiragePrismPrismBox:
     vtbls:
       - ea: 0x141A58D60
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140EFE340: ctor
   Client::UI::AddonMiragePrismPrismBoxCrystallize:
     vtbls:
       - ea: 0x141A59098
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140F015E0: ctor
   Client::UI::AddonMobHunt:
     vtbls:
       - ea: 0x141A5AC00
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140F09720: ctor
   Client::UI::AddonGrandCompanySupplyList:
     vtbls:
       - ea: 0x141A5B9D0
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140F0F3B0: ctor
   Client::UI::AddonGrandCompanySupplyReward:
     vtbls:
       - ea: 0x141A5BC10
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140F10C80: ctor
   Client::UI::AddonTalk:
     vtbls:
       - ea: 0x141A5FD50
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140F406D0: ctor
+      0x140F408F0: Finalize2
   Client::UI::AddonChatLogPanel:
     vtbls:
       - ea: 0x141A60AA0
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140F45360: ctor
   Client::UI::AddonChatLog:
     vtbls:
       - ea: 0x141A60CD8
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140F48440: ctor
+      0x140F486D0: Finalize2
   Client::UI::AddonActionDetail:
     vtbls:
       - ea: 0x141A61650
@@ -6302,33 +7102,48 @@ classes:
     vtbls:
       - ea: 0x141A60F90
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140F50940: ctor
   Client::UI::AddonItemDetail:
     vtbls:
       - ea: 0x141A61B08
         base: Component::GUI::AtkUnitBase
     funcs:
       0x140F556B0: ctor
+      0x140F557E0: Finalize2
       0x140F56BE0: GenerateTooltip
   Client::UI::AddonItemFinder:
     vtbls:
       - ea: 0x141A62018
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140F5B0C0: ctor
+      0x140F5B190: Finalize2
   Client::UI::AddonCharacterInspect:
     vtbls:
       - ea: 0x141A62D68
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140F5F1A0: ctor
   Client::UI::AddonSalvageItemSelector:
     vtbls:
       - ea: 0x141A66820
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140F7A810: ctor
   Client::UI::AddonSalvageDialog:
     vtbls:
       - ea: 0x141A66C90
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140F7B8D0: ctor
   Client::UI::AddonAreaMap:
     vtbls:
       - ea: 0x141A68730
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140F868B0: ctor
+      0x140F86B40: Finalize2
   Client::UI::AddonScreenInfoChild:
     vtbls:
       - ea: 0x141A96FC8
@@ -6337,10 +7152,15 @@ classes:
     vtbls:
       - ea: 0x141A980D8
         base: Client::UI::AddonScreenInfoChild
+    funcs:
+      0x141106840: ctor
   Client::UI::AddonScreenText:
     vtbls:
       - ea: 0x141A9A318
         base: Client::UI::AddonScreenInfoChild
+    funcs:
+      0x14110AA50: ctor
+      0x14110ABA0: Finalize2
   Client::UI::AddonImage3:
     vtbls:
       - ea: 0x141A9EA08
@@ -6349,14 +7169,21 @@ classes:
     vtbls:
       - ea: 0x141A92178
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1410DDCA0: ctor
   Client::UI::AddonFlyText:
     vtbls:
       - ea: 0x141A91D08
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1410DA210: ctor
+      0x1410DA390: Finalize2
   Client::UI::AddonMiniTalk:
     vtbls:
       - ea: 0x141A91F40
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1410DCF80: ctor
   Client::UI::AddonGathering:
     vtbls:
       - ea: 0x141A69030
@@ -6369,6 +7196,9 @@ classes:
     vtbls:
       - ea: 0x141A69268
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140F94F40: ctor
+      0x140F95240: Finalize2
   Client::UI::AddonNamePlate::BakePlateRenderer:
     vtbls:
       - ea: 0x141A69910
@@ -6393,30 +7223,44 @@ classes:
     vtbls:
       - ea: 0x141A71120
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140FD5910: ctor
   Client::UI::AddonSatisfactionSupply:
     vtbls:
       - ea: 0x141A71358
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140FD5E00: ctor
   Client::UI::AddonFieldMarker:
     vtbls:
       - ea: 0x141A744A8
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140FEDFF0: ctor
   Client::UI::AddonDeepDungeonStatus:
     vtbls:
       - ea: 0x141A79608
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x14100F740: ctor
   Client::UI::AddonItemInspectionList:
     vtbls:
       - ea: 0x141A7CD28
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x14102FDF0: ctor
   Client::UI::AddonItemInspectionResult:
     vtbls:
       - ea: 0x141A7D198
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x141030970: ctor
   Client::UI::AddonReconstructionBox:
     vtbls:
       - ea: 0x141A81DE0
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x141049550: ctor
   Client::UI::AddonWeeklyBingo::DutySlot:
     vtbls:
       - ea: 0x141A85900
@@ -6448,278 +7292,423 @@ classes:
     vtbls:
       - ea: 0x141A85970
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x141068960: ctor
+      0x141068AA0: Finalize2
   Client::UI::AddonWeeklyPuzzle:
     vtbls:
       - ea: 0x141A86018
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x14106D480: ctor
+      0x14106D630: Finalize2
   Client::UI::AddonMYCItemBox:
     vtbls:
       - ea: 0x141A876F8
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x14107AB20: ctor
+      0x14107AB90: Finalize2
   Client::UI::AddonMJIHud:
     vtbls:
       - ea: 0x141A8CEB0
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1410B4090: ctor
   Client::UI::AddonMJIPouch:
     vtbls:
       - ea: 0x141A8D0E8
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1410B5470: ctor
   Client::UI::AddonMJIRecipeNoteBook:
     vtbls:
       - ea: 0x141A8D320
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1410B63C0: ctor
   Client::UI::AddonMJIMissionComplete:
     vtbls:
       - ea: 0x141A8D558
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1410B79A0: ctor
   Client::UI::AddonMJICraftDemandResearch:
     vtbls:
       - ea: 0x141A8D790
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1410B7F10: ctor
   Client::UI::AddonMJICraftMaterialConfirmation:
     vtbls:
       - ea: 0x141A8D9C8
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1410B9D00: ctor
   Client::UI::AddonMJICraftSales:
     vtbls:
       - ea: 0x141A8DC00
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1410BA850: ctor
   Client::UI::AddonMJICraftSchedule:
     vtbls:
       - ea: 0x141A8DE38
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1410BB2D0: ctor
   Client::UI::AddonMJICraftScheduleMaintenance:
     vtbls:
       - ea: 0x141A8E070
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1410BDDC0: ctor
   Client::UI::AddonMJICraftSchedulePreset:
     vtbls:
       - ea: 0x141A8E2A8
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1410BE450: ctor
   Client::UI::AddonMJICraftScheduleMaterialList:
     vtbls:
       - ea: 0x141A8E4E0
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1410BEE90: ctor
   Client::UI::AddonMJICraftScheduleSetting:
     vtbls:
       - ea: 0x141A8E738
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1410BF590: ctor
   Client::UI::AddonMJIAnimalBreeding:
     vtbls:
       - ea: 0x141A8E970
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1410C0D10: ctor
+      0x1410C0EB0: Finalize2
   Client::UI::AddonMJIAnimalBreedingAutomatic:
     vtbls:
       - ea: 0x141A8EBA8
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1410C23C0: ctor
   Client::UI::AddonMJIAnimalNameInputString:
     vtbls:
       - ea: 0x141A8EDE0
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1410C2A90: ctor
   Client::UI::AddonMJIFarmManagement:
     vtbls:
       - ea: 0x141A8F018
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1410C3110: ctor
+      0x1410C3230: Finalize2
   Client::UI::AddonMJIFarmAutomatic:
     vtbls:
       - ea: 0x141A8F250
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1410C3EF0: ctor
   Client::UI::AddonMJIGatheringHouse:
     vtbls:
       - ea: 0x141A8F488
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1410C52A0: ctor
   Client::UI::AddonMJIGatheringHouseExplore:
     vtbls:
       - ea: 0x141A8F6E0
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1410C70E0: ctor
   Client::UI::AddonMJIBuilding:
     vtbls:
       - ea: 0x141A8F938
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1410C8690: ctor
   Client::UI::AddonMJIBuildingProgress:
     vtbls:
       - ea: 0x141A8FB70
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1410C9680: ctor
   Client::UI::AddonMJIGatheringNoteBook:
     vtbls:
       - ea: 0x141A8FDA8
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1410C9830: ctor
   Client::UI::AddonMJIDisposeShop:
     vtbls:
       - ea: 0x141A8FFE0
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1410CA6F0: ctor
   Client::UI::AddonMJIDisposeShopShipping:
     vtbls:
       - ea: 0x141A90218
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1410CB430: ctor
   Client::UI::AddonMJIDisposeShopShippingBulk:
     vtbls:
       - ea: 0x141A90450
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1410CBAB0: ctor
   Client::UI::AddonMJIMinionManagement:
     vtbls:
       - ea: 0x141A90688
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1410CCFB0: ctor
   Client::UI::AddonMJIMinionNoteBook:
     vtbls:
       - ea: 0x141A908C0
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1410D0910: ctor
   Client::UI::AddonMJIBuildingMove:
     vtbls:
       - ea: 0x141A90B18
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1410D3720: ctor
   Client::UI::AddonMJIEntrance:
     vtbls:
       - ea: 0x141A90D50
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1410D4910: ctor
   Client::UI::AddonMJISetting:
     vtbls:
       - ea: 0x141A911C0
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1410D6A70: ctor
   Client::UI::AddonMJIPadGuide:
     vtbls:
       - ea: 0x141A90F88
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1410D6800: ctor
   Client::UI::AddonTargetInfoBase:
     vtbls:
       - ea: 0x141A95BC8
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1410FBDF0: ctor
   Client::UI::AddonTargetInfo:
     vtbls:
       - ea: 0x141A95E00
         base: Client::UI::AddonTargetInfoBase
+    funcs:
+      0x1410FCA50: ctor
   Client::UI::AddonTargetInfoBuffDebuff:
     vtbls:
       - ea: 0x141A96038
         base: Client::UI::AddonTargetInfoBase
+    funcs:
+      0x1410FD1B0: ctor
   Client::UI::AddonTargetInfoCastBar:
     vtbls:
       - ea: 0x141A96270
         base: Client::UI::AddonTargetInfoBase
+    funcs:
+      0x1410FD410: ctor
   Client::UI::AddonTargetInfoMainTarget:
     vtbls:
       - ea: 0x141A964A8
         base: Client::UI::AddonTargetInfoBase
+    funcs:
+      0x1410FD650: ctor
   Client::UI::AddonTargetCursor:
     vtbls:
       - ea: 0x141A966E0
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1410FDC00: ctor
   Client::UI::AddonBattleTalk:
     vtbls:
       - ea: 0x141A96B50
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1410FF030: ctor
   Client::UI::AddonScreenInfoFrontBack:
     vtbls:
       - ea: 0x141A96D88
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1410FFC60: ctor
+      0x1410FFE20: Finalize2
   Client::UI::AddonMainCommand:
     vtbls:
       - ea: 0x141A9F438
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1411161D0: ctor
+      0x141116340: Finalize2
   Client::UI::AddonParameterWidget:
     vtbls:
       - ea: 0x141A9F690
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1411172B0: ctor
   Client::UI::AddonExp:
     vtbls:
       - ea: 0x141A9F8C8
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x141117880: ctor
   Client::UI::AddonEnemyList:
     vtbls:
       - ea: 0x141A9FB00
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x141117E20: ctor
   Client::UI::AddonBagWidget:
     vtbls:
       - ea: 0x141AA0720
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x14111A7F0: ctor
   Client::UI::AddonMoney:
     vtbls:
       - ea: 0x141AA0958
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x14111ADD0: ctor
   Client::UI::AddonNotification:
     vtbls:
       - ea: 0x141AA0B90
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x14111B1D0: ctor
   Client::UI::AddonShopCardDialog:
     vtbls:
       - ea: 0x141AB63A0
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1411AAAD0: ctor
   Client::UI::AddonDTR:
     vtbls:
       - ea: 0x141AA1168
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x14111DA20: ctor
   Client::UI::AddonCastBar:
     vtbls:
       - ea: 0x141AA13A0
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x14111E9B0: ctor
   Client::UI::AddonNaviMap:
     vtbls:
       - ea: 0x141AA1608
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x14111F2E0: ctor
   Client::UI::AddonActionBarBase:
     vtbls:
       - ea: 0x141AA1848
         base: Component::GUI::AtkUnitBase
     vfuncs:
       76: PulseActionBarSlot
+    funcs:
+      0x141121D60: ctor
   Client::UI::AddonActionBarX:
     vtbls:
       - ea: 0x141AA1B08
         base: Client::UI::AddonActionBarBase
+    funcs:
+      0x141124B30: ctor
   Client::UI::AddonActionBar:
     vtbls:
       - ea: 0x141AA1E30
         base: Client::UI::AddonActionBarX
+    funcs:
+      0x1411253C0: ctor
   Client::UI::AddonPartyList:
     vtbls:
       - ea: 0x141AA2418
         base: Component::GUI::AtkUnitBase
     funcs:
+      0x141126600: ctor
       0x1411277B0: ResizeForPartySize
   Client::UI::AddonAllianceListX:
     vtbls:
       - ea: 0x141AA2658
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x14112A760: ctor
   Client::UI::AddonToDoList:
     vtbls:
       - ea: 0x141AA3040
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x141130120: ctor
+      0x141130220: Finalize2
   Client::UI::AddonActionCross:
     vtbls:
       - ea: 0x141AA38C8
         base: Client::UI::AddonActionBarBase
+    funcs:
+      0x141135D20: ctor
   Client::UI::AddonActionContents:
     vtbls:
       - ea: 0x141AA3B90
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1411382F0: ctor
+      0x141138410: Finalize2
   Client::UI::AddonActionDoubleCrossBase:
     vtbls:
       - ea: 0x141AA3DD8
         base: Client::UI::AddonActionBarX
+    funcs:
+      0x141139650: ctor
   Client::UI::AddonActionDoubleCrossL:
     vtbls:
       - ea: 0x141AA40D8
         base: Client::UI::AddonActionDoubleCrossBase
+    funcs:
+      0x141139D90: ctor
   Client::UI::AddonActionDoubleCrossR:
     vtbls:
       - ea: 0x141AA43E8
         base: Client::UI::AddonActionDoubleCrossBase
+    funcs:
+      0x14113A4C0: ctor
   Client::UI::AddonFocusTargetInfo:
     vtbls:
       - ea: 0x141AA46E8
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x14113ABF0: ctor
   Client::UI::AddonLimitBreak:
     vtbls:
       - ea: 0x141AA4920
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x14113B7B0: ctor
   Client::UI::AddonMainCross:
     vtbls:
       - ea: 0x141AA4B90
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x14113C760: ctor
+      0x14113C970: Finalize2
   Client::UI::AddonHudLayoutWindow:
     vtbls:
       - ea: 0x141AAABB8
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x141163300: ctor
   Client::UI::AddonHudLayoutScreen:
     vtbls:
       - ea: 0x141AAADF0
@@ -6746,10 +7735,14 @@ classes:
     vtbls:
       - ea: 0x141A93F08
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1410FB830: ctor
   Client::UI::AddonGoldSaucerInfo:
     vtbls:
       - ea: 0x141AB7E40
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1411B1840: ctor
   Client::UI::AddonGSInfoGeneral:
     vtbls:
       - ea: 0x141AB8078
@@ -6762,6 +7755,8 @@ classes:
     vtbls:
       - ea: 0x141AB8958
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1411B4860: ctor
   Client::UI::AddonGSInfoCardDeck:
     vtbls:
       - ea: 0x141AB8B90
@@ -6774,26 +7769,38 @@ classes:
     vtbls:
       - ea: 0x141AB9000
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1411B6C50: ctor
   Client::UI::AddonChocoboBreedTraining:
     vtbls:
       - ea: 0x141ABA650
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1411C1750: ctor
   Client::UI::AddonRaceChocoboResult:
     vtbls:
       - ea: 0x141ABB5D8
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1411C2BC0: ctor
   Client::UI::Addon_RaceChocoboRanking:
     vtbls:
       - ea: 0x141ABB810
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1411C3990: ctor
   Client::UI::Addon_RaceChocoboParameter:
     vtbls:
       - ea: 0x141ABBC88
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1411C4FE0: ctor
   Client::UI::AddonChocoboRace:
     vtbls:
       - ea: 0x141ABBED0
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1411C5460: ctor
   Client::Game::Fate::FateDirector:
     vtbls:
       - ea: 0x141AC3A30
@@ -6803,38 +7810,57 @@ classes:
       - ea: 0x141AC4348
     vfuncs:
       0: dtor
+    funcs:
+      0x141295040: ctor
+      0x1412952C0: Finalize
   Client::UI::AddonLotteryDaily:
     vtbls:
       - ea: 0x141ABE310
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1411D24B0: ctor
   Client::UI::AddonAOZContentResult:
     vtbls:
       - ea: 0x141A82B30
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x141050220: ctor
   Client::UI::AddonCutSceneSelectString:
     vtbls:
       - ea: 0x141A82FA0
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x141051160: ctor
   Client::UI::AddonAOZContentBriefing:
     vtbls:
       - ea: 0x141A828F8
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x14104D8F0: ctor
   Client::UI::AddonGcArmyMemberList:
     vtbls:
       - ea: 0x141A77440
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1410018C0: ctor
   Client::UI::AddonGcArmyExpeditionResult:
     vtbls:
       - ea: 0x141A78870
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x141008730: ctor
   Client::UI::AddonGcArmyExpedition:
     vtbls:
       - ea: 0x141A78638
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x141006D40: ctor
   Client::UI::AddonGcArmyCapture:
     vtbls:
       - ea: 0x141A78CF0
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x14100A350: ctor
   Client::Game::Object::EventObject:
     vtbls:
       - ea: 0x141AC2DC8
@@ -6900,6 +7926,7 @@ classes:
     funcs:
       0x1412B05B0: CreateShaderPackage  # static function
       0x1412B0D50: ctor
+      0x1412B0E60: Finalize
       0x1412B2130: VectorResize_PixelShader # these 3 functions are identical, just template-generated functions from std::vectors
       0x1412B2220: VectorResize_ShaderNode
       0x1412B2310: VectorResize_VertexShader
@@ -7002,6 +8029,7 @@ classes:
       0: dtor
     funcs:
       0x1413523E0: ctor
+      0x141352480: Finalize
       0x141352560: Initialize
   Client::System::Scheduler::Base::SchedulerState:
     vtbls:
@@ -7042,6 +8070,7 @@ classes:
         base: Component::Log::LogModuleInterface
     funcs:
       0x1413BD210: ctor
+      0x1413BD2E0: Finalize
   Client::Game::Object::HousingObject:
     vtbls:
       - ea: 0x141BA8488
