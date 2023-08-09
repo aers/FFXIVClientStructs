@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.IKDFishingLog)]
 [StructLayout(LayoutKind.Explicit, Size = 0x460)]
 public unsafe partial struct AgentIKDFishingLog {
-	public static AgentIKDFishingLog* Instance() => Framework.Instance()->GetUiModule()->GetAgentModule()->GetAgentIKDFishingLog();
+    public static AgentIKDFishingLog* Instance() => Framework.Instance()->GetUiModule()->GetAgentModule()->GetAgentIKDFishingLog();
 
     [FieldOffset(0x00)] public AgentInterface AgentInterface;
 
@@ -27,20 +27,20 @@ public unsafe partial struct AgentIKDFishingLog {
 
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct LogEntry {
-	    [FieldOffset(0x00)] public uint ItemId;
-	    [FieldOffset(0x08)] public ushort Average;
-	    [FieldOffset(0x0A)] public ushort Large;
-	    [FieldOffset(0x0C)] public ushort Points;
+        [FieldOffset(0x00)] public uint ItemId;
+        [FieldOffset(0x08)] public ushort Average;
+        [FieldOffset(0x0A)] public ushort Large;
+        [FieldOffset(0x0C)] public ushort Points;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x148)]
     public unsafe partial struct PotentialCatchSpot {
-	    [FieldOffset(0x00)] public uint SpotId;
-	    [FixedSizeArray<LogEntry>(10)]
-	    [FieldOffset(0x04)] public fixed byte CatchEntries[10 * 0x10];
+        [FieldOffset(0x00)] public uint SpotId;
+        [FixedSizeArray<LogEntry>(10)]
+        [FieldOffset(0x04)] public fixed byte CatchEntries[10 * 0x10];
 
         [FieldOffset(0xA4)] public uint SpecialSpotId;
-	    [FixedSizeArray<LogEntry>(10)]
-	    [FieldOffset(0xA8)] public fixed byte SpecialCatchEntries[10 * 0x10];
+        [FixedSizeArray<LogEntry>(10)]
+        [FieldOffset(0xA8)] public fixed byte SpecialCatchEntries[10 * 0x10];
     }
 }
