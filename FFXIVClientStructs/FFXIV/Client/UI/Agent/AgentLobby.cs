@@ -94,8 +94,8 @@ public unsafe struct CharaSelectCharacterEntry
 
     [FieldOffset(0x11)] public CharaSelectCharacterEntryLoginFlags LoginFlags;
 
-    [FieldOffset(0x18)] public ulong CurrentWorldId;
-    [FieldOffset(0x1A)] public ulong HomeWorldId;
+    [FieldOffset(0x18)] public ushort CurrentWorldId;
+    [FieldOffset(0x1A)] public ushort HomeWorldId;
 
     [FieldOffset(0x2C)] public fixed byte Name[32];
     [FieldOffset(0x4C)] public fixed byte CurrentWorldName[32];
