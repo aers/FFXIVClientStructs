@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
 // Client::UI::Misc::ItemOrderModule
 //   Client::UI::Misc::UserFileManager::UserFileEvent
-// ctor "48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 41 56 41 57 48 83 EC 20 45 33 FF 48 89 51 10 48 8D 05 ?? ?? ?? ?? 4C 89 79 08 48 8B F1"
+// ctor "48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 41 56 41 57 48 83 EC 30 45 33 FF 48 89 51 10"
 [StructLayout(LayoutKind.Explicit, Size = 0xD8)]
 public unsafe partial struct ItemOrderModule
 {
