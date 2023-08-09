@@ -3,7 +3,7 @@
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
 // Client::UI::Misc::RaptureTextModule
-// ctor "40 57 48 83 EC 40 48 8B 02"
+// ctor "E8 ?? ?? ?? ?? 48 8D 9F ?? ?? ?? ?? 4D 8B C5"
 [StructLayout(LayoutKind.Explicit, Size = 0xE58)]
 public unsafe partial struct RaptureTextModule
 {
