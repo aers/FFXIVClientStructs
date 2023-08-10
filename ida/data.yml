@@ -851,6 +851,8 @@ classes:
     funcs:
       0x14095BFD0: Initialize
       0x14095C3F0: IsAchievementComplete
+      0x14095C140: RequestAchievementProgress
+      0x14095C490: ReceiveAchievementProgress
     vfuncs:
       0: dtor
   Client::Game::UI::ContentsNote:
