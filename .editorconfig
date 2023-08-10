@@ -54,3 +54,12 @@ csharp_style_prefer_utf8_string_literals = false
 
 # Indentation preferences
 csharp_indent_labels = flush_left
+
+# Braces
+csharp_prefer_braces = false
+
+# New-line options
+csharp_new_line_before_open_brace = none
+csharp_new_line_before_else = false
+csharp_new_line_before_catch = false
+csharp_new_line_before_finally = false
