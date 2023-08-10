@@ -10,6 +10,19 @@ public unsafe partial struct Achievement
     [FieldOffset(0x08)] public AchievementState State;
     [FieldOffset(0x0C)] public fixed byte CompletedAchievements[428];
 
+    [FieldOffset(0x1DC)] public AchievementState ProgressRequestState;
+    [FieldOffset(0x1E0)] public uint ProgressAchievementId;
+    [FieldOffset(0x1E4)] public uint ProgressCurrent;
+    [FieldOffset(0x1E8)] public uint ProgressMax;
+
+    /// <summary> Requests Achievement Progress from the server. </summary>
+    [MemberFunction("48 83 EC ?? C7 81 ?? ?? ?? ?? ?? ?? ?? ?? 45 33 C9")]
+    public partial void RequestAchievementProgress(uint id);
+
+    /// <summary> Receives Achievement Progress requested with <see cref="RequestAchievementProgress"/>. </summary>
+    [MemberFunction("C7 81 ?? ?? ?? ?? ?? ?? ?? ?? 89 91 ?? ?? ?? ?? 44 89 81")]
+    public partial void ReceiveAchievementProgress(uint id, uint current, uint max);
+
     /// <summary> Check if an achievement is complete. </summary>
     /// <param name="achievementId">Achievement ID to check against. This is the ID from the Achievement table. </param>
     /// <returns> Returns true if the achievement is complete. </returns>
