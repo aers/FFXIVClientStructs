@@ -46,7 +46,6 @@ public unsafe partial struct RaptureAtkModule
     [VirtualFunction(39)]
     public partial void SetUiVisibility(bool uiVisible);
 
-    [Obsolete("Use RaptureAtkUnitManager.IsUiVisible")]
     public bool IsUiVisible {
         get => !RaptureAtkUnitManager.Flags.HasFlag(RaptureAtkModuleFlags.UiHidden);
         set => SetUiVisibility(value);
