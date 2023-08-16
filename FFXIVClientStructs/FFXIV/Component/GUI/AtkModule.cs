@@ -23,6 +23,8 @@ public unsafe partial struct AtkModule
 
     [FieldOffset(0x1B48)] public AtkArrayDataHolder AtkArrayDataHolder;
 
+    [FieldOffset(0x5C7C)] public byte ActiveColorThemeType;
+
     [VirtualFunction(9)]
     public partial NumberArrayData* GetNumberArrayData(int index);
 
