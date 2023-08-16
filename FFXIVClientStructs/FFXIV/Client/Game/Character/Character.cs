@@ -58,7 +58,8 @@ public unsafe partial struct Character
     [FieldOffset(0x878)] public OrnamentContainer Ornament;
     [FieldOffset(0x920)] public ActionTimelineManager ActionTimelineManager;
 
-    [FieldOffset(0xCB0)] public uint PlayerTargetObjectID;
+    [FieldOffset(0xCB0)] public GameObjectID LookTarget;
+    [FieldOffset(0xCB0), Obsolete($"Use {nameof(LookTarget)}")] public uint PlayerTargetObjectID;
 
     [FieldOffset(0x17C0)] public Balloon Balloon;
 
@@ -69,7 +70,8 @@ public unsafe partial struct Character
     [FieldOffset(0x1A4C)] public float Alpha;
     [FieldOffset(0x1A80)] public Companion* CompanionObject; // minion
     [FieldOffset(0x1A98)] public fixed byte FreeCompanyTag[6];
-    [FieldOffset(0x1AB8)] public ulong TargetObjectID;
+    [FieldOffset(0x1AB0)] public GameObjectID CombatSoftTarget;
+    [FieldOffset(0x1AB0), Obsolete($"Use {nameof(CombatSoftTarget)}")] public ulong TargetObjectID;
 
     [FieldOffset(0x1B00)] public uint NameID;
 
