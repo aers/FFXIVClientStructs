@@ -119,6 +119,9 @@ public unsafe partial struct UIModule
     [VirtualFunction(57)]
     public partial RetainerCommentModule* GetRetainerCommentModule();
 
+    [VirtualFunction(58)]
+    public partial BannerModule* GetBannerModule();
+
     [VirtualFunction(64)]
     public partial void* GetUIInputData();
 
