@@ -6,6 +6,15 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
 // Client::UI::Misc::CharaView
+//
+// ClientObjectIndex:
+//  0 used in Character, PvPCharacter
+//  1 used in Inspect, CharaCard
+//  2 used in TryOn, GearSetPreview
+//  3 used in Colorant
+//  4 used in BannerList, BannerEdit
+//  0 - 7 used in BannerParty
+//
 [StructLayout(LayoutKind.Explicit, Size = 0x2C8)]
 public unsafe partial struct CharaView : ICreatable
 {
