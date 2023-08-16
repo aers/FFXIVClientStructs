@@ -80,6 +80,7 @@ functions:
   0x140643F50: GetGameObjectByIndex
   0x14048AB20: PrepareColorSet
   0x14048ADF0: ReadStainingTemplate
+  0x1404d9bf0: GetAvailablePoses
   0x1404DE6A0: Client::Game::Control::InputManager_GetInputStatus
   0x1404F62B0: Client::System::Input::InputData_IsInputIDKeyPress
   0x1404F63C0: Client::System::Input::InputData_IsInputIDClicked
