@@ -1,4 +1,5 @@
 using FFXIVClientStructs.FFXIV.Client.Game.Character.Data;
+using FFXIVClientStructs.FFXIV.Client.Game.Control;
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
 using FFXIVClientStructs.FFXIV.Client.Graphics.Vfx;
 using FFXIVClientStructs.FFXIV.Common.Math;
@@ -58,7 +59,17 @@ public unsafe partial struct Character
     [FieldOffset(0x878)] public OrnamentContainer Ornament;
     [FieldOffset(0x920)] public ActionTimelineManager ActionTimelineManager;
 
+    [Obsolete($"Use {nameof(LookTargetId)} instead.")]
     [FieldOffset(0xCB0)] public uint PlayerTargetObjectID;
+
+    /// <summary>
+    /// The current target for this character's gaze. Can be set independently of soft or hard targets, and may be set
+    /// by NPCs or minions. For players, an action cast will generally target the LookTarget.
+    /// </summary>
+    /// <remarks>
+    /// Unlike other GameObjectIDs, this one appears to be set to fully 0 if the player is not looking at anything.
+    /// </remarks>
+    [FieldOffset(0xCB0)] public GameObjectID LookTargetId; 
 
     [FieldOffset(0x17C0)] public Balloon Balloon;
 
@@ -69,7 +80,21 @@ public unsafe partial struct Character
     [FieldOffset(0x1A4C)] public float Alpha;
     [FieldOffset(0x1A80)] public Companion* CompanionObject; // minion
     [FieldOffset(0x1A98)] public fixed byte FreeCompanyTag[6];
+    
+    [Obsolete("Use HardTargetObjectId instead.")]
     [FieldOffset(0x1AB8)] public ulong TargetObjectID;
+
+    /// <summary>
+    /// The current hard target for this Character. This will not be set for the LocalPlayer. Developers should
+    /// generally use <see cref="GetHardTargetId"/> over reading this field directly.
+    /// </summary>
+    [FieldOffset(0x1AB8)] public GameObjectID HardTargetId;
+    
+    /// <summary>
+    /// The current soft target for this Character. This will not be set for the LocalPlayer. Developers should
+    /// generally use <see cref="GetSoftTargetId"/> over reading this field directly.
+    /// </summary>
+    [FieldOffset(0x1AC0)] public GameObjectID SoftTargetId;
 
     [FieldOffset(0x1B00)] public uint NameID;
 
@@ -119,8 +144,30 @@ public unsafe partial struct Character
         set => StatusFlags4 = (byte) (value ? StatusFlags4 | 0x20 : StatusFlags4 & ~0x20);
     }
 
+    [Obsolete("Use GetHardTargetId instead.")]
+    public ulong GetTargetId() => this.GetHardTargetId();
+    
+    /// <summary>
+    /// Gets the hard target ID for this character. If this character is the LocalPlayer, this will instead read the
+    /// hard target ID from the <see cref="TargetSystem"/>. Used for calculating ToT via /assist.
+    /// </summary>
+    /// <returns>Returns the object ID of this character's target.</returns>
     [MemberFunction("E8 ?? ?? ?? ?? 49 3B C7 0F 84")]
-    public partial ulong GetTargetId();
+    public partial GameObjectID GetHardTargetId();
+    
+    [MemberFunction("E8 ?? ?? ?? ?? 48 3B FD 74 36")]
+    public partial void SetHardTargetId(GameObjectID id);
+
+    /// <summary>
+    /// Gets the soft target ID for this character. If this character is the LocalPlayer, this will instead read the
+    /// soft target ID from the <see cref="TargetSystem"/>.
+    /// </summary>
+    /// <returns>Returns the object ID of this character's target.</returns>
+    [MemberFunction("E8 ?? ?? ?? ?? 49 3B C5")]
+    public partial GameObjectID GetSoftTargetId();
+    
+    [MemberFunction("E8 ?? ?? ?? ?? B8 ?? ?? ?? ?? 4C 3B F0")]
+    public partial void SetSoftTargetId(GameObjectID id);
 
     // Seemingly used for cutscenes and GPose.
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 9F ?? ?? ?? ?? 48 8D 8F")]
