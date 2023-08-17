@@ -81,19 +81,25 @@ public unsafe partial struct Character
     [FieldOffset(0x1A80)] public Companion* CompanionObject; // minion
     [FieldOffset(0x1A98)] public fixed byte FreeCompanyTag[6];
     
-    [Obsolete("Use HardTargetObjectId instead.")]
+    [Obsolete($"Use {nameof(HardTargetId)} instead.")]
     [FieldOffset(0x1AB8)] public ulong TargetObjectID;
 
     /// <summary>
-    /// The current hard target for this Character. This will not be set for the LocalPlayer. Developers should
-    /// generally use <see cref="GetHardTargetId"/> over reading this field directly.
+    /// The current hard target for this Character. This will not be set for the LocalPlayer.
     /// </summary>
+    /// <remarks>
+    /// Developers should generally use <see cref="GetHardTargetId"/> over reading this field directly, as it will
+    /// properly handle resolving the hard target for the local player.
+    /// </remarks>
     [FieldOffset(0x1AB8)] public GameObjectID HardTargetId;
     
     /// <summary>
-    /// The current soft target for this Character. This will not be set for the LocalPlayer. Developers should
-    /// generally use <see cref="GetSoftTargetId"/> over reading this field directly.
+    /// The current soft target for this Character. This will not be set for the LocalPlayer.
     /// </summary>
+    /// <remarks>
+    /// Developers should generally use <see cref="GetSoftTargetId"/> over reading this field directly, as it will
+    /// properly handle resolving the soft target for the local player.
+    /// </remarks>
     [FieldOffset(0x1AC0)] public GameObjectID SoftTargetId;
 
     [FieldOffset(0x1B00)] public uint NameID;
@@ -144,7 +150,7 @@ public unsafe partial struct Character
         set => StatusFlags4 = (byte) (value ? StatusFlags4 | 0x20 : StatusFlags4 & ~0x20);
     }
 
-    [Obsolete("Use GetHardTargetId instead.")]
+    [Obsolete($"Use {nameof(GetHardTargetId)} instead.")]
     public ulong GetTargetId() => this.GetHardTargetId();
     
     /// <summary>
