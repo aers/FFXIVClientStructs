@@ -190,6 +190,6 @@ public unsafe struct CharaViewItem
     //[FieldOffset(0x7)] public byte Unk7;
     [FieldOffset(0x8)] public uint ItemId;
     [FieldOffset(0xC)] public uint GlamourItemId;
-    [FieldOffset(0x10)] public WeaponModelId ModelMain;
-    [FieldOffset(0x18)] public WeaponModelId ModelSub;
+    [FieldOffset(0x10)] public ulong ModelMain; // WeaponModelId or EquipmentModelId
+    [FieldOffset(0x18)] public ulong ModelSub; // WeaponModelId or EquipmentModelId
 }
