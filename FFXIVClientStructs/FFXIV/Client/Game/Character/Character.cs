@@ -83,7 +83,7 @@ public unsafe partial struct Character
 
     /// <summary>
     /// The GameObjectID of the entity that currently has the combat tag on this character. May be set to a party ID if
-    /// certain conditions are met (PVP/alliances?).
+    /// certain conditions are met (PVP?). See <see cref="CombatTagType"/> for information about the type of tagger.
     /// </summary>
     /// <remarks>
     /// A tagger is generally the first entity to deal damage to this character, and will persist until that entity
@@ -113,7 +113,9 @@ public unsafe partial struct Character
     [FieldOffset(0x1AC0)] public GameObjectID SoftTargetId;
 
     [FieldOffset(0x1B00)] public uint NameID;
-
+    
+    [FieldOffset(0x1B10)] public uint CompanionOwnerID;
+    
     [FieldOffset(0x1B1C)] public ushort CurrentWorld;
     [FieldOffset(0x1B1E)] public ushort HomeWorld;
 
@@ -122,7 +124,17 @@ public unsafe partial struct Character
     [FieldOffset(0x1B26)] public CharacterModes Mode;
     [FieldOffset(0x1B27)] public byte ModeParam; // Different purpose depending on mode. See CharacterModes for more info.
     [FieldOffset(0x1B29)] public byte Battalion; // used for determining friend/enemy state
-    [FieldOffset(0x1B10)] public uint CompanionOwnerID;
+
+    /// <summary>
+    /// The type of tagger, as represented in <see cref="CombatTaggerId"/>. Known values:
+    /// <list type="bullet">
+    /// <item>0 - Entity Not Tagged</item>
+    /// <item>1 - Character Tag (players, battle NPCs, etc.)</item>
+    /// <item>2 - Party Tag (PVP?)</item>
+    /// <item>4 - Observed, but unknown.</item>
+    /// </list>
+    /// </summary>
+    [FieldOffset(0x1B31)] public byte CombatTagType;
 
     // Note: These 2 status flags might be just an ushort instead of 2 separate bytes.
 
