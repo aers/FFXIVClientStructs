@@ -80,6 +80,16 @@ public unsafe partial struct Character
     [FieldOffset(0x1A4C)] public float Alpha;
     [FieldOffset(0x1A80)] public Companion* CompanionObject; // minion
     [FieldOffset(0x1A98)] public fixed byte FreeCompanyTag[6];
+
+    /// <summary>
+    /// The GameObjectID of the entity that currently has the combat tag on this character. May be set to a party ID if
+    /// certain conditions are met (PVP/alliances?).
+    /// </summary>
+    /// <remarks>
+    /// A tagger is generally the first entity to deal damage to this character, and will persist until that entity
+    /// has died, at which point it will reset.
+    /// </remarks>
+    [FieldOffset(0x1AB0)] public GameObjectID CombatTaggerId;
     
     [Obsolete($"Use {nameof(HardTargetId)} instead.")]
     [FieldOffset(0x1AB8)] public ulong TargetObjectID;
