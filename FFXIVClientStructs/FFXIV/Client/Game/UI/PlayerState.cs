@@ -73,15 +73,7 @@ public unsafe partial struct PlayerState
     /// </remarks>
     [FieldOffset(0x474)] public fixed byte ContentRouletteCompletion[12];
     [FieldOffset(0x480)] public short PlayerCommendations;
-    /// <remarks>
-    /// 0 = Idle Pose<br/>
-    /// 1 = Unknown<br/>
-    /// 2 = Sit Pose<br/>
-    /// 3 = Ground Sit Pose<br/>
-    /// 4 = Bed Pose<br/>
-    /// 5 = Accessorie Pose: Umbrellas<br/>
-    /// 6 = Accessorie Pose: Glasses, Wings
-    /// </remarks>
+
     [FieldOffset(0x482)] public fixed byte SelectedPoses[7];
     [FieldOffset(0x489)] public byte PlayerStateFlags1;
     [FieldOffset(0x48A)] public byte PlayerStateFlags2;
@@ -169,6 +161,18 @@ public unsafe partial struct PlayerState
     /// <param name="classJobId">The ClassJob row id of the DoH job to check.</param>
     [MemberFunction("E8 ?? ?? ?? ?? 38 43 45")]
     public partial bool IsMeisterFlagAndHasSoulStoneEquipped(uint classJobId);
+
+    /// <summary> Get the current state of a specific type of pose. </summary>
+    /// <param name="pose"> The type of pose. </param>
+    /// <returns> The 0-based value of the pose. </returns>
+    public byte CurrentPose(PoseType pose)
+        => !Enum.IsDefined(pose) ? (byte)0 : SelectedPoses[(int)pose];
+
+    /// <summary> Get the last valid value for a specific type of pose. </summary>
+    /// <param name="pose"> The type of pose. </param>
+    /// <remarks> The returned value represents the count of the type of pose - 1. </remarks>
+    [MemberFunction("E8 ?? ?? ?? ?? FE C3 44 8B F0")]
+    public static partial byte AvailablePoses(PoseType pose);
 
     #region Unlocks
 
@@ -364,3 +368,15 @@ public enum PlayerStateFlag : uint
     IsPvPMentorStatusActive = 11,
     Unknown14 = 14,
 }
+
+
+public enum PoseType : byte
+{
+    Idle = 0,
+    WeaponDrawn = 1,
+    Sit = 2,
+    GroundSit = 3,
+    Doze = 4,
+    Umbrella = 5,
+    Accessory = 6,
+};
