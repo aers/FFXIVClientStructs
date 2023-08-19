@@ -1,4 +1,4 @@
-﻿using FFXIVClientStructs.FFXIV.Client.Game;
+using FFXIVClientStructs.FFXIV.Client.Game;
 using FFXIVClientStructs.FFXIV.Client.Game.Character;
 using FFXIVClientStructs.FFXIV.Client.System.Memory;
 using FFXIVClientStructs.FFXIV.Component.GUI;
@@ -138,7 +138,7 @@ public unsafe partial struct CharaView : ICreatable
     public readonly partial void UnequipGear(bool hasCharacterData = false, bool characterLoaded = true);
 
     [MemberFunction("E8 ?? ?? ?? ?? 45 33 DB FF C3")]
-    public readonly partial void SetItemSlotData(byte slotId, uint itemId, byte stain, int a5 = 0, byte a6 = 1);
+    public readonly partial void SetItemSlotData(byte slotId, uint itemId, byte stainId, int glamourItemId = 0, byte a6 = 1);
 
     [MemberFunction("E8 ?? ?? ?? ?? B1 01 0F B6 86")]
     public readonly partial void ToggleDrawWeapon(bool drawn);
@@ -184,7 +184,7 @@ public unsafe struct CharaViewItem
     [FieldOffset(0x2)] public byte GlamourEquipSlotCategory;
     [FieldOffset(0x3)] public byte StainId;
     [FieldOffset(0x4)] public byte GlamourStainId;
-    //[FieldOffset(0x5)] public byte Unk5;
+    //[FieldOffset(0x5)] public byte Unk5; // a6 of SetItemSlotData
     //[FieldOffset(0x6)] public byte Unk6;
     //[FieldOffset(0x7)] public byte Unk7;
     [FieldOffset(0x8)] public uint ItemId;
