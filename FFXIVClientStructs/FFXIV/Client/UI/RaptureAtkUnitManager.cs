@@ -15,6 +15,8 @@ public unsafe partial struct RaptureAtkUnitManager
 
     [FieldOffset(0x9C80)] public RaptureAtkModuleFlags Flags;
 
+    [FieldOffset(0x9CF8)] public UIModule.UiFlags UiFlags;
+
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B F8 41 B0 01")]
     [GenerateCStrOverloads]
     public partial AtkUnitBase* GetAddonByName(byte* name, int index = 1);
