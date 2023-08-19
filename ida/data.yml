@@ -3904,8 +3904,8 @@ classes:
       0x140733A00: IsCasting
       0x140742DF0: IsMounted
       0x140744640: GetCompanionOwnerID
-      0x140745570: SetHardTargetId
-      0x1407455E0: GetHardTargetId
+      0x140745570: SetTargetId
+      0x1407455E0: GetTargetId
       0x140745620: SetSoftTargetId
       0x1407456A0: GetSoftTargetId
       0x140746300: SetMode

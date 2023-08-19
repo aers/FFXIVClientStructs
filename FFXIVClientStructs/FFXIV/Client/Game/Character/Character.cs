@@ -64,7 +64,8 @@ public unsafe partial struct Character
 
     /// <summary>
     /// The current target for this character's gaze. Can be set independently of soft or hard targets, and may be set
-    /// by NPCs or minions. For players, an action cast will generally target the LookTarget.
+    /// by NPCs or minions. For players, an action cast will generally target the LookTarget (which generally will be
+    /// the soft target if set, then the hard target).
     /// </summary>
     /// <remarks>
     /// Unlike other GameObjectIDs, this one appears to be set to fully 0 if the player is not looking at anything.
@@ -91,17 +92,17 @@ public unsafe partial struct Character
     /// </remarks>
     [FieldOffset(0x1AB0)] public GameObjectID CombatTaggerId;
     
-    [Obsolete($"Use {nameof(HardTargetId)} instead.")]
+    [Obsolete($"Use {nameof(TargetId)} instead.")]
     [FieldOffset(0x1AB8)] public ulong TargetObjectID;
 
     /// <summary>
-    /// The current hard target for this Character. This will not be set for the LocalPlayer.
+    /// The current (hard) target for this Character. This will not be set for the LocalPlayer.
     /// </summary>
     /// <remarks>
-    /// Developers should generally use <see cref="GetHardTargetId"/> over reading this field directly, as it will
-    /// properly handle resolving the hard target for the local player.
+    /// Developers should generally use <see cref="GetTargetId"/> over reading this field directly, as it will
+    /// properly handle resolving the target for the local player.
     /// </remarks>
-    [FieldOffset(0x1AB8)] public GameObjectID HardTargetId;
+    [FieldOffset(0x1AB8)] public GameObjectID TargetId;
     
     /// <summary>
     /// The current soft target for this Character. This will not be set for the LocalPlayer.
@@ -171,20 +172,18 @@ public unsafe partial struct Character
         get => (StatusFlags4 & 0x20) == 0x20;
         set => StatusFlags4 = (byte) (value ? StatusFlags4 | 0x20 : StatusFlags4 & ~0x20);
     }
-
-    [Obsolete($"Use {nameof(GetHardTargetId)} instead.")]
-    public ulong GetTargetId() => this.GetHardTargetId();
     
     /// <summary>
-    /// Gets the hard target ID for this character. If this character is the LocalPlayer, this will instead read the
-    /// hard target ID from the <see cref="TargetSystem"/>. Used for calculating ToT via /assist.
+    /// Gets the (hard) target ID for this character. If this character is the LocalPlayer, this will instead read the
+    /// target ID from the <see cref="TargetSystem"/>. Used for calculating ToT via /assist.
     /// </summary>
     /// <returns>Returns the object ID of this character's target.</returns>
+    // TODO: Update this return type to GameObjectID with next API bump.
     [MemberFunction("E8 ?? ?? ?? ?? 49 3B C7 0F 84")]
-    public partial GameObjectID GetHardTargetId();
+    public partial ulong GetTargetId();
     
     [MemberFunction("E8 ?? ?? ?? ?? 48 3B FD 74 36")]
-    public partial void SetHardTargetId(GameObjectID id);
+    public partial void SetTargetId(GameObjectID id);
 
     /// <summary>
     /// Gets the soft target ID for this character. If this character is the LocalPlayer, this will instead read the
