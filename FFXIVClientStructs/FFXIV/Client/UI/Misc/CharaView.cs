@@ -18,7 +18,6 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 [StructLayout(LayoutKind.Explicit, Size = 0x2C8)]
 public unsafe partial struct CharaView : ICreatable
 {
-    [FieldOffset(0x0)] public void** VTable;
     [FieldOffset(0x8)] public uint State; // initialization state of KernelTexture, Camera etc. that happens in Render(), 6 = ready for use
     [FieldOffset(0xC)] public uint ClientObjectId; // ID of object in ClientObjectManager, basically ClientObjectIndex + 40
     [FieldOffset(0x10)] public uint ClientObjectIndex;
