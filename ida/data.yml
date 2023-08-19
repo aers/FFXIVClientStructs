@@ -3874,6 +3874,10 @@ classes:
       0x1406B9160: GetCharacter
       0x141448410: ToggleAnimationPlayback
       0x1414484B0: IsAnimationPaused
+  Client::UI::Misc::CharaView::CharacterData:
+    funcs:
+      0x1414465B0: ctor
+      0x141446600: ImportLocalPlayerEquipment
   Client::UI::Misc::CharaViewPortrait:
     vtbls:
       - ea: 0x141BBFBB8
@@ -6160,6 +6164,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x1412147E0: ctor
+      0x1412149C0: OpenForGearset
   Client::UI::Agent::AgentBannerUpdateView:
     vtbls:
       - ea: 0x141AC1848
