@@ -64,7 +64,7 @@ public unsafe partial struct AgentBannerEditorState
     [FieldOffset(0x240)] public fixed uint ItemIds[14];
     [FieldOffset(0x278)] public fixed byte StainIds[14];
 
-    [FieldOffset(0x288)] public uint GearsetHash;
+    [FieldOffset(0x288)] public uint Checksum;
     [FieldOffset(0x28C)] public BannerGearVisibilityFlag GearVisibilityFlag;
     [FieldOffset(0x290)] public byte GearsetIndex;
     [FieldOffset(0x291)] public byte ClassJobId;
