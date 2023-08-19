@@ -1,13 +1,15 @@
 using FFXIVClientStructs.FFXIV.Client.UI.Misc;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
-namespace FFXIVClientStructs.FFXIV.Client.UI.Agent; 
+namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 // ctor "40 53 48 83 EC 20 48 8B D9 E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 03 48 8D 53 30"
 [Agent(AgentId.BannerEditor)]
 [StructLayout(LayoutKind.Explicit, Size = 0x38)]
 public unsafe partial struct AgentBannerEditor
 {
+    public static AgentBannerEditor* Instance() => (AgentBannerEditor*)AgentModule.Instance()->GetAgentByInternalId(AgentId.BannerEditor);
+
     [FieldOffset(0)] public AgentInterface AgentInterface;
     [FieldOffset(0x28)] public AgentBannerEditorState* EditorState;
 
