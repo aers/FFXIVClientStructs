@@ -6169,7 +6169,6 @@ classes:
     funcs:
       0x141271DD0: Save
       0x14126C010: GetPresetIndex
-      0x14126C010: GetPresetIndex
       0x141275730: SetFrame
       0x1412753D0: SetAccent
       0x141272920: SetHasChanged
