@@ -134,6 +134,10 @@ public unsafe partial struct AgentModule
     public AgentIKDResult* GetAgentIKDResult() {
         return (AgentIKDResult*)GetAgentByInternalId(AgentId.IKDResult);
     }
+
+    public AgentBannerEditor* GetAgentBannerEditor() {
+        return (AgentBannerEditor*)GetAgentByInternalId(AgentId.BannerEditor);
+    }
 }
 
 public enum AgentId : uint {

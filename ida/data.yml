@@ -3563,6 +3563,7 @@ classes:
       36: GetAgentModule
       38: GetUI3DModule
       57: GetRetainerCommentModule
+      58: GetBannerModule
       64: GetUIInputData
       65: GetUIInputModule
       67: GetLogFilterConfig
@@ -3796,6 +3797,9 @@ classes:
       0x140691020: RemoveGlamourPlateLink
       0x140691030: HasLinkedGlamourPlate
       0x140691220: GetClassJobIcon
+      0x1406916F0: GetBannerIndexByGearsetIndex
+      0x140691750: SetBannerIndexForGearsetIndex
+      0x140691810: IsGearsetLinkedWithBanner
   Client::UI::Misc::ItemFinderModule:
     vtbls:
       - ea: 0x1419AB3C8
@@ -3832,6 +3836,26 @@ classes:
       0x1406B6BD0: Finalize
       0x1406B7070: GetComment
       0x1406B70D0: SetComment
+  Client::UI::Misc::BannerModule:
+    vtbls:
+      - ea: 0x1419AAD90
+        base: Client::UI::Misc::UserFileManager::UserFileEvent
+    funcs:
+      0x140659EF0: ctor
+      0x140659FD0: CreateBanner
+      0x14065A050: DeleteBanner
+      0x14065A0C0: GetNextId
+      0x14065A0E0: GetBannerById
+      0x14065A130: GetBannerIdByBannerIndex
+  Client::UI::Misc::BannerModuleData:
+    funcs:
+      0x1406C9580: ctor
+      0x1406CC1A0: CreateBanner
+      0x1406CCB50: DeleteBanner
+  Client::UI::Misc::BannerModuleEntry:
+    funcs:
+      0x140659C50: ctor
+      0x1409587E0: GenerateChecksum # static
   Client::UI::Misc::CharaView:
     vtbls:
       - ea: 0x1419ABE90
@@ -3839,9 +3863,56 @@ classes:
       0: dtor
       1: Initialize
       2: Finalize
+      3: ResetPositions
     funcs:
       0x1406B7EA0: ctor
       0x1406B7FC0: Finalize2
+      0x1406B80E0: SetCustomizeData
+      0x1406B8200: Render
+      0x1406B8CA0: UnequipGear
+      0x1406B8EB0: SetItemSlotData
+      0x1406B9040: ToggleDrawWeapon
+      0x1406B9160: GetCharacter
+      0x141448410: ToggleAnimationPlayback
+      0x1414484B0: IsAnimationPaused
+  Client::UI::Misc::CharaView::CharacterData:
+    funcs:
+      0x1414465B0: ctor
+      0x141446600: ImportLocalPlayerEquipment
+  Client::UI::Misc::CharaViewPortrait:
+    vtbls:
+      - ea: 0x141BBFBB8
+        base: Client::UI::Misc::CharaView
+    vfuncs:
+      4: SetCameraDistance
+      5: SetCameraYawAndPitch
+      6: SetCameraXAndY
+      10: Update
+    funcs:
+      0x1414468E0: ctor
+      0x141446B10: Initialize2
+      0x1414474B0: ImportPortraitData
+      0x1414479F0: ExportPortraitData
+      0x141447D80: ToggleGearVisibility
+      0x141447E10: SetCameraZoom
+      0x141447E70: ResetCamera
+      0x141447FC0: SetBackground
+      0x141447FE0: SetHeadDirection
+      0x141448070: ResetHeadDirection
+      0x1414480E0: SetEyeDirection
+      0x141448170: ResetEyeDirection
+      0x1414481E0: SetExpression
+      0x141448280: SetPoseTimed
+      0x141448320: SetPose
+      0x1414483D0: GetAnimationTime
+      0x141448600: SetDirectionalLightingColor
+      0x141448680: SetDirectionalLightingBrightness
+      0x1414486B0: SetDirectionalLightingAngle
+      0x1414486F0: SetAmbientLightingColor
+      0x141448770: SetAmbientLightingBrightness
+      0x141448AB0: ToggleCharacterVisibility
+      0x141448D40: ApplyCameraPositions
+      0x141449170: SetCameraPosition
   Client::Game::SavedAppearanceManager:
     vtbls:
       - ea: 0x1419AC800
@@ -6094,6 +6165,14 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x1412147E0: ctor
+      0x1412149C0: OpenForGearset
+  Client::UI::Agent::AgentBannerEditor::State:
+    funcs:
+      0x141271DD0: Save
+      0x14126C010: GetPresetIndex
+      0x141275730: SetFrame
+      0x1412753D0: SetAccent
+      0x141272920: SetHasChanged
   Client::UI::Agent::AgentBannerUpdateView:
     vtbls:
       - ea: 0x141AC1848

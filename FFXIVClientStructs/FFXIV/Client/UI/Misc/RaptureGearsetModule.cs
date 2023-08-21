@@ -1,4 +1,4 @@
-﻿using FFXIVClientStructs.FFXIV.Client.System.Framework;
+using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Client.UI.Misc.UserFileManager;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
@@ -88,6 +88,15 @@ public unsafe partial struct RaptureGearsetModule
     [MemberFunction("45 33 C0 83 FA 64")]
     public partial int GetClassJobIconForGearset(int gearsetId);
 
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 C0 41 3B C7")]
+    public partial byte GetBannerIndexByGearsetIndex(byte gearsetIndex); // returns the actual BannerIndex (gearset->BannerIndex - 1)
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 7C 24 ?? 40 FE C6")]
+    public partial void SetBannerIndexForGearsetIndex(byte gearsetIndex, sbyte bannerIndex); // actual BannerIndex, -1 = unlink banner
+
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 3F 48 8B 03")]
+    public partial bool IsGearsetLinkedWithBanner(byte gearsetIndex); // equivalent to Flags.HasFlag(GearsetFlag.Exists) && BannerIndex != 0
+
     [StructLayout(LayoutKind.Sequential, Size = 0xAF2C)]
     public struct Gearsets {
         private fixed byte data[0x1C0 * 100];
@@ -137,7 +146,8 @@ public unsafe partial struct RaptureGearsetModule
         [FieldOffset(0x31)] public byte ClassJob;
         [FieldOffset(0x32)] public byte GlamourSetLink;
         [FieldOffset(0x34)] public short ItemLevel;
-        // [FieldOffset(0x36)] public byte BannerId; // ?
+        /// <remarks>This is the BannerIndex, but offset by 1. If it's 0, the gearset is not linked to a banner.</remarks>
+        [FieldOffset(0x36)] public byte BannerIndex;
         [FieldOffset(0x37)] public GearsetFlag Flags;
 
         private const int ItemDataOffset = 0x38;
@@ -156,5 +166,19 @@ public unsafe partial struct RaptureGearsetModule
         [FieldOffset(ItemDataOffset + GearsetItem.Size * 11)] public GearsetItem RingRight;
         [FieldOffset(ItemDataOffset + GearsetItem.Size * 12)] public GearsetItem RightLeft; // ?!
         [FieldOffset(ItemDataOffset + GearsetItem.Size * 13)] public GearsetItem SoulStone;
+
+        /// <returns>Returns a pointer to the BannerModuleEntry* or null if the gearset is not linked to a banner.</returns>
+        public BannerModuleEntry* GetBanner()
+        {
+            if (BannerIndex == 0)
+                return null;
+
+            var bannerModule = BannerModule.Instance();
+            var bannerId = bannerModule->GetBannerIdByBannerIndex(BannerIndex - 1);
+            if (bannerId == -1)
+                return null;
+
+            return bannerModule->GetBannerById(bannerId);
+        }
     }
 }
