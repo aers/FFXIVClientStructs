@@ -117,6 +117,11 @@ public unsafe partial struct AgentModule
 	    return (AgentDeepDungeonMap*)GetAgentByInternalId(AgentId.DeepDungeonMap);
     }
 
+    public AgentMiragePrismMiragePlate* GetAgentMiragePrismMiragePlate()
+    {
+        return (AgentMiragePrismMiragePlate*)GetAgentByInternalId(AgentId.MiragePrismMiragePlate);
+    }
+
     public AgentMiragePrismPrismBox* GetAgentMiragePrismPrismBox()
     {
         return (AgentMiragePrismPrismBox*)GetAgentByInternalId(AgentId.MiragePrismPrismBox);
