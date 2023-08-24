@@ -1,10 +1,10 @@
-﻿using FFXIVClientStructs.FFXIV.Client.System.Framework;
+using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.MiragePrismMiragePlate)]
-[StructLayout(LayoutKind.Explicit, Size = 0x308)]
+[StructLayout(LayoutKind.Explicit, Size = 0x350)]
 public unsafe partial struct AgentMiragePrismMiragePlate {
     [FieldOffset(0x00)] public AgentInterface AgentInterface;
     [FixedSizeArray<MiragePlateItem>(14)]
