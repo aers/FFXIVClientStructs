@@ -7943,6 +7943,12 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14100A350: ctor
+  Client::UI::AddonBannerEditor:
+    vtbls:
+      - ea: 0x141A8B410
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1410AAAB0: ctor
   Client::Game::Object::EventObject:
     vtbls:
       - ea: 0x141AC2DC8
