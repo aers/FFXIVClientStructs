@@ -1,4 +1,5 @@
 using FFXIVClientStructs.FFXIV.Client.Game.Character.Data;
+using FFXIVClientStructs.FFXIV.Client.Game.Control;
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
 using FFXIVClientStructs.FFXIV.Client.Graphics.Vfx;
 using FFXIVClientStructs.FFXIV.Common.Math;
@@ -58,7 +59,18 @@ public unsafe partial struct Character
     [FieldOffset(0x878)] public OrnamentContainer Ornament;
     [FieldOffset(0x920)] public ActionTimelineManager ActionTimelineManager;
 
+    [Obsolete($"Use {nameof(LookTargetId)} instead.")]
     [FieldOffset(0xCB0)] public uint PlayerTargetObjectID;
+
+    /// <summary>
+    /// The current target for this character's gaze. Can be set independently of soft or hard targets, and may be set
+    /// by NPCs or minions. For players, an action cast will generally target the LookTarget (which generally will be
+    /// the soft target if set, then the hard target).
+    /// </summary>
+    /// <remarks>
+    /// Unlike other GameObjectIDs, this one appears to be set to fully 0 if the player is not looking at anything.
+    /// </remarks>
+    [FieldOffset(0xCB0)] public GameObjectID LookTargetId; 
 
     [FieldOffset(0x17C0)] public Balloon Balloon;
 
@@ -69,10 +81,42 @@ public unsafe partial struct Character
     [FieldOffset(0x1A4C)] public float Alpha;
     [FieldOffset(0x1A80)] public Companion* CompanionObject; // minion
     [FieldOffset(0x1A98)] public fixed byte FreeCompanyTag[6];
+
+    /// <summary>
+    /// The GameObjectID of the entity that currently has the combat tag on this character. May be set to a party ID if
+    /// certain conditions are met (PVP?). See <see cref="CombatTagType"/> for information about the type of tagger.
+    /// </summary>
+    /// <remarks>
+    /// A tagger is generally the first entity to deal damage to this character, and will persist until that entity
+    /// has died, at which point it will reset.
+    /// </remarks>
+    [FieldOffset(0x1AB0)] public GameObjectID CombatTaggerId;
+    
+    [Obsolete($"Use {nameof(TargetId)} instead.")]
     [FieldOffset(0x1AB8)] public ulong TargetObjectID;
 
-    [FieldOffset(0x1B00)] public uint NameID;
+    /// <summary>
+    /// The current (hard) target for this Character. This will not be set for the LocalPlayer.
+    /// </summary>
+    /// <remarks>
+    /// Developers should generally use <see cref="GetTargetId"/> over reading this field directly, as it will
+    /// properly handle resolving the target for the local player.
+    /// </remarks>
+    [FieldOffset(0x1AB8)] public GameObjectID TargetId;
+    
+    /// <summary>
+    /// The current soft target for this Character. This will not be set for the LocalPlayer.
+    /// </summary>
+    /// <remarks>
+    /// Developers should generally use <see cref="GetSoftTargetId"/> over reading this field directly, as it will
+    /// properly handle resolving the soft target for the local player.
+    /// </remarks>
+    [FieldOffset(0x1AC0)] public GameObjectID SoftTargetId;
 
+    [FieldOffset(0x1B00)] public uint NameID;
+    
+    [FieldOffset(0x1B10)] public uint CompanionOwnerID;
+    
     [FieldOffset(0x1B1C)] public ushort CurrentWorld;
     [FieldOffset(0x1B1E)] public ushort HomeWorld;
 
@@ -81,7 +125,17 @@ public unsafe partial struct Character
     [FieldOffset(0x1B26)] public CharacterModes Mode;
     [FieldOffset(0x1B27)] public byte ModeParam; // Different purpose depending on mode. See CharacterModes for more info.
     [FieldOffset(0x1B29)] public byte Battalion; // used for determining friend/enemy state
-    [FieldOffset(0x1B10)] public uint CompanionOwnerID;
+
+    /// <summary>
+    /// The type of tagger, as represented in <see cref="CombatTaggerId"/>. Known values:
+    /// <list type="bullet">
+    /// <item>0 - Entity Not Tagged</item>
+    /// <item>1 - Character Tag (players, battle NPCs, etc.)</item>
+    /// <item>2 - Party Tag (PVP?)</item>
+    /// <item>4 - Observed, but unknown.</item>
+    /// </list>
+    /// </summary>
+    [FieldOffset(0x1B31)] public byte CombatTagType;
 
     // Note: These 2 status flags might be just an ushort instead of 2 separate bytes.
 
@@ -118,9 +172,29 @@ public unsafe partial struct Character
         get => (StatusFlags4 & 0x20) == 0x20;
         set => StatusFlags4 = (byte) (value ? StatusFlags4 | 0x20 : StatusFlags4 & ~0x20);
     }
-
+    
+    /// <summary>
+    /// Gets the (hard) target ID for this character. If this character is the LocalPlayer, this will instead read the
+    /// target ID from the <see cref="TargetSystem"/>. Used for calculating ToT via /assist.
+    /// </summary>
+    /// <returns>Returns the object ID of this character's target.</returns>
+    // TODO: Update this return type to GameObjectID with next API bump.
     [MemberFunction("E8 ?? ?? ?? ?? 49 3B C7 0F 84")]
     public partial ulong GetTargetId();
+    
+    [MemberFunction("E8 ?? ?? ?? ?? 48 3B FD 74 36")]
+    public partial void SetTargetId(GameObjectID id);
+
+    /// <summary>
+    /// Gets the soft target ID for this character. If this character is the LocalPlayer, this will instead read the
+    /// soft target ID from the <see cref="TargetSystem"/>.
+    /// </summary>
+    /// <returns>Returns the object ID of this character's target.</returns>
+    [MemberFunction("E8 ?? ?? ?? ?? 49 3B C5")]
+    public partial GameObjectID GetSoftTargetId();
+    
+    [MemberFunction("E8 ?? ?? ?? ?? B8 ?? ?? ?? ?? 4C 3B F0")]
+    public partial void SetSoftTargetId(GameObjectID id);
 
     // Seemingly used for cutscenes and GPose.
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 9F ?? ?? ?? ?? 48 8D 8F")]

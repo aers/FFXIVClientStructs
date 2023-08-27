@@ -10,8 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Object;
 //   if (DataID != 0) ObjectID = DataID, Type = 1
 // else ObjectID = ObjectID, Type = 0
 [StructLayout(LayoutKind.Explicit, Size = 0x8)]
-public struct GameObjectID
-{
+public struct GameObjectID {
     [FieldOffset(0x0)] public uint ObjectID;
     [FieldOffset(0x4)] public byte Type;
 
@@ -20,8 +19,18 @@ public struct GameObjectID
         return *(long*)objid;
     }
 
+    public static unsafe implicit operator ulong(GameObjectID id) {
+        var objid = stackalloc GameObjectID[] {id};
+        return *(ulong*)objid;
+    }
+
     public static unsafe implicit operator GameObjectID(long id) {
         var objid = stackalloc long[] {id};
+        return *(GameObjectID*)objid;
+    }
+    
+    public static unsafe implicit operator GameObjectID(ulong id) {
+        var objid = stackalloc ulong[] {id};
         return *(GameObjectID*)objid;
     }
 }
