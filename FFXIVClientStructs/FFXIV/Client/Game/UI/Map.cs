@@ -127,6 +127,13 @@ public unsafe partial struct MapMarkerContainer
     public LinkedList* List;
     public int Size;
 
+    [StructLayout(LayoutKind.Sequential)]
+    public unsafe partial struct LinkedList
+    {
+        public MapMarkerNode* First;
+        public MapMarkerNode* Last;
+    }
+
     public IEnumerable<MarkerInfo> GetAllMarkers()
     {
         var result = new List<MarkerInfo>();
@@ -140,13 +147,6 @@ public unsafe partial struct MapMarkerContainer
 
         return result;
     }
-}
-
-[StructLayout(LayoutKind.Sequential)]
-public unsafe partial struct LinkedList
-{
-    public MapMarkerNode* First;
-    public MapMarkerNode* Last;
 }
 
 [StructLayout(LayoutKind.Sequential)]
