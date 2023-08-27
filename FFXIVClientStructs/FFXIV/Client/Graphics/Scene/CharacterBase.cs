@@ -1,4 +1,5 @@
 ﻿using FFXIVClientStructs.FFXIV.Client.Game.Character;
+using FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
 using FFXIVClientStructs.FFXIV.Client.Graphics.Physics;
 using FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 
@@ -49,8 +50,11 @@ public unsafe partial struct CharacterBase
     public BonePhysicsModule* BonePhysicsModule; // Client::Graphics::Physics::BonePhysicsModule ptr
 
     [FieldOffset(0x224)] public float VfxScale;
-    [FieldOffset(0x240)] public void*
-        CharacterDataCB; // Client::Graphics::Kernel::ConstantBuffer ptr, this CB includes stuff like hair color
+    [Obsolete("Use CharacterDataCBuffer")]
+    [FieldOffset(0x240)] public void* CharacterDataCB;
+    [FieldOffset(0x240)] public ConstantBuffer* CharacterDataCBuffer; // Size has been observed to be 0x50, contents may be InstanceParameter
+
+    [FieldOffset(0x258)] public Texture** ColorSetTextures; // each one corresponds to a material, size = SlotCount * 4
 
     [FieldOffset(0x2B0)] public float WeatherWetness;  // Set to 1.0f when raining and not covered or umbrella'd
     [FieldOffset(0x2B4)] public float SwimmingWetness; // Set to 1.0f when in water
@@ -69,14 +73,26 @@ public unsafe partial struct CharacterBase
     public void* TempSlotData; // struct with temporary data for each slot (size = 0x88 * slot count)
 
     //
+    [Obsolete("Use Materials")]
     [FieldOffset(0x2E8)] public void**
         MaterialArray; // array of Client::Graphics::Render::Material ptrs size = SlotCount * 4 (4 material per model max)
+    [FieldOffset(0x2E8)]
+    public Material** Materials; // size = SlotCount * 4 (4 material per model max)
 
     [FieldOffset(0x2F0)]
     public void* EID; // Client::System::Resource::Handle::ElementIdResourceHandle - EID file for base skeleton
 
     [FieldOffset(0x2F8)] public void**
         IMCArray; // array of Client::System::Resource::Handle::ImageChangeDataResourceHandle ptrs size = SlotCount - IMC file for model in slot
+
+    public readonly Span<Pointer<Model>> ModelsSpan
+        => new(Models, SlotCount);
+
+    public readonly Span<Pointer<Texture>> ColorSetTexturesSpan
+        => new(ColorSetTextures, SlotCount * 4);
+
+    public readonly Span<Pointer<Material>> MaterialsSpan
+        => new(Materials, SlotCount * 4);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 74 21 C7 40")]
     public static partial CharacterBase* Create(uint modelId, CustomizeData* customize, EquipmentModelId* equipData /* 10 times, 40 byte */, byte unk);

@@ -1,4 +1,6 @@
-﻿namespace FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
+﻿using FFXIVClientStructs.FFXIV.Client.Graphics.Render;
+
+namespace FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
 // Client::Graphics::Kernel::ShaderPackage
 //   Client::Graphics::ReferencedClassBase
 
@@ -18,6 +20,12 @@ public unsafe struct ShaderPackage
     [StructLayout(LayoutKind.Explicit, Size = 0xC)]
     public struct ConstantSamplerUnknown
     {
+        [FieldOffset(0x0)] public uint CRC;
+        /// <summary>
+        /// Cross-reference this with <see cref="Material.TextureEntry.Id"/>.
+        /// </summary>
+        [FieldOffset(0x4)] public uint Id;
+        [FieldOffset(0xA)] public ushort Slot;
     }
 
     [FieldOffset(0x00)] public ReferencedClassBase ReferencedClassBase;
@@ -60,4 +68,27 @@ public unsafe struct ShaderPackage
     [FieldOffset(0xE0)] public uint SubviewValue1;
     [FieldOffset(0xE4)] public uint SubviewValue2;
     [FieldOffset(0xE8)] public void* ShaderNodeTreeVtbl; // class I haven't defined yet
+
+    public readonly Span<MaterialElement> MaterialElementsSpan
+        => new(MaterialElements, MaterialElementCount);
+
+    public readonly Span<ConstantSamplerUnknown> ConstantsSpan
+        => new(Constants, ConstantCount);
+    public readonly Span<ConstantSamplerUnknown> SamplersSpan
+        => new(Samplers, SamplerCount);
+    public readonly Span<ConstantSamplerUnknown> UnknownsSpan
+        => new(Unknowns, UnkCount);
+
+    public readonly Span<uint> SystemKeysSpan
+        => new(SystemKeys, SystemKeyCount);
+    public readonly Span<uint> SceneKeysSpan
+        => new(SceneKeys, SceneKeyCount);
+    public readonly Span<uint> MaterialKeysSpan
+        => new(MaterialKeys, MaterialKeyCount);
+    public readonly Span<uint> SystemValuesSpan
+        => new(SystemValues, SystemKeyCount);
+    public readonly Span<uint> SceneValuesSpan
+        => new(SceneValues, SceneKeyCount);
+    public readonly Span<uint> MaterialValuesSpan
+        => new(MaterialValues, MaterialKeyCount);
 }

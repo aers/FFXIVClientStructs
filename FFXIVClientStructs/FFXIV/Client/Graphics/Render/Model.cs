@@ -12,6 +12,12 @@ public unsafe struct Model {
 
     [FieldOffset(0x40)] public Skeleton* Skeleton;
 
+    [FieldOffset(0x58)] public void** BoneList;
+    [FieldOffset(0x60)] public int BoneCount;
+
     [FieldOffset(0x98)] public Material** Materials;
     [FieldOffset(0xA0)] public int MaterialCount;
+
+    public readonly ReadOnlySpan<Pointer<Material>> MaterialsSpan
+        => new(Materials, MaterialCount);
 }
