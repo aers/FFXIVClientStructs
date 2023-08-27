@@ -12,13 +12,26 @@ public unsafe struct StdString
     [FieldOffset(0x10)] public ulong Length;
     [FieldOffset(0x18)] public ulong Capacity;
 
+    public readonly ReadOnlySpan<byte> Span
+    {
+        get
+        {
+            if (Length < 16)
+                fixed (byte* buffer = Buffer)
+                    return new(buffer, (int)Length);
+            else if (Length <= 0x7FEFFFFF)
+                return new(BufferPtr, (int)Length);
+            else
+                throw new OverflowException($"std::string too large (length {Length})");
+        }
+    }
+
     public byte[] GetBytes()
     {
         var data = new byte[Length];
 
-        if (Length < 16)
-            for (ulong i = 0; i < Length; i++)
-                data[i] = Buffer[i];
+        if (Length <= 0x7FEFFFFF)
+            Span.CopyTo(data);
         else
             for (ulong i = 0; i < Length; i++)
                 data[i] = BufferPtr[i];
@@ -27,6 +40,9 @@ public unsafe struct StdString
 
     public override string ToString()
     {
+        if (Length <= 0x7FEFFFFF)
+            return Encoding.UTF8.GetString(Span);
+
         return Encoding.UTF8.GetString(GetBytes());
     }
 }
