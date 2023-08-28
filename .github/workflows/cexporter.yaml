@@ -4,6 +4,8 @@ on:
   pull_request:
     branches:
       - main
+    paths:
+      - 'FFXIVClientStructs/**/*.cs'
 
 jobs:
   test:
@@ -15,5 +17,6 @@ jobs:
           dotnet-version: 7.0.x
       - name: Install dependencies
         run: dotnet restore
-      - name: Run CExporter
-        run: dotnet run --project ida/CExporter/CExporter.csproj
+      - name: Run CExporter'
+        working-directory: ./ida
+        run: dotnet run --project CExporter/CExporter.csproj
