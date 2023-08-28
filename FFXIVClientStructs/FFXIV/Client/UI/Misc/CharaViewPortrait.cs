@@ -23,8 +23,8 @@ public unsafe partial struct CharaViewPortrait : ICreatable
     [FieldOffset(0x305)] public byte DirectionalLightingColorGreen;
     [FieldOffset(0x306)] public byte DirectionalLightingColorBlue;
     [FieldOffset(0x307)] public byte DirectionalLightingBrightness;
-    [FieldOffset(0x308)] public ushort DirectionalLightingVerticalAngle; // -180 to 180
-    [FieldOffset(0x30A)] public ushort DirectionalLightingHorizontalAngle; // -180 to 180
+    [FieldOffset(0x308)] public short DirectionalLightingVerticalAngle; // -180 to 180
+    [FieldOffset(0x30A)] public short DirectionalLightingHorizontalAngle; // -180 to 180
     [FieldOffset(0x30C)] public byte AmbientLightingColorRed;
     [FieldOffset(0x30D)] public byte AmbientLightingColorGreen;
     [FieldOffset(0x30E)] public byte AmbientLightingColorBlue;
