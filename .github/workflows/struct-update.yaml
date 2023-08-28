@@ -1,0 +1,29 @@
+name: Struct Update
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'FFXIVClientStructs/**/*.cs'
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '7.0.x'
+      - name: Restore
+        run: dotnet restore
+      - name: Run
+        working-directory: ./ida
+        run: dotnet run --project CExporter/CExporter.csproj
+      - name: Commit
+        run: |
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git add .
+          git commit -m "Update structs"
+          git push
