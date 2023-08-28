@@ -4012,8 +4012,8 @@ classes:
       0x1412BF010: SetupMount
   Client::Game::Character::ReaperShroudContainer:
     vtbls:
-      - ea: 0x1419BFDC0
-      - ea: 0x1419BFDE8
+      - ea: 0x1419C5DA0
+      - ea: 0x1419C5DC8
         base: Client::Graphics::Vfx::VfxDataListenner
     vfuncs:
       - 0: dtor
