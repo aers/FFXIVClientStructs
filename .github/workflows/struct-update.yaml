@@ -1,0 +1,54 @@
+name: Struct Update
+
+on:
+  schedule:
+    - cron: '0 0 * * 1'
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    if: github.repository_owner == 'aers'
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+      - name: Check for changes
+        id: git-check
+        run: |
+          echo "=============== list modified files ==============="
+          git diff --name-only HEAD^ HEAD
+          
+          echo "========== check paths of modified files =========="
+          git diff --name-only HEAD^ HEAD -- FFXIVClientStructs > files.txt
+          while IFS= read -r file
+          do
+            echo $file
+            if [[ $file != FFXIVClientStructs/* ]]; then
+              echo "This modified file is not under the 'FFXIVClientStructs' folder."
+              echo "has_changes=false" >> $GITHUB_OUTPUT
+              break
+            else
+              echo "has_changes=true" >> $GITHUB_OUTPUT
+            fi
+          done < files.txt
+      - name: Setup .NET
+        if: steps.git-check.outputs.has_changes == 'true'
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '7.0.x'
+      - name: Restore
+        if: steps.git-check.outputs.has_changes == 'true'
+        run: dotnet restore
+      - name: Run CExporter
+        if: steps.git-check.outputs.has_changes == 'true'
+        working-directory: ./ida
+        run: dotnet run --project CExporter/CExporter.csproj
+      - name: Commit C Structs
+        if: steps.git-check.outputs.has_changes == 'true'
+        run: |
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git add .
+          git commit -m "Update structs"
+          git push
