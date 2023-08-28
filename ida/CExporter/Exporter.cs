@@ -17,15 +17,18 @@ public enum GapStrategy
 
 public static class ExporterStatics
 {
-    private static Type[] _definedTypes;
+    private static Type[]? _definedTypes;
 
     public static Type[] DefinedTypes => _definedTypes ??= GetExportableTypes();
 
+#pragma warning disable CA2211
+    // ReSharper disable once InconsistentNaming
     public static string FFXIVNamespacePrefix = string.Join(".", nameof(FFXIVClientStructs), nameof(FFXIVClientStructs.FFXIV), "");
     public static string StdNamespacePrefix = string.Join(".", nameof(FFXIVClientStructs), nameof(FFXIVClientStructs.STD), "");
     public static string InteropNamespacePrefix = string.Join(".", nameof(FFXIVClientStructs), nameof(FFXIVClientStructs.Interop), "");
 
     public static string[] IgnoredTypeNames = { "MemberFunctionPointers", "StaticAddressPointers", "Addresses" };
+#pragma warning restore CA2211
 
     private static Type[] GetExportableTypes()
     {
@@ -38,13 +41,16 @@ public static class ExporterStatics
         }
         catch (ReflectionTypeLoadException ex)
         {
-            definedTypes = ex.Types.Where(t => t != null).ToArray();
+            definedTypes = ex.Types.Where(t => t != null).ToArray()!;
         }
 
         return definedTypes.Where(t => t.FullName!.StartsWith(FFXIVNamespacePrefix)).ToArray();
     }
+
+    public static Dictionary<Type, string> ErrorListDictionary = new();
 }
 
+// ReSharper disable once InconsistentNaming
 public class ExporterIDA : ExporterBase
 {
     public ExporterIDA() : base("::")
@@ -132,7 +138,7 @@ public abstract class ExporterBase
 
     private void ProcessType(Type type, StringBuilder header)
     {
-        if (_knownTypes.Contains(type) || type.IsPrimitive || type.IsInterface)
+        if (_knownTypes.Contains(type) || type.IsPrimitive || type.IsInterface || type.IsBlocked())
             return;
 
         if (type.IsFixedBuffer())
@@ -154,7 +160,7 @@ public abstract class ExporterBase
         }
     }
 
-    private bool IsNotHavok(FieldInfo fieldInfo)
+    private static bool IsNotHavok(FieldInfo fieldInfo)
     {
         var type = fieldInfo.FieldType;
         if (type.IsPointer)
@@ -162,10 +168,10 @@ public abstract class ExporterBase
         return !(type.GenericTypeArguments.Any(IsHavok) || IsHavok(type));
     }
 
-    private bool IsHavok(Type type)
+    private static bool IsHavok(Type type)
     {
         //check if fieldInfo is either a Havok type or a recursive pointer to a Havok type or generic type
-        if(type.IsPointer)
+        if (type.IsPointer)
             type = type.GetElementType()!;
         return type.GenericTypeArguments.Any(IsHavok) || type.Namespace!.StartsWith("FFXIVClientStructs.Havok");
     }
@@ -260,7 +266,7 @@ public abstract class ExporterBase
 
         foreach (var fieldInfo in fields)
         {
-            if (SetProperty(type, header, fieldInfo, false, fieldInfo.GetFieldOffset(), padFill, sb, pad, ref offset))
+            if (SetProperty(type, header, fieldInfo, false, fieldInfo.GetFieldOffset(), padFill, sb, pad, null, ref offset))
                 return;
         }
 
@@ -352,14 +358,14 @@ public abstract class ExporterBase
                 if (isStruct)
                 {
                     sb.AppendLine("    struct {");
-                    if (layoutObjects.Any(layoutObject => SetProperty(type, header, layoutObject.Info, isUnion, layoutObject.Offset, padFill, sb, pad, ref offset)))
+                    if (layoutObjects.Any(layoutObject => SetProperty(type, header, layoutObject.Info, isUnion, layoutObject.Offset, padFill, sb, pad, fields.GetNextLayout(grouping), ref offset)))
                     {
                         return;
                     }
 
                     sb.AppendLine($"    }} _union_struct_0x{structLayout.Offset():X};");
                 }
-                else if (SetProperty(type, header, layoutObjects[0].Info, isUnion, layoutObjects[0].Offset, padFill, sb, pad, ref offset)) return;
+                else if (SetProperty(type, header, layoutObjects[0].Info, isUnion, layoutObjects[0].Offset, padFill, sb, pad, fields.GetNextLayout(grouping), ref offset)) return;
             }
 
             if (!isUnion)
@@ -376,7 +382,7 @@ public abstract class ExporterBase
         header.AppendLine(sb.ToString());
     }
 
-    private bool SetProperty(Type type, StringBuilder header, FieldInfo fieldInfo, bool isUnion, int fieldOffset, string padFill, StringBuilder sb, int pad, ref int offset)
+    private bool SetProperty(Type type, StringBuilder header, FieldInfo fieldInfo, bool isUnion, int fieldOffset, string padFill, StringBuilder sb, int pad, UnionLayout? nextLayout, ref int offset)
     {
         var fieldType = fieldInfo.FieldType;
         int fieldSize;
@@ -386,9 +392,10 @@ public abstract class ExporterBase
 
         if (offset > fieldOffset)
         {
-            var k = sb.ToString();
-            Debug.WriteLine($"Current offset exceeded the next field's offset (0x{offset:X} > 0x{fieldOffset:X}): {FixFullName(type)}.{fieldInfo.Name}");
-            Console.WriteLine($"Current offset exceeded the next field's offset (0x{offset:X} > 0x{fieldOffset:X}): {FixFullName(type)}.{fieldInfo.Name}");
+            var error = $"Current offset exceeded the next field's offset (0x{offset:X} > 0x{fieldOffset:X}): {FixFullName(type)}.{fieldInfo.Name}";
+            Debug.WriteLine(error);
+            Console.WriteLine(error);
+            ExporterStatics.ErrorListDictionary.TryAdd(type, error);
             Errored = true;
             return true;
         }
@@ -423,7 +430,11 @@ public abstract class ExporterBase
 
             sb.AppendLine(string.Format($"    /* 0x{{0:X{pad}}} */ {fieldType.FixTypeName(FixFullName)} {fieldInfo.Name};", fieldOffset));
 
-            fieldSize = Enum.GetUnderlyingType(fieldType).SizeOf();
+            var enumSize = Enum.GetUnderlyingType(fieldType).SizeOf();
+
+            fieldSize = nextLayout?.Offset() - fieldOffset ?? enumSize;
+            if (fieldSize > enumSize)
+                fieldSize = enumSize;
         }
         else
         {
@@ -471,14 +482,6 @@ public abstract class ExporterBase
         header.AppendLine(sb.ToString());
     }
 
-    private void ProcessPrimitive(Type type)
-    {
-        if (_knownTypes.Contains(type))
-            return;
-
-        _knownTypes.Add(type);
-    }
-
     protected virtual string FixFullName(Type type)
     {
         string fullName;
@@ -487,7 +490,7 @@ public abstract class ExporterBase
             var isPointer = type.IsPointer;
             var dereferenced = isPointer ? type.GetElementType()! : type;
             var generic = dereferenced.GetGenericTypeDefinition();
-            fullName = generic.FullName?.Split('`')[0];
+            fullName = generic.FullName?.Split('`')[0]!;
             if (dereferenced.IsNested)
             {
                 fullName += '+' + generic.FullName?.Split('+')[1].Split('[')[0];
@@ -522,7 +525,7 @@ public abstract class ExporterBase
             }
         }
 
-        var (oldName, newName) = _nameOverride.FirstOrDefault(t => fullName!.Contains(t.Key));
+        var (oldName, newName) = _nameOverride.FirstOrDefault(t => fullName.Contains(t.Key));
         if (string.IsNullOrWhiteSpace(oldName) || fullName.Replace("*", "").EndsWith("Struct"))
             return fullName.Replace(".", _separator).Replace("+", _separator);
 
@@ -575,8 +578,18 @@ public abstract class ExporterBase
         }
     }
 }
+public static class Extensions
+{
+    internal static UnionLayout? GetNextLayout(this List<UnionLayout> layouts, UnionLayout layout)
+    {
+        var index = layouts.IndexOf(layout);
+        if (index == -1 || index == layouts.Count - 1)
+            return null;
+        return layouts[index + 1];
+    }
+}
 
-record UnionLayout
+internal record UnionLayout
 {
     public List<StructLayout> Layouts = new();
 
@@ -585,7 +598,7 @@ record UnionLayout
     public int SizeDif() => Layouts.Max(t => t.Size()) - Layouts.Min(t => t.Size());
 }
 
-record StructLayout
+internal record StructLayout
 {
     public List<StructObject> Objects = new();
 
@@ -604,9 +617,9 @@ record StructLayout
     public int Offset() => _offset ??= Objects.Min(t => t.Offset);
 }
 
-record StructObject
+internal record StructObject
 {
     public int Offset;
     public int Size;
-    public FieldInfo Info;
+    public required FieldInfo Info;
 }

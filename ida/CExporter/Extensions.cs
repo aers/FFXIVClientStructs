@@ -39,6 +39,7 @@ public static class TypeExtensions
             _ when type == typeof(int*) => "__int32*",
             _ when type == typeof(uint*) => "unsigned __int32*",
             _ when type == typeof(float*) => "float*",
+            _ when type == typeof(Half) => "__int16", // Half is a struct that is 2 bytes long and does not exist in C so we just use __int16
             _ => unhandled(type)
         };
 
@@ -48,13 +49,20 @@ public static class TypeExtensions
         return type switch
         {
             _ when type == typeof(sbyte) || type == typeof(byte) || type == typeof(bool) => 1,
-            _ when type == typeof(short) || type == typeof(ushort) => 2,
+            _ when type == typeof(short) || type == typeof(ushort) || type == typeof(Half) => 2,
             _ when type == typeof(int) || type == typeof(uint) || type == typeof(float) => 4,
             _ when type == typeof(long) || type == typeof(ulong) || type == typeof(double) || type.IsPointer => 8,
             _ when type.IsStruct() => type.StructLayoutAttribute?.Size ?? (int?)typeof(Unsafe).GetMethod("SizeOf")?.MakeGenericMethod(type).Invoke(null, null) ?? 0,
             _ => (int?)typeof(Unsafe).GetMethod("SizeOf")?.MakeGenericMethod(type).Invoke(null, null) ?? 0
         };
     }
+
+    public static bool IsBlocked(this Type type) =>
+        type switch
+        {
+            _ when type == typeof(Half) => true,
+            _ => false
+        };
 }
 
 public static class FieldInfoExtensions
