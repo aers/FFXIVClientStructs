@@ -188,8 +188,15 @@ struct Client_Game_UI_LimitBreakController;
 struct Client_Game_UI_Loot;
 struct Client_Game_UI_LootItem;
 struct Client_Game_UI_Map;
-struct Client_Game_UI_Map_QuestMarkerArray;
+struct StdVector_ClientGameUIMapMarkerData;
+struct Client_Game_UI_MapMarkerContainer;
+struct Client_Game_UI_SimpleMapMarkerContainer;
 struct Client_Game_UI_Map_MapMarkerInfo;
+struct Client_Game_UI_Map_QuestMarkerArray;
+struct Client_Game_UI_MapMarkerContainer_LinkedList;
+struct Client_Game_UI_MapMarkerData;
+struct Client_Game_UI_MapMarkerNode;
+struct Client_Game_UI_MarkerInfo;
 struct Client_Game_UI_MarkingController;
 struct Client_Game_UI_MobHunt;
 struct Client_Game_UI_MobHunt_KillCounts;
@@ -203,6 +210,7 @@ struct Client_Game_UI_Revive;
 struct Component_GUI_AtkEventInterface;
 struct Client_Game_UI_RouletteController;
 struct Client_Game_UI_SelectUseTicketInvoker;
+struct Client_Game_UI_SimpleMapMarkerData;
 struct Client_Game_UI_Telepo;
 struct StdVector_ClientGameUITeleportInfo;
 struct Client_Game_UI_TeleportInfo;
@@ -326,6 +334,7 @@ struct Client_UI_AddonAOZNotebook_SpellbookBlock;
 struct Client_UI_AddonAOZNotebook_ActiveActions;
 struct Client_UI_AddonBank;
 struct Client_UI_AddonBank_AddonBankVTable;
+struct Client_UI_AddonBannerEditor;
 struct Client_UI_AddonCastBar;
 struct Client_UI_AddonCharacterInspect;
 struct Client_UI_AddonChatLogPanel;
@@ -452,6 +461,13 @@ struct Client_UI_Agent_AgentExplorationResultInterface;
 struct Client_UI_Agent_AgentAozContentBriefing;
 struct Client_UI_Agent_AgentAozContentResult;
 struct Client_UI_Agent_AgentArchiveItem;
+struct Client_UI_Agent_AgentBannerEditor;
+struct Client_UI_Agent_AgentBannerEditorState;
+struct Client_UI_Misc_BannerModuleEntry;
+struct Common_Math_HalfVector4;
+struct Common_Math_HalfVector2;
+struct Client_UI_Agent_AgentBannerEditorState_ExpressionDropdownItem;
+struct Client_UI_Agent_AgentBannerEditorState_GenericDropdownItem;
 struct Client_UI_Agent_AgentBannerInterface;
 struct Client_UI_Agent_AgentBannerInterface_Storage;
 struct Client_UI_Agent_AgentBannerInterface_Storage_CharacterData;
@@ -461,7 +477,7 @@ struct Client_UI_Agent_AgentBannerParty;
 struct Client_UI_Agent_AgentCharaCard;
 struct Client_UI_Agent_AgentCharaCard_Storage;
 struct Client_UI_Misc_CharaView;
-struct Client_UI_Misc_CharaView_UnkStruct;
+struct Client_UI_Misc_CharaViewCharacterData;
 struct Client_UI_Agent_AgentChatLog;
 struct Client_UI_Agent_AgentCompanyCraftMaterial;
 struct Client_UI_Agent_AgentContentsFinder;
@@ -488,6 +504,9 @@ struct Client_UI_Agent_AgentGatheringNote;
 struct Client_UI_Agent_AgentGcArmyExpedition;
 struct Client_UI_Agent_AgentGoldSaucer;
 struct Client_UI_Agent_AgentGrandCompanySupply;
+struct Client_UI_Agent_AgentHousingPlant;
+struct Client_UI_Agent_AgentHousingPlant_SelectableItem;
+struct Client_UI_Agent_AgentHousingPlant_SelectedItem;
 struct Client_UI_Agent_AgentHUD;
 struct Client_UI_Agent_AgentIKDFishingLog;
 struct Client_UI_Agent_AgentIKDFishingLog_LogEntry;
@@ -519,6 +538,7 @@ struct StdMap_Node_SystemUInt32_SystemUInt32;
 struct StdPair_SystemUInt32_SystemUInt32;
 struct Client_UI_Agent_FlagMapMarker;
 struct Client_UI_Agent_MapMarkerBase;
+struct Client_UI_Agent_AgentMiragePrismMiragePlate;
 struct Client_UI_Agent_AgentMiragePrismPrismBox;
 struct Client_UI_Agent_AgentMJIPouch;
 struct Client_UI_Agent_AgentMJIPouch_PouchIndexInfo;
@@ -588,6 +608,7 @@ struct Client_UI_Agent_LobbySubscriptionInfo;
 struct Client_UI_Agent_LobbyUIClient_LobbyUIClientVTable;
 struct Client_UI_Agent_MapMarkerInfo;
 struct Client_UI_Agent_MiniMapMarker;
+struct Client_UI_Agent_MiragePlateItem;
 struct Client_UI_Agent_MiragePrismPrismBoxData;
 struct Client_UI_Agent_PrismBoxItem;
 struct Client_UI_Agent_PrismBoxCrystallizeItem;
@@ -663,8 +684,17 @@ struct Client_UI_Misc_AcquaintanceModule;
 struct Client_UI_Misc_UserFileManager_UserFileEvent;
 struct Client_UI_Misc_AcquaintanceModule_Acquaintance;
 struct Client_UI_Misc_AcquaintanceModule_AcquaintanceModuleVTable;
+struct Client_UI_Misc_BannerModule;
+struct Client_UI_Misc_BannerModuleData;
+struct Client_UI_Misc_CharaView_CharaViewVTable;
+struct Client_UI_Misc_CharaView_UnkStruct;
+struct Client_UI_Misc_CharaViewItem;
+struct Client_UI_Misc_CharaViewPortrait;
+struct Common_Math_Vector4;
+struct Client_UI_Misc_CharaViewPortrait_CharaViewPortraitVTable;
 struct Client_UI_Misc_ConfigModule;
 struct Client_UI_Misc_ConfigModule_Option;
+struct Client_UI_Misc_ExportedPortraitData;
 struct Client_UI_Misc_FieldMarkerModule;
 struct Client_UI_Misc_FieldMarkerPreset;
 struct Client_UI_Misc_GamePresetPoint;
@@ -748,7 +778,6 @@ struct Common_Configuration_ConfigProperties_UIntProperties;
 struct Common_Lua_lua_State;
 struct Common_Math_Matrix2x2;
 struct Common_Math_Vector2;
-struct Common_Math_Vector4;
 struct Component_Excel_ExcelModule;
 struct Component_Excel_ExcelModule_ExcelModuleVTable;
 struct Component_Excel_ExcelModuleInterface;
@@ -1416,6 +1445,17 @@ enum Client_Game_UI_PlayerStateFlag /* Size=0x4 */
     Unknown14 = 14
 };
 
+enum Client_Game_UI_PoseType /* Size=0x1 */
+{
+    Idle = 0,
+    WeaponDrawn = 1,
+    Sit = 2,
+    GroundSit = 3,
+    Doze = 4,
+    Umbrella = 5,
+    Accessory = 6
+};
+
 enum Client_Game_UI_RollResult /* Size=0x4 */
 {
     UnAwarded = 0,
@@ -1551,11 +1591,28 @@ enum Client_System_Resource_ResourceCategory /* Size=0x4 */
     MaxCount = 20
 };
 
+enum Client_UI_ActionBarLayout /* Size=0x1 */
+{
+    Layout12X1 = 0,
+    Layout6X2 = 1,
+    Layout4X3 = 2,
+    Layout3X4 = 3,
+    Layout2X6 = 4,
+    Layout1X12 = 5
+};
+
 enum Client_UI_Agent_ActionStatus /* Size=0x1 */
 {
     Available = 0,
     NotYetAvailable = 1,
     NotCurrentlyAvailable = 3
+};
+
+enum Client_UI_Agent_AgentBannerEditorState_EditorOpenType /* Size=0x4 */
+{
+    Portrait = 0,
+    Gearset = 1,
+    AdventurerPlate = 2
 };
 
 enum Client_UI_Agent_AgentFreeCompanyProfile_FCProfile_ActiveType /* Size=0x1 */
@@ -2183,6 +2240,14 @@ enum Client_UI_Info_InfoProxyId /* Size=0x4 */
     CircleList = 31,
     Circle = 32,
     CircleFinder = 33
+};
+
+enum Client_UI_Misc_BannerGearVisibilityFlag /* Size=0x4 */
+{
+    None = 0,
+    HeadgearHidden = 1,
+    WeaponHidden = 2,
+    VisorClosed = 4
 };
 
 enum Client_UI_Misc_ConfigOption /* Size=0x2 */
@@ -3566,7 +3631,21 @@ struct Client_Game_ActionTimelineManager /* Size=0x340 */
     /*       */ byte _gap_0x2D8[0x4];
     /* 0x2DC */ unsigned __int16 BaseOverride;
     /* 0x2DE */ unsigned __int16 LipsOverride;
-    /*       */ byte _gap_0x2E0[0x60];
+    /*       */ byte _gap_0x2E0[0x30];
+    /* 0x310 */ unsigned __int16 BannerTimelineRowId;
+    /* 0x312 */ byte BannerFacialRowId;
+    /*       */ byte _gap_0x313;
+    /*       */ byte _gap_0x314[0x4];
+    /*       */ byte _gap_0x318[0x10];
+    /*       */ byte _gap_0x328[0x4];
+    /* 0x32C */ unsigned __int32 BannerTimelineAdditionalData;
+    /* 0x330 */ unsigned __int32 BannerTimelineIcon;
+    /* 0x334 */ unsigned __int16 BannerTimelineUnlockCondition;
+    /* 0x336 */ unsigned __int16 BannerTimelineSortKey;
+    /* 0x338 */ byte BannerTimelineType;
+    /*       */ byte _gap_0x339;
+    /*       */ byte _gap_0x33A[0x2];
+    /*       */ byte _gap_0x33C[0x4];
 };
 
 struct Client_System_String_Utf8String /* Size=0x68 */
@@ -3854,8 +3933,7 @@ struct Client_Game_Character_Character /* Size=0x1B40 */
     /*        */ byte _gap_0x8A0[0x80];
     /* 0x0920 */ Client_Game_ActionTimelineManager ActionTimelineManager;
     /*        */ byte _gap_0xC60[0x50];
-    /* 0x0CB0 */ unsigned __int32 PlayerTargetObjectID;
-    /*        */ byte _gap_0xCB4[0x4];
+    /* 0x0CB0 */ Client_Game_Object_GameObjectID LookTargetId;
     /*        */ byte _gap_0xCB8[0xB08];
     /* 0x17C0 */ Client_Game_Balloon Balloon;
     /*        */ byte _gap_0x1840[0x188];
@@ -3871,9 +3949,11 @@ struct Client_Game_Character_Character /* Size=0x1B40 */
     /*        */ byte _gap_0x1A88[0x10];
     /* 0x1A98 */ byte FreeCompanyTag[0x6];
     /*        */ byte _gap_0x1A9E[0x2];
-    /*        */ byte _gap_0x1AA0[0x18];
-    /* 0x1AB8 */ unsigned __int64 TargetObjectID;
-    /*        */ byte _gap_0x1AC0[0x40];
+    /*        */ byte _gap_0x1AA0[0x10];
+    /* 0x1AB0 */ Client_Game_Object_GameObjectID CombatTaggerId;
+    /* 0x1AB8 */ Client_Game_Object_GameObjectID TargetId;
+    /* 0x1AC0 */ Client_Game_Object_GameObjectID SoftTargetId;
+    /*        */ byte _gap_0x1AC8[0x38];
     /* 0x1B00 */ unsigned __int32 NameID;
     /*        */ byte _gap_0x1B04[0x4];
     /*        */ byte _gap_0x1B08[0x8];
@@ -3893,7 +3973,10 @@ struct Client_Game_Character_Character /* Size=0x1B40 */
     /* 0x1B29 */ byte Battalion;
     /*        */ byte _gap_0x1B2A[0x2];
     /*        */ byte _gap_0x1B2C[0x4];
-    /*        */ byte _gap_0x1B30[0x8];
+    /*        */ byte _gap_0x1B30;
+    /* 0x1B31 */ byte CombatTagType;
+    /*        */ byte _gap_0x1B32[0x2];
+    /*        */ byte _gap_0x1B34[0x4];
     /* 0x1B38 */ byte StatusFlags3;
     /*        */ byte _gap_0x1B39;
     /* 0x1B3A */ byte StatusFlags4;
@@ -5622,7 +5705,14 @@ struct Client_Game_UI_Achievement /* Size=0x550 */
     /* 0x000 */ void** VTable;
     /* 0x008 */ Client_Game_UI_Achievement_AchievementState State;
     /* 0x00C */ byte CompletedAchievements[0x1AC];
-    /*       */ byte _gap_0x1B8[0x398];
+    /*       */ byte _gap_0x1B8[0x20];
+    /*       */ byte _gap_0x1D8[0x4];
+    /* 0x1DC */ Client_Game_UI_Achievement_AchievementState ProgressRequestState;
+    /* 0x1E0 */ unsigned __int32 ProgressAchievementId;
+    /* 0x1E4 */ unsigned __int32 ProgressCurrent;
+    /* 0x1E8 */ unsigned __int32 ProgressMax;
+    /*       */ byte _gap_0x1EC[0x4];
+    /*       */ byte _gap_0x1F0[0x360];
 };
 
 struct Client_Game_UI_AreaInstance /* Size=0x28 */
@@ -5867,15 +5957,52 @@ struct Client_Game_UI_LootItem /* Size=0x40 */
     /*      */ byte _gap_0x3C[0x4];
 };
 
-struct Client_Game_UI_Map_QuestMarkerArray /* Size=0x10E0 */
+struct StdVector_ClientGameUIMapMarkerData /* Size=0x18 */
 {
-    /*        */ byte _gap_0x0[0x10E0];
+    /* 0x00 */ Client_Game_UI_MapMarkerData* First;
+    /* 0x08 */ Client_Game_UI_MapMarkerData* Last;
+    /* 0x10 */ Client_Game_UI_MapMarkerData* End;
+};
+
+struct Client_Game_UI_MapMarkerContainer /* Size=0x0 */
+{
+    /* 0x0 */ Client_Game_UI_MapMarkerContainer_LinkedList* List;
+    /* 0x8 */ __int32 Size;
+};
+
+struct Client_Game_UI_SimpleMapMarkerContainer /* Size=0x0 */
+{
+    /* 0x0 */ unsigned __int64 CurrentSize;
+    /* 0x8 */ __int64 InternalPointer;
+    /* 0x10 */ Client_Game_UI_SimpleMapMarkerData** DataArray;
+    /* 0x18 */ unsigned __int64 MaxSize;
 };
 
 struct Client_Game_UI_Map /* Size=0x0 */
 {
     /*     */ byte _gap_0x0[0x90];
-    /* 0x90 */ Client_Game_UI_Map_QuestMarkerArray QuestMarkers;
+    /* 0x90 */ byte QuestData[0x10E0];
+    /* 0x1170 */ byte LevequestData[0x900];
+    /*     */ byte _gap_0x1A70[0x78];
+    /* 0x1AE8 */ StdVector_ClientGameUIMapMarkerData ActiveLevequestMarkerData;
+    /*     */ byte _gap_0x1B00[0x10];
+    /* 0x1B10 */ Client_Game_UI_MapMarkerContainer QuestMarkerData;
+    /*     */ byte _gap_0x1B10[0x8];
+    /* 0x1B18 */ Client_Game_UI_SimpleMapMarkerContainer SimpleQuestMarkerData;
+    /*     */ byte _gap_0x1B18[0x40];
+    /* 0x1B58 */ Client_Game_UI_MapMarkerContainer GuildLeveAssignmentMapMarkerData;
+    /*     */ byte _gap_0x1B58[0x48];
+    /* 0x1BA0 */ Client_Game_UI_MapMarkerContainer GuildOrderGuideMarkerData;
+    /*     */ byte _gap_0x1BA0[0x22F0];
+    /* 0x3E90 */ Client_Game_UI_MapMarkerContainer TripleTriadMarkerData;
+    /*     */ byte _gap_0x3E90[0x10];
+    /* 0x3EA0 */ Client_Game_UI_MapMarkerContainer CustomTalkMarkerData;
+    /*     */ byte _gap_0x3EA0[0x8];
+    /* 0x3EA8 */ Client_Game_UI_SimpleMapMarkerContainer SimpleCustomTalkMarkerData;
+    /*     */ byte _gap_0x3EA8[0xA0];
+    /* 0x3F48 */ Client_Game_UI_MapMarkerContainer GemstoneTraderMarkerData;
+    /*     */ byte _gap_0x3F48[0x8];
+    /* 0x3F50 */ Client_Game_UI_SimpleMapMarkerContainer SimpleGemstoneTraderMarkerData;
 };
 
 struct Client_Game_UI_Map_MapMarkerInfo /* Size=0x90 */
@@ -5888,6 +6015,51 @@ struct Client_Game_UI_Map_MapMarkerInfo /* Size=0x90 */
     /*      */ byte _gap_0x8A;
     /* 0x8B */ byte ShouldRender;
     /*      */ byte _gap_0x8C[0x4];
+};
+
+struct Client_Game_UI_Map_QuestMarkerArray /* Size=0x10E0 */
+{
+    /*        */ byte _gap_0x0[0x10E0];
+};
+
+struct Client_Game_UI_MapMarkerContainer_LinkedList /* Size=0x0 */
+{
+    /* 0x0 */ Client_Game_UI_MapMarkerNode* First;
+    /* 0x8 */ Client_Game_UI_MapMarkerNode* Last;
+};
+
+struct Client_Game_UI_MapMarkerData /* Size=0x48 */
+{
+    /* 0x00 */ unsigned __int32 LevelId;
+    /* 0x04 */ unsigned __int32 ObjectiveId;
+    /* 0x08 */ Client_System_String_Utf8String* TooltipString;
+    /* 0x10 */ unsigned __int32 IconId;
+    /*      */ byte _gap_0x14[0x4];
+    /* 0x18 */ float X;
+    /* 0x1C */ float Y;
+    /* 0x20 */ float Z;
+    /* 0x24 */ float Radius;
+    /*      */ byte _gap_0x28[0x10];
+    /*      */ byte _gap_0x38[0x4];
+    /* 0x3C */ unsigned __int16 RecommendedLevel;
+    /*      */ byte _gap_0x3E[0x2];
+    /*      */ byte _gap_0x40[0x8];
+};
+
+struct Client_Game_UI_MarkerInfo /* Size=0x90 */
+{
+    /*      */ byte _gap_0x0[0x4];
+    /* 0x04 */ unsigned __int32 ObjectiveId;
+    /* 0x08 */ Client_System_String_Utf8String Label;
+    /* 0x70 */ StdVector_ClientGameUIMapMarkerData MarkerData;
+    /*      */ byte _gap_0x88[0x8];
+};
+
+struct Client_Game_UI_MapMarkerNode /* Size=0x0 */
+{
+    /* 0x0 */ Client_Game_UI_MapMarkerNode* Next;
+    /* 0x8 */ Client_Game_UI_MapMarkerNode* Previous;
+    /* 0x10 */ Client_Game_UI_MarkerInfo Data;
 };
 
 struct Client_Game_UI_MarkingController /* Size=0x2E0 */
@@ -6152,6 +6324,14 @@ struct Client_Game_UI_SelectUseTicketInvoker /* Size=0x28 */
     /*      */ byte _gap_0x8[0x8];
     /* 0x10 */ Client_Game_UI_Telepo* Telepo;
     /*      */ byte _gap_0x18[0x10];
+};
+
+struct Client_Game_UI_SimpleMapMarkerData /* Size=0x10 */
+{
+    /* 0x00 */ unsigned __int32 IconId;
+    /* 0x04 */ unsigned __int32 LevelId;
+    /* 0x08 */ unsigned __int32 ObjectiveId;
+    /* 0x0C */ __int32 Flags;
 };
 
 struct StdVector_ClientGameUITeleportInfo /* Size=0x18 */
@@ -7325,7 +7505,12 @@ struct Client_UI_AddonActionBarBase /* Size=0x248 */
 struct Client_UI_AddonActionBarX /* Size=0x298 */
 {
     /* 0x000 */ Client_UI_AddonActionBarBase AddonActionBarBase;
-    /*       */ byte _gap_0x248[0x50];
+    /*       */ byte _gap_0x248[0x28];
+    /* 0x270 */ Client_UI_ActionBarLayout ActionBarLayout;
+    /*       */ byte _gap_0x271;
+    /*       */ byte _gap_0x272[0x2];
+    /*       */ byte _gap_0x274[0x4];
+    /*       */ byte _gap_0x278[0x20];
 };
 
 struct Client_UI_AddonActionBar /* Size=0x2B8 */
@@ -7554,6 +7739,53 @@ struct Client_UI_AddonBank_AddonBankVTable /* Size=0x0 */
 {
     /*     */ byte _gap_0x0[0x178];
     /* 0x178 */ __int64 OnSetup;
+};
+
+struct Client_UI_AddonBannerEditor /* Size=0x4E8 */
+{
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
+    /*       */ byte _gap_0x220[0xB8];
+    /* 0x2D8 */ Component_GUI_AtkComponentDropDownList* PresetDropdown;
+    /*       */ byte _gap_0x2E0[0x18];
+    /* 0x2F8 */ Component_GUI_AtkComponentDropDownList* BackgroundDropdown;
+    /*       */ byte _gap_0x300[0x18];
+    /* 0x318 */ Component_GUI_AtkComponentDropDownList* FrameDropdown;
+    /*       */ byte _gap_0x320[0x18];
+    /* 0x338 */ Component_GUI_AtkComponentDropDownList* AccentDropdown;
+    /*       */ byte _gap_0x340[0x18];
+    /* 0x358 */ Component_GUI_AtkComponentDropDownList* PoseDropdown;
+    /*       */ byte _gap_0x360[0x18];
+    /* 0x378 */ Component_GUI_AtkComponentDropDownList* ExpressionDropdown;
+    /*       */ byte _gap_0x380[0x38];
+    /* 0x3B8 */ Component_GUI_AtkComponentCheckBox* PlayAnimationCheckbox;
+    /* 0x3C0 */ Component_GUI_AtkComponentCheckBox* HeadFacingCameraCheckbox;
+    /* 0x3C8 */ Component_GUI_AtkComponentCheckBox* EyesFacingCameraCheckbox;
+    /*       */ byte _gap_0x3D0[0x28];
+    /* 0x3F8 */ Component_GUI_AtkComponentButton* ApplyEquipmentButton;
+    /* 0x400 */ Component_GUI_AtkComponentButton* SaveButton;
+    /* 0x408 */ Component_GUI_AtkComponentButton* CloseButton;
+    /* 0x410 */ Component_GUI_AtkComponentSlider* AmbientLightingColorRedSlider;
+    /* 0x418 */ Component_GUI_AtkComponentSlider* AmbientLightingColorGreenSlider;
+    /* 0x420 */ Component_GUI_AtkComponentSlider* AmbientLightingColorBlueSlider;
+    /* 0x428 */ Component_GUI_AtkComponentSlider* AmbientLightingBrightnessSlider;
+    /* 0x430 */ Component_GUI_AtkComponentSlider* DirectionalLightingColorRedSlider;
+    /* 0x438 */ Component_GUI_AtkComponentSlider* DirectionalLightingColorGreenSlider;
+    /* 0x440 */ Component_GUI_AtkComponentSlider* DirectionalLightingColorBlueSlider;
+    /* 0x448 */ Component_GUI_AtkComponentSlider* DirectionalLightingBrightnessSlider;
+    /* 0x450 */ Component_GUI_AtkComponentSlider* DirectionalLightingVerticalAngleSlider;
+    /* 0x458 */ Component_GUI_AtkComponentSlider* DirectionalLightingHorizontalAngleSlider;
+    /* 0x460 */ Component_GUI_AtkComponentSlider* CameraZoomSlider;
+    /* 0x468 */ Component_GUI_AtkComponentSlider* ImageRotation;
+    /*       */ byte _gap_0x470[0x50];
+    /* 0x4C0 */ Component_GUI_AtkResNode* WarningSymbol;
+    /*       */ byte _gap_0x4C8[0x4];
+    /* 0x4CC */ __int16 NumPresets;
+    /*       */ byte _gap_0x4CE[0x2];
+    /*       */ byte _gap_0x4D0[0x10];
+    /*       */ byte _gap_0x4E0[0x2];
+    /*       */ byte _gap_0x4E2;
+    /* 0x4E3 */ bool IsWarningSymbolShown;
+    /*       */ byte _gap_0x4E4[0x4];
 };
 
 struct Client_UI_AddonCastBar /* Size=0x500 */
@@ -9579,6 +9811,140 @@ struct Client_UI_Agent_AgentArchiveItem /* Size=0x30 */
     /* 0x28 */ Client_UI_Agent_ArchiveItem* ArchiveItem;
 };
 
+struct Client_UI_Agent_AgentBannerEditor /* Size=0x38 */
+{
+    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
+    /* 0x28 */ Client_UI_Agent_AgentBannerEditorState* EditorState;
+    /*      */ byte _gap_0x30[0x8];
+};
+
+struct Common_Math_HalfVector4 /* Size=0x8 */
+{
+    /* 0x0 */ __int16 X;
+    /* 0x2 */ __int16 Y;
+    /* 0x4 */ __int16 Z;
+    /* 0x6 */ __int16 W;
+};
+
+struct Common_Math_HalfVector2 /* Size=0x4 */
+{
+    /* 0x0 */ __int16 X;
+    /* 0x2 */ __int16 Y;
+};
+
+struct Client_UI_Misc_BannerModuleEntry /* Size=0x90 */
+{
+    /* 0x00 */ byte BannerTimelineName[0x40];
+    /*      */ byte _gap_0x40[0x4];
+    /* 0x44 */ Common_Math_HalfVector4 CameraPosition;
+    /* 0x4C */ Common_Math_HalfVector4 CameraTarget;
+    /* 0x54 */ Common_Math_HalfVector2 HeadDirection;
+    /* 0x58 */ Common_Math_HalfVector2 EyeDirection;
+    /* 0x5C */ __int16 DirectionalLightingVerticalAngle;
+    /* 0x5E */ __int16 DirectionalLightingHorizontalAngle;
+    /* 0x60 */ byte Race;
+    /* 0x61 */ byte Gender;
+    /* 0x62 */ byte Height;
+    /* 0x63 */ byte Tribe;
+    /* 0x64 */ byte DirectionalLightingColorRed;
+    /* 0x65 */ byte DirectionalLightingColorGreen;
+    /* 0x66 */ byte DirectionalLightingColorBlue;
+    /* 0x67 */ byte AmbientLightingColorRed;
+    /* 0x68 */ byte AmbientLightingColorGreen;
+    /* 0x69 */ byte AmbientLightingColorBlue;
+    /*      */ byte _gap_0x6A[0x2];
+    /* 0x6C */ float AnimationProgress;
+    /* 0x70 */ unsigned __int32 BannerTimelineIcon;
+    /* 0x74 */ unsigned __int32 LastUpdated;
+    /* 0x78 */ unsigned __int32 Checksum;
+    /* 0x7C */ unsigned __int16 BannerBg;
+    /* 0x7E */ unsigned __int16 BannerFrame;
+    /* 0x80 */ unsigned __int16 BannerDecoration;
+    /* 0x82 */ unsigned __int16 BannerTimeline;
+    /* 0x84 */ __int16 ImageRotation;
+    /* 0x86 */ byte BannerIndex;
+    /* 0x87 */ byte BannerId;
+    /* 0x88 */ byte BannerTimelineClassJobCategory;
+    /* 0x89 */ byte Expression;
+    /* 0x8A */ byte CameraZoom;
+    /* 0x8B */ byte DirectionalLightingBrightness;
+    /* 0x8C */ byte AmbientLightingBrightness;
+    /* 0x8D */ byte HasBannerTimelineCustomName;
+    /*      */ byte _gap_0x8E[0x2];
+};
+
+struct Client_UI_Agent_AgentBannerEditorState /* Size=0x2D8 */
+{
+    /*       */ byte _gap_0x0[0x20];
+    /* 0x020 */ __int64 PresetItems;
+    /* 0x028 */ unsigned __int32 PresetItemsCount;
+    /*       */ byte _gap_0x2C[0x4];
+    /*       */ byte _gap_0x30[0x10];
+    /* 0x040 */ Client_UI_Agent_AgentBannerEditorState_GenericDropdownItem** BackgroundItems;
+    /* 0x048 */ unsigned __int32 BackgroundItemsCount;
+    /*       */ byte _gap_0x4C[0x4];
+    /*       */ byte _gap_0x50[0x20];
+    /* 0x070 */ Client_UI_Agent_AgentBannerEditorState_GenericDropdownItem** FrameItems;
+    /* 0x078 */ unsigned __int32 FrameItemsCount;
+    /*       */ byte _gap_0x7C[0x4];
+    /*       */ byte _gap_0x80[0x20];
+    /* 0x0A0 */ Client_UI_Agent_AgentBannerEditorState_GenericDropdownItem** AccentItems;
+    /* 0x0A8 */ unsigned __int32 AccentItemsCount;
+    /*       */ byte _gap_0xAC[0x4];
+    /*       */ byte _gap_0xB0[0x20];
+    /* 0x0D0 */ Client_UI_Agent_AgentBannerEditorState_GenericDropdownItem** BannerTimelineItems;
+    /* 0x0D8 */ unsigned __int32 BannerTimelineItemsCount;
+    /*       */ byte _gap_0xDC[0x4];
+    /*       */ byte _gap_0xE0[0x20];
+    /* 0x100 */ Client_UI_Agent_AgentBannerEditorState_ExpressionDropdownItem** ExpressionItems;
+    /* 0x108 */ unsigned __int32 ExpressionItemsCount;
+    /*       */ byte _gap_0x10C[0x4];
+    /*       */ byte _gap_0x110[0x10];
+    /* 0x120 */ Client_UI_Misc_BannerModuleEntry BannerEntry;
+    /*       */ byte _gap_0x1B0[0x90];
+    /* 0x240 */ unsigned __int32 ItemIds[0xE];
+    /* 0x278 */ byte StainIds[0xE];
+    /*       */ byte _gap_0x286[0x2];
+    /* 0x288 */ unsigned __int32 Checksum;
+    /* 0x28C */ Client_UI_Misc_BannerGearVisibilityFlag GearVisibilityFlag;
+    /* 0x290 */ byte GearsetIndex;
+    /* 0x291 */ byte ClassJobId;
+    /*       */ byte _gap_0x292[0x2];
+    /*       */ byte _gap_0x294[0x4];
+    /* 0x298 */ Client_UI_Agent_AgentBannerEditor* AgentBannerEditor;
+    /* 0x2A0 */ Client_UI_UIModule* UIModule;
+    /* 0x2A8 */ Client_UI_Misc_CharaViewPortrait* CharaView;
+    /*       */ byte _gap_0x2B0[0x8];
+    /* 0x2B8 */ Client_UI_Agent_AgentBannerEditorState_EditorOpenType OpenType;
+    /*       */ byte _gap_0x2BC[0x4];
+    /*       */ byte _gap_0x2C0[0x4];
+    /* 0x2C4 */ unsigned __int32 FrameCountdown;
+    /* 0x2C8 */ __int32 GearsetId;
+    /*       */ byte _gap_0x2CC[0x4];
+    /* 0x2D0 */ __int32 CloseDialogAddonId;
+    /* 0x2D4 */ bool HasDataChanged;
+    /*       */ byte _gap_0x2D5;
+    /*       */ byte _gap_0x2D6[0x2];
+};
+
+struct Client_UI_Agent_AgentBannerEditorState_ExpressionDropdownItem /* Size=0x18 */
+{
+    /*      */ byte _gap_0x0[0x8];
+    /* 0x08 */ __int64 Data;
+    /* 0x10 */ unsigned __int16 Id;
+    /*      */ byte _gap_0x12[0x2];
+    /*      */ byte _gap_0x14[0x4];
+};
+
+struct Client_UI_Agent_AgentBannerEditorState_GenericDropdownItem /* Size=0x18 */
+{
+    /* 0x00 */ __int64 Data;
+    /*      */ byte _gap_0x8[0x8];
+    /* 0x10 */ unsigned __int16 Id;
+    /*      */ byte _gap_0x12[0x2];
+    /*      */ byte _gap_0x14[0x4];
+};
+
 struct Client_UI_Agent_AgentBannerInterface /* Size=0x30 */
 {
     /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
@@ -9658,49 +10024,40 @@ struct Client_UI_Agent_AgentCharaCard /* Size=0x38 */
     /*      */ byte _gap_0x30[0x8];
 };
 
-struct Client_UI_Misc_CharaView_UnkStruct /* Size=0x20 */
+struct Client_UI_Misc_CharaViewCharacterData /* Size=0x68 */
 {
-    /* 0x00 */ unsigned __int16 Unk0;
-    /*      */ byte _gap_0x2;
-    /* 0x03 */ byte Unk1;
-    /* 0x04 */ byte Unk2;
-    /*      */ byte _gap_0x5;
-    /*      */ byte _gap_0x6[0x2];
-    /* 0x08 */ unsigned __int64 Unk3;
-    /* 0x10 */ unsigned __int64 Unk4;
-    /* 0x18 */ unsigned __int64 Unk5;
+    /* 0x00 */ Client_Game_Character_CustomizeData CustomizeData;
+    /*      */ byte _gap_0x1A[0x2];
+    /* 0x1C */ unsigned __int32 ItemIds[0xE];
+    /* 0x54 */ byte ItemStains[0xE];
+    /* 0x62 */ byte ClassJobId;
+    /* 0x63 */ bool VisorHidden;
+    /* 0x64 */ bool WeaponHidden;
+    /* 0x65 */ bool VisorClosed;
+    /*      */ byte _gap_0x66[0x2];
 };
 
 struct Client_UI_Misc_CharaView /* Size=0x2C8 */
 {
-    /* 0x000 */ void** VTable;
-    /* 0x008 */ unsigned __int32 Unk8;
-    /* 0x00C */ unsigned __int32 CutsceneActorIndex;
-    /* 0x010 */ unsigned __int32 ScreenActorIndex;
-    /* 0x014 */ unsigned __int32 Unk14;
-    /*       */ byte _gap_0x18[0x8];
-    /* 0x020 */ void* Unk20;
-    /* 0x028 */ Client_Game_Camera* Camera;
-    /* 0x030 */ unsigned __int64 Unk30;
-    /* 0x038 */ unsigned __int64 Unk38;
-    /*       */ byte _gap_0x40[0x80];
-    /* 0x0C0 */ unsigned __int32 UnkC0;
-    /*       */ byte _gap_0xC4[0x4];
+    /* 0x000 */ Client_UI_Misc_CharaView_CharaViewVTable* VTable;
+    /* 0x008 */ unsigned __int32 State;
+    /* 0x00C */ unsigned __int32 ClientObjectId;
+    /* 0x010 */ unsigned __int32 ClientObjectIndex;
+    /* 0x014 */ unsigned __int32 CameraType;
+    /* 0x018 */ __int64 CameraManager;
+    /* 0x020 */ Client_Game_Camera* Camera;
+    /*       */ byte _gap_0x28[0x8];
+    /* 0x030 */ Component_GUI_AgentInterface* Agent;
+    /*       */ byte _gap_0x38[0x10];
+    /* 0x048 */ Client_UI_Misc_CharaViewCharacterData CharacterData;
+    /*       */ byte _gap_0xB0[0x10];
+    /*       */ byte _gap_0xC0[0x4];
+    /* 0x0C4 */ float ZoomRatio;
     /*       */ byte _gap_0xC8[0x8];
-    /* 0x0D0 */ Client_UI_Misc_CharaView_UnkStruct UnkD0;
-    /* 0x0F0 */ Client_UI_Misc_CharaView_UnkStruct UnkF0;
-    /* 0x110 */ Client_UI_Misc_CharaView_UnkStruct Unk110;
-    /* 0x130 */ Client_UI_Misc_CharaView_UnkStruct Unk130;
-    /* 0x150 */ Client_UI_Misc_CharaView_UnkStruct Unk150;
-    /* 0x170 */ Client_UI_Misc_CharaView_UnkStruct Unk170;
-    /* 0x190 */ Client_UI_Misc_CharaView_UnkStruct Unk190;
-    /*       */ byte _gap_0x1B0[0xE0];
-    /* 0x290 */ unsigned __int64 Unk290;
-    /* 0x298 */ unsigned __int64 Unk298;
-    /* 0x2A0 */ unsigned __int64 Unk2A0;
-    /* 0x2A8 */ unsigned __int64 Unk2A8;
-    /* 0x2B0 */ unsigned __int64 Unk2B0;
-    /* 0x2B8 */ unsigned __int16 Unk2B8;
+    /* 0x0D0 */ byte Items[0x1C0];
+    /*       */ byte _gap_0x290[0x28];
+    /* 0x2B8 */ bool CharacterDataCopied;
+    /* 0x2B9 */ bool CharacterLoaded;
     /*       */ byte _gap_0x2BA[0x2];
     /*       */ byte _gap_0x2BC[0x4];
     /*       */ byte _gap_0x2C0[0x8];
@@ -10083,6 +10440,38 @@ struct Client_UI_Agent_AgentGrandCompanySupply /* Size=0x2F8 */
     /* 0x090 */ __int32 SelectedTab;
     /*       */ byte _gap_0x94[0x4];
     /*       */ byte _gap_0x98[0x260];
+};
+
+struct Client_UI_Agent_AgentHousingPlant /* Size=0x950 */
+{
+    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
+    /*       */ byte _gap_0x28[0x18];
+    /* 0x040 */ unsigned __int32 ContextAddonId;
+    /* 0x044 */ unsigned __int32 PlotType;
+    /* 0x048 */ byte SelectedItems[0x20];
+    /* 0x068 */ byte SelectedItems2[0x20];
+    /* 0x088 */ byte SelectableItems[0x8C0];
+    /* 0x948 */ byte SelectableItemCount;
+    /*       */ byte _gap_0x949;
+    /*       */ byte _gap_0x94A[0x2];
+    /*       */ byte _gap_0x94C[0x4];
+};
+
+struct Client_UI_Agent_AgentHousingPlant_SelectableItem /* Size=0x10 */
+{
+    /* 0x00 */ void* ItemCache;
+    /* 0x08 */ unsigned __int32 InventoryId;
+    /* 0x0C */ unsigned __int16 InventorySlot;
+    /*      */ byte _gap_0xE[0x2];
+};
+
+struct Client_UI_Agent_AgentHousingPlant_SelectedItem /* Size=0x10 */
+{
+    /* 0x00 */ unsigned __int32 InventoryId;
+    /* 0x04 */ unsigned __int16 InventorySlot;
+    /*      */ byte _gap_0x6[0x2];
+    /* 0x08 */ unsigned __int32 ItemId;
+    /*      */ byte _gap_0xC[0x4];
 };
 
 struct Client_UI_Agent_AgentHUD /* Size=0x4BA0 */
@@ -10554,6 +10943,14 @@ struct Client_UI_Agent_AgentMap /* Size=0x11F70 */
     /*         */ byte _gap_0x5A26;
     /* 0x05A27 */ byte IsControlKeyPressed;
     /*         */ byte _gap_0x5A28[0xC548];
+};
+
+struct Client_UI_Agent_AgentMiragePrismMiragePlate /* Size=0x350 */
+{
+    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
+    /*       */ byte _gap_0x28[0x120];
+    /* 0x148 */ byte PlateItems[0x1C0];
+    /*       */ byte _gap_0x308[0x48];
 };
 
 struct Client_UI_Agent_AgentMiragePrismPrismBox /* Size=0x80 */
@@ -11392,6 +11789,19 @@ struct Client_UI_Agent_MiniMapMarker /* Size=0x40 */
     /* 0x08 */ Client_UI_Agent_MapMarkerBase MapMarker;
 };
 
+struct Client_UI_Agent_MiragePlateItem /* Size=0x20 */
+{
+    /* 0x00 */ byte EquipType;
+    /* 0x01 */ byte EquipSlotCategory;
+    /*      */ byte _gap_0x2;
+    /* 0x03 */ byte Stain;
+    /*      */ byte _gap_0x4[0x4];
+    /* 0x08 */ unsigned __int32 ItemId;
+    /*      */ byte _gap_0xC[0x4];
+    /* 0x10 */ unsigned __int64 ModelMain;
+    /* 0x18 */ unsigned __int64 ModelSub;
+};
+
 struct Client_UI_Agent_PrismBoxItem /* Size=0x88 */
 {
     /* 0x00 */ Client_System_String_Utf8String Name;
@@ -11436,7 +11846,7 @@ struct Client_UI_Agent_MiragePrismPrismBoxData /* Size=0x1BAE0 */
     /*         */ byte _gap_0x1B9F0[0x4];
     /* 0x1B9F4 */ unsigned __int32 FilterFlags;
     /* 0x1B9F8 */ void* AgentCabinet;
-    /* 0x1BA00 */ void* AgentMiragePrismMiragePlate;
+    /* 0x1BA00 */ Client_UI_Agent_AgentMiragePrismMiragePlate* AgentMiragePrismMiragePlate;
     /* 0x1BA08 */ byte FilterLevel;
     /*         */ byte _gap_0x1BA09;
     /* 0x1BA0A */ byte FilterGender;
@@ -12273,6 +12683,118 @@ struct Client_UI_Misc_AcquaintanceModule_AcquaintanceModuleVTable /* Size=0x1 */
     /*     */ byte _gap_0x0;
 };
 
+struct Client_UI_Misc_BannerModule /* Size=0x48 */
+{
+    /* 0x00 */ Client_UI_Misc_UserFileManager_UserFileEvent UserFileEvent;
+    /* 0x40 */ Client_UI_Misc_BannerModuleData* Data;
+};
+
+struct Client_UI_Misc_BannerModuleData /* Size=0x3E60 */
+{
+    /* 0x0000 */ byte Entries[0x3DE0];
+    /* 0x3DE0 */ byte BannerId2BannerIndex[0x6E];
+    /* 0x3E4E */ byte NextId;
+    /*        */ byte _gap_0x3E4F;
+    /*        */ byte _gap_0x3E50[0x8];
+    /* 0x3E58 */ Client_UI_Misc_BannerModule* BannerModule;
+};
+
+struct Client_UI_Misc_CharaView_CharaViewVTable /* Size=0x0 */
+{
+    /* 0x0 */ __int64 Dtor;
+    /* 0x8 */ __int64 Initialize;
+    /* 0x10 */ __int64 Release;
+    /* 0x18 */ __int64 ResetPositions;
+};
+
+struct Client_UI_Misc_CharaView_UnkStruct /* Size=0x20 */
+{
+    /* 0x00 */ unsigned __int16 Unk0;
+    /*      */ byte _gap_0x2;
+    /* 0x03 */ byte Unk1;
+    /* 0x04 */ byte Unk2;
+    /*      */ byte _gap_0x5;
+    /*      */ byte _gap_0x6[0x2];
+    /* 0x08 */ unsigned __int64 Unk3;
+    /* 0x10 */ unsigned __int64 Unk4;
+    /* 0x18 */ unsigned __int64 Unk5;
+};
+
+struct Client_UI_Misc_CharaViewItem /* Size=0x20 */
+{
+    /* 0x00 */ byte SlotId;
+    /* 0x01 */ byte EquipSlotCategory;
+    /* 0x02 */ byte GlamourEquipSlotCategory;
+    /* 0x03 */ byte StainId;
+    /* 0x04 */ byte GlamourStainId;
+    /*      */ byte _gap_0x5;
+    /*      */ byte _gap_0x6[0x2];
+    /* 0x08 */ unsigned __int32 ItemId;
+    /* 0x0C */ unsigned __int32 GlamourItemId;
+    /* 0x10 */ unsigned __int64 ModelMain;
+    /* 0x18 */ unsigned __int64 ModelSub;
+};
+
+struct Common_Math_Vector4 /* Size=0x10 */
+{
+    /* 0x00 */ float X;
+    /* 0x04 */ float Y;
+    /* 0x08 */ float Z;
+    /* 0x0C */ float W;
+};
+
+struct Client_UI_Misc_CharaViewPortrait /* Size=0x3C0 */
+{
+    /*       */ byte _gap_0x0[0x2D0];
+    /* 0x2D0 */ Common_Math_Vector4 CameraPosition;
+    /* 0x2E0 */ Common_Math_Vector4 CameraTarget;
+    /* 0x2F0 */ float CameraYaw;
+    /* 0x2F4 */ float CameraPitch;
+    /* 0x2F8 */ float CameraDistance;
+    /* 0x2FC */ __int16 ImageRotation;
+    /* 0x2FE */ byte CameraZoom;
+    /*       */ byte _gap_0x2FF;
+    /* 0x300 */ float CameraZoomNormalized;
+    /* 0x304 */ byte DirectionalLightingColorRed;
+    /* 0x305 */ byte DirectionalLightingColorGreen;
+    /* 0x306 */ byte DirectionalLightingColorBlue;
+    /* 0x307 */ byte DirectionalLightingBrightness;
+    /* 0x308 */ unsigned __int16 DirectionalLightingVerticalAngle;
+    /* 0x30A */ unsigned __int16 DirectionalLightingHorizontalAngle;
+    /* 0x30C */ byte AmbientLightingColorRed;
+    /* 0x30D */ byte AmbientLightingColorGreen;
+    /* 0x30E */ byte AmbientLightingColorBlue;
+    /* 0x30F */ byte AmbientLightingBrightness;
+    /*       */ byte _gap_0x310[0x4];
+    /* 0x314 */ __int16 PoseClassJob;
+    /* 0x316 */ __int16 BannerBg;
+    /* 0x318 */ byte BackgroundState;
+    /*       */ byte _gap_0x319;
+    /*       */ byte _gap_0x31A[0x2];
+    /*       */ byte _gap_0x31C[0x4];
+    /* 0x320 */ Component_GUI_AtkTexture BackgroundTexture;
+    /* 0x338 */ Client_UI_Misc_CharaViewCharacterData PortraitCharacterData;
+    /* 0x3A0 */ bool CharacterVisible;
+    /* 0x3A1 */ bool CharacterDataCopied;
+    /* 0x3A2 */ bool CharacterLoaded;
+    /*       */ byte _gap_0x3A3;
+    /*       */ byte _gap_0x3A4[0x4];
+    /*       */ byte _gap_0x3A8[0x18];
+};
+
+struct Client_UI_Misc_CharaViewPortrait_CharaViewPortraitVTable /* Size=0x0 */
+{
+    /* 0x0 */ __int64 Dtor;
+    /*     */ byte _gap_0x8[0x8];
+    /* 0x10 */ __int64 Release;
+    /* 0x18 */ __int64 ResetPositions;
+    /* 0x20 */ __int64 SetCameraDistance;
+    /* 0x28 */ __int64 SetCameraYawAndPitch;
+    /* 0x30 */ __int64 SetCameraXAndY;
+    /*     */ byte _gap_0x38[0x18];
+    /* 0x50 */ __int64 Update;
+};
+
 struct Client_UI_Misc_ConfigModule /* Size=0xE348 */
 {
     /*        */ byte _gap_0x0[0x28];
@@ -12290,6 +12812,33 @@ struct Client_UI_Misc_ConfigModule_Option /* Size=0x20 */
     /* 0x18 */ unsigned __int32 Unk18;
     /* 0x1C */ unsigned __int16 Unk1C;
     /*      */ byte _gap_0x1E[0x2];
+};
+
+struct Client_UI_Misc_ExportedPortraitData /* Size=0x34 */
+{
+    /* 0x00 */ Common_Math_HalfVector4 CameraPosition;
+    /* 0x08 */ Common_Math_HalfVector4 CameraTarget;
+    /* 0x10 */ __int16 ImageRotation;
+    /* 0x12 */ byte CameraZoom;
+    /*      */ byte _gap_0x13;
+    /* 0x14 */ unsigned __int16 BannerTimeline;
+    /*      */ byte _gap_0x16[0x2];
+    /* 0x18 */ float AnimationProgress;
+    /* 0x1C */ byte Expression;
+    /*      */ byte _gap_0x1D;
+    /* 0x1E */ Common_Math_HalfVector2 HeadDirection;
+    /* 0x22 */ Common_Math_HalfVector2 EyeDirection;
+    /* 0x26 */ byte DirectionalLightingColorRed;
+    /* 0x27 */ byte DirectionalLightingColorGreen;
+    /* 0x28 */ byte DirectionalLightingColorBlue;
+    /* 0x29 */ byte DirectionalLightingBrightness;
+    /* 0x2A */ __int16 DirectionalLightingVerticalAngle;
+    /* 0x2C */ __int16 DirectionalLightingHorizontalAngle;
+    /* 0x2E */ byte AmbientLightingColorRed;
+    /* 0x2F */ byte AmbientLightingColorGreen;
+    /* 0x30 */ byte AmbientLightingColorBlue;
+    /* 0x31 */ byte AmbientLightingBrightness;
+    /* 0x32 */ unsigned __int16 BannerBg;
 };
 
 struct Client_UI_Misc_FieldMarkerModule /* Size=0xC78 */
@@ -12570,7 +13119,15 @@ struct Client_UI_Misc_LogMessageSource /* Size=0x10 */
 
 struct Client_UI_Misc_PronounModule /* Size=0x3B0 */
 {
-    /*       */ byte _gap_0x0[0x3B0];
+    /*       */ byte _gap_0x0[0x8];
+    /* 0x008 */ Component_Excel_ExcelModuleInterface* ExcelModuleInterface;
+    /* 0x010 */ Client_UI_Misc_RaptureTextModule* RaptureTextModule;
+    /* 0x018 */ Component_Excel_ExcelSheet* TextCommandParamSheet;
+    /*       */ byte _gap_0x20[0x270];
+    /* 0x290 */ Client_Game_Object_GameObject* UiMouseOverTarget;
+    /*       */ byte _gap_0x298[0xF8];
+    /* 0x390 */ Client_UI_UIModule* UiModule;
+    /*       */ byte _gap_0x398[0x18];
 };
 
 struct Client_UI_Misc_RaptureGearsetModule_Gearsets /* Size=0xAF2C */
@@ -12599,7 +13156,7 @@ struct Client_UI_Misc_RaptureGearsetModule_GearsetEntry /* Size=0x1C0 */
     /* 0x032 */ byte GlamourSetLink;
     /*       */ byte _gap_0x33;
     /* 0x034 */ __int16 ItemLevel;
-    /*       */ byte _gap_0x36;
+    /* 0x036 */ byte BannerIndex;
     /* 0x037 */ Client_UI_Misc_RaptureGearsetModule_GearsetFlag Flags;
     /*       */ byte _gap_0x38[0x188];
 };
@@ -12678,7 +13235,10 @@ struct Client_UI_Misc_RaptureLogModule /* Size=0x3488 */
     /* 0x00F0 */ Client_UI_Misc_RaptureTextModule* RaptureTextModule;
     /*        */ byte _gap_0xF8[0x430];
     /* 0x0528 */ byte ChatTabs[0x2DC8];
-    /*        */ byte _gap_0x32F0[0x180];
+    /*        */ byte _gap_0x32F0[0xF8];
+    /* 0x33E8 */ byte ChatTabsPendingReload[0x4];
+    /*        */ byte _gap_0x33EC[0x4];
+    /*        */ byte _gap_0x33F0[0x80];
     /* 0x3470 */ Client_UI_Misc_LogMessageSource* MsgSourceArray;
     /* 0x3478 */ __int32 MsgSourceArrayLength;
     /*        */ byte _gap_0x347C[0x4];
@@ -12860,7 +13420,10 @@ struct Client_UI_RaidFinderDutyEntry /* Size=0x140 */
 
 struct Client_UI_RaptureAtkUnitManager /* Size=0x9D10 */
 {
-    /*        */ byte _gap_0x0[0x9D10];
+    /*        */ byte _gap_0x0[0x9CF8];
+    /* 0x9CF8 */ Client_UI_UIModule_UiFlags UiFlags;
+    /*        */ byte _gap_0x9CFC[0x4];
+    /*        */ byte _gap_0x9D00[0x10];
 };
 
 struct Client_UI_RaptureAtkModule_NamePlateInfo /* Size=0x248 */
@@ -13078,7 +13641,8 @@ struct Client_UI_UIModule_UIModuleVTable /* Size=0x0 */
     /* 0x188 */ __int64 GetFieldMarkerModule;
     /*     */ byte _gap_0x190[0x38];
     /* 0x1C8 */ __int64 GetRetainerCommentModule;
-    /*     */ byte _gap_0x1D0[0x30];
+    /* 0x1D0 */ __int64 GetBannerModule;
+    /*     */ byte _gap_0x1D8[0x28];
     /* 0x200 */ __int64 GetUIInputData;
     /* 0x208 */ __int64 GetUIInputModule;
     /*     */ byte _gap_0x210[0x8];
@@ -13220,14 +13784,6 @@ struct Common_Math_Vector2 /* Size=0x8 */
 {
     /* 0x0 */ float X;
     /* 0x4 */ float Y;
-};
-
-struct Common_Math_Vector4 /* Size=0x10 */
-{
-    /* 0x00 */ float X;
-    /* 0x04 */ float Y;
-    /* 0x08 */ float Z;
-    /* 0x0C */ float W;
 };
 
 struct Component_Excel_ExcelModule /* Size=0x818 */
@@ -13738,7 +14294,12 @@ struct Component_GUI_AtkModule /* Size=0x8250 */
     /* 0x1B18 */ Component_GUI_AtkCollisionNode* IntersectingCollisionNode;
     /*        */ byte _gap_0x1B20[0x28];
     /* 0x1B48 */ Component_GUI_AtkArrayDataHolder AtkArrayDataHolder;
-    /*        */ byte _gap_0x1B98[0x66B8];
+    /*        */ byte _gap_0x1B98[0x40E0];
+    /*        */ byte _gap_0x5C78[0x4];
+    /* 0x5C7C */ byte ActiveColorThemeType;
+    /*        */ byte _gap_0x5C7D;
+    /*        */ byte _gap_0x5C7E[0x2];
+    /*        */ byte _gap_0x5C80[0x25D0];
 };
 
 struct Component_GUI_AtkModule_AtkModuleVTable /* Size=0x0 */
