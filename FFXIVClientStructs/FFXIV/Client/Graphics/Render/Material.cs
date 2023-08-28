@@ -3,7 +3,15 @@ using FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render; 
 
-[StructLayout(LayoutKind.Explicit, Size = 0x20)]
+/// <summary>
+/// Represents a renderer material.
+/// </summary>
+/// <remarks>
+/// This structure is the header of a memory block of size sizeof(Material) + sizeof(uint) * ShaderKeyCount + sizeof(Material.TextureEntry) * TextureCount.
+/// On construction, ShaderKeyCount is determined by <see cref="ShaderPackage.MaterialKeyCount"/>, and TextureCount is the number of
+/// <see cref="ShaderPackage.Samplers"/> with <see cref="ShaderPackage.ConstantSamplerUnknown.Slot"/> == <see cref="ShaderPackage.SamplerSlotMaterial"/>.
+/// </remarks>
+[StructLayout(LayoutKind.Explicit, Size = 0x40)]
 public unsafe struct Material {
     [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public struct TextureEntry
@@ -22,16 +30,19 @@ public unsafe struct Material {
     [FieldOffset(0x00)] public ReferencedClassBase ReferencedClassBase;
     [FieldOffset(0x10)] public MaterialResourceHandle* MaterialResourceHandle;
     [FieldOffset(0x18)] public uint ShaderFlags;
-    [FieldOffset(0x20)] public uint* ShaderKeys;
+    /// <summary>
+    /// Each of these values corresponds to a key in <see cref="ShaderPackage.MaterialKeys"/>, in the same order.
+    /// </summary>
+    [FieldOffset(0x20)] public uint* ShaderKeyValues;
     [FieldOffset(0x28)] public ConstantBuffer* MaterialParameterCBuffer; // arbitrary size and contents, defined by the shader package
     [FieldOffset(0x30)] public TextureEntry* Textures;
     [FieldOffset(0x38)] public ushort TextureCount;
 
     public readonly int ShaderKeyCount
-        => (int)((uint*)Textures - ShaderKeys);
+        => (int)((uint*)Textures - ShaderKeyValues);
 
-    public readonly Span<uint> ShaderKeysSpan
-        => new(ShaderKeys, ShaderKeyCount);
+    public readonly Span<uint> ShaderKeyValuesSpan
+        => new(ShaderKeyValues, ShaderKeyCount);
 
     public readonly Span<TextureEntry> TexturesSpan
         => new(Textures, TextureCount);

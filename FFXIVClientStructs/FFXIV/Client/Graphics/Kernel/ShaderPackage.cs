@@ -9,6 +9,8 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
 [StructLayout(LayoutKind.Explicit, Size = 0x408)]
 public unsafe struct ShaderPackage
 {
+    public const ushort SamplerSlotMaterial = 2;
+
     [StructLayout(LayoutKind.Explicit, Size = 0x8)]
     public struct MaterialElement
     {
