@@ -48,6 +48,7 @@ public static class ExporterStatics
     }
 
     public static Dictionary<Type, string> ErrorListDictionary = new();
+    public static Dictionary<Type, string> WarningListDictionary = new();
 }
 
 // ReSharper disable once InconsistentNaming
@@ -433,8 +434,17 @@ public abstract class ExporterBase
             var enumSize = Enum.GetUnderlyingType(fieldType).SizeOf();
 
             fieldSize = nextLayout?.Offset() - fieldOffset ?? enumSize;
-            if (fieldSize > enumSize)
+            if (fieldSize >= enumSize)
+            {
                 fieldSize = enumSize;
+            }
+            else
+            {
+                var warn = $"Warning enum {FixFullName(type)} has bad size declaration";
+                Debug.WriteLine(warn);
+                Console.WriteLine(warn);
+                ExporterStatics.WarningListDictionary.TryAdd(type, warn);
+            }
         }
         else
         {
