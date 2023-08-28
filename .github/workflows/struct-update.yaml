@@ -1,26 +1,35 @@
 name: Struct Update
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - 'FFXIVClientStructs/**/*.cs'
+  schedule:
+    - cron: '0 0 * * 1'
+  workflow_dispatch:
 
 jobs:
   update:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-dotnet@v3
+        with:
+          fetch-depth: 2
+      - name: Check for changes
+        id: git-check
+        run: |
+          git diff --quiet HEAD^ HEAD
+          echo ::set-output name=has_changes::$(if [ $? -eq 1 ]; then echo "true"; else echo "false"; fi)
+      - name: No changes check
+        if: steps.git-check.outputs.has_changes == 'false'
+        run: exit 0
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '7.0.x'
       - name: Restore
         run: dotnet restore
-      - name: Run
+      - name: Run CExporter
         working-directory: ./ida
         run: dotnet run --project CExporter/CExporter.csproj
-      - name: Commit
+      - name: Commit C Structs
         run: |
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config user.name "github-actions[bot]"
