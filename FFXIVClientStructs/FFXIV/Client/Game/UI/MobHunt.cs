@@ -28,12 +28,6 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 /// </summary>
 [StructLayout(LayoutKind.Explicit, Size = 0x198)]
 public unsafe partial struct MobHunt {
-    [Obsolete("Use AvailableMarkId instead", true)]
-    [FieldOffset(0x8)] public fixed byte unkArray[18];
-
-    [Obsolete("Use ObtainedMarkId instead", true)]
-    [FieldOffset(0x1A)] public fixed byte MarkID[18];
-
     [FieldOffset(0x08)] public fixed byte AvailableMarkId[18];
     [FieldOffset(0x1A)] public fixed byte ObtainedMarkId[18];
 

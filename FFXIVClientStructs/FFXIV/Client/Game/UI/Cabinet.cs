@@ -6,8 +6,6 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 /// </summary>
 [StructLayout(LayoutKind.Explicit, Size = 0x84)]
 public unsafe partial struct Cabinet {
-    [Obsolete("Use State.", true)]
-    [FieldOffset(0x00)] public int CabinetLoaded; // This becomes 2 for some reason, unsure why or what it means.
     [FieldOffset(0x00)] public CabinetState State;
     [FieldOffset(0x04)] public fixed byte UnlockedItems[0x80];
 

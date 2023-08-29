@@ -6,15 +6,15 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 [StructLayout(LayoutKind.Explicit, Size = 0xF40)]
 public unsafe partial struct QuestManager {
     [FixedSizeArray<QuestWork>(30)]
-    [FieldOffset(0x10)] public fixed byte NormalQuests[0x18 * 30];
-    [FixedSizeArray<DailyQuestWork>(12)]
-    [FieldOffset(0x5B8)] public fixed byte DailyQuests[0x10 * 12];
-    [FixedSizeArray<TrackingWork>(5)]
-    [FieldOffset(0x6A8)] public fixed byte TrackedQuests[0x10 * 5];
-    [FixedSizeArray<BeastReputationWork>(17)]
-    [FieldOffset(0xBC8)] public fixed byte BeastReputation[0x10 * 17];
-    [FixedSizeArray<LeveWork>(16)]
-    [FieldOffset(0xCD8)] public fixed byte LeveQuests[0x18 * 16];
+	[FieldOffset(0x10)] public fixed byte NormalQuests[0x18 * 30];
+	[FixedSizeArray<DailyQuestWork>(12)]
+	[FieldOffset(0x5B8)] public fixed byte DailyQuests[0x10 * 12];
+	[FixedSizeArray<TrackingWork>(5)]
+	[FieldOffset(0x6A8)] public fixed byte TrackedQuests[0x10 * 5];
+	[FixedSizeArray<BeastReputationWork>(17)]
+	[FieldOffset(0xBC8)] public fixed byte BeastReputation[0x10 * 17];
+	[FixedSizeArray<LeveWork>(16)]
+	[FieldOffset(0xCD8)] public fixed byte LeveQuests[0x18 * 16];
     [FieldOffset(0xE58)] public byte NumLeveAllowances;
 
     [FieldOffset(0xF40)] public byte NumAcceptedQuests;

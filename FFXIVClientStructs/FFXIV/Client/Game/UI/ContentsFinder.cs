@@ -8,24 +8,6 @@ public unsafe partial struct ContentsFinder {
     [FieldOffset(0x00)] public void* vtbl;
     [FieldOffset(0x18)] public LootRule LootRules;
 
-    [Obsolete("Use IsUnrestrictedParty boolean property instead", true)]
-    [FieldOffset(0x19)] public byte UnrestrictedParty;
-
-    [Obsolete("Use IsMinimalIL boolean property instead", true)]
-    [FieldOffset(0x1A)] public byte MinimalIL;
-
-    [Obsolete("Use IsSilenceEcho boolean property instead", true)]
-    [FieldOffset(0x1B)] public byte SilenceEcho;
-
-    [Obsolete("Use IsExplorerMode boolean property instead", true)]
-    [FieldOffset(0x1C)] public byte ExplorerMode;
-
-    [Obsolete("Use IsLevelSync boolean property instead", true)]
-    [FieldOffset(0x1D)] public byte LevelSync;
-
-    [Obsolete("Use IsLimitedLevelingRoulette boolean property instead", true)]
-    [FieldOffset(0x1E)] public byte LimitedLevelingRoulette;
-
     [FieldOffset(0x19)] public bool IsUnrestrictedParty;
     [FieldOffset(0x1A)] public bool IsMinimalIL;
     [FieldOffset(0x1B)] public bool IsSilenceEcho;
