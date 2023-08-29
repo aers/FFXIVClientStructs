@@ -28,6 +28,8 @@ public static class ExporterStatics
     public static string InteropNamespacePrefix = string.Join(".", nameof(FFXIVClientStructs), nameof(FFXIVClientStructs.Interop), "");
 
     public static string[] IgnoredTypeNames = { "MemberFunctionPointers", "StaticAddressPointers", "Addresses" };
+    public static Dictionary<Type, string> ErrorListDictionary = new();
+    public static Dictionary<Type, string> WarningListDictionary = new();
 #pragma warning restore CA2211
 
     private static Type[] GetExportableTypes()
@@ -47,8 +49,6 @@ public static class ExporterStatics
         return definedTypes.Where(t => t.FullName!.StartsWith(FFXIVNamespacePrefix)).ToArray();
     }
 
-    public static Dictionary<Type, string> ErrorListDictionary = new();
-    public static Dictionary<Type, string> WarningListDictionary = new();
 }
 
 // ReSharper disable once InconsistentNaming
