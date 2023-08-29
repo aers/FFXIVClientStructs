@@ -15,7 +15,7 @@ public static class TypeExtensions
 
     public static bool IsStruct(this Type type)
     {
-        return type.IsValueType && !type.IsPrimitive && !type.IsEnum && type != typeof(decimal);
+        return type != typeof(decimal) && type is { IsValueType: true, IsPrimitive: false, IsEnum: false };
     }
 
     public static string FixTypeName(this Type type, Func<Type, string> unhandled) =>
@@ -67,29 +67,28 @@ public static class TypeExtensions
 
 public static class FieldInfoExtensions
 {
-    public static bool IsFixed(this FieldInfo finfo)
+    public static bool IsFixed(this FieldInfo info)
     {
-        var attr = finfo.GetCustomAttributes(typeof(FixedBufferAttribute), false).Cast<FixedBufferAttribute>().FirstOrDefault();
+        var attr = info.GetCustomAttributes(typeof(FixedBufferAttribute), false).Cast<FixedBufferAttribute>().FirstOrDefault();
         return attr != null;
     }
 
-    public static Type GetFixedType(this FieldInfo finfo)
+    public static Type GetFixedType(this FieldInfo info)
     {
-        return finfo.GetCustomAttributes(typeof(FixedBufferAttribute), false).Cast<FixedBufferAttribute>().Single().ElementType;
+        return info.GetCustomAttributes(typeof(FixedBufferAttribute), false).Cast<FixedBufferAttribute>().Single().ElementType;
     }
 
-    public static int GetFixedSize(this FieldInfo finfo)
+    public static int GetFixedSize(this FieldInfo info)
     {
-        return finfo.GetCustomAttributes(typeof(FixedBufferAttribute), false).Cast<FixedBufferAttribute>().Single().Length;
+        return info.GetCustomAttributes(typeof(FixedBufferAttribute), false).Cast<FixedBufferAttribute>().Single().Length;
     }
 
-    public static int GetFieldOffset(this FieldInfo finfo)
+    public static int GetFieldOffset(this FieldInfo info)
     {
-        var attrs = finfo.GetCustomAttributes(typeof(FieldOffsetAttribute), false);
-        if (attrs.Length != 0)
-            return attrs.Cast<FieldOffsetAttribute>().Single().Value;
-
-        // Lets assume this is because it's a LayoutKind.Sequential struct
-        return Marshal.OffsetOf(finfo.DeclaringType, finfo.Name).ToInt32();
+        var attrs = info.GetCustomAttributes(typeof(FieldOffsetAttribute), false);
+        return attrs.Length != 0 ? 
+            attrs.Cast<FieldOffsetAttribute>().Single().Value :
+            // Lets assume this is because it's a LayoutKind.Sequential struct
+            Marshal.OffsetOf(info.DeclaringType!, info.Name).ToInt32();
     }
 }
