@@ -3978,6 +3978,7 @@ classes:
       0x140744640: GetCompanionOwnerID
       0x140745570: SetTargetId
       0x1407455E0: GetTargetId
+      0x1407461A0: GetParentCharacter
       0x140745620: SetSoftTargetId
       0x1407456A0: GetSoftTargetId
       0x140746300: SetMode
@@ -4006,6 +4007,9 @@ classes:
       - ea: 0x1419C5D78
     funcs:
       0x1412C3000: HasOrnament
+  Client::Game::Character::MountContainer:
+    funcs:
+      0x1412BF010: SetupMount
   Client::Game::Character::Data::CharacterData:
     vtbls:
       - ea: 0x1419AE468
@@ -8033,6 +8037,7 @@ classes:
         base: Client::Game::Character::Character
     funcs:
       0x1412D3F30: ctor
+      0x1412D40E0: SetupOrnament
   Client::Game::Character::CutsceneCharacter:
     vtbls:
       - ea: 0x141C07658

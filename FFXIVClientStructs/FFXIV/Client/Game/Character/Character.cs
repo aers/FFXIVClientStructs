@@ -212,6 +212,10 @@ public unsafe partial struct Character
     [MemberFunction("E8 ?? ?? ?? ?? 45 0F B6 86 ?? ?? ?? ?? 33 D2")]
     public partial void SetupBNpc(uint bNpcBaseId, uint bNpcNameId = 0);
 
+    /// <summary> Can only be used for Mounts, Minions, and Ornaments. Literally just checks if the game object at index - 1 is a character and returns that. </summary>
+    [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 48 0F 45 F8")]
+    public partial Character* GetParentCharacter();
+
     [VirtualFunction(79)]
     public partial StatusManager* GetStatusManager();
 
@@ -275,7 +279,7 @@ public unsafe partial struct Character
     
     //0x10 bytes are from the base class which is just vtable + gameobject ptr (same as Companion-/DrawDataContainer)
     [StructLayout(LayoutKind.Explicit, Size = 0x60)]
-    public struct MountContainer {
+    public partial struct MountContainer {
 	    [FieldOffset(0x08)] public BattleChara* OwnerObject;
 	    [FieldOffset(0x10)] public Character* MountObject;
 	    [FieldOffset(0x18)] public ushort MountId;
@@ -283,6 +287,9 @@ public unsafe partial struct Character
 	    //1 in dismount animation, 4 = instant delete mount when dismounting (used for npcs and such)
 	    [FieldOffset(0x20)] public byte Flags;
 	    [FieldOffset(0x24)] public fixed uint MountedObjectIds[7];
+
+        [MemberFunction("E8 ?? ?? ?? ?? 48 8B 43 ?? 80 B8 ?? ?? ?? ?? ?? 74 ?? 0F B6 90")]
+        public partial void SetupMount(short mountId, uint buddyModelTop, uint buddyModelBody, uint buddyModelLegs, byte buddyStain);
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]
