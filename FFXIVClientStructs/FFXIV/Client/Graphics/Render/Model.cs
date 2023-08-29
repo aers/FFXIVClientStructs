@@ -18,6 +18,8 @@ public unsafe struct Model {
     [FieldOffset(0x98)] public Material** Materials;
     [FieldOffset(0xA0)] public int MaterialCount;
 
+    [FieldOffset(0xE8)] public uint SlotIndex;
+
     public readonly ReadOnlySpan<Pointer<Material>> MaterialsSpan
         => new(Materials, MaterialCount);
 }
