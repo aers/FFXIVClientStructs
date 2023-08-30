@@ -280,7 +280,8 @@ public unsafe partial struct Character
     
     //0x10 bytes are from the base class which is just vtable + gameobject ptr (same as Companion-/DrawDataContainer)
     [StructLayout(LayoutKind.Explicit, Size = 0x60)]
-    public partial struct MountContainer {
+    public partial struct MountContainer 
+    {
 	    [FieldOffset(0x00)] public void** ContainerVTable;
 	    [FieldOffset(0x08)] public BattleChara* OwnerObject;
 	    [FieldOffset(0x10)] public Character* MountObject;
@@ -319,7 +320,8 @@ public unsafe partial struct Character
     // We do not actually know where all the other values come in, nothing except Flags and Vfx is actually used by Reaper Shroud (not even NpcEquipId, strangely).
     // This probably is used by other transformations too, but we have not found any yet.
     [StructLayout(LayoutKind.Explicit, Size = 0x40)]
-    public struct ReaperShroudContainer {
+    public struct ReaperShroudContainer 
+    {
         [FieldOffset(0x00)] public void** ContainerVTable;
         [FieldOffset(0x08)] public BattleChara* OwnerObject;
         [FieldOffset(0x10)] public void** VfxListenerVTable;
@@ -365,7 +367,8 @@ public unsafe partial struct Character
     }
     
     [Flags]
-    public enum CopyFlags : uint {
+    public enum CopyFlags : uint 
+    {
         None = 0x00,
         
         Mount = 0x2,
@@ -394,5 +397,4 @@ public unsafe partial struct Character
         [Obsolete("do not use")] Unk080000 = 0x80000,
         [Obsolete("do not use")] Unk100000 = 0x100000,
     }
-    
 }
