@@ -4010,6 +4010,14 @@ classes:
   Client::Game::Character::MountContainer:
     funcs:
       0x1412BF010: SetupMount
+  Client::Game::Character::ReaperShroudContainer:
+    vtbls:
+      - ea: 0x1419C5DA0
+      - ea: 0x1419C5DC8
+        base: Client::Graphics::Vfx::VfxDataListenner
+    vfuncs:
+      - 0: dtor
+      - 1: ctor
   Client::Game::Character::Data::CharacterData:
     vtbls:
       - ea: 0x1419AE468
