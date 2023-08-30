@@ -65,7 +65,7 @@ internal sealed class FixedStringGenerator : IIncrementalGenerator
         });
     }
 
-    internal sealed record FixedStringInfo(string FieldName, int MaxLength, string PropertyName, string SpanPropertyName)
+    internal sealed record FixedStringInfo(string FieldName, int MaxLength, string PropertyName)
     {
         public static Validation<DiagnosticInfo, FixedStringInfo> GetFromRoslyn(IFieldSymbol fieldSymbol)
         {
@@ -91,14 +91,12 @@ internal sealed class FixedStringGenerator : IIncrementalGenerator
             Validation<DiagnosticInfo, string> validPropertyName = attribute.GetValidAttributeArgument<string>("PropertyName", 0, AttributeName, fieldSymbol);
 
             return (validSymbol, validPropertyName).Apply((symbol, propertyName) =>
-                new FixedStringInfo(symbol.Name, symbol.FixedSize, string.IsNullOrEmpty(propertyName) ? $"{symbol.Name}String" : propertyName, string.IsNullOrEmpty(propertyName) ? $"{symbol.Name}Span" : $"{propertyName}Span"));
+                new FixedStringInfo(symbol.Name, symbol.FixedSize, string.IsNullOrEmpty(propertyName) ? $"{symbol.Name}String" : propertyName));
         }
 
         public void RenderFixedString(IndentedStringBuilder builder)
         {
-            // MemoryMarshal.CreateReadOnlySpanFromNullTerminated does not allow to specify a max length
-            builder.AppendLine($"public ReadOnlySpan<byte> {SpanPropertyName} {{ get {{ fixed (byte* p = {FieldName}) {{ var span = new ReadOnlySpan<byte>(p, {MaxLength}); var nullIdx = span.IndexOf((byte)0); return nullIdx >= 0 ? span[..nullIdx] : span; }} }} }}");
-            builder.AppendLine($"public string {PropertyName} => Encoding.UTF8.GetString({SpanPropertyName});");
+            builder.AppendLine($"public string {PropertyName} {{ get {{ fixed (byte* p = {FieldName}) {{ var str = Encoding.UTF8.GetString(p, {MaxLength}); var nullIdx = str.IndexOf('\0'); return nullIdx >= 0 ? str[..nullIdx] : str; }} }} }}");
         }
     }
 
