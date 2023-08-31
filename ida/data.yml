@@ -249,6 +249,7 @@ functions:
   0x1406218D0: WorldToViewportPoint
   0x140734660: ObjectIdToPlayerObjectId # returns invalid id if objectid is not a player
   0x14075C0C0: ProcessActorControlPacket
+  0x140707CF0: CreateDummyItemSlot
   0x140B04F50: IsInMordionGaol # if this returns true, i'm sorry for you
   0x140B58610: WorldToScreenPoint
   0x1416A17D0: OodleNew # oodle code starts here
@@ -4616,6 +4617,8 @@ classes:
       0x140226030: UseItem
       0x140226960: UnblockItemSlot
       0x1402254A0: OpenForItemSlot
+      0x140225840: DiscardItem
+      0x140227810: LowerItemQuality
   Client::UI::Agent::AgentConfigLogColor:
     vtbls:
       - ea: 0x14196E590
