@@ -4016,8 +4016,8 @@ classes:
       - ea: 0x1419C5DC8
         base: Client::Graphics::Vfx::VfxDataListenner
     vfuncs:
-      - 0: dtor
-      - 1: ctor
+      0: dtor
+      1: ctor
   Client::Game::Character::Data::CharacterData:
     vtbls:
       - ea: 0x1419AE468
