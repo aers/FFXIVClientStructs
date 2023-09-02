@@ -5137,7 +5137,7 @@ classes:
       0x140C54B50: ctor
   Client::UI::Agent::AgentSalvage:
     vtbls:
-      - ea: 0x141A16C38
+      - ea: 0x1419FC538
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140CE0310: ctor
@@ -5257,7 +5257,7 @@ classes:
       0x1409F9690: ctor
   Client::UI::Agent::AgentRelic2Glass:
     vtbls:
-      - ea: 0x1419FC538
+      - ea: 0x141A16C38
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x1409FE950: ctor
