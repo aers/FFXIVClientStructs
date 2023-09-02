@@ -6670,6 +6670,7 @@ classes:
       0x14085E2F0: GetEventHandlerById
       0x140965EB0: GetCurrentContentType
       0x140965F80: GetCurrentContentId
+      0x140966000: CanLeaveCurrentContent # static
       0x140967980: GetContentFinderCondition
   Client::Game::Event::EventHandlerModule:
     vtbls:

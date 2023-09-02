@@ -56,4 +56,7 @@ public unsafe partial struct EventFramework
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B D8 3B 86")]
     public static partial uint GetCurrentContentId();
+
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 18 48 8B 4F 10")]
+    public static partial bool CanLeaveCurrentContent();
 }
