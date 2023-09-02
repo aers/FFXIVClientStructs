@@ -413,6 +413,7 @@ public enum AgentId : uint {
     HarpoonTip = 271,
     PvpScreenInformationHotBar = 272,
     PvpWelcome = 273,
+    JobHudNotice = 274,
     UserPolicyPerformance = 278,
     PvpTeamInputString = 280,
     PvpTeamCrestEditor = 285,
