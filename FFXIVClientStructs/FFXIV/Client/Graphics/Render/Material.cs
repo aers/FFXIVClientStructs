@@ -28,6 +28,9 @@ public unsafe struct Material {
     }
 
     [FieldOffset(0x00)] public ReferencedClassBase ReferencedClassBase;
+    /// <summary>
+    /// The resource handle this material was instantiated from. Its <see cref="MaterialResourceHandle.Material"/> will be the current structure.
+    /// </summary>
     [FieldOffset(0x10)] public MaterialResourceHandle* MaterialResourceHandle;
     [FieldOffset(0x18)] public uint ShaderFlags;
     /// <summary>

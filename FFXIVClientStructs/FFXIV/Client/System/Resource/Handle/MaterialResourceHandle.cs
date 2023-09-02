@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using FFXIVClientStructs.FFXIV.Client.Graphics.Render;
+using System.Text;
 
 namespace FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 // Client::System::Resource::Handle::MaterialResourceHandle
@@ -45,6 +46,10 @@ public unsafe partial struct MaterialResourceHandle
     }
 
     [FieldOffset(0x0)] public ResourceHandle ResourceHandle;
+    /// <summary>
+    /// The instantiated material. Its <see cref="Material.MaterialResourceHandle"/> will be the current structure.
+    /// </summary>
+    [FieldOffset(0xC0)] public Material* Material;
     [FieldOffset(0xC8)] public ShaderPackageResourceHandle* ShaderPackageResourceHandle;
     [FieldOffset(0xD0)] public TextureEntry* Textures;
     [FieldOffset(0xE0)] public byte* Strings;
