@@ -18,8 +18,8 @@ public unsafe partial struct AgentModule
     [FieldOffset(0x14)] public uint FrameCounter;
     [FieldOffset(0x18)] public float FrameDelta;
 
-    [FixedSizeArray<Pointer<AgentInterface>>(432)]
-    [FieldOffset(0x20)] public fixed byte Agents[432 * 8];
+    [FixedSizeArray<Pointer<AgentInterface>>(433)]
+    [FieldOffset(0x20)] public fixed byte Agents[433 * 8];
 
     [FieldOffset(0xDA8)] public UIModule* UIModulePtr;
     [FieldOffset(0xDB0)] public AgentModule* AgentModulePtr;
