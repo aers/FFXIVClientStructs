@@ -10,6 +10,7 @@ public class Program {
 
         ExporterBase exporter = new ExporterIDA();
 
+        Console.WriteLine($"Working directory: {Environment.CurrentDirectory}");
         Console.WriteLine($"Writing to {path}");
 
         File.WriteAllText($"{outputBase}ffxiv_client_structs.h", exporter.Export(GapStrategy.FullSize));
