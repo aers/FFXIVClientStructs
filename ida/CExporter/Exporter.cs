@@ -96,24 +96,32 @@ public abstract class ExporterBase {
         sb.AppendLine();
         sb.AppendLine("// Enum Definitions");
         var enums = definedTypes.Where(t => t.IsEnum).ToList();
+#if DEBUG
         Console.Clear();
+#endif
         for (var index = 0; index < enums.Count; index++) {
             var processPercent = index / (float)enums.Count;
+#if DEBUG
             Console.SetCursorPosition(0, 0);
             Console.WriteLine($"GapStrategy: {_gapStrategy}, Type: {GetType().Name}");
             Console.WriteLine($"Processing Enums: {processPercent:P}");
+#endif
             ProcessEnum(enums[index], sb);
         }
 
         sb.AppendLine();
         sb.AppendLine("// Definitions");
         var definitions = definedTypes.Where(t => !t.IsEnum).ToList();
+#if DEBUG
         Console.Clear();
+#endif
         for (var index = 0; index < definitions.Count; index++) {
             var processPercent = index / (float)definitions.Count;
+#if DEBUG
             Console.SetCursorPosition(0, 0);
             Console.WriteLine($"GapStrategy: {_gapStrategy}, Type: {GetType().Name}");
             Console.WriteLine($"Processing Structs: {processPercent:P}");
+#endif
             ProcessType(definitions[index], sb);
         }
 
