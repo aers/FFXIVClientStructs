@@ -2,7 +2,7 @@ using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
-namespace FFXIVClientStructs.FFXIV.Client.UI.Agent; 
+namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.FreeCompanyProfile)]
 [StructLayout(LayoutKind.Explicit, Size = 0x27C)]
 public unsafe partial struct AgentFreeCompanyProfile {
