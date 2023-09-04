@@ -31,6 +31,7 @@ struct Client_Game_Character_DrawObjectData;
 struct Client_Game_Character_EquipmentModelId;
 struct Client_Game_Character_CustomizeData;
 struct Client_Game_Character_Character_OrnamentContainer;
+struct Client_Game_Character_Character_ReaperShroudContainer;
 struct Client_Game_Character_Character_CastInfo;
 struct Client_Game_Character_Character_CharacterVTable;
 struct Client_Game_Character_Character_ForayInfo;
@@ -570,6 +571,8 @@ struct Client_UI_Agent_AgentSatisfactionSupply_SatisfactionSupplyNpcInfo;
 struct Client_UI_Agent_AgentSatisfactionSupply_ItemInfo;
 struct Client_UI_Agent_AgentScreenLog;
 struct StdDeque_ClientUIAgentBalloonInfo;
+struct Client_UI_Agent_AgentShop;
+struct Client_UI_Agent_AgentShop_ShopItem;
 struct Client_UI_Agent_AgentSubmersibleExplorationResult;
 struct Client_UI_Agent_AgentTeleport;
 struct Client_UI_Agent_AgentTryon;
@@ -987,6 +990,13 @@ enum Client_Game_Character_Character_EurekaElement /* Size=0x1 */
     Earth = 4,
     Lightning = 5,
     Water = 6
+};
+
+enum Client_Game_Character_Character_ReaperShroudContainer_ShroudFlags /* Size=0x4 */
+{
+    ShroudAttacking = 1,
+    ShroudActive = 2,
+    ShroudLoading = 256
 };
 
 enum Client_Game_Character_DrawDataContainer_EquipmentSlot /* Size=0x4 */
@@ -1896,6 +1906,7 @@ enum Client_UI_Agent_AgentId /* Size=0x4 */
     HarpoonTip = 271,
     PvpScreenInformationHotBar = 272,
     PvpWelcome = 273,
+    JobHudNotice = 274,
     UserPolicyPerformance = 278,
     PvpTeamInputString = 280,
     PvpTeamCrestEditor = 285,
@@ -3799,7 +3810,7 @@ struct Client_Game_Character_Data_CharacterData /* Size=0x48 */
 
 struct Client_Game_Character_Character_MountContainer /* Size=0x60 */
 {
-    /*      */ byte _gap_0x0[0x8];
+    /* 0x00 */ void** ContainerVTable;
     /* 0x08 */ Client_Game_Character_BattleChara* OwnerObject;
     /* 0x10 */ Client_Game_Character_Character* MountObject;
     /* 0x18 */ unsigned __int16 MountId;
@@ -3814,7 +3825,7 @@ struct Client_Game_Character_Character_MountContainer /* Size=0x60 */
 
 struct Client_Game_Character_Character_CompanionContainer /* Size=0x20 */
 {
-    /*      */ byte _gap_0x0[0x8];
+    /* 0x00 */ void** ContainerVTable;
     /* 0x08 */ Client_Game_Character_BattleChara* OwnerObject;
     /* 0x10 */ Client_Game_Character_Companion* CompanionObject;
     /* 0x18 */ unsigned __int16 CompanionId;
@@ -3902,13 +3913,30 @@ struct Client_Game_Character_DrawDataContainer /* Size=0x190 */
 
 struct Client_Game_Character_Character_OrnamentContainer /* Size=0x28 */
 {
-    /*      */ byte _gap_0x0[0x8];
+    /* 0x00 */ void** ContainerVTable;
     /* 0x08 */ Client_Game_Character_BattleChara* OwnerObject;
     /* 0x10 */ Client_Game_Character_Ornament* OrnamentObject;
     /* 0x18 */ unsigned __int16 OrnamentId;
     /*      */ byte _gap_0x1A[0x2];
     /*      */ byte _gap_0x1C[0x4];
     /*      */ byte _gap_0x20[0x8];
+};
+
+struct Client_Game_Character_Character_ReaperShroudContainer /* Size=0x40 */
+{
+    /* 0x00 */ void** ContainerVTable;
+    /* 0x08 */ Client_Game_Character_BattleChara* OwnerObject;
+    /* 0x10 */ void** VfxListenerVTable;
+    /* 0x18 */ unsigned __int16 StanceChangeId;
+    /*      */ byte _gap_0x1A[0x2];
+    /* 0x1C */ unsigned __int32 StanceChangeState;
+    /* 0x20 */ float Timer;
+    /*      */ byte _gap_0x24[0x4];
+    /* 0x28 */ void* CopyObject;
+    /* 0x30 */ Client_Graphics_Vfx_VfxData* Vfx;
+    /* 0x38 */ Client_Game_Character_Character_ReaperShroudContainer_ShroudFlags Flags;
+    /* 0x3C */ unsigned __int16 NpcEquipId;
+    /*      */ byte _gap_0x3E[0x2];
 };
 
 struct Client_Game_Character_Character /* Size=0x1B40 */
@@ -3930,7 +3958,8 @@ struct Client_Game_Character_Character /* Size=0x1B40 */
     /* 0x06C8 */ Client_Game_Character_Character_CompanionContainer Companion;
     /* 0x06E8 */ Client_Game_Character_DrawDataContainer DrawData;
     /* 0x0878 */ Client_Game_Character_Character_OrnamentContainer Ornament;
-    /*        */ byte _gap_0x8A0[0x80];
+    /*        */ byte _gap_0x8A0[0x40];
+    /* 0x08E0 */ Client_Game_Character_Character_ReaperShroudContainer ReaperShroud;
     /* 0x0920 */ Client_Game_ActionTimelineManager ActionTimelineManager;
     /*        */ byte _gap_0xC60[0x50];
     /* 0x0CB0 */ Client_Game_Object_GameObjectID LookTargetId;
@@ -10670,38 +10699,36 @@ struct Client_UI_Agent_AgentInspect_ItemData /* Size=0x28 */
     /* 0x20 */ Client_Game_InventoryItem* Item;
 };
 
-struct Client_UI_Agent_AgentInventoryContext /* Size=0x678 */
+struct Client_UI_Agent_AgentInventoryContext /* Size=0x778 */
 {
     /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x028 */ unsigned __int32 BlockingAddonId;
     /* 0x02C */ __int32 ContexItemStartIndex;
     /* 0x030 */ __int32 ContextItemCount;
     /*       */ byte _gap_0x34[0x4];
-    /* 0x038 */ byte EventParams[0x520];
-    /* 0x558 */ byte EventIdArray[0x50];
-    /* 0x5A8 */ unsigned __int32 ContextItemDisabledMask;
-    /* 0x5AC */ unsigned __int32 ContextItemSubmenuMask;
-    /* 0x5B0 */ __int32 PositionX;
-    /* 0x5B4 */ __int32 PositionY;
-    /*       */ byte _gap_0x5B8[0x10];
-    /* 0x5C8 */ unsigned __int32 OwnerAddonId;
-    union {
-    /* 0x5D0 */ Client_Game_InventoryType TargetInventoryId;
-    /* 0x5D0 */ Client_Game_InventoryType BlockedInventoryId;
-    } _union_0x5D0;
-    union {
-    /* 0x5D4 */ __int32 TargetInventorySlotId;
-    /* 0x5D4 */ __int32 BlockedInventorySlotId;
-    } _union_0x5D4;
-    /*       */ byte _gap_0x5D4[0x4];
-    /*       */ byte _gap_0x5D8[0x4];
-    /* 0x5DC */ unsigned __int32 DummyInventoryId;
-    /*       */ byte _gap_0x5E0[0x8];
-    /* 0x5E8 */ Client_Game_InventoryItem* TargetInventorySlot;
-    /* 0x5F0 */ Client_Game_InventoryItem TargetDummyItem;
-    /*       */ byte _gap_0x628[0x10];
-    /* 0x638 */ Client_Game_InventoryItem DiscardDummyItem;
-    /*       */ byte _gap_0x670[0x8];
+    /* 0x038 */ byte EventParams[0x620];
+    /* 0x658 */ byte EventIdArray[0x54];
+    /* 0x6AC */ unsigned __int32 ContextItemDisabledMask;
+    /* 0x6B0 */ unsigned __int32 ContextItemSubmenuMask;
+    /* 0x6B4 */ __int32 PositionX;
+    /* 0x6B8 */ __int32 PositionY;
+    /*       */ byte _gap_0x6BC[0x4];
+    /*       */ byte _gap_0x6C0[0x8];
+    /* 0x6C8 */ unsigned __int32 OwnerAddonId;
+    /*       */ byte _gap_0x6CC[0x4];
+    /* 0x6D0 */ Client_Game_InventoryType TargetInventoryId;
+    /* 0x6D4 */ __int32 TargetInventorySlotId;
+    /*       */ byte _gap_0x6D8[0x4];
+    /* 0x6DC */ unsigned __int32 DummyInventoryId;
+    /*       */ byte _gap_0x6E0[0x8];
+    /* 0x6E8 */ Client_Game_InventoryItem* TargetInventorySlot;
+    /* 0x6F0 */ Client_Game_InventoryItem TargetDummyItem;
+    /* 0x728 */ Client_Game_InventoryType BlockedInventoryId;
+    /* 0x72C */ __int32 BlockedInventorySlotId;
+    /*       */ byte _gap_0x730[0x8];
+    /* 0x738 */ Client_Game_InventoryItem DiscardDummyItem;
+    /* 0x770 */ __int32 DialogType;
+    /*       */ byte _gap_0x774[0x4];
 };
 
 struct Client_UI_Agent_AgentItemDonationInfo /* Size=0x18 */
@@ -11030,8 +11057,7 @@ struct Client_UI_Agent_AgentModule /* Size=0xDB8 */
     /* 0x014 */ unsigned __int32 FrameCounter;
     /* 0x018 */ float FrameDelta;
     /*       */ byte _gap_0x1C[0x4];
-    /* 0x020 */ byte Agents[0xD80];
-    /*       */ byte _gap_0xDA0[0x8];
+    /* 0x020 */ byte Agents[0xD88];
     /* 0xDA8 */ Client_UI_UIModule* UIModulePtr;
     /* 0xDB0 */ Client_UI_Agent_AgentModule* AgentModulePtr;
 };
@@ -11342,6 +11368,47 @@ struct Client_UI_Agent_AgentScreenLog /* Size=0x3F0 */
     /*       */ byte _gap_0x380[0x10];
     /* 0x390 */ byte BalloonSlots[0x50];
     /*       */ byte _gap_0x3E0[0x10];
+};
+
+struct Client_UI_Agent_AgentShop /* Size=0x120 */
+{
+    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
+    /*       */ byte _gap_0x28[0x60];
+    /* 0x088 */ Component_GUI_AtkEventInterface* EventReceiver;
+    /*       */ byte _gap_0x90[0x8];
+    /* 0x098 */ byte* ShopName;
+    /*       */ byte _gap_0xA0[0x8];
+    /*       */ byte _gap_0xA8[0x4];
+    /* 0x0AC */ unsigned __int32 DialogAddonId;
+    /*       */ byte _gap_0xB0[0x8];
+    /* 0x0B8 */ Client_UI_Agent_AgentShop_ShopItem* ItemReceive;
+    /* 0x0C0 */ Client_UI_Agent_AgentShop_ShopItem* ItemCost;
+    /*       */ byte _gap_0xC8[0x8];
+    /* 0x0D0 */ __int32 ItemReceiveCount;
+    /*       */ byte _gap_0xD4[0x4];
+    /*       */ byte _gap_0xD8[0x4];
+    /* 0x0DC */ __int32 ItemCostCount;
+    /*       */ byte _gap_0xE0[0x20];
+    /* 0x100 */ __int32 SelectedItemIndex;
+    /* 0x104 */ __int32 SelectedItemStackSize;
+    /*       */ byte _gap_0x108[0x18];
+};
+
+struct Client_UI_Agent_AgentShop_ShopItem /* Size=0x240 */
+{
+    /* 0x000 */ Client_System_String_Utf8String ItemName;
+    /*       */ byte _gap_0x68[0xD0];
+    /* 0x138 */ Client_System_String_Utf8String Qty;
+    /* 0x1A0 */ Client_System_String_Utf8String Set;
+    /* 0x208 */ unsigned __int32 CategoryIconId;
+    /* 0x20C */ unsigned __int32 ItemIconId;
+    /*       */ byte _gap_0x210[0x4];
+    /* 0x214 */ unsigned __int32 ItemCount;
+    /* 0x218 */ unsigned __int32 OwnedItemCount;
+    /* 0x21C */ unsigned __int32 ItemId;
+    /*       */ byte _gap_0x220[0x4];
+    /* 0x224 */ unsigned __int32 MaxStack;
+    /*       */ byte _gap_0x228[0x18];
 };
 
 struct Client_UI_Agent_AgentSubmersibleExplorationResult /* Size=0x38 */
