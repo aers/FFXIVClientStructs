@@ -1,10 +1,9 @@
-﻿using FFXIVClientStructs.FFXIV.Client.System.String;
+using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x1C70)]
-public unsafe partial struct InfoModule
-{
+public unsafe partial struct InfoModule {
     [FieldOffset(0x1978)] public fixed long InfoProxyArray[34];
     [FieldOffset(0x1A88)] public ulong LocalContentId;
     [FieldOffset(0x1A90)] public Utf8String LocalCharName;
@@ -18,8 +17,7 @@ public unsafe partial struct InfoModule
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 55 68")]
     public partial InfoProxyInterface* GetInfoProxyById(uint id);
 }
-public enum InfoProxyId : uint
-{
+public enum InfoProxyId : uint {
     //ShellCommandChatLinkShell refers to 3,18
     //Party Decline, PartyInv,PartyJoin  refer to 2
     //ShellCommandDice refers to  3, 13(Fc), 18 ,24

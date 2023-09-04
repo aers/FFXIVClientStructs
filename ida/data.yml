@@ -249,6 +249,7 @@ functions:
   0x1406218D0: WorldToViewportPoint
   0x140734660: ObjectIdToPlayerObjectId # returns invalid id if objectid is not a player
   0x14075C0C0: ProcessActorControlPacket
+  0x140707CF0: CreateDummyItemSlot
   0x140B04F50: IsInMordionGaol # if this returns true, i'm sorry for you
   0x140B58610: WorldToScreenPoint
   0x1416A17D0: OodleNew # oodle code starts here
@@ -3193,12 +3194,17 @@ classes:
       0x1405440D0: LoadIconById
       0x140544100: LoadIcon
       0x14057A270: SetDisabledColor
+  Component::GUI::AtkDragDropInterface:
+    vtbls:
+      - ea: 0x141996048
+    vfuncs:
+      7: GetDragComponent
   Component::GUI::AtkComponentListItemRenderer:
     vtbls:
       - ea: 0x1419960C8
         base: Component::GUI::AtkComponentButton
-    vfuncs:
-      15: GetAtkResNode
+      - ea: 0x141996198
+        base: Component::GUI::AtkDragDropInterface
     funcs:
       0x1405455E0: ctor
       0x1405456E0: Finalize
@@ -3374,6 +3380,8 @@ classes:
     vtbls:
       - ea: 0x141997378
         base: Component::GUI::AtkComponentBase
+      - ea: 0x141997418
+        base: Component::GUI::AtkDragDropInterface
     funcs:
       0x14057A860: ctor
       0x140579FB0: LoadIconById
@@ -3976,7 +3984,11 @@ classes:
       0x140733A00: IsCasting
       0x140742DF0: IsMounted
       0x140744640: GetCompanionOwnerID
+      0x140745570: SetTargetId
       0x1407455E0: GetTargetId
+      0x1407461A0: GetParentCharacter
+      0x140745620: SetSoftTargetId
+      0x1407456A0: GetSoftTargetId
       0x140746300: SetMode
       0x140748520: Finalize
       0x14074F6B0: SetupBNpc
@@ -4003,6 +4015,17 @@ classes:
       - ea: 0x1419C5D78
     funcs:
       0x1412C3000: HasOrnament
+  Client::Game::Character::MountContainer:
+    funcs:
+      0x1412BF010: SetupMount
+  Client::Game::Character::ReaperShroudContainer:
+    vtbls:
+      - ea: 0x1419C5DA0
+      - ea: 0x1419C5DC8
+        base: Client::Graphics::Vfx::VfxDataListenner
+    vfuncs:
+      0: dtor
+      1: ctor
   Client::Game::Character::Data::CharacterData:
     vtbls:
       - ea: 0x1419AE468
@@ -4601,6 +4624,8 @@ classes:
       0x140226030: UseItem
       0x140226960: UnblockItemSlot
       0x1402254A0: OpenForItemSlot
+      0x140225840: DiscardItem
+      0x140227810: LowerItemQuality
   Client::UI::Agent::AgentConfigLogColor:
     vtbls:
       - ea: 0x14196E590
@@ -5119,7 +5144,7 @@ classes:
       0x140C54B50: ctor
   Client::UI::Agent::AgentSalvage:
     vtbls:
-      - ea: 0x141A16C38
+      - ea: 0x1419FC538
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140CE0310: ctor
@@ -5239,7 +5264,7 @@ classes:
       0x1409F9690: ctor
   Client::UI::Agent::AgentRelic2Glass:
     vtbls:
-      - ea: 0x1419FC538
+      - ea: 0x141A16C38
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x1409FE950: ctor
@@ -6652,6 +6677,7 @@ classes:
       0x14085E2F0: GetEventHandlerById
       0x140965EB0: GetCurrentContentType
       0x140965F80: GetCurrentContentId
+      0x140966000: CanLeaveCurrentContent # static
       0x140967980: GetContentFinderCondition
   Client::Game::Event::EventHandlerModule:
     vtbls:
@@ -8030,6 +8056,7 @@ classes:
         base: Client::Game::Character::Character
     funcs:
       0x1412D3F30: ctor
+      0x1412D40E0: SetupOrnament
   Client::Game::Character::CutsceneCharacter:
     vtbls:
       - ea: 0x141C07658

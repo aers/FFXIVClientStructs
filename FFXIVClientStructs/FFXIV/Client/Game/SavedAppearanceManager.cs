@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 public unsafe partial struct SavedAppearanceManager {
     [FixedSizeArray<SavedAppearanceSlot>(40)]
     [FieldOffset(0x08)] public fixed byte Slot[0x140 * 40];
-    
+
     [VirtualFunction(1)] public partial bool IsSlotCreated(byte slotIndex);
     [VirtualFunction(2)] public partial SavedAppearanceSlot* GetSlot(byte slotIndex);
     [VirtualFunction(6)] public partial uint GetSlotCount();

@@ -1,8 +1,7 @@
-﻿namespace FFXIVClientStructs.FFXIV.Common.Math;
+namespace FFXIVClientStructs.FFXIV.Common.Math;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
-public struct Vector4 : IEquatable<Vector4>, IFormattable
-{
+public struct Vector4 : IEquatable<Vector4>, IFormattable {
     [FieldOffset(0x0)] public float X;
     [FieldOffset(0x4)] public float Y;
     [FieldOffset(0x8)] public float Z;
@@ -17,53 +16,44 @@ public struct Vector4 : IEquatable<Vector4>, IFormattable
     public float SqrMagnitude => X * X + Y * Y + Z * Z + W * W;
 
     public Vector4(float value) : this(value, value, value, value) { }
-    public Vector4(float x, float y, float z, float w)
-    {
+    public Vector4(float x, float y, float z, float w) {
         X = x;
         Y = y;
         Z = z;
         W = w;
     }
 
-    public static Vector4 Normalize(Vector4 value)
-    {
+    public static Vector4 Normalize(Vector4 value) {
         var mag = value.Magnitude;
         return mag > float.Epsilon ? value / mag : Zero;
     }
 
-    public static float Dot(Vector4 left, Vector4 right)
-    {
+    public static float Dot(Vector4 left, Vector4 right) {
         return left.X * right.X + left.Y * right.Y + left.Z * right.Z + left.W * right.W;
     }
 
-    public static Vector4 Project(Vector4 left, Vector4 right)
-    {
+    public static Vector4 Project(Vector4 left, Vector4 right) {
         return right * (Dot(left, right) / Dot(right, right));
     }
 
-    public static Vector4 Lerp(Vector4 start, Vector4 end, float amount)
-    {
+    public static Vector4 Lerp(Vector4 start, Vector4 end, float amount) {
         return LerpUnclamped(start, end, System.Math.Clamp(amount, 0.0f, 1.0f));
     }
 
-    public static Vector4 LerpUnclamped(Vector4 start, Vector4 end, float amount)
-    {
+    public static Vector4 LerpUnclamped(Vector4 start, Vector4 end, float amount) {
         return start + (end - start) * amount;
     }
 
-    public static float Distance(Vector4 a, Vector4 b)
-    {
+    public static float Distance(Vector4 a, Vector4 b) {
         return MathF.Sqrt(SqrDistance(a, b));
     }
 
-    public static float SqrDistance(Vector4 a, Vector4 b)
-    {
+    public static float SqrDistance(Vector4 a, Vector4 b) {
         var diff = a - b;
         return Dot(diff, diff);
     }
 
-    public static Vector4 Transform(Vector2 position, Matrix4x4 matrix)
-    {
+    public static Vector4 Transform(Vector2 position, Matrix4x4 matrix) {
         return new Vector4(
             position.X * matrix.M11 + position.Y * matrix.M21 + matrix.M41,
             position.X * matrix.M12 + position.Y * matrix.M22 + matrix.M42,
@@ -72,8 +62,7 @@ public struct Vector4 : IEquatable<Vector4>, IFormattable
         );
     }
 
-    public static Vector4 Transform(Vector2 value, Quaternion rotation)
-    {
+    public static Vector4 Transform(Vector2 value, Quaternion rotation) {
         var x2 = rotation.X + rotation.X;
         var y2 = rotation.Y + rotation.Y;
         var z2 = rotation.Z + rotation.Z;
@@ -96,8 +85,7 @@ public struct Vector4 : IEquatable<Vector4>, IFormattable
         );
     }
 
-    public static Vector4 Transform(Vector3 position, Matrix4x4 matrix)
-    {
+    public static Vector4 Transform(Vector3 position, Matrix4x4 matrix) {
         return new Vector4(
             position.X * matrix.M11 + position.Y * matrix.M21 + position.Z * matrix.M31 + matrix.M41,
             position.X * matrix.M12 + position.Y * matrix.M22 + position.Z * matrix.M32 + matrix.M42,
@@ -106,8 +94,7 @@ public struct Vector4 : IEquatable<Vector4>, IFormattable
         );
     }
 
-    public static Vector4 Transform(Vector3 value, Quaternion rotation)
-    {
+    public static Vector4 Transform(Vector3 value, Quaternion rotation) {
         var x2 = rotation.X + rotation.X;
         var y2 = rotation.Y + rotation.Y;
         var z2 = rotation.Z + rotation.Z;
@@ -130,8 +117,7 @@ public struct Vector4 : IEquatable<Vector4>, IFormattable
         );
     }
 
-    public static Vector4 Transform(Vector4 vector, Matrix4x4 matrix)
-    {
+    public static Vector4 Transform(Vector4 vector, Matrix4x4 matrix) {
         return new Vector4(
             vector.X * matrix.M11 + vector.Y * matrix.M21 + vector.Z * matrix.M31 + vector.W * matrix.M41,
             vector.X * matrix.M12 + vector.Y * matrix.M22 + vector.Z * matrix.M32 + vector.W * matrix.M42,
@@ -140,8 +126,7 @@ public struct Vector4 : IEquatable<Vector4>, IFormattable
         );
     }
 
-    public static Vector4 Transform(Vector4 value, Quaternion rotation)
-    {
+    public static Vector4 Transform(Vector4 value, Quaternion rotation) {
         var x2 = rotation.X + rotation.X;
         var y2 = rotation.Y + rotation.Y;
         var z2 = rotation.Z + rotation.Z;
@@ -177,8 +162,7 @@ public struct Vector4 : IEquatable<Vector4>, IFormattable
     public static bool operator ==(Vector4 left, Vector4 right) => left.Equals(right);
     public static bool operator !=(Vector4 left, Vector4 right) => !left.Equals(right);
 
-    public bool Equals(Vector4 other)
-    {
+    public bool Equals(Vector4 other) {
         return X.Equals(other.X) && Y.Equals(other.Y) && Z.Equals(other.Z) && W.Equals(other.W);
     }
 

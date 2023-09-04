@@ -1,12 +1,10 @@
-﻿using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace FFXIVClientStructs.InteropSourceGenerators.Extensions;
 
-internal static class SyntaxNodeExtensions
-{
-    public static string GetContainingFileScopedNamespace(this SyntaxNode syntaxNode)
-    {
+internal static class SyntaxNodeExtensions {
+    public static string GetContainingFileScopedNamespace(this SyntaxNode syntaxNode) {
         SyntaxNode? potentialNamespaceParentNode = syntaxNode;
 
         while (potentialNamespaceParentNode != null &&

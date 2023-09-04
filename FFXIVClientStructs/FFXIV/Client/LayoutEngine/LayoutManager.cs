@@ -1,4 +1,4 @@
-﻿
+
 namespace FFXIVClientStructs.FFXIV.Client.LayoutEngine;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x98)]

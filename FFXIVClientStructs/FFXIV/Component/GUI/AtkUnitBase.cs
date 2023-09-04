@@ -8,8 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 // ctor E8 ?? ?? ?? ?? 83 8B ?? ?? ?? ?? ?? 33 C0
 
 [StructLayout(LayoutKind.Explicit, Size = 0x220)]
-public unsafe partial struct AtkUnitBase
-{
+public unsafe partial struct AtkUnitBase {
     [FieldOffset(0x0)] public AtkEventListener AtkEventListener;
     [FieldOffset(0x8)] public fixed byte Name[0x20];
     [FieldOffset(0x28)] public AtkUldManager UldManager;
@@ -31,13 +30,13 @@ public unsafe partial struct AtkUnitBase
     [FieldOffset(0x1D2)] public ushort ContextMenuParentID;
     [FieldOffset(0x1D5)] public byte Alpha;
 
-    [FieldOffset(0x1D8)] public AtkResNode**
+    [FieldOffset(0x1D8)]
+    public AtkResNode**
         CollisionNodeList; // seems to be all collision nodes in tree, may be something else though
 
     [FieldOffset(0x1E0)] public uint CollisionNodeListCount;
 
-    public bool IsVisible
-    {
+    public bool IsVisible {
         get => (Flags & 0x20) == 0x20;
         set => Flags = value ? Flags |= 0x20 : Flags &= 0xDF;
     }

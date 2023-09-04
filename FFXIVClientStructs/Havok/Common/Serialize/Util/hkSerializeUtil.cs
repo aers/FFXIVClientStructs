@@ -1,88 +1,79 @@
-﻿namespace FFXIVClientStructs.Havok;
+namespace FFXIVClientStructs.Havok;
 
-public unsafe partial struct hkSerializeUtil
-{
-	
-	[StructLayout(LayoutKind.Explicit, Size=0x10)]
-	public struct ErrorDetails
-	{
-		public enum ErrorID : int
-		{
-			None = 0x00,
-			ReadFailed,
-			UnsupportedFormat,
-			PackfilePlatform,
-			VersioningFailed,
-			NonHeapObject,
-			LoadFailed,
-			DeprecatedNotInitialized,
-			MaxId,
-		}
+public unsafe partial struct hkSerializeUtil {
 
-		[FieldOffset(0x0)] public hkEnum<ErrorID, int> Id;
-		[FieldOffset(0x8)] public hkStringPtr DefaultMessage;
-	}
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
+    public struct ErrorDetails {
+        public enum ErrorID : int {
+            None = 0x00,
+            ReadFailed,
+            UnsupportedFormat,
+            PackfilePlatform,
+            VersioningFailed,
+            NonHeapObject,
+            LoadFailed,
+            DeprecatedNotInitialized,
+            MaxId,
+        }
 
-	[Flags]
-	public enum SaveOptionBits : int
-	{
-		Default = 0x00,
-		TextFormat = 0x01,
-		SerializeIgnoredMembers = 0x02,
-		WriteAttributes = 0x04,
-		Concise = 0x08,
-	}
+        [FieldOffset(0x0)] public hkEnum<ErrorID, int> Id;
+        [FieldOffset(0x8)] public hkStringPtr DefaultMessage;
+    }
 
-	[StructLayout(LayoutKind.Explicit, Size = 0x4)]
-	public struct SaveOptions
-	{
-		[FieldOffset(0x00)] public hkFlags<SaveOptionBits, int> Flags;
-	}
+    [Flags]
+    public enum SaveOptionBits : int {
+        Default = 0x00,
+        TextFormat = 0x01,
+        SerializeIgnoredMembers = 0x02,
+        WriteAttributes = 0x04,
+        Concise = 0x08,
+    }
 
-	[Flags]
-	public enum LoadOptionBits : int
-	{
-		Default = 0x00,
-		FailIfVersioning = 0x01,
-		Forced = 0x02,
-	}
-	
-	[StructLayout(LayoutKind.Explicit, Size = 0x18)]
-	public struct LoadOptions
-	{
-		[FieldOffset(0x0)] public hkFlags<LoadOptionBits, int> Flags;
-		[FieldOffset(0x8)] public hkClassNameRegistry* ClassNameRegistry;
-		[FieldOffset(0x10)] public hkTypeInfoRegistry* TypeInfoRegistry;
-	}
+    [StructLayout(LayoutKind.Explicit, Size = 0x4)]
+    public struct SaveOptions {
+        [FieldOffset(0x00)] public hkFlags<SaveOptionBits, int> Flags;
+    }
 
-	[MemberFunction("E8 ?? ?? ?? ?? 48 8B F0 48 85 C0 74 51 48 8B 18")]
-	public static partial hkResource* Load(hkStreamReader* streamReader, ErrorDetails* errorResult, LoadOptions* loadOptions);
+    [Flags]
+    public enum LoadOptionBits : int {
+        Default = 0x00,
+        FailIfVersioning = 0x01,
+        Forced = 0x02,
+    }
 
-	[MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 81 EC ?? ?? ?? ?? 49 8B E8")]
-	public static partial hkResource* LoadFromBuffer(void* buf, int bufLen, ErrorDetails* errorResult, LoadOptions* loadOptions);
+    [StructLayout(LayoutKind.Explicit, Size = 0x18)]
+    public struct LoadOptions {
+        [FieldOffset(0x0)] public hkFlags<LoadOptionBits, int> Flags;
+        [FieldOffset(0x8)] public hkClassNameRegistry* ClassNameRegistry;
+        [FieldOffset(0x10)] public hkTypeInfoRegistry* TypeInfoRegistry;
+    }
 
-	[MemberFunction("40 53 48 83 EC 30 8B 44 24 60 48 8B D9 89 44 24 28")]
-	public static partial hkResult* Save(hkResult* result, void* hkObject, hkClass* klass, hkStreamWriter* writer,
-		SaveOptions options);
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B F0 48 85 C0 74 51 48 8B 18")]
+    public static partial hkResource* Load(hkStreamReader* streamReader, ErrorDetails* errorResult, LoadOptions* loadOptions);
 
-	// there's a function that does this in the game but unfortunately its not siggable safely, so we'll just replicate what the function does here
-	public static hkResource* LoadFromFile(byte* fileName, ErrorDetails* errorResult, LoadOptions* loadOptions)
-	{
-		hkIstream* inputStream = stackalloc hkIstream[1];
-		inputStream->Ctor2(fileName);
+    [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 81 EC ?? ?? ?? ?? 49 8B E8")]
+    public static partial hkResource* LoadFromBuffer(void* buf, int bufLen, ErrorDetails* errorResult, LoadOptions* loadOptions);
 
-		hkResource* resource = Load(inputStream->StreamReader.ptr, errorResult, loadOptions);
+    [MemberFunction("40 53 48 83 EC 30 8B 44 24 60 48 8B D9 89 44 24 28")]
+    public static partial hkResult* Save(hkResult* result, void* hkObject, hkClass* klass, hkStreamWriter* writer,
+        SaveOptions options);
 
-		inputStream->Dtor();
+    // there's a function that does this in the game but unfortunately its not siggable safely, so we'll just replicate what the function does here
+    public static hkResource* LoadFromFile(byte* fileName, ErrorDetails* errorResult, LoadOptions* loadOptions) {
+        hkIstream* inputStream = stackalloc hkIstream[1];
+        inputStream->Ctor2(fileName);
 
-		return resource;
-	}
+        hkResource* resource = Load(inputStream->StreamReader.ptr, errorResult, loadOptions);
 
-	public static hkResource* LoadFromFile(ReadOnlySpan<byte> fileName, ErrorDetails* errorResult, LoadOptions* loadOptions)
-	{
-		fixed (byte* n = fileName)
-			return LoadFromFile(n, errorResult, loadOptions);
-	}
+        inputStream->Dtor();
+
+        return resource;
+    }
+
+    public static hkResource* LoadFromFile(ReadOnlySpan<byte> fileName, ErrorDetails* errorResult, LoadOptions* loadOptions) {
+        fixed (byte* n = fileName)
+            return LoadFromFile(n, errorResult, loadOptions);
+    }
 }
 
 

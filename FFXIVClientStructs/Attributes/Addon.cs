@@ -1,9 +1,7 @@
-﻿namespace FFXIVClientStructs.Attributes;
+namespace FFXIVClientStructs.Attributes;
 
-public class Addon : Attribute
-{
-    public Addon(params string[] addonIdentifiers)
-    {
+public class Addon : Attribute {
+    public Addon(params string[] addonIdentifiers) {
         AddonIdentifiers = addonIdentifiers;
     }
 

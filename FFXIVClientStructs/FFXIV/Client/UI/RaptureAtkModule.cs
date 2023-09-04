@@ -9,8 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //   Component::GUI::AtkModule
 //     Component::GUI::AtkModuleInterface
 [StructLayout(LayoutKind.Explicit, Size = 0x28C80)]
-public unsafe partial struct RaptureAtkModule
-{
+public unsafe partial struct RaptureAtkModule {
     public static RaptureAtkModule* Instance() => UIModule.Instance()->GetRaptureAtkModule();
 
     [FieldOffset(0x0)] public AtkModule AtkModule;
@@ -22,7 +21,7 @@ public unsafe partial struct RaptureAtkModule
     [FieldOffset(0x11910)] public RaptureAtkUnitManager RaptureAtkUnitManager;
 
     [FieldOffset(0x1B590), Obsolete("Use RaptureAtkUnitManager.Flags")] public RaptureAtkModuleFlags Flags; // TODO: this is actually at RaptureAtkUnitManager + 0x9C80
-    
+
     [FieldOffset(0x1B8A0)] public int NameplateInfoCount;
     [FieldOffset(0x1B8A8)] public NamePlateInfo NamePlateInfoArray; // 0-50, &NamePlateInfoArray[i]
 
@@ -46,15 +45,13 @@ public unsafe partial struct RaptureAtkModule
     [VirtualFunction(39)]
     public partial void SetUiVisibility(bool uiVisible);
 
-    [Obsolete("Use RaptureAtkUnitManager.IsUiVisible")]
     public bool IsUiVisible {
         get => !RaptureAtkUnitManager.Flags.HasFlag(RaptureAtkModuleFlags.UiHidden);
         set => SetUiVisibility(value);
     }
-    
+
     [StructLayout(LayoutKind.Explicit, Size = 0x248)]
-    public struct NamePlateInfo
-    {
+    public struct NamePlateInfo {
         [FieldOffset(0x00)] public GameObjectID ObjectID;
         [FieldOffset(0x30)] public Utf8String Name;
         [FieldOffset(0x98)] public Utf8String FcName;

@@ -1,4 +1,4 @@
-﻿using FFXIVClientStructs.FFXIV.Client.UI;
+using FFXIVClientStructs.FFXIV.Client.UI;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 // Client::UI::Agent::AgentInterface
@@ -7,8 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 // size = 0x8
 // ctor E8 ?? ?? ?? ?? F6 C3 01 74 0D BA ?? ?? ?? ?? 48 8B CF E8 ?? ?? ?? ?? 48 8B C7 48 8B 5C 24 ?? 48 83 C4 20 5F C3 CC 48 89 5C 24 ?? 48 89 6C 24 ?? 
 [StructLayout(LayoutKind.Explicit, Size = 0x28)]
-public unsafe partial struct AgentInterface
-{
+public unsafe partial struct AgentInterface {
     [FieldOffset(0x0)] public AtkEventInterface AtkEventInterface;
     [FieldOffset(0x10)] public UIModule* UiModule;
     [FieldOffset(0x20)] public uint AddonId;
@@ -16,7 +15,7 @@ public unsafe partial struct AgentInterface
 
     [VirtualFunction(0)]
     public partial void* ReceiveEvent(void* eventData, AtkValue* values, uint valueCount, ulong eventKind);
-    
+
     [VirtualFunction(3)]
     public partial void Show();
 

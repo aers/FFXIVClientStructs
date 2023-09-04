@@ -1,8 +1,7 @@
-﻿namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
+namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 
 // there's 20+ of these but these are the ones I've encountered/debugged
-public enum TextureFormat : uint
-{
+public enum TextureFormat : uint {
     R8G8B8A8 = 5200,
     D24S8 = 16976 // depth 28 stencil 8, see MS texture formats on google if you really care :)
 }
@@ -18,8 +17,7 @@ public enum TextureFormat : uint
 // size = 0xA8
 // ctor E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 41 B9 ?? ?? ?? ?? 48 89 07 48 8B CF
 [StructLayout(LayoutKind.Explicit, Size = 0xC0)]
-public unsafe struct Texture
-{
+public unsafe struct Texture {
     [FieldOffset(0x00)] public void* vtbl;
     [FieldOffset(0x20)] public Notifier Notifier;
     [FieldOffset(0x38)] public uint Width;

@@ -1,12 +1,11 @@
-﻿using FFXIVClientStructs.FFXIV.Client.System.Memory;
+using FFXIVClientStructs.FFXIV.Client.System.Memory;
 using FFXIVClientStructs.FFXIV.Common.Math;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x3C0)]
-public unsafe partial struct CharaViewPortrait : ICreatable
-{
+public unsafe partial struct CharaViewPortrait : ICreatable {
     [FieldOffset(0)] public CharaView Base;
 
     // Spherical Camera?
@@ -25,7 +24,7 @@ public unsafe partial struct CharaViewPortrait : ICreatable
     [FieldOffset(0x307)] public byte DirectionalLightingBrightness;
     [FieldOffset(0x308)] public ushort DirectionalLightingVerticalAngle; // -180 to 180
     [FieldOffset(0x30A)] public ushort DirectionalLightingHorizontalAngle; // -180 to 180
-    [FieldOffset(0x30B)] public byte AmbientLightingColorRed;
+    [FieldOffset(0x30C)] public byte AmbientLightingColorRed;
     [FieldOffset(0x30D)] public byte AmbientLightingColorGreen;
     [FieldOffset(0x30E)] public byte AmbientLightingColorBlue;
     [FieldOffset(0x30F)] public byte AmbientLightingBrightness;
@@ -139,8 +138,7 @@ public unsafe partial struct CharaViewPortrait : ICreatable
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x34)]
-public unsafe struct ExportedPortraitData
-{
+public unsafe struct ExportedPortraitData {
     [FieldOffset(0x0)] public HalfVector4 CameraPosition;
     [FieldOffset(0x8)] public HalfVector4 CameraTarget;
     [FieldOffset(0x10)] public short ImageRotation;

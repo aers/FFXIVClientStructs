@@ -1,4 +1,5 @@
 using FFXIVClientStructs.FFXIV.Client.Game.Character.Data;
+using FFXIVClientStructs.FFXIV.Client.Game.Control;
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
 using FFXIVClientStructs.FFXIV.Client.Graphics.Vfx;
 using FFXIVClientStructs.FFXIV.Common.Math;
@@ -12,14 +13,13 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 // ctor E8 ?? ?? ?? ?? 48 8B C8 48 8B 43 08 45 33 C9
 [StructLayout(LayoutKind.Explicit, Size = 0x1B40)]
 [VTableAddress("48 8d 05 ?? ?? ?? ?? 48 8b d9 48 89 01 48 8d 05 ?? ?? ?? ?? 48 89 81 a0 01 00 00 48 8d 05 ?? ?? ?? ??", 3)]
-public unsafe partial struct Character
-{
+public unsafe partial struct Character {
     [FieldOffset(0x0)] public GameObject GameObject;
 
     [FieldOffset(0x1A8)] public CharacterData CharacterData;
-    
+
     #region This is inside a new 0x48 byte class at offset 0x1A8
-    
+
     [FieldOffset(0x1B0), Obsolete("Use CharacterData.ModelScale", false)] public float ModelScale;
     [FieldOffset(0x1B4), Obsolete("Use CharacterData.ModelCharaId", false)] public int ModelCharaId;
     [FieldOffset(0x1B8), Obsolete("Use CharacterData.ModelSkeletonId", false)] public int ModelSkeletonId;
@@ -56,22 +56,66 @@ public unsafe partial struct Character
     [Obsolete($"Use {nameof(DrawData)}.CustomizeData"), FieldOffset(0x858)] public fixed byte CustomizeData[0x1A];
 
     [FieldOffset(0x878)] public OrnamentContainer Ornament;
+    [FieldOffset(0x8E0)] public ReaperShroudContainer ReaperShroud;
     [FieldOffset(0x920)] public ActionTimelineManager ActionTimelineManager;
 
+    [Obsolete($"Use {nameof(LookTargetId)} instead.")]
     [FieldOffset(0xCB0)] public uint PlayerTargetObjectID;
+
+    /// <summary>
+    /// The current target for this character's gaze. Can be set independently of soft or hard targets, and may be set
+    /// by NPCs or minions. For players, an action cast will generally target the LookTarget (which generally will be
+    /// the soft target if set, then the hard target).
+    /// </summary>
+    /// <remarks>
+    /// Unlike other GameObjectIDs, this one appears to be set to fully 0 if the player is not looking at anything.
+    /// </remarks>
+    [FieldOffset(0xCB0)] public GameObjectID LookTargetId;
 
     [FieldOffset(0x17C0)] public Balloon Balloon;
 
-    [FieldOffset(0x19C8)] public VfxData* VfxData; 
+    [FieldOffset(0x19C8)] public VfxData* VfxData;
     [FieldOffset(0x19D0)] public VfxData* VfxData2;
     [FieldOffset(0x19F8)] public VfxData* Omen;
 
     [FieldOffset(0x1A4C)] public float Alpha;
     [FieldOffset(0x1A80)] public Companion* CompanionObject; // minion
     [FieldOffset(0x1A98)] public fixed byte FreeCompanyTag[6];
+
+    /// <summary>
+    /// The GameObjectID of the entity that currently has the combat tag on this character. May be set to a party ID if
+    /// certain conditions are met (PVP?). See <see cref="CombatTagType"/> for information about the type of tagger.
+    /// </summary>
+    /// <remarks>
+    /// A tagger is generally the first entity to deal damage to this character, and will persist until that entity
+    /// has died, at which point it will reset.
+    /// </remarks>
+    [FieldOffset(0x1AB0)] public GameObjectID CombatTaggerId;
+
+    [Obsolete($"Use {nameof(TargetId)} instead.")]
     [FieldOffset(0x1AB8)] public ulong TargetObjectID;
 
+    /// <summary>
+    /// The current (hard) target for this Character. This will not be set for the LocalPlayer.
+    /// </summary>
+    /// <remarks>
+    /// Developers should generally use <see cref="GetTargetId"/> over reading this field directly, as it will
+    /// properly handle resolving the target for the local player.
+    /// </remarks>
+    [FieldOffset(0x1AB8)] public GameObjectID TargetId;
+
+    /// <summary>
+    /// The current soft target for this Character. This will not be set for the LocalPlayer.
+    /// </summary>
+    /// <remarks>
+    /// Developers should generally use <see cref="GetSoftTargetId"/> over reading this field directly, as it will
+    /// properly handle resolving the soft target for the local player.
+    /// </remarks>
+    [FieldOffset(0x1AC0)] public GameObjectID SoftTargetId;
+
     [FieldOffset(0x1B00)] public uint NameID;
+
+    [FieldOffset(0x1B10)] public uint CompanionOwnerID;
 
     [FieldOffset(0x1B1C)] public ushort CurrentWorld;
     [FieldOffset(0x1B1E)] public ushort HomeWorld;
@@ -81,7 +125,17 @@ public unsafe partial struct Character
     [FieldOffset(0x1B26)] public CharacterModes Mode;
     [FieldOffset(0x1B27)] public byte ModeParam; // Different purpose depending on mode. See CharacterModes for more info.
     [FieldOffset(0x1B29)] public byte Battalion; // used for determining friend/enemy state
-    [FieldOffset(0x1B10)] public uint CompanionOwnerID;
+
+    /// <summary>
+    /// The type of tagger, as represented in <see cref="CombatTaggerId"/>. Known values:
+    /// <list type="bullet">
+    /// <item>0 - Entity Not Tagged</item>
+    /// <item>1 - Character Tag (players, battle NPCs, etc.)</item>
+    /// <item>2 - Party Tag (PVP?)</item>
+    /// <item>4 - Observed, but unknown.</item>
+    /// </list>
+    /// </summary>
+    [FieldOffset(0x1B31)] public byte CombatTagType;
 
     // Note: These 2 status flags might be just an ushort instead of 2 separate bytes.
 
@@ -113,19 +167,38 @@ public unsafe partial struct Character
     public bool IsAllianceMember => (StatusFlags2 & 0x10) == 0x10;
     public bool IsFriend => (StatusFlags2 & 0x20) == 0x20;
 
-    public bool IsGPoseWet
-    {
+    public bool IsGPoseWet {
         get => (StatusFlags4 & 0x20) == 0x20;
-        set => StatusFlags4 = (byte) (value ? StatusFlags4 | 0x20 : StatusFlags4 & ~0x20);
+        set => StatusFlags4 = (byte)(value ? StatusFlags4 | 0x20 : StatusFlags4 & ~0x20);
     }
 
+    /// <summary>
+    /// Gets the (hard) target ID for this character. If this character is the LocalPlayer, this will instead read the
+    /// target ID from the <see cref="TargetSystem"/>. Used for calculating ToT via /assist.
+    /// </summary>
+    /// <returns>Returns the object ID of this character's target.</returns>
+    // TODO: Update this return type to GameObjectID with next API bump.
     [MemberFunction("E8 ?? ?? ?? ?? 49 3B C7 0F 84")]
     public partial ulong GetTargetId();
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 3B FD 74 36")]
+    public partial void SetTargetId(GameObjectID id);
+
+    /// <summary>
+    /// Gets the soft target ID for this character. If this character is the LocalPlayer, this will instead read the
+    /// soft target ID from the <see cref="TargetSystem"/>.
+    /// </summary>
+    /// <returns>Returns the object ID of this character's target.</returns>
+    [MemberFunction("E8 ?? ?? ?? ?? 49 3B C5")]
+    public partial GameObjectID GetSoftTargetId();
+
+    [MemberFunction("E8 ?? ?? ?? ?? B8 ?? ?? ?? ?? 4C 3B F0")]
+    public partial void SetSoftTargetId(GameObjectID id);
 
     // Seemingly used for cutscenes and GPose.
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 9F ?? ?? ?? ?? 48 8D 8F")]
     public partial ulong CopyFromCharacter(Character* source, CopyFlags flags);
-    
+
     [Obsolete("Use CopyFromCharacter(Character*, CopyFlags)")]
     public ulong CopyFromCharacter(Character* source, uint flags) => CopyFromCharacter(source, (CopyFlags)flags);
 
@@ -137,6 +210,10 @@ public unsafe partial struct Character
 
     [MemberFunction("E8 ?? ?? ?? ?? 45 0F B6 86 ?? ?? ?? ?? 33 D2")]
     public partial void SetupBNpc(uint bNpcBaseId, uint bNpcNameId = 0);
+
+    /// <summary> Can only be used for Mounts, Minions, and Ornaments. Literally just checks if the game object at index - 1 is a character and returns that. </summary>
+    [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 48 0F 45 F8")]
+    public partial Character* GetParentCharacter();
 
     [VirtualFunction(79)]
     public partial StatusManager* GetStatusManager();
@@ -154,10 +231,9 @@ public unsafe partial struct Character
 
     [VirtualFunction(87)]
     public partial bool IsMount();
-    
+
     [StructLayout(LayoutKind.Explicit, Size = 0x170)]
-    public struct CastInfo
-    {
+    public struct CastInfo {
         [FieldOffset(0x00)] public byte IsCasting;
         [FieldOffset(0x01)] public byte Interruptible;
         [FieldOffset(0x02)] public ActionType ActionType;
@@ -181,10 +257,9 @@ public unsafe partial struct Character
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 2)]
-    public struct ForayInfo
-    {
+    public struct ForayInfo {
         [FieldOffset(0x00)] public byte ForayRank;
-        
+
         //bozja
         public byte ResistanceRank {
             get => ForayRank;
@@ -192,54 +267,84 @@ public unsafe partial struct Character
         }
 
         //eureka
-        public byte ElementalLevel  {
+        public byte ElementalLevel {
             get => ForayRank;
             set => ForayRank = value;
         }
         [FieldOffset(0x01)] public EurekaElement Element; //only on enemies
     }
-    
+
     //0x10 bytes are from the base class which is just vtable + gameobject ptr (same as Companion-/DrawDataContainer)
     [StructLayout(LayoutKind.Explicit, Size = 0x60)]
-    public struct MountContainer {
-	    [FieldOffset(0x08)] public BattleChara* OwnerObject;
-	    [FieldOffset(0x10)] public Character* MountObject;
-	    [FieldOffset(0x18)] public ushort MountId;
-	    [FieldOffset(0x1C)] public float DismountTimer;
-	    //1 in dismount animation, 4 = instant delete mount when dismounting (used for npcs and such)
-	    [FieldOffset(0x20)] public byte Flags;
-	    [FieldOffset(0x24)] public fixed uint MountedObjectIds[7];
+    public partial struct MountContainer {
+        [FieldOffset(0x00)] public void** ContainerVTable;
+        [FieldOffset(0x08)] public BattleChara* OwnerObject;
+        [FieldOffset(0x10)] public Character* MountObject;
+        [FieldOffset(0x18)] public ushort MountId;
+        [FieldOffset(0x1C)] public float DismountTimer;
+        //1 in dismount animation, 4 = instant delete mount when dismounting (used for npcs and such)
+        [FieldOffset(0x20)] public byte Flags;
+        [FieldOffset(0x24)] public fixed uint MountedObjectIds[7];
+
+        [MemberFunction("E8 ?? ?? ?? ?? 48 8B 43 ?? 80 B8 ?? ?? ?? ?? ?? 74 ?? 0F B6 90")]
+        public partial void SetupMount(short mountId, uint buddyModelTop, uint buddyModelBody, uint buddyModelLegs, byte buddyStain);
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public struct CompanionContainer {
-	    [FieldOffset(0x08)] public BattleChara* OwnerObject;
-	    [FieldOffset(0x10)] public Companion* CompanionObject;
-	    //used if minion is summoned but the object slot is taken by a mount
-	    [FieldOffset(0x18)] public ushort CompanionId;
+        [FieldOffset(0x00)] public void** ContainerVTable;
+        [FieldOffset(0x08)] public BattleChara* OwnerObject;
+        [FieldOffset(0x10)] public Companion* CompanionObject;
+        //used if minion is summoned but the object slot is taken by a mount
+        [FieldOffset(0x18)] public ushort CompanionId;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x28)]
     public struct OrnamentContainer {
-	    [FieldOffset(0x08)] public BattleChara* OwnerObject;
-	    [FieldOffset(0x10)] public Ornament* OrnamentObject;
-	    [FieldOffset(0x18)] public ushort OrnamentId;
+        [FieldOffset(0x00)] public void** ContainerVTable;
+        [FieldOffset(0x08)] public BattleChara* OwnerObject;
+        [FieldOffset(0x10)] public Ornament* OrnamentObject;
+        [FieldOffset(0x18)] public ushort OrnamentId;
     }
 
-    public enum EurekaElement : byte
-    {
+    // Reaper Shroud seems to be mostly hardcoded.
+    // It applies a transformation to NpcEquip row 2161 (which only sets the body slot to 8100,1).
+    // It also enables the Vfx in this container, and toggles the 'atr_eye_a' attribute in the model (for the red pupils).
+    // We do not actually know where all the other values come in, nothing except Flags and Vfx is actually used by Reaper Shroud (not even NpcEquipId, strangely).
+    // This probably is used by other transformations too, but we have not found any yet.
+    [StructLayout(LayoutKind.Explicit, Size = 0x40)]
+    public struct ReaperShroudContainer {
+        [FieldOffset(0x00)] public void** ContainerVTable;
+        [FieldOffset(0x08)] public BattleChara* OwnerObject;
+        [FieldOffset(0x10)] public void** VfxListenerVTable;
+        [FieldOffset(0x18)] public ushort StanceChangeId;
+        [FieldOffset(0x1C)] public uint StanceChangeState;
+        [FieldOffset(0x20)] public float Timer;
+        [FieldOffset(0x28)] public void* CopyObject;
+        [FieldOffset(0x30)] public VfxData* Vfx;
+        [FieldOffset(0x38)] public ShroudFlags Flags;
+        [FieldOffset(0x3C)] public ushort NpcEquipId;
+
+        [Flags]
+        public enum ShroudFlags : uint {
+            ShroudAttacking = 0x01, // On when the character is using a skill from reaper shroud, can be on for a short time without shroud itself being on.
+            ShroudActive = 0x02, // On as long as the transformation is enabled.
+            ShroudLoading = 0x0100, // On at the start before the VFX is loaded.
+        }
+    }
+
+    public enum EurekaElement : byte {
         None = 0,
         Fire = 1,
         Ice = 2,
         Wind = 3,
         Earth = 4,
         Lightning = 5,
-        Water = 6
+        Water = 6,
     }
 
     // Seems similar to ConditionFlag in Dalamud but not all flags are valid on the character
-    public enum CharacterModes : byte 
-    {
+    public enum CharacterModes : byte {
         None = 0, // Mode is never used
         Normal = 1, // Param always 0
         EmoteLoop = 3, // Param is an EmoteMode entry
@@ -249,11 +354,11 @@ public unsafe partial struct Character
         InPositionLoop = 11, // Param is an EmoteMode entry
         Performance = 16, // Unknown
     }
-    
+
     [Flags]
     public enum CopyFlags : uint {
         None = 0x00,
-        
+
         Mount = 0x2,
         ClassJob = 0x4,
         Companion = 0x20,
@@ -263,7 +368,7 @@ public unsafe partial struct Character
         Position = 0x10000, // includes rotation
         UseSecondaryCharaId = 0x200000,
         Ornament = 0x400000,
-        
+
         // Unknowns included to improve readability of ToString, not to be used.
         [Obsolete("do not use")] Unk000001 = 0x1,
         [Obsolete("do not use")] Unk000008 = 0x8, // Copies Character+0x1B24
@@ -280,5 +385,4 @@ public unsafe partial struct Character
         [Obsolete("do not use")] Unk080000 = 0x80000,
         [Obsolete("do not use")] Unk100000 = 0x100000,
     }
-    
 }

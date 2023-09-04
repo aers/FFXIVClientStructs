@@ -1,4 +1,4 @@
-﻿namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene; 
+namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 
 // Client::Graphics::Scene::Weapon
 //   Client::Graphics::Scene::CharacterBase

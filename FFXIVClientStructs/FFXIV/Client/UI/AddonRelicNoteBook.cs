@@ -1,4 +1,4 @@
-﻿using FFXIVClientStructs.FFXIV.Component.GUI;
+using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
@@ -7,8 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //     Component::GUI::AtkEventListener
 [Addon("RelicNoteBook")]
 [StructLayout(LayoutKind.Explicit, Size = 0xAA8)]
-public unsafe struct AddonRelicNoteBook
-{
+public unsafe struct AddonRelicNoteBook {
     [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
     [FieldOffset(0x220)] public AtkImageNode* CornerImage;
     [FieldOffset(0x228)] public AtkComponentBase* WeaponImageContainer;
@@ -19,8 +18,7 @@ public unsafe struct AddonRelicNoteBook
     [FieldOffset(0x250)] public AtkComponentList* CategoryList;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x28)]
-    public struct TargetNode
-    {
+    public struct TargetNode {
         [FieldOffset(0x0)] public AtkComponentCheckBox* CheckBox;
         [FieldOffset(0x8)] public AtkResNode* ResNode;
         [FieldOffset(0x10)] public AtkImageNode* ImageNode;

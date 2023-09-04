@@ -1,4 +1,4 @@
-﻿using FFXIVClientStructs.FFXIV.Client.Game.UI;
+using FFXIVClientStructs.FFXIV.Client.Game.UI;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
@@ -9,8 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 //     Component::GUI::AtkModuleInterface::AtkEventInterface
 [Agent(AgentId.Revive)]
 [StructLayout(LayoutKind.Explicit, Size = 0xB8)]
-public unsafe struct AgentRevive
-{
+public unsafe struct AgentRevive {
     [FieldOffset(0x0)] public AgentInterface AgentInterface;
     [FieldOffset(0x28)] public Revive* Revive; //callback for SelectYesNo
     [FieldOffset(0x38)] public byte ReviveState;

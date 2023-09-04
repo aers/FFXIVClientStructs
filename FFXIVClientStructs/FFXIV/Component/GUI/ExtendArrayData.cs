@@ -1,8 +1,7 @@
-﻿namespace FFXIVClientStructs.FFXIV.Component.GUI;
+namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x28)]
-public unsafe struct ExtendArrayData
-{
+public unsafe struct ExtendArrayData {
     [FieldOffset(0x0)] public AtkArrayData AtkArrayData;
 
     [FieldOffset(0x20)]

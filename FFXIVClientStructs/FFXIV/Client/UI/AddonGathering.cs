@@ -1,4 +1,4 @@
-﻿using FFXIVClientStructs.FFXIV.Component.GUI;
+using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
@@ -7,8 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //     Component::GUI::AtkEventListener
 [Addon("Gathering")]
 [StructLayout(LayoutKind.Explicit, Size = 0x300)]
-public unsafe struct AddonGathering
-{
+public unsafe struct AddonGathering {
     [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
     [FieldOffset(0x220)] public AtkResNode* UnkResNode220;
     [FieldOffset(0x228)] public AtkComponentCheckBox* GatheredItemComponentCheckBox1;

@@ -1,5 +1,4 @@
-﻿namespace FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
+namespace FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
 
-public struct VertexShader
-{
+public struct VertexShader {
 }

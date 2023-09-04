@@ -1,4 +1,4 @@
-﻿using FFXIVClientStructs.FFXIV.Client.Game;
+using FFXIVClientStructs.FFXIV.Client.Game;
 using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Client.UI.Misc.UserFileManager;
@@ -82,7 +82,7 @@ public unsafe partial struct RaptureHotbarModule {
     /// <param name="hotbarId">The hotbar ID (bounded between 0 and 17) to check.</param>
     /// <returns>Returns true if the hotbar is shared, false otherwise.</returns>
     public bool IsHotbarShared(uint hotbarId) {
-        return ((1 << ((int) hotbarId & 7)) & this.HotbarShareStateBitmask[hotbarId >> 3]) > 0;
+        return ((1 << ((int)hotbarId & 7)) & this.HotbarShareStateBitmask[hotbarId >> 3]) > 0;
     }
 
     /// <summary>
@@ -109,7 +109,7 @@ public unsafe struct HotBars {
         get {
             if (i < 0 || i > 17) return null;
             fixed (byte* p = data) {
-                return (HotBar*) (p + sizeof(HotBar) * i);
+                return (HotBar*)(p + sizeof(HotBar) * i);
             }
         }
     }
@@ -130,7 +130,7 @@ public unsafe struct HotBarSlots {
         get {
             if (i < 0 || i > 15) return null;
             fixed (byte* p = data) {
-                return (HotBarSlot*) (p + sizeof(HotBarSlot) * i);
+                return (HotBarSlot*)(p + sizeof(HotBarSlot) * i);
             }
         }
     }
@@ -375,7 +375,7 @@ public unsafe struct SavedHotBars {
         get {
             if (i is < 0 or > 60) return null;
             fixed (byte* p = savedHotBars) {
-                return (SavedHotBarClassJob*) (p + sizeof(SavedHotBarClassJob) * i);
+                return (SavedHotBarClassJob*)(p + sizeof(SavedHotBarClassJob) * i);
             }
         }
     }
@@ -397,7 +397,7 @@ public unsafe struct SavedHotBars {
             get {
                 if (i is < 0 or > 17) return null;
                 fixed (byte* p = bars) {
-                    return (SavedHotBarClassJobBar*) (p + sizeof(SavedHotBarClassJobBar) * i);
+                    return (SavedHotBarClassJobBar*)(p + sizeof(SavedHotBarClassJobBar) * i);
                 }
             }
         }
@@ -420,7 +420,7 @@ public unsafe struct SavedHotBars {
             get {
                 if (i is < 0 or > 16) return null;
                 fixed (byte* p = slots) {
-                    return (SavedHotBarClassJobSlot*) (p + sizeof(SavedHotBarClassJobSlot) * i);
+                    return (SavedHotBarClassJobSlot*)(p + sizeof(SavedHotBarClassJobSlot) * i);
                 }
             }
         }

@@ -1,11 +1,10 @@
-﻿using FFXIVClientStructs.FFXIV.Component.GUI;
+using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 [Addon("GSInfoEmj")]
 [StructLayout(LayoutKind.Explicit, Size = 0x258)]
-public unsafe partial struct AddonGSInfoEmj
-{
+public unsafe partial struct AddonGSInfoEmj {
     [FieldOffset(0x00)] public AtkUnitBase AtkUnitBase;
 
     [FieldOffset(0x220)] public AtkTextNode* MatchesPlayed;

@@ -1,12 +1,11 @@
-﻿using System.Text;
+using System.Text;
 using FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
 // this type is used to store data of a bunch of different kinds
 // the enum is not exhaustive, just the ones I care about so far
-public enum ValueType
-{
+public enum ValueType {
     Int = 0x3,
     Bool = 0x2,
     UInt = 0x4,
@@ -20,8 +19,7 @@ public enum ValueType
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
-public unsafe partial struct AtkValue
-{
+public unsafe partial struct AtkValue {
     [FieldOffset(0x0)] public ValueType Type;
 
     // union field

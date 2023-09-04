@@ -24,6 +24,11 @@ This support **Python3** and **IDA** only.
 `pip install dacite pyyaml` or `python -m pip install dacite pyyaml` in whichever version of python you are currently using with IDA Pro.
 If you are familiar with Poetry, the `sigmaker` extras package will do the same.
 
+## ffxiv_exdgetters.py
+This script ingests the `exh` files from the base game and renames various functions, including setting the return type of the functions to the propper sheet struct.
+
+This support **Python3.10+** and **IDA 7.4+** only.
+
 ## ffxiv_client_structs.h
 This file along with `ffxiv_client_structs_arrays.h` are rough exports of the C# struct implementations to a C header format.
 The idea being, you can import these into your choice of tool that supports them. At time of writing, both Ghidra and IDA Pro support importing C headers.

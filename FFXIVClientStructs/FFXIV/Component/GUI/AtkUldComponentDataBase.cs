@@ -1,8 +1,7 @@
-﻿namespace FFXIVClientStructs.FFXIV.Component.GUI;
+namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x9)]
-public struct AtkUldComponentDataBase
-{
+public struct AtkUldComponentDataBase {
     [FieldOffset(0x0)] public byte Index;
     [FieldOffset(0x1)] public byte Up;
     [FieldOffset(0x2)] public byte Down;

@@ -1,8 +1,7 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game.Object;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x3888)]
-public unsafe partial struct GameObjectManager
-{
+public unsafe partial struct GameObjectManager {
     [FieldOffset(0x04)] public byte Active;
     [FieldOffset(0x18)] public fixed long ObjectList[599]; // size 599 * 8
     [FieldOffset(0x12D0)] public fixed long ObjectListFiltered[599];

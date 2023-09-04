@@ -1,8 +1,7 @@
-﻿namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
+namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 [InfoProxy(InfoProxyId.Party)]
 [StructLayout(LayoutKind.Explicit, Size = 0x348)]
-public unsafe partial struct InfoProxyParty
-{
+public unsafe partial struct InfoProxyParty {
     [FieldOffset(0x00)] public InfoProxyCommonList InfoProxyCommonList;
     [FieldOffset(0xE8)] public void* UnkE8;
     [FieldOffset(0x100)] public void* Unk100;

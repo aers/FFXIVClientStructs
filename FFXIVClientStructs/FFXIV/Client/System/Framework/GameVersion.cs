@@ -1,6 +1,6 @@
-﻿using System.Text;
+using System.Text;
 
-namespace FFXIVClientStructs.FFXIV.Client.System.Framework; 
+namespace FFXIVClientStructs.FFXIV.Client.System.Framework;
 
 // Allocates a lot of space for inlined array, even though it only uses 5 strings.
 [StructLayout(LayoutKind.Explicit, Size = 0x900)]
@@ -14,7 +14,7 @@ public unsafe struct GameVersion {
     public string Stormblood => this[2];
     public string Shadowbringers => this[3];
     public string Endwalker => this[4];
-        
+
     public string this[int i] {
         get {
             if (i == 0) {

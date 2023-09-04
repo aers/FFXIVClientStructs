@@ -1,8 +1,7 @@
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x20)]
-public unsafe struct AtkArrayData
-{
+public unsafe struct AtkArrayData {
     [FieldOffset(0x0)] public void* vtbl;
     [FieldOffset(0x8)] public int Size;
     [FieldOffset(0xC)] public fixed byte SubscribedAddons[16];

@@ -1,4 +1,4 @@
-﻿using FFXIVClientStructs.FFXIV.Client.System.Framework;
+using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Common.Log;
 using FFXIVClientStructs.FFXIV.Component.Excel;
@@ -9,8 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 //   Component::Log::LogModule
 // ctor "E8 ?? ?? ?? ?? 4C 8D A7 ?? ?? ?? ?? 49 8B CC E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ??"
 [StructLayout(LayoutKind.Explicit, Size = 0x3488)]
-public unsafe partial struct RaptureLogModule
-{
+public unsafe partial struct RaptureLogModule {
     public static RaptureLogModule* Instance() => Framework.Instance()->GetUiModule()->GetRaptureLogModule();
 
     [FieldOffset(0x00)] public LogModule LogModule;
@@ -38,8 +37,7 @@ public unsafe partial struct RaptureLogModule
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 ?? 0F B6 85 ?? ?? ?? ?? 48 8D 8D")]
     public partial bool GetLogMessageDetail(int index, short* logKind, Utf8String* sender, Utf8String* message, uint* timeStamp);
 
-    public bool GetLogMessage(int index, out byte[] message)
-    {
+    public bool GetLogMessage(int index, out byte[] message) {
         var pMsg = stackalloc Utf8String[1];
         pMsg->Ctor();
         var result = GetLogMessage(index, pMsg);
@@ -48,8 +46,7 @@ public unsafe partial struct RaptureLogModule
         return result;
     }
 
-    public bool GetLogMessageDetail(int index, out byte[] sender, out byte[] message, out short logKind, out uint time)
-    {
+    public bool GetLogMessageDetail(int index, out byte[] sender, out byte[] message, out short logKind, out uint time) {
         var pMsg = stackalloc Utf8String[1];
         var pSender = stackalloc Utf8String[1];
         var pKind = stackalloc short[1];
@@ -73,8 +70,7 @@ public unsafe partial struct RaptureLogModule
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
-public struct LogMessageSource
-{
+public struct LogMessageSource {
     [FieldOffset(0x00)] public ulong ContentId;
     [FieldOffset(0x08)] public int LogMessageIndex;
     [FieldOffset(0x0C)] public short World;
@@ -82,8 +78,7 @@ public struct LogMessageSource
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x928)]
-public struct RaptureLogModuleTab
-{
+public struct RaptureLogModuleTab {
     [FieldOffset(0x00)] public Utf8String Name;
     [FieldOffset(0x68)] public Utf8String VisibleLogLines;
 }

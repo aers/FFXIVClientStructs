@@ -3,8 +3,7 @@ using FFXIVClientStructs.FFXIV.Client.System.Memory;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
-public enum TextureType : byte
-{
+public enum TextureType : byte {
     Resource = 1,
     Crest = 2,
     KernelTexture = 3
@@ -15,8 +14,7 @@ public enum TextureType : byte
 // size = 0x18
 // no explicit ctor
 [StructLayout(LayoutKind.Explicit, Size = 0x18)]
-public unsafe partial struct AtkTexture : ICreatable
-{
+public unsafe partial struct AtkTexture : ICreatable {
     [FieldOffset(0x0)] public void* vtbl;
 
     // union type

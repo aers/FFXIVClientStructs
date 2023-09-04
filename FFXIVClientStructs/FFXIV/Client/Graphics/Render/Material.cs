@@ -1,6 +1,6 @@
 using FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 
-namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render; 
+namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x20)]
 public unsafe struct Material {

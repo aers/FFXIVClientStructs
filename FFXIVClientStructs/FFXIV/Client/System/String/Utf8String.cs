@@ -1,4 +1,4 @@
-﻿using System.Text;
+using System.Text;
 using FFXIVClientStructs.FFXIV.Client.System.Memory;
 
 namespace FFXIVClientStructs.FFXIV.Client.System.String;
@@ -7,8 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.System.String;
 // size = 0x68
 // ctor E8 ?? ?? ?? ?? 44 2B F7 
 [StructLayout(LayoutKind.Explicit, Size = 0x68)]
-public unsafe partial struct Utf8String : ICreatable
-{
+public unsafe partial struct Utf8String : ICreatable {
     [FieldOffset(0x0)] public byte* StringPtr; // pointer to null-terminated string
     [FieldOffset(0x8)] public long BufSize; // default buffer = 0x40
     [FieldOffset(0x10)] public long BufUsed;
@@ -20,18 +19,16 @@ public unsafe partial struct Utf8String : ICreatable
     public static Utf8String* FromString(string str)
         => FromString(str, IMemorySpace.GetDefaultSpace());
 
-    public static Utf8String* FromString(string str, IMemorySpace* memorySpace)
-    {
+    public static Utf8String* FromString(string str, IMemorySpace* memorySpace) {
         var newString = memorySpace->Create<Utf8String>();
         newString->SetString(str);
         return newString;
     }
 
-    public override string ToString()
-    {
+    public override string ToString() {
         if (StringPtr == null || BufUsed <= 1)
             return string.Empty;
-        return Encoding.UTF8.GetString(StringPtr, (int) BufUsed - 1);
+        return Encoding.UTF8.GetString(StringPtr, (int)BufUsed - 1);
     }
 
     [MemberFunction("E8 ?? ?? ?? ?? 44 2B F7")]
