@@ -1,8 +1,7 @@
-﻿namespace FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
+namespace FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x27D8)]
-public unsafe partial struct InstanceContentDeepDungeon
-{
+public unsafe partial struct InstanceContentDeepDungeon {
     [FieldOffset(0x00)] public InstanceContentDirector InstanceContentDirector;
 
     [FixedSizeArray<DeepDungeonPartyInfo>(4)]
@@ -22,15 +21,13 @@ public unsafe partial struct InstanceContentDeepDungeon
     [FieldOffset(0x1DCB)] public byte HoardCount;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x08)]
-    public struct DeepDungeonPartyInfo
-    {
+    public struct DeepDungeonPartyInfo {
         [FieldOffset(0x00)] public uint ObjectId;
         [FieldOffset(0x04)] public sbyte RoomIndex;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x03)]
-    public struct DeepDungeonItemInfo
-    {
+    public struct DeepDungeonItemInfo {
         [FieldOffset(0x00)] public byte ItemId;
         [FieldOffset(0x01)] public byte Count;
         [FieldOffset(0x02)] public byte Flags;
@@ -40,8 +37,7 @@ public unsafe partial struct InstanceContentDeepDungeon
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x02)]
-    public struct DeepDungeonChestInfo
-    {
+    public struct DeepDungeonChestInfo {
         [FieldOffset(0x00)] public byte ChestType;
         [FieldOffset(0x01)] public sbyte RoomIndex;
     }

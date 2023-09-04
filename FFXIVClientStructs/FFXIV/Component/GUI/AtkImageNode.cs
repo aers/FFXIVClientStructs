@@ -1,10 +1,9 @@
-﻿using System.Text;
+using System.Text;
 using FFXIVClientStructs.FFXIV.Client.System.Memory;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
-public enum ImageNodeFlags
-{
+public enum ImageNodeFlags {
     FlipH = 0x01,
     FlipV = 0x02,
 
@@ -21,8 +20,7 @@ public enum ImageNodeFlags
 // common CreateAtkNode function E8 ?? ?? ?? ?? 48 8B 4E 08 49 8B D5 
 // type 2
 [StructLayout(LayoutKind.Explicit, Size = 0xB8)]
-public unsafe partial struct AtkImageNode : ICreatable
-{
+public unsafe partial struct AtkImageNode : ICreatable {
     [FieldOffset(0x0)] public AtkResNode AtkResNode;
     [FieldOffset(0xA8)] public AtkUldPartsList* PartsList;
     [FieldOffset(0xB0)] public ushort PartId;

@@ -1,10 +1,9 @@
-﻿using FFXIVClientStructs.FFXIV.Client.System.String;
+using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 [InfoProxy(InfoProxyId.SearchComment)]
 [StructLayout(LayoutKind.Explicit, Size = 0x240)]
-public unsafe partial struct InfoProxySearchComment
-{
+public unsafe partial struct InfoProxySearchComment {
     [FieldOffset(0x00)] public InfoProxyInterface InfoProxyInterface;
     [FieldOffset(0x20)] public void* Unk20;
     [FieldOffset(0x3a)] public fixed byte SearchCommentAsByteArr[62]; //Length is guessed

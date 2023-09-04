@@ -3,10 +3,8 @@ using System.IO;
 
 namespace CExporter;
 
-public class Program
-{
-    public static void Main(string[] _)
-    {
+public class Program {
+    public static void Main(string[] _) {
         const string outputBase = "../../../../";
 
         ExporterBase exporter = new ExporterIDA();
@@ -22,8 +20,7 @@ public class Program
         Console.Clear();
         Console.SetCursorPosition(0, 0);
 
-        if (exporter.Errored)
-        {
+        if (exporter.Errored) {
             Console.Clear();
             Console.SetCursorPosition(0, 0);
             foreach (var (_, value) in ExporterStatics.ErrorListDictionary)
@@ -32,7 +29,7 @@ public class Program
         }
 
         // ReSharper disable once InvertIf
-        if(ExporterStatics.WarningListDictionary.Count > 0)
+        if (ExporterStatics.WarningListDictionary.Count > 0)
             foreach (var (_, value) in ExporterStatics.WarningListDictionary)
                 Console.WriteLine(value);
     }

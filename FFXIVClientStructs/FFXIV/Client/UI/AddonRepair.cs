@@ -1,4 +1,4 @@
-﻿using FFXIVClientStructs.FFXIV.Component.GUI;
+using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
@@ -7,8 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //     Component::GUI::AtkEventListener
 [Addon("Repair")]
 [StructLayout(LayoutKind.Explicit, Size = 0xF7A0)]
-public unsafe struct AddonRepair
-{
+public unsafe struct AddonRepair {
     [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
 
     [FieldOffset(0x228)] public AtkTextNode* UnusedText1; // Top right corner

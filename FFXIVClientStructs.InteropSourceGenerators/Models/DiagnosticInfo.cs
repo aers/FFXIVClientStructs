@@ -1,4 +1,4 @@
-﻿// from https://github.com/CommunityToolkit/dotnet/blob/main/src/CommunityToolkit.Mvvm.SourceGenerators/Models/DiagnosticInfo.cs
+// from https://github.com/CommunityToolkit/dotnet/blob/main/src/CommunityToolkit.Mvvm.SourceGenerators/Models/DiagnosticInfo.cs
 // see ThirdPartyLicenses.txt for more info
 
 // Licensed to the .NET Foundation under one or more agreements.
@@ -26,14 +26,12 @@ internal sealed record DiagnosticInfo(
     DiagnosticDescriptor Descriptor,
     SyntaxTree? SyntaxTree,
     TextSpan TextSpan,
-    Seq<string> Arguments)
-{
+    Seq<string> Arguments) {
     /// <summary>
     ///     Creates a new <see cref="Diagnostic" /> instance with the state from this model.
     /// </summary>
     /// <returns>A new <see cref="Diagnostic" /> instance with the state from this model.</returns>
-    public Diagnostic ToDiagnostic()
-    {
+    public Diagnostic ToDiagnostic() {
         if (SyntaxTree is not null)
             return Diagnostic.Create(Descriptor, Location.Create(SyntaxTree, TextSpan), Arguments.ToArray());
 
@@ -47,8 +45,7 @@ internal sealed record DiagnosticInfo(
     /// <param name="symbol">The source <see cref="ISymbol" /> to attach the diagnostics to.</param>
     /// <param name="args">The optional arguments for the formatted message to include.</param>
     /// <returns>A new <see cref="DiagnosticInfo" /> instance with the specified parameters.</returns>
-    public static DiagnosticInfo Create(DiagnosticDescriptor descriptor, ISymbol symbol, params object[] args)
-    {
+    public static DiagnosticInfo Create(DiagnosticDescriptor descriptor, ISymbol symbol, params object[] args) {
         Location location = symbol.Locations.First();
 
         return new DiagnosticInfo(descriptor, location.SourceTree, location.SourceSpan,
@@ -62,8 +59,7 @@ internal sealed record DiagnosticInfo(
     /// <param name="node">The source <see cref="SyntaxNode" /> to attach the diagnostics to.</param>
     /// <param name="args">The optional arguments for the formatted message to include.</param>
     /// <returns>A new <see cref="DiagnosticInfo" /> instance with the specified parameters.</returns>
-    public static DiagnosticInfo Create(DiagnosticDescriptor descriptor, SyntaxNode node, params object[] args)
-    {
+    public static DiagnosticInfo Create(DiagnosticDescriptor descriptor, SyntaxNode node, params object[] args) {
         Location location = node.GetLocation();
 
         return new DiagnosticInfo(descriptor, location.SourceTree, location.SourceSpan,

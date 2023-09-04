@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using System.Reflection.PortableExecutable;
 using FFXIVClientStructs.Interop;
 
@@ -15,8 +15,7 @@ reader.GetSectionData(textHeader.Name).GetContent().CopyTo(relocFile.Slice(textH
 reader.GetSectionData(rdataHeader.Name).GetContent().CopyTo(relocFile.Slice(rdataHeader.VirtualAddress, rdataHeader.VirtualSize));
 reader.GetSectionData(dataHeader.Name).GetContent().CopyTo(relocFile.Slice(dataHeader.VirtualAddress, dataHeader.VirtualSize));
 
-unsafe
-{
+unsafe {
     fixed (byte* bytes = relocFile) {
         var totalSigCount = Resolver.GetInstance.Addresses.Count;
         Console.WriteLine($"Unresolved count: {totalSigCount}");
@@ -24,7 +23,7 @@ unsafe
         Resolver.GetInstance.SetupSearchSpace(new IntPtr(bytes), relocFile.Length, textHeader.VirtualAddress,
             textHeader.VirtualSize, dataHeader.VirtualAddress, dataHeader.VirtualSize,
             rdataHeader.VirtualAddress, rdataHeader.VirtualSize);
-        
+
         var watch = new Stopwatch();
         watch.Start();
         Resolver.GetInstance.Resolve();
@@ -32,10 +31,10 @@ unsafe
         Console.WriteLine($"Resolved in {watch.ElapsedMilliseconds}ms");
 
         var resolvedCount = Resolver.GetInstance.Addresses.Count(sig => sig.Value != 0);
-        Console.WriteLine($"Resolved count: {resolvedCount} ({((float) resolvedCount / totalSigCount) * 100}%)");
+        Console.WriteLine($"Resolved count: {resolvedCount} ({((float)resolvedCount / totalSigCount) * 100}%)");
 
         Console.WriteLine("\n=== Static Addresses ===");
-        foreach(var address in Resolver.GetInstance.Addresses.Where(address => address is StaticAddress))
+        foreach (var address in Resolver.GetInstance.Addresses.Where(address => address is StaticAddress))
             Console.WriteLine($"{address.Name} - {address.String} - {address.Value - new UIntPtr(bytes):X16}");
     }
 }

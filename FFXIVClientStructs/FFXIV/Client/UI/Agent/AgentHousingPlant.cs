@@ -1,6 +1,6 @@
-﻿using FFXIVClientStructs.FFXIV.Component.GUI;
+using FFXIVClientStructs.FFXIV.Component.GUI;
 
-namespace FFXIVClientStructs.FFXIV.Client.UI.Agent; 
+namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.HousingPlant)]
 [StructLayout(LayoutKind.Explicit, Size = 0x950)]
@@ -24,7 +24,7 @@ public unsafe partial struct AgentHousingPlant {
     public struct SelectedItem {
         [FieldOffset(0x00)] public uint InventoryId;
         [FieldOffset(0x04)] public ushort InventorySlot;
-        
+
         [FieldOffset(0x08)] public uint ItemId;
     }
 

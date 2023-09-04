@@ -1,10 +1,8 @@
-﻿namespace FFXIVClientStructs.Interop.Attributes;
+namespace FFXIVClientStructs.Interop.Attributes;
 
 [AttributeUsage(AttributeTargets.Method)]
-public class MemberFunctionAttribute : Attribute
-{
-    public MemberFunctionAttribute(string signature)
-    {
+public class MemberFunctionAttribute : Attribute {
+    public MemberFunctionAttribute(string signature) {
         this.Signature = signature;
     }
 

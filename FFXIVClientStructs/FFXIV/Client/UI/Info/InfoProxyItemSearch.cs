@@ -1,9 +1,8 @@
-﻿using FFXIVClientStructs.FFXIV.Client.System.String;
+using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 [StructLayout(LayoutKind.Explicit, Size = 0x3C8)]
-public unsafe partial struct InfoProxyItemSearch
-{
+public unsafe partial struct InfoProxyItemSearch {
     [FieldOffset(0x000)] public InfoProxyPageInterface InfoProxyPageInterface;
 
     [FieldOffset(0x028)] public Utf8String Query;
@@ -12,8 +11,7 @@ public unsafe partial struct InfoProxyItemSearch
     [FieldOffset(0x90)] public fixed byte Entries[20 * 0x8];
 
     [StructLayout(LayoutKind.Explicit, Size = 0x8)]
-    public struct Entry
-    {
+    public struct Entry {
         [FieldOffset(0x0)] public uint ItemID;
         [FieldOffset(0x4)] public uint Count;
     }

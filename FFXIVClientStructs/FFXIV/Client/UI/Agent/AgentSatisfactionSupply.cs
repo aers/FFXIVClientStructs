@@ -1,12 +1,11 @@
-﻿using FFXIVClientStructs.FFXIV.Client.System.String;
+using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.SatisfactionSupply)]
 [StructLayout(LayoutKind.Explicit, Size = 0x500)]
-public unsafe partial struct AgentSatisfactionSupply
-{
+public unsafe partial struct AgentSatisfactionSupply {
     [FieldOffset(0x00)] public AgentInterface AgentInterface;
 
     [FieldOffset(0x40)] public SatisfactionSupplyNpcInfo NpcInfo;
@@ -50,8 +49,7 @@ public unsafe partial struct AgentSatisfactionSupply
     [FieldOffset(0x4EC)] public uint TimeRemainingMinutes;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x1A)]
-    public struct SatisfactionSupplyNpcInfo
-    {
+    public struct SatisfactionSupplyNpcInfo {
         [FieldOffset(0x00)] public uint Id;
         [FieldOffset(0x04)] public uint SatisfactionRank;
         [FieldOffset(0x14)] public ushort SelectedItemIndex;
@@ -59,8 +57,7 @@ public unsafe partial struct AgentSatisfactionSupply
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x3C)]
-    public struct ItemInfo
-    {
+    public struct ItemInfo {
         [FieldOffset(0x00)] public uint Id;
         [FieldOffset(0x04)] public ushort Collectability1;
         [FieldOffset(0x06)] public ushort Collectability2;
@@ -68,7 +65,7 @@ public unsafe partial struct AgentSatisfactionSupply
         [FieldOffset(0x0A)] public ushort Bonus;
         [FieldOffset(0x0C)] public uint Reward1Id;
         [FieldOffset(0x10)] public uint Reward2Id;
-        
+
         // These 2 are only set for Fishing items
         [FieldOffset(0x38)] public ushort FishingSpotId;
         [FieldOffset(0x3A)] public ushort SpearFishingSpotId;
@@ -76,7 +73,6 @@ public unsafe partial struct AgentSatisfactionSupply
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x108)]
-public unsafe partial struct AgentDeliveryItemInfo
-{
+public unsafe partial struct AgentDeliveryItemInfo {
     [FieldOffset(0xA0)] public Utf8String ItemName;
 }

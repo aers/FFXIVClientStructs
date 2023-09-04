@@ -1,12 +1,11 @@
-﻿using FFXIVClientStructs.FFXIV.Client.Graphics.Render;
+using FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 using FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
 // Class name unknown
 [StructLayout(LayoutKind.Explicit, Size = 0x20)]
-public unsafe struct AtkTextureResource
-{
+public unsafe struct AtkTextureResource {
     [FieldOffset(0x0)] public uint TexPathHash; // crc32(full path)
     [FieldOffset(0x4)] public int IconID;
     [FieldOffset(0x8)] public TextureResourceHandle* TexFileResourceHandle;

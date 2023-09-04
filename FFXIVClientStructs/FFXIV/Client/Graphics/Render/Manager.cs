@@ -1,14 +1,12 @@
-﻿namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
+namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 // Client::Graphics::Render::Manager
 //  Client::Graphics::Singleton<Client::Graphics::Render::Manager>
 
 // size = 0x2D6C0
 // ctor 48 89 01 48 8D 59 08 
 [StructLayout(LayoutKind.Explicit, Size = 0x2D730)]
-public unsafe partial struct Manager
-{
-    public enum RenderViews : uint
-    {
+public unsafe partial struct Manager {
+    public enum RenderViews : uint {
         OmniShadow0 = 0,
         OmniShadow1,
         OmniShadow2,
@@ -43,8 +41,7 @@ public unsafe partial struct Manager
         Unused // unused in retail
     }
 
-    public enum RenderSubViews : uint
-    {
+    public enum RenderSubViews : uint {
         Shadow0 = 0,
         Shadow1,
         Shadow2,

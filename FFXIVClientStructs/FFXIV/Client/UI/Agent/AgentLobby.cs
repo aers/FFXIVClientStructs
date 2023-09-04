@@ -8,8 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.Lobby)]
 [VTableAddress("48 8D 05 ?? ?? ?? ?? 48 89 71 18 48 89 01", 3)]
 [StructLayout(LayoutKind.Explicit, Size = 0x1DD0)]
-public unsafe partial struct AgentLobby
-{
+public unsafe partial struct AgentLobby {
     public static AgentLobby* Instance()
         => (AgentLobby*)AgentModule.Instance()->GetAgentByInternalId(AgentId.Lobby);
 
@@ -17,7 +16,7 @@ public unsafe partial struct AgentLobby
 
     [FieldOffset(0x40)] public LobbyData LobbyData; // for lack of a better name
     [FieldOffset(0xA00)] public UIModule* UIModule;
-    
+
     [FieldOffset(0xA40)] public ExcelSheet* ErrorSheet;
     [FieldOffset(0xA48)] public ExcelSheet* LobbySheet;
     //[FieldOffset(0xA50)] public NetworkModuleProxy* NetworkModuleProxy;
@@ -44,8 +43,7 @@ public unsafe partial struct AgentLobby
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x9C0)]
-public unsafe partial struct LobbyData
-{
+public unsafe partial struct LobbyData {
     [FieldOffset(0)] public AgentLobby* AgentLobby;
     [FieldOffset(0x8)] public LobbyUIClient LobbyUIClient;
 
@@ -57,8 +55,7 @@ public unsafe partial struct LobbyData
 
 [VTableAddress("48 8D 05 ?? ?? ?? ?? 48 8B F9 48 89 01 48 81 C1 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 8F", 3)]
 [StructLayout(LayoutKind.Explicit, Size = 0x848)]
-public unsafe partial struct LobbyUIClient
-{
+public unsafe partial struct LobbyUIClient {
     //[FieldOffset(0x10)] public NetworkModuleProxy* NetworkModuleProxy;
     //[FieldOffset(0x18)] public ?* SomeNetworkConfig; // contains hosts and ports
 
@@ -68,8 +65,7 @@ public unsafe partial struct LobbyUIClient
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x54)]
-public unsafe struct LobbyDataCenterWorldEntry
-{
+public unsafe struct LobbyDataCenterWorldEntry {
     [FieldOffset(0)] public ushort Id; // RowId in World sheet
     [FieldOffset(0x2)] public ushort Index;
 
@@ -88,8 +84,7 @@ public unsafe struct LobbySubscriptionInfo // name probably totally wrong
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x6F8)]
-public unsafe struct CharaSelectCharacterEntry
-{
+public unsafe struct CharaSelectCharacterEntry {
     [FieldOffset(0x8)] public ulong ContentId;
 
     [FieldOffset(0x11)] public CharaSelectCharacterEntryLoginFlags LoginFlags;
@@ -107,8 +102,7 @@ public unsafe struct CharaSelectCharacterEntry
     [FieldOffset(0x4C0)] public CharaSelectCharacterInfo CharacterInfo; // x2?
 }
 
-public enum CharaSelectCharacterEntryLoginFlags : byte
-{
+public enum CharaSelectCharacterEntryLoginFlags : byte {
     None = 0,
     Locked = 1, // Lobby#64: "You cannot select this character with your current account."
     NameChangeRequired = 2, // Lobby#26: "A name change is required to log in with this character."
@@ -118,8 +112,7 @@ public enum CharaSelectCharacterEntryLoginFlags : byte
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x58)]
-public unsafe struct CharaSelectRetainerInfo
-{
+public unsafe struct CharaSelectRetainerInfo {
     [FieldOffset(0)] public ulong RetainerId;
     [FieldOffset(0x8)] public ulong OwnerContentId;
     [FieldOffset(0x10)] public ushort Index; // guessed
@@ -128,16 +121,14 @@ public unsafe struct CharaSelectRetainerInfo
     [FieldOffset(0x18)] public fixed byte Name[32];
 }
 
-public enum CharaSelectRetainerInfoLoginFlags : ushort
-{
+public enum CharaSelectRetainerInfoLoginFlags : ushort {
     None = 0,
 
     NameChangeRequired = 4, // Lobby#66: "Please change your retainer's name after retrieving your character's data./To log in with this character you must first change your retainer's name."
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x1E2)]
-public unsafe struct CharaSelectCharacterInfo
-{
+public unsafe struct CharaSelectCharacterInfo {
     [FieldOffset(0x8)] public fixed byte Name[32];
     [FieldOffset(0x28)] public byte CurrentClassJobId;
 
@@ -180,8 +171,7 @@ public unsafe struct CharaSelectCharacterInfo
 }
 
 [Flags]
-public enum CharaSelectCharacterConfigFlags : ushort
-{
+public enum CharaSelectCharacterConfigFlags : ushort {
     None = 0,
     HideHead = 0x01,
     HideWeapon = 0x02,
@@ -194,14 +184,13 @@ public enum CharaSelectCharacterConfigFlags : ushort
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 40 * 0x10)]
-public unsafe partial struct CharaSelectCharacterList
-{
+public unsafe partial struct CharaSelectCharacterList {
     [StaticAddress("4C 8D 3D ?? ?? ?? ?? 48 8B DA", 3)]
     public static partial CharaSelectCharacterList* Instance();
-    
+
     [StaticAddress("48 89 2D ?? ?? ?? ?? 48 8B 6C 24", 3, true)]
     public static partial Character* GetCurrentCharacter();
-    
+
     [MemberFunction("E8 ?? ?? ?? ?? 66 44 89 B6")]
     public static partial void CleanupCharacters();
 
@@ -210,8 +199,7 @@ public unsafe partial struct CharaSelectCharacterList
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
-public struct CharaSelectCharacterMapping
-{
+public struct CharaSelectCharacterMapping {
     [FieldOffset(0)] public ulong ContentId;
     [FieldOffset(8)] public short ClientObjectIndex; // index in ClientObjectManager
 }

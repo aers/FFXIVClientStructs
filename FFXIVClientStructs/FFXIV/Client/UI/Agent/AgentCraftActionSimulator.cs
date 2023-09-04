@@ -1,4 +1,4 @@
-﻿using FFXIVClientStructs.FFXIV.Client.System.Framework;
+using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
@@ -8,8 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 //     Component::GUI::AtkModuleInterface::AtkEventInterface
 [Agent(AgentId.CraftActionSimulator)]
 [StructLayout(LayoutKind.Explicit, Size = 0x90)]
-public unsafe struct AgentCraftActionSimulator
-{
+public unsafe struct AgentCraftActionSimulator {
     [FieldOffset(0x0)] public AgentInterface AgentInterface;
 
     [FieldOffset(0x28)] public ProgressEfficiencyCalculations* Progress; // Progress tab of the Efficiency Calculations window.
@@ -20,8 +19,7 @@ public unsafe struct AgentCraftActionSimulator
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x0108)]
-public struct ProgressEfficiencyCalculations
-{
+public struct ProgressEfficiencyCalculations {
     [FieldOffset(0x00)] public ProgressEfficiencyCalculation BasicSynthesis;
     [FieldOffset(0x18)] public ProgressEfficiencyCalculation RapidSynthesis;
     [FieldOffset(0x30)] public ProgressEfficiencyCalculation MuscleMemory;
@@ -34,8 +32,7 @@ public struct ProgressEfficiencyCalculations
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x0138)]
-public struct QualityEfficiencyCalculations
-{
+public struct QualityEfficiencyCalculations {
     [FieldOffset(0x000)] public QualityEfficiencyCalculation BasicTouch;
     [FieldOffset(0x018)] public QualityEfficiencyCalculation HastyTouch;
     [FieldOffset(0x030)] public QualityEfficiencyCalculation StandardTouch;
@@ -55,8 +52,7 @@ public struct QualityEfficiencyCalculations
 // but they each only use certain fields, so I broke it into 2 distinct structs.
 // Left this here as a template.
 [StructLayout(LayoutKind.Explicit, Size = 0x0018)]
-public struct EfficiencyCalculation
-{
+public struct EfficiencyCalculation {
     [FieldOffset(0x00)] public uint ActionId;
 
     [FieldOffset(0x04)] public uint ProgressEfficiency;
@@ -72,8 +68,7 @@ public struct EfficiencyCalculation
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x0018)]
-public struct ProgressEfficiencyCalculation
-{
+public struct ProgressEfficiencyCalculation {
     [FieldOffset(0x00)] public uint ActionId;
     [FieldOffset(0x04)] public uint ProgressEfficiency;
     [FieldOffset(0x08)] public uint ProgressIncrease;
@@ -81,16 +76,14 @@ public struct ProgressEfficiencyCalculation
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x0018)]
-public struct QualityEfficiencyCalculation
-{
+public struct QualityEfficiencyCalculation {
     [FieldOffset(0x00)] public uint ActionId;
     [FieldOffset(0x0C)] public uint QualityEfficiencyPercentage;
     [FieldOffset(0x10)] public uint QualityIncrease;
     [FieldOffset(0x16)] public ActionStatus Status;
 }
 
-public enum ActionStatus : byte
-{
+public enum ActionStatus : byte {
     Available = 0x0,
     NotYetAvailable = 0x1, // You have not yet learned this action, such as when you haven't reached the required level or completed the class mission.
     NotCurrentlyAvailable = 0x3, // This action cannot be used at this time, such as MuscleMemory on any step but 1, PreciseTouch when quality isn't Good/Excellent.

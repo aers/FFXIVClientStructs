@@ -1,4 +1,4 @@
-﻿using FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
+using FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 
 namespace FFXIVClientStructs.FFXIV.Client.System.Resource;
 // Client::System::Resource::ResourceManager
@@ -7,8 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Resource;
 // size = 0x1728
 // ctor E8 ?? ?? ?? ?? 48 89 05 ?? ?? ?? ?? 48 8B 08
 [StructLayout(LayoutKind.Explicit, Size = 0x1728)]
-public unsafe partial struct ResourceManager
-{
+public unsafe partial struct ResourceManager {
     [FieldOffset(0x8)] public ResourceGraph* ResourceGraph;
 
     [MemberFunction("44 8B 12 4D 8B D8 41 0F B7 C2 49 C1 EA 18")]

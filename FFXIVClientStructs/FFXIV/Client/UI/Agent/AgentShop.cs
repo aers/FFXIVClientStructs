@@ -1,7 +1,7 @@
-﻿using FFXIVClientStructs.FFXIV.Client.System.String;
+using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
-namespace FFXIVClientStructs.FFXIV.Client.UI.Agent; 
+namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.Shop)]
 [StructLayout(LayoutKind.Explicit, Size = 0x120)]
@@ -11,16 +11,16 @@ public unsafe struct AgentShop {
     [FieldOffset(0x00)] public AgentInterface AgentInterface;
 
     [FieldOffset(0x88)] public AtkEventInterface* EventReceiver; // can be an agent or something else
-    
+
     [FieldOffset(0x98)] public byte* ShopName; // only for SpecialShop ?
-    
+
     [FieldOffset(0xAC)] public uint DialogAddonId; // also not always used
 
     [FieldOffset(0xB8)] public ShopItem* ItemReceive;
     [FieldOffset(0xC0)] public ShopItem* ItemCost; // there is 3 of these for every item
 
     [FieldOffset(0xD0)] public int ItemReceiveCount;
-    
+
     [FieldOffset(0xDC)] public int ItemCostCount;
 
     [FieldOffset(0x100)] public int SelectedItemIndex;

@@ -1,4 +1,4 @@
-﻿using FFXIVClientStructs.FFXIV.Component.GUI;
+using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 // Client::UI::AddonTeleport
@@ -10,8 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 [Addon("Teleport")]
 [StructLayout(LayoutKind.Explicit, Size = 0x2D8)]
-public unsafe partial struct AddonTeleport
-{
+public unsafe partial struct AddonTeleport {
     [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
     [FieldOffset(0x220)] public AtkComponentRadioButton* TabHeaderAll;
     [FieldOffset(0x228)] public AtkComponentRadioButton* TabHeaderLaNoscea;

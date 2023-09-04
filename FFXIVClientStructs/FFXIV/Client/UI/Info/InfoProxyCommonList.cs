@@ -1,11 +1,10 @@
-﻿using FFXIVClientStructs.FFXIV.Client.System.String;
+using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
 [StructLayout(LayoutKind.Explicit, Size = 0xB8)]
-public unsafe partial struct InfoProxyCommonList
-{
+public unsafe partial struct InfoProxyCommonList {
     [FieldOffset(0x0)] public InfoProxyPageInterface InfoProxyPageInterface;
     [FieldOffset(0x20)] public Utf8String Unk20;
     [FieldOffset(0x88)] public byte Unk88; //Corresponding ATkModule NumberArrrayIndex
@@ -30,8 +29,7 @@ public unsafe partial struct InfoProxyCommonList
     public partial CharacterData* GetEntry(uint idx);
 
     [StructLayout(LayoutKind.Explicit, Size = 0x68)]
-    public struct CharacterData
-    {
+    public struct CharacterData {
         [FieldOffset(0x00)] public long ContentId;
         //1 byte
         /// <summary>
@@ -87,7 +85,7 @@ public unsafe partial struct InfoProxyCommonList
         [Obsolete("Use ClientLanguage")]
         [FieldOffset(0x25)] public byte MainLanguage;
         [FieldOffset(0x25)] public Language ClientLanguage;
-        
+
         /// <summary>
         /// Bitmask, Values in Dec
         /// 1 = JP
@@ -104,7 +102,7 @@ public unsafe partial struct InfoProxyCommonList
         [FieldOffset(0x4A)] public fixed byte FCTag[6];
         // 8 bytes
         [FieldOffset(0x58)] public CharIndexEntry* Index;
-        
+
         public enum Language : byte {
             JP = 0,
             EN = 1,
@@ -121,8 +119,7 @@ public unsafe partial struct InfoProxyCommonList
         }
     }
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
-    public struct CharIndexEntry
-    {
+    public struct CharIndexEntry {
         [FieldOffset(0x0)] public long ContentID;
 
         [FieldOffset(0xA)] public ushort HomeWorld;
@@ -130,13 +127,11 @@ public unsafe partial struct InfoProxyCommonList
 
     [Obsolete]//2023-03-11
     [StructLayout(LayoutKind.Explicit, Size = 0x318)]
-    public partial struct CharacterDict
-    {
+    public partial struct CharacterDict {
         [FixedSizeArray<Entry>(512)]
         [FieldOffset(0x0)] public fixed byte Entries[512 * 0x10];
         [StructLayout(LayoutKind.Explicit, Size = 0x10)]
-        public struct Entry
-        {
+        public struct Entry {
             [FieldOffset(0x0)] public ulong ContentID;
 
             [FieldOffset(0xA)] public ushort HomeWorld;
@@ -145,14 +140,12 @@ public unsafe partial struct InfoProxyCommonList
 
     [Obsolete]//2023-03-11
     [StructLayout(LayoutKind.Explicit, Size = 0x4B00)]
-    public partial struct CharacterArray
-    {
+    public partial struct CharacterArray {
         [FixedSizeArray<Entry>(200)]
         [FieldOffset(0x0)] public fixed byte Entries[200 * 0x60];
 
         [StructLayout(LayoutKind.Explicit, Size = 0x60)]
-        public struct Entry
-        {
+        public struct Entry {
             [FieldOffset(0x00)] public ulong ContentId;
             //1 byte
             /// <summary>

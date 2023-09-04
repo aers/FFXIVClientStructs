@@ -16,8 +16,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 //  0 - 7 used in BannerParty
 //
 [StructLayout(LayoutKind.Explicit, Size = 0x2C8)]
-public unsafe partial struct CharaView : ICreatable
-{
+public unsafe partial struct CharaView : ICreatable {
     [FieldOffset(0x8)] public uint State; // initialization state of KernelTexture, Camera etc. that happens in Render(), 6 = ready for use
     [FieldOffset(0xC)] public uint ClientObjectId; // ID of object in ClientObjectManager, basically ClientObjectIndex + 40
     [FieldOffset(0x10)] public uint ClientObjectIndex;
@@ -145,8 +144,7 @@ public unsafe partial struct CharaView : ICreatable
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x68)]
-public unsafe partial struct CharaViewCharacterData : ICreatable
-{
+public unsafe partial struct CharaViewCharacterData : ICreatable {
     [FieldOffset(0)] public CustomizeData CustomizeData; // see Glamourer.Customization.CharacterCustomization
     //[FieldOffset(0x1A)] public byte Unk1A;
     //[FieldOffset(0x1B)] public byte Unk1B;
@@ -162,8 +160,7 @@ public unsafe partial struct CharaViewCharacterData : ICreatable
     public static CharaViewCharacterData* Create()
         => IMemorySpace.GetUISpace()->Create<CharaViewCharacterData>();
 
-    public static CharaViewCharacterData* CreateFromLocalPlayer()
-    {
+    public static CharaViewCharacterData* CreateFromLocalPlayer() {
         var obj = Create();
         obj->ImportLocalPlayerEquipment();
         return obj;
@@ -177,8 +174,7 @@ public unsafe partial struct CharaViewCharacterData : ICreatable
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x20)]
-public unsafe struct CharaViewItem
-{
+public unsafe struct CharaViewItem {
     [FieldOffset(0x0)] public byte SlotId;
     [FieldOffset(0x1)] public byte EquipSlotCategory;
     [FieldOffset(0x2)] public byte GlamourEquipSlotCategory;

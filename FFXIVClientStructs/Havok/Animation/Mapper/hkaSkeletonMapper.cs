@@ -1,8 +1,7 @@
-﻿namespace FFXIVClientStructs.Havok;
+namespace FFXIVClientStructs.Havok;
 
 [StructLayout(LayoutKind.Sequential)]
-public struct hkaSkeletonMapper
-{
-	public hkReferencedObject hkReferencedObject;
-	public hkaSkeletonMapperData Mapping;
+public struct hkaSkeletonMapper {
+    public hkReferencedObject hkReferencedObject;
+    public hkaSkeletonMapperData Mapping;
 }

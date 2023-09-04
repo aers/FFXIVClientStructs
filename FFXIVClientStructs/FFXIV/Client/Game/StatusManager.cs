@@ -1,8 +1,7 @@
-﻿namespace FFXIVClientStructs.FFXIV.Client.Game;
+namespace FFXIVClientStructs.FFXIV.Client.Game;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x188)]
-public unsafe partial struct StatusManager
-{
+public unsafe partial struct StatusManager {
     // This field is often null and cannot be relied on to retrieve the owning Character object
     [FieldOffset(0x0)] public Character.Character* Owner;
     [FixedSizeArray<Status>(30)]

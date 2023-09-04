@@ -1,6 +1,6 @@
-﻿using FFXIVClientStructs.FFXIV.Component.GUI;
+using FFXIVClientStructs.FFXIV.Component.GUI;
 
-namespace FFXIVClientStructs.FFXIV.Client.UI; 
+namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x248)]
 public unsafe partial struct AddonActionBarBase {
@@ -12,7 +12,7 @@ public unsafe partial struct AddonActionBarBase {
     /// Bitfield representing currently active pulses.
     /// </summary>
     [FieldOffset(0x238)] public short CurrentPulsingSlots;
-    
+
     /// <summary>
     /// The ID of the hotbar in RaptureHotbarModule that this ActionBar is currently referencing.
     /// </summary>
@@ -22,7 +22,7 @@ public unsafe partial struct AddonActionBarBase {
     [FieldOffset(0x23C)] public byte RaptureHotbarId;
 
     [FieldOffset(0x23E)] public byte SlotCount;
-    
+
     /// <summary>
     /// Whether the current hotbar is considered a "shared" hotbar or not.
     /// </summary>

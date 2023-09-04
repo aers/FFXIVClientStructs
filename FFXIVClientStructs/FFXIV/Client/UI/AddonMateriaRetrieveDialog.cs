@@ -1,4 +1,4 @@
-﻿using FFXIVClientStructs.FFXIV.Component.GUI;
+using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
@@ -7,7 +7,6 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //     Component::GUI::AtkEventListener
 [Addon("MateriaRetrieveDialog")]
 [StructLayout(LayoutKind.Explicit, Size = 0x220)]
-public struct AddonMateriaRetrieveDialog
-{
+public struct AddonMateriaRetrieveDialog {
     [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
 }

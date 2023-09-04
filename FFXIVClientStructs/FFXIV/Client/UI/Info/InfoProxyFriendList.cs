@@ -1,11 +1,10 @@
-﻿using FFXIVClientStructs.FFXIV.Client.System.String;
+using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
 [InfoProxy(InfoProxyId.FriendList)]
 [StructLayout(LayoutKind.Explicit, Size = 0x3AD0)]
-public unsafe partial struct InfoProxyFriendList
-{
+public unsafe partial struct InfoProxyFriendList {
     [FieldOffset(0x00)] public InfoProxyCommonList InfoProxyCommonList;
     [FieldOffset(0x0D8)] public Utf8String Str2;
     [FieldOffset(0x140)] public Utf8String Str3;
@@ -19,8 +18,7 @@ public unsafe partial struct InfoProxyFriendList
 
 
     [StructLayout(LayoutKind.Explicit, Size = 0x40)]
-    public unsafe partial struct StrBuf
-    {
+    public unsafe partial struct StrBuf {
         [FieldOffset(0x00)] public fixed byte Data[64];
     }
 }

@@ -7,8 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //     Component::GUI::AtkEventListener
 [Addon("WeeklyBingo")]
 [StructLayout(LayoutKind.Explicit, Size = 0x23C8)]
-public unsafe struct AddonWeeklyBingo
-{
+public unsafe struct AddonWeeklyBingo {
     [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
     [FieldOffset(0x220)] public DutySlotList DutySlotList;
     [FieldOffset(0x18E8)] public StringThing StringThing;
@@ -17,8 +16,7 @@ public unsafe struct AddonWeeklyBingo
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x16C8)]
-public unsafe struct DutySlotList
-{
+public unsafe struct DutySlotList {
     [FieldOffset(0x0)] public void** vtbl;
     [FieldOffset(0x8)] public void* addon; // AddonWeeklyBingo*
     [FieldOffset(0x24)] public uint NumSecondChances;
@@ -45,8 +43,7 @@ public unsafe struct DutySlotList
     [FieldOffset(0x18D8), Obsolete("Overrun struct size do not use", true)] public AtkTextNode* SecondChancesRemaining;
     [FieldOffset(0x18E0), Obsolete("Overrun struct size do not use", true)] public AtkResNode* DutyContainer;
 
-    public DutySlot this[int index] => index switch
-    {
+    public DutySlot this[int index] => index switch {
         0 => DutySlot1,
         1 => DutySlot2,
         2 => DutySlot3,
@@ -68,8 +65,7 @@ public unsafe struct DutySlotList
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x168)]
-public unsafe struct DutySlot
-{
+public unsafe struct DutySlot {
     [FieldOffset(0x0)] public void** vtbl;
     [FieldOffset(0x8)] public AddonWeeklyBingo* addon; // AddonWeeklyBingo*
     [FieldOffset(0x10)] public int index; // 0-15
@@ -83,17 +79,19 @@ public unsafe struct DutySlot
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x50)]
-public unsafe struct StringThing
-{
+public unsafe struct StringThing {
     [FieldOffset(0x0)] public void* vtbl;
 
-    [FieldOffset(0x08)] public byte*
+    [FieldOffset(0x08)]
+    public byte*
         FullSealsText; // No more seals can be applied. Deliver the journal to Khloe Aliapoh to receive your reward.
 
-    [FieldOffset(0x10)] public byte*
+    [FieldOffset(0x10)]
+    public byte*
         OneOrMoreLinesText; // One or more lines of seals have been completed. Deliver the journal to Khloe Aliapoh to receive your reward or continue adventuring to add more seals.
 
-    [FieldOffset(0x18)] public byte*
+    [FieldOffset(0x18)]
+    public byte*
         SecondChancePointsText; // Second Chance points can be used to increase your chances of completing lines.
 
     [FieldOffset(0x20)] public byte* ReceiveSealCompleteText; // Select a completed duty to receive a seal.
@@ -104,8 +102,7 @@ public unsafe struct StringThing
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x590)]
-public unsafe struct StickerSlotList
-{
+public unsafe struct StickerSlotList {
     [FieldOffset(0x0)] public void** vtbl;
     [FieldOffset(0x8)] public void* addon; // AddonWeeklyBingo*
     [FieldOffset(0x10)] public StickerSlot StickerSlot1;
@@ -125,8 +122,7 @@ public unsafe struct StickerSlotList
     [FieldOffset(0x4E0)] public StickerSlot StickerSlot15;
     [FieldOffset(0x538)] public StickerSlot StickerSlot16;
 
-    public StickerSlot this[int index] => index switch
-    {
+    public StickerSlot this[int index] => index switch {
         0 => StickerSlot1,
         1 => StickerSlot2,
         2 => StickerSlot3,
@@ -148,8 +144,7 @@ public unsafe struct StickerSlotList
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x58)]
-public unsafe struct StickerSlot
-{
+public unsafe struct StickerSlot {
     [FieldOffset(0x0)] public void** vtbl;
     [FieldOffset(0x8)] public void* addon; // AddonWeeklyBingo*
     [FieldOffset(0x10)] public int index; // 1-16
