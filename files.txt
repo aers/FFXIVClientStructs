@@ -1,0 +1,1 @@
+FFXIVClientStructs/FFXIV/Client/UI/Agent/AgentModule.cs
