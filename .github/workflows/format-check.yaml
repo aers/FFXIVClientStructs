@@ -17,6 +17,6 @@ jobs:
           dotnet-version: 7.0.x
       - name: Install dependencies
         run: dotnet restore
-      - name: Run CExporter'
+      - name: Run Format
         working-directory: ./ida
-        run: dotnet format --verify-no-changes
+        run: dotnet format --verify-no-changes FFXIVClientStructs.sln
