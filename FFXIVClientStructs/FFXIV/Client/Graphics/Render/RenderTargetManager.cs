@@ -1,12 +1,11 @@
-﻿namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
+namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 // Client::Graphics::Render::RenderTargetManager
 //   Client::Graphics::Singleton
 //   Client::Graphics::Kernel::Notifier
 
 // WARNING: THIS IS OUT OF DATE
 [StructLayout(LayoutKind.Explicit, Size = 0x4A0)]
-public unsafe partial struct RenderTargetManager
-{
+public unsafe partial struct RenderTargetManager {
     [FieldOffset(0x0)] public void* vtbl;
 
     [FieldOffset(0x8)] public Notifier Notifier;

@@ -1,12 +1,11 @@
-﻿using FFXIVClientStructs.FFXIV.Client.System.Memory;
+using FFXIVClientStructs.FFXIV.Client.System.Memory;
 using FFXIVClientStructs.FFXIV.Common.Math;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x3C0)]
-public unsafe partial struct CharaViewPortrait : ICreatable
-{
+public unsafe partial struct CharaViewPortrait : ICreatable {
     [FieldOffset(0)] public CharaView Base;
 
     // Spherical Camera?
@@ -139,8 +138,7 @@ public unsafe partial struct CharaViewPortrait : ICreatable
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x34)]
-public unsafe struct ExportedPortraitData
-{
+public unsafe struct ExportedPortraitData {
     [FieldOffset(0x0)] public HalfVector4 CameraPosition;
     [FieldOffset(0x8)] public HalfVector4 CameraTarget;
     [FieldOffset(0x10)] public short ImageRotation;

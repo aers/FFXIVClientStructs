@@ -1,12 +1,11 @@
-﻿using FFXIVClientStructs.FFXIV.Client.System.String;
+using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 [Addon("LookingForGroupDetail")]
 [StructLayout(LayoutKind.Explicit, Size = 0x3E8)]
-public unsafe partial struct AddonLookingForGroupDetail
-{
+public unsafe partial struct AddonLookingForGroupDetail {
     [FieldOffset(0x00)] public AtkUnitBase AtkUnitBase;
 
     [FieldOffset(0x248)] public AtkComponentButton* JoinPartyButton;
@@ -26,7 +25,7 @@ public unsafe partial struct AddonLookingForGroupDetail
     [FieldOffset(0x2F0)] public AtkTextNode* ItemLevelTextNode;
     [FieldOffset(0x2F0)] public AtkTextNode* StatusTextNode;
     [FieldOffset(0x300)] public AtkTextNode* DescriptionTextNode;
-    
+
     [FieldOffset(0x308)] public Utf8String DescriptionString;
     [FieldOffset(0x370)] public Utf8String CategoriesString; // Duty Complete, Loot, One Player Per Job
 }

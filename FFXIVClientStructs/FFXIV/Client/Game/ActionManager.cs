@@ -4,8 +4,7 @@ using FFXIVClientStructs.FFXIV.Common.Math;
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x7F0)]
-public unsafe partial struct ActionManager
-{
+public unsafe partial struct ActionManager {
     [FieldOffset(0x60)] public ComboDetail Combo;
 
     [FieldOffset(0x68)] public bool ActionQueued;
@@ -135,10 +134,10 @@ public unsafe partial struct ActionManager
 
     [MemberFunction("40 53 55 57 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 33 DB")]
     public partial bool SetBlueMageActions(uint* actionArray);
-    
+
     [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 20 48 8B DA 8B F9 E8 ?? ?? ?? ?? 4C 8B C3")]
     public static partial bool CanUseActionOnTarget(uint actionId, GameObject* target);
-    
+
     /// <summary>
     /// Returns the ID of the action present at the specified Duty Action slot.
     /// </summary>
@@ -153,19 +152,18 @@ public unsafe partial struct ActionManager
 /// shared between one (or more) actions, depending on the group in question.
 /// </summary>
 [StructLayout(LayoutKind.Explicit, Size = 0x14)]
-public struct RecastDetail
-{
+public struct RecastDetail {
     /// <summary>
     /// A byte representing if this recast group is currently "active." When this is a non-zero value (true), this
     /// recast group is actively in cooldown.
     /// </summary>
     [FieldOffset(0x0)] public byte IsActive;
-    
+
     /// <summary>
     /// The last Action ID that triggered an update for this recast group. 
     /// </summary>
     [FieldOffset(0x4)] public uint ActionID;
-    
+
     /// <summary>
     /// The current "elapsed" time of this action's recharge. For most actions, this value will be set to zero when the
     /// action is used. For actions with multiple charges, this value will give "credit" for unspent actions.
@@ -179,7 +177,7 @@ public struct RecastDetail
     /// the appropriate value (defined by the action, but generally the recharge time) is subtracted from this value.
     /// </remarks>
     [FieldOffset(0x8)] public float Elapsed;
-    
+
     /// <summary>
     /// The total number of seconds this recast group takes to go from "fully exhausted" to "fully charged." For most
     /// actions, this will simply be the adjusted recast time from <see cref="ActionManager.GetAdjustedRecastTime"/>
@@ -207,8 +205,7 @@ public struct ComboDetail {
     [FieldOffset(0x04)] public uint Action;
 }
 
-public enum ActionType : byte
-{
+public enum ActionType : byte {
     None = 0x00,
     Spell = 0x01,
     Item = 0x02,

@@ -1,4 +1,4 @@
-﻿using FFXIVClientStructs.FFXIV.Component.GUI;
+using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
@@ -7,8 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //     Component::GUI::AtkEventListener
 [Addon("JournalResult")]
 [StructLayout(LayoutKind.Explicit, Size = 0x288)]
-public unsafe struct AddonJournalResult
-{
+public unsafe struct AddonJournalResult {
     [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
     [FieldOffset(0x220)] public AtkImageNode* AtkImageNode220;
     [FieldOffset(0x228)] public AtkImageNode* AtkImageNode228;

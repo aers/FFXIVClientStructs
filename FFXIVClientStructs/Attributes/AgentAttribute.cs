@@ -1,11 +1,9 @@
-﻿using FFXIVClientStructs.FFXIV.Client.UI.Agent;
+using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 namespace FFXIVClientStructs.Attributes;
 
-public class AgentAttribute : Attribute
-{
-    public AgentAttribute(AgentId agentId)
-    {
+public class AgentAttribute : Attribute {
+    public AgentAttribute(AgentId agentId) {
         ID = agentId;
     }
 

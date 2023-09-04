@@ -1,10 +1,9 @@
-﻿using FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
+using FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 
 namespace FFXIVClientStructs.FFXIV.Client.System.Scheduler.Resource;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x88)]
-public unsafe partial struct SchedulerResource
-{
+public unsafe partial struct SchedulerResource {
     [FieldOffset(0x00)] public void** VTable;
     [FieldOffset(0x08)] public SchedulerResource* Next;
     [FieldOffset(0x10)] public SchedulerResource* Previous;
@@ -14,8 +13,7 @@ public unsafe partial struct SchedulerResource
     [FieldOffset(0x7C)] public uint Consumers;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x40)]
-    public partial struct ResourceName
-    {
+    public partial struct ResourceName {
         [FieldOffset(0x00)] public void** VTable;
         [FieldOffset(0x08)] public byte* DataPointer;
         [FieldOffset(0x10)] public ushort Unk1;

@@ -1,4 +1,4 @@
-﻿using System.Drawing;
+using System.Drawing;
 using System.Text;
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
 using FFXIVClientStructs.FFXIV.Client.System.Framework;
@@ -9,11 +9,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.Context)]
 [StructLayout(LayoutKind.Explicit, Size = 0x1750)]
-public unsafe partial struct AgentContext
-{
-    public static AgentContext* Instance()
-    {
-        return (AgentContext*) Framework.Instance()->GetUiModule()->GetAgentModule()->GetAgentByInternalId(
+public unsafe partial struct AgentContext {
+    public static AgentContext* Instance() {
+        return (AgentContext*)Framework.Instance()->GetUiModule()->GetAgentModule()->GetAgentByInternalId(
             AgentId.Context);
     }
 
@@ -92,8 +90,7 @@ public unsafe partial struct AgentContext
     public partial void AddContextMenuItem2(int eventId, uint addonTextId, bool disabled = false, bool submenu = false,
         bool copyText = true);
 
-    public void SetPosition(int x, int y)
-    {
+    public void SetPosition(int x, int y) {
         Position.X = x;
         Position.Y = y;
         OpenAtPosition = 1;
@@ -101,20 +98,16 @@ public unsafe partial struct AgentContext
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x678)]
-public unsafe struct ContextMenu
-{
+public unsafe struct ContextMenu {
     [FieldOffset(0x00)] public short CurrentEventIndex;
     [FieldOffset(0x02)] public short CurrentEventId;
 
     [FieldOffset(0x08)]
     public fixed byte EventParams[0x10 * 33]; // 32 * AtkValue + 1 * AtkValue for submenus with title
 
-    public Span<AtkValue> EventParamSpan
-    {
-        get
-        {
-            fixed (byte* ptr = EventParams)
-            {
+    public Span<AtkValue> EventParamSpan {
+        get {
+            fixed (byte* ptr = EventParams) {
                 return new Span<AtkValue>(ptr, 33);
             }
         }
@@ -131,8 +124,7 @@ public unsafe struct ContextMenu
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x60)]
-public unsafe struct ContextMenuTarget
-{
+public unsafe struct ContextMenuTarget {
     [FieldOffset(0x00)] public ulong ContentId;
     [FieldOffset(0x14)] public byte AddonListIndex;
     [FieldOffset(0x16)] public ushort CurrentWorldId;

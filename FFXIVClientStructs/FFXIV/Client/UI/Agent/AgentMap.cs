@@ -1,4 +1,4 @@
-﻿using System.Numerics;
+using System.Numerics;
 using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Component.GUI;
@@ -10,8 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 //     Component::GUI::AtkModuleInterface::AtkEventInterface
 [Agent(AgentId.Map)]
 [StructLayout(LayoutKind.Explicit, Size = 0x11F70)]
-public unsafe partial struct AgentMap
-{
+public unsafe partial struct AgentMap {
     [FieldOffset(0x0)] public AgentInterface AgentInterface;
 
     [FieldOffset(0x118)] public StdMap<uint, uint> SymbolMap; // Icon:MapSymbol
@@ -112,23 +111,20 @@ public unsafe partial struct AgentMap
         return true;
     }
 
-    public void SetFlagMapMarker(uint territoryId, uint mapId, Vector3 worldPosition, uint iconId = 0xEC91)
-    {
+    public void SetFlagMapMarker(uint territoryId, uint mapId, Vector3 worldPosition, uint iconId = 0xEC91) {
         IsFlagMarkerSet = 0;
-        var mapX = (int) (MathF.Round(worldPosition.X, 3, MidpointRounding.AwayFromZero) * 1000) * 0.001f;
-        var mapY = (int) (MathF.Round(worldPosition.Z, 3, MidpointRounding.AwayFromZero) * 1000) * 0.001f;
+        var mapX = (int)(MathF.Round(worldPosition.X, 3, MidpointRounding.AwayFromZero) * 1000) * 0.001f;
+        var mapY = (int)(MathF.Round(worldPosition.Z, 3, MidpointRounding.AwayFromZero) * 1000) * 0.001f;
         SetFlagMapMarker(territoryId, mapId, mapX, mapY, iconId);
     }
 
-    public void AddGatheringTempMarker(int mapX, int mapY, int radius, uint iconId = 0, uint styleFlags = 4, string? tooltip = null)
-    {
+    public void AddGatheringTempMarker(int mapX, int mapY, int radius, uint iconId = 0, uint styleFlags = 4, string? tooltip = null) {
         var toolTip = Utf8String.FromString(tooltip ?? string.Empty);
         AddGatheringTempMarker(styleFlags, mapX, mapY, iconId, radius, toolTip);
         toolTip->Dtor();
     }
 
-    public void OpenMap(uint mapId, uint territoryId = 0, string? windowTitle = null, MapType type = MapType.FlagMarker)
-    {
+    public void OpenMap(uint mapId, uint territoryId = 0, string? windowTitle = null, MapType type = MapType.FlagMarker) {
         var title = Utf8String.FromString(windowTitle ?? string.Empty);
         var info = stackalloc OpenMapInfo[1];
         info->Type = type == MapType.FlagMarker && IsFlagMarkerSet != 1 ? MapType.Centered : type;
@@ -141,8 +137,7 @@ public unsafe partial struct AgentMap
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x38)]
-public unsafe struct MapMarkerBase
-{
+public unsafe struct MapMarkerBase {
     [FieldOffset(0x00)] public byte SubtextOrientation;
     [FieldOffset(0x01)] public byte SubtextStyle;
     [FieldOffset(0x02)] public ushort IconFlags;
@@ -157,8 +152,7 @@ public unsafe struct MapMarkerBase
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x48)]
-public struct FlagMapMarker
-{
+public struct FlagMapMarker {
     [FieldOffset(0x00)] public MapMarkerBase MapMarker;
     [FieldOffset(0x38)] public uint TerritoryId;
     [FieldOffset(0x3C)] public uint MapId;
@@ -167,8 +161,7 @@ public struct FlagMapMarker
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x48)]
-public struct MapMarkerInfo
-{
+public struct MapMarkerInfo {
     [FieldOffset(0x00)] public MapMarkerBase MapMarker;
 
     [FieldOffset(0x3C)] public ushort DataType;
@@ -178,8 +171,7 @@ public struct MapMarkerInfo
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x108)]
-public struct TempMapMarker
-{
+public struct TempMapMarker {
     [FieldOffset(0x00)] public Utf8String TooltipText;
     [FieldOffset(0x68)] public MapMarkerBase MapMarker;
 
@@ -188,8 +180,7 @@ public struct TempMapMarker
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x40)]
-public struct MiniMapMarker
-{
+public struct MiniMapMarker {
     [FieldOffset(0x00)] public ushort DataType;
     [FieldOffset(0x02)] public ushort DataKey;
 
@@ -197,8 +188,7 @@ public struct MiniMapMarker
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0xB8)]
-public struct OpenMapInfo
-{
+public struct OpenMapInfo {
     [FieldOffset(0x00)] public MapType Type;
     [FieldOffset(0x08)] public uint TerritoryId;
     [FieldOffset(0x0C)] public uint MapId;
@@ -207,8 +197,7 @@ public struct OpenMapInfo
     // there is a lot more stuff in here depending on what type of map it's used for
 }
 
-public enum MapType : uint
-{
+public enum MapType : uint {
     SharedFate = 0,
     FlagMarker = 1,
     GatheringLog = 2,

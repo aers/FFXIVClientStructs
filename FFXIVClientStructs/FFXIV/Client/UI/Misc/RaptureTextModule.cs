@@ -1,12 +1,11 @@
-﻿using FFXIVClientStructs.FFXIV.Client.System.Framework;
+using FFXIVClientStructs.FFXIV.Client.System.Framework;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
 // Client::UI::Misc::RaptureTextModule
 // ctor "E8 ?? ?? ?? ?? 48 8D 9F ?? ?? ?? ?? 4D 8B C5"
 [StructLayout(LayoutKind.Explicit, Size = 0xE58)]
-public unsafe partial struct RaptureTextModule
-{
+public unsafe partial struct RaptureTextModule {
     public static RaptureTextModule* Instance() => Framework.Instance()->GetUiModule()->GetRaptureTextModule();
 
     [MemberFunction("E9 ?? ?? ?? ?? 80 EA 20")]

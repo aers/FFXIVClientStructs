@@ -1,8 +1,7 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game.Group;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x230)]
-public unsafe struct PartyMember
-{
+public unsafe struct PartyMember {
     [FieldOffset(0x0)] public StatusManager StatusManager;
     [FieldOffset(0x190)] public float X;
     [FieldOffset(0x194)] public float Y;

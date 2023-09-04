@@ -1,4 +1,4 @@
-﻿using FFXIVClientStructs.FFXIV.Component.GUI;
+using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
@@ -6,8 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //   Component::GUI::AtkUnitBase
 //     Component::GUI::AtkEventListener
 [StructLayout(LayoutKind.Explicit, Size = 0x2E0)]
-public unsafe struct AddonRequest
-{
+public unsafe struct AddonRequest {
     [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
     [FieldOffset(0x220)] public AtkCollisionNode* AtkCollisionNode220;
     [FieldOffset(0x228)] public AtkComponentIcon* AtkComponentIcon228;
@@ -35,6 +34,6 @@ public unsafe struct AddonRequest
     [FieldOffset(0x2C0)] public AtkComponentDragDrop* AtkComponentDragDrop2C0;
     [FieldOffset(0x2C8)] public AtkComponentDragDrop* AtkComponentDragDrop2C8;
     [FieldOffset(0x2D0)] public AtkComponentDragDrop* AtkComponentDragDrop2D0;
-    
+
     [FieldOffset(0x2D8)] public int EntryCount;
 }

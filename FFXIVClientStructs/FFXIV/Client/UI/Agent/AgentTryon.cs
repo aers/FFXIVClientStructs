@@ -1,4 +1,4 @@
-﻿using FFXIVClientStructs.FFXIV.Client.System.Framework;
+using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
@@ -10,8 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.Tryon)]
 [VTableAddress("48 8D 05 ?? ?? ?? ?? 48 8D 4F 28 48 89 07 E8 ?? ?? ?? ?? 48 C7 87", 3)]
 [StructLayout(LayoutKind.Explicit, Size = 0x670)]
-public unsafe partial struct AgentTryon
-{
+public unsafe partial struct AgentTryon {
     [FieldOffset(0)] public AgentInterface AgentInterface;
 
     public static AgentTryon* Instance() => Framework.Instance()->GetUiModule()->GetAgentModule()->GetAgentTryon();

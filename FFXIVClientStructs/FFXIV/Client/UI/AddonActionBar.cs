@@ -1,4 +1,4 @@
-﻿namespace FFXIVClientStructs.FFXIV.Client.UI;
+namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 [Addon("_ActionBar")]
 [StructLayout(LayoutKind.Explicit, Size = 0x2B8)]

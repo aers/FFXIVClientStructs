@@ -8,8 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 //   Client::UI::Misc::UserFileManager::UserFileEvent
 // ctor "48 89 5C 24 ?? 57 48 83 EC 20 33 FF 48 89 51 10 48 8D 05 ?? ?? ?? ?? 48 89 79 08 48 8B D9 48 89 01 48 89 79 18 4C 8D 05 ?? ?? ?? ?? 89 79 20 8D 57 0C 48 89 79 28 89 79 3C 48 83 C1 30 E8 ?? ?? ?? ?? 89 BB"
 [StructLayout(LayoutKind.Explicit, Size = 0x11D0)]
-public unsafe partial struct ItemFinderModule
-{
+public unsafe partial struct ItemFinderModule {
     public static ItemFinderModule* Instance() => Framework.Instance()->GetUiModule()->GetItemFinderModule();
 
     [FieldOffset(0)] public UserFileEvent UserFileEvent;
@@ -45,8 +44,7 @@ public unsafe partial struct ItemFinderModule
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x1F8)]
-public unsafe struct ItemFinderModuleResult
-{
+public unsafe struct ItemFinderModuleResult {
     [FieldOffset(0x00)] public Utf8String ItemName;
     [FieldOffset(0x68)] public Utf8String ItemNameHQ;
     [FieldOffset(0xD0)] public Utf8String ItemNameCollectible;
@@ -101,8 +99,7 @@ public unsafe struct ItemFinderModuleResult
 }
 
 [StructLayout(LayoutKind.Explicit)]
-public unsafe struct ItemFinderModuleRetainerResult
-{
+public unsafe struct ItemFinderModuleRetainerResult {
     [FieldOffset(0x00)] public ItemFinderModuleRetainerResult* Next;
 
     [FieldOffset(0x20)] public long RetainerId;

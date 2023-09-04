@@ -1,4 +1,4 @@
-﻿using FFXIVClientStructs.FFXIV.Component.GUI;
+using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
@@ -7,8 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //     Component::GUI::AtkEventListener
 [Addon("LotteryDaily")]
 [StructLayout(LayoutKind.Explicit, Size = 0x408)]
-public unsafe struct AddonLotteryDaily
-{
+public unsafe struct AddonLotteryDaily {
     [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
     [FieldOffset(0x220)] public GameTileBoard GameBoard;
     [FieldOffset(0x268)] public LaneTileSelector LaneSelector;
@@ -57,14 +56,12 @@ public unsafe struct AddonLotteryDaily
     [FieldOffset(0x404)] public int UnkNumber404;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x18)]
-    public struct GameTileRow
-    {
+    public struct GameTileRow {
         [FieldOffset(0x0)] public AtkComponentCheckBox* Col1;
         [FieldOffset(0x8)] public AtkComponentCheckBox* Col2;
         [FieldOffset(0x10)] public AtkComponentCheckBox* Col3;
 
-        public AtkComponentCheckBox* this[int index] => index switch
-        {
+        public AtkComponentCheckBox* this[int index] => index switch {
             0 => Col1,
             1 => Col2,
             2 => Col3,
@@ -73,14 +70,12 @@ public unsafe struct AddonLotteryDaily
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x48)]
-    public struct GameTileBoard
-    {
+    public struct GameTileBoard {
         [FieldOffset(0x0)] public GameTileRow Row1;
         [FieldOffset(0x18)] public GameTileRow Row2;
         [FieldOffset(0x30)] public GameTileRow Row3;
 
-        public AtkComponentCheckBox* this[int index] => (index / 3) switch
-        {
+        public AtkComponentCheckBox* this[int index] => (index / 3) switch {
             0 => Row1[index % 3],
             1 => Row2[index % 3],
             2 => Row3[index % 3],
@@ -89,8 +84,7 @@ public unsafe struct AddonLotteryDaily
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x40)]
-    public struct LaneTileSelector
-    {
+    public struct LaneTileSelector {
         [FieldOffset(0x0)] public AtkComponentRadioButton* MajorDiagonal;
         [FieldOffset(0x8)] public AtkComponentRadioButton* Col1;
         [FieldOffset(0x10)] public AtkComponentRadioButton* Col2;
@@ -100,8 +94,7 @@ public unsafe struct AddonLotteryDaily
         [FieldOffset(0x30)] public AtkComponentRadioButton* Row2;
         [FieldOffset(0x38)] public AtkComponentRadioButton* Row3;
 
-        public AtkComponentRadioButton* this[int index] => index switch
-        {
+        public AtkComponentRadioButton* this[int index] => index switch {
             0 => MajorDiagonal,
             1 => Col1,
             2 => Col2,
@@ -115,14 +108,12 @@ public unsafe struct AddonLotteryDaily
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0xC)]
-    public struct GameNumberRow
-    {
+    public struct GameNumberRow {
         [FieldOffset(0x0)] public int Col1;
         [FieldOffset(0x4)] public int Col2;
         [FieldOffset(0x8)] public int Col3;
 
-        public int this[int index] => index switch
-        {
+        public int this[int index] => index switch {
             0 => Col1,
             1 => Col2,
             2 => Col3,
@@ -131,14 +122,12 @@ public unsafe struct AddonLotteryDaily
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x24)]
-    public struct GameBoardNumbers
-    {
+    public struct GameBoardNumbers {
         [FieldOffset(0x0)] public GameNumberRow Row1;
         [FieldOffset(0xC)] public GameNumberRow Row2;
         [FieldOffset(0x18)] public GameNumberRow Row3;
 
-        public int this[int index] => (index / 3) switch
-        {
+        public int this[int index] => (index / 3) switch {
             0 => Row1[index % 3],
             1 => Row2[index % 3],
             2 => Row3[index % 3],

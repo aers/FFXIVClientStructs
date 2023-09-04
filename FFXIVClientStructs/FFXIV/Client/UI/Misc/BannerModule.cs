@@ -1,4 +1,4 @@
-﻿using FFXIVClientStructs.FFXIV.Client.System.Framework;
+using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Client.UI.Misc.UserFileManager;
 using FFXIVClientStructs.FFXIV.Common.Math;
 
@@ -8,8 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 //   Client::UI::Misc::UserFileManager::UserFileEvent
 // ctor "E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 49 8B D4 E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 49 8B D4 E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 49 8B D4 E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 49 8B D4 E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 49 8B D4 E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 48 8B D7"
 [StructLayout(LayoutKind.Explicit, Size = 0x48)]
-public unsafe partial struct BannerModule
-{
+public unsafe partial struct BannerModule {
     public static BannerModule* Instance() => Framework.Instance()->GetUiModule()->GetBannerModule();
 
     [FieldOffset(0)] public UserFileEvent UserFileEvent;
@@ -56,8 +55,7 @@ public unsafe partial struct BannerModule
 
 // ctor "E8 ?? ?? ?? ?? 48 89 43 40 48 8B 4B 40 48 85 C9 74 0A"
 [StructLayout(LayoutKind.Explicit, Size = 0x3E60)]
-public unsafe partial struct BannerModuleData
-{
+public unsafe partial struct BannerModuleData {
     [FixedSizeArray<BannerModuleEntry>(110)]
     [FieldOffset(0x00)] public fixed byte Entries[0x90 * 110];
     [FieldOffset(0x3DE0)] public fixed byte BannerId2BannerIndex[110];
@@ -74,8 +72,7 @@ public unsafe partial struct BannerModuleData
 
 // ctor "E8 ?? ?? ?? ?? 0F B6 84 3E"
 [StructLayout(LayoutKind.Explicit, Size = 0x90)]
-public unsafe partial struct BannerModuleEntry
-{
+public unsafe partial struct BannerModuleEntry {
     [FieldOffset(0x00)] public fixed byte BannerTimelineName[0x40];
     // [FieldOffset(0x40)] public fixed byte Flags[4]; // see "8B C2 4C 8B C9 99"
     [FieldOffset(0x44)] public HalfVector4 CameraPosition;
@@ -124,8 +121,7 @@ public unsafe partial struct BannerModuleEntry
 }
 
 [Flags]
-public enum BannerGearVisibilityFlag : uint
-{
+public enum BannerGearVisibilityFlag : uint {
     None = 0,
     HeadgearHidden = 1 << 0,
     WeaponHidden = 1 << 1,

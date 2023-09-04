@@ -1,4 +1,4 @@
-﻿using FFXIVClientStructs.FFXIV.Client.Game.Character;
+using FFXIVClientStructs.FFXIV.Client.Game.Character;
 
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 // Client::Graphics::Scene::Human
@@ -9,8 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 // size = 0xA80
 // ctor E8 ?? ?? ?? ?? 48 8B F8 48 85 C0 74 28 48 8D 55 D7
 [StructLayout(LayoutKind.Explicit, Size = 0xA80)]
-public unsafe partial struct Human
-{
+public unsafe partial struct Human {
     [FieldOffset(0x0)] public CharacterBase CharacterBase;
     [FieldOffset(0x8F0), Obsolete("Use Customize.Data")] public fixed byte CustomizeData[0x1A];
     [FieldOffset(0x8F0)] public CustomizeData Customize;

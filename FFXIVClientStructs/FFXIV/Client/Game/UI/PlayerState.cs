@@ -5,8 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 // Client::Game::UI::PlayerState
 // ctor "48 81 C1 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? C6 83 ?? ?? ?? ?? ??"
 [StructLayout(LayoutKind.Explicit, Size = 0x7E8)]
-public unsafe partial struct PlayerState
-{
+public unsafe partial struct PlayerState {
     [FieldOffset(0x00)] public byte IsLoaded;
     [FieldOffset(0x01)] public fixed byte CharacterName[64];
     [FieldOffset(0x41)] public fixed byte PSNOnlineID[17];
@@ -40,7 +39,7 @@ public unsafe partial struct PlayerState
     [FieldOffset(0x139)] public byte FirstClass;
     [FieldOffset(0x13A)] public byte StartTown;
     [FieldOffset(0x13B)] public byte QuestSpecialFlags;
-    
+
     [FieldOffset(0x154)] public int BaseStrength;
     [FieldOffset(0x158)] public int BaseDexterity;
     [FieldOffset(0x15C)] public int BaseVitality;
@@ -123,7 +122,7 @@ public unsafe partial struct PlayerState
     [FieldOffset(0x74C)] public byte MentorVersion; // latest is 2
 
     [FieldOffset(0x750)] public fixed uint DesynthesisLevels[8];
-    
+
     [StaticAddress("48 8D 0D ?? ?? ?? ?? 4D 8B F9", 3)]
     public static partial PlayerState* Instance();
 
@@ -243,8 +242,8 @@ public unsafe partial struct PlayerState
             return false;
         var id = aetherCurrentId - 0x2B0000;
         var idx = id >> 3;
-	    var flag = 1 << (byte)(id + idx * -8 & 0x1F);
-	    return (UnlockFlags[idx] & flag) != 0;
+        var flag = 1 << (byte)(id + idx * -8 & 0x1F);
+        return (UnlockFlags[idx] & flag) != 0;
     }
 
     /// <summary>
@@ -258,8 +257,7 @@ public unsafe partial struct PlayerState
 
     #region Weekly Bonus/Weekly Bingo/Wondrous Tails
 
-    public enum WeeklyBingoTaskStatus
-    {
+    public enum WeeklyBingoTaskStatus {
         /// <summary>Incomplete task.</summary>
         Open,
         /// <summary>Completed task, but sticker not placed.</summary>
@@ -357,8 +355,7 @@ public unsafe partial struct PlayerState
     #endregion
 }
 
-public enum PlayerStateFlag : uint
-{
+public enum PlayerStateFlag : uint {
     IsLoginSecurityToken = 1,
     IsBuddyInStable = 2,
     IsMentorStatusActive = 7,
@@ -370,8 +367,7 @@ public enum PlayerStateFlag : uint
 }
 
 
-public enum PoseType : byte
-{
+public enum PoseType : byte {
     Idle = 0,
     WeaponDrawn = 1,
     Sit = 2,

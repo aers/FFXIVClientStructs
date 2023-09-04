@@ -1,14 +1,13 @@
-﻿using FFXIVClientStructs.FFXIV.Component.GUI;
+using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 [Addon("NeedGreed")]
 [StructLayout(LayoutKind.Explicit, Size = 0x510)]
-public unsafe partial struct AddonNeedGreed
-{
+public unsafe partial struct AddonNeedGreed {
     [FieldOffset(0x00)] public AtkUnitBase AtkUnitBase;
-    
-    [FixedSizeArray<LootItemInfo>(16)] 
+
+    [FixedSizeArray<LootItemInfo>(16)]
     [FieldOffset(0x220)] public fixed byte Items[0x28 * 16];
 
     [FieldOffset(0x4FC)] public int NumItems;
@@ -16,8 +15,7 @@ public unsafe partial struct AddonNeedGreed
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x28)]
-public unsafe struct LootItemInfo
-{
+public unsafe struct LootItemInfo {
     [FieldOffset(0x00)] public byte* ItemName; // Pointer to a SeString
     [FieldOffset(0x08)] public uint ItemId;
     [FieldOffset(0x0C)] public uint IconId;

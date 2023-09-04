@@ -1,8 +1,7 @@
-﻿namespace FFXIVClientStructs.FFXIV.Client.Game;
+namespace FFXIVClientStructs.FFXIV.Client.Game;
 
 [StructLayout(LayoutKind.Explicit, Size = 0xC)]
-public struct Status
-{
+public struct Status {
     [FieldOffset(0x0)] public ushort StatusID;
     // this contains different information depending on the type of status
     // debuffs - stack count

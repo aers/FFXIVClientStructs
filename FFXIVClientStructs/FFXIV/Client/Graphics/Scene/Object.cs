@@ -1,4 +1,4 @@
-﻿using FFXIVClientStructs.FFXIV.Common.Math;
+using FFXIVClientStructs.FFXIV.Common.Math;
 
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 // Client::Graphics::Scene::Object
@@ -7,8 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 // size = 0x80
 // ctor - inlined in all derived class ctors
 [StructLayout(LayoutKind.Explicit, Size = 0x80)]
-public unsafe partial struct Object
-{
+public unsafe partial struct Object {
     [FieldOffset(0x18)] public Object* ParentObject;
     [FieldOffset(0x20)] public Object* PreviousSiblingObject;
     [FieldOffset(0x28)] public Object* NextSiblingObject;
@@ -22,8 +21,7 @@ public unsafe partial struct Object
     public partial ObjectType GetObjectType();
 }
 
-public enum ObjectType
-{
+public enum ObjectType {
     Object = 0,
     Terrain = 1,
     BgObject = 2,

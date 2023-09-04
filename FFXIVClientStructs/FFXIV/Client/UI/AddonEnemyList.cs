@@ -1,4 +1,4 @@
-﻿using FFXIVClientStructs.FFXIV.Component.GUI;
+using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
@@ -7,8 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //     Component::GUI::AtkEventListener
 [Addon("_EnemyList")]
 [StructLayout(LayoutKind.Explicit, Size = 0x278)]
-public unsafe struct AddonEnemyList
-{
+public unsafe struct AddonEnemyList {
     public const byte MaxEnemyCount = 8;
 
     [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;

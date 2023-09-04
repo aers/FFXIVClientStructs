@@ -1,10 +1,9 @@
-﻿using System.Globalization;
+using System.Globalization;
 
 namespace FFXIVClientStructs.FFXIV.Common.Math;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x4)]
-public struct HalfVector2 : IEquatable<HalfVector2>, IFormattable
-{
+public struct HalfVector2 : IEquatable<HalfVector2>, IFormattable {
     [FieldOffset(0x0)] public Half X;
     [FieldOffset(0x2)] public Half Y;
 
@@ -14,8 +13,7 @@ public struct HalfVector2 : IEquatable<HalfVector2>, IFormattable
     public static readonly HalfVector2 NegativeInfinity = new(Half.NegativeInfinity);
 
     public HalfVector2(Half value) : this(value, value) { }
-    public HalfVector2(Half x, Half y)
-    {
+    public HalfVector2(Half x, Half y) {
         X = x;
         Y = y;
     }
@@ -35,8 +33,7 @@ public struct HalfVector2 : IEquatable<HalfVector2>, IFormattable
     public override int GetHashCode() => HashCode.Combine(X, Y);
 
     public override string ToString() => ToString(null, null);
-    public string ToString(string? format, IFormatProvider? provider)
-    {
+    public string ToString(string? format, IFormatProvider? provider) {
         if (string.IsNullOrEmpty(format)) format = "HalfVector2 {{ X = {0}, Y = {1} }}";
         provider ??= CultureInfo.CurrentCulture;
         return string.Format(provider, format, X, Y);

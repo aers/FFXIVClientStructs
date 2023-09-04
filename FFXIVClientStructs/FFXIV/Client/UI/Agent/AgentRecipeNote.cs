@@ -1,4 +1,4 @@
-﻿using FFXIVClientStructs.FFXIV.Client.System.Framework;
+using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
@@ -6,8 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.RecipeNote)]
 [StructLayout(LayoutKind.Explicit, Size = 0x560)]
-public unsafe partial struct AgentRecipeNote
-{
+public unsafe partial struct AgentRecipeNote {
     public static AgentRecipeNote* Instance() => (AgentRecipeNote*)Framework.Instance()->GetUiModule()->GetAgentModule()->GetAgentByInternalId(AgentId.RecipeNote);
 
     [FieldOffset(0x0)] public AgentInterface AgentInterface;

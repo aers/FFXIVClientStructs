@@ -4,8 +4,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Control;
 // Client::Game::Control::TargetSystem
 
 [StructLayout(LayoutKind.Explicit, Size = 0x5370)]
-public unsafe partial struct TargetSystem
-{
+public unsafe partial struct TargetSystem {
     [FieldOffset(0x80)] public GameObject* Target;
     [FieldOffset(0x88)] public GameObject* SoftTarget;
     [FieldOffset(0x98)] public GameObject* GPoseTarget;
@@ -44,8 +43,7 @@ public unsafe partial struct TargetSystem
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B D8 48 85 DB 74 ?? 48 8B CB")]
     public partial GameObject* GetMouseOverObject(int x, int y, GameObjectArray* objectArray, Camera* camera);
 
-    public GameObject* GetMouseOverObject(int x, int y)
-    {
+    public GameObject* GetMouseOverObject(int x, int y) {
         var camera = Control.Instance()->CameraManager.Camera;
         var localPlayer = Control.Instance()->LocalPlayer;
         if (camera == null || localPlayer == null || ObjectFilterArray1.Length <= 0)
@@ -56,15 +54,12 @@ public unsafe partial struct TargetSystem
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x12C0)]
-public unsafe struct GameObjectArray
-{
+public unsafe struct GameObjectArray {
     [FieldOffset(0x00)] public int Length;
     [FieldOffset(0x08)] public fixed long Objects[599];
 
-    public GameObject* this[int index]
-    {
-        get
-        {
+    public GameObject* this[int index] {
+        get {
             if (Length <= 0 || index < 0 || index > Length)
                 return null;
             return (GameObject*)Objects[index];

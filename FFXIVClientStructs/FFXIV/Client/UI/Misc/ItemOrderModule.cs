@@ -8,8 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 //   Client::UI::Misc::UserFileManager::UserFileEvent
 // ctor "48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 41 56 41 57 48 83 EC 30 45 33 FF 48 89 51 10"
 [StructLayout(LayoutKind.Explicit, Size = 0xD8)]
-public unsafe partial struct ItemOrderModule
-{
+public unsafe partial struct ItemOrderModule {
     public static ItemOrderModule* Instance() => Framework.Instance()->GetUiModule()->GetItemOrderModule();
 
     [FieldOffset(0)] public UserFileEvent UserFileEvent;
@@ -37,8 +36,7 @@ public unsafe partial struct ItemOrderModule
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x60)]
-public unsafe struct ItemOrderModuleSorter
-{
+public unsafe struct ItemOrderModuleSorter {
     [FieldOffset(0x00)] public InventoryType InventoryType;
 
     [FieldOffset(0x08)] public StdVector<Pointer<ItemOrderModuleSorterItemEntry>> Items;
@@ -55,15 +53,13 @@ public unsafe struct ItemOrderModuleSorter
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x40)]
-public unsafe struct ItemOrderModuleSorterRetainerEntry
-{
+public unsafe struct ItemOrderModuleSorterRetainerEntry {
     [FieldOffset(0x20)] public ulong RetainerId;
     [FieldOffset(0x28)] public ItemOrderModuleSorter* Sorter;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0xC)]
-public unsafe struct ItemOrderModuleSorterItemEntry
-{
+public unsafe struct ItemOrderModuleSorterItemEntry {
     [FieldOffset(0x00)] public ushort Page;
     [FieldOffset(0x02)] public ushort Slot;
 
@@ -72,15 +68,13 @@ public unsafe struct ItemOrderModuleSorterItemEntry
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x4)]
-public unsafe struct ItemOrderModuleSorterPreviousOrderEntry
-{
+public unsafe struct ItemOrderModuleSorterPreviousOrderEntry {
     [FieldOffset(0x00)] public ushort Slot;
     [FieldOffset(0x02)] public ushort Page;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
-public unsafe struct ItemOrderModuleSorterSortFunctionEntry
-{
+public unsafe struct ItemOrderModuleSorterSortFunctionEntry {
     [FieldOffset(0x00)] public nint FunctionPtr;
     [FieldOffset(0x08)] public bool Descending;
 }

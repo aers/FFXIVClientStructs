@@ -1,4 +1,4 @@
-﻿namespace FFXIVClientStructs.FFXIV.Component.GUI;
+namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
 // not entirely sure this class exists
 [StructLayout(LayoutKind.Explicit, Size = 0x8)]

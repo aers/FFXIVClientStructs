@@ -1,13 +1,12 @@
-﻿namespace FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
+namespace FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
 
 // ctor (2023.07.06.0000.0000):
 // E9 ?? ?? ?? ?? 3D ?? ?? ?? ?? 0F 87 ?? ?? ?? ?? 3D ?? ?? ?? ?? 0F 83 ?? ?? ?? ?? 05 ?? ?? ?? ?? 83 F8 05
 // has id >63000 in InstanceContent sheet
 [StructLayout(LayoutKind.Explicit, Size = 0x1CA8 + 0x650)]
-public struct InstanceContentOceanFishing
-{
-    [FieldOffset(0x0)] public InstanceContentDirector InstanceContentDirector; 
-    
+public struct InstanceContentOceanFishing {
+    [FieldOffset(0x0)] public InstanceContentDirector InstanceContentDirector;
+
     // Row ID for IKDRoute sheet
     // Each zone (and their time of day) can be extracted from sheet
     [FieldOffset(0x1CC8)] public uint CurrentRoute;
@@ -25,7 +24,7 @@ public struct InstanceContentOceanFishing
     [FieldOffset(0x22D8)] public uint Mission1Type;
     [FieldOffset(0x22DC)] public uint Mission2Type;
     [FieldOffset(0x22E0)] public uint Mission3Type;
-    
+
     // Progress can be larger than the mission's required amount
     [FieldOffset(0x22E4)] public ushort Mission1Progress;
     [FieldOffset(0x22E6)] public ushort Mission2Progress;

@@ -1,8 +1,7 @@
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x30)]
-public unsafe partial struct StringArrayData
-{
+public unsafe partial struct StringArrayData {
     [FieldOffset(0x0)] public AtkArrayData AtkArrayData;
     [FieldOffset(0x20)] public byte** StringArray;
     [FieldOffset(0x28)] public byte** ManagedStringArray;
@@ -33,14 +32,14 @@ public unsafe partial struct StringArrayData
     public partial void SetValueForced(int index, byte* value, bool notify);
 
     public void SetValue(int index, byte* value, bool notify) {
-	    SetValueForced(index, value, notify);
+        SetValueForced(index, value, notify);
     }
 
     public void SetValue(int index, string value, bool notify) {
-	    SetValueForced(index, value, notify);
+        SetValueForced(index, value, notify);
     }
 
     public void SetValue(int index, byte[] value, bool notify) {
-	    SetValueForced(index, value, notify);
+        SetValueForced(index, value, notify);
     }
 }

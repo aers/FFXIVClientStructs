@@ -1,9 +1,8 @@
-﻿namespace FFXIVClientStructs.FFXIV.Client.System.File;
+namespace FFXIVClientStructs.FFXIV.Client.System.File;
 
 // inlined ctor, see FileManager ctor
 [StructLayout(LayoutKind.Explicit, Size = 0x278)]
-public unsafe struct FileDescriptor
-{
+public unsafe struct FileDescriptor {
     [FieldOffset(0x0)] public FileMode FileMode;
     [FieldOffset(0x8)] public byte* FileBuffer;
     [FieldOffset(0x10)] public ulong FileLength;

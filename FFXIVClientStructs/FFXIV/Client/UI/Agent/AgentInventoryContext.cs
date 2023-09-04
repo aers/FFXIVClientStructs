@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.InventoryContext)]
 [StructLayout(LayoutKind.Explicit, Size = 0x778)]
 public unsafe partial struct AgentInventoryContext {
-    public static AgentInventoryContext* Instance() => (AgentInventoryContext*) AgentModule.Instance()->GetAgentByInternalId(AgentId.InventoryContext);
+    public static AgentInventoryContext* Instance() => (AgentInventoryContext*)AgentModule.Instance()->GetAgentByInternalId(AgentId.InventoryContext);
 
     [FieldOffset(0x0)] public AgentInterface AgentInterface;
     [FieldOffset(0x28)] public uint BlockingAddonId;
@@ -25,14 +25,14 @@ public unsafe partial struct AgentInventoryContext {
 
     [FieldOffset(0x6B4)] public int PositionX;
     [FieldOffset(0x6B8)] public int PositionY;
-    
+
     [FieldOffset(0x6C8)] public uint OwnerAddonId;
     [FieldOffset(0x6CC)] public int YesNoPosition; // 2 shorts combined, gets passed as int arg, default = -1
     [FieldOffset(0x6CC)] public short YesNoX;
     [FieldOffset(0x6CE)] public short YesNoY;
     [FieldOffset(0x6D0)] public InventoryType TargetInventoryId;
     [FieldOffset(0x6D4)] public int TargetInventorySlotId;
-    
+
     [FieldOffset(0x6DC)] public uint DummyInventoryId;
 
     [FieldOffset(0x6E8)] public InventoryItem* TargetInventorySlot;

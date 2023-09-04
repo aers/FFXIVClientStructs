@@ -1,9 +1,8 @@
-﻿using FFXIVClientStructs.FFXIV.Client.Graphics;
+using FFXIVClientStructs.FFXIV.Client.Graphics;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
-public enum TextInputFlags1
-{
+public enum TextInputFlags1 {
     Capitalize = 0x1,
     Mask = 0x2,
     EnableDictionary = 0x4,
@@ -14,8 +13,7 @@ public enum TextInputFlags1
     AllowLowerCase = 0x80
 }
 
-public enum TextInputFlags2
-{
+public enum TextInputFlags2 {
     AllowNumberInput = 0x1,
     AllowSymbolInput = 0x2,
     WordWrap = 0x4,
@@ -24,8 +22,7 @@ public enum TextInputFlags2
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x7C)]
-public unsafe struct AtkUldComponentDataTextInput
-{
+public unsafe struct AtkUldComponentDataTextInput {
     [FieldOffset(0x00)] public AtkUldComponentDataInputBase InputBase;
     [FieldOffset(0x10)] public fixed uint Nodes[16];
     [FieldOffset(0x50)] public ByteColor CandidateColor;

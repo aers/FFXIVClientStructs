@@ -1,11 +1,10 @@
-﻿using FFXIVClientStructs.FFXIV.Component.GUI;
+using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 [Addon("MobHunt")]
 [StructLayout(LayoutKind.Explicit, Size = 0x248)]
-public unsafe partial struct AddonMobHunt
-{
+public unsafe partial struct AddonMobHunt {
     [FieldOffset(0x00)] public AtkUnitBase AtkUnitBase;
 
     [FieldOffset(0x220)] public AtkComponentButton* NextPageButton;

@@ -1,4 +1,4 @@
-﻿using FFXIVClientStructs.FFXIV.Component.GUI;
+using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
@@ -6,8 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //   Component::GUI::AtkUnitBase
 //     Component::GUI::AtkEventListener
 [StructLayout(LayoutKind.Explicit, Size = 0x2B0)]
-public unsafe struct AddonContextIconMenu
-{
+public unsafe struct AddonContextIconMenu {
     [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
     [FieldOffset(0x220)] public int EntryCount;
     [FieldOffset(0x240)] public AtkComponentList* AtkComponentList240;

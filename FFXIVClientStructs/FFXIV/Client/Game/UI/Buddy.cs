@@ -2,11 +2,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
 // ctor E8 ?? ?? ?? ?? 48 89 B3 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 B3 ?? ?? ?? ?? 
 [StructLayout(LayoutKind.Explicit, Size = 0xED8)]
-public unsafe partial struct Buddy
-{
+public unsafe partial struct Buddy {
     [StructLayout(LayoutKind.Explicit, Size = 0x198)]
-    public struct BuddyMember
-    {
+    public struct BuddyMember {
         [FieldOffset(0x0)] public uint ObjectID;
         [FieldOffset(0x4)] public uint CurrentHealth;
 
@@ -44,11 +42,11 @@ public unsafe partial struct Buddy
     [FieldOffset(0xEB0)] public BuddyMember* SquadronTrustPtr;
 
     public bool IsBuddyEquipUnlocked(uint buddyEquipId) {
-        fixed(byte* p = BuddyEquipUnlock) {
+        fixed (byte* p = BuddyEquipUnlock) {
             return IsBuddyEquipUnlockedInternal(p, buddyEquipId);
         }
     }
-    
+
     [MemberFunction("E9 ?? ?? ?? ?? 0F B7 50 02 41 B8")]
     private static partial bool IsBuddyEquipUnlockedInternal(void* ptr, uint buddyEquipId);
 }
