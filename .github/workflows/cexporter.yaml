@@ -1,4 +1,4 @@
-name: CExporter-check
+name: CExporter Check
 
 on:
   pull_request:
@@ -17,6 +17,6 @@ jobs:
           dotnet-version: 7.0.x
       - name: Install dependencies
         run: dotnet restore
-      - name: Run CExporter'
+      - name: Run CExporter
         working-directory: ./ida
-        run: dotnet run --project CExporter/CExporter.csproj
+        run: dotnet run --project CExporter/CExporter.csproj -c Release
