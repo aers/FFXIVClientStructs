@@ -20,7 +20,6 @@ jobs:
       - name: Restore
         run: dotnet restore
       - name: Run CExporter
-        working-directory: ./ida
         run: dotnet run --project CExporter/CExporter.csproj
       - name: Check for changes
         id: git-check
