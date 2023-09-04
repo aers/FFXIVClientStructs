@@ -9,7 +9,7 @@ public class Program {
         var dir = new DirectoryInfo(Environment.CurrentDirectory);
         while (dir.FullName.Contains("ida") && !dir.FullName.EndsWith("ida")) {
             dir = dir.Parent!;
-        } 
+        }
         while (!dir.FullName.Contains("ida") && !dir.FullName.EndsWith("ida")) {
             dir = dir.GetDirectories("ida/CExporter", SearchOption.AllDirectories).First().Parent!;
         }
