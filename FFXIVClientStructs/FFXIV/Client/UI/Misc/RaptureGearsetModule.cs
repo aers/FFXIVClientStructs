@@ -1,4 +1,3 @@
-using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Client.UI.Misc.UserFileManager;
 
@@ -10,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 [VTableAddress("48 8D 05 ?? ?? ?? ?? 48 89 5F 40 48 8D 77 48", 3)]
 [StructLayout(LayoutKind.Explicit, Size = 0xB670)]
 public unsafe partial struct RaptureGearsetModule {
-    public static RaptureGearsetModule* Instance() => Framework.Instance()->GetUiModule()->GetRaptureGearsetModule();
+    public static RaptureGearsetModule* Instance() => UIModule.Instance()->GetRaptureGearsetModule();
 
     [FieldOffset(0)] public UserFileEvent UserFileEvent;
     [FixedSizeArray<GearsetEntry>(100)]
@@ -41,7 +40,7 @@ public unsafe partial struct RaptureGearsetModule {
     /// Check if a gearset at a specific index is valid.
     /// </summary>
     /// <remarks>
-    /// Will return 0 if the gearset index is higher than the player's max allowed gearset number.
+    /// Will return <c>false</c> if the gearset index is higher than the player's max allowed gearset number.
     /// </remarks>
     /// <param name="gearsetId">The index of the gearset to look up.</param>
     /// <returns>Returns <c>true</c> if the gearset is valid, <c>false</c> otherwise.</returns>
@@ -54,7 +53,7 @@ public unsafe partial struct RaptureGearsetModule {
     /// <param name="gearsetId">The gearset ID to attempt to equip.</param>
     /// <param name="glamourPlateId">The glamour plate to attempt to equip alongside this gearset. Passing 0 will use the
     /// linked gearset (if any).</param>
-    /// <returns>Returns 0 if the equip succeeded, -1 otherwise (???).</returns>
+    /// <returns>Returns 0 if the equip succeeded, -1 otherwise.</returns>
     [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 48 8B F9 41 0F B6 F0 48 8D 0D")]
     public partial int EquipGearset(int gearsetId, byte glamourPlateId = 0);
 
@@ -91,21 +90,37 @@ public unsafe partial struct RaptureGearsetModule {
     /// Check if a specific gearset has a linked glamour plate.
     /// </summary>
     /// <param name="gearsetId">The ID of the gearset to check.</param>
-    /// <returns>Returns 0 if a gearset is invalid or does not have a linked plate, 1 otherwise.</returns>
+    /// <returns>Returns <c>false</c> if a gearset is invalid or does not have a linked plate, <c>true</c> otherwise.</returns>
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 0E 8B D3")]
-    public partial byte HasLinkedGlamourPlate(int gearsetId);
+    public partial bool HasLinkedGlamourPlate(int gearsetId);
 
     [MemberFunction("45 33 C0 83 FA 64")]
     public partial int GetClassJobIconForGearset(int gearsetId);
 
+    /// <summary>
+    /// Get the Banner index of a Gearset.
+    /// </summary>
+    /// <param name="gearsetId">The ID of the gearset.</param>
+    /// <returns>The actual BannerIndex (gearset->BannerIndex - 1).</returns>
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 C0 41 3B C7")]
-    public partial byte GetBannerIndexByGearsetIndex(byte gearsetIndex); // returns the actual BannerIndex (gearset->BannerIndex - 1)
+    public partial byte GetBannerIndex(byte gearsetId);
 
+    /// <summary>
+    /// Set the Banner index of a Gearset.
+    /// </summary>
+    /// <param name="gearsetId">The ID of the gearset.</param>
+    /// <param name="bannerIndex">The Banner index, or -1 to unlink the Banner.</param>
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 7C 24 ?? 40 FE C6")]
-    public partial void SetBannerIndexForGearsetIndex(byte gearsetIndex, sbyte bannerIndex); // actual BannerIndex, -1 = unlink banner
+    public partial void SetBannerIndex(byte gearsetId, sbyte bannerIndex);
 
+    /// <summary>
+    /// Check if a specified gearset has a Banner linked to it.
+    /// </summary>
+    /// <param name="gearsetId">The ID of the gearset.</param>
+    /// <returns>Returns <c>true</c> if the gearset has a Banner linked to it, <c>false</c> otherwise.</returns>
+    /// <remarks>Equivalent to Flags.HasFlag(GearsetFlag.Exists) &amp;&amp; BannerIndex != 0.</remarks>
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 3F 48 8B 03")]
-    public partial bool IsGearsetLinkedWithBanner(byte gearsetIndex); // equivalent to Flags.HasFlag(GearsetFlag.Exists) && BannerIndex != 0
+    public partial bool HasLinkedBanner(byte gearsetId);
 
     [StructLayout(LayoutKind.Sequential, Size = 0xAF2C)]
     public struct Gearsets {
