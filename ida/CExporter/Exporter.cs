@@ -101,7 +101,7 @@ public abstract class ExporterBase {
             var processPercent = index / (float)enums.Count;
             Console.SetCursorPosition(0, 0);
             Console.WriteLine($"GapStrategy: {_gapStrategy}, Type: {GetType().Name}");
-            Console.WriteLine($"Processing Structs: {processPercent:P}");
+            Console.WriteLine($"Processing Enums: {processPercent:P}");
             ProcessEnum(enums[index], sb);
         }
 

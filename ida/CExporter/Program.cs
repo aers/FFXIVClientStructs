@@ -6,14 +6,17 @@ namespace CExporter;
 public class Program {
     public static void Main(string[] _) {
         const string outputBase = "../../../../";
+        var path = new FileInfo(Path.Combine(outputBase, "ffxiv_client_structs"));
 
         ExporterBase exporter = new ExporterIDA();
+
+        Console.WriteLine($"Writing to {path}");
 
         File.WriteAllText($"{outputBase}ffxiv_client_structs.h", exporter.Export(GapStrategy.FullSize));
         File.WriteAllText($"{outputBase}ffxiv_client_structs_arrays.h", exporter.Export(GapStrategy.ByteArray));
 
         exporter = new ExporterGhidra();
-
+        
         File.WriteAllText($"{outputBase}ffxiv_client_structs_ghidra.h", exporter.Export(GapStrategy.FullSize));
         File.WriteAllText($"{outputBase}ffxiv_client_structs_arrays_ghidra.h", exporter.Export(GapStrategy.ByteArray));
 
