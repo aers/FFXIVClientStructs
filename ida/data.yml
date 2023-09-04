@@ -3194,12 +3194,17 @@ classes:
       0x1405440D0: LoadIconById
       0x140544100: LoadIcon
       0x14057A270: SetDisabledColor
+  Component::GUI::AtkDragDropInterface:
+    vtbls:
+      - ea: 0x141996048
+    vfuncs:
+      7: GetDragComponent
   Component::GUI::AtkComponentListItemRenderer:
     vtbls:
       - ea: 0x1419960C8
         base: Component::GUI::AtkComponentButton
-    vfuncs:
-      15: GetAtkResNode
+      - ea: 0x141996198
+        base: Component::GUI::AtkDragDropInterface
     funcs:
       0x1405455E0: ctor
       0x1405456E0: Finalize
@@ -3375,6 +3380,8 @@ classes:
     vtbls:
       - ea: 0x141997378
         base: Component::GUI::AtkComponentBase
+      - ea: 0x141997418
+        base: Component::GUI::AtkDragDropInterface
     funcs:
       0x14057A860: ctor
       0x140579FB0: LoadIconById
