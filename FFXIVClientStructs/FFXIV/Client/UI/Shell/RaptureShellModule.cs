@@ -1,4 +1,3 @@
-using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Shell;
@@ -7,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Shell;
 // ctor "E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 4C 8B CF"
 [StructLayout(LayoutKind.Explicit, Size = 0x1208)]
 public unsafe partial struct RaptureShellModule {
-    public static RaptureShellModule* Instance() => Framework.Instance()->GetUiModule()->GetRaptureShellModule();
+    public static RaptureShellModule* Instance() => UIModule.Instance()->GetRaptureShellModule();
 
     [FieldOffset(0x2C0)] public int MacroCurrentLine;
     [FieldOffset(0x2B3)] public bool MacroLocked;

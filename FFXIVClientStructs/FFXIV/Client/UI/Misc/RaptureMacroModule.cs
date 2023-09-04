@@ -1,4 +1,3 @@
-using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Client.UI.Misc.UserFileManager;
 
@@ -9,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 // ctor "E8 ?? ?? ?? ?? 48 8D B7 ?? ?? ?? ?? 4C 8B C7"
 [StructLayout(LayoutKind.Explicit, Size = 0x51AA8)]
 public unsafe partial struct RaptureMacroModule {
-    public static RaptureMacroModule* Instance() => Framework.Instance()->GetUiModule()->GetRaptureMacroModule();
+    public static RaptureMacroModule* Instance() => UIModule.Instance()->GetRaptureMacroModule();
 
     [StructLayout(LayoutKind.Sequential, Size = 0x688)]
     public struct Macro {
