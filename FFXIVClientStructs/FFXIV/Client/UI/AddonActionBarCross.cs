@@ -1,5 +1,5 @@
-﻿
-namespace FFXIVClientStructs.FFXIV.Client.UI; 
+
+namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 [Addon("_ActionCross")]
 [StructLayout(LayoutKind.Explicit, Size = 0x710)]

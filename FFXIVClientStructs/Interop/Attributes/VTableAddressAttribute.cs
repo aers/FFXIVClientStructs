@@ -1,10 +1,8 @@
-﻿namespace FFXIVClientStructs.Interop.Attributes;
+namespace FFXIVClientStructs.Interop.Attributes;
 
 [AttributeUsage(AttributeTargets.Struct)]
-public class VTableAddressAttribute : Attribute
-{
-    public VTableAddressAttribute(string signature, int offset, bool isPointer = false)
-    {
+public class VTableAddressAttribute : Attribute {
+    public VTableAddressAttribute(string signature, int offset, bool isPointer = false) {
         Signature = signature;
         Offset = offset;
         IsPointer = isPointer;

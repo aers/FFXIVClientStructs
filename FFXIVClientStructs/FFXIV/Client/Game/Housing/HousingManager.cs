@@ -1,8 +1,7 @@
-﻿namespace FFXIVClientStructs.FFXIV.Client.Game.Housing;
+namespace FFXIVClientStructs.FFXIV.Client.Game.Housing;
 
 [StructLayout(LayoutKind.Explicit, Size = 0xE0)]
-public unsafe partial struct HousingManager
-{
+public unsafe partial struct HousingManager {
     [MemberFunction("E8 ?? ?? ?? ?? 8B 56 7C")]
     public static partial HousingManager* Instance();
 

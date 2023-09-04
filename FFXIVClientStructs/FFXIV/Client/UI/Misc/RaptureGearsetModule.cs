@@ -7,8 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 //   Client::UI::Misc::UserFileManager::UserFileEvent
 // ctor "48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC 20 45 33 F6 48 89 51 10 48 8D 05 ?? ?? ?? ?? 4C 89 71 08 49 8B D8"
 [StructLayout(LayoutKind.Explicit, Size = 0xB670)]
-public unsafe partial struct RaptureGearsetModule
-{
+public unsafe partial struct RaptureGearsetModule {
     public static RaptureGearsetModule* Instance() => Framework.Instance()->GetUiModule()->GetRaptureGearsetModule();
 
     [FieldOffset(0)] public UserFileEvent UserFileEvent;
@@ -18,7 +17,7 @@ public unsafe partial struct RaptureGearsetModule
     [FieldOffset(0x0048)] public Gearsets Gearset;
 
     [FieldOffset(0xB434)] public int CurrentGearsetIndex;
-    
+
     /// <summary>
     /// Return a pointer to a <see cref="GearsetEntry"/> by index/ID.
     /// </summary>
@@ -105,15 +104,14 @@ public unsafe partial struct RaptureGearsetModule
             get {
                 if (i is < 0 or > 100) return null;
                 fixed (byte* p = data) {
-                    return (GearsetEntry*) (p + sizeof(GearsetEntry) * i);
+                    return (GearsetEntry*)(p + sizeof(GearsetEntry) * i);
                 }
             }
         }
     }
 
     [Flags]
-    public enum GearsetFlag : byte
-    {
+    public enum GearsetFlag : byte {
         None = 0x00,
         Exists = 0x01,
         Unknown02 = 0x02,
@@ -126,8 +124,7 @@ public unsafe partial struct RaptureGearsetModule
     }
 
     [StructLayout(LayoutKind.Explicit, Size = Size)]
-    public struct GearsetItem
-    {
+    public struct GearsetItem {
         public const int Size = 0x1C;
 
         [FieldOffset(0x0)] public uint ItemID;
@@ -139,8 +136,7 @@ public unsafe partial struct RaptureGearsetModule
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x1C0)]
-    public struct GearsetEntry
-    {
+    public struct GearsetEntry {
         [FieldOffset(0x000)] public byte ID;    // This may actually be set number, which is not _quite_ ID.
         [FieldOffset(0x001)] public fixed byte Name[0x2F];
         [FieldOffset(0x31)] public byte ClassJob;
@@ -168,8 +164,7 @@ public unsafe partial struct RaptureGearsetModule
         [FieldOffset(ItemDataOffset + GearsetItem.Size * 13)] public GearsetItem SoulStone;
 
         /// <returns>Returns a pointer to the BannerModuleEntry* or null if the gearset is not linked to a banner.</returns>
-        public BannerModuleEntry* GetBanner()
-        {
+        public BannerModuleEntry* GetBanner() {
             if (BannerIndex == 0)
                 return null;
 

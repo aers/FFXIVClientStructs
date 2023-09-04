@@ -1,6 +1,6 @@
-﻿using FFXIVClientStructs.FFXIV.Client.UI.Misc;
+using FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
-namespace FFXIVClientStructs.FFXIV.Client.UI; 
+namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 [Addon("_ActionDoubleCrossL", "_ActionDoubleCrossR")]
 [StructLayout(LayoutKind.Explicit, Size = 0x2F8)]
@@ -11,12 +11,12 @@ public struct AddonActionDoubleCrossBase {
     /// Set to 1 when the WXHB is showing the directional pad inputs as well as the action button inputs.
     /// </summary>
     [FieldOffset(0x2E1)] public byte ShowDPadSlots;
-    
+
     /// <summary>
     /// The ID of the hotbar in <see cref="RaptureHotbarModule"/> that this action bar is currently referencing.
     /// </summary>
     [FieldOffset(0x2E8)] public byte BarTarget;
-    
+
     /// <summary>
     /// Use the left side (slots 0-7) of the hotbar specified in <see cref="BarTarget"/>.
     /// </summary>

@@ -1,4 +1,4 @@
-﻿using FFXIVClientStructs.FFXIV.Client.System.String;
+using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
@@ -8,8 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //     Component::GUI::AtkEventListener
 [Addon("FateReward")]
 [StructLayout(LayoutKind.Explicit, Size = 0x570)]
-public unsafe struct AddonFateReward
-{
+public unsafe struct AddonFateReward {
     [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
     [FieldOffset(0x220)] public AtkResNode* AtkResNode220;
     [FieldOffset(0x228)] public AtkImageNode* AtkImageNode228;

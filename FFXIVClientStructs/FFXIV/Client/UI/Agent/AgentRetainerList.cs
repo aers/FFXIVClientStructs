@@ -1,4 +1,4 @@
-﻿using FFXIVClientStructs.FFXIV.Client.System.Framework;
+using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
@@ -11,11 +11,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 // ctor 48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 48 8B F1 E8 ?? ?? ?? ?? 33 C9
 [Agent(AgentId.RetainerList)]
 [StructLayout(LayoutKind.Explicit, Size = 0x5B8)]
-public unsafe struct AgentRetainerList
-{
-    public static AgentRetainerList* Instance()
-    {
-        return (AgentRetainerList*) Framework.Instance()->GetUiModule()->GetAgentModule()->GetAgentByInternalId(
+public unsafe struct AgentRetainerList {
+    public static AgentRetainerList* Instance() {
+        return (AgentRetainerList*)Framework.Instance()->GetUiModule()->GetAgentModule()->GetAgentByInternalId(
             AgentId.RetainerList);
     }
 
@@ -26,8 +24,7 @@ public unsafe struct AgentRetainerList
     [FieldOffset(0x50)] public RetainerList Retainers;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x460)]
-    public struct RetainerList
-    {
+    public struct RetainerList {
         [FieldOffset(0x00)] private fixed byte Retainers[0x460];
         [FieldOffset(0x70 * 0)] public Retainer Retainer0;
         [FieldOffset(0x70 * 1)] public Retainer Retainer1;
@@ -40,14 +37,11 @@ public unsafe struct AgentRetainerList
         [FieldOffset(0x70 * 8)] public Retainer Retainer8;
         [FieldOffset(0x70 * 9)] public Retainer Retainer9;
 
-        public Retainer* this[int index]
-        {
-            get
-            {
+        public Retainer* this[int index] {
+            get {
                 if (index is < 0 or >= 10) return null;
-                fixed (byte* p = Retainers)
-                {
-                    var r = (Retainer*) p;
+                fixed (byte* p = Retainers) {
+                    var r = (Retainer*)p;
                     return r + index;
                 }
             }
@@ -55,8 +49,7 @@ public unsafe struct AgentRetainerList
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x70)]
-    public struct Retainer
-    {
+    public struct Retainer {
         [FieldOffset(0x00)] public Utf8String Name;
 
         [FieldOffset(0x6C)] public byte Index;

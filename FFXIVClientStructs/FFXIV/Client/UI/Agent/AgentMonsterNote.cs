@@ -1,12 +1,11 @@
-﻿using FFXIVClientStructs.FFXIV.Client.System.String;
+using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
-namespace FFXIVClientStructs.FFXIV.Client.UI.Agent; 
+namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.MonsterNote)]
 [StructLayout(LayoutKind.Explicit, Size = 0x68)]
-public struct AgentMonsterNote
-{
+public struct AgentMonsterNote {
     [FieldOffset(0x00)] public AgentInterface AgentInterface;
     [FieldOffset(0x28)] public StdVector<Utf8String> StringVector;
     [FieldOffset(0x40)] public uint BaseId;
@@ -18,8 +17,7 @@ public struct AgentMonsterNote
 
     [FieldOffset(0x5C)] public byte IsLocked;
 
-    public uint GetMonsterNoteIdForIndex(int index)
-    {
+    public uint GetMonsterNoteIdForIndex(int index) {
         return (uint)(ClassId * BaseId + Rank * 10 + index + 1);
     }
 }

@@ -1,10 +1,9 @@
-﻿using FFXIVClientStructs.FFXIV.Common.Math;
+using FFXIVClientStructs.FFXIV.Common.Math;
 
 namespace FFXIVClientStructs.FFXIV.Shader;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x90)]
-public struct CustomizeParameter
-{
+public struct CustomizeParameter {
     /// <summary>
     /// XYZ : Skin diffuse color, as squared RGB.
     /// W : Muscle tone.

@@ -1,4 +1,4 @@
-﻿using FFXIVClientStructs.FFXIV.Client.System.Framework;
+using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
@@ -8,8 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 //     Component::GUI::AtkModuleInterface::AtkEventInterface
 [Agent(AgentId.Request)]
 [StructLayout(LayoutKind.Explicit, Size = 0x460)]
-public unsafe partial struct AgentRequest
-{
+public unsafe partial struct AgentRequest {
     public static AgentRequest* Instance() => (AgentRequest*)Framework.Instance()->GetUiModule()->GetAgentModule()->GetAgentByInternalId(AgentId.Request);
 
     [FieldOffset(0x0)] public AgentInterface AgentInterface;

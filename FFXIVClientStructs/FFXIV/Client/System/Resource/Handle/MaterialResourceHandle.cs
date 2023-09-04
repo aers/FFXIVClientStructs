@@ -1,5 +1,5 @@
-﻿using FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 using System.Text;
+using FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 
 namespace FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 // Client::System::Resource::Handle::MaterialResourceHandle
@@ -8,11 +8,9 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 
 // ctor 40 53 48 83 EC ?? 48 8B 44 24 ?? 48 8B D9 48 89 44 24 ?? 48 8B 44 24 ?? 48 89 44 24 ?? E8 ?? ?? ?? ?? 33 C9 
 [StructLayout(LayoutKind.Explicit, Size = 0x108)]
-public unsafe partial struct MaterialResourceHandle
-{
+public unsafe partial struct MaterialResourceHandle {
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
-    public struct TextureEntry
-    {
+    public struct TextureEntry {
         [FieldOffset(0x0)]
         public TextureResourceHandle* TextureResourceHandle;
         [FieldOffset(0x8)]
@@ -20,26 +18,22 @@ public unsafe partial struct MaterialResourceHandle
         [FieldOffset(0xA)]
         public ushort Flags;
 
-        public bool IsDX11
-        {
+        public bool IsDX11 {
             readonly get => (Flags & 0x8000) != 0;
             set => Flags = value ? (ushort)(Flags | 0x8000) : (ushort)(Flags & ~0x8000);
         }
 
-        public ushort Index1
-        {
+        public ushort Index1 {
             readonly get => (ushort)(Flags & 0x001F);
             set => Flags = (ushort)((Flags & ~0x001F) | (value & 0x001F));
         }
 
-        public ushort Index2
-        {
+        public ushort Index2 {
             readonly get => (ushort)((Flags & 0x03E0) >> 5);
             set => Flags = (ushort)((Flags & ~0x03E0) | ((value & 0x001F) << 5));
         }
 
-        public ushort Index3
-        {
+        public ushort Index3 {
             readonly get => (ushort)((Flags & 0x7C00) >> 10);
             set => Flags = (ushort)((Flags & ~0x7C00) | ((value & 0x001F) << 10));
         }
@@ -68,8 +62,7 @@ public unsafe partial struct MaterialResourceHandle
     public readonly string ShpkNameString
         => Encoding.UTF8.GetString(ShpkNameSpan);
 
-    public readonly byte* TexturePath(int index)
-    {
+    public readonly byte* TexturePath(int index) {
         if (index < 0 || index >= TextureCount)
             throw new ArgumentOutOfRangeException(nameof(index));
         return Strings + Textures[index].PathOffset;

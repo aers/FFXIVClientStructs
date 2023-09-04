@@ -1,11 +1,11 @@
-﻿using FFXIVClientStructs.FFXIV.Client.Game.Character;
+using System.Runtime.CompilerServices;
+using FFXIVClientStructs.FFXIV.Client.Game.Character;
 using FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
 using FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 using FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 using FFXIVClientStructs.FFXIV.Common.Math;
 using FFXIVClientStructs.FFXIV.Shader;
 using FFXIVClientStructs.Interop.Attributes;
-using System.Runtime.CompilerServices;
 
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 // Client::Graphics::Scene::Human
@@ -16,8 +16,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 // size = 0xA80
 // ctor E8 ?? ?? ?? ?? 48 8B F8 48 85 C0 74 28 48 8D 55 D7
 [StructLayout(LayoutKind.Explicit, Size = 0xA80)]
-public unsafe partial struct Human
-{
+public unsafe partial struct Human {
     [FieldOffset(0x0)] public CharacterBase CharacterBase;
     [FieldOffset(0x8F0), Obsolete("Use Customize.Data")] public fixed byte CustomizeData[0x1A];
     [FieldOffset(0x8F0)] public CustomizeData Customize;
@@ -81,8 +80,7 @@ public unsafe partial struct Human
     [FieldOffset(0x9C0)] public Texture* RFingerDecal;
     [FieldOffset(0x9C8)] public Texture* LFingerDecal;
 
-    public ref Texture* SlotDecal(int slot)
-    {
+    public ref Texture* SlotDecal(int slot) {
         if (slot < 0 || slot > 9)
             throw new ArgumentOutOfRangeException(nameof(slot));
         return ref ((Texture**)Unsafe.AsPointer(ref _slotDecalBase))[slot];

@@ -1,8 +1,7 @@
-﻿namespace FFXIVClientStructs.FFXIV.Client.Game.Object;
+namespace FFXIVClientStructs.FFXIV.Client.Game.Object;
 
 [StructLayout(LayoutKind.Explicit)]
-public unsafe partial struct ClientObjectManager
-{
+public unsafe partial struct ClientObjectManager {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? C7 43 60 FF FF FF FF", 3)]
     public static partial ClientObjectManager* Instance();
 

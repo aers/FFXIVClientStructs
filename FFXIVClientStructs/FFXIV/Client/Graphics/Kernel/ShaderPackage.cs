@@ -1,4 +1,4 @@
-﻿using FFXIVClientStructs.FFXIV.Client.Graphics.Render;
+using FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
 // Client::Graphics::Kernel::ShaderPackage
@@ -7,21 +7,18 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
 // ctor E8 ?? ?? ?? ?? 8B 55 18 48 8B F0
 // size = 0x408
 [StructLayout(LayoutKind.Explicit, Size = 0x408)]
-public unsafe struct ShaderPackage
-{
+public unsafe struct ShaderPackage {
     public const ushort SamplerSlotMaterial = 2;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x8)]
-    public struct MaterialElement
-    {
+    public struct MaterialElement {
         [FieldOffset(0x0)] public uint CRC;
         [FieldOffset(0x4)] public ushort Offset;
         [FieldOffset(0x6)] public ushort Size;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0xC)]
-    public struct ConstantSamplerUnknown
-    {
+    public struct ConstantSamplerUnknown {
         [FieldOffset(0x0)] public uint CRC;
         /// <summary>
         /// Cross-reference this with <see cref="Material.TextureEntry.Id"/>.

@@ -1,11 +1,10 @@
-﻿using FFXIVClientStructs.FFXIV.Component.GUI;
+using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 [Addon("GcArmyExpedition")]
 [StructLayout(LayoutKind.Explicit, Size = 0x2E8)]
-public unsafe struct AddonGcArmyExpedition
-{
+public unsafe struct AddonGcArmyExpedition {
     [FieldOffset(0x00)] public AtkUnitBase AtkUnitBase;
 
     [FieldOffset(0x220)] public AtkComponentButton* DeployButton;
@@ -24,6 +23,6 @@ public unsafe struct AddonGcArmyExpedition
     [FieldOffset(0x2C0)] public AtkResNode* SquadronSergeantImageResNode;
     [FieldOffset(0x2C8)] public AtkResNode* SquadronSergeantChatMessageResNode;
     [FieldOffset(0x2D0)] public AtkTextNode* SquadronSergeantChatMessageTextNode;
-    
+
     [FieldOffset(0x2D8)] public int SelectedTab;
 }

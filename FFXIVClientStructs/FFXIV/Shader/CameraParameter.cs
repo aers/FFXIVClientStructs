@@ -1,10 +1,9 @@
-﻿using FFXIVClientStructs.FFXIV.Common.Math;
+using FFXIVClientStructs.FFXIV.Common.Math;
 
 namespace FFXIVClientStructs.FFXIV.Shader;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x1C0)]
-public struct CameraParameter
-{
+public struct CameraParameter {
     [FieldOffset(0x0)]
     public Vector4 ViewMatrixX;
     [FieldOffset(0x10)]

@@ -1,4 +1,4 @@
-﻿using FFXIVClientStructs.FFXIV.Client.Graphics.Render;
+using FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
 
@@ -7,8 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
 
 // Client::Graphics::Kernel::DeviceDX11
 [StructLayout(LayoutKind.Explicit, Size = 0x258)]
-public unsafe partial struct Device
-{
+public unsafe partial struct Device {
     [FieldOffset(0x8)] public void* ContextArray; // Client::Graphics::Kernel::Context array
     [FieldOffset(0x10)] public void* RenderThread; // Client::Graphics::Kernel::RenderThread
     [FieldOffset(0x70)] public SwapChain* SwapChain;

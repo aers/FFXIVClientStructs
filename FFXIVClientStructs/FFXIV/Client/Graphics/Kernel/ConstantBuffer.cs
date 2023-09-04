@@ -1,11 +1,10 @@
-﻿namespace FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
+namespace FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
 
 /// <summary>
 /// A constant buffer (or cbuffer), which is used to send values to shaders. Usually contains 4*n floats.
 /// </summary>
 [StructLayout(LayoutKind.Explicit, Size = 0x70)]
-public unsafe partial struct ConstantBuffer
-{
+public unsafe partial struct ConstantBuffer {
     public const byte DefaultLoadSourcePointerFlags = 2;
 
     [FieldOffset(0x20)]
@@ -21,8 +20,7 @@ public unsafe partial struct ConstantBuffer
     public readonly Span<float> TryGetBuffer()
         => TryGetBuffer<float>();
 
-    public readonly Span<TContents> TryGetBuffer<TContents>() where TContents : unmanaged
-    {
+    public readonly Span<TContents> TryGetBuffer<TContents>() where TContents : unmanaged {
         var sourcePointer = TryGetSourcePointer();
         if (sourcePointer != null)
             return new Span<TContents>(sourcePointer, ByteSize / sizeof(TContents));
@@ -30,8 +28,7 @@ public unsafe partial struct ConstantBuffer
             return default;
     }
 
-    public Span<TContents> LoadBuffer<TContents>(int offset, int length, byte flags = DefaultLoadSourcePointerFlags) where TContents : unmanaged
-    {
+    public Span<TContents> LoadBuffer<TContents>(int offset, int length, byte flags = DefaultLoadSourcePointerFlags) where TContents : unmanaged {
         var sourcePointer = LoadSourcePointer(offset * sizeof(TContents), length * sizeof(TContents), flags);
         if (sourcePointer != null)
             return new Span<TContents>(sourcePointer, length);
@@ -48,15 +45,13 @@ public unsafe partial struct ConstantBuffer
 /// </summary>
 /// <typeparam name="TContents">Type of the cbuffer's contents. Usually a container of floats or vectors thereof.</typeparam>
 [StructLayout(LayoutKind.Sequential)]
-public unsafe readonly struct ConstantBufferPointer<TContents> where TContents : unmanaged
-{
+public unsafe readonly struct ConstantBufferPointer<TContents> where TContents : unmanaged {
     public readonly ConstantBuffer* CBuffer;
 
     public int Length
         => CBuffer == null ? 0 : (CBuffer->ByteSize / sizeof(TContents));
 
-    public ConstantBufferPointer(ConstantBuffer* cBuffer)
-    {
+    public ConstantBufferPointer(ConstantBuffer* cBuffer) {
         CBuffer = cBuffer;
     }
 

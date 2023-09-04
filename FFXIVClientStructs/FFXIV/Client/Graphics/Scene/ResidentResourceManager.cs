@@ -1,10 +1,9 @@
-﻿using FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
+using FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 
 [StructLayout(LayoutKind.Explicit)]
-public unsafe partial struct ResidentResourceManager
-{
+public unsafe partial struct ResidentResourceManager {
     [FieldOffset(0x14)]
     public uint ResourceCount;
 

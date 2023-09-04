@@ -1,0 +1,22 @@
+name: CExporter Check
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'FFXIVClientStructs/**/*.cs'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 7.0.x
+      - name: Install dependencies
+        run: dotnet restore
+      - name: Run CExporter
+        working-directory: ./ida
+        run: dotnet run --project CExporter/CExporter.csproj -c Release

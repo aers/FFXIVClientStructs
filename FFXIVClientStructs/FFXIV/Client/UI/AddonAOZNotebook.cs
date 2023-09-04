@@ -1,4 +1,4 @@
-﻿using FFXIVClientStructs.FFXIV.Component.GUI;
+using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
@@ -7,8 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //     Component::GUI::AtkEventListener
 [Addon("AOZNotebook")]
 [StructLayout(LayoutKind.Explicit, Size = 0xCC8)]
-public unsafe struct AddonAOZNotebook
-{
+public unsafe struct AddonAOZNotebook {
     [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
 
     [FieldOffset(0x308)] public SpellbookBlock SpellbookBlock01;
@@ -54,8 +53,7 @@ public unsafe struct AddonAOZNotebook
     [FieldOffset(0xB00)] public ActiveActions ActiveActions24;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x48)]
-    public struct SpellbookBlock
-    {
+    public struct SpellbookBlock {
         [FieldOffset(0x0)] public AtkComponentBase* AtkComponentBase;
         [FieldOffset(0x8)] public AtkCollisionNode* AtkCollisionNode;
         [FieldOffset(0x10)] public AtkComponentCheckBox* AtkComponentCheckBox;
@@ -68,18 +66,15 @@ public unsafe struct AddonAOZNotebook
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]
-    public struct ActiveActions
-    {
+    public struct ActiveActions {
         [FieldOffset(0x0)] public AtkComponentDragDrop* AtkComponentDragDrop;
         [FieldOffset(0x8)] public AtkTextNode* AtkTextNode;
         [FieldOffset(0x10)] public char* Name;
         [FieldOffset(0x18)] public int ActionID;
     }
 
-    public SpellbookBlock GetSpellbookBlock(int index)
-    {
-        return index switch
-        {
+    public SpellbookBlock GetSpellbookBlock(int index) {
+        return index switch {
             0 => SpellbookBlock01,
             1 => SpellbookBlock02,
             2 => SpellbookBlock03,
@@ -100,10 +95,8 @@ public unsafe struct AddonAOZNotebook
         };
     }
 
-    public ActiveActions GetActiveActions(int index)
-    {
-        return index switch
-        {
+    public ActiveActions GetActiveActions(int index) {
+        return index switch {
             0 => ActiveActions01,
             1 => ActiveActions02,
             2 => ActiveActions03,

@@ -1,13 +1,12 @@
-﻿using FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
+using System.Runtime.CompilerServices;
+using FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
 using FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 using FFXIVClientStructs.FFXIV.Common.Math;
-using System.Runtime.CompilerServices;
 
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 
 [StructLayout(LayoutKind.Explicit)]
-public unsafe partial struct CharacterUtility
-{
+public unsafe partial struct CharacterUtility {
     public const int ResourceHandleCount = 87;
 
     [FieldOffset(0x0)]

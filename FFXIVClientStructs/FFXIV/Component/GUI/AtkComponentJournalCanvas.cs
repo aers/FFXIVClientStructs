@@ -1,4 +1,4 @@
-﻿namespace FFXIVClientStructs.FFXIV.Component.GUI;
+namespace FFXIVClientStructs.FFXIV.Component.GUI;
 // Component::GUI::AtkComponentJournalCanvas
 //   Component::GUI::AtkComponentBase
 //     Component::GUI::AtkEventListener
@@ -7,7 +7,6 @@
 // common CreateAtkComponent function 8B FA 33 DB E8 ?? ?? ?? ?? 
 // type ?
 [StructLayout(LayoutKind.Explicit, Size = 0x520)]
-public struct AtkComponentJournalCanvas
-{
+public struct AtkComponentJournalCanvas {
     [FieldOffset(0x0)] public AtkComponentBase AtkComponentBase;
 }

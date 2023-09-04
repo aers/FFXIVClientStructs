@@ -1,12 +1,11 @@
-﻿using FFXIVClientStructs.FFXIV.Client.System.String;
+using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
 [InfoProxy(InfoProxyId.FreeCompany)]
 [StructLayout(LayoutKind.Explicit, Size = 0x6E8)]
-public unsafe partial struct InfoProxyFreeCompany
-{
+public unsafe partial struct InfoProxyFreeCompany {
     [FieldOffset(0x00)] public InfoProxyInterface InfoProxyInterface;
     [FieldOffset(0x20)] public void* Unk20; //Low adress probably high in hierarchy
     [FieldOffset(0x30)] public ulong ID;
@@ -33,8 +32,7 @@ public unsafe partial struct InfoProxyFreeCompany
     public partial void RequestDataForCharacter(uint objectID);
 
     [StructLayout(LayoutKind.Explicit, Size = 0x58)]
-    public struct RankData
-    {
+    public struct RankData {
         [FieldOffset(0x00)] public fixed byte Permissions[10];
         [FieldOffset(0x20)] public ushort MemberCount;
         [FieldOffset(0x22)] public byte RankNumber;
@@ -52,8 +50,7 @@ public unsafe partial struct InfoProxyFreeCompany
             ((uint)(Permissions[5] >> 3) + (((uint)Permissions[6]) << 5) + (((uint)Permissions[7] & 0x0F) << 13) + (((uint)Permissions[9] & 0x08) << 14));
         public WorkshopAccess Workshop =>
             (WorkshopAccess)(((Permissions[7] & 0xC0) >> 6) + (((uint)Permissions[8]) << 2) + (((uint)Permissions[9] & 0x07) << 10));
-        public enum BasicSettings : ushort
-        {
+        public enum BasicSettings : ushort {
             None = 0,
             CompanyProfile = 1,
             RankSettings = 4,
@@ -72,15 +69,13 @@ public unsafe partial struct InfoProxyFreeCompany
         /// Deposit Only is stored at a diferent location
         /// The definition of using bit 4 is virtual and done for ease of use
         /// </summary>
-        public enum ChestAccess : byte
-        {
+        public enum ChestAccess : byte {
             NoAccess = 1,
             ViewOnly = 2,
             FullAccess = 4,
             DepositOnly = 8,
         }
-        public enum HousingAccess : uint
-        {
+        public enum HousingAccess : uint {
             EstateHallAccess = 1,
             EstateRenameing = 2,
             GreetingCustomization = 4,
@@ -101,8 +96,7 @@ public unsafe partial struct InfoProxyFreeCompany
             OrchestrionOperation = 131072,
 
         }
-        public enum WorkshopAccess : ushort
-        {
+        public enum WorkshopAccess : ushort {
             CosntructionRemoval = 1,
             ProjCommenceDisc = 2,
             ProjMatDelivery = 4,

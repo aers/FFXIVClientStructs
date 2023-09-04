@@ -1,4 +1,4 @@
-﻿namespace FFXIVClientStructs.FFXIV.Component.GUI;
+namespace FFXIVClientStructs.FFXIV.Component.GUI;
 // Component::GUI::AtkComponentIcon
 //   Component::GUI::AtkComponentBase
 //     Component::GUI::AtkEventListener
@@ -7,8 +7,7 @@
 // common CreateAtkComponent function 8B FA 33 DB E8 ?? ?? ?? ?? 
 // type 15
 [StructLayout(LayoutKind.Explicit, Size = 0x118)]
-public unsafe partial struct AtkComponentIcon
-{
+public unsafe partial struct AtkComponentIcon {
     [FieldOffset(0x00)] public AtkComponentBase AtkComponentBase;
     [FieldOffset(0xC0)] public long IconId;
     [FieldOffset(0xC8)] public AtkUldAsset* Texture;
@@ -24,8 +23,7 @@ public unsafe partial struct AtkComponentIcon
 }
 
 [Flags]
-public enum IconComponentFlags : uint
-{
+public enum IconComponentFlags : uint {
     None = 0x00,
     DyeIcon = 0x08,
     Macro = 0x10,

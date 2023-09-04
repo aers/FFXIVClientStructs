@@ -6,8 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 // ctor "40 53 48 83 EC 20 48 8B D9 E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 03 48 8D 53 30"
 [Agent(AgentId.BannerEditor)]
 [StructLayout(LayoutKind.Explicit, Size = 0x38)]
-public unsafe partial struct AgentBannerEditor
-{
+public unsafe partial struct AgentBannerEditor {
     public static AgentBannerEditor* Instance() => (AgentBannerEditor*)AgentModule.Instance()->GetAgentByInternalId(AgentId.BannerEditor);
 
     [FieldOffset(0)] public AgentInterface AgentInterface;
@@ -18,25 +17,21 @@ public unsafe partial struct AgentBannerEditor
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x2D8)]
-public unsafe partial struct AgentBannerEditorState
-{
-    public enum EditorOpenType : int
-    {
+public unsafe partial struct AgentBannerEditorState {
+    public enum EditorOpenType : int {
         Portrait = 0,
         Gearset = 1,
         AdventurerPlate = 2,
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x18)]
-    public struct GenericDropdownItem
-    {
+    public struct GenericDropdownItem {
         [FieldOffset(0)] public nint Data;
         [FieldOffset(0x10)] public ushort Id;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x18)]
-    public struct ExpressionDropdownItem
-    {
+    public struct ExpressionDropdownItem {
         [FieldOffset(0x08)] public nint Data;
         [FieldOffset(0x10)] public ushort Id;
     }

@@ -5,15 +5,12 @@ using static LanguageExt.Prelude;
 
 namespace FFXIVClientStructs.InteropSourceGenerators.Extensions;
 
-internal static class AttributeDataExtensions
-{
+internal static class AttributeDataExtensions {
     public static Option<T> GetAttributeArgument<T>(this AttributeData attributeData, string argumentName,
-        int argumentIndex)
-    {
+        int argumentIndex) {
         // [Attribute("??")]
         // [Attribute(name: "??")]
-        if (attributeData.ConstructorArguments.Any())
-        {
+        if (attributeData.ConstructorArguments.Any()) {
             if (argumentIndex > attributeData.ConstructorArguments.Length)
                 return None;
 

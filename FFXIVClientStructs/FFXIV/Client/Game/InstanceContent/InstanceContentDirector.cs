@@ -1,8 +1,7 @@
-﻿namespace FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
+namespace FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x1CA8)]
-public unsafe struct InstanceContentDirector
-{
+public unsafe struct InstanceContentDirector {
     [FieldOffset(0x00)] public ContentDirector ContentDirector;
     //[FieldOffset(0x730)] public fixed byte InstanceContentExcelRow[0xA8];
     /// <summary>
@@ -12,8 +11,7 @@ public unsafe struct InstanceContentDirector
     [FieldOffset(0xCDC)] public InstanceContentType InstanceContentType;
 }
 
-public enum InstanceContentType : byte
-{
+public enum InstanceContentType : byte {
     Raid = 1,
     Dungeon = 2,
     DeepDungeon = 9,

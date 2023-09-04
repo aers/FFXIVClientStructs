@@ -1,4 +1,4 @@
-﻿using FFXIVClientStructs.FFXIV.Client.System.String;
+using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
@@ -8,8 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 //     Component::GUI::AtkModuleInterface::AtkEventInterface
 [Agent(AgentId.ChatLog)]
 [StructLayout(LayoutKind.Explicit, Size = 0x2B8)]
-public unsafe partial struct AgentChatLog
-{
+public unsafe partial struct AgentChatLog {
     public static AgentChatLog* Instance() => (AgentChatLog*)AgentModule.Instance()->GetAgentByInternalId(AgentId.ChatLog);
 
     [FieldOffset(0x00)] public AgentInterface AgentInterface;
@@ -22,8 +21,7 @@ public unsafe partial struct AgentChatLog
 }
 
 // There are definitely more channels than just these, these were all the ones I could find quickly.
-public enum ChatChannel
-{
+public enum ChatChannel {
     Say = 1,
     Party = 2,
     Alliance = 3,

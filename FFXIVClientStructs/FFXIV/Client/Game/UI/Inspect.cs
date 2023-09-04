@@ -1,11 +1,10 @@
-﻿using FFXIVClientStructs.FFXIV.Client.Game.Character;
+using FFXIVClientStructs.FFXIV.Client.Game.Character;
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x268)]
-public unsafe struct Inspect
-{
+public unsafe struct Inspect {
     [FieldOffset(0xC), Obsolete("Improperly mapped use outside variables")] public GameObjectID ObjectId;
 
     [FieldOffset(0xC)] public uint ObjectID;
@@ -17,7 +16,7 @@ public unsafe struct Inspect
     [FieldOffset(0x54)] public fixed byte PSNOnlineID[17];
     [FieldOffset(0x66)] public byte ClassJobId;
     [FieldOffset(0x67)] public byte Level;
-	[FieldOffset(0x68)] public byte SyncedLevel;
+    [FieldOffset(0x68)] public byte SyncedLevel;
 
     [FieldOffset(0x6A)] public ushort AverageItemLevel;
     [FieldOffset(0x6C)] public ushort TitleId;
@@ -51,8 +50,7 @@ public unsafe struct Inspect
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 8)]
-public struct ExtraInspectDataEntry
-{
+public struct ExtraInspectDataEntry {
     [FieldOffset(0x00)] public int Key;
     [FieldOffset(0x04)] public int Value;
 }

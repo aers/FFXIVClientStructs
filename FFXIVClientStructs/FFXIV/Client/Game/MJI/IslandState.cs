@@ -1,11 +1,11 @@
-﻿namespace FFXIVClientStructs.FFXIV.Client.Game.MJI; 
+namespace FFXIVClientStructs.FFXIV.Client.Game.MJI;
 
 [StructLayout(LayoutKind.Explicit, Size = 0xD0)]
 public unsafe struct IslandState {
     // Unknown!! This flag *appears* to control island state for quite a few things and is read *a lot* by Lua, but I
     // haven't been able to tack this down quite yet. 
     [FieldOffset(0x00)] public bool CanEditIsland;
-    
+
     /// <summary>
     /// The current Sanctuary Rank of the player's island. Controls what buildings/items/recipes are or aren't
     /// available to the player, and represented by MJIRank.
@@ -78,7 +78,7 @@ public unsafe struct IslandState {
     /// A sub-struct representing the Farm's (Cropland's) current state
     /// </summary>
     [FieldOffset(0x6F)] public MJIFarmPasture Farm;
-    
+
     /// <summary>
     /// A sub-struct representing the Pasture's current state.
     /// </summary>
@@ -88,20 +88,20 @@ public unsafe struct IslandState {
     /// Appears to be set if the pasture in it has any animal currently under care.
     /// </summary>
     [FieldOffset(0x77)] public bool PastureUnderCare; // ??
-    
+
     // Note: 0x78 to the game is treated as a single DWORD, but the actual values are only used in the context of
     // LOWORD or HIWORD, so we'll split these fields.
-    
+
     /// <summary>
     /// The current daily care fee paid to the Creature Comforter for the pasture.
     /// </summary>
     [FieldOffset(0x78)] public ushort PastureDailyCareFee;
-    
+
     /// <summary>
     /// The current daily care fee paid to the Produce Producer for the farm.
     /// </summary>
     [FieldOffset(0x7A)] public ushort FarmDailyCareFee;
-    
+
     /// <summary>
     /// The current number of hours remaining until a specific Landmark has finished construction.
     /// 
@@ -111,14 +111,14 @@ public unsafe struct IslandState {
     /// This array is indexed by the RowID of an MJILandmarkPlace.
     /// </summary>
     [FieldOffset(0x7C)] public fixed byte LandmarkHoursToCompletion[5];
-    
+
     /// <summary>
     /// The RowID of the MJILandmark present at a specific MJILandmarkPlace.
     /// 
     /// This array is indexed by the RowID of an MJILandmarkPlace.
     /// </summary>
     [FieldOffset(0x81)] public fixed byte LandmarkIds[5];
-    
+
     /// <summary>
     /// The current construction status of a landmark at a specific MJILandmarkPlace.
     /// 

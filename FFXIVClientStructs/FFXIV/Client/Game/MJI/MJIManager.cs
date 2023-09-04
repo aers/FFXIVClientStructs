@@ -1,4 +1,4 @@
-﻿namespace FFXIVClientStructs.FFXIV.Client.Game.MJI;
+namespace FFXIVClientStructs.FFXIV.Client.Game.MJI;
 
 /// <summary>
 /// Manager struct (?) for Island Sanctuary (internally MJI).
@@ -29,10 +29,10 @@ public unsafe partial struct MJIManager {
     [FieldOffset(0x1C)] public uint CurrentModeItem;
 
     [FieldOffset(0x28)] public IslandState IslandState;
-    
+
     [FieldOffset(0x110)] public MJIPastureHandler* PastureHandler;
     [FieldOffset(0x118)] public MJIFarmState* FarmState;
-    
+
     /// <summary>
     /// A struct representing landmark placements on the Island Sanctuary. Each index represents a specific landmark
     /// slot directly. Refer to <see cref="MJILandmarkPlacement"/> for more information.
@@ -44,7 +44,7 @@ public unsafe partial struct MJIManager {
     /// </remarks>
     [FixedSizeArray<MJILandmarkPlacement>(5)]
     [FieldOffset(0x1B4)] public fixed byte LandmarkPlacements[5 * MJILandmarkPlacement.Size]; // ??
-    
+
     /// <summary>
     /// A struct representing building placements on the Island Sanctuary. Each index represents a specific building
     /// slot directly. Refer to <see cref="MJIBuildingPlacement"/> for more information.
@@ -72,7 +72,7 @@ public unsafe partial struct MJIManager {
     /// </summary>
     [FixedSizeArray<MJIFarmPasturePlacement>(3)]
     [FieldOffset(0x260)] public fixed byte FarmPlacements[MJIFarmPasturePlacement.Size * 3];
-    
+
     /// <summary>
     /// A struct representing pasture placements on the current Island Sanctuary. Identical in behavior (hopefully)
     /// to that of <see cref="FarmPlacements"/>
@@ -100,7 +100,7 @@ public unsafe partial struct MJIManager {
     /// the lower half.
     /// </summary>
     [FieldOffset(0x2BA)] public fixed byte SupplyAndDemandShifts[81];
-    
+
     /// <summary>
     /// The current day in the Craftworks cycle, from 0 to 6.
     /// </summary>
@@ -108,7 +108,7 @@ public unsafe partial struct MJIManager {
     /// 0 represents reset day (Tuesday).
     /// </remarks>
     [FieldOffset(0x368)] public byte CurrentCycleDay;
-    
+
     /// <summary>
     /// An array containing the currently-configured rest days for the Isleworks. Contains values 0 - 13, and is
     /// always in order.
@@ -118,7 +118,7 @@ public unsafe partial struct MJIManager {
     /// populated until the Craftworks have been opened at least once.
     /// </remarks>
     [FieldOffset(0x369)] public fixed byte CraftworksRestDays[4];
-    
+
     /// <summary>
     /// The current groove level of the Isleworks.
     /// </summary>
@@ -215,7 +215,7 @@ public unsafe partial struct MJIManager {
     /// <param name="itemId">The Craftwork ID to look up</param>
     /// <returns>Returns an enum value.</returns>
     public CraftworkSupply GetSupplyForCraftwork(uint itemId) {
-        return (CraftworkSupply) ((this.SupplyAndDemandShifts[itemId] & 0xF0) >> 4);
+        return (CraftworkSupply)((this.SupplyAndDemandShifts[itemId] & 0xF0) >> 4);
     }
 
     /// <summary>
@@ -224,7 +224,7 @@ public unsafe partial struct MJIManager {
     /// <param name="itemId">The Craftwork ID to look up</param>
     /// <returns>Returns an enum value.</returns>
     public CraftworkDemandShift GetDemandShiftForCraftwork(uint itemId) {
-        return (CraftworkDemandShift) (this.SupplyAndDemandShifts[itemId] & 0x0F);
+        return (CraftworkDemandShift)(this.SupplyAndDemandShifts[itemId] & 0x0F);
     }
 }
 
@@ -234,7 +234,7 @@ public unsafe partial struct MJIManager {
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
 public struct MJIBuildingPlacement {
     public const int Size = 0x10;
-    
+
     /// <summary>
     /// At load, the location of this specific building. Will update if a building is changed, but the exact
     /// mechanism of the update (and why it does such) is not currently known.
@@ -261,7 +261,7 @@ public struct MJILandmarkPlacement {
     public const int Size = 0xC;
 
     [FieldOffset(0x8)] public byte HoursToCompletion;
-    
+
     /// <summary>
     /// The RowID of the landmark currently present at the specified location.
     /// </summary>
@@ -276,7 +276,7 @@ public struct MJILandmarkPlacement {
 [StructLayout(LayoutKind.Explicit, Size = Size)]
 public struct MJIFarmPasturePlacement {
     public const int Size = 0xC;
-    
+
     /// <summary>
     /// The SGB ID of the model to use for this location
     /// </summary>

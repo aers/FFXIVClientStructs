@@ -1,4 +1,4 @@
-﻿using FFXIVClientStructs.FFXIV.Component.GUI;
+using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
@@ -7,8 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //     Component::GUI::AtkEventListener
 [Addon("_Exp")]
 [StructLayout(LayoutKind.Explicit, Size = 0x290)]
-public struct AddonExp
-{
+public struct AddonExp {
     [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
 
     [FieldOffset(0x270)] public byte ClassJob;
@@ -17,5 +16,5 @@ public struct AddonExp
     [FieldOffset(0x27C)] public uint RequiredExp;
     [FieldOffset(0x280)] public uint RestedExp;
 
-    public float CurrentExpPercent => (float) CurrentExp / RequiredExp * 100;
+    public float CurrentExpPercent => (float)CurrentExp / RequiredExp * 100;
 }

@@ -1,14 +1,12 @@
-﻿namespace FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
+namespace FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
 // Client::Graphics::Kernel::ShaderNode
 
 // size = 0x38
 // inlined ctor
 [StructLayout(LayoutKind.Explicit, Size = 0x38)]
-public unsafe struct ShaderNode
-{
+public unsafe struct ShaderNode {
     [StructLayout(LayoutKind.Explicit, Size = 0x8)]
-    public struct ShaderPass
-    {
+    public struct ShaderPass {
         [FieldOffset(0x0)] public uint VertexShader;
         [FieldOffset(0x4)] public uint PixelShader;
     }

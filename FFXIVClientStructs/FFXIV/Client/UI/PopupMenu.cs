@@ -1,12 +1,11 @@
-﻿using FFXIVClientStructs.FFXIV.Component.GUI;
+using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 // Client::UI::PopupMenu
 // Used in several addons as inlined derivations
 [StructLayout(LayoutKind.Explicit, Size = 0x68)]
-public unsafe struct PopupMenu
-{
+public unsafe struct PopupMenu {
     [FieldOffset(0x0)] public AtkEventListener AtkEventListener;
     [FieldOffset(0x8)] public AtkStage* AtkStage;
     [FieldOffset(0x10)] public byte** EntryNames; // array of char* pointers

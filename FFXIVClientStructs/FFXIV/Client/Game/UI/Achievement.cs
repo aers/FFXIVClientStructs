@@ -1,11 +1,10 @@
-﻿namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
+namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
 /// <summary>
 /// A struct representing the UIState Achievement
 /// </summary>
 [StructLayout(LayoutKind.Explicit, Size = 0x550)]
-public unsafe partial struct Achievement
-{
+public unsafe partial struct Achievement {
     [FieldOffset(0x00)] public void** VTable;
     [FieldOffset(0x08)] public AchievementState State;
     [FieldOffset(0x0C)] public fixed byte CompletedAchievements[428];
@@ -40,11 +39,10 @@ public unsafe partial struct Achievement
         => State is AchievementState.Loaded;
 
     /// <summary> Represents the loaded state of Achievement </summary>
-    public enum AchievementState : int
-    {
-        Invalid   = 0, // Achievement is initialized at this state
+    public enum AchievementState : int {
+        Invalid = 0, // Achievement is initialized at this state
         Requested = 1, // This state is set between the client request and receiving the data from the server
-        Loaded    = 2, // Set upon data being received
+        Loaded = 2, // Set upon data being received
     }
 
     [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 04 30", 3)]

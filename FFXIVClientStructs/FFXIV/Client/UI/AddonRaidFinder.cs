@@ -1,12 +1,11 @@
-﻿using FFXIVClientStructs.FFXIV.Client.System.String;
+using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 [Addon("RaidFinder")]
 [StructLayout(LayoutKind.Explicit, Size = 0xEF0)]
-public unsafe partial struct AddonRaidFinder
-{
+public unsafe partial struct AddonRaidFinder {
     [FieldOffset(0x00)] public AtkUnitBase AtkUnitBase;
 
     [FieldOffset(0x288)] public AtkComponentList* DutyList;
@@ -20,7 +19,7 @@ public unsafe partial struct AddonRaidFinder
     [FieldOffset(0x378)] public Utf8String RaidsTooltipString;
     [FieldOffset(0x3E0)] public Utf8String TrialsTooltipString;
     [FieldOffset(0x448)] public Utf8String UltimatesTooltipString;
-    
+
     [FieldOffset(0x4D4)] public int HighlightedRow;
     [FieldOffset(0x4DC)] public int NumDisplayedEntries; // Use to index into EntryInfoArray
     [FieldOffset(0x4E0)] public int SelectedTab;
@@ -30,23 +29,21 @@ public unsafe partial struct AddonRaidFinder
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x140)]
-public struct RaidFinderDutyEntry
-{
+public struct RaidFinderDutyEntry {
     [FieldOffset(0x00)] public Utf8String DutyName;
     [FieldOffset(0x68)] public Utf8String DutyLevel;
     [FieldOffset(0xD0)] public Utf8String CurrentlyRecruitingPartiesCount;
-    
+
     [FieldOffset(0x138)] public RaidFinderEntryFlags Flags;
     // There are 8 bytes worth of additional data at the end, not sure what exactly they mean
 }
 
 [Flags]
-public enum RaidFinderEntryFlags : byte
-{
+public enum RaidFinderEntryFlags : byte {
     AvailableForSelection = 0x01, // Checkbox is available and can be checked
-    Selected = 0x02, 
+    Selected = 0x02,
     Locked = 0x04, // Unable to select duty due to not meeting conditions
-    
+
     Ultimate = 0x08,
     Unreal = 0x20,
     Extreme = 0x40,

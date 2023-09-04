@@ -1,7 +1,7 @@
 using FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
 using FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 
-namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render; 
+namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 
 /// <summary>
 /// Represents a renderer material.
@@ -14,8 +14,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 [StructLayout(LayoutKind.Explicit, Size = 0x40)]
 public unsafe struct Material {
     [StructLayout(LayoutKind.Explicit, Size = 0x18)]
-    public struct TextureEntry
-    {
+    public struct TextureEntry {
         /// <summary>
         /// Cross-reference this with <see cref="ShaderPackage.ConstantSamplerUnknown.Id"/>.
         /// </summary>

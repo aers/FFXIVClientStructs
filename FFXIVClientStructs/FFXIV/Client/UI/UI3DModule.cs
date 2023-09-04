@@ -7,12 +7,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 // ctor E8 ?? ?? ?? ?? 48 8B 44 24 ?? 4C 8D BF ?? ?? ?? ?? 
 [StructLayout(LayoutKind.Explicit, Size = 0x11BE0)]
-public unsafe partial struct UI3DModule
-{
+public unsafe partial struct UI3DModule {
     // Client::UI::UI3DModule::MapInfo
     [StructLayout(LayoutKind.Explicit, Size = 0x18)]
-    public struct MapInfo
-    {
+    public struct MapInfo {
         [FieldOffset(0x8)] public int MapId;
 
         [FieldOffset(0xC)] public int IconId;
@@ -35,8 +33,7 @@ public unsafe partial struct UI3DModule
     //   Client::UI::UI3DModule::MapInfo
     // ctor inlined
     [StructLayout(LayoutKind.Explicit, Size = 0x60)]
-    public struct ObjectInfo
-    {
+    public struct ObjectInfo {
         [FieldOffset(0x0)] public MapInfo MapInfo;
         [FieldOffset(0x18)] public GameObject* GameObject;
         [FieldOffset(0x20)] public Vector3 NamePlatePos;
@@ -58,8 +55,7 @@ public unsafe partial struct UI3DModule
     //   Client::UI::UI3DModule::MapInfo
     // ctor inlined
     [StructLayout(LayoutKind.Explicit, Size = 0x28)]
-    public struct MemberInfo
-    {
+    public struct MemberInfo {
         [FieldOffset(0x0)] public MapInfo MapInfo;
         [FieldOffset(0x18)] public BattleChara* BattleChara;
 
@@ -71,8 +67,7 @@ public unsafe partial struct UI3DModule
     // Client::UI::UI3DModule::UnkInfo
     //   Client::UI::UI3DModule::MapInfo
     [StructLayout(LayoutKind.Explicit, Size = 0x40)]
-    public struct UnkInfo
-    {
+    public struct UnkInfo {
         [FieldOffset(0x0)] public MapInfo MapInfo;
         // rest unknown
     }

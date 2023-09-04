@@ -1,8 +1,7 @@
-﻿namespace FFXIVClientStructs.FFXIV.Client.Game;
+namespace FFXIVClientStructs.FFXIV.Client.Game;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x340)]
-public unsafe partial struct ActionTimelineManager
-{
+public unsafe partial struct ActionTimelineManager {
     [FieldOffset(0x10)] public ActionTimelineDriver Driver;
 
     [FieldOffset(0x2C0)] public float OverallSpeed; // The overall speed which is applied to all slots as well as things like particles attached to the owner
@@ -24,8 +23,7 @@ public unsafe partial struct ActionTimelineManager
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x1F0)]
-public unsafe partial struct ActionTimelineDriver
-{
+public unsafe partial struct ActionTimelineDriver {
     public const int TimelineSlotCount = 13;
 
     [FieldOffset(0xE0)] public unsafe fixed ushort TimelineIds[TimelineSlotCount]; // The timeline active in each slot or 0 when none
@@ -39,8 +37,7 @@ public unsafe partial struct ActionTimelineDriver
     public partial void SetSlotSpeed(uint slot, float speed); // Sets the speed of the animation slot
 }
 
-public enum ActionTimelineSlots : int
-{
+public enum ActionTimelineSlots : int {
     Base = 0,
     UpperBody = 1,
     Facial = 2,

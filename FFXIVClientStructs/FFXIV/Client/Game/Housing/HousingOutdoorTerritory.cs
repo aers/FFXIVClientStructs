@@ -1,9 +1,9 @@
-namespace FFXIVClientStructs.FFXIV.Client.Game.Housing; 
+namespace FFXIVClientStructs.FFXIV.Client.Game.Housing;
 
 [StructLayout(LayoutKind.Explicit, Size = 0xAE30)]
 public unsafe partial struct HousingOutdoorTerritory {
     [FieldOffset(0x00)] public HousingTerritory HousingTerritory;
-    
+
     /// <summary>
     /// Get the Icon ID used for map icons in housing areas.
     /// </summary>
@@ -11,10 +11,10 @@ public unsafe partial struct HousingOutdoorTerritory {
     /// <returns>IconID, or 0 if something went wrong</returns>
     [MemberFunction("40 56 57 48 83 EC 38 0F B6 FA")]
     public partial int GetPlotIcon(byte plot);
-    
+
     [FixedSizeArray<PlotDetail>(60)]
     [FieldOffset(0x96B8)] public fixed byte Plot[0x10 * 60];
-    
+
     [FixedSizeArray<ApartmentBuildingState>(2)]
     [FieldOffset(0x9A78)] public fixed byte ApartmentBuilding[2];
 
