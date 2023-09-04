@@ -1,4 +1,5 @@
-﻿using FFXIVClientStructs.FFXIV.Component.GUI;
+﻿using FFXIVClientStructs.FFXIV.Client.System.String;
+using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI; 
 
@@ -7,6 +8,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 public unsafe partial struct AddonDtr {
     [FieldOffset(0x00)] public AtkUnitBase AtkUnitBase;
 
+    [FieldOffset(0x220)] public Utf8String TimeModeTooltip; // Example: "Eorzea Time/Local Time"
+    [FieldOffset(0x288)] public Utf8String NetworkInfoTooltip;
     [FieldOffset(0x2F8)] public AtkTextNode* TimeText;
     [FieldOffset(0x300)] public AtkResNode* NetworkStrengthContainer;
     [FieldOffset(0x308)] public AtkImageNode* NetworkStrengthImage;
