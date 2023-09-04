@@ -24,12 +24,11 @@ jobs:
         run: dotnet run --project CExporter/CExporter.csproj -c Release
       - name: Check for changes
         id: git-check
-        run: |
-          echo "=============== list modified files ==============="
-          git diff --name-only
-          
+        run: |          
           echo "========== check paths of modified files =========="
           git diff --name-only -- ida > files.txt
+          echo "=============== list modified files ==============="
+          tail files.txt
           while IFS= read -r file
           do
             echo $file
@@ -43,7 +42,7 @@ jobs:
           done < files.txt
           rm files.txt
       - name: Commit C Structs
-        if: steps.git-check.outputs.complete == 'true'
+        if: steps.git-check.outputs.has_changes == 'true'
         run: |
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config user.name "github-actions[bot]"
