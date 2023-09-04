@@ -1,4 +1,11 @@
+using System.Runtime.CompilerServices;
 using FFXIVClientStructs.FFXIV.Client.Game.Character;
+using FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
+using FFXIVClientStructs.FFXIV.Client.Graphics.Render;
+using FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
+using FFXIVClientStructs.FFXIV.Common.Math;
+using FFXIVClientStructs.FFXIV.Shader;
+using FFXIVClientStructs.Interop.Attributes;
 
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 // Client::Graphics::Scene::Human
@@ -60,6 +67,40 @@ public unsafe partial struct Human {
     [FieldOffset(0x93C)] public ushort FaceId; // fXXXX ID
     [FieldOffset(0x93E)] public ushort TailEarId; // tXXXX/zXXXX(viera)
     [FieldOffset(0x940)] public ushort FurId;
+
+    [FieldOffset(0x980)] private nint _slotDecalBase;
+    [FieldOffset(0x980)] public Texture* HeadDecal;
+    [FieldOffset(0x988)] public Texture* TopDecal;
+    [FieldOffset(0x990)] public Texture* ArmsDecal;
+    [FieldOffset(0x998)] public Texture* LegsDecal;
+    [FieldOffset(0x9A0)] public Texture* FeetDecal;
+    [FieldOffset(0x9A8)] public Texture* EarDecal;
+    [FieldOffset(0x9B0)] public Texture* NeckDecal;
+    [FieldOffset(0x9B8)] public Texture* WristDecal;
+    [FieldOffset(0x9C0)] public Texture* RFingerDecal;
+    [FieldOffset(0x9C8)] public Texture* LFingerDecal;
+
+    public ref Texture* SlotDecal(int slot) {
+        if (slot < 0 || slot > 9)
+            throw new ArgumentOutOfRangeException(nameof(slot));
+        return ref ((Texture**)Unsafe.AsPointer(ref _slotDecalBase))[slot];
+    }
+
+    public Span<Pointer<Texture>> SlotDecalsSpan
+        => new(Unsafe.AsPointer(ref _slotDecalBase), 10);
+
+    [FieldOffset(0x9D8)] public ConstantBuffer* CustomizeParameterCBuffer;
+    [FieldOffset(0x9E0)] public ConstantBuffer* DecalColorCBuffer;
+
+    public readonly ConstantBufferPointer<CustomizeParameter> CustomizeParameterTypedCBuffer
+        => new(CustomizeParameterCBuffer);
+    public readonly ConstantBufferPointer<Vector4> DecalColorTypedCBuffer
+        => new(DecalColorCBuffer);
+
+    [FieldOffset(0x9E8)] public TextureResourceHandle* Decal;
+    [FieldOffset(0x9F0)] public TextureResourceHandle* LegacyBodyDecal;
+    [FieldOffset(0x9F8)] public Texture* FreeCompanyCrest;
+    [FieldOffset(0xA00)] public uint SlotFreeCompanyCrestBitfield; // & 0x001 for slot 0, up to & 0x200 for slot 9
 
     [FieldOffset(0xA38)] public byte* ChangedEquipData;
 

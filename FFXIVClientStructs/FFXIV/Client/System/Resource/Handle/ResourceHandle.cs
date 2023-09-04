@@ -20,9 +20,27 @@ public unsafe partial struct ResourceHandle {
     [FieldOffset(0x48)] public StdString FileName; // std::string
     [FieldOffset(0xAC)] public uint RefCount;
 
+    public ReadOnlySpan<byte> GetDataSpan() {
+        var data = GetData();
+        if (data == null)
+            return default;
+
+        var length = GetLength();
+        if (length > 0x7FEFFFFF)
+            throw new OverflowException($"Resource too large (length {length})");
+
+        return new(data, (int)length);
+    }
+
     [MemberFunction("E8 ?? ?? ?? ?? 48 C7 03 ?? ?? ?? ?? C6 83")]
     public partial bool DecRef();
 
     [MemberFunction("E8 ?? ?? ?? ?? 41 8B 46 30 C1 E0 05")]
     public partial bool IncRef();
+
+    [VirtualFunction(23u)]
+    public partial byte* GetData();
+
+    [VirtualFunction(17u)]
+    public partial ulong GetLength();
 }
