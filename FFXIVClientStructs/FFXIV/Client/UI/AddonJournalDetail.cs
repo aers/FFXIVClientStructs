@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [StructLayout(LayoutKind.Explicit, Size = 0x2F8)]
 public unsafe struct AddonJournalDetail {
     [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
-    
+
     [FieldOffset(0x230)] public AtkComponentScrollBar* ScrollBarNode;
     [FieldOffset(0x238)] public AtkComponentGuildLeveCard* GuildLeveCardNode;
     [FieldOffset(0x240)] public AtkTextNode* DutyNameTextNode;

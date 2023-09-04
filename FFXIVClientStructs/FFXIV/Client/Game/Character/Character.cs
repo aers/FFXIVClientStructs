@@ -62,6 +62,7 @@ public unsafe partial struct Character {
 
     [Obsolete("Use CharacterData.CombatTaggerId instead.", true)]
     [FieldOffset(0x1AB0)] public GameObjectID CombatTaggerId; // offset not updated for 6.5
+
     /// <summary>
     /// The current (hard) target for this Character. This will not be set for the LocalPlayer.
     /// </summary>

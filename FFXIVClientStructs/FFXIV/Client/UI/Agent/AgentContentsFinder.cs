@@ -12,7 +12,7 @@ public unsafe partial struct AgentContentsFinder {
     [FieldOffset(0x0)] public AgentInterface AgentInterface;
 
     [FieldOffset(0x38)] public Utf8String Description;
-    
+
     // TODO split into 3 separate arrays, (8F0, EE0, 14D0), each with 5 entries, 8F0 seems to be the top row of rewards while 14D0 is the bottom row, EE0 is unknown
     [FixedSizeArray<ItemReward>(15)]
     [FieldOffset(0x8F0)] public fixed byte ItemRewardArray[0x130 * 15]; // E8 ?? ?? ?? ?? 41 B8 ?? ?? ?? ?? 89 5E 2C
