@@ -14,14 +14,18 @@ public struct AgentRetainerTask {
     // 03 - Completed Venture
     [FieldOffset(0x28)] public uint DisplayType;
 
+    [FieldOffset(0x38)] public uint OpenerAddonId;
+
     // Set when venture is complete
     [FieldOffset(0x44)] public uint RewardXP;
 
     // Set when venture is complete
-    [FieldOffset(0x50)] public uint RewardItemId;
+    [FieldOffset(0x50)] public unsafe fixed uint RewardItemIds[2];
 
     // Set when venture is complete
-    [FieldOffset(0x58)] public uint RewardItemCount;
+    [FieldOffset(0x58)] public unsafe fixed uint RewardItemCount[2];
+
+    [FieldOffset(0x6C)] public uint RetainerTaskLvRange;
 
     [FieldOffset(0x74)] public uint RetainerTaskId;
 
