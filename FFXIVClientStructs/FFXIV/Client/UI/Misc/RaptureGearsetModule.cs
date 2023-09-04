@@ -101,9 +101,9 @@ public unsafe partial struct RaptureGearsetModule {
     /// Get the Banner index of a Gearset.
     /// </summary>
     /// <param name="gearsetId">The ID of the gearset.</param>
-    /// <returns>The actual BannerIndex (gearset->BannerIndex - 1).</returns>
+    /// <returns>The Banner index, or -1 if it was not linked.</returns>
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 C0 41 3B C7")]
-    public partial byte GetBannerIndex(byte gearsetId);
+    public partial sbyte GetBannerIndex(byte gearsetId);
 
     /// <summary>
     /// Set the Banner index of a Gearset.
