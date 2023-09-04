@@ -62,6 +62,10 @@ public unsafe partial struct AgentModule {
         return (AgentRetainerList*)GetAgentByInternalId(AgentId.RetainerList);
     }
 
+    public AgentRetainerTask* GetAgentRetainerTask() {
+        return (AgentRetainerTask*)GetAgentByInternalId(AgentId.RetainerTask);
+    }
+
     public AgentRevive* GetAgentRevive() {
         return (AgentRevive*)GetAgentByInternalId(AgentId.Revive);
     }
