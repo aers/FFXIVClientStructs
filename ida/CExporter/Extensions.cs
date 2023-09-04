@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
@@ -78,5 +80,18 @@ public static class FieldInfoExtensions {
             attrs.Cast<FieldOffsetAttribute>().Single().Value :
             // Lets assume this is because it's a LayoutKind.Sequential struct
             Marshal.OffsetOf(info.DeclaringType!, info.Name).ToInt32();
+    }
+}
+public static class Extensions {
+    internal static UnionLayout? GetNextLayout(this List<UnionLayout> layouts, UnionLayout layout) {
+        var index = layouts.IndexOf(layout);
+        if (index == -1 || index == layouts.Count - 1)
+            return null;
+        return layouts[index + 1];
+    }
+
+    public static void WriteFile(this FileInfo file, string content) {
+        using var stream = file.CreateText();
+        stream.Write(content);
     }
 }

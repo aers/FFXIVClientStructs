@@ -523,14 +523,6 @@ public abstract class ExporterBase {
         }
     }
 }
-public static class Extensions {
-    internal static UnionLayout? GetNextLayout(this List<UnionLayout> layouts, UnionLayout layout) {
-        var index = layouts.IndexOf(layout);
-        if (index == -1 || index == layouts.Count - 1)
-            return null;
-        return layouts[index + 1];
-    }
-}
 
 internal record UnionLayout {
     public List<StructLayout> Layouts = new();

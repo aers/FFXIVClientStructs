@@ -1,32 +1,34 @@
 using System;
 using System.IO;
+using System.Linq;
 
 namespace CExporter;
 
 public class Program {
     public static void Main(string[] _) {
-        const string outputBase = "../../../../";
-        var workingDirectory = Environment.CurrentDirectory;
-        var path = "";
-        if (!workingDirectory.EndsWith("ida"))
-            path = outputBase;
+        var dir = new DirectoryInfo(Environment.CurrentDirectory);
+        while (dir.FullName.Contains("ida") && !dir.FullName.EndsWith("ida")) {
+            dir = dir.Parent!;
+        } 
+        while (!dir.FullName.Contains("ida") && !dir.FullName.EndsWith("ida")) {
+            dir = dir.GetDirectories("ida/CExporter", SearchOption.AllDirectories).First().Parent!;
+        }
 
         ExporterBase exporter = new ExporterIDA();
 
-        File.WriteAllText($"{path}ffxiv_client_structs.h", exporter.Export(GapStrategy.FullSize));
-        File.WriteAllText($"{path}ffxiv_client_structs_arrays.h", exporter.Export(GapStrategy.ByteArray));
+        new FileInfo(Path.Combine(dir.FullName, "ffxiv_client_structs.h")).WriteFile(exporter.Export(GapStrategy.FullSize));
+        new FileInfo(Path.Combine(dir.FullName, "ffxiv_client_structs_arrays.h")).WriteFile(exporter.Export(GapStrategy.ByteArray));
 
         exporter = new ExporterGhidra();
-        
-        File.WriteAllText($"{path}ffxiv_client_structs_ghidra.h", exporter.Export(GapStrategy.FullSize));
-        File.WriteAllText($"{path}ffxiv_client_structs_arrays_ghidra.h", exporter.Export(GapStrategy.ByteArray));
 
+        new FileInfo(Path.Combine(dir.FullName, "ffxiv_client_structs_ghidra.h")).WriteFile(exporter.Export(GapStrategy.FullSize));
+        new FileInfo(Path.Combine(dir.FullName, "ffxiv_client_structs_arrays_ghidra.h")).WriteFile(exporter.Export(GapStrategy.ByteArray));
+#if DEBUG
         Console.Clear();
         Console.SetCursorPosition(0, 0);
+#endif
 
         if (exporter.Errored) {
-            Console.Clear();
-            Console.SetCursorPosition(0, 0);
             foreach (var (_, value) in ExporterStatics.ErrorListDictionary)
                 Console.WriteLine(value);
             throw new Exception("Exporter failed to export all types some error happened");
