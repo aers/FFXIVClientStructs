@@ -34,16 +34,16 @@ jobs:
           done < files.txt
           rm files.txt
       - name: Setup .NET
-        if: steps.git-check.outputs.has_changes == 'true'
+        if: steps.git-check.outputs.has_changes == 'true' || ${{ github.event_name == 'workflow_dispatch' }}
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '7.0.x'
       - name: Restore
-        if: steps.git-check.outputs.has_changes == 'true'
+        if: steps.git-check.outputs.has_changes == 'true' || ${{ github.event_name == 'workflow_dispatch' }}
         run: dotnet restore
       - name: Run CExporter
         id: cexporter
-        if: steps.git-check.outputs.has_changes == 'true'
+        if: steps.git-check.outputs.has_changes == 'true' || ${{ github.event_name == 'workflow_dispatch' }}
         working-directory: ./ida
         run: |
           dotnet run --project CExporter/CExporter.csproj
