@@ -21,6 +21,8 @@ public unsafe partial struct AddonDtr {
     [FieldOffset(0x338)] public AtkResNode* WalkModeContainer;
     [FieldOffset(0x340)] public AtkResNode* WorldInfoContainer;
     [FieldOffset(0x348)] public AtkTextNode* WorldText;
-    [FieldOffset(0x350)] public AtkImageNode* WorldVisitImage; // Displays homeicon if in homeworld
+    [FieldOffset(0x350)] public AtkImageNode* WorldVisitImage; // Displays home icon if in home world
     [FieldOffset(0x358)] public AtkCollisionNode* CollisionNode;
+    
+    // [FieldOffset(0x360)] public int SomeKindOfCalculatedPositionOffset; // Component::GUI::AtkUnitBase_GetScaledWidth(a1, 0) - v9 - v10;
 }
