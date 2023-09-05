@@ -1,7 +1,7 @@
 using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
-namespace FFXIVClientStructs.FFXIV.Client.UI; 
+namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 [Addon("_DTR")]
 [StructLayout(LayoutKind.Explicit, Size = 0x368)]
