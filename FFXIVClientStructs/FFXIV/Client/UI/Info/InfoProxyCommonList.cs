@@ -28,6 +28,7 @@ public unsafe partial struct InfoProxyCommonList {
         [FieldOffset(0x00)] public ulong ContentId;
         [FieldOffset(0x08)] public ClientState State; // bunch of stuff mashed together from online status, mentor status, duty status
         //12 bytes
+        [FieldOffset(0x18)] public uint Unk18; // Some kind of flag type, seems to be 0x10 for accepted, 0x20 for pending. and there seems to be some check for 0x1000000
         [FieldOffset(0x1C)] public byte SortId; // Could also be Index for the list
         // 1 byte
         [FieldOffset(0x1E)] public ushort CurrentWorld;
