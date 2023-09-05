@@ -28,7 +28,7 @@ public unsafe partial struct InfoProxyCommonList {
         [FieldOffset(0x00)] public ulong ContentId;
         [FieldOffset(0x08)] public ClientState State; // bunch of stuff mashed together from online status, mentor status, duty status
         //12 bytes
-        [FieldOffset(0x1C)] public byte SortId;
+        [FieldOffset(0x1C)] public byte SortId; // Could also be Index for the list
         // 1 byte
         [FieldOffset(0x1E)] public ushort CurrentWorld;
         [FieldOffset(0x20)] public ushort HomeWorld;
@@ -86,7 +86,7 @@ public unsafe partial struct InfoProxyCommonList {
             [Obsolete("Included to improve readability of ToString, not to be used.", true)] Unk100000 = 0x0000000000100000,
             [Obsolete("Included to improve readability of ToString, not to be used.", true)] Unk200000 = 0x0000000000200000,
             [Obsolete("Included to improve readability of ToString, not to be used.", true)] Unk1000000 = 0x0000000001000000,
-            [Obsolete("Included to improve readability of ToString, not to be used.", true)] Unk4000000 = 0x0000000004000000,
+            [Obsolete("Included to improve readability of ToString, not to be used.", true)] Unk4000000 = 0x0000000004000000, // PartyFinder?
             [Obsolete("Included to improve readability of ToString, not to be used.", true)] Unk20000000 = 0x0000000200000000,
             [Obsolete("Included to improve readability of ToString, not to be used.", true)] Unk40000000 = 0x0000000400000000,
             [Obsolete("Included to improve readability of ToString, not to be used.", true)] Unk80000000 = 0x0000000800000000,
