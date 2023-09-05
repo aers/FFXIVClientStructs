@@ -15,7 +15,7 @@ public unsafe partial struct InfoProxyCommonList {
     [FieldOffset(0x90)] public ushort Unk90; //10 * DataSize
     [FieldOffset(0x98)] public CharacterData* CharData;
 
-    public readonly ReadOnlySpan<CharacterData> CharDataSpan => new (CharData, (int)InfoProxyPageInterface.InfoProxyInterface.EntryCount); // It cant be higher than 200 at this time anyways so this is fine
+    public readonly ReadOnlySpan<CharacterData> CharDataSpan => new(CharData, (int)InfoProxyPageInterface.InfoProxyInterface.EntryCount); // It cant be higher than 200 at this time anyways so this is fine
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B D0 48 8B CB E8 ?? ?? ?? ?? 41 C6 46")]
     public partial ulong GetContentIDForEntry(uint idx);
