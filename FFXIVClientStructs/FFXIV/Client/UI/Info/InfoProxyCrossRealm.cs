@@ -19,7 +19,7 @@ public unsafe partial struct InfoProxyCrossRealm {
     [FixedSizeArray<CrossRealmGroup>(6)]
     [FieldOffset(0x3A0)] public fixed byte CrossRealmGroupArray[6 * 0x2C8];
 
-    [Obsolete("Use CrossRealmGroupArraySpan")]
+    [Obsolete("Use CrossRealmGroupArraySpan and make sure not to iterate further than GroupMemberCount, GroupMembersSpan now includes invalid members and residual data from people that left the group")]
     public ReadOnlySpan<CrossRealmGroup> CrossRealmGroupSpan {
         get {
             fixed (byte* gp = CrossRealmGroupArray) {
