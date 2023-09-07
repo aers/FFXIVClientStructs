@@ -103,7 +103,7 @@ public unsafe partial struct AtkUnitBase {
 
     [VirtualFunction(4)]
     public partial bool Close(bool unknown);
-    
+
     [VirtualFunction(5)]
     public partial void Show(bool unkBool, uint unsetShowHideFlags);
 
