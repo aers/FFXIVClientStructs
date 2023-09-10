@@ -1114,8 +1114,14 @@ classes:
   Client::System::Framework::Task:
     vtbls:
       - ea: 0x141942578
+    vfuncs:
+      0: dtor
+      1: Execute_arg1 # arg 1 is always an event object
+      2: Execute_arg2
     funcs:
-      0x1400961C0: TaskRunner  # task starter which runs the task's function pointer
+      0x1400961B0: TaskRunner_arg1 # these are used to run static tasks, vfuncs are for Task subclasses
+      0x1400961C0: TaskRunner_arg2
+      0x1400961D0: TaskRunner_arg3
   Client::System::Framework::TaskManager::RootTask:
     vtbls:
       - ea: 0x141942590
@@ -1168,11 +1174,23 @@ classes:
       0x140094760: TaskDraw2DBegin
       0x1400947A0: TaskUpdateInputDevice
       0x1400947E0: TaskUpdateInputUI
-      0x140094BC0: TaskRenderManagerUpdate
-      0x140094BE0: TaskRenderManagerRender
+      0x140094980: TaskInputDeviceApply
+      0x140094990: TaskUpdateCamera
+      0x1400949B0: TaskUpdateNetwork
+      0x140094A50: TaskIntervalFrameworkBegin
+      0x140094B20: TaskIntervalEnd
+      0x140094B70: TaskUpdateGraphicsScene
+      0x140094BA0: TaskPostUpdateGraphicsScene
+      0x140094BC0: TaskUpdateGraphicsRender
+      0x140094BE0: TaskRenderGraphicsRender
+      0x140094C00: TaskUpdateHavokAnimation
       0x140094C70: TaskUpdateBonePhysics
-      0x140094CD0: TaskUpdateLayoutWorld
-      0x140094CF0: TaskResourceManagerUpdate
+      0x140094C90: TaskUpdateLookAtIk
+      0x140094CB0: TaskOnNeededWorldMatrixOfCurrentFrame
+      0x140094CD0: TaskLayoutWorld
+      0x140094CE0: TaskHousingEvent
+      0x140094CF0: TaskResourceManager
+      0x140094D00: TaskUpdateGame
       0x140095B20: Finalize
   Component::Excel::ExcelModuleInterface:
     vtbls:
@@ -1226,6 +1244,8 @@ classes:
       0x1404B85B0: ctor
       0x1404B86D0: Initialize
       0x1404B8B70: Raycast
+      0x1404BAD40: TaskCollisionUpdate
+      0x1404B8490: TaskBGCollisionModule_OnEndOfFrame
       0x1412D4E70: Raycast1 # not sure where else to put those two for now
       0x1412D4EC0: Raycast2
   Common::Component::BGCollision::Object:
