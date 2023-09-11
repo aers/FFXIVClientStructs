@@ -19,7 +19,7 @@ public unsafe partial struct AddonActionMenu {
     [FieldOffset(0x268)] public AtkComponentRadioButton* ExtrasRadioButton;
     [FieldOffset(0x270)] public AtkComponentRadioButton* RoleRadioButton;
 
-    [FixedSizeArray<ActionInfo>(80)] 
+    [FixedSizeArray<ActionInfo>(80)]
     [FieldOffset(0x318)] public fixed byte ActionArray[0x38 * 80];
 
     [FieldOffset(0x14A8)] public AtkResNode* SidebarContainer; // Contains radio buttons for Actions, Role, Traits etc, including all of the icon buttons that are on the left side
