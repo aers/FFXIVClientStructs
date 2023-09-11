@@ -227,6 +227,8 @@ struct Client::Graphics::Environment::EnvSimulator;
 struct Client::Graphics::Render::ShadowCamera;
 struct Client::Graphics::Render::Camera;
 struct Client::Graphics::ReferencedClassBase;
+struct Client::Graphics::Kernel::ConstantBuffer;
+struct Client::Graphics::Kernel::ConstantBufferPointer;
 struct Client::Graphics::Kernel::CVector;
 struct Client::Graphics::Kernel::Device;
 struct Client::Graphics::Kernel::PixelShader;
@@ -254,6 +256,7 @@ struct Client::Graphics::Physics::BoneSimulator;
 struct Client::Graphics::Ray;
 struct Client::Graphics::Render::Manager;
 struct Client::Graphics::Render::Material;
+struct Client::Graphics::Render::Material::TextureEntry;
 struct Client::Graphics::Render::Model;
 struct Client::Graphics::Render::Notifier;
 struct Client::Graphics::Render::OffscreenRenderingManager;
@@ -264,10 +267,12 @@ struct Client::Graphics::Transform;
 struct Client::Graphics::Render::SubView;
 struct Common::Math::Rectangle;
 struct Client::Graphics::Render::Texture;
+struct Client::Graphics::Render::Texture::TextureVTable;
 struct Client::Graphics::Render::View;
 struct Client::Graphics::Scene::CameraManager;
 struct Client::Graphics::Scene::CharacterBase;
 struct Client::Graphics::Scene::CharacterBase::CharacterBaseVTable;
+struct Client::Graphics::Scene::CharacterUtility;
 struct Client::Graphics::Scene::Demihuman;
 struct Client::Graphics::Scene::DrawObject;
 struct Client::Graphics::Scene::EnvLocation;
@@ -276,6 +281,8 @@ struct Client::Graphics::Scene::EnvSpace;
 struct Client::Graphics::Scene::Human;
 struct Client::Graphics::Scene::Monster;
 struct Client::Graphics::Scene::Object::ObjectVTable;
+struct Client::Graphics::Scene::Object::SiblingEnumerator;
+struct Client::Graphics::Scene::ResidentResourceManager;
 struct Client::Graphics::Scene::Weapon;
 struct Client::Graphics::Scene::World;
 struct Client::Graphics::Vfx::VfxData;
@@ -300,10 +307,13 @@ struct Client::System::Memory::IMemorySpace::IMemorySpaceVTable;
 struct Client::System::Resource::Handle::MaterialResourceHandle;
 struct Client::System::Resource::Handle::ResourceHandle;
 struct StdString;
+struct Client::System::Resource::Handle::MaterialResourceHandle::TextureEntry;
 struct Client::System::Resource::Handle::ModelResourceHandle;
 struct StdMap::PointerSystemByte::SystemInt16;
 struct StdMap::Node::PointerSystemByte::SystemInt16;
 struct StdPair::PointerSystemByte::SystemInt16;
+struct Client::System::Resource::Handle::ResourceHandle::ResourceHandleVTable;
+struct Client::System::Resource::Handle::ShaderPackageResourceHandle;
 struct Client::System::Resource::Handle::SkeletonResourceHandle;
 struct Client::System::Resource::Handle::SkeletonResourceHandle::SkeletonHeader;
 struct Client::System::Resource::Handle::TextureResourceHandle;
@@ -348,6 +358,7 @@ struct Client::UI::AddonContextIconMenu;
 struct Client::UI::AddonContextMenu;
 struct Client::UI::AddonCutSceneSelectString;
 struct Client::UI::AddonDeliveryItemInfo;
+struct Client::UI::AddonDtr;
 struct Client::UI::AddonEnemyList;
 struct Client::UI::AddonExp;
 struct Client::UI::AddonFateReward;
@@ -562,6 +573,7 @@ struct Client::UI::Agent::AgentRetainerItemTransferData::DuplicateItemEntry;
 struct Client::UI::Agent::AgentRetainerList;
 struct Client::UI::Agent::AgentRetainerList::RetainerList;
 struct Client::UI::Agent::AgentRetainerList::Retainer;
+struct Client::UI::Agent::AgentRetainerTask;
 struct Client::UI::Agent::AgentRevive;
 struct Client::UI::Agent::AgentSalvage;
 struct Client::UI::Agent::SalvageResult;
@@ -886,6 +898,13 @@ struct Component::GUI::ExtendArrayData;
 struct Component::GUI::NumberArrayData;
 struct Component::GUI::StringArrayData;
 struct Component::GUI::ULD::AtkUldComponentDataTab;
+struct Shader::CameraLight;
+struct Shader::CameraParameter;
+struct Shader::CommonParameter;
+struct Shader::CustomizeParameter;
+struct Shader::InstanceParameter;
+struct Shader::ModelParameter;
+struct Shader::SceneParameter;
 
 // Enum Definitions
 enum Client::Game::ActionTimelineSlots: __int32
@@ -6560,6 +6579,16 @@ struct Client::Graphics::Environment::EnvManager /* Size=0x900 */
     /*       */ byte _gap_0x8F8[0x8];
 };
 
+struct Client::Graphics::Kernel::ConstantBuffer /* Size=0x70 */
+{
+    /*      */ byte _gap_0x0[0x20];
+    /* 0x20 */ __int32 ByteSize;
+    /* 0x24 */ __int32 Flags;
+    /* 0x28 */ void* UnsafeSourcePointer;
+    /*      */ byte _gap_0x30[0x40];
+};
+
+struct Client::Graphics::Kernel::ConstantBufferPointer; /* Size=unknown due to generic type with parameters */
 struct Client::Graphics::Kernel::CVector; /* Size=unknown due to generic type with parameters */
 struct Client::Graphics::Kernel::Device /* Size=0x258 */
 {
@@ -6709,8 +6738,10 @@ struct Client::Graphics::Kernel::ShaderPackage /* Size=0x408 */
 
 struct Client::Graphics::Kernel::ShaderPackage::ConstantSamplerUnknown /* Size=0xC */
 {
-    /*     */ byte _gap_0x0[0x8];
-    /*     */ byte _gap_0x8[0x4];
+    /* 0x0 */ unsigned __int32 CRC;
+    /* 0x4 */ unsigned __int32 Id;
+    /*     */ byte _gap_0x8[0x2];
+    /* 0xA */ unsigned __int16 Slot;
 };
 
 struct Client::Graphics::Kernel::ShaderPackage::MaterialElement /* Size=0x8 */
@@ -6796,11 +6827,27 @@ struct Client::Graphics::Render::Manager /* Size=0x2D730 */
     /*         */ byte _gap_0xB408[0x22328];
 };
 
-struct Client::Graphics::Render::Material /* Size=0x20 */
+struct Client::Graphics::Render::Material /* Size=0x40 */
 {
     /* 0x00 */ Client::Graphics::ReferencedClassBase ReferencedClassBase;
     /* 0x10 */ Client::System::Resource::Handle::MaterialResourceHandle* MaterialResourceHandle;
-    /*      */ byte _gap_0x18[0x8];
+    /* 0x18 */ unsigned __int32 ShaderFlags;
+    /*      */ byte _gap_0x1C[0x4];
+    /* 0x20 */ unsigned __int32* ShaderKeyValues;
+    /* 0x28 */ Client::Graphics::Kernel::ConstantBuffer* MaterialParameterCBuffer;
+    /* 0x30 */ Client::Graphics::Render::Material::TextureEntry* Textures;
+    /* 0x38 */ unsigned __int16 TextureCount;
+    /*      */ byte _gap_0x3A[0x2];
+    /*      */ byte _gap_0x3C[0x4];
+};
+
+struct Client::Graphics::Render::Material::TextureEntry /* Size=0x18 */
+{
+    /* 0x00 */ unsigned __int32 Id;
+    /*      */ byte _gap_0x4[0x4];
+    /* 0x08 */ Client::System::Resource::Handle::TextureResourceHandle* Texture;
+    /* 0x10 */ unsigned __int32 SamplerFlags;
+    /*      */ byte _gap_0x14[0x4];
 };
 
 struct Client::Graphics::Render::Model /* Size=0xF0 */
@@ -6813,11 +6860,17 @@ struct Client::Graphics::Render::Model /* Size=0xF0 */
     /* 0x30 */ Client::System::Resource::Handle::ModelResourceHandle* ModelResourceHandle;
     /*      */ byte _gap_0x38[0x8];
     /* 0x40 */ Client::Graphics::Render::Skeleton* Skeleton;
-    /*      */ byte _gap_0x48[0x50];
+    /*      */ byte _gap_0x48[0x10];
+    /* 0x58 */ void** BoneList;
+    /* 0x60 */ __int32 BoneCount;
+    /*      */ byte _gap_0x64[0x4];
+    /*      */ byte _gap_0x68[0x30];
     /* 0x98 */ Client::Graphics::Render::Material** Materials;
     /* 0xA0 */ __int32 MaterialCount;
     /*      */ byte _gap_0xA4[0x4];
-    /*      */ byte _gap_0xA8[0x48];
+    /*      */ byte _gap_0xA8[0x40];
+    /* 0xE8 */ unsigned __int32 SlotIndex;
+    /*      */ byte _gap_0xEC[0x4];
 };
 
 struct Client::Graphics::Render::Notifier /* Size=0x18 */
@@ -6929,7 +6982,10 @@ struct Client::Graphics::Render::SubView /* Size=0x58 */
 
 struct Client::Graphics::Render::Texture /* Size=0xC0 */
 {
+    union {
     /* 0x00 */ void* vtbl;
+    /* 0x00 */ Client::Graphics::Render::Texture::TextureVTable* VTable;
+    } _union_0x0;
     /*      */ byte _gap_0x8[0x18];
     /* 0x20 */ Client::Graphics::Render::Notifier Notifier;
     /* 0x38 */ unsigned __int32 Width;
@@ -6952,6 +7008,13 @@ struct Client::Graphics::Render::Texture /* Size=0xC0 */
     /* 0x68 */ void* D3D11Texture2D;
     /* 0x70 */ void* D3D11ShaderResourceView;
     /*      */ byte _gap_0x78[0x48];
+};
+
+struct Client::Graphics::Render::Texture::TextureVTable /* Size=0x0 */
+{
+    /*     */ byte _gap_0x0[0x10];
+    /* 0x10 */ __int64 IncRef;
+    /* 0x18 */ __int64 DecRef;
 };
 
 struct Client::Graphics::Render::View /* Size=0x5A0 */
@@ -6991,8 +7054,10 @@ struct Client::Graphics::Scene::CharacterBase /* Size=0x8F0 */
     /*       */ byte _gap_0x220[0x4];
     /* 0x224 */ float VfxScale;
     /*       */ byte _gap_0x228[0x18];
-    /* 0x240 */ void* CharacterDataCB;
-    /*       */ byte _gap_0x248[0x68];
+    /* 0x240 */ Client::Graphics::Kernel::ConstantBuffer* CharacterDataCBuffer;
+    /*       */ byte _gap_0x248[0x10];
+    /* 0x258 */ Client::Graphics::Render::Texture** ColorSetTextures;
+    /*       */ byte _gap_0x260[0x50];
     /* 0x2B0 */ float WeatherWetness;
     /* 0x2B4 */ float SwimmingWetness;
     /* 0x2B8 */ float WetnessDepth;
@@ -7003,7 +7068,7 @@ struct Client::Graphics::Scene::CharacterBase /* Size=0x8F0 */
     /* 0x2D0 */ void* TempData;
     /* 0x2D8 */ void* TempSlotData;
     /*       */ byte _gap_0x2E0[0x8];
-    /* 0x2E8 */ void** MaterialArray;
+    /* 0x2E8 */ Client::Graphics::Render::Material** Materials;
     /* 0x2F0 */ void* EID;
     /* 0x2F8 */ void** IMCArray;
     /*       */ byte _gap_0x300[0x5F0];
@@ -7015,6 +7080,15 @@ struct Client::Graphics::Scene::CharacterBase::CharacterBaseVTable /* Size=0x0 *
     /* 0x190 */ __int64 GetModelType;
     /*     */ byte _gap_0x198[0x80];
     /* 0x218 */ __int64 FlagSlotForUpdate;
+};
+
+struct Client::Graphics::Scene::CharacterUtility /* Size=0x0 */
+{
+    /* 0x0 */ void* VTable;
+    /* 0x8 */ byte ResourceHandles[0x2B8];
+    /*     */ byte _gap_0x2C0[0x38];
+    /* 0x2F8 */ Client::Graphics::Kernel::ConstantBuffer* LegacyBodyDecalColorCBuffer;
+    /* 0x300 */ Client::Graphics::Kernel::ConstantBuffer* FreeCompanyCrestColorCBuffer;
 };
 
 struct Client::Graphics::Scene::Demihuman /* Size=0x978 */
@@ -7077,7 +7151,26 @@ struct Client::Graphics::Scene::Human /* Size=0xA80 */
     /* 0x940 */ unsigned __int16 FurId;
     /*       */ byte _gap_0x942[0x2];
     /*       */ byte _gap_0x944[0x4];
-    /*       */ byte _gap_0x948[0xF0];
+    /*       */ byte _gap_0x948[0x38];
+    /* 0x980 */ Client::Graphics::Render::Texture* HeadDecal;
+    /* 0x988 */ Client::Graphics::Render::Texture* TopDecal;
+    /* 0x990 */ Client::Graphics::Render::Texture* ArmsDecal;
+    /* 0x998 */ Client::Graphics::Render::Texture* LegsDecal;
+    /* 0x9A0 */ Client::Graphics::Render::Texture* FeetDecal;
+    /* 0x9A8 */ Client::Graphics::Render::Texture* EarDecal;
+    /* 0x9B0 */ Client::Graphics::Render::Texture* NeckDecal;
+    /* 0x9B8 */ Client::Graphics::Render::Texture* WristDecal;
+    /* 0x9C0 */ Client::Graphics::Render::Texture* RFingerDecal;
+    /* 0x9C8 */ Client::Graphics::Render::Texture* LFingerDecal;
+    /*       */ byte _gap_0x9D0[0x8];
+    /* 0x9D8 */ Client::Graphics::Kernel::ConstantBuffer* CustomizeParameterCBuffer;
+    /* 0x9E0 */ Client::Graphics::Kernel::ConstantBuffer* DecalColorCBuffer;
+    /* 0x9E8 */ Client::System::Resource::Handle::TextureResourceHandle* Decal;
+    /* 0x9F0 */ Client::System::Resource::Handle::TextureResourceHandle* LegacyBodyDecal;
+    /* 0x9F8 */ Client::Graphics::Render::Texture* FreeCompanyCrest;
+    /* 0xA00 */ unsigned __int32 SlotFreeCompanyCrestBitfield;
+    /*       */ byte _gap_0xA04[0x4];
+    /*       */ byte _gap_0xA08[0x30];
     /* 0xA38 */ byte* ChangedEquipData;
     /*       */ byte _gap_0xA40[0x40];
 };
@@ -7092,6 +7185,18 @@ struct Client::Graphics::Scene::Object::ObjectVTable /* Size=0x0 */
 {
     /*     */ byte _gap_0x0[0x10];
     /* 0x10 */ __int64 GetObjectType;
+};
+
+struct Client::Graphics::Scene::Object::SiblingEnumerator /* Size=0x0 */
+{
+};
+
+struct Client::Graphics::Scene::ResidentResourceManager /* Size=0x0 */
+{
+    /*     */ byte _gap_0x0[0x10];
+    /*     */ byte _gap_0x10[0x4];
+    /* 0x14 */ unsigned __int32 ResourceCount;
+    /* 0x18 */ Client::System::Resource::Handle::ResourceHandle** ResourceList;
 };
 
 struct Client::Graphics::Scene::Weapon /* Size=0x920 */
@@ -7330,6 +7435,7 @@ struct Client::System::Resource::Handle::ResourceHandle /* Size=0xB0 */
     union {
     /* 0x00 */ void* vtbl;
     /* 0x00 */ void** vfunc;
+    /* 0x00 */ Client::System::Resource::Handle::ResourceHandle::ResourceHandleVTable* VTable;
     } _union_0x0;
     /* 0x08 */ Client::System::Resource::ResourceCategory Category;
     /* 0x0C */ unsigned __int32 FileType;
@@ -7350,7 +7456,26 @@ struct Client::System::Resource::Handle::ResourceHandle /* Size=0xB0 */
 struct Client::System::Resource::Handle::MaterialResourceHandle /* Size=0x108 */
 {
     /* 0x000 */ Client::System::Resource::Handle::ResourceHandle ResourceHandle;
-    /*       */ byte _gap_0xB0[0x58];
+    /*       */ byte _gap_0xB0[0x10];
+    /* 0x0C0 */ Client::Graphics::Render::Material* Material;
+    /* 0x0C8 */ Client::System::Resource::Handle::ShaderPackageResourceHandle* ShaderPackageResourceHandle;
+    /* 0x0D0 */ Client::System::Resource::Handle::MaterialResourceHandle::TextureEntry* Textures;
+    /*       */ byte _gap_0xD8[0x8];
+    /* 0x0E0 */ byte* Strings;
+    /*       */ byte _gap_0xE8[0x10];
+    /* 0x0F8 */ unsigned __int16 ShpkNameOffset;
+    /* 0x0FA */ byte TextureCount;
+    /*       */ byte _gap_0xFB;
+    /*       */ byte _gap_0xFC[0x4];
+    /*       */ byte _gap_0x100[0x8];
+};
+
+struct Client::System::Resource::Handle::MaterialResourceHandle::TextureEntry /* Size=0x10 */
+{
+    /* 0x00 */ Client::System::Resource::Handle::TextureResourceHandle* TextureResourceHandle;
+    /* 0x08 */ unsigned __int16 PathOffset;
+    /* 0x0A */ unsigned __int16 Flags;
+    /*      */ byte _gap_0xC[0x4];
 };
 
 struct StdPair::PointerSystemByte::SystemInt16 /* Size=0x10 */
@@ -7395,6 +7520,20 @@ struct Client::System::Resource::Handle::ModelResourceHandle /* Size=0x260 */
     /*       */ byte _gap_0x238[0x28];
 };
 
+struct Client::System::Resource::Handle::ResourceHandle::ResourceHandleVTable /* Size=0x0 */
+{
+    /*     */ byte _gap_0x0[0x88];
+    /* 0x88 */ __int64 GetLength;
+    /*     */ byte _gap_0x90[0x28];
+    /* 0xB8 */ __int64 GetData;
+};
+
+struct Client::System::Resource::Handle::ShaderPackageResourceHandle /* Size=0x0 */
+{
+    /* 0x0 */ Client::System::Resource::Handle::ResourceHandle ResourceHandle;
+    /* 0xB0 */ Client::Graphics::Kernel::ShaderPackage* ShaderPackage;
+};
+
 struct Client::System::Resource::Handle::SkeletonResourceHandle::SkeletonHeader /* Size=0x30 */
 {
     /* 0x00 */ unsigned __int32 SklbMagic;
@@ -7423,7 +7562,9 @@ struct Client::System::Resource::Handle::SkeletonResourceHandle /* Size=0x0 */
 struct Client::System::Resource::Handle::TextureResourceHandle /* Size=0x140 */
 {
     /* 0x000 */ Client::System::Resource::Handle::ResourceHandle ResourceHandle;
-    /*       */ byte _gap_0xB0[0x90];
+    /*       */ byte _gap_0xB0[0x68];
+    /* 0x118 */ Client::Graphics::Render::Texture* Texture;
+    /*       */ byte _gap_0x120[0x20];
 };
 
 struct Client::System::Resource::ResourceGraph /* Size=0xC80 */
@@ -7981,6 +8122,28 @@ struct Client::UI::AddonDeliveryItemInfo /* Size=0x68 */
     /* 0x00 */ unsigned __int32 ItemId;
     /*      */ byte _gap_0x4[0x4];
     /*      */ byte _gap_0x8[0x60];
+};
+
+struct Client::UI::AddonDtr /* Size=0x368 */
+{
+    /* 0x000 */ Component::GUI::AtkUnitBase AtkUnitBase;
+    /* 0x220 */ Client::System::String::Utf8String TimeModeTooltip;
+    /* 0x288 */ Client::System::String::Utf8String NetworkInfoTooltip;
+    /*       */ byte _gap_0x2F0[0x8];
+    /* 0x2F8 */ Component::GUI::AtkTextNode* TimeText;
+    /* 0x300 */ Component::GUI::AtkResNode* NetworkStrengthContainer;
+    /* 0x308 */ Component::GUI::AtkImageNode* NetworkStrengthImage;
+    /* 0x310 */ Component::GUI::AtkResNode* MailContainer;
+    /* 0x318 */ Component::GUI::AtkImageNode* MailImage;
+    /* 0x320 */ Component::GUI::AtkTextNode* MailText;
+    /* 0x328 */ Component::GUI::AtkResNode* DutyRecorderContainer;
+    /* 0x330 */ Component::GUI::AtkResNode* AlarmsContainer;
+    /* 0x338 */ Component::GUI::AtkResNode* WalkModeContainer;
+    /* 0x340 */ Component::GUI::AtkResNode* WorldInfoContainer;
+    /* 0x348 */ Component::GUI::AtkTextNode* WorldText;
+    /* 0x350 */ Component::GUI::AtkImageNode* WorldVisitImage;
+    /* 0x358 */ Component::GUI::AtkCollisionNode* CollisionNode;
+    /*       */ byte _gap_0x360[0x8];
 };
 
 struct Client::UI::AddonEnemyList /* Size=0x278 */
@@ -11212,6 +11375,32 @@ struct Client::UI::Agent::AgentRetainerList /* Size=0x5B8 */
     /*       */ byte _gap_0x4C[0x4];
     /* 0x050 */ Client::UI::Agent::AgentRetainerList::RetainerList Retainers;
     /*       */ byte _gap_0x4B0[0x108];
+};
+
+struct Client::UI::Agent::AgentRetainerTask /* Size=0x90 */
+{
+    /* 0x00 */ Component::GUI::AgentInterface AgentInterface;
+    /* 0x28 */ unsigned __int32 DisplayType;
+    /*      */ byte _gap_0x2C[0x4];
+    /*      */ byte _gap_0x30[0x8];
+    /* 0x38 */ unsigned __int32 OpenerAddonId;
+    /*      */ byte _gap_0x3C[0x4];
+    /*      */ byte _gap_0x40[0x4];
+    /* 0x44 */ unsigned __int32 RewardXP;
+    /*      */ byte _gap_0x48[0x8];
+    /* 0x50 */ unsigned __int32 RewardItemIds[0x2];
+    /* 0x58 */ unsigned __int32 RewardItemCount[0x2];
+    /*      */ byte _gap_0x60[0x8];
+    /*      */ byte _gap_0x68[0x4];
+    /* 0x6C */ unsigned __int32 RetainerTaskLvRange;
+    /*      */ byte _gap_0x70[0x4];
+    /* 0x74 */ unsigned __int32 RetainerTaskId;
+    /*      */ byte _gap_0x78[0x8];
+    /* 0x80 */ bool IsLoading;
+    /*      */ byte _gap_0x81;
+    /*      */ byte _gap_0x82[0x2];
+    /* 0x84 */ unsigned __int32 XPToReward;
+    /*      */ byte _gap_0x88[0x8];
 };
 
 struct Client::UI::Agent::AgentRevive /* Size=0xB8 */
@@ -14947,5 +15136,68 @@ struct Component::GUI::ULD::AtkUldComponentDataTab /* Size=0x24 */
     /* 0x0C */ unsigned __int32 Nodes[0x4];
     /* 0x1C */ unsigned __int32 TextId;
     /* 0x20 */ unsigned __int32 GroupId;
+};
+
+struct Shader::CameraLight /* Size=0x20 */
+{
+    /* 0x00 */ Common::Math::Vector4 DiffuseSpecular;
+    /* 0x10 */ Common::Math::Vector4 Rim;
+};
+
+struct Shader::CameraParameter /* Size=0x1C0 */
+{
+    /* 0x000 */ Common::Math::Vector4 ViewMatrixX;
+    /* 0x010 */ Common::Math::Vector4 ViewMatrixY;
+    /* 0x020 */ Common::Math::Vector4 ViewMatrixZ;
+    /* 0x030 */ Common::Math::Vector4 InverseViewMatrixX;
+    /* 0x040 */ Common::Math::Vector4 InverseViewMatrixY;
+    /* 0x050 */ Common::Math::Vector4 InverseViewMatrixZ;
+    /* 0x060 */ Common::Math::Matrix4x4 ViewProjectionMatrix;
+    /* 0x0A0 */ Common::Math::Matrix4x4 InverseViewProjectionMatrix;
+    /* 0x0E0 */ Common::Math::Matrix4x4 InverseProjectionMatrix;
+    /* 0x120 */ Common::Math::Matrix4x4 ProjectionMatrix;
+    /* 0x160 */ Common::Math::Matrix4x4 MainViewToProjectionMatrix;
+    /* 0x1A0 */ Common::Math::Vector3 EyePosition;
+    /* 0x1B0 */ Common::Math::Vector3 LookAtVector;
+};
+
+struct Shader::CommonParameter /* Size=0x40 */
+{
+    /* 0x00 */ Common::Math::Vector4 RenderTarget;
+    /* 0x10 */ Common::Math::Vector4 Viewport;
+    /* 0x20 */ Common::Math::Vector4 Misc;
+    /* 0x30 */ Common::Math::Vector4 Misc2;
+};
+
+struct Shader::CustomizeParameter /* Size=0x90 */
+{
+    /* 0x00 */ Common::Math::Vector4 SkinColor;
+    /* 0x10 */ Common::Math::Vector4 SkinFresnelValue0;
+    /* 0x20 */ Common::Math::Vector4 LipColor;
+    /* 0x30 */ Common::Math::Vector3 MainColor;
+    /* 0x40 */ Common::Math::Vector3 HairFresnelValue0;
+    /* 0x50 */ Common::Math::Vector3 MeshColor;
+    /* 0x60 */ Common::Math::Vector4 LeftColor;
+    /* 0x70 */ Common::Math::Vector4 RightColor;
+    /* 0x80 */ Common::Math::Vector3 OptionColor;
+};
+
+struct Shader::InstanceParameter /* Size=0x50 */
+{
+    /* 0x00 */ Common::Math::Vector4 MulColor;
+    /* 0x10 */ Common::Math::Vector4 EnvParameter;
+    /* 0x20 */ Shader::CameraLight CameraLight;
+    /* 0x40 */ Common::Math::Vector4 Wetness;
+};
+
+struct Shader::ModelParameter /* Size=0x10 */
+{
+    /* 0x00 */ Common::Math::Vector4 Params;
+};
+
+struct Shader::SceneParameter /* Size=0x20 */
+{
+    /* 0x00 */ Common::Math::Vector4 OcclusionIntensity;
+    /* 0x10 */ Common::Math::Vector4 Wetness;
 };
 

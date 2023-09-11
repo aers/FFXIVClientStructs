@@ -227,6 +227,8 @@ struct Client_Graphics_Environment_EnvSimulator;
 struct Client_Graphics_Render_ShadowCamera;
 struct Client_Graphics_Render_Camera;
 struct Client_Graphics_ReferencedClassBase;
+struct Client_Graphics_Kernel_ConstantBuffer;
+struct Client_Graphics_Kernel_ConstantBufferPointer;
 struct Client_Graphics_Kernel_CVector;
 struct Client_Graphics_Kernel_Device;
 struct Client_Graphics_Kernel_PixelShader;
@@ -254,6 +256,7 @@ struct Client_Graphics_Physics_BoneSimulator;
 struct Client_Graphics_Ray;
 struct Client_Graphics_Render_Manager;
 struct Client_Graphics_Render_Material;
+struct Client_Graphics_Render_Material_TextureEntry;
 struct Client_Graphics_Render_Model;
 struct Client_Graphics_Render_Notifier;
 struct Client_Graphics_Render_OffscreenRenderingManager;
@@ -264,10 +267,12 @@ struct Client_Graphics_Transform;
 struct Client_Graphics_Render_SubView;
 struct Common_Math_Rectangle;
 struct Client_Graphics_Render_Texture;
+struct Client_Graphics_Render_Texture_TextureVTable;
 struct Client_Graphics_Render_View;
 struct Client_Graphics_Scene_CameraManager;
 struct Client_Graphics_Scene_CharacterBase;
 struct Client_Graphics_Scene_CharacterBase_CharacterBaseVTable;
+struct Client_Graphics_Scene_CharacterUtility;
 struct Client_Graphics_Scene_Demihuman;
 struct Client_Graphics_Scene_DrawObject;
 struct Client_Graphics_Scene_EnvLocation;
@@ -276,6 +281,8 @@ struct Client_Graphics_Scene_EnvSpace;
 struct Client_Graphics_Scene_Human;
 struct Client_Graphics_Scene_Monster;
 struct Client_Graphics_Scene_Object_ObjectVTable;
+struct Client_Graphics_Scene_Object_SiblingEnumerator;
+struct Client_Graphics_Scene_ResidentResourceManager;
 struct Client_Graphics_Scene_Weapon;
 struct Client_Graphics_Scene_World;
 struct Client_Graphics_Vfx_VfxData;
@@ -300,10 +307,13 @@ struct Client_System_Memory_IMemorySpace_IMemorySpaceVTable;
 struct Client_System_Resource_Handle_MaterialResourceHandle;
 struct Client_System_Resource_Handle_ResourceHandle;
 struct StdString;
+struct Client_System_Resource_Handle_MaterialResourceHandle_TextureEntry;
 struct Client_System_Resource_Handle_ModelResourceHandle;
 struct StdMap_PointerSystemByte_SystemInt16;
 struct StdMap_Node_PointerSystemByte_SystemInt16;
 struct StdPair_PointerSystemByte_SystemInt16;
+struct Client_System_Resource_Handle_ResourceHandle_ResourceHandleVTable;
+struct Client_System_Resource_Handle_ShaderPackageResourceHandle;
 struct Client_System_Resource_Handle_SkeletonResourceHandle;
 struct Client_System_Resource_Handle_SkeletonResourceHandle_SkeletonHeader;
 struct Client_System_Resource_Handle_TextureResourceHandle;
@@ -348,6 +358,7 @@ struct Client_UI_AddonContextIconMenu;
 struct Client_UI_AddonContextMenu;
 struct Client_UI_AddonCutSceneSelectString;
 struct Client_UI_AddonDeliveryItemInfo;
+struct Client_UI_AddonDtr;
 struct Client_UI_AddonEnemyList;
 struct Client_UI_AddonExp;
 struct Client_UI_AddonFateReward;
@@ -562,6 +573,7 @@ struct Client_UI_Agent_AgentRetainerItemTransferData_DuplicateItemEntry;
 struct Client_UI_Agent_AgentRetainerList;
 struct Client_UI_Agent_AgentRetainerList_RetainerList;
 struct Client_UI_Agent_AgentRetainerList_Retainer;
+struct Client_UI_Agent_AgentRetainerTask;
 struct Client_UI_Agent_AgentRevive;
 struct Client_UI_Agent_AgentSalvage;
 struct Client_UI_Agent_SalvageResult;
@@ -886,6 +898,13 @@ struct Component_GUI_ExtendArrayData;
 struct Component_GUI_NumberArrayData;
 struct Component_GUI_StringArrayData;
 struct Component_GUI_ULD_AtkUldComponentDataTab;
+struct Shader_CameraLight;
+struct Shader_CameraParameter;
+struct Shader_CommonParameter;
+struct Shader_CustomizeParameter;
+struct Shader_InstanceParameter;
+struct Shader_ModelParameter;
+struct Shader_SceneParameter;
 
 // Enum Definitions
 enum Client_Game_ActionTimelineSlots /* Size=0x4 */
@@ -6560,6 +6579,16 @@ struct Client_Graphics_Environment_EnvManager /* Size=0x900 */
     /*       */ byte _gap_0x8F8[0x8];
 };
 
+struct Client_Graphics_Kernel_ConstantBuffer /* Size=0x70 */
+{
+    /*      */ byte _gap_0x0[0x20];
+    /* 0x20 */ __int32 ByteSize;
+    /* 0x24 */ __int32 Flags;
+    /* 0x28 */ void* UnsafeSourcePointer;
+    /*      */ byte _gap_0x30[0x40];
+};
+
+struct Client_Graphics_Kernel_ConstantBufferPointer; /* Size=unknown due to generic type with parameters */
 struct Client_Graphics_Kernel_CVector; /* Size=unknown due to generic type with parameters */
 struct Client_Graphics_Kernel_Device /* Size=0x258 */
 {
@@ -6709,8 +6738,10 @@ struct Client_Graphics_Kernel_ShaderPackage /* Size=0x408 */
 
 struct Client_Graphics_Kernel_ShaderPackage_ConstantSamplerUnknown /* Size=0xC */
 {
-    /*     */ byte _gap_0x0[0x8];
-    /*     */ byte _gap_0x8[0x4];
+    /* 0x0 */ unsigned __int32 CRC;
+    /* 0x4 */ unsigned __int32 Id;
+    /*     */ byte _gap_0x8[0x2];
+    /* 0xA */ unsigned __int16 Slot;
 };
 
 struct Client_Graphics_Kernel_ShaderPackage_MaterialElement /* Size=0x8 */
@@ -6796,11 +6827,27 @@ struct Client_Graphics_Render_Manager /* Size=0x2D730 */
     /*         */ byte _gap_0xB408[0x22328];
 };
 
-struct Client_Graphics_Render_Material /* Size=0x20 */
+struct Client_Graphics_Render_Material /* Size=0x40 */
 {
     /* 0x00 */ Client_Graphics_ReferencedClassBase ReferencedClassBase;
     /* 0x10 */ Client_System_Resource_Handle_MaterialResourceHandle* MaterialResourceHandle;
-    /*      */ byte _gap_0x18[0x8];
+    /* 0x18 */ unsigned __int32 ShaderFlags;
+    /*      */ byte _gap_0x1C[0x4];
+    /* 0x20 */ unsigned __int32* ShaderKeyValues;
+    /* 0x28 */ Client_Graphics_Kernel_ConstantBuffer* MaterialParameterCBuffer;
+    /* 0x30 */ Client_Graphics_Render_Material_TextureEntry* Textures;
+    /* 0x38 */ unsigned __int16 TextureCount;
+    /*      */ byte _gap_0x3A[0x2];
+    /*      */ byte _gap_0x3C[0x4];
+};
+
+struct Client_Graphics_Render_Material_TextureEntry /* Size=0x18 */
+{
+    /* 0x00 */ unsigned __int32 Id;
+    /*      */ byte _gap_0x4[0x4];
+    /* 0x08 */ Client_System_Resource_Handle_TextureResourceHandle* Texture;
+    /* 0x10 */ unsigned __int32 SamplerFlags;
+    /*      */ byte _gap_0x14[0x4];
 };
 
 struct Client_Graphics_Render_Model /* Size=0xF0 */
@@ -6813,11 +6860,17 @@ struct Client_Graphics_Render_Model /* Size=0xF0 */
     /* 0x30 */ Client_System_Resource_Handle_ModelResourceHandle* ModelResourceHandle;
     /*      */ byte _gap_0x38[0x8];
     /* 0x40 */ Client_Graphics_Render_Skeleton* Skeleton;
-    /*      */ byte _gap_0x48[0x50];
+    /*      */ byte _gap_0x48[0x10];
+    /* 0x58 */ void** BoneList;
+    /* 0x60 */ __int32 BoneCount;
+    /*      */ byte _gap_0x64[0x4];
+    /*      */ byte _gap_0x68[0x30];
     /* 0x98 */ Client_Graphics_Render_Material** Materials;
     /* 0xA0 */ __int32 MaterialCount;
     /*      */ byte _gap_0xA4[0x4];
-    /*      */ byte _gap_0xA8[0x48];
+    /*      */ byte _gap_0xA8[0x40];
+    /* 0xE8 */ unsigned __int32 SlotIndex;
+    /*      */ byte _gap_0xEC[0x4];
 };
 
 struct Client_Graphics_Render_Notifier /* Size=0x18 */
@@ -6929,7 +6982,10 @@ struct Client_Graphics_Render_SubView /* Size=0x58 */
 
 struct Client_Graphics_Render_Texture /* Size=0xC0 */
 {
+    union {
     /* 0x00 */ void* vtbl;
+    /* 0x00 */ Client_Graphics_Render_Texture_TextureVTable* VTable;
+    } _union_0x0;
     /*      */ byte _gap_0x8[0x18];
     /* 0x20 */ Client_Graphics_Render_Notifier Notifier;
     /* 0x38 */ unsigned __int32 Width;
@@ -6952,6 +7008,13 @@ struct Client_Graphics_Render_Texture /* Size=0xC0 */
     /* 0x68 */ void* D3D11Texture2D;
     /* 0x70 */ void* D3D11ShaderResourceView;
     /*      */ byte _gap_0x78[0x48];
+};
+
+struct Client_Graphics_Render_Texture_TextureVTable /* Size=0x0 */
+{
+    /*     */ byte _gap_0x0[0x10];
+    /* 0x10 */ __int64 IncRef;
+    /* 0x18 */ __int64 DecRef;
 };
 
 struct Client_Graphics_Render_View /* Size=0x5A0 */
@@ -6991,8 +7054,10 @@ struct Client_Graphics_Scene_CharacterBase /* Size=0x8F0 */
     /*       */ byte _gap_0x220[0x4];
     /* 0x224 */ float VfxScale;
     /*       */ byte _gap_0x228[0x18];
-    /* 0x240 */ void* CharacterDataCB;
-    /*       */ byte _gap_0x248[0x68];
+    /* 0x240 */ Client_Graphics_Kernel_ConstantBuffer* CharacterDataCBuffer;
+    /*       */ byte _gap_0x248[0x10];
+    /* 0x258 */ Client_Graphics_Render_Texture** ColorSetTextures;
+    /*       */ byte _gap_0x260[0x50];
     /* 0x2B0 */ float WeatherWetness;
     /* 0x2B4 */ float SwimmingWetness;
     /* 0x2B8 */ float WetnessDepth;
@@ -7003,7 +7068,7 @@ struct Client_Graphics_Scene_CharacterBase /* Size=0x8F0 */
     /* 0x2D0 */ void* TempData;
     /* 0x2D8 */ void* TempSlotData;
     /*       */ byte _gap_0x2E0[0x8];
-    /* 0x2E8 */ void** MaterialArray;
+    /* 0x2E8 */ Client_Graphics_Render_Material** Materials;
     /* 0x2F0 */ void* EID;
     /* 0x2F8 */ void** IMCArray;
     /*       */ byte _gap_0x300[0x5F0];
@@ -7015,6 +7080,15 @@ struct Client_Graphics_Scene_CharacterBase_CharacterBaseVTable /* Size=0x0 */
     /* 0x190 */ __int64 GetModelType;
     /*     */ byte _gap_0x198[0x80];
     /* 0x218 */ __int64 FlagSlotForUpdate;
+};
+
+struct Client_Graphics_Scene_CharacterUtility /* Size=0x0 */
+{
+    /* 0x0 */ void* VTable;
+    /* 0x8 */ byte ResourceHandles[0x2B8];
+    /*     */ byte _gap_0x2C0[0x38];
+    /* 0x2F8 */ Client_Graphics_Kernel_ConstantBuffer* LegacyBodyDecalColorCBuffer;
+    /* 0x300 */ Client_Graphics_Kernel_ConstantBuffer* FreeCompanyCrestColorCBuffer;
 };
 
 struct Client_Graphics_Scene_Demihuman /* Size=0x978 */
@@ -7077,7 +7151,26 @@ struct Client_Graphics_Scene_Human /* Size=0xA80 */
     /* 0x940 */ unsigned __int16 FurId;
     /*       */ byte _gap_0x942[0x2];
     /*       */ byte _gap_0x944[0x4];
-    /*       */ byte _gap_0x948[0xF0];
+    /*       */ byte _gap_0x948[0x38];
+    /* 0x980 */ Client_Graphics_Render_Texture* HeadDecal;
+    /* 0x988 */ Client_Graphics_Render_Texture* TopDecal;
+    /* 0x990 */ Client_Graphics_Render_Texture* ArmsDecal;
+    /* 0x998 */ Client_Graphics_Render_Texture* LegsDecal;
+    /* 0x9A0 */ Client_Graphics_Render_Texture* FeetDecal;
+    /* 0x9A8 */ Client_Graphics_Render_Texture* EarDecal;
+    /* 0x9B0 */ Client_Graphics_Render_Texture* NeckDecal;
+    /* 0x9B8 */ Client_Graphics_Render_Texture* WristDecal;
+    /* 0x9C0 */ Client_Graphics_Render_Texture* RFingerDecal;
+    /* 0x9C8 */ Client_Graphics_Render_Texture* LFingerDecal;
+    /*       */ byte _gap_0x9D0[0x8];
+    /* 0x9D8 */ Client_Graphics_Kernel_ConstantBuffer* CustomizeParameterCBuffer;
+    /* 0x9E0 */ Client_Graphics_Kernel_ConstantBuffer* DecalColorCBuffer;
+    /* 0x9E8 */ Client_System_Resource_Handle_TextureResourceHandle* Decal;
+    /* 0x9F0 */ Client_System_Resource_Handle_TextureResourceHandle* LegacyBodyDecal;
+    /* 0x9F8 */ Client_Graphics_Render_Texture* FreeCompanyCrest;
+    /* 0xA00 */ unsigned __int32 SlotFreeCompanyCrestBitfield;
+    /*       */ byte _gap_0xA04[0x4];
+    /*       */ byte _gap_0xA08[0x30];
     /* 0xA38 */ byte* ChangedEquipData;
     /*       */ byte _gap_0xA40[0x40];
 };
@@ -7092,6 +7185,18 @@ struct Client_Graphics_Scene_Object_ObjectVTable /* Size=0x0 */
 {
     /*     */ byte _gap_0x0[0x10];
     /* 0x10 */ __int64 GetObjectType;
+};
+
+struct Client_Graphics_Scene_Object_SiblingEnumerator /* Size=0x0 */
+{
+};
+
+struct Client_Graphics_Scene_ResidentResourceManager /* Size=0x0 */
+{
+    /*     */ byte _gap_0x0[0x10];
+    /*     */ byte _gap_0x10[0x4];
+    /* 0x14 */ unsigned __int32 ResourceCount;
+    /* 0x18 */ Client_System_Resource_Handle_ResourceHandle** ResourceList;
 };
 
 struct Client_Graphics_Scene_Weapon /* Size=0x920 */
@@ -7330,6 +7435,7 @@ struct Client_System_Resource_Handle_ResourceHandle /* Size=0xB0 */
     union {
     /* 0x00 */ void* vtbl;
     /* 0x00 */ void** vfunc;
+    /* 0x00 */ Client_System_Resource_Handle_ResourceHandle_ResourceHandleVTable* VTable;
     } _union_0x0;
     /* 0x08 */ Client_System_Resource_ResourceCategory Category;
     /* 0x0C */ unsigned __int32 FileType;
@@ -7350,7 +7456,26 @@ struct Client_System_Resource_Handle_ResourceHandle /* Size=0xB0 */
 struct Client_System_Resource_Handle_MaterialResourceHandle /* Size=0x108 */
 {
     /* 0x000 */ Client_System_Resource_Handle_ResourceHandle ResourceHandle;
-    /*       */ byte _gap_0xB0[0x58];
+    /*       */ byte _gap_0xB0[0x10];
+    /* 0x0C0 */ Client_Graphics_Render_Material* Material;
+    /* 0x0C8 */ Client_System_Resource_Handle_ShaderPackageResourceHandle* ShaderPackageResourceHandle;
+    /* 0x0D0 */ Client_System_Resource_Handle_MaterialResourceHandle_TextureEntry* Textures;
+    /*       */ byte _gap_0xD8[0x8];
+    /* 0x0E0 */ byte* Strings;
+    /*       */ byte _gap_0xE8[0x10];
+    /* 0x0F8 */ unsigned __int16 ShpkNameOffset;
+    /* 0x0FA */ byte TextureCount;
+    /*       */ byte _gap_0xFB;
+    /*       */ byte _gap_0xFC[0x4];
+    /*       */ byte _gap_0x100[0x8];
+};
+
+struct Client_System_Resource_Handle_MaterialResourceHandle_TextureEntry /* Size=0x10 */
+{
+    /* 0x00 */ Client_System_Resource_Handle_TextureResourceHandle* TextureResourceHandle;
+    /* 0x08 */ unsigned __int16 PathOffset;
+    /* 0x0A */ unsigned __int16 Flags;
+    /*      */ byte _gap_0xC[0x4];
 };
 
 struct StdPair_PointerSystemByte_SystemInt16 /* Size=0x10 */
@@ -7395,6 +7520,20 @@ struct Client_System_Resource_Handle_ModelResourceHandle /* Size=0x260 */
     /*       */ byte _gap_0x238[0x28];
 };
 
+struct Client_System_Resource_Handle_ResourceHandle_ResourceHandleVTable /* Size=0x0 */
+{
+    /*     */ byte _gap_0x0[0x88];
+    /* 0x88 */ __int64 GetLength;
+    /*     */ byte _gap_0x90[0x28];
+    /* 0xB8 */ __int64 GetData;
+};
+
+struct Client_System_Resource_Handle_ShaderPackageResourceHandle /* Size=0x0 */
+{
+    /* 0x0 */ Client_System_Resource_Handle_ResourceHandle ResourceHandle;
+    /* 0xB0 */ Client_Graphics_Kernel_ShaderPackage* ShaderPackage;
+};
+
 struct Client_System_Resource_Handle_SkeletonResourceHandle_SkeletonHeader /* Size=0x30 */
 {
     /* 0x00 */ unsigned __int32 SklbMagic;
@@ -7423,7 +7562,9 @@ struct Client_System_Resource_Handle_SkeletonResourceHandle /* Size=0x0 */
 struct Client_System_Resource_Handle_TextureResourceHandle /* Size=0x140 */
 {
     /* 0x000 */ Client_System_Resource_Handle_ResourceHandle ResourceHandle;
-    /*       */ byte _gap_0xB0[0x90];
+    /*       */ byte _gap_0xB0[0x68];
+    /* 0x118 */ Client_Graphics_Render_Texture* Texture;
+    /*       */ byte _gap_0x120[0x20];
 };
 
 struct Client_System_Resource_ResourceGraph /* Size=0xC80 */
@@ -7981,6 +8122,28 @@ struct Client_UI_AddonDeliveryItemInfo /* Size=0x68 */
     /* 0x00 */ unsigned __int32 ItemId;
     /*      */ byte _gap_0x4[0x4];
     /*      */ byte _gap_0x8[0x60];
+};
+
+struct Client_UI_AddonDtr /* Size=0x368 */
+{
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
+    /* 0x220 */ Client_System_String_Utf8String TimeModeTooltip;
+    /* 0x288 */ Client_System_String_Utf8String NetworkInfoTooltip;
+    /*       */ byte _gap_0x2F0[0x8];
+    /* 0x2F8 */ Component_GUI_AtkTextNode* TimeText;
+    /* 0x300 */ Component_GUI_AtkResNode* NetworkStrengthContainer;
+    /* 0x308 */ Component_GUI_AtkImageNode* NetworkStrengthImage;
+    /* 0x310 */ Component_GUI_AtkResNode* MailContainer;
+    /* 0x318 */ Component_GUI_AtkImageNode* MailImage;
+    /* 0x320 */ Component_GUI_AtkTextNode* MailText;
+    /* 0x328 */ Component_GUI_AtkResNode* DutyRecorderContainer;
+    /* 0x330 */ Component_GUI_AtkResNode* AlarmsContainer;
+    /* 0x338 */ Component_GUI_AtkResNode* WalkModeContainer;
+    /* 0x340 */ Component_GUI_AtkResNode* WorldInfoContainer;
+    /* 0x348 */ Component_GUI_AtkTextNode* WorldText;
+    /* 0x350 */ Component_GUI_AtkImageNode* WorldVisitImage;
+    /* 0x358 */ Component_GUI_AtkCollisionNode* CollisionNode;
+    /*       */ byte _gap_0x360[0x8];
 };
 
 struct Client_UI_AddonEnemyList /* Size=0x278 */
@@ -11212,6 +11375,32 @@ struct Client_UI_Agent_AgentRetainerList /* Size=0x5B8 */
     /*       */ byte _gap_0x4C[0x4];
     /* 0x050 */ Client_UI_Agent_AgentRetainerList_RetainerList Retainers;
     /*       */ byte _gap_0x4B0[0x108];
+};
+
+struct Client_UI_Agent_AgentRetainerTask /* Size=0x90 */
+{
+    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
+    /* 0x28 */ unsigned __int32 DisplayType;
+    /*      */ byte _gap_0x2C[0x4];
+    /*      */ byte _gap_0x30[0x8];
+    /* 0x38 */ unsigned __int32 OpenerAddonId;
+    /*      */ byte _gap_0x3C[0x4];
+    /*      */ byte _gap_0x40[0x4];
+    /* 0x44 */ unsigned __int32 RewardXP;
+    /*      */ byte _gap_0x48[0x8];
+    /* 0x50 */ unsigned __int32 RewardItemIds[0x2];
+    /* 0x58 */ unsigned __int32 RewardItemCount[0x2];
+    /*      */ byte _gap_0x60[0x8];
+    /*      */ byte _gap_0x68[0x4];
+    /* 0x6C */ unsigned __int32 RetainerTaskLvRange;
+    /*      */ byte _gap_0x70[0x4];
+    /* 0x74 */ unsigned __int32 RetainerTaskId;
+    /*      */ byte _gap_0x78[0x8];
+    /* 0x80 */ bool IsLoading;
+    /*      */ byte _gap_0x81;
+    /*      */ byte _gap_0x82[0x2];
+    /* 0x84 */ unsigned __int32 XPToReward;
+    /*      */ byte _gap_0x88[0x8];
 };
 
 struct Client_UI_Agent_AgentRevive /* Size=0xB8 */
@@ -14947,5 +15136,68 @@ struct Component_GUI_ULD_AtkUldComponentDataTab /* Size=0x24 */
     /* 0x0C */ unsigned __int32 Nodes[0x4];
     /* 0x1C */ unsigned __int32 TextId;
     /* 0x20 */ unsigned __int32 GroupId;
+};
+
+struct Shader_CameraLight /* Size=0x20 */
+{
+    /* 0x00 */ Common_Math_Vector4 DiffuseSpecular;
+    /* 0x10 */ Common_Math_Vector4 Rim;
+};
+
+struct Shader_CameraParameter /* Size=0x1C0 */
+{
+    /* 0x000 */ Common_Math_Vector4 ViewMatrixX;
+    /* 0x010 */ Common_Math_Vector4 ViewMatrixY;
+    /* 0x020 */ Common_Math_Vector4 ViewMatrixZ;
+    /* 0x030 */ Common_Math_Vector4 InverseViewMatrixX;
+    /* 0x040 */ Common_Math_Vector4 InverseViewMatrixY;
+    /* 0x050 */ Common_Math_Vector4 InverseViewMatrixZ;
+    /* 0x060 */ Common_Math_Matrix4x4 ViewProjectionMatrix;
+    /* 0x0A0 */ Common_Math_Matrix4x4 InverseViewProjectionMatrix;
+    /* 0x0E0 */ Common_Math_Matrix4x4 InverseProjectionMatrix;
+    /* 0x120 */ Common_Math_Matrix4x4 ProjectionMatrix;
+    /* 0x160 */ Common_Math_Matrix4x4 MainViewToProjectionMatrix;
+    /* 0x1A0 */ Common_Math_Vector3 EyePosition;
+    /* 0x1B0 */ Common_Math_Vector3 LookAtVector;
+};
+
+struct Shader_CommonParameter /* Size=0x40 */
+{
+    /* 0x00 */ Common_Math_Vector4 RenderTarget;
+    /* 0x10 */ Common_Math_Vector4 Viewport;
+    /* 0x20 */ Common_Math_Vector4 Misc;
+    /* 0x30 */ Common_Math_Vector4 Misc2;
+};
+
+struct Shader_CustomizeParameter /* Size=0x90 */
+{
+    /* 0x00 */ Common_Math_Vector4 SkinColor;
+    /* 0x10 */ Common_Math_Vector4 SkinFresnelValue0;
+    /* 0x20 */ Common_Math_Vector4 LipColor;
+    /* 0x30 */ Common_Math_Vector3 MainColor;
+    /* 0x40 */ Common_Math_Vector3 HairFresnelValue0;
+    /* 0x50 */ Common_Math_Vector3 MeshColor;
+    /* 0x60 */ Common_Math_Vector4 LeftColor;
+    /* 0x70 */ Common_Math_Vector4 RightColor;
+    /* 0x80 */ Common_Math_Vector3 OptionColor;
+};
+
+struct Shader_InstanceParameter /* Size=0x50 */
+{
+    /* 0x00 */ Common_Math_Vector4 MulColor;
+    /* 0x10 */ Common_Math_Vector4 EnvParameter;
+    /* 0x20 */ Shader_CameraLight CameraLight;
+    /* 0x40 */ Common_Math_Vector4 Wetness;
+};
+
+struct Shader_ModelParameter /* Size=0x10 */
+{
+    /* 0x00 */ Common_Math_Vector4 Params;
+};
+
+struct Shader_SceneParameter /* Size=0x20 */
+{
+    /* 0x00 */ Common_Math_Vector4 OcclusionIntensity;
+    /* 0x10 */ Common_Math_Vector4 Wetness;
 };
 
