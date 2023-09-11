@@ -6778,6 +6778,12 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x140D61BA0: ctor
+  Client::UI::AddonActionMenu:
+    vtbls:
+      - ea: 0x141A679E0
+        base: Component::GUI::AtkUnitBase
+    funcs:
+        0x:140F7EF80: ctor
   Client::UI::AddonFateReward:
     vtbls:
       - ea: 0x141A696D8
