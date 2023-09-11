@@ -19,8 +19,8 @@ public unsafe partial struct AddonActionMenu {
     [FieldOffset(0x268)] public AtkComponentRadioButton* ExtrasRadioButton;
     [FieldOffset(0x270)] public AtkComponentRadioButton* RoleRadioButton;
 
-    [FixedSizeArray<ActionInfo>(80)] [FieldOffset(0x318)]
-    public fixed byte ActionArray[0x38 * 80];
+    [FixedSizeArray<ActionInfo>(80)] 
+    [FieldOffset(0x318)] public fixed byte ActionArray[0x38 * 80];
 
     [FieldOffset(0x14A8)] public AtkResNode* SidebarContainer; // Contains radio buttons for Actions, Role, Traits etc, including all of the icon buttons that are on the left side
     [FieldOffset(0x14B0)] public AtkResNode* ContentsContainer; // Contains all the nodes tha appear in the main area of the window
@@ -29,7 +29,6 @@ public unsafe partial struct AddonActionMenu {
     [FieldOffset(0x14C8)] public AtkComponentButton* CompactModeToggleButton;
     [FieldOffset(0x14D0)] public AtkResNode* LevelTextContainer;
     [FieldOffset(0x14D8)] public AtkImageNode* JobIcon;
-
     [FieldOffset(0x14E0)] public AtkTextNode* JobText;
 
     // [FieldOffset(0x14E8)] public AtkTextNode* UnknownText;
