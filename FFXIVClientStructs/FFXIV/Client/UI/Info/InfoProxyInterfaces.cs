@@ -7,6 +7,9 @@ public unsafe partial struct InfoProxyInterface {
     //For Proxies with a fixed count this is apparently 0
     [FieldOffset(0x10)] public uint EntryCount;
 
+    [VirtualFunction(6)]
+    public partial void EndRequest();
+
     [VirtualFunction(7)]
     public partial uint GetEntryCount();
 }
@@ -28,4 +31,6 @@ public unsafe partial struct InfoProxyInvitedInterface {
 public unsafe partial struct InfoProxyPageInterface {
     [FieldOffset(0x0)] public InfoProxyInterface InfoProxyInterface;
 
+    [VirtualFunction(12)]
+    public partial bool AddPage(void* data);
 }
