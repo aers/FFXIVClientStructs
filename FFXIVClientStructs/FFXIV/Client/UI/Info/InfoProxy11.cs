@@ -13,7 +13,7 @@ public unsafe partial struct InfoProxy11 {
 
     [FieldOffset(0x30)] private fixed byte InternalListings[MarketBoardListing.Size * 100];
 
-    public Span<MarketBoardListing> Listings => new(Unsafe.AsPointer(ref this.InternalListings[0]), (int)this.ListingCount);
+    public Span<MarketBoardListing> Listings => new(Unsafe.AsPointer(ref this.InternalListings[0]), (int) this.ListingCount);
 
     [FieldOffset(0x4810)] public uint ListingCount;
 
@@ -66,4 +66,3 @@ public unsafe struct MarketBoardListing {
 
     // [FieldOffset(0xB1)] public byte UNK_0xB1;
 }
-
