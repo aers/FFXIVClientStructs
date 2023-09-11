@@ -1486,6 +1486,7 @@ classes:
       3: ClearData
       5: RequestData
       6: EndRequest
+      7: GetEntryCount
   Client::UI::Info::InfoProxyPageInterface:
     vtbls:
       - ea: 0x14194E1A8
