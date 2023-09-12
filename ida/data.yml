@@ -7389,6 +7389,12 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141049550: ctor
+  Client::UI::AddonScenarioTree:
+    vtbls:
+      - ea: 0x141A7DF08
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1410346F0: ctor
   Client::UI::AddonWeeklyBingo::DutySlot:
     vtbls:
       - ea: 0x141A85900
