@@ -524,6 +524,7 @@ classes:
       0x14091D500: GetPartyMemberByObjectId
       0x140B73700: Create
       0x140B73640: GetGroupManager
+      0x140B73660: GetNextInstance
   Client::Game::Balloon:
     funcs:
       0x141417D20: OpenBalloon
