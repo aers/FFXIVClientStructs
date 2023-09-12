@@ -23,6 +23,9 @@ public unsafe partial struct GroupManager {
     [StaticAddress("33 D2 48 8D 0D ?? ?? ?? ?? 33 DB", 5)]
     public static partial GroupManager* Instance();
 
+    [MemberFunction("48 8D 81 ?? ?? ?? ?? 84 D2")]
+    public partial GroupManager* GetNextInstance(bool getNextInstance = true); // if true, simply adds sizeof(GroupManager) to the `this` pointer
+
     [MemberFunction("E8 ?? ?? ?? ?? EB B8 E8")]
     public partial bool IsObjectIDInParty(uint objectID);
 
