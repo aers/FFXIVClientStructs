@@ -67,6 +67,7 @@ public unsafe partial struct MarkerInfo {
     [FieldOffset(0x04)] public uint ObjectiveId;
     [FieldOffset(0x08)] public Utf8String Label;
     [FieldOffset(0x70)] public StdVector<MapMarkerData> MarkerData;
+    [FieldOffset(0x8B)] public bool ShouldRender;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x48)]
