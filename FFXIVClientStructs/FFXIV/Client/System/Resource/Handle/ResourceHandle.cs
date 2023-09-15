@@ -17,8 +17,11 @@ public unsafe partial struct ResourceHandle {
     [FieldOffset(0x2C)] public uint FileSize2;
     [FieldOffset(0x34)] public uint FileSize3;
 
+    [FieldOffset(0x6C)] public byte UserData;
+
     [FieldOffset(0x48)] public StdString FileName; // std::string
-    [FieldOffset(0xAC)] public uint RefCount;
+    [FieldOffset(0xA9)] public byte LoadState;
+    [FieldOffset(0xAC)] public int RefCount;
 
     public ReadOnlySpan<byte> GetDataSpan() {
         var data = GetData();
@@ -38,9 +41,18 @@ public unsafe partial struct ResourceHandle {
     [MemberFunction("E8 ?? ?? ?? ?? 41 8B 46 30 C1 E0 05")]
     public partial bool IncRef();
 
-    [VirtualFunction(23u)]
-    public partial byte* GetData();
+    [VirtualFunction(6u)]
+    public partial byte GetUserData();
 
     [VirtualFunction(17u)]
     public partial ulong GetLength();
+
+    [VirtualFunction(23u)]
+    public partial byte* GetData();
+
+    [VirtualFunction(31u)]
+    public partial bool LoadIntoKernel();
+
+    [VirtualFunction(33u)]
+    public partial bool Load(void* contents, bool flag);
 }
