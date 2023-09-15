@@ -29,13 +29,12 @@ public unsafe partial struct ItemOrderModule {
     [FieldOffset(0xA0)] public ItemOrderModuleSorter* ArmourySoulCrystalSorter;
     [FieldOffset(0xA8)] public ItemOrderModuleSorter* ArmouryWaistSorter; // no longer used
     [FieldOffset(0xB0)] public ulong ActiveRetainerId;
-    [FieldOffset(0xB8)] public StdVector<ItemOrderModuleSorterRetainerEntry>* RetainerSorter;
-    [FieldOffset(0xC0)] public long RetainerSorterCount;
+    [FieldOffset(0xB8)] public StdMap<ulong, Pointer<ItemOrderModuleSorter>> RetainerSorter;
     [FieldOffset(0xC8)] public ItemOrderModuleSorter* SaddleBagSorter;
     [FieldOffset(0xD0)] public ItemOrderModuleSorter* PremiumSaddleBagSorter;
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x60)]
+[StructLayout(LayoutKind.Explicit, Size = 0x68)]
 public unsafe struct ItemOrderModuleSorter {
     [FieldOffset(0x00)] public InventoryType InventoryType;
 
@@ -47,15 +46,12 @@ public unsafe struct ItemOrderModuleSorter {
     [FieldOffset(0x3C)] public int PercentComplete; // set to 100 if done
     [FieldOffset(0x40)] public StdVector<ItemOrderModuleSorterSortFunctionEntry> SortFunctions;
     [FieldOffset(0x58)] public ItemOrderModuleSorterPreviousOrderEntry* PreviousOrderArray;
+    // [FieldOffset(0x60)] public bool UnkBool; Set to true, only when it's the InventorySorter?
 
-    public long ItemCount => ((nint)Items.Last - (nint)Items.First) >> 3;
-    public long SortFunctionCount => ((nint)SortFunctions.Last - (nint)SortFunctions.First) >> 4;
-}
-
-[StructLayout(LayoutKind.Explicit, Size = 0x40)]
-public unsafe struct ItemOrderModuleSorterRetainerEntry {
-    [FieldOffset(0x20)] public ulong RetainerId;
-    [FieldOffset(0x28)] public ItemOrderModuleSorter* Sorter;
+    [Obsolete("Use Items.Size()", false)]
+    public long ItemCount => (long)Items.Size();
+    [Obsolete("Use SortFunctions.Size()", false)]
+    public long SortFunctionCount => (long)SortFunctions.Size();
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0xC)]
