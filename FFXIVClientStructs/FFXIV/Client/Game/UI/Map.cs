@@ -1,4 +1,3 @@
-using System.Runtime.CompilerServices;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
@@ -7,9 +6,6 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 public unsafe partial struct Map {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? 41 8B D4 66 89 44 24", 3)]
     public static partial Map* Instance();
-
-    [Obsolete("Use QuestDataSpan instead", true)]
-    [FieldOffset(0x90)] public QuestMarkerArray QuestMarkers;
 
     [FixedSizeArray<MarkerInfo>(30)]
     [FieldOffset(0x90)] public fixed byte QuestData[0x90 * 30];
@@ -27,31 +23,6 @@ public unsafe partial struct Map {
     [FieldOffset(0x3EA8)] public SimpleMapMarkerContainer SimpleCustomTalkMarkerData;
     [FieldOffset(0x3F48)] public MapMarkerContainer GemstoneTraderMarkerData;
     [FieldOffset(0x3F50)] public SimpleMapMarkerContainer SimpleGemstoneTraderMarkerData;
-
-    [Obsolete("Use QuestDataSpan instead", true)]
-    [StructLayout(LayoutKind.Sequential, Size = 0x10E0)]
-    public struct QuestMarkerArray {
-        private fixed byte data[30 * 0x90];
-
-        public MapMarkerInfo* this[int index] {
-            get {
-                if (index is < 0 or > 30) return null;
-
-                fixed (byte* pointer = data) {
-                    return (MapMarkerInfo*)(pointer + sizeof(MapMarkerInfo) * index);
-                }
-            }
-        }
-    }
-
-    [Obsolete("Use MarkerInfo structure instead", true)]
-    [StructLayout(LayoutKind.Explicit, Size = 0x90)]
-    public struct MapMarkerInfo {
-        [FieldOffset(0x04)] public uint QuestID;
-        [FieldOffset(0x08)] public Utf8String Name;
-        [FieldOffset(0x8B)] public byte ShouldRender;
-        [FieldOffset(0x88)] public ushort RecommendedLevel;
-    }
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
