@@ -12,6 +12,11 @@ public unsafe struct AtkTextureResource {
 
     [FieldOffset(0x10)] public Texture* KernelTextureObject; // Client::Graphics::Kernel::Texture, renderer texture obj
 
-    [FieldOffset(0x18)] public ushort Count_1; // both of these are some sort of reference/use count
+    [Obsolete("Use Count")]
+    [FieldOffset(0x18)] public ushort Count_1;
+    [FieldOffset(0x18)] public ushort Count;
+    [Obsolete("Use Version")]
     [FieldOffset(0x1A)] public byte Count_2;
+    [FieldOffset(0x1A)] public byte Version;
+    [FieldOffset(0x1B)] public byte ShareCount;
 }
