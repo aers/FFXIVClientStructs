@@ -21,7 +21,7 @@ public unsafe partial struct ResourceHandle {
 
     [FieldOffset(0x48)] public StdString FileName; // std::string
     [FieldOffset(0xA9)] public byte LoadState;
-    [FieldOffset(0xAC)] public int RefCount;
+    [FieldOffset(0xAC)] public uint RefCount;
 
     public ReadOnlySpan<byte> GetDataSpan() {
         var data = GetData();
