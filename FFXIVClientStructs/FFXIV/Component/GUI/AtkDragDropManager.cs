@@ -11,18 +11,18 @@ public unsafe struct AtkDragDropManager {
 
     //the first 2 seem to point to some subclass of DragDrop, maybe some temp thing
     [FieldOffset(0x98)] public AtkDragDropInterface* DragDrop1;
-    
-	// vvv Not set in some cases where DragDropS isn't used (like with hotbars)
+
+    // vvv Not set in some cases where DragDropS isn't used (like with hotbars)
     [FieldOffset(0xA0)] public AtkDragDropInterface* DragDrop2;
     [FieldOffset(0xA8)] public AtkComponentDragDrop* DragDropS;
-	// ^^^
+    // ^^^
 
     //returns some sort of (event?)mask from some static array
     //public const int MaskSize = 0x57;
     //[FieldOffset(0xB0)] public delegate*unmanaged<int, ulong> GetMask;
 
     [FieldOffset(0xB8)] public short DragStartX;
-	[FieldOffset(0xBA)] public short DragStartY;
+    [FieldOffset(0xBA)] public short DragStartY;
 
     [FieldOffset(0xBC)] public bool IsDragging;
     // True if the item was clicked on (user must click again to drop it somewhere)
