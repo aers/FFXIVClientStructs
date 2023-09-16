@@ -41,7 +41,7 @@ public unsafe partial struct AtkUldManager {
     [FieldOffset(0x42)] public ushort NodeListCount;
     [FieldOffset(0x48)] public void* AtkResourceRendererManager;
     [FieldOffset(0x50)] public AtkResNode** NodeList;
-    [FieldOffset(0x58), Obsolete("Use DuplicateObjectsList")] public AtkLinkedList<Pointer<DuplicateObjectList>> DuplicateObjects;
+    [FieldOffset(0x58), Obsolete("Use DuplicateObjectsList", true)] public AtkLinkedList<Pointer<DuplicateObjectList>> DuplicateObjects;
     [FieldOffset(0x58)] public StdLinkedList<Pointer<DuplicateObjectList>> DuplicateObjectsList; // linked list of lists of duplicates
     [FieldOffset(0x78)] public AtkResNode* RootNode;
     [FieldOffset(0x80)] public ushort RootNodeWidth;

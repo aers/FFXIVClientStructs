@@ -16,7 +16,7 @@ public unsafe partial struct SavedAppearanceManager {
 public unsafe partial struct SavedAppearanceSlot {
     [FieldOffset(0x00)] public uint Magic; // Should be 0x2013_FF14
     [FieldOffset(0x04)] public uint Version;
-    [Obsolete("Use CustomizeData")]
+    [Obsolete("Use CustomizeData", true)]
     [FieldOffset(0x10)] public fixed byte Customize[0x1A];
     [FieldOffset(0x10)] public CustomizeData CustomizeData;
     [FieldOffset(0x30), FixedString("Label")] public fixed byte LabelBytes[0x40];

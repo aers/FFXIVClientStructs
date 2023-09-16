@@ -5,7 +5,7 @@ public unsafe partial struct RetainerManager {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? 48 8B 18", 3)]
     public static partial RetainerManager* Instance();
 
-    [Obsolete("Use Retainers")]
+    [Obsolete("Use Retainers", true)]
     [FieldOffset(0x000)] public RetainerList Retainer;
     [FixedSizeArray<RetainerList.Retainer>(10)]
     [FieldOffset(0x000)] public fixed byte Retainers[0x48 * 10];

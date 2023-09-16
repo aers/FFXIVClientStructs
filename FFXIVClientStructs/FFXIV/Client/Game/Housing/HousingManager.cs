@@ -6,7 +6,7 @@ public unsafe partial struct HousingManager {
     public static partial HousingManager* Instance();
 
     [FieldOffset(0x00)] public HousingTerritory* CurrentTerritory;
-    [Obsolete("Use HousingOutdoorTerritory", false)]
+    [Obsolete("Use HousingOutdoorTerritory", true)]
     [FieldOffset(0x08)] public HousingTerritory* OutdoorTerritory;
     [FieldOffset(0x08)] public HousingOutdoorTerritory* HousingOutdoorTerritory;
     [FieldOffset(0x10)] public HousingTerritory* IndoorTerritory;
