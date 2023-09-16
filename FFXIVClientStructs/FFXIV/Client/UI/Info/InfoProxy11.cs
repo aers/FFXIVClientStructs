@@ -3,6 +3,7 @@ using System.Runtime.CompilerServices;
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x5B98)]
+[VTableAddress("48 8D 05 ?? ?? ?? ?? 48 8B F1 48 89 01 48 8D 99 ?? ?? ?? ?? BF ?? ?? ?? ?? 0F 1F 84 00 ?? ?? ?? ?? 48 83 EB 78 48 8B CB E8 ?? ?? ?? ?? 48 83 EF 01 75 EE 8D 5F 14", 3)]
 public unsafe partial struct InfoProxy11 {
     [FieldOffset(0x00)] public InfoProxyPageInterface InfoProxyPageInterface;
 
@@ -66,4 +67,3 @@ public unsafe struct MarketBoardListing {
 
     // [FieldOffset(0xB1)] public byte UNK_0xB1;
 }
-
