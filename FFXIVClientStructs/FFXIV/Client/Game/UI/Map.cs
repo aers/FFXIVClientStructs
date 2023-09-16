@@ -8,7 +8,7 @@ public unsafe partial struct Map {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? 41 8B D4 66 89 44 24", 3)]
     public static partial Map* Instance();
 
-    [Obsolete("Use QuestDataSpan instead", false)]
+    [Obsolete("Use QuestDataSpan instead", true)]
     [FieldOffset(0x90)] public QuestMarkerArray QuestMarkers;
 
     [FixedSizeArray<MarkerInfo>(30)]
@@ -28,7 +28,7 @@ public unsafe partial struct Map {
     [FieldOffset(0x3F48)] public MapMarkerContainer GemstoneTraderMarkerData;
     [FieldOffset(0x3F50)] public SimpleMapMarkerContainer SimpleGemstoneTraderMarkerData;
 
-    [Obsolete("Use QuestDataSpan instead", false)]
+    [Obsolete("Use QuestDataSpan instead", true)]
     [StructLayout(LayoutKind.Sequential, Size = 0x10E0)]
     public struct QuestMarkerArray {
         private fixed byte data[30 * 0x90];
@@ -44,7 +44,7 @@ public unsafe partial struct Map {
         }
     }
 
-    [Obsolete("Use MarkerInfo structure instead", false)]
+    [Obsolete("Use MarkerInfo structure instead", true)]
     [StructLayout(LayoutKind.Explicit, Size = 0x90)]
     public struct MapMarkerInfo {
         [FieldOffset(0x04)] public uint QuestID;

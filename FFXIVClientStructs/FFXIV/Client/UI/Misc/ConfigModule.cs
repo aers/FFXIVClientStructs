@@ -20,14 +20,14 @@ public unsafe partial struct ConfigModule {
     [FieldOffset(0x5C38)] private fixed byte values[0x10 * ConfigOptionCount];
 
     [MemberFunction("E8 ?? ?? ?? ?? C6 47 4D 00")]
-    [Obsolete("Use Framework.SystemConfig functions.", false)]
+    [Obsolete("Use Framework.SystemConfig functions.", true)]
     public partial bool SetOption(uint index, int value, int a4 = 2, bool a5 = true, bool a6 = false);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 35 ?? ?? ?? ?? 33 DB")]
-    [Obsolete("Use Framework.SystemConfig functions.", false)]
+    [Obsolete("Use Framework.SystemConfig functions.", true)]
     public partial int GetIntValue(uint index, int a3 = 2);
 
-    [Obsolete("Use Framework.SystemConfig functions.", false)]
+    [Obsolete("Use Framework.SystemConfig functions.", true)]
     public uint? GetIndex(ConfigOption option) {
         for (uint i = 0; i < ConfigOptionCount; i++) {
             var o = GetOption(i);
@@ -38,7 +38,7 @@ public unsafe partial struct ConfigModule {
         return null;
     }
 
-    [Obsolete("Use Framework.SystemConfig functions.", false)]
+    [Obsolete("Use Framework.SystemConfig functions.", true)]
     public void SetOption(ConfigOption option, int value) {
         for (uint i = 0; i < ConfigOptionCount; i++) {
             var o = GetOption(i);
@@ -48,12 +48,12 @@ public unsafe partial struct ConfigModule {
         }
     }
 
-    [Obsolete("Use Framework.SystemConfig functions.", false)]
+    [Obsolete("Use Framework.SystemConfig functions.", true)]
     public void SetOptionById(short optionId, int value) {
         SetOption((ConfigOption)optionId, value);
     }
 
-    [Obsolete("Use Framework.SystemConfig functions.", false)]
+    [Obsolete("Use Framework.SystemConfig functions.", true)]
     public Option* GetOption(string name) {
         if (string.IsNullOrEmpty(name)) return null;
         for (uint i = 0; i < ConfigOptionCount; i++) {
@@ -66,7 +66,7 @@ public unsafe partial struct ConfigModule {
         return null;
     }
 
-    [Obsolete("Use Framework.SystemConfig functions.", false)]
+    [Obsolete("Use Framework.SystemConfig functions.", true)]
     public Option* GetOption(uint index) {
         fixed (byte* p = options) {
             var o = (Option*)p;
@@ -74,7 +74,7 @@ public unsafe partial struct ConfigModule {
         }
     }
 
-    [Obsolete("Use Framework.SystemConfig functions.", false)]
+    [Obsolete("Use Framework.SystemConfig functions.", true)]
     public Option* GetOption(ConfigOption option) {
         for (uint i = 0; i < ConfigOptionCount; i++) {
             var o = GetOption(i);
@@ -84,12 +84,12 @@ public unsafe partial struct ConfigModule {
         return null;
     }
 
-    [Obsolete("Use Framework.SystemConfig functions.", false)]
+    [Obsolete("Use Framework.SystemConfig functions.", true)]
     public Option* GetOptionById(short optionId) {
         return GetOption((ConfigOption)optionId);
     }
 
-    [Obsolete("Use Framework.SystemConfig functions.", false)]
+    [Obsolete("Use Framework.SystemConfig functions.", true)]
     public AtkValue* GetValue(uint index) {
         fixed (byte* p = values) {
             var v = (AtkValue*)p;
@@ -97,7 +97,7 @@ public unsafe partial struct ConfigModule {
         }
     }
 
-    [Obsolete("Use Framework.SystemConfig functions.", false)]
+    [Obsolete("Use Framework.SystemConfig functions.", true)]
     public AtkValue* GetValue(ConfigOption option) {
         for (uint i = 0; i < ConfigOptionCount; i++) {
             var o = GetOption(i);
@@ -107,12 +107,12 @@ public unsafe partial struct ConfigModule {
         return null;
     }
 
-    [Obsolete("Use Framework.SystemConfig functions.", false)]
+    [Obsolete("Use Framework.SystemConfig functions.", true)]
     public AtkValue* GetValueById(short optionId) {
         return GetValue((ConfigOption)optionId);
     }
 
-    [Obsolete("Use Framework.SystemConfig functions.", false)]
+    [Obsolete("Use Framework.SystemConfig functions.", true)]
     public int GetIntValue(ConfigOption option) {
         for (uint i = 0; i < ConfigOptionCount; i++) {
             var o = GetOption(i);
@@ -122,7 +122,7 @@ public unsafe partial struct ConfigModule {
         return 0;
     }
 
-    [Obsolete("Use Framework.SystemConfig functions.", false)]
+    [Obsolete("Use Framework.SystemConfig functions.", true)]
     public int GetIntValue(short optionId) {
         return GetIntValue((ConfigOption)optionId);
     }

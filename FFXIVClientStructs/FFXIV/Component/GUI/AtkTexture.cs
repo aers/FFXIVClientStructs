@@ -23,7 +23,7 @@ public unsafe partial struct AtkTexture : ICreatable {
     [FieldOffset(0x8)] public Texture* KernelTexture;
     [FieldOffset(0x10)] public TextureType TextureType;
     [FieldOffset(0x11)] public bool TextureReady; // Use IsTextureReady() instead
-    [Obsolete("Use IsTextureReady()")]
+    [Obsolete("Use IsTextureReady()", true)]
     [FieldOffset(0x11)] public byte UnkBool_2;
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 87 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? 4C 89 BF")]

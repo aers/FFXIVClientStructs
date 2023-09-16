@@ -15,14 +15,14 @@ public unsafe partial struct AgentContentsFinder {
 
     [FieldOffset(0x38)] public Utf8String Description;
 
-    [FieldOffset(0x86), Obsolete("Use Description instead")] public byte* DescriptionString; // null-terminated cstring representing the currently displayed duty description
+    [FieldOffset(0x86), Obsolete("Use Description instead", true)] public byte* DescriptionString; // null-terminated cstring representing the currently displayed duty description
 
-    [FieldOffset(0x1B8), Obsolete("Poorly mapped")] public ContentsFinderRewards Reward;
-    [FieldOffset(0x408), Obsolete("Poorly mapped")] public ContentsFinderRewards BonusReward;
+    [FieldOffset(0x1B8), Obsolete("Poorly mapped", true)] public ContentsFinderRewards Reward;
+    [FieldOffset(0x408), Obsolete("Poorly mapped", true)] public ContentsFinderRewards BonusReward;
 
     // These seem to be duplicates of the above reward structs
-    [FieldOffset(0x5C8), Obsolete("Poorly mapped")] public ContentsFinderRewards Reward2;
-    [FieldOffset(0x810), Obsolete("Poorly mapped")] public ContentsFinderRewards BonusReward2;
+    [FieldOffset(0x5C8), Obsolete("Poorly mapped", true)] public ContentsFinderRewards Reward2;
+    [FieldOffset(0x810), Obsolete("Poorly mapped", true)] public ContentsFinderRewards BonusReward2;
 
     // TODO split into 3 separate arrays, (8F0, EE0, 14D0), each with 5 entries, 8F0 seems to be the top row of rewards while 14D0 is the bottom row, EE0 is unknown
     [FixedSizeArray<ItemReward>(15)]

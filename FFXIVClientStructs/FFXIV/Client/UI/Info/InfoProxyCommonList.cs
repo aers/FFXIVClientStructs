@@ -13,12 +13,12 @@ public unsafe partial struct InfoProxyCommonList {
     [FieldOffset(0x8C)] public ushort DictSize;
     [FieldOffset(0x8E)] public ushort Unk8E; //10 * DataSize
     [FieldOffset(0x90)] public ushort Unk90; //10 * DataSize
-    [Obsolete("Use DataSize or DictSize")]
+    [Obsolete("Use DataSize or DictSize", true)]
     public ushort Size => DataSize;
-    [Obsolete("Use GetEntry")]//2023-03-11
+    [Obsolete("Use GetEntry", true)]//2023-03-11
     [FieldOffset(0x98)] public CharacterArray* Data;
     [FieldOffset(0x98)] public CharacterData* CharData;
-    [Obsolete("Use CharIndex")]//2023-03-11
+    [Obsolete("Use CharIndex", true)]//2023-03-11
     [FieldOffset(0xA0)] public CharacterDict* Dict;
     [FieldOffset(0xA0)] public CharIndexEntry* CharIndex;
 
@@ -82,7 +82,7 @@ public unsafe partial struct InfoProxyCommonList {
         /// 2 = DE
         /// 3 = FR
         /// </summary>
-        [Obsolete("Use ClientLanguage")]
+        [Obsolete("Use ClientLanguage", true)]
         [FieldOffset(0x25)] public byte MainLanguage;
         [FieldOffset(0x25)] public Language ClientLanguage;
 
@@ -93,7 +93,7 @@ public unsafe partial struct InfoProxyCommonList {
         /// 4 = DE
         /// 8 = FR
         /// </summary>
-        [Obsolete("Use Languages")]
+        [Obsolete("Use Languages", true)]
         [FieldOffset(0x26)] public byte AvailableLanguages;
         [FieldOffset(0x26)] public LanguageMask Languages;
         // 2 bytes
