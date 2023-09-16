@@ -18,6 +18,11 @@ public unsafe partial struct InfoProxy11 {
 
     [FieldOffset(0x4810)] public uint ListingCount;
 
+    [FieldOffset(0x5680)] public LastPurchasedMarketboardItem LastPurchasedMarketboardItem;
+
+    [FieldOffset(0x5B68)] public fixed uint WishlistItems[10];
+    [FieldOffset(0x5B90)] public uint WishlistSize;
+
     [VirtualFunction(6)]
     public partial void EndRequest();
 
@@ -29,6 +34,14 @@ public unsafe partial struct InfoProxy11 {
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B 5B 04 85 DB")]
     public partial nint ProcessRequestResult(nint a2, nint a3, nint a4, int a5, byte a6, int a7);
+
+    /// <summary>
+    /// Copies the specified market board listing into the <see cref="LastPurchasedMarketboardItem"/> fields of the InfoProxy.
+    /// </summary>
+    /// <param name="listing">The listing to copy.</param>
+    /// <returns>Returns true if successful.</returns>
+    [MemberFunction("40 56 48 8B C2")]
+    public partial bool SetLastPurchasedItem(MarketBoardListing* listing);
 }
 
 [StructLayout(LayoutKind.Explicit, Size = Size)]
@@ -66,4 +79,19 @@ public unsafe struct MarketBoardListing {
     [FieldOffset(0xB0)] public byte Town;
 
     // [FieldOffset(0xB1)] public byte UNK_0xB1;
+}
+
+[StructLayout(LayoutKind.Explicit)]
+public struct LastPurchasedMarketboardItem {
+    [FieldOffset(0x00)] public ulong SellingRetainerContentId;
+    [FieldOffset(0x08)] public ulong GlobalItemId;
+    [FieldOffset(0x10)] public uint ItemId;
+    [FieldOffset(0x14)] public uint Quantity;
+    [FieldOffset(0x18)] public uint UnitPrice;
+    [FieldOffset(0x1C)] public uint TotalTax;
+    // [FieldOffset(0x20)] public uint Unk_0x20; // Filled from 0x98
+    [FieldOffset(0x22)] public bool IsHqItem;
+    [FieldOffset(0x23)] public byte Town;
+
+    public bool Present => this.SellingRetainerContentId != 0;
 }
