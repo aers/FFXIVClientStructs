@@ -21,6 +21,7 @@ public unsafe partial struct Framework {
     [FieldOffset(0x1678)] public bool IsNetworkModuleInitialized;
     [FieldOffset(0x1679)] public bool EnableNetworking;
     [FieldOffset(0x1680)] public long ServerTime;
+    [FieldOffset(0x16F8)] public TaskManager TaskManager;
     [FieldOffset(0x16B8)] public float FrameDeltaTime;
     [FieldOffset(0x16C8)] public uint FrameCounter;
     [FieldOffset(0x1770)] public long EorzeaTime;
