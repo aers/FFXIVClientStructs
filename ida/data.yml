@@ -3828,9 +3828,10 @@ classes:
       0x140691020: RemoveGlamourPlateLink
       0x140691030: HasLinkedGlamourPlate
       0x140691220: GetClassJobIcon
-      0x1406916F0: GetBannerIndexByGearsetIndex
-      0x140691750: SetBannerIndexForGearsetIndex
-      0x140691810: IsGearsetLinkedWithBanner
+      0x1406916F0: GetBannerIndex
+      0x140691750: SetBannerIndex
+      0x140691810: HasLinkedBanner
+      0x140691BE0: FindGearsetIDByName
   Client::UI::Misc::ItemFinderModule:
     vtbls:
       - ea: 0x1419AB3C8
