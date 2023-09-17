@@ -122,20 +122,6 @@ public unsafe partial struct RaptureGearsetModule {
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 3F 48 8B 03")]
     public partial bool HasLinkedBanner(byte gearsetId);
 
-    [StructLayout(LayoutKind.Sequential, Size = 0xAF2C)]
-    public struct Gearsets {
-        private fixed byte data[0x1C0 * 100];
-
-        public GearsetEntry* this[int i] {
-            get {
-                if (i is < 0 or > 100) return null;
-                fixed (byte* p = data) {
-                    return (GearsetEntry*)(p + sizeof(GearsetEntry) * i);
-                }
-            }
-        }
-    }
-
     [Flags]
     public enum GearsetFlag : byte {
         None = 0,
