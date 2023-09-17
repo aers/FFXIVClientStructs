@@ -1,8 +1,7 @@
-﻿namespace FFXIVClientStructs.FFXIV.Component.Excel;
+namespace FFXIVClientStructs.FFXIV.Component.Excel;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x818)]
-public unsafe partial struct ExcelModule
-{
+public unsafe partial struct ExcelModule {
     [VirtualFunction(1)]
     public partial ExcelSheet* GetSheetByIndex(uint sheetIndex);
 

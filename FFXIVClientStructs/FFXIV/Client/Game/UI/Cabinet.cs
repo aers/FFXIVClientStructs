@@ -1,4 +1,4 @@
-﻿namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
+namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
 /// <summary>
 /// A struct representing the UIState Cabinet (otherwise known as the "Armoire" in-game) and the bitfield for stored
@@ -6,7 +6,7 @@
 /// </summary>
 [StructLayout(LayoutKind.Explicit, Size = 0x48)]
 public unsafe partial struct Cabinet {
-    [Obsolete("Use State.", false)]
+    [Obsolete("Use State.", true)]
     [FieldOffset(0x00)] public int CabinetLoaded; // This becomes 2 for some reason, unsure why or what it means.
     [FieldOffset(0x00)] public CabinetState State;
     [FieldOffset(0x04)] public fixed byte UnlockedItems[0x41];
@@ -33,10 +33,9 @@ public unsafe partial struct Cabinet {
         => this.State is CabinetState.Loaded;
 
     /// <summary> Represents the loaded state of Cabinet </summary>
-    public enum CabinetState : int
-    {
-        Invalid   = 0, // Cabinet is initialized at this state
+    public enum CabinetState : int {
+        Invalid = 0, // Cabinet is initialized at this state
         Requested = 1, // This state is set between the client request and receiving the data from the server
-        Loaded    = 2, // Set upon data being received
+        Loaded = 2, // Set upon data being received
     }
 }

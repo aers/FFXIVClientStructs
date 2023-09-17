@@ -1,10 +1,9 @@
-﻿using FFXIVClientStructs.FFXIV.Component.Exd;
+using FFXIVClientStructs.FFXIV.Component.Exd;
 
 namespace FFXIVClientStructs.FFXIV.Component.Excel;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
-public unsafe partial struct ExcelModuleInterface
-{
+public unsafe partial struct ExcelModuleInterface {
     [FieldOffset(0x08)] public ExdModule* ExdModule;
 
     [VirtualFunction(1)]

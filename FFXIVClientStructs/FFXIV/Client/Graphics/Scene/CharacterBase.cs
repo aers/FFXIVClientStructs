@@ -1,4 +1,5 @@
-﻿using FFXIVClientStructs.FFXIV.Client.Game.Character;
+using FFXIVClientStructs.FFXIV.Client.Game.Character;
+using FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
 using FFXIVClientStructs.FFXIV.Client.Graphics.Physics;
 using FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 
@@ -12,34 +13,30 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 // ctor - E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 45 33 C0 48 89 03 BA ?? ?? ?? ?? 
 [StructLayout(LayoutKind.Explicit, Size = 0x8F0)]
 [VTableAddress("48 8d 05 ?? ?? ?? ?? 48 89 07 48 8d 9f d0 00 00 00", 3)]
-public unsafe partial struct CharacterBase
-{
+public unsafe partial struct CharacterBase {
     [FieldOffset(0x0)] public DrawObject DrawObject;
     [FieldOffset(0x90)] public byte UnkFlags_01;
     [FieldOffset(0x91)] public byte UnkFlags_02;
     [FieldOffset(0x92)] public byte UnkFlags_03;
     [FieldOffset(0x98)] public int SlotCount; // model slots
     [FieldOffset(0xA0)] public Skeleton* Skeleton; // Client::Graphics::Render::Skeleton
-    
-    [Obsolete("Use Models")]
+
+    [Obsolete("Use Models", true)]
     [FieldOffset(0xA8)] public void** ModelArray; // array of Client::Graphics::Render::Model ptrs size = SlotCount
     [FieldOffset(0xA8)] public Model** Models; // size = SlotCount
     [FieldOffset(0x148)] public void* PostBoneDeformer; // Client::Graphics::Scene::PostBoneDeformer ptr
 
-    public bool IsChangingVisor
-    {
+    public bool IsChangingVisor {
         get => (UnkFlags_01 & 0x80) == 0x80;
-        set => UnkFlags_01 = (byte) (value ? UnkFlags_01 | 0x80 : UnkFlags_01 & ~0x80);
+        set => UnkFlags_01 = (byte)(value ? UnkFlags_01 | 0x80 : UnkFlags_01 & ~0x80);
     }
 
-    public bool VisorToggled
-    {
+    public bool VisorToggled {
         get => (UnkFlags_01 & 0x40) == 0x40;
         set => UnkFlags_01 = (byte)(value ? UnkFlags_01 | 0x40 : UnkFlags_01 & ~0x40);
     }
 
-    public bool HasUmbrella
-    {
+    public bool HasUmbrella {
         get => (UnkFlags_03 & 0x01) == 0x01;
         set => UnkFlags_03 = (byte)(value ? UnkFlags_03 | 0x01 : UnkFlags_03 & ~0x01);
     }
@@ -49,8 +46,11 @@ public unsafe partial struct CharacterBase
     public BonePhysicsModule* BonePhysicsModule; // Client::Graphics::Physics::BonePhysicsModule ptr
 
     [FieldOffset(0x224)] public float VfxScale;
-    [FieldOffset(0x240)] public void*
-        CharacterDataCB; // Client::Graphics::Kernel::ConstantBuffer ptr, this CB includes stuff like hair color
+    [Obsolete("Use CharacterDataCBuffer", true)]
+    [FieldOffset(0x240)] public void* CharacterDataCB;
+    [FieldOffset(0x240)] public ConstantBuffer* CharacterDataCBuffer; // Size has been observed to be 0x50, contents may be InstanceParameter
+
+    [FieldOffset(0x258)] public Texture** ColorSetTextures; // each one corresponds to a material, size = SlotCount * 4
 
     [FieldOffset(0x2B0)] public float WeatherWetness;  // Set to 1.0f when raining and not covered or umbrella'd
     [FieldOffset(0x2B4)] public float SwimmingWetness; // Set to 1.0f when in water
@@ -69,14 +69,28 @@ public unsafe partial struct CharacterBase
     public void* TempSlotData; // struct with temporary data for each slot (size = 0x88 * slot count)
 
     //
-    [FieldOffset(0x2E8)] public void**
+    [Obsolete("Use Materials", true)]
+    [FieldOffset(0x2E8)]
+    public void**
         MaterialArray; // array of Client::Graphics::Render::Material ptrs size = SlotCount * 4 (4 material per model max)
+    [FieldOffset(0x2E8)]
+    public Material** Materials; // size = SlotCount * 4 (4 material per model max)
 
     [FieldOffset(0x2F0)]
     public void* EID; // Client::System::Resource::Handle::ElementIdResourceHandle - EID file for base skeleton
 
-    [FieldOffset(0x2F8)] public void**
+    [FieldOffset(0x2F8)]
+    public void**
         IMCArray; // array of Client::System::Resource::Handle::ImageChangeDataResourceHandle ptrs size = SlotCount - IMC file for model in slot
+
+    public readonly Span<Pointer<Model>> ModelsSpan
+        => new(Models, SlotCount);
+
+    public readonly Span<Pointer<Texture>> ColorSetTexturesSpan
+        => new(ColorSetTextures, SlotCount * 4);
+
+    public readonly Span<Pointer<Material>> MaterialsSpan
+        => new(Materials, SlotCount * 4);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 74 21 C7 40")]
     public static partial CharacterBase* Create(uint modelId, CustomizeData* customize, EquipmentModelId* equipData /* 10 times, 40 byte */, byte unk);
@@ -87,8 +101,7 @@ public unsafe partial struct CharacterBase
     [VirtualFunction(50)]
     public partial ModelType GetModelType();
 
-    public enum ModelType : byte
-    {
+    public enum ModelType : byte {
         Human = 1,
         DemiHuman = 2,
         Monster = 3,

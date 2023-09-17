@@ -3,19 +3,19 @@ using System.Text;
 using FFXIVClientStructs.InteropGenerator;
 using Microsoft.CodeAnalysis;
 
-namespace FFXIVClientStructs.InteropSourceGenerators; 
+namespace FFXIVClientStructs.InteropSourceGenerators;
 
 [Generator]
 public class VersionGenerator : ISourceGenerator {
     private uint version;
-    
+
     private string GitCommand(GeneratorExecutionContext context, string command) {
         var mainSyntaxTree = context.Compilation.SyntaxTrees.First(x => x.HasCompilationUnitRoot);
         var directory = Path.GetDirectoryName(mainSyntaxTree.FilePath);
-        
+
         var gitProcess = new Process() {
             StartInfo = new ProcessStartInfo() {
-                CreateNoWindow = true, 
+                CreateNoWindow = true,
                 RedirectStandardOutput = true,
                 UseShellExecute = false,
                 FileName = "git",
@@ -25,11 +25,11 @@ public class VersionGenerator : ISourceGenerator {
         };
 
         var output = new StringBuilder();
-        
+
         gitProcess.OutputDataReceived += (_, e) => {
             output.Append(e.Data);
         };
-        
+
         gitProcess.Start();
         gitProcess.BeginOutputReadLine();
         gitProcess.WaitForExit();
@@ -41,7 +41,7 @@ public class VersionGenerator : ISourceGenerator {
         var hash = GitCommand(context, "show -s --format=%H");
         var count = GitCommand(context, $"rev-list --count {hash}");
         if (!uint.TryParse(count, out version)) version = 0;
-        
+
         var builder = new IndentedStringBuilder();
         builder.AppendLine("using System.Reflection;");
         builder.AppendLine($"[assembly: AssemblyVersion(\"1.0.0.{version}\")]");
@@ -51,7 +51,7 @@ public class VersionGenerator : ISourceGenerator {
         builder.AppendLine("namespace FFXIVClientStructs.Interop;");
         builder.AppendLine("public partial class Resolver {");
         using (builder.Indent()) {
-            builder.AppendLine($"public const uint Version = {version};");
+            builder.AppendLine($"public static readonly uint Version = {version};");
         }
 
         builder.AppendLine("}");

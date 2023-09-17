@@ -6,33 +6,27 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
 // Client::UI::Misc::RaptureMacroModule
 //   Client::UI::Misc::UserFileManager::UserFileEvent
-// ctor "E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 4C 8B C7 49 8B D4 E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 4C 8B C7"
+// ctor "E8 ?? ?? ?? ?? 48 8D B7 ?? ?? ?? ?? 4C 8B C7"
 [StructLayout(LayoutKind.Explicit, Size = 0x51AA8)]
-public unsafe partial struct RaptureMacroModule
-{
+public unsafe partial struct RaptureMacroModule {
     public static RaptureMacroModule* Instance => Framework.Instance()->GetUiModule()->GetRaptureMacroModule();
 
     [StructLayout(LayoutKind.Sequential, Size = 0x688)]
-    public struct Macro
-    {
+    public struct Macro {
         public uint IconId;
         public uint Unk; // MacroIcon, exclusive of /micon or similar. Oddly, off by one from Lumina's table.
         public Utf8String Name;
         public Lines Line;
 
         [StructLayout(LayoutKind.Sequential, Size = 0x618)]
-        public struct Lines
-        {
+        public struct Lines {
             private fixed byte data[0x618];
 
-            public Utf8String* this[int i]
-            {
-                get
-                {
+            public Utf8String* this[int i] {
+                get {
                     if (i < 0 || i > 14) return null;
-                    fixed (byte* p = data)
-                    {
-                        return (Utf8String*) (p + sizeof(Utf8String) * i);
+                    fixed (byte* p = data) {
+                        return (Utf8String*)(p + sizeof(Utf8String) * i);
                     }
                 }
             }
@@ -40,19 +34,15 @@ public unsafe partial struct RaptureMacroModule
     }
 
     [StructLayout(LayoutKind.Sequential, Size = 0x28D20)]
-    public struct MacroPage
-    {
+    public struct MacroPage {
         private fixed byte data[0x28D20];
 
-        public Macro* this[int i]
-        {
-            get
-            {
+        public Macro* this[int i] {
+            get {
                 if (i < 0 || i > 99) return null;
                 Macro* a;
-                fixed (byte* p = data)
-                {
-                    a = (Macro*) (p + 0x688 * i);
+                fixed (byte* p = data) {
+                    a = (Macro*)(p + 0x688 * i);
                 }
 
                 return a;

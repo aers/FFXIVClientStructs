@@ -1,8 +1,7 @@
-﻿namespace FFXIVClientStructs.FFXIV.Component.GUI;
+namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
-public partial struct AtkCursor
-{
+public partial struct AtkCursor {
     [FieldOffset(0x00)] public CursorType Type;
     [FieldOffset(0x0E)] public byte Visible;
 
@@ -15,8 +14,7 @@ public partial struct AtkCursor
     [MemberFunction("E8 ?? ?? ?? ?? C6 47 0F 01")]
     public partial void SetCursorType(CursorType type, byte a3 = 0);
 
-    public enum CursorType : byte
-    {
+    public enum CursorType : byte {
         Arrow,
         Boot,
         Search,

@@ -1,8 +1,7 @@
-﻿namespace FFXIVClientStructs.Havok;
+namespace FFXIVClientStructs.Havok;
 
-[StructLayout(LayoutKind.Explicit, Size=0x18)]
-public unsafe partial struct hkOstream
-{
+[StructLayout(LayoutKind.Explicit, Size = 0x18)]
+public unsafe partial struct hkOstream {
     [FieldOffset(0x00)] public hkReferencedObject hkReferencedObject;
     [FieldOffset(0x10)] public hkRefPtr<hkStreamWriter> StreamWriter;
 

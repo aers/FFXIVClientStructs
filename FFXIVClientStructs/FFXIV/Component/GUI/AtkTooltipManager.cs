@@ -1,14 +1,12 @@
-﻿using FFXIVClientStructs.FFXIV.Client.System.Memory;
+using FFXIVClientStructs.FFXIV.Client.System.Memory;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
 // Component::GUI::AtkToolTipManager
 //      Component::GUI::AtkEventListener
 [StructLayout(LayoutKind.Explicit, Size = 0x150)]
-public unsafe partial struct AtkTooltipManager
-{
-    public enum AtkTooltipType : byte
-    {
+public unsafe partial struct AtkTooltipManager {
+    public enum AtkTooltipType : byte {
         Text = 1,
         Item = 2,
         TextItem = 3,
@@ -16,8 +14,7 @@ public unsafe partial struct AtkTooltipManager
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x18)]
-    public partial struct AtkTooltipArgs : ICreatable
-    {
+    public partial struct AtkTooltipArgs : ICreatable {
         [FieldOffset(0x0)] public byte* Text;
         [FieldOffset(0x8)] public ulong TypeSpecificID;
         [FieldOffset(0x10)] public uint Flags;
@@ -29,8 +26,7 @@ public unsafe partial struct AtkTooltipManager
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]
-    public struct AtkTooltipInfo
-    {
+    public struct AtkTooltipInfo {
         [FieldOffset(0x0)] public AtkTooltipArgs AtkTooltipArgs;
         [FieldOffset(0x18)] public ushort ParentID; // same as IDs in addons
         [FieldOffset(0x1A)] public AtkTooltipType Type;
@@ -53,10 +49,10 @@ public unsafe partial struct AtkTooltipManager
         ushort parentID,
         AtkResNode* targetNode,
         AtkTooltipArgs* tooltipArgs,
-        delegate* unmanaged[Stdcall] <float*, float*, void*> unkDelegate = null,
+        delegate* unmanaged[Stdcall]<float*, float*, void*> unkDelegate = null,
         bool unk7 = false,
         bool unk8 = true);
-    
+
     [GenerateCStrOverloads] // cursed forced partial to make generator happy
     public partial void ShowTooltip(ushort parentId, AtkResNode* targetNode, byte* tooltipString);
     public partial void ShowTooltip(ushort parentId, AtkResNode* targetNode, byte* tooltipString) {
@@ -65,7 +61,7 @@ public unsafe partial struct AtkTooltipManager
         args->Text = tooltipString;
         ShowTooltip(AtkTooltipType.Text, parentId, targetNode, args);
     }
-    
+
     [MemberFunction("E8 ?? ?? ?? ?? 41 F6 C5 20")]
     public partial void HideTooltip(ushort parentId, bool unk = false);
 }

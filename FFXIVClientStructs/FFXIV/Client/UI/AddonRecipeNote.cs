@@ -1,4 +1,4 @@
-﻿using FFXIVClientStructs.FFXIV.Component.GUI;
+using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
@@ -7,8 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //     Component::GUI::AtkEventListener
 [Addon("RecipeNote")]
 [StructLayout(LayoutKind.Explicit, Size = 0x22D0)]
-public unsafe struct AddonRecipeNote
-{
+public unsafe struct AddonRecipeNote {
     [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
     [FieldOffset(0x220)] public AtkTextNode* Unk220;
     [FieldOffset(0x228)] public AtkTextNode* Unk228;

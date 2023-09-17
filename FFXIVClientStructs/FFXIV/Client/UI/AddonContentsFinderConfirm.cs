@@ -1,4 +1,4 @@
-﻿using FFXIVClientStructs.FFXIV.Component.GUI;
+using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
@@ -8,8 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("ContentsFinderConfirm")]
 [StructLayout(LayoutKind.Explicit, Size = 0x2A0)]
 [VTableAddress("48 8d 05 ?? ?? ?? ?? 48 89 03 41 b0 01 48 89 8b 20 02 00 00 33 c0 48 89 8b 28 02 00 00 ba 00 00 00 01", 3)]
-public unsafe partial struct AddonContentsFinderConfirm
-{
+public unsafe partial struct AddonContentsFinderConfirm {
     [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
 
     [FieldOffset(0x228)] public AtkTextNode* AtkTextNode228;

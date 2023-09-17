@@ -1,4 +1,4 @@
-﻿namespace FFXIVClientStructs.FFXIV.Component.GUI;
+namespace FFXIVClientStructs.FFXIV.Component.GUI;
 // Component::GUI::AtkComponentListItemRenderer
 //  Component::GUI::AtkComponentButton
 //   Component::GUI::AtkComponentBase
@@ -8,8 +8,8 @@
 // common CreateAtkComponent function 8B FA 33 DB E8 ?? ?? ?? ?? 
 // type ?
 [StructLayout(LayoutKind.Explicit, Size = 0x1A8)]
-public struct AtkComponentListItemRenderer
-{
+public struct AtkComponentListItemRenderer {
     [FieldOffset(0x0)] public AtkComponentButton AtkComponentButton;
+    [FieldOffset(0xF0)] public AtkDragDropInterface AtkDragDropInterface;
     [FieldOffset(0x184)] public int ListItemIndex;
 }

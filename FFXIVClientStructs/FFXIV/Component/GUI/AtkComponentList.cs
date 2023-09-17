@@ -1,4 +1,4 @@
-﻿namespace FFXIVClientStructs.FFXIV.Component.GUI;
+namespace FFXIVClientStructs.FFXIV.Component.GUI;
 // Component::GUI::AtkComponentList
 //   Component::GUI::AtkComponentBase
 //     Component::GUI::AtkEventListener
@@ -7,8 +7,7 @@
 // common CreateAtkComponent function 8B FA 33 DB E8 ?? ?? ?? ?? 
 // type 1
 [StructLayout(LayoutKind.Explicit, Size = 0x1A8)]
-public unsafe struct AtkComponentList
-{
+public unsafe struct AtkComponentList {
     [FieldOffset(0x0)] public AtkComponentBase AtkComponentBase;
     [FieldOffset(0xC0)] public AtkComponentListItemRenderer* FirstAtkComponentListItemRenderer;
     [FieldOffset(0xC8)] public AtkComponentScrollBar* AtkComponentScrollBarC8;
@@ -25,8 +24,7 @@ public unsafe struct AtkComponentList
     [FieldOffset(0x158)] public int HoveredItemIndex3; // Repeat?
 
     [StructLayout(LayoutKind.Explicit, Size = 0x18)]
-    public struct ListItem
-    {
+    public struct ListItem {
         [FieldOffset(0x8)] public AtkComponentListItemRenderer* AtkComponentListItemRenderer;
     }
 }

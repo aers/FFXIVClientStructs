@@ -1,4 +1,4 @@
-﻿using FFXIVClientStructs.FFXIV.Client.System.Framework;
+using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
@@ -7,10 +7,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 // size = 0xDB8
 // ctor E8 ?? ?? ?? ?? 48 8B 85 ?? ?? ?? ?? 49 8B CF 48 89 87
 [StructLayout(LayoutKind.Explicit, Size = 0xDB8)]
-public unsafe partial struct AgentModule
-{
+public unsafe partial struct AgentModule {
     public static AgentModule* Instance() => Framework.Instance()->GetUiModule()->GetAgentModule();
-    
+
     [FieldOffset(0x0)] public void* vtbl;
     [FieldOffset(0x8)] public UIModule* UIModule;
     [FieldOffset(0x10)] public byte Initialized;
@@ -18,8 +17,8 @@ public unsafe partial struct AgentModule
     [FieldOffset(0x14)] public uint FrameCounter;
     [FieldOffset(0x18)] public float FrameDelta;
 
-    [FixedSizeArray<Pointer<AgentInterface>>(432)]
-    [FieldOffset(0x20)] public fixed byte Agents[432 * 8];
+    [FixedSizeArray<Pointer<AgentInterface>>(433)]
+    [FieldOffset(0x20)] public fixed byte Agents[433 * 8];
 
     [FieldOffset(0xDA8)] public UIModule* UIModulePtr;
     [FieldOffset(0xDB0)] public AgentModule* AgentModulePtr;
@@ -27,104 +26,104 @@ public unsafe partial struct AgentModule
     [MemberFunction("E8 ?? ?? ?? ?? 83 FE 0D")]
     public partial AgentInterface* GetAgentByInternalID(uint agentID);
 
-    public AgentInterface* GetAgentByInternalId(AgentId agentId)
-    {
-        return GetAgentByInternalID((uint) agentId);
+    public AgentInterface* GetAgentByInternalId(AgentId agentId) {
+        return GetAgentByInternalID((uint)agentId);
     }
 
-    public AgentHUD* GetAgentHUD()
-    {
-        return (AgentHUD*) GetAgentByInternalId(AgentId.Hud);
+    public AgentHUD* GetAgentHUD() {
+        return (AgentHUD*)GetAgentByInternalId(AgentId.Hud);
     }
 
-    public AgentHudLayout* GetAgentHudLayout()
-    {
-        return (AgentHudLayout*) GetAgentByInternalId(AgentId.HudLayout);
+    public AgentHudLayout* GetAgentHudLayout() {
+        return (AgentHudLayout*)GetAgentByInternalId(AgentId.HudLayout);
     }
 
-    public AgentTeleport* GetAgentTeleport()
-    {
-        return (AgentTeleport*) GetAgentByInternalId(AgentId.Teleport);
+    public AgentTeleport* GetAgentTeleport() {
+        return (AgentTeleport*)GetAgentByInternalId(AgentId.Teleport);
     }
 
-    public AgentLobby* GetAgentLobby()
-    {
-        return (AgentLobby*) GetAgentByInternalId(AgentId.Lobby);
+    public AgentLobby* GetAgentLobby() {
+        return (AgentLobby*)GetAgentByInternalId(AgentId.Lobby);
     }
 
-    public AgentMap* GetAgentMap()
-    {
-        return (AgentMap*) GetAgentByInternalId(AgentId.Map);
+    public AgentMap* GetAgentMap() {
+        return (AgentMap*)GetAgentByInternalId(AgentId.Map);
     }
 
-    public AgentScreenLog* GetAgentScreenLog()
-    {
-        return (AgentScreenLog*) GetAgentByInternalId(AgentId.ScreenLog);
+    public AgentScreenLog* GetAgentScreenLog() {
+        return (AgentScreenLog*)GetAgentByInternalId(AgentId.ScreenLog);
     }
 
-    public AgentItemSearch* GetAgentItemSearch()
-    {
-        return (AgentItemSearch*) GetAgentByInternalId(AgentId.ItemSearch);
+    public AgentItemSearch* GetAgentItemSearch() {
+        return (AgentItemSearch*)GetAgentByInternalId(AgentId.ItemSearch);
     }
 
-    public AgentRetainerList* GetAgentRetainerList()
-    {
-        return (AgentRetainerList*) GetAgentByInternalId(AgentId.RetainerList);
+    public AgentRetainerList* GetAgentRetainerList() {
+        return (AgentRetainerList*)GetAgentByInternalId(AgentId.RetainerList);
     }
 
-    public AgentRevive* GetAgentRevive()
-    {
-        return (AgentRevive*) GetAgentByInternalId(AgentId.Revive);
+    public AgentRetainerTask* GetAgentRetainerTask() {
+        return (AgentRetainerTask*)GetAgentByInternalId(AgentId.RetainerTask);
     }
 
-    public AgentSalvage* GetAgentSalvage()
-    {
-        return (AgentSalvage*) GetAgentByInternalId(AgentId.Salvage);
+    public AgentRevive* GetAgentRevive() {
+        return (AgentRevive*)GetAgentByInternalId(AgentId.Revive);
     }
 
-    public AgentMonsterNote* GetAgentMonsterNote()
-    {
+    public AgentSalvage* GetAgentSalvage() {
+        return (AgentSalvage*)GetAgentByInternalId(AgentId.Salvage);
+    }
+
+    public AgentMonsterNote* GetAgentMonsterNote() {
         return (AgentMonsterNote*)GetAgentByInternalId(AgentId.MonsterNote);
     }
 
-    public AgentMJIPouch* GetAgentMJIPouch()
-    {
+    public AgentMJIPouch* GetAgentMJIPouch() {
         return (AgentMJIPouch*)GetAgentByInternalId(AgentId.MJIPouch);
     }
 
-    public AgentAozContentBriefing* GetAgentAozContentBriefing()
-    {
+    public AgentAozContentBriefing* GetAgentAozContentBriefing() {
         return (AgentAozContentBriefing*)GetAgentByInternalId(AgentId.AozContentBriefing);
     }
 
-    public AgentAozContentResult* GetAgentAozContentResult()
-    {
+    public AgentAozContentResult* GetAgentAozContentResult() {
         return (AgentAozContentResult*)GetAgentByInternalId(AgentId.AozContentResult);
     }
 
-    public AgentCraftActionSimulator* GetAgentCraftActionSimulator()
-    {
+    public AgentCraftActionSimulator* GetAgentCraftActionSimulator() {
         return (AgentCraftActionSimulator*)GetAgentByInternalId(AgentId.CraftActionSimulator);
     }
-    
-    public AgentDeepDungeonStatus* GetAgentDeepDungeonStatus()
-    {
-	    return (AgentDeepDungeonStatus*)GetAgentByInternalId(AgentId.DeepDungeonStatus);
+
+    public AgentDeepDungeonStatus* GetAgentDeepDungeonStatus() {
+        return (AgentDeepDungeonStatus*)GetAgentByInternalId(AgentId.DeepDungeonStatus);
     }
 
-    public AgentDeepDungeonMap* GetAgentDeepDungeonMap()
-    {
-	    return (AgentDeepDungeonMap*)GetAgentByInternalId(AgentId.DeepDungeonMap);
+    public AgentDeepDungeonMap* GetAgentDeepDungeonMap() {
+        return (AgentDeepDungeonMap*)GetAgentByInternalId(AgentId.DeepDungeonMap);
     }
 
-    public AgentMiragePrismPrismBox* GetAgentMiragePrismPrismBox()
-    {
+    public AgentMiragePrismMiragePlate* GetAgentMiragePrismMiragePlate() {
+        return (AgentMiragePrismMiragePlate*)GetAgentByInternalId(AgentId.MiragePrismMiragePlate);
+    }
+
+    public AgentMiragePrismPrismBox* GetAgentMiragePrismPrismBox() {
         return (AgentMiragePrismPrismBox*)GetAgentByInternalId(AgentId.MiragePrismPrismBox);
     }
 
-    public AgentTryon* GetAgentTryon()
-    {
+    public AgentTryon* GetAgentTryon() {
         return (AgentTryon*)GetAgentByInternalId(AgentId.Tryon);
+    }
+
+    public AgentIKDFishingLog* GetAgentIKDFishingLog() {
+        return (AgentIKDFishingLog*)GetAgentByInternalId(AgentId.IKDFishingLog);
+    }
+
+    public AgentIKDResult* GetAgentIKDResult() {
+        return (AgentIKDResult*)GetAgentByInternalId(AgentId.IKDResult);
+    }
+
+    public AgentBannerEditor* GetAgentBannerEditor() {
+        return (AgentBannerEditor*)GetAgentByInternalId(AgentId.BannerEditor);
     }
 }
 
@@ -172,7 +171,7 @@ public enum AgentId : uint {
     Map = 39,
     Loot = 40, //NeedGreed
     Repair = 41,
-    
+
     Materialize = 43,
     MateriaAttach = 44,
     MiragePrism = 45,
@@ -224,7 +223,7 @@ public enum AgentId : uint {
     // FreeCompanyPetition = 85,
     ArmouryBoard = 88,
     HowtoList = 89,
-    Cabinet = 90, 
+    Cabinet = 90,
     LegacyItemStorage = 91,
     GrandCompanyRank = 92,
     GrandCompanySupply = 93,
@@ -274,7 +273,7 @@ public enum AgentId : uint {
     CursorRect = 137,
     RetainerStatus = 138,
     RetainerTask = 139,
-    
+
     RetainerItemTransfer = 142,
 
     RelicNotebook = 144,
@@ -290,7 +289,7 @@ public enum AgentId : uint {
     ArmouryNotebook = 155,
     MinionNotebook = 156,
     MountNotebook = 157,
-    ItemCompare = 158, 
+    ItemCompare = 158,
     DailyQuestSupply = 159,
     MobHunt = 160,
     PatchMark = 161, //SelectOk?
@@ -396,6 +395,7 @@ public enum AgentId : uint {
     HarpoonTip = 271,
     PvpScreenInformationHotBar = 272,
     PvpWelcome = 273,
+    JobHudNotice = 274,
     UserPolicyPerformance = 278,
     PvpTeamInputString = 280,
     PvpTeamCrestEditor = 285,
@@ -425,7 +425,7 @@ public enum AgentId : uint {
     MiragePrismENpcSatisfaction = 314,
     Description = 315, //Frontline/Bozja Description
     Alarm = 316,
-    
+
     FreeShop = 319,
     AozNotebook = 320, //Bluemage Spells
     RhythmAction = 321,
@@ -471,6 +471,12 @@ public enum AgentId : uint {
     McGuffin = 368, //Collection
     CraftActionSimulator = 369,
 
+    //Ocean Fishing
+    IKDSchedule = 370,
+    IKDFishingLog = 371,
+    IKDResult = 372,
+    IKDMission = 373,
+
     InclusionShop = 374, //Item Exchange
 
     MycWarResultNotebook = 376,
@@ -493,7 +499,7 @@ public enum AgentId : uint {
     BannerList = 393, // Portraits
     BannerEditor = 394, // Portrait Editor
     BannerUpdateView = 395,
-    
+
     CharaCard = 398, // AdventurerPlate
     CharaCardDesignSetting = 399,
     CharaCardProfileSetting = 400,
@@ -511,7 +517,7 @@ public enum AgentId : uint {
     MJIGatheringNoteBook = 412,
     MJIDisposeShop = 413,
     MJIMinionManagement = 414,
-    MJIMinionNoteBook = 415, 
+    MJIMinionNoteBook = 415,
     MJIBuildingMove = 416,
     MJIEntrance = 417,
     MJISettings = 418,
@@ -521,7 +527,7 @@ public enum AgentId : uint {
     VVDNotebook = 423,
     VVDFinder = 424,
     TofuList = 425,
-    
+
     BannerParty = 428,
     BannerMIP = 429,
 

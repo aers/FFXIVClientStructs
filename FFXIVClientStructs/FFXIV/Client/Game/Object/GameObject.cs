@@ -10,18 +10,27 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Object;
 //   if (DataID != 0) ObjectID = DataID, Type = 1
 // else ObjectID = ObjectID, Type = 0
 [StructLayout(LayoutKind.Explicit, Size = 0x8)]
-public struct GameObjectID
-{
+public struct GameObjectID {
     [FieldOffset(0x0)] public uint ObjectID;
     [FieldOffset(0x4)] public byte Type;
 
     public static unsafe implicit operator long(GameObjectID id) {
-        var objid = stackalloc GameObjectID[] {id};
+        var objid = stackalloc GameObjectID[] { id };
         return *(long*)objid;
     }
 
+    public static unsafe implicit operator ulong(GameObjectID id) {
+        var objid = stackalloc GameObjectID[] { id };
+        return *(ulong*)objid;
+    }
+
     public static unsafe implicit operator GameObjectID(long id) {
-        var objid = stackalloc long[] {id};
+        var objid = stackalloc long[] { id };
+        return *(GameObjectID*)objid;
+    }
+
+    public static unsafe implicit operator GameObjectID(ulong id) {
+        var objid = stackalloc ulong[] { id };
         return *(GameObjectID*)objid;
     }
 }
@@ -33,8 +42,7 @@ public struct GameObjectID
 // ctor E8 ?? ?? ?? ?? 48 8D 8E ?? ?? ?? ?? 48 89 AE ?? ?? ?? ?? 48 8B D7 
 [StructLayout(LayoutKind.Explicit, Size = 0x1A0)]
 [VTableAddress("48 8d 05 ?? ?? ?? ?? c7 81 80 00 00 00 00 00 00 00", 3)]
-public unsafe partial struct GameObject
-{
+public unsafe partial struct GameObject {
     [FieldOffset(0x10)] public Vector3 DefaultPosition;
     [FieldOffset(0x20)] public float DefaultRotation;
     [FieldOffset(0x30)] public fixed byte Name[64];
@@ -101,7 +109,7 @@ public unsafe partial struct GameObject
 
     [VirtualFunction(58)]
     public partial bool IsNotMounted();
-    
+
     [VirtualFunction(61)]
     public partial bool IsCharacter();
 
@@ -109,8 +117,7 @@ public unsafe partial struct GameObject
     public partial void SetDrawOffset(float x, float y, float z);
 }
 
-public enum ObjectKind : byte
-{
+public enum ObjectKind : byte {
     None = 0,
     Pc = 1,
     BattleNpc = 2,
@@ -131,14 +138,12 @@ public enum ObjectKind : byte
 }
 
 [Flags]
-public enum ObjectTargetableFlags : byte
-{
+public enum ObjectTargetableFlags : byte {
     IsTargetable = 2,
     Unk1 = 4, // This flag is used but purpose is unclear
 }
 
-public enum ObjectHighlightColor : byte
-{
+public enum ObjectHighlightColor : byte {
     None = 0,
     Red = 1,
     Green = 2,

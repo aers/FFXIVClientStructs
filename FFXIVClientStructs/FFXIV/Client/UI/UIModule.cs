@@ -12,8 +12,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //   Client::UI::UIModuleInterface
 [StructLayout(LayoutKind.Explicit, Size = 0xEC1E0)]
 [VTableAddress("48 8D 05 ?? ?? ?? ?? 4C 89 61 ?? 4C 8B F2", 3)]
-public unsafe partial struct UIModule
-{
+public unsafe partial struct UIModule {
     public static UIModule* Instance() => Framework.Instance()->GetUiModule();
 
     [FieldOffset(0x0)] public void* vtbl;
@@ -24,8 +23,7 @@ public unsafe partial struct UIModule
     [FieldOffset(0x20)] public void* unk;
     [FieldOffset(0x28)] public void* SystemConfig;
 
-    public static void PlayChatSoundEffect(uint effectId)
-    {
+    public static void PlayChatSoundEffect(uint effectId) {
         if (effectId is < 1 or > 16)
             throw new ArgumentException("Valid chat sfx values are 1 through 16.");
 
@@ -95,12 +93,12 @@ public unsafe partial struct UIModule
     [VirtualFunction(23)]
     public partial void* GetFlagStatusModule();
 
-    [VirtualFunction(26)] 
+    [VirtualFunction(26)]
     public partial RaptureUiDataModule* GetRaptureUiDataModule();
 
     [VirtualFunction(30)]
     public partial void* GetRaptureTeleportHistory();
-    
+
     [VirtualFunction(32)]
     public partial RecommendEquipModule* GetRecommendEquipModule();
 
@@ -118,6 +116,9 @@ public unsafe partial struct UIModule
 
     [VirtualFunction(57)]
     public partial RetainerCommentModule* GetRetainerCommentModule();
+
+    [VirtualFunction(58)]
+    public partial BannerModule* GetBannerModule();
 
     [VirtualFunction(64)]
     public partial void* GetUIInputData();
@@ -148,7 +149,7 @@ public unsafe partial struct UIModule
 
     [VirtualFunction(141)]
     public partial void ToggleUi(UiFlags flags, bool enable, bool unknown = true);
-    
+
     [VirtualFunction(151)]
     public partial void ShowGoldSaucerReward(byte type, uint mgp, uint rewardItemId, uint rewardItemCount);
 
@@ -218,44 +219,40 @@ public unsafe partial struct UIModule
 
     [VirtualFunction(190)]
     public partial void ExecuteMainCommand(uint command);
-    
+
     [VirtualFunction(191)]
     public partial bool IsMainCommandUnlocked(uint command);
 
     [VirtualFunction(205)]
-    public partial void Test205(nint a1,nint a2,nint a3,nint a4);
+    public partial void Test205(nint a1, nint a2, nint a3, nint a4);
 
     [MemberFunction("E8 ?? ?? ?? ?? 4D 39 BE")]
-    public static partial bool PlaySound(uint effectId, long a2, long a3, byte a4);
+    public static partial bool PlaySound(uint effectId, long a2 = 0, long a3 = 0, byte a4 = 0);
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 BF 4C 8B CB")]
     [GenerateCStrOverloads]
     public static partial bool IsPlayerCharacterName(byte* name);
 
     [StructLayout(LayoutKind.Explicit, Size = 0x8)]
-    public struct Unk1
-    {
+    public struct Unk1 {
         [FieldOffset(0x0)] public void* vtbl;
         [FieldOffset(0x0)] public void** vfunc;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x8)]
-    public struct Unk2
-    {
+    public struct Unk2 {
         [FieldOffset(0x0)] public void* vtbl;
         [FieldOffset(0x0)] public void** vfunc;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x8)] // size?
-    public struct Unk3
-    {
+    public struct Unk3 {
         [FieldOffset(0x0)] public void* vtbl;
         [FieldOffset(0x0)] public void** vfunc;
     }
 
     [Flags]
-    public enum UiFlags
-    {
+    public enum UiFlags {
         Shortcuts = 1, //disable ui shortcuts
         Hud = 2,
         Nameplates = 4,

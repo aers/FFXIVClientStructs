@@ -1,8 +1,7 @@
-﻿namespace FFXIVClientStructs.FFXIV.Component.GUI;
+namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x3C)]
-public unsafe struct AtkUldComponentDataNumericInput
-{
+public unsafe struct AtkUldComponentDataNumericInput {
     [FieldOffset(0x00)] public AtkUldComponentDataInputBase InputBase;
     [FieldOffset(0x10)] public fixed uint Nodes[5];
     [FieldOffset(0x24)] public int Value;

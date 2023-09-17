@@ -12,8 +12,4 @@
       <ProjectReference Include="..\FFXIVClientStructs\FFXIVClientStructs.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <PackageReference Include="PeNet" Version="2.9.9" />
-    </ItemGroup>
-
 </Project>

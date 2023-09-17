@@ -1,7 +1,6 @@
-﻿namespace FFXIVClientStructs.FFXIV.Component.GUI;
+namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
-public enum ComponentType : byte
-{
+public enum ComponentType : byte {
     Base = 0,
     Button = 1,
     Window = 2,
@@ -26,7 +25,8 @@ public enum ComponentType : byte
     Multipurpose = 21,
     Map = 22,
     Preview = 23,
-    HoldButton = 24
+    HoldButton = 24,
+    Portrait = 25,
 }
 
 // Component::GUI::AtkComponentBase
@@ -38,8 +38,7 @@ public enum ComponentType : byte
 // common CreateAtkComponent function 8B FA 33 DB E8 ?? ?? ?? ?? 
 // type 0
 [StructLayout(LayoutKind.Explicit, Size = 0xC0)]
-public unsafe partial struct AtkComponentBase
-{
+public unsafe partial struct AtkComponentBase {
     [FieldOffset(0x00)] public AtkEventListener AtkEventListener;
     [FieldOffset(0x08)] public AtkUldManager UldManager;
     [FieldOffset(0xA0)] public AtkResNode* AtkResNode;
@@ -53,7 +52,7 @@ public unsafe partial struct AtkComponentBase
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B 53 FC")]
     public partial AtkResNode* GetScrollBarNodeById(uint id);
-    
-    [VirtualFunction(10)] 
+
+    [VirtualFunction(10)]
     public partial void* SetEnabledState(bool enabled);
 }

@@ -1,6 +1,6 @@
-﻿using FFXIVClientStructs.FFXIV.Client.Game.Object;
+using FFXIVClientStructs.FFXIV.Client.Game.Object;
 
-namespace FFXIVClientStructs.FFXIV.Client.Game.Event; 
+namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x30)]
 public struct EventState {

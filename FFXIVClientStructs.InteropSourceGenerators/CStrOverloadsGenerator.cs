@@ -1,4 +1,4 @@
-﻿using FFXIVClientStructs.InteropGenerator;
+using FFXIVClientStructs.InteropGenerator;
 using FFXIVClientStructs.InteropSourceGenerators.Extensions;
 using FFXIVClientStructs.InteropSourceGenerators.Models;
 using LanguageExt;
@@ -8,23 +8,19 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 namespace FFXIVClientStructs.InteropSourceGenerators;
 
 [Generator]
-internal sealed class CStrOverloadsGenerator : IIncrementalGenerator
-{
+internal sealed class CStrOverloadsGenerator : IIncrementalGenerator {
     private const string AttributeName = "FFXIVClientStructs.Interop.Attributes.GenerateCStrOverloadsAttribute";
 
-    public void Initialize(IncrementalGeneratorInitializationContext context)
-    {
+    public void Initialize(IncrementalGeneratorInitializationContext context) {
         IncrementalValuesProvider<(Validation<DiagnosticInfo, StructInfo> StructInfo,
             Validation<DiagnosticInfo, CStrOverloadInfo> CStrOverloadInfos)> structAndMethodInfos =
             context.SyntaxProvider
                 .ForAttributeWithMetadataName(
                     AttributeName,
-                    static (node, _) => node is MethodDeclarationSyntax
-                    {
-                        Parent : StructDeclarationSyntax, AttributeLists.Count: > 0
+                    static (node, _) => node is MethodDeclarationSyntax {
+                        Parent: StructDeclarationSyntax, AttributeLists.Count: > 0
                     },
-                    static (context, _) =>
-                    {
+                    static (context, _) => {
                         StructDeclarationSyntax structSyntax = (StructDeclarationSyntax)context.TargetNode.Parent!;
 
                         MethodDeclarationSyntax methodSyntax = (MethodDeclarationSyntax)context.TargetNode;
@@ -46,25 +42,20 @@ internal sealed class CStrOverloadsGenerator : IIncrementalGenerator
                     new StructWithCStrOverloadInfos(si, csoi))
             );
 
-        context.RegisterSourceOutput(structWithMethodInfos, (sourceContext, item) =>
-        {
+        context.RegisterSourceOutput(structWithMethodInfos, (sourceContext, item) => {
             item.Match(
-                Fail: diagnosticInfos =>
-                {
+                Fail: diagnosticInfos => {
                     diagnosticInfos.Iter(dInfo => sourceContext.ReportDiagnostic(dInfo.ToDiagnostic()));
                 },
-                Succ: structWithMethodInfo =>
-                {
+                Succ: structWithMethodInfo => {
                     sourceContext.AddSource(structWithMethodInfo.GetFileName(), structWithMethodInfo.RenderSource());
                 });
         });
     }
 
-    internal sealed record CStrOverloadInfo(MethodInfo MethodInfo, Option<string> IgnoreArgument)
-    {
+    internal sealed record CStrOverloadInfo(MethodInfo MethodInfo, Option<string> IgnoreArgument) {
         public static Validation<DiagnosticInfo, CStrOverloadInfo> GetFromRoslyn(
-            MethodDeclarationSyntax methodSyntax, IMethodSymbol methodSymbol)
-        {
+            MethodDeclarationSyntax methodSyntax, IMethodSymbol methodSymbol) {
             Validation<DiagnosticInfo, MethodInfo> validMethodInfo =
                 MethodInfo.GetFromRoslyn(methodSyntax, methodSymbol);
 
@@ -77,8 +68,7 @@ internal sealed class CStrOverloadsGenerator : IIncrementalGenerator
                 new CStrOverloadInfo(methodInfo, optionIgnoreArgument));
         }
 
-        public void RenderOverloadMethods(IndentedStringBuilder builder)
-        {
+        public void RenderOverloadMethods(IndentedStringBuilder builder) {
             Seq<string> overloadParamNames =
                 MethodInfo.Parameters.Where(param => param.Type == "byte*" && param.Name != IgnoreArgument)
                     .Map(param => param.Name).ToSeq();
@@ -91,8 +81,7 @@ internal sealed class CStrOverloadsGenerator : IIncrementalGenerator
 
             builder.AppendLine();
             MethodInfo.RenderStartOverload(builder, "byte*", "string", IgnoreArgument);
-            foreach (string overloadParamName in overloadParamNames)
-            {
+            foreach (string overloadParamName in overloadParamNames) {
                 var valName = $"utf8StringLength{overloadParamName}";
 
                 builder.AppendLine(
@@ -105,8 +94,7 @@ internal sealed class CStrOverloadsGenerator : IIncrementalGenerator
                 builder.AppendLine();
             }
 
-            foreach (string overloadParamName in overloadParamNames)
-            {
+            foreach (string overloadParamName in overloadParamNames) {
                 builder.AppendLine($"fixed (byte* {overloadParamName}Ptr = {overloadParamName}Bytes)");
                 builder.AppendLine("{");
                 builder.Indent();
@@ -114,8 +102,7 @@ internal sealed class CStrOverloadsGenerator : IIncrementalGenerator
 
             builder.AppendLine($"{returnString}{MethodInfo.Name}({paramNames});");
 
-            foreach (string _ in overloadParamNames)
-            {
+            foreach (string _ in overloadParamNames) {
                 builder.DecrementIndent();
                 builder.AppendLine("}");
             }
@@ -124,8 +111,7 @@ internal sealed class CStrOverloadsGenerator : IIncrementalGenerator
 
             builder.AppendLine();
             MethodInfo.RenderStartOverload(builder, "byte*", "ReadOnlySpan<byte>", IgnoreArgument);
-            foreach (string overloadParamName in overloadParamNames)
-            {
+            foreach (string overloadParamName in overloadParamNames) {
                 builder.AppendLine($"fixed (byte* {overloadParamName}Ptr = {overloadParamName})");
                 builder.AppendLine("{");
                 builder.Indent();
@@ -133,8 +119,7 @@ internal sealed class CStrOverloadsGenerator : IIncrementalGenerator
 
             builder.AppendLine($"{returnString}{MethodInfo.Name}({paramNames});");
 
-            foreach (string _ in overloadParamNames)
-            {
+            foreach (string _ in overloadParamNames) {
                 builder.DecrementIndent();
                 builder.AppendLine("}");
             }
@@ -143,10 +128,8 @@ internal sealed class CStrOverloadsGenerator : IIncrementalGenerator
         }
     }
 
-    private sealed record StructWithCStrOverloadInfos(StructInfo StructInfo, Seq<CStrOverloadInfo> CStrOverloadInfos)
-    {
-        public string RenderSource()
-        {
+    private sealed record StructWithCStrOverloadInfos(StructInfo StructInfo, Seq<CStrOverloadInfo> CStrOverloadInfos) {
+        public string RenderSource() {
             IndentedStringBuilder builder = new();
 
             StructInfo.RenderStart(builder);
@@ -158,8 +141,7 @@ internal sealed class CStrOverloadsGenerator : IIncrementalGenerator
             return builder.ToString();
         }
 
-        public string GetFileName()
-        {
+        public string GetFileName() {
             return $"{StructInfo.Namespace}.{StructInfo.Name}.CStrOverloads.g.cs";
         }
     }

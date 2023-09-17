@@ -2,8 +2,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
 [InfoProxy(InfoProxyId.CrossRealmParty)]
 [StructLayout(LayoutKind.Explicit, Size = 0x1620)]
-public unsafe partial struct InfoProxyCrossRealm
-{
+public unsafe partial struct InfoProxyCrossRealm {
     [FieldOffset(0x00)] public InfoProxyInterface InfoProxyInterface;
 
     // memset((void *)(a1 + 0x30),  0, 0x358ui64);
@@ -17,14 +16,13 @@ public unsafe partial struct InfoProxyCrossRealm
     [FieldOffset(0x392)] public byte IsPartyLeader;
     [FieldOffset(0x393)] public byte IsInCrossRealmParty;
 
+    [FixedSizeArray<CrossRealmGroup>(6)]
     [FieldOffset(0x3A0)] public fixed byte CrossRealmGroupArray[6 * 0x2C8];
 
-    public ReadOnlySpan<CrossRealmGroup> CrossRealmGroupSpan
-    {
-        get
-        {
-            fixed (byte* gp = CrossRealmGroupArray)
-            {
+    [Obsolete("Use CrossRealmGroupArraySpan", true)]
+    public ReadOnlySpan<CrossRealmGroup> CrossRealmGroupSpan {
+        get {
+            fixed (byte* gp = CrossRealmGroupArray) {
                 return new ReadOnlySpan<CrossRealmGroup>(gp, GroupCount);
             }
         }
@@ -62,17 +60,15 @@ public unsafe partial struct InfoProxyCrossRealm
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x2C8)]
-public unsafe struct CrossRealmGroup
-{
+public unsafe partial struct CrossRealmGroup {
     [FieldOffset(0x00)] public byte GroupMemberCount;
+    [FixedSizeArray<CrossRealmMember>(8)]
     [FieldOffset(0x08)] public fixed byte GroupMembers[8 * 0x58];
 
-    public ReadOnlySpan<CrossRealmMember> GroupMemberSpan
-    {
-        get
-        {
-            fixed (byte* gp = GroupMembers)
-            {
+    [Obsolete("Use GroupMembersSpan and make sure not to iterate further than GroupMemberCount, GroupMembersSpan now includes invalid members and residual data from people that left the group", true)]
+    public ReadOnlySpan<CrossRealmMember> GroupMemberSpan {
+        get {
+            fixed (byte* gp = GroupMembers) {
                 return new ReadOnlySpan<CrossRealmMember>(gp, GroupMemberCount);
             }
         }
@@ -80,8 +76,7 @@ public unsafe struct CrossRealmGroup
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x58)]
-public unsafe struct CrossRealmMember
-{
+public unsafe struct CrossRealmMember {
     [FieldOffset(0x08)] public ulong ContentId;
     [FieldOffset(0x18)] public uint ObjectId;
     [FieldOffset(0x20)] public byte Level;

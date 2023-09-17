@@ -1,11 +1,10 @@
-﻿using FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
+using FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
 using FFXIVClientStructs.FFXIV.Common.Lua;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x3BC0)]
-public unsafe partial struct EventFramework
-{
+public unsafe partial struct EventFramework {
     [FieldOffset(0x00)] public EventHandlerModule EventHandlerModule;
     [FieldOffset(0xC0)] public DirectorModule DirectorModule;
     [FieldOffset(0x160)] public LuaActorModule LuaActorModule;
@@ -31,13 +30,23 @@ public unsafe partial struct EventFramework
     public partial PublicContentDirector* GetPublicContentDirector();
 
     public InstanceContentDeepDungeon* GetInstanceContentDeepDungeon() {
-	    var director = (EventHandler*)GetContentDirector();
-	    if (director == null || director->Info.EventId.Type != EventHandlerType.InstanceContentDirector)
-		    return null;
-	    var instanceDirector = (InstanceContentDirector*)director;
-	    if (instanceDirector->InstanceContentType != InstanceContentType.DeepDungeon)
-		    return null;
-	    return (InstanceContentDeepDungeon*)director;
+        var director = (EventHandler*)GetContentDirector();
+        if (director == null || director->Info.EventId.Type != EventHandlerType.InstanceContentDirector)
+            return null;
+        var instanceDirector = (InstanceContentDirector*)director;
+        if (instanceDirector->InstanceContentType != InstanceContentType.DeepDungeon)
+            return null;
+        return (InstanceContentDeepDungeon*)director;
+    }
+
+    public InstanceContentOceanFishing* GetInstanceContentOceanFishing() {
+        var director = (EventHandler*)GetContentDirector();
+        if (director == null || director->Info.EventId.Type != EventHandlerType.InstanceContentDirector)
+            return null;
+        var instanceDirector = (InstanceContentDirector*)director;
+        if (instanceDirector->InstanceContentType != InstanceContentType.OceanFishing)
+            return null;
+        return (InstanceContentOceanFishing*)director;
     }
 
     [MemberFunction("E8 ?? ?? ?? ?? 32 C9 0F B6 D9")]
@@ -46,4 +55,7 @@ public unsafe partial struct EventFramework
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B D8 3B 86")]
     public static partial uint GetCurrentContentId();
+
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 18 48 8B 4F 10")]
+    public static partial bool CanLeaveCurrentContent();
 }

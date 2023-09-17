@@ -1,11 +1,10 @@
-﻿namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
+namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 
 // ctor: E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 59 ?? 48 89 01 E8 
 [StructLayout(LayoutKind.Explicit, Size = 0x190)]
-public unsafe partial struct DrawDataContainer
-{
+public unsafe partial struct DrawDataContainer {
     [FieldOffset(0x000)] public void** Vtable;
-    [FieldOffset(0x008)] public Character*  Parent;
+    [FieldOffset(0x008)] public Character* Parent;
 
     [FieldOffset(0x010)] public WeaponModelId MainHandModel;
     [FieldOffset(0x020)] public DrawObjectData MainHand;
@@ -19,7 +18,7 @@ public unsafe partial struct DrawDataContainer
     [FieldOffset(0x0DA)] public ushort OffHandFlags1;
     [FieldOffset(0x0DC)] public byte OffHandFlags2;
 
-    [FieldOffset(0x0E0)] public WeaponModelId  UnkE0Model;
+    [FieldOffset(0x0E0)] public WeaponModelId UnkE0Model;
     [FieldOffset(0x0F0)] public DrawObjectData UnkF0;
     [FieldOffset(0x142)] public ushort Unk144Flags1;
     [FieldOffset(0x144)] public byte Unk144Flags2;
@@ -40,7 +39,10 @@ public unsafe partial struct DrawDataContainer
     [FieldOffset(0x18A)] public uint Unk18A;
     [FieldOffset(0x18E)] public byte Flags1;
     [FieldOffset(0x18F)] public byte Flags2;
-    
+
+    [MemberFunction("E8 ?? ?? ?? ?? 41 B5 ?? FF C6")]
+    public partial void LoadEquipment(EquipmentSlot slot, EquipmentModelId modelId, bool force);
+
 
     [MemberFunction("E8 ?? ?? ?? ?? 33 DB BE")]
     public partial void LoadWeapon(WeaponSlot slot, WeaponModelId weaponData, byte redrawOnEquality, byte unk2, byte skipGameObject, byte unk4);
@@ -67,41 +69,48 @@ public unsafe partial struct DrawDataContainer
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 97 ?? ?? ?? ?? 48 8B CF C0 EA")]
     public partial void SetVisor(bool state);
 
-    public enum WeaponSlot : uint
-    {
+    public enum EquipmentSlot : uint {
+        Head = 0,
+        Body = 1,
+        Hands = 2,
+        Legs = 3,
+        Feet = 4,
+        Ears = 5,
+        Neck = 6,
+        Wrists = 7,
+        RFinger = 8,
+        LFinger = 9,
+    }
+
+    public enum WeaponSlot : uint {
         MainHand = 0,
         OffHand = 1,
         Unk = 2,
     }
 
-    public bool IsHatHidden
-    {
+    public bool IsHatHidden {
         get => (Flags1 & 0x01) == 0x01;
-        set => Flags1 = (byte) (value ? Flags1 | 0x01 : Flags1 & ~0x01);
+        set => Flags1 = (byte)(value ? Flags1 | 0x01 : Flags1 & ~0x01);
     }
 
-    public bool IsWeaponHidden
-    {
+    public bool IsWeaponHidden {
         get => (Flags2 & 0x01) == 0x01;
         set => Flags2 = (byte)(value ? Flags2 | 0x01 : Flags2 & ~0x01);
     }
 
-    public bool IsVisorToggled
-    {
+    public bool IsVisorToggled {
         get => (Flags2 & 0x08) == 0x08;
         set => Flags2 = (byte)(value ? Flags2 | 0x08 : Flags2 & ~0x08);
     }
 
     private const byte WeaponHiddenFlag = 0x02;
 
-    public bool IsMainHandHidden
-    {
+    public bool IsMainHandHidden {
         get => (MainHandState & WeaponHiddenFlag) == WeaponHiddenFlag;
         set => MainHandState = (byte)(value ? MainHandState | WeaponHiddenFlag : MainHandState & ~WeaponHiddenFlag);
     }
 
-    public bool IsOffHandHidden
-    {
+    public bool IsOffHandHidden {
         get => (OffHandState & WeaponHiddenFlag) == WeaponHiddenFlag;
         set => OffHandState = (byte)(value ? OffHandState | WeaponHiddenFlag : OffHandState & ~WeaponHiddenFlag);
     }
@@ -111,14 +120,12 @@ public unsafe partial struct DrawDataContainer
 
 // ctor: E8 ?? ?? ?? ?? 48 8B E8 EB ?? 33 ED 48 89 AB
 [StructLayout(LayoutKind.Explicit, Size = 0x44)]
-public unsafe partial struct DrawObjectData
-{
+public unsafe partial struct DrawObjectData {
 
 }
 
 [StructLayout(LayoutKind.Explicit, Size = Count)]
-public unsafe partial struct CustomizeData
-{
+public unsafe partial struct CustomizeData {
     private const int Count = 0x1A;
 
     [FieldOffset(0x00)] public fixed byte Data[Count];
@@ -138,8 +145,7 @@ public unsafe partial struct CustomizeData
 
 
 [StructLayout(LayoutKind.Explicit, Size = 8)]
-public struct WeaponModelId
-{
+public struct WeaponModelId {
     [FieldOffset(0)] public ushort Id;
     [FieldOffset(2)] public ushort Type;
     [FieldOffset(4)] public ushort Variant;
@@ -148,9 +154,8 @@ public struct WeaponModelId
     [FieldOffset(0)] public ulong Value;
 }
 
-[StructLayout(LayoutKind.Explicit, Size=4)]
-public struct EquipmentModelId
-{
+[StructLayout(LayoutKind.Explicit, Size = 4)]
+public struct EquipmentModelId {
     [FieldOffset(0)] public ushort Id;
     [FieldOffset(2)] public byte Variant;
     [FieldOffset(3)] public byte Stain;

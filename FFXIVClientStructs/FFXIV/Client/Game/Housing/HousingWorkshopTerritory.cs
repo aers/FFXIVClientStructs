@@ -1,21 +1,19 @@
-﻿using FFXIVClientStructs.FFXIV.Client.System.String;
+using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Housing;
 
 [StructLayout(LayoutKind.Explicit, Size = 0xB8C0)]
-public unsafe partial struct HousingWorkshopTerritory
-{
+public unsafe partial struct HousingWorkshopTerritory {
     [FieldOffset(0x68)] public HousingWorkshopAirshipData Airship;
 
     [FieldOffset(0x2960)] public HousingWorkshopSubmersibleData Submersible;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x28F8)]
-public unsafe partial struct HousingWorkshopAirshipData
-{
+public unsafe partial struct HousingWorkshopAirshipData {
     [FixedSizeArray<HousingWorkshopAirshipSubData>(4)]
     [FieldOffset(0x0)] public fixed byte DataList[0x1C0 * 4];
-    
+
     [FieldOffset(0x770)] public byte ActiveAirshipId; // 0-3, 255 if none
     [FieldOffset(0x771)] public byte AirshipCount;
 
@@ -24,8 +22,7 @@ public unsafe partial struct HousingWorkshopAirshipData
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x8F40)]
-public unsafe partial struct HousingWorkshopSubmersibleData
-{
+public unsafe partial struct HousingWorkshopSubmersibleData {
     [FixedSizeArray<HousingWorkshopSubmersibleSubData>(4)]
     [FieldOffset(0x0)] public fixed byte DataList[0x2320 * 4];
 
@@ -34,9 +31,8 @@ public unsafe partial struct HousingWorkshopSubmersibleData
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x1C0)]
-public unsafe partial struct HousingWorkshopAirshipSubData
-{
-    [FieldOffset(0x0), Obsolete] public fixed byte Data[0x1C0];
+public unsafe partial struct HousingWorkshopAirshipSubData {
+    [FieldOffset(0x0), Obsolete("Cast to byte instead", true)] public fixed byte Data[0x1C0];
     [FieldOffset(0x4)] public uint RegisterTime;
     [FieldOffset(0xC)] public byte RankId;
     [FieldOffset(0x10)] public uint ReturnTime;
@@ -73,8 +69,7 @@ public unsafe partial struct HousingWorkshopAirshipSubData
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x38)]
-public unsafe partial struct HousingWorkshopAirshipGathered
-{
+public unsafe partial struct HousingWorkshopAirshipGathered {
     [FieldOffset(0x0)] public uint ExpGained;
 
     [FieldOffset(0xC)] public uint ItemIdPrimary;
@@ -94,8 +89,7 @@ public unsafe partial struct HousingWorkshopAirshipGathered
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x2320)]
-public unsafe partial struct HousingWorkshopSubmersibleSubData
-{
+public unsafe partial struct HousingWorkshopSubmersibleSubData {
     [FieldOffset(0x0)] public HousingWorkshopSubmersibleData* Parent;
     [FieldOffset(0x0), Obsolete("Wrong mapping stop using this", true)] public HousingWorkshopSubmersibleSubData* Self;
     [FieldOffset(0xE)] public byte RankId;
@@ -124,7 +118,7 @@ public unsafe partial struct HousingWorkshopSubmersibleSubData
     [FieldOffset(0x58)] public ushort SpeedBonus;
     [FieldOffset(0x5A)] public ushort RangeBonus;
     [FieldOffset(0x5C)] public ushort FavorBonus;
-    [FieldOffset(0x60), Obsolete("Use SubmarineRating", false)] public byte Rating;
+    [FieldOffset(0x60), Obsolete("Use SubmarineRating", true)] public byte Rating;
     [FieldOffset(0x60)] public SubmarineRating SubmarineRating;
     [FieldOffset(0x62)] public ushort LogSpeed;
 
@@ -141,8 +135,7 @@ public unsafe partial struct HousingWorkshopSubmersibleSubData
     public DateTime GetReturnTime() => DateTime.UnixEpoch.AddSeconds(ReturnTime);
 }
 
-public enum SubmarineRating : byte
-{
+public enum SubmarineRating : byte {
     SS = 0,
     S = 1,
     A = 2,
@@ -151,8 +144,7 @@ public enum SubmarineRating : byte
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x38)]
-public struct HousingWorkshopSubmarineGathered
-{
+public struct HousingWorkshopSubmarineGathered {
     [FieldOffset(0x0)] public byte Point;
     [FieldOffset(0x1)] public SubmarineRating PointRating;
     [FieldOffset(0x2)] public byte UnlockedPoint;
@@ -171,12 +163,12 @@ public struct HousingWorkshopSubmarineGathered
     [FieldOffset(0x1E)] public byte UnknownPrimary;
     [FieldOffset(0x1F)] public byte UnknownAdditional;
 
-    [FieldOffset(0x20), Obsolete("Use SurveyLinePrimary", false)] public uint UnknownPrimary1;
-    [FieldOffset(0x24), Obsolete("Use SurveyLineAdditional", false)] public uint UnknownAdditional1;
-    [FieldOffset(0x28), Obsolete("Use YieldLinePrimary", false)] public uint UnknownPrimary2;
-    [FieldOffset(0x2C), Obsolete("Use YieldLineAdditional", false)] public uint UnknownAdditional2;
-    [FieldOffset(0x30), Obsolete("Use DiscoveredLinePrimary", false)] public uint UnknownPrimary3;
-    [FieldOffset(0x34), Obsolete("Use DiscoveredLineAdditional", false)] public uint UnknownAdditional3;
+    [FieldOffset(0x20), Obsolete("Use SurveyLinePrimary", true)] public uint UnknownPrimary1;
+    [FieldOffset(0x24), Obsolete("Use SurveyLineAdditional", true)] public uint UnknownAdditional1;
+    [FieldOffset(0x28), Obsolete("Use YieldLinePrimary", true)] public uint UnknownPrimary2;
+    [FieldOffset(0x2C), Obsolete("Use YieldLineAdditional", true)] public uint UnknownAdditional2;
+    [FieldOffset(0x30), Obsolete("Use DiscoveredLinePrimary", true)] public uint UnknownPrimary3;
+    [FieldOffset(0x34), Obsolete("Use DiscoveredLineAdditional", true)] public uint UnknownAdditional3;
 
     [FieldOffset(0x20)] public uint SurveyLinePrimary;
     [FieldOffset(0x24)] public uint SurveyLineAdditional;

@@ -1,11 +1,10 @@
-﻿using FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
+using FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 
 namespace FFXIVClientStructs.FFXIV.Client.System.Resource;
 
 using CategoryMap = StdMap<uint, Pointer<StdMap<uint, Pointer<ResourceHandle>>>>;
 
-public enum ResourceCategory : ushort
-{
+public enum ResourceCategory : ushort {
     Common = 0,
     BgCommon = 1,
     Bg = 2,
@@ -25,11 +24,9 @@ public enum ResourceCategory : ushort
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0xC80)]
-public unsafe partial struct ResourceGraph
-{
+public unsafe partial struct ResourceGraph {
     [StructLayout(LayoutKind.Explicit, Size = 0xA0)]
-    public partial struct CategoryContainer
-    {
+    public partial struct CategoryContainer {
         [FixedSizeArray<Pointer<CategoryMap>>(0x14)]
         [FieldOffset(0x0)] public fixed byte CategoryMaps[0x8 * 0x14];
 

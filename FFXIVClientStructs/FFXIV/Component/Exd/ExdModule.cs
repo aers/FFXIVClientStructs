@@ -1,10 +1,9 @@
-﻿using FFXIVClientStructs.FFXIV.Component.Excel;
+using FFXIVClientStructs.FFXIV.Component.Excel;
 
 namespace FFXIVClientStructs.FFXIV.Component.Exd;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x28)]
-public unsafe partial struct ExdModule
-{
+public unsafe partial struct ExdModule {
     [FieldOffset(0x20)] public ExcelModule* ExcelModule;
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F 57 F6 48 85 C0")]

@@ -1,7 +1,7 @@
-﻿using FFXIVClientStructs.FFXIV.Client.System.String;
+using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
-namespace FFXIVClientStructs.FFXIV.Client.UI.Agent; 
+namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.AozContentResult)]
 [StructLayout(LayoutKind.Explicit, Size = 0x30)]

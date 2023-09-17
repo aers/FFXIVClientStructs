@@ -1,12 +1,11 @@
-﻿using FFXIVClientStructs.FFXIV.Client.System.String;
+using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 [Addon("Social")]
 [StructLayout(LayoutKind.Explicit, Size = 0x320)]
-public unsafe partial struct AddonSocial
-{
+public unsafe partial struct AddonSocial {
     [FieldOffset(0x00)] public AtkUnitBase AtkUnitBase;
 
     [FieldOffset(0x290)] public AtkComponentRadioButton* PartyMembersRadioButton;

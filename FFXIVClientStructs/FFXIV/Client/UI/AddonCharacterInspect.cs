@@ -1,6 +1,6 @@
-﻿using FFXIVClientStructs.FFXIV.Component.GUI;
+using FFXIVClientStructs.FFXIV.Component.GUI;
 
-namespace FFXIVClientStructs.FFXIV.Client.UI; 
+namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 [Addon("CharacterInspect")]
 [StructLayout(LayoutKind.Explicit, Size = 0x500)]
