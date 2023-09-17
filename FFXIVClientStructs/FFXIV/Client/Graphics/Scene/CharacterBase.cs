@@ -50,7 +50,7 @@ public unsafe partial struct CharacterBase {
     [FieldOffset(0x240)] public void* CharacterDataCB;
     [FieldOffset(0x240)] public ConstantBuffer* CharacterDataCBuffer; // Size has been observed to be 0x50, contents may be InstanceParameter
 
-    [FieldOffset(0x258)] public Texture** ColorSetTextures; // each one corresponds to a material, size = SlotCount * 4
+    [FieldOffset(0x258)] public Texture** ColorTableTextures; // each one corresponds to a material, size = SlotCount * 4
 
     [FieldOffset(0x2B0)] public float WeatherWetness;  // Set to 1.0f when raining and not covered or umbrella'd
     [FieldOffset(0x2B4)] public float SwimmingWetness; // Set to 1.0f when in water
