@@ -159,3 +159,4 @@ public enum InventoryType : uint
     HousingInteriorStoreroom7 = 27007,
     HousingInteriorStoreroom8 = 27008
 }
+
