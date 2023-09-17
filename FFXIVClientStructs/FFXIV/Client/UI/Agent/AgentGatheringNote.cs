@@ -1,4 +1,3 @@
-using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
@@ -6,8 +5,6 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.GatheringNote)]
 [StructLayout(LayoutKind.Explicit, Size = 0x178)]
 public unsafe partial struct AgentGatheringNote {
-    public static AgentGatheringNote* Instance() => (AgentGatheringNote*)Framework.Instance()->GetUiModule()->GetAgentModule()->GetAgentByInternalId(AgentId.GatheringNote);
-
     [FieldOffset(0x0)] public AgentInterface AgentInterface;
 
     [FieldOffset(0xB8)] public GatheringAreaInfo* GatheringAreaInfo; // Represents the currently set gathering area

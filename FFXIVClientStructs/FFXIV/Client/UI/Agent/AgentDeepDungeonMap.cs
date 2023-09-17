@@ -1,18 +1,13 @@
 using System.Runtime.CompilerServices;
-using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.DeepDungeonMap)]
 [StructLayout(LayoutKind.Explicit, Size = 0x30)]
-public unsafe struct AgentDeepDungeonMap {
+public unsafe partial struct AgentDeepDungeonMap {
     [FieldOffset(0x00)] public AgentInterface AgentInterface;
     [FieldOffset(0x28)] public AgentDeepDungeonMapData* Data;
-
-    public static AgentDeepDungeonMap* Instance() {
-        return Framework.Instance()->GetUiModule()->GetAgentModule()->GetAgentDeepDungeonMap();
-    }
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x36)]

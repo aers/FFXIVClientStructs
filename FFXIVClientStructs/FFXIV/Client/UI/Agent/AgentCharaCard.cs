@@ -1,5 +1,4 @@
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
-using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Client.UI.Misc;
 using FFXIVClientStructs.FFXIV.Component.GUI;
@@ -12,9 +11,6 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.CharaCard)]
 [StructLayout(LayoutKind.Explicit, Size = 0x38)]
 public unsafe partial struct AgentCharaCard {
-    public static AgentCharaCard* Instance() => (AgentCharaCard*)Framework.Instance()->GetUiModule()->GetAgentModule()->GetAgentByInternalId(AgentId.CharaCard);
-
-
     [FieldOffset(0x0)] public AgentInterface AgentInterface;
 
     [FieldOffset(0x28)] public Storage* Data;

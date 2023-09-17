@@ -9,9 +9,6 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [VTableAddress("48 8D 05 ?? ?? ?? ?? 48 89 71 18 48 89 01", 3)]
 [StructLayout(LayoutKind.Explicit, Size = 0x1DD0)]
 public unsafe partial struct AgentLobby {
-    public static AgentLobby* Instance()
-        => (AgentLobby*)AgentModule.Instance()->GetAgentByInternalId(AgentId.Lobby);
-
     [FieldOffset(0)] public AgentInterface AgentInterface;
 
     [FieldOffset(0x40)] public LobbyData LobbyData; // for lack of a better name

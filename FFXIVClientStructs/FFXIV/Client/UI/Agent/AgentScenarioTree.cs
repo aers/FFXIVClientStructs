@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x30)]
 [Agent(AgentId.ScenarioTree)]
-public unsafe struct AgentScenarioTree {
+public unsafe partial struct AgentScenarioTree {
     [FieldOffset(0x00)] public AgentInterface AgentInterface;
     [FieldOffset(0x28)] public AgentScenarioTreeData* Data;
 
@@ -15,6 +15,4 @@ public unsafe struct AgentScenarioTree {
         [FieldOffset(0x00)] public ushort CurrentScenarioQuest; // CurrentScenarioQuest | 0x10000U = Quest row
         [FieldOffset(0x06)] public ushort CompleteScenarioQuest; // Only populated if no MSQ is accepted
     }
-
-    public AgentScenarioTree* Instance() => (AgentScenarioTree*)AgentModule.Instance()->GetAgentByInternalId(AgentId.ScenarioTree);
 }

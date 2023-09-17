@@ -1,4 +1,3 @@
-using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
@@ -8,14 +7,11 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 //     Component::GUI::AtkModuleInterface::AtkEventInterface
 [Agent(AgentId.CraftActionSimulator)]
 [StructLayout(LayoutKind.Explicit, Size = 0x90)]
-public unsafe struct AgentCraftActionSimulator {
+public unsafe partial struct AgentCraftActionSimulator {
     [FieldOffset(0x0)] public AgentInterface AgentInterface;
 
     [FieldOffset(0x28)] public ProgressEfficiencyCalculations* Progress; // Progress tab of the Efficiency Calculations window.
     [FieldOffset(0x40)] public QualityEfficiencyCalculations* Quality; // Quality tab of the Efficiency Calculations window.
-
-    public static AgentCraftActionSimulator* Instance() =>
-        (AgentCraftActionSimulator*)Framework.Instance()->GetUiModule()->GetAgentModule()->GetAgentByInternalId(AgentId.CraftActionSimulator);
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x0108)]

@@ -1,11 +1,10 @@
-using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.RetainerTask)]
 [StructLayout(LayoutKind.Explicit, Size = 0x90)]
-public struct AgentRetainerTask {
+public unsafe partial struct AgentRetainerTask {
     [FieldOffset(0x00)] public AgentInterface AgentInterface;
 
     // 00 - None
@@ -33,7 +32,4 @@ public struct AgentRetainerTask {
 
     // Set when venture in progress
     [FieldOffset(0x84)] public uint XPToReward;
-
-    public static unsafe AgentRetainerTask* Instance() =>
-        Framework.Instance()->GetUiModule()->GetAgentModule()->GetAgentRetainerTask();
 }

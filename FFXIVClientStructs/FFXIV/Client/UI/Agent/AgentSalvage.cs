@@ -1,5 +1,4 @@
 using FFXIVClientStructs.FFXIV.Client.Game;
-using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
@@ -8,8 +7,6 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.Salvage)]
 [StructLayout(LayoutKind.Explicit, Size = 0x190)]
 public unsafe partial struct AgentSalvage {
-    public static AgentSalvage* Instance() => Framework.Instance()->GetUiModule()->GetAgentModule()->GetAgentSalvage();
-
     [FieldOffset(0x00)] public AgentInterface AgentInterface;
 
     [FieldOffset(0x30)] public SalvageItemCategory SelectedCategory;

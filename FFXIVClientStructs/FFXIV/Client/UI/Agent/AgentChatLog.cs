@@ -9,8 +9,6 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.ChatLog)]
 [StructLayout(LayoutKind.Explicit, Size = 0x2B8)]
 public unsafe partial struct AgentChatLog {
-    public static AgentChatLog* Instance() => (AgentChatLog*)AgentModule.Instance()->GetAgentByInternalId(AgentId.ChatLog);
-
     [FieldOffset(0x00)] public AgentInterface AgentInterface;
 
     [FieldOffset(0x40)] public ChatChannel CurrentChannel;

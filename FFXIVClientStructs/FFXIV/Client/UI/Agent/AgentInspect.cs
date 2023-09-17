@@ -1,5 +1,4 @@
 using FFXIVClientStructs.FFXIV.Client.Game;
-using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Client.UI.Info;
 using FFXIVClientStructs.FFXIV.Component.GUI;
@@ -12,8 +11,6 @@ public unsafe partial struct AgentInspect {
     //Notes to INfoProxies:
     //0xa used for DeepDungeon
     //0xd
-    public static AgentInspect* Instance() =>
-        (AgentInspect*)Framework.Instance()->GetUiModule()->GetAgentModule()->GetAgentByInternalId(AgentId.Inspect);
 
     [FieldOffset(0x000)] public AgentInterface AgentInterface;
     //First byte seems to be a bit field

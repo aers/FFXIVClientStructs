@@ -13,8 +13,6 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 public unsafe partial struct AgentTryon {
     [FieldOffset(0)] public AgentInterface AgentInterface;
 
-    public static AgentTryon* Instance() => Framework.Instance()->GetUiModule()->GetAgentModule()->GetAgentTryon();
-
     // you can ignore the openerAddonId in the call and just set it to 0
     [MemberFunction("E8 ?? ?? ?? ?? EB 56 48 8B 49 10")]
     public static partial bool TryOn(uint openerAddonId, uint itemId, byte stainId, uint glamourItemId, byte glamourStainId);

@@ -11,7 +11,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.FreeCompany)]
 [StructLayout(LayoutKind.Explicit, Size = 0xAD8)]
-public unsafe struct AgentFreeCompany {
+public unsafe partial struct AgentFreeCompany {
     [FieldOffset(0x000)] public AgentInterface AgentInterface;
     [FieldOffset(0x028)] public void* vtbl2;
     [FieldOffset(0x030)] public void* vtbl3;
