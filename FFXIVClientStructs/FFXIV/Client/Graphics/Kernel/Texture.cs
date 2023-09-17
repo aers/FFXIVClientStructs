@@ -1,6 +1,4 @@
-using FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
-
-namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
+namespace FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
 
 // there's 20+ of these but these are the ones I've encountered/debugged
 public enum TextureFormat : uint {

@@ -1,5 +1,4 @@
-using System.Text;
-using FFXIVClientStructs.FFXIV.Client.Graphics.Render;
+using FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
