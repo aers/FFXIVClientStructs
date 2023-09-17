@@ -16,7 +16,7 @@ public unsafe partial struct InventoryManager
     public partial int GetItemCountInContainer(uint itemId, InventoryType inventoryType, bool isHq = false, short minCollectability = 0);
 
     [MemberFunction("E8 ?? ?? ?? ?? 33 DB 89 1E")]
-    public partial int MoveItemSlot(InventoryType srcContainer, short srcSlot, InventoryType dstContainer, short dstSlot, byte unk = 0);
+    public partial int MoveItemSlot(InventoryType srcContainer, ushort srcSlot, InventoryType dstContainer, ushort dstSlot, byte unk = 0);
 
     /// <summary>
     /// Get the number of gearsets the player is permitted to have/use.
