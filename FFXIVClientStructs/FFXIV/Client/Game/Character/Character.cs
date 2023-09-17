@@ -252,7 +252,7 @@ public unsafe partial struct Character {
         //[FieldOffset(0x4C)] public uint TotalActionCounter?;
         //[FieldOffset(0x50)] public uint OwnActionCounter?;
 
-        [FieldOffset(0x58)] public fixed long ActionRecipientsObjectIdArray[32];
+        [FieldOffset(0x58)] public fixed ulong ActionRecipientsObjectIdArray[32];
         [FieldOffset(0x158)] public int ActionRecipientsCount;
     }
 

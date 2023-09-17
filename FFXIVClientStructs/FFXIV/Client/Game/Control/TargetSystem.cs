@@ -23,7 +23,7 @@ public unsafe partial struct TargetSystem {
     public static partial TargetSystem* Instance();
 
     [MemberFunction("E8 ?? ?? ?? ?? 4C 8B F8 EB 13")]
-    public partial uint GetCurrentTargetID();
+    public partial ulong GetCurrentTargetID();
 
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 83 C0 ED")]
     public partial GameObject* GetCurrentTarget();
@@ -56,7 +56,7 @@ public unsafe partial struct TargetSystem {
 [StructLayout(LayoutKind.Explicit, Size = 0x12C0)]
 public unsafe struct GameObjectArray {
     [FieldOffset(0x00)] public int Length;
-    [FieldOffset(0x08)] public fixed long Objects[599];
+    [FieldOffset(0x08)] public fixed ulong Objects[599];
 
     public GameObject* this[int index] {
         get {
