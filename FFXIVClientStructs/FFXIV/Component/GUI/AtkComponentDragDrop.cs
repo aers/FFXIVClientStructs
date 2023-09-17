@@ -9,6 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [StructLayout(LayoutKind.Explicit, Size = 0x110)]
 public unsafe partial struct AtkComponentDragDrop {
     [FieldOffset(0x0)] public AtkComponentBase AtkComponentBase;
+    [FieldOffset(0xC0)] public AtkDragDropInterface AtkDragDropInterface;
     [FieldOffset(0xF8)] public AtkComponentIcon* AtkComponentIcon;
 
     [MemberFunction("E8 ?? ?? ?? ?? 83 F8 FF 74 40")]
