@@ -3,12 +3,8 @@ using FFXIVClientStructs.FFXIV.Application.Network.WorkDefinitions;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
-// idk if this is a manager, but I don't know what else to call it
 [StructLayout(LayoutKind.Explicit, Size = 0xF40)]
 public unsafe partial struct QuestManager {
-    [Obsolete("Use NormalQuestsSpan")]
-    [FieldOffset(0x10)] public QuestListArray Quest;
-
     [FixedSizeArray<QuestWork>(30)]
     [FieldOffset(0x10)] public fixed byte NormalQuests[0x18 * 30];
     [FixedSizeArray<DailyQuestWork>(12)]
@@ -41,7 +37,7 @@ public unsafe partial struct QuestManager {
     public static partial byte GetQuestSequence(ushort questId);
 
     /**
-     * <inheritdoc cref="QuestManager.GetQuestSequence(ushort)"/>
+     * <inheritdoc cref="GetQuestSequence(ushort)"/>
      * <remarks>This is a helper method to handle trimming uints down to the game-requested ushort.</remarks>
      */
     public static byte GetQuestSequence(uint questId) => GetQuestSequence((ushort)(questId & 0xFFFF));
@@ -56,10 +52,10 @@ public unsafe partial struct QuestManager {
     public partial bool IsQuestAccepted(ushort questId);
 
     /**
-     * <inheritdoc cref="QuestManager.IsQuestAccepted(ushort)"/>
+     * <inheritdoc cref="IsQuestAccepted(ushort)"/>
      * <remarks>This is a helper method to handle trimming uints down to the game-requested ushort.</remarks>
      */
-    public bool IsQuestAccepted(uint questId) => this.IsQuestAccepted((ushort)(questId & 0xFFFF));
+    public bool IsQuestAccepted(uint questId) => IsQuestAccepted((ushort)(questId & 0xFFFF));
 
     /// <summary>
     /// Check if a specific levequest has been completed.
@@ -131,35 +127,5 @@ public unsafe partial struct QuestManager {
         var span = BeastReputationSpan;
         if (index >= span.Length) return null;
         return (BeastReputationWork*)Unsafe.AsPointer(ref span[(int)index]);
-    }
-
-    [StructLayout(LayoutKind.Explicit)]
-    public struct QuestListArray {
-        [FieldOffset(0x00)] private fixed byte data[0x18 * 30];
-
-        public Quest* this[int index] {
-            get {
-                if (index < 0 || index > 30) return null;
-
-                fixed (byte* pointer = data) {
-                    return (Quest*)(pointer + sizeof(Quest) * index);
-                }
-            }
-        }
-
-        [StructLayout(LayoutKind.Explicit, Size = 0x18)]
-        public struct Quest {
-            [FieldOffset(0x08)] public ushort QuestID;
-            [FieldOffset(0x0B)] public QuestFlags Flags; // 1 for Priority, 8 for Hidden
-
-            public bool IsHidden => Flags.HasFlag(QuestFlags.Hidden);
-
-            [Flags]
-            public enum QuestFlags : byte {
-                None,
-                Priority,
-                Hidden = 0x8
-            }
-        }
     }
 }

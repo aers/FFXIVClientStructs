@@ -15,12 +15,12 @@ public unsafe struct AtkArrayData {
     [FieldOffset(0x1E)] public byte UpdateState;
     [FieldOffset(0x1F)] public sbyte RefCount; // initialized to -1, used by Agents
 
-    [Obsolete("Use AtkArrayData.SubscribedAddonsCount")]
+    [Obsolete("Use AtkArrayData.SubscribedAddonsCount", true)]
     [FieldOffset(0x1D)] public byte Unk1D;
 
-    [Obsolete("Use AtkArrayData.UpdateState")]
+    [Obsolete("Use AtkArrayData.UpdateState", true)]
     [FieldOffset(0x1E)] public bool HasModifiedData;
 
-    [Obsolete("Use AtkArrayData.RefCount")]
+    [Obsolete("Use AtkArrayData.RefCount", true)]
     [FieldOffset(0x1F)] public byte Unk1F;
 }

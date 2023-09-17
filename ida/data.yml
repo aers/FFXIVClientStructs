@@ -1599,6 +1599,7 @@ classes:
       0x140102A20: ProcessRequestResult
       0x140102CF0: ProcessItemHistory
       0x140102D40: ProcessItemHistory_Internal
+      0x140103430: SetLastPurchasedItem
   Client::UI::Info::InfoProxyPartyInvite:
     vtbls:
       - ea: 0x141950028
@@ -3827,9 +3828,10 @@ classes:
       0x140691020: RemoveGlamourPlateLink
       0x140691030: HasLinkedGlamourPlate
       0x140691220: GetClassJobIcon
-      0x1406916F0: GetBannerIndexByGearsetIndex
-      0x140691750: SetBannerIndexForGearsetIndex
-      0x140691810: IsGearsetLinkedWithBanner
+      0x1406916F0: GetBannerIndex
+      0x140691750: SetBannerIndex
+      0x140691810: HasLinkedBanner
+      0x140691BE0: FindGearsetIDByName
   Client::UI::Misc::ItemFinderModule:
     vtbls:
       - ea: 0x1419AB3C8
@@ -6758,6 +6760,8 @@ classes:
     vtbls:
       - ea: 0x141BA9F88
         base: Client::Game::InstanceContent::ContentDirector
+    funcs:
+      0x1414142FAB0: HandleEnterContentInfoPacket  # static
   Client::UI::PopupMenu:
     vtbls:
       - ea: 0x141A1BEE8
@@ -6784,7 +6788,7 @@ classes:
       - ea: 0x141A679E0
         base: Component::GUI::AtkUnitBase
     funcs:
-        0x:140F7EF80: ctor
+        0x140F7EF80: ctor
   Client::UI::AddonFateReward:
     vtbls:
       - ea: 0x141A696D8

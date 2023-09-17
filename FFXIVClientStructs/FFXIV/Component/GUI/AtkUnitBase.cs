@@ -29,6 +29,7 @@ public unsafe partial struct AtkUnitBase {
     [FieldOffset(0x1D0)] public ushort UnknownID;
     [FieldOffset(0x1D2)] public ushort ContextMenuParentID;
     [FieldOffset(0x1D5)] public byte Alpha;
+    [FieldOffset(0x1D6)] public byte ShowHideFlags;
 
     [FieldOffset(0x1D8)]
     public AtkResNode**
@@ -107,10 +108,10 @@ public unsafe partial struct AtkUnitBase {
     public partial bool Close(bool unknown);
 
     [VirtualFunction(5)]
-    public partial bool Show(int unkInt, bool unkBool = false);
+    public partial void Show(bool unkBool, uint unsetShowHideFlags);
 
     [VirtualFunction(6)]
-    public partial bool Hide(bool unknown);
+    public partial void Hide(bool unkBool, bool callHideCallback, uint setShowHideFlags);
 
     [VirtualFunction(7)]
     public partial void SetPosition(short x, short y);

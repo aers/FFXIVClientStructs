@@ -11,15 +11,15 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 public unsafe partial struct BattleChara {
     [FieldOffset(0x0)] public Character Character;
 
-    [Obsolete("Use GetStatusManager", false)]
+    [Obsolete("Use GetStatusManager", true)]
     [FieldOffset(0x1B80)] public StatusManager StatusManager;
 
-    [Obsolete("Use GetCastInfo", false)]
+    [Obsolete("Use GetCastInfo", true)]
     [FieldOffset(0x1D10)] public Character.CastInfo SpellCastInfo;
 
     //[FieldOffset(0x1E60)] public fixed byte UnkBattleCharaStruct[0xF00];
 
-    [Obsolete("Use GetForayInfo", false)]
+    [Obsolete("Use GetForayInfo", true)]
     [FieldOffset(0x2D80)] public Character.ForayInfo Foray;
 
     public StatusManager* GetStatusManager => Character.GetStatusManager();

@@ -21,7 +21,7 @@ public unsafe partial struct CharacterBase {
     [FieldOffset(0x98)] public int SlotCount; // model slots
     [FieldOffset(0xA0)] public Skeleton* Skeleton; // Client::Graphics::Render::Skeleton
 
-    [Obsolete("Use Models")]
+    [Obsolete("Use Models", true)]
     [FieldOffset(0xA8)] public void** ModelArray; // array of Client::Graphics::Render::Model ptrs size = SlotCount
     [FieldOffset(0xA8)] public Model** Models; // size = SlotCount
     [FieldOffset(0x148)] public void* PostBoneDeformer; // Client::Graphics::Scene::PostBoneDeformer ptr
@@ -46,7 +46,7 @@ public unsafe partial struct CharacterBase {
     public BonePhysicsModule* BonePhysicsModule; // Client::Graphics::Physics::BonePhysicsModule ptr
 
     [FieldOffset(0x224)] public float VfxScale;
-    [Obsolete("Use CharacterDataCBuffer")]
+    [Obsolete("Use CharacterDataCBuffer", true)]
     [FieldOffset(0x240)] public void* CharacterDataCB;
     [FieldOffset(0x240)] public ConstantBuffer* CharacterDataCBuffer; // Size has been observed to be 0x50, contents may be InstanceParameter
 
@@ -69,7 +69,7 @@ public unsafe partial struct CharacterBase {
     public void* TempSlotData; // struct with temporary data for each slot (size = 0x88 * slot count)
 
     //
-    [Obsolete("Use Materials")]
+    [Obsolete("Use Materials", true)]
     [FieldOffset(0x2E8)]
     public void**
         MaterialArray; // array of Client::Graphics::Render::Material ptrs size = SlotCount * 4 (4 material per model max)

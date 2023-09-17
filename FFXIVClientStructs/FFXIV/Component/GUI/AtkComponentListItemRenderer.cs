@@ -10,5 +10,6 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [StructLayout(LayoutKind.Explicit, Size = 0x1A8)]
 public struct AtkComponentListItemRenderer {
     [FieldOffset(0x0)] public AtkComponentButton AtkComponentButton;
+    [FieldOffset(0xF0)] public AtkDragDropInterface AtkDragDropInterface;
     [FieldOffset(0x184)] public int ListItemIndex;
 }

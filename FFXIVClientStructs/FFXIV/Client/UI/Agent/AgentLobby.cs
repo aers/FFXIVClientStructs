@@ -20,7 +20,7 @@ public unsafe partial struct AgentLobby {
 
     [FieldOffset(0x10E0)] public sbyte ServiceAccountIndex;
     [FieldOffset(0x10E1)] public sbyte SelectedCharacterIndex; // index in CharaSelectCharacterList
-    [Obsolete("Renamed to SelectedCharacterContentId")]
+    [Obsolete("Renamed to SelectedCharacterContentId", true)]
     [FieldOffset(0x10E8)] public ulong SelectedCharacterId;
     [FieldOffset(0x10E8)] public ulong SelectedCharacterContentId;
     [FieldOffset(0x10F0)] public byte DataCenter;
