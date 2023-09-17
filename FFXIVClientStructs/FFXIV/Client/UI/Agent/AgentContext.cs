@@ -92,20 +92,12 @@ public unsafe partial struct AgentContext {
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x678)]
-public unsafe struct ContextMenu {
+public unsafe partial struct ContextMenu {
     [FieldOffset(0x00)] public short CurrentEventIndex;
     [FieldOffset(0x02)] public short CurrentEventId;
 
-    [FieldOffset(0x08)]
-    public fixed byte EventParams[0x10 * 33]; // 32 * AtkValue + 1 * AtkValue for submenus with title
-
-    public Span<AtkValue> EventParamSpan {
-        get {
-            fixed (byte* ptr = EventParams) {
-                return new Span<AtkValue>(ptr, 33);
-            }
-        }
-    }
+    [FixedSizeArray<AtkValue>(33)]
+    [FieldOffset(0x08)] public fixed byte EventParams[0x10 * 33]; // 32 * AtkValue + 1 * AtkValue for submenus with title
 
     [FieldOffset(0x428)] public fixed byte EventIdArray[32];
     [FieldOffset(0x450)] public fixed long EventHandlerArray[32];

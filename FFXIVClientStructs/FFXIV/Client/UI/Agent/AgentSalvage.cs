@@ -26,15 +26,8 @@ public unsafe partial struct AgentSalvage {
     [FieldOffset(0x398)] public SalvageResult DesynthItem;
     [FieldOffset(0x3A4)] public uint DesynthItemId;
 
-    [FixedArray(typeof(SalvageResult), 3)]
-    [FieldOffset(0x3A8)] public fixed byte DesynthResult[8 * 3];
-
-    public Span<SalvageResult> DesynthResultSpan {
-        get {
-            fixed (byte* ptr = DesynthResult)
-                return new Span<SalvageResult>(ptr, 3);
-        }
-    }
+    [FixedSizeArray<SalvageResult>(3)]
+    [FieldOffset(0x3A8)] public fixed byte DesynthResults[8 * 3];
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 7C 24 ?? C7 85")]
     public partial void* ItemListRefresh();
