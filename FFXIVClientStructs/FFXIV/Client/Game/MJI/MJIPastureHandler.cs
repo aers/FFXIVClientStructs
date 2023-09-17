@@ -1,11 +1,11 @@
-﻿namespace FFXIVClientStructs.FFXIV.Client.Game.MJI; 
+namespace FFXIVClientStructs.FFXIV.Client.Game.MJI;
 
 
 // ctor 1413EA840 ? - extends EventHandler
-[StructLayout(LayoutKind.Explicit, Size = 0xAE0)]
+[StructLayout(LayoutKind.Explicit, Size = 0xAE0)] // completely lost track of size
 public unsafe partial struct MJIPastureHandler {
     [FieldOffset(0x0)] public void* vtbl;
-    
+
     /// <summary>
     /// An array representing all animals currently present in the pastures on the Island. 
     /// </summary>
@@ -17,28 +17,29 @@ public unsafe partial struct MJIPastureHandler {
     /// the Companion EXD sheet. See <see cref="MinionSlots"/> if information about minion locations is required.
     /// </summary>
     // Warning: This array will change size every time new minions are added!!
-    [FixedSizeArray<bool>(480)]
-    [FieldOffset(0x6F8)] public fixed byte RoamingMinions[480];
+    [FixedSizeArray<bool>(496)]
+    [FieldOffset(0x6F8)] public fixed byte RoamingMinions[496];
 
     /// <summary>
     /// An array containing information on all the minion slots present on the Island Sanctuary.
     /// This array is indexed by an internal ID and does not appear to be grouped by location or similar.
     /// </summary>
-    [FixedSizeArray<MJIMinionSlot>(40)] 
-    [FieldOffset(0x8B8)] public fixed byte MinionSlots[40 * MJIMinionSlot.Size];
+    [FixedSizeArray<MJIMinionSlot>(50)]
+    [FieldOffset(0x8E8)] public fixed byte MinionSlots[50 * MJIMinionSlot.Size];
 
     /// <summary>
     /// Gets the current number of minions roaming the Island Sanctuary.
     /// </summary>
-    [MemberFunction("E8 ?? ?? ?? ?? 3C 28 72 1E")]
+    [MemberFunction("E8 ?? ?? ?? ?? 3A C3 72 1E")]
     public partial byte GetCurrentRoamingMinionCount();
 }
 
 [StructLayout(LayoutKind.Explicit, Size = Size)]
-public struct MJIAnimal {
+public unsafe struct MJIAnimal {
     public const int Size = 0x34;
 
-    [FieldOffset(0x0)] public byte SlotId;
+    [FieldOffset(0x00)] public byte SlotId;
+    [FieldOffset(0x01)] public fixed byte Nickname[24]; // string
     [FieldOffset(0x1C)] public uint BNPCNameId;
     [FieldOffset(0x20)] public uint ObjectId;
     [FieldOffset(0x24)] public byte AnimalType;
@@ -58,10 +59,10 @@ public struct MJIMinionSlot {
     /// May be set to 40 if the slot is currently empty or uninitialized.
     /// </remarks>
     [FieldOffset(0x0)] public byte SlotId;
-    
+
     [FieldOffset(0x4)] public uint ObjectId;
     [FieldOffset(0x8)] public ushort MinionId;
-    
+
     /// <summary>
     /// The MJIMinionPopAreaId that this minion currently resides in.
     /// </summary>

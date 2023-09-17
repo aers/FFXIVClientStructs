@@ -1,4 +1,4 @@
-﻿using System.Text;
+using System.Text;
 using FFXIVClientStructs.FFXIV.Client.Graphics;
 using FFXIVClientStructs.FFXIV.Client.System.Memory;
 using FFXIVClientStructs.FFXIV.Client.System.String;
@@ -6,8 +6,7 @@ using FFXIVClientStructs.FFXIV.Client.System.String;
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
 [Flags]
-public enum TextFlags
-{
+public enum TextFlags {
     AutoAdjustNodeSize = 0x01,
     Bold = 0x02,
     Italic = 0x04,
@@ -19,13 +18,11 @@ public enum TextFlags
 }
 
 [Flags]
-public enum TextFlags2
-{
+public enum TextFlags2 {
     Ellipsis = 0x04
 }
 
-public enum FontType : byte
-{
+public enum FontType : byte {
     Axis = 0x0,
     MiedingerMed = 0x1,
     Miedinger = 0x2,
@@ -44,8 +41,7 @@ public enum FontType : byte
 // common CreateAtkNode function E8 ?? ?? ?? ?? 48 8B 4E 08 49 8B D5 
 // type 3
 [StructLayout(LayoutKind.Explicit, Size = 0x158)]
-public unsafe partial struct AtkTextNode : ICreatable
-{
+public unsafe partial struct AtkTextNode : ICreatable {
     [FieldOffset(0x0)] public AtkResNode AtkResNode;
     [FieldOffset(0xA8)] public uint TextId;
     [FieldOffset(0xAC)] public ByteColor TextColor;
@@ -92,23 +88,32 @@ public unsafe partial struct AtkTextNode : ICreatable
     [MemberFunction("E8 ?? ?? ?? ?? 0F B7 6D 08")]
     public partial void GetTextDrawSize(ushort* outWidth, ushort* outHeight, byte* text = null, int start = 0,
         int end = -1, bool considerScale = false);
-    
+
     [MemberFunction("E8 ?? ?? ?? ?? 49 8B 0E 48 8B 9E")]
     public partial void SetAlignment(AlignmentType alignmentType);
 
     [MemberFunction("E8 ?? ?? ?? ?? 45 33 C0 B2 18")]
     public partial void SetFont(FontType fontType);
-    
+
     public void SetText(Span<byte> span) {
         fixed (byte* ptr = span) SetText(ptr);
     }
-    
-    public void SetText(byte[] bytes)
-    {
+
+    public void SetText(byte[] bytes) {
         var charPtr = Marshal.AllocHGlobal(bytes.Length + 1);
         Marshal.Copy(bytes, 0, charPtr, bytes.Length);
         Marshal.WriteByte(charPtr, bytes.Length, 0);
-        SetText((byte*) charPtr.ToPointer());
+        SetText((byte*)charPtr.ToPointer());
         Marshal.FreeHGlobal(charPtr);
+    }
+
+    public AlignmentType AlignmentType {
+        get => (AlignmentType)(AlignmentFontType & 0x0F);
+        set => SetAlignment(value);
+    }
+
+    public FontType FontType {
+        get => (FontType)((AlignmentFontType & 0xF0) >> 4);
+        set => SetFont(value);
     }
 }

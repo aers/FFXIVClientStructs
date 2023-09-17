@@ -1,11 +1,10 @@
-﻿using FFXIVClientStructs.FFXIV.Component.GUI;
+using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 [Addon("_PartyList")]
-[StructLayout(LayoutKind.Explicit, Size = 0x13D8)]
-public unsafe struct AddonPartyList
-{
+[StructLayout(LayoutKind.Explicit, Size = 0x13E0)]
+public unsafe struct AddonPartyList {
     [FieldOffset(0x000)] public AtkUnitBase AtkUnitBase;
     [FieldOffset(0x220)] public PartyMembers PartyMember; // 8 PartyListMember
     [FieldOffset(0x9E0)] public TrustMembers TrustMember; // 7 PartyListMember
@@ -19,30 +18,29 @@ public unsafe struct AddonPartyList
 
     [FieldOffset(0x1360)] public fixed short Edited[17]; // 0X11 if edited? Need comfirm
 
-    [FieldOffset(0x1388)] public AtkNineGridNode* BackgroundNineGridNode;
-    [FieldOffset(0x1390)] public AtkTextNode* PartyTypeTextNode; // Solo Light/Full Party
-    [FieldOffset(0x1398)] public AtkResNode* LeaderMarkResNode;
-    [FieldOffset(0x13A0)] public AtkResNode* MpBarSpecialResNode;
-    [FieldOffset(0x13A8)] public AtkTextNode* MpBarSpecialTextNode;
+    [FieldOffset(0x1390)] public AtkNineGridNode* BackgroundNineGridNode;
+    [FieldOffset(0x1398)] public AtkTextNode* PartyTypeTextNode; // Solo Light/Full Party
+    [FieldOffset(0x13A0)] public AtkResNode* LeaderMarkResNode;
+    [FieldOffset(0x13A8)] public AtkResNode* MpBarSpecialResNode;
+    [FieldOffset(0x13B0)] public AtkTextNode* MpBarSpecialTextNode;
 
-    [FieldOffset(0x13B0)] public int MemberCount;
-    [FieldOffset(0x13B4)] public int TrustCount;
-    [FieldOffset(0x13B8)] public int EnmityLeaderIndex; // Starts from 0 (-1 if no leader)
-    [FieldOffset(0x13BC)] public int HideWhenSolo;
+    [FieldOffset(0x13B8)] public int MemberCount;
+    [FieldOffset(0x13BC)] public int TrustCount;
+    [FieldOffset(0x13C0)] public int EnmityLeaderIndex; // Starts from 0 (-1 if no leader)
+    [FieldOffset(0x13C4)] public int HideWhenSolo;
 
-    [FieldOffset(0x13C0)] public int HoveredIndex;
-    [FieldOffset(0x13C4)] public int TargetedIndex;
+    [FieldOffset(0x13C8)] public int HoveredIndex;
+    [FieldOffset(0x13CC)] public int TargetedIndex;
 
-    [FieldOffset(0x13C8)] public int Unknown1410;
-    [FieldOffset(0x13CC)] public int Unknown1414;
-    [FieldOffset(0x13D0)] public byte Unknown1418;
+    [FieldOffset(0x13D0)] public int Unknown1410;
+    [FieldOffset(0x13D4)] public int Unknown1414;
+    [FieldOffset(0x13D8)] public byte Unknown1418;
 
-    [FieldOffset(0x13D1)] public byte PetCount; // or PetSummoned?
-    [FieldOffset(0x13D2)] public byte ChocoboCount; // or ChocoboSummoned?
+    [FieldOffset(0x13DA)] public byte PetCount; // or PetSummoned?
+    [FieldOffset(0x13DB)] public byte ChocoboCount; // or ChocoboSummoned?
 
     [StructLayout(LayoutKind.Explicit, Size = PartyListMemberStruct.Size * 8)]
-    public struct PartyMembers
-    {
+    public struct PartyMembers {
         [FieldOffset(PartyListMemberStruct.Size * 00)]
         public PartyListMemberStruct PartyMember0;
 
@@ -67,12 +65,9 @@ public unsafe struct AddonPartyList
         [FieldOffset(PartyListMemberStruct.Size * 07)]
         public PartyListMemberStruct PartyMember7;
 
-        public PartyListMemberStruct this[int i]
-        {
-            get
-            {
-                return i switch
-                {
+        public PartyListMemberStruct this[int i] {
+            get {
+                return i switch {
                     0 => PartyMember0,
                     1 => PartyMember1,
                     2 => PartyMember2,
@@ -88,8 +83,7 @@ public unsafe struct AddonPartyList
     }
 
     [StructLayout(LayoutKind.Explicit, Size = PartyListMemberStruct.Size * 7)]
-    public struct TrustMembers
-    {
+    public struct TrustMembers {
         [FieldOffset(PartyListMemberStruct.Size * 00)]
         public PartyListMemberStruct Trust0;
 
@@ -111,12 +105,9 @@ public unsafe struct AddonPartyList
         [FieldOffset(PartyListMemberStruct.Size * 06)]
         public PartyListMemberStruct Trust6;
 
-        public PartyListMemberStruct this[int i]
-        {
-            get
-            {
-                return i switch
-                {
+        public PartyListMemberStruct this[int i] {
+            get {
+                return i switch {
                     0 => Trust0,
                     1 => Trust1,
                     2 => Trust2,
@@ -131,8 +122,7 @@ public unsafe struct AddonPartyList
     }
 
     [StructLayout(LayoutKind.Explicit, Size = Size)]
-    public struct PartyListMemberStruct
-    {
+    public struct PartyListMemberStruct {
         public const int Size = 0xF8;
 
         [FieldOffset(0x00)] public StatusIcons StatusIcon;
@@ -158,8 +148,7 @@ public unsafe struct AddonPartyList
         [FieldOffset(0xF0)] public byte EmnityByte; //01 or 02 or FF 
 
         [StructLayout(LayoutKind.Explicit, Size = 0x50)]
-        public struct StatusIcons
-        {
+        public struct StatusIcons {
             [FieldOffset(0x00)] public AtkComponentIconText* StatusIcon0;
             [FieldOffset(0x08)] public AtkComponentIconText* StatusIcon1;
             [FieldOffset(0x10)] public AtkComponentIconText* StatusIcon2;
@@ -171,12 +160,9 @@ public unsafe struct AddonPartyList
             [FieldOffset(0x40)] public AtkComponentIconText* StatusIcon8;
             [FieldOffset(0x48)] public AtkComponentIconText* StatusIcon9;
 
-            public AtkComponentIconText* this[int i]
-            {
-                get
-                {
-                    return i switch
-                    {
+            public AtkComponentIconText* this[int i] {
+                get {
+                    return i switch {
                         0 => StatusIcon0,
                         1 => StatusIcon1,
                         2 => StatusIcon2,

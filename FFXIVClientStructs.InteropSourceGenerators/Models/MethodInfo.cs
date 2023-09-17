@@ -1,4 +1,4 @@
-﻿using System.Collections.Immutable;
+using System.Collections.Immutable;
 using FFXIVClientStructs.InteropGenerator;
 using FFXIVClientStructs.InteropSourceGenerators.Extensions;
 using LanguageExt;
@@ -11,11 +11,9 @@ using static LanguageExt.Prelude;
 namespace FFXIVClientStructs.InteropSourceGenerators.Models;
 
 internal sealed record MethodInfo(string Name, string Modifiers, string ReturnType, bool IsStatic,
-    ImmutableArray<ParameterInfo> Parameters)
-{
+    ImmutableArray<ParameterInfo> Parameters) {
     public static Validation<DiagnosticInfo, MethodInfo> GetFromRoslyn(MethodDeclarationSyntax methodSyntax,
-        IMethodSymbol methodSymbol)
-    {
+        IMethodSymbol methodSymbol) {
         Validation<DiagnosticInfo, MethodDeclarationSyntax> validSyntax =
             methodSyntax.HasModifier(SyntaxKind.PartialKeyword)
                 ? Success<DiagnosticInfo, MethodDeclarationSyntax>(methodSyntax)
@@ -55,15 +53,13 @@ internal sealed record MethodInfo(string Name, string Modifiers, string ReturnTy
 
     public string GetReturnString() => ReturnType == "void" ? "" : "return ";
 
-    public void RenderStart(IndentedStringBuilder builder)
-    {
+    public void RenderStart(IndentedStringBuilder builder) {
         builder.AppendLine($"{Modifiers} {ReturnType} {Name}({GetParameterTypesAndNamesString()})");
         builder.AppendLine("{");
         builder.Indent();
     }
 
-    public void RenderStartOverload(IndentedStringBuilder builder, string origType, string replaceType, Option<string> ignoreArgument)
-    {
+    public void RenderStartOverload(IndentedStringBuilder builder, string origType, string replaceType, Option<string> ignoreArgument) {
         string paramString = string.Join(", ", Parameters
             .Map(p => p.Type == origType && p.Name != ignoreArgument ? p with { Type = replaceType } : p)
             .Map(p => $"{p.Type} {p.Name}{p.DefaultValue.Match(Some: (p) => $" = {p}", None: "")}"));
@@ -72,8 +68,7 @@ internal sealed record MethodInfo(string Name, string Modifiers, string ReturnTy
         builder.Indent();
     }
 
-    public void RenderEnd(IndentedStringBuilder builder)
-    {
+    public void RenderEnd(IndentedStringBuilder builder) {
         builder.DecrementIndent();
         builder.AppendLine("}");
     }

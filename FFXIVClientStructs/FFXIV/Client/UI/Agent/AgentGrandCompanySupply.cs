@@ -1,24 +1,22 @@
-﻿using FFXIVClientStructs.FFXIV.Client.System.String;
+using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.GrandCompanySupply)]
-[StructLayout(LayoutKind.Explicit, Size = 0x98)]
-public unsafe struct AgentGrandCompanySupply
-{
+[StructLayout(LayoutKind.Explicit, Size = 0x2F8)]
+public unsafe struct AgentGrandCompanySupply {
     [FieldOffset(0x00)] public AgentInterface AgentInterface;
 
     [FieldOffset(0x60)] public SupplyProvisioningData* SupplyProvisioningData;
     [FieldOffset(0x68)] public GrandCompanyItem* ItemArray;
-    
+
     [FieldOffset(0x78)] public int NumItems;
     [FieldOffset(0x90)] public int SelectedTab;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x790)]
-public unsafe partial struct SupplyProvisioningData
-{
+public unsafe partial struct SupplyProvisioningData {
     [FixedSizeArray<SupplyProvisioningItem>(8)]
     [FieldOffset(0x40)] public fixed byte SupplyData[0xA8 * 8];
 
@@ -27,8 +25,7 @@ public unsafe partial struct SupplyProvisioningData
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0xA8)]
-public struct SupplyProvisioningItem
-{
+public struct SupplyProvisioningItem {
     [FieldOffset(0x00)] public int ItemId;
     [FieldOffset(0x04)] public int ExpReward;
     [FieldOffset(0x08)] public int SealReward;
@@ -40,8 +37,7 @@ public struct SupplyProvisioningItem
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0xA0)]
-public struct GrandCompanyItem
-{
+public struct GrandCompanyItem {
     [FieldOffset(0x00)] public Utf8String ItemName;
     [FieldOffset(0x70)] public int IconID;
     [FieldOffset(0x74)] public int ExpReward;

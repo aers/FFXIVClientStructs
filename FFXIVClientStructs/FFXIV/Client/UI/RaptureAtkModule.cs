@@ -1,5 +1,6 @@
-﻿using FFXIVClientStructs.FFXIV.Client.Game.Object;
+using FFXIVClientStructs.FFXIV.Client.Game.Object;
 using FFXIVClientStructs.FFXIV.Client.System.String;
+using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
@@ -7,32 +8,50 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 // Client::UI::RaptureAtkModule
 //   Component::GUI::AtkModule
 //     Component::GUI::AtkModuleInterface
-[StructLayout(LayoutKind.Explicit, Size = 0x289F8)]
-public partial struct RaptureAtkModule
-{
+[StructLayout(LayoutKind.Explicit, Size = 0x28C80)]
+public unsafe partial struct RaptureAtkModule {
+    public static RaptureAtkModule* Instance() => UIModule.Instance()->GetRaptureAtkModule();
+
     [FieldOffset(0x0)] public AtkModule AtkModule;
 
-    [FieldOffset(0x11690)] public RaptureAtkUnitManager RaptureAtkUnitManager;
+    [FieldOffset(0x10A70)] public Utf8String* AddonNames; // pointer to an array of 837 Utf8Strings
 
-    [FieldOffset(0x1B310)] public RaptureAtkModuleFlags Flags;
-    
-    [FieldOffset(0x1B618)] public int NameplateInfoCount;
-    [FieldOffset(0x1B620)] public NamePlateInfo NamePlateInfoArray; // 0-50, &NamePlateInfoArray[i]
+    [FieldOffset(0x10B50)] public AgentModule AgentModule;
+
+    [FieldOffset(0x11910)] public RaptureAtkUnitManager RaptureAtkUnitManager;
+
+    [FieldOffset(0x1B590), Obsolete("Use RaptureAtkUnitManager.Flags", true)] public RaptureAtkModuleFlags Flags; // TODO: this is actually at RaptureAtkUnitManager + 0x9C80
+
+    [FieldOffset(0x1B8A0)] public int NameplateInfoCount;
+    [FieldOffset(0x1B8A8)] public NamePlateInfo NamePlateInfoArray; // 0-50, &NamePlateInfoArray[i]
+
+    [FieldOffset(0x28C38)] public AtkTexture CharaViewDefaultBackgroundTexture; // "ui/common/CharacterBg.tex" (or _hr1 variant)
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 44 24 ?? 48 89 9F")]
     public partial bool ChangeUiMode(uint uiMode);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 39 77 28 0F 84")]
+    public partial bool IncRefNumberArrayData(int index);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 75 28")]
+    public partial bool DecRefNumberArrayData(int index);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 49 83 7E ?? ?? 74 0D")]
+    public partial bool IncRefStringArrayData(int index);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 46 58 48 85 C0")]
+    public partial bool DecRefStringArrayData(int index);
 
     [VirtualFunction(39)]
     public partial void SetUiVisibility(bool uiVisible);
 
     public bool IsUiVisible {
-        get => !Flags.HasFlag(RaptureAtkModuleFlags.UiHidden);
+        get => !RaptureAtkUnitManager.Flags.HasFlag(RaptureAtkModuleFlags.UiHidden);
         set => SetUiVisibility(value);
     }
-    
+
     [StructLayout(LayoutKind.Explicit, Size = 0x248)]
-    public struct NamePlateInfo
-    {
+    public struct NamePlateInfo {
         [FieldOffset(0x00)] public GameObjectID ObjectID;
         [FieldOffset(0x30)] public Utf8String Name;
         [FieldOffset(0x98)] public Utf8String FcName;

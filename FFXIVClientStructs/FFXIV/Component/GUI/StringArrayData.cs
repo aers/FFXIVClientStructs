@@ -1,8 +1,7 @@
-﻿namespace FFXIVClientStructs.FFXIV.Component.GUI;
+namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x30)]
-public unsafe partial struct StringArrayData
-{
+public unsafe partial struct StringArrayData {
     [FieldOffset(0x0)] public AtkArrayData AtkArrayData;
     [FieldOffset(0x20)] public byte** StringArray;
     [FieldOffset(0x28)] public byte** ManagedStringArray;
@@ -23,7 +22,7 @@ public unsafe partial struct StringArrayData
     /// The game will allocate memory in the UI space and copy the text. The passed pointer can then be freed right after the SetValue call.<br/>
     /// Internally, the pointer to the allocated memory is (also) stored in ManagedStringArray to allow SetValue to reuse or reallocate the space as needed.
     /// </param>
-    /// <param name="silent">If <c>false</c> and the value was changed, HasModifiedData will be set to <c>true</c>.</param>
+    /// <param name="silent">If <c>false</c> and the value was changed, UpdateState will be set to <c>1</c> to request an update on subscribed addons.</param>
     [MemberFunction("E8 ?? ?? ?? ?? F6 47 14 08")]
     [GenerateCStrOverloads]
     public partial void SetValue(int index, byte* value, bool readBeforeWrite, bool managed, bool silent);
@@ -33,14 +32,14 @@ public unsafe partial struct StringArrayData
     public partial void SetValueForced(int index, byte* value, bool notify);
 
     public void SetValue(int index, byte* value, bool notify) {
-	    SetValueForced(index, value, notify);
+        SetValueForced(index, value, notify);
     }
 
     public void SetValue(int index, string value, bool notify) {
-	    SetValueForced(index, value, notify);
+        SetValueForced(index, value, notify);
     }
 
     public void SetValue(int index, byte[] value, bool notify) {
-	    SetValueForced(index, value, notify);
+        SetValueForced(index, value, notify);
     }
 }

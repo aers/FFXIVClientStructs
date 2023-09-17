@@ -1,31 +1,31 @@
-﻿namespace FFXIVClientStructs.FFXIV.Client.Game.UI; 
+namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
 [StructLayout(LayoutKind.Explicit, Size = 0xB0)]
-public unsafe partial struct ContentsFinder
-{
-    public static ContentsFinder* Instance() => &UIState.Instance()->ContentsFinder;
-    
+public unsafe partial struct ContentsFinder {
+    [StaticAddress("0F B6 FA 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 80 78 59 02", 6)]
+    public static partial ContentsFinder* Instance();
+
     [FieldOffset(0x00)] public void* vtbl;
     [FieldOffset(0x18)] public LootRule LootRules;
-    
-    [Obsolete("Use IsUnrestrictedParty boolean property instead", true)] 
+
+    [Obsolete("Use IsUnrestrictedParty boolean property instead", true)]
     [FieldOffset(0x19)] public byte UnrestrictedParty;
-    
+
     [Obsolete("Use IsMinimalIL boolean property instead", true)]
     [FieldOffset(0x1A)] public byte MinimalIL;
-    
+
     [Obsolete("Use IsSilenceEcho boolean property instead", true)]
     [FieldOffset(0x1B)] public byte SilenceEcho;
-    
+
     [Obsolete("Use IsExplorerMode boolean property instead", true)]
     [FieldOffset(0x1C)] public byte ExplorerMode;
-    
+
     [Obsolete("Use IsLevelSync boolean property instead", true)]
     [FieldOffset(0x1D)] public byte LevelSync;
-    
+
     [Obsolete("Use IsLimitedLevelingRoulette boolean property instead", true)]
     [FieldOffset(0x1E)] public byte LimitedLevelingRoulette;
-    
+
     [FieldOffset(0x19)] public bool IsUnrestrictedParty;
     [FieldOffset(0x1A)] public bool IsMinimalIL;
     [FieldOffset(0x1B)] public bool IsSilenceEcho;
@@ -41,9 +41,8 @@ public unsafe partial struct ContentsFinder
     public partial uint SetJoinInProgress(bool isUnrestrictedParty);
 
     public DateTime GetEnteredQueueDateTime() => DateTime.UnixEpoch.AddSeconds(EnteredQueueTimestamp);
-    
-    public enum LootRule : byte 
-    {
+
+    public enum LootRule : byte {
         Normal = 0,
         GreedOnly = 1,
         Lootmaster = 2

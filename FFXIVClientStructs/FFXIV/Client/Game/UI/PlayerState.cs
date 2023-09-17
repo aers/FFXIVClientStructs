@@ -4,9 +4,8 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
 // Client::Game::UI::PlayerState
 // ctor "48 81 C1 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? C6 83 ?? ?? ?? ?? ??"
-[StructLayout(LayoutKind.Explicit, Size = 0x7D0)]
-public unsafe partial struct PlayerState
-{
+[StructLayout(LayoutKind.Explicit, Size = 0x7E8)]
+public unsafe partial struct PlayerState {
     [FieldOffset(0x00)] public byte IsLoaded;
     [FieldOffset(0x01)] public fixed byte CharacterName[64];
     [FieldOffset(0x41)] public fixed byte PSNOnlineID[17];
@@ -40,7 +39,7 @@ public unsafe partial struct PlayerState
     [FieldOffset(0x139)] public byte FirstClass;
     [FieldOffset(0x13A)] public byte StartTown;
     [FieldOffset(0x13B)] public byte QuestSpecialFlags;
-    
+
     [FieldOffset(0x154)] public int BaseStrength;
     [FieldOffset(0x158)] public int BaseDexterity;
     [FieldOffset(0x15C)] public int BaseVitality;
@@ -48,8 +47,6 @@ public unsafe partial struct PlayerState
     [FieldOffset(0x164)] public int BaseMind;
     [FieldOffset(0x168)] public int BasePiety;
     [FieldOffset(0x16C)] public fixed int Attributes[74];
-
-    [FieldOffset(0x2E1)] public byte NumOwnedMounts;
 
     [FieldOffset(0x294)] public byte GrandCompany;
     [FieldOffset(0x295)] public byte GCRankMaelstrom;
@@ -62,35 +59,29 @@ public unsafe partial struct PlayerState
 
     [FieldOffset(0x2A0)] public uint BaseRestedExperience;
 
-    [FieldOffset(0x430)] public uint NumFishCaught;
-    [FieldOffset(0x434)] public uint FishingBait;
+    [FieldOffset(0x2E8)] public byte NumOwnedMounts;
 
-    [FieldOffset(0x464)] public uint NumSpearfishCaught;
+    [FieldOffset(0x438)] public uint NumFishCaught;
+    [FieldOffset(0x43C)] public uint FishingBait;
+
+    [FieldOffset(0x46C)] public uint NumSpearfishCaught;
 
     /// <remarks>
     /// Index is column 27 of ContentRoulette sheet.<br/>
     /// See also: <see cref="RouletteController.IsRouletteComplete" />
     /// </remarks>
-    [FieldOffset(0x46C)] public fixed byte ContentRouletteCompletion[12];
-    [FieldOffset(0x478)] public short PlayerCommendations;
-    /// <remarks>
-    /// 0 = Idle Pose<br/>
-    /// 1 = Unknown<br/>
-    /// 2 = Sit Pose<br/>
-    /// 3 = Ground Sit Pose<br/>
-    /// 4 = Bed Pose<br/>
-    /// 5 = Accessorie Pose: Umbrellas<br/>
-    /// 6 = Accessorie Pose: Glasses, Wings
-    /// </remarks>
-    [FieldOffset(0x47A)] public fixed byte SelectedPoses[7];
-    [FieldOffset(0x481)] public byte PlayerStateFlags1;
-    [FieldOffset(0x482)] public byte PlayerStateFlags2;
-    [FieldOffset(0x483)] public byte PlayerStateFlags3;
+    [FieldOffset(0x474)] public fixed byte ContentRouletteCompletion[12];
+    [FieldOffset(0x480)] public short PlayerCommendations;
 
-    [FieldOffset(0x501)] public fixed byte UnlockFlags[44];
+    [FieldOffset(0x482)] public fixed byte SelectedPoses[7];
+    [FieldOffset(0x489)] public byte PlayerStateFlags1;
+    [FieldOffset(0x48A)] public byte PlayerStateFlags2;
+    [FieldOffset(0x48B)] public byte PlayerStateFlags3;
+
+    [FieldOffset(0x509)] public fixed byte UnlockFlags[44];
 
     /// <summary>Carrier Level of Delivery Moogle Quests</summary>
-    [FieldOffset(0x531)] public byte DeliveryLevel;
+    [FieldOffset(0x539)] public byte DeliveryLevel;
 
     /// <summary>
     /// Flag containing information about which DoH job the player is specialized in.
@@ -101,37 +92,37 @@ public unsafe partial struct PlayerState
     /// <see cref="IsMeisterFlagMaxCount" /><br/>
     /// <see cref="IsMeisterFlagAndHasSoulStoneEquipped" />
     /// </remarks>
-    [FieldOffset(0x533)] public byte MeisterFlag;
+    [FieldOffset(0x53B)] public byte MeisterFlag;
 
-    [FieldOffset(0x538)] public uint SquadronMissionCompletionTimestamp;
-    [FieldOffset(0x53C)] public uint SquadronTrainingCompletionTimestamp;
-    [FieldOffset(0x540)] public ushort ActiveGcArmyExpedition;
-    [FieldOffset(0x542)] public ushort ActiveGcArmyTraining;
+    [FieldOffset(0x540)] public uint SquadronMissionCompletionTimestamp;
+    [FieldOffset(0x544)] public uint SquadronTrainingCompletionTimestamp;
+    [FieldOffset(0x548)] public ushort ActiveGcArmyExpedition;
+    [FieldOffset(0x54A)] public ushort ActiveGcArmyTraining;
 
     #region Weekly Bonus/Weekly Bingo/Wondrous Tails Fields (packet reader: "4C 8B D2 48 8D 81")
 
     /// <summary>RowIds of WeeklyBingoOrderData sheet</summary>
-    [FieldOffset(0x640)] public fixed byte WeeklyBingoOrderData[16];
+    [FieldOffset(0x658)] public fixed byte WeeklyBingoOrderData[16];
     /// <summary>RowIds of WeeklyBingoRewardData sheet</summary>
-    [FieldOffset(0x650)] public fixed byte WeeklyBingoRewardData[4];
+    [FieldOffset(0x668)] public fixed byte WeeklyBingoRewardData[4];
     /// <summary>Bitflags of placed stickers.</summary>
     /// <remarks>Use IsWeeklyBingoStickerPlaced(index) and WeeklyBingoNumPlacedStickers instead.</remarks>
-    [FieldOffset(0x654)] private readonly ushort _weeklyBingoStickers;
+    [FieldOffset(0x66C)] private readonly ushort _weeklyBingoStickers;
 
     /// <remarks>Use GetWeeklyBingoExpireUnixTimestamp(), WeeklyBingoNumSecondChancePoints and HasWeeklyBingoJournal instead</remarks>
-    [FieldOffset(0x658)] private readonly uint _weeklyBingoFlags;
-    [FieldOffset(0x65C)] private fixed byte _weeklyBingoTaskStatus[4];
-    [FieldOffset(0x660)] public byte WeeklyBingoRequestOpenBingoNo;
+    [FieldOffset(0x670)] private readonly uint _weeklyBingoFlags;
+    [FieldOffset(0x674)] private fixed byte _weeklyBingoTaskStatus[4];
+    [FieldOffset(0x678)] public byte WeeklyBingoRequestOpenBingoNo;
 
-    [FieldOffset(0x69C)] public byte WeeklyBingoExpMultiplier;
-    [FieldOffset(0x69D)] public bool WeeklyBingoUnk63;
+    [FieldOffset(0x6B4)] public byte WeeklyBingoExpMultiplier;
+    [FieldOffset(0x6B5)] public bool WeeklyBingoUnk63;
 
     #endregion
 
-    [FieldOffset(0x734)] public byte MentorVersion; // latest is 2
+    [FieldOffset(0x74C)] public byte MentorVersion; // latest is 2
 
-    [FieldOffset(0x738)] public fixed uint DesynthesisLevels[8];
-    
+    [FieldOffset(0x750)] public fixed uint DesynthesisLevels[8];
+
     [StaticAddress("48 8D 0D ?? ?? ?? ?? 4D 8B F9", 3)]
     public static partial PlayerState* Instance();
 
@@ -170,6 +161,18 @@ public unsafe partial struct PlayerState
     [MemberFunction("E8 ?? ?? ?? ?? 38 43 45")]
     public partial bool IsMeisterFlagAndHasSoulStoneEquipped(uint classJobId);
 
+    /// <summary> Get the current state of a specific type of pose. </summary>
+    /// <param name="pose"> The type of pose. </param>
+    /// <returns> The 0-based value of the pose. </returns>
+    public byte CurrentPose(PoseType pose)
+        => !Enum.IsDefined(pose) ? (byte)0 : SelectedPoses[(int)pose];
+
+    /// <summary> Get the last valid value for a specific type of pose. </summary>
+    /// <param name="pose"> The type of pose. </param>
+    /// <remarks> The returned value represents the count of the type of pose - 1. </remarks>
+    [MemberFunction("E8 ?? ?? ?? ?? FE C3 44 8B F0")]
+    public static partial byte AvailablePoses(PoseType pose);
+
     #region Unlocks
 
     /// <summary>
@@ -177,7 +180,7 @@ public unsafe partial struct PlayerState
     /// </summary>
     /// <param name="mountId">The ID of the mount to look up.</param>
     /// <returns>Returns true if the mount has been unlocked.</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 5C 8B CB")]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 5D 8B CB")]
     public partial bool IsMountUnlocked(uint mountId);
 
     /// <summary>
@@ -239,8 +242,8 @@ public unsafe partial struct PlayerState
             return false;
         var id = aetherCurrentId - 0x2B0000;
         var idx = id >> 3;
-	    var flag = 1 << (byte)(id + idx * -8 & 0x1F);
-	    return (UnlockFlags[idx] & flag) != 0;
+        var flag = 1 << (byte)(id + idx * -8 & 0x1F);
+        return (UnlockFlags[idx] & flag) != 0;
     }
 
     /// <summary>
@@ -254,8 +257,7 @@ public unsafe partial struct PlayerState
 
     #region Weekly Bonus/Weekly Bingo/Wondrous Tails
 
-    public enum WeeklyBingoTaskStatus
-    {
+    public enum WeeklyBingoTaskStatus {
         /// <summary>Incomplete task.</summary>
         Open,
         /// <summary>Completed task, but sticker not placed.</summary>
@@ -353,8 +355,7 @@ public unsafe partial struct PlayerState
     #endregion
 }
 
-public enum PlayerStateFlag : uint
-{
+public enum PlayerStateFlag : uint {
     IsLoginSecurityToken = 1,
     IsBuddyInStable = 2,
     IsMentorStatusActive = 7,
@@ -364,3 +365,14 @@ public enum PlayerStateFlag : uint
     IsPvPMentorStatusActive = 11,
     Unknown14 = 14,
 }
+
+
+public enum PoseType : byte {
+    Idle = 0,
+    WeaponDrawn = 1,
+    Sit = 2,
+    GroundSit = 3,
+    Doze = 4,
+    Umbrella = 5,
+    Accessory = 6,
+};

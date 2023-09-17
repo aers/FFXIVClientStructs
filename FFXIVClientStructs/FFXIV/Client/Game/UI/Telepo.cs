@@ -1,11 +1,10 @@
-﻿namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
+namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 // Client::Game::UI::Telepo
 
 // size = 0x58
 // ctor E8 ?? ?? ?? ?? 89 B3 ?? ?? ?? ?? 48 8D 8B ?? ?? ?? ?? 48 8D 05
 [StructLayout(LayoutKind.Explicit, Size = 0x58)]
-public unsafe partial struct Telepo
-{
+public unsafe partial struct Telepo {
     [FieldOffset(0x00)] public void* vtbl;
     [FieldOffset(0x10)] public StdVector<TeleportInfo> TeleportList;
     [FieldOffset(0x28)] public SelectUseTicketInvoker UseTicketInvoker;
@@ -16,7 +15,7 @@ public unsafe partial struct Telepo
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4B 10 84 C0 48 8B 01 74 2C")]
     public partial bool Teleport(uint aetheryteID, byte subIndex);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 89 46 68 4C 8D 45 50")]
+    [MemberFunction("E8 ?? ?? ?? ?? 49 89 47 68")]
     public partial void* UpdateAetheryteList();
 
     /// Territories have aetherstream coordinates X and Y, an associated ExpansionValue and an associated Plane in TerritoryTypeTelepo.
@@ -32,8 +31,7 @@ public unsafe partial struct Telepo
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x20)]
-public struct TeleportInfo
-{
+public struct TeleportInfo {
     [FieldOffset(0x00)] public uint AetheryteId;
     [FieldOffset(0x04)] public uint GilCost;
     [FieldOffset(0x08)] public ushort TerritoryId;
@@ -48,8 +46,7 @@ public struct TeleportInfo
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x28)]
-public unsafe partial struct SelectUseTicketInvoker
-{
+public unsafe partial struct SelectUseTicketInvoker {
     [FieldOffset(0x00)] public void* vtbl;
     [FieldOffset(0x10)] public Telepo* Telepo;
 

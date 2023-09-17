@@ -1,4 +1,4 @@
-﻿using FFXIVClientStructs.FFXIV.Component.GUI;
+using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
@@ -7,8 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //     Component::GUI::AtkEventListener
 [Addon("GrandCompanySupplyReward")]
 [StructLayout(LayoutKind.Explicit, Size = 0x230)]
-public unsafe struct AddonGrandCompanySupplyReward
-{
+public unsafe struct AddonGrandCompanySupplyReward {
     [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
     [FieldOffset(0x220)] public AtkComponentButton* DeliverButton;
     [FieldOffset(0x228)] public AtkComponentButton* CancelButton;

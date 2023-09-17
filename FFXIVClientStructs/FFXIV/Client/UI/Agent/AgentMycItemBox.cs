@@ -1,11 +1,10 @@
-﻿using FFXIVClientStructs.FFXIV.Component.GUI;
+using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.MycItemBox)]
 [StructLayout(LayoutKind.Explicit, Size = 0x58)]
-public unsafe struct AgentMycItemBox
-{
+public unsafe struct AgentMycItemBox {
     [FieldOffset(0x00)] public AgentInterface AgentInterface;
 
     /// <remarks>
@@ -15,9 +14,8 @@ public unsafe struct AgentMycItemBox
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x1580)]
-public unsafe partial struct MycItemBoxData
-{
-    [FixedSizeArray<MycItemCategory>(7)] 
+public unsafe partial struct MycItemBoxData {
+    [FixedSizeArray<MycItemCategory>(7)]
     [FieldOffset(0x08)] public fixed byte ItemCacheArray[7 * 0x184];
 
     [FieldOffset(0x08)] public MycItemCategory OffensiveCache;
@@ -27,10 +25,10 @@ public unsafe partial struct MycItemBoxData
     [FieldOffset(0x618)] public MycItemCategory TacticalCache;
     [FieldOffset(0x79C)] public MycItemCategory DetrimentalCache;
     [FieldOffset(0x920)] public MycItemCategory ItemRelatedCache;
-    
-    [FixedSizeArray<MycItemCategory>(7)] 
+
+    [FixedSizeArray<MycItemCategory>(7)]
     [FieldOffset(0xAA4)] public fixed byte ItemHolsterArray[7 * 0x184];
-    
+
     [FieldOffset(0xAA4)] public MycItemCategory OffensiveHolster;
     [FieldOffset(0xC28)] public MycItemCategory DefensiveHolster;
     [FieldOffset(0xDAC)] public MycItemCategory RestorativeHolster;
@@ -44,8 +42,7 @@ public unsafe partial struct MycItemBoxData
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x184)]
-public unsafe partial struct MycItemCategory
-{
+public unsafe partial struct MycItemCategory {
     [FixedSizeArray<MycItem>(48)]
     [FieldOffset(0x00)] public fixed byte ItemArray[48 * 0x8];
 
@@ -53,8 +50,7 @@ public unsafe partial struct MycItemCategory
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x8)]
-public unsafe partial struct MycItem
-{
+public unsafe partial struct MycItem {
     [FieldOffset(0x00)] public int ActionId;
     [FieldOffset(0x04)] public int Count;
 }

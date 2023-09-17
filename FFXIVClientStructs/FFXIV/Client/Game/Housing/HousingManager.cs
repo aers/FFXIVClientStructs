@@ -1,13 +1,14 @@
-﻿namespace FFXIVClientStructs.FFXIV.Client.Game.Housing;
+namespace FFXIVClientStructs.FFXIV.Client.Game.Housing;
 
 [StructLayout(LayoutKind.Explicit, Size = 0xE0)]
-public unsafe partial struct HousingManager
-{
+public unsafe partial struct HousingManager {
     [MemberFunction("E8 ?? ?? ?? ?? 8B 56 7C")]
     public static partial HousingManager* Instance();
 
     [FieldOffset(0x00)] public HousingTerritory* CurrentTerritory;
+    [Obsolete("Use HousingOutdoorTerritory", true)]
     [FieldOffset(0x08)] public HousingTerritory* OutdoorTerritory;
+    [FieldOffset(0x08)] public HousingOutdoorTerritory* HousingOutdoorTerritory;
     [FieldOffset(0x10)] public HousingTerritory* IndoorTerritory;
     [FieldOffset(0x18)] public HousingWorkshopTerritory* WorkshopTerritory;
 
@@ -25,7 +26,7 @@ public unsafe partial struct HousingManager
     public partial sbyte GetCurrentWard();
 
     // 1 for Main Division, 2 for Subdivision
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 0F 0F B6 C8")]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 0B 0F B6 C8 E8 ?? ?? ?? ?? 0F B6 D8")]
     public partial byte GetCurrentDivision();
 
     // Apartment / FC Room number
@@ -33,7 +34,7 @@ public unsafe partial struct HousingManager
     public partial short GetCurrentRoom();
 
     // -128 for Apartments in Main Division, -127 for Apartments in Subdivision
-    [MemberFunction("E8 ?? ?? ?? ?? 88 44 24 78")]
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 D8 3C FF")]
     public partial sbyte GetCurrentPlot();
 
     // Unique Identifier

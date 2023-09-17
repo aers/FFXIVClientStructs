@@ -1,4 +1,4 @@
-﻿using FFXIVClientStructs.FFXIV.Component.GUI;
+using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
@@ -8,13 +8,12 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("ContentsFinder")]
 [StructLayout(LayoutKind.Explicit, Size = 0x16C8)]
 [VTableAddress("48 8d 05 ?? ?? ?? ?? 48 89 03 48 8d b3 38 02 00 00 48 8d 05 ?? ?? ?? ?? 48 89 ab 28 02 00 00 48 89 83 ?? ?? ?? ?? 8d 7d 02 48 89 ab 30 02 00 00 66 90 48 8b ce e8 ?? ?? ?? ?? 48 83 c6 09 48 83 ef 01 75 ?? 48", 3)]
-public unsafe partial struct AddonContentsFinder
-{
+public unsafe partial struct AddonContentsFinder {
     [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
 
-    [FieldOffset(0x2B8)] public AtkComponentButton* ClearSelectionButton; // Both ClearSelection and DutyStatus
-    [FieldOffset(0x2C0)] public AtkComponentButton* JoinButton; // Both Join and Withdraw
-    
+    [FieldOffset(0x2B8)] public AtkComponentButton* JoinButton; // Both Join and Withdraw
+    [FieldOffset(0x2C0)] public AtkComponentButton* ClearSelectionButton; // Both ClearSelection and DutyStatus
+
     [FieldOffset(0x2C8)] public AtkComponentRadioButton* DutyRouletteRadioButton;
     [FieldOffset(0x2D0)] public AtkComponentRadioButton* Dungeons1RadioButton;
     [FieldOffset(0x2D8)] public AtkComponentRadioButton* Dungeons2RadioButton;
@@ -46,7 +45,7 @@ public unsafe partial struct AddonContentsFinder
     [FieldOffset(0x388)] public AtkTextNode* NumberSelectedTextNode;
     [FieldOffset(0x390)] public AtkTextNode* ObtainingDataTextNode;
     [FieldOffset(0x398)] public AtkTextNode* NumOtherPartiesRecruitingTextNode;
-    
+
     [FieldOffset(0x3A8)] public AtkImageNode* StarImageNode; // Image node next to ItemLevelTextNode
     [FieldOffset(0x3B0)] public AtkResNode* RoleIconResNode;
     [FieldOffset(0x3B8)] public AtkImageNode* RoleIconImageNode;

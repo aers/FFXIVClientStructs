@@ -1,4 +1,4 @@
-﻿using FFXIVClientStructs.FFXIV.Client.Game;
+using FFXIVClientStructs.FFXIV.Client.Game;
 using FFXIVClientStructs.FFXIV.Client.Game.Character;
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
 using FFXIVClientStructs.FFXIV.Client.System.String;
@@ -7,8 +7,7 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [StructLayout(LayoutKind.Explicit, Size = 0xF0)]
-public unsafe struct BalloonInfo
-{
+public unsafe struct BalloonInfo {
     [FieldOffset(0x0)] public Utf8String FormattedText; // Contains breaks for newlines
     [FieldOffset(0x68)] public Utf8String OriginalText;
     [FieldOffset(0xD0)] public GameObjectID ObjectId;
@@ -19,23 +18,24 @@ public unsafe struct BalloonInfo
 
     [FieldOffset(0xE0)] public float CameraDistance;
     [FieldOffset(0xE4)] public int BalloonId; // matches BalloonCounter when the balloon is made
-    [FieldOffset(0xE8)] public BalloonType Type;
-    [FieldOffset(0xE9)] public byte Slot;
+    [FieldOffset(0xE8)] public ushort ParentBone;
+    [FieldOffset(0xE8), Obsolete("Wrong mapping", true)] public BalloonType Type;
+    [FieldOffset(0xE9), CExportIgnore] public byte Slot; // Does not exist at current offset or was removed
     [FieldOffset(0xEA)] public byte UnknownByteEA;
+    [FieldOffset(0xEB)] public byte UnknownByteEB;
+    [FieldOffset(0xEC)] public byte UnknownByteEC;
 }
 
 // not sure how this maps to the addon yet, might just be in order though
 [StructLayout(LayoutKind.Explicit, Size = 0x8)]
-public struct BalloonSlot
-{
+public struct BalloonSlot {
     [FieldOffset(0x0)] public int Id;
     [FieldOffset(0x4)] public byte Available; // bool
 }
 
 [Agent(AgentId.ScreenLog)]
 [StructLayout(LayoutKind.Explicit, Size = 0x3F0)]
-public unsafe struct AgentScreenLog
-{
+public unsafe partial struct AgentScreenLog {
     [FieldOffset(0x0)] public AgentInterface AgentInterface;
 
     [FieldOffset(0x350)] public StdDeque<BalloonInfo> BalloonQueue;
@@ -46,5 +46,6 @@ public unsafe struct AgentScreenLog
     [FieldOffset(0x37C)]
     public int BalloonCounter; // count of all balloons since game launch, used as unique balloon ID
 
+    [FixedSizeArray<BalloonSlot>(10)]
     [FieldOffset(0x390)] public fixed byte BalloonSlots[10 * 0x8]; // type BalloonSlot array
 }

@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 // https://github.com/dotnet/efcore/blob/main/src/EFCore/Infrastructure/IndentedStringBuilder.cs
@@ -23,8 +23,7 @@ namespace FFXIVClientStructs.InteropGenerator;
 ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
 ///     for more information and examples.
 /// </remarks>
-public class IndentedStringBuilder
-{
+public class IndentedStringBuilder {
     private const byte IndentSize = 4;
     private int _indent;
     private bool _indentPending = true;
@@ -49,8 +48,7 @@ public class IndentedStringBuilder
     /// </summary>
     /// <param name="value">The string to append.</param>
     /// <returns>This builder so that additional calls can be chained.</returns>
-    public virtual IndentedStringBuilder Append(string value)
-    {
+    public virtual IndentedStringBuilder Append(string value) {
         DoIndent();
 
         _stringBuilder.Append(value);
@@ -63,8 +61,7 @@ public class IndentedStringBuilder
     /// </summary>
     /// <param name="value">The char to append.</param>
     /// <returns>This builder so that additional calls can be chained.</returns>
-    public virtual IndentedStringBuilder Append(char value)
-    {
+    public virtual IndentedStringBuilder Append(char value) {
         DoIndent();
 
         _stringBuilder.Append(value);
@@ -77,12 +74,10 @@ public class IndentedStringBuilder
     /// </summary>
     /// <param name="value">The strings to append.</param>
     /// <returns>This builder so that additional calls can be chained.</returns>
-    public virtual IndentedStringBuilder Append(IEnumerable<string> value)
-    {
+    public virtual IndentedStringBuilder Append(IEnumerable<string> value) {
         DoIndent();
 
-        foreach (var str in value)
-        {
+        foreach (var str in value) {
             _stringBuilder.Append(str);
         }
 
@@ -94,12 +89,10 @@ public class IndentedStringBuilder
     /// </summary>
     /// <param name="value">The chars to append.</param>
     /// <returns>This builder so that additional calls can be chained.</returns>
-    public virtual IndentedStringBuilder Append(IEnumerable<char> value)
-    {
+    public virtual IndentedStringBuilder Append(IEnumerable<char> value) {
         DoIndent();
 
-        foreach (var chr in value)
-        {
+        foreach (var chr in value) {
             _stringBuilder.Append(chr);
         }
 
@@ -110,8 +103,7 @@ public class IndentedStringBuilder
     ///     Appends a new line to the string being built.
     /// </summary>
     /// <returns>This builder so that additional calls can be chained.</returns>
-    public virtual IndentedStringBuilder AppendLine()
-    {
+    public virtual IndentedStringBuilder AppendLine() {
         AppendLine(string.Empty);
 
         return this;
@@ -125,10 +117,8 @@ public class IndentedStringBuilder
     /// </remarks>
     /// <param name="value">The string to append.</param>
     /// <returns>This builder so that additional calls can be chained.</returns>
-    public virtual IndentedStringBuilder AppendLine(string value)
-    {
-        if (value.Length != 0)
-        {
+    public virtual IndentedStringBuilder AppendLine(string value) {
+        if (value.Length != 0) {
             DoIndent();
         }
 
@@ -146,32 +136,24 @@ public class IndentedStringBuilder
     /// <param name="value">The string to append.</param>
     /// <param name="skipFinalNewline">If <see langword="true" />, then the terminating new line is not added after the last line.</param>
     /// <returns>This builder so that additional calls can be chained.</returns>
-    public virtual IndentedStringBuilder AppendLines(string value, bool skipFinalNewline = false)
-    {
-        using (var reader = new StringReader(value))
-        {
+    public virtual IndentedStringBuilder AppendLines(string value, bool skipFinalNewline = false) {
+        using (var reader = new StringReader(value)) {
             var first = true;
             string? line;
-            while ((line = reader.ReadLine()) != null)
-            {
-                if (first)
-                {
+            while ((line = reader.ReadLine()) != null) {
+                if (first) {
                     first = false;
-                }
-                else
-                {
+                } else {
                     AppendLine();
                 }
 
-                if (line.Length != 0)
-                {
+                if (line.Length != 0) {
                     Append(line);
                 }
             }
         }
 
-        if (!skipFinalNewline)
-        {
+        if (!skipFinalNewline) {
             AppendLine();
         }
 
@@ -182,8 +164,7 @@ public class IndentedStringBuilder
     ///     Resets this builder ready to build a new string.
     /// </summary>
     /// <returns>This builder so that additional calls can be chained.</returns>
-    public virtual IndentedStringBuilder Clear()
-    {
+    public virtual IndentedStringBuilder Clear() {
         _stringBuilder.Clear();
         _indent = 0;
 
@@ -194,8 +175,7 @@ public class IndentedStringBuilder
     ///     Increments the indent.
     /// </summary>
     /// <returns>This builder so that additional calls can be chained.</returns>
-    public virtual IndentedStringBuilder IncrementIndent()
-    {
+    public virtual IndentedStringBuilder IncrementIndent() {
         _indent++;
 
         return this;
@@ -205,10 +185,8 @@ public class IndentedStringBuilder
     ///     Decrements the indent.
     /// </summary>
     /// <returns>This builder so that additional calls can be chained.</returns>
-    public virtual IndentedStringBuilder DecrementIndent()
-    {
-        if (_indent > 0)
-        {
+    public virtual IndentedStringBuilder DecrementIndent() {
+        if (_indent > 0) {
             _indent--;
         }
 
@@ -236,22 +214,18 @@ public class IndentedStringBuilder
     public override string ToString()
         => _stringBuilder.ToString();
 
-    private void DoIndent()
-    {
-        if (_indentPending && _indent > 0)
-        {
+    private void DoIndent() {
+        if (_indentPending && _indent > 0) {
             _stringBuilder.Append(' ', _indent * IndentSize);
         }
 
         _indentPending = false;
     }
 
-    private sealed class Indenter : IDisposable
-    {
+    private sealed class Indenter : IDisposable {
         private readonly IndentedStringBuilder _stringBuilder;
 
-        public Indenter(IndentedStringBuilder stringBuilder)
-        {
+        public Indenter(IndentedStringBuilder stringBuilder) {
             _stringBuilder = stringBuilder;
 
             _stringBuilder.IncrementIndent();
@@ -261,13 +235,11 @@ public class IndentedStringBuilder
             => _stringBuilder.DecrementIndent();
     }
 
-    private sealed class IndentSuspender : IDisposable
-    {
+    private sealed class IndentSuspender : IDisposable {
         private readonly IndentedStringBuilder _stringBuilder;
         private readonly int _indent;
 
-        public IndentSuspender(IndentedStringBuilder stringBuilder)
-        {
+        public IndentSuspender(IndentedStringBuilder stringBuilder) {
             _stringBuilder = stringBuilder;
             _indent = _stringBuilder._indent;
             _stringBuilder._indent = 0;

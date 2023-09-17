@@ -1,4 +1,4 @@
-﻿using FFXIVClientStructs.FFXIV.Client.System.String;
+using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
@@ -8,8 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //     Component::GUI::AtkEventListener
 [Addon("GuildLeve")]
 [StructLayout(LayoutKind.Explicit, Size = 0x18F0)]
-public unsafe struct AddonGuildLeve
-{
+public unsafe struct AddonGuildLeve {
     [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
     [FieldOffset(0x228)] public AtkComponentTreeList* AtkComponentTreeList228;
     [FieldOffset(0x230)] public AtkComponentRadioButton* FieldcraftButton;

@@ -1,19 +1,16 @@
-﻿namespace FFXIVClientStructs.FFXIV.Common.Lua;
+namespace FFXIVClientStructs.FFXIV.Common.Lua;
 
 //ctor 48 8D 05 ?? ?? ?? ?? C6 41 10 01 48 89 01 33 C0
 [StructLayout(LayoutKind.Explicit, Size = 0x28)]
-public unsafe struct LuaState
-{
+public unsafe struct LuaState {
     [FieldOffset(0x08)] public lua_State* State;
     [FieldOffset(0x10)] public bool GCEnabled;
     [FieldOffset(0x18)] public long LastGCRestart;
     [FieldOffset(0x20)] public delegate*<lua_State*, int> db_errorfb;
 
-    public string?[] DoString(string code, string? name = null)
-    {
+    public string?[] DoString(string code, string? name = null) {
         var top = State->lua_gettop();
-        try
-        {
+        try {
             if (State->luaL_loadbuffer(code, code.Length, name) != 0)
                 throw new Exception($"{State->lua_tostring(-1)}");
 
@@ -22,25 +19,21 @@ public unsafe struct LuaState
 
             var cnt = State->lua_gettop() - top;
             var results = new string?[cnt];
-            for (var i = 0; i < cnt; i++)
-            {
+            for (var i = 0; i < cnt; i++) {
                 State->luaB_tostring();
                 results[i] = State->lua_tostring(-1);
                 State->lua_remove(1);
             }
 
             return results;
-        }
-        finally
-        {
+        } finally {
             State->lua_settop(top);
         }
     }
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0xB0)]
-public unsafe partial struct lua_State
-{
+public unsafe partial struct lua_State {
     [MemberFunction("E8 ?? ?? ?? ?? FF C7 03 F8")]
     public partial int lua_gettop();
 
@@ -77,8 +70,7 @@ public unsafe partial struct lua_State
     [GenerateCStrOverloads]
     public partial int luaL_loadbuffer(byte* buff, long size, byte* name);
 
-    public int luaL_loadbuffer(string buff, long size)
-    {
+    public int luaL_loadbuffer(string buff, long size) {
         return luaL_loadbuffer(buff, size, "?");
     }
 
@@ -107,41 +99,34 @@ public unsafe partial struct lua_State
     [MemberFunction("E8 ?? ?? ?? ?? FF C7 3B FE 7E")]
     public partial void lua_call(int nargs, int nresults);
 
-    public void lua_setglobal(string s)
-    {
+    public void lua_setglobal(string s) {
         lua_setfield(-10002, s);
     }
 
-    public void lua_getglobal(string s)
-    {
+    public void lua_getglobal(string s) {
         lua_getfield(-10002, s);
     }
-    
 
-    public void lua_pushcfunction(delegate*<lua_State*, int> f)
-    {
+
+    public void lua_pushcfunction(delegate*<lua_State*, int> f) {
         lua_pushcclosure(f, 0);
     }
 
-    public string? lua_tostring(int idx)
-    {
-        return Marshal.PtrToStringUTF8((nint) lua_tolstring(idx, null));
+    public string? lua_tostring(int idx) {
+        return Marshal.PtrToStringUTF8((nint)lua_tolstring(idx, null));
     }
 
-    public void lua_pop(int n)
-    {
+    public void lua_pop(int n) {
         lua_settop(-n - 1);
     }
-    
-    public void lua_register(string n, delegate*<lua_State*, int> f)
-    {
+
+    public void lua_register(string n, delegate*<lua_State*, int> f) {
         lua_pushcfunction(f);
         lua_setglobal(n);
     }
 }
 
-public enum LuaType
-{
+public enum LuaType {
     None = -1,
     Nil,
     Boolean,

@@ -1,10 +1,9 @@
-﻿namespace FFXIVClientStructs.FFXIV.Client.Game.Group;
+namespace FFXIVClientStructs.FFXIV.Client.Game.Group;
 
 // there are actually two copies of this back to back in the exe
 // maybe for 48 man raid support since the group manager can only hold 1 alliance worth of party members
 [StructLayout(LayoutKind.Explicit, Size = 0x3D70)]
-public unsafe partial struct GroupManager
-{
+public unsafe partial struct GroupManager {
     [FixedSizeArray<PartyMember>(8)]
     [FieldOffset(0x0)] public fixed byte PartyMembers[0x230 * 8]; // PartyMember type
     [FixedSizeArray<PartyMember>(20)]
@@ -23,6 +22,9 @@ public unsafe partial struct GroupManager
 
     [StaticAddress("33 D2 48 8D 0D ?? ?? ?? ?? 33 DB", 5)]
     public static partial GroupManager* Instance();
+
+    [MemberFunction("48 8D 81 ?? ?? ?? ?? 84 D2")]
+    public partial GroupManager* GetNextInstance(bool getNextInstance = true); // if true, simply adds sizeof(GroupManager) to the `this` pointer
 
     [MemberFunction("E8 ?? ?? ?? ?? EB B8 E8")]
     public partial bool IsObjectIDInParty(uint objectID);

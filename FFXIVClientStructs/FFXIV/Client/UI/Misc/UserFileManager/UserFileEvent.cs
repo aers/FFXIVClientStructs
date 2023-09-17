@@ -1,10 +1,9 @@
-﻿namespace FFXIVClientStructs.FFXIV.Client.UI.Misc.UserFileManager;
+namespace FFXIVClientStructs.FFXIV.Client.UI.Misc.UserFileManager;
 
 // Client::UI::Misc::UserFileManager::UserFileEvent
 // ctor inlined
 [StructLayout(LayoutKind.Explicit, Size = 0x40)]
-public unsafe partial struct UserFileEvent
-{
+public unsafe partial struct UserFileEvent {
     [FieldOffset(0x08)] public ulong CharacterContentID;
     [FieldOffset(0x10)] public nint UserFileManager;
     [FieldOffset(0x18)] public nint TempDataPtr;
@@ -52,15 +51,14 @@ public unsafe partial struct UserFileEvent
 }
 
 // these are only valid for files inside FFXIV_CHR<ContentId> folder
-public enum UserFileType : ushort
-{
+public enum UserFileType : ushort {
     ADDON = 0x00,
     MACRO = 0x01, // RaptureMacroModule
     HOTBAR = 0x02, // RaptureHotbarModule
     KEYBIND = 0x03,
     LOGFLTR = 0x04,
     GEARSET = 0x05, // RaptureGearsetModule
-    ACQ = 0x06,
+    ACQ = 0x06, // AcquaintanceModule
     ITEMODR = 0x07, // ItemOrderModule
     ITEMFDR = 0x08, // ItemFinderModule
     UISAVE = 0x09, // UiSavePackModule

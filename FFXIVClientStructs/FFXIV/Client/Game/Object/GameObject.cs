@@ -10,18 +10,27 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Object;
 //   if (DataID != 0) ObjectID = DataID, Type = 1
 // else ObjectID = ObjectID, Type = 0
 [StructLayout(LayoutKind.Explicit, Size = 0x8)]
-public struct GameObjectID
-{
+public struct GameObjectID {
     [FieldOffset(0x0)] public uint ObjectID;
     [FieldOffset(0x4)] public byte Type;
 
     public static unsafe implicit operator long(GameObjectID id) {
-        var objid = stackalloc GameObjectID[] {id};
+        var objid = stackalloc GameObjectID[] { id };
         return *(long*)objid;
     }
 
+    public static unsafe implicit operator ulong(GameObjectID id) {
+        var objid = stackalloc GameObjectID[] { id };
+        return *(ulong*)objid;
+    }
+
     public static unsafe implicit operator GameObjectID(long id) {
-        var objid = stackalloc long[] {id};
+        var objid = stackalloc long[] { id };
+        return *(GameObjectID*)objid;
+    }
+
+    public static unsafe implicit operator GameObjectID(ulong id) {
+        var objid = stackalloc ulong[] { id };
         return *(GameObjectID*)objid;
     }
 }
@@ -33,8 +42,7 @@ public struct GameObjectID
 // ctor E8 ?? ?? ?? ?? 48 8D 8E ?? ?? ?? ?? 48 89 AE ?? ?? ?? ?? 48 8B D7 
 [StructLayout(LayoutKind.Explicit, Size = 0x1A0)]
 [VTableAddress("48 8d 05 ?? ?? ?? ?? c7 81 80 00 00 00 00 00 00 00", 3)]
-public unsafe partial struct GameObject
-{
+public unsafe partial struct GameObject {
     [FieldOffset(0x10)] public Vector3 DefaultPosition;
     [FieldOffset(0x20)] public float DefaultRotation;
     [FieldOffset(0x30)] public fixed byte Name[64];
@@ -55,6 +63,7 @@ public unsafe partial struct GameObject
     [FieldOffset(0xC8)] public float Height;
     [FieldOffset(0xCC)] public float VfxScale;
     [FieldOffset(0xD0)] public float HitboxRadius;
+    [FieldOffset(0xE0)] public Vector3 DrawOffset;
     [FieldOffset(0xF4)] public EventId EventId;
     [FieldOffset(0xF8)] public uint FateId;
     [FieldOffset(0x100)] public DrawObject* DrawObject;
@@ -86,25 +95,29 @@ public unsafe partial struct GameObject
     [VirtualFunction(17)]
     public partial void DisableDraw();
 
-
     [VirtualFunction(27)]
     public partial DrawObject* GetDrawObject();
+
+    [VirtualFunction(30)]
+    public partial void Highlight(ObjectHighlightColor color);
 
     [VirtualFunction(47)]
     public partial uint GetNpcID();
 
-    [VirtualFunction(56)]
+    [VirtualFunction(57)]
     public partial bool IsDead();
 
-    [VirtualFunction(57)]
+    [VirtualFunction(58)]
     public partial bool IsNotMounted();
-    
-    [VirtualFunction(60)]
+
+    [VirtualFunction(61)]
     public partial bool IsCharacter();
+
+    [MemberFunction("E8 ?? ?? ?? ?? 0F 28 74 24 ?? 80 3D")]
+    public partial void SetDrawOffset(float x, float y, float z);
 }
 
-public enum ObjectKind : byte
-{
+public enum ObjectKind : byte {
     None = 0,
     Pc = 1,
     BattleNpc = 2,
@@ -125,8 +138,18 @@ public enum ObjectKind : byte
 }
 
 [Flags]
-public enum ObjectTargetableFlags : byte
-{
+public enum ObjectTargetableFlags : byte {
     IsTargetable = 2,
     Unk1 = 4, // This flag is used but purpose is unclear
+}
+
+public enum ObjectHighlightColor : byte {
+    None = 0,
+    Red = 1,
+    Green = 2,
+    Blue = 3,
+    Yellow = 4,
+    Orange = 5,
+    Magenta = 6,
+    Black = 7
 }

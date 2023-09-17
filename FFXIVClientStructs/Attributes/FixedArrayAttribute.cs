@@ -1,4 +1,4 @@
-﻿namespace FFXIVClientStructs.Attributes; 
+namespace FFXIVClientStructs.Attributes;
 
 
 /// <summary>

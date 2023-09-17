@@ -1,4 +1,4 @@
-﻿using FFXIVClientStructs.FFXIV.Client.Game;
+using FFXIVClientStructs.FFXIV.Client.Game;
 using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Client.UI.Info;
@@ -8,8 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.Inspect)]
 [StructLayout(LayoutKind.Explicit, Size = 0x554)]
-public unsafe partial struct AgentInspect
-{
+public unsafe partial struct AgentInspect {
     //Notes to INfoProxies:
     //0xa used for DeepDungeon
     //0xd
@@ -46,8 +45,7 @@ public unsafe partial struct AgentInspect
     [FieldOffset(0x550)] public InfoProxyFreeCompany* InfoProxyFreeCompany;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x86)]
-    public struct FreeCompanyData
-    {
+    public struct FreeCompanyData {
         [FieldOffset(0x00)] public byte Unkown4b0; //Maybe FreeCompany get status 1=Finished
         [FieldOffset(0x01)] public bool IsPArtOfFreeCOmpany; //HasGuild???????? if 0 Client::UI::RaptureAtkModule.OpenAddon can be called without getting additional infos
         [FieldOffset(0x08)] public long ID;
@@ -58,8 +56,7 @@ public unsafe partial struct AgentInspect
         [FieldOffset(0x1E)] public Utf8String GuildName;
     }
     [StructLayout(LayoutKind.Explicit, Size = 0x28)]
-    public struct ItemData
-    {
+    public struct ItemData {
         [FieldOffset(0x00)] public uint IconID;
         [FieldOffset(0x04)] public IconFlagsTopRight IconFlags1;
         [FieldOffset(0x05)] public ColorRGB Color;
@@ -69,27 +66,23 @@ public unsafe partial struct AgentInspect
         [FieldOffset(0x18)] public fixed short ModelSub[4];
         [FieldOffset(0x20)] public InventoryItem* Item; //Init 0 unsure
         [StructLayout(LayoutKind.Explicit)]
-        public struct ColorRGB
-        {
+        public struct ColorRGB {
             [FieldOffset(0x0)] public byte B;
             [FieldOffset(0x1)] public byte G;
             [FieldOffset(0x2)] public byte R;
         }
-        public enum IconFlagsTopRight
-        {
+        public enum IconFlagsTopRight : byte {
             None = 0,
             Dyeable = 1,
             Glamoured = 4,
         }
     }
-    public enum ItemDataFlags
-    {
+    public enum ItemDataFlags {
         None = 0,
         Filled = 8,
     }
 
-    public void ExamineCharacter(uint objectID)
-    {
+    public void ExamineCharacter(uint objectID) {
         RequestObjectID = objectID;
         RequestSearchCommentOID = objectID;
         RequestFreeCompanyOID = objectID;

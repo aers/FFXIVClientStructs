@@ -1,4 +1,3 @@
-using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Client.UI.Misc.UserFileManager;
 
@@ -6,63 +5,19 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
 // Client::UI::Misc::RaptureMacroModule
 //   Client::UI::Misc::UserFileManager::UserFileEvent
-// ctor "E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 4C 8B C7 49 8B D4 E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 4C 8B C7"
+// ctor "E8 ?? ?? ?? ?? 48 8D B7 ?? ?? ?? ?? 4C 8B C7"
 [StructLayout(LayoutKind.Explicit, Size = 0x51AA8)]
-public unsafe partial struct RaptureMacroModule
-{
-    public static RaptureMacroModule* Instance => Framework.Instance()->GetUiModule()->GetRaptureMacroModule();
-
-    [StructLayout(LayoutKind.Sequential, Size = 0x688)]
-    public struct Macro
-    {
-        public uint IconId;
-        public uint Unk; // MacroIcon, exclusive of /micon or similar. Oddly, off by one from Lumina's table.
-        public Utf8String Name;
-        public Lines Line;
-
-        [StructLayout(LayoutKind.Sequential, Size = 0x618)]
-        public struct Lines
-        {
-            private fixed byte data[0x618];
-
-            public Utf8String* this[int i]
-            {
-                get
-                {
-                    if (i < 0 || i > 14) return null;
-                    fixed (byte* p = data)
-                    {
-                        return (Utf8String*) (p + sizeof(Utf8String) * i);
-                    }
-                }
-            }
-        }
-    }
-
-    [StructLayout(LayoutKind.Sequential, Size = 0x28D20)]
-    public struct MacroPage
-    {
-        private fixed byte data[0x28D20];
-
-        public Macro* this[int i]
-        {
-            get
-            {
-                if (i < 0 || i > 99) return null;
-                Macro* a;
-                fixed (byte* p = data)
-                {
-                    a = (Macro*) (p + 0x688 * i);
-                }
-
-                return a;
-            }
-        }
-    }
+public unsafe partial struct RaptureMacroModule {
+    public static RaptureMacroModule* Instance() => UIModule.Instance()->GetRaptureMacroModule();
 
     [FieldOffset(0)] public UserFileEvent UserFileEvent;
-    [FieldOffset(0x58)] public MacroPage Individual;
-    [FieldOffset(0x28D78)] public MacroPage Shared;
+    [FieldOffset(0x40)] public RaptureTextModule* RaptureTextModule;
+    //[FieldOffset(0x48)] public TextChecker* TextChecker;
+
+    [FixedSizeArray<Macro>(100)]
+    [FieldOffset(0x58)] public fixed byte Individual[100 * 0x688];
+    [FixedSizeArray<Macro>(100)]
+    [FieldOffset(0x28D78)] public fixed byte Shared[100 * 0x688];
 
     [MemberFunction("E8 ?? ?? ?? ?? 32 DB 83 C6 F9")]
     public partial Macro* GetMacro(uint set, uint index);
@@ -86,4 +41,13 @@ public unsafe partial struct RaptureMacroModule
     /// <param name="set">The macro page ID that needs saving.</param>
     [MemberFunction("45 85 C0 75 04 88 51 3D")]
     public partial void SetSavePendingFlag(bool needsSave, uint set);
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x688)]
+    public partial struct Macro {
+        [FieldOffset(0)] public uint IconId;
+        [FieldOffset(0x4)] public uint MacroIconRowId; // offset by +1
+        [FieldOffset(0x8)] public Utf8String Name;
+        [FixedSizeArray<Utf8String>(15)]
+        [FieldOffset(0x70)] public fixed byte Lines[15 * 0x68];
+    }
 }

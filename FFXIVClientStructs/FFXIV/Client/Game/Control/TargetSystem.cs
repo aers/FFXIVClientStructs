@@ -3,9 +3,8 @@ using FFXIVClientStructs.FFXIV.Client.Game.Object;
 namespace FFXIVClientStructs.FFXIV.Client.Game.Control;
 // Client::Game::Control::TargetSystem
 
-[StructLayout(LayoutKind.Explicit, Size = 0x52F0)]
-public unsafe partial struct TargetSystem
-{
+[StructLayout(LayoutKind.Explicit, Size = 0x5370)]
+public unsafe partial struct TargetSystem {
     [FieldOffset(0x80)] public GameObject* Target;
     [FieldOffset(0x88)] public GameObject* SoftTarget;
     [FieldOffset(0x98)] public GameObject* GPoseTarget;
@@ -16,9 +15,9 @@ public unsafe partial struct TargetSystem
     [FieldOffset(0x140)] public GameObjectID TargetObjectId;
     [FieldOffset(0x148)] public GameObjectArray ObjectFilterArray0;
 
-    [FieldOffset(0x1A18)] public GameObjectArray ObjectFilterArray1;
-    [FieldOffset(0x2CD8)] public GameObjectArray ObjectFilterArray2;
-    [FieldOffset(0x3F98)] public GameObjectArray ObjectFilterArray3;
+    [FieldOffset(0x1A98)] public GameObjectArray ObjectFilterArray1;
+    [FieldOffset(0x2D58)] public GameObjectArray ObjectFilterArray2;
+    [FieldOffset(0x4018)] public GameObjectArray ObjectFilterArray3;
 
     [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 3B C6 0F 95 C0", 3)]
     public static partial TargetSystem* Instance();
@@ -26,7 +25,7 @@ public unsafe partial struct TargetSystem
     [MemberFunction("E8 ?? ?? ?? ?? 4C 8B F8 EB 13")]
     public partial uint GetCurrentTargetID();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 3B C6 0F 94 C0")]
+    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 83 C0 ED")]
     public partial GameObject* GetCurrentTarget();
 
     [MemberFunction("48 85 D2 74 2C 4C 63 89")]
@@ -44,8 +43,7 @@ public unsafe partial struct TargetSystem
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B D8 48 85 DB 74 ?? 48 8B CB")]
     public partial GameObject* GetMouseOverObject(int x, int y, GameObjectArray* objectArray, Camera* camera);
 
-    public GameObject* GetMouseOverObject(int x, int y)
-    {
+    public GameObject* GetMouseOverObject(int x, int y) {
         var camera = Control.Instance()->CameraManager.Camera;
         var localPlayer = Control.Instance()->LocalPlayer;
         if (camera == null || localPlayer == null || ObjectFilterArray1.Length <= 0)
@@ -56,15 +54,12 @@ public unsafe partial struct TargetSystem
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x12C0)]
-public unsafe struct GameObjectArray
-{
+public unsafe struct GameObjectArray {
     [FieldOffset(0x00)] public int Length;
     [FieldOffset(0x08)] public fixed long Objects[599];
 
-    public GameObject* this[int index]
-    {
-        get
-        {
+    public GameObject* this[int index] {
+        get {
             if (Length <= 0 || index < 0 || index > Length)
                 return null;
             return (GameObject*)Objects[index];

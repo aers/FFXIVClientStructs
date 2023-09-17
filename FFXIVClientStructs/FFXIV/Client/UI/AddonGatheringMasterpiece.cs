@@ -1,4 +1,4 @@
-﻿using FFXIVClientStructs.FFXIV.Component.GUI;
+using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
@@ -7,8 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //     Component::GUI::AtkEventListener
 [Addon("GatheringMasterpiece")]
 [StructLayout(LayoutKind.Explicit, Size = 0x7F8)]
-public unsafe struct AddonGatheringMasterpiece
-{
+public unsafe struct AddonGatheringMasterpiece {
     [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
     [FieldOffset(0x388)] public AtkComponentDragDrop* CollectDragDrop;
 }

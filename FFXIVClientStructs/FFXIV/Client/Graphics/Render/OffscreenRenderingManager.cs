@@ -1,11 +1,10 @@
-﻿namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
+namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 // Client::Graphics::Render::OffscreenRenderingManager
 // renderer responsible for UI character models - tryon, inspect, etc
 
 // size = 0x150
 [StructLayout(LayoutKind.Explicit, Size = 0x190)]
-public unsafe struct OffscreenRenderingManager
-{
+public unsafe struct OffscreenRenderingManager {
     [FieldOffset(0x0)] public void* vtbl;
 
     // OffscreenRenderingManager::RenderJobSystem - size is at least 0xB8

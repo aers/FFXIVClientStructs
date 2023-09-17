@@ -1,4 +1,4 @@
-﻿using FFXIVClientStructs.FFXIV.Client.System.String;
+using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
@@ -7,8 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //   Component::GUI::AtkUnitBase
 //     Component::GUI::AtkEventListener
 [StructLayout(LayoutKind.Explicit, Size = 0x8A8)]
-public unsafe struct AddonSynthesis
-{
+public unsafe struct AddonSynthesis {
     [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
 
     [FieldOffset(0x238)] public AtkComponentButton* QuitButton;
@@ -60,8 +59,7 @@ public unsafe struct AddonSynthesis
     [FieldOffset(0x830)] public Utf8String CraftEffect9HoverText;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]
-    public struct CraftEffect
-    {
+    public struct CraftEffect {
         // Manipulation, Innovation, etc.
         [FieldOffset(0x0)] public AtkComponentBase* Container;
         [FieldOffset(0x8)] public AtkImageNode* Image;

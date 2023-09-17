@@ -1,12 +1,11 @@
-﻿namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
+namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 // Client::Graphics::Render::RenderTargetManager
 //   Client::Graphics::Singleton
 //   Client::Graphics::Kernel::Notifier
 
 // WARNING: THIS IS OUT OF DATE
-[StructLayout(LayoutKind.Explicit, Size = 0x480)]
-public unsafe partial struct RenderTargetManager
-{
+[StructLayout(LayoutKind.Explicit, Size = 0x4A0)]
+public unsafe partial struct RenderTargetManager {
     [FieldOffset(0x0)] public void* vtbl;
 
     [FieldOffset(0x8)] public Notifier Notifier;
@@ -17,18 +16,18 @@ public unsafe partial struct RenderTargetManager
 
     // specific ones i can name
     // offscreen renderer is used to render models for UI elements like the character window
-    [FieldOffset(0x1E0)] public Texture* OffscreenRenderTarget_1;
-    [FieldOffset(0x1E8)] public Texture* OffscreenRenderTarget_2;
-    [FieldOffset(0x1F0)] public Texture* OffscreenRenderTarget_3;
-    [FieldOffset(0x1F8)] public Texture* OffscreenRenderTarget_4;
-    [FieldOffset(0x200)] public Texture* OffscreenGBuffer;
-    [FieldOffset(0x208)] public Texture* OffscreenDepthStencil;
+    [FieldOffset(0x1E0), CExportIgnore] public Texture* OffscreenRenderTarget_1;
+    [FieldOffset(0x1E8), CExportIgnore] public Texture* OffscreenRenderTarget_2;
+    [FieldOffset(0x1F0), CExportIgnore] public Texture* OffscreenRenderTarget_3;
+    [FieldOffset(0x1F8), CExportIgnore] public Texture* OffscreenRenderTarget_4;
+    [FieldOffset(0x200), CExportIgnore] public Texture* OffscreenGBuffer;
+    [FieldOffset(0x208), CExportIgnore] public Texture* OffscreenDepthStencil;
 
-    [FieldOffset(0x210)]
+    [FieldOffset(0x210), CExportIgnore]
     public Texture* OffscreenRenderTarget_Unk1; // these are related to offscreen renderer due to their size
 
-    [FieldOffset(0x218)] public Texture* OffscreenRenderTarget_Unk2;
-    [FieldOffset(0x220)] public Texture* OffscreenRenderTarget_Unk3;
+    [FieldOffset(0x218), CExportIgnore] public Texture* OffscreenRenderTarget_Unk2;
+    [FieldOffset(0x220), CExportIgnore] public Texture* OffscreenRenderTarget_Unk3;
 
     [FieldOffset(0x248)] public uint Resolution_Width;
     [FieldOffset(0x24C)] public uint Resolution_Height;
@@ -45,5 +44,7 @@ public unsafe partial struct RenderTargetManager
 
     [StaticAddress("48 8B 0D ?? ?? ?? ?? 48 8B B1 ?? ?? ?? ??", 3, isPointer: true)]
     public static partial RenderTargetManager* Instance();
-    
+
+    [MemberFunction("48 8B 05 ?? ?? ?? ?? 8B CA 48 8B 84 C8")]
+    public partial Texture* GetCharaViewTexture(uint clientObjectIndex);
 }

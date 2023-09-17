@@ -1,4 +1,4 @@
-﻿using System.Text;
+using System.Text;
 using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
@@ -9,26 +9,27 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 // For updating offsets:
 //  "48 8B CB E8 ?? ?? ?? ?? 48 8B 7C 24 ?? 33 C0 48 8B 5C 24"
 //    16 * (v6 + ConfigOptionCount * a6) + a1 + {ValuesFieldOffset}
-[StructLayout(LayoutKind.Explicit, Size = 0xDEE8)]
-public unsafe partial struct ConfigModule
-{
+[StructLayout(LayoutKind.Explicit, Size = 0xE348)]
+public unsafe partial struct ConfigModule {
     public static ConfigModule* Instance() => Framework.Instance()->GetUiModule()->GetConfigModule();
 
-    public const int ConfigOptionCount = 701;
+    public const int ConfigOptionCount = 715;
     [FieldOffset(0x28)] public UIModule* UIModule;
     [FieldOffset(0x2C8)] private fixed byte options[Option.Size * ConfigOptionCount];
-    
-    [FieldOffset(0x5A78)] private fixed byte values[0x10 * ConfigOptionCount];
+
+    [FieldOffset(0x5C38)] private fixed byte values[0x10 * ConfigOptionCount];
 
     [MemberFunction("E8 ?? ?? ?? ?? C6 47 4D 00")]
+    [Obsolete("Use Framework.SystemConfig functions.", true)]
     public partial bool SetOption(uint index, int value, int a4 = 2, bool a5 = true, bool a6 = false);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 35 ?? ?? ?? ?? 33 DB")]
+    [Obsolete("Use Framework.SystemConfig functions.", true)]
     public partial int GetIntValue(uint index, int a3 = 2);
 
+    [Obsolete("Use Framework.SystemConfig functions.", true)]
     public uint? GetIndex(ConfigOption option) {
-        for (uint i = 0; i < ConfigOptionCount; i++)
-        {
+        for (uint i = 0; i < ConfigOptionCount; i++) {
             var o = GetOption(i);
             if (o->OptionID != option) continue;
             return i;
@@ -36,11 +37,10 @@ public unsafe partial struct ConfigModule
 
         return null;
     }
-    
-    public void SetOption(ConfigOption option, int value)
-    {
-        for (uint i = 0; i < ConfigOptionCount; i++)
-        {
+
+    [Obsolete("Use Framework.SystemConfig functions.", true)]
+    public void SetOption(ConfigOption option, int value) {
+        for (uint i = 0; i < ConfigOptionCount; i++) {
             var o = GetOption(i);
             if (o->OptionID != option) continue;
             SetOption(i, value);
@@ -48,15 +48,15 @@ public unsafe partial struct ConfigModule
         }
     }
 
-    public void SetOptionById(short optionId, int value)
-    {
-        SetOption((ConfigOption) optionId, value);
+    [Obsolete("Use Framework.SystemConfig functions.", true)]
+    public void SetOptionById(short optionId, int value) {
+        SetOption((ConfigOption)optionId, value);
     }
 
+    [Obsolete("Use Framework.SystemConfig functions.", true)]
     public Option* GetOption(string name) {
         if (string.IsNullOrEmpty(name)) return null;
-        for (uint i = 0; i < ConfigOptionCount; i++)
-        {
+        for (uint i = 0; i < ConfigOptionCount; i++) {
             var o = GetOption(i);
             if (o->GetName() == name) {
                 return o;
@@ -66,19 +66,17 @@ public unsafe partial struct ConfigModule
         return null;
     }
 
-    public Option* GetOption(uint index)
-    {
-        fixed (byte* p = options)
-        {
-            var o = (Option*) p;
+    [Obsolete("Use Framework.SystemConfig functions.", true)]
+    public Option* GetOption(uint index) {
+        fixed (byte* p = options) {
+            var o = (Option*)p;
             return o + index;
         }
     }
 
-    public Option* GetOption(ConfigOption option)
-    {
-        for (uint i = 0; i < ConfigOptionCount; i++)
-        {
+    [Obsolete("Use Framework.SystemConfig functions.", true)]
+    public Option* GetOption(ConfigOption option) {
+        for (uint i = 0; i < ConfigOptionCount; i++) {
             var o = GetOption(i);
             if (o->OptionID == option) return o;
         }
@@ -86,24 +84,22 @@ public unsafe partial struct ConfigModule
         return null;
     }
 
-    public Option* GetOptionById(short optionId)
-    {
-        return GetOption((ConfigOption) optionId);
+    [Obsolete("Use Framework.SystemConfig functions.", true)]
+    public Option* GetOptionById(short optionId) {
+        return GetOption((ConfigOption)optionId);
     }
 
-    public AtkValue* GetValue(uint index)
-    {
-        fixed (byte* p = values)
-        {
-            var v = (AtkValue*) p;
+    [Obsolete("Use Framework.SystemConfig functions.", true)]
+    public AtkValue* GetValue(uint index) {
+        fixed (byte* p = values) {
+            var v = (AtkValue*)p;
             return v + index;
         }
     }
 
-    public AtkValue* GetValue(ConfigOption option)
-    {
-        for (uint i = 0; i < ConfigOptionCount; i++)
-        {
+    [Obsolete("Use Framework.SystemConfig functions.", true)]
+    public AtkValue* GetValue(ConfigOption option) {
+        for (uint i = 0; i < ConfigOptionCount; i++) {
             var o = GetOption(i);
             if (o->OptionID == option) return GetValue(i);
         }
@@ -111,15 +107,14 @@ public unsafe partial struct ConfigModule
         return null;
     }
 
-    public AtkValue* GetValueById(short optionId)
-    {
-        return GetValue((ConfigOption) optionId);
+    [Obsolete("Use Framework.SystemConfig functions.", true)]
+    public AtkValue* GetValueById(short optionId) {
+        return GetValue((ConfigOption)optionId);
     }
 
-    public int GetIntValue(ConfigOption option)
-    {
-        for (uint i = 0; i < ConfigOptionCount; i++)
-        {
+    [Obsolete("Use Framework.SystemConfig functions.", true)]
+    public int GetIntValue(ConfigOption option) {
+        for (uint i = 0; i < ConfigOptionCount; i++) {
             var o = GetOption(i);
             if (o->OptionID == option) return GetIntValue(i);
         }
@@ -127,14 +122,13 @@ public unsafe partial struct ConfigModule
         return 0;
     }
 
-    public int GetIntValue(short optionId)
-    {
-        return GetIntValue((ConfigOption) optionId);
+    [Obsolete("Use Framework.SystemConfig functions.", true)]
+    public int GetIntValue(short optionId) {
+        return GetIntValue((ConfigOption)optionId);
     }
 
     [StructLayout(LayoutKind.Explicit, Size = Size)]
-    public struct Option
-    {
+    public struct Option {
         public const int Size = 0x20;
         [FieldOffset(0x00)] public void* Unk00;
         [FieldOffset(0x08)] public ulong Unk08;

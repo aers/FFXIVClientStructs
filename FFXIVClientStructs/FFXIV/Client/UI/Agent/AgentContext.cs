@@ -1,4 +1,4 @@
-﻿using System.Drawing;
+using System.Drawing;
 using System.Text;
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
 using FFXIVClientStructs.FFXIV.Client.System.Framework;
@@ -8,12 +8,10 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.Context)]
-[StructLayout(LayoutKind.Explicit, Size = 0x1748)]
-public unsafe partial struct AgentContext
-{
-    public static AgentContext* Instance()
-    {
-        return (AgentContext*) Framework.Instance()->GetUiModule()->GetAgentModule()->GetAgentByInternalId(
+[StructLayout(LayoutKind.Explicit, Size = 0x1750)]
+public unsafe partial struct AgentContext {
+    public static AgentContext* Instance() {
+        return (AgentContext*)Framework.Instance()->GetUiModule()->GetAgentModule()->GetAgentByInternalId(
             AgentId.Context);
     }
 
@@ -63,16 +61,19 @@ public unsafe partial struct AgentContext
     public partial bool OpenSubMenu();
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4B ?? 48 8B 01 FF 90 ?? ?? ?? ?? B2 ?? 48 8B 48")]
+    [GenerateCStrOverloads]
     public partial void OpenYesNo(byte* text, uint yesId = 576, uint noId = 577, uint checkboxId = 0,
         bool setOwner = true);
 
     [MemberFunction("E8 ?? ?? ?? ?? 40 80 F6")]
     public partial void ClearMenu();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 41 BF ?? ?? ?? ?? 48 8D 54 24")]
+    [MemberFunction("E8 ?? ?? ?? ?? 41 BF ?? ?? ?? ?? 48 8D 44 24 ?? 41 8B D7")]
+    [GenerateCStrOverloads]
     public partial void SetMenuTitle(byte* text);
 
     [MemberFunction("E8 ?? ?? ?? ?? FF CE 48 FF CF")]
+    [GenerateCStrOverloads]
     public partial void AddMenuItem(byte* text, void* handler, long handlerParam, bool disabled = false,
         bool submenu = false);
 
@@ -81,6 +82,7 @@ public unsafe partial struct AgentContext
         bool submenu = false);
 
     [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 48 8B 99 ?? ?? ?? ?? 4C 8B D1")]
+    [GenerateCStrOverloads]
     public partial void AddContextMenuItem(int eventId, byte* text, bool disabled = false, bool submenu = false,
         bool copyText = true);
 
@@ -88,45 +90,7 @@ public unsafe partial struct AgentContext
     public partial void AddContextMenuItem2(int eventId, uint addonTextId, bool disabled = false, bool submenu = false,
         bool copyText = true);
 
-    public void AddMenuItem(string text, void* handler, long handlerParam, bool disabled = false, bool submenu = false)
-    {
-        var str = Encoding.UTF8.GetBytes(text + '\0');
-        fixed (byte* ptr = &str[0])
-        {
-            AddMenuItem(ptr, handler, handlerParam, disabled, submenu);
-        }
-    }
-
-    public void AddContextMenuItem(int eventId, string text, bool disabled = false, bool submenu = false,
-        bool copyText = true)
-    {
-        var str = Encoding.UTF8.GetBytes(text + '\0');
-        fixed (byte* ptr = &str[0])
-        {
-            AddContextMenuItem(eventId, ptr, disabled, submenu, copyText);
-        }
-    }
-
-    public void SetMenuTitle(string text)
-    {
-        var str = Encoding.UTF8.GetBytes(text + '\0');
-        fixed (byte* ptr = &str[0])
-        {
-            SetMenuTitle(ptr);
-        }
-    }
-
-    public void OpenYesNo(string text, uint yesId = 576, uint noId = 577, uint checkboxId = 0, bool bindToOwner = true)
-    {
-        var str = Encoding.UTF8.GetBytes(text + '\0');
-        fixed (byte* ptr = &str[0])
-        {
-            OpenYesNo(ptr, yesId, noId, checkboxId, bindToOwner);
-        }
-    }
-
-    public void SetPosition(int x, int y)
-    {
+    public void SetPosition(int x, int y) {
         Position.X = x;
         Position.Y = y;
         OpenAtPosition = 1;
@@ -134,20 +98,16 @@ public unsafe partial struct AgentContext
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x678)]
-public unsafe struct ContextMenu
-{
+public unsafe struct ContextMenu {
     [FieldOffset(0x00)] public short CurrentEventIndex;
     [FieldOffset(0x02)] public short CurrentEventId;
 
     [FieldOffset(0x08)]
     public fixed byte EventParams[0x10 * 33]; // 32 * AtkValue + 1 * AtkValue for submenus with title
 
-    public Span<AtkValue> EventParamSpan
-    {
-        get
-        {
-            fixed (byte* ptr = EventParams)
-            {
+    public Span<AtkValue> EventParamSpan {
+        get {
+            fixed (byte* ptr = EventParams) {
                 return new Span<AtkValue>(ptr, 33);
             }
         }
@@ -164,8 +124,7 @@ public unsafe struct ContextMenu
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x60)]
-public unsafe struct ContextMenuTarget
-{
+public unsafe struct ContextMenuTarget {
     [FieldOffset(0x00)] public ulong ContentId;
     [FieldOffset(0x14)] public byte AddonListIndex;
     [FieldOffset(0x16)] public ushort CurrentWorldId;

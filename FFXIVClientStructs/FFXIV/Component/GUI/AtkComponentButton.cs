@@ -1,4 +1,4 @@
-﻿namespace FFXIVClientStructs.FFXIV.Component.GUI;
+namespace FFXIVClientStructs.FFXIV.Component.GUI;
 // Component::GUI::AtkComponentButton
 //   Component::GUI::AtkComponentBase
 //     Component::GUI::AtkEventListener
@@ -7,8 +7,7 @@
 // common CreateAtkComponent function 8B FA 33 DB E8 ?? ?? ?? ?? 
 // type 1
 [StructLayout(LayoutKind.Explicit, Size = 0xF0)]
-public unsafe struct AtkComponentButton
-{
+public unsafe struct AtkComponentButton {
     [FieldOffset(0x0)] public AtkComponentBase AtkComponentBase;
 
     // based on the text size
@@ -20,5 +19,5 @@ public unsafe struct AtkComponentButton
     [FieldOffset(0xD0)] public AtkResNode* ButtonBGNode;
     [FieldOffset(0xE8)] public uint Flags;
 
-    public bool IsEnabled => (AtkComponentBase.OwnerNode->AtkResNode.Flags & (1 << 5)) != 0;
+    public bool IsEnabled => AtkComponentBase.OwnerNode->AtkResNode.NodeFlags.HasFlag(NodeFlags.Enabled);
 }

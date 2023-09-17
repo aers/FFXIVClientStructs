@@ -1,4 +1,4 @@
-﻿using FFXIVClientStructs.FFXIV.Client.System.String;
+using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
@@ -7,23 +7,20 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 //   Client::UI::Agent::AgentBannerInterface
 //     Client::UI::Agent::AgentInterface
 [StructLayout(LayoutKind.Explicit, Size = 0x30)]
-public unsafe partial struct AgentBannerInterface
-{
+public unsafe partial struct AgentBannerInterface {
     [FieldOffset(0x0)] public AgentInterface AgentInterface;
     [FieldOffset(0x28)] public Storage* Data;
 
     // Client::UI::Agent::AgentBannerInterface::Storage
     // Destroyed in Client::UI::Agent::AgentBannerInterface::dtor
     [StructLayout(LayoutKind.Explicit, Size = 0x3B30)]
-    public partial struct Storage
-    {
+    public partial struct Storage {
         public const int CharacterDataSize = 0x760;
 
         // vtable: 48 8D 05 ?? ?? ?? ?? 48 89 01 48 8B F9 7E 
         // dtor: E8 ?? ?? ?? ?? 48 83 EF ?? 75 ?? BA ?? ?? ?? ?? 48 8B CE E8 ?? ?? ?? ?? 48 89 7D
         [StructLayout(LayoutKind.Explicit, Size = CharacterDataSize)]
-        public struct CharacterData
-        {
+        public struct CharacterData {
             [FieldOffset(0x000)] public void** VTable;
 
             [FieldOffset(0x018)] public Utf8String Name1;
@@ -50,7 +47,7 @@ public unsafe partial struct AgentBannerInterface
         public const int NumCharacters = 8;
 
         [FixedSizeArray<CharacterData>(NumCharacters)]
-        [FieldOffset(0x00)] public fixed byte CharacterArray[CharacterDataSize * NumCharacters];
+        [FieldOffset(0x20)] public fixed byte CharacterArray[CharacterDataSize * NumCharacters];
 
         [FieldOffset(0x3B20)] public long Unk3;
         [FieldOffset(0x3B28)] public long Unk4;

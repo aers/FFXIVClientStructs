@@ -1,0 +1,21 @@
+name: Format Check
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - '**/*.cs'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 7.0.x
+      - name: Install dependencies
+        run: dotnet restore
+      - name: Run Format
+        run: dotnet format --verify-no-changes FFXIVClientStructs.sln

@@ -1,4 +1,4 @@
-﻿using FFXIVClientStructs.FFXIV.Client.System.Framework;
+using FFXIVClientStructs.FFXIV.Client.System.Framework;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
@@ -8,8 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 //       Component::GUI::AtkModuleInterface::AtkEventInterface
 [Agent(AgentId.BannerParty)]
 [StructLayout(LayoutKind.Explicit, Size = 0x38)]
-public unsafe partial struct AgentBannerParty
-{
+public unsafe partial struct AgentBannerParty {
     public static AgentBannerParty* Instance() => (AgentBannerParty*)Framework.Instance()->GetUiModule()->GetAgentModule()->GetAgentByInternalId(AgentId.BannerParty);
 
     [FieldOffset(0x0)] public AgentBannerInterface AgentBannerInterface;

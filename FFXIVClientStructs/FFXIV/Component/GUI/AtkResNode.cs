@@ -4,8 +4,7 @@ using FFXIVClientStructs.FFXIV.Common.Math;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
-public enum NodeType : ushort
-{
+public enum NodeType : ushort {
     Res = 1,
     Image = 2,
     Text = 3,
@@ -19,8 +18,7 @@ public enum NodeType : ushort
 // 'visible' will change visibility immediately, the rest rely on other stuff to happen so they dont do anything
 // top and bottom assumed based on a scrollbar, lots of left-aligned text has AnchorLeft set
 [Flags]
-public enum NodeFlags
-{
+public enum NodeFlags : ushort {
     AnchorTop = 0x01,
     AnchorLeft = 0x02,
     AnchorBottom = 0x04,
@@ -49,8 +47,7 @@ public enum NodeFlags
 // size = 0xA8
 // ctor E9 ?? ?? ?? ?? 33 C0 48 83 C4 20 5B C3 66 90 
 [StructLayout(LayoutKind.Explicit, Size = 0xA8)]
-public unsafe partial struct AtkResNode : ICreatable
-{
+public unsafe partial struct AtkResNode : ICreatable {
     [FieldOffset(0x0)] public AtkEventTarget AtkEventTarget;
     [FieldOffset(0x8)] public uint NodeID;
     [FieldOffset(0x10)] public void* TimelineObject; // Component::GUI::AtkTimeline???
@@ -69,7 +66,7 @@ public unsafe partial struct AtkResNode : ICreatable
     [FieldOffset(0x4C)] public float ScaleX;
     [FieldOffset(0x50)] public float ScaleY;
     [FieldOffset(0x54)] public float Rotation; // radians (file is degrees)
-    [FieldOffset(0x58), Obsolete] public fixed float UnkMatrix[3 * 2];
+    [FieldOffset(0x58), Obsolete("Use Transform or ScreenX, ScreenY", true)] public fixed float UnkMatrix[3 * 2];
     [FieldOffset(0x58)] public Matrix2x2 Transform;
     [FieldOffset(0x68)] public float ScreenX;
     [FieldOffset(0x6C)] public float ScreenY;
@@ -101,12 +98,14 @@ public unsafe partial struct AtkResNode : ICreatable
 
     // asm accesses these fields together so this is one 32bit field with priority+flags
     [FieldOffset(0x9C)] public ushort Priority;
+    [Obsolete("Use NodeFlags", true)]
     [FieldOffset(0x9E)] public short Flags;
+    [FieldOffset(0x9E)] public NodeFlags NodeFlags;
     [FieldOffset(0xA0)] public uint Flags_2; // bit 1 = has changes, ClipCount is bits 10-17, idk its a mess
     [FieldOffset(0xA0)] public uint DrawFlags;
 
-    public bool IsVisible => (Flags & 0x10) == 0x10;
-    
+    public bool IsVisible => NodeFlags.HasFlag(NodeFlags.Visible);
+
     [MemberFunction("E9 ?? ?? ?? ?? 33 C0 48 83 C4 20 5B C3 66 90")]
     public partial void Ctor();
 
@@ -163,18 +162,16 @@ public unsafe partial struct AtkResNode : ICreatable
         AtkResNode* nodeParam, bool isSystemEvent);
 
     public void AddEvent(AtkEventType eventType, uint eventParam, AtkEventListener* listener, AtkResNode* nodeParam,
-        bool isSystemEvent)
-    {
-        AddEvent((ushort) eventType, eventParam, listener, nodeParam, isSystemEvent);
+        bool isSystemEvent) {
+        AddEvent((ushort)eventType, eventParam, listener, nodeParam, isSystemEvent);
     }
-    
+
     [MemberFunction("E8 ?? ?? ?? ?? 44 38 7D 67")]
     public partial void RemoveEvent(ushort eventType, uint eventParam, AtkEventListener* listener,
         bool isSystemEvent);
 
-    public void RemoveEvent(AtkEventType eventType, uint eventParam, AtkEventListener* listener, bool isSystemEvent)
-    {
-        RemoveEvent((ushort) eventType, eventParam, listener, isSystemEvent);
+    public void RemoveEvent(AtkEventType eventType, uint eventParam, AtkEventListener* listener, bool isSystemEvent) {
+        RemoveEvent((ushort)eventType, eventParam, listener, isSystemEvent);
     }
 
     [MemberFunction("48 85 C9 74 0B 8B 41 44")]
@@ -188,7 +185,7 @@ public unsafe partial struct AtkResNode : ICreatable
 
     [MemberFunction("E8 ?? ?? ?? ?? 8D 56 B5")]
     public partial void SetPositionShort(short X, short Y);
-    
+
     [MemberFunction("48 85 C9 74 0B 8B 41 4C")]
     public partial void GetScale(float* outX, float* outY);
 
@@ -206,7 +203,19 @@ public unsafe partial struct AtkResNode : ICreatable
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F B7 D5 48 8B CF")]
     public partial void SetScaleY(float y);
-    
+
+    [MemberFunction("E8 ?? ?? ?? ?? 49 8B 4C FE")]
+    public partial float GetX();
+
+    [MemberFunction("E8 ?? ?? ?? ?? 0F BE 43 10")]
+    public partial float GetY();
+
+    [MemberFunction("E8 ?? ?? ?? ?? 0F BF 07")]
+    public partial void SetX(float x);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 66 03 BE")]
+    public partial void SetY(float y);
+
     [MemberFunction("E8 ?? ?? ?? ?? 66 03 C0")]
     public partial ushort GetWidth();
 

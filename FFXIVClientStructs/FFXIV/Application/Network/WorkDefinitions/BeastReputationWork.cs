@@ -1,4 +1,4 @@
-﻿namespace FFXIVClientStructs.FFXIV.Application.Network.WorkDefinitions;
+namespace FFXIVClientStructs.FFXIV.Application.Network.WorkDefinitions;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
 public struct BeastReputationWork {

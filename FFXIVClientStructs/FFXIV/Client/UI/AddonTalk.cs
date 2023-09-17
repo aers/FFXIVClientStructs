@@ -1,4 +1,4 @@
-﻿using FFXIVClientStructs.FFXIV.Client.System.String;
+using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
@@ -8,8 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //     Component::GUI::AtkEventListener
 [Addon("Talk")]
 [StructLayout(LayoutKind.Explicit, Size = 0xE80)]
-public unsafe struct AddonTalk
-{
+public unsafe struct AddonTalk {
     [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
     [FieldOffset(0x220)] public AtkTextNode* AtkTextNode220;
     [FieldOffset(0x228)] public AtkTextNode* AtkTextNode228;

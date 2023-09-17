@@ -1,9 +1,8 @@
-﻿using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis;
 
 namespace FFXIVClientStructs.InteropSourceGenerators;
 
-internal static class DiagnosticDescriptors
-{
+internal static class DiagnosticDescriptors {
     public static DiagnosticDescriptor StructMustBePartial { get; } = new(
         "CSIG0001",
         "Struct must be partial",
@@ -39,7 +38,7 @@ internal static class DiagnosticDescriptors
         DiagnosticSeverity.Error,
         true
     );
-    
+
     public static DiagnosticDescriptor AttributeGenericTypeArgumentInvalid { get; } = new(
         "CSIG0005",
         "Attribute generic type argument invalid",
@@ -48,7 +47,7 @@ internal static class DiagnosticDescriptors
         DiagnosticSeverity.Error,
         true
     );
-    
+
     public static DiagnosticDescriptor FixedSizedAttributeOnInvalidField { get; } = new(
         "CSIG0006",
         "Fixed sized attribute used on invalid field",

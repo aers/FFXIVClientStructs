@@ -1,11 +1,10 @@
-﻿using FFXIVClientStructs.FFXIV.Client.System.String;
+using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
-[StructLayout(LayoutKind.Explicit, Size = 0x3E8)]
-public unsafe partial struct InfoProxy25
-{
+[StructLayout(LayoutKind.Explicit, Size = 0x418)]
+public unsafe partial struct InfoProxy25 {
     [FieldOffset(0x00)] public InfoProxyInterface InfoProxyInterface;
 
     [FieldOffset(0x038)] public Utf8String UnkString0;

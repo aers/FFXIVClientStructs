@@ -1,18 +1,17 @@
-﻿using FFXIVClientStructs.FFXIV.Component.GUI;
+using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 [Addon("GSInfoCardList")]
 [StructLayout(LayoutKind.Explicit, Size = 0x540)]
-public unsafe partial struct AddonGSInfoCardList
-{
+public unsafe partial struct AddonGSInfoCardList {
     [FieldOffset(0x00)] public AtkUnitBase AtkUnitBase;
 
     [FieldOffset(0x348)] public AtkResNode* PageSelection;
-    
+
     [FixedSizeArray<Pointer<AtkComponentButton>>(9)]
     [FieldOffset(0x350)] public fixed byte PageButtons[0x8 * 9];
-    
+
     [FieldOffset(0x398)] public AtkComponentButton* GotoFirstPageButton;
     [FieldOffset(0x3A0)] public AtkComponentButton* GotoLastPageButton;
 
@@ -35,8 +34,7 @@ public unsafe partial struct AddonGSInfoCardList
     [FieldOffset(0x514)] public int SelectedCardIndex; // 0-30, does not account for page
 }
 
-public enum GSInfoCardListFilterMode
-{
+public enum GSInfoCardListFilterMode {
     DisplayAllCards = 0xE,
     DisplayOwnedCards = 0x6,
     DisplayUnownedCards = 0x9,

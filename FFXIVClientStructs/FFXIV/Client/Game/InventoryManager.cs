@@ -1,9 +1,8 @@
-﻿namespace FFXIVClientStructs.FFXIV.Client.Game;
+namespace FFXIVClientStructs.FFXIV.Client.Game;
 
 //ctor i guess 40 53 48 83 EC 20 48 8B D9 45 33 C9 B9
 [StructLayout(LayoutKind.Explicit, Size = 0x3620)]
-public unsafe partial struct InventoryManager
-{
+public unsafe partial struct InventoryManager {
     [FieldOffset(0x1E08)] public InventoryContainer* Inventories;
 
     [MemberFunction("E8 ?? ?? ?? ?? 44 0F BE C7")]
@@ -18,6 +17,9 @@ public unsafe partial struct InventoryManager
     [MemberFunction("E8 ?? ?? ?? ?? 33 DB 89 1E")]
     public partial int MoveItemSlot(InventoryType srcContainer, ushort srcSlot, InventoryType dstContainer, ushort dstSlot, byte unk = 0);
 
+    [MemberFunction("E8 ?? ?? ?? ?? 85 C0 7F 6D")]
+    private partial uint GetEquippedItemIdForSlot(int slotId);
+
     /// <summary>
     /// Get the number of gearsets the player is permitted to have/use.
     /// </summary>
@@ -27,7 +29,7 @@ public unsafe partial struct InventoryManager
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? 8B D8 E8 ?? ?? ?? ?? 8B 55 F7")]
     private partial int GetLimitedTomestoneCount(int a1);
-    
+
     [MemberFunction("E8 ?? ?? ?? ?? 8D 4F DD")]
     private static partial int GetSpecialItemId(byte switchCase);
 
@@ -43,20 +45,18 @@ public unsafe partial struct InventoryManager
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x18)]
-public unsafe partial struct InventoryContainer
-{
+public unsafe partial struct InventoryContainer {
     [FieldOffset(0x00)] public InventoryItem* Items;
     [FieldOffset(0x08)] public InventoryType Type;
     [FieldOffset(0x0C)] public uint Size;
     [FieldOffset(0x10)] public byte Loaded;
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8B 5B 0C")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8B 57 F0")]
     public partial InventoryItem* GetInventorySlot(int index);
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x38)]
-public unsafe struct InventoryItem
-{
+public unsafe struct InventoryItem {
     [FieldOffset(0x00)] public InventoryType Container;
     [FieldOffset(0x04)] public short Slot;
     [FieldOffset(0x08)] public uint ItemID;
@@ -71,8 +71,7 @@ public unsafe struct InventoryItem
     [FieldOffset(0x30)] public uint GlamourID;
 
     [Flags]
-    public enum ItemFlags : byte
-    {
+    public enum ItemFlags : byte {
         None = 0,
         HQ = 1,
         CompanyCrestApplied = 2,
@@ -81,8 +80,7 @@ public unsafe struct InventoryItem
     }
 }
 
-public enum InventoryType : uint
-{
+public enum InventoryType : uint {
     Inventory1 = 0,
     Inventory2 = 1,
     Inventory3 = 2,
@@ -159,4 +157,3 @@ public enum InventoryType : uint
     HousingInteriorStoreroom7 = 27007,
     HousingInteriorStoreroom8 = 27008
 }
-

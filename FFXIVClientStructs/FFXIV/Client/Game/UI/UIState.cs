@@ -1,4 +1,4 @@
-﻿using FFXIVClientStructs.FFXIV.Client.Game.Event;
+using FFXIVClientStructs.FFXIV.Client.Game.Event;
 using FFXIVClientStructs.FFXIV.Client.Game.Fate;
 using FFXIVClientStructs.FFXIV.Component.Exd;
 
@@ -8,48 +8,61 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
 // ctor E8 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? 48 83 C4 28 E9 ?? ?? ?? ?? 48 83 EC 28 33 D2 
 [StructLayout(LayoutKind.Explicit, Size = 0x16BAC)] // its at least this big, may be a few bytes bigger
-public unsafe partial struct UIState
-{
+public unsafe partial struct UIState {
     [FieldOffset(0x00)] public Hotbar Hotbar;
     [FieldOffset(0x08)] public Hate Hate;
     [FieldOffset(0x110)] public Hater Hater;
-    [FieldOffset(0xA18)] public WeaponState WeaponState;
+    [FieldOffset(0xA18)] public Chain Chain;
+    [FieldOffset(0xA20)] public WeaponState WeaponState;
     [FieldOffset(0xA38)] public PlayerState PlayerState;
-    [FieldOffset(0x1208)] public Revive Revive;
-    [FieldOffset(0x14A0)] public Telepo Telepo;
-    [FieldOffset(0x14F8)] public Cabinet Cabinet;
-    [FieldOffset(0x1A90)] public Buddy Buddy;
-    [FieldOffset(0x296C)] public PvPProfile PvPProfile;
-    [FieldOffset(0x29F0)] public ContentsNote ContentsNote;
-    [FieldOffset(0x2A98)] public RelicNote RelicNote;
-    [FieldOffset(0x2AF8)] public AreaInstance AreaInstance;
-    [FieldOffset(0x2B34)] public MobHunt MobHunt;
-    [FieldOffset(0x2FC0)] public Loot Loot;
+    [FieldOffset(0x1220)] public Revive Revive;
+    [FieldOffset(0x1250)] public Inspect Inspect;
+    [FieldOffset(0x14B8)] public Telepo Telepo;
+    [FieldOffset(0x1510)] public Cabinet Cabinet;
+    [FieldOffset(0x1560)] public Achievement Achievement;
+    [FieldOffset(0x1AB0)] public Buddy Buddy;
+    [FieldOffset(0x298C)] public PvPProfile PvPProfile;
+    [FieldOffset(0x2A10)] public ContentsNote ContentsNote;
+    [FieldOffset(0x2AB8)] public RelicNote RelicNote;
+    [FieldOffset(0x2B18)] public AreaInstance AreaInstance; // at vtbl - 0x10
+    [FieldOffset(0x2FE0)] public Loot Loot;
 
-    [FieldOffset(0x3C60)] public RecipeNote RecipeNote;
+    [FieldOffset(0x3C80)] public RecipeNote RecipeNote;
 
-    [FieldOffset(0xA7C8)] public Director* ActiveDirector;
-    [FieldOffset(0xA910)] public FateDirector* FateDirector;
+    [FieldOffset(0xA800)] public Director* ActiveDirector;
+    [FieldOffset(0xA948)] public FateDirector* FateDirector;
 
-    [FieldOffset(0xAA58)] public Map Map;
+    [FieldOffset(0xAA90)] public Map Map;
 
-    [FieldOffset(0xEA40)] public MarkingController MarkingController;
-    [FieldOffset(0xECF0)] public LimitBreakController LimitBreakController;
+    [FieldOffset(0xEA80)] public MarkingController MarkingController;
+    [FieldOffset(0xED60)] public LimitBreakController LimitBreakController;
 
-    [FieldOffset(0x119B8)] public RouletteController RouletteController;
-    [FieldOffset(0x11A88)] public ContentsFinder ContentsFinder;
+    [FieldOffset(0x11A28)] public RouletteController RouletteController;
+    [FieldOffset(0x11AF8)] public ContentsFinder ContentsFinder;
+    [FieldOffset(0x11C10)] public MobHunt MobHunt;
 
     // Ref: UIState#IsUnlockLinkUnlocked (relative to uistate)
-    [FieldOffset(0x169FC)] public fixed byte UnlockLinkBitmask[0x7E];
-    
+    // Size: Offset of UnlockedAetherytesBitmask - Offset of UnlockLinkBitmask
+    [FieldOffset(0x16AF4)] public fixed byte UnlockLinkBitmask[0x40];
+
+    // Ref: Telepo#UpdateAetheryteList (in the Aetheryte sheet loop)
+    // Size: Number of rows in Aetheryte sheet >> 3
+    [FieldOffset(0x16B34)] public fixed byte UnlockedAetherytesBitmask[200 >> 3];
+
+    // Ref: E8 ?? ?? ?? ?? 48 83 6F ?? ?? 75 06 48 89 77 68
+    // Size: Number of rows in HowTo sheet >> 3
+    [FieldOffset(0x16B4E)] public fixed byte UnlockedHowtoBitmask[288 >> 3];
+
     // Ref: g_Client::Game::UI::UnlockedCompanionsMask
     //      direct ref: 48 8D 0D ?? ?? ?? ?? 0F B6 04 08 84 D0 75 10 B8 ?? ?? ?? ?? 48 8B 5C 24
     //      relative to uistate: E8 ?? ?? ?? ?? 84 C0 75 A6 32 C0 (case for 0x355)
-    [FieldOffset(0x16A7A)] public fixed byte UnlockedCompanionsBitmask[0x3A];
-    
+    // Size: Number of rows in Companion sheet >> 3
+    [FieldOffset(0x16B72)] public fixed byte UnlockedCompanionsBitmask[496 >> 3];
+
     // 42 0F B6 04 30 44 84 C0
-    [FieldOffset(0x16AB6)] public fixed byte ChocoboTaxiStandsBitmask[0x26];
-    
+    // Size: Number of rows in ChocoboTaxi sheet >> 3
+    [FieldOffset(0x16BB0)] public fixed byte ChocoboTaxiStandsBitmask[312 >> 3];
+
     [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B 8B ?? ?? ?? ?? 48 8B 01", 3)]
     public static partial UIState* Instance();
 
@@ -113,6 +126,24 @@ public unsafe partial struct UIState
     public partial bool IsEmoteUnlocked(ushort emoteId);
 
     /// <summary>
+    /// Check if a aetheryte is unlocked for the current character.
+    /// </summary>
+    /// <param name="aetheryteId">The ID of the aetheryte to check for.</param>
+    /// <returns>Returns true if the specified aetheryte is unlocked.</returns>
+    public bool IsAetheryteUnlocked(uint aetheryteId) {
+        return ((1 << ((int)aetheryteId & 7)) & this.UnlockedAetherytesBitmask[aetheryteId >> 3]) > 0;
+    }
+
+    /// <summary>
+    /// Check if a HowTo is unlocked for the current character.
+    /// </summary>
+    /// <param name="howtoId">The ID of the HowTo to check for.</param>
+    /// <returns>Returns true if the specified HowTo is unlocked.</returns>
+    public bool IsHowToUnlocked(uint howtoId) {
+        return ((1 << ((int)howtoId & 7)) & this.UnlockedHowtoBitmask[howtoId >> 3]) > 0;
+    }
+
+    /// <summary>
     /// Check if a companion (minion) is unlocked for the current character.
     /// </summary>
     /// <remarks>
@@ -123,15 +154,15 @@ public unsafe partial struct UIState
     /// <returns>Returns true if the specified minion is unlocked.</returns>
     public bool IsCompanionUnlocked(uint companionId) {
         // Logic borrowed from E8 ?? ?? ?? ?? 84 C0 75 A6 32 C0 and others.
-        
+
         // This, for some reason, does not exist as a siggable method in the game code normally. Virtually everyone and
         // everything that does minion checks will have this snippet (or one like it) in place. One does exist in the
         // crossref for the bitmask, but it's over in what I suspect is in the UI module and is bounded. I don't want to
         // replicate this upper bound here as that'll just be something we need to change with alarming regularity.
-        
-        return ((1 << ((int) companionId & 7)) & this.UnlockedCompanionsBitmask[companionId >> 3]) > 0;
+
+        return ((1 << ((int)companionId & 7)) & this.UnlockedCompanionsBitmask[companionId >> 3]) > 0;
     }
-    
+
     public bool IsChocoboTaxiStandUnlocked(uint chocoboTaxiStandId) {
         return ((1 << ((ushort)chocoboTaxiStandId & 7)) & this.ChocoboTaxiStandsBitmask[(ushort)chocoboTaxiStandId >> 3]) > 0;
     }
@@ -147,8 +178,7 @@ public unsafe partial struct UIState
     public partial int GetNextMapAllowanceTimestamp();
 
     // Only valid after the timers window has been opened, returns DateTime.MinValue otherwise.
-    public DateTime GetNextMapAllowanceDateTime()
-    {
+    public DateTime GetNextMapAllowanceDateTime() {
         var timeStamp = GetNextMapAllowanceTimestamp();
         return timeStamp > 0 ? DateTime.UnixEpoch.AddSeconds(timeStamp) : DateTime.MinValue;
     }

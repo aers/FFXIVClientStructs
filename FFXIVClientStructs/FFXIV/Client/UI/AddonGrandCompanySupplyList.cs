@@ -1,11 +1,10 @@
-﻿using FFXIVClientStructs.FFXIV.Component.GUI;
+using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 [Addon("GrandCompanySupplyList")]
 [StructLayout(LayoutKind.Explicit, Size = 0x760)]
-public unsafe struct AddonGrandCompanySupplyList
-{
+public unsafe struct AddonGrandCompanySupplyList {
     [FieldOffset(0x00)] public AtkUnitBase AtkUnitBase;
 
     [FieldOffset(0x280)] public AtkComponentList* SupplyProvisioningList;
@@ -27,5 +26,5 @@ public unsafe struct AddonGrandCompanySupplyList
     [FieldOffset(0x2E8)] public int SelectedTab;
     [FieldOffset(0x2EC)] public int SelectedSortBy;
     [FieldOffset(0x2F0)] public int SelectedFilter;
-    
+
 }
