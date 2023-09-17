@@ -1599,6 +1599,7 @@ classes:
       0x140102A20: ProcessRequestResult
       0x140102CF0: ProcessItemHistory
       0x140102D40: ProcessItemHistory_Internal
+      0x140103430: SetLastPurchasedItem
   Client::UI::Info::InfoProxyPartyInvite:
     vtbls:
       - ea: 0x141950028
@@ -6758,6 +6759,8 @@ classes:
     vtbls:
       - ea: 0x141BA9F88
         base: Client::Game::InstanceContent::ContentDirector
+    funcs:
+      0x1414142FAB0: HandleEnterContentInfoPacket  # static
   Client::UI::PopupMenu:
     vtbls:
       - ea: 0x141A1BEE8
@@ -6784,7 +6787,7 @@ classes:
       - ea: 0x141A679E0
         base: Component::GUI::AtkUnitBase
     funcs:
-        0x:140F7EF80: ctor
+        0x140F7EF80: ctor
   Client::UI::AddonFateReward:
     vtbls:
       - ea: 0x141A696D8
