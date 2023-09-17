@@ -86,8 +86,8 @@ public unsafe partial struct CharacterBase {
     public readonly Span<Pointer<Model>> ModelsSpan
         => new(Models, SlotCount);
 
-    public readonly Span<Pointer<Texture>> ColorSetTexturesSpan
-        => new(ColorSetTextures, SlotCount * 4);
+    public readonly Span<Pointer<Texture>> ColorTableTexturesSpan
+        => new(ColorTableTextures, SlotCount * 4);
 
     public readonly Span<Pointer<Material>> MaterialsSpan
         => new(Materials, SlotCount * 4);
