@@ -4,7 +4,7 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Resource;
 
 using CategoryMap = StdMap<uint, Pointer<StdMap<uint, Pointer<ResourceHandle>>>>;
 
-public enum ResourceCategory {
+public enum ResourceCategory : ushort {
     Common = 0,
     BgCommon = 1,
     Bg = 2,
