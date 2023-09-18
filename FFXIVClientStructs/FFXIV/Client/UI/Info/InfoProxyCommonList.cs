@@ -26,11 +26,17 @@ public unsafe partial struct InfoProxyCommonList {
     [StructLayout(LayoutKind.Explicit, Size = 0x68)]
     public struct CharacterData {
         [FieldOffset(0x00)] public ulong ContentId;
-        [FieldOffset(0x08)] public ClientState State; // bunch of stuff mashed together from online status, mentor status, duty status
+        [FieldOffset(0x08)] public OnlineStatus State;
         //12 bytes
-        [FieldOffset(0x18)] public uint Unk18; // Some kind of flag type, seems to be 0x10 for accepted, 0x20 for pending. and there seems to be some check for 0x1000000
-        [FieldOffset(0x1C)] public byte SortId; // Could also be Index for the list
-        // 1 byte
+        /// <summary>
+        /// Extra flags for status:
+        /// 0x10 = ? always set when accepted friend request
+        /// 0x20 = WaitingForFriendListApproval
+        /// 0x1000000 = OtherWorld (FCTag not available)
+        /// </summary>
+        [FieldOffset(0x18)] public uint ExtraFlags;
+        [FieldOffset(0x1C)] public byte Sort;
+        // 1ul byte
         [FieldOffset(0x1E)] public ushort CurrentWorld;
         [FieldOffset(0x20)] public ushort HomeWorld;
         [FieldOffset(0x22)] public ushort Location; //ZoneID
@@ -44,75 +50,59 @@ public unsafe partial struct InfoProxyCommonList {
         // 8 bytes
         [FieldOffset(0x58)] public CharIndexEntry* Index;
 
+        /// <summary>
+        /// These are the flag bits shifted 1 to the right from the keys of OnlineStatus exd entries.
+        /// </summary>
         [Flags]
-        public enum ClientState : ulong {
-            Offline = 0x0000000000000000,
-            Busy = 0x0000000000001000,
-            PlayingTripleTriad = 0x0000000000004000,
-            ViewingCutscene = 0x0000000000008000,
-            AFK = 0x0000000000020000,
-            CameraMode = 0x0000000000040000,
-            RP = 0x0000000000400000,
-            LFP = 0x0000000000800000,
-            WaitingForDutyFinder = 0x0000000002000000,
-            RecruitingMembers = 0x0000000004000000,
-            Mentor = 0x0000000008000000,
-            PvEMentor = 0x0000000010000000,
-            TradeMentor = 0x0000000020000000,
-            PvPMentor = 0x0000000040000000,
-            Returner = 0x0000000080000000,
-            NewAdventurer = 0x0000000100000000,
-            PartyLeader = 0x0000001000000000,
-            PartyMember = 0x0000002000000000,
-            PartyLeaderCrossWorld = 0x0000004000000000,
-            PartyMemberCrossWorld = 0x0000008000000000,
-            AnotherWorld = 0x0000010000000000,
-            Online = 0x0000800000000000,
-
-            // Unknowns included to improve readability of ToString, not to be used.
-            [Obsolete("Included to improve readability of ToString, not to be used.", true)] Unk1 = 0x0000000000000001,
-            [Obsolete("Included to improve readability of ToString, not to be used.", true)] Unk2 = 0x0000000000000002,
-            [Obsolete("Included to improve readability of ToString, not to be used.", true)] Unk4 = 0x0000000000000004,
-            [Obsolete("Included to improve readability of ToString, not to be used.", true)] Unk8 = 0x0000000000000008,
-            [Obsolete("Included to improve readability of ToString, not to be used.", true)] Unk10 = 0x0000000000000010,
-            [Obsolete("Included to improve readability of ToString, not to be used.", true)] Unk20 = 0x0000000000000020,
-            [Obsolete("Included to improve readability of ToString, not to be used.", true)] Unk40 = 0x0000000000000040,
-            [Obsolete("Included to improve readability of ToString, not to be used.", true)] Unk80 = 0x0000000000000080,
-            [Obsolete("Included to improve readability of ToString, not to be used.", true)] Unk100 = 0x0000000000000100,
-            [Obsolete("Included to improve readability of ToString, not to be used.", true)] Unk200 = 0x0000000000000200,
-            [Obsolete("Included to improve readability of ToString, not to be used.", true)] Unk400 = 0x0000000000000400,
-            [Obsolete("Included to improve readability of ToString, not to be used.", true)] Unk800 = 0x0000000000000800,
-            [Obsolete("Included to improve readability of ToString, not to be used.", true)] Unk2000 = 0x0000000000002000,
-            [Obsolete("Included to improve readability of ToString, not to be used.", true)] Unk10000 = 0x0000000000010000,
-            [Obsolete("Included to improve readability of ToString, not to be used.", true)] Unk80000 = 0x0000000000080000,
-            [Obsolete("Included to improve readability of ToString, not to be used.", true)] Unk100000 = 0x0000000000100000,
-            [Obsolete("Included to improve readability of ToString, not to be used.", true)] Unk200000 = 0x0000000000200000,
-            [Obsolete("Included to improve readability of ToString, not to be used.", true)] Unk1000000 = 0x0000000001000000,
-            [Obsolete("Included to improve readability of ToString, not to be used.", true)] Unk20000000 = 0x0000000200000000,
-            [Obsolete("Included to improve readability of ToString, not to be used.", true)] Unk40000000 = 0x0000000400000000,
-            [Obsolete("Included to improve readability of ToString, not to be used.", true)] Unk80000000 = 0x0000000800000000,
-            [Obsolete("Included to improve readability of ToString, not to be used.", true)] Unk200000000 = 0x0000020000000000,
-            [Obsolete("Included to improve readability of ToString, not to be used.", true)] Unk400000000 = 0x0000040000000000,
-            [Obsolete("Included to improve readability of ToString, not to be used.", true)] Unk800000000 = 0x0000080000000000,
-            [Obsolete("Included to improve readability of ToString, not to be used.", true)] Unk1000000000 = 0x0000100000000000,
-            [Obsolete("Included to improve readability of ToString, not to be used.", true)] Unk2000000000 = 0x0000200000000000,
-            [Obsolete("Included to improve readability of ToString, not to be used.", true)] Unk4000000000 = 0x0000400000000000,
-            [Obsolete("Included to improve readability of ToString, not to be used.", true)] Unk10000000000 = 0x0001000000000000,
-            [Obsolete("Included to improve readability of ToString, not to be used.", true)] Unk20000000000 = 0x0002000000000000,
-            [Obsolete("Included to improve readability of ToString, not to be used.", true)] Unk40000000000 = 0x0004000000000000,
-            [Obsolete("Included to improve readability of ToString, not to be used.", true)] Unk80000000000 = 0x0008000000000000,
-            [Obsolete("Included to improve readability of ToString, not to be used.", true)] Unk100000000000 = 0x0010000000000000,
-            [Obsolete("Included to improve readability of ToString, not to be used.", true)] Unk200000000000 = 0x0020000000000000,
-            [Obsolete("Included to improve readability of ToString, not to be used.", true)] Unk400000000000 = 0x0040000000000000,
-            [Obsolete("Included to improve readability of ToString, not to be used.", true)] Unk800000000000 = 0x0080000000000000,
-            [Obsolete("Included to improve readability of ToString, not to be used.", true)] Unk1000000000000 = 0x0100000000000000,
-            [Obsolete("Included to improve readability of ToString, not to be used.", true)] Unk2000000000000 = 0x0200000000000000,
-            [Obsolete("Included to improve readability of ToString, not to be used.", true)] Unk4000000000000 = 0x0400000000000000,
-            [Obsolete("Included to improve readability of ToString, not to be used.", true)] Unk8000000000000 = 0x0800000000000000,
-            [Obsolete("Included to improve readability of ToString, not to be used.", true)] Unk10000000000000 = 0x1000000000000000,
-            [Obsolete("Included to improve readability of ToString, not to be used.", true)] Unk20000000000000 = 0x2000000000000000,
-            [Obsolete("Included to improve readability of ToString, not to be used.", true)] Unk40000000000000 = 0x4000000000000000,
-            [Obsolete("Included to improve readability of ToString, not to be used.", true)] Unk80000000000000 = 0x8000000000000000
+        public enum OnlineStatus : ulong {
+            Offline = 0,
+            GameQA = 1ul << 2,
+            GameMaster = 1ul << 3,
+            GameMasterBlue = 1ul << 4,
+            EventParticipant = 1ul << 5,
+            Disconnected = 1ul << 6,
+            WaitingForFriendListApproval = 1ul << 7,
+            WaitingForLinkshellApproval = 1ul << 8,
+            WaitingForFreeCompanyApproval = 1ul << 9,
+            NotFound = 1ul << 10,
+            OfflineExd = 1ul << 11,
+            BattleMentor = 1ul << 12,
+            Busy = 1ul << 13,
+            PvP = 1ul << 14,
+            PlayingTripleTriad = 1ul << 15,
+            ViewingCutscene = 1ul << 16,
+            UsingAChocoboPorter = 1ul << 17,
+            AwayFromKeyboard = 1ul << 18,
+            CameraMode = 1ul << 19,
+            LookingForRepairs = 1ul << 20,
+            LookingToRepair = 1ul << 21,
+            LookingToMeldMateria = 1ul << 22,
+            RolePlaying = 1ul << 23,
+            LookingForParty = 1ul << 24,
+            SowrdForHire = 1ul << 25,
+            WaitingForDutyFinder = 1ul << 26,
+            RecruitingPartyMembers = 1ul << 27,
+            Mentor = 1ul << 28,
+            PvEMentor = 1ul << 29,
+            TradeMentor = 1ul << 30,
+            PvPmentor = 1ul << 31,
+            Returner = 1ul << 32,
+            NewAdventurer = 1ul << 33,
+            AllianceLeader = 1ul << 34,
+            AlliancePartyLeader = 1ul << 35,
+            AlliancePartyMember = 1ul << 36,
+            PartyLeader = 1ul << 37,
+            PartyMember = 1ul << 38,
+            PartyLeaderCrossWorld = 1ul << 39,
+            PartyMemberCrossWorld = 1ul << 40,
+            AnotherWorld = 1ul << 41,
+            SharingDuty = 1ul << 42,
+            SimilarDuty = 1ul << 43,
+            InDuty = 1ul << 44,
+            TrailAdventurer = 1ul << 45,
+            FreeCompany = 1ul << 46,
+            GrandCompany = 1ul << 47,
+            Online = 1ul << 48,
         }
 
         public enum Language : byte {
