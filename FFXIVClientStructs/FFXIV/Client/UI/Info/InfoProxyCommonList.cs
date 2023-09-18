@@ -49,7 +49,7 @@ public unsafe partial struct InfoProxyCommonList {
         [FieldOffset(0x4A)] public fixed byte FCTag[6];
         // 8 bytes
         [FieldOffset(0x58)] public CharIndexEntry* Index;
-        
+
         [Flags]
         public enum OnlineStatus : ulong {
             Offline = 0,
