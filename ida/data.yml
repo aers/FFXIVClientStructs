@@ -1600,6 +1600,7 @@ classes:
       0x140102CF0: ProcessItemHistory
       0x140102D40: ProcessItemHistory_Internal
       0x140103430: SetLastPurchasedItem
+      0x140103510: SendPurchaseRequestPacket
   Client::UI::Info::InfoProxyPartyInvite:
     vtbls:
       - ea: 0x141950028
