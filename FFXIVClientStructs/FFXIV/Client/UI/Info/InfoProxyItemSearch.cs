@@ -55,8 +55,48 @@ public unsafe partial struct InfoProxyItemSearch {
 
     // [FieldOffset(0x5B96)] public byte Unk_0x5B96; // controls if AddData gets called? (ResultsPresent?)
 
+    /// <summary>
+    /// Loads received marketboard data into the <see cref="Listings"/> array. This method is directly responsible for translating the inbound
+    /// <c>MarketBoardOfferings</c> packet into <see cref="MarketBoardListing"/> structs.
+    /// </summary>
+    /// <param name="packetPtr">A pointer to the packet to load in.</param>
+    /// <param name="count">The number of entries to load. Always appears to be 10.</param>
+    /// <returns>Returns an nint, probably.</returns>
+    [VirtualFunction(1)]
+    public partial nint AddData(nint packetPtr, uint count = 10);
+
+    [VirtualFunction(2)]
+    public partial void RemoveData(); // nullsub. including for completeless only.
+
+    /// <summary>
+    /// Sets the value of <see cref="InfoProxyInterface.EntryCount"/> to 0 for this proxy. Does not actually delete any data from any arrays. 
+    /// </summary>
+    [VirtualFunction(3)]
+    public partial void ClearData();
+
+    /// <summary>
+    /// Send a search request to the server based on the currently selected <see cref="SearchItemId"/> and other data. WILL generate a network request.
+    /// </summary>
+    /// <returns>Returns true if the packet was sent (?), false otherwise.</returns>
+    [VirtualFunction(5)]
+    public partial bool RequestData();
+
+    /// <summary>
+    /// (Currently) a nullsub that gets called by <see cref="AddPage"/> after all data is received from the server.
+    /// </summary>
+    /// <remarks>
+    /// Technically returns <c>0</c>, but the return does not seem to be used at all.
+    /// </remarks>
     [VirtualFunction(6)]
     public partial void EndRequest();
+
+    /// <summary>
+    /// Handles the <c>MarketBoardOfferings</c> packet and calls <see cref="AddData"/> to load into the InfoProxy. Will also handle dispatching
+    /// packets to the server for pagination/fetch purposes. Calls <see cref="EndRequest"/> when all data is loaded.
+    /// </summary>
+    /// <param name="packetPtr">A pointer to the packet data to load in.</param>
+    [VirtualFunction(12)]
+    public partial void AddPage(nint packetPtr);
 
     [MemberFunction("41 83 F8 14 77 3C")]
     public partial void ProcessItemHistory(nint a2, nint a3, nint a4);
