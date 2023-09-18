@@ -1,6 +1,7 @@
 // Forward References
 struct Application_Network_WorkDefinitions_BeastReputationWork;
 struct Application_Network_WorkDefinitions_DailyQuestWork;
+struct Application_Network_WorkDefinitions_EnterContentInfo;
 struct Application_Network_WorkDefinitions_LeveWork;
 struct Application_Network_WorkDefinitions_QuestWork;
 struct Application_Network_WorkDefinitions_TrackingWork;
@@ -154,16 +155,13 @@ struct Client_Game_Object_GameObject;
 struct Client_Game_Object_GameObject_GameObjectVTable;
 struct Client_Game_Object_GameObjectManager;
 struct Client_Game_QuestManager;
-struct Client_Game_QuestManager_QuestListArray;
-struct Client_Game_QuestManager_QuestListArray_Quest;
 struct Client_Game_RaceChocoboManager;
 struct Client_Game_RankData;
 struct Client_Game_RecastDetail;
 struct Client_Game_ReconstructionBoxData;
 struct Client_Game_ReconstructionBoxManager;
 struct Client_Game_RetainerManager;
-struct Client_Game_RetainerManager_RetainerList;
-struct Client_Game_RetainerManager_RetainerList_Retainer;
+struct Client_Game_RetainerManager_Retainer;
 struct Client_Game_SatisfactionSupplyManager;
 struct Client_Game_SavedAppearanceManager;
 struct Client_Game_SavedAppearanceManager_SavedAppearanceManagerVTable;
@@ -192,8 +190,6 @@ struct Client_Game_UI_Map;
 struct StdVector_ClientGameUIMapMarkerData;
 struct Client_Game_UI_MapMarkerContainer;
 struct Client_Game_UI_SimpleMapMarkerContainer;
-struct Client_Game_UI_Map_MapMarkerInfo;
-struct Client_Game_UI_Map_QuestMarkerArray;
 struct Client_Game_UI_MapMarkerContainer_LinkedList;
 struct Client_Game_UI_MapMarkerData;
 struct Client_Game_UI_MapMarkerNode;
@@ -231,6 +227,7 @@ struct Client_Graphics_Kernel_ConstantBuffer;
 struct Client_Graphics_Kernel_ConstantBufferPointer;
 struct Client_Graphics_Kernel_CVector;
 struct Client_Graphics_Kernel_Device;
+struct Client_Graphics_Kernel_Notifier;
 struct Client_Graphics_Kernel_PixelShader;
 struct Client_Graphics_Kernel_ShaderNode;
 struct Client_Graphics_Kernel_ShaderNode_ShaderPass;
@@ -247,6 +244,8 @@ struct Pointer_ClientGraphicsKernelShaderNode;
 struct Client_Graphics_Kernel_ShaderPackage_ConstantSamplerUnknown;
 struct Client_Graphics_Kernel_ShaderPackage_MaterialElement;
 struct Client_Graphics_Kernel_SwapChain;
+struct Client_Graphics_Kernel_Texture;
+struct Client_Graphics_Kernel_Texture_TextureVTable;
 struct Client_Graphics_Kernel_VertexShader;
 struct Client_Graphics_Physics_BonePhysicsModule;
 struct Client_Graphics_Physics_BoneSimulators;
@@ -258,7 +257,6 @@ struct Client_Graphics_Render_Manager;
 struct Client_Graphics_Render_Material;
 struct Client_Graphics_Render_Material_TextureEntry;
 struct Client_Graphics_Render_Model;
-struct Client_Graphics_Render_Notifier;
 struct Client_Graphics_Render_OffscreenRenderingManager;
 struct Client_Graphics_Render_PartialSkeleton;
 struct Client_Graphics_Render_RenderTargetManager;
@@ -266,8 +264,6 @@ struct Client_Graphics_Render_Skeleton;
 struct Client_Graphics_Transform;
 struct Client_Graphics_Render_SubView;
 struct Common_Math_Rectangle;
-struct Client_Graphics_Render_Texture;
-struct Client_Graphics_Render_Texture_TextureVTable;
 struct Client_Graphics_Render_View;
 struct Client_Graphics_Scene_CameraManager;
 struct Client_Graphics_Scene_CharacterBase;
@@ -301,7 +297,12 @@ struct Client_System_Configuration_SystemConfig;
 struct Common_Configuration_SystemConfig;
 struct Client_System_File_FileDescriptor;
 struct Client_System_Framework_Framework;
+struct Client_System_Framework_TaskManager;
+struct Client_System_Framework_TaskManagerOsData;
 struct Client_System_Framework_GameVersion;
+struct Client_System_Framework_RootTask;
+struct Client_System_Framework_Task;
+struct Client_System_Framework_Task_TaskVTable;
 struct Client_System_Memory_IMemorySpace;
 struct Client_System_Memory_IMemorySpace_IMemorySpaceVTable;
 struct Client_System_Resource_Handle_MaterialResourceHandle;
@@ -328,19 +329,21 @@ struct Client_System_Scheduler_Resource_SchedulerResource;
 struct Client_System_Scheduler_Resource_SchedulerResource_ResourceName;
 struct Client_System_Scheduler_Resource_SchedulerResourceManagement;
 struct Client_UI_ActionBarSlot;
+struct Client_UI_ActionInfo;
 struct Client_UI_AddonActionBar;
 struct Client_UI_AddonActionBarX;
 struct Client_UI_AddonActionBarBase;
 struct Client_UI_AddonActionBarBase_AddonActionBarBaseVTable;
 struct Client_UI_AddonActionCross;
 struct Client_UI_AddonActionDoubleCrossBase;
-struct Client_UI_AddonAOZNotebook;
+struct Client_UI_AddonActionMenu;
 struct Component_GUI_AtkUnitBase;
 struct Component_GUI_AtkEventListener;
 struct Component_GUI_AtkUldManager;
 struct StdLinkedList_PointerComponentGUIAtkUldManagerDuplicateObjectList;
 struct StdLinkedList_Node_PointerComponentGUIAtkUldManagerDuplicateObjectList;
 struct Pointer_ComponentGUIAtkUldManagerDuplicateObjectList;
+struct Client_UI_AddonAOZNotebook;
 struct Client_UI_AddonAOZNotebook_SpellbookBlock;
 struct Client_UI_AddonAOZNotebook_ActiveActions;
 struct Client_UI_AddonBank;
@@ -520,6 +523,7 @@ struct Client_UI_Agent_AgentHousingPlant;
 struct Client_UI_Agent_AgentHousingPlant_SelectableItem;
 struct Client_UI_Agent_AgentHousingPlant_SelectedItem;
 struct Client_UI_Agent_AgentHUD;
+struct Client_UI_Agent_AgentHudLayout;
 struct Client_UI_Agent_AgentIKDFishingLog;
 struct Client_UI_Agent_AgentIKDFishingLog_LogEntry;
 struct Client_UI_Agent_AgentIKDFishingLog_PotentialCatchSpot;
@@ -534,6 +538,7 @@ struct Client_UI_Agent_AgentInspect_FreeCompanyData;
 struct Client_UI_Agent_AgentInspect_ItemData;
 struct Client_UI_Agent_AgentInspect_ItemData_ColorRGB;
 struct Client_UI_Agent_AgentInventoryContext;
+struct Client_UI_Agent_AgentItemDetail;
 struct Client_UI_Agent_AgentItemDonationInfo;
 struct Client_UI_Agent_AgentItemSearch;
 struct Client_UI_Agent_AgentLobby;
@@ -552,6 +557,7 @@ struct Client_UI_Agent_FlagMapMarker;
 struct Client_UI_Agent_MapMarkerBase;
 struct Client_UI_Agent_AgentMiragePrismMiragePlate;
 struct Client_UI_Agent_AgentMiragePrismPrismBox;
+struct Client_UI_Agent_AgentMiragePrismPrismItemDetail;
 struct Client_UI_Agent_AgentMJIPouch;
 struct Client_UI_Agent_AgentMJIPouch_PouchIndexInfo;
 struct Client_UI_Agent_AgentMJIPouch_PouchInventoryData;
@@ -561,6 +567,7 @@ struct Pointer_ClientUIAgentPouchInventoryItem;
 struct StdVector_ClientSystemStringUtf8String;
 struct Client_UI_Agent_AgentModule;
 struct Client_UI_Agent_AgentMonsterNote;
+struct Client_UI_Agent_AgentMycBattleAreaInfo;
 struct Client_UI_Agent_AgentMycItemBox;
 struct Client_UI_Agent_AgentReadyCheck;
 struct Client_UI_Agent_AgentReadyCheck_ReadyCheckEntry;
@@ -571,7 +578,6 @@ struct Client_UI_Agent_AgentRetainerItemTransfer;
 struct Client_UI_Agent_AgentRetainerItemTransferData;
 struct Client_UI_Agent_AgentRetainerItemTransferData_DuplicateItemEntry;
 struct Client_UI_Agent_AgentRetainerList;
-struct Client_UI_Agent_AgentRetainerList_RetainerList;
 struct Client_UI_Agent_AgentRetainerList_Retainer;
 struct Client_UI_Agent_AgentRetainerTask;
 struct Client_UI_Agent_AgentRevive;
@@ -581,6 +587,8 @@ struct Client_UI_Agent_AgentSalvage_SalvageListItem;
 struct Client_UI_Agent_AgentSatisfactionSupply;
 struct Client_UI_Agent_AgentSatisfactionSupply_SatisfactionSupplyNpcInfo;
 struct Client_UI_Agent_AgentSatisfactionSupply_ItemInfo;
+struct Client_UI_Agent_AgentScenarioTree;
+struct Client_UI_Agent_AgentScenarioTree_AgentScenarioTreeData;
 struct Client_UI_Agent_AgentScreenLog;
 struct StdDeque_ClientUIAgentBalloonInfo;
 struct Client_UI_Agent_AgentShop;
@@ -628,6 +636,8 @@ struct Client_UI_Agent_MiragePrismPrismBoxData;
 struct Client_UI_Agent_PrismBoxItem;
 struct Client_UI_Agent_PrismBoxCrystallizeItem;
 struct Client_UI_Agent_MissionInfo;
+struct Client_UI_Agent_MycDynamicEvent;
+struct Client_UI_Agent_MycDynamicEventData;
 struct Client_UI_Agent_MycItem;
 struct Client_UI_Agent_MycItemBoxData;
 struct Client_UI_Agent_MycItemCategory;
@@ -642,14 +652,13 @@ struct Client_UI_Agent_TempMapMarker;
 struct Client_UI_Info_CrossRealmGroup;
 struct Client_UI_Info_CrossRealmMember;
 struct Client_UI_Info_InfoModule;
-struct Client_UI_Info_InfoProxy11;
-struct Client_UI_Info_InfoProxyPageInterface;
-struct Client_UI_Info_InfoProxyInterface;
 struct Client_UI_Info_InfoProxy17;
+struct Client_UI_Info_InfoProxyInterface;
 struct Client_UI_Info_InfoProxy20;
 struct Client_UI_Info_InfoProxy21;
 struct Client_UI_Info_InfoProxyInvitedList;
 struct Client_UI_Info_InfoProxyCommonList;
+struct Client_UI_Info_InfoProxyPageInterface;
 struct Client_UI_Info_InfoProxy22;
 struct Client_UI_Info_InfoProxy23;
 struct Client_UI_Info_InfoProxy24;
@@ -658,15 +667,13 @@ struct Client_UI_Info_InfoProxy26;
 struct Client_UI_Info_InfoProxy27;
 struct Client_UI_Info_InfoProxy28;
 struct Client_UI_Info_InfoProxyBlacklist;
+struct Client_UI_Info_InfoProxyCatalogSearch;
+struct Client_UI_Info_InfoProxyCatalogSearch_Entry;
 struct Client_UI_Info_InfoProxyCircle;
 struct Client_UI_Info_InfoProxyCircle_Unk1;
 struct Client_UI_Info_InfoProxyCircleFinder;
 struct Client_UI_Info_InfoProxyCircleList;
-struct Client_UI_Info_InfoProxyCommonList_CharacterArray;
-struct Client_UI_Info_InfoProxyCommonList_CharacterArray_Entry;
 struct Client_UI_Info_InfoProxyCommonList_CharacterData;
-struct Client_UI_Info_InfoProxyCommonList_CharacterDict;
-struct Client_UI_Info_InfoProxyCommonList_CharacterDict_Entry;
 struct Client_UI_Info_InfoProxyCommonList_CharIndexEntry;
 struct Client_UI_Info_InfoProxyCrossRealm;
 struct Client_UI_Info_InfoProxyCrossWorldLinkShell;
@@ -682,7 +689,8 @@ struct Client_UI_Info_InfoProxyFriendList;
 struct Client_UI_Info_InfoProxyFriendList_StrBuf;
 struct Client_UI_Info_InfoProxyInterface_InfoProxyInterfaceVTable;
 struct Client_UI_Info_InfoProxyItemSearch;
-struct Client_UI_Info_InfoProxyItemSearch_Entry;
+struct Client_UI_Info_LastPurchasedMarketboardItem;
+struct Client_UI_Info_InfoProxyItemSearch_InfoProxyItemSearchVTable;
 struct Client_UI_Info_InfoProxyLetter;
 struct Client_UI_Info_InfoProxyLetter_Letter;
 struct Client_UI_Info_InfoProxyLetter_Letter_ItemAttachment;
@@ -690,10 +698,12 @@ struct Client_UI_Info_InfoProxyLinkShell;
 struct Client_UI_Info_InfoProxyLinkShell_Entry;
 struct Client_UI_Info_InfoProxyLinkShellChat;
 struct Client_UI_Info_InfoProxyLinkshellMember;
+struct Client_UI_Info_InfoProxyPageInterface_InfoProxyPageInterfaceVTable;
 struct Client_UI_Info_InfoProxyParty;
 struct Client_UI_Info_InfoProxyPartyInvite;
 struct Client_UI_Info_InfoProxySearch;
 struct Client_UI_Info_InfoProxySearchComment;
+struct Client_UI_Info_MarketBoardListing;
 struct Client_UI_LootItemInfo;
 struct Client_UI_Misc_AcquaintanceModule;
 struct Client_UI_Misc_UserFileManager_UserFileEvent;
@@ -721,21 +731,23 @@ struct Client_UI_Misc_ItemFinderModule;
 struct Client_UI_Misc_ItemFinderModuleResult;
 struct Client_UI_Misc_ItemFinderModuleRetainerResult;
 struct Client_UI_Misc_ItemOrderModule;
-struct StdVector_ClientUIMiscItemOrderModuleSorterRetainerEntry;
+struct StdMap_SystemUInt64_PointerClientUIMiscItemOrderModuleSorter;
+struct StdMap_Node_SystemUInt64_PointerClientUIMiscItemOrderModuleSorter;
+struct StdPair_SystemUInt64_PointerClientUIMiscItemOrderModuleSorter;
+struct Pointer_ClientUIMiscItemOrderModuleSorter;
 struct Client_UI_Misc_ItemOrderModuleSorter;
 struct StdVector_PointerClientUIMiscItemOrderModuleSorterItemEntry;
 struct Pointer_ClientUIMiscItemOrderModuleSorterItemEntry;
 struct StdVector_ClientUIMiscItemOrderModuleSorterSortFunctionEntry;
 struct Client_UI_Misc_ItemOrderModuleSorterItemEntry;
 struct Client_UI_Misc_ItemOrderModuleSorterPreviousOrderEntry;
-struct Client_UI_Misc_ItemOrderModuleSorterRetainerEntry;
 struct Client_UI_Misc_ItemOrderModuleSorterSortFunctionEntry;
 struct Client_UI_Misc_LogMessageSource;
 struct Client_UI_Misc_PronounModule;
 struct Client_UI_Misc_RaptureGearsetModule;
-struct Client_UI_Misc_RaptureGearsetModule_Gearsets;
 struct Client_UI_Misc_RaptureGearsetModule_GearsetEntry;
 struct Client_UI_Misc_RaptureGearsetModule_GearsetItem;
+struct Client_UI_Misc_RaptureGearsetModule_RaptureGearsetModuleVTable;
 struct Client_UI_Misc_RaptureHotbarModule;
 struct Client_UI_Misc_SavedHotBars;
 struct Client_UI_Misc_RaptureLogModule;
@@ -744,14 +756,11 @@ struct StdVector_SystemInt32;
 struct StdVector_SystemByte;
 struct Client_UI_Misc_RaptureLogModuleTab;
 struct Client_UI_Misc_RaptureMacroModule;
-struct Client_UI_Misc_RaptureMacroModule_MacroPage;
 struct Client_UI_Misc_RaptureMacroModule_Macro;
-struct Client_UI_Misc_RaptureMacroModule_Macro_Lines;
 struct Client_UI_Misc_RaptureTextModule;
 struct Client_UI_Misc_RaptureUiDataModule;
 struct Client_UI_Misc_RecommendEquipModule;
 struct Client_UI_Misc_RetainerCommentModule;
-struct Client_UI_Misc_RetainerCommentModule_RetainerCommentList;
 struct Client_UI_Misc_RetainerCommentModule_RetainerComment;
 struct Client_UI_Misc_SavedHotBars_SavedHotBarClassJob;
 struct Client_UI_Misc_SavedHotBars_SavedHotBarClassJobBars;
@@ -775,6 +784,7 @@ struct Client_UI_UI3DModule_MapInfo;
 struct Client_UI_UI3DModule_MemberInfo;
 struct Client_UI_UI3DModule_ObjectInfo;
 struct Client_UI_UI3DModule_UnkInfo;
+struct Client_UI_UIInputData;
 struct Client_UI_UIModule;
 struct Client_UI_UIModule_Unk1;
 struct Client_UI_UIModule_Unk2;
@@ -799,7 +809,6 @@ struct Component_Excel_ExcelModuleInterface;
 struct Component_Excel_ExcelModuleInterface_ExcelModuleInterfaceVTable;
 struct Component_Excel_ExcelSheet;
 struct Component_Exd_ExdModule;
-struct Component_GUI_AgentHudLayout;
 struct Component_GUI_AgentInterface_AgentInterfaceVTable;
 struct Component_GUI_AtkArrayData;
 struct Component_GUI_AtkArrayDataHolder;
@@ -811,6 +820,7 @@ struct Component_GUI_AtkComponentBase_AtkComponentBaseVTable;
 struct Component_GUI_AtkComponentButton;
 struct Component_GUI_AtkComponentCheckBox;
 struct Component_GUI_AtkComponentDragDrop;
+struct Component_GUI_AtkDragDropInterface;
 struct Component_GUI_AtkComponentDropDownList;
 struct Component_GUI_AtkComponentGaugeBar;
 struct Component_GUI_AtkComponentGuildLeveCard;
@@ -837,12 +847,17 @@ struct Component_GUI_AtkComponentTreeList;
 struct Component_GUI_AtkComponentWindow;
 struct Component_GUI_AtkCounterNode;
 struct Component_GUI_AtkCursor;
+struct Component_GUI_AtkDragDropInterface_AtkDragDropInterfaceVTable;
 struct Component_GUI_AtkDragDropManager;
 struct Component_GUI_AtkEvent;
 struct Component_GUI_AtkImageNode;
 struct Component_GUI_AtkLinkedList;
 struct Component_GUI_AtkLinkedList_Node;
 struct Component_GUI_AtkModule;
+struct Component_GUI_AtkTextureResourceManager;
+struct StdLinkedList_PointerComponentGUIAtkTextureResource;
+struct StdLinkedList_Node_PointerComponentGUIAtkTextureResource;
+struct Pointer_ComponentGUIAtkTextureResource;
 struct Component_GUI_AtkModule_AtkModuleVTable;
 struct Component_GUI_AtkNineGridNode;
 struct Component_GUI_AtkResNode_AtkResNodeVTable;
@@ -1394,14 +1409,7 @@ enum Client_Game_Object_ObjectTargetableFlags /* Size=0x1 */
     Unk1 = 4
 };
 
-enum Client_Game_QuestManager_QuestListArray_Quest_QuestFlags /* Size=0x1 */
-{
-    None = 0,
-    Priority = 1,
-    Hidden = 8
-};
-
-enum Client_Game_RetainerManager_RetainerList_RetainerTown /* Size=0x1 */
+enum Client_Game_RetainerManager_RetainerTown /* Size=0x1 */
 {
     LimsaLominsa = 1,
     Gridania = 2,
@@ -1505,6 +1513,12 @@ enum Client_Game_UI_RollState /* Size=0x4 */
     Unknown = 28
 };
 
+enum Client_Graphics_Kernel_TextureFormat /* Size=0x4 */
+{
+    R8G8B8A8 = 5200,
+    D24S8 = 16976
+};
+
 enum Client_Graphics_Render_Manager_RenderSubViews /* Size=0x4 */
 {
     Shadow0 = 0,
@@ -1563,12 +1577,6 @@ enum Client_Graphics_Render_Manager_RenderViews /* Size=0x4 */
     Unused = 31
 };
 
-enum Client_Graphics_Render_TextureFormat /* Size=0x4 */
-{
-    R8G8B8A8 = 5200,
-    D24S8 = 16976
-};
-
 enum Client_Graphics_Scene_CharacterBase_ModelType /* Size=0x1 */
 {
     Human = 1,
@@ -1600,7 +1608,7 @@ enum Client_System_File_FileMode /* Size=0x4 */
     LoadSqPackResource = 11
 };
 
-enum Client_System_Resource_ResourceCategory /* Size=0x4 */
+enum Client_System_Resource_ResourceCategory /* Size=0x2 */
 {
     Common = 0,
     BgCommon = 1,
@@ -2146,6 +2154,14 @@ enum Client_UI_Agent_MapType /* Size=0x4 */
     Bozja = 9
 };
 
+enum Client_UI_Agent_MycDynamicEventState /* Size=0x1 */
+{
+    None = 0,
+    Register = 1,
+    Commence = 2,
+    Underway = 3
+};
+
 enum Client_UI_Agent_WaymarkIndex /* Size=0x4 */
 {
     A = 0,
@@ -2158,6 +2174,27 @@ enum Client_UI_Agent_WaymarkIndex /* Size=0x4 */
     Four = 7
 };
 
+enum Client_UI_GamepadButtonsFlags /* Size=0x2 */
+{
+    None = 0,
+    DPadUp = 1,
+    DPadDown = 2,
+    DPadLeft = 4,
+    DPadRight = 8,
+    Triangle = 16,
+    Cross = 32,
+    Square = 64,
+    Circle = 128,
+    L1 = 256,
+    L2 = 512,
+    L3 = 1024,
+    R1 = 2048,
+    R2 = 4096,
+    R3 = 8192,
+    Select = 16384,
+    Start = 32768
+};
+
 enum Client_UI_GSInfoCardListFilterMode /* Size=0x4 */
 {
     DisplayOwnedCards = 6,
@@ -2165,16 +2202,87 @@ enum Client_UI_GSInfoCardListFilterMode /* Size=0x4 */
     DisplayAllCards = 14
 };
 
+enum Client_UI_Info_InfoProxyCommonList_CharacterData_ClientState /* Size=0x8 */
+{
+    Offline = 0,
+    Unk1 = 1,
+    Unk2 = 2,
+    Unk4 = 4,
+    Unk8 = 8,
+    Unk10 = 16,
+    Unk20 = 32,
+    Unk40 = 64,
+    Unk80 = 128,
+    Unk100 = 256,
+    Unk200 = 512,
+    Unk400 = 1024,
+    Unk800 = 2048,
+    Busy = 4096,
+    Unk2000 = 8192,
+    PlayingTripleTriad = 16384,
+    ViewingCutscene = 32768,
+    Unk10000 = 65536,
+    AFK = 131072,
+    CameraMode = 262144,
+    Unk80000 = 524288,
+    Unk100000 = 1048576,
+    Unk200000 = 2097152,
+    RP = 4194304,
+    LFP = 8388608,
+    Unk1000000 = 16777216,
+    WaitingForDutyFinder = 33554432,
+    RecruitingMembers = 67108864,
+    Mentor = 134217728,
+    PvEMentor = 268435456,
+    TradeMentor = 536870912,
+    PvPMentor = 1073741824,
+    Returner = 2147483648,
+    NewAdventurer = 4294967296,
+    Unk20000000 = 8589934592,
+    Unk40000000 = 17179869184,
+    Unk80000000 = 34359738368,
+    PartyLeader = 68719476736,
+    PartyMember = 137438953472,
+    PartyLeaderCrossWorld = 274877906944,
+    PartyMemberCrossWorld = 549755813888,
+    AnotherWorld = 1099511627776,
+    Unk200000000 = 2199023255552,
+    Unk400000000 = 4398046511104,
+    Unk800000000 = 8796093022208,
+    Unk1000000000 = 17592186044416,
+    Unk2000000000 = 35184372088832,
+    Unk4000000000 = 70368744177664,
+    Online = 140737488355328,
+    Unk10000000000 = 281474976710656,
+    Unk20000000000 = 562949953421312,
+    Unk40000000000 = 1125899906842624,
+    Unk80000000000 = 2251799813685248,
+    Unk100000000000 = 4503599627370496,
+    Unk200000000000 = 9007199254740992,
+    Unk400000000000 = 18014398509481984,
+    Unk800000000000 = 36028797018963968,
+    Unk1000000000000 = 72057594037927936,
+    Unk2000000000000 = 144115188075855872,
+    Unk4000000000000 = 288230376151711744,
+    Unk8000000000000 = 576460752303423488,
+    Unk10000000000000 = 1152921504606846976,
+    Unk20000000000000 = 2305843009213693952,
+    Unk40000000000000 = 4611686018427387904,
+    Unk80000000000000 = 9223372036854775808
+};
+
 enum Client_UI_Info_InfoProxyCommonList_CharacterData_Language /* Size=0x1 */
 {
     JP = 0,
     EN = 1,
     DE = 2,
-    FR = 3
+    FR = 3,
+    None = 255
 };
 
 enum Client_UI_Info_InfoProxyCommonList_CharacterData_LanguageMask /* Size=0x1 */
 {
+    None = 0,
     JP = 1,
     EN = 2,
     DE = 4,
@@ -2270,6 +2378,14 @@ enum Client_UI_Info_InfoProxyId /* Size=0x4 */
     CircleList = 31,
     Circle = 32,
     CircleFinder = 33
+};
+
+enum Client_UI_KeyStateFlags /* Size=0x4 */
+{
+    Down = 1,
+    Pressed = 2,
+    Released = 4,
+    Held = 8
 };
 
 enum Client_UI_Misc_BannerGearVisibilityFlag /* Size=0x4 */
@@ -3229,12 +3345,43 @@ enum Client_UI_Misc_RaptureGearsetModule_GearsetFlag /* Size=0x1 */
     None = 0,
     Exists = 1,
     Unknown02 = 2,
-    Unknown04 = 4,
+    MainHandMissing = 4,
     HeadgearVisible = 8,
     WeaponsVisible = 16,
     VisorEnabled = 32,
     Unknown40 = 64,
     Unknown80 = 128
+};
+
+enum Client_UI_Misc_RaptureGearsetModule_GearsetItemFlag /* Size=0x1 */
+{
+    None = 0,
+    ItemMissing = 1,
+    Unknown02 = 2,
+    ColorDiffers = 4,
+    MateriaDiffers = 8,
+    AppearanceDiffers = 16,
+    Unknown20 = 32,
+    Unknown40 = 64,
+    Unknown80 = 128
+};
+
+enum Client_UI_Misc_RaptureGearsetModule_GearsetItemIndex /* Size=0x4 */
+{
+    MainHand = 0,
+    OffHand = 1,
+    Head = 2,
+    Body = 3,
+    Hands = 4,
+    Belt = 5,
+    Legs = 6,
+    Feet = 7,
+    Ears = 8,
+    Neck = 9,
+    Wrists = 10,
+    RingRight = 11,
+    RingLeft = 12,
+    SoulStone = 13
 };
 
 enum Client_UI_Misc_UserFileManager_UserFileType /* Size=0x2 */
@@ -3251,6 +3398,15 @@ enum Client_UI_Misc_UserFileManager_UserFileType /* Size=0x2 */
     UISAVE = 9,
     GS = 10,
     CONTROL = 13
+};
+
+enum Client_UI_MouseButtonFlags /* Size=0x4 */
+{
+    LBUTTON = 1,
+    MBUTTON = 2,
+    RBUTTON = 4,
+    XBUTTON1 = 8,
+    XBUTTON2 = 16
 };
 
 enum Client_UI_RaidFinderEntryFlags /* Size=0x1 */
@@ -3565,6 +3721,19 @@ struct Application_Network_WorkDefinitions_DailyQuestWork /* Size=0x10 */
     /* 0x0A */ byte Flags;
     /*      */ byte _gap_0xB;
     /*      */ byte _gap_0xC[0x4];
+};
+
+struct Application_Network_WorkDefinitions_EnterContentInfo /* Size=0x28 */
+{
+    /* 0x00 */ byte NotifyType;
+    /*      */ byte _gap_0x1;
+    /*      */ byte _gap_0x2[0x2];
+    /*      */ byte _gap_0x4[0x4];
+    /*      */ byte _gap_0x8[0x10];
+    /*      */ byte _gap_0x18[0x4];
+    /* 0x1C */ unsigned __int16 ContentFinderConditionId;
+    /*      */ byte _gap_0x1E[0x2];
+    /*      */ byte _gap_0x20[0x8];
 };
 
 struct Application_Network_WorkDefinitions_LeveWork /* Size=0x18 */
@@ -4060,7 +4229,7 @@ struct Client_Game_Character_Character_CastInfo /* Size=0x170 */
     /*       */ byte _gap_0x45;
     /*       */ byte _gap_0x46[0x2];
     /*       */ byte _gap_0x48[0x10];
-    /* 0x058 */ __int64 ActionRecipientsObjectIdArray[0x20];
+    /* 0x058 */ unsigned __int64 ActionRecipientsObjectIdArray[0x20];
     /* 0x158 */ __int32 ActionRecipientsCount;
     /*       */ byte _gap_0x15C[0x4];
     /*       */ byte _gap_0x160[0x10];
@@ -4128,7 +4297,7 @@ struct Client_Game_Control_GameObjectArray /* Size=0x12C0 */
 {
     /* 0x0000 */ __int32 Length;
     /*        */ byte _gap_0x4[0x4];
-    /* 0x0008 */ __int64 Objects[0x257];
+    /* 0x0008 */ unsigned __int64 Objects[0x257];
 };
 
 struct Client_Game_Control_TargetSystem /* Size=0x5370 */
@@ -5575,20 +5744,6 @@ struct Client_Game_QuestManager /* Size=0xF40 */
     /* 0xF50 */ byte NumAcceptedLeveQuests;
 };
 
-struct Client_Game_QuestManager_QuestListArray /* Size=0x0 */
-{
-};
-
-struct Client_Game_QuestManager_QuestListArray_Quest /* Size=0x18 */
-{
-    /*      */ byte _gap_0x0[0x8];
-    /* 0x08 */ unsigned __int16 QuestID;
-    /*      */ byte _gap_0xA;
-    /* 0x0B */ Client_Game_QuestManager_QuestListArray_Quest_QuestFlags Flags;
-    /*      */ byte _gap_0xC[0x4];
-    /*      */ byte _gap_0x10[0x8];
-};
-
 struct Client_Game_RaceChocoboManager /* Size=0x26 */
 {
     /*      */ byte _gap_0x0[0x8];
@@ -5659,7 +5814,7 @@ struct Client_Game_RetainerManager /* Size=0x2E8 */
     /* 0x2E8 */ unsigned __int32 RetainerObjectId;
 };
 
-struct Client_Game_RetainerManager_RetainerList_Retainer /* Size=0x48 */
+struct Client_Game_RetainerManager_Retainer /* Size=0x48 */
 {
     /* 0x00 */ unsigned __int64 RetainerID;
     /* 0x08 */ byte Name[0x20];
@@ -5668,27 +5823,13 @@ struct Client_Game_RetainerManager_RetainerList_Retainer /* Size=0x48 */
     /* 0x2A */ byte Level;
     /* 0x2B */ byte ItemCount;
     /* 0x2C */ unsigned __int32 Gil;
-    /* 0x30 */ Client_Game_RetainerManager_RetainerList_RetainerTown Town;
+    /* 0x30 */ Client_Game_RetainerManager_RetainerTown Town;
     /* 0x31 */ byte MarkerItemCount;
     /*      */ byte _gap_0x32[0x2];
     /* 0x34 */ unsigned __int32 MarketExpire;
     /* 0x38 */ unsigned __int32 VentureID;
     /* 0x3C */ unsigned __int32 VentureComplete;
     /*      */ byte _gap_0x40[0x8];
-};
-
-struct Client_Game_RetainerManager_RetainerList /* Size=0x2D0 */
-{
-    /* 0x000 */ Client_Game_RetainerManager_RetainerList_Retainer Retainer0;
-    /* 0x048 */ Client_Game_RetainerManager_RetainerList_Retainer Retainer1;
-    /* 0x090 */ Client_Game_RetainerManager_RetainerList_Retainer Retainer2;
-    /* 0x0D8 */ Client_Game_RetainerManager_RetainerList_Retainer Retainer3;
-    /* 0x120 */ Client_Game_RetainerManager_RetainerList_Retainer Retainer4;
-    /* 0x168 */ Client_Game_RetainerManager_RetainerList_Retainer Retainer5;
-    /* 0x1B0 */ Client_Game_RetainerManager_RetainerList_Retainer Retainer6;
-    /* 0x1F8 */ Client_Game_RetainerManager_RetainerList_Retainer Retainer7;
-    /* 0x240 */ Client_Game_RetainerManager_RetainerList_Retainer Retainer8;
-    /* 0x288 */ Client_Game_RetainerManager_RetainerList_Retainer Retainer9;
 };
 
 struct Client_Game_SatisfactionSupplyManager /* Size=0x31F */
@@ -6053,23 +6194,6 @@ struct Client_Game_UI_Map /* Size=0x0 */
     /* 0x3F50 */ Client_Game_UI_SimpleMapMarkerContainer SimpleGemstoneTraderMarkerData;
 };
 
-struct Client_Game_UI_Map_MapMarkerInfo /* Size=0x90 */
-{
-    /*      */ byte _gap_0x0[0x4];
-    /* 0x04 */ unsigned __int32 QuestID;
-    /* 0x08 */ Client_System_String_Utf8String Name;
-    /*      */ byte _gap_0x70[0x18];
-    /* 0x88 */ unsigned __int16 RecommendedLevel;
-    /*      */ byte _gap_0x8A;
-    /* 0x8B */ byte ShouldRender;
-    /*      */ byte _gap_0x8C[0x4];
-};
-
-struct Client_Game_UI_Map_QuestMarkerArray /* Size=0x10E0 */
-{
-    /*        */ byte _gap_0x0[0x10E0];
-};
-
 struct Client_Game_UI_MapMarkerContainer_LinkedList /* Size=0x0 */
 {
     /* 0x0 */ Client_Game_UI_MapMarkerNode* First;
@@ -6100,7 +6224,10 @@ struct Client_Game_UI_MarkerInfo /* Size=0x90 */
     /* 0x04 */ unsigned __int32 ObjectiveId;
     /* 0x08 */ Client_System_String_Utf8String Label;
     /* 0x70 */ StdVector_ClientGameUIMapMarkerData MarkerData;
-    /*      */ byte _gap_0x88[0x8];
+    /*      */ byte _gap_0x88[0x2];
+    /*      */ byte _gap_0x8A;
+    /* 0x8B */ bool ShouldRender;
+    /*      */ byte _gap_0x8C[0x4];
 };
 
 struct Client_Game_UI_MapMarkerNode /* Size=0x0 */
@@ -6622,6 +6749,13 @@ struct Client_Graphics_Kernel_Device /* Size=0x258 */
     /* 0x250 */ void* ImmediateContext;
 };
 
+struct Client_Graphics_Kernel_Notifier /* Size=0x18 */
+{
+    /* 0x00 */ void* vtbl;
+    /* 0x08 */ Client_Graphics_Kernel_Notifier* Next;
+    /* 0x10 */ Client_Graphics_Kernel_Notifier* Prev;
+};
+
 struct Client_Graphics_Kernel_PixelShader /* Size=0x1 */
 {
     /*     */ byte _gap_0x0;
@@ -6757,9 +6891,46 @@ struct Client_Graphics_Kernel_SwapChain /* Size=0x70 */
     /* 0x38 */ unsigned __int32 Width;
     /* 0x3C */ unsigned __int32 Height;
     /*      */ byte _gap_0x40[0x18];
-    /* 0x58 */ Client_Graphics_Render_Texture* BackBuffer;
-    /* 0x60 */ Client_Graphics_Render_Texture* DepthStencil;
+    /* 0x58 */ Client_Graphics_Kernel_Texture* BackBuffer;
+    /* 0x60 */ Client_Graphics_Kernel_Texture* DepthStencil;
     /* 0x68 */ void* DXGISwapChain;
+};
+
+struct Client_Graphics_Kernel_Texture /* Size=0xC0 */
+{
+    union {
+    /* 0x00 */ void* vtbl;
+    /* 0x00 */ Client_Graphics_Kernel_Texture_TextureVTable* VTable;
+    } _union_0x0;
+    /*      */ byte _gap_0x8[0x18];
+    /* 0x20 */ Client_Graphics_Kernel_Notifier Notifier;
+    /* 0x38 */ unsigned __int32 Width;
+    /* 0x3C */ unsigned __int32 Height;
+    /* 0x40 */ unsigned __int32 Width2;
+    /* 0x44 */ unsigned __int32 Height2;
+    /* 0x48 */ unsigned __int32 Width3;
+    /* 0x4C */ unsigned __int32 Height3;
+    /* 0x50 */ unsigned __int32 Depth;
+    /* 0x54 */ byte MipLevel;
+    /* 0x55 */ byte Unk_55;
+    /* 0x56 */ byte Unk_56;
+    /* 0x57 */ byte Unk_57;
+    /* 0x58 */ Client_Graphics_Kernel_TextureFormat TextureFormat;
+    /* 0x5C */ unsigned __int32 Flags;
+    /* 0x60 */ byte ArraySize;
+    /*      */ byte _gap_0x61;
+    /*      */ byte _gap_0x62[0x2];
+    /*      */ byte _gap_0x64[0x4];
+    /* 0x68 */ void* D3D11Texture2D;
+    /* 0x70 */ void* D3D11ShaderResourceView;
+    /*      */ byte _gap_0x78[0x48];
+};
+
+struct Client_Graphics_Kernel_Texture_TextureVTable /* Size=0x0 */
+{
+    /*     */ byte _gap_0x0[0x10];
+    /* 0x10 */ __int64 IncRef;
+    /* 0x18 */ __int64 DecRef;
 };
 
 struct Client_Graphics_Kernel_VertexShader /* Size=0x1 */
@@ -6873,13 +7044,6 @@ struct Client_Graphics_Render_Model /* Size=0xF0 */
     /*      */ byte _gap_0xEC[0x4];
 };
 
-struct Client_Graphics_Render_Notifier /* Size=0x18 */
-{
-    /* 0x00 */ void* vtbl;
-    /* 0x08 */ Client_Graphics_Render_Notifier* Next;
-    /* 0x10 */ Client_Graphics_Render_Notifier* Prev;
-};
-
 struct Client_Graphics_Render_OffscreenRenderingManager /* Size=0x190 */
 {
     /* 0x000 */ void* vtbl;
@@ -6913,7 +7077,7 @@ struct Client_Graphics_Render_PartialSkeleton /* Size=0x1C0 */
 struct Client_Graphics_Render_RenderTargetManager /* Size=0x4A0 */
 {
     /* 0x000 */ void* vtbl;
-    /* 0x008 */ Client_Graphics_Render_Notifier Notifier;
+    /* 0x008 */ Client_Graphics_Kernel_Notifier Notifier;
     /* 0x020 */ byte RenderTargetArray[0x208];
     /*       */ byte _gap_0x228[0x20];
     /* 0x248 */ unsigned __int32 Resolution_Width;
@@ -6971,50 +7135,13 @@ struct Client_Graphics_Render_SubView /* Size=0x58 */
     /*      */ byte _gap_0xC[0x4];
     /* 0x10 */ Common_Math_Rectangle ViewportRegion;
     /* 0x20 */ void* Camera;
-    /* 0x28 */ Client_Graphics_Render_Texture* RenderTarget_1;
-    /* 0x30 */ Client_Graphics_Render_Texture* RenderTarget_2;
-    /* 0x38 */ Client_Graphics_Render_Texture* RenderTarget_3;
-    /* 0x40 */ Client_Graphics_Render_Texture* RenderTarget_4;
+    /* 0x28 */ Client_Graphics_Kernel_Texture* RenderTarget_1;
+    /* 0x30 */ Client_Graphics_Kernel_Texture* RenderTarget_2;
+    /* 0x38 */ Client_Graphics_Kernel_Texture* RenderTarget_3;
+    /* 0x40 */ Client_Graphics_Kernel_Texture* RenderTarget_4;
     /* 0x48 */ unsigned __int32 RenderTargetUsedCount;
     /*      */ byte _gap_0x4C[0x4];
-    /* 0x50 */ Client_Graphics_Render_Texture* DepthStencil;
-};
-
-struct Client_Graphics_Render_Texture /* Size=0xC0 */
-{
-    union {
-    /* 0x00 */ void* vtbl;
-    /* 0x00 */ Client_Graphics_Render_Texture_TextureVTable* VTable;
-    } _union_0x0;
-    /*      */ byte _gap_0x8[0x18];
-    /* 0x20 */ Client_Graphics_Render_Notifier Notifier;
-    /* 0x38 */ unsigned __int32 Width;
-    /* 0x3C */ unsigned __int32 Height;
-    /* 0x40 */ unsigned __int32 Width2;
-    /* 0x44 */ unsigned __int32 Height2;
-    /* 0x48 */ unsigned __int32 Width3;
-    /* 0x4C */ unsigned __int32 Height3;
-    /* 0x50 */ unsigned __int32 Depth;
-    /* 0x54 */ byte MipLevel;
-    /* 0x55 */ byte Unk_55;
-    /* 0x56 */ byte Unk_56;
-    /* 0x57 */ byte Unk_57;
-    /* 0x58 */ Client_Graphics_Render_TextureFormat TextureFormat;
-    /* 0x5C */ unsigned __int32 Flags;
-    /* 0x60 */ byte ArraySize;
-    /*      */ byte _gap_0x61;
-    /*      */ byte _gap_0x62[0x2];
-    /*      */ byte _gap_0x64[0x4];
-    /* 0x68 */ void* D3D11Texture2D;
-    /* 0x70 */ void* D3D11ShaderResourceView;
-    /*      */ byte _gap_0x78[0x48];
-};
-
-struct Client_Graphics_Render_Texture_TextureVTable /* Size=0x0 */
-{
-    /*     */ byte _gap_0x0[0x10];
-    /* 0x10 */ __int64 IncRef;
-    /* 0x18 */ __int64 DecRef;
+    /* 0x50 */ Client_Graphics_Kernel_Texture* DepthStencil;
 };
 
 struct Client_Graphics_Render_View /* Size=0x5A0 */
@@ -7056,7 +7183,7 @@ struct Client_Graphics_Scene_CharacterBase /* Size=0x8F0 */
     /*       */ byte _gap_0x228[0x18];
     /* 0x240 */ Client_Graphics_Kernel_ConstantBuffer* CharacterDataCBuffer;
     /*       */ byte _gap_0x248[0x10];
-    /* 0x258 */ Client_Graphics_Render_Texture** ColorSetTextures;
+    /* 0x258 */ Client_Graphics_Kernel_Texture** ColorTableTextures;
     /*       */ byte _gap_0x260[0x50];
     /* 0x2B0 */ float WeatherWetness;
     /* 0x2B4 */ float SwimmingWetness;
@@ -7152,22 +7279,22 @@ struct Client_Graphics_Scene_Human /* Size=0xA80 */
     /*       */ byte _gap_0x942[0x2];
     /*       */ byte _gap_0x944[0x4];
     /*       */ byte _gap_0x948[0x38];
-    /* 0x980 */ Client_Graphics_Render_Texture* HeadDecal;
-    /* 0x988 */ Client_Graphics_Render_Texture* TopDecal;
-    /* 0x990 */ Client_Graphics_Render_Texture* ArmsDecal;
-    /* 0x998 */ Client_Graphics_Render_Texture* LegsDecal;
-    /* 0x9A0 */ Client_Graphics_Render_Texture* FeetDecal;
-    /* 0x9A8 */ Client_Graphics_Render_Texture* EarDecal;
-    /* 0x9B0 */ Client_Graphics_Render_Texture* NeckDecal;
-    /* 0x9B8 */ Client_Graphics_Render_Texture* WristDecal;
-    /* 0x9C0 */ Client_Graphics_Render_Texture* RFingerDecal;
-    /* 0x9C8 */ Client_Graphics_Render_Texture* LFingerDecal;
+    /* 0x980 */ Client_Graphics_Kernel_Texture* HeadDecal;
+    /* 0x988 */ Client_Graphics_Kernel_Texture* TopDecal;
+    /* 0x990 */ Client_Graphics_Kernel_Texture* ArmsDecal;
+    /* 0x998 */ Client_Graphics_Kernel_Texture* LegsDecal;
+    /* 0x9A0 */ Client_Graphics_Kernel_Texture* FeetDecal;
+    /* 0x9A8 */ Client_Graphics_Kernel_Texture* EarDecal;
+    /* 0x9B0 */ Client_Graphics_Kernel_Texture* NeckDecal;
+    /* 0x9B8 */ Client_Graphics_Kernel_Texture* WristDecal;
+    /* 0x9C0 */ Client_Graphics_Kernel_Texture* RFingerDecal;
+    /* 0x9C8 */ Client_Graphics_Kernel_Texture* LFingerDecal;
     /*       */ byte _gap_0x9D0[0x8];
     /* 0x9D8 */ Client_Graphics_Kernel_ConstantBuffer* CustomizeParameterCBuffer;
     /* 0x9E0 */ Client_Graphics_Kernel_ConstantBuffer* DecalColorCBuffer;
     /* 0x9E8 */ Client_System_Resource_Handle_TextureResourceHandle* Decal;
     /* 0x9F0 */ Client_System_Resource_Handle_TextureResourceHandle* LegacyBodyDecal;
-    /* 0x9F8 */ Client_Graphics_Render_Texture* FreeCompanyCrest;
+    /* 0x9F8 */ Client_Graphics_Kernel_Texture* FreeCompanyCrest;
     /* 0xA00 */ unsigned __int32 SlotFreeCompanyCrestBitfield;
     /*       */ byte _gap_0xA04[0x4];
     /*       */ byte _gap_0xA08[0x30];
@@ -7360,6 +7487,24 @@ struct Client_System_File_FileDescriptor /* Size=0x278 */
     /* 0x070 */ byte Utf16FilePath[0x208];
 };
 
+struct Client_System_Framework_TaskManagerOsData /* Size=0x4C */
+{
+    /*      */ byte _gap_0x0[0x40];
+    /* 0x40 */ __int64 Handle;
+    /*      */ byte _gap_0x48[0x4];
+};
+
+struct Client_System_Framework_TaskManager /* Size=0x70 */
+{
+    /* 0x00 */ void* vtbl;
+    /* 0x08 */ Client_System_Framework_TaskManagerOsData OsData;
+    /*      */ byte _gap_0x54[0x4];
+    /* 0x58 */ Client_System_Framework_RootTask* TaskList;
+    /* 0x60 */ unsigned __int32 TaskCount;
+    /*      */ byte _gap_0x64[0x4];
+    /* 0x68 */ void* UserData;
+};
+
 struct Client_System_Framework_GameVersion /* Size=0x900 */
 {
     /*       */ byte _gap_0x0[0x900];
@@ -7383,7 +7528,9 @@ struct Client_System_Framework_Framework /* Size=0x35C8 */
     /*        */ byte _gap_0x16C0[0x8];
     /* 0x16C8 */ unsigned __int32 FrameCounter;
     /*        */ byte _gap_0x16CC[0x4];
-    /*        */ byte _gap_0x16D0[0xA0];
+    /*        */ byte _gap_0x16D0[0x28];
+    /* 0x16F8 */ Client_System_Framework_TaskManager TaskManager;
+    /*        */ byte _gap_0x1768[0x8];
     /* 0x1770 */ __int64 EorzeaTime;
     /*        */ byte _gap_0x1778[0x20];
     /* 0x1798 */ __int64 EorzeaTimeOverride;
@@ -7412,6 +7559,33 @@ struct Client_System_Framework_Framework /* Size=0x35C8 */
     /*        */ byte _gap_0x34F0[0xD8];
 };
 
+struct Client_System_Framework_Task /* Size=0x38 */
+{
+    union {
+    /* 0x00 */ void* vtbl;
+    /* 0x00 */ Client_System_Framework_Task_TaskVTable* VTable;
+    } _union_0x0;
+    /* 0x08 */ void* Runner;
+    /* 0x10 */ Client_System_Framework_Framework* Framework;
+    /* 0x18 */ void* Func;
+    /*      */ byte _gap_0x20[0x8];
+    /* 0x28 */ Client_System_Framework_Task* Previous;
+    /* 0x30 */ Client_System_Framework_Task* Next;
+};
+
+struct Client_System_Framework_RootTask /* Size=0x78 */
+{
+    /* 0x00 */ Client_System_Framework_Task Task;
+    /* 0x38 */ Client_System_Framework_Task UnkTask;
+    /*      */ byte _gap_0x70[0x8];
+};
+
+struct Client_System_Framework_Task_TaskVTable /* Size=0x0 */
+{
+    /*     */ byte _gap_0x0[0x8];
+    /* 0x8 */ __int64 Execute;
+};
+
 struct Client_System_Memory_IMemorySpace /* Size=0x0 */
 {
     /* 0x0 */ Client_System_Memory_IMemorySpace_IMemorySpaceVTable* VTable;
@@ -7438,6 +7612,8 @@ struct Client_System_Resource_Handle_ResourceHandle /* Size=0xB0 */
     /* 0x00 */ Client_System_Resource_Handle_ResourceHandle_ResourceHandleVTable* VTable;
     } _union_0x0;
     /* 0x08 */ Client_System_Resource_ResourceCategory Category;
+    /* 0x0A */ byte Unknown0A;
+    /* 0x0B */ byte Expansion;
     /* 0x0C */ unsigned __int32 FileType;
     /* 0x10 */ unsigned __int32 Id;
     /*      */ byte _gap_0x14[0x4];
@@ -7448,8 +7624,14 @@ struct Client_System_Resource_Handle_ResourceHandle /* Size=0xB0 */
     /* 0x34 */ unsigned __int32 FileSize3;
     /*      */ byte _gap_0x38[0x10];
     /* 0x48 */ StdString FileName;
-    /*      */ byte _gap_0x68[0x40];
-    /*      */ byte _gap_0xA8[0x4];
+    /*      */ byte _gap_0x68[0x4];
+    /* 0x6C */ byte UserData;
+    /*      */ byte _gap_0x6D;
+    /*      */ byte _gap_0x6E[0x2];
+    /*      */ byte _gap_0x70[0x38];
+    /*      */ byte _gap_0xA8;
+    /* 0xA9 */ byte LoadState;
+    /*      */ byte _gap_0xAA[0x2];
     /* 0xAC */ unsigned __int32 RefCount;
 };
 
@@ -7522,10 +7704,16 @@ struct Client_System_Resource_Handle_ModelResourceHandle /* Size=0x260 */
 
 struct Client_System_Resource_Handle_ResourceHandle_ResourceHandleVTable /* Size=0x0 */
 {
-    /*     */ byte _gap_0x0[0x88];
+    /*     */ byte _gap_0x0[0x30];
+    /* 0x30 */ __int64 GetUserData;
+    /*     */ byte _gap_0x38[0x50];
     /* 0x88 */ __int64 GetLength;
     /*     */ byte _gap_0x90[0x28];
     /* 0xB8 */ __int64 GetData;
+    /*     */ byte _gap_0xC0[0x38];
+    /* 0xF8 */ __int64 LoadIntoKernel;
+    /*     */ byte _gap_0x100[0x8];
+    /* 0x108 */ __int64 Load;
 };
 
 struct Client_System_Resource_Handle_ShaderPackageResourceHandle /* Size=0x0 */
@@ -7563,7 +7751,7 @@ struct Client_System_Resource_Handle_TextureResourceHandle /* Size=0x140 */
 {
     /* 0x000 */ Client_System_Resource_Handle_ResourceHandle ResourceHandle;
     /*       */ byte _gap_0xB0[0x68];
-    /* 0x118 */ Client_Graphics_Render_Texture* Texture;
+    /* 0x118 */ Client_Graphics_Kernel_Texture* Texture;
     /*       */ byte _gap_0x120[0x20];
 };
 
@@ -7653,6 +7841,19 @@ struct Client_UI_ActionBarSlot /* Size=0xC8 */
     /* 0xB0 */ Component_GUI_AtkResNode* RecastOverlayContainer;
     /* 0xB8 */ byte* PopUpHelpTextPtr;
     /*      */ byte _gap_0xC0[0x8];
+};
+
+struct Client_UI_ActionInfo /* Size=0x38 */
+{
+    /* 0x00 */ byte* ActionText;
+    /* 0x08 */ byte* TooltipText;
+    /*      */ byte _gap_0x10[0x4];
+    /* 0x14 */ unsigned __int32 ActionId;
+    /* 0x18 */ unsigned __int32 IconId;
+    /*      */ byte _gap_0x1C[0x4];
+    /*      */ byte _gap_0x20[0x4];
+    /* 0x24 */ unsigned __int32 ActionCategory;
+    /*      */ byte _gap_0x28[0x10];
 };
 
 struct Client_UI_AddonActionBarBase /* Size=0x248 */
@@ -7822,11 +8023,44 @@ struct Component_GUI_AtkUnitBase /* Size=0x220 */
     /* 0x1D2 */ unsigned __int16 ContextMenuParentID;
     /*       */ byte _gap_0x1D4;
     /* 0x1D5 */ byte Alpha;
-    /*       */ byte _gap_0x1D6[0x2];
+    /* 0x1D6 */ byte ShowHideFlags;
+    /*       */ byte _gap_0x1D7;
     /* 0x1D8 */ Component_GUI_AtkResNode** CollisionNodeList;
     /* 0x1E0 */ unsigned __int32 CollisionNodeListCount;
     /*       */ byte _gap_0x1E4[0x4];
     /*       */ byte _gap_0x1E8[0x38];
+};
+
+struct Client_UI_AddonActionMenu /* Size=0x1720 */
+{
+    /* 0x0000 */ Component_GUI_AtkUnitBase AtkUnitBase;
+    /* 0x0220 */ Component_GUI_AtkComponentList* ActionList;
+    /* 0x0228 */ Component_GUI_AtkComponentList* TraitList;
+    /* 0x0230 */ Component_GUI_AtkComponentRadioButton* ActionsRadioButton;
+    /* 0x0238 */ Component_GUI_AtkComponentRadioButton* TraitsRadioButton;
+    /* 0x0240 */ Component_GUI_AtkComponentRadioButton* GathererRoleRadioButton;
+    /* 0x0248 */ Component_GUI_AtkComponentRadioButton* GeneralRadioButton;
+    /* 0x0250 */ Component_GUI_AtkComponentRadioButton* OrdersRadioButton;
+    /* 0x0258 */ Component_GUI_AtkComponentRadioButton* MainCommandsRadioButton;
+    /* 0x0260 */ Component_GUI_AtkComponentRadioButton* PerformanceRadioButton;
+    /* 0x0268 */ Component_GUI_AtkComponentRadioButton* ExtrasRadioButton;
+    /* 0x0270 */ Component_GUI_AtkComponentRadioButton* RoleRadioButton;
+    /*        */ byte _gap_0x278[0xA0];
+    /* 0x0318 */ byte ActionArray[0x1180];
+    /*        */ byte _gap_0x1498[0x10];
+    /* 0x14A8 */ Component_GUI_AtkResNode* SidebarContainer;
+    /* 0x14B0 */ Component_GUI_AtkResNode* ContentsContainer;
+    /* 0x14B8 */ Component_GUI_AtkResNode* ActionsFooterContainer;
+    /* 0x14C0 */ Component_GUI_AtkComponentButton* HelpButton;
+    /* 0x14C8 */ Component_GUI_AtkComponentButton* CompactModeToggleButton;
+    /* 0x14D0 */ Component_GUI_AtkResNode* LevelTextContainer;
+    /* 0x14D8 */ Component_GUI_AtkImageNode* JobIcon;
+    /* 0x14E0 */ Component_GUI_AtkTextNode* JobText;
+    /*        */ byte _gap_0x14E8[0x28];
+    /* 0x1510 */ Component_GUI_AtkComponentScrollBar* Scrollbar;
+    /* 0x1518 */ Component_GUI_AtkResNode* ActionContentsContainer;
+    /* 0x1520 */ Component_GUI_AtkCollisionNode* ActionCollision;
+    /*        */ byte _gap_0x1528[0x1F8];
 };
 
 struct Client_UI_AddonAOZNotebook_SpellbookBlock /* Size=0x48 */
@@ -8624,17 +8858,16 @@ struct Client_UI_AddonLookingForGroupDetail /* Size=0x3E8 */
     /* 0x280 */ Component_GUI_AtkComponentButton* SendTellButton;
     /* 0x288 */ Component_GUI_AtkComponentButton* AllianceBackButton;
     /* 0x290 */ Component_GUI_AtkComponentButton* BackButton;
-    /*       */ byte _gap_0x298[0x30];
-    /* 0x2C8 */ Component_GUI_AtkImageNode* LookingForGroupImageNode;
+    /*       */ byte _gap_0x298[0x20];
+    /* 0x2B8 */ Component_GUI_AtkComponentButton* RelayPartyFinderInfoButton;
+    /* 0x2C0 */ Component_GUI_AtkImageNode* LookingForGroupImageNode;
+    /* 0x2C8 */ Component_GUI_AtkImageNode* CategoryImageNode;
     /* 0x2D0 */ Component_GUI_AtkTextNode* PartyLeaderTextNode;
     /* 0x2D8 */ Component_GUI_AtkTextNode* LocationTextNode;
     /* 0x2E0 */ Component_GUI_AtkTextNode* TimeRemainingTextNode;
     /* 0x2E8 */ Component_GUI_AtkTextNode* DutyNameTextNode;
-    union {
     /* 0x2F0 */ Component_GUI_AtkTextNode* ItemLevelTextNode;
-    /* 0x2F0 */ Component_GUI_AtkTextNode* StatusTextNode;
-    } _union_0x2F0;
-    /*       */ byte _gap_0x2F8[0x8];
+    /* 0x2F8 */ Component_GUI_AtkTextNode* StatusTextNode;
     /* 0x300 */ Component_GUI_AtkTextNode* DescriptionTextNode;
     /* 0x308 */ Client_System_String_Utf8String DescriptionString;
     /* 0x370 */ Client_System_String_Utf8String CategoriesString;
@@ -8996,8 +9229,8 @@ struct Client_UI_AddonRaidFinder /* Size=0xEF0 */
 struct Client_UI_AddonRecipeNote /* Size=0x22D0 */
 {
     /* 0x0000 */ Component_GUI_AtkUnitBase AtkUnitBase;
-    /* 0x0220 */ Component_GUI_AtkTextNode* Unk220;
-    /* 0x0228 */ Component_GUI_AtkTextNode* Unk228;
+    /* 0x0220 */ Component_GUI_AtkTextNode* CurrentJobLevel;
+    /* 0x0228 */ Component_GUI_AtkTextNode* CurrentJobName;
     /* 0x0230 */ Component_GUI_AtkTextNode* Unk230;
     /* 0x0238 */ Component_GUI_AtkImageNode* Unk238;
     /*        */ byte _gap_0x240[0x8];
@@ -9032,20 +9265,20 @@ struct Client_UI_AddonRecipeNote /* Size=0x22D0 */
     /* 0x0348 */ Component_GUI_AtkComponentButton* Unk348;
     /* 0x0350 */ Component_GUI_AtkComponentButton* Unk350;
     /* 0x0358 */ Component_GUI_AtkResNode* Unk358;
-    /* 0x0360 */ Component_GUI_AtkTextNode* Unk360;
+    /* 0x0360 */ Component_GUI_AtkTextNode* PaginationText;
     /* 0x0368 */ Component_GUI_AtkComponentBase* Unk368;
     /* 0x0370 */ Component_GUI_AtkComponentBase* Unk370;
     /* 0x0378 */ Component_GUI_AtkComponentBase* Unk378;
     /* 0x0380 */ Component_GUI_AtkComponentBase* Unk380;
     /* 0x0388 */ Component_GUI_AtkComponentBase* Unk388;
-    /* 0x0390 */ Component_GUI_AtkTextNode* Unk390;
-    /* 0x0398 */ Component_GUI_AtkTextNode* Unk398;
-    /* 0x03A0 */ Component_GUI_AtkTextNode* Unk3A0;
-    /* 0x03A8 */ Component_GUI_AtkTextNode* Unk3A8;
-    /* 0x03B0 */ Component_GUI_AtkTextNode* Unk3B0;
+    /* 0x0390 */ Component_GUI_AtkTextNode* CharacteristicsTextLine1;
+    /* 0x0398 */ Component_GUI_AtkTextNode* CharacteristicsTextLine2;
+    /* 0x03A0 */ Component_GUI_AtkTextNode* CharacteristicsTextLine3;
+    /* 0x03A8 */ Component_GUI_AtkTextNode* CharacteristicsTextLine4;
+    /* 0x03B0 */ Component_GUI_AtkTextNode* CharacteristicsTextLine5;
     /* 0x03B8 */ Component_GUI_AtkTextNode* Unk3B8;
     /* 0x03C0 */ Component_GUI_AtkResNode* Unk3C0;
-    /* 0x03C8 */ void* Unk3C8;
+    /* 0x03C8 */ Component_GUI_AtkTextNode* RecipeLevelLiteral;
     /* 0x03D0 */ Component_GUI_AtkComponentButton* Unk3D0;
     /* 0x03D8 */ Component_GUI_AtkResNode* Unk3D8;
     /* 0x03E0 */ Component_GUI_AtkComponentButton* Unk3E0;
@@ -9066,37 +9299,37 @@ struct Client_UI_AddonRecipeNote /* Size=0x22D0 */
     /* 0x0458 */ void* Unk458;
     /* 0x0460 */ void* Unk460;
     /* 0x0468 */ void* Unk468;
-    /* 0x0470 */ void* Unk470;
-    /* 0x0478 */ Component_GUI_AtkTextNode* Quality;
-    /* 0x0480 */ void* Unk480;
-    /* 0x0488 */ void* Unk488;
-    /* 0x0490 */ void* Unk490;
-    /* 0x0498 */ void* Unk498;
-    /* 0x04A0 */ void* Unk4A0;
-    /* 0x04A8 */ void* Unk4A8;
-    /* 0x04B0 */ void* Unk4B0;
-    /* 0x04B8 */ void* Unk4B8;
+    /* 0x0470 */ Component_GUI_AtkTextNode* SelectedRecipeName;
+    /* 0x0478 */ Component_GUI_AtkTextNode* SelectedRecipeDurability;
+    /* 0x0480 */ Component_GUI_AtkTextNode* SelectedRecipeDifficulty;
+    /* 0x0488 */ Component_GUI_AtkTextNode* SelectedRecipeStartingQuality;
+    /* 0x0490 */ Component_GUI_AtkTextNode* SelectedRecipeMaximumQuality;
+    /* 0x0498 */ Component_GUI_AtkTextNode* SelectedRecipeHighestStartingQuality;
+    /* 0x04A0 */ Component_GUI_AtkTextNode* BagLiteral;
+    /* 0x04A8 */ Component_GUI_AtkTextNode* SelectedRecipeResultQuantityInInventoryNqAndHq;
+    /* 0x04B0 */ Component_GUI_AtkTextNode* CraftableLiteral;
+    /* 0x04B8 */ Component_GUI_AtkTextNode* SelectedRecipeQuantityCraftableFromMaterialsInInventory;
     /* 0x04C0 */ void* Unk4C0;
-    /* 0x04C8 */ void* Unk4C8;
-    /* 0x04D0 */ void* Unk4D0;
+    /* 0x04C8 */ Component_GUI_AtkTextNode* ProgressCalculationSentence;
+    /* 0x04D0 */ Component_GUI_AtkTextNode* QualityCalculationSentence;
     /* 0x04D8 */ void* Unk4D8;
     /* 0x04E0 */ void* Unk4E0;
-    /* 0x04E8 */ void* Unk4E8;
-    /* 0x04F0 */ void* Unk4F0;
+    /* 0x04E8 */ Component_GUI_AtkTextNode* AetherCrystal1QuantityRequiredForCraft;
+    /* 0x04F0 */ Component_GUI_AtkTextNode* AetherCrystal1QuantityInInventory;
     /* 0x04F8 */ void* Unk4F8;
     /* 0x0500 */ void* Unk500;
-    /* 0x0508 */ void* Unk508;
-    /* 0x0510 */ void* Unk510;
+    /* 0x0508 */ Component_GUI_AtkTextNode* AetherCrystal2QuantityRequiredForCraft;
+    /* 0x0510 */ Component_GUI_AtkTextNode* AetherCrystal2QuantityInInventory;
     /* 0x0518 */ void* Unk518;
     /* 0x0520 */ void* Unk520;
     /* 0x0528 */ void* Unk528;
-    /* 0x0530 */ void* Unk530;
-    /* 0x0538 */ void* Unk538;
+    /* 0x0530 */ Component_GUI_AtkTextNode* Ingredient1Name;
+    /* 0x0538 */ Component_GUI_AtkTextNode* Ingredient1QuantityRequiredForCraft;
     /* 0x0540 */ void* Unk540;
     /* 0x0548 */ void* Unk548;
     /* 0x0550 */ void* Unk550;
-    /* 0x0558 */ void* Unk558;
-    /* 0x0560 */ void* Unk560;
+    /* 0x0558 */ Component_GUI_AtkTextNode* Ingredient1QuantityInInventoryNq;
+    /* 0x0560 */ Component_GUI_AtkTextNode* Ingredient1QuantityInInventoryHq;
     /*        */ byte _gap_0x568[0x10];
     /* 0x0578 */ void* Unk578;
     /* 0x0580 */ void* Unk580;
@@ -9104,13 +9337,14 @@ struct Client_UI_AddonRecipeNote /* Size=0x22D0 */
     /* 0x0590 */ void* Unk590;
     /* 0x0598 */ void* Unk598;
     /* 0x05A0 */ void* Unk5A0;
-    /* 0x05A8 */ void* Unk5A8;
-    /* 0x05B0 */ void* Unk5B0;
+    /* 0x05A8 */ Component_GUI_AtkTextNode* Ingredient2Name;
+    /* 0x05B0 */ Component_GUI_AtkTextNode* Ingredient2QuantityRequiredForCraft;
     /* 0x05B8 */ void* Unk5B8;
     /* 0x05C0 */ void* Unk5C0;
     /* 0x05C8 */ void* Unk5C8;
-    /* 0x05D0 */ void* Unk5D0;
-    /*        */ byte _gap_0x5D8[0x10];
+    /* 0x05D0 */ Component_GUI_AtkTextNode* Ingredient2QuantityInInventoryNq;
+    /* 0x05D8 */ Component_GUI_AtkTextNode* Ingredient2QuantityInInventoryHq;
+    /*        */ byte _gap_0x5E0[0x8];
     /* 0x05E8 */ void* Unk5E8;
     /* 0x05F0 */ void* Unk5F0;
     /* 0x05F8 */ void* Unk5F8;
@@ -9118,12 +9352,13 @@ struct Client_UI_AddonRecipeNote /* Size=0x22D0 */
     /* 0x0608 */ void* Unk608;
     /* 0x0610 */ void* Unk610;
     /* 0x0618 */ void* Unk618;
-    /* 0x0620 */ void* Unk620;
-    /* 0x0628 */ void* Unk628;
+    /* 0x0620 */ Component_GUI_AtkTextNode* Ingredient3Name;
+    /* 0x0628 */ Component_GUI_AtkTextNode* Ingredient3QuantityRequiredForCraft;
     /* 0x0630 */ void* Unk630;
     /* 0x0638 */ void* Unk638;
     /* 0x0640 */ void* Unk640;
-    /*        */ byte _gap_0x648[0x10];
+    /* 0x0648 */ Component_GUI_AtkTextNode* Ingredient3QuantityInInventoryNq;
+    /* 0x0650 */ Component_GUI_AtkTextNode* Ingredient3QuantityInInventoryHq;
     /* 0x0658 */ void* Unk658;
     /* 0x0660 */ void* Unk660;
     /* 0x0668 */ void* Unk668;
@@ -9132,12 +9367,13 @@ struct Client_UI_AddonRecipeNote /* Size=0x22D0 */
     /* 0x0680 */ void* Unk680;
     /* 0x0688 */ void* Unk688;
     /* 0x0690 */ void* Unk690;
-    /* 0x0698 */ void* Unk698;
-    /* 0x06A0 */ void* Unk6A0;
+    /* 0x0698 */ Component_GUI_AtkTextNode* Ingredient4Name;
+    /* 0x06A0 */ Component_GUI_AtkTextNode* Ingredient4QuantityRequiredForCraft;
     /* 0x06A8 */ void* Unk6A8;
     /* 0x06B0 */ void* Unk6B0;
-    /*        */ byte _gap_0x6B8[0x10];
-    /* 0x06C8 */ void* Unk6C8;
+    /*        */ byte _gap_0x6B8[0x8];
+    /* 0x06C0 */ Component_GUI_AtkTextNode* Ingredient4QuantityInInventoryNq;
+    /* 0x06C8 */ Component_GUI_AtkTextNode* Ingredient4QuantityInInventoryHq;
     /* 0x06D0 */ void* Unk6D0;
     /* 0x06D8 */ void* Unk6D8;
     /* 0x06E0 */ void* Unk6E0;
@@ -9146,12 +9382,12 @@ struct Client_UI_AddonRecipeNote /* Size=0x22D0 */
     /* 0x06F8 */ void* Unk6F8;
     /* 0x0700 */ void* Unk700;
     /* 0x0708 */ void* Unk708;
-    /* 0x0710 */ void* Unk710;
-    /* 0x0718 */ void* Unk718;
+    /* 0x0710 */ Component_GUI_AtkTextNode* Ingredient5Name;
+    /* 0x0718 */ Component_GUI_AtkTextNode* Ingredient5QuantityRequiredForCraft;
     /* 0x0720 */ void* Unk720;
     /*        */ byte _gap_0x728[0x10];
-    /* 0x0738 */ void* Unk738;
-    /* 0x0740 */ void* Unk740;
+    /* 0x0738 */ Component_GUI_AtkTextNode* Ingredient5QuantityInInventoryNq;
+    /* 0x0740 */ Component_GUI_AtkTextNode* Ingredient5QuantityInInventoryHq;
     /* 0x0748 */ void* Unk748;
     /* 0x0750 */ void* Unk750;
     /* 0x0758 */ void* Unk758;
@@ -9160,11 +9396,13 @@ struct Client_UI_AddonRecipeNote /* Size=0x22D0 */
     /* 0x0770 */ void* Unk770;
     /* 0x0778 */ void* Unk778;
     /* 0x0780 */ void* Unk780;
-    /* 0x0788 */ void* Unk788;
-    /* 0x0790 */ void* Unk790;
+    /* 0x0788 */ Component_GUI_AtkTextNode* Ingredient6Name;
+    /* 0x0790 */ Component_GUI_AtkTextNode* Ingredient6QuantityRequiredForCraft;
     /*        */ byte _gap_0x798[0x10];
     /* 0x07A8 */ void* Unk7A8;
-    /*        */ byte _gap_0x7B0[0x50];
+    /* 0x07B0 */ Component_GUI_AtkTextNode* Ingredient6QuantityInInventoryNq;
+    /* 0x07B8 */ Component_GUI_AtkTextNode* Ingredient6QuantityInInventoryHq;
+    /*        */ byte _gap_0x7C0[0x40];
     /* 0x0800 */ Client_UI_AddonRecipeNote* this800;
     /* 0x0808 */ Component_GUI_AtkStage* Unk808;
     /* 0x0810 */ Component_GUI_AtkComponentTextInput* Unk810;
@@ -9431,7 +9669,7 @@ struct Client_UI_AddonSalvageItemSelector /* Size=0x1CB0 */
 {
     /* 0x0000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /*        */ byte _gap_0x220[0x48];
-    /* 0x0268 */ byte ItemData[0x1A40];
+    /* 0x0268 */ byte Items[0x1A40];
     /* 0x1CA8 */ Client_UI_Agent_AgentSalvage_SalvageItemCategory SelectedCategory;
     /* 0x1CAC */ unsigned __int32 ItemCount;
 };
@@ -10164,7 +10402,7 @@ struct Component_GUI_AtkTexture /* Size=0x18 */
     union {
     /* 0x08 */ Component_GUI_AtkTextureResource* Resource;
     /* 0x08 */ void* Crest;
-    /* 0x08 */ Client_Graphics_Render_Texture* KernelTexture;
+    /* 0x08 */ Client_Graphics_Kernel_Texture* KernelTexture;
     } _union_0x8;
     /* 0x10 */ Component_GUI_TextureType TextureType;
     /* 0x11 */ bool TextureReady;
@@ -10583,7 +10821,15 @@ struct Client_UI_Agent_AgentFriendList /* Size=0xC8 */
 {
     /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x28 */ Client_UI_Info_InfoProxyFriendList* InfoProxy;
-    /*      */ byte _gap_0x30[0x98];
+    /* 0x30 */ Client_System_String_Utf8String SelectedPlayerName;
+    /*      */ byte _gap_0x98[0x8];
+    /* 0xA0 */ unsigned __int64 SelectedContentId;
+    /*      */ byte _gap_0xA8[0x8];
+    /* 0xB0 */ byte SelectedIndex;
+    /*      */ byte _gap_0xB1;
+    /*      */ byte _gap_0xB2[0x2];
+    /*      */ byte _gap_0xB4[0x4];
+    /*      */ byte _gap_0xB8[0x10];
 };
 
 struct Client_UI_Agent_AgentGatheringNote /* Size=0x178 */
@@ -10684,6 +10930,16 @@ struct Client_UI_Agent_AgentHUD /* Size=0x4BA0 */
     /*        */ byte _gap_0x1368[0x88];
     /* 0x13F0 */ Client_UI_Agent_HudPartyMemberEnmity* PartyEnmityList;
     /*        */ byte _gap_0x13F8[0x37A8];
+};
+
+struct Client_UI_Agent_AgentHudLayout /* Size=0x78 */
+{
+    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
+    /*      */ byte _gap_0x28[0x48];
+    /* 0x70 */ bool NeedToSave;
+    /*      */ byte _gap_0x71;
+    /*      */ byte _gap_0x72[0x2];
+    /*      */ byte _gap_0x74[0x4];
 };
 
 struct Client_UI_Agent_AgentIKDFishingLog /* Size=0x460 */
@@ -10892,6 +11148,15 @@ struct Client_UI_Agent_AgentInventoryContext /* Size=0x778 */
     /* 0x738 */ Client_Game_InventoryItem DiscardDummyItem;
     /* 0x770 */ __int32 DialogType;
     /*       */ byte _gap_0x774[0x4];
+};
+
+struct Client_UI_Agent_AgentItemDetail /* Size=0x150 */
+{
+    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
+    /*       */ byte _gap_0x28[0x110];
+    /* 0x138 */ unsigned __int32 ItemId;
+    /*       */ byte _gap_0x13C[0x4];
+    /*       */ byte _gap_0x140[0x10];
 };
 
 struct Client_UI_Agent_AgentItemDonationInfo /* Size=0x18 */
@@ -11157,6 +11422,14 @@ struct Client_UI_Agent_AgentMiragePrismPrismBox /* Size=0x80 */
     /* 0x48 */ Client_Game_InventoryItem TempDyeItem;
 };
 
+struct Client_UI_Agent_AgentMiragePrismPrismItemDetail /* Size=0x58 */
+{
+    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
+    /*      */ byte _gap_0x28[0x28];
+    /*      */ byte _gap_0x50[0x4];
+    /* 0x54 */ unsigned __int32 ItemId;
+};
+
 struct Client_UI_Agent_AgentMJIPouch /* Size=0x38 */
 {
     /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
@@ -11244,6 +11517,13 @@ struct Client_UI_Agent_AgentMonsterNote /* Size=0x68 */
     /*      */ byte _gap_0x5D;
     /*      */ byte _gap_0x5E[0x2];
     /*      */ byte _gap_0x60[0x8];
+};
+
+struct Client_UI_Agent_AgentMycBattleAreaInfo /* Size=0x48 */
+{
+    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
+    /* 0x28 */ Client_UI_Agent_MycDynamicEventData* MycDynamicEventData;
+    /*      */ byte _gap_0x30[0x18];
 };
 
 struct Client_UI_Agent_AgentMycItemBox /* Size=0x58 */
@@ -11339,29 +11619,6 @@ struct Client_UI_Agent_AgentRetainerItemTransferData_DuplicateItemEntry /* Size=
     /* 0x74 */ unsigned __int32 UiCategoryIconId;
 };
 
-struct Client_UI_Agent_AgentRetainerList_Retainer /* Size=0x70 */
-{
-    /* 0x00 */ Client_System_String_Utf8String Name;
-    /*      */ byte _gap_0x68[0x4];
-    /* 0x6C */ byte Index;
-    /* 0x6D */ byte SortedIndex;
-    /*      */ byte _gap_0x6E[0x2];
-};
-
-struct Client_UI_Agent_AgentRetainerList_RetainerList /* Size=0x460 */
-{
-    /* 0x000 */ Client_UI_Agent_AgentRetainerList_Retainer Retainer0;
-    /* 0x070 */ Client_UI_Agent_AgentRetainerList_Retainer Retainer1;
-    /* 0x0E0 */ Client_UI_Agent_AgentRetainerList_Retainer Retainer2;
-    /* 0x150 */ Client_UI_Agent_AgentRetainerList_Retainer Retainer3;
-    /* 0x1C0 */ Client_UI_Agent_AgentRetainerList_Retainer Retainer4;
-    /* 0x230 */ Client_UI_Agent_AgentRetainerList_Retainer Retainer5;
-    /* 0x2A0 */ Client_UI_Agent_AgentRetainerList_Retainer Retainer6;
-    /* 0x310 */ Client_UI_Agent_AgentRetainerList_Retainer Retainer7;
-    /* 0x380 */ Client_UI_Agent_AgentRetainerList_Retainer Retainer8;
-    /* 0x3F0 */ Client_UI_Agent_AgentRetainerList_Retainer Retainer9;
-};
-
 struct Client_UI_Agent_AgentRetainerList /* Size=0x5B8 */
 {
     /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
@@ -11373,8 +11630,17 @@ struct Client_UI_Agent_AgentRetainerList /* Size=0x5B8 */
     /*       */ byte _gap_0x49;
     /*       */ byte _gap_0x4A[0x2];
     /*       */ byte _gap_0x4C[0x4];
-    /* 0x050 */ Client_UI_Agent_AgentRetainerList_RetainerList Retainers;
+    /* 0x050 */ byte Retainers[0x460];
     /*       */ byte _gap_0x4B0[0x108];
+};
+
+struct Client_UI_Agent_AgentRetainerList_Retainer /* Size=0x70 */
+{
+    /* 0x00 */ Client_System_String_Utf8String Name;
+    /*      */ byte _gap_0x68[0x4];
+    /* 0x6C */ byte Index;
+    /* 0x6D */ byte SortedIndex;
+    /*      */ byte _gap_0x6E[0x2];
 };
 
 struct Client_UI_Agent_AgentRetainerTask /* Size=0x90 */
@@ -11446,7 +11712,7 @@ struct Client_UI_Agent_AgentSalvage /* Size=0x190 */
     /* 0x398 */ Client_UI_Agent_SalvageResult DesynthItem;
     /*       */ byte _gap_0x3A0[0x4];
     /* 0x3A4 */ unsigned __int32 DesynthItemId;
-    /* 0x3A8 */ byte DesynthResult[0x18];
+    /* 0x3A8 */ byte DesynthResults[0x18];
 };
 
 struct Client_UI_Agent_AgentSalvage_SalvageListItem /* Size=0x88 */
@@ -11534,6 +11800,21 @@ struct Client_UI_Agent_AgentSatisfactionSupply_ItemInfo /* Size=0x3C */
     /*      */ byte _gap_0x18[0x20];
     /* 0x38 */ unsigned __int16 FishingSpotId;
     /* 0x3A */ unsigned __int16 SpearFishingSpotId;
+};
+
+struct Client_UI_Agent_AgentScenarioTree /* Size=0x30 */
+{
+    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
+    /* 0x28 */ Client_UI_Agent_AgentScenarioTree_AgentScenarioTreeData* Data;
+};
+
+struct Client_UI_Agent_AgentScenarioTree_AgentScenarioTreeData /* Size=0x30 */
+{
+    /* 0x00 */ unsigned __int16 CurrentScenarioQuest;
+    /*      */ byte _gap_0x2[0x2];
+    /*      */ byte _gap_0x4[0x2];
+    /* 0x06 */ unsigned __int16 CompleteScenarioQuest;
+    /*      */ byte _gap_0x8[0x28];
 };
 
 struct StdDeque_ClientUIAgentBalloonInfo /* Size=0x28 */
@@ -12125,6 +12406,28 @@ struct Client_UI_Agent_MissionInfo /* Size=0x78 */
     /*      */ byte _gap_0x74[0x4];
 };
 
+struct Client_UI_Agent_MycDynamicEvent /* Size=0x78 */
+{
+    /* 0x00 */ unsigned __int32 TimeLeft;
+    /* 0x04 */ unsigned __int16 Id;
+    /*      */ byte _gap_0x6;
+    /* 0x07 */ Client_UI_Agent_MycDynamicEventState State;
+    /*      */ byte _gap_0x8[0x2];
+    /* 0x0A */ unsigned __int16 ParticipantCount;
+    /*      */ byte _gap_0xC[0x4];
+    /* 0x10 */ Client_System_String_Utf8String Name;
+};
+
+struct Client_UI_Agent_MycDynamicEventData /* Size=0x178 */
+{
+    /*       */ byte _gap_0x0[0x8];
+    /*       */ byte _gap_0x8[0x4];
+    /* 0x00C */ byte Count;
+    /*       */ byte _gap_0xD;
+    /*       */ byte _gap_0xE[0x2];
+    /* 0x010 */ byte Array[0x168];
+};
+
 struct Client_UI_Agent_MycItem /* Size=0x8 */
 {
     /* 0x0 */ __int32 ActionId;
@@ -12310,18 +12613,6 @@ struct Client_UI_Info_InfoProxyInterface /* Size=0x18 */
     /*      */ byte _gap_0x14[0x4];
 };
 
-struct Client_UI_Info_InfoProxyPageInterface /* Size=0x20 */
-{
-    /* 0x00 */ Client_UI_Info_InfoProxyInterface InfoProxyInterface;
-    /*      */ byte _gap_0x18[0x8];
-};
-
-struct Client_UI_Info_InfoProxy11 /* Size=0x5B98 */
-{
-    /* 0x0000 */ Client_UI_Info_InfoProxyPageInterface InfoProxyPageInterface;
-    /*        */ byte _gap_0x20[0x5B78];
-};
-
 struct Client_UI_Info_InfoProxy17 /* Size=0x1F8 */
 {
     /* 0x000 */ Client_UI_Info_InfoProxyInterface InfoProxyInterface;
@@ -12337,6 +12628,11 @@ struct Client_UI_Info_InfoProxy20 /* Size=0x28 */
     /*      */ byte _gap_0x18[0x10];
 };
 
+struct Client_UI_Info_InfoProxyPageInterface /* Size=0x20 */
+{
+    /*      */ byte _gap_0x0[0x20];
+};
+
 struct Client_UI_Info_InfoProxyCommonList /* Size=0xB8 */
 {
     /* 0x00 */ Client_UI_Info_InfoProxyPageInterface InfoProxyPageInterface;
@@ -12350,8 +12646,7 @@ struct Client_UI_Info_InfoProxyCommonList /* Size=0xB8 */
     /*      */ byte _gap_0x92[0x2];
     /*      */ byte _gap_0x94[0x4];
     /* 0x98 */ Client_UI_Info_InfoProxyCommonList_CharacterData* CharData;
-    /* 0xA0 */ Client_UI_Info_InfoProxyCommonList_CharIndexEntry* CharIndex;
-    /*      */ byte _gap_0xA8[0x10];
+    /*      */ byte _gap_0xA0[0x18];
 };
 
 struct Client_UI_Info_InfoProxyInvitedList /* Size=0xC8 */
@@ -12426,6 +12721,21 @@ struct Client_UI_Info_InfoProxyBlacklist /* Size=0x1A00 */
     /* 0x0660 */ Client_System_String_Utf8String Unk660;
     /* 0x06C8 */ Client_System_String_Utf8String Unk6C8;
     /*        */ byte _gap_0x730[0x12D0];
+};
+
+struct Client_UI_Info_InfoProxyCatalogSearch /* Size=0x3C8 */
+{
+    /* 0x000 */ Client_UI_Info_InfoProxyPageInterface InfoProxyPageInterface;
+    /*       */ byte _gap_0x20[0x8];
+    /* 0x028 */ Client_System_String_Utf8String Query;
+    /* 0x090 */ byte Entries[0xA0];
+    /*       */ byte _gap_0x130[0x298];
+};
+
+struct Client_UI_Info_InfoProxyCatalogSearch_Entry /* Size=0x8 */
+{
+    /* 0x0 */ unsigned __int32 ItemID;
+    /* 0x4 */ unsigned __int32 Count;
 };
 
 struct Client_UI_Info_InfoProxyCircle /* Size=0x6BB8 */
@@ -12522,54 +12832,14 @@ struct Client_UI_Info_InfoProxyCircleList /* Size=0x1E0 */
     /*       */ byte _gap_0x1B0[0x30];
 };
 
-struct Client_UI_Info_InfoProxyCommonList_CharacterArray /* Size=0x4B00 */
-{
-    /* 0x0000 */ byte Entries[0x4B00];
-};
-
-struct Client_UI_Info_InfoProxyCommonList_CharacterArray_Entry /* Size=0x60 */
-{
-    /* 0x00 */ unsigned __int64 ContentId;
-    /*      */ byte _gap_0x8;
-    /* 0x09 */ unsigned __int16 OnlineStatus;
-    /* 0x0B */ byte MentorState;
-    /* 0x0C */ byte PartyStatus;
-    /* 0x0D */ byte DutyStatus;
-    /*      */ byte _gap_0xE[0x2];
-    /*      */ byte _gap_0x10[0x4];
-    /* 0x14 */ byte DictIndex;
-    /*      */ byte _gap_0x15;
-    /* 0x16 */ unsigned __int16 CurrentWorld;
-    /* 0x18 */ unsigned __int16 HomeWorld;
-    /* 0x1A */ unsigned __int16 Location;
-    /* 0x1C */ Client_UI_Agent_GrandCompany GrandCompany;
-    /* 0x1D */ byte MainLanguage;
-    /* 0x1E */ byte AvailableLanguages;
-    /*      */ byte _gap_0x1F;
-    /*      */ byte _gap_0x20;
-    /* 0x21 */ byte Job;
-    /* 0x22 */ byte Name[0x20];
-    /* 0x42 */ byte FCTag[0x6];
-    /*      */ byte _gap_0x48[0x18];
-};
-
 struct Client_UI_Info_InfoProxyCommonList_CharacterData /* Size=0x68 */
 {
-    /* 0x00 */ __int64 ContentId;
-    /*      */ byte _gap_0x8;
-    /* 0x09 */ unsigned __int16 OnlineStatus;
-    /* 0x0B */ byte MentorState;
-    /* 0x0C */ byte PartyStatus;
-    /* 0x0D */ byte DutyStatus;
-    /*      */ byte _gap_0xE[0x2];
-    /*      */ byte _gap_0x10[0x2];
-    /*      */ byte _gap_0x12;
-    /* 0x13 */ byte Unk13;
-    /* 0x14 */ byte DictIndex;
-    /*      */ byte _gap_0x15;
-    /*      */ byte _gap_0x16[0x2];
-    /*      */ byte _gap_0x18[0x4];
-    /*      */ byte _gap_0x1C[0x2];
+    /* 0x00 */ unsigned __int64 ContentId;
+    /* 0x08 */ Client_UI_Info_InfoProxyCommonList_CharacterData_ClientState State;
+    /*      */ byte _gap_0x10[0x8];
+    /* 0x18 */ unsigned __int32 Unk18;
+    /* 0x1C */ byte SortId;
+    /*      */ byte _gap_0x1D;
     /* 0x1E */ unsigned __int16 CurrentWorld;
     /* 0x20 */ unsigned __int16 HomeWorld;
     /* 0x22 */ unsigned __int16 Location;
@@ -12586,22 +12856,9 @@ struct Client_UI_Info_InfoProxyCommonList_CharacterData /* Size=0x68 */
     /*      */ byte _gap_0x60[0x8];
 };
 
-struct Client_UI_Info_InfoProxyCommonList_CharacterDict /* Size=0x318 */
-{
-    /* 0x000 */ byte Entries[0x2000];
-};
-
-struct Client_UI_Info_InfoProxyCommonList_CharacterDict_Entry /* Size=0x10 */
-{
-    /* 0x00 */ unsigned __int64 ContentID;
-    /*      */ byte _gap_0x8[0x2];
-    /* 0x0A */ unsigned __int16 HomeWorld;
-    /*      */ byte _gap_0xC[0x4];
-};
-
 struct Client_UI_Info_InfoProxyCommonList_CharIndexEntry /* Size=0x10 */
 {
-    /* 0x00 */ __int64 ContentID;
+    /* 0x00 */ unsigned __int64 ContentID;
     /*      */ byte _gap_0x8[0x2];
     /* 0x0A */ unsigned __int16 HomeWorld;
     /*      */ byte _gap_0xC[0x4];
@@ -12756,23 +13013,44 @@ struct Client_UI_Info_InfoProxyFriendList_StrBuf /* Size=0x40 */
 
 struct Client_UI_Info_InfoProxyInterface_InfoProxyInterfaceVTable /* Size=0x0 */
 {
-    /*     */ byte _gap_0x0[0x38];
+    /*     */ byte _gap_0x0[0x30];
+    /* 0x30 */ __int64 EndRequest;
     /* 0x38 */ __int64 GetEntryCount;
 };
 
-struct Client_UI_Info_InfoProxyItemSearch /* Size=0x3C8 */
+struct Client_UI_Info_LastPurchasedMarketboardItem /* Size=0x0 */
 {
-    /* 0x000 */ Client_UI_Info_InfoProxyPageInterface InfoProxyPageInterface;
-    /*       */ byte _gap_0x20[0x8];
-    /* 0x028 */ Client_System_String_Utf8String Query;
-    /* 0x090 */ byte Entries[0xA0];
-    /*       */ byte _gap_0x130[0x298];
+    /* 0x0 */ unsigned __int64 SellingRetainerContentId;
+    /* 0x8 */ unsigned __int64 GlobalItemId;
+    /* 0x10 */ unsigned __int32 ItemId;
+    /* 0x14 */ unsigned __int32 Quantity;
+    /* 0x18 */ unsigned __int32 UnitPrice;
+    /* 0x1C */ unsigned __int32 TotalTax;
+    /*     */ byte _gap_0x20[0x2];
+    /* 0x22 */ bool IsHqItem;
+    /* 0x23 */ byte Town;
 };
 
-struct Client_UI_Info_InfoProxyItemSearch_Entry /* Size=0x8 */
+struct Client_UI_Info_InfoProxyItemSearch /* Size=0x5B98 */
 {
-    /* 0x0 */ unsigned __int32 ItemID;
-    /* 0x4 */ unsigned __int32 Count;
+    /*        */ byte _gap_0x0[0x20];
+    /* 0x0020 */ unsigned __int32 SelectedItemId;
+    /*        */ byte _gap_0x24[0x4];
+    /*        */ byte _gap_0x28[0x47E8];
+    /* 0x4810 */ unsigned __int32 ListingCount;
+    /*        */ byte _gap_0x4814[0x4];
+    /*        */ byte _gap_0x4818[0xE68];
+    /* 0x5680 */ Client_UI_Info_LastPurchasedMarketboardItem LastPurchasedMarketboardItem;
+    /*        */ byte _gap_0x5680[0x4E8];
+    /* 0x5B68 */ unsigned __int32 WishlistItems[0xA];
+    /* 0x5B90 */ unsigned __int32 WishlistSize;
+    /*        */ byte _gap_0x5B94[0x4];
+};
+
+struct Client_UI_Info_InfoProxyItemSearch_InfoProxyItemSearchVTable /* Size=0x0 */
+{
+    /*     */ byte _gap_0x0[0x30];
+    /* 0x30 */ __int64 EndRequest;
 };
 
 struct Client_UI_Info_InfoProxyLetter /* Size=0x5250 */
@@ -12842,6 +13120,12 @@ struct Client_UI_Info_InfoProxyLinkshellMember /* Size=0xD0 */
     /*      */ byte _gap_0xB8[0x18];
 };
 
+struct Client_UI_Info_InfoProxyPageInterface_InfoProxyPageInterfaceVTable /* Size=0x0 */
+{
+    /*     */ byte _gap_0x0[0x60];
+    /* 0x60 */ __int64 AddPage;
+};
+
 struct Client_UI_Info_InfoProxyParty /* Size=0x348 */
 {
     /* 0x000 */ Client_UI_Info_InfoProxyCommonList InfoProxyCommonList;
@@ -12885,6 +13169,30 @@ struct Client_UI_Info_InfoProxySearchComment /* Size=0x240 */
     /* 0x168 */ Client_System_String_Utf8String UnkString1;
     /* 0x1D0 */ Client_System_String_Utf8String UnkString2;
     /*       */ byte _gap_0x238[0x8];
+};
+
+struct Client_UI_Info_MarketBoardListing /* Size=0xB8 */
+{
+    /*      */ byte _gap_0x0[0x68];
+    /* 0x68 */ unsigned __int64 GlobalItemId;
+    /* 0x70 */ unsigned __int64 SellingRetainerContentId;
+    /* 0x78 */ unsigned __int64 SellingPlayerContentId;
+    /*      */ byte _gap_0x80[0x8];
+    /* 0x88 */ unsigned __int32 UnitPrice;
+    /* 0x8C */ unsigned __int32 TotalTax;
+    /* 0x90 */ unsigned __int32 Quantity;
+    /* 0x94 */ unsigned __int32 ItemId;
+    /*      */ byte _gap_0x98[0x4];
+    /*      */ byte _gap_0x9C[0x2];
+    /* 0x9E */ unsigned __int16 Materia[0x5];
+    /* 0xA8 */ bool IsHqItem;
+    /* 0xA9 */ byte MateriaCount;
+    /*      */ byte _gap_0xAA[0x2];
+    /*      */ byte _gap_0xAC[0x4];
+    /* 0xB0 */ byte Town;
+    /*      */ byte _gap_0xB1;
+    /*      */ byte _gap_0xB2[0x2];
+    /*      */ byte _gap_0xB4[0x4];
 };
 
 struct Client_UI_LootItemInfo /* Size=0x28 */
@@ -13015,8 +13323,8 @@ struct Client_UI_Misc_CharaViewPortrait /* Size=0x3C0 */
     /* 0x305 */ byte DirectionalLightingColorGreen;
     /* 0x306 */ byte DirectionalLightingColorBlue;
     /* 0x307 */ byte DirectionalLightingBrightness;
-    /* 0x308 */ unsigned __int16 DirectionalLightingVerticalAngle;
-    /* 0x30A */ unsigned __int16 DirectionalLightingHorizontalAngle;
+    /* 0x308 */ __int16 DirectionalLightingVerticalAngle;
+    /* 0x30A */ __int16 DirectionalLightingHorizontalAngle;
     /* 0x30C */ byte AmbientLightingColorRed;
     /* 0x30D */ byte AmbientLightingColorGreen;
     /* 0x30E */ byte AmbientLightingColorBlue;
@@ -13278,11 +13586,39 @@ struct Client_UI_Misc_ItemFinderModuleRetainerResult /* Size=0x0 */
     /* 0x78 */ __int32 Page5CountCollectible;
 };
 
-struct StdVector_ClientUIMiscItemOrderModuleSorterRetainerEntry /* Size=0x18 */
+struct Pointer_ClientUIMiscItemOrderModuleSorter /* Size=0x8 */
 {
-    /* 0x00 */ Client_UI_Misc_ItemOrderModuleSorterRetainerEntry* First;
-    /* 0x08 */ Client_UI_Misc_ItemOrderModuleSorterRetainerEntry* Last;
-    /* 0x10 */ Client_UI_Misc_ItemOrderModuleSorterRetainerEntry* End;
+    /* 0x0 */ Client_UI_Misc_ItemOrderModuleSorter* Value;
+};
+
+struct StdPair_SystemUInt64_PointerClientUIMiscItemOrderModuleSorter /* Size=0x10 */
+{
+    /* 0x00 */ unsigned __int64 Item1;
+    /* 0x08 */ Pointer_ClientUIMiscItemOrderModuleSorter Item2;
+};
+
+struct StdMap_Node_SystemUInt64_PointerClientUIMiscItemOrderModuleSorter /* Size=0x38 */
+{
+    /* 0x00 */ StdMap_Node_SystemUInt64_PointerClientUIMiscItemOrderModuleSorter* Left;
+    /* 0x08 */ StdMap_Node_SystemUInt64_PointerClientUIMiscItemOrderModuleSorter* Parent;
+    /* 0x10 */ StdMap_Node_SystemUInt64_PointerClientUIMiscItemOrderModuleSorter* Right;
+    /* 0x18 */ byte Color;
+    /*      */ byte _gap_0x19;
+    /*      */ byte _gap_0x1A[0x2];
+    /* 0x1C */ bool IsNil;
+    /*      */ byte _gap_0x1D;
+    /*      */ byte _gap_0x1E[0x2];
+    /* 0x20 */ byte _18;
+    /* 0x21 */ byte _19;
+    /*      */ byte _gap_0x22[0x2];
+    /*      */ byte _gap_0x24[0x4];
+    /* 0x28 */ StdPair_SystemUInt64_PointerClientUIMiscItemOrderModuleSorter KeyValuePair;
+};
+
+struct StdMap_SystemUInt64_PointerClientUIMiscItemOrderModuleSorter /* Size=0x10 */
+{
+    /* 0x00 */ StdMap_Node_SystemUInt64_PointerClientUIMiscItemOrderModuleSorter* Head;
+    /* 0x08 */ unsigned __int64 Count;
 };
 
 struct Client_UI_Misc_ItemOrderModule /* Size=0xD8 */
@@ -13292,8 +13628,7 @@ struct Client_UI_Misc_ItemOrderModule /* Size=0xD8 */
     /*      */ byte _gap_0x48[0x60];
     /* 0xA8 */ Client_UI_Misc_ItemOrderModuleSorter* ArmouryWaistSorter;
     /* 0xB0 */ unsigned __int64 ActiveRetainerId;
-    /* 0xB8 */ StdVector_ClientUIMiscItemOrderModuleSorterRetainerEntry* RetainerSorter;
-    /* 0xC0 */ __int64 RetainerSorterCount;
+    /* 0xB8 */ StdMap_SystemUInt64_PointerClientUIMiscItemOrderModuleSorter RetainerSorter;
     /* 0xC8 */ Client_UI_Misc_ItemOrderModuleSorter* SaddleBagSorter;
     /* 0xD0 */ Client_UI_Misc_ItemOrderModuleSorter* PremiumSaddleBagSorter;
 };
@@ -13317,7 +13652,7 @@ struct StdVector_ClientUIMiscItemOrderModuleSorterSortFunctionEntry /* Size=0x18
     /* 0x10 */ Client_UI_Misc_ItemOrderModuleSorterSortFunctionEntry* End;
 };
 
-struct Client_UI_Misc_ItemOrderModuleSorter /* Size=0x60 */
+struct Client_UI_Misc_ItemOrderModuleSorter /* Size=0x68 */
 {
     /* 0x00 */ Client_Game_InventoryType InventoryType;
     /*      */ byte _gap_0x4[0x4];
@@ -13330,6 +13665,7 @@ struct Client_UI_Misc_ItemOrderModuleSorter /* Size=0x60 */
     /* 0x3C */ __int32 PercentComplete;
     /* 0x40 */ StdVector_ClientUIMiscItemOrderModuleSorterSortFunctionEntry SortFunctions;
     /* 0x58 */ Client_UI_Misc_ItemOrderModuleSorterPreviousOrderEntry* PreviousOrderArray;
+    /*      */ byte _gap_0x60[0x8];
 };
 
 struct Client_UI_Misc_ItemOrderModuleSorterItemEntry /* Size=0xC */
@@ -13346,14 +13682,6 @@ struct Client_UI_Misc_ItemOrderModuleSorterPreviousOrderEntry /* Size=0x4 */
 {
     /* 0x0 */ unsigned __int16 Slot;
     /* 0x2 */ unsigned __int16 Page;
-};
-
-struct Client_UI_Misc_ItemOrderModuleSorterRetainerEntry /* Size=0x40 */
-{
-    /*      */ byte _gap_0x0[0x20];
-    /* 0x20 */ unsigned __int64 RetainerId;
-    /* 0x28 */ Client_UI_Misc_ItemOrderModuleSorter* Sorter;
-    /*      */ byte _gap_0x30[0x10];
 };
 
 struct Client_UI_Misc_ItemOrderModuleSorterSortFunctionEntry /* Size=0x10 */
@@ -13386,18 +13714,12 @@ struct Client_UI_Misc_PronounModule /* Size=0x3B0 */
     /*       */ byte _gap_0x398[0x18];
 };
 
-struct Client_UI_Misc_RaptureGearsetModule_Gearsets /* Size=0xAF2C */
-{
-    /*        */ byte _gap_0x0[0xAF28];
-    /*        */ byte _gap_0xAF28[0x4];
-};
-
 struct Client_UI_Misc_RaptureGearsetModule /* Size=0xB670 */
 {
-    /*        */ byte _gap_0x0[0x48];
-    /* 0x0048 */ Client_UI_Misc_RaptureGearsetModule_Gearsets Gearset;
-    /*        */ byte _gap_0xAF74[0x4];
-    /*        */ byte _gap_0xAF78[0x4B8];
+    /* 0x0000 */ Client_UI_Misc_UserFileManager_UserFileEvent UserFileEvent;
+    /*        */ byte _gap_0x40[0x8];
+    /* 0x0048 */ byte Entries[0xAF00];
+    /*        */ byte _gap_0xAF48[0x4E8];
     /*        */ byte _gap_0xB430[0x4];
     /* 0xB434 */ __int32 CurrentGearsetIndex;
     /*        */ byte _gap_0xB438[0x238];
@@ -13406,8 +13728,7 @@ struct Client_UI_Misc_RaptureGearsetModule /* Size=0xB670 */
 struct Client_UI_Misc_RaptureGearsetModule_GearsetEntry /* Size=0x1C0 */
 {
     /* 0x000 */ byte ID;
-    /* 0x001 */ byte Name[0x2F];
-    /*       */ byte _gap_0x30;
+    /* 0x001 */ byte Name[0x30];
     /* 0x031 */ byte ClassJob;
     /* 0x032 */ byte GlamourSetLink;
     /*       */ byte _gap_0x33;
@@ -13425,8 +13746,13 @@ struct Client_UI_Misc_RaptureGearsetModule_GearsetItem /* Size=0x1C */
     /*      */ byte _gap_0x9;
     /* 0x0A */ unsigned __int16 Materia[0x5];
     /* 0x14 */ byte MateriaGrade[0x5];
-    /*      */ byte _gap_0x19;
+    /* 0x19 */ Client_UI_Misc_RaptureGearsetModule_GearsetItemFlag Flags;
     /*      */ byte _gap_0x1A[0x2];
+};
+
+struct Client_UI_Misc_RaptureGearsetModule_RaptureGearsetModuleVTable /* Size=0x1 */
+{
+    /*     */ byte _gap_0x0;
 };
 
 struct Client_UI_Misc_SavedHotBars /* Size=0x15720 */
@@ -13508,31 +13834,22 @@ struct Client_UI_Misc_RaptureLogModuleTab /* Size=0x928 */
     /*       */ byte _gap_0xD0[0x858];
 };
 
-struct Client_UI_Misc_RaptureMacroModule_MacroPage /* Size=0x28D20 */
-{
-    /*         */ byte _gap_0x0[0x28D20];
-};
-
 struct Client_UI_Misc_RaptureMacroModule /* Size=0x51AA8 */
 {
     /* 0x00000 */ Client_UI_Misc_UserFileManager_UserFileEvent UserFileEvent;
-    /*         */ byte _gap_0x40[0x18];
-    /* 0x00058 */ Client_UI_Misc_RaptureMacroModule_MacroPage Individual;
-    /* 0x28D78 */ Client_UI_Misc_RaptureMacroModule_MacroPage Shared;
+    /* 0x00040 */ Client_UI_Misc_RaptureTextModule* RaptureTextModule;
+    /*         */ byte _gap_0x48[0x10];
+    /* 0x00058 */ byte Individual[0x28D20];
+    /* 0x28D78 */ byte Shared[0x28D20];
     /*         */ byte _gap_0x51A98[0x10];
-};
-
-struct Client_UI_Misc_RaptureMacroModule_Macro_Lines /* Size=0x618 */
-{
-    /*       */ byte _gap_0x0[0x618];
 };
 
 struct Client_UI_Misc_RaptureMacroModule_Macro /* Size=0x688 */
 {
     /* 0x000 */ unsigned __int32 IconId;
-    /* 0x004 */ unsigned __int32 Unk;
+    /* 0x004 */ unsigned __int32 MacroIconRowId;
     /* 0x008 */ Client_System_String_Utf8String Name;
-    /* 0x070 */ Client_UI_Misc_RaptureMacroModule_Macro_Lines Line;
+    /* 0x070 */ byte Lines[0x618];
 };
 
 struct Client_UI_Misc_RaptureTextModule /* Size=0xE58 */
@@ -13567,22 +13884,21 @@ struct Client_UI_Misc_RecommendEquipModule /* Size=0x80 */
     /*      */ byte _gap_0x78[0x8];
 };
 
-struct Client_UI_Misc_RetainerCommentModule_RetainerCommentList /* Size=0x410 */
-{
-    /*       */ byte _gap_0x0[0x410];
-};
-
 struct Client_UI_Misc_RetainerCommentModule /* Size=0x5A0 */
 {
     /* 0x000 */ Client_UI_Misc_UserFileManager_UserFileEvent UserFileEvent;
-    /* 0x040 */ Client_UI_Misc_RetainerCommentModule_RetainerCommentList Retainers;
-    /*       */ byte _gap_0x450[0x150];
+    /*       */ byte _gap_0x40[0x8];
+    /* 0x048 */ byte Retainers[0x550];
+    /*       */ byte _gap_0x598[0x8];
 };
 
-struct Client_UI_Misc_RetainerCommentModule_RetainerComment /* Size=0x68 */
+struct Client_UI_Misc_RetainerCommentModule_RetainerComment /* Size=0x88 */
 {
-    /* 0x00 */ unsigned __int64 ID;
-    /*      */ byte _gap_0x8[0x60];
+    /* 0x00 */ unsigned __int64 Id;
+    /* 0x08 */ byte Comment[0x5B];
+    /*      */ byte _gap_0x63;
+    /*      */ byte _gap_0x64[0x4];
+    /*      */ byte _gap_0x68[0x20];
 };
 
 struct Client_UI_Misc_SavedHotBars_SavedHotBarClassJobBars /* Size=0x5A0 */
@@ -13818,6 +14134,92 @@ struct Client_UI_UI3DModule_UnkInfo /* Size=0x40 */
 {
     /* 0x00 */ Client_UI_UI3DModule_MapInfo MapInfo;
     /*      */ byte _gap_0x18[0x28];
+};
+
+struct Client_UI_UIInputData /* Size=0xA20 */
+{
+    /*       */ byte _gap_0x0[0x8];
+    /* 0x008 */ __int32 GamepadLeftStickX;
+    /* 0x00C */ __int32 GamepadLeftStickY;
+    /* 0x010 */ __int32 GamepadRightStickX;
+    /* 0x014 */ __int32 GamepadRightStickY;
+    /* 0x018 */ Client_UI_GamepadButtonsFlags GamepadButtons;
+    /*       */ byte _gap_0x1A[0x2];
+    /*       */ byte _gap_0x1C[0x4];
+    /*       */ byte _gap_0x20[0x8];
+    /*       */ byte _gap_0x28[0x4];
+    /* 0x02C */ float Start;
+    /* 0x030 */ float Select;
+    /* 0x034 */ float L3;
+    /* 0x038 */ float R3;
+    /* 0x03C */ float L1;
+    /* 0x040 */ float R1;
+    /* 0x044 */ float Cross;
+    /* 0x048 */ float Circle;
+    /* 0x04C */ float Square;
+    /* 0x050 */ float Triangle;
+    /*       */ byte _gap_0x54[0x4];
+    /*       */ byte _gap_0x58[0x50];
+    /*       */ byte _gap_0xA8[0x4];
+    /* 0x0AC */ float DPadLeft;
+    /* 0x0B0 */ float DPadRight;
+    /* 0x0B4 */ float DPadUp;
+    /* 0x0B8 */ float DPadDown;
+    /* 0x0BC */ float GamepadLeftStickLeft;
+    /* 0x0C0 */ float GamepadLeftStickRight;
+    /* 0x0C4 */ float GamepadLeftStickUp;
+    /* 0x0C8 */ float GamepadLeftStickDown;
+    /* 0x0CC */ float GamepadRightStickLeft;
+    /* 0x0D0 */ float GamepadRightStickRight;
+    /* 0x0D4 */ float GamepadRightStickUp;
+    /* 0x0D8 */ float GamepadRightStickDown;
+    /*       */ byte _gap_0xDC[0x4];
+    /* 0x0E0 */ float L2;
+    /*       */ byte _gap_0xE4[0x4];
+    /* 0x0E8 */ float R2;
+    /*       */ byte _gap_0xEC[0x4];
+    /*       */ byte _gap_0xF0[0x3A8];
+    /* 0x498 */ __int32 UIFilteredCursorXPosition;
+    /* 0x49C */ __int32 UIFilteredCursorYPosition;
+    /* 0x4A0 */ __int32 UIFilteredMouseWheel;
+    /* 0x4A4 */ Client_UI_MouseButtonFlags UIFilteredMouseButtonHeldFlags;
+    /* 0x4A8 */ Client_UI_MouseButtonFlags UIFilteredMouseButtonPressedFlags;
+    /*       */ byte _gap_0x4AC[0x4];
+    /* 0x4B0 */ Client_UI_MouseButtonFlags UIFilteredMouseButtonReleasedFlags;
+    /* 0x4B4 */ Client_UI_MouseButtonFlags UIFilteredMouseButtonHeldThrottledFlags;
+    /* 0x4B8 */ __int32 UIFilteredCursorXDelta;
+    /* 0x4BC */ __int32 UIFilteredCursorYDelta;
+    /*       */ byte _gap_0x4C0[0x8];
+    /* 0x4C8 */ __int32 CursorXPosition;
+    /* 0x4CC */ __int32 CursorYPosition;
+    /* 0x4D0 */ __int32 MouseWheel;
+    /* 0x4D4 */ Client_UI_MouseButtonFlags MouseButtonHeldFlags;
+    /* 0x4D8 */ Client_UI_MouseButtonFlags MouseButtonPressedFlags;
+    /*       */ byte _gap_0x4DC[0x4];
+    /* 0x4E0 */ Client_UI_MouseButtonFlags MouseButtonReleasedFlags;
+    /* 0x4E4 */ Client_UI_MouseButtonFlags MouseButtonHeldThrottledFlags;
+    /* 0x4E8 */ __int32 CursorXDelta;
+    /* 0x4EC */ __int32 CursorYDelta;
+    /*       */ byte _gap_0x4F0[0x4];
+    /* 0x4F4 */ bool IsGameWindowFocused;
+    /*       */ byte _gap_0x4F5;
+    /*       */ byte _gap_0x4F6[0x2];
+    /*       */ byte _gap_0x4F8[0x20];
+    /*       */ byte _gap_0x518[0x4];
+    /* 0x51C */ byte KeyState[0x214];
+    /*       */ byte _gap_0x730[0x48];
+    /*       */ byte _gap_0x778[0x4];
+    /*       */ byte _gap_0x77C;
+    /* 0x77D */ byte KeyHeldKeycode;
+    /*       */ byte _gap_0x77E[0x2];
+    /* 0x780 */ byte LastKeyCharKeyCode;
+    /*       */ byte _gap_0x781;
+    /*       */ byte _gap_0x782[0x2];
+    /*       */ byte _gap_0x784[0x4];
+    /* 0x788 */ char LastKeyChar;
+    /*       */ byte _gap_0x78A[0x2];
+    /*       */ byte _gap_0x78C[0x4];
+    /*       */ byte _gap_0x790[0x290];
 };
 
 struct Client_UI_UIModule_Unk1 /* Size=0x8 */
@@ -14089,16 +14491,6 @@ struct Component_Exd_ExdModule /* Size=0x28 */
     /* 0x20 */ Component_Excel_ExcelModule* ExcelModule;
 };
 
-struct Component_GUI_AgentHudLayout /* Size=0x78 */
-{
-    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
-    /*      */ byte _gap_0x28[0x48];
-    /* 0x70 */ bool NeedToSave;
-    /*      */ byte _gap_0x71;
-    /*      */ byte _gap_0x72[0x2];
-    /*      */ byte _gap_0x74[0x4];
-};
-
 struct Component_GUI_AgentInterface_AgentInterfaceVTable /* Size=0x0 */
 {
     /* 0x0 */ __int64 ReceiveEvent;
@@ -14245,10 +14637,22 @@ struct Component_GUI_AtkComponentCheckBox /* Size=0x110 */
     /*       */ byte _gap_0xF0[0x20];
 };
 
+struct Component_GUI_AtkDragDropInterface /* Size=0x30 */
+{
+    union {
+    /* 0x00 */ void* vtbl;
+    /* 0x00 */ Component_GUI_AtkDragDropInterface_AtkDragDropInterfaceVTable* VTable;
+    } _union_0x0;
+    /* 0x08 */ Component_GUI_AtkComponentNode* ComponentNode;
+    /* 0x10 */ Component_GUI_AtkResNode* ActiveNode;
+    /*      */ byte _gap_0x18[0x18];
+};
+
 struct Component_GUI_AtkComponentDragDrop /* Size=0x110 */
 {
     /* 0x000 */ Component_GUI_AtkComponentBase AtkComponentBase;
-    /*       */ byte _gap_0xC0[0x38];
+    /* 0x0C0 */ Component_GUI_AtkDragDropInterface AtkDragDropInterface;
+    /*       */ byte _gap_0xF0[0x8];
     /* 0x0F8 */ Component_GUI_AtkComponentIcon* AtkComponentIcon;
     /*       */ byte _gap_0x100[0x10];
 };
@@ -14351,7 +14755,8 @@ struct Component_GUI_AtkComponentList_ListItem /* Size=0x18 */
 struct Component_GUI_AtkComponentListItemRenderer /* Size=0x1A8 */
 {
     /* 0x000 */ Component_GUI_AtkComponentButton AtkComponentButton;
-    /*       */ byte _gap_0xF0[0x90];
+    /* 0x0F0 */ Component_GUI_AtkDragDropInterface AtkDragDropInterface;
+    /*       */ byte _gap_0x120[0x60];
     /*       */ byte _gap_0x180[0x4];
     /* 0x184 */ __int32 ListItemIndex;
     /*       */ byte _gap_0x188[0x20];
@@ -14492,15 +14897,33 @@ struct Component_GUI_AtkCursor /* Size=0x10 */
     /*      */ byte _gap_0xF;
 };
 
+struct Component_GUI_AtkDragDropInterface_AtkDragDropInterfaceVTable /* Size=0x0 */
+{
+    /*     */ byte _gap_0x0[0x8];
+    /* 0x8 */ __int64 GetScreenPosition;
+    /*     */ byte _gap_0x10[0x8];
+    /* 0x18 */ __int64 GetComponentNode;
+    /* 0x20 */ __int64 SetComponentNode;
+    /* 0x28 */ __int64 GetActiveNode;
+    /*     */ byte _gap_0x30[0x8];
+    /* 0x38 */ __int64 GetComponent;
+};
+
 struct Component_GUI_AtkDragDropManager /* Size=0xC8 */
 {
     /* 0x00 */ Component_GUI_AtkEventListener AtkEventListener;
     /*      */ byte _gap_0x8[0x88];
     /* 0x90 */ Component_GUI_AtkStage* AtkStage;
-    /*      */ byte _gap_0x98[0x20];
+    /* 0x98 */ Component_GUI_AtkDragDropInterface* DragDrop1;
+    /* 0xA0 */ Component_GUI_AtkDragDropInterface* DragDrop2;
+    /* 0xA8 */ Component_GUI_AtkComponentDragDrop* DragDropS;
+    /*      */ byte _gap_0xB0[0x8];
     /* 0xB8 */ __int16 DragStartX;
     /* 0xBA */ __int16 DragStartY;
-    /*      */ byte _gap_0xBC[0x4];
+    /* 0xBC */ bool IsDragging;
+    /* 0xBD */ bool ReclickToDrop;
+    /* 0xBE */ bool MouseMoved;
+    /* 0xBF */ bool IsNotDiscarding;
     /*      */ byte _gap_0xC0[0x8];
 };
 
@@ -14531,6 +14954,39 @@ struct Component_GUI_AtkImageNode /* Size=0xB8 */
 
 struct Component_GUI_AtkLinkedList; /* Size=unknown due to generic type with parameters */
 struct Component_GUI_AtkLinkedList_Node; /* Size=unknown due to generic type with parameters */
+struct Pointer_ComponentGUIAtkTextureResource /* Size=0x8 */
+{
+    /* 0x0 */ Component_GUI_AtkTextureResource* Value;
+};
+
+struct StdLinkedList_Node_PointerComponentGUIAtkTextureResource /* Size=0x18 */
+{
+    /* 0x00 */ Pointer_ComponentGUIAtkTextureResource Value;
+    /* 0x08 */ StdLinkedList_Node_PointerComponentGUIAtkTextureResource* Next;
+    /* 0x10 */ StdLinkedList_Node_PointerComponentGUIAtkTextureResource* Previous;
+};
+
+struct StdLinkedList_PointerComponentGUIAtkTextureResource /* Size=0x18 */
+{
+    /* 0x00 */ StdLinkedList_Node_PointerComponentGUIAtkTextureResource* End;
+    /* 0x08 */ StdLinkedList_Node_PointerComponentGUIAtkTextureResource* Start;
+    /* 0x10 */ unsigned __int32 Count;
+    /*      */ byte _gap_0x14[0x4];
+};
+
+struct Component_GUI_AtkTextureResourceManager /* Size=0x58 */
+{
+    /* 0x00 */ StdLinkedList_PointerComponentGUIAtkTextureResource LoadedTextures;
+    /* 0x18 */ __int32 DefaultTextureVersion;
+    /*      */ byte _gap_0x1C[0x4];
+    /* 0x20 */ Component_Exd_ExdModule* ExdModule;
+    /* 0x28 */ __int32 IconLanguageSheetId;
+    /* 0x2C */ __int32 IconLanguage;
+    /* 0x30 */ byte LocalizedIconRange[0x20];
+    /* 0x50 */ unsigned __int32 LocalizedIconRangeCount;
+    /*      */ byte _gap_0x54[0x4];
+};
+
 struct Component_GUI_AtkModule /* Size=0x8250 */
 {
     union {
@@ -14539,11 +14995,8 @@ struct Component_GUI_AtkModule /* Size=0x8250 */
     } _union_0x0;
     /*        */ byte _gap_0x8[0x120];
     /* 0x0128 */ Component_GUI_AtkStage* AtkStage;
-    /*        */ byte _gap_0x130[0xF8];
-    /* 0x0228 */ __int32 DefaultTextureVersion;
-    /*        */ byte _gap_0x22C[0x4];
-    /* 0x0230 */ Component_Exd_ExdModule* ExdModule;
-    /*        */ byte _gap_0x238[0x30];
+    /*        */ byte _gap_0x130[0xE0];
+    /* 0x0210 */ Component_GUI_AtkTextureResourceManager AtkTextureResourceManager;
     /* 0x0268 */ Client_UI_RaptureAtkUnitManager* RaptureAtkUnitManager;
     /*        */ byte _gap_0x270[0x18A0];
     /* 0x1B10 */ Component_GUI_AtkUnitBase* IntersectingAddon;
@@ -14641,11 +15094,13 @@ struct Component_GUI_AtkTooltipManager /* Size=0x150 */
 struct Component_GUI_AtkStage /* Size=0x75DF8 */
 {
     /* 0x00000 */ Component_GUI_AtkEventTarget AtkEventTarget;
+    /*         */ byte _gap_0x8[0x10];
+    /* 0x00018 */ Component_GUI_AtkTextureResourceManager* AtkTextureResourceManager;
     union {
     /* 0x00020 */ Client_UI_RaptureAtkUnitManager* RaptureAtkUnitManager;
     /* 0x00020 */ __int64 AtkInputManager;
     } _union_0x20;
-    /*         */ byte _gap_0x10[0x28];
+    /*         */ byte _gap_0x28[0x10];
     /* 0x00038 */ Component_GUI_AtkArrayDataHolder* AtkArrayDataHolder;
     /*         */ byte _gap_0x40[0x20];
     /* 0x00060 */ Client_UI_Misc_RaptureTextModule* RaptureTextModule;
@@ -14699,10 +15154,10 @@ struct Component_GUI_AtkTextureResource /* Size=0x20 */
     /* 0x00 */ unsigned __int32 TexPathHash;
     /* 0x04 */ __int32 IconID;
     /* 0x08 */ Client_System_Resource_Handle_TextureResourceHandle* TexFileResourceHandle;
-    /* 0x10 */ Client_Graphics_Render_Texture* KernelTextureObject;
-    /* 0x18 */ unsigned __int16 Count_1;
-    /* 0x1A */ byte Count_2;
-    /*      */ byte _gap_0x1B;
+    /* 0x10 */ Client_Graphics_Kernel_Texture* KernelTextureObject;
+    /* 0x18 */ unsigned __int16 Count;
+    /* 0x1A */ byte Version;
+    /* 0x1B */ byte ShareCount;
     /*      */ byte _gap_0x1C[0x4];
 };
 
@@ -15071,9 +15526,9 @@ struct Component_GUI_AtkUnitBase_AtkUnitBaseVTable /* Size=0x0 */
 struct Component_GUI_AtkUnitList /* Size=0x810 */
 {
     /* 0x000 */ void* vtbl;
-    /* 0x008 */ Component_GUI_AtkUnitBase* AtkUnitEntries;
-    /*       */ byte _gap_0x10[0x7F8];
-    /* 0x808 */ unsigned __int32 Count;
+    /* 0x008 */ byte Entries[0x800];
+    /* 0x808 */ unsigned __int16 Count;
+    /*       */ byte _gap_0x80A[0x2];
     /*       */ byte _gap_0x80C[0x4];
 };
 
