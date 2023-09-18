@@ -10,18 +10,39 @@ public unsafe partial struct InfoProxyItemSearch {
     /// <summary>
     /// The ItemID that has been searched.
     /// </summary>
-    [FieldOffset(0x20)] public uint SelectedItemId;
+    [FieldOffset(0x20)] public uint SearchItemId;
+
+    // Following are used for requesting item data from the server in RequestData
+    // [FieldOffset(0x24)] public byte Unk_0x24; // ?
+    // [FieldOffset(0x25)] public byte Unk_0x25; // ?
+    // [FieldOffset(0x28)] public byte Unk_0x28;
 
     [FieldOffset(0x30)] private fixed byte InternalListings[MarketBoardListing.Size * 100];
 
+    /// <summary>
+    /// All items currently available on the general marketboard for the last specified search term (found in <see cref="SearchItemId"/>.
+    /// Can be empty if no results were found.
+    /// </summary>
     public Span<MarketBoardListing> Listings => new(Unsafe.AsPointer(ref this.InternalListings[0]), (int)this.ListingCount);
 
     [FieldOffset(0x4810)] public uint ListingCount;
+
+    [FieldOffset(0x4818)] private fixed byte InternalRetainerListings[MarketBoardListing.Size * 20];
+
+    /// <summary>
+    /// All items currently available for sale from the last targeted retainer. Can be empty if no results were found.
+    /// </summary>
+    public Span<MarketBoardListing> RetainerListings =>
+        new(Unsafe.AsPointer(ref this.InternalRetainerListings[0]), (int)this.RetainerListingCount);
+
+    [FieldOffset(0x5678)] public uint RetainerListingCount;
 
     [FieldOffset(0x5680)] public LastPurchasedMarketboardItem LastPurchasedMarketboardItem;
 
     [FieldOffset(0x5B68)] public fixed uint WishlistItems[10];
     [FieldOffset(0x5B90)] public uint WishlistSize;
+
+    // [FieldOffset(0x5B96)] public byte Unk_0x5B96; // controls if AddData gets called? (ResultsPresent?)
 
     [VirtualFunction(6)]
     public partial void EndRequest();
@@ -50,7 +71,7 @@ public unsafe struct MarketBoardListing {
 
     // [FieldOffset(0x00)] public Utf8String Unk_0x00;
 
-    [FieldOffset(0x68)] public ulong GlobalItemId;
+    [FieldOffset(0x68)] public ulong ListingId;
     [FieldOffset(0x70)] public ulong SellingRetainerContentId; // ??
     [FieldOffset(0x78)] public ulong SellingPlayerContentId;
 
@@ -59,9 +80,9 @@ public unsafe struct MarketBoardListing {
     [FieldOffset(0x90)] public uint Quantity;
     [FieldOffset(0x94)] public uint ItemId;
 
-    // [FieldOffset(0x98)] public uint Unk_0x98;
-    // [FieldOffset(0x9A)] public uint Unk_0x9A;
-    // [FieldOffset(0x9C)] public uint Unk_0x9C;
+    // [FieldOffset(0x98)] public ushort Unk_0x98; // From Packet 0x36
+    // [FieldOffset(0x9A)] public ushort Durability; // From Packet 0x38 (per Kara)
+    // [FieldOffset(0x9C)] public ushort Spiritbond; // From Packet 0x3A (per Kara)
 
     /// <summary>
     /// List of materias associated with this item. Only valid up to the count specified in MateriaCount.
@@ -76,7 +97,7 @@ public unsafe struct MarketBoardListing {
     /// <summary>
     /// The Town (from EXD) that this marketboard entry is from.
     /// </summary>
-    [FieldOffset(0xB0)] public byte Town;
+    [FieldOffset(0xB0)] public byte TownId;
 
     // [FieldOffset(0xB1)] public byte UNK_0xB1;
 }
@@ -84,14 +105,14 @@ public unsafe struct MarketBoardListing {
 [StructLayout(LayoutKind.Explicit)]
 public struct LastPurchasedMarketboardItem {
     [FieldOffset(0x00)] public ulong SellingRetainerContentId;
-    [FieldOffset(0x08)] public ulong GlobalItemId;
+    [FieldOffset(0x08)] public ulong ListingId;
     [FieldOffset(0x10)] public uint ItemId;
     [FieldOffset(0x14)] public uint Quantity;
     [FieldOffset(0x18)] public uint UnitPrice;
     [FieldOffset(0x1C)] public uint TotalTax;
     // [FieldOffset(0x20)] public uint Unk_0x20; // Filled from 0x98
     [FieldOffset(0x22)] public bool IsHqItem;
-    [FieldOffset(0x23)] public byte Town;
+    [FieldOffset(0x23)] public byte TownId;
 
-    public bool Present => this.SellingRetainerContentId != 0;
+    public bool Present => ListingId != 0;
 }
