@@ -1853,13 +1853,65 @@ classes:
       - ea: 0x1419655B8
     funcs:
       0x1401CDDB0: ctor
+  Client::System::Resource::Handle::EquipmentParameterResourceHandle:
+    vtbls:
+      - ea: 0x141965778
+        base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::PreBoneDeformerResourceHandle:
+    vtbls:
+      - ea: 0x141965940
+        base: Client::System::Resource::Handle::DefaultResourceHandle
   Client::System::Resource::Handle::CharaMakeParameterResourceHandle:
     vtbls:
       - ea: 0x141965AC0
         base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::ExSkeletonTableResourceHandle:
+    vtbls:
+      - ea: 0x141965C40
+        base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::PapLoadTableResourceHandle:
+    vtbls:
+      - ea: 0x141965F80
+        base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::AnimationExchangeTableResourceHandle:
+    vtbls:
+      - ea: 0x141966100
+        base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::MotionLineTableResourceHandle:
+    vtbls:
+      - ea: 0x141966280
+        base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::SkeletonResourceHandle:
+    vtbls:
+      - ea: 0x141966400
+        base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::AnimationWorkTableResourceHandle:
+    vtbls:
+      - ea: 0x141966580
+        base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::StainingTemplateResourceHandle:
+    vtbls:
+      - ea: 0x141966700
+        base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::ImageChangeDataResourceHandle:
+    vtbls:
+      - ea: 0x141966880
+        base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::ElementIdResourceHandle:
+    vtbls:
+      - ea: 0x141966A00
+        base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::GrassZoneDataResourceHandle:
+    vtbls:
+      - ea: 0x141966B80
+        base: Client::System::Resource::Handle::DefaultResourceHandle
   Client::System::Resource::Handle::ApricotResourceHandle:
     vtbls:
       - ea: 0x141966D40
+        base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::ApricotTextureResourceHandle:
+    vtbls:
+      - ea: 0x141966EC0
         base: Client::System::Resource::Handle::DefaultResourceHandle
   Client::System::Resource::Handle::ModelResourceHandle:
     vtbls:
@@ -1869,6 +1921,110 @@ classes:
       0x1401DE280: GetMaterialFileNameBySlot
       0x1403D1F50: GetAttributeIndex
       0x1403D20C0: GetShapeIndex
+  Client::System::Resource::Handle::TerrainResourceHandle:
+    vtbls:
+      - ea: 0x141967340
+        base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::EnvSetResourceHandle:
+    vtbls:
+      - ea: 0x1419674C0
+        base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::SoundSetResourceHandle:
+    vtbls:
+      - ea: 0x141967640
+        base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::AmbientSetResourceHandle:
+    vtbls:
+      - ea: 0x1419677C0
+        base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::ObjectBehaviorSetResourceHandle:
+    vtbls:
+      - ea: 0x141967940
+        base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::SkyVisibilityResourceHandle:
+    vtbls:
+      - ea: 0x141967AC0
+        base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::ClipAABBResourceHandle:
+    vtbls:
+      - ea: 0x141967C40
+        base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::AttachOffsetResourceHandle:
+    vtbls:
+      - ea: 0x141967DC0
+        base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::UdwResourceHandle:
+    vtbls:
+      - ea: 0x141967F40
+        base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::SpmResourceHandle:
+    vtbls:
+      - ea: 0x1419680C0
+        base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::SkeletonParamResourceHandle:
+    vtbls:
+      - ea: 0x141968540
+        base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::MsbResourceHandle:
+    vtbls:
+      - ea: 0x1419686C0
+        base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::CollisionMeshResourceHandle:
+    vtbls:
+      - ea: 0x141968840
+        base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::CutSceneResourceHandle:
+    vtbls:
+      - ea: 0x1419689C0
+        base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::TimeLineResourceHandle:
+    vtbls:
+      - ea: 0x141968B40
+        base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::LevelSceneResourceHandle:
+    vtbls:
+      - ea: 0x141968CF0
+        base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::LayerGroupResourceHandle:
+    vtbls:
+      - ea: 0x141968E70
+        base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::SharedGroupResourceHandle:
+    vtbls:
+      - ea: 0x141968FF0
+        base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::NaviMeshResourceHandle:
+    vtbls:
+      - ea: 0x141969170
+        base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::ExlResourceHandle:
+    vtbls:
+      - ea: 0x1419692F0
+        base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::ExhResourceHandle:
+    vtbls:
+      - ea: 0x141969470
+        base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::ExdResourceHandle:
+    vtbls:
+      - ea: 0x1419695F0
+        base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::HardwareCursorResourceHandle:
+    vtbls:
+      - ea: 0x141969770
+        base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::CursorResourceHandle:
+    vtbls:
+      - ea: 0x1419698F0
+        base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::PNGResourceHandle:
+    vtbls:
+      - ea: 0x141969A70
+        base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::UgdResourceHandle:
+    vtbls:
+      - ea: 0x141969BF0
+        base: Client::System::Resource::Handle::DefaultResourceHandle
   Client::System::Resource::Handle::UldResourceHandle:
     vtbls:
       - ea: 0x141969D70
@@ -1877,6 +2033,34 @@ classes:
     vtbls:
       - ea: 0x141969ED8
         base: Client::System::Resource::Handle::ResourceHandleFactory
+  Client::System::Resource::Handle::LuaResourceHandle:
+    vtbls:
+      - ea: 0x141969EF0
+        base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::LuabResourceHandle:
+    vtbls:
+      - ea: 0x14196A070
+        base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::EquipmentVfxParameterResourceHandle:
+    vtbls:
+      - ea: 0x141AC60C8
+        base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::GimmickParameterResourceHandle:
+    vtbls:
+      - ea: 0x141AC6270
+        base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::EquipmentDeformerParameterResourceHandle:
+    vtbls:
+      - ea: 0x141AC6428
+        base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::WeaponAttachOffsetExistResourceHandle:
+    vtbls:
+      - ea: 0x141AC65D8
+        base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::WeaponTypeDataResourceHandle:
+    vtbls:
+      - ea: 0x141AC6780
+        base: Client::System::Resource::Handle::DefaultResourceHandle
   Client::Graphics::Primitive::Manager:
     instances:
       - ea: 0x14211E020
@@ -6762,7 +6946,7 @@ classes:
       - ea: 0x141BA9F88
         base: Client::Game::InstanceContent::ContentDirector
     funcs:
-      0x1414142FAB0: HandleEnterContentInfoPacket  # static
+      0x14142FAB0: HandleEnterContentInfoPacket  # static
   Client::UI::PopupMenu:
     vtbls:
       - ea: 0x141A1BEE8
