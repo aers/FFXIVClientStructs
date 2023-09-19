@@ -30,7 +30,7 @@ public unsafe partial struct ActionTimelineManager {
     /// <param name="emoteId"> The row id of the executed emote. </param>
     /// <returns> Returns 0 or one of the row ids for height adjustment for emotes (like kneeling to hug small objects). </returns>
     [MemberFunction("E8 ?? ?? ?? ?? 44 0F B7 F8 45 85 FF")]
-    public partial ulong GetHeightAdjustActionTimelineRowId(GameObjectID target, int emoteId);
+    public partial uint GetHeightAdjustActionTimelineRowId(GameObjectID target, int emoteId);
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x1F0)]
