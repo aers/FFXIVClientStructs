@@ -47,7 +47,9 @@ public unsafe partial struct Character {
 
     #endregion
 
-    [FieldOffset(0x641)] public byte CPoseState;
+    [FieldOffset(0x620)] public EmoteController EmoteContainer;
+
+    [FieldOffset(0x641), Obsolete("Use EmoteController.CPoseState", true)] public byte CPoseState;
     [FieldOffset(0x660)] public MountContainer Mount;
     [FieldOffset(0x6C8)] public CompanionContainer Companion;
     [FieldOffset(0x6E8)] public DrawDataContainer DrawData;
@@ -215,6 +217,10 @@ public unsafe partial struct Character {
     [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 48 0F 45 F8")]
     public partial Character* GetParentCharacter();
 
+    /// <summary> Uses TransformationId, Clan, BodyType, Gender and Height as well as RSP scaling values to calculate current height, returns it casted to ulong.  </summary>
+    [MemberFunction("E8 ?? ?? ?? ?? F3 0F 59 C7 48 8B CE")]
+    public partial ulong CalculateHeight();
+
     [VirtualFunction(79)]
     public partial StatusManager* GetStatusManager();
 
@@ -272,6 +278,16 @@ public unsafe partial struct Character {
             set => ForayRank = value;
         }
         [FieldOffset(0x01)] public EurekaElement Element; //only on enemies
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x40)]
+    public partial struct EmoteController {
+        [FieldOffset(0x00)] public void** ContainerVTable;
+        [FieldOffset(0x08)] public BattleChara* OwnerObject;
+        [FieldOffset(0x14)] public ushort EmoteId;
+        [FieldOffset(0x16)] public ushort Unk1; // Seems to be 1 when close enough to a target that height adjustment is needed, maybe.
+        [FieldOffset(0x18)] public GameObjectID Target;
+        [FieldOffset(0x21)] public byte CPoseState;
     }
 
     //0x10 bytes are from the base class which is just vtable + gameobject ptr (same as Companion-/DrawDataContainer)
