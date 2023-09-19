@@ -217,7 +217,7 @@ public unsafe partial struct Character {
     [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 48 0F 45 F8")]
     public partial Character* GetParentCharacter();
 
-    /// <summary> Uses TransformationId, Clan, BodyType, Gender and Height as well as RSP scaling values to calculate current height, returns it casted to ulong.  </summary>
+    /// <summary> Uses TransformationId, Clan, BodyType, Gender and Height as well as RSP scaling values to calculate current height.  </summary>
     [MemberFunction("E8 ?? ?? ?? ?? F3 0F 59 C7 48 8B CE")]
     public partial float CalculateHeight();
 

@@ -379,7 +379,6 @@ classes:
   Client::UI::Atk2DMap:
   Component::Excel::ExcelLanguageEvent:
   Component::GUI::AtkComponentWindowGrab:
-  Component::GUI::AtkDragDropInterface:
   Component::GUI::AtkExternalInterface:
   Component::GUI::AtkManagedInterface:
   Component::GUI::AtkModuleEvent:
@@ -4209,7 +4208,7 @@ classes:
       0x14074F6B0: SetupBNpc
       0x1407502C0: CopyFromCharacter
       0x1407AD460: ctor
-  Client::Game::Character::EmoteController:
+  Client::Game::Control::EmoteController:
     vtbls:
       - ea: 0x1419AE190
   Client::Game::Character::DrawDataContainer:
