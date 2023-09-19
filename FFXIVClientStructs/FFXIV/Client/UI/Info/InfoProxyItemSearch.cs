@@ -1,4 +1,5 @@
 using System.Runtime.CompilerServices;
+using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
@@ -35,6 +36,16 @@ public unsafe partial struct InfoProxyItemSearch {
     public Span<MarketBoardListing> RetainerListings =>
         new(Unsafe.AsPointer(ref this.InternalRetainerListings[0]), (int)this.RetainerListingCount);
 
+    [FieldOffset(0x56A8)] private fixed byte InternalPlayerRetainers[PlayerRetainerInfo.Size * 10];
+
+    /// <summary>
+    /// All retainers currently registered to the player. Needs to be loaded by accessing any retainer's marketboard listings and appears
+    /// to be a cache of some sort.
+    /// </summary>
+    public Span<PlayerRetainerInfo> PlayerRetainers => new(Unsafe.AsPointer(ref this.InternalPlayerRetainers[0]), (int)this.PlayerRetainerCount);
+
+    [FieldOffset(0x5B58)] public uint PlayerRetainerCount;
+
     [FieldOffset(0x5678)] public uint RetainerListingCount;
 
     [FieldOffset(0x5680)] public LastPurchasedMarketboardItem LastPurchasedMarketboardItem;
@@ -44,8 +55,48 @@ public unsafe partial struct InfoProxyItemSearch {
 
     // [FieldOffset(0x5B96)] public byte Unk_0x5B96; // controls if AddData gets called? (ResultsPresent?)
 
+    /// <summary>
+    /// Loads received marketboard data into the <see cref="Listings"/> array. This method is directly responsible for translating the inbound
+    /// <c>MarketBoardOfferings</c> packet into <see cref="MarketBoardListing"/> structs.
+    /// </summary>
+    /// <param name="packetPtr">A pointer to the packet to load in.</param>
+    /// <param name="count">The number of entries to load. Always appears to be 10.</param>
+    /// <returns>Returns an nint, probably.</returns>
+    [VirtualFunction(1)]
+    public partial nint AddData(nint packetPtr, uint count = 10);
+
+    [VirtualFunction(2)]
+    public partial void RemoveData(); // nullsub. including for completeless only.
+
+    /// <summary>
+    /// Sets the value of <see cref="InfoProxyInterface.EntryCount"/> to 0 for this proxy. Does not actually delete any data from any arrays. 
+    /// </summary>
+    [VirtualFunction(3)]
+    public partial void ClearData();
+
+    /// <summary>
+    /// Send a search request to the server based on the currently selected <see cref="SearchItemId"/> and other data. WILL generate a network request.
+    /// </summary>
+    /// <returns>Returns true if the packet was sent (?), false otherwise.</returns>
+    [VirtualFunction(5)]
+    public partial bool RequestData();
+
+    /// <summary>
+    /// (Currently) a nullsub that gets called by <see cref="AddPage"/> after all data is received from the server.
+    /// </summary>
+    /// <remarks>
+    /// Technically returns <c>0</c>, but the return does not seem to be used at all.
+    /// </remarks>
     [VirtualFunction(6)]
     public partial void EndRequest();
+
+    /// <summary>
+    /// Handles the <c>MarketBoardOfferings</c> packet and calls <see cref="AddData"/> to load into the InfoProxy. Will also handle dispatching
+    /// packets to the server for pagination/fetch purposes. Calls <see cref="EndRequest"/> when all data is loaded.
+    /// </summary>
+    /// <param name="packetPtr">A pointer to the packet data to load in.</param>
+    [VirtualFunction(12)]
+    public partial void AddPage(nint packetPtr);
 
     [MemberFunction("41 83 F8 14 77 3C")]
     public partial void ProcessItemHistory(nint a2, nint a3, nint a4);
@@ -55,6 +106,15 @@ public unsafe partial struct InfoProxyItemSearch {
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B 5B 04 85 DB")]
     public partial nint ProcessRequestResult(nint a2, nint a3, nint a4, int a5, byte a6, int a7);
+
+    /// <summary>
+    /// Load player retainer information from a packet into the 
+    /// </summary>
+    /// <param name="packetData"></param>
+    /// <param name="retainerCount"></param>
+    /// <returns></returns>
+    [MemberFunction("41 83 F8 0A 0F 87 ?? ?? ?? ?? 55")]
+    public partial nint ProcessPlayerRetainerInfo(nint packetData, uint retainerCount = 0xA);
 
     /// <summary>
     /// Copies the specified market board listing into the <see cref="LastPurchasedMarketboardItem"/> fields of the InfoProxy.
@@ -80,9 +140,13 @@ public unsafe struct MarketBoardListing {
     [FieldOffset(0x90)] public uint Quantity;
     [FieldOffset(0x94)] public uint ItemId;
 
-    // [FieldOffset(0x98)] public ushort Unk_0x98; // From Packet 0x36
-    // [FieldOffset(0x9A)] public ushort Durability; // From Packet 0x38 (per Kara)
-    // [FieldOffset(0x9C)] public ushort Spiritbond; // From Packet 0x3A (per Kara)
+    /// <summary>
+    /// The index of the retainer's inventory slot in the RetainerMarket inventory.
+    /// </summary>
+    [FieldOffset(0x98)] public ushort ContainerIndex;
+
+    [FieldOffset(0x9A)] public ushort Durability; // unused (?)
+    [FieldOffset(0x9C)] public ushort Spiritbond; // unused (?)
 
     /// <summary>
     /// List of materias associated with this item. Only valid up to the count specified in MateriaCount.
@@ -99,7 +163,7 @@ public unsafe struct MarketBoardListing {
     /// </summary>
     [FieldOffset(0xB0)] public byte TownId;
 
-    // [FieldOffset(0xB1)] public byte UNK_0xB1;
+    [FieldOffset(0xB1)] public byte StainId;
 }
 
 [StructLayout(LayoutKind.Explicit)]
@@ -110,9 +174,22 @@ public struct LastPurchasedMarketboardItem {
     [FieldOffset(0x14)] public uint Quantity;
     [FieldOffset(0x18)] public uint UnitPrice;
     [FieldOffset(0x1C)] public uint TotalTax;
-    // [FieldOffset(0x20)] public uint Unk_0x20; // Filled from 0x98
+    [FieldOffset(0x20)] public ushort ContainerIndex;
     [FieldOffset(0x22)] public bool IsHqItem;
     [FieldOffset(0x23)] public byte TownId;
 
     public bool Present => ListingId != 0;
+}
+
+[StructLayout(LayoutKind.Explicit, Size = Size)]
+public struct PlayerRetainerInfo {
+    public const int Size = 0x78;
+
+    [FieldOffset(0x00)] public ulong RetainerId;
+    [FieldOffset(0x08)] public byte TownId;
+    [FieldOffset(0x09)] public bool SellingItems;
+    // [FieldOffset(0x0A)] public byte Unk_0x0A;
+
+    // [FieldOffset(0x0C)] public int Unk_0x0C; // Some kind of timestamp? 
+    [FieldOffset(0x10)] public Utf8String Name;
 }

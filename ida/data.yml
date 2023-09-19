@@ -1601,6 +1601,7 @@ classes:
       0x140102D40: ProcessItemHistory_Internal
       0x140103430: SetLastPurchasedItem
       0x140103510: SendPurchaseRequestPacket
+      0x1401036A0: ProcessPlayerRetainerInfo
   Client::UI::Info::InfoProxyPartyInvite:
     vtbls:
       - ea: 0x141950028
@@ -2124,6 +2125,10 @@ classes:
         base: Client::Network::Protocol::Chat::PacketReceiverCallbackInterface
     funcs:
       0x14140CA60: HandleSocialPacket
+      0x14140FFF0: HandleMarketBoardOfferingsPacket
+      0x1414100B0: HandleMarketBoardPurchasePacket
+      0x141410B50: HandleMarketBoardHistoryPacket
+      0x14140FF50: HandleMarketBoardItemRequestStartPacket
   Client::Network::NetworkModulePacketReceiverCallback: # derives Application::Network::PacketReceiverCallbackInterface & Client::Network::PacketDispatcher
     vtbls:
       - ea: 0x14196C240
