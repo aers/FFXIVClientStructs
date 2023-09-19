@@ -5,7 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 /// </summary>
 [StructLayout(LayoutKind.Explicit, Size = 0x550)]
 public unsafe partial struct Achievement {
-    [FieldOffset(0x00)] public void** VTable;
+    [FieldOffset(0x00)] public void** vtbl;
     [FieldOffset(0x08)] public AchievementState State;
     [FieldOffset(0x0C)] public fixed byte CompletedAchievements[428];
 

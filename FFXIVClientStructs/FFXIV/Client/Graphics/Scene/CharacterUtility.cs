@@ -10,7 +10,7 @@ public unsafe partial struct CharacterUtility {
     public const int ResourceHandleCount = 87;
 
     [FieldOffset(0x0)]
-    public void* VTable;
+    public void* vtbl;
 
     [FieldOffset(0x8)]
     [FixedSizeArray<Pointer<ResourceHandle>>(ResourceHandleCount)]
