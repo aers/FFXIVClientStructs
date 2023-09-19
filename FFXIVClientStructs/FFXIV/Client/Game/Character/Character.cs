@@ -47,7 +47,9 @@ public unsafe partial struct Character {
 
     #endregion
 
-    [FieldOffset(0x641)] public byte CPoseState;
+    [FieldOffset(0x620)] public EmoteController EmoteController;
+
+    [FieldOffset(0x641), Obsolete("Use EmoteController.CPoseState", true)] public byte CPoseState;
     [FieldOffset(0x660)] public MountContainer Mount;
     [FieldOffset(0x6C8)] public CompanionContainer Companion;
     [FieldOffset(0x6E8)] public DrawDataContainer DrawData;
@@ -214,6 +216,10 @@ public unsafe partial struct Character {
     /// <summary> Can only be used for Mounts, Minions, and Ornaments. Literally just checks if the game object at index - 1 is a character and returns that. </summary>
     [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 48 0F 45 F8")]
     public partial Character* GetParentCharacter();
+
+    /// <summary> Uses TransformationId, Clan, BodyType, Gender and Height as well as RSP scaling values to calculate current height, returns it casted to ulong.  </summary>
+    [MemberFunction("E8 ?? ?? ?? ?? F3 0F 59 C7 48 8B CE")]
+    public partial float CalculateHeight();
 
     [VirtualFunction(79)]
     public partial StatusManager* GetStatusManager();

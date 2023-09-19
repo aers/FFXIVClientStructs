@@ -1,7 +1,11 @@
+using FFXIVClientStructs.FFXIV.Client.Game.Object;
+
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x340)]
 public unsafe partial struct ActionTimelineManager {
+    [FieldOffset(0x08)] public Character.Character* Parent;
+
     [FieldOffset(0x10)] public ActionTimelineDriver Driver;
 
     [FieldOffset(0x2C0)] public float OverallSpeed; // The overall speed which is applied to all slots as well as things like particles attached to the owner
@@ -20,6 +24,13 @@ public unsafe partial struct ActionTimelineManager {
     [FieldOffset(0x334)] public ushort BannerTimelineUnlockCondition;
     [FieldOffset(0x336)] public ushort BannerTimelineSortKey;
     [FieldOffset(0x338)] public byte BannerTimelineType;
+
+    /// <summary> Computes height difference between the player the action timeline belongs to and target to height adjust emotes. </summary>
+    /// <param name="target"> The object id of the target of the emote. </param>
+    /// <param name="emoteId"> The row id of the executed emote. </param>
+    /// <returns> Returns 0 or one of the row ids for height adjustment for emotes (like kneeling to hug small objects). </returns>
+    [MemberFunction("E8 ?? ?? ?? ?? 44 0F B7 F8 45 85 FF")]
+    public partial uint GetHeightAdjustActionTimelineRowId(GameObjectID target, int emoteId);
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x1F0)]

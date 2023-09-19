@@ -4203,11 +4203,15 @@ classes:
       0x1407461A0: GetParentCharacter
       0x140745620: SetSoftTargetId
       0x1407456A0: GetSoftTargetId
+      0x140745b50: CalculateHeight
       0x140746300: SetMode
       0x140748520: Finalize
       0x14074F6B0: SetupBNpc
       0x1407502C0: CopyFromCharacter
       0x1407AD460: ctor
+  Client::Game::Character::EmoteController:
+    vtbls:
+      - ea: 0x1419AE190
   Client::Game::Character::DrawDataContainer:
     vtbls:
       - ea: 0x1419ADFB8
@@ -8446,6 +8450,7 @@ classes:
     vtbls:
       - ea: 0x141ACD3F8
     funcs:
+      0x1412CBBA0: GetHeightAdjustActionTimelineRowId
       0x14133A3C0: CreateInstance
       0x14133A410: ctor
     instances:
