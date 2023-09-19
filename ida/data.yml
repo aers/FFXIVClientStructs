@@ -6755,7 +6755,7 @@ classes:
       0x141244B40: ctor
   Client::UI::Agent::AgentMJISettings:
     vtbls:
-      - ea: 0x1419FE2E0
+      - ea: 0x141AC2078
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140A3F720: ctor
