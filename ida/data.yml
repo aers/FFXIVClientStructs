@@ -7285,6 +7285,14 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x140EA1D50: ctor
+  Client::UI::AddonCharacter:
+    vtbls:
+      - ea: 0x141A51090
+        base: Component::GUI::AtkUnitBase
+  Client::UI::AddonCharacterStatus:
+    vtbls:
+      - ea: 0x141A512C8
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonMonsterNote:
     vtbls:
       - ea: 0x141A526E0
