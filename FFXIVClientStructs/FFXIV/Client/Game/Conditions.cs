@@ -9,13 +9,13 @@ public unsafe partial struct Conditions {
 }
 
 /// <summary>
-/// Internal use only.<br/>
-/// This enum is used to generate static getters in <see cref="Conditions"/> via ConditionsGenerator, prefixed by "Is".
+/// This enum is used to generate static getters in <see cref="Conditions"/> via ConditionsGenerator, prefixed by "Is".<br/>
+/// It is recommended to avoid using the enum. If possible, use the getters.
 /// </summary>
 /// <remarks>
 /// Names are based on the LogMessage entry linked in the Condition sheet.
 /// </remarks>
-internal enum ConditionFlag {
+public enum ConditionFlag {
     /// <summary>
     /// Unused and excluded in ConditionsGenerator.
     /// </summary>
