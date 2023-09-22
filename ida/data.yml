@@ -3716,6 +3716,34 @@ classes:
       - ea: 0x141999198
     funcs:
       0x1405BF030: ctor
+  Client::LayoutEngine::Layer::EnvSpaceLayoutInstance:
+    vtbls:
+      - ea: 0x14199AD68
+        base: Client::LayoutEngine::ILayoutInstance
+  Client::LayoutEngine::Layer::BgPartsLayoutInstance:
+    vtbls:
+      - ea: 0x14199AAF8
+        base: Client::LayoutEngine::ILayoutInstance
+  Client::LayoutEngine::Layer::EnvLocationLayoutInstance:
+    vtbls:
+      - ea: 0x14199AFD8
+        base: Client::LayoutEngine::ILayoutInstance
+  Client::LayoutEngine::Layer::LightLayoutInstance:
+    vtbls:
+      - ea: 0x14199B248
+        base: Client::LayoutEngine::ILayoutInstance
+  Client::LayoutEngine::Layer::DecalLayoutInstance:
+    vtbls:
+      - ea: 0x14199B4B8
+        base: Client::LayoutEngine::ILayoutInstance
+  Client::LayoutEngine::Layer::VfxLayoutInstance:
+    vtbls:
+      - ea: 0x14199B728
+        base: Client::LayoutEngine::ILayoutInstance
+  Client::LayoutEngine::Layer::WeaponLayoutInstance:
+    vtbls:
+      - ea: 0x14199B998
+        base: Client::LayoutEngine::ILayoutInstance
   Client::LayoutEngine::Group::TimeLineLayoutInstance:
     vtbls:
       - ea: 0x1419A0120
@@ -8538,6 +8566,29 @@ classes:
     funcs:
       0x1414803A0: ctor
       0x1414808F0: GetResourceData
+  Client::System::Scheduler::Base::BaseInstanceObject:
+    vtbls:
+      - ea: 0x141AD0250
+  Client::System::Scheduler::SchedulerInstanceObject:
+    vtbls:
+      - ea: 0x141AD04A0
+        base: Client::System::Scheduler::Base::BaseInstanceObject
+  Client::System::Scheduler::Instance::VfxObject:
+    vtbls:
+      - ea: 0x141BC80C0
+        base: Client::System::Scheduler::SchedulerInstanceObject
+  Client::System::Scheduler::Instance::BgObject:
+    vtbls:
+      - ea: 0x141BC8730
+        base: Client::System::Scheduler::SchedulerInstanceObject
+  Client::System::Scheduler::Instance::LightObject:
+    vtbls:
+      - ea: 0x141BC8A58
+        base: Client::System::Scheduler::SchedulerInstanceObject
+  Client::System::Scheduler::Instance::WeaponObject:
+    vtbls:
+      - ea: 0x141BC8D68
+        base: Client::System::Scheduler::SchedulerInstanceObject
   Client::System::Scheduler::Clip::BaseClip:
     vtbls:
       - ea: 0x141BCA000
