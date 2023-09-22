@@ -1853,6 +1853,14 @@ classes:
       - ea: 0x1419655B8
     funcs:
       0x1401CDDB0: ctor
+  Client::System::Resource::Handle::GrassGridDataResourceHandle:
+    vtbls:
+      - ea: 0x1419653F8
+        base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::SoundResourceHandle:
+    vtbls:
+      - ea: 0x1419655E0
+        base: Client::System::Resource::Handle::ResourceHandle
   Client::System::Resource::Handle::EquipmentParameterResourceHandle:
     vtbls:
       - ea: 0x141965778
@@ -1868,6 +1876,10 @@ classes:
   Client::System::Resource::Handle::ExSkeletonTableResourceHandle:
     vtbls:
       - ea: 0x141965C40
+        base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::PartialAnimationPackResourceHandle:
+    vtbls:
+      - ea: 0x141965DF0
         base: Client::System::Resource::Handle::DefaultResourceHandle
   Client::System::Resource::Handle::PapLoadTableResourceHandle:
     vtbls:
@@ -1921,6 +1933,10 @@ classes:
       0x1401DE280: GetMaterialFileNameBySlot
       0x1403D1F50: GetAttributeIndex
       0x1403D20C0: GetShapeIndex
+  Client::System::Resource::Handle::ShaderCodeResourceHandle:
+    vtbls:
+      - ea: 0x1419671C0
+        base: Client::System::Resource::Handle::ResourceHandle
   Client::System::Resource::Handle::TerrainResourceHandle:
     vtbls:
       - ea: 0x141967340
@@ -1960,6 +1976,14 @@ classes:
   Client::System::Resource::Handle::SpmResourceHandle:
     vtbls:
       - ea: 0x1419680C0
+        base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::LookAtIkResourceHandle:
+    vtbls:
+      - ea: 0x141968240
+        base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::AutoShakeIkResourceHandle:
+    vtbls:
+      - ea: 0x1419683C0
         base: Client::System::Resource::Handle::DefaultResourceHandle
   Client::System::Resource::Handle::SkeletonParamResourceHandle:
     vtbls:
@@ -2041,6 +2065,10 @@ classes:
     vtbls:
       - ea: 0x14196A070
         base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::BonePhysicsResourceHandle:
+    vtbls:
+      - ea: 0x141AC5F10
+        base: Client::System::Resource::Handle::DefaultResourceHandle
   Client::System::Resource::Handle::EquipmentVfxParameterResourceHandle:
     vtbls:
       - ea: 0x141AC60C8
@@ -2060,6 +2088,22 @@ classes:
   Client::System::Resource::Handle::WeaponTypeDataResourceHandle:
     vtbls:
       - ea: 0x141AC6780
+        base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::ControlPointResourceHandle:
+    vtbls:
+      - ea: 0x141AC6948
+        base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::CameraShakeResourceHandle:
+    vtbls:
+      - ea: 0x141AC6AE8
+        base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::FontdataResourceHandle:
+    vtbls:
+      - ea: 0x141AC6C88
+        base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::GaijiFontdataResourceHandle:
+    vtbls:
+      - ea: 0x141AC6E30
         base: Client::System::Resource::Handle::DefaultResourceHandle
   Client::Graphics::Primitive::Manager:
     instances:
