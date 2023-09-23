@@ -17,7 +17,9 @@ public unsafe partial struct AtkStage {
     [FieldOffset(0x78)] public AtkDragDropManager DragDropManager;
     [FieldOffset(0x168)] public AtkTooltipManager TooltipManager;
     [FieldOffset(0x338)] public AtkCursor AtkCursor;
-    [FieldOffset(0x350)] public void* AtkEventDispatcher;
+    [FixedSizeArray<Pointer<AtkEventDispatcher>>(32)]
+    [FieldOffset(0x350)] public fixed byte AtkEventDispatcher[8 * 32];
+    [FieldOffset(0x850)] public uint NextEventDispatcherIndex;
     [FieldOffset(0x868)] public AtkEvent* RegisteredEvents;
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F BF D5")]
