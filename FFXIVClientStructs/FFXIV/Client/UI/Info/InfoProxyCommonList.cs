@@ -23,7 +23,7 @@ public unsafe partial struct InfoProxyCommonList {
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 85 FF 74 55")]
     public partial CharacterData* GetEntry(uint idx);
-    
+
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 13 45 33 C9")]
     public partial void ApplyFilters();
 
@@ -39,7 +39,7 @@ public unsafe partial struct InfoProxyCommonList {
         /// 0x1000000 = OtherWorld (FCTag not available)
         /// </summary>
         [FieldOffset(0x18)] public uint ExtraFlags;
-        [FieldOffset(0x1A)] public DisplayGroup Group;
+        [FieldOffset(0x1A), CExportIgnore] public DisplayGroup Group;
         [FieldOffset(0x1C)] public byte Sort;
         // 1ul byte
         [FieldOffset(0x1E)] public ushort CurrentWorld;
@@ -131,7 +131,7 @@ public unsafe partial struct InfoProxyCommonList {
 
         [FieldOffset(0xA)] public ushort HomeWorld;
     }
-    
+
     public enum DisplayGroup : sbyte {
         All = -1,
         None,
