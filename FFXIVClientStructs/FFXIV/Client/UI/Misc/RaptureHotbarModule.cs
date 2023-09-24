@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using FFXIVClientStructs.FFXIV.Client.Game;
 using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Client.System.String;
@@ -25,7 +26,15 @@ public unsafe partial struct RaptureHotbarModule {
     /// </summary>
     [FieldOffset(0x78)] public fixed byte HotbarShareStateBitmask[4];
 
-    [FieldOffset(0x90)] public HotBars HotBar;
+    /// <summary>
+    /// An array of all active hotbars loaded and available to the player. This field tracks both normal hotbars
+    /// (indices 0 to 9) and cross hotbars (indices 10 to 17).
+    /// </summary>
+    [FixedSizeArray<HotBar>(18)]
+    [FieldOffset(0x90)] public fixed byte HotBars[18 * Misc.HotBar.Size];
+
+    public Span<HotBar> StandardHotBars => this.HotBarsSpan[..10];
+    public Span<HotBar> CrossHotBars => this.HotBarsSpan[10..];
 
     [FieldOffset(0xFC90)] public HotBar PetHotBar;
     [FieldOffset(0x10A90)] public HotBar PetCrossHotBar;
@@ -35,7 +44,21 @@ public unsafe partial struct RaptureHotbarModule {
     /// </summary>
     [FieldOffset(0x11890)] public HotBarSlot ScratchSlot;
 
-    [FieldOffset(0x11974)] public SavedHotBars SavedClassJob;
+
+    /// <summary>
+    /// A field containing all saved hotbars, as persisted to disk. This field tracks both normal and cross hotbars, at
+    /// their appropriate sub-indices.
+    /// </summary>
+    /// <remarks>
+    /// Data in this field is stored in the following order: the common PvE hotbar (index 0), each class' PvE hotbar
+    /// based on their ClassJob ID (indices 1-40), the common PvP hotbar (index 41), and each job's PvP hotbar
+    /// (excluding Blue Mage) (indices 42-60).
+    ///
+    /// To calculate a PvP hotbar index, add the ClassJob's <c>JobIndex</c> to 41. If the JobIndex is at or above 16,
+    /// subtract 1 to handle Blue Mage's edge case.
+    /// </remarks>
+    [FixedSizeArray<SavedHotBarGroup>(61)]
+    [FieldOffset(0x11974)] public fixed byte SavedHotBars[61 * SavedHotBarGroup.Size];
 
     [MemberFunction("E9 ?? ?? ?? ?? 48 8D 91 ?? ?? ?? ?? E9")]
     public partial byte ExecuteSlot(HotBarSlot* hotbarSlot);
@@ -101,38 +124,23 @@ public unsafe partial struct RaptureHotbarModule {
         bool ignoreSharedHotbars, bool isPvpSlot);
 }
 
-[StructLayout(LayoutKind.Sequential, Size = HotBar.Size * 18)]
-public unsafe struct HotBars {
-    private fixed byte data[HotBar.Size * 18]; // 10 normal + 8 cross
-
-    public HotBar* this[int i] {
-        get {
-            if (i < 0 || i > 17) return null;
-            fixed (byte* p = data) {
-                return (HotBar*)(p + sizeof(HotBar) * i);
-            }
-        }
-    }
-}
-
 [StructLayout(LayoutKind.Explicit, Size = Size)]
-public partial struct HotBar {
+public unsafe partial struct HotBar {
     public const int Size = HotBarSlot.Size * 16;
 
-    [FieldOffset(0x00)] public HotBarSlots Slot;
-}
+    [FixedSizeArray<HotBarSlot>(16)]
+    [FieldOffset(0x00)] public fixed byte Slots[16 * HotBarSlot.Size];
 
-[StructLayout(LayoutKind.Sequential, Size = HotBarSlot.Size * 16)]
-public unsafe struct HotBarSlots {
-    private fixed byte data[HotBarSlot.Size * 16];
+    /// <summary>
+    /// Helper method to return a pointer to a specific HotBarSlot, as certain APIs are much happier with a
+    /// pointer rather than a fixed reference.
+    /// </summary>
+    /// <param name="id">A hotbar slot ID between 0 and 15.</param>
+    /// <returns>Returns a pointer to a HotBarSlot, or null if an invalid ID was passed.</returns>
+    public HotBarSlot* GetHotbarSlot(uint id) {
+        if (id > 15) return null;
 
-    public HotBarSlot* this[int i] {
-        get {
-            if (i < 0 || i > 15) return null;
-            fixed (byte* p = data) {
-                return (HotBarSlot*)(p + sizeof(HotBarSlot) * i);
-            }
-        }
+        return (HotBarSlot*)Unsafe.AsPointer(ref SlotsSpan[(int)id]);
     }
 }
 
@@ -211,7 +219,7 @@ public unsafe partial struct HotBarSlot {
     /// - 6: Blue (Job Gauge?)
     /// - 7: Bright Yellow (Rival Wings - CE)
     /// - All others: Grey
-    [FieldOffset(0xCA)] public byte UNK_0xCA;
+    [FieldOffset(0xCA)] public byte CostType;
 
     /// Appears to control display of the primary cost of the action (0xCA). 
     ///
@@ -220,7 +228,7 @@ public unsafe partial struct HotBarSlot {
     /// - 3: Displays the value of 0xD0 in the bottom right (e.g. for Gearsets/UNK_0x17)
     /// - 4: Mode 3, but display a custom string from CostText instead (generally "x {count}" for Items)
     /// - 0/255: No display, all other cases
-    [FieldOffset(0xCB)] public byte UNK_0xCB;
+    [FieldOffset(0xCB)] public byte CostDisplayMode;
 
     /// The icon ID that is currently being displayed on this hotbar slot. 
     [FieldOffset(0xCC)] public int Icon;
@@ -231,7 +239,7 @@ public unsafe partial struct HotBarSlot {
     ///
     /// For actions that have some cost (MP, job bar, etc.), this appears to be the relevant value shown in the bottom
     /// left of the action.
-    [FieldOffset(0xD0)] public uint UNK_0xD0;
+    [FieldOffset(0xD0)] public uint CostValue;
 
     /// UNKNOWN. Appears to be Recipe specific. References the resulting Item ID of the recipe on the hotbar slot.
     [FieldOffset(0xD4)] public uint UNK_0xD4;
@@ -279,8 +287,7 @@ public unsafe partial struct HotBarSlot {
     /// Borrows game logic of checking for a non-zero command ID. Kept as a byte for API compatibility though this
     /// probably should be a bool instead.
     /// </remarks>
-    // TODO: Change return type to "bool" with Dalamud API 9.
-    public byte IsEmpty => Convert.ToByte(this.CommandId == 0);
+    public bool IsEmpty => this.CommandId == 0;
 
     [MemberFunction("E8 ?? ?? ?? ?? 4C 39 6F 08")]
     public partial void Set(UIModule* uiModule, HotbarSlotType type, uint id);
@@ -291,9 +298,8 @@ public unsafe partial struct HotBarSlot {
     /// </summary>
     /// <param name="type">The <see cref="HotbarSlotType"/> that this slot should trigger.</param>
     /// <param name="id">The ID of the command that this slot should trigger.</param>
-    public void Set(HotbarSlotType type, uint id) {
+    public void Set(HotbarSlotType type, uint id) =>
         Set(Framework.Instance()->GetUiModule(), type, id);
-    }
 
     /// <summary>
     /// Populates HotBarSlot.Icon with information from IconB/IconTypeB. 
@@ -350,89 +356,40 @@ public unsafe partial struct HotBarSlot {
 
 #region Saved Bars
 
-// TODO: After we have better fixed arrays, simplify this down: SavedHotBarGroup[18] -> SavedHotBar[16] -> SavedHotBarSlot
-//       (@kazwolfe)
-
-/// <summary>
-/// A struct containing all saved hotbars, as persisted to disk. This field tracks both normal and cross hotbars, at
-/// their appropriate sub-indices.
-/// </summary>
-/// <remarks>
-/// Data in this field is stored in the following order: the common PvE hotbar (index 0), each class' PvE hotbar
-/// based on their ClassJob ID (indices 1-40), the common PvP hotbar (index 41), and each job's PvP hotbar
-/// (excluding Blue Mage) (indices 42-60).
-///
-/// To calculate a PvP hotbar index, add the ClassJob's <c>JobIndex</c> to 41. If the JobIndex is at or above 16,
-/// subtract 1 to handle Blue Mage's edge case.
-/// </remarks>
 [StructLayout(LayoutKind.Explicit, Size = Size)]
-public unsafe struct SavedHotBars {
-    public const int Size = SavedHotBarClassJob.Size * 61;
+public unsafe partial struct SavedHotBarGroup {
+    public const int Size = SavedHotBar.Size * 18;
 
-    [FieldOffset(0x00)] private fixed byte savedHotBars[0x15720];
+    [FixedSizeArray<SavedHotBar>(18)]
+    [FieldOffset(0x00)] public fixed byte HotBars[SavedHotBar.Size * 18];
+}
 
-    public SavedHotBarClassJob* this[int i] {
-        get {
-            if (i is < 0 or > 60) return null;
-            fixed (byte* p = savedHotBars) {
-                return (SavedHotBarClassJob*)(p + sizeof(SavedHotBarClassJob) * i);
-            }
-        }
+[StructLayout(LayoutKind.Explicit, Size = Size)]
+public unsafe partial struct SavedHotBar {
+    public const int Size = SavedHotBarSlot.Size * 16;
+
+    [FixedSizeArray<SavedHotBarSlot>(16)]
+    [FieldOffset(0x00)] public fixed byte Slots[SavedHotBarSlot.Size * 16];
+
+    /// <summary>
+    /// Helper method to return a pointer to a specific HotBarSlot, as certain APIs are much happier with a
+    /// pointer rather than a fixed reference.
+    /// </summary>
+    /// <param name="id">A hotbar slot ID between 0 and 15.</param>
+    /// <returns>Returns a pointer to a HotBarSlot, or null if an invalid ID was passed.</returns>
+    public SavedHotBarSlot* GetSavedHotBarSlot(uint id) {
+        if (id > 15) return null;
+
+        return (SavedHotBarSlot*)Unsafe.AsPointer(ref this.Slots[id]);
     }
+}
 
-    [StructLayout(LayoutKind.Explicit, Size = Size)]
-    public struct SavedHotBarClassJob {
-        public const int Size = SavedHotBarClassJobBars.Size;
+[StructLayout(LayoutKind.Explicit, Size = Size)]
+public struct SavedHotBarSlot {
+    public const int Size = 0x05;
 
-        [FieldOffset(0x00)] public SavedHotBarClassJobBars Bar;
-    }
-
-    [StructLayout(LayoutKind.Explicit, Size = Size)]
-    public struct SavedHotBarClassJobBars {
-        public const int Size = SavedHotBarClassJobBar.Size * 18;
-
-        [FieldOffset(0x00)] private fixed byte bars[Size];
-
-        public SavedHotBarClassJobBar* this[int i] {
-            get {
-                if (i is < 0 or > 17) return null;
-                fixed (byte* p = bars) {
-                    return (SavedHotBarClassJobBar*)(p + sizeof(SavedHotBarClassJobBar) * i);
-                }
-            }
-        }
-
-        [StructLayout(LayoutKind.Explicit, Size = Size)]
-        public struct SavedHotBarClassJobBar {
-            public const int Size = SavedHotBarClassJobSlots.Size;
-
-            [FieldOffset(0x00)] public SavedHotBarClassJobSlots Slot;
-        }
-    }
-
-    [StructLayout(LayoutKind.Explicit, Size = Size)]
-    public struct SavedHotBarClassJobSlots {
-        public const int Size = SavedHotBarClassJobSlot.Size * 16;
-
-        [FieldOffset(0x00)] private fixed byte slots[Size];
-
-        public SavedHotBarClassJobSlot* this[int i] {
-            get {
-                if (i is < 0 or > 16) return null;
-                fixed (byte* p = slots) {
-                    return (SavedHotBarClassJobSlot*)(p + sizeof(SavedHotBarClassJobSlot) * i);
-                }
-            }
-        }
-
-        [StructLayout(LayoutKind.Explicit, Size = Size)]
-        public struct SavedHotBarClassJobSlot {
-            public const int Size = 0x05;
-
-            [FieldOffset(0x00)] public HotbarSlotType Type;
-            [FieldOffset(0x01)] public uint ID;
-        }
-    }
+    [FieldOffset(0x00)] public HotbarSlotType CommandType;
+    [FieldOffset(0x01)] public uint CommandId;
 }
 
 #endregion
@@ -467,8 +424,7 @@ public enum HotbarSlotType : byte {
     PvPCombo = 0x1A,
     SquadronOrder = 0x1B,
 
-    Unk_0x1C =
-        0x1C, // seems to be a legacy type, possibly performance instrument related based on associated icon 000782
+    Unk_0x1C = 0x1C, // seems to be a legacy type, possibly performance instrument related based on associated icon 000782
     PerformanceInstrument = 0x1D,
     Collection = 0x1E,
     FashionAccessory = 0x1F,
