@@ -133,7 +133,7 @@ public unsafe partial struct InfoProxyCommonList {
     }
     
     public enum DisplayGroup : sbyte {
-        NoFilter = -1,
+        All = -1,
         None,
         Star,
         Circle,
