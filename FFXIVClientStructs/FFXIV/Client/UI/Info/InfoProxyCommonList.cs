@@ -14,6 +14,7 @@ public unsafe partial struct InfoProxyCommonList {
     [FieldOffset(0x8E)] public ushort Unk8E; //10 * DataSize
     [FieldOffset(0x90)] public ushort Unk90; //10 * DataSize
     [FieldOffset(0x98)] public CharacterData* CharData;
+    [FieldOffset(0xA9)] public DisplayGroup FilterGroup;
 
     public readonly ReadOnlySpan<CharacterData> CharDataSpan => new(CharData, (int)InfoProxyPageInterface.InfoProxyInterface.EntryCount); // It cant be higher than 200 at this time anyways so this is fine
 
@@ -22,6 +23,9 @@ public unsafe partial struct InfoProxyCommonList {
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 85 FF 74 55")]
     public partial CharacterData* GetEntry(uint idx);
+    
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 13 45 33 C9")]
+    public partial void ApplyFilters();
 
     [StructLayout(LayoutKind.Explicit, Size = 0x68)]
     public struct CharacterData {
@@ -35,6 +39,7 @@ public unsafe partial struct InfoProxyCommonList {
         /// 0x1000000 = OtherWorld (FCTag not available)
         /// </summary>
         [FieldOffset(0x18)] public uint ExtraFlags;
+        [FieldOffset(0x1A)] public DisplayGroup Group;
         [FieldOffset(0x1C)] public byte Sort;
         // 1ul byte
         [FieldOffset(0x1E)] public ushort CurrentWorld;
@@ -125,5 +130,17 @@ public unsafe partial struct InfoProxyCommonList {
         [FieldOffset(0x0)] public ulong ContentID;
 
         [FieldOffset(0xA)] public ushort HomeWorld;
+    }
+    
+    public enum DisplayGroup : sbyte {
+        NoFilter = -1,
+        None,
+        Star,
+        Circle,
+        Triangle,
+        Diamond,
+        Heart,
+        Spade,
+        Club,
     }
 }
