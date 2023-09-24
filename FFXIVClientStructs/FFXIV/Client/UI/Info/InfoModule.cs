@@ -34,8 +34,8 @@ public enum InfoProxyId : uint {
     Letter = 8,
     PlayerSearch = 9,
     SearchComment = 10, //0xa
-    //Maybe Retainer(List) = 11, or gets something needed there
-    ItemSearch = 12,
+    ItemSearch = 11,
+    CatalogSearch = 12,
     FreeCompany = 13,
     FreeCompanyCreate = 14,
     FreeCompanyMember = 15,
