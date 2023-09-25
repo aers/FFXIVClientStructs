@@ -207,24 +207,24 @@ public struct ComboDetail {
 
 public enum ActionType : byte {
     None = 0x00,
-    Spell = 0x01,
+    Skill = 0x01, // Spell, Weaponskill, Ability
     Item = 0x02,
     KeyItem = 0x03,
-    Ability = 0x04,
-    General = 0x05,
-    Companion = 0x06,
-    Unk_7 = 0x07,
-    Unk_8 = 0x08, //something with Leve?
+    Ability = 0x04, // Not in UseAction (??)
+    GeneralAction = 0x05,
+    BuddyAction = 0x06,
+    MainCommand = 0x07,
+    Companion = 0x08,
     CraftAction = 0x09,
-    MainCommand = 0x0A,
+    Unk_10 = 0x0A, // item?
     PetAction = 0x0B,
-    Unk_12 = 0x0C,
+    Unk_12 = 0x0C, // Not in UseAction (?)
     Mount = 0x0D,
     PvPAction = 0x0E,
-    Waymark = 0x0F,
+    FieldMarker = 0x0F,
     ChocoboRaceAbility = 0x10,
     ChocoboRaceItem = 0x11,
-    Unk_18 = 0x12,
-    SquadronAction = 0x13,
-    Accessory = 0x14
+    Unk_18 = 0x12, // Not in UseAction (?)
+    BgcArmyAction = 0x13,
+    Ornament = 0x14,
 }

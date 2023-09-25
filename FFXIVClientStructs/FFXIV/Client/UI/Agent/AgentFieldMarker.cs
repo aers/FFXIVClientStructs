@@ -15,17 +15,10 @@ public unsafe partial struct AgentFieldMarker {
 
     [FieldOffset(0xC70)] public Utf8String TooltipString;
 
-    public bool IsWaymarkActive(WaymarkIndex waymark) => (ActiveMarkerFlags & (1 << (int)waymark)) != 0;
-    public bool IsWaymarkActive(int index) => (ActiveMarkerFlags & (1 << index)) != 0;
-}
-
-public enum WaymarkIndex {
-    A,
-    B,
-    C,
-    D,
-    One,
-    Two,
-    Three,
-    Four,
+    /// <summary>
+    /// Check if a specific field marker (waymark) has been placed.
+    /// </summary>
+    /// <param name="index">The EXD row ID of the field marker to check.</param>
+    /// <returns>Returns true if the field marker is placed, false otherwise.</returns>
+    public bool IsFieldMarkerActive(int index) => (ActiveMarkerFlags & (1 << index)) != 0;
 }
