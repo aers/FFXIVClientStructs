@@ -1,9 +1,9 @@
-name: Struct Update
+name: Format Update
 
 on:
-  schedule:
-    - cron: '0 0 * * 1'
-  workflow_dispatch:
+  push:
+    branches: 
+      - main
 
 jobs:
   update:
@@ -19,21 +19,20 @@ jobs:
           dotnet-version: '7.0.x'
       - name: Restore
         run: dotnet restore
-      - name: Run CExporter
-        working-directory: ./ida
-        run: dotnet run --project CExporter/CExporter.csproj -c Release
+      - name: Run Format
+        run: dotnet format
       - name: Check for changes
         id: git-check
         run: |
           echo "========== check paths of modified files =========="
-          git diff --name-only -- ida > files.txt
+          git diff --name-only -- *.cs > files.txt
           echo "=============== list modified files ==============="
           tail files.txt
           while IFS= read -r file
           do
             echo $file
-            if [[ $file != ida/* ]]; then
-              echo "This modified file is not under the 'ida' folder."
+            if [[ $file != *.cs ]]; then
+              echo "This modified file is not in a c# file."
               echo "has_changes=false" >> $GITHUB_OUTPUT
               break
             else
@@ -41,11 +40,11 @@ jobs:
             fi
           done < files.txt
           rm files.txt
-      - name: Commit C Structs
+      - name: Commit Format Structs
         if: steps.git-check.outputs.has_changes == 'true'
         run: |
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config user.name "github-actions[bot]"
           git add .
-          git commit -m "Update structs"
+          git commit -m "Update Format"
           git push
