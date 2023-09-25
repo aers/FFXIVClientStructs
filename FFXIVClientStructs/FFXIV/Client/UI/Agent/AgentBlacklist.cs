@@ -6,8 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.SocialBlacklist)]
 [StructLayout(LayoutKind.Explicit, Size = 0x110)]
-public unsafe partial struct AgentBlacklist
-{
+public unsafe partial struct AgentBlacklist {
     [FieldOffset(0x00)] public AgentInterface AgentInterface;
     [FieldOffset(0x28)] public InfoProxyBlacklist* InfoProxy;
     [FieldOffset(0x30)] public Utf8String SelectedPlayerName;
