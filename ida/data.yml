@@ -69,6 +69,7 @@ functions:
   0x1400622B0: MemoryManager_GetFileSpace
   0x140062250: MemoryManager_GetSoundSpace_1
   0x140062270: MemoryManager_GetSoundSpace_2
+  0x140060A50: MemoryManager_SpaceAlloc
   0x140065480: IsMacClient
   0x1400A65E0: GetCurrentUnixTimestamp # in seconds
   0x1400A6710: Client::UI::PlaySoundEffect # this is a static function in the UI namespace, arg1 is the SE
