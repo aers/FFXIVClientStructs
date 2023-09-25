@@ -420,7 +420,7 @@ class ExcelHeaderFile:
         for i in range(self.header.language_count):
             self.languages.append(self.data[32 + (self.header.column_count * 4) + (self.header.page_count * 4) + i])
     
-    def map_names(self, names: dict[int, str]):
+    def map_names(self, names: dict[int, str]) -> tuple[dict[int, tuple[str, str]], int]:
         mapped: dict[int, tuple[str, str]] = {}
         largest_offset_index: int = 0
         for i in range(self.header.column_count):
@@ -765,7 +765,7 @@ def get_size_from_ida_type(type: str):
         return 8
 
 def do_structs():
-    exd_headers: dict[int, dict[int, tuple[str, str]]] = {}
+    exd_headers: dict[int, tuple[dict[int, tuple[str, str]], int]] = {}
 
     exd_enum_struct = ida_enum.add_enum(idc.BADADDR, 'Component::Exd::SheetsEnum', 0)
 
@@ -776,14 +776,14 @@ def do_structs():
     print('Making structs... please wait. This may take a while. Undo buffer will be cleared due to the large amount of changes.')
 
     for key in exd_headers:
-        [exd_header, exd_size] = exd_headers[key]
+        [exd_header, exd_header_count] = exd_headers[key]
         struct_name = f'Component::Exd::Sheets::{exd_map[key]}'
         struct_id = ida_struct.add_struc(-1, struct_name)
         struct_type = ida_struct.get_struc(struct_id)
         exd_struct_map[key] = struct_name
         for index in exd_header:
             [type, name] = exd_header[index]
-            ida_struct.add_struc_member(struct_type, name, -1, get_idc_type_from_ida_type(type), None, get_size_from_ida_type(type))
+            ida_struct.add_struc_member(struct_type, name, index, get_idc_type_from_ida_type(type), None, get_size_from_ida_type(type))
             meminfo = ida_struct.get_member_by_name(struct_type, name)
             ida_struct.set_member_tinfo(struct_type, meminfo, 0, get_tinfo_from_type(type), 0)
 
