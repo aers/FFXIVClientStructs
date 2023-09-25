@@ -14,9 +14,12 @@ public unsafe partial struct InfoProxyCommonList {
     [FieldOffset(0x8E)] public ushort Unk8E; //10 * DataSize
     [FieldOffset(0x90)] public ushort Unk90; //10 * DataSize
     [FieldOffset(0x98)] public CharacterData* CharData;
+    [FieldOffset(0xA0)] public CharacterIndex* IndexData;
     [FieldOffset(0xA9)] public DisplayGroup FilterGroup;
+    //[FieldOffset(0xAC)] public uint UnkAC; // Some kind of flag mask for OnlineStatus check InfoProxyCommonlist_vf14
 
     public readonly ReadOnlySpan<CharacterData> CharDataSpan => new(CharData, (int)InfoProxyPageInterface.InfoProxyInterface.EntryCount); // It cant be higher than 200 at this time anyways so this is fine
+    public readonly ReadOnlySpan<CharacterIndex> CharIndexSpan => new(IndexData, (int)InfoProxyPageInterface.InfoProxyInterface.EntryCount); // It cant be higher than 200 at this time anyways so this is fine
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B D0 48 8B CB E8 ?? ?? ?? ?? 41 C6 46")]
     public partial ulong GetContentIDForEntry(uint idx);
@@ -36,10 +39,12 @@ public unsafe partial struct InfoProxyCommonList {
         /// Extra flags for status:
         /// 0x10 = ? always set when accepted friend request
         /// 0x20 = WaitingForFriendListApproval
-        /// 0x1000000 = OtherWorld (FCTag not available)
+        /// 0x10000->0x70000 = DisplayGroup.Star -> DisplayGroup.Club
+        /// 0x1000000 = OtherServer (FCTag not available)
         /// </summary>
         [FieldOffset(0x18)] public uint ExtraFlags;
-        [FieldOffset(0x1A), CExportIgnore] public DisplayGroup Group;
+        public DisplayGroup Group => (DisplayGroup)(ExtraFlags >> 16);
+        public bool IsOtherServer => (ExtraFlags & 0x1000000) != 0;
         [FieldOffset(0x1C)] public byte Sort;
         // 1ul byte
         [FieldOffset(0x1E)] public ushort CurrentWorld;
@@ -53,7 +58,7 @@ public unsafe partial struct InfoProxyCommonList {
         [FieldOffset(0x2A)] public fixed byte Name[32];
         [FieldOffset(0x4A)] public fixed byte FCTag[6];
         // 8 bytes
-        [FieldOffset(0x58)] public CharIndexEntry* Index;
+        [FieldOffset(0x58)] public CharacterIndex* Index;
 
         [Flags]
         public enum OnlineStatus : ulong {
@@ -125,8 +130,8 @@ public unsafe partial struct InfoProxyCommonList {
         }
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
-    public struct CharIndexEntry {
+    [StructLayout(LayoutKind.Explicit, Size = 0x20)]
+    public struct CharacterIndex {
         [FieldOffset(0x0)] public ulong ContentID;
 
         [FieldOffset(0xA)] public ushort HomeWorld;
