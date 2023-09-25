@@ -14,7 +14,7 @@ public static class SpanExtensions {
     /// Enumerates the elements of a Span{T} as pointers.
     /// </summary>
     public unsafe ref struct SpanPointerEnumerator<T> where T : unmanaged {
-        private int _currentIndex;
+        private int _currentIndex = -1;
         private readonly Span<T> _items;
         public SpanPointerEnumerator(Span<T> span) => _items = span;
         public bool MoveNext() => ++_currentIndex < _items.Length;
