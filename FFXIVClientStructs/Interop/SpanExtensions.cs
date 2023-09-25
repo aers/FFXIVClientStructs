@@ -16,7 +16,11 @@ public static class SpanExtensions {
     public unsafe ref struct SpanPointerEnumerator<T> where T : unmanaged {
         private int _currentIndex;
         private readonly Span<T> _items;
-        public SpanPointerEnumerator(Span<T> span) => _items = span;
+
+        public SpanPointerEnumerator(Span<T> span) {
+            _items = span;
+            _currentIndex = -1;
+        }
         public bool MoveNext() => ++_currentIndex < _items.Length;
         public readonly T* Current => (T*)Unsafe.AsPointer(ref _items[_currentIndex]);
         public SpanPointerEnumerator<T> GetEnumerator() => new(_items);
