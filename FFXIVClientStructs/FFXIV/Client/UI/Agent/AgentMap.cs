@@ -28,7 +28,7 @@ public unsafe partial struct AgentMap {
 
     [FieldOffset(0x3860), FixedSizeArray<MapMarkerBase>(12)] public fixed byte WarpMarkerArray[0x38 * 12]; // 12 * MapMarkerBase
     [FieldOffset(0x3B00)] public fixed byte UnkArray2[0xA8 * 6];
-    [FieldOffset(0x3F26), FixedSizeArray<MiniMapMarker>(100)] public fixed byte MiniMapMarkerArray[0x40 * 100]; // 100 * MiniMapMarker
+    [FieldOffset(0x3EF0), FixedSizeArray<MiniMapMarker>(100)] public fixed byte MiniMapMarkerArray[0x40 * 100]; // 100 * MiniMapMarker
 
     [FieldOffset(0x5898)] public float SelectedMapSizeFactorFloat;
     [FieldOffset(0x589C)] public float CurrentMapSizeFactorFloat;
@@ -57,6 +57,9 @@ public unsafe partial struct AgentMap {
     [FieldOffset(0x5A17)] public byte MiniMapMarkerCount;
     [FieldOffset(0x5A1F)] public byte IsPlayerMoving;
     [FieldOffset(0x5A27)] public byte IsControlKeyPressed;
+
+    [FieldOffset(0x5E30)] public QuestLinkContainer QuestLinkContainer1; // One may be main map, the other minimap?
+    [FieldOffset(0x68E8)] public QuestLinkContainer QuestLinkContainer2;
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8D 4C 24 ?? E8 ?? ?? ?? ?? 33 ED 48 8D 15")]
     public partial void SetFlagMapMarker(uint territoryId, uint mapId, float mapX, float mapY, uint iconId = 0xEC91);
@@ -192,6 +195,27 @@ public struct OpenMapInfo {
 
     [FieldOffset(0x20)] public Utf8String TitleString;
     // there is a lot more stuff in here depending on what type of map it's used for
+}
+
+[StructLayout(LayoutKind.Explicit, Size = 0xAB8)]
+public unsafe partial struct QuestLinkContainer {
+    [FieldOffset(0x08)] public ushort MarkerCount;
+
+    [FixedSizeArray<QuestLinkMarker>(20)]
+    [FieldOffset(0x18)] public fixed byte Markers[0x88 * 20];
+}
+
+[StructLayout(LayoutKind.Explicit, Size = 0x88)]
+public struct QuestLinkMarker {
+    [FieldOffset(0x02)] public ushort QuestId;
+    [FieldOffset(0x08)] public Utf8String TooltipText;
+    [FieldOffset(0x70)] public int RecommendedLevel; // Unsure, seemed to match the level of the quest
+    [FieldOffset(0x74)] public uint IconId;
+    [FieldOffset(0x78)] public uint LevelId; // Index into Level datasheet
+    [FieldOffset(0x7C)] public uint SourceMapId;
+    [FieldOffset(0x80)] public uint TargetMapId;
+    [FieldOffset(0x84)] public ushort X; // Not sure, range seems weird
+    [FieldOffset(0x86)] public ushort Y; // Not sure, range seems weird
 }
 
 public enum MapType : uint {
