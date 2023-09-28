@@ -8083,7 +8083,7 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141A638F0: ctor
-  Client::UI::AddonPvpProfileManeuvers:
+  Client::UI::AddonPvpProfileColosseum:
     vtbls:
       - ea: 0x141A63D80
         base: Component::GUI::AtkUnitBase
