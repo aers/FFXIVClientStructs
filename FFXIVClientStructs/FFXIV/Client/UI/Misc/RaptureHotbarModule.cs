@@ -109,7 +109,7 @@ public unsafe partial struct RaptureHotbarModule {
     }
 
     /// <summary>
-    /// Dumps a hotbar slot into a specific save slot within <see cref="SavedClassJob"/> and prepares a file save. Used
+    /// Dumps a hotbar slot into a specific save slot within <see cref="SavedHotBars"/> and prepares a file save. Used
     /// to persist hotbar changes to disk. This method will attempt to resolve the proper index for saving depending on
     /// shared hotbar configuration and specified PvP state.
     /// </summary>
