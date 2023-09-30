@@ -212,6 +212,7 @@ public unsafe partial struct QuestLinkContainer {
 
 [StructLayout(LayoutKind.Explicit, Size = 0x88)]
 public struct QuestLinkMarker {
+    [FieldOffset(0x00)] public byte Valid; // possibly a bool, used at sub_140BD40B0+A9 (6.48) 
     [FieldOffset(0x02)] public ushort QuestId;
     [FieldOffset(0x08)] public Utf8String TooltipText;
     [FieldOffset(0x70)] public int RecommendedLevel;
