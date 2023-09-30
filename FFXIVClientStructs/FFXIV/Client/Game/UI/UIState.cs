@@ -63,6 +63,11 @@ public unsafe partial struct UIState {
     // Size: Number of rows in ChocoboTaxiStand sheet >> 3
     [FieldOffset(0x16BB0)] public fixed byte ChocoboTaxiStandsBitmask[87 >> 3];
 
+    // Ref: UIState#IsCutsceneSeen
+    // Size: Max CutsceneWorkIndex.WorkIndex id >> 3
+    //       (just check inside IsCutsceneSeen function for max WorkIndex id)
+    [FieldOffset(0x16BBC)] public fixed byte CutsceneSeenBitmask[1248 >> 3];
+
     [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B 8B ?? ?? ?? ?? 48 8B 01", 3)]
     public static partial UIState* Instance();
 
@@ -172,6 +177,15 @@ public unsafe partial struct UIState {
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 7C 24 ?? 3C")]
     public static partial bool IsInstanceContentUnlocked(uint instanceContentId);
+
+    /// <summary> Check if the player has seen the cutscene before. </summary>
+    /// <remarks>
+    /// Only tracks skippable cutscenes (for that, check if WorkIndex is not 0 in CutsceneWorkIndex sheet).
+    /// </remarks>
+    /// <param name="cutsceneId"> RowId of the Cutscene </param>
+    /// <returns> Returns <c>true</c> if the player has seen the cutscene before, otherwise <c>false</c>. </returns>
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 41 0F B6 CE")]
+    public partial bool IsCutsceneSeen(uint cutsceneId);
 
     // Only valid after the timers window has been opened, returns -1 otherwise.
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B F8 E8 ?? ?? ?? ?? 49 8D 9F")]
