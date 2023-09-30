@@ -756,6 +756,7 @@ classes:
       0x140982F40: SetUnlockLinkValue
       0x140982FE0: IsUnlockLinkUnlocked
       0x140983010: IsUnlockLinkUnlockedOrQuestCompleted
+      0x1409832C0: IsCutsceneSeen
       0x140985210: IsEmoteUnlocked
       0x140985380: IsItemActionUnlocked
       0x1409834D0: IsTripleTriadCardUnlocked

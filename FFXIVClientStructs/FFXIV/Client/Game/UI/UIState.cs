@@ -49,19 +49,24 @@ public unsafe partial struct UIState {
     // Size: Number of rows in Aetheryte sheet >> 3
     [FieldOffset(0x16B34)] public fixed byte UnlockedAetherytesBitmask[200 >> 3];
 
-    // Ref: E8 ?? ?? ?? ?? 48 83 6F ?? ?? 75 06 48 89 77 68
+    // Ref: "E8 ?? ?? ?? ?? 48 83 6F ?? ?? 75 06 48 89 77 68"
     // Size: Number of rows in HowTo sheet >> 3
     [FieldOffset(0x16B4E)] public fixed byte UnlockedHowtoBitmask[288 >> 3];
 
     // Ref: g_Client::Game::UI::UnlockedCompanionsMask
-    //      direct ref: 48 8D 0D ?? ?? ?? ?? 0F B6 04 08 84 D0 75 10 B8 ?? ?? ?? ?? 48 8B 5C 24
-    //      relative to uistate: E8 ?? ?? ?? ?? 84 C0 75 A6 32 C0 (case for 0x355)
+    //      direct ref: "48 8D 0D ?? ?? ?? ?? 0F B6 04 08 84 D0 75 10 B8 ?? ?? ?? ?? 48 8B 5C 24"
+    //      relative to uistate: "E8 ?? ?? ?? ?? 84 C0 75 A6 32 C0" (case for 0x355)
     // Size: Number of rows in Companion sheet >> 3
     [FieldOffset(0x16B72)] public fixed byte UnlockedCompanionsBitmask[496 >> 3];
 
-    // 42 0F B6 04 30 44 84 C0
-    // Size: Number of rows in ChocoboTaxi sheet >> 3
-    [FieldOffset(0x16BB0)] public fixed byte ChocoboTaxiStandsBitmask[312 >> 3];
+    // Ref: "42 0F B6 04 30 44 84 C0"
+    // Size: Number of rows in ChocoboTaxiStand sheet >> 3
+    [FieldOffset(0x16BB0)] public fixed byte ChocoboTaxiStandsBitmask[87 >> 3];
+
+    // Ref: UIState#IsCutsceneSeen
+    // Size: Max CutsceneWorkIndex.WorkIndex id >> 3
+    //       (just check inside IsCutsceneSeen function for max WorkIndex id)
+    [FieldOffset(0x16BBC)] public fixed byte CutsceneSeenBitmask[1248 >> 3];
 
     [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B 8B ?? ?? ?? ?? 48 8B 01", 3)]
     public static partial UIState* Instance();
@@ -172,6 +177,15 @@ public unsafe partial struct UIState {
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 7C 24 ?? 3C")]
     public static partial bool IsInstanceContentUnlocked(uint instanceContentId);
+
+    /// <summary> Check if the player has seen the cutscene before. </summary>
+    /// <remarks>
+    /// Only tracks skippable cutscenes (for that, check if WorkIndex is not 0 in CutsceneWorkIndex sheet).
+    /// </remarks>
+    /// <param name="cutsceneId"> RowId of the Cutscene </param>
+    /// <returns> Returns <c>true</c> if the player has seen the cutscene before, otherwise <c>false</c>. </returns>
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 41 0F B6 CE")]
+    public partial bool IsCutsceneSeen(uint cutsceneId);
 
     // Only valid after the timers window has been opened, returns -1 otherwise.
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B F8 E8 ?? ?? ?? ?? 49 8D 9F")]
