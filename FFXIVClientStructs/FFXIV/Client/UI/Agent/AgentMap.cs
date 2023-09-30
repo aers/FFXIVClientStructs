@@ -63,7 +63,7 @@ public unsafe partial struct AgentMap {
     [FieldOffset(0x5A1F)] public byte IsPlayerMoving;
     [FieldOffset(0x5A27)] public byte IsControlKeyPressed;
 
-    [FieldOffset(0x5E30)] public QuestLinkContainer MainMapQuestLinkContainer;
+    [FieldOffset(0x5E30)] public QuestLinkContainer MapQuestLinkContainer;
     [FieldOffset(0x68E8)] public QuestLinkContainer MiniMapQuestLinkContainer;
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8D 4C 24 ?? E8 ?? ?? ?? ?? 33 ED 48 8D 15")]
