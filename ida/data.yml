@@ -943,7 +943,7 @@ classes:
       0x1409A7BF0: GetSpellIdForAction
       0x1409A9190: UseActionLocation
       0x1409A9FC0: UseGeneralAction
-      0x1409AACA0: UseWaymarkAction
+      0x1409AACA0: UseFieldMarkerAction
       0x1409AB790: CheckActionResources
       0x1409AF160: GetActionStatus
       0x1409B0F00: CanUseAction
@@ -4842,7 +4842,7 @@ classes:
     vfuncs:
       0: dtor
     funcs:
-      0x14094CD30: ClearWaymarks
+      0x14094CD30: ClearFieldMarkers
   Client::Game::LimitBreakController:
     instances:
       - ea: 0x142182DE0

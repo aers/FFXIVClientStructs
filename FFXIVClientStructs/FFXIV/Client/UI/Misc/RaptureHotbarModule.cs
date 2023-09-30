@@ -406,12 +406,12 @@ public enum HotbarSlotType : byte {
     Marker = 0x08,
     CraftAction = 0x09,
     GeneralAction = 0x0A,
-    CompanionOrder = 0x0B,
+    BuddyAction = 0x0B,
     MainCommand = 0x0C,
-    Minion = 0x0D,
+    Companion = 0x0D,
 
     GearSet = 0x0F,
-    PetOrder = 0x10,
+    PetAction = 0x10,
     Mount = 0x11,
     FieldMarker = 0x12,
 
@@ -422,11 +422,11 @@ public enum HotbarSlotType : byte {
     ExtraCommand = 0x18,
     PvPQuickChat = 0x19,
     PvPCombo = 0x1A,
-    SquadronOrder = 0x1B,
+    BgcArmyAction = 0x1B,
 
     Unk_0x1C = 0x1C, // seems to be a legacy type, possibly performance instrument related based on associated icon 000782
     PerformanceInstrument = 0x1D,
     Collection = 0x1E,
-    FashionAccessory = 0x1F,
+    Ornament = 0x1F,
     LostFindsItem = 0x20
 }
