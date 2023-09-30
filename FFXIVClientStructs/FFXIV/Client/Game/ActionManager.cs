@@ -207,7 +207,7 @@ public struct ComboDetail {
 
 public enum ActionType : byte {
     None = 0x00,
-    Skill = 0x01, // Spell, Weaponskill, Ability
+    Action = 0x01, // Spell, Weaponskill, Ability. Confusing name, I know.
     Item = 0x02,
     KeyItem = 0x03,
     Ability = 0x04, // Not in UseAction (??)
@@ -216,9 +216,9 @@ public enum ActionType : byte {
     MainCommand = 0x07,
     Companion = 0x08,
     CraftAction = 0x09,
-    Unk_10 = 0x0A, // item?
+    Unk_10 = 0x0A, // Fishing per Sapphire? Something to do with items.
     PetAction = 0x0B,
-    Unk_12 = 0x0C, // Not in UseAction (?)
+    Unk_12 = 0x0C, // Not in UseAction. Sapphire says CompanyAction, but not actually triggered.
     Mount = 0x0D,
     PvPAction = 0x0E,
     FieldMarker = 0x0F,
