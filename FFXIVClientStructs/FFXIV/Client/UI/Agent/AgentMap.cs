@@ -16,7 +16,7 @@ public unsafe partial struct AgentMap {
     // These do not contain any of the other arrow markers.
     [FieldOffset(0xE8)] public StdVector<LinkedTooltipMarker> MinimapMSQLinkedTooltipMarkers;
     [FieldOffset(0x100)] public StdVector<Pointer<LinkedTooltipMarker>> MinimapMSQLinkedTooltipMarkersList;
-    
+
     [FieldOffset(0x118)] public StdMap<uint, uint> SymbolMap; // Icon:MapSymbol
 
     [FieldOffset(0x158)] public Utf8String CurrentMapPath;
