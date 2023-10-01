@@ -332,6 +332,9 @@ classes:
     funcs:
       0x1404CE490: PlayTimeline
       0x1404CEE40: SetSlotSpeed
+  Client::Game::Character::CharacterData:
+    vtbls:
+      - ea: 0x1419ADF60
   Client::Game::ActionTimelineManager:
     vtbls:
       - ea: 0x1419ADFE0
@@ -4257,6 +4260,8 @@ classes:
         base: Client::Game::Object::GameObject
       - ea: 0x1419AE458
         base: Client::Graphics::Vfx::VfxDataListenner
+      - ea: 0x1419AE468
+        base: Client::Game::Character::CharacterData
     vfuncs:
       76: GetModelChara
       79: GetStatusManager
@@ -4317,25 +4322,6 @@ classes:
     vfuncs:
       0: dtor
       1: ctor
-  Client::Game::Character::Data::CharacterData:
-    vtbls:
-      - ea: 0x1419AE468
-  Client::Game::Character::Data::BattleCharaData:
-    vtbls:
-      - ea: 0x1419C60F8
-        base: Client::Game::Character::Data::CharacterData
-  Client::Game::Character::Data::CompanionData:
-    vtbls:
-      - ea: 0x141AC9A98
-        base: Client::Game::Character::Data::CharacterData
-  Client::Game::Character::Data::OrnamentData:
-    vtbls:
-      - ea: 0x141AC9788
-        base: Client::Game::Character::Data::CharacterData
-  Client::Game::Character::Data::CutsceneCharacterData:
-    vtbls:
-      - ea: 0x141C07928
-        base: Client::Game::Character::Data::CharacterData
   Client::Game::Character::DrawData:
     vtbls:
       - ea: 0x141990B28
@@ -4809,6 +4795,8 @@ classes:
         base: Client::Game::Character::Character
       - ea: 0x1419C60E8
         base: Client::Graphics::Vfx::VfxDataListenner
+      - ea: 0x1419C60F8
+        base: Client::Game::Character::CharacterData
     funcs:
       0x1407AD370: ctor
       0x1407AD650: Finalize
@@ -8621,12 +8609,16 @@ classes:
     vtbls:
       - ea: 0x141AC97C8
         base: Client::Game::Character::Character
+      - ea: 0x141AC9A98
+        base: Client::Game::Character::CharacterData
     funcs:
       0x1412D42C0: ctor
   Client::Game::Character::Ornament:
     vtbls:
       - ea: 0x141AC94B8
         base: Client::Game::Character::Character
+      - ea: 0x141AC9788
+        base: Client::Game::Character::CharacterData
     funcs:
       0x1412D3F30: ctor
       0x1412D40E0: SetupOrnament
@@ -8634,6 +8626,8 @@ classes:
     vtbls:
       - ea: 0x141C07658
         base: Client::Game::Character::Character
+      - ea: 0x141C07928
+        base: Client::Game::Character::CharacterData
     funcs:
       0x1415419D0: ctor
   Client::Game::CameraBase:

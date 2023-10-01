@@ -1,4 +1,3 @@
-using FFXIVClientStructs.FFXIV.Client.Game.Character.Data;
 using FFXIVClientStructs.FFXIV.Client.Game.Control;
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
 using FFXIVClientStructs.FFXIV.Client.Graphics.Vfx;
@@ -8,6 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 // Client::Game::Character::Character
 //   Client::Game::Object::GameObject
 //   Client::Graphics::Vfx::VfxDataListenner
+//   Client::Game::Character::CharacterData
 
 // size = 0x1B40
 // ctor E8 ?? ?? ?? ?? 48 8B C8 48 8B 43 08 45 33 C9

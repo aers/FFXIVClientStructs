@@ -1,12 +1,4 @@
-namespace FFXIVClientStructs.FFXIV.Client.Game.Character.Data;
-
-/** This could be any of the following
- * - CharacterData
- * - BattleCharaData
- * - CompanionData
- * - OrnamentData
- * - CutsceneCharacterData
- */
+namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x48)]
 public unsafe struct CharacterData {
