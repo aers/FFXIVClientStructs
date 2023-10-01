@@ -8083,7 +8083,7 @@ classes:
       - ea: 0x141A638F0
         base: Component::GUI::AtkUnitBase
     funcs:
-      0x141A638F0: ctor
+      0x140F67330: ctor
   Client::UI::AddonPvpProfileColosseum:
     vtbls:
       - ea: 0x141A63D80
@@ -8412,10 +8412,14 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1411C5460: ctor
+  Client::UI::AddonInventoryInterface:
+    vtbls:
+      - ea: 0x141A4ED88
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonInventory:
     vtbls:
       - ea: 0x141A4F000
-        base: Component::GUI::AtkUnitBase
+        base: Client::UI::AddonInventoryInterface
     funcs:
       0x140E988E0: ctor
   Client::UI::AddonInventoryBuddy:
@@ -8433,13 +8437,13 @@ classes:
   Client::UI::AddonInventoryExpansion:
     vtbls:
       - ea: 0x141A4FE10
-        base: Component::GUI::AtkUnitBase
+        base: Client::UI::AddonInventoryInterface
     funcs:
       0x140EA01D0: ctor
   Client::UI::AddonInventoryLarge:
     vtbls:
       - ea: 0x141A4F6E8
-        base: Component::GUI::AtkUnitBase
+        base: Client::UI::AddonInventoryInterface
     funcs:
       0x140E9BA50: ctor
   Client::UI::AddonInventoryRetainer:
