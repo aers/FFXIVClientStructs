@@ -76,12 +76,12 @@ public unsafe partial struct AtkResNode : ICreatable {
     // not sure what the _2s are for, the regular ones are loaded from the file
     [FieldOffset(0x74)] public float Depth;
     [FieldOffset(0x78)] public float Depth_2;
-    [FieldOffset(0x7C)] public ushort AddRed;
-    [FieldOffset(0x7E)] public ushort AddGreen;
-    [FieldOffset(0x80)] public ushort AddBlue;
-    [FieldOffset(0x82)] public ushort AddRed_2;
-    [FieldOffset(0x84)] public ushort AddGreen_2;
-    [FieldOffset(0x86)] public ushort AddBlue_2;
+    [FieldOffset(0x7C)] public short AddRed;
+    [FieldOffset(0x7E)] public short AddGreen;
+    [FieldOffset(0x80)] public short AddBlue;
+    [FieldOffset(0x82)] public short AddRed_2;
+    [FieldOffset(0x84)] public short AddGreen_2;
+    [FieldOffset(0x86)] public short AddBlue_2;
     [FieldOffset(0x88)] public byte MultiplyRed;
     [FieldOffset(0x89)] public byte MultiplyGreen;
     [FieldOffset(0x8A)] public byte MultiplyBlue;
@@ -93,7 +93,6 @@ public unsafe partial struct AtkResNode : ICreatable {
     [FieldOffset(0x90)] public ushort Width;
     [FieldOffset(0x92)] public ushort Height;
     [FieldOffset(0x94)] public float OriginX;
-
     [FieldOffset(0x98)] public float OriginY;
 
     // asm accesses these fields together so this is one 32bit field with priority+flags
