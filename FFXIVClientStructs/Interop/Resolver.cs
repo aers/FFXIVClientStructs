@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using Serilog;
 
 namespace FFXIVClientStructs.Interop;
@@ -127,7 +128,7 @@ public sealed partial class Resolver {
 
         try {
             var json = File.ReadAllText(_cacheFile.FullName);
-            _textCache = JsonSerializer.Deserialize<ConcurrentDictionary<string, long>>(json) ?? new ConcurrentDictionary<string, long>();
+            _textCache = JsonSerializer.Deserialize(json, ResolverJsonContext.Default.ConcurrentDictionaryStringInt64) ?? new ConcurrentDictionary<string, long>();
         } catch {
             _textCache = new ConcurrentDictionary<string, long>();
         }
@@ -136,7 +137,7 @@ public sealed partial class Resolver {
     private void SaveCache() {
         if (_cacheFile == null || _textCache == null || _cacheChanged == false)
             return;
-        var json = JsonSerializer.Serialize(_textCache, new JsonSerializerOptions { WriteIndented = true });
+        var json = JsonSerializer.Serialize(_textCache, ResolverJsonContext.Default.ConcurrentDictionaryStringInt64);
         if (string.IsNullOrWhiteSpace(json))
             return;
         if (_cacheFile.Directory is { Exists: false })
@@ -242,5 +243,10 @@ outLoop:;
         }
 
         _preResolveArray[firstByte]!.Add(address);
+    }
+
+    [JsonSerializable(typeof(ConcurrentDictionary<string, long>))]
+    [JsonSourceGenerationOptions(WriteIndented = true)]
+    private partial class ResolverJsonContext : JsonSerializerContext {
     }
 }
