@@ -98,7 +98,6 @@ public unsafe partial struct AtkResNode : ICreatable {
     // asm accesses these fields together so this is one 32bit field with priority+flags
     [FieldOffset(0x9C)] public ushort Priority;
     [FieldOffset(0x9E)] public NodeFlags NodeFlags;
-    [FieldOffset(0xA0), Obsolete("Use DrawFlags", true)] public uint Flags_2; // bit 1 = has changes, ClipCount is bits 10-17, idk its a mess
     [FieldOffset(0xA0)] public uint DrawFlags;
 
     public bool IsVisible => NodeFlags.HasFlag(NodeFlags.Visible);
