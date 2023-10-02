@@ -44,8 +44,6 @@ public unsafe partial struct CharacterBase {
     public BonePhysicsModule* BonePhysicsModule; // Client::Graphics::Physics::BonePhysicsModule ptr
 
     [FieldOffset(0x224)] public float VfxScale;
-    [Obsolete("Use CharacterDataCBuffer", true)]
-    [FieldOffset(0x240)] public void* CharacterDataCB;
     [FieldOffset(0x240)] public ConstantBuffer* CharacterDataCBuffer; // Size has been observed to be 0x50, contents may be InstanceParameter
 
     [FieldOffset(0x258)] public Texture** ColorTableTextures; // each one corresponds to a material, size = SlotCount * 4
@@ -58,28 +56,17 @@ public unsafe partial struct CharacterBase {
     // next few fields are used temporarily when loading the render object and cleared after load
     [FieldOffset(0x2C8)] public uint HasModelInSlotLoaded; // tracks which slots have loaded models into staging
 
-    [FieldOffset(0x2CC)]
-    public uint HasModelFilesInSlotLoaded; // tracks which slots have loaded materials, etc into staging
+    [FieldOffset(0x2CC)] public uint HasModelFilesInSlotLoaded; // tracks which slots have loaded materials, etc into staging
 
     [FieldOffset(0x2D0)] public void* TempData; // struct with temporary data (size = 0x88)
 
-    [FieldOffset(0x2D8)]
-    public void* TempSlotData; // struct with temporary data for each slot (size = 0x88 * slot count)
+    [FieldOffset(0x2D8)] public void* TempSlotData; // struct with temporary data for each slot (size = 0x88 * slot count)
 
-    //
-    [Obsolete("Use Materials", true)]
-    [FieldOffset(0x2E8)]
-    public void**
-        MaterialArray; // array of Client::Graphics::Render::Material ptrs size = SlotCount * 4 (4 material per model max)
-    [FieldOffset(0x2E8)]
-    public Material** Materials; // size = SlotCount * 4 (4 material per model max)
+    [FieldOffset(0x2E8)] public Material** Materials; // size = SlotCount * 4 (4 material per model max)
 
-    [FieldOffset(0x2F0)]
-    public void* EID; // Client::System::Resource::Handle::ElementIdResourceHandle - EID file for base skeleton
+    [FieldOffset(0x2F0)] public void* EID; // Client::System::Resource::Handle::ElementIdResourceHandle - EID file for base skeleton
 
-    [FieldOffset(0x2F8)]
-    public void**
-        IMCArray; // array of Client::System::Resource::Handle::ImageChangeDataResourceHandle ptrs size = SlotCount - IMC file for model in slot
+    [FieldOffset(0x2F8)] public void** IMCArray; // array of Client::System::Resource::Handle::ImageChangeDataResourceHandle ptrs size = SlotCount - IMC file for model in slot
 
     public readonly Span<Pointer<Model>> ModelsSpan
         => new(Models, SlotCount);
