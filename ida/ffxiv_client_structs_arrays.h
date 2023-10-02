@@ -23,7 +23,7 @@ struct Client::Game::Camera3;
 struct Client::Game::Camera4;
 struct Client::Game::Character::BattleChara;
 struct Client::Game::Character::Character;
-struct Client::Game::Character::Data::CharacterData;
+struct Client::Game::Character::CharacterData;
 struct Client::Game::Control::EmoteController;
 struct Client::Game::Character::Character::MountContainer;
 struct Client::Game::Character::Character::CompanionContainer;
@@ -368,6 +368,7 @@ struct Client::UI::AddonEnemyList;
 struct Client::UI::AddonExp;
 struct Client::UI::AddonFateReward;
 struct Client::UI::AddonFieldMarker;
+struct Client::UI::AddonFieldMarkerInfo;
 struct Client::UI::AddonFriendList;
 struct Client::UI::AddonGathering;
 struct Client::UI::AddonGatheringMasterpiece;
@@ -456,7 +457,6 @@ struct Client::UI::AddonTalk;
 struct Component::GUI::AtkEventTarget;
 struct Component::GUI::AtkEventListenerUnk1;
 struct Client::UI::AddonTeleport;
-struct Client::UI::AddonWaymarkInfo;
 struct Client::UI::AddonWeeklyBingo;
 struct Client::UI::DutySlotList;
 struct Client::UI::DutySlot;
@@ -491,6 +491,7 @@ struct Client::UI::Agent::AgentBannerInterface::Storage::CharacterData;
 struct Component::GUI::AtkTexture;
 struct Client::UI::Agent::AgentBannerMIP;
 struct Client::UI::Agent::AgentBannerParty;
+struct Client::UI::Agent::AgentBlacklist;
 struct Client::UI::Agent::AgentCharaCard;
 struct Client::UI::Agent::AgentCharaCard::Storage;
 struct Client::UI::Misc::CharaView;
@@ -552,11 +553,15 @@ struct Pointer::ClientUIAgentCharaSelectCharacterEntry;
 struct Client::UI::Agent::AgentLobby::AgentLobbyVTable;
 struct Client::UI::Agent::AgentLoot;
 struct Client::UI::Agent::AgentMap;
+struct StdVector::ClientUIAgentLinkedTooltipMarker;
+struct StdVector::PointerClientUIAgentLinkedTooltipMarker;
+struct Pointer::ClientUIAgentLinkedTooltipMarker;
 struct StdMap::SystemUInt32::SystemUInt32;
 struct StdMap::Node::SystemUInt32::SystemUInt32;
 struct StdPair::SystemUInt32::SystemUInt32;
 struct Client::UI::Agent::FlagMapMarker;
 struct Client::UI::Agent::MapMarkerBase;
+struct Client::UI::Agent::QuestLinkContainer;
 struct Client::UI::Agent::AgentMiragePrismMiragePlate;
 struct Client::UI::Agent::AgentMiragePrismPrismBox;
 struct Client::UI::Agent::AgentMiragePrismPrismItemDetail;
@@ -628,6 +633,7 @@ struct Client::UI::Agent::GrandCompanyItem;
 struct Client::UI::Agent::HudPartyMember;
 struct Client::UI::Agent::HudPartyMemberEnmity;
 struct Client::UI::Agent::ItemReward;
+struct Client::UI::Agent::LinkedTooltipMarker;
 struct Client::UI::Agent::LobbyDataCenterWorldEntry;
 struct Client::UI::Agent::LobbySubscriptionInfo;
 struct Client::UI::Agent::LobbyUIClient::LobbyUIClientVTable;
@@ -648,6 +654,7 @@ struct Client::UI::Agent::ProgressEfficiencyCalculation;
 struct Client::UI::Agent::ProgressEfficiencyCalculations;
 struct Client::UI::Agent::QualityEfficiencyCalculation;
 struct Client::UI::Agent::QualityEfficiencyCalculations;
+struct Client::UI::Agent::QuestLinkMarker;
 struct Client::UI::Agent::SupplyProvisioningData;
 struct Client::UI::Agent::SupplyProvisioningItem;
 struct Client::UI::Agent::TempMapMarker;
@@ -676,7 +683,7 @@ struct Client::UI::Info::InfoProxyCircle::Unk1;
 struct Client::UI::Info::InfoProxyCircleFinder;
 struct Client::UI::Info::InfoProxyCircleList;
 struct Client::UI::Info::InfoProxyCommonList::CharacterData;
-struct Client::UI::Info::InfoProxyCommonList::CharIndexEntry;
+struct Client::UI::Info::InfoProxyCommonList::CharacterIndex;
 struct Client::UI::Info::InfoProxyCrossRealm;
 struct Client::UI::Info::InfoProxyCrossWorldLinkShell;
 struct Client::UI::Info::InfoProxyInvitedInterface;
@@ -848,6 +855,9 @@ struct Component::GUI::AtkCursor;
 struct Component::GUI::AtkDragDropInterface::AtkDragDropInterfaceVTable;
 struct Component::GUI::AtkDragDropManager;
 struct Component::GUI::AtkEvent;
+struct Component::GUI::AtkEventDispatcher;
+struct StdVector::PointerComponentGUIAtkEvent;
+struct Pointer::ComponentGUIAtkEvent;
 struct Component::GUI::AtkImageNode;
 struct Component::GUI::AtkLinkedList;
 struct Component::GUI::AtkLinkedList::Node;
@@ -937,26 +947,26 @@ enum Client::Game::ActionTimelineSlots: __int32
 enum Client::Game::ActionType: byte
 {
     None = 0,
-    Spell = 1,
+    Action = 1,
     Item = 2,
     KeyItem = 3,
     Ability = 4,
-    General = 5,
-    Companion = 6,
-    Unk_7 = 7,
-    Unk_8 = 8,
+    GeneralAction = 5,
+    BuddyAction = 6,
+    MainCommand = 7,
+    Companion = 8,
     CraftAction = 9,
-    MainCommand = 10,
+    Unk_10 = 10,
     PetAction = 11,
     Unk_12 = 12,
     Mount = 13,
     PvPAction = 14,
-    Waymark = 15,
+    FieldMarker = 15,
     ChocoboRaceAbility = 16,
     ChocoboRaceItem = 17,
     Unk_18 = 18,
-    SquadronAction = 19,
-    Accessory = 20
+    BgcArmyAction = 19,
+    Ornament = 20
 };
 
 enum Client::Game::BalloonState: unsigned __int32
@@ -2160,18 +2170,6 @@ enum Client::UI::Agent::MycDynamicEventState: byte
     Underway = 3
 };
 
-enum Client::UI::Agent::WaymarkIndex: __int32
-{
-    A = 0,
-    B = 1,
-    C = 2,
-    D = 3,
-    One = 4,
-    Two = 5,
-    Three = 6,
-    Four = 7
-};
-
 enum Client::UI::GamepadButtonsFlags: unsigned __int16
 {
     None = 0,
@@ -3313,11 +3311,11 @@ enum Client::UI::Misc::HotbarSlotType: byte
     Marker = 8,
     CraftAction = 9,
     GeneralAction = 10,
-    CompanionOrder = 11,
+    BuddyAction = 11,
     MainCommand = 12,
-    Minion = 13,
+    Companion = 13,
     GearSet = 15,
-    PetOrder = 16,
+    PetAction = 16,
     Mount = 17,
     FieldMarker = 18,
     Recipe = 20,
@@ -3327,11 +3325,11 @@ enum Client::UI::Misc::HotbarSlotType: byte
     ExtraCommand = 24,
     PvPQuickChat = 25,
     PvPCombo = 26,
-    SquadronOrder = 27,
+    BgcArmyAction = 27,
     Unk_0x1C = 28,
     PerformanceInstrument = 29,
     Collection = 30,
-    FashionAccessory = 31,
+    Ornament = 31,
     LostFindsItem = 32
 };
 
@@ -3960,7 +3958,7 @@ struct Client::Game::Camera4 /* Size=0x350 */
     /*       */ byte _gap_0x2F0[0x60];
 };
 
-struct Client::Game::Character::Data::CharacterData /* Size=0x48 */
+struct Client::Game::Character::CharacterData /* Size=0x48 */
 {
     /* 0x00 */ void* vtbl;
     /* 0x08 */ float ModelScale;
@@ -4141,7 +4139,7 @@ struct Client::Game::Character::Character::ReaperShroudContainer /* Size=0x40 */
 struct Client::Game::Character::Character /* Size=0x1B40 */
 {
     /*        */ byte _gap_0x0[0x1A8];
-    /* 0x01A8 */ Client::Game::Character::Data::CharacterData CharacterData;
+    /* 0x01A8 */ Client::Game::Character::CharacterData CharacterData;
     /*        */ byte _gap_0x1F0[0x2];
     /* 0x01F2 */ byte StatusFlags;
     /* 0x01F3 */ byte StatusFlags2;
@@ -6628,7 +6626,9 @@ struct Client::Game::UI::UIState /* Size=0x16BAC */
     /*         */ byte _gap_0x16B4D;
     /* 0x16B4E */ byte UnlockedHowtoBitmask[0x24];
     /* 0x16B72 */ byte UnlockedCompanionsBitmask[0x3E];
-    /* 0x16BB0 */ byte ChocoboTaxiStandsBitmask[0x27];
+    /* 0x16BB0 */ byte ChocoboTaxiStandsBitmask[0xA];
+    /*         */ byte _gap_0x16BBA[0x2];
+    /* 0x16BBC */ byte CutsceneSeenBitmask[0x9C];
 };
 
 struct Client::Graphics::Animation::AnimationResourceHandle /* Size=0x0 */
@@ -8451,7 +8451,7 @@ struct Client::UI::AddonFieldMarker /* Size=0x598 */
     /*       */ byte _gap_0x220[0x10];
     /* 0x230 */ __int32 HoveredButtonIndex;
     /*       */ byte _gap_0x234[0x4];
-    /* 0x238 */ byte WaymarkInfo[0xC0];
+    /* 0x238 */ byte FieldMarkerInfo[0xC0];
     /*       */ byte _gap_0x2F8[0x280];
     /*       */ byte _gap_0x578[0x4];
     /* 0x57C */ __int32 HoveredPresetIndex;
@@ -8460,6 +8460,15 @@ struct Client::UI::AddonFieldMarker /* Size=0x598 */
     /*       */ byte _gap_0x582[0x2];
     /*       */ byte _gap_0x584[0x4];
     /*       */ byte _gap_0x588[0x10];
+};
+
+struct Client::UI::AddonFieldMarkerInfo /* Size=0x18 */
+{
+    /* 0x00 */ __int32 IconId;
+    /* 0x04 */ __int32 Active;
+    /* 0x08 */ byte* TooltipString;
+    /* 0x10 */ __int32 Slot;
+    /*      */ byte _gap_0x14[0x4];
 };
 
 struct Client::UI::AddonFriendList /* Size=0x380 */
@@ -9944,15 +9953,6 @@ struct Client::UI::AddonTeleport /* Size=0x2D8 */
     /* 0x2D4 */ unsigned __int32 Unknown2D4;
 };
 
-struct Client::UI::AddonWaymarkInfo /* Size=0x18 */
-{
-    /* 0x00 */ __int32 IconId;
-    /* 0x04 */ __int32 Active;
-    /* 0x08 */ byte* TooltipString;
-    /* 0x10 */ __int32 Slot;
-    /*      */ byte _gap_0x14[0x4];
-};
-
 struct Client::UI::DutySlot /* Size=0x168 */
 {
     /* 0x000 */ void** vtbl;
@@ -10457,6 +10457,18 @@ struct Client::UI::Agent::AgentBannerParty /* Size=0x38 */
 {
     /* 0x00 */ Client::UI::Agent::AgentBannerInterface AgentBannerInterface;
     /*      */ byte _gap_0x30[0x8];
+};
+
+struct Client::UI::Agent::AgentBlacklist /* Size=0x110 */
+{
+    /* 0x000 */ Component::GUI::AgentInterface AgentInterface;
+    /* 0x028 */ Client::UI::Info::InfoProxyBlacklist* InfoProxy;
+    /* 0x030 */ Client::System::String::Utf8String SelectedPlayerName;
+    /* 0x098 */ Client::System::String::Utf8String SelectedPlayerFullName;
+    /* 0x100 */ unsigned __int64 SelectedPlayerContentId;
+    /* 0x108 */ unsigned __int16 SelectYesnoAddonId;
+    /*       */ byte _gap_0x10A[0x2];
+    /*       */ byte _gap_0x10C[0x4];
 };
 
 struct Client::UI::Agent::AgentCharaCard /* Size=0x38 */
@@ -11287,6 +11299,25 @@ struct Client::UI::Agent::AgentLoot /* Size=0x90 */
     /*      */ byte _gap_0x80[0x10];
 };
 
+struct StdVector::ClientUIAgentLinkedTooltipMarker /* Size=0x18 */
+{
+    /* 0x00 */ Client::UI::Agent::LinkedTooltipMarker* First;
+    /* 0x08 */ Client::UI::Agent::LinkedTooltipMarker* Last;
+    /* 0x10 */ Client::UI::Agent::LinkedTooltipMarker* End;
+};
+
+struct Pointer::ClientUIAgentLinkedTooltipMarker /* Size=0x8 */
+{
+    /* 0x0 */ Client::UI::Agent::LinkedTooltipMarker* Value;
+};
+
+struct StdVector::PointerClientUIAgentLinkedTooltipMarker /* Size=0x18 */
+{
+    /* 0x00 */ Pointer::ClientUIAgentLinkedTooltipMarker* First;
+    /* 0x08 */ Pointer::ClientUIAgentLinkedTooltipMarker* Last;
+    /* 0x10 */ Pointer::ClientUIAgentLinkedTooltipMarker* End;
+};
+
 struct StdPair::SystemUInt32::SystemUInt32 /* Size=0x8 */
 {
     /* 0x0 */ unsigned __int32 Item1;
@@ -11346,10 +11377,22 @@ struct Client::UI::Agent::FlagMapMarker /* Size=0x48 */
     /* 0x44 */ float YFloat;
 };
 
+struct Client::UI::Agent::QuestLinkContainer /* Size=0xAB8 */
+{
+    /*       */ byte _gap_0x0[0x8];
+    /* 0x008 */ unsigned __int16 MarkerCount;
+    /*       */ byte _gap_0xA[0x2];
+    /*       */ byte _gap_0xC[0x4];
+    /*       */ byte _gap_0x10[0x8];
+    /* 0x018 */ byte Markers[0xAA0];
+};
+
 struct Client::UI::Agent::AgentMap /* Size=0x11F70 */
 {
     /* 0x00000 */ Component::GUI::AgentInterface AgentInterface;
-    /*         */ byte _gap_0x28[0xF0];
+    /*         */ byte _gap_0x28[0xC0];
+    /* 0x000E8 */ StdVector::ClientUIAgentLinkedTooltipMarker MinimapMSQLinkedTooltipMarkers;
+    /* 0x00100 */ StdVector::PointerClientUIAgentLinkedTooltipMarker MinimapMSQLinkedTooltipMarkersList;
     /* 0x00118 */ StdMap::SystemUInt32::SystemUInt32 SymbolMap;
     /*         */ byte _gap_0x128[0x30];
     /* 0x00158 */ Client::System::String::Utf8String CurrentMapPath;
@@ -11364,12 +11407,8 @@ struct Client::UI::Agent::AgentMap /* Size=0x11F70 */
     /* 0x03818 */ Client::UI::Agent::FlagMapMarker FlagMapMarker;
     /* 0x03860 */ byte WarpMarkerArray[0x2A0];
     /* 0x03B00 */ byte UnkArray2[0x3F0];
-    /*         */ byte _gap_0x3EF0[0x30];
-    /*         */ byte _gap_0x3F20[0x4];
-    /*         */ byte _gap_0x3F24[0x2];
-    /* 0x03F26 */ byte MiniMapMarkerArray[0x1900];
-    /*         */ byte _gap_0x5826[0x2];
-    /*         */ byte _gap_0x5828[0x70];
+    /* 0x03EF0 */ byte MiniMapMarkerArray[0x1900];
+    /*         */ byte _gap_0x57F0[0xA8];
     /* 0x05898 */ float SelectedMapSizeFactorFloat;
     /* 0x0589C */ float CurrentMapSizeFactorFloat;
     /* 0x058A0 */ __int16 SelectedMapSizeFactor;
@@ -11409,7 +11448,10 @@ struct Client::UI::Agent::AgentMap /* Size=0x11F70 */
     /*         */ byte _gap_0x5A24[0x2];
     /*         */ byte _gap_0x5A26;
     /* 0x05A27 */ byte IsControlKeyPressed;
-    /*         */ byte _gap_0x5A28[0xC548];
+    /*         */ byte _gap_0x5A28[0x408];
+    /* 0x05E30 */ Client::UI::Agent::QuestLinkContainer MapQuestLinkContainer;
+    /* 0x068E8 */ Client::UI::Agent::QuestLinkContainer MiniMapQuestLinkContainer;
+    /*         */ byte _gap_0x73A0[0xABD0];
 };
 
 struct Client::UI::Agent::AgentMiragePrismMiragePlate /* Size=0x350 */
@@ -12285,6 +12327,13 @@ struct Client::UI::Agent::ItemReward /* Size=0x130 */
     /*       */ byte _gap_0xF0[0x40];
 };
 
+struct Client::UI::Agent::LinkedTooltipMarker /* Size=0x70 */
+{
+    /* 0x00 */ Client::System::String::Utf8String TooltipText;
+    /* 0x68 */ unsigned __int32 IconId;
+    /* 0x6C */ unsigned __int32 LevelId;
+};
+
 struct Client::UI::Agent::LobbyDataCenterWorldEntry /* Size=0x54 */
 {
     /* 0x00 */ unsigned __int16 Id;
@@ -12531,6 +12580,21 @@ struct Client::UI::Agent::QualityEfficiencyCalculations /* Size=0x138 */
     /* 0x120 */ Client::UI::Agent::QualityEfficiencyCalculation TrainedFinesse;
 };
 
+struct Client::UI::Agent::QuestLinkMarker /* Size=0x88 */
+{
+    /* 0x00 */ byte Valid;
+    /*      */ byte _gap_0x1;
+    /* 0x02 */ unsigned __int16 QuestId;
+    /*      */ byte _gap_0x4[0x4];
+    /* 0x08 */ Client::System::String::Utf8String TooltipText;
+    /* 0x70 */ __int32 RecommendedLevel;
+    /* 0x74 */ unsigned __int32 IconId;
+    /* 0x78 */ unsigned __int32 LevelId;
+    /* 0x7C */ unsigned __int32 SourceMapId;
+    /* 0x80 */ unsigned __int32 TargetMapId;
+    /*      */ byte _gap_0x84[0x4];
+};
+
 struct Client::UI::Agent::SupplyProvisioningData /* Size=0x790 */
 {
     /*       */ byte _gap_0x0[0x40];
@@ -12658,7 +12722,7 @@ struct Client::UI::Info::InfoProxyCommonList /* Size=0xB8 */
     /*      */ byte _gap_0x92[0x2];
     /*      */ byte _gap_0x94[0x4];
     /* 0x98 */ Client::UI::Info::InfoProxyCommonList::CharacterData* CharData;
-    /*      */ byte _gap_0xA0[0x8];
+    /* 0xA0 */ Client::UI::Info::InfoProxyCommonList::CharacterIndex* IndexData;
     /*      */ byte _gap_0xA8;
     /* 0xA9 */ Client::UI::Info::InfoProxyCommonList::DisplayGroup FilterGroup;
     /*      */ byte _gap_0xAA[0x2];
@@ -12869,16 +12933,17 @@ struct Client::UI::Info::InfoProxyCommonList::CharacterData /* Size=0x68 */
     /* 0x2A */ byte Name[0x20];
     /* 0x4A */ byte FCTag[0x6];
     /*      */ byte _gap_0x50[0x8];
-    /* 0x58 */ Client::UI::Info::InfoProxyCommonList::CharIndexEntry* Index;
+    /* 0x58 */ Client::UI::Info::InfoProxyCommonList::CharacterIndex* Index;
     /*      */ byte _gap_0x60[0x8];
 };
 
-struct Client::UI::Info::InfoProxyCommonList::CharIndexEntry /* Size=0x10 */
+struct Client::UI::Info::InfoProxyCommonList::CharacterIndex /* Size=0x20 */
 {
     /* 0x00 */ unsigned __int64 ContentID;
     /*      */ byte _gap_0x8[0x2];
     /* 0x0A */ unsigned __int16 HomeWorld;
     /*      */ byte _gap_0xC[0x4];
+    /*      */ byte _gap_0x10[0x10];
 };
 
 struct Client::UI::Info::InfoProxyCrossRealm /* Size=0x1620 */
@@ -14957,6 +15022,25 @@ struct Component::GUI::AtkEvent /* Size=0x30 */
     /* 0x30 */ byte Flags;
 };
 
+struct Pointer::ComponentGUIAtkEvent /* Size=0x8 */
+{
+    /* 0x0 */ Component::GUI::AtkEvent* Value;
+};
+
+struct StdVector::PointerComponentGUIAtkEvent /* Size=0x18 */
+{
+    /* 0x00 */ Pointer::ComponentGUIAtkEvent* First;
+    /* 0x08 */ Pointer::ComponentGUIAtkEvent* Last;
+    /* 0x10 */ Pointer::ComponentGUIAtkEvent* End;
+};
+
+struct Component::GUI::AtkEventDispatcher /* Size=0x28 */
+{
+    /* 0x00 */ Component::GUI::AtkEventManager* AtkEventManager;
+    /* 0x08 */ StdVector::PointerComponentGUIAtkEvent Events;
+    /*      */ byte _gap_0x20[0x8];
+};
+
 struct Component::GUI::AtkImageNode /* Size=0xB8 */
 {
     /* 0x00 */ Component::GUI::AtkResNode AtkResNode;
@@ -15126,8 +15210,10 @@ struct Component::GUI::AtkStage /* Size=0x75DF8 */
     /*         */ byte _gap_0x2B8[0x80];
     /* 0x00338 */ Component::GUI::AtkCursor AtkCursor;
     /*         */ byte _gap_0x348[0x8];
-    /* 0x00350 */ void* AtkEventDispatcher;
-    /*         */ byte _gap_0x358[0x510];
+    /* 0x00350 */ byte AtkEventDispatcher[0x500];
+    /* 0x00850 */ unsigned __int32 NextEventDispatcherIndex;
+    /*         */ byte _gap_0x854[0x4];
+    /*         */ byte _gap_0x858[0x10];
     /* 0x00868 */ Component::GUI::AtkEvent* RegisteredEvents;
     /*         */ byte _gap_0x870[0x75588];
 };
