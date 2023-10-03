@@ -10,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 // common CreateAtkNode function E8 ?? ?? ?? ?? 48 8B 4E 08 49 8B D5 
 // type 5
 [StructLayout(LayoutKind.Explicit, Size = 0x130)]
-public unsafe partial struct AtkCounterNode {
+public unsafe partial struct AtkCounterNode : ICreatable {
     [FieldOffset(0x0)] public AtkResNode AtkResNode;
     [FieldOffset(0xB0)] public AtkUldPartsList* PartsList;
     [FieldOffset(0xB8)] public uint PartId;
@@ -21,8 +21,8 @@ public unsafe partial struct AtkCounterNode {
     [FieldOffset(0xC4)] public float Width;
     [FieldOffset(0xC8)] public Utf8String NodeText;
 
-    // [MemberFunction("E9 ?? ?? ?? ?? 45 33 C9 4C 8B C0 33 D2 B9 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 85 C0 74 5D")]
-    // public partial void Ctor();
+    [MemberFunction("E9 ?? ?? ?? ?? 45 33 C9 4C 8B C0 33 D2 B9 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 85 C0 0F 84 ?? ?? ?? ?? 48 8B C8 48 83 C4 20 5B E9 ?? ?? ?? ?? 45 33 C9 4C 8B C0 33 D2 B9 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 85 C0 74 5D")]
+    public partial void Ctor();
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 0E 8D 04 9B")]
     public partial void SetNumber(int number);
