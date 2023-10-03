@@ -5,16 +5,14 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //   Component::GUI::AtkUnitManager
 //     Component::GUI::AtkEventListener
 
-// size = 0x9D2C
-// ctor 40 53 48 83 EC 20 48 8B D9 E8 ?? ?? ?? ?? C6 83 ?? ?? ?? ?? ?? 48 8D 8B ?? ?? ?? ?
-
-[StructLayout(LayoutKind.Explicit, Size = 0x9D10)]
+// ctor "40 53 48 83 EC 20 48 8B D9 E8 ?? ?? ?? ?? C6 83 ?? ?? ?? ?? ?? 48 8D 8B ?? ?? ??"
+[StructLayout(LayoutKind.Explicit, Size = 0x9D18)]
 public unsafe partial struct RaptureAtkUnitManager {
     [FieldOffset(0x0)] public AtkUnitManager AtkUnitManager;
 
-    [FieldOffset(0x9C80)] public RaptureAtkModuleFlags Flags;
+    [FieldOffset(0x9C88)] public RaptureAtkModuleFlags Flags;
 
-    [FieldOffset(0x9CF8)] public UIModule.UiFlags UiFlags;
+    [FieldOffset(0x9D00)] public UIModule.UiFlags UiFlags;
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B F8 41 B0 01")]
     [GenerateCStrOverloads]
