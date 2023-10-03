@@ -2,6 +2,7 @@ using FFXIVClientStructs.FFXIV.Client.Game.Control;
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
 using FFXIVClientStructs.FFXIV.Client.Graphics.Vfx;
 using FFXIVClientStructs.FFXIV.Common.Math;
+using static FFXIVClientStructs.FFXIV.Client.Game.Character.CharacterSetup;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 // Client::Game::Character::Character
@@ -97,6 +98,8 @@ public unsafe partial struct Character {
     [FieldOffset(0xCB0)] public GameObjectID LookTargetId; // offset not updated for 6.5
 
     [FieldOffset(0x13C0)] public ushort VoiceId;
+
+    [FieldOffset(0x1418)] public CharacterSetup CharacterSetup;
 
     [FieldOffset(0x17C0)] public Balloon Balloon; // offset not updated for 6.5
 
@@ -206,13 +209,11 @@ public unsafe partial struct Character {
     [MemberFunction("E8 ?? ?? ?? ?? B8 ?? ?? ?? ?? 4C 3B F0")]
     public partial void SetSoftTargetId(GameObjectID id);
 
-    // Seemingly used for cutscenes and GPose.
-    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 9F ?? ?? ?? ?? 48 8D 8F")]
-    public partial ulong CopyFromCharacter(Character* source, CopyFlags flags);
+    [Obsolete("Use CharacterSetup.CopyFromCharacter", true)]
+    public ulong CopyFromCharacter(Character* source, CopyFlags flags) => CharacterSetup.CopyFromCharacter(source, flags);
 
     [Obsolete("Use CopyFromCharacter(Character*, CopyFlags)", true)]
     public ulong CopyFromCharacter(Character* source, uint flags) => CopyFromCharacter(source, (CopyFlags)flags);
-
     public bool IsMounted() {
         // inlined as of 6.5
         return this.Mount.MountId != 0;
@@ -221,8 +222,8 @@ public unsafe partial struct Character {
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4F ?? E8 ?? ?? ?? ?? 48 8B 4C 24 ??")]
     public partial void SetMode(CharacterModes mode, byte modeParam);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 45 0F B6 86 ?? ?? ?? ?? 48 8D 8F")]
-    public partial void SetupBNpc(uint bNpcBaseId, uint bNpcNameId = 0);
+    [Obsolete("Use CharacterSetup.SetupBNpc", true)]
+    public void SetupBNpc(uint bNpcBaseId, uint bNpcNameId = 0) => CharacterSetup.SetupBNpc(bNpcBaseId, bNpcNameId);
 
     /// <summary> Can only be used for Mounts, Minions, and Ornaments. Literally just checks if the game object at index - 1 is a character and returns that. </summary>
     [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 48 0F 45 F8")]
@@ -370,36 +371,5 @@ public unsafe partial struct Character {
         Carrying = 9, // Param is a Carry entry
         InPositionLoop = 11, // Param is an EmoteMode entry
         Performance = 16, // Unknown
-    }
-
-    [Flags]
-    public enum CopyFlags : uint {
-        None = 0x00,
-
-        Mount = 0x2,
-        ClassJob = 0x4,
-        Companion = 0x20,
-        WeaponHiding = 0x80,
-        Target = 0x400,
-        Name = 0x1000,
-        Position = 0x10000, // includes rotation
-        UseSecondaryCharaId = 0x200000,
-        Ornament = 0x400000,
-
-        // Unknowns included to improve readability of ToString, not to be used.
-        [Obsolete("do not use", true)] Unk000001 = 0x1,
-        [Obsolete("do not use", true)] Unk000008 = 0x8, // Copies Character+0x1B24
-        [Obsolete("do not use", true)] Unk000010 = 0x10,
-        [Obsolete("do not use", true)] Unk000040 = 0x40,
-        [Obsolete("do not use", true)] Unk000100 = 0x100,
-        [Obsolete("do not use", true)] Unk000200 = 0x200,
-        [Obsolete("do not use", true)] Unk000800 = 0x800,
-        [Obsolete("do not use", true)] Unk002000 = 0x2000,
-        [Obsolete("do not use", true)] Unk004000 = 0x4000,
-        [Obsolete("do not use", true)] Unk008000 = 0x8000, // Copies Character+0xBFC
-        [Obsolete("do not use", true)] Unk020000 = 0x20000,
-        [Obsolete("do not use", true)] Unk040000 = 0x40000,
-        [Obsolete("do not use", true)] Unk080000 = 0x80000,
-        [Obsolete("do not use", true)] Unk100000 = 0x100000,
     }
 }
