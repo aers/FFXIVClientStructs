@@ -24,7 +24,7 @@ public unsafe struct CharacterData {
     [FieldOffset(0x3A)] public byte ClassJob;
     [FieldOffset(0x3B)] public byte Level;
 
-    [FieldOffset(0x45)] public byte ShieldValue;
+    [FieldOffset(0x46)] public byte ShieldValue;
 
     [FieldOffset(0x47)] public byte OnlineStatus;
 }

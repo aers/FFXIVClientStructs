@@ -9,14 +9,14 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 //   Client::Graphics::Vfx::VfxDataListenner
 //   Client::Game::Character::CharacterData
 
-// size = 0x1B40
+// size = 0x1BD0
 // ctor E8 ?? ?? ?? ?? 48 8B C8 48 8B 43 08 45 33 C9
-[StructLayout(LayoutKind.Explicit, Size = 0x1B40)]
+[StructLayout(LayoutKind.Explicit, Size = 0x1BD0)]
 [VTableAddress("48 8D 05 ?? ?? ?? ?? 48 8B D9 48 89 01 48 8D 05 ?? ?? ?? ?? 48 89 81 ?? ?? ?? ?? 48 81 C1 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 8B ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 8B ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 35", 3)]
 public unsafe partial struct Character {
     [FieldOffset(0x0)] public GameObject GameObject;
 
-    [FieldOffset(0x1A8)] public CharacterData CharacterData;
+    [FieldOffset(0x1A0)] public CharacterData CharacterData;
 
     #region This is inside a new 0x48 byte class at offset 0x1A8
 
@@ -118,7 +118,7 @@ public unsafe partial struct Character {
     [FieldOffset(0x1AB0)] public GameObjectID CombatTaggerId;
 
     [Obsolete($"Use {nameof(TargetId)} instead.", true)]
-    [FieldOffset(0x1AB8)] public ulong TargetObjectID;
+    [FieldOffset(0x1B58)] public ulong TargetObjectID;
 
     /// <summary>
     /// The current (hard) target for this Character. This will not be set for the LocalPlayer.
@@ -127,7 +127,7 @@ public unsafe partial struct Character {
     /// Developers should generally use <see cref="GetTargetId"/> over reading this field directly, as it will
     /// properly handle resolving the target for the local player.
     /// </remarks>
-    [FieldOffset(0x1AB8)] public GameObjectID TargetId;
+    [FieldOffset(0x1B58)] public GameObjectID TargetId;
 
     /// <summary>
     /// The current soft target for this Character. This will not be set for the LocalPlayer.
@@ -136,7 +136,7 @@ public unsafe partial struct Character {
     /// Developers should generally use <see cref="GetSoftTargetId"/> over reading this field directly, as it will
     /// properly handle resolving the soft target for the local player.
     /// </remarks>
-    [FieldOffset(0x1AC0)] public GameObjectID SoftTargetId;
+    [FieldOffset(0x1B60)] public GameObjectID SoftTargetId;
 
     [FieldOffset(0x1B00)] public uint NameID;
 
@@ -168,7 +168,7 @@ public unsafe partial struct Character {
     // 0x10 = IsHostile
     // 0x20 = InCombat 
     // 0x40 = OffHandDrawn
-    [FieldOffset(0x1F2)] public byte StatusFlags;
+    [FieldOffset(0x1EB)] public byte StatusFlags;
 
     // 0x1 = Unknown
     // 0x2 = Unknown (always on for some reason?)
@@ -179,7 +179,7 @@ public unsafe partial struct Character {
     [FieldOffset(0x1F3)] public byte StatusFlags2;
     // 0x1 = WeaponDrawn
     // 0x2 = Unknown (Appears to always be set)
-    [FieldOffset(0x1B38)] public byte StatusFlags3;
+    [FieldOffset(0x1BC1)] public byte StatusFlags3;
     // 0x20 = GPose wetness toggled
     [FieldOffset(0x1B3A)] public byte StatusFlags4;
 
