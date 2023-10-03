@@ -41,7 +41,7 @@ public unsafe partial struct DrawDataContainer {
     [FieldOffset(0x18F)] public byte Flags2;
 
     [MemberFunction("E8 ?? ?? ?? ?? 41 B5 ?? FF C6")]
-    public partial void LoadEquipment(EquipmentSlot slot, EquipmentModelId modelId, bool force);
+    public partial void LoadEquipment(EquipmentSlot slot, EquipmentModelId* modelId, bool force);
 
 
     [MemberFunction("E8 ?? ?? ?? ?? 44 8B 9E")]
