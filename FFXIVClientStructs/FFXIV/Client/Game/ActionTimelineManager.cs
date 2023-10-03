@@ -8,11 +8,11 @@ public unsafe partial struct ActionTimelineManager {
 
     [FieldOffset(0x10)] public ActionTimelineDriver Driver;
 
-    [FieldOffset(0x2C0)] public float OverallSpeed; // The overall speed which is applied to all slots as well as things like particles attached to the owner
+    [FieldOffset(0x2C4)] public float OverallSpeed; // The overall speed which is applied to all slots as well as things like particles attached to the owner
 
-    [FieldOffset(0x2DC)] public ushort BaseOverride; // Forces base animation when character is in a Normal or AnimLock state
+    [FieldOffset(0x2E0)] public ushort BaseOverride; // Forces base animation when character is in a Normal or AnimLock state
 
-    [FieldOffset(0x2DE)] public ushort LipsOverride; // Forces the character lips to play timeline
+    [FieldOffset(0x2E2)] public ushort LipsOverride; // Forces the character lips to play timeline
 
     [FieldOffset(0x310)] public ushort BannerTimelineRowId;
     [FieldOffset(0x312)] public byte BannerFacialRowId;
