@@ -6480,11 +6480,9 @@ classes:
     funcs:
       0x141256080: ctor
   Client::UI::Agent::AgentPvPMap:
-    vtbls:
-      - ea: 0x141A71E78
-        base: Client::UI::Agent::AgentInterface
-    funcs:
-      0x140A42B70: ctor
+#    vtbls:
+#fail       - ea: 0x141A86708
+#        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentPvPMKSIntroduction:
     vtbls:
       - ea: 0x141A74BF0
@@ -6881,6 +6879,26 @@ classes:
     funcs:
       0x1412592E0: ctor
       0x141259360: Finalize
+  Client::UI::Agent::AgentTurnBreak:
+    vtbls:
+      - ea: 0x1419E2880
+        base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentSXTBattleLog:
+    vtbls:
+      - ea: 0x141A71E78
+        base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentFGSEnterDialog:
+    vtbls:
+      - ea: 0x141A86690
+        base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentFGSWinner:
+    vtbls:
+      - ea: 0x141A86780
+        base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentFGSResult:
+    vtbls:
+      - ea: 0x141A86708
+        base: Client::UI::Agent::AgentInterface
   Client::Game::UI::GameEventCallback:
     vtbls:
       - ea: 0x141A46A00
