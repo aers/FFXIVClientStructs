@@ -20,42 +20,65 @@ public unsafe partial struct Character {
 
     #region This is inside a new 0x48 byte class at offset 0x1A8
 
-    [FieldOffset(0x1B0), Obsolete("Use CharacterData.ModelScale", true)] public float ModelScale;
-    [FieldOffset(0x1B4), Obsolete("Use CharacterData.ModelCharaId", true)] public int ModelCharaId;
-    [FieldOffset(0x1B8), Obsolete("Use CharacterData.ModelSkeletonId", true)] public int ModelSkeletonId;
-    [FieldOffset(0x1BC), Obsolete("Use CharacterData.ModelCharaId_2", true)] public int ModelCharaId_2; // == -1 -> return ModelCharaId
-    [FieldOffset(0x1C0), Obsolete("Use CharacterData.ModelSkeletonId_2", true)] public int ModelSkeletonId_2; // == 0 -> return ModelSkeletonId
+    [FieldOffset(0x1B0), Obsolete("Use CharacterData.ModelScale", true)]
+    public float ModelScale;
+    [FieldOffset(0x1B4), Obsolete("Use CharacterData.ModelCharaId", true)]
+    public int ModelCharaId;
+    [FieldOffset(0x1B8), Obsolete("Use CharacterData.ModelSkeletonId", true)]
+    public int ModelSkeletonId;
+    [FieldOffset(0x1BC), Obsolete("Use CharacterData.ModelCharaId_2", true)]
+    public int ModelCharaId_2; // == -1 -> return ModelCharaId
+    [FieldOffset(0x1C0), Obsolete("Use CharacterData.ModelSkeletonId_2", true)]
+    public int ModelSkeletonId_2; // == 0 -> return ModelSkeletonId
 
-    [FieldOffset(0x1C4), Obsolete("Use CharacterData.Health", true)] public uint Health;
-    [FieldOffset(0x1C8), Obsolete("Use CharacterData.MaxHealth", true)] public uint MaxHealth;
-    [FieldOffset(0x1CC), Obsolete("Use CharacterData.Mana", true)] public uint Mana;
-    [FieldOffset(0x1D0), Obsolete("Use CharacterData.MaxMana", true)] public uint MaxMana;
-    [FieldOffset(0x1D4), Obsolete("Use CharacterData.GatheringPoints", true)] public ushort GatheringPoints;
-    [FieldOffset(0x1D6), Obsolete("Use CharacterData.MaxGatheringPoints", true)] public ushort MaxGatheringPoints;
-    [FieldOffset(0x1D8), Obsolete("Use CharacterData.CraftingPoints", true)] public ushort CraftingPoints;
-    [FieldOffset(0x1DA), Obsolete("Use CharacterData.MaxCraftingPoints", true)] public ushort MaxCraftingPoints;
-    [FieldOffset(0x1DC), Obsolete("Use CharacterData.TransformationId", true)] public short TransformationId;
-    [FieldOffset(0x1DE), Obsolete("Use CharacterData.StatusEffectVFXId", true)] public short StatusEffectVFXId; // outdated since TitleID moved here
-    [FieldOffset(0x1DE), Obsolete("Use CharacterData.TitleID", true)] public ushort TitleID;
+    [FieldOffset(0x1C4), Obsolete("Use CharacterData.Health", true)]
+    public uint Health;
+    [FieldOffset(0x1C8), Obsolete("Use CharacterData.MaxHealth", true)]
+    public uint MaxHealth;
+    [FieldOffset(0x1CC), Obsolete("Use CharacterData.Mana", true)]
+    public uint Mana;
+    [FieldOffset(0x1D0), Obsolete("Use CharacterData.MaxMana", true)]
+    public uint MaxMana;
+    [FieldOffset(0x1D4), Obsolete("Use CharacterData.GatheringPoints", true)]
+    public ushort GatheringPoints;
+    [FieldOffset(0x1D6), Obsolete("Use CharacterData.MaxGatheringPoints", true)]
+    public ushort MaxGatheringPoints;
+    [FieldOffset(0x1D8), Obsolete("Use CharacterData.CraftingPoints", true)]
+    public ushort CraftingPoints;
+    [FieldOffset(0x1DA), Obsolete("Use CharacterData.MaxCraftingPoints", true)]
+    public ushort MaxCraftingPoints;
+    [FieldOffset(0x1DC), Obsolete("Use CharacterData.TransformationId", true)]
+    public short TransformationId;
+    [FieldOffset(0x1DE), Obsolete("Use CharacterData.StatusEffectVFXId", true)]
+    public short StatusEffectVFXId; // outdated since TitleID moved here
+    [FieldOffset(0x1DE), Obsolete("Use CharacterData.TitleID", true)]
+    public ushort TitleID;
 
-    [FieldOffset(0x1E2), Obsolete("Use CharacterData.ClassJob", true)] public byte ClassJob;
-    [FieldOffset(0x1E3), Obsolete("Use CharacterData.Level", true)] public byte Level;
+    [FieldOffset(0x1E2), Obsolete("Use CharacterData.ClassJob", true)]
+    public byte ClassJob;
+    [FieldOffset(0x1E3), Obsolete("Use CharacterData.Level", true)]
+    public byte Level;
 
-    [FieldOffset(0x1ED), Obsolete("Use CharacterData.ShieldValue", true)] public byte ShieldValue;
+    [FieldOffset(0x1ED), Obsolete("Use CharacterData.ShieldValue", true)]
+    public byte ShieldValue;
 
-    [FieldOffset(0x1EF), Obsolete("Use CharacterData.OnlineStatus", true)] public byte OnlineStatus;
+    [FieldOffset(0x1EF), Obsolete("Use CharacterData.OnlineStatus", true)]
+    public byte OnlineStatus;
 
     #endregion
 
     [FieldOffset(0x620)] public EmoteController EmoteController;
 
-    [FieldOffset(0x641), Obsolete("Use EmoteController.CPoseState", true)] public byte CPoseState;
+    [FieldOffset(0x641), Obsolete("Use EmoteController.CPoseState", true)]
+    public byte CPoseState;
     [FieldOffset(0x660)] public MountContainer Mount;
     [FieldOffset(0x6C8)] public CompanionContainer Companion;
     [FieldOffset(0x6E8)] public DrawDataContainer DrawData;
 
-    [Obsolete($"Use {nameof(DrawData)}", true), FieldOffset(0x830)] public fixed byte EquipSlotData[4 * 10];
-    [Obsolete($"Use {nameof(DrawData)}.CustomizeData", true), FieldOffset(0x858)] public fixed byte CustomizeData[0x1A];
+    [Obsolete($"Use {nameof(DrawData)}", true), FieldOffset(0x830)]
+    public fixed byte EquipSlotData[4 * 10];
+    [Obsolete($"Use {nameof(DrawData)}.CustomizeData", true), FieldOffset(0x858)]
+    public fixed byte CustomizeData[0x1A];
 
     [FieldOffset(0x878)] public OrnamentContainer Ornament;
     [FieldOffset(0x8E0)] public ReaperShroudContainer ReaperShroud;
@@ -204,8 +227,10 @@ public unsafe partial struct Character {
     [Obsolete("Use CopyFromCharacter(Character*, CopyFlags)", true)]
     public ulong CopyFromCharacter(Character* source, uint flags) => CopyFromCharacter(source, (CopyFlags)flags);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 4C 8B 7F 48")]
-    public partial bool IsMounted();
+    public bool IsMounted() {
+        // inlined as of 6.5
+        return this.Mount.MountId != 0;
+    }
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4F ?? E8 ?? ?? ?? ?? 48 8B 4C 24 ??")]
     public partial void SetMode(CharacterModes mode, byte modeParam);

@@ -234,7 +234,7 @@ public unsafe partial struct PlayerState {
     /// </remarks>
     /// <param name="kitId">The kit ID to check for.</param>
     /// <returns>Returns true if the framer's kit is unlocked.</returns>
-    [MemberFunction("4C 8B C9 66 83 FA ?? 73")]
+    [MemberFunction("E9 ?? ?? ?? ?? 33 FF 0F 1F 40 00")]
     public partial bool IsFramersKitUnlocked(uint kitId);
 
     public bool IsAetherCurrentUnlocked(uint aetherCurrentId) {
@@ -353,6 +353,7 @@ public unsafe partial struct PlayerState {
     public partial bool IsPlayerStateFlagSet(PlayerStateFlag flag);
 
     #endregion
+
 }
 
 public enum PlayerStateFlag : uint {
@@ -365,7 +366,6 @@ public enum PlayerStateFlag : uint {
     IsPvPMentorStatusActive = 11,
     Unknown14 = 14,
 }
-
 
 public enum PoseType : byte {
     Idle = 0,

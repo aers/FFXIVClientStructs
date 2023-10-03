@@ -20,9 +20,14 @@ unsafe {
         var totalSigCount = Resolver.GetInstance.Addresses.Count;
         Console.WriteLine($"Unresolved count: {totalSigCount}");
 
-        Resolver.GetInstance.SetupSearchSpace(new IntPtr(bytes), relocFile.Length, textHeader.VirtualAddress,
-            textHeader.VirtualSize, dataHeader.VirtualAddress, dataHeader.VirtualSize,
-            rdataHeader.VirtualAddress, rdataHeader.VirtualSize);
+        Resolver.GetInstance.SetupSearchSpace(new IntPtr(bytes),
+            relocFile.Length,
+            textHeader.VirtualAddress,
+            textHeader.VirtualSize,
+            dataHeader.VirtualAddress,
+            dataHeader.VirtualSize,
+            rdataHeader.VirtualAddress,
+            rdataHeader.VirtualSize);
 
         var watch = new Stopwatch();
         watch.Start();
@@ -32,6 +37,11 @@ unsafe {
 
         var resolvedCount = Resolver.GetInstance.Addresses.Count(sig => sig.Value != 0);
         Console.WriteLine($"Resolved count: {resolvedCount} ({((float)resolvedCount / totalSigCount) * 100}%)");
+
+        Console.WriteLine("\n=== Broken Signatures ===");
+        var unresolvedSigs = Resolver.GetInstance.Addresses.Where(sig => sig.Value == 0);
+        foreach (var sig in unresolvedSigs)
+            Console.WriteLine($"[FAIL] {sig.Name}: {sig.String}");
 
         Console.WriteLine("\n=== Static Addresses ===");
         foreach (var address in Resolver.GetInstance.Addresses.Where(address => address is StaticAddress))

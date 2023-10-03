@@ -8,10 +8,10 @@ public partial struct AtkCursor {
     [MemberFunction("48 83 EC ?? 80 79 ?? ?? 74 ?? C6 41")]
     public partial void Hide();
 
-    [MemberFunction("48 83 EC 58 80 79 0E 00 75 68")]
+    [MemberFunction("48 83 EC 58 80 79 1A 00 75 6C")]
     public partial void Show();
 
-    [MemberFunction("E8 ?? ?? ?? ?? C6 47 0F 01")]
+    [MemberFunction("E8 ?? ?? ?? ?? C6 47 1B 01")]
     public partial void SetCursorType(CursorType type, byte a3 = 0);
 
     public enum CursorType : byte {

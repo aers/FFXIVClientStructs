@@ -17,7 +17,7 @@ public unsafe partial struct StatusManager {
     [MemberFunction("E8 ?? ?? ?? ?? 85 C0 79 ?? 48 8B 15")]
     public partial int GetStatusIndex(uint statusId, uint sourceId = 0xE0000000);
 
-    [MemberFunction("83 FA 1E 72 04 0F 57 C0")]
+    [MemberFunction("83 FA 3C 72 04 0F 57 C0")]
     public partial float GetRemainingTime(int statusIndex);
 
     [MemberFunction("E8 ?? ?? ?? ?? 3D ?? ?? ?? ?? 74 45")]
@@ -29,6 +29,6 @@ public unsafe partial struct StatusManager {
     [MemberFunction("E8 ?? ?? ?? ?? 49 8B CE E8 ?? ?? ?? ?? 84 C0 74 4E")]
     public partial void AddStatus(ushort statusId, ushort param = 0, void* u3 = null);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 83 FF 1E")]
+    [MemberFunction("E8 ?? ?? ?? ?? 83 FF 3C")]
     public partial void RemoveStatus(int statusIndex, byte u2 = 0); // u2 always appears to be 0
 }
