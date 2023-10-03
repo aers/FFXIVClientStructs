@@ -40,32 +40,31 @@ public enum FontType : byte {
 // size = 0x158
 // common CreateAtkNode function E8 ?? ?? ?? ?? 48 8B 4E 08 49 8B D5 
 // type 3
-[StructLayout(LayoutKind.Explicit, Size = 0x158)]
+[StructLayout(LayoutKind.Explicit, Size = 0x160)]
 public unsafe partial struct AtkTextNode : ICreatable {
     [FieldOffset(0x0)] public AtkResNode AtkResNode;
-    [FieldOffset(0xA8)] public uint TextId;
-    [FieldOffset(0xAC)] public ByteColor TextColor;
-    [FieldOffset(0xB0)] public ByteColor EdgeColor;
-    [FieldOffset(0xB4)] public ByteColor BackgroundColor;
+    [FieldOffset(0xB0)] public uint TextId;
+    [FieldOffset(0xB4)] public ByteColor TextColor;
+    [FieldOffset(0xB8)] public ByteColor EdgeColor;
+    [FieldOffset(0xBC)] public ByteColor BackgroundColor;
 
-    [FieldOffset(0xB8)] public Utf8String NodeText;
+    [FieldOffset(0xC0)] public Utf8String NodeText;
 
-    [FieldOffset(0x128)] public void* UnkPtr_1;
+    [FieldOffset(0x130)] public void* UnkPtr_1;
 
     // if text is "asdf" and you selected "sd" this is 2, 3
-    [FieldOffset(0x138)] public uint SelectStart;
-    [FieldOffset(0x13C)] public uint SelectEnd;
-    [FieldOffset(0x14A)] public byte LineSpacing;
-
-    [FieldOffset(0x14B)] public byte CharSpacing;
+    [FieldOffset(0x140)] public uint SelectStart;
+    [FieldOffset(0x144)] public uint SelectEnd;
+    [FieldOffset(0x152)] public byte LineSpacing;
+    [FieldOffset(0x153)] public byte CharSpacing;
 
     // alignment bits 0-3 font type bits 4-7
-    [FieldOffset(0x14C)] public byte AlignmentFontType;
-    [FieldOffset(0x14D)] public byte FontSize;
-    [FieldOffset(0x14E)] public byte SheetType;
-    [FieldOffset(0x150)] public ushort FontCacheHandle;
-    [FieldOffset(0x152)] public byte TextFlags;
-    [FieldOffset(0x153)] public byte TextFlags2;
+    [FieldOffset(0x154)] public byte AlignmentFontType;
+    [FieldOffset(0x155)] public byte FontSize;
+    [FieldOffset(0x156)] public byte SheetType;
+    [FieldOffset(0x158)] public ushort FontCacheHandle;
+    [FieldOffset(0x15A)] public byte TextFlags;
+    [FieldOffset(0x15B)] public byte TextFlags2;
 
     [MemberFunction(
         "E9 ?? ?? ?? ?? 45 33 C9 4C 8B C0 33 D2 B9 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 85 C0 0F 84 ?? ?? ?? ?? 48 8B C8 48 83 C4 20 5B E9 ?? ?? ?? ?? 45 33 C9 4C 8B C0 33 D2 B9 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 85 C0 0F 84 ?? ?? ?? ?? 48 8B C8 48 83 C4 20 5B E9 ?? ?? ?? ?? 45 33 C9 4C 8B C0 33 D2 B9 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 85 C0 74 5D")]

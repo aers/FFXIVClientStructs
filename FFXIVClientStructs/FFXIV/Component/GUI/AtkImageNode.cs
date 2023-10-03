@@ -19,13 +19,13 @@ public enum ImageNodeFlags {
 // size = 0xB8
 // common CreateAtkNode function E8 ?? ?? ?? ?? 48 8B 4E 08 49 8B D5 
 // type 2
-[StructLayout(LayoutKind.Explicit, Size = 0xB8)]
+[StructLayout(LayoutKind.Explicit, Size = 0xC0)]
 public unsafe partial struct AtkImageNode : ICreatable {
     [FieldOffset(0x0)] public AtkResNode AtkResNode;
-    [FieldOffset(0xA8)] public AtkUldPartsList* PartsList;
-    [FieldOffset(0xB0)] public ushort PartId;
-    [FieldOffset(0xB2)] public byte WrapMode;
-    [FieldOffset(0xB3)] public byte Flags; // actually a bitfield
+    [FieldOffset(0xB0)] public AtkUldPartsList* PartsList;
+    [FieldOffset(0xB8)] public ushort PartId;
+    [FieldOffset(0xBA)] public byte WrapMode;
+    [FieldOffset(0xBB)] public byte Flags; // actually a bitfield
 
     [MemberFunction(
         "E9 ?? ?? ?? ?? 45 33 C9 4C 8B C0 33 D2 B9 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 85 C0 0F 84 ?? ?? ?? ?? 48 8B C8 48 83 C4 20 5B E9 ?? ?? ?? ?? 45 33 C9 4C 8B C0 33 D2 B9 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 85 C0 0F 84 ?? ?? ?? ?? 48 8B C8 48 83 C4 20 5B E9 ?? ?? ?? ?? 45 33 C9 4C 8B C0 33 D2 B9 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 85 C0 0F 84 ?? ?? ?? ??")]

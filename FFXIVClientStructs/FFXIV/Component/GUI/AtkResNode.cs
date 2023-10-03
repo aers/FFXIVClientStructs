@@ -11,7 +11,8 @@ public enum NodeType : ushort {
     NineGrid = 4,
     Counter = 5,
 
-    Collision = 8
+    Collision = 8,
+    UnknownNode10 = 10 // new 6.5
     // Component: >=1000
 }
 
@@ -46,7 +47,7 @@ public enum NodeFlags : ushort {
 
 // size = 0xA8
 // ctor E9 ?? ?? ?? ?? 33 C0 48 83 C4 20 5B C3 66 90 
-[StructLayout(LayoutKind.Explicit, Size = 0xA8)]
+[StructLayout(LayoutKind.Explicit, Size = 0xB0)]
 public unsafe partial struct AtkResNode : ICreatable {
     [FieldOffset(0x0)] public AtkEventTarget AtkEventTarget;
     [FieldOffset(0x8)] public uint NodeID;

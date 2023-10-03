@@ -15,12 +15,12 @@ public enum CollisionType : ushort {
 // size = 0xB8
 // common CreateAtkNode function E8 ?? ?? ?? ?? 48 8B 4E 08 49 8B D5 
 // type 8
-[StructLayout(LayoutKind.Explicit, Size = 0xB8)]
+[StructLayout(LayoutKind.Explicit, Size = 0xC0)]
 public unsafe partial struct AtkCollisionNode : ICreatable {
     [FieldOffset(0x0)] public AtkResNode AtkResNode;
-    [FieldOffset(0xA8)] public ushort CollisionType;
-    [FieldOffset(0xAA)] public ushort Uses;
-    [FieldOffset(0xB0)] public AtkComponentBase* LinkedComponent;
+    [FieldOffset(0xB0)] public ushort CollisionType;
+    [FieldOffset(0xB2)] public ushort Uses;
+    [FieldOffset(0xB8)] public AtkComponentBase* LinkedComponent;
 
     [MemberFunction("E9 ?? ?? ?? ?? 81 FB ?? ?? ?? ?? 72 24")]
     public partial void Ctor();
