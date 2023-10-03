@@ -40,6 +40,8 @@ public unsafe partial struct AddonTeleport {
     [FieldOffset(0x2D0)] public uint ListTotalCount;
     [FieldOffset(0x2D4)] public uint Unknown2D4; // Maybe just padding
 
-    [MemberFunction("E8 ?? ?? ?? ?? EB 4F 83 EA 01")]
-    public partial bool ChangeTab(uint tabIndex);
+    // 6.5: function removed due to rework?
+    // TODO: check what the click handler does at "E9 ?? ?? ?? ?? 41 83 FA 0D 0F 85 ?? ?? ?? ?? 48 8B 44 24 ?? 44 0F B6 40"
+    // [MemberFunction("E8 ?? ?? ?? ?? EB 4F 83 EA 01")]
+    // public partial bool ChangeTab(uint tabIndex);
 }
