@@ -120,112 +120,109 @@ public unsafe partial struct UIModule {
     [VirtualFunction(58)]
     public partial BannerModule* GetBannerModule();
 
-    [VirtualFunction(64)]
+    [VirtualFunction(65)]
     public partial UIInputData* GetUIInputData();
 
-    [VirtualFunction(65)]
+    [VirtualFunction(66)]
     public partial void* GetUIInputModule();
 
-    [VirtualFunction(67)]
+    [VirtualFunction(68)]
     public partial void* GetLogFilterConfig();
 
-    [VirtualFunction(75)]
+    [VirtualFunction(76)]
     public partial bool EnterGPose();
 
-    [VirtualFunction(76)]
+    [VirtualFunction(77)]
     public partial void ExitGPose();
 
-    [VirtualFunction(77)]
+    [VirtualFunction(78)]
     public partial bool IsInGPose();
 
-    [VirtualFunction(78)]
+    [VirtualFunction(79)]
     public partial void EnterIdleCam(byte a1 = 0, ulong focusObject = 0xE0000000);
 
-    [VirtualFunction(79)]
+    [VirtualFunction(80)]
     public partial void ExitIdleCam();
 
-    [VirtualFunction(80)]
+    [VirtualFunction(81)]
     public partial bool IsInIdleCam();
 
-    [VirtualFunction(141)]
+    [VirtualFunction(143)]
     public partial void ToggleUi(UiFlags flags, bool enable, bool unknown = true);
 
-    [VirtualFunction(151)]
+    [VirtualFunction(153)]
     public partial void ShowGoldSaucerReward(byte type, uint mgp, uint rewardItemId, uint rewardItemCount);
 
-    [VirtualFunction(152)]
+    [VirtualFunction(154)]
     public partial void HideGoldSaucerReward();
 
-    [VirtualFunction(153)]
+    [VirtualFunction(155)]
     public partial void ShowTextRelicAtma(uint itemId);
 
-    [VirtualFunction(160)]
+    [VirtualFunction(163)]
     public partial void ShowHousingHarvest(uint itemId, int amount, uint image = 0);
 
-    [VirtualFunction(164)]
-    public partial void ShowImage(uint imageId, bool useLocalePath = false, int displayType = 0, bool playSound = false);
-
-    [VirtualFunction(165)]
-    [GenerateCStrOverloads]
-    public partial void ShowText(int position, byte* text, uint iconOrCheck1 = 0, bool playSound = true, uint iconOrCheck2 = 0, bool alsoPlaySound = true);
-
-    [VirtualFunction(166)]
-    public partial void ShowTextChain(int chain, int hqChain = 0);
-
     [VirtualFunction(167)]
-    [GenerateCStrOverloads]
-    public partial void ShowAreaText(byte* text, int layer = 0, bool isTop = true, bool isFast = false, uint logMessageId = 0);
+    public partial void ShowImage(uint imageId, bool useLocalePath = false, int displayType = 0, bool playSound = false);
 
     [VirtualFunction(168)]
     [GenerateCStrOverloads]
-    public partial void ShowPoisonText(byte* text, int layer = 0);
+    public partial void ShowText(int position, byte* text, uint iconOrCheck1 = 0, bool playSound = true, uint iconOrCheck2 = 0, bool alsoPlaySound = true);
 
     [VirtualFunction(169)]
+    public partial void ShowTextChain(int chain, int hqChain = 0);
+
+    [VirtualFunction(170)]
+    [GenerateCStrOverloads]
+    public partial void ShowAreaText(byte* text, int layer = 0, bool isTop = true, bool isFast = false, uint logMessageId = 0);
+
+    [VirtualFunction(171)]
+    [GenerateCStrOverloads]
+    public partial void ShowPoisonText(byte* text, int layer = 0);
+
+    [VirtualFunction(172)]
     [GenerateCStrOverloads]
     public partial void ShowErrorText(byte* text, bool forceVisible = true);
 
-    [VirtualFunction(170)]
+    [VirtualFunction(173)]
     public partial void ShowTextClassChange(uint classJobId);
 
-    [VirtualFunction(171)]
+    [VirtualFunction(174)]
     public partial void ShowGetAction(ActionType actionType, uint actionId);
 
-    [VirtualFunction(172)]
+    [VirtualFunction(175)]
     public partial void ShowLocationTitle(int territoryId, bool zoomAnim, bool restartAnim, int* language /*-1 = client lang*/);
 
-    [VirtualFunction(176)]
+    [VirtualFunction(179)]
     public partial void ShowGrandCompany1(uint gc, uint gcRank, bool playSound = true);
 
-    [VirtualFunction(179)]
+    [VirtualFunction(182)]
     public partial void ShowStreak(int streak, int streakType);
 
-    [VirtualFunction(180)]
+    [VirtualFunction(183)]
     public partial void ShowAddonKillStreakForManeuvers(int streak, int streakType);
 
-    [VirtualFunction(181)]
+    [VirtualFunction(184)]
     public partial void ShowBalloonMessage(float* worldPosition, byte pz, uint textImage); //121501 -> Nice Shot!
-
-    [VirtualFunction(182)]
-    [GenerateCStrOverloads]
-    public partial void ShowBattleTalk(byte* name, byte* text, float duration, byte style);
-
-    [VirtualFunction(183)]
-    [GenerateCStrOverloads]
-    public partial void ShowBattleTalkImage(byte* name, byte* text, float duration, uint image, byte style);
 
     [VirtualFunction(185)]
     [GenerateCStrOverloads]
+    public partial void ShowBattleTalk(byte* name, byte* text, float duration, byte style);
+
+    [VirtualFunction(186)]
+    [GenerateCStrOverloads]
+    public partial void ShowBattleTalkImage(byte* name, byte* text, float duration, uint image, byte style);
+
+    [VirtualFunction(188)]
+    [GenerateCStrOverloads]
     public partial void ShowBattleTalkSound(byte* name, byte* text, float duration, int sound, byte style);
 
-    [VirtualFunction(190)]
+    [VirtualFunction(193)]
     public partial void ExecuteMainCommand(uint command);
 
-    [VirtualFunction(191)]
+    [VirtualFunction(194)]
     public partial bool IsMainCommandUnlocked(uint command);
-
-    [VirtualFunction(205)]
-    public partial void Test205(nint a1, nint a2, nint a3, nint a4);
-
+    
     [MemberFunction("E8 ?? ?? ?? ?? 4D 39 BE")]
     public static partial bool PlaySound(uint effectId, long a2 = 0, long a3 = 0, byte a4 = 0);
 
