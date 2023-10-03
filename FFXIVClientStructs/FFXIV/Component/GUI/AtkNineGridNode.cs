@@ -13,14 +13,14 @@ public unsafe partial struct AtkNineGridNode : ICreatable {
     [FieldOffset(0x0)] public AtkResNode AtkResNode;
     [FieldOffset(0xB0)] public AtkUldPartsList* PartsList;
     [FieldOffset(0xB8)] public uint PartID;
-    [FieldOffset(0xBA)] public short TopOffset;
-    [FieldOffset(0xBC)] public short BottomOffset;
-    [FieldOffset(0xBE)] public short LeftOffset;
-    [FieldOffset(0xC2)] public short RightOffset;
-    [FieldOffset(0xC4)] public uint BlendMode;
+    [FieldOffset(0xBC)] public short TopOffset;
+    [FieldOffset(0xBE)] public short BottomOffset;
+    [FieldOffset(0xC0)] public short LeftOffset;
+    [FieldOffset(0xC4)] public short RightOffset;
+    [FieldOffset(0xC8)] public uint BlendMode;
 
     // bit 1 = parts type, bit 2 = render type
-    [FieldOffset(0xC8)] public byte PartsTypeRenderType;
+    [FieldOffset(0xCC)] public byte PartsTypeRenderType;
 
     [MemberFunction(
         "E9 ?? ?? ?? ?? 45 33 C9 4C 8B C0 33 D2 B9 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 85 C0 0F 84 ?? ?? ?? ?? 48 8B C8 48 83 C4 20 5B E9 ?? ?? ?? ?? 45 33 C9 4C 8B C0 33 D2 B9 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 85 C0 74 5D")]
