@@ -78,7 +78,7 @@ public unsafe partial struct lua_State {
     [GenerateCStrOverloads]
     public partial int luaL_loadfile(byte* filename);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 85 C0 7E 10")]
+    [MemberFunction("E8 ?? ?? ?? ?? 3B C3 74 0D")]
     public partial LuaType lua_type(int idx);
 
     [MemberFunction("E8 ?? ?? ?? ?? 41 8B D3")]

@@ -20,7 +20,7 @@ public unsafe partial struct RaptureLogModule {
     [FixedSizeArray<RaptureLogModuleTab>(5)]
     [FieldOffset(0x528)] public fixed byte ChatTabs[5 * 0x928];
 
-    [FieldOffset(0x33E8)] public fixed byte ChatTabsPendingReload[4]; // set to 1 to reload the tab, see "48 8D 9E ?? ?? ?? ?? 48 8D BE ?? ?? ?? ?? 90"
+    [FieldOffset(0x33E8)] public fixed byte ChatTabsPendingReload[4]; // set to 1 to reload the tab, see "48 8D 9F ?? ?? ?? ?? 48 8D B7 ?? ?? ?? ?? 80 3B 00"
 
     [FieldOffset(0x3470)] public LogMessageSource* MsgSourceArray;
     [FieldOffset(0x3478)] public int MsgSourceArrayLength;

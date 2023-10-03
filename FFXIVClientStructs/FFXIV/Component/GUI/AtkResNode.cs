@@ -195,7 +195,7 @@ public unsafe partial struct AtkResNode {
     [MemberFunction("E8 ?? ?? ?? ?? 49 8D 7E 1E")]
     public partial float GetScaleY();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 7F 38")]
+    [MemberFunction("E8 ?? ?? ?? ?? F3 41 0F 58 F9")]
     public partial void SetScale(float X, float Y);
 
     [MemberFunction("E9 ?? ?? ?? ?? F3 0F 5E CA")]

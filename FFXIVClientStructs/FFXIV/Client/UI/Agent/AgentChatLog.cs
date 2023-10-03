@@ -14,7 +14,7 @@ public unsafe partial struct AgentChatLog {
     [FieldOffset(0x40)] public ChatChannel CurrentChannel;
     [FieldOffset(0x48)] public Utf8String ChannelLabel; // ie, "Say", "Party" that displays above the text input
 
-    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 49 8D 8E")]
+    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 81 FF ?? ?? ?? ?? 75 20")]
     public partial bool InsertTextCommandParam(uint textParamId, bool unk);
 }
 
