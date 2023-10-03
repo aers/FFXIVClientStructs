@@ -4171,8 +4171,8 @@ classes:
       0x1406CB2D0: SetItemSlotData
       0x1406CB460: ToggleDrawWeapon
       0x1406CB580: GetCharacter
-#fail       0x141448410: ToggleAnimationPlayback
-#fail       0x1414484B0: IsAnimationPaused
+      0x1414D4A50: ToggleAnimationPlayback
+      0x1414D4AF0: IsAnimationPaused
   Client::UI::Misc::CharaView::CharacterData:
     funcs:
       0x1414D2BF0: ctor
@@ -4186,31 +4186,31 @@ classes:
       5: SetCameraYawAndPitch
       6: SetCameraXAndY
       10: Update
-#    funcs:
-#fail       0x1414468E0: ctor
-#fail       0x141446B10: Initialize2
-#fail       0x1414474B0: ImportPortraitData
-#fail       0x1414479F0: ExportPortraitData
-#fail       0x141447D80: ToggleGearVisibility
-#fail       0x141447E10: SetCameraZoom
-#fail       0x141447E70: ResetCamera
-#fail       0x141447FC0: SetBackground
-#fail       0x141447FE0: SetHeadDirection
-#fail       0x141448070: ResetHeadDirection
-#fail       0x1414480E0: SetEyeDirection
-#fail       0x141448170: ResetEyeDirection
-#fail       0x1414481E0: SetExpression
-#fail       0x141448280: SetPoseTimed
-#fail       0x141448320: SetPose
-#fail       0x1414483D0: GetAnimationTime
-#fail       0x141448600: SetDirectionalLightingColor
-#fail       0x141448680: SetDirectionalLightingBrightness
-#fail       0x1414486B0: SetDirectionalLightingAngle
-#fail       0x1414486F0: SetAmbientLightingColor
-#fail       0x141448770: SetAmbientLightingBrightness
-#fail       0x141448AB0: ToggleCharacterVisibility
-#fail       0x141448D40: ApplyCameraPositions
-#fail       0x141449170: SetCameraPosition
+    funcs:
+      0x1414D2F20: ctor
+      0x1414D3150: Initialize2
+      0x1414D3AF0: ImportPortraitData
+      0x1414D4030: ExportPortraitData
+      0x1414D43C0: ToggleGearVisibility
+      0x1414D4450: SetCameraZoom
+      0x1414D44B0: ResetCamera
+      0x1414D4600: SetBackground
+      0x1414D4620: SetHeadDirection
+      0x1414D46B0: ResetHeadDirection
+      0x1414D4720: SetEyeDirection
+      0x1414D47B0: ResetEyeDirection
+      0x1414D4820: SetExpression
+      0x1414D48C0: SetPoseTimed
+      0x1414D4960: SetPose
+      0x1414D4A10: GetAnimationTime
+      0x1414D4C40: SetDirectionalLightingColor
+      0x1414D4CC0: SetDirectionalLightingBrightness
+      0x1414D4CF0: SetDirectionalLightingAngle
+      0x1414D4D30: SetAmbientLightingColor
+      0x1414D4DB0: SetAmbientLightingBrightness
+      0x1414D50F0: ToggleCharacterVisibility
+      0x1414D5380: ApplyCameraPositions
+      0x1414D57B0: SetCameraPosition
   Client::Game::SavedAppearanceManager:
     vtbls:
       - ea: 0x141A1EB98
@@ -6538,7 +6538,7 @@ classes:
       0x140BF5710: Finalize
       0x140BF06C0: AddGatheringTempMapMarker
       0x140BEF5E0: OpenMap
-#fail       0x140BDF080: OpenMapByMapId
+      0x140BFC3F0: OpenMapByMapId
       0x140BF0A50: SetFlagMapMarker # (this, territoryId, mapId, (float)x, (float)y, iconId)
       0x140BF9410: AddMapMarker
       0x140BF9810: AddMiniMapMarker
