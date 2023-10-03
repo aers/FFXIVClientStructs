@@ -284,7 +284,7 @@ classes:
         pointer: False
     funcs:
       0x140941FF0: CancelCrafting
-#fail       0x14092F870: IsRecipeUnlocked # (this, recipeId)  # inlined
+      0x140942F60: IsRecipeUnlocked # (this, recipeId)  # no xrefs
       0x1409434D0: FirstRecipeIndex
       0x140943490: GetRecipeByIndex # (this, index)
       0x140943510: GetSelectedRecipe
