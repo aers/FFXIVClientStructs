@@ -1,9 +1,9 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
-// ctor E8 ?? ?? ?? ?? 48 89 B3 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 B3 ?? ?? ?? ?? 
-[StructLayout(LayoutKind.Explicit, Size = 0xED8)]
+// ctor "E8 ?? ?? ?? ?? 48 89 AB ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 AB"
+[StructLayout(LayoutKind.Explicit, Size = 0x1B80)]
 public unsafe partial struct Buddy {
-    [StructLayout(LayoutKind.Explicit, Size = 0x198)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x300)]
     public struct BuddyMember {
         [FieldOffset(0x0)] public uint ObjectID;
         [FieldOffset(0x4)] public uint CurrentHealth;
@@ -20,29 +20,32 @@ public unsafe partial struct Buddy {
     }
 
     [FieldOffset(0x0)] public BuddyMember Companion;
-    [FieldOffset(0x198)] public BuddyMember Pet;
+    [FieldOffset(0x300)] public BuddyMember Pet;
     [FixedSizeArray<BuddyMember>(7)]
-    [FieldOffset(0x330)] public fixed byte BattleBuddies[0x198 * 7]; // BuddyMember array for Squadron/Trust
-    [FieldOffset(0xE58)] public BuddyMember* CompanionPtr;
-    [FieldOffset(0xE58)] private fixed byte BuddyEquipUnlock[1];
-    [FieldOffset(0xE60)] public float TimeLeft;
-    [FieldOffset(0xE73)] public fixed byte Name[21];
-    [FieldOffset(0xE88)] public uint CurrentXP;
-    [FieldOffset(0xE8C)] public byte Rank;
-    [FieldOffset(0xE8D)] public byte Stars;
-    [FieldOffset(0xE8E)] public byte SkillPoints;
-    [FieldOffset(0xE8F)] public byte DefenderLevel;
-    [FieldOffset(0xE90)] public byte AttackerLevel;
-    [FieldOffset(0xE91)] public byte HealerLevel;
-    [FieldOffset(0xE92)] public byte ActiveCommand;
-    [FieldOffset(0xE93)] public byte FavoriteFeed;
-    [FieldOffset(0xE94)] public byte CurrentColorStainId;
-    [FieldOffset(0xE95)] public byte Mounted; // bool
-    [FieldOffset(0xEA0)] public BuddyMember* PetPtr;
-    [FieldOffset(0xEB0)] public BuddyMember* SquadronTrustPtr;
+    [FieldOffset(0x600)] public fixed byte BattleBuddies[0x300 * 7]; // BuddyMember array for Squadron/Trust
+    [FieldOffset(0x1B00)] public BuddyMember* CompanionPtr;
+    [FieldOffset(0x1B08)] public float TimeLeft;
+    [FieldOffset(0x1B0C)] private fixed byte BuddyEquipUnlockBitmask[96 >> 3]; // number of BuddyEquip rows >> 3
+    [FieldOffset(0x1B18)] private byte BardingHead;
+    [FieldOffset(0x1B19)] private byte BardingChest;
+    [FieldOffset(0x1B1A)] private byte BardingFeet;
+    [FieldOffset(0x1B1B)] public fixed byte Name[21];
+    [FieldOffset(0x1B30)] public uint CurrentXP;
+    [FieldOffset(0x1B34)] public byte Rank;
+    [FieldOffset(0x1B35)] public byte Stars;
+    [FieldOffset(0x1B36)] public byte SkillPoints;
+    [FieldOffset(0x1B37)] public byte DefenderLevel;
+    [FieldOffset(0x1B38)] public byte AttackerLevel;
+    [FieldOffset(0x1B39)] public byte HealerLevel;
+    [FieldOffset(0x1B3A)] public byte ActiveCommand;
+    [FieldOffset(0x1B3B)] public byte FavoriteFeed;
+    [FieldOffset(0x1B3C)] public byte CurrentColorStainId;
+    [FieldOffset(0x1B3D)] public byte Mounted; // bool
+    [FieldOffset(0x1B48)] public BuddyMember* PetPtr;
+    [FieldOffset(0x1B58)] public BuddyMember* SquadronTrustPtr;
 
     public bool IsBuddyEquipUnlocked(uint buddyEquipId) {
-        fixed (byte* p = BuddyEquipUnlock) {
+        fixed (byte* p = BuddyEquipUnlockBitmask) {
             return IsBuddyEquipUnlockedInternal(p, buddyEquipId);
         }
     }
