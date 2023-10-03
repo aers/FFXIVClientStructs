@@ -2,7 +2,6 @@ using FFXIVClientStructs.FFXIV.Client.Game.Control;
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
 using FFXIVClientStructs.FFXIV.Client.Graphics.Vfx;
 using FFXIVClientStructs.FFXIV.Common.Math;
-using static FFXIVClientStructs.FFXIV.Client.Game.Character.CharacterSetup;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 // Client::Game::Character::Character
@@ -210,10 +209,10 @@ public unsafe partial struct Character {
     public partial void SetSoftTargetId(GameObjectID id);
 
     [Obsolete("Use CharacterSetup.CopyFromCharacter", true)]
-    public ulong CopyFromCharacter(Character* source, CopyFlags flags) => CharacterSetup.CopyFromCharacter(source, flags);
+    public ulong CopyFromCharacter(Character* source, CharacterSetup.CopyFlags flags) => CharacterSetup.CopyFromCharacter(source, flags);
 
     [Obsolete("Use CopyFromCharacter(Character*, CopyFlags)", true)]
-    public ulong CopyFromCharacter(Character* source, uint flags) => CopyFromCharacter(source, (CopyFlags)flags);
+    public ulong CopyFromCharacter(Character* source, uint flags) => CopyFromCharacter(source, (CharacterSetup.CopyFlags)flags);
     public bool IsMounted() {
         // inlined as of 6.5
         return this.Mount.MountId != 0;
