@@ -595,7 +595,7 @@ classes:
       0x140727C10: GetEquippedItemIdForSlot
       0x14072AD10: GetPermittedGearsetCount
       0x1407352D0: GetLimitedTomestoneCount
-#fail       0x1413BFEC0: GetSpecialItemId #static
+      0x14144C400: GetSpecialItemId #static
       0x140735340: GetLimitedTomestoneWeeklyLimit #static
   Client::Game::MonsterNoteManager:
     instances:
@@ -656,7 +656,7 @@ classes:
       0x140B88160: IsPouchItemLocked # (this, pouchItemId)
       0x140B863F0: IsFunctionUnlocked # (this, functionId)
       0x140B86630: HandleActorControlPacket
-#fail       0x140B6E090: HandleInboundPacket
+      0x140B87160: HandleInboundPacket
       0x140B885E0: GetVisibleMinimapIcons
       0x140B88170: IsItemLocked
       0x140B88330: GetPastureSlotCount
@@ -664,12 +664,12 @@ classes:
   Client::Game::MJI::IslandState:
     funcs:
       0x140B8BF90: ctor
-#  Client::Game::MJI::MJIPastureHandler:
-#    funcs:
-#fail       0x1414576A0: GetCurrentRoamingMinionCount
-#fail       0x141457810: SetMinionPlaceStatus  # (this, minionId, isPlaced)
-#fail       0x1414572C0: ExecuteReleaseMinion  # (this, minionId, areaId)
-#fail       0x141457450: ExecuteRecallMinion   # (this, minionId)
+  Client::Game::MJI::MJIPastureHandler:
+    funcs:
+      0x1414E3EB0: GetCurrentRoamingMinionCount
+      0x1414E4020: SetMinionPlaceStatus  # (this, minionId, isPlaced)
+      0x1414E3AD0: ExecuteReleaseMinion  # (this, minionId, areaId)
+      0x1414E3C60: ExecuteRecallMinion   # (this, minionId)
   Client::System::String::Utf8String:
     funcs:
       0x140059B20: ctor  # empty string ctor
