@@ -30,7 +30,7 @@ public unsafe partial struct UIState {
     [FieldOffset(0x49E0)] public RecipeNote RecipeNote;
 
     [FieldOffset(0xB560)] public Director* ActiveDirector;
-    [FieldOffset(0xB6A8)] public FateDirector* FateDirector; // 6.5: not updated yet
+    [FieldOffset(0xB6A8)] public FateDirector* FateDirector;
 
     [FieldOffset(0xB7F0)] public Map Map;
 
