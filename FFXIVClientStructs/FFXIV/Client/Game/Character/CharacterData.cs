@@ -1,6 +1,6 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 
-[StructLayout(LayoutKind.Explicit, Size = 0x48)]
+[StructLayout(LayoutKind.Explicit, Size = 0x68)]
 public unsafe struct CharacterData {
     [FieldOffset(0x0)] public void* vtbl;
     [FieldOffset(0x8)] public float ModelScale;
@@ -26,5 +26,20 @@ public unsafe struct CharacterData {
 
     [FieldOffset(0x46)] public byte ShieldValue;
 
-    [FieldOffset(0x47)] public byte OnlineStatus;
+    [FieldOffset(0x48)] public byte OnlineStatus;
+    [FieldOffset(0x49)] public byte Battalion; // used for determining friend/enemy state
+
+    // 0x1, 0x2, 0x4, 0x8 = Unknown
+    // 0x10 = IsHostile
+    // 0x20 = InCombat 
+    // 0x40 = OffHandDrawn
+    [FieldOffset(0x4B)] public byte Flags1;
+
+    // 0x1 = Unknown
+    // 0x2 = Unknown (always on for some reason?)
+    // 0x4 = Unknown
+    // 0x8 = PartyMember
+    // 0x10 = AllianceMember
+    // 0x20 = Friend
+    [FieldOffset(0x4C)] public byte Flags2;
 }
