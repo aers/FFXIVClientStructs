@@ -8,21 +8,21 @@ public unsafe partial struct Map {
     public static partial Map* Instance();
 
     [FixedSizeArray<MarkerInfo>(30)]
-    [FieldOffset(0x90)] public fixed byte QuestData[0x90 * 30];
+    [FieldOffset(0x98)] public fixed byte QuestData[0x90 * 30];
 
     [FixedSizeArray<MarkerInfo>(16)]
-    [FieldOffset(0x1170)] public fixed byte LevequestData[0x90 * 16];
+    [FieldOffset(0x1178)] public fixed byte LevequestData[0x90 * 16];
 
-    [FieldOffset(0x1AE8)] public StdVector<MapMarkerData> ActiveLevequestMarkerData;
-    [FieldOffset(0x1B10)] public MapMarkerContainer QuestMarkerData;
-    [FieldOffset(0x1B18)] public SimpleMapMarkerContainer SimpleQuestMarkerData;
-    [FieldOffset(0x1B58)] public MapMarkerContainer GuildLeveAssignmentMapMarkerData;
-    [FieldOffset(0x1BA0)] public MapMarkerContainer GuildOrderGuideMarkerData;
-    [FieldOffset(0x3E90)] public MapMarkerContainer TripleTriadMarkerData;
-    [FieldOffset(0x3EA0)] public MapMarkerContainer CustomTalkMarkerData;
-    [FieldOffset(0x3EA8)] public SimpleMapMarkerContainer SimpleCustomTalkMarkerData;
-    [FieldOffset(0x3F48)] public MapMarkerContainer GemstoneTraderMarkerData;
-    [FieldOffset(0x3F50)] public SimpleMapMarkerContainer SimpleGemstoneTraderMarkerData;
+    [FieldOffset(0x1AF0)] public StdVector<MapMarkerData> ActiveLevequestMarkerData;
+    [FieldOffset(0x1B18)] public MapMarkerContainer QuestMarkerData;
+    [FieldOffset(0x1B20)] public SimpleMapMarkerContainer SimpleQuestMarkerData;
+    [FieldOffset(0x1B60)] public MapMarkerContainer GuildLeveAssignmentMapMarkerData;
+    [FieldOffset(0x1BA8)] public MapMarkerContainer GuildOrderGuideMarkerData;
+    [FieldOffset(0x3E98)] public MapMarkerContainer TripleTriadMarkerData;
+    [FieldOffset(0x3EA8)] public MapMarkerContainer CustomTalkMarkerData;
+    [FieldOffset(0x3EB0)] public SimpleMapMarkerContainer SimpleCustomTalkMarkerData;
+    [FieldOffset(0x3F50)] public MapMarkerContainer GemstoneTraderMarkerData;
+    [FieldOffset(0x3F58)] public SimpleMapMarkerContainer SimpleGemstoneTraderMarkerData;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
