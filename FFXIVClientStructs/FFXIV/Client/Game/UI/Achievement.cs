@@ -3,7 +3,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 /// <summary>
 /// A struct representing the UIState Achievement
 /// </summary>
-[StructLayout(LayoutKind.Explicit, Size = 0x550)]
+[StructLayout(LayoutKind.Explicit, Size = 0x558)]
 public unsafe partial struct Achievement {
     [FieldOffset(0x00)] public void** vtbl;
     [FieldOffset(0x08)] public AchievementState State;

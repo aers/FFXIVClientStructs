@@ -4,7 +4,7 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.RecipeNote)]
-[StructLayout(LayoutKind.Explicit, Size = 0x560)]
+[StructLayout(LayoutKind.Explicit, Size = 0x568)]
 public unsafe partial struct AgentRecipeNote {
     [FieldOffset(0x0)] public AgentInterface AgentInterface;
 

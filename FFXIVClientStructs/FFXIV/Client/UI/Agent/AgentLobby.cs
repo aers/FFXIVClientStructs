@@ -7,7 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 // ctor "E8 ?? ?? ?? ?? EB 03 48 8B C5 45 33 C9 48 89 47 20"
 [Agent(AgentId.Lobby)]
 [VTableAddress("48 8D 05 ?? ?? ?? ?? 48 89 71 18 48 89 01", 3)]
-[StructLayout(LayoutKind.Explicit, Size = 0x1DD0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x1DF8)]
 public unsafe partial struct AgentLobby {
     [FieldOffset(0)] public AgentInterface AgentInterface;
 

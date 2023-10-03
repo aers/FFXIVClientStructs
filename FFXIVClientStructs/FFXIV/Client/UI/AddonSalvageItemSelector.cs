@@ -5,7 +5,7 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 [Addon("SalvageItemSelector")]
-[StructLayout(LayoutKind.Explicit, Size = 0x1CB0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x1CF8)]
 public unsafe partial struct AddonSalvageItemSelector {
     [FieldOffset(0x0000)] public AtkUnitBase AtkUnitBase;
 

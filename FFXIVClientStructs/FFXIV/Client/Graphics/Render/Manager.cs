@@ -4,7 +4,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 
 // size = 0x2D6C0
 // ctor 48 89 01 48 8D 59 08 
-[StructLayout(LayoutKind.Explicit, Size = 0x2D730)]
+[StructLayout(LayoutKind.Explicit, Size = 0x2D750)]
 public unsafe partial struct Manager {
     public enum RenderViews : uint {
         OmniShadow0 = 0,

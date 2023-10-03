@@ -5,8 +5,8 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
 //   Client::Graphics::ReferencedClassBase
 
 // ctor E8 ?? ?? ?? ?? 8B 55 18 48 8B F0
-// size = 0x408
-[StructLayout(LayoutKind.Explicit, Size = 0x408)]
+// size = 0x418
+[StructLayout(LayoutKind.Explicit, Size = 0x418)]
 public unsafe struct ShaderPackage {
     public const ushort SamplerSlotMaterial = 2;
 

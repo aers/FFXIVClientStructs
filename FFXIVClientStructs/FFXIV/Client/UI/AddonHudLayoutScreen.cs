@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 // size = 0x7E8
 // ctor 48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 48 8B D9 E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 8D 8B ?? ?? ?? ?? 48 89 03 E8 ?? ?? ?? ?? 48 8D 8B ?? ?? ?? ?? 
 [Addon("_HudLayoutScreen")]
-[StructLayout(LayoutKind.Explicit, Size = 0x8A8)]
+[StructLayout(LayoutKind.Explicit, Size = 0x8E8)]
 public unsafe struct AddonHudLayoutScreen {
     [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
     [FieldOffset(0x2C8)] public AddonHudLayoutWindow* HudLayoutWindow;

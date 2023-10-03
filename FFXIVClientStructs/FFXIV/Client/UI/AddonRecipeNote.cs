@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //   Component::GUI::AtkUnitBase
 //     Component::GUI::AtkEventListener
 [Addon("RecipeNote")]
-[StructLayout(LayoutKind.Explicit, Size = 0x22D0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x3B90)]
 public unsafe struct AddonRecipeNote {
     [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
     [FieldOffset(0x220)] public AtkTextNode* CurrentJobLevel; // Job Level String [ex: "Level 90"]

@@ -3,7 +3,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 // Client::Game::UI::ContentsNote
 // size = 0xA8
 // ctor inlined in UIState
-[StructLayout(LayoutKind.Explicit, Size = 0xA8)]
+[StructLayout(LayoutKind.Explicit, Size = 0xB8)]
 public unsafe partial struct ContentsNote {
     [FieldOffset(0x08)] public fixed byte CompletionFlags[11];
     [FieldOffset(0x1C)] public byte SelectedTab;
