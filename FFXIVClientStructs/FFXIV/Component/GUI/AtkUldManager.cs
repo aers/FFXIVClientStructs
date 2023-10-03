@@ -41,7 +41,8 @@ public unsafe partial struct AtkUldManager {
     [FieldOffset(0x42)] public ushort NodeListCount;
     [FieldOffset(0x48)] public void* AtkResourceRendererManager;
     [FieldOffset(0x50)] public AtkResNode** NodeList;
-    [FieldOffset(0x58), Obsolete("Use DuplicateObjectsList", true)] public AtkLinkedList<Pointer<DuplicateObjectList>> DuplicateObjects;
+    [FieldOffset(0x58), Obsolete("Use DuplicateObjectsList", true)]
+    public AtkLinkedList<Pointer<DuplicateObjectList>> DuplicateObjects;
     [FieldOffset(0x58)] public StdLinkedList<Pointer<DuplicateObjectList>> DuplicateObjectsList; // linked list of lists of duplicates
     [FieldOffset(0x78)] public AtkResNode* RootNode;
     [FieldOffset(0x80)] public ushort RootNodeWidth;
@@ -59,6 +60,6 @@ public unsafe partial struct AtkUldManager {
     [MemberFunction("48 89 5C 24 ?? 57 48 83 EC ?? 8B FA 33 DB E8")]
     public partial AtkComponentBase* CreateAtkComponent(ComponentType type);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 49 8B 4E 10 8B C5")]
+    [MemberFunction("E8 ?? ?? ?? ?? 49 8B 4F 10 41 8B C4")]
     public partial void UpdateDrawNodeList();
 }

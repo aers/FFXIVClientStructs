@@ -14,6 +14,6 @@ public unsafe partial struct CameraManager {
         }
     }
 
-    [StaticAddress("48 8B 05 ?? ?? ?? ?? 48 63 3A", 3, isPointer: true)]
+    [StaticAddress("48 C7 40 ?? ?? ?? ?? ?? 48 8B 01", 3, isPointer: true)]
     public static partial CameraManager* Instance();
 }

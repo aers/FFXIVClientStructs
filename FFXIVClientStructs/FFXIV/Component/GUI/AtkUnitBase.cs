@@ -89,7 +89,7 @@ public unsafe partial struct AtkUnitBase {
 
     /// <param name="arrayType">0 for StringArrayData or 1 for NumberArrayData</param>
     /// <param name="arrayIndex">The index in AtkArrayDataHolder</param>
-    [MemberFunction("E8 ?? ?? ?? ?? 44 8D 43 79")]
+    [MemberFunction("E8 ?? ?? ?? ?? 44 8D 43 7A")]
     public partial void SubscribeAtkArrayData(byte arrayType, byte arrayIndex);
 
     /// <param name="arrayType">0 for StringArrayData or 1 for NumberArrayData</param>
