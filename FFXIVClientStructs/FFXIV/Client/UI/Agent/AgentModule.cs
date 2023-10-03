@@ -23,7 +23,7 @@ public unsafe partial struct AgentModule {
     [FieldOffset(0xDA8)] public UIModule* UIModulePtr;
     [FieldOffset(0xDB0)] public AgentModule* AgentModulePtr;
 
-    [MemberFunction("E8 ?? ?? ?? ?? 83 FE 0D")]
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B7 A8")]
     public partial AgentInterface* GetAgentByInternalID(uint agentID);
 
     public AgentInterface* GetAgentByInternalId(AgentId agentId) {
@@ -409,7 +409,7 @@ public enum AgentId : uint {
     CharaCardProfileSetting = 400,
 
     PvPMKSIntroduction = 402,
-    MJIHud = 403,  // Island Sanctuary
+    MJIHud = 403, // Island Sanctuary
     MJIPouch = 404,
     MJIRecipeNoteBook = 405,
     MJICraftSchedule = 406,

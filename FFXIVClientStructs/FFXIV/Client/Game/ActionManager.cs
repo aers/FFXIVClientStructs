@@ -69,7 +69,7 @@ public unsafe partial struct ActionManager {
     [MemberFunction("40 53 48 83 EC ?? 48 63 DA 85 D2")]
     public partial RecastDetail* GetRecastGroupDetail(int recastGroup);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 85 C0 75 ?? 83 FF ?? 0F 85")]
+    [MemberFunction("E8 ?? ?? ?? ?? 85 C0 75 94")]
     public partial uint CheckActionResources(ActionType actionType, uint actionId, void* actionData = null);
 
     /// <summary>

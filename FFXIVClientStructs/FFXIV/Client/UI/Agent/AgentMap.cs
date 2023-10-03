@@ -23,17 +23,22 @@ public unsafe partial struct AgentMap {
     [FieldOffset(0x1C0)] public Utf8String SelectedMapPath;
     [FieldOffset(0x228)] public Utf8String SelectedMapBgPath;
     [FieldOffset(0x290)] public Utf8String CurrentMapBgPath;
-    [FieldOffset(0x2F8), FixedSizeArray<Utf8String>(4)] public fixed byte MapSelectionStrings[4 * 0x68]; // 4 * Utf8String
+    [FieldOffset(0x2F8), FixedSizeArray<Utf8String>(4)]
+    public fixed byte MapSelectionStrings[4 * 0x68]; // 4 * Utf8String
     [FieldOffset(0x498)] public Utf8String MapTitleString;
 
-    [FieldOffset(0x638), FixedSizeArray<MapMarkerInfo>(132)] public fixed byte MapMarkerInfoArray[0x48 * 132]; // 132 * MapMarkerInfo
-    [FieldOffset(0x2B58), FixedSizeArray<TempMapMarker>(12)] public fixed byte TempMapMarkerArray[0x110 * 12]; // 12 * TempMapMarker
+    [FieldOffset(0x638), FixedSizeArray<MapMarkerInfo>(132)]
+    public fixed byte MapMarkerInfoArray[0x48 * 132]; // 132 * MapMarkerInfo
+    [FieldOffset(0x2B58), FixedSizeArray<TempMapMarker>(12)]
+    public fixed byte TempMapMarkerArray[0x110 * 12]; // 12 * TempMapMarker
 
     [FieldOffset(0x3818)] public FlagMapMarker FlagMapMarker;
 
-    [FieldOffset(0x3860), FixedSizeArray<MapMarkerBase>(12)] public fixed byte WarpMarkerArray[0x38 * 12]; // 12 * MapMarkerBase
+    [FieldOffset(0x3860), FixedSizeArray<MapMarkerBase>(12)]
+    public fixed byte WarpMarkerArray[0x38 * 12]; // 12 * MapMarkerBase
     [FieldOffset(0x3B00)] public fixed byte UnkArray2[0xA8 * 6];
-    [FieldOffset(0x3EF0), FixedSizeArray<MiniMapMarker>(100)] public fixed byte MiniMapMarkerArray[0x40 * 100]; // 100 * MiniMapMarker
+    [FieldOffset(0x3EF0), FixedSizeArray<MiniMapMarker>(100)]
+    public fixed byte MiniMapMarkerArray[0x40 * 100]; // 100 * MiniMapMarker
 
     [FieldOffset(0x5898)] public float SelectedMapSizeFactorFloat;
     [FieldOffset(0x589C)] public float CurrentMapSizeFactorFloat;
@@ -66,13 +71,13 @@ public unsafe partial struct AgentMap {
     [FieldOffset(0x5E30)] public QuestLinkContainer MapQuestLinkContainer;
     [FieldOffset(0x68E8)] public QuestLinkContainer MiniMapQuestLinkContainer;
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 4C 24 ?? E8 ?? ?? ?? ?? 33 ED 48 8D 15")]
+    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8B 4B 10 48 85 C9")]
     public partial void SetFlagMapMarker(uint territoryId, uint mapId, float mapX, float mapY, uint iconId = 0xEC91);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 5C 24 ?? B0 ?? 48 8B B4 24")]
     public partial void OpenMapByMapId(uint mapId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 81 A7 ?? ?? ?? ?? ?? ?? ?? ?? 8D 55 05")]
+    [MemberFunction("E8 ?? ?? ?? ?? 49 8B 45 28 48 8D 8C 24")]
     public partial void OpenMap(OpenMapInfo* data);
 
     [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 7C 24 ?? 41 54 41 55 41 56 48 83 EC 20")]

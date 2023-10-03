@@ -32,7 +32,7 @@ public unsafe partial struct AgentLobby {
 
     [FieldOffset(0x1228)] public bool TemporaryLocked; // "Please wait and try logging in later."
 
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 07 C6 87 ?? ?? ?? ?? ?? 48 8B 4C 24")]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 07 C6 86 ?? ?? ?? ?? ?? 48 8B 8C 24")]
     public readonly partial void UpdateCharaSelectDisplay(sbyte index, bool a2);
 
     [MemberFunction("E8 ?? ?? ?? ?? EB 4A 84 C0")]
@@ -46,7 +46,7 @@ public unsafe partial struct LobbyData {
 
     [FieldOffset(0x858)] public StdVector<Pointer<CharaSelectCharacterEntry>> CharaSelectEntries;
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 48 08 49 89 8C 24")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 74 95")]
     public partial CharaSelectCharacterEntry* GetCharacterEntryByIndex(int a2, int worldIndex, int characterMappingIndex);
 }
 
