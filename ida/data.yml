@@ -7,7 +7,7 @@ globals:
   0x142177870: g_InputManager
   0x142177898: g_InputManager_MouseButtonHoldState
   0x1421B24E0: g_CurrentCharaSelectCharacter # Client::Game::Character::Character*
-#fail   0x142125280: g_CharaSelectCharacterList # see Client::UI::Agent::AgentLobby::CharaSelectCharacterList
+  0x1421B2700: g_CharaSelectCharacterList # see Client::UI::Agent::AgentLobby::CharaSelectCharacterList
   0x1421C4600: g_RenderSkeletonLinkedListStart
   0x1421C4608: g_RenderSkeletonLinkedListEnd
   0x1421C4660: g_RenderModelLinkedListStart
@@ -177,11 +177,11 @@ functions:
   0x1413B8050: lua_xmove
   0x1413B8F60: lua_resume
   0x1413B90B0: lua_yield
-#fail   0x14149F440: lua_gethook
-#fail   0x14149F450: lua_gethookcount
-#fail   0x14149F460: lua_gethookmask
-#fail   0x14149F650: lua_sethook
-#fail   0x14149F680: lua_setlocal
+  0x141536890: lua_gethook
+  0x1415368A0 : lua_gethookcount
+  0x1415368B0: lua_gethookmask
+  0x141536AA0: lua_sethook
+  0x141536AD0: lua_setlocal
   0x1413B92F0: luaL_openlibs
   0x1413B94E0: luaL_addlstring
   0x1413B9580: luaL_addstring
@@ -217,17 +217,17 @@ functions:
   0x1413BA9F0: luaL_typerror
   0x1413BAA50: luaL_unref
   0x1413BAAD0: luaL_where
-#fail   0x14149F470: lua_getinfo
-#fail   0x14149F560: lua_getlocal
-#fail   0x14149F5D0: lua_getstack
-#fail   0x1414A84E0: luaopen_base
-#fail   0x1414A9040: luaopen_table
-#fail   0x1414AA3E0: luaopen_io
-#fail   0x1414AB1B0: luaopen_os
-#fail   0x1414AC5D0: luaopen_string
-#fail   0x1414ADC40: luaopen_math
-#fail   0x1414AECD0: luaopen_debug
-#fail   0x1414AF7C0: luaopen_package
+  0x1415368C0: lua_getinfo
+  0x1415369B0: lua_getlocal
+  0x141536A20: lua_getstack
+  0x14153F930: luaopen_base
+  0x141540490: luaopen_table
+  0x141541830: luaopen_io
+  0x141542600: luaopen_os
+  0x141543A20: luaopen_string
+  0x141545090: luaopen_math
+  0x141546120: luaopen_debug
+  0x141546C10: luaopen_package
   0x1415FE530: crc
   0x1416591E4: ThrowException
   0x14167FAA4: FreeMemory
