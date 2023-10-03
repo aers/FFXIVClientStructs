@@ -7399,10 +7399,10 @@ classes:
       0x140EE0C20: Finalize2
   Client::UI::AddonRecipeNote:
     vtbls:
-      - ea: 0x141ACE608
+      - ea: 0x141AC7FB8
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x140EBDB00: ctor
+      0x140EE6490: ctor
       0x140EEBB20: ReceiveEvent_ClickSynthesizeButton
       0x140EEBB70: ReceiveEvent_ClickQuickSynthesisButton
       0x140EEBBC0: ReceiveEvent_ClickTrialSynthesisButton
