@@ -62,6 +62,6 @@ public unsafe partial struct AtkTooltipManager {
         ShowTooltip(AtkTooltipType.Text, parentId, targetNode, args);
     }
 
-    [MemberFunction(" E8 ?? ?? ?? ?? 41 F6 C5 08")]
+    [MemberFunction("E8 ?? ?? ?? ?? 41 F6 C5 08")]
     public partial void HideTooltip(ushort parentId, bool unk = false);
 }
