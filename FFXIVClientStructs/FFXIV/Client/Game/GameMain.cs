@@ -8,12 +8,12 @@ public unsafe partial struct GameMain {
 
     [FieldOffset(0xAD8)] public JobGaugeManager JobGaugeManager;
 
-    [FieldOffset(0x4010)] public uint CurrentTerritoryTypeId; // can be 0 during loading screens
-    [FieldOffset(0x4014)] public uint CurrentTerritoryIntendedUseId;
+    [FieldOffset(0x4088)] public uint CurrentTerritoryTypeId; // can be 0 during loading screens
+    [FieldOffset(0x408C)] public uint CurrentTerritoryIntendedUseId;
 
-    [FieldOffset(0x401C)] public ushort CurrentContentFinderConditionId;
+    [FieldOffset(0x4094)] public ushort CurrentContentFinderConditionId;
 
-    [FieldOffset(0x4028)] public uint CurrentMapId;
+    [FieldOffset(0x40A0)] public uint CurrentMapId;
 
     [StaticAddress("48 8D 0D ?? ?? ?? ?? 38 05", 3)]
     public static partial GameMain* Instance();
