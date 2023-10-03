@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 // size = 0xDB8
 // ctor E8 ?? ?? ?? ?? 48 8B 85 ?? ?? ?? ?? 49 8B CF 48 89 87
-[StructLayout(LayoutKind.Explicit, Size = 0xDB8)]
+[StructLayout(LayoutKind.Explicit, Size = 0xDF8)]
 public unsafe partial struct AgentModule {
     public static AgentModule* Instance() => Framework.Instance()->GetUiModule()->GetAgentModule();
 
@@ -17,11 +17,8 @@ public unsafe partial struct AgentModule {
     [FieldOffset(0x14)] public uint FrameCounter;
     [FieldOffset(0x18)] public float FrameDelta;
 
-    [FixedSizeArray<Pointer<AgentInterface>>(433)]
-    [FieldOffset(0x20)] public fixed byte Agents[433 * 8];
-
-    [FieldOffset(0xDA8)] public UIModule* UIModulePtr;
-    [FieldOffset(0xDB0)] public AgentModule* AgentModulePtr;
+    [FixedSizeArray<Pointer<AgentInterface>>(441)]
+    [FieldOffset(0x20)] public fixed byte Agents[441 * 8];
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F B7 A8")]
     public partial AgentInterface* GetAgentByInternalID(uint agentID);
@@ -128,7 +125,7 @@ public enum AgentId : uint {
     ArmouryBoard = 88,
     HowtoList = 89,
     Cabinet = 90,
-    //TODO new agent here
+    CabinetWithdraw = 91, // new in 6.50
     LegacyItemStorage = 92,
     GrandCompanyRank = 93,
     GrandCompanySupply = 94,
@@ -430,8 +427,7 @@ public enum AgentId : uint {
     MJIBuildingMove = 417,
     MJIEntrance = 418,
     MJISettings = 419,
-
-    //TODO new agent here
+    MJIHousingMenu = 420, // new in 6.40
 
     ArchiveItem = 423,
 
