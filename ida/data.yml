@@ -284,7 +284,7 @@ classes:
         pointer: False
     funcs:
       0x140941FF0: CancelCrafting
-#fail       0x14092F870: IsRecipeUnlocked # (this, recipeId)
+#dead       0x14092F870: IsRecipeUnlocked # (this, recipeId)  # inlined
       0x1409434D0: FirstRecipeIndex
       0x140943490: GetRecipeByIndex # (this, index)
       0x140943510: GetSelectedRecipe
@@ -435,7 +435,7 @@ classes:
     funcs:
       0x14077D5C0: Finalize
       0x14077D660: Initialize
-#fail       0x1407700C0: CreateQueuedBattleChara
+      0x14077E230: CreateQueuedBattleChara
       0x14077E2C0: OnReceiveCreatePlayerBattleCharaPacket
       0x14077E3A0: OnReceiveCreateNonPlayerBattleCharaPacket
       0x14077E5C0: ProcessBattleCharaCreationQueue
@@ -528,17 +528,17 @@ classes:
       0x140B8CCB0: Create
       0x140B8CBF0: GetGroupManager
       0x140B8CC10: GetNextInstance
-#  Client::Game::Balloon:
-#    funcs:
-#fail       0x141417D20: OpenBalloon
-#fail       0x141417D90: CloseBalloon
-#fail       0x141417E80: Initialize
-#fail       0x141417EC0: SetDefaultId
-#fail       0x141417ED0: Reset # this is near identical to Initialize but is called in update instead
-#fail       0x141417F10: Update
-#fail       0x141418070: Terminate
-#fail       0x1414180C0: StartTimerMode # (Balloon* this, float timer, ushort id) if id == 1 use default id else use id
-#fail       0x141418100: StartOtherMode # (Balloon* this, ushort id) id same as above
+  Client::Game::Balloon:
+    funcs:
+      0x1414A4900: OpenBalloon
+      0x1414A4970: CloseBalloon
+      0x1414A4A60: Initialize
+      0x1414A4AA0: SetDefaultId
+      0x1414A4AB0: Reset # this is near identical to Initialize but is called in update instead
+      0x1414A4AF0: Update
+      0x1414A4C50: Terminate
+      0x1414A4CA0: StartTimerMode # (Balloon* this, float timer, ushort id) if id == 1 use default id else use id
+      0x1414A4CE0: StartOtherMode # (Balloon* this, ushort id) id same as above
   Client::Game::Fate::FateManager:
     instances:
       - ea: 0x142228CE0
