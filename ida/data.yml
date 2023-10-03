@@ -50,7 +50,7 @@ globals:
   0x14218EFE0: g_OodlePrintf
   0x14265E960: ?hkaSkeletonMapperClass@@3VhkClass@@B
   0x14265E9E0: ?hkaAnimationContainerClass@@3VhkClass@@B
-#fail   0x1425CD510: ?hkReferencedObjectClass@@3VhkClass@@B
+  0x14265F990: ?hkReferencedObjectClass@@3VhkClass@@B
   0x14266A1B0: ?hkMonitorStream__m_instance@@3V?$hkThreadLocalData@PEAVhkMonitorStream@@@@A
   0x14266C320: ?hkMeshShapeClass@@3VhkClass@@B
   0x14266CC50: ?hkSkinnedRefMeshShapeClass@@3VhkClass@@B
@@ -517,7 +517,7 @@ classes:
       0x14092D870: SetPartyEmpty
       0x14092E600: GetAllianceMemberByGroupAndIndex  # (this, group, index)
       0x14092E660: GetAllianceMemberByIndex # (this, index)
-#fail       0x14091CE40: IsObjectIDInParty # (this, objectID)
+      0x14092E680: IsObjectIDInParty # (this, objectID)
       0x14092E6E0: IsCharacterInPartyByName # (this, char*)
       0x14092E760: IsObjectIDInAlliance
       0x14092E7D0: IsObjectIDPartyLeader
@@ -528,8 +528,8 @@ classes:
       0x140B8CCB0: Create
       0x140B8CBF0: GetGroupManager
       0x140B8CC10: GetNextInstance
-  Client::Game::Balloon:
-    funcs:
+#  Client::Game::Balloon:
+#    funcs:
 #fail       0x141417D20: OpenBalloon
 #fail       0x141417D90: CloseBalloon
 #fail       0x141417E80: Initialize
@@ -664,8 +664,8 @@ classes:
   Client::Game::MJI::IslandState:
     funcs:
       0x140B8BF90: ctor
-  Client::Game::MJI::MJIPastureHandler:
-    funcs:
+#  Client::Game::MJI::MJIPastureHandler:
+#    funcs:
 #fail       0x1414576A0: GetCurrentRoamingMinionCount
 #fail       0x141457810: SetMinionPlaceStatus  # (this, minionId, isPlaced)
 #fail       0x1414572C0: ExecuteReleaseMinion  # (this, minionId, areaId)
@@ -952,7 +952,7 @@ classes:
       0x1409C64A0: CanUseAction
       0x1409C6D30: GetAdjustedActionId
       0x1409C4580: CanPlayerClassUseAction
-#fail       0x1409B37B0: UseAction
+      0x1409C8D50: UseAction
       0x1409C9800: UseComboAction
       0x1409CA1A0: GetRecastTimerActive
       0x1409CA530: StartCooldown
@@ -1206,7 +1206,7 @@ classes:
   Common::Component::Excel::ExcelModuleInterface: # these are two different classes
     vtbls:
       - ea: 0x141D80EC0
-#fail       - ea: 0x141CFDA50
+      - ea: 0x141D80F50
         base: Common::Component::Excel::ExcelResourceListener
     vfuncs:
       1: GetSheetByIndex
@@ -1494,7 +1494,7 @@ classes:
       7: GetEntryCount
   Client::UI::Info::InfoProxyPageInterface:
     vtbls:
-#fail       - ea: 0x14194E1A8
+      - ea: 0x1419BCC20
         base: Client::UI::Info::InfoProxyInterface
     vfuncs:
       12: AddPage
@@ -2172,11 +2172,11 @@ classes:
       - ea: 0x141B439E0
         base: Client::Network::Protocol::Chat::PacketReceiverCallbackInterface
     funcs:
-#fail       0x14140CA60: HandleSocialPacket
+      0x141499620: HandleSocialPacket
 #fail       0x14140FFF0: HandleMarketBoardOfferingsPacket
-#fail       0x1414100B0: HandleMarketBoardPurchasePacket
+      0x14149CD40: HandleMarketBoardPurchasePacket
 #fail       0x141410B50: HandleMarketBoardHistoryPacket
-#fail       0x14140FF50: HandleMarketBoardItemRequestStartPacket
+      0x14149CBE0: HandleMarketBoardItemRequestStartPacket
   Client::Network::NetworkModulePacketReceiverCallback: # derives Application::Network::PacketReceiverCallbackInterface & Client::Network::PacketDispatcher
     vtbls:
       - ea: 0x1419DB880
@@ -4175,8 +4175,8 @@ classes:
 #fail       0x1414484B0: IsAnimationPaused
   Client::UI::Misc::CharaView::CharacterData:
     funcs:
-#fail       0x1414465B0: ctor
-#fail       0x141446600: ImportLocalPlayerEquipment
+      0x1414D2BF0: ctor
+      0x1414D2C40: ImportLocalPlayerEquipment
   Client::UI::Misc::CharaViewPortrait:
     vtbls:
       - ea: 0x141C4ADF0
@@ -4186,7 +4186,7 @@ classes:
       5: SetCameraYawAndPitch
       6: SetCameraXAndY
       10: Update
-    funcs:
+#    funcs:
 #fail       0x1414468E0: ctor
 #fail       0x141446B10: Initialize2
 #fail       0x1414474B0: ImportPortraitData
@@ -4258,8 +4258,6 @@ classes:
     vtbls:
       - ea: 0x141A20570
         base: Client::Game::Object::GameObject
-#fail       - ea: 0x1419AE458
-        base: Client::Graphics::Vfx::VfxDataListenner
       - ea: 0x141A20830
         base: Client::Game::Character::CharacterData
     vfuncs:
@@ -4294,10 +4292,10 @@ classes:
     vtbls:
       - ea: 0x141A20390
     funcs:
-#fail       0x1412BFB70: ctor
+      0x1413159B0: ctor
       0x141317190: LoadWeapon
       0x141317EB0: HideWeapons
-#fail       0x1412C2820: LoadEquipment
+      0x141318810: LoadEquipment
       0x1413189C0: HideHeadgear
       0x141318B20: SetVisor
   Client::Game::Character::CompanionContainer:
@@ -4305,7 +4303,7 @@ classes:
       - ea: 0x141B45930
     funcs:
       0x1413121F0: GetCompanionDataID
-#fail       0x1412BC4F0: SetCompanion
+      0x141312030: SetCompanion
   Client::Game::Character::OrnamentContainer:
     vtbls:
       - ea: 0x141A39A60
@@ -4313,7 +4311,7 @@ classes:
       0x141319260: HasOrnament
   Client::Game::Character::MountContainer:
     funcs:
-#fail       0x1412BF010: SetupMount
+      0x1413145B0: SetupMount
   Client::Game::Character::ReaperShroudContainer:
     vtbls:
       - ea: 0x141A39A88
@@ -4338,7 +4336,7 @@ classes:
       - ea: 0x141A362C0
   Client::UI::Shell::RaptureShellCommandInterface:
     vtbls:
-#fail       - ea: 0x1419C2910
+      - ea: 0x141A362D0
         base: Component::Shell::ShellCommandInterface
   Client::UI::Shell::RaptureShellModule:
     vtbls:
@@ -4659,7 +4657,7 @@ classes:
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandHotbarBase:
     vtbls:
-#fail       - ea: 0x1419C56E8
+      - ea: 0x141A39120
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandHotbar:
     vtbls:
@@ -4793,18 +4791,16 @@ classes:
     vtbls:
       - ea: 0x141A39B10
         base: Client::Game::Character::Character
-#fail       - ea: 0x1419C60E8
-        base: Client::Graphics::Vfx::VfxDataListenner
       - ea: 0x141A39DD0
         base: Client::Game::Character::CharacterData
     funcs:
       0x1407BC210: ctor
       0x1407BC4D0: Finalize
   Client::Game::TitleController:
-    vtbls:
+#    vtbls:
 #fail       - ea: 0x1419F9768
-    vfuncs:
-      0: dtor
+#    vfuncs:
+#      0: dtor
   Client::Game::TitleList:
     vtbls:
       - ea: 0x141A6DC70
@@ -4815,7 +4811,7 @@ classes:
       - ea: 0x141A6DC28
   Client::Game::UI::Hotbar:
     vtbls:
-#fail       - ea: 0x1419F97D0
+      - ea: 0x141A6DBE8
         base: Client::UI::Misc::RaptureHotbarModule::ClearCallback
     vfuncs:
       0: dtor
@@ -4951,7 +4947,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140D11890: ctor
-#fail       0x140D209B0: OpenForItemId
+      0x140D11930: OpenForItemId
   Client::UI::Agent::AgentFishRecord:
     vtbls:
       - ea: 0x141A8CAD8
@@ -6858,34 +6854,33 @@ classes:
       0x141296210: ctor
   Client::UI::Agent::AgentBannerInterface:
     vtbls:
-#fail       - ea: 0x141BC5B20
+      - ea: 0x141B3C878
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x14146D3D0: ctor
-#fail       0x14146D400: Finalize
+      0x141257570: Finalize
   Client::UI::Agent::AgentBannerInterface::Storage:
     funcs:
-#fail       0x14146D9B0: Update
+      0x141258590: Update
   Client::UI::Agent::AgentBannerInterface::Storage::CharacterData:
     vtbls:
-#fail       - ea: 0x141C06E28
+      - ea: 0x141B3C860
         base: Component::GUI::AtkModuleInterface::AtkEventInterface
     funcs:
-#fail       0x141538BF0: ctor
-#fail       0x141538CD0: dtor
+      0x141256700: ctor
+      0x1412567E0: dtor
   Client::UI::Agent::AgentBannerParty:
     vtbls:
       - ea: 0x141B3C908
         base: Client::UI::Agent::AgentBannerInterface
     funcs:
-#fail       0x14127FB60: ctor
+      0x1412579C0: ctor
   Client::UI::Agent::AgentBannerMIP:
     vtbls:
       - ea: 0x141B3C998
         base: Client::UI::Agent::AgentBannerInterface
     funcs:
-#fail       0x141280D30: ctor
-#fail       0x141280DA0: Finalize
+      0x1412592E0: ctor
+      0x141259360: Finalize
   Client::Game::UI::GameEventCallback:
     vtbls:
       - ea: 0x141A46A00
@@ -7469,7 +7464,7 @@ classes:
       - ea: 0x141B0A938
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x140FAD0E0: ctor
+      0x140FCFAC0: ctor
   Client::UI::AddonContentsInfoDetail:
     vtbls:
       - ea: 0x141AE06D8
@@ -7564,7 +7559,7 @@ classes:
       0x140F27CE0: ctor
   Client::UI::AddonMiragePrismPrismBoxCrystallize:
     vtbls:
-#fail       - ea: 0x141A59098
+      - ea: 0x141ACE608
         base: Component::GUI::AtkUnitBase
     funcs:
       0x140F2AF80: ctor
@@ -7678,7 +7673,7 @@ classes:
       0x141147B40: Finalize2
   Client::UI::AddonImage3:
     vtbls:
-#fail       - ea: 0x141A9EA08
+      - ea: 0x141B17450
         base: Client::UI::AddonImage
   Client::UI::AddonPopUpText:
     vtbls:
@@ -7704,15 +7699,15 @@ classes:
       - ea: 0x141B0AB78
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x140F93140: ctor
+      0x141123B50: ctor
       0x1410848B0: ReceiveEvent_ToggleQuickGathering
-#fail       0x140F93940: ReceiveEvent_Gather
+      0x141124350: ReceiveEvent_Gather
   Client::UI::AddonGatheringMasterpiece:
     vtbls:
       - ea: 0x141B0A460
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x140F94F40: ctor
+      0x141125A00: ctor
 #fail       0x140F95240: Finalize2
   Client::UI::AddonNamePlate::BakePlateRenderer:
     vtbls:
@@ -8665,7 +8660,7 @@ classes:
       - ea: 0x141C40BD0
         base: Client::Game::CameraBase
     funcs:
-#fail       0x141432000: ctor
+      0x1414BD150: ctor
   Client::Graphics::Culling::OcclusionCullingManager:
     instances:
       - ea: 0x1421C4620
@@ -8722,16 +8717,16 @@ classes:
     vtbls:
       - ea: 0x141B60B70
     funcs:
-#fail       0x141372A20: ctor
-#fail       0x141372E90: Reset
-#fail       0x141372F10: Update
-#fail       0x1413738F0: UpdateWithoutIntegration
+      0x1413FEFE0: ctor
+      0x1413FF450: Reset
+      0x1413FF4D0: Update
+      0x1413FFEB0: UpdateWithoutIntegration
   Client::Game::Object::Aetheryte:
     vtbls:
       - ea: 0x141B62558
         base: Client::Game::Object::GameObject
     funcs:
-#fail       0x1413984C0: Create
+      0x141424B40: Create
   Component::Log::LogModuleInterface:
     vtbls:
       - ea: 0x141B65E68
@@ -8751,8 +8746,8 @@ classes:
       - ea: 0x141B65EB8
         base: Component::Log::LogModuleInterface
     funcs:
-#fail       0x1413BD210: ctor
-#fail       0x1413BD2E0: Finalize
+      0x141449740: ctor
+      0x141449810: Finalize
   Client::Game::Object::HousingObject:
     vtbls:
       - ea: 0x141C32C40
@@ -8792,7 +8787,7 @@ classes:
       - ea: 0x142231C78
   Client::System::Scheduler::TimelineGroup:
     funcs:
-#fail       0x1413AFF10: PlayAction
+      0x14143C440: PlayAction
   Client::System::Scheduler::Base::TimelineController:
     vtbls:
       - ea: 0x141B52C38
@@ -8806,9 +8801,9 @@ classes:
       - ea: 0x141C528C0
         base: Client::System::Scheduler::Base::TimelineController
     funcs:
-#fail       0x14147ADC0: ctor
-#fail       0x14147BB30: PlayAction
-#fail       0x14147DD30: LoadTimelineResources
+      0x141512250: ctor
+      0x141512FC0: PlayAction
+      0x1415151C0: LoadTimelineResources
   Client::System::Scheduler::Resource::SchedulerResourceManagement:
     instances:
       - ea: 0x142233E48
@@ -8828,8 +8823,8 @@ classes:
       - ea: 0x141C52D38
         base: Client::System::Scheduler::Base::LinkList<Client::System::Scheduler::Resource::SchedulerResource>
     funcs:
-#fail       0x1414803A0: ctor
-#fail       0x1414808F0: GetResourceData
+      0x1415177F0: ctor
+      0x141517D40: GetResourceData
   Client::System::Scheduler::Base::BaseInstanceObject:
     vtbls:
       - ea: 0x141B4D528
@@ -8855,11 +8850,11 @@ classes:
         base: Client::System::Scheduler::SchedulerInstanceObject
   Client::System::Scheduler::Clip::BaseClip:
     vtbls:
-#fail       - ea: 0x141BCA000
+      - ea: 0x141B532A8
         base: Client::System::Scheduler::Base::SchedulerState
   Client::System::Scheduler::Clip::HavokAnimationClip:
     vtbls:
-#fail       - ea: 0x141BCB210
+      - ea: 0x141B544B8
         base: Client::System::Scheduler::Clip::BaseClip
   Client::System::Scheduler::Base::SceneConnectionBlock:
     vtbls:
@@ -9039,7 +9034,7 @@ classes:
       0x141806820: ?set@hkQsTransformf@@QEAA_NAEBVhkMatrix4f@@@Z
       0x1418067C0: ?set4x4ColumnMajor@hkQsTransformf@@QEAA_NPEBM@Z
       0x141805FB0: ?getAngleSr@hkQuaternionf@@QEBA?AVhkSimdFloat32@@XZ
-#fail       0x141798D30: ?isOk@hkQuaternionf@@QEBAIM@Z
+      0x1418060D0: ?isOk@hkQuaternionf@@QEBAIM@Z
       0x1418046D0: ?setAxisAngle@hkQuaternionf@@QEAAXAEBVhkVector4f@@M@Z
       0x141804710: ?setAxisAngle@hkQuaternionf@@QEAAXAEBVhkVector4f@@AEBVhkSimdFloat32@@@Z
       0x141804940: ?setFromEulerAngles@hkQuaternionf@@QEAAXMMM@Z
