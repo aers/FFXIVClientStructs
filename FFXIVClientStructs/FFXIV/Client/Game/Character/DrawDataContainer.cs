@@ -44,14 +44,14 @@ public unsafe partial struct DrawDataContainer {
     public partial void LoadEquipment(EquipmentSlot slot, EquipmentModelId modelId, bool force);
 
 
-    [MemberFunction("E8 ?? ?? ?? ?? 33 DB BE")]
+    [MemberFunction("E8 ?? ?? ?? ?? 44 8B 9E")]
     public partial void LoadWeapon(WeaponSlot slot, WeaponModelId weaponData, byte redrawOnEquality, byte unk2, byte skipGameObject, byte unk4);
 
     /// <summary>
     /// Called when Hide/Display Weapons when sheathed is toggled or /displayarms is used.
     /// </summary>
     /// <param name="hide">When false, weapons will be turned visible, when true, they will be hidden.</param>
-    [MemberFunction("E8 ?? ?? ?? ?? 4C 8B 6C 24 ?? 0F BA E5")]
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 86 ?? ?? ?? ?? A8 08")]
     public partial void HideWeapons(bool hide);
 
     /// <summary>
@@ -59,7 +59,7 @@ public unsafe partial struct DrawDataContainer {
     /// </summary>
     /// <param name="unk">Almost always 0, but sometimes not?</param>
     /// <param name="hide">When false, the headgear will be turned visible, when true it will be hidden.</param>
-    [MemberFunction("E8 ?? ?? ?? ?? 49 8B 04 ?? 80 A3")]
+    [MemberFunction("E8 ?? ?? ?? ?? 45 85 F6 75 92")]
     public partial void HideHeadgear(uint unk, bool hide);
 
     /// <summary>

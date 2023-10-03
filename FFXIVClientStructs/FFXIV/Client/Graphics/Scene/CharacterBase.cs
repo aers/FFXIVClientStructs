@@ -92,7 +92,7 @@ public unsafe partial struct CharacterBase {
     public readonly Span<Pointer<Material>> MaterialsSpan
         => new(Materials, SlotCount * 4);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 74 21 C7 40")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4E 08 48 8B D0 4C 8B 01")]
     public static partial CharacterBase* Create(uint modelId, CustomizeData* customize, EquipmentModelId* equipData /* 10 times, 40 byte */, byte unk);
 
     [MemberFunction("E8 ?? ?? ?? ?? 40 F6 C7 01 74 3A 40 F6 C7 04 75 27 48 85 DB 74 2F 48 8B 05 ?? ?? ?? ?? 48 8B D3 48 8B 48 30")]

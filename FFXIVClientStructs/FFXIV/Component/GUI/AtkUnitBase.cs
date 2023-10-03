@@ -149,35 +149,35 @@ public unsafe partial struct AtkUnitBase {
     [VirtualFunction(18)]
     public partial bool ShouldCollideWithWindow(AtkCollisionNode* collisionNode);
 
-    [VirtualFunction(39)]
+    [VirtualFunction(40)]
     public partial void Initialize();
 
     /// <remarks>
     /// The name "Finalizer" is used instead of "Finalize" to avoid conflicts
     /// with the <see cref="System.Object.Finalize"/> method.
     /// </remarks>
-    [VirtualFunction(40)]
+    [VirtualFunction(41)]
     public partial void Finalizer();
 
-    [VirtualFunction(41)]
+    [VirtualFunction(42)]
     public partial void Update(float delta);
 
-    [VirtualFunction(42)]
+    [VirtualFunction(43)]
     public partial void Draw();
 
-    [VirtualFunction(47)]
+    [VirtualFunction(48)]
     public partial void OnSetup(uint a2, AtkValue* atkValues);
 
-    [VirtualFunction(49)]
+    [VirtualFunction(50)]
     public partial void OnRefresh(uint numValues, AtkValue* values);
 
-    [VirtualFunction(50)]
+    [VirtualFunction(51)]
     public partial void OnUpdate(NumberArrayData** numberArrayData, StringArrayData** stringArrayData);
 
-    [VirtualFunction(60)]
+    [VirtualFunction(61)]
     public partial void OnMouseOver();
 
-    [VirtualFunction(61)]
+    [VirtualFunction(62)]
     public partial void OnMouseOut();
 
     [MemberFunction("E9 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 8D 15")]
