@@ -60,6 +60,38 @@ public unsafe partial struct AtkUldManager {
     [MemberFunction("48 89 5C 24 ?? 57 48 83 EC ?? 8B FA 33 DB E8")]
     public partial AtkComponentBase* CreateAtkComponent(ComponentType type);
 
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4C 24 ?? 48 8B 51 08")]
+    public partial AtkResNode* CreateAtkNode(NodeType type);
+
+    private static AtkResNode* CreateAtkNodeInternal(NodeType type) {
+        AtkUldManager* uldManager = stackalloc AtkUldManager[1];
+        return uldManager->CreateAtkNode(type);
+    }
+
+    public static AtkResNode* CreateAtkResNode() {
+        return CreateAtkNodeInternal(NodeType.Res);
+    }
+    
+    public static AtkImageNode* CreateAtkImageNode() {
+        return (AtkImageNode*) CreateAtkNodeInternal(NodeType.Image);
+    }
+    
+    public static AtkTextNode* CreateAtkTextNode() {
+        return (AtkTextNode*) CreateAtkNodeInternal(NodeType.Text);
+    }
+    
+    public static AtkNineGridNode* CreateAtkNineGridNode() {
+        return (AtkNineGridNode*) CreateAtkNodeInternal(NodeType.NineGrid);
+    }
+    
+    public static AtkCounterNode* CreateAtkCounterNode() {
+        return (AtkCounterNode*) CreateAtkNodeInternal(NodeType.Counter);
+    }
+    
+    public static AtkCollisionNode* CreateAtkCollisionNode() {
+        return (AtkCollisionNode*) CreateAtkNodeInternal(NodeType.Collision);
+    }
+
     [MemberFunction("E8 ?? ?? ?? ?? 49 8B 4F 10 41 8B C4")]
     public partial void UpdateDrawNodeList();
 }

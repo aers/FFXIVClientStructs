@@ -48,7 +48,7 @@ public enum NodeFlags : ushort {
 // size = 0xA8
 // ctor E9 ?? ?? ?? ?? 33 C0 48 83 C4 20 5B C3 66 90 
 [StructLayout(LayoutKind.Explicit, Size = 0xB0)]
-public unsafe partial struct AtkResNode : ICreatable {
+public unsafe partial struct AtkResNode {
     [FieldOffset(0x0)] public AtkEventTarget AtkEventTarget;
     [FieldOffset(0x8)] public uint NodeID;
     [FieldOffset(0x10)] public void* TimelineObject; // Component::GUI::AtkTimeline???
@@ -106,8 +106,8 @@ public unsafe partial struct AtkResNode : ICreatable {
 
     public bool IsVisible => NodeFlags.HasFlag(NodeFlags.Visible);
 
-    [MemberFunction("E9 ?? ?? ?? ?? 33 C0 48 83 C4 20 5B C3 66 90")]
-    public partial void Ctor();
+    // [MemberFunction("E9 ?? ?? ?? ?? 33 C0 48 83 C4 20 5B C3 66 90")]
+    // public partial void Ctor();
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B 54 FB 04")]
     public partial AtkImageNode* GetAsAtkImageNode();
