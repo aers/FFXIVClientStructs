@@ -9,7 +9,7 @@ public unsafe partial struct StatusManager {
     [FieldOffset(0x2D8)] public uint Flags1;
     [FieldOffset(0x2DC)] public ushort Flags2;
     [FieldOffset(0x2E0)] public long Unk_178;
-    [FieldOffset(0x2E4)] public byte Unk_180;
+    //[FieldOffset(0x2E8)] public byte Unk_180;
     [FieldOffset(0x2E8)] public byte NumValidStatuses;
 
     [MemberFunction("E8 ?? ?? ?? ?? 3C 01 74 B7")]
