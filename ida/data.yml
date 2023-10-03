@@ -8225,7 +8225,7 @@ classes:
       - ea: 0x141B1B630
         base: Component::GUI::AtkUnitBase
     vfuncs:
-      76: PulseActionBarSlot
+      78: PulseActionBarSlot
     funcs:
       0x141160450: ctor
   Client::UI::AddonActionBarX:
