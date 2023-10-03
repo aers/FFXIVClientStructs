@@ -96,6 +96,8 @@ public unsafe partial struct Character {
     /// </remarks>
     [FieldOffset(0xCB0)] public GameObjectID LookTargetId; // offset not updated for 6.5
 
+    [FieldOffset(0x13C0)] public ushort VoiceId;
+
     [FieldOffset(0x17C0)] public Balloon Balloon; // offset not updated for 6.5
 
     [FieldOffset(0x19C8)] public VfxData* VfxData; // offset not updated for 6.5
@@ -144,7 +146,6 @@ public unsafe partial struct Character {
     [FieldOffset(0x1BB0)] public ushort CurrentWorld;
     [FieldOffset(0x1BB2)] public ushort HomeWorld;
 
-    [FieldOffset(0x1B24)] public ushort VoiceId; // offset not updated for 6.5
     [FieldOffset(0x1B26)] public byte EventState; // Leave for backwards compat. See Mode. // offset not updated for 6.5
     [FieldOffset(0x1B26)] public CharacterModes Mode; // offset not updated for 6.5
     [FieldOffset(0x1B27)] public byte ModeParam; // Different purpose depending on mode. See CharacterModes for more info. // offset not updated for 6.5
