@@ -5,20 +5,20 @@ public unsafe partial struct InstanceContentDeepDungeon {
     [FieldOffset(0x00)] public InstanceContentDirector InstanceContentDirector;
 
     [FixedSizeArray<DeepDungeonPartyInfo>(4)]
-    [FieldOffset(0x1D40)] public fixed byte Party[0x08 * 4];
+    [FieldOffset(0x1D48)] public fixed byte Party[0x08 * 4];
     [FixedSizeArray<DeepDungeonItemInfo>(16)]
-    [FieldOffset(0x1D60)] public fixed byte Items[0x03 * 16];
+    [FieldOffset(0x1D68)] public fixed byte Items[0x03 * 16];
     [FixedSizeArray<DeepDungeonChestInfo>(16)]
-    [FieldOffset(0x1D90)] public fixed byte Chests[0x02 * 16];
+    [FieldOffset(0x1D98)] public fixed byte Chests[0x02 * 16];
 
-    [FieldOffset(0x1DC0)] public uint BonusLootItemId;
-    [FieldOffset(0x1DC4)] public byte Floor;
-    [FieldOffset(0x1DC5)] public byte ReturnProgress;
-    [FieldOffset(0x1DC6)] public byte PassageProgress;
+    [FieldOffset(0x1DC8)] public uint BonusLootItemId;
+    [FieldOffset(0x1DCC)] public byte Floor;
+    [FieldOffset(0x1DCD)] public byte ReturnProgress;
+    [FieldOffset(0x1DCE)] public byte PassageProgress;
 
-    [FieldOffset(0x1DC8)] public byte WeaponLevel;
-    [FieldOffset(0x1DC9)] public byte ArmorLevel;
-    [FieldOffset(0x1DCB)] public byte HoardCount;
+    [FieldOffset(0x1DD0)] public byte WeaponLevel;
+    [FieldOffset(0x1DD1)] public byte ArmorLevel;
+    [FieldOffset(0x1DD2)] public byte HoardCount;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x08)]
     public struct DeepDungeonPartyInfo {
