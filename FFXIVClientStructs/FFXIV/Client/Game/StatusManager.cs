@@ -1,15 +1,16 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
-[StructLayout(LayoutKind.Explicit, Size = 0x188)]
+[StructLayout(LayoutKind.Explicit, Size = 0x2F0)]
 public unsafe partial struct StatusManager {
     // This field is often null and cannot be relied on to retrieve the owning Character object
     [FieldOffset(0x0)] public Character.Character* Owner;
-    [FixedSizeArray<Status>(30)]
-    [FieldOffset(0x8)] public fixed byte Status[0xC * 30]; // Client::Game::Status array
-    [FieldOffset(0x170)] public uint Unk_170;
-    [FieldOffset(0x174)] public ushort Unk_174;
-    [FieldOffset(0x178)] public long Unk_178;
-    [FieldOffset(0x180)] public byte Unk_180;
+    [FixedSizeArray<Status>(60)]
+    [FieldOffset(0x8)] public fixed byte Status[0xC * 60]; // Client::Game::Status array
+    [FieldOffset(0x2D8)] public uint Flags1;
+    [FieldOffset(0x2DC)] public ushort Flags2;
+    [FieldOffset(0x2E0)] public long Unk_178;
+    //[FieldOffset(0x2E8)] public byte Unk_180;
+    [FieldOffset(0x2E8)] public byte NumValidStatuses;
 
     [MemberFunction("E8 ?? ?? ?? ?? 3C 01 74 B7")]
     public partial bool HasStatus(uint statusId, uint sourceId = 0xE0000000);

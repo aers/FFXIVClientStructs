@@ -5,22 +5,22 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 //     Client::Graphics::Vfx::VfxDataListenner
 // characters that fight (players, monsters, etc)
 
-// size = 0x2D70
+// size = 0x2F80
 // ctor E8 ?? ?? ?? ?? 48 8B F8 EB 02 33 FF 8B 86 ?? ?? ?? ?? 
-[StructLayout(LayoutKind.Explicit, Size = 0x2D90)]
+[StructLayout(LayoutKind.Explicit, Size = 0x2F80)]
 public unsafe partial struct BattleChara {
     [FieldOffset(0x0)] public Character Character;
 
-    [Obsolete("Use GetStatusManager", true)]
-    [FieldOffset(0x1B80)] public StatusManager StatusManager;
+    //[Obsolete("Use GetStatusManager", true)]
+    [FieldOffset(0x1C10)] public StatusManager StatusManager;
 
-    [Obsolete("Use GetCastInfo", true)]
-    [FieldOffset(0x1D10)] public Character.CastInfo SpellCastInfo;
+    //[Obsolete("Use GetCastInfo", true)]
+    [FieldOffset(0x1F00)] public Character.CastInfo SpellCastInfo;
 
-    //[FieldOffset(0x1E60)] public fixed byte UnkBattleCharaStruct[0xF00];
+    //[FieldOffset(0x2070)] public fixed byte IncomingEffects[0xF00];
 
-    [Obsolete("Use GetForayInfo", true)]
-    [FieldOffset(0x2D80)] public Character.ForayInfo Foray;
+    //[Obsolete("Use GetForayInfo", true)]
+    [FieldOffset(0x2F70)] public Character.ForayInfo Foray;
 
     public StatusManager* GetStatusManager => Character.GetStatusManager();
     public Character.CastInfo* GetCastInfo => Character.GetCastInfo();

@@ -9,14 +9,14 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 //   Client::Graphics::Vfx::VfxDataListenner
 //   Client::Game::Character::CharacterData
 
-// size = 0x1B40
+// size = 0x1BD0
 // ctor E8 ?? ?? ?? ?? 48 8B C8 48 8B 43 08 45 33 C9
-[StructLayout(LayoutKind.Explicit, Size = 0x1B40)]
+[StructLayout(LayoutKind.Explicit, Size = 0x1BD0)]
 [VTableAddress("48 8D 05 ?? ?? ?? ?? 48 8B D9 48 89 01 48 8D 05 ?? ?? ?? ?? 48 89 81 ?? ?? ?? ?? 48 81 C1 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 8B ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 8B ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 35", 3)]
 public unsafe partial struct Character {
     [FieldOffset(0x0)] public GameObject GameObject;
 
-    [FieldOffset(0x1A8)] public CharacterData CharacterData;
+    [FieldOffset(0x1A0)] public CharacterData CharacterData;
 
     #region This is inside a new 0x48 byte class at offset 0x1A8
 
@@ -67,25 +67,24 @@ public unsafe partial struct Character {
 
     #endregion
 
-    [FieldOffset(0x620)] public EmoteController EmoteController;
+    [FieldOffset(0x210)] public fixed byte Movement[0x420];
 
-    [FieldOffset(0x641), Obsolete("Use EmoteController.CPoseState", true)]
-    public byte CPoseState;
-    [FieldOffset(0x660)] public MountContainer Mount;
-    [FieldOffset(0x6C8)] public CompanionContainer Companion;
-    [FieldOffset(0x6E8)] public DrawDataContainer DrawData;
+    [FieldOffset(0x630)] public EmoteController EmoteController;
+    [FieldOffset(0x630 + 0x21), Obsolete("Use EmoteController.CPoseState", true)] public byte CPoseState;
 
-    [Obsolete($"Use {nameof(DrawData)}", true), FieldOffset(0x830)]
-    public fixed byte EquipSlotData[4 * 10];
-    [Obsolete($"Use {nameof(DrawData)}.CustomizeData", true), FieldOffset(0x858)]
-    public fixed byte CustomizeData[0x1A];
+    [FieldOffset(0x670)] public MountContainer Mount;
+    [FieldOffset(0x6D8)] public CompanionContainer Companion;
 
-    [FieldOffset(0x878)] public OrnamentContainer Ornament;
-    [FieldOffset(0x8E0)] public ReaperShroudContainer ReaperShroud;
-    [FieldOffset(0x920)] public ActionTimelineManager ActionTimelineManager;
+    [FieldOffset(0x6F8)] public DrawDataContainer DrawData;
+    [Obsolete($"Use {nameof(DrawData)}", true), FieldOffset(0x6F8 + 0x148)] public fixed byte EquipSlotData[4 * 10];
+    [Obsolete($"Use {nameof(DrawData)}.CustomizeData", true), FieldOffset(0x6F8 + 0x170)] public fixed byte CustomizeData[0x1A];
+
+    [FieldOffset(0x8A0)] public OrnamentContainer Ornament;
+    [FieldOffset(0x918)] public ReaperShroudContainer ReaperShroud;
+    [FieldOffset(0x970)] public ActionTimelineManager ActionTimelineManager;
 
     [Obsolete($"Use {nameof(LookTargetId)} instead.", true)]
-    [FieldOffset(0xCB0)] public uint PlayerTargetObjectID;
+    [FieldOffset(0xCB0)] public uint PlayerTargetObjectID; // offset not updated for 6.5
 
     /// <summary>
     /// The current target for this character's gaze. Can be set independently of soft or hard targets, and may be set
@@ -95,17 +94,17 @@ public unsafe partial struct Character {
     /// <remarks>
     /// Unlike other GameObjectIDs, this one appears to be set to fully 0 if the player is not looking at anything.
     /// </remarks>
-    [FieldOffset(0xCB0)] public GameObjectID LookTargetId;
+    [FieldOffset(0xCB0)] public GameObjectID LookTargetId; // offset not updated for 6.5
 
-    [FieldOffset(0x17C0)] public Balloon Balloon;
+    [FieldOffset(0x17C0)] public Balloon Balloon; // offset not updated for 6.5
 
-    [FieldOffset(0x19C8)] public VfxData* VfxData;
-    [FieldOffset(0x19D0)] public VfxData* VfxData2;
-    [FieldOffset(0x19F8)] public VfxData* Omen;
+    [FieldOffset(0x19C8)] public VfxData* VfxData; // offset not updated for 6.5
+    [FieldOffset(0x19D0)] public VfxData* VfxData2; // offset not updated for 6.5
+    [FieldOffset(0x19F8)] public VfxData* Omen; // offset not updated for 6.5
 
-    [FieldOffset(0x1A4C)] public float Alpha;
-    [FieldOffset(0x1A80)] public Companion* CompanionObject; // minion
-    [FieldOffset(0x1A98)] public fixed byte FreeCompanyTag[6];
+    [FieldOffset(0x1A4C)] public float Alpha; // offset not updated for 6.5
+    [FieldOffset(0x1A80)] public Companion* CompanionObject; // minion // offset not updated for 6.5
+    [FieldOffset(0x1B40)] public fixed byte FreeCompanyTag[6];
 
     /// <summary>
     /// The GameObjectID of the entity that currently has the combat tag on this character. May be set to a party ID if
@@ -115,10 +114,10 @@ public unsafe partial struct Character {
     /// A tagger is generally the first entity to deal damage to this character, and will persist until that entity
     /// has died, at which point it will reset.
     /// </remarks>
-    [FieldOffset(0x1AB0)] public GameObjectID CombatTaggerId;
+    [FieldOffset(0x1AB0)] public GameObjectID CombatTaggerId; // offset not updated for 6.5
 
     [Obsolete($"Use {nameof(TargetId)} instead.", true)]
-    [FieldOffset(0x1AB8)] public ulong TargetObjectID;
+    [FieldOffset(0x1B58)] public ulong TargetObjectID;
 
     /// <summary>
     /// The current (hard) target for this Character. This will not be set for the LocalPlayer.
@@ -127,7 +126,7 @@ public unsafe partial struct Character {
     /// Developers should generally use <see cref="GetTargetId"/> over reading this field directly, as it will
     /// properly handle resolving the target for the local player.
     /// </remarks>
-    [FieldOffset(0x1AB8)] public GameObjectID TargetId;
+    [FieldOffset(0x1B58)] public GameObjectID TargetId;
 
     /// <summary>
     /// The current soft target for this Character. This will not be set for the LocalPlayer.
@@ -136,20 +135,19 @@ public unsafe partial struct Character {
     /// Developers should generally use <see cref="GetSoftTargetId"/> over reading this field directly, as it will
     /// properly handle resolving the soft target for the local player.
     /// </remarks>
-    [FieldOffset(0x1AC0)] public GameObjectID SoftTargetId;
+    [FieldOffset(0x1B60)] public GameObjectID SoftTargetId;
 
-    [FieldOffset(0x1B00)] public uint NameID;
+    [FieldOffset(0x1B98)] public uint NameID;
 
-    [FieldOffset(0x1B10)] public uint CompanionOwnerID;
+    [FieldOffset(0x1BA8)] public uint CompanionOwnerID;
 
-    [FieldOffset(0x1B1C)] public ushort CurrentWorld;
-    [FieldOffset(0x1B1E)] public ushort HomeWorld;
+    [FieldOffset(0x1BB0)] public ushort CurrentWorld;
+    [FieldOffset(0x1BB2)] public ushort HomeWorld;
 
-    [FieldOffset(0x1B24)] public ushort VoiceId;
-    [FieldOffset(0x1B26)] public byte EventState; // Leave for backwards compat. See Mode.
-    [FieldOffset(0x1B26)] public CharacterModes Mode;
-    [FieldOffset(0x1B27)] public byte ModeParam; // Different purpose depending on mode. See CharacterModes for more info.
-    [FieldOffset(0x1B29)] public byte Battalion; // used for determining friend/enemy state
+    [FieldOffset(0x1B24)] public ushort VoiceId; // offset not updated for 6.5
+    [FieldOffset(0x1B26)] public byte EventState; // Leave for backwards compat. See Mode. // offset not updated for 6.5
+    [FieldOffset(0x1B26)] public CharacterModes Mode; // offset not updated for 6.5
+    [FieldOffset(0x1B27)] public byte ModeParam; // Different purpose depending on mode. See CharacterModes for more info. // offset not updated for 6.5
 
     /// <summary>
     /// The type of tagger, as represented in <see cref="CombatTaggerId"/>. Known values:
@@ -160,37 +158,24 @@ public unsafe partial struct Character {
     /// <item>4 - Observed, but unknown.</item>
     /// </list>
     /// </summary>
-    [FieldOffset(0x1B31)] public byte CombatTagType;
+    [FieldOffset(0x1B31)] public byte CombatTagType; // offset not updated for 6.5
 
     // Note: These 2 status flags might be just an ushort instead of 2 separate bytes.
 
-    // 0x1, 0x2, 0x4, 0x8 = Unknown
-    // 0x10 = IsHostile
-    // 0x20 = InCombat 
-    // 0x40 = OffHandDrawn
-    [FieldOffset(0x1F2)] public byte StatusFlags;
-
-    // 0x1 = Unknown
-    // 0x2 = Unknown (always on for some reason?)
-    // 0x4 = Unknown
-    // 0x8 = PartyMember
-    // 0x10 = AllianceMember
-    // 0x20 = Friend
-    [FieldOffset(0x1F3)] public byte StatusFlags2;
     // 0x1 = WeaponDrawn
     // 0x2 = Unknown (Appears to always be set)
-    [FieldOffset(0x1B38)] public byte StatusFlags3;
+    [FieldOffset(0x1BC1)] public byte StatusFlags3;
     // 0x20 = GPose wetness toggled
-    [FieldOffset(0x1B3A)] public byte StatusFlags4;
+    [FieldOffset(0x1B3A)] public byte StatusFlags4; // offset not updated for 6.5
 
     public bool IsWeaponDrawn => (StatusFlags3 & 0x1) == 0x1;
-    public bool IsOffhandDrawn => (StatusFlags & 0x40) == 0x40;
-    public bool InCombat => (StatusFlags & 0x20) == 0x20;
-    public bool IsHostile => (StatusFlags & 0x10) == 0x10;
+    public bool IsOffhandDrawn => (CharacterData.Flags1 & 0x40) == 0x40;
+    public bool InCombat => (CharacterData.Flags1 & 0x20) == 0x20;
+    public bool IsHostile => (CharacterData.Flags1 & 0x10) == 0x10;
     public bool IsCasting => GetCastInfo() != null && (GetCastInfo()->IsCasting & 0x1) == 0x1;
-    public bool IsPartyMember => (StatusFlags2 & 0x8) == 0x8;
-    public bool IsAllianceMember => (StatusFlags2 & 0x10) == 0x10;
-    public bool IsFriend => (StatusFlags2 & 0x20) == 0x20;
+    public bool IsPartyMember => (CharacterData.Flags2 & 0x8) == 0x8;
+    public bool IsAllianceMember => (CharacterData.Flags2 & 0x10) == 0x10;
+    public bool IsFriend => (CharacterData.Flags2 & 0x20) == 0x20;
 
     public bool IsGPoseWet {
         get => (StatusFlags4 & 0x20) == 0x20;
@@ -306,7 +291,7 @@ public unsafe partial struct Character {
     }
 
     //0x10 bytes are from the base class which is just vtable + gameobject ptr (same as Companion-/DrawDataContainer)
-    [StructLayout(LayoutKind.Explicit, Size = 0x60)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x68)]
     public partial struct MountContainer {
         [FieldOffset(0x00)] public void** ContainerVTable;
         [FieldOffset(0x08)] public BattleChara* OwnerObject;
@@ -330,7 +315,7 @@ public unsafe partial struct Character {
         [FieldOffset(0x18)] public ushort CompanionId;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 0x28)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x78)]
     public struct OrnamentContainer {
         [FieldOffset(0x00)] public void** ContainerVTable;
         [FieldOffset(0x08)] public BattleChara* OwnerObject;
@@ -343,7 +328,7 @@ public unsafe partial struct Character {
     // It also enables the Vfx in this container, and toggles the 'atr_eye_a' attribute in the model (for the red pupils).
     // We do not actually know where all the other values come in, nothing except Flags and Vfx is actually used by Reaper Shroud (not even NpcEquipId, strangely).
     // This probably is used by other transformations too, but we have not found any yet.
-    [StructLayout(LayoutKind.Explicit, Size = 0x40)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x50)]
     public struct ReaperShroudContainer {
         [FieldOffset(0x00)] public void** ContainerVTable;
         [FieldOffset(0x08)] public BattleChara* OwnerObject;
