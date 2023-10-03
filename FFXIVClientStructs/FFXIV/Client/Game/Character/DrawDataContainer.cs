@@ -34,11 +34,11 @@ public unsafe partial struct DrawDataContainer {
     [FieldOffset(0x168)] public EquipmentModelId RFinger;
     [FieldOffset(0x16C)] public EquipmentModelId LFinger;
 
-    [FieldOffset(0x170)] public CustomizeData CustomizeData;
+    [FieldOffset(0x188)] public CustomizeData CustomizeData;
 
-    [FieldOffset(0x18A)] public uint Unk18A;
-    [FieldOffset(0x18E)] public byte Flags1;
-    [FieldOffset(0x18F)] public byte Flags2;
+    [FieldOffset(0x1A2)] public uint Unk18A;
+    [FieldOffset(0x1A6)] public byte Flags1;
+    [FieldOffset(0x1A7)] public byte Flags2;
 
     [MemberFunction("E8 ?? ?? ?? ?? 41 B5 ?? FF C6")]
     public partial void LoadEquipment(EquipmentSlot slot, EquipmentModelId* modelId, bool force);
@@ -119,7 +119,7 @@ public unsafe partial struct DrawDataContainer {
 
 
 // ctor: E8 ?? ?? ?? ?? 48 8B E8 EB ?? 33 ED 48 89 AB
-[StructLayout(LayoutKind.Explicit, Size = 0x44)]
+[StructLayout(LayoutKind.Explicit, Size = 0x48)]
 public unsafe partial struct DrawObjectData {
 
 }
