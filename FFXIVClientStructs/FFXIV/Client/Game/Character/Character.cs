@@ -142,8 +142,8 @@ public unsafe partial struct Character {
 
     [FieldOffset(0x1B10)] public uint CompanionOwnerID;
 
-    [FieldOffset(0x1B1C)] public ushort CurrentWorld;
-    [FieldOffset(0x1B1E)] public ushort HomeWorld;
+    [FieldOffset(0x1BB0)] public ushort CurrentWorld;
+    [FieldOffset(0x1BB2)] public ushort HomeWorld;
 
     [FieldOffset(0x1B24)] public ushort VoiceId;
     [FieldOffset(0x1B26)] public byte EventState; // Leave for backwards compat. See Mode.
