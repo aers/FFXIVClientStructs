@@ -3388,16 +3388,16 @@ classes:
       16: Hide2
       17: SetScaleToHudLayoutScale
       18: ShouldCollideWithWindow
-      39: Initialize
-      40: Finalize
-      41: Update
-      42: Draw
-      44: LoadUldResourceHandle
-      47: OnSetup
-      49: OnRefresh
-      50: OnRequestedUpdate
-      60: OnMouseOver
-      61: OnMouseOut
+      40: Initialize
+      41: Finalize
+      42: Update
+      43: Draw
+      45: LoadUldResourceHandle
+      48: OnSetup
+      50: OnRefresh
+      51: OnRequestedUpdate
+      61: OnMouseOver
+      62: OnMouseOut
     funcs:
       0x140538270: ctor
       0x1405384A0: Finalize2

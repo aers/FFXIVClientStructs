@@ -8,7 +8,7 @@ public unsafe partial struct SatisfactionSupplyManager {
     [FieldOffset(0x14)] public fixed byte SatisfactionRankArray[9]; // 1-5 indicating each NPC's "Satisfaction" value (the hearts in the UI)
     [FieldOffset(0x1D)] public fixed byte UsedAllowanceArray[9];
 
-    [MemberFunction("0F B6 41 24 4C 8B C1")]
+    [MemberFunction("E8 ?? ?? ?? ?? 2B F0 E8 ?? ?? ?? ?? 8B CB")]
     public partial int GetUsedAllowances();
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B D0 48 8B CB E8 ?? ?? ?? ?? E8")]
