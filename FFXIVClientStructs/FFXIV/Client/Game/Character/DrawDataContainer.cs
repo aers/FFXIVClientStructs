@@ -52,11 +52,11 @@ public unsafe partial struct DrawDataContainer {
     [FieldOffset(0x010 + 3 * DrawObjectData.Size + 0x20)] public EquipmentModelId RFinger;
     [FieldOffset(0x010 + 3 * DrawObjectData.Size + 0x24)] public EquipmentModelId LFinger;
 
-    [FieldOffset(0x200)] public CustomizeData CustomizeData;
+    [FieldOffset(0x188)] public CustomizeData CustomizeData;
 
-    [FieldOffset(0x1BA)] public uint Unk18A;
-    [FieldOffset(0x1BE)] public byte Flags1;
-    [FieldOffset(0x1BF)] public byte Flags2;
+    [FieldOffset(0x1A2)] public uint Unk18A;
+    [FieldOffset(0x1A6)] public byte Flags1;
+    [FieldOffset(0x1B7)] public byte Flags2;
 
     [MemberFunction("E8 ?? ?? ?? ?? 41 B5 ?? FF C6")]
     public partial void LoadEquipment(EquipmentSlot slot, EquipmentModelId* modelId, bool force);
