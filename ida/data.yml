@@ -4313,9 +4313,6 @@ classes:
       - ea: 0x141B45980
       - ea: 0x141B459A8
         base: Client::Graphics::Vfx::VfxDataListenner
-    vfuncs:
-      0: dtor
-      1: ctor
     funcs:
       0x14132CEA0: LoadCharacterSound
   Client::Game::Character::MountContainer:
@@ -4326,9 +4323,6 @@ classes:
       - ea: 0x141A39A88
       - ea: 0x141A39AB0
         base: Client::Graphics::Vfx::VfxDataListenner
-    vfuncs:
-      0: dtor
-      1: ctor
   Client::Game::Character::DrawData:
     vtbls:
       - ea: 0x141A004C0
