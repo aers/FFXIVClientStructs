@@ -102,20 +102,20 @@ public unsafe partial struct PlayerState {
     #region Weekly Bonus/Weekly Bingo/Wondrous Tails Fields (packet reader: "4C 8B D2 48 8D 81")
 
     /// <summary>RowIds of WeeklyBingoOrderData sheet</summary>
-    [FieldOffset(0x66C)] public fixed byte WeeklyBingoOrderData[16];
+    [FieldOffset(0x67C)] public fixed byte WeeklyBingoOrderData[16];
     /// <summary>RowIds of WeeklyBingoRewardData sheet</summary>
-    [FieldOffset(0x67C)] public fixed byte WeeklyBingoRewardData[4];
+    [FieldOffset(0x68C)] public fixed byte WeeklyBingoRewardData[4];
     /// <summary>Bitflags of placed stickers.</summary>
     /// <remarks>Use IsWeeklyBingoStickerPlaced(index) and WeeklyBingoNumPlacedStickers instead.</remarks>
-    [FieldOffset(0x680)] private readonly ushort _weeklyBingoStickers;
+    [FieldOffset(0x690)] private readonly ushort _weeklyBingoStickers;
 
     /// <remarks>Use GetWeeklyBingoExpireUnixTimestamp(), WeeklyBingoNumSecondChancePoints and HasWeeklyBingoJournal instead</remarks>
-    [FieldOffset(0x684)] private readonly uint _weeklyBingoFlags;
-    [FieldOffset(0x688)] private fixed byte _weeklyBingoTaskStatus[4];
-    [FieldOffset(0x68C)] public byte WeeklyBingoRequestOpenBingoNo;
+    [FieldOffset(0x694)] private readonly uint _weeklyBingoFlags;
+    [FieldOffset(0x698)] private fixed byte _weeklyBingoTaskStatus[4];
+    [FieldOffset(0x69C)] public byte WeeklyBingoRequestOpenBingoNo;
 
-    [FieldOffset(0x6C8)] public byte WeeklyBingoExpMultiplier;
-    [FieldOffset(0x6C9)] public bool WeeklyBingoUnk63;
+    [FieldOffset(0x6D8)] public byte WeeklyBingoExpMultiplier;
+    [FieldOffset(0x6D9)] public bool WeeklyBingoUnk63;
 
     #endregion
 
