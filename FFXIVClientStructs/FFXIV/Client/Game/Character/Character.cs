@@ -108,6 +108,7 @@ public unsafe partial struct Character {
     [Obsolete("Use Vfx.VoiceId", true)]
     [FieldOffset(0x13C0)] public ushort VoiceId;
 
+    [FieldOffset(0x1410)] public byte StatusFlags4;
     [FieldOffset(0x1418)] public CharacterSetup CharacterSetup;
 
     [FieldOffset(0x1920)] public Balloon Balloon;
@@ -160,7 +161,6 @@ public unsafe partial struct Character {
     // 0x2 = Unknown (Appears to always be set)
     [FieldOffset(0x1BC1)] public byte StatusFlags3;
     // 0x20 = GPose wetness toggled
-    [FieldOffset(0x1B3A)] public byte StatusFlags4; // offset not updated for 6.5
 
     public bool IsWeaponDrawn => (StatusFlags3 & 0x1) == 0x1;
     public bool IsOffhandDrawn => (CharacterData.Flags1 & 0x40) == 0x40;
@@ -172,8 +172,8 @@ public unsafe partial struct Character {
     public bool IsFriend => (CharacterData.Flags2 & 0x20) == 0x20;
 
     public bool IsGPoseWet {
-        get => (StatusFlags4 & 0x20) == 0x20;
-        set => StatusFlags4 = (byte)(value ? StatusFlags4 | 0x20 : StatusFlags4 & ~0x20);
+        get => (StatusFlags4 & 0x01) == 0x01;
+        set => StatusFlags4 = (byte)(value ? StatusFlags4 | 0x01 : StatusFlags4 & ~0x01);
     }
 
     /// <summary>
