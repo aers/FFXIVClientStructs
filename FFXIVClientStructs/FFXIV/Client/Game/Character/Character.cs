@@ -96,16 +96,21 @@ public unsafe partial struct Character {
     /// </remarks>
     [FieldOffset(0xCB0+0x50)] public GameObjectID LookTargetId;
 
+    [FieldOffset(0x12F0)] public VfxContainer Vfx;
+
+    [Obsolete("Use Vfx.VfxData", true)]
+    [FieldOffset(0x12F0 + 0x18)] public VfxData* VfxData;
+    [Obsolete("Use Vfx.VfxData2", true)]
+    [FieldOffset(0x12F0 + 0x20)] public VfxData* VfxData2;
+    [Obsolete("Use Vfx.Omen", true)]
+    [FieldOffset(0x12F0 + 0x48)] public VfxData* Omen;
+
+    [Obsolete("Use Vfx.VoiceId", true)]
     [FieldOffset(0x13C0)] public ushort VoiceId;
 
     [FieldOffset(0x1418)] public CharacterSetup CharacterSetup;
 
     [FieldOffset(0x1920)] public Balloon Balloon;
-
-    // there is a class for this now at 0x12F0, Size 0xF0, v6.50
-    [FieldOffset(0x12F0+0x18)] public VfxData* VfxData;
-    [FieldOffset(0x12F0+0x20)] public VfxData* VfxData2;
-    [FieldOffset(0x12F0+0x48)] public VfxData* Omen;
 
     [FieldOffset(0x1B28)] public float Alpha;
     [FieldOffset(0x1B30)] public Companion* CompanionObject; // minion
@@ -275,6 +280,22 @@ public unsafe partial struct Character {
             set => ForayRank = value;
         }
         [FieldOffset(0x01)] public EurekaElement Element; //only on enemies
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0xF0)]
+    public partial struct VfxContainer {
+        [FieldOffset(0x00)] public void** ContainerVTable;
+        [FieldOffset(0x08)] public BattleChara* OwnerObject;
+        [FieldOffset(0x10)] public void** VfxListenerVTable;
+
+        [FieldOffset(0x18)] public VfxData* VfxData;
+        [FieldOffset(0x20)] public VfxData* VfxData2;
+        [FieldOffset(0x48)] public VfxData* Omen;
+
+        [FieldOffset(0xD0)] public ushort VoiceId;
+
+        [MemberFunction("E8 ?? ?? ?? ?? 0F B6 06 3C")]
+        public partial nint LoadCharacterSound(int unk1, int unk2, nint unk3, ulong unk4, int unk5, int unk6, ulong unk7);
     }
 
     //0x10 bytes are from the base class which is just vtable + gameobject ptr (same as Companion-/DrawDataContainer)
