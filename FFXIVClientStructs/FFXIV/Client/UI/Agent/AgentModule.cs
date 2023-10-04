@@ -438,7 +438,7 @@ public enum AgentId : uint {
     BannerParty = 430,
     BannerMIP = 431,
     TurnBreak = 432,
-    
+
     //TODO PvPMap = 432
 
     SXTBattleLog = 434,

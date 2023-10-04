@@ -71,25 +71,25 @@ public unsafe partial struct AtkUldManager {
     public static AtkResNode* CreateAtkResNode() {
         return CreateAtkNodeInternal(NodeType.Res);
     }
-    
+
     public static AtkImageNode* CreateAtkImageNode() {
-        return (AtkImageNode*) CreateAtkNodeInternal(NodeType.Image);
+        return (AtkImageNode*)CreateAtkNodeInternal(NodeType.Image);
     }
-    
+
     public static AtkTextNode* CreateAtkTextNode() {
-        return (AtkTextNode*) CreateAtkNodeInternal(NodeType.Text);
+        return (AtkTextNode*)CreateAtkNodeInternal(NodeType.Text);
     }
-    
+
     public static AtkNineGridNode* CreateAtkNineGridNode() {
-        return (AtkNineGridNode*) CreateAtkNodeInternal(NodeType.NineGrid);
+        return (AtkNineGridNode*)CreateAtkNodeInternal(NodeType.NineGrid);
     }
-    
+
     public static AtkCounterNode* CreateAtkCounterNode() {
-        return (AtkCounterNode*) CreateAtkNodeInternal(NodeType.Counter);
+        return (AtkCounterNode*)CreateAtkNodeInternal(NodeType.Counter);
     }
-    
+
     public static AtkCollisionNode* CreateAtkCollisionNode() {
-        return (AtkCollisionNode*) CreateAtkNodeInternal(NodeType.Collision);
+        return (AtkCollisionNode*)CreateAtkNodeInternal(NodeType.Collision);
     }
 
     [MemberFunction("E8 ?? ?? ?? ?? 49 8B 4F 10 41 8B C4")]

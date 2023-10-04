@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 // common CreateAtkNode function E8 ?? ?? ?? ?? 48 8B 4E 08 49 8B D5 
 // type 4
 [StructLayout(LayoutKind.Explicit, Size = 0xD0)]
-public unsafe partial struct AtkNineGridNode : ICreatable  {
+public unsafe partial struct AtkNineGridNode : ICreatable {
     [FieldOffset(0x0)] public AtkResNode AtkResNode;
     [FieldOffset(0xB0)] public AtkUldPartsList* PartsList;
     [FieldOffset(0xB8)] public uint PartID;

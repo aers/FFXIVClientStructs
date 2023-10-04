@@ -222,7 +222,7 @@ public unsafe partial struct UIModule {
 
     [VirtualFunction(194)]
     public partial bool IsMainCommandUnlocked(uint command);
-    
+
     [MemberFunction("E8 ?? ?? ?? ?? 4D 39 BE")]
     public static partial bool PlaySound(uint effectId, long a2 = 0, long a3 = 0, byte a4 = 0);
 
