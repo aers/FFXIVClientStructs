@@ -3,19 +3,19 @@ using FFXIVClientStructs.FFXIV.Common.Lua;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 
-[StructLayout(LayoutKind.Explicit, Size = 0x3BC0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x3C10)]
 public unsafe partial struct EventFramework {
     [FieldOffset(0x00)] public EventHandlerModule EventHandlerModule;
     [FieldOffset(0xC0)] public DirectorModule DirectorModule;
     [FieldOffset(0x160)] public LuaActorModule LuaActorModule;
     [FieldOffset(0x1B0)] public EventSceneModule EventSceneModule;
-    [FieldOffset(0x3350)] public int LoadState; //0=Exd, 1=EventHandler, 2=Director, 3=LuaActor, 4=EventScene, 5=Idle?, 6=Ready?
+    [FieldOffset(0x3370)] public int LoadState; //0=Exd, 1=EventHandler, 2=Director, 3=LuaActor, 4=EventScene, 5=Idle?, 6=Ready?
 
-    [FieldOffset(0x3358)] public LuaState* LuaState;
-    [FieldOffset(0x3360)] public LuaThread LuaThread;
+    [FieldOffset(0x3378)] public LuaState* LuaState;
+    [FieldOffset(0x3380)] public LuaThread LuaThread;
 
-    [FieldOffset(0x33B8)] public EventState EventState1;
-    [FieldOffset(0x3418)] public EventState EventState2;
+    [FieldOffset(0x33D8)] public EventState EventState1;
+    [FieldOffset(0x3438)] public EventState EventState2;
 
     [StaticAddress("48 8B 35 ?? ?? ?? ?? 0F B6 EA 4C 8B F1", 3, isPointer: true)]
     public static partial EventFramework* Instance();
