@@ -175,6 +175,7 @@ public enum AgentId : uint {
     CursorRect = 138,
     RetainerStatus = 139,
     RetainerTask = 140,
+    RetainerTaskSupply = 141,
 
     RetainerItemTransfer = 143,
 
