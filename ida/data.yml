@@ -20,8 +20,6 @@ globals:
   0x1421F8888: g_GameObjectManager_ObjectList
   0x1421F9B40: g_GameObjectManager_ObjectListEnd
   0x142202150: g_LocalContentId
-#fail   0x142101738: g_Client::Game::UI::Buddy.Pet # not a pointer
-#fail   0x142101748: g_Client::Game::UI::Buddy.Pet.BuffList # not a pointer
   0x142204CE8: g_Client::Game::UI::Buddy.CompanionStats.TimeRemaining  # not a pointer
   0x142204D38: g_Client::Game::UI::Buddy.BattleBuddyListPtr # Member of UIState
   0x142204DE8: g_Client::Game::UI::ContentsNote
@@ -764,8 +762,8 @@ classes:
       0x140998E30: IsItemActionUnlocked
       0x140996F90: IsTripleTriadCardUnlocked
       0x140998540: GetNextMapAllowanceTimestamp
-#fail       0x1413E2F40: IsInstanceContentUnlocked   # static
-#fail       0x1413E3220: IsInstanceContentCompleted  # static
+      0x14146FDF0: IsInstanceContentUnlocked   # static
+      0x1414700D0: IsInstanceContentCompleted  # static
       0x1409997C0: Terminate
   Client::Game::UI::PlayerState:
     instances:
@@ -927,7 +925,7 @@ classes:
       0x14099AC40: AddLogMessage
       0x14099BB20: AddActionLogMessage
       0x14099C230: AddToScreenLogWithLogMessageId  # this converts log message id to screen log kind and calls below function
-#fail       0x140988850: AddToScreenLogWithScreenLogKind
+      0x14099C310: AddToScreenLogWithScreenLogKind
   Client::Game::ActionManager:
     instances:
       - ea: 0x14217CB20
@@ -3236,8 +3234,8 @@ classes:
       0x140529DE0: GetAsAtkImageNode
       0x140529E00: GetAsAtkTextNode
       0x140529E20: GetAsAtkNineGridNode
-#fail       0x14051A860: GetAsAtkCounterNode
-#fail       0x14051A880: GetAsAtkCollisionNode
+      0x140529E40: GetAsAtkCounterNode
+      0x140529E60: GetAsAtkCollisionNode
       0x140529EA0: GetAsAtkComponentNode
       0x140529EC0: GetComponent
       0x140550AF0: GetComponent_2
@@ -3353,7 +3351,7 @@ classes:
     funcs:
       0x14059FA70: ctor
       0x14052FF30: SetText
-#fail       0x140520970: SetNumber
+      0x14052FF70: SetNumber
       0x1405300D0: UpdateWidth
   Component::GUI::AtkCollisionNode:
     vtbls:
@@ -3605,7 +3603,7 @@ classes:
       - ea: 0x141A08588
     funcs:
       0x140581540: ctor
-#fail       0x1405718C0: DrawUldFromData
+      0x140581730: DrawUldFromData
       0x140581D40: DrawUldFromDataClipped
   Component::GUI::AtkComponentMap:
     vtbls:
@@ -4275,16 +4273,16 @@ classes:
       0x140747B50: IsCasting
 #fail       0x140742DF0: IsMounted
       0x140758600: GetCompanionOwnerID
-#fail       0x140745570: SetTargetId
+      0x1407591C0: SetTargetId
       0x140759230: GetTargetId
       0x140759D80: GetParentCharacter
       0x140759270: SetSoftTargetId
       0x1407592F0: GetSoftTargetId
-#fail       0x140745b50: CalculateHeight
-#fail       0x140746300: SetMode
+      0x1407597A0: CalculateHeight
+      0x140759EE0: SetMode
       0x14075BE00: Finalize
-#fail       0x14074F6B0: SetupBNpc
-#fail       0x1407502C0: CopyFromCharacter
+      0x14132E1C0: SetupBNpc # todo: not on Character anymore in 6.50
+      0x14132F6F0: CopyFromCharacter # todo: not on Character anymore in 6.50
       0x1407BC2F0: ctor
   Client::Game::Control::EmoteController:
     vtbls:
@@ -4798,10 +4796,10 @@ classes:
       0x1407BC210: ctor
       0x1407BC4D0: Finalize
   Client::Game::TitleController:
-#    vtbls:
-#fail       - ea: 0x1419F9768
-#    vfuncs:
-#      0: dtor
+    vtbls:
+      - ea: 0x141A6DC68
+    vfuncs:
+      0: dtor
   Client::Game::TitleList:
     vtbls:
       - ea: 0x141A6DC70
@@ -5664,9 +5662,6 @@ classes:
     vtbls:
       - ea: 0x141A8A568
         base: Client::UI::Agent::AgentInterface
-    funcs:
-#fail       0x140C72D00: ctor
-#fail       0x140C72DC0: Finalize
   Client::UI::Agent::AgentLovmParty:
     vtbls:
       - ea: 0x141A85AD8
@@ -7682,7 +7677,7 @@ classes:
       - ea: 0x141B18170
         base: Client::UI::AddonScreenInfoChild
     funcs:
-#fail       0x141106840: ctor
+      0x141154020: ctor
   Client::UI::AddonScreenText:
     vtbls:
       - ea: 0x141B127F0
@@ -7727,7 +7722,6 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141125A00: ctor
-#fail       0x140F95240: Finalize2
   Client::UI::AddonNamePlate::BakePlateRenderer:
     vtbls:
       - ea: 0x141ADE6D8
