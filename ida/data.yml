@@ -4308,6 +4308,16 @@ classes:
       - ea: 0x141A39A60
     funcs:
       0x141319260: HasOrnament
+  Client::Game::Character::VfxContainer:
+    vtbls:
+      - ea: 141b45980
+      - ea: 141b459a8
+        base: Client::Graphics::Vfx::VfxDataListenner
+    vfuncs:
+      0: dtor
+      1: ctor
+    funcs:
+      0x14132CEA0: LoadCharacterSound
   Client::Game::Character::MountContainer:
     funcs:
       0x1413145B0: SetupMount
