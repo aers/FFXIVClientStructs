@@ -94,30 +94,24 @@ public unsafe partial struct Character {
     /// <remarks>
     /// Unlike other GameObjectIDs, this one appears to be set to fully 0 if the player is not looking at anything.
     /// </remarks>
-    [FieldOffset(0xCB0)] public GameObjectID LookTargetId; // offset not updated for 6.5
+    [FieldOffset(0xCB0+0x50)] public GameObjectID LookTargetId;
 
     [FieldOffset(0x13C0)] public ushort VoiceId;
 
     [FieldOffset(0x1418)] public CharacterSetup CharacterSetup;
 
-    [FieldOffset(0x17C0)] public Balloon Balloon; // offset not updated for 6.5
+    [FieldOffset(0x1920)] public Balloon Balloon;
 
-    [FieldOffset(0x19C8)] public VfxData* VfxData; // offset not updated for 6.5
-    [FieldOffset(0x19D0)] public VfxData* VfxData2; // offset not updated for 6.5
-    [FieldOffset(0x19F8)] public VfxData* Omen; // offset not updated for 6.5
+    // there is a class for this now at 0x12F0, Size 0xF0, v6.50
+    [FieldOffset(0x12F0+0x18)] public VfxData* VfxData;
+    [FieldOffset(0x12F0+0x20)] public VfxData* VfxData2;
+    [FieldOffset(0x12F0+0x48)] public VfxData* Omen;
 
-    [FieldOffset(0x1A4C)] public float Alpha; // offset not updated for 6.5
-    [FieldOffset(0x1A80)] public Companion* CompanionObject; // minion // offset not updated for 6.5
+    [FieldOffset(0x1B28)] public float Alpha;
+    [FieldOffset(0x1B30)] public Companion* CompanionObject; // minion
     [FieldOffset(0x1B40)] public fixed byte FreeCompanyTag[6];
 
-    /// <summary>
-    /// The GameObjectID of the entity that currently has the combat tag on this character. May be set to a party ID if
-    /// certain conditions are met (PVP?). See <see cref="CombatTagType"/> for information about the type of tagger.
-    /// </summary>
-    /// <remarks>
-    /// A tagger is generally the first entity to deal damage to this character, and will persist until that entity
-    /// has died, at which point it will reset.
-    /// </remarks>
+    [Obsolete("Use CharacterData.CombatTaggerId instead.", true)]
     [FieldOffset(0x1AB0)] public GameObjectID CombatTaggerId; // offset not updated for 6.5
 
     [Obsolete($"Use {nameof(TargetId)} instead.", true)]
@@ -148,19 +142,11 @@ public unsafe partial struct Character {
     [FieldOffset(0x1BB0)] public ushort CurrentWorld;
     [FieldOffset(0x1BB2)] public ushort HomeWorld;
 
-    [FieldOffset(0x1B26)] public byte EventState; // Leave for backwards compat. See Mode. // offset not updated for 6.5
-    [FieldOffset(0x1B26)] public CharacterModes Mode; // offset not updated for 6.5
-    [FieldOffset(0x1B27)] public byte ModeParam; // Different purpose depending on mode. See CharacterModes for more info. // offset not updated for 6.5
+    [FieldOffset(0x1BB6)] public byte EventState; // Leave for backwards compat. See Mode.
+    [FieldOffset(0x1BB6)] public CharacterModes Mode;
+    [FieldOffset(0x1BB7)] public byte ModeParam; // Different purpose depending on mode. See CharacterModes for more info.
 
-    /// <summary>
-    /// The type of tagger, as represented in <see cref="CombatTaggerId"/>. Known values:
-    /// <list type="bullet">
-    /// <item>0 - Entity Not Tagged</item>
-    /// <item>1 - Character Tag (players, battle NPCs, etc.)</item>
-    /// <item>2 - Party Tag (PVP?)</item>
-    /// <item>4 - Observed, but unknown.</item>
-    /// </list>
-    /// </summary>
+    [Obsolete("Use CharacterData.CombatTagType instead.", true)]
     [FieldOffset(0x1B31)] public byte CombatTagType; // offset not updated for 6.5
 
     // Note: These 2 status flags might be just an ushort instead of 2 separate bytes.

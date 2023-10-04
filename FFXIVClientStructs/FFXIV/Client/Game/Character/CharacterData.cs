@@ -1,3 +1,5 @@
+using FFXIVClientStructs.FFXIV.Client.Game.Object;
+
 namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x68)]
@@ -42,4 +44,25 @@ public unsafe struct CharacterData {
     // 0x10 = AllianceMember
     // 0x20 = Friend
     [FieldOffset(0x4C)] public byte Flags2;
+
+    /// <summary>
+    /// The type of tagger, as represented in <see cref="CombatTaggerId"/>. Known values:
+    /// <list type="bullet">
+    /// <item>0 - Entity Not Tagged</item>
+    /// <item>1 - Character Tag (players, battle NPCs, etc.)</item>
+    /// <item>2 - Party Tag (PVP?)</item>
+    /// <item>4 - Observed, but unknown.</item>
+    /// </list>
+    /// </summary>
+    [FieldOffset(0x4D)] public byte CombatTagType;
+
+    /// <summary>
+    /// The GameObjectID of the entity that currently has the combat tag on this character. May be set to a party ID if
+    /// certain conditions are met (PVP?). See <see cref="CombatTagType"/> for information about the type of tagger.
+    /// </summary>
+    /// <remarks>
+    /// A tagger is generally the first entity to deal damage to this character, and will persist until that entity
+    /// has died, at which point it will reset.
+    /// </remarks>
+    [FieldOffset(0x50)] public GameObjectID CombatTaggerId;
 }
