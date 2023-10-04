@@ -19,6 +19,17 @@ public unsafe partial struct MirageManager {
     [FieldOffset(0x1458)] public bool GlamourPlatesRequested;
     [FieldOffset(0x1459)] public bool GlamourPlatesLoaded;
 
+    /// <summary>
+    /// Restores an item from the Glamour Dresser and puts it back into the players inventory.
+    /// </summary>
+    /// <param name="itemIndex">The index of <see cref="PrismBoxItemIds"/> to restore.</param>
+    /// <returns>
+    /// Returns <c>true</c> if the command was sent to the server, or <c>false</c>
+    /// if the player already possess a unique item or if inventory space is insufficient.
+    /// </returns>
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 0F 41 B0 01")]
+    public partial bool RestorePrismBoxItem(uint itemIndex);
+
     [StructLayout(LayoutKind.Explicit, Size = 0x3C)]
     public struct GlamourPlate {
         [FieldOffset(0x00)] public fixed uint ItemIds[12];

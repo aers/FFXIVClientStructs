@@ -577,7 +577,8 @@ classes:
       0x140745300: HasInstance
       0x140745320: GetInstance
       0x140745410: Clear
-      0x1407454D0: RequestMiragePrismBox
+      0x1407454D0: RequestPrismBox
+      0x140745860: RestorePrismBoxItem
       0x140745CB0: RequestGlamourPlates
       0x140745F10: ApplyGlamourPlate
   Client::Game::InventoryManager:
