@@ -4310,8 +4310,8 @@ classes:
       0x141319260: HasOrnament
   Client::Game::Character::VfxContainer:
     vtbls:
-      - ea: 141b45980
-      - ea: 141b459a8
+      - ea: 0x141B45980
+      - ea: 0x141B459A8
         base: Client::Graphics::Vfx::VfxDataListenner
     vfuncs:
       0: dtor
