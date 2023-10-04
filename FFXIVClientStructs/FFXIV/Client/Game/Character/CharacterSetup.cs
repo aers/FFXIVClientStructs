@@ -1,5 +1,6 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 
+[StructLayout(LayoutKind.Explicit, Size = 0x18)]
 public unsafe partial struct CharacterSetup {
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 9F ?? ?? ?? ?? 48 8D 8F")]
     public partial ulong CopyFromCharacter(Character* source, CopyFlags flags);
