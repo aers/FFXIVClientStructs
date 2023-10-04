@@ -55,7 +55,7 @@ public unsafe partial struct DrawDataContainer {
     [FieldOffset(0x200)] public CustomizeData CustomizeData;
 
     [FieldOffset(0x1BA)] public uint Unk18A;
-    [FieldOffset(0x1BC)] public byte Flags1;
+    [FieldOffset(0x1BE)] public byte Flags1;
     [FieldOffset(0x1BF)] public byte Flags2;
 
     [MemberFunction("E8 ?? ?? ?? ?? 41 B5 ?? FF C6")]
