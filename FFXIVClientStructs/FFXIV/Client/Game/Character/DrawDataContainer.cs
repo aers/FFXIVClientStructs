@@ -99,8 +99,8 @@ public unsafe partial struct DrawDataContainer {
     }
 
     public bool IsVisorToggled {
-        get => (Flags2 & 0x08) == 0x08;
-        set => Flags2 = (byte)(value ? Flags2 | 0x08 : Flags2 & ~0x08);
+        get => (Flags2 & 0x10) == 0x10;
+        set => Flags2 = (byte)(value ? Flags2 | 0x10 : Flags2 & ~0x10);
     }
 
     private const byte WeaponHiddenFlag = 0x02;
