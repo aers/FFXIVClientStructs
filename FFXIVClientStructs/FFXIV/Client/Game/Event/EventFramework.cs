@@ -9,13 +9,13 @@ public unsafe partial struct EventFramework {
     [FieldOffset(0xC0)] public DirectorModule DirectorModule;
     [FieldOffset(0x160)] public LuaActorModule LuaActorModule;
     [FieldOffset(0x1B8)] public EventSceneModule EventSceneModule;
-    [FieldOffset(0x3350)] public int LoadState; //0=Exd, 1=EventHandler, 2=Director, 3=LuaActor, 4=EventScene, 5=Idle?, 6=Ready?
+    [FieldOffset(0x3358)] public int LoadState; // Not verified in 6.5 //0=Exd, 1=EventHandler, 2=Director, 3=LuaActor, 4=EventScene, 5=Idle?, 6=Ready?
 
-    [FieldOffset(0x3358)] public LuaState* LuaState;
-    [FieldOffset(0x3360)] public LuaThread LuaThread;
+    [FieldOffset(0x3360)] public LuaState* LuaState; // Not verified in 6.5
+    [FieldOffset(0x3368)] public LuaThread LuaThread; // Not verified in 6.5
 
-    [FieldOffset(0x33B8)] public EventState EventState1;
-    [FieldOffset(0x3418)] public EventState EventState2;
+    [FieldOffset(0x33C0)] public EventState EventState1; // Not verified in 6.5
+    [FieldOffset(0x3420)] public EventState EventState2; // Not verified in 6.5
 
     [StaticAddress("48 8B 35 ?? ?? ?? ?? 0F B6 EA 4C 8B F1", 3, isPointer: true)]
     public static partial EventFramework* Instance();
