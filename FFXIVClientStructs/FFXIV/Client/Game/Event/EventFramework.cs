@@ -8,7 +8,7 @@ public unsafe partial struct EventFramework {
     [FieldOffset(0x00)] public EventHandlerModule EventHandlerModule;
     [FieldOffset(0xC0)] public DirectorModule DirectorModule;
     [FieldOffset(0x160)] public LuaActorModule LuaActorModule;
-    [FieldOffset(0x1B0)] public EventSceneModule EventSceneModule;
+    [FieldOffset(0x1B8)] public EventSceneModule EventSceneModule;
     [FieldOffset(0x3350)] public int LoadState; //0=Exd, 1=EventHandler, 2=Director, 3=LuaActor, 4=EventScene, 5=Idle?, 6=Ready?
 
     [FieldOffset(0x3358)] public LuaState* LuaState;
