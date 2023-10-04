@@ -8,12 +8,12 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [StructLayout(LayoutKind.Explicit, Size = 0x1CF8)]
 public unsafe partial struct AddonSalvageItemSelector {
     [FieldOffset(0x0000)] public AtkUnitBase AtkUnitBase;
+    [FieldOffset(0x0228)] public AgentSalvage.SalvageItemCategory SelectedCategory;
 
     [FixedSizeArray<SalvageItem>(140)]
-    [FieldOffset(0x0268)] public fixed byte Items[0x30 * 140];
+    [FieldOffset(0x02B0)] public fixed byte Items[0x30 * 140];
 
-    [FieldOffset(0x1CA8)] public AgentSalvage.SalvageItemCategory SelectedCategory;
-    [FieldOffset(0x1CAC)] public uint ItemCount;
+    [FieldOffset(0x1CF0)] public uint ItemCount;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x30)]
     public unsafe struct SalvageItem {
