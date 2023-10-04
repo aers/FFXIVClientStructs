@@ -1,3 +1,5 @@
+using FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
+
 namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 
 // ctor: E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 59 ?? 48 89 01 E8 
@@ -6,39 +8,55 @@ public unsafe partial struct DrawDataContainer {
     [FieldOffset(0x000)] public void** Vtable;
     [FieldOffset(0x008)] public Character* Parent;
 
+    [FixedSizeArray<DrawObjectData>(3)]
+    [FieldOffset(0x010)] public fixed byte WeaponData[3 * DrawObjectData.Size];
+
+    public ref DrawObjectData Weapon(WeaponSlot which) {
+        fixed (byte* ptr = WeaponData)
+            return ref ((DrawObjectData*)ptr)[(int) which];
+    }
+
+    [Obsolete("Use Weapon(WeaponSlot.MainHand).ModelId", true)]
     [FieldOffset(0x010)] public WeaponModelId MainHandModel;
-    [FieldOffset(0x020)] public DrawObjectData MainHand;
+    [Obsolete("Use Weapon(WeaponSlot.MainHand).State", true)]
     [FieldOffset(0x06C)] public byte MainHandState;
+    [Obsolete("Use Weapon(WeaponSlot.MainHand).Flags1", true)]
     [FieldOffset(0x072)] public ushort MainHandFlags1;
+    [Obsolete("Use Weapon(WeaponSlot.MainHand).Flags2", true)]
     [FieldOffset(0x074)] public byte MainHandFlags2;
 
-    [FieldOffset(0x078)] public WeaponModelId OffHandModel;
-    [FieldOffset(0x088)] public DrawObjectData OffHand;
-    [FieldOffset(0x0D4)] public byte OffHandState;
-    [FieldOffset(0x0DA)] public ushort OffHandFlags1;
-    [FieldOffset(0x0DC)] public byte OffHandFlags2;
+    [Obsolete("Use Weapon(WeaponSlot.OffHand).ModelId", true)]
+    [FieldOffset(0x080)] public WeaponModelId OffHandModel;
+    [Obsolete("Use Weapon(WeaponSlot.OffHand).State", true)]
+    [FieldOffset(0x0DC)] public byte OffHandState;
+    [Obsolete("Use Weapon(WeaponSlot.OffHand).Flags1", true)]
+    [FieldOffset(0x0E2)] public ushort OffHandFlags1;
+    [Obsolete("Use Weapon(WeaponSlot.OffHand).Flags2", true)]
+    [FieldOffset(0x0E4)] public byte OffHandFlags2;
 
-    [FieldOffset(0x0E0)] public WeaponModelId UnkE0Model;
-    [FieldOffset(0x0F0)] public DrawObjectData UnkF0;
-    [FieldOffset(0x142)] public ushort Unk144Flags1;
-    [FieldOffset(0x144)] public byte Unk144Flags2;
+    [Obsolete("Use Weapon(WeaponSlot.Unk).ModelId", true)]
+    [FieldOffset(0x0F0)] public WeaponModelId UnkE0Model;
+    [Obsolete("Use Weapon(WeaponSlot.Unk).Flags1", true)]
+    [FieldOffset(0x152)] public ushort Unk144Flags1;
+    [Obsolete("Use Weapon(WeaponSlot.Unk).Flags2", true)]
+    [FieldOffset(0x154)] public byte Unk144Flags2;
 
-    [FieldOffset(0x148)] public EquipmentModelId Head;
-    [FieldOffset(0x14C)] public EquipmentModelId Top;
-    [FieldOffset(0x150)] public EquipmentModelId Arms;
-    [FieldOffset(0x154)] public EquipmentModelId Legs;
-    [FieldOffset(0x158)] public EquipmentModelId Feet;
-    [FieldOffset(0x15C)] public EquipmentModelId Ear;
-    [FieldOffset(0x160)] public EquipmentModelId Neck;
-    [FieldOffset(0x164)] public EquipmentModelId Wrist;
-    [FieldOffset(0x168)] public EquipmentModelId RFinger;
-    [FieldOffset(0x16C)] public EquipmentModelId LFinger;
+    [FieldOffset(0x010 + 3 * DrawObjectData.Size + 0x00)] public EquipmentModelId Head;
+    [FieldOffset(0x010 + 3 * DrawObjectData.Size + 0x04)] public EquipmentModelId Top;
+    [FieldOffset(0x010 + 3 * DrawObjectData.Size + 0x08)] public EquipmentModelId Arms;
+    [FieldOffset(0x010 + 3 * DrawObjectData.Size + 0x0C)] public EquipmentModelId Legs;
+    [FieldOffset(0x010 + 3 * DrawObjectData.Size + 0x10)] public EquipmentModelId Feet;
+    [FieldOffset(0x010 + 3 * DrawObjectData.Size + 0x14)] public EquipmentModelId Ear;
+    [FieldOffset(0x010 + 3 * DrawObjectData.Size + 0x18)] public EquipmentModelId Neck;
+    [FieldOffset(0x010 + 3 * DrawObjectData.Size + 0x1C)] public EquipmentModelId Wrist;
+    [FieldOffset(0x010 + 3 * DrawObjectData.Size + 0x20)] public EquipmentModelId RFinger;
+    [FieldOffset(0x010 + 3 * DrawObjectData.Size + 0x24)] public EquipmentModelId LFinger;
 
-    [FieldOffset(0x188)] public CustomizeData CustomizeData;
+    [FieldOffset(0x200)] public CustomizeData CustomizeData;
 
-    [FieldOffset(0x1A2)] public uint Unk18A;
-    [FieldOffset(0x1A6)] public byte Flags1;
-    [FieldOffset(0x1A7)] public byte Flags2;
+    [FieldOffset(0x1BA)] public uint Unk18A;
+    [FieldOffset(0x1BC)] public byte Flags1;
+    [FieldOffset(0x1BF)] public byte Flags2;
 
     [MemberFunction("E8 ?? ?? ?? ?? 41 B5 ?? FF C6")]
     public partial void LoadEquipment(EquipmentSlot slot, EquipmentModelId* modelId, bool force);
@@ -103,25 +121,37 @@ public unsafe partial struct DrawDataContainer {
         set => Flags2 = (byte)(value ? Flags2 | 0x10 : Flags2 & ~0x10);
     }
 
-    private const byte WeaponHiddenFlag = 0x02;
-
+    [Obsolete("Use WeaponSpan[0].IsHidden", true)]
     public bool IsMainHandHidden {
-        get => (MainHandState & WeaponHiddenFlag) == WeaponHiddenFlag;
-        set => MainHandState = (byte)(value ? MainHandState | WeaponHiddenFlag : MainHandState & ~WeaponHiddenFlag);
+        get => (Weapon(WeaponSlot.MainHand).State & 0x02) == 0x02;
+        set => Weapon(WeaponSlot.MainHand).State = (byte)(value ? Weapon(WeaponSlot.MainHand).State | 0x02 : Weapon(WeaponSlot.MainHand).State & ~0x02);
     }
 
+    [Obsolete("Use WeaponSpan[1].IsHidden", true)]
     public bool IsOffHandHidden {
-        get => (OffHandState & WeaponHiddenFlag) == WeaponHiddenFlag;
-        set => OffHandState = (byte)(value ? OffHandState | WeaponHiddenFlag : OffHandState & ~WeaponHiddenFlag);
+        get => (Weapon(WeaponSlot.OffHand).State & 0x02) == 0x02;
+        set => Weapon(WeaponSlot.OffHand).State = (byte)(value ? Weapon(WeaponSlot.OffHand).State | 0x02 : Weapon(WeaponSlot.OffHand).State & ~0x02);
     }
 }
 
 
 
 // ctor: E8 ?? ?? ?? ?? 48 8B E8 EB ?? 33 ED 48 89 AB
-[StructLayout(LayoutKind.Explicit, Size = 0x48)]
+[StructLayout(LayoutKind.Explicit, Size = Size)]
 public unsafe partial struct DrawObjectData {
+    public const int Size = 0x70;
 
+    [FieldOffset(0x00)] public WeaponModelId ModelId;
+    [FieldOffset(0x10)] public void** VTable;
+    [FieldOffset(0x18)] public DrawObject* DrawObject;
+    [FieldOffset(0x5C)] public byte State;
+    [FieldOffset(0x62)] public ushort Flags1;
+    [FieldOffset(0x64)] public byte Flags2;
+
+    public bool IsHidden {
+        get => (State & 0x02) == 0x02;
+        set => State = (byte)(value ? State | 0x02 : State & ~0x02);
+    }
 }
 
 [StructLayout(LayoutKind.Explicit, Size = Count)]
