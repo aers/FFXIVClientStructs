@@ -13,7 +13,7 @@ public unsafe partial struct DrawDataContainer {
 
     public ref DrawObjectData Weapon(WeaponSlot which) {
         fixed (byte* ptr = WeaponData)
-            return ref ((DrawObjectData*)ptr)[(int) which];
+            return ref ((DrawObjectData*)ptr)[(int)which];
     }
 
     [Obsolete("Use Weapon(WeaponSlot.MainHand).ModelId", true)]

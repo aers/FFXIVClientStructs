@@ -94,7 +94,7 @@ public unsafe partial struct Character {
     /// <remarks>
     /// Unlike other GameObjectIDs, this one appears to be set to fully 0 if the player is not looking at anything.
     /// </remarks>
-    [FieldOffset(0xCB0+0x50)] public GameObjectID LookTargetId;
+    [FieldOffset(0xCB0 + 0x50)] public GameObjectID LookTargetId;
 
     [FieldOffset(0x12F0)] public VfxContainer Vfx;
 
