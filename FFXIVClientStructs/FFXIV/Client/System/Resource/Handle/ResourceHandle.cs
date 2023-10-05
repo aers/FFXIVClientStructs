@@ -9,8 +9,13 @@ public unsafe partial struct ResourceHandle {
     [FieldOffset(0x00)] public void* vtbl;
     [FieldOffset(0x00)] public void** vfunc;
 
+    [FieldOffset(0x08)] public ResourceHandleType Type;
+
+    [Obsolete($"Use {(nameof(Type.Category))} instead", true)]
     [FieldOffset(0x08)] public ResourceCategory Category; // First byte in SqPack name, but stored as ushort
+    [Obsolete($"Use {(nameof(Type.Unknown0A))} instead", true)]
     [FieldOffset(0x0A)] public byte Unknown0A; // Third byte in SqPack name
+    [Obsolete($"Use {(nameof(Type.Expansion))} instead", true)]
     [FieldOffset(0x0B)] public byte Expansion; // Second byte in SqPack name. Specifies SqPack folder: 0 = ffxiv, 1 = ex1, 2 = ex2, ...
 
     [FieldOffset(0x0C)] public uint FileType; // "txt" "uld" etc from the header
@@ -58,4 +63,41 @@ public unsafe partial struct ResourceHandle {
 
     [VirtualFunction(33u)]
     public partial bool Load(void* contents, bool flag);
+}
+
+[StructLayout(LayoutKind.Explicit, Size = 4)]
+public struct ResourceHandleType {
+    [FieldOffset(0x0)] public uint Value;
+    [FieldOffset(0x0)] public HandleCategory Category;
+    [FieldOffset(0x2)] public byte Unknown0A;
+    [FieldOffset(0x3)] public byte Expansion;
+
+    public static explicit operator ResourceHandleType(ResourceCategory value) {
+        return new() {
+            Value = (uint)value
+        };
+    }
+
+    public static explicit operator ResourceCategory(ResourceHandleType value) {
+        return (ResourceCategory)value.Value;
+    }
+
+    public enum HandleCategory : ushort {
+        Common = 0,
+        BgCommon = 1,
+        Bg = 2,
+        Cut = 3,
+        Chara = 4,
+        Shader = 5,
+        Ui = 6,
+        Sound = 7,
+        Vfx = 8,
+        UiScript = 9,
+        Exd = 10,
+        GameScript = 11,
+        Music = 12,
+        SqpackTest = 18,
+        Debug = 19,
+        MaxCount = 20
+    }
 }
