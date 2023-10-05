@@ -7,7 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 // all data in here is used for UI display
 
 // ctor "E8 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? 48 83 C4 28 E9 ?? ?? ?? ?? 48 83 EC 28 33 D2"
-[StructLayout(LayoutKind.Explicit, Size = 0x1791C)] // its at least this big, may be a few bytes bigger
+[StructLayout(LayoutKind.Explicit, Size = 0x17D10)] // its at least this big, may be a few bytes bigger
 public unsafe partial struct UIState {
     [FieldOffset(0x00)] public Hotbar Hotbar;
     [FieldOffset(0x08)] public Hate Hate;

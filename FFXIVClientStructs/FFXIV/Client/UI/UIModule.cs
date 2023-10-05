@@ -114,6 +114,9 @@ public unsafe partial struct UIModule {
     [VirtualFunction(49)]
     public partial FieldMarkerModule* GetFieldMarkerModule();
 
+    [VirtualFunction(55)]
+    public partial InputTimerModule* GetInputTimerModule();
+
     [VirtualFunction(57)]
     public partial RetainerCommentModule* GetRetainerCommentModule();
 
