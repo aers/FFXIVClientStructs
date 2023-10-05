@@ -13,11 +13,11 @@ public unsafe partial struct RecipeNote {
     [StructLayout(LayoutKind.Explicit, Size = 0x3B0)]
     public struct RecipeData {
         [FieldOffset(0x000)] public RecipeEntry* Recipes;
-        [FieldOffset(0x3A8)] public ushort SelectedIndex;
+        [FieldOffset(0x3B8)] public ushort SelectedIndex;
         public RecipeEntry* SelectedRecipe => Recipes + SelectedIndex;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 0x4F8)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x500)]
     public struct RecipeEntry {
         [FieldOffset(0x4E7)] public byte CraftType;
         [FieldOffset(0x4C2)] public ushort RecipeId;
