@@ -9,6 +9,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [VTableAddress("48 8D 8B ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 03 48 8D 05", 10)]
 [StructLayout(LayoutKind.Explicit, Size = 0x9D18)]
 public unsafe partial struct RaptureAtkUnitManager {
+    public static RaptureAtkUnitManager* Instance() => &RaptureAtkModule.Instance()->RaptureAtkUnitManager;
+
     [FieldOffset(0x0)] public AtkUnitManager AtkUnitManager;
 
     [FieldOffset(0x9C88)] public RaptureAtkModuleFlags Flags;
@@ -22,5 +24,6 @@ public unsafe partial struct RaptureAtkUnitManager {
     [MemberFunction("E8 ?? ?? ?? ?? 8B 6B 20")]
     public partial AtkUnitBase* GetAddonById(ushort id);
 
-    [VirtualFunction(11)] public partial void UpdateAddonByID(ushort addonId, NumberArrayData** numberArrayData, StringArrayData** stringArrayData, bool forced);
+    [VirtualFunction(11)]
+    public partial void UpdateAddonByID(ushort addonId, NumberArrayData** numberArrayData, StringArrayData** stringArrayData, bool forced);
 }
