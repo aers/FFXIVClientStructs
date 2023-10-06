@@ -1,6 +1,6 @@
 using FFXIVClientStructs.FFXIV.Client.System.Framework;
 
-namespace FFXIVClientStructs.FFXIV.Client.UI.Misc; 
+namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x4F8)]
 public unsafe partial struct InputTimerModule {
@@ -11,7 +11,7 @@ public unsafe partial struct InputTimerModule {
     [FieldOffset(0x18)] public float InputTimer;
     [FieldOffset(0x1C)] public float Unk1C; // used in a couple different ways, no idea
     [FieldOffset(0x20)] public float AutoAfkTimeLimit; // -1 if disabled
-    
+
     [FieldOffset(0x28)] public float InstanceContentAfkTimeLimit;
     [FieldOffset(0x2C)] public float PvpAfkTimeLimit;
     [FieldOffset(0x30)] public float MjiAfkTimeLimit; // Island
@@ -19,7 +19,7 @@ public unsafe partial struct InputTimerModule {
     [FieldOffset(0x38)] public float AfkTimeLimit;
 
     [FieldOffset(0x3C)] public int Status;
-    
+
     [FieldOffset(0x42)] public ushort TerritoryTypeId;
     [FieldOffset(0x44)] public float NoviceNetworkAfkTimeLimit;
 
