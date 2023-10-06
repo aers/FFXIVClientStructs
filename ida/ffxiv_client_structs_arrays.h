@@ -311,6 +311,7 @@ struct Client::System::Memory::IMemorySpace;
 struct Client::System::Memory::IMemorySpace::IMemorySpaceVTable;
 struct Client::System::Resource::Handle::MaterialResourceHandle;
 struct Client::System::Resource::Handle::ResourceHandle;
+struct Client::System::Resource::Handle::ResourceHandleType;
 struct StdString;
 struct Client::System::Resource::Handle::MaterialResourceHandle::TextureEntry;
 struct Client::System::Resource::Handle::ModelResourceHandle;
@@ -1620,7 +1621,27 @@ enum Client::System::File::FileMode: unsigned __int32
     LoadSqPackResource = 11
 };
 
-enum Client::System::Resource::ResourceCategory: unsigned __int16
+enum Client::System::Resource::Handle::ResourceHandleType::HandleCategory: unsigned __int16
+{
+    Common = 0,
+    BgCommon = 1,
+    Bg = 2,
+    Cut = 3,
+    Chara = 4,
+    Shader = 5,
+    Ui = 6,
+    Sound = 7,
+    Vfx = 8,
+    UiScript = 9,
+    Exd = 10,
+    GameScript = 11,
+    Music = 12,
+    SqpackTest = 18,
+    Debug = 19,
+    MaxCount = 20
+};
+
+enum Client::System::Resource::ResourceCategory: __int32
 {
     Common = 0,
     BgCommon = 1,
@@ -1976,7 +1997,7 @@ enum Client::UI::Agent::AgentId: unsigned __int32
     FreeShop = 320,
     AozNotebook = 321,
     RhythmAction = 322,
-    RhythmAction = 322,
+    WeddingNotification = 323,
     Emj = 324,
     EmjIntro = 327,
     AozContentBriefing = 328,
@@ -7621,6 +7642,11 @@ struct Client::System::Memory::IMemorySpace::IMemorySpaceVTable /* Size=0x0 */
     /* 0x18 */ __int64 Malloc;
 };
 
+struct Client::System::Resource::Handle::ResourceHandleType /* Size=0x4 */
+{
+    /*     */ byte _gap_0x0[0x4];
+};
+
 struct StdString /* Size=0x20 */
 {
     /*      */ byte _gap_0x0[0x10];
@@ -7635,9 +7661,7 @@ struct Client::System::Resource::Handle::ResourceHandle /* Size=0xB0 */
     /* 0x00 */ void** vfunc;
     /* 0x00 */ Client::System::Resource::Handle::ResourceHandle::ResourceHandleVTable* VTable;
     } _union_0x0;
-    /* 0x08 */ Client::System::Resource::ResourceCategory Category;
-    /* 0x0A */ byte Unknown0A;
-    /* 0x0B */ byte Expansion;
+    /* 0x08 */ Client::System::Resource::Handle::ResourceHandleType Type;
     /* 0x0C */ unsigned __int32 FileType;
     /* 0x10 */ unsigned __int32 Id;
     /*      */ byte _gap_0x14[0x4];

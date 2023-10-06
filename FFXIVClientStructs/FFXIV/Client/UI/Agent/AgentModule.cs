@@ -336,7 +336,7 @@ public enum AgentId : uint {
     FreeShop = 320,
     AozNotebook = 321, //Bluemage Spells
     RhythmAction = 322,
-    WeddingNotification = 322,
+    WeddingNotification = 323,
 
     Emj = 324, //Mahjong
 

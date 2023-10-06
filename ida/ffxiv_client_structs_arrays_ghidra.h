@@ -311,6 +311,7 @@ struct Client_System_Memory_IMemorySpace;
 struct Client_System_Memory_IMemorySpace_IMemorySpaceVTable;
 struct Client_System_Resource_Handle_MaterialResourceHandle;
 struct Client_System_Resource_Handle_ResourceHandle;
+struct Client_System_Resource_Handle_ResourceHandleType;
 struct StdString;
 struct Client_System_Resource_Handle_MaterialResourceHandle_TextureEntry;
 struct Client_System_Resource_Handle_ModelResourceHandle;
@@ -1620,7 +1621,27 @@ enum Client_System_File_FileMode /* Size=0x4 */
     LoadSqPackResource = 11
 };
 
-enum Client_System_Resource_ResourceCategory /* Size=0x2 */
+enum Client_System_Resource_Handle_ResourceHandleType_HandleCategory /* Size=0x2 */
+{
+    Common = 0,
+    BgCommon = 1,
+    Bg = 2,
+    Cut = 3,
+    Chara = 4,
+    Shader = 5,
+    Ui = 6,
+    Sound = 7,
+    Vfx = 8,
+    UiScript = 9,
+    Exd = 10,
+    GameScript = 11,
+    Music = 12,
+    SqpackTest = 18,
+    Debug = 19,
+    MaxCount = 20
+};
+
+enum Client_System_Resource_ResourceCategory /* Size=0x4 */
 {
     Common = 0,
     BgCommon = 1,
@@ -1976,7 +1997,7 @@ enum Client_UI_Agent_AgentId /* Size=0x4 */
     FreeShop = 320,
     AozNotebook = 321,
     RhythmAction = 322,
-    RhythmAction = 322,
+    WeddingNotification = 323,
     Emj = 324,
     EmjIntro = 327,
     AozContentBriefing = 328,
@@ -7621,6 +7642,11 @@ struct Client_System_Memory_IMemorySpace_IMemorySpaceVTable /* Size=0x0 */
     /* 0x18 */ __int64 Malloc;
 };
 
+struct Client_System_Resource_Handle_ResourceHandleType /* Size=0x4 */
+{
+    /*     */ byte _gap_0x0[0x4];
+};
+
 struct StdString /* Size=0x20 */
 {
     /*      */ byte _gap_0x0[0x10];
@@ -7635,9 +7661,7 @@ struct Client_System_Resource_Handle_ResourceHandle /* Size=0xB0 */
     /* 0x00 */ void** vfunc;
     /* 0x00 */ Client_System_Resource_Handle_ResourceHandle_ResourceHandleVTable* VTable;
     } _union_0x0;
-    /* 0x08 */ Client_System_Resource_ResourceCategory Category;
-    /* 0x0A */ byte Unknown0A;
-    /* 0x0B */ byte Expansion;
+    /* 0x08 */ Client_System_Resource_Handle_ResourceHandleType Type;
     /* 0x0C */ unsigned __int32 FileType;
     /* 0x10 */ unsigned __int32 Id;
     /*      */ byte _gap_0x14[0x4];
