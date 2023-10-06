@@ -6,7 +6,12 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [StructLayout(LayoutKind.Explicit, Size = 0x2F8)]
 public struct AddonActionDoubleCrossBase {
     [FieldOffset(0x000)] public AddonActionBarBase ActionBarBase;
-
+    
+    /// <summary>
+    /// Indicates whether this bar is selected.
+    /// </summary>
+    [FieldOffset(0x2E0)] public bool Selected;
+    
     /// <summary>
     /// Set to 1 when the WXHB is showing the directional pad inputs as well as the action button inputs.
     /// </summary>
