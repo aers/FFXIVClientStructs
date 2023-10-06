@@ -1,3 +1,4 @@
+using FFXIVClientStructs.FFXIV.Client.Game;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
@@ -36,14 +37,39 @@ public struct SupplyProvisioningItem {
     [FieldOffset(0x90)] public int ItemCategoryIconId; // eg, Bracelet IconId, Body IconId
 }
 
+/// <summary>
+/// Positions 0-7 are supply items (CRP, BSM, ...)
+/// Positions 8-10 are provisioning items (MIN, BTN, FSH)
+/// Positions 11+ are expert delivery items
+/// </summary>
 [StructLayout(LayoutKind.Explicit, Size = 0xA0)]
 public struct GrandCompanyItem {
     [FieldOffset(0x00)] public Utf8String ItemName;
+
+    /// <summary>
+    /// For supply and provisioning items: Always Inventory1 (even if you have none in your inventory).
+    /// </summary>
+    [FieldOffset(0x68)] public InventoryType Inventory;
+
     [FieldOffset(0x70)] public int IconID;
     [FieldOffset(0x74)] public int ExpReward;
     [FieldOffset(0x78)] public int SealReward;
     [FieldOffset(0x80)] public int NumPossessed;
+    [FieldOffset(0x84)] public uint ItemId;
+    [FieldOffset(0x8C)] public int Position; // position within AgentGrandCompanySupply.ItemArray
     [FieldOffset(0x90)] public int NumRequested;
+
+    /// <summary>
+    /// For supply and provisioning items: Level
+    /// For expert delivery items: ItemLevel
+    /// </summary>
+    [FieldOffset(0x94)] public short ItemLevel;
+
+    /// <summary>
+    /// for supply and provisioning items: always 0.
+    /// </summary>
+    [FieldOffset(0x96)] public byte ItemUiCategory;
+    [FieldOffset(0x97)] public byte Slot;
     [FieldOffset(0x9A)] public byte TurnInAvailable;
     [FieldOffset(0x9B)] public byte Bonus;
 
