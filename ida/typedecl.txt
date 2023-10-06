@@ -1,0 +1,4 @@
+# test comment
+Client::Game::MJI::MJIManager.IsRecipeUnlocked(Client::Game::MJI::MJIManager* this, ushort recipeId) -> bool
+Client::Game::MJI::MJIManager.IsPouchItemLocked(Client::Game::MJI::MJIManager* this, _ pouchItemId) -> bool
+Client::Game::MJI::MJIManager.IsFunctionUnlocked(Client::Game::MJI::MJIManager* this, _ functionId) -> bool
