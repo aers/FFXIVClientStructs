@@ -3476,6 +3476,9 @@ classes:
         base: Component::GUI::AtkComponentBase
     vfuncs:
       24: GetAtkComponentListItemRenderer # (this, listItemIndex)
+      31: SelectItem
+      32: DeselectItem
+      36: GetItemCount
     funcs:
       0x1405605B0: ctor
   Component::GUI::AtkComponentTreeList:
@@ -3483,8 +3486,12 @@ classes:
       - ea: 0x141A07858
         base: Component::GUI::AtkComponentList
     funcs:
+      0x140563060: LoadAtkValues
+      0x140563AC0: ExpandGroupExclusively
+      0x140564DD0: GetItem
       0x140565100: ctor
       0x1405651C0: Finalize
+      0x1405675C0: CreateItem
   Component::GUI::AtkModule:
     vtbls:
       - ea: 0x141A079D0
