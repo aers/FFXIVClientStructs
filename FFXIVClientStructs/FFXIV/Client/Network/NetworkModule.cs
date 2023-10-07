@@ -1,12 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 using Unknown = nint;
 
 namespace FFXIVClientStructs.FFXIV.Client.Network;
 
-[StructLayout(LayoutKind.Explicit, Size = 0xAF8)]
-public unsafe partial struct NetworkModule
-{
+[StructLayout(LayoutKind.Explicit, Size = 0xB60)]
+public unsafe partial struct NetworkModule {
     //Filled from Config
     [FieldOffset(0x02C)] public int Unk02C;
     [FieldOffset(0x030)] public int Unk030;
@@ -24,99 +23,102 @@ public unsafe partial struct NetworkModule
     [FixedSizeArray<Utf8String>(0xC)] [FieldOffset(0x060)]
     public fixed byte LobbyServerNames[0xC * 0x68];
 
-    //0x10 bytes
-    [FieldOffset(0x540)] public int Unk540;
+    [FieldOffset(0x540)] public Utf8String Unk540;
 
-    [FieldOffset(0x544)] public short Unk544;
-
+    [FieldOffset(0x5A8)] public int Unk5A8;
+    [FieldOffset(0x5AC)] public int Unk5AC;
     //These are all filled with information from config
-    [FieldOffset(0x548)] public int Unk548; //ServerPort
-    [FieldOffset(0x550)] public Utf8String UnkString550; //config-dl.ffxiv.com
-    [FieldOffset(0x5B8)] public int Unk5B8;
-    [FieldOffset(0x5BC)] public int Unk5BC; //ServerPort
-    [FieldOffset(0x5C0)] public Utf8String UnkString5C0; //dctravel.ffxiv.com
-    [FieldOffset(0x628)] public int Unk628; //ServerPort
-    [FieldOffset(0x630)] public Utf8String UnkString630; //Related to 940 Seen: neolobby01.ffxiv.com
-    [FieldOffset(0x698)] public int Unk698; //ServerPort
-    [FieldOffset(0x6A0)] public Utf8String UnkString6A0; //Seen: neolobby03.ffxiv.com
-    [FieldOffset(0x708)] public int Unk708;
-    [FieldOffset(0x70C)] public int Unk70C;
-    [FieldOffset(0x710)] public int Unk710;
-    [FieldOffset(0x714)] public int Unk714;
-    [FieldOffset(0x718)] public Utf8String UnkString718;
-    [FieldOffset(0x780)] public Utf8String Protocol780; //Seen: TCP
-    [FieldOffset(0x7E8)] public int Unk7E8; //Seen: 0
-    [FieldOffset(0x7F0)] public Utf8String UnkString7F0; //Seen: "00000"
-    [FieldOffset(0x858)] public Utf8String UnkString858;
+    [FieldOffset(0x5B0)] public int Unk548; //ServerPort
+    //4 bytes padding
+    [FieldOffset(0x5B8)] public Utf8String ConfigServerName; //config-dl.ffxiv.com
+    [FieldOffset(0x620)] public int Unk620; //0
+    [FieldOffset(0x624)] public int ConfigServerPort; //ServerPort (443)
+    [FieldOffset(0x628)] public Utf8String DcTravelServerName; //dctravel.ffxiv.com
+    [FieldOffset(0x690)] public short DcTravelServerPort; //ServerPort 54994
+    //6 bytes padding
+    [FieldOffset(0x698)] public Utf8String UnkString698; //Related to 9A8 Seen: neolobby01.ffxiv.com
+    [FieldOffset(0x700)] public short Unk700; //ServerPort 54992
+    //6 bytes padding
+    [FieldOffset(0x708)] public Utf8String UnkString708; //Seen: neolobby03.ffxiv.com
+    [FieldOffset(0x770)] public int Unk770;
+    [FieldOffset(0x774)] public int Unk774;
+    [FieldOffset(0x778)] public int Unk778;
+    [FieldOffset(0x77C)] public int Unk77C; //Sever Port 54992
+    [FieldOffset(0x780)] public Utf8String UnkString780; //Empty
+    [FieldOffset(0x7E8)] public Utf8String Protocol7E8; //Seen: TCP
+    [FieldOffset(0x850)] public long Unk850; //Seen: 0
+    [FieldOffset(0x858)] public Utf8String UnkString858; //Seen: "00000"
     [FieldOffset(0x8C0)] public Utf8String UnkString8C0;
-    [FieldOffset(0x928)] public byte Unk928;
-    [FieldOffset(0x92C)] public int Unk92C;
-
+    [FieldOffset(0x928)] public Utf8String UnkString8928;
+    [FieldOffset(0x990)] public long Unk990;
     //This region seems to generally hold references to other objects
-    [FieldOffset(0x930)] public Unk930Obj* Unk930; //seen in getting FC info
-    [FieldOffset(0x938)] public void* Unk938; //Struct is similar to 930Obj
-    [FieldOffset(0x940)] public Unk940Obj* Unk940;
-    [FieldOffset(0x948)] public void* Unk948;
-    [FieldOffset(0x950)] public void* Unk950;
-    [FieldOffset(0x958)] public void* Unk958;
-    [FieldOffset(0x960)] public byte Unk960; //Related to 940
-    [FieldOffset(0x961)] public bool WinSockInitialized;
-    [FieldOffset(0x968)] public NetworkModulePacketReceiverCallback* PacketReceiverCallback;
-    [FieldOffset(0x970)] public void* Unk970;
-    [FieldOffset(0x978)] public void* Unk978;
+    [FieldOffset(0x998)] public Unk930Obj* Unk998; //seen in getting FC info
 
-    [FieldOffset(0x980)] public int Unk980;
+
+    [FieldOffset(0x9A0)] public void* Unk9A0; //Struct is similar to 930Obj
+    [FieldOffset(0x9A8)] public Unk940Obj* Unk9A8;
+    [FieldOffset(0x9B0)] public void* Unk9B0;
+    [FieldOffset(0x9B8)] public void* Unk9B8;
+    [FieldOffset(0x9C0)] public void* Unk9C0;
+    [FieldOffset(0x9C8)] public byte Unk9C8; //Related to 940
+    [FieldOffset(0x9C9)] public bool WinSockInitialized;
+    [FieldOffset(0x9D0)] public NetworkModulePacketReceiverCallback* PacketReceiverCallback;
+    [FieldOffset(0x9D8)] public void* Unk9D8;
+    [FieldOffset(0x9E0)] public void* Unk9E0;
+
+    [FieldOffset(0x9E8)] public int Unk9E8;
 
     //OVERLAP!!
-    [FieldOffset(0x984)] public int Unk984; //State related to Unk940
-    [FieldOffset(0x988)] public byte Unk988; //guessing bool
+    [FieldOffset(0x9EC)] public int Unk9EC; //State related to Unk940
+    [FieldOffset(0x9F0)] public byte Unk9F0; //guessing bool
 
-    [FieldOffset(0x990)] public TimeStruct Unk990;
-    [FieldOffset(0x9A8)] public int Unk9A8;
+    //TODO: Offsets (+0x68)
 
-    [FieldOffset(0x9D8)] public int Unk9D8; //Init = 30 (0x1e)
-    [FieldOffset(0x9E0)] public TimeStruct Unk9E0;
-    [FieldOffset(0x9F8)] public int Unk9F8; //Init = 60 (0x3C)
-    [FieldOffset(0xA00)] public void* UnkA00;
-    [FieldOffset(0xA08)] public int UnkA08;
-    [FieldOffset(0xA0C)] public int UnkA0C; //Timestamp
-    [FieldOffset(0xA10)] public void* UnkA10;
-    [FieldOffset(0xA18)] public void* UnkA18;
-    [FieldOffset(0xA20)] public TimeStruct UnkA20;
-    [FieldOffset(0xA38)] public byte UnkA38;
-    [FieldOffset(0xA40)] public TimeStruct UnkA40;
-    [FieldOffset(0xA58)] public void* UnkA58;
-    [FieldOffset(0xA60)] public void* UnkA60;
-    [FieldOffset(0xA68)] public TimeStruct UnkA68;
+    [FieldOffset(0x9F8)] public TimeStruct Unk9F8;
+    [FieldOffset(0xA10)] public int UnkA10;
+
+    [FieldOffset(0xA40)] public int UnkA40; //Init = 30 (0x1e)
+    [FieldOffset(0xA48)] public TimeStruct UnkA48;
+    [FieldOffset(0xA60)] public int UnkA60; //Init = 60 (0x3C)
+    [FieldOffset(0xA68)] public void* UnkA68;
+    [FieldOffset(0xA70)] public int UnkA70;
+    [FieldOffset(0xA74)] public int UnkA74; //Timestamp
+    [FieldOffset(0xA78)] public void* UnkA78;
     [FieldOffset(0xA80)] public void* UnkA80;
     [FieldOffset(0xA88)] public TimeStruct UnkA88;
-    [FieldOffset(0xAA0)] public TimeStruct UnkAA0;
-    [FieldOffset(0xAB8)] public int UnkAB8; //Init 0x42c80000
-    [FieldOffset(0xABC)] public byte UnkABC;
-    [FieldOffset(0xAC0)] public byte UnkAC0;
-    [FieldOffset(0xAC4)] public int UnkAC4; //Init 0xFFFFFFFF
-    [FieldOffset(0xAC8)] public int UnkAC8; //From Config
-    [FieldOffset(0xACC)] public int UnkACC; //From Config
-    [FieldOffset(0xAD0)] public int UnkAD0; //From Config
-    [FieldOffset(0xAD4)] public int UnkAD4; //From Config
-    [FieldOffset(0xAD8)] public TimeStruct UnkAD8;
+    [FieldOffset(0xAA0)] public byte UnkAA0;
+    [FieldOffset(0xAA8)] public TimeStruct UnkAA8;
 
-    [FieldOffset(0xAF0)] public byte UnkAF0; //guessing bool
+    [FieldOffset(0xAC0)] public void* UnkAC0;
+    [FieldOffset(0xAC8)] public void* UnkAC8;
+    [FieldOffset(0xAD0)] public TimeStruct UnkAD0;
+    [FieldOffset(0xAE8)] public void* UnkAE8;
+    [FieldOffset(0xAF0)] public TimeStruct UnkAF0;
+    [FieldOffset(0xB08)] public TimeStruct UnkB08;
+    [FieldOffset(0xB20)] public int UnkB20; //Init 0x42c80000
+    [FieldOffset(0xB24)] public byte UnkB24;
+    [FieldOffset(0xB28)] public byte UnkB28;
+    [FieldOffset(0xB2C)] public int UnkB2C; //Init 0xFFFFFFFF
+    [FieldOffset(0xB30)] public int UnkB30; //From Config
+    [FieldOffset(0xB34)] public int UnkB34; //From Config
+    [FieldOffset(0xB38)] public int UnkB38; //From Config
+    [FieldOffset(0xB3C)] public int UnkB3C; //From Config
+    [FieldOffset(0xB40)] public TimeStruct UnkB40;
+
+    [FieldOffset(0xB58)] public byte UnkB58; //guessing bool
 
     //FUN_14157e450 is probably init
     //FUN_14157f880 proxies Unk930.FUN_1415858f0(...)
 
     [StructLayout(LayoutKind.Explicit, Size = 0x18)]
-    public struct TimeStruct
-    {
+    public struct TimeStruct {
         [FieldOffset(0x00)] public int TimeStamp;
         [FieldOffset(0x08)] public ulong CpuMilliSeconds;
         [FieldOffset(0x10)] public ulong CpuNanoSeconds;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0xA0)]
-    public partial struct Unk930Obj
-    {
+    public partial struct Unk930Obj {
         [FieldOffset(0x00)] public Utf8String ServerIp;
 
         [FieldOffset(0x68)] public short Unk68;
@@ -133,8 +135,7 @@ public unsafe partial struct NetworkModule
 
         //FUN_1415858f0 proxies Unk098.FUN_1415ea880(...)
         [StructLayout(LayoutKind.Explicit, Size = 0x118)]
-        public partial struct Unk98Obj
-        {
+        public partial struct Unk98Obj {
             [FieldOffset(0x00)] public void** vtbl;
             [FieldOffset(0x008)] public Unk008Obj* Unk008; //Some struct
             [FieldOffset(0x010)] public Unk010Obj* Unk010;
@@ -157,13 +158,11 @@ public unsafe partial struct NetworkModule
             [FieldOffset(0x114)] public ushort Unk114;
 
 
-            public struct Unk008Obj
-            {
+            public struct Unk008Obj {
             }
 
             [StructLayout(LayoutKind.Explicit, Size = 0x270)]
-            public struct Unk010Obj
-            {
+            public struct Unk010Obj {
                 [FieldOffset(0x000)] public void** vtbl;
                 [FieldOffset(0x008)] public Unk008Obj2 Unk008;
                 [FieldOffset(0x010)] public Unknown* Unk010; //Looks like a self referenceing empty vector
@@ -190,8 +189,7 @@ public unsafe partial struct NetworkModule
                 [FieldOffset(0x200)] public void* Unk200; //CriticalSection
 
                 [StructLayout(LayoutKind.Explicit)]
-                public struct Unk008Obj2
-                {
+                public struct Unk008Obj2 {
                     [FieldOffset(0x000)] public void** vtbl;
                 }
             }
@@ -199,8 +197,7 @@ public unsafe partial struct NetworkModule
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x7C8)]
-    public struct Unk940Obj
-    {
+    public struct Unk940Obj {
         //ctor FUN_141586030
         [FieldOffset(0x28)] public int Unk028;
         [FieldOffset(0x2C)] public short Unk02C;
@@ -260,28 +257,24 @@ public unsafe partial struct NetworkModule
         [FieldOffset(0x760)] public Utf8String Unk760;
 
         [StructLayout(LayoutKind.Explicit, Size = 0x70)]
-        public struct Unk070Obj
-        {
+        public struct Unk070Obj {
             [FieldOffset(0x00)] public Utf8String Unk00;
             [FieldOffset(0x68)] public short Unk068; //Init to 54999
         }
 
         [StructLayout(LayoutKind.Explicit, Size = 0x130)]
-        public struct Unk538Obj
-        {
+        public struct Unk538Obj {
         }
 
         [StructLayout(LayoutKind.Explicit, Size = 0x18)]
-        public struct Unk260Obj
-        {
+        public struct Unk260Obj {
             [FieldOffset(0x00)] public Unknown Unk00;
             [FieldOffset(0x08)] public Unknown Unk08;
             [FieldOffset(0x10)] public Unknown Unk10;
         }
 
         [StructLayout(LayoutKind.Explicit, Size = 0x20)]
-        public struct Unk2A8Obj
-        {
+        public struct Unk2A8Obj {
             [FieldOffset(0x00)] public Unknown Unk00;
             [FieldOffset(0x08)] public Unknown Unk08;
             [FieldOffset(0x10)] public Unknown Unk10;
@@ -289,8 +282,7 @@ public unsafe partial struct NetworkModule
         }
 
         [StructLayout(LayoutKind.Explicit, Size = 0x5B)]
-        public struct Unk2C8Obj
-        {
+        public struct Unk2C8Obj {
         }
     }
 }
