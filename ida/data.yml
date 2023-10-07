@@ -5251,7 +5251,7 @@ classes:
       0x140C25050: ctor
   Client::UI::Agent::AgentGrandCompanySupply:
     vtbls:
-      - ea: 0x141A8B7E0
+      - ea: 0x141A88490
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140D04580: ctor
