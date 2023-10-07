@@ -3230,6 +3230,7 @@ classes:
         base: Component::GUI::AtkEventTarget
     vfuncs:
       1: Destroy
+      2: UpdateAnimation
     funcs:
       0x140529C80: ctor
       0x140529DE0: GetAsAtkImageNode
