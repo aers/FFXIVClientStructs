@@ -27,7 +27,7 @@ public unsafe partial struct UIState {
     [FieldOffset(0x3850)] public AreaInstance AreaInstance; // at vtbl - 0x10
     [FieldOffset(0x3D18)] public Loot Loot;
 
-    [FieldOffset(0x43B8)] public RecipeNote RecipeNote;
+    [FieldOffset(0x49E0)] public RecipeNote RecipeNote;
 
     [FieldOffset(0xB560)] public Director* ActiveDirector;
     [FieldOffset(0xB6A8)] public FateDirector* FateDirector;
