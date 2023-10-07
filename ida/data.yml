@@ -5255,7 +5255,7 @@ classes:
       - ea: 0x141A88490
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140D04580: ctor
+      0x140C261E0: ctor
   Client::UI::Agent::AgentGrandCompanyExchange:
     vtbls:
       - ea: 0x141A883A0
@@ -5361,6 +5361,12 @@ classes:
     vtbls:
       - ea: 0x1419DE710
         base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::ItemCatalogContextEvent:
+    vtbls:
+      - ea: 0x141A70350
+        base: Component::GUI::AtkModuleInterface::AtkEventInterface
+    funcs:
+      0x1409FE9E0: ctor
   Client::UI::Agent::AgentShop:
     vtbls:
       - ea: 0x141A70368
