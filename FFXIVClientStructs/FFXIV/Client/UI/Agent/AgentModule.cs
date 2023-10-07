@@ -280,6 +280,7 @@ public enum AgentId : uint {
     CameraSetting = 251,
     PvPDuelRequest = 252,
     PvPHeader = 253,
+    PvPGauge = 254, // PvPFrontlineGauge
 
     AquariumSetting = 257,
 
@@ -407,6 +408,7 @@ public enum AgentId : uint {
     BannerEditor = 395, // Portrait Editor
     BannerUpdateView = 396,
 
+    PvPMap = 398,
     CharaCard = 399, // AdventurerPlate
     CharaCardDesignSetting = 400,
     CharaCardProfileSetting = 401,
@@ -439,8 +441,6 @@ public enum AgentId : uint {
     BannerParty = 430,
     BannerMIP = 431,
     TurnBreak = 432,
-
-    //TODO PvPMap = 432
 
     SXTBattleLog = 434,
 

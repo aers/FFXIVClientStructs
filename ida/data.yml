@@ -6488,9 +6488,9 @@ classes:
     funcs:
       0x141256080: ctor
   Client::UI::Agent::AgentPvPMap:
-#    vtbls:
-#fail       - ea: 0x141A86708
-#        base: Client::UI::Agent::AgentInterface
+    vtbls:
+      - ea: 0x141A74AE0
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentPvPMKSIntroduction:
     vtbls:
       - ea: 0x141A74BF0
