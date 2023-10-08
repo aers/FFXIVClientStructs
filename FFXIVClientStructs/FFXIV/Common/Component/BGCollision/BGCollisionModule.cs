@@ -31,7 +31,7 @@ public unsafe partial struct BGCollisionModule {
     }
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x50)]
+[StructLayout(LayoutKind.Explicit, Size = 0x58)]
 public unsafe struct RaycastHit {
     [FieldOffset(0x00)] public Vector3 Point;
 
@@ -41,8 +41,8 @@ public unsafe struct RaycastHit {
     [FieldOffset(0x24)] public Vector3 V3;
 
     [FieldOffset(0x30)] public Vector3 Unk30;
-    [FieldOffset(0x3C)] public int Flags; // layers i guess?
-    [FieldOffset(0x40)] public int Unk40;
-    [FieldOffset(0x44)] public float Distance;
-    [FieldOffset(0x48)] public Object* Object;
+    [FieldOffset(0x40)] public int Flags; // layers i guess?
+    [FieldOffset(0x44)] public int Unk44; // part of flags?
+    [FieldOffset(0x48)] public float Distance;
+    [FieldOffset(0x50)] public Object* Object;
 }
