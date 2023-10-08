@@ -29,9 +29,9 @@ public unsafe partial struct GameObject {
     [FieldOffset(0x10)] public Vector3 DefaultPosition;
     [FieldOffset(0x20)] public float DefaultRotation;
     [FieldOffset(0x30)] public fixed byte Name[64];
-    [FieldOffset(0x74)] public uint ObjectID;
+    [FieldOffset(0x74)] public uint ObjectID; //TODO: rename to EntityId
     [FieldOffset(0x78)] public uint LayoutID;
-    [FieldOffset(0x80)] public uint DataID;
+    [FieldOffset(0x80)] public uint DataID; //TODO: raname to BaseId
     [FieldOffset(0x84)] public uint OwnerID;
     [FieldOffset(0x88)] public ushort ObjectIndex; // index in object table
     [FieldOffset(0x8C)] public byte ObjectKind;
@@ -86,7 +86,7 @@ public unsafe partial struct GameObject {
     public partial void Highlight(ObjectHighlightColor color);
 
     [VirtualFunction(47)]
-    public partial uint GetNpcID();
+    public partial uint GetNpcID(); //TODO: rename to GetNameId
 
     [VirtualFunction(57)]
     public partial bool IsDead();
