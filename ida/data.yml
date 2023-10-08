@@ -84,7 +84,6 @@ functions:
   0x1405053B0: Client::System::Input::InputData_IsInputIDKeyPress
   0x1405054C0: Client::System::Input::InputData_IsInputIDClicked
   0x140505E00: Client::System::Input::InputData_IsMouseCombinationDragged
-  0x140510450: Component::GUI::AtkCursor_SetCursorType # the cursor's icon I believe
   0x14050F6F0: RemoveFromList # (AtkEvent**, AtkEvent*) Finds and removes param2 from the param1 list
   0x140539090: GetScaleListEntryFromScale
   0x1405478C0: GetScaleForListOption
@@ -3218,6 +3217,12 @@ classes:
       0x14053BCF0: GetSingleton
       0x14053BD00: GetSingleton2
       0x1405A0750: Finalize
+  Component::GUI::AtkCursor:
+    funcs:
+      0x140510330: Show
+      0x1405103C0: Hide
+      0x140510450: SetCursorType
+      0x140510500: SetVisible
   Component::GUI::AtkDragDropManager:
     vtbls:
       - ea: 0x141A065D8
