@@ -3,7 +3,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.MJI;
 /// <summary>
 /// Manager struct (?) for Island Sanctuary (internally MJI).
 /// </summary>
-[StructLayout(LayoutKind.Explicit, Size = 0x3F4)] // probably bigger
+[StructLayout(LayoutKind.Explicit, Size = 0x440)]
 public unsafe partial struct MJIManager {
     /// <summary>
     /// Reports if the player is currently on the Island Sanctuary.

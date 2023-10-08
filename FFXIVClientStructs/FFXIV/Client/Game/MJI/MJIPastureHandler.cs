@@ -1,7 +1,7 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game.MJI;
 
-// ctor 1413EA840 ? - extends EventHandler
-[StructLayout(LayoutKind.Explicit, Size = 0xAE0)] // completely lost track of size
+// ctor 1414E1770 ? - extends EventHandler
+[StructLayout(LayoutKind.Explicit, Size = 0xB78)]
 public unsafe partial struct MJIPastureHandler {
     [FieldOffset(0x0)] public void* vtbl;
 

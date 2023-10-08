@@ -647,6 +647,7 @@ classes:
       0x140B859E0: Initialize # static
       0x140B85A30: Destroy    # static
       0x140B85A70: GetSingleton  # static
+      0x140B85A80: Load   # loads in a ton of sub-structs and other info.
       0x140B89000: ctor
       0x140B892A0: Finalize
       0x140B87BB0: LoadDemandResearchPacket
@@ -664,10 +665,14 @@ classes:
       0x140B8BF90: ctor
   Client::Game::MJI::MJIPastureHandler:
     funcs:
+      0x1414E1770: ctor
       0x1414E3EB0: GetCurrentRoamingMinionCount
       0x1414E4020: SetMinionPlaceStatus  # (this, minionId, isPlaced)
       0x1414E3AD0: ExecuteReleaseMinion  # (this, minionId, areaId)
       0x1414E3C60: ExecuteRecallMinion   # (this, minionId)
+  Client::Game::MJI::MJIFarmHandler:
+    funcs:
+      0x1414DE4C0: ctor
   Client::System::String::Utf8String:
     funcs:
       0x140059B20: ctor  # empty string ctor
@@ -4034,6 +4039,7 @@ classes:
       0x14067F150: ctor
       0x14067F410: Finalize
       0x140680A10: PrintMessage
+      0x140683A30: PrintString  # (this, stringPtr)
       0x140681FE0: ShowLogMessage # (this, logMessageId)
       0x140682170: ShowLogMessage<uint> # (this, logMessageId, IntegerParameter1)
       0x140682450: ShowLogMessage<uint,uint> # (this, logMessageId, IntegerParameter1, IntegerParameter2)
