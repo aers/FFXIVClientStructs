@@ -6,8 +6,11 @@ globals:
   0x141FE5380: g_ClientInstanceLimit
   0x142171820: g_InputManager
   0x142171848: g_InputManager_MouseButtonHoldState
-  #fail  0x142106BE0: g_StackCookie
-  #fail  0x1421244B0: g_WinVersion
+  #fail 0x142106BE0: g_StackCookie
+  #fail 0x14218DD88: g_InvereStackCookie
+  #fail 0x1421A95F0: argc
+  #fail 0x1421A95F8: argv
+  #fail 0x1421AB620: g_OSVersion
   0x1421AC368: g_CurrentCharaSelectCharacter # Client::Game::Character::Character*
   0x1421AC540: g_CharaSelectCharacterList # see Client::UI::Agent::AgentLobby::CharaSelectCharacterList
   0x1421BE480: g_RenderSkeletonLinkedListStart
@@ -75,7 +78,7 @@ functions:
   0x1400622D0: MemoryManager_GetSoundSpace_2
   0x140060AB0: MemoryManager_SpaceAlloc
   0x1400654E0: IsMacClient
-  #fail  0x140094DB0: GetWinVersion
+  0x1400951b0: CheckOsTypeAndVersion
   0x1400A6BD0: GetCurrentUnixTimestamp # in seconds
   0x1400A6D00: Client::UI::PlaySoundEffect # this is a static function in the UI namespace, arg1 is the SE
   0x1400A8990: Client::UI::GetUIColor # (idx, &color, &edgeColor)
@@ -395,6 +398,8 @@ classes:
   Client::Graphics::RenderObjectList:
   Client::Graphics::Singleton:
   Client::System::Common::NonCopyable:
+    vfuncs:
+      0: dtor
   Client::System::Crypt::CryptInterface:
   Client::System::Input::InputData::InputCodeModifiedInterface:
   Client::System::Input::SoftKeyboardDeviceInterface::SoftKeyboardInputInterface:
@@ -1381,7 +1386,7 @@ classes:
       0x140093B20: GetNetworkModuleProxy
       0x140093B40: GetUIModule
       0x140093B60: GetUIClipboard
-      #fail  0x140094220: InitNetworking
+      #fail  0x140094620: InitNetworking
       0x140094A20: TaskBegin
       0x140094B60: TaskDraw2DBegin
       0x140094BA0: TaskUpdateInputDevice
@@ -2409,6 +2414,7 @@ classes:
     funcs:
       0x14021B020: ctor
       0x14021B070: Initialize
+      #fail 0x14021BE40: SetOSTypeAndVersion
       0x14021CB20: IsInCrossWorldDuty
   Application::Network::PacketReceiverCallbackInterface:
     vtbls:
@@ -2536,6 +2542,11 @@ classes:
   Client::UI::Agent::AgentLobby::LobbyData:
     funcs:
       0x140241A90: GetCharacterEntryByIndex
+      #fail 0x14023f310: GetCharacterEntryFromServer
+  Client::UI::Agent::AgentLobby::LobbyData::CharaSelectCharacterEntry:
+    funcs:
+      #fail 0x1416187B0: IsNotLocked
+      #fail 0x141618890: IsNameChangeRequired
   Client::UI::Agent::AgentCursor:
     vtbls:
       - ea: 0x1419DE6D0

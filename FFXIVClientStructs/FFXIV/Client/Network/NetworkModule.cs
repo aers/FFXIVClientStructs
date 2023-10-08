@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using FFXIVClientStructs.FFXIV.Application.Network;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 using Unknown = nint;
 
@@ -25,8 +26,8 @@ public unsafe partial struct NetworkModule {
 
     [FieldOffset(0x540)] public Utf8String Unk540;
 
-    [FieldOffset(0x5A8)] public int Unk5A8;
-    [FieldOffset(0x5AC)] public int Unk5AC;
+    [FieldOffset(0x5A8)] public int Unk5A8; //Set by FUN_14021be20, Os related
+    [FieldOffset(0x5AC)] public int OperatingSystemTypeAndVersion; //Most likely this si an enum
     //These are all filled with information from config
     [FieldOffset(0x5B0)] public int Unk548; //ServerPort
     //4 bytes padding
@@ -48,8 +49,8 @@ public unsafe partial struct NetworkModule {
     [FieldOffset(0x7E8)] public Utf8String Protocol7E8; //Seen: TCP
     [FieldOffset(0x850)] public long Unk850; //Seen: 0
     [FieldOffset(0x858)] public Utf8String UnkString858; //Seen: "00000"
-    [FieldOffset(0x8C0)] public Utf8String UnkString8C0;
-    [FieldOffset(0x928)] public Utf8String UnkString8928;
+    [FieldOffset(0x8C0)] public Utf8String UnkString8C0; //Empty
+    [FieldOffset(0x928)] public Utf8String UnkString928; //Empty
     [FieldOffset(0x990)] public long Unk990;
     //This region seems to generally hold references to other objects
     [FieldOffset(0x998)] public Unk930Obj* Unk998; //seen in getting FC info
@@ -59,14 +60,14 @@ public unsafe partial struct NetworkModule {
     [FieldOffset(0x9A8)] public Unk940Obj* Unk9A8;
     [FieldOffset(0x9B0)] public void* Unk9B0;
     [FieldOffset(0x9B8)] public void* Unk9B8;
-    [FieldOffset(0x9C0)] public void* Unk9C0;
+    [FieldOffset(0x9C0)] public Unk9C0Struct* Unk9C0; //Has vtbl
     [FieldOffset(0x9C8)] public byte Unk9C8; //Related to 940
     [FieldOffset(0x9C9)] public bool WinSockInitialized;
     [FieldOffset(0x9D0)] public NetworkModulePacketReceiverCallback* PacketReceiverCallback;
     [FieldOffset(0x9D8)] public void* Unk9D8;
     [FieldOffset(0x9E0)] public void* Unk9E0;
 
-    [FieldOffset(0x9E8)] public int Unk9E8;
+    [FieldOffset(0x9E8)] public int Unk9E8; //Compared to 4
 
     //OVERLAP!!
     [FieldOffset(0x9EC)] public int Unk9EC; //State related to Unk940
@@ -78,6 +79,7 @@ public unsafe partial struct NetworkModule {
     [FieldOffset(0xA10)] public int UnkA10;
 
     [FieldOffset(0xA40)] public int UnkA40; //Init = 30 (0x1e)
+    [FieldOffset(0xA44)] public int UnkA44;
     [FieldOffset(0xA48)] public TimeStruct UnkA48;
     [FieldOffset(0xA60)] public int UnkA60; //Init = 60 (0x3C)
     [FieldOffset(0xA68)] public void* UnkA68;
@@ -107,8 +109,13 @@ public unsafe partial struct NetworkModule {
 
     [FieldOffset(0xB58)] public byte UnkB58; //guessing bool
 
-    //FUN_14157e450 is probably init
-    //FUN_14157f880 proxies Unk930.FUN_1415858f0(...)
+
+    //FUN_14021c0b0
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
+    public struct Unk9C0Struct {
+        [FieldOffset(0x0)] public LobbyClient.LobbyRequestCallback LobbyRequestCallback;
+    }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public struct TimeStruct {
