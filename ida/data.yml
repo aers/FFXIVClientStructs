@@ -4258,7 +4258,7 @@ classes:
       29: UpdateRadius
       30: Highlight
       39: Update
-      47: GetNpcID
+      47: GetNameId
       57: IsDead
       58: IsNotMounted
       59: Terminate
