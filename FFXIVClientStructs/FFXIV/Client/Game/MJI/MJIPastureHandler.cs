@@ -1,6 +1,5 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game.MJI;
 
-
 // ctor 1413EA840 ? - extends EventHandler
 [StructLayout(LayoutKind.Explicit, Size = 0xAE0)] // completely lost track of size
 public unsafe partial struct MJIPastureHandler {
@@ -16,16 +15,16 @@ public unsafe partial struct MJIPastureHandler {
     /// An array representing which minions are currently out roaming the Island. This array is indexed by row ID from
     /// the Companion EXD sheet. See <see cref="MinionSlots"/> if information about minion locations is required.
     /// </summary>
-    // Warning: This array will change size every time new minions are added!!
-    [FixedSizeArray<bool>(496)]
-    [FieldOffset(0x6F8)] public fixed byte RoamingMinions[496];
+    // Warning: This array will change size every time new minions are added!! Should be the row count of the Companion sheet.
+    [FixedSizeArray<bool>(512)]
+    [FieldOffset(0x6F8)] public fixed byte RoamingMinions[512];
 
     /// <summary>
     /// An array containing information on all the minion slots present on the Island Sanctuary.
     /// This array is indexed by an internal ID and does not appear to be grouped by location or similar.
     /// </summary>
     [FixedSizeArray<MJIMinionSlot>(50)]
-    [FieldOffset(0x8E8)] public fixed byte MinionSlots[50 * MJIMinionSlot.Size];
+    [FieldOffset(0x8F8)] public fixed byte MinionSlots[50 * MJIMinionSlot.Size];
 
     /// <summary>
     /// Gets the current number of minions roaming the Island Sanctuary.
@@ -43,7 +42,15 @@ public unsafe struct MJIAnimal {
     [FieldOffset(0x1C)] public uint BNPCNameId;
     [FieldOffset(0x20)] public uint ObjectId;
     [FieldOffset(0x24)] public byte AnimalType;
+
+    /// <summary>
+    /// Value representing how much food the animal in question has eaten. Seems to cap at 35 (?).
+    /// </summary>
     [FieldOffset(0x25)] public byte FoodLevel;
+
+    /// <summary>
+    /// The animal's current mood. Ranges from 0 for "very unhappy" (lightning icon) to 4 for "very happy" (sun icon).
+    /// </summary>
     [FieldOffset(0x26)] public byte Mood;
     [FieldOffset(0x27)] public ushort Leavings; // ??
 }
