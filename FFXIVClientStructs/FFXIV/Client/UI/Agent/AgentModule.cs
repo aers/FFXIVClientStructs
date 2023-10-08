@@ -397,7 +397,7 @@ public enum AgentId : uint {
     OrnamentNoteBook = 384, //Accessories
 
     TourismMenu = 386,
-
+    GatheringMasterpiece = 387,
     StarlightGiftBox = 388,
     SpearFishing = 389,
     Omikuji = 390,
