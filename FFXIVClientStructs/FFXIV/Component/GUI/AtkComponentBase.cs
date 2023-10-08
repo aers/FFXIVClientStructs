@@ -53,6 +53,9 @@ public unsafe partial struct AtkComponentBase {
     [MemberFunction("E8 ?? ?? ?? ?? 8B 53 FC")]
     public partial AtkResNode* GetScrollBarNodeById(uint id);
 
+    [VirtualFunction(5)]
+    public partial void OnUldUpdate();
+
     [VirtualFunction(10)]
     public partial void* SetEnabledState(bool enabled);
 }
