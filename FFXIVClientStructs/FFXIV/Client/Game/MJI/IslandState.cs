@@ -275,10 +275,13 @@ public unsafe struct MJIGranaries {
     );
 }
 
-[StructLayout(LayoutKind.Sequential, Size = 0x04)]
+[StructLayout(LayoutKind.Explicit, Size = 0x04)]
 public struct MJIFarmPasture {
-    public byte Level;
-    public byte HoursToCompletion;
-    public bool UnderConstruction;
-    public byte UNK_0x4;
+    [FieldOffset(0x00)] public byte Level;
+    [FieldOffset(0x01)] public byte HoursToCompletion;
+    [FieldOffset(0x02)] public bool UnderConstruction;
+    [FieldOffset(0x03)] public byte EligibleForCare;
+
+    [Obsolete($"Renamed to {nameof(EligibleForCare)}")]
+    [FieldOffset(0x03)] public byte UNK_0x4;
 }

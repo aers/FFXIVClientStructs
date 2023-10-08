@@ -30,6 +30,7 @@ public unsafe partial struct GameObject {
     [FieldOffset(0x20)] public float DefaultRotation;
     [FieldOffset(0x30)] public fixed byte Name[64];
     [FieldOffset(0x74)] public uint ObjectID;
+    [FieldOffset(0x78)] public uint LayoutID;
     [FieldOffset(0x80)] public uint DataID;
     [FieldOffset(0x84)] public uint OwnerID;
     [FieldOffset(0x88)] public ushort ObjectIndex; // index in object table
