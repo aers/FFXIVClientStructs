@@ -670,7 +670,7 @@ classes:
       0x1414E4020: SetMinionPlaceStatus  # (this, minionId, isPlaced)
       0x1414E3AD0: ExecuteReleaseMinion  # (this, minionId, areaId)
       0x1414E3C60: ExecuteRecallMinion   # (this, minionId)
-  Client::Game::MJI::MJIFarmHandler:
+  Client::Game::MJI::MJIFarmState:
     funcs:
       0x1414DE4C0: ctor
   Client::System::String::Utf8String:

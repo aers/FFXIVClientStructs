@@ -44,7 +44,8 @@ public unsafe struct MJIAnimal {
     [FieldOffset(0x24)] public byte AnimalType;
 
     /// <summary>
-    /// Value representing how much food the animal in question has eaten. Seems to cap at 35 (?).
+    /// Value representing the animal's current food level. Decreases once every hour.
+    /// Appears to cap at 36.
     /// </summary>
     [FieldOffset(0x25)] public byte FoodLevel;
 
@@ -52,7 +53,7 @@ public unsafe struct MJIAnimal {
     /// The animal's current mood. Ranges from 0 for "very unhappy" (lightning icon) to 4 for "very happy" (sun icon).
     /// </summary>
     [FieldOffset(0x26)] public byte Mood;
-    [FieldOffset(0x27)] public ushort Leavings; // ??
+    [FieldOffset(0x27)] public ushort Leavings; // ?? unsure why this is a ushort.
 }
 
 [StructLayout(LayoutKind.Explicit, Size = Size)]
