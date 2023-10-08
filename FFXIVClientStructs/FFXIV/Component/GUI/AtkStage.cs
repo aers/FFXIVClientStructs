@@ -18,9 +18,11 @@ public unsafe partial struct AtkStage {
     [FieldOffset(0x168)] public AtkTooltipManager TooltipManager;
     [FieldOffset(0x338)] public AtkCursor AtkCursor;
     [FixedSizeArray<AtkEventDispatcher>(32)]
-    [FieldOffset(0x350)] public fixed byte AtkEventDispatcher[0x28 * 32];
-    [FieldOffset(0x850)] public uint NextEventDispatcherIndex;
-    [FieldOffset(0x868)] public AtkEvent* RegisteredEvents;
+    [FieldOffset(0x358)] public fixed byte AtkEventDispatcher[0x28 * 32];
+    [FieldOffset(0x858)] public uint NextEventDispatcherIndex;
+    //[FieldOffset(0x85C)] public bool DispatchEvents;
+    [FixedSizeArray<AtkEvent>(10000)]
+    [FieldOffset(0x878)] public fixed byte RegisteredEvents[0x30 * 10000];
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F BF D5")]
     public static partial AtkStage* GetSingleton();
