@@ -41,10 +41,13 @@ public enum NodeFlags : ushort {
 }
 
 [Flags]
-public enum NodeDrawFlags : uint {
-    // When a new animation is set, the node isn't forced visible.
+public enum NodeViewFlags : uint {
+    IsDirty = 0x1,
+    // When a new label is set, the node isn't forced visible.
     // This doesn't stop it from going invisible when the animation goes away.
-    DontMakeVisibleOnNewAnimation = 0x100
+    DontMakeVisibleOnNewTimelineLabel = 0x100,
+
+    // bit 1 = has changes, ClipCount is bits 10-17, idk its a mess
 }
 
 // Component::GUI::AtkResNode
@@ -58,6 +61,7 @@ public enum NodeDrawFlags : uint {
 public unsafe partial struct AtkResNode : ICreatable {
     [FieldOffset(0x0)] public AtkEventTarget AtkEventTarget;
     [FieldOffset(0x8)] public uint NodeID;
+    [FieldOffset(0x10), Obsolete("Use Timeline", true)] public void* TimelineObject;
     [FieldOffset(0x10)] public AtkTimeline* Timeline;
 
     [FieldOffset(0x18)] public AtkEventManager AtkEventManager; // holds events registered to this node
@@ -108,9 +112,9 @@ public unsafe partial struct AtkResNode : ICreatable {
     [Obsolete("Use NodeFlags", true)]
     [FieldOffset(0x9E)] public short Flags;
     [FieldOffset(0x9E)] public NodeFlags NodeFlags;
-    [FieldOffset(0xA0), Obsolete("Use DrawFlags", true)] public uint Flags_2; // bit 1 = has changes, ClipCount is bits 10-17, idk its a mess
-    [FieldOffset(0xA0)] public uint DrawFlags;
-    [FieldOffset(0xA0)] public NodeDrawFlags ViewFlags;
+    [FieldOffset(0xA0), Obsolete("Use ViewFlags", true)] public uint Flags_2;
+    [FieldOffset(0xA0), Obsolete("Use ViewFlags", true)] public uint DrawFlags;
+    [FieldOffset(0xA0)] public NodeViewFlags ViewFlags;
 
     public bool IsVisible => NodeFlags.HasFlag(NodeFlags.Visible);
 
