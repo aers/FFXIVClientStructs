@@ -728,6 +728,13 @@ classes:
       0x140537060: SeardNodeById
       0x1405370C0: SearchNodeByIndex
       0x140537130: GetDuplicatedNode
+  Component::GUI::AtkTimeline:
+    funcs:
+      0x14056CF40: GetStartFrameIdxForLabelId
+      0x14056D070: GetEndFrameIdxForLabelId
+      0x14056CCF0: UpdateChildAnimationStates
+      0x14056C520: UpdateChildAnimationAndLabelStates
+      0x14056C680: SetTimelineState
   Component::GUI::AtkArrayDataHolder:
     funcs:
       0x140507DE0: ctor
@@ -3318,6 +3325,12 @@ classes:
       0x14052BD20: Init
       0x14052BEF0: SetScale0  # SetScale jumps to this
       0x140536900: SetSize
+      0x14052A5D0: GetTimelineLabel
+      0x14052A450: SetTimelineLabel2
+      0x14052A4D0: SetTimelineLabel3
+      0x14052A580: GetTimelineFrameIdx
+      0x14052A3D0: EnableTimeline
+      0x14052A3F0: DisableTimeline
   Component::GUI::AtkImageNode:
     vtbls:
       - ea: 0x141A06F98
@@ -3460,6 +3473,7 @@ classes:
       0x140553C30: LoadIconById
       0x140553C60: LoadIcon
       0x14058A620: SetDisabledColor
+      0x140553EA0: SetTimelineState
   Component::GUI::AtkDragDropInterface:
     vtbls:
       - ea: 0x141A074F8

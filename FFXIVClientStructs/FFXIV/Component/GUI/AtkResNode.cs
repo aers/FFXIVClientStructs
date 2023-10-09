@@ -248,6 +248,15 @@ public unsafe partial struct AtkResNode : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? FF C6 3B F5 72 E5 BA ?? ?? ?? ??")]
     public partial void SetUseDepthBasedPriority(bool enable);
 
+    [MemberFunction("E8 ?? ?? ?? ?? 66 83 F8 66 75 3F")]
+    public partial ushort GetTimelineLabel();
+
+    [MemberFunction("48 85 C9 74 12 48 8B 41 10")]
+    public partial void EnableTimeline();
+
+    [MemberFunction("E8 ?? ?? ?? ?? 40 FE C5 49 83 C7 04")]
+    public partial void DisableTimeline();
+
     [VirtualFunction(1)]
     public partial void Destroy(bool free);
 
