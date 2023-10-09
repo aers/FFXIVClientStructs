@@ -4424,16 +4424,12 @@ struct StdSet_Node_PointerClientGameObjectGameObject /* Size=0x30 */
     /* 0x08 */ StdSet_Node_PointerClientGameObjectGameObject* Parent;
     /* 0x10 */ StdSet_Node_PointerClientGameObjectGameObject* Right;
     /* 0x18 */ byte Color;
-    /*      */ byte _gap_0x19;
-    /*      */ byte _gap_0x1A[0x2];
-    /* 0x1C */ bool IsNil;
-    /*      */ byte _gap_0x1D;
-    /*      */ byte _gap_0x1E[0x2];
-    /* 0x20 */ byte _18;
-    /* 0x21 */ byte _19;
-    /*      */ byte _gap_0x22[0x2];
+    /* 0x19 */ bool IsNil;
+    /* 0x1A */ byte _18;
+    /* 0x1B */ byte _19;
+    /* 0x1C */ Pointer_ClientGameObjectGameObject Key;
     /*      */ byte _gap_0x24[0x4];
-    /* 0x28 */ Pointer_ClientGameObjectGameObject Key;
+    /*      */ byte _gap_0x28[0x8];
 };
 
 struct StdSet_PointerClientGameObjectGameObject /* Size=0x10 */
@@ -4525,9 +4521,9 @@ struct StdPair_SystemIntPtr_SystemIntPtr /* Size=0x10 */
 struct StdPair_SystemUInt16_StdPairSystemIntPtrSystemIntPtr /* Size=0x18 */
 {
     /* 0x00 */ unsigned __int16 Item1;
-    /*      */ byte _gap_0x2[0x2];
-    /*      */ byte _gap_0x4[0x4];
-    /* 0x08 */ StdPair_SystemIntPtr_SystemIntPtr Item2;
+    /* 0x02 */ StdPair_SystemIntPtr_SystemIntPtr Item2;
+    /*      */ byte _gap_0x12[0x2];
+    /*      */ byte _gap_0x14[0x4];
 };
 
 struct StdMap_Node_SystemUInt16_StdPairSystemIntPtrSystemIntPtr /* Size=0x40 */
@@ -4536,16 +4532,12 @@ struct StdMap_Node_SystemUInt16_StdPairSystemIntPtrSystemIntPtr /* Size=0x40 */
     /* 0x08 */ StdMap_Node_SystemUInt16_StdPairSystemIntPtrSystemIntPtr* Parent;
     /* 0x10 */ StdMap_Node_SystemUInt16_StdPairSystemIntPtrSystemIntPtr* Right;
     /* 0x18 */ byte Color;
-    /*      */ byte _gap_0x19;
-    /*      */ byte _gap_0x1A[0x2];
-    /* 0x1C */ bool IsNil;
-    /*      */ byte _gap_0x1D;
-    /*      */ byte _gap_0x1E[0x2];
-    /* 0x20 */ byte _18;
-    /* 0x21 */ byte _19;
-    /*      */ byte _gap_0x22[0x2];
-    /*      */ byte _gap_0x24[0x4];
-    /* 0x28 */ StdPair_SystemUInt16_StdPairSystemIntPtrSystemIntPtr KeyValuePair;
+    /* 0x19 */ bool IsNil;
+    /* 0x1A */ byte _18;
+    /* 0x1B */ byte _19;
+    /* 0x1C */ StdPair_SystemUInt16_StdPairSystemIntPtrSystemIntPtr KeyValuePair;
+    /*      */ byte _gap_0x34[0x4];
+    /*      */ byte _gap_0x38[0x8];
 };
 
 struct StdMap_SystemUInt16_StdPairSystemIntPtrSystemIntPtr /* Size=0x10 */
@@ -4571,8 +4563,8 @@ struct Pointer_ClientGameEventEventHandlerStruct /* Size=0x8 */
 struct StdPair_SystemUInt32_PointerClientGameEventEventHandlerStruct /* Size=0x10 */
 {
     /* 0x00 */ unsigned __int32 Item1;
-    /*      */ byte _gap_0x4[0x4];
-    /* 0x08 */ Pointer_ClientGameEventEventHandlerStruct Item2;
+    /* 0x04 */ Pointer_ClientGameEventEventHandlerStruct Item2;
+    /*      */ byte _gap_0xC[0x4];
 };
 
 struct StdMap_Node_SystemUInt32_PointerClientGameEventEventHandlerStruct /* Size=0x38 */
@@ -4581,16 +4573,12 @@ struct StdMap_Node_SystemUInt32_PointerClientGameEventEventHandlerStruct /* Size
     /* 0x08 */ StdMap_Node_SystemUInt32_PointerClientGameEventEventHandlerStruct* Parent;
     /* 0x10 */ StdMap_Node_SystemUInt32_PointerClientGameEventEventHandlerStruct* Right;
     /* 0x18 */ byte Color;
-    /*      */ byte _gap_0x19;
-    /*      */ byte _gap_0x1A[0x2];
-    /* 0x1C */ bool IsNil;
-    /*      */ byte _gap_0x1D;
-    /*      */ byte _gap_0x1E[0x2];
-    /* 0x20 */ byte _18;
-    /* 0x21 */ byte _19;
-    /*      */ byte _gap_0x22[0x2];
-    /*      */ byte _gap_0x24[0x4];
-    /* 0x28 */ StdPair_SystemUInt32_PointerClientGameEventEventHandlerStruct KeyValuePair;
+    /* 0x19 */ bool IsNil;
+    /* 0x1A */ byte _18;
+    /* 0x1B */ byte _19;
+    /* 0x1C */ StdPair_SystemUInt32_PointerClientGameEventEventHandlerStruct KeyValuePair;
+    /*      */ byte _gap_0x2C[0x4];
+    /*      */ byte _gap_0x30[0x8];
 };
 
 struct StdMap_SystemUInt32_PointerClientGameEventEventHandlerStruct /* Size=0x10 */
@@ -4627,16 +4615,12 @@ struct StdMap_Node_SystemInt64_ClientGameEventLuaActor /* Size=0xB0 */
     /* 0x08 */ StdMap_Node_SystemInt64_ClientGameEventLuaActor* Parent;
     /* 0x10 */ StdMap_Node_SystemInt64_ClientGameEventLuaActor* Right;
     /* 0x18 */ byte Color;
-    /*      */ byte _gap_0x19;
-    /*      */ byte _gap_0x1A[0x2];
-    /* 0x1C */ bool IsNil;
-    /*      */ byte _gap_0x1D;
-    /*      */ byte _gap_0x1E[0x2];
-    /* 0x20 */ byte _18;
-    /* 0x21 */ byte _19;
-    /*      */ byte _gap_0x22[0x2];
-    /*      */ byte _gap_0x24[0x4];
-    /* 0x28 */ StdPair_SystemInt64_ClientGameEventLuaActor KeyValuePair;
+    /* 0x19 */ bool IsNil;
+    /* 0x1A */ byte _18;
+    /* 0x1B */ byte _19;
+    /* 0x1C */ StdPair_SystemInt64_ClientGameEventLuaActor KeyValuePair;
+    /*      */ byte _gap_0xA4[0x4];
+    /*      */ byte _gap_0xA8[0x8];
 };
 
 struct StdMap_SystemInt64_ClientGameEventLuaActor /* Size=0x10 */
@@ -7500,16 +7484,12 @@ struct StdMap_Node_ClientSystemStringUtf8String_PointerSystemByte /* Size=0x98 *
     /* 0x08 */ StdMap_Node_ClientSystemStringUtf8String_PointerSystemByte* Parent;
     /* 0x10 */ StdMap_Node_ClientSystemStringUtf8String_PointerSystemByte* Right;
     /* 0x18 */ byte Color;
-    /*      */ byte _gap_0x19;
-    /*      */ byte _gap_0x1A[0x2];
-    /* 0x1C */ bool IsNil;
-    /*      */ byte _gap_0x1D;
-    /*      */ byte _gap_0x1E[0x2];
-    /* 0x20 */ byte _18;
-    /* 0x21 */ byte _19;
-    /*      */ byte _gap_0x22[0x2];
-    /*      */ byte _gap_0x24[0x4];
-    /* 0x28 */ StdPair_ClientSystemStringUtf8String_PointerSystemByte KeyValuePair;
+    /* 0x19 */ bool IsNil;
+    /* 0x1A */ byte _18;
+    /* 0x1B */ byte _19;
+    /* 0x1C */ StdPair_ClientSystemStringUtf8String_PointerSystemByte KeyValuePair;
+    /*      */ byte _gap_0x8C[0x4];
+    /*      */ byte _gap_0x90[0x8];
 };
 
 struct StdMap_ClientSystemStringUtf8String_PointerSystemByte /* Size=0x10 */
@@ -7769,16 +7749,12 @@ struct StdMap_Node_PointerSystemByte_SystemInt16 /* Size=0x38 */
     /* 0x08 */ StdMap_Node_PointerSystemByte_SystemInt16* Parent;
     /* 0x10 */ StdMap_Node_PointerSystemByte_SystemInt16* Right;
     /* 0x18 */ byte Color;
-    /*      */ byte _gap_0x19;
-    /*      */ byte _gap_0x1A[0x2];
-    /* 0x1C */ bool IsNil;
-    /*      */ byte _gap_0x1D;
-    /*      */ byte _gap_0x1E[0x2];
-    /* 0x20 */ byte _18;
-    /* 0x21 */ byte _19;
-    /*      */ byte _gap_0x22[0x2];
-    /*      */ byte _gap_0x24[0x4];
-    /* 0x28 */ StdPair_PointerSystemByte_SystemInt16 KeyValuePair;
+    /* 0x19 */ bool IsNil;
+    /* 0x1A */ byte _18;
+    /* 0x1B */ byte _19;
+    /* 0x1C */ StdPair_PointerSystemByte_SystemInt16 KeyValuePair;
+    /*      */ byte _gap_0x2C[0x4];
+    /*      */ byte _gap_0x30[0x8];
 };
 
 struct StdMap_PointerSystemByte_SystemInt16 /* Size=0x10 */
@@ -11424,16 +11400,12 @@ struct StdMap_Node_SystemUInt32_SystemUInt32 /* Size=0x30 */
     /* 0x08 */ StdMap_Node_SystemUInt32_SystemUInt32* Parent;
     /* 0x10 */ StdMap_Node_SystemUInt32_SystemUInt32* Right;
     /* 0x18 */ byte Color;
-    /*      */ byte _gap_0x19;
-    /*      */ byte _gap_0x1A[0x2];
-    /* 0x1C */ bool IsNil;
-    /*      */ byte _gap_0x1D;
-    /*      */ byte _gap_0x1E[0x2];
-    /* 0x20 */ byte _18;
-    /* 0x21 */ byte _19;
-    /*      */ byte _gap_0x22[0x2];
-    /* 0x24 */ StdPair_SystemUInt32_SystemUInt32 KeyValuePair;
-    /*      */ byte _gap_0x2C[0x4];
+    /* 0x19 */ bool IsNil;
+    /* 0x1A */ byte _18;
+    /* 0x1B */ byte _19;
+    /* 0x1C */ StdPair_SystemUInt32_SystemUInt32 KeyValuePair;
+    /*      */ byte _gap_0x24[0x4];
+    /*      */ byte _gap_0x28[0x8];
 };
 
 struct StdMap_SystemUInt32_SystemUInt32 /* Size=0x10 */
@@ -13838,16 +13810,12 @@ struct StdMap_Node_SystemUInt64_PointerClientUIMiscItemOrderModuleSorter /* Size
     /* 0x08 */ StdMap_Node_SystemUInt64_PointerClientUIMiscItemOrderModuleSorter* Parent;
     /* 0x10 */ StdMap_Node_SystemUInt64_PointerClientUIMiscItemOrderModuleSorter* Right;
     /* 0x18 */ byte Color;
-    /*      */ byte _gap_0x19;
-    /*      */ byte _gap_0x1A[0x2];
-    /* 0x1C */ bool IsNil;
-    /*      */ byte _gap_0x1D;
-    /*      */ byte _gap_0x1E[0x2];
-    /* 0x20 */ byte _18;
-    /* 0x21 */ byte _19;
-    /*      */ byte _gap_0x22[0x2];
-    /*      */ byte _gap_0x24[0x4];
-    /* 0x28 */ StdPair_SystemUInt64_PointerClientUIMiscItemOrderModuleSorter KeyValuePair;
+    /* 0x19 */ bool IsNil;
+    /* 0x1A */ byte _18;
+    /* 0x1B */ byte _19;
+    /* 0x1C */ StdPair_SystemUInt64_PointerClientUIMiscItemOrderModuleSorter KeyValuePair;
+    /*      */ byte _gap_0x2C[0x4];
+    /*      */ byte _gap_0x30[0x8];
 };
 
 struct StdMap_SystemUInt64_PointerClientUIMiscItemOrderModuleSorter /* Size=0x10 */
@@ -15356,16 +15324,12 @@ struct StdMap_Node_PointerComponentGUIAtkResNode_PointerComponentGUIAtkTooltipMa
     /* 0x08 */ StdMap_Node_PointerComponentGUIAtkResNode_PointerComponentGUIAtkTooltipManagerAtkTooltipInfo* Parent;
     /* 0x10 */ StdMap_Node_PointerComponentGUIAtkResNode_PointerComponentGUIAtkTooltipManagerAtkTooltipInfo* Right;
     /* 0x18 */ byte Color;
-    /*      */ byte _gap_0x19;
-    /*      */ byte _gap_0x1A[0x2];
-    /* 0x1C */ bool IsNil;
-    /*      */ byte _gap_0x1D;
-    /*      */ byte _gap_0x1E[0x2];
-    /* 0x20 */ byte _18;
-    /* 0x21 */ byte _19;
-    /*      */ byte _gap_0x22[0x2];
-    /*      */ byte _gap_0x24[0x4];
-    /* 0x28 */ StdPair_PointerComponentGUIAtkResNode_PointerComponentGUIAtkTooltipManagerAtkTooltipInfo KeyValuePair;
+    /* 0x19 */ bool IsNil;
+    /* 0x1A */ byte _18;
+    /* 0x1B */ byte _19;
+    /* 0x1C */ StdPair_PointerComponentGUIAtkResNode_PointerComponentGUIAtkTooltipManagerAtkTooltipInfo KeyValuePair;
+    /*      */ byte _gap_0x2C[0x4];
+    /*      */ byte _gap_0x30[0x8];
 };
 
 struct StdMap_PointerComponentGUIAtkResNode_PointerComponentGUIAtkTooltipManagerAtkTooltipInfo /* Size=0x10 */

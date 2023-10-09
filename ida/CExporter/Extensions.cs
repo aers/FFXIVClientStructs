@@ -76,10 +76,19 @@ public static class FieldInfoExtensions {
 
     public static int GetFieldOffset(this FieldInfo info) {
         var attrs = info.GetCustomAttributes(typeof(FieldOffsetAttribute), false);
-        return attrs.Length != 0 ?
-            attrs.Cast<FieldOffsetAttribute>().Single().Value :
-            // Lets assume this is because it's a LayoutKind.Sequential struct
-            Marshal.OffsetOf(info.DeclaringType!, info.Name).ToInt32();
+        return attrs.Length != 0 ? attrs.Cast<FieldOffsetAttribute>().Single().Value : GetFieldOffsetSequential(info);
+    }
+
+    public static int GetFieldOffsetSequential(this FieldInfo info) 
+    {
+        var fields = info.DeclaringType.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+        var offset = 0;
+        foreach (var field in fields) {
+            if (field == info)
+                return offset;
+            offset += field.FieldType.SizeOf();
+        }
+        throw new Exception("Field not found");
     }
 }
 public static class Extensions {
