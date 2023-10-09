@@ -142,16 +142,16 @@ struct Client_Game_MirageManager;
 struct Client_Game_MirageManager_GlamourPlate;
 struct Client_Game_MJI_IslandState;
 struct Client_Game_MJI_MJIFarmPasture;
+struct Client_Game_MJI_MJIWorkshops;
+struct Client_Game_MJI_MJIGranaries;
 struct Client_Game_MJI_MJIAnimal;
 struct Client_Game_MJI_MJIBuildingPlacement;
 struct Client_Game_MJI_MJIFarmPasturePlacement;
 struct Client_Game_MJI_MJIFarmState;
-struct Client_Game_MJI_MJIGranaries;
 struct Client_Game_MJI_MJILandmarkPlacement;
 struct Client_Game_MJI_MJIManager;
 struct Client_Game_MJI_MJIMinionSlot;
 struct Client_Game_MJI_MJIPastureHandler;
-struct Client_Game_MJI_MJIWorkshops;
 struct Client_Game_MonsterNoteManager;
 struct Client_Game_MonsterNoteRankInfo;
 struct Client_Game_Object_ClientObjectManager;
@@ -854,6 +854,12 @@ struct Component_GUI_AtkComponentSlider;
 struct Component_GUI_AtkComponentTextInput;
 struct Component_GUI_AtkComponentTextNineGrid;
 struct Component_GUI_AtkComponentTreeList;
+struct StdVector_PointerComponentGUIAtkComponentTreeListItem;
+struct Pointer_ComponentGUIAtkComponentTreeListItem;
+struct Component_GUI_AtkComponentTreeList_AtkComponentTreeListVTable;
+struct Component_GUI_AtkComponentTreeListItem;
+struct StdVector_SystemUInt32;
+struct StdVector_PointerSystemByte;
 struct Component_GUI_AtkComponentWindow;
 struct Component_GUI_AtkCounterNode;
 struct Component_GUI_AtkCursor;
@@ -1065,6 +1071,13 @@ enum Client_Game_Character_DrawDataContainer_WeaponSlot /* Size=0x4 */
     MainHand = 0,
     OffHand = 1,
     Unk = 2
+};
+
+enum Client_Game_Control_InputManager_MouseButtonHoldState /* Size=0x1 */
+{
+    None = 0,
+    Left = 1,
+    Right = 2
 };
 
 enum Client_Game_Event_EventHandlerStructType /* Size=0x2 */
@@ -1671,6 +1684,15 @@ enum Client_UI_ActionBarLayout /* Size=0x1 */
     Layout1X12 = 5
 };
 
+enum Client_UI_ActionCrossSelect /* Size=0x4 */
+{
+    None = 0,
+    Left = 1,
+    Right = 2,
+    LR = 3,
+    RL = 4
+};
+
 enum Client_UI_Agent_ActionStatus /* Size=0x1 */
 {
     Available = 0,
@@ -1954,6 +1976,7 @@ enum Client_UI_Agent_AgentId /* Size=0x4 */
     CameraSetting = 251,
     PvPDuelRequest = 252,
     PvPHeader = 253,
+    PvPGauge = 254,
     AquariumSetting = 257,
     DeepDungeonMenu = 259,
     DeepDungeonResult = 261,
@@ -2038,6 +2061,7 @@ enum Client_UI_Agent_AgentId /* Size=0x4 */
     MycBattleAreaInfo = 382,
     OrnamentNoteBook = 384,
     TourismMenu = 386,
+    GatheringMasterpiece = 387,
     StarlightGiftBox = 388,
     SpearFishing = 389,
     Omikuji = 390,
@@ -2047,6 +2071,7 @@ enum Client_UI_Agent_AgentId /* Size=0x4 */
     BannerList = 394,
     BannerEditor = 395,
     BannerUpdateView = 396,
+    PvPMap = 398,
     CharaCard = 399,
     CharaCardDesignSetting = 400,
     CharaCardProfileSetting = 401,
@@ -3504,6 +3529,14 @@ enum Component_GUI_AlignmentType /* Size=0x4 */
     BottomLeft = 6,
     Bottom = 7,
     BottomRight = 8
+};
+
+enum Component_GUI_AtkComponentTreeListItemType /* Size=0x4 */
+{
+    Leaf = 0,
+    LastLeafInGroup = 1,
+    CollapsibleGroupHeader = 2,
+    GroupHeader = 4
 };
 
 enum Component_GUI_AtkCursor_CursorType /* Size=0x1 */
@@ -5468,14 +5501,31 @@ struct Client_Game_MJI_MJIFarmPasture /* Size=0x4 */
 {
     /* 0x0 */ byte Level;
     /* 0x1 */ byte HoursToCompletion;
-    /*     */ byte _gap_0x2[0x2];
-    /* 0x4 */ bool UnderConstruction;
-    /*     */ byte _gap_0x5;
-    /*     */ byte _gap_0x6[0x2];
-    /* 0x8 */ byte UNK_0x4;
+    /* 0x2 */ bool UnderConstruction;
+    /* 0x3 */ byte EligibleForCare;
 };
 
-struct Client_Game_MJI_IslandState /* Size=0xD0 */
+struct Client_Game_MJI_MJIWorkshops /* Size=0x1C */
+{
+    /* 0x00 */ void* vtbl;
+    /* 0x08 */ byte PlaceId[0x4];
+    /* 0x0C */ byte GlamourLevel[0x4];
+    /* 0x10 */ byte HoursToCompletion[0x4];
+    /* 0x14 */ byte BuildingLevel[0x4];
+    /* 0x18 */ byte UnderConstruction[0x4];
+};
+
+struct Client_Game_MJI_MJIGranaries /* Size=0x12 */
+{
+    /* 0x00 */ void* vtbl;
+    /* 0x08 */ byte PlaceId[0x2];
+    /* 0x0A */ byte GlamourLevel[0x2];
+    /* 0x0C */ byte HoursToCompletion[0x2];
+    /* 0x0E */ byte BuildingLevel[0x2];
+    /* 0x10 */ byte UnderConstruction[0x2];
+};
+
+struct Client_Game_MJI_IslandState /* Size=0xE8 */
 {
     /* 0x00 */ bool CanEditIsland;
     /* 0x01 */ byte CurrentRank;
@@ -5488,18 +5538,28 @@ struct Client_Game_MJI_IslandState /* Size=0xD0 */
     /* 0x0C */ byte SlopesGlamourId;
     /* 0x0D */ byte UnlockedKeyItems[0x3];
     /* 0x10 */ byte UnlockedRecipes[0x3];
-    /* 0x13 */ byte LockedPouchItems[0x5C];
-    /* 0x6F */ Client_Game_MJI_MJIFarmPasture Farm;
-    /* 0x73 */ Client_Game_MJI_MJIFarmPasture Pasture;
-    /* 0x77 */ bool PastureUnderCare;
-    /* 0x78 */ unsigned __int16 PastureDailyCareFee;
-    /* 0x7A */ unsigned __int16 FarmDailyCareFee;
-    /* 0x7C */ byte LandmarkHoursToCompletion[0x5];
-    /* 0x81 */ byte LandmarkIds[0x5];
-    /* 0x86 */ byte LandmarkUnderConstruction[0x5];
-    /*      */ byte _gap_0x8B;
-    /*      */ byte _gap_0x8C[0x4];
-    /*      */ byte _gap_0x90[0x40];
+    /*      */ byte _gap_0x13;
+    /* 0x14 */ byte LockedPouchItems[0x6D];
+    /* 0x81 */ Client_Game_MJI_MJIFarmPasture Farm;
+    /* 0x85 */ Client_Game_MJI_MJIFarmPasture Pasture;
+    /* 0x89 */ bool PastureUnderCare;
+    /* 0x8A */ unsigned __int16 PastureDailyCareFee;
+    /* 0x8C */ unsigned __int16 FarmDailyCareFee;
+    /* 0x8E */ byte LandmarkHoursToCompletion[0x5];
+    /* 0x93 */ byte LandmarkIds[0x5];
+    /* 0x98 */ byte LandmarkUnderConstruction[0x5];
+    /* 0x9D */ byte LandmarkRotation[0x5];
+    /*      */ byte _gap_0xA2[0x2];
+    /*      */ byte _gap_0xA4[0x4];
+    /* 0xA8 */ Client_Game_MJI_MJIWorkshops Workshops;
+    /*      */ byte _gap_0xC4[0x4];
+    /* 0xC8 */ Client_Game_MJI_MJIGranaries Granaries;
+    /*      */ byte _gap_0xDA[0x2];
+    /*      */ byte _gap_0xDC[0x4];
+    /* 0xE0 */ byte CabinLevel;
+    /* 0xE1 */ byte CabinGlamour;
+    /*      */ byte _gap_0xE2[0x2];
+    /*      */ byte _gap_0xE4[0x4];
 };
 
 struct Client_Game_MJI_MJIAnimal /* Size=0x34 */
@@ -5548,28 +5608,22 @@ struct Client_Game_MJI_MJIFarmState /* Size=0x148 */
     /* 0x05C */ byte GardenerYield[0x14];
     /* 0x070 */ byte FarmSlotFlags[0x14];
     /*       */ byte _gap_0x84[0x4];
-    /*       */ byte _gap_0x88[0xC0];
+    /* 0x088 */ unsigned __int32 PlotObjectIndex[0x14];
+    /* 0x0D8 */ unsigned __int32 LayoutId[0x14];
+    /*       */ byte _gap_0x128[0x20];
 };
 
-struct Client_Game_MJI_MJIGranaries /* Size=0x12 */
+struct Client_Game_MJI_MJILandmarkPlacement /* Size=0x10 */
 {
-    /* 0x00 */ void* vtbl;
-    /* 0x08 */ byte PlaceId[0x2];
-    /* 0x0A */ byte GlamourLevel[0x2];
-    /* 0x0C */ byte HoursToCompletion[0x2];
-    /* 0x0E */ byte BuildingLevel[0x2];
-    /* 0x10 */ byte UnderConstruction[0x2];
+    /*      */ byte _gap_0x0[0x8];
+    /* 0x08 */ byte HoursToCompletion;
+    /* 0x09 */ byte LandmarkId;
+    /* 0x0A */ unsigned __int16 UnderConstruction;
+    /* 0x0C */ unsigned __int16 Rotation;
+    /*      */ byte _gap_0xE[0x2];
 };
 
-struct Client_Game_MJI_MJILandmarkPlacement /* Size=0xC */
-{
-    /*     */ byte _gap_0x0[0x8];
-    /* 0x8 */ byte HoursToCompletion;
-    /* 0x9 */ byte LandmarkId;
-    /* 0xA */ unsigned __int16 UnderConstruction;
-};
-
-struct Client_Game_MJI_MJIManager /* Size=0x3F4 */
+struct Client_Game_MJI_MJIManager /* Size=0x440 */
 {
     /*       */ byte _gap_0x0[0x4];
     /*       */ byte _gap_0x4[0x2];
@@ -5585,35 +5639,35 @@ struct Client_Game_MJI_MJIManager /* Size=0x3F4 */
     /* 0x01C */ unsigned __int32 CurrentModeItem;
     /*       */ byte _gap_0x20[0x8];
     /* 0x028 */ Client_Game_MJI_IslandState IslandState;
-    /*       */ byte _gap_0xF8[0x18];
-    /* 0x110 */ Client_Game_MJI_MJIPastureHandler* PastureHandler;
-    /* 0x118 */ Client_Game_MJI_MJIFarmState* FarmState;
-    /*       */ byte _gap_0x120[0x90];
-    /*       */ byte _gap_0x1B0[0x4];
-    /* 0x1B4 */ byte LandmarkPlacements[0x3C];
-    /* 0x1F0 */ byte BuildingPlacements[0x60];
-    /* 0x250 */ Client_Game_MJI_MJIBuildingPlacement CabinPlacement;
-    /* 0x260 */ byte FarmPlacements[0x24];
-    /* 0x284 */ byte PasturePlacements[0x24];
-    /*       */ byte _gap_0x2A8[0x10];
-    /* 0x2B8 */ byte CurrentPopularity;
-    /* 0x2B9 */ byte NextPopularity;
-    /* 0x2BA */ byte SupplyAndDemandShifts[0x51];
-    /*       */ byte _gap_0x30B;
-    /*       */ byte _gap_0x30C[0x4];
-    /*       */ byte _gap_0x310[0x58];
-    /* 0x368 */ byte CurrentCycleDay;
-    /* 0x369 */ byte CraftworksRestDays[0x4];
-    /*       */ byte _gap_0x36D;
-    /*       */ byte _gap_0x36E[0x2];
-    /*       */ byte _gap_0x370[0x40];
-    /*       */ byte _gap_0x3B0[0x4];
-    /*       */ byte _gap_0x3B4[0x2];
-    /* 0x3B6 */ unsigned __int32 CurrentGroove;
-    /*       */ byte _gap_0x3BA[0x2];
-    /*       */ byte _gap_0x3BC[0x4];
-    /*       */ byte _gap_0x3C0[0x30];
+    /*       */ byte _gap_0x110[0x18];
+    /* 0x128 */ Client_Game_MJI_MJIPastureHandler* PastureHandler;
+    /* 0x130 */ Client_Game_MJI_MJIFarmState* FarmState;
+    /*       */ byte _gap_0x138[0x98];
+    /*       */ byte _gap_0x1D0[0x4];
+    /* 0x1D4 */ byte LandmarkPlacements[0x50];
+    /* 0x224 */ byte BuildingPlacements[0x60];
+    /* 0x284 */ Client_Game_MJI_MJIBuildingPlacement CabinPlacement;
+    /* 0x294 */ byte FarmPlacements[0x24];
+    /* 0x2B8 */ byte PasturePlacements[0x24];
+    /*       */ byte _gap_0x2DC[0x4];
+    /*       */ byte _gap_0x2E0[0x10];
+    /* 0x2F0 */ byte CurrentPopularity;
+    /* 0x2F1 */ byte NextPopularity;
+    /* 0x2F2 */ byte SupplyAndDemandShifts[0x5B];
+    /*       */ byte _gap_0x34D;
+    /*       */ byte _gap_0x34E[0x2];
+    /*       */ byte _gap_0x350[0x58];
+    /* 0x3A8 */ byte CurrentCycleDay;
+    /* 0x3A9 */ byte CraftworksRestDays[0x4];
+    /*       */ byte _gap_0x3AD;
+    /*       */ byte _gap_0x3AE[0x2];
+    /*       */ byte _gap_0x3B0[0x40];
     /*       */ byte _gap_0x3F0[0x4];
+    /*       */ byte _gap_0x3F4[0x2];
+    /* 0x3F6 */ unsigned __int32 CurrentGroove;
+    /*       */ byte _gap_0x3FA[0x2];
+    /*       */ byte _gap_0x3FC[0x4];
+    /*       */ byte _gap_0x400[0x40];
 };
 
 struct Client_Game_MJI_MJIMinionSlot /* Size=0xC */
@@ -5627,23 +5681,14 @@ struct Client_Game_MJI_MJIMinionSlot /* Size=0xC */
     /*     */ byte _gap_0xB;
 };
 
-struct Client_Game_MJI_MJIPastureHandler /* Size=0xAE0 */
+struct Client_Game_MJI_MJIPastureHandler /* Size=0xB78 */
 {
     /* 0x000 */ void* vtbl;
     /*       */ byte _gap_0x8[0x2E0];
     /* 0x2E8 */ byte MJIAnimals[0x410];
-    /* 0x6F8 */ byte RoamingMinions[0x1F0];
-    /* 0x8E8 */ byte MinionSlots[0x258];
-};
-
-struct Client_Game_MJI_MJIWorkshops /* Size=0x1C */
-{
-    /* 0x00 */ void* vtbl;
-    /* 0x08 */ byte PlaceId[0x4];
-    /* 0x0C */ byte GlamourLevel[0x4];
-    /* 0x10 */ byte HoursToCompletion[0x4];
-    /* 0x14 */ byte BuildingLevel[0x4];
-    /* 0x18 */ byte UnderConstruction[0x4];
+    /* 0x6F8 */ byte RoamingMinions[0x200];
+    /* 0x8F8 */ byte MinionSlots[0x258];
+    /*       */ byte _gap_0xB50[0x28];
 };
 
 struct Client_Game_MonsterNoteManager /* Size=0x460 */
@@ -5677,7 +5722,8 @@ struct Client_Game_Object_GameObject /* Size=0x1A0 */
     /* 0x030 */ byte Name[0x40];
     /*       */ byte _gap_0x70[0x4];
     /* 0x074 */ unsigned __int32 ObjectID;
-    /*       */ byte _gap_0x78[0x8];
+    /* 0x078 */ unsigned __int32 LayoutID;
+    /*       */ byte _gap_0x7C[0x4];
     /* 0x080 */ unsigned __int32 DataID;
     /* 0x084 */ unsigned __int32 OwnerID;
     /* 0x088 */ unsigned __int16 ObjectIndex;
@@ -6629,8 +6675,9 @@ struct Client_Game_UI_UIState /* Size=0x17D10 */
     /* 0x03850 */ Client_Game_UI_AreaInstance AreaInstance;
     /*         */ byte _gap_0x3878[0x4A0];
     /* 0x03D18 */ Client_Game_UI_Loot Loot;
-    /* 0x043B8 */ Client_Game_UI_RecipeNote RecipeNote;
-    /*         */ byte _gap_0x49C8[0x6B98];
+    /*         */ byte _gap_0x43B8[0x628];
+    /* 0x049E0 */ Client_Game_UI_RecipeNote RecipeNote;
+    /*         */ byte _gap_0x4FF0[0x6570];
     /* 0x0B560 */ Client_Game_Event_Director* ActiveDirector;
     /*         */ byte _gap_0xB568[0x140];
     /* 0x0B6A8 */ Client_Game_Fate_FateDirector* FateDirector;
@@ -7950,14 +7997,22 @@ struct Client_UI_AddonActionCross /* Size=0x710 */
     /*       */ byte _gap_0x248[0x4A0];
     /* 0x6E8 */ __int32 ExpandedHoldControlsLTRT;
     /* 0x6EC */ __int32 ExpandedHoldControlsRTLT;
-    /*       */ byte _gap_0x6F0[0x20];
+    /*       */ byte _gap_0x6F0[0x10];
+    /*       */ byte _gap_0x700;
+    /* 0x701 */ bool LeftBar;
+    /* 0x702 */ bool RightBar;
+    /*       */ byte _gap_0x703;
+    /* 0x704 */ bool PetBar;
+    /*       */ byte _gap_0x705;
+    /*       */ byte _gap_0x706[0x2];
+    /*       */ byte _gap_0x708[0x8];
 };
 
 struct Client_UI_AddonActionDoubleCrossBase /* Size=0x2F8 */
 {
     /* 0x000 */ Client_UI_AddonActionBarBase ActionBarBase;
     /*       */ byte _gap_0x248[0x98];
-    /*       */ byte _gap_0x2E0;
+    /* 0x2E0 */ bool Selected;
     /* 0x2E1 */ byte ShowDPadSlots;
     /*       */ byte _gap_0x2E2[0x2];
     /*       */ byte _gap_0x2E4[0x4];
@@ -10929,19 +10984,18 @@ struct Client_UI_Agent_AgentGoldSaucer /* Size=0x210 */
     /*       */ byte _gap_0x110[0x100];
 };
 
-struct Client_UI_Agent_AgentGrandCompanySupply /* Size=0x2F8 */
+struct Client_UI_Agent_AgentGrandCompanySupply /* Size=0x98 */
 {
-    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
-    /*       */ byte _gap_0x28[0x38];
-    /* 0x060 */ Client_UI_Agent_SupplyProvisioningData* SupplyProvisioningData;
-    /* 0x068 */ Client_UI_Agent_GrandCompanyItem* ItemArray;
-    /*       */ byte _gap_0x70[0x8];
-    /* 0x078 */ __int32 NumItems;
-    /*       */ byte _gap_0x7C[0x4];
-    /*       */ byte _gap_0x80[0x10];
-    /* 0x090 */ __int32 SelectedTab;
-    /*       */ byte _gap_0x94[0x4];
-    /*       */ byte _gap_0x98[0x260];
+    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
+    /*      */ byte _gap_0x28[0x38];
+    /* 0x60 */ Client_UI_Agent_SupplyProvisioningData* SupplyProvisioningData;
+    /* 0x68 */ Client_UI_Agent_GrandCompanyItem* ItemArray;
+    /*      */ byte _gap_0x70[0x8];
+    /* 0x78 */ __int32 NumItems;
+    /*      */ byte _gap_0x7C[0x4];
+    /*      */ byte _gap_0x80[0x10];
+    /* 0x90 */ __int32 SelectedTab;
+    /*      */ byte _gap_0x94[0x4];
 };
 
 struct Client_UI_Agent_AgentHousingPlant /* Size=0x950 */
@@ -12324,16 +12378,20 @@ struct Client_UI_Agent_GcArmyExpeditionData /* Size=0x1998 */
 struct Client_UI_Agent_GrandCompanyItem /* Size=0xA0 */
 {
     /* 0x00 */ Client_System_String_Utf8String ItemName;
-    /*      */ byte _gap_0x68[0x8];
+    /* 0x68 */ Client_Game_InventoryType Inventory;
+    /*      */ byte _gap_0x6C[0x4];
     /* 0x70 */ __int32 IconID;
     /* 0x74 */ __int32 ExpReward;
     /* 0x78 */ __int32 SealReward;
     /*      */ byte _gap_0x7C[0x4];
     /* 0x80 */ __int32 NumPossessed;
-    /*      */ byte _gap_0x84[0x4];
-    /*      */ byte _gap_0x88[0x8];
+    /* 0x84 */ unsigned __int32 ItemId;
+    /*      */ byte _gap_0x88[0x4];
+    /* 0x8C */ __int32 Position;
     /* 0x90 */ __int32 NumRequested;
-    /*      */ byte _gap_0x94[0x4];
+    /* 0x94 */ __int16 ItemLevel;
+    /* 0x96 */ byte ItemUiCategory;
+    /* 0x97 */ byte Slot;
     /*      */ byte _gap_0x98[0x2];
     /* 0x9A */ byte TurnInAvailable;
     /* 0x9B */ byte Bonus;
@@ -14519,7 +14577,7 @@ struct Common_Component_BGCollision_Object /* Size=0x8 */
     /*     */ byte _gap_0x0[0x8];
 };
 
-struct Common_Component_BGCollision_RaycastHit /* Size=0x50 */
+struct Common_Component_BGCollision_RaycastHit /* Size=0x58 */
 {
     /* 0x00 */ System_Numerics_Vector3 Point;
     /*      */ byte _gap_0x0[0x8];
@@ -14534,12 +14592,12 @@ struct Common_Component_BGCollision_RaycastHit /* Size=0x50 */
     /*      */ byte _gap_0x24[0x4];
     /*      */ byte _gap_0x28[0x8];
     /* 0x30 */ System_Numerics_Vector3 Unk30;
-    /*      */ byte _gap_0x30[0x8];
-    /*      */ byte _gap_0x38[0x4];
-    /* 0x3C */ __int32 Flags;
-    /* 0x40 */ __int32 Unk40;
-    /* 0x44 */ float Distance;
-    /* 0x48 */ Common_Component_BGCollision_Object* Object;
+    /*      */ byte _gap_0x30[0x10];
+    /* 0x40 */ __int32 Flags;
+    /* 0x44 */ __int32 Unk44;
+    /* 0x48 */ float Distance;
+    /*      */ byte _gap_0x4C[0x4];
+    /* 0x50 */ Common_Component_BGCollision_Object* Object;
 };
 
 struct Common_Configuration_ChangeEventInterface /* Size=0x18 */
@@ -15018,10 +15076,57 @@ struct Component_GUI_AtkComponentTextNineGrid /* Size=0xD8 */
     /*      */ byte _gap_0xC0[0x18];
 };
 
+struct Pointer_ComponentGUIAtkComponentTreeListItem /* Size=0x8 */
+{
+    /* 0x0 */ Component_GUI_AtkComponentTreeListItem* Value;
+};
+
+struct StdVector_PointerComponentGUIAtkComponentTreeListItem /* Size=0x18 */
+{
+    /* 0x00 */ Pointer_ComponentGUIAtkComponentTreeListItem* First;
+    /* 0x08 */ Pointer_ComponentGUIAtkComponentTreeListItem* Last;
+    /* 0x10 */ Pointer_ComponentGUIAtkComponentTreeListItem* End;
+};
+
 struct Component_GUI_AtkComponentTreeList /* Size=0x228 */
 {
-    /* 0x000 */ Component_GUI_AtkComponentList AtkComponentList;
-    /*       */ byte _gap_0x1A8[0x80];
+    /*       */ byte _gap_0x0[0x1A8];
+    /* 0x1A8 */ StdVector_PointerComponentGUIAtkComponentTreeListItem Items;
+    /*       */ byte _gap_0x1C0[0x58];
+    /*       */ byte _gap_0x218[0x4];
+    /* 0x21C */ bool LayoutRefreshPending;
+    /*       */ byte _gap_0x21D;
+    /*       */ byte _gap_0x21E[0x2];
+    /*       */ byte _gap_0x220[0x8];
+};
+
+struct Component_GUI_AtkComponentTreeList_AtkComponentTreeListVTable /* Size=0x0 */
+{
+    /*     */ byte _gap_0x0[0xF8];
+    /* 0xF8 */ __int64 SelectItem;
+    /* 0x100 */ __int64 DeselectItem;
+};
+
+struct StdVector_SystemUInt32 /* Size=0x18 */
+{
+    /* 0x00 */ unsigned __int32* First;
+    /* 0x08 */ unsigned __int32* Last;
+    /* 0x10 */ unsigned __int32* End;
+};
+
+struct StdVector_PointerSystemByte /* Size=0x18 */
+{
+    /* 0x00 */ Pointer_SystemByte* First;
+    /* 0x08 */ Pointer_SystemByte* Last;
+    /* 0x10 */ Pointer_SystemByte* End;
+};
+
+struct Component_GUI_AtkComponentTreeListItem /* Size=0x48 */
+{
+    /* 0x00 */ StdVector_SystemUInt32 UIntValues;
+    /* 0x18 */ StdVector_PointerSystemByte StringValues;
+    /* 0x30 */ Component_GUI_AtkComponentListItemRenderer* Renderer;
+    /*      */ byte _gap_0x38[0x10];
 };
 
 struct Component_GUI_AtkComponentWindow /* Size=0x108 */
@@ -15045,16 +15150,23 @@ struct Component_GUI_AtkCounterNode /* Size=0x130 */
     /* 0x0C8 */ Client_System_String_Utf8String NodeText;
 };
 
-struct Component_GUI_AtkCursor /* Size=0x10 */
+struct Component_GUI_AtkCursor /* Size=0x20 */
 {
-    /* 0x00 */ Component_GUI_AtkCursor_CursorType Type;
+    /* 0x00 */ bool ShouldAutoHide;
     /*      */ byte _gap_0x1;
     /*      */ byte _gap_0x2[0x2];
     /*      */ byte _gap_0x4[0x4];
-    /*      */ byte _gap_0x8[0x4];
-    /*      */ byte _gap_0xC[0x2];
-    /* 0x0E */ byte Visible;
-    /*      */ byte _gap_0xF;
+    /* 0x08 */ bool IsAutoHidden;
+    /*      */ byte _gap_0x9;
+    /*      */ byte _gap_0xA[0x2];
+    /* 0x0C */ Component_GUI_AtkCursor_CursorType Type;
+    /*      */ byte _gap_0xD;
+    /*      */ byte _gap_0xE[0x2];
+    /*      */ byte _gap_0x10[0x8];
+    /*      */ byte _gap_0x18[0x2];
+    /* 0x1A */ bool IsVisible;
+    /*      */ byte _gap_0x1B;
+    /*      */ byte _gap_0x1C[0x4];
 };
 
 struct Component_GUI_AtkDragDropInterface_AtkDragDropInterfaceVTable /* Size=0x0 */
@@ -15289,13 +15401,12 @@ struct Component_GUI_AtkStage /* Size=0x75E00 */
     /* 0x00168 */ Component_GUI_AtkTooltipManager TooltipManager;
     /*         */ byte _gap_0x2B8[0x80];
     /* 0x00338 */ Component_GUI_AtkCursor AtkCursor;
-    /*         */ byte _gap_0x348[0x8];
-    /* 0x00350 */ byte AtkEventDispatcher[0x500];
-    /* 0x00850 */ unsigned __int32 NextEventDispatcherIndex;
-    /*         */ byte _gap_0x854[0x4];
-    /*         */ byte _gap_0x858[0x10];
-    /* 0x00868 */ Component_GUI_AtkEvent* RegisteredEvents;
-    /*         */ byte _gap_0x870[0x75590];
+    /* 0x00358 */ byte AtkEventDispatcher[0x500];
+    /* 0x00858 */ unsigned __int32 NextEventDispatcherIndex;
+    /*         */ byte _gap_0x85C[0x4];
+    /*         */ byte _gap_0x860[0x18];
+    /* 0x00878 */ byte RegisteredEvents[0x75300];
+    /*         */ byte _gap_0x75B78[0x288];
 };
 
 struct Component_GUI_AtkTextNode /* Size=0x160 */
