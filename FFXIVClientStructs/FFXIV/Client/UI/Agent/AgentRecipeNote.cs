@@ -10,6 +10,11 @@ public unsafe partial struct AgentRecipeNote {
 
     [FieldOffset(0x3BC)] public int SelectedRecipeIndex;
     [FieldOffset(0x3D4)] public uint ActiveCraftRecipeId; // 0 when not actively crafting, does not include 0x10_000
+    [FieldOffset(0x3EC)] public bool RecipeSearchOpen;
+    [FieldOffset(0x406)] public bool RecipeSearchProcessing;
+    [FieldOffset(0x408)] public Utf8String RecipeSearch;
+    [FieldOffset(0x498)] public byte RecipeSearchHistorySelected;
+    [FieldOffset(0x4A0)] public StdDeque<Utf8String> RecipeSearchHistory;
 
     // Add 0x10_000, differentiate duplicate recipes by the CraftType value + 8
     // Name           CraftType ClassJob
