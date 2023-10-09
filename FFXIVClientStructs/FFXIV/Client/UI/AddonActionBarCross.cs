@@ -5,7 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [StructLayout(LayoutKind.Explicit, Size = 0x710)]
 public struct AddonActionCross {
     [FieldOffset(0x000)] public AddonActionBarBase ActionBarBase;
-    
+
     /// <summary>
     /// The selection state and/or the mapped hotbar set of the Left->Right Expanded Hold Bar.<br/>
     /// </summary>
