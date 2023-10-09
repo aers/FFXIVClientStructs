@@ -373,6 +373,7 @@ public unsafe partial struct Character {
         Normal = 1, // Param always 0
         EmoteLoop = 3, // Param is an EmoteMode entry
         Mounted = 4, // Param always 0
+        Crafting = 5, // Param always 0
         AnimLock = 8, // Param always 0
         Carrying = 9, // Param is a Carry entry
         InPositionLoop = 11, // Param is an EmoteMode entry
