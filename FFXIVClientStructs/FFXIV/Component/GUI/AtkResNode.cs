@@ -250,4 +250,7 @@ public unsafe partial struct AtkResNode : ICreatable {
 
     [VirtualFunction(1)]
     public partial void Destroy(bool free);
+
+    [VirtualFunction(2)]
+    public partial void UpdateFromTimeline();
 }
