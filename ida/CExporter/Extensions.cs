@@ -79,8 +79,7 @@ public static class FieldInfoExtensions {
         return attrs.Length != 0 ? attrs.Cast<FieldOffsetAttribute>().Single().Value : GetFieldOffsetSequential(info);
     }
 
-    public static int GetFieldOffsetSequential(this FieldInfo info) 
-    {
+    public static int GetFieldOffsetSequential(this FieldInfo info) {
         var fields = info.DeclaringType.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
         var offset = 0;
         foreach (var field in fields) {
