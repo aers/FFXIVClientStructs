@@ -59,6 +59,7 @@ public unsafe partial struct RaptureAtkModule {
         [FieldOffset(0x168)] public Utf8String DisplayTitle;
         [FieldOffset(0x1D0)] public Utf8String LevelText;
         [FieldOffset(0x240)] public int Flags;
+        [FieldOffset(0x244)] public bool IsDirty;
 
         public bool IsPrefixTitle => ((Flags >> (8 * 3)) & 0xFF) == 1;
     }
