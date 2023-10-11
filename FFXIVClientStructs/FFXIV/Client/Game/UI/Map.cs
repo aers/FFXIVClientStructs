@@ -15,22 +15,11 @@ public unsafe partial struct Map {
 
     [FieldOffset(0x1AF0)] public StdVector<MapMarkerData> ActiveLevequestMarkerData;
     [FieldOffset(0x1B18)] public MapMarkerContainer QuestMarkerData;
-    [FieldOffset(0x1B20)] public SimpleMapMarkerContainer SimpleQuestMarkerData;
     [FieldOffset(0x1B60)] public MapMarkerContainer GuildLeveAssignmentMapMarkerData;
     [FieldOffset(0x1BA8)] public MapMarkerContainer GuildOrderGuideMarkerData;
     [FieldOffset(0x3E98)] public MapMarkerContainer TripleTriadMarkerData;
     [FieldOffset(0x3EA8)] public MapMarkerContainer CustomTalkMarkerData;
-    [FieldOffset(0x3EB0)] public SimpleMapMarkerContainer SimpleCustomTalkMarkerData;
     [FieldOffset(0x3F50)] public MapMarkerContainer GemstoneTraderMarkerData;
-    [FieldOffset(0x3F58)] public SimpleMapMarkerContainer SimpleGemstoneTraderMarkerData;
-}
-
-[StructLayout(LayoutKind.Explicit, Size = 0x10)]
-public unsafe partial struct SimpleMapMarkerData {
-    [FieldOffset(0x00)] public uint IconId;
-    [FieldOffset(0x04)] public uint LevelId; // RowId into the 'Level' sheet
-    [FieldOffset(0x08)] public uint ObjectiveId; // RowId for whichever type of data this specific marker is representing, QuestId in the case of quests
-    [FieldOffset(0x0C)] public int Flags;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x90)]
@@ -52,30 +41,6 @@ public unsafe partial struct MapMarkerData {
     [FieldOffset(0x20)] public float Z;
     [FieldOffset(0x24)] public float Radius;
     [FieldOffset(0x3C)] public ushort RecommendedLevel;
-}
-
-/// <summary>
-/// This container uses a 2-dimensional array to contain Map Markers that contain basic information.
-/// If you need more advanced information, use the MapMarkerContainer fields instead if applicable.
-/// </summary>
-[StructLayout(LayoutKind.Sequential)]
-public unsafe partial struct SimpleMapMarkerContainer {
-    public ulong CurrentSize;
-    public nint InternalPointer;
-    public SimpleMapMarkerData** DataArray;
-    public ulong MaxSize;
-
-    public Span<Pointer<SimpleMapMarkerData>> DataSpan => new(DataArray, (int)CurrentSize);
-
-    public IEnumerable<SimpleMapMarkerData> GetEnumerable() {
-        var results = new List<SimpleMapMarkerData>();
-
-        foreach (var index in Enumerable.Range(0, (int)CurrentSize)) {
-            results.Add(*DataArray[index]);
-        }
-
-        return results;
-    }
 }
 
 /// <summary>
