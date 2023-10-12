@@ -2270,6 +2270,7 @@ classes:
       0x140255AD0: Finalize
       0x14025A330: UpdateCharaSelectDisplay
       0x140262420: OpenLoginWaitDialog
+      0x140263DE0: ShowCharacterNotFoundWarning
   Client::UI::Agent::AgentLobby::LobbyData:
     funcs:
       0x1402416D0: GetCharacterEntryByIndex
