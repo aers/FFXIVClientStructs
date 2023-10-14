@@ -67,6 +67,17 @@ public unsafe partial struct RaptureHotbarModule {
     public partial byte ExecuteSlotById(uint hotbarId, uint slotId);
 
     /// <summary>
+    /// Updates all hotbar slots that link to an old gearset id and replaces them with a link to the new id.
+    /// </summary>
+    /// <remarks>
+    /// Usually called right after <see cref="RaptureGearsetModule.ReassignGearsetId"/>.
+    /// </remarks>
+    /// <param name="gearsetId">The new/current ID of the gearset.</param>
+    /// <param name="oldGearsetId">The old ID of the gearset, which needs to be updated.</param>
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4E 10 48 8B 01 FF 50 40 48 8B 5C 24")]
+    public partial void ReassignGearsetId(int gearsetId, int oldGearsetId);
+
+    /// <summary>
     /// Retrieves a pointer to a specific hotbar slot via hotbar ID or slot ID. If the hotbar slot specified is out of
     /// bounds, return the <see cref="ScratchSlot"/>. 
     /// </summary>

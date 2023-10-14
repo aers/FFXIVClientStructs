@@ -79,6 +79,20 @@ public unsafe partial struct RaptureGearsetModule {
     public partial void UpdateGearset(int gearsetId);
 
     /// <summary>
+    /// Reassign a gearsets ID (aka. swap gearset positions).<br/>
+    /// The game calls this "Reassign Set Number".
+    /// </summary>
+    /// <remarks>
+    /// Check if the return value is a valid gearset id and then call
+    /// <see cref="RaptureHotbarModule.ReassignGearsetId"/> to update hotbars accordingly.
+    /// </remarks>
+    /// <param name="gearsetId">The ID of the gearset to switch.</param>
+    /// <param name="newGearsetId">The ID the gearset should be reassigned to.</param>
+    /// <returns>Returns <c>-1</c> if either gearset ID is invalid, <c>-2</c> if the player is editing a portrait, otherwise the old gearset ID.</returns>
+    [MemberFunction("E8 ?? ?? ?? ?? 8B E8 83 F8 FE 0F 8E ?? ?? ?? ?? 80 BF")]
+    public partial int ReassignGearsetId(int gearsetId, int newGearsetId);
+
+    /// <summary>
     /// Link a glamour plate to a specific gearset.
     /// </summary>
     /// <param name="gearsetId">The gearset ID to link a glamour plate to </param>

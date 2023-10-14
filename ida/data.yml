@@ -4069,6 +4069,7 @@ classes:
       0x140691590: ExecuteSlot
       0x14068C670: ExecuteSlotById
       0x14068C6B0: GetSlotById
+      0x14068FBA0: ReassignGearsetId
       0x140690C70: GetSlotAppearance   # static
       0x140691F90: WriteSavedSlot
   Client::UI::Misc::RaptureHotbarModule::HotbarSlot:
@@ -4110,6 +4111,7 @@ classes:
       0x1406A1FA0: CreateGearset
       0x1406A2030: DeleteGearset
       0x1406A2200: UpdateGearset # (this, gearsetIndex)
+      0x1406A2390: ReassignGearsetId
       0x1406A2640: LinkGlamourPlate
       0x1406A2760: RemoveGlamourPlateLink
       0x1406A2770: HasLinkedGlamourPlate
