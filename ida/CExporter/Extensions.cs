@@ -80,6 +80,8 @@ public static class FieldInfoExtensions {
     }
 
     public static int GetFieldOffsetSequential(this FieldInfo info) {
+        if (info.DeclaringType is null)
+            throw new Exception($"Unable to access declaring type of field {info.Name}");
         var fields = info.DeclaringType.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
         var offset = 0;
         foreach (var field in fields) {
