@@ -45,6 +45,7 @@ public unsafe partial struct AddonActionBarBase {
 [StructLayout(LayoutKind.Explicit, Size = 0xC8)]
 public unsafe struct ActionBarSlot {
     [FieldOffset(0x04)] public int ActionId;       // Not cleared when slot is emptied
+    [FieldOffset(0x88)] public AtkComponentDragDrop* ComponentDragDrop;
     [FieldOffset(0x90)] public AtkComponentNode* Icon;
     [FieldOffset(0x98)] public AtkTextNode* ControlHintTextNode;
     [FieldOffset(0xA0)] public AtkResNode* IconFrame;
