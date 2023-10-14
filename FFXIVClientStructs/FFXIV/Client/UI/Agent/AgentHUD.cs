@@ -32,6 +32,9 @@ public unsafe partial struct AgentHUD {
 
     [FieldOffset(0x13F0)] public HudPartyMemberEnmity* PartyEnmityList;
 
+    [MemberFunction("E8 ?? ?? ?? ?? 41 B0 01 EB 27")]
+    public partial bool SetMainCommandEnabledState(uint mainCommandId, bool enabled);
+
     [MemberFunction("48 85 D2 74 7F 48 89 5C 24")]
     public partial void OpenContextMenuFromTarget(GameObject* gameObject);
 }

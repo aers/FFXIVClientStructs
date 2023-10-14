@@ -4888,6 +4888,7 @@ classes:
     funcs:
       0x140C03810: ctor
       0x140C04090: Finalize
+      0x140C059D0: SetMainCommandEnabledState
       0x140C09CB0: UpdateParty
       0x140C0DCF0: UpdateHotBar
       0x140C1B470: OpenContextMenuFromTarget
