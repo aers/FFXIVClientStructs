@@ -345,8 +345,8 @@ public unsafe partial struct Character {
         [FieldOffset(0x1C)] public uint StanceChangeState;
         [FieldOffset(0x20)] public float Timer;
         [FieldOffset(0x28)] public void* CopyObject;
-        [FieldOffset(0x30)] public VfxData* Vfx;
-        [FieldOffset(0x38)] public ShroudFlags Flags;
+        [FieldOffset(0x30)] public ShroudFlags Flags;
+        [FieldOffset(0x40)] public VfxData* Vfx;
         [FieldOffset(0x3C)] public ushort NpcEquipId;
 
         [Flags]
