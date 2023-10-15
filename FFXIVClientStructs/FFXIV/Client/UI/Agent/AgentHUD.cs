@@ -32,6 +32,9 @@ public unsafe partial struct AgentHUD {
 
     [FieldOffset(0x13F0)] public HudPartyMemberEnmity* PartyEnmityList;
 
+    [MemberFunction("48 8B 81 ?? ?? ?? ?? 44 8B C2 83 E2 1F")]
+    public partial bool IsMainCommandEnabled(uint mainCommandId);
+
     [MemberFunction("E8 ?? ?? ?? ?? 41 B0 01 EB 27")]
     public partial bool SetMainCommandEnabledState(uint mainCommandId, bool enabled);
 
