@@ -79,16 +79,19 @@ public unsafe partial struct RaptureGearsetModule {
     public partial void UpdateGearset(int gearsetId);
 
     /// <summary>
-    /// Reassign a gearsets ID (aka. swap gearset positions).<br/>
-    /// The game calls this "Reassign Set Number".
+    /// Reassigns the ID of a gearset, effectively swapping the positions of two gearsets.
     /// </summary>
     /// <remarks>
-    /// Check if the return value is a valid gearset id and then call
-    /// <see cref="RaptureHotbarModule.ReassignGearsetId"/> to update hotbars accordingly.
+    /// This method is used to change the order of gearsets, and is referred to as "Reassign Set Number" in the game.<br/>
+    /// After calling this method, it is advisable to validate the returned gearset ID and, if the ID is valid, to
+    /// call <see cref="RaptureHotbarModule.ReassignGearsetId"/> to update the hotbar slots.
     /// </remarks>
-    /// <param name="gearsetId">The ID of the gearset to switch.</param>
-    /// <param name="newGearsetId">The ID the gearset should be reassigned to.</param>
-    /// <returns>Returns <c>-1</c> if either gearset ID is invalid, <c>-2</c> if the player is editing a portrait, otherwise the old gearset ID.</returns>
+    /// <param name="gearsetId">The ID of the gearset to be switched.</param>
+    /// <param name="newGearsetId">The ID to which the gearset should be reassigned.</param>
+    /// <returns>
+    /// Returns <c>-1</c> if either the original gearset ID or the new gearset ID is invalid, <c>-2</c> if the player
+    /// is currently editing a portrait, otherwise it returns the ID of the original gearset that was moved to a new position.
+    /// </returns>
     [MemberFunction("E8 ?? ?? ?? ?? 8B E8 83 F8 FE 0F 8E ?? ?? ?? ?? 80 BF")]
     public partial int ReassignGearsetId(int gearsetId, int newGearsetId);
 
