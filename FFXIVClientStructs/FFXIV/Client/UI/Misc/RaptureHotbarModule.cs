@@ -67,13 +67,13 @@ public unsafe partial struct RaptureHotbarModule {
     public partial byte ExecuteSlotById(uint hotbarId, uint slotId);
 
     /// <summary>
-    /// Updates all hotbar slots that link to an old gearset id and replaces them with a link to the new id.
+    /// Reassigns hotbar slots associated with the old gearset to the new gearset.
     /// </summary>
     /// <remarks>
-    /// Usually called right after <see cref="RaptureGearsetModule.ReassignGearsetId"/>.
+    /// This method is typically called immediately after <see cref="RaptureGearsetModule.ReassignGearsetId"/>.
     /// </remarks>
-    /// <param name="gearsetId">The new/current ID of the gearset.</param>
-    /// <param name="oldGearsetId">The old ID of the gearset, which needs to be updated.</param>
+    /// <param name="gearsetId">The ID of the new gearset to be assigned to the hotbars, replacing the old gearset.</param>
+    /// <param name="oldGearsetId">The ID of the gearset to be replaced on the hotbars with the new gearset.</param>
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4E 10 48 8B 01 FF 50 40 48 8B 5C 24")]
     public partial void ReassignGearsetId(int gearsetId, int oldGearsetId);
 
