@@ -66,8 +66,7 @@ public unsafe partial struct RaptureAtkModule {
     }
 
     [Flags]
-    public enum AgentUpdateFlags : byte
-    {
+    public enum AgentUpdateFlags : byte {
         None = 0x00,
         InventoryUpdate = 0x01,
         ActionBarUpdate = 0x02, // Triggered by using Actions, Inventories, Gearsets, Macros
