@@ -114,7 +114,9 @@ struct Client_Game_Gauge_WhiteMageGauge;
 struct Client_Game_Group_GroupManager;
 struct Client_Game_Group_PartyMember;
 struct Client_Game_StatusManager;
+struct Client_Game_Housing_HousingFurniture;
 struct Client_Game_Housing_HousingManager;
+struct Client_Game_Housing_HousingObjectManager;
 struct Client_Game_Housing_HousingOutdoorTerritory;
 struct Client_Game_Housing_HousingTerritory;
 struct Client_Game_Housing_HousingWorkshopAirshipData;
@@ -582,6 +584,7 @@ struct Client_UI_Agent_AgentMycItemBox;
 struct Client_UI_Agent_AgentReadyCheck;
 struct Client_UI_Agent_AgentReadyCheck_ReadyCheckEntry;
 struct Client_UI_Agent_AgentRecipeNote;
+struct StdDeque_ClientSystemStringUtf8String;
 struct Client_UI_Agent_AgentReconstructionBox;
 struct Client_UI_Agent_AgentRequest;
 struct Client_UI_Agent_AgentRetainerItemTransfer;
@@ -1000,6 +1003,7 @@ enum Client_Game_Character_Character_CharacterModes /* Size=0x1 */
     Normal = 1,
     EmoteLoop = 3,
     Mounted = 4,
+    Crafting = 5,
     AnimLock = 8,
     Carrying = 9,
     InPositionLoop = 11,
@@ -3469,6 +3473,18 @@ enum Client_UI_RaidFinderEntryFlags /* Size=0x1 */
     Extreme = 64
 };
 
+enum Client_UI_RaptureAtkModule_AgentUpdateFlags /* Size=0x1 */
+{
+    None = 0,
+    InventoryUpdate = 1,
+    ActionBarUpdate = 2,
+    RetainerUpdate = 4,
+    NameplateUpdate = 8,
+    UnlocksUpdate = 16,
+    MainCommandEnabledStateUpdate = 32,
+    HousingInventoryUpdate = 64
+};
+
 enum Client_UI_RaptureAtkModuleFlags /* Size=0x1 */
 {
     None = 0,
@@ -4158,11 +4174,13 @@ struct Client_Game_Character_Character_ReaperShroudContainer /* Size=0x50 */
     /* 0x20 */ float Timer;
     /*      */ byte _gap_0x24[0x4];
     /* 0x28 */ void* CopyObject;
-    /* 0x30 */ Client_Graphics_Vfx_VfxData* Vfx;
-    /* 0x38 */ Client_Game_Character_Character_ReaperShroudContainer_ShroudFlags Flags;
+    /* 0x30 */ Client_Game_Character_Character_ReaperShroudContainer_ShroudFlags Flags;
+    /*      */ byte _gap_0x34[0x4];
+    /*      */ byte _gap_0x38[0x4];
     /* 0x3C */ unsigned __int16 NpcEquipId;
     /*      */ byte _gap_0x3E[0x2];
-    /*      */ byte _gap_0x40[0x10];
+    /* 0x40 */ Client_Graphics_Vfx_VfxData* Vfx;
+    /*      */ byte _gap_0x48[0x8];
 };
 
 struct Client_Game_Character_Character_VfxContainer /* Size=0xF0 */
@@ -5122,6 +5140,19 @@ struct Client_Game_Group_PartyMember /* Size=0x390 */
     /*       */ byte _gap_0x388[0x8];
 };
 
+struct Client_Game_Housing_HousingFurniture /* Size=0x30 */
+{
+    /* 0x00 */ unsigned __int32 Id;
+    /* 0x04 */ byte Stain;
+    /*      */ byte _gap_0x5;
+    /*      */ byte _gap_0x6[0x2];
+    /*      */ byte _gap_0x8[0x8];
+    /* 0x10 */ Common_Math_Vector3 Position;
+    /* 0x20 */ float Rotation;
+    /* 0x24 */ __int32 Index;
+    /*      */ byte _gap_0x28[0x8];
+};
+
 struct Client_Game_Housing_HousingManager /* Size=0xE0 */
 {
     /* 0x00 */ Client_Game_Housing_HousingTerritory* CurrentTerritory;
@@ -5131,9 +5162,19 @@ struct Client_Game_Housing_HousingManager /* Size=0xE0 */
     /*      */ byte _gap_0x20[0xC0];
 };
 
+struct Client_Game_Housing_HousingObjectManager /* Size=0xC98 */
+{
+    /*       */ byte _gap_0x0[0x18];
+    /* 0x018 */ byte Objects[0xC80];
+};
+
 struct Client_Game_Housing_HousingTerritory /* Size=0x0 */
 {
-    /*     */ byte _gap_0x0[0x96A0];
+    /*     */ byte _gap_0x0[0x10];
+    /* 0x10 */ byte Furniture[0x8940];
+    /*     */ byte _gap_0x8950[0x18];
+    /* 0x8968 */ Client_Game_Housing_HousingObjectManager HousingObjectManager;
+    /*     */ byte _gap_0x9600[0xA0];
     /* 0x96A0 */ unsigned __int32 HouseID;
 };
 
@@ -7904,7 +7945,8 @@ struct Client_UI_ActionBarSlot /* Size=0xC8 */
 {
     /*      */ byte _gap_0x0[0x4];
     /* 0x04 */ __int32 ActionId;
-    /*      */ byte _gap_0x8[0x88];
+    /*      */ byte _gap_0x8[0x80];
+    /* 0x88 */ Component_GUI_AtkComponentDragDrop* ComponentDragDrop;
     /* 0x90 */ Component_GUI_AtkComponentNode* Icon;
     /* 0x98 */ Component_GUI_AtkTextNode* ControlHintTextNode;
     /* 0xA0 */ Component_GUI_AtkResNode* IconFrame;
@@ -11344,7 +11386,12 @@ struct Client_UI_Agent_AgentLobby /* Size=0x1DF8 */
     /*        */ byte _gap_0x1229;
     /*        */ byte _gap_0x122A[0x2];
     /*        */ byte _gap_0x122C[0x4];
-    /*        */ byte _gap_0x1230[0xBC8];
+    /*        */ byte _gap_0x1230[0xB70];
+    /*        */ byte _gap_0x1DA0[0x4];
+    /* 0x1DA4 */ bool HasShownCharacterNotFound;
+    /*        */ byte _gap_0x1DA5;
+    /*        */ byte _gap_0x1DA6[0x2];
+    /*        */ byte _gap_0x1DA8[0x50];
 };
 
 struct Client_UI_Agent_AgentLobby_AgentLobbyVTable /* Size=0x1 */
@@ -11674,6 +11721,15 @@ struct Client_UI_Agent_AgentReadyCheck_ReadyCheckEntry /* Size=0x10 */
     /*      */ byte _gap_0xC[0x4];
 };
 
+struct StdDeque_ClientSystemStringUtf8String /* Size=0x28 */
+{
+    /* 0x00 */ void* ContainerBase;
+    /* 0x08 */ Client_System_String_Utf8String** Map;
+    /* 0x10 */ unsigned __int64 MapSize;
+    /* 0x18 */ unsigned __int64 MyOff;
+    /* 0x20 */ unsigned __int64 MySize;
+};
+
 struct Client_UI_Agent_AgentRecipeNote /* Size=0x568 */
 {
     /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
@@ -11683,7 +11739,24 @@ struct Client_UI_Agent_AgentRecipeNote /* Size=0x568 */
     /*       */ byte _gap_0x3C0[0x10];
     /*       */ byte _gap_0x3D0[0x4];
     /* 0x3D4 */ unsigned __int32 ActiveCraftRecipeId;
-    /*       */ byte _gap_0x3D8[0x190];
+    /*       */ byte _gap_0x3D8[0x10];
+    /*       */ byte _gap_0x3E8[0x4];
+    /* 0x3EC */ bool RecipeSearchOpen;
+    /*       */ byte _gap_0x3ED;
+    /*       */ byte _gap_0x3EE[0x2];
+    /*       */ byte _gap_0x3F0[0x10];
+    /*       */ byte _gap_0x400[0x4];
+    /*       */ byte _gap_0x404[0x2];
+    /* 0x406 */ bool RecipeSearchProcessing;
+    /*       */ byte _gap_0x407;
+    /* 0x408 */ Client_System_String_Utf8String RecipeSearch;
+    /*       */ byte _gap_0x470[0x28];
+    /* 0x498 */ byte RecipeSearchHistorySelected;
+    /*       */ byte _gap_0x499;
+    /*       */ byte _gap_0x49A[0x2];
+    /*       */ byte _gap_0x49C[0x4];
+    /* 0x4A0 */ StdDeque_ClientSystemStringUtf8String RecipeSearchHistory;
+    /*       */ byte _gap_0x4C8[0xA0];
 };
 
 struct Client_UI_Agent_AgentReconstructionBox /* Size=0x240 */
@@ -14197,12 +14270,19 @@ struct Client_UI_RaptureAtkModule_NamePlateInfo /* Size=0x248 */
     /* 0x1D0 */ Client_System_String_Utf8String LevelText;
     /*       */ byte _gap_0x238[0x8];
     /* 0x240 */ __int32 Flags;
-    /*       */ byte _gap_0x244[0x4];
+    /* 0x244 */ bool IsDirty;
+    /*       */ byte _gap_0x245;
+    /*       */ byte _gap_0x246[0x2];
 };
 
 struct Client_UI_RaptureAtkModule /* Size=0x28F98 */
 {
-    /*         */ byte _gap_0x0[0x10D40];
+    /*         */ byte _gap_0x0[0x87F0];
+    /*         */ byte _gap_0x87F0[0x4];
+    /*         */ byte _gap_0x87F4[0x2];
+    /*         */ byte _gap_0x87F6;
+    /* 0x087F7 */ Client_UI_RaptureAtkModule_AgentUpdateFlags AgentUpdateFlag;
+    /*         */ byte _gap_0x87F8[0x8548];
     /* 0x10D40 */ Client_System_String_Utf8String* AddonNames;
     /*         */ byte _gap_0x10D48[0xD8];
     /* 0x10E20 */ Client_UI_Agent_AgentModule AgentModule;
