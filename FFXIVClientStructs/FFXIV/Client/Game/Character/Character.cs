@@ -41,16 +41,6 @@ public unsafe partial struct Character {
 
     [FieldOffset(0x12F0)] public VfxContainer Vfx;
 
-    [Obsolete("Use Vfx.VfxData", true)]
-    [FieldOffset(0x12F0 + 0x18)] public VfxData* VfxData;
-    [Obsolete("Use Vfx.VfxData2", true)]
-    [FieldOffset(0x12F0 + 0x20)] public VfxData* VfxData2;
-    [Obsolete("Use Vfx.Omen", true)]
-    [FieldOffset(0x12F0 + 0x48)] public VfxData* Omen;
-
-    [Obsolete("Use Vfx.VoiceId", true)]
-    [FieldOffset(0x13C0)] public ushort VoiceId;
-
     [FieldOffset(0x1410)] public byte StatusFlags4;
     [FieldOffset(0x1418)] public CharacterSetup CharacterSetup;
 
@@ -59,9 +49,6 @@ public unsafe partial struct Character {
     [FieldOffset(0x1B28)] public float Alpha;
     [FieldOffset(0x1B30)] public Companion* CompanionObject; // minion
     [FieldOffset(0x1B40)] public fixed byte FreeCompanyTag[6];
-
-    [Obsolete("Use CharacterData.CombatTaggerId instead.", true)]
-    [FieldOffset(0x1AB0)] public GameObjectID CombatTaggerId; // offset not updated for 6.5
 
     /// <summary>
     /// The current (hard) target for this Character. This will not be set for the LocalPlayer.
@@ -91,9 +78,6 @@ public unsafe partial struct Character {
     [FieldOffset(0x1BB6)] public byte EventState; // Leave for backwards compat. See Mode.
     [FieldOffset(0x1BB6)] public CharacterModes Mode;
     [FieldOffset(0x1BB7)] public byte ModeParam; // Different purpose depending on mode. See CharacterModes for more info.
-
-    [Obsolete("Use CharacterData.CombatTagType instead.", true)]
-    [FieldOffset(0x1B31)] public byte CombatTagType; // offset not updated for 6.5
 
     // Note: These 2 status flags might be just an ushort instead of 2 separate bytes.
 
@@ -139,9 +123,6 @@ public unsafe partial struct Character {
     [MemberFunction("E8 ?? ?? ?? ?? B8 ?? ?? ?? ?? 4C 3B F0")]
     public partial void SetSoftTargetId(GameObjectID id);
 
-    [Obsolete("Use CharacterSetup.CopyFromCharacter", true)]
-    public ulong CopyFromCharacter(Character* source, CharacterSetup.CopyFlags flags) => CharacterSetup.CopyFromCharacter(source, flags);
-
     public bool IsMounted() {
         // inlined as of 6.5
         return this.Mount.MountId != 0;
@@ -149,9 +130,6 @@ public unsafe partial struct Character {
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4F ?? E8 ?? ?? ?? ?? 48 8B 4C 24 ??")]
     public partial void SetMode(CharacterModes mode, byte modeParam);
-
-    [Obsolete("Use CharacterSetup.SetupBNpc", true)]
-    public void SetupBNpc(uint bNpcBaseId, uint bNpcNameId = 0) => CharacterSetup.SetupBNpc(bNpcBaseId, bNpcNameId);
 
     /// <summary> Can only be used for Mounts, Minions, and Ornaments. Literally just checks if the game object at index - 1 is a character and returns that. </summary>
     [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 48 0F 45 F8")]

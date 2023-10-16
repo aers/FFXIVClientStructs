@@ -52,9 +52,6 @@ public unsafe partial struct AtkUldManager {
     [MemberFunction("F6 81 ?? ?? ?? ?? ?? 44 8B CA")]
     public partial AtkResNode* SearchNodeById(uint id);
 
-    [Obsolete("Use CreateAtkNode", true)]
-    public AtkResNode* CreateNodeByType(uint type) => CreateAtkNode((NodeType)type);
-
     [MemberFunction("48 89 5C 24 ?? 57 48 83 EC ?? 8B FA 33 DB E8")]
     public partial AtkComponentBase* CreateAtkComponent(ComponentType type);
 
