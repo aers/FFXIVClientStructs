@@ -51,12 +51,12 @@ public unsafe partial struct PlayerState {
     [FieldOffset(0x2B1)] public byte GCRankMaelstrom;
     [FieldOffset(0x2B2)] public byte GCRankTwinAdders;
     [FieldOffset(0x2B3)] public byte GCRankImmortalFlames;
-    [FieldOffset(0x2B4)] public byte HomeAetheryteId;
-    [FieldOffset(0x2B5)] public byte FavouriteAetheryteCount;
-    [FieldOffset(0x2B6)] public fixed byte FavouriteAetheryteArray[4];
-    [FieldOffset(0x2BA)] public byte FreeAetheryteId;
-
-    [FieldOffset(0x2BC)] public uint BaseRestedExperience;
+    [FieldOffset(0x2B4)] public ushort HomeAetheryteId;
+    [FieldOffset(0x2B6)] public byte FavouriteAetheryteCount;
+    [FieldOffset(0x2B8)] public fixed ushort FavouriteAetheryteArray[4];
+    [FieldOffset(0x2C0)] public ushort FreeAetheryteId;
+    [FieldOffset(0x2C2)] public ushort FreeAetherytePlayStationPlus;
+    [FieldOffset(0x2C4)] public uint BaseRestedExperience;
 
     [FieldOffset(0x2D5)] public fixed byte OwnedMountsBitmask[49];
     [FieldOffset(0x306)] public byte NumOwnedMounts;
