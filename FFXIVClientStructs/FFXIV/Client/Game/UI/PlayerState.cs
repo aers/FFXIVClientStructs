@@ -64,8 +64,18 @@ public unsafe partial struct PlayerState {
 
     [FieldOffset(0x306)] public byte NumOwnedMounts;
 
+    // Ref: "48 8D 0D ?? ?? ?? ?? 41 0F B6 0C 08 41 B0 01 84 D1 0F 95 C1 24 01 02 C0 0A C8 41 0F B6 C4"
+    // Size: (FishParameterSheet.Count(row => row.IsInLog) + 7) >> 3
+    [FieldOffset(0x3B4)] public fixed byte CaughtFishBitmask[(1272 + 7) >> 3];
+
     [FieldOffset(0x458)] public uint NumFishCaught;
     [FieldOffset(0x45C)] public uint FishingBait;
+    // Ref: "41 0F B6 04 00 D3 E2 84 D0 0F 95 85"
+    // Size: (SpearfishingNotebookSheet.RowCount + 7) >> 3
+    [FieldOffset(0x460)] public fixed byte UnlockedSpearfishingNotebookBitmask[(56 + 7) >> 3];
+    // Ref: "48 8D 0D ?? ?? ?? ?? 41 0F B6 0C 08 84 D1 40 0F"
+    // Size: (SpearfishingItemSheet.RowCount + 7) >> 3
+    [FieldOffset(0x467)] public fixed byte CaughtSpearfishBitmask[(287 + 7) >> 3];
 
     [FieldOffset(0x48C)] public uint NumSpearfishCaught;
 
