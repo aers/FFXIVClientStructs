@@ -95,6 +95,7 @@ public enum InventoryType : uint {
     HandIn = 2005,
     DamagedGear = 2007,
     Examine = 2009,
+    ReconstructionBuyback = 2013, // Doman Enclave Reconstruction Reclamation Box
 
     ArmoryOffHand = 3200,
     ArmoryHead = 3201,
