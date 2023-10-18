@@ -46,27 +46,26 @@ public unsafe partial struct UIState {
     [FieldOffset(0x17954)] public fixed byte UnlockLinkBitmask[0x40];
 
     // Ref: Telepo#UpdateAetheryteList (in the Aetheryte sheet loop)
-    // Size: Number of rows in Aetheryte sheet >> 3
-    [FieldOffset(0x17994)] public fixed byte UnlockedAetherytesBitmask[201 >> 3];
+    // Size: (AetheryteSheet.RowCount + 7) >> 3
+    [FieldOffset(0x17994)] public fixed byte UnlockedAetherytesBitmask[(201 + 7) >> 3];
 
     // Ref: "E8 ?? ?? ?? ?? 48 83 6F ?? ?? 75 06 48 89 77 68"
-    // Size: Number of rows in HowTo sheet >> 3
-    [FieldOffset(0x179AE)] public fixed byte UnlockedHowtoBitmask[288 >> 3];
+    // Size: (HowToSheet.RowCount + 7) >> 3
+    [FieldOffset(0x179AE)] public fixed byte UnlockedHowtoBitmask[(288 + 7) >> 3];
 
     // Ref: g_Client::Game::UI::UnlockedCompanionsMask
     //      direct ref: "48 8D 0D ?? ?? ?? ?? 0F B6 04 08 84 D0 75 10 B8 ?? ?? ?? ?? 48 8B 5C 24"
     //      relative to uistate: "E8 ?? ?? ?? ?? 84 C0 75 A6 32 C0" (case for 0x355)
-    // Size: Number of rows in Companion sheet >> 3
-    [FieldOffset(0x179D2)] public fixed byte UnlockedCompanionsBitmask[512 >> 3];
+    // Size: (CompanionSheet.RowCount + 7) >> 3
+    [FieldOffset(0x179D2)] public fixed byte UnlockedCompanionsBitmask[(512 + 7) >> 3];
 
     // Ref: "42 0F B6 04 30 44 84 C0"
-    // Size: Number of rows in ChocoboTaxiStand sheet >> 3
-    [FieldOffset(0x17A12)] public fixed byte ChocoboTaxiStandsBitmask[87 >> 3];
+    // Size: (ChocoboTaxiStandSheet.RowCount + 7) >> 3
+    [FieldOffset(0x17A12)] public fixed byte ChocoboTaxiStandsBitmask[(87 + 7) >> 3];
 
     // Ref: UIState#IsCutsceneSeen
-    // Size: Max CutsceneWorkIndex.WorkIndex id >> 3
-    //       (just check inside IsCutsceneSeen function for max WorkIndex id)
-    [FieldOffset(0x17A1E)] public fixed byte CutsceneSeenBitmask[1272 >> 3];
+    // Size: (CutsceneWorkIndex.Max(row => row.WorkIndex) + 7) >> 3
+    [FieldOffset(0x17A1E)] public fixed byte CutsceneSeenBitmask[(1272 + 7) >> 3];
 
     [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B 8B ?? ?? ?? ?? 48 8B 01", 3)]
     public static partial UIState* Instance();
@@ -136,7 +135,7 @@ public unsafe partial struct UIState {
     /// <param name="aetheryteId">The ID of the aetheryte to check for.</param>
     /// <returns>Returns true if the specified aetheryte is unlocked.</returns>
     public bool IsAetheryteUnlocked(uint aetheryteId) {
-        return ((1 << ((int)aetheryteId & 7)) & this.UnlockedAetherytesBitmask[aetheryteId >> 3]) > 0;
+        return ((1 << ((int)aetheryteId & 7)) & UnlockedAetherytesBitmask[aetheryteId >> 3]) > 0;
     }
 
     /// <summary>
@@ -145,7 +144,7 @@ public unsafe partial struct UIState {
     /// <param name="howtoId">The ID of the HowTo to check for.</param>
     /// <returns>Returns true if the specified HowTo is unlocked.</returns>
     public bool IsHowToUnlocked(uint howtoId) {
-        return ((1 << ((int)howtoId & 7)) & this.UnlockedHowtoBitmask[howtoId >> 3]) > 0;
+        return ((1 << ((int)howtoId & 7)) & UnlockedHowtoBitmask[howtoId >> 3]) > 0;
     }
 
     /// <summary>
@@ -158,18 +157,18 @@ public unsafe partial struct UIState {
     /// <param name="companionId">The ID of the companion/minion to check for.</param>
     /// <returns>Returns true if the specified minion is unlocked.</returns>
     public bool IsCompanionUnlocked(uint companionId) {
-        // Logic borrowed from E8 ?? ?? ?? ?? 84 C0 75 A6 32 C0 and others.
+        // Logic borrowed from "E8 ?? ?? ?? ?? 84 C0 75 A6 32 C0" and others.
 
         // This, for some reason, does not exist as a siggable method in the game code normally. Virtually everyone and
         // everything that does minion checks will have this snippet (or one like it) in place. One does exist in the
         // crossref for the bitmask, but it's over in what I suspect is in the UI module and is bounded. I don't want to
         // replicate this upper bound here as that'll just be something we need to change with alarming regularity.
 
-        return ((1 << ((int)companionId & 7)) & this.UnlockedCompanionsBitmask[companionId >> 3]) > 0;
+        return ((1 << ((int)companionId & 7)) & UnlockedCompanionsBitmask[companionId >> 3]) > 0;
     }
 
     public bool IsChocoboTaxiStandUnlocked(uint chocoboTaxiStandId) {
-        return ((1 << ((ushort)chocoboTaxiStandId & 7)) & this.ChocoboTaxiStandsBitmask[(ushort)chocoboTaxiStandId >> 3]) > 0;
+        return ((1 << ((ushort)chocoboTaxiStandId & 7)) & ChocoboTaxiStandsBitmask[(ushort)chocoboTaxiStandId >> 3]) > 0;
     }
 
     [MemberFunction("E8 ?? ?? ?? ?? 44 22 F0")]

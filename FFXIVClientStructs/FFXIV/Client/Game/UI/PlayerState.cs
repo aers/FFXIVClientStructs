@@ -58,7 +58,10 @@ public unsafe partial struct PlayerState {
 
     [FieldOffset(0x2BC)] public uint BaseRestedExperience;
 
-    [FieldOffset(0x2D5)] public fixed byte OwnedMountsBitmask[49];
+    // Size: (MountSheet.Max(row => row.Order) + 7) >> 3
+    /// <remarks> Use <see cref="IsMountUnlocked"/> </remarks>
+    [FieldOffset(0x2DD)] public fixed byte OwnedMountsBitmask[(280 + 7) >> 3];
+
     [FieldOffset(0x306)] public byte NumOwnedMounts;
 
     [FieldOffset(0x458)] public uint NumFishCaught;
