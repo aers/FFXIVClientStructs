@@ -784,6 +784,11 @@ classes:
       0x14093C760: IsOrnamentUnlocked
       0x14093B1D0: IsOrchestrionRollUnlocked
       0x14093A330: IsSecretRecipeBookUnlocked # DoH unlockable books
+      0x14093A4A0: SetSightseeingLogUnlockState
+      0x14093A4F0: SetSightseeingLogUnlockStateEx
+      0x14093A540: SetAdventureExPhaseComplete
+      0x14093A590: IsAdventureExPhaseComplete
+      0x14093A860: IsAdventureComplete
       0x14093B110: IsFolkloreTomeUnlocked     # DoL unlockable books
       0x14093C560: IsMcGuffinUnlocked
       0x14093C860: IsFramersKitUnlocked

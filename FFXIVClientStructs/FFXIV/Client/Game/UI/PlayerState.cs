@@ -93,6 +93,18 @@ public unsafe partial struct PlayerState {
     [FieldOffset(0x4AA)] public byte PlayerStateFlags2;
     [FieldOffset(0x4AB)] public byte PlayerStateFlags3;
 
+    [FieldOffset(0x4D4)] public byte SightseeingLogUnlockState; // 0 = Not Unlocked, 1 = ARR Part 1, 2 = ARR Part 2
+    [FieldOffset(0x4D5)] public byte SightseeingLogUnlockStateEx; // 3 = Quest "Sights of the North" completed (= AdventureExPhase unlocked?)
+    // Ref: PlayerState.IsAdventureExPhaseComplete
+    // Size: (AdventureExPhaseSheet.RowCount + 7) >> 3
+    /// <remarks> Use <see cref="IsAdventureExPhaseComplete"/> </remarks>
+    [FieldOffset(0x4D6)] public fixed byte UnlockedAdventureExPhaseBitmask[(3 + 7) >> 3];
+
+    // Ref: PlayerState.IsAdventureComplete
+    // Size: (AdventureSheet.RowCount + 7) >> 3
+    /// <remarks> Use <see cref="IsAdventureComplete"/> </remarks>
+    [FieldOffset(0x500)] public fixed byte UnlockedAdventureBitmask[(295 + 7) >> 3];
+
     [FieldOffset(0x529)] public fixed byte UnlockFlags[44];
 
     /// <summary>Carrier Level of Delivery Moogle Quests</summary>
@@ -267,6 +279,20 @@ public unsafe partial struct PlayerState {
     /// <param name="territoryTypeColumn32">Column 32 of TerritoryType</param>
     [MemberFunction("4C 8B C9 85 D2 74 48")]
     public partial bool IsAetherCurrentZoneComplete(uint territoryTypeColumn32);
+
+    /// <summary>
+    /// Check if all vistas of an expansion in the Sightseeing Log have been discovered.
+    /// </summary>
+    /// <param name="adventureExPhaseId">AdventureExPhase RowId</param>
+    [MemberFunction("E8 ?? ?? ?? ?? 88 84 24 ?? ?? ?? ?? 4D 85 F6")]
+    public partial bool IsAdventureExPhaseComplete(uint adventureExPhaseId);
+
+    /// <summary>
+    /// Check if a Sightseeing Log vista has been discovered.
+    /// </summary>
+    /// <param name="adventureId">Index of Row (= RowId - 2162688)</param>
+    [MemberFunction("81 FA ?? ?? ?? ?? 73 1F 0F B6 C2")]
+    public partial bool IsAdventureComplete(uint adventureId);
 
     #endregion
 
