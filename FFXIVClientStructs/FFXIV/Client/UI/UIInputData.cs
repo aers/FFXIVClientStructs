@@ -25,7 +25,9 @@ public unsafe partial struct UIInputData {
     [FieldOffset(0x50)] public float Start;
     [FieldOffset(0x54)] public float L3;
     [FieldOffset(0x58)] public float R3;
+    [FieldOffset(0x5C)] public float PSButton;
     [FieldOffset(0x60)] public float Select;
+    [FieldOffset(0x64)] public float MuteButton;
 
     [FieldOffset(0xAC)] public float GamepadLeftStickLeft;
     [FieldOffset(0xB0)] public float GamepadLeftStickRight;
@@ -34,9 +36,9 @@ public unsafe partial struct UIInputData {
     [FieldOffset(0xD0)] public float GamepadLeftStickDown;
 
     [FieldOffset(0xEC)] public float GamepadRightStickLeft;
-    [FieldOffset(0xF0)] public float GamepadRightStickUp;
+    [FieldOffset(0xF0)] public float GamepadRightStickRight;
 
-    [FieldOffset(0x14C)] public float GamepadRightStickRight;
+    [FieldOffset(0x14C)] public float GamepadRightStickUp;
     [FieldOffset(0x150)] public float GamepadRightStickDown;
 
     // These values are weird... When DPadLeft is pressed it'll have value 1.0f, but DPadUp will have value 8.74278E-08
