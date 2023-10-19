@@ -64,7 +64,7 @@ public unsafe partial struct UIState {
     [FieldOffset(0x17A12)] public fixed byte ChocoboTaxiStandsBitmask[(87 + 7) >> 3];
 
     // Ref: UIState#IsCutsceneSeen
-    // Size: (CutsceneWorkIndex.Max(row => row.WorkIndex) + 7) >> 3
+    // Size: (CutsceneWorkIndexSheet.Max(row => row.WorkIndex) + 7) >> 3
     [FieldOffset(0x17A1E)] public fixed byte CutsceneSeenBitmask[(1272 + 7) >> 3];
 
     [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B 8B ?? ?? ?? ?? 48 8B 01", 3)]
@@ -176,6 +176,12 @@ public unsafe partial struct UIState {
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 7C 24 ?? 3C")]
     public static partial bool IsInstanceContentUnlocked(uint instanceContentId);
+
+    [MemberFunction("48 83 EC 28 E8 ?? ?? ?? ?? 48 85 C0 74 15 0F B7 40 2A")]
+    public static partial bool IsPublicContentCompleted(uint publicContentId);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 80 BF ?? ?? ?? ?? ?? 74 1E")]
+    public static partial bool IsPublicContentUnlocked(uint publicContentId);
 
     /// <summary> Check if the player has seen the cutscene before. </summary>
     /// <remarks>

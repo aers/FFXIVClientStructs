@@ -769,6 +769,8 @@ classes:
       0x140998540: GetNextMapAllowanceTimestamp
       0x14146FDF0: IsInstanceContentUnlocked   # static
       0x1414700D0: IsInstanceContentCompleted  # static
+      0x1414B0850: IsPublicContentUnlocked   # static
+      0x1414B08E0: IsPublicContentCompleted  # static
       0x1409997C0: Terminate
   Client::Game::UI::PlayerState:
     instances:
