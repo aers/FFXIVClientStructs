@@ -14,6 +14,8 @@ public unsafe partial struct UIInputData {
     [FieldOffset(0x14)] public int GamepadRightStickY; // from -99 (Down) to 99 (Up)
     [FieldOffset(0x18)] public GamepadButtonsFlags GamepadButtons; // Not always set if UI is focused
 
+    // These fields are only correct for actual physical Playstation Controllers
+    // Tested with Sony DualSense Controller Model: CFI-ZCT1W
     [FieldOffset(0x2C)] public float Square;
     [FieldOffset(0x30)] public float Cross;
     [FieldOffset(0x34)] public float Circle;
