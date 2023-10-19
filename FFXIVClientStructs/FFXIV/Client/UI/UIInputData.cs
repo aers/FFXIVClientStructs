@@ -1,4 +1,4 @@
-// Various standard keycode names 
+// Suppress Inconsistent Naming due to VirtualKeyCode Names 
 // ReSharper disable InconsistentNaming
 using FFXIVClientStructs.FFXIV.Client.System.Framework;
 
