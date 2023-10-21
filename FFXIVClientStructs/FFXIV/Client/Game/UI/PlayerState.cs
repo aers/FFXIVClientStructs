@@ -109,7 +109,7 @@ public unsafe partial struct PlayerState {
 
     /// <summary>Carrier Level of Delivery Moogle Quests</summary>
     [FieldOffset(0x559)] public byte DeliveryLevel;
-
+    // [FieldOffset(0x560)] public byte UnkWeddingPlanFlag; // see lua function "GetWeddingPlan"
     /// <summary>
     /// Flag containing information about which DoH job the player is specialized in.
     /// </summary>
@@ -126,6 +126,7 @@ public unsafe partial struct PlayerState {
     [FieldOffset(0x568)] public ushort ActiveGcArmyExpedition;
     [FieldOffset(0x56A)] public ushort ActiveGcArmyTraining;
     [FieldOffset(0x56C)] public bool HasNewGcArmyCandidate; // see lua function "GcArmyIsNewCandidate"
+    // [FieldOffset(0x56D)] public bool UnkGcPvpMountActionCheck; // see "80 3D ?? ?? ?? ?? ?? 75 3C"
 
     [FieldOffset(0x56E)] public fixed byte UnlockedMinerFolkloreTomeBitmask[2];
     [FieldOffset(0x570)] public fixed byte UnlockedBotanistFolkloreTomeBitmask[2];
