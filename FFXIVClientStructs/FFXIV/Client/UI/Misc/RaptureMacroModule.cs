@@ -49,5 +49,12 @@ public unsafe partial struct RaptureMacroModule {
         [FieldOffset(0x8)] public Utf8String Name;
         [FixedSizeArray<Utf8String>(15)]
         [FieldOffset(0x70)] public fixed byte Lines[15 * 0x68];
+
+        /// <summary>
+        /// Set the Icon of this Macro and also sets the correct MacroIconRowId
+        /// </summary>
+        /// <param name="iconId">The icon ID that this macro should now use </param>
+        [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 8B FA 89 11")]
+        public partial void SetIcon(uint iconId);
     }
 }
