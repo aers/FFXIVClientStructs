@@ -24,7 +24,7 @@ public unsafe partial struct RaptureHotbarModule {
     /// <summary>
     /// A bitfield representing whether a specific hotbar is to be considered "shared" or not.
     /// </summary>
-    [FieldOffset(0x78)] public fixed byte HotbarShareStateBitmask[4];
+    [FieldOffset(0x7C)] public fixed byte HotbarShareStateBitmask[4];
 
     /// <summary>
     /// An array of all active hotbars loaded and available to the player. This field tracks both normal hotbars
