@@ -50,12 +50,9 @@ public unsafe partial struct RaptureHotbarModule {
     /// their appropriate sub-indices.
     /// </summary>
     /// <remarks>
-    /// Data in this field is stored in the following order: the common PvE hotbar (index 0), each class' PvE hotbar
-    /// based on their ClassJob ID (indices 1-40), the common PvP hotbar (index 41), and each job's PvP hotbar
-    /// (excluding Blue Mage) (indices 42-60).
-    ///
-    /// To calculate a PvP hotbar index, add the ClassJob's <c>JobIndex</c> to 41. If the JobIndex is at or above 16,
-    /// subtract 1 to handle Blue Mage's edge case.
+    /// To retrieve PvE hotbar information, pass in either 0 for the shared hotbar or the ID of the ClassJob to retrieve.
+    /// To retrieve PvP hotbar information, pass in the result of the <see cref="GetSavedPvPHotbarIndexForClassJobId"/>
+    /// method.
     /// </remarks>
     [FixedSizeArray<SavedHotBarGroup>(65)]
     [FieldOffset(0x11974)] public fixed byte SavedHotBars[65 * SavedHotBarGroup.Size];
@@ -180,6 +177,24 @@ public unsafe partial struct RaptureHotbarModule {
     [MemberFunction("E8 ?? ?? ?? ?? EB 57 48 8D 9F ?? ?? ?? ??")]
     public partial void WriteSavedSlot(uint classJobId, uint hotbarId, uint slotId, HotBarSlot* slotSource,
         bool ignoreSharedHotbars, bool isPvpSlot);
+
+    /// <summary>
+    /// Get the Saved Hotbar Index for the PVP hotbar for a specific ClassJob, for use in <see cref="SavedHotBarsSpan"/>. 
+    /// </summary>
+    /// <param name="classJobId">The ClassJob to look up, or 0 for the shared PVP hotbar.</param>
+    /// <param name="negOneOnInvalid">Return -1 if the ClassJob can't have a PVP variant.</param>
+    /// <returns>Returns an index for the requested ClassJob's PVP hotbar.</returns>
+    [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 20 8B CA 41 0F B6 F8")]
+    public partial int GetPvPSavedHotbarIndexForClassJobId(uint classJobId, bool negOneOnInvalid = true);
+
+    /// <summary>
+    /// Get the ClassJob EXD Row ID for a specific saved hotbar's index. This method is PVP-aware and will resolve
+    /// accordingly.
+    /// </summary>
+    /// <param name="savedHotbarIndex">The saved hotbar index to check.</param>
+    /// <returns>The EXD Row ID for the ClassJob this hotbar is intended for. If zero, this is a shared hotbar.</returns>
+    [MemberFunction("E8 ?? ?? ?? ?? 41 0F B6 CD BA")]
+    public partial uint GetClassJobIdForSavedHotbarIndex(int savedHotbarIndex);
 }
 
 [StructLayout(LayoutKind.Explicit, Size = Size)]

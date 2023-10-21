@@ -93,6 +93,10 @@ functions:
   0x1400A8360: InDeepDungeon
   0x1400A85B0: IsUnconscious
   0x1400A85C0: IsRolePlaying
+  0x1400A8750: IsClassJobACrafter   # static, (classJobId) -> bool
+  0x1400A8760: IsClassJobAGatherer  # static, (classJobId) -> bool
+  0x1400A8720: IsClassJobAJob       # static, (classJobId, ClassJobExd*?) -> bool
+  0x1400A88E0: GetClassJobParentId  # static, (classJobId, ClassJobExd*?) -> uint
   0x14099C660: GetTeleportCost
   0x140B1E250: SetCondition
   0x140B1EA80: IsLocalPlayerLalafell
@@ -4077,6 +4081,9 @@ classes:
       0x1406900B0: ReloadAllMacroSlots
       0x140690C70: GetSlotAppearance   # static
       0x140691F90: WriteSavedSlot
+      0x1406932A0: GetPvPSavedHotbarIndexForClassJobId
+      0x140693350: GetClassJobIdForSavedHotbarIndex
+      0x1406933F0: GetInstance  # static
   Client::UI::Misc::RaptureHotbarModule::HotbarSlot:
     funcs:
       # Convention(ish?): Get just returns a value, Load actually mutates the HotbarSlot passed to it
