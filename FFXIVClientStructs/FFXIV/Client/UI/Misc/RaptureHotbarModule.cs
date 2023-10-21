@@ -31,7 +31,7 @@ public unsafe partial struct RaptureHotbarModule {
     /// (indices 0 to 9) and cross hotbars (indices 10 to 17).
     /// </summary>
     [FixedSizeArray<HotBar>(18)]
-    [FieldOffset(0x90)] public fixed byte HotBars[18 * Misc.HotBar.Size];
+    [FieldOffset(0x90)] public fixed byte HotBars[18 * HotBar.Size];
 
     public Span<HotBar> StandardHotBars => this.HotBarsSpan[..10];
     public Span<HotBar> CrossHotBars => this.HotBarsSpan[10..];
@@ -51,7 +51,7 @@ public unsafe partial struct RaptureHotbarModule {
     /// </summary>
     /// <remarks>
     /// To retrieve PvE hotbar information, pass in either 0 for the shared hotbar or the ID of the ClassJob to retrieve.
-    /// To retrieve PvP hotbar information, pass in the result of the <see cref="GetSavedPvPHotbarIndexForClassJobId"/>
+    /// To retrieve PvP hotbar information, pass in the result of the <see cref="GetPvPSavedHotbarIndexForClassJobId"/>
     /// method.
     /// </remarks>
     [FixedSizeArray<SavedHotBarGroup>(65)]
