@@ -597,6 +597,11 @@ classes:
       0x140727C10: GetEquippedItemIdForSlot
       0x14072AD10: GetPermittedGearsetCount
       0x1407352D0: GetLimitedTomestoneCount
+      0x140734DC0: GetGil
+      0x140734F90: GetCompanySeals
+      0x140735040: GetMaxCompanySeals
+      0x1407351B0: GetTomestoneCount
+      0x140735640: GetGoldSaucerCoin
       0x14144C400: GetSpecialItemId #static
       0x140735340: GetLimitedTomestoneWeeklyLimit #static
   Client::Game::MonsterNoteManager:
