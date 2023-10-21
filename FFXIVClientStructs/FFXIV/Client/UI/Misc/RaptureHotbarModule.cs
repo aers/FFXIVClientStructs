@@ -31,7 +31,7 @@ public unsafe partial struct RaptureHotbarModule {
     /// (indices 0 to 9) and cross hotbars (indices 10 to 17).
     /// </summary>
     [FixedSizeArray<HotBar>(18)]
-    [FieldOffset(0x90)] public fixed byte HotBars[18 * Misc.HotBar.Size];
+    [FieldOffset(0x90)] public fixed byte HotBars[18 * HotBar.Size];
 
     public Span<HotBar> StandardHotBars => this.HotBarsSpan[..10];
     public Span<HotBar> CrossHotBars => this.HotBarsSpan[10..];
@@ -50,15 +50,12 @@ public unsafe partial struct RaptureHotbarModule {
     /// their appropriate sub-indices.
     /// </summary>
     /// <remarks>
-    /// Data in this field is stored in the following order: the common PvE hotbar (index 0), each class' PvE hotbar
-    /// based on their ClassJob ID (indices 1-40), the common PvP hotbar (index 41), and each job's PvP hotbar
-    /// (excluding Blue Mage) (indices 42-60).
-    ///
-    /// To calculate a PvP hotbar index, add the ClassJob's <c>JobIndex</c> to 41. If the JobIndex is at or above 16,
-    /// subtract 1 to handle Blue Mage's edge case.
+    /// To retrieve PvE hotbar information, pass in either 0 for the shared hotbar or the ID of the ClassJob to retrieve.
+    /// To retrieve PvP hotbar information, pass in the result of the <see cref="GetPvPSavedHotbarIndexForClassJobId"/>
+    /// method.
     /// </remarks>
-    [FixedSizeArray<SavedHotBarGroup>(61)]
-    [FieldOffset(0x11974)] public fixed byte SavedHotBars[61 * SavedHotBarGroup.Size];
+    [FixedSizeArray<SavedHotBarGroup>(65)]
+    [FieldOffset(0x11974)] public fixed byte SavedHotBars[65 * SavedHotBarGroup.Size];
 
     [MemberFunction("E9 ?? ?? ?? ?? 48 8D 91 ?? ?? ?? ?? E9")]
     public partial byte ExecuteSlot(HotBarSlot* hotbarSlot);
@@ -67,15 +64,62 @@ public unsafe partial struct RaptureHotbarModule {
     public partial byte ExecuteSlotById(uint hotbarId, uint slotId);
 
     /// <summary>
-    /// Reassigns hotbar slots associated with the old gearset to the new gearset.
+    /// Search through the hotbar module and delete all hotbar slots associated with the specified macro. Used when a user
+    /// deletes a specific macro from their list, and should affect saved (but unloaded) hotbars as well.
+    /// </summary>
+    /// <param name="macroSet">The macro set to scan for.</param>
+    /// <param name="macroIndex">The macro index to scan for.</param>
+    [MemberFunction("E8 ?? ?? ?? ?? EB 1A FF 50 68 44 0F B6 83")]
+    public partial void DeleteMacroSlots(byte macroSet, byte macroIndex);
+
+    /// <summary>
+    /// Search through the hotbar module and reloads all hotbar slots associated with the specified macro. Used when
+    /// a user updates a specific macro in any way that would change its hotbar display (e.g. new icon or name). This
+    /// method will reload data from the saved hotbar information, overwriting any prior manual (unsaved)
+    /// <see cref="HotBarSlot.Set(HotbarSlotType, uint)"/> operations.
+    /// </summary>
+    /// <param name="macroSet">The macro set to scan for.</param>
+    /// <param name="macroIndex">The macro index to scan for.</param>
+    [MemberFunction("E8 ?? ?? ?? ?? 8B 83 ?? ?? ?? ?? 39 87")]
+    public partial void ReloadMacroSlots(byte macroSet, byte macroIndex);
+
+    /// <summary>
+    /// Search through the hotbar module and reload all hotbar slots associated with a specific gearset. Used when
+    /// a user updates a gearset in any a way that would change its hotbar display (e.g. new name). This
+    /// method will reload data from the saved hotbar information, overwriting any prior manual (unsaved)
+    /// <see cref="HotBarSlot.Set(HotbarSlotType, uint)"/> operations.
+    /// </summary>
+    /// <param name="gearsetId">The gearset ID to refresh.</param>
+    [MemberFunction("E8 ?? ?? ?? ?? 49 8B 4D 40 48 8B 01 FF 50 40")]
+    public partial void ReloadGearsetSlots(int gearsetId);
+
+    /// <summary>
+    /// Search through the hotbar module and reassign all hotbar slots associated with a specific gearset to a new target gearset.
+    /// Used when the user reorders or updates their gearset configurations.
     /// </summary>
     /// <remarks>
     /// This method is typically called immediately after <see cref="RaptureGearsetModule.ReassignGearsetId"/>.
     /// </remarks>
-    /// <param name="gearsetId">The ID of the new gearset to be assigned to the hotbars, replacing the old gearset.</param>
-    /// <param name="oldGearsetId">The ID of the gearset to be replaced on the hotbars with the new gearset.</param>
+    /// <param name="gearsetId">The ID of the new gearset to be assigned.</param>
+    /// <param name="oldGearsetId">The ID of the gearset to be replaced.</param>
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4E 10 48 8B 01 FF 50 40 48 8B 5C 24")]
     public partial void ReassignGearsetId(int gearsetId, int oldGearsetId);
+
+    /// <summary>
+    /// Search through the hotbar module and delete any hotbar slots associated with a specific gearset. Used when the user
+    /// deletes a gearset.
+    /// </summary>
+    /// <param name="gearsetId">The gearset ID to search for and delete.</param>
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 9C 24 ?? ?? ?? ?? 32 C0 48 8B 4C 24")]
+    public partial void DeleteGearsetSlots(int gearsetId);
+
+    /// <summary>
+    /// Search through the hotbar module and reload <em>all</em> macro hotbar slots. This method will reload data
+    /// from the saved hotbar information, overwriting any prior manual (unsaved)
+    /// <see cref="HotBarSlot.Set(HotbarSlotType, uint)"/> operations.
+    /// </summary>
+    [MemberFunction("E8 ?? ?? ?? ?? 8B C5 48 8B 4C 24 ?? 48 33 CC E8 ?? ?? ?? ?? 48 8B 9C 24")]
+    public partial void ReloadAllMacroSlots();
 
     /// <summary>
     /// Retrieves a pointer to a specific hotbar slot via hotbar ID or slot ID. If the hotbar slot specified is out of
@@ -133,6 +177,24 @@ public unsafe partial struct RaptureHotbarModule {
     [MemberFunction("E8 ?? ?? ?? ?? EB 57 48 8D 9F ?? ?? ?? ??")]
     public partial void WriteSavedSlot(uint classJobId, uint hotbarId, uint slotId, HotBarSlot* slotSource,
         bool ignoreSharedHotbars, bool isPvpSlot);
+
+    /// <summary>
+    /// Get the Saved Hotbar Index for the PVP hotbar for a specific ClassJob, for use in <see cref="SavedHotBarsSpan"/>. 
+    /// </summary>
+    /// <param name="classJobId">The ClassJob to look up, or 0 for the shared PVP hotbar.</param>
+    /// <param name="negOneOnInvalid">Return -1 if the ClassJob can't have a PVP variant.</param>
+    /// <returns>Returns an index for the requested ClassJob's PVP hotbar.</returns>
+    [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 20 8B CA 41 0F B6 F8")]
+    public partial int GetPvPSavedHotbarIndexForClassJobId(uint classJobId, bool negOneOnInvalid = true);
+
+    /// <summary>
+    /// Get the ClassJob EXD Row ID for a specific saved hotbar's index. This method is PVP-aware and will resolve
+    /// accordingly.
+    /// </summary>
+    /// <param name="savedHotbarIndex">The saved hotbar index to check.</param>
+    /// <returns>The EXD Row ID for the ClassJob this hotbar is intended for. If zero, this is a shared hotbar.</returns>
+    [MemberFunction("E8 ?? ?? ?? ?? 41 0F B6 CD BA")]
+    public partial uint GetClassJobIdForSavedHotbarIndex(int savedHotbarIndex);
 }
 
 [StructLayout(LayoutKind.Explicit, Size = Size)]
