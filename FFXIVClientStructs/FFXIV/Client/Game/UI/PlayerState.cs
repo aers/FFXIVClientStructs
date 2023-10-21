@@ -126,6 +126,10 @@ public unsafe partial struct PlayerState {
     [FieldOffset(0x568)] public ushort ActiveGcArmyExpedition;
     [FieldOffset(0x56A)] public ushort ActiveGcArmyTraining;
 
+    [FieldOffset(0x56E)] public fixed byte UnlockedMinerFolkloreTomeBitmask[2];
+    [FieldOffset(0x570)] public fixed byte UnlockedBotanistFolkloreTomeBitmask[2];
+    [FieldOffset(0x572)] public fixed byte UnlockedFishingFolkloreTomeBitmask[2];
+
     #region Weekly Bonus/Weekly Bingo/Wondrous Tails Fields (packet reader: "4C 8B D2 48 8D 81")
 
     /// <summary>RowIds of WeeklyBingoOrderData sheet</summary>
