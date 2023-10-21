@@ -4024,6 +4024,9 @@ classes:
       0x14066CA90: GetLineCount
       0x14066E1F0: SetMacroLines # function called by replace/append
       0x14066DC50: SetSavePendingFlag
+  Client::UI::Misc::RaptureMacroModule::Macro:
+    funcs:
+      0x14066C870: SetIcon
   Client::UI::Misc::RaptureTextModule:
     vtbls:
       - ea: 0x141A1D0B8
