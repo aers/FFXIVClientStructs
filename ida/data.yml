@@ -4069,8 +4069,12 @@ classes:
       0x140691590: ExecuteSlot
       0x14068C670: ExecuteSlotById
       0x14068C6B0: GetSlotById
+      0x14068F0B0: DeleteMacroSlots
       0x14068F290: ReloadMacroSlots
+      0x14068F6D0: ReloadGearsetSlots
       0x14068FBA0: ReassignGearsetId
+      0x14068FDC0: DeleteGearsetSlots
+      0x1406900B0: ReloadAllMacroSlots
       0x140690C70: GetSlotAppearance   # static
       0x140691F90: WriteSavedSlot
   Client::UI::Misc::RaptureHotbarModule::HotbarSlot:

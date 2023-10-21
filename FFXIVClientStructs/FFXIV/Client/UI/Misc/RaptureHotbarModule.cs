@@ -57,8 +57,8 @@ public unsafe partial struct RaptureHotbarModule {
     /// To calculate a PvP hotbar index, add the ClassJob's <c>JobIndex</c> to 41. If the JobIndex is at or above 16,
     /// subtract 1 to handle Blue Mage's edge case.
     /// </remarks>
-    [FixedSizeArray<SavedHotBarGroup>(61)]
-    [FieldOffset(0x11974)] public fixed byte SavedHotBars[61 * SavedHotBarGroup.Size];
+    [FixedSizeArray<SavedHotBarGroup>(65)]
+    [FieldOffset(0x11974)] public fixed byte SavedHotBars[65 * SavedHotBarGroup.Size];
 
     [MemberFunction("E9 ?? ?? ?? ?? 48 8D 91 ?? ?? ?? ?? E9")]
     public partial byte ExecuteSlot(HotBarSlot* hotbarSlot);
@@ -97,23 +97,32 @@ public unsafe partial struct RaptureHotbarModule {
     public partial void ReloadGearsetSlots(int gearsetId);
 
     /// <summary>
+    /// Search through the hotbar module and reassign all hotbar slots associated with a specific gearset to a new target gearset.
+    /// Used when the user reorders or updates their gearset configurations.
+    /// </summary>
+    /// <remarks>
+    /// This method is typically called immediately after <see cref="RaptureGearsetModule.ReassignGearsetId"/>.
+    /// </remarks>
+    /// <param name="gearsetId">The ID of the new gearset to be assigned.</param>
+    /// <param name="oldGearsetId">The ID of the gearset to be replaced.</param>
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4E 10 48 8B 01 FF 50 40 48 8B 5C 24")]
+    public partial void ReassignGearsetId(int gearsetId, int oldGearsetId);
+
+    /// <summary>
+    /// Search through the hotbar module and delete any hotbar slots associated with a specific gearset. Used when the user
+    /// deletes a gearset.
+    /// </summary>
+    /// <param name="gearsetId">The gearset ID to search for and delete.</param>
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 9C 24 ?? ?? ?? ?? 32 C0 48 8B 4C 24")]
+    public partial void DeleteGearsetSlots(int gearsetId);
+
+    /// <summary>
     /// Search through the hotbar module and reload <em>all</em> macro hotbar slots. This method will reload data
     /// from the saved hotbar information, overwriting any prior manual (unsaved)
     /// <see cref="HotBarSlot.Set(HotbarSlotType, uint)"/> operations.
     /// </summary>
     [MemberFunction("E8 ?? ?? ?? ?? 8B C5 48 8B 4C 24 ?? 48 33 CC E8 ?? ?? ?? ?? 48 8B 9C 24")]
     public partial void ReloadAllMacroSlots();
-
-    /// <summary>
-    /// Reassigns hotbar slots associated with the old gearset to the new gearset.
-    /// </summary>
-    /// <remarks>
-    /// This method is typically called immediately after <see cref="RaptureGearsetModule.ReassignGearsetId"/>.
-    /// </remarks>
-    /// <param name="gearsetId">The ID of the new gearset to be assigned to the hotbars, replacing the old gearset.</param>
-    /// <param name="oldGearsetId">The ID of the gearset to be replaced on the hotbars with the new gearset.</param>
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4E 10 48 8B 01 FF 50 40 48 8B 5C 24")]
-    public partial void ReassignGearsetId(int gearsetId, int oldGearsetId);
 
     /// <summary>
     /// Retrieves a pointer to a specific hotbar slot via hotbar ID or slot ID. If the hotbar slot specified is out of
