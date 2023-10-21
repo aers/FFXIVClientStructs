@@ -125,6 +125,7 @@ public unsafe partial struct PlayerState {
     [FieldOffset(0x564)] public uint SquadronTrainingCompletionTimestamp;
     [FieldOffset(0x568)] public ushort ActiveGcArmyExpedition;
     [FieldOffset(0x56A)] public ushort ActiveGcArmyTraining;
+    [FieldOffset(0x56C)] public bool HasNewGcArmyCandidate; // see lua function "GcArmyIsNewCandidate"
 
     [FieldOffset(0x56E)] public fixed byte UnlockedMinerFolkloreTomeBitmask[2];
     [FieldOffset(0x570)] public fixed byte UnlockedBotanistFolkloreTomeBitmask[2];
