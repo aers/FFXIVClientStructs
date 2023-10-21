@@ -601,6 +601,7 @@ classes:
       0x140734F90: GetCompanySeals
       0x140735040: GetMaxCompanySeals
       0x1407351B0: GetTomestoneCount
+      0x140735400: GetWolfMarks
       0x140735640: GetGoldSaucerCoin
       0x14144C400: GetSpecialItemId #static
       0x140735340: GetLimitedTomestoneWeeklyLimit #static
