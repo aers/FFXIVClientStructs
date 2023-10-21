@@ -67,6 +67,44 @@ public unsafe partial struct RaptureHotbarModule {
     public partial byte ExecuteSlotById(uint hotbarId, uint slotId);
 
     /// <summary>
+    /// Search through the hotbar module and delete all hotbar slots associated with the specified macro. Used when a user
+    /// deletes a specific macro from their list, and should affect saved (but unloaded) hotbars as well.
+    /// </summary>
+    /// <param name="macroSet">The macro set to scan for.</param>
+    /// <param name="macroIndex">The macro index to scan for.</param>
+    [MemberFunction("E8 ?? ?? ?? ?? EB 1A FF 50 68 44 0F B6 83")]
+    public partial void DeleteMacroSlots(byte macroSet, byte macroIndex);
+
+    /// <summary>
+    /// Search through the hotbar module and reloads all hotbar slots associated with the specified macro. Used when
+    /// a user updates a specific macro in any way that would change its hotbar display (e.g. new icon or name). This
+    /// method will reload data from the saved hotbar information, overwriting any prior manual (unsaved)
+    /// <see cref="HotBarSlot.Set(HotbarSlotType, uint)"/> operations.
+    /// </summary>
+    /// <param name="macroSet">The macro set to scan for.</param>
+    /// <param name="macroIndex">The macro index to scan for.</param>
+    [MemberFunction("E8 ?? ?? ?? ?? 8B 83 ?? ?? ?? ?? 39 87")]
+    public partial void ReloadMacroSlots(byte macroSet, byte macroIndex);
+
+    /// <summary>
+    /// Search through the hotbar module and reload all hotbar slots associated with a specific gearset. Used when
+    /// a user updates a gearset in any a way that would change its hotbar display (e.g. new name). This
+    /// method will reload data from the saved hotbar information, overwriting any prior manual (unsaved)
+    /// <see cref="HotBarSlot.Set(HotbarSlotType, uint)"/> operations.
+    /// </summary>
+    /// <param name="gearsetId">The gearset ID to refresh.</param>
+    [MemberFunction("E8 ?? ?? ?? ?? 49 8B 4D 40 48 8B 01 FF 50 40")]
+    public partial void ReloadGearsetSlots(int gearsetId);
+
+    /// <summary>
+    /// Search through the hotbar module and reload <em>all</em> macro hotbar slots. This method will reload data
+    /// from the saved hotbar information, overwriting any prior manual (unsaved)
+    /// <see cref="HotBarSlot.Set(HotbarSlotType, uint)"/> operations.
+    /// </summary>
+    [MemberFunction("E8 ?? ?? ?? ?? 8B C5 48 8B 4C 24 ?? 48 33 CC E8 ?? ?? ?? ?? 48 8B 9C 24")]
+    public partial void ReloadAllMacroSlots();
+
+    /// <summary>
     /// Reassigns hotbar slots associated with the old gearset to the new gearset.
     /// </summary>
     /// <remarks>
