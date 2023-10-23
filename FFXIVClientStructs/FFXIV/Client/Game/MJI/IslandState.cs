@@ -281,7 +281,4 @@ public struct MJIFarmPasture {
     [FieldOffset(0x01)] public byte HoursToCompletion;
     [FieldOffset(0x02)] public bool UnderConstruction;
     [FieldOffset(0x03)] public byte EligibleForCare;
-
-    [Obsolete($"Renamed to {nameof(EligibleForCare)}")]
-    [FieldOffset(0x03)] public byte UNK_0x4;
 }

@@ -1,6 +1,5 @@
 using System.Text;
 using FFXIVClientStructs.FFXIV.Client.System.Framework;
-using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
@@ -18,114 +17,6 @@ public unsafe partial struct ConfigModule {
     [FieldOffset(0x2C8)] private fixed byte options[Option.Size * ConfigOptionCount];
 
     [FieldOffset(0x5C38)] private fixed byte values[0x10 * ConfigOptionCount];
-
-    [MemberFunction("E8 ?? ?? ?? ?? C6 47 4D 00")]
-    [Obsolete("Use Framework.SystemConfig functions.", true)]
-    public partial bool SetOption(uint index, int value, int a4 = 2, bool a5 = true, bool a6 = false);
-
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 35 ?? ?? ?? ?? 33 DB")]
-    [Obsolete("Use Framework.SystemConfig functions.", true)]
-    public partial int GetIntValue(uint index, int a3 = 2);
-
-    [Obsolete("Use Framework.SystemConfig functions.", true)]
-    public uint? GetIndex(ConfigOption option) {
-        for (uint i = 0; i < ConfigOptionCount; i++) {
-            var o = GetOption(i);
-            if (o->OptionID != option) continue;
-            return i;
-        }
-
-        return null;
-    }
-
-    [Obsolete("Use Framework.SystemConfig functions.", true)]
-    public void SetOption(ConfigOption option, int value) {
-        for (uint i = 0; i < ConfigOptionCount; i++) {
-            var o = GetOption(i);
-            if (o->OptionID != option) continue;
-            SetOption(i, value);
-            return;
-        }
-    }
-
-    [Obsolete("Use Framework.SystemConfig functions.", true)]
-    public void SetOptionById(short optionId, int value) {
-        SetOption((ConfigOption)optionId, value);
-    }
-
-    [Obsolete("Use Framework.SystemConfig functions.", true)]
-    public Option* GetOption(string name) {
-        if (string.IsNullOrEmpty(name)) return null;
-        for (uint i = 0; i < ConfigOptionCount; i++) {
-            var o = GetOption(i);
-            if (o->GetName() == name) {
-                return o;
-            }
-        }
-
-        return null;
-    }
-
-    [Obsolete("Use Framework.SystemConfig functions.", true)]
-    public Option* GetOption(uint index) {
-        fixed (byte* p = options) {
-            var o = (Option*)p;
-            return o + index;
-        }
-    }
-
-    [Obsolete("Use Framework.SystemConfig functions.", true)]
-    public Option* GetOption(ConfigOption option) {
-        for (uint i = 0; i < ConfigOptionCount; i++) {
-            var o = GetOption(i);
-            if (o->OptionID == option) return o;
-        }
-
-        return null;
-    }
-
-    [Obsolete("Use Framework.SystemConfig functions.", true)]
-    public Option* GetOptionById(short optionId) {
-        return GetOption((ConfigOption)optionId);
-    }
-
-    [Obsolete("Use Framework.SystemConfig functions.", true)]
-    public AtkValue* GetValue(uint index) {
-        fixed (byte* p = values) {
-            var v = (AtkValue*)p;
-            return v + index;
-        }
-    }
-
-    [Obsolete("Use Framework.SystemConfig functions.", true)]
-    public AtkValue* GetValue(ConfigOption option) {
-        for (uint i = 0; i < ConfigOptionCount; i++) {
-            var o = GetOption(i);
-            if (o->OptionID == option) return GetValue(i);
-        }
-
-        return null;
-    }
-
-    [Obsolete("Use Framework.SystemConfig functions.", true)]
-    public AtkValue* GetValueById(short optionId) {
-        return GetValue((ConfigOption)optionId);
-    }
-
-    [Obsolete("Use Framework.SystemConfig functions.", true)]
-    public int GetIntValue(ConfigOption option) {
-        for (uint i = 0; i < ConfigOptionCount; i++) {
-            var o = GetOption(i);
-            if (o->OptionID == option) return GetIntValue(i);
-        }
-
-        return 0;
-    }
-
-    [Obsolete("Use Framework.SystemConfig functions.", true)]
-    public int GetIntValue(short optionId) {
-        return GetIntValue((ConfigOption)optionId);
-    }
 
     [StructLayout(LayoutKind.Explicit, Size = Size)]
     public struct Option {

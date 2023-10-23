@@ -21,8 +21,6 @@ public unsafe partial struct RaptureAtkModule {
 
     [FieldOffset(0x11C20)] public RaptureAtkUnitManager RaptureAtkUnitManager;
 
-    [FieldOffset(0x1B8A8), Obsolete("Use RaptureAtkUnitManager.Flags", true)] public RaptureAtkModuleFlags Flags; // TODO: this is actually at RaptureAtkUnitManager + 0x9C88
-
     [FieldOffset(0x1BBB8)] public int NameplateInfoCount;
     [FieldOffset(0x1BBC0)] public NamePlateInfo NamePlateInfoArray; // 0-50, &NamePlateInfoArray[i]
 
