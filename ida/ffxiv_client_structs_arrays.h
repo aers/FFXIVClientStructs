@@ -1694,7 +1694,9 @@ enum Client::UI::ActionCrossSelect: __int32
     Left = 1,
     Right = 2,
     LR = 3,
-    RL = 4
+    RL = 4,
+    DoubleCrossLeft = 5,
+    DoubleCrossRight = 6
 };
 
 enum Client::UI::Agent::ActionStatus: byte
@@ -3496,6 +3498,131 @@ enum Client::UI::RaptureAtkModuleFlags: byte
     Unk20 = 32,
     Unk40 = 64,
     Unk80 = 128
+};
+
+enum Client::UI::SeVirtualKey: __int32
+{
+    NO_KEY = 0,
+    LBUTTON = 1,
+    RBUTTON = 2,
+    CANCEL = 3,
+    MBUTTON = 4,
+    XBUTTON1 = 5,
+    XBUTTON2 = 6,
+    BACK = 8,
+    TAB = 9,
+    CLEAR = 12,
+    RETURN = 13,
+    SHIFT = 16,
+    CONTROL = 17,
+    MENU = 18,
+    PAUSE = 19,
+    CAPITAL = 20,
+    HANGUL = 21,
+    JUNJA = 23,
+    FINAL = 24,
+    KANJI = 25,
+    ESCAPE = 27,
+    CONVERT = 28,
+    NONCONVERT = 29,
+    ACCEPT = 30,
+    MODECHANGE = 31,
+    SPACE = 32,
+    PRIOR = 33,
+    NEXT = 34,
+    END = 35,
+    HOME = 36,
+    LEFT = 37,
+    UP = 38,
+    RIGHT = 39,
+    DOWN = 40,
+    SELECT = 41,
+    PRINT = 42,
+    EXECUTE = 43,
+    SNAPSHOT = 44,
+    INSERT = 45,
+    DELETE = 46,
+    HELP = 47,
+    KEY_0 = 48,
+    KEY_1 = 49,
+    KEY_2 = 50,
+    KEY_3 = 51,
+    KEY_4 = 52,
+    KEY_5 = 53,
+    KEY_6 = 54,
+    KEY_7 = 55,
+    KEY_8 = 56,
+    KEY_9 = 57,
+    A = 65,
+    B = 66,
+    C = 67,
+    D = 68,
+    E = 69,
+    F = 70,
+    G = 71,
+    H = 72,
+    I = 73,
+    J = 74,
+    K = 75,
+    L = 76,
+    M = 77,
+    N = 78,
+    O = 79,
+    P = 80,
+    Q = 81,
+    R = 82,
+    S = 83,
+    T = 84,
+    U = 85,
+    V = 86,
+    W = 87,
+    X = 88,
+    Y = 89,
+    Z = 90,
+    LWIN = 91,
+    RWIN = 92,
+    APPS = 93,
+    SLEEP = 95,
+    NUMPAD0 = 96,
+    NUMPAD1 = 97,
+    NUMPAD2 = 98,
+    NUMPAD3 = 99,
+    NUMPAD4 = 100,
+    NUMPAD5 = 101,
+    NUMPAD6 = 102,
+    NUMPAD7 = 103,
+    NUMPAD8 = 104,
+    NUMPAD9 = 105,
+    MULTIPLY = 106,
+    ADD = 107,
+    SEPARATOR = 108,
+    SUBTRACT = 109,
+    DECIMAL = 110,
+    DIVIDE = 111,
+    F1 = 112,
+    F2 = 113,
+    F3 = 114,
+    F4 = 115,
+    F5 = 116,
+    F6 = 117,
+    F7 = 118,
+    F8 = 119,
+    F9 = 120,
+    F10 = 121,
+    F11 = 122,
+    F12 = 123,
+    F13 = 124,
+    F14 = 125,
+    F15 = 126,
+    F16 = 127,
+    NUMLOCK = 128,
+    SCROLL = 129,
+    F19 = 130,
+    F20 = 131,
+    F21 = 132,
+    F22 = 133,
+    F23 = 134,
+    F24 = 135
 };
 
 enum Client::UI::UIModule::UiFlags: __int32
@@ -8012,10 +8139,20 @@ struct Client::UI::AddonActionBarBase::AddonActionBarBaseVTable /* Size=0x0 */
 struct Client::UI::AddonActionCross /* Size=0x710 */
 {
     /* 0x000 */ Client::UI::AddonActionBarBase ActionBarBase;
-    /*       */ byte _gap_0x248[0x4A0];
+    /*       */ byte _gap_0x248[0x498];
+    /* 0x6E0 */ byte ButtonMask;
+    /*       */ byte _gap_0x6E1;
+    /*       */ byte _gap_0x6E2[0x2];
+    /*       */ byte _gap_0x6E4[0x4];
     /* 0x6E8 */ __int32 ExpandedHoldControlsLTRT;
     /* 0x6EC */ __int32 ExpandedHoldControlsRTLT;
-    /*       */ byte _gap_0x6F0[0x10];
+    /* 0x6F0 */ bool DoubleCrossLeft;
+    /*       */ byte _gap_0x6F1;
+    /*       */ byte _gap_0x6F2[0x2];
+    /* 0x6F4 */ bool DoubleCrossRight;
+    /*       */ byte _gap_0x6F5;
+    /*       */ byte _gap_0x6F6[0x2];
+    /*       */ byte _gap_0x6F8[0x8];
     /*       */ byte _gap_0x700;
     /* 0x701 */ bool LeftBar;
     /* 0x702 */ bool RightBar;
@@ -8023,7 +8160,11 @@ struct Client::UI::AddonActionCross /* Size=0x710 */
     /* 0x704 */ bool PetBar;
     /*       */ byte _gap_0x705;
     /*       */ byte _gap_0x706[0x2];
-    /*       */ byte _gap_0x708[0x8];
+    /* 0x708 */ byte AlphaStandard;
+    /* 0x709 */ byte AlphaActive;
+    /* 0x70A */ byte AlphaInactive;
+    /*       */ byte _gap_0x70B;
+    /*       */ byte _gap_0x70C[0x4];
 };
 
 struct Client::UI::AddonActionDoubleCrossBase /* Size=0x2F8 */
@@ -14041,17 +14182,17 @@ struct Client::UI::Misc::RaptureHotbarModule /* Size=0x288F8 */
     /*         */ byte _gap_0x52[0x2];
     /*         */ byte _gap_0x54[0x4];
     /*         */ byte _gap_0x58[0x20];
-    /* 0x00078 */ byte HotbarShareStateBitmask[0x4];
-    /*         */ byte _gap_0x7C[0x4];
+    /*         */ byte _gap_0x78[0x4];
+    /* 0x0007C */ byte HotbarShareStateBitmask[0x4];
     /*         */ byte _gap_0x80[0x10];
     /* 0x00090 */ byte HotBars[0xFC00];
     /* 0x0FC90 */ Client::UI::Misc::HotBar PetHotBar;
     /* 0x10A90 */ Client::UI::Misc::HotBar PetCrossHotBar;
     /* 0x11890 */ Client::UI::Misc::HotBarSlot ScratchSlot;
     /*         */ byte _gap_0x11970[0x4];
-    /* 0x11974 */ byte SavedHotBars[0x15720];
-    /*         */ byte _gap_0x27094[0x4];
-    /*         */ byte _gap_0x27098[0x1860];
+    /* 0x11974 */ byte SavedHotBars[0x16DA0];
+    /*         */ byte _gap_0x28714[0x4];
+    /*         */ byte _gap_0x28718[0x1E0];
 };
 
 struct StdVector::SystemInt32 /* Size=0x18 */
@@ -14416,37 +14557,49 @@ struct Client::UI::UIInputData /* Size=0xA20 */
     /*       */ byte _gap_0x1C[0x4];
     /*       */ byte _gap_0x20[0x8];
     /*       */ byte _gap_0x28[0x4];
-    /* 0x02C */ float Start;
-    /* 0x030 */ float Select;
-    /* 0x034 */ float L3;
-    /* 0x038 */ float R3;
+    /* 0x02C */ float Square;
+    /* 0x030 */ float Cross;
+    /* 0x034 */ float Circle;
+    /* 0x038 */ float Triangle;
     /* 0x03C */ float L1;
     /* 0x040 */ float R1;
-    /* 0x044 */ float Cross;
-    /* 0x048 */ float Circle;
-    /* 0x04C */ float Square;
-    /* 0x050 */ float Triangle;
-    /*       */ byte _gap_0x54[0x4];
-    /*       */ byte _gap_0x58[0x50];
+    /* 0x044 */ float L2;
+    /* 0x048 */ float R2;
+    /*       */ byte _gap_0x4C[0x4];
+    /* 0x050 */ float Start;
+    /* 0x054 */ float L3;
+    /* 0x058 */ float R3;
+    /* 0x05C */ float PSButton;
+    /* 0x060 */ float Select;
+    /* 0x064 */ float MuteButton;
+    /*       */ byte _gap_0x68[0x40];
     /*       */ byte _gap_0xA8[0x4];
-    /* 0x0AC */ float DPadLeft;
-    /* 0x0B0 */ float DPadRight;
-    /* 0x0B4 */ float DPadUp;
-    /* 0x0B8 */ float DPadDown;
-    /* 0x0BC */ float GamepadLeftStickLeft;
-    /* 0x0C0 */ float GamepadLeftStickRight;
-    /* 0x0C4 */ float GamepadLeftStickUp;
-    /* 0x0C8 */ float GamepadLeftStickDown;
-    /* 0x0CC */ float GamepadRightStickLeft;
-    /* 0x0D0 */ float GamepadRightStickRight;
-    /* 0x0D4 */ float GamepadRightStickUp;
-    /* 0x0D8 */ float GamepadRightStickDown;
-    /*       */ byte _gap_0xDC[0x4];
-    /* 0x0E0 */ float L2;
-    /*       */ byte _gap_0xE4[0x4];
-    /* 0x0E8 */ float R2;
-    /*       */ byte _gap_0xEC[0x4];
-    /*       */ byte _gap_0xF0[0x3A8];
+    /* 0x0AC */ float GamepadLeftStickLeft;
+    /* 0x0B0 */ float GamepadLeftStickRight;
+    /*       */ byte _gap_0xB4[0x4];
+    /*       */ byte _gap_0xB8[0x10];
+    /*       */ byte _gap_0xC8[0x4];
+    /* 0x0CC */ float GamepadLeftStickUp;
+    /* 0x0D0 */ float GamepadLeftStickDown;
+    /*       */ byte _gap_0xD4[0x4];
+    /*       */ byte _gap_0xD8[0x10];
+    /*       */ byte _gap_0xE8[0x4];
+    /* 0x0EC */ float GamepadRightStickLeft;
+    /* 0x0F0 */ float GamepadRightStickRight;
+    /*       */ byte _gap_0xF4[0x4];
+    /*       */ byte _gap_0xF8[0x50];
+    /*       */ byte _gap_0x148[0x4];
+    /* 0x14C */ float GamepadRightStickUp;
+    /* 0x150 */ float GamepadRightStickDown;
+    /*       */ byte _gap_0x154[0x4];
+    /*       */ byte _gap_0x158[0x30];
+    /*       */ byte _gap_0x188[0x4];
+    /* 0x18C */ float DPadLeft;
+    /* 0x190 */ float DPadRight;
+    /* 0x194 */ float DPadUp;
+    /* 0x198 */ float DPadDown;
+    /*       */ byte _gap_0x19C[0x4];
+    /*       */ byte _gap_0x1A0[0x2F8];
     /* 0x498 */ __int32 UIFilteredCursorXPosition;
     /* 0x49C */ __int32 UIFilteredCursorYPosition;
     /* 0x4A0 */ __int32 UIFilteredMouseWheel;
@@ -14472,10 +14625,8 @@ struct Client::UI::UIInputData /* Size=0xA20 */
     /* 0x4F4 */ bool IsGameWindowFocused;
     /*       */ byte _gap_0x4F5;
     /*       */ byte _gap_0x4F6[0x2];
-    /*       */ byte _gap_0x4F8[0x20];
-    /*       */ byte _gap_0x518[0x4];
-    /* 0x51C */ byte KeyState[0x214];
-    /*       */ byte _gap_0x730[0x48];
+    /*       */ byte _gap_0x4F8[0x4];
+    /* 0x4FC */ byte KeyState[0x27C];
     /*       */ byte _gap_0x778[0x4];
     /*       */ byte _gap_0x77C;
     /* 0x77D */ byte KeyHeldKeycode;
