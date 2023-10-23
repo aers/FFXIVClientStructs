@@ -10,7 +10,8 @@ public unsafe struct StdVector<T> : IList<T>, IList, IReadOnlyList<T> where T : 
     public T* Last;
     public T* End;
 
-    public int Capacity {
+    // TODO: When removing Capacity() (for breaking changes), rename this to Capacity
+    public int CapacityInt {
         readonly get => checked((int)LongCapacity);
         set => LongCapacity = value;
     }
@@ -29,7 +30,7 @@ public unsafe struct StdVector<T> : IList<T>, IList, IReadOnlyList<T> where T : 
     }
 
     public readonly int Count => checked((int)LongCount);
-
+    
     public readonly long LongCount {
         get {
             if (First == null || Last == null || First > Last)
@@ -221,7 +222,7 @@ public unsafe struct StdVector<T> : IList<T>, IList, IReadOnlyList<T> where T : 
         }
         Reserve(capacity);
 
-        return Capacity;
+        return CapacityInt;
     }
 
     public Enumerator GetEnumerator() {
@@ -370,9 +371,10 @@ public unsafe struct StdVector<T> : IList<T>, IList, IReadOnlyList<T> where T : 
 
         return (ulong)(Last - First);
     }
-
-    [Obsolete("Use Capacity", true)]
-    public ulong Capacity2() {
+    
+    // TODO: When removing this obsolete (for breaking changes), rename CapacityInt to Capacity
+    [Obsolete("Use CapacityInt", true)]
+    public ulong Capacity() {
         if (End == null || First == null)
             return 0;
 
