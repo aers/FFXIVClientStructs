@@ -3987,6 +3987,10 @@ classes:
       0x140631700: Finalize
       0x140699560: ctor
       0x140699A70: ClearTellHistory
+  Client::UI::Misc::AddonConfigModule:
+    vtbls:
+      - ea: 0x141A1D4C0
+        base: Client::UI::Misc::UserFileManager::UserFileEvent
   Client::UI::Misc::ConfigModule:
     vtbls:
       - ea: 0x141A1CE10

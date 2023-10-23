@@ -79,7 +79,7 @@ public unsafe partial struct UIModule {
     public partial ConfigModule* GetConfigModule();
 
     [VirtualFunction(19)]
-    public partial void* GetAddonConfig();
+    public partial AddonConfigModule* GetAddonConfig();
 
     [VirtualFunction(20)]
     public partial UiSavePackModule* GetUiSavePackModule();
