@@ -4,6 +4,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x1C70)]
 public unsafe partial struct InfoModule {
+    public static InfoModule* Instance() => UIModule.Instance()->GetInfoModule();
+
     [FieldOffset(0x1978)] public fixed long InfoProxyArray[34];
     [FieldOffset(0x1A88)] public ulong LocalContentId;
     [FieldOffset(0x1A90)] public Utf8String LocalCharName;
@@ -16,7 +18,21 @@ public unsafe partial struct InfoModule {
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 55 68")]
     public partial InfoProxyInterface* GetInfoProxyById(uint id);
+
+    /// <summary>
+    /// Checks if the local player has a specific online status set.
+    /// </summary>
+    /// <param name="id">The RowId in the OnlineStatus sheet.</param>
+    [MemberFunction("48 8B 81 ?? ?? ?? ?? 0F B6 CA 48 D3 E8")]
+    public partial bool IsOnlineStatusSet(uint id);
+
+    /// <summary>
+    /// Checks if the local player is in a cross world duty.
+    /// </summary>
+    [MemberFunction("E8 ?? ?? ?? ?? 44 8B 8C 24 ?? ?? ?? ?? 84 C0")]
+    public partial bool IsInCrossWorldDuty();
 }
+
 public enum InfoProxyId : uint {
     //ShellCommandChatLinkShell refers to 3,18
     //Party Decline, PartyInv,PartyJoin  refer to 2
