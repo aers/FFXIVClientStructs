@@ -12,6 +12,7 @@ public unsafe partial struct InfoModule {
     [FieldOffset(0x1AF8)] public Utf8String UnkString1;
     [FieldOffset(0x1B60)] public Utf8String UnkString2;
     [FieldOffset(0x1BC8)] public Utf8String UnkString3;
+    [FieldOffset(0x1C30)] public ulong OnlineStatusFlags;
 
     public InfoProxyInterface* GetInfoProxyById(InfoProxyId id)
         => GetInfoProxyById((uint)id);
