@@ -4,8 +4,8 @@ using FFXIVClientStructs.FFXIV.Client.UI.Misc.UserFileManager;
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc; 
 
 [StructLayout(LayoutKind.Explicit, Size = 0x68)]
-public unsafe partial struct AddonConfigModule {
-    public static AddonConfigModule* Instance() => Framework.Instance()->GetUiModule()->GetAddonConfig();
+public unsafe partial struct AddonConfig {
+    public static AddonConfig* Instance() => Framework.Instance()->GetUiModule()->GetAddonConfig();
     
     [FieldOffset(0x00)] public UserFileEvent UserFileEvent;
 
