@@ -423,19 +423,14 @@ public abstract class ExporterBase {
 
         sb.AppendLine("{");
 
-        var values = Enum.GetValues(type);
-        var processedValues = new List<object>();
+        var values = Enum.GetNames(type).Select(t => Tuple.Create(t, Enum.Parse(type, t, true))).DistinctBy(t => t.Item2).ToArray();
         for (var i = 0; i < values.Length; i++) {
-            var value = values.GetValue(i)!;
-            if (processedValues.Contains(value))
-                continue;
-            var name = Enum.GetName(type, value);
+            var (name, value) = values[i];
             sb.Append($"    {name} = {value:D}");
             if (i < values.Length - 1)
                 sb.AppendLine(",");
             else
                 sb.AppendLine();
-            processedValues.Add(value);
         }
 
         sb.AppendLine("};");
