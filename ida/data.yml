@@ -4112,6 +4112,8 @@ classes:
     vtbls:
       - ea: 0x141A1D530
         base: Component::Text::TextChecker::ExecNonMacroFunc
+    vfuncs:
+      1: ProcessString
     funcs:
       0x14069CA00: ctor
   Client::UI::Misc::RaptureGearsetModule:
