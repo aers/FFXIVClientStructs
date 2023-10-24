@@ -4036,6 +4036,7 @@ classes:
       - ea: 0x141A1D0B8
     vfuncs:
       0: dtor
+      9: ProcessMacroCode
     funcs:
       0x14066F040: ctor
       0x14066FCE0: Finalize
