@@ -383,6 +383,8 @@ classes:
   Client::UI::Agent::AgentMap::MapMarkerStructSearch:
   Client::UI::Atk2DMap:
   Component::Excel::ExcelLanguageEvent:
+    vtbls:
+      - ea: 0x141A160A8
   Component::GUI::AtkComponentWindowGrab:
   Component::GUI::AtkExternalInterface:
   Component::GUI::AtkManagedInterface:
@@ -4039,6 +4041,12 @@ classes:
   Client::UI::Misc::RaptureTextModule:
     vtbls:
       - ea: 0x141A1D0B8
+      - ea: 0x141A1D158
+        base: Component::Text::MacroDecoder
+      - ea: 0x141A1D310
+        base: Component::Text::TextChecker::ExecNonMacroFunc
+      - ea: 0x141A1D320
+        base: Component::Excel::ExcelLanguageEvent
     vfuncs:
       0: dtor
       9: ProcessMacroCode
