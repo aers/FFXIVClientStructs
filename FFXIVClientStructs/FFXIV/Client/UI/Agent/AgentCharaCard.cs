@@ -32,7 +32,7 @@ public unsafe partial struct AgentCharaCard {
     [StructLayout(LayoutKind.Explicit, Size = 0x950)]
     public unsafe partial struct Storage {
         [FieldOffset(0x4)] public ushort ObjectId;
-        [FieldOffset(0x8)] public ulong CountentId;
+        [FieldOffset(0x8)] public ulong ContentId;
 
         [FieldOffset(0x58)] public Utf8String Name;
         [FieldOffset(0xC0)] public ushort WorldId;
