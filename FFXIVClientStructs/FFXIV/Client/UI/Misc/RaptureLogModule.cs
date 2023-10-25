@@ -18,12 +18,12 @@ public unsafe partial struct RaptureLogModule {
     [FieldOffset(0xF0)] public RaptureTextModule* RaptureTextModule;
 
     [FixedSizeArray<RaptureLogModuleTab>(5)]
-    [FieldOffset(0x528)] public fixed byte ChatTabs[5 * 0x928];
+    [FieldOffset(0x530)] public fixed byte ChatTabs[5 * 0x928];
 
     [FieldOffset(0x33E8)] public fixed byte ChatTabsPendingReload[4]; // set to 1 to reload the tab, see "48 8D 9F ?? ?? ?? ?? 48 8D B7 ?? ?? ?? ?? 80 3B 00"
 
-    [FieldOffset(0x3470)] public LogMessageSource* MsgSourceArray;
-    [FieldOffset(0x3478)] public int MsgSourceArrayLength;
+    [FieldOffset(0x3478)] public LogMessageSource* MsgSourceArray;
+    [FieldOffset(0x3480)] public int MsgSourceArrayLength;
 
     [MemberFunction("E8 ?? ?? ?? ?? 44 03 FB")]
     public partial void ShowLogMessage(uint logMessageID);
