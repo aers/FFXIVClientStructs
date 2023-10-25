@@ -363,8 +363,6 @@ classes:
       - ea: 0x141A03E20
   Client::Game::InstanceContent::ContentSheetWaiterInterface:
   Client::Game::Object::IGameObjectEventListener:
-    vtbls:
-      - ea: 0x1419A4F58
   Client::Game::Object::IFilterCommand:
     vtbls:
       - ea: 0x141A03D80
@@ -376,6 +374,8 @@ classes:
   Client::System::Input::SoftKeyboardDeviceInterface::SoftKeyboardInputInterface:
   Client::System::Input::TextServiceInterface:
   Client::System::Input::TextServiceInterface::TextServiceEvent:
+    vtbls:
+      - ea: 0x141A06678
   Client::System::Input::InputDeviceManager:
     instances:
       - ea: 0x1421AD128
@@ -387,9 +387,15 @@ classes:
       - ea: 0x141A160A8
   Component::GUI::AtkComponentWindowGrab:
   Component::GUI::AtkExternalInterface:
+    vtbls:
+      - ea: 0x141A066C0
   Component::GUI::AtkManagedInterface:
   Component::GUI::AtkModuleEvent:
+    vtbls:
+      - ea: 0x141A160B8
   Component::GUI::AtkModuleInterface:
+    vtbls:
+      - ea: 0x141A06E20
   Component::GUI::AtkModuleInterface::AtkEventInterface:
     vtbls:
       - ea: 0x1419BCB70
@@ -403,7 +409,18 @@ classes:
       0: dtor
       1: ProcessString
   Component::Text::TextModule:
+    vtbls:
+      - ea: 0x141A18F60
+        base: Component::Text::TextModuleInterface
+      - ea: 0x141A19000
+        base: Component::Text::MacroDecoder
   Component::Text::TextModuleInterface:
+    vtbls:
+      - ea: 0x141A18EC8
+  Component::Text::Localize::Localize:
+    vtbls:
+      - ea: 0x141A18F50
+        base: Component::Excel::ExcelLanguageEvent
   SQEX::CDev::Engine::Sd::SdMemoryAllocator:
   SQEX::CDev::Engine::Sd::Driver::BankController:
   Client::System::Scheduler::Base::LinkList:
@@ -1481,6 +1498,12 @@ classes:
     vtbls:
       - ea: 0x1419BD0A0
         base: Component::GUI::AtkModule
+      - ea: 0x1419BD2E8
+        base: Component::GUI::AtkExternalInterface
+      - ea: 0x1419BD300
+        base: Client::System::Input::TextServiceInterface::TextServiceEvent
+      - ea: 0x1419BD348
+        base: Common::Configuration::ConfigBase::ChangeEventInterface
     funcs:
       0x1400B4680: ctor
       0x1400B5310: Finalize
@@ -1495,6 +1518,9 @@ classes:
       0x1400DDEF0: IsUIVisible
       0x140568150: DecRefNumberArrayData
       0x1405681B0: DecRefStringArrayData
+  Component::GUI::AtkModuleInterface::AtkHistoryInterface:
+    vtbls:
+      - ea: 0x1419BCB80
   Client::UI::Info::InfoProxyInterface:
     vtbls:
       - ea: 0x1419BCBC0
@@ -1532,7 +1558,11 @@ classes:
       0x14017C160: dtor2
   Common::Configuration::ConfigBase::ChangeEventInterface:
     vtbls:
-      - ea: 0x1419BD348
+      - ea: 0x1419A4F58
+  Client::UI::RaptureAtkHistory:
+    vtbls:
+      - ea: 0x1419BD390
+        base: Component::GUI::AtkModuleInterface::AtkHistoryInterface
   Client::UI::Info::InfoProxyCommonlist:
     vtbls:
       - ea: 0x1419BD4D0
@@ -3100,7 +3130,7 @@ classes:
       - ea: 0x1421CC900
     vtbls:
       - ea: 0x141A03EA0
-        base: Client::Game::Object::IGameObjectEventListener
+        base: Common::Configuration::ConfigBase::ChangeEventInterface
     funcs:
       0x1404EEA50: ctor
       0x1404F7150: InteractWithObject
@@ -3518,6 +3548,10 @@ classes:
     vtbls:
       - ea: 0x141A079D0
         base: Component::GUI::AtkModuleInterface
+      - ea: 0x141A07C18
+        base: Component::GUI::AtkExternalInterface
+      - ea: 0x141A07C30
+        base: Client::System::Input::TextServiceInterface::TextServiceEvent
     vfuncs:
       0: dtor
       9: GetNumberArrayData
@@ -3825,6 +3859,9 @@ classes:
       0x1406317F0: Finalize
       0x1406B8CA0: ctor
       0x1406BD320: MjiCreateWorkshopPreset
+  Client::UI::Misc::InputTimerModule:
+    vtbls:
+      - ea: 0x141A16AF0
   Client::UI::UI3DModule::MapInfo:
     vtbls:
       - ea: 0x141A16AF8
@@ -3888,6 +3925,7 @@ classes:
       34: GetInfoModule
       36: GetAgentModule
       38: GetUI3DModule
+      55: GetInputTimerModule
       57: GetRetainerCommentModule
       58: GetBannerModule
       64: GetFishingModule
@@ -3981,6 +4019,11 @@ classes:
   Component::Text::MacroDecoder:
     vtbls:
       - ea: 0x141A18B50
+  Component::Text::MacroEncoder:
+    vtbls:
+      - ea: 0x141A18D08
+    funcs:
+      0x14063EE90: ctor
   Component::Text::TextChecker:
     vtbls:
       - ea: 0x141A18D10
@@ -3998,6 +4041,10 @@ classes:
       0x140631700: Finalize
       0x140699560: ctor
       0x140699A70: ClearTellHistory
+  Client::UI::Misc::LogFilterConfig:
+    vtbls:
+      - ea: 0x141A1D4C0
+        base: Client::UI::Misc::UserFileManager::UserFileEvent
   Client::UI::Misc::ConfigModule:
     vtbls:
       - ea: 0x141A1CE10
@@ -4041,6 +4088,7 @@ classes:
   Client::UI::Misc::RaptureTextModule:
     vtbls:
       - ea: 0x141A1D0B8
+        base: Component::Text::TextModule
       - ea: 0x141A1D158
         base: Component::Text::MacroDecoder
       - ea: 0x141A1D310
@@ -4121,6 +4169,10 @@ classes:
       0x14068B8B0: LoadUnkCAForSlot
       0x14068B8E0: LoadUnkCBForSlot
       0x14068B240: LoadUnkDEForSlot          # different from all the other loads - this one still needs slotType/ID for things
+  Client::UI::Misc::AddonConfig:
+    vtbls:
+      - ea: 0x141A1D3F0
+        base: Client::UI::Misc::UserFileManager::UserFileEvent
   Client::UI::Misc::PronounModule:
     vtbls:
       - ea: 0x141A1D530
@@ -4164,6 +4216,14 @@ classes:
     funcs:
       0x1406B6200: ctor
       0x1406B6460: Finalize
+  Client::UI::Misc::LetterDataModule:
+    vtbls:
+      - ea: 0x141A1D7E0
+        base: Client::UI::Misc::UserFileManager::UserFileEvent
+  Client::UI::Misc::RetainerTaskDataModule:
+    vtbls:
+      - ea: 0x141A1D848
+        base: Client::UI::Misc::UserFileManager::UserFileEvent
   Client::UI::Misc::RaptureTeleportHistory:
     vtbls:
       - ea: 0x141A1D8B0
@@ -4228,6 +4288,16 @@ classes:
     funcs:
       0x1414D2BF0: ctor
       0x1414D2C40: ImportLocalPlayerEquipment
+  Client::UI::Misc::SupportModule:
+    vtbls:
+      - ea: 0x141A1E450
+    funcs:
+      0x1406CC600: ctor
+  Client::SupportDesk::SupportDesk:
+    vtbls:
+      - ea: 0x141B95D00
+    funcs:
+      0x141464600: ctor
   Client::UI::Misc::CharaViewPortrait:
     vtbls:
       - ea: 0x141C4ADF0
@@ -8825,6 +8895,23 @@ classes:
     funcs:
       0x141449740: ctor
       0x141449810: Finalize
+  Component::Completion::CompletionModuleInterface:
+    vtbls:
+      - ea: 0x141B66658
+  Component::Text::TextModuleInterface::FixedSheetInterface:
+    vtbls:
+      - ea: 0x141B666A8
+  Component::Completion::CompletionModule:
+    vtbls:
+      - ea: 0x141B666D0
+        base: Component::Completion::CompletionModuleInterface
+      - ea: 0x141B66720
+        base: Component::Text::TextModuleInterface::FixedSheetInterface
+      - ea: 0x141B66748
+        base: Component::Excel::ExcelLanguageEvent
+    funcs:
+      0x14144DF30: ctor
+      0x14144E0B0: Finalize
   Client::Game::Object::HousingObject:
     vtbls:
       - ea: 0x141C32C40
