@@ -1521,6 +1521,13 @@ classes:
   Component::GUI::AtkModuleInterface::AtkHistoryInterface:
     vtbls:
       - ea: 0x1419BCB80
+    vfuncs:
+      0: dtor
+      1: Previous
+      2: Next
+      3: Reset
+      4: GetCurrent
+      5: GetCurrent2
   Client::UI::Info::InfoProxyInterface:
     vtbls:
       - ea: 0x1419BCBC0
@@ -3949,6 +3956,8 @@ classes:
       101: IsGamePadInputActive
       104: ToggleInputMode
       106: IsUIHidden
+      107: AddAtkHistoryEntry
+      108: ClearAtkHistory
       112: ShowContentIntroduction
       113: IsContentIntroductionInvisible
       114: HideContentIntroduction

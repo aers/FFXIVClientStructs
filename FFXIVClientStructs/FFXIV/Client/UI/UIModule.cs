@@ -1,9 +1,11 @@
 using FFXIVClientStructs.FFXIV.Client.Game;
 using FFXIVClientStructs.FFXIV.Client.System.Framework;
+using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 using FFXIVClientStructs.FFXIV.Client.UI.Info;
 using FFXIVClientStructs.FFXIV.Client.UI.Misc;
 using FFXIVClientStructs.FFXIV.Client.UI.Shell;
+using FFXIVClientStructs.FFXIV.Common.Configuration;
 using FFXIVClientStructs.FFXIV.Component.Excel;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
@@ -17,19 +19,9 @@ public unsafe partial struct UIModule {
 
     [FieldOffset(0x0)] public void* vtbl;
     [FieldOffset(0x0)] public void** vfunc;
-    [FieldOffset(0x8)] public Unk1 UnkObj1;
-    [FieldOffset(0x10)] public Unk2 UnkObj2;
-    [FieldOffset(0x18)] public Unk3 UnkObj3;
-    [FieldOffset(0x20)] public void* unk;
-    [FieldOffset(0x28)] public void* SystemConfig;
-
-    public static void PlayChatSoundEffect(uint effectId) {
-        if (effectId is < 1 or > 16)
-            throw new ArgumentException("Valid chat sfx values are 1 through 16.");
-
-        PlaySound(effectId + 0x24u, 0, 0, 0);
-    }
-
+    [FieldOffset(0x8)] public void** AtkModuleEvent;
+    [FieldOffset(0x10)] public void** ExcelLanguageEvent;
+    [FieldOffset(0x18)] public ChangeEventInterface ChangeEventInterface;
     /*
         dq 0                                    ; +0x30
         dq 23000000000h                         ; +0x38
@@ -37,7 +29,10 @@ public unsafe partial struct UIModule {
         dq 23000000000h                         ; +0x48
         dq 0                                    ; +0x50
         and so on...
-     */
+    */
+
+    [FixedSizeArray<RaptureAtkHistory>(19)]
+    [FieldOffset(0x3B0)] public fixed byte AtkHistory[19 * 0x38];
 
     [VirtualFunction(5)]
     public partial ExcelModuleInterface* GetExcelModule();
@@ -150,6 +145,12 @@ public unsafe partial struct UIModule {
     [VirtualFunction(81)]
     public partial bool IsInIdleCam();
 
+    [VirtualFunction(107)]
+    public partial void AddAtkHistoryEntry(Utf8String* text, int historyIdx);
+
+    [VirtualFunction(108)]
+    public partial void ClearAtkHistory(int historyIdx);
+
     [VirtualFunction(143)]
     public partial void ToggleUi(UiFlags flags, bool enable, bool unknown = true);
 
@@ -233,22 +234,11 @@ public unsafe partial struct UIModule {
     [GenerateCStrOverloads]
     public static partial bool IsPlayerCharacterName(byte* name);
 
-    [StructLayout(LayoutKind.Explicit, Size = 0x8)]
-    public struct Unk1 {
-        [FieldOffset(0x0)] public void* vtbl;
-        [FieldOffset(0x0)] public void** vfunc;
-    }
+    public static void PlayChatSoundEffect(uint effectId) {
+        if (effectId is < 1 or > 16)
+            throw new ArgumentException("Valid chat sfx values are 1 through 16.");
 
-    [StructLayout(LayoutKind.Explicit, Size = 0x8)]
-    public struct Unk2 {
-        [FieldOffset(0x0)] public void* vtbl;
-        [FieldOffset(0x0)] public void** vfunc;
-    }
-
-    [StructLayout(LayoutKind.Explicit, Size = 0x8)] // size?
-    public struct Unk3 {
-        [FieldOffset(0x0)] public void* vtbl;
-        [FieldOffset(0x0)] public void** vfunc;
+        PlaySound(effectId + 0x24u, 0, 0, 0);
     }
 
     [Flags]
