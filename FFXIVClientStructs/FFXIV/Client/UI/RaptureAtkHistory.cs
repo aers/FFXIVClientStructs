@@ -1,6 +1,6 @@
 using FFXIVClientStructs.FFXIV.Client.System.String;
 
-namespace FFXIVClientStructs.FFXIV.Client.UI; 
+namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x38)]
 public unsafe partial struct RaptureAtkHistory {
