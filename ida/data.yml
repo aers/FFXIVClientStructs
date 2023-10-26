@@ -339,11 +339,15 @@ classes:
   Client::Game::ActionTimelineManager:
     vtbls:
       - ea: 0x141A203B8
+    funcs:
+      0x1407BC460: ctor
+      0x140762DA0: dtor
   Client::Game::RetainerManager:
     instances:
       - ea: 0x142227F70
         pointer: False
     funcs:
+      0x140D7E440: Initialize
       0x140D7EBB0: GetRetainerBySortedIndex
       0x140D7EBF0: GetRetainerByHiredIndex
       0x140D7EC50: GetLastSelectedRetainer
@@ -356,6 +360,7 @@ classes:
       - ea: 0x1421FC600
         pointer: False
     funcs:
+      0x1408BBE10: Initialize
       0x1408BC140: GetUsedAllowances
       0x1408BC190: GetResetTimestamp
   Client::Game::Control::TargetSystem::ListFeeder:
@@ -599,8 +604,8 @@ classes:
       - ea: 0x1421F3DA8
         pointer: False
     funcs:
-      0x140745240: Ctor
-      0x140745290: Dtor
+      0x140745240: ctor
+      0x140745290: dtor
       0x140745300: HasInstance
       0x140745320: GetInstance
       0x140745410: Clear
@@ -627,6 +632,19 @@ classes:
     instances:
       - ea: 0x1422011D0
         pointer: False
+    funcs:
+      0x1409320D0: Initialize
+  Client::Game::GcArmyManager:
+    instances:
+      - ea: 0x1421FC4D0
+        pointer: True
+    funcs:
+      0x1408A1DE0: ctor
+      0x1408A1E30: dtor
+      0x1408A1EA0: HasInstance
+      0x1408A1EC0: GetInstance
+      0x1408A2070: GetMemberCount
+      0x1408A2090: GetMember
   Client::Game::Housing::HousingManager:
     instances:
       - ea: 0x14221B508
@@ -7096,6 +7114,11 @@ classes:
     instances:
       - ea: 0x1421FC538
         pointer: False
+    funcs:
+      0x1408E5940: ctor
+      0x1408E59F0: dtor
+      0x1408E5A50: HasInstance
+      0x1408E5A70: GetInstance
   Client::Game::Event::EventFramework:
     instances:
       - ea: 0x1421FC518
