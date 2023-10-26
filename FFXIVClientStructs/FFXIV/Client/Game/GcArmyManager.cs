@@ -99,5 +99,7 @@ public unsafe partial struct GcArmyMember {
 [Flags]
 public enum GcArmyMemberFlag : byte {
     None = 0,
-    // OnSquadronMission = 1 or 5?
+    OnSquadronMission = 1,
+    InTraining = 2,
+    ReturnedFromMission = 4, // maybe
 }
