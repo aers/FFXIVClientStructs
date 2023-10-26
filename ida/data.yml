@@ -619,6 +619,7 @@ classes:
         pointer: False
     funcs:
       0x14071E4E0: GetInventoryContainer  # (this, containerId)
+      0x14071E540: GetInventorySlot  # (this, containerId, slotId)
       0x14071F6C0: MoveItemSlot # (srcContainer, srcSlot, dstContainer, dstSlot, 1)
       0x1407267B0: GetInventoryItemCount # (this, itemId, hq, 1, 1, 0)
       0x140726F20: GetItemCountInContainer # (this, itemId, containerId, hq, 0)
@@ -626,6 +627,17 @@ classes:
       0x140727C10: GetEquippedItemIdForSlot
       0x14072AD10: GetPermittedGearsetCount
       0x1407352D0: GetLimitedTomestoneCount
+      0x1407259E0: GetEmptySlotsInBag
+      0x14072F8C0: SendTradeRequest
+      0x140731E00: GetRetainerGil
+      0x140734260: GetFreeCompanyGil
+      0x140734DC0: GetGil
+      0x140734F90: GetCompanySeals
+      0x140735040: GetMaxCompanySeals
+      0x1407351B0: GetTomestoneCount
+      0x140735400: GetWolfMarks
+      0x140735520: GetAlliedSeals
+      0x140735640: GetGoldSaucerCoin
       0x14144C400: GetSpecialItemId #static
       0x140735340: GetLimitedTomestoneWeeklyLimit #static
   Client::Game::MonsterNoteManager:

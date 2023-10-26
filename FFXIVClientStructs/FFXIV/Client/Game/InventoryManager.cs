@@ -3,10 +3,16 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 //ctor i guess 40 53 48 83 EC 20 48 8B D9 45 33 C9 B9
 [StructLayout(LayoutKind.Explicit, Size = 0x3620)]
 public unsafe partial struct InventoryManager {
+    [StaticAddress("48 8D 0D ?? ?? ?? ?? 81 C2", 3)]
+    public static partial InventoryManager* Instance();
+
     [FieldOffset(0x1E08)] public InventoryContainer* Inventories;
 
     [MemberFunction("E8 ?? ?? ?? ?? 44 0F BE C7")]
     public partial InventoryContainer* GetInventoryContainer(InventoryType inventoryType);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 33 C9 38 48 06")]
+    public partial InventoryItem* GetInventorySlot(InventoryType inventoryType, int index);
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B 53 F1")]
     public partial int GetInventoryItemCount(uint itemId, bool isHq = false, bool checkEquipped = true, bool checkArmory = true, short minCollectability = 0);
@@ -27,6 +33,36 @@ public unsafe partial struct InventoryManager {
     [MemberFunction("E8 ?? ?? ?? ?? 42 8B 74 A5")]
     public partial byte GetPermittedGearsetCount();
 
+    [MemberFunction("E8 ?? ?? ?? ?? 44 8B E8 44 3B E0")]
+    public partial uint GetEmptySlotsInBag();
+
+    [MemberFunction("E8 ?? ?? ?? ?? 3B 44 24 58")]
+    public partial uint GetGil();
+
+    [MemberFunction("E8 ?? ?? ?? ?? 03 D8 3B F3")]
+    public partial uint GetRetainerGil();
+
+    [MemberFunction("E8 ?? ?? ?? ?? 8B F8 39 BB")]
+    public partial uint GetFreeCompanyGil();
+
+    [MemberFunction("E8 ?? ?? ?? ?? 3B C3 73 25")]
+    public partial uint GetGoldSaucerCoin();
+
+    [MemberFunction("E8 ?? ?? ?? ?? 2B E8 8B C5 EB 61")]
+    public partial uint GetWolfMarks();
+
+    [MemberFunction("E9 ?? ?? ?? ?? 83 FB 1D")]
+    public partial uint GetAlliedSeals();
+
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B7 4D 6C")]
+    public partial uint GetCompanySeals(byte grandcompanyId);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 2B C3 EB 11")]
+    public partial uint GetMaxCompanySeals(byte grandcompanyId);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 8B CE 2B E8")]
+    public partial uint GetTomestoneCount(uint tomestoneItemId);
+
     [MemberFunction("E8 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? 8B D8 E8 ?? ?? ?? ?? 8B 55 F7")]
     private partial int GetLimitedTomestoneCount(int a1);
 
@@ -39,9 +75,6 @@ public unsafe partial struct InventoryManager {
 
     // Gets the number of (limited) tomestones the user has acquired during the current reset cycle.
     public int GetWeeklyAcquiredTomestoneCount() => GetLimitedTomestoneCount(GetSpecialItemId(9));
-
-    [StaticAddress("48 8D 0D ?? ?? ?? ?? 81 C2", 3)]
-    public static partial InventoryManager* Instance();
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x18)]
