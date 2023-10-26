@@ -42,6 +42,9 @@ public unsafe partial struct InventoryManager {
     [MemberFunction("E8 ?? ?? ?? ?? 03 D8 3B F3")]
     public partial uint GetRetainerGil();
 
+    [MemberFunction("E8 ?? ?? ?? ?? 8B F8 39 BB")]
+    public partial uint GetFreeCompanyGil();
+
     [MemberFunction("E8 ?? ?? ?? ?? 3B C3 73 25")]
     public partial uint GetGoldSaucerCoin();
 

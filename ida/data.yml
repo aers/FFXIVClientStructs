@@ -600,6 +600,7 @@ classes:
       0x1407352D0: GetLimitedTomestoneCount
       0x1407259E0: GetEmptySlotsInBag
       0x140731E00: GetRetainerGil
+      0x140734260: GetFreeCompanyGil
       0x140734DC0: GetGil
       0x140734F90: GetCompanySeals
       0x140735040: GetMaxCompanySeals
