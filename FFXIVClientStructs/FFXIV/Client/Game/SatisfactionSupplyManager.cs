@@ -29,7 +29,7 @@ public unsafe partial struct SatisfactionSupplyManager {
 
 // Based on SatisfactionNpc lumina sheet
 public enum SatisfactionSupplyNpc : short {
-    ZholeAliapoh = 1,
+    ZhloeAliapoh = 1,
     Mnaago,
     Kurenai,
     Adkiragh,
