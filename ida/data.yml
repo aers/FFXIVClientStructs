@@ -254,6 +254,7 @@ functions:
   0x14071BC30: CreateDummyItemSlot
   0x140B1DEE0: IsInMordionGaol # if this returns true, i'm sorry for you
   0x140B716B0: WorldToScreenPoint
+  0x14144AA10: GetBannerConditionUnlockState
   0x14170CF80: OodleNew # oodle code starts here
   0x14170CFF0: OodleDelete
   0x14170D020: rrPrintf_v1
