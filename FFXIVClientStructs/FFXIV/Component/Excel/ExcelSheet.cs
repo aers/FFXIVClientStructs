@@ -13,7 +13,7 @@ public unsafe struct ExcelSheet {
     //[FieldOffset(0x68)] public LinkList<ExcelPage> ExcelPages;
 
     [FieldOffset(0xCC)] public ushort ColumnCount;
-    
+
     [FieldOffset(0xD0)] public ushort Version; //?
     [FieldOffset(0xD2)] public ushort SheetIndex;
 

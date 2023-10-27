@@ -20,7 +20,7 @@ public unsafe partial struct Map {
     [FieldOffset(0x3E98)] public StdList<MarkerInfo> TripleTriad;
     [FieldOffset(0x3EA8)] public StdList<MarkerInfo> CustomTalk;
     [FieldOffset(0x3F50)] public StdList<MarkerInfo> GemstoneTraders;
-    
+
     [FieldOffset(0x1AF0), Obsolete("Use ActiveLevequest")] public StdVector<MapMarkerData> ActiveLevequestMarkerData;
     [FieldOffset(0x1B18), Obsolete("Use List<T> UnacceptedQuests")] public MapMarkerContainer QuestMarkerData;
     [FieldOffset(0x1B60), Obsolete("Use List<T> GuildLeveAssignments")] public MapMarkerContainer GuildLeveAssignmentMapMarkerData;
