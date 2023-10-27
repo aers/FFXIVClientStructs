@@ -22,7 +22,7 @@ public unsafe partial struct TargetSystem {
     // Indicates if addon windows such as the Map, Inventory, should be shown.
     // Changes to false when interacting with things like Aethernets
     // These two variables are forced to be opposites of each other
-    [FieldOffset(0x52E0)] public bool ShouldShowWindows;
+    // [FieldOffset(0x52E0)] public int ShowWindowFlagsMaybe;
     [FieldOffset(0x5300)] public bool ShouldHideWindows;
     // There are other boolean values around here
 
