@@ -19,11 +19,8 @@ public unsafe partial struct TargetSystem {
     [FieldOffset(0x2D58)] public GameObjectArray ObjectFilterArray2;
     [FieldOffset(0x4018)] public GameObjectArray ObjectFilterArray3;
     
-    // Indicates if addon windows such as the Map, Inventory, should be shown.
-    // Changes to false when interacting with things like Aethernets
-    // These two variables are forced to be opposites of each other
-    // [FieldOffset(0x52E0)] public int ShowWindowFlagsMaybe;
-    [FieldOffset(0x5300)] public bool ShouldHideWindows;
+    // [FieldOffset(0x52E0)] public int ShowWindowFlagsMaybe; // Might be some kind of flags to show/hide certain types of windows
+    [FieldOffset(0x5300)] public bool ShouldHideWindows; // Is true when interacting with shops, aethernets, or other things that hide ui elements
     // There are other boolean values around here
 
     [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 3B C6 0F 95 C0", 3)]
