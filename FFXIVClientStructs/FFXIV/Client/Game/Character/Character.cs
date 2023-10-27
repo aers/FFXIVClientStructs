@@ -292,6 +292,7 @@ public unsafe partial struct Character {
         Crafting = 5, // Param always 0
         AnimLock = 8, // Param always 0
         Carrying = 9, // Param is a Carry entry
+        RidingPillion = 10, // Param is the pillion seat number
         InPositionLoop = 11, // Param is an EmoteMode entry
         Performance = 16, // Unknown
     }
