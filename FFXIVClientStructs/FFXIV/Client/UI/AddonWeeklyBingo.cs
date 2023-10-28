@@ -10,6 +10,11 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 public unsafe struct AddonWeeklyBingo {
     [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
     [FieldOffset(0x220)] public DutySlotList DutySlotList;
+
+    [FieldOffset(0x18C8)] public AtkComponentButton* SecondChanceButton;
+    [FieldOffset(0x18D0)] public AtkComponentButton* CancelButton;
+    [FieldOffset(0x18D8)] public AtkTextNode* SecondChancesRemaining;
+    [FieldOffset(0x18E0)] public AtkResNode* DutyContainer;
     [FieldOffset(0x18E8)] public StringThing StringThing;
     [FieldOffset(0x1938)] public StickerSlotList StickerSlotList;
     [FieldOffset(0x1F20)] public uint NumStickersPlaced;
