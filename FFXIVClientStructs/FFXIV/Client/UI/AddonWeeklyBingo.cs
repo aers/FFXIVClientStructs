@@ -20,7 +20,7 @@ public unsafe struct AddonWeeklyBingo {
     [FieldOffset(0x1F20)] public uint NumStickersPlaced;
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x16C8)]
+[StructLayout(LayoutKind.Explicit, Size = 0x16A8)]
 public unsafe struct DutySlotList {
     [FieldOffset(0x0)] public void** vtbl;
     [FieldOffset(0x8)] public void* addon; // AddonWeeklyBingo*
