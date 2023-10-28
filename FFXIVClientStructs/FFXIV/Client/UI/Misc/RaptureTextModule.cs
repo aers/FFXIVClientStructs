@@ -1,5 +1,5 @@
 using FFXIVClientStructs.FFXIV.Client.System.Framework;
-using FFXIVClientStructs.FFXIV.Client.System.String;
+using FFXIVClientStructs.FFXIV.Component.Text;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
@@ -9,8 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 public unsafe partial struct RaptureTextModule {
     public static RaptureTextModule* Instance() => Framework.Instance()->GetUiModule()->GetRaptureTextModule();
 
-    [VirtualFunction(9)]
-    public partial Utf8String* ProcessMacroCode(Utf8String* output, byte* input);
+    [FieldOffset(0x00)] public TextModule TextModule;
 
     [MemberFunction("E9 ?? ?? ?? ?? 80 EA 20")]
     public partial byte* GetAddonText(uint addonId);
