@@ -1,3 +1,5 @@
+using FFXIVClientStructs.FFXIV.Component.GUI;
+
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 // ctor E8 ?? ?? ?? ?? EB 03 48 8B C5 33 D2 48 89 47 58
