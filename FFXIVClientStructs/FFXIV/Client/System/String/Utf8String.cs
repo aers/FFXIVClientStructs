@@ -27,7 +27,7 @@ public unsafe partial struct Utf8String : ICreatable {
     public static Utf8String* FromUtf8String(Utf8String* str) => FromUtf8String(str, IMemorySpace.GetDefaultSpace());
     public static Utf8String* FromUtf8String(Utf8String* str, IMemorySpace* memorySpace) {
         var newString = memorySpace->Create<Utf8String>();
-        if(str != null)
+        if (str != null)
             newString->Copy(str);
         return newString;
     }
@@ -72,7 +72,7 @@ public unsafe partial struct Utf8String : ICreatable {
 
     [MemberFunction("E8 ?? ?? ?? ?? 44 2B F7")]
     public partial void Ctor();
-    
+
     [MemberFunction("E8 ?? ?? ?? ?? 4D 8D 7D")]
     public partial void CtorFromSequence(byte* str, int size);
 
