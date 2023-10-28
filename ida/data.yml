@@ -93,6 +93,10 @@ functions:
   0x1400A8360: InDeepDungeon
   0x1400A85B0: IsUnconscious
   0x1400A85C0: IsRolePlaying
+  0x1400A8750: IsClassJobACrafter   # static, (classJobId) -> bool
+  0x1400A8760: IsClassJobAGatherer  # static, (classJobId) -> bool
+  0x1400A8720: IsClassJobAJob       # static, (classJobId, ClassJobExd*?) -> bool
+  0x1400A88E0: GetClassJobParentId  # static, (classJobId, ClassJobExd*?) -> uint
   0x14099C660: GetTeleportCost
   0x140B1E250: SetCondition
   0x140B1EA80: IsLocalPlayerLalafell
@@ -335,11 +339,15 @@ classes:
   Client::Game::ActionTimelineManager:
     vtbls:
       - ea: 0x141A203B8
+    funcs:
+      0x1407BC460: ctor
+      0x140762DA0: dtor
   Client::Game::RetainerManager:
     instances:
       - ea: 0x142227F70
         pointer: False
     funcs:
+      0x140D7E440: Initialize
       0x140D7EBB0: GetRetainerBySortedIndex
       0x140D7EBF0: GetRetainerByHiredIndex
       0x140D7EC50: GetLastSelectedRetainer
@@ -352,6 +360,7 @@ classes:
       - ea: 0x1421FC600
         pointer: False
     funcs:
+      0x1408BBE10: Initialize
       0x1408BC140: GetUsedAllowances
       0x1408BC190: GetResetTimestamp
   Client::Game::Control::TargetSystem::ListFeeder:
@@ -359,8 +368,6 @@ classes:
       - ea: 0x141A03E20
   Client::Game::InstanceContent::ContentSheetWaiterInterface:
   Client::Game::Object::IGameObjectEventListener:
-    vtbls:
-      - ea: 0x1419A4F58
   Client::Game::Object::IFilterCommand:
     vtbls:
       - ea: 0x141A03D80
@@ -372,6 +379,8 @@ classes:
   Client::System::Input::SoftKeyboardDeviceInterface::SoftKeyboardInputInterface:
   Client::System::Input::TextServiceInterface:
   Client::System::Input::TextServiceInterface::TextServiceEvent:
+    vtbls:
+      - ea: 0x141A06678
   Client::System::Input::InputDeviceManager:
     instances:
       - ea: 0x1421AD128
@@ -379,11 +388,19 @@ classes:
   Client::UI::Agent::AgentMap::MapMarkerStructSearch:
   Client::UI::Atk2DMap:
   Component::Excel::ExcelLanguageEvent:
+    vtbls:
+      - ea: 0x141A160A8
   Component::GUI::AtkComponentWindowGrab:
   Component::GUI::AtkExternalInterface:
+    vtbls:
+      - ea: 0x141A066C0
   Component::GUI::AtkManagedInterface:
   Component::GUI::AtkModuleEvent:
+    vtbls:
+      - ea: 0x141A160B8
   Component::GUI::AtkModuleInterface:
+    vtbls:
+      - ea: 0x141A06E20
   Component::GUI::AtkModuleInterface::AtkEventInterface:
     vtbls:
       - ea: 0x1419BCB70
@@ -391,8 +408,27 @@ classes:
       0: ReceiveEvent
   Component::GUI::AtkTextInput::AtkTextInputEventInterface:
   Component::Text::TextChecker::ExecNonMacroFunc:
+    vtbls:
+      - ea: 0x1419DCFC0
+    vfuncs:
+      0: dtor
+      1: ProcessString
   Component::Text::TextModule:
+    vtbls:
+      - ea: 0x141A18F60
+        base: Component::Text::TextModuleInterface
+      - ea: 0x141A19000
+        base: Component::Text::MacroDecoder
   Component::Text::TextModuleInterface:
+    vtbls:
+      - ea: 0x141A18EC8
+    vfuncs:
+      0: dtor
+      9: ProcessMacroCode
+  Component::Text::Localize::Localize:
+    vtbls:
+      - ea: 0x141A18F50
+        base: Component::Excel::ExcelLanguageEvent
   SQEX::CDev::Engine::Sd::SdMemoryAllocator:
   SQEX::CDev::Engine::Sd::Driver::BankController:
   Client::System::Scheduler::Base::LinkList:
@@ -571,8 +607,8 @@ classes:
       - ea: 0x1421F3DA8
         pointer: False
     funcs:
-      0x140745240: Ctor
-      0x140745290: Dtor
+      0x140745240: ctor
+      0x140745290: dtor
       0x140745300: HasInstance
       0x140745320: GetInstance
       0x140745410: Clear
@@ -586,6 +622,7 @@ classes:
         pointer: False
     funcs:
       0x14071E4E0: GetInventoryContainer  # (this, containerId)
+      0x14071E540: GetInventorySlot  # (this, containerId, slotId)
       0x14071F6C0: MoveItemSlot # (srcContainer, srcSlot, dstContainer, dstSlot, 1)
       0x1407267B0: GetInventoryItemCount # (this, itemId, hq, 1, 1, 0)
       0x140726F20: GetItemCountInContainer # (this, itemId, containerId, hq, 0)
@@ -593,12 +630,36 @@ classes:
       0x140727C10: GetEquippedItemIdForSlot
       0x14072AD10: GetPermittedGearsetCount
       0x1407352D0: GetLimitedTomestoneCount
+      0x1407259E0: GetEmptySlotsInBag
+      0x14072F8C0: SendTradeRequest
+      0x140731E00: GetRetainerGil
+      0x140734260: GetFreeCompanyGil
+      0x140734DC0: GetGil
+      0x140734F90: GetCompanySeals
+      0x140735040: GetMaxCompanySeals
+      0x1407351B0: GetTomestoneCount
+      0x140735400: GetWolfMarks
+      0x140735520: GetAlliedSeals
+      0x140735640: GetGoldSaucerCoin
       0x14144C400: GetSpecialItemId #static
       0x140735340: GetLimitedTomestoneWeeklyLimit #static
   Client::Game::MonsterNoteManager:
     instances:
       - ea: 0x1422011D0
         pointer: False
+    funcs:
+      0x1409320D0: Initialize
+  Client::Game::GcArmyManager:
+    instances:
+      - ea: 0x1421FC4D0
+        pointer: True
+    funcs:
+      0x1408A1DE0: ctor
+      0x1408A1E30: dtor
+      0x1408A1EA0: HasInstance
+      0x1408A1EC0: GetInstance
+      0x1408A2070: GetMemberCount
+      0x1408A2090: GetMember
   Client::Game::Housing::HousingManager:
     instances:
       - ea: 0x14221B508
@@ -686,6 +747,7 @@ classes:
       0x14005AE80: GetString
       0x14005CD10: Clear
       0x14005AFB0: GetSize
+      0x14005A240: Concat
   Component::GUI::AtkValue:
     funcs:
       0x1405074A0: dtor
@@ -1470,6 +1532,12 @@ classes:
     vtbls:
       - ea: 0x1419BD0A0
         base: Component::GUI::AtkModule
+      - ea: 0x1419BD2E8
+        base: Component::GUI::AtkExternalInterface
+      - ea: 0x1419BD300
+        base: Client::System::Input::TextServiceInterface::TextServiceEvent
+      - ea: 0x1419BD348
+        base: Common::Configuration::ConfigBase::ChangeEventInterface
     funcs:
       0x1400B4680: ctor
       0x1400B5310: Finalize
@@ -1484,6 +1552,16 @@ classes:
       0x1400DDEF0: IsUIVisible
       0x140568150: DecRefNumberArrayData
       0x1405681B0: DecRefStringArrayData
+  Component::GUI::AtkModuleInterface::AtkHistoryInterface:
+    vtbls:
+      - ea: 0x1419BCB80
+    vfuncs:
+      0: dtor
+      1: Previous
+      2: Next
+      3: Reset
+      4: GetCurrent
+      5: GetCurrent2
   Client::UI::Info::InfoProxyInterface:
     vtbls:
       - ea: 0x1419BCBC0
@@ -1512,6 +1590,8 @@ classes:
       0x1400ADAA0: GetInfoProxyById
       0x1400ADAC0: GetLocalCharacterName
       0x1400ADB40: GetLocalContentID
+      0x1400ADC10: IsOnlineStatusSet
+      0x1400ADC90: IsInCrossWorldDuty
   Client::UI::Info::InfoProxyBlacklist:
     vtbls:
       - ea: 0x1419BCFA8
@@ -1521,7 +1601,11 @@ classes:
       0x14017C160: dtor2
   Common::Configuration::ConfigBase::ChangeEventInterface:
     vtbls:
-      - ea: 0x1419BD348
+      - ea: 0x1419A4F58
+  Client::UI::RaptureAtkHistory:
+    vtbls:
+      - ea: 0x1419BD390
+        base: Component::GUI::AtkModuleInterface::AtkHistoryInterface
   Client::UI::Info::InfoProxyCommonlist:
     vtbls:
       - ea: 0x1419BD4D0
@@ -2149,6 +2233,7 @@ classes:
     funcs:
       0x14021AC90: ctor
       0x14021ACE0: Initialize
+      0x14021C790: IsInCrossWorldDuty
   Application::Network::PacketReceiverCallbackInterface:
     vtbls:
       - ea: 0x1419DB868
@@ -3089,7 +3174,7 @@ classes:
       - ea: 0x1421CC900
     vtbls:
       - ea: 0x141A03EA0
-        base: Client::Game::Object::IGameObjectEventListener
+        base: Common::Configuration::ConfigBase::ChangeEventInterface
     funcs:
       0x1404EEA50: ctor
       0x1404F7150: InteractWithObject
@@ -3507,6 +3592,10 @@ classes:
     vtbls:
       - ea: 0x141A079D0
         base: Component::GUI::AtkModuleInterface
+      - ea: 0x141A07C18
+        base: Component::GUI::AtkExternalInterface
+      - ea: 0x141A07C30
+        base: Client::System::Input::TextServiceInterface::TextServiceEvent
     vfuncs:
       0: dtor
       9: GetNumberArrayData
@@ -3814,6 +3903,9 @@ classes:
       0x1406317F0: Finalize
       0x1406B8CA0: ctor
       0x1406BD320: MjiCreateWorkshopPreset
+  Client::UI::Misc::InputTimerModule:
+    vtbls:
+      - ea: 0x141A16AF0
   Client::UI::UI3DModule::MapInfo:
     vtbls:
       - ea: 0x141A16AF8
@@ -3877,6 +3969,7 @@ classes:
       34: GetInfoModule
       36: GetAgentModule
       38: GetUI3DModule
+      55: GetInputTimerModule
       57: GetRetainerCommentModule
       58: GetBannerModule
       64: GetFishingModule
@@ -3900,6 +3993,8 @@ classes:
       101: IsGamePadInputActive
       104: ToggleInputMode
       106: IsUIHidden
+      107: AddAtkHistoryEntry
+      108: ClearAtkHistory
       112: ShowContentIntroduction
       113: IsContentIntroductionInvisible
       114: HideContentIntroduction
@@ -3970,6 +4065,11 @@ classes:
   Component::Text::MacroDecoder:
     vtbls:
       - ea: 0x141A18B50
+  Component::Text::MacroEncoder:
+    vtbls:
+      - ea: 0x141A18D08
+    funcs:
+      0x14063EE90: ctor
   Component::Text::TextChecker:
     vtbls:
       - ea: 0x141A18D10
@@ -3987,9 +4087,9 @@ classes:
       0x140631700: Finalize
       0x140699560: ctor
       0x140699A70: ClearTellHistory
-  Client::UI::Misc::AddonConfig:
+  Client::UI::Misc::LogFilterConfig:
     vtbls:
-      - ea: 0x141A1D3F0
+      - ea: 0x141A1D4C0
         base: Client::UI::Misc::UserFileManager::UserFileEvent
   Client::UI::Misc::ConfigModule:
     vtbls:
@@ -4028,11 +4128,19 @@ classes:
       0x14066CA90: GetLineCount
       0x14066E1F0: SetMacroLines # function called by replace/append
       0x14066DC50: SetSavePendingFlag
+  Client::UI::Misc::RaptureMacroModule::Macro:
+    funcs:
+      0x14066C870: SetIcon
   Client::UI::Misc::RaptureTextModule:
     vtbls:
       - ea: 0x141A1D0B8
-    vfuncs:
-      0: dtor
+        base: Component::Text::TextModule
+      - ea: 0x141A1D158
+        base: Component::Text::MacroDecoder
+      - ea: 0x141A1D310
+        base: Component::Text::TextChecker::ExecNonMacroFunc
+      - ea: 0x141A1D320
+        base: Component::Excel::ExcelLanguageEvent
     funcs:
       0x14066F040: ctor
       0x14066FCE0: Finalize
@@ -4073,9 +4181,17 @@ classes:
       0x140691590: ExecuteSlot
       0x14068C670: ExecuteSlotById
       0x14068C6B0: GetSlotById
+      0x14068F0B0: DeleteMacroSlots
+      0x14068F290: ReloadMacroSlots
+      0x14068F6D0: ReloadGearsetSlots
       0x14068FBA0: ReassignGearsetId
+      0x14068FDC0: DeleteGearsetSlots
+      0x1406900B0: ReloadAllMacroSlots
       0x140690C70: GetSlotAppearance   # static
       0x140691F90: WriteSavedSlot
+      0x1406932A0: GetPvPSavedHotbarIndexForClassJobId
+      0x140693350: GetClassJobIdForSavedHotbarIndex
+      0x1406933F0: GetInstance  # static
   Client::UI::Misc::RaptureHotbarModule::HotbarSlot:
     funcs:
       # Convention(ish?): Get just returns a value, Load actually mutates the HotbarSlot passed to it
@@ -4096,6 +4212,10 @@ classes:
       0x14068B8B0: LoadUnkCAForSlot
       0x14068B8E0: LoadUnkCBForSlot
       0x14068B240: LoadUnkDEForSlot          # different from all the other loads - this one still needs slotType/ID for things
+  Client::UI::Misc::AddonConfig:
+    vtbls:
+      - ea: 0x141A1D3F0
+        base: Client::UI::Misc::UserFileManager::UserFileEvent
   Client::UI::Misc::PronounModule:
     vtbls:
       - ea: 0x141A1D530
@@ -4139,6 +4259,14 @@ classes:
     funcs:
       0x1406B6200: ctor
       0x1406B6460: Finalize
+  Client::UI::Misc::LetterDataModule:
+    vtbls:
+      - ea: 0x141A1D7E0
+        base: Client::UI::Misc::UserFileManager::UserFileEvent
+  Client::UI::Misc::RetainerTaskDataModule:
+    vtbls:
+      - ea: 0x141A1D848
+        base: Client::UI::Misc::UserFileManager::UserFileEvent
   Client::UI::Misc::RaptureTeleportHistory:
     vtbls:
       - ea: 0x141A1D8B0
@@ -4203,6 +4331,16 @@ classes:
     funcs:
       0x1414D2BF0: ctor
       0x1414D2C40: ImportLocalPlayerEquipment
+  Client::UI::Misc::SupportModule:
+    vtbls:
+      - ea: 0x141A1E450
+    funcs:
+      0x1406CC600: ctor
+  Client::SupportDesk::SupportDesk:
+    vtbls:
+      - ea: 0x141B95D00
+    funcs:
+      0x141464600: ctor
   Client::UI::Misc::CharaViewPortrait:
     vtbls:
       - ea: 0x141C4ADF0
@@ -6989,6 +7127,11 @@ classes:
     instances:
       - ea: 0x1421FC538
         pointer: False
+    funcs:
+      0x1408E5940: ctor
+      0x1408E59F0: dtor
+      0x1408E5A50: HasInstance
+      0x1408E5A70: GetInstance
   Client::Game::Event::EventFramework:
     instances:
       - ea: 0x1421FC518
@@ -8800,6 +8943,23 @@ classes:
     funcs:
       0x141449740: ctor
       0x141449810: Finalize
+  Component::Completion::CompletionModuleInterface:
+    vtbls:
+      - ea: 0x141B66658
+  Component::Text::TextModuleInterface::FixedSheetInterface:
+    vtbls:
+      - ea: 0x141B666A8
+  Component::Completion::CompletionModule:
+    vtbls:
+      - ea: 0x141B666D0
+        base: Component::Completion::CompletionModuleInterface
+      - ea: 0x141B66720
+        base: Component::Text::TextModuleInterface::FixedSheetInterface
+      - ea: 0x141B66748
+        base: Component::Excel::ExcelLanguageEvent
+    funcs:
+      0x14144DF30: ctor
+      0x14144E0B0: Finalize
   Client::Game::Object::HousingObject:
     vtbls:
       - ea: 0x141C32C40

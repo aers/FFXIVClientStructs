@@ -138,9 +138,6 @@ public unsafe partial struct PlayerState {
     [MemberFunction("E8 ?? ?? ?? ?? BE ?? ?? ?? ?? 84 C0 75 0C")]
     public partial byte GetBeastTribeRank(byte beastTribeIndex);
 
-    [Obsolete("Use QuestManager.Instance()->GetBeastTribeAllowance() instead.", true)]
-    public static ulong GetBeastTribeAllowance() => QuestManager.Instance()->GetBeastTribeAllowance();
-
     /// <summary>
     /// Returns whether the player is possessing the maximum amount of specialized souls.
     /// </summary>

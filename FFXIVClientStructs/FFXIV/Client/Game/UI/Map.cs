@@ -13,24 +13,21 @@ public unsafe partial struct Map {
     [FixedSizeArray<MarkerInfo>(16)]
     [FieldOffset(0x1178)] public fixed byte LevequestData[0x90 * 16];
 
-    [FieldOffset(0x1AF0)] public StdVector<MapMarkerData> ActiveLevequestMarkerData;
-    [FieldOffset(0x1B18)] public MapMarkerContainer QuestMarkerData;
-    [FieldOffset(0x1B20)] public SimpleMapMarkerContainer SimpleQuestMarkerData;
-    [FieldOffset(0x1B60)] public MapMarkerContainer GuildLeveAssignmentMapMarkerData;
-    [FieldOffset(0x1BA8)] public MapMarkerContainer GuildOrderGuideMarkerData;
-    [FieldOffset(0x3E98)] public MapMarkerContainer TripleTriadMarkerData;
-    [FieldOffset(0x3EA8)] public MapMarkerContainer CustomTalkMarkerData;
-    [FieldOffset(0x3EB0)] public SimpleMapMarkerContainer SimpleCustomTalkMarkerData;
-    [FieldOffset(0x3F50)] public MapMarkerContainer GemstoneTraderMarkerData;
-    [FieldOffset(0x3F58)] public SimpleMapMarkerContainer SimpleGemstoneTraderMarkerData;
-}
+    [FieldOffset(0x1AF0)] public StdVector<MapMarkerData> ActiveLevequest; // Markers for active levequest missions, they have to be actually started.
+    [FieldOffset(0x1B18)] public StdList<MarkerInfo> UnacceptedQuests;
+    [FieldOffset(0x1B60)] public StdList<MarkerInfo> GuildLeveAssignments;
+    [FieldOffset(0x1BA8)] public StdList<MarkerInfo> GuildOrderGuides;
+    [FieldOffset(0x3E98)] public StdList<MarkerInfo> TripleTriad;
+    [FieldOffset(0x3EA8)] public StdList<MarkerInfo> CustomTalk;
+    [FieldOffset(0x3F50)] public StdList<MarkerInfo> GemstoneTraders;
 
-[StructLayout(LayoutKind.Explicit, Size = 0x10)]
-public unsafe partial struct SimpleMapMarkerData {
-    [FieldOffset(0x00)] public uint IconId;
-    [FieldOffset(0x04)] public uint LevelId; // RowId into the 'Level' sheet
-    [FieldOffset(0x08)] public uint ObjectiveId; // RowId for whichever type of data this specific marker is representing, QuestId in the case of quests
-    [FieldOffset(0x0C)] public int Flags;
+    [FieldOffset(0x1AF0), Obsolete("Use ActiveLevequest")] public StdVector<MapMarkerData> ActiveLevequestMarkerData;
+    [FieldOffset(0x1B18), Obsolete("Use List<T> UnacceptedQuests")] public MapMarkerContainer QuestMarkerData;
+    [FieldOffset(0x1B60), Obsolete("Use List<T> GuildLeveAssignments")] public MapMarkerContainer GuildLeveAssignmentMapMarkerData;
+    [FieldOffset(0x1BA8), Obsolete("Use List<T> GuildOrderGuides")] public MapMarkerContainer GuildOrderGuideMarkerData;
+    [FieldOffset(0x3E98), Obsolete("Use List<T> TripleTriad")] public MapMarkerContainer TripleTriadMarkerData;
+    [FieldOffset(0x3EA8), Obsolete("Use List<T> CustomTalk")] public MapMarkerContainer CustomTalkMarkerData;
+    [FieldOffset(0x3F50), Obsolete("Use List<T> GemstoneTraders")] public MapMarkerContainer GemstoneTraderMarkerData;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x90)]
@@ -55,43 +52,22 @@ public unsafe partial struct MapMarkerData {
 }
 
 /// <summary>
-/// This container uses a 2-dimensional array to contain Map Markers that contain basic information.
-/// If you need more advanced information, use the MapMarkerContainer fields instead if applicable.
-/// </summary>
-[StructLayout(LayoutKind.Sequential)]
-public unsafe partial struct SimpleMapMarkerContainer {
-    public ulong CurrentSize;
-    public nint InternalPointer;
-    public SimpleMapMarkerData** DataArray;
-    public ulong MaxSize;
-
-    public Span<Pointer<SimpleMapMarkerData>> DataSpan => new(DataArray, (int)CurrentSize);
-
-    public IEnumerable<SimpleMapMarkerData> GetEnumerable() {
-        var results = new List<SimpleMapMarkerData>();
-
-        foreach (var index in Enumerable.Range(0, (int)CurrentSize)) {
-            results.Add(*DataArray[index]);
-        }
-
-        return results;
-    }
-}
-
-/// <summary>
 /// This container uses a linked list internally to contain Map Markers that contain tooltip information.
 /// </summary>
+[Obsolete("Use StdList<T> instead.")]
 [StructLayout(LayoutKind.Sequential)]
 public unsafe partial struct MapMarkerContainer {
     public LinkedList* List;
     public int Size;
 
+    [Obsolete("Use StdList<T> instead.")]
     [StructLayout(LayoutKind.Sequential)]
     public unsafe partial struct LinkedList {
         public MapMarkerNode* First;
         public MapMarkerNode* Last;
     }
 
+    [Obsolete("Use StdList<T> instead.")]
     public IEnumerable<MarkerInfo> GetAllMarkers() {
         var result = new List<MarkerInfo>();
         var current = List->First;
@@ -105,6 +81,7 @@ public unsafe partial struct MapMarkerContainer {
     }
 }
 
+[Obsolete("Use StdList<T> instead.")]
 [StructLayout(LayoutKind.Sequential)]
 public unsafe partial struct MapMarkerNode {
     public MapMarkerNode* Next;

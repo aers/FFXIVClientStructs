@@ -47,11 +47,6 @@ public unsafe struct ItemOrderModuleSorter {
     [FieldOffset(0x40)] public StdVector<ItemOrderModuleSorterSortFunctionEntry> SortFunctions;
     [FieldOffset(0x58)] public ItemOrderModuleSorterPreviousOrderEntry* PreviousOrderArray;
     // [FieldOffset(0x60)] public bool UnkBool; Set to true, only when it's the InventorySorter?
-
-    [Obsolete("Use Items.Size()", true)]
-    public long ItemCount => (long)Items.Size();
-    [Obsolete("Use SortFunctions.Size()", true)]
-    public long SortFunctionCount => (long)SortFunctions.Size();
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0xC)]

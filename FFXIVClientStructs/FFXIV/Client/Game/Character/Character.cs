@@ -18,74 +18,17 @@ public unsafe partial struct Character {
 
     [FieldOffset(0x1A0)] public CharacterData CharacterData;
 
-    #region This is inside a new 0x48 byte class at offset 0x1A8
-
-    [FieldOffset(0x1B0), Obsolete("Use CharacterData.ModelScale", true)]
-    public float ModelScale;
-    [FieldOffset(0x1B4), Obsolete("Use CharacterData.ModelCharaId", true)]
-    public int ModelCharaId;
-    [FieldOffset(0x1B8), Obsolete("Use CharacterData.ModelSkeletonId", true)]
-    public int ModelSkeletonId;
-    [FieldOffset(0x1BC), Obsolete("Use CharacterData.ModelCharaId_2", true)]
-    public int ModelCharaId_2; // == -1 -> return ModelCharaId
-    [FieldOffset(0x1C0), Obsolete("Use CharacterData.ModelSkeletonId_2", true)]
-    public int ModelSkeletonId_2; // == 0 -> return ModelSkeletonId
-
-    [FieldOffset(0x1C4), Obsolete("Use CharacterData.Health", true)]
-    public uint Health;
-    [FieldOffset(0x1C8), Obsolete("Use CharacterData.MaxHealth", true)]
-    public uint MaxHealth;
-    [FieldOffset(0x1CC), Obsolete("Use CharacterData.Mana", true)]
-    public uint Mana;
-    [FieldOffset(0x1D0), Obsolete("Use CharacterData.MaxMana", true)]
-    public uint MaxMana;
-    [FieldOffset(0x1D4), Obsolete("Use CharacterData.GatheringPoints", true)]
-    public ushort GatheringPoints;
-    [FieldOffset(0x1D6), Obsolete("Use CharacterData.MaxGatheringPoints", true)]
-    public ushort MaxGatheringPoints;
-    [FieldOffset(0x1D8), Obsolete("Use CharacterData.CraftingPoints", true)]
-    public ushort CraftingPoints;
-    [FieldOffset(0x1DA), Obsolete("Use CharacterData.MaxCraftingPoints", true)]
-    public ushort MaxCraftingPoints;
-    [FieldOffset(0x1DC), Obsolete("Use CharacterData.TransformationId", true)]
-    public short TransformationId;
-    [FieldOffset(0x1DE), Obsolete("Use CharacterData.StatusEffectVFXId", true)]
-    public short StatusEffectVFXId; // outdated since TitleID moved here
-    [FieldOffset(0x1DE), Obsolete("Use CharacterData.TitleID", true)]
-    public ushort TitleID;
-
-    [FieldOffset(0x1E2), Obsolete("Use CharacterData.ClassJob", true)]
-    public byte ClassJob;
-    [FieldOffset(0x1E3), Obsolete("Use CharacterData.Level", true)]
-    public byte Level;
-
-    [FieldOffset(0x1ED), Obsolete("Use CharacterData.ShieldValue", true)]
-    public byte ShieldValue;
-
-    [FieldOffset(0x1EF), Obsolete("Use CharacterData.OnlineStatus", true)]
-    public byte OnlineStatus;
-
-    #endregion
-
     [FieldOffset(0x210)] public fixed byte Movement[0x420];
-
     [FieldOffset(0x630)] public EmoteController EmoteController;
-    [FieldOffset(0x630 + 0x21), Obsolete("Use EmoteController.CPoseState", true)] public byte CPoseState;
+
 
     [FieldOffset(0x670)] public MountContainer Mount;
     [FieldOffset(0x6D8)] public CompanionContainer Companion;
 
     [FieldOffset(0x6F8)] public DrawDataContainer DrawData;
-    [Obsolete($"Use {nameof(DrawData)}", true), FieldOffset(0x6F8 + 0x148)] public fixed byte EquipSlotData[4 * 10];
-    [Obsolete($"Use {nameof(DrawData)}.CustomizeData", true), FieldOffset(0x6F8 + 0x170)] public fixed byte CustomizeData[0x1A];
-
     [FieldOffset(0x8A0)] public OrnamentContainer Ornament;
     [FieldOffset(0x918)] public ReaperShroudContainer ReaperShroud;
     [FieldOffset(0x970)] public ActionTimelineManager ActionTimelineManager;
-
-    [Obsolete($"Use {nameof(LookTargetId)} instead.", true)]
-    [FieldOffset(0xCB0)] public uint PlayerTargetObjectID; // offset not updated for 6.5
-
     /// <summary>
     /// The current target for this character's gaze. Can be set independently of soft or hard targets, and may be set
     /// by NPCs or minions. For players, an action cast will generally target the LookTarget (which generally will be
@@ -98,16 +41,6 @@ public unsafe partial struct Character {
 
     [FieldOffset(0x12F0)] public VfxContainer Vfx;
 
-    [Obsolete("Use Vfx.VfxData", true)]
-    [FieldOffset(0x12F0 + 0x18)] public VfxData* VfxData;
-    [Obsolete("Use Vfx.VfxData2", true)]
-    [FieldOffset(0x12F0 + 0x20)] public VfxData* VfxData2;
-    [Obsolete("Use Vfx.Omen", true)]
-    [FieldOffset(0x12F0 + 0x48)] public VfxData* Omen;
-
-    [Obsolete("Use Vfx.VoiceId", true)]
-    [FieldOffset(0x13C0)] public ushort VoiceId;
-
     [FieldOffset(0x1410)] public byte StatusFlags4;
     [FieldOffset(0x1418)] public CharacterSetup CharacterSetup;
 
@@ -116,12 +49,6 @@ public unsafe partial struct Character {
     [FieldOffset(0x1B28)] public float Alpha;
     [FieldOffset(0x1B30)] public Companion* CompanionObject; // minion
     [FieldOffset(0x1B40)] public fixed byte FreeCompanyTag[6];
-
-    [Obsolete("Use CharacterData.CombatTaggerId instead.", true)]
-    [FieldOffset(0x1AB0)] public GameObjectID CombatTaggerId; // offset not updated for 6.5
-
-    [Obsolete($"Use {nameof(TargetId)} instead.", true)]
-    [FieldOffset(0x1B58)] public ulong TargetObjectID;
 
     /// <summary>
     /// The current (hard) target for this Character. This will not be set for the LocalPlayer.
@@ -151,9 +78,6 @@ public unsafe partial struct Character {
     [FieldOffset(0x1BB6)] public byte EventState; // Leave for backwards compat. See Mode.
     [FieldOffset(0x1BB6)] public CharacterModes Mode;
     [FieldOffset(0x1BB7)] public byte ModeParam; // Different purpose depending on mode. See CharacterModes for more info.
-
-    [Obsolete("Use CharacterData.CombatTagType instead.", true)]
-    [FieldOffset(0x1B31)] public byte CombatTagType; // offset not updated for 6.5
 
     // Note: These 2 status flags might be just an ushort instead of 2 separate bytes.
 
@@ -199,11 +123,6 @@ public unsafe partial struct Character {
     [MemberFunction("E8 ?? ?? ?? ?? B8 ?? ?? ?? ?? 4C 3B F0")]
     public partial void SetSoftTargetId(GameObjectID id);
 
-    [Obsolete("Use CharacterSetup.CopyFromCharacter", true)]
-    public ulong CopyFromCharacter(Character* source, CharacterSetup.CopyFlags flags) => CharacterSetup.CopyFromCharacter(source, flags);
-
-    [Obsolete("Use CopyFromCharacter(Character*, CopyFlags)", true)]
-    public ulong CopyFromCharacter(Character* source, uint flags) => CopyFromCharacter(source, (CharacterSetup.CopyFlags)flags);
     public bool IsMounted() {
         // inlined as of 6.5
         return this.Mount.MountId != 0;
@@ -211,9 +130,6 @@ public unsafe partial struct Character {
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4F ?? E8 ?? ?? ?? ?? 48 8B 4C 24 ??")]
     public partial void SetMode(CharacterModes mode, byte modeParam);
-
-    [Obsolete("Use CharacterSetup.SetupBNpc", true)]
-    public void SetupBNpc(uint bNpcBaseId, uint bNpcNameId = 0) => CharacterSetup.SetupBNpc(bNpcBaseId, bNpcNameId);
 
     /// <summary> Can only be used for Mounts, Minions, and Ornaments. Literally just checks if the game object at index - 1 is a character and returns that. </summary>
     [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 48 0F 45 F8")]
@@ -376,6 +292,7 @@ public unsafe partial struct Character {
         Crafting = 5, // Param always 0
         AnimLock = 8, // Param always 0
         Carrying = 9, // Param is a Carry entry
+        RidingPillion = 10, // Param is the pillion seat number
         InPositionLoop = 11, // Param is an EmoteMode entry
         Performance = 16, // Unknown
     }
