@@ -31,7 +31,7 @@ public unsafe partial struct AgentCharaCard {
     // dtor "E8 ?? ?? ?? ?? BA ?? ?? ?? ?? 48 8B CF E8 ?? ?? ?? ?? 48 89 73 ?? E8"
     [StructLayout(LayoutKind.Explicit, Size = 0x950)]
     public unsafe partial struct Storage {
-        [FieldOffset(0x4)] public ushort ObjectId;
+        [FieldOffset(0x4)] public uint ObjectId;
         [FieldOffset(0x8)] public ulong ContentId;
 
         [FieldOffset(0x58)] public Utf8String Name;
