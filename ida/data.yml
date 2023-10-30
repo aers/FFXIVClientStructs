@@ -5255,6 +5255,8 @@ classes:
     vtbls:
       - ea: 0x1419DEE00
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x1419DEE78
+        base: Client::UI::Agent::AgentContext::AgentContextUpdateChecker
     funcs:
       0x14028F870: ctor
       0x14028F900: Finalize
@@ -6347,10 +6349,12 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140AB6010: ctor
-  Client::UI::Agent::AgentCrossWorldLinkShell:
+  Client::UI::Agent::AgentCrossWorldLinkshell:
     vtbls:
       - ea: 0x1419E1E28
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x1419E1EA0
+        base: Component::GUI::AtkEventListener
     funcs:
       0x1402F60A0: ctor
       0x1402F6180: Finalize
