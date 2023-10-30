@@ -14,11 +14,13 @@ public unsafe partial struct MacroEncoder {
     [FieldOffset(0x240)] public Utf8String Str6;
     [FieldOffset(0x2A8)] public Utf8String Str7;
 
-    [StructLayout(LayoutKind.Explicit, Size = 0x100)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x68)]
     public struct MacroCodeDescription {
         [FieldOffset(0x00)] public byte Id;
+        [FieldOffset(0x01)] public fixed byte ParamTypes[7]; // 'n', 's', 'x', 'S', 'N', '*', '.'
 
-        [FieldOffset(0x48)] public int ParameterCount;
-        [FieldOffset(0x4C)] public bool HasParameter;
+        [FieldOffset(0x44)] public int ParamCount;
+        [FieldOffset(0x48)] public int RequiredParamCount;
+        [FieldOffset(0x4C)] public bool RequiresParameter;
     }
 }
