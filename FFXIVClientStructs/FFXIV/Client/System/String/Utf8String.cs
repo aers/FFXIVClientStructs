@@ -17,7 +17,10 @@ public unsafe partial struct Utf8String : ICreatable, IDisposable {
     [FieldOffset(0x21)] public byte IsUsingInlineBuffer;
     [FieldOffset(0x22)] public fixed byte InlineBuffer[0x40]; // inline buffer used until strlen > 0x40
 
-    public ReadOnlySpan<byte> Span => new(StringPtr, Math.Max(0, (int)(BufUsed - 1)));
+    public int Length => Math.Max(0, (int)(BufUsed - 1));
+    public ReadOnlySpan<byte> Span => new(StringPtr, Length);
+
+    public Utf8String() => Ctor();
 
     public static Utf8String* CreateEmpty(IMemorySpace* memorySpace = null) {
         if (memorySpace == null) memorySpace = IMemorySpace.GetDefaultSpace();
