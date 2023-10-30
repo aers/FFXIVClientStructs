@@ -748,6 +748,13 @@ classes:
       0x14005CD10: Clear
       0x14005AFB0: GetSize
       0x14005A240: Concat
+      0x14005A470: Equals
+      0x14005A4C0: EqualsString
+      0x14005A500: NotEquals
+      0x14005A550: NotEqualsString
+      0x14005AFD0: AddChar
+      0x14005BA30: Append
+      0x14005CEA0: SetSize
   Component::GUI::AtkValue:
     funcs:
       0x1405074A0: dtor
@@ -4070,6 +4077,8 @@ classes:
       - ea: 0x141A18D08
     funcs:
       0x14063EE90: ctor
+      0x140643090: ParseParameter
+      0x14005AE90: GetParameterLength
   Component::Text::TextChecker:
     vtbls:
       - ea: 0x141A18D10

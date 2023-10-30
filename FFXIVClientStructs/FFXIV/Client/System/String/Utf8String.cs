@@ -83,8 +83,7 @@ public unsafe partial struct Utf8String : ICreatable, IDisposable {
     [MemberFunction("E8 ?? ?? ?? ?? 49 83 6E")]
     public partial void Dtor();
 
-    [GenerateCStrOverloads]
-    [MemberFunction("E8 ?? ?? ?? ?? EB 30 40 84 F6")]
+    [MemberFunction("E8 ?? ?? ?? ?? EB 30 40 84 F6"), GenerateCStrOverloads]
     public partial void SetString(byte* cStr);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 3B DD")]
@@ -92,6 +91,12 @@ public unsafe partial struct Utf8String : ICreatable, IDisposable {
 
     [MemberFunction("E8 ?? ?? ?? ?? 85 ED 79")]
     public partial void Clear();
+
+    [MemberFunction("E9 ?? ?? ?? ?? 48 2B D8")]
+    public partial bool Equals(Utf8String* other);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 8B 57 ?? 84 C0"), GenerateCStrOverloads]
+    public partial bool EqualsString(byte* other);
 
     [MemberFunction("E8 ?? ?? ?? ?? 40 0F B6 C7 48 8D 35")]
     public static partial Utf8String* Concat(Utf8String* str, Utf8String* buffer, Utf8String* other);
