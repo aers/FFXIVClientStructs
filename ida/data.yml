@@ -20,10 +20,14 @@ globals:
   0x1421F8888: g_GameObjectManager_ObjectList
   0x1421F9B40: g_GameObjectManager_ObjectListEnd
   0x142202150: g_LocalContentId
+  0x142202930: g_Client::Game::UI::Inspect # not a pointer
   0x142204CE8: g_Client::Game::UI::Buddy.CompanionStats.TimeRemaining  # not a pointer
   0x142204D38: g_Client::Game::UI::Buddy.BattleBuddyListPtr # Member of UIState
-  0x142204DE8: g_Client::Game::UI::ContentsNote
+  0x142204DE8: g_Client::Game::UI::ContentsNote # not a pointer
   0x142204EA0: g_Client::Game::UI::RelicNote # not a pointer
+  0x14220CC10: g_Client::Game::UI::ActiveDirector
+  0x14220CD58: g_Client::Game::UI::FateDirector
+  0x14220CEA0: g_Client::Game::UI::Map # not a pointer
   # 0x142211190: g_TitleController # commented out because it no longer has an xref
   0x142211198: g_TitleList
   0x142213F30: g_Client::Game::UI::ContentsFinder::LootRules
@@ -994,6 +998,9 @@ classes:
     instances:
       - ea: 0x1422053C8
         pointer: False
+  Client::Game::UI::Map::MapMarkerData:
+    funcs:
+      0x140964E30: SetData # (int levelId, Utf8String* tooltip, uint iconId, float x, float y, float z, float radius, ushort territoryTypeId, uint mapId, uint placeNameZoneId, uint placeNameId, ushort recommendedLevel, char a14) -> MapMarkerData*
   Client::Game::BattleLog:
     funcs:
       0x14099AC40: AddLogMessage
