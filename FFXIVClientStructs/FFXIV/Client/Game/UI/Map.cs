@@ -17,6 +17,8 @@ public unsafe partial struct Map {
     [FieldOffset(0x1B18)] public StdList<MarkerInfo> UnacceptedQuests;
     [FieldOffset(0x1B60)] public StdList<MarkerInfo> GuildLeveAssignments;
     [FieldOffset(0x1BA8)] public StdList<MarkerInfo> GuildOrderGuides;
+    [FixedSizeArray<MarkerInfo>(62)]
+    [FieldOffset(0x1BB8)] public fixed byte HousingData[0x90 * 62]; // 60 Plots + 2 Apartments
     [FieldOffset(0x3E98)] public StdList<MarkerInfo> TripleTriad;
     [FieldOffset(0x3EA8)] public StdList<MarkerInfo> CustomTalk;
     [FieldOffset(0x3F50)] public StdList<MarkerInfo> GemstoneTraders;
@@ -44,11 +46,18 @@ public unsafe partial struct MapMarkerData {
     [FieldOffset(0x04)] public uint ObjectiveId;
     [FieldOffset(0x08)] public Utf8String* TooltipString;
     [FieldOffset(0x10)] public uint IconId;
+
     [FieldOffset(0x18)] public float X;
     [FieldOffset(0x1C)] public float Y;
     [FieldOffset(0x20)] public float Z;
     [FieldOffset(0x24)] public float Radius;
+
+    [FieldOffset(0x2C)] public uint MapId;
+    [FieldOffset(0x30)] public uint PlaceNameZoneId;
+    [FieldOffset(0x34)] public uint PlaceNameId;
+
     [FieldOffset(0x3C)] public ushort RecommendedLevel;
+    [FieldOffset(0x3E)] public ushort TerritoryTypeId;
 }
 
 /// <summary>
