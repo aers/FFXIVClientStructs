@@ -61,7 +61,7 @@ public enum NodeViewFlags : uint {
 public unsafe partial struct AtkResNode : ICreatable {
     [FieldOffset(0x0)] public AtkEventTarget AtkEventTarget;
     [FieldOffset(0x8)] public uint NodeID;
-    [FieldOffset(0x10), Obsolete("Use Timeline", true)] public void* TimelineObject;
+    [FieldOffset(0x10), Obsolete("Use Timeline")] public void* TimelineObject;
     [FieldOffset(0x10)] public AtkTimeline* Timeline;
 
     [FieldOffset(0x18)] public AtkEventManager AtkEventManager; // holds events registered to this node
@@ -109,8 +109,8 @@ public unsafe partial struct AtkResNode : ICreatable {
     // asm accesses these fields together so this is one 32bit field with priority+flags
     [FieldOffset(0x9C)] public ushort Priority;
     [FieldOffset(0x9E)] public NodeFlags NodeFlags;
-    [FieldOffset(0xA0), Obsolete("Use ViewFlags", true)] public uint Flags_2;
-    [FieldOffset(0xA0), Obsolete("Use ViewFlags", true)] public uint DrawFlags;
+    [FieldOffset(0xA0), Obsolete("Use ViewFlags")] public uint Flags_2;
+    [FieldOffset(0xA0), Obsolete("Use ViewFlags")] public uint DrawFlags;
     [FieldOffset(0xA0)] public NodeViewFlags ViewFlags;
 
     public bool IsVisible => NodeFlags.HasFlag(NodeFlags.Visible);
