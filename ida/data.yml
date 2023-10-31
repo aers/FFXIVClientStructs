@@ -424,6 +424,8 @@ classes:
       - ea: 0x141A18EC8
     vfuncs:
       0: dtor
+      7: EncodeString
+      8: EncodeMacro
       9: ProcessMacroCode
   Component::Text::Localize::Localize:
     vtbls:
@@ -4077,8 +4079,9 @@ classes:
       - ea: 0x141A18D08
     funcs:
       0x14063EE90: ctor
-      0x140643090: ParseParameter
-      0x14005AE90: GetParameterLength
+      0x140642D10: EncodeMacro
+      0x140643090: EncodeParameter
+      0x140642B00: ParseMacro
   Component::Text::TextChecker:
     vtbls:
       - ea: 0x141A18D10
