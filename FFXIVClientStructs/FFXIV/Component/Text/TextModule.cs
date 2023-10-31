@@ -13,6 +13,12 @@ public unsafe partial struct TextModule {
     //[FieldOffset(0x3A8)] public Utf8String UnkStr; // DecoderResult?
     [FieldOffset(0x410)] public Utf8String MacroEncoderResult;
 
+    [VirtualFunction(7)]
+    public partial Utf8String* EncodeString(Utf8String* ouput, Utf8String* input);
+
+    [VirtualFunction(8), GenerateCStrOverloads]
+    public partial int EncodeMacro(byte* input, Utf8String* output);
+
     [VirtualFunction(9)]
     public partial Utf8String* ProcessMacroCode(Utf8String* output, byte* input);
 }
