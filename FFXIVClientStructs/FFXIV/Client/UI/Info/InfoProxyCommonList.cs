@@ -53,7 +53,8 @@ public unsafe partial struct InfoProxyCommonList {
         [FieldOffset(0x24)] public GrandCompany GrandCompany;
         [FieldOffset(0x25)] public Language ClientLanguage;
         [FieldOffset(0x26)] public LanguageMask Languages;
-        // 2 bytes
+        // 1 byte
+        [FieldOffset(0x28)] public byte Sex;
         [FieldOffset(0x29)] public byte Job;
         [FieldOffset(0x2A)] public fixed byte Name[32];
         [FieldOffset(0x4A)] public fixed byte FCTag[6];
