@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.System.String;
 // size = 0x68
 // ctor E8 ?? ?? ?? ?? 44 2B F7 
 [StructLayout(LayoutKind.Explicit, Size = 0x68)]
-public unsafe partial struct Utf8String : ICreatable {
+public unsafe partial struct Utf8String : ICreatable, IDisposable {
     [FieldOffset(0x0)] public byte* StringPtr; // pointer to null-terminated string
     [FieldOffset(0x8)] public long BufSize; // default buffer = 0x40
     [FieldOffset(0x10)] public long BufUsed;
@@ -17,7 +17,10 @@ public unsafe partial struct Utf8String : ICreatable {
     [FieldOffset(0x21)] public byte IsUsingInlineBuffer;
     [FieldOffset(0x22)] public fixed byte InlineBuffer[0x40]; // inline buffer used until strlen > 0x40
 
-    public ReadOnlySpan<byte> Span => new(StringPtr, Math.Max(0, (int)(BufUsed - 1)));
+    public int Length => Math.Max(0, (int)(BufUsed - 1));
+    public ReadOnlySpan<byte> Span => new(StringPtr, Length);
+
+    public Utf8String() => Ctor();
 
     public static Utf8String* CreateEmpty(IMemorySpace* memorySpace = null) {
         if (memorySpace == null) memorySpace = IMemorySpace.GetDefaultSpace();
@@ -57,30 +60,33 @@ public unsafe partial struct Utf8String : ICreatable {
     public void Prepend(Utf8String* other) => Prepend((Utf8String*)Unsafe.AsPointer(ref this), other);
 
     public static void Append(Utf8String* str, Utf8String* value) {
-        var buffer = stackalloc Utf8String[1];
-        var result = Concat(str, buffer, value);
+        using var buffer = new Utf8String();
+        var result = Concat(str, &buffer, value);
         str->Copy(result);
-        buffer->Dtor();
     }
 
     public static void Prepend(Utf8String* str, Utf8String* value) {
-        var buffer = stackalloc Utf8String[1];
-        var result = Concat(value, buffer, str);
+        using var buffer = new Utf8String();
+        var result = Concat(value, &buffer, str);
         str->Copy(result);
-        buffer->Dtor();
+    }
+
+    public void Dtor(bool free) => Dispose(free);
+
+    void IDisposable.Dispose() => Dispose(false);
+
+    private void Dispose(bool free) {
+        Dtor();
+        if (free) IMemorySpace.Free((Utf8String*)Unsafe.AsPointer(ref this));
     }
 
     [MemberFunction("E8 ?? ?? ?? ?? 44 2B F7")]
     public partial void Ctor();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 4D 8D 7D")]
-    public partial void CtorFromSequence(byte* str, int size);
-
     [MemberFunction("E8 ?? ?? ?? ?? 49 83 6E")]
     public partial void Dtor();
 
-    [GenerateCStrOverloads]
-    [MemberFunction("E8 ?? ?? ?? ?? EB 30 40 84 F6")]
+    [MemberFunction("E8 ?? ?? ?? ?? EB 30 40 84 F6"), GenerateCStrOverloads]
     public partial void SetString(byte* cStr);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 3B DD")]
@@ -88,6 +94,12 @@ public unsafe partial struct Utf8String : ICreatable {
 
     [MemberFunction("E8 ?? ?? ?? ?? 85 ED 79")]
     public partial void Clear();
+
+    [MemberFunction("E9 ?? ?? ?? ?? 48 2B D8")]
+    public partial bool EqualsUtf8(Utf8String* other);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 8B 57 ?? 84 C0"), GenerateCStrOverloads]
+    public partial bool EqualsString(byte* other);
 
     [MemberFunction("E8 ?? ?? ?? ?? 40 0F B6 C7 48 8D 35")]
     public static partial Utf8String* Concat(Utf8String* str, Utf8String* buffer, Utf8String* other);

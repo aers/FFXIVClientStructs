@@ -2,6 +2,7 @@ using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Serilog;
 
 namespace FFXIVClientStructs.Interop;
 

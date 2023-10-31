@@ -20,10 +20,14 @@ globals:
   0x1421F8888: g_GameObjectManager_ObjectList
   0x1421F9B40: g_GameObjectManager_ObjectListEnd
   0x142202150: g_LocalContentId
+  0x142202930: g_Client::Game::UI::Inspect # not a pointer
   0x142204CE8: g_Client::Game::UI::Buddy.CompanionStats.TimeRemaining  # not a pointer
   0x142204D38: g_Client::Game::UI::Buddy.BattleBuddyListPtr # Member of UIState
-  0x142204DE8: g_Client::Game::UI::ContentsNote
+  0x142204DE8: g_Client::Game::UI::ContentsNote # not a pointer
   0x142204EA0: g_Client::Game::UI::RelicNote # not a pointer
+  0x14220CC10: g_Client::Game::UI::ActiveDirector
+  0x14220CD58: g_Client::Game::UI::FateDirector
+  0x14220CEA0: g_Client::Game::UI::Map # not a pointer
   # 0x142211190: g_TitleController # commented out because it no longer has an xref
   0x142211198: g_TitleList
   0x142213F30: g_Client::Game::UI::ContentsFinder::LootRules
@@ -254,6 +258,7 @@ functions:
   0x14071BC30: CreateDummyItemSlot
   0x140B1DEE0: IsInMordionGaol # if this returns true, i'm sorry for you
   0x140B716B0: WorldToScreenPoint
+  0x14144AA10: GetBannerConditionUnlockState
   0x14170CF80: OodleNew # oodle code starts here
   0x14170CFF0: OodleDelete
   0x14170D020: rrPrintf_v1
@@ -424,6 +429,8 @@ classes:
       - ea: 0x141A18EC8
     vfuncs:
       0: dtor
+      7: EncodeString
+      8: EncodeMacro
       9: ProcessMacroCode
   Component::Text::Localize::Localize:
     vtbls:
@@ -748,6 +755,13 @@ classes:
       0x14005CD10: Clear
       0x14005AFB0: GetSize
       0x14005A240: Concat
+      0x14005A470: Equals
+      0x14005A4C0: EqualsString
+      0x14005A500: NotEquals
+      0x14005A550: NotEqualsString
+      0x14005AFD0: AddChar
+      0x14005BA30: Append
+      0x14005CEA0: SetSize
   Component::GUI::AtkValue:
     funcs:
       0x1405074A0: dtor
@@ -795,6 +809,13 @@ classes:
       0x140537060: SeardNodeById
       0x1405370C0: SearchNodeByIndex
       0x140537130: GetDuplicatedNode
+  Component::GUI::AtkTimeline:
+    funcs:
+      0x14056CF40: GetStartFrameIdxForLabelId
+      0x14056D070: GetEndFrameIdxForLabelId
+      0x14056CCF0: UpdateChildAnimationStates
+      0x14056C520: UpdateChildAnimationAndLabelStates
+      0x14056C680: SetTimelineState
   Component::GUI::AtkArrayDataHolder:
     funcs:
       0x140507DE0: ctor
@@ -831,6 +852,8 @@ classes:
       0x140998540: GetNextMapAllowanceTimestamp
       0x14146FDF0: IsInstanceContentUnlocked   # static
       0x1414700D0: IsInstanceContentCompleted  # static
+      0x1414B0850: IsPublicContentUnlocked   # static
+      0x1414B08E0: IsPublicContentCompleted  # static
       0x1409997C0: Terminate
   Client::Game::UI::PlayerState:
     instances:
@@ -846,6 +869,11 @@ classes:
       0x14093C760: IsOrnamentUnlocked
       0x14093B1D0: IsOrchestrionRollUnlocked
       0x14093A330: IsSecretRecipeBookUnlocked # DoH unlockable books
+      0x14093A4A0: SetSightseeingLogUnlockState
+      0x14093A4F0: SetSightseeingLogUnlockStateEx
+      0x14093A540: SetAdventureExPhaseComplete
+      0x14093A590: IsAdventureExPhaseComplete
+      0x14093A860: IsAdventureComplete
       0x14093B110: IsFolkloreTomeUnlocked     # DoL unlockable books
       0x14093C560: IsMcGuffinUnlocked
       0x14093C860: IsFramersKitUnlocked
@@ -987,6 +1015,9 @@ classes:
     instances:
       - ea: 0x1422053C8
         pointer: False
+  Client::Game::UI::Map::MapMarkerData:
+    funcs:
+      0x140964E30: SetData # (int levelId, Utf8String* tooltip, uint iconId, float x, float y, float z, float radius, ushort territoryTypeId, uint mapId, uint placeNameZoneId, uint placeNameId, ushort recommendedLevel, char a14) -> MapMarkerData*
   Client::Game::BattleLog:
     funcs:
       0x14099AC40: AddLogMessage
@@ -3409,6 +3440,12 @@ classes:
       0x14052BD20: Init
       0x14052BEF0: SetScale0  # SetScale jumps to this
       0x140536900: SetSize
+      0x14052A5D0: GetTimelineLabel
+      0x14052A450: SetTimelineLabel2
+      0x14052A4D0: SetTimelineLabel3
+      0x14052A580: GetTimelineFrameIdx
+      0x14052A3D0: EnableTimeline
+      0x14052A3F0: DisableTimeline
   Component::GUI::AtkImageNode:
     vtbls:
       - ea: 0x141A06F98
@@ -3551,6 +3588,7 @@ classes:
       0x140553C30: LoadIconById
       0x140553C60: LoadIcon
       0x14058A620: SetDisabledColor
+      0x140553EA0: SetTimelineState
   Component::GUI::AtkDragDropInterface:
     vtbls:
       - ea: 0x141A074F8
@@ -4070,6 +4108,9 @@ classes:
       - ea: 0x141A18D08
     funcs:
       0x14063EE90: ctor
+      0x140642D10: EncodeMacro
+      0x140643090: EncodeParameter
+      0x140642B00: ParseMacro
   Component::Text::TextChecker:
     vtbls:
       - ea: 0x141A18D10
@@ -5246,6 +5287,8 @@ classes:
     vtbls:
       - ea: 0x1419DEE00
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x1419DEE78
+        base: Client::UI::Agent::AgentContext::AgentContextUpdateChecker
     funcs:
       0x14028F870: ctor
       0x14028F900: Finalize
@@ -6338,10 +6381,12 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140AB6010: ctor
-  Client::UI::Agent::AgentCrossWorldLinkShell:
+  Client::UI::Agent::AgentCrossWorldLinkshell:
     vtbls:
       - ea: 0x1419E1E28
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x1419E1EA0
+        base: Component::GUI::AtkEventListener
     funcs:
       0x1402F60A0: ctor
       0x1402F6180: Finalize

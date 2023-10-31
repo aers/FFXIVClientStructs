@@ -58,11 +58,26 @@ public unsafe partial struct PlayerState {
     [FieldOffset(0x2C2)] public ushort FreeAetherytePlayStationPlus;
     [FieldOffset(0x2C4)] public uint BaseRestedExperience;
 
-    [FieldOffset(0x2D5)] public fixed byte OwnedMountsBitmask[49];
+    // Size: (MountSheet.Max(row => row.Order) + 7) >> 3
+    /// <remarks> Use <see cref="IsMountUnlocked"/> </remarks>
+    [FieldOffset(0x2DD)] public fixed byte OwnedMountsBitmask[(280 + 7) >> 3];
+    // Size: (OrnamentSheet.RowCount + 7) >> 3
+    /// <remarks> Use <see cref="IsOrnamentUnlocked"/> </remarks>
+    [FieldOffset(0x300)] public fixed byte UnlockedOrnamentsBitmask[(41 + 7) >> 3];
     [FieldOffset(0x306)] public byte NumOwnedMounts;
+
+    // Ref: "48 8D 0D ?? ?? ?? ?? 41 0F B6 0C 08 41 B0 01 84 D1 0F 95 C1 24 01 02 C0 0A C8 41 0F B6 C4"
+    // Size: (FishParameterSheet.Count(row => row.IsInLog) + 7) >> 3
+    [FieldOffset(0x3B4)] public fixed byte CaughtFishBitmask[(1272 + 7) >> 3];
 
     [FieldOffset(0x458)] public uint NumFishCaught;
     [FieldOffset(0x45C)] public uint FishingBait;
+    // Ref: "41 0F B6 04 00 D3 E2 84 D0 0F 95 85"
+    // Size: (SpearfishingNotebookSheet.RowCount + 7) >> 3
+    [FieldOffset(0x460)] public fixed byte UnlockedSpearfishingNotebookBitmask[(56 + 7) >> 3];
+    // Ref: "48 8D 0D ?? ?? ?? ?? 41 0F B6 0C 08 84 D1 40 0F"
+    // Size: (SpearfishingItemSheet.RowCount + 7) >> 3
+    [FieldOffset(0x467)] public fixed byte CaughtSpearfishBitmask[(287 + 7) >> 3];
 
     [FieldOffset(0x48C)] public uint NumSpearfishCaught;
 
@@ -78,11 +93,23 @@ public unsafe partial struct PlayerState {
     [FieldOffset(0x4AA)] public byte PlayerStateFlags2;
     [FieldOffset(0x4AB)] public byte PlayerStateFlags3;
 
+    [FieldOffset(0x4D4)] public byte SightseeingLogUnlockState; // 0 = Not Unlocked, 1 = ARR Part 1, 2 = ARR Part 2
+    [FieldOffset(0x4D5)] public byte SightseeingLogUnlockStateEx; // 3 = Quest "Sights of the North" completed (= AdventureExPhase unlocked?)
+    // Ref: PlayerState.IsAdventureExPhaseComplete
+    // Size: (AdventureExPhaseSheet.RowCount + 7) >> 3
+    /// <remarks> Use <see cref="IsAdventureExPhaseComplete"/> </remarks>
+    [FieldOffset(0x4D6)] public fixed byte UnlockedAdventureExPhaseBitmask[(3 + 7) >> 3];
+
+    // Ref: PlayerState.IsAdventureComplete
+    // Size: (AdventureSheet.RowCount + 7) >> 3
+    /// <remarks> Use <see cref="IsAdventureComplete"/> </remarks>
+    [FieldOffset(0x500)] public fixed byte UnlockedAdventureBitmask[(295 + 7) >> 3];
+
     [FieldOffset(0x529)] public fixed byte UnlockFlags[44];
 
     /// <summary>Carrier Level of Delivery Moogle Quests</summary>
     [FieldOffset(0x559)] public byte DeliveryLevel;
-
+    // [FieldOffset(0x560)] public byte UnkWeddingPlanFlag; // see lua function "GetWeddingPlan"
     /// <summary>
     /// Flag containing information about which DoH job the player is specialized in.
     /// </summary>
@@ -98,6 +125,12 @@ public unsafe partial struct PlayerState {
     [FieldOffset(0x564)] public uint SquadronTrainingCompletionTimestamp;
     [FieldOffset(0x568)] public ushort ActiveGcArmyExpedition;
     [FieldOffset(0x56A)] public ushort ActiveGcArmyTraining;
+    [FieldOffset(0x56C)] public bool HasNewGcArmyCandidate; // see lua function "GcArmyIsNewCandidate"
+    // [FieldOffset(0x56D)] public bool UnkGcPvpMountActionCheck; // see "80 3D ?? ?? ?? ?? ?? 75 3C"
+
+    [FieldOffset(0x56E)] public fixed byte UnlockedMinerFolkloreTomeBitmask[2];
+    [FieldOffset(0x570)] public fixed byte UnlockedBotanistFolkloreTomeBitmask[2];
+    [FieldOffset(0x572)] public fixed byte UnlockedFishingFolkloreTomeBitmask[2];
 
     #region Weekly Bonus/Weekly Bingo/Wondrous Tails Fields (packet reader: "4C 8B D2 48 8D 81")
 
@@ -249,6 +282,20 @@ public unsafe partial struct PlayerState {
     /// <param name="territoryTypeColumn32">Column 32 of TerritoryType</param>
     [MemberFunction("4C 8B C9 85 D2 74 48")]
     public partial bool IsAetherCurrentZoneComplete(uint territoryTypeColumn32);
+
+    /// <summary>
+    /// Check if all vistas of an expansion in the Sightseeing Log have been discovered.
+    /// </summary>
+    /// <param name="adventureExPhaseId">AdventureExPhase RowId</param>
+    [MemberFunction("E8 ?? ?? ?? ?? 88 84 24 ?? ?? ?? ?? 4D 85 F6")]
+    public partial bool IsAdventureExPhaseComplete(uint adventureExPhaseId);
+
+    /// <summary>
+    /// Check if a Sightseeing Log vista has been discovered.
+    /// </summary>
+    /// <param name="adventureId">Index of Row (= RowId - 2162688)</param>
+    [MemberFunction("81 FA ?? ?? ?? ?? 73 1F 0F B6 C2")]
+    public partial bool IsAdventureComplete(uint adventureId);
 
     #endregion
 

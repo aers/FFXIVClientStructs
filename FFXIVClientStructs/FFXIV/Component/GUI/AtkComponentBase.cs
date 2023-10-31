@@ -53,6 +53,15 @@ public unsafe partial struct AtkComponentBase {
     [MemberFunction("E8 ?? ?? ?? ?? 8B 53 FC")]
     public partial AtkResNode* GetScrollBarNodeById(uint id);
 
+    [MemberFunction("E9 ?? ?? ?? ?? 48 85 C0 74 61")]
+    public partial void PlayTimelineAnimation(byte labelId);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 41 3A C6 74 22")]
+    public partial bool IsAnimated();
+
+    [VirtualFunction(5)]
+    public partial void OnUldUpdate();
+
     [VirtualFunction(10)]
     public partial void* SetEnabledState(bool enabled);
 }

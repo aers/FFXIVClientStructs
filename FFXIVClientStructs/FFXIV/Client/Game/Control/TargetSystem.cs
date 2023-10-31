@@ -18,7 +18,7 @@ public unsafe partial struct TargetSystem {
     [FieldOffset(0x1A98)] public GameObjectArray ObjectFilterArray1;
     [FieldOffset(0x2D58)] public GameObjectArray ObjectFilterArray2;
     [FieldOffset(0x4018)] public GameObjectArray ObjectFilterArray3;
-    
+
     // Names might be inaccurate, these seem to be used to control what the player can interact with at any given time
     // For example, when interacting with the aethernet menu, these values change presumable to limit your ability to select an object other than the aetheryte.
     [FieldOffset(0x52E0)] public fixed uint TargetModes[8];

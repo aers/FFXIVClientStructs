@@ -1,4 +1,5 @@
 using FFXIVClientStructs.FFXIV.Client.System.String;
+using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
@@ -56,7 +57,7 @@ public struct ItemReward {
     [FieldOffset(0x08)] public int Quantity; // -1 seems to be arrow up
     [FieldOffset(0x10)] public uint IconId;
     [FieldOffset(0x18)] public Utf8String TooltipString;
-    [FieldOffset(0x84)] public Utf8String UnkString; // This string seems to be unused?
+    [FieldOffset(0x88)] public Utf8String UnkString; // This string seems to be unused?
 }
 
 public enum ContentsRouletteRole : byte {

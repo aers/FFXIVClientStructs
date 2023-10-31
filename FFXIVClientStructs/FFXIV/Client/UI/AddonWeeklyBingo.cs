@@ -37,7 +37,7 @@ public unsafe struct DutySlotList {
     [FieldOffset(0x1270)] public DutySlot DutySlot14;
     [FieldOffset(0x13D8)] public DutySlot DutySlot15;
     [FieldOffset(0x1540)] public DutySlot DutySlot16;
-    
+
     [FieldOffset(0x16A8)] public AtkComponentButton* SecondChanceButton;
     [FieldOffset(0x16B0)] public AtkComponentButton* CancelButton;
     [FieldOffset(0x16B8)] public AtkTextNode* SecondChancesRemaining;

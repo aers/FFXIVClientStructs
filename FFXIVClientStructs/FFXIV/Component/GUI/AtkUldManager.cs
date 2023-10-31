@@ -10,7 +10,7 @@ public enum AtkLoadState : byte {
     LoadError = 4
 }
 
-// used in both addons (AtkUnitBase derived classes) and components (AtkComponontBase derived classes) to read data from uld files
+// used in both addons (AtkUnitBase derived classes) and components (AtkComponentBase derived classes) to read data from uld files
 // also used to render UI components
 [StructLayout(LayoutKind.Explicit, Size = 0x90)]
 public unsafe partial struct AtkUldManager {
