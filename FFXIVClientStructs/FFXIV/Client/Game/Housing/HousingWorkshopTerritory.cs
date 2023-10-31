@@ -32,7 +32,6 @@ public unsafe partial struct HousingWorkshopSubmersibleData {
 
 [StructLayout(LayoutKind.Explicit, Size = 0x1C0)]
 public unsafe partial struct HousingWorkshopAirshipSubData {
-    [FieldOffset(0x0), Obsolete("Cast to byte instead", true)] public fixed byte Data[0x1C0];
     [FieldOffset(0x4)] public uint RegisterTime;
     [FieldOffset(0xC)] public byte RankId;
     [FieldOffset(0x10)] public uint ReturnTime;
@@ -91,7 +90,6 @@ public unsafe partial struct HousingWorkshopAirshipGathered {
 [StructLayout(LayoutKind.Explicit, Size = 0x2320)]
 public unsafe partial struct HousingWorkshopSubmersibleSubData {
     [FieldOffset(0x0)] public HousingWorkshopSubmersibleData* Parent;
-    [FieldOffset(0x0), Obsolete("Wrong mapping stop using this", true)] public HousingWorkshopSubmersibleSubData* Self;
     [FieldOffset(0xE)] public byte RankId;
     [FieldOffset(0x10)] public uint RegisterTime;
     [FieldOffset(0x14)] public uint ReturnTime;
@@ -118,7 +116,6 @@ public unsafe partial struct HousingWorkshopSubmersibleSubData {
     [FieldOffset(0x58)] public ushort SpeedBonus;
     [FieldOffset(0x5A)] public ushort RangeBonus;
     [FieldOffset(0x5C)] public ushort FavorBonus;
-    [FieldOffset(0x60), Obsolete("Use SubmarineRating", true)] public byte Rating;
     [FieldOffset(0x60)] public SubmarineRating SubmarineRating;
     [FieldOffset(0x62)] public ushort LogSpeed;
 
@@ -162,14 +159,6 @@ public struct HousingWorkshopSubmarineGathered {
     [FieldOffset(0x1D)] public bool ItemHQAdditional;
     [FieldOffset(0x1E)] public byte UnknownPrimary;
     [FieldOffset(0x1F)] public byte UnknownAdditional;
-
-    [FieldOffset(0x20), Obsolete("Use SurveyLinePrimary", true)] public uint UnknownPrimary1;
-    [FieldOffset(0x24), Obsolete("Use SurveyLineAdditional", true)] public uint UnknownAdditional1;
-    [FieldOffset(0x28), Obsolete("Use YieldLinePrimary", true)] public uint UnknownPrimary2;
-    [FieldOffset(0x2C), Obsolete("Use YieldLineAdditional", true)] public uint UnknownAdditional2;
-    [FieldOffset(0x30), Obsolete("Use DiscoveredLinePrimary", true)] public uint UnknownPrimary3;
-    [FieldOffset(0x34), Obsolete("Use DiscoveredLineAdditional", true)] public uint UnknownAdditional3;
-
     [FieldOffset(0x20)] public uint SurveyLinePrimary;
     [FieldOffset(0x24)] public uint SurveyLineAdditional;
     [FieldOffset(0x28)] public uint YieldLinePrimary;

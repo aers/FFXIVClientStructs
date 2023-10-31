@@ -20,8 +20,6 @@ public unsafe partial struct AgentLobby {
 
     [FieldOffset(0x10E0)] public sbyte ServiceAccountIndex;
     [FieldOffset(0x10E1)] public sbyte SelectedCharacterIndex; // index in CharaSelectCharacterList
-    [Obsolete("Renamed to SelectedCharacterContentId", true)]
-    [FieldOffset(0x10E8)] public ulong SelectedCharacterId;
     [FieldOffset(0x10E8)] public ulong SelectedCharacterContentId;
     [FieldOffset(0x10F0)] public byte DataCenter;
 
@@ -31,6 +29,8 @@ public unsafe partial struct AgentLobby {
     [FieldOffset(0x1110)] public uint IdleTime;
 
     [FieldOffset(0x1228)] public bool TemporaryLocked; // "Please wait and try logging in later."
+
+    [FieldOffset(0x1DA4)] public bool HasShownCharacterNotFound; // "The character you last logged out with in this play environment could not be found on the current data center."
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 07 C6 86 ?? ?? ?? ?? ?? 48 8B 8C 24")]
     public readonly partial void UpdateCharaSelectDisplay(sbyte index, bool a2);

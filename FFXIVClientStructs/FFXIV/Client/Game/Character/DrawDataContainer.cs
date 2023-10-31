@@ -16,31 +16,6 @@ public unsafe partial struct DrawDataContainer {
             return ref ((DrawObjectData*)ptr)[(int)which];
     }
 
-    [Obsolete("Use Weapon(WeaponSlot.MainHand).ModelId", true)]
-    [FieldOffset(0x010)] public WeaponModelId MainHandModel;
-    [Obsolete("Use Weapon(WeaponSlot.MainHand).State", true)]
-    [FieldOffset(0x06C)] public byte MainHandState;
-    [Obsolete("Use Weapon(WeaponSlot.MainHand).Flags1", true)]
-    [FieldOffset(0x072)] public ushort MainHandFlags1;
-    [Obsolete("Use Weapon(WeaponSlot.MainHand).Flags2", true)]
-    [FieldOffset(0x074)] public byte MainHandFlags2;
-
-    [Obsolete("Use Weapon(WeaponSlot.OffHand).ModelId", true)]
-    [FieldOffset(0x080)] public WeaponModelId OffHandModel;
-    [Obsolete("Use Weapon(WeaponSlot.OffHand).State", true)]
-    [FieldOffset(0x0DC)] public byte OffHandState;
-    [Obsolete("Use Weapon(WeaponSlot.OffHand).Flags1", true)]
-    [FieldOffset(0x0E2)] public ushort OffHandFlags1;
-    [Obsolete("Use Weapon(WeaponSlot.OffHand).Flags2", true)]
-    [FieldOffset(0x0E4)] public byte OffHandFlags2;
-
-    [Obsolete("Use Weapon(WeaponSlot.Unk).ModelId", true)]
-    [FieldOffset(0x0F0)] public WeaponModelId UnkE0Model;
-    [Obsolete("Use Weapon(WeaponSlot.Unk).Flags1", true)]
-    [FieldOffset(0x152)] public ushort Unk144Flags1;
-    [Obsolete("Use Weapon(WeaponSlot.Unk).Flags2", true)]
-    [FieldOffset(0x154)] public byte Unk144Flags2;
-
     [FieldOffset(0x010 + 3 * DrawObjectData.Size + 0x00)] public EquipmentModelId Head;
     [FieldOffset(0x010 + 3 * DrawObjectData.Size + 0x04)] public EquipmentModelId Top;
     [FieldOffset(0x010 + 3 * DrawObjectData.Size + 0x08)] public EquipmentModelId Arms;
@@ -119,18 +94,6 @@ public unsafe partial struct DrawDataContainer {
     public bool IsVisorToggled {
         get => (Flags2 & 0x10) == 0x10;
         set => Flags2 = (byte)(value ? Flags2 | 0x10 : Flags2 & ~0x10);
-    }
-
-    [Obsolete("Use WeaponSpan[0].IsHidden", true)]
-    public bool IsMainHandHidden {
-        get => (Weapon(WeaponSlot.MainHand).State & 0x02) == 0x02;
-        set => Weapon(WeaponSlot.MainHand).State = (byte)(value ? Weapon(WeaponSlot.MainHand).State | 0x02 : Weapon(WeaponSlot.MainHand).State & ~0x02);
-    }
-
-    [Obsolete("Use WeaponSpan[1].IsHidden", true)]
-    public bool IsOffHandHidden {
-        get => (Weapon(WeaponSlot.OffHand).State & 0x02) == 0x02;
-        set => Weapon(WeaponSlot.OffHand).State = (byte)(value ? Weapon(WeaponSlot.OffHand).State | 0x02 : Weapon(WeaponSlot.OffHand).State & ~0x02);
     }
 }
 

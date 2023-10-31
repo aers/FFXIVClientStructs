@@ -1,4 +1,3 @@
-using System.Text;
 using FFXIVClientStructs.FFXIV.Client.System.Memory;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
