@@ -96,7 +96,7 @@ public unsafe partial struct Utf8String : ICreatable, IDisposable {
     public partial void Clear();
 
     [MemberFunction("E9 ?? ?? ?? ?? 48 2B D8")]
-    public partial bool Equals(Utf8String* other);
+    public partial bool EqualsUtf8(Utf8String* other);
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B 57 ?? 84 C0"), GenerateCStrOverloads]
     public partial bool EqualsString(byte* other);
