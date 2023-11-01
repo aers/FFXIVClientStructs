@@ -40,16 +40,6 @@ public enum NodeFlags : ushort {
     UnkFlag2 = 0x8000
 }
 
-[Flags]
-public enum NodeViewFlags : uint {
-    IsDirty = 0x1,
-    // When a new label is set, the node isn't forced visible.
-    // This doesn't stop it from going invisible when the animation goes away.
-    DontMakeVisibleOnNewTimelineLabel = 0x100,
-
-    // bit 1 = has changes, ClipCount is bits 10-17, idk its a mess
-}
-
 // Component::GUI::AtkResNode
 //   Component::GUI::AtkEventTarget
 
@@ -109,9 +99,12 @@ public unsafe partial struct AtkResNode : ICreatable {
     // asm accesses these fields together so this is one 32bit field with priority+flags
     [FieldOffset(0x9C)] public ushort Priority;
     [FieldOffset(0x9E)] public NodeFlags NodeFlags;
-    [FieldOffset(0xA0), Obsolete("Use ViewFlags")] public uint Flags_2;
-    [FieldOffset(0xA0), Obsolete("Use ViewFlags")] public uint DrawFlags;
-    [FieldOffset(0xA0)] public NodeViewFlags ViewFlags;
+    /// <summary>
+    /// IsDirty = 0x1,
+    /// DontMakeVisibleOnNewTimelineLabel = 0x100,
+    /// bit 3 is recalculate scale/rotation
+    /// </summary>
+    [FieldOffset(0xA0)] public uint DrawFlags; // bit 1 = has changes, ClipCount is bits 10-17, idk its a mess
 
     public bool IsVisible => NodeFlags.HasFlag(NodeFlags.Visible);
 
