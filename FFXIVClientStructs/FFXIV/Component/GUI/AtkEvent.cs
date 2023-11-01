@@ -23,9 +23,16 @@ public enum AtkEventType : byte {
     ListItemToggle = 35,
 
     // AtkComponentDragDrop 
+    DragDropBegin = 47, // sent on MouseDown over a draggable icon (will NOT send for a locked icon)
+    DragDropInsert = 50, // sent when dropping an icon into a hotbar/inventory slot or similar
     DragDropRollOver = 52,
     DragDropRollOut = 53,
+    DragDropDiscard = 54, // sent when dropping an icon into empty screenspace, eg to remove an action from a hotbar
+    DragDropCancel = 55, // sent on MouseUp if the cursor has not moved since DragDropBegin, OR on MouseDown over a locked icon
+    
+    [Obsolete("Use AtkEventType.DragDropDiscard instead")]
     DragDropUnk54 = 54,
+    [Obsolete("Use AtkEventType.DragDropCancel instead")]
     DragDropUnk55 = 55,
 
     // AtkComponentIconText
