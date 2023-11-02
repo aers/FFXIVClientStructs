@@ -29,7 +29,7 @@ public enum AtkEventType : byte {
     DragDropRollOut = 53,
     DragDropDiscard = 54, // sent when dropping an icon into empty screenspace, eg to remove an action from a hotbar
     DragDropCancel = 55, // sent on MouseUp if the cursor has not moved since DragDropBegin, OR on MouseDown over a locked icon
-    
+
     [Obsolete("Use AtkEventType.DragDropDiscard instead")]
     DragDropUnk54 = 54,
     [Obsolete("Use AtkEventType.DragDropCancel instead")]
