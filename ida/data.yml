@@ -7923,7 +7923,7 @@ classes:
   Client::UI::AddonImage3:
     vtbls:
       - ea: 0x141B20A50
-        base: Client::UI::AddonImage
+        base:  Client::UI::AddonScreenInfoChild
   Client::UI::AddonPopUpText:
     vtbls:
       - ea: 0x141B11998
@@ -8782,7 +8782,7 @@ classes:
   Client::UI::AddonFGSCountDown:
     vtbls:
       - ea: 0x141B21230
-        base: Component::GUI::AtkUnitBase
+        base: Client::UI::AddonScreenInfoChild
     funcs:
       0x141154000: ctor
   Client::UI::AddonFGSEliminated:
