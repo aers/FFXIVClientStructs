@@ -30,12 +30,14 @@ public static class TypeExtensions {
             _ when type == typeof(long) || type == typeof(nint) => "__int64",
             _ when type == typeof(ushort) => "unsigned __int16",
             _ when type == typeof(uint) => "unsigned __int32",
-            _ when type == typeof(ulong) => "unsigned __int64",
+            _ when type == typeof(ulong) || type == typeof(nuint) => "unsigned __int64",
             _ when type == typeof(sbyte) => "signed __int8",
             _ when type == typeof(short*) => "__int16*",
             _ when type == typeof(ushort*) => "unsigned __int16*",
             _ when type == typeof(int*) => "__int32*",
             _ when type == typeof(uint*) => "unsigned __int32*",
+            _ when type == typeof(long*) || type == typeof(nint*) => "__int64*",
+            _ when type == typeof(ulong*) || type == typeof(nuint*) => "unsigned __int64*",
             _ when type == typeof(float*) => "float*",
             _ when type == typeof(Half) => "__int16", // Half is a struct that is 2 bytes long and does not exist in C so we just use __int16
             _ => unhandled(type)
