@@ -26,7 +26,7 @@ public unsafe partial struct RaptureLogModule {
     [FieldOffset(0x3480)] public int MsgSourceArrayLength;
 
     [MemberFunction("E8 ?? ?? ?? ?? 39 9E ?? ?? ?? ?? 7E 4B")]
-    public partial uint PrintMessage(ushort logKindId, Utf8String* senderName, Utf8String* message, int timestamp, bool a6 = false); // a6 has something to do with Linkshells
+    public partial uint PrintMessage(ushort logKindId, Utf8String* senderName, Utf8String* message, int timestamp, bool silent = false);
 
     [MemberFunction("E8 ?? ?? ?? ?? 44 03 FB")]
     public partial void ShowLogMessage(uint logMessageID);
