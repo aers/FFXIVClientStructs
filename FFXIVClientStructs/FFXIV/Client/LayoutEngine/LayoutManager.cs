@@ -23,7 +23,7 @@ public unsafe partial struct OutdoorAreaLayoutData {
 
     [FixedSizeArray<OutdoorPlotLayoutData>(60)]
     [FieldOffset(0x1F0)] public fixed byte Plot[60 * 0x1D0];
-    
+
     [MemberFunction("E8 ?? ?? ?? ?? 44 0F B6 0E 41 80 F9 FF")]
     public partial void SetFixture(uint plot, uint part, uint fixtureId);
 }
@@ -33,7 +33,7 @@ public unsafe partial struct OutdoorPlotLayoutData {
 
     [FixedSizeArray<OutdoorPlotFixtureData>(8)]
     [FieldOffset(0x28)] public fixed byte Fixture[8 * 0x28];
-    
+
     [MemberFunction("E9 ?? ?? ?? ?? 48 89 5C 24 ?? 48 8D 0C AD")]
     public partial void SetFixture(uint part, uint fixture, uint a4 = 0xFFFFFFFF);
 }
