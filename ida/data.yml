@@ -3642,7 +3642,7 @@ classes:
       17: SetHandlerFunction
       26: IsAddonReady
       39: SetUIVisibility
-      58: OnUpdate
+      58: Update
       63: OpenMapWithMapLink
     funcs:
       0x14056A6F0: ctor
