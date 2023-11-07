@@ -9,6 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //   Component::GUI::AtkModule
 //     Component::GUI::AtkModuleInterface
 [StructLayout(LayoutKind.Explicit, Size = 0x28F98)]
+[VTableAddress("33 C9 48 8D 05 ?? ?? ?? ?? 48 89 8F", 5)]
 public unsafe partial struct RaptureAtkModule {
     public static RaptureAtkModule* Instance() => UIModule.Instance()->GetRaptureAtkModule();
 
@@ -43,6 +44,9 @@ public unsafe partial struct RaptureAtkModule {
 
     [VirtualFunction(39)]
     public partial void SetUiVisibility(bool uiVisible);
+
+    [VirtualFunction(58)]
+    public partial void Update(float delta);
 
     public bool IsUiVisible {
         get => !RaptureAtkUnitManager.Flags.HasFlag(RaptureAtkModuleFlags.UiHidden);
