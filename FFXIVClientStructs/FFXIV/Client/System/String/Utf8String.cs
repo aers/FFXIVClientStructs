@@ -80,6 +80,13 @@ public unsafe partial struct Utf8String : ICreatable, IDisposable {
         if (free) IMemorySpace.Free((Utf8String*)Unsafe.AsPointer(ref this));
     }
 
+    public int ToInteger(int fromBase = 0) {
+        return ToInteger((Utf8String*)Unsafe.AsPointer(ref this), fromBase);
+    }
+
+    [MemberFunction("E8 ?? ?? ?? ?? 44 8B E0 BF")]
+    public static partial int ToInteger(Utf8String* value, int fromBase = 0); // base 0 = detect format (0x hex, 0b bin, 0o oct)
+
     [MemberFunction("E8 ?? ?? ?? ?? 44 2B F7")]
     public partial void Ctor();
 

@@ -762,6 +762,7 @@ classes:
       0x14005AFD0: AddChar
       0x14005BA30: Append
       0x14005CEA0: SetSize
+      0x140650330: ToInteger # strtoi for utf8string (str, base)
   Component::GUI::AtkValue:
     funcs:
       0x140507C80: dtor
