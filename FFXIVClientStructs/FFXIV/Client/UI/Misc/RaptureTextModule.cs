@@ -1,4 +1,5 @@
 using FFXIVClientStructs.FFXIV.Client.System.Framework;
+using FFXIVClientStructs.FFXIV.Component.Excel;
 using FFXIVClientStructs.FFXIV.Component.Text;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
@@ -10,6 +11,11 @@ public unsafe partial struct RaptureTextModule {
     public static RaptureTextModule* Instance() => Framework.Instance()->GetUiModule()->GetRaptureTextModule();
 
     [FieldOffset(0x00)] public TextModule TextModule;
+    [FieldOffset(0x510)] public void** ExecNonMacroFunc; // only a vtable
+    [FieldOffset(0x518)] public void** ExcelLanguageEvent; // only a vtable
+    [FieldOffset(0x520)] public UIModule* UiModule;
+    [FieldOffset(0x528)] public TextChecker TextChecker;
+    [FieldOffset(0x620)] public ExcelSheet* AddonSheet;
 
     [MemberFunction("E9 ?? ?? ?? ?? 80 EA 20")]
     public partial byte* GetAddonText(uint addonId);

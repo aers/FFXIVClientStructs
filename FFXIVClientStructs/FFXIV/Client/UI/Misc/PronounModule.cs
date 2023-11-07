@@ -2,6 +2,7 @@ using FFXIVClientStructs.FFXIV.Client.Game.Object;
 using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Component.Excel;
+using FFXIVClientStructs.FFXIV.Component.Text;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
@@ -19,7 +20,7 @@ public unsafe partial struct PronounModule {
     [FieldOffset(0xF0)] public Utf8String EncodedResult;
 
     [FieldOffset(0x290)] public GameObject* UiMouseOverTarget;
-    //[FieldOffset(0x298)] public TextChecker TextChecker;
+    [FieldOffset(0x298)] public TextChecker TextChecker;
     [FieldOffset(0x390)] public UIModule* UiModule;
 
     [VirtualFunction(1)]
