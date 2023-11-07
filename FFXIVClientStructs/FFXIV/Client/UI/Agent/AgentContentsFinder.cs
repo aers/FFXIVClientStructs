@@ -26,11 +26,11 @@ public unsafe partial struct AgentContentsFinder {
     [FixedSizeArray<ContentsRouletteRole>(11)]
     [FieldOffset(0x2007)] public fixed byte ContentRouletteRoleBonus[11];
 
-    [FieldOffset(0x2014)] public uint DutyPenaltyMinutes;
-    [FieldOffset(0x2018)] public uint UnkPenaltyMinutes;
+    [FieldOffset(0x2034)] public uint DutyPenaltyMinutes;
+    [FieldOffset(0x2038)] public uint UnkPenaltyMinutes;
 
-    [FieldOffset(0x204C)] public int CurrentTimestamp;
-    [FieldOffset(0x2058)] public byte SelectedTab;
+    [FieldOffset(0x206C)] public int CurrentTimestamp;
+    [FieldOffset(0x2078)] public byte SelectedTab;
 
     [MemberFunction("48 89 6C 24 ?? 48 89 74 24 ?? 57 48 81 EC ?? ?? ?? ?? 48 8B F9 41 0F B6 E8")]
     public partial void* OpenRegularDuty(uint contentsFinderCondition, byte a2 = 0);
