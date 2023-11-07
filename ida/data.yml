@@ -3562,6 +3562,8 @@ classes:
       - ea: 0x141A077D0
         base: Component::GUI::AtkEventListener
     vfuncs:
+      5: OnUldUpdate
+      7: OnUldDraw
       10: SetEnabledState
       14: GetAtkResNode
       17: InitializeFromComponentData
@@ -3609,12 +3611,20 @@ classes:
       - ea: 0x141A07BC8
         base: Component::GUI::AtkComponentBase
     vfuncs:
-      24: GetAtkComponentListItemRenderer # (this, listItemIndex)
+      25: GetItemRenderer
+      26: SetItemDisabledState
+      27: GetItemDisabledState
+      28: SetItemHighlightedState
+      29: GetItemHighlightedState
       31: SelectItem
       32: DeselectItem
       36: GetItemCount
+      45: GetSelectedItemAtkResNode
     funcs:
       0x140560DE0: ctor
+      0x14055B1F0: SetItemLabel
+      0x14055B2B0: GetItemLabel
+      0x140560500: DispatchItemEvent
   Component::GUI::AtkComponentTreeList:
     vtbls:
       - ea: 0x141A07D38
@@ -3695,6 +3705,10 @@ classes:
         base: Component::GUI::AtkComponentBase
     funcs:
       0x14057C7D0: ctor
+      0x14057C660: SelectItem
+      0x14057C720: DeselectItem
+      0x14057C740: GetSelectedItemIndex
+      0x14057DAD0: SetPreviewTextByIndex
   Component::GUI::AtkComponentRadioButton:
     vtbls:
       - ea: 0x141A08670
