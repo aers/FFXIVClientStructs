@@ -8538,6 +8538,12 @@ classes:
         0x1400A8C50: GetBarTarget # static (int mapValue, out bool useLeft) -> hotbarId
     funcs:
       0x141174C80: ctor
+  Client::UI::AddonActionCrossEditor:
+    vtbls:
+      - ea:  0x141AE9708
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140FD4DF0: ctor
   Client::UI::AddonActionContents:
     vtbls:
       - ea: 0x141B26FE0

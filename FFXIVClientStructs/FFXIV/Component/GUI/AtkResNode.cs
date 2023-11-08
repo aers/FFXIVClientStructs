@@ -101,6 +101,7 @@ public unsafe partial struct AtkResNode : ICreatable {
     [FieldOffset(0x9E)] public NodeFlags NodeFlags;
     /// <summary>
     /// <term>Bit 1 [0x1]</term> Is dirty (has updates to be drawn)<br/>
+    /// <term>Bit 2 [0x2]</term> Is undergoing timeline animation (?)<br/>
     /// <term>Bit 3 [0x4]</term> Calculate transformation<br/>
     /// <term>Bit 9 [0x100]</term> Don't make visible on new timeline label<br/>
     /// <term>Bits 10-17</term> ClipCount<br/>
