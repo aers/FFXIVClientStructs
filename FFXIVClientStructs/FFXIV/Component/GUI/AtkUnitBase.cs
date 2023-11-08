@@ -30,7 +30,6 @@ public unsafe partial struct AtkUnitBase {
     [FieldOffset(0x1D2)] public ushort ContextMenuParentID;
     [FieldOffset(0x1D5)] public byte Alpha;
     [FieldOffset(0x1D6)] public byte ShowHideFlags;
-
     [FieldOffset(0x1D8)]
     public AtkResNode**
         CollisionNodeList; // seems to be all collision nodes in tree, may be something else though
@@ -164,6 +163,9 @@ public unsafe partial struct AtkUnitBase {
 
     [VirtualFunction(43)]
     public partial void Draw();
+
+    [VirtualFunction(46)]
+    public partial void CheckWindowCollisionAtCoords(int x, int y, void* a4);
 
     [VirtualFunction(48)]
     public partial void OnSetup(uint a2, AtkValue* atkValues);

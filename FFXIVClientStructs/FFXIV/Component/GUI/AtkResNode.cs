@@ -100,11 +100,13 @@ public unsafe partial struct AtkResNode : ICreatable {
     [FieldOffset(0x9C)] public ushort Priority;
     [FieldOffset(0x9E)] public NodeFlags NodeFlags;
     /// <summary>
-    /// IsDirty = 0x1,
-    /// DontMakeVisibleOnNewTimelineLabel = 0x100,
-    /// bit 3 is recalculate scale/rotation
+    /// <term>Bit 1 [0x1]</term> Is dirty (has updates to be drawn)<br/>
+    /// <term>Bit 3 [0x4]</term> Calculate transformation<br/>
+    /// <term>Bit 9 [0x100]</term> Don't make visible on new timeline label<br/>
+    /// <term>Bits 10-17</term> ClipCount<br/>
+    /// <term>Bit 24 [0x800000]</term> Use elliptical collision instead of rectangular
     /// </summary>
-    [FieldOffset(0xA0)] public uint DrawFlags; // bit 1 = has changes, ClipCount is bits 10-17, idk its a mess
+    [FieldOffset(0xA0)] public uint DrawFlags;
 
     public bool IsVisible => NodeFlags.HasFlag(NodeFlags.Visible);
 
@@ -232,6 +234,9 @@ public unsafe partial struct AtkResNode : ICreatable {
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 83 C7 08 48 83 EB 01 75 DC")]
     public partial void ToggleVisibility(bool enable);
+    
+    [MemberFunction("E8 ?? ?? ?? ?? 45 33 F6 48 8D B3 48 05 00 00")]
+    public partial void SetAlpha(byte alpha);
 
     [MemberFunction("E8 ?? ?? ?? ?? 66 85 C0 75 48")]
     public partial ushort GetPriority();

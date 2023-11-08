@@ -1,11 +1,22 @@
 using FFXIVClientStructs.FFXIV.Client.UI.Misc;
+using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 [Addon("_ActionDoubleCrossL", "_ActionDoubleCrossR")]
 [StructLayout(LayoutKind.Explicit, Size = 0x2F8)]
-public struct AddonActionDoubleCrossBase {
+public unsafe partial struct AddonActionDoubleCrossBase {
     [FieldOffset(0x000)] public AddonActionBarBase ActionBarBase;
+
+    [FieldOffset(0x248)] public AtkResNode* ContainerNode;
+    [FieldOffset(0x250)] public AtkComponentNode* SlotContainerL;
+    [FieldOffset(0x258)] public AtkComponentNode* SlotContainerR;
+
+    [FixedSizeArray<AddonActionCross.HelpMessage>(4)]
+    [FieldOffset(0x260)] public fixed byte HotbarHelpL[4 * AddonActionCross.HelpMessage.Size];
+
+    [FixedSizeArray<AddonActionCross.HelpMessage>(4)]
+    [FieldOffset(0x2A0)] public fixed byte HotbarHelpR[4 * AddonActionCross.HelpMessage.Size];
 
     /// <summary>
     /// Indicates whether this bar is selected.
@@ -17,6 +28,10 @@ public struct AddonActionDoubleCrossBase {
     /// </summary>
     [FieldOffset(0x2E1)] public byte ShowDPadSlots;
 
+    [FieldOffset(0x2E2)] public bool AlwaysDisplay;
+    [FieldOffset(0x2E3)] public bool OtherBarSelected; // true if any bar other than this one is selected
+    [FieldOffset(0x2E4)] public bool DoubleTapDetected; // true if the currently-held trigger matches the previous trigger press.
+ 
     /// <summary>
     /// The ID of the hotbar in <see cref="RaptureHotbarModule"/> that this action bar is currently referencing.
     /// </summary>
