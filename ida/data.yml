@@ -759,6 +759,7 @@ classes:
       0x14005A4C0: EqualsString
       0x14005A500: NotEquals
       0x14005A550: NotEqualsString
+      0x14005C950: Compare
       0x14005AFD0: AddChar
       0x14005BA30: Append
       0x14005CEA0: SetSize
@@ -4123,6 +4124,7 @@ classes:
       - ea: 0x141A190B8
     funcs:
       0x14063F6A0: ctor
+      0x140642440: EncodeString
       0x140643520: EncodeMacro
       0x1406438A0: EncodeParameter
       0x140643310: ParseMacro
