@@ -17,8 +17,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 public unsafe partial struct UIModule {
     public static UIModule* Instance() => Framework.Instance()->GetUiModule();
 
-    [FieldOffset(0x0)] public void* vtbl;
-    [FieldOffset(0x0)] public void** vfunc;
+    // CExporterIgnore so it only exports the VTable from source generation
+    [FieldOffset(0x0), CExportIgnore] public void* vtbl;
+    [FieldOffset(0x0), CExportIgnore] public void** vfunc;
     [FieldOffset(0x8)] public void** AtkModuleEvent;
     [FieldOffset(0x10)] public void** ExcelLanguageEvent;
     [FieldOffset(0x18)] public ChangeEventInterface ChangeEventInterface;
