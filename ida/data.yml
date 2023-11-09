@@ -8689,6 +8689,180 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x140ED0C60: ctor
+  Client::UI::AddonJobHud:
+    vtbls: 
+      - ea: 0x141B28528
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1411807C0: ctor
+  Client::UI::AddonJobHudACN0:
+    vtbls: 
+      - ea: 0x141B2B5E8
+        base: Client::UI::AddonJobHud
+    funcs:
+      0x141194720: ctor
+  Client::UI::AddonJobHudAST0:
+    vtbls: 
+      - ea: 0x141B28830
+        base: Client::UI::AddonJobHud
+    funcs:
+      0x141182850: ctor
+  Client::UI::AddonJobHudBLM0:
+    vtbls: 
+      - ea: 0x141B28B38
+        base: Client::UI::AddonJobHud
+    funcs:
+      0x141185030: ctor
+  Client::UI::AddonJobHudBRD0:
+    vtbls: 
+      - ea: 0x141B28E40
+        base: Client::UI::AddonJobHud
+    funcs:
+      0x141187720: ctor
+  Client::UI::AddonJobHudDNC0:
+    vtbls: 
+      - ea: 0x141B2CB20
+        base: Client::UI::AddonJobHud
+    funcs:
+      0x14119C4C0: ctor
+  Client::UI::AddonJobHudDNC1:
+    vtbls: 
+      - ea: 0x141B2CE28
+        base: Client::UI::AddonJobHud
+    funcs:
+      0x14119D760: ctor
+  Client::UI::AddonJobHudDRG0:
+    vtbls: 
+      - ea: 0x141B29758
+        base: Client::UI::AddonJobHud
+    funcs:
+      0x14118A5C0: ctor
+  Client::UI::AddonJobHudDRK0:
+    vtbls: 
+      - ea: 0x141B29148
+        base: Client::UI::AddonJobHud
+    funcs:
+      0x141188530: ctor
+  Client::UI::AddonJobHudDRK1:
+    vtbls: 
+      - ea: 0x141B29450
+        base: Client::UI::AddonJobHud
+    funcs:
+      0x1411891E0: ctor
+  Client::UI::AddonJobHudGFF0: #SGE
+    vtbls: 
+      - ea: 0x141B2D740
+        base: Client::UI::AddonJobHud
+    funcs:
+      0x1411A0BD0: ctor
+  Client::UI::AddonJobHudGFF1: #SGE
+    vtbls: 
+      - ea: 0x141B2DA48
+        base: Client::UI::AddonJobHud
+    funcs:
+      0x1411A1BA0: ctor
+  Client::UI::AddonJobHudGNB0:
+    vtbls: 
+      - ea: 0x141B2C818
+        base: Client::UI::AddonJobHud
+    funcs:
+      0x14119B740: ctor
+  Client::UI::AddonJobHudMCH0:
+    vtbls: 
+      - ea: 0x141B29A60
+        base: Client::UI::AddonJobHud
+    funcs:
+      0x14118B700: ctor
+  Client::UI::AddonJobHudMNK0:
+    vtbls: 
+      - ea: 0x141B29D68
+        base: Client::UI::AddonJobHud
+    funcs:
+      0x14118CDF0: ctor
+  Client::UI::AddonJobHudMNK1:
+    vtbls: 
+      - ea: 0x141B2A070
+        base: Client::UI::AddonJobHud
+    funcs:
+      0x14118D9A0: ctor
+  Client::UI::AddonJobHudNIN0:
+    vtbls: 
+      - ea: 0x141B2A378
+        base: Client::UI::AddonJobHud
+    funcs:
+      0x14118E450: ctor
+  Client::UI::AddonJobHudNIN1:
+    vtbls: 
+      - ea: 0x141B2A680
+        base: Client::UI::AddonJobHud
+    funcs:
+      0x14118EE40: ctor
+  Client::UI::AddonJobHudPLD0:
+    vtbls: 
+      - ea: 0x141B2A988
+        base: Client::UI::AddonJobHud
+    funcs:
+      0x14118FEC0: ctor
+  Client::UI::AddonJobHudRDM0:
+    vtbls: 
+      - ea: 0x141B2AC90
+        base: Client::UI::AddonJobHud
+    funcs:
+      0x141191900: ctor
+  Client::UI::AddonJobHudRPR0:
+    vtbls: 
+      - ea: 0x141B2D130
+        base: Client::UI::AddonJobHud
+    funcs:
+      0x14119EE50: ctor
+  Client::UI::AddonJobHudRPR1:
+    vtbls: 
+      - ea: 0x141B2D438
+        base: Client::UI::AddonJobHud
+    funcs:
+      0x1411A05E0: ctor
+  Client::UI::AddonJobHudSAM0:
+    vtbls: 
+      - ea: 0x141B2AF98
+        base: Client::UI::AddonJobHud
+    funcs:
+      0x141193010: ctor
+  Client::UI::AddonJobHudSAM1:
+    vtbls: 
+      - ea: 0x141B2B2A0
+        base: Client::UI::AddonJobHud
+    funcs:
+      0x141193C60: ctor
+  Client::UI::AddonJobHudSCH0:
+    vtbls: 
+      - ea: 0x141B2B8F0
+        base: Client::UI::AddonJobHud
+    funcs:
+      0x1411959B0: ctor
+  Client::UI::AddonJobHudSMN0:
+    vtbls: 
+      - ea: 0x141B2BBF8
+        base: Client::UI::AddonJobHud
+    funcs:
+      0x1411964E0: ctor
+  Client::UI::AddonJobHudSMN1:
+    vtbls: 
+      - ea: 0x141B2BF00
+        base: Client::UI::AddonJobHud
+    funcs:
+      0x141198710: ctor
+  Client::UI::AddonJobHudWAR0:
+    vtbls: 
+      - ea: 0x141B2C208
+        base: Client::UI::AddonJobHud
+    funcs:
+      0x141199630: ctor
+  Client::UI::AddonJobHudWHM0:
+    vtbls: 
+      - ea: 0x141B2C510
+        base: Client::UI::AddonJobHud
+    funcs:
+      0x14119A6B0: ctor
   Client::UI::AddonLovmPaletteEdit:
     vtbls:
       - ea: 0x141B40400
