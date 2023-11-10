@@ -39,7 +39,7 @@ public unsafe partial struct InstanceContentOceanFishing {
     // these are only valid when Status is Finished
     [FieldOffset(0x2100)] public byte AllResultSize; 
     [FieldOffset(0x2101)] public byte LocalIndexInAllResult;
-    [FieldOffset(0x2104)] public IndividualResultStruct IndividualResult;
+    [FieldOffset(0x2102)] public IndividualResultStruct IndividualResult;
     [FieldOffset(0x2124)] public AllResultStruct LocalPlayerAllResult;
     [FixedSizeArray<AllResultStruct>(10)]
     [FieldOffset(0x214C)] public fixed byte AllResult[0x28 * 10];
