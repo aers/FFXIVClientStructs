@@ -76,11 +76,12 @@ public unsafe partial struct InstanceContentOceanFishing {
     [StructLayout(LayoutKind.Explicit, Size = 0x22)]
     public struct IndividualResultStruct {
         [FieldOffset(0x2)] public uint TotalPoints;
-        [FieldOffset(0xA)] public uint ExperiencePoint;
+        [FieldOffset(0xA)] public uint ExperiencePoints;
         // Script introduced in the last expansion
         [FieldOffset(0xE)] public ushort Script1;
         // Script that is introduced in this expansion
         [FieldOffset(0x10)] public ushort Script2;
+        // Each element is row id for IKDContentBonus
         [FieldOffset(0x12)] public fixed byte Bonuses[16];
     }
 
