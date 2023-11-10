@@ -11,7 +11,12 @@ public unsafe partial struct InstanceContentOceanFishing {
     // Each zone (and their time of day) can be extracted from sheet
     [FieldOffset(0x1CD0)] public uint CurrentRoute;
 
-    [FieldOffset(0x1CD8)] public byte CurrentZone; // 0, 1, 2
+    [FieldOffset(0x1CD4)] public OceanFishingStatus Status;
+
+    [FieldOffset(0x1CD8)] public uint CurrentZone; // 0, 1, 2
+
+    // It always is 420
+    [FieldOffset(0x1CDC)] public uint Duration;
 
     // InstanceContentDirector.ContentDirector.ContentTimeLeft - TimeOffset = time left in current zone
     // After changing zones, seems to tick down independent of the UI and then jump up
@@ -27,6 +32,13 @@ public unsafe partial struct InstanceContentOceanFishing {
     [FixedSizeArray<FishDataStruct>(60)]
     [FieldOffset(0x1D3C)] public fixed byte FishData[0x10 * 60];
 
+    // Offset can be found in this function "48 8D 81 ?? ?? ?? ?? B9 ?? ?? ?? ?? 0F 1F 40 ?? 48 8D 80"
+    // It only has correct data when Status == 4
+    [FieldOffset(0x2100)] public IndividualResultStruct IndividualResult;
+    // It only has correct data when Status == 4
+    [FixedSizeArray<AllResultStruct>(11)]
+    [FieldOffset(0x2124)] public fixed byte AllResult[0x28 * 11];
+
     // Row ID for IKDPlayerMissionCondition sheet
     // Description and required amount can be extracted from sheet
     [FieldOffset(0x22E0)] public uint Mission1Type;
@@ -38,13 +50,41 @@ public unsafe partial struct InstanceContentOceanFishing {
     [FieldOffset(0x22EE)] public ushort Mission2Progress;
     [FieldOffset(0x22F0)] public ushort Mission3Progress;
 
+
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct FishDataStruct {
         [FieldOffset(0x0)] public uint ItemId;
         // Row id for IKDFishParam sheet, can be used to retrieve fish type like jellyfish, seahorse etc.
         [FieldOffset(0x4)] public ushort FishParamId;
         [FieldOffset(0x6)] public ushort NqAmount;
-        [FieldOffset(0x8)] public uint HqAmount;
-        [FieldOffset(0xC)] public uint TotalScore;
+        [FieldOffset(0x8)] public ushort HqAmount;
+        [FieldOffset(0xC)] public uint TotalPoints;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x28)]
+    public struct AllResultStruct {
+        [FieldOffset(0x0)] public ushort WorldId;
+        [FieldOffset(0x2)] public ushort CaughtFish;
+        [FieldOffset(0x4)] public ushort TotalPoint;
+        [FieldOffset(0x8)] public fixed byte PlayerName[32];
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x24)]
+    public struct IndividualResultStruct {
+        [FieldOffset(0x4)] public uint TotalPoint;
+        [FieldOffset(0xC)] public uint ExperiencePoint;
+        // Script introduced in the last expansion
+        [FieldOffset(0x10)] public ushort Script1;
+        // Script that is introduced in this expansion
+        [FieldOffset(0x12)] public ushort Script2;
+        [FieldOffset(0x14)] public fixed byte Bonuses[16];
+    }
+
+    public enum OceanFishingStatus : uint {
+        WaitingForPlayers = 0,
+        SwitchingZone = 1,
+        Fishing = 2,
+        EnteringNewZone = 3,
+        Finished = 4,
     }
 }
