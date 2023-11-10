@@ -1,11 +1,13 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
 
 // ctor (2023.07.06.0000.0000):
-// E9 ?? ?? ?? ?? 3D ?? ?? ?? ?? 0F 87 ?? ?? ?? ?? 3D ?? ?? ?? ?? 0F 83 ?? ?? ?? ?? 05 ?? ?? ?? ?? 83 F8 05
+// 40 53 48 83 EC ?? 48 8B D9 E8 ?? ?? ?? ?? C6 83 ?? ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 03 48 8D 05 ?? ?? ?? ?? 48 89 83 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 83 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 83 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 83 ?? ?? ?? ?? 33 C0
 // has id >63000 in InstanceContent sheet
 [StructLayout(LayoutKind.Explicit, Size = 0x1CA8 + 0x650)]
 public unsafe partial struct InstanceContentOceanFishing {
     [FieldOffset(0x0)] public InstanceContentDirector InstanceContentDirector;
+
+    // Most of the fields, if not specified, can be found in "83 FA ?? 0F 87 ?? ?? ?? ?? 48 89 5C 24 ?? 57 48 83 EC ?? 48 8B 05"
 
     // Row ID for IKDRoute sheet
     // Each zone (and their time of day) can be extracted from sheet
@@ -32,12 +34,15 @@ public unsafe partial struct InstanceContentOceanFishing {
     [FixedSizeArray<FishDataStruct>(60)]
     [FieldOffset(0x1D3C)] public fixed byte FishData[0x10 * 60];
 
-    // Offset can be found in this function "48 8D 81 ?? ?? ?? ?? B9 ?? ?? ?? ?? 0F 1F 40 ?? 48 8D 80"
-    // It only has correct data when Status == 4
-    [FieldOffset(0x2100)] public IndividualResultStruct IndividualResult;
-    // It only has correct data when Status == 4
-    [FixedSizeArray<AllResultStruct>(11)]
-    [FieldOffset(0x2124)] public fixed byte AllResult[0x28 * 11];
+    // the function that sets the data -> "48 8D 81 ?? ?? ?? ?? B9 ?? ?? ?? ?? 0F 1F 40 ?? 48 8D 80"
+    // Offsets can be found with "48 89 5C 24 ? 48 89 74 24 ? 57 48 81 EC ? ? ? ? 48 8B 05 ? ? ? ? 48 33 C4 48 89 84 24 ? ? ? ? 48 8B F1 48 8D 4C 24"
+    // these are only valid when Status is Finished
+    [FieldOffset(0x2100)] public byte AllResultSize; 
+    [FieldOffset(0x2101)] public byte LocalIndexInAllResult;
+    [FieldOffset(0x2104)] public IndividualResultStruct IndividualResult;
+    [FieldOffset(0x2124)] public AllResultStruct LocalPlayerAllResult;
+    [FixedSizeArray<AllResultStruct>(10)]
+    [FieldOffset(0x214C)] public fixed byte AllResult[0x28 * 10];
 
     // Row ID for IKDPlayerMissionCondition sheet
     // Description and required amount can be extracted from sheet
@@ -49,7 +54,6 @@ public unsafe partial struct InstanceContentOceanFishing {
     [FieldOffset(0x22EC)] public ushort Mission1Progress;
     [FieldOffset(0x22EE)] public ushort Mission2Progress;
     [FieldOffset(0x22F0)] public ushort Mission3Progress;
-
 
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct FishDataStruct {
@@ -65,26 +69,26 @@ public unsafe partial struct InstanceContentOceanFishing {
     public struct AllResultStruct {
         [FieldOffset(0x0)] public ushort WorldId;
         [FieldOffset(0x2)] public ushort CaughtFish;
-        [FieldOffset(0x4)] public ushort TotalPoint;
+        [FieldOffset(0x4)] public ushort TotalPoints;
         [FieldOffset(0x8)] public fixed byte PlayerName[32];
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 0x24)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x22)]
     public struct IndividualResultStruct {
-        [FieldOffset(0x4)] public uint TotalPoint;
-        [FieldOffset(0xC)] public uint ExperiencePoint;
+        [FieldOffset(0x2)] public uint TotalPoints;
+        [FieldOffset(0xA)] public uint ExperiencePoint;
         // Script introduced in the last expansion
-        [FieldOffset(0x10)] public ushort Script1;
+        [FieldOffset(0xE)] public ushort Script1;
         // Script that is introduced in this expansion
-        [FieldOffset(0x12)] public ushort Script2;
-        [FieldOffset(0x14)] public fixed byte Bonuses[16];
+        [FieldOffset(0x10)] public ushort Script2;
+        [FieldOffset(0x12)] public fixed byte Bonuses[16];
     }
 
     public enum OceanFishingStatus : uint {
         WaitingForPlayers = 0,
         SwitchingZone = 1,
         Fishing = 2,
-        EnteringNewZone = 3,
+        NewZone = 3,
         Finished = 4,
     }
 }
