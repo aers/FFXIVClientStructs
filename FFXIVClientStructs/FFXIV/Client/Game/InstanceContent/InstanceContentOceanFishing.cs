@@ -15,7 +15,8 @@ public unsafe partial struct InstanceContentOceanFishing {
 
     [FieldOffset(0x1CD4)] public OceanFishingStatus Status;
 
-    [FieldOffset(0x1CD8)] public uint CurrentZone; // 0, 1, 2
+    // this should be uint, byte should be ok too since it only has 3 zones
+    [FieldOffset(0x1CD8)] public byte CurrentZone; // 0, 1, 2
 
     // It always is 420
     [FieldOffset(0x1CDC)] public uint Duration;
@@ -78,9 +79,9 @@ public unsafe partial struct InstanceContentOceanFishing {
         [FieldOffset(0x2)] public uint TotalPoints;
         [FieldOffset(0xA)] public uint ExperiencePoints;
         // Script introduced in the last expansion
-        [FieldOffset(0xE)] public ushort Script1;
+        [FieldOffset(0xE)] public ushort Script1Amount;
         // Script that is introduced in this expansion
-        [FieldOffset(0x10)] public ushort Script2;
+        [FieldOffset(0x10)] public ushort Script2Amount;
         // Each element is row id for IKDContentBonus
         [FieldOffset(0x12)] public fixed byte Bonuses[16];
     }
