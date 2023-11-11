@@ -15,7 +15,7 @@ public unsafe partial struct InstanceContentOceanFishing {
 
     [FieldOffset(0x1CD4)] public OceanFishingStatus Status;
 
-    // this should be uint, byte should be ok too since it only has 3 zones
+    // this should be uint, byte should be fine too since it only has 3 zones
     [FieldOffset(0x1CD8)] public byte CurrentZone; // 0, 1, 2
 
     // It always is 420
@@ -34,6 +34,11 @@ public unsafe partial struct InstanceContentOceanFishing {
     // Array size can be found with "83 FF ?? 72 ?? 4C 8B 74 24 ?? 49 8D 9F"
     [FixedSizeArray<FishDataStruct>(60)]
     [FieldOffset(0x1D3C)] public fixed byte FishData[0x10 * 60];
+
+    // The first 10 of them are normal fish, the rest are spectral fish
+    public Span<FishDataStruct> FirstZoneFishData => FishDataSpan.Slice(0, 20);
+    public Span<FishDataStruct> SecondZoneFishData => FishDataSpan.Slice(20, 20);
+    public Span<FishDataStruct> ThirdZoneFishData => FishDataSpan.Slice(40, 20);
 
     // the function that sets the data -> "48 8D 81 ?? ?? ?? ?? B9 ?? ?? ?? ?? 0F 1F 40 ?? 48 8D 80"
     // Offsets can be found with "48 89 5C 24 ? 48 89 74 24 ? 57 48 81 EC ? ? ? ? 48 8B 05 ? ? ? ? 48 33 C4 48 89 84 24 ? ? ? ? 48 8B F1 48 8D 4C 24"
