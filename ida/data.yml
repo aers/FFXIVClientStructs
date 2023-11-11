@@ -2294,16 +2294,16 @@ classes:
         base: Client::Network::Protocol::Chat::PacketReceiverCallbackInterface
     funcs:
       0x14149A120: HandleSocialPacket
-#fail       0x14140FFF0: HandleMarketBoardOfferingsPacket
+      0x14149D780: HandleMarketBoardOfferingsPacket
       0x14149D840: HandleMarketBoardPurchasePacket
-#fail       0x141410B50: HandleMarketBoardHistoryPacket
+      0x14149E2E0: HandleMarketBoardHistoryPacket
       0x14149D6E0: HandleMarketBoardItemRequestStartPacket
   Client::Network::NetworkModulePacketReceiverCallback: # derives Application::Network::PacketReceiverCallbackInterface & Client::Network::PacketDispatcher
     vtbls:
       - ea: 0x1419DC710
         base: Application::Network::PacketReceiverCallbackInterface
       - ea: 0x1419DC728
-        base: Client::Network::Protocol::Zone::PacketReceiverCallbackInterface
+        base: Client::Network::PacketDispatcher #Client::Network::Protocol::Zone::PacketReceiverCallbackInterface
       - ea: 0x1419DC738
         base: Client::Network::Protocol::Chat::PacketReceiverCallbackInterface
   Client::UI::Agent::AgentInterface:
@@ -7277,7 +7277,7 @@ classes:
       - ea: 0x141C3CF90
         base: Client::Game::InstanceContent::ContentDirector
     funcs:
-#fail       0x1414305B0: HandleEnterContentInfoPacket  # static
+      0x1414BB710: HandleEnterContentInfoPacket  # static
   Client::UI::PopupMenu:
     vtbls:
       - ea: 0x141A99D98
