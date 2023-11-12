@@ -14,9 +14,9 @@ public unsafe partial struct AddonJobHudSAM0 {
     [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public partial struct KenkiGaugeData {
         [FieldOffset(0x00)] public AddonJobHudGaugeData GaugeData;
-        [FieldOffset(0x08)] public bool Visible;
+        [FieldOffset(0x08)] public bool Prereq08;
         [FieldOffset(0x09)] public bool Prereq09;
-        [FieldOffset(0x0A)] public bool CanUseMeditate;
+        [FieldOffset(0x0A)] public bool Prereq0A;
         [FieldOffset(0x0C)] public int MeditationStackCount;
         [FieldOffset(0x10)] public int KenkiValue;
         [FieldOffset(0x14)] public int KenkiMax;
@@ -28,7 +28,7 @@ public unsafe partial struct AddonJobHudSAM0 {
 
         [FieldOffset(0x10)] public AtkResNode* KenkiContainer;
         [FieldOffset(0x18)] public AtkTextNode* KenkiValueText;
-        [FieldOffset(0x20)] public AtkImageNode* KenkiBar;
+        [FieldOffset(0x20)] public AtkImageNode* KenkiBarFill;
         [FieldOffset(0x28)] public AtkImageNode* KenkiBarGain;
         [FieldOffset(0x30)] public AtkImageNode* KenkiBarLoss;
         [FieldOffset(0x38)] public AtkComponentBase* KenkiMarker;
@@ -94,7 +94,7 @@ public unsafe partial struct AddonJobHudSAM1 {
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public partial struct SenGaugeData {
         [FieldOffset(0x00)] public AddonJobHudGaugeData GaugeData;
-        [FieldOffset(0x08)] public bool Visible;
+        [FieldOffset(0x08)] public bool Prereq08;
         [FieldOffset(0x09)] public bool HasSetsu;
         [FieldOffset(0x0A)] public bool HasGetsu;
         [FieldOffset(0x0B)] public bool HasKa;

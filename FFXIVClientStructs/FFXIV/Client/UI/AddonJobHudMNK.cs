@@ -70,7 +70,7 @@ public unsafe partial struct AddonJobHudMNK1 {
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public partial struct ChakraGaugeData {
         [FieldOffset(0x00)] public AddonJobHudGaugeData GaugeData;
-        [FieldOffset(0x08)] public bool Visible;
+        [FieldOffset(0x08)] public bool Prereq08;
         [FieldOffset(0x0C)] public int ChakraCount;
     }
 

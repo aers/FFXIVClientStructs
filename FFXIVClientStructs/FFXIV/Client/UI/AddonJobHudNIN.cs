@@ -14,7 +14,7 @@ public unsafe partial struct AddonJobHudNIN0 {
     [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public partial struct NinkiGaugeData {
         [FieldOffset(0x00)] public AddonJobHudGaugeData GaugeData;
-        [FieldOffset(0x08)] public bool Visible;
+        [FieldOffset(0x08)] public bool Prereq08;
         [FieldOffset(0x0C)] public int NinkiValue;
         [FieldOffset(0x10)] public int Max; // 100
         [FieldOffset(0x14)] public int Mid; // 50
@@ -58,7 +58,7 @@ public unsafe partial struct AddonJobHudNIN1 {
     public partial struct HutonGaugeData {
         [FieldOffset(0x00)] public AddonJobHudGaugeData GaugeData;
         [FieldOffset(0x08)] public bool IsActive;
-        [FieldOffset(0x09)] public bool Visible;
+        [FieldOffset(0x09)] public bool Prereq09;
         [FieldOffset(0x0C)] public int TimeLeft; // in ms
         [FieldOffset(0x10)] public int MaxTime;  // 60,000 ms
         [FieldOffset(0x14)] public int ManualCasts;

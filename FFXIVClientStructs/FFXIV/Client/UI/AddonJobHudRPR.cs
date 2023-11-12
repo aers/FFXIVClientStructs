@@ -35,14 +35,14 @@ public unsafe partial struct AddonJobHudRRP0 {
         [FieldOffset(0x20)] public AtkComponentBase* SoulMarker;
         [FieldOffset(0x28)] public AtkResNode* SoulBarOutline;
         [FieldOffset(0x30)] public AtkResNode* SoulBarEffects;
-        [FieldOffset(0x38)] public AtkImageNode* SoulBar;
+        [FieldOffset(0x38)] public AtkImageNode* SoulBarFill;
         [FieldOffset(0x40)] public AtkImageNode* SoulBarGain;
         [FieldOffset(0x48)] public AtkImageNode* SoulBarLoss;
         [FieldOffset(0x80)] public AtkComponentBase* SoulTextContainer;
         [FieldOffset(0x88)] public AtkComponentBase* ShroudMarker;
         [FieldOffset(0x90)] public AtkResNode* ShroudBarOutline;
         [FieldOffset(0x98)] public AtkResNode* ShroudBarEffects;
-        [FieldOffset(0xA0)] public AtkImageNode* ShroudBar;
+        [FieldOffset(0xA0)] public AtkImageNode* ShroudBarFill;
         [FieldOffset(0xA8)] public AtkImageNode* ShroudBarGain;
         [FieldOffset(0xB0)] public AtkImageNode* ShroudBarLoss;
         [FieldOffset(0xE8)] public AtkComponentBase* ShroudTextContainer;

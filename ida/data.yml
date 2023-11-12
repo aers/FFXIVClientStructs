@@ -3446,6 +3446,9 @@ classes:
       0x14052AD60: GetTimelineFrameIdx
       0x14052ABB0: EnableTimeline
       0x14052ABD0: DisableTimeline
+      0x14052AC70: SetTimelineFrameAnimated # sets FrameTime from int, enables animation flag
+      0x14052ACF0: SetTimelineFrame # sets FrameTime from int, disables animation flag, calls UpdateChildAnimationStates
+      0x14052ADF0: GetTimelineStartFrameIdx
   Component::GUI::AtkImageNode:
     vtbls:
       - ea: 0x141A07478
@@ -3662,6 +3665,10 @@ classes:
         base: Component::GUI::AtkComponentBase
     funcs:
       0x14056F640: ctor
+      0x14056F200: SetMinValue
+      0x14056F240: SetMaxValue
+      0x14056F280: SetGaugeValue1 # checks various conditions and then proceeds to 2
+      0x140571330: SetGaugeValue2 # directly sets value and sets the text node number
   Component::GUI::AtkComponentSlider:
     vtbls:
       - ea: 0x141A082C8
@@ -3719,6 +3726,10 @@ classes:
         base: Component::GUI::AtkComponentBase
     funcs:
       0x14057EF20: ctor
+      0x14057F140: SetText
+      0x14057F180: SetNumber
+      0x14057F1D0: UpdateX
+      0x14057F230: UpdateDimensions
   Component::GUI::AtkResourceRendererBase:
     vtbls:
       - ea: 0x141A089D0
@@ -8695,12 +8706,13 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1411807C0: ctor
+      0x141180980: UpdateAtkArrayData
     vfuncs:
         60: UpdateGaugeType
         72: InitializePointers
         74: UpdateVisibility
-        76: UpdateVisibility2 # exactly the same as 74 but only exists on ACN0
         75: SetTimeLineLabelDefaults
+        76: UpdateVisibility2 # exactly the same as 74 but only exists on ACN0
         77: ChangeGaugeType
         78: UpdateGaugeData
   Client::UI::AddonJobHud::AddonJobHudGaugeData:
@@ -8755,12 +8767,19 @@ classes:
         base: Client::UI::AddonJobHud::AddonJobHudGauge
     funcs:
         0x141181340: ctor
+        0x141181830: OnRequestedUpdate_1
+        0x141181C20: OnRequestedUpdate_2
   Client::UI::AddonJobHudAST0::ArcanaGaugeSimple:
     vtbls: 
       - ea: 0x141B287F0
         base: Client::UI::AddonJobHud::AddonJobHudGauge
     funcs:
         0x141181DF0: ctor
+        0x1411822F0: OnRequestedUpdate_1
+        0x141182680: OnRequestedUpdate_2
+  Client::UI::AddonJobHudAST0::Astrosign:
+    funcs:
+        0x1411811C0: OnRequestedUpdate
   Client::UI::AddonJobHudBLM0:
     vtbls: 
       - ea: 0x141B28B38
@@ -8777,12 +8796,19 @@ classes:
         base: Client::UI::AddonJobHud::AddonJobHudGauge
     funcs:
         0x141182B30: ctor
+        0x141183F60: Update_1
+        0x1411833C0: OnRequestedUpdate1
+        0x1411839A0: OnRequestedUpdate2
+        0x141183BA0: OnRequestedUpdate3
+        0x141183E50: OnRequestedUpdate4
   Client::UI::AddonJobHudBLM0::ElementalGaugeSimple:
     vtbls: 
       - ea: 0x141B28AF8
         base: Client::UI::AddonJobHud::AddonJobHudGauge
     funcs:
         0x141184090: ctor
+        0x141184810: OnRequestedUpdate_1
+        0x141184CC0: OnRequestedUpdate_2
   Client::UI::AddonJobHudBRD0:
     vtbls: 
       - ea: 0x141B28E40
@@ -8799,12 +8825,24 @@ classes:
         base: Client::UI::AddonJobHud::AddonJobHudGauge
     funcs:
       0x141185350: ctor
+      0x1411859F0: OnRequestedUpdate_1
+      0x141185A80: OnRequestedUpdate_2
+      0x141185BB0: OnRequestedUpdate_3
+      0x141185CE0: OnRequestedUpdate_4
+      0x1411860D0: OnRequestedUpdate_5
+      0x1411862B0: OnRequestedUpdate_6
   Client::UI::AddonJobHudBRD0::SongGaugeSimple:
     vtbls: 
       - ea: 0x141B28E00
         base: Client::UI::AddonJobHud::AddonJobHudGauge
     funcs:
       0x1411865B0: ctor
+      0x141186C30: OnRequestedUpdate_1
+      0x141186CB0: OnRequestedUpdate_2
+      0x141186DA0: OnRequestedUpdate_3
+      0x141186ED0: OnRequestedUpdate_4
+      0x141187290: OnRequestedUpdate_5
+      0x141187420: OnRequestedUpdate_6
   Client::UI::AddonJobHudDNC0:
     vtbls: 
       - ea: 0x141B2CB20
@@ -8819,10 +8857,16 @@ classes:
     vtbls: 
       - ea: 0x141B2CAA0
         base: Client::UI::AddonJobHud::AddonJobHudGauge
+    funcs:
+        0x14119BCE0: OnRequestedUpdate_1
+        0x14119BEC0: OnRequestedUpdate_2
   Client::UI::AddonJobHudDNC0::StepGaugeSimple:
     vtbls: 
       - ea: 0x141B2CAE0
         base: Client::UI::AddonJobHud::AddonJobHudGauge
+    funcs:
+        0x14119C240: OnRequestedUpdate_1
+        0x14119C3F0: OnRequestedUpdate_2
   Client::UI::AddonJobHudDNC1:
     vtbls: 
       - ea: 0x141B2CE28
@@ -8837,10 +8881,19 @@ classes:
     vtbls: 
       - ea: 0x141B2CDA8
         base: Client::UI::AddonJobHud::AddonJobHudGauge
+    funcs:
+        0x14119CC70: OnRequestedUpdate_1
+        0x14119CD80: OnRequestedUpdate_2
+        0x14119CF60: Update_1
+        0x14119CBF0: Update_2
   Client::UI::AddonJobHudDNC1::FeatherGaugeSimple:
     vtbls: 
       - ea: 0x141B2CDE8
         base: Client::UI::AddonJobHud::AddonJobHudGauge
+    funcs:
+        0x14119D4E0: OnRequestedUpdate_1
+        0x14119D640: OnRequestedUpdate_2
+        0x14119D460: Update_1
   Client::UI::AddonJobHudDRG0:
     vtbls: 
       - ea: 0x141B29758
@@ -8883,10 +8936,17 @@ classes:
     vtbls: 
       - ea: 0x141B290C8
         base: Client::UI::AddonJobHud::AddonJobHudGauge
+    funcs:
+        0x141187C70: OnRequestedUpdate_1
+        0x141187D40: OnRequestedUpdate_2
   Client::UI::AddonJobHudDRK0::BloodGaugeSimple:
     vtbls: 
       - ea: 0x141B29108
         base: Client::UI::AddonJobHud::AddonJobHudGauge
+    funcs:
+        0x1411881A0: OnRequestedUpdate_1
+        0x141188290: OnRequestedUpdate_2
+        0x141188470: OnRequestedUpdate_3
   Client::UI::AddonJobHudDRK1:
     vtbls: 
       - ea: 0x141B29450
@@ -8901,10 +8961,18 @@ classes:
     vtbls: 
       - ea: 0x141B293D0
         base: Client::UI::AddonJobHud::AddonJobHudGauge
+    funcs:
+        0x141188A70: OnRequestedUpdate_1
+        0x141188B80: OnRequestedUpdate_2
+        0x141188C20: OnRequestedUpdate_3
   Client::UI::AddonJobHudDRK1::DarksideGaugeSimple:
     vtbls: 
       - ea: 0x141B29410
         base: Client::UI::AddonJobHud::AddonJobHudGauge
+    funcs:
+        0x141188FA0: OnRequestedUpdate_1
+        0x141189030: OnRequestedUpdate_2
+        0x141189150: OnRequestedUpdate_3
   Client::UI::AddonJobHudGFF0: #SGE
     vtbls: 
       - ea: 0x141B2D740
@@ -8937,10 +9005,21 @@ classes:
     vtbls: 
       - ea: 0x141B2D9C8
         base: Client::UI::AddonJobHud::AddonJobHudGauge
+    funcs:
+        0x1411A10A0: Update_1
+        0x1411A11E0: OnRequestedUpdate_1
+        0x1411A1370: OnRequestedUpdate_2
+        0x1411A1120: Reset_1
   Client::UI::AddonJobHudGFF1::AddersgallGaugeSimple:
     vtbls: 
       - ea: 0x141B2DA08
         base: Client::UI::AddonJobHud::AddonJobHudGauge
+    funcs:
+        0x1411A1710: Update_1
+        0x1411A1880: OnRequestedUpdate_1
+        0x1411A1A30: OnRequestedUpdate_2
+        0x1411807A0: OnRequestedUpdate_3
+        0x1411A1790: Reset_1
   Client::UI::AddonJobHudGNB0:
     vtbls: 
       - ea: 0x141B2C818
@@ -8955,10 +9034,16 @@ classes:
     vtbls: 
       - ea: 0x141B2C798
         base: Client::UI::AddonJobHud::AddonJobHudGauge
+    funcs:
+        0x14119AF00: OnRequestedUpdate_1
+        0x14119ADB0: Update_1
   Client::UI::AddonJobHudGNB0::PowderGaugeSimple:
     vtbls: 
       - ea: 0x141B2C7D8
         base: Client::UI::AddonJobHud::AddonJobHudGauge
+    funcs:
+        0x14119B4E0: OnRequestedUpdate_1
+        0x14119B580: OnRequestedUpdate_2
   Client::UI::AddonJobHudMCH0:
     vtbls: 
       - ea: 0x141B29A60
@@ -8973,10 +9058,18 @@ classes:
     vtbls: 
       - ea: 0x141B299E0
         base: Client::UI::AddonJobHud::AddonJobHudGauge
+    funcs:
+        0x14118AC10: OnRequestedUpdate_1
+        0x14118ADC0: OnRequestedUpdate_2
+        0x14118AF50: OnRequestedUpdate_3
   Client::UI::AddonJobHudMCH0::HeatGaugeSimple:
     vtbls: 
       - ea: 0x141B29A20
         base: Client::UI::AddonJobHud::AddonJobHudGauge
+    funcs:
+        0x14118B340: OnRequestedUpdate_1
+        0x14118B4F0: OnRequestedUpdate_2
+        0x14118B680: OnRequestedUpdate_3
   Client::UI::AddonJobHudMNK0:
     vtbls: 
       - ea: 0x141B29D68
@@ -9082,10 +9175,17 @@ classes:
     vtbls: 
       - ea: 0x141B2A908
         base: Client::UI::AddonJobHud::AddonJobHudGauge
+    funcs:
+        0x14118F470: OnRequestedUpdate_1
+        0x14118F510: OnRequestedUpdate_2
+        0x14118F6B0: OnRequestedUpdate_3
   Client::UI::AddonJobHudPLD0::OathGaugeSimple:
     vtbls: 
       - ea: 0x141B2A948
         base: Client::UI::AddonJobHud::AddonJobHudGauge
+    funcs:
+        0x14118FC20: OnRequestedUpdate_1
+        0x14118FDE0: OnRequestedUpdate_2
   Client::UI::AddonJobHudRDM0:
     vtbls: 
       - ea: 0x141B2AC90
@@ -9102,12 +9202,26 @@ classes:
         base: Client::UI::AddonJobHud::AddonJobHudGauge
     funcs:
       0x1411902B0: ctor
+      0x1411909B0: OnRequestedUpdate_1
+      0x141190B00: OnRequestedUpdate_2
+      0x141190BD0: OnRequestedUpdate_3
+      0x141190E00: OnRequestedUpdate_4
+      0x141190EA0: Update_1
+  Client::UI::AddonJobHudRDM0::BalanceGauge::ManaBar:
+    funcs:
+      0x141190160: OnSetup
+      0x1411901D0: Update
   Client::UI::AddonJobHudRDM0::BalanceGaugeSimple:
     vtbls: 
       - ea: 0x141B2AC50
         base: Client::UI::AddonJobHud::AddonJobHudGauge
     funcs:
       0x141190F70: ctor
+      0x141191400: OnRequestedUpdate_1
+      0x1411914A0: OnRequestedUpdate_2
+      0x141191550: OnRequestedUpdate_3
+      0x1411916B0: OnRequestedUpdate_4
+      0x141191750: OnRequestedUpdate_5
   Client::UI::AddonJobHudRRP0:
     vtbls: 
       - ea: 0x141B2D130
@@ -9237,10 +9351,18 @@ classes:
     vtbls: 
       - ea: 0x141B2B870
         base: Client::UI::AddonJobHud::AddonJobHudGauge
+    funcs:
+        0x141194DB0: Update_1
+        0x141194EE0: OnRequestedUpdate_1
+        0x141195140: OnRequestedUpdate_2
+        0x141195310: OnRequestedUpdate_3
   Client::UI::AddonJobHudSCH0::FaerieGaugeSimple:
     vtbls: 
       - ea: 0x141B2B8B0
         base: Client::UI::AddonJobHud::AddonJobHudGauge
+    funcs:
+        0x141195700: OnRequestedUpdate_1
+        0x141195770: OnRequestedUpdate_2
   Client::UI::AddonJobHudSMN0:
     vtbls: 
       - ea: 0x141B2BBF8
@@ -9255,10 +9377,16 @@ classes:
     vtbls: 
       - ea: 0x141B2BB78
         base: Client::UI::AddonJobHud::AddonJobHudGauge
+    funcs:
+        0x141196040: Update_1
+        0x141195F40: OnRequestedUpdate_1
   Client::UI::AddonJobHudSMN0::AetherflowSMNGaugeSimple:
     vtbls: 
       - ea: 0x141B2BBB8
         base: Client::UI::AddonJobHud::AddonJobHudGauge
+    funcs:
+        0x141196470: Update_1
+        0x141196370: OnRequestedUpdate_1
   Client::UI::AddonJobHudSMN1:
     vtbls: 
       - ea: 0x141B2BF00
@@ -9275,10 +9403,28 @@ classes:
         base: Client::UI::AddonJobHud::AddonJobHudGauge
     funcs:
       0x141196790: ctor
+      0x141197570: Update_1
+      0x141196BF0: Reset_1
+      0x141196D70: OnRequestedUpdate_1
+      0x141197140: OnRequestedUpdate_2
+  Client::UI::AddonJobHudSMN1::TranceGauge::EgiGauge:
+    funcs:
+        0x141197680: OnRequestedUpdate
   Client::UI::AddonJobHudSMN1::TranceGaugeSimple:
     vtbls: 
       - ea: 0x141B2BEC0
         base: Client::UI::AddonJobHud::AddonJobHudGauge
+    funcs:
+        0x141198340: Update_1
+        0x141197C70: OnRequestedUpdate_1
+        0x141197F90: OnRequestedUpdate_2
+        0x141197B40: Reset_1
+  Client::UI::AddonJobHudSMN1::TranceGaugeSimple::EgiGaugeSimple:
+    funcs:
+        0x141198410: OnRequestedUpdate_1
+        0x141198480: OnRequestedUpdate_2
+        0x141198510: OnRequestedUpdate_3
+        0x141198560: OnRequestedUpdate_4
   Client::UI::AddonJobHudWAR0:
     vtbls: 
       - ea: 0x141B2C208
@@ -9293,10 +9439,17 @@ classes:
     vtbls: 
       - ea: 0x141B2C188
         base: Client::UI::AddonJobHud::AddonJobHudGauge
+    funcs:
+        0x141198D70: OnRequestedUpdate_1
+        0x141198E00: OnRequestedUpdate_2
+        0x141198F70: OnRequestedUpdate_3
   Client::UI::AddonJobHudWAR0::BeastGaugeSimple:
     vtbls: 
       - ea: 0x141B2C1C8
         base: Client::UI::AddonJobHud::AddonJobHudGauge
+    funcs:
+        0x1411993C0: OnRequestedUpdate_1
+        0x141199550: OnRequestedUpdate_2
   Client::UI::AddonJobHudWHM0:
     vtbls: 
       - ea: 0x141B2C510
@@ -9311,12 +9464,17 @@ classes:
     vtbls: 
       - ea: 0x141B2C490
         base: Client::UI::AddonJobHud::AddonJobHudGauge
+    funcs:
+      0x141199C00: OnRequestedUpdate1
+      0x141199DA0: OnRequestedUpdate2
   Client::UI::AddonJobHudWHM0::HealingGaugeSimple:
     vtbls: 
       - ea: 0x141B2C4D0
         base: Client::UI::AddonJobHud::AddonJobHudGauge
     funcs:
       0x141199EB0: ctor
+      0x14119A350: OnRequestedUpdate_1
+      0x14119A4D0: OnRequestedUpdate_2
   Client::UI::AddonLovmPaletteEdit:
     vtbls:
       - ea: 0x141B40400
