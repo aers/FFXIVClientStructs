@@ -5,6 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Component.Text;
 [StructLayout(LayoutKind.Explicit, Size = 0x310)]
 public unsafe partial struct MacroEncoder {
     [FieldOffset(0x08)] public StdMap<Utf8String, MacroCodeDescription> MacroCodeMap;
+    [FieldOffset(0x18)] public int ClientLanguage; //set before calling EncodeString
     [FieldOffset(0x20)] public Utf8String EncoderError;
     [FieldOffset(0x88)] public Utf8String Str2;
     [FieldOffset(0xF0)] public Utf8String Str3;
@@ -24,11 +25,24 @@ public unsafe partial struct MacroEncoder {
         return null;
     }
 
+    public string? GetMacroString(byte code) {
+        var currentNode = MacroCodeMap.SmallestValue;
+        while (currentNode != null && currentNode != MacroCodeMap.Head) {
+            if (currentNode->KeyValuePair.Item2.Id == code)
+                return currentNode->KeyValuePair.Item1.ToString();
+            currentNode = currentNode->Next();
+        }
+        return null;
+    }
+
     [MemberFunction("E8 ?? ?? ?? ?? FF CF 89 7C 24 ?? EB")]
     public partial int EncodeParameter(Utf8String* output, Utf8String* param, byte type, int* outExtraParams);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8B F8 83 F8 ?? 0F 8C")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8B F8 83 F8 ?? 0F 8C"), GenerateCStrOverloads]
     public partial int EncodeMacro(Utf8String* output, byte* input, int* outNumCharsRead);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 8B D8 83 F8 ?? 7C ?? 49 8D 8E"), GenerateCStrOverloads]
+    public partial void EncodeString(Utf8String* output, byte* input);
 
     [StructLayout(LayoutKind.Explicit, Size = 0x50)]
     public struct MacroCodeDescription {
