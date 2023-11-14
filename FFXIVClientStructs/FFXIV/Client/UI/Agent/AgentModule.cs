@@ -431,6 +431,7 @@ public enum AgentId : uint {
     MJIEntrance = 418,
     MJISettings = 419,
     MJIHousingMenu = 420, // new in 6.40
+    MJINekomimiRequest = 422, // favors
 
     ArchiveItem = 423,
 
