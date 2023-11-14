@@ -7,7 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 // common CreateAtkComponent function 8B FA 33 DB E8 ?? ?? ?? ?? 
 // type 1
 [StructLayout(LayoutKind.Explicit, Size = 0x1A8)]
-public unsafe struct AtkComponentList {
+public unsafe partial struct AtkComponentList {
     [FieldOffset(0x0)] public AtkComponentBase AtkComponentBase;
     [FieldOffset(0xC0)] public AtkComponentListItemRenderer* FirstAtkComponentListItemRenderer;
     [FieldOffset(0xC8)] public AtkComponentScrollBar* AtkComponentScrollBarC8;
@@ -22,9 +22,50 @@ public unsafe struct AtkComponentList {
     [FieldOffset(0x148)] public AtkCollisionNode* HoveredItemCollisionNode;
     [FieldOffset(0x150)] public int HoveredItemIndex2; // Repeat?
     [FieldOffset(0x158)] public int HoveredItemIndex3; // Repeat?
+    [FieldOffset(0x193)] public bool IsUpdatePending;
+
+    [VirtualFunction(25)]
+    public partial AtkComponentListItemRenderer* GetItemRenderer(int index);
+
+    [VirtualFunction(26)]
+    public partial void SetItemDisabledState(int index, bool disabled);
+
+    [VirtualFunction(27)]
+    public partial bool GetItemDisabledState(int index);
+
+    [VirtualFunction(28)]
+    public partial void SetItemHighlightedState(int index, bool highlighted, bool triggerUpdate = true);
+
+    [VirtualFunction(29)]
+    public partial bool GetItemHighlightedState(int index);
+
+    [VirtualFunction(31)]
+    public partial void SelectItem(int index, bool dispatchEvent37 = false);
+
+    [VirtualFunction(32)]
+    public partial void DeselectItem();
+
+    [VirtualFunction(36)]
+    public partial int GetItemCount();
+
+    /// <remarks> Used by <see cref="AtkComponentDropDownList"/>. </remarks>
+    [MemberFunction("E8 ?? ?? ?? ?? 45 38 A4 3E"), GenerateCStrOverloads]
+    public partial void SetItemLabel(int index, byte* text);
+
+    /// <remarks> Used by <see cref="AtkComponentDropDownList"/>. </remarks>
+    [MemberFunction("E8 ?? ?? ?? ?? 89 5C 24 28 48 8B 5C 24")]
+    public partial byte* GetItemLabel(int index);
+
+    [MemberFunction("83 FA FF 0F 8E")]
+    public partial void DispatchItemEvent(int index, AtkEventType eventType);
 
     [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public struct ListItem {
+        /// <remarks> Used by <see cref="AtkComponentDropDownList"/>. </remarks>
+        [FieldOffset(0)] public byte* Label;
         [FieldOffset(0x8)] public AtkComponentListItemRenderer* AtkComponentListItemRenderer;
+
+        [FieldOffset(0x14)] public bool IsHighlighted;
+        [FieldOffset(0x15)] public bool IsDisabled;
     }
 }
