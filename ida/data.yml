@@ -3678,6 +3678,9 @@ classes:
       0x14056F1E0: SetMaxValue
       0x14056F220: SetGaugeValue
       0x14056F300: HaltTransitions
+      0x14056F350: SetGaugeRange
+      0x14056F390: SetFillColor
+      0x14056F450: SetBackdropColor
       0x14056FF70: UpdateFloatValues
       0x1405700F0: UpdateBarFill1
       0x1405704A0: UpdateBarFill2
@@ -3687,7 +3690,7 @@ classes:
       0x1405712D0: SetParameterText
       0x1405713B0: GetFillPosition1
       0x140571450: GetFillPosition2
-      0x1405714D0: InitializeFillMargin    
+      0x1405714D0: InitializeFillMargin
     vfuncs:
       8: InitializeFillNodes
   Component::GUI::AtkComponentGaugeBar::GaugeValueTransition:

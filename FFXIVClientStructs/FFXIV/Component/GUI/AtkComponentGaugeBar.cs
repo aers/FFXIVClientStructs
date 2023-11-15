@@ -10,7 +10,10 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [StructLayout(LayoutKind.Explicit, Size = 0x1A8)]
 public unsafe partial struct AtkComponentGaugeBar {
     [FieldOffset(0x0)] public AtkComponentBase AtkComponentBase;
-
+    
+    /// <summary>
+    /// Data describing a value transition. Informs the fields in <see cref="GaugeValue"/>. These fields aren't overwritten until the next transition of the same type occurs.
+    /// </summary>
     [StructLayout(LayoutKind.Explicit, Size = Size)]
     public struct GaugeValueTransition {
         public const int Size = 0x10;
@@ -20,6 +23,9 @@ public unsafe partial struct AtkComponentGaugeBar {
         [FieldOffset(0x0C)] public float TransitionLength;
     }
 
+    /// <summary>
+    /// The most recent increase and most recent decrease of a gauge's value.
+    /// </summary>
     [StructLayout(LayoutKind.Explicit, Size = Size)]
     public struct GaugeValueTransitionData {
         public const int Size = 0x20;
@@ -27,17 +33,21 @@ public unsafe partial struct AtkComponentGaugeBar {
         [FieldOffset(0x10)] public GaugeValueTransition Decrease;
     }
 
+    /// <summary>
+    /// The gauge's current value, represented a few different ways. Float values are used as reference for animating the bar.
+    /// </summary>
     [StructLayout(LayoutKind.Explicit, Size = Size)]
     public struct GaugeValue {
         public const int Size = 0x10;
         [FieldOffset(0x0)] public int ValueInt; // true current value of the gauge
-
-        // used to calculate the bar animation
         [FieldOffset(0x4)] public float ValueFloatIncreasing; // increases gradually to match others (but decreases instantly)
         [FieldOffset(0x8)] public float ValueFloat;           // updates instantly to match ValueInt
         [FieldOffset(0xC)] public float ValueFloatDecreasing; // decreases gradually to match others (but increases instantly)
     }
 
+    /// <summary>
+    /// A set of three NineGrid nodes for the bar's fill level; one main fill node, and two nodes layered beneath in alternate colours.
+    /// </summary>
     [StructLayout(LayoutKind.Explicit, Size = Size)]
     public struct GaugeFill {
         public const int Size = 0x18;
@@ -46,27 +56,25 @@ public unsafe partial struct AtkComponentGaugeBar {
         [FieldOffset(0x10)] public AtkNineGridNode* DecreaseFillNode;                     // same, for decreases
     }
 
-    // There fields and functions to track and display both a primary value and a secondary value (ie, shields on partylist HP bars)
-    // The vast majority of gauges only use the primary value
+    // There are fields and functions to track two values per gauge, but the vast majority of gauges only use the first value
+    // The main (only?) use-case for the secondary gauge value is to display shields on Party List HP bars
 
-    // [0] Primary
-    // [1] Secondary
     [FixedSizeArray<GaugeValueTransitionData>(2)]
     [FieldOffset(0xC0)] public fixed byte TransitionData[2 * GaugeValueTransitionData.Size];
 
-    // [0] Primary
-    // [1] Secondary
     [FixedSizeArray<GaugeValue>(2)]
     [FieldOffset(0x100)] public fixed byte Values[2 * GaugeValue.Size];
 
     [FieldOffset(0x120)] public AtkImageNode* BackdropImageNode;
     [FieldOffset(0x128)] public GaugeFill PrimaryFill;
-    [FieldOffset(0x140)] public GaugeFill SecondaryFill;
-    [FieldOffset(0x158)] public GaugeFill SecondaryOverflow;
-    [FieldOffset(0x170)] public AtkImageNode* SecondaryOverflowMaxIcon; // the little "etc" icon that appears on a shield too big to display
 
-    [FieldOffset(0x180)] public AtkNineGridNode* BorderNineGridNode; // appears on crafting window bars
-    [FieldOffset(0x188)] public AtkTextNode* ParameterTextNode; // only seems to be used by the parameter widget
+    // optional nodes not seen on all bars
+    [FieldOffset(0x140)] public GaugeFill SecondaryFill;                // portion of shield that fits within the HP bar
+    [FieldOffset(0x158)] public GaugeFill SecondaryOverflow;            // portion of shield that overflows onto a separate bar
+    [FieldOffset(0x170)] public AtkImageNode* SecondaryOverflowMaxIcon; // the little "etc" icon that appears on a shield too big to display
+    [FieldOffset(0x178)] public AtkNineGridNode* RestedExpNode;         // specific to Exp bar, naturally
+    [FieldOffset(0x180)] public AtkNineGridNode* BorderNineGridNode;    // appears on crafting window bars
+    [FieldOffset(0x188)] public AtkTextNode* ParameterTextNode;         // mainly seems to be used by the Parameter Widget; other gauges that have a text node won't necessarily use this field to point to it
 
     [FieldOffset(0x190)] public int MinValue;
     [FieldOffset(0x194)] public int MaxValue;
