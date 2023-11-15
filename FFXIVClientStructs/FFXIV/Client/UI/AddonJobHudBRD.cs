@@ -14,13 +14,7 @@ public unsafe partial struct AddonJobHudBRD0 {
     [StructLayout(LayoutKind.Explicit, Size = 0x40)]
     public partial struct SongGaugeData {
         [FieldOffset(0x00)] public AddonJobHudGaugeData GaugeData;
-
-        [FieldOffset(0x08)] public byte Prereq08;
-        [FieldOffset(0x09)] public byte Prereq09;
-        [FieldOffset(0x0A)] public byte Prereq0A;
-        [FieldOffset(0x0B)] public byte Prereq0B;
-        [FieldOffset(0x0C)] public byte Prereq0C;
-        [FieldOffset(0x0D)] public byte Prereq0D;
+        [FieldOffset(0x08)] public fixed byte Prerequisites[6];
         [FieldOffset(0x10)] public int SoulVoiceValue;
         [FieldOffset(0x14)] public int SoulVoiceMinimumNeeded;
         [FieldOffset(0x1C)] public int SoulVoiceMax;
@@ -37,7 +31,6 @@ public unsafe partial struct AddonJobHudBRD0 {
     [StructLayout(LayoutKind.Explicit, Size = 0x100)]
     public partial struct SongGauge {
         [FieldOffset(0x00)] public AddonJobHudGauge Gauge;
-
         [FieldOffset(0x10)] public AtkResNode* Container;
         [FieldOffset(0x18)] public AtkTextNode* SongTitle;
         [FieldOffset(0x20)] public AtkTextNode* SongTimerText;
@@ -70,7 +63,6 @@ public unsafe partial struct AddonJobHudBRD0 {
     [StructLayout(LayoutKind.Explicit, Size = 0xE0)]
     public partial struct SongGaugeSimple {
         [FieldOffset(0x00)] public AddonJobHudGauge Gauge;
-
         [FieldOffset(0x10)] public AtkResNode* Container;
         [FieldOffset(0x18)] public AtkComponentTextNineGrid* SongTitle;
         [FieldOffset(0x20)] public AtkComponentTextNineGrid* SongTimerDisplay;

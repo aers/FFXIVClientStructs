@@ -15,9 +15,7 @@ public unsafe partial struct AddonJobHudWHM0 {
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public partial struct HealingGaugeData {
         [FieldOffset(0x00)] public AddonJobHudGaugeData GaugeData;
-
-        [FieldOffset(0x08)] public byte Prereq08;
-        [FieldOffset(0x09)] public byte Prereq09;
+        [FieldOffset(0x08)] public fixed byte Prerequisites[2];
         [FieldOffset(0x0C)] public int LilyCount;
         [FieldOffset(0x10)] public int LiliesSpent;
         [FieldOffset(0x14)] public int LilyTimer;
@@ -27,7 +25,6 @@ public unsafe partial struct AddonJobHudWHM0 {
     [StructLayout(LayoutKind.Explicit, Size = 0x70)]
     public partial struct HealingGauge {
         [FieldOffset(0x00)] public AddonJobHudGauge Gauge;
-
         [FieldOffset(0x10)] public AtkResNode* Container;
         [FieldOffset(0x18)] public AtkResNode* LilyContainer;
         [FieldOffset(0x20)] public AtkResNode* BloodLily;
@@ -45,7 +42,6 @@ public unsafe partial struct AddonJobHudWHM0 {
     [StructLayout(LayoutKind.Explicit, Size = 0xA0)]
     public partial struct HealingGaugeSimple {
         [FieldOffset(0x00)] public AddonJobHudGauge Gauge;
-
         [FieldOffset(0x10)] public AtkResNode* Container;
         [FieldOffset(0x18)] public AtkComponentBase* LilyGem1;
         [FieldOffset(0x20)] public AtkComponentBase* LilyGem2;

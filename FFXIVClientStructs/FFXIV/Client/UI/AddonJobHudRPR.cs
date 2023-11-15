@@ -14,9 +14,7 @@ public unsafe partial struct AddonJobHudRRP0 {
     [StructLayout(LayoutKind.Explicit, Size = 0x28)]
     public partial struct SoulGaugeData {
         [FieldOffset(0x00)] public AddonJobHudGaugeData GaugeData;
-
-        [FieldOffset(0x08)] public bool Prereq08;
-        [FieldOffset(0x09)] public bool Prereq09;
+        [FieldOffset(0x08)] public fixed byte Prerequisites[2];
         [FieldOffset(0x0C)] public int SoulValue;
         [FieldOffset(0x10)] public int ShroudValue;
         [FieldOffset(0x14)] public int SoulMax;
@@ -29,7 +27,6 @@ public unsafe partial struct AddonJobHudRRP0 {
     [StructLayout(LayoutKind.Explicit, Size = 0xF8)]
     public partial struct SoulGauge {
         [FieldOffset(0x00)] public AddonJobHudGauge Gauge;
-
         [FieldOffset(0x10)] public AtkResNode* Container;
         [FieldOffset(0x18)] public AtkResNode* Container2;
         [FieldOffset(0x20)] public AtkComponentBase* SoulMarker;
@@ -51,7 +48,6 @@ public unsafe partial struct AddonJobHudRRP0 {
     [StructLayout(LayoutKind.Explicit, Size = 0x50)]
     public partial struct SoulGaugeSimple {
         [FieldOffset(0x00)] public AddonJobHudGauge Gauge;
-
         [FieldOffset(0x10)] public AtkResNode* Container;
         [FieldOffset(0x18)] public AtkResNode* ShroudContainer; // no equiv. pointer to SoulContainer, strangely
         [FieldOffset(0x20)] public AtkComponentGaugeBar* SoulGaugeBar;
@@ -78,18 +74,15 @@ public unsafe partial struct AddonJobHudRRP1 {
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public partial struct DeathGaugeData {
         [FieldOffset(0x00)] public AddonJobHudGaugeData GaugeData;
-
-        [FieldOffset(0x08)] public bool Prereq08;
-        [FieldOffset(0x09)] public bool Enshrouded;
+        [FieldOffset(0x08)] public fixed byte Prerequisites[2];
         [FieldOffset(0x0C)] public int LemureShroudStacks;
         [FieldOffset(0x10)] public int VoidShroudStacks;
-        [FieldOffset(0x14)] public int EnshroudTimer; //ms
+        [FieldOffset(0x14)] public int EnshroudTimer;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x118)]
     public partial struct DeathGauge {
         [FieldOffset(0x000)] public AddonJobHudGauge Gauge;
-
         [FieldOffset(0x010)] public AtkResNode*  Container;
 
         [StructLayout(LayoutKind.Explicit, Size = Size)]
@@ -111,7 +104,6 @@ public unsafe partial struct AddonJobHudRRP1 {
     [StructLayout(LayoutKind.Explicit, Size = 0xD8)]
     public partial struct DeathGaugeSimple {
         [FieldOffset(0x00)] public AddonJobHudGauge Gauge;
-
         [FieldOffset(0x010)] public AtkResNode* Container;
         [FieldOffset(0x018)] public AtkResNode* EnshroudIndicator;
 

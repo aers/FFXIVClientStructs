@@ -5,7 +5,8 @@ using static FFXIVClientStructs.FFXIV.Client.UI.AddonJobHud;
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 /// <summary>
-/// ACN / SCH - Aetherflow Gauge
+/// ACN / SCH - Aetherflow Gauge<br/>
+/// NOTE: this loads the UldResourceHandle "JobHudSCH0"
 /// </summary>
 [Addon("JobHudACN0")]
 [StructLayout(LayoutKind.Explicit, Size = 0x340)]
@@ -16,7 +17,7 @@ public unsafe partial struct AddonJobHudACN0 {
     public partial struct AetherflowACNGaugeData {
         [FieldOffset(0x00)] public AddonJobHudGaugeData GaugeData;
         [FieldOffset(0x08)] public byte AetherflowStacks;
-        [FieldOffset(0x09)] public bool Prereq09;
+        [FieldOffset(0x09)] public fixed byte Prerequisites[1];
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x60)]
@@ -62,7 +63,8 @@ public unsafe partial struct AddonJobHudACN0 {
 }
 
 /// <summary>
-/// SCH - Faerie Gauge
+/// SCH - Faerie Gauge<br/>
+/// NOTE: this loads the UldResourceHandle "JobHudSCH1"
 /// </summary>
 [Addon("JobHudSCH0")]
 [StructLayout(LayoutKind.Explicit, Size = 0x388)]
@@ -72,12 +74,9 @@ public unsafe partial struct AddonJobHudSCH0 {
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public partial struct FaerieGaugeData {
         [FieldOffset(0x00)] public AddonJobHudGaugeData GaugeData;
-
         [FieldOffset(0x08)] public int FaeValue;
         [FieldOffset(0x0C)] public int FaeMax;
-        [FieldOffset(0x10)] public bool Prereq10;
-        [FieldOffset(0x11)] public bool Prereq11;
-        [FieldOffset(0x12)] public bool Prereq12;
+        [FieldOffset(0x10)] public fixed byte Prerequisites[3];
         [FieldOffset(0x18)] public int SeraphTimeLeft;
         [FieldOffset(0x1C)] public int SeraphMaxTime;
     }
@@ -85,7 +84,6 @@ public unsafe partial struct AddonJobHudSCH0 {
     [StructLayout(LayoutKind.Explicit, Size = 0x90)]
     public partial struct FaerieGauge {
         [FieldOffset(0x00)] public AddonJobHudGauge Gauge;
-
         [FieldOffset(0x10)] public AtkResNode* Container;
         [FieldOffset(0x18)] public AtkResNode* FaeriePlateContainer;
         [FieldOffset(0x20)] public AtkTextNode* SeraphTimerText;
@@ -108,15 +106,12 @@ public unsafe partial struct AddonJobHudSCH0 {
     [StructLayout(LayoutKind.Explicit, Size = 0x58)]
     public partial struct FaerieGaugeSimple {
         [FieldOffset(0x00)] public AddonJobHudGauge Gauge;
-
         [FieldOffset(0x10)] public AtkResNode* Container;
         [FieldOffset(0x18)] public AtkResNode* Container2;
         [FieldOffset(0x20)] public AtkComponentGaugeBar* FaeGaugeBar;
         [FieldOffset(0x28)] public AtkResNode* FaeGaugeBarFill;
         [FieldOffset(0x30)] public AtkComponentTextNineGrid* FaeValueDisplay;
-
         [FieldOffset(0x38)] public int FaeBarState;
-
         [FieldOffset(0x40)] public AtkResNode* SeraphContainer;
         [FieldOffset(0x48)] public AtkComponentTextNineGrid* SeraphTimerDisplay;
     }
@@ -139,13 +134,12 @@ public unsafe partial struct AddonJobHudSMN0 {
     public partial struct AetherflowSMNGaugeData {
         [FieldOffset(0x00)] public AddonJobHudGaugeData GaugeData;
         [FieldOffset(0x08)] public int AetherflowStacks;
-        [FieldOffset(0x0C)] public bool Prereq0C;
+        [FieldOffset(0x0C)] public fixed byte Prerequisites[1];
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x38)]
     public partial struct AetherflowSMNGauge {
         [FieldOffset(0x00)] public AddonJobHudGauge Gauge;
-
         [FieldOffset(0x10)] public AtkComponentBase* StackContainer1;
         [FieldOffset(0x18)] public AtkComponentBase* StackContainer2;
         [FieldOffset(0x20)] public AtkResNode* Stack1;
@@ -158,7 +152,6 @@ public unsafe partial struct AddonJobHudSMN0 {
     [StructLayout(LayoutKind.Explicit, Size = 0x38)]
     public partial struct AetherflowSMNGaugeSimple {
         [FieldOffset(0x00)] public AddonJobHudGauge Gauge;
-
         [FieldOffset(0x10)] public AtkComponentBase* StackContainer1;
         [FieldOffset(0x18)] public AtkComponentBase* StackContainer2;
         [FieldOffset(0x20)] public AtkResNode* Stack1;
@@ -185,21 +178,14 @@ public unsafe partial struct AddonJobHudSMN1 {
     [StructLayout(LayoutKind.Explicit, Size = 0x38)]
     public partial struct TranceGaugeData {
         [FieldOffset(0x00)] public AddonJobHudGaugeData GaugeData;
-
-        [FieldOffset(0x08)] public bool Prereq08;
-        [FieldOffset(0x09)] public bool Prereq09;
+        [FieldOffset(0x08)] public fixed byte Prerequisites[2];
         [FieldOffset(0x0C)] public int Phase;
         [FieldOffset(0x10)] public int SummonTimeLeft;
         [FieldOffset(0x14)] public int SummonTimeMax;
         [FieldOffset(0x1C)] public byte IfritReady;
         [FieldOffset(0x1D)] public byte TitanReady;
         [FieldOffset(0x1E)] public byte GarudaReady;
-
-        // 2 at max level, 0 for ACN, must reflect level
-        [FieldOffset(0x20)] public int Prereq20; 
-        [FieldOffset(0x24)] public int Prereq24;
-        [FieldOffset(0x28)] public int Prereq28;
-
+        [FieldOffset(0x20)] public fixed int Prerequisites2[3];
         [FieldOffset(0x2C)] public int CurrentEgi;
         [FieldOffset(0x30)] public int Attunement;
     }
@@ -207,7 +193,6 @@ public unsafe partial struct AddonJobHudSMN1 {
     [StructLayout(LayoutKind.Explicit, Size = 0x108)]
     public partial struct TranceGauge {
         [FieldOffset(0x000)] public AddonJobHudGauge Gauge;
-
         [FieldOffset(0x010)] public AtkResNode* Container;
         [FieldOffset(0x018)] public AtkResNode* CarbunclePlate;
         [FieldOffset(0x020)] public AtkImageNode* CarbuncleBar;
@@ -238,7 +223,6 @@ public unsafe partial struct AddonJobHudSMN1 {
     [StructLayout(LayoutKind.Explicit, Size = 0xD8)]
     public partial struct TranceGaugeSimple {
         [FieldOffset(0x00)] public AddonJobHudGauge Gauge;
-
         [FieldOffset(0x10)] public AtkComponentGaugeBar* TranceGaugeBar;
         [FieldOffset(0x18)] public AtkResNode* SummonIcon;
         [FieldOffset(0x20)] public AtkComponentTextNineGrid* TranceTimerDisplay;
@@ -256,7 +240,6 @@ public unsafe partial struct AddonJobHudSMN1 {
         [FieldOffset(0x40)] public EgiGaugeSimple IfritGauge;
         [FieldOffset(0x60)] public EgiGaugeSimple TitanGauge;
         [FieldOffset(0x80)] public EgiGaugeSimple GarudaGauge;
-
         [FieldOffset(0xA0)] public AtkComponentBase* EgiIconContainer;
         [FieldOffset(0xA8)] public AtkResNode* EgiIcons;
         [FieldOffset(0xB0)] public AtkResNode* IfritIcon;

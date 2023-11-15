@@ -14,10 +14,7 @@ public unsafe partial struct AddonJobHudAST0 {
     [StructLayout(LayoutKind.Explicit, Size = 0x40)]
     public partial struct ArcanaGaugeData {
         [FieldOffset(0x00)] public AddonJobHudGaugeData GaugeData;
-
-        [FieldOffset(0x08)] public byte Prereq08;
-        [FieldOffset(0x09)] public byte Prereq09;
-        [FieldOffset(0x0A)] public byte Prereq0A;
+        [FieldOffset(0x08)] public fixed byte Prerequisites[3];
         [FieldOffset(0x0C)] public int DrawnCard;
         [FieldOffset(0x10)] public int DrawnMinorArcanum;
         [FieldOffset(0x14)] public int DrawnRoleBuff;
@@ -32,7 +29,6 @@ public unsafe partial struct AddonJobHudAST0 {
     [StructLayout(LayoutKind.Explicit, Size = 0xC8)]
     public partial struct ArcanaGauge {
         [FieldOffset(0x00)] public AddonJobHudGauge Gauge;
-
         [FieldOffset(0x10)] public AtkResNode* Container;
         [FieldOffset(0x18)] public AtkComponentBase* CardContainer;
         [FieldOffset(0x20)] public AtkTextNode* CardName;
@@ -52,7 +48,6 @@ public unsafe partial struct AddonJobHudAST0 {
     [StructLayout(LayoutKind.Explicit, Size = 0xC0)]
     public partial struct ArcanaGaugeSimple {
         [FieldOffset(0x00)] public AddonJobHudGauge Gauge;
-
         [FieldOffset(0x10)] public AtkComponentBase* CardContainer;
         [FieldOffset(0x18)] public AtkComponentTextNineGrid* CardName;
         [FieldOffset(0x20)] public AtkResNode* CardAstrosign;

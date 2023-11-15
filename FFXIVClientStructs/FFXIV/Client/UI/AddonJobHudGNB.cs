@@ -14,18 +14,13 @@ public unsafe partial struct AddonJobHudGNB0 {
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public partial struct PowderGaugeData {
         [FieldOffset(0x00)] public AddonJobHudGaugeData GaugeData;
-
-        [FieldOffset(0x08)] public byte Prereq08;
-        [FieldOffset(0x09)] public byte Prereq09;
-        [FieldOffset(0x0A)] public bool TankStance;
-        [FieldOffset(0x0B)] public byte Prereq0B;
+        [FieldOffset(0x08)] public fixed byte Prerequisites[4];
         [FieldOffset(0x0C)] public int Ammo;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x70)]
     public partial struct PowderGauge {
         [FieldOffset(0x00)] public AddonJobHudGauge Gauge;
-        
         [FieldOffset(0x10)] public AtkResNode* Container;
 
         [FixedSizeArray<Pointer<AtkComponentBase>>(3)]

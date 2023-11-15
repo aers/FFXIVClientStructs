@@ -14,12 +14,7 @@ public unsafe partial struct AddonJobHudBLM0 {
     [StructLayout(LayoutKind.Explicit, Size = 0x38)]
     public partial struct ElementalGaugeData {
         [FieldOffset(0x00)] public AddonJobHudGaugeData GaugeData;
-
-        [FieldOffset(0x08)] public bool Prereq08;
-        [FieldOffset(0x09)] public bool Prereq09;
-        [FieldOffset(0x0A)] public bool Prereq0A;
-        [FieldOffset(0x0B)] public bool Prereq0B;
-        [FieldOffset(0x0C)] public bool Prereq0C;
+        [FieldOffset(0x08)] public fixed byte Prerequisites[5];
         [FieldOffset(0x10)] public int AstralFireStacks;
         [FieldOffset(0x14)] public int UmbralIceStacks;
         [FieldOffset(0x18)] public int ElementTimeLeft;
@@ -35,7 +30,6 @@ public unsafe partial struct AddonJobHudBLM0 {
     [StructLayout(LayoutKind.Explicit, Size = 0x168)]
     public partial struct ElementalGauge {
         [FieldOffset(0x000)] public AddonJobHudGauge Gauge;
-
         [FieldOffset(0x010)] public AtkResNode* Container;
         [FieldOffset(0x018)] public AtkResNode* ElementalCrescent;
         [FieldOffset(0x020)] public bool ElementActive;
@@ -113,7 +107,6 @@ public unsafe partial struct AddonJobHudBLM0 {
         [FieldOffset(0x70)] public fixed byte PolyglotGem[2 * 0x08];
         
         [FieldOffset(0x80)] public AtkComponentBase* ParadoxGem;
-
         [FieldOffset(0x88)] public int AstralFireStacks;
         [FieldOffset(0x8C)] public int AstralFireMax;
         [FieldOffset(0x90)] public int UmbralHeartCount;

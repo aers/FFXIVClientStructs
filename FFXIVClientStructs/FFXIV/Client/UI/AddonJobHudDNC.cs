@@ -14,16 +14,10 @@ public unsafe partial struct AddonJobHudDNC0 {
     [StructLayout(LayoutKind.Explicit, Size = 0x30)]
     public partial struct StepGaugeData {
         [FieldOffset(0x00)] public AddonJobHudGaugeData GaugeData;
-
-        [FieldOffset(0x08)] public byte Prereq08;
-        [FieldOffset(0x09)] public byte Prereq09;
-
+        [FieldOffset(0x08)] public fixed byte Prerequisites[2];
         [FieldOffset(0x0C)] public int DanceStatus;
         [FieldOffset(0x10)] public int CompletedSteps;
-
-        [FixedSizeArray<int>(4)]
-        [FieldOffset(0x14)] public fixed byte Steps[4 * 0x04];
-        
+        [FieldOffset(0x14)] public fixed int Steps[4];
         [FieldOffset(0x24)] public int StandardFinishActive;
         [FieldOffset(0x28)] public int StandardFinishTimeLeft;
     }
@@ -31,7 +25,6 @@ public unsafe partial struct AddonJobHudDNC0 {
     [StructLayout(LayoutKind.Explicit, Size = 0x68)]
     public partial struct StepGauge {
         [FieldOffset(0x00)] public AddonJobHudGauge Gauge;
-        
         [FieldOffset(0x10)] public AtkResNode* Container;
         [FieldOffset(0x18)] public int DanceStatus;
 
@@ -48,7 +41,6 @@ public unsafe partial struct AddonJobHudDNC0 {
     [StructLayout(LayoutKind.Explicit, Size = 0x68)]
     public partial struct StepGaugeSimple {
         [FieldOffset(0x00)] public AddonJobHudGauge Gauge;
-        
         [FieldOffset(0x10)] public AtkResNode* Container;
         [FieldOffset(0x18)] public int DanceStatus;
 
@@ -79,9 +71,7 @@ public unsafe partial struct AddonJobHudDNC1 {
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public partial struct FeatherGaugeData {
         [FieldOffset(0x00)] public AddonJobHudGaugeData GaugeData;
-
-        [FieldOffset(0x08)] public byte Prereq08;
-        [FieldOffset(0x09)] public byte Prereq09;
+        [FieldOffset(0x08)] public fixed byte Prerequisites[2];
         [FieldOffset(0x0C)] public int FeatherCount;
         [FieldOffset(0x10)] public int EspritValue;
         [FieldOffset(0x14)] public int EspritMax;
@@ -91,7 +81,6 @@ public unsafe partial struct AddonJobHudDNC1 {
     [StructLayout(LayoutKind.Explicit, Size = 0x98)]
     public partial struct FeatherGauge {
         [FieldOffset(0x00)] public AddonJobHudGauge Gauge;
-        
         [FieldOffset(0x10)] public AtkResNode* Container;
         [FieldOffset(0x18)] public AtkResNode* FeatherContainer;
 
@@ -99,7 +88,6 @@ public unsafe partial struct AddonJobHudDNC1 {
         [FieldOffset(0x20)] public fixed byte Feathers[4 * 0x08];
         
         [FieldOffset(0x40)] public int FeatherCount;
-
         [FieldOffset(0x48)] public AtkResNode* EspritBar;
         [FieldOffset(0x50)] public AtkResNode* EspritValueContainer;
         [FieldOffset(0x58)] public AtkTextNode* EspritValueText;
@@ -114,14 +102,13 @@ public unsafe partial struct AddonJobHudDNC1 {
     [StructLayout(LayoutKind.Explicit, Size = 0x70)]
     public partial struct FeatherGaugeSimple {
         [FieldOffset(0x00)] public AddonJobHudGauge Gauge;
-
         [FieldOffset(0x10)] public AtkResNode* Container;
         [FieldOffset(0x18)] public AtkResNode* FeatherContainer;
+
         [FixedSizeArray<Pointer<AtkComponentBase>>(4)]
         [FieldOffset(0x20)] public fixed byte Feathers[4 * 0x08];
 
         [FieldOffset(0x40)] public int FeatherCount;
-
         [FieldOffset(0x48)] public AtkResNode* EspritBarContainer;
         [FieldOffset(0x50)] public AtkComponentGaugeBar* EspritGaugeBar;
         [FieldOffset(0x58)] public AtkResNode* EspritBarFill;

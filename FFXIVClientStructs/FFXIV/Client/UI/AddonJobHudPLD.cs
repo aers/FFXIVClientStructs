@@ -14,10 +14,7 @@ public unsafe partial struct AddonJobHudPLD0 {
     [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public partial struct OathGaugeData {
         [FieldOffset(0x00)] public AddonJobHudGaugeData GaugeData;
-
-        [FieldOffset(0x08)] public byte TankStance;
-        [FieldOffset(0x09)] public byte Prereq09;
-        [FieldOffset(0x0A)] public byte Prereq0A;
+        [FieldOffset(0x08)] public fixed byte Prerequisites[3];
         [FieldOffset(0x0C)] public int OathValue;
         [FieldOffset(0x10)] public int OathMax;
     }
@@ -25,7 +22,6 @@ public unsafe partial struct AddonJobHudPLD0 {
     [StructLayout(LayoutKind.Explicit, Size = 0x58)]
     public partial struct OathGauge {
         [FieldOffset(0x00)] public AddonJobHudGauge Gauge;
-        
         [FieldOffset(0x10)] public AtkResNode* Container;       
         [FieldOffset(0x18)] public AtkResNode* Container2;
         [FieldOffset(0x20)] public AtkComponentGaugeBar* OathGaugeBar;
@@ -39,7 +35,6 @@ public unsafe partial struct AddonJobHudPLD0 {
     [StructLayout(LayoutKind.Explicit, Size = 0x48)]
     public partial struct OathGaugeSimple {
         [FieldOffset(0x00)] public AddonJobHudGauge Gauge;
-
         [FieldOffset(0x18)] public AtkResNode* Container;
         [FieldOffset(0x20)] public AtkComponentGaugeBar* OathGaugeBar;
         [FieldOffset(0x28)] public AtkResNode* OathGaugeBarFill;

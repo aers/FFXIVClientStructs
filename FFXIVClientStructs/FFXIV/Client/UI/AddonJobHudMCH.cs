@@ -14,31 +14,22 @@ public unsafe partial struct AddonJobHudMCH0 {
     [StructLayout(LayoutKind.Explicit, Size = 0x38)]
     public partial struct HeatGaugeData {
         [FieldOffset(0x00)] public AddonJobHudGaugeData GaugeData;
-
-        [FieldOffset(0x08)] public byte Prereq08;
-        [FieldOffset(0x09)] public byte Prereq09;
-
+        [FieldOffset(0x08)] public fixed byte Prerequisites[2];
         [FieldOffset(0x0C)] public int HeatValue;
         [FieldOffset(0x10)] public int HeatMax;
         [FieldOffset(0x14)] public int HeatMid;
-
         [FieldOffset(0x18)] public bool OverheatActive;
-
         [FieldOffset(0x1C)] public int OverheatTimeLeft;
         [FieldOffset(0x24)] public int BatteryValue;
         [FieldOffset(0x28)] public int BatteryMax;
         [FieldOffset(0x2C)] public int BatteryMid;
-
         [FieldOffset(0x30)] public bool SummonActive;
-
         [FieldOffset(0x34)] public int SummonTimeLeft;
-
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x78)]
     public partial struct HeatGauge {
         [FieldOffset(0x00)] public AddonJobHudGauge Gauge;
-
         [FieldOffset(0x10)] public AtkResNode* HeatContainer;
         [FieldOffset(0x18)] public AtkComponentGaugeBar* HeatGaugeBar;
         [FieldOffset(0x20)] public AtkComponentTextNineGrid* HeatValueDisplay;
@@ -57,7 +48,6 @@ public unsafe partial struct AddonJobHudMCH0 {
     [StructLayout(LayoutKind.Explicit, Size = 0x70)]
     public partial struct HeatGaugeSimple {
         [FieldOffset(0x00)] public AddonJobHudGauge Gauge;
-
         [FieldOffset(0x10)] public AtkResNode* HeatContainer;
         [FieldOffset(0x18)] public AtkComponentGaugeBar* HeatGaugeBar;
         [FieldOffset(0x20)] public AtkComponentTextNineGrid* HeatValueDisplay;
@@ -69,7 +59,6 @@ public unsafe partial struct AddonJobHudMCH0 {
         [FieldOffset(0x50)] public AtkResNode* BarFillContainer;
         [FieldOffset(0x58)] public AtkResNode* BatteryContainer2; // duplicate of 0x38
         [FieldOffset(0x60)] public AtkComponentTextNineGrid* SummonTimerDisplay;
-
     }
 
     [FieldOffset(0x260)] public HeatGaugeData DataPrevious;

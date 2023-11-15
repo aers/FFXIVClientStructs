@@ -14,9 +14,7 @@ public unsafe partial struct AddonJobHudMNK0 {
     [StructLayout(LayoutKind.Explicit, Size = 0x28)]
     public partial struct MastersGaugeData {
         [FieldOffset(0x00)] public AddonJobHudGaugeData GaugeData;
-
-        [FieldOffset(0x08)] public byte Prereq08;
-        [FieldOffset(0x09)] public byte Prereq09;
+        [FieldOffset(0x08)] public fixed byte Prerequisites[2];
         [FieldOffset(0x0C)] public int BeastChakra1;
         [FieldOffset(0x10)] public int BeastChakra2;
         [FieldOffset(0x14)] public int BeastChakra3;
@@ -29,7 +27,6 @@ public unsafe partial struct AddonJobHudMNK0 {
     [StructLayout(LayoutKind.Explicit, Size = 0xB0)]
     public partial struct MastersGauge {
         [FieldOffset(0x00)] public AddonJobHudGauge Gauge;
-
         [FieldOffset(0x10)] public AtkResNode* NadiContainer;
         [FieldOffset(0x18)] public AtkComponentBase* BeastChakra1;
         [FieldOffset(0x20)] public AtkResNode* BeastChakraIcon1;
@@ -70,14 +67,13 @@ public unsafe partial struct AddonJobHudMNK1 {
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public partial struct ChakraGaugeData {
         [FieldOffset(0x00)] public AddonJobHudGaugeData GaugeData;
-        [FieldOffset(0x08)] public bool Prereq08;
+        [FieldOffset(0x08)] public fixed byte Prerequisites[1];
         [FieldOffset(0x0C)] public int ChakraCount;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x40)]
     public partial struct ChakraGauge {
         [FieldOffset(0x00)] public AddonJobHudGauge Gauge;
-
         [FieldOffset(0x10)] public AtkResNode* Container;
 
         [FixedSizeArray<Pointer<AtkComponentBase>>(5)]
@@ -87,7 +83,6 @@ public unsafe partial struct AddonJobHudMNK1 {
     [StructLayout(LayoutKind.Explicit, Size = 0x48)]
     public partial struct ChakraGaugeSimple {
         [FieldOffset(0x00)] public AddonJobHudGauge Gauge;
-
         [FieldOffset(0x10)] public AtkResNode* Container;
 
         [FixedSizeArray<Pointer<AtkComponentBase>>(5)]

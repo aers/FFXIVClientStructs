@@ -15,11 +15,7 @@ public unsafe partial struct AddonJobHudRDM0 {
     [StructLayout(LayoutKind.Explicit, Size = 0x28)]
     public partial struct BalanceGaugeData {
         [FieldOffset(0x00)] public AddonJobHudGaugeData GaugeData;
-
-        [FieldOffset(0x08)] public bool Prereq08;
-        [FieldOffset(0x09)] public bool Prereq09;
-        [FieldOffset(0x0A)] public bool Prereq0A;
-
+        [FieldOffset(0x08)] public fixed byte Prerequisites[3];
         [FieldOffset(0x0C)] public int BlackMana;
         [FieldOffset(0x10)] public int WhiteMana;
         [FieldOffset(0x14)] public int MaxMana;
@@ -39,7 +35,6 @@ public unsafe partial struct AddonJobHudRDM0 {
             [FieldOffset(0x10)] public AtkImageNode* BarFill;
             [FieldOffset(0x18)] public AtkImageNode* BarGain;
             [FieldOffset(0x20)] public AtkImageNode* BarLoss;
-
             [FieldOffset(0x28)] public int BarHeight;
             [FieldOffset(0x2C)] public int BarTargetHeight;
             [FieldOffset(0x30)] public float HeightAdjust;
@@ -51,7 +46,6 @@ public unsafe partial struct AddonJobHudRDM0 {
 
         [FieldOffset(0x10)] public ManaBar BlackManaBar;
         [FieldOffset(0x58)] public ManaBar WhiteManaBar;
-
         [FieldOffset(0xA0)] public AtkResNode* Container;
         [FieldOffset(0xA8)] public AtkResNode* EffectsContainer;
         [FieldOffset(0xB0)] public AtkResNode* Effects;
@@ -73,7 +67,6 @@ public unsafe partial struct AddonJobHudRDM0 {
     [StructLayout(LayoutKind.Explicit, Size = 0x90)]
     public partial struct BalanceGaugeSimple {
         [FieldOffset(0x00)] public AddonJobHudGauge Gauge;
-
         [FieldOffset(0x10)] public AtkComponentGaugeBar* BlackManaGaugeBar;
         [FieldOffset(0x18)] public AtkComponentGaugeBar* WhiteManaGaugeBar;
 

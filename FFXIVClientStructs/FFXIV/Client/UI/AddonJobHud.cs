@@ -25,8 +25,7 @@ public unsafe partial struct AddonJobHud {
     [FieldOffset(0x254)] public int TimelineLabelSimple; // always set to 101 by vf75
     
     /// <summary>
-    /// Base struct for GaugeData, containing the data that each particular gauge relies on.<br/>
-    /// The first few fields (0x8  onwards) in each individual GaugeData struct are generally "Prereq" booleans determining whether the gauge (or specific parts of it) should display, based on job level etc.<br/>
+    /// Base struct containing the data that each particular gauge relies on.<br/>
     /// </summary>
     [StructLayout(LayoutKind.Explicit, Size = 0x08)]
     public unsafe partial struct AddonJobHudGaugeData {

@@ -14,9 +14,7 @@ public unsafe partial struct AddonJobHudSAM0 {
     [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public partial struct KenkiGaugeData {
         [FieldOffset(0x00)] public AddonJobHudGaugeData GaugeData;
-        [FieldOffset(0x08)] public bool Prereq08;
-        [FieldOffset(0x09)] public bool Prereq09;
-        [FieldOffset(0x0A)] public bool Prereq0A;
+        [FieldOffset(0x08)] public fixed byte Prerequisites[3];
         [FieldOffset(0x0C)] public int MeditationStackCount;
         [FieldOffset(0x10)] public int KenkiValue;
         [FieldOffset(0x14)] public int KenkiMax;
@@ -25,7 +23,6 @@ public unsafe partial struct AddonJobHudSAM0 {
     [StructLayout(LayoutKind.Explicit, Size = 0x90)]
     public partial struct KenkiGauge {
         [FieldOffset(0x00)] public AddonJobHudGauge Gauge;
-
         [FieldOffset(0x10)] public AtkResNode* KenkiContainer;
         [FieldOffset(0x18)] public AtkTextNode* KenkiValueText;
         [FieldOffset(0x20)] public AtkImageNode* KenkiBarFill;
@@ -36,16 +33,13 @@ public unsafe partial struct AddonJobHudSAM0 {
         
         [FixedSizeArray<Pointer<AtkComponentBase>>(3)]
         [FieldOffset(0x48)] public fixed byte MeditationGem[3 * 0x8];
-
-        [FixedSizeArray<bool>(3)]
+        
         [FieldOffset(0x60)] public fixed byte HasMeditationStack[3];
-
         [FieldOffset(0x63)] public bool MeditationStacksGlowing;
         [FieldOffset(0x64)] public int MeditationStackCount;
         [FieldOffset(0x68)] public int GlowTimelineFrameId;
-        [FieldOffset(0x6C)] public int MarkerPosition; // Animates toward KenkiBarWidth
+        [FieldOffset(0x6C)] public int MarkerPosition;
         [FieldOffset(0x70)] public int KenkiBarWidth; // Kenki Value * 2.76
-        [FieldOffset(0x74)] public float MarkerAdjust;
         [FieldOffset(0x78)] public int KenkiBarMaxWidth; // 276
         [FieldOffset(0x7C)] public bool KenkiBarAnimating;
         [FieldOffset(0x7D)] public bool MarkerVisible;
@@ -66,10 +60,8 @@ public unsafe partial struct AddonJobHudSAM0 {
 
         [FixedSizeArray<Pointer<AtkComponentBase>>(3)]
         [FieldOffset(0x38)] public fixed byte MeditationStacks[3 * 0x8];
-
-        [FixedSizeArray<bool>(3)]
+        
         [FieldOffset(0x50)] public fixed byte HasMeditationStack[3];
-
         [FieldOffset(0x53)] public bool MeditationStacksGlowing;
         [FieldOffset(0x54)] public int MeditationStackCount;
         [FieldOffset(0x58)] public int GlowTimelineFrameId;
@@ -94,7 +86,7 @@ public unsafe partial struct AddonJobHudSAM1 {
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public partial struct SenGaugeData {
         [FieldOffset(0x00)] public AddonJobHudGaugeData GaugeData;
-        [FieldOffset(0x08)] public bool Prereq08;
+        [FieldOffset(0x08)] public fixed byte Prerequisites[1];
         [FieldOffset(0x09)] public bool HasSetsu;
         [FieldOffset(0x0A)] public bool HasGetsu;
         [FieldOffset(0x0B)] public bool HasKa;

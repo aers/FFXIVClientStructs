@@ -14,7 +14,7 @@ public unsafe partial struct AddonJobHudGFF0 {
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public partial struct EukrasiaGaugeData {
         [FieldOffset(0x00)] public AddonJobHudGaugeData GaugeData;
-        [FieldOffset(0x08)] public bool Prereq08;
+        [FieldOffset(0x08)] public fixed byte Prerequisites[1];
         [FieldOffset(0x09)] public bool EukrasiaActive;
     }
 
@@ -49,9 +49,7 @@ public unsafe partial struct AddonJobHudGFF1 {
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public partial struct AddersgallGaugeData {
         [FieldOffset(0x00)] public AddonJobHudGaugeData GaugeData;
-
-        [FieldOffset(0x08)] public bool Prereq08;
-        [FieldOffset(0x09)] public bool Prereq09;
+        [FieldOffset(0x08)] public fixed byte Prerequisites[2];
         [FieldOffset(0x0C)] public int Addersgall;
         [FieldOffset(0x10)] public int Addersting;
         [FieldOffset(0x14)] public int AddersgallTimer;
@@ -62,7 +60,6 @@ public unsafe partial struct AddonJobHudGFF1 {
     [StructLayout(LayoutKind.Explicit, Size = 0x70)]
     public partial struct AddersgallGauge {
         [FieldOffset(0x00)] public AddonJobHudGauge Gauge;
-
         [FieldOffset(0x10)] public AtkResNode* AdderstingContainer;
 
         [FixedSizeArray<Pointer<AtkComponentBase>>(3)]
@@ -82,7 +79,6 @@ public unsafe partial struct AddonJobHudGFF1 {
     [StructLayout(LayoutKind.Explicit, Size = 0x60)]
     public partial struct AddersgallGaugeSimple {
         [FieldOffset(0x00)] public AddonJobHudGauge Gauge;
-        
         [FieldOffset(0x10)] public AtkResNode* AdderstingContainer;
 
         [FixedSizeArray<Pointer<AtkComponentBase>>(3)]
@@ -92,7 +88,6 @@ public unsafe partial struct AddonJobHudGFF1 {
         [FieldOffset(0x30)] public fixed byte AdderstingGem[3 * 0x08];
         
         [FieldOffset(0x48)] public AtkComponentGaugeBar* TimerGaugeBar;
-
         [FieldOffset(0x50)] public int Addersgall;
         [FieldOffset(0x54)] public int Addersting;
         [FieldOffset(0x58)] public int AddersgallTimelineFrameId;
