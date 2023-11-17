@@ -10,6 +10,10 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 public unsafe partial struct Monster {
     [FieldOffset(0x0)] public CharacterBase CharacterBase;
 
+    [FieldOffset(0x8F0)] public ushort ModelSetId;
+    [FieldOffset(0x8F2)] public ushort SecondaryId;
+    [FieldOffset(0x8F4)] public ushort Variant;
+
     // Expects at least 8 bytes of data.
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 33 C0 48 8D 4D")]
     public partial bool SetupFromData(byte* data);
