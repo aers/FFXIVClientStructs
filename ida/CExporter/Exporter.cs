@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
-using FFXIVClientStructs;
+using FFXIVClientStructs.Attributes;
 
 namespace CExporter;
 
