@@ -126,6 +126,9 @@ public unsafe partial struct CharacterBase {
     [VirtualFunction(81)]
     public readonly partial byte* ResolveImcPath(byte* pathBuffer, nuint pathBufferSize, uint slotIndex);
 
+    /// <remarks>
+    /// Caveat: this method will dereference a null pointer if determining the MTRL file path involves an IMC lookup and it is not called at the "right" moment.
+    /// </remarks>
     [VirtualFunction(82)]
     public readonly partial byte* ResolveMtrlPath(byte* pathBuffer, nuint pathBufferSize, uint slotIndex, byte* mtrlFileName);
 
@@ -204,6 +207,9 @@ public unsafe partial struct CharacterBase {
         return MemoryMarshal.CreateReadOnlySpanFromNullTerminated(result);
     }
 
+    /// <remarks>
+    /// Caveat: this method will dereference a null pointer if determining the MTRL file path involves an IMC lookup and it is not called at the "right" moment.
+    /// </remarks>
     public readonly ReadOnlySpan<byte> ResolveMtrlPath(Span<byte> pathBuffer, uint slotIndex, ReadOnlySpan<byte> mtrlFileName) {
         byte* result;
         fixed (byte* pMtrlFileName = mtrlFileName)
@@ -291,6 +297,9 @@ public unsafe partial struct CharacterBase {
         return Encoding.UTF8.GetString(ResolveImcPath(pathBuffer, slotIndex));
     }
 
+    /// <remarks>
+    /// Caveat: this method will dereference a null pointer if determining the MTRL file path involves an IMC lookup and it is not called at the "right" moment.
+    /// </remarks>
     public readonly string ResolveMtrlPath(uint slotIndex, string mtrlFileName) {
         var mtrlFileNameByteCount = Encoding.UTF8.GetByteCount(mtrlFileName);
         Span<byte> mtrlFileNameBytes = mtrlFileNameByteCount <= 512 ? stackalloc byte[mtrlFileNameByteCount + 1] : new byte[mtrlFileNameByteCount + 1];
