@@ -1,3 +1,4 @@
+using System.Text;
 using FFXIVClientStructs.FFXIV.Client.Game.Character;
 using FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
 using FFXIVClientStructs.FFXIV.Client.Graphics.Physics;
@@ -14,6 +15,8 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 [StructLayout(LayoutKind.Explicit, Size = 0x8F0)]
 [VTableAddress("48 8d 05 ?? ?? ?? ?? 48 89 07 48 8d 9f d0 00 00 00", 3)]
 public unsafe partial struct CharacterBase {
+    public const int PathBufferSize = 260;
+
     [FieldOffset(0x0)] public DrawObject DrawObject;
     [FieldOffset(0x90)] public byte UnkFlags_01;
     [FieldOffset(0x91)] public byte UnkFlags_02;
@@ -95,4 +98,222 @@ public unsafe partial struct CharacterBase {
 
     [VirtualFunction(67)]
     public partial ulong FlagSlotForUpdate(uint slot, EquipmentModelId* slotBytes);
+
+    [VirtualFunction(71)]
+    public readonly partial byte* ResolveRootPath(byte* pathBuffer, nuint pathBufferSize);
+
+    [VirtualFunction(72)]
+    public readonly partial byte* ResolveSklbPath(byte* pathBuffer, nuint pathBufferSize, uint partialSkeletonIndex);
+
+    [VirtualFunction(73)]
+    public readonly partial byte* ResolveMdlPath(byte* pathBuffer, nuint pathBufferSize, uint slotIndex);
+
+    [VirtualFunction(74)]
+    public readonly partial byte* ResolveSkpPath(byte* pathBuffer, nuint pathBufferSize, uint partialSkeletonIndex);
+
+    [VirtualFunction(75)]
+    public readonly partial byte* ResolvePhybPath(byte* pathBuffer, nuint pathBufferSize, uint partialSkeletonIndex);
+
+    [VirtualFunction(76)]
+    public readonly partial byte* ResolvePapPath(byte* pathBuffer, nuint pathBufferSize, uint unkAnimationIndex, byte* animationName);
+
+    [VirtualFunction(77)]
+    public readonly partial byte* ResolveTmbPath(byte* pathBuffer, nuint pathBufferSize, byte* timelineName);
+
+    [VirtualFunction(79)]
+    public readonly partial byte* ResolveMaterialPapPath(byte* pathBuffer, nuint pathBufferSize, uint slotIndex, uint unkSId);
+
+    [VirtualFunction(81)]
+    public readonly partial byte* ResolveImcPath(byte* pathBuffer, nuint pathBufferSize, uint slotIndex);
+
+    [VirtualFunction(82)]
+    public readonly partial byte* ResolveMtrlPath(byte* pathBuffer, nuint pathBufferSize, uint slotIndex, byte* mtrlFileName);
+
+    [VirtualFunction(83)]
+    public readonly partial byte* ResolveDecalPath(byte* pathBuffer, nuint pathBufferSize, uint slotIndex);
+
+    [VirtualFunction(84)]
+    public readonly partial byte* ResolveVfxPath(byte* pathBuffer, nuint pathBufferSize, uint slotIndex, uint* unkOutParam);
+
+    [VirtualFunction(85)]
+    public readonly partial byte* ResolveEidPath(byte* pathBuffer, nuint pathBufferSize);
+
+    #region Resolve*Path(Span<byte>) overloads
+    public readonly ReadOnlySpan<byte> ResolveRootPath(Span<byte> pathBuffer) {
+        byte* result;
+        fixed (byte* pBuffer = pathBuffer)
+            result = ResolveRootPath(pBuffer, (nuint)pathBuffer.Length);
+        return MemoryMarshal.CreateReadOnlySpanFromNullTerminated(result);
+    }
+
+    public readonly ReadOnlySpan<byte> ResolveSklbPath(Span<byte> pathBuffer, uint partialSkeletonIndex) {
+        byte* result;
+        fixed (byte* pBuffer = pathBuffer)
+            result = ResolveSklbPath(pBuffer, (nuint)pathBuffer.Length, partialSkeletonIndex);
+        return MemoryMarshal.CreateReadOnlySpanFromNullTerminated(result);
+    }
+
+    public readonly ReadOnlySpan<byte> ResolveMdlPath(Span<byte> pathBuffer, uint slotIndex) {
+        byte* result;
+        fixed (byte* pBuffer = pathBuffer)
+            result = ResolveMdlPath(pBuffer, (nuint)pathBuffer.Length, slotIndex);
+        return MemoryMarshal.CreateReadOnlySpanFromNullTerminated(result);
+    }
+
+    public readonly ReadOnlySpan<byte> ResolveSkpPath(Span<byte> pathBuffer, uint partialSkeletonIndex) {
+        byte* result;
+        fixed (byte* pBuffer = pathBuffer)
+            result = ResolveSkpPath(pBuffer, (nuint)pathBuffer.Length, partialSkeletonIndex);
+        return MemoryMarshal.CreateReadOnlySpanFromNullTerminated(result);
+    }
+
+    public readonly ReadOnlySpan<byte> ResolvePhybPath(Span<byte> pathBuffer, uint partialSkeletonIndex) {
+        byte* result;
+        fixed (byte* pBuffer = pathBuffer)
+            result = ResolvePhybPath(pBuffer, (nuint)pathBuffer.Length, partialSkeletonIndex);
+        return MemoryMarshal.CreateReadOnlySpanFromNullTerminated(result);
+    }
+
+    public readonly ReadOnlySpan<byte> ResolvePapPath(Span<byte> pathBuffer, uint unkAnimationIndex, ReadOnlySpan<byte> animationName) {
+        byte* result;
+        fixed (byte* pAnimationName = animationName)
+        fixed (byte* pBuffer = pathBuffer)
+            result = ResolvePapPath(pBuffer, (nuint)pathBuffer.Length, unkAnimationIndex, pAnimationName);
+        return MemoryMarshal.CreateReadOnlySpanFromNullTerminated(result);
+    }
+
+    public readonly ReadOnlySpan<byte> ResolveTmbPath(Span<byte> pathBuffer, ReadOnlySpan<byte> timelineName) {
+        byte* result;
+        fixed (byte* pTimelineName = timelineName)
+        fixed (byte* pBuffer = pathBuffer)
+            result = ResolveTmbPath(pBuffer, (nuint)pathBuffer.Length, pTimelineName);
+        return MemoryMarshal.CreateReadOnlySpanFromNullTerminated(result);
+    }
+
+    public readonly ReadOnlySpan<byte> ResolveMaterialPapPath(Span<byte> pathBuffer, uint slotIndex, uint unkSId) {
+        byte* result;
+        fixed (byte* pBuffer = pathBuffer)
+            result = ResolveMaterialPapPath(pBuffer, (nuint)pathBuffer.Length, slotIndex, unkSId);
+        return MemoryMarshal.CreateReadOnlySpanFromNullTerminated(result);
+    }
+
+    public readonly ReadOnlySpan<byte> ResolveImcPath(Span<byte> pathBuffer, uint slotIndex) {
+        byte* result;
+        fixed (byte* pBuffer = pathBuffer)
+            result = ResolveImcPath(pBuffer, (nuint)pathBuffer.Length, slotIndex);
+        return MemoryMarshal.CreateReadOnlySpanFromNullTerminated(result);
+    }
+
+    public readonly ReadOnlySpan<byte> ResolveMtrlPath(Span<byte> pathBuffer, uint slotIndex, ReadOnlySpan<byte> mtrlFileName) {
+        byte* result;
+        fixed (byte* pMtrlFileName = mtrlFileName)
+        fixed (byte* pBuffer = pathBuffer)
+            result = ResolveMtrlPath(pBuffer, (nuint)pathBuffer.Length, slotIndex, pMtrlFileName);
+        return MemoryMarshal.CreateReadOnlySpanFromNullTerminated(result);
+    }
+
+    public readonly ReadOnlySpan<byte> ResolveDecalPath(Span<byte> pathBuffer, uint slotIndex) {
+        byte* result;
+        fixed (byte* pBuffer = pathBuffer)
+            result = ResolveDecalPath(pBuffer, (nuint)pathBuffer.Length, slotIndex);
+        return MemoryMarshal.CreateReadOnlySpanFromNullTerminated(result);
+    }
+
+    public readonly ReadOnlySpan<byte> ResolveVfxPath(Span<byte> pathBuffer, uint slotIndex, out uint unkOutParam) {
+        byte* result;
+        fixed (uint* pUnkOutParam = &unkOutParam)
+        fixed (byte* pBuffer = pathBuffer)
+            result = ResolveVfxPath(pBuffer, (nuint)pathBuffer.Length, slotIndex, pUnkOutParam);
+        return MemoryMarshal.CreateReadOnlySpanFromNullTerminated(result);
+    }
+
+    public readonly ReadOnlySpan<byte> ResolveEidPath(Span<byte> pathBuffer) {
+        byte* result;
+        fixed (byte* pBuffer = pathBuffer)
+            result = ResolveEidPath(pBuffer, (nuint)pathBuffer.Length);
+        return MemoryMarshal.CreateReadOnlySpanFromNullTerminated(result);
+    }
+    #endregion
+
+    #region Resolve*Path(string) overloads
+    public readonly string ResolveRootPath() {
+        Span<byte> pathBuffer = stackalloc byte[PathBufferSize];
+        return Encoding.UTF8.GetString(ResolveRootPath(pathBuffer));
+    }
+
+    public readonly string ResolveSklbPath(uint partialSkeletonIndex) {
+        Span<byte> pathBuffer = stackalloc byte[PathBufferSize];
+        return Encoding.UTF8.GetString(ResolveSklbPath(pathBuffer, partialSkeletonIndex));
+    }
+
+    public readonly string ResolveMdlPath(uint slotIndex) {
+        Span<byte> pathBuffer = stackalloc byte[PathBufferSize];
+        return Encoding.UTF8.GetString(ResolveMdlPath(pathBuffer, slotIndex));
+    }
+
+    public readonly string ResolveSkpPath(uint partialSkeletonIndex) {
+        Span<byte> pathBuffer = stackalloc byte[PathBufferSize];
+        return Encoding.UTF8.GetString(ResolveSkpPath(pathBuffer, partialSkeletonIndex));
+    }
+
+    public readonly string ResolvePhybPath(uint partialSkeletonIndex) {
+        Span<byte> pathBuffer = stackalloc byte[PathBufferSize];
+        return Encoding.UTF8.GetString(ResolvePhybPath(pathBuffer, partialSkeletonIndex));
+    }
+
+    public readonly string ResolvePapPath(uint unkAnimationIndex, string animationName) {
+        var animationNameByteCount = Encoding.UTF8.GetByteCount(animationName);
+        Span<byte> animationNameBytes = animationNameByteCount <= 512 ? stackalloc byte[animationNameByteCount + 1] : new byte[animationNameByteCount + 1];
+        Encoding.UTF8.GetBytes(animationName, animationNameBytes);
+        animationNameBytes[animationNameByteCount] = 0;
+
+        Span<byte> pathBuffer = stackalloc byte[PathBufferSize];
+        return Encoding.UTF8.GetString(ResolvePapPath(pathBuffer, unkAnimationIndex, animationNameBytes));
+    }
+
+    public readonly string ResolveTmbPath(string timelineName) {
+        var timelineNameByteCount = Encoding.UTF8.GetByteCount(timelineName);
+        Span<byte> timelineNameBytes = timelineNameByteCount <= 512 ? stackalloc byte[timelineNameByteCount + 1] : new byte[timelineNameByteCount + 1];
+        Encoding.UTF8.GetBytes(timelineName, timelineNameBytes);
+        timelineNameBytes[timelineNameByteCount] = 0;
+
+        Span<byte> pathBuffer = stackalloc byte[PathBufferSize];
+        return Encoding.UTF8.GetString(ResolveTmbPath(pathBuffer, timelineNameBytes));
+    }
+
+    public readonly string ResolveMaterialPapPath(uint slotIndex, uint unkSId) {
+        Span<byte> pathBuffer = stackalloc byte[PathBufferSize];
+        return Encoding.UTF8.GetString(ResolveMaterialPapPath(pathBuffer, slotIndex, unkSId));
+    }
+
+    public readonly string ResolveImcPath(uint slotIndex) {
+        Span<byte> pathBuffer = stackalloc byte[PathBufferSize];
+        return Encoding.UTF8.GetString(ResolveImcPath(pathBuffer, slotIndex));
+    }
+
+    public readonly string ResolveMtrlPath(uint slotIndex, string mtrlFileName) {
+        var mtrlFileNameByteCount = Encoding.UTF8.GetByteCount(mtrlFileName);
+        Span<byte> mtrlFileNameBytes = mtrlFileNameByteCount <= 512 ? stackalloc byte[mtrlFileNameByteCount + 1] : new byte[mtrlFileNameByteCount + 1];
+        Encoding.UTF8.GetBytes(mtrlFileName, mtrlFileNameBytes);
+        mtrlFileNameBytes[mtrlFileNameByteCount] = 0;
+
+        Span<byte> pathBuffer = stackalloc byte[PathBufferSize];
+        return Encoding.UTF8.GetString(ResolveMtrlPath(pathBuffer, slotIndex, mtrlFileNameBytes));
+    }
+
+    public readonly string ResolveDecalPath(uint slotIndex) {
+        Span<byte> pathBuffer = stackalloc byte[PathBufferSize];
+        return Encoding.UTF8.GetString(ResolveDecalPath(pathBuffer, slotIndex));
+    }
+
+    public readonly string ResolveVfxPath(uint slotIndex, out uint unkOutParam) {
+        Span<byte> pathBuffer = stackalloc byte[PathBufferSize];
+        return Encoding.UTF8.GetString(ResolveVfxPath(pathBuffer, slotIndex, out unkOutParam));
+    }
+
+    public readonly string ResolveEidPath() {
+        Span<byte> pathBuffer = stackalloc byte[PathBufferSize];
+        return Encoding.UTF8.GetString(ResolveEidPath(pathBuffer));
+    }
+    #endregion
 }
