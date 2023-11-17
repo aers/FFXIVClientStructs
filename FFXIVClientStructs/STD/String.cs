@@ -23,22 +23,17 @@ public unsafe struct StdString {
         }
     }
 
+    [Obsolete("Use AsSpan() instead")]
     public readonly byte[] GetBytes() {
         var data = new byte[Length];
-
-        if (Length <= int.MaxValue)
-            AsSpan().CopyTo(data);
-        else {
-            fixed (byte* pData = data) {
-                System.Buffer.MemoryCopy(BufferPtr, pData, Length, Length);
-            }
-        }
+        // If the string is too large to fit a span, it is also too large to fit an array:
+        // https://sharplab.io/#v2:EYLgtghglgdgNAFxAJwK4wD4AEBMAGAWAChcBGY4gNwmQAIbkIBPAfVNoF5aYBTAd1rAmCHgG1YCAHQBZCAA8AahAA2qHrQC0tAKwA2ALoBuKjXrJGrHJ279BwsRJnylq9Vu3ajQA===
+        // We are therefore not handling ≥ 2 GiB cases here - they should not happen in practice anyway.
+        AsSpan().CopyTo(data);
         return data;
     }
 
     public readonly override string ToString() {
-        // Using GetBytes() if this string is too large to fit in a span brings no benefit:
-        // Encoding.GetString(byte[]) uses .Length (not .LongLength), which throws an OverflowException if the string didn't fit in a span in the first place.
         return Encoding.UTF8.GetString(AsSpan());
     }
 
