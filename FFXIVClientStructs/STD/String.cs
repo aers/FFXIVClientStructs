@@ -11,6 +11,9 @@ public unsafe struct StdString {
     [FieldOffset(0x10)] public ulong Length;
     [FieldOffset(0x18)] public ulong Capacity;
 
+    public readonly byte this[Index index] => AsSpan()[index];
+    public readonly ReadOnlySpan<byte> this[Range range] => AsSpan()[range];
+
     public readonly ReadOnlySpan<byte> AsSpan() {
         if (Length < 16) {
             fixed (StdString* pThis = &this) {
@@ -33,9 +36,8 @@ public unsafe struct StdString {
         return data;
     }
 
-    public readonly override string ToString() {
-        return Encoding.UTF8.GetString(AsSpan());
-    }
+    public readonly override string ToString()
+        => Encoding.UTF8.GetString(AsSpan());
 
     public static implicit operator ReadOnlySpan<byte>(in StdString value)
         => value.AsSpan();

@@ -17,10 +17,16 @@ public unsafe partial struct Utf8String : ICreatable, IDisposable {
     [FieldOffset(0x21)] public byte IsUsingInlineBuffer;
     [FieldOffset(0x22)] public fixed byte InlineBuffer[0x40]; // inline buffer used until strlen > 0x40
 
-    public int Length => Math.Max(0, (int)(BufUsed - 1));
-    public ReadOnlySpan<byte> Span => new(StringPtr, Length);
+    public readonly int Length => Math.Max(0, (int)(BufUsed - 1));
+    [Obsolete("Use AsSpan() instead")]
+    public readonly ReadOnlySpan<byte> Span => new(StringPtr, Length);
+
+    public readonly byte this[Index index] => AsSpan()[index];
+    public readonly ReadOnlySpan<byte> this[Range range] => AsSpan()[range];
 
     public Utf8String() => Ctor();
+
+    public readonly ReadOnlySpan<byte> AsSpan() => new(StringPtr, Length);
 
     public static Utf8String* CreateEmpty(IMemorySpace* memorySpace = null) {
         if (memorySpace == null) memorySpace = IMemorySpace.GetDefaultSpace();
@@ -110,4 +116,7 @@ public unsafe partial struct Utf8String : ICreatable, IDisposable {
 
     [MemberFunction("E8 ?? ?? ?? ?? 40 0F B6 C7 48 8D 35")]
     public static partial Utf8String* Concat(Utf8String* str, Utf8String* buffer, Utf8String* other);
+
+    public static implicit operator ReadOnlySpan<byte>(in Utf8String value)
+        => value.AsSpan();
 }
