@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyCompany("FFXIVClientStructs")]
 [assembly: AssemblyProduct("FFXIVClientStructs")]
 [assembly: AssemblyTitle("FFXIVClientStructs")]
+[assembly: InternalsVisibleTo("CExporter")]
 
 #if DEBUG
 [assembly: AssemblyConfiguration("Debug")]
