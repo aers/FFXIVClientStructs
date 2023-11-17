@@ -11,19 +11,37 @@ public unsafe struct StdString {
     [FieldOffset(0x10)] public ulong Length;
     [FieldOffset(0x18)] public ulong Capacity;
 
-    public byte[] GetBytes() {
+    public readonly ReadOnlySpan<byte> AsSpan() {
+        if (Length < 16) {
+            fixed (StdString* pThis = &this) {
+                return new(pThis->Buffer, (int)Length);
+            }
+        } else if (Length <= int.MaxValue) {
+            return new(BufferPtr, (int)Length);
+        } else {
+            throw new OverflowException($"Cannot convert StdString of length {Length} (≥ 2 GiB) to ReadOnlySpan<byte>");
+        }
+    }
+
+    public readonly byte[] GetBytes() {
         var data = new byte[Length];
 
-        if (Length < 16)
-            for (ulong i = 0; i < Length; i++)
-                data[i] = Buffer[i];
-        else
-            for (ulong i = 0; i < Length; i++)
-                data[i] = BufferPtr[i];
+        if (Length <= int.MaxValue)
+            AsSpan().CopyTo(data);
+        else {
+            fixed (byte* pData = data) {
+                System.Buffer.MemoryCopy(BufferPtr, pData, Length, Length);
+            }
+        }
         return data;
     }
 
-    public override string ToString() {
-        return Encoding.UTF8.GetString(GetBytes());
+    public readonly override string ToString() {
+        // Using GetBytes() if this string is too large to fit in a span brings no benefit:
+        // Encoding.GetString(byte[]) uses .Length (not .LongLength), which throws an OverflowException if the string didn't fit in a span in the first place.
+        return Encoding.UTF8.GetString(AsSpan());
     }
+
+    public static implicit operator ReadOnlySpan<byte>(in StdString value)
+        => value.AsSpan();
 }
