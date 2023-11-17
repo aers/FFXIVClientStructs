@@ -8,11 +8,24 @@ public unsafe struct StdString {
     // if (Length < 16) uses Buffer else uses BufferPtr
     [FieldOffset(0x0)] public byte* BufferPtr;
     [FieldOffset(0x0)] public fixed byte Buffer[16];
+    /// <summary>
+    /// This string's length, as a <see cref="ulong"/>.
+    /// </summary>
     [FieldOffset(0x10)] public ulong Length;
     [FieldOffset(0x18)] public ulong Capacity;
 
-    public readonly byte this[Index index] => AsSpan()[index];
-    public readonly ReadOnlySpan<byte> this[Range range] => AsSpan()[range];
+    /// <summary>
+    /// This string's length, as an <see cref="int"/>.
+    /// </summary>
+    /// <exception cref="OverflowException">This string is ≥ 2 GiB, or an attempt is made to give it a negative length.</exception>
+    /// <remarks>
+    /// The primary motive of this property is to support the implicit <see cref="Index"/> and <see cref="Range"/> accessors.
+    /// </remarks>
+    public int Count {
+        readonly get => checked((int)Length);
+        set => Length = checked((ulong)value);
+    }
+    public readonly ref readonly byte this[int index] => ref AsSpan()[index];
 
     public readonly ReadOnlySpan<byte> AsSpan() {
         if (Length < 16) {
@@ -25,6 +38,9 @@ public unsafe struct StdString {
             throw new OverflowException($"Cannot convert StdString of length {Length} (≥ 2 GiB) to ReadOnlySpan<byte>");
         }
     }
+
+    public readonly ReadOnlySpan<byte> Slice(int start) => AsSpan().Slice(start);
+    public readonly ReadOnlySpan<byte> Slice(int start, int length) => AsSpan().Slice(start, length);
 
     [Obsolete("Use AsSpan() instead")]
     public readonly byte[] GetBytes() {

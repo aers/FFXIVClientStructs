@@ -21,12 +21,14 @@ public unsafe partial struct Utf8String : ICreatable, IDisposable {
     [Obsolete("Use AsSpan() instead")]
     public readonly ReadOnlySpan<byte> Span => new(StringPtr, Length);
 
-    public readonly byte this[Index index] => AsSpan()[index];
-    public readonly ReadOnlySpan<byte> this[Range range] => AsSpan()[range];
+    public readonly ref readonly byte this[int index] => ref AsSpan()[index];
 
     public Utf8String() => Ctor();
 
     public readonly ReadOnlySpan<byte> AsSpan() => new(StringPtr, Length);
+
+    public readonly ReadOnlySpan<byte> Slice(int start) => AsSpan().Slice(start);
+    public readonly ReadOnlySpan<byte> Slice(int start, int length) => AsSpan().Slice(start, length);
 
     public static Utf8String* CreateEmpty(IMemorySpace* memorySpace = null) {
         if (memorySpace == null) memorySpace = IMemorySpace.GetDefaultSpace();
