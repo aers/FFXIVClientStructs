@@ -5162,6 +5162,7 @@ classes:
     funcs:
       0x140C3FB50: ctor
       0x140CB00D0: Finalize
+      0x140c40010: OpenMacro
   Client::UI::Agent::AgentFishingNote:
     vtbls:
       - ea: 0x141A8B180
