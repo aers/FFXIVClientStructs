@@ -242,7 +242,7 @@ public unsafe partial struct Character {
         [FieldOffset(0x18)] public ushort CompanionId;
 
         [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 ?? 66 44 89 7F")]
-        public partial void SetupCompanion(short ornamentId, uint param);
+        public partial void SetupCompanion(short companionId, uint param);
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x78)]
