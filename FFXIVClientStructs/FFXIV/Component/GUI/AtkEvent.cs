@@ -40,6 +40,10 @@ public enum AtkEventType : byte {
     IconTextRollOut = 57,
     IconTextClick = 58,
 
+    // AtkSimpleTween
+    TweenProgress = 64,
+    TweenComplete = 65,
+
     // AtkComponentWindow
     WindowRollOver = 67,
     WindowRollOut = 68,

@@ -10,6 +10,7 @@ public unsafe partial struct AtkComponentDropDownList {
     [FieldOffset(0xC8)] public AtkComponentList* List;
 
     [FieldOffset(0xD8)] public bool IsOpen;
+    [FieldOffset(0xD9)] public bool OpenStateChangePending;
 
     [MemberFunction("E8 ?? ?? ?? ?? 45 89 3E")]
     public partial void SelectItem(int index);

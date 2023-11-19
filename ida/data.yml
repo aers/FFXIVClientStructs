@@ -1541,6 +1541,10 @@ classes:
   Component::GUI::AtkUnitList:
     vtbls:
       - ea: 0x1419BD640
+    funcs:
+      0x1405435F0: Append
+      0x140543650: Remove
+      0x1405436E0: InsertAfter
   Component::GUI::AtkUnitManager:
     vtbls:
       - ea: 0x1419BD648
@@ -1554,6 +1558,7 @@ classes:
       0x140545540: GetAddonById
       0x1405455A0: GetAddonByName
       0x140545650: GetAddonByNode
+      0x140548A40: UpdateDrawOrderIndexes
   Client::UI::RaptureAtkUnitManager:
     vtbls:
       - ea: 0x1419BD7A0
@@ -3311,6 +3316,20 @@ classes:
     vtbls:
       - ea: 0x141A05B18
         base: Component::GUI::AtkEventTarget
+    vfuncs:
+      1: dtor
+    funcs:
+      0x140515A80: ctor
+      0x140515C40: Prepare
+      0x140515CF0: Execute
+      0x140515DC0: Clear
+      0x140515EA0: RegisterEvent
+      0x140515EE0: UnregisterEvent
+      0x140515F30: SetValues
+      0x140516060: AddAnimation
+      0x140516190: GetNodeValue
+      0x140516320: SetNodeValue
+      0x140516440: Update
   Component::GUI::AtkTexture:
     vtbls:
       - ea: 0x141A05A98
@@ -3340,6 +3359,7 @@ classes:
       0x140519D00: ctor
       0x14053C470: GetSingleton
       0x14053C480: GetSingleton2
+      0x1405486B0: GetSingleton3
       0x1405A0F20: Finalize
   Component::GUI::AtkCursor:
     funcs:
@@ -3401,6 +3421,7 @@ classes:
       0x14052ADF0: RegisterEvent
       0x14052AE30: UnregisterEvent
       0x14052AE70: DispatchEvent
+      0x14052AFD0: GetBounds
       0x14052B1E0: GetPositionFloat
       0x14052B200: SetPositionFloat
       0x14052B250: GetPositionShort
@@ -3439,7 +3460,7 @@ classes:
       0x14052C060: GetIsUsingDepthBasedDrawPriority
       0x14052C080: SetUseDepthBasedDrawPriority
       0x14052C0D0: SetDepth
-      0x14052C4A0: Init
+      0x14052C4A0: Initialize
       0x14052C670: SetScale0  # SetScale jumps to this
       0x140537080: SetSize
       0x14052AD50: GetTimelineLabel
@@ -3523,6 +3544,11 @@ classes:
       16: Hide2
       17: SetScaleToHudLayoutScale
       18: ShouldCollideWithWindow
+      22: ShouldIgnoreInputs
+      23: GetRootNode
+      26: GetWindowBounds
+      29: GetRootBounds
+      36: Focus
       40: Initialize
       41: Finalize
       42: Update
@@ -3531,6 +3557,8 @@ classes:
       48: OnSetup
       50: OnRefresh
       51: OnRequestedUpdate
+      53: FireCloseCallback
+      57: OnOpenTransitionStarted
       61: OnMouseOver
       62: OnMouseOut
     funcs:
@@ -3549,6 +3577,9 @@ classes:
       0x140539CA0: CalculateBounds
       0x14053A470: SetFlag
       0x14053BFD0: Draw
+      0x14053C2D0: LoadUldByName
+      0x14053C3F0: SetOpenTransition
+      0x14053C430: SetCloseTransition
       0x14053C4F0: SubscribeAtkArrayData # handler: "4C 8B D2 48 8B D1 41 83 F9 04"
       0x14053C680: UnsubscribeAtkArrayData # handler: "48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 48 8B DA 48 8B F9 41 83 F9 04"
       0x14053C930: SetFocusNode
