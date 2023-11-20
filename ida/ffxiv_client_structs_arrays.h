@@ -7762,7 +7762,11 @@ struct Client::Graphics::Scene::Human /* Size=0xA80 */
 struct Client::Graphics::Scene::Monster /* Size=0x900 */
 {
     /* 0x000 */ Client::Graphics::Scene::CharacterBase CharacterBase;
-    /*       */ byte _gap_0x8F0[0x10];
+    /* 0x8F0 */ unsigned __int16 ModelSetId;
+    /* 0x8F2 */ unsigned __int16 SecondaryId;
+    /* 0x8F4 */ unsigned __int16 Variant;
+    /*       */ byte _gap_0x8F6[0x2];
+    /*       */ byte _gap_0x8F8[0x8];
 };
 
 struct Client::Graphics::Scene::Object::ObjectVTable /* Size=0x0 */
