@@ -35,24 +35,24 @@ public unsafe partial struct Human {
     [FieldOffset(0x940)] public ushort FurId;
 
     [FieldOffset(0x980)] private nint _slotDecalBase;
-    [FieldOffset(0x980)] public Texture* HeadDecal;
-    [FieldOffset(0x988)] public Texture* TopDecal;
-    [FieldOffset(0x990)] public Texture* ArmsDecal;
-    [FieldOffset(0x998)] public Texture* LegsDecal;
-    [FieldOffset(0x9A0)] public Texture* FeetDecal;
-    [FieldOffset(0x9A8)] public Texture* EarDecal;
-    [FieldOffset(0x9B0)] public Texture* NeckDecal;
-    [FieldOffset(0x9B8)] public Texture* WristDecal;
-    [FieldOffset(0x9C0)] public Texture* RFingerDecal;
-    [FieldOffset(0x9C8)] public Texture* LFingerDecal;
+    [FieldOffset(0x980)] public TextureResourceHandle* HeadDecal;
+    [FieldOffset(0x988)] public TextureResourceHandle* TopDecal;
+    [FieldOffset(0x990)] public TextureResourceHandle* ArmsDecal;
+    [FieldOffset(0x998)] public TextureResourceHandle* LegsDecal;
+    [FieldOffset(0x9A0)] public TextureResourceHandle* FeetDecal;
+    [FieldOffset(0x9A8)] public TextureResourceHandle* EarDecal;
+    [FieldOffset(0x9B0)] public TextureResourceHandle* NeckDecal;
+    [FieldOffset(0x9B8)] public TextureResourceHandle* WristDecal;
+    [FieldOffset(0x9C0)] public TextureResourceHandle* RFingerDecal;
+    [FieldOffset(0x9C8)] public TextureResourceHandle* LFingerDecal;
 
-    public ref Texture* SlotDecal(int slot) {
+    public ref TextureResourceHandle* SlotDecal(int slot) {
         if (slot < 0 || slot > 9)
             throw new ArgumentOutOfRangeException(nameof(slot));
-        return ref ((Texture**)Unsafe.AsPointer(ref _slotDecalBase))[slot];
+        return ref ((TextureResourceHandle**)Unsafe.AsPointer(ref _slotDecalBase))[slot];
     }
 
-    public Span<Pointer<Texture>> SlotDecalsSpan
+    public Span<Pointer<TextureResourceHandle>> SlotDecalsSpan
         => new(Unsafe.AsPointer(ref _slotDecalBase), 10);
 
     [FieldOffset(0x9D8)] public ConstantBuffer* CustomizeParameterCBuffer;
