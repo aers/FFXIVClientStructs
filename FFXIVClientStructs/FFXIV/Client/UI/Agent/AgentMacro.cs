@@ -3,7 +3,7 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.Macro)]
-[StructLayout(LayoutKind.Explicit, Size = 0xbf0)]
+[StructLayout(LayoutKind.Explicit, Size = 0xEB18)]
 public unsafe partial struct AgentMacro {
     [FieldOffset(0x0)]
     public AgentInterface AgentInterface;
