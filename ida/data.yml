@@ -4524,12 +4524,13 @@ classes:
       - ea: 0x141B42EB0
     funcs:
       0x141312D90: GetCompanionDataID
-      0x141312BD0: SetCompanion
+      0x141312BD0: SetupCompanion
   Client::Game::Character::OrnamentContainer:
     vtbls:
       - ea: 0x141A38150
     funcs:
       0x141319E40: HasOrnament
+      0x141319E70: SetupOrnament
   Client::Game::Character::VfxContainer:
     vtbls:
       - ea: 0x141B42F00
@@ -4539,6 +4540,7 @@ classes:
       0x14132DAC0: LoadCharacterSound
   Client::Game::Character::MountContainer:
     funcs:
+      0x141313A60: CreateAndSetupMount
       0x141315150: SetupMount
   Client::Game::Character::ReaperShroudContainer:
     vtbls:
