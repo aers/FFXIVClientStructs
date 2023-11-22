@@ -6,17 +6,10 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 // ctor E8 ?? ?? ?? ?? 81 A3 ?? ?? ?? ?? ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 
 [StructLayout(LayoutKind.Explicit, Size = 0xB0)]
 public unsafe partial struct ResourceHandle {
-    [FieldOffset(0x00)] public void* vtbl;
-    [FieldOffset(0x00)] public void** vfunc;
+    [FieldOffset(0x00), CExportIgnore] public void* vtbl;
+    [FieldOffset(0x00), CExportIgnore] public void** vfunc;
 
     [FieldOffset(0x08)] public ResourceHandleType Type;
-
-    [Obsolete($"Use Type.Category instead", true)]
-    [FieldOffset(0x08)] public ResourceCategory Category; // First byte in SqPack name, but stored as ushort
-    [Obsolete($"Use Type.Unknown0A instead", true)]
-    [FieldOffset(0x0A)] public byte Unknown0A; // Third byte in SqPack name
-    [Obsolete($"Use Type.Expansion instead", true)]
-    [FieldOffset(0x0B)] public byte Expansion; // Second byte in SqPack name. Specifies SqPack folder: 0 = ffxiv, 1 = ex1, 2 = ex2, ...
 
     [FieldOffset(0x0C)] public uint FileType; // "txt" "uld" etc from the header
     [FieldOffset(0x10)] public uint Id;

@@ -15,16 +15,15 @@ public enum TextureType : byte {
 // no explicit ctor
 [StructLayout(LayoutKind.Explicit, Size = 0x18)]
 public unsafe partial struct AtkTexture : ICreatable {
-    [FieldOffset(0x0)] public void* vtbl;
+    [FieldOffset(0x0), CExportIgnore] public void* vtbl;
 
     // union type
     [FieldOffset(0x8)] public AtkTextureResource* Resource;
     [FieldOffset(0x8)] public void* Crest;
     [FieldOffset(0x8)] public Texture* KernelTexture;
     [FieldOffset(0x10)] public TextureType TextureType;
-    [FieldOffset(0x11)] public bool TextureReady; // Use IsTextureReady() instead
-    [Obsolete("Use IsTextureReady()", true)]
-    [FieldOffset(0x11)] public byte UnkBool_2;
+    [FieldOffset(0x11), Obsolete("Use IsTextureReady() instead")] public bool TextureReady;
+    [FieldOffset(0x11)] private bool CachedIsTextureReady; // Use IsTextureReady() to get this
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 87 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? 4C 89 BF")]
     public partial void Ctor();

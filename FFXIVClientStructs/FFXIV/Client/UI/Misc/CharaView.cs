@@ -43,66 +43,6 @@ public unsafe partial struct CharaView : ICreatable {
     public static CharaView* Create()
         => IMemorySpace.GetUISpace()->Create<CharaView>();
 
-    #region old struct
-    [Obsolete("Use State", true)]
-    [FieldOffset(0x008)] public uint Unk8;
-    [Obsolete("Use ClientObjectId", true)]
-    [FieldOffset(0x00C)] public uint CutsceneActorIndex; // 40 to 47
-    [Obsolete("Use ClientObjectIndex", true)]
-    [FieldOffset(0x010)] public uint ScreenActorIndex;   // 0 to 7, not 240 to 247
-    [Obsolete("Use CameraType", true)]
-    [FieldOffset(0x014)] public uint Unk14;
-    [Obsolete("Use Camera", true)]
-    [FieldOffset(0x020)] public void* Unk20;
-
-    [Obsolete("Unknown", true)]
-    [FieldOffset(0x0C0)] public uint UnkC0;
-    [Obsolete("Use Agent", true)]
-    [FieldOffset(0x030)] public ulong Unk30;
-    [Obsolete("Unknown", true)]
-    [FieldOffset(0x038)] public ulong Unk38;
-
-    [Obsolete("Use ItemsSpan", true)]
-    [FieldOffset(0x0D0)] public UnkStruct UnkD0;
-    [Obsolete("Use ItemsSpan", true)]
-    [FieldOffset(0x0F0)] public UnkStruct UnkF0;
-    [Obsolete("Use ItemsSpan", true)]
-    [FieldOffset(0x110)] public UnkStruct Unk110;
-    [Obsolete("Use ItemsSpan", true)]
-    [FieldOffset(0x130)] public UnkStruct Unk130;
-    [Obsolete("Use ItemsSpan", true)]
-    [FieldOffset(0x150)] public UnkStruct Unk150;
-    [Obsolete("Use ItemsSpan", true)]
-    [FieldOffset(0x170)] public UnkStruct Unk170;
-    [Obsolete("Use ItemsSpan", true)]
-    [FieldOffset(0x190)] public UnkStruct Unk190;
-
-    [Obsolete("Use CharacterDataCopied and CharacterLoaded", true)]
-    [FieldOffset(0x2B8)] public ushort Unk2B8;
-    [Obsolete("Unknown", true)]
-    [FieldOffset(0x290)] public ulong Unk290;
-    [Obsolete("Unknown", true)]
-    [FieldOffset(0x298)] public ulong Unk298;
-    [Obsolete("Unknown", true)]
-    [FieldOffset(0x2A0)] public ulong Unk2A0;
-    [Obsolete("Unknown", true)]
-    [FieldOffset(0x2A8)] public ulong Unk2A8;
-    [Obsolete("Unknown", true)]
-    [FieldOffset(0x2B0)] public ulong Unk2B0;
-
-    [Obsolete("Use CharaViewItem", true)]
-    [StructLayout(LayoutKind.Explicit, Size = 0x20)]
-    public struct UnkStruct // related to equipped/glamoured items
-    {
-        [FieldOffset(0x00)] public ushort Unk0;
-        [FieldOffset(0x03)] public byte Unk1;
-        [FieldOffset(0x04)] public byte Unk2;
-        [FieldOffset(0x08)] public ulong Unk3; // ItemID
-        [FieldOffset(0x10)] public ulong Unk4;
-        [FieldOffset(0x18)] public ulong Unk5;
-    }
-    #endregion
-
     [MemberFunction("E8 ?? ?? ?? ?? 41 80 A6 ?? ?? ?? ?? ?? 48 8D 05")]
     public readonly partial void Ctor();
 

@@ -445,7 +445,8 @@ public enum AgentId : uint {
     SXTBattleLog = 434,
 
     FGSEnterDialog = 436,
-
+    FGSStageIntro = 437,
+    FGSHud = 438,
     FGSWinner = 439,
     FGSResult = 440
 }

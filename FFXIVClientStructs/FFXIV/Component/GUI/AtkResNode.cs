@@ -51,7 +51,8 @@ public enum NodeFlags : ushort {
 public unsafe partial struct AtkResNode : ICreatable {
     [FieldOffset(0x0)] public AtkEventTarget AtkEventTarget;
     [FieldOffset(0x8)] public uint NodeID;
-    [FieldOffset(0x10)] public void* TimelineObject; // Component::GUI::AtkTimeline???
+    [FieldOffset(0x10), Obsolete("Use Timeline")] public void* TimelineObject;
+    [FieldOffset(0x10)] public AtkTimeline* Timeline;
 
     [FieldOffset(0x18)] public AtkEventManager AtkEventManager; // holds events registered to this node
 
@@ -67,7 +68,6 @@ public unsafe partial struct AtkResNode : ICreatable {
     [FieldOffset(0x4C)] public float ScaleX;
     [FieldOffset(0x50)] public float ScaleY;
     [FieldOffset(0x54)] public float Rotation; // radians (file is degrees)
-    [FieldOffset(0x58), Obsolete("Use Transform or ScreenX, ScreenY", true)] public fixed float UnkMatrix[3 * 2];
     [FieldOffset(0x58)] public Matrix2x2 Transform;
     [FieldOffset(0x68)] public float ScreenX;
     [FieldOffset(0x6C)] public float ScreenY;
@@ -98,11 +98,13 @@ public unsafe partial struct AtkResNode : ICreatable {
 
     // asm accesses these fields together so this is one 32bit field with priority+flags
     [FieldOffset(0x9C)] public ushort Priority;
-    [Obsolete("Use NodeFlags", true)]
-    [FieldOffset(0x9E)] public short Flags;
     [FieldOffset(0x9E)] public NodeFlags NodeFlags;
-    [FieldOffset(0xA0), Obsolete("Use DrawFlags", true)] public uint Flags_2; // bit 1 = has changes, ClipCount is bits 10-17, idk its a mess
-    [FieldOffset(0xA0)] public uint DrawFlags;
+    /// <summary>
+    /// IsDirty = 0x1,
+    /// DontMakeVisibleOnNewTimelineLabel = 0x100,
+    /// bit 3 is recalculate scale/rotation
+    /// </summary>
+    [FieldOffset(0xA0)] public uint DrawFlags; // bit 1 = has changes, ClipCount is bits 10-17, idk its a mess
 
     public bool IsVisible => NodeFlags.HasFlag(NodeFlags.Visible);
 
@@ -240,6 +242,18 @@ public unsafe partial struct AtkResNode : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? FF C6 3B F5 72 E5 BA ?? ?? ?? ??")]
     public partial void SetUseDepthBasedPriority(bool enable);
 
+    [MemberFunction("E8 ?? ?? ?? ?? 66 83 F8 66 75 3F")]
+    public partial ushort GetTimelineLabel();
+
+    [MemberFunction("48 85 C9 74 12 48 8B 41 10")]
+    public partial void EnableTimeline();
+
+    [MemberFunction("E8 ?? ?? ?? ?? 40 FE C5 49 83 C7 04")]
+    public partial void DisableTimeline();
+
     [VirtualFunction(1)]
     public partial void Destroy(bool free);
+
+    [VirtualFunction(2)]
+    public partial void UpdateFromTimeline();
 }

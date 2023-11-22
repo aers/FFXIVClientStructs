@@ -9,18 +9,18 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //   Component::GUI::AtkModule
 //     Component::GUI::AtkModuleInterface
 [StructLayout(LayoutKind.Explicit, Size = 0x28F98)]
+[VTableAddress("33 C9 48 8D 05 ?? ?? ?? ?? 48 89 8F", 5)]
 public unsafe partial struct RaptureAtkModule {
     public static RaptureAtkModule* Instance() => UIModule.Instance()->GetRaptureAtkModule();
 
     [FieldOffset(0x0)] public AtkModule AtkModule;
 
-    [FieldOffset(0x10D40)] public Utf8String* AddonNames; // pointer to an array of 855 Utf8Strings
+    [FieldOffset(0x87F7)] public AgentUpdateFlags AgentUpdateFlag; // reset happens in RaptureAtkModule_OnUpdate
+    [FieldOffset(0x10D40)] public Utf8String* AddonNames; // pointer to an array of 853 Utf8Strings
 
     [FieldOffset(0x10E20)] public AgentModule AgentModule;
 
     [FieldOffset(0x11C20)] public RaptureAtkUnitManager RaptureAtkUnitManager;
-
-    [FieldOffset(0x1B8A8), Obsolete("Use RaptureAtkUnitManager.Flags", true)] public RaptureAtkModuleFlags Flags; // TODO: this is actually at RaptureAtkUnitManager + 0x9C88
 
     [FieldOffset(0x1BBB8)] public int NameplateInfoCount;
     [FieldOffset(0x1BBC0)] public NamePlateInfo NamePlateInfoArray; // 0-50, &NamePlateInfoArray[i]
@@ -45,6 +45,9 @@ public unsafe partial struct RaptureAtkModule {
     [VirtualFunction(39)]
     public partial void SetUiVisibility(bool uiVisible);
 
+    [VirtualFunction(58)]
+    public partial void Update(float delta);
+
     public bool IsUiVisible {
         get => !RaptureAtkUnitManager.Flags.HasFlag(RaptureAtkModuleFlags.UiHidden);
         set => SetUiVisibility(value);
@@ -62,6 +65,18 @@ public unsafe partial struct RaptureAtkModule {
         [FieldOffset(0x244)] public bool IsDirty;
 
         public bool IsPrefixTitle => ((Flags >> (8 * 3)) & 0xFF) == 1;
+    }
+
+    [Flags]
+    public enum AgentUpdateFlags : byte {
+        None = 0x00,
+        InventoryUpdate = 0x01,
+        ActionBarUpdate = 0x02, // Triggered by using Actions, Inventories, Gearsets, Macros
+        RetainerUpdate = 0x04,
+        NameplateUpdate = 0x08,
+        UnlocksUpdate = 0x10, // Triggered by Mounts, Minions, Orchestrion Rolls, Sightseeing Log, UnlockLinks...
+        MainCommandEnabledStateUpdate = 0x20,
+        HousingInventoryUpdate = 0x40,
     }
 }
 

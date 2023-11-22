@@ -12,6 +12,10 @@ public unsafe partial struct HousingOutdoorTerritory {
     [MemberFunction("40 56 57 48 83 EC 38 0F B6 FA")]
     public partial int GetPlotIcon(byte plot);
 
+    [FieldOffset(0x96A8)] public sbyte StandingInPlot;
+    [FieldOffset(0x96AA)] public sbyte EditingFixturesOfPlot;
+    [FieldOffset(0x96B0)] public sbyte EditingFurnishingsOfPlot;
+
     [FixedSizeArray<PlotDetail>(60)]
     [FieldOffset(0x96B8)] public fixed byte Plot[0x10 * 60];
 
