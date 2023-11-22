@@ -7,11 +7,12 @@ namespace FFXIVClientStructs.STD;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct StdVector<T> : IList<T>, IList, IReadOnlyList<T> where T : unmanaged {
     public T* First;
+    // End of used memory
     public T* Last;
+    // End of allocated memory
     public T* End;
 
-    // TODO: When removing Capacity() (for breaking changes), rename this to Capacity
-    public int CapacityInt {
+    public int Capacity {
         readonly get => checked((int)LongCapacity);
         set => LongCapacity = value;
     }
@@ -30,28 +31,28 @@ public unsafe struct StdVector<T> : IList<T>, IList, IReadOnlyList<T> where T : 
     }
 
     public readonly int Count => checked((int)LongCount);
-    
+
     public readonly long LongCount {
         get {
             if (First == null || Last == null || First > Last)
                 return 0;
 
-            var capacity = Last - First;
-            if (capacity > 0xFFFFFFFF)
-                throw new OverflowException("Size exceeds max");
-            return capacity;
+            var count = Last - First;
+            if (count > 0xFFFFFFFF)
+                throw new OverflowException("Count exceeds max");
+            return count;
         }
     }
 
-    bool IList.IsFixedSize => false;
+    readonly bool IList.IsFixedSize => false;
 
-    bool ICollection<T>.IsReadOnly => false;
+    readonly bool ICollection<T>.IsReadOnly => false;
 
-    bool IList.IsReadOnly => false;
+    readonly bool IList.IsReadOnly => false;
 
-    bool ICollection.IsSynchronized => false;
+    readonly bool ICollection.IsSynchronized => false;
 
-    object ICollection.SyncRoot => this;
+    readonly object ICollection.SyncRoot => this;
 
     public readonly T this[int index] {
         get {
@@ -78,9 +79,10 @@ public unsafe struct StdVector<T> : IList<T>, IList, IReadOnlyList<T> where T : 
     }
 
     public void Add(T value) {
-        Resize(Count + 1);
+        var count = LongCount;
+        Resize(count + 1);
 
-        *Last++ = value;
+        First[count] = value;
     }
 
     private void Resize(long newSize) {
@@ -130,18 +132,18 @@ public unsafe struct StdVector<T> : IList<T>, IList, IReadOnlyList<T> where T : 
         return Count - 1;
     }
 
-    public void AddRange(IEnumerable<T> collection)
-        => InsertRange(Count, collection);
+    public void AddRange(IEnumerable<T> collection) =>
+        InsertRange(Count, collection);
 
     public void Clear() {
         Last = First;
     }
 
-    public bool Contains(T value) {
+    public readonly bool Contains(T value) {
         return Count != 0 && IndexOf(value) >= 0;
     }
 
-    bool IList.Contains(object? value) {
+    readonly bool IList.Contains(object? value) {
         try {
             return Contains((T)value!);
         } catch (InvalidCastException) {
@@ -149,7 +151,7 @@ public unsafe struct StdVector<T> : IList<T>, IList, IReadOnlyList<T> where T : 
         }
     }
 
-    public void CopyTo(T[] array) =>
+    public readonly void CopyTo(T[] array) =>
         CopyTo(array, 0);
 
     void ICollection.CopyTo(Array array, int index) {
@@ -171,18 +173,16 @@ public unsafe struct StdVector<T> : IList<T>, IList, IReadOnlyList<T> where T : 
             throw new ArgumentException("Insufficient space for destination");
         }
 
-        T[]? tArray = array as T[];
-        if (tArray != null) {
+        if (array is T[] tArray) {
             CopyTo(tArray, index);
         } else {
-            object?[]? objects = array as object[];
-            if (objects == null) {
+            if (array is not object[] objects) {
                 throw new ArgumentException("Invalid array type", nameof(array));
             }
 
             var count = Count;
             try {
-                for (int i = 0; i < count; ++i)
+                for (var i = 0; i < count; ++i)
                     objects[index + i] = First[i];
             } catch (ArrayTypeMismatchException) {
                 throw new ArgumentException("Invalid array type", nameof(array));
@@ -208,7 +208,7 @@ public unsafe struct StdVector<T> : IList<T>, IList, IReadOnlyList<T> where T : 
             throw new ArgumentException("Insufficient space for destination");
         }
 
-        for (int i = 0; i < count; ++i)
+        for (var i = 0; i < count; ++i)
             array[arrayIndex + i] = First[index + i];
     }
 
@@ -222,7 +222,7 @@ public unsafe struct StdVector<T> : IList<T>, IList, IReadOnlyList<T> where T : 
         }
         Reserve(capacity);
 
-        return CapacityInt;
+        return Capacity;
     }
 
     public Enumerator GetEnumerator() {
@@ -282,7 +282,7 @@ public unsafe struct StdVector<T> : IList<T>, IList, IReadOnlyList<T> where T : 
         }
 
         if (collection is ICollection<T> c) {
-            int count = c.Count;
+            var count = c.Count;
             if (count > 0) {
                 var vCount = Count;
                 Resize(vCount + count);
@@ -310,7 +310,7 @@ public unsafe struct StdVector<T> : IList<T>, IList, IReadOnlyList<T> where T : 
     }
 
     public bool Remove(T item) {
-        int index = IndexOf(item);
+        var index = IndexOf(item);
         if (index >= 0) {
             RemoveAt(index);
             return true;
@@ -354,40 +354,8 @@ public unsafe struct StdVector<T> : IList<T>, IList, IReadOnlyList<T> where T : 
         LongCapacity = LongCount;
     }
 
-    [Obsolete("Use other properties or GetEnumerator()", true)]
-    public ReadOnlySpan<T> Span {
-        get {
-            var size = Size();
-            if (size >= 0x7FEFFFFF)
-                throw new IndexOutOfRangeException($"Size exceeds max. Array index. (Size={size})");
-            return new ReadOnlySpan<T>(First, (int)size);
-        }
-    }
-
-    [Obsolete("Use Count", true)]
-    public ulong Size() {
-        if (First == null || Last == null)
-            return 0;
-
-        return (ulong)(Last - First);
-    }
-    
-    // TODO: When removing this obsolete (for breaking changes), rename CapacityInt to Capacity
-    [Obsolete("Use CapacityInt", true)]
-    public ulong Capacity() {
-        if (End == null || First == null)
-            return 0;
-
-        return (ulong)(End - First);
-    }
-
-    [Obsolete("Use this[value]", true)]
-    public T Get(ulong index) {
-        if (index >= Size())
-            throw new IndexOutOfRangeException($"Index out of Range: {index}");
-
-        return First[index];
-    }
+    public readonly ReadOnlySpan<T> AsSpan() =>
+        new(First, Count);
 
     public struct Enumerator : IEnumerator<T>, IEnumerator {
         private readonly StdVector<T>* vector;
@@ -413,9 +381,9 @@ public unsafe struct StdVector<T> : IList<T>, IList, IReadOnlyList<T> where T : 
 
         readonly object? IEnumerator.Current {
             get {
-                if (idx == 0 || idx == vector->LongCount + 1) {
+                if (idx == 0 || idx == vector->LongCount + 1)
                     throw new InvalidOperationException();
-                }
+
                 return Current;
             }
         }
