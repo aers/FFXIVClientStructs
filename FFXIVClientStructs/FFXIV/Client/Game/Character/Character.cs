@@ -79,6 +79,8 @@ public unsafe partial struct Character {
     [FieldOffset(0x1BB6)] public CharacterModes Mode;
     [FieldOffset(0x1BB7)] public byte ModeParam; // Different purpose depending on mode. See CharacterModes for more info.
 
+    [FieldOffset(0x1BBB)] public byte FreeCompanyCrestBitfield; // & 0x01 for offhand weapon, & 0x02 for head, & 0x04 for top, ..., & 0x20 for feet
+
     // Note: These 2 status flags might be just an ushort instead of 2 separate bytes.
 
     // 0x1 = WeaponDrawn
