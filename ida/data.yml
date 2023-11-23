@@ -1546,6 +1546,7 @@ classes:
       - ea: 0x1419BD648
         base: Component::GUI::AtkEventListener
     vfuncs:
+      8: ShowAddonByID
       11: UpdateAddonByID
     funcs:
       0x14017C260: Finalize
