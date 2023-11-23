@@ -4188,7 +4188,10 @@ classes:
       0x14066E410: SetSavePendingFlag
   Client::UI::Misc::RaptureMacroModule::Macro:
     funcs:
+      0x14066CFA0: Clear
+      0x14066CFF0: IsEmpty
       0x14066D030: SetIcon
+      0x14078C010: Copy
   Client::UI::Misc::RaptureTextModule:
     vtbls:
       - ea: 0x141A1BF08
@@ -5164,7 +5167,11 @@ classes:
     funcs:
       0x140C3FB50: ctor
       0x140CB00D0: Finalize
-      0x140c40010: OpenMacro
+      0x140C40010: OpenMacro
+      0x140C42680: AddHistoryEvent
+      0x140C429A0: GetPreviousHistoryEvent
+      0x140C429E0: GetNextHistoryEvent
+      0x140C42870: DoHistoryEvent
   Client::UI::Agent::AgentFishingNote:
     vtbls:
       - ea: 0x141A8B180
