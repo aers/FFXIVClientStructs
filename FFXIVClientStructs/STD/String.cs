@@ -9,11 +9,16 @@ namespace FFXIVClientStructs.STD;
 // std::string aka std::basic_string from msvc
 [StructLayout(LayoutKind.Explicit, Size = 0x20)]
 public unsafe struct StdBasicString<T> : IList<T>, IList, IReadOnlyList<T> where T : unmanaged {
-    // if (Length < 16) uses Buffer else uses BufferPtr
     [FieldOffset(0x0)] public T* BufferPtr;
     [FieldOffset(0x0)] public fixed byte SmallBufferRaw[16];
     [FieldOffset(0x10)] public ulong _Length;
     [FieldOffset(0x18)] public ulong _Capacity;
+
+    public StdBasicString() {
+        NativeMemory.Fill(SmallBuffer, 16, 0);
+        _Length = 0;
+        Capacity = SmallStringCapacity;
+    }
 
     private static int SmallStringCapacity => Math.Max(16 / sizeof(T), 1) - 1;
     public readonly bool IsSmallStringOptimized => LongCapacity < SmallStringCapacity;
@@ -27,7 +32,7 @@ public unsafe struct StdBasicString<T> : IList<T>, IList, IReadOnlyList<T> where
     public readonly T* Data => IsSmallStringOptimized ? SmallBuffer : BufferPtr;
 
     public readonly ReadOnlySpan<T> AsSpan() =>
-        new(Data, checked((int)_Length));
+        new(Data, Count);
 
     public readonly override string ToString() {
         var span = AsSpan();
@@ -46,7 +51,7 @@ public unsafe struct StdBasicString<T> : IList<T>, IList, IReadOnlyList<T> where
     //
 
     public int Capacity {
-        readonly get => checked((int)LongCapacity);
+        readonly get => checked((int)_Capacity);
         set => LongCapacity = value;
     }
 
@@ -55,7 +60,7 @@ public unsafe struct StdBasicString<T> : IList<T>, IList, IReadOnlyList<T> where
         set => Reallocate(value);
     }
 
-    public readonly int Count => checked((int)LongCount);
+    public readonly int Count => checked((int)_Length);
 
     public readonly long LongCount => checked((long)_Length);
 

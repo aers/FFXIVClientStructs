@@ -12,6 +12,12 @@ public unsafe struct StdVector<T> : IList<T>, IList, IReadOnlyList<T> where T : 
     // End of allocated memory
     public T* End;
 
+    public StdVector() {
+        First = null;
+        Last = null;
+        End = null;
+    }
+
     public int Capacity {
         readonly get => checked((int)LongCapacity);
         set => LongCapacity = value;
