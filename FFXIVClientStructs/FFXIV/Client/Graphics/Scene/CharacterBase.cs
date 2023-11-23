@@ -101,4 +101,7 @@ public unsafe partial struct CharacterBase {
 
     [VirtualFunction(96)]
     public partial void SetFreeCompanyCrestVisibleOnSlot(byte slot, byte isVisible);
+
+    [VirtualFunction(97)]
+    public partial void SetFreeCompanyCrest(Texture* freeCompanyCrest);
 }
