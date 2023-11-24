@@ -11,7 +11,7 @@ public unsafe partial struct AgentMacro {
     [FieldOffset(0x00)] public AgentInterface AgentInterface;
     [FieldOffset(0x28)] public RaptureMacroModule.Macro ClipboardMacro;
     [FieldOffset(0x6B0)] public ExcelSheet* TextCommandParamSheet;
-    
+
     /// <summary>
     /// The currently selected macro set.
     /// </summary>
@@ -29,7 +29,7 @@ public unsafe partial struct AgentMacro {
     [FieldOffset(0xB7C)] public uint IconListAddonId;
 
     [FieldOffset(0xB84)] public uint TextCommandListAddonId;
-    
+
     [FieldOffset(0xBD0)] public StdVector<TextCommandEntry> TextCommands;
     [FieldOffset(0xBE8)] public int FocusedTextCommandIndex;
 
