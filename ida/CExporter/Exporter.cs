@@ -357,7 +357,7 @@ public abstract class ExporterBase {
         sb.Append(" (");
         sb.Append(callType.Name switch {
             "CallConvCdecl" => "__cdecl",
-            "CallConvFastcall" => "f__astcall",
+            "CallConvFastcall" => "__fastcall",
             "CallConvStdcall" => "__stdcall",
             "CallConvThiscall" => "__thiscall",
             _ => throw new Exception($"Unknown calling convention {callType.Name}")
