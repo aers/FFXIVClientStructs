@@ -349,33 +349,11 @@ public abstract class ExporterBase {
         header.AppendLine(sb.ToString());
     }
 
-    private string BuildUnmanagedFunctionDefinition(FieldInfo fieldInfo) {
-        var sb = new StringBuilder();
-        var fieldType = fieldInfo.FieldType;
-        var callType = fieldInfo.GetModifiedFieldType().GetFunctionPointerCallingConventions()[0];
-        sb.Append(fieldType.GetFunctionPointerReturnType().FixTypeName(FixFullName));
-        sb.Append(" (");
-        sb.Append(callType.Name switch {
-            "CallConvCdecl" => "__cdecl",
-            "CallConvFastcall" => "__fastcall",
-            "CallConvStdcall" => "__stdcall",
-            "CallConvThiscall" => "__thiscall",
-            _ => throw new Exception($"Unknown calling convention {callType.Name}")
-        });
-        sb.Append(" *");
-        sb.Append(fieldInfo.Name);
-        sb.Append(")(");
-        sb.Append(string.Join(", ", fieldType.GetFunctionPointerParameterTypes().Select(t => t.FixTypeName(FixFullName)).Select((t, i) => t + $" a{i + 1}")));
-        sb.Append(')');
-        return sb.ToString();
-    }
-
     private string BuildFunctionDefinition(FieldInfo fieldInfo) {
         var sb = new StringBuilder();
         var fieldType = fieldInfo.FieldType;
         sb.Append(fieldType.GetFunctionPointerReturnType().FixTypeName(FixFullName));
-        sb.Append(" (__fastcall"); // unsure if this is correct checked from GameObject->LuaActor->LuaState->db_errorfb what call type it was
-        sb.Append(" *");
+        sb.Append(" (__fastcall *");
         sb.Append(fieldInfo.Name);
         sb.Append(")(");
         sb.Append(string.Join(", ", fieldType.GetFunctionPointerParameterTypes().Select(t => t.FixTypeName(FixFullName)).Select((t, i) => t + $" a{i + 1}")));
@@ -438,11 +416,7 @@ public abstract class ExporterBase {
                 Console.WriteLine(warn);
                 ExporterStatics.WarningListDictionary.TryAdd(type, warn);
             }
-        } else if (fieldType.IsUnmanagedFunctionPointer) {
-            sb.AppendLine(string.Format($"    /* 0x{{0:X{pad}}} */ {BuildUnmanagedFunctionDefinition(fieldInfo)};", fieldOffset));
-
-            fieldSize = 8;
-        } else if (fieldType.IsFunctionPointer) {
+        } else if (fieldType.IsFunctionPointer || fieldType.IsUnmanagedFunctionPointer) {
             sb.AppendLine(string.Format($"    /* 0x{{0:X{pad}}} */ {BuildFunctionDefinition(fieldInfo)};", fieldOffset));
 
             fieldSize = 8;
