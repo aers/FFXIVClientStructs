@@ -36,7 +36,7 @@ def try_set_func_arg_type(ea, arg_idx, type, ptr=0, name=None):
     if not ida_nalt.get_tinfo(tinfo, ea):
         print("Unable to get type info for 0x{0:X}, trying to decompile first".format(ea))
 
-        if not ida_hexrays.decompile(ea):
+        if not ida_hexrays.decompile_func(ea):
             print("Unable to decompile 0x{0:X}, moving on".format(ea))
             return
 
