@@ -6,6 +6,8 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using FFXIVClientStructs.Attributes;
+using Microsoft.VisualBasic;
+using Microsoft.VisualBasic.FileIO;
 
 namespace CExporter;
 
@@ -149,6 +151,8 @@ public abstract class ExporterBase {
 
     private static bool IsNotHavok(FieldInfo fieldInfo) {
         var type = fieldInfo.FieldType;
+        if (type.IsFunctionPointer || type.IsUnmanagedFunctionPointer)
+            return true;
         if (type.IsPointer)
             type = type.GetElementType()!;
         return !(type.GenericTypeArguments.Any(IsHavok) || IsHavok(type));
@@ -345,6 +349,40 @@ public abstract class ExporterBase {
         header.AppendLine(sb.ToString());
     }
 
+    private string BuildUnmanagedFunctionDefinition(FieldInfo fieldInfo) {
+        var sb = new StringBuilder();
+        var fieldType = fieldInfo.FieldType;
+        var callType = fieldInfo.GetModifiedFieldType().GetFunctionPointerCallingConventions()[0];
+        sb.Append(fieldType.GetFunctionPointerReturnType().FixTypeName(FixFullName));
+        sb.Append(" (");
+        sb.Append(callType.Name switch {
+            "CallConvCdecl" => "__cdecl",
+            "CallConvFastcall" => "f__astcall",
+            "CallConvStdcall" => "__stdcall",
+            "CallConvThiscall" => "__thiscall",
+            _ => throw new Exception($"Unknown calling convention {callType.Name}")
+        });
+        sb.Append(" *");
+        sb.Append(fieldInfo.Name);
+        sb.Append(")(");
+        sb.Append(string.Join(", ", fieldType.GetFunctionPointerParameterTypes().Select(FixFullName).Select((t, i) => t + $" a{i + 1}")));
+        sb.Append(')');
+        return sb.ToString();
+    }
+
+    private string BuildFunctionDefinition(FieldInfo fieldInfo) {
+        var sb = new StringBuilder();
+        var fieldType = fieldInfo.FieldType;
+        sb.Append(fieldType.GetFunctionPointerReturnType().FixTypeName(FixFullName));
+        sb.Append(" (__fastcall"); // unsure if this is correct checked from GameObject->LuaActor->LuaState->db_errorfb what call type it was
+        sb.Append(" *");
+        sb.Append(fieldInfo.Name);
+        sb.Append(")(");
+        sb.Append(string.Join(", ", fieldType.GetFunctionPointerParameterTypes().Select(FixFullName).Select((t, i) => t + $" a{i + 1}")));
+        sb.Append(')');
+        return sb.ToString();
+    }
+
     private bool SetProperty(Type type, StringBuilder header, FieldInfo fieldInfo, bool isUnion, int fieldOffset, string padFill, StringBuilder sb, int pad, UnionLayout? nextLayout, ref int offset) {
         var fieldType = fieldInfo.FieldType;
         int fieldSize;
@@ -396,6 +434,14 @@ public abstract class ExporterBase {
                 Console.WriteLine(warn);
                 ExporterStatics.WarningListDictionary.TryAdd(type, warn);
             }
+        } else if (fieldType.IsUnmanagedFunctionPointer) {
+            sb.AppendLine(string.Format($"    /* 0x{{0:X{pad}}} */ {BuildUnmanagedFunctionDefinition(fieldInfo)};", fieldOffset));
+
+            fieldSize = 8;
+        } else if (fieldType.IsFunctionPointer){
+            sb.AppendLine(string.Format($"    /* 0x{{0:X{pad}}} */ {BuildFunctionDefinition(fieldInfo)};", fieldOffset));
+
+            fieldSize = 8;
         } else {
             ProcessType(fieldType, header);
 

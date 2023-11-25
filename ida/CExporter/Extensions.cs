@@ -49,7 +49,7 @@ public static class TypeExtensions {
             _ when type == typeof(sbyte) || type == typeof(byte) || type == typeof(bool) => 1,
             _ when type == typeof(short) || type == typeof(ushort) || type == typeof(Half) => 2,
             _ when type == typeof(int) || type == typeof(uint) || type == typeof(float) => 4,
-            _ when type == typeof(long) || type == typeof(ulong) || type == typeof(double) || type.IsPointer => 8,
+            _ when type == typeof(long) || type == typeof(ulong) || type == typeof(double) || type.IsPointer || type.IsFunctionPointer || type.IsUnmanagedFunctionPointer => 8,
             _ when type.IsStruct() => type.StructLayoutAttribute?.Size ?? (int?)typeof(Unsafe).GetMethod("SizeOf")?.MakeGenericMethod(type).Invoke(null, null) ?? 0,
             _ => (int?)typeof(Unsafe).GetMethod("SizeOf")?.MakeGenericMethod(type).Invoke(null, null) ?? 0
         };
