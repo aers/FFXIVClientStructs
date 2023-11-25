@@ -6,8 +6,6 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using FFXIVClientStructs.Attributes;
-using Microsoft.VisualBasic;
-using Microsoft.VisualBasic.FileIO;
 
 namespace CExporter;
 
