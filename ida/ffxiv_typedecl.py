@@ -3,7 +3,7 @@ import re
 import idaapi
 import idc
 import ida_nalt
-
+import ida_hexrays
 
 def parse_declaration(func_name):
     """
@@ -34,8 +34,15 @@ def try_set_func_arg_type(ea, arg_idx, type, ptr=0, name=None):
     # Create type info for this function
     tinfo = idaapi.tinfo_t()
     if not ida_nalt.get_tinfo(tinfo, ea):
-        print("Unable to get type info for 0x{0:X}".format(ea))
-        return
+        print("Unable to get type info for 0x{0:X}, trying to decompile first".format(ea))
+
+        if not ida_hexrays.decompile(ea):
+            print("Unable to decompile 0x{0:X}, moving on".format(ea))
+            return
+
+        if not ida_nalt.get_tinfo(tinfo, ea):
+            print("Unable to get type info for 0x{0:X} with decompile, moving on".format(ea))
+            return
 
     # Get function data from type info
     funcdata = idaapi.func_type_data_t()
