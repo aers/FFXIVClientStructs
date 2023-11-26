@@ -5,10 +5,11 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [StructLayout(LayoutKind.Explicit, Size = 0x248)]
 public unsafe partial struct AddonActionBarBase {
     [FieldOffset(0x00)] public AtkUnitBase AtkUnitBase;
-    
+
+    [Obsolete("Use ActionBarSlotVector")]
     [FieldOffset(0x220)] public ActionBarSlot* ActionBarSlots;
-    [FieldOffset(0x228)] public IntPtr* ActionBarSlotsEnd; // endpoint of slot span. Adds (200 * SlotCount) to the ActionBarSlots pointer
-    [FieldOffset(0x230)] public IntPtr* ActionBarSlotsEnd_2; // always seems to be exactly the same as the previous pointer?
+
+    [FieldOffset(0x220)] public StdVector<ActionBarSlot> ActionBarSlotVector;
 
     /// <summary>
     /// Bitfield representing currently active pulses.
@@ -42,6 +43,7 @@ public unsafe partial struct AddonActionBarBase {
     [VirtualFunction(78)]
     public partial void PulseActionBarSlot(int slotIndex);
 
+    [Obsolete("Use ActionBarSlotVector")]
     public Span<ActionBarSlot> Slot => new(ActionBarSlots, SlotCount);
 }
 
