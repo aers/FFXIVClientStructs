@@ -149,6 +149,8 @@ public abstract class ExporterBase {
 
     private static bool IsNotHavok(FieldInfo fieldInfo) {
         var type = fieldInfo.FieldType;
+        if (type.IsFunctionPointer || type.IsUnmanagedFunctionPointer)
+            return true;
         if (type.IsPointer)
             type = type.GetElementType()!;
         return !(type.GenericTypeArguments.Any(IsHavok) || IsHavok(type));
@@ -345,12 +347,28 @@ public abstract class ExporterBase {
         header.AppendLine(sb.ToString());
     }
 
+    private string BuildFunctionDefinition(FieldInfo fieldInfo) {
+        var sb = new StringBuilder();
+        var fieldType = fieldInfo.FieldType;
+        sb.Append(fieldType.GetFunctionPointerReturnType().FixTypeName(FixFullName));
+        sb.Append(" (__fastcall *");
+        sb.Append(fieldInfo.Name);
+        sb.Append(")(");
+        sb.Append(string.Join(", ", fieldType.GetFunctionPointerParameterTypes().Select(t => t.FixTypeName(FixFullName)).Select((t, i) => t + $" a{i + 1}")));
+        sb.Append(')');
+        return sb.ToString();
+    }
+
     private bool SetProperty(Type type, StringBuilder header, FieldInfo fieldInfo, bool isUnion, int fieldOffset, string padFill, StringBuilder sb, int pad, UnionLayout? nextLayout, ref int offset) {
         var fieldType = fieldInfo.FieldType;
         int fieldSize;
 
-        if (!isUnion)
-            FillGaps(ref offset, fieldOffset, padFill, sb);
+        if (!isUnion) {
+            if (fieldType.IsUnmanagedFunctionPointer)
+                FillVFuncGap(ref offset, fieldOffset, padFill, sb);
+            else
+                FillGaps(ref offset, fieldOffset, padFill, sb);
+        }
 
         if (offset > fieldOffset) {
             var error = $"Current offset exceeded the next field's offset (0x{offset:X} > 0x{fieldOffset:X}): {FixFullName(type)}.{fieldInfo.Name}";
@@ -396,6 +414,10 @@ public abstract class ExporterBase {
                 Console.WriteLine(warn);
                 ExporterStatics.WarningListDictionary.TryAdd(type, warn);
             }
+        } else if (fieldType.IsFunctionPointer || fieldType.IsUnmanagedFunctionPointer) {
+            sb.AppendLine(string.Format($"    /* 0x{{0:X{pad}}} */ {BuildFunctionDefinition(fieldInfo)};", fieldOffset));
+
+            fieldSize = 8;
         } else {
             ProcessType(fieldType, header);
 
@@ -477,6 +499,14 @@ public abstract class ExporterBase {
             return fullName.Replace(".", _separator).Replace("+", _separator);
 
         return fullName.Replace(".", _separator).Replace("+", _separator).Replace(oldName, newName);
+    }
+
+    private void FillVFuncGap(ref int offset, int maxOffset, string padFill, StringBuilder sb) {
+        int gap;
+        while ((gap = maxOffset - offset) > 0) {
+            sb.AppendLine($"    /* {padFill} */ __int64 _vf{offset / 8};");
+            offset += 8;
+        }
     }
 
     private void FillGaps(ref int offset, int maxOffset, string padFill, StringBuilder sb) {
