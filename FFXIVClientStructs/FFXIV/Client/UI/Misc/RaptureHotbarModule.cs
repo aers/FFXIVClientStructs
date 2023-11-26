@@ -474,17 +474,20 @@ public unsafe partial struct HotBarSlot {
     /// </summary>
     /// <returns>Returns a bool indicating whether the action's range constraints are met.</returns>
     [MemberFunction("E8 ?? ?? ?? ?? 88 47 40 48 8B D7")]
-    public partial bool IsSlotActionTargetSatisfied();
+    public partial bool IsSlotActionTargetInRange();
 
     /// <summary>
     /// Check if an arbitrary slot type/action ID's target is currently in range. Overload to allow for any slot type
     /// or action ID to be checked. Use <see cref="IsSlotActionTargetInRange()"/> to target the current slot.
     /// </summary>
+    /// <remarks>
+    /// This method can realistically be static, I'm unsure why it's not...
+    /// </remarks>
     /// <param name="slotType">The slot type (normally <see cref="IconTypeB"/>) to check.</param>
     /// <param name="actionId">The action ID (normally <see cref="IconB"/>) to check.</param>
-    /// <returns></returns>
+    /// <returns>Returns a bool indicating whether the action's range constraints are met.</returns>
     [MemberFunction("40 53 48 83 EC 20 41 8B D8 80 FA 11")]
-    public partial bool IsSlotActionTargetSatisfied2(HotbarSlotType slotType, uint actionId);
+    public partial bool IsSlotActionTargetInRange2(HotbarSlotType slotType, uint actionId);
 }
 
 #region Saved Bars

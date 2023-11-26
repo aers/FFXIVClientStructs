@@ -97,13 +97,13 @@ public unsafe partial struct ActionManager {
     public partial bool IsActionOffCooldown(ActionType actionType, uint actionId);
 
     /// <summary>
-    /// Check if the specified action's target is considered "satisfied". Normally, this checks if the target is in range, but may have 
+    /// Check if the specified action's target is within range, if any. Will not check line of sight (performance reasons?).
     /// </summary>
-    /// <param name="actionType"></param>
-    /// <param name="actionId"></param>
-    /// <returns></returns>
+    /// <param name="actionType">The action type to check against.</param>
+    /// <param name="actionId">The action ID to check against.</param>
+    /// <returns>Returns true if target constraints are satisfied, false otherwise.</returns>
     [MemberFunction("E8 ?? ?? ?? ?? 88 47 40 EB 36")]
-    public partial bool IsActionTargetSatisfied(ActionType actionType, uint actionId);
+    public partial bool IsActionTargetInRange(ActionType actionType, uint actionId);
 
     [MemberFunction("E8 ?? ?? ?? ?? F3 0F 11 43 ?? 80 3B 00")]
     public static partial float GetActionRange(uint actionId);
