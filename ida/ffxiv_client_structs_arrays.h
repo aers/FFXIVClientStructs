@@ -7762,7 +7762,11 @@ struct Client::Graphics::Scene::Human /* Size=0xA80 */
 struct Client::Graphics::Scene::Monster /* Size=0x900 */
 {
     /* 0x000 */ Client::Graphics::Scene::CharacterBase CharacterBase;
-    /*       */ byte _gap_0x8F0[0x10];
+    /* 0x8F0 */ unsigned __int16 ModelSetId;
+    /* 0x8F2 */ unsigned __int16 SecondaryId;
+    /* 0x8F4 */ unsigned __int16 Variant;
+    /*       */ byte _gap_0x8F6[0x2];
+    /*       */ byte _gap_0x8F8[0x8];
 };
 
 struct Client::Graphics::Scene::Object::ObjectVTable /* Size=0x0 */
@@ -8088,11 +8092,7 @@ struct StdString /* Size=0x20 */
 
 struct Client::System::Resource::Handle::ResourceHandle /* Size=0xB0 */
 {
-    union {
-    /* 0x00 */ void* vtbl;
-    /* 0x00 */ void** vfunc;
     /* 0x00 */ Client::System::Resource::Handle::ResourceHandle::ResourceHandleVTable* VTable;
-    } _union_0x0;
     /* 0x08 */ Client::System::Resource::Handle::ResourceHandleType Type;
     /* 0x0C */ unsigned __int32 FileType;
     /* 0x10 */ unsigned __int32 Id;
@@ -10909,10 +10909,7 @@ struct Client::UI::Agent::AgentBannerInterface::Storage /* Size=0x3B30 */
 
 struct Component::GUI::AtkTexture /* Size=0x18 */
 {
-    union {
-    /* 0x00 */ void* vtbl;
     /* 0x00 */ Component::GUI::AtkTexture::AtkTextureVTable* VTable;
-    } _union_0x0;
     union {
     /* 0x08 */ Component::GUI::AtkTextureResource* Resource;
     /* 0x08 */ void* Crest;
@@ -15079,11 +15076,7 @@ struct Common::Configuration::ChangeEventInterface /* Size=0x18 */
 
 struct Client::UI::UIModule /* Size=0xEE030 */
 {
-    union {
-    /* 0x00000 */ void* vtbl;
-    /* 0x00000 */ void** vfunc;
     /* 0x00000 */ Client::UI::UIModule::UIModuleVTable* VTable;
-    } _union_0x0;
     /* 0x00008 */ void** AtkModuleEvent;
     /* 0x00010 */ void** ExcelLanguageEvent;
     /* 0x00018 */ Common::Configuration::ChangeEventInterface ChangeEventInterface;
@@ -15484,10 +15477,7 @@ struct Component::GUI::AtkComponentCheckBox /* Size=0x110 */
 
 struct Component::GUI::AtkDragDropInterface /* Size=0x30 */
 {
-    union {
-    /* 0x00 */ void* vtbl;
     /* 0x00 */ Component::GUI::AtkDragDropInterface::AtkDragDropInterfaceVTable* VTable;
-    } _union_0x0;
     /* 0x08 */ Component::GUI::AtkComponentNode* ComponentNode;
     /* 0x10 */ Component::GUI::AtkResNode* ActiveNode;
     /*      */ byte _gap_0x18[0x18];
@@ -15933,10 +15923,7 @@ struct Component::GUI::AtkTextureResourceManager /* Size=0x58 */
 
 struct Component::GUI::AtkModule /* Size=0x82A0 */
 {
-    union {
-    /* 0x0000 */ void* vtbl;
     /* 0x0000 */ Component::GUI::AtkModule::AtkModuleVTable* VTable;
-    } _union_0x0;
     /*        */ byte _gap_0x8[0x120];
     /* 0x0128 */ Component::GUI::AtkStage* AtkStage;
     /*        */ byte _gap_0x130[0x120];

@@ -325,4 +325,13 @@ public unsafe partial struct CharacterBase {
         return Encoding.UTF8.GetString(ResolveEidPath(pathBuffer));
     }
     #endregion
+
+    [VirtualFunction(95)]
+    public readonly partial byte IsFreeCompanyCrestVisibleOnSlot(byte slot);
+
+    [VirtualFunction(96)]
+    public partial void SetFreeCompanyCrestVisibleOnSlot(byte slot, byte isVisible);
+
+    [VirtualFunction(97)]
+    public partial void SetFreeCompanyCrest(Texture* freeCompanyCrest);
 }
