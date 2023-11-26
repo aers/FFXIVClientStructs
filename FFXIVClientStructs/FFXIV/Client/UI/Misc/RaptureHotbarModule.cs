@@ -257,7 +257,7 @@ public unsafe partial struct HotBarSlot {
     /// different action. For example, PvP combos will use this to track the "active" action.
     ///
     /// Note that this is *not* a reference to an icon directly.
-    [FieldOffset(0xC0)] public uint IconB;
+    [FieldOffset(0xC0)] public uint IconB; // TODO? (apiX): Rename to `ApparentIcon`, `GetApparentIconId` etc. 
 
     /// Unknown field with offset 0xC4 (196), possibly overloaded
     ///
@@ -382,6 +382,13 @@ public unsafe partial struct HotBarSlot {
     public partial bool LoadIconFromSlotB();
 
     /// <summary>
+    /// Loads in cost data (value or text) for this target hotbar slot.
+    /// </summary>
+    /// <returns></returns>
+    [MemberFunction("E8 ?? ?? ?? ?? 40 0A F0 44 8B 83")]
+    public partial bool LoadCostDataForSlot(bool isLoaded = true);
+
+    /// <summary>
     /// Get an icon ID for a hotbar slot, with specified appearance slot type and action ID.
     ///
     /// This method appears to exist to allow certain action types (specifically macros it seems?) to have a different
@@ -408,6 +415,31 @@ public unsafe partial struct HotBarSlot {
     public partial byte* GetDisplayNameForSlot(HotbarSlotType slotType, uint actionId);
 
     /// <summary>
+    /// Gets the <see cref="CostValue"/> for a specific hotbar slot, taking account the specified appearance slot type
+    /// and action ID.
+    ///
+    /// This method is always called using the parameters from <see cref="IconTypeB"/> and <see cref="IconB"/>.
+    /// </summary>
+    /// <param name="slotType">The slot type to look up and return information for.</param>
+    /// <param name="actionId">The action ID to look up and return information for.</param>
+    /// <returns>Returns the cost value for this HotBarSlot.</returns>
+    [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 30 0F B6 C2 41 8B D8")]
+    public partial uint GetCostValueForSlot(HotbarSlotType slotType, uint actionId);
+
+    /// <summary>
+    /// Gets the <see cref="CostText"/> for a specific hotbar slot, taking account the specified appearance slot type
+    /// and action ID. This will normally match the result from <see cref="GetCostValueForSlot"/> but may differ for
+    /// Items and certain actions (e.g. Black Mage's Flare).
+    ///
+    /// This method is always called using the parameters from <see cref="IconTypeB"/> and <see cref="IconB"/>.
+    /// </summary>
+    /// <param name="slotType">The slot type to look up and return information for.</param>
+    /// <param name="actionId">The action ID to look up and return information for.</param>
+    /// <returns>Returns the cost text for this HotBarSlot.</returns>
+    [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 30 0F B6 C2 41 8B D8")]
+    public partial uint GetCostTextForSlot(HotbarSlotType slotType, uint actionId);
+
+    /// <summary>
     /// Retrieves a <see cref="ActionType"/> for the specified hotbar slot type.
     /// </summary>
     /// <remarks>
@@ -425,6 +457,34 @@ public unsafe partial struct HotBarSlot {
     /// <returns>Returns a uint.</returns>
     [MemberFunction("40 53 48 83 EC 40 8B 99 ?? ?? ?? ??")]
     public partial uint GetRecastChargesFromSlotB();
+
+    /// <summary>
+    /// Check whether the action contained in this slot is considered usable or not. When set to false, the respective
+    /// slot in the UI is greyed out (though is still interactable). 
+    /// </summary>
+    /// <param name="slotType">The slot type to check against - always IconTypeB.</param>
+    /// <param name="actionId">The actionID to check against - always IconB.</param>
+    /// <returns>Returns a bool indicating if the action within this slot is usable.</returns>
+    [MemberFunction("E8 ?? ?? ?? ?? 88 47 3E E9")]
+    public partial bool IsSlotUsable(HotbarSlotType slotType, uint actionId);
+
+    /// <summary>
+    /// Check if the hotbar slot's action's target is currently in range. When set to false, the UI will show an X
+    /// on the hotbar slot.
+    /// </summary>
+    /// <returns>Returns a bool indicating whether the action's range constraints are met.</returns>
+    [MemberFunction("E8 ?? ?? ?? ?? 88 47 40 48 8B D7")]
+    public partial bool IsSlotActionTargetSatisfied();
+
+    /// <summary>
+    /// Check if an arbitrary slot type/action ID's target is currently in range. Overload to allow for any slot type
+    /// or action ID to be checked. Use <see cref="IsSlotActionTargetInRange()"/> to target the current slot.
+    /// </summary>
+    /// <param name="slotType">The slot type (normally <see cref="IconTypeB"/>) to check.</param>
+    /// <param name="actionId">The action ID (normally <see cref="IconB"/>) to check.</param>
+    /// <returns></returns>
+    [MemberFunction("40 53 48 83 EC 20 41 8B D8 80 FA 11")]
+    public partial bool IsSlotActionTargetSatisfied2(HotbarSlotType slotType, uint actionId);
 }
 
 #region Saved Bars
@@ -467,6 +527,38 @@ public struct SavedHotBarSlot {
 
 #endregion
 
+/// <summary>
+/// An intermediate struct used to translate from a <see cref="HotBarSlot"/> to the UI String/NumberArrays. 
+/// </summary>
+/// <remarks>
+/// <b>Do not consider this struct stable (yet).</b>
+/// </remarks>
+[StructLayout(LayoutKind.Explicit, Size = 0x43)]
+internal unsafe struct HotBarUiIntermediate {
+    // Converts to array in E8 ?? ?? ?? ?? EB 34 E8
+
+    [FieldOffset(0x00)] public Utf8String* PopUpHelpText; // to StringArray idx slotBase + 14
+    [FieldOffset(0x08)] public nint CostTextPtr; // to StringArray idx slotBase + 1
+    [FieldOffset(0x10)] public uint IntermediateActionType; // to NumberArray idx slotBase + 0
+    [FieldOffset(0x14)] public uint ActionId; // to NumberArray idx slotBase + 3
+    [FieldOffset(0x18)] public uint IconId; // to NumberArray idx slotBase + 4
+    [FieldOffset(0x1C)] public uint Unk_0x1C; // to NumberArray idx slotBase + 7
+    [FieldOffset(0x20)] public uint Unk_0x20;
+    [FieldOffset(0x24)] public uint CooldownPercent; // to NumberArray idx slotBase + 8
+    [FieldOffset(0x28)] public uint Unk_0x28; // related to cooldown calculation.
+    [FieldOffset(0x2C)] public uint Unk_0x2C; // to NumberArray idx slotBase + 9
+    [FieldOffset(0x30)] public uint Unk_0x30;
+    [FieldOffset(0x34)] public uint Unk_0x34; // to NumberArray idx slotBase + 13
+    [FieldOffset(0x38)] public uint CostValue; // to NumberArray idx slotBase + 10
+    [FieldOffset(0x3C)] public byte CostType; // to NumberArray idx slotBase + 1
+    [FieldOffset(0x3D)] public byte CostDisplayMode; // to NumberArray idx slotBase + 2
+    [FieldOffset(0x3E)] public bool ActionAvailable1; // to NumberArray idx slotBase + 5
+    [FieldOffset(0x3F)] public bool ActionAvailable2; // to NumberArray idx slotBase + 6
+    [FieldOffset(0x40)] public bool ActionTargetSatisfied; // to NumberArray idx slotBase + 15
+    [FieldOffset(0x41)] public bool DrawAnts; // to NumberArray idx slotBase + 14
+    [FieldOffset(0x42)] public byte Unk_0x42;
+}
+
 public enum HotbarSlotType : byte {
     Empty = 0x00,
     Action = 0x01,
@@ -496,10 +588,9 @@ public enum HotbarSlotType : byte {
     PvPQuickChat = 0x19,
     PvPCombo = 0x1A,
     BgcArmyAction = 0x1B,
-
     Unk_0x1C = 0x1C, // seems to be a legacy type, possibly performance instrument related based on associated icon 000782
     PerformanceInstrument = 0x1D,
-    Collection = 0x1E,
+    Collection = 0x1E, // TODO (apiX): Rename to McGuffin to match EXD name
     Ornament = 0x1F,
     LostFindsItem = 0x20
 }
