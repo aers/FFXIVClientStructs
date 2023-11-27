@@ -224,7 +224,7 @@ public unsafe partial struct HotBarSlot {
     /// The string that appears when a hotbar slot is hovered over.
     ///
     /// Calculated by concatenating GetDisplayNameForSlot with PopUpKeybindHint (in most cases).
-    [FieldOffset(0x00)] public Utf8String PopUpHelp;
+    [FieldOffset(0x00)] public Utf8String PopUpHelp; // TODO (apiX): Rename to DisplayName
 
     /// The "cost text" to display when 0xCB is in mode 2 or 4.
     ///
@@ -488,6 +488,16 @@ public unsafe partial struct HotBarSlot {
     /// <returns>Returns a bool indicating whether the action's range constraints are met.</returns>
     [MemberFunction("40 53 48 83 EC 20 41 8B D8 80 FA 11")]
     public partial bool IsSlotActionTargetInRange2(HotbarSlotType slotType, uint actionId);
+
+    /// <summary>
+    /// Gets the action's cooldown percentage. This value is displayed as a white circle overlaid on the hotbar slot. An action that
+    /// is not currently in cooldown will be 0. Actions that do not have a cooldown will also return 0.
+    /// </summary>
+    /// <param name="outCooldownSecondsLeft">An out parameter representing the seconds left in cooldown. Unused if cooldown is GCD.</param>
+    /// <param name="a3">Unknown, appears to be a UI-related field for forcing values if the percentage is 0.</param>
+    /// <returns>Returns a range from 0 to 100.</returns>
+    [MemberFunction("E8 ?? ?? ?? ?? 89 47 24 E9")]
+    public partial int GetSlotActionCooldownPercentage(int* outCooldownSecondsLeft, int a3 = 0);
 }
 
 #region Saved Bars
@@ -545,13 +555,13 @@ internal unsafe struct HotBarUiIntermediate {
     [FieldOffset(0x10)] public uint IntermediateActionType; // to NumberArray idx slotBase + 0
     [FieldOffset(0x14)] public uint ActionId; // to NumberArray idx slotBase + 3
     [FieldOffset(0x18)] public uint IconId; // to NumberArray idx slotBase + 4
-    [FieldOffset(0x1C)] public uint Unk_0x1C; // to NumberArray idx slotBase + 7
-    [FieldOffset(0x20)] public uint Unk_0x20;
+    [FieldOffset(0x1C)] public uint CooldownMode; // to NumberArray idx slotBase + 7
+    [FieldOffset(0x20)] public uint CooldownSeconds;
     [FieldOffset(0x24)] public uint CooldownPercent; // to NumberArray idx slotBase + 8
-    [FieldOffset(0x28)] public uint Unk_0x28; // related to cooldown calculation.
-    [FieldOffset(0x2C)] public uint Unk_0x2C; // to NumberArray idx slotBase + 9
-    [FieldOffset(0x30)] public uint Unk_0x30;
-    [FieldOffset(0x34)] public uint Unk_0x34; // to NumberArray idx slotBase + 13
+    [FieldOffset(0x28)] public uint LastCooldownPercent;
+    [FieldOffset(0x2C)] public uint ChargePercent; // to NumberArray idx slotBase + 9
+    [FieldOffset(0x30)] public uint LastChargePercent;
+    [FieldOffset(0x34)] public uint CurrentCharges; // to NumberArray idx slotBase + 13
     [FieldOffset(0x38)] public uint CostValue; // to NumberArray idx slotBase + 10
     [FieldOffset(0x3C)] public byte CostType; // to NumberArray idx slotBase + 1
     [FieldOffset(0x3D)] public byte CostDisplayMode; // to NumberArray idx slotBase + 2

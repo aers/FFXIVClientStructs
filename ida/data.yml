@@ -4277,12 +4277,15 @@ classes:
       0x14068B900: GetRecastTimeFromSlotB
       0x14068B800: GetRecastChargesFromSlotB  # (this) -> uint
       0x14068B730: GetMaxChargesFromSlotB
+      0x14068B430: GetPrimaryRecastGroupPercentageFromSlotB # (this, out int, out int, int) -> int
       0x14068B630: GetAdditionalRecastGroupPercentageFromSlotB # (this, int) -> int
       0x14068C070: LoadCostTypeForSlot
       0x14068C0A0: LoadCostDisplayModeForSlot
       0x14068BA00: LoadUnkDEForSlot          # different from all the other loads - this one still needs slotType/ID for things
       0x14068C0D0: LoadCostDataForSlot
       0x14068BBD0: GetKeybindHintForSlot
+      0x14068BBE0: LoadKeybindHintForSlot
+      0x14068BFF0: SetPopUpHelpForSlot
       0x140689AF0: IsSlotUsable              # (this, HotbarSlotType, uint) -> bool
       0x1406E0E10: IsSlotActionTargetInRange # (this) -> bool
       0x14068A8E0: IsSlotActionTargetInRange2 # (this, HotbarSlotType, uint) -> bool 
@@ -4290,6 +4293,7 @@ classes:
       0x14068AFF0: PopulateIntermediateCooldownInfo # (this, HotBarUiIntermediate*)  - used for array population?
       0x14068AE90: GetAdjustedCommandId  # ???
       0x14068BE80: LoadMacroSlot
+      0x14068B190: GetSlotActionCooldownPercent  # (this, out int, int) -> int
   Client::UI::Misc::RaptureHotbarModule::HotbarUiIntermediate:
     funcs:
       0x140689690: ctor
