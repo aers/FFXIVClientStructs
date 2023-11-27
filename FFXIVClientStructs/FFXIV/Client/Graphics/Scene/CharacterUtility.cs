@@ -4,7 +4,7 @@ using FFXIVClientStructs.FFXIV.Common.Math;
 
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 
-[StructLayout(LayoutKind.Explicit)]
+[StructLayout(LayoutKind.Explicit, Size = 0x410)]
 public unsafe partial struct CharacterUtility {
     public const int ResourceHandleCount = 87;
 
