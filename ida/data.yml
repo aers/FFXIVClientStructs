@@ -4464,6 +4464,7 @@ classes:
       28: GetDrawObject_2
       29: UpdateRadius
       30: Highlight
+      38: SetReadyToDraw
       39: Update
       47: GetNameId
       57: IsDead
@@ -4478,6 +4479,7 @@ classes:
       0x140749BB0: GetPosition
       0x140749C00: SetPosition
       0x140749CB0: SetRotation
+      0x14074ADD0: IsReadyToDraw
       0x14074D770: Initialize
       0x14074D9D0: ctor
   Client::Game::Character::Character:

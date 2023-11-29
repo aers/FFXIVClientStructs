@@ -85,6 +85,9 @@ public unsafe partial struct GameObject {
     [VirtualFunction(30)]
     public partial void Highlight(ObjectHighlightColor color);
 
+    [VirtualFunction(38)]
+    public partial void SetReadyToDraw();
+
     [VirtualFunction(47)]
     public partial uint GetNpcID(); //TODO: rename to GetNameId
 
@@ -105,6 +108,9 @@ public unsafe partial struct GameObject {
 
     [MemberFunction("E8 ?? ?? ?? ?? 83 4B 70 01")]
     public partial void SetPosition(float x, float y, float z);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 ?? 48 8B 17 45 33 C9")]
+    public partial bool IsReadyToDraw();
 }
 
 public enum ObjectKind : byte {
@@ -129,8 +135,9 @@ public enum ObjectKind : byte {
 
 [Flags]
 public enum ObjectTargetableFlags : byte {
-    IsTargetable = 2,
-    Unk1 = 4, // This flag is used but purpose is unclear
+    IsTargetable = 1 << 1,
+    Unk1 = 1 << 2, // This flag is used but purpose is unclear
+    ReadyToDraw = 1 << 6
 }
 
 public enum ObjectHighlightColor : byte {
