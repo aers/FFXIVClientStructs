@@ -31,6 +31,16 @@ public unsafe partial struct ActionTimelineManager {
     /// <returns> Returns 0 or one of the row ids for height adjustment for emotes (like kneeling to hug small objects). </returns>
     [MemberFunction("E8 ?? ?? ?? ?? 44 0F B7 F8 45 85 FF")]
     public partial uint GetHeightAdjustActionTimelineRowId(GameObjectID target, int emoteId);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 0F 28 D6 41 8B D7")]
+    public partial void SetSlotSpeed(uint slot, float speed); // Sets the speed of the animation slot on the target actor and any children (mounts, ornaments)
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 83 C7 ?? 48 83 EE ?? 75 ?? 48 8B 74 24 ?? 48 8B 6C 24")]
+    public partial void SetLipsOverrideTimeline(uint slot, ushort actionTimelineId);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 ?? 80 8E ?? ?? ?? ?? ?? 48 8D 8B")]
+    public partial bool CalculateAndApplyOverallSpeed(); // Calculates the current overall speed and applies it, returns true if the speed changed
+
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x1F0)]
@@ -41,11 +51,22 @@ public unsafe partial struct ActionTimelineDriver {
 
     [FieldOffset(0x154)] public unsafe fixed float TimelineSpeeds[TimelineSlotCount]; // Speed for each slot
 
+    [FieldOffset(0x1C8)] public Character.Character* Parent;
+
     [MemberFunction("E8 ?? ?? ?? ?? 4C 8B BC 24 ?? ?? ?? ?? 4C 8D 9C 24 ?? ?? ?? ?? 49 8B 5B ??")]
     public partial void PlayTimeline(ushort actionTimelineId, void* a2 = null); // Determines which slot the timeline belongs in and then plays it on that slot
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 7B 08 48 81 C7")]
     public partial void SetSlotSpeed(uint slot, float speed); // Sets the speed of the animation slot
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 46 ?? 0F 28 D0")]
+    public partial float GetSlotSpeed(uint slot);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B7 F8 8D 8F")]
+    public partial ushort GetSlotTimeline(uint slot);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 41 0F B7 C6 4D 8B CC")]
+    public partial void SetSlotTimeline(uint slot, ushort actionTimelineId); 
 }
 
 public enum ActionTimelineSlots : int {
