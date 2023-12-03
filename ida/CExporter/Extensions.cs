@@ -78,7 +78,7 @@ public static class FieldInfoExtensions {
             return Tuple.Create(type.GenericTypeArguments[0], (int)fsattr.Count);
         }
         var attr = info.GetCustomAttributes(typeof(FixedBufferAttribute), false).Cast<FixedBufferAttribute>().Single();
-        if(attr == null)
+        if (attr == null)
             throw new Exception("Field is not fixed");
         return new Tuple<Type, int>(attr.ElementType, attr.Length);
     }
