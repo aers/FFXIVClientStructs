@@ -329,9 +329,17 @@ classes:
     funcs:
       0x1415E9600: ctor
       0x1415EAB40: Initialize
+      #fail 0x1415e96e0: GetCharacterData
   Application::Network::LobbyClient::LobbyRequestCallback:
     vtbls:
       - ea: 0x141C980F8
+    vfuncs:
+      0: dtor
+    funcs:
+      0x141617700: ctor #fail
+  Clinet::Network::LobbyClient::LobbyCharacterRequestCallback:
+    vtbls:
+      - ea: 0x141c93548 # fail
     funcs:
       0x141618340: ctor
   Client::Game::StatusManager:
@@ -2415,6 +2423,7 @@ classes:
       0x14021B020: ctor
       0x14021B070: Initialize
       #fail 0x14021BE40: SetOSTypeAndVersion
+      #fail 0x14021C0b0: FUN_14021c0b0
       0x14021CB20: IsInCrossWorldDuty
   Application::Network::PacketReceiverCallbackInterface:
     vtbls:
@@ -2443,6 +2452,7 @@ classes:
         base: Client::Network::Protocol::Chat::PacketReceiverCallbackInterface
     funcs:
       #fail 0x141295860: ReceiveEvent
+      #fail 0x141499550: HandlePartyInvitePacket
       0x14149A240: HandleSocialPacket
       0x14149D8B0: HandleMarketBoardOfferingsPacket
       0x14149D970: HandleMarketBoardPurchasePacket

@@ -1,4 +1,5 @@
 using FFXIVClientStructs.FFXIV.Client.Game.Character;
+using FFXIVClientStructs.FFXIV.Client.Network;
 using FFXIVClientStructs.FFXIV.Component.Excel;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
@@ -59,8 +60,9 @@ public unsafe partial struct LobbyData {
 [VTableAddress("48 8D 05 ?? ?? ?? ?? 48 8B F9 48 89 01 48 81 C1 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 8F", 3)]
 [StructLayout(LayoutKind.Explicit, Size = 0x848)]
 public unsafe partial struct LobbyUIClient {
-    //[FieldOffset(0x10)] public NetworkModuleProxy* NetworkModuleProxy;
-    //[FieldOffset(0x18)] public ?* SomeNetworkConfig; // contains hosts and ports
+    [FieldOffset(0x00)] public void** vtbl;
+    [FieldOffset(0x10)] public NetworkModuleProxy* NetworkModuleProxy;
+    //[FieldOffset(0x18)] public ?* NetworkModule; // contains hosts and ports
 
     [FieldOffset(0x30)] public StdVector<LobbyDataCenterWorldEntry> CurrentDataCenterWorlds;
 

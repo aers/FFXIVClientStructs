@@ -111,6 +111,8 @@ public unsafe partial struct NetworkModule {
 
 
     //FUN_14021c0b0
+    [MemberFunction("E8 ?? ?? ?? ?? 4C 8B B3 ?? ?? ?? ?? 48 89 BB")]
+    public partial void GetChracterData(void* p2, void* p3);
 
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct Unk9C0Struct {
@@ -291,5 +293,7 @@ public unsafe partial struct NetworkModule {
         [StructLayout(LayoutKind.Explicit, Size = 0x5B)]
         public struct Unk2C8Obj {
         }
+
+
     }
 }
