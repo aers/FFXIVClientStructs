@@ -25,7 +25,7 @@ public unsafe partial struct PlayerState {
     [FieldOffset(0x7D)] public byte Tribe;
     [FieldOffset(0x7E)] public byte CurrentClassJobId;
 
-    [FieldOffset(0x80)] public void* CurrentClassJobRow;
+    [FieldOffset(0x80)] public nint CurrentClassJobRow;
     [FieldOffset(0x88)] public short CurrentLevel;
     [FieldOffset(0x8A)] public fixed short ClassJobLevelArray[32];
 
