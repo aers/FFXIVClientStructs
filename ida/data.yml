@@ -1681,7 +1681,7 @@ classes:
       0x1400F9660: ctor
       0x1400FABB0: RequestData
       0x14017C860: Finalize
-  Client::UI::UIClipboard::UIClipboard:
+  Client::UI::UIClipboard:
     vtbls:
       - ea: 0x1419BDF30
     funcs:
