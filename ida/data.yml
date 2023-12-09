@@ -1278,7 +1278,7 @@ classes:
       0x1400905F0: ctor
       0x140093B20: GetNetworkModuleProxy
       0x140093B40: GetUIModule
-      0x140093B60: GetClipboardViewerHandler
+      0x140093B60: GetUIClipboard
       0x140094A20: TaskBegin
       0x140094B60: TaskDraw2DBegin
       0x140094BA0: TaskUpdateInputDevice
@@ -1301,17 +1301,6 @@ classes:
       0x1400950F0: TaskResourceManager
       0x140095100: TaskUpdateGame
       0x140095F20: Finalize
-  Client::System::Framework::Framework::ClipboardViewerHandler:
-    vtbls:
-      - ea: 0x1419BDF30
-    funcs:
-      0x1400EF040: Ctor
-      0x1400EF0B0: Setup # inserts the window to the clipboard viewer chain
-      0x1400EF0E0: RemoveFromChain
-      0x1400EF110: OnClipboardDataChanged
-      0x1400EF1A0: OnClipboardViewerChainChanged
-    vfuncs:
-      0: Dtor
   Component::Excel::ExcelModuleInterface:
     vtbls:
       - ea: 0x1419B1770
@@ -1698,6 +1687,8 @@ classes:
       - ea: 0x1419BDF30
     funcs:
       0x1400EF040: ctor
+      0x1400EF110: OnClipboardDataChanged
+      0x1400EF1A0: OnClipboardViewerChainChanged
   Client::UI::Info::InfoProxyCrossRealm:
     instances:
       - ea: 0x1421A6F20
