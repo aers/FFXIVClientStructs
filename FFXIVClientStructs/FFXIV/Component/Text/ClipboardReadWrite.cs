@@ -11,13 +11,29 @@ public unsafe struct ClipboardReadWrite {
 
     private ClipboardReadWrite* ThisPtr => (ClipboardReadWrite*)Unsafe.AsPointer(ref this);
 
-    public void WriteToSystemClipboard(Utf8String* withPayload, Utf8String* withoutPayload) =>
-        ThisPtr->vtbl->WriteToSystemClipboard(ThisPtr, withPayload, withoutPayload);
+    /// <summary>
+    /// Writes to the system clipboard.
+    /// </summary>
+    /// <param name="stringToCopy">[in] The string to copy with payloads.</param>
+    /// <param name="copiedStringWithoutPayload">[inout] The copied string without payloads.</param>
+    public void WriteToSystemClipboard(Utf8String* stringToCopy, Utf8String* copiedStringWithoutPayload) =>
+        ThisPtr->vtbl->WriteToSystemClipboard(ThisPtr, stringToCopy, copiedStringWithoutPayload);
 
+    /// <summary>
+    /// Retrieves the current system clipboard text.
+    /// </summary>
+    /// <returns></returns>
     public ref Utf8String GetSystemClipboardText() => ref *ThisPtr->vtbl->GetSystemClipboardText(ThisPtr);
 
+    /// <summary>
+    /// Sets the copy staging text.
+    /// </summary>
+    /// <param name="utf8String">The text.</param>
     public void SetCopyStagingText(Utf8String* utf8String) => ThisPtr->vtbl->SetCopyStagingText(ThisPtr, utf8String);
 
+    /// <summary>
+    /// Sets the copy staging text to the system clipboard.
+    /// </summary>
     public void ApplyCopyStagingText() => ThisPtr->vtbl->ApplyCopyStagingText(ThisPtr);
 
     [StructLayout(LayoutKind.Sequential)]
