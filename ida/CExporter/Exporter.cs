@@ -240,7 +240,7 @@ public abstract class ExporterBase {
 
         var name = type.FixTypeName(FixFullName, false).Replace("*", "Ptr");
         _knownNames.Add(name);
-        sb.AppendLine($"struct {name} /* Size=0x{structSize:X} */");
+        sb.AppendLine($"__unaligned struct {name} /* Size=0x{structSize:X} */");
         sb.AppendLine("{");
 
         foreach (var fieldInfo in fields) {
@@ -286,7 +286,7 @@ public abstract class ExporterBase {
 
         var name = type.FixTypeName(FixFullName);
         _knownNames.Add(name);
-        sb.AppendLine($"struct {name} /* Size=0x{structSize:X} */");
+        sb.AppendLine($"__unaligned struct {name} /* Size=0x{structSize:X} */");
         sb.AppendLine("{");
 
         var offset = 0;
