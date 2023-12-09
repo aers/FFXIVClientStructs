@@ -1,5 +1,5 @@
 using FFXIVClientStructs.FFXIV.Client.UI;
-using FFXIVClientStructs.FFXIV.Component.Text;
+using FFXIVClientStructs.FFXIV.Client.System.Input;
 
 namespace FFXIVClientStructs.FFXIV.Client.System.Framework;
 
@@ -7,7 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Framework;
 [StructLayout(LayoutKind.Explicit, Size = 0xF8)]
 public unsafe partial struct ClipboardViewerHandler {
     [FieldOffset(0x8)] public UIModule* UIModule;
-    [FieldOffset(0x10)] public ClipboardData ClipboardData;
+    [FieldOffset(0x10)] public ClipBoard Data;
     [FieldOffset(0xE8)] public ulong Hwnd;
     [FieldOffset(0xF0)] public ulong HwndNext;
 

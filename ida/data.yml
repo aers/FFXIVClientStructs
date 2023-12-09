@@ -1312,18 +1312,6 @@ classes:
       0x1400EF1A0: OnClipboardViewerChainChanged
     vfuncs:
       0: Dtor
-  Component::Text::ClipboardData:
-    vtbls:
-      - ea: 0x141A37DD0
-    funcs:
-      0x1407B9E40: Ctor
-      0x1407B9E80: Destroy
-    vfuncs:
-      0: Dtor
-      1: WriteToSystemClipboard
-      2: GetSystemClipboardText
-      3: SetCopyStagingText
-      4: ApplyCopyStagingText
   Component::Excel::ExcelModuleInterface:
     vtbls:
       - ea: 0x1419B1770
