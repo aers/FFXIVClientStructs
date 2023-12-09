@@ -1,11 +1,10 @@
-using FFXIVClientStructs.FFXIV.Client.UI;
 using FFXIVClientStructs.FFXIV.Client.System.Input;
 
-namespace FFXIVClientStructs.FFXIV.Client.System.Framework;
+namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 // ctor "E8 ?? ?? ?? ?? EB 03 48 8B C6 4C 8B 87"
 [StructLayout(LayoutKind.Explicit, Size = 0xF8)]
-public unsafe partial struct ClipboardViewerHandler {
+public unsafe partial struct UIClipboard {
     [FieldOffset(0x8)] public UIModule* UIModule;
     [FieldOffset(0x10)] public ClipBoard Data;
     [FieldOffset(0xE8)] public ulong Hwnd;

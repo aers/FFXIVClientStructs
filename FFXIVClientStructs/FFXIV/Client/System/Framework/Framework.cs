@@ -36,7 +36,7 @@ public unsafe partial struct Framework {
     [FieldOffset(0x2B38)] public ExdModule* ExdModule;
     [FieldOffset(0x2B50)] public BGCollisionModule* BGCollisionModule;
     [FieldOffset(0x2B60)] public UIModule* UIModule;
-    [FieldOffset(0x2B68)] public ClipboardViewerHandler* ClipboardViewerHandler;
+    [FieldOffset(0x2B68)] public UIClipboard* UIClipboard;
     [FieldOffset(0x2BC8)] public LuaState LuaState;
 
     [FieldOffset(0x2BF0)] public GameVersion GameVersion;
@@ -48,7 +48,7 @@ public unsafe partial struct Framework {
     public partial UIModule* GetUiModule();
 
     [MemberFunction("E8 ?? ?? ?? ?? 4C 8B 44 24 ?? 48 8B C8 48 8B D3")]
-    public partial ClipboardViewerHandler* GetClipboardViewerHandler();
+    public partial UIClipboard* GetUIClipboard();
 
     [MemberFunction("E8 ?? ?? ?? ?? 89 47 2C")]
     public static partial long GetServerTime();
