@@ -412,6 +412,12 @@ classes:
     vfuncs:
       0: ReceiveEvent
   Component::GUI::AtkTextInput::AtkTextInputEventInterface:
+  Component::GUI::AtkTextInput:
+    vtbls:
+      - ea: 0x141A067B8
+        base: Client::System::Input::TextServiceInterface::TextServiceEvent
+    funcs:
+      0x14054C500: ctor
   Component::Text::TextChecker::ExecNonMacroFunc:
     vtbls:
       - ea: 0x1419DD688
@@ -485,7 +491,6 @@ classes:
       0x140549B50: HandleInput
       0x14054B510: SetFocus
       0x14054C010: HandleFocus
-      0x14054C500: ctor
   Client::Game::Object::GameObjectManager: # all game objects
     instances:
       - ea: 0x1421F26F0
@@ -1522,6 +1527,20 @@ classes:
     vtbls:
       - ea: 0x1419B2208
         base: Client::System::Input::TextServiceInterface
+  Client::System::Input::ClipBoardInterface:
+    vtbls:
+      - ea: 0x141A37DB8
+    vfuncs:
+      0: dtor
+      1: WriteToSystemClipboard
+      2: GetSystemClipboardText
+  Client::System::Input::ClipBoard:
+    vtbls:
+      - ea: 0x141A37DD0
+        base: Client::System::Input::ClipBoardInterface
+    vfuncs:
+      3: SetCopyStagingText
+      4: ApplyCopyStagingText
   Component::Shell::ShellCommandModule:
     vtbls:
       - ea: 0x1419B2458
