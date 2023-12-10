@@ -1535,6 +1535,9 @@ classes:
       0: dtor
       1: WriteToSystemClipboard
       2: GetSystemClipboardText
+    funcs:
+      0x1407B9E40: ctor
+      0x1407B9E80: Finalize
   Client::System::Input::ClipBoard:
     vtbls:
       - ea: 0x141A37DD0
@@ -1685,8 +1688,12 @@ classes:
   Client::UI::UIClipboard:
     vtbls:
       - ea: 0x1419BDF30
+    vfuncs:
+      0: dtor
     funcs:
       0x1400EF040: ctor
+      0x1400EF0B0: Attach
+      0x1400EF0E0: Detach
       0x1400EF110: OnClipboardDataChanged
       0x1400EF1A0: OnClipboardViewerChainChanged
   Client::UI::Info::InfoProxyCrossRealm:
