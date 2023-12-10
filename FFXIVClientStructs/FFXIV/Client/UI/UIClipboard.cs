@@ -8,8 +8,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 public unsafe partial struct UIClipboard {
     [FieldOffset(0x8)] public UIModule* UIModule;
     [FieldOffset(0x10)] public ClipBoard Data;
-    [FieldOffset(0xE8)] public ulong Hwnd;
-    [FieldOffset(0xF0)] public ulong HwndNext;
+    [FieldOffset(0xE8)] public nint ThisHwnd;
+    [FieldOffset(0xF0)] public nint NextHwnd;
 
     /// <summary>
     /// Called when the content of the clipboard changes (WM_DRAWCLIPBOARD (0x308)).
@@ -22,9 +22,9 @@ public unsafe partial struct UIClipboard {
     /// </summary>
     /// <param name="wParam">A handle to the window being removed from the clipboard viewer chain.</param>
     /// <param name="lParam">
-    /// A handle to the next window in the chain following the window being removed.
+    /// A handle to the next window in the chain following the window being removed.<br/>
     /// This parameter is NULL if the window being removed is the last window in the chain.
     /// </param>
     [MemberFunction("48 8B C1 48 8B 89 ?? ?? ?? ?? 48 3B D1")]
-    public partial void OnClipboardViewerChainChanged(ulong wParam, ulong lParam);
+    public partial void OnClipboardViewerChainChanged(nint wParam, nint lParam);
 }
