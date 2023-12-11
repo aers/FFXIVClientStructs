@@ -305,6 +305,8 @@ struct Client_System_Framework_GameVersion;
 struct Client_System_Framework_RootTask;
 struct Client_System_Framework_Task;
 struct Client_System_Framework_Task_TaskVTable;
+struct Client_System_Input_ClipBoard;
+struct Client_System_Input_ClipBoard_ClipBoardVTable;
 struct Client_System_Memory_IMemorySpace;
 struct Client_System_Memory_IMemorySpace_IMemorySpaceVTable;
 struct Client_System_Resource_Handle_MaterialResourceHandle;
@@ -811,6 +813,7 @@ struct Client_UI_UI3DModule_MemberInfo;
 struct Client_UI_UI3DModule_MapInfo;
 struct Client_UI_UI3DModule_ObjectInfo;
 struct Client_UI_UI3DModule_UnkInfo;
+struct Client_UI_UIClipboard;
 struct Client_UI_UIInputData;
 struct Client_UI_UIModule;
 struct Common_Configuration_ChangeEventInterface;
@@ -884,6 +887,7 @@ struct Component_GUI_AtkEvent;
 struct Component_GUI_AtkEventDispatcher;
 struct StdVectorComponentGUIAtkEventPtr;
 struct Component_GUI_AtkImageNode;
+struct Component_GUI_AtkInputManager;
 struct Component_GUI_AtkModule;
 struct Component_GUI_AtkTextureResourceManager;
 struct StdLinkedListComponentGUIAtkTextureResourcePtr;
@@ -896,6 +900,7 @@ struct Component_GUI_AtkTooltipManager;
 struct StdMapComponentGUIAtkResNodePtrComponentGUIAtkTooltipManagerAtkTooltipInfoPtr;
 struct StdMap_NodeComponentGUIAtkResNodePtrComponentGUIAtkTooltipManagerAtkTooltipInfoPtr;
 struct StdPairComponentGUIAtkResNodePtrComponentGUIAtkTooltipManagerAtkTooltipInfoPtr;
+struct Component_GUI_AtkTextInput;
 struct Component_GUI_AtkTextNode;
 struct Component_GUI_AtkTexture_AtkTextureVTable;
 struct Component_GUI_AtkTextureResource;
@@ -8229,7 +8234,8 @@ __unaligned struct Client_System_Framework_Framework /* Size=0x35C8 */
     /* 0x2B50 */ Common_Component_BGCollision_BGCollisionModule* BGCollisionModule;
     /*        */ byte _gap_0x2B58[0x8];
     /* 0x2B60 */ Client_UI_UIModule* UIModule;
-    /*        */ byte _gap_0x2B68[0x60];
+    /* 0x2B68 */ Client_UI_UIClipboard* UIClipboard;
+    /*        */ byte _gap_0x2B70[0x58];
     /* 0x2BC8 */ Common_Lua_LuaState LuaState;
     /* 0x2BF0 */ Client_System_Framework_GameVersion GameVersion;
     /*        */ byte _gap_0x34F0[0xD8];
@@ -8260,6 +8266,22 @@ __unaligned struct Client_System_Framework_Task_TaskVTable /* Size=0x0 */
 {
     /*     */ __int64 _vf0;
     /* 0x8 */ void (__fastcall *Execute)(Client_System_Framework_Task* a1, void* a2);
+};
+
+__unaligned struct Client_System_Input_ClipBoard /* Size=0xD8 */
+{
+    /* 0x00 */ Client_System_Input_ClipBoard_ClipBoardVTable* VTable;
+    /* 0x08 */ Client_System_String_Utf8String SystemClipboardText;
+    /* 0x70 */ Client_System_String_Utf8String CopyStagingText;
+};
+
+__unaligned struct Client_System_Input_ClipBoard_ClipBoardVTable /* Size=0x0 */
+{
+    /*     */ __int64 _vf0;
+    /* 0x8 */ void (__fastcall *WriteToSystemClipboard)(Client_System_Input_ClipBoard* a1, Client_System_String_Utf8String* a2, Client_System_String_Utf8String* a3);
+    /* 0x10 */ Client_System_String_Utf8String* (__fastcall *GetSystemClipboardText)(Client_System_Input_ClipBoard* a1);
+    /* 0x18 */ void (__fastcall *SetCopyStagingText)(Client_System_Input_ClipBoard* a1, Client_System_String_Utf8String* a2);
+    /* 0x20 */ void (__fastcall *ApplyCopyStagingText)(Client_System_Input_ClipBoard* a1);
 };
 
 __unaligned struct Client_System_Memory_IMemorySpace /* Size=0x0 */
@@ -15694,6 +15716,15 @@ __unaligned struct Client_UI_UI3DModule_UnkInfo /* Size=0x40 */
     /*      */ byte _gap_0x18[0x28];
 };
 
+__unaligned struct Client_UI_UIClipboard /* Size=0xF8 */
+{
+    /*      */ byte _gap_0x0[0x8];
+    /* 0x08 */ Client_UI_UIModule* UIModule;
+    /* 0x10 */ Client_System_Input_ClipBoard Data;
+    /* 0xE8 */ __int64 ThisHwnd;
+    /* 0xF0 */ __int64 NextHwnd;
+};
+
 __unaligned struct Client_UI_UIInputData /* Size=0xA20 */
 {
     /*       */ byte _gap_0x0[0x8];
@@ -16776,6 +16807,11 @@ __unaligned struct Component_GUI_AtkImageNode /* Size=0xC0 */
     /*      */ byte _gap_0xBC[0x4];
 };
 
+__unaligned struct Component_GUI_AtkInputManager /* Size=0x0 */
+{
+    /* 0x0 */ Component_GUI_AtkTextInput* TextInput;
+};
+
 __unaligned struct StdLinkedList_NodeComponentGUIAtkTextureResourcePtr /* Size=0x18 */
 {
     /* 0x00 */ Component_GUI_AtkTextureResource* Value;
@@ -16919,11 +16955,9 @@ __unaligned struct Component_GUI_AtkStage /* Size=0x75E00 */
     /* 0x00000 */ Component_GUI_AtkEventTarget AtkEventTarget;
     /*         */ byte _gap_0x8[0x10];
     /* 0x00018 */ Component_GUI_AtkTextureResourceManager* AtkTextureResourceManager;
-    union {
     /* 0x00020 */ Client_UI_RaptureAtkUnitManager* RaptureAtkUnitManager;
-    /* 0x00020 */ __int64 AtkInputManager;
-    } _union_0x20;
-    /*         */ byte _gap_0x28[0x10];
+    /* 0x00028 */ Component_GUI_AtkInputManager* AtkInputManager;
+    /*         */ byte _gap_0x30[0x8];
     /* 0x00038 */ Component_GUI_AtkArrayDataHolder* AtkArrayDataHolder;
     /*         */ byte _gap_0x40[0x20];
     /* 0x00060 */ Client_UI_Misc_RaptureTextModule* RaptureTextModule;
@@ -16939,6 +16973,15 @@ __unaligned struct Component_GUI_AtkStage /* Size=0x75E00 */
     /*         */ byte _gap_0x860[0x18];
     /* 0x00878 */ Component_GUI_AtkEvent RegisteredEvents[0x2710];
     /*         */ byte _gap_0x75B78[0x288];
+};
+
+__unaligned struct Component_GUI_AtkTextInput /* Size=0xCC0 */
+{
+    /*       */ byte _gap_0x0[0x1C0];
+    /* 0x1C0 */ Client_System_Input_ClipBoard ClipboardData;
+    /* 0x298 */ Client_System_String_Utf8String CopyBufferRaw;
+    /* 0x300 */ Client_System_String_Utf8String CopyBufferFiltered;
+    /*       */ byte _gap_0x368[0x958];
 };
 
 __unaligned struct Component_GUI_AtkTextNode /* Size=0x160 */

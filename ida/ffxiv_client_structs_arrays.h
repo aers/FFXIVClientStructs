@@ -305,6 +305,8 @@ struct Client::System::Framework::GameVersion;
 struct Client::System::Framework::RootTask;
 struct Client::System::Framework::Task;
 struct Client::System::Framework::Task::TaskVTable;
+struct Client::System::Input::ClipBoard;
+struct Client::System::Input::ClipBoard::ClipBoardVTable;
 struct Client::System::Memory::IMemorySpace;
 struct Client::System::Memory::IMemorySpace::IMemorySpaceVTable;
 struct Client::System::Resource::Handle::MaterialResourceHandle;
@@ -811,6 +813,7 @@ struct Client::UI::UI3DModule::MemberInfo;
 struct Client::UI::UI3DModule::MapInfo;
 struct Client::UI::UI3DModule::ObjectInfo;
 struct Client::UI::UI3DModule::UnkInfo;
+struct Client::UI::UIClipboard;
 struct Client::UI::UIInputData;
 struct Client::UI::UIModule;
 struct Common::Configuration::ChangeEventInterface;
@@ -884,6 +887,7 @@ struct Component::GUI::AtkEvent;
 struct Component::GUI::AtkEventDispatcher;
 struct StdVectorComponentGUIAtkEventPtr;
 struct Component::GUI::AtkImageNode;
+struct Component::GUI::AtkInputManager;
 struct Component::GUI::AtkModule;
 struct Component::GUI::AtkTextureResourceManager;
 struct StdLinkedListComponentGUIAtkTextureResourcePtr;
@@ -896,6 +900,7 @@ struct Component::GUI::AtkTooltipManager;
 struct StdMapComponentGUIAtkResNodePtrComponentGUIAtkTooltipManagerAtkTooltipInfoPtr;
 struct StdMap::NodeComponentGUIAtkResNodePtrComponentGUIAtkTooltipManagerAtkTooltipInfoPtr;
 struct StdPairComponentGUIAtkResNodePtrComponentGUIAtkTooltipManagerAtkTooltipInfoPtr;
+struct Component::GUI::AtkTextInput;
 struct Component::GUI::AtkTextNode;
 struct Component::GUI::AtkTexture::AtkTextureVTable;
 struct Component::GUI::AtkTextureResource;
@@ -8229,7 +8234,8 @@ __unaligned struct Client::System::Framework::Framework /* Size=0x35C8 */
     /* 0x2B50 */ Common::Component::BGCollision::BGCollisionModule* BGCollisionModule;
     /*        */ byte _gap_0x2B58[0x8];
     /* 0x2B60 */ Client::UI::UIModule* UIModule;
-    /*        */ byte _gap_0x2B68[0x60];
+    /* 0x2B68 */ Client::UI::UIClipboard* UIClipboard;
+    /*        */ byte _gap_0x2B70[0x58];
     /* 0x2BC8 */ Common::Lua::LuaState LuaState;
     /* 0x2BF0 */ Client::System::Framework::GameVersion GameVersion;
     /*        */ byte _gap_0x34F0[0xD8];
@@ -8260,6 +8266,22 @@ __unaligned struct Client::System::Framework::Task::TaskVTable /* Size=0x0 */
 {
     /*     */ __int64 _vf0;
     /* 0x8 */ void (__fastcall *Execute)(Client::System::Framework::Task* a1, void* a2);
+};
+
+__unaligned struct Client::System::Input::ClipBoard /* Size=0xD8 */
+{
+    /* 0x00 */ Client::System::Input::ClipBoard::ClipBoardVTable* VTable;
+    /* 0x08 */ Client::System::String::Utf8String SystemClipboardText;
+    /* 0x70 */ Client::System::String::Utf8String CopyStagingText;
+};
+
+__unaligned struct Client::System::Input::ClipBoard::ClipBoardVTable /* Size=0x0 */
+{
+    /*     */ __int64 _vf0;
+    /* 0x8 */ void (__fastcall *WriteToSystemClipboard)(Client::System::Input::ClipBoard* a1, Client::System::String::Utf8String* a2, Client::System::String::Utf8String* a3);
+    /* 0x10 */ Client::System::String::Utf8String* (__fastcall *GetSystemClipboardText)(Client::System::Input::ClipBoard* a1);
+    /* 0x18 */ void (__fastcall *SetCopyStagingText)(Client::System::Input::ClipBoard* a1, Client::System::String::Utf8String* a2);
+    /* 0x20 */ void (__fastcall *ApplyCopyStagingText)(Client::System::Input::ClipBoard* a1);
 };
 
 __unaligned struct Client::System::Memory::IMemorySpace /* Size=0x0 */
@@ -15694,6 +15716,15 @@ __unaligned struct Client::UI::UI3DModule::UnkInfo /* Size=0x40 */
     /*      */ byte _gap_0x18[0x28];
 };
 
+__unaligned struct Client::UI::UIClipboard /* Size=0xF8 */
+{
+    /*      */ byte _gap_0x0[0x8];
+    /* 0x08 */ Client::UI::UIModule* UIModule;
+    /* 0x10 */ Client::System::Input::ClipBoard Data;
+    /* 0xE8 */ __int64 ThisHwnd;
+    /* 0xF0 */ __int64 NextHwnd;
+};
+
 __unaligned struct Client::UI::UIInputData /* Size=0xA20 */
 {
     /*       */ byte _gap_0x0[0x8];
@@ -16776,6 +16807,11 @@ __unaligned struct Component::GUI::AtkImageNode /* Size=0xC0 */
     /*      */ byte _gap_0xBC[0x4];
 };
 
+__unaligned struct Component::GUI::AtkInputManager /* Size=0x0 */
+{
+    /* 0x0 */ Component::GUI::AtkTextInput* TextInput;
+};
+
 __unaligned struct StdLinkedList::NodeComponentGUIAtkTextureResourcePtr /* Size=0x18 */
 {
     /* 0x00 */ Component::GUI::AtkTextureResource* Value;
@@ -16919,11 +16955,9 @@ __unaligned struct Component::GUI::AtkStage /* Size=0x75E00 */
     /* 0x00000 */ Component::GUI::AtkEventTarget AtkEventTarget;
     /*         */ byte _gap_0x8[0x10];
     /* 0x00018 */ Component::GUI::AtkTextureResourceManager* AtkTextureResourceManager;
-    union {
     /* 0x00020 */ Client::UI::RaptureAtkUnitManager* RaptureAtkUnitManager;
-    /* 0x00020 */ __int64 AtkInputManager;
-    } _union_0x20;
-    /*         */ byte _gap_0x28[0x10];
+    /* 0x00028 */ Component::GUI::AtkInputManager* AtkInputManager;
+    /*         */ byte _gap_0x30[0x8];
     /* 0x00038 */ Component::GUI::AtkArrayDataHolder* AtkArrayDataHolder;
     /*         */ byte _gap_0x40[0x20];
     /* 0x00060 */ Client::UI::Misc::RaptureTextModule* RaptureTextModule;
@@ -16939,6 +16973,15 @@ __unaligned struct Component::GUI::AtkStage /* Size=0x75E00 */
     /*         */ byte _gap_0x860[0x18];
     /* 0x00878 */ Component::GUI::AtkEvent RegisteredEvents[0x2710];
     /*         */ byte _gap_0x75B78[0x288];
+};
+
+__unaligned struct Component::GUI::AtkTextInput /* Size=0xCC0 */
+{
+    /*       */ byte _gap_0x0[0x1C0];
+    /* 0x1C0 */ Client::System::Input::ClipBoard ClipboardData;
+    /* 0x298 */ Client::System::String::Utf8String CopyBufferRaw;
+    /* 0x300 */ Client::System::String::Utf8String CopyBufferFiltered;
+    /*       */ byte _gap_0x368[0x958];
 };
 
 __unaligned struct Component::GUI::AtkTextNode /* Size=0x160 */
