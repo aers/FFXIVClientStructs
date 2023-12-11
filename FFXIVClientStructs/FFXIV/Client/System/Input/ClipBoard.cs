@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Input;
 public unsafe partial struct ClipBoard {
     [FieldOffset(0x08)] public Utf8String SystemClipboardText;
     [FieldOffset(0x70)] public Utf8String CopyStagingText;
-    
+
     /// <summary>
     /// Writes to the system clipboard.<br />
     /// Currently, <c>this</c> is unused; this might as well be a static function, but all uses of it are indirect.
