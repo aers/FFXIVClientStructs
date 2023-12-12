@@ -44,7 +44,6 @@ public unsafe partial struct RaptureHotbarModule {
     /// </summary>
     [FieldOffset(0x11890)] public HotBarSlot ScratchSlot;
 
-
     /// <summary>
     /// A field containing all saved hotbars, as persisted to disk. This field tracks both normal and cross hotbars, at
     /// their appropriate sub-indices.
@@ -56,6 +55,18 @@ public unsafe partial struct RaptureHotbarModule {
     /// </remarks>
     [FixedSizeArray<SavedHotBarGroup>(65)]
     [FieldOffset(0x11974)] public fixed byte SavedHotBars[65 * SavedHotBarGroup.Size];
+
+    /// <summary>
+    /// Hotbar slots representing available Duty Actions (see also <see cref="ActionManager.GetDutyActionId"/>).
+    /// </summary>
+    [FixedSizeArray<DutyActionSlot>(2)]
+    [FieldOffset(0x28720)] public fixed byte DutyActionSlots[2 * DutyActionSlot.Size];
+
+    /// <summary>
+    /// Sets whether Duty Actions are present or not. Controls whether to show the appropriate UI element and whether
+    /// to rewrite the special DutyAction General Actions.
+    /// </summary>
+    [FieldOffset(0x288F0)] public bool DutyActionsPresent;
 
     [MemberFunction("E9 ?? ?? ?? ?? 48 8D 91 ?? ?? ?? ?? E9")]
     public partial byte ExecuteSlot(HotBarSlot* hotbarSlot);
@@ -195,6 +206,37 @@ public unsafe partial struct RaptureHotbarModule {
     /// <returns>The EXD Row ID for the ClassJob this hotbar is intended for. If zero, this is a shared hotbar.</returns>
     [MemberFunction("E8 ?? ?? ?? ?? 41 0F B6 CD BA")]
     public partial uint GetClassJobIdForSavedHotbarIndex(int savedHotbarIndex);
+
+    /// <summary>
+    /// Sets the value of <see cref="DutyActionsPresent"/>.
+    /// </summary>
+    /// <param name="present">Whether to show/enable duty actions or not.</param>
+    [MemberFunction("E8 ?? ?? ?? ?? 80 7B 28 01 75 1C")]
+    public partial void SetDutyActionsPresent(bool present);
+
+    /// <summary>
+    /// Gets the specified <see cref="DutyActionSlot"/>, returning slot 0 if an invalid ID is passed in.
+    /// </summary>
+    /// <param name="index">The index of the slot (0 or 1) to retrieve.</param>
+    /// <returns>Returns a pointer to the DutyActionSlot.</returns>
+    [MemberFunction("E8 ?? ?? ?? ?? 42 8B 3C FB")]
+    public partial DutyActionSlot* GetDutyActionSlot(uint index);
+
+    /// <summary>
+    /// Sets the specified DutyAction slot to hold the target action ID. Only takes effect if index is 0 or 1.
+    /// </summary>
+    /// <param name="index">The index of the DutyAction slot to edit.</param>
+    /// <param name="actionId">The ID of the action to set in this slot.</param>
+    [MemberFunction("E8 ?? ?? ?? ?? 40 FE C5 4D 8D 76 04")]
+    public partial void SetDutyActionSlot(uint index, uint actionId);
+
+    /// <summary>
+    /// Executes the specified DutyAction slot. Does not appear to validate that the slot is in an executable state.
+    /// </summary>
+    /// <param name="index">The index of the slot to execute. If greater than 1, slot 0 is executed.</param>
+    /// <returns>Returns true always (?)</returns>
+    [MemberFunction("48 83 EC 28 85 D2 78 25")]
+    public partial bool ExecuteDutyActionSlot(uint index);
 }
 
 [StructLayout(LayoutKind.Explicit, Size = Size)]
@@ -498,6 +540,21 @@ public unsafe partial struct HotBarSlot {
     /// <returns>Returns a range from 0 to 100.</returns>
     [MemberFunction("E8 ?? ?? ?? ?? 89 47 24 E9")]
     public partial int GetSlotActionCooldownPercentage(int* outCooldownSecondsLeft, int a3 = 0);
+}
+
+/// <summary>
+/// A special extended <see cref="HotBarSlot"/> used for duty actions
+/// </summary>
+[StructLayout(LayoutKind.Explicit, Size = Size)]
+public unsafe partial struct DutyActionSlot {
+    public const int Size = HotBarSlot.Size + 8;
+
+    [FieldOffset(0x00)] public HotBarSlot Slot;
+
+    /// <summary>
+    /// The PrimaryCostType from the Action EXD (+0x29).
+    /// </summary>
+    [FieldOffset(0xE0)] public byte PrimaryCostType;
 }
 
 #region Saved Bars

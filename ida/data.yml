@@ -4256,6 +4256,16 @@ classes:
       0x140693A60: GetPvPSavedHotbarIndexForClassJobId
       0x140693B10: GetClassJobIdForSavedHotbarIndex
       0x14068D6E0: PopulateIntermediateFromSlot  # (this, HotBarSlot*, HotBarUiIntermediate*)  - used for array population?
+      0x140690E50: SetHotbarLocked
+      0x140690E90: IsHotbarLocked
+      0x140690EC0: SetCrossHotbarLocked
+      0x140690F00: IsCrossHotbarLocked
+      0x1406916B0: IsDutyAction1Usable
+      0x1406916D0: SetDutyActionsPresent  # (this, isPresent) -> void
+      0x1406917A0: GetDutyActionId        # (this, slotId) -> uint  - identical to ActionManager's version.
+      0x1406917F0: SetDutyActionSlot      # (this, slotId, actionId)
+      0x140691900: GetDutyActionSlot      # (this, slotId) -> DutyActionSlot*
+      0x140691960: ExecuteDutyActionSlot  # (this, slotId)
       0x140693BB0: GetInstance  # static
   Client::UI::Misc::RaptureHotbarModule::HotbarSlot:
     funcs:
@@ -4294,6 +4304,9 @@ classes:
       0x14068AE90: GetAdjustedCommandId  # ???
       0x14068BE80: LoadMacroSlot
       0x14068B190: GetSlotActionCooldownPercent  # (this, out int, int) -> int
+  Client::UI::Misc::RaptureHotbarModule::DutyActionSlot:
+    funcs:
+      0x1406918D0: Initialize
   Client::UI::Misc::RaptureHotbarModule::HotbarUiIntermediate:
     funcs:
       0x140689690: ctor
