@@ -1,5 +1,6 @@
 using System.Runtime.CompilerServices;
 using FFXIVClientStructs.FFXIV.Client.Game;
+using FFXIVClientStructs.FFXIV.Client.Game.UI;
 using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Client.UI.Misc.UserFileManager;
@@ -14,6 +15,7 @@ public unsafe partial struct RaptureHotbarModule {
     public static RaptureHotbarModule* Instance() => Framework.Instance()->GetUiModule()->GetRaptureHotbarModule();
 
     [FieldOffset(0)] public UserFileEvent UserFileEvent; // to 0x40
+    [FieldOffset(0x40)] public void** InputCodeModifiedInterfaceVTable;
     [FieldOffset(0x48)] public UIModule* UiModule;
 
     /// <summary>
@@ -25,6 +27,8 @@ public unsafe partial struct RaptureHotbarModule {
     /// A bitfield representing whether a specific hotbar is to be considered "shared" or not.
     /// </summary>
     [FieldOffset(0x7C)] public fixed byte HotbarShareStateBitmask[4];
+
+    [FieldOffset(0x88)] internal UIState* UiState;
 
     /// <summary>
     /// An array of all active hotbars loaded and available to the player. This field tracks both normal hotbars
@@ -43,6 +47,13 @@ public unsafe partial struct RaptureHotbarModule {
     /// A scratch hotbar slot used for temporary operations such as saving and temporary rewrites.
     /// </summary>
     [FieldOffset(0x11890)] public HotBarSlot ScratchSlot;
+
+    // No idea how this field works. Observed so far:
+    // 15 (0x0E) - referenced in code.
+    // 18 (0x12) - Mount/FashionAccessory
+    // 34 (0x22) - Carbuncle up
+    // Seems to control something with overriding the main bar too?
+    [FieldOffset(0x11970)] public uint PetHotbarMode;
 
     /// <summary>
     /// A field containing all saved hotbars, as persisted to disk. This field tracks both normal and cross hotbars, at
@@ -188,6 +199,14 @@ public unsafe partial struct RaptureHotbarModule {
     [MemberFunction("E8 ?? ?? ?? ?? EB 57 48 8D 9F ?? ?? ?? ??")]
     public partial void WriteSavedSlot(uint classJobId, uint hotbarId, uint slotId, HotBarSlot* slotSource,
         bool ignoreSharedHotbars, bool isPvpSlot);
+
+    /// <summary>
+    /// Clears the specified hotbar slot <em>and</em> the backing saved hotbar slot in the same ClassJob ID. 
+    /// </summary>
+    /// <param name="hotbarId">The saved hotbar ID to select.</param>
+    /// <param name="slotId">The saved slot ID to clear.</param>
+    [MemberFunction("E8 ?? ?? ?? ?? FF C7 83 FF 10 7C E3")]
+    public partial void ClearSavedSlotById(uint hotbarId, uint slotId);
 
     /// <summary>
     /// Get the Saved Hotbar Index for the PVP hotbar for a specific ClassJob, for use in <see cref="SavedHotBarsSpan"/>. 

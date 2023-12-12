@@ -4242,6 +4242,7 @@ classes:
       0x14068C1D0: ctor
       0x14068C3C0: Finalize
       0x14068E780: IsHotbarEmpty
+      0x14068CD40: ClearSavedSlotById  # (this, hotbarId, slotId) -> void
       0x140691D50: ExecuteSlot
       0x14068CE30: ExecuteSlotById
       0x14068CE70: GetSlotById
@@ -4255,23 +4256,33 @@ classes:
       0x140692750: WriteSavedSlot
       0x140693A60: GetPvPSavedHotbarIndexForClassJobId
       0x140693B10: GetClassJobIdForSavedHotbarIndex
+      0x14068CEB0: SetPetHotbarSlot      # (this, slotId, slotType, actionId) -> nint
+      0x14068CF70: SetPetCrossHotbarSlot # (this, slotId, slotType, actionId) -> nint
+      0x14068D030: ClearPetHotbarSlot       # (this, slotId) -> nint
+      0x14068D0B0: ClearPetCrossHotbarSlot  # (this, slotId) -> nint
+      0x14068D130: ExecutePetHotbarSlot       # (this, slotId) -> bool (?)
+      0x14068D150: ExecutePetCrossHotbarSlot  # (this, slotId) -> bool (?)
       0x14068D6E0: PopulateIntermediateFromSlot  # (this, HotBarSlot*, HotBarUiIntermediate*)  - used for array population?
+      0x14068E7E0: IsSavedSlotEmpty  # (this, classJobId, hotbarId, slotId) -> bool
       0x140690E50: SetHotbarLocked
       0x140690E90: IsHotbarLocked
       0x140690EC0: SetCrossHotbarLocked
       0x140690F00: IsCrossHotbarLocked
       0x1406916B0: IsDutyAction1Usable
-      0x1406916D0: SetDutyActionsPresent  # (this, isPresent) -> void
-      0x1406917A0: GetDutyActionId        # (this, slotId) -> uint  - identical to ActionManager's version.
-      0x1406917F0: SetDutyActionSlot      # (this, slotId, actionId)
-      0x140691900: GetDutyActionSlot      # (this, slotId) -> DutyActionSlot*
-      0x140691960: ExecuteDutyActionSlot  # (this, slotId)
+      0x1406916D0: SetDutyActionsPresent             # (this, isPresent) -> void
+      0x1406917A0: GetDutyActionId                   # (this, slotId) -> uint  - identical to ActionManager's version.
+      0x1406917C0: GetDutyActionIdForGeneralActionId # (this, generalActionId) -> uint
+      0x1406917F0: SetDutyActionSlot                 # (this, slotId, actionId)
+      0x140691900: GetDutyActionSlot                 # (this, slotId) -> DutyActionSlot*
+      0x140691960: ExecuteDutyActionSlot             # (this, slotId)
+      0x140691A10: IsGeneralActionDutyAction         # (this, generalActionId) -> bool  - utility function? 
       0x140693BB0: GetInstance  # static
   Client::UI::Misc::RaptureHotbarModule::HotbarSlot:
     funcs:
       # Convention(ish?): Get just returns a value, Load actually mutates the HotbarSlot passed to it
       0x14068A930: Initialize
       0x14068A9D0: InitializeAndSet  # (this, UiModule*, HotbarSlotType, uint)
+      0x14068AAB0: Clear
       0x14068AC90: Set
       0x14068BFB0: LoadIconFromSlotB
       0x140689700: GetIconIdForSlot
