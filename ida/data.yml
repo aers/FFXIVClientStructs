@@ -291,6 +291,7 @@ classes:
     funcs:
       0x1409427F0: CancelCrafting
       0x140943760: IsRecipeUnlocked # (this, recipeId)  # no xrefs
+      0x1409437D0: GetCraftTypeLevel
       0x140943CD0: FirstRecipeIndex
       0x140943C90: GetRecipeByIndex # (this, index)
       0x140943D10: GetSelectedRecipe
@@ -612,6 +613,7 @@ classes:
       0x140850E10: GetQuestClassJob
       0x140850B40: IsQuestAccepted
       0x140850FD0: GetBeastTribeAllowance
+      0x14087B360: IsRecipeComplete # static (uint recipeId)
       0x140892280: IsLevequestComplete
       0x14093A020: GetNextLeveAllowancesTimestamp # multiply by 60 for unix timestamp
   Client::Game::MirageManager:
@@ -3318,6 +3320,7 @@ classes:
       0x140507970: SetValueIfDifferentUtf8
       0x1405079B0: SetValueForced
       0x1405079F0: SetValueForcedUtf8
+      0x140507A70: SetValueAndUpdate # calls SetValue with silent = false
   Component::GUI::ExtendArrayData:
     vtbls:
       - ea: 0x141A05A00
