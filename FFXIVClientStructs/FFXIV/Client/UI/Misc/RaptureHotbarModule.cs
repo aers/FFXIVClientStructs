@@ -1,5 +1,6 @@
 using System.Runtime.CompilerServices;
 using FFXIVClientStructs.FFXIV.Client.Game;
+using FFXIVClientStructs.FFXIV.Client.Game.UI;
 using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Client.UI.Misc.UserFileManager;
@@ -14,6 +15,7 @@ public unsafe partial struct RaptureHotbarModule {
     public static RaptureHotbarModule* Instance() => Framework.Instance()->GetUiModule()->GetRaptureHotbarModule();
 
     [FieldOffset(0)] public UserFileEvent UserFileEvent; // to 0x40
+    [FieldOffset(0x40)] public void** InputCodeModifiedInterfaceVTable;
     [FieldOffset(0x48)] public UIModule* UiModule;
 
     /// <summary>
@@ -25,6 +27,8 @@ public unsafe partial struct RaptureHotbarModule {
     /// A bitfield representing whether a specific hotbar is to be considered "shared" or not.
     /// </summary>
     [FieldOffset(0x7C)] public fixed byte HotbarShareStateBitmask[4];
+
+    [FieldOffset(0x88)] internal UIState* UiState;
 
     /// <summary>
     /// An array of all active hotbars loaded and available to the player. This field tracks both normal hotbars
@@ -44,6 +48,12 @@ public unsafe partial struct RaptureHotbarModule {
     /// </summary>
     [FieldOffset(0x11890)] public HotBarSlot ScratchSlot;
 
+    // No idea how this field works. Observed so far:
+    // 15 (0x0E) - referenced in code.
+    // 18 (0x12) - Mount/FashionAccessory
+    // 34 (0x22) - Carbuncle up
+    // Seems to control something with overriding the main bar too?
+    [FieldOffset(0x11970)] public uint PetHotbarMode;
 
     /// <summary>
     /// A field containing all saved hotbars, as persisted to disk. This field tracks both normal and cross hotbars, at
@@ -56,6 +66,18 @@ public unsafe partial struct RaptureHotbarModule {
     /// </remarks>
     [FixedSizeArray<SavedHotBarGroup>(65)]
     [FieldOffset(0x11974)] public fixed byte SavedHotBars[65 * SavedHotBarGroup.Size];
+
+    /// <summary>
+    /// Hotbar slots representing available Duty Actions (see also <see cref="ActionManager.GetDutyActionId"/>).
+    /// </summary>
+    [FixedSizeArray<DutyActionSlot>(2)]
+    [FieldOffset(0x28720)] public fixed byte DutyActionSlots[2 * DutyActionSlot.Size];
+
+    /// <summary>
+    /// Sets whether Duty Actions are present or not. Controls whether to show the appropriate UI element and whether
+    /// to rewrite the special DutyAction General Actions.
+    /// </summary>
+    [FieldOffset(0x288F0)] public bool DutyActionsPresent;
 
     [MemberFunction("E9 ?? ?? ?? ?? 48 8D 91 ?? ?? ?? ?? E9")]
     public partial byte ExecuteSlot(HotBarSlot* hotbarSlot);
@@ -179,6 +201,14 @@ public unsafe partial struct RaptureHotbarModule {
         bool ignoreSharedHotbars, bool isPvpSlot);
 
     /// <summary>
+    /// Clears the specified hotbar slot <em>and</em> the backing saved hotbar slot in the same ClassJob ID. 
+    /// </summary>
+    /// <param name="hotbarId">The saved hotbar ID to select.</param>
+    /// <param name="slotId">The saved slot ID to clear.</param>
+    [MemberFunction("E8 ?? ?? ?? ?? FF C7 83 FF 10 7C E3")]
+    public partial void ClearSavedSlotById(uint hotbarId, uint slotId);
+
+    /// <summary>
     /// Get the Saved Hotbar Index for the PVP hotbar for a specific ClassJob, for use in <see cref="SavedHotBarsSpan"/>. 
     /// </summary>
     /// <param name="classJobId">The ClassJob to look up, or 0 for the shared PVP hotbar.</param>
@@ -195,6 +225,37 @@ public unsafe partial struct RaptureHotbarModule {
     /// <returns>The EXD Row ID for the ClassJob this hotbar is intended for. If zero, this is a shared hotbar.</returns>
     [MemberFunction("E8 ?? ?? ?? ?? 41 0F B6 CD BA")]
     public partial uint GetClassJobIdForSavedHotbarIndex(int savedHotbarIndex);
+
+    /// <summary>
+    /// Sets the value of <see cref="DutyActionsPresent"/>.
+    /// </summary>
+    /// <param name="present">Whether to show/enable duty actions or not.</param>
+    [MemberFunction("E8 ?? ?? ?? ?? 80 7B 28 01 75 1C")]
+    public partial void SetDutyActionsPresent(bool present);
+
+    /// <summary>
+    /// Gets the specified <see cref="DutyActionSlot"/>, returning slot 0 if an invalid ID is passed in.
+    /// </summary>
+    /// <param name="index">The index of the slot (0 or 1) to retrieve.</param>
+    /// <returns>Returns a pointer to the DutyActionSlot.</returns>
+    [MemberFunction("E8 ?? ?? ?? ?? 42 8B 3C FB")]
+    public partial DutyActionSlot* GetDutyActionSlot(uint index);
+
+    /// <summary>
+    /// Sets the specified DutyAction slot to hold the target action ID. Only takes effect if index is 0 or 1.
+    /// </summary>
+    /// <param name="index">The index of the DutyAction slot to edit.</param>
+    /// <param name="actionId">The ID of the action to set in this slot.</param>
+    [MemberFunction("E8 ?? ?? ?? ?? 40 FE C5 4D 8D 76 04")]
+    public partial void SetDutyActionSlot(uint index, uint actionId);
+
+    /// <summary>
+    /// Executes the specified DutyAction slot. Does not appear to validate that the slot is in an executable state.
+    /// </summary>
+    /// <param name="index">The index of the slot to execute. If greater than 1, slot 0 is executed.</param>
+    /// <returns>Returns true always (?)</returns>
+    [MemberFunction("48 83 EC 28 85 D2 78 25")]
+    public partial bool ExecuteDutyActionSlot(uint index);
 }
 
 [StructLayout(LayoutKind.Explicit, Size = Size)]
@@ -224,7 +285,7 @@ public unsafe partial struct HotBarSlot {
     /// The string that appears when a hotbar slot is hovered over.
     ///
     /// Calculated by concatenating GetDisplayNameForSlot with PopUpKeybindHint (in most cases).
-    [FieldOffset(0x00)] public Utf8String PopUpHelp;
+    [FieldOffset(0x00)] public Utf8String PopUpHelp; // TODO (apiX): Rename to DisplayName
 
     /// The "cost text" to display when 0xCB is in mode 2 or 4.
     ///
@@ -257,7 +318,7 @@ public unsafe partial struct HotBarSlot {
     /// different action. For example, PvP combos will use this to track the "active" action.
     ///
     /// Note that this is *not* a reference to an icon directly.
-    [FieldOffset(0xC0)] public uint IconB;
+    [FieldOffset(0xC0)] public uint IconB; // TODO? (apiX): Rename to `ApparentIcon`, `GetApparentIconId` etc. 
 
     /// Unknown field with offset 0xC4 (196), possibly overloaded
     ///
@@ -382,6 +443,13 @@ public unsafe partial struct HotBarSlot {
     public partial bool LoadIconFromSlotB();
 
     /// <summary>
+    /// Loads in cost data (value or text) for this target hotbar slot.
+    /// </summary>
+    /// <returns></returns>
+    [MemberFunction("E8 ?? ?? ?? ?? 40 0A F0 44 8B 83")]
+    public partial bool LoadCostDataForSlot(bool isLoaded = true);
+
+    /// <summary>
     /// Get an icon ID for a hotbar slot, with specified appearance slot type and action ID.
     ///
     /// This method appears to exist to allow certain action types (specifically macros it seems?) to have a different
@@ -408,6 +476,31 @@ public unsafe partial struct HotBarSlot {
     public partial byte* GetDisplayNameForSlot(HotbarSlotType slotType, uint actionId);
 
     /// <summary>
+    /// Gets the <see cref="CostValue"/> for a specific hotbar slot, taking account the specified appearance slot type
+    /// and action ID.
+    ///
+    /// This method is always called using the parameters from <see cref="IconTypeB"/> and <see cref="IconB"/>.
+    /// </summary>
+    /// <param name="slotType">The slot type to look up and return information for.</param>
+    /// <param name="actionId">The action ID to look up and return information for.</param>
+    /// <returns>Returns the cost value for this HotBarSlot.</returns>
+    [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 30 0F B6 C2 41 8B D8")]
+    public partial uint GetCostValueForSlot(HotbarSlotType slotType, uint actionId);
+
+    /// <summary>
+    /// Gets the <see cref="CostText"/> for a specific hotbar slot, taking account the specified appearance slot type
+    /// and action ID. This will normally match the result from <see cref="GetCostValueForSlot"/> but may differ for
+    /// Items and certain actions (e.g. Black Mage's Flare).
+    ///
+    /// This method is always called using the parameters from <see cref="IconTypeB"/> and <see cref="IconB"/>.
+    /// </summary>
+    /// <param name="slotType">The slot type to look up and return information for.</param>
+    /// <param name="actionId">The action ID to look up and return information for.</param>
+    /// <returns>Returns the cost text for this HotBarSlot.</returns>
+    [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 30 0F B6 C2 41 8B D8")]
+    public partial uint GetCostTextForSlot(HotbarSlotType slotType, uint actionId);
+
+    /// <summary>
     /// Retrieves a <see cref="ActionType"/> for the specified hotbar slot type.
     /// </summary>
     /// <remarks>
@@ -425,6 +518,62 @@ public unsafe partial struct HotBarSlot {
     /// <returns>Returns a uint.</returns>
     [MemberFunction("40 53 48 83 EC 40 8B 99 ?? ?? ?? ??")]
     public partial uint GetRecastChargesFromSlotB();
+
+    /// <summary>
+    /// Check whether the action contained in this slot is considered usable or not. When set to false, the respective
+    /// slot in the UI is greyed out (though is still interactable). 
+    /// </summary>
+    /// <param name="slotType">The slot type to check against - always IconTypeB.</param>
+    /// <param name="actionId">The actionID to check against - always IconB.</param>
+    /// <returns>Returns a bool indicating if the action within this slot is usable.</returns>
+    [MemberFunction("E8 ?? ?? ?? ?? 88 47 3E E9")]
+    public partial bool IsSlotUsable(HotbarSlotType slotType, uint actionId);
+
+    /// <summary>
+    /// Check if the hotbar slot's action's target is currently in range. When set to false, the UI will show an X
+    /// on the hotbar slot.
+    /// </summary>
+    /// <returns>Returns a bool indicating whether the action's range constraints are met.</returns>
+    [MemberFunction("E8 ?? ?? ?? ?? 88 47 40 48 8B D7")]
+    public partial bool IsSlotActionTargetInRange();
+
+    /// <summary>
+    /// Check if an arbitrary slot type/action ID's target is currently in range. Overload to allow for any slot type
+    /// or action ID to be checked. Use <see cref="IsSlotActionTargetInRange()"/> to target the current slot.
+    /// </summary>
+    /// <remarks>
+    /// This method can realistically be static, I'm unsure why it's not...
+    /// </remarks>
+    /// <param name="slotType">The slot type (normally <see cref="IconTypeB"/>) to check.</param>
+    /// <param name="actionId">The action ID (normally <see cref="IconB"/>) to check.</param>
+    /// <returns>Returns a bool indicating whether the action's range constraints are met.</returns>
+    [MemberFunction("40 53 48 83 EC 20 41 8B D8 80 FA 11")]
+    public partial bool IsSlotActionTargetInRange2(HotbarSlotType slotType, uint actionId);
+
+    /// <summary>
+    /// Gets the action's cooldown percentage. This value is displayed as a white circle overlaid on the hotbar slot. An action that
+    /// is not currently in cooldown will be 0. Actions that do not have a cooldown will also return 0.
+    /// </summary>
+    /// <param name="outCooldownSecondsLeft">An out parameter representing the seconds left in cooldown. Unused if cooldown is GCD.</param>
+    /// <param name="a3">Unknown, appears to be a UI-related field for forcing values if the percentage is 0.</param>
+    /// <returns>Returns a range from 0 to 100.</returns>
+    [MemberFunction("E8 ?? ?? ?? ?? 89 47 24 E9")]
+    public partial int GetSlotActionCooldownPercentage(int* outCooldownSecondsLeft, int a3 = 0);
+}
+
+/// <summary>
+/// A special extended <see cref="HotBarSlot"/> used for duty actions
+/// </summary>
+[StructLayout(LayoutKind.Explicit, Size = Size)]
+public unsafe partial struct DutyActionSlot {
+    public const int Size = HotBarSlot.Size + 8;
+
+    [FieldOffset(0x00)] public HotBarSlot Slot;
+
+    /// <summary>
+    /// The PrimaryCostType from the Action EXD (+0x29).
+    /// </summary>
+    [FieldOffset(0xE0)] public byte PrimaryCostType;
 }
 
 #region Saved Bars
@@ -467,6 +616,38 @@ public struct SavedHotBarSlot {
 
 #endregion
 
+/// <summary>
+/// An intermediate struct used to translate from a <see cref="HotBarSlot"/> to the UI String/NumberArrays. 
+/// </summary>
+/// <remarks>
+/// <b>Do not consider this struct stable (yet).</b>
+/// </remarks>
+[StructLayout(LayoutKind.Explicit, Size = 0x43)]
+internal unsafe struct HotBarUiIntermediate {
+    // Converts to array in E8 ?? ?? ?? ?? EB 34 E8
+
+    [FieldOffset(0x00)] public Utf8String* PopUpHelpText; // to StringArray idx slotBase + 14
+    [FieldOffset(0x08)] public nint CostTextPtr; // to StringArray idx slotBase + 1
+    [FieldOffset(0x10)] public uint IntermediateActionType; // to NumberArray idx slotBase + 0
+    [FieldOffset(0x14)] public uint ActionId; // to NumberArray idx slotBase + 3
+    [FieldOffset(0x18)] public uint IconId; // to NumberArray idx slotBase + 4
+    [FieldOffset(0x1C)] public uint CooldownMode; // to NumberArray idx slotBase + 7
+    [FieldOffset(0x20)] public uint CooldownSeconds;
+    [FieldOffset(0x24)] public uint CooldownPercent; // to NumberArray idx slotBase + 8
+    [FieldOffset(0x28)] public uint LastCooldownPercent;
+    [FieldOffset(0x2C)] public uint ChargePercent; // to NumberArray idx slotBase + 9
+    [FieldOffset(0x30)] public uint LastChargePercent;
+    [FieldOffset(0x34)] public uint CurrentCharges; // to NumberArray idx slotBase + 13
+    [FieldOffset(0x38)] public uint CostValue; // to NumberArray idx slotBase + 10
+    [FieldOffset(0x3C)] public byte CostType; // to NumberArray idx slotBase + 1
+    [FieldOffset(0x3D)] public byte CostDisplayMode; // to NumberArray idx slotBase + 2
+    [FieldOffset(0x3E)] public bool ActionAvailable1; // to NumberArray idx slotBase + 5
+    [FieldOffset(0x3F)] public bool ActionAvailable2; // to NumberArray idx slotBase + 6
+    [FieldOffset(0x40)] public bool ActionTargetSatisfied; // to NumberArray idx slotBase + 15
+    [FieldOffset(0x41)] public bool DrawAnts; // to NumberArray idx slotBase + 14
+    [FieldOffset(0x42)] public byte Unk_0x42;
+}
+
 public enum HotbarSlotType : byte {
     Empty = 0x00,
     Action = 0x01,
@@ -496,10 +677,9 @@ public enum HotbarSlotType : byte {
     PvPQuickChat = 0x19,
     PvPCombo = 0x1A,
     BgcArmyAction = 0x1B,
-
     Unk_0x1C = 0x1C, // seems to be a legacy type, possibly performance instrument related based on associated icon 000782
     PerformanceInstrument = 0x1D,
-    Collection = 0x1E,
+    Collection = 0x1E, // TODO (apiX): Rename to McGuffin to match EXD name
     Ornament = 0x1F,
     LostFindsItem = 0x20
 }

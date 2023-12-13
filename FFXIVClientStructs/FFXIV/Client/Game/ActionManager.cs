@@ -96,6 +96,15 @@ public unsafe partial struct ActionManager {
     [MemberFunction("77 49 80 3B 00")]
     public partial bool IsActionOffCooldown(ActionType actionType, uint actionId);
 
+    /// <summary>
+    /// Check if the specified action's target is within range, if any. Will not check line of sight (performance reasons?).
+    /// </summary>
+    /// <param name="actionType">The action type to check against.</param>
+    /// <param name="actionId">The action ID to check against.</param>
+    /// <returns>Returns true if target constraints are satisfied, false otherwise.</returns>
+    [MemberFunction("E8 ?? ?? ?? ?? 88 47 40 EB 36")]
+    public partial bool IsActionTargetInRange(ActionType actionType, uint actionId);
+
     [MemberFunction("E8 ?? ?? ?? ?? F3 0F 11 43 ?? 80 3B 00")]
     public static partial float GetActionRange(uint actionId);
 
@@ -134,6 +143,15 @@ public unsafe partial struct ActionManager {
 
     [MemberFunction("40 53 55 57 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 33 DB")]
     public partial bool SetBlueMageActions(uint* actionArray);
+
+    /// <summary>
+    /// Check whether this action should be highlighted (showing "ants") in the UI or not.
+    /// </summary>
+    /// <param name="actionType">The action type to check.</param>
+    /// <param name="actionId">The action ID to check.</param>
+    /// <returns>Returns true if ants should be drawn, false otherwise.</returns>
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B CB 88 47 41")]
+    public partial bool IsActionHighlighted(ActionType actionType, uint actionId);
 
     [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 20 48 8B DA 8B F9 E8 ?? ?? ?? ?? 4C 8B C3")]
     public static partial bool CanUseActionOnTarget(uint actionId, GameObject* target);
