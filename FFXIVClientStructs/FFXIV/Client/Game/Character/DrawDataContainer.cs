@@ -107,7 +107,7 @@ public unsafe partial struct DrawObjectData {
     [FieldOffset(0x00)] public WeaponModelId ModelId;
     [FieldOffset(0x10)] public void** VTable;
     [FieldOffset(0x18)] public DrawObject* DrawObject;
-    [FieldOffset(0x5C)] public byte State;
+    [FieldOffset(0x60)] public byte State;
     [FieldOffset(0x62)] public ushort Flags1;
     [FieldOffset(0x64)] public byte Flags2;
 
