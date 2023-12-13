@@ -1,3 +1,5 @@
+using FFXIVClientStructs.FFXIV.Common.Math;
+
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 // Component::GUI::AtkUnitBase
 //   Component::GUI::AtkEventListener
@@ -16,26 +18,39 @@ public unsafe partial struct AtkUnitBase {
     [FieldOffset(0xD0)] public AtkCollisionNode* WindowCollisionNode;
     [FieldOffset(0xD8)] public AtkCollisionNode* WindowHeaderCollisionNode;
     [FieldOffset(0xE0)] public AtkResNode* CursorTarget; // Likely always AtkCollisionNode
+    [FieldOffset(0x100)] public AtkComponentNode* CurrentDropDownOwnerNode;
     [FieldOffset(0x108)] public AtkComponentNode* WindowNode;
+    [FieldOffset(0x110)] public AtkSimpleTween RootNodeTween; // used for open/close transitions
     [FieldOffset(0x160)] public AtkValue* AtkValues;
-    [FieldOffset(0x1AC)] public float Scale;
     [FieldOffset(0x182)] public byte Flags;
+    [FieldOffset(0x194)] public uint OpenTransitionDuration;
+    [FieldOffset(0x198)] public uint CloseTransitionDuration;
+    [FieldOffset(0x1A1)] public byte NumOpenPopups; // used for dialogs and context menus to block inputs via ShouldIgnoreInputs
+    [FieldOffset(0x1A4)] public float OpenTransitionScale;
+    [FieldOffset(0x1A8)] public float CloseTransitionScale;
+    [FieldOffset(0x1AC)] public float Scale;
     [FieldOffset(0x1B6)] public byte VisibilityFlags;
+    [FieldOffset(0x1B8)] public ushort DrawOrderIndex;
     [FieldOffset(0x1BC)] public short X;
     [FieldOffset(0x1BE)] public short Y;
+    [FieldOffset(0x1C0)] public short OpenTransitionOffsetX;
+    [FieldOffset(0x1C2)] public short OpenTransitionOffsetY;
+    [FieldOffset(0x1C4)] public short CloseTransitionOffsetX;
+    [FieldOffset(0x1C6)] public short CloseTransitionOffsetY;
+    [FieldOffset(0x1C8)] public short OpenSoundEffectId;
     [FieldOffset(0x1CA)] public ushort AtkValuesCount;
     [FieldOffset(0x1CC)] public ushort ID;
     [FieldOffset(0x1CE)] public ushort ParentID;
+    [FieldOffset(0x1D0)] public ushort HostID; // for example, in CharacterProfile this holds the ID of the Character addon
+    [Obsolete("Use HostID")]
     [FieldOffset(0x1D0)] public ushort UnknownID;
     [FieldOffset(0x1D2)] public ushort ContextMenuParentID;
     [FieldOffset(0x1D5)] public byte Alpha;
     [FieldOffset(0x1D6)] public byte ShowHideFlags;
-
-    [FieldOffset(0x1D8)]
-    public AtkResNode**
-        CollisionNodeList; // seems to be all collision nodes in tree, may be something else though
-
+    [FieldOffset(0x1D8)] public AtkResNode** CollisionNodeList; // seems to be all collision nodes in tree, may be something else though
     [FieldOffset(0x1E0)] public uint CollisionNodeListCount;
+
+    public int DepthLayer => Flags & 0xF;
 
     public bool IsVisible {
         get => (Flags & 0x20) == 0x20;
@@ -102,13 +117,13 @@ public unsafe partial struct AtkUnitBase {
     public partial void ReceiveEvent(AtkEventType eventType, int eventParam, AtkEvent* atkEvent, nint a5 = 0);
 
     [VirtualFunction(3)]
-    public partial bool Open(uint uknUint);
+    public partial bool Open(uint depthLayer);
 
     [VirtualFunction(4)]
-    public partial bool Close(bool unknown);
+    public partial bool Close(bool fireCallback);
 
     [VirtualFunction(5)]
-    public partial void Show(bool unkBool, uint unsetShowHideFlags);
+    public partial void Show(bool silenceOpenSoundEffect, uint unsetShowHideFlags);
 
     [VirtualFunction(6)]
     public partial void Hide(bool unkBool, bool callHideCallback, uint setShowHideFlags);
@@ -138,7 +153,7 @@ public unsafe partial struct AtkUnitBase {
     public partial void SetScale(float scale, bool a3);
 
     [VirtualFunction(15)]
-    public partial void GetSize(short* width, short* height, bool scaled);
+    public partial void GetSize(short* outWidth, short* outHeight, bool scaled);
 
     [VirtualFunction(16)]
     public partial void Hide2();
@@ -148,6 +163,21 @@ public unsafe partial struct AtkUnitBase {
 
     [VirtualFunction(18)]
     public partial bool ShouldCollideWithWindow(AtkCollisionNode* collisionNode);
+
+    [VirtualFunction(22)]
+    public partial bool ShouldIgnoreInputs();
+
+    [VirtualFunction(23)]
+    public partial AtkResNode* GetRootNode();
+
+    [VirtualFunction(26)]
+    public partial void GetWindowBounds(Bounds* outBounds); // tries to get it from WindowCollisionNode first, then from RootNode
+
+    [VirtualFunction(29)]
+    public partial void GetRootBounds(Bounds* outBounds);
+
+    [VirtualFunction(36)]
+    public partial void Focus();
 
     [VirtualFunction(40)]
     public partial void Initialize();
@@ -166,13 +196,16 @@ public unsafe partial struct AtkUnitBase {
     public partial void Draw();
 
     [VirtualFunction(48)]
-    public partial void OnSetup(uint a2, AtkValue* atkValues);
+    public partial void OnSetup(uint numValues, AtkValue* values);
 
     [VirtualFunction(50)]
     public partial void OnRefresh(uint numValues, AtkValue* values);
 
     [VirtualFunction(51)]
     public partial void OnUpdate(NumberArrayData** numberArrayData, StringArrayData** stringArrayData);
+
+    [VirtualFunction(53)]
+    public partial void FireCloseCallback();
 
     [VirtualFunction(61)]
     public partial void OnMouseOver();
@@ -183,4 +216,10 @@ public unsafe partial struct AtkUnitBase {
     [MemberFunction("E9 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 8D 15")]
     [GenerateCStrOverloads]
     public partial bool LoadUldByName(byte* name, byte a3 = 0, uint a4 = 6);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 8D 53 24")]
+    public partial void SetOpenTransition(float duration, short offsetX, short offsetY, float scale);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 8D 55 06 48 8B CE")]
+    public partial void SetCloseTransition(float duration, short offsetX, short offsetY, float scale);
 }
