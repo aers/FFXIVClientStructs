@@ -82,7 +82,7 @@ public unsafe partial struct AtkComponentGaugeBar {
     [FieldOffset(0x1A0)] public short MarginX;
     [FieldOffset(0x1A2)] public short MaxFillPositionX;
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B F8 48 85 C0 0F 84 ?? ?? ?? ?? 49 8B 0F")]
+    [MemberFunction("45 33 D2 48 8D 05 ?? ?? ?? ?? 4C 89 51 08")]
     public partial void Ctor();
 
     /// <summary>
