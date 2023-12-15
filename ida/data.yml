@@ -107,6 +107,7 @@ functions:
   0x140C46D90: CreateSelectYesno
   0x1411A6AB0: Client::UI::AddonHudLayoutScreen::MoveableAddonInfoStruct_UpdateAddonPosition
   0x1413064B0: Client::Graphics::Kernel::CreateShader # static function
+  0x141311460: FilterCustomizeData # ensures NPC specific faces etc aren't on players
   0x1413119B0: NormalizeCustomizeData
   0x14134BED0: Client::Game::Control::InputManager::IsAutoRunning # static function, might belong in a different class.
   0x1413B7110: lua_close
@@ -338,7 +339,10 @@ classes:
       - ea: 0x141A03218
     funcs:
       0x1404DDC40: PlayTimeline
+      0x1404DE200: GetSlotTimeline
       0x1404DE5F0: SetSlotSpeed
+      0x1404DE900: GetSlotSpeed
+      0x1404DF520: SetSlotTimeline
   Client::Game::Character::CharacterData:
     vtbls:
       - ea: 0x141A1EEC8
@@ -348,6 +352,10 @@ classes:
     funcs:
       0x1407BCC90: ctor
       0x1407635E0: dtor
+      0x141320880: CalculateAndApplyOverallSpeed
+      0x141322DB0: SetSlotSpeed
+      0x141322F10: GetHeightAdjustActionTimelineRowId
+      0x1413239D0: SetLipsOverrideTimeline
   Client::Game::RetainerManager:
     instances:
       - ea: 0x142221DF0
@@ -515,9 +523,10 @@ classes:
       0x1412E2440: CreateEventObject
       0x1412E2520: CreateAreaObject
       0x1412E2610: DeleteObjectByIndex
-      0x1412E2990: GetObjectByIndex
-      0x1412E2AB0: GetIndexByObject
       0x1412E28E0: CalculateNextAvailableIndex
+      0x1412E2990: GetObjectByIndex
+      0x1412E2A70: IsValidClientObject
+      0x1412E2AB0: GetIndexByObject
   Client::Game::Character::CharacterManager: # networked characters
     instances:
       - ea: 0x1421F23B0
@@ -4579,6 +4588,7 @@ classes:
       28: GetDrawObject_2
       29: UpdateRadius
       30: Highlight
+      38: SetReadyToDraw
       39: Update
       47: GetNameId
       57: IsDead
@@ -4593,6 +4603,7 @@ classes:
       0x140749BB0: GetPosition
       0x140749C00: SetPosition
       0x140749CB0: SetRotation
+      0x14074ADD0: IsReadyToDraw
       0x14074D770: Initialize
       0x14074D9D0: ctor
   Client::Game::Character::Character:
@@ -4622,8 +4633,6 @@ classes:
       0x140759FE0: CalculateHeight
       0x14075A720: SetMode
       0x14075C640: Finalize
-      0x14132EDE0: SetupBNpc # todo: not on Character anymore in 6.50
-      0x141330310: CopyFromCharacter # todo: not on Character anymore in 6.50
       0x1407BCB20: ctor
   Client::Game::Control::EmoteController:
     vtbls:
@@ -4644,6 +4653,17 @@ classes:
     funcs:
       0x141312D90: GetCompanionDataID
       0x141312BD0: SetupCompanion
+  Client::Game::Character::CharacterSetup:
+    vtbls:
+      - ea: 0x141B42F38
+    funcs:
+      0x14132E480: ctor
+      0x14132E890: SetupRaw
+      0x14132ED50: SetupPlayer
+      0x14132EDE0: SetupBNpc
+      0x14132EFF0: SetupEventNpc
+      0x14132FBC0: SetupBuddyMount
+      0x141330310: CopyFromCharacter
   Client::Game::Character::OrnamentContainer:
     vtbls:
       - ea: 0x141A38150
@@ -9948,7 +9968,6 @@ classes:
     vtbls:
       - ea: 0x141B46D30
     funcs:
-      0x141322F10: GetHeightAdjustActionTimelineRowId
       0x14139A360: CreateInstance
       0x14139A3B0: ctor
     instances:
