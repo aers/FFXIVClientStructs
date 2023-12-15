@@ -76,6 +76,8 @@ functions:
   0x1400A6BD0: GetCurrentUnixTimestamp # in seconds
   0x1400A6D00: Client::UI::PlaySoundEffect # this is a static function in the UI namespace, arg1 is the SE
   0x1400A8990: Client::UI::GetUIColor # (idx, &color, &edgeColor)
+  0x1400A89D0: Client::UI::GetNumberAsBoxedChar # (uint) accepts numbers 0-30
+  0x1400A8A80: Client::UI::GetNumberAsDigitChars # (uint) accepts numbers 0-999
   0x1401C0590: j_SleepEx
   0x1402ED030: CountdownPointer
   0x140318B30: CleanupCharaSelectCharacters
@@ -3502,6 +3504,7 @@ classes:
       0x14052BAE0: SetColor
       0x14052BB20: SetAddRGB
       0x14052BB70: SetMultiplyRGB
+      0x14052BBB0: SetAlpha
       0x14052BBC0: GetPriority
       0x14052BBE0: SetPriority
       0x14052BC00: IsVisible
@@ -3566,6 +3569,7 @@ classes:
         base: Component::GUI::AtkResNode
     funcs:
       0x1405A0180: ctor
+      0x14052A670: CheckCollisionAtCoords
   Component::GUI::AtkComponentNode:
     vtbls:
       - ea: 0x141A06538
@@ -3603,6 +3607,7 @@ classes:
       42: Update
       43: Draw
       45: LoadUldResourceHandle
+      46: CheckWindowCollisionAtCoords
       48: OnSetup
       50: OnRefresh
       51: OnRequestedUpdate
@@ -3889,7 +3894,9 @@ classes:
       0x14058AB30: LoadIconById
       0x14058AB70: GetIconId
       0x14058AFA0: AttachTooltip
+      0x14058B0F0: SetTimelineState
       0x14058B4D0: Finalize
+      0x14058B1D0: GetTimelineActiveLabelId
   Component::GUI::AtkComponentMultipurpose:
     vtbls:
       - ea: 0x141A07E58
@@ -8723,9 +8730,27 @@ classes:
       - ea: 0x141B19D50
         base: Component::GUI::AtkUnitBase
     vfuncs:
+      73: UpdateCycledBar # also calls 76 if needed
+      74: UpdateLockState
+      75: UpdateSlotVisibility
+      76: UpdateBarNumberText
+      77: UpdateControlHints
       78: PulseActionBarSlot
+      79: OnDragDropCancel  # calls 84 or 85 depending on why the dragdrop was cancelled
+      80: OnDragDropInsert
+      81: OnDragDropBegin
+      82: OnDragDropDiscard
+      83: OnDragDropRollover
+      84: OnDragDropCancelLocked
+      85: OnDragDropCancelByMouseUp
+      86: IsExpandedHold # always false on everything but _ActionCross
+      87: IsNotExpandedHold # always true on everything but _ActionCross
+      88: IsCross # only true on _ActionCross
     funcs:
       0x141160DE0: ctor
+      0x141161690: UpdatePulsingSlots
+      0x141161740: UpdateIconFrames
+      0x1411617C0: UpdateSlotVisibilityForDragDrop
   Client::UI::AddonActionBarX:
     vtbls:
       - ea: 0x141B1A018
@@ -8764,6 +8789,14 @@ classes:
         base: Client::UI::AddonActionBarBase
     funcs:
       0x141174DA0: ctor
+      0x141176200: UpdateExpandedHold
+      0x1400A8C50: GetBarTarget # static (int mapValue, out bool useLeft) -> hotbarId
+  Client::UI::AddonActionCrossEditor:
+    vtbls:
+      - ea:  0x141ADE988 
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140FD4F10: ctor
   Client::UI::AddonActionContents:
     vtbls:
       - ea: 0x141B1C100
@@ -8783,12 +8816,16 @@ classes:
         base: Client::UI::AddonActionDoubleCrossBase
     funcs:
       0x141178E40: ctor
+    vfuncs:
+      91: LoadUldResourceHandle
   Client::UI::AddonActionDoubleCrossR:
     vtbls:
       - ea: 0x141B1C970
         base: Client::UI::AddonActionDoubleCrossBase
     funcs:
       0x141179570: ctor
+    vfuncs:
+      91: LoadUldResourceHandle
   Client::UI::AddonFocusTargetInfo:
     vtbls:
       - ea: 0x141B1CC78

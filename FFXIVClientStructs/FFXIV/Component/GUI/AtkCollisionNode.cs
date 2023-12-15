@@ -24,4 +24,7 @@ public unsafe partial struct AtkCollisionNode : ICreatable {
 
     [MemberFunction("E9 ?? ?? ?? ?? 45 33 C9 4C 8B C0 33 D2 B9 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 85 C0 74 5D")]
     public partial void Ctor();
+
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 1E FE C3")]
+    public partial bool CheckCollisionAtCoords(int x, int y, bool inclusive);
 }

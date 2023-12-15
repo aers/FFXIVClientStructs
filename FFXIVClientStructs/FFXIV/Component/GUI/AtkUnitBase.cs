@@ -195,6 +195,9 @@ public unsafe partial struct AtkUnitBase {
     [VirtualFunction(43)]
     public partial void Draw();
 
+    [VirtualFunction(46)]
+    public partial void CheckWindowCollisionAtCoords(int x, int y, void* a4);
+
     [VirtualFunction(48)]
     public partial void OnSetup(uint numValues, AtkValue* values);
 
