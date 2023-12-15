@@ -56,5 +56,14 @@ public unsafe partial struct RaptureMacroModule {
         /// <param name="iconId">The icon ID that this macro should now use </param>
         [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 8B FA 89 11")]
         public partial void SetIcon(uint iconId);
+
+        [MemberFunction("E8 ?? ?? ?? ?? 49 8B CE E8 ?? ?? ?? ?? 48 8B 4D")]
+        public partial Macro* Copy(Macro* other);
+
+        [MemberFunction("E8 ?? ?? ?? ?? 48 63 96 ?? ?? ?? ?? 83 FA")]
+        public partial void Clear();
+
+        [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4F ?? 84 C0 48 8B 01 75")]
+        public partial bool IsEmpty();
     }
 }

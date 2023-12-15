@@ -79,6 +79,8 @@ public unsafe partial struct Character {
     [FieldOffset(0x1BB6)] public CharacterModes Mode;
     [FieldOffset(0x1BB7)] public byte ModeParam; // Different purpose depending on mode. See CharacterModes for more info.
 
+    [FieldOffset(0x1BBB)] public byte FreeCompanyCrestBitfield; // & 0x01 for offhand weapon, & 0x02 for head, & 0x04 for top, ..., & 0x20 for feet
+
     // Note: These 2 status flags might be just an ushort instead of 2 separate bytes.
 
     // 0x1 = WeaponDrawn
@@ -226,25 +228,34 @@ public unsafe partial struct Character {
         [FieldOffset(0x20)] public byte Flags;
         [FieldOffset(0x24)] public fixed uint MountedObjectIds[7];
 
+        [MemberFunction("E8 ?? ?? ?? ?? 8B 43 ?? 41 89 46")]
+        public partial void CreateAndSetupMount(short mountId, uint buddyModelTop, uint buddyModelBody, uint buddyModelLegs, byte buddyStain, byte unk6, byte unk7);
+
         [MemberFunction("E8 ?? ?? ?? ?? 48 8B 43 ?? 80 B8 ?? ?? ?? ?? ?? 74 ?? 0F B6 90")]
         public partial void SetupMount(short mountId, uint buddyModelTop, uint buddyModelBody, uint buddyModelLegs, byte buddyStain);
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]
-    public struct CompanionContainer {
+    public partial struct CompanionContainer {
         [FieldOffset(0x00)] public void** ContainerVTable;
         [FieldOffset(0x08)] public BattleChara* OwnerObject;
         [FieldOffset(0x10)] public Companion* CompanionObject;
         //used if minion is summoned but the object slot is taken by a mount
         [FieldOffset(0x18)] public ushort CompanionId;
+
+        [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 ?? 66 44 89 7F")]
+        public partial void SetupCompanion(short companionId, uint param);
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x78)]
-    public struct OrnamentContainer {
+    public partial struct OrnamentContainer {
         [FieldOffset(0x00)] public void** ContainerVTable;
         [FieldOffset(0x08)] public BattleChara* OwnerObject;
         [FieldOffset(0x10)] public Ornament* OrnamentObject;
         [FieldOffset(0x18)] public ushort OrnamentId;
+
+        [MemberFunction("E8 ?? ?? ?? ?? 48 8B 7B ?? 0F B7 97")]
+        public partial void SetupOrnament(short ornamentId, uint param);
     }
 
     // Reaper Shroud seems to be mostly hardcoded.

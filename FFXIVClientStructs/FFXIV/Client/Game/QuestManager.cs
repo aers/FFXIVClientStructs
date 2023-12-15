@@ -58,6 +58,14 @@ public unsafe partial struct QuestManager {
     public bool IsQuestAccepted(uint questId) => IsQuestAccepted((ushort)(questId & 0xFFFF));
 
     /// <summary>
+    /// Check if a recipe has been crafted (= completed) before.
+    /// </summary>
+    /// <param name="recipeId">The RowId of the Recipe Sheet.</param>
+    /// <returns>Returns <c>true</c> if the recipe has been completed, <c>false</c> otherwise.</returns>
+    [MemberFunction("40 53 48 83 EC 20 8B D9 81 F9")]
+    public static partial bool IsRecipeComplete(uint recipeId);
+
+    /// <summary>
     /// Check if a specific levequest has been completed.
     /// </summary>
     /// <param name="levequestId">The RowId of the Leve Sheet.</param>

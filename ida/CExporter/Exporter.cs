@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
-using FFXIVClientStructs;
+using FFXIVClientStructs.Attributes;
 
 namespace CExporter;
 
@@ -73,6 +73,7 @@ public abstract class ExporterBase {
     private GapStrategy _gapStrategy;
 
     private readonly HashSet<Type> _knownTypes = new();
+    private readonly HashSet<string> _knownNames = new();
 
     public bool Errored { get; private set; }
 
@@ -125,7 +126,7 @@ public abstract class ExporterBase {
             ProcessType(definitions[index], sb);
         }
 
-        return sb.ToString().Replace("__{0}__", string.Join(Environment.NewLine, _knownTypes.Where(t => !t.IsEnum).Select(t => $"struct {FixFullName(t)};")));
+        return sb.ToString().Replace("__{0}__", string.Join(Environment.NewLine, _knownNames.Select(t => $"struct {t};")));
     }
 
     private void ProcessType(Type type, StringBuilder header) {
@@ -149,6 +150,8 @@ public abstract class ExporterBase {
 
     private static bool IsNotHavok(FieldInfo fieldInfo) {
         var type = fieldInfo.FieldType;
+        if (type.IsFunctionPointer || type.IsUnmanagedFunctionPointer)
+            return true;
         if (type.IsPointer)
             type = type.GetElementType()!;
         return !(type.GenericTypeArguments.Any(IsHavok) || IsHavok(type));
@@ -173,7 +176,7 @@ public abstract class ExporterBase {
                 new StructObject {
                     Info = fieldInfo,
                     Offset = fieldInfo.GetFieldOffset(),
-                    Size = fieldInfo.IsFixed() ? fieldInfo.GetFixedType().SizeOf() * fieldInfo.GetFixedSize() : fieldInfo.FieldType.SizeOf()
+                    Size = fieldInfo.IsFixed() ? fieldInfo.GetFixedLength() : fieldInfo.FieldType.SizeOf()
                 }).GroupBy(obj => obj.Offset)
             .Select(grouping => new UnionLayout {
                 Layouts = grouping.Select(f => new StructLayout {
@@ -207,10 +210,8 @@ public abstract class ExporterBase {
     }
 
     private void ProcessStdStruct(Type type, StringBuilder header) {
-        if (_knownTypes.Contains(type))
+        if (!_knownTypes.Add(type))
             return;
-
-        _knownTypes.Add(type);
 
         var typeName = type.Name.IndexOf('`') > 0 ? type.Name[..type.Name.IndexOf('`')] : type.Name;
 
@@ -222,7 +223,7 @@ public abstract class ExporterBase {
 
         var sb = new StringBuilder();
         if (type.ContainsGenericParameters) {
-            header.AppendLine($"struct {FixFullName(type)}; /* Size=unknown due to generic type with parameters */");
+            header.AppendLine($"struct {type.FixTypeName(FixFullName)}; /* Size=unknown due to generic type with parameters */");
             return;
         }
 
@@ -237,7 +238,9 @@ public abstract class ExporterBase {
             .Where(fieldInfo => !fieldInfo.IsStatic) // not static
             .OrderBy(fieldInfo => fieldInfo.GetFieldOffset());
 
-        sb.AppendLine($"struct {FixFullName(type)} /* Size=0x{structSize:X} */");
+        var name = type.FixTypeName(FixFullName, false).Replace("*", "Ptr");
+        _knownNames.Add(name);
+        sb.AppendLine($"__unaligned struct {name} /* Size=0x{structSize:X} */");
         sb.AppendLine("{");
 
         foreach (var fieldInfo in fields) {
@@ -259,12 +262,15 @@ public abstract class ExporterBase {
         if (type == typeof(void))
             return;
 
+        if (type.Name == "Pointer`1" && type.Namespace == ExporterStatics.InteropNamespacePrefix[..^1])
+            return;
+
         _knownTypes.Add(type);
 
         int structSize;
         if (type.IsGenericType) {
             if (type.ContainsGenericParameters) {
-                header.AppendLine($"struct {FixFullName(type)}; /* Size=unknown due to generic type with parameters */");
+                header.AppendLine($"struct {type.FixTypeName(FixFullName)}; /* Size=unknown due to generic type with parameters */");
                 return;
             }
 
@@ -278,7 +284,9 @@ public abstract class ExporterBase {
 
         var sb = new StringBuilder();
 
-        sb.AppendLine($"struct {FixFullName(type)} /* Size=0x{structSize:X} */");
+        var name = type.FixTypeName(FixFullName);
+        _knownNames.Add(name);
+        sb.AppendLine($"__unaligned struct {name} /* Size=0x{structSize:X} */");
         sb.AppendLine("{");
 
         var offset = 0;
@@ -345,12 +353,28 @@ public abstract class ExporterBase {
         header.AppendLine(sb.ToString());
     }
 
+    private string BuildFunctionDefinition(FieldInfo fieldInfo) {
+        var sb = new StringBuilder();
+        var fieldType = fieldInfo.FieldType;
+        sb.Append(fieldType.GetFunctionPointerReturnType().FixTypeName(FixFullName));
+        sb.Append(" (__fastcall *");
+        sb.Append(fieldInfo.Name);
+        sb.Append(")(");
+        sb.Append(string.Join(", ", fieldType.GetFunctionPointerParameterTypes().Select(t => t.FixTypeName(FixFullName)).Select((t, i) => t + $" a{i + 1}")));
+        sb.Append(')');
+        return sb.ToString();
+    }
+
     private bool SetProperty(Type type, StringBuilder header, FieldInfo fieldInfo, bool isUnion, int fieldOffset, string padFill, StringBuilder sb, int pad, UnionLayout? nextLayout, ref int offset) {
         var fieldType = fieldInfo.FieldType;
         int fieldSize;
 
-        if (!isUnion)
-            FillGaps(ref offset, fieldOffset, padFill, sb);
+        if (!isUnion) {
+            if (fieldType.IsUnmanagedFunctionPointer)
+                FillVFuncGap(ref offset, fieldOffset, padFill, sb);
+            else
+                FillGaps(ref offset, fieldOffset, padFill, sb);
+        }
 
         if (offset > fieldOffset) {
             var error = $"Current offset exceeded the next field's offset (0x{offset:X} > 0x{fieldOffset:X}): {FixFullName(type)}.{fieldInfo.Name}";
@@ -362,8 +386,7 @@ public abstract class ExporterBase {
         }
 
         if (fieldInfo.IsFixed()) {
-            var fixedType = fieldInfo.GetFixedType();
-            var fixedSize = fieldInfo.GetFixedSize();
+            var (fixedType, fixedSize) = fieldInfo.GetFixed();
             ProcessType(fixedType, header);
 
             sb.AppendLine(string.Format($"    /* 0x{{0:X{pad}}} */ {fixedType.FixTypeName(FixFullName)} {fieldInfo.Name}[0x{fixedSize:X}];", fieldOffset));
@@ -377,7 +400,9 @@ public abstract class ExporterBase {
                 ProcessType(elemType, header);
             }
 
-            sb.AppendLine(string.Format($"    /* 0x{{0:X{pad}}} */ {fieldType.FixTypeName(FixFullName)} {(fieldInfo.Name.EndsWith("k__BackingField") ? "Value" : fieldInfo.Name)};", fieldOffset));
+            bool shouldLower = elemType.Namespace != ExporterStatics.StdNamespacePrefix[..^1];
+
+            sb.AppendLine(string.Format($"    /* 0x{{0:X{pad}}} */ {fieldType.FixTypeName(FixFullName, shouldLower)} {(fieldInfo.Name.EndsWith("k__BackingField") ? "Value" : fieldInfo.Name)};", fieldOffset));
 
             fieldSize = 8;
         } else if (fieldType.IsEnum) {
@@ -396,10 +421,16 @@ public abstract class ExporterBase {
                 Console.WriteLine(warn);
                 ExporterStatics.WarningListDictionary.TryAdd(type, warn);
             }
+        } else if (fieldType.IsFunctionPointer || fieldType.IsUnmanagedFunctionPointer) {
+            sb.AppendLine(string.Format($"    /* 0x{{0:X{pad}}} */ {BuildFunctionDefinition(fieldInfo)};", fieldOffset));
+
+            fieldSize = 8;
         } else {
             ProcessType(fieldType, header);
 
-            sb.AppendLine(string.Format($"    /* 0x{{0:X{pad}}} */ {fieldType.FixTypeName(FixFullName)} {fieldInfo.Name};", fieldOffset));
+            bool shouldLower = fieldType.Namespace != ExporterStatics.StdNamespacePrefix[..^1];
+
+            sb.AppendLine(string.Format($"    /* 0x{{0:X{pad}}} */ {fieldType.FixTypeName(FixFullName, shouldLower)} {fieldInfo.Name};", fieldOffset));
 
             fieldSize = fieldType.IsGenericType ? Marshal.SizeOf(Activator.CreateInstance(fieldType)!) : fieldType.SizeOf();
         }
@@ -438,8 +469,19 @@ public abstract class ExporterBase {
         header.AppendLine(sb.ToString());
     }
 
-    protected virtual string FixFullName(Type type) {
+    protected virtual string FixFullName(Type type, bool shouldLower = true) {
         string fullName;
+        if (type.Name.StartsWith("Pointer`1") && type.FullName!.StartsWith(ExporterStatics.InteropNamespacePrefix)) {
+            var isPointer = type.IsPointer;
+            var pointerCount = 0;
+            while (isPointer) {
+                pointerCount++;
+                type = type.GetElementType()!;
+                isPointer = type.IsPointer;
+            }
+            var generic = type.GenericTypeArguments[0];
+            return generic.FixTypeName(FixFullName, shouldLower) + new string('*', pointerCount + 1);
+        }
         if (type.IsGenericType || (type.IsPointer && type.GetElementType()!.IsGenericType)) {
             var isPointer = type.IsPointer;
             var dereferenced = isPointer ? type.GetElementType()! : type;
@@ -448,8 +490,8 @@ public abstract class ExporterBase {
             if (dereferenced.IsNested) {
                 fullName += '+' + generic.FullName?.Split('+')[1].Split('[')[0];
             }
-
-            fullName = dereferenced.GenericTypeArguments.Aggregate(fullName, (current, argType) => current + $"{_separator}{FixFullName(argType).Replace(_separator, "")}");
+            if (dereferenced.GenericTypeArguments.Any())
+                fullName += dereferenced.GenericTypeArguments.Aggregate("", (current, argType) => current + $"{argType.FixTypeName(FixFullName, shouldLower).Replace("__", "").Replace(" ", "").Replace(_separator, "")}").Replace("*", "Ptr");
             if (isPointer)
                 fullName += '*';
         } else {
@@ -477,6 +519,14 @@ public abstract class ExporterBase {
             return fullName.Replace(".", _separator).Replace("+", _separator);
 
         return fullName.Replace(".", _separator).Replace("+", _separator).Replace(oldName, newName);
+    }
+
+    private void FillVFuncGap(ref int offset, int maxOffset, string padFill, StringBuilder sb) {
+        int gap;
+        while ((gap = maxOffset - offset) > 0) {
+            sb.AppendLine($"    /* {padFill} */ __int64 _vf{offset / 8};");
+            offset += 8;
+        }
     }
 
     private void FillGaps(ref int offset, int maxOffset, string padFill, StringBuilder sb) {

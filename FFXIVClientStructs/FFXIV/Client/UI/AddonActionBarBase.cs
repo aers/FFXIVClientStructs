@@ -6,7 +6,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 public unsafe partial struct AddonActionBarBase {
     [FieldOffset(0x00)] public AtkUnitBase AtkUnitBase;
 
+    [Obsolete("Use ActionBarSlotVector")]
     [FieldOffset(0x220)] public ActionBarSlot* ActionBarSlots;
+
+    [FieldOffset(0x220)] public StdVector<ActionBarSlot> ActionBarSlotVector;
 
     /// <summary>
     /// Bitfield representing currently active pulses.
@@ -14,7 +17,7 @@ public unsafe partial struct AddonActionBarBase {
     [FieldOffset(0x238)] public short CurrentPulsingSlots;
 
     /// <summary>
-    /// The ID of the hotbar in RaptureHotbarModule that this ActionBar is currently referencing.
+    /// The ID of the hotbar in RaptureHotbarModule that this ActionBar is currently referencing. Changes when cycling to other bars.
     /// </summary>
     /// <remarks>
     /// This field is ignored for WHXBs.
@@ -22,11 +25,14 @@ public unsafe partial struct AddonActionBarBase {
     [FieldOffset(0x23C)] public byte RaptureHotbarId;
 
     [FieldOffset(0x23E)] public byte SlotCount;
-
+    [FieldOffset(0x23F)] public bool IsLocked;
     /// <summary>
     /// Whether the current hotbar is considered a "shared" hotbar or not.
     /// </summary>
     [FieldOffset(0x240)] public bool IsSharedHotbar;
+    [FieldOffset(0x242)] public bool IsCrossHotbar;   // always true on XHB and WXHBs, false elsewhere
+    [FieldOffset(0x243)] public bool DragDropInProgress; // ignored by XHB and WXHBs
+    [FieldOffset(0x245)] public bool DisplayPetBar;
 
     /// <summary>
     /// Trigger the "pulse" effect for the specified hotbar slot, similar to what happens on hotbar slot keypress.
@@ -37,13 +43,13 @@ public unsafe partial struct AddonActionBarBase {
     [VirtualFunction(78)]
     public partial void PulseActionBarSlot(int slotIndex);
 
-
+    [Obsolete("Use ActionBarSlotVector")]
     public Span<ActionBarSlot> Slot => new(ActionBarSlots, SlotCount);
-
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0xC8)]
 public unsafe struct ActionBarSlot {
+    [FieldOffset(0x00)] public int HotbarId; // Not persistent, only updated if slot is visible
     [FieldOffset(0x04)] public int ActionId;       // Not cleared when slot is emptied
     [FieldOffset(0x88)] public AtkComponentDragDrop* ComponentDragDrop;
     [FieldOffset(0x90)] public AtkComponentNode* Icon;
