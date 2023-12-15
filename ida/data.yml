@@ -109,6 +109,7 @@ functions:
   0x140C46D90: CreateSelectYesno
   0x1411A6AB0: Client::UI::AddonHudLayoutScreen::MoveableAddonInfoStruct_UpdateAddonPosition
   0x1413064B0: Client::Graphics::Kernel::CreateShader # static function
+  0x141311460: FilterCustomizeData # ensures NPC specific faces etc aren't on players
   0x1413119B0: NormalizeCustomizeData
   0x14134BED0: Client::Game::Control::InputManager::IsAutoRunning # static function, might belong in a different class.
   0x1413B7110: lua_close
@@ -293,6 +294,7 @@ classes:
     funcs:
       0x1409427F0: CancelCrafting
       0x140943760: IsRecipeUnlocked # (this, recipeId)  # no xrefs
+      0x1409437D0: GetCraftTypeLevel
       0x140943CD0: FirstRecipeIndex
       0x140943C90: GetRecipeByIndex # (this, index)
       0x140943D10: GetSelectedRecipe
@@ -339,7 +341,10 @@ classes:
       - ea: 0x141A03218
     funcs:
       0x1404DDC40: PlayTimeline
+      0x1404DE200: GetSlotTimeline
       0x1404DE5F0: SetSlotSpeed
+      0x1404DE900: GetSlotSpeed
+      0x1404DF520: SetSlotTimeline
   Client::Game::Character::CharacterData:
     vtbls:
       - ea: 0x141A1EEC8
@@ -349,6 +354,10 @@ classes:
     funcs:
       0x1407BCC90: ctor
       0x1407635E0: dtor
+      0x141320880: CalculateAndApplyOverallSpeed
+      0x141322DB0: SetSlotSpeed
+      0x141322F10: GetHeightAdjustActionTimelineRowId
+      0x1413239D0: SetLipsOverrideTimeline
   Client::Game::RetainerManager:
     instances:
       - ea: 0x142221DF0
@@ -414,6 +423,12 @@ classes:
     vfuncs:
       0: ReceiveEvent
   Component::GUI::AtkTextInput::AtkTextInputEventInterface:
+  Component::GUI::AtkTextInput:
+    vtbls:
+      - ea: 0x141A067B8
+        base: Client::System::Input::TextServiceInterface::TextServiceEvent
+    funcs:
+      0x14054C500: ctor
   Component::Text::TextChecker::ExecNonMacroFunc:
     vtbls:
       - ea: 0x1419DD688
@@ -487,7 +502,6 @@ classes:
       0x140549B50: HandleInput
       0x14054B510: SetFocus
       0x14054C010: HandleFocus
-      0x14054C500: ctor
   Client::Game::Object::GameObjectManager: # all game objects
     instances:
       - ea: 0x1421F26F0
@@ -511,9 +525,10 @@ classes:
       0x1412E2440: CreateEventObject
       0x1412E2520: CreateAreaObject
       0x1412E2610: DeleteObjectByIndex
-      0x1412E2990: GetObjectByIndex
-      0x1412E2AB0: GetIndexByObject
       0x1412E28E0: CalculateNextAvailableIndex
+      0x1412E2990: GetObjectByIndex
+      0x1412E2A70: IsValidClientObject
+      0x1412E2AB0: GetIndexByObject
   Client::Game::Character::CharacterManager: # networked characters
     instances:
       - ea: 0x1421F23B0
@@ -609,6 +624,7 @@ classes:
       0x140850E10: GetQuestClassJob
       0x140850B40: IsQuestAccepted
       0x140850FD0: GetBeastTribeAllowance
+      0x14087B360: IsRecipeComplete # static (uint recipeId)
       0x140892280: IsLevequestComplete
       0x14093A020: GetNextLeveAllowancesTimestamp # multiply by 60 for unix timestamp
   Client::Game::MirageManager:
@@ -1080,6 +1096,8 @@ classes:
       0x1409CAED0: SetCooldownForGroup  # (this, groupId, newElapsed, newTotal) -> *RecastDetail
       0x1409CAF10: SkewCooldownForGroup # (this, groupId, skew) -> *RecastDetail
       0x1409CAF60: ResetCooldownForGroup
+      0x1409C6D10: IsActionHighlighted  # (this, actionType, actionId)
+      0x1409CA620: IsActionTargetInRange
       0x1409C42D0: Update
       0x1409C4940: Initialize
   Client::Game::JobGaugeManager:
@@ -1275,6 +1293,7 @@ classes:
       0x1400905F0: ctor
       0x140093B20: GetNetworkModuleProxy
       0x140093B40: GetUIModule
+      0x140093B60: GetUIClipboard
       0x140094A20: TaskBegin
       0x140094B60: TaskDraw2DBegin
       0x140094BA0: TaskUpdateInputDevice
@@ -1524,6 +1543,23 @@ classes:
     vtbls:
       - ea: 0x1419B2208
         base: Client::System::Input::TextServiceInterface
+  Client::System::Input::ClipBoardInterface:
+    vtbls:
+      - ea: 0x141A37DB8
+    vfuncs:
+      0: dtor
+      1: WriteToSystemClipboard
+      2: GetSystemClipboardText
+    funcs:
+      0x1407B9E40: ctor
+      0x1407B9E80: Finalize
+  Client::System::Input::ClipBoard:
+    vtbls:
+      - ea: 0x141A37DD0
+        base: Client::System::Input::ClipBoardInterface
+    vfuncs:
+      3: SetCopyStagingText
+      4: ApplyCopyStagingText
   Component::Shell::ShellCommandModule:
     vtbls:
       - ea: 0x1419B2458
@@ -1543,11 +1579,16 @@ classes:
   Component::GUI::AtkUnitList:
     vtbls:
       - ea: 0x1419BD640
+    funcs:
+      0x1405435F0: Append
+      0x140543650: Remove
+      0x1405436E0: InsertAfter
   Component::GUI::AtkUnitManager:
     vtbls:
       - ea: 0x1419BD648
         base: Component::GUI::AtkEventListener
     vfuncs:
+      8: ShowAddonByID
       11: UpdateAddonByID
     funcs:
       0x14017C260: Finalize
@@ -1556,6 +1597,7 @@ classes:
       0x140545540: GetAddonById
       0x1405455A0: GetAddonByName
       0x140545650: GetAddonByNode
+      0x140548A40: UpdateDrawOrderIndexes
   Client::UI::RaptureAtkUnitManager:
     vtbls:
       - ea: 0x1419BD7A0
@@ -1663,6 +1705,17 @@ classes:
       0x1400F9660: ctor
       0x1400FABB0: RequestData
       0x14017C860: Finalize
+  Client::UI::UIClipboard:
+    vtbls:
+      - ea: 0x1419BDF30
+    vfuncs:
+      0: dtor
+    funcs:
+      0x1400EF040: ctor
+      0x1400EF0B0: Attach
+      0x1400EF0E0: Detach
+      0x1400EF110: OnClipboardDataChanged
+      0x1400EF1A0: OnClipboardViewerChainChanged
   Client::UI::Info::InfoProxyCrossRealm:
     instances:
       - ea: 0x1421A6F20
@@ -3280,6 +3333,7 @@ classes:
       0x140507970: SetValueIfDifferentUtf8
       0x1405079B0: SetValueForced
       0x1405079F0: SetValueForcedUtf8
+      0x140507A70: SetValueAndUpdate # calls SetValue with silent = false
   Component::GUI::ExtendArrayData:
     vtbls:
       - ea: 0x141A05A00
@@ -3313,6 +3367,20 @@ classes:
     vtbls:
       - ea: 0x141A05B18
         base: Component::GUI::AtkEventTarget
+    vfuncs:
+      1: dtor
+    funcs:
+      0x140515A80: ctor
+      0x140515C40: Prepare
+      0x140515CF0: Execute
+      0x140515DC0: Clear
+      0x140515EA0: RegisterEvent
+      0x140515EE0: UnregisterEvent
+      0x140515F30: SetValues
+      0x140516060: AddAnimation
+      0x140516190: GetNodeValue
+      0x140516320: SetNodeValue
+      0x140516440: Update
   Component::GUI::AtkTexture:
     vtbls:
       - ea: 0x141A05A98
@@ -3342,6 +3410,7 @@ classes:
       0x140519D00: ctor
       0x14053C470: GetSingleton
       0x14053C480: GetSingleton2
+      0x1405486B0: GetSingleton3
       0x1405A0F20: Finalize
   Component::GUI::AtkCursor:
     funcs:
@@ -3403,6 +3472,7 @@ classes:
       0x14052ADF0: RegisterEvent
       0x14052AE30: UnregisterEvent
       0x14052AE70: DispatchEvent
+      0x14052AFD0: GetBounds
       0x14052B1E0: GetPositionFloat
       0x14052B200: SetPositionFloat
       0x14052B250: GetPositionShort
@@ -3442,7 +3512,7 @@ classes:
       0x14052C060: GetIsUsingDepthBasedDrawPriority
       0x14052C080: SetUseDepthBasedDrawPriority
       0x14052C0D0: SetDepth
-      0x14052C4A0: Init
+      0x14052C4A0: Initialize
       0x14052C670: SetScale0  # SetScale jumps to this
       0x140537080: SetSize
       0x14052AD50: GetTimelineLabel
@@ -3527,6 +3597,11 @@ classes:
       16: Hide2
       17: SetScaleToHudLayoutScale
       18: ShouldCollideWithWindow
+      22: ShouldIgnoreInputs
+      23: GetRootNode
+      26: GetWindowBounds
+      29: GetRootBounds
+      36: Focus
       40: Initialize
       41: Finalize
       42: Update
@@ -3536,6 +3611,8 @@ classes:
       48: OnSetup
       50: OnRefresh
       51: OnRequestedUpdate
+      53: FireCloseCallback
+      57: OnOpenTransitionStarted
       61: OnMouseOver
       62: OnMouseOut
     funcs:
@@ -3554,6 +3631,9 @@ classes:
       0x140539CA0: CalculateBounds
       0x14053A470: SetFlag
       0x14053BFD0: Draw
+      0x14053C2D0: LoadUldByName
+      0x14053C3F0: SetOpenTransition
+      0x14053C430: SetCloseTransition
       0x14053C4F0: SubscribeAtkArrayData # handler: "4C 8B D2 48 8B D1 41 83 F9 04"
       0x14053C680: UnsubscribeAtkArrayData # handler: "48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 48 8B DA 48 8B F9 41 83 F9 04"
       0x14053C930: SetFocusNode
@@ -4195,7 +4275,10 @@ classes:
       0x14066E410: SetSavePendingFlag
   Client::UI::Misc::RaptureMacroModule::Macro:
     funcs:
+      0x14066CFA0: Clear
+      0x14066CFF0: IsEmpty
       0x14066D030: SetIcon
+      0x14078C010: Copy
   Client::UI::Misc::RaptureTextModule:
     vtbls:
       - ea: 0x141A1BF08
@@ -4243,6 +4326,7 @@ classes:
       0x14068C1D0: ctor
       0x14068C3C0: Finalize
       0x14068E780: IsHotbarEmpty
+      0x14068CD40: ClearSavedSlotById  # (this, hotbarId, slotId) -> void
       0x140691D50: ExecuteSlot
       0x14068CE30: ExecuteSlotById
       0x14068CE70: GetSlotById
@@ -4256,27 +4340,71 @@ classes:
       0x140692750: WriteSavedSlot
       0x140693A60: GetPvPSavedHotbarIndexForClassJobId
       0x140693B10: GetClassJobIdForSavedHotbarIndex
+      0x14068CEB0: SetPetHotbarSlot      # (this, slotId, slotType, actionId) -> nint
+      0x14068CF70: SetPetCrossHotbarSlot # (this, slotId, slotType, actionId) -> nint
+      0x14068D030: ClearPetHotbarSlot       # (this, slotId) -> nint
+      0x14068D0B0: ClearPetCrossHotbarSlot  # (this, slotId) -> nint
+      0x14068D130: ExecutePetHotbarSlot       # (this, slotId) -> bool (?)
+      0x14068D150: ExecutePetCrossHotbarSlot  # (this, slotId) -> bool (?)
+      0x14068D6E0: PopulateIntermediateFromSlot  # (this, HotBarSlot*, HotBarUiIntermediate*)  - used for array population?
+      0x14068E7E0: IsSavedSlotEmpty  # (this, classJobId, hotbarId, slotId) -> bool
+      0x140690E50: SetHotbarLocked
+      0x140690E90: IsHotbarLocked
+      0x140690EC0: SetCrossHotbarLocked
+      0x140690F00: IsCrossHotbarLocked
+      0x1406916B0: IsDutyAction1Usable
+      0x1406916D0: SetDutyActionsPresent             # (this, isPresent) -> void
+      0x1406917A0: GetDutyActionId                   # (this, slotId) -> uint  - identical to ActionManager's version.
+      0x1406917C0: GetDutyActionIdForGeneralActionId # (this, generalActionId) -> uint
+      0x1406917F0: SetDutyActionSlot                 # (this, slotId, actionId)
+      0x140691900: GetDutyActionSlot                 # (this, slotId) -> DutyActionSlot*
+      0x140691960: ExecuteDutyActionSlot             # (this, slotId)
+      0x140691A10: IsGeneralActionDutyAction         # (this, generalActionId) -> bool  - utility function? 
       0x140693BB0: GetInstance  # static
   Client::UI::Misc::RaptureHotbarModule::HotbarSlot:
     funcs:
       # Convention(ish?): Get just returns a value, Load actually mutates the HotbarSlot passed to it
+      0x14068A930: Initialize
+      0x14068A9D0: InitializeAndSet  # (this, UiModule*, HotbarSlotType, uint)
+      0x14068AAB0: Clear
       0x14068AC90: Set
       0x14068BFB0: LoadIconFromSlotB
       0x140689700: GetIconIdForSlot
       0x140689F90: GetDisplayNameForSlot
       0x14068A740: GetCostTextForSlot
-      0x140689DF0: GetUnkCAForSlot
-      0x140689EF0: GetUnkCBForSlot
+      0x140689DF0: GetCostTypeForSlot
+      0x140689EF0: GetCostDisplayModeForSlot
       0x14068A4D0: GetAdjustedSlotTooltip    # loads in some adjustment things and then calls GetSlotTooltip
-      0x14068A590: GetUnkD0ForSlot
+      0x14068A590: GetCostValueForSlot
       0x14068AEC0: GetActionTypeForSlotType
       0x14068AFC0: GetItemRowForSlot
       0x14068BAF0: GetAdjustedIconIdForSlot  # loads in adjustment things and then calls GetIconForIdForSlot
       0x14068B900: GetRecastTimeFromSlotB
       0x14068B800: GetRecastChargesFromSlotB  # (this) -> uint
-      0x14068C070: LoadUnkCAForSlot
-      0x14068C0A0: LoadUnkCBForSlot
+      0x14068B730: GetMaxChargesFromSlotB
+      0x14068B430: GetPrimaryRecastGroupPercentageFromSlotB # (this, out int, out int, int) -> int
+      0x14068B630: GetAdditionalRecastGroupPercentageFromSlotB # (this, int) -> int
+      0x14068C070: LoadCostTypeForSlot
+      0x14068C0A0: LoadCostDisplayModeForSlot
       0x14068BA00: LoadUnkDEForSlot          # different from all the other loads - this one still needs slotType/ID for things
+      0x14068C0D0: LoadCostDataForSlot
+      0x14068BBD0: GetKeybindHintForSlot
+      0x14068BBE0: LoadKeybindHintForSlot
+      0x14068BFF0: SetPopUpHelpForSlot
+      0x140689AF0: IsSlotUsable              # (this, HotbarSlotType, uint) -> bool
+      0x1406E0E10: IsSlotActionTargetInRange # (this) -> bool
+      0x14068A8E0: IsSlotActionTargetInRange2 # (this, HotbarSlotType, uint) -> bool 
+      0x14068AB20: GetIntermediateActionType # (this) -> IntermediateActionType - ultimately passed to the NumberArray
+      0x14068AFF0: PopulateIntermediateCooldownInfo # (this, HotBarUiIntermediate*)  - used for array population?
+      0x14068AE90: GetAdjustedCommandId  # ???
+      0x14068BE80: LoadMacroSlot
+      0x14068B190: GetSlotActionCooldownPercent  # (this, out int, int) -> int
+  Client::UI::Misc::RaptureHotbarModule::DutyActionSlot:
+    funcs:
+      0x1406918D0: Initialize
+  Client::UI::Misc::RaptureHotbarModule::HotbarUiIntermediate:
+    funcs:
+      0x140689690: ctor
   Client::UI::Misc::AddonConfig:
     vtbls:
       - ea: 0x141A1C240
@@ -4467,6 +4595,7 @@ classes:
       28: GetDrawObject_2
       29: UpdateRadius
       30: Highlight
+      38: SetReadyToDraw
       39: Update
       47: GetNameId
       57: IsDead
@@ -4481,6 +4610,7 @@ classes:
       0x140749BB0: GetPosition
       0x140749C00: SetPosition
       0x140749CB0: SetRotation
+      0x14074ADD0: IsReadyToDraw
       0x14074D770: Initialize
       0x14074D9D0: ctor
   Client::Game::Character::Character:
@@ -4510,8 +4640,6 @@ classes:
       0x140759FE0: CalculateHeight
       0x14075A720: SetMode
       0x14075C640: Finalize
-      0x14132EDE0: SetupBNpc # todo: not on Character anymore in 6.50
-      0x141330310: CopyFromCharacter # todo: not on Character anymore in 6.50
       0x1407BCB20: ctor
   Client::Game::Control::EmoteController:
     vtbls:
@@ -4531,12 +4659,24 @@ classes:
       - ea: 0x141B42EB0
     funcs:
       0x141312D90: GetCompanionDataID
-      0x141312BD0: SetCompanion
+      0x141312BD0: SetupCompanion
+  Client::Game::Character::CharacterSetup:
+    vtbls:
+      - ea: 0x141B42F38
+    funcs:
+      0x14132E480: ctor
+      0x14132E890: SetupRaw
+      0x14132ED50: SetupPlayer
+      0x14132EDE0: SetupBNpc
+      0x14132EFF0: SetupEventNpc
+      0x14132FBC0: SetupBuddyMount
+      0x141330310: CopyFromCharacter
   Client::Game::Character::OrnamentContainer:
     vtbls:
       - ea: 0x141A38150
     funcs:
       0x141319E40: HasOrnament
+      0x141319E70: SetupOrnament
   Client::Game::Character::VfxContainer:
     vtbls:
       - ea: 0x141B42F00
@@ -4546,6 +4686,7 @@ classes:
       0x14132DAC0: LoadCharacterSound
   Client::Game::Character::MountContainer:
     funcs:
+      0x141313A60: CreateAndSetupMount
       0x141315150: SetupMount
   Client::Game::Character::ReaperShroudContainer:
     vtbls:
@@ -5169,6 +5310,11 @@ classes:
     funcs:
       0x140C3FB50: ctor
       0x140CB00D0: Finalize
+      0x140C40010: OpenMacro
+      0x140C42680: AddHistoryEvent
+      0x140C429A0: GetPreviousHistoryEvent
+      0x140C429E0: GetNextHistoryEvent
+      0x140C42870: DoHistoryEvent
   Client::UI::Agent::AgentFishingNote:
     vtbls:
       - ea: 0x141A8B180
@@ -5469,6 +5615,10 @@ classes:
     funcs:
       0x140D0E820: ctor
       0x140D0E900: Finalize
+  Client::UI::Agent::AgentCabinetWithdraw:
+    vtbls:
+      - ea: 0x141A8A180
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentLegacyItemStorage:
     vtbls:
       - ea: 0x141A87B70
@@ -5753,6 +5903,10 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140A24720: ctor
+  Client::UI::Agent::AgentRetainerTaskSupply:
+    vtbls:
+      - ea: 0x141A6F370
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentRelicNoteBook:
     vtbls:
       - ea: 0x141A6EC98
@@ -5795,6 +5949,10 @@ classes:
       0x140A30050: UpdateTimeRemaining # (this, resetTimestamp) returns true if an update occurred
       0x140A300F0: UpdateAddon # at least the TimeRemaining
       0x140A303A0: UpdateClassJobLevel
+  Client::UI::Agent::AgentSatisfactionSupplyResult:
+    vtbls:
+      - ea: 0x141A6F560
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMiniGame:
     vtbls:
       - ea: 0x1419E2E58
@@ -6059,6 +6217,14 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140A3B460: ctor
+  Client::UI::Agent::AgentSkyIslandResult:
+    vtbls:
+      - ea: 0x141A6F9D8
+        base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentSkyIsland2Result:
+    vtbls:
+      - ea: 0x141A6F838
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentBeginnersMansionProblem:
     vtbls:
       - ea: 0x141A8A018
@@ -6266,6 +6432,10 @@ classes:
         base: Client::UI::Agent::AgentInterface # TODO: incorrect inheritance
     funcs:
       0x140AACE20: ctor
+  Client::UI::Agent::AgentPvPGauge:
+    vtbls:
+      - ea: 0x141A72F78
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentAquariumSetting:
     vtbls:
       - ea: 0x141A89B60
@@ -6277,6 +6447,10 @@ classes:
     funcs:
       0x140A7DEE0: ctor
       0x140A7DF50: Finalize
+  Client::UI::Agent::AgentDeepDungeonResult:
+    vtbls:
+      - ea: 0x141A71A28
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentItemAppraisal:
     vtbls:
       - ea: 0x141A87800
@@ -6309,6 +6483,34 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140C844D0: ctor
+  Client::UI::Agent::AgentHarpoonTip:
+    vtbls:
+      - ea: 0x141A86F40
+        base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentPvpScreenInformationHotBar:
+    vtbls:
+      - ea: 0x141A88E40
+        base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentPvpWelcome:
+    vtbls:
+      - ea: 0x141A70D38
+        base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentJobHudNotice:
+    vtbls:
+      - ea: 0x141A87AF8
+        base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentUserPolicyPerformance:
+    vtbls:
+      - ea: 0x141A70970
+        base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentPvpTeamInputString:
+    vtbls:
+      - ea: 0x1419E2010
+        base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentPvpTeamCrestEditor:
+    vtbls:
+      - ea: 0x1419E2288
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentPvPTeam:
     vtbls:
       - ea: 0x1419E2388
@@ -6378,6 +6580,10 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140AEA0E0: ctor
+  Client::UI::Agent::AgentPerformanceMode:
+    vtbls:
+      - ea: 0x141A727E0
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentFashion:
     vtbls:
       - ea: 0x141A845B0
@@ -6385,6 +6591,10 @@ classes:
     funcs:
       0x140BC1BD0: ctor
       0x140BC1D30: Finalize
+  Client::UI::Agent::AgentSelectYesno:
+    vtbls:
+      - ea: 0x141A72508
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentHousingGuestBook:
     vtbls:
       - ea: 0x141B3A600
@@ -6413,12 +6623,24 @@ classes:
     funcs:
       0x1402F6850: ctor
       0x1402F6930: Finalize
+  Client::UI::Agent::AgentMiragePrismENpcSatisfaction:
+    vtbls:
+      - ea: 0x141A74618
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentDescription:
     vtbls:
       - ea: 0x141A8AD58
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140D36140: ctor
+  Client::UI::Agent::AgentAlarm:
+    vtbls:
+      - ea: 0x141A89898
+        base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentFreeShop:
+    vtbls:
+      - ea: 0x141A8B5A8
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentAozNoteBook:
     vtbls:
       - ea: 0x141A89920
@@ -6426,6 +6648,14 @@ classes:
     funcs:
       0x140CE4DE0: ctor
       0x140CE4F10: Finalize
+  Client::UI::Agent::AgentRhythmAction:
+    vtbls:
+      - ea: 0x1419E2ED0
+        base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentWeddingNotification:
+    vtbls:
+      - ea: 0x141A70CC0
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentEmj:
     vtbls:
       - ea: 0x141A846B8
@@ -6480,6 +6710,10 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140A231B0: ctor
+  Client::UI::Agent::AgentQIBCStatus:
+    vtbls:
+      - ea: 0x141A6E240
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentDawn:
     vtbls:
       - ea: 0x141A734D0
@@ -6500,6 +6734,10 @@ classes:
     funcs:
       0x14123F9B0: ctor
       0x14123FAA0: Finalize
+  Client::UI::Agent::AgentSubmersibleExplorationMapSelect:
+    vtbls:
+      - ea: 0x1419E09E0
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentQuestRedo:
     vtbls:
       - ea: 0x141A6E608
@@ -6612,6 +6850,10 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140ADD180: ctor
+  Client::UI::Agent::AgentInclusionShop:
+    vtbls:
+      - ea: 0x141A87670
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMycWarResultNotebook:
     vtbls:
       - ea: 0x141A73BF8
@@ -6655,6 +6897,10 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140A4E0F0: ctor
+  Client::UI::Agent::AgentGatheringMasterpiece:
+    vtbls:
+      - ea: 0x141A86608
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentStarlightGiftBox:
     vtbls:
       - ea: 0x141A74350
@@ -6885,6 +7131,10 @@ classes:
     vtbls:
       - ea: 0x1419DD7B8
         base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentChatLogNameConfig:
+    vtbls:
+      - ea: 0x1419DEB80
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentHudLayout:
     vtbls:
       - ea: 0x141A87348
@@ -7064,6 +7314,10 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140A575C0: ctor
+  Client::UI::Agent::AgentMJIHousingMenu:
+    vtbls:
+      - ea: 0x141B3B358
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentArchiveItem:
     vtbls:
       - ea: 0x141A89BF0
@@ -8741,6 +8995,576 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x140ED0D80: ctor
+  Client::UI::AddonJobHud:
+    vtbls: 
+      - ea: 0x141B1D648
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1411808E0: ctor
+      0x141180AA0: GetNumberArrayData
+    vfuncs:
+        60: UpdateGaugeType
+        72: InitializePointers
+        74: UpdateVisibility
+        75: SetTimeLineLabelDefaults
+        76: UpdateVisibility2
+        77: ChangeGaugeType
+        78: UpdateGaugeData
+  Client::UI::AddonJobHud::AddonJobHudGaugeData:
+    vtbls: 
+      - ea: 0x141B1D5D0
+    vfuncs:
+      0: Initialize
+      1: Copy
+  Client::UI::AddonJobHud::AddonJobHudGauge:
+    vtbls: 
+      - ea: 0x141B1D608
+    vfuncs: 
+      0: dtor
+      1: Initialize
+      2: Finalize
+      3: Update
+      4: OnSetup
+      5: OnRequestedUpdate
+      6: OnChangeGaugeType
+      7: Reset
+  Client::UI::AddonJobHudACN0: # the addon named "JobHudACN0" loads the UldResourceHandle "JobHudSCH0"
+    vtbls: 
+      - ea: 0x141B20708
+        base: Client::UI::AddonJobHud
+    funcs:
+      0x141194840: ctor
+  Client::UI::AddonJobHudACN0::AetherflowACNGaugeData:
+    vtbls: 
+      - ea: 0x141B20638
+        base: Client::UI::AddonJobHud::AddonJobHudGaugeData
+  Client::UI::AddonJobHudACN0::AetherflowACNGauge:
+    vtbls: 
+      - ea: 0x141B20688
+        base: Client::UI::AddonJobHud::AddonJobHudGauge
+  Client::UI::AddonJobHudACN0::AetherflowACNGaugeSimple:
+    vtbls: 
+      - ea: 0x141B206C8
+        base: Client::UI::AddonJobHud::AddonJobHudGauge
+  Client::UI::AddonJobHudAST0:
+    vtbls: 
+      - ea: 0x141B1D950
+        base: Client::UI::AddonJobHud
+    funcs:
+      0x141182970: ctor
+  Client::UI::AddonJobHudAST0::ArcanaGaugeData:
+    vtbls: 
+      - ea: 0x141B1D8C0 
+        base: Client::UI::AddonJobHud::AddonJobHudGaugeData
+  Client::UI::AddonJobHudAST0::ArcanaGauge:
+    vtbls: 
+      - ea: 0x141B1D8D0
+        base: Client::UI::AddonJobHud::AddonJobHudGauge
+    funcs:
+        0x141181460: ctor
+  Client::UI::AddonJobHudAST0::ArcanaGaugeSimple:
+    vtbls: 
+      - ea: 0x141B1D910 
+        base: Client::UI::AddonJobHud::AddonJobHudGauge
+    funcs:
+        0x141181F10: ctor
+  Client::UI::AddonJobHudBLM0:
+    vtbls: 
+      - ea: 0x141B1DC58
+        base: Client::UI::AddonJobHud
+    funcs:
+        0x141185150: ctor
+  Client::UI::AddonJobHudBLM0::ElementalGaugeData:
+    vtbls: 
+      - ea: 0x141B1DBC8
+        base: Client::UI::AddonJobHud::AddonJobHudGaugeData
+  Client::UI::AddonJobHudBLM0::ElementalGauge:
+    vtbls: 
+      - ea: 0x141B1DBD8
+        base: Client::UI::AddonJobHud::AddonJobHudGauge
+    funcs:
+        0x141182C50: ctor
+  Client::UI::AddonJobHudBLM0::ElementalGaugeSimple:
+    vtbls: 
+      - ea: 0x141B1DC18
+        base: Client::UI::AddonJobHud::AddonJobHudGauge
+    funcs:
+        0x1411841B0: ctor
+  Client::UI::AddonJobHudBRD0:
+    vtbls: 
+      - ea: 0x141B1DF60
+        base: Client::UI::AddonJobHud
+    funcs:
+      0x141187840: ctor
+  Client::UI::AddonJobHudBRD0::SongGaugeData:
+    vtbls: 
+      - ea: 0x141B1DED0
+        base: Client::UI::AddonJobHud::AddonJobHudGaugeData
+  Client::UI::AddonJobHudBRD0::SongGauge:
+    vtbls: 
+      - ea: 0x141B1DEE0
+        base: Client::UI::AddonJobHud::AddonJobHudGauge
+    funcs:
+      0x141185470: ctor
+  Client::UI::AddonJobHudBRD0::SongGaugeSimple:
+    vtbls: 
+      - ea: 0x141B1DF20
+        base: Client::UI::AddonJobHud::AddonJobHudGauge
+    funcs:
+      0x1411866D0: ctor
+  Client::UI::AddonJobHudDNC0:
+    vtbls: 
+      - ea: 0x141B21C40
+        base: Client::UI::AddonJobHud
+    funcs:
+      0x14119C5E0: ctor
+  Client::UI::AddonJobHudDNC0::StepGaugeData:
+    vtbls: 
+      - ea: 0x141B21BB0
+        base: Client::UI::AddonJobHud::AddonJobHudGaugeData
+  Client::UI::AddonJobHudDNC0::StepGauge:
+    vtbls: 
+      - ea: 0x141B21BC0
+        base: Client::UI::AddonJobHud::AddonJobHudGauge
+  Client::UI::AddonJobHudDNC0::StepGaugeSimple:
+    vtbls: 
+      - ea: 0x141B21C00
+        base: Client::UI::AddonJobHud::AddonJobHudGauge
+  Client::UI::AddonJobHudDNC1:
+    vtbls: 
+      - ea: 0x141B21F48
+        base: Client::UI::AddonJobHud
+    funcs:
+      0x14119D880: ctor
+  Client::UI::AddonJobHudDNC1::FeatherGaugeData:
+    vtbls: 
+      - ea: 0x141B21EB8
+        base: Client::UI::AddonJobHud::AddonJobHudGaugeData
+  Client::UI::AddonJobHudDNC1::FeatherGauge:
+    vtbls: 
+      - ea: 0x141B21EC8
+        base: Client::UI::AddonJobHud::AddonJobHudGauge
+  Client::UI::AddonJobHudDNC1::FeatherGaugeSimple:
+    vtbls: 
+      - ea: 0x141B21F08
+        base: Client::UI::AddonJobHud::AddonJobHudGauge
+  Client::UI::AddonJobHudDRG0:
+    vtbls: 
+      - ea: 0x141B1E878
+        base: Client::UI::AddonJobHud
+    funcs:
+      0x14118A6E0: ctor
+  Client::UI::AddonJobHudDRG0::DragonGaugeData:
+    vtbls: 
+      - ea: 0x141B1E7E8
+        base: Client::UI::AddonJobHud::AddonJobHudGaugeData
+  Client::UI::AddonJobHudDRG0::DragonGauge:
+    vtbls: 
+      - ea: 0x141B1E7F8
+        base: Client::UI::AddonJobHud::AddonJobHudGauge
+  Client::UI::AddonJobHudDRG0::DragonGaugeSimple:
+    vtbls: 
+      - ea: 0x141B1E838
+        base: Client::UI::AddonJobHud::AddonJobHudGauge
+    funcs:
+        0x141189CB0: ctor
+  Client::UI::AddonJobHudDRK0:
+     vtbls: 
+       - ea: 0x141B1E268
+         base: Client::UI::AddonJobHud
+     funcs:
+       0x141188650: ctor
+  Client::UI::AddonJobHudDRK0::BloodGaugeData:
+     vtbls: 
+       - ea: 0x141B1E1D8
+         base: Client::UI::AddonJobHud::AddonJobHudGaugeData
+  Client::UI::AddonJobHudDRK0::BloodGauge:
+     vtbls: 
+       - ea: 0x141B1E1E8
+         base: Client::UI::AddonJobHud::AddonJobHudGauge
+  Client::UI::AddonJobHudDRK0::BloodGaugeSimple:
+     vtbls: 
+       - ea: 0x141B1E228
+         base: Client::UI::AddonJobHud::AddonJobHudGauge
+  Client::UI::AddonJobHudDRK1:
+    vtbls: 
+      - ea: 0x141B1E570
+        base: Client::UI::AddonJobHud
+    funcs:
+      0x141189300: ctor
+  Client::UI::AddonJobHudDRK1::DarksideGaugeData:
+    vtbls: 
+      - ea: 0x141B1E4E0
+        base: Client::UI::AddonJobHud::AddonJobHudGaugeData
+  Client::UI::AddonJobHudDRK1::DarksideGauge:
+    vtbls: 
+      - ea: 0x141B1E4F0
+        base: Client::UI::AddonJobHud::AddonJobHudGauge
+  Client::UI::AddonJobHudDRK1::DarksideGaugeSimple:
+    vtbls: 
+      - ea: 0x141B1E530 
+        base: Client::UI::AddonJobHud::AddonJobHudGauge
+  Client::UI::AddonJobHudGFF0: #SGE
+    vtbls: 
+      - ea: 0x141B22860
+        base: Client::UI::AddonJobHud
+    funcs:
+      0x1411A0CF0: ctor
+  Client::UI::AddonJobHudGFF0::EukrasiaGaugeData:
+    vtbls: 
+      - ea: 0x141B227D0
+        base: Client::UI::AddonJobHud::AddonJobHudGaugeData
+  Client::UI::AddonJobHudGFF0::EukrasiaGauge:
+    vtbls: 
+      - ea: 0x141B227E0
+        base: Client::UI::AddonJobHud::AddonJobHudGauge
+  Client::UI::AddonJobHudGFF0::EukrasiaGaugeSimple:
+    vtbls: 
+      - ea: 0x141B22820
+        base: Client::UI::AddonJobHud::AddonJobHudGauge
+  Client::UI::AddonJobHudGFF1: #SGE
+    vtbls: 
+      - ea: 0x141B22B68
+        base: Client::UI::AddonJobHud
+    funcs:
+      0x1411A1CC0: ctor
+  Client::UI::AddonJobHudGFF1::AddersgallGaugeData:
+    vtbls: 
+      - ea: 0x141B22AD8
+        base: Client::UI::AddonJobHud::AddonJobHudGaugeData
+  Client::UI::AddonJobHudGFF1::AddersgallGauge:
+    vtbls: 
+      - ea: 0x141B22AE8
+        base: Client::UI::AddonJobHud::AddonJobHudGauge
+  Client::UI::AddonJobHudGFF1::AddersgallGaugeSimple:
+    vtbls: 
+      - ea: 0x141B22B28
+        base: Client::UI::AddonJobHud::AddonJobHudGauge
+  Client::UI::AddonJobHudGNB0:
+    vtbls: 
+      - ea: 0x141B21938
+        base: Client::UI::AddonJobHud
+    funcs:
+      0x14119B860: ctor
+  Client::UI::AddonJobHudGNB0::PowderGaugeData:
+    vtbls: 
+      - ea: 0x141B218A8
+        base: Client::UI::AddonJobHud::AddonJobHudGaugeData
+  Client::UI::AddonJobHudGNB0::PowderGauge:
+    vtbls: 
+      - ea: 0x141B218B8
+        base: Client::UI::AddonJobHud::AddonJobHudGauge
+  Client::UI::AddonJobHudGNB0::PowderGaugeSimple:
+    vtbls: 
+      - ea: 0x141B218F8
+        base: Client::UI::AddonJobHud::AddonJobHudGauge
+  Client::UI::AddonJobHudMCH0:
+    vtbls: 
+      - ea: 0x141B1EB80
+        base: Client::UI::AddonJobHud
+    funcs:
+      0x14118B820: ctor
+  Client::UI::AddonJobHudMCH0::HeatGaugeData:
+    vtbls: 
+      - ea: 0x141B1EAF0
+        base: Client::UI::AddonJobHud::AddonJobHudGaugeData
+  Client::UI::AddonJobHudMCH0::HeatGauge:
+    vtbls: 
+      - ea: 0x141B1EB00
+        base: Client::UI::AddonJobHud::AddonJobHudGauge
+  Client::UI::AddonJobHudMCH0::HeatGaugeSimple:
+    vtbls: 
+      - ea: 0x141B1EB40
+        base: Client::UI::AddonJobHud::AddonJobHudGauge
+  Client::UI::AddonJobHudMNK0:
+    vtbls: 
+      - ea: 0x141B1EE88
+        base: Client::UI::AddonJobHud
+    funcs:
+      0x14118CF10: ctor
+  Client::UI::AddonJobHudMNK0::MastersGaugeData:
+    vtbls: 
+      - ea: 0x141B1EDF8
+        base: Client::UI::AddonJobHud::AddonJobHudGaugeData
+  Client::UI::AddonJobHudMNK0::MastersGauge:
+    vtbls: 
+      - ea: 0x141B1EE08
+        base: Client::UI::AddonJobHud::AddonJobHudGauge
+    funcs:
+        0x14118BB90: ctor
+  Client::UI::AddonJobHudMNK0::MastersGaugeSimple:
+    vtbls: 
+      - ea: 0x141B1EE48
+        base: Client::UI::AddonJobHud::AddonJobHudGauge
+    funcs:
+        0x14118C590: ctor
+  Client::UI::AddonJobHudMNK1:
+    vtbls: 
+      - ea: 0x141B1F190
+        base: Client::UI::AddonJobHud
+    funcs:
+      0x14118DAC0: ctor
+  Client::UI::AddonJobHudMNK1::ChakraGaugeData:
+    vtbls: 
+      - ea: 0x141B1F100
+        base: Client::UI::AddonJobHud::AddonJobHudGaugeData
+  Client::UI::AddonJobHudMNK1::ChakraGauge:
+    vtbls: 
+      - ea: 0x141B1F110
+        base: Client::UI::AddonJobHud::AddonJobHudGauge
+  Client::UI::AddonJobHudMNK1::ChakraGaugeSimple:
+    vtbls: 
+      - ea: 0x141B1F150
+        base: Client::UI::AddonJobHud::AddonJobHudGauge
+  Client::UI::AddonJobHudNIN0:
+    vtbls: 
+      - ea: 0x141B1F498
+        base: Client::UI::AddonJobHud
+    funcs:
+      0x14118E570: ctor
+  Client::UI::AddonJobHudNIN0::NinkiGaugeData:
+    vtbls: 
+      - ea: 0x141B1F408
+        base: Client::UI::AddonJobHud::AddonJobHudGaugeData
+  Client::UI::AddonJobHudNIN0::NinkiGauge:
+    vtbls: 
+      - ea: 0x141B1F418
+        base: Client::UI::AddonJobHud::AddonJobHudGauge
+  Client::UI::AddonJobHudNIN0::NinkiGaugeSimple:
+    vtbls: 
+      - ea: 0x141B1F458
+        base: Client::UI::AddonJobHud::AddonJobHudGauge
+  Client::UI::AddonJobHudNIN1:
+    vtbls: 
+      - ea: 0x141B1F7A0
+        base: Client::UI::AddonJobHud
+    funcs:
+      0x14118EF60: ctor
+  Client::UI::AddonJobHudNIN1::HutonGaugeData:
+    vtbls: 
+      - ea: 0x141B1F710
+        base: Client::UI::AddonJobHud::AddonJobHudGaugeData
+  Client::UI::AddonJobHudNIN1::HutonGauge:
+    vtbls: 
+      - ea: 0x141B1F720
+        base: Client::UI::AddonJobHud::AddonJobHudGauge
+  Client::UI::AddonJobHudNIN1::HutonGaugeSimple:
+    vtbls: 
+      - ea: 0x141B1F760
+        base: Client::UI::AddonJobHud::AddonJobHudGauge
+  Client::UI::AddonJobHudPLD0:
+    vtbls: 
+      - ea: 0x141B1FAA8
+        base: Client::UI::AddonJobHud
+    funcs:
+      0x14118FFE0: ctor
+  Client::UI::AddonJobHudPLD0::OathGaugeData:
+    vtbls: 
+      - ea: 0x141B1FA18
+        base: Client::UI::AddonJobHud::AddonJobHudGaugeData
+  Client::UI::AddonJobHudPLD0::OathGauge:
+    vtbls: 
+      - ea: 0x141B1FA28
+        base: Client::UI::AddonJobHud::AddonJobHudGauge
+  Client::UI::AddonJobHudPLD0::OathGaugeSimple:
+    vtbls: 
+      - ea: 0x141B1FA68
+        base: Client::UI::AddonJobHud::AddonJobHudGauge
+  Client::UI::AddonJobHudRDM0:
+    vtbls: 
+      - ea: 0x141B1FDB0
+        base: Client::UI::AddonJobHud
+    funcs:
+      0x141191A20: ctor
+  Client::UI::AddonJobHudRDM0::BalanceGaugeData:
+    vtbls: 
+      - ea: 0x141B1FD20
+        base: Client::UI::AddonJobHud::AddonJobHudGaugeData
+  Client::UI::AddonJobHudRDM0::BalanceGauge:
+    vtbls: 
+      - ea: 0x141B1FD30
+        base: Client::UI::AddonJobHud::AddonJobHudGauge
+    funcs:
+      0x1411903D0: ctor
+  Client::UI::AddonJobHudRDM0::BalanceGaugeSimple:
+    vtbls: 
+      - ea: 0x141B1FD70
+        base: Client::UI::AddonJobHud::AddonJobHudGauge
+    funcs:
+      0x141191090: ctor
+  Client::UI::AddonJobHudRRP0:
+    vtbls: 
+      - ea: 0x141B22250
+        base: Client::UI::AddonJobHud
+    funcs:
+      0x14119EF70: ctor
+  Client::UI::AddonJobHudRRP0::SoulGaugeData:
+    vtbls: 
+      - ea: 0x141B221C0
+        base: Client::UI::AddonJobHud::AddonJobHudGaugeData
+  Client::UI::AddonJobHudRRP0::SoulGauge:
+    vtbls: 
+      - ea: 0x141B221D0
+        base: Client::UI::AddonJobHud::AddonJobHudGauge
+    funcs:
+        0x14119DBA0: ctor
+  Client::UI::AddonJobHudRRP0::SoulGaugeSimple:
+    vtbls: 
+      - ea: 0x141B22210
+        base: Client::UI::AddonJobHud::AddonJobHudGauge
+  Client::UI::AddonJobHudRRP1:
+    vtbls: 
+      - ea: 0x141B22558
+        base: Client::UI::AddonJobHud
+    funcs:
+      0x1411A0700: ctor
+  Client::UI::AddonJobHudRRP1::DeathGaugeData:
+    vtbls: 
+      - ea: 0x141B224C8
+        base: Client::UI::AddonJobHud::AddonJobHudGaugeData
+  Client::UI::AddonJobHudRRP1::DeathGauge:
+    vtbls: 
+      - ea: 0x141B224D8
+        base: Client::UI::AddonJobHud::AddonJobHudGauge
+    funcs:
+        0x14119F250: ctor
+  Client::UI::AddonJobHudRRP1::DeathGauge::ShroudStack:
+    funcs:
+        0x14119FBE0: OnRequestedUpdate
+  Client::UI::AddonJobHudRRP1::DeathGaugeSimple:
+    vtbls: 
+      - ea: 0x141B22518
+        base: Client::UI::AddonJobHud::AddonJobHudGauge
+  Client::UI::AddonJobHudSAM0:
+    vtbls: 
+      - ea: 0x141B200B8
+        base: Client::UI::AddonJobHud
+    funcs:
+      0x141193130: ctor
+  Client::UI::AddonJobHudSAM0::KenkiGaugeData:
+    vtbls: 
+      - ea: 0x141B20028
+        base: Client::UI::AddonJobHud::AddonJobHudGaugeData
+  Client::UI::AddonJobHudSAM0::KenkiGauge:
+    vtbls: 
+      - ea: 0x141B20038
+        base: Client::UI::AddonJobHud::AddonJobHudGauge
+  Client::UI::AddonJobHudSAM0::KenkiGaugeSimple:
+    vtbls: 
+      - ea: 0x141B20078
+        base: Client::UI::AddonJobHud::AddonJobHudGauge
+  Client::UI::AddonJobHudSAM1:
+    vtbls: 
+      - ea: 0x141B203C0
+        base: Client::UI::AddonJobHud
+    funcs:
+      0x141193D80: ctor
+  Client::UI::AddonJobHudSAM1::SenGaugeData:
+    vtbls: 
+      - ea: 0x141B20330
+        base: Client::UI::AddonJobHud::AddonJobHudGaugeData
+  Client::UI::AddonJobHudSAM1::SenGauge:
+    vtbls: 
+      - ea: 0x141B20340
+        base: Client::UI::AddonJobHud::AddonJobHudGauge
+  Client::UI::AddonJobHudSAM1::SenGaugeSimple:
+    vtbls: 
+      - ea: 0x141B20380
+        base: Client::UI::AddonJobHud::AddonJobHudGauge
+  Client::UI::AddonJobHudSCH0: # the addon named "JobHudSCH0" loads the UldResourceHandle "JobHudSCH1"
+    vtbls: 
+      - ea: 0x141B20A10
+        base: Client::UI::AddonJobHud
+    funcs:
+      0x141195AD0: ctor
+  Client::UI::AddonJobHudSCH0::FaerieGaugeData:
+    vtbls: 
+      - ea: 0x141B20980
+        base: Client::UI::AddonJobHud::AddonJobHudGaugeData
+  Client::UI::AddonJobHudSCH0::FaerieGauge:
+    vtbls: 
+      - ea: 0x141B20990
+        base: Client::UI::AddonJobHud::AddonJobHudGauge
+  Client::UI::AddonJobHudSCH0::FaerieGaugeSimple:
+    vtbls: 
+      - ea: 0x141B209D0
+        base: Client::UI::AddonJobHud::AddonJobHudGauge
+  Client::UI::AddonJobHudSMN0:
+    vtbls: 
+      - ea: 0x141B20D18
+        base: Client::UI::AddonJobHud
+    funcs:
+      0x141196600: ctor
+  Client::UI::AddonJobHudSMN0::AetherflowSMNGaugeData:
+    vtbls: 
+      - ea: 0x141B20C88
+        base: Client::UI::AddonJobHud::AddonJobHudGaugeData
+  Client::UI::AddonJobHudSMN0::AetherflowSMNGauge:
+    vtbls: 
+      - ea: 0x141B20C98
+        base: Client::UI::AddonJobHud::AddonJobHudGauge
+  Client::UI::AddonJobHudSMN0::AetherflowSMNGaugeSimple:
+    vtbls: 
+      - ea: 0x141B20CD8
+        base: Client::UI::AddonJobHud::AddonJobHudGauge
+  Client::UI::AddonJobHudSMN1:
+    vtbls: 
+      - ea: 0x141B21020
+        base: Client::UI::AddonJobHud
+    funcs:
+      0x141198830: ctor
+  Client::UI::AddonJobHudSMN1::TranceGaugeData:
+    vtbls: 
+      - ea: 0x141B20F90
+        base: Client::UI::AddonJobHud::AddonJobHudGaugeData
+  Client::UI::AddonJobHudSMN1::TranceGauge:
+    vtbls: 
+      - ea: 0x141B20FA0
+        base: Client::UI::AddonJobHud::AddonJobHudGauge
+    funcs:
+      0x1411968B0: ctor
+  Client::UI::AddonJobHudSMN1::TranceGaugeSimple:
+    vtbls: 
+      - ea: 0x141B20FE0
+        base: Client::UI::AddonJobHud::AddonJobHudGauge
+  Client::UI::AddonJobHudWAR0:
+    vtbls: 
+      - ea: 0x141B21328
+        base: Client::UI::AddonJobHud
+    funcs:
+      0x141199750: ctor
+  Client::UI::AddonJobHudWAR0::BeastGaugeData:
+    vtbls: 
+      - ea: 0x141B21298
+        base: Client::UI::AddonJobHud::AddonJobHudGaugeData
+  Client::UI::AddonJobHudWAR0::BeastGauge:
+    vtbls: 
+      - ea: 0x141B212A8
+        base: Client::UI::AddonJobHud::AddonJobHudGauge
+  Client::UI::AddonJobHudWAR0::BeastGaugeSimple:
+    vtbls: 
+      - ea: 0x141B212E8
+        base: Client::UI::AddonJobHud::AddonJobHudGauge
+  Client::UI::AddonJobHudWHM0:
+    vtbls: 
+      - ea: 0x141B21630
+        base: Client::UI::AddonJobHud
+    funcs:
+      0x14119A7D0: ctor
+  Client::UI::AddonJobHudWHM0::HealingGaugeData:
+    vtbls: 
+      - ea: 0x141B215A0
+        base: Client::UI::AddonJobHud::AddonJobHudGaugeData
+  Client::UI::AddonJobHudWHM0::HealingGauge:
+    vtbls: 
+      - ea: 0x141B215B0
+        base: Client::UI::AddonJobHud::AddonJobHudGauge
+  Client::UI::AddonJobHudWHM0::HealingGaugeSimple:
+    vtbls: 
+      - ea: 0x141B215F0
+        base: Client::UI::AddonJobHud::AddonJobHudGauge
+    funcs:
+      0x141199FD0: ctor
   Client::UI::AddonLovmPaletteEdit:
     vtbls:
       - ea: 0x141B353C0
@@ -9181,7 +10005,6 @@ classes:
     vtbls:
       - ea: 0x141B46D30
     funcs:
-      0x141322F10: GetHeightAdjustActionTimelineRowId
       0x14139A360: CreateInstance
       0x14139A3B0: ctor
     instances:

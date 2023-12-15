@@ -37,6 +37,8 @@ public unsafe partial struct AtkUldManager {
     [FieldOffset(0x28)] public ResourceHandle* UldResourceHandle; // addons release this reference, components do not
     [FieldOffset(0x30)] public DuplicateNodeInfo* DuplicateNodeInfoList; // these are nodes duplicated by the loader during load
     [FieldOffset(0x38)] public AtkTimelineManager* TimelineManager;
+    [FieldOffset(0x40)] public ushort DrawOrderIndex;
+    [Obsolete("Use DrawOrderIndex")]
     [FieldOffset(0x40)] public ushort Unk40;
     [FieldOffset(0x42)] public ushort NodeListCount;
     [FieldOffset(0x48)] public void* AtkResourceRendererManager;

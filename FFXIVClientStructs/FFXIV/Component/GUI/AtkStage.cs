@@ -11,7 +11,7 @@ public unsafe partial struct AtkStage {
     [FieldOffset(0x0)] public AtkEventTarget AtkEventTarget;
     [FieldOffset(0x18)] public AtkTextureResourceManager* AtkTextureResourceManager;
     [FieldOffset(0x20)] public RaptureAtkUnitManager* RaptureAtkUnitManager;
-    [FieldOffset(0x20)] public nint AtkInputManager;
+    [FieldOffset(0x28)] public AtkInputManager* AtkInputManager;
     [FieldOffset(0x38)] public AtkArrayDataHolder* AtkArrayDataHolder;
     [FieldOffset(0x60)] public RaptureTextModule* RaptureTextModule;
     [FieldOffset(0x78)] public AtkDragDropManager DragDropManager;

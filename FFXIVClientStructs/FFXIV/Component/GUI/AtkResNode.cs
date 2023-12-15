@@ -179,6 +179,9 @@ public unsafe partial struct AtkResNode : ICreatable {
         RemoveEvent((ushort)eventType, eventParam, listener, isSystemEvent);
     }
 
+    [MemberFunction("E8 ?? ?? ?? ?? 8B 5C 24 2C")]
+    public partial void GetBounds(Bounds* outBounds);
+
     [MemberFunction("48 85 C9 74 0B 8B 41 44")]
     public partial void GetPositionFloat(float* outX, float* outY);
 

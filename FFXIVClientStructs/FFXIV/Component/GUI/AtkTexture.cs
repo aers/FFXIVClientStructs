@@ -15,7 +15,7 @@ public enum TextureType : byte {
 // no explicit ctor
 [StructLayout(LayoutKind.Explicit, Size = 0x18)]
 public unsafe partial struct AtkTexture : ICreatable {
-    [FieldOffset(0x0)] public void* vtbl;
+    [FieldOffset(0x0), CExportIgnore] public void* vtbl;
 
     // union type
     [FieldOffset(0x8)] public AtkTextureResource* Resource;

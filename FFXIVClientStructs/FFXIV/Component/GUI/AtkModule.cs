@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 //   Component::GUI::AtkModuleInterface
 [StructLayout(LayoutKind.Explicit, Size = 0x82A0)]
 public unsafe partial struct AtkModule {
-    [FieldOffset(0x0)] public void* vtbl;
+    [FieldOffset(0x0), CExportIgnore] public void* vtbl;
 
     [FieldOffset(0x128)] public AtkStage* AtkStage;
     // [FieldOffset(0x130)] public AtkServer* AtkServer;

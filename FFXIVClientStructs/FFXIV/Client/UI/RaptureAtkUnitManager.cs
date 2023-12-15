@@ -24,6 +24,9 @@ public unsafe partial struct RaptureAtkUnitManager {
     [MemberFunction("E8 ?? ?? ?? ?? 8B 6B 20")]
     public partial AtkUnitBase* GetAddonById(ushort id);
 
+    [VirtualFunction(8)]
+    public partial bool ShowAddonByID(ushort addonId, bool show); // True calls AtkUnitBase.Show, False calls AtkUnitBase.Hide
+
     [VirtualFunction(11)]
     public partial void UpdateAddonByID(ushort addonId, NumberArrayData** numberArrayData, StringArrayData** stringArrayData, bool forced);
 }

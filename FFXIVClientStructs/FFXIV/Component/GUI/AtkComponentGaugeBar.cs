@@ -9,4 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [StructLayout(LayoutKind.Explicit, Size = 0x1A8)]
 public struct AtkComponentGaugeBar {
     [FieldOffset(0x0)] public AtkComponentBase AtkComponentBase;
+
+    [FieldOffset(0x190)] public int MinValue;
+    [FieldOffset(0x194)] public int MaxValue;
 }
