@@ -26,5 +26,5 @@ public unsafe partial struct AtkCollisionNode : ICreatable {
     public partial void Ctor();
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 1E FE C3")]
-    public partial bool CheckCollisionAtCoords(int x, int y, bool inclusive);
+    public partial bool CheckCollisionAtCoords(short x, short y, bool inclusive);
 }
