@@ -36,7 +36,7 @@ public unsafe partial struct ActionTimelineManager {
     public partial void SetSlotSpeed(uint slot, float speed); // Sets the speed of the animation slot on the target actor and any children (mounts, ornaments)
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 83 C7 ?? 48 83 EE ?? 75 ?? 48 8B 74 24 ?? 48 8B 6C 24")]
-    public partial void SetLipsOverrideTimeline(uint slot, ushort actionTimelineId);
+    public partial void SetLipsOverrideTimeline(ushort actionTimelineId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 ?? 80 8E ?? ?? ?? ?? ?? 48 8D 8B")]
     public partial bool CalculateAndApplyOverallSpeed(); // Calculates the current overall speed and applies it, returns true if the speed changed
