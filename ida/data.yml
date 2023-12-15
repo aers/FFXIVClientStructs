@@ -3759,6 +3759,28 @@ classes:
         base: Component::GUI::AtkComponentBase
     funcs:
       0x14056F5E0: ctor
+      0x14056F1A0: SetMinValue
+      0x14056F1E0: SetMaxValue
+      0x14056F220: SetGaugeValue
+      0x14056F300: HaltTransitions
+      0x14056F350: SetGaugeRange
+      0x14056F390: SetFillColor
+      0x14056F450: SetBackdropColor
+      0x14056FF70: UpdateFloatValues
+      0x1405700F0: UpdateBarFill1
+      0x1405704A0: UpdateBarFill2
+      0x140570C10: SetupGaugeTransitionSplit # handles situations where the value overflows to/from the secondary gauge (ie shield bar in party list)
+      0x140571070: SetupGaugeTransition
+      0x1405711C0: SetGaugeValueInstant # no transition animation
+      0x1405712D0: SetParameterText
+      0x1405713B0: GetFillPosition1
+      0x140571450: GetFillPosition2
+      0x1405714D0: InitializeFillMargin
+    vfuncs:
+      8: InitializeFillNodes
+  Component::GUI::AtkComponentGaugeBar::GaugeValueTransition:
+    funcs:
+      0x14056FDC0: GetTransitioningValue
   Component::GUI::AtkComponentSlider:
     vtbls:
       - ea: 0x141A072F8
