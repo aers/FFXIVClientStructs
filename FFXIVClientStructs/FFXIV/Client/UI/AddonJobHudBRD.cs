@@ -50,7 +50,7 @@ public unsafe partial struct AddonJobHudBRD0 {
 
         [FixedSizeArray<Pointer<AtkComponentBase>>(3)]
         [FieldOffset(0x98)] public fixed byte WandererRepertoireArrow[3 * 0x08];
-        
+
         [FieldOffset(0xB0)] public AtkResNode* SongBarContainer;
         [FieldOffset(0xB8)] public AtkResNode* SongBarFill;
         [FieldOffset(0xC0)] public AtkResNode* SongsPlayedContainer;
@@ -80,7 +80,7 @@ public unsafe partial struct AddonJobHudBRD0 {
 
         [FixedSizeArray<Pointer<AtkComponentBase>>(3)]
         [FieldOffset(0x88)] public fixed byte WandererRepertoireGem[3 * 0x08];
-     
+
         [FieldOffset(0xA0)] public AtkResNode* SongsPlayedContainer;
         [FieldOffset(0xA8)] public AtkResNode* SongsPlayed;
 

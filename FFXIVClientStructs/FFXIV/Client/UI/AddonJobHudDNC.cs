@@ -86,7 +86,7 @@ public unsafe partial struct AddonJobHudDNC1 {
 
         [FixedSizeArray<Pointer<AtkComponentBase>>(4)]
         [FieldOffset(0x20)] public fixed byte Feathers[4 * 0x08];
-        
+
         [FieldOffset(0x40)] public int FeatherCount;
         [FieldOffset(0x48)] public AtkResNode* EspritBar;
         [FieldOffset(0x50)] public AtkResNode* EspritValueContainer;

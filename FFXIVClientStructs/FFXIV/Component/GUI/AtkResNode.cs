@@ -238,7 +238,7 @@ public unsafe partial struct AtkResNode : ICreatable {
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 83 C7 08 48 83 EB 01 75 DC")]
     public partial void ToggleVisibility(bool enable);
-    
+
     [MemberFunction("E8 ?? ?? ?? ?? 45 33 F6 48 8D B3 48 05 00 00")]
     public partial void SetAlpha(byte alpha);
 

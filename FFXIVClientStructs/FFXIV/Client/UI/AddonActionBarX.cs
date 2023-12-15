@@ -22,8 +22,7 @@ public unsafe partial struct AddonActionBarX {
     [FieldOffset(0x27C)] public fixed byte LayoutDimensions[6 * Dimensions.Size]; // every hotbar stores the same pre-baked dimensions for each of the 6 layout options
 
     [StructLayout(LayoutKind.Explicit, Size = Size)]
-    public struct Dimensions
-    {
+    public struct Dimensions {
         public const int Size = 0x4;
         [FieldOffset(0x0)] public short Width;
         [FieldOffset(0x2)] public short Height;

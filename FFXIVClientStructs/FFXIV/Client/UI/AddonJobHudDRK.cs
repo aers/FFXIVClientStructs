@@ -24,11 +24,11 @@ public unsafe partial struct AddonJobHudDRK0 {
     [StructLayout(LayoutKind.Explicit, Size = 0x48)]
     public partial struct BloodGauge {
         [FieldOffset(0x00)] public AddonJobHudGauge Gauge;
-        [FieldOffset(0x10)] public AtkResNode* Container;       
+        [FieldOffset(0x10)] public AtkResNode* Container;
         [FieldOffset(0x18)] public AtkResNode* StanceGemContainer;
-        [FieldOffset(0x20)] public AtkResNode* SwordGlow;       
+        [FieldOffset(0x20)] public AtkResNode* SwordGlow;
         [FieldOffset(0x28)] public AtkResNode* StanceGem;
-        [FieldOffset(0x30)] public AtkTextNode* BloodValueText;       
+        [FieldOffset(0x30)] public AtkTextNode* BloodValueText;
         [FieldOffset(0x38)] public AtkComponentGaugeBar* BloodGaugeBar;
     }
 
@@ -68,22 +68,22 @@ public unsafe partial struct AddonJobHudDRK1 {
     [StructLayout(LayoutKind.Explicit, Size = 0x60)]
     public partial struct DarksideGauge {
         [FieldOffset(0x00)] public AddonJobHudGauge Gauge;
-        [FieldOffset(0x10)] public AtkResNode* Container;       
+        [FieldOffset(0x10)] public AtkResNode* Container;
         [FieldOffset(0x18)] public AtkResNode* DarkArtsContainer;
         [FieldOffset(0x20)] public AtkResNode* DarkArts;
-        [FieldOffset(0x30)] public AtkResNode* DarksideHelm;       
+        [FieldOffset(0x30)] public AtkResNode* DarksideHelm;
         [FieldOffset(0x38)] public AtkTextNode* DarksideTimerText;
-        [FieldOffset(0x48)] public AtkResNode* LivingShadowHelm;      
+        [FieldOffset(0x48)] public AtkResNode* LivingShadowHelm;
         [FieldOffset(0x50)] public AtkTextNode* LivingShadowTimerText;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x48)]
     public partial struct DarksideGaugeSimple {
         [FieldOffset(0x00)] public AddonJobHudGauge Gauge;
-        [FieldOffset(0x10)] public AtkComponentBase* DarkArtsGem ;
+        [FieldOffset(0x10)] public AtkComponentBase* DarkArtsGem;
         [FieldOffset(0x20)] public AtkComponentGaugeBar* DarksideGaugeBar;
         [FieldOffset(0x28)] public AtkComponentTextNineGrid* DarksideValueDisplay;
-        [FieldOffset(0x30)] public AtkResNode* LivingShadow;       
+        [FieldOffset(0x30)] public AtkResNode* LivingShadow;
         [FieldOffset(0x38)] public AtkResNode* LivingShadowTimerDisplay;
     }
 

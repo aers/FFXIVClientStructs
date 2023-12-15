@@ -16,14 +16,14 @@ public unsafe partial struct AddonJobHud {
     // these 4 pointers get set in vf72, and point to varying offsets for each type of gauge
     [FieldOffset(0x228)] public AddonJobHudGauge* GaugeStandard;
     [FieldOffset(0x230)] public AddonJobHudGauge* GaugeSimple;
-    [FieldOffset(0x238)] public AddonJobHudGaugeData* DataPrevious;    
+    [FieldOffset(0x238)] public AddonJobHudGaugeData* DataPrevious;
     [FieldOffset(0x240)] public AddonJobHudGaugeData* DataCurrent; // Current is always used to apply updates, and then copied onto Previous. The two are compared to detect changes.
 
     [FieldOffset(0x248)] public AtkResNode* RootNode;
 
     [FieldOffset(0x250)] public int TimelineLabelStandard; // always set to 19 by vf75
     [FieldOffset(0x254)] public int TimelineLabelSimple; // always set to 101 by vf75
-    
+
     /// <summary>
     /// Base struct containing the data that each particular gauge relies on.<br/>
     /// </summary>
@@ -31,7 +31,7 @@ public unsafe partial struct AddonJobHud {
     public unsafe partial struct AddonJobHudGaugeData {
         [FieldOffset(0x0)] public void* vtbl;
     }
-    
+
     /// <summary>
     /// Base struct for the gauges themselves.<br/>
     /// The majority of the fields in any given gauge will be pointers to Nodes and Components within its addon, but data values are usually sprinkled in too.

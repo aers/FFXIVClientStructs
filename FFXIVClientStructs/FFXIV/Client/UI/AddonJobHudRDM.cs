@@ -72,7 +72,7 @@ public unsafe partial struct AddonJobHudRDM0 {
 
         [FixedSizeArray<Pointer<AtkComponentTextNineGrid>>(2)]
         [FieldOffset(0x20)] public fixed byte ManaValueDisplay[2 * 0x8];
-        
+
         [FieldOffset(0x38)] public AtkResNode* BarContainer;
         [FieldOffset(0x40)] public AtkResNode* Crystal;
         [FieldOffset(0x48)] public AtkComponentBase* Crystal2;
@@ -82,7 +82,7 @@ public unsafe partial struct AddonJobHudRDM0 {
         [FieldOffset(0x68)] public AtkComponentBase* ManaStack1;
         [FieldOffset(0x70)] public AtkComponentBase* ManaStack2;
         [FieldOffset(0x78)] public AtkComponentBase* ManaStack3;
-            
+
         [FieldOffset(0x80)] public int ComboReadyState; // becomes 1 at 50, 2 at 100
         [FieldOffset(0x84)] public int CrystalState; // 0 = default (Grey), 1 = Black Imbalance, 2 = White Imbalance, 3 = Combo Ready (Red)
         [FieldOffset(0x88)] public bool ComboReady; // becomes 1 at 50

@@ -31,7 +31,7 @@ public unsafe partial struct AddonActionDoubleCrossBase {
     [FieldOffset(0x2E2)] public bool AlwaysDisplay;
     [FieldOffset(0x2E3)] public bool OtherBarSelected; // true if any bar other than this one is selected
     [FieldOffset(0x2E4)] public bool DoubleTapDetected; // true if the currently-held trigger matches the previous trigger press.
- 
+
     /// <summary>
     /// The ID of the hotbar in <see cref="RaptureHotbarModule"/> that this action bar is currently referencing.
     /// </summary>

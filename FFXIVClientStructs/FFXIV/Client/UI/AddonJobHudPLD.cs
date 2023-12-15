@@ -22,12 +22,12 @@ public unsafe partial struct AddonJobHudPLD0 {
     [StructLayout(LayoutKind.Explicit, Size = 0x58)]
     public partial struct OathGauge {
         [FieldOffset(0x00)] public AddonJobHudGauge Gauge;
-        [FieldOffset(0x10)] public AtkResNode* Container;       
+        [FieldOffset(0x10)] public AtkResNode* Container;
         [FieldOffset(0x18)] public AtkResNode* Container2;
         [FieldOffset(0x20)] public AtkComponentGaugeBar* OathGaugeBar;
         [FieldOffset(0x28)] public AtkComponentBase* OathMarker;
-        [FieldOffset(0x30)] public AtkTextNode* OathValueText;       
-        [FieldOffset(0x38)] public AtkComponentBase* StanceSigilContainer;       
+        [FieldOffset(0x30)] public AtkTextNode* OathValueText;
+        [FieldOffset(0x38)] public AtkComponentBase* StanceSigilContainer;
         [FieldOffset(0x40)] public AtkResNode* StanceSigil;
         [FieldOffset(0x48)] public AtkResNode* StanceGemLowLevel;
     }

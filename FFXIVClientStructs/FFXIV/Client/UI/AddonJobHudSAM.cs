@@ -30,10 +30,10 @@ public unsafe partial struct AddonJobHudSAM0 {
         [FieldOffset(0x30)] public AtkImageNode* KenkiBarLoss;
         [FieldOffset(0x38)] public AtkComponentBase* KenkiMarker;
         [FieldOffset(0x40)] public AtkResNode* MeditationContainer;
-        
+
         [FixedSizeArray<Pointer<AtkComponentBase>>(3)]
         [FieldOffset(0x48)] public fixed byte MeditationGem[3 * 0x8];
-        
+
         [FieldOffset(0x60)] public fixed byte HasMeditationStack[3];
         [FieldOffset(0x63)] public bool MeditationStacksGlowing;
         [FieldOffset(0x64)] public int MeditationStackCount;
@@ -60,7 +60,7 @@ public unsafe partial struct AddonJobHudSAM0 {
 
         [FixedSizeArray<Pointer<AtkComponentBase>>(3)]
         [FieldOffset(0x38)] public fixed byte MeditationStacks[3 * 0x8];
-        
+
         [FieldOffset(0x50)] public fixed byte HasMeditationStack[3];
         [FieldOffset(0x53)] public bool MeditationStacksGlowing;
         [FieldOffset(0x54)] public int MeditationStackCount;

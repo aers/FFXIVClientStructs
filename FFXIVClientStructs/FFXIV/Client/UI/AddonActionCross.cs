@@ -4,8 +4,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 [Addon("_ActionCross")]
 [StructLayout(LayoutKind.Explicit, Size = 0x710)]
-public unsafe partial struct AddonActionCross
-{
+public unsafe partial struct AddonActionCross {
     [FieldOffset(0x000)] public AddonActionBarBase ActionBarBase;
 
     [FieldOffset(0x248)] public ChangeSetUI ChangeSet;
@@ -42,8 +41,7 @@ public unsafe partial struct AddonActionCross
     [FieldOffset(0x70A)] public byte AlphaInactive;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x158)]
-    public partial struct ChangeSetUI
-    { // in control guide arrays: 0=top, 1=right, 2=bottom, 3=left
+    public partial struct ChangeSetUI { // in control guide arrays: 0=top, 1=right, 2=bottom, 3=left
 
         [FixedSizeArray<HelpMessage>(8)]
         [FieldOffset(0x000)] public fixed byte HelpMessages[8 * HelpMessage.Size]; // hidden "hotbar help" style nodes attached to the Change Set display for some reason
@@ -67,8 +65,7 @@ public unsafe partial struct AddonActionCross
     }
 
     [StructLayout(LayoutKind.Explicit, Size = Size)]
-    public partial struct SlotGroup
-    {
+    public partial struct SlotGroup {
         public const int Size = 0x60;
 
         [FixedSizeArray<HelpMessage>(4)]
@@ -79,8 +76,7 @@ public unsafe partial struct AddonActionCross
     }
 
     [StructLayout(LayoutKind.Explicit, Size = Size)]
-    public partial struct HelpMessage
-    {
+    public partial struct HelpMessage {
         public const int Size = 0x10;
 
         [FieldOffset(0x00)] public AtkComponentBase* HelpComponent;
@@ -88,8 +84,7 @@ public unsafe partial struct AddonActionCross
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x48)] // in control guide arrays: 0=top, 1=right, 2=bottom, 3=left
-    public partial struct ControlGuide
-    {
+    public partial struct ControlGuide {
         [FieldOffset(0x00)] public AtkComponentBase* ComponentBase;
 
         [FixedSizeArray<Pointer<AtkComponentBase>>(4)]
@@ -120,7 +115,7 @@ public unsafe partial struct AddonActionCross
         if (target == 19) target = (uint)(ActionBarBase.RaptureHotbarId - 1);
         if (target == 18) target = (uint)(ActionBarBase.RaptureHotbarId + 1);
         return target >= 18 ? 10 :
-               target <  10 ? 17 : 
+               target < 10 ? 17 :
                target;
     }
 
@@ -131,7 +126,7 @@ public unsafe partial struct AddonActionCross
     /// <param name="useLeftSide">True = left side of target bar, False = right side of target bar</param>
     /// <returns>The hotbar ID (<see cref="AddonActionBarBase.RaptureHotbarId"/>) of the set of actions assigned to this input.<br/>
     /// The Cycle Up/Down options will return the values 18 or 19, which are not actual bar IDs. You can use <see cref="GetAdjustedBarTarget"/> instead to account for this.</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 8B D0 83 F8 12 74 38")] 
+    [MemberFunction("E8 ?? ?? ?? ?? 8B D0 83 F8 12 74 38")]
     public static partial uint GetBarTarget(uint mapValue, bool* useLeftSide);
 
     // renamed fields for clarity

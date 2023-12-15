@@ -67,7 +67,7 @@ public unsafe partial struct AddonJobHudGFF1 {
 
         [FixedSizeArray<Pointer<AtkComponentBase>>(3)]
         [FieldOffset(0x30)] public fixed byte AdderstingGem[3 * 0x08];
-        
+
         [FieldOffset(0x48)] public AtkResNode* TimerBar;
         [FieldOffset(0x50)] public AtkResNode* TimerFill;
         [FieldOffset(0x58)] public AtkResNode* Container;
@@ -86,7 +86,7 @@ public unsafe partial struct AddonJobHudGFF1 {
 
         [FixedSizeArray<Pointer<AtkComponentBase>>(3)]
         [FieldOffset(0x30)] public fixed byte AdderstingGem[3 * 0x08];
-        
+
         [FieldOffset(0x48)] public AtkComponentGaugeBar* TimerGaugeBar;
         [FieldOffset(0x50)] public int Addersgall;
         [FieldOffset(0x54)] public int Addersting;

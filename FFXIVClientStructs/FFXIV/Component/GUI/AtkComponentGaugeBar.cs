@@ -10,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [StructLayout(LayoutKind.Explicit, Size = 0x1A8)]
 public unsafe partial struct AtkComponentGaugeBar {
     [FieldOffset(0x0)] public AtkComponentBase AtkComponentBase;
-    
+
     /// <summary>
     /// Data describing a value transition. Informs the fields in <see cref="GaugeValue"/>. These fields aren't overwritten until the next transition of the same type occurs.
     /// </summary>

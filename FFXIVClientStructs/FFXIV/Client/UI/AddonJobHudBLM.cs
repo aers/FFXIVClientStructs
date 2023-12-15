@@ -98,14 +98,14 @@ public unsafe partial struct AddonJobHudBLM0 {
 
         [FixedSizeArray<Pointer<AtkComponentBase>>(3)]
         [FieldOffset(0x40)] public fixed byte UmbralHearts[3 * 0x08];
-        
+
         [FieldOffset(0x58)] public AtkComponentBase* ElementalIcon;
         [FieldOffset(0x60)] public AtkResNode* EnochianGauge;
         [FieldOffset(0x68)] public AtkComponentGaugeBar* EnochianGaugeBar;
 
         [FixedSizeArray<Pointer<AtkComponentBase>>(2)]
         [FieldOffset(0x70)] public fixed byte PolyglotGem[2 * 0x08];
-        
+
         [FieldOffset(0x80)] public AtkComponentBase* ParadoxGem;
         [FieldOffset(0x88)] public int AstralFireStacks;
         [FieldOffset(0x8C)] public int AstralFireMax;

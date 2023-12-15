@@ -83,7 +83,7 @@ public unsafe partial struct AddonJobHudRRP1 {
     [StructLayout(LayoutKind.Explicit, Size = 0x118)]
     public partial struct DeathGauge {
         [FieldOffset(0x000)] public AddonJobHudGauge Gauge;
-        [FieldOffset(0x010)] public AtkResNode*  Container;
+        [FieldOffset(0x010)] public AtkResNode* Container;
 
         [StructLayout(LayoutKind.Explicit, Size = Size)]
         public partial struct ShroudStack {
