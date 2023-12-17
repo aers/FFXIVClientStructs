@@ -8218,6 +8218,60 @@ classes:
         base: Client::Game::InstanceContent::InstanceContentDirector
     funcs:
       0x14147AB30: ctor
+  Client::Game::InstanceContent::InstanceContentBattleSusano: # The Pool of Tribute / The Pool of Tribute (Extreme)
+    vtbls:
+      - ea: 0x141C14E00
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414A77E0: ctor
+  Client::Game::InstanceContent::InstanceContentBattleLakshmi: # Emanation / Emanation (Extreme)
+    vtbls:
+      - ea: 0x141C159F8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414A78C0: ctor
+  Client::Game::InstanceContent::InstanceContentBattleShinryu: # The Royal Menagerie / The Minstrel's Ballad: Shinryu's Domain
+    vtbls:
+      - ea: 0x141C141F0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414A7750: ctor
+  Client::Game::InstanceContent::InstanceContentBattleTsukuyomi: # Castrum Fluminis / The Minstrel's Ballad: Tsukuyomi's Pain
+    vtbls:
+      - ea: 0x141C17DE0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414A7B30: ctor
+  Client::Game::InstanceContent::InstanceContentBattleYojimbo: # Kugane Ohashi
+    vtbls:
+      - ea: 0x141C18AB8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414A7B90: ctor
+  Client::Game::InstanceContent::InstanceContentBattleRathalos: # The Great Hunt / The Great Hunt (Extreme)
+    vtbls:
+      - ea: 0x141C171E8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414A79B0: ctor
+  Client::Game::InstanceContent::InstanceContentBattleByakko: # The Jade Stoa / The Jade Stoa (Extreme)
+    vtbls:
+      - ea: 0x141C165F0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414A7960: ctor
+  Client::Game::InstanceContent::InstanceContentBattleSuzaku: # Hells' Kier / Hells' Kier (Extreme)
+    vtbls:
+      - ea: 0x141C196B0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414A7BE0: ctor
+  Client::Game::InstanceContent::InstanceContentBattleSeiryu: # The Wreath of Snakes / The Wreath of Snakes (Extreme)
+    vtbls:
+      - ea: 0x141C1A2A8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414A7C40: ctor
   Client::Game::InstanceContent::PublicContentDirector:
     vtbls:
       - ea: 0x141C30028
