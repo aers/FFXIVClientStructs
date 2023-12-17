@@ -8176,6 +8176,48 @@ classes:
         base: Client::Game::InstanceContent::InstanceContentDirector
     funcs:
       0x14147A190: ctor
+  Client::Game::InstanceContent::InstanceContentBattleRavana: # Thok ast Thok (Hard/Extreme)
+    vtbls:
+      - ea: 0x141BB71A0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14147A6F0: ctor
+  Client::Game::InstanceContent::InstanceContentBattleBismarck: # The Limitless Blue (Hard/Extreme)
+    vtbls:
+      - ea: 0x141BB7D98
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14147A840: ctor
+  Client::Game::InstanceContent::InstanceContentBattleThordan: # The Singularity Reactor / The Minstrel's Ballad: Thordan's Reign
+    vtbls:
+      - ea: 0x141BB8990
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14147A8E0: ctor
+  Client::Game::InstanceContent::InstanceContentBattleNidhogg: # The Final Steps of Faith / The Minstrel's Ballad: Nidhogg's Rage
+    vtbls:
+      - ea: 0x141BBA180
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14147A9B0: ctor
+  Client::Game::InstanceContent::InstanceContentBattleSephirot: # Containment Bay S1T7 / Containment Bay S1T7 (Extreme)
+    vtbls:
+      - ea: 0x141BB9588
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14147A950: ctor
+  Client::Game::InstanceContent::InstanceContentBattleSophia: # Containment Bay P1T6 / Containment Bay P1T6 (Extreme)
+    vtbls:
+      - ea: 0x141BBAD78
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14147AA10: ctor
+  Client::Game::InstanceContent::InstanceContentBattleZurvan: # Containment Bay Z1T9 / Containment Bay Z1T9 (Extreme)
+    vtbls:
+      - ea: 0x141BBB970
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14147AB30: ctor
   Client::Game::InstanceContent::PublicContentDirector:
     vtbls:
       - ea: 0x141C30028
