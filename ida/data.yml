@@ -7600,6 +7600,180 @@ classes:
         base: Client::Game::InstanceContent::InstanceContentPvpDirector
     funcs:
       0x1414A95C0: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonSastasha: # Sastasha
+    vtbls:
+      - ea: 0x141B70F90
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14145B400: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonTamtara: # The Tam-Tara Deepcroft
+    vtbls:
+      - ea: 0x141B71BE0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14145B4B0: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonCopperBell: # Copperbell Mines
+    vtbls:
+      - ea: 0x141B6F6F0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14145B2E0: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonHalatali: # Halatali
+    vtbls:
+      - ea: 0x141B96EE0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141477710: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonResidence: # Haukke Manor
+    vtbls:
+      - ea: 0x141B70338
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14145B370: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonBrayflox: # Brayflox's Longstop
+    vtbls:
+      - ea: 0x141B72840
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14145B540: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonQarn: # The Sunken Temple of Qarn
+    vtbls:
+      - ea: 0x141B986D0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141477B10: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonCuttersCry: # Cutter's Cry
+    vtbls:
+      - ea: 0x141B9AAB8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414781A0: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonDzemael: # Dzemael Darkhold
+    vtbls:
+      - ea: 0x141B9B6B0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141478210: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonAurumVale: # The Aurum Vale
+    vtbls:
+      - ea: 0x141B94AF8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141477580: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonWandererPalace: # The Wanderer's Palace
+    vtbls:
+      - ea: 0x141B992C8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141478030: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonCastrumMeridianum: # Castrum Meridianum
+    vtbls:
+      - ea: 0x141B73480
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14145B590: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonPraetorium: # The Praetorium
+    vtbls:
+      - ea: 0x141B74078
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14145B600: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonRuinsOfAmdapor: # Amdapor Keep
+    vtbls:
+      - ea: 0x141B9C2A8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141478340: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonSirius: # Pharos Sirius
+    vtbls:
+      - ea: 0x141B9CEA0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414783B0: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonCopperBellHard: # Copperbell Mines (Hard)
+    vtbls:
+      - ea: 0x141B93F00
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141477510: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonResidenceHard: # Haukke Manor (Hard)
+    vtbls:
+      - ea: 0x141B956F0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141477610: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonLostCityOfAmdapor: # The Lost City of Amdapor
+    vtbls:
+      - ea: 0x141B9DA98
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141478490: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonHalataliHard: # Halatali (Hard)
+    vtbls:
+      - ea: 0x141B97AD8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141477780: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonBrayfloxHard: # Brayflox's Longstop (Hard)
+    vtbls:
+      - ea: 0x141B962E8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414776A0: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonTreasureIsland?: # Hullbreaker Isle
+    vtbls:
+      - ea: 0x141B9E690
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141478520: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonTamtaraHard: # The Tam-Tara Deepcroft (Hard)
+    vtbls:
+      - ea: 0x141B9F288
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414785C0: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonStoneVigilHard: # The Stone Vigil (Hard)
+    vtbls:
+      - ea: 0x141B99EC0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141478130: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonSnowcloak: # Snowcloak
+    vtbls:
+      - ea: 0x141B77DE0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14145B900: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonSastashaHard: # Sastasha (Hard)
+    vtbls:
+      - ea: 0x141BA0A78
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414786D0: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonQarnHard: # The Sunken Temple of Qarn (Hard)
+    vtbls:
+      - ea: 0x141B9FE80
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141478660: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonKeeperOfTheLake: # The Keeper of the Lake
+    vtbls:
+      - ea: 0x141B771B0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14145B830: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonWandererPalaceHard: # The Wanderer's Palace (Hard)
+    vtbls:
+      - ea: 0x141BA2268
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141478790: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonRuinsOfAmdaporHard: # Amdapor Keep (Hard)
+    vtbls:
+      - ea: 0x141BA1670
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141478740: ctor
   Client::Game::InstanceContent::PublicContentDirector:
     vtbls:
       - ea: 0x141C30028
