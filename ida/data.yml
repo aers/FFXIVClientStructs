@@ -8536,6 +8536,18 @@ classes:
         base: Client::Game::InstanceContent::InstanceContentDirector
     funcs:
       0x14148B210: ctor
+  Client::Game::InstanceContent::InstanceContentTreasureHuntDungeon0:
+    vtbls:
+      - ea: 0x141C2A510
+        base: Client::Game::InstanceContent::InstanceContentTreasureHuntDungeonDirector
+    funcs:
+      0x1414ABEC0: ctor
+  Client::Game::InstanceContent::InstanceContentTreasureHuntDungeon1:
+    vtbls:
+      - ea: 0x141BF26E0
+        base: Client::Game::InstanceContent::InstanceContentTreasureHuntDungeonDirector
+    funcs:
+      0x14148D1B0: ctor
   Client::Game::InstanceContent::PublicContentDirector:
     vtbls:
       - ea: 0x141C30028
