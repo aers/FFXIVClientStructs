@@ -7972,6 +7972,24 @@ classes:
         base: Client::Game::InstanceContent::InstanceContentDirector
     funcs:
       0x14145C870: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonDohnMheg: # Dohn Mheg
+    vtbls:
+      - ea: 0x141C01380
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414A68F0: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonTwinning: # The Twinning
+    vtbls:
+      - ea: 0x141B63298
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141454540: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonGrandCosmos: # The Grand Cosmos
+    vtbls:
+      - ea: 0x141B63ED8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414545C0: ctor
   Client::Game::InstanceContent::PublicContentDirector:
     vtbls:
       - ea: 0x141C30028
