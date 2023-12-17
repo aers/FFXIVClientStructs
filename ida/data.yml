@@ -8584,6 +8584,12 @@ classes:
         base: Client::Game::InstanceContent::InstanceContentDirector
     funcs:
       0x1414ADD20: ctor
+  Client::Game::InstanceContent::InstanceContentOceanFishing:
+    vtbls:
+      - ea: 0x141B6B7F0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141456030: ctor
   Client::Game::InstanceContent::PublicContentDirector:
     vtbls:
       - ea: 0x141C30028
