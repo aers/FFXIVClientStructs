@@ -8272,6 +8272,18 @@ classes:
         base: Client::Game::InstanceContent::InstanceContentDirector
     funcs:
       0x1414A7C40: ctor
+  Client::Game::InstanceContent::InstanceContentBattleElidibus: # The Seat of Sacrifice / The Seat of Sacrifice (Extreme)
+    vtbls:
+      - ea: 0x141B69FE8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141455BE0: ctor
+  Client::Game::InstanceContent::InstanceContentBattleEmeraldWeapon: # Castrum Marinum / Castrum Marinum (Extreme)
+    vtbls:
+      - ea: 0x141B6ABE0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141455C30: ctor
   Client::Game::InstanceContent::PublicContentDirector:
     vtbls:
       - ea: 0x141C30028
