@@ -8518,6 +8518,18 @@ classes:
         base: Client::Game::InstanceContent::InstanceContentQuestBattle
     funcs:
       0x14145C930: ctor
+  Client::Game::InstanceContent::InstanceContentBeginnerTrainingExercise:
+    vtbls:
+      - ea: 0x141B93150
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141477350: ctor
+  Client::Game::InstanceContent::InstanceContentBeginnerTrainingFinalExercise: # Final Exercise
+    vtbls:
+      - ea: 0x141BF02D0
+        base: Client::Game::InstanceContent::InstanceContentBeginnerTrainingExercise
+    funcs:
+      0x14148A060: ctor
   Client::Game::InstanceContent::PublicContentDirector:
     vtbls:
       - ea: 0x141C30028
