@@ -7882,6 +7882,96 @@ classes:
         base: Client::Game::InstanceContent::InstanceContentDirector
     funcs:
       0x141478F90: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonSirensongSea: # The Sirensong Sea
+    vtbls:
+      - ea: 0x141B7D628
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14145C1D0: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonShisui: # Shisui of the Violet Tides
+    vtbls:
+      - ea: 0x141BFAED8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414A60D0: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonBardamMettle: # Bardam's Mettle
+    vtbls:
+      - ea: 0x141B7FB78
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14145C630: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonDomaCastle: # Doma Castle
+    vtbls:
+      - ea: 0x141B80800
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14145C6D0: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonCastrumAbania: # Castrum Abania
+    vtbls:
+      - ea: 0x141B7EF30
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14145C5B0: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonAlaMhigo: # Ala Mhigo
+    vtbls:
+      - ea: 0x141B7E2D8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14145C480: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonKuganeCastle: # Kugane Castle
+    vtbls:
+      - ea: 0x141BFD498
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414A6570: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonTempleOfTheFist: # The Temple of the Fist
+    vtbls:
+      - ea: 0x141BFBB18
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414A6400: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonDrownedCityOfSkalla: # The Drowned City of Skalla
+    vtbls:
+      - ea: 0x141B81448
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14145C7A0: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonHellsLid: # Hells' Lid
+    vtbls:
+      - ea: 0x141BFE0F8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414A6610: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonFractalContinuumHard: # The Fractal Continuum (Hard)
+    vtbls:
+      - ea: 0x141BFED78
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414A6660: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonSwallowCompass: # The Swallow's Compass
+    vtbls:
+      - ea: 0x141BFFA50
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414A6770: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonBurn: # The Burn
+    vtbls:
+      - ea: 0x141B820A8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14145C820: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonSaintMocianneArboretumHard: # Saint Mocianne's Arboretum (Hard)
+    vtbls:
+      - ea: 0x141C006B8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414A6810: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonGhimlytDark: # The Ghimlyt Dark
+    vtbls:
+      - ea: 0x141B82CE8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14145C870: ctor
   Client::Game::InstanceContent::PublicContentDirector:
     vtbls:
       - ea: 0x141C30028
