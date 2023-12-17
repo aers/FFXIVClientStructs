@@ -8578,6 +8578,12 @@ classes:
         base: Client::Game::InstanceContent::InstanceContentDirector
     funcs:
       0x1414ACC80: ctor
+  Client::Game::InstanceContent::InstanceContentAirForceOne: # Air Force One GATE in Gold Saucer
+    vtbls:
+      - ea: 0x141C2D5E0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414ADD20: ctor
   Client::Game::InstanceContent::PublicContentDirector:
     vtbls:
       - ea: 0x141C30028
