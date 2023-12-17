@@ -7774,6 +7774,114 @@ classes:
         base: Client::Game::InstanceContent::InstanceContentDirector
     funcs:
       0x141478740: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonDuskVigil: # The Dusk Vigil
+    vtbls:
+      - ea: 0x141BA5248
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141478B50: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonSohmAl: # Sohm Al
+    vtbls:
+      - ea: 0x141B76590
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14145B7E0: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonAery: # The Aery
+    vtbls:
+      - ea: 0x141B74C70
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14145B6E0: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonVault: # The Vault
+    vtbls:
+      - ea: 0x141B75970
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14145B730: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonGreatGubalLibrary: # The Great Gubal Library
+    vtbls:
+      - ea: 0x141B7C9D0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14145C050: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonAetherochemicalResearchFacility: # The Aetherochemical Research Facility
+    vtbls:
+      - ea: 0x141B7A378
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14145BCA0: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonNeverreap: # Neverreap
+    vtbls:
+      - ea: 0x141BA3A58
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414789A0: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonFractalContinuum: # The Fractal Continuum
+    vtbls:
+      - ea: 0x141BA4650
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141478A00: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonSaintMocianneArboretum: # Saint Mocianne's Arboretum
+    vtbls:
+      - ea: 0x141BA6A38
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141478CA0: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonPharosSiriusHard: # Pharos Sirius (Hard)
+    vtbls:
+      - ea: 0x141BA5E40
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141478C30: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonAntitower: # The Antitower
+    vtbls:
+      - ea: 0x141B79700
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14145BB90: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonLostCityOfAmdaporHard: # The Lost City of Amdapor (Hard)
+    vtbls:
+      - ea: 0x141BA7630
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141478E00: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonSohrKhai: # Sohr Khai
+    vtbls:
+      - ea: 0x141B7B0D0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14145BD40: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonHullbreakerIsleHard: # Hullbreaker Isle (Hard)
+    vtbls:
+      - ea: 0x141BA8228
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141478E70: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonXelphatol: # Xelphatol
+    vtbls:
+      - ea: 0x141B78A28
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14145B950: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonGreatGubalLibraryHard: # The Great Gubal Library (Hard)
+    vtbls:
+      - ea: 0x141BA2E60
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141478820: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonBaelsarWall: # Baelsar's Wall
+    vtbls:
+      - ea: 0x141B7BCF8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14145C000: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonSohmAlHard: # Sohm Al (Hard)
+    vtbls:
+      - ea: 0x141BA8E20
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141478F90: ctor
   Client::Game::InstanceContent::PublicContentDirector:
     vtbls:
       - ea: 0x141C30028
