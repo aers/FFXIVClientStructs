@@ -8548,6 +8548,18 @@ classes:
         base: Client::Game::InstanceContent::InstanceContentTreasureHuntDungeonDirector
     funcs:
       0x14148D1B0: ctor
+  Client::Game::InstanceContent::InstanceContentSeasonalDungeon1: # The Haunted Manor
+    vtbls:
+      - ea: 0x141BF32E0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14148DD20: ctor
+  Client::Game::InstanceContent::InstanceContentSeasonalDungeon2: # The Valentione's Ceremony
+    vtbls:
+      - ea: 0x141C298D0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414AB900: ctor
   Client::Game::InstanceContent::PublicContentDirector:
     vtbls:
       - ea: 0x141C30028
