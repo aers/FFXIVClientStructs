@@ -7430,6 +7430,8 @@ classes:
   Client::Game::Event::EventHandler:
     vtbls:
       - ea: 0x141A451B0
+    funcs:
+      0x1407C69B0: ctor
   Client::Game::Event::LuaScriptLoader<Client::Game::Event::ModuleBase>:
     vtbls:
       - ea: 0x141A459F0
@@ -7448,6 +7450,8 @@ classes:
     vtbls:
       - ea: 0x141A45A78
         base: Client::Game::Event::EventHandler
+    funcs:
+      0x1407CED30: ctor
   Client::Game::Event::EventSceneModuleImplBase:
     vtbls:
       - ea: 0x141A462D0
@@ -7467,6 +7471,8 @@ classes:
     vtbls:
       - ea: 0x141A48AF0
         base: Client::Game::Event::LuaEventHandler
+    funcs:
+      0x140827F20: ctor
   Client::Game::Event::JournalCallback:
     vtbls:
       - ea: 0x141A4B9F0
@@ -7550,15 +7556,56 @@ classes:
     vtbls:
       - ea: 0x141A49420
         base: Client::Game::Event::Director
+    funcs:
+      0x14082CD00: ctor
   Client::Game::InstanceContent::InstanceContentDirector:
     vtbls:
       - ea: 0x141B92558
         base: Client::Game::InstanceContent::ContentDirector
+    funcs:
+      0x1414738B0: ctor
+  Client::Game::InstanceContent::InstanceContentGuildOrderDirector:
+    vtbls:
+      - ea: 0x141BC6D28
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14147D1F0: ctor
+  Client::Game::InstanceContent::InstanceContentPvpDirector:
+    vtbls:
+      - ea: 0x141B62440
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141453760: ctor
+  Client::Game::InstanceContent::InstanceContentCrystallineConflictDirector:
+    vtbls:
+      - ea: 0x141B8A610
+        base: Client::Game::InstanceContent::InstanceContentPvpDirector
+    funcs:
+      0x14145E6C0: ctor
+  Client::Game::InstanceContent::InstanceContentFrontlineDirector:
+    vtbls:
+      - ea: 0x141BD2290
+        base: Client::Game::InstanceContent::InstanceContentPvpDirector
+    funcs:
+      0x141481860: ctor
+  Client::Game::InstanceContent::InstanceContentTreasureHuntDungeonDirector:
+    vtbls:
+      - ea: 0x141BF1AE0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14148C7B0: ctor
+  Client::Game::InstanceContent::InstanceContentRivalWingDirector:
+    vtbls:
+      - ea: 0x141C21E38
+        base: Client::Game::InstanceContent::InstanceContentPvpDirector
+    funcs:
+      0x1414A95C0: ctor
   Client::Game::InstanceContent::PublicContentDirector:
     vtbls:
       - ea: 0x141C30028
         base: Client::Game::InstanceContent::ContentDirector
     funcs:
+      0x1414B1DE0: ctor
       0x1414BB840: HandleEnterContentInfoPacket  # static
   Client::UI::PopupMenu:
     vtbls:
@@ -9615,6 +9662,8 @@ classes:
     vtbls:
       - ea: 0x141B3D020
         base: Client::Game::Event::Director
+    funcs:
+      0x140827F20: ctor
   Client::Game::Fate::FateContext:
     vtbls:
       - ea: 0x141B3D948
