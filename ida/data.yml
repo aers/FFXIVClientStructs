@@ -8074,6 +8074,108 @@ classes:
         base: Client::Game::InstanceContent::InstanceContentGuildOrderDirector
     funcs:
       0x1414958D0: ctor
+  Client::Game::InstanceContent::InstanceContentBattleNavel: # The Navel
+    vtbls:
+      - ea: 0x141B851A0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14145CB90: ctor
+  Client::Game::InstanceContent::InstanceContentBattlePortaDecumana: # The Porta Decumana
+    vtbls:
+      - ea: 0x141B85DE8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14145CBF0: ctor
+  Client::Game::InstanceContent::InstanceContentBattleNabriales: # The Chrysalis
+    vtbls:
+      - ea: 0x141BB59B0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14147A650: ctor
+  Client::Game::InstanceContent::InstanceContentBattleEpicDhormeChimera: # A Relic Reborn: The Chimera
+    vtbls:
+      - ea: 0x141BAF9F0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14147A380: ctor
+  Client::Game::InstanceContent::InstanceContentBattleEpicHydra: # A Relic Reborn: the Hydra
+    vtbls:
+      - ea: 0x141BB05E8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14147A3D0: ctor
+  Client::Game::InstanceContent::InstanceContentBattleGilgamesh: # Battle on the Big Bridge
+    vtbls:
+      - ea: 0x141BB11E0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14147A420: ctor
+  Client::Game::InstanceContent::InstanceContentBattleUltrosTyphon: # The Dragon's Neck
+    vtbls:
+      - ea: 0x141BB35C8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14147A510: ctor
+  Client::Game::InstanceContent::InstanceContentBattleGilgameshEnkidu: # Battle in the Big Keep
+    vtbls:
+      - ea: 0x141BB65A8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14147A6A0: ctor
+  Client::Game::InstanceContent::InstanceContentBattleGaruda: # The Bowl of Embers (Hard) / The Bowl of Embers (Extreme)
+    vtbls:
+      - ea: 0x141BAA620
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141479590: ctor
+  Client::Game::InstanceContent::InstanceContentBattleIfrit: # The Howling Eye (Hard) / The Howling Eye (Extreme)
+    vtbls:
+      - ea: 0x141BABE10
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14147A0B0: ctor
+  Client::Game::InstanceContent::InstanceContentBattleTitan: # The Navel (Hard) / The Navel (Extreme)
+    vtbls:
+      - ea: 0x141BAB218
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141479E40: ctor
+  Client::Game::InstanceContent::InstanceContentBattleMoogle: # Thornmarch (Hard) / Thornmarch (Extreme)
+    vtbls:
+      - ea: 0x141BACA08
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14147A100: ctor
+  Client::Game::InstanceContent::InstanceContentBattleLeviathan: # The Whorleater (Hard) / The Whorleater (Extreme)
+    vtbls:
+      - ea: 0x141BAEDF0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14147A330: ctor
+  Client::Game::InstanceContent::InstanceContentBattleRamuh: # The Striking Tree (Hard) / The Striking Tree (Extreme)
+    vtbls:
+      - ea: 0x141BB1DD8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14147A470: ctor
+  Client::Game::InstanceContent::InstanceContentBattleShiva: # The Akh Afah Amphitheatre (Hard) / The Akh Afah Amphitheatre (Extreme)
+    vtbls:
+      - ea: 0x141BB29D0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14147A4C0: ctor
+  Client::Game::InstanceContent::InstanceContentBattleOdin: # Urth's Fount
+    vtbls:
+      - ea: 0x141BB41C0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14147A560: ctor
+  Client::Game::InstanceContent::InstanceContentBattleUltimaWeapon: # The Minstrel's Ballad: Ultima's Bane
+    vtbls:
+      - ea: 0x141BAD600
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14147A190: ctor
   Client::Game::InstanceContent::PublicContentDirector:
     vtbls:
       - ea: 0x141C30028
