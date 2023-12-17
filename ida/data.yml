@@ -8572,6 +8572,12 @@ classes:
         base: Client::Game::InstanceContent::InstanceContentRivalWingDirector
     funcs:
       0x1414AC5C0: ctor
+  Client::Game::InstanceContent::InstanceContentMahjong:
+    vtbls:
+      - ea: 0x141C2C990
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414ACC80: ctor
   Client::Game::InstanceContent::PublicContentDirector:
     vtbls:
       - ea: 0x141C30028
