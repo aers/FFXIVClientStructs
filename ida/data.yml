@@ -8530,6 +8530,12 @@ classes:
         base: Client::Game::InstanceContent::InstanceContentBeginnerTrainingExercise
     funcs:
       0x14148A060: ctor
+  Client::Game::InstanceContent::InstanceContentDeepDungeon:
+    vtbls:
+      - ea: 0x141BF0ED0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14148B210: ctor
   Client::Game::InstanceContent::PublicContentDirector:
     vtbls:
       - ea: 0x141C30028
