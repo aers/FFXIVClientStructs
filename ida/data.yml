@@ -7990,6 +7990,90 @@ classes:
         base: Client::Game::InstanceContent::InstanceContentDirector
     funcs:
       0x1414545C0: ctor
+  Client::Game::InstanceContent::InstanceContentGuildOrder001: # Basic Training: Enemy Parties
+    vtbls:
+      - ea: 0x141BC7940
+        base: Client::Game::InstanceContent::InstanceContentGuildOrderDirector
+    funcs:
+      0x1414955A0: ctor
+  Client::Game::InstanceContent::InstanceContentGuildOrder002: # Under the Armor
+    vtbls:
+      - ea: 0x141BC8558
+        base: Client::Game::InstanceContent::InstanceContentGuildOrderDirector
+    funcs:
+      0x1414955F0: ctor
+  Client::Game::InstanceContent::InstanceContentGuildOrder003: # Basic Training: Enemy Strongholds
+    vtbls:
+      - ea: 0x141BC9170
+        base: Client::Game::InstanceContent::InstanceContentGuildOrderDirector
+    funcs:
+      0x14147E290: ctor
+  Client::Game::InstanceContent::InstanceContentGuildOrder004: # Hero on the Half Shell
+    vtbls:
+      - ea: 0x141BC9D88
+        base: Client::Game::InstanceContent::InstanceContentGuildOrderDirector
+    funcs:
+      0x141495640: ctor
+  Client::Game::InstanceContent::InstanceContentGuildOrder005: # Pulling Poison Posies
+    vtbls:
+      - ea: 0x141BCA9A0
+        base: Client::Game::InstanceContent::InstanceContentGuildOrderDirector
+    funcs:
+      0x141495690: ctor
+  Client::Game::InstanceContent::InstanceContentGuildOrder006: # Stinging Back
+    vtbls:
+      - ea: 0x141BCB5B8
+        base: Client::Game::InstanceContent::InstanceContentGuildOrderDirector
+    funcs:
+      0x1414956D0: ctor
+  Client::Game::InstanceContent::InstanceContentGuildOrder007: # All's Well that Ends in the Well
+    vtbls:
+      - ea: 0x141BCC1D0
+        base: Client::Game::InstanceContent::InstanceContentGuildOrderDirector
+    funcs:
+      0x141495710: ctor
+  Client::Game::InstanceContent::InstanceContentGuildOrder008: # Flicking Sticks and Taking Names
+    vtbls:
+      - ea: 0x141BCCDE8
+        base: Client::Game::InstanceContent::InstanceContentGuildOrderDirector
+    funcs:
+      0x141495750: ctor
+  Client::Game::InstanceContent::InstanceContentGuildOrder009: # More than a Feeler
+    vtbls:
+      - ea: 0x141BCDA00
+        base: Client::Game::InstanceContent::InstanceContentGuildOrderDirector
+    funcs:
+      0x14147F6C0: ctor
+  Client::Game::InstanceContent::InstanceContentGuildOrder010: # Annoy the Void
+    vtbls:
+      - ea: 0x141BCE618
+        base: Client::Game::InstanceContent::InstanceContentGuildOrderDirector
+    funcs:
+      0x141495790: ctor
+  Client::Game::InstanceContent::InstanceContentGuildOrder011: # Shadow and Claw
+    vtbls:
+      - ea: 0x141BCF230
+        base: Client::Game::InstanceContent::InstanceContentGuildOrderDirector
+    funcs:
+      0x1414957E0: ctor
+  Client::Game::InstanceContent::InstanceContentGuildOrder012: # Long Live the Queen
+    vtbls:
+      - ea: 0x141BCFE48
+        base: Client::Game::InstanceContent::InstanceContentGuildOrderDirector
+    funcs:
+      0x141495830: ctor
+  Client::Game::InstanceContent::InstanceContentGuildOrder013: # Ward Up
+    vtbls:
+      - ea: 0x141BD0A60
+        base: Client::Game::InstanceContent::InstanceContentGuildOrderDirector
+    funcs:
+      0x141495880: ctor
+  Client::Game::InstanceContent::InstanceContentGuildOrder014: # Solemn Trinity
+    vtbls:
+      - ea: 0x141BD1678
+        base: Client::Game::InstanceContent::InstanceContentGuildOrderDirector
+    funcs:
+      0x1414958D0: ctor
   Client::Game::InstanceContent::PublicContentDirector:
     vtbls:
       - ea: 0x141C30028
