@@ -8590,6 +8590,12 @@ classes:
         base: Client::Game::InstanceContent::InstanceContentDirector
     funcs:
       0x141456030: ctor
+  Client::Game::InstanceContent::InstanceContentTripleTriad: # Triple Triad Open Tournament / Triple Triad Invitational Parlor
+    vtbls:
+      - ea: 0x141B6CFF8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141457FC0: ctor
   Client::Game::InstanceContent::PublicContentDirector:
     vtbls:
       - ea: 0x141C30028
