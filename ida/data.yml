@@ -8596,6 +8596,24 @@ classes:
         base: Client::Game::InstanceContent::InstanceContentDirector
     funcs:
       0x141457FC0: ctor
+  Client::Game::InstanceContent::InstanceContentVariantDungeon1: # The Sil'dihn Subterrane
+    vtbls:
+      - ea: 0x141B8E248
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414615F0: ctor
+  Client::Game::InstanceContent::InstanceContentVariantDungeon2: # Mount Rokkon
+    vtbls:
+      - ea: 0x141B8D650
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141461170: ctor
+  Client::Game::InstanceContent::InstanceContentVariantDungeon3: # Aloalo Island
+    vtbls:
+      - ea: 0x141B8EE50
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141461750: ctor
   Client::Game::InstanceContent::PublicContentDirector:
     vtbls:
       - ea: 0x141C30028
