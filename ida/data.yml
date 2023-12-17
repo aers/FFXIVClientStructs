@@ -8614,6 +8614,12 @@ classes:
         base: Client::Game::InstanceContent::InstanceContentDirector
     funcs:
       0x141461750: ctor
+  Client::Game::InstanceContent::InstanceContentCriterionDungeon:
+    vtbls:
+      - ea: 0x141B8FA48
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141461A30: ctor
   Client::Game::InstanceContent::PublicContentDirector:
     vtbls:
       - ea: 0x141C30028
