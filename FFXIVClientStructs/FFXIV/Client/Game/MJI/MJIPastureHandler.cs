@@ -104,7 +104,7 @@ public unsafe struct MJIAnimal {
     /// <summary>
     /// 0 if not under care, otherwise Item row id of used food.
     /// </summary>
-    [FieldOffset(0x2A)] public uint AutoFoodItemId;
+    [FieldOffset(0x2C)] public uint AutoFoodItemId;
 
     /// <summary>
     /// Number of leavings of each type automatically gathered by a mammet that are ready for collection.
