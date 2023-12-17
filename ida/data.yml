@@ -8308,6 +8308,216 @@ classes:
         base: Client::Game::InstanceContent::InstanceContentFrontlineDirector
     funcs:
       0x141454870: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattle:
+    vtbls:
+      - ea: 0x141BA9A18
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141478FE0: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattleASpectacleForTheAges: # A Spectacle for the Ages
+    vtbls:
+      - ea: 0x141BED2B0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141489DB0: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattleABloodyReunion: # A Bloody Reunion
+    vtbls:
+      - ea: 0x141BEDEB8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141489E60: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattleOneLifeForOneWorld: # One Life for One World
+    vtbls:
+      - ea: 0x141BEEAC0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141489F00: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattleCarteneauFlatsHeliodrome: # The Carteneau Flats: Heliodrome
+    vtbls:
+      - ea: 0x141BEF6C8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141489FB0: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattleItProbablyATrap: # It's Probably a Trap
+    vtbls:
+      - ea: 0x141C01FC8
+        base: Client::Game::InstanceContent::InstanceContentQuestBattle
+    funcs:
+      0x1414A6970: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattleInThalName: # In Thal's Name
+    vtbls:
+      - ea: 0x141C09948
+        base: Client::Game::InstanceContent::InstanceContentQuestBattle
+    funcs:
+      0x1414A6ED0: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattleWithHeartAndSteel: # With Heart and Steel
+    vtbls:
+      - ea: 0x141C04488
+        base: Client::Game::InstanceContent::InstanceContentQuestBattle
+    funcs:
+      0x1414A6B30: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattleNaadam: # Naadam
+    vtbls:
+      - ea: 0x141C02BD0
+        base: Client::Game::InstanceContent::InstanceContentQuestBattle
+    funcs:
+      0x1414A6A00: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattleBloodOnTheDeck: # Blood on the Deck
+    vtbls:
+      - ea: 0x141C050B0
+        base: Client::Game::InstanceContent::InstanceContentQuestBattle
+    funcs:
+      0x1414A6BF0: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattleFaceOfTrueEvil: # The Face of True Evil
+    vtbls:
+      - ea: 0x141C05CB8
+        base: Client::Game::InstanceContent::InstanceContentQuestBattle
+    funcs:
+      0x1414A6C50: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattleMatsubaMayhem: # Matsuba Mayhem
+    vtbls:
+      - ea: 0x141C068C0
+        base: Client::Game::InstanceContent::InstanceContentQuestBattle
+    funcs:
+      0x1414A6CB0: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattleBattleOnBekko: # The Battle on Bekko
+    vtbls:
+      - ea: 0x141C074C8
+        base: Client::Game::InstanceContent::InstanceContentQuestBattle
+    funcs:
+      0x1414A6D10: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattleCuriousGorgeMeetsHisMatch: # Curious Gorge Meets His Match
+    vtbls:
+      - ea: 0x141C080D0
+        base: Client::Game::InstanceContent::InstanceContentQuestBattle
+    funcs:
+      0x1414A6D70: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattleOurUnsungHeroes: # Our Unsung Heroes
+    vtbls:
+      - ea: 0x141C08CD8
+        base: Client::Game::InstanceContent::InstanceContentQuestBattle
+    funcs:
+      0x1414A6E00: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattleHeartOfTheProblem: # The Heart of the Problem
+    vtbls:
+      - ea: 0x141C0B158
+        base: Client::Game::InstanceContent::InstanceContentQuestBattle
+    funcs:
+      0x1414A6FF0: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattleDarkAsTheNightSky: # Dark as the Night Sky
+    vtbls:
+      - ea: 0x141C0BD60
+        base: Client::Game::InstanceContent::InstanceContentQuestBattle
+    funcs:
+      0x1414A7080: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattleResonant: # The Resonant
+    vtbls:
+      - ea: 0x141C03870
+        base: Client::Game::InstanceContent::InstanceContentQuestBattle
+    funcs:
+      0x1414A6A80: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattleRaisingTheSword: # Raising the Sword
+    vtbls:
+      - ea: 0x141C0A550
+        base: Client::Game::InstanceContent::InstanceContentQuestBattle
+    funcs:
+      0x1414A6F60: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattleOrphansAndTheBrokenBlade: # The Orphans and the Broken Blade
+    vtbls:
+      - ea: 0x141C0D570
+        base: Client::Game::InstanceContent::InstanceContentQuestBattle
+    funcs:
+      0x1414A71A0: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattleOurCompromise: # Our Compromise
+    vtbls:
+      - ea: 0x141C0E178
+        base: Client::Game::InstanceContent::InstanceContentQuestBattle
+    funcs:
+      0x1414A7230: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattleDragonSound: # Dragon Sound
+    vtbls:
+      - ea: 0x141C0C968
+        base: Client::Game::InstanceContent::InstanceContentQuestBattle
+    funcs:
+      0x1414A7110: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattleWhenClansCollide: # When Clans Collide
+    vtbls:
+      - ea: 0x141C0ED80
+        base: Client::Game::InstanceContent::InstanceContentQuestBattle
+    funcs:
+      0x1414A72C0: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattleInterdimensionalRift: # Interdimensional Rift
+    vtbls:
+      - ea: 0x141C0F988
+        base: Client::Game::InstanceContent::InstanceContentQuestBattle
+    funcs:
+      0x1414A7350: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattleReturnOfTheBull: # Return of the Bull
+    vtbls:
+      - ea: 0x141C105B0
+        base: Client::Game::InstanceContent::InstanceContentQuestBattle
+    funcs:
+      0x1414A7420: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattleEmissaryOfTheDawn: # Emissary of the Dawn
+    vtbls:
+      - ea: 0x141C111B8
+        base: Client::Game::InstanceContent::InstanceContentQuestBattle
+    funcs:
+      0x1414A74B0: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattleWillOfTheMoon: # The Will of the Moon
+    vtbls:
+      - ea: 0x141C11DC0
+        base: Client::Game::InstanceContent::InstanceContentQuestBattle
+    funcs:
+      0x1414A7540: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattleMessengerOfTheWinds: # Messenger of the Winds
+    vtbls:
+      - ea: 0x141C129C8
+        base: Client::Game::InstanceContent::InstanceContentQuestBattle
+    funcs:
+      0x1414A75D0: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattleARequiemForHeroes: # A Requiem for Heroes
+    vtbls:
+      - ea: 0x141C135D0
+        base: Client::Game::InstanceContent::InstanceContentQuestBattle
+    funcs:
+      0x1414A7700: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattleHardenedHeart: # The Hardened Heart
+    vtbls:
+      - ea: 0x141B64B18
+        base: Client::Game::InstanceContent::InstanceContentQuestBattle
+    funcs:
+      0x141454640: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattleComingClean: # Coming Clean
+    vtbls:
+      - ea: 0x141B66328
+        base: Client::Game::InstanceContent::InstanceContentQuestBattle
+    funcs:
+      0x141454770: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattleLegendOfTheNotSoHiddenTemple: # Legend of the Not-so-hidden Temple
+    vtbls:
+      - ea: 0x141B65720
+        base: Client::Game::InstanceContent::InstanceContentQuestBattle
+    funcs:
+      0x1414546A0: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattleAsTheHeartBids: # As the Heart Bids
+    vtbls:
+      - ea: 0x141B66F30
+        base: Client::Game::InstanceContent::InstanceContentQuestBattle
+    funcs:
+      0x1414547C0: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattleSleepNowInSapphire: # Sleep Now in Sapphire
+    vtbls:
+      - ea: 0x141B67B38
+        base: Client::Game::InstanceContent::InstanceContentQuestBattle
+    funcs:
+      0x141454820: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattleInFromTheCold: # In from the Cold
+    vtbls:
+      - ea: 0x141B83990
+        base: Client::Game::InstanceContent::InstanceContentQuestBattle
+    funcs:
+      0x14145C930: ctor
   Client::Game::InstanceContent::PublicContentDirector:
     vtbls:
       - ea: 0x141C30028
