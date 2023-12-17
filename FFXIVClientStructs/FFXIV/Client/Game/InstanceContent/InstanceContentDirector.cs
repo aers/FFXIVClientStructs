@@ -13,9 +13,22 @@ public unsafe struct InstanceContentDirector {
 public enum InstanceContentType : byte {
     Raid = 1,
     Dungeon = 2,
-    DeepDungeon = 9,
+    GuildOrder = 3, // Guildhests
     Trial = 4,
-    BeginnerTraining = 8,
+    CrystallineConflict = 5,
     Frontlines = 6,
-    OceanFishing = 16
+    QuestBattle = 7,
+    BeginnerTraining = 8,
+    DeepDungeon = 9,
+    TreasureHuntDungeon = 10,
+    SeasonalDungeon = 11,
+    RivalWing = 12,
+    MaskedCarnivale = 13,
+    Mahjong = 14,
+    GoldSaucer = 15, // only used for Air Force One in Gold Saucer
+    OceanFishing = 16,
+    UnrealTrial = 17,
+    TripleTriad = 18,
+    VariantDungeon = 19,
+    CriterionDungeon = 20
 }
