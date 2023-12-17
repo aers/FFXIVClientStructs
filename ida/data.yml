@@ -8284,6 +8284,30 @@ classes:
         base: Client::Game::InstanceContent::InstanceContentDirector
     funcs:
       0x141455C30: ctor
+  Client::Game::InstanceContent::InstanceContentFrontline01: # The Borderland Ruins (Secure) (unconfirmed)
+    vtbls:
+      - ea: 0x141BD2EC8
+        base: Client::Game::InstanceContent::InstanceContentFrontlineDirector
+    funcs:
+      0x141483140: ctor
+  Client::Game::InstanceContent::InstanceContentFrontline02: # Seal Rock (Seize) (unconfirmed)
+    vtbls:
+      - ea: 0x141BD3B10
+        base: Client::Game::InstanceContent::InstanceContentFrontlineDirector
+    funcs:
+      0x141485500: ctor
+  Client::Game::InstanceContent::InstanceContentFrontline03: # The Fields of Glory (Shatter)
+    vtbls:
+      - ea: 0x141BD4748
+        base: Client::Game::InstanceContent::InstanceContentFrontlineDirector
+    funcs:
+      0x141486CA0: ctor
+  Client::Game::InstanceContent::InstanceContentFrontline04: # Onsal Hakair (Danshig Naadam)
+    vtbls:
+      - ea: 0x141B68750
+        base: Client::Game::InstanceContent::InstanceContentFrontlineDirector
+    funcs:
+      0x141454870: ctor
   Client::Game::InstanceContent::PublicContentDirector:
     vtbls:
       - ea: 0x141C30028
