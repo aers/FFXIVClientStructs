@@ -7702,6 +7702,126 @@ classes:
         base: Client::Game::InstanceContent::InstanceContentDirector
     funcs:
       0x141488720: ctor
+  Client::Game::InstanceContent::InstanceContentRaidAlexanderFather001: # Alexander - The Fist of the Father
+    vtbls:
+      - ea: 0x141BDB340
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141488950: ctor
+  Client::Game::InstanceContent::InstanceContentRaidAlexanderFather002: # Alexander - The Cuff of the Father
+    vtbls:
+      - ea: 0x141BDCB30
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141488A30: ctor
+  Client::Game::InstanceContent::InstanceContentRaidAlexanderFather003: # Alexander - The Arm of the Father
+    vtbls:
+      - ea: 0x141BDE320
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141488B10: ctor
+  Client::Game::InstanceContent::InstanceContentRaidAlexanderFather004: # Alexander - The Burden of the Father / Alexander - The Burden of the Father (Savage)
+    vtbls:
+      - ea: 0x141BDFB10
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141488C20: ctor
+  Client::Game::InstanceContent::InstanceContentRaidAlexanderSon001: # Alexander - The Fist of the Son
+    vtbls:
+      - ea: 0x141BE2AF0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141488F20: ctor
+  Client::Game::InstanceContent::InstanceContentRaidAlexanderSon002: # Alexander - The Cuff of the Son
+    vtbls:
+      - ea: 0x141BE42E0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141489000: ctor
+  Client::Game::InstanceContent::InstanceContentRaidAlexanderSon003: # Alexander - The Arm of the Son
+    vtbls:
+      - ea: 0x141BE5AD0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414890E0: ctor
+  Client::Game::InstanceContent::InstanceContentRaidAlexanderSon004: # Alexander - The Burden of the Son / Alexander - The Burden of the Son (Savage)
+    vtbls:
+      - ea: 0x141BE72C0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414891C0: ctor
+  Client::Game::InstanceContent::InstanceContentRaidAlexanderCreator001: # Alexander - The Eyes of the Creator / Alexander - The Eyes of the Creator (Savage)
+    vtbls:
+      - ea: 0x141BE8AB0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414892B0: ctor
+  Client::Game::InstanceContent::InstanceContentRaidAlexanderCreator002: # Alexander - The Breath of the Creator
+    vtbls:
+      - ea: 0x141BE96A8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141489310: ctor
+  Client::Game::InstanceContent::InstanceContentRaidAlexanderCreator003: # Alexander - The Heart of the Creator
+    vtbls:
+      - ea: 0x141BEAE98
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141489710: ctor
+  Client::Game::InstanceContent::InstanceContentRaidAlexanderCreator004: # Alexander - The Soul of the Creator / Alexander - The Soul of the Creator (Savage)
+    vtbls:
+      - ea: 0x141BEC6B8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141489CB0: ctor
+  Client::Game::InstanceContent::InstanceContentRaidAlexanderFather001Savage: # Alexander - The Fist of the Father (Savage)
+    vtbls:
+      - ea: 0x141BDBF38
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414889C0: ctor
+  Client::Game::InstanceContent::InstanceContentRaidAlexanderFather002Savage: # Alexander - The Cuff of the Father (Savage)
+    vtbls:
+      - ea: 0x141BDD728
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141488AA0: ctor
+  Client::Game::InstanceContent::InstanceContentRaidAlexanderFather003Savage: # Alexander - The Arm of the Father (Savage)
+    vtbls:
+      - ea: 0x141BDEF18
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141488B80: ctor
+  Client::Game::InstanceContent::InstanceContentRaidAlexanderSon001Savage: # Alexander - The Fist of the Son (Savage)
+    vtbls:
+      - ea: 0x141BE36E8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141488F90: ctor
+  Client::Game::InstanceContent::InstanceContentRaidAlexanderSon002Savage: # Alexander - The Cuff of the Son (Savage)
+    vtbls:
+      - ea: 0x141BE4ED8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141489070: ctor
+  Client::Game::InstanceContent::InstanceContentRaidAlexanderSon003Savage: # Alexander - The Arm of the Son (Savage)
+    vtbls:
+      - ea: 0x141BE66C8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141489140: ctor
+  Client::Game::InstanceContent::InstanceContentRaidAlexanderCreator002Savage: # Alexander - The Breath of the Creator (Savage)
+    vtbls:
+      - ea: 0x141BEA2A0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414893D0: ctor
+  Client::Game::InstanceContent::InstanceContentRaidAlexanderCreator003Savage: # Alexander - The Heart of the Creator (Savage)
+    vtbls:
+      - ea: 0x141BEBAA8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141489B10: ctor
   Client::Game::InstanceContent::InstanceContentDungeonSastasha: # Sastasha
     vtbls:
       - ea: 0x141B70F90
