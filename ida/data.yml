@@ -7720,6 +7720,24 @@ classes:
         base: Client::Game::InstanceContent::InstanceContentDirector
     funcs:
       0x141488720: ctor
+  Client::Game::InstanceContent::InstanceContentRaidVoidArk: # The Void Ark
+    vtbls:
+      - ea: 0x141BE0708
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141488C70: ctor
+  Client::Game::InstanceContent::InstanceContentRaidWeepingCityOfMhach: # The Weeping City of Mhach
+    vtbls:
+      - ea: 0x141BE1300
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141488E00: ctor
+  Client::Game::InstanceContent::InstanceContentRaidDunScaith: # Dun Scaith
+    vtbls:
+      - ea: 0x141BE1EF8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141488EB0: ctor
   Client::Game::InstanceContent::InstanceContentRaidAlexanderFather001: # Alexander - The Fist of the Father
     vtbls:
       - ea: 0x141BDB340
