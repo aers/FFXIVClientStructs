@@ -7600,6 +7600,24 @@ classes:
         base: Client::Game::InstanceContent::InstanceContentPvpDirector
     funcs:
       0x1414A95C0: ctor
+  Client::Game::InstanceContent::InstanceContentRaidCrystalTower001: # The Labyrinth of the Ancients
+    vtbls:
+      - ea: 0x141BBC568
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14147ACA0: ctor
+  Client::Game::InstanceContent::InstanceContentRaidCrystalTower002: # Syrcus Tower
+    vtbls:
+      - ea: 0x141BBD160
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14147AD90: ctor
+  Client::Game::InstanceContent::InstanceContentRaidWorldOfDarkness: # The World of Darkness
+    vtbls:
+      - ea: 0x141BBDD58
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14147AF90: ctor
   Client::Game::InstanceContent::InstanceContentRaidSeaBahamut001: # The Binding Coil of Bahamut - Turn 1
     vtbls:
       - ea: 0x141BBE950
