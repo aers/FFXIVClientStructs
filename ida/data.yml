@@ -7948,6 +7948,18 @@ classes:
         base: Client::Game::InstanceContent::InstanceContentDirector
     funcs:
       0x1414AB6A0: ctor
+  Client::Game::InstanceContent::InstanceContentRaidUnendingCoilOfBahamut: # The Unending Coil of Bahamut (Ultimate)
+    vtbls:
+      - ea: 0x141C1DEC0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414A7EB0: ctor
+  Client::Game::InstanceContent::InstanceContentRaidWeaponsRefrain: # The Weapon's Refrain (Ultimate)
+    vtbls:
+      - ea: 0x141C1EAB8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414A7F30: ctor
   Client::Game::InstanceContent::InstanceContentRaidSeatOfSacrifice: # The Seat of Sacrifice / The Seat of Sacrifice (Extreme)
     vtbls:
       - ea: 0x141B69FE8
