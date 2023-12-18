@@ -7600,6 +7600,108 @@ classes:
         base: Client::Game::InstanceContent::InstanceContentPvpDirector
     funcs:
       0x1414A95C0: ctor
+  Client::Game::InstanceContent::InstanceContentRaidSeaBahamut001: # The Binding Coil of Bahamut - Turn 1
+    vtbls:
+      - ea: 0x141BBE950
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14147B130: ctor
+  Client::Game::InstanceContent::InstanceContentRaidSeaBahamut002: # The Binding Coil of Bahamut - Turn 2
+    vtbls:
+      - ea: 0x141BBF548
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14147B1A0: ctor
+  Client::Game::InstanceContent::InstanceContentRaidSeaBahamut003: # The Binding Coil of Bahamut - Turn 3
+    vtbls:
+      - ea: 0x141BC0140
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14147B240: ctor
+  Client::Game::InstanceContent::InstanceContentRaidSeaBahamut004: # The Binding Coil of Bahamut - Turn 4
+    vtbls:
+      - ea: 0x141BC0D38
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14147B2C0: ctor
+  Client::Game::InstanceContent::InstanceContentRaidSeaBahamut005: # The Binding Coil of Bahamut - Turn 5
+    vtbls:
+      - ea: 0x141BC1930
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14147B310: ctor
+  Client::Game::InstanceContent::InstanceContentRaidForestBahamut001: # The Second Coil of Bahamut - Turn 1
+    vtbls:
+      - ea: 0x141BC2528
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14147B3A0: ctor
+  Client::Game::InstanceContent::InstanceContentRaidForestBahamut002: # The Second Coil of Bahamut - Turn 2
+    vtbls:
+      - ea: 0x141BC3120
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14147B440: ctor
+  Client::Game::InstanceContent::InstanceContentRaidForestBahamut003: # The Second Coil of Bahamut - Turn 3
+    vtbls:
+      - ea: 0x141BC3D18
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14147B4A0: ctor
+  Client::Game::InstanceContent::InstanceContentRaidForestBahamut004: # The Second Coil of Bahamut - Turn 4
+    vtbls:
+      - ea: 0x141BC4910
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14147B520: ctor
+  Client::Game::InstanceContent::InstanceContentRaidFinalBahamut001: # The Final Coil of Bahamut - Turn 1
+    vtbls:
+      - ea: 0x141BD8360
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141488790: ctor
+  Client::Game::InstanceContent::InstanceContentRaidFinalBahamut002: # The Final Coil of Bahamut - Turn 2
+    vtbls:
+      - ea: 0x141BD8F58
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141488800: ctor
+  Client::Game::InstanceContent::InstanceContentRaidFinalBahamut003: # The Final Coil of Bahamut - Turn 3
+    vtbls:
+      - ea: 0x141BD9B50
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141488860: ctor
+  Client::Game::InstanceContent::InstanceContentRaidFinalBahamut004: # The Final Coil of Bahamut - Turn 4
+    vtbls:
+      - ea: 0x141BDA748
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414888E0: ctor
+  Client::Game::InstanceContent::InstanceContentRaidForestBahamut001Hard: # The Second Coil of Bahamut (Savage) - Turn 1
+    vtbls:
+      - ea: 0x141BD5380
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414885A0: ctor
+  Client::Game::InstanceContent::InstanceContentRaidForestBahamut002Hard: # The Second Coil of Bahamut (Savage) - Turn 2
+    vtbls:
+      - ea: 0x141BD5F78
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141488640: ctor
+  Client::Game::InstanceContent::InstanceContentRaidForestBahamut003Hard: # The Second Coil of Bahamut (Savage) - Turn 3
+    vtbls:
+      - ea: 0x141BD6B70
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414886A0: ctor
+  Client::Game::InstanceContent::InstanceContentRaidForestBahamut004Hard: # The Second Coil of Bahamut (Savage) - Turn 4
+    vtbls:
+      - ea: 0x141BD7768
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141488720: ctor
   Client::Game::InstanceContent::InstanceContentDungeonSastasha: # Sastasha
     vtbls:
       - ea: 0x141B70F90
