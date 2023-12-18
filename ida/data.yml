@@ -7858,6 +7858,24 @@ classes:
         base: Client::Game::InstanceContent::InstanceContentDirector
     funcs:
       0x141489B10: ctor
+  Client::Game::InstanceContent::InstanceContentRaidRoyalCityOfRabanastre: # The Royal City of Rabanastre
+    vtbls:
+      - ea: 0x141C1F6F0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414A8080: ctor
+  Client::Game::InstanceContent::InstanceContentRaidRidoranaLighthouse: # The Ridorana Lighthouse
+    vtbls:
+      - ea: 0x141C20448
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414A8190: ctor
+  Client::Game::InstanceContent::InstanceContentRaidOrbonneMonastery: # The Orbonne Monastery
+    vtbls:
+      - ea: 0x141C21148
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414A8280: ctor
   Client::Game::InstanceContent::InstanceContentRaidDeltascape001: # Deltascape V1.0 / Deltascape V1.0 (Savage)
     vtbls:
       - ea: 0x141C1AEA0
