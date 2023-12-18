@@ -7972,6 +7972,12 @@ classes:
         base: Client::Game::InstanceContent::InstanceContentDirector
     funcs:
       0x141455C30: ctor
+  Client::Game::InstanceContent::InstanceContentRaidEpicOfAlexander: # The Epic of Alexander (Ultimate)
+    vtbls:
+      - ea: 0x141B693F0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141455A00: ctor
   Client::Game::InstanceContent::InstanceContentDungeonSastasha: # Sastasha
     vtbls:
       - ea: 0x141B70F90
