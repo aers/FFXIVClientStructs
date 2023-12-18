@@ -206,8 +206,10 @@ struct Client::Game::UI::MobHunt::KillCounts;
 struct Client::Game::UI::PlayerState;
 struct Client::Game::UI::PvPProfile;
 struct Client::Game::UI::RecipeNote;
+struct Client::Game::UI::RecipeNote::RecipeCrystal;
 struct Client::Game::UI::RecipeNote::RecipeData;
 struct Client::Game::UI::RecipeNote::RecipeEntry;
+struct Client::Game::UI::RecipeNote::RecipeIngredient;
 struct Client::Game::UI::RelicNote;
 struct Client::Game::UI::Revive;
 struct Component::GUI::AtkEventInterface;
@@ -338,15 +340,24 @@ struct Client::UI::ActionInfo;
 struct Client::UI::AddonActionBar;
 struct Client::UI::AddonActionBarX;
 struct Client::UI::AddonActionBarBase;
+struct StdVectorClientUIActionBarSlot;
+struct Client::UI::AddonActionBarX::Dimensions;
 struct Client::UI::AddonActionBarBase::AddonActionBarBaseVTable;
 struct Client::UI::AddonActionCross;
-struct Client::UI::AddonActionDoubleCrossBase;
-struct Client::UI::AddonActionMenu;
+struct Client::UI::AddonActionCross::ChangeSetUI;
+struct Client::UI::AddonActionCross::HelpMessage;
+struct Client::UI::AddonActionCross::SlotGroup;
+struct Client::UI::AddonActionCross::ControlGuide;
+struct Client::UI::AddonActionCrossEditor;
 struct Component::GUI::AtkUnitBase;
 struct Component::GUI::AtkEventListener;
 struct Component::GUI::AtkUldManager;
 struct StdLinkedListComponentGUIAtkUldManagerDuplicateObjectListPtr;
 struct StdLinkedList::NodeComponentGUIAtkUldManagerDuplicateObjectListPtr;
+struct Component::GUI::AtkSimpleTween;
+struct StdVectorComponentGUISimpleTweenAnimation;
+struct Client::UI::AddonActionDoubleCrossBase;
+struct Client::UI::AddonActionMenu;
 struct Client::UI::AddonAOZNotebook;
 struct Client::UI::AddonAOZNotebook::SpellbookBlock;
 struct Client::UI::AddonAOZNotebook::ActiveActions;
@@ -394,6 +405,137 @@ struct Client::UI::AddonItemDonationInfo;
 struct Client::UI::AddonItemInspectionList;
 struct Client::UI::AddonItemInspectionResult;
 struct Client::UI::AddonItemSearchResult;
+struct Client::UI::AddonJobHud;
+struct Client::UI::AddonJobHud::AddonJobHudGauge;
+struct Client::UI::AddonJobHud::AddonJobHudGaugeData;
+struct Client::UI::AddonJobHudACN0;
+struct Client::UI::AddonJobHudACN0::AetherflowACNGaugeData;
+struct Client::UI::AddonJobHudACN0::AetherflowACNGauge;
+struct Client::UI::AddonJobHudACN0::AetherflowACNGauge::AetherflowACNStack;
+struct Client::UI::AddonJobHudACN0::AetherflowACNGaugeSimple;
+struct Client::UI::AddonJobHudACN0::AetherflowACNGaugeSimple::AetherflowACNStackSimple;
+struct Client::UI::AddonJobHudAST0;
+struct Client::UI::AddonJobHudAST0::ArcanaGaugeData;
+struct Client::UI::AddonJobHudAST0::ArcanaGauge;
+struct Client::UI::AddonJobHudAST0::Astrosign;
+struct Client::UI::AddonJobHudAST0::ArcanaGaugeSimple;
+struct Client::UI::AddonJobHudBLM0;
+struct Client::UI::AddonJobHudBLM0::ElementalGaugeData;
+struct Client::UI::AddonJobHudBLM0::ElementalGauge;
+struct Client::UI::AddonJobHudBLM0::ElementalGauge::UmbralHeart;
+struct Client::UI::AddonJobHudBLM0::ElementalGauge::PolyglotStack;
+struct Client::UI::AddonJobHudBLM0::ElementalGaugeSimple;
+struct Client::UI::AddonJobHudBRD0;
+struct Client::UI::AddonJobHudBRD0::SongGaugeData;
+struct Client::UI::AddonJobHudBRD0::SongGauge;
+struct Client::UI::AddonJobHudBRD0::SongGaugeSimple;
+struct Client::UI::AddonJobHudDNC0;
+struct Client::UI::AddonJobHudDNC0::StepGaugeData;
+struct Client::UI::AddonJobHudDNC0::StepGauge;
+struct Client::UI::AddonJobHudDNC0::StepGaugeSimple;
+struct Client::UI::AddonJobHudDNC1;
+struct Client::UI::AddonJobHudDNC1::FeatherGaugeData;
+struct Client::UI::AddonJobHudDNC1::FeatherGauge;
+struct Client::UI::AddonJobHudDNC1::FeatherGaugeSimple;
+struct Client::UI::AddonJobHudDRG0;
+struct Client::UI::AddonJobHudDRG0::DragonGaugeData;
+struct Client::UI::AddonJobHudDRG0::DragonGauge;
+struct Client::UI::AddonJobHudDRG0::DragonGaugeSimple;
+struct Client::UI::AddonJobHudDRK0;
+struct Client::UI::AddonJobHudDRK0::BloodGaugeData;
+struct Client::UI::AddonJobHudDRK0::BloodGauge;
+struct Client::UI::AddonJobHudDRK0::BloodGaugeSimple;
+struct Client::UI::AddonJobHudDRK1;
+struct Client::UI::AddonJobHudDRK1::DarksideGaugeData;
+struct Client::UI::AddonJobHudDRK1::DarksideGauge;
+struct Client::UI::AddonJobHudDRK1::DarksideGaugeSimple;
+struct Client::UI::AddonJobHudGFF0;
+struct Client::UI::AddonJobHudGFF0::EukrasiaGaugeData;
+struct Client::UI::AddonJobHudGFF0::EukrasiaGauge;
+struct Client::UI::AddonJobHudGFF0::EukrasiaGaugeSimple;
+struct Client::UI::AddonJobHudGFF1;
+struct Client::UI::AddonJobHudGFF1::AddersgallGaugeData;
+struct Client::UI::AddonJobHudGFF1::AddersgallGauge;
+struct Client::UI::AddonJobHudGFF1::AddersgallGaugeSimple;
+struct Client::UI::AddonJobHudGNB0;
+struct Client::UI::AddonJobHudGNB0::PowderGaugeData;
+struct Client::UI::AddonJobHudGNB0::PowderGauge;
+struct Client::UI::AddonJobHudGNB0::PowderGaugeSimple;
+struct Client::UI::AddonJobHudMCH0;
+struct Client::UI::AddonJobHudMCH0::HeatGaugeData;
+struct Client::UI::AddonJobHudMCH0::HeatGauge;
+struct Client::UI::AddonJobHudMCH0::HeatGaugeSimple;
+struct Client::UI::AddonJobHudMNK0;
+struct Client::UI::AddonJobHudMNK0::MastersGaugeData;
+struct Client::UI::AddonJobHudMNK0::MastersGauge;
+struct Client::UI::AddonJobHudMNK0::MastersGaugeSimple;
+struct Client::UI::AddonJobHudMNK1;
+struct Client::UI::AddonJobHudMNK1::ChakraGaugeData;
+struct Client::UI::AddonJobHudMNK1::ChakraGauge;
+struct Client::UI::AddonJobHudMNK1::ChakraGaugeSimple;
+struct Client::UI::AddonJobHudNIN0;
+struct Client::UI::AddonJobHudNIN0::NinkiGaugeData;
+struct Client::UI::AddonJobHudNIN0::NinkiGauge;
+struct Client::UI::AddonJobHudNIN0::NinkiGaugeSimple;
+struct Client::UI::AddonJobHudNIN1;
+struct Client::UI::AddonJobHudNIN1::HutonGaugeData;
+struct Client::UI::AddonJobHudNIN1::HutonGauge;
+struct Client::UI::AddonJobHudNIN1::HutonGaugeSimple;
+struct Client::UI::AddonJobHudPLD0;
+struct Client::UI::AddonJobHudPLD0::OathGaugeData;
+struct Client::UI::AddonJobHudPLD0::OathGauge;
+struct Client::UI::AddonJobHudPLD0::OathGaugeSimple;
+struct Client::UI::AddonJobHudRDM0;
+struct Client::UI::AddonJobHudRDM0::BalanceGaugeData;
+struct Client::UI::AddonJobHudRDM0::BalanceGauge;
+struct Client::UI::AddonJobHudRDM0::BalanceGauge::ManaBar;
+struct Client::UI::AddonJobHudRDM0::BalanceGaugeSimple;
+struct Client::UI::AddonJobHudRRP0;
+struct Client::UI::AddonJobHudRRP0::SoulGaugeData;
+struct Client::UI::AddonJobHudRRP0::SoulGauge;
+struct Client::UI::AddonJobHudRRP0::SoulGaugeSimple;
+struct Client::UI::AddonJobHudRRP1;
+struct Client::UI::AddonJobHudRRP1::DeathGaugeData;
+struct Client::UI::AddonJobHudRRP1::DeathGauge;
+struct Client::UI::AddonJobHudRRP1::DeathGauge::ShroudStack;
+struct Client::UI::AddonJobHudRRP1::DeathGaugeSimple;
+struct Client::UI::AddonJobHudRRP1::DeathGaugeSimple::ShroudStackSimple;
+struct Client::UI::AddonJobHudSAM0;
+struct Client::UI::AddonJobHudSAM0::KenkiGaugeData;
+struct Client::UI::AddonJobHudSAM0::KenkiGauge;
+struct Client::UI::AddonJobHudSAM0::KenkiGaugeSimple;
+struct Client::UI::AddonJobHudSAM1;
+struct Client::UI::AddonJobHudSAM1::SenGaugeData;
+struct Client::UI::AddonJobHudSAM1::SenGauge;
+struct Client::UI::AddonJobHudSAM1::SenGaugeSimple;
+struct Client::UI::AddonJobHudSCH0;
+struct Client::UI::AddonJobHudSCH0::FaerieGaugeData;
+struct Client::UI::AddonJobHudSCH0::FaerieGauge;
+struct Client::UI::AddonJobHudSCH0::FaerieGaugeSimple;
+struct Client::UI::AddonJobHudSMN0;
+struct Client::UI::AddonJobHudSMN0::AetherflowSMNGaugeData;
+struct Client::UI::AddonJobHudSMN0::AetherflowSMNGauge;
+struct Client::UI::AddonJobHudSMN0::AetherflowSMNGaugeSimple;
+struct Client::UI::AddonJobHudSMN1;
+struct Client::UI::AddonJobHudSMN1::TranceGaugeData;
+struct Client::UI::AddonJobHudSMN1::TranceGauge;
+struct Client::UI::AddonJobHudSMN1::TranceGauge::EgiGauge;
+struct Client::UI::AddonJobHudSMN1::TranceGaugeSimple;
+struct Client::UI::AddonJobHudSMN1::TranceGaugeSimple::EgiGaugeSimple;
+struct Client::UI::AddonJobHudWAR0;
+struct Client::UI::AddonJobHudWAR0::BeastGaugeData;
+struct Client::UI::AddonJobHudWAR0::BeastGauge;
+struct Client::UI::AddonJobHudWAR0::BeastGaugeSimple;
+struct Client::UI::AddonJobHudWHM0;
+struct Client::UI::AddonJobHudWHM0::HealingGaugeData;
+struct Client::UI::AddonJobHudWHM0::HealingGauge;
+struct Client::UI::AddonJobHudWHM0::HealingGaugeSimple;
+struct Component::GUI::AtkComponentGaugeBar;
+struct Component::GUI::AtkComponentBase;
+struct Component::GUI::AtkComponentGaugeBar::GaugeValueTransitionData;
+struct Component::GUI::AtkComponentGaugeBar::GaugeValueTransition;
+struct Component::GUI::AtkComponentGaugeBar::GaugeValue;
+struct Component::GUI::AtkComponentGaugeBar::GaugeFill;
 struct Client::UI::AddonJournalDetail;
 struct Client::UI::AddonJournalResult;
 struct Client::UI::AddonLookingForGroupDetail;
@@ -739,12 +881,14 @@ struct Client::UI::Misc::CharaView::CharaViewVTable;
 struct Client::UI::Misc::CharaViewPortrait::CharaViewPortraitVTable;
 struct Client::UI::Misc::ConfigModule;
 struct Client::UI::Misc::ConfigModule::Option;
+struct Client::UI::Misc::DutyActionSlot;
+struct Client::UI::Misc::HotBarSlot;
 struct Client::UI::Misc::ExportedPortraitData;
 struct Client::UI::Misc::FieldMarkerModule;
 struct Client::UI::Misc::FieldMarkerPreset;
 struct Client::UI::Misc::GamePresetPoint;
 struct Client::UI::Misc::HotBar;
-struct Client::UI::Misc::HotBarSlot;
+struct Client::UI::Misc::HotBarUiIntermediate;
 struct Client::UI::Misc::InputTimerModule;
 struct Client::UI::Misc::InputTimerModule::InputTimerData;
 struct Client::UI::Misc::ItemFinderModule;
@@ -828,6 +972,7 @@ struct Common::Configuration::ConfigProperties::FloatProperties;
 struct Common::Configuration::ConfigProperties::StringProperties;
 struct Common::Configuration::ConfigProperties::UIntProperties;
 struct Common::Lua::lua_State;
+struct Common::Math::Bounds;
 struct Common::Math::Matrix2x2;
 struct Common::Math::Vector2;
 struct Component::Excel::ExcelModule;
@@ -843,14 +988,12 @@ struct Component::GUI::AtkArrayDataHolder;
 struct Component::GUI::AtkCollisionNode;
 struct Component::GUI::AtkResNode;
 struct Component::GUI::AtkEventManager;
-struct Component::GUI::AtkComponentBase;
 struct Component::GUI::AtkComponentBase::AtkComponentBaseVTable;
 struct Component::GUI::AtkComponentButton;
 struct Component::GUI::AtkComponentCheckBox;
 struct Component::GUI::AtkComponentDragDrop;
 struct Component::GUI::AtkDragDropInterface;
 struct Component::GUI::AtkComponentDropDownList;
-struct Component::GUI::AtkComponentGaugeBar;
 struct Component::GUI::AtkComponentGuildLeveCard;
 struct Component::GUI::AtkComponentHoldButton;
 struct Component::GUI::AtkComponentIcon;
@@ -895,6 +1038,7 @@ struct StdLinkedList::NodeComponentGUIAtkTextureResourcePtr;
 struct Component::GUI::AtkModule::AtkModuleVTable;
 struct Component::GUI::AtkNineGridNode;
 struct Component::GUI::AtkResNode::AtkResNodeVTable;
+struct Component::GUI::AtkSimpleTween::AtkSimpleTweenVTable;
 struct Component::GUI::AtkStage;
 struct Component::GUI::AtkTooltipManager;
 struct StdMapComponentGUIAtkResNodePtrComponentGUIAtkTooltipManagerAtkTooltipInfoPtr;
@@ -952,6 +1096,8 @@ struct Component::GUI::AtkUnitList;
 struct Component::GUI::AtkUnitManager;
 struct Component::GUI::ExtendArrayData;
 struct Component::GUI::NumberArrayData;
+struct Component::GUI::SimpleTweenAnimation;
+struct Component::GUI::SimpleTweenValue;
 struct Component::GUI::StringArrayData;
 struct Component::GUI::ULD::AtkUldComponentDataTab;
 struct Component::Text::TextModule::TextModuleVTable;
@@ -1067,7 +1213,7 @@ enum Client::Game::Character::CharacterSetup::CopyFlags: unsigned __int32
     Name = 4096,
     Unk002000 = 8192,
     Unk004000 = 16384,
-    Unk008000 = 32768,
+    LastAnimation = 32768,
     Position = 65536,
     Unk020000 = 131072,
     Unk040000 = 262144,
@@ -1466,7 +1612,8 @@ enum Client::Game::Object::ObjectKind: byte
 enum Client::Game::Object::ObjectTargetableFlags: byte
 {
     IsTargetable = 2,
-    Unk1 = 4
+    Unk1 = 4,
+    ReadyToDraw = 64
 };
 
 enum Client::Game::RetainerManager::RetainerTown: byte
@@ -3772,6 +3919,8 @@ enum Component::GUI::AtkEventType: byte
     IconTextRollOver = 56,
     IconTextRollOut = 57,
     IconTextClick = 58,
+    TweenProgress = 64,
+    TweenComplete = 65,
     WindowRollOver = 67,
     WindowRollOut = 68,
     WindowChangeScale = 69
@@ -3934,6 +4083,26 @@ enum Component::GUI::NodeType: unsigned __int16
     Counter = 5,
     Collision = 8,
     UnknownNode10 = 10
+};
+
+enum Component::GUI::SimpleTweenState: unsigned __int32
+{
+    None = 0,
+    Tweening = 1,
+    Complete = 2
+};
+
+enum Component::GUI::SimpleTweenValueType: unsigned __int32
+{
+    X = 0,
+    Y = 1,
+    ScaleX = 2,
+    ScaleY = 3,
+    Scale = 4,
+    Alpha = 5,
+    Width = 6,
+    Height = 7,
+    NodeText = 8
 };
 
 enum Component::GUI::TextFlags: __int32
@@ -4108,7 +4277,9 @@ __unaligned struct Client::Game::ActionTimelineDriver /* Size=0x1F0 */
     /*       */ byte _gap_0x100[0x50];
     /*       */ byte _gap_0x150[0x4];
     /* 0x154 */ float TimelineSpeeds[0xD];
-    /*       */ byte _gap_0x188[0x68];
+    /*       */ byte _gap_0x188[0x40];
+    /* 0x1C8 */ Client::Game::Character::Character* Parent;
+    /*       */ byte _gap_0x1D0[0x20];
 };
 
 __unaligned struct Client::Game::ActionTimelineManager /* Size=0x340 */
@@ -4348,12 +4519,9 @@ __unaligned struct Client::Game::Character::DrawObjectData /* Size=0x70 */
     /*      */ byte _gap_0x8[0x8];
     /* 0x10 */ void** VTable;
     /* 0x18 */ Client::Graphics::Scene::DrawObject* DrawObject;
-    /*      */ byte _gap_0x20[0x38];
-    /*      */ byte _gap_0x58[0x4];
-    /* 0x5C */ byte State;
-    /*      */ byte _gap_0x5D;
-    /*      */ byte _gap_0x5E[0x2];
-    /*      */ byte _gap_0x60[0x2];
+    /*      */ byte _gap_0x20[0x40];
+    /* 0x60 */ byte State;
+    /*      */ byte _gap_0x61;
     /* 0x62 */ unsigned __int16 Flags1;
     /* 0x64 */ byte Flags2;
     /*      */ byte _gap_0x65;
@@ -6214,7 +6382,7 @@ __unaligned struct Client::Game::Object::GameObject::GameObjectVTable /* Size=0x
     /*     */ __int64 _vf35;
     /*     */ __int64 _vf36;
     /*     */ __int64 _vf37;
-    /*     */ __int64 _vf38;
+    /* 0x130 */ void (__fastcall *SetReadyToDraw)(Client::Game::Object::GameObject* a1);
     /*     */ __int64 _vf39;
     /*     */ __int64 _vf40;
     /*     */ __int64 _vf41;
@@ -6810,7 +6978,7 @@ __unaligned struct Client::Game::UI::PlayerState /* Size=0x818 */
     /* 0x07D */ byte Tribe;
     /* 0x07E */ byte CurrentClassJobId;
     /*       */ byte _gap_0x7F;
-    /*       */ byte _gap_0x80[0x8];
+    /* 0x080 */ __int64 CurrentClassJobRow;
     /* 0x088 */ __int16 CurrentLevel;
     /* 0x08A */ __int16 ClassJobLevelArray[0x20];
     /*       */ byte _gap_0xCA[0x2];
@@ -6988,6 +7156,12 @@ __unaligned struct Client::Game::UI::RecipeNote /* Size=0x610 */
     /*       */ byte _gap_0xC0[0x550];
 };
 
+__unaligned struct Client::Game::UI::RecipeNote::RecipeCrystal /* Size=0x2 */
+{
+    /* 0x0 */ signed __int8 Id;
+    /* 0x1 */ byte Amount;
+};
+
 __unaligned struct Client::Game::UI::RecipeNote::RecipeData /* Size=0x3B0 */
 {
     /* 0x000 */ Client::Game::UI::RecipeNote::RecipeEntry* Recipes;
@@ -6995,18 +7169,59 @@ __unaligned struct Client::Game::UI::RecipeNote::RecipeData /* Size=0x3B0 */
     /* 0x3B8 */ unsigned __int16 SelectedIndex;
 };
 
+__unaligned struct Client::Game::UI::RecipeNote::RecipeIngredient /* Size=0x88 */
+{
+    /*      */ byte _gap_0x0[0x10];
+    /* 0x10 */ Client::System::String::Utf8String Name;
+    /* 0x78 */ unsigned __int32 ItemId;
+    /* 0x7C */ unsigned __int32 IconId;
+    /*      */ byte _gap_0x80[0x2];
+    /* 0x82 */ byte Amount;
+    /* 0x83 */ byte Flags;
+    /*      */ byte _gap_0x84[0x4];
+};
+
 __unaligned struct Client::Game::UI::RecipeNote::RecipeEntry /* Size=0x500 */
 {
-    /*       */ byte _gap_0x0[0x4C0];
+    /* 0x000 */ Client::Game::UI::RecipeNote::RecipeIngredient Ingredients[0x8];
+    /* 0x440 */ Client::Game::UI::RecipeNote::RecipeCrystal Crystals[0x2];
+    /*       */ byte _gap_0x444[0x4];
+    /* 0x448 */ Client::System::String::Utf8String ItemName;
+    /* 0x4B0 */ unsigned __int32 IconId;
+    /* 0x4B4 */ unsigned __int32 ItemId;
+    /* 0x4B8 */ unsigned __int32 StatusRequired;
+    /* 0x4BC */ unsigned __int32 ItemRequired;
     /*       */ byte _gap_0x4C0[0x2];
     /* 0x4C2 */ unsigned __int16 RecipeId;
-    /*       */ byte _gap_0x4C4[0x4];
-    /*       */ byte _gap_0x4C8[0x18];
-    /*       */ byte _gap_0x4E0[0x4];
+    /* 0x4C4 */ unsigned __int16 Difficulty;
+    /*       */ byte _gap_0x4C6[0x2];
+    /* 0x4C8 */ unsigned __int32 Quality;
+    /* 0x4CC */ unsigned __int16 Durability;
+    /* 0x4CE */ byte MaterialQualityFactor;
+    /*       */ byte _gap_0x4CF;
+    /* 0x4D0 */ unsigned __int16 RequiredCraftsmanship;
+    /* 0x4D2 */ unsigned __int16 RequiredControl;
+    /* 0x4D4 */ unsigned __int16 QuickSynthCraftsmanship;
+    /* 0x4D6 */ unsigned __int16 QuickSynthControl;
+    /* 0x4D8 */ unsigned __int16 SecretRecipeBook;
+    /*       */ byte _gap_0x4DA[0x2];
+    /* 0x4DC */ unsigned __int32 RequiredQuality;
+    /* 0x4E0 */ unsigned __int16 SuggestedCraftsmanship;
+    /* 0x4E2 */ unsigned __int16 ConditionsFlag;
     /*       */ byte _gap_0x4E4[0x2];
-    /*       */ byte _gap_0x4E6;
+    /* 0x4E6 */ byte AmountResult;
     /* 0x4E7 */ byte CraftType;
-    /*       */ byte _gap_0x4E8[0x18];
+    /* 0x4E8 */ byte ClassJobLevel;
+    /*       */ byte _gap_0x4E9;
+    /* 0x4EA */ byte Stars;
+    /*       */ byte _gap_0x4EB;
+    /*       */ byte _gap_0x4EC[0x2];
+    /* 0x4EE */ byte Flags;
+    /* 0x4EF */ byte Flags2;
+    /* 0x4F0 */ unsigned __int32 Number;
+    /* 0x4F4 */ unsigned __int16 RecipeLevelTableId;
+    /* 0x4F6 */ unsigned __int16 PatchNumber;
+    /*       */ byte _gap_0x4F8[0x8];
 };
 
 __unaligned struct Client::Game::UI::RelicNote /* Size=0x18 */
@@ -7734,7 +7949,8 @@ __unaligned struct Client::Graphics::Scene::CharacterBase /* Size=0x8F0 */
     /* 0x240 */ Client::Graphics::Kernel::ConstantBuffer* CharacterDataCBuffer;
     /*       */ byte _gap_0x248[0x10];
     /* 0x258 */ Client::Graphics::Kernel::Texture** ColorTableTextures;
-    /*       */ byte _gap_0x260[0x50];
+    /* 0x260 */ Common::Math::Vector3 Tint;
+    /*       */ byte _gap_0x270[0x40];
     /* 0x2B0 */ float WeatherWetness;
     /* 0x2B4 */ float SwimmingWetness;
     /* 0x2B8 */ float WetnessDepth;
@@ -7824,21 +8040,21 @@ __unaligned struct Client::Graphics::Scene::CharacterBase::CharacterBaseVTable /
     /*     */ __int64 _vf68;
     /*     */ __int64 _vf69;
     /*     */ __int64 _vf70;
-    /*     */ __int64 _vf71;
-    /*     */ __int64 _vf72;
-    /*     */ __int64 _vf73;
-    /*     */ __int64 _vf74;
-    /*     */ __int64 _vf75;
-    /*     */ __int64 _vf76;
-    /*     */ __int64 _vf77;
+    /* 0x238 */ byte* (__fastcall *ResolveRootPath)(Client::Graphics::Scene::CharacterBase* a1, byte* a2, unsigned __int64 a3);
+    /* 0x240 */ byte* (__fastcall *ResolveSklbPath)(Client::Graphics::Scene::CharacterBase* a1, byte* a2, unsigned __int64 a3, unsigned __int32 a4);
+    /* 0x248 */ byte* (__fastcall *ResolveMdlPath)(Client::Graphics::Scene::CharacterBase* a1, byte* a2, unsigned __int64 a3, unsigned __int32 a4);
+    /* 0x250 */ byte* (__fastcall *ResolveSkpPath)(Client::Graphics::Scene::CharacterBase* a1, byte* a2, unsigned __int64 a3, unsigned __int32 a4);
+    /* 0x258 */ byte* (__fastcall *ResolvePhybPath)(Client::Graphics::Scene::CharacterBase* a1, byte* a2, unsigned __int64 a3, unsigned __int32 a4);
+    /* 0x260 */ byte* (__fastcall *ResolvePapPath)(Client::Graphics::Scene::CharacterBase* a1, byte* a2, unsigned __int64 a3, unsigned __int32 a4, byte* a5);
+    /* 0x268 */ byte* (__fastcall *ResolveTmbPath)(Client::Graphics::Scene::CharacterBase* a1, byte* a2, unsigned __int64 a3, byte* a4);
     /*     */ __int64 _vf78;
-    /*     */ __int64 _vf79;
+    /* 0x278 */ byte* (__fastcall *ResolveMaterialPapPath)(Client::Graphics::Scene::CharacterBase* a1, byte* a2, unsigned __int64 a3, unsigned __int32 a4, unsigned __int32 a5);
     /*     */ __int64 _vf80;
-    /*     */ __int64 _vf81;
-    /*     */ __int64 _vf82;
-    /*     */ __int64 _vf83;
-    /*     */ __int64 _vf84;
-    /*     */ __int64 _vf85;
+    /* 0x288 */ byte* (__fastcall *ResolveImcPath)(Client::Graphics::Scene::CharacterBase* a1, byte* a2, unsigned __int64 a3, unsigned __int32 a4);
+    /* 0x290 */ byte* (__fastcall *ResolveMtrlPath)(Client::Graphics::Scene::CharacterBase* a1, byte* a2, unsigned __int64 a3, unsigned __int32 a4, byte* a5);
+    /* 0x298 */ byte* (__fastcall *ResolveDecalPath)(Client::Graphics::Scene::CharacterBase* a1, byte* a2, unsigned __int64 a3, unsigned __int32 a4);
+    /* 0x2A0 */ byte* (__fastcall *ResolveVfxPath)(Client::Graphics::Scene::CharacterBase* a1, byte* a2, unsigned __int64 a3, unsigned __int32 a4, unsigned __int32* a5);
+    /* 0x2A8 */ byte* (__fastcall *ResolveEidPath)(Client::Graphics::Scene::CharacterBase* a1, byte* a2, unsigned __int64 a3);
     /*     */ __int64 _vf86;
     /*     */ __int64 _vf87;
     /*     */ __int64 _vf88;
@@ -7905,7 +8121,11 @@ __unaligned struct Client::Graphics::Scene::EnvSpace /* Size=0xD0 */
 
 __unaligned struct Client::Graphics::Scene::EnvScene /* Size=0x790 */
 {
-    /*       */ byte _gap_0x0[0xB0];
+    /*       */ byte _gap_0x0[0x28];
+    /*       */ byte _gap_0x28[0x4];
+    /* 0x02C */ byte WeatherIds[0x20];
+    /*       */ byte _gap_0x4C[0x4];
+    /*       */ byte _gap_0x50[0x60];
     /* 0x0B0 */ Client::Graphics::Scene::EnvSpace EnvSpaces[0x8];
     /*       */ byte _gap_0x730[0x60];
 };
@@ -8577,7 +8797,7 @@ __unaligned struct Client::System::Scheduler::Resource::SchedulerResourceManagem
 
 __unaligned struct Client::UI::ActionBarSlot /* Size=0xC8 */
 {
-    /*      */ byte _gap_0x0[0x4];
+    /* 0x00 */ __int32 HotbarId;
     /* 0x04 */ __int32 ActionId;
     /*      */ byte _gap_0x8[0x80];
     /* 0x88 */ Component::GUI::AtkComponentDragDrop* ComponentDragDrop;
@@ -8603,38 +8823,71 @@ __unaligned struct Client::UI::ActionInfo /* Size=0x38 */
     /*      */ byte _gap_0x28[0x10];
 };
 
+__unaligned struct StdVectorClientUIActionBarSlot /* Size=0x18 */
+{
+    /* 0x00 */ Client::UI::ActionBarSlot* First;
+    /* 0x08 */ Client::UI::ActionBarSlot* Last;
+    /* 0x10 */ Client::UI::ActionBarSlot* End;
+};
+
 __unaligned struct Client::UI::AddonActionBarBase /* Size=0x248 */
 {
     /*       */ byte _gap_0x0[0x220];
-    /* 0x220 */ Client::UI::ActionBarSlot* ActionBarSlots;
-    /*       */ byte _gap_0x228[0x10];
+    /* 0x220 */ StdVectorClientUIActionBarSlot ActionBarSlotVector;
     /* 0x238 */ __int16 CurrentPulsingSlots;
     /*       */ byte _gap_0x23A[0x2];
     /* 0x23C */ byte RaptureHotbarId;
     /*       */ byte _gap_0x23D;
     /* 0x23E */ byte SlotCount;
-    /*       */ byte _gap_0x23F;
+    /* 0x23F */ bool IsLocked;
     /* 0x240 */ bool IsSharedHotbar;
     /*       */ byte _gap_0x241;
-    /*       */ byte _gap_0x242[0x2];
-    /*       */ byte _gap_0x244[0x4];
+    /* 0x242 */ bool IsCrossHotbar;
+    /* 0x243 */ bool DragDropInProgress;
+    /*       */ byte _gap_0x244;
+    /* 0x245 */ bool DisplayPetBar;
+    /*       */ byte _gap_0x246[0x2];
+};
+
+__unaligned struct Client::UI::AddonActionBarX::Dimensions /* Size=0x4 */
+{
+    /* 0x0 */ __int16 Width;
+    /* 0x2 */ __int16 Height;
 };
 
 __unaligned struct Client::UI::AddonActionBarX /* Size=0x298 */
 {
     /* 0x000 */ Client::UI::AddonActionBarBase AddonActionBarBase;
-    /*       */ byte _gap_0x248[0x28];
+    /* 0x248 */ Component::GUI::AtkTextNode* HotbarNumIconTextNode;
+    /* 0x250 */ Component::GUI::AtkCollisionNode* HotbarNumIconCollisionNode;
+    /* 0x258 */ Component::GUI::AtkResNode* ContainerNode;
+    /* 0x260 */ Component::GUI::AtkResNode* HotbarNumIconNode;
+    /* 0x268 */ Component::GUI::AtkResNode* PadlockNode;
     /* 0x270 */ Client::UI::ActionBarLayout ActionBarLayout;
     /*       */ byte _gap_0x271;
     /*       */ byte _gap_0x272[0x2];
     /*       */ byte _gap_0x274[0x4];
-    /*       */ byte _gap_0x278[0x20];
+    /*       */ byte _gap_0x278[0x4];
+    /* 0x27C */ Client::UI::AddonActionBarX::Dimensions LayoutDimensions[0x6];
+    /*       */ byte _gap_0x294[0x4];
 };
 
 __unaligned struct Client::UI::AddonActionBar /* Size=0x2B8 */
 {
     /* 0x000 */ Client::UI::AddonActionBarX AddonActionBarX;
-    /*       */ byte _gap_0x298[0x20];
+    /*       */ byte _gap_0x298[0x8];
+    /* 0x2A0 */ Component::GUI::AtkComponentBase* CycleUpArrow;
+    union {
+    /* 0x2A8 */ Component::GUI::AtkComponentBase* CycleDownArrow;
+    /* 0x2A8 */ Component::GUI::AtkComponentCheckBox* PadlockCheckbox;
+    } _union_0x2A8;
+    /*       */ byte _gap_0x2B0;
+    /* 0x2B1 */ byte HotbarIdPet;
+    /*       */ byte _gap_0x2B2;
+    /* 0x2B3 */ byte HotbarId;
+    /*       */ byte _gap_0x2B4;
+    /* 0x2B5 */ bool IncludePetBarWhenCycling;
+    /*       */ byte _gap_0x2B6[0x2];
 };
 
 __unaligned struct Client::UI::AddonActionBarBase::AddonActionBarBaseVTable /* Size=0x0 */
@@ -8720,52 +8973,81 @@ __unaligned struct Client::UI::AddonActionBarBase::AddonActionBarBaseVTable /* S
     /* 0x270 */ void (__fastcall *PulseActionBarSlot)(Client::UI::AddonActionBarBase* a1, __int32 a2);
 };
 
+__unaligned struct Client::UI::AddonActionCross::HelpMessage /* Size=0x10 */
+{
+    /* 0x00 */ Component::GUI::AtkComponentBase* HelpComponent;
+    /* 0x08 */ Component::GUI::AtkTextNode* HelpText;
+};
+
+__unaligned struct Client::UI::AddonActionCross::ChangeSetUI /* Size=0x158 */
+{
+    /* 0x000 */ Client::UI::AddonActionCross::HelpMessage HelpMessages[0x8];
+    /* 0x080 */ Component::GUI::AtkComponentNode* NumIcons[0x8];
+    /* 0x0C0 */ Component::GUI::AtkResNode* ContainerNode;
+    /*       */ byte _gap_0xC8[0x8];
+    /* 0x0D0 */ Component::GUI::AtkComponentBase* DpadComponents[0x4];
+    /* 0x0F0 */ Component::GUI::AtkResNode* DpadNodes[0x4];
+    /*       */ byte _gap_0x110[0x8];
+    /* 0x118 */ Component::GUI::AtkComponentBase* ActionButtonComponents[0x4];
+    /* 0x138 */ Component::GUI::AtkResNode* ActionButtonNodes[0x4];
+};
+
+__unaligned struct Client::UI::AddonActionCross::SlotGroup /* Size=0x60 */
+{
+    /* 0x00 */ Client::UI::AddonActionCross::HelpMessage HotbarHelp[0x4];
+    /* 0x40 */ Component::GUI::AtkComponentNode* SlotContainer;
+    /* 0x48 */ Component::GUI::AtkComponentNode* HotbarHelpContainer;
+    /*      */ byte _gap_0x50[0x10];
+};
+
+__unaligned struct Client::UI::AddonActionCross::ControlGuide /* Size=0x48 */
+{
+    /* 0x00 */ Component::GUI::AtkComponentBase* ComponentBase;
+    /* 0x08 */ Component::GUI::AtkComponentBase* Components[0x4];
+    /* 0x28 */ Component::GUI::AtkResNode* Nodes[0x4];
+};
+
 __unaligned struct Client::UI::AddonActionCross /* Size=0x710 */
 {
     /* 0x000 */ Client::UI::AddonActionBarBase ActionBarBase;
-    /*       */ byte _gap_0x248[0x498];
+    /* 0x248 */ Client::UI::AddonActionCross::ChangeSetUI ChangeSet;
+    /* 0x3A0 */ Component::GUI::AtkComponentNode* PadlockNode;
+    /* 0x3A8 */ Component::GUI::AtkComponentCheckBox* PadlockCheckbox;
+    /* 0x3B0 */ Client::UI::AddonActionCross::SlotGroup SlotGroups[0x4];
+    /* 0x530 */ Client::UI::AddonActionCross::ControlGuide ControlGuideDpad;
+    /* 0x578 */ Client::UI::AddonActionCross::ControlGuide ControlGuideActionButtons;
+    /* 0x5C0 */ Component::GUI::AtkTextNode* SetNumIconNode;
+    /* 0x5C8 */ Component::GUI::AtkComponentBase* ControlGuideEditComponent;
+    /*       */ byte _gap_0x5D0[0xF8];
+    /* 0x6C8 */ Component::GUI::AtkResNode* RootNode;
+    /* 0x6D0 */ Component::GUI::AtkResNode* ContainerNode;
+    /*       */ byte _gap_0x6D8[0x8];
     /* 0x6E0 */ byte ButtonMask;
     /*       */ byte _gap_0x6E1;
     /*       */ byte _gap_0x6E2[0x2];
     /*       */ byte _gap_0x6E4[0x4];
-    /* 0x6E8 */ __int32 ExpandedHoldControlsLTRT;
-    /* 0x6EC */ __int32 ExpandedHoldControlsRTLT;
-    /* 0x6F0 */ bool DoubleCrossLeft;
+    /* 0x6E8 */ unsigned __int32 ExpandedHoldMapValueLR;
+    /* 0x6EC */ unsigned __int32 ExpandedHoldMapValueRL;
+    /* 0x6F0 */ bool SelectedDoubleCrossLeft;
     /*       */ byte _gap_0x6F1;
     /*       */ byte _gap_0x6F2[0x2];
-    /* 0x6F4 */ bool DoubleCrossRight;
+    /* 0x6F4 */ bool SelectedDoubleCrossRight;
     /*       */ byte _gap_0x6F5;
     /*       */ byte _gap_0x6F6[0x2];
     /*       */ byte _gap_0x6F8[0x8];
-    /*       */ byte _gap_0x700;
-    /* 0x701 */ bool LeftBar;
-    /* 0x702 */ bool RightBar;
-    /*       */ byte _gap_0x703;
-    /* 0x704 */ bool PetBar;
+    /* 0x700 */ bool InEditMode;
+    /* 0x701 */ bool SelectedLeft;
+    /* 0x702 */ bool SelectedRight;
+    /* 0x703 */ bool DisplayChangeSet;
+    /* 0x704 */ bool DisplayPetBar;
     /*       */ byte _gap_0x705;
-    /*       */ byte _gap_0x706[0x2];
+    /* 0x706 */ bool AlternateDisplayType;
+    /* 0x707 */ bool OverrideHidden;
     /* 0x708 */ byte AlphaStandard;
     /* 0x709 */ byte AlphaActive;
     /* 0x70A */ byte AlphaInactive;
     /*       */ byte _gap_0x70B;
     /*       */ byte _gap_0x70C[0x4];
-};
-
-__unaligned struct Client::UI::AddonActionDoubleCrossBase /* Size=0x2F8 */
-{
-    /* 0x000 */ Client::UI::AddonActionBarBase ActionBarBase;
-    /*       */ byte _gap_0x248[0x98];
-    /* 0x2E0 */ bool Selected;
-    /* 0x2E1 */ byte ShowDPadSlots;
-    /*       */ byte _gap_0x2E2[0x2];
-    /*       */ byte _gap_0x2E4[0x4];
-    /* 0x2E8 */ byte BarTarget;
-    /*       */ byte _gap_0x2E9;
-    /*       */ byte _gap_0x2EA[0x2];
-    /* 0x2EC */ byte UseLeftSide;
-    /* 0x2ED */ byte MergedPositioning;
-    /*       */ byte _gap_0x2EE[0x2];
-    /*       */ byte _gap_0x2F0[0x8];
 };
 
 __unaligned struct Component::GUI::AtkEventListener /* Size=0x8 */
@@ -8804,7 +9086,7 @@ __unaligned struct Component::GUI::AtkUldManager /* Size=0x90 */
     /* 0x28 */ Client::System::Resource::Handle::ResourceHandle* UldResourceHandle;
     /* 0x30 */ Component::GUI::AtkUldManager::DuplicateNodeInfo* DuplicateNodeInfoList;
     /* 0x38 */ Component::GUI::AtkTimelineManager* TimelineManager;
-    /* 0x40 */ unsigned __int16 Unk40;
+    /* 0x40 */ unsigned __int16 DrawOrderIndex;
     /* 0x42 */ unsigned __int16 NodeListCount;
     /*      */ byte _gap_0x44[0x4];
     /* 0x48 */ void* AtkResourceRendererManager;
@@ -8823,6 +9105,29 @@ __unaligned struct Component::GUI::AtkUldManager /* Size=0x90 */
     /*      */ byte _gap_0x8C[0x4];
 };
 
+__unaligned struct StdVectorComponentGUISimpleTweenAnimation /* Size=0x18 */
+{
+    /* 0x00 */ Component::GUI::SimpleTweenAnimation* First;
+    /* 0x08 */ Component::GUI::SimpleTweenAnimation* Last;
+    /* 0x10 */ Component::GUI::SimpleTweenAnimation* End;
+};
+
+__unaligned struct Component::GUI::AtkSimpleTween /* Size=0x50 */
+{
+    /* 0x00 */ Component::GUI::AtkSimpleTween::AtkSimpleTweenVTable* VTable;
+    /* 0x08 */ Component::GUI::SimpleTweenState State;
+    /*      */ byte _gap_0xC[0x4];
+    /* 0x10 */ Component::GUI::AtkResNode* Node;
+    /* 0x18 */ float CurrentTimestamp;
+    /* 0x1C */ float Duration;
+    /* 0x20 */ StdVectorComponentGUISimpleTweenAnimation Animations;
+    /* 0x38 */ __int32 Id;
+    /*      */ byte _gap_0x3C[0x4];
+    /* 0x40 */ Component::GUI::AtkEvent* Event;
+    /* 0x48 */ float EasingFactor;
+    /*      */ byte _gap_0x4C[0x4];
+};
+
 __unaligned struct Component::GUI::AtkUnitBase /* Size=0x220 */
 {
     union {
@@ -8836,31 +9141,44 @@ __unaligned struct Component::GUI::AtkUnitBase /* Size=0x220 */
     /* 0x0D0 */ Component::GUI::AtkCollisionNode* WindowCollisionNode;
     /* 0x0D8 */ Component::GUI::AtkCollisionNode* WindowHeaderCollisionNode;
     /* 0x0E0 */ Component::GUI::AtkResNode* CursorTarget;
-    /*       */ byte _gap_0xE8[0x20];
+    /*       */ byte _gap_0xE8[0x18];
+    /* 0x100 */ Component::GUI::AtkComponentNode* CurrentDropDownOwnerNode;
     /* 0x108 */ Component::GUI::AtkComponentNode* WindowNode;
-    /*       */ byte _gap_0x110[0x50];
+    /* 0x110 */ Component::GUI::AtkSimpleTween RootNodeTween;
     /* 0x160 */ Component::GUI::AtkValue* AtkValues;
     /*       */ byte _gap_0x168[0x18];
     /*       */ byte _gap_0x180[0x2];
     /* 0x182 */ byte Flags;
     /*       */ byte _gap_0x183;
     /*       */ byte _gap_0x184[0x4];
-    /*       */ byte _gap_0x188[0x20];
-    /*       */ byte _gap_0x1A8[0x4];
+    /*       */ byte _gap_0x188[0x8];
+    /*       */ byte _gap_0x190[0x4];
+    /* 0x194 */ unsigned __int32 OpenTransitionDuration;
+    /* 0x198 */ unsigned __int32 CloseTransitionDuration;
+    /*       */ byte _gap_0x19C[0x4];
+    /*       */ byte _gap_0x1A0;
+    /* 0x1A1 */ byte NumOpenPopups;
+    /*       */ byte _gap_0x1A2[0x2];
+    /* 0x1A4 */ float OpenTransitionScale;
+    /* 0x1A8 */ float CloseTransitionScale;
     /* 0x1AC */ float Scale;
     /*       */ byte _gap_0x1B0[0x4];
     /*       */ byte _gap_0x1B4[0x2];
     /* 0x1B6 */ byte VisibilityFlags;
     /*       */ byte _gap_0x1B7;
-    /*       */ byte _gap_0x1B8[0x4];
+    /* 0x1B8 */ unsigned __int16 DrawOrderIndex;
+    /*       */ byte _gap_0x1BA[0x2];
     /* 0x1BC */ __int16 X;
     /* 0x1BE */ __int16 Y;
-    /*       */ byte _gap_0x1C0[0x8];
-    /*       */ byte _gap_0x1C8[0x2];
+    /* 0x1C0 */ __int16 OpenTransitionOffsetX;
+    /* 0x1C2 */ __int16 OpenTransitionOffsetY;
+    /* 0x1C4 */ __int16 CloseTransitionOffsetX;
+    /* 0x1C6 */ __int16 CloseTransitionOffsetY;
+    /* 0x1C8 */ __int16 OpenSoundEffectId;
     /* 0x1CA */ unsigned __int16 AtkValuesCount;
     /* 0x1CC */ unsigned __int16 ID;
     /* 0x1CE */ unsigned __int16 ParentID;
-    /* 0x1D0 */ unsigned __int16 UnknownID;
+    /* 0x1D0 */ unsigned __int16 HostID;
     /* 0x1D2 */ unsigned __int16 ContextMenuParentID;
     /*       */ byte _gap_0x1D4;
     /* 0x1D5 */ byte Alpha;
@@ -8870,6 +9188,41 @@ __unaligned struct Component::GUI::AtkUnitBase /* Size=0x220 */
     /* 0x1E0 */ unsigned __int32 CollisionNodeListCount;
     /*       */ byte _gap_0x1E4[0x4];
     /*       */ byte _gap_0x1E8[0x38];
+};
+
+__unaligned struct Client::UI::AddonActionCrossEditor /* Size=0x250 */
+{
+    /* 0x000 */ Component::GUI::AtkUnitBase AtkUnitBase;
+    /* 0x220 */ Component::GUI::AtkTextNode* HeadingText;
+    /* 0x228 */ Component::GUI::AtkTextNode* InstructionText;
+    /* 0x230 */ Component::GUI::AtkTextNode* SelectedActionText;
+    /* 0x238 */ Component::GUI::AtkComponentBase* ControlGuide;
+    /* 0x240 */ Component::GUI::AtkComponentIcon* SelectedActionIcon;
+    /*       */ byte _gap_0x248[0x8];
+};
+
+__unaligned struct Client::UI::AddonActionDoubleCrossBase /* Size=0x2F8 */
+{
+    /* 0x000 */ Client::UI::AddonActionBarBase ActionBarBase;
+    /* 0x248 */ Component::GUI::AtkResNode* ContainerNode;
+    /* 0x250 */ Component::GUI::AtkComponentNode* SlotContainerL;
+    /* 0x258 */ Component::GUI::AtkComponentNode* SlotContainerR;
+    /* 0x260 */ Client::UI::AddonActionCross::HelpMessage HotbarHelpL[0x4];
+    /* 0x2A0 */ Client::UI::AddonActionCross::HelpMessage HotbarHelpR[0x4];
+    /* 0x2E0 */ bool Selected;
+    /* 0x2E1 */ byte ShowDPadSlots;
+    /* 0x2E2 */ bool AlwaysDisplay;
+    /* 0x2E3 */ bool OtherBarSelected;
+    /* 0x2E4 */ bool DoubleTapDetected;
+    /*       */ byte _gap_0x2E5;
+    /*       */ byte _gap_0x2E6[0x2];
+    /* 0x2E8 */ byte BarTarget;
+    /*       */ byte _gap_0x2E9;
+    /*       */ byte _gap_0x2EA[0x2];
+    /* 0x2EC */ byte UseLeftSide;
+    /* 0x2ED */ byte MergedPositioning;
+    /*       */ byte _gap_0x2EE[0x2];
+    /*       */ byte _gap_0x2F0[0x8];
 };
 
 __unaligned struct Client::UI::AddonActionMenu /* Size=0x1720 */
@@ -9699,6 +10052,1746 @@ __unaligned struct Client::UI::AddonItemSearchResult /* Size=0x3D0 */
     /* 0x268 */ Component::GUI::AtkTextNode* HitsMessage;
     /* 0x270 */ Component::GUI::AtkTextNode* ErrorMessage;
     /*       */ byte _gap_0x278[0x158];
+};
+
+__unaligned struct Client::UI::AddonJobHud /* Size=0x260 */
+{
+    /* 0x000 */ Component::GUI::AtkUnitBase AtkUnitBase;
+    /* 0x220 */ byte Unk220;
+    /* 0x221 */ bool UseSimpleGauge;
+    /* 0x222 */ byte Unk222;
+    /*       */ byte _gap_0x223;
+    /*       */ byte _gap_0x224[0x4];
+    /* 0x228 */ Client::UI::AddonJobHud::AddonJobHudGauge* GaugeStandard;
+    /* 0x230 */ Client::UI::AddonJobHud::AddonJobHudGauge* GaugeSimple;
+    /* 0x238 */ Client::UI::AddonJobHud::AddonJobHudGaugeData* DataPrevious;
+    /* 0x240 */ Client::UI::AddonJobHud::AddonJobHudGaugeData* DataCurrent;
+    /* 0x248 */ Component::GUI::AtkResNode* RootNode;
+    /* 0x250 */ __int32 TimelineLabelStandard;
+    /* 0x254 */ __int32 TimelineLabelSimple;
+    /*       */ byte _gap_0x258[0x8];
+};
+
+__unaligned struct Client::UI::AddonJobHud::AddonJobHudGauge /* Size=0x10 */
+{
+    /* 0x00 */ void* vtbl;
+    /* 0x08 */ Client::UI::AddonJobHud* JobHud;
+};
+
+__unaligned struct Client::UI::AddonJobHud::AddonJobHudGaugeData /* Size=0x8 */
+{
+    /* 0x0 */ void* vtbl;
+};
+
+__unaligned struct Client::UI::AddonJobHudACN0::AetherflowACNGaugeData /* Size=0x10 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGaugeData GaugeData;
+    /* 0x08 */ byte AetherflowStacks;
+    /* 0x09 */ byte Prerequisites[0x1];
+    /*      */ byte _gap_0xA[0x2];
+    /*      */ byte _gap_0xC[0x4];
+};
+
+__unaligned struct Client::UI::AddonJobHudACN0::AetherflowACNGauge::AetherflowACNStack /* Size=0x18 */
+{
+    /* 0x00 */ Component::GUI::AtkComponentBase* StackContainer;
+    /* 0x08 */ Component::GUI::AtkResNode* StackNode;
+    /* 0x10 */ bool StackReady;
+    /*      */ byte _gap_0x11;
+    /*      */ byte _gap_0x12[0x2];
+    /*      */ byte _gap_0x14[0x4];
+};
+
+__unaligned struct Client::UI::AddonJobHudACN0::AetherflowACNGauge /* Size=0x60 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGauge Gauge;
+    /* 0x10 */ Client::UI::AddonJobHudACN0::AetherflowACNGauge::AetherflowACNStack AetherflowStacks[0x3];
+    /* 0x58 */ __int32 TimelineFrameId;
+    /*      */ byte _gap_0x5C[0x4];
+};
+
+__unaligned struct Client::UI::AddonJobHudACN0::AetherflowACNGaugeSimple::AetherflowACNStackSimple /* Size=0x18 */
+{
+    /* 0x00 */ Component::GUI::AtkComponentBase* StackContainer;
+    /* 0x08 */ Component::GUI::AtkResNode* StackNode;
+    /* 0x10 */ bool StackReady;
+    /*      */ byte _gap_0x11;
+    /*      */ byte _gap_0x12[0x2];
+    /*      */ byte _gap_0x14[0x4];
+};
+
+__unaligned struct Client::UI::AddonJobHudACN0::AetherflowACNGaugeSimple /* Size=0x60 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGauge Gauge;
+    /* 0x10 */ Client::UI::AddonJobHudACN0::AetherflowACNGaugeSimple::AetherflowACNStackSimple AetherflowStacks[0x3];
+    /* 0x58 */ __int32 TimelineFrameId;
+    /*      */ byte _gap_0x5C[0x4];
+};
+
+__unaligned struct Client::UI::AddonJobHudACN0 /* Size=0x340 */
+{
+    /* 0x000 */ Client::UI::AddonJobHud JobHud;
+    /* 0x260 */ Client::UI::AddonJobHudACN0::AetherflowACNGaugeData DataPrevious;
+    /* 0x270 */ Client::UI::AddonJobHudACN0::AetherflowACNGaugeData DataCurrent;
+    /* 0x280 */ Client::UI::AddonJobHudACN0::AetherflowACNGauge GaugeStandard;
+    /* 0x2E0 */ Client::UI::AddonJobHudACN0::AetherflowACNGaugeSimple GaugeSimple;
+};
+
+__unaligned struct Client::UI::AddonJobHudAST0::ArcanaGaugeData /* Size=0x40 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGaugeData GaugeData;
+    /* 0x08 */ byte Prerequisites[0x3];
+    /*      */ byte _gap_0xB;
+    /* 0x0C */ __int32 DrawnCard;
+    /* 0x10 */ __int32 DrawnMinorArcanum;
+    /* 0x14 */ __int32 DrawnRoleBuff;
+    /* 0x18 */ __int32 DrawnAstrosign;
+    /* 0x1C */ __int32 Astrosign1;
+    /* 0x20 */ __int32 Astrosign2;
+    /* 0x24 */ __int32 Astrosign3;
+    /*      */ byte _gap_0x28[0x8];
+    /* 0x30 */ byte* CardName;
+    /* 0x38 */ byte* MinorArcanaName;
+};
+
+__unaligned struct Client::UI::AddonJobHudAST0::Astrosign /* Size=0x18 */
+{
+    /* 0x00 */ Component::GUI::AtkComponentBase* Container;
+    /* 0x08 */ Component::GUI::AtkResNode* Symbol;
+    /* 0x10 */ __int32 Type;
+    /*      */ byte _gap_0x14[0x4];
+};
+
+__unaligned struct Client::UI::AddonJobHudAST0::ArcanaGauge /* Size=0xC8 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGauge Gauge;
+    /* 0x10 */ Component::GUI::AtkResNode* Container;
+    /* 0x18 */ Component::GUI::AtkComponentBase* CardContainer;
+    /* 0x20 */ Component::GUI::AtkTextNode* CardName;
+    /* 0x28 */ Component::GUI::AtkResNode* CardAstrosign;
+    /* 0x30 */ Component::GUI::AtkResNode* CardSymbol;
+    /* 0x38 */ Component::GUI::AtkResNode* CardBorder;
+    /* 0x40 */ Component::GUI::AtkResNode* GaugePlate;
+    /* 0x48 */ Component::GUI::AtkResNode* MinorArcanaContainer;
+    /* 0x50 */ Component::GUI::AtkTextNode* MinorArcanaName;
+    /* 0x58 */ Component::GUI::AtkResNode* MinorArcanaSymbol;
+    /* 0x60 */ Component::GUI::AtkResNode* AstrosignContainer;
+    /*      */ byte _gap_0x68[0x10];
+    /* 0x78 */ Client::UI::AddonJobHudAST0::Astrosign Astrosigns[0x3];
+    /*      */ byte _gap_0xC0[0x8];
+};
+
+__unaligned struct Client::UI::AddonJobHudAST0::ArcanaGaugeSimple /* Size=0xC0 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGauge Gauge;
+    /* 0x10 */ Component::GUI::AtkComponentBase* CardContainer;
+    /* 0x18 */ Component::GUI::AtkComponentTextNineGrid* CardName;
+    /* 0x20 */ Component::GUI::AtkResNode* CardAstrosign;
+    /* 0x28 */ Component::GUI::AtkResNode* CardSymbol;
+    /* 0x30 */ Component::GUI::AtkResNode* CardBorder;
+    /* 0x38 */ Component::GUI::AtkResNode* Container;
+    /* 0x40 */ Component::GUI::AtkComponentBase* MinorArcanaContainer;
+    /* 0x48 */ Component::GUI::AtkComponentTextNineGrid* MinorArcanaName;
+    /* 0x50 */ Component::GUI::AtkResNode* MinorArcanaSymbol;
+    /* 0x58 */ Component::GUI::AtkResNode* AstrosignContainer;
+    /*      */ byte _gap_0x60[0x10];
+    /* 0x70 */ Client::UI::AddonJobHudAST0::Astrosign Astrosigns[0x3];
+    /*      */ byte _gap_0xB8[0x8];
+};
+
+__unaligned struct Client::UI::AddonJobHudAST0 /* Size=0x468 */
+{
+    /* 0x000 */ Client::UI::AddonJobHud JobHud;
+    /* 0x260 */ Client::UI::AddonJobHudAST0::ArcanaGaugeData DataPrevious;
+    /* 0x2A0 */ Client::UI::AddonJobHudAST0::ArcanaGaugeData DataCurrent;
+    /* 0x2E0 */ Client::UI::AddonJobHudAST0::ArcanaGauge GaugeStandard;
+    /* 0x3A8 */ Client::UI::AddonJobHudAST0::ArcanaGaugeSimple GaugeSimple;
+};
+
+__unaligned struct Client::UI::AddonJobHudBLM0::ElementalGaugeData /* Size=0x38 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGaugeData GaugeData;
+    /* 0x08 */ byte Prerequisites[0x5];
+    /*      */ byte _gap_0xD;
+    /*      */ byte _gap_0xE[0x2];
+    /* 0x10 */ __int32 AstralFireStacks;
+    /* 0x14 */ __int32 UmbralIceStacks;
+    /* 0x18 */ __int32 ElementTimeLeft;
+    /* 0x1C */ __int32 ElementMaxTime;
+    /* 0x20 */ __int32 UmbralHearts;
+    /* 0x24 */ __int32 EnochianTimer;
+    /* 0x28 */ __int32 EnochianMaxTime;
+    /* 0x2C */ __int32 PolyglotStacks;
+    /* 0x30 */ __int32 PolyglotMax;
+    /* 0x34 */ bool ParadoxReady;
+    /*      */ byte _gap_0x35;
+    /*      */ byte _gap_0x36[0x2];
+};
+
+__unaligned struct Client::UI::AddonJobHudBLM0::ElementalGauge::UmbralHeart /* Size=0x10 */
+{
+    /* 0x00 */ Component::GUI::AtkComponentBase* Container;
+    /* 0x08 */ Component::GUI::AtkResNode* Glow;
+};
+
+__unaligned struct Client::UI::AddonJobHudBLM0::ElementalGauge::PolyglotStack /* Size=0x18 */
+{
+    /* 0x00 */ Component::GUI::AtkComponentBase* Container;
+    /* 0x08 */ Component::GUI::AtkResNode* Gem;
+    /* 0x10 */ Component::GUI::AtkResNode* Slot;
+};
+
+__unaligned struct Client::UI::AddonJobHudBLM0::ElementalGauge /* Size=0x168 */
+{
+    /* 0x000 */ Client::UI::AddonJobHud::AddonJobHudGauge Gauge;
+    /* 0x010 */ Component::GUI::AtkResNode* Container;
+    /* 0x018 */ Component::GUI::AtkResNode* ElementalCrescent;
+    /* 0x020 */ bool ElementActive;
+    /*       */ byte _gap_0x21;
+    /*       */ byte _gap_0x22[0x2];
+    /*       */ byte _gap_0x24[0x4];
+    /* 0x028 */ Component::GUI::AtkResNode* ElementStacks;
+    /* 0x030 */ Component::GUI::AtkComponentBase* ElementStack[0x3];
+    /* 0x048 */ __int32 TimelineStartFrameId;
+    /*       */ byte _gap_0x4C[0x4];
+    /* 0x050 */ Component::GUI::AtkTextNode* ElementTimerText;
+    /* 0x058 */ Component::GUI::AtkComponentBase* ElementOrbContainer;
+    /* 0x060 */ Component::GUI::AtkResNode* FireOrb;
+    /* 0x068 */ Component::GUI::AtkResNode* IceOrb;
+    /* 0x070 */ Client::UI::AddonJobHudBLM0::ElementalGauge::UmbralHeart UmbralHearts[0x3];
+    /* 0x0A0 */ Component::GUI::AtkResNode* UmbralHeartContainer;
+    /* 0x0A8 */ __int32 UmbralHeartTimelineFrameId;
+    /*       */ byte _gap_0xAC[0x4];
+    /*       */ byte _gap_0xB0[0x8];
+    /* 0x0B8 */ Component::GUI::AtkResNode* EnochianBar;
+    /* 0x0C0 */ Component::GUI::AtkComponentBase* EnochianBarFill;
+    /* 0x0C8 */ Component::GUI::AtkResNode* EnochianDialContainer;
+    /* 0x0D0 */ Component::GUI::AtkComponentBase* EnochianDial;
+    /* 0x0D8 */ bool EnochianActive;
+    /*       */ byte _gap_0xD9;
+    /*       */ byte _gap_0xDA[0x2];
+    /* 0x0DC */ __int32 EnochianTimePassed;
+    /*       */ byte _gap_0xE0[0x8];
+    /* 0x0E8 */ Component::GUI::AtkResNode* PolyglotContainer;
+    /* 0x0F0 */ Client::UI::AddonJobHudBLM0::ElementalGauge::PolyglotStack Polyglot[0x2];
+    /* 0x120 */ __int32 PolyglotTimelineFrameId;
+    /* 0x124 */ __int32 PolyglotStacks;
+    /* 0x128 */ __int32 PolyglotMax;
+    /*       */ byte _gap_0x12C[0x4];
+    /* 0x130 */ Component::GUI::AtkResNode* ParadoxContainer;
+    /* 0x138 */ Component::GUI::AtkImageNode* ParadoxNeedle;
+    /*       */ byte _gap_0x140[0x8];
+    /* 0x148 */ Component::GUI::AtkComponentBase* ParadoxGem;
+    /* 0x150 */ Component::GUI::AtkResNode* ParadoxGemGlow;
+    /* 0x158 */ Component::GUI::AtkResNode* ParadoxGemBase;
+    /*       */ byte _gap_0x160[0x8];
+};
+
+__unaligned struct Client::UI::AddonJobHudBLM0::ElementalGaugeSimple /* Size=0xA8 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGauge Gauge;
+    /* 0x10 */ Component::GUI::AtkResNode* Container;
+    /* 0x18 */ Component::GUI::AtkResNode* Container2;
+    /* 0x20 */ Component::GUI::AtkComponentTextNineGrid* ElementalTimerDisplay;
+    /* 0x28 */ Component::GUI::AtkComponentBase* ElementStack[0x3];
+    /* 0x40 */ Component::GUI::AtkComponentBase* UmbralHearts[0x3];
+    /* 0x58 */ Component::GUI::AtkComponentBase* ElementalIcon;
+    /* 0x60 */ Component::GUI::AtkResNode* EnochianGauge;
+    /* 0x68 */ Component::GUI::AtkComponentGaugeBar* EnochianGaugeBar;
+    /* 0x70 */ Component::GUI::AtkComponentBase* PolyglotGem[0x2];
+    /* 0x80 */ Component::GUI::AtkComponentBase* ParadoxGem;
+    /* 0x88 */ __int32 AstralFireStacks;
+    /* 0x8C */ __int32 AstralFireMax;
+    /* 0x90 */ __int32 UmbralHeartCount;
+    /*      */ byte _gap_0x94[0x4];
+    /* 0x98 */ bool ParadoxReady;
+    /*      */ byte _gap_0x99;
+    /*      */ byte _gap_0x9A[0x2];
+    /* 0x9C */ __int32 PolyglotStacks;
+    /* 0xA0 */ __int32 TimelineFrameId;
+    /*      */ byte _gap_0xA4[0x4];
+};
+
+__unaligned struct Client::UI::AddonJobHudBLM0 /* Size=0x4E0 */
+{
+    /* 0x000 */ Client::UI::AddonJobHud JobHud;
+    /* 0x260 */ Client::UI::AddonJobHudBLM0::ElementalGaugeData DataPrevious;
+    /* 0x298 */ Client::UI::AddonJobHudBLM0::ElementalGaugeData DataCurrent;
+    /* 0x2D0 */ Client::UI::AddonJobHudBLM0::ElementalGauge GaugeStandard;
+    /* 0x438 */ Client::UI::AddonJobHudBLM0::ElementalGaugeSimple GaugeSimple;
+};
+
+__unaligned struct Client::UI::AddonJobHudBRD0::SongGaugeData /* Size=0x40 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGaugeData GaugeData;
+    /* 0x08 */ byte Prerequisites[0x6];
+    /*      */ byte _gap_0xE[0x2];
+    /* 0x10 */ __int32 SoulVoiceValue;
+    /* 0x14 */ __int32 SoulVoiceMinimumNeeded;
+    /*      */ byte _gap_0x18[0x4];
+    /* 0x1C */ __int32 SoulVoiceMax;
+    /* 0x20 */ __int32 Song;
+    /* 0x24 */ __int32 SongTimeLeft;
+    /* 0x28 */ __int32 SongTimerMax;
+    /* 0x2C */ __int32 Repertoire;
+    /*      */ byte _gap_0x30[0x4];
+    /* 0x34 */ byte HasPlayedMage;
+    /* 0x35 */ byte HasPlayedArmy;
+    /* 0x36 */ byte HasPlayedWanderer;
+    /*      */ byte _gap_0x37;
+    /* 0x38 */ byte* SongTitle;
+};
+
+__unaligned struct Client::UI::AddonJobHudBRD0::SongGauge /* Size=0x100 */
+{
+    /* 0x000 */ Client::UI::AddonJobHud::AddonJobHudGauge Gauge;
+    /* 0x010 */ Component::GUI::AtkResNode* Container;
+    /* 0x018 */ Component::GUI::AtkTextNode* SongTitle;
+    /* 0x020 */ Component::GUI::AtkTextNode* SongTimerText;
+    /* 0x028 */ Component::GUI::AtkResNode* StaffHighlight;
+    /* 0x030 */ Component::GUI::AtkResNode* RepertoireNotes;
+    /* 0x038 */ Component::GUI::AtkResNode* SongBar;
+    /* 0x040 */ Component::GUI::AtkResNode* StaffFlash;
+    /* 0x048 */ Component::GUI::AtkResNode* HarpPlate;
+    /* 0x050 */ Component::GUI::AtkResNode* SoulVoiceContainer;
+    /* 0x058 */ Component::GUI::AtkComponentTextNineGrid* SoulVoiceValueDisplay;
+    /* 0x060 */ Component::GUI::AtkComponentGaugeBar* SoulVoiceGaugeBar;
+    /* 0x068 */ Component::GUI::AtkResNode* SoulVoiceTickmark;
+    /* 0x070 */ __int32 ApexArrowStatus;
+    /*       */ byte _gap_0x74[0x4];
+    /* 0x078 */ Component::GUI::AtkComponentBase* ArmyRepertoireNote[0x4];
+    union {
+    /* 0x098 */ Component::GUI::AtkComponentBase* WandererRepertoireArrow[0x3];
+    /* 0x098 */ Component::GUI::AtkComponentBase* SongIcon[0x3];
+    } _union_0x98;
+    /* 0x0B0 */ Component::GUI::AtkResNode* SongBarContainer;
+    /* 0x0B8 */ Component::GUI::AtkResNode* SongBarFill;
+    /* 0x0C0 */ Component::GUI::AtkResNode* SongsPlayedContainer;
+    /* 0x0C8 */ Component::GUI::AtkResNode* SongsPlayed;
+    /*       */ byte _gap_0xD0[0x30];
+};
+
+__unaligned struct Client::UI::AddonJobHudBRD0::SongGaugeSimple /* Size=0xE0 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGauge Gauge;
+    /* 0x10 */ Component::GUI::AtkResNode* Container;
+    /* 0x18 */ Component::GUI::AtkComponentTextNineGrid* SongTitle;
+    /* 0x20 */ Component::GUI::AtkComponentTextNineGrid* SongTimerDisplay;
+    /* 0x28 */ Component::GUI::AtkResNode* SongBarContainer;
+    /* 0x30 */ Component::GUI::AtkResNode* Repertoire;
+    /* 0x38 */ Component::GUI::AtkResNode* RepertoireContainer;
+    /* 0x40 */ Component::GUI::AtkComponentGaugeBar* SongGaugeBar;
+    /* 0x48 */ Component::GUI::AtkResNode* SoulVoiceContainer;
+    /* 0x50 */ Component::GUI::AtkComponentTextNineGrid* SoulVoiceValueDisplay;
+    /* 0x58 */ Component::GUI::AtkComponentGaugeBar* SoulVoiceGaugeBar;
+    /*      */ byte _gap_0x60[0x8];
+    /* 0x68 */ Component::GUI::AtkComponentBase* ArmyRepertoireGem[0x4];
+    /* 0x88 */ Component::GUI::AtkComponentBase* WandererRepertoireGem[0x3];
+    /* 0xA0 */ Component::GUI::AtkResNode* SongsPlayedContainer;
+    /* 0xA8 */ Component::GUI::AtkResNode* SongsPlayed;
+    /* 0xB0 */ Component::GUI::AtkComponentBase* SongIcon[0x3];
+    /*      */ byte _gap_0xC8[0x18];
+};
+
+__unaligned struct Client::UI::AddonJobHudBRD0 /* Size=0x4C0 */
+{
+    /* 0x000 */ Client::UI::AddonJobHud JobHud;
+    /* 0x260 */ Client::UI::AddonJobHudBRD0::SongGaugeData DataPrevious;
+    /* 0x2A0 */ Client::UI::AddonJobHudBRD0::SongGaugeData DataCurrent;
+    /* 0x2E0 */ Client::UI::AddonJobHudBRD0::SongGauge GaugeStandard;
+    /* 0x3E0 */ Client::UI::AddonJobHudBRD0::SongGaugeSimple GaugeSimple;
+};
+
+__unaligned struct Client::UI::AddonJobHudDNC0::StepGaugeData /* Size=0x30 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGaugeData GaugeData;
+    /* 0x08 */ byte Prerequisites[0x2];
+    /*      */ byte _gap_0xA[0x2];
+    /* 0x0C */ __int32 DanceStatus;
+    /* 0x10 */ __int32 CompletedSteps;
+    /* 0x14 */ __int32 Steps[0x4];
+    /* 0x24 */ __int32 StandardFinishActive;
+    /* 0x28 */ __int32 StandardFinishTimeLeft;
+    /*      */ byte _gap_0x2C[0x4];
+};
+
+__unaligned struct Client::UI::AddonJobHudDNC0::StepGauge /* Size=0x68 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGauge Gauge;
+    /* 0x10 */ Component::GUI::AtkResNode* Container;
+    /* 0x18 */ __int32 DanceStatus;
+    /*      */ byte _gap_0x1C[0x4];
+    /* 0x20 */ Component::GUI::AtkComponentBase* StepIcons[0x4];
+    /* 0x40 */ __int32 CompletedSteps;
+    /*      */ byte _gap_0x44[0x4];
+    /* 0x48 */ Component::GUI::AtkResNode* StandardFinishTimerContainer;
+    /* 0x50 */ Component::GUI::AtkResNode* StandardFinishTimerIcon;
+    /* 0x58 */ Component::GUI::AtkTextNode* StandardFinishTimerText;
+    /* 0x60 */ __int32 StandardFinishActive;
+    /*      */ byte _gap_0x64[0x4];
+};
+
+__unaligned struct Client::UI::AddonJobHudDNC0::StepGaugeSimple /* Size=0x68 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGauge Gauge;
+    /* 0x10 */ Component::GUI::AtkResNode* Container;
+    /* 0x18 */ __int32 DanceStatus;
+    /*      */ byte _gap_0x1C[0x4];
+    /* 0x20 */ Component::GUI::AtkComponentBase* StepIcons[0x4];
+    /* 0x40 */ __int32 CompletedSteps;
+    /*      */ byte _gap_0x44[0x4];
+    /* 0x48 */ Component::GUI::AtkResNode* StandardFinishTimerContainer;
+    /* 0x50 */ Component::GUI::AtkResNode* StandardFinishTimerIcon;
+    /* 0x58 */ Component::GUI::AtkTextNode* StandardFinishTimerText;
+    /* 0x60 */ __int32 StandardFinishActive;
+    /*      */ byte _gap_0x64[0x4];
+};
+
+__unaligned struct Client::UI::AddonJobHudDNC0 /* Size=0x398 */
+{
+    /* 0x000 */ Client::UI::AddonJobHud JobHud;
+    /* 0x260 */ Client::UI::AddonJobHudDNC0::StepGaugeData DataPrevious;
+    /* 0x290 */ Client::UI::AddonJobHudDNC0::StepGaugeData DataCurrent;
+    /* 0x2C0 */ Client::UI::AddonJobHudDNC0::StepGauge GaugeStandard;
+    /*       */ byte _gap_0x328[0x8];
+    /* 0x330 */ Client::UI::AddonJobHudDNC0::StepGaugeSimple GaugeSimple;
+};
+
+__unaligned struct Client::UI::AddonJobHudDNC1::FeatherGaugeData /* Size=0x20 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGaugeData GaugeData;
+    /* 0x08 */ byte Prerequisites[0x2];
+    /*      */ byte _gap_0xA[0x2];
+    /* 0x0C */ __int32 FeatherCount;
+    /* 0x10 */ __int32 EspritValue;
+    /* 0x14 */ __int32 EspritMax;
+    /* 0x18 */ __int32 EspritMid;
+    /*      */ byte _gap_0x1C[0x4];
+};
+
+__unaligned struct Client::UI::AddonJobHudDNC1::FeatherGauge /* Size=0x98 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGauge Gauge;
+    /* 0x10 */ Component::GUI::AtkResNode* Container;
+    /* 0x18 */ Component::GUI::AtkResNode* FeatherContainer;
+    /* 0x20 */ Component::GUI::AtkComponentBase* Feathers[0x4];
+    /* 0x40 */ __int32 FeatherCount;
+    /*      */ byte _gap_0x44[0x4];
+    /* 0x48 */ Component::GUI::AtkResNode* EspritBar;
+    /* 0x50 */ Component::GUI::AtkResNode* EspritValueContainer;
+    /* 0x58 */ Component::GUI::AtkTextNode* EspritValueText;
+    /* 0x60 */ Component::GUI::AtkImageNode* EspritBarFill;
+    /* 0x68 */ Component::GUI::AtkImageNode* EspritBarGain;
+    /* 0x70 */ Component::GUI::AtkImageNode* EspritBarLoss;
+    /* 0x78 */ bool SaberDanceState;
+    /*      */ byte _gap_0x79;
+    /*      */ byte _gap_0x7A[0x2];
+    /*      */ byte _gap_0x7C[0x4];
+    /* 0x80 */ __int32 EspritBarTargetValue;
+    /*      */ byte _gap_0x84[0x4];
+    /* 0x88 */ __int32 EspritBarValue;
+    /*      */ byte _gap_0x8C[0x4];
+    /*      */ byte _gap_0x90[0x8];
+};
+
+__unaligned struct Client::UI::AddonJobHudDNC1::FeatherGaugeSimple /* Size=0x70 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGauge Gauge;
+    /* 0x10 */ Component::GUI::AtkResNode* Container;
+    /* 0x18 */ Component::GUI::AtkResNode* FeatherContainer;
+    /* 0x20 */ Component::GUI::AtkComponentBase* Feathers[0x4];
+    /* 0x40 */ __int32 FeatherCount;
+    /*      */ byte _gap_0x44[0x4];
+    /* 0x48 */ Component::GUI::AtkResNode* EspritBarContainer;
+    /* 0x50 */ Component::GUI::AtkComponentGaugeBar* EspritGaugeBar;
+    /* 0x58 */ Component::GUI::AtkResNode* EspritBarFill;
+    /* 0x60 */ Component::GUI::AtkComponentTextNineGrid* EspritValueDisplay;
+    /*      */ byte _gap_0x68[0x8];
+};
+
+__unaligned struct Client::UI::AddonJobHudDNC1 /* Size=0x3A8 */
+{
+    /* 0x000 */ Client::UI::AddonJobHud JobHud;
+    /* 0x260 */ Client::UI::AddonJobHudDNC1::FeatherGaugeData DataPrevious;
+    /* 0x280 */ Client::UI::AddonJobHudDNC1::FeatherGaugeData DataCurrent;
+    /* 0x2A0 */ Client::UI::AddonJobHudDNC1::FeatherGauge GaugeStandard;
+    /* 0x338 */ Client::UI::AddonJobHudDNC1::FeatherGaugeSimple GaugeSimple;
+};
+
+__unaligned struct Client::UI::AddonJobHudDRG0::DragonGaugeData /* Size=0x28 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGaugeData GaugeData;
+    /* 0x08 */ byte Prerequisites[0x3];
+    /*      */ byte _gap_0xB;
+    /* 0x0C */ __int32 LotDStatus;
+    /* 0x10 */ __int32 LotDTimer;
+    /* 0x14 */ __int32 LotDMax;
+    /* 0x18 */ __int32 EyeCount;
+    /* 0x1C */ __int32 FirstMindsFocusCount;
+    /*      */ byte _gap_0x20[0x8];
+};
+
+__unaligned struct Client::UI::AddonJobHudDRG0::DragonGauge /* Size=0x58 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGauge Gauge;
+    /* 0x10 */ Component::GUI::AtkResNode* Container;
+    /* 0x18 */ Component::GUI::AtkResNode* Container2;
+    /* 0x20 */ __int32 LotDStatus;
+    /*      */ byte _gap_0x24[0x4];
+    /* 0x28 */ Component::GUI::AtkTextNode* LotDTimerText;
+    /* 0x30 */ Component::GUI::AtkComponentGaugeBar* LotDTimerGaugeBar;
+    /* 0x38 */ Component::GUI::AtkResNode* EyeNode;
+    /* 0x40 */ Component::GUI::AtkResNode* DragonSilhouette;
+    /* 0x48 */ Component::GUI::AtkResNode* FirstMindsFocusContainer;
+    /* 0x50 */ Component::GUI::AtkResNode* FirstMindsFocusContainer2;
+};
+
+__unaligned struct Client::UI::AddonJobHudDRG0::DragonGaugeSimple /* Size=0x90 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGauge Gauge;
+    /* 0x10 */ Component::GUI::AtkResNode* Container;
+    /* 0x18 */ Component::GUI::AtkComponentTextNineGrid* LotDTimerDisplay;
+    /* 0x20 */ Component::GUI::AtkComponentGaugeBar* LotDTimerGaugeBar;
+    /* 0x28 */ Component::GUI::AtkResNode* GemContainer;
+    /* 0x30 */ Component::GUI::AtkResNode* EyeContainer;
+    /* 0x38 */ bool LotDReady;
+    /*      */ byte _gap_0x39;
+    /*      */ byte _gap_0x3A[0x2];
+    /*      */ byte _gap_0x3C[0x4];
+    /* 0x40 */ Component::GUI::AtkComponentBase* Eye1;
+    /* 0x48 */ Component::GUI::AtkResNode* EyeGlow1;
+    /* 0x50 */ Component::GUI::AtkComponentBase* Eye2;
+    /* 0x58 */ Component::GUI::AtkResNode* EyeGlow2;
+    /* 0x60 */ Component::GUI::AtkResNode* FirstMindsFocusContainer;
+    /* 0x68 */ bool FirstMindsFocusReady;
+    /*      */ byte _gap_0x69;
+    /*      */ byte _gap_0x6A[0x2];
+    /*      */ byte _gap_0x6C[0x4];
+    /* 0x70 */ Component::GUI::AtkComponentBase* FirstMindsFocus1;
+    /* 0x78 */ Component::GUI::AtkResNode* FirstMindsFocusGlow1;
+    /* 0x80 */ Component::GUI::AtkComponentBase* FirstMindsFocus2;
+    /* 0x88 */ Component::GUI::AtkResNode* FirstMindsFocusGlow2;
+};
+
+__unaligned struct Client::UI::AddonJobHudDRG0 /* Size=0x398 */
+{
+    /* 0x000 */ Client::UI::AddonJobHud JobHud;
+    /* 0x260 */ Client::UI::AddonJobHudDRG0::DragonGaugeData DataPrevious;
+    /* 0x288 */ Client::UI::AddonJobHudDRG0::DragonGaugeData DataCurrent;
+    /* 0x2B0 */ Client::UI::AddonJobHudDRG0::DragonGauge GaugeStandard;
+    /* 0x308 */ Client::UI::AddonJobHudDRG0::DragonGaugeSimple GaugeSimple;
+};
+
+__unaligned struct Client::UI::AddonJobHudDRK0::BloodGaugeData /* Size=0x18 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGaugeData GaugeData;
+    /* 0x08 */ byte Prerequisites[0x2];
+    /* 0x0A */ byte TankStance;
+    /*      */ byte _gap_0xB;
+    /* 0x0C */ __int32 BloodValue;
+    /* 0x10 */ __int32 BloodMax;
+    /* 0x14 */ __int32 BloodMid;
+};
+
+__unaligned struct Client::UI::AddonJobHudDRK0::BloodGauge /* Size=0x48 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGauge Gauge;
+    /* 0x10 */ Component::GUI::AtkResNode* Container;
+    /* 0x18 */ Component::GUI::AtkResNode* StanceGemContainer;
+    /* 0x20 */ Component::GUI::AtkResNode* SwordGlow;
+    /* 0x28 */ Component::GUI::AtkResNode* StanceGem;
+    /* 0x30 */ Component::GUI::AtkTextNode* BloodValueText;
+    /* 0x38 */ Component::GUI::AtkComponentGaugeBar* BloodGaugeBar;
+    /*      */ byte _gap_0x40[0x8];
+};
+
+__unaligned struct Client::UI::AddonJobHudDRK0::BloodGaugeSimple /* Size=0x40 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGauge Gauge;
+    /* 0x10 */ Component::GUI::AtkResNode* Container;
+    /* 0x18 */ Component::GUI::AtkResNode* BarContainer;
+    /* 0x20 */ Component::GUI::AtkComponentBase* StanceIcon;
+    /* 0x28 */ Component::GUI::AtkComponentTextNineGrid* BloodValueDisplay;
+    /*      */ byte _gap_0x30[0x8];
+    /* 0x38 */ Component::GUI::AtkComponentGaugeBar* BloodGaugeBar;
+};
+
+__unaligned struct Client::UI::AddonJobHudDRK0 /* Size=0x318 */
+{
+    /* 0x000 */ Client::UI::AddonJobHud JobHud;
+    /* 0x260 */ Client::UI::AddonJobHudDRK0::BloodGaugeData DataPrevious;
+    /* 0x278 */ Client::UI::AddonJobHudDRK0::BloodGaugeData DataCurrent;
+    /* 0x290 */ Client::UI::AddonJobHudDRK0::BloodGauge GaugeStandard;
+    /* 0x2D8 */ Client::UI::AddonJobHudDRK0::BloodGaugeSimple GaugeSimple;
+};
+
+__unaligned struct Client::UI::AddonJobHudDRK1::DarksideGaugeData /* Size=0x18 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGaugeData GaugeData;
+    /* 0x08 */ byte Prerequisites[0x3];
+    /*      */ byte _gap_0xB;
+    /* 0x0C */ __int32 DarksideTimeLeft;
+    /* 0x10 */ __int32 DarksideTimeMax;
+    /* 0x14 */ __int32 LivingShadowTimeLeft;
+};
+
+__unaligned struct Client::UI::AddonJobHudDRK1::DarksideGauge /* Size=0x60 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGauge Gauge;
+    /* 0x10 */ Component::GUI::AtkResNode* Container;
+    /* 0x18 */ Component::GUI::AtkResNode* DarkArtsContainer;
+    /* 0x20 */ Component::GUI::AtkResNode* DarkArts;
+    /*      */ byte _gap_0x28[0x8];
+    /* 0x30 */ Component::GUI::AtkResNode* DarksideHelm;
+    /* 0x38 */ Component::GUI::AtkTextNode* DarksideTimerText;
+    /*      */ byte _gap_0x40[0x8];
+    /* 0x48 */ Component::GUI::AtkResNode* LivingShadowHelm;
+    /* 0x50 */ Component::GUI::AtkTextNode* LivingShadowTimerText;
+    /*      */ byte _gap_0x58[0x8];
+};
+
+__unaligned struct Client::UI::AddonJobHudDRK1::DarksideGaugeSimple /* Size=0x48 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGauge Gauge;
+    /* 0x10 */ Component::GUI::AtkComponentBase* DarkArtsGem;
+    /*      */ byte _gap_0x18[0x8];
+    /* 0x20 */ Component::GUI::AtkComponentGaugeBar* DarksideGaugeBar;
+    /* 0x28 */ Component::GUI::AtkComponentTextNineGrid* DarksideValueDisplay;
+    /* 0x30 */ Component::GUI::AtkResNode* LivingShadow;
+    /* 0x38 */ Component::GUI::AtkResNode* LivingShadowTimerDisplay;
+    /*      */ byte _gap_0x40[0x8];
+};
+
+__unaligned struct Client::UI::AddonJobHudDRK1 /* Size=0x338 */
+{
+    /* 0x000 */ Client::UI::AddonJobHud JobHud;
+    /* 0x260 */ Client::UI::AddonJobHudDRK1::DarksideGaugeData DataPrevious;
+    /* 0x278 */ Client::UI::AddonJobHudDRK1::DarksideGaugeData DataCurrent;
+    /* 0x290 */ Client::UI::AddonJobHudDRK1::DarksideGauge GaugeStandard;
+    /* 0x2F0 */ Client::UI::AddonJobHudDRK1::DarksideGaugeSimple GaugeSimple;
+};
+
+__unaligned struct Client::UI::AddonJobHudGFF0::EukrasiaGaugeData /* Size=0x10 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGaugeData GaugeData;
+    /* 0x08 */ byte Prerequisites[0x1];
+    /* 0x09 */ bool EukrasiaActive;
+    /*      */ byte _gap_0xA[0x2];
+    /*      */ byte _gap_0xC[0x4];
+};
+
+__unaligned struct Client::UI::AddonJobHudGFF0::EukrasiaGauge /* Size=0x20 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGauge Gauge;
+    /* 0x10 */ Component::GUI::AtkResNode* Container;
+    /* 0x18 */ bool EukrasiaActive;
+    /*      */ byte _gap_0x19;
+    /*      */ byte _gap_0x1A[0x2];
+    /*      */ byte _gap_0x1C[0x4];
+};
+
+__unaligned struct Client::UI::AddonJobHudGFF0::EukrasiaGaugeSimple /* Size=0x20 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGauge Gauge;
+    /* 0x10 */ Component::GUI::AtkResNode* Container;
+    /* 0x18 */ bool EukrasiaActive;
+    /*      */ byte _gap_0x19;
+    /*      */ byte _gap_0x1A[0x2];
+    /*      */ byte _gap_0x1C[0x4];
+};
+
+__unaligned struct Client::UI::AddonJobHudGFF0 /* Size=0x2C0 */
+{
+    /* 0x000 */ Client::UI::AddonJobHud JobHud;
+    /* 0x260 */ Client::UI::AddonJobHudGFF0::EukrasiaGaugeData DataPrevious;
+    /* 0x270 */ Client::UI::AddonJobHudGFF0::EukrasiaGaugeData DataCurrent;
+    /* 0x280 */ Client::UI::AddonJobHudGFF0::EukrasiaGauge GaugeStandard;
+    /* 0x2A0 */ Client::UI::AddonJobHudGFF0::EukrasiaGaugeSimple GaugeSimple;
+};
+
+__unaligned struct Client::UI::AddonJobHudGFF1::AddersgallGaugeData /* Size=0x20 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGaugeData GaugeData;
+    /* 0x08 */ byte Prerequisites[0x2];
+    /*      */ byte _gap_0xA[0x2];
+    /* 0x0C */ __int32 Addersgall;
+    /* 0x10 */ __int32 Addersting;
+    /* 0x14 */ __int32 AddersgallTimer;
+    /* 0x18 */ __int32 AddersgallTimerMax;
+    /* 0x1C */ bool InCombat;
+    /*      */ byte _gap_0x1D;
+    /*      */ byte _gap_0x1E[0x2];
+};
+
+__unaligned struct Client::UI::AddonJobHudGFF1::AddersgallGauge /* Size=0x70 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGauge Gauge;
+    /* 0x10 */ Component::GUI::AtkResNode* AdderstingContainer;
+    /* 0x18 */ Component::GUI::AtkComponentBase* AddersgallGem[0x3];
+    /* 0x30 */ Component::GUI::AtkComponentBase* AdderstingGem[0x3];
+    /* 0x48 */ Component::GUI::AtkResNode* TimerBar;
+    /* 0x50 */ Component::GUI::AtkResNode* TimerFill;
+    /* 0x58 */ Component::GUI::AtkResNode* Container;
+    /* 0x60 */ __int32 Addersgall;
+    /* 0x64 */ __int32 Addersting;
+    /* 0x68 */ __int32 TimelineFrameId;
+    /*      */ byte _gap_0x6C[0x4];
+};
+
+__unaligned struct Client::UI::AddonJobHudGFF1::AddersgallGaugeSimple /* Size=0x60 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGauge Gauge;
+    /* 0x10 */ Component::GUI::AtkResNode* AdderstingContainer;
+    /* 0x18 */ Component::GUI::AtkComponentBase* AddersgallGem[0x3];
+    /* 0x30 */ Component::GUI::AtkComponentBase* AdderstingGem[0x3];
+    /* 0x48 */ Component::GUI::AtkComponentGaugeBar* TimerGaugeBar;
+    /* 0x50 */ __int32 Addersgall;
+    /* 0x54 */ __int32 Addersting;
+    /* 0x58 */ __int32 AddersgallTimelineFrameId;
+    /* 0x5C */ __int32 AdderstingTimelineFrameId;
+};
+
+__unaligned struct Client::UI::AddonJobHudGFF1 /* Size=0x370 */
+{
+    /* 0x000 */ Client::UI::AddonJobHud JobHud;
+    /* 0x260 */ Client::UI::AddonJobHudGFF1::AddersgallGaugeData DataPrevious;
+    /* 0x280 */ Client::UI::AddonJobHudGFF1::AddersgallGaugeData DataCurrent;
+    /* 0x2A0 */ Client::UI::AddonJobHudGFF1::AddersgallGauge GaugeStandard;
+    /* 0x310 */ Client::UI::AddonJobHudGFF1::AddersgallGaugeSimple GaugeSimple;
+};
+
+__unaligned struct Client::UI::AddonJobHudGNB0::PowderGaugeData /* Size=0x10 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGaugeData GaugeData;
+    /* 0x08 */ byte Prerequisites[0x4];
+    /* 0x0C */ __int32 Ammo;
+};
+
+__unaligned struct Client::UI::AddonJobHudGNB0::PowderGauge /* Size=0x70 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGauge Gauge;
+    /* 0x10 */ Component::GUI::AtkResNode* Container;
+    /* 0x18 */ Component::GUI::AtkComponentBase* Ammo[0x3];
+    /* 0x30 */ Component::GUI::AtkResNode* AmmoNode[0x3];
+    /*      */ byte _gap_0x48[0x10];
+    /* 0x58 */ Component::GUI::AtkResNode* RecoilNode;
+    /* 0x60 */ Component::GUI::AtkResNode* AmmoPlate;
+    /* 0x68 */ Component::GUI::AtkResNode* StanceIcon;
+};
+
+__unaligned struct Client::UI::AddonJobHudGNB0::PowderGaugeSimple /* Size=0x68 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGauge Gauge;
+    /* 0x10 */ Component::GUI::AtkComponentBase* AmmoGem[0x3];
+    /* 0x28 */ Component::GUI::AtkResNode* AmmoGemGlow[0x3];
+    /*      */ byte _gap_0x40[0x8];
+    /* 0x48 */ Component::GUI::AtkComponentBase* StanceIcon;
+    /*      */ byte _gap_0x50[0x8];
+    /* 0x58 */ Component::GUI::AtkResNode* TwoGems;
+    /*      */ byte _gap_0x60[0x8];
+};
+
+__unaligned struct Client::UI::AddonJobHudGNB0 /* Size=0x358 */
+{
+    /* 0x000 */ Client::UI::AddonJobHud JobHud;
+    /* 0x260 */ Client::UI::AddonJobHudGNB0::PowderGaugeData DataPrevious;
+    /* 0x270 */ Client::UI::AddonJobHudGNB0::PowderGaugeData DataCurrent;
+    /* 0x280 */ Client::UI::AddonJobHudGNB0::PowderGauge GaugeStandard;
+    /* 0x2F0 */ Client::UI::AddonJobHudGNB0::PowderGaugeSimple GaugeSimple;
+};
+
+__unaligned struct Client::UI::AddonJobHudMCH0::HeatGaugeData /* Size=0x38 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGaugeData GaugeData;
+    /* 0x08 */ byte Prerequisites[0x2];
+    /*      */ byte _gap_0xA[0x2];
+    /* 0x0C */ __int32 HeatValue;
+    /* 0x10 */ __int32 HeatMax;
+    /* 0x14 */ __int32 HeatMid;
+    /* 0x18 */ bool OverheatActive;
+    /*      */ byte _gap_0x19;
+    /*      */ byte _gap_0x1A[0x2];
+    /* 0x1C */ __int32 OverheatTimeLeft;
+    /*      */ byte _gap_0x20[0x4];
+    /* 0x24 */ __int32 BatteryValue;
+    /* 0x28 */ __int32 BatteryMax;
+    /* 0x2C */ __int32 BatteryMid;
+    /* 0x30 */ bool SummonActive;
+    /*      */ byte _gap_0x31;
+    /*      */ byte _gap_0x32[0x2];
+    /* 0x34 */ __int32 SummonTimeLeft;
+};
+
+__unaligned struct Client::UI::AddonJobHudMCH0::HeatGauge /* Size=0x78 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGauge Gauge;
+    /* 0x10 */ Component::GUI::AtkResNode* HeatContainer;
+    /* 0x18 */ Component::GUI::AtkComponentGaugeBar* HeatGaugeBar;
+    /* 0x20 */ Component::GUI::AtkComponentTextNineGrid* HeatValueDisplay;
+    /* 0x28 */ Component::GUI::AtkResNode* OverheatTimer;
+    /* 0x30 */ Component::GUI::AtkTextNode* OverheatTimerText;
+    /* 0x38 */ __int32 OverheatState;
+    /*      */ byte _gap_0x3C[0x4];
+    /* 0x40 */ Component::GUI::AtkResNode* BatteryContainer;
+    /* 0x48 */ Component::GUI::AtkComponentGaugeBar* BatteryGaugeBar;
+    /* 0x50 */ Component::GUI::AtkComponentTextNineGrid* BatteryValueDisplay;
+    /* 0x58 */ Component::GUI::AtkResNode* BatteryTimer;
+    /* 0x60 */ Component::GUI::AtkResNode* BatteryTimerTextContainer;
+    /* 0x68 */ Component::GUI::AtkTextNode* BatteryTimerText;
+    /* 0x70 */ __int32 SummonState;
+    /*      */ byte _gap_0x74[0x4];
+};
+
+__unaligned struct Client::UI::AddonJobHudMCH0::HeatGaugeSimple /* Size=0x70 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGauge Gauge;
+    /* 0x10 */ Component::GUI::AtkResNode* HeatContainer;
+    /* 0x18 */ Component::GUI::AtkComponentGaugeBar* HeatGaugeBar;
+    /* 0x20 */ Component::GUI::AtkComponentTextNineGrid* HeatValueDisplay;
+    /* 0x28 */ Component::GUI::AtkComponentTextNineGrid* OverheatTimerDisplay;
+    /* 0x30 */ __int32 OverheatState;
+    /*      */ byte _gap_0x34[0x4];
+    /* 0x38 */ Component::GUI::AtkResNode* BatteryContainer;
+    /* 0x40 */ Component::GUI::AtkComponentGaugeBar* BatteryGaugeBar;
+    /* 0x48 */ Component::GUI::AtkComponentTextNineGrid* BatteryValueDisplay;
+    /* 0x50 */ Component::GUI::AtkResNode* BarFillContainer;
+    /* 0x58 */ Component::GUI::AtkResNode* BatteryContainer2;
+    /* 0x60 */ Component::GUI::AtkComponentTextNineGrid* SummonTimerDisplay;
+    /*      */ byte _gap_0x68[0x8];
+};
+
+__unaligned struct Client::UI::AddonJobHudMCH0 /* Size=0x3B8 */
+{
+    /* 0x000 */ Client::UI::AddonJobHud JobHud;
+    /* 0x260 */ Client::UI::AddonJobHudMCH0::HeatGaugeData DataPrevious;
+    /* 0x298 */ Client::UI::AddonJobHudMCH0::HeatGaugeData DataCurrent;
+    /* 0x2D0 */ Client::UI::AddonJobHudMCH0::HeatGauge GaugeStandard;
+    /* 0x348 */ Client::UI::AddonJobHudMCH0::HeatGaugeSimple GaugeSimple;
+};
+
+__unaligned struct Client::UI::AddonJobHudMNK0::MastersGaugeData /* Size=0x28 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGaugeData GaugeData;
+    /* 0x08 */ byte Prerequisites[0x2];
+    /*      */ byte _gap_0xA[0x2];
+    /* 0x0C */ __int32 BeastChakra1;
+    /* 0x10 */ __int32 BeastChakra2;
+    /* 0x14 */ __int32 BeastChakra3;
+    /* 0x18 */ bool LunarNadi;
+    /* 0x19 */ bool SolarNadi;
+    /*      */ byte _gap_0x1A[0x2];
+    /* 0x1C */ __int32 BlitzTimeRemaining;
+    /* 0x20 */ __int32 BlitzType;
+    /*      */ byte _gap_0x24[0x4];
+};
+
+__unaligned struct Client::UI::AddonJobHudMNK0::MastersGauge /* Size=0xB0 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGauge Gauge;
+    /* 0x10 */ Component::GUI::AtkResNode* NadiContainer;
+    /* 0x18 */ Component::GUI::AtkComponentBase* BeastChakra1;
+    /* 0x20 */ Component::GUI::AtkResNode* BeastChakraIcon1;
+    /* 0x28 */ Component::GUI::AtkComponentBase* BeastChakra2;
+    /* 0x30 */ Component::GUI::AtkResNode* BeastChakraIcon2;
+    /* 0x38 */ Component::GUI::AtkComponentBase* BeastChakra3;
+    /* 0x40 */ Component::GUI::AtkResNode* BeastChakraIcon3;
+    /*      */ byte _gap_0x48[0x18];
+    /* 0x60 */ Component::GUI::AtkComponentBase* LunarNadi;
+    /* 0x68 */ Component::GUI::AtkComponentBase* SolarNadi;
+    /* 0x70 */ Component::GUI::AtkResNode* NadiIcons;
+    /*      */ byte _gap_0x78[0x8];
+    /* 0x80 */ Component::GUI::AtkResNode* BlitzTimer;
+    /* 0x88 */ Component::GUI::AtkTextNode* BlitzTimerText;
+    /* 0x90 */ bool BlitzActive;
+    /*      */ byte _gap_0x91;
+    /*      */ byte _gap_0x92[0x2];
+    /* 0x94 */ __int32 BlitzType;
+    /*      */ byte _gap_0x98[0x8];
+    /* 0xA0 */ Component::GUI::AtkResNode* Nadi;
+    /* 0xA8 */ Component::GUI::AtkResNode* BeastChakraSlots;
+};
+
+__unaligned struct Client::UI::AddonJobHudMNK0::MastersGaugeSimple /* Size=0xC0 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGauge Gauge;
+    /*      */ byte _gap_0x10[0xB0];
+};
+
+__unaligned struct Client::UI::AddonJobHudMNK0 /* Size=0x420 */
+{
+    /* 0x000 */ Client::UI::AddonJobHud JobHud;
+    /* 0x260 */ Client::UI::AddonJobHudMNK0::MastersGaugeData DataPrevious;
+    /* 0x288 */ Client::UI::AddonJobHudMNK0::MastersGaugeData DataCurrent;
+    /* 0x2B0 */ Client::UI::AddonJobHudMNK0::MastersGauge GaugeStandard;
+    /* 0x360 */ Client::UI::AddonJobHudMNK0::MastersGaugeSimple GaugeSimple;
+};
+
+__unaligned struct Client::UI::AddonJobHudMNK1::ChakraGaugeData /* Size=0x10 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGaugeData GaugeData;
+    /* 0x08 */ byte Prerequisites[0x1];
+    /*      */ byte _gap_0x9;
+    /*      */ byte _gap_0xA[0x2];
+    /* 0x0C */ __int32 ChakraCount;
+};
+
+__unaligned struct Client::UI::AddonJobHudMNK1::ChakraGauge /* Size=0x40 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGauge Gauge;
+    /* 0x10 */ Component::GUI::AtkResNode* Container;
+    /* 0x18 */ Component::GUI::AtkComponentBase* Chakra[0x5];
+};
+
+__unaligned struct Client::UI::AddonJobHudMNK1::ChakraGaugeSimple /* Size=0x48 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGauge Gauge;
+    /* 0x10 */ Component::GUI::AtkResNode* Container;
+    /* 0x18 */ Component::GUI::AtkComponentBase* Chakra[0x5];
+    /* 0x40 */ bool ChakraCapped;
+    /*      */ byte _gap_0x41;
+    /*      */ byte _gap_0x42[0x2];
+    /*      */ byte _gap_0x44[0x4];
+};
+
+__unaligned struct Client::UI::AddonJobHudMNK1 /* Size=0x308 */
+{
+    /* 0x000 */ Client::UI::AddonJobHud JobHud;
+    /* 0x260 */ Client::UI::AddonJobHudMNK1::ChakraGaugeData DataPrevious;
+    /* 0x270 */ Client::UI::AddonJobHudMNK1::ChakraGaugeData DataCurrent;
+    /* 0x280 */ Client::UI::AddonJobHudMNK1::ChakraGauge GaugeStandard;
+    /* 0x2C0 */ Client::UI::AddonJobHudMNK1::ChakraGaugeSimple GaugeSimple;
+};
+
+__unaligned struct Client::UI::AddonJobHudNIN0::NinkiGaugeData /* Size=0x18 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGaugeData GaugeData;
+    /* 0x08 */ byte Prerequisites[0x1];
+    /*      */ byte _gap_0x9;
+    /*      */ byte _gap_0xA[0x2];
+    /* 0x0C */ __int32 NinkiValue;
+    /* 0x10 */ __int32 Max;
+    /* 0x14 */ __int32 Mid;
+};
+
+__unaligned struct Client::UI::AddonJobHudNIN0::NinkiGauge /* Size=0x40 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGauge Gauge;
+    /* 0x10 */ Component::GUI::AtkResNode* Container;
+    /* 0x18 */ Component::GUI::AtkResNode* Scroll;
+    /* 0x20 */ Component::GUI::AtkTextNode* ValueText;
+    /* 0x28 */ Component::GUI::AtkComponentGaugeBar* GaugeBar0;
+    /* 0x30 */ Component::GUI::AtkComponentGaugeBar* GaugeBar1;
+    /* 0x38 */ bool CanSpend;
+    /*      */ byte _gap_0x39;
+    /*      */ byte _gap_0x3A[0x2];
+    /*      */ byte _gap_0x3C[0x4];
+};
+
+__unaligned struct Client::UI::AddonJobHudNIN0::NinkiGaugeSimple /* Size=0x38 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGauge Gauge;
+    /* 0x10 */ Component::GUI::AtkResNode* Container;
+    /* 0x18 */ Component::GUI::AtkResNode* BarTextNode;
+    /* 0x20 */ Component::GUI::AtkComponentTextNineGrid* ValueDisplay;
+    /* 0x28 */ Component::GUI::AtkComponentGaugeBar* GaugeBar;
+    /*      */ byte _gap_0x30[0x8];
+};
+
+__unaligned struct Client::UI::AddonJobHudNIN0 /* Size=0x308 */
+{
+    /* 0x000 */ Client::UI::AddonJobHud JobHud;
+    /* 0x260 */ Client::UI::AddonJobHudNIN0::NinkiGaugeData DataPrevious;
+    /* 0x278 */ Client::UI::AddonJobHudNIN0::NinkiGaugeData DataCurrent;
+    /* 0x290 */ Client::UI::AddonJobHudNIN0::NinkiGauge GaugeStandard;
+    /* 0x2D0 */ Client::UI::AddonJobHudNIN0::NinkiGaugeSimple GaugeSimple;
+};
+
+__unaligned struct Client::UI::AddonJobHudNIN1::HutonGaugeData /* Size=0x18 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGaugeData GaugeData;
+    /* 0x08 */ byte Prerequisites[0x2];
+    /*      */ byte _gap_0xA[0x2];
+    /* 0x0C */ __int32 TimeLeft;
+    /* 0x10 */ __int32 MaxTime;
+    /* 0x14 */ __int32 ManualCasts;
+};
+
+__unaligned struct Client::UI::AddonJobHudNIN1::HutonGauge /* Size=0x68 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGauge Gauge;
+    /* 0x10 */ Component::GUI::AtkResNode* Container;
+    /* 0x18 */ Component::GUI::AtkResNode* Pinwheel;
+    /* 0x20 */ Component::GUI::AtkTextNode* ValueText;
+    /* 0x28 */ Component::GUI::AtkComponentBase* Blade[0x6];
+    /* 0x58 */ __int32 TimePerBlade;
+    /* 0x5C */ __int32 BladesFallen;
+    /* 0x60 */ bool IsActive;
+    /*      */ byte _gap_0x61;
+    /*      */ byte _gap_0x62[0x2];
+    /*      */ byte _gap_0x64[0x4];
+};
+
+__unaligned struct Client::UI::AddonJobHudNIN1::HutonGaugeSimple /* Size=0x28 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGauge Gauge;
+    /* 0x10 */ Component::GUI::AtkResNode* Container;
+    /* 0x18 */ Component::GUI::AtkComponentTextNineGrid* ValueDisplay;
+    /* 0x20 */ Component::GUI::AtkComponentGaugeBar* GaugeBar;
+};
+
+__unaligned struct Client::UI::AddonJobHudNIN1 /* Size=0x320 */
+{
+    /* 0x000 */ Client::UI::AddonJobHud JobHud;
+    /* 0x260 */ Client::UI::AddonJobHudNIN1::HutonGaugeData DataPrevious;
+    /* 0x278 */ Client::UI::AddonJobHudNIN1::HutonGaugeData DataCurrent;
+    /* 0x290 */ Client::UI::AddonJobHudNIN1::HutonGauge GaugeStandard;
+    /* 0x2F8 */ Client::UI::AddonJobHudNIN1::HutonGaugeSimple GaugeSimple;
+};
+
+__unaligned struct Client::UI::AddonJobHudPLD0::OathGaugeData /* Size=0x18 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGaugeData GaugeData;
+    /* 0x08 */ byte Prerequisites[0x3];
+    /*      */ byte _gap_0xB;
+    /* 0x0C */ __int32 OathValue;
+    /* 0x10 */ __int32 OathMax;
+    /*      */ byte _gap_0x14[0x4];
+};
+
+__unaligned struct Client::UI::AddonJobHudPLD0::OathGauge /* Size=0x58 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGauge Gauge;
+    /* 0x10 */ Component::GUI::AtkResNode* Container;
+    /* 0x18 */ Component::GUI::AtkResNode* Container2;
+    /* 0x20 */ Component::GUI::AtkComponentGaugeBar* OathGaugeBar;
+    /* 0x28 */ Component::GUI::AtkComponentBase* OathMarker;
+    /* 0x30 */ Component::GUI::AtkTextNode* OathValueText;
+    /* 0x38 */ Component::GUI::AtkComponentBase* StanceSigilContainer;
+    /* 0x40 */ Component::GUI::AtkResNode* StanceSigil;
+    /* 0x48 */ Component::GUI::AtkResNode* StanceGemLowLevel;
+    /*      */ byte _gap_0x50[0x8];
+};
+
+__unaligned struct Client::UI::AddonJobHudPLD0::OathGaugeSimple /* Size=0x48 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGauge Gauge;
+    /*      */ byte _gap_0x10[0x8];
+    /* 0x18 */ Component::GUI::AtkResNode* Container;
+    /* 0x20 */ Component::GUI::AtkComponentGaugeBar* OathGaugeBar;
+    /* 0x28 */ Component::GUI::AtkResNode* OathGaugeBarFill;
+    /* 0x30 */ Component::GUI::AtkComponentTextNineGrid* OathValueDisplay;
+    /* 0x38 */ Component::GUI::AtkComponentBase* StanceIcon;
+    /*      */ byte _gap_0x40[0x8];
+};
+
+__unaligned struct Client::UI::AddonJobHudPLD0 /* Size=0x330 */
+{
+    /* 0x000 */ Client::UI::AddonJobHud JobHud;
+    /* 0x260 */ Client::UI::AddonJobHudPLD0::OathGaugeData DataPrevious;
+    /* 0x278 */ Client::UI::AddonJobHudPLD0::OathGaugeData DataCurrent;
+    /* 0x290 */ Client::UI::AddonJobHudPLD0::OathGauge GaugeStandard;
+    /* 0x2E8 */ Client::UI::AddonJobHudPLD0::OathGaugeSimple GaugeSimple;
+};
+
+__unaligned struct Client::UI::AddonJobHudRDM0::BalanceGaugeData /* Size=0x28 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGaugeData GaugeData;
+    /* 0x08 */ byte Prerequisites[0x3];
+    /*      */ byte _gap_0xB;
+    /* 0x0C */ __int32 BlackMana;
+    /* 0x10 */ __int32 WhiteMana;
+    /* 0x14 */ __int32 MaxMana;
+    /* 0x18 */ __int32 BlackMidMana;
+    /* 0x1C */ __int32 WhiteMidMana;
+    /* 0x20 */ __int32 ManaStacks;
+    /*      */ byte _gap_0x24[0x4];
+};
+
+__unaligned struct Client::UI::AddonJobHudRDM0::BalanceGauge::ManaBar /* Size=0x48 */
+{
+    /* 0x00 */ Component::GUI::AtkComponentBase* Container;
+    /* 0x08 */ Component::GUI::AtkTextNode* ValueText;
+    /* 0x10 */ Component::GUI::AtkImageNode* BarFill;
+    /* 0x18 */ Component::GUI::AtkImageNode* BarGain;
+    /* 0x20 */ Component::GUI::AtkImageNode* BarLoss;
+    /* 0x28 */ __int32 BarHeight;
+    /* 0x2C */ __int32 BarTargetHeight;
+    /* 0x30 */ float HeightAdjust;
+    /* 0x34 */ __int32 MaxHeight;
+    /* 0x38 */ __int32 Value;
+    /* 0x3C */ __int32 IsAnimating;
+    /* 0x40 */ __int32 TimelineFrameId;
+    /*      */ byte _gap_0x44[0x4];
+};
+
+__unaligned struct Client::UI::AddonJobHudRDM0::BalanceGauge /* Size=0x100 */
+{
+    /* 0x000 */ Client::UI::AddonJobHud::AddonJobHudGauge Gauge;
+    /* 0x010 */ Client::UI::AddonJobHudRDM0::BalanceGauge::ManaBar BlackManaBar;
+    /* 0x058 */ Client::UI::AddonJobHudRDM0::BalanceGauge::ManaBar WhiteManaBar;
+    /* 0x0A0 */ Component::GUI::AtkResNode* Container;
+    /* 0x0A8 */ Component::GUI::AtkResNode* EffectsContainer;
+    /* 0x0B0 */ Component::GUI::AtkResNode* Effects;
+    /* 0x0B8 */ Component::GUI::AtkResNode* BarContainer;
+    /* 0x0C0 */ Component::GUI::AtkResNode* BarBackDrop;
+    /* 0x0C8 */ Component::GUI::AtkComponentBase* ManaStackContainer;
+    /* 0x0D0 */ Component::GUI::AtkComponentBase* ManaStacks[0x3];
+    /* 0x0E8 */ bool ComboFlash;
+    /* 0x0E9 */ bool NoComboFlash;
+    /*       */ byte _gap_0xEA[0x2];
+    /* 0x0EC */ __int32 EffectsPosition;
+    /* 0x0F0 */ bool ComboReady;
+    /*       */ byte _gap_0xF1;
+    /*       */ byte _gap_0xF2[0x2];
+    /* 0x0F4 */ __int32 CrystalState;
+    /* 0x0F8 */ __int32 ManaStackCount;
+    /*       */ byte _gap_0xFC[0x4];
+};
+
+__unaligned struct Client::UI::AddonJobHudRDM0::BalanceGaugeSimple /* Size=0x90 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGauge Gauge;
+    /* 0x10 */ Component::GUI::AtkComponentGaugeBar* BlackManaGaugeBar;
+    /* 0x18 */ Component::GUI::AtkComponentGaugeBar* WhiteManaGaugeBar;
+    /* 0x20 */ Component::GUI::AtkComponentTextNineGrid* ManaValueDisplay[0x2];
+    /*      */ byte _gap_0x30[0x8];
+    /* 0x38 */ Component::GUI::AtkResNode* BarContainer;
+    /* 0x40 */ Component::GUI::AtkResNode* Crystal;
+    /* 0x48 */ Component::GUI::AtkComponentBase* Crystal2;
+    /* 0x50 */ Component::GUI::AtkResNode* Container;
+    /* 0x58 */ Component::GUI::AtkResNode* ManaStackContainer;
+    /* 0x60 */ Component::GUI::AtkResNode* ManaStackGlow;
+    /* 0x68 */ Component::GUI::AtkComponentBase* ManaStack1;
+    /* 0x70 */ Component::GUI::AtkComponentBase* ManaStack2;
+    /* 0x78 */ Component::GUI::AtkComponentBase* ManaStack3;
+    /* 0x80 */ __int32 ComboReadyState;
+    /* 0x84 */ __int32 CrystalState;
+    /* 0x88 */ bool ComboReady;
+    /*      */ byte _gap_0x89;
+    /*      */ byte _gap_0x8A[0x2];
+    /* 0x8C */ __int32 ManaStackCount;
+};
+
+__unaligned struct Client::UI::AddonJobHudRDM0 /* Size=0x440 */
+{
+    /* 0x000 */ Client::UI::AddonJobHud JobHud;
+    /* 0x260 */ Client::UI::AddonJobHudRDM0::BalanceGaugeData DataPrevious;
+    /* 0x288 */ Client::UI::AddonJobHudRDM0::BalanceGaugeData DataCurrent;
+    /* 0x2B0 */ Client::UI::AddonJobHudRDM0::BalanceGauge GaugeStandard;
+    /* 0x3B0 */ Client::UI::AddonJobHudRDM0::BalanceGaugeSimple GaugeSimple;
+};
+
+__unaligned struct Client::UI::AddonJobHudRRP0::SoulGaugeData /* Size=0x28 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGaugeData GaugeData;
+    /* 0x08 */ byte Prerequisites[0x2];
+    /*      */ byte _gap_0xA[0x2];
+    /* 0x0C */ __int32 SoulValue;
+    /* 0x10 */ __int32 ShroudValue;
+    /* 0x14 */ __int32 SoulMax;
+    /* 0x18 */ __int32 ShroudMax;
+    /* 0x1C */ __int32 SoulMid;
+    /* 0x20 */ __int32 ShroudMid;
+    /* 0x24 */ bool Enshrouded;
+    /*      */ byte _gap_0x25;
+    /*      */ byte _gap_0x26[0x2];
+};
+
+__unaligned struct Client::UI::AddonJobHudRRP0::SoulGauge /* Size=0xF8 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGauge Gauge;
+    /* 0x10 */ Component::GUI::AtkResNode* Container;
+    /* 0x18 */ Component::GUI::AtkResNode* Container2;
+    /* 0x20 */ Component::GUI::AtkComponentBase* SoulMarker;
+    /* 0x28 */ Component::GUI::AtkResNode* SoulBarOutline;
+    /* 0x30 */ Component::GUI::AtkResNode* SoulBarEffects;
+    /* 0x38 */ Component::GUI::AtkImageNode* SoulBarFill;
+    /* 0x40 */ Component::GUI::AtkImageNode* SoulBarGain;
+    /* 0x48 */ Component::GUI::AtkImageNode* SoulBarLoss;
+    /*      */ byte _gap_0x50[0x30];
+    /* 0x80 */ Component::GUI::AtkComponentBase* SoulTextContainer;
+    /* 0x88 */ Component::GUI::AtkComponentBase* ShroudMarker;
+    /* 0x90 */ Component::GUI::AtkResNode* ShroudBarOutline;
+    /* 0x98 */ Component::GUI::AtkResNode* ShroudBarEffects;
+    /* 0xA0 */ Component::GUI::AtkImageNode* ShroudBarFill;
+    /* 0xA8 */ Component::GUI::AtkImageNode* ShroudBarGain;
+    /* 0xB0 */ Component::GUI::AtkImageNode* ShroudBarLoss;
+    /*      */ byte _gap_0xB8[0x30];
+    /* 0xE8 */ Component::GUI::AtkComponentBase* ShroudTextContainer;
+    /*      */ byte _gap_0xF0[0x8];
+};
+
+__unaligned struct Client::UI::AddonJobHudRRP0::SoulGaugeSimple /* Size=0x50 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGauge Gauge;
+    /* 0x10 */ Component::GUI::AtkResNode* Container;
+    /* 0x18 */ Component::GUI::AtkResNode* ShroudContainer;
+    /* 0x20 */ Component::GUI::AtkComponentGaugeBar* SoulGaugeBar;
+    /* 0x28 */ Component::GUI::AtkComponentTextNineGrid* SoulValueDisplay;
+    /*      */ byte _gap_0x30[0x8];
+    /* 0x38 */ Component::GUI::AtkComponentGaugeBar* ShroudGaugeBar;
+    /* 0x40 */ Component::GUI::AtkComponentTextNineGrid* ShroudValueDisplay;
+    /*      */ byte _gap_0x48[0x4];
+    /* 0x4C */ __int32 GlowTimelineFrameId;
+};
+
+__unaligned struct Client::UI::AddonJobHudRRP0 /* Size=0x3F8 */
+{
+    /* 0x000 */ Client::UI::AddonJobHud JobHud;
+    /* 0x260 */ Client::UI::AddonJobHudRRP0::SoulGaugeData DataPrevious;
+    /* 0x288 */ Client::UI::AddonJobHudRRP0::SoulGaugeData DataCurrent;
+    /* 0x2B0 */ Client::UI::AddonJobHudRRP0::SoulGauge GaugeStandard;
+    /* 0x3A8 */ Client::UI::AddonJobHudRRP0::SoulGaugeSimple GaugeSimple;
+};
+
+__unaligned struct Client::UI::AddonJobHudRRP1::DeathGaugeData /* Size=0x20 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGaugeData GaugeData;
+    /* 0x08 */ byte Prerequisites[0x2];
+    /*      */ byte _gap_0xA[0x2];
+    /* 0x0C */ __int32 LemureShroudStacks;
+    /* 0x10 */ __int32 VoidShroudStacks;
+    /* 0x14 */ __int32 EnshroudTimer;
+    /*      */ byte _gap_0x18[0x8];
+};
+
+__unaligned struct Client::UI::AddonJobHudRRP1::DeathGauge::ShroudStack /* Size=0x30 */
+{
+    /*      */ byte _gap_0x0[0x8];
+    /* 0x08 */ Component::GUI::AtkComponentBase* Container;
+    /* 0x10 */ Component::GUI::AtkResNode* LemureStack;
+    /* 0x18 */ Component::GUI::AtkResNode* LemureFlame;
+    /* 0x20 */ Component::GUI::AtkResNode* VoidStack;
+    /* 0x28 */ Component::GUI::AtkResNode* VoidFlame;
+};
+
+__unaligned struct Client::UI::AddonJobHudRRP1::DeathGauge /* Size=0x118 */
+{
+    /* 0x000 */ Client::UI::AddonJobHud::AddonJobHudGauge Gauge;
+    /* 0x010 */ Component::GUI::AtkResNode* Container;
+    /* 0x018 */ Client::UI::AddonJobHudRRP1::DeathGauge::ShroudStack ShroudStacks[0x5];
+    /*       */ byte _gap_0x108[0x8];
+    /* 0x110 */ Component::GUI::AtkComponentTextNineGrid* EnshroudTimerDisplay;
+};
+
+__unaligned struct Client::UI::AddonJobHudRRP1::DeathGaugeSimple::ShroudStackSimple /* Size=0x20 */
+{
+    /*      */ byte _gap_0x0[0x4];
+    /* 0x04 */ Component::GUI::AtkComponentBase* Container;
+    /* 0x0C */ Component::GUI::AtkResNode* GlowContainer;
+    /* 0x14 */ Component::GUI::AtkResNode* Glow;
+    /*      */ byte _gap_0x1C[0x4];
+};
+
+__unaligned struct Client::UI::AddonJobHudRRP1::DeathGaugeSimple /* Size=0xD8 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGauge Gauge;
+    /* 0x10 */ Component::GUI::AtkResNode* Container;
+    /* 0x18 */ Component::GUI::AtkResNode* EnshroudIndicator;
+    /*      */ byte _gap_0x20[0x8];
+    /*      */ byte _gap_0x28[0x4];
+    /* 0x2C */ Client::UI::AddonJobHudRRP1::DeathGaugeSimple::ShroudStackSimple ShroudStacks[0x5];
+    /*      */ byte _gap_0xCC[0x4];
+    /* 0xD0 */ Component::GUI::AtkComponentTextNineGrid* EnshroudTimerDisplay;
+};
+
+__unaligned struct Client::UI::AddonJobHudRRP1 /* Size=0x490 */
+{
+    /* 0x000 */ Client::UI::AddonJobHud JobHud;
+    /* 0x260 */ Client::UI::AddonJobHudRRP1::DeathGaugeData DataPrevious;
+    /* 0x280 */ Client::UI::AddonJobHudRRP1::DeathGaugeData DataCurrent;
+    /* 0x2A0 */ Client::UI::AddonJobHudRRP1::DeathGauge GaugeStandard;
+    /* 0x3B8 */ Client::UI::AddonJobHudRRP1::DeathGaugeSimple GaugeSimple;
+};
+
+__unaligned struct Client::UI::AddonJobHudSAM0::KenkiGaugeData /* Size=0x18 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGaugeData GaugeData;
+    /* 0x08 */ byte Prerequisites[0x3];
+    /*      */ byte _gap_0xB;
+    /* 0x0C */ __int32 MeditationStackCount;
+    /* 0x10 */ __int32 KenkiValue;
+    /* 0x14 */ __int32 KenkiMax;
+};
+
+__unaligned struct Client::UI::AddonJobHudSAM0::KenkiGauge /* Size=0x90 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGauge Gauge;
+    /* 0x10 */ Component::GUI::AtkResNode* KenkiContainer;
+    /* 0x18 */ Component::GUI::AtkTextNode* KenkiValueText;
+    /* 0x20 */ Component::GUI::AtkImageNode* KenkiBarFill;
+    /* 0x28 */ Component::GUI::AtkImageNode* KenkiBarGain;
+    /* 0x30 */ Component::GUI::AtkImageNode* KenkiBarLoss;
+    /* 0x38 */ Component::GUI::AtkComponentBase* KenkiMarker;
+    /* 0x40 */ Component::GUI::AtkResNode* MeditationContainer;
+    /* 0x48 */ Component::GUI::AtkComponentBase* MeditationGem[0x3];
+    /* 0x60 */ byte HasMeditationStack[0x3];
+    /* 0x63 */ bool MeditationStacksGlowing;
+    /* 0x64 */ __int32 MeditationStackCount;
+    /* 0x68 */ __int32 GlowTimelineFrameId;
+    /* 0x6C */ __int32 MarkerPosition;
+    /* 0x70 */ __int32 KenkiBarWidth;
+    /*      */ byte _gap_0x74[0x4];
+    /* 0x78 */ __int32 KenkiBarMaxWidth;
+    /* 0x7C */ bool KenkiBarAnimating;
+    /* 0x7D */ bool MarkerVisible;
+    /*      */ byte _gap_0x7E[0x2];
+    /* 0x80 */ __int32 MarkerOffset;
+    /* 0x84 */ float MarkerShift;
+    /* 0x88 */ bool KenkiCapped;
+    /*      */ byte _gap_0x89;
+    /*      */ byte _gap_0x8A[0x2];
+    /*      */ byte _gap_0x8C[0x4];
+};
+
+__unaligned struct Client::UI::AddonJobHudSAM0::KenkiGaugeSimple /* Size=0x60 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGauge Gauge;
+    /* 0x10 */ Component::GUI::AtkResNode* Container;
+    /* 0x18 */ Component::GUI::AtkResNode* KenkiContainer;
+    /* 0x20 */ Component::GUI::AtkComponentGaugeBar* KenkiGaugeBar;
+    /* 0x28 */ Component::GUI::AtkComponentTextNineGrid* KenkiValueDisplay;
+    /* 0x30 */ Component::GUI::AtkResNode* MeditationContainer;
+    /* 0x38 */ Component::GUI::AtkComponentBase* MeditationStacks[0x3];
+    /* 0x50 */ byte HasMeditationStack[0x3];
+    /* 0x53 */ bool MeditationStacksGlowing;
+    /* 0x54 */ __int32 MeditationStackCount;
+    /* 0x58 */ __int32 GlowTimelineFrameId;
+    /* 0x5C */ bool KenkiCapped;
+    /* 0x5D */ bool Visible;
+    /*      */ byte _gap_0x5E[0x2];
+};
+
+__unaligned struct Client::UI::AddonJobHudSAM0 /* Size=0x380 */
+{
+    /* 0x000 */ Client::UI::AddonJobHud JobHud;
+    /* 0x260 */ Client::UI::AddonJobHudSAM0::KenkiGaugeData DataPrevious;
+    /* 0x278 */ Client::UI::AddonJobHudSAM0::KenkiGaugeData DataCurrent;
+    /* 0x290 */ Client::UI::AddonJobHudSAM0::KenkiGauge GaugeStandard;
+    /* 0x320 */ Client::UI::AddonJobHudSAM0::KenkiGaugeSimple GaugeSimple;
+};
+
+__unaligned struct Client::UI::AddonJobHudSAM1::SenGaugeData /* Size=0x10 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGaugeData GaugeData;
+    /* 0x08 */ byte Prerequisites[0x1];
+    /* 0x09 */ bool HasSetsu;
+    /* 0x0A */ bool HasGetsu;
+    /* 0x0B */ bool HasKa;
+    /*      */ byte _gap_0xC[0x4];
+};
+
+__unaligned struct Client::UI::AddonJobHudSAM1::SenGauge /* Size=0x50 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGauge Gauge;
+    /* 0x10 */ Component::GUI::AtkResNode* Container;
+    /* 0x18 */ Component::GUI::AtkResNode* SetsuNode;
+    /* 0x20 */ Component::GUI::AtkResNode* GetsuNode;
+    /* 0x28 */ Component::GUI::AtkResNode* KaNode;
+    /* 0x30 */ Component::GUI::AtkResNode* SetsuGlow;
+    /* 0x38 */ Component::GUI::AtkResNode* GetsuGlow;
+    /* 0x40 */ Component::GUI::AtkResNode* KaGlow;
+    /* 0x48 */ bool HasSetsu;
+    /* 0x49 */ bool HasGetsu;
+    /* 0x4A */ bool HasKa;
+    /*      */ byte _gap_0x4B;
+    /* 0x4C */ __int32 GlowTimelineFrameId;
+};
+
+__unaligned struct Client::UI::AddonJobHudSAM1::SenGaugeSimple /* Size=0x58 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGauge Gauge;
+    /* 0x10 */ Component::GUI::AtkResNode* Container;
+    /* 0x18 */ Component::GUI::AtkResNode* Gems;
+    /* 0x20 */ Component::GUI::AtkResNode* SetsuNode;
+    /* 0x28 */ Component::GUI::AtkResNode* GetsuNode;
+    /* 0x30 */ Component::GUI::AtkResNode* KaNode;
+    /* 0x38 */ Component::GUI::AtkResNode* SetsuGlow;
+    /* 0x40 */ Component::GUI::AtkResNode* GetsuGlow;
+    /* 0x48 */ Component::GUI::AtkResNode* KaGlow;
+    /* 0x50 */ bool HasSetsu;
+    /* 0x51 */ bool HasGetsu;
+    /* 0x52 */ bool HasKa;
+    /* 0x53 */ bool HasAll;
+    /*      */ byte _gap_0x54[0x4];
+};
+
+__unaligned struct Client::UI::AddonJobHudSAM1 /* Size=0x328 */
+{
+    /* 0x000 */ Client::UI::AddonJobHud JobHud;
+    /* 0x260 */ Client::UI::AddonJobHudSAM1::SenGaugeData DataPrevious;
+    /* 0x270 */ Client::UI::AddonJobHudSAM1::SenGaugeData DataCurrent;
+    /* 0x280 */ Client::UI::AddonJobHudSAM1::SenGauge GaugeStandard;
+    /* 0x2D0 */ Client::UI::AddonJobHudSAM1::SenGaugeSimple GaugeSimple;
+};
+
+__unaligned struct Client::UI::AddonJobHudSCH0::FaerieGaugeData /* Size=0x20 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGaugeData GaugeData;
+    /* 0x08 */ __int32 FaeValue;
+    /* 0x0C */ __int32 FaeMax;
+    /* 0x10 */ byte Prerequisites[0x3];
+    /*      */ byte _gap_0x13;
+    /*      */ byte _gap_0x14[0x4];
+    /* 0x18 */ __int32 SeraphTimeLeft;
+    /* 0x1C */ __int32 SeraphMaxTime;
+};
+
+__unaligned struct Client::UI::AddonJobHudSCH0::FaerieGauge /* Size=0x90 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGauge Gauge;
+    /* 0x10 */ Component::GUI::AtkResNode* Container;
+    /* 0x18 */ Component::GUI::AtkResNode* FaeriePlateContainer;
+    /* 0x20 */ Component::GUI::AtkTextNode* SeraphTimerText;
+    /*      */ byte _gap_0x28[0x8];
+    /* 0x30 */ Component::GUI::AtkResNode* FaeGaugeTextContainer;
+    /* 0x38 */ Component::GUI::AtkTextNode* FaeGaugeText;
+    /* 0x40 */ Component::GUI::AtkImageNode* FaeBarFillAbsent;
+    /* 0x48 */ Component::GUI::AtkImageNode* FaeBarFillSeraph;
+    /* 0x50 */ Component::GUI::AtkImageNode* FaeBarFillStandard;
+    /* 0x58 */ Component::GUI::AtkResNode* FaeBarGain;
+    /* 0x60 */ Component::GUI::AtkResNode* FaeBarLoss;
+    /* 0x68 */ Component::GUI::AtkResNode* FaeriePlate;
+    /* 0x70 */ __int32 FaeBarMaxWidth;
+    /* 0x74 */ __int32 FaeBarWidth;
+    /* 0x78 */ __int32 FaeBarTargetWidth;
+    /* 0x7C */ __int32 FaeBarWidthChange;
+    /*      */ byte _gap_0x80[0x4];
+    /* 0x84 */ bool FaeBarAnimating;
+    /*      */ byte _gap_0x85;
+    /*      */ byte _gap_0x86;
+    /* 0x87 */ bool HasFaerie;
+    /*      */ byte _gap_0x88[0x8];
+};
+
+__unaligned struct Client::UI::AddonJobHudSCH0::FaerieGaugeSimple /* Size=0x58 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGauge Gauge;
+    /* 0x10 */ Component::GUI::AtkResNode* Container;
+    /* 0x18 */ Component::GUI::AtkResNode* Container2;
+    /* 0x20 */ Component::GUI::AtkComponentGaugeBar* FaeGaugeBar;
+    /* 0x28 */ Component::GUI::AtkResNode* FaeGaugeBarFill;
+    /* 0x30 */ Component::GUI::AtkComponentTextNineGrid* FaeValueDisplay;
+    /* 0x38 */ __int32 FaeBarState;
+    /*      */ byte _gap_0x3C[0x4];
+    /* 0x40 */ Component::GUI::AtkResNode* SeraphContainer;
+    /* 0x48 */ Component::GUI::AtkComponentTextNineGrid* SeraphTimerDisplay;
+    /*      */ byte _gap_0x50[0x8];
+};
+
+__unaligned struct Client::UI::AddonJobHudSCH0 /* Size=0x388 */
+{
+    /* 0x000 */ Client::UI::AddonJobHud JobHud;
+    /* 0x260 */ Client::UI::AddonJobHudSCH0::FaerieGaugeData DataPrevious;
+    /* 0x280 */ Client::UI::AddonJobHudSCH0::FaerieGaugeData DataCurrent;
+    /* 0x2A0 */ Client::UI::AddonJobHudSCH0::FaerieGauge GaugeStandard;
+    /* 0x330 */ Client::UI::AddonJobHudSCH0::FaerieGaugeSimple GaugeSimple;
+};
+
+__unaligned struct Client::UI::AddonJobHudSMN0::AetherflowSMNGaugeData /* Size=0x10 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGaugeData GaugeData;
+    /* 0x08 */ __int32 AetherflowStacks;
+    /* 0x0C */ byte Prerequisites[0x1];
+    /*      */ byte _gap_0xD;
+    /*      */ byte _gap_0xE[0x2];
+};
+
+__unaligned struct Client::UI::AddonJobHudSMN0::AetherflowSMNGauge /* Size=0x38 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGauge Gauge;
+    /* 0x10 */ Component::GUI::AtkComponentBase* StackContainer1;
+    /* 0x18 */ Component::GUI::AtkComponentBase* StackContainer2;
+    /* 0x20 */ Component::GUI::AtkResNode* Stack1;
+    /* 0x28 */ Component::GUI::AtkResNode* Stack2;
+    /* 0x30 */ bool Stack1Ready;
+    /* 0x31 */ bool Stack2Ready;
+    /*      */ byte _gap_0x32[0x2];
+    /* 0x34 */ __int32 TimelineFrameId;
+};
+
+__unaligned struct Client::UI::AddonJobHudSMN0::AetherflowSMNGaugeSimple /* Size=0x38 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGauge Gauge;
+    /* 0x10 */ Component::GUI::AtkComponentBase* StackContainer1;
+    /* 0x18 */ Component::GUI::AtkComponentBase* StackContainer2;
+    /* 0x20 */ Component::GUI::AtkResNode* Stack1;
+    /* 0x28 */ Component::GUI::AtkResNode* Stack2;
+    /* 0x30 */ bool Stack1Ready;
+    /* 0x31 */ bool Stack2Ready;
+    /*      */ byte _gap_0x32[0x2];
+    /* 0x34 */ __int32 TimelineFrameId;
+};
+
+__unaligned struct Client::UI::AddonJobHudSMN0 /* Size=0x2F0 */
+{
+    /* 0x000 */ Client::UI::AddonJobHud JobHud;
+    /* 0x260 */ Client::UI::AddonJobHudSMN0::AetherflowSMNGaugeData DataPrevious;
+    /* 0x270 */ Client::UI::AddonJobHudSMN0::AetherflowSMNGaugeData DataCurrent;
+    /* 0x280 */ Client::UI::AddonJobHudSMN0::AetherflowSMNGauge GaugeStandard;
+    /* 0x2B8 */ Client::UI::AddonJobHudSMN0::AetherflowSMNGaugeSimple GaugeSimple;
+};
+
+__unaligned struct Client::UI::AddonJobHudSMN1::TranceGaugeData /* Size=0x38 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGaugeData GaugeData;
+    /* 0x08 */ byte Prerequisites[0x2];
+    /*      */ byte _gap_0xA[0x2];
+    /* 0x0C */ __int32 Phase;
+    /* 0x10 */ __int32 SummonTimeLeft;
+    /* 0x14 */ __int32 SummonTimeMax;
+    /*      */ byte _gap_0x18[0x4];
+    /* 0x1C */ byte IfritReady;
+    /* 0x1D */ byte TitanReady;
+    /* 0x1E */ byte GarudaReady;
+    /*      */ byte _gap_0x1F;
+    /* 0x20 */ __int32 Prerequisites2[0x3];
+    /* 0x2C */ __int32 CurrentEgi;
+    /* 0x30 */ __int32 Attunement;
+    /*      */ byte _gap_0x34[0x4];
+};
+
+__unaligned struct Client::UI::AddonJobHudSMN1::TranceGauge::EgiGauge /* Size=0x28 */
+{
+    /* 0x00 */ Component::GUI::AtkComponentBase* Container;
+    /* 0x08 */ Component::GUI::AtkTextNode* AttunementStackText;
+    /* 0x10 */ Component::GUI::AtkResNode* Gem;
+    /* 0x18 */ Component::GUI::AtkResNode* Silhouette;
+    /* 0x20 */ __int32 Status;
+    /*      */ byte _gap_0x24[0x4];
+};
+
+__unaligned struct Client::UI::AddonJobHudSMN1::TranceGauge /* Size=0x108 */
+{
+    /* 0x000 */ Client::UI::AddonJobHud::AddonJobHudGauge Gauge;
+    /* 0x010 */ Component::GUI::AtkResNode* Container;
+    /* 0x018 */ Component::GUI::AtkResNode* CarbunclePlate;
+    /* 0x020 */ Component::GUI::AtkImageNode* CarbuncleBar;
+    /* 0x028 */ Component::GUI::AtkTextNode* CarbuncleGaugeValue;
+    /*       */ byte _gap_0x30[0x8];
+    /* 0x038 */ Component::GUI::AtkResNode* SummonPlate;
+    /* 0x040 */ Component::GUI::AtkResNode* SummonHead;
+    /* 0x048 */ Component::GUI::AtkTextNode* TranceGaugeValue;
+    /*       */ byte _gap_0x50[0x8];
+    /* 0x058 */ Component::GUI::AtkImageNode* TranceBar;
+    /*       */ byte _gap_0x60[0x8];
+    /* 0x068 */ Component::GUI::AtkResNode* SummonWing;
+    /* 0x070 */ Component::GUI::AtkResNode* SummonBarMask;
+    /* 0x078 */ Component::GUI::AtkResNode* EgiGems;
+    /* 0x080 */ Component::GUI::AtkComponentTextNineGrid* EgiTimerDisplay;
+    /* 0x088 */ Client::UI::AddonJobHudSMN1::TranceGauge::EgiGauge IfritGauge;
+    /* 0x0B0 */ Client::UI::AddonJobHudSMN1::TranceGauge::EgiGauge TitanGauge;
+    /* 0x0D8 */ Client::UI::AddonJobHudSMN1::TranceGauge::EgiGauge GarudaGauge;
+    /*       */ byte _gap_0x100[0x8];
+};
+
+__unaligned struct Client::UI::AddonJobHudSMN1::TranceGaugeSimple::EgiGaugeSimple /* Size=0x20 */
+{
+    /* 0x00 */ Component::GUI::AtkComponentBase* Gem;
+    /* 0x08 */ Component::GUI::AtkTextNode* AttunementStackText;
+    /* 0x10 */ Component::GUI::AtkResNode* GemGlow;
+    /* 0x18 */ __int32 Status;
+    /*      */ byte _gap_0x1C[0x4];
+};
+
+__unaligned struct Client::UI::AddonJobHudSMN1::TranceGaugeSimple /* Size=0xD8 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGauge Gauge;
+    /* 0x10 */ Component::GUI::AtkComponentGaugeBar* TranceGaugeBar;
+    /* 0x18 */ Component::GUI::AtkResNode* SummonIcon;
+    /* 0x20 */ Component::GUI::AtkComponentTextNineGrid* TranceTimerDisplay;
+    /*      */ byte _gap_0x28[0x8];
+    /* 0x30 */ Component::GUI::AtkResNode* EgiContainer;
+    /* 0x38 */ Component::GUI::AtkComponentTextNineGrid* EgiTimerDisplay;
+    /* 0x40 */ Client::UI::AddonJobHudSMN1::TranceGaugeSimple::EgiGaugeSimple IfritGauge;
+    /* 0x60 */ Client::UI::AddonJobHudSMN1::TranceGaugeSimple::EgiGaugeSimple TitanGauge;
+    /* 0x80 */ Client::UI::AddonJobHudSMN1::TranceGaugeSimple::EgiGaugeSimple GarudaGauge;
+    /* 0xA0 */ Component::GUI::AtkComponentBase* EgiIconContainer;
+    /* 0xA8 */ Component::GUI::AtkResNode* EgiIcons;
+    /* 0xB0 */ Component::GUI::AtkResNode* IfritIcon;
+    /* 0xB8 */ Component::GUI::AtkResNode* TitanIcon;
+    /* 0xC0 */ Component::GUI::AtkResNode* GarudaIcon;
+    /* 0xC8 */ bool EgiActive;
+    /*      */ byte _gap_0xC9;
+    /*      */ byte _gap_0xCA[0x2];
+    /*      */ byte _gap_0xCC[0x4];
+    /* 0xD0 */ Component::GUI::AtkResNode* TimelineFrameId;
+};
+
+__unaligned struct Client::UI::AddonJobHudSMN1 /* Size=0x4B0 */
+{
+    /* 0x000 */ Client::UI::AddonJobHud JobHud;
+    /* 0x260 */ Client::UI::AddonJobHudSMN1::TranceGaugeData DataPrevious;
+    /* 0x298 */ Client::UI::AddonJobHudSMN1::TranceGaugeData DataCurrent;
+    /* 0x2D0 */ Client::UI::AddonJobHudSMN1::TranceGauge GaugeStandard;
+    /* 0x3D8 */ Client::UI::AddonJobHudSMN1::TranceGaugeSimple GaugeSimple;
+};
+
+__unaligned struct Client::UI::AddonJobHudWAR0::BeastGaugeData /* Size=0x18 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGaugeData GaugeData;
+    /* 0x08 */ byte Prerequisites[0x3];
+    /*      */ byte _gap_0xB;
+    /* 0x0C */ __int32 BeastValue;
+    /* 0x10 */ __int32 BeastMax;
+    /*      */ byte _gap_0x14[0x4];
+};
+
+__unaligned struct Client::UI::AddonJobHudWAR0::BeastGauge /* Size=0x58 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGauge Gauge;
+    /* 0x10 */ Component::GUI::AtkResNode* Container;
+    /* 0x18 */ Component::GUI::AtkResNode* Container2;
+    /* 0x20 */ Component::GUI::AtkResNode* Container3;
+    /* 0x28 */ Component::GUI::AtkComponentGaugeBar* BeastGaugeBar;
+    /* 0x30 */ Component::GUI::AtkTextNode* BeastValueText;
+    /* 0x38 */ Component::GUI::AtkComponentBase* StancePlateContainer;
+    /* 0x40 */ Component::GUI::AtkResNode* StancePlate;
+    /* 0x48 */ Component::GUI::AtkResNode* StanceGemLowLevel;
+    /*      */ byte _gap_0x50[0x8];
+};
+
+__unaligned struct Client::UI::AddonJobHudWAR0::BeastGaugeSimple /* Size=0x40 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGauge Gauge;
+    /* 0x10 */ Component::GUI::AtkResNode* BarContainer;
+    /* 0x18 */ Component::GUI::AtkComponentGaugeBar* BeastGaugeBar;
+    /* 0x20 */ Component::GUI::AtkResNode* BeastGaugeBarFill;
+    /* 0x28 */ Component::GUI::AtkComponentTextNineGrid* BeastValueDisplay;
+    /* 0x30 */ Component::GUI::AtkComponentBase* StanceIcon;
+    /*      */ byte _gap_0x38[0x8];
+};
+
+__unaligned struct Client::UI::AddonJobHudWAR0 /* Size=0x328 */
+{
+    /* 0x000 */ Client::UI::AddonJobHud JobHud;
+    /* 0x260 */ Client::UI::AddonJobHudWAR0::BeastGaugeData DataPrevious;
+    /* 0x278 */ Client::UI::AddonJobHudWAR0::BeastGaugeData DataCurrent;
+    /* 0x290 */ Client::UI::AddonJobHudWAR0::BeastGauge GaugeStandard;
+    /* 0x2E8 */ Client::UI::AddonJobHudWAR0::BeastGaugeSimple GaugeSimple;
+};
+
+__unaligned struct Client::UI::AddonJobHudWHM0::HealingGaugeData /* Size=0x20 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGaugeData GaugeData;
+    /* 0x08 */ byte Prerequisites[0x2];
+    /*      */ byte _gap_0xA[0x2];
+    /* 0x0C */ __int32 LilyCount;
+    /* 0x10 */ __int32 LiliesSpent;
+    /* 0x14 */ __int32 LilyTimer;
+    /* 0x18 */ __int32 LilyTimerMax;
+    /*      */ byte _gap_0x1C[0x4];
+};
+
+__unaligned struct Client::UI::AddonJobHudWHM0::HealingGauge /* Size=0x70 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGauge Gauge;
+    /* 0x10 */ Component::GUI::AtkResNode* Container;
+    /* 0x18 */ Component::GUI::AtkResNode* LilyContainer;
+    /* 0x20 */ Component::GUI::AtkResNode* BloodLily;
+    /* 0x28 */ __int32 LiliesSpent;
+    /*      */ byte _gap_0x2C[0x4];
+    /* 0x30 */ Component::GUI::AtkComponentBase* Lily[0x3];
+    /* 0x48 */ __int32 LilyCount;
+    /*      */ byte _gap_0x4C[0x4];
+    /* 0x50 */ Component::GUI::AtkResNode* Branch;
+    /* 0x58 */ Component::GUI::AtkComponentBase* Shine;
+    /* 0x60 */ Component::GUI::AtkResNode* BranchContainer;
+    /*      */ byte _gap_0x68[0x8];
+};
+
+__unaligned struct Component::GUI::AtkComponentBase /* Size=0xC0 */
+{
+    union {
+    /* 0x00 */ Component::GUI::AtkEventListener AtkEventListener;
+    /* 0x00 */ Component::GUI::AtkComponentBase::AtkComponentBaseVTable* VTable;
+    } _union_0x0;
+    /* 0x08 */ Component::GUI::AtkUldManager UldManager;
+    /*      */ byte _gap_0x98[0x8];
+    /* 0xA0 */ Component::GUI::AtkResNode* AtkResNode;
+    /* 0xA8 */ Component::GUI::AtkComponentNode* OwnerNode;
+    /*      */ byte _gap_0xB0[0x10];
+};
+
+__unaligned struct Component::GUI::AtkComponentGaugeBar::GaugeValueTransition /* Size=0x10 */
+{
+    /* 0x00 */ __int32 StartValue;
+    /* 0x04 */ __int32 EndValue;
+    /* 0x08 */ float Progress;
+    /* 0x0C */ float TransitionLength;
+};
+
+__unaligned struct Component::GUI::AtkComponentGaugeBar::GaugeValueTransitionData /* Size=0x20 */
+{
+    /* 0x00 */ Component::GUI::AtkComponentGaugeBar::GaugeValueTransition Increase;
+    /* 0x10 */ Component::GUI::AtkComponentGaugeBar::GaugeValueTransition Decrease;
+};
+
+__unaligned struct Component::GUI::AtkComponentGaugeBar::GaugeValue /* Size=0x10 */
+{
+    /* 0x00 */ __int32 ValueInt;
+    /* 0x04 */ float ValueFloatIncreasing;
+    /* 0x08 */ float ValueFloat;
+    /* 0x0C */ float ValueFloatDecreasing;
+};
+
+__unaligned struct Component::GUI::AtkComponentGaugeBar::GaugeFill /* Size=0x18 */
+{
+    /* 0x00 */ Component::GUI::AtkNineGridNode* MainFillNode;
+    /* 0x08 */ Component::GUI::AtkNineGridNode* IncreaseFillNode;
+    /* 0x10 */ Component::GUI::AtkNineGridNode* DecreaseFillNode;
+};
+
+__unaligned struct Component::GUI::AtkComponentGaugeBar /* Size=0x1A8 */
+{
+    /* 0x000 */ Component::GUI::AtkComponentBase AtkComponentBase;
+    /* 0x0C0 */ Component::GUI::AtkComponentGaugeBar::GaugeValueTransitionData TransitionData[0x2];
+    /* 0x100 */ Component::GUI::AtkComponentGaugeBar::GaugeValue Values[0x2];
+    /* 0x120 */ Component::GUI::AtkImageNode* BackdropImageNode;
+    /* 0x128 */ Component::GUI::AtkComponentGaugeBar::GaugeFill PrimaryFill;
+    /* 0x140 */ Component::GUI::AtkComponentGaugeBar::GaugeFill SecondaryFill;
+    /* 0x158 */ Component::GUI::AtkComponentGaugeBar::GaugeFill SecondaryOverflow;
+    /* 0x170 */ Component::GUI::AtkImageNode* SecondaryOverflowMaxIcon;
+    /* 0x178 */ Component::GUI::AtkNineGridNode* RestedExpNode;
+    /* 0x180 */ Component::GUI::AtkNineGridNode* BorderNineGridNode;
+    /* 0x188 */ Component::GUI::AtkTextNode* ParameterTextNode;
+    /* 0x190 */ __int32 MinValue;
+    /* 0x194 */ __int32 MaxValue;
+    /*       */ byte _gap_0x198[0x8];
+    /* 0x1A0 */ __int16 MarginX;
+    /* 0x1A2 */ __int16 MaxFillPositionX;
+    /*       */ byte _gap_0x1A4[0x4];
+};
+
+__unaligned struct Client::UI::AddonJobHudWHM0::HealingGaugeSimple /* Size=0xA0 */
+{
+    /* 0x00 */ Client::UI::AddonJobHud::AddonJobHudGauge Gauge;
+    /* 0x10 */ Component::GUI::AtkResNode* Container;
+    /* 0x18 */ Component::GUI::AtkComponentBase* LilyGem1;
+    /* 0x20 */ Component::GUI::AtkComponentBase* LilyGem2;
+    /* 0x28 */ Component::GUI::AtkComponentBase* LilyGem3;
+    /* 0x30 */ Component::GUI::AtkResNode* LilyGemGlow1;
+    /* 0x38 */ Component::GUI::AtkResNode* LilyGemGlow2;
+    /* 0x40 */ Component::GUI::AtkResNode* LilyGemGlow3;
+    /*      */ byte _gap_0x48[0x8];
+    /* 0x50 */ Component::GUI::AtkResNode* BloodLilyContainer;
+    /* 0x58 */ Component::GUI::AtkComponentBase* BloodGem1;
+    /* 0x60 */ Component::GUI::AtkComponentBase* BloodGem2;
+    /* 0x68 */ Component::GUI::AtkComponentBase* BloodGem3;
+    /* 0x70 */ Component::GUI::AtkResNode* BloodGemGlow1;
+    /* 0x78 */ Component::GUI::AtkResNode* BloodGemGlow2;
+    /* 0x80 */ Component::GUI::AtkResNode* BloodGemGlow3;
+    /*      */ byte _gap_0x88[0x8];
+    /* 0x90 */ Component::GUI::AtkComponentGaugeBar LilyTimerGaugeBar;
+};
+
+__unaligned struct Client::UI::AddonJobHudWHM0 /* Size=0x3B0 */
+{
+    /* 0x000 */ Client::UI::AddonJobHud JobHud;
+    /* 0x260 */ Client::UI::AddonJobHudWHM0::HealingGaugeData DataPrevious;
+    /* 0x280 */ Client::UI::AddonJobHudWHM0::HealingGaugeData DataCurrent;
+    /* 0x2A0 */ Client::UI::AddonJobHudWHM0::HealingGauge GaugeStandard;
+    /* 0x310 */ Client::UI::AddonJobHudWHM0::HealingGaugeSimple GaugeSimple;
 };
 
 __unaligned struct Client::UI::AddonJournalDetail /* Size=0x2F8 */
@@ -12949,7 +15042,9 @@ __unaligned struct StdDequeClientSystemStringUtf8String /* Size=0x28 */
 __unaligned struct Client::UI::Agent::AgentRecipeNote /* Size=0x568 */
 {
     /* 0x000 */ Component::GUI::AgentInterface AgentInterface;
-    /*       */ byte _gap_0x28[0x390];
+    /*       */ byte _gap_0x28[0x388];
+    /* 0x3B0 */ __int32 SelectedCraftType;
+    /*       */ byte _gap_0x3B4[0x4];
     /*       */ byte _gap_0x3B8[0x4];
     /* 0x3BC */ __int32 SelectedRecipeIndex;
     /*       */ byte _gap_0x3C0[0x10];
@@ -14735,6 +16830,41 @@ __unaligned struct Client::UI::Misc::ConfigModule::Option /* Size=0x20 */
     /*      */ byte _gap_0x1E[0x2];
 };
 
+__unaligned struct Client::UI::Misc::HotBarSlot /* Size=0xE0 */
+{
+    /* 0x00 */ Client::System::String::Utf8String PopUpHelp;
+    /* 0x68 */ byte CostText[0x20];
+    /* 0x88 */ byte PopUpKeybindHint[0x20];
+    /* 0xA8 */ byte KeybindHint[0x10];
+    /* 0xB8 */ unsigned __int32 CommandId;
+    /* 0xBC */ unsigned __int32 IconA;
+    /* 0xC0 */ unsigned __int32 IconB;
+    /* 0xC4 */ unsigned __int16 UNK_0xC4;
+    /*      */ byte _gap_0xC6;
+    /* 0xC7 */ Client::UI::Misc::HotbarSlotType CommandType;
+    /* 0xC8 */ Client::UI::Misc::HotbarSlotType IconTypeA;
+    /* 0xC9 */ Client::UI::Misc::HotbarSlotType IconTypeB;
+    /* 0xCA */ byte CostType;
+    /* 0xCB */ byte CostDisplayMode;
+    /* 0xCC */ __int32 Icon;
+    /* 0xD0 */ unsigned __int32 CostValue;
+    /* 0xD4 */ unsigned __int32 UNK_0xD4;
+    /* 0xD8 */ unsigned __int32 UNK_0xD8;
+    /* 0xDC */ byte UNK_0xDC;
+    /* 0xDD */ byte UNK_0xDD;
+    /* 0xDE */ byte UNK_0xDE;
+    /* 0xDF */ byte IsLoaded;
+};
+
+__unaligned struct Client::UI::Misc::DutyActionSlot /* Size=0xE8 */
+{
+    /* 0x00 */ Client::UI::Misc::HotBarSlot Slot;
+    /* 0xE0 */ byte PrimaryCostType;
+    /*      */ byte _gap_0xE1;
+    /*      */ byte _gap_0xE2[0x2];
+    /*      */ byte _gap_0xE4[0x4];
+};
+
 __unaligned struct Client::UI::Misc::ExportedPortraitData /* Size=0x34 */
 {
     /* 0x00 */ Common::Math::HalfVector4 CameraPosition;
@@ -14792,35 +16922,33 @@ __unaligned struct Client::UI::Misc::FieldMarkerModule /* Size=0xC78 */
     /*       */ byte _gap_0xC70[0x8];
 };
 
-__unaligned struct Client::UI::Misc::HotBarSlot /* Size=0xE0 */
-{
-    /* 0x00 */ Client::System::String::Utf8String PopUpHelp;
-    /* 0x68 */ byte CostText[0x20];
-    /* 0x88 */ byte PopUpKeybindHint[0x20];
-    /* 0xA8 */ byte KeybindHint[0x10];
-    /* 0xB8 */ unsigned __int32 CommandId;
-    /* 0xBC */ unsigned __int32 IconA;
-    /* 0xC0 */ unsigned __int32 IconB;
-    /* 0xC4 */ unsigned __int16 UNK_0xC4;
-    /*      */ byte _gap_0xC6;
-    /* 0xC7 */ Client::UI::Misc::HotbarSlotType CommandType;
-    /* 0xC8 */ Client::UI::Misc::HotbarSlotType IconTypeA;
-    /* 0xC9 */ Client::UI::Misc::HotbarSlotType IconTypeB;
-    /* 0xCA */ byte CostType;
-    /* 0xCB */ byte CostDisplayMode;
-    /* 0xCC */ __int32 Icon;
-    /* 0xD0 */ unsigned __int32 CostValue;
-    /* 0xD4 */ unsigned __int32 UNK_0xD4;
-    /* 0xD8 */ unsigned __int32 UNK_0xD8;
-    /* 0xDC */ byte UNK_0xDC;
-    /* 0xDD */ byte UNK_0xDD;
-    /* 0xDE */ byte UNK_0xDE;
-    /* 0xDF */ byte IsLoaded;
-};
-
 __unaligned struct Client::UI::Misc::HotBar /* Size=0xE00 */
 {
     /* 0x000 */ Client::UI::Misc::HotBarSlot Slots[0x10];
+};
+
+__unaligned struct Client::UI::Misc::HotBarUiIntermediate /* Size=0x43 */
+{
+    /* 0x00 */ Client::System::String::Utf8String* PopUpHelpText;
+    /* 0x08 */ __int64 CostTextPtr;
+    /* 0x10 */ unsigned __int32 IntermediateActionType;
+    /* 0x14 */ unsigned __int32 ActionId;
+    /* 0x18 */ unsigned __int32 IconId;
+    /* 0x1C */ unsigned __int32 CooldownMode;
+    /* 0x20 */ unsigned __int32 CooldownSeconds;
+    /* 0x24 */ unsigned __int32 CooldownPercent;
+    /* 0x28 */ unsigned __int32 LastCooldownPercent;
+    /* 0x2C */ unsigned __int32 ChargePercent;
+    /* 0x30 */ unsigned __int32 LastChargePercent;
+    /* 0x34 */ unsigned __int32 CurrentCharges;
+    /* 0x38 */ unsigned __int32 CostValue;
+    /* 0x3C */ byte CostType;
+    /* 0x3D */ byte CostDisplayMode;
+    /* 0x3E */ bool ActionAvailable1;
+    /* 0x3F */ bool ActionAvailable2;
+    /* 0x40 */ bool ActionTargetSatisfied;
+    /* 0x41 */ bool DrawAnts;
+    /* 0x42 */ byte Unk_0x42;
 };
 
 __unaligned struct Client::UI::Misc::InputTimerModule::InputTimerData /* Size=0x38 */
@@ -15174,7 +17302,7 @@ __unaligned struct Client::UI::Misc::SavedHotBarGroup /* Size=0x5A0 */
 __unaligned struct Client::UI::Misc::RaptureHotbarModule /* Size=0x288F8 */
 {
     /* 0x00000 */ Client::UI::Misc::UserFileManager::UserFileEvent UserFileEvent;
-    /*         */ byte _gap_0x40[0x8];
+    /* 0x00040 */ void** InputCodeModifiedInterfaceVTable;
     /* 0x00048 */ Client::UI::UIModule* UiModule;
     /*         */ byte _gap_0x50;
     /* 0x00051 */ byte ActiveHotbarClassJobId;
@@ -15188,10 +17316,15 @@ __unaligned struct Client::UI::Misc::RaptureHotbarModule /* Size=0x288F8 */
     /* 0x0FC90 */ Client::UI::Misc::HotBar PetHotBar;
     /* 0x10A90 */ Client::UI::Misc::HotBar PetCrossHotBar;
     /* 0x11890 */ Client::UI::Misc::HotBarSlot ScratchSlot;
-    /*         */ byte _gap_0x11970[0x4];
+    /* 0x11970 */ unsigned __int32 PetHotbarMode;
     /* 0x11974 */ Client::UI::Misc::SavedHotBarGroup SavedHotBars[0x41];
     /*         */ byte _gap_0x28714[0x4];
-    /*         */ byte _gap_0x28718[0x1E0];
+    /*         */ byte _gap_0x28718[0x8];
+    /* 0x28720 */ Client::UI::Misc::DutyActionSlot DutyActionSlots[0x2];
+    /* 0x288F0 */ bool DutyActionsPresent;
+    /*         */ byte _gap_0x288F1;
+    /*         */ byte _gap_0x288F2[0x2];
+    /*         */ byte _gap_0x288F4[0x4];
 };
 
 __unaligned struct StdVectorint32 /* Size=0x18 */
@@ -16117,6 +18250,14 @@ __unaligned struct Common::Lua::lua_State /* Size=0xB0 */
     /*      */ byte _gap_0x0[0xB0];
 };
 
+__unaligned struct Common::Math::Bounds /* Size=0x10 */
+{
+    /* 0x00 */ System::Drawing::Point Pos1;
+    /*      */ byte _gap_0x0[0x8];
+    /* 0x08 */ System::Drawing::Point Pos2;
+    /*      */ byte _gap_0x8[0x8];
+};
+
 __unaligned struct Common::Math::Matrix2x2 /* Size=0x10 */
 {
     /*      */ byte _gap_0x0[0x10];
@@ -16300,19 +18441,6 @@ __unaligned struct Component::GUI::AtkCollisionNode /* Size=0xC0 */
     /* 0xB8 */ Component::GUI::AtkComponentBase* LinkedComponent;
 };
 
-__unaligned struct Component::GUI::AtkComponentBase /* Size=0xC0 */
-{
-    union {
-    /* 0x00 */ Component::GUI::AtkEventListener AtkEventListener;
-    /* 0x00 */ Component::GUI::AtkComponentBase::AtkComponentBaseVTable* VTable;
-    } _union_0x0;
-    /* 0x08 */ Component::GUI::AtkUldManager UldManager;
-    /*      */ byte _gap_0x98[0x8];
-    /* 0xA0 */ Component::GUI::AtkResNode* AtkResNode;
-    /* 0xA8 */ Component::GUI::AtkComponentNode* OwnerNode;
-    /*      */ byte _gap_0xB0[0x10];
-};
-
 __unaligned struct Component::GUI::AtkComponentBase::AtkComponentBaseVTable /* Size=0x0 */
 {
     /*     */ __int64 _vf0;
@@ -16372,15 +18500,9 @@ __unaligned struct Component::GUI::AtkComponentDropDownList /* Size=0xE0 */
     /* 0xC8 */ Component::GUI::AtkComponentList* List;
     /*      */ byte _gap_0xD0[0x8];
     /* 0xD8 */ bool IsOpen;
-    /*      */ byte _gap_0xD9;
+    /* 0xD9 */ bool OpenStateChangePending;
     /*      */ byte _gap_0xDA[0x2];
     /*      */ byte _gap_0xDC[0x4];
-};
-
-__unaligned struct Component::GUI::AtkComponentGaugeBar /* Size=0x1A8 */
-{
-    /* 0x000 */ Component::GUI::AtkComponentBase AtkComponentBase;
-    /*       */ byte _gap_0xC0[0xE8];
 };
 
 __unaligned struct Component::GUI::AtkComponentGuildLeveCard /* Size=0xF0 */
@@ -16617,7 +18739,10 @@ __unaligned struct Component::GUI::AtkComponentTextInput /* Size=0x600 */
 __unaligned struct Component::GUI::AtkComponentTextNineGrid /* Size=0xD8 */
 {
     /* 0x00 */ Component::GUI::AtkComponentBase AtkComponentBase;
-    /*      */ byte _gap_0xC0[0x18];
+    /* 0xC0 */ Component::GUI::AtkTextNode* AtkTextNode;
+    /* 0xC8 */ Component::GUI::AtkResNode* OwnerNode;
+    /* 0xD0 */ float OwnerX;
+    /* 0xD4 */ __int32 Flags;
 };
 
 __unaligned struct StdVectorComponentGUIAtkComponentTreeListItemPtr /* Size=0x18 */
@@ -16914,6 +19039,12 @@ __unaligned struct Component::GUI::AtkResNode::AtkResNodeVTable /* Size=0x0 */
     /*     */ __int64 _vf0;
     /* 0x8 */ void (__fastcall *Destroy)(Component::GUI::AtkResNode* a1, bool a2);
     /* 0x10 */ void (__fastcall *UpdateFromTimeline)(Component::GUI::AtkResNode* a1);
+};
+
+__unaligned struct Component::GUI::AtkSimpleTween::AtkSimpleTweenVTable /* Size=0x0 */
+{
+    /*     */ __int64 _vf0;
+    /* 0x8 */ void (__fastcall *Dtor)(Component::GUI::AtkSimpleTween* a1);
 };
 
 __unaligned struct StdPairComponentGUIAtkResNodePtrComponentGUIAtkTooltipManagerAtkTooltipInfoPtr /* Size=0x10 */
@@ -17472,21 +19603,21 @@ __unaligned struct Component::GUI::AtkUnitBase::AtkUnitBaseVTable /* Size=0x0 */
     /*     */ __int64 _vf19;
     /*     */ __int64 _vf20;
     /*     */ __int64 _vf21;
-    /*     */ __int64 _vf22;
-    /*     */ __int64 _vf23;
+    /* 0xB0 */ bool (__fastcall *ShouldIgnoreInputs)(Component::GUI::AtkUnitBase* a1);
+    /* 0xB8 */ Component::GUI::AtkResNode* (__fastcall *GetRootNode)(Component::GUI::AtkUnitBase* a1);
     /*     */ __int64 _vf24;
     /*     */ __int64 _vf25;
-    /*     */ __int64 _vf26;
+    /* 0xD0 */ void (__fastcall *GetWindowBounds)(Component::GUI::AtkUnitBase* a1, Common::Math::Bounds* a2);
     /*     */ __int64 _vf27;
     /*     */ __int64 _vf28;
-    /*     */ __int64 _vf29;
+    /* 0xE8 */ void (__fastcall *GetRootBounds)(Component::GUI::AtkUnitBase* a1, Common::Math::Bounds* a2);
     /*     */ __int64 _vf30;
     /*     */ __int64 _vf31;
     /*     */ __int64 _vf32;
     /*     */ __int64 _vf33;
     /*     */ __int64 _vf34;
     /*     */ __int64 _vf35;
-    /*     */ __int64 _vf36;
+    /* 0x120 */ void (__fastcall *Focus)(Component::GUI::AtkUnitBase* a1);
     /*     */ __int64 _vf37;
     /*     */ __int64 _vf38;
     /*     */ __int64 _vf39;
@@ -17496,14 +19627,14 @@ __unaligned struct Component::GUI::AtkUnitBase::AtkUnitBaseVTable /* Size=0x0 */
     /* 0x158 */ void (__fastcall *Draw)(Component::GUI::AtkUnitBase* a1);
     /*     */ __int64 _vf44;
     /*     */ __int64 _vf45;
-    /*     */ __int64 _vf46;
+    /* 0x170 */ bool (__fastcall *CheckWindowCollisionAtCoords)(Component::GUI::AtkUnitBase* a1, __int16 a2, __int16 a3);
     /*     */ __int64 _vf47;
     /* 0x180 */ void (__fastcall *OnSetup)(Component::GUI::AtkUnitBase* a1, unsigned __int32 a2, Component::GUI::AtkValue* a3);
     /*     */ __int64 _vf49;
     /* 0x190 */ void (__fastcall *OnRefresh)(Component::GUI::AtkUnitBase* a1, unsigned __int32 a2, Component::GUI::AtkValue* a3);
     /* 0x198 */ void (__fastcall *OnUpdate)(Component::GUI::AtkUnitBase* a1, Component::GUI::NumberArrayData** a2, Component::GUI::StringArrayData** a3);
     /*     */ __int64 _vf52;
-    /*     */ __int64 _vf53;
+    /* 0x1A8 */ void (__fastcall *FireCloseCallback)(Component::GUI::AtkUnitBase* a1);
     /*     */ __int64 _vf54;
     /*     */ __int64 _vf55;
     /*     */ __int64 _vf56;
@@ -17559,6 +19690,22 @@ __unaligned struct Component::GUI::NumberArrayData /* Size=0x28 */
 {
     /* 0x00 */ Component::GUI::AtkArrayData AtkArrayData;
     /* 0x20 */ __int32* IntArray;
+};
+
+__unaligned struct Component::GUI::SimpleTweenAnimation /* Size=0x20 */
+{
+    /* 0x00 */ Component::GUI::SimpleTweenAnimation* Next;
+    /* 0x08 */ Component::GUI::SimpleTweenAnimation* Previous;
+    /* 0x10 */ Component::GUI::SimpleTweenValueType Type;
+    /* 0x14 */ float StartValue;
+    /* 0x18 */ float Delta;
+    /*      */ byte _gap_0x1C[0x4];
+};
+
+__unaligned struct Component::GUI::SimpleTweenValue /* Size=0x8 */
+{
+    /* 0x0 */ Component::GUI::SimpleTweenValueType Type;
+    /* 0x4 */ float Value;
 };
 
 __unaligned struct Component::GUI::StringArrayData /* Size=0x30 */
