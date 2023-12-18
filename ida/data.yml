@@ -7978,6 +7978,12 @@ classes:
         base: Client::Game::InstanceContent::InstanceContentDirector
     funcs:
       0x141455A00: ctor
+  Client::Game::InstanceContent::InstanceContentRaidDragonsongsReprise: # Dragonsong's Reprise (Ultimate)
+    vtbls:
+      - ea: 0x141B8BE60
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141460D70: ctor
   Client::Game::InstanceContent::InstanceContentDungeonSastasha: # Sastasha
     vtbls:
       - ea: 0x141B70F90
