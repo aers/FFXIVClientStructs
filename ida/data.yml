@@ -7822,6 +7822,78 @@ classes:
         base: Client::Game::InstanceContent::InstanceContentDirector
     funcs:
       0x141489B10: ctor
+  Client::Game::InstanceContent::InstanceContentRaidDeltascape001: # Deltascape V1.0 / Deltascape V1.0 (Savage)
+    vtbls:
+      - ea: 0x141C1AEA0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414A7CD0: ctor
+  Client::Game::InstanceContent::InstanceContentRaidDeltascape002: # Deltascape V2.0 / Deltascape V2.0 (Savage)
+    vtbls:
+      - ea: 0x141C1BAA8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414A7D20: ctor
+  Client::Game::InstanceContent::InstanceContentRaidDeltascape003: # Deltascape V3.0 / Deltascape V3.0 (Savage)
+    vtbls:
+      - ea: 0x141C1C6B0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414A7DA0: ctor
+  Client::Game::InstanceContent::InstanceContentRaidDeltascape004: # Deltascape V4.0 / Deltascape V4.0 (Savage)
+    vtbls:
+      - ea: 0x141C1D2B8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414A7E20: ctor
+  Client::Game::InstanceContent::InstanceContentRaidSigmascape001: # Sigmascape V1.0 / Sigmascape V1.0 (Savage)
+    vtbls:
+      - ea: 0x141C236C8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414AB1B0: ctor
+  Client::Game::InstanceContent::InstanceContentRaidSigmascape002: # Sigmascape V2.0 / Sigmascape V2.0 (Savage)
+    vtbls:
+      - ea: 0x141C242E0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414AB230: ctor
+  Client::Game::InstanceContent::InstanceContentRaidSigmascape003: # Sigmascape V3.0 / Sigmascape V3.0 (Savage)
+    vtbls:
+      - ea: 0x141C24EE8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414AB360: ctor
+  Client::Game::InstanceContent::InstanceContentRaidSigmascape004: # Sigmascape V4.0 / Sigmascape V4.0 (Savage)
+    vtbls:
+      - ea: 0x141C25C30
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414AB420: ctor
+  Client::Game::InstanceContent::InstanceContentRaidAlphascape001: # Alphascape V1.0 / Alphascape V1.0 (Savage)
+    vtbls:
+      - ea: 0x141C26870
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414AB4A0: ctor
+  Client::Game::InstanceContent::InstanceContentRaidAlphascape002: # Alphascape V2.0 / Alphascape V2.0 (Savage)
+    vtbls:
+      - ea: 0x141C27478
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414AB540: ctor
+  Client::Game::InstanceContent::InstanceContentRaidAlphascape003: # Alphascape V3.0 / Alphascape V3.0 (Savage)
+    vtbls:
+      - ea: 0x141C28098
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414AB5E0: ctor
+  Client::Game::InstanceContent::InstanceContentRaidAlphascape004: # Alphascape V4.0 / Alphascape V4.0 (Savage)
+    vtbls:
+      - ea: 0x141C28CB0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414AB6A0: ctor
   Client::Game::InstanceContent::InstanceContentDungeonSastasha: # Sastasha
     vtbls:
       - ea: 0x141B70F90
