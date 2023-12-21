@@ -641,6 +641,24 @@ classes:
       0x1407460A0: RestorePrismBoxItem
       0x1407464F0: RequestGlamourPlates
       0x140746750: ApplyGlamourPlate
+  Client::Game::CurrencyManager:
+    instances:
+      - ea: 0x142221D10
+        pointer: True
+    funcs:
+      0x140B8D700: Create
+      0x140B8D770: Destroy
+      0x140B8D7B0: Initialize
+      0x140B8D8A0: Finalize
+      0x140B8D6D0: HasInstance
+      0x140B8D6F0: GetInstance
+      0x140B8D940: HasItem
+      0x140B8DA10: GetItemCount
+      0x140B8DAE0: GetItemMaxCount
+      0x140B8DBB0: GetItemCountRemaining
+      0x140B8DCB0: IsItemLimited
+      0x140B8DD80: GetItemIdBySpecialId
+      0x140B8DE00: SetItemData
   Client::Game::InventoryManager:
     instances:
       - ea: 0x1421EDC40
