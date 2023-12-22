@@ -734,24 +734,63 @@ classes:
       0x140B862D0: Destroy    # static
       0x140B86310: GetSingleton  # static
       0x140B86320: Load   # loads in a ton of sub-structs and other info.
-      0x140B898A0: ctor
-      0x140B89B40: Finalize
-      0x140B88450: LoadDemandResearchPacket
-      0x140B889D0: IsRecipeUnlocked # (this, recipeId)
-      0x140B88A00: IsPouchItemLocked # (this, pouchItemId)
       0x140B86C90: IsFunctionUnlocked # (this, functionId)
+      0x140B86D20: RegisterListener
+      0x140B86D50: UnregisterListener
       0x140B86ED0: HandleActorControlPacket
       0x140B87A00: HandleInboundPacket
-      0x140B88E80: GetVisibleMinimapIcons
+      0x140B87E70: HandleSchedulePacket
+      0x140B88100: SetDisplayedCycle
+      0x140B883A0: RequestDemandFull
+      0x140B883F0: RequestDemandSpecific
+      0x140B88450: LoadDemandResearchPacket
+      0x140B88590: ScheduleCraft
+      0x140B88610: CancelScheduledCraft
+      0x140B88650: SetRestCycles
+      0x140B889D0: IsRecipeUnlocked # (this, recipeId)
+      0x140B88A00: IsPouchItemLocked # (this, pouchItemId)
       0x140B88A10: IsItemLocked
+      0x140B88AF0: GetPastureExpectedCollectedLeavings
+      0x140B88B10: GetPastureCollectLeavingsWillOvercap
+      0x140B88B30: GetPastureNoLeavingsToCollect
+      0x140B88B90: GetPastureAnimals
+      0x140B88BB0: GetPastureCaptureState
       0x140B88BD0: GetPastureSlotCount
       0x140B88D60: GetFarmSlotCount
+      0x140B88E40: IsPastureEligibleForCare
+      0x140B88E50: IsFarmEligibleForCare
+      0x140B88E80: GetVisibleMinimapIcons
+      0x140B890F0: GetFavorCraftObjectId
+      0x140B89110: GetFavorNumDelivered
+      0x140B89130: GetFavorDeliveryComplete
+      0x140B89150: GetFavorIsBonus
+      0x140B89170: GetFavorNumScheduled
+      0x140B89190: GetFavorNumRequired
+      0x140B891B0: GetFavorReward
+      0x140B891D0: GetFavorFullBonus
+      0x140B891F0: RequestFavorData
+      0x140B89210: IsFavorDataAvailable
+      0x140B898A0: ctor
+      0x140B89B40: Finalize
   Client::Game::MJI::IslandState:
     funcs:
       0x140B8C830: ctor
   Client::Game::MJI::MJIPastureHandler:
     funcs:
       0x1414E23B0: ctor
+      0x1414E3710: DismissCaretaker
+      0x1414E3790: CollectLeavingsAll
+      0x1414E3810: IsValidAnimal
+      0x1414E3880: OpenUI
+      0x1414E39D0: CalculateExpectedCollectedLeavings
+      0x1414E3A80: CollectAllLeavingsWillOvercap
+      0x1414E3B30: NoLeavingsToCollect
+      0x1414E3CE0: UpdateAvailableLeavings
+      0x1414E4030: EntrustAnimal
+      0x1414E4260: CollectLeavingsSingle
+      0x1414E4300: CollectLeavingsAndReleaseAnimal
+      0x1414E4440: ReleaseAnimal
+      0x1414E4520: ChangeAnimalNickname
       0x1414E4AF0: GetCurrentRoamingMinionCount
       0x1414E4C60: SetMinionPlaceStatus  # (this, minionId, isPlaced)
       0x1414E4710: ExecuteReleaseMinion  # (this, minionId, areaId)
@@ -759,6 +798,49 @@ classes:
   Client::Game::MJI::MJIFarmState:
     funcs:
       0x1414DF100: ctor
+      0x1414DF1A0: dtor
+      0x1414DF270: InitSeedItemIds
+      0x1414DF2D0: Update
+      0x1414DF3A0: CalculateCareCost
+      0x1414DF400: GetSlotData
+      0x1414DF4D0: Entrust
+      0x1414DF520: Dismiss
+      0x1414DF570: CollectSingle
+      0x1414DF5C0: CollectSingleAndDismiss
+      0x1414DF610: UpdateExpectedTotalYield
+      0x1414DF6C0: CollectAll
+      0x1414DF900: UpdatePendingSlot
+      0x1414E02C0: InitCropLayout
+      0x1414E06A0: UpdateCropLayout
+  Client::Game::MJI::MJIFavorState:
+    funcs:
+      0x1414EB3C0: ctor
+      0x1414EB440: dtor
+      0x1414EB4A0: GetNumItemsDelivered
+      0x1414EB550: GetNumItemsRequired
+      0x1414EB600: GetItemReward
+      0x1414EB6C0: RequestData
+      0x1414EB700: ReceiveData
+      0x1414EB7C0: GetRequestData
+  Client::Game::MJI::MJIGranariesState:
+    funcs:
+      0x1414DEC20: ctor
+      0x1414DEC90: dtor
+      0x1414DECA0: CollectResources
+      0x1414DED30: SelectExpeditionStart
+      0x1414DEDC0: SelectExpeditionCommit
+      0x1414DEDF0: InitFromPacket
+      0x1414DEEA0: RefreshAgent
+      0x1414DEEC0: NotifyExpeditionUpdated
+      0x1414DEEE0: OpenUI
+      0x1414DEF00: HasAnyResources
+      0x1414DEFF0: GetActiveExpeditionId
+      0x1414DF010: GetRemainingDays
+      0x1414DF030: GetRareResourcePouchId
+      0x1414DF050: GetRareResourceCount
+      0x1414DF070: GetNormalResourcePouchIds
+      0x1414DF0B0: GetNormalResourceCounts
+      0x1414DF0F0: GetFinishTime
   Client::System::String::Utf8String:
     funcs:
       0x140059B20: ctor  # empty string ctor
@@ -7260,6 +7342,89 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x141267020: ctor
+      0x1412674B0: InitScheduleData
+      0x1412678B0: OpenReviewMaterialsUIOnly
+      0x141267950: UpdateScheduleData
+      0x141267BF0: UpdateMaterialAllocation
+      0x141267EE0: HaveDeficit
+      0x141268030: CopyMaterialAllocationFromPouchAgent
+      0x141268150: SetPopularitySupplyDemand
+      0x141268290: UpdateCurScheduleSettingPopularitySupplyDemand
+      0x141268350: SetGroove
+      0x1412684B0: HandleEventMain
+      0x1412686A0: ClearSlot
+      0x141268880: HandleEventClearSlotConfirm
+      0x1412688C0: AskConfirmRegisterPreset
+      0x141268960: HandleEventRegisterPresetConfirm
+      0x1412689B0: OpenRequisiteMaterialsForCurItem
+      0x141268BD0: CopyWorkshopAgenda
+      0x141268C80: AskConfirmClearWorkshop
+      0x141268D00: HandleEventClearWorkshopConfirm
+      0x141268E90: AskAddScheduleUsingSupplyDemand
+      0x141268F10: PasteWorkshopAgenda
+      0x141269370: ShowImpl
+      0x141269480: UpdateImpl
+      0x141269690: UpdateMainAddon
+      0x141269CC0: UpdateWorkshopDerivedData
+      0x14126A100: AskAddSchedule
+      0x14126A1F0: FillScheduleItemsByTheme
+      0x14126A540: FillScheduleItemsByTime
+      0x14126A8D0: RequestDemandAndUpdateSelectedItem
+      0x14126A940: UpdateScheduleSettingAddon
+      0x14126AF60: SetCurrentlySelectedItem
+      0x14126B070: OnScheduleSettingOpened
+      0x14126B2D0: HandleEventScheduleSetting
+      0x14126B4A0: OpenScheduleFreeContextMenu
+      0x14126B590: OpenScheduleUsedContextMenu
+      0x14126B730: AskSchedulePreset
+      0x14126B860: UpdatePresetAddon
+      0x14126B920: FillPresetItems
+      0x14126BAD0: HandleEventSchedulePreset
+      0x14126BBC0: AskDeletePreset
+      0x14126BC40: HandleEventDeletePresetConfirm
+      0x14126BCB0: RegisterPreset
+      0x14126BDE0: SchedulePreset
+      0x14126C020: OpenSetRest
+      0x14126C1D0: AskSetRestConfirm
+      0x14126C400: HandleEventSetRest
+      0x14126C460: HandleEventSetRestConfirm
+      0x14126C660: OpenReviewMaterials
+      0x14126C910: HandleEventReviewMaterials
+      0x14126C9D0: UpdateReviewMaterialsAddon
+      0x14126D110: OpenSupplyDemand
+      0x14126D430: UpdateSupplyDemandAddon
+      0x14126D950: HandleEventSupplyDemand
+      0x14126DE10: AskClearCycleConfirm
+      0x14126DEB0: HandleEventClearCycleConfirm
+      0x14126E070: HandleEventSupplyDemandContextMenu
+      0x14126E240: UpdateRequisiteMaterialsAddon
+      0x14126E620: HandleEventRequisiteMaterials
+      0x14126E680: OpenFavors
+      0x14126E6C0: InitStartReadThemes
+      0x14126E850: InitReadThemeRow
+      0x14126E920: InitStartReadCraftObjects
+      0x14126EAC0: InitReadCraftObjectRow
+      0x14126EBB0: InitFilterCraftsByTheme
+      0x14126EE00: InitStartReadItems
+      0x14126EF60: InitReadItemRow
+      0x14126F000: InitAssignSortIndices
+      0x14126F080: InitAddCraftSortedByName
+      0x14126F1D0: SetDisplayedCycle
+      0x14126F370: GetHoursSinceCycleStart
+  Client::UI::Agent::AgentMJINekomimiRequest:
+    vtbls:
+      - ea: 0x141B3AFC8
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1412726A0: ctor
+      0x141272870: OpenUI
+      0x1412728F0: OpenUIFromCraftSchedule
+      0x141272970: ForceRequestFavorData
+      0x1412729E0: InitData
+      0x141272AB0: UpdateImpl
+      0x141272BA0: UpdateAddon
+      0x141272FA0: TryReceiveFetchedData
+      0x141273120: InitItemData
   Client::UI::Agent::AgentMJIGatheringNoteBook:
     vtbls:
       - ea: 0x141B3B2E0
@@ -7290,6 +7455,31 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x141274010: ctor
+      0x141274360: HandleEventMain
+      0x141274420: HandleEventShipItem
+      0x1412745F0: HandleEventShipItemConfirmOvercap
+      0x141274770: HandleEventShipItemConfirmLeaveDeficit
+      0x1412747C0: HandleEventShipBulk
+      0x141274820: HandleEventShipBulkConfirmOvercap
+      0x141274890: UpdateImpl
+      0x141274950: FirstUpdateAfterInit
+      0x141274AF0: TryUpdateAddon
+      0x141274EF0: AskShipItem
+      0x141275100: ShipItem
+      0x141275290: AskShipBulk
+      0x1412756F0: ShipBulk
+      0x141275960: CheckBulkOvercap
+      0x141275C80: InitStartReadUICategories
+      0x141275E00: InitReadUICategoryRow
+      0x141275ED0: InitStartReadShopItems
+      0x141276030: InitReadShopItemRow
+      0x141276130: InitFillAndSortPerCategoryItems
+      0x1412762D0: InitStartReadItemPouch
+      0x141276420: InitReadItemPouchRow
+      0x141276480: InitStartReadItems
+      0x1412765D0: InitReadItemRow
+      0x141276660: InitStartReadCurrencyItems
+      0x1412767A0: InitReadCurrencyItemRow
   Client::UI::Agent::AgentMJIAnimalManagement:
     vtbls:
       - ea: 0x141B3AC60
@@ -7297,6 +7487,31 @@ classes:
     funcs:
       0x14125AC20: ctor
       0x14125AD30: Finalize
+      0x14125AE20: ShowImpl
+      0x14125AF40: OpenAddon
+      0x14125C200: PrepareForOp
+      0x14125C300: HandleContextMenuEvent
+      0x14125C5B0: HandleEventRelease
+      0x14125C9C0: ConfirmReleaseCaptured
+      0x14125CAA0: AskCollect
+      0x14125CC50: CalculateNumFilledSlots
+      0x14125CEA0: UpdateSlots
+      0x14125D2D0: UpdateAvailableFoods
+      0x14125D490: GetNumItemsInInventory
+      0x14125D540: HandleEventConfirmCollectAll
+      0x14125D680: HandleEventConfirmCollectAllOvercap
+      0x14125D780: Entrust
+      0x14125D8A0: Dismiss
+      0x14125D9B0: CollectSingle
+      0x14125DAD0: CollectAll
+      0x14125DBF0: Release
+      0x14125DCF0: DismissRelease
+      0x14125DF10: ChangeNickname
+      0x14125E130: InitStartReadSheets
+      0x14125E490: InitReadAnimalRow
+      0x14125E640: InitReadPouchItemRow
+      0x14125E740: InitReadItemRow
+      0x14125E870: FindItemDescByItemId
   Client::UI::Agent::AgentMJIFarmManagement:
     vtbls:
       - ea: 0x141B3B1C8
@@ -7304,6 +7519,22 @@ classes:
     funcs:
       0x1412778D0: ctor
       0x1412779D0: Finalize
+      0x141277A40: OpenUI
+      0x141277AB0: ShowImpl
+      0x141278760: PrepareForOp
+      0x141278860: HandleContextMenuEvent
+      0x141278B70: TryFinishInit
+      0x141278D30: ClearSeeds
+      0x141278E60: UpdateEntrustSeeds
+      0x141279090: FindSeedIndexByItemId
+      0x141279140: GetNumItemsInInventory
+      0x1412791F0: HandleEventConfirmCollectAll
+      0x1412792F0: HandleEventConfirmCollectAllOvercap
+      0x141279360: Entrust
+      0x141279480: Dismiss
+      0x141279590: CollectSingle
+      0x1412796B0: CollectAll
+      0x141279810: StartCollectAll
   Client::UI::Agent::AgentMJIEntrance:
     vtbls:
       - ea: 0x141B3B150
@@ -7317,6 +7548,40 @@ classes:
     funcs:
       0x14127B520: ctor
       0x14127B5E0: Finalize
+      0x14127B660: OpenUI
+      0x14127B820: RefreshUI
+      0x14127B860: RefreshExpeditions
+      0x14127BA30: NotifyExpeditionSelected
+      0x14127C0A0: UpdateLoadCowrieItem
+      0x14127C0F0: HandleEventMain
+      0x14127C3B0: HandleEventSelectExpedition
+      0x14127C720: IsExpeditionUnlocked
+      0x14127C7D0: CanNotGatherAnymore
+      0x14127C9A0: CanNotGatherWithoutOvercap
+      0x14127CB90: OpenAddon
+      0x14127D3C0: AskConfirmStart
+      0x14127D520: AskConfirmChangeExtend
+      0x14127D680: AskConfirmChange
+      0x14127D7D0: AskConfirmExtend
+      0x14127D950: RefreshExpeditionSelect
+  Client::UI::Agent::AgentMJIGatheringHouse::AgentData:
+    funcs:
+      0x141279A70: ctor
+      0x141279B10: dtor
+      0x141279C40: Init
+      0x141279D40: Reset
+      0x141279DB0: Update
+      0x141279F40: InitSheets
+      0x141279FE0: SheetsReady
+      0x14127A020: InitResources
+      0x14127A370: InitDerived
+      0x14127A880: GetExpeditionEntry
+      0x14127AA00: GetResourceEntryByItemId
+      0x14127AB10: GetResourceEntryByPouchId
+      0x14127AC20: ResetVectors
+      0x14127AD00: ResetExpeditions
+      0x14127AE90: ResetExpeditionItems
+      0x14127AF20: ResetResources
   Client::UI::Agent::AgentMJIMinionManagement:
     vtbls:
       - ea: 0x141B3B460

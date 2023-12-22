@@ -5,6 +5,19 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.MJI;
 public unsafe partial struct MJIPastureHandler {
     [FieldOffset(0x0)] public void* vtbl;
 
+    // 0x230: AtkEventInterface-derived structure of size 0x30, used by agent to execute operations
+
+    /// <summary>
+    /// Mapping from MJIAnimal row id to Item row ids for both leavings.
+    /// </summary>
+    [FieldOffset(0x2C8)] public StdMap<uint, StdPair<uint, uint>> AnimalToLeavingItemIds;
+
+    /// <summary>
+    /// Per-item totals of uncollected leavings.
+    /// Key is Item sheet row id, value is total amount for all animals.
+    /// </summary>
+    [FieldOffset(0x2D8)] public StdMap<uint, int> AvailableMammetLeavings;
+
     /// <summary>
     /// An array representing all animals currently present in the pastures on the Island. 
     /// </summary>
@@ -26,6 +39,14 @@ public unsafe partial struct MJIPastureHandler {
     [FixedSizeArray<MJIMinionSlot>(50)]
     [FieldOffset(0x8F8)] public fixed byte MinionSlots[50 * MJIMinionSlot.Size];
 
+    // 0xB50: substructure describing currently captured animal, if there are no slots available; size is at least 8
+
+    /// <summary>
+    /// Collect all leavings gathered by mammets.
+    /// </summary>
+    [MemberFunction("E8 ?? ?? ?? ?? EB 72 48 8D 4D 10")]
+    public partial void CollectLeavingsAll();
+
     /// <summary>
     /// Gets the current number of minions roaming the Island Sanctuary.
     /// </summary>
@@ -41,6 +62,10 @@ public unsafe struct MJIAnimal {
     [FieldOffset(0x01)] public fixed byte Nickname[24]; // string
     [FieldOffset(0x1C)] public uint BNPCNameId;
     [FieldOffset(0x20)] public uint ObjectId;
+
+    /// <summary>
+    /// Row index in MJIAnimals sheet.
+    /// </summary>
     [FieldOffset(0x24)] public byte AnimalType;
 
     /// <summary>
@@ -53,7 +78,39 @@ public unsafe struct MJIAnimal {
     /// The animal's current mood. Ranges from 0 for "very unhappy" (lightning icon) to 4 for "very happy" (sun icon).
     /// </summary>
     [FieldOffset(0x26)] public byte Mood;
-    [FieldOffset(0x27)] public ushort Leavings; // ?? unsure why this is a ushort.
+
+    [FieldOffset(0x27), Obsolete("Use ManualLeavingsAvailable & UnderCare fields instead.")] public ushort Leavings; // ?? unsure why this is a ushort.
+
+    /// <summary>
+    /// True if there are some leavings that you can manually collect.
+    /// </summary>
+    [FieldOffset(0x27)] public bool ManualLeavingsAvailable;
+
+    /// <summary>
+    /// True if this animal is managed by a mammet.
+    /// </summary>
+    [FieldOffset(0x28)] public bool UnderCare;
+
+    /// <summary>
+    /// True if mammet was paid for care already - if true, dismissing and re-entrusting won't cost anything.
+    /// </summary>
+    [FieldOffset(0x29)] public bool WasUnderCare;
+
+    /// <summary>
+    /// True if not cared for, either because mammet was not assigned, or because it was not paid.
+    /// </summary>
+    [FieldOffset(0x2A)] public bool CareHalted;
+
+    /// <summary>
+    /// 0 if not under care, otherwise Item row id of used food.
+    /// </summary>
+    [FieldOffset(0x2C)] public uint AutoFoodItemId;
+
+    /// <summary>
+    /// Number of leavings of each type automatically gathered by a mammet that are ready for collection.
+    /// </summary>
+    [FieldOffset(0x30)] public byte AutoAvailableLeavings1;
+    [FieldOffset(0x31)] public byte AutoAvailableLeavings2;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = Size)]
