@@ -28,7 +28,7 @@ public unsafe partial struct RaptureHotbarModule {
     /// </summary>
     [FieldOffset(0x7C)] public fixed byte HotbarShareStateBitmask[4];
 
-    [FieldOffset(0x88)] internal UIState* UiState;
+    [FieldOffset(0x88)] internal Client.Game.UI.Hotbar* UiHotbar;
 
     /// <summary>
     /// An array of all active hotbars loaded and available to the player. This field tracks both normal hotbars
@@ -66,6 +66,8 @@ public unsafe partial struct RaptureHotbarModule {
     /// </remarks>
     [FixedSizeArray<SavedHotBarGroup>(65)]
     [FieldOffset(0x11974)] public fixed byte SavedHotBars[65 * SavedHotBarGroup.Size];
+    
+    [FieldOffset(0x28714)] public CrossHotbarFlags CrossHotbarFlags;
 
     /// <summary>
     /// Hotbar slots representing available Duty Actions (see also <see cref="ActionManager.GetDutyActionId"/>).
@@ -679,7 +681,25 @@ public enum HotbarSlotType : byte {
     BgcArmyAction = 0x1B,
     Unk_0x1C = 0x1C, // seems to be a legacy type, possibly performance instrument related based on associated icon 000782
     PerformanceInstrument = 0x1D,
-    Collection = 0x1E, // TODO (apiX): Rename to McGuffin to match EXD name
+    [Obsolete("Use McGuffin instead")] Collection = 0x1E,
+    McGuffin = 0x1E,
     Ornament = 0x1F,
     LostFindsItem = 0x20
+}
+
+[Flags]
+public enum CrossHotbarFlags : ushort {
+    ChangeSetActive = 1 << 0,
+    Active = 1 << 1,
+
+    LeftSideFocus = 1 << 4,
+    RightSideFocus = 1 << 5,
+    FadeRestOfScreen = 1 << 6,
+    PetHotbarActive = 1 << 7,
+    ExpandedHoldLeftFocus = 1 << 8,
+    ExpandedHoldRightFocus = 1 << 9,
+    WXHBLeftFocus = 1 << 10,
+
+    WXHBRightFocus = 1 << 14,
+    EditMode = 1 << 15,
 }
