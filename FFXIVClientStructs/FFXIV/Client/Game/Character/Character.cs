@@ -30,8 +30,8 @@ public unsafe partial struct Character {
     [FieldOffset(0x970)] public ActionTimelineManager ActionTimelineManager;
     [FieldOffset(0xCB0)] public GazeContainer Gaze;
 
-    /// <inheritdoc cref="GazeController.TargetInfo.LookTargetId"/>
-    [Obsolete("Use Character.Gaze.Controller.Torso.TargetInfo.LookTargetId")]
+    /// <inheritdoc cref="GazeController.Gaze.TargetInformation.TargetId"/>
+    [Obsolete("Use Character.Gaze.Controller.Torso.TargetInfo.TargetId")]
     [FieldOffset(0xCB0 + 0x50)] public GameObjectID LookTargetId;
 
     [FieldOffset(0x12F0)] public VfxContainer Vfx;

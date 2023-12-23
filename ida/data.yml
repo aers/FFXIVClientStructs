@@ -4819,7 +4819,7 @@ classes:
       - ea: 0x141A03250
     funcs:
       0x1404E1A80: ctor
-  Client::Game::Control::GazeController::Gaze::TargetInfo:
+  Client::Game::Control::GazeController::Gaze::TargetInformation:
     vtbls:
       - ea: 0x141A03238
   Client::Game::Character::DrawData:
