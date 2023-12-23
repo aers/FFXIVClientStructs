@@ -30,14 +30,7 @@ public unsafe partial struct Character {
     [FieldOffset(0x970)] public ActionTimelineManager ActionTimelineManager;
     [FieldOffset(0xCB0)] public GazeContainer Gaze;
 
-    /// <summary>
-    /// The current target for this character's gaze. Can be set independently of soft or hard targets, and may be set
-    /// by NPCs or minions. For players, an action cast will generally target the LookTarget (which generally will be
-    /// the soft target if set, then the hard target).
-    /// </summary>
-    /// <remarks>
-    /// Unlike other GameObjectIDs, this one appears to be set to fully 0 if the player is not looking at anything.
-    /// </remarks>
+    /// <inheritdoc cref="GazeController.TargetInfo.LookTargetId"/>
     [Obsolete("Use Character.Gaze.Controller.Torso.TargetInfo.LookTargetId")]
     [FieldOffset(0xCB0 + 0x50)] public GameObjectID LookTargetId;
 
