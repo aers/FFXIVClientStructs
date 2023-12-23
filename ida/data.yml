@@ -4748,6 +4748,8 @@ classes:
   Client::Game::Control::EmoteController:
     vtbls:
       - ea: 0x141A1F0F8
+    funcs:
+      0x1404E93C0: Initialize
   Client::Game::Character::DrawDataContainer:
     vtbls:
       - ea: 0x141A1EF20
@@ -4762,6 +4764,7 @@ classes:
     vtbls:
       - ea: 0x141B42EB0
     funcs:
+      0x141312A70: ctor
       0x141312D90: GetCompanionDataID
       0x141312BD0: SetupCompanion
   Client::Game::Character::CharacterSetup:
@@ -4789,7 +4792,10 @@ classes:
     funcs:
       0x14132DAC0: LoadCharacterSound
   Client::Game::Character::MountContainer:
+    vtbls:
+      - ea: 0x141B42ED8
     funcs:
+      0x141312E70: ctor
       0x141313A60: CreateAndSetupMount
       0x141315150: SetupMount
   Client::Game::Character::ReaperShroudContainer:
@@ -4797,6 +4803,25 @@ classes:
       - ea: 0x141A38178
       - ea: 0x141A381A0
         base: Client::Graphics::Vfx::VfxDataListenner
+  Client::Game::Character::GazeContainer:
+    vtbls:
+      - ea: 0x141A1EF70
+    funcs:
+      0x141326C30: ctor
+      0x141326D50: Update
+  Client::Game::Control::GazeController:
+    vtbls:
+      - ea: 0x141A03258
+    funcs:
+      0x140504310: ctor
+  Client::Game::Control::GazeController::Gaze:
+    vtbls:
+      - ea: 0x141A03250
+    funcs:
+      0x1404E1A80: ctor
+  Client::Game::Control::GazeController::Gaze::TargetInfo:
+    vtbls:
+      - ea: 0x141A03238
   Client::Game::Character::DrawData:
     vtbls:
       - ea: 0x141A008D0
