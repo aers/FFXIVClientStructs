@@ -7481,6 +7481,32 @@ classes:
     vtbls:
       - ea: 0x141A4BA00
         base: Client::Game::Event::LuaEventHandler
+    funcs:
+      0x140849C40: ctor
+  Client::Game::Event::QuestBattleDirector:
+    vtbls:
+      - ea: 0x141A4A7A8
+        base: Client::Game::Event::Director
+    funcs:
+      0x140835E70: ctor
+  Client::Game::Event::TreasureHuntDirector:
+    vtbls:
+      - ea: 0x141A601C0
+        base: Client::Game::Event::Director
+    funcs:
+      0x1408D5370: ctor
+  Client::Game::Event::CompanyCraftDirector:
+    vtbls:
+      - ea: 0x141A75640
+        base: Client::Game::Event::Director
+    funcs:
+      0x140B4DE90: ctor
+  Client::Game::Event::DpsChallengeDirectorDirector:
+    vtbls:
+      - ea: 0x141A60AC8
+        base: Client::Game::Event::Director
+    funcs:
+      0x1408D6AC0: ctor
   Client::Game::ReconstructionBoxManager:
     instances:
       - ea: 0x1421F63C0
@@ -7536,18 +7562,26 @@ classes:
     vtbls:
       - ea: 0x141A4DBD0
         base: Client::Game::Event::Director
+    funcs:
+      0x14087FFF0: ctor
   Client::Game::Event::GatheringLeveDirector:
     vtbls:
       - ea: 0x141A5CE00
         base: Client::Game::Event::LeveDirector
+    funcs:
+      0x1408CF970: ctor
   Client::Game::Event::BattleLeveDirector:
     vtbls:
       - ea: 0x141A4E4E8
         base: Client::Game::Event::LeveDirector
+    funcs:
+      0x1408818F0: ctor
   Client::Game::Event::CompanyLeveDirector:
     vtbls:
       - ea: 0x141A5F890
         base: Client::Game::Event::LeveDirector
+    funcs:
+      0x1408D3CE0: CVector
   Client::Game::Gimmick::GimmickBill:
     vtbls:
       - ea: 0x141A5C558
@@ -11073,7 +11107,7 @@ classes:
       - ea: 0x141B3D020
         base: Client::Game::Event::Director
     funcs:
-      0x140827F20: ctor
+      0x1412E73E0: ctor
   Client::Game::Fate::FateContext:
     vtbls:
       - ea: 0x141B3D948
