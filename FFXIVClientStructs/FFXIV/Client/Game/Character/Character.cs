@@ -31,7 +31,7 @@ public unsafe partial struct Character {
     [FieldOffset(0xCB0)] public GazeContainer Gaze;
 
     /// <inheritdoc cref="GazeController.Gaze.TargetInformation.TargetId"/>
-    [Obsolete("Use Character.Gaze.Controller.Torso.TargetInfo.TargetId")]
+    [Obsolete("Use Character.Gaze.Controller.GazesSpan[0].TargetInfo.TargetId")]
     [FieldOffset(0xCB0 + 0x50)] public GameObjectID LookTargetId;
 
     [FieldOffset(0x12F0)] public VfxContainer Vfx;
