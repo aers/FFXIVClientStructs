@@ -23,6 +23,12 @@ public unsafe partial struct RaptureHotbarModule {
     /// </summary>
     [FieldOffset(0x51)] public byte ActiveHotbarClassJobId;
 
+    // PvE hotbars starting from MCH onwards, appears to track whether a hotbar was initialized?
+    [FieldOffset(0x54)] internal fixed bool ExpacJobHotbarsCreated[12];
+
+    // PvP hotbars for all jobs, appears to track initialization status?
+    [FieldOffset(0x60)] internal fixed bool PvPHotbarsCreated[22];
+
     /// <summary>
     /// A bitfield representing whether a specific hotbar is to be considered "shared" or not.
     /// </summary>
@@ -49,7 +55,7 @@ public unsafe partial struct RaptureHotbarModule {
     [FieldOffset(0x11890)] public HotBarSlot ScratchSlot;
 
     // No idea how this field works. Observed so far:
-    // 15 (0x0E) - referenced in code.
+    // 15 (0x0E) - Quest mount (?)
     // 18 (0x12) - Mount/FashionAccessory
     // 34 (0x22) - Carbuncle up
     // Seems to control something with overriding the main bar too?
@@ -66,8 +72,32 @@ public unsafe partial struct RaptureHotbarModule {
     /// </remarks>
     [FixedSizeArray<SavedHotBarGroup>(65)]
     [FieldOffset(0x11974)] public fixed byte SavedHotBars[65 * SavedHotBarGroup.Size];
-    
+
     [FieldOffset(0x28714)] public CrossHotbarFlags CrossHotbarFlags;
+
+    /// <summary>
+    /// Field to track the player's current Grand Company. Used for emote refresh/update purposes.
+    /// </summary>
+    /// <remarks>
+    /// If this field is out of sync with game state, it will be updated on the next frame. Setting
+    /// this field manually appears to have no effect (?).
+    /// </remarks>
+    [FieldOffset(0x28718)] public uint GrandCompanyId;
+
+    /// <summary>
+    /// Field to indicate whether the PvP hotbar is currently active or not.
+    /// </summary>
+    /// <remarks>
+    /// If this field is out of sync with the game's PVP state, it will be updated on the next frame. Setting
+    /// this field manually will not enable the PvP hotbars.
+    /// </remarks>
+    [FieldOffset(0x2871C)] public bool PvPHotbarsActive;
+
+    /// <summary>
+    /// Field to indicate that the PvP hotbar swap notification (AgentPvpScreenInformation) needs to be shown.
+    /// This field is set to <c>false</c> after the agent has been shown.
+    /// </summary>
+    [FieldOffset(0x2871D)] public bool ShowPvPHotbarSwapNotification;
 
     /// <summary>
     /// Hotbar slots representing available Duty Actions (see also <see cref="ActionManager.GetDutyActionId"/>).
@@ -576,6 +606,8 @@ public unsafe partial struct DutyActionSlot {
     /// The PrimaryCostType from the Action EXD (+0x29).
     /// </summary>
     [FieldOffset(0xE0)] public byte PrimaryCostType;
+
+    [FieldOffset(0xE1)] public bool IsActive;
 }
 
 #region Saved Bars
@@ -691,9 +723,10 @@ public enum HotbarSlotType : byte {
 public enum CrossHotbarFlags : ushort {
     ChangeSetActive = 1 << 0,
     Active = 1 << 1,
-
-    LeftSideFocus = 1 << 4,
-    RightSideFocus = 1 << 5,
+    LeftSideToggleFocus = 1 << 2,
+    RightSideToggleFocus = 1 << 3,
+    LeftSideHoldFocus = 1 << 4,
+    RightSideHoldFocus = 1 << 5,
     FadeRestOfScreen = 1 << 6,
     PetHotbarActive = 1 << 7,
     ExpandedHoldLeftFocus = 1 << 8,
@@ -702,4 +735,8 @@ public enum CrossHotbarFlags : ushort {
 
     WXHBRightFocus = 1 << 14,
     EditMode = 1 << 15,
+
+    // helpers
+    LeftSideFocus = LeftSideHoldFocus | LeftSideToggleFocus,
+    RightSideFocus = RightSideHoldFocus | RightSideToggleFocus,
 }
