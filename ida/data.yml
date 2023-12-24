@@ -262,6 +262,9 @@ functions:
   0x140B1E780: IsInMordionGaol # if this returns true, i'm sorry for you
   0x140B71F50: WorldToScreenPoint
   0x14144B630: GetBannerConditionUnlockState
+  0x14145D450: GetInstanceContentCrystallineConflictDirector
+  0x1414ADCE0: GetInstanceContentMahjongDirector
+  0x1414B1440: GetPublicContentDirectorByType # maybe type? could be static id. idk
   0x14170DBC0: OodleNew # oodle code starts here
   0x14170DC30: OodleDelete
   0x14170DC60: rrPrintf_v1
@@ -314,6 +317,7 @@ classes:
       0x1404DCDE0: IsInGPose  # (probably) static
       0x1404DCE20: IsInIdleCam  # static
       0x1404DD010: IsInInstanceArea
+      0x1404DD150: GetTourismDirector
       0x1409312D0: IsInPvPInstance
       0x140931390: IsInPvPArea
       0x1400A85D0: IsInSanctuary # static, more likely Client::UI::IsInSanctuary but it fits here just fine
@@ -7494,8 +7498,20 @@ classes:
       0x140861C70: ctor
       0x1408624C0: Finalize
       0x14086AC90: ProcessDirectorUpdate
+      0x14086E5C0: GetDirectorByEventId
+      0x14086E610: GetCompanyLeveDirector
       0x14086E670: GetInstanceContentDirector
+      0x14086E6A0: GetCrystallineConflictDirector
+      0x14086E6D0: GetFrontlinesDirector
+      0x14086E700: GetRivalWingDirector
+      0x14086E730: GetTreasureHuntDungeonDirector
+      0x14086E760: GetTourismDirector
+      0x14086E790: GetTripleTriadDirector
+      0x14086E810: GetSkyIslandDirector
+      0x14086E840: GetPublicContentDirector
       0x14086E8D0: GetContentDirector
+      0x14086E8E0: GetQuestBattleDirector
+      0x14086E930: GetGoldSaucerDirector
       0x140873460: GetEventHandlerById
       0x140979FD0: GetCurrentContentType
       0x14097A0A0: GetCurrentContentId
