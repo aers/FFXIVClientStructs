@@ -5,15 +5,20 @@ using static FFXIVClientStructs.STD.StdHelpers.StdImplHelpers;
 
 namespace FFXIVClientStructs.STD;
 
-// This part deals with the definition and convenience methods.
 /// <summary>
 /// A <see cref="ValueTuple{T1,T2}"/>-like view for <see href="https://en.cppreference.com/w/cpp/utility/pair">std::pair</see>.
 /// </summary>
 /// <typeparam name="T1">The type of the first item.</typeparam>
 /// <typeparam name="T2">The type of the second item.</typeparam>
 [StructLayout(LayoutKind.Sequential, Pack = 8)]
-public partial struct StdPair<T1, T2>
+public struct StdPair<T1, T2>
     : IDisposable
+    , IEquatable<StdPair<T1, T2>>
+    , IStructuralEquatable
+    , IStructuralComparable
+    , IComparable
+    , IComparable<StdPair<T1, T2>>
+    , ITuple
     where T1 : unmanaged
     where T2 : unmanaged {
     public T1 Item1;
@@ -57,19 +62,6 @@ public partial struct StdPair<T1, T2>
 
     /// <inheritdoc cref="object.ToString"/>
     public override string ToString() => $"({Item1}, {Item2})";
-}
-
-// This part deals with implementation of the interfaces <see cref="ValueTuple{T1,T2}"/> implements.
-/// <summary>
-/// A <see cref="ValueTuple{T1,T2}"/>-like view for <see href="https://en.cppreference.com/w/cpp/utility/pair">std::pair</see>.
-/// </summary>
-public partial struct StdPair<T1, T2>
-    : IEquatable<StdPair<T1, T2>>
-        , IStructuralEquatable
-        , IStructuralComparable
-        , IComparable
-        , IComparable<StdPair<T1, T2>>
-        , ITuple {
 
     /// <inheritdoc cref="ITuple.this"/>
     public object this[int index] => index switch {
