@@ -103,6 +103,7 @@ public unsafe struct StdVector<T> : IStdVector<T>
     public long TrimExcess() => WithDefaultAllocator.TrimExcess();
     public void Resize(long newSize) => WithDefaultAllocator.Resize(newSize);
     public void Resize(long newSize, in T defaultValue) => WithDefaultAllocator.Resize(newSize, in defaultValue);
+    public void ResizeUndefined(long newSize) => WithDefaultAllocator.ResizeUndefined(newSize);
     public long SetCapacity(long newCapacity) => WithDefaultAllocator.SetCapacity(newCapacity);
     public override int GetHashCode() => HashCode.Combine((nint)First, (nint)Last, (nint)End);
     public override string ToString() => $"{nameof(StdVector<T>)}<{typeof(T)}>({LongCount}/{LongCapacity})";

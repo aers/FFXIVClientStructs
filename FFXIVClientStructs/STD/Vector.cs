@@ -34,9 +34,7 @@ public unsafe struct StdVector<T, TMemorySpace, TDisposable> : IStdVector<T> whe
         set => Resize(value);
     }
 
-    /// <summary>
-    /// Gets or sets the number of elements contained in this vector.
-    /// </summary>
+    /// <inheritdoc/>
     public long LongCount {
         readonly get => Last - First;
         set => Resize(value);
@@ -48,9 +46,7 @@ public unsafe struct StdVector<T, TMemorySpace, TDisposable> : IStdVector<T> whe
         set => SetCapacity(value);
     }
 
-    /// <summary>
-    /// Gets or sets the total number of elements the internal data structure can hold without resizing.
-    /// </summary>
+    /// <inheritdoc/>
     public long LongCapacity {
         readonly get => End - First;
         set => SetCapacity(value);
@@ -60,12 +56,12 @@ public unsafe struct StdVector<T, TMemorySpace, TDisposable> : IStdVector<T> whe
         readonly get => First;
         set => First = value;
     }
-    
+
     T* IStdVector<T>.Last {
         readonly get => Last;
         set => Last = value;
     }
-    
+
     T* IStdVector<T>.End {
         readonly get => End;
         set => End = value;
@@ -219,10 +215,11 @@ public unsafe struct StdVector<T, TMemorySpace, TDisposable> : IStdVector<T> whe
             case var _ when TryGetCountFromEnumerable(collection, out var count):
                 EnsureCapacity(prevCount + count);
                 SpliceHole(index, count);
-                Last += count;
-                var p = First + index;
-                foreach (var item in collection)
-                    *p++ = item;
+                using (var enu = collection.GetEnumerator()) {
+                    var p = First + index;
+                    while (count-- > 0 && enu.MoveNext())
+                        *p++ = enu.Current;
+                }
                 break;
             default:
                 foreach (var item in collection)
@@ -236,7 +233,7 @@ public unsafe struct StdVector<T, TMemorySpace, TDisposable> : IStdVector<T> whe
         var prevCount = LongCount;
         if (index < 0 || index > prevCount)
             throw new ArgumentOutOfRangeException(nameof(index), index, null);
-        
+
         EnsureCapacity(prevCount + span.Length);
         SpliceHole(index, span.Length);
         Last += span.Length;
@@ -466,11 +463,30 @@ public unsafe struct StdVector<T, TMemorySpace, TDisposable> : IStdVector<T> whe
     /// <see cref="List{T}.TrimExcess"/>
     public long TrimExcess() => SetCapacity(LongCount);
 
-    /// <summary>
-    /// Resizes this vector to the given size. In case of expansion, the data of new items are undefined.
-    /// </summary>
-    /// <param name="newSize">The new size.</param>
+    /// <inheritdoc/>
     public void Resize(long newSize) {
+        var prevCount = LongCount;
+        ResizeUndefined(newSize);
+
+        if (newSize <= prevCount)
+            return;
+
+        ZeroMemory(First + prevCount, (nuint)(newSize - prevCount));
+    }
+
+    /// <inheritdoc/>
+    public void Resize(long newSize, in T defaultValue) {
+        var prevCount = LongCount;
+        ResizeUndefined(newSize);
+
+        if (newSize <= prevCount)
+            return;
+
+        FillMemory(First + prevCount, (nuint)(newSize - prevCount), defaultValue);
+    }
+
+    /// <inheritdoc/>
+    public void ResizeUndefined(long newSize) {
         var prevCount = LongCount;
         EnsureCapacity(newSize);
         Last = First + newSize;
@@ -481,29 +497,7 @@ public unsafe struct StdVector<T, TMemorySpace, TDisposable> : IStdVector<T> whe
             TDisposable.Dispose(ref First[i]);
     }
 
-    /// <summary>
-    /// Resizes this vector to the given size. In case of expansion, the data of new items are set to <paramref name="defaultValue"/>.
-    /// </summary>
-    /// <param name="newSize">The new size.</param>
-    /// <param name="defaultValue">The value for the new items.</param>
-    public void Resize(long newSize, in T defaultValue) {
-        var prevCount = LongCount;
-        Resize(newSize);
-
-        if (newSize <= prevCount)
-            return;
-
-        for (var i = prevCount; i < newSize; i++)
-            First[i] = defaultValue;
-    }
-
-    /// <summary>
-    /// Sets the capacity of this vector.
-    /// </summary>
-    /// <param name="newCapacity">The new capacity. Must be at least <see cref="LongCount"/>.</param>
-    /// <returns>The new capacity.</returns>
-    /// <exception cref="ArgumentOutOfRangeException">When <paramref name="newCapacity"/> is less than <see cref="LongCount"/>.</exception>
-    /// <exception cref="OutOfMemoryException">When failed to allocate memory as requested.</exception>
+    /// <inheritdoc/>
     public long SetCapacity(long newCapacity) {
         var count = LongCount;
         var prevCapacity = LongCapacity;
@@ -555,5 +549,6 @@ public unsafe struct StdVector<T, TMemorySpace, TDisposable> : IStdVector<T> whe
         Buffer.MemoryCopy(First + fromIndex, First + toIndex, count * sizeof(T), count * sizeof(T));
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private readonly void SpliceHole(long index, long count) => CopyInside(index, index + count, count);
+    private readonly void SpliceHole(long index, long count) =>
+        CopyInside(index, index + count, LongCount - index);
 }
