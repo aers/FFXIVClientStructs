@@ -10,17 +10,17 @@ public unsafe interface IStdVector<T> : IDisposable, IList, IList<T>, IReadOnlyL
     /// <summary>
     /// Gets the pointer to the first element of the vector. <c>null</c> if empty.
     /// </summary>
-    public T* First { get; set; }
+    public T* First { get; }
 
     /// <summary>
     /// Gets the pointer to next of the last element of the vector. <c>null</c> if empty.
     /// </summary>
-    public T* Last { get; set; }
+    public T* Last { get; }
 
     /// <summary>
     /// Gets the pointer to the end of the memory allocation. <c>null</c> if empty.
     /// </summary>
-    public T* End { get; set; }
+    public T* End { get; }
 
     /// <inheritdoc cref="LongCount"/>
     new int Count { get; set; }
@@ -103,7 +103,7 @@ public unsafe interface IStdVector<T> : IDisposable, IList, IList<T>, IReadOnlyL
     void AddRange(IEnumerable<T> collection);
 
     /// <inheritdoc cref="List{T}.AddRange"/>
-    void AddRange(ReadOnlySpan<T> span);
+    void AddSpan(ReadOnlySpan<T> span);
 
     /// <inheritdoc cref="List{T}.BinarySearch(T)"/>
     long BinarySearch(in T item);
@@ -163,7 +163,7 @@ public unsafe interface IStdVector<T> : IDisposable, IList, IList<T>, IReadOnlyL
     void InsertRange(long index, IEnumerable<T> collection);
 
     /// <inheritdoc cref="List{T}.InsertRange"/>
-    void InsertRange(long index, ReadOnlySpan<T> span);
+    void InsertSpan(long index, ReadOnlySpan<T> span);
 
     /// <inheritdoc cref="List{T}.LastIndexOf(T)"/>
     int LastIndexOf(in T item);
@@ -392,11 +392,12 @@ public unsafe interface IStdVector<T> : IDisposable, IList, IList<T>, IReadOnlyL
         /// <summary>
         /// Initializes a new instance of <see cref="Enumerator"/> struct.
         /// </summary>
-        /// <param name="owner">The owner of this enumerator.</param>
-        public Enumerator(IStdVector<T> owner) {
-            _ownerFirst = owner.First;
-            _ownerLast = owner.Last;
-            _current = owner.First - 1;
+        /// <param name="first">The pointer to the first item.</param>
+        /// <param name="last">The pointer to past the last item.</param>
+        public Enumerator(T* first, T* last) {
+            _ownerFirst = first;
+            _ownerLast = last;
+            _current = first - 1;
         }
 
         /// <summary>

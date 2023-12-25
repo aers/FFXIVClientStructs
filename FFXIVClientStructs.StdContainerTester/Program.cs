@@ -10,11 +10,16 @@ public static class Program {
 
     public static void Main() {
         SetupMemorySpaceFunctions();
-        while (true) {
+        do {
+            StringTester.Test();
+            Console.WriteLine();
+            
             VectorTester.Test();
+            Console.WriteLine();
+
             if (KnownAllocations.Any())
                 throw new InvalidOperationException("Malloc/Free mismatch (end)");
-        }
+        } while (false);
     }
 
     private static unsafe void SetupMemorySpaceFunctions() {

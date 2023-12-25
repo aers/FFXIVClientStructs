@@ -34,20 +34,43 @@ public static class StdImplHelpers {
     }
 
     internal static unsafe void ZeroMemory<T>(T* p, nuint size) where T : unmanaged {
-        while (size > 0) {
-            var chunk = (int)Math.Min(0x10000000, size);
-            new Span<T>(p, chunk).Clear();
-            size -= (nuint)chunk;
-            p += chunk;
-        }
+        foreach (var span in new ChunkedSpanEnumerator<T>(p, size))
+            span.Clear();
     }
 
     internal static unsafe void FillMemory<T>(T* p, nuint size, in T value) where T : unmanaged {
-        while (size > 0) {
-            var chunk = (int)Math.Min(0x10000000, size);
-            new Span<T>(p, chunk).Fill(value);
-            size -= (nuint)chunk;
-            p += chunk;
+        foreach (var span in new ChunkedSpanEnumerator<T>(p, size))
+            span.Fill(value);
+    }
+
+    internal unsafe struct ChunkedSpanEnumerator<T>
+        where T : unmanaged {
+        private const int ChunkSize = 0x10000000;
+        private readonly T* _ptr;
+        private readonly nuint _count;
+        private nuint _offset = unchecked((nuint)0 - ChunkSize);
+
+        public ChunkedSpanEnumerator(T* ptr, nuint count) {
+            _ptr = ptr;
+            _count = count;
         }
+
+        public Span<T> Current =>
+            _offset >= _count
+                ? throw new InvalidOperationException()
+                : new(
+                    _ptr + _offset,
+                    (int)Math.Min(ChunkSize, (ulong)(_count - _offset)));
+        
+        public bool MoveNext() {
+            var next = unchecked(_offset + ChunkSize);
+            if (next >= _count - 1 || _count == 0)
+                return false;
+
+            _offset = next;
+            return true;
+        }
+
+        public ChunkedSpanEnumerator<T> GetEnumerator() => this;
     }
 }

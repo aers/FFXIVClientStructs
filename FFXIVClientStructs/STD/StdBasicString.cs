@@ -1,5 +1,8 @@
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.Numerics;
 using System.Runtime.CompilerServices;
+using System.Text;
 using FFXIVClientStructs.FFXIV.Client.System.Memory;
 using FFXIVClientStructs.STD.StdHelpers;
 using JetBrains.Annotations;
@@ -8,40 +11,53 @@ using static FFXIVClientStructs.STD.StdHelpers.StdImplHelpers;
 namespace FFXIVClientStructs.STD;
 
 /// <summary>
-/// A <see cref="List{T}"/>-like view for <see href="https://en.cppreference.com/w/cpp/container/vector">std::vector</see>.
+/// A <see cref="List{T}"/>-like view for <see href="https://en.cppreference.com/w/cpp/string/basic_string">std::basic_string</see>.
 /// </summary>
 /// <typeparam name="T">The type of element.</typeparam>
 /// <typeparam name="TMemorySpace">The specifier for <see cref="IMemorySpace"/>, for vectors with different preferred memory space.</typeparam>
-/// <typeparam name="TDisposable">The specifier for <see cref="IDisposable"/>, for element types that has its own destructor.</typeparam>
-[StructLayout(LayoutKind.Sequential)]
+/// <remarks>The object must be pinned on use, if the instance of this struct itself is allocated in heap.</remarks>
+[StructLayout(LayoutKind.Sequential, Size = 0x20)]
 [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
-public unsafe struct StdVector<T, TMemorySpace, TDisposable> : IStdVector<T>
-    where T : unmanaged
-    where TMemorySpace : IMemorySpaceStatic
-    where TDisposable : IDisposableStatic<T> {
+public unsafe struct StdBasicString<T, TMemorySpace> : IStdBasicString<T>, IComparable<StdBasicString<T, TMemorySpace>>
+    where T : unmanaged, IBinaryNumber<T>
+    where TMemorySpace : IMemorySpaceStatic {
 
-    /// <inheritdoc cref="IStdVector{T}.First"/>
-    public T* First;
+    // See:
+    // https://github.com/microsoft/STL/blob/a8888806c6960f1687590ffd4244794c753aa819/stl/inc/xstring#L2202
+    private const int BufByteSize = 16;
+    private static readonly int BufSize = BufByteSize / sizeof(T);
+    private static readonly int SmallStringCapacity = BufByteSize / sizeof(T) - 1;
 
-    /// <inheritdoc cref="IStdVector{T}.Last"/>
-    public T* Last;
+    public fixed byte BufferBytes[BufByteSize];
+    public ulong ULongLength;
+    public ulong ULongCapacity;
 
-    /// <inheritdoc cref="IStdVector{T}.End"/>
-    public T* End;
+    public Encoding? IntrinsicEncoding => null;
 
-    /// <inheritdoc cref="LongCount"/>
+    /// <inheritdoc/>
+    public readonly T* First => IsLargeMode
+        ? *(T**)Unsafe.AsPointer(ref Unsafe.AsRef(in BufferBytes[0]))
+        : (T*)Unsafe.AsPointer(ref Unsafe.AsRef(in BufferBytes[0]));
+
+    /// <inheritdoc/>
+    public readonly T* Last => First + ULongLength;
+
+    /// <inheritdoc/>
+    public readonly T* End => First + ULongCapacity;
+
+    /// <inheritdoc cref="IStdVector{T}.Count"/>
     public int Count {
-        readonly get => checked((int)LongCount);
+        readonly get => checked((int)ULongLength);
         set => Resize(value);
     }
 
     /// <inheritdoc/>
     public long LongCount {
-        readonly get => Last - First;
+        readonly get => unchecked((long)ULongLength);
         set => Resize(value);
     }
 
-    /// <inheritdoc cref="LongCapacity"/>
+    /// <inheritdoc/>
     public int Capacity {
         readonly get => checked((int)LongCapacity);
         set => SetCapacity(value);
@@ -49,40 +65,25 @@ public unsafe struct StdVector<T, TMemorySpace, TDisposable> : IStdVector<T>
 
     /// <inheritdoc/>
     public long LongCapacity {
-        readonly get => End - First;
+        readonly get => IsLargeMode ? unchecked((long)ULongCapacity) : BufSize;
         set => SetCapacity(value);
     }
 
-    /// <inheritdoc/>
-    readonly T* IStdVector<T>.First => First;
-
-    /// <inheritdoc/>
-    readonly T* IStdVector<T>.Last => Last;
-
-    /// <inheritdoc/>
-    readonly T* IStdVector<T>.End => End;
+    private readonly bool IsLargeMode => ULongCapacity > (ulong)SmallStringCapacity;
 
     /// <inheritdoc/>
     public readonly ref T this[long index] => ref First[CheckedIndex(index, false)];
 
-    public static implicit operator Span<T>(in StdVector<T, TMemorySpace, TDisposable> value)
+    public static bool operator ==(in StdBasicString<T, TMemorySpace> l, in StdBasicString<T, TMemorySpace> r) => l.Equals(r);
+
+    public static bool operator !=(in StdBasicString<T, TMemorySpace> l, in StdBasicString<T, TMemorySpace> r) => !l.Equals(r);
+    
+    public static implicit operator Span<T>(in StdBasicString<T, TMemorySpace> value)
         => value.AsSpan();
 
-    public static implicit operator ReadOnlySpan<T>(in StdVector<T, TMemorySpace, TDisposable> value)
+    public static implicit operator ReadOnlySpan<T>(in StdBasicString<T, TMemorySpace> value)
         => value.AsSpan();
     
-    /// <inheritdoc/>
-    public void Dispose() {
-        Resize(0);
-        TrimExcess();
-    }
-
-    /// <inheritdoc/>
-    public override int GetHashCode() => HashCode.Combine((nint)First, (nint)Last, (nint)End);
-
-    /// <inheritdoc/>
-    public override string ToString() => $"{nameof(StdVector<T>)}<{typeof(T)}, {typeof(TMemorySpace)}, {typeof(TDisposable)}>({LongCount}/{LongCapacity})";
-
     /// <inheritdoc/>
     public readonly Span<T> AsSpan() => new(First, Count);
 
@@ -99,7 +100,8 @@ public unsafe struct StdVector<T, TMemorySpace, TDisposable> : IStdVector<T>
     /// <inheritdoc/>
     public void Add(in T item) {
         EnsureCapacity(LongCount + 1);
-        *Last++ = item;
+        First[ULongLength++] = item;
+        First[ULongLength] = default;
     }
 
     /// <inheritdoc/>
@@ -107,6 +109,9 @@ public unsafe struct StdVector<T, TMemorySpace, TDisposable> : IStdVector<T>
 
     /// <inheritdoc/>
     public void AddSpan(ReadOnlySpan<T> span) => InsertSpan(LongCount, span);
+
+    /// <inheritdoc/>
+    public void AddString(Encoding encoding, ReadOnlySpan<char> str) => InsertString(encoding, LongCount, str);
 
     /// <inheritdoc/>
     public readonly long BinarySearch(in T item) => BinarySearch(0, LongCount, item, null);
@@ -123,19 +128,80 @@ public unsafe struct StdVector<T, TMemorySpace, TDisposable> : IStdVector<T>
             item,
             comparer);
 
-    /// <inheritdoc cref="IStdVector{T}.Clear"/>
-    public void Clear() {
-        if (!TDisposable.IsDisposable) {
-            Last = First;
-            return;
+    /// <inheritdoc cref="IComparable{T}.CompareTo"/>
+    public readonly int CompareTo(IStdBasicString<T>? other) {
+        if (other is null)
+            return 1;
+
+        var lv = First;
+        var lt = lv + LongCount;
+        var rv = other.First;
+        var rt = rv + other.LongCount;
+        while (lv < lt && rv < rt) {
+            var cmp = Comparer<T>.Default.Compare(*lv, *rv);
+            if (cmp != 0)
+                return cmp;
+            lv++;
+            rv++;
         }
 
-        while (Last != First)
-            TDisposable.Dispose(ref *--Last);
+        return LongCount.CompareTo(other.LongCount);
+    }
+
+    /// <inheritdoc cref="IComparable{T}.CompareTo"/>
+    public readonly int CompareTo(in StdBasicString<T, TMemorySpace> other) {
+        var lv = First;
+        var lt = lv + LongCount;
+        var rv = other.First;
+        var rt = rv + other.LongCount;
+        while (lv < lt && rv < rt) {
+            var cmp = Comparer<T>.Default.Compare(*lv, *rv);
+            if (cmp != 0)
+                return cmp;
+            lv++;
+            rv++;
+        }
+
+        return LongCount.CompareTo(other.LongCount);
     }
 
     /// <inheritdoc/>
+    readonly int IComparable<StdBasicString<T, TMemorySpace>>.CompareTo(StdBasicString<T, TMemorySpace> other) => CompareTo(other);
+
+    /// <inheritdoc/>
+    public readonly int CompareTo(object? obj) => obj is null ? 1 : CompareTo((StdBasicString<T, TMemorySpace>)obj);
+
+    /// <inheritdoc cref="IStdVector{T}.Clear"/>
+    public void Clear() => ResizeUndefined(0);
+
+    /// <inheritdoc/>
     public readonly bool Contains(in T item) => LongIndexOf(item) != -1;
+
+    /// <inheritdoc/>
+    public void Dispose() {
+        Clear();
+        SetCapacity(0);
+    }
+
+    /// <inheritdoc/>
+    public readonly override bool Equals(object? obj) => obj is StdBasicString<T, TMemorySpace> sbs && Equals(sbs);
+
+    /// <inheritdoc/>
+    public readonly bool Equals(IStdBasicString<T>? obj) => obj is StdBasicString<T, TMemorySpace> sbs && Equals(sbs);
+
+    /// <inheritdoc cref="Equals(object?)"/>
+    public readonly bool Equals(in StdBasicString<T, TMemorySpace> other) {
+        if (LongCount != other.LongCount)
+            return false;
+        var buf1 = First;
+        var buf2 = other.First;
+        for (var i = 0L; i < LongCount; i++) {
+            if (*buf1++ != *buf2++)
+                return false;
+        }
+
+        return true;
+    }
 
     /// <inheritdoc/>
     public readonly bool Exists(Predicate<T> match) => LongFindIndex(match) != -1;
@@ -166,8 +232,20 @@ public unsafe struct StdVector<T, TMemorySpace, TDisposable> : IStdVector<T>
 
     /// <inheritdoc/>
     public readonly void ForEach(Action<T> action) {
-        for (var p = First; p < Last; p++)
+        var i = ULongLength;
+        for (var p = First; i > 0; p++, i--)
             action(*p);
+    }
+
+    /// <inheritdoc/>
+    public readonly IStdVector<T>.Enumerator GetEnumerator() => new(First, Last);
+
+    /// <inheritdoc/>
+    public override int GetHashCode() {
+        var hc = new HashCode();
+        foreach (var span in new ChunkedSpanEnumerator<byte>((byte*)First, (nuint)(LongCount * sizeof(T))))
+            hc.AddBytes(span);
+        return hc.ToHashCode();
     }
 
     /// <inheritdoc/>
@@ -186,8 +264,9 @@ public unsafe struct StdVector<T, TMemorySpace, TDisposable> : IStdVector<T>
 
         EnsureCapacity(LongCount + 1);
         SpliceHole(index, 1);
-        Last++;
+        ULongLength++;
         First[index] = item;
+        First[ULongLength] = default;
     }
 
     /// <inheritdoc/>
@@ -202,7 +281,7 @@ public unsafe struct StdVector<T, TMemorySpace, TDisposable> : IStdVector<T>
                 EnsureCapacity(checked(prevCount * 2));
                 CopyInside(index, index + prevCount, prevCount - index);
                 CopyInside(0, index, prevCount);
-                Last += prevCount;
+                ULongLength += (ulong)prevCount;
                 break;
             case List<T> list:
                 InsertSpan(index, CollectionsMarshal.AsSpan(list));
@@ -217,7 +296,7 @@ public unsafe struct StdVector<T, TMemorySpace, TDisposable> : IStdVector<T>
                     var p = First + index;
                     while (count-- > 0 && enu.MoveNext()) {
                         *p++ = enu.Current;
-                        Last++;
+                        ULongLength++;
                     }
                 }
                 break;
@@ -226,6 +305,8 @@ public unsafe struct StdVector<T, TMemorySpace, TDisposable> : IStdVector<T>
                     Insert(index++, item);
                 break;
         }
+
+        First[ULongLength] = default;
     }
 
     /// <inheritdoc/>
@@ -236,8 +317,24 @@ public unsafe struct StdVector<T, TMemorySpace, TDisposable> : IStdVector<T>
 
         EnsureCapacity(prevCount + span.Length);
         SpliceHole(index, span.Length);
-        Last += span.Length;
+        ULongLength += (ulong)span.Length;
         span.CopyTo(new Span<T>(First + index, span.Length));
+        First[ULongLength] = default;
+    }
+
+    /// <inheritdoc/>
+    public void InsertString(Encoding encoding, long index, ReadOnlySpan<char> str) {
+        var sizeofT = sizeof(T);
+        var nb = encoding.GetByteCount(str);
+        if (nb % sizeofT != 0)
+            throw new InvalidOperationException("Number of bytes required is not aligned to the data type.");
+        nb /= sizeofT;
+
+        EnsureCapacity(LongCapacity + nb);
+        SpliceHole(index, nb);
+        ULongLength += (ulong)nb;
+        encoding.GetBytes(str, new Span<byte>(First + index, nb * sizeofT));
+        First[ULongLength] = default;
     }
 
     /// <inheritdoc/>
@@ -256,6 +353,7 @@ public unsafe struct StdVector<T, TMemorySpace, TDisposable> : IStdVector<T>
             return false;
 
         RemoveAt(i);
+        First[ULongLength] = default;
         return true;
     }
 
@@ -272,29 +370,25 @@ public unsafe struct StdVector<T, TMemorySpace, TDisposable> : IStdVector<T>
             index--;
         }
 
+        First[ULongLength] = default;
         return removed;
     }
 
     /// <inheritdoc/>
     public void RemoveAt(long index) {
         _ = CheckedIndex(index, false);
-        TDisposable.Dispose(ref First[index]);
-        Last--;
+        ULongLength--;
         CopyInside(index + 1, index, LongCount - index);
+        First[ULongLength] = default;
     }
 
     /// <inheritdoc/>
     public void RemoveRange(long index, long count) {
         _ = CheckedIndex(index, true);
         _ = CheckedCount(index, count);
-        if (TDisposable.IsDisposable) {
-            var p = First + index;
-            for (var remain = count; remain > 0; remain--)
-                TDisposable.Dispose(ref *p);
-        }
-
-        Last -= count;
+        ULongLength -= (ulong)count;
         CopyInside(index + count, index, LongCount - index);
+        First[ULongLength] = default;
     }
 
     /// <inheritdoc/>
@@ -304,8 +398,9 @@ public unsafe struct StdVector<T, TMemorySpace, TDisposable> : IStdVector<T>
     public void Reverse(long index, long count) {
         _ = CheckedIndex(index, true);
         _ = CheckedCount(index, count);
-        var l = First + index;
-        var r = First + count - 1;
+        var first = First;
+        var l = first + index;
+        var r = first + count - 1;
         for (; l < r; l++, r--) {
             var t = *l;
             *l = *r;
@@ -392,7 +487,7 @@ public unsafe struct StdVector<T, TMemorySpace, TDisposable> : IStdVector<T>
                 throw new ArgumentOutOfRangeException(nameof(startIndex), startIndex, null);
         }
 
-        if (count < 0 || startIndex > LongCount - count)
+        if (count < 0 || startIndex - count + 1 < 0)
             throw new ArgumentOutOfRangeException(nameof(count), count, null);
 
         var end = First + startIndex - count;
@@ -443,7 +538,7 @@ public unsafe struct StdVector<T, TMemorySpace, TDisposable> : IStdVector<T>
                 throw new ArgumentOutOfRangeException(nameof(index), index, null);
         }
 
-        if (count < 0 || index > LongCount - count)
+        if (count < 0 || index - count + 1 < 0)
             throw new ArgumentOutOfRangeException(nameof(count), count, null);
 
         var end = First + index - count;
@@ -454,6 +549,10 @@ public unsafe struct StdVector<T, TMemorySpace, TDisposable> : IStdVector<T>
 
         return -1;
     }
+
+    /// <inheritdoc/>
+    public readonly string Decode(Encoding encoding) =>
+        encoding.GetString((byte*)First, checked((int)(LongCount * sizeof(T))));
 
     /// <inheritdoc/>
     public long EnsureCapacity(long capacity) {
@@ -492,14 +591,9 @@ public unsafe struct StdVector<T, TMemorySpace, TDisposable> : IStdVector<T>
 
     /// <inheritdoc/>
     public void ResizeUndefined(long newSize) {
-        var prevCount = LongCount;
         EnsureCapacity(newSize);
-        Last = First + newSize;
-
-        if (newSize >= prevCount || !TDisposable.IsDisposable)
-            return;
-        for (var i = newSize; i < prevCount; i++)
-            TDisposable.Dispose(ref First[i]);
+        ULongLength = (ulong)newSize;
+        First[newSize] = default;
     }
 
     /// <inheritdoc/>
@@ -508,30 +602,41 @@ public unsafe struct StdVector<T, TMemorySpace, TDisposable> : IStdVector<T>
         var prevCapacity = LongCapacity;
         if (newCapacity < count || count < 0)
             throw new ArgumentOutOfRangeException(nameof(newCapacity), newCapacity, null);
+
         if (newCapacity == prevCapacity)
             return prevCapacity;
 
-        var newAlloc =
-            newCapacity == 0
-                ? null
-                : TMemorySpace.Allocate(checked((nuint)(newCapacity * sizeof(T))), 16);
-        if (newAlloc == null && newCapacity > 0)
+        var oldPtr = First;
+        if (newCapacity <= BufSize) {
+            if (!IsLargeMode)
+                return BufSize;
+            var data = new ReadOnlySpan<T>(oldPtr, BufSize);
+            ULongCapacity = (ulong)SmallStringCapacity;
+            fixed (byte* p = BufferBytes)
+                data.CopyTo(new Span<T>(p, BufSize));
+            Debug.Assert(count < BufSize, "count < BufSize");
+            BufferBytes[count] = 0;
+            IMemorySpace.Free(oldPtr, (nuint)((prevCapacity + 1) * sizeof(T)));
+            return BufSize;
+        }
+
+        var newAlloc = (T*)TMemorySpace.Allocate(checked((nuint)((newCapacity + 1) * sizeof(T))), 16);
+        if (newAlloc == null)
             throw new OutOfMemoryException();
 
         if (count != 0)
-            Unsafe.CopyBlock(newAlloc, First, (uint)(count * sizeof(T)));
+            Unsafe.CopyBlock(newAlloc, oldPtr, (uint)(count * sizeof(T)));
 
-        if (First != null)
-            IMemorySpace.Free(First, (nuint)(prevCapacity * sizeof(T)));
+        // Ensure null termination
+        newAlloc[count] = default;
 
-        First = (T*)newAlloc;
-        End = First + newCapacity;
-        Last = First + count;
+        if (IsLargeMode)
+            IMemorySpace.Free(oldPtr, (nuint)((prevCapacity + 1) * sizeof(T)));
+
+        ULongCapacity = (ulong)newCapacity;
+        *(T**)Unsafe.AsPointer(ref BufferBytes[0]) = newAlloc;
         return newCapacity;
     }
-
-    /// <inheritdoc/>
-    public readonly IStdVector<T>.Enumerator GetEnumerator() => new(First, Last);
 
     [AssertionMethod]
     private readonly long CheckedIndex(long index, bool allowEnd) {

@@ -67,6 +67,8 @@ public static class VectorTester {
             var cmp = Comparer<T>.Default.Compare(*lv, *rv);
             if (cmp != 0)
                 return cmp;
+            lv++;
+            rv++;
         }
 
         return l.LongCount.CompareTo(r.LongCount);
