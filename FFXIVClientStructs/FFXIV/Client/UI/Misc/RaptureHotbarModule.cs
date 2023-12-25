@@ -26,13 +26,23 @@ public unsafe partial struct RaptureHotbarModule {
     // PvE hotbars starting from MCH onwards, appears to track whether a hotbar was initialized?
     [FieldOffset(0x54)] internal fixed bool ExpacJobHotbarsCreated[12];
 
-    // PvP hotbars for all jobs, appears to track initialization status?
+    // PvP hotbars for all jobs, appears to track if it's been initialized. 
     [FieldOffset(0x60)] internal fixed bool PvPHotbarsCreated[22];
+
+    // ????? maybe AllowResets?
+    [FieldOffset(0x76)] internal bool ClearCallbackPresent;
 
     /// <summary>
     /// A bitfield representing whether a specific hotbar is to be considered "shared" or not.
     /// </summary>
     [FieldOffset(0x7C)] public fixed byte HotbarShareStateBitmask[4];
+
+    /// <summary>
+    /// Another bitmask that appears to be related to hotbar sharing state.
+    /// Initialized to 0x3E3F8 (default share state) on game start, but doesn't ever appear to be updated or read elsewhere.
+    /// Dead field?
+    /// </summary>
+    [FieldOffset(0x80)] internal fixed byte HotbarShareStateBitmask2[4];
 
     [FieldOffset(0x88)] internal Client.Game.UI.Hotbar* UiHotbar;
 
@@ -216,6 +226,21 @@ public unsafe partial struct RaptureHotbarModule {
     public bool IsHotbarShared(uint hotbarId) {
         return ((1 << ((int)hotbarId & 7)) & this.HotbarShareStateBitmask[hotbarId >> 3]) > 0;
     }
+
+    /// <summary>
+    /// Sets a hotbar slot and triggers a save for it automatically via <see cref="WriteSavedSlot"/>. Caution must be
+    /// taken to ensure invalid hotbar/slot IDs are not passed into this method, as game-provided sanity checks seem
+    /// to not be present for this method.
+    /// </summary>
+    /// <param name="hotbarId">The hotbar ID to set and write.</param>
+    /// <param name="slotId">The slot ID to set and write.</param>
+    /// <param name="commandType">The command type to set.</param>
+    /// <param name="commandId">The command ID to set.</param>
+    /// <param name="ignoreSharedHotbars">Unclear use, appears to ignore writing to shared slots if set.</param>
+    /// <param name="allowSaveToPvP">If in PVP mode, allow saving to PVP hotbars. No effect if not in PVP mode.</param>
+    [MemberFunction("E8 ?? ?? ?? ?? B0 01 EB B9")]
+    public partial void SetAndSaveSlot(uint hotbarId, uint slotId, HotbarSlotType commandType, uint commandId,
+        bool ignoreSharedHotbars = false, bool allowSaveToPvP = true);
 
     /// <summary>
     /// Dumps a hotbar slot into a specific save slot within <see cref="SavedHotBars"/> and prepares a file save. Used
