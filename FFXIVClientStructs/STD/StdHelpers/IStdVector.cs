@@ -3,6 +3,16 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace FFXIVClientStructs.STD.StdHelpers;
 
+/// <summary>
+/// Base interface for containers with continuous data storage.
+/// </summary>
+/// <typeparam name="T">The element type.</typeparam>
+/// <remarks>
+/// Implementation for <see cref="ICollection"/> and its family will not work if
+/// <see cref="LongCount"/> is above <see cref="int.MaxValue"/>. In such cases,
+/// use <see cref="GetEnumerator"/>; return value itself is an <see cref="IEnumerable{T}"/>,
+/// and <see cref="IDisposable.Dispose"/> is not required for these enumerators.
+/// </remarks>
 [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
 [SuppressMessage("ReSharper", "PossibleInterfaceMemberAmbiguity")]
 public unsafe interface IStdVector<T> : IDisposable, IList, IList<T>, IReadOnlyList<T>
@@ -176,7 +186,7 @@ public unsafe interface IStdVector<T> : IDisposable, IList, IList<T>, IReadOnlyL
 
     /// <inheritdoc cref="List{T}.IndexOf(T,int,int)"/>
     int IndexOf(in T item, int index, int count);
-    
+
     /// <summary>
     /// Inserts the item into the vector. The item will be copied.
     /// </summary>
@@ -425,7 +435,7 @@ public unsafe interface IStdVector<T> : IDisposable, IList, IList<T>, IReadOnlyL
     /// <summary>
     /// Enumerator for <see cref="IStdVector{T}"/>.
     /// </summary>
-    public struct Enumerator : IEnumerator<T> {
+    public struct Enumerator : IEnumerable<T>, IEnumerator<T> {
         private readonly T* _ownerFirst;
         private readonly T* _ownerLast;
         private T* _current;
@@ -471,5 +481,11 @@ public unsafe interface IStdVector<T> : IDisposable, IList, IList<T>, IReadOnlyL
 
         /// <inheritdoc cref="IDisposable.Dispose"/>
         public void Dispose() { }
+
+        /// <inheritdoc cref="IEnumerable{T}.GetEnumerator"/>
+        public IEnumerator<T> GetEnumerator() => new Enumerator(_ownerFirst, _ownerLast);
+
+        /// <inheritdoc cref="IEnumerable.GetEnumerator"/>
+        IEnumerator IEnumerable.GetEnumerator() => new Enumerator(_ownerFirst, _ownerLast);
     }
 }
