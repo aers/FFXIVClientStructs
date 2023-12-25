@@ -528,7 +528,6 @@ public unsafe struct StdVector<T, TMemorySpace, TOperation> : IStdVector<T>
         if (newSize <= prevCount)
             return;
 
-        ZeroMemory(First + prevCount, (nuint)(newSize - prevCount));
         for (var i = prevCount; i < newSize; i++)
             TOperation.SetDefault(ref First[i]);
     }
@@ -544,7 +543,6 @@ public unsafe struct StdVector<T, TMemorySpace, TOperation> : IStdVector<T>
         if (newSize <= prevCount)
             return;
 
-        FillMemory(First + prevCount, (nuint)(newSize - prevCount), defaultValue);
         for (var i = prevCount; i < newSize; i++)
             TOperation.Copy(in defaultValue, out First[i]);
     }
