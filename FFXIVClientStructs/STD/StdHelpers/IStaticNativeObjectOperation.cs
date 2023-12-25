@@ -4,7 +4,7 @@ namespace FFXIVClientStructs.STD.StdHelpers;
 /// Static instructions for how to deal with a type.
 /// </summary>
 /// <typeparam name="T">The type.</typeparam>
-public interface INativeObjectOperationStatic<T>
+public interface IStaticNativeObjectOperation<T>
     where T : unmanaged{
     /// <summary>
     /// Gets a value indicating whether the type is has a default value.

@@ -11,7 +11,7 @@ namespace FFXIVClientStructs.STD.StdHelpers;
 /// <typeparam name="TOperation">The operations.</typeparam>
 internal static unsafe class LongPointerSortHelper<T, TOperation>
     where T : unmanaged
-    where TOperation : INativeObjectOperationStatic<T> {
+    where TOperation : IStaticNativeObjectOperation<T> {
     private const long IntrosortSizeThreshold = 64;
 
     internal static void Sort(T* data, long dataLength) =>

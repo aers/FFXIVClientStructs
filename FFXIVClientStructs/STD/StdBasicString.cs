@@ -20,7 +20,7 @@ namespace FFXIVClientStructs.STD;
 [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
 public unsafe struct StdBasicString<T, TMemorySpace> : IStdBasicString<T>, IComparable<StdBasicString<T, TMemorySpace>>
     where T : unmanaged, IBinaryNumber<T>
-    where TMemorySpace : IMemorySpaceStatic {
+    where TMemorySpace : IStaticMemorySpace {
 
     // See:
     // https://github.com/microsoft/STL/blob/a8888806c6960f1687590ffd4244794c753aa819/stl/inc/xstring#L2202
@@ -127,7 +127,7 @@ public unsafe struct StdBasicString<T, TMemorySpace> : IStdBasicString<T>, IComp
 
     /// <inheritdoc/>
     public readonly long BinarySearch(long index, long count, in T item, IComparer<T>? comparer) =>
-        LongPointerSortHelper<T, NativeObjectOperationStatic<T>>.BinarySearch(
+        LongPointerSortHelper<T, DefaultStaticNativeObjectOperation<T>>.BinarySearch(
             First,
             CheckedIndex(index, true),
             CheckedCount(index, count),
@@ -422,26 +422,26 @@ public unsafe struct StdBasicString<T, TMemorySpace> : IStdBasicString<T>, IComp
 
     /// <inheritdoc/>
     public void Sort() =>
-        LongPointerSortHelper<T, NativeObjectOperationStatic<T>>.Sort(
+        LongPointerSortHelper<T, DefaultStaticNativeObjectOperation<T>>.Sort(
             First,
             LongCount);
 
     /// <inheritdoc/>
     public void Sort(long index, long count) =>
-        LongPointerSortHelper<T, NativeObjectOperationStatic<T>>.Sort(
+        LongPointerSortHelper<T, DefaultStaticNativeObjectOperation<T>>.Sort(
             First + CheckedIndex(index, true),
             CheckedCount(index, count));
 
     /// <inheritdoc/>
     public void Sort(IComparer<T>? comparer) =>
-        LongPointerSortHelper<T, NativeObjectOperationStatic<T>>.Sort(
+        LongPointerSortHelper<T, DefaultStaticNativeObjectOperation<T>>.Sort(
             First,
             LongCount,
             comparer);
 
     /// <inheritdoc/>
     public void Sort(long index, long count, IComparer<T>? comparer) =>
-        LongPointerSortHelper<T, NativeObjectOperationStatic<T>>.Sort(
+        LongPointerSortHelper<T, DefaultStaticNativeObjectOperation<T>>.Sort(
             First + CheckedIndex(index, true),
             CheckedCount(index, count),
             comparer);
@@ -451,7 +451,7 @@ public unsafe struct StdBasicString<T, TMemorySpace> : IStdBasicString<T>, IComp
 
     /// <inheritdoc/>
     public void Sort(long index, long count, Comparison<T> comparison) =>
-        LongPointerSortHelper<T, NativeObjectOperationStatic<T>>.Sort(
+        LongPointerSortHelper<T, DefaultStaticNativeObjectOperation<T>>.Sort(
             First + CheckedIndex(index, true),
             CheckedCount(index, count),
             comparison);

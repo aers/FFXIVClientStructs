@@ -4,12 +4,12 @@ using FFXIVClientStructs.STD.StdHelpers;
 namespace FFXIVClientStructs.STD;
 
 /// <summary>
-/// A <see cref="StdBasicString{T,TMemorySpace}"/> using <see cref="DefaultMemorySpaceStatic"/> and <see cref="byte"/>.<br />
+/// A <see cref="StdBasicString{T,TMemorySpace}"/> using <see cref="DefaultStaticMemorySpace"/> and <see cref="byte"/>.<br />
 /// Encoding contained within is assumed to be the system default encoding.
 /// </summary>
 [StructLayout(LayoutKind.Explicit, Size = 0x20)]
 public unsafe struct StdString : IStdBasicString<byte> {
-    [FieldOffset(0x0)] public StdBasicString<byte, DefaultMemorySpaceStatic> BasicString;
+    [FieldOffset(0x0)] public StdBasicString<byte, DefaultStaticMemorySpace> BasicString;
     [FieldOffset(0x0)] public byte* BufferPtr;
     [FieldOffset(0x0)] public fixed byte Buffer[16];
     /// <summary>

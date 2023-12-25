@@ -17,8 +17,8 @@ namespace FFXIVClientStructs.STD;
 [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
 public unsafe struct StdVector<T, TMemorySpace, TOperation> : IStdVector<T>
     where T : unmanaged
-    where TMemorySpace : IMemorySpaceStatic
-    where TOperation : INativeObjectOperationStatic<T> {
+    where TMemorySpace : IStaticMemorySpace
+    where TOperation : IStaticNativeObjectOperation<T> {
 
     /// <inheritdoc cref="IStdVector{T}.First"/>
     public T* First;

@@ -6,9 +6,9 @@ namespace FFXIVClientStructs.STD.StdHelpers;
 /// Marks that <typeparamref name="T"/> might be a <see cref="IDisposable"/>.
 /// </summary>
 /// <typeparam name="T">The type.</typeparam>
-public class NativeObjectOperationStatic<T> : INativeObjectOperationStatic<T>
+public class DefaultStaticNativeObjectOperation<T> : IStaticNativeObjectOperation<T>
     where T : unmanaged {
-    private NativeObjectOperationStatic() { }
+    private DefaultStaticNativeObjectOperation() { }
 
     /// <inheritdoc/>
     public static bool HasDefault {

@@ -4,12 +4,12 @@ using FFXIVClientStructs.STD.StdHelpers;
 namespace FFXIVClientStructs.STD;
 
 /// <summary>
-/// A <see cref="StdBasicString{T,TMemorySpace}"/> using <see cref="DefaultMemorySpaceStatic"/> and <see cref="char"/>.<br />
+/// A <see cref="StdBasicString{T,TMemorySpace}"/> using <see cref="DefaultStaticMemorySpace"/> and <see cref="char"/>.<br />
 /// Encoding contained within is assumed to be UTF-16.
 /// </summary>
 [StructLayout(LayoutKind.Explicit, Size = 0x20)]
 public unsafe struct StdWString : IStdBasicString<char> {
-    [FieldOffset(0x0)] public StdBasicString<char, DefaultMemorySpaceStatic> BasicString;
+    [FieldOffset(0x0)] public StdBasicString<char, DefaultStaticMemorySpace> BasicString;
 
     public readonly Encoding IntrinsicEncoding => Encoding.Unicode;
     public readonly char* First => BasicString.First;

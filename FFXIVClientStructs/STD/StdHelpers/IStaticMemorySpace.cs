@@ -5,7 +5,7 @@ namespace FFXIVClientStructs.STD.StdHelpers;
 /// <summary>
 /// Static interface for <see cref="IMemorySpace"/>.
 /// </summary>
-public unsafe interface IMemorySpaceStatic {
+public unsafe interface IStaticMemorySpace {
     /// <summary>
     /// Allocates aligned memory.
     /// </summary>
