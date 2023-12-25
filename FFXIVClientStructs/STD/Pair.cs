@@ -1,14 +1,13 @@
 using System.Collections;
-using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 
-using static FFXIVClientStructs.STD.StdHelpers;
+using static FFXIVClientStructs.STD.StdHelpers.StdImplHelpers;
 
 namespace FFXIVClientStructs.STD;
 
+// This part deals with the definition and convenience methods.
 /// <summary>
-/// A <see cref="ValueTuple{T1,T2}"/>-like view for <see href="https://en.cppreference.com/w/cpp/utility/pair">std::pair</see>.<br />
-/// This part deals with the definition and convenience methods.
+/// A <see cref="ValueTuple{T1,T2}"/>-like view for <see href="https://en.cppreference.com/w/cpp/utility/pair">std::pair</see>.
 /// </summary>
 /// <typeparam name="T1">The type of the first item.</typeparam>
 /// <typeparam name="T2">The type of the second item.</typeparam>
@@ -20,8 +19,6 @@ public partial struct StdPair<T1, T2>
     public T1 Item1;
     public T2 Item2;
 
-    [SuppressMessage("ReSharper", "ConvertToPrimaryConstructor")]
-    [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
     public StdPair(in T1 item1, in T2 item2) {
         Item1 = item1;
         Item2 = item2;
@@ -57,14 +54,15 @@ public partial struct StdPair<T1, T2>
 
     /// <inheritdoc cref="object.GetHashCode"/>
     public readonly override int GetHashCode() => HashCode.Combine(Item1, Item2);
+
+    /// <inheritdoc cref="object.ToString"/>
+    public override string ToString() => $"({Item1}, {Item2})";
 }
 
+// This part deals with implementation of the interfaces <see cref="ValueTuple{T1,T2}"/> implements.
 /// <summary>
-/// A <see cref="ValueTuple{T1,T2}"/>-like view for <see href="https://en.cppreference.com/w/cpp/utility/pair">std::pair</see>.<br />
-/// This part deals with implementation of the interfaces <see cref="ValueTuple{T1,T2}"/> implements.
+/// A <see cref="ValueTuple{T1,T2}"/>-like view for <see href="https://en.cppreference.com/w/cpp/utility/pair">std::pair</see>.
 /// </summary>
-/// <typeparam name="T1">The type of the first item.</typeparam>
-/// <typeparam name="T2">The type of the second item.</typeparam>
 public partial struct StdPair<T1, T2>
     : IEquatable<StdPair<T1, T2>>
         , IStructuralEquatable
@@ -83,7 +81,7 @@ public partial struct StdPair<T1, T2>
     /// <inheritdoc cref="ITuple.Length"/>
     public int Length => 2;
 
-    /// <inheritdoc cref="IEquatable{T}.Equals(T?)"/>
+    /// <inheritdoc cref="IEquatable{T}.Equals(T)"/>
     public readonly bool Equals(StdPair<T1, T2> other) => DefaultEquals(Item1, other.Item1) && DefaultEquals(Item2, other.Item2);
 
     /// <inheritdoc cref="IStructuralEquatable.Equals(object?,System.Collections.IEqualityComparer)"/>
