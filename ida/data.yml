@@ -285,6 +285,24 @@ functions:
   0x14171C9F0: rrArithEncodeInit
   0x14171EF90: rrRandStateMod
   0x14171F1A0: rrRandStateSeed
+  0x1404C9EC0: IntersectSweptSphereTriangleBroad
+  0x1404CC9A0: IntersectRayTriangle
+  0x1404CCC00: IntersectSweptSphereTriangle
+  0x1419245D0: IntersectRayAABB
+  0x1419246D0: IntersectRayAABBWithPoint
+  0x141924BD0: IntersectRayTriangleWithNormal
+  0x1419255A0: PointInCylinder
+  0x1419257D0: IntersectRaySphere
+  0x1419258B0: IntersectRaySphere2
+  0x141925FD0: IntersectRayCylinder
+  0x1419266A0: IntersectSweptSphereLineSegment
+  0x14192CFA0: GetTrianglePlaneNormalY
+  0x14192D780: IntersectCallbackNonHoriz
+  0x14192D7F0: IntersectCallbackMoreOrthoNonHoriz
+  0x14192D8D0: IntersectCallbackAny
+  0x14192D900: IntersectCallbackMoreOrtho
+  0x14192E6E0: CollisionAlloc
+  0x14192E720: CollisionFree
 
 classes:
   Client::Game::UI::RecipeNote:
@@ -1445,18 +1463,516 @@ classes:
   Common::Component::Environment::DebugInterface:
     vtbls:
       - ea: 0x141A015D0
-  Common::Component::BGCollision::BGCollisionModule:
+  Common::Component::BGCollision::IResourceManager:
+    vtbls:
+      - ea: 0x141A015F8
+        base: Common::Component::Environment::AllocatorInterface
+      - ea: 0x141A01638
+        base: Common::Component::Environment::ResourceInterface
+      - ea: 0x141A01650
+        base: Common::Component::Environment::DebugInterface
+    vfuncs:
+      4: StartRaycastVisit
+      5: EndVisit
+      6: EndRaycast
+  Common::Component::BGCollision::ResourceManager:
+    vtbls:
+      - ea: 0x141A01810
+        base: Common::Component::BGCollision::IResourceManager
+      - ea: 0x141A01858
+        base: Common::Component::Environment::ResourceInterface # indirect base, offset 8
+      - ea: 0x141A01870
+        base: Common::Component::Environment::DebugInterface # indirect base, offset 0x10
+      - ea: 0x141A01898
+        base: Client::System::Resource::ResourceEventListener
     funcs:
-      0x1404C7540: ctor
-      0x1404C7660: Initialize
-      0x1404C7B00: Raycast
-      0x1404C9CD0: TaskCollisionUpdate
-      0x1404C7420: TaskBGCollisionModule_OnEndOfFrame
-      0x1413330E0: Raycast1 # not sure where else to put those two for now
-      0x141333130: Raycast2
+      0x1404C8780: ctor
+      0x1404C8920: dtor
+  Common::Component::BGCollision::ResourceHandle:
+    vtbls:
+      - ea: 0x141A01768
+        base: Common::Component::Environment::ResourceInterface::ResourceHandleInterface
+      - ea: 0x141A017A0
+    vfuncs:
+      0: deldtor
+      1: GetPath
+      2: LoadComplete
+      3: LoadFailed
   Common::Component::BGCollision::Object:
     vtbls:
       - ea: 0x141A01678
+    vfuncs:
+      0: deldtor
+  Common::Component::BGCollision::NodeLink:
+    vtbls:
+      - ea: 0x141D7A0B0
+    vfuncs:
+      0: deldtor
+  Common::Component::BGCollision::Node:
+    vtbls:
+      - ea: 0x141D7A0B8
+        base: Common::Component::BGCollision::Object
+      - ea: 0x141D7A0C0
+        base: Common::Component::BGCollision::NodeLink
+  Common::Component::BGCollision::IMesh:
+    vtbls:
+      - ea: 0x141A01680
+    vfuncs:
+      0: deldtor
+      1: Clone
+  Common::Component::BGCollision::Mesh:
+    vtbls:
+      - ea: 0x141A01690
+        base: Common::Component::BGCollision::Object
+      - ea: 0x141A016E8
+        base: Common::Component::BGCollision::IMesh
+    vfuncs:
+      2: GetBoundsMin
+      3: GetBoundsMax
+      4: Intersect
+      5: GetNumPrimitives
+      6: GetNumVertices
+      7: GatherVertices
+      8: GetPrimitives
+      9: GetAABB
+      10: Visit
+  Common::Component::BGCollision::MeshSimple:
+    funcs:
+      0x141928A70: ctor
+  Common::Component::BGCollision::MeshPCBLegacy:
+    funcs:
+      0x1419284F0: ctor
+  Common::Component::BGCollision::MeshPCB:
+    vtbls:
+      - ea: 0x141A016F8
+        base: Common::Component::BGCollision::Mesh
+      - ea: 0x141A01750
+        base: Common::Component::BGCollision::IMesh # indirect base, offset 8
+    funcs:
+      0x14192AB60: IntersectImpl
+      0x14192B780: GatherVerticesCompressed
+      0x14192B910: GatherVerticesLocal
+      0x14192BA90: FillResult
+      0x14192BBA0: ctor
+      0x14192BBD0: dtor
+  Common::Component::BGCollision::SceneWrapperNode:
+    vtbls:
+      - ea: 0x141D79ED0
+        base: Common::Component::BGCollision::Node
+  Common::Component::BGCollision::ISceneWrapper:
+    vtbls:
+      - ea: 0x141D79ED8
+        base: Common::Component::BGCollision::SceneWrapperNode
+      - ea: 0x141D79F68
+        base: Common::Component::BGCollision::NodeLink # indirect base, offset 8
+    vfuncs:
+      1: Clear
+      2: SetStreamingSphere
+      3: HasLoadingColliders
+      4: AddColliderStreamed
+      5: AddColliderMesh
+      6: AddColliderMeshPlaceholder
+      7: AddColliderBox
+      8: AddColliderCylinder
+      9: AddColliderSphere
+      10: AddColliderPlane
+      11: AddColliderPlaneTwoSided
+      12: RemoveCollider
+      13: UpdateColliders
+      14: Raycast
+      15: ExecuteForEachIntersecting
+      16: FindContainingCollidersCheckLayer
+      17: FindContainingColliders
+  Common::Component::BGCollision::SceneWrapper:
+    vtbls:
+      - ea: 0x141D79F78
+        base: Common::Component::BGCollision::ISceneWrapper
+      - ea: 0x141D7A028
+        base: Common::Component::BGCollision::NodeLink # indirect base, offset 8
+    vfuncs:
+      0: deldtor
+      18: Visit1
+      20: Visit2
+      21: Visit3
+    funcs:
+      0x1419277E0: ctor
+      0x1419278B0: dtor
+  Common::Component::BGCollision::Scene:
+    vtbls:
+      - ea: 0x141D7A520
+        base: Common::Component::BGCollision::Object
+    funcs:
+      0x14192E770: ctor
+      0x14192E830: dtor
+      0x14192E890: Clear
+      0x14192E990: GetStreamingSphere
+      0x14192E9C0: AddOrUpdateInQuadtree
+      0x14192E9D0: AddColliderStreamed
+      0x14192EA70: AddColliderMesh
+      0x14192EB30: AddColliderMeshWithTransform
+      0x14192EC30: AddColliderMeshPlaceholder
+      0x14192ED00: AddColliderBox
+      0x14192EDB0: AddColliderCylinder
+      0x14192EE60: AddColliderSphere
+      0x14192EF10: AddColliderPlane
+      0x14192EFC0: AddColliderPlaneTwoSided
+      0x14192F070: RemoveCollider
+      0x14192F080: UpdateColliders
+      0x14192F1A0: ExecuteForEachIntersecting
+      0x14192F4B0: Raycast
+      0x14192FA70: FindContainingColliders
+      0x14192FBF0: FindContainingCollidersCheckLayer
+      0x14192FD70: Visit1
+      0x14192FEF0: Visit3
+      0x141930010: Visit2
+  Common::Component::BGCollision::SceneManager:
+    vtbls:
+      - ea: 0x141D79F70
+    vfuncs:
+      0: deldtor
+    funcs:
+      0x141926B80: ctor
+      0x141926BC0: dtor
+      0x141926C80: ClearScenes
+      0x141926CB0: Init
+      0x141926D20: UpdateScenes
+      0x141926D90: DeleteAllScenes
+      0x141926E30: CreateScene
+      0x141926E90: DestroyScene
+      0x141926F10: HasLoadingColliders
+      0x141926F30: AddColliderStreamed
+      0x141926F50: AddColliderMesh
+      0x141926FA0: AddColliderMeshPlaceholder
+      0x141926FC0: AddColliderBox
+      0x141926FE0: AddColliderCylinder
+      0x141927000: AddColliderSphere
+      0x141927020: AddColliderPlane
+      0x141927040: AddColliderPlaneTwoSided
+      0x141927080: RaycastSimple
+      0x141927120: RaycastSimpleLayer
+      0x1419271C0: RaycastSimpleMaterialFilter
+      0x141927260: RaycastNonHoriz
+      0x141927300: RaycastNonHorizMaterialFilter
+      0x1419273C0: SweepSphere
+      0x141927420: SweepSphereLayer
+      0x141927480: SweepSphereMaterialFilter
+      0x1419274E0: SweepSphereNonHoriz
+      0x141927550: SweepSphereNonHorizMaterialFilter
+      0x1419275C0: Raycast
+      0x141927600: FindContainingCollidersCheckLayer
+      0x1419276A0: Alloc
+      0x1419276C0: Free
+      0x1419276E0: StartLoad
+      0x141927700: StopLoad
+      0x141927720: Printf
+      0x1419277C0: ReportError
+  Common::Component::BGCollision::Quadtree:
+    vtbls:
+      - ea: 0x141D7A528
+        base: Common::Component::BGCollision::Object
+    funcs:
+      0x141930230: ctor
+      0x141930440: dtor
+      0x1419304C0: Add
+  Common::Component::BGCollision::QuadtreeNodeLink:
+    vtbls:
+      - ea: 0x141D7A098
+        base: Common::Component::BGCollision::NodeLink
+  Common::Component::BGCollision::QuadtreeNode:
+    vtbls:
+      - ea: 0x141D7A0A0
+        base: Common::Component::BGCollision::Object
+      - ea: 0x141D7A0A8
+        base: Common::Component::BGCollision::QuadtreeNodeLink
+  Common::Component::BGCollision::Quadtree::ColliderIterator:
+    funcs:
+      0x1419308F0: ctor
+      0x141930AF0: ctorLevel
+      0x141931020: SkipEmptyCells
+  Common::Component::BGCollision::Quadtree::CellIterator:
+    funcs:
+      0x141930E80: Increment
+  Common::Component::BGCollision::Collider:
+    vtbls:
+      - ea: 0x141D7A0C8
+        base: Common::Component::BGCollision::Node
+      - ea: 0x141D7A188
+        base: Common::Component::BGCollision::NodeLink # indirect base, offset 8
+      - ea: 0x141D7A190
+        base: Common::Component::BGCollision::QuadtreeNode
+      - ea: 0x141D7A198
+        base: Common::Component::BGCollision::QuadtreeNodeLink # indirect base, offset 0x28
+    vfuncs:
+      0: deldtor
+      1: Load
+      2: Unload
+      3: WantUnload
+      4: GetMaterial
+      5: GetMaterialId
+      6: GetMaterialMask
+      7: SetMaterial
+      8: SetTranslation
+      9: GetTranslation
+      10: GetWorldBB
+      11: SetRotation
+      12: GetRotation
+      13: SetScale
+      14: GetScale
+      15: GetWorldTransform
+      16: GetInvWorldTransform
+      17: GetColliderType
+      18: Update
+      19: LoadInProgress
+      20: Raycast
+      21: IsInsideCheckLayer
+      22: IsInside
+    funcs:
+      0x14192BD20: ctor
+      0x14192BE90: dtor
+  Common::Component::BGCollision::ColliderMesh:
+    vtbls:
+      - ea: 0x141D7A270
+        base: Common::Component::BGCollision::Collider
+      - ea: 0x141D7A340
+        base: Common::Component::BGCollision::NodeLink # indirect base, offset 8
+      - ea: 0x141D7A348
+        base: Common::Component::BGCollision::QuadtreeNode # indirect base, offset 0x20
+      - ea: 0x141D7A350
+        base: Common::Component::BGCollision::QuadtreeNodeLink # indirect base, offset 0x28
+      - ea: 0x141D7A358
+        base: Common::Component::Excel::ExcelResourceListener
+    vfuncs:
+      24: CreateMesh
+      25: ClearMesh
+    funcs:
+      0x141928F00: ctorSimple
+      0x1419291A0: ctor
+      0x1419292E0: dtor
+      0x14192A840: CreatePlaceholderMesh
+      0x14192A990: SetPlaceholderBounds
+      0x14192A9E0: SetPlaceholderVertexMaterial
+  Common::Component::BGCollision::ColliderMesh::RayIntersectFunctor:
+    vtbls:
+      - ea: 0x141D7A388
+    vfuncs:
+      0: deldtor
+      1: AcceptIntersection
+    funcs:
+      0x14192C7A0: IntersectCheckMaterial
+      0x14192CAF0: IntersectCheckAdjustedMaterial
+      0x14192CE10: Intersect
+  Common::Component::BGCollision::ColliderMesh::SphereIntersectFunctor:
+    vtbls:
+      - ea: 0x141D7A3B8
+    vfuncs:
+      0: deldtor
+      1: AcceptIntersection
+    funcs:
+      0x14192C610: IntersectCheckMaterial
+      0x14192C930: IntersectCheckAdjustedMaterial
+      0x14192CCB0: Intersect
+  Common::Component::BGCollision::ColliderStreamed:
+    vtbls:
+      - ea: 0x141D7A3E8
+        base: Common::Component::BGCollision::Collider
+      - ea: 0x141D7A4E0
+        base: Common::Component::BGCollision::NodeLink # indirect base, offset 8
+      - ea: 0x141D7A4E8
+        base: Common::Component::BGCollision::QuadtreeNode # indirect base, offset 0x20
+      - ea: 0x141D7A4F0
+        base: Common::Component::BGCollision::QuadtreeNodeLink # indirect base, offset 0x28
+      - ea: 0x141D7A4F8
+        base: Common::Component::Excel::ExcelResourceListener
+    funcs:
+      0x14192D990: ctor
+      0x14192DAE0: dtor
+      0x14192E230: LoadInProgressAroundPoint
+      0x14192E340: AllLoadedAroundPoint
+  Common::Component::BGCollision::ColliderBox:
+    vtbls:
+      - ea: 0x141D7A540
+        base: Common::Component::BGCollision::Collider
+      - ea: 0x141D7A638
+        base: Common::Component::BGCollision::NodeLink # indirect base, offset 8
+      - ea: 0x141D7A640
+        base: Common::Component::BGCollision::QuadtreeNode # indirect base, offset 0x20
+      - ea: 0x141D7A648
+        base: Common::Component::BGCollision::QuadtreeNodeLink # indirect base, offset 0x28
+    vfuncs:
+      24: SweepSphereNonHorizCheckLayer
+      25: SweepSphereSimpleCheckLayerAndMaterial
+      26: SweepSphereSimpleCheckLayer
+      27: SweepSphereSimple
+      28: RaycastNonHorizCheckLayer
+      29: RaycastSimpleCheckLayer
+      30: RaycastSimple
+    funcs:
+      0x1419320D0: ctor
+  Common::Component::BGCollision::ColliderBox::IIntersectFunctor:
+    vtbls:
+      - ea: 0x141D7A530
+    vfuncs:
+      0: deldtor
+      1: AcceptIntersection
+  Common::Component::BGCollision::ColliderBox::RayNonHorizIntersectFunctor:
+    vtbls:
+      - ea: 0x141D7A890
+        base: Common::Component::BGCollision::ColliderBox::IIntersectFunctor
+  Common::Component::BGCollision::ColliderBox::RayIntersectFunctor:
+    vtbls:
+      - ea: 0x141D7A8A0
+        base: Common::Component::BGCollision::ColliderBox::IIntersectFunctor
+    funcs:
+      0x141931230: Intersect
+  Common::Component::BGCollision::ColliderBox::SphereNonHorizIntersectFunctor:
+    vtbls:
+      - ea: 0x141D7A8B0
+        base: Common::Component::BGCollision::ColliderBox::IIntersectFunctor
+  Common::Component::BGCollision::ColliderBox::SphereIntersectFunctor:
+    vtbls:
+      - ea: 0x141D7A8C0
+        base: Common::Component::BGCollision::ColliderBox::IIntersectFunctor
+    funcs:
+      0x1419318D0: Intersect
+  Common::Component::BGCollision::ColliderBox::RayNonHorizIntersectFunctor2:
+    vtbls:
+      - ea: 0x141D7A8D0
+        base: Common::Component::BGCollision::ColliderBox::IIntersectFunctor
+  Common::Component::BGCollision::ColliderCylinder:
+    vtbls:
+      - ea: 0x141D7A8F0
+        base: Common::Component::BGCollision::Collider
+      - ea: 0x141D7A9B0
+        base: Common::Component::BGCollision::NodeLink # indirect base, offset 8
+      - ea: 0x141D7A9B8
+        base: Common::Component::BGCollision::QuadtreeNode # indirect base, offset 0x20
+      - ea: 0x141D7A9C0
+        base: Common::Component::BGCollision::QuadtreeNodeLink # indirect base, offset 0x28
+    funcs:
+      0x141933A50: FillResult
+      0x141933E50: RaycastSimple
+      0x141934120: SweepSphereSimple
+      0x1419344C0: ctor
+  Common::Component::BGCollision::ColliderSphere:
+    vtbls:
+      - ea: 0x141D7A9D8
+        base: Common::Component::BGCollision::Collider
+      - ea: 0x141D7AAD0
+        base: Common::Component::BGCollision::NodeLink # indirect base, offset 8
+      - ea: 0x141D7AAD8
+        base: Common::Component::BGCollision::QuadtreeNode # indirect base, offset 0x20
+      - ea: 0x141D7AAE0
+        base: Common::Component::BGCollision::QuadtreeNodeLink # indirect base, offset 0x28
+    vfuncs:
+      24: SweepSphereNonHorizCheckLayer
+      25: SweepSphereSimpleCheckLayerAndMaterial
+      26: SweepSphereSimpleCheckLayer
+      27: SweepSphereSimple
+      28: RaycastNonHorizCheckLayer
+      29: RaycastSimpleCheckLayer
+      30: RaycastSimple
+    funcs:
+      0x141935B30: FillResult
+      0x141935D60: ctor
+  Common::Component::BGCollision::ColliderPlane:
+    vtbls:
+      - ea: 0x141D7AAF8
+        base: Common::Component::BGCollision::Collider
+      - ea: 0x141D7ABF0
+        base: Common::Component::BGCollision::NodeLink # indirect base, offset 8
+      - ea: 0x141D7ABF8
+        base: Common::Component::BGCollision::QuadtreeNode # indirect base, offset 0x20
+      - ea: 0x141D7AC00
+        base: Common::Component::BGCollision::QuadtreeNodeLink # indirect base, offset 0x28
+    vfuncs:
+      24: SweepSphereNonHorizCheckLayer
+      25: SweepSphereSimpleCheckLayerAndMaterial
+      26: SweepSphereSimpleCheckLayer
+      27: SweepSphereSimple
+      28: RaycastNonHorizCheckLayer
+      29: RaycastSimpleCheckLayer
+      30: RaycastSimple
+    funcs:
+      0x1419383B0: ctor
+  Common::Component::BGCollision::ColliderPlaneTwoSided:
+    vtbls:
+      - ea: 0x141D7AC08
+        base: Common::Component::BGCollision::ColliderPlane
+      - ea: 0x141D7AD00
+        base: Common::Component::BGCollision::NodeLink # indirect base, offset 8
+      - ea: 0x141D7AD08
+        base: Common::Component::BGCollision::QuadtreeNode # indirect base, offset 0x20
+      - ea: 0x141D7AD10
+        base: Common::Component::BGCollision::QuadtreeNodeLink # indirect base, offset 0x28
+    funcs:
+      0x141939590: ctor
+
+  Common::Component::BGCollision::ColliderPlane::IIntersectFunctor:
+    vtbls:
+      - ea: 0x141D7AAE8
+    vfuncs:
+      0: deldtor
+      1: AcceptIntersection
+  Common::Component::BGCollision::ColliderPlane::RayIntersectFunctor:
+    vtbls:
+      - ea: 0x141D7AD28
+        base: Common::Component::BGCollision::ColliderPlane::IIntersectFunctor
+    funcs:
+      0x141937680: Intersect
+  Common::Component::BGCollision::ColliderPlane::SphereIntersectFunctor:
+    vtbls:
+      - ea: 0x141D7AD48
+        base: Common::Component::BGCollision::ColliderPlane::IIntersectFunctor
+    funcs:
+      0x141937CE0: Intersect
+  Common::Component::BGCollision::BGCollisionModule:
+    funcs:
+      0x1404C7420: TaskBGCollisionModule_OnEndOfFrame
+      0x1404C7450: TaskBGCollisionModule_Update
+      0x1404C7540: ctor
+      0x1404C75F0: dtor
+      0x1404C7660: Initialize
+      0x1404C7770: UpdateTaskFuncImpl
+      0x1404C7800: UpdateTaskFunc
+      0x1404C7810: Shutdown
+      0x1404C78A0: IsLoadInProgress
+      0x1404C7960: RaycastSimple
+      0x1404C7A30: SweepSphere
+      0x1404C7B00: RaycastMaterialFilter
+      0x1404C7C30: SweepSphereMaterialFilter
+      0x1404C7D10: RaycastNonHoriz
+      0x1404C7E00: SweepSphereNonHoriz
+      0x1404C7EF0: SweepSphereNonHorizMaterialFilter
+      0x1404C8010: RaycastNonHorizMaterialFilter
+      0x1404C8150: FindContainingColliders
+      0x1404C81E0: RemoveCollider
+      0x1404C8240: AddColliderStreamed
+      0x1404C82B0: AddColliderMesh
+      0x1404C8340: AddColliderMeshPlaceholder
+      0x1404C83E0: AddColliderBox
+      0x1404C8470: AddColliderCylinder
+      0x1404C8520: AddColliderSphere
+      0x1404C85C0: AddColliderPlane
+      0x1404C8650: AddColliderPlaneTwoSided
+      0x1404C9CB0: TaskBGCollisionModule_OnEndOfFrameRunner
+      0x1404C9CC0: TaskBGCollisionModule_UpdateTaskRunner
+      0x1404C9CD0: TaskBGCollisionModule_UpdateRunner
+      0x1413330E0: Raycast1 # not sure where else to put those two for now
+      0x141333130: Raycast2
+  Common::Component::BGCollision::RaycastHit:
+    funcs:
+      0x141922450: GetNormalComponents
+      0x1419224D0: GetNormal
+  Common::Component::BGCollision::ColliderList:
+    funcs:
+      0x141922610: Add
+  Common::Component::BGCollision::ColliderUpdatePayload:
+    funcs:
+      0x1419226A0: ctor
+  Common::Component::BGCollision::ColliderUpdateListeners:
+    funcs:
+      0x141922C60: ctor
+      0x141922DA0: Notify
   Common::Component::Environment::ResourceInterface::ResourceHandleInterface:
     vtbls:
       - ea: 0x141A01580
@@ -10456,6 +10972,25 @@ classes:
   Vector3:
     funcs:
       0x1401BDAF0: Normalize
+      0x1404C9D30: Normalize2
+      0x141935950: ctorRotatedAroundAxis
+  Vector4:
+    funcs:
+      0x1419231A0: ctorMulMatrix
+      0x14192D5D0: UnitW
+      0x141935680: QuatMultiplyBy
+  Matrix4x4:
+    funcs:
+      0x1419235E0: ctorRotX
+      0x141923790: ctorRotY
+      0x141923930: ctorRotZ
+      0x141923B10: ctorScale
+      0x141923BE0: ctorTranslation
+      0x141923DD0: Invert
+      0x14192C010: TransformVector4
+  AABB:
+    funcs:
+      0x141926A90: ctorTransformed
   # havok
   hkArrayUtil:
     funcs:
