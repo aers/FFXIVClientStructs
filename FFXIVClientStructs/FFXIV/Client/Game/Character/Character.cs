@@ -293,7 +293,7 @@ public unsafe partial struct Character {
         [FieldOffset(0x600)] public byte FaceCameraFlag; // looks like a bitfield but only with one bit used
 
         [FieldOffset(0x604)] public Vector2 BannerHeadDirection;
-        [FieldOffset(0x60C)] public Vector2 BannerEyesDirection;
+        [FieldOffset(0x60C)] public Vector2 BannerEyeDirection;
         [FieldOffset(0x614)] public BannerCameraFollowFlags BannerCameraFollowFlag;
 
         public bool IsFacingCamera {
