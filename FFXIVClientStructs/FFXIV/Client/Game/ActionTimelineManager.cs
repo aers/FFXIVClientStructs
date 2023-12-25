@@ -2,6 +2,9 @@ using FFXIVClientStructs.FFXIV.Client.Game.Object;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
+// Client::System::Scheduler::ActionTimelineManager
+// ctor "E8 ?? ?? ?? ?? 48 8B C8 48 89 05 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B 05"
+// TODO: move into correct namespace
 [StructLayout(LayoutKind.Explicit, Size = 0x340)]
 public unsafe partial struct ActionTimelineManager {
     [FieldOffset(0x08)] public Character.Character* Parent;
@@ -40,7 +43,6 @@ public unsafe partial struct ActionTimelineManager {
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 ?? 80 8E ?? ?? ?? ?? ?? 48 8D 8B")]
     public partial bool CalculateAndApplyOverallSpeed(); // Calculates the current overall speed and applies it, returns true if the speed changed
-
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x1F0)]

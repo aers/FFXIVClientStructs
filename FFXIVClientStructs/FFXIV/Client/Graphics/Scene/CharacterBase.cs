@@ -6,13 +6,12 @@ using FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 using FFXIVClientStructs.FFXIV.Common.Math;
 
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
+
 // Client::Graphics::Scene::CharacterBase
 //   Client::Graphics::Scene::DrawObject
 //     Client::Graphics::Scene::Object
+// ctor "E8 ?? ?? ?? ?? 33 C9 48 8D 05 ?? ?? ?? ?? 48 89 03 48 B8"
 // base class for graphics objects representing characters (human, demihuman, monster, and weapons)
-
-// size = 0x8F0
-// ctor - E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 45 33 C0 48 89 03 BA ?? ?? ?? ?? 
 [StructLayout(LayoutKind.Explicit, Size = 0x8F0)]
 [VTableAddress("48 8d 05 ?? ?? ?? ?? 48 89 07 48 8d 9f d0 00 00 00", 3)]
 public unsafe partial struct CharacterBase {

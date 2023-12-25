@@ -372,6 +372,7 @@ classes:
     vtbls:
       - ea: 0x141A03218
     funcs:
+      0x1404DDAB0: ctor
       0x1404DDC40: PlayTimeline
       0x1404DE200: GetSlotTimeline
       0x1404DE5F0: SetSlotSpeed
@@ -10762,8 +10763,6 @@ classes:
   Client::System::Scheduler::Base::SchedulerState:
     vtbls:
       - ea: 0x141B4DEA0
-    funcs:
-      0x1413C1B50: ctor
   Client::Graphics::Physics::BoneSimulator:
     vtbls:
       - ea: 0x141B5D470
@@ -10853,7 +10852,10 @@ classes:
     instances:
       - ea: 0x14222BAF8
   Client::System::Scheduler::TimelineGroup:
+    vtbls:
+      - ea: 0x141B61288
     funcs:
+      0x14143CAE0: ctor
       0x14143D060: PlayAction
   Client::System::Scheduler::Base::TimelineController:
     vtbls:
