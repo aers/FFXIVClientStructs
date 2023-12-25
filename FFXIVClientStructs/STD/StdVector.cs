@@ -12,13 +12,13 @@ namespace FFXIVClientStructs.STD;
 /// </summary>
 /// <typeparam name="T">The type of element.</typeparam>
 /// <typeparam name="TMemorySpace">The specifier for <see cref="IMemorySpace"/>, for vectors with different preferred memory space.</typeparam>
-/// <typeparam name="TDisposable">The specifier for <see cref="IDisposable"/>, for element types that has its own destructor.</typeparam>
+/// <typeparam name="TOperation">The specifier for <see cref="IDisposable"/>, for element types that has its own destructor.</typeparam>
 [StructLayout(LayoutKind.Sequential)]
 [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
-public unsafe struct StdVector<T, TMemorySpace, TDisposable> : IStdVector<T>
+public unsafe struct StdVector<T, TMemorySpace, TOperation> : IStdVector<T>
     where T : unmanaged
     where TMemorySpace : IMemorySpaceStatic
-    where TDisposable : IDisposableStatic<T> {
+    where TOperation : INativeObjectOperationStatic<T> {
 
     /// <inheritdoc cref="IStdVector{T}.First"/>
     public T* First;
@@ -65,10 +65,10 @@ public unsafe struct StdVector<T, TMemorySpace, TDisposable> : IStdVector<T>
     /// <inheritdoc/>
     public readonly ref T this[long index] => ref First[CheckedIndex(index, false)];
 
-    public static implicit operator Span<T>(in StdVector<T, TMemorySpace, TDisposable> value)
+    public static implicit operator Span<T>(in StdVector<T, TMemorySpace, TOperation> value)
         => value.AsSpan();
 
-    public static implicit operator ReadOnlySpan<T>(in StdVector<T, TMemorySpace, TDisposable> value)
+    public static implicit operator ReadOnlySpan<T>(in StdVector<T, TMemorySpace, TOperation> value)
         => value.AsSpan();
     
     /// <inheritdoc/>
@@ -81,7 +81,7 @@ public unsafe struct StdVector<T, TMemorySpace, TDisposable> : IStdVector<T>
     public override int GetHashCode() => HashCode.Combine((nint)First, (nint)Last, (nint)End);
 
     /// <inheritdoc/>
-    public override string ToString() => $"{nameof(StdVector<T>)}<{typeof(T)}, {typeof(TMemorySpace)}, {typeof(TDisposable)}>({LongCount}/{LongCapacity})";
+    public override string ToString() => $"{nameof(StdVector<T>)}<{typeof(T)}, {typeof(TMemorySpace)}, {typeof(TOperation)}>({LongCount}/{LongCapacity})";
 
     /// <inheritdoc/>
     public readonly Span<T> AsSpan() => new(First, Count);
@@ -97,16 +97,25 @@ public unsafe struct StdVector<T, TMemorySpace, TDisposable> : IStdVector<T>
         checked((int)CheckedCount(index, count)));
 
     /// <inheritdoc/>
-    public void Add(in T item) {
+    public void AddCopy(in T item) {
         EnsureCapacity(LongCount + 1);
-        *Last++ = item;
+        TOperation.Copy(in item, out *Last++);
     }
 
     /// <inheritdoc/>
-    public void AddRange(IEnumerable<T> collection) => InsertRange(LongCount, collection);
+    public void AddMove(ref T item) {
+        EnsureCapacity(LongCount + 1);
+        TOperation.Move(ref item, out *Last++);
+    }
 
     /// <inheritdoc/>
-    public void AddSpan(ReadOnlySpan<T> span) => InsertSpan(LongCount, span);
+    public void AddRangeCopy(IEnumerable<T> collection) => InsertRangeCopy(LongCount, collection);
+
+    /// <inheritdoc/>
+    public void AddSpanCopy(ReadOnlySpan<T> span) => InsertSpanCopy(LongCount, span);
+
+    /// <inheritdoc/>
+    public void AddSpanMove(Span<T> span) => InsertSpanMove(LongCount, span);
 
     /// <inheritdoc/>
     public readonly long BinarySearch(in T item) => BinarySearch(0, LongCount, item, null);
@@ -116,7 +125,7 @@ public unsafe struct StdVector<T, TMemorySpace, TDisposable> : IStdVector<T>
 
     /// <inheritdoc/>
     public readonly long BinarySearch(long index, long count, in T item, IComparer<T>? comparer) =>
-        LongPointerSortHelper<T>.BinarySearch(
+        LongPointerSortHelper<T, TOperation>.BinarySearch(
             First,
             CheckedIndex(index, true),
             CheckedCount(index, count),
@@ -125,13 +134,13 @@ public unsafe struct StdVector<T, TMemorySpace, TDisposable> : IStdVector<T>
 
     /// <inheritdoc cref="IStdVector{T}.Clear"/>
     public void Clear() {
-        if (!TDisposable.IsDisposable) {
+        if (!TOperation.IsDisposable) {
             Last = First;
             return;
         }
 
         while (Last != First)
-            TDisposable.Dispose(ref *--Last);
+            TOperation.Dispose(ref *--Last);
     }
 
     /// <inheritdoc/>
@@ -180,39 +189,56 @@ public unsafe struct StdVector<T, TMemorySpace, TDisposable> : IStdVector<T>
     public readonly int IndexOf(in T item, int index, int count) => checked((int)LongIndexOf(item, index, count));
 
     /// <inheritdoc/>
-    public void Insert(long index, in T item) {
+    public void InsertCopy(long index, in T item) {
         if (index < 0 || index > LongCount)
             throw new ArgumentOutOfRangeException(nameof(index), index, null);
+        if (!TOperation.IsCopiable)
+            throw new InvalidOperationException("Items are not copiable.");
 
         EnsureCapacity(LongCount + 1);
-        SpliceHole(index, 1);
+        SpliceHoleUnchecked(index, 1);
         Last++;
-        First[index] = item;
+        TOperation.Copy(in item, out First[index]);
     }
 
     /// <inheritdoc/>
-    public void InsertRange(long index, IEnumerable<T> collection) {
+    public void InsertMove(long index, ref T item) {
+        if (index < 0 || index > LongCount)
+            throw new ArgumentOutOfRangeException(nameof(index), index, null);
+        if (!TOperation.IsCopiable)
+            throw new InvalidOperationException("Items are not copiable.");
+
+        EnsureCapacity(LongCount + 1);
+        SpliceHoleUnchecked(index, 1);
+        Last++;
+        TOperation.Move(ref item, out First[index]);
+    }
+
+    /// <inheritdoc/>
+    public void InsertRangeCopy(long index, IEnumerable<T> collection) {
         var prevCount = LongCount;
         if (index < 0 || index > prevCount)
             throw new ArgumentOutOfRangeException(nameof(index), index, null);
+        if (!TOperation.IsCopiable)
+            throw new InvalidOperationException("Items are not copiable.");
 
         switch (collection) {
             case IStdVector<T> isv when isv.PointerEquals(this):
                 // We're inserting this vector into itself.
                 EnsureCapacity(checked(prevCount * 2));
-                CopyInside(index, index + prevCount, prevCount - index);
-                CopyInside(0, index, prevCount);
+                CopyInsideUnchecked(index, index + prevCount, prevCount - index);
+                CopyInsideUnchecked(0, index, prevCount);
                 Last += prevCount;
                 break;
             case List<T> list:
-                InsertSpan(index, CollectionsMarshal.AsSpan(list));
+                InsertSpanCopy(index, CollectionsMarshal.AsSpan(list));
                 break;
             case T[] array:
-                InsertSpan(index, array.AsSpan());
+                InsertSpanCopy(index, array.AsSpan());
                 break;
             case var _ when TryGetCountFromEnumerable(collection, out var count):
                 EnsureCapacity(prevCount + count);
-                SpliceHole(index, count);
+                SpliceHoleUnchecked(index, count);
                 using (var enu = collection.GetEnumerator()) {
                     var p = First + index;
                     while (count-- > 0 && enu.MoveNext()) {
@@ -223,21 +249,43 @@ public unsafe struct StdVector<T, TMemorySpace, TDisposable> : IStdVector<T>
                 break;
             default:
                 foreach (var item in collection)
-                    Insert(index++, item);
+                    InsertCopy(index++, item);
                 break;
         }
     }
 
     /// <inheritdoc/>
-    public void InsertSpan(long index, ReadOnlySpan<T> span) {
+    public void InsertSpanCopy(long index, ReadOnlySpan<T> span) {
         var prevCount = LongCount;
         if (index < 0 || index > prevCount)
             throw new ArgumentOutOfRangeException(nameof(index), index, null);
+        if (!TOperation.IsCopiable)
+            throw new InvalidOperationException("Items are not copiable.");
+        if (!TOperation.IsMovable && index != LongCount)
+            throw new InvalidOperationException("Items are not movable, and trying to insert in middle.");
 
         EnsureCapacity(prevCount + span.Length);
-        SpliceHole(index, span.Length);
+        SpliceHoleUnchecked(index, span.Length);
         Last += span.Length;
-        span.CopyTo(new Span<T>(First + index, span.Length));
+        var p = First + index;
+        foreach (ref readonly var s in span)
+            TOperation.Copy(in s, out *p++);
+    }
+
+    /// <inheritdoc/>
+    public void InsertSpanMove(long index, Span<T> span) {
+        var prevCount = LongCount;
+        if (index < 0 || index > prevCount)
+            throw new ArgumentOutOfRangeException(nameof(index), index, null);
+        if (!TOperation.IsMovable)
+            throw new InvalidOperationException("Items are not movable.");
+
+        EnsureCapacity(prevCount + span.Length);
+        SpliceHoleUnchecked(index, span.Length);
+        Last += span.Length;
+        var p = First + index;
+        foreach (ref var s in span)
+            TOperation.Move(ref s, out *p++);
     }
 
     /// <inheritdoc/>
@@ -278,23 +326,27 @@ public unsafe struct StdVector<T, TMemorySpace, TDisposable> : IStdVector<T>
     /// <inheritdoc/>
     public void RemoveAt(long index) {
         _ = CheckedIndex(index, false);
-        TDisposable.Dispose(ref First[index]);
+        if (!TOperation.IsMovable && index + 1 != LongCount)
+            throw new InvalidOperationException("Cannot remove from middle when items are not movable");
+        TOperation.Dispose(ref First[index]);
         Last--;
-        CopyInside(index + 1, index, LongCount - index);
+        CopyInsideUnchecked(index + 1, index, LongCount - index);
     }
 
     /// <inheritdoc/>
     public void RemoveRange(long index, long count) {
         _ = CheckedIndex(index, true);
         _ = CheckedCount(index, count);
-        if (TDisposable.IsDisposable) {
+        if (!TOperation.IsMovable && index + count != LongCount)
+            throw new InvalidOperationException("Cannot remove from middle when items are not movable");
+        if (TOperation.IsDisposable) {
             var p = First + index;
             for (var remain = count; remain > 0; remain--)
-                TDisposable.Dispose(ref *p);
+                TOperation.Dispose(ref *p);
         }
 
         Last -= count;
-        CopyInside(index + count, index, LongCount - index);
+        CopyInsideUnchecked(index + count, index, LongCount - index);
     }
 
     /// <inheritdoc/>
@@ -306,33 +358,30 @@ public unsafe struct StdVector<T, TMemorySpace, TDisposable> : IStdVector<T>
         _ = CheckedCount(index, count);
         var l = First + index;
         var r = First + count - 1;
-        for (; l < r; l++, r--) {
-            var t = *l;
-            *l = *r;
-            *r = t;
-        }
+        for (; l < r; l++, r--)
+            TOperation.Swap(ref *l, ref *r);
     }
 
     /// <inheritdoc/>
-    public void Sort() => LongPointerSortHelper<T>.Sort(First, LongCount);
+    public void Sort() => LongPointerSortHelper<T, TOperation>.Sort(First, LongCount);
 
     /// <inheritdoc/>
     public void Sort(long index, long count) =>
-        LongPointerSortHelper<T>.Sort(First + CheckedIndex(index, true), CheckedCount(index, count));
+        LongPointerSortHelper<T, TOperation>.Sort(First + CheckedIndex(index, true), CheckedCount(index, count));
 
     /// <inheritdoc/>
-    public void Sort(IComparer<T>? comparer) => LongPointerSortHelper<T>.Sort(First, LongCount, comparer);
+    public void Sort(IComparer<T>? comparer) => LongPointerSortHelper<T, TOperation>.Sort(First, LongCount, comparer);
 
     /// <inheritdoc/>
     public void Sort(long index, long count, IComparer<T>? comparer) =>
-        LongPointerSortHelper<T>.Sort(First + CheckedIndex(index, true), CheckedCount(index, count), comparer);
+        LongPointerSortHelper<T, TOperation>.Sort(First + CheckedIndex(index, true), CheckedCount(index, count), comparer);
 
     /// <inheritdoc/>
     public void Sort(Comparison<T> comparison) => Sort(0, LongCount, comparison);
 
     /// <inheritdoc/>
     public void Sort(long index, long count, Comparison<T> comparison) =>
-        LongPointerSortHelper<T>.Sort(First + CheckedIndex(index, true), CheckedCount(index, count), comparison);
+        LongPointerSortHelper<T, TOperation>.Sort(First + CheckedIndex(index, true), CheckedCount(index, count), comparison);
 
     /// <inheritdoc/>
     public readonly T[] ToArray() => ToArray(0, LongCount);
@@ -471,35 +520,33 @@ public unsafe struct StdVector<T, TMemorySpace, TDisposable> : IStdVector<T>
     /// <inheritdoc/>
     public void Resize(long newSize) {
         var prevCount = LongCount;
+        if (!TOperation.HasDefault && prevCount < newSize)
+            throw new InvalidOperationException("Type has no default value. Try specifying one.");
+
         ResizeUndefined(newSize);
 
         if (newSize <= prevCount)
             return;
 
         ZeroMemory(First + prevCount, (nuint)(newSize - prevCount));
+        for (var i = prevCount; i < newSize; i++)
+            TOperation.SetDefault(ref First[i]);
     }
 
     /// <inheritdoc/>
     public void Resize(long newSize, in T defaultValue) {
         var prevCount = LongCount;
+        if (!TOperation.IsCopiable && prevCount < newSize)
+            throw new InvalidOperationException("Elements are not copiable, and default value cannot be specified.");
+
         ResizeUndefined(newSize);
 
         if (newSize <= prevCount)
             return;
 
         FillMemory(First + prevCount, (nuint)(newSize - prevCount), defaultValue);
-    }
-
-    /// <inheritdoc/>
-    public void ResizeUndefined(long newSize) {
-        var prevCount = LongCount;
-        EnsureCapacity(newSize);
-        Last = First + newSize;
-
-        if (newSize >= prevCount || !TDisposable.IsDisposable)
-            return;
-        for (var i = newSize; i < prevCount; i++)
-            TDisposable.Dispose(ref First[i]);
+        for (var i = prevCount; i < newSize; i++)
+            TOperation.Copy(in defaultValue, out First[i]);
     }
 
     /// <inheritdoc/>
@@ -511,20 +558,27 @@ public unsafe struct StdVector<T, TMemorySpace, TDisposable> : IStdVector<T>
         if (newCapacity == prevCapacity)
             return prevCapacity;
 
+        if (count != 0 && !TOperation.IsMovable)
+            throw new InvalidOperationException("Elements are not movable, and the vector is not empty.");
+
         var newAlloc =
             newCapacity == 0
                 ? null
-                : TMemorySpace.Allocate(checked((nuint)(newCapacity * sizeof(T))), 16);
+                : (T*)TMemorySpace.Allocate(checked((nuint)(newCapacity * sizeof(T))), 16);
         if (newAlloc == null && newCapacity > 0)
             throw new OutOfMemoryException();
 
-        if (count != 0)
-            Unsafe.CopyBlock(newAlloc, First, (uint)(count * sizeof(T)));
+        if (count != 0) {
+            for (var i = 0L; i < count; i++) {
+                TOperation.Move(ref First[i], out newAlloc![i]);
+                TOperation.Dispose(ref First[i]);
+            }
+        }
 
         if (First != null)
             IMemorySpace.Free(First, (nuint)(prevCapacity * sizeof(T)));
 
-        First = (T*)newAlloc;
+        First = newAlloc;
         End = First + newCapacity;
         Last = First + count;
         return newCapacity;
@@ -532,6 +586,17 @@ public unsafe struct StdVector<T, TMemorySpace, TDisposable> : IStdVector<T>
 
     /// <inheritdoc/>
     public readonly IStdVector<T>.Enumerator GetEnumerator() => new(First, Last);
+
+    private void ResizeUndefined(long newSize) {
+        var prevCount = LongCount;
+        EnsureCapacity(newSize);
+        Last = First + newSize;
+
+        if (newSize >= prevCount || !TOperation.IsDisposable)
+            return;
+        for (var i = newSize; i < prevCount; i++)
+            TOperation.Dispose(ref First[i]);
+    }
 
     [AssertionMethod]
     private readonly long CheckedIndex(long index, bool allowEnd) {
@@ -550,10 +615,11 @@ public unsafe struct StdVector<T, TMemorySpace, TDisposable> : IStdVector<T>
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private readonly void CopyInside(long fromIndex, long toIndex, long count) =>
+    private readonly void CopyInsideUnchecked(long fromIndex, long toIndex, long count) =>
         Buffer.MemoryCopy(First + fromIndex, First + toIndex, count * sizeof(T), count * sizeof(T));
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private readonly void SpliceHole(long index, long count) =>
-        CopyInside(index, index + count, LongCount - index);
+    private readonly void SpliceHoleUnchecked(long index, long count) {
+        CopyInsideUnchecked(index, index + count, LongCount - index);
+    }
 }

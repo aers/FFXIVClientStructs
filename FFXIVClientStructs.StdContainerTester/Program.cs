@@ -17,7 +17,7 @@ public static class Program {
             VectorTester.Test();
             Console.WriteLine();
 
-            if (KnownAllocations.Any())
+            if (KnownAllocations.Any(x => x.Value != default))
                 throw new InvalidOperationException("Malloc/Free mismatch (end)");
         } while (false);
     }
@@ -41,8 +41,11 @@ public static class Program {
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvStdcall) })]
         static void FreeImpl(void* ptr, ulong size) {
-            if (!KnownAllocations.Remove((nuint)ptr))
+            if (!KnownAllocations.TryGetValue((nuint)ptr, out var expectedSize))
                 throw new InvalidOperationException("Malloc/Free mismatch (free)");
+            if (expectedSize != size)
+                throw new InvalidOperationException("Free size mismatch");
+            KnownAllocations[(nuint)ptr] = 0;
             NativeMemory.AlignedFree(ptr);
         }
     }

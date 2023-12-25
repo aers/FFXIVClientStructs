@@ -8,12 +8,12 @@ public static class VectorTester {
     public static void Test() {
         using (var testByteVector = new StdVector<byte>()) {
             for (var i = 0; i < 64; i++)
-                testByteVector.Add((byte)i);
+                testByteVector.AddCopy((byte)i);
             testByteVector.Dump();
             foreach (ref var x in testByteVector)
                 x ^= 0xFF;
             testByteVector.Dump();
-            testByteVector.InsertRange(32, testByteVector);
+            testByteVector.InsertRangeCopy(32, testByteVector);
             testByteVector.Dump();
             testByteVector.RemoveRange(64, 32);
             testByteVector.Dump();
@@ -24,7 +24,7 @@ public static class VectorTester {
             testByteVector.Sort(4, testByteVector.LongCount - 4);
             testByteVector.Dump();
             using (var nrv = NewRandomVector(32, _ => (byte)Rnd.NextInt64()))
-                testByteVector.AddRange(nrv);
+                testByteVector.AddRangeCopy(nrv);
             testByteVector.Dump();
             testByteVector.Clear();
             testByteVector.Resize(32);
@@ -41,8 +41,8 @@ public static class VectorTester {
         }
 
         using var vecvec = new StdVector<StdVector<byte>>();
-        vecvec.Add(NewRandomVector(64, _ => (byte)Rnd.NextInt64()));
-        vecvec.Add(NewRandomVector(32, _ => (byte)Rnd.NextInt64()));
+        vecvec.AddCopy(NewRandomVector(64, _ => (byte)Rnd.NextInt64()));
+        vecvec.AddCopy(NewRandomVector(32, _ => (byte)Rnd.NextInt64()));
         vecvec[0].Sort();
         vecvec.AsSpan()[0].Dump();
         Console.WriteLine("index: " + vecvec[0].BinarySearch(127));
@@ -56,7 +56,7 @@ public static class VectorTester {
         var vec = new StdVector<T>();
         vec.EnsureCapacity(length);
         while (vec.LongCount < length)
-            vec.Add(valueGenerator(vec.LongCount));
+            vec.AddCopy(valueGenerator(vec.LongCount));
         return vec;
     }
 

@@ -7,7 +7,7 @@ public static class StringTester {
         using var test1 = new StdString();
         test1.AddString("12345");
         Console.WriteLine(test1);
-        test1.AddSpan("abcde"u8);
+        test1.AddSpanCopy("abcde"u8);
         Console.WriteLine(test1);
         test1.RemoveRange(3, 5);
         Console.WriteLine(test1);
@@ -39,7 +39,7 @@ public static class StringTester {
         Console.WriteLine(test1);
         
         test1.RemoveAll(x => (char)x is 'x' or 'y');
-        test1.Add((byte)'_');
+        test1.AddCopy((byte)'_');
         Console.WriteLine(test1);
 
         test1.Clear();

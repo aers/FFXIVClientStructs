@@ -39,9 +39,11 @@ public unsafe struct StdWString : IStdBasicString<char> {
     public readonly Span<char> AsSpan() => BasicString.AsSpan();
     public readonly Span<char> AsSpan(long index) => BasicString.AsSpan(index);
     public readonly Span<char> AsSpan(long index, int count) => BasicString.AsSpan(index, count);
-    public void Add(in char item) => BasicString.Add(in item);
-    public void AddRange(IEnumerable<char> collection) => BasicString.AddRange(collection);
-    public void AddSpan(ReadOnlySpan<char> span) => BasicString.AddSpan(span);
+    public void AddCopy(in char item) => BasicString.AddCopy(in item);
+    public void AddMove(ref char item) => BasicString.AddMove(ref item);
+    public void AddRangeCopy(IEnumerable<char> collection) => BasicString.AddRangeCopy(collection);
+    public void AddSpanCopy(ReadOnlySpan<char> span) => BasicString.AddSpanCopy(span);
+    public void AddSpanMove(Span<char> span) => BasicString.AddSpanMove(span);
     public void AddString(Encoding encoding, ReadOnlySpan<char> str) => BasicString.AddString(encoding, str);
     public void AddString(ReadOnlySpan<char> str) => BasicString.AddString(IntrinsicEncoding, str);
     public readonly long BinarySearch(in char item) => BasicString.BinarySearch(in item);
@@ -67,9 +69,11 @@ public unsafe struct StdWString : IStdBasicString<char> {
     public readonly int IndexOf(in char item) => BasicString.IndexOf(in item);
     public readonly int IndexOf(in char item, int index) => BasicString.IndexOf(in item, index);
     public readonly int IndexOf(in char item, int index, int count) => BasicString.IndexOf(in item, index, count);
-    public void Insert(long index, in char item) => BasicString.Insert(index, in item);
-    public void InsertRange(long index, IEnumerable<char> collection) => BasicString.InsertRange(index, collection);
-    public void InsertSpan(long index, ReadOnlySpan<char> span) => BasicString.InsertSpan(index, span);
+    public void InsertCopy(long index, in char item) => BasicString.InsertCopy(index, in item);
+    public void InsertMove(long index, ref char item) => BasicString.InsertMove(index, ref item);
+    public void InsertRangeCopy(long index, IEnumerable<char> collection) => BasicString.InsertRangeCopy(index, collection);
+    public void InsertSpanCopy(long index, ReadOnlySpan<char> span) => BasicString.InsertSpanCopy(index, span);
+    public void InsertSpanMove(long index, Span<char> span) => BasicString.InsertSpanMove(index, span);
     public void InsertString(Encoding encoding, long index, ReadOnlySpan<char> str) => BasicString.InsertString(encoding, index, str);
     public void InsertString(long index, ReadOnlySpan<char> str) => BasicString.InsertString(IntrinsicEncoding, index, str);
     public readonly int LastIndexOf(in char item) => BasicString.LastIndexOf(in item);
@@ -106,7 +110,6 @@ public unsafe struct StdWString : IStdBasicString<char> {
     public long TrimExcess() => BasicString.TrimExcess();
     public void Resize(long newSize) => BasicString.Resize(newSize);
     public void Resize(long newSize, in char defaultValue) => BasicString.Resize(newSize, in defaultValue);
-    public void ResizeUndefined(long newSize) => BasicString.ResizeUndefined(newSize);
     public long SetCapacity(long newCapacity) => BasicString.SetCapacity(newCapacity);
     public readonly int CompareTo(object? obj) => BasicString.CompareTo(obj);
     public readonly int CompareTo(IStdBasicString<char>? other) => BasicString.CompareTo(other);

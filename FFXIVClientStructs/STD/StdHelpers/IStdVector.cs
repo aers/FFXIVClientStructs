@@ -96,14 +96,35 @@ public unsafe interface IStdVector<T> : IDisposable, IList, IList<T>, IReadOnlyL
     /// <returns>The span.</returns>
     Span<T> AsSpan(long index, int count);
 
-    /// <inheritdoc cref="List{T}.Add"/>
-    void Add(in T item);
+    /// <summary>
+    /// Adds the item into the vector. The item will be copied.
+    /// </summary>
+    /// <param name="item">The item.</param>
+    void AddCopy(in T item);
 
-    /// <inheritdoc cref="List{T}.AddRange"/>
-    void AddRange(IEnumerable<T> collection);
+    /// <summary>
+    /// Adds the item into the vector. The item will be moved.
+    /// </summary>
+    /// <param name="item">The item.</param>
+    void AddMove(ref T item);
 
-    /// <inheritdoc cref="List{T}.AddRange"/>
-    void AddSpan(ReadOnlySpan<T> span);
+    /// <summary>
+    /// Appends the collection into the vector. Items will be copied.
+    /// </summary>
+    /// <param name="collection">The collection.</param>
+    void AddRangeCopy(IEnumerable<T> collection);
+
+    /// <summary>
+    /// Appends the span into the vector. Items will be copied.
+    /// </summary>
+    /// <param name="span">The span.</param>
+    void AddSpanCopy(ReadOnlySpan<T> span);
+
+    /// <summary>
+    /// Appends the span into the vector. Items will be moved.
+    /// </summary>
+    /// <param name="span">The span.</param>
+    void AddSpanMove(Span<T> span);
 
     /// <inheritdoc cref="List{T}.BinarySearch(T)"/>
     long BinarySearch(in T item);
@@ -155,15 +176,41 @@ public unsafe interface IStdVector<T> : IDisposable, IList, IList<T>, IReadOnlyL
 
     /// <inheritdoc cref="List{T}.IndexOf(T,int,int)"/>
     int IndexOf(in T item, int index, int count);
+    
+    /// <summary>
+    /// Inserts the item into the vector. The item will be copied.
+    /// </summary>
+    /// <param name="index">The zero-based index of insertion.</param>
+    /// <param name="item">The item.</param>
+    void InsertCopy(long index, in T item);
 
-    /// <inheritdoc cref="List{T}.Insert"/>
-    void Insert(long index, in T item);
+    /// <summary>
+    /// Inserts the item into the vector. The item will be moved.
+    /// </summary>
+    /// <param name="index">The zero-based index of insertion.</param>
+    /// <param name="item">The item.</param>
+    void InsertMove(long index, ref T item);
 
-    /// <inheritdoc cref="List{T}.InsertRange"/>
-    void InsertRange(long index, IEnumerable<T> collection);
+    /// <summary>
+    /// Inserts the collection into the vector. Items will be copied.
+    /// </summary>
+    /// <param name="index">The zero-based index of insertion.</param>
+    /// <param name="collection">The collection.</param>
+    void InsertRangeCopy(long index, IEnumerable<T> collection);
 
-    /// <inheritdoc cref="List{T}.InsertRange"/>
-    void InsertSpan(long index, ReadOnlySpan<T> span);
+    /// <summary>
+    /// Inserts the span into the vector. Items will be copied.
+    /// </summary>
+    /// <param name="index">The zero-based index of insertion.</param>
+    /// <param name="span">The span.</param>
+    void InsertSpanCopy(long index, ReadOnlySpan<T> span);
+
+    /// <summary>
+    /// Inserts the span into the vector. Items will be moved.
+    /// </summary>
+    /// <param name="index">The zero-based index of insertion.</param>
+    /// <param name="span">The span.</param>
+    void InsertSpanMove(long index, Span<T> span);
 
     /// <inheritdoc cref="List{T}.LastIndexOf(T)"/>
     int LastIndexOf(in T item);
@@ -301,12 +348,6 @@ public unsafe interface IStdVector<T> : IDisposable, IList, IList<T>, IReadOnlyL
     void Resize(long newSize, in T defaultValue);
 
     /// <summary>
-    /// Resizes this vector to the given size. In case of expansion, the data of new items are undefined.
-    /// </summary>
-    /// <param name="newSize">The new size.</param>
-    void ResizeUndefined(long newSize);
-
-    /// <summary>
     /// Sets the capacity of this vector.
     /// </summary>
     /// <param name="newCapacity">The new capacity. Must be at least <see cref="StdVector{T,TMemorySpace,TDisposable}.LongCount"/>.</param>
@@ -317,7 +358,7 @@ public unsafe interface IStdVector<T> : IDisposable, IList, IList<T>, IReadOnlyL
 
     #region Collection interfaces
 
-    void ICollection<T>.Add(T item) => Add(item);
+    void ICollection<T>.Add(T item) => AddCopy(item);
 
     void ICollection<T>.Clear() => Clear();
 
@@ -338,7 +379,7 @@ public unsafe interface IStdVector<T> : IDisposable, IList, IList<T>, IReadOnlyL
 
     int IList<T>.IndexOf(T item) => IndexOf(item);
 
-    void IList<T>.Insert(int index, T item) => Insert(index, item);
+    void IList<T>.Insert(int index, T item) => InsertCopy(index, item);
 
     void IList<T>.RemoveAt(int index) => RemoveAt(index);
 
@@ -351,7 +392,7 @@ public unsafe interface IStdVector<T> : IDisposable, IList, IList<T>, IReadOnlyL
     int IList.Add(object? value) {
         if (LongCount >= int.MaxValue)
             throw new NotSupportedException();
-        Add((T)(value ?? throw new ArgumentNullException(nameof(value))));
+        AddCopy((T)(value ?? throw new ArgumentNullException(nameof(value))));
         return Count - 1;
     }
 
@@ -361,7 +402,7 @@ public unsafe interface IStdVector<T> : IDisposable, IList, IList<T>, IReadOnlyL
 
     int IList.IndexOf(object? value) => value is T typedValue ? IndexOf(typedValue) : -1;
 
-    void IList.Insert(int index, object? value) => Insert(index, (T)(value ?? throw new ArgumentNullException(nameof(value))));
+    void IList.Insert(int index, object? value) => InsertCopy(index, (T)(value ?? throw new ArgumentNullException(nameof(value))));
 
     void IList.Remove(object? value) => Remove((T)(value ?? throw new ArgumentNullException(nameof(value))));
 

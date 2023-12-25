@@ -4,14 +4,14 @@ using FFXIVClientStructs.STD.StdHelpers;
 namespace FFXIVClientStructs.STD;
 
 /// <summary>
-/// A <see cref="StdVector{T,TMemorySpace,TDisposable}"/> using <see cref="DefaultMemorySpaceStatic"/> and <see cref="AutoDisposableStatic{T}"/>.
+/// A <see cref="StdVector{T,TMemorySpace,TDisposable}"/> using <see cref="DefaultMemorySpaceStatic"/> and <see cref="NativeObjectOperationStatic{T}"/>.
 /// </summary>
 /// <typeparam name="T">The type of element.</typeparam>
 [StructLayout(LayoutKind.Sequential)]
 [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
 public unsafe struct StdVector<T> : IStdVector<T>
     where T : unmanaged {
-    public StdVector<T, DefaultMemorySpaceStatic, AutoDisposableStatic<T>> WithDefaultAllocator;
+    public StdVector<T, DefaultMemorySpaceStatic, NativeObjectOperationStatic<T>> WithDefaultAllocator;
     public T* First {
         readonly get => WithDefaultAllocator.First;
         set => WithDefaultAllocator.First = value;
@@ -48,9 +48,11 @@ public unsafe struct StdVector<T> : IStdVector<T>
     public readonly Span<T> AsSpan() => WithDefaultAllocator.AsSpan();
     public readonly Span<T> AsSpan(long index) => WithDefaultAllocator.AsSpan(index);
     public readonly Span<T> AsSpan(long index, int count) => WithDefaultAllocator.AsSpan(index, count);
-    public void Add(in T item) => WithDefaultAllocator.Add(in item);
-    public void AddRange(IEnumerable<T> collection) => WithDefaultAllocator.AddRange(collection);
-    public void AddSpan(ReadOnlySpan<T> span) => WithDefaultAllocator.AddSpan(span);
+    public void AddCopy(in T item) => WithDefaultAllocator.AddCopy(in item);
+    public void AddMove(ref T item) => WithDefaultAllocator.AddMove(ref item);
+    public void AddRangeCopy(IEnumerable<T> collection) => WithDefaultAllocator.AddRangeCopy(collection);
+    public void AddSpanCopy(ReadOnlySpan<T> span) => WithDefaultAllocator.AddSpanCopy(span);
+    public void AddSpanMove(Span<T> span) => WithDefaultAllocator.AddSpanMove(span);
     public readonly long BinarySearch(in T item) => WithDefaultAllocator.BinarySearch(item);
     public readonly long BinarySearch(in T item, IComparer<T>? comparer) => WithDefaultAllocator.BinarySearch(item, comparer);
     public readonly long BinarySearch(long index, long count, in T item, IComparer<T>? comparer) => WithDefaultAllocator.BinarySearch(index, count, item, comparer);
@@ -69,9 +71,11 @@ public unsafe struct StdVector<T> : IStdVector<T>
     public readonly int IndexOf(in T item) => WithDefaultAllocator.IndexOf(in item);
     public readonly int IndexOf(in T item, int index) => WithDefaultAllocator.IndexOf(in item, index);
     public readonly int IndexOf(in T item, int index, int count) => WithDefaultAllocator.IndexOf(in item, index, count);
-    public void Insert(long index, in T item) => WithDefaultAllocator.Insert(index, in item);
-    public void InsertRange(long index, IEnumerable<T> collection) => WithDefaultAllocator.InsertRange(index, collection);
-    public void InsertSpan(long index, ReadOnlySpan<T> span) => WithDefaultAllocator.InsertSpan(index, span);
+    public void InsertCopy(long index, in T item) => WithDefaultAllocator.InsertCopy(index, in item);
+    public void InsertMove(long index, ref T item) => WithDefaultAllocator.InsertMove(index, ref item);
+    public void InsertRangeCopy(long index, IEnumerable<T> collection) => WithDefaultAllocator.InsertRangeCopy(index, collection);
+    public void InsertSpanCopy(long index, ReadOnlySpan<T> span) => WithDefaultAllocator.InsertSpanCopy(index, span);
+    public void InsertSpanMove(long index, Span<T> span) => WithDefaultAllocator.InsertSpanMove(index, span);
     public readonly int LastIndexOf(in T item) => WithDefaultAllocator.LastIndexOf(in item);
     public readonly int LastIndexOf(in T item, int index) => WithDefaultAllocator.LastIndexOf(in item, index);
     public readonly int LastIndexOf(in T item, int index, int count) => WithDefaultAllocator.LastIndexOf(in item, index, count);
@@ -106,7 +110,6 @@ public unsafe struct StdVector<T> : IStdVector<T>
     public long TrimExcess() => WithDefaultAllocator.TrimExcess();
     public void Resize(long newSize) => WithDefaultAllocator.Resize(newSize);
     public void Resize(long newSize, in T defaultValue) => WithDefaultAllocator.Resize(newSize, in defaultValue);
-    public void ResizeUndefined(long newSize) => WithDefaultAllocator.ResizeUndefined(newSize);
     public long SetCapacity(long newCapacity) => WithDefaultAllocator.SetCapacity(newCapacity);
     public readonly override int GetHashCode() => HashCode.Combine((nint)First, (nint)Last, (nint)End);
     public readonly override string ToString() => $"{nameof(StdVector<T>)}<{typeof(T)}>({LongCount}/{LongCapacity})";

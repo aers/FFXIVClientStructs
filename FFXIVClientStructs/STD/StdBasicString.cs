@@ -98,17 +98,23 @@ public unsafe struct StdBasicString<T, TMemorySpace> : IStdBasicString<T>, IComp
         checked((int)CheckedCount(index, count)));
 
     /// <inheritdoc/>
-    public void Add(in T item) {
+    public void AddCopy(in T item) {
         EnsureCapacity(LongCount + 1);
         First[ULongLength++] = item;
         First[ULongLength] = default;
     }
 
     /// <inheritdoc/>
-    public void AddRange(IEnumerable<T> collection) => InsertRange(LongCount, collection);
+    public void AddMove(ref T item) => AddCopy(in item);
 
     /// <inheritdoc/>
-    public void AddSpan(ReadOnlySpan<T> span) => InsertSpan(LongCount, span);
+    public void AddRangeCopy(IEnumerable<T> collection) => InsertRangeCopy(LongCount, collection);
+
+    /// <inheritdoc/>
+    public void AddSpanCopy(ReadOnlySpan<T> span) => InsertSpanCopy(LongCount, span);
+
+    /// <inheritdoc/>
+    public void AddSpanMove(Span<T> span) => InsertSpanMove(LongCount, span);
 
     /// <inheritdoc/>
     public void AddString(Encoding encoding, ReadOnlySpan<char> str) => InsertString(encoding, LongCount, str);
@@ -121,7 +127,7 @@ public unsafe struct StdBasicString<T, TMemorySpace> : IStdBasicString<T>, IComp
 
     /// <inheritdoc/>
     public readonly long BinarySearch(long index, long count, in T item, IComparer<T>? comparer) =>
-        LongPointerSortHelper<T>.BinarySearch(
+        LongPointerSortHelper<T, NativeObjectOperationStatic<T>>.BinarySearch(
             First,
             CheckedIndex(index, true),
             CheckedCount(index, count),
@@ -258,7 +264,7 @@ public unsafe struct StdBasicString<T, TMemorySpace> : IStdBasicString<T>, IComp
     public readonly int IndexOf(in T item, int index, int count) => checked((int)LongIndexOf(item, index, count));
 
     /// <inheritdoc/>
-    public void Insert(long index, in T item) {
+    public void InsertCopy(long index, in T item) {
         if (index < 0 || index > LongCount)
             throw new ArgumentOutOfRangeException(nameof(index), index, null);
 
@@ -270,7 +276,10 @@ public unsafe struct StdBasicString<T, TMemorySpace> : IStdBasicString<T>, IComp
     }
 
     /// <inheritdoc/>
-    public void InsertRange(long index, IEnumerable<T> collection) {
+    public void InsertMove(long index, ref T item) => InsertCopy(index, item);
+
+    /// <inheritdoc/>
+    public void InsertRangeCopy(long index, IEnumerable<T> collection) {
         var prevCount = LongCount;
         if (index < 0 || index > prevCount)
             throw new ArgumentOutOfRangeException(nameof(index), index, null);
@@ -284,10 +293,10 @@ public unsafe struct StdBasicString<T, TMemorySpace> : IStdBasicString<T>, IComp
                 ULongLength += (ulong)prevCount;
                 break;
             case List<T> list:
-                InsertSpan(index, CollectionsMarshal.AsSpan(list));
+                InsertSpanCopy(index, CollectionsMarshal.AsSpan(list));
                 break;
             case T[] array:
-                InsertSpan(index, array.AsSpan());
+                InsertSpanCopy(index, array.AsSpan());
                 break;
             case var _ when TryGetCountFromEnumerable(collection, out var count):
                 EnsureCapacity(prevCount + count);
@@ -302,7 +311,7 @@ public unsafe struct StdBasicString<T, TMemorySpace> : IStdBasicString<T>, IComp
                 break;
             default:
                 foreach (var item in collection)
-                    Insert(index++, item);
+                    InsertCopy(index++, item);
                 break;
         }
 
@@ -310,7 +319,7 @@ public unsafe struct StdBasicString<T, TMemorySpace> : IStdBasicString<T>, IComp
     }
 
     /// <inheritdoc/>
-    public void InsertSpan(long index, ReadOnlySpan<T> span) {
+    public void InsertSpanCopy(long index, ReadOnlySpan<T> span) {
         var prevCount = LongCount;
         if (index < 0 || index > prevCount)
             throw new ArgumentOutOfRangeException(nameof(index), index, null);
@@ -321,6 +330,9 @@ public unsafe struct StdBasicString<T, TMemorySpace> : IStdBasicString<T>, IComp
         span.CopyTo(new Span<T>(First + index, span.Length));
         First[ULongLength] = default;
     }
+
+    /// <inheritdoc/>
+    public void InsertSpanMove(long index, Span<T> span) => InsertSpanCopy(index, span);
 
     /// <inheritdoc/>
     public void InsertString(Encoding encoding, long index, ReadOnlySpan<char> str) {
@@ -409,25 +421,40 @@ public unsafe struct StdBasicString<T, TMemorySpace> : IStdBasicString<T>, IComp
     }
 
     /// <inheritdoc/>
-    public void Sort() => LongPointerSortHelper<T>.Sort(First, LongCount);
+    public void Sort() =>
+        LongPointerSortHelper<T, NativeObjectOperationStatic<T>>.Sort(
+            First,
+            LongCount);
 
     /// <inheritdoc/>
     public void Sort(long index, long count) =>
-        LongPointerSortHelper<T>.Sort(First + CheckedIndex(index, true), CheckedCount(index, count));
+        LongPointerSortHelper<T, NativeObjectOperationStatic<T>>.Sort(
+            First + CheckedIndex(index, true),
+            CheckedCount(index, count));
 
     /// <inheritdoc/>
-    public void Sort(IComparer<T>? comparer) => LongPointerSortHelper<T>.Sort(First, LongCount, comparer);
+    public void Sort(IComparer<T>? comparer) =>
+        LongPointerSortHelper<T, NativeObjectOperationStatic<T>>.Sort(
+            First,
+            LongCount,
+            comparer);
 
     /// <inheritdoc/>
     public void Sort(long index, long count, IComparer<T>? comparer) =>
-        LongPointerSortHelper<T>.Sort(First + CheckedIndex(index, true), CheckedCount(index, count), comparer);
+        LongPointerSortHelper<T, NativeObjectOperationStatic<T>>.Sort(
+            First + CheckedIndex(index, true),
+            CheckedCount(index, count),
+            comparer);
 
     /// <inheritdoc/>
     public void Sort(Comparison<T> comparison) => Sort(0, LongCount, comparison);
 
     /// <inheritdoc/>
     public void Sort(long index, long count, Comparison<T> comparison) =>
-        LongPointerSortHelper<T>.Sort(First + CheckedIndex(index, true), CheckedCount(index, count), comparison);
+        LongPointerSortHelper<T, NativeObjectOperationStatic<T>>.Sort(
+            First + CheckedIndex(index, true),
+            CheckedCount(index, count),
+            comparison);
 
     /// <inheritdoc/>
     public readonly T[] ToArray() => ToArray(0, LongCount);
@@ -590,13 +617,6 @@ public unsafe struct StdBasicString<T, TMemorySpace> : IStdBasicString<T>, IComp
     }
 
     /// <inheritdoc/>
-    public void ResizeUndefined(long newSize) {
-        EnsureCapacity(newSize);
-        ULongLength = (ulong)newSize;
-        First[newSize] = default;
-    }
-
-    /// <inheritdoc/>
     public long SetCapacity(long newCapacity) {
         var count = LongCount;
         var prevCapacity = LongCapacity;
@@ -636,6 +656,12 @@ public unsafe struct StdBasicString<T, TMemorySpace> : IStdBasicString<T>, IComp
         ULongCapacity = (ulong)newCapacity;
         *(T**)Unsafe.AsPointer(ref BufferBytes[0]) = newAlloc;
         return newCapacity;
+    }
+
+    private void ResizeUndefined(long newSize) {
+        EnsureCapacity(newSize);
+        ULongLength = (ulong)newSize;
+        First[newSize] = default;
     }
 
     [AssertionMethod]

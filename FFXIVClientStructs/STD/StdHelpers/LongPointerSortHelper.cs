@@ -8,8 +8,10 @@ namespace FFXIVClientStructs.STD.StdHelpers;
 /// Taken from ArraySortHelper.
 /// </summary>
 /// <typeparam name="T">The element type.</typeparam>
-internal static unsafe class LongPointerSortHelper<T>
-    where T : unmanaged {
+/// <typeparam name="TOperation">The operations.</typeparam>
+internal static unsafe class LongPointerSortHelper<T, TOperation>
+    where T : unmanaged
+    where TOperation : INativeObjectOperationStatic<T> {
     private const long IntrosortSizeThreshold = 64;
 
     internal static void Sort(T* data, long dataLength) =>
@@ -47,16 +49,14 @@ internal static unsafe class LongPointerSortHelper<T>
     private static void SwapIfGreater(T* data, Comparison<T> comparer, long i, long j) {
         Debug.Assert(i != j);
 
-        if (comparer(data[i], data[j]) > 0) {
-            (data[i], data[j]) = (data[j], data[i]);
-        }
+        if (comparer(data[i], data[j]) > 0)
+            TOperation.Swap(ref data[i], ref data[j]);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static void Swap(T* a, long i, long j) {
         Debug.Assert(i != j);
-
-        (a[i], a[j]) = (a[j], a[i]);
+        TOperation.Swap(ref a[i], ref a[j]);
     }
 
     private static void IntrospectiveSort(T* data, long dataLength, Comparison<T> comparer) {
@@ -159,34 +159,27 @@ internal static unsafe class LongPointerSortHelper<T>
     private static void DownHeap(T* data, long i, long n, Comparison<T> comparer) {
         Debug.Assert(comparer != null);
 
-        var d = data[i - 1];
         while (i <= n >> 1) {
             var child = 2 * i;
             if (child < n && comparer(data[child - 1], data[child]) < 0) {
                 child++;
             }
 
-            if (!(comparer(d, data[child - 1]) < 0))
+            if (!(comparer(data[i - 1], data[child - 1]) < 0))
                 break;
 
-            data[i - 1] = data[child - 1];
+            Swap(data, i - 1, child - 1);
             i = child;
         }
-
-        data[i - 1] = d;
     }
 
     private static void InsertionSort(T* data, long dataLength, Comparison<T> comparer) {
         for (long i = 0; i < dataLength - 1; i++) {
-            var t = data[i + 1];
-
             var j = i;
-            while (j >= 0 && comparer(t, data[j]) < 0) {
-                data[j + 1] = data[j];
+            while (j >= 0 && comparer(data[j + 1], data[j]) < 0) {
+                Swap(data, j + 1, j);
                 j--;
             }
-
-            data[j + 1] = t;
         }
     }
 }
