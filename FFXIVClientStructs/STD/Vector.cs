@@ -60,10 +60,12 @@ public unsafe struct StdVector<T, TMemorySpace, TDisposable> : IStdVector<T> whe
         readonly get => First;
         set => First = value;
     }
+    
     T* IStdVector<T>.Last {
         readonly get => Last;
         set => Last = value;
     }
+    
     T* IStdVector<T>.End {
         readonly get => End;
         set => End = value;
@@ -80,6 +82,12 @@ public unsafe struct StdVector<T, TMemorySpace, TDisposable> : IStdVector<T> whe
         Resize(0);
         TrimExcess();
     }
+
+    /// <inheritdoc/>
+    public override int GetHashCode() => HashCode.Combine((nint)First, (nint)Last, (nint)End);
+
+    /// <inheritdoc/>
+    public override string ToString() => $"{nameof(StdVector<T>)}<{typeof(T)}, {typeof(TMemorySpace)}, {typeof(TDisposable)}>({LongCount}/{LongCapacity})";
 
     /// <inheritdoc/>
     public readonly Span<T> AsSpan() => new(First, Count);
@@ -101,7 +109,25 @@ public unsafe struct StdVector<T, TMemorySpace, TDisposable> : IStdVector<T> whe
     }
 
     /// <inheritdoc/>
-    public void AddRange(IEnumerable<T> items) => InsertRange(0, items);
+    public void AddRange(IEnumerable<T> collection) => InsertRange(LongCount, collection);
+
+    /// <inheritdoc/>
+    public void AddRange(ReadOnlySpan<T> items) => InsertRange(LongCount, items);
+
+    /// <inheritdoc/>
+    public long BinarySearch(in T item) => BinarySearch(0, LongCount, item, null);
+
+    /// <inheritdoc/>
+    public long BinarySearch(in T item, IComparer<T>? comparer) => BinarySearch(0, LongCount, item, comparer);
+
+    /// <inheritdoc/>
+    public long BinarySearch(long index, long count, in T item, IComparer<T>? comparer) =>
+        LongPointerSortHelper<T>.BinarySearch(
+            First,
+            CheckedIndex(index, true),
+            CheckedCount(index, count),
+            item,
+            comparer);
 
     /// <inheritdoc cref="IStdVector{T}.Clear"/>
     public void Clear() {
@@ -172,27 +198,49 @@ public unsafe struct StdVector<T, TMemorySpace, TDisposable> : IStdVector<T> whe
 
     /// <inheritdoc/>
     public void InsertRange(long index, IEnumerable<T> collection) {
-        if (index < 0 || index > LongCount)
+        var prevCount = LongCount;
+        if (index < 0 || index > prevCount)
             throw new ArgumentOutOfRangeException(nameof(index), index, null);
 
-        if (TryGetCountFromEnumerable(collection, out var count)) {
-            EnsureCapacity(LongCount + count);
-            SpliceHole(index, count);
-            Last += count;
-
-            if (collection is IStdVector<T> isv && isv.PointerEquals(this)) {
+        switch (collection) {
+            case IStdVector<T> isv when isv.PointerEquals(this):
                 // We're inserting this vector into itself.
-                CopyInside(0, index, index);
-                CopyInside(index + count, index * 2, count - index);
-            } else {
+                EnsureCapacity(prevCount * 2);
+                CopyInside(index, index + prevCount, prevCount - index);
+                CopyInside(0, index, prevCount);
+                Last += prevCount;
+                break;
+            case List<T> list:
+                InsertRange(index, CollectionsMarshal.AsSpan(list));
+                break;
+            case T[] array:
+                InsertRange(index, array.AsSpan());
+                break;
+            case var _ when TryGetCountFromEnumerable(collection, out var count):
+                EnsureCapacity(prevCount + count);
+                SpliceHole(index, count);
+                Last += count;
                 var p = First + index;
                 foreach (var item in collection)
                     *p++ = item;
-            }
-        } else {
-            foreach (var item in collection)
-                Insert(index++, item);
+                break;
+            default:
+                foreach (var item in collection)
+                    Insert(index++, item);
+                break;
         }
+    }
+
+    /// <inheritdoc/>
+    public void InsertRange(long index, ReadOnlySpan<T> span) {
+        var prevCount = LongCount;
+        if (index < 0 || index > prevCount)
+            throw new ArgumentOutOfRangeException(nameof(index), index, null);
+        
+        EnsureCapacity(prevCount + span.Length);
+        SpliceHole(index, span.Length);
+        Last += span.Length;
+        span.CopyTo(new Span<T>(First + index, span.Length));
     }
 
     /// <inheritdoc/>
@@ -269,6 +317,10 @@ public unsafe struct StdVector<T, TMemorySpace, TDisposable> : IStdVector<T> whe
 
     /// <inheritdoc/>
     public void Sort() => LongPointerSortHelper<T>.Sort(First, LongCount);
+
+    /// <inheritdoc/>
+    public void Sort(long index, long count) =>
+        LongPointerSortHelper<T>.Sort(First + CheckedIndex(index, true), CheckedCount(index, count));
 
     /// <inheritdoc/>
     public void Sort(IComparer<T>? comparer) => LongPointerSortHelper<T>.Sort(First, LongCount, comparer);
@@ -463,7 +515,7 @@ public unsafe struct StdVector<T, TMemorySpace, TDisposable> : IStdVector<T> whe
         var newAlloc =
             newCapacity == 0
                 ? null
-                : TMemorySpace.GetSpace()->Malloc(checked((ulong)(newCapacity * sizeof(T))), 16);
+                : TMemorySpace.Allocate(checked((nuint)(newCapacity * sizeof(T))), 16);
         if (newAlloc == null && newCapacity > 0)
             throw new OutOfMemoryException();
 
@@ -471,7 +523,7 @@ public unsafe struct StdVector<T, TMemorySpace, TDisposable> : IStdVector<T> whe
             Unsafe.CopyBlock(newAlloc, First, (uint)(count * sizeof(T)));
 
         if (First != null)
-            IMemorySpace.Free(First, (ulong)(prevCapacity * sizeof(T)));
+            IMemorySpace.Free(First, (nuint)(prevCapacity * sizeof(T)));
 
         First = (T*)newAlloc;
         End = First + newCapacity;
@@ -481,7 +533,7 @@ public unsafe struct StdVector<T, TMemorySpace, TDisposable> : IStdVector<T> whe
 
     /// <inheritdoc/>
     public readonly IStdVector<T>.Enumerator GetEnumerator() => new(this);
-    
+
     [AssertionMethod]
     private readonly long CheckedIndex(long index, bool allowEnd) {
         if (index < 0)

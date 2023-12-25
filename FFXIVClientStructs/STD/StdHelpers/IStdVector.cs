@@ -97,7 +97,19 @@ public unsafe interface IStdVector<T> : IDisposable, IList, IList<T>, IReadOnlyL
     void Add(in T item);
     
     /// <inheritdoc cref="List{T}.AddRange"/>
-    void AddRange(IEnumerable<T> items);
+    void AddRange(IEnumerable<T> collection);
+    
+    /// <inheritdoc cref="List{T}.AddRange"/>
+    void AddRange(ReadOnlySpan<T> span);
+    
+    /// <inheritdoc cref="List{T}.BinarySearch(T)"/>
+    long BinarySearch(in T item);
+    
+    /// <inheritdoc cref="List{T}.BinarySearch(T,IComparer{T}?)"/>
+    long BinarySearch(in T item, IComparer<T>? comparer);
+    
+    /// <inheritdoc cref="List{T}.BinarySearch(int,int,T,IComparer{T}?)"/>
+    long BinarySearch(long index, long count, in T item, IComparer<T>? comparer);
     
     /// <inheritdoc cref="List{T}.Clear"/>
     new void Clear();
@@ -147,6 +159,9 @@ public unsafe interface IStdVector<T> : IDisposable, IList, IList<T>, IReadOnlyL
     /// <inheritdoc cref="List{T}.InsertRange"/>
     void InsertRange(long index, IEnumerable<T> collection);
     
+    /// <inheritdoc cref="List{T}.InsertRange"/>
+    void InsertRange(long index, ReadOnlySpan<T> span);
+    
     /// <inheritdoc cref="List{T}.LastIndexOf(T)"/>
     int LastIndexOf(in T item);
     
@@ -176,6 +191,13 @@ public unsafe interface IStdVector<T> : IDisposable, IList, IList<T>, IReadOnlyL
     
     /// <inheritdoc cref="List{T}.Sort()"/>
     void Sort();
+    
+    /// <summary>
+    /// Sorts the elements in a range of elements in this vector using the default comparer.
+    /// </summary>
+    /// <param name="index">The zero-based starting index of the range to sort.</param>
+    /// <param name="count">The length of the range to sort.</param>
+    void Sort(long index, long count);
     
     /// <inheritdoc cref="List{T}.Sort(IComparer{T})"/>
     void Sort(IComparer<T>? comparer);

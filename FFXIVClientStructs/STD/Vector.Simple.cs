@@ -4,14 +4,14 @@ using FFXIVClientStructs.STD.StdHelpers;
 namespace FFXIVClientStructs.STD;
 
 /// <summary>
-/// A <see cref="StdVector{T,TMemorySpace,TDisposable}"/> using <see cref="DefaultMemorySpaceStatic"/> and <see cref="NonDisposableStatic{T}"/>.
+/// A <see cref="StdVector{T,TMemorySpace,TDisposable}"/> using <see cref="DefaultMemorySpaceStatic"/> and <see cref="AutoDisposableStatic{T}"/>.
 /// </summary>
 /// <typeparam name="T">The type of element.</typeparam>
 [StructLayout(LayoutKind.Sequential)]
 [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
 public unsafe struct StdVector<T> : IStdVector<T>
     where T : unmanaged {
-    public StdVector<T, DefaultMemorySpaceStatic, NonDisposableStatic<T>> WithDefaultAllocator;
+    public StdVector<T, DefaultMemorySpaceStatic, AutoDisposableStatic<T>> WithDefaultAllocator;
     public T* First {
         get => WithDefaultAllocator.First;
         set => WithDefaultAllocator.First = value;
@@ -46,8 +46,12 @@ public unsafe struct StdVector<T> : IStdVector<T>
     public Span<T> AsSpan(long index) => WithDefaultAllocator.AsSpan(index);
     public Span<T> AsSpan(long index, int count) => WithDefaultAllocator.AsSpan(index, count);
     public void Add(in T item) => WithDefaultAllocator.Add(in item);
-    public void AddRange(IEnumerable<T> items) => WithDefaultAllocator.AddRange(items);
-    void IStdVector<T>.Clear() => WithDefaultAllocator.Clear();
+    public void AddRange(IEnumerable<T> collection) => WithDefaultAllocator.AddRange(collection);
+    public void AddRange(ReadOnlySpan<T> span) => WithDefaultAllocator.AddRange(span);
+    public long BinarySearch(in T item) => WithDefaultAllocator.BinarySearch(item);
+    public long BinarySearch(in T item, IComparer<T>? comparer) => WithDefaultAllocator.BinarySearch(item, comparer);
+    public long BinarySearch(long index, long count, in T item, IComparer<T>? comparer) => WithDefaultAllocator.BinarySearch(index, count, item, comparer);
+    public void Clear() => WithDefaultAllocator.Clear();
     public IStdVector<T>.Enumerator GetEnumerator() => WithDefaultAllocator.GetEnumerator();
     public bool Contains(in T item) => WithDefaultAllocator.Contains(in item);
     public bool Exists(Predicate<T> match) => WithDefaultAllocator.Exists(match);
@@ -64,6 +68,7 @@ public unsafe struct StdVector<T> : IStdVector<T>
     public int IndexOf(in T item, int index, int count) => WithDefaultAllocator.IndexOf(in item, index, count);
     public void Insert(long index, in T item) => WithDefaultAllocator.Insert(index, in item);
     public void InsertRange(long index, IEnumerable<T> collection) => WithDefaultAllocator.InsertRange(index, collection);
+    public void InsertRange(long index, ReadOnlySpan<T> span) => WithDefaultAllocator.InsertRange(index, span);
     public int LastIndexOf(in T item) => WithDefaultAllocator.LastIndexOf(in item);
     public int LastIndexOf(in T item, int index) => WithDefaultAllocator.LastIndexOf(in item, index);
     public int LastIndexOf(in T item, int index, int count) => WithDefaultAllocator.LastIndexOf(in item, index, count);
@@ -74,6 +79,7 @@ public unsafe struct StdVector<T> : IStdVector<T>
     public void Reverse() => WithDefaultAllocator.Reverse();
     public void Reverse(long index, long count) => WithDefaultAllocator.Reverse(index, count);
     public void Sort() => WithDefaultAllocator.Sort();
+    public void Sort(long index, long count) => WithDefaultAllocator.Sort(index, count);
     public void Sort(IComparer<T>? comparer) => WithDefaultAllocator.Sort(comparer);
     public void Sort(long index, long count, IComparer<T>? comparer) => WithDefaultAllocator.Sort(index, count, comparer);
     public void Sort(Comparison<T> comparison) => WithDefaultAllocator.Sort(comparison);
@@ -98,4 +104,6 @@ public unsafe struct StdVector<T> : IStdVector<T>
     public void Resize(long newSize) => WithDefaultAllocator.Resize(newSize);
     public void Resize(long newSize, in T defaultValue) => WithDefaultAllocator.Resize(newSize, in defaultValue);
     public long SetCapacity(long newCapacity) => WithDefaultAllocator.SetCapacity(newCapacity);
+    public override int GetHashCode() => HashCode.Combine((nint)First, (nint)Last, (nint)End);
+    public override string ToString() => $"{nameof(StdVector<T>)}<{typeof(T)}>({LongCount}/{LongCapacity})";
 }

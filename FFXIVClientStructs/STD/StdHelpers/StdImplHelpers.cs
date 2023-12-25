@@ -13,9 +13,12 @@ public static class StdImplHelpers {
     internal static int DefaultCompare<T>(in T v1, in T v2) where T : unmanaged =>
         Comparer<T>.Default.Compare(v1, v2);
 
-    internal static bool TryGetCountFromEnumerable<T>([NoEnumeration] IEnumerable<T> enumerable, out int count) {
+    internal static bool TryGetCountFromEnumerable<T>([NoEnumeration] IEnumerable<T>? enumerable, out int count) {
         switch (enumerable)
         {
+            case null:
+                count = 0;
+                return true;
             case ICollection c:
                 count = c.Count;
                 return true;

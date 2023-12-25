@@ -4,6 +4,10 @@ using System.Runtime.CompilerServices;
 
 namespace FFXIVClientStructs.STD.StdHelpers;
 
+/// <summary>
+/// Taken from ArraySortHelper.
+/// </summary>
+/// <typeparam name="T">The element type.</typeparam>
 internal static unsafe class LongPointerSortHelper<T>
     where T : unmanaged {
     private const long IntrosortSizeThreshold = 64;
@@ -17,15 +21,12 @@ internal static unsafe class LongPointerSortHelper<T>
     internal static void Sort(T* data, long dataLength, Comparison<T> comparer) =>
         IntrospectiveSort(data, dataLength, comparer);
 
-    internal static long BinarySearch(T* data, long dataLength, long index, long length, T value, IComparer<T>? comparer) {
+    internal static long BinarySearch(T* data, long index, long length, T value, IComparer<T>? comparer) {
         comparer ??= Comparer<T>.Default;
-        return InternalBinarySearch(data, dataLength, index, length, value, comparer);
+        return InternalBinarySearch(data, index, length, value, comparer);
     }
 
-    private static long InternalBinarySearch(T* data, long dataLength, long index, long length, T value, IComparer<T> comparer) {
-        Debug.Assert(data != null, "Check the arguments in the caller!");
-        Debug.Assert(index >= 0 && length >= 0 && (dataLength - index >= length), "Check the arguments in the caller!");
-
+    private static long InternalBinarySearch(T* data, long index, long length, T value, IComparer<T> comparer) {
         var lo = index;
         var hi = index + length - 1;
         while (lo <= hi) {

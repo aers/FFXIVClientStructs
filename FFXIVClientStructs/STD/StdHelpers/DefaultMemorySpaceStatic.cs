@@ -5,5 +5,6 @@ namespace FFXIVClientStructs.STD.StdHelpers;
 public class DefaultMemorySpaceStatic : IMemorySpaceStatic {
     private DefaultMemorySpaceStatic() => throw new InvalidOperationException();
 
-    public static unsafe delegate* unmanaged[Stdcall]<IMemorySpace*> GetSpace => IMemorySpace.MemberFunctionPointers.GetDefaultSpace;
+    public static unsafe void* Allocate(UIntPtr size, UIntPtr alignment) =>
+        IMemorySpace.GetDefaultSpace()->Malloc(size, alignment);
 }
