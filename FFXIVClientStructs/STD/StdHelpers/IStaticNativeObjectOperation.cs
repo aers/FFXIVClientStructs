@@ -28,13 +28,29 @@ public interface IStaticNativeObjectOperation<T>
     /// </summary>
     /// <remarks>If <c>false</c>, then any operation resulting in move will fail.</remarks>
     public abstract static bool IsMovable { get; }
+    
+    /// <summary>
+    /// Compares two items.
+    /// </summary>
+    /// <param name="left">The left item.</param>
+    /// <param name="right">The right item.</param>
+    /// <returns>0 if equal, negative if left is less than right, positive otherwise.</returns>
+    public abstract static int Compare(in T left, in T right);
+
+    /// <summary>
+    /// Compares two items for equality.
+    /// </summary>
+    /// <param name="left">The left item.</param>
+    /// <param name="right">The right item.</param>
+    /// <returns><c>true</c> if equal.</returns>
+    public abstract static bool Equals(in T left, in T right);
 
     /// <summary>
     /// Sets the given item to the default value.
     /// </summary>
     /// <param name="item">The item to default.</param>
     /// <exception cref="NotSupportedException">If <see cref="HasDefault"/> is <c>false</c>.</exception>
-    public abstract static void SetDefault(ref T item);
+    public abstract static void SetDefault(out T item);
 
     /// <summary>
     /// Disposes the given item, if <see cref="IsDisposable"/> is true.

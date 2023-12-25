@@ -11,106 +11,106 @@ namespace FFXIVClientStructs.STD;
 [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
 public unsafe struct StdVector<T> : IStdVector<T>
     where T : unmanaged {
-    public StdVector<T, DefaultStaticMemorySpace, DefaultStaticNativeObjectOperation<T>> WithDefaultAllocator;
+    public StdVector<T, DefaultStaticMemorySpace, DefaultStaticNativeObjectOperation<T>> WithOperationSpecs;
     public T* First {
-        readonly get => WithDefaultAllocator.First;
-        set => WithDefaultAllocator.First = value;
+        readonly get => WithOperationSpecs.First;
+        set => WithOperationSpecs.First = value;
     }
     public T* Last {
-        readonly get => WithDefaultAllocator.Last;
-        set => WithDefaultAllocator.Last = value;
+        readonly get => WithOperationSpecs.Last;
+        set => WithOperationSpecs.Last = value;
     }
     public T* End {
-        readonly get => WithDefaultAllocator.End;
-        set => WithDefaultAllocator.End = value;
+        readonly get => WithOperationSpecs.End;
+        set => WithOperationSpecs.End = value;
     }
     public long LongCapacity {
-        readonly get => WithDefaultAllocator.LongCapacity;
-        set => WithDefaultAllocator.LongCapacity = value;
+        readonly get => WithOperationSpecs.LongCapacity;
+        set => WithOperationSpecs.LongCapacity = value;
     }
     public int Count {
-        readonly get => WithDefaultAllocator.Count;
-        set => WithDefaultAllocator.Count = value;
+        readonly get => WithOperationSpecs.Count;
+        set => WithOperationSpecs.Count = value;
     }
     public long LongCount {
-        readonly get => WithDefaultAllocator.LongCount;
-        set => WithDefaultAllocator.LongCount = value;
+        readonly get => WithOperationSpecs.LongCount;
+        set => WithOperationSpecs.LongCount = value;
     }
     int IStdVector<T>.Capacity {
-        readonly get => WithDefaultAllocator.Capacity;
-        set => WithDefaultAllocator.Capacity = value;
+        readonly get => WithOperationSpecs.Capacity;
+        set => WithOperationSpecs.Capacity = value;
     }
-    public readonly ref T this[long index] => ref WithDefaultAllocator[index];
+    public readonly ref T this[long index] => ref WithOperationSpecs[index];
 
     public static implicit operator Span<T>(in StdVector<T> value) => value.AsSpan();
     public static implicit operator ReadOnlySpan<T>(in StdVector<T> value) => value.AsSpan();
-    public void Dispose() => WithDefaultAllocator.Dispose();
-    public readonly Span<T> AsSpan() => WithDefaultAllocator.AsSpan();
-    public readonly Span<T> AsSpan(long index) => WithDefaultAllocator.AsSpan(index);
-    public readonly Span<T> AsSpan(long index, int count) => WithDefaultAllocator.AsSpan(index, count);
-    public void AddCopy(in T item) => WithDefaultAllocator.AddCopy(in item);
-    public void AddMove(ref T item) => WithDefaultAllocator.AddMove(ref item);
-    public void AddRangeCopy(IEnumerable<T> collection) => WithDefaultAllocator.AddRangeCopy(collection);
-    public void AddSpanCopy(ReadOnlySpan<T> span) => WithDefaultAllocator.AddSpanCopy(span);
-    public void AddSpanMove(Span<T> span) => WithDefaultAllocator.AddSpanMove(span);
-    public readonly long BinarySearch(in T item) => WithDefaultAllocator.BinarySearch(item);
-    public readonly long BinarySearch(in T item, IComparer<T>? comparer) => WithDefaultAllocator.BinarySearch(item, comparer);
-    public readonly long BinarySearch(long index, long count, in T item, IComparer<T>? comparer) => WithDefaultAllocator.BinarySearch(index, count, item, comparer);
-    public void Clear() => WithDefaultAllocator.Clear();
-    public readonly IStdVector<T>.Enumerator GetEnumerator() => WithDefaultAllocator.GetEnumerator();
-    public readonly bool Contains(in T item) => WithDefaultAllocator.Contains(in item);
-    public readonly bool Exists(Predicate<T> match) => WithDefaultAllocator.Exists(match);
-    public readonly T? Find(Predicate<T> match) => WithDefaultAllocator.Find(match);
-    public readonly int FindIndex(Predicate<T> match) => WithDefaultAllocator.FindIndex(match);
-    public readonly int FindIndex(int startIndex, Predicate<T> match) => WithDefaultAllocator.FindIndex(startIndex, match);
-    public readonly int FindIndex(int startIndex, int count, Predicate<T> match) => WithDefaultAllocator.FindIndex(startIndex, count, match);
-    public readonly int FindLastIndex(Predicate<T> match) => WithDefaultAllocator.FindLastIndex(match);
-    public readonly int FindLastIndex(int startIndex, Predicate<T> match) => WithDefaultAllocator.FindLastIndex(startIndex, match);
-    public readonly int FindLastIndex(int startIndex, int count, Predicate<T> match) => WithDefaultAllocator.FindLastIndex(startIndex, count, match);
-    public readonly void ForEach(Action<T> action) => WithDefaultAllocator.ForEach(action);
-    public readonly int IndexOf(in T item) => WithDefaultAllocator.IndexOf(in item);
-    public readonly int IndexOf(in T item, int index) => WithDefaultAllocator.IndexOf(in item, index);
-    public readonly int IndexOf(in T item, int index, int count) => WithDefaultAllocator.IndexOf(in item, index, count);
-    public void InsertCopy(long index, in T item) => WithDefaultAllocator.InsertCopy(index, in item);
-    public void InsertMove(long index, ref T item) => WithDefaultAllocator.InsertMove(index, ref item);
-    public void InsertRangeCopy(long index, IEnumerable<T> collection) => WithDefaultAllocator.InsertRangeCopy(index, collection);
-    public void InsertSpanCopy(long index, ReadOnlySpan<T> span) => WithDefaultAllocator.InsertSpanCopy(index, span);
-    public void InsertSpanMove(long index, Span<T> span) => WithDefaultAllocator.InsertSpanMove(index, span);
-    public readonly int LastIndexOf(in T item) => WithDefaultAllocator.LastIndexOf(in item);
-    public readonly int LastIndexOf(in T item, int index) => WithDefaultAllocator.LastIndexOf(in item, index);
-    public readonly int LastIndexOf(in T item, int index, int count) => WithDefaultAllocator.LastIndexOf(in item, index, count);
-    public bool Remove(in T item) => WithDefaultAllocator.Remove(in item);
-    public long RemoveAll(Predicate<T> match) => WithDefaultAllocator.RemoveAll(match);
-    public void RemoveAt(long index) => WithDefaultAllocator.RemoveAt(index);
-    public void RemoveRange(long index, long count) => WithDefaultAllocator.RemoveRange(index, count);
-    public void Reverse() => WithDefaultAllocator.Reverse();
-    public void Reverse(long index, long count) => WithDefaultAllocator.Reverse(index, count);
-    public void Sort() => WithDefaultAllocator.Sort();
-    public void Sort(long index, long count) => WithDefaultAllocator.Sort(index, count);
-    public void Sort(IComparer<T>? comparer) => WithDefaultAllocator.Sort(comparer);
-    public void Sort(long index, long count, IComparer<T>? comparer) => WithDefaultAllocator.Sort(index, count, comparer);
-    public void Sort(Comparison<T> comparison) => WithDefaultAllocator.Sort(comparison);
-    public void Sort(long index, long count, Comparison<T> comparison) => WithDefaultAllocator.Sort(index, count, comparison);
-    public readonly T[] ToArray() => WithDefaultAllocator.ToArray();
-    public readonly T[] ToArray(long index) => WithDefaultAllocator.ToArray(index);
-    public readonly T[] ToArray(long index, long count) => WithDefaultAllocator.ToArray(index, count);
-    public readonly long LongFindIndex(Predicate<T> match) => WithDefaultAllocator.LongFindIndex(match);
-    public readonly long LongFindIndex(long startIndex, Predicate<T> match) => WithDefaultAllocator.LongFindIndex(startIndex, match);
-    public readonly long LongFindIndex(long startIndex, long count, Predicate<T> match) => WithDefaultAllocator.LongFindIndex(startIndex, count, match);
-    public readonly long LongFindLastIndex(Predicate<T> match) => WithDefaultAllocator.LongFindLastIndex(match);
-    public readonly long LongFindLastIndex(long startIndex, Predicate<T> match) => WithDefaultAllocator.LongFindLastIndex(startIndex, match);
-    public readonly long LongFindLastIndex(long startIndex, long count, Predicate<T> match) => WithDefaultAllocator.LongFindLastIndex(startIndex, count, match);
-    public readonly long LongIndexOf(in T item) => WithDefaultAllocator.LongIndexOf(in item);
-    public readonly long LongIndexOf(in T item, long index) => WithDefaultAllocator.LongIndexOf(in item, index);
-    public readonly long LongIndexOf(in T item, long index, long count) => WithDefaultAllocator.LongIndexOf(in item, index, count);
-    public readonly long LongLastIndexOf(in T item) => WithDefaultAllocator.LongLastIndexOf(in item);
-    public readonly long LongLastIndexOf(in T item, long index) => WithDefaultAllocator.LongLastIndexOf(in item, index);
-    public readonly long LongLastIndexOf(in T item, long index, long count) => WithDefaultAllocator.LongLastIndexOf(in item, index, count);
-    public long EnsureCapacity(long capacity) => WithDefaultAllocator.EnsureCapacity(capacity);
-    public long TrimExcess() => WithDefaultAllocator.TrimExcess();
-    public void Resize(long newSize) => WithDefaultAllocator.Resize(newSize);
-    public void Resize(long newSize, in T defaultValue) => WithDefaultAllocator.Resize(newSize, in defaultValue);
-    public long SetCapacity(long newCapacity) => WithDefaultAllocator.SetCapacity(newCapacity);
+    public void Dispose() => WithOperationSpecs.Dispose();
+    public readonly Span<T> AsSpan() => WithOperationSpecs.AsSpan();
+    public readonly Span<T> AsSpan(long index) => WithOperationSpecs.AsSpan(index);
+    public readonly Span<T> AsSpan(long index, int count) => WithOperationSpecs.AsSpan(index, count);
+    public void AddCopy(in T item) => WithOperationSpecs.AddCopy(in item);
+    public void AddMove(ref T item) => WithOperationSpecs.AddMove(ref item);
+    public void AddRangeCopy(IEnumerable<T> collection) => WithOperationSpecs.AddRangeCopy(collection);
+    public void AddSpanCopy(ReadOnlySpan<T> span) => WithOperationSpecs.AddSpanCopy(span);
+    public void AddSpanMove(Span<T> span) => WithOperationSpecs.AddSpanMove(span);
+    public readonly long BinarySearch(in T item) => WithOperationSpecs.BinarySearch(item);
+    public readonly long BinarySearch(in T item, IComparer<T>? comparer) => WithOperationSpecs.BinarySearch(item, comparer);
+    public readonly long BinarySearch(long index, long count, in T item, IComparer<T>? comparer) => WithOperationSpecs.BinarySearch(index, count, item, comparer);
+    public void Clear() => WithOperationSpecs.Clear();
+    public readonly IStdVector<T>.Enumerator GetEnumerator() => WithOperationSpecs.GetEnumerator();
+    public readonly bool Contains(in T item) => WithOperationSpecs.Contains(in item);
+    public readonly bool Exists(Predicate<T> match) => WithOperationSpecs.Exists(match);
+    public readonly T? Find(Predicate<T> match) => WithOperationSpecs.Find(match);
+    public readonly int FindIndex(Predicate<T> match) => WithOperationSpecs.FindIndex(match);
+    public readonly int FindIndex(int startIndex, Predicate<T> match) => WithOperationSpecs.FindIndex(startIndex, match);
+    public readonly int FindIndex(int startIndex, int count, Predicate<T> match) => WithOperationSpecs.FindIndex(startIndex, count, match);
+    public readonly int FindLastIndex(Predicate<T> match) => WithOperationSpecs.FindLastIndex(match);
+    public readonly int FindLastIndex(int startIndex, Predicate<T> match) => WithOperationSpecs.FindLastIndex(startIndex, match);
+    public readonly int FindLastIndex(int startIndex, int count, Predicate<T> match) => WithOperationSpecs.FindLastIndex(startIndex, count, match);
+    public readonly void ForEach(Action<T> action) => WithOperationSpecs.ForEach(action);
+    public readonly int IndexOf(in T item) => WithOperationSpecs.IndexOf(in item);
+    public readonly int IndexOf(in T item, int index) => WithOperationSpecs.IndexOf(in item, index);
+    public readonly int IndexOf(in T item, int index, int count) => WithOperationSpecs.IndexOf(in item, index, count);
+    public void InsertCopy(long index, in T item) => WithOperationSpecs.InsertCopy(index, in item);
+    public void InsertMove(long index, ref T item) => WithOperationSpecs.InsertMove(index, ref item);
+    public void InsertRangeCopy(long index, IEnumerable<T> collection) => WithOperationSpecs.InsertRangeCopy(index, collection);
+    public void InsertSpanCopy(long index, ReadOnlySpan<T> span) => WithOperationSpecs.InsertSpanCopy(index, span);
+    public void InsertSpanMove(long index, Span<T> span) => WithOperationSpecs.InsertSpanMove(index, span);
+    public readonly int LastIndexOf(in T item) => WithOperationSpecs.LastIndexOf(in item);
+    public readonly int LastIndexOf(in T item, int index) => WithOperationSpecs.LastIndexOf(in item, index);
+    public readonly int LastIndexOf(in T item, int index, int count) => WithOperationSpecs.LastIndexOf(in item, index, count);
+    public bool Remove(in T item) => WithOperationSpecs.Remove(in item);
+    public long RemoveAll(Predicate<T> match) => WithOperationSpecs.RemoveAll(match);
+    public void RemoveAt(long index) => WithOperationSpecs.RemoveAt(index);
+    public void RemoveRange(long index, long count) => WithOperationSpecs.RemoveRange(index, count);
+    public void Reverse() => WithOperationSpecs.Reverse();
+    public void Reverse(long index, long count) => WithOperationSpecs.Reverse(index, count);
+    public void Sort() => WithOperationSpecs.Sort();
+    public void Sort(long index, long count) => WithOperationSpecs.Sort(index, count);
+    public void Sort(IComparer<T>? comparer) => WithOperationSpecs.Sort(comparer);
+    public void Sort(long index, long count, IComparer<T>? comparer) => WithOperationSpecs.Sort(index, count, comparer);
+    public void Sort(Comparison<T> comparison) => WithOperationSpecs.Sort(comparison);
+    public void Sort(long index, long count, Comparison<T> comparison) => WithOperationSpecs.Sort(index, count, comparison);
+    public readonly T[] ToArray() => WithOperationSpecs.ToArray();
+    public readonly T[] ToArray(long index) => WithOperationSpecs.ToArray(index);
+    public readonly T[] ToArray(long index, long count) => WithOperationSpecs.ToArray(index, count);
+    public readonly long LongFindIndex(Predicate<T> match) => WithOperationSpecs.LongFindIndex(match);
+    public readonly long LongFindIndex(long startIndex, Predicate<T> match) => WithOperationSpecs.LongFindIndex(startIndex, match);
+    public readonly long LongFindIndex(long startIndex, long count, Predicate<T> match) => WithOperationSpecs.LongFindIndex(startIndex, count, match);
+    public readonly long LongFindLastIndex(Predicate<T> match) => WithOperationSpecs.LongFindLastIndex(match);
+    public readonly long LongFindLastIndex(long startIndex, Predicate<T> match) => WithOperationSpecs.LongFindLastIndex(startIndex, match);
+    public readonly long LongFindLastIndex(long startIndex, long count, Predicate<T> match) => WithOperationSpecs.LongFindLastIndex(startIndex, count, match);
+    public readonly long LongIndexOf(in T item) => WithOperationSpecs.LongIndexOf(in item);
+    public readonly long LongIndexOf(in T item, long index) => WithOperationSpecs.LongIndexOf(in item, index);
+    public readonly long LongIndexOf(in T item, long index, long count) => WithOperationSpecs.LongIndexOf(in item, index, count);
+    public readonly long LongLastIndexOf(in T item) => WithOperationSpecs.LongLastIndexOf(in item);
+    public readonly long LongLastIndexOf(in T item, long index) => WithOperationSpecs.LongLastIndexOf(in item, index);
+    public readonly long LongLastIndexOf(in T item, long index, long count) => WithOperationSpecs.LongLastIndexOf(in item, index, count);
+    public long EnsureCapacity(long capacity) => WithOperationSpecs.EnsureCapacity(capacity);
+    public long TrimExcess() => WithOperationSpecs.TrimExcess();
+    public void Resize(long newSize) => WithOperationSpecs.Resize(newSize);
+    public void Resize(long newSize, in T defaultValue) => WithOperationSpecs.Resize(newSize, in defaultValue);
+    public long SetCapacity(long newCapacity) => WithOperationSpecs.SetCapacity(newCapacity);
     public readonly override int GetHashCode() => HashCode.Combine((nint)First, (nint)Last, (nint)End);
     public readonly override string ToString() => $"{nameof(StdVector<T>)}<{typeof(T)}>({LongCount}/{LongCapacity})";
     

@@ -4,24 +4,24 @@ using System.Diagnostics;
 namespace FFXIVClientStructs.STD.StdHelpers;
 
 [StructLayout(LayoutKind.Sequential)]
-public unsafe struct RedBlackTreeNodeHeader<T, TCompare>
+public unsafe struct RedBlackTreeNodeHeader<T, TOperation>
     where T : unmanaged
-    where TCompare : IStaticComparer<T> {
-    public RedBlackTreeNodeHeader<T, TCompare>* Left;
-    public RedBlackTreeNodeHeader<T, TCompare>* Parent;
-    public RedBlackTreeNodeHeader<T, TCompare>* Right;
+    where TOperation : IStaticNativeObjectOperation<T> {
+    public RedBlackTreeNodeHeader<T, TOperation>* Left;
+    public RedBlackTreeNodeHeader<T, TOperation>* Parent;
+    public RedBlackTreeNodeHeader<T, TOperation>* Right;
     public byte Color;
     public bool IsNil;
     public byte _18;
     public byte _19;
-    public T Data;
+    public T Value;
 
-    public RedBlackTreeNodeHeader<T, TCompare>* Next() {
+    public RedBlackTreeNodeHeader<T, TOperation>* Next() {
         Debug.Assert(!IsNil, "Tried to increment a head node.");
         if (Right->IsNil) {
-            fixed (RedBlackTreeNodeHeader<T, TCompare>* thisPtr = &this) {
+            fixed (RedBlackTreeNodeHeader<T, TOperation>* thisPtr = &this) {
                 var ptr = thisPtr;
-                RedBlackTreeNodeHeader<T, TCompare>* node;
+                RedBlackTreeNodeHeader<T, TOperation>* node;
                 while (!(node = ptr->Parent)->IsNil && ptr == node->Right)
                     ptr = node;
 
@@ -35,13 +35,13 @@ public unsafe struct RedBlackTreeNodeHeader<T, TCompare>
         return ret;
     }
 
-    public RedBlackTreeNodeHeader<T, TCompare>* Prev() {
+    public RedBlackTreeNodeHeader<T, TOperation>* Prev() {
         if (IsNil) return Right;
 
         if (Left->IsNil) {
-            fixed (RedBlackTreeNodeHeader<T, TCompare>* thisPtr = &this) {
+            fixed (RedBlackTreeNodeHeader<T, TOperation>* thisPtr = &this) {
                 var ptr = thisPtr;
-                RedBlackTreeNodeHeader<T, TCompare>* node;
+                RedBlackTreeNodeHeader<T, TOperation>* node;
                 while (!(node = ptr->Parent)->IsNil && ptr == node->Left)
                     ptr = node;
 
@@ -56,12 +56,12 @@ public unsafe struct RedBlackTreeNodeHeader<T, TCompare>
     }
 
     public struct Enumerator : IEnumerable<T>, IEnumerator<T> {
-        private readonly RedBlackTreeNodeHeader<T, TCompare>* _head;
-        private RedBlackTreeNodeHeader<T, TCompare>* _current;
+        private readonly RedBlackTreeNodeHeader<T, TOperation>* _head;
+        private RedBlackTreeNodeHeader<T, TOperation>* _current;
 
-        internal Enumerator(RedBlackTreeNodeHeader<T, TCompare>* head) => _head = _current = head;
+        internal Enumerator(RedBlackTreeNodeHeader<T, TOperation>* head) => _head = _current = head;
 
-        public ref T Current => ref _current->Data;
+        public ref T Current => ref _current->Value;
 
         object IEnumerator.Current => Current;
 

@@ -6,13 +6,13 @@ namespace FFXIVClientStructs.STD;
 [StructLayout(LayoutKind.Sequential, Size = 0x10)]
 public unsafe struct StdSet<TKey> : IEnumerable<TKey>
     where TKey : unmanaged {
-    public RedBlackTreeNodeHeader<TKey, DefaultStaticComparer<TKey>>* Head;
+    public RedBlackTreeNodeHeader<TKey, DefaultStaticNativeObjectOperation<TKey>>* Head;
     public ulong Count;
 
-    public RedBlackTreeNodeHeader<TKey, DefaultStaticComparer<TKey>>* SmallestValue => Head->Left;
-    public RedBlackTreeNodeHeader<TKey, DefaultStaticComparer<TKey>>* LargestValue => Head->Right;
+    public RedBlackTreeNodeHeader<TKey, DefaultStaticNativeObjectOperation<TKey>>* SmallestValue => Head->Left;
+    public RedBlackTreeNodeHeader<TKey, DefaultStaticNativeObjectOperation<TKey>>* LargestValue => Head->Right;
 
-    public RedBlackTreeNodeHeader<TKey, DefaultStaticComparer<TKey>>.Enumerator GetEnumerator() => new(Head);
+    public RedBlackTreeNodeHeader<TKey, DefaultStaticNativeObjectOperation<TKey>>.Enumerator GetEnumerator() => new(Head);
 
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 

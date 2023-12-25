@@ -36,7 +36,15 @@ public class DefaultStaticNativeObjectOperation<T> : IStaticNativeObjectOperatio
 
     /// <inheritdoc/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static void SetDefault(ref T item) => item = default;
+    public static int Compare(in T left, in T right) => Comparer<T>.Default.Compare(left, right);
+
+    /// <inheritdoc/>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static bool Equals(in T left, in T right) => EqualityComparer<T>.Default.Equals(left, right);
+
+    /// <inheritdoc/>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static void SetDefault(out T item) => item = default;
 
     /// <inheritdoc/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]

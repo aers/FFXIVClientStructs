@@ -469,7 +469,7 @@ public unsafe struct StdVector<T, TMemorySpace, TOperation> : IStdVector<T>
 
         var end = First + index + count;
         for (var p = First + index; p < end; p++, index++) {
-            if (DefaultEquals(*p, item))
+            if (TOperation.Equals(*p, item))
                 return index;
         }
 
@@ -497,7 +497,7 @@ public unsafe struct StdVector<T, TMemorySpace, TOperation> : IStdVector<T>
 
         var end = First + index - count;
         for (var p = First + index; p >= end; p--, index--) {
-            if (DefaultEquals(item, *p))
+            if (TOperation.Equals(item, *p))
                 return index;
         }
 
@@ -529,7 +529,7 @@ public unsafe struct StdVector<T, TMemorySpace, TOperation> : IStdVector<T>
             return;
 
         for (var i = prevCount; i < newSize; i++)
-            TOperation.SetDefault(ref First[i]);
+            TOperation.SetDefault(out First[i]);
     }
 
     /// <inheritdoc/>

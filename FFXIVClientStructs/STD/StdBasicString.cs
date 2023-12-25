@@ -542,7 +542,7 @@ public unsafe struct StdBasicString<T, TMemorySpace> : IStdBasicString<T>, IComp
 
         var end = First + index + count;
         for (var p = First + index; p < end; p++, index++) {
-            if (DefaultEquals(*p, item))
+            if (*p == item)
                 return index;
         }
 
@@ -570,7 +570,7 @@ public unsafe struct StdBasicString<T, TMemorySpace> : IStdBasicString<T>, IComp
 
         var end = First + index - count;
         for (var p = First + index; p >= end; p--, index--) {
-            if (DefaultEquals(item, *p))
+            if (item == *p)
                 return index;
         }
 

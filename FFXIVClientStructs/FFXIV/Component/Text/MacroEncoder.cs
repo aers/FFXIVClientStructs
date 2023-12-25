@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Component.Text;
@@ -18,8 +19,8 @@ public unsafe partial struct MacroEncoder {
     public MacroCodeDescription* GetMacroCode(string code) {
         var currentNode = MacroCodeMap.SmallestValue;
         while (currentNode != null && currentNode != MacroCodeMap.Head) {
-            if (currentNode->KeyValuePair.Item1.EqualsString(code))
-                return &currentNode->KeyValuePair.Item2;
+            if (currentNode->Value.Item1.EqualsString(code))
+                return (MacroCodeDescription*)Unsafe.AsPointer(ref currentNode->Value.Item2);
             currentNode = currentNode->Next();
         }
         return null;
@@ -28,8 +29,8 @@ public unsafe partial struct MacroEncoder {
     public string? GetMacroString(byte code) {
         var currentNode = MacroCodeMap.SmallestValue;
         while (currentNode != null && currentNode != MacroCodeMap.Head) {
-            if (currentNode->KeyValuePair.Item2.Id == code)
-                return currentNode->KeyValuePair.Item1.ToString();
+            if (currentNode->Value.Item2.Id == code)
+                return currentNode->Value.Item1.ToString();
             currentNode = currentNode->Next();
         }
         return null;
