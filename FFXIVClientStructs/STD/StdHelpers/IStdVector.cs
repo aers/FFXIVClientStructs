@@ -385,18 +385,18 @@ public unsafe interface IStdVector<T> : IDisposable, IList, IList<T>, IReadOnlyL
     /// Enumerator for <see cref="IStdVector{T}"/>.
     /// </summary>
     public struct Enumerator : IEnumerator<T> {
-        private readonly T* ownerFirst;
-        private readonly T* ownerLast;
-        private T* current;
+        private readonly T* _ownerFirst;
+        private readonly T* _ownerLast;
+        private T* _current;
 
         /// <summary>
         /// Initializes a new instance of <see cref="Enumerator"/> struct.
         /// </summary>
         /// <param name="owner">The owner of this enumerator.</param>
         public Enumerator(IStdVector<T> owner) {
-            ownerFirst = owner.First;
-            ownerLast = owner.Last;
-            current = owner.First - 1;
+            _ownerFirst = owner.First;
+            _ownerLast = owner.Last;
+            _current = owner.First - 1;
         }
 
         /// <summary>
@@ -404,9 +404,9 @@ public unsafe interface IStdVector<T> : IDisposable, IList, IList<T>, IReadOnlyL
         /// </summary>
         public readonly ref T Current {
             get {
-                if (current < ownerFirst || current >= ownerLast)
+                if (_current < _ownerFirst || _current >= _ownerLast)
                     throw new InvalidOperationException();
-                return ref *current;
+                return ref *_current;
             }
         }
 
@@ -418,14 +418,14 @@ public unsafe interface IStdVector<T> : IDisposable, IList, IList<T>, IReadOnlyL
 
         /// <inheritdoc cref="IEnumerator.MoveNext"/>
         public bool MoveNext() {
-            if (current >= ownerLast - 1)
+            if (_current >= _ownerLast - 1)
                 return false;
-            ++current;
+            ++_current;
             return true;
         }
 
         /// <inheritdoc cref="IEnumerator.Reset"/>
-        public void Reset() => current = ownerFirst - 1;
+        public void Reset() => _current = _ownerFirst - 1;
 
         /// <inheritdoc cref="IDisposable.Dispose"/>
         public void Dispose() { }
