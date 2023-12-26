@@ -28,6 +28,9 @@ public unsafe partial struct RaptureHotbarModule {
     /// <summary>
     /// The ID of the ClassJob associated with the currently-active hotbars.
     /// </summary>
+    /// <remarks>
+    /// Can have a bit set at 0x80 if <see cref="ModuleReady"/> is false, though the meaning of this flag is unclear.
+    /// </remarks>
     [FieldOffset(0x51)] public byte ActiveHotbarClassJobId;
 
     /// <summary>
@@ -234,6 +237,19 @@ public unsafe partial struct RaptureHotbarModule {
         RaptureHotbarModule* hotbarModule, HotBarSlot* slot);
 
     /// <summary>
+    /// Gets whether the specified action should be highlighted with ants in the UI.
+    /// Internally calls <see cref="ActionManager.IsActionHighlighted"/>.
+    /// </summary>
+    /// <remarks>
+    /// This method does not appear in any code paths.
+    /// </remarks>
+    /// <param name="commandType">The type of the command to look up.</param>
+    /// <param name="commandId">The ID of the command to look up.</param>
+    /// <returns>Returns <c>true</c> if the action would be highlighted, <c>false</c> otherwise.</returns>
+    [MemberFunction("40 53 48 83 EC 20 44 0F B6 CA 41 8B D8")]
+    public partial bool IsActionHighlighted(HotbarSlotType commandType, uint commandId);
+
+    /// <summary>
     /// Helper method to check if a specific hotbar is to be shared between all classes or not.
     /// </summary>
     /// <remarks>
@@ -247,10 +263,13 @@ public unsafe partial struct RaptureHotbarModule {
     }
 
     /// <summary>
-    /// Sets a hotbar slot and triggers a save for it automatically via <see cref="WriteSavedSlot"/>. Caution must be
-    /// taken to ensure invalid hotbar/slot IDs are not passed into this method, as game-provided sanity checks seem
-    /// to not be present for this method.
+    /// Sets a hotbar slot and triggers a save for it automatically via <see cref="WriteSavedSlot"/>. This will
+    /// trigger a save against the currently-active hotbar group.
     /// </summary>
+    /// <remarks>
+    /// Caution must be taken to ensure invalid hotbar/slot IDs are not passed into this method, as game-provided
+    /// sanity checks seem to not be present for this method.
+    /// </remarks>
     /// <param name="hotbarId">The hotbar ID to set and write.</param>
     /// <param name="slotId">The slot ID to set and write.</param>
     /// <param name="commandType">The command type to set.</param>
@@ -260,6 +279,42 @@ public unsafe partial struct RaptureHotbarModule {
     [MemberFunction("E8 ?? ?? ?? ?? B0 01 EB B9")]
     public partial void SetAndSaveSlot(uint hotbarId, uint slotId, HotbarSlotType commandType, uint commandId,
         bool ignoreSharedHotbars = false, bool allowSaveToPvP = true);
+
+    /// <summary>
+    /// Attempt to add the specified action to the first free slot of the specified hotbar.
+    /// </summary>
+    /// <param name="hotbarId">The hotbar ID to save this action to. Is not validated; must be between 0 and 9 inclusive.</param>
+    /// <param name="commandType">The command type to save.</param>
+    /// <param name="commandId">The command ID to save.</param>
+    /// <returns>Returns <c>true</c> if the save is successful, false otherwise.</returns>
+    [MemberFunction("E8 ?? ?? ?? ?? EB 62 83 7C 24")]
+    public partial bool SetAndSaveFirstAvailableNormalSlot(uint hotbarId, HotbarSlotType commandType, uint commandId);
+
+    /// <summary>
+    /// Attempt to add the specified action to the first free slot of the specified cross hotbar.
+    /// </summary>
+    /// <param name="hotbarId">The cross hotbar ID to save this action to. is not validated; must be 0 to 8 inclusive.</param>
+    /// <param name="commandType">The command type to save.</param>
+    /// <param name="commandId">The command ID to save.</param>
+    /// <returns>Returns <c>true</c> if the save is successful, false otherwise.</returns>
+    [MemberFunction("E8 ?? ?? ?? ?? EB 62 83 7C 24")]
+    public partial bool SetAndSaveFirstAvailableCrossSlot(uint hotbarId, HotbarSlotType commandType, uint commandId);
+
+    /// <summary>
+    /// Attempt to add the specified action to the first free slot of *any* normal hotbar.
+    /// </summary>
+    /// <param name="commandType">The command type to save.</param>
+    /// <param name="commandId">The command ID to save.</param>
+    /// <returns>Returns <c>true</c> if the save is successful, false otherwise.</returns>
+    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 83 FD 0A")]
+    public partial bool SetAndSaveFirstGloballyAvailableNormalSlot(HotbarSlotType commandType, uint commandId);
+
+    /// <summary>
+    /// Attempt to add the specified action to the first free slot of *any* normal hotbar.
+    /// </summary>
+    /// <inheritdoc cref="SetAndSaveFirstGloballyAvailableNormalSlot"/>
+    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 83 FD 08")]
+    public partial bool SetAndSaveFirstGloballyAvailableCrossSlot(HotbarSlotType commandType, uint commandId);
 
     /// <summary>
     /// Dumps a hotbar slot into a specific save slot within <see cref="SavedHotBars"/> and prepares a file save. Used
@@ -283,6 +338,15 @@ public unsafe partial struct RaptureHotbarModule {
     /// <param name="slotId">The saved slot ID to clear.</param>
     [MemberFunction("E8 ?? ?? ?? ?? FF C7 83 FF 10 7C E3")]
     public partial void ClearSavedSlotById(uint hotbarId, uint slotId);
+
+    /// <summary>
+    /// Loads the specified saved hotbar from <see cref="SavedHotBars"/> into the live hotbar. Will automatically
+    /// respect PVP mode. Will not reload from disk.
+    /// </summary>
+    /// <param name="classJobId">The ClassJob ID to retrieve a hotbar from.</param>
+    /// <param name="hotbarId">The hotbar ID to retrieve.</param>
+    [MemberFunction("E8 ?? ?? ?? ?? FF C7 83 FF 12")]
+    public partial void LoadSavedHotbar(uint classJobId, uint hotbarId);
 
     /// <summary>
     /// Get the Saved Hotbar Index for the PVP hotbar for a specific ClassJob, for use in <see cref="SavedHotBarsSpan"/>. 
@@ -477,6 +541,7 @@ public unsafe partial struct HotBarSlot {
     /// - 3: Appears to mark a PVP combo action
     /// - 4: Set on Squadron Order - Disengage, maybe others
     /// - 5: Set for Lost Finds Items (?)
+    /// - 128: Appears as a flag?
     /// - 0/255: "generic"
     [FieldOffset(0xDE)] public byte UNK_0xDE;
 

@@ -4431,6 +4431,10 @@ classes:
       0x14068C3C0: Finalize
       0x14068E780: IsHotbarEmpty
       0x14068CBA0: SetAndSaveSlot
+      0x14068C7B0: SetAndSaveFirstAvailableNormalSlot
+      0x14068C860: SetAndSaveFirstAvailableCrossSlot
+      0x14068C910: SetAndSaveFirstGloballyAvailableNormalSlot
+      0x14068C9C0: SetAndSaveFirstGloballyAvailableCrossSlot
       0x14068CCD0: SetSlotToMacroAndSave
       0x14068CD40: ClearSavedSlotById  # (this, hotbarId, slotId) -> void
       0x140691D50: ExecuteSlot
@@ -4460,6 +4464,9 @@ classes:
       0x140690F00: IsCrossHotbarLocked
       0x1406916B0: IsDutyAction1Usable
       0x1406916D0: SetDutyActionsPresent             # (this, isPresent) -> void
+      0x1406916E0: IsAnyDutyActionActive
+      0x140691740: SetDutyActionActive
+      0x140691770: GetDutyActionCount
       0x1406917A0: GetDutyActionId                   # (this, slotId) -> uint  - identical to ActionManager's version.
       0x1406917C0: GetDutyActionIdForGeneralActionId # (this, generalActionId) -> uint
       0x1406917F0: SetDutyActionSlot                 # (this, slotId, actionId)
@@ -4468,9 +4475,14 @@ classes:
       0x140691A10: IsGeneralActionDutyAction         # (this, generalActionId) -> bool  - utility function? 
       0x14068E060: GrandCompanyUpdateTask            # (this) -> void
       0x14068E2E0: PvPStateUpdateTask                # (this) -> void
+      0x14068E400: ToggleWXHBRightFocusFlag
+      0x14068E460: ToggleWXHBLeftFocusFlag
       0x140691030: SetStandardHotbarShareState
       0x140691090: SetCrossHotbarShareState
-      0x140692880: DestroyAllHotbars                   # (this, performReset) -> void?
+      0x140692880: DeleteAllHotbars                 # (this, performReset) -> void?
+      0x14068DDE0: PerformMateriaActionMigration
+      0x14068A890: IsActionHighlighted               # (this, commandType, commandId) -> bool
+      0x140692F00: LoadSavedHotbar                   # (this, groupId, hotbarId)
       0x140693BB0: GetInstance  # static
   Client::UI::Misc::RaptureHotbarModule::HotbarSlot:
     funcs:
