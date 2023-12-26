@@ -28,11 +28,11 @@ public unsafe struct StdMap<TKey, TValue>
     where TKey : unmanaged
     where TValue : unmanaged {
     public StdMap<TKey, TValue, DefaultStaticNativeObjectOperation<TKey>, DefaultStaticNativeObjectOperation<TValue>> WithOperationSpecs;
-    
+
     public RedBlackTreeNodeHeader<StdPair<TKey, TValue>, KeyComparingStaticNativeObjectOperation<TKey, TValue, DefaultStaticNativeObjectOperation<TKey>, DefaultStaticNativeObjectOperation<TValue>>>* Head => WithOperationSpecs.Head;
     public RedBlackTreeNodeHeader<StdPair<TKey, TValue>, KeyComparingStaticNativeObjectOperation<TKey, TValue, DefaultStaticNativeObjectOperation<TKey>, DefaultStaticNativeObjectOperation<TValue>>>* SmallestValue => WithOperationSpecs.SmallestValue;
     public RedBlackTreeNodeHeader<StdPair<TKey, TValue>, KeyComparingStaticNativeObjectOperation<TKey, TValue, DefaultStaticNativeObjectOperation<TKey>, DefaultStaticNativeObjectOperation<TValue>>>* LargestValue => WithOperationSpecs.LargestValue;
-    
+
     public RedBlackTreeNodeHeader<StdPair<TKey, TValue>, KeyComparingStaticNativeObjectOperation<TKey, TValue, DefaultStaticNativeObjectOperation<TKey>, DefaultStaticNativeObjectOperation<TValue>>>.Enumerator GetEnumerator() => new(WithOperationSpecs.Head);
 
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();

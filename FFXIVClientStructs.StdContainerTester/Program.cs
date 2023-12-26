@@ -11,6 +11,9 @@ public static class Program {
     public static void Main() {
         SetupMemorySpaceFunctions();
         do {
+            ListTester.Test();
+            Console.WriteLine();
+
             StringTester.Test();
             Console.WriteLine();
             

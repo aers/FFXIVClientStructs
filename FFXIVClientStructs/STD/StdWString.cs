@@ -8,8 +8,15 @@ namespace FFXIVClientStructs.STD;
 /// Encoding contained within is assumed to be UTF-16.
 /// </summary>
 [StructLayout(LayoutKind.Explicit, Size = 0x20)]
-public unsafe struct StdWString : IStdBasicString<char> {
+public unsafe struct StdWString
+    : IStdBasicString<char>
+        , IStaticNativeObjectOperation<StdWString> {
     [FieldOffset(0x0)] public StdBasicString<char, DefaultStaticMemorySpace> BasicString;
+
+    public static bool HasDefault => StdBasicString<char, DefaultStaticMemorySpace>.HasDefault;
+    public static bool IsDisposable => StdBasicString<char, DefaultStaticMemorySpace>.IsDisposable;
+    public static bool IsCopiable => StdBasicString<char, DefaultStaticMemorySpace>.IsCopiable;
+    public static bool IsMovable => StdBasicString<char, DefaultStaticMemorySpace>.IsMovable;
 
     public readonly Encoding IntrinsicEncoding => Encoding.Unicode;
     public readonly char* First => BasicString.First;
@@ -35,6 +42,14 @@ public unsafe struct StdWString : IStdBasicString<char> {
 
     public static implicit operator ReadOnlySpan<char>(in StdWString value) => value.AsSpan();
 
+    public static int Compare(in StdWString left, in StdWString right) => StdBasicString<char, DefaultStaticMemorySpace>.Compare(left.BasicString, right.BasicString);
+    public static bool ContentEquals(in StdWString left, in StdWString right) => StdBasicString<char, DefaultStaticMemorySpace>.ContentEquals(left.BasicString, right.BasicString);
+    public static void ConstructDefaultInPlace(out StdWString item) => StdBasicString<char, DefaultStaticMemorySpace>.ConstructDefaultInPlace(out item.BasicString);
+    public static void StaticDispose(ref StdWString item) => StdBasicString<char, DefaultStaticMemorySpace>.StaticDispose(ref item.BasicString);
+    public static void ConstructCopyInPlace(in StdWString source, out StdWString target) => StdBasicString<char, DefaultStaticMemorySpace>.ConstructCopyInPlace(in source.BasicString, out target.BasicString);
+    public static void ConstructMoveInPlace(ref StdWString source, out StdWString target) => StdBasicString<char, DefaultStaticMemorySpace>.ConstructMoveInPlace(ref source.BasicString, out target.BasicString);
+    public static void Swap(ref StdWString item1, ref StdWString item2) => StdBasicString<char, DefaultStaticMemorySpace>.Swap(ref item1.BasicString, ref item2.BasicString);
+
     public readonly Span<char> AsSpan() => BasicString.AsSpan();
     public readonly Span<char> AsSpan(long index) => BasicString.AsSpan(index);
     public readonly Span<char> AsSpan(long index, int count) => BasicString.AsSpan(index, count);
@@ -44,6 +59,7 @@ public unsafe struct StdWString : IStdBasicString<char> {
     public void AddSpanCopy(ReadOnlySpan<char> span) => BasicString.AddSpanCopy(span);
     public void AddSpanMove(Span<char> span) => BasicString.AddSpanMove(span);
     public void AddString(Encoding encoding, ReadOnlySpan<char> str) => BasicString.AddString(encoding, str);
+    public void AddString(ReadOnlySpan<char> str) => BasicString.AddString(IntrinsicEncoding, str);
     public readonly long BinarySearch(in char item) => BasicString.BinarySearch(in item);
     public readonly long BinarySearch(in char item, IComparer<char>? comparer) => BasicString.BinarySearch(in item, comparer);
     public readonly long BinarySearch(long index, long count, in char item, IComparer<char>? comparer) => BasicString.BinarySearch(index, count, in item, comparer);
@@ -53,10 +69,11 @@ public unsafe struct StdWString : IStdBasicString<char> {
     public readonly bool Contains(ReadOnlySpan<char> subsequence) => BasicString.Contains(subsequence);
     public readonly bool ContainsString(Encoding encoding, ReadOnlySpan<char> str) => BasicString.ContainsString(encoding, str);
     public readonly bool ContainsString(ReadOnlySpan<char> str) => BasicString.ContainsString(IntrinsicEncoding, str);
-    public void AddString(ReadOnlySpan<char> str) => BasicString.AddString(IntrinsicEncoding, str);
+    public readonly int CompareTo(object? obj) => BasicString.CompareTo(obj);
+    public readonly int CompareTo(IContinuousStorageContainer<char>? other) => BasicString.CompareTo(other);
     public void Dispose() => BasicString.Dispose();
     public readonly override bool Equals(object? obj) => obj is StdWString s && Equals(s);
-    public readonly bool Equals(IStdBasicString<char>? other) => BasicString.Equals(other);
+    public readonly bool Equals(IContinuousStorageContainer<char>? other) => other is StdWString s && Equals(s);
     public readonly bool Equals(in StdWString other) => BasicString.Equals(other.BasicString);
     public readonly bool Exists(Predicate<char> match) => BasicString.Exists(match);
     public readonly char? Find(Predicate<char> match) => BasicString.Find(match);
@@ -157,7 +174,5 @@ public unsafe struct StdWString : IStdBasicString<char> {
     public void Resize(long newSize) => BasicString.Resize(newSize);
     public void Resize(long newSize, in char defaultValue) => BasicString.Resize(newSize, in defaultValue);
     public long SetCapacity(long newCapacity) => BasicString.SetCapacity(newCapacity);
-    public readonly int CompareTo(object? obj) => BasicString.CompareTo(obj);
-    public readonly int CompareTo(IStdBasicString<char>? other) => BasicString.CompareTo(other);
     public readonly string Decode(Encoding encoding) => BasicString.Decode(encoding);
 }

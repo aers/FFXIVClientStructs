@@ -15,7 +15,9 @@ namespace FFXIVClientStructs.STD;
 /// <typeparam name="TOperation">The specifier for <see cref="IDisposable"/>, for element types that has its own destructor.</typeparam>
 [StructLayout(LayoutKind.Sequential)]
 [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
-public unsafe struct StdVector<T, TMemorySpace, TOperation> : IContinuousStorageContainer<T>
+public unsafe struct StdVector<T, TMemorySpace, TOperation>
+    : IContinuousStorageContainer<T>
+        , IStaticNativeObjectOperation<StdVector<T, TMemorySpace, TOperation>>
     where T : unmanaged
     where TMemorySpace : IStaticMemorySpace
     where TOperation : IStaticNativeObjectOperation<T> {
@@ -28,6 +30,11 @@ public unsafe struct StdVector<T, TMemorySpace, TOperation> : IContinuousStorage
 
     /// <inheritdoc cref="IContinuousStorageContainer{T}.End"/>
     public T* End;
+
+    public static bool HasDefault => true;
+    public static bool IsDisposable => true;
+    public static bool IsCopiable => TOperation.IsCopiable;
+    public static bool IsMovable => true;
 
     /// <inheritdoc cref="LongCount"/>
     public int Count {
@@ -70,12 +77,99 @@ public unsafe struct StdVector<T, TMemorySpace, TOperation> : IContinuousStorage
 
     public static implicit operator ReadOnlySpan<T>(in StdVector<T, TMemorySpace, TOperation> value)
         => value.AsSpan();
-    
+
+    /// <inheritdoc/>
+    public static int Compare(in StdVector<T, TMemorySpace, TOperation> left, in StdVector<T, TMemorySpace, TOperation> right) {
+        var lv = left.First;
+        var lt = lv + left.LongCount;
+        var rv = right.First;
+        var rt = rv + right.LongCount;
+        while (lv < lt && rv < rt) {
+            var cmp = TOperation.Compare(*lv, *rv);
+            if (cmp != 0)
+                return cmp;
+            lv++;
+            rv++;
+        }
+
+        return left.LongCount.CompareTo(right.LongCount);
+    }
+
+    /// <inheritdoc/>
+    public static bool ContentEquals(in StdVector<T, TMemorySpace, TOperation> left, in StdVector<T, TMemorySpace, TOperation> right) {
+        if (left.LongCount != right.LongCount)
+            return false;
+        var c = left.LongCount;
+        var l = left.First;
+        var r = right.First;
+        for (; c > 0; c--) {
+            if (!TOperation.ContentEquals(*l++, *r++))
+                return false;
+        }
+
+        return true;
+    }
+
+    /// <inheritdoc/>
+    public static void ConstructDefaultInPlace(out StdVector<T, TMemorySpace, TOperation> item) => item = default;
+
+    /// <inheritdoc/>
+    public static void StaticDispose(ref StdVector<T, TMemorySpace, TOperation> item) => item.Dispose();
+
+    /// <inheritdoc/>
+    public static void ConstructCopyInPlace(in StdVector<T, TMemorySpace, TOperation> source, out StdVector<T, TMemorySpace, TOperation> target) {
+        target = default;
+        var len = source.LongCount;
+        target.EnsureCapacity(len);
+        target.Last = target.First + len;
+        Buffer.MemoryCopy(source.First, target.First, sizeof(T) * len, sizeof(T) * len);
+    }
+
+    /// <inheritdoc/>
+    public static void ConstructMoveInPlace(ref StdVector<T, TMemorySpace, TOperation> source, out StdVector<T, TMemorySpace, TOperation> target) => (target, source) = (source, default);
+
+    /// <inheritdoc/>
+    public static void Swap(ref StdVector<T, TMemorySpace, TOperation> item1, ref StdVector<T, TMemorySpace, TOperation> item2) => (item1, item2) = (item2, item1);
+
     /// <inheritdoc/>
     public void Dispose() {
         Resize(0);
         TrimExcess();
     }
+
+    /// <inheritdoc/>
+    public readonly int CompareTo(object? obj) => obj switch {
+        StdVector<T, TMemorySpace, TOperation> other => CompareTo(other),
+        IContinuousStorageContainer<T> other => CompareTo(other),
+        null => 1,
+        _ => throw new ArgumentException(null, nameof(obj)),
+    };
+
+    /// <inheritdoc cref="IComparable{T}.CompareTo"/>
+    public readonly int CompareTo(in StdVector<T, TMemorySpace, TOperation> other) => Compare(this, other);
+
+    /// <inheritdoc/>
+    public readonly int CompareTo(IContinuousStorageContainer<T>? other) {
+        if (other is null)
+            return 1;
+        var lv = First;
+        var lt = lv + LongCount;
+        var rv = other.First;
+        var rt = rv + other.LongCount;
+        while (lv < lt && rv < rt) {
+            var cmp = Comparer<T>.Default.Compare(*lv, *rv);
+            if (cmp != 0)
+                return cmp;
+            lv++;
+            rv++;
+        }
+
+        return LongCount.CompareTo(other.LongCount);
+    }
+
+    /// <inheritdoc/>
+    public readonly bool Equals(IContinuousStorageContainer<T>? other) =>
+        other is StdVector<T, TMemorySpace, TOperation> sv && ContentEquals(this, sv);
 
     /// <inheritdoc/>
     public override int GetHashCode() => HashCode.Combine((nint)First, (nint)Last, (nint)End);
@@ -99,13 +193,13 @@ public unsafe struct StdVector<T, TMemorySpace, TOperation> : IContinuousStorage
     /// <inheritdoc/>
     public void AddCopy(in T item) {
         EnsureCapacity(LongCount + 1);
-        TOperation.Copy(in item, out *Last++);
+        TOperation.ConstructCopyInPlace(in item, out *Last++);
     }
 
     /// <inheritdoc/>
     public void AddMove(ref T item) {
         EnsureCapacity(LongCount + 1);
-        TOperation.Move(ref item, out *Last++);
+        TOperation.ConstructMoveInPlace(ref item, out *Last++);
     }
 
     /// <inheritdoc/>
@@ -140,7 +234,7 @@ public unsafe struct StdVector<T, TMemorySpace, TOperation> : IContinuousStorage
         }
 
         while (Last != First)
-            TOperation.Dispose(ref *--Last);
+            TOperation.StaticDispose(ref *--Last);
     }
 
     /// <inheritdoc/>
@@ -213,7 +307,7 @@ public unsafe struct StdVector<T, TMemorySpace, TOperation> : IContinuousStorage
         EnsureCapacity(LongCount + 1);
         SpliceHoleUnchecked(index, 1);
         Last++;
-        TOperation.Copy(in item, out First[index]);
+        TOperation.ConstructCopyInPlace(in item, out First[index]);
     }
 
     /// <inheritdoc/>
@@ -226,7 +320,7 @@ public unsafe struct StdVector<T, TMemorySpace, TOperation> : IContinuousStorage
         EnsureCapacity(LongCount + 1);
         SpliceHoleUnchecked(index, 1);
         Last++;
-        TOperation.Move(ref item, out First[index]);
+        TOperation.ConstructMoveInPlace(ref item, out First[index]);
     }
 
     /// <inheritdoc/>
@@ -284,7 +378,7 @@ public unsafe struct StdVector<T, TMemorySpace, TOperation> : IContinuousStorage
         Last += span.Length;
         var p = First + index;
         foreach (ref readonly var s in span)
-            TOperation.Copy(in s, out *p++);
+            TOperation.ConstructCopyInPlace(in s, out *p++);
     }
 
     /// <inheritdoc/>
@@ -300,7 +394,7 @@ public unsafe struct StdVector<T, TMemorySpace, TOperation> : IContinuousStorage
         Last += span.Length;
         var p = First + index;
         foreach (ref var s in span)
-            TOperation.Move(ref s, out *p++);
+            TOperation.ConstructMoveInPlace(ref s, out *p++);
     }
 
     /// <inheritdoc/>
@@ -352,7 +446,7 @@ public unsafe struct StdVector<T, TMemorySpace, TOperation> : IContinuousStorage
         _ = CheckedIndex(index);
         if (!TOperation.IsMovable && index + 1 != LongCount)
             throw new InvalidOperationException("Cannot remove from middle when items are not movable");
-        TOperation.Dispose(ref First[index]);
+        TOperation.StaticDispose(ref First[index]);
         Last--;
         CopyInsideUnchecked(index + 1, index, LongCount - index);
     }
@@ -365,7 +459,7 @@ public unsafe struct StdVector<T, TMemorySpace, TOperation> : IContinuousStorage
         if (TOperation.IsDisposable) {
             var p = First + index;
             for (var remain = count; remain > 0; remain--)
-                TOperation.Dispose(ref *p);
+                TOperation.StaticDispose(ref *p);
         }
 
         Last -= count;
@@ -490,7 +584,7 @@ public unsafe struct StdVector<T, TMemorySpace, TOperation> : IContinuousStorage
 
         var end = First + index + count;
         for (var p = First + index; p < end; p++, index++) {
-            if (TOperation.Equals(*p, item))
+            if (TOperation.ContentEquals(*p, item))
                 return index;
         }
 
@@ -499,10 +593,10 @@ public unsafe struct StdVector<T, TMemorySpace, TOperation> : IContinuousStorage
 
     /// <inheritdoc/>
     public readonly long LongIndexOf(ReadOnlySpan<T> subsequence) => LongIndexOf(subsequence, 0, LongCount);
-    
+
     /// <inheritdoc/>
     public readonly long LongIndexOf(ReadOnlySpan<T> subsequence, long index) => LongIndexOf(subsequence, index, LongCount - index);
-    
+
     /// <inheritdoc/>
     public readonly long LongIndexOf(ReadOnlySpan<T> subsequence, long index, long count) {
         fixed (T* p = subsequence)
@@ -511,11 +605,11 @@ public unsafe struct StdVector<T, TMemorySpace, TOperation> : IContinuousStorage
 
     /// <inheritdoc/>
     public readonly long LongIndexOf(T* subsequence, nint subsequenceLength) => LongIndexOf(subsequence, subsequenceLength, 0, LongCount);
-    
+
     /// <inheritdoc/>
     public readonly long LongIndexOf(T* subsequence, nint subsequenceLength, long index) =>
         LongIndexOf(subsequence, subsequenceLength, index, LongCount - index);
-    
+
     /// <inheritdoc/>
     public readonly long LongIndexOf(T* subsequence, nint subsequenceLength, long index, long count) {
         _ = CheckedRangeCount(index, count);
@@ -529,12 +623,12 @@ public unsafe struct StdVector<T, TMemorySpace, TOperation> : IContinuousStorage
         var test = First + index;
         var testEnd = test + count - subsequenceLength + 1;
         for (; test < testEnd; ++test) {
-            if (!TOperation.Equals(*subsequence, *test))
+            if (!TOperation.ContentEquals(*subsequence, *test))
                 continue;
             var s = subsequence + 1;
             var t = test + 1;
             nint i = 1;
-            while (i < subsequenceLength && TOperation.Equals(*s++, *t++))
+            while (i < subsequenceLength && TOperation.ContentEquals(*s++, *t++))
                 i++;
             if (i == subsequenceLength)
                 return test - First;
@@ -564,7 +658,7 @@ public unsafe struct StdVector<T, TMemorySpace, TOperation> : IContinuousStorage
 
         var end = First + index - count;
         for (var p = First + index; p >= end; p--, index--) {
-            if (TOperation.Equals(item, *p))
+            if (TOperation.ContentEquals(item, *p))
                 return index;
         }
 
@@ -573,19 +667,19 @@ public unsafe struct StdVector<T, TMemorySpace, TOperation> : IContinuousStorage
 
     /// <inheritdoc/>
     public readonly long LongLastIndexOf(ReadOnlySpan<T> subsequence) => LongLastIndexOf(subsequence, 0, LongCount);
-    
+
     /// <inheritdoc/>
     public readonly long LongLastIndexOf(ReadOnlySpan<T> subsequence, long index) => LongLastIndexOf(subsequence, index, index + 1);
-    
+
     /// <inheritdoc/>
     public readonly long LongLastIndexOf(ReadOnlySpan<T> subsequence, long index, long count) {
         fixed (T* p = subsequence)
             return LongLastIndexOf(p, subsequence.Length, index, index + 1);
     }
-    
+
     /// <inheritdoc/>
     public readonly long LongLastIndexOf(T* subsequence, nint subsequenceLength) => LongLastIndexOf(subsequence, subsequenceLength, 0, LongCount);
-    
+
     /// <inheritdoc/>
     public readonly long LongLastIndexOf(T* subsequence, nint subsequenceLength, long index) =>
         LongLastIndexOf(subsequence, subsequenceLength, index, index + 1);
@@ -613,12 +707,12 @@ public unsafe struct StdVector<T, TMemorySpace, TOperation> : IContinuousStorage
         var testEnd = First + index;
         var test = testEnd + count - subsequenceLength;
         for (; test >= testEnd; --test) {
-            if (!TOperation.Equals(*subsequence, *test))
+            if (!TOperation.ContentEquals(*subsequence, *test))
                 continue;
             var s = subsequence + 1;
             var t = test + 1;
             nint i = 1;
-            while (i < subsequenceLength && TOperation.Equals(*s++, *t++))
+            while (i < subsequenceLength && TOperation.ContentEquals(*s++, *t++))
                 i++;
             if (i == subsequenceLength)
                 return test - First;
@@ -652,7 +746,7 @@ public unsafe struct StdVector<T, TMemorySpace, TOperation> : IContinuousStorage
             return;
 
         for (var i = prevCount; i < newSize; i++)
-            TOperation.SetDefault(out First[i]);
+            TOperation.ConstructDefaultInPlace(out First[i]);
     }
 
     /// <inheritdoc/>
@@ -667,7 +761,7 @@ public unsafe struct StdVector<T, TMemorySpace, TOperation> : IContinuousStorage
             return;
 
         for (var i = prevCount; i < newSize; i++)
-            TOperation.Copy(in defaultValue, out First[i]);
+            TOperation.ConstructCopyInPlace(in defaultValue, out First[i]);
     }
 
     /// <inheritdoc/>
@@ -691,8 +785,8 @@ public unsafe struct StdVector<T, TMemorySpace, TOperation> : IContinuousStorage
 
         if (count != 0) {
             for (var i = 0L; i < count; i++) {
-                TOperation.Move(ref First[i], out newAlloc![i]);
-                TOperation.Dispose(ref First[i]);
+                TOperation.ConstructMoveInPlace(ref First[i], out newAlloc![i]);
+                TOperation.StaticDispose(ref First[i]);
             }
         }
 
@@ -716,7 +810,7 @@ public unsafe struct StdVector<T, TMemorySpace, TOperation> : IContinuousStorage
         if (newSize >= prevCount || !TOperation.IsDisposable)
             return;
         for (var i = newSize; i < prevCount; i++)
-            TOperation.Dispose(ref First[i]);
+            TOperation.StaticDispose(ref First[i]);
     }
 
     [AssertionMethod]

@@ -15,7 +15,7 @@ namespace FFXIVClientStructs.STD.StdHelpers;
 /// </remarks>
 [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
 [SuppressMessage("ReSharper", "PossibleInterfaceMemberAmbiguity")]
-public unsafe interface IContinuousStorageContainer<T> : IDisposable, IList, IList<T>, IReadOnlyList<T>
+public unsafe interface IContinuousStorageContainer<T> : IDisposable, IList, IList<T>, IReadOnlyList<T>, IComparable, IComparable<IContinuousStorageContainer<T>>, IEquatable<IContinuousStorageContainer<T>>
     where T : unmanaged {
     /// <summary>
     /// Gets the pointer to the first element of the vector. <c>null</c> if empty.
@@ -413,7 +413,7 @@ public unsafe interface IContinuousStorageContainer<T> : IDisposable, IList, ILi
 
     /// <inheritdoc cref="List{T}.LastIndexOf(T,int,int)"/>
     long LongLastIndexOf(in T item, long index, long count);
-    
+
     /// <summary>
     /// Finds the first index of the last occurrence of the given subsequence.
     /// </summary>

@@ -5,7 +5,7 @@ namespace FFXIVClientStructs.STD.StdHelpers;
 /// </summary>
 /// <typeparam name="T">The type.</typeparam>
 public interface IStaticNativeObjectOperation<T>
-    where T : unmanaged{
+    where T : unmanaged {
     /// <summary>
     /// Gets a value indicating whether the type is has a default value.
     /// </summary>
@@ -28,7 +28,7 @@ public interface IStaticNativeObjectOperation<T>
     /// </summary>
     /// <remarks>If <c>false</c>, then any operation resulting in move will fail.</remarks>
     public abstract static bool IsMovable { get; }
-    
+
     /// <summary>
     /// Compares two items.
     /// </summary>
@@ -43,20 +43,20 @@ public interface IStaticNativeObjectOperation<T>
     /// <param name="left">The left item.</param>
     /// <param name="right">The right item.</param>
     /// <returns><c>true</c> if equal.</returns>
-    public abstract static bool Equals(in T left, in T right);
+    public abstract static bool ContentEquals(in T left, in T right);
 
     /// <summary>
     /// Sets the given item to the default value.
     /// </summary>
     /// <param name="item">The item to default.</param>
     /// <exception cref="NotSupportedException">If <see cref="HasDefault"/> is <c>false</c>.</exception>
-    public abstract static void SetDefault(out T item);
+    public abstract static void ConstructDefaultInPlace(out T item);
 
     /// <summary>
     /// Disposes the given item, if <see cref="IsDisposable"/> is true.
     /// </summary>
     /// <param name="item">The item to dispose.</param>
-    public abstract static void Dispose(ref T item);
+    public abstract static void StaticDispose(ref T item);
 
     /// <summary>
     /// Copies the given item.
@@ -64,7 +64,7 @@ public interface IStaticNativeObjectOperation<T>
     /// <param name="source">The source.</param>
     /// <param name="target">The target.</param>
     /// <exception cref="NotSupportedException">If <see cref="IsCopiable"/> is <c>false</c>.</exception>
-    public abstract static void Copy(in T source, out T target);
+    public abstract static void ConstructCopyInPlace(in T source, out T target);
 
     /// <summary>
     /// Moves the given item.
@@ -72,7 +72,7 @@ public interface IStaticNativeObjectOperation<T>
     /// <param name="source">The source.</param>
     /// <param name="target">The target.</param>
     /// <exception cref="NotSupportedException">If <see cref="IsMovable"/> is <c>false</c>.</exception>
-    public abstract static void Move(ref T source, out T target);
+    public abstract static void ConstructMoveInPlace(ref T source, out T target);
 
     /// <summary>
     /// Swaps the given items.

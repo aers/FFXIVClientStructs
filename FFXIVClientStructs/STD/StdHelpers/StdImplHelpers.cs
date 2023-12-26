@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 
 namespace FFXIVClientStructs.STD.StdHelpers;
@@ -61,7 +60,7 @@ public static class StdImplHelpers {
                 : new(
                     _ptr + _offset,
                     (int)Math.Min(ChunkSize, (ulong)(_count - _offset)));
-        
+
         public bool MoveNext() {
             var next = unchecked(_offset + ChunkSize);
             if (next >= _count - 1 || _count == 0)

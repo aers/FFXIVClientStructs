@@ -1,6 +1,5 @@
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -19,7 +18,10 @@ namespace FFXIVClientStructs.STD;
 /// <remarks>The object must be pinned on use, if the instance of this struct itself is allocated in heap.</remarks>
 [StructLayout(LayoutKind.Sequential, Size = 0x20)]
 [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
-public unsafe struct StdBasicString<T, TMemorySpace> : IStdBasicString<T>, IComparable<StdBasicString<T, TMemorySpace>>
+public unsafe struct StdBasicString<T, TMemorySpace>
+    : IStdBasicString<T>
+        , IComparable<StdBasicString<T, TMemorySpace>>
+        , IStaticNativeObjectOperation<StdBasicString<T, TMemorySpace>>
     where T : unmanaged, IBinaryNumber<T>
     where TMemorySpace : IStaticMemorySpace {
 
@@ -32,6 +34,11 @@ public unsafe struct StdBasicString<T, TMemorySpace> : IStdBasicString<T>, IComp
     public fixed byte BufferBytes[BufByteSize];
     public ulong ULongLength;
     public ulong ULongCapacity;
+
+    public static bool HasDefault => true;
+    public static bool IsDisposable => true;
+    public static bool IsCopiable => true;
+    public static bool IsMovable => true;
 
     public Encoding? IntrinsicEncoding => null;
 
@@ -78,13 +85,40 @@ public unsafe struct StdBasicString<T, TMemorySpace> : IStdBasicString<T>, IComp
     public static bool operator ==(in StdBasicString<T, TMemorySpace> l, in StdBasicString<T, TMemorySpace> r) => l.Equals(r);
 
     public static bool operator !=(in StdBasicString<T, TMemorySpace> l, in StdBasicString<T, TMemorySpace> r) => !l.Equals(r);
-    
+
     public static implicit operator Span<T>(in StdBasicString<T, TMemorySpace> value)
         => value.AsSpan();
 
     public static implicit operator ReadOnlySpan<T>(in StdBasicString<T, TMemorySpace> value)
         => value.AsSpan();
-    
+
+    /// <inheritdoc/>
+    public static int Compare(in StdBasicString<T, TMemorySpace> left, in StdBasicString<T, TMemorySpace> right) => left.CompareTo(right);
+
+    /// <inheritdoc/>
+    public static bool ContentEquals(in StdBasicString<T, TMemorySpace> left, in StdBasicString<T, TMemorySpace> right) => left.Equals(right);
+
+    /// <inheritdoc/>
+    public static void ConstructDefaultInPlace(out StdBasicString<T, TMemorySpace> item) => item = default;
+
+    /// <inheritdoc/>
+    public static void StaticDispose(ref StdBasicString<T, TMemorySpace> item) => item.Dispose();
+
+    /// <inheritdoc/>
+    public static void ConstructCopyInPlace(in StdBasicString<T, TMemorySpace> source, out StdBasicString<T, TMemorySpace> target) {
+        target = default;
+        var len = source.LongCount;
+        target.EnsureCapacity(len);
+        target.ULongLength = source.ULongLength;
+        Buffer.MemoryCopy(source.First, target.First, sizeof(T) * (len + 1), sizeof(T) * (len + 1));
+    }
+
+    /// <inheritdoc/>
+    public static void ConstructMoveInPlace(ref StdBasicString<T, TMemorySpace> source, out StdBasicString<T, TMemorySpace> target) => (target, source) = (source, default);
+
+    /// <inheritdoc/>
+    public static void Swap(ref StdBasicString<T, TMemorySpace> item1, ref StdBasicString<T, TMemorySpace> item2) => (item1, item2) = (item2, item1);
+
     /// <inheritdoc/>
     public readonly Span<T> AsSpan() => new(First, Count);
 
@@ -176,6 +210,25 @@ public unsafe struct StdBasicString<T, TMemorySpace> : IStdBasicString<T>, IComp
     readonly int IComparable<StdBasicString<T, TMemorySpace>>.CompareTo(StdBasicString<T, TMemorySpace> other) => CompareTo(other);
 
     /// <inheritdoc/>
+    public readonly int CompareTo(IContinuousStorageContainer<T>? other) {
+        if (other is null)
+            return 1;
+        var lv = First;
+        var lt = lv + LongCount;
+        var rv = other.First;
+        var rt = rv + other.LongCount;
+        while (lv < lt && rv < rt) {
+            var cmp = Comparer<T>.Default.Compare(*lv, *rv);
+            if (cmp != 0)
+                return cmp;
+            lv++;
+            rv++;
+        }
+
+        return LongCount.CompareTo(other.LongCount);
+    }
+
+    /// <inheritdoc/>
     public readonly int CompareTo(object? obj) => obj is null ? 1 : CompareTo((StdBasicString<T, TMemorySpace>)obj);
 
     /// <inheritdoc cref="IContinuousStorageContainer{T}.Clear"/>
@@ -203,7 +256,7 @@ public unsafe struct StdBasicString<T, TMemorySpace> : IStdBasicString<T>, IComp
     public readonly override bool Equals(object? obj) => obj is StdBasicString<T, TMemorySpace> sbs && Equals(sbs);
 
     /// <inheritdoc/>
-    public readonly bool Equals(IStdBasicString<T>? obj) => obj is StdBasicString<T, TMemorySpace> sbs && Equals(sbs);
+    public readonly bool Equals(IContinuousStorageContainer<T>? obj) => obj is StdBasicString<T, TMemorySpace> sbs && Equals(sbs);
 
     /// <inheritdoc cref="Equals(object?)"/>
     public readonly bool Equals(in StdBasicString<T, TMemorySpace> other) {
@@ -401,7 +454,7 @@ public unsafe struct StdBasicString<T, TMemorySpace> : IStdBasicString<T>, IComp
 
     /// <inheritdoc/>
     public readonly int LastIndexOfString(Encoding encoding, ReadOnlySpan<char> str) => LastIndexOfString(encoding, str, 0, Count);
-    
+
     /// <inheritdoc/>
     public readonly int LastIndexOfString(Encoding encoding, ReadOnlySpan<char> str, int index) =>
         LastIndexOfString(encoding, str, index, Count - index);
@@ -600,10 +653,10 @@ public unsafe struct StdBasicString<T, TMemorySpace> : IStdBasicString<T>, IComp
 
     /// <inheritdoc/>
     public readonly long LongIndexOf(ReadOnlySpan<T> subsequence) => LongIndexOf(subsequence, 0, LongCount);
-    
+
     /// <inheritdoc/>
     public readonly long LongIndexOf(ReadOnlySpan<T> subsequence, long index) => LongIndexOf(subsequence, index, LongCount - index);
-    
+
     /// <inheritdoc/>
     public readonly long LongIndexOf(ReadOnlySpan<T> subsequence, long index, long count) {
         fixed (T* p = subsequence)
@@ -612,11 +665,11 @@ public unsafe struct StdBasicString<T, TMemorySpace> : IStdBasicString<T>, IComp
 
     /// <inheritdoc/>
     public readonly long LongIndexOf(T* subsequence, nint subsequenceLength) => LongIndexOf(subsequence, subsequenceLength, 0, LongCount);
-    
+
     /// <inheritdoc/>
     public readonly long LongIndexOf(T* subsequence, nint subsequenceLength, long index) =>
         LongIndexOf(subsequence, subsequenceLength, index, LongCount - index);
-    
+
     /// <inheritdoc/>
     public readonly long LongIndexOf(T* subsequence, nint subsequenceLength, long index, long count) {
         _ = CheckedRangeCount(index, count);
@@ -691,19 +744,19 @@ public unsafe struct StdBasicString<T, TMemorySpace> : IStdBasicString<T>, IComp
 
     /// <inheritdoc/>
     public readonly long LongLastIndexOf(ReadOnlySpan<T> subsequence) => LongLastIndexOf(subsequence, 0, LongCount);
-    
+
     /// <inheritdoc/>
     public readonly long LongLastIndexOf(ReadOnlySpan<T> subsequence, long index) => LongLastIndexOf(subsequence, index, index + 1);
-    
+
     /// <inheritdoc/>
     public readonly long LongLastIndexOf(ReadOnlySpan<T> subsequence, long index, long count) {
         fixed (T* p = subsequence)
             return LongLastIndexOf(p, subsequence.Length, index, index + 1);
     }
-    
+
     /// <inheritdoc/>
     public readonly long LongLastIndexOf(T* subsequence, nint subsequenceLength) => LongLastIndexOf(subsequence, subsequenceLength, 0, LongCount);
-    
+
     /// <inheritdoc/>
     public readonly long LongLastIndexOf(T* subsequence, nint subsequenceLength, long index) =>
         LongLastIndexOf(subsequence, subsequenceLength, index, index + 1);

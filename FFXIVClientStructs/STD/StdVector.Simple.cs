@@ -61,6 +61,11 @@ public unsafe struct StdVector<T> : IContinuousStorageContainer<T>
     public readonly bool Contains(in T item) => WithOperationSpecs.Contains(in item);
     public readonly bool Contains(T* subsequence, IntPtr length) => WithOperationSpecs.Contains(subsequence, length);
     public readonly bool Contains(ReadOnlySpan<T> subsequence) => WithOperationSpecs.Contains(subsequence);
+    public readonly int CompareTo(object? obj) => WithOperationSpecs.CompareTo(obj);
+    public readonly int CompareTo(IContinuousStorageContainer<T>? other) => WithOperationSpecs.CompareTo(other);
+    public readonly override bool Equals(object? obj) => obj is StdVector<T> v && Equals(v);
+    public readonly bool Equals(IContinuousStorageContainer<T>? other) => other is StdVector<T> v && Equals(v);
+    public readonly bool Equals(in StdVector<T> other) => WithOperationSpecs.Equals(other.WithOperationSpecs);
     public readonly bool Exists(Predicate<T> match) => WithOperationSpecs.Exists(match);
     public readonly T? Find(Predicate<T> match) => WithOperationSpecs.Find(match);
     public readonly int FindIndex(Predicate<T> match) => WithOperationSpecs.FindIndex(match);
@@ -133,7 +138,7 @@ public unsafe struct StdVector<T> : IContinuousStorageContainer<T>
     public long SetCapacity(long newCapacity) => WithOperationSpecs.SetCapacity(newCapacity);
     public readonly override int GetHashCode() => HashCode.Combine((nint)First, (nint)Last, (nint)End);
     public readonly override string ToString() => $"{nameof(StdVector<T>)}<{typeof(T)}>({LongCount}/{LongCapacity})";
-    
+
     [Obsolete($"Use {nameof(AsSpan)} instead.")]
     public ReadOnlySpan<T> Span {
         get {

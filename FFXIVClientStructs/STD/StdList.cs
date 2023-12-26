@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using FFXIVClientStructs.FFXIV.Client.System.Memory;
 using FFXIVClientStructs.STD.StdHelpers;
@@ -6,7 +7,9 @@ namespace FFXIVClientStructs.STD;
 
 [StructLayout(LayoutKind.Sequential, Size = 0x10)]
 [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
-public unsafe struct StdList<T, TMemorySpace, TOperation> : IStdList<T>
+public unsafe struct StdList<T, TMemorySpace, TOperation>
+    : IStdList<T>
+        , IStaticNativeObjectOperation<StdList<T, TMemorySpace, TOperation>>
     where T : unmanaged
     where TMemorySpace : IStaticMemorySpace
     where TOperation : IStaticNativeObjectOperation<T> {
@@ -18,6 +21,11 @@ public unsafe struct StdList<T, TMemorySpace, TOperation> : IStdList<T>
     // Size is the number of nodes in the list (excluding the head node)
     public ulong Size;
 
+    public static bool HasDefault => true;
+    public static bool IsDisposable => true;
+    public static bool IsCopiable => TOperation.IsCopiable;
+    public static bool IsMovable => true;
+
     /// <inheritdoc/>
     public Pointer<IStdList<T>.Node> First => Last.Value->Next;
 
@@ -25,8 +33,8 @@ public unsafe struct StdList<T, TMemorySpace, TOperation> : IStdList<T>
     public Pointer<IStdList<T>.Node> Last {
         get {
             if (Head is null) {
-                // TODO: allocate the first node
-                throw new NotImplementedException();
+                Head = CreateNodeDefault();
+                Head->Next = Head->Previous = Head;
             }
 
             return Head;
@@ -41,12 +49,78 @@ public unsafe struct StdList<T, TMemorySpace, TOperation> : IStdList<T>
 
     /// <inheritdoc/>
     readonly int ICollection<T>.Count => Count;
-    
+
     /// <inheritdoc/>
     public readonly bool IsReadOnly => false;
-    
+
     /// <inheritdoc/>
     readonly int IReadOnlyCollection<T>.Count => Count;
+
+    /// <inheritdoc/>
+    public static int Compare(in StdList<T, TMemorySpace, TOperation> left, in StdList<T, TMemorySpace, TOperation> right) {
+        var leftEnd = left.Head;
+        var rightEnd = right.Head;
+        if (leftEnd is null && rightEnd is null)
+            return 0;
+        if (leftEnd is null)
+            return -1;
+        if (rightEnd is null)
+            return 1;
+
+        var leftNode = leftEnd->Next;
+        var rightNode = rightEnd->Next;
+        for (; leftNode != leftEnd && rightNode != rightEnd; leftNode = leftNode->Next, rightNode = rightNode->Next) {
+            var c = TOperation.Compare(leftNode->Value, rightNode->Value);
+            if (c != 0)
+                return c;
+        }
+
+        if (leftNode != leftEnd)
+            return 1;
+        if (rightNode != rightEnd)
+            return -1;
+        return 0;
+    }
+
+    /// <inheritdoc/>
+    public static bool ContentEquals(in StdList<T, TMemorySpace, TOperation> left, in StdList<T, TMemorySpace, TOperation> right) {
+        if (left.Count != right.Count)
+            return false;
+        if (left.Count == 0 || right.Count == 0)
+            return false;
+        Debug.Assert(left.Head is not null && right.Head is not null, "Count and Head are not consistent");
+
+        var leftEnd = left.Head;
+        var rightEnd = right.Head;
+        var leftNode = leftEnd->Next;
+        var rightNode = rightEnd->Next;
+        for (; leftNode != leftEnd && rightNode != rightEnd; leftNode = leftNode->Next, rightNode = rightNode->Next) {
+            if (!TOperation.ContentEquals(leftNode->Value, rightNode->Value))
+                return false;
+        }
+        return true;
+    }
+
+    /// <inheritdoc/>
+    public static void ConstructDefaultInPlace(out StdList<T, TMemorySpace, TOperation> item) => item = default;
+
+    /// <inheritdoc/>
+    public static void ConstructCopyInPlace(in StdList<T, TMemorySpace, TOperation> source, out StdList<T, TMemorySpace, TOperation> target) {
+        if (!TOperation.IsCopiable)
+            throw new InvalidOperationException("Copying is not supported");
+        target = default;
+        foreach (ref var v in source)
+            target.AddLastCopy(v);
+    }
+
+    /// <inheritdoc/>
+    public static void ConstructMoveInPlace(ref StdList<T, TMemorySpace, TOperation> source, out StdList<T, TMemorySpace, TOperation> target) => (target, source) = (source, default);
+
+    /// <inheritdoc/>
+    public static void StaticDispose(ref StdList<T, TMemorySpace, TOperation> item) => item.Dispose();
+
+    /// <inheritdoc/>
+    public static void Swap(ref StdList<T, TMemorySpace, TOperation> item1, ref StdList<T, TMemorySpace, TOperation> item2) => (item1, item2) = (item2, item1);
 
     /// <inheritdoc/>
     public static Pointer<IStdList<T>.Node> CreateNodeCopy(in T value) {
@@ -56,7 +130,7 @@ public unsafe struct StdList<T, TMemorySpace, TOperation> : IStdList<T>
         if (alloc is null)
             throw new OutOfMemoryException();
         alloc->Next = alloc->Previous = null;
-        TOperation.Copy(in value, out alloc->Value);
+        TOperation.ConstructCopyInPlace(in value, out alloc->Value);
         return alloc;
     }
 
@@ -68,7 +142,7 @@ public unsafe struct StdList<T, TMemorySpace, TOperation> : IStdList<T>
         if (alloc is null)
             throw new OutOfMemoryException();
         alloc->Next = alloc->Previous = null;
-        TOperation.Move(ref value, out alloc->Value);
+        TOperation.ConstructMoveInPlace(ref value, out alloc->Value);
         return alloc;
     }
 
@@ -80,15 +154,19 @@ public unsafe struct StdList<T, TMemorySpace, TOperation> : IStdList<T>
         if (alloc is null)
             throw new OutOfMemoryException();
         alloc->Next = alloc->Previous = null;
-        TOperation.SetDefault(out alloc->Value);
+        TOperation.ConstructDefaultInPlace(out alloc->Value);
         return alloc;
     }
 
     /// <inheritdoc/>
-    public static void DisposeNode(Pointer<IStdList<T>.Node> node) => IMemorySpace.Free(node, (ulong)sizeof(IStdList<T>.Node));
+    public static void DisposeNode(Pointer<IStdList<T>.Node> node, bool disposeValue) {
+        if (disposeValue)
+            TOperation.StaticDispose(ref node.Value->Value);
+        IMemorySpace.Free(node, (ulong)sizeof(IStdList<T>.Node));
+    }
 
     /// <inheritdoc/>
-    public void AddAfter(Pointer<IStdList<T>.Node> node, Pointer<IStdList<T>.Node> newNode) {
+    public Pointer<IStdList<T>.Node> AddAfter(Pointer<IStdList<T>.Node> node, Pointer<IStdList<T>.Node> newNode) {
         if (node.Value is null || newNode.Value is null)
             throw new NullReferenceException();
         Detach(newNode);
@@ -97,55 +175,59 @@ public unsafe struct StdList<T, TMemorySpace, TOperation> : IStdList<T>
         newNode.Value->Next->Previous = newNode.Value;
         node.Value->Next = newNode.Value;
         Size++;
+        return newNode;
     }
-    
-    /// <inheritdoc/>
-    public void AddAfterDefault(Pointer<IStdList<T>.Node> node) => AddAfter(node, CreateNodeDefault());
-    
-    /// <inheritdoc/>
-    public void AddAfterCopy(Pointer<IStdList<T>.Node> node, in T value) => AddAfter(node, CreateNodeCopy(in value));
-    
-    /// <inheritdoc/>
-    public void AddAfterMove(Pointer<IStdList<T>.Node> node, ref T value) => AddAfter(node, CreateNodeMove(ref value));
 
     /// <inheritdoc/>
-    public void AddBefore(Pointer<IStdList<T>.Node> node, Pointer<IStdList<T>.Node> newNode) => AddAfter(node.Value->Previous, newNode);
-    
-    /// <inheritdoc/>
-    public void AddBeforeDefault(Pointer<IStdList<T>.Node> node) => AddBefore(node, CreateNodeDefault());
-    
-    /// <inheritdoc/>
-    public void AddBeforeCopy(Pointer<IStdList<T>.Node> node, in T value) => AddBefore(node, CreateNodeCopy(in value));
-    
-    /// <inheritdoc/>
-    public void AddBeforeMove(Pointer<IStdList<T>.Node> node, ref T value) => AddBefore(node, CreateNodeMove(ref value));
+    public Pointer<IStdList<T>.Node> AddAfterDefault(Pointer<IStdList<T>.Node> node) => AddAfter(node, CreateNodeDefault());
 
     /// <inheritdoc/>
-    public void AddFirst(Pointer<IStdList<T>.Node> newNode) => AddAfter(Head, newNode);
-    
-    /// <inheritdoc/>
-    public void AddFirstDefault() => AddFirst(CreateNodeDefault());
-    
-    /// <inheritdoc/>
-    public void AddFirstCopy(in T value) => AddFirst(CreateNodeCopy(in value));
-    
-    /// <inheritdoc/>
-    public void AddFirstMove(ref T value) => AddFirst(CreateNodeMove(ref value));
+    public Pointer<IStdList<T>.Node> AddAfterCopy(Pointer<IStdList<T>.Node> node, in T value) => AddAfter(node, CreateNodeCopy(in value));
 
     /// <inheritdoc/>
-    public void AddLast(Pointer<IStdList<T>.Node> newNode) => AddBefore(Head, newNode);
-    
+    public Pointer<IStdList<T>.Node> AddAfterMove(Pointer<IStdList<T>.Node> node, ref T value) => AddAfter(node, CreateNodeMove(ref value));
+
     /// <inheritdoc/>
-    public void AddLastDefault() => AddLast(CreateNodeDefault());
-    
+    public Pointer<IStdList<T>.Node> AddBefore(Pointer<IStdList<T>.Node> node, Pointer<IStdList<T>.Node> newNode) => AddAfter(node.Value->Previous, newNode);
+
     /// <inheritdoc/>
-    public void AddLastCopy(in T value) => AddLast(CreateNodeCopy(in value));
-    
+    public Pointer<IStdList<T>.Node> AddBeforeDefault(Pointer<IStdList<T>.Node> node) => AddBefore(node, CreateNodeDefault());
+
     /// <inheritdoc/>
-    public void AddLastMove(ref T value) => AddLast(CreateNodeMove(ref value));
+    public Pointer<IStdList<T>.Node> AddBeforeCopy(Pointer<IStdList<T>.Node> node, in T value) => AddBefore(node, CreateNodeCopy(in value));
+
+    /// <inheritdoc/>
+    public Pointer<IStdList<T>.Node> AddBeforeMove(Pointer<IStdList<T>.Node> node, ref T value) => AddBefore(node, CreateNodeMove(ref value));
+
+    /// <inheritdoc/>
+    public Pointer<IStdList<T>.Node> AddFirst(Pointer<IStdList<T>.Node> newNode) => AddAfter(Last, newNode);
+
+    /// <inheritdoc/>
+    public Pointer<IStdList<T>.Node> AddFirstDefault() => AddFirst(CreateNodeDefault());
+
+    /// <inheritdoc/>
+    public Pointer<IStdList<T>.Node> AddFirstCopy(in T value) => AddFirst(CreateNodeCopy(in value));
+
+    /// <inheritdoc/>
+    public Pointer<IStdList<T>.Node> AddFirstMove(ref T value) => AddFirst(CreateNodeMove(ref value));
+
+    /// <inheritdoc/>
+    public Pointer<IStdList<T>.Node> AddLast(Pointer<IStdList<T>.Node> newNode) => AddBefore(Last, newNode);
+
+    /// <inheritdoc/>
+    public Pointer<IStdList<T>.Node> AddLastDefault() => AddLast(CreateNodeDefault());
+
+    /// <inheritdoc/>
+    public Pointer<IStdList<T>.Node> AddLastCopy(in T value) => AddLast(CreateNodeCopy(in value));
+
+    /// <inheritdoc/>
+    public Pointer<IStdList<T>.Node> AddLastMove(ref T value) => AddLast(CreateNodeMove(ref value));
 
     /// <inheritdoc/>
     public void Clear() {
+        if (Head is null)
+            return;
+
         while (Head != Head->Previous)
             Remove(Head->Previous);
     }
@@ -170,7 +252,7 @@ public unsafe struct StdList<T, TMemorySpace, TOperation> : IStdList<T>
     public void Dispose() {
         Clear();
         if (Head is not null)
-            IMemorySpace.Free(Head);
+            DisposeNode(Head, false);
         Head = null;
     }
 
@@ -179,7 +261,7 @@ public unsafe struct StdList<T, TMemorySpace, TOperation> : IStdList<T>
         if (Head is null)
             return default;
         for (var node = Head->Next; node != Head; node = node->Next) {
-            if (TOperation.Equals(node->Value, value))
+            if (TOperation.ContentEquals(node->Value, value))
                 return node;
         }
 
@@ -191,7 +273,7 @@ public unsafe struct StdList<T, TMemorySpace, TOperation> : IStdList<T>
         if (Head is null)
             return default;
         for (var node = Head->Previous; node != Head; node = node->Previous) {
-            if (TOperation.Equals(node->Value, value))
+            if (TOperation.ContentEquals(node->Value, value))
                 return node;
         }
 
@@ -209,7 +291,7 @@ public unsafe struct StdList<T, TMemorySpace, TOperation> : IStdList<T>
         if (node.Value is null)
             throw new NullReferenceException();
         Detach(node);
-        DisposeNode(node);
+        DisposeNode(node, true);
         Size--;
     }
 

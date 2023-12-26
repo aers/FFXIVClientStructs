@@ -3,7 +3,7 @@ using System.Text;
 
 namespace FFXIVClientStructs.STD.StdHelpers;
 
-public interface IStdBasicString<T> : IContinuousStorageContainer<T>, IComparable, IComparable<IStdBasicString<T>>, IEquatable<IStdBasicString<T>> 
+public interface IStdBasicString<T> : IContinuousStorageContainer<T>
     where T : unmanaged, IBinaryNumber<T> {
     /// <summary>
     /// Gets the encoding implied by the container.

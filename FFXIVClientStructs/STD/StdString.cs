@@ -8,7 +8,9 @@ namespace FFXIVClientStructs.STD;
 /// Encoding contained within is assumed to be the system default encoding.
 /// </summary>
 [StructLayout(LayoutKind.Explicit, Size = 0x20)]
-public unsafe struct StdString : IStdBasicString<byte> {
+public unsafe struct StdString
+    : IStdBasicString<byte>
+        , IStaticNativeObjectOperation<StdString> {
     [FieldOffset(0x0)] public StdBasicString<byte, DefaultStaticMemorySpace> BasicString;
     [FieldOffset(0x0)] public byte* BufferPtr;
     [FieldOffset(0x0)] public fixed byte Buffer[16];
@@ -17,6 +19,11 @@ public unsafe struct StdString : IStdBasicString<byte> {
     /// </summary>
     [FieldOffset(0x10)] public ulong Length;
     [FieldOffset(0x18)] public ulong Capacity;
+
+    public static bool HasDefault => StdBasicString<char, DefaultStaticMemorySpace>.HasDefault;
+    public static bool IsDisposable => StdBasicString<char, DefaultStaticMemorySpace>.IsDisposable;
+    public static bool IsCopiable => StdBasicString<char, DefaultStaticMemorySpace>.IsCopiable;
+    public static bool IsMovable => StdBasicString<char, DefaultStaticMemorySpace>.IsMovable;
 
     public readonly Encoding IntrinsicEncoding =>
         CodePagesEncodingProvider.Instance.GetEncoding(0)
@@ -44,6 +51,23 @@ public unsafe struct StdString : IStdBasicString<byte> {
 
     public static implicit operator ReadOnlySpan<byte>(in StdString value) => value.AsSpan();
 
+    public static int Compare(in StdString left, in StdString right) => StdBasicString<byte, DefaultStaticMemorySpace>.Compare(left.BasicString, right.BasicString);
+    public static bool ContentEquals(in StdString left, in StdString right) => StdBasicString<byte, DefaultStaticMemorySpace>.ContentEquals(left.BasicString, right.BasicString);
+    public static void ConstructDefaultInPlace(out StdString item) {
+        item = default;
+        StdBasicString<byte, DefaultStaticMemorySpace>.ConstructDefaultInPlace(out item.BasicString);
+    }
+    public static void StaticDispose(ref StdString item) => StdBasicString<byte, DefaultStaticMemorySpace>.StaticDispose(ref item.BasicString);
+    public static void ConstructCopyInPlace(in StdString source, out StdString target) {
+        target = default;
+        StdBasicString<byte, DefaultStaticMemorySpace>.ConstructCopyInPlace(in source.BasicString, out target.BasicString);
+    }
+    public static void ConstructMoveInPlace(ref StdString source, out StdString target) {
+        target = default;
+        StdBasicString<byte, DefaultStaticMemorySpace>.ConstructMoveInPlace(ref source.BasicString, out target.BasicString);
+    }
+    public static void Swap(ref StdString item1, ref StdString item2) => StdBasicString<byte, DefaultStaticMemorySpace>.Swap(ref item1.BasicString, ref item2.BasicString);
+
     public readonly Span<byte> AsSpan() => BasicString.AsSpan();
     public readonly Span<byte> AsSpan(long index) => BasicString.AsSpan(index);
     public readonly Span<byte> AsSpan(long index, int count) => BasicString.AsSpan(index, count);
@@ -53,19 +77,21 @@ public unsafe struct StdString : IStdBasicString<byte> {
     public void AddSpanCopy(ReadOnlySpan<byte> span) => BasicString.AddSpanCopy(span);
     public void AddSpanMove(Span<byte> span) => BasicString.AddSpanMove(span);
     public void AddString(Encoding encoding, ReadOnlySpan<char> str) => BasicString.AddString(encoding, str);
+    public void AddString(ReadOnlySpan<char> str) => BasicString.AddString(IntrinsicEncoding, str);
     public readonly long BinarySearch(in byte item) => BasicString.BinarySearch(in item);
     public readonly long BinarySearch(in byte item, IComparer<byte>? comparer) => BasicString.BinarySearch(in item, comparer);
     public readonly long BinarySearch(long index, long count, in byte item, IComparer<byte>? comparer) => BasicString.BinarySearch(index, count, in item, comparer);
     public void Clear() => BasicString.Clear();
+    public readonly int CompareTo(object? obj) => BasicString.CompareTo(obj);
+    public readonly int CompareTo(IContinuousStorageContainer<byte>? other) => BasicString.CompareTo(other);
     public readonly bool Contains(in byte item) => BasicString.Contains(in item);
     public readonly bool Contains(byte* subsequence, IntPtr length) => BasicString.Contains(subsequence, length);
     public readonly bool Contains(ReadOnlySpan<byte> subsequence) => BasicString.Contains(subsequence);
     public readonly bool ContainsString(Encoding encoding, ReadOnlySpan<char> str) => BasicString.ContainsString(encoding, str);
     public readonly bool ContainsString(ReadOnlySpan<char> str) => BasicString.ContainsString(IntrinsicEncoding, str);
-    public void AddString(ReadOnlySpan<char> str) => BasicString.AddString(IntrinsicEncoding, str);
     public void Dispose() => BasicString.Dispose();
     public readonly override bool Equals(object? obj) => obj is StdString s && Equals(s);
-    public readonly bool Equals(IStdBasicString<byte>? other) => BasicString.Equals(other);
+    public readonly bool Equals(IContinuousStorageContainer<byte>? other) => other is StdString s && Equals(s);
     public readonly bool Equals(in StdString other) => BasicString.Equals(other.BasicString);
     public readonly bool Exists(Predicate<byte> match) => BasicString.Exists(match);
     public readonly byte? Find(Predicate<byte> match) => BasicString.Find(match);
@@ -166,13 +192,11 @@ public unsafe struct StdString : IStdBasicString<byte> {
     public void Resize(long newSize) => BasicString.Resize(newSize);
     public void Resize(long newSize, in byte defaultValue) => BasicString.Resize(newSize, in defaultValue);
     public long SetCapacity(long newCapacity) => BasicString.SetCapacity(newCapacity);
-    public readonly int CompareTo(object? obj) => BasicString.CompareTo(obj);
-    public readonly int CompareTo(IStdBasicString<byte>? other) => BasicString.CompareTo(other);
     public readonly string Decode(Encoding encoding) => BasicString.Decode(encoding);
-    
+
     [Obsolete($"Use {nameof(AsSpan)} instead.")]
     public readonly ReadOnlySpan<byte> Slice(int start) => AsSpan(start);
-    
+
     [Obsolete($"Use {nameof(AsSpan)} instead.")]
     public readonly ReadOnlySpan<byte> Slice(int start, int length) => AsSpan(start, length);
 
