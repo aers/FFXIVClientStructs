@@ -1,41 +1,87 @@
-using System.Collections;
-using FFXIVClientStructs.STD.StdHelpers;
+using System.Diagnostics;
 
 namespace FFXIVClientStructs.STD;
 
 [StructLayout(LayoutKind.Sequential, Size = 0x10)]
-public unsafe struct StdMap<TKey, TValue, TKeyOperation, TValueOperation>
-    : IEnumerable<StdPair<TKey, TValue>>
-    where TKey : unmanaged
-    where TValue : unmanaged
-    where TKeyOperation : IStaticNativeObjectOperation<TKey>
-    where TValueOperation : IStaticNativeObjectOperation<TValue> {
-    public RedBlackTreeNodeHeader<StdPair<TKey, TValue>, KeyComparingStaticNativeObjectOperation<TKey, TValue, TKeyOperation, TValueOperation>>* Head;
-    public ulong Count;
-
-    public RedBlackTreeNodeHeader<StdPair<TKey, TValue>, KeyComparingStaticNativeObjectOperation<TKey, TValue, TKeyOperation, TValueOperation>>* SmallestValue => Head->Left;
-    public RedBlackTreeNodeHeader<StdPair<TKey, TValue>, KeyComparingStaticNativeObjectOperation<TKey, TValue, TKeyOperation, TValueOperation>>* LargestValue => Head->Right;
-
-    public RedBlackTreeNodeHeader<StdPair<TKey, TValue>, KeyComparingStaticNativeObjectOperation<TKey, TValue, TKeyOperation, TValueOperation>>.Enumerator GetEnumerator() => new(Head);
-
-    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
-
-    IEnumerator<StdPair<TKey, TValue>> IEnumerable<StdPair<TKey, TValue>>.GetEnumerator() => GetEnumerator();
-}
-
 public unsafe struct StdMap<TKey, TValue>
-    : IEnumerable<StdPair<TKey, TValue>>
     where TKey : unmanaged
     where TValue : unmanaged {
-    public StdMap<TKey, TValue, DefaultStaticNativeObjectOperation<TKey>, DefaultStaticNativeObjectOperation<TValue>> WithOperationSpecs;
+    public Node* Head;
+    public ulong Count;
 
-    public RedBlackTreeNodeHeader<StdPair<TKey, TValue>, KeyComparingStaticNativeObjectOperation<TKey, TValue, DefaultStaticNativeObjectOperation<TKey>, DefaultStaticNativeObjectOperation<TValue>>>* Head => WithOperationSpecs.Head;
-    public RedBlackTreeNodeHeader<StdPair<TKey, TValue>, KeyComparingStaticNativeObjectOperation<TKey, TValue, DefaultStaticNativeObjectOperation<TKey>, DefaultStaticNativeObjectOperation<TValue>>>* SmallestValue => WithOperationSpecs.SmallestValue;
-    public RedBlackTreeNodeHeader<StdPair<TKey, TValue>, KeyComparingStaticNativeObjectOperation<TKey, TValue, DefaultStaticNativeObjectOperation<TKey>, DefaultStaticNativeObjectOperation<TValue>>>* LargestValue => WithOperationSpecs.LargestValue;
+    public Node* SmallestValue
+        => Head->Left;
 
-    public RedBlackTreeNodeHeader<StdPair<TKey, TValue>, KeyComparingStaticNativeObjectOperation<TKey, TValue, DefaultStaticNativeObjectOperation<TKey>, DefaultStaticNativeObjectOperation<TValue>>>.Enumerator GetEnumerator() => new(WithOperationSpecs.Head);
+    public Node* LargestValue
+        => Head->Right;
 
-    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+    public Enumerator GetEnumerator() => new(this);
 
-    IEnumerator<StdPair<TKey, TValue>> IEnumerable<StdPair<TKey, TValue>>.GetEnumerator() => GetEnumerator();
+    public ref struct Enumerator {
+        private readonly Node* _head;
+        private Node* _current;
+
+        internal Enumerator(StdMap<TKey, TValue> map) {
+            _head = _current = map.Head;
+        }
+
+        public bool MoveNext() {
+            if (_current == null || _current == _head->Right)
+                return false;
+            _current = _current == _head ? _head->Left : _current->Next();
+            return _current != null;
+        }
+
+        public ref readonly StdPair<TKey, TValue> Current => ref _current->KeyValuePair;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public struct Node {
+        public Node* Left;
+        public Node* Parent;
+        public Node* Right;
+        public byte Color;
+        public bool IsNil;
+        public byte _18;
+        public byte _19;
+        public StdPair<TKey, TValue> KeyValuePair;
+
+        public Node* Next() {
+            Debug.Assert(!IsNil, "Tried to increment a head node.");
+            if (Right->IsNil)
+                fixed (Node* thisPtr = &this) {
+                    var ptr = thisPtr;
+                    Node* node;
+                    while (!(node = ptr->Parent)->IsNil && ptr == node->Right)
+                        ptr = node;
+
+                    return node;
+                }
+
+            var ret = Right;
+            while (!ret->Left->IsNil)
+                ret = ret->Left;
+            return ret;
+        }
+
+        public Node* Prev() {
+            if (IsNil)
+                return Right;
+
+            if (Left->IsNil)
+                fixed (Node* thisPtr = &this) {
+                    var ptr = thisPtr;
+                    Node* node;
+                    while (!(node = ptr->Parent)->IsNil && ptr == node->Left)
+                        ptr = node;
+
+                    return ptr->IsNil ? ptr : node;
+                }
+
+            var ret = Left;
+            while (!ret->Right->IsNil)
+                ret = ret->Right;
+            return ret;
+        }
+    }
 }
