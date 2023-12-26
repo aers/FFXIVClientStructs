@@ -19,9 +19,22 @@ public unsafe partial struct RaptureHotbarModule {
     [FieldOffset(0x48)] public UIModule* UiModule;
 
     /// <summary>
+    /// Set in RaptureHotbarModule's ReadFile after all processing/loading appears to have been completed.
+    /// Might also (probably does?) signify all migrations and version checks have been completed and everything
+    /// is stable.
+    /// </summary>
+    [FieldOffset(0x50)] public bool ModuleReady;
+
+    /// <summary>
     /// The ID of the ClassJob associated with the currently-active hotbars.
     /// </summary>
     [FieldOffset(0x51)] public byte ActiveHotbarClassJobId;
+
+    /// <summary>
+    /// Appears to be set if HOTBAR.DAT was loaded from disk successfully. Set to 0 if decryption fails or
+    /// the file read errors out. Does not appear to track migration state. Set in ReadFile.
+    /// </summary>
+    [FieldOffset(0x52)] public bool DatFileLoadedSuccessfully;
 
     // PvE hotbars starting from MCH onwards, appears to track whether a hotbar was initialized?
     [FieldOffset(0x54)] internal fixed bool ExpacJobHotbarsCreated[12];
@@ -31,6 +44,12 @@ public unsafe partial struct RaptureHotbarModule {
 
     // ????? maybe AllowResets?
     [FieldOffset(0x76)] internal bool ClearCallbackPresent;
+
+    /// <summary>
+    /// A state field to track the current materia melding state (locked - 1 / standard - 2 / advanced - 3), and whether
+    /// the hotbars were migrated to replace actions or not.
+    /// </summary>
+    [FieldOffset(0x78)] internal uint MateriaMeldState;
 
     /// <summary>
     /// A bitfield representing whether a specific hotbar is to be considered "shared" or not.
