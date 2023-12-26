@@ -4,12 +4,12 @@ using FFXIVClientStructs.STD.StdHelpers;
 namespace FFXIVClientStructs.STD;
 
 /// <summary>
-/// A <see cref="StdVector{T,TMemorySpace,TDisposable}"/> using <see cref="DefaultStaticMemorySpace"/> and <see cref="DefaultStaticNativeObjectOperation{T}"/>.
+/// A <see cref="StdVector{T,TMemorySpace,TOperation}"/> using <see cref="DefaultStaticMemorySpace"/> and <see cref="DefaultStaticNativeObjectOperation{T}"/>.
 /// </summary>
 /// <typeparam name="T">The type of element.</typeparam>
 [StructLayout(LayoutKind.Sequential)]
 [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
-public unsafe struct StdVector<T> : IStdVector<T>
+public unsafe struct StdVector<T> : IContinuousStorageContainer<T>
     where T : unmanaged {
     public StdVector<T, DefaultStaticMemorySpace, DefaultStaticNativeObjectOperation<T>> WithOperationSpecs;
     public T* First {
@@ -36,7 +36,7 @@ public unsafe struct StdVector<T> : IStdVector<T>
         readonly get => WithOperationSpecs.LongCount;
         set => WithOperationSpecs.LongCount = value;
     }
-    int IStdVector<T>.Capacity {
+    int IContinuousStorageContainer<T>.Capacity {
         readonly get => WithOperationSpecs.Capacity;
         set => WithOperationSpecs.Capacity = value;
     }
@@ -57,8 +57,10 @@ public unsafe struct StdVector<T> : IStdVector<T>
     public readonly long BinarySearch(in T item, IComparer<T>? comparer) => WithOperationSpecs.BinarySearch(item, comparer);
     public readonly long BinarySearch(long index, long count, in T item, IComparer<T>? comparer) => WithOperationSpecs.BinarySearch(index, count, item, comparer);
     public void Clear() => WithOperationSpecs.Clear();
-    public readonly IStdVector<T>.Enumerator GetEnumerator() => WithOperationSpecs.GetEnumerator();
+    public readonly IContinuousStorageContainer<T>.Enumerator GetEnumerator() => WithOperationSpecs.GetEnumerator();
     public readonly bool Contains(in T item) => WithOperationSpecs.Contains(in item);
+    public readonly bool Contains(T* subsequence, IntPtr length) => WithOperationSpecs.Contains(subsequence, length);
+    public readonly bool Contains(ReadOnlySpan<T> subsequence) => WithOperationSpecs.Contains(subsequence);
     public readonly bool Exists(Predicate<T> match) => WithOperationSpecs.Exists(match);
     public readonly T? Find(Predicate<T> match) => WithOperationSpecs.Find(match);
     public readonly int FindIndex(Predicate<T> match) => WithOperationSpecs.FindIndex(match);
@@ -71,6 +73,9 @@ public unsafe struct StdVector<T> : IStdVector<T>
     public readonly int IndexOf(in T item) => WithOperationSpecs.IndexOf(in item);
     public readonly int IndexOf(in T item, int index) => WithOperationSpecs.IndexOf(in item, index);
     public readonly int IndexOf(in T item, int index, int count) => WithOperationSpecs.IndexOf(in item, index, count);
+    public readonly int IndexOf(ReadOnlySpan<T> subsequence) => WithOperationSpecs.IndexOf(subsequence);
+    public readonly int IndexOf(ReadOnlySpan<T> subsequence, int index) => WithOperationSpecs.IndexOf(subsequence, index);
+    public readonly int IndexOf(ReadOnlySpan<T> subsequence, int index, int count) => WithOperationSpecs.IndexOf(subsequence, index, count);
     public void InsertCopy(long index, in T item) => WithOperationSpecs.InsertCopy(index, in item);
     public void InsertMove(long index, ref T item) => WithOperationSpecs.InsertMove(index, ref item);
     public void InsertRangeCopy(long index, IEnumerable<T> collection) => WithOperationSpecs.InsertRangeCopy(index, collection);
@@ -79,6 +84,9 @@ public unsafe struct StdVector<T> : IStdVector<T>
     public readonly int LastIndexOf(in T item) => WithOperationSpecs.LastIndexOf(in item);
     public readonly int LastIndexOf(in T item, int index) => WithOperationSpecs.LastIndexOf(in item, index);
     public readonly int LastIndexOf(in T item, int index, int count) => WithOperationSpecs.LastIndexOf(in item, index, count);
+    public readonly int LastIndexOf(ReadOnlySpan<T> subsequence) => WithOperationSpecs.LastIndexOf(subsequence);
+    public readonly int LastIndexOf(ReadOnlySpan<T> subsequence, int index) => WithOperationSpecs.LastIndexOf(subsequence, index);
+    public readonly int LastIndexOf(ReadOnlySpan<T> subsequence, int index, int count) => WithOperationSpecs.LastIndexOf(subsequence, index, count);
     public bool Remove(in T item) => WithOperationSpecs.Remove(in item);
     public long RemoveAll(Predicate<T> match) => WithOperationSpecs.RemoveAll(match);
     public void RemoveAt(long index) => WithOperationSpecs.RemoveAt(index);
@@ -103,9 +111,21 @@ public unsafe struct StdVector<T> : IStdVector<T>
     public readonly long LongIndexOf(in T item) => WithOperationSpecs.LongIndexOf(in item);
     public readonly long LongIndexOf(in T item, long index) => WithOperationSpecs.LongIndexOf(in item, index);
     public readonly long LongIndexOf(in T item, long index, long count) => WithOperationSpecs.LongIndexOf(in item, index, count);
+    public readonly long LongIndexOf(ReadOnlySpan<T> subsequence) => WithOperationSpecs.LongIndexOf(subsequence);
+    public readonly long LongIndexOf(ReadOnlySpan<T> subsequence, long index) => WithOperationSpecs.LongIndexOf(subsequence, index);
+    public readonly long LongIndexOf(ReadOnlySpan<T> subsequence, long index, long count) => WithOperationSpecs.LongIndexOf(subsequence, index, count);
+    public readonly long LongIndexOf(T* subsequence, IntPtr subsequenceLength) => WithOperationSpecs.LongIndexOf(subsequence, subsequenceLength);
+    public readonly long LongIndexOf(T* subsequence, IntPtr subsequenceLength, long index) => WithOperationSpecs.LongIndexOf(subsequence, subsequenceLength, index);
+    public readonly long LongIndexOf(T* subsequence, IntPtr subsequenceLength, long index, long count) => WithOperationSpecs.LongIndexOf(subsequence, subsequenceLength, index, count);
     public readonly long LongLastIndexOf(in T item) => WithOperationSpecs.LongLastIndexOf(in item);
     public readonly long LongLastIndexOf(in T item, long index) => WithOperationSpecs.LongLastIndexOf(in item, index);
     public readonly long LongLastIndexOf(in T item, long index, long count) => WithOperationSpecs.LongLastIndexOf(in item, index, count);
+    public readonly long LongLastIndexOf(ReadOnlySpan<T> subsequence) => WithOperationSpecs.LongLastIndexOf(subsequence);
+    public readonly long LongLastIndexOf(ReadOnlySpan<T> subsequence, long index) => WithOperationSpecs.LongLastIndexOf(subsequence, index);
+    public readonly long LongLastIndexOf(ReadOnlySpan<T> subsequence, long index, long count) => WithOperationSpecs.LongLastIndexOf(subsequence, index, count);
+    public readonly long LongLastIndexOf(T* subsequence, IntPtr subsequenceLength) => WithOperationSpecs.LongLastIndexOf(subsequence, subsequenceLength);
+    public readonly long LongLastIndexOf(T* subsequence, IntPtr subsequenceLength, long index) => WithOperationSpecs.LongLastIndexOf(subsequence, subsequenceLength, index);
+    public readonly long LongLastIndexOf(T* subsequence, IntPtr subsequenceLength, long index, long count) => WithOperationSpecs.LongLastIndexOf(subsequence, subsequenceLength, index, count);
     public long EnsureCapacity(long capacity) => WithOperationSpecs.EnsureCapacity(capacity);
     public long TrimExcess() => WithOperationSpecs.TrimExcess();
     public void Resize(long newSize) => WithOperationSpecs.Resize(newSize);

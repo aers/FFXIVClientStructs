@@ -15,7 +15,7 @@ namespace FFXIVClientStructs.STD.StdHelpers;
 /// </remarks>
 [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
 [SuppressMessage("ReSharper", "PossibleInterfaceMemberAmbiguity")]
-public unsafe interface IStdVector<T> : IDisposable, IList, IList<T>, IReadOnlyList<T>
+public unsafe interface IContinuousStorageContainer<T> : IDisposable, IList, IList<T>, IReadOnlyList<T>
     where T : unmanaged {
     /// <summary>
     /// Gets the pointer to the first element of the vector. <c>null</c> if empty.
@@ -151,6 +151,21 @@ public unsafe interface IStdVector<T> : IDisposable, IList, IList<T>, IReadOnlyL
     /// <inheritdoc cref="List{T}.Contains"/>
     bool Contains(in T item);
 
+    /// <summary>
+    /// Determines if this vector contains the specified subsequence.
+    /// </summary>
+    /// <param name="subsequence">The pointer to the first item in the subsequence.</param>
+    /// <param name="length">The length.</param>
+    /// <returns><c>true</c> if the subsequence is contained within.</returns>
+    bool Contains(T* subsequence, nint length);
+
+    /// <summary>
+    /// Determines if this vector contains the specified subsequence.
+    /// </summary>
+    /// <param name="subsequence">The subsequence.</param>
+    /// <returns><c>true</c> if the subsequence is contained within.</returns>
+    bool Contains(ReadOnlySpan<T> subsequence);
+
     /// <inheritdoc cref="List{T}.Exists"/>
     bool Exists(Predicate<T> match);
 
@@ -186,6 +201,15 @@ public unsafe interface IStdVector<T> : IDisposable, IList, IList<T>, IReadOnlyL
 
     /// <inheritdoc cref="List{T}.IndexOf(T,int,int)"/>
     int IndexOf(in T item, int index, int count);
+
+    /// <inheritdoc cref="LongIndexOf(System.ReadOnlySpan{T})"/>
+    int IndexOf(ReadOnlySpan<T> subsequence);
+
+    /// <inheritdoc cref="LongIndexOf(System.ReadOnlySpan{T},long)"/>
+    int IndexOf(ReadOnlySpan<T> subsequence, int index);
+
+    /// <inheritdoc cref="LongIndexOf(System.ReadOnlySpan{T},long,long)"/>
+    int IndexOf(ReadOnlySpan<T> subsequence, int index, int count);
 
     /// <summary>
     /// Inserts the item into the vector. The item will be copied.
@@ -230,6 +254,15 @@ public unsafe interface IStdVector<T> : IDisposable, IList, IList<T>, IReadOnlyL
 
     /// <inheritdoc cref="List{T}.LastIndexOf(T,int,int)"/>
     int LastIndexOf(in T item, int index, int count);
+
+    /// <inheritdoc cref="LongLastIndexOf(System.ReadOnlySpan{T})"/>
+    int LastIndexOf(ReadOnlySpan<T> subsequence);
+
+    /// <inheritdoc cref="LongLastIndexOf(System.ReadOnlySpan{T},long)"/>
+    int LastIndexOf(ReadOnlySpan<T> subsequence, int index);
+
+    /// <inheritdoc cref="LongLastIndexOf(System.ReadOnlySpan{T},long,long)"/>
+    int LastIndexOf(ReadOnlySpan<T> subsequence, int index, int count);
 
     /// <inheritdoc cref="List{T}.Remove"/>
     bool Remove(in T item);
@@ -321,6 +354,57 @@ public unsafe interface IStdVector<T> : IDisposable, IList, IList<T>, IReadOnlyL
     /// <inheritdoc cref="List{T}.IndexOf(T,int,int)"/>
     long LongIndexOf(in T item, long index, long count);
 
+    /// <summary>
+    /// Finds the specified subsequence in this vector.
+    /// </summary>
+    /// <param name="subsequence">The subsequence to search for.</param>
+    /// <returns>Offset of the subsequence, or -1 if not found.</returns>
+    long LongIndexOf(ReadOnlySpan<T> subsequence);
+
+    /// <summary>
+    /// Finds the specified subsequence in this vector.
+    /// </summary>
+    /// <param name="subsequence">The subsequence to search for.</param>
+    /// <param name="index">The index in this vector to begin looking from.</param>
+    /// <returns>Offset of the subsequence, or -1 if not found.</returns>
+    long LongIndexOf(ReadOnlySpan<T> subsequence, long index);
+
+    /// <summary>
+    /// Finds the specified subsequence in this vector.
+    /// </summary>
+    /// <param name="subsequence">The subsequence to search for.</param>
+    /// <param name="index">The index in this vector to begin looking from.</param>
+    /// <param name="count">The number of items to look in.</param>
+    /// <returns>Offset of the subsequence, or -1 if not found.</returns>
+    long LongIndexOf(ReadOnlySpan<T> subsequence, long index, long count);
+
+    /// <summary>
+    /// Finds the specified subsequence in this vector.
+    /// </summary>
+    /// <param name="subsequence">The subsequence to search for.</param>
+    /// <param name="subsequenceLength">The length of the subsequence.</param>
+    /// <returns>Offset of the subsequence, or -1 if not found.</returns>
+    long LongIndexOf(T* subsequence, nint subsequenceLength);
+
+    /// <summary>
+    /// Finds the specified subsequence in this vector.
+    /// </summary>
+    /// <param name="subsequence">The subsequence to search for.</param>
+    /// <param name="subsequenceLength">The length of the subsequence.</param>
+    /// <param name="index">The index in this vector to begin looking from.</param>
+    /// <returns>Offset of the subsequence, or -1 if not found.</returns>
+    long LongIndexOf(T* subsequence, nint subsequenceLength, long index);
+
+    /// <summary>
+    /// Finds the specified subsequence in this vector.
+    /// </summary>
+    /// <param name="subsequence">The subsequence to search for.</param>
+    /// <param name="subsequenceLength">The length of the subsequence.</param>
+    /// <param name="index">The index in this vector to begin looking from.</param>
+    /// <param name="count">The number of items to look in.</param>
+    /// <returns>Offset of the subsequence, or -1 if not found.</returns>
+    long LongIndexOf(T* subsequence, nint subsequenceLength, long index, long count);
+
     /// <inheritdoc cref="List{T}.LastIndexOf(T)"/>
     long LongLastIndexOf(in T item);
 
@@ -329,13 +413,64 @@ public unsafe interface IStdVector<T> : IDisposable, IList, IList<T>, IReadOnlyL
 
     /// <inheritdoc cref="List{T}.LastIndexOf(T,int,int)"/>
     long LongLastIndexOf(in T item, long index, long count);
+    
+    /// <summary>
+    /// Finds the first index of the last occurrence of the given subsequence.
+    /// </summary>
+    /// <param name="subsequence">The subsequence to search for.</param>
+    /// <returns>The first index, or -1 if not found.</returns>
+    long LongLastIndexOf(ReadOnlySpan<T> subsequence);
 
     /// <summary>
-    /// Determines if two instances of <see cref="IStdVector{T}"/> have same pointers.
+    /// Finds the first index of the last occurrence of the given subsequence.
+    /// </summary>
+    /// <param name="subsequence">The subsequence to search for.</param>
+    /// <param name="index">The first index in this container to search from.</param>
+    /// <returns>The first index, or -1 if not found.</returns>
+    long LongLastIndexOf(ReadOnlySpan<T> subsequence, long index);
+
+    /// <summary>
+    /// Finds the first index of the last occurrence of the given subsequence.
+    /// </summary>
+    /// <param name="subsequence">The subsequence to search for.</param>
+    /// <param name="index">The first index in this container to search from.</param>
+    /// <param name="count">The number of items in this container to search from.</param>
+    /// <returns>The first index, or -1 if not found.</returns>
+    long LongLastIndexOf(ReadOnlySpan<T> subsequence, long index, long count);
+
+    /// <summary>
+    /// Finds the first index of the last occurrence of the given subsequence.
+    /// </summary>
+    /// <param name="subsequence">The subsequence to search for.</param>
+    /// <param name="subsequenceLength">The length of the subsequence.</param>
+    /// <returns>The first index, or -1 if not found.</returns>
+    long LongLastIndexOf(T* subsequence, nint subsequenceLength);
+
+    /// <summary>
+    /// Finds the first index of the last occurrence of the given subsequence.
+    /// </summary>
+    /// <param name="subsequence">The subsequence to search for.</param>
+    /// <param name="subsequenceLength">The length of the subsequence.</param>
+    /// <param name="index">The first index in this container to search from.</param>
+    /// <returns>The first index, or -1 if not found.</returns>
+    long LongLastIndexOf(T* subsequence, nint subsequenceLength, long index);
+
+    /// <summary>
+    /// Finds the first index of the last occurrence of the given subsequence.
+    /// </summary>
+    /// <param name="subsequence">The subsequence to search for.</param>
+    /// <param name="subsequenceLength">The length of the subsequence.</param>
+    /// <param name="index">The first index in this container to search from.</param>
+    /// <param name="count">The number of items in this container to search from.</param>
+    /// <returns>The first index, or -1 if not found.</returns>
+    long LongLastIndexOf(T* subsequence, nint subsequenceLength, long index, long count);
+
+    /// <summary>
+    /// Determines if two instances of <see cref="IContinuousStorageContainer{T}"/> have same pointers.
     /// </summary>
     /// <param name="other">The other instance.</param>
     /// <returns><c>true</c> if equals.</returns>
-    public bool PointerEquals(IStdVector<T> other) =>
+    public bool PointerEquals(IContinuousStorageContainer<T> other) =>
         First == other.First && Last == other.Last && End == other.End;
 
     /// <see cref="List{T}.EnsureCapacity"/>
@@ -360,9 +495,9 @@ public unsafe interface IStdVector<T> : IDisposable, IList, IList<T>, IReadOnlyL
     /// <summary>
     /// Sets the capacity of this vector.
     /// </summary>
-    /// <param name="newCapacity">The new capacity. Must be at least <see cref="StdVector{T,TMemorySpace,TDisposable}.LongCount"/>.</param>
+    /// <param name="newCapacity">The new capacity. Must be at least <see cref="StdVector{T,TMemorySpace,TOperation}.LongCount"/>.</param>
     /// <returns>The new capacity.</returns>
-    /// <exception cref="ArgumentOutOfRangeException">When <paramref name="newCapacity"/> is less than <see cref="StdVector{T,TMemorySpace,TDisposable}.LongCount"/>.</exception>
+    /// <exception cref="ArgumentOutOfRangeException">When <paramref name="newCapacity"/> is less than <see cref="StdVector{T,TMemorySpace,TOperation}.LongCount"/>.</exception>
     /// <exception cref="OutOfMemoryException">When failed to allocate memory as requested.</exception>
     long SetCapacity(long newCapacity);
 
@@ -433,7 +568,7 @@ public unsafe interface IStdVector<T> : IDisposable, IList, IList<T>, IReadOnlyL
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
     /// <summary>
-    /// Enumerator for <see cref="IStdVector{T}"/>.
+    /// Enumerator for <see cref="IContinuousStorageContainer{T}"/>.
     /// </summary>
     public struct Enumerator : IEnumerable<T>, IEnumerator<T> {
         private readonly T* _ownerFirst;

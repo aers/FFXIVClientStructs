@@ -15,18 +15,18 @@ namespace FFXIVClientStructs.STD;
 /// <typeparam name="TOperation">The specifier for <see cref="IDisposable"/>, for element types that has its own destructor.</typeparam>
 [StructLayout(LayoutKind.Sequential)]
 [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
-public unsafe struct StdVector<T, TMemorySpace, TOperation> : IStdVector<T>
+public unsafe struct StdVector<T, TMemorySpace, TOperation> : IContinuousStorageContainer<T>
     where T : unmanaged
     where TMemorySpace : IStaticMemorySpace
     where TOperation : IStaticNativeObjectOperation<T> {
 
-    /// <inheritdoc cref="IStdVector{T}.First"/>
+    /// <inheritdoc cref="IContinuousStorageContainer{T}.First"/>
     public T* First;
 
-    /// <inheritdoc cref="IStdVector{T}.Last"/>
+    /// <inheritdoc cref="IContinuousStorageContainer{T}.Last"/>
     public T* Last;
 
-    /// <inheritdoc cref="IStdVector{T}.End"/>
+    /// <inheritdoc cref="IContinuousStorageContainer{T}.End"/>
     public T* End;
 
     /// <inheritdoc cref="LongCount"/>
@@ -54,16 +54,16 @@ public unsafe struct StdVector<T, TMemorySpace, TOperation> : IStdVector<T>
     }
 
     /// <inheritdoc/>
-    readonly T* IStdVector<T>.First => First;
+    readonly T* IContinuousStorageContainer<T>.First => First;
 
     /// <inheritdoc/>
-    readonly T* IStdVector<T>.Last => Last;
+    readonly T* IContinuousStorageContainer<T>.Last => Last;
 
     /// <inheritdoc/>
-    readonly T* IStdVector<T>.End => End;
+    readonly T* IContinuousStorageContainer<T>.End => End;
 
     /// <inheritdoc/>
-    public readonly ref T this[long index] => ref First[CheckedIndex(index, false)];
+    public readonly ref T this[long index] => ref First[CheckedIndex(index)];
 
     public static implicit operator Span<T>(in StdVector<T, TMemorySpace, TOperation> value)
         => value.AsSpan();
@@ -88,13 +88,13 @@ public unsafe struct StdVector<T, TMemorySpace, TOperation> : IStdVector<T>
 
     /// <inheritdoc/>
     public readonly Span<T> AsSpan(long index) => new(
-        First + CheckedIndex(index, true),
-        checked((int)CheckedCount(index, LongCount - index)));
+        First + index,
+        checked((int)CheckedRangeCount(index, LongCount - index)));
 
     /// <inheritdoc/>
     public readonly Span<T> AsSpan(long index, int count) => new(
-        First + CheckedIndex(index, true),
-        checked((int)CheckedCount(index, count)));
+        First + index,
+        checked((int)CheckedRangeCount(index, count)));
 
     /// <inheritdoc/>
     public void AddCopy(in T item) {
@@ -127,12 +127,12 @@ public unsafe struct StdVector<T, TMemorySpace, TOperation> : IStdVector<T>
     public readonly long BinarySearch(long index, long count, in T item, IComparer<T>? comparer) =>
         LongPointerSortHelper<T, TOperation>.BinarySearch(
             First,
-            CheckedIndex(index, true),
-            CheckedCount(index, count),
+            index,
+            CheckedRangeCount(index, count),
             item,
             comparer);
 
-    /// <inheritdoc cref="IStdVector{T}.Clear"/>
+    /// <inheritdoc cref="IContinuousStorageContainer{T}.Clear"/>
     public void Clear() {
         if (!TOperation.IsDisposable) {
             Last = First;
@@ -145,6 +145,12 @@ public unsafe struct StdVector<T, TMemorySpace, TOperation> : IStdVector<T>
 
     /// <inheritdoc/>
     public readonly bool Contains(in T item) => LongIndexOf(item) != -1;
+
+    /// <inheritdoc/>
+    public readonly bool Contains(T* subsequence, nint length) => LongIndexOf(subsequence, length) != -1;
+
+    /// <inheritdoc/>
+    public readonly bool Contains(ReadOnlySpan<T> subsequence) => LongIndexOf(subsequence) != -1;
 
     /// <inheritdoc/>
     public readonly bool Exists(Predicate<T> match) => LongFindIndex(match) != -1;
@@ -189,6 +195,15 @@ public unsafe struct StdVector<T, TMemorySpace, TOperation> : IStdVector<T>
     public readonly int IndexOf(in T item, int index, int count) => checked((int)LongIndexOf(item, index, count));
 
     /// <inheritdoc/>
+    public readonly int IndexOf(ReadOnlySpan<T> item) => checked((int)LongIndexOf(item));
+
+    /// <inheritdoc/>
+    public readonly int IndexOf(ReadOnlySpan<T> item, int index) => checked((int)LongIndexOf(item, index));
+
+    /// <inheritdoc/>
+    public readonly int IndexOf(ReadOnlySpan<T> item, int index, int count) => checked((int)LongIndexOf(item, index, count));
+
+    /// <inheritdoc/>
     public void InsertCopy(long index, in T item) {
         if (index < 0 || index > LongCount)
             throw new ArgumentOutOfRangeException(nameof(index), index, null);
@@ -223,7 +238,7 @@ public unsafe struct StdVector<T, TMemorySpace, TOperation> : IStdVector<T>
             throw new InvalidOperationException("Items are not copiable.");
 
         switch (collection) {
-            case IStdVector<T> isv when isv.PointerEquals(this):
+            case IContinuousStorageContainer<T> isv when isv.PointerEquals(this):
                 // We're inserting this vector into itself.
                 EnsureCapacity(checked(prevCount * 2));
                 CopyInsideUnchecked(index, index + prevCount, prevCount - index);
@@ -298,6 +313,15 @@ public unsafe struct StdVector<T, TMemorySpace, TOperation> : IStdVector<T>
     public readonly int LastIndexOf(in T item, int index, int count) => checked((int)LongLastIndexOf(item, index, count));
 
     /// <inheritdoc/>
+    public readonly int LastIndexOf(ReadOnlySpan<T> subsequence) => checked((int)LongLastIndexOf(subsequence));
+
+    /// <inheritdoc/>
+    public readonly int LastIndexOf(ReadOnlySpan<T> subsequence, int index) => checked((int)LongLastIndexOf(subsequence, index));
+
+    /// <inheritdoc/>
+    public readonly int LastIndexOf(ReadOnlySpan<T> subsequence, int index, int count) => checked((int)LongLastIndexOf(subsequence, index, count));
+
+    /// <inheritdoc/>
     public bool Remove(in T item) {
         var i = LongIndexOf(item);
         if (i == -1)
@@ -325,7 +349,7 @@ public unsafe struct StdVector<T, TMemorySpace, TOperation> : IStdVector<T>
 
     /// <inheritdoc/>
     public void RemoveAt(long index) {
-        _ = CheckedIndex(index, false);
+        _ = CheckedIndex(index);
         if (!TOperation.IsMovable && index + 1 != LongCount)
             throw new InvalidOperationException("Cannot remove from middle when items are not movable");
         TOperation.Dispose(ref First[index]);
@@ -335,8 +359,7 @@ public unsafe struct StdVector<T, TMemorySpace, TOperation> : IStdVector<T>
 
     /// <inheritdoc/>
     public void RemoveRange(long index, long count) {
-        _ = CheckedIndex(index, true);
-        _ = CheckedCount(index, count);
+        _ = CheckedRangeCount(index, count);
         if (!TOperation.IsMovable && index + count != LongCount)
             throw new InvalidOperationException("Cannot remove from middle when items are not movable");
         if (TOperation.IsDisposable) {
@@ -354,8 +377,7 @@ public unsafe struct StdVector<T, TMemorySpace, TOperation> : IStdVector<T>
 
     /// <inheritdoc/>
     public void Reverse(long index, long count) {
-        _ = CheckedIndex(index, true);
-        _ = CheckedCount(index, count);
+        _ = CheckedRangeCount(index, count);
         var l = First + index;
         var r = First + count - 1;
         for (; l < r; l++, r--)
@@ -367,21 +389,21 @@ public unsafe struct StdVector<T, TMemorySpace, TOperation> : IStdVector<T>
 
     /// <inheritdoc/>
     public void Sort(long index, long count) =>
-        LongPointerSortHelper<T, TOperation>.Sort(First + CheckedIndex(index, true), CheckedCount(index, count));
+        LongPointerSortHelper<T, TOperation>.Sort(First + index, CheckedRangeCount(index, count));
 
     /// <inheritdoc/>
     public void Sort(IComparer<T>? comparer) => LongPointerSortHelper<T, TOperation>.Sort(First, LongCount, comparer);
 
     /// <inheritdoc/>
     public void Sort(long index, long count, IComparer<T>? comparer) =>
-        LongPointerSortHelper<T, TOperation>.Sort(First + CheckedIndex(index, true), CheckedCount(index, count), comparer);
+        LongPointerSortHelper<T, TOperation>.Sort(First + index, CheckedRangeCount(index, count), comparer);
 
     /// <inheritdoc/>
     public void Sort(Comparison<T> comparison) => Sort(0, LongCount, comparison);
 
     /// <inheritdoc/>
     public void Sort(long index, long count, Comparison<T> comparison) =>
-        LongPointerSortHelper<T, TOperation>.Sort(First + CheckedIndex(index, true), CheckedCount(index, count), comparison);
+        LongPointerSortHelper<T, TOperation>.Sort(First + index, CheckedRangeCount(index, count), comparison);
 
     /// <inheritdoc/>
     public readonly T[] ToArray() => ToArray(0, LongCount);
@@ -391,8 +413,7 @@ public unsafe struct StdVector<T, TMemorySpace, TOperation> : IStdVector<T>
 
     /// <inheritdoc/>
     public readonly T[] ToArray(long index, long count) {
-        _ = CheckedIndex(index, true);
-        _ = CheckedCount(index, count);
+        _ = CheckedRangeCount(index, count);
         if (count == 0)
             return Array.Empty<T>();
 
@@ -477,6 +498,52 @@ public unsafe struct StdVector<T, TMemorySpace, TOperation> : IStdVector<T>
     }
 
     /// <inheritdoc/>
+    public readonly long LongIndexOf(ReadOnlySpan<T> subsequence) => LongIndexOf(subsequence, 0, LongCount);
+    
+    /// <inheritdoc/>
+    public readonly long LongIndexOf(ReadOnlySpan<T> subsequence, long index) => LongIndexOf(subsequence, index, LongCount - index);
+    
+    /// <inheritdoc/>
+    public readonly long LongIndexOf(ReadOnlySpan<T> subsequence, long index, long count) {
+        fixed (T* p = subsequence)
+            return LongIndexOf(p, subsequence.Length, index, count);
+    }
+
+    /// <inheritdoc/>
+    public readonly long LongIndexOf(T* subsequence, nint subsequenceLength) => LongIndexOf(subsequence, subsequenceLength, 0, LongCount);
+    
+    /// <inheritdoc/>
+    public readonly long LongIndexOf(T* subsequence, nint subsequenceLength, long index) =>
+        LongIndexOf(subsequence, subsequenceLength, index, LongCount - index);
+    
+    /// <inheritdoc/>
+    public readonly long LongIndexOf(T* subsequence, nint subsequenceLength, long index, long count) {
+        _ = CheckedRangeCount(index, count);
+        if (subsequenceLength < 0)
+            throw new ArgumentOutOfRangeException(nameof(subsequenceLength), subsequenceLength, null);
+        if (subsequenceLength == 0)
+            return index;
+        if (count < subsequenceLength)
+            return -1;
+
+        var test = First + index;
+        var testEnd = test + count - subsequenceLength + 1;
+        for (; test < testEnd; ++test) {
+            if (!TOperation.Equals(*subsequence, *test))
+                continue;
+            var s = subsequence + 1;
+            var t = test + 1;
+            nint i = 1;
+            while (i < subsequenceLength && TOperation.Equals(*s++, *t++))
+                i++;
+            if (i == subsequenceLength)
+                return test - First;
+        }
+
+        return -1;
+    }
+
+    /// <inheritdoc/>
     public readonly long LongLastIndexOf(in T item) => LongLastIndexOf(item, 0, LongCount);
 
     /// <inheritdoc/>
@@ -499,6 +566,62 @@ public unsafe struct StdVector<T, TMemorySpace, TOperation> : IStdVector<T>
         for (var p = First + index; p >= end; p--, index--) {
             if (TOperation.Equals(item, *p))
                 return index;
+        }
+
+        return -1;
+    }
+
+    /// <inheritdoc/>
+    public readonly long LongLastIndexOf(ReadOnlySpan<T> subsequence) => LongLastIndexOf(subsequence, 0, LongCount);
+    
+    /// <inheritdoc/>
+    public readonly long LongLastIndexOf(ReadOnlySpan<T> subsequence, long index) => LongLastIndexOf(subsequence, index, index + 1);
+    
+    /// <inheritdoc/>
+    public readonly long LongLastIndexOf(ReadOnlySpan<T> subsequence, long index, long count) {
+        fixed (T* p = subsequence)
+            return LongLastIndexOf(p, subsequence.Length, index, index + 1);
+    }
+    
+    /// <inheritdoc/>
+    public readonly long LongLastIndexOf(T* subsequence, nint subsequenceLength) => LongLastIndexOf(subsequence, subsequenceLength, 0, LongCount);
+    
+    /// <inheritdoc/>
+    public readonly long LongLastIndexOf(T* subsequence, nint subsequenceLength, long index) =>
+        LongLastIndexOf(subsequence, subsequenceLength, index, index + 1);
+
+    /// <inheritdoc/>
+    public readonly long LongLastIndexOf(T* subsequence, nint subsequenceLength, long index, long count) {
+        if (LongCount == 0) {
+            if (index != -1)
+                throw new ArgumentOutOfRangeException(nameof(index), index, null);
+        } else {
+            if (index < -1 || index >= LongCount)
+                throw new ArgumentOutOfRangeException(nameof(index), index, null);
+        }
+
+        if (count < 0 || index > LongCount - count)
+            throw new ArgumentOutOfRangeException(nameof(count), count, null);
+
+        if (subsequenceLength < 0)
+            throw new ArgumentOutOfRangeException(nameof(subsequenceLength), subsequenceLength, null);
+        if (subsequenceLength == 0)
+            return index;
+        if (count < subsequenceLength)
+            return -1;
+
+        var testEnd = First + index;
+        var test = testEnd + count - subsequenceLength;
+        for (; test >= testEnd; --test) {
+            if (!TOperation.Equals(*subsequence, *test))
+                continue;
+            var s = subsequence + 1;
+            var t = test + 1;
+            nint i = 1;
+            while (i < subsequenceLength && TOperation.Equals(*s++, *t++))
+                i++;
+            if (i == subsequenceLength)
+                return test - First;
         }
 
         return -1;
@@ -583,7 +706,7 @@ public unsafe struct StdVector<T, TMemorySpace, TOperation> : IStdVector<T>
     }
 
     /// <inheritdoc/>
-    public readonly IStdVector<T>.Enumerator GetEnumerator() => new(First, Last);
+    public readonly IContinuousStorageContainer<T>.Enumerator GetEnumerator() => new(First, Last);
 
     private void ResizeUndefined(long newSize) {
         var prevCount = LongCount;
@@ -597,16 +720,18 @@ public unsafe struct StdVector<T, TMemorySpace, TOperation> : IStdVector<T>
     }
 
     [AssertionMethod]
-    private readonly long CheckedIndex(long index, bool allowEnd) {
+    private readonly long CheckedIndex(long index) {
         if (index < 0)
             throw new ArgumentOutOfRangeException(nameof(index), index, null);
-        if (index > LongCount || (index == LongCount && !allowEnd))
+        if (index >= LongCount)
             throw new ArgumentOutOfRangeException(nameof(index), index, null);
         return index;
     }
 
     [AssertionMethod]
-    private readonly long CheckedCount(long index, long count) {
+    private readonly long CheckedRangeCount(long index, long count) {
+        if (index < 0 || index > LongCount)
+            throw new ArgumentOutOfRangeException(nameof(index), index, null);
         if (count < 0 || count > LongCount - index)
             throw new ArgumentOutOfRangeException(nameof(count), count, null);
         return count;

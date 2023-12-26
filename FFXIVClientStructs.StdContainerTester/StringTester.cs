@@ -52,5 +52,12 @@ public static class StringTester {
         
         test1.AddString("氣気气");
         Console.WriteLine(test1);
+        
+        test1.InsertString(4, "test");
+        test1.InsertString(test1.LongCount - 4, "test");
+        Console.WriteLine(test1);
+        Console.WriteLine(test1.ContainsString("스트"));
+        Console.WriteLine(test1.IndexOfString("test"));
+        Console.WriteLine(test1.LastIndexOfString("test"));
     }
 }

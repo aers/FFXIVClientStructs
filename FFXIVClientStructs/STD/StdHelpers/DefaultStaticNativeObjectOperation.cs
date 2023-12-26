@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.STD.StdHelpers;
 /// <typeparam name="T">The type.</typeparam>
 public class DefaultStaticNativeObjectOperation<T> : IStaticNativeObjectOperation<T>
     where T : unmanaged {
-    private DefaultStaticNativeObjectOperation() { }
+    private DefaultStaticNativeObjectOperation() => throw new InvalidOperationException();
 
     /// <inheritdoc/>
     public static bool HasDefault {
