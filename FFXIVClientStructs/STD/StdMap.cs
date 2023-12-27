@@ -185,11 +185,13 @@ public unsafe struct StdMap<TKey, TValue, TMemorySpace>
     }
 
     /// <inheritdoc/>
-    public readonly bool TryGetValue(in TKey key, out TValue value) {
+    public readonly bool TryGetValue(in TKey key, out TValue value, bool copyCtor) {
         var loc = Tree.FindLowerBound(key);
         var eq = loc.KeyEquals(key);
-        if (eq)
+        if (eq && copyCtor)
             StdOps<TValue>.ConstructCopyInPlace(loc.Bound->_Myval.Item2, out value);
+        else if (eq)
+            value = loc.Bound->_Myval.Item2;
         else
             value = default;
         return eq;

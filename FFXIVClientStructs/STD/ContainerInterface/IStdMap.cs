@@ -120,8 +120,9 @@ public unsafe interface IStdMap<TKey, TValue>
     /// </summary>
     /// <param name="key">The key.</param>
     /// <param name="value">The corresponding value.</param>
+    /// <param name="copyCtor">If <c>true</c>, use <see cref="IStaticNativeObjectOperation{T}.ConstructCopyInPlace"/> to make a copy.</param>
     /// <returns><c>true</c> if a corresponding entry exists.</returns>
-    bool TryGetValue(in TKey key, out TValue value);
+    bool TryGetValue(in TKey key, out TValue value, bool copyCtor);
 
     /// <summary>
     /// Returns an <see cref="IEnumerable{T}"/> that iterates over the map in sorted order.
@@ -143,11 +144,11 @@ public unsafe interface IStdMap<TKey, TValue>
         CopyTo(typedArray, index);
     }
 
-    bool IDictionary<TKey, TValue>.TryGetValue(TKey key, out TValue value) => TryGetValue(key, out value);
+    bool IDictionary<TKey, TValue>.TryGetValue(TKey key, out TValue value) => TryGetValue(key, out value, false);
     bool IDictionary<TKey, TValue>.ContainsKey(TKey key) => ContainsKey(key);
     bool IDictionary<TKey, TValue>.Remove(TKey key) => Remove(key);
     bool IReadOnlyDictionary<TKey, TValue>.ContainsKey(TKey key) => ContainsKey(key);
-    bool IReadOnlyDictionary<TKey, TValue>.TryGetValue(TKey key, out TValue value) => TryGetValue(key, out value);
+    bool IReadOnlyDictionary<TKey, TValue>.TryGetValue(TKey key, out TValue value) => TryGetValue(key, out value, false);
     IEnumerator<KeyValuePair<TKey, TValue>> IEnumerable<KeyValuePair<TKey, TValue>>.GetEnumerator() => new KeyValuePairViewEnumerator(GetEnumerator());
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
@@ -186,11 +187,13 @@ public unsafe interface IStdMap<TKey, TValue>
         bool ICollection<TKey>.Remove(TKey item) => throw new NotSupportedException();
     }
 
-    public struct KeyEnumerator : IEnumerator<TKey> {
+    public struct KeyEnumerator : IEnumerator<TKey>, IEnumerable<TKey> {
         private RedBlackTree<StdPair<TKey, TValue>, TKey, PairKeyExtractor<TKey, TValue>>.Enumerator _enumerator;
 
         public KeyEnumerator(RedBlackTree<StdPair<TKey, TValue>, TKey, PairKeyExtractor<TKey, TValue>>* tree, bool ltr) =>
             _enumerator = new RedBlackTree<StdPair<TKey, TValue>, TKey, PairKeyExtractor<TKey, TValue>>.Enumerator(tree, ltr);
+        private KeyEnumerator(RedBlackTree<StdPair<TKey, TValue>, TKey, PairKeyExtractor<TKey, TValue>>.Enumerator enumerator) =>
+            _enumerator = enumerator;
 
         public readonly ref readonly TKey Current => ref _enumerator.Current.Item1;
         readonly TKey IEnumerator<TKey>.Current => Current;
@@ -200,6 +203,10 @@ public unsafe interface IStdMap<TKey, TValue>
         public bool DeleteAndMoveNext() => _enumerator.DeleteAndMoveNext();
         public void Reset() => _enumerator.Reset();
         public void Dispose() => _enumerator.Dispose();
+
+        public KeyEnumerator GetEnumerator() => new(_enumerator.GetEnumerator());
+        IEnumerator<TKey> IEnumerable<TKey>.GetEnumerator() => GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 
     public readonly struct ValueCollection : ICollection<TValue> {
@@ -242,11 +249,13 @@ public unsafe interface IStdMap<TKey, TValue>
         bool ICollection<TValue>.Remove(TValue item) => throw new NotSupportedException();
     }
 
-    public struct ValueEnumerator : IEnumerator<TValue> {
+    public struct ValueEnumerator : IEnumerator<TValue>, IEnumerable<TValue> {
         private RedBlackTree<StdPair<TKey, TValue>, TKey, PairKeyExtractor<TKey, TValue>>.Enumerator _enumerator;
 
         public ValueEnumerator(RedBlackTree<StdPair<TKey, TValue>, TKey, PairKeyExtractor<TKey, TValue>>* tree, bool ltr) =>
             _enumerator = new RedBlackTree<StdPair<TKey, TValue>, TKey, PairKeyExtractor<TKey, TValue>>.Enumerator(tree, ltr);
+        private ValueEnumerator(RedBlackTree<StdPair<TKey, TValue>, TKey, PairKeyExtractor<TKey, TValue>>.Enumerator enumerator) =>
+            _enumerator = enumerator;
 
         public readonly ref TValue Current => ref _enumerator.Current.Item2;
         readonly TValue IEnumerator<TValue>.Current => Current;
@@ -256,6 +265,10 @@ public unsafe interface IStdMap<TKey, TValue>
         public bool DeleteAndMoveNext() => _enumerator.DeleteAndMoveNext();
         public void Reset() => _enumerator.Reset();
         public void Dispose() => _enumerator.Dispose();
+
+        public ValueEnumerator GetEnumerator() => new(_enumerator.GetEnumerator());
+        IEnumerator<TValue> IEnumerable<TValue>.GetEnumerator() => GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 
     public struct KeyValuePairViewEnumerator : IEnumerator<KeyValuePair<TKey, TValue>> {

@@ -3,11 +3,11 @@ using FFXIVClientStructs.STD.Helper;
 
 namespace FFXIVClientStructs.STD;
 
-public struct StdMap<TKey, TValue> : IStdMap<TKey, TValue> 
+public struct StdMap<TKey, TValue> : IStdMap<TKey, TValue>
     where TKey : unmanaged
     where TValue : unmanaged {
     public StdMap<TKey, TValue, IStaticMemorySpace.Default> WithOps;
-    
+
     public static bool HasDefault => StdMap<TKey, TValue, IStaticMemorySpace.Default>.HasDefault;
     public static bool IsDisposable => StdMap<TKey, TValue, IStaticMemorySpace.Default>.IsDisposable;
     public static bool IsCopiable => StdMap<TKey, TValue, IStaticMemorySpace.Default>.IsCopiable;
@@ -36,7 +36,7 @@ public struct StdMap<TKey, TValue> : IStdMap<TKey, TValue>
     public readonly bool ContainsValue(in TValue value) => WithOps.ContainsValue(in value);
     public bool Remove(in TKey key) => WithOps.Remove(in key);
     public bool Remove(in TKey key, in TValue value) => WithOps.Remove(in key, in value);
-    public readonly bool TryGetValue(in TKey key, out TValue value) => WithOps.TryGetValue(in key, out value);
+    public readonly bool TryGetValue(in TKey key, out TValue value, bool copyCtor) => WithOps.TryGetValue(in key, out value, copyCtor);
     public readonly RedBlackTree<StdPair<TKey, TValue>, TKey, PairKeyExtractor<TKey, TValue>>.Enumerator GetEnumerator() => WithOps.GetEnumerator();
     public readonly RedBlackTree<StdPair<TKey, TValue>, TKey, PairKeyExtractor<TKey, TValue>>.Enumerator Reverse() => WithOps.Reverse();
     public void Dispose() => WithOps.Dispose();

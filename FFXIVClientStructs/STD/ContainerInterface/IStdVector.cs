@@ -76,21 +76,12 @@ public unsafe interface IStdVector<T> : IDisposable, IList, IList<T>, IReadOnlyL
 
     T IList<T>.this[int index] {
         get => this[index];
-        set {
-            ref var slot = ref this[index];
-            StdOps<T>.StaticDispose(ref slot);
-            StdOps<T>.ConstructCopyInPlace(value, out slot);
-        }
+        set => this[index] = value;
     }
 
     object? IList.this[int index] {
         get => this[index];
-        set {
-            var typedValue = (T)(value ?? throw new ArgumentNullException(nameof(value)));
-            ref var slot = ref this[index];
-            StdOps<T>.StaticDispose(ref slot);
-            StdOps<T>.ConstructCopyInPlace(typedValue, out slot);
-        }
+        set => this[index] = (T)(value ?? throw new ArgumentNullException(nameof(value)));
     }
 
     #endregion
