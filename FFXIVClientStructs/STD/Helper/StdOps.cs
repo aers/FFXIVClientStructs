@@ -10,6 +10,8 @@ namespace FFXIVClientStructs.STD.Helper;
 [SuppressMessage("ReSharper", "StaticMemberInGenericType")]
 public abstract class StdOps<T> : IStaticNativeObjectOperation<T>
     where T : unmanaged {
+    private static readonly CompareDelegate? InnerCompare;
+    private static readonly ContentEqualsDelegate? InnerContentEquals;
     private static readonly ConstructDefaultInPlaceDelegate? InnerConstructDefaultInPlace;
     private static readonly ConstructCopyInPlaceDelegate? InnerConstructCopyInPlace;
     private static readonly ConstructMoveInPlaceDelegate? InnerConstructMoveInPlace;
@@ -22,6 +24,8 @@ public abstract class StdOps<T> : IStaticNativeObjectOperation<T>
             IsCopiable = (bool)typeof(T).GetProperty(nameof(IsCopiable))!.GetValue(null)!;
             IsMovable = (bool)typeof(T).GetProperty(nameof(IsMovable))!.GetValue(null)!;
             IsDisposable = (bool)typeof(T).GetProperty(nameof(IsDisposable))!.GetValue(null)!;
+            InnerCompare = (CompareDelegate)Delegate.CreateDelegate(typeof(CompareDelegate), typeof(T), nameof(Compare));
+            InnerContentEquals = (ContentEqualsDelegate)Delegate.CreateDelegate(typeof(ContentEqualsDelegate), typeof(T), nameof(ContentEquals));
             InnerConstructDefaultInPlace = (ConstructDefaultInPlaceDelegate)Delegate.CreateDelegate(typeof(ConstructDefaultInPlaceDelegate), typeof(T), nameof(ConstructDefaultInPlace));
             InnerConstructCopyInPlace = (ConstructCopyInPlaceDelegate)Delegate.CreateDelegate(typeof(ConstructCopyInPlaceDelegate), typeof(T), nameof(ConstructCopyInPlace));
             InnerConstructMoveInPlace = (ConstructMoveInPlaceDelegate)Delegate.CreateDelegate(typeof(ConstructMoveInPlaceDelegate), typeof(T), nameof(ConstructMoveInPlace));
@@ -32,6 +36,10 @@ public abstract class StdOps<T> : IStaticNativeObjectOperation<T>
             IsDisposable = typeof(T).IsAssignableTo(typeof(IDisposable));
         }
     }
+
+    private delegate int CompareDelegate(in T left, in T right);
+
+    private delegate bool ContentEqualsDelegate(in T left, in T right);
 
     private delegate void ConstructDefaultInPlaceDelegate(out T item);
 
@@ -57,11 +65,13 @@ public abstract class StdOps<T> : IStaticNativeObjectOperation<T>
 
     /// <inheritdoc/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int Compare(in T left, in T right) => Comparer<T>.Default.Compare(left, right);
+    public static int Compare(in T left, in T right) =>
+        InnerCompare?.Invoke(left, right) ?? Comparer<T>.Default.Compare(left, right);
 
     /// <inheritdoc/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool ContentEquals(in T left, in T right) => EqualityComparer<T>.Default.Equals(left, right);
+    public static bool ContentEquals(in T left, in T right) =>
+        InnerContentEquals?.Invoke(left, right) ?? EqualityComparer<T>.Default.Equals(left, right);
 
     /// <inheritdoc/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]

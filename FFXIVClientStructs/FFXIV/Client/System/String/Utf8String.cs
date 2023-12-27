@@ -144,7 +144,17 @@ public unsafe partial struct Utf8String : ICreatable, IDisposable, IStaticNative
         target.SetString(source);
     }
 
-    public static void ConstructMoveInPlace(ref Utf8String source, out Utf8String target) => (target, source) = (source, default);
+    public static void ConstructMoveInPlace(ref Utf8String source, out Utf8String target) {
+        (target, source) = (source, default);
+        if (target.IsUsingInlineBuffer != 0)
+            target.StringPtr = (byte*)Unsafe.AsPointer(ref target.InlineBuffer[0]);
+    }
 
-    public static void Swap(ref Utf8String item1, ref Utf8String item2) => (item1, item2) = (item2, item1);
+    public static void Swap(ref Utf8String item1, ref Utf8String item2) {
+        (item1, item2) = (item2, item1);
+        if (item1.IsUsingInlineBuffer != 0)
+            item1.StringPtr = (byte*)Unsafe.AsPointer(ref item1.InlineBuffer[0]);
+        if (item2.IsUsingInlineBuffer != 0)
+            item2.StringPtr = (byte*)Unsafe.AsPointer(ref item2.InlineBuffer[0]);
+    }
 }

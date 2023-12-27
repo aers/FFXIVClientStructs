@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Diagnostics.CodeAnalysis;
-using FFXIVClientStructs.STD.Helper;
 
 namespace FFXIVClientStructs.STD.ContainerInterface;
 
@@ -496,9 +495,9 @@ public unsafe interface IStdVector<T> : IDisposable, IList, IList<T>, IReadOnlyL
     /// <summary>
     /// Sets the capacity of this vector.
     /// </summary>
-    /// <param name="newCapacity">The new capacity. Must be at least <see cref="StdVector{T,TMemorySpace,StdOps<T>}.LongCount"/>.</param>
+    /// <param name="newCapacity">The new capacity. Must be at least <see cref="StdVector{T,TMemorySpace}.LongCount"/>.</param>
     /// <returns>The new capacity.</returns>
-    /// <exception cref="ArgumentOutOfRangeException">When <paramref name="newCapacity"/> is less than <see cref="StdVector{T,TMemorySpace,StdOps<T>}.LongCount"/>.</exception>
+    /// <exception cref="ArgumentOutOfRangeException">When <paramref name="newCapacity"/> is less than <see cref="StdVector{T,TMemorySpace}.LongCount"/>.</exception>
     /// <exception cref="OutOfMemoryException">When failed to allocate memory as requested.</exception>
     long SetCapacity(long newCapacity);
 
