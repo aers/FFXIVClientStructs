@@ -54,7 +54,7 @@ public unsafe partial struct NetworkModule {
     [FieldOffset(0x9D8)] public void* Unk9D8;
     [FieldOffset(0x9E0)] public void* Unk9E0;
 
-    [FieldOffset(0x9E8)] public int Unk9E8; //Compared to 4
+    [FieldOffset(0x9E8)] public int Unk9E8; //Compared to 4, most likely state
 
     //OVERLAP!!
     [FieldOffset(0x9EC)] public int Unk9EC; //State related to Unk940
@@ -78,7 +78,8 @@ public unsafe partial struct NetworkModule {
     [FieldOffset(0xAA0)] public byte UnkAA0;
     [FieldOffset(0xAA8)] public TimeStruct UnkAA8;
 
-    [FieldOffset(0xAC0)] public void* UnkAC0; //related to 998
+    [FieldOffset(0xAC0)] public uint UnkAC0; //related to 998
+    [FieldOffset(0xAC4)] public uint UnkAC4;
     [FieldOffset(0xAC8)] public void* UnkAC8; //related to 9A0
     [FieldOffset(0xAD0)] public TimeStruct UnkAD0;
     [FieldOffset(0xAE8)] public void* UnkAE8; //init 0xbb8 (3000)
@@ -86,6 +87,7 @@ public unsafe partial struct NetworkModule {
     [FieldOffset(0xB08)] public TimeStruct UnkB08;
     [FieldOffset(0xB20)] public int UnkB20; //Init 0x42c80000
     [FieldOffset(0xB24)] public byte UnkB24; //Init 0
+    [FieldOffset(0xB26)] public short CurrentInstance;
     [FieldOffset(0xB28)] public byte UnkB28; //Init 0
     [FieldOffset(0xB2C)] public int UnkB2C; //Init 0xffffffff
     [FieldOffset(0xB30)] public int KeepAliveZone;

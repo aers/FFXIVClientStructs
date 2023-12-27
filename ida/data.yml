@@ -2438,9 +2438,12 @@ classes:
       0x14021B020: ctor
       0x14021B070: Initialize
       0x14021B7F0: dtor
+      #0x14021B870: IsConnected #unsure
+      0x14021B890: IsWinSockInitialized
       #fail 0x14021BE40: SetOSTypeAndVersion
       0x14021c440: FUN_14021c440
       0x14021CB20: IsInCrossWorldDuty
+      0x14021CBA0: GetCurrentInstance
   Application::Network::PacketReceiverCallbackInterface:
     vtbls:
       - ea: 0x1419DC088
