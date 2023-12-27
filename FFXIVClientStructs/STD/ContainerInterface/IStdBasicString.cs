@@ -1,8 +1,8 @@
 ﻿using System.Numerics;
 
-namespace FFXIVClientStructs.STD.StdHelpers;
+namespace FFXIVClientStructs.STD.ContainerInterface;
 
-public interface IStdBasicString<T> : IContinuousStorageContainer<T>
+public interface IStdBasicString<T> : IStdVector<T>
     where T : unmanaged, IBinaryNumber<T> {
     /// <summary>
     /// Appends the given string to this basic string.

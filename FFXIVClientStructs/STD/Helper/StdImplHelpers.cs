@@ -1,7 +1,7 @@
 using System.Collections;
 using JetBrains.Annotations;
 
-namespace FFXIVClientStructs.STD.StdHelpers;
+namespace FFXIVClientStructs.STD.Helper;
 
 public static class StdImplHelpers {
     // [MethodImpl(MethodImplOptions.AggressiveInlining)]

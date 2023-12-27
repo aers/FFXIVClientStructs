@@ -2,7 +2,7 @@ using System.Diagnostics;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 
-namespace FFXIVClientStructs.STD.StdHelpers;
+namespace FFXIVClientStructs.STD.Helper;
 
 /// <summary>
 /// Taken from ArraySortHelper.

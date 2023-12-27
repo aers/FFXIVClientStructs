@@ -1,9 +1,10 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 using FFXIVClientStructs.FFXIV.Client.System.Memory;
-using FFXIVClientStructs.STD.StdHelpers;
+using FFXIVClientStructs.STD.ContainerInterface;
+using FFXIVClientStructs.STD.Helper;
 using JetBrains.Annotations;
-using static FFXIVClientStructs.STD.StdHelpers.StdImplHelpers;
+using static FFXIVClientStructs.STD.Helper.StdImplHelpers;
 
 namespace FFXIVClientStructs.STD;
 
@@ -15,18 +16,18 @@ namespace FFXIVClientStructs.STD;
 [StructLayout(LayoutKind.Sequential)]
 [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
 public unsafe struct StdVector<T, TMemorySpace>
-    : IContinuousStorageContainer<T>
+    : IStdVector<T>
         , IStaticNativeObjectOperation<StdVector<T, TMemorySpace>>
     where T : unmanaged
     where TMemorySpace : IStaticMemorySpace {
 
-    /// <inheritdoc cref="IContinuousStorageContainer{T}.First"/>
+    /// <inheritdoc cref="IStdVector{T}.First"/>
     public T* First;
 
-    /// <inheritdoc cref="IContinuousStorageContainer{T}.Last"/>
+    /// <inheritdoc cref="IStdVector{T}.Last"/>
     public T* Last;
 
-    /// <inheritdoc cref="IContinuousStorageContainer{T}.End"/>
+    /// <inheritdoc cref="IStdVector{T}.End"/>
     public T* End;
 
     public static bool HasDefault => true;
@@ -59,13 +60,13 @@ public unsafe struct StdVector<T, TMemorySpace>
     }
 
     /// <inheritdoc/>
-    readonly T* IContinuousStorageContainer<T>.First => First;
+    readonly T* IStdVector<T>.First => First;
 
     /// <inheritdoc/>
-    readonly T* IContinuousStorageContainer<T>.Last => Last;
+    readonly T* IStdVector<T>.Last => Last;
 
     /// <inheritdoc/>
-    readonly T* IContinuousStorageContainer<T>.End => End;
+    readonly T* IStdVector<T>.End => End;
 
     /// <inheritdoc/>
     public readonly ref T this[long index] => ref First[CheckedIndex(index)];
@@ -138,7 +139,7 @@ public unsafe struct StdVector<T, TMemorySpace>
     /// <inheritdoc/>
     public readonly int CompareTo(object? obj) => obj switch {
         StdVector<T, TMemorySpace> other => CompareTo(other),
-        IContinuousStorageContainer<T> other => CompareTo(other),
+        IStdVector<T> other => CompareTo(other),
         null => 1,
         _ => throw new ArgumentException(null, nameof(obj)),
     };
@@ -147,7 +148,7 @@ public unsafe struct StdVector<T, TMemorySpace>
     public readonly int CompareTo(in StdVector<T, TMemorySpace> other) => Compare(this, other);
 
     /// <inheritdoc/>
-    public readonly int CompareTo(IContinuousStorageContainer<T>? other) {
+    public readonly int CompareTo(IStdVector<T>? other) {
         if (other is null)
             return 1;
         var lv = First;
@@ -166,7 +167,7 @@ public unsafe struct StdVector<T, TMemorySpace>
     }
 
     /// <inheritdoc/>
-    public readonly bool Equals(IContinuousStorageContainer<T>? other) =>
+    public readonly bool Equals(IStdVector<T>? other) =>
         other is StdVector<T, TMemorySpace> sv && ContentEquals(this, sv);
 
     /// <inheritdoc/>
@@ -224,7 +225,7 @@ public unsafe struct StdVector<T, TMemorySpace>
             item,
             comparer);
 
-    /// <inheritdoc cref="IContinuousStorageContainer{T}.Clear"/>
+    /// <inheritdoc cref="IStdVector{T}.Clear"/>
     public void Clear() {
         if (!StdOps<T>.IsDisposable) {
             Last = First;
@@ -330,7 +331,7 @@ public unsafe struct StdVector<T, TMemorySpace>
             throw new InvalidOperationException("Items are not copiable.");
 
         switch (collection) {
-            case IContinuousStorageContainer<T> isv when isv.PointerEquals(this):
+            case IStdVector<T> isv when isv.PointerEquals(this):
                 // We're inserting this vector into itself.
                 EnsureCapacity(checked(prevCount * 2));
                 CopyInsideUnchecked(index, index + prevCount, prevCount - index);
@@ -798,7 +799,7 @@ public unsafe struct StdVector<T, TMemorySpace>
     }
 
     /// <inheritdoc/>
-    public readonly IContinuousStorageContainer<T>.Enumerator GetEnumerator() => new(First, Last);
+    public readonly IStdVector<T>.Enumerator GetEnumerator() => new(First, Last);
 
     private void ResizeUndefined(long newSize) {
         var prevCount = LongCount;

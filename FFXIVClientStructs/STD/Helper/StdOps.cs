@@ -1,22 +1,20 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 
-namespace FFXIVClientStructs.STD.StdHelpers;
+namespace FFXIVClientStructs.STD.Helper;
 
 /// <summary>
 /// Marks that <typeparamref name="T"/> might be a <see cref="IDisposable"/>.
 /// </summary>
 /// <typeparam name="T">The type.</typeparam>
 [SuppressMessage("ReSharper", "StaticMemberInGenericType")]
-public class StdOps<T> : IStaticNativeObjectOperation<T>
+public abstract class StdOps<T> : IStaticNativeObjectOperation<T>
     where T : unmanaged {
     private static readonly ConstructDefaultInPlaceDelegate? InnerConstructDefaultInPlace;
     private static readonly ConstructCopyInPlaceDelegate? InnerConstructCopyInPlace;
     private static readonly ConstructMoveInPlaceDelegate? InnerConstructMoveInPlace;
     private static readonly StaticDisposeDelegate? InnerStaticDispose;
     private static readonly SwapDelegate? InnerSwap;
-
-    private StdOps() => throw new InvalidOperationException();
 
     static StdOps() {
         if (typeof(T).IsAssignableTo(typeof(IStaticNativeObjectOperation<T>))) {

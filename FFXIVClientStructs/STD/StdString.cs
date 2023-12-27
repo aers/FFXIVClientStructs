@@ -1,17 +1,18 @@
-using FFXIVClientStructs.STD.StdHelpers;
+using FFXIVClientStructs.STD.ContainerInterface;
+using FFXIVClientStructs.STD.Helper;
 
 namespace FFXIVClientStructs.STD;
 
 /// <summary>
 /// A <see cref="StdBasicString{T,TEncoding,TMemorySpace}"/> using
-/// <see cref="DefaultStaticMemorySpace"/>, <see cref="IStaticEncoding.System"/> and <see cref="byte"/>.<br />
+/// <see cref="IStaticMemorySpace.Default"/>, <see cref="IStaticEncoding.System"/> and <see cref="byte"/>.<br />
 /// Encoding contained within is assumed to be the system default encoding.
 /// </summary>
 [StructLayout(LayoutKind.Explicit, Size = 0x20)]
 public unsafe struct StdString
     : IStdBasicString<byte>
         , IStaticNativeObjectOperation<StdString> {
-    [FieldOffset(0x0)] public StdBasicString<byte, IStaticEncoding.System, DefaultStaticMemorySpace> BasicString;
+    [FieldOffset(0x0)] public StdBasicString<byte, IStaticEncoding.System, IStaticMemorySpace.Default> BasicString;
     [FieldOffset(0x0)] public byte* BufferPtr;
     [FieldOffset(0x0)] public fixed byte Buffer[16];
     /// <summary>
@@ -20,10 +21,10 @@ public unsafe struct StdString
     [FieldOffset(0x10)] public ulong Length;
     [FieldOffset(0x18)] public ulong Capacity;
 
-    public static bool HasDefault => StdBasicString<char, IStaticEncoding.System, DefaultStaticMemorySpace>.HasDefault;
-    public static bool IsDisposable => StdBasicString<char, IStaticEncoding.System, DefaultStaticMemorySpace>.IsDisposable;
-    public static bool IsCopiable => StdBasicString<char, IStaticEncoding.System, DefaultStaticMemorySpace>.IsCopiable;
-    public static bool IsMovable => StdBasicString<char, IStaticEncoding.System, DefaultStaticMemorySpace>.IsMovable;
+    public static bool HasDefault => StdBasicString<char, IStaticEncoding.System, IStaticMemorySpace.Default>.HasDefault;
+    public static bool IsDisposable => StdBasicString<char, IStaticEncoding.System, IStaticMemorySpace.Default>.IsDisposable;
+    public static bool IsCopiable => StdBasicString<char, IStaticEncoding.System, IStaticMemorySpace.Default>.IsCopiable;
+    public static bool IsMovable => StdBasicString<char, IStaticEncoding.System, IStaticMemorySpace.Default>.IsMovable;
 
     public byte* First => BasicString.First;
     public byte* Last => BasicString.Last;
@@ -36,7 +37,7 @@ public unsafe struct StdString
         get => BasicString.LongCount;
         set => BasicString.LongCount = value;
     }
-    int IContinuousStorageContainer<byte>.Capacity {
+    int IStdVector<byte>.Capacity {
         get => BasicString.Capacity;
         set => BasicString.Capacity = value;
     }
@@ -48,22 +49,22 @@ public unsafe struct StdString
 
     public static implicit operator ReadOnlySpan<byte>(in StdString value) => value.AsSpan();
 
-    public static int Compare(in StdString left, in StdString right) => StdBasicString<byte, IStaticEncoding.System, DefaultStaticMemorySpace>.Compare(left.BasicString, right.BasicString);
-    public static bool ContentEquals(in StdString left, in StdString right) => StdBasicString<byte, IStaticEncoding.System, DefaultStaticMemorySpace>.ContentEquals(left.BasicString, right.BasicString);
+    public static int Compare(in StdString left, in StdString right) => StdBasicString<byte, IStaticEncoding.System, IStaticMemorySpace.Default>.Compare(left.BasicString, right.BasicString);
+    public static bool ContentEquals(in StdString left, in StdString right) => StdBasicString<byte, IStaticEncoding.System, IStaticMemorySpace.Default>.ContentEquals(left.BasicString, right.BasicString);
     public static void ConstructDefaultInPlace(out StdString item) {
         item = default;
-        StdBasicString<byte, IStaticEncoding.System, DefaultStaticMemorySpace>.ConstructDefaultInPlace(out item.BasicString);
+        StdBasicString<byte, IStaticEncoding.System, IStaticMemorySpace.Default>.ConstructDefaultInPlace(out item.BasicString);
     }
-    public static void StaticDispose(ref StdString item) => StdBasicString<byte, IStaticEncoding.System, DefaultStaticMemorySpace>.StaticDispose(ref item.BasicString);
+    public static void StaticDispose(ref StdString item) => StdBasicString<byte, IStaticEncoding.System, IStaticMemorySpace.Default>.StaticDispose(ref item.BasicString);
     public static void ConstructCopyInPlace(in StdString source, out StdString target) {
         target = default;
-        StdBasicString<byte, IStaticEncoding.System, DefaultStaticMemorySpace>.ConstructCopyInPlace(in source.BasicString, out target.BasicString);
+        StdBasicString<byte, IStaticEncoding.System, IStaticMemorySpace.Default>.ConstructCopyInPlace(in source.BasicString, out target.BasicString);
     }
     public static void ConstructMoveInPlace(ref StdString source, out StdString target) {
         target = default;
-        StdBasicString<byte, IStaticEncoding.System, DefaultStaticMemorySpace>.ConstructMoveInPlace(ref source.BasicString, out target.BasicString);
+        StdBasicString<byte, IStaticEncoding.System, IStaticMemorySpace.Default>.ConstructMoveInPlace(ref source.BasicString, out target.BasicString);
     }
-    public static void Swap(ref StdString item1, ref StdString item2) => StdBasicString<byte, IStaticEncoding.System, DefaultStaticMemorySpace>.Swap(ref item1.BasicString, ref item2.BasicString);
+    public static void Swap(ref StdString item1, ref StdString item2) => StdBasicString<byte, IStaticEncoding.System, IStaticMemorySpace.Default>.Swap(ref item1.BasicString, ref item2.BasicString);
 
     public readonly Span<byte> AsSpan() => BasicString.AsSpan();
     public readonly Span<byte> AsSpan(long index) => BasicString.AsSpan(index);
@@ -79,14 +80,14 @@ public unsafe struct StdString
     public readonly long BinarySearch(long index, long count, in byte item, IComparer<byte>? comparer) => BasicString.BinarySearch(index, count, in item, comparer);
     public void Clear() => BasicString.Clear();
     public readonly int CompareTo(object? obj) => BasicString.CompareTo(obj);
-    public readonly int CompareTo(IContinuousStorageContainer<byte>? other) => BasicString.CompareTo(other);
+    public readonly int CompareTo(IStdVector<byte>? other) => BasicString.CompareTo(other);
     public readonly bool Contains(in byte item) => BasicString.Contains(in item);
     public readonly bool Contains(byte* subsequence, IntPtr length) => BasicString.Contains(subsequence, length);
     public readonly bool Contains(ReadOnlySpan<byte> subsequence) => BasicString.Contains(subsequence);
     public readonly bool ContainsString(ReadOnlySpan<char> str) => BasicString.ContainsString(str);
     public void Dispose() => BasicString.Dispose();
     public readonly override bool Equals(object? obj) => obj is StdString s && Equals(s);
-    public readonly bool Equals(IContinuousStorageContainer<byte>? other) => other is StdString s && Equals(s);
+    public readonly bool Equals(IStdVector<byte>? other) => other is StdString s && Equals(s);
     public readonly bool Equals(in StdString other) => BasicString.Equals(other.BasicString);
     public readonly bool Exists(Predicate<byte> match) => BasicString.Exists(match);
     public readonly byte? Find(Predicate<byte> match) => BasicString.Find(match);
@@ -97,7 +98,7 @@ public unsafe struct StdString
     public readonly int FindLastIndex(int startIndex, Predicate<byte> match) => BasicString.FindLastIndex(startIndex, match);
     public readonly int FindLastIndex(int startIndex, int count, Predicate<byte> match) => BasicString.FindLastIndex(startIndex, count, match);
     public readonly void ForEach(Action<byte> action) => BasicString.ForEach(action);
-    public readonly IContinuousStorageContainer<byte>.Enumerator GetEnumerator() => BasicString.GetEnumerator();
+    public readonly IStdVector<byte>.Enumerator GetEnumerator() => BasicString.GetEnumerator();
     public readonly override int GetHashCode() => BasicString.GetHashCode();
     public readonly override string ToString() => BasicString.ToString();
     public readonly int IndexOf(in byte item) => BasicString.IndexOf(in item);

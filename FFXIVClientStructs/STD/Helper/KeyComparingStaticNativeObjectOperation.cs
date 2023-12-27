@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
-namespace FFXIVClientStructs.STD.StdHelpers;
+namespace FFXIVClientStructs.STD.Helper;
 
 [SuppressMessage("ReSharper", "StaticMemberInGenericType")]
 public class KeyComparingStaticNativeObjectOperation<TKey, TValue, TKeyOperation, TValueOperation>

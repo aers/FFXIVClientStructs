@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Diagnostics.CodeAnalysis;
 
-namespace FFXIVClientStructs.STD.StdHelpers;
+namespace FFXIVClientStructs.STD.ContainerInterface;
 
 /// <summary>
 /// Base interface for containers with continuous data storage.
@@ -15,7 +15,7 @@ namespace FFXIVClientStructs.STD.StdHelpers;
 /// </remarks>
 [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
 [SuppressMessage("ReSharper", "PossibleInterfaceMemberAmbiguity")]
-public unsafe interface IContinuousStorageContainer<T> : IDisposable, IList, IList<T>, IReadOnlyList<T>, IComparable, IComparable<IContinuousStorageContainer<T>>, IEquatable<IContinuousStorageContainer<T>>
+public unsafe interface IStdVector<T> : IDisposable, IList, IList<T>, IReadOnlyList<T>, IComparable, IComparable<IStdVector<T>>, IEquatable<IStdVector<T>>
     where T : unmanaged {
     /// <summary>
     /// Gets the pointer to the first element of the vector. <c>null</c> if empty.
@@ -466,11 +466,11 @@ public unsafe interface IContinuousStorageContainer<T> : IDisposable, IList, ILi
     long LongLastIndexOf(T* subsequence, nint subsequenceLength, long index, long count);
 
     /// <summary>
-    /// Determines if two instances of <see cref="IContinuousStorageContainer{T}"/> have same pointers.
+    /// Determines if two instances of <see cref="IStdVector{T}"/> have same pointers.
     /// </summary>
     /// <param name="other">The other instance.</param>
     /// <returns><c>true</c> if equals.</returns>
-    public bool PointerEquals(IContinuousStorageContainer<T> other) =>
+    public bool PointerEquals(IStdVector<T> other) =>
         First == other.First && Last == other.Last && End == other.End;
 
     /// <see cref="List{T}.EnsureCapacity"/>
@@ -568,7 +568,7 @@ public unsafe interface IContinuousStorageContainer<T> : IDisposable, IList, ILi
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
     /// <summary>
-    /// Enumerator for <see cref="IContinuousStorageContainer{T}"/>.
+    /// Enumerator for <see cref="IStdVector{T}"/>.
     /// </summary>
     public struct Enumerator : IEnumerable<T>, IEnumerator<T> {
         private readonly T* _ownerFirst;

@@ -3,13 +3,12 @@ using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using FFXIVClientStructs.FFXIV.Client.System.Memory;
 
-namespace FFXIVClientStructs.STD.StdHelpers;
+namespace FFXIVClientStructs.STD.Helper;
 
 [StructLayout(LayoutKind.Sequential)]
-public unsafe struct RedBlackTree<T, TMemorySpace>
-    : IEquatable<RedBlackTree<T, TMemorySpace>>
-    where T : unmanaged
-    where TMemorySpace : IStaticMemorySpace {
+public unsafe struct RedBlackTree<T>
+    : IEquatable<RedBlackTree<T>>
+    where T : unmanaged {
     public Node* Head;
     public long LongCount;
 
@@ -21,8 +20,8 @@ public unsafe struct RedBlackTree<T, TMemorySpace>
         Black,
     }
 
-    public readonly RedBlackTree<T, TMemorySpace>* Pointer =>
-        (RedBlackTree<T, TMemorySpace>*) Unsafe.AsPointer(ref Unsafe.AsRef(in this));
+    public readonly RedBlackTree<T>* Pointer =>
+        (RedBlackTree<T>*)Unsafe.AsPointer(ref Unsafe.AsRef(in this));
 
     /// <summary>
     /// Gets the rightmost node in subtree at <paramref name="node"/>.
@@ -42,9 +41,9 @@ public unsafe struct RedBlackTree<T, TMemorySpace>
         return node;
     }
 
-    public readonly bool Equals(in RedBlackTree<T, TMemorySpace> other) => Head == other.Head && LongCount == other.LongCount;
-    readonly bool IEquatable<RedBlackTree<T, TMemorySpace>>.Equals(RedBlackTree<T, TMemorySpace> other) => Equals(other);
-    public readonly override bool Equals(object? obj) => obj is RedBlackTree<T, TMemorySpace> t && Equals(t);
+    public readonly bool Equals(in RedBlackTree<T> other) => Head == other.Head && LongCount == other.LongCount;
+    readonly bool IEquatable<RedBlackTree<T>>.Equals(RedBlackTree<T> other) => Equals(other);
+    public readonly override bool Equals(object? obj) => obj is RedBlackTree<T> t && Equals(t);
 
     public void EraseHead() {
         if (Head is null)
@@ -226,7 +225,7 @@ public unsafe struct RedBlackTree<T, TMemorySpace>
     }
 
     public void ExtractAndErase(Node* node) => Node.FreeNode(Extract(node));
-    
+
     public readonly FindResult FindUpperBound(in T key) {
         if (Head is null)
             return default;
@@ -269,9 +268,10 @@ public unsafe struct RedBlackTree<T, TMemorySpace>
 
     public readonly override int GetHashCode() => HashCode.Combine((nint)Head, LongCount);
 
-    public Node* GetOrCreateHead() {
+    public Node* GetOrCreateHead<TMemorySpace>()
+        where TMemorySpace : IStaticMemorySpace {
         if (Head is null)
-            Head = Node.BuyHeadNode();
+            Head = Node.BuyHeadNode<TMemorySpace>();
         return Head;
     }
 
@@ -404,7 +404,8 @@ public unsafe struct RedBlackTree<T, TMemorySpace>
         wherenode->_Parent = promotingNode;
     }
 
-    public bool TryInsertEmpty(in T key, out Node* node) {
+    public bool TryInsertEmpty<TMemorySpace>(in T key, out Node* node)
+        where TMemorySpace : IStaticMemorySpace {
         var loc = FindLowerBound(key);
         if (loc.Bound is not null && !loc.Bound->_Isnil && StdOps<T>.ContentEquals(loc.Bound->_Myval, key)) {
             node = null;
@@ -412,8 +413,8 @@ public unsafe struct RedBlackTree<T, TMemorySpace>
         }
 
         if (loc.Location.Parent is null)
-            loc.Location = new TreeId { Parent = GetOrCreateHead()->_Parent, Child = TreeChild.Right };
-        node = Insert(loc.Location, Node.BuyNode(Head));
+            loc.Location = new TreeId { Parent = GetOrCreateHead<TMemorySpace>()->_Parent, Child = TreeChild.Right };
+        node = Insert(loc.Location, Node.BuyNode<TMemorySpace>(Head));
         return true;
     }
 
@@ -444,7 +445,8 @@ public unsafe struct RedBlackTree<T, TMemorySpace>
         public byte _19;
         public T _Myval;
 
-        public static Node* BuyHeadNode(){
+        public static Node* BuyHeadNode<TMemorySpace>()
+            where TMemorySpace : IStaticMemorySpace {
             var n = (Node*)TMemorySpace.Allocate((nuint)sizeof(Node), 0x10);
             if (n == null)
                 throw new OutOfMemoryException();
@@ -455,7 +457,8 @@ public unsafe struct RedBlackTree<T, TMemorySpace>
             return n;
         }
 
-        public static Node* BuyNode(Node* head){
+        public static Node* BuyNode<TMemorySpace>(Node* head)
+            where TMemorySpace : IStaticMemorySpace {
             var n = (Node*)TMemorySpace.Allocate((nuint)sizeof(Node), 0x10);
             if (n == null)
                 throw new OutOfMemoryException();
@@ -508,11 +511,11 @@ public unsafe struct RedBlackTree<T, TMemorySpace>
     }
 
     public struct Enumerator : IEnumerable<T>, IEnumerator<T> {
-        private readonly RedBlackTree<T, TMemorySpace>* _owner;
+        private readonly RedBlackTree<T>* _owner;
         private readonly bool _ltr;
         private Node* _current;
 
-        internal Enumerator(RedBlackTree<T, TMemorySpace>* owner, bool ltr) {
+        internal Enumerator(RedBlackTree<T>* owner, bool ltr) {
             _owner = owner;
             _ltr = ltr;
             Reset();
@@ -532,7 +535,7 @@ public unsafe struct RedBlackTree<T, TMemorySpace>
                 _current = _current == null ? _owner->Head->_Left : _current->Next();
             else
                 _current = _current == null ? _owner->Head->_Right : _current->Prev();
-            
+
             return !_current->_Isnil;
         }
 

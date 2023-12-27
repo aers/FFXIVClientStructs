@@ -1,4 +1,4 @@
-namespace FFXIVClientStructs.STD.StdHelpers;
+namespace FFXIVClientStructs.STD.Helper;
 
 /// <summary>
 /// Static instructions for how to deal with a type.

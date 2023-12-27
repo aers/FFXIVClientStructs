@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
-using FFXIVClientStructs.STD.StdHelpers;
+using FFXIVClientStructs.STD.Helper;
 
 namespace FFXIVClientStructs.STD;
 

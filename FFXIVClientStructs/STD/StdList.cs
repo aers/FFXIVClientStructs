@@ -1,7 +1,8 @@
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using FFXIVClientStructs.FFXIV.Client.System.Memory;
-using FFXIVClientStructs.STD.StdHelpers;
+using FFXIVClientStructs.STD.ContainerInterface;
+using FFXIVClientStructs.STD.Helper;
 
 namespace FFXIVClientStructs.STD;
 

@@ -3,9 +3,10 @@ using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 using FFXIVClientStructs.FFXIV.Client.System.Memory;
-using FFXIVClientStructs.STD.StdHelpers;
+using FFXIVClientStructs.STD.ContainerInterface;
+using FFXIVClientStructs.STD.Helper;
 using JetBrains.Annotations;
-using static FFXIVClientStructs.STD.StdHelpers.StdImplHelpers;
+using static FFXIVClientStructs.STD.Helper.StdImplHelpers;
 
 namespace FFXIVClientStructs.STD;
 
@@ -52,7 +53,7 @@ public unsafe struct StdBasicString<T, TEncoding, TMemorySpace>
     /// <inheritdoc/>
     public readonly T* End => First + ULongCapacity;
 
-    /// <inheritdoc cref="IContinuousStorageContainer{T}.Count"/>
+    /// <inheritdoc cref="IStdVector{T}.Count"/>
     public int Count {
         readonly get => checked((int)ULongLength);
         set => Resize(value);
@@ -209,7 +210,7 @@ public unsafe struct StdBasicString<T, TEncoding, TMemorySpace>
     readonly int IComparable<StdBasicString<T, TEncoding, TMemorySpace>>.CompareTo(StdBasicString<T, TEncoding, TMemorySpace> other) => CompareTo(other);
 
     /// <inheritdoc/>
-    public readonly int CompareTo(IContinuousStorageContainer<T>? other) {
+    public readonly int CompareTo(IStdVector<T>? other) {
         if (other is null)
             return 1;
         var lv = First;
@@ -230,7 +231,7 @@ public unsafe struct StdBasicString<T, TEncoding, TMemorySpace>
     /// <inheritdoc/>
     public readonly int CompareTo(object? obj) => obj is null ? 1 : CompareTo((StdBasicString<T, TEncoding, TMemorySpace>)obj);
 
-    /// <inheritdoc cref="IContinuousStorageContainer{T}.Clear"/>
+    /// <inheritdoc cref="IStdVector{T}.Clear"/>
     public void Clear() => ResizeUndefined(0);
 
     /// <inheritdoc/>
@@ -255,7 +256,7 @@ public unsafe struct StdBasicString<T, TEncoding, TMemorySpace>
     public readonly override bool Equals(object? obj) => obj is StdBasicString<T, TEncoding, TMemorySpace> sbs && Equals(sbs);
 
     /// <inheritdoc/>
-    public readonly bool Equals(IContinuousStorageContainer<T>? obj) => obj is StdBasicString<T, TEncoding, TMemorySpace> sbs && Equals(sbs);
+    public readonly bool Equals(IStdVector<T>? obj) => obj is StdBasicString<T, TEncoding, TMemorySpace> sbs && Equals(sbs);
 
     /// <inheritdoc cref="Equals(object?)"/>
     public readonly bool Equals(in StdBasicString<T, TEncoding, TMemorySpace> other) {
@@ -306,7 +307,7 @@ public unsafe struct StdBasicString<T, TEncoding, TMemorySpace>
     }
 
     /// <inheritdoc/>
-    public readonly IContinuousStorageContainer<T>.Enumerator GetEnumerator() => new(First, Last);
+    public readonly IStdVector<T>.Enumerator GetEnumerator() => new(First, Last);
 
     /// <inheritdoc/>
     public override int GetHashCode() {
@@ -368,7 +369,7 @@ public unsafe struct StdBasicString<T, TEncoding, TMemorySpace>
             throw new ArgumentOutOfRangeException(nameof(index), index, null);
 
         switch (collection) {
-            case IContinuousStorageContainer<T> isv when isv.PointerEquals(this):
+            case IStdVector<T> isv when isv.PointerEquals(this):
                 // We're inserting this vector into itself.
                 EnsureCapacity(checked(prevCount * 2));
                 CopyInside(index, index + prevCount, prevCount - index);
