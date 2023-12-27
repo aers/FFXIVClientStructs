@@ -198,6 +198,17 @@ public unsafe struct StdMap<TKey, TValue, TMemorySpace>
     }
 
     /// <inheritdoc/>
+    public readonly bool TryGetValuePointer(in TKey key, out TValue* value) {
+        var loc = Tree.FindLowerBound(key);
+        var eq = loc.KeyEquals(key);
+        if (eq)
+            value = &loc.Bound->_Myval.Item2;
+        else
+            value = default;
+        return eq;
+    }
+
+    /// <inheritdoc/>
     public void Add(KeyValuePair<TKey, TValue> item) {
         if (!TryAddValueKCopyVCopy(item.Key, item.Value))
             throw new ArgumentException("An element with the same key already exists.", nameof(item));

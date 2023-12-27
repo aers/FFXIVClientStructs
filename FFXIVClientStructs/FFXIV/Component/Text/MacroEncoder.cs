@@ -17,12 +17,10 @@ public unsafe partial struct MacroEncoder {
     [FieldOffset(0x2A8)] public Utf8String Str7;
 
     public MacroCodeDescription* GetMacroCode(string code) {
-        foreach (ref var node in MacroCodeMap) {
-            if (node.Item1.EqualsString(code))
-                return (MacroCodeDescription*) Unsafe.AsPointer(ref node.Item2);
-        }
-        
-        return null;
+        using var us = new Utf8String();
+        us.Ctor();
+        us.SetString(code);
+        return MacroCodeMap.TryGetValuePointer(us, out var ptr) ? ptr : null;
     }
 
     public string? GetMacroString(byte code) {

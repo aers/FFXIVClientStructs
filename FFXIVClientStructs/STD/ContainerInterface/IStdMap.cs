@@ -121,8 +121,16 @@ public unsafe interface IStdMap<TKey, TValue>
     /// <param name="key">The key.</param>
     /// <param name="value">The corresponding value.</param>
     /// <param name="copyCtor">If <c>true</c>, use <see cref="IStaticNativeObjectOperation{T}.ConstructCopyInPlace"/> to make a copy.</param>
-    /// <returns><c>true</c> if a corresponding entry exists.</returns>
+    /// <returns><c>true</c> if corresponding entry exists.</returns>
     bool TryGetValue(in TKey key, out TValue value, bool copyCtor);
+
+    /// <summary>
+    /// Attempts to get the pointer to the value corresponding to <paramref name="key"/>/
+    /// </summary>
+    /// <param name="key">The key.</param>
+    /// <param name="value">The corresponding value.</param>
+    /// <returns><c>true</c> if corresponding entry exists.</returns>
+    public bool TryGetValuePointer(in TKey key, out TValue* value);
 
     /// <summary>
     /// Returns an <see cref="IEnumerable{T}"/> that iterates over the map in sorted order.

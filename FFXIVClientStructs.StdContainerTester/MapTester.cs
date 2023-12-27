@@ -33,5 +33,23 @@ public static class MapTester {
 
             Console.WriteLine(string.Join(", ", map.Select(x => x.ToString())));
         }
+
+        using (var map = new StdMap<StdWString, StdWString>()) {
+            using var key = new StdWString();
+            using var value = new StdWString();
+            key.AddString("k1");
+            value.AddString("v1");
+            map.TryAddValueKMoveVMove(ref Unsafe.AsRef(in key), ref Unsafe.AsRef(in value));
+
+            key.AddString("k2");
+            value.AddString("v2");
+            map.TryAddValueKMoveVMove(ref Unsafe.AsRef(in key), ref Unsafe.AsRef(in value));
+
+            key.AddString("k1");
+            value.AddString("aaaaaaaaaaaaaaaa");
+            StdOps<StdWString>.Swap(ref map[key], ref Unsafe.AsRef(in value));
+
+            Console.WriteLine(string.Join(", ", map.Select(x => x.ToString())));
+        }
     }
 }
