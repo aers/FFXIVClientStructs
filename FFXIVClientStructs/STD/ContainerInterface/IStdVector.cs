@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Diagnostics.CodeAnalysis;
+using FFXIVClientStructs.STD.Helper;
 
 namespace FFXIVClientStructs.STD.ContainerInterface;
 
@@ -75,12 +76,21 @@ public unsafe interface IStdVector<T> : IDisposable, IList, IList<T>, IReadOnlyL
 
     T IList<T>.this[int index] {
         get => this[index];
-        set => this[index] = value;
+        set {
+            ref var slot = ref this[index];
+            StdOps<T>.StaticDispose(ref slot);
+            StdOps<T>.ConstructCopyInPlace(value, out slot);
+        }
     }
 
     object? IList.this[int index] {
         get => this[index];
-        set => this[index] = (T)(value ?? throw new ArgumentNullException(nameof(value)));
+        set {
+            var typedValue = (T)(value ?? throw new ArgumentNullException(nameof(value)));
+            ref var slot = ref this[index];
+            StdOps<T>.StaticDispose(ref slot);
+            StdOps<T>.ConstructCopyInPlace(typedValue, out slot);
+        }
     }
 
     #endregion

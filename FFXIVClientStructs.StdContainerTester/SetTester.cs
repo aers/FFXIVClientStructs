@@ -1,10 +1,8 @@
-﻿using FFXIVClientStructs.Interop;
-using FFXIVClientStructs.STD;
-using FFXIVClientStructs.STD.Helper;
+﻿using FFXIVClientStructs.STD;
 
 namespace FFXIVClientStructs.StdContainerTester;
 
-public static unsafe class SetTester {
+public static class SetTester {
     public static void Test() {
         using var set1 = new StdSet<int>();
         for (var i = 1; i <= 8; i++)
@@ -17,7 +15,6 @@ public static unsafe class SetTester {
         for (var i = 6; i <= 10; i++)
             set1.Remove(i);
 
-        DumpNodes<int>(set1.WithOps.Tree.Head);
         Console.WriteLine(string.Join(", ", set1.ToArrayReverse().Select(x => x.ToString())));
 
         using var set2 = new StdSet<int>();
@@ -60,25 +57,5 @@ public static unsafe class SetTester {
         ts.AddString("aaa");
         Console.WriteLine(set4.Contains(ts));
         Console.WriteLine(string.Join(", ", set4.Select(x => x.ToString())));
-    }
-
-    private static void DumpNodes<T>(Pointer<RedBlackTree<T>.Node> x)
-        where T : unmanaged {
-        var nodeNames = new Dictionary<Pointer<RedBlackTree<T>.Node>, T>();
-        var q = new Queue<Pointer<RedBlackTree<T>.Node>>();
-        q.Enqueue(x);
-        while (q.TryDequeue(out x)) {
-            if (!nodeNames.TryAdd(x, x.Value->_Myval))
-                continue;
-            if (!nodeNames.ContainsKey(x.Value->_Left))
-                q.Enqueue(x.Value->_Left);
-            if (!nodeNames.ContainsKey(x.Value->_Right))
-                q.Enqueue(x.Value->_Right);
-            if (!nodeNames.ContainsKey(x.Value->_Parent))
-                q.Enqueue(x.Value->_Parent);
-        }
-        foreach (var (node, name) in nodeNames) {
-            Console.WriteLine($"#{name}: {node.Value->_Myval} Nil={node.Value->_Isnil} Left={nodeNames[node.Value->_Left]} Right={nodeNames[node.Value->_Right]} Parent={nodeNames[node.Value->_Parent]}");
-        }
     }
 }

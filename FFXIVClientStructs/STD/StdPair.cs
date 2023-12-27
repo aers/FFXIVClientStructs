@@ -61,6 +61,9 @@ public struct StdPair<T1, T2>
 
     public static bool operator >=(in StdPair<T1, T2> l, in StdPair<T1, T2> r) => l.CompareTo(r) >= 0;
 
+    public static implicit operator KeyValuePair<T1, T2>(StdPair<T1, T2> a) => new(a.Item1, a.Item2);
+    public static implicit operator StdPair<T1, T2>(KeyValuePair<T1, T2> a) => new(a.Key, a.Value);
+
     public static int Compare(in StdPair<T1, T2> left, in StdPair<T1, T2> right) {
         var c = StdOps<T1>.Compare(left.Item1, right.Item1);
         return c == 0 ? StdOps<T2>.Compare(left.Item2, right.Item2) : c;

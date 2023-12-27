@@ -9,9 +9,15 @@ namespace FFXIVClientStructs.STD;
 public unsafe struct StdSet<T, TMemorySpace>
     : IStdSet<T>
         , IEquatable<StdSet<T, TMemorySpace>>
+        , IStaticNativeObjectOperation<StdSet<T, TMemorySpace>>
     where T : unmanaged
     where TMemorySpace : IStaticMemorySpace {
-    public RedBlackTree<T> Tree;
+    public RedBlackTree<T, T, DefaultKeyExtractor<T>> Tree;
+
+    public static bool HasDefault => true;
+    public static bool IsDisposable => true;
+    public static bool IsCopiable => StdOps<T>.IsCopiable;
+    public static bool IsMovable => true;
 
     /// <inheritdoc/>
     public readonly long LongCount => Tree.LongCount;
@@ -20,10 +26,10 @@ public unsafe struct StdSet<T, TMemorySpace>
     public readonly int Count => checked((int)Tree.LongCount);
 
     /// <inheritdoc/>
-    public readonly RedBlackTree<T>.Enumerator GetEnumerator() => new(Tree.Pointer, true);
+    public readonly RedBlackTree<T, T, DefaultKeyExtractor<T>>.Enumerator GetEnumerator() => new(Tree.Pointer, true);
 
     /// <inheritdoc/>
-    public readonly RedBlackTree<T>.Enumerator Reverse() => new(Tree.Pointer, false);
+    public readonly RedBlackTree<T, T, DefaultKeyExtractor<T>>.Enumerator Reverse() => new(Tree.Pointer, false);
 
     /// <inheritdoc/>
     public bool AddCopy(in T value) {
@@ -224,4 +230,55 @@ public unsafe struct StdSet<T, TMemorySpace>
                 notFoundInSelf++;
         }
     }
+
+    public static int Compare(in StdSet<T, TMemorySpace> left, in StdSet<T, TMemorySpace> right) {
+        using var e1 = left.GetEnumerator();
+        using var e2 = right.GetEnumerator();
+        while (true) {
+            var b1 = e1.MoveNext();
+            var b2 = e2.MoveNext();
+            if (!b1 && !b2)
+                return 0;
+            if (b1 && !b2)
+                return 1;
+            if (!b1 && b2)
+                return -1;
+            var c = StdOps<T>.Compare(e1.Current, e2.Current);
+            if (c != 0)
+                return c;
+        }
+    }
+
+    public static bool ContentEquals(in StdSet<T, TMemorySpace> left, in StdSet<T, TMemorySpace> right) {
+        if (left.LongCount != right.LongCount)
+            return false;
+
+        using var e1 = left.GetEnumerator();
+        using var e2 = right.GetEnumerator();
+        while (true) {
+            var b1 = e1.MoveNext();
+            var b2 = e2.MoveNext();
+            if (!b1 && !b2)
+                return true;
+            if (b1 != b2)
+                return false;
+            if (!StdOps<T>.ContentEquals(e1.Current, e2.Current))
+                return false;
+        }
+    }
+
+    public static void ConstructDefaultInPlace(out StdSet<T, TMemorySpace> item) {
+        item = default;
+        item.Tree.GetOrCreateHead<TMemorySpace>();
+    }
+    public static void StaticDispose(ref StdSet<T, TMemorySpace> item) => item.Dispose();
+    public static void ConstructCopyInPlace(in StdSet<T, TMemorySpace> source, out StdSet<T, TMemorySpace> target) {
+        if (!IsCopiable)
+            throw new InvalidOperationException("Copying is not supported");
+        ConstructDefaultInPlace(out target);
+        foreach (ref var v in source)
+            target.AddCopy(v);
+    }
+    public static void ConstructMoveInPlace(ref StdSet<T, TMemorySpace> source, out StdSet<T, TMemorySpace> target) => (target, source) = (source, default);
+    public static void Swap(ref StdSet<T, TMemorySpace> item1, ref StdSet<T, TMemorySpace> item2) => (item1, item2) = (item2, item1);
 }

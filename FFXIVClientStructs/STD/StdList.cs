@@ -102,13 +102,16 @@ public unsafe struct StdList<T, TMemorySpace>
     }
 
     /// <inheritdoc/>
-    public static void ConstructDefaultInPlace(out StdList<T, TMemorySpace> item) => item = default;
+    public static void ConstructDefaultInPlace(out StdList<T, TMemorySpace> item) {
+        item = default;
+        item.Head = CreateNodeDefault();
+    }
 
     /// <inheritdoc/>
     public static void ConstructCopyInPlace(in StdList<T, TMemorySpace> source, out StdList<T, TMemorySpace> target) {
         if (!StdOps<T>.IsCopiable)
             throw new InvalidOperationException("Copying is not supported");
-        target = default;
+        ConstructDefaultInPlace(out target);
         foreach (ref var v in source)
             target.AddLastCopy(v);
     }

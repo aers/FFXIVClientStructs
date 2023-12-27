@@ -5,7 +5,9 @@ using FFXIVClientStructs.STD.Helper;
 namespace FFXIVClientStructs.STD.ContainerInterface;
 
 [SuppressMessage("ReSharper", "PossibleInterfaceMemberAmbiguity")]
-public interface IStdSet<T> : IReadOnlySet<T>, ISet<T>, ICollection, IDisposable where T : unmanaged {
+public interface IStdSet<T>
+    : IReadOnlySet<T>, ISet<T>, ICollection, IDisposable
+    where T : unmanaged {
     /// <summary>
     /// Gets the number of items, in <see cref="long"/>.
     /// </summary>
@@ -32,13 +34,13 @@ public interface IStdSet<T> : IReadOnlySet<T>, ISet<T>, ICollection, IDisposable
     /// Returns an <see cref="IEnumerable{T}"/> that iterates over the set in sorted order.
     /// </summary>
     /// <returns>An enumerator that iterates over the set in sorted order.</returns>
-    new RedBlackTree<T>.Enumerator GetEnumerator();
+    new RedBlackTree<T, T, DefaultKeyExtractor<T>>.Enumerator GetEnumerator();
     
     /// <summary>
     /// Returns an <see cref="IEnumerable{T}"/> that iterates over the set in reverse order.
     /// </summary>
     /// <returns>An enumerator that iterates over the set in reverse order.</returns>
-    RedBlackTree<T>.Enumerator Reverse();
+    RedBlackTree<T, T, DefaultKeyExtractor<T>>.Enumerator Reverse();
     
     /// <summary>
     /// Adds an item as a copy of <paramref name="value"/>.

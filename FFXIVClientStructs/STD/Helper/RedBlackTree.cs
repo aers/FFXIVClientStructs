@@ -6,9 +6,11 @@ using FFXIVClientStructs.FFXIV.Client.System.Memory;
 namespace FFXIVClientStructs.STD.Helper;
 
 [StructLayout(LayoutKind.Sequential)]
-public unsafe struct RedBlackTree<T>
-    : IEquatable<RedBlackTree<T>>
-    where T : unmanaged {
+public unsafe struct RedBlackTree<T, TKey, TKeyExtractor>
+    : IEquatable<RedBlackTree<T, TKey, TKeyExtractor>>
+    where T : unmanaged
+    where TKeyExtractor : IStaticKeyExtractor<T, TKey>
+    where TKey : unmanaged {
     public Node* Head;
     public long LongCount;
 
@@ -20,8 +22,8 @@ public unsafe struct RedBlackTree<T>
         Black,
     }
 
-    public readonly RedBlackTree<T>* Pointer =>
-        (RedBlackTree<T>*)Unsafe.AsPointer(ref Unsafe.AsRef(in this));
+    public readonly RedBlackTree<T, TKey, TKeyExtractor>* Pointer =>
+        (RedBlackTree<T, TKey, TKeyExtractor>*)Unsafe.AsPointer(ref Unsafe.AsRef(in this));
 
     /// <summary>
     /// Gets the rightmost node in subtree at <paramref name="node"/>.
@@ -41,9 +43,9 @@ public unsafe struct RedBlackTree<T>
         return node;
     }
 
-    public readonly bool Equals(in RedBlackTree<T> other) => Head == other.Head && LongCount == other.LongCount;
-    readonly bool IEquatable<RedBlackTree<T>>.Equals(RedBlackTree<T> other) => Equals(other);
-    public readonly override bool Equals(object? obj) => obj is RedBlackTree<T> t && Equals(t);
+    public readonly bool Equals(in RedBlackTree<T, TKey, TKeyExtractor> other) => Head == other.Head && LongCount == other.LongCount;
+    readonly bool IEquatable<RedBlackTree<T, TKey, TKeyExtractor>>.Equals(RedBlackTree<T, TKey, TKeyExtractor> other) => Equals(other);
+    public readonly override bool Equals(object? obj) => obj is RedBlackTree<T, TKey, TKeyExtractor> t && Equals(t);
 
     public void EraseHead() {
         if (Head is null)
@@ -226,14 +228,14 @@ public unsafe struct RedBlackTree<T>
 
     public void ExtractAndErase(Node* node) => Node.FreeNode(Extract(node));
 
-    public readonly FindResult FindUpperBound(in T key) {
+    public readonly FindResult FindUpperBound(in TKey key) {
         if (Head is null)
             return default;
         var result = new FindResult { Location = new TreeId { Parent = Head->_Parent, Child = TreeChild.Right }, Bound = Head };
         var tryNode = result.Location.Parent;
         while (!tryNode->_Isnil) {
             result.Location.Parent = tryNode;
-            if (StdOps<T>.Compare(key, tryNode->_Myval) < 0) {
+            if (StdOps<TKey>.Compare(key, TKeyExtractor.ExtractKey(tryNode->_Myval)) < 0) {
                 result.Location.Child = TreeChild.Left;
                 result.Bound = tryNode;
                 tryNode = tryNode->_Left;
@@ -246,14 +248,14 @@ public unsafe struct RedBlackTree<T>
         return result;
     }
 
-    public readonly FindResult FindLowerBound(in T key) {
+    public readonly FindResult FindLowerBound(in TKey key) {
         if (Head is null)
             return default;
         var result = new FindResult { Location = new TreeId { Parent = Head->_Parent, Child = TreeChild.Right }, Bound = Head };
         var tryNode = result.Location.Parent;
         while (!tryNode->_Isnil) {
             result.Location.Parent = tryNode;
-            if (StdOps<T>.Compare(key, tryNode->_Myval) <= 0) {
+            if (StdOps<TKey>.Compare(key, TKeyExtractor.ExtractKey(tryNode->_Myval)) <= 0) {
                 result.Location.Child = TreeChild.Left;
                 result.Bound = tryNode;
                 tryNode = tryNode->_Left;
@@ -404,17 +406,22 @@ public unsafe struct RedBlackTree<T>
         wherenode->_Parent = promotingNode;
     }
 
-    public bool TryInsertEmpty<TMemorySpace>(in T key, out Node* node)
+    public Node* InsertEmpty<TMemorySpace>(FindResult loc)
+        where TMemorySpace : IStaticMemorySpace {
+        if (loc.Location.Parent is null)
+            loc.Location = new TreeId { Parent = GetOrCreateHead<TMemorySpace>()->_Parent, Child = TreeChild.Right };
+        return Insert(loc.Location, Node.BuyNode<TMemorySpace>(Head));
+    }
+
+    public bool TryInsertEmpty<TMemorySpace>(in TKey key, out Node* node)
         where TMemorySpace : IStaticMemorySpace {
         var loc = FindLowerBound(key);
-        if (loc.Bound is not null && !loc.Bound->_Isnil && StdOps<T>.ContentEquals(loc.Bound->_Myval, key)) {
-            node = null;
+        if (loc.KeyEquals(key)) {
+            node = loc.Bound;
             return false;
         }
 
-        if (loc.Location.Parent is null)
-            loc.Location = new TreeId { Parent = GetOrCreateHead<TMemorySpace>()->_Parent, Child = TreeChild.Right };
-        node = Insert(loc.Location, Node.BuyNode<TMemorySpace>(Head));
+        node = InsertEmpty<TMemorySpace>(loc);
         return true;
     }
 
@@ -432,6 +439,12 @@ public unsafe struct RedBlackTree<T>
     public struct FindResult {
         public TreeId Location;
         public Node* Bound;
+
+        public readonly bool KeyEquals(in TKey other) {
+            if (Bound is null || Bound->_Isnil)
+                return false;
+            return StdOps<TKey>.ContentEquals(TKeyExtractor.ExtractKey(Bound->_Myval), other);
+        }
     }
 
     [StructLayout(LayoutKind.Sequential)]
@@ -511,21 +524,21 @@ public unsafe struct RedBlackTree<T>
     }
 
     public struct Enumerator : IEnumerable<T>, IEnumerator<T> {
-        private readonly RedBlackTree<T>* _owner;
+        private readonly RedBlackTree<T, TKey, TKeyExtractor>* _owner;
         private readonly bool _ltr;
         private Node* _current;
 
-        internal Enumerator(RedBlackTree<T>* owner, bool ltr) {
+        internal Enumerator(RedBlackTree<T, TKey, TKeyExtractor>* owner, bool ltr) {
             _owner = owner;
             _ltr = ltr;
             Reset();
         }
 
-        public ref T Current => ref _current->_Myval;
+        public readonly ref T Current => ref _current->_Myval;
 
-        object IEnumerator.Current => Current;
+        readonly object IEnumerator.Current => Current;
 
-        T IEnumerator<T>.Current => Current;
+        readonly T IEnumerator<T>.Current => Current;
 
         public bool MoveNext() {
             if (_owner->Head == null || (_current is not null && _current == _owner->Head))
@@ -554,10 +567,10 @@ public unsafe struct RedBlackTree<T>
         public void Dispose() {
         }
 
-        public Enumerator GetEnumerator() => new(_owner, _ltr);
+        public readonly Enumerator GetEnumerator() => new(_owner, _ltr);
 
-        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+        readonly IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-        IEnumerator<T> IEnumerable<T>.GetEnumerator() => GetEnumerator();
+        readonly IEnumerator<T> IEnumerable<T>.GetEnumerator() => GetEnumerator();
     }
 }
