@@ -6,9 +6,15 @@ namespace FFXIVClientStructs.STD;
 
 [StructLayout(LayoutKind.Sequential, Size = 0x10)]
 [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
-public unsafe struct StdSet<TKey> : IReadOnlySet<TKey>, ISet<TKey>, IDisposable, IEquatable<StdSet<TKey>>
-    where TKey : unmanaged {
-    public RedBlackTree<TKey, DefaultStaticNativeObjectOperation<TKey>> Tree;
+public unsafe struct StdSet<T, TMemorySpace>
+    : IReadOnlySet<T>
+        , ISet<T>
+        , ICollection
+        , IDisposable
+    , IEquatable<StdSet<T, TMemorySpace>>
+    where T : unmanaged
+    where TMemorySpace : IStaticMemorySpace {
+    public RedBlackTree<T, TMemorySpace> Tree;
 
     public readonly long LongCount => Tree.LongCount;
 
@@ -16,46 +22,46 @@ public unsafe struct StdSet<TKey> : IReadOnlySet<TKey>, ISet<TKey>, IDisposable,
 
     public readonly bool IsReadOnly => false;
 
-    public readonly RedBlackTree<TKey, DefaultStaticNativeObjectOperation<TKey>>.Enumerator GetEnumerator() => new(Tree.Pointer, true);
+    #region Collection interfaces
 
-    readonly IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+    int ICollection.Count => Count;
+    int ICollection<T>.Count => Count;
+    int IReadOnlyCollection<T>.Count => Count;
 
-    readonly IEnumerator<TKey> IEnumerable<TKey>.GetEnumerator() => GetEnumerator();
+    bool ICollection<T>.IsReadOnly => false;
+    bool ICollection.IsSynchronized => false;
+    object ICollection.SyncRoot => Array.Empty<byte>();
 
-    public readonly RedBlackTree<TKey, DefaultStaticNativeObjectOperation<TKey>>.Enumerator Reverse() => new(Tree.Pointer, false);
+    #endregion
 
-    public bool AddCopy(in TKey item) {
-        if (!Tree.TryInsertEmpty<DefaultStaticMemorySpace>(item, out var node))
+    public readonly RedBlackTree<T, TMemorySpace>.Enumerator GetEnumerator() => new(Tree.Pointer, true);
+
+    public readonly RedBlackTree<T, TMemorySpace>.Enumerator Reverse() => new(Tree.Pointer, false);
+
+    public bool AddCopy(in T item) {
+        if (!Tree.TryInsertEmpty(item, out var node))
             return false;
 
-        DefaultStaticNativeObjectOperation<TKey>.ConstructCopyInPlace(item, out node->_Myval);
+        StdOps<T>.ConstructCopyInPlace(item, out node->_Myval);
         return true;
     }
 
-    public bool AddMove(ref TKey item) {
-        if (!Tree.TryInsertEmpty<DefaultStaticMemorySpace>(item, out var node))
+    public bool AddMove(ref T item) {
+        if (!Tree.TryInsertEmpty(item, out var node))
             return false;
 
-        DefaultStaticNativeObjectOperation<TKey>.ConstructMoveInPlace(ref item, out node->_Myval);
+        StdOps<T>.ConstructMoveInPlace(ref item, out node->_Myval);
         return true;
     }
-
-    void ICollection<TKey>.Add(TKey item) => AddCopy(item);
-
-    bool ISet<TKey>.Add(TKey item) => AddCopy(item);
 
     public void Clear() => Tree.EraseHead();
 
-    public readonly bool Contains(in TKey item) {
+    public readonly bool Contains(in T item) {
         var b = Tree.FindLowerBound(item).Bound;
-        return b is not null && DefaultStaticNativeObjectOperation<TKey>.ContentEquals(b->_Myval, item);
+        return b is not null && StdOps<T>.ContentEquals(b->_Myval, item);
     }
 
-    readonly bool ICollection<TKey>.Contains(TKey item) => Contains(item);
-
-    readonly bool IReadOnlySet<TKey>.Contains(TKey item) => Contains(item);
-
-    public readonly void CopyTo(TKey[] array, int arrayIndex) {
+    public readonly void CopyTo(T[] array, int arrayIndex) {
         if (arrayIndex < 0 || arrayIndex > array.Length)
             throw new ArgumentOutOfRangeException(nameof(arrayIndex), arrayIndex, null);
         if (array.Length - arrayIndex < LongCount)
@@ -68,16 +74,16 @@ public unsafe struct StdSet<TKey> : IReadOnlySet<TKey>, ISet<TKey>, IDisposable,
 
     public void Dispose() => Tree.EraseHead();
 
-    public readonly bool Equals(in StdSet<TKey> other) => Tree.Equals(other.Tree);
-    readonly bool IEquatable<StdSet<TKey>>.Equals(StdSet<TKey> other) => Tree.Equals(other.Tree);
-    public readonly override bool Equals(object? obj) => obj is StdSet<TKey> t && Equals(t);
+    public readonly bool Equals(in StdSet<T, TMemorySpace> other) => Tree.Equals(other.Tree);
+    readonly bool IEquatable<StdSet<T, TMemorySpace>>.Equals(StdSet<T, TMemorySpace> other) => Tree.Equals(other.Tree);
+    public readonly override bool Equals(object? obj) => obj is StdSet<T, TMemorySpace> t && Equals(t);
 
-    public void ExceptWith(IEnumerable<TKey> other) {
+    public void ExceptWith(IEnumerable<T> other) {
         var n = Tree.Min();
         if (n is null)
             return;
         
-        if (other is not IReadOnlySet<TKey> otherSet)
+        if (other is not IReadOnlySet<T> otherSet)
             otherSet = other.ToHashSet();
         
         using var enumerator = GetEnumerator();
@@ -90,12 +96,12 @@ public unsafe struct StdSet<TKey> : IReadOnlySet<TKey>, ISet<TKey>, IDisposable,
 
     public override int GetHashCode() => Tree.GetHashCode();
 
-    public void IntersectWith(IEnumerable<TKey> other) {
+    public void IntersectWith(IEnumerable<T> other) {
         var n = Tree.Min();
         if (n is null)
             return;
         
-        if (other is not IReadOnlySet<TKey> otherSet)
+        if (other is not IReadOnlySet<T> otherSet)
             otherSet = other.ToHashSet();
         
         using var enumerator = GetEnumerator();
@@ -106,49 +112,49 @@ public unsafe struct StdSet<TKey> : IReadOnlySet<TKey>, ISet<TKey>, IDisposable,
         }
     }
 
-    public readonly bool IsProperSubsetOf(IEnumerable<TKey> other) {
+    public readonly bool IsProperSubsetOf(IEnumerable<T> other) {
         CountOverlaps(other, out var notFoundInOther, out var notFoundInSelf);
         return notFoundInOther == 0 && notFoundInSelf > 0;
     }
 
-    public readonly bool IsProperSupersetOf(IEnumerable<TKey> other) {
+    public readonly bool IsProperSupersetOf(IEnumerable<T> other) {
         CountOverlaps(other, out var notFoundInOther, out var notFoundInSelf);
         return notFoundInOther > 0 && notFoundInSelf == 0;
     }
 
-    public readonly bool IsSubsetOf(IEnumerable<TKey> other) {
+    public readonly bool IsSubsetOf(IEnumerable<T> other) {
         CountOverlaps(other, out var notFoundInOther, out _);
         return notFoundInOther == 0;
     }
 
-    public readonly bool IsSupersetOf(IEnumerable<TKey> other) {
+    public readonly bool IsSupersetOf(IEnumerable<T> other) {
         CountOverlaps(other, out _, out var notFoundInSelf);
         return notFoundInSelf == 0;
     }
 
-    public readonly ref readonly TKey Min() => ref Tree.Min()->_Myval;
+    public readonly ref readonly T Min() => ref Tree.Min()->_Myval;
 
-    public readonly ref readonly TKey Max() => ref Tree.Min()->_Myval;
+    public readonly ref readonly T Max() => ref Tree.Min()->_Myval;
 
-    public readonly bool Overlaps(IEnumerable<TKey> other) {
+    public readonly bool Overlaps(IEnumerable<T> other) {
         CountOverlaps(other, out _, out var notFoundInSelf);
         return notFoundInSelf < Tree.LongCount;
     }
 
-    public bool Remove(TKey item) {
+    public bool Remove(T item) {
         var b = Tree.FindLowerBound(item).Bound;
-        if (b is null || !DefaultStaticNativeObjectOperation<TKey>.ContentEquals(b->_Myval, item))
+        if (b is null || !StdOps<T>.ContentEquals(b->_Myval, item))
             return false;
         Tree.ExtractAndErase(b);
         return true;
     }
 
-    public readonly bool SetEquals(IEnumerable<TKey> other) {
+    public readonly bool SetEquals(IEnumerable<T> other) {
         CountOverlaps(other, out var notFoundInOther, out var notFoundInSelf);
         return notFoundInOther == 0 && notFoundInSelf == 0;
     }
 
-    public void SymmetricExceptWith(IEnumerable<TKey> other) {
+    public void SymmetricExceptWith(IEnumerable<T> other) {
         var n = Tree.Min();
         if (n is null)
             return;
@@ -166,29 +172,55 @@ public unsafe struct StdSet<TKey> : IReadOnlySet<TKey>, ISet<TKey>, IDisposable,
             AddCopy(o);
     }
 
-    public TKey[] ToArray() {
-        var res = new TKey[LongCount];
+    public T[] ToArray() {
+        var res = new T[LongCount];
         var i = 0L;
         foreach (ref var v in this)
             res[i++] = v;
         return res;
     }
 
-    public TKey[] ToArrayReverse() {
-        var res = new TKey[LongCount];
+    public T[] ToArrayReverse() {
+        var res = new T[LongCount];
         var i = 0L;
         foreach (ref var v in Reverse())
             res[i++] = v;
         return res;
     }
 
-    public void UnionWith(IEnumerable<TKey> other) {
+    public void UnionWith(IEnumerable<T> other) {
         foreach (var o in other)
             AddCopy(o);
     }
 
-    private readonly void CountOverlaps(IEnumerable<TKey> other, out long notFoundInOther, out long notFoundInSelf) {
-        if (other is not IReadOnlySet<TKey>)
+    #region Collection interfaces
+
+    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+    
+    IEnumerator<T> IEnumerable<T>.GetEnumerator() => GetEnumerator();
+
+    void ICollection.CopyTo(Array array, int index) {
+        if (array is not T[] typedArray)
+            throw new ArgumentException(null, nameof(array));
+        CopyTo(typedArray, index);
+    }
+
+    void ICollection<T>.Add(T item) => AddCopy(item);
+
+    void ICollection<T>.Clear() => Clear();
+
+    bool ICollection<T>.Contains(T item) => Contains(item);
+
+    bool ICollection<T>.Remove(T item) => Remove(item);
+
+    bool ISet<T>.Add(T item) => AddCopy(item);
+
+    bool IReadOnlySet<T>.Contains(T item) => Contains(item);
+
+    #endregion
+
+    private readonly void CountOverlaps(IEnumerable<T> other, out long notFoundInOther, out long notFoundInSelf) {
+        if (other is not IReadOnlySet<T>)
             other = other.ToHashSet();
 
         notFoundInOther = Tree.LongCount;

@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.StdContainerTester;
 
 public static unsafe class SetTester {
     public static void Test() {
-        using var set1 = new StdSet<int>();
+        using var set1 = new StdSet<int, DefaultStaticMemorySpace>();
         for (var i = 1; i <= 8; i++)
             set1.AddCopy(i);
         for (var i = 4; i <= 12; i++)
@@ -20,14 +20,14 @@ public static unsafe class SetTester {
         DumpNodes(set1.Tree.Head);
         Console.WriteLine(string.Join(", ", set1.ToArrayReverse().Select(x => x.ToString())));
 
-        using var set2 = new StdSet<int>();
+        using var set2 = new StdSet<int, DefaultStaticMemorySpace>();
         for (var i = 8; i < 16; i++)
             set2.AddCopy(i);
         
         Console.WriteLine("Set 1: " + string.Join(", ", set1.Select(x => x.ToString())));
         Console.WriteLine("Set 2: " + string.Join(", ", set2.Select(x => x.ToString())));
 
-        using var set3 = new StdSet<int>();
+        using var set3 = new StdSet<int, DefaultStaticMemorySpace>();
         set3.UnionWith(set1);
         set3.UnionWith(set2);
         Console.WriteLine(string.Join(", ", set3.Select(x => x.ToString())));
@@ -48,9 +48,9 @@ public static unsafe class SetTester {
         Console.WriteLine(string.Join(", ", set3.Select(x => x.ToString())));
     }
 
-    private static void DumpNodes(Pointer<RedBlackTree<int, DefaultStaticNativeObjectOperation<int>>.Node> x) {
-        var nodeNames = new Dictionary<Pointer<RedBlackTree<int, DefaultStaticNativeObjectOperation<int>>.Node>, int>();
-        var q = new Queue<Pointer<RedBlackTree<int, DefaultStaticNativeObjectOperation<int>>.Node>>();
+    private static void DumpNodes(Pointer<RedBlackTree<int, DefaultStaticMemorySpace>.Node> x) {
+        var nodeNames = new Dictionary<Pointer<RedBlackTree<int, DefaultStaticMemorySpace>.Node>, int>();
+        var q = new Queue<Pointer<RedBlackTree<int, DefaultStaticMemorySpace>.Node>>();
         q.Enqueue(x);
         while (q.TryDequeue(out x)) {
             if (!nodeNames.TryAdd(x, x.Value->_Myval))

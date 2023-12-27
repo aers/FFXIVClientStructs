@@ -7,12 +7,11 @@ namespace FFXIVClientStructs.STD;
 
 [StructLayout(LayoutKind.Sequential, Size = 0x10)]
 [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
-public unsafe struct StdList<T, TMemorySpace, TOperation>
+public unsafe struct StdList<T, TMemorySpace>
     : IStdList<T>
-        , IStaticNativeObjectOperation<StdList<T, TMemorySpace, TOperation>>
+        , IStaticNativeObjectOperation<StdList<T, TMemorySpace>>
     where T : unmanaged
-    where TMemorySpace : IStaticMemorySpace
-    where TOperation : IStaticNativeObjectOperation<T> {
+    where TMemorySpace : IStaticMemorySpace {
 
     // First node is Head->Next
     // Last node is Head->Previous
@@ -23,7 +22,7 @@ public unsafe struct StdList<T, TMemorySpace, TOperation>
 
     public static bool HasDefault => true;
     public static bool IsDisposable => true;
-    public static bool IsCopiable => TOperation.IsCopiable;
+    public static bool IsCopiable => StdOps<T>.IsCopiable;
     public static bool IsMovable => true;
 
     /// <inheritdoc/>
@@ -57,7 +56,7 @@ public unsafe struct StdList<T, TMemorySpace, TOperation>
     readonly int IReadOnlyCollection<T>.Count => Count;
 
     /// <inheritdoc/>
-    public static int Compare(in StdList<T, TMemorySpace, TOperation> left, in StdList<T, TMemorySpace, TOperation> right) {
+    public static int Compare(in StdList<T, TMemorySpace> left, in StdList<T, TMemorySpace> right) {
         var leftEnd = left.Head;
         var rightEnd = right.Head;
         if (leftEnd is null && rightEnd is null)
@@ -70,7 +69,7 @@ public unsafe struct StdList<T, TMemorySpace, TOperation>
         var leftNode = leftEnd->Next;
         var rightNode = rightEnd->Next;
         for (; leftNode != leftEnd && rightNode != rightEnd; leftNode = leftNode->Next, rightNode = rightNode->Next) {
-            var c = TOperation.Compare(leftNode->Value, rightNode->Value);
+            var c = StdOps<T>.Compare(leftNode->Value, rightNode->Value);
             if (c != 0)
                 return c;
         }
@@ -83,7 +82,7 @@ public unsafe struct StdList<T, TMemorySpace, TOperation>
     }
 
     /// <inheritdoc/>
-    public static bool ContentEquals(in StdList<T, TMemorySpace, TOperation> left, in StdList<T, TMemorySpace, TOperation> right) {
+    public static bool ContentEquals(in StdList<T, TMemorySpace> left, in StdList<T, TMemorySpace> right) {
         if (left.Count != right.Count)
             return false;
         if (left.Count == 0 || right.Count == 0)
@@ -95,18 +94,18 @@ public unsafe struct StdList<T, TMemorySpace, TOperation>
         var leftNode = leftEnd->Next;
         var rightNode = rightEnd->Next;
         for (; leftNode != leftEnd && rightNode != rightEnd; leftNode = leftNode->Next, rightNode = rightNode->Next) {
-            if (!TOperation.ContentEquals(leftNode->Value, rightNode->Value))
+            if (!StdOps<T>.ContentEquals(leftNode->Value, rightNode->Value))
                 return false;
         }
         return true;
     }
 
     /// <inheritdoc/>
-    public static void ConstructDefaultInPlace(out StdList<T, TMemorySpace, TOperation> item) => item = default;
+    public static void ConstructDefaultInPlace(out StdList<T, TMemorySpace> item) => item = default;
 
     /// <inheritdoc/>
-    public static void ConstructCopyInPlace(in StdList<T, TMemorySpace, TOperation> source, out StdList<T, TMemorySpace, TOperation> target) {
-        if (!TOperation.IsCopiable)
+    public static void ConstructCopyInPlace(in StdList<T, TMemorySpace> source, out StdList<T, TMemorySpace> target) {
+        if (!StdOps<T>.IsCopiable)
             throw new InvalidOperationException("Copying is not supported");
         target = default;
         foreach (ref var v in source)
@@ -114,54 +113,54 @@ public unsafe struct StdList<T, TMemorySpace, TOperation>
     }
 
     /// <inheritdoc/>
-    public static void ConstructMoveInPlace(ref StdList<T, TMemorySpace, TOperation> source, out StdList<T, TMemorySpace, TOperation> target) => (target, source) = (source, default);
+    public static void ConstructMoveInPlace(ref StdList<T, TMemorySpace> source, out StdList<T, TMemorySpace> target) => (target, source) = (source, default);
 
     /// <inheritdoc/>
-    public static void StaticDispose(ref StdList<T, TMemorySpace, TOperation> item) => item.Dispose();
+    public static void StaticDispose(ref StdList<T, TMemorySpace> item) => item.Dispose();
 
     /// <inheritdoc/>
-    public static void Swap(ref StdList<T, TMemorySpace, TOperation> item1, ref StdList<T, TMemorySpace, TOperation> item2) => (item1, item2) = (item2, item1);
+    public static void Swap(ref StdList<T, TMemorySpace> item1, ref StdList<T, TMemorySpace> item2) => (item1, item2) = (item2, item1);
 
     /// <inheritdoc/>
     public static Pointer<IStdList<T>.Node> CreateNodeCopy(in T value) {
-        if (!TOperation.IsCopiable)
+        if (!StdOps<T>.IsCopiable)
             throw new InvalidOperationException("Copying is not supported");
         var alloc = (IStdList<T>.Node*)TMemorySpace.Allocate((nuint)sizeof(IStdList<T>.Node), 0x10);
         if (alloc is null)
             throw new OutOfMemoryException();
         alloc->Next = alloc->Previous = null;
-        TOperation.ConstructCopyInPlace(in value, out alloc->Value);
+        StdOps<T>.ConstructCopyInPlace(in value, out alloc->Value);
         return alloc;
     }
 
     /// <inheritdoc/>
     public static Pointer<IStdList<T>.Node> CreateNodeMove(ref T value) {
-        if (!TOperation.IsMovable)
+        if (!StdOps<T>.IsMovable)
             throw new InvalidOperationException("Moving is not supported");
         var alloc = (IStdList<T>.Node*)TMemorySpace.Allocate((nuint)sizeof(IStdList<T>.Node), 0x10);
         if (alloc is null)
             throw new OutOfMemoryException();
         alloc->Next = alloc->Previous = null;
-        TOperation.ConstructMoveInPlace(ref value, out alloc->Value);
+        StdOps<T>.ConstructMoveInPlace(ref value, out alloc->Value);
         return alloc;
     }
 
     /// <inheritdoc/>
     public static Pointer<IStdList<T>.Node> CreateNodeDefault() {
-        if (!TOperation.IsMovable)
+        if (!StdOps<T>.IsMovable)
             throw new InvalidOperationException("Moving is not supported");
         var alloc = (IStdList<T>.Node*)TMemorySpace.Allocate((nuint)sizeof(IStdList<T>.Node), 0x10);
         if (alloc is null)
             throw new OutOfMemoryException();
         alloc->Next = alloc->Previous = null;
-        TOperation.ConstructDefaultInPlace(out alloc->Value);
+        StdOps<T>.ConstructDefaultInPlace(out alloc->Value);
         return alloc;
     }
 
     /// <inheritdoc/>
     public static void DisposeNode(Pointer<IStdList<T>.Node> node, bool disposeValue) {
         if (disposeValue)
-            TOperation.StaticDispose(ref node.Value->Value);
+            StdOps<T>.StaticDispose(ref node.Value->Value);
         IMemorySpace.Free(node, (ulong)sizeof(IStdList<T>.Node));
     }
 
@@ -261,7 +260,7 @@ public unsafe struct StdList<T, TMemorySpace, TOperation>
         if (Head is null)
             return default;
         for (var node = Head->Next; node != Head; node = node->Next) {
-            if (TOperation.ContentEquals(node->Value, value))
+            if (StdOps<T>.ContentEquals(node->Value, value))
                 return node;
         }
 
@@ -273,7 +272,7 @@ public unsafe struct StdList<T, TMemorySpace, TOperation>
         if (Head is null)
             return default;
         for (var node = Head->Previous; node != Head; node = node->Previous) {
-            if (TOperation.ContentEquals(node->Value, value))
+            if (StdOps<T>.ContentEquals(node->Value, value))
                 return node;
         }
 

@@ -1,24 +1,23 @@
-using System.Text;
 using FFXIVClientStructs.STD.StdHelpers;
 
 namespace FFXIVClientStructs.STD;
 
 /// <summary>
-/// A <see cref="StdBasicString{T,TMemorySpace}"/> using <see cref="DefaultStaticMemorySpace"/> and <see cref="char"/>.<br />
+/// A <see cref="StdBasicString{T,TEncoding,TMemorySpace}"/> using
+/// <see cref="DefaultStaticMemorySpace"/>, <see cref="IStaticEncoding.Unicode"/> and <see cref="byte"/>.<br />
 /// Encoding contained within is assumed to be UTF-16.
 /// </summary>
 [StructLayout(LayoutKind.Explicit, Size = 0x20)]
 public unsafe struct StdWString
     : IStdBasicString<char>
         , IStaticNativeObjectOperation<StdWString> {
-    [FieldOffset(0x0)] public StdBasicString<char, DefaultStaticMemorySpace> BasicString;
+    [FieldOffset(0x0)] public StdBasicString<char, IStaticEncoding.Unicode, DefaultStaticMemorySpace> BasicString;
 
-    public static bool HasDefault => StdBasicString<char, DefaultStaticMemorySpace>.HasDefault;
-    public static bool IsDisposable => StdBasicString<char, DefaultStaticMemorySpace>.IsDisposable;
-    public static bool IsCopiable => StdBasicString<char, DefaultStaticMemorySpace>.IsCopiable;
-    public static bool IsMovable => StdBasicString<char, DefaultStaticMemorySpace>.IsMovable;
+    public static bool HasDefault => StdBasicString<char, IStaticEncoding.Unicode, DefaultStaticMemorySpace>.HasDefault;
+    public static bool IsDisposable => StdBasicString<char, IStaticEncoding.Unicode, DefaultStaticMemorySpace>.IsDisposable;
+    public static bool IsCopiable => StdBasicString<char, IStaticEncoding.Unicode, DefaultStaticMemorySpace>.IsCopiable;
+    public static bool IsMovable => StdBasicString<char, IStaticEncoding.Unicode, DefaultStaticMemorySpace>.IsMovable;
 
-    public readonly Encoding IntrinsicEncoding => Encoding.Unicode;
     public readonly char* First => BasicString.First;
     public readonly char* Last => BasicString.Last;
     public readonly char* End => BasicString.End;
@@ -42,13 +41,13 @@ public unsafe struct StdWString
 
     public static implicit operator ReadOnlySpan<char>(in StdWString value) => value.AsSpan();
 
-    public static int Compare(in StdWString left, in StdWString right) => StdBasicString<char, DefaultStaticMemorySpace>.Compare(left.BasicString, right.BasicString);
-    public static bool ContentEquals(in StdWString left, in StdWString right) => StdBasicString<char, DefaultStaticMemorySpace>.ContentEquals(left.BasicString, right.BasicString);
-    public static void ConstructDefaultInPlace(out StdWString item) => StdBasicString<char, DefaultStaticMemorySpace>.ConstructDefaultInPlace(out item.BasicString);
-    public static void StaticDispose(ref StdWString item) => StdBasicString<char, DefaultStaticMemorySpace>.StaticDispose(ref item.BasicString);
-    public static void ConstructCopyInPlace(in StdWString source, out StdWString target) => StdBasicString<char, DefaultStaticMemorySpace>.ConstructCopyInPlace(in source.BasicString, out target.BasicString);
-    public static void ConstructMoveInPlace(ref StdWString source, out StdWString target) => StdBasicString<char, DefaultStaticMemorySpace>.ConstructMoveInPlace(ref source.BasicString, out target.BasicString);
-    public static void Swap(ref StdWString item1, ref StdWString item2) => StdBasicString<char, DefaultStaticMemorySpace>.Swap(ref item1.BasicString, ref item2.BasicString);
+    public static int Compare(in StdWString left, in StdWString right) => StdBasicString<char, IStaticEncoding.Unicode, DefaultStaticMemorySpace>.Compare(left.BasicString, right.BasicString);
+    public static bool ContentEquals(in StdWString left, in StdWString right) => StdBasicString<char, IStaticEncoding.Unicode, DefaultStaticMemorySpace>.ContentEquals(left.BasicString, right.BasicString);
+    public static void ConstructDefaultInPlace(out StdWString item) => StdBasicString<char, IStaticEncoding.Unicode, DefaultStaticMemorySpace>.ConstructDefaultInPlace(out item.BasicString);
+    public static void StaticDispose(ref StdWString item) => StdBasicString<char, IStaticEncoding.Unicode, DefaultStaticMemorySpace>.StaticDispose(ref item.BasicString);
+    public static void ConstructCopyInPlace(in StdWString source, out StdWString target) => StdBasicString<char, IStaticEncoding.Unicode, DefaultStaticMemorySpace>.ConstructCopyInPlace(in source.BasicString, out target.BasicString);
+    public static void ConstructMoveInPlace(ref StdWString source, out StdWString target) => StdBasicString<char, IStaticEncoding.Unicode, DefaultStaticMemorySpace>.ConstructMoveInPlace(ref source.BasicString, out target.BasicString);
+    public static void Swap(ref StdWString item1, ref StdWString item2) => StdBasicString<char, IStaticEncoding.Unicode, DefaultStaticMemorySpace>.Swap(ref item1.BasicString, ref item2.BasicString);
 
     public readonly Span<char> AsSpan() => BasicString.AsSpan();
     public readonly Span<char> AsSpan(long index) => BasicString.AsSpan(index);
@@ -58,8 +57,7 @@ public unsafe struct StdWString
     public void AddRangeCopy(IEnumerable<char> collection) => BasicString.AddRangeCopy(collection);
     public void AddSpanCopy(ReadOnlySpan<char> span) => BasicString.AddSpanCopy(span);
     public void AddSpanMove(Span<char> span) => BasicString.AddSpanMove(span);
-    public void AddString(Encoding encoding, ReadOnlySpan<char> str) => BasicString.AddString(encoding, str);
-    public void AddString(ReadOnlySpan<char> str) => BasicString.AddString(IntrinsicEncoding, str);
+    public void AddString(ReadOnlySpan<char> str) => BasicString.AddString(str);
     public readonly long BinarySearch(in char item) => BasicString.BinarySearch(in item);
     public readonly long BinarySearch(in char item, IComparer<char>? comparer) => BasicString.BinarySearch(in item, comparer);
     public readonly long BinarySearch(long index, long count, in char item, IComparer<char>? comparer) => BasicString.BinarySearch(index, count, in item, comparer);
@@ -67,8 +65,7 @@ public unsafe struct StdWString
     public readonly bool Contains(in char item) => BasicString.Contains(in item);
     public readonly bool Contains(char* subsequence, IntPtr length) => BasicString.Contains(subsequence, length);
     public readonly bool Contains(ReadOnlySpan<char> subsequence) => BasicString.Contains(subsequence);
-    public readonly bool ContainsString(Encoding encoding, ReadOnlySpan<char> str) => BasicString.ContainsString(encoding, str);
-    public readonly bool ContainsString(ReadOnlySpan<char> str) => BasicString.ContainsString(IntrinsicEncoding, str);
+    public readonly bool ContainsString(ReadOnlySpan<char> str) => BasicString.ContainsString(str);
     public readonly int CompareTo(object? obj) => BasicString.CompareTo(obj);
     public readonly int CompareTo(IContinuousStorageContainer<char>? other) => BasicString.CompareTo(other);
     public void Dispose() => BasicString.Dispose();
@@ -86,41 +83,33 @@ public unsafe struct StdWString
     public readonly void ForEach(Action<char> action) => BasicString.ForEach(action);
     public readonly IContinuousStorageContainer<char>.Enumerator GetEnumerator() => BasicString.GetEnumerator();
     public readonly override int GetHashCode() => BasicString.GetHashCode();
-    public readonly override string ToString() => Decode(IntrinsicEncoding);
     public readonly int IndexOf(in char item) => BasicString.IndexOf(in item);
     public readonly int IndexOf(in char item, int index) => BasicString.IndexOf(in item, index);
     public readonly int IndexOf(in char item, int index, int count) => BasicString.IndexOf(in item, index, count);
     public readonly int IndexOf(ReadOnlySpan<char> subsequence) => BasicString.IndexOf(subsequence);
     public readonly int IndexOf(ReadOnlySpan<char> subsequence, int index) => BasicString.IndexOf(subsequence, index);
     public readonly int IndexOf(ReadOnlySpan<char> subsequence, int index, int count) => BasicString.IndexOf(subsequence, index, count);
-    public readonly int IndexOfString(Encoding encoding, ReadOnlySpan<char> str) => BasicString.IndexOfString(encoding, str);
-    public readonly int IndexOfString(Encoding encoding, ReadOnlySpan<char> str, int index) => BasicString.IndexOfString(encoding, str, index);
-    public readonly int IndexOfString(Encoding encoding, ReadOnlySpan<char> str, int index, int count) => BasicString.IndexOfString(encoding, str, index, count);
-    public readonly int IndexOfString(ReadOnlySpan<char> str) => BasicString.IndexOfString(IntrinsicEncoding, str);
-    public readonly int IndexOfString(ReadOnlySpan<char> str, int index) => BasicString.IndexOfString(IntrinsicEncoding, str, index);
-    public readonly int IndexOfString(ReadOnlySpan<char> str, int index, int count) => BasicString.IndexOfString(IntrinsicEncoding, str, index, count);
+    public readonly int IndexOfString(ReadOnlySpan<char> str) => BasicString.IndexOfString(str);
+    public readonly int IndexOfString(ReadOnlySpan<char> str, int index) => BasicString.IndexOfString(str, index);
+    public readonly int IndexOfString(ReadOnlySpan<char> str, int index, int count) => BasicString.IndexOfString(str, index, count);
     public void InsertCopy(long index, in char item) => BasicString.InsertCopy(index, in item);
     public void InsertMove(long index, ref char item) => BasicString.InsertMove(index, ref item);
     public void InsertRangeCopy(long index, IEnumerable<char> collection) => BasicString.InsertRangeCopy(index, collection);
     public void InsertSpanCopy(long index, ReadOnlySpan<char> span) => BasicString.InsertSpanCopy(index, span);
     public void InsertSpanMove(long index, Span<char> span) => BasicString.InsertSpanMove(index, span);
-    public void InsertString(Encoding encoding, long index, ReadOnlySpan<char> str) => BasicString.InsertString(encoding, index, str);
-    public void InsertString(long index, ReadOnlySpan<char> str) => BasicString.InsertString(IntrinsicEncoding, index, str);
+    public void InsertString(long index, ReadOnlySpan<char> str) => BasicString.InsertString(index, str);
     public readonly int LastIndexOf(in char item) => BasicString.LastIndexOf(in item);
     public readonly int LastIndexOf(in char item, int index) => BasicString.LastIndexOf(in item, index);
     public readonly int LastIndexOf(in char item, int index, int count) => BasicString.LastIndexOf(in item, index, count);
     public readonly int LastIndexOf(ReadOnlySpan<char> subsequence) => BasicString.LastIndexOf(subsequence);
     public readonly int LastIndexOf(ReadOnlySpan<char> subsequence, int index) => BasicString.LastIndexOf(subsequence, index);
     public readonly int LastIndexOf(ReadOnlySpan<char> subsequence, int index, int count) => BasicString.LastIndexOf(subsequence, index, count);
-    public readonly int LastIndexOfString(Encoding encoding, ReadOnlySpan<char> str) => BasicString.LastIndexOfString(encoding, str);
-    public readonly int LastIndexOfString(Encoding encoding, ReadOnlySpan<char> str, int index) => BasicString.LastIndexOfString(encoding, str, index);
-    public readonly int LastIndexOfString(Encoding encoding, ReadOnlySpan<char> str, int index, int count) => BasicString.LastIndexOfString(encoding, str, index, count);
-    public readonly long LongIndexOfString(Encoding encoding, ReadOnlySpan<char> str) => BasicString.LongIndexOfString(encoding, str);
-    public readonly long LongIndexOfString(Encoding encoding, ReadOnlySpan<char> str, long index) => BasicString.LongIndexOfString(encoding, str, index);
-    public readonly long LongIndexOfString(Encoding encoding, ReadOnlySpan<char> str, long index, long count) => BasicString.LongIndexOfString(encoding, str, index, count);
-    public readonly int LastIndexOfString(ReadOnlySpan<char> str) => BasicString.LastIndexOfString(IntrinsicEncoding, str);
-    public readonly int LastIndexOfString(ReadOnlySpan<char> str, int index) => BasicString.LastIndexOfString(IntrinsicEncoding, str, index);
-    public readonly int LastIndexOfString(ReadOnlySpan<char> str, int index, int count) => BasicString.LastIndexOfString(IntrinsicEncoding, str, index, count);
+    public readonly int LastIndexOfString(ReadOnlySpan<char> str) => BasicString.LastIndexOfString(str);
+    public readonly int LastIndexOfString(ReadOnlySpan<char> str, int index) => BasicString.LastIndexOfString(str, index);
+    public readonly int LastIndexOfString(ReadOnlySpan<char> str, int index, int count) => BasicString.LastIndexOfString(str, index, count);
+    public readonly long LongIndexOfString(ReadOnlySpan<char> str) => BasicString.LongIndexOfString(str);
+    public readonly long LongIndexOfString(ReadOnlySpan<char> str, long index) => BasicString.LongIndexOfString(str, index);
+    public readonly long LongIndexOfString(ReadOnlySpan<char> str, long index, long count) => BasicString.LongIndexOfString(str, index, count);
     public readonly long LongFindIndex(Predicate<char> match) => BasicString.LongFindIndex(match);
     public readonly long LongFindIndex(long startIndex, Predicate<char> match) => BasicString.LongFindIndex(startIndex, match);
     public readonly long LongFindIndex(long startIndex, long count, Predicate<char> match) => BasicString.LongFindIndex(startIndex, count, match);
@@ -136,9 +125,6 @@ public unsafe struct StdWString
     public readonly long LongIndexOf(char* subsequence, IntPtr subsequenceLength) => BasicString.LongIndexOf(subsequence, subsequenceLength);
     public readonly long LongIndexOf(char* subsequence, IntPtr subsequenceLength, long index) => BasicString.LongIndexOf(subsequence, subsequenceLength, index);
     public readonly long LongIndexOf(char* subsequence, IntPtr subsequenceLength, long index, long count) => BasicString.LongIndexOf(subsequence, subsequenceLength, index, count);
-    public readonly long LongIndexOfString(ReadOnlySpan<char> str) => BasicString.LongIndexOfString(IntrinsicEncoding, str);
-    public readonly long LongIndexOfString(ReadOnlySpan<char> str, long index) => BasicString.LongIndexOfString(IntrinsicEncoding, str, index);
-    public readonly long LongIndexOfString(ReadOnlySpan<char> str, long index, long count) => BasicString.LongIndexOfString(IntrinsicEncoding, str, index, count);
     public readonly long LongLastIndexOf(in char item) => BasicString.LongLastIndexOf(in item);
     public readonly long LongLastIndexOf(in char item, long index) => BasicString.LongLastIndexOf(in item, index);
     public readonly long LongLastIndexOf(in char item, long index, long count) => BasicString.LongLastIndexOf(in item, index, count);
@@ -148,12 +134,9 @@ public unsafe struct StdWString
     public readonly long LongLastIndexOf(char* subsequence, IntPtr subsequenceLength) => BasicString.LongLastIndexOf(subsequence, subsequenceLength);
     public readonly long LongLastIndexOf(char* subsequence, IntPtr subsequenceLength, long index) => BasicString.LongLastIndexOf(subsequence, subsequenceLength, index);
     public readonly long LongLastIndexOf(char* subsequence, IntPtr subsequenceLength, long index, long count) => BasicString.LongLastIndexOf(subsequence, subsequenceLength, index, count);
-    public readonly long LongLastIndexOfString(Encoding encoding, ReadOnlySpan<char> str) => BasicString.LongLastIndexOfString(encoding, str);
-    public readonly long LongLastIndexOfString(Encoding encoding, ReadOnlySpan<char> str, long index) => BasicString.LongLastIndexOfString(encoding, str, index);
-    public readonly long LongLastIndexOfString(Encoding encoding, ReadOnlySpan<char> str, long index, long count) => BasicString.LongLastIndexOfString(encoding, str, index, count);
-    public readonly long LongLastIndexOfString(ReadOnlySpan<char> str) => BasicString.LongLastIndexOfString(IntrinsicEncoding, str);
-    public readonly long LongLastIndexOfString(ReadOnlySpan<char> str, long index) => BasicString.LongLastIndexOfString(IntrinsicEncoding, str, index);
-    public readonly long LongLastIndexOfString(ReadOnlySpan<char> str, long index, long count) => BasicString.LongLastIndexOfString(IntrinsicEncoding, str, index, count);
+    public readonly long LongLastIndexOfString(ReadOnlySpan<char> str) => BasicString.LongLastIndexOfString(str);
+    public readonly long LongLastIndexOfString(ReadOnlySpan<char> str, long index) => BasicString.LongLastIndexOfString(str, index);
+    public readonly long LongLastIndexOfString(ReadOnlySpan<char> str, long index, long count) => BasicString.LongLastIndexOfString(str, index, count);
     public bool Remove(in char item) => BasicString.Remove(in item);
     public long RemoveAll(Predicate<char> match) => BasicString.RemoveAll(match);
     public void RemoveAt(long index) => BasicString.RemoveAt(index);
@@ -169,10 +152,10 @@ public unsafe struct StdWString
     public readonly char[] ToArray() => BasicString.ToArray();
     public readonly char[] ToArray(long index) => BasicString.ToArray(index);
     public readonly char[] ToArray(long index, long count) => BasicString.ToArray(index, count);
+    public override string ToString() => BasicString.ToString();
     public long EnsureCapacity(long capacity) => BasicString.EnsureCapacity(capacity);
     public long TrimExcess() => BasicString.TrimExcess();
     public void Resize(long newSize) => BasicString.Resize(newSize);
     public void Resize(long newSize, in char defaultValue) => BasicString.Resize(newSize, in defaultValue);
     public long SetCapacity(long newCapacity) => BasicString.SetCapacity(newCapacity);
-    public readonly string Decode(Encoding encoding) => BasicString.Decode(encoding);
 }

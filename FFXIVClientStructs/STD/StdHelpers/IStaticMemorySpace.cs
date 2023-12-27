@@ -14,3 +14,7 @@ public unsafe interface IStaticMemorySpace {
     /// <returns>0 if failed; otherwise, pointer to the newly allocated memory.</returns>
     public abstract static void* Allocate(nuint size, nuint alignment);
 }
+
+public interface IStdMeta {
+    
+}

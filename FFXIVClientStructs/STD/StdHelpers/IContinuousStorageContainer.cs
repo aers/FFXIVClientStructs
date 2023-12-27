@@ -495,13 +495,19 @@ public unsafe interface IContinuousStorageContainer<T> : IDisposable, IList, ILi
     /// <summary>
     /// Sets the capacity of this vector.
     /// </summary>
-    /// <param name="newCapacity">The new capacity. Must be at least <see cref="StdVector{T,TMemorySpace,TOperation}.LongCount"/>.</param>
+    /// <param name="newCapacity">The new capacity. Must be at least <see cref="StdVector{T,TMemorySpace,StdOps<T>}.LongCount"/>.</param>
     /// <returns>The new capacity.</returns>
-    /// <exception cref="ArgumentOutOfRangeException">When <paramref name="newCapacity"/> is less than <see cref="StdVector{T,TMemorySpace,TOperation}.LongCount"/>.</exception>
+    /// <exception cref="ArgumentOutOfRangeException">When <paramref name="newCapacity"/> is less than <see cref="StdVector{T,TMemorySpace,StdOps<T>}.LongCount"/>.</exception>
     /// <exception cref="OutOfMemoryException">When failed to allocate memory as requested.</exception>
     long SetCapacity(long newCapacity);
 
     #region Collection interfaces
+
+    void ICollection.CopyTo(Array array, int index) {
+        if (array is not T[] typedArray)
+            throw new ArgumentException(null, nameof(array));
+        CopyTo(typedArray, index);
+    }
 
     void ICollection<T>.Add(T item) => AddCopy(item);
 
@@ -522,18 +528,6 @@ public unsafe interface IContinuousStorageContainer<T> : IDisposable, IList, ILi
 
     bool ICollection<T>.Remove(T item) => Remove(item);
 
-    int IList<T>.IndexOf(T item) => IndexOf(item);
-
-    void IList<T>.Insert(int index, T item) => InsertCopy(index, item);
-
-    void IList<T>.RemoveAt(int index) => RemoveAt(index);
-
-    void ICollection.CopyTo(Array array, int index) {
-        if (array is not T[] typedArray)
-            throw new ArgumentException(null, nameof(array));
-        CopyTo(typedArray, index);
-    }
-
     int IList.Add(object? value) {
         if (LongCount >= int.MaxValue)
             throw new NotSupportedException();
@@ -552,6 +546,12 @@ public unsafe interface IContinuousStorageContainer<T> : IDisposable, IList, ILi
     void IList.Remove(object? value) => Remove((T)(value ?? throw new ArgumentNullException(nameof(value))));
 
     void IList.RemoveAt(int index) => RemoveAt(index);
+
+    int IList<T>.IndexOf(T item) => IndexOf(item);
+
+    void IList<T>.Insert(int index, T item) => InsertCopy(index, item);
+
+    void IList<T>.RemoveAt(int index) => RemoveAt(index);
 
     #endregion
 

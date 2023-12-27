@@ -2,7 +2,6 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using System.Runtime.CompilerServices;
-using System.Text;
 using FFXIVClientStructs.FFXIV.Client.System.Memory;
 using FFXIVClientStructs.STD.StdHelpers;
 using JetBrains.Annotations;
@@ -14,15 +13,17 @@ namespace FFXIVClientStructs.STD;
 /// A <see cref="List{T}"/>-like view for <see href="https://en.cppreference.com/w/cpp/string/basic_string">std::basic_string</see>.
 /// </summary>
 /// <typeparam name="T">The type of element.</typeparam>
+/// <typeparam name="TEncoding">The encoding.</typeparam>
 /// <typeparam name="TMemorySpace">The specifier for <see cref="IMemorySpace"/>, for vectors with different preferred memory space.</typeparam>
 /// <remarks>The object must be pinned on use, if the instance of this struct itself is allocated in heap.</remarks>
 [StructLayout(LayoutKind.Sequential, Size = 0x20)]
 [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
-public unsafe struct StdBasicString<T, TMemorySpace>
+public unsafe struct StdBasicString<T, TEncoding, TMemorySpace>
     : IStdBasicString<T>
-        , IComparable<StdBasicString<T, TMemorySpace>>
-        , IStaticNativeObjectOperation<StdBasicString<T, TMemorySpace>>
+        , IComparable<StdBasicString<T, TEncoding, TMemorySpace>>
+        , IStaticNativeObjectOperation<StdBasicString<T, TEncoding, TMemorySpace>>
     where T : unmanaged, IBinaryNumber<T>
+    where TEncoding : IStaticEncoding
     where TMemorySpace : IStaticMemorySpace {
 
     // See:
@@ -39,8 +40,6 @@ public unsafe struct StdBasicString<T, TMemorySpace>
     public static bool IsDisposable => true;
     public static bool IsCopiable => true;
     public static bool IsMovable => true;
-
-    public Encoding? IntrinsicEncoding => null;
 
     /// <inheritdoc/>
     public readonly T* First => IsLargeMode
@@ -82,30 +81,30 @@ public unsafe struct StdBasicString<T, TMemorySpace>
     /// <inheritdoc/>
     public readonly ref T this[long index] => ref First[CheckedIndex(index)];
 
-    public static bool operator ==(in StdBasicString<T, TMemorySpace> l, in StdBasicString<T, TMemorySpace> r) => l.Equals(r);
+    public static bool operator ==(in StdBasicString<T, TEncoding, TMemorySpace> l, in StdBasicString<T, TEncoding, TMemorySpace> r) => l.Equals(r);
 
-    public static bool operator !=(in StdBasicString<T, TMemorySpace> l, in StdBasicString<T, TMemorySpace> r) => !l.Equals(r);
+    public static bool operator !=(in StdBasicString<T, TEncoding, TMemorySpace> l, in StdBasicString<T, TEncoding, TMemorySpace> r) => !l.Equals(r);
 
-    public static implicit operator Span<T>(in StdBasicString<T, TMemorySpace> value)
+    public static implicit operator Span<T>(in StdBasicString<T, TEncoding, TMemorySpace> value)
         => value.AsSpan();
 
-    public static implicit operator ReadOnlySpan<T>(in StdBasicString<T, TMemorySpace> value)
+    public static implicit operator ReadOnlySpan<T>(in StdBasicString<T, TEncoding, TMemorySpace> value)
         => value.AsSpan();
 
     /// <inheritdoc/>
-    public static int Compare(in StdBasicString<T, TMemorySpace> left, in StdBasicString<T, TMemorySpace> right) => left.CompareTo(right);
+    public static int Compare(in StdBasicString<T, TEncoding, TMemorySpace> left, in StdBasicString<T, TEncoding, TMemorySpace> right) => left.CompareTo(right);
 
     /// <inheritdoc/>
-    public static bool ContentEquals(in StdBasicString<T, TMemorySpace> left, in StdBasicString<T, TMemorySpace> right) => left.Equals(right);
+    public static bool ContentEquals(in StdBasicString<T, TEncoding, TMemorySpace> left, in StdBasicString<T, TEncoding, TMemorySpace> right) => left.Equals(right);
 
     /// <inheritdoc/>
-    public static void ConstructDefaultInPlace(out StdBasicString<T, TMemorySpace> item) => item = default;
+    public static void ConstructDefaultInPlace(out StdBasicString<T, TEncoding, TMemorySpace> item) => item = default;
 
     /// <inheritdoc/>
-    public static void StaticDispose(ref StdBasicString<T, TMemorySpace> item) => item.Dispose();
+    public static void StaticDispose(ref StdBasicString<T, TEncoding, TMemorySpace> item) => item.Dispose();
 
     /// <inheritdoc/>
-    public static void ConstructCopyInPlace(in StdBasicString<T, TMemorySpace> source, out StdBasicString<T, TMemorySpace> target) {
+    public static void ConstructCopyInPlace(in StdBasicString<T, TEncoding, TMemorySpace> source, out StdBasicString<T, TEncoding, TMemorySpace> target) {
         target = default;
         var len = source.LongCount;
         target.EnsureCapacity(len);
@@ -114,10 +113,10 @@ public unsafe struct StdBasicString<T, TMemorySpace>
     }
 
     /// <inheritdoc/>
-    public static void ConstructMoveInPlace(ref StdBasicString<T, TMemorySpace> source, out StdBasicString<T, TMemorySpace> target) => (target, source) = (source, default);
+    public static void ConstructMoveInPlace(ref StdBasicString<T, TEncoding, TMemorySpace> source, out StdBasicString<T, TEncoding, TMemorySpace> target) => (target, source) = (source, default);
 
     /// <inheritdoc/>
-    public static void Swap(ref StdBasicString<T, TMemorySpace> item1, ref StdBasicString<T, TMemorySpace> item2) => (item1, item2) = (item2, item1);
+    public static void Swap(ref StdBasicString<T, TEncoding, TMemorySpace> item1, ref StdBasicString<T, TEncoding, TMemorySpace> item2) => (item1, item2) = (item2, item1);
 
     /// <inheritdoc/>
     public readonly Span<T> AsSpan() => new(First, Count);
@@ -152,7 +151,7 @@ public unsafe struct StdBasicString<T, TMemorySpace>
     public void AddSpanMove(Span<T> span) => InsertSpanMove(LongCount, span);
 
     /// <inheritdoc/>
-    public void AddString(Encoding encoding, ReadOnlySpan<char> str) => InsertString(encoding, LongCount, str);
+    public void AddString(ReadOnlySpan<char> str) => InsertString(LongCount, str);
 
     /// <inheritdoc/>
     public readonly long BinarySearch(in T item) => BinarySearch(0, LongCount, item, null);
@@ -162,7 +161,7 @@ public unsafe struct StdBasicString<T, TMemorySpace>
 
     /// <inheritdoc/>
     public readonly long BinarySearch(long index, long count, in T item, IComparer<T>? comparer) =>
-        LongPointerSortHelper<T, DefaultStaticNativeObjectOperation<T>>.BinarySearch(
+        LongPointerSortHelper<T>.BinarySearch(
             First,
             index,
             CheckedRangeCount(index, count),
@@ -190,7 +189,7 @@ public unsafe struct StdBasicString<T, TMemorySpace>
     }
 
     /// <inheritdoc cref="IComparable{T}.CompareTo"/>
-    public readonly int CompareTo(in StdBasicString<T, TMemorySpace> other) {
+    public readonly int CompareTo(in StdBasicString<T, TEncoding, TMemorySpace> other) {
         var lv = First;
         var lt = lv + LongCount;
         var rv = other.First;
@@ -207,7 +206,7 @@ public unsafe struct StdBasicString<T, TMemorySpace>
     }
 
     /// <inheritdoc/>
-    readonly int IComparable<StdBasicString<T, TMemorySpace>>.CompareTo(StdBasicString<T, TMemorySpace> other) => CompareTo(other);
+    readonly int IComparable<StdBasicString<T, TEncoding, TMemorySpace>>.CompareTo(StdBasicString<T, TEncoding, TMemorySpace> other) => CompareTo(other);
 
     /// <inheritdoc/>
     public readonly int CompareTo(IContinuousStorageContainer<T>? other) {
@@ -229,7 +228,7 @@ public unsafe struct StdBasicString<T, TMemorySpace>
     }
 
     /// <inheritdoc/>
-    public readonly int CompareTo(object? obj) => obj is null ? 1 : CompareTo((StdBasicString<T, TMemorySpace>)obj);
+    public readonly int CompareTo(object? obj) => obj is null ? 1 : CompareTo((StdBasicString<T, TEncoding, TMemorySpace>)obj);
 
     /// <inheritdoc cref="IContinuousStorageContainer{T}.Clear"/>
     public void Clear() => ResizeUndefined(0);
@@ -244,7 +243,7 @@ public unsafe struct StdBasicString<T, TMemorySpace>
     public readonly bool Contains(ReadOnlySpan<T> subsequence) => LongIndexOf(subsequence) != -1;
 
     /// <inheritdoc/>
-    public readonly bool ContainsString(Encoding encoding, ReadOnlySpan<char> str) => LongIndexOfString(encoding, str) != -1;
+    public readonly bool ContainsString(ReadOnlySpan<char> str) => LongIndexOfString(str) != -1;
 
     /// <inheritdoc/>
     public void Dispose() {
@@ -253,13 +252,13 @@ public unsafe struct StdBasicString<T, TMemorySpace>
     }
 
     /// <inheritdoc/>
-    public readonly override bool Equals(object? obj) => obj is StdBasicString<T, TMemorySpace> sbs && Equals(sbs);
+    public readonly override bool Equals(object? obj) => obj is StdBasicString<T, TEncoding, TMemorySpace> sbs && Equals(sbs);
 
     /// <inheritdoc/>
-    public readonly bool Equals(IContinuousStorageContainer<T>? obj) => obj is StdBasicString<T, TMemorySpace> sbs && Equals(sbs);
+    public readonly bool Equals(IContinuousStorageContainer<T>? obj) => obj is StdBasicString<T, TEncoding, TMemorySpace> sbs && Equals(sbs);
 
     /// <inheritdoc cref="Equals(object?)"/>
-    public readonly bool Equals(in StdBasicString<T, TMemorySpace> other) {
+    public readonly bool Equals(in StdBasicString<T, TEncoding, TMemorySpace> other) {
         if (LongCount != other.LongCount)
             return false;
         var buf1 = First;
@@ -336,16 +335,16 @@ public unsafe struct StdBasicString<T, TMemorySpace>
     public readonly int IndexOf(ReadOnlySpan<T> item, int index, int count) => checked((int)LongIndexOf(item, index, count));
 
     /// <inheritdoc/>
-    public readonly int IndexOfString(Encoding encoding, ReadOnlySpan<char> str) =>
-        IndexOfString(encoding, str, 0, Count);
+    public readonly int IndexOfString(ReadOnlySpan<char> str) =>
+        IndexOfString(str, 0, Count);
 
     /// <inheritdoc/>
-    public readonly int IndexOfString(Encoding encoding, ReadOnlySpan<char> str, int index) =>
-        IndexOfString(encoding, str, index, Count - index);
+    public readonly int IndexOfString(ReadOnlySpan<char> str, int index) =>
+        IndexOfString(str, index, Count - index);
 
     /// <inheritdoc/>
-    public readonly int IndexOfString(Encoding encoding, ReadOnlySpan<char> str, int index, int count) =>
-        checked((int)LongIndexOfString(encoding, str, index, count));
+    public readonly int IndexOfString(ReadOnlySpan<char> str, int index, int count) =>
+        checked((int)LongIndexOfString(str, index, count));
 
     /// <inheritdoc/>
     public void InsertCopy(long index, in T item) {
@@ -419,7 +418,8 @@ public unsafe struct StdBasicString<T, TMemorySpace>
     public void InsertSpanMove(long index, Span<T> span) => InsertSpanCopy(index, span);
 
     /// <inheritdoc/>
-    public void InsertString(Encoding encoding, long index, ReadOnlySpan<char> str) {
+    public void InsertString(long index, ReadOnlySpan<char> str) {
+        var encoding = TEncoding.Encoding;
         var sizeofT = sizeof(T);
         var nb = encoding.GetByteCount(str);
         if (nb % sizeofT != 0)
@@ -453,15 +453,15 @@ public unsafe struct StdBasicString<T, TMemorySpace>
         checked((int)LongLastIndexOf(subsequence, index, count));
 
     /// <inheritdoc/>
-    public readonly int LastIndexOfString(Encoding encoding, ReadOnlySpan<char> str) => LastIndexOfString(encoding, str, 0, Count);
+    public readonly int LastIndexOfString(ReadOnlySpan<char> str) => LastIndexOfString(str, 0, Count);
 
     /// <inheritdoc/>
-    public readonly int LastIndexOfString(Encoding encoding, ReadOnlySpan<char> str, int index) =>
-        LastIndexOfString(encoding, str, index, Count - index);
+    public readonly int LastIndexOfString(ReadOnlySpan<char> str, int index) =>
+        LastIndexOfString(str, index, Count - index);
 
     /// <inheritdoc/>
-    public readonly int LastIndexOfString(Encoding encoding, ReadOnlySpan<char> str, int index, int count) =>
-        checked((int)LongLastIndexOfString(encoding, str, index, count));
+    public readonly int LastIndexOfString(ReadOnlySpan<char> str, int index, int count) =>
+        checked((int)LongLastIndexOfString(str, index, count));
 
     /// <inheritdoc/>
     public bool Remove(in T item) {
@@ -525,26 +525,26 @@ public unsafe struct StdBasicString<T, TMemorySpace>
 
     /// <inheritdoc/>
     public void Sort() =>
-        LongPointerSortHelper<T, DefaultStaticNativeObjectOperation<T>>.Sort(
+        LongPointerSortHelper<T>.Sort(
             First,
             LongCount);
 
     /// <inheritdoc/>
     public void Sort(long index, long count) =>
-        LongPointerSortHelper<T, DefaultStaticNativeObjectOperation<T>>.Sort(
+        LongPointerSortHelper<T>.Sort(
             First + index,
             CheckedRangeCount(index, count));
 
     /// <inheritdoc/>
     public void Sort(IComparer<T>? comparer) =>
-        LongPointerSortHelper<T, DefaultStaticNativeObjectOperation<T>>.Sort(
+        LongPointerSortHelper<T>.Sort(
             First,
             LongCount,
             comparer);
 
     /// <inheritdoc/>
     public void Sort(long index, long count, IComparer<T>? comparer) =>
-        LongPointerSortHelper<T, DefaultStaticNativeObjectOperation<T>>.Sort(
+        LongPointerSortHelper<T>.Sort(
             First + index,
             CheckedRangeCount(index, count),
             comparer);
@@ -554,7 +554,7 @@ public unsafe struct StdBasicString<T, TMemorySpace>
 
     /// <inheritdoc/>
     public void Sort(long index, long count, Comparison<T> comparison) =>
-        LongPointerSortHelper<T, DefaultStaticNativeObjectOperation<T>>.Sort(
+        LongPointerSortHelper<T>.Sort(
             First + index,
             CheckedRangeCount(index, count),
             comparison);
@@ -576,6 +576,8 @@ public unsafe struct StdBasicString<T, TMemorySpace>
             Buffer.MemoryCopy(First + index, p, count * sizeof(T), count * sizeof(T));
         return res;
     }
+
+    public override string ToString() => TEncoding.Encoding.GetString((byte*)First, checked((int)(LongCount * sizeof(T))));
 
     /// <inheritdoc/>
     public readonly long LongFindIndex(Predicate<T> match) => LongFindIndex(0, LongCount, match);
@@ -698,15 +700,16 @@ public unsafe struct StdBasicString<T, TMemorySpace>
     }
 
     /// <inheritdoc/>
-    public readonly long LongIndexOfString(Encoding encoding, ReadOnlySpan<char> str) =>
-        LongIndexOfString(encoding, str, 0, LongCount);
+    public readonly long LongIndexOfString(ReadOnlySpan<char> str) =>
+        LongIndexOfString(str, 0, LongCount);
 
     /// <inheritdoc/>
-    public readonly long LongIndexOfString(Encoding encoding, ReadOnlySpan<char> str, long index) =>
-        LongIndexOfString(encoding, str, index, LongCount - index);
+    public readonly long LongIndexOfString(ReadOnlySpan<char> str, long index) =>
+        LongIndexOfString(str, index, LongCount - index);
 
     /// <inheritdoc/>
-    public readonly long LongIndexOfString(Encoding encoding, ReadOnlySpan<char> str, long index, long count) {
+    public readonly long LongIndexOfString(ReadOnlySpan<char> str, long index, long count) {
+        var encoding = TEncoding.Encoding;
         var byteCount = encoding.GetByteCount(str);
         var bytes = byteCount < 1024 ? stackalloc byte[byteCount] : new byte[byteCount];
         encoding.GetBytes(str, bytes);
@@ -799,25 +802,22 @@ public unsafe struct StdBasicString<T, TMemorySpace>
     }
 
     /// <inheritdoc/>
-    public readonly long LongLastIndexOfString(Encoding encoding, ReadOnlySpan<char> str) =>
-        LongLastIndexOfString(encoding, str, 0, LongCount);
+    public readonly long LongLastIndexOfString(ReadOnlySpan<char> str) =>
+        LongLastIndexOfString(str, 0, LongCount);
 
     /// <inheritdoc/>
-    public readonly long LongLastIndexOfString(Encoding encoding, ReadOnlySpan<char> str, long index) =>
-        LongLastIndexOfString(encoding, str, index, LongCount - index);
+    public readonly long LongLastIndexOfString(ReadOnlySpan<char> str, long index) =>
+        LongLastIndexOfString(str, index, LongCount - index);
 
     /// <inheritdoc/>
-    public readonly long LongLastIndexOfString(Encoding encoding, ReadOnlySpan<char> str, long index, long count) {
+    public readonly long LongLastIndexOfString(ReadOnlySpan<char> str, long index, long count) {
+        var encoding = TEncoding.Encoding;
         var byteCount = encoding.GetByteCount(str);
         var bytes = byteCount < 1024 ? stackalloc byte[byteCount] : new byte[byteCount];
         encoding.GetBytes(str, bytes);
         fixed (void* p = bytes)
             return LongLastIndexOf((T*)p, byteCount / sizeof(T), index, count);
     }
-
-    /// <inheritdoc/>
-    public readonly string Decode(Encoding encoding) =>
-        encoding.GetString((byte*)First, checked((int)(LongCount * sizeof(T))));
 
     /// <inheritdoc/>
     public long EnsureCapacity(long capacity) {

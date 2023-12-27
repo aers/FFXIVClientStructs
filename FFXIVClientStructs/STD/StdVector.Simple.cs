@@ -4,14 +4,14 @@ using FFXIVClientStructs.STD.StdHelpers;
 namespace FFXIVClientStructs.STD;
 
 /// <summary>
-/// A <see cref="StdVector{T,TMemorySpace,TOperation}"/> using <see cref="DefaultStaticMemorySpace"/> and <see cref="DefaultStaticNativeObjectOperation{T}"/>.
+/// A <see cref="StdVector{T,TMemorySpace}"/> using <see cref="DefaultStaticMemorySpace"/> and <see cref="StdOps{T}"/>.
 /// </summary>
 /// <typeparam name="T">The type of element.</typeparam>
 [StructLayout(LayoutKind.Sequential)]
 [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
 public unsafe struct StdVector<T> : IContinuousStorageContainer<T>
     where T : unmanaged {
-    public StdVector<T, DefaultStaticMemorySpace, DefaultStaticNativeObjectOperation<T>> WithOperationSpecs;
+    public StdVector<T, DefaultStaticMemorySpace> WithOperationSpecs;
     public T* First {
         readonly get => WithOperationSpecs.First;
         set => WithOperationSpecs.First = value;

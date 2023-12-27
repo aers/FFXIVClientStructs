@@ -8,10 +8,9 @@ namespace FFXIVClientStructs.STD.StdHelpers;
 /// Taken from ArraySortHelper.
 /// </summary>
 /// <typeparam name="T">The element type.</typeparam>
-/// <typeparam name="TOperation">The operations.</typeparam>
-internal static unsafe class LongPointerSortHelper<T, TOperation>
-    where T : unmanaged
-    where TOperation : IStaticNativeObjectOperation<T> {
+/// <typeparam name="StdOps<T>">The operations.</typeparam>
+internal static unsafe class LongPointerSortHelper<T>
+    where T : unmanaged {
     private const long IntrosortSizeThreshold = 64;
 
     internal static void Sort(T* data, long dataLength) =>
@@ -50,13 +49,13 @@ internal static unsafe class LongPointerSortHelper<T, TOperation>
         Debug.Assert(i != j);
 
         if (comparer(data[i], data[j]) > 0)
-            TOperation.Swap(ref data[i], ref data[j]);
+            StdOps<T>.Swap(ref data[i], ref data[j]);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static void Swap(T* a, long i, long j) {
         Debug.Assert(i != j);
-        TOperation.Swap(ref a[i], ref a[j]);
+        StdOps<T>.Swap(ref a[i], ref a[j]);
     }
 
     private static void IntrospectiveSort(T* data, long dataLength, Comparison<T> comparer) {

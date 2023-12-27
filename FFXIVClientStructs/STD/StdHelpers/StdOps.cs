@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.STD.StdHelpers;
 /// </summary>
 /// <typeparam name="T">The type.</typeparam>
 [SuppressMessage("ReSharper", "StaticMemberInGenericType")]
-public class DefaultStaticNativeObjectOperation<T> : IStaticNativeObjectOperation<T>
+public class StdOps<T> : IStaticNativeObjectOperation<T>
     where T : unmanaged {
     private static readonly ConstructDefaultInPlaceDelegate? InnerConstructDefaultInPlace;
     private static readonly ConstructCopyInPlaceDelegate? InnerConstructCopyInPlace;
@@ -16,9 +16,9 @@ public class DefaultStaticNativeObjectOperation<T> : IStaticNativeObjectOperatio
     private static readonly StaticDisposeDelegate? InnerStaticDispose;
     private static readonly SwapDelegate? InnerSwap;
 
-    private DefaultStaticNativeObjectOperation() => throw new InvalidOperationException();
+    private StdOps() => throw new InvalidOperationException();
 
-    static DefaultStaticNativeObjectOperation() {
+    static StdOps() {
         if (typeof(T).IsAssignableTo(typeof(IStaticNativeObjectOperation<T>))) {
             HasDefault = (bool)typeof(T).GetProperty(nameof(HasDefault))!.GetValue(null)!;
             IsCopiable = (bool)typeof(T).GetProperty(nameof(IsCopiable))!.GetValue(null)!;

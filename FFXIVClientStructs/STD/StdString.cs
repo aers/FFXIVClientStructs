@@ -1,17 +1,17 @@
-using System.Text;
 using FFXIVClientStructs.STD.StdHelpers;
 
 namespace FFXIVClientStructs.STD;
 
 /// <summary>
-/// A <see cref="StdBasicString{T,TMemorySpace}"/> using <see cref="DefaultStaticMemorySpace"/> and <see cref="byte"/>.<br />
+/// A <see cref="StdBasicString{T,TEncoding,TMemorySpace}"/> using
+/// <see cref="DefaultStaticMemorySpace"/>, <see cref="IStaticEncoding.System"/> and <see cref="byte"/>.<br />
 /// Encoding contained within is assumed to be the system default encoding.
 /// </summary>
 [StructLayout(LayoutKind.Explicit, Size = 0x20)]
 public unsafe struct StdString
     : IStdBasicString<byte>
         , IStaticNativeObjectOperation<StdString> {
-    [FieldOffset(0x0)] public StdBasicString<byte, DefaultStaticMemorySpace> BasicString;
+    [FieldOffset(0x0)] public StdBasicString<byte, IStaticEncoding.System, DefaultStaticMemorySpace> BasicString;
     [FieldOffset(0x0)] public byte* BufferPtr;
     [FieldOffset(0x0)] public fixed byte Buffer[16];
     /// <summary>
@@ -20,14 +20,11 @@ public unsafe struct StdString
     [FieldOffset(0x10)] public ulong Length;
     [FieldOffset(0x18)] public ulong Capacity;
 
-    public static bool HasDefault => StdBasicString<char, DefaultStaticMemorySpace>.HasDefault;
-    public static bool IsDisposable => StdBasicString<char, DefaultStaticMemorySpace>.IsDisposable;
-    public static bool IsCopiable => StdBasicString<char, DefaultStaticMemorySpace>.IsCopiable;
-    public static bool IsMovable => StdBasicString<char, DefaultStaticMemorySpace>.IsMovable;
+    public static bool HasDefault => StdBasicString<char, IStaticEncoding.System, DefaultStaticMemorySpace>.HasDefault;
+    public static bool IsDisposable => StdBasicString<char, IStaticEncoding.System, DefaultStaticMemorySpace>.IsDisposable;
+    public static bool IsCopiable => StdBasicString<char, IStaticEncoding.System, DefaultStaticMemorySpace>.IsCopiable;
+    public static bool IsMovable => StdBasicString<char, IStaticEncoding.System, DefaultStaticMemorySpace>.IsMovable;
 
-    public readonly Encoding IntrinsicEncoding =>
-        CodePagesEncodingProvider.Instance.GetEncoding(0)
-        ?? throw new NotSupportedException();
     public byte* First => BasicString.First;
     public byte* Last => BasicString.Last;
     public byte* End => BasicString.End;
@@ -51,22 +48,22 @@ public unsafe struct StdString
 
     public static implicit operator ReadOnlySpan<byte>(in StdString value) => value.AsSpan();
 
-    public static int Compare(in StdString left, in StdString right) => StdBasicString<byte, DefaultStaticMemorySpace>.Compare(left.BasicString, right.BasicString);
-    public static bool ContentEquals(in StdString left, in StdString right) => StdBasicString<byte, DefaultStaticMemorySpace>.ContentEquals(left.BasicString, right.BasicString);
+    public static int Compare(in StdString left, in StdString right) => StdBasicString<byte, IStaticEncoding.System, DefaultStaticMemorySpace>.Compare(left.BasicString, right.BasicString);
+    public static bool ContentEquals(in StdString left, in StdString right) => StdBasicString<byte, IStaticEncoding.System, DefaultStaticMemorySpace>.ContentEquals(left.BasicString, right.BasicString);
     public static void ConstructDefaultInPlace(out StdString item) {
         item = default;
-        StdBasicString<byte, DefaultStaticMemorySpace>.ConstructDefaultInPlace(out item.BasicString);
+        StdBasicString<byte, IStaticEncoding.System, DefaultStaticMemorySpace>.ConstructDefaultInPlace(out item.BasicString);
     }
-    public static void StaticDispose(ref StdString item) => StdBasicString<byte, DefaultStaticMemorySpace>.StaticDispose(ref item.BasicString);
+    public static void StaticDispose(ref StdString item) => StdBasicString<byte, IStaticEncoding.System, DefaultStaticMemorySpace>.StaticDispose(ref item.BasicString);
     public static void ConstructCopyInPlace(in StdString source, out StdString target) {
         target = default;
-        StdBasicString<byte, DefaultStaticMemorySpace>.ConstructCopyInPlace(in source.BasicString, out target.BasicString);
+        StdBasicString<byte, IStaticEncoding.System, DefaultStaticMemorySpace>.ConstructCopyInPlace(in source.BasicString, out target.BasicString);
     }
     public static void ConstructMoveInPlace(ref StdString source, out StdString target) {
         target = default;
-        StdBasicString<byte, DefaultStaticMemorySpace>.ConstructMoveInPlace(ref source.BasicString, out target.BasicString);
+        StdBasicString<byte, IStaticEncoding.System, DefaultStaticMemorySpace>.ConstructMoveInPlace(ref source.BasicString, out target.BasicString);
     }
-    public static void Swap(ref StdString item1, ref StdString item2) => StdBasicString<byte, DefaultStaticMemorySpace>.Swap(ref item1.BasicString, ref item2.BasicString);
+    public static void Swap(ref StdString item1, ref StdString item2) => StdBasicString<byte, IStaticEncoding.System, DefaultStaticMemorySpace>.Swap(ref item1.BasicString, ref item2.BasicString);
 
     public readonly Span<byte> AsSpan() => BasicString.AsSpan();
     public readonly Span<byte> AsSpan(long index) => BasicString.AsSpan(index);
@@ -76,8 +73,7 @@ public unsafe struct StdString
     public void AddRangeCopy(IEnumerable<byte> collection) => BasicString.AddRangeCopy(collection);
     public void AddSpanCopy(ReadOnlySpan<byte> span) => BasicString.AddSpanCopy(span);
     public void AddSpanMove(Span<byte> span) => BasicString.AddSpanMove(span);
-    public void AddString(Encoding encoding, ReadOnlySpan<char> str) => BasicString.AddString(encoding, str);
-    public void AddString(ReadOnlySpan<char> str) => BasicString.AddString(IntrinsicEncoding, str);
+    public void AddString(ReadOnlySpan<char> str) => BasicString.AddString(str);
     public readonly long BinarySearch(in byte item) => BasicString.BinarySearch(in item);
     public readonly long BinarySearch(in byte item, IComparer<byte>? comparer) => BasicString.BinarySearch(in item, comparer);
     public readonly long BinarySearch(long index, long count, in byte item, IComparer<byte>? comparer) => BasicString.BinarySearch(index, count, in item, comparer);
@@ -87,8 +83,7 @@ public unsafe struct StdString
     public readonly bool Contains(in byte item) => BasicString.Contains(in item);
     public readonly bool Contains(byte* subsequence, IntPtr length) => BasicString.Contains(subsequence, length);
     public readonly bool Contains(ReadOnlySpan<byte> subsequence) => BasicString.Contains(subsequence);
-    public readonly bool ContainsString(Encoding encoding, ReadOnlySpan<char> str) => BasicString.ContainsString(encoding, str);
-    public readonly bool ContainsString(ReadOnlySpan<char> str) => BasicString.ContainsString(IntrinsicEncoding, str);
+    public readonly bool ContainsString(ReadOnlySpan<char> str) => BasicString.ContainsString(str);
     public void Dispose() => BasicString.Dispose();
     public readonly override bool Equals(object? obj) => obj is StdString s && Equals(s);
     public readonly bool Equals(IContinuousStorageContainer<byte>? other) => other is StdString s && Equals(s);
@@ -104,41 +99,34 @@ public unsafe struct StdString
     public readonly void ForEach(Action<byte> action) => BasicString.ForEach(action);
     public readonly IContinuousStorageContainer<byte>.Enumerator GetEnumerator() => BasicString.GetEnumerator();
     public readonly override int GetHashCode() => BasicString.GetHashCode();
-    public readonly override string ToString() => Decode(IntrinsicEncoding);
+    public readonly override string ToString() => BasicString.ToString();
     public readonly int IndexOf(in byte item) => BasicString.IndexOf(in item);
     public readonly int IndexOf(in byte item, int index) => BasicString.IndexOf(in item, index);
     public readonly int IndexOf(in byte item, int index, int count) => BasicString.IndexOf(in item, index, count);
     public readonly int IndexOf(ReadOnlySpan<byte> subsequence) => BasicString.IndexOf(subsequence);
     public readonly int IndexOf(ReadOnlySpan<byte> subsequence, int index) => BasicString.IndexOf(subsequence, index);
     public readonly int IndexOf(ReadOnlySpan<byte> subsequence, int index, int count) => BasicString.IndexOf(subsequence, index, count);
-    public readonly int IndexOfString(Encoding encoding, ReadOnlySpan<char> str) => BasicString.IndexOfString(encoding, str);
-    public readonly int IndexOfString(Encoding encoding, ReadOnlySpan<char> str, int index) => BasicString.IndexOfString(encoding, str, index);
-    public readonly int IndexOfString(Encoding encoding, ReadOnlySpan<char> str, int index, int count) => BasicString.IndexOfString(encoding, str, index, count);
-    public readonly int IndexOfString(ReadOnlySpan<char> str) => BasicString.IndexOfString(IntrinsicEncoding, str);
-    public readonly int IndexOfString(ReadOnlySpan<char> str, int index) => BasicString.IndexOfString(IntrinsicEncoding, str, index);
-    public readonly int IndexOfString(ReadOnlySpan<char> str, int index, int count) => BasicString.IndexOfString(IntrinsicEncoding, str, index, count);
+    public readonly int IndexOfString(ReadOnlySpan<char> str) => BasicString.IndexOfString(str);
+    public readonly int IndexOfString(ReadOnlySpan<char> str, int index) => BasicString.IndexOfString(str, index);
+    public readonly int IndexOfString(ReadOnlySpan<char> str, int index, int count) => BasicString.IndexOfString(str, index, count);
     public void InsertCopy(long index, in byte item) => BasicString.InsertCopy(index, in item);
     public void InsertMove(long index, ref byte item) => BasicString.InsertMove(index, ref item);
     public void InsertRangeCopy(long index, IEnumerable<byte> collection) => BasicString.InsertRangeCopy(index, collection);
     public void InsertSpanCopy(long index, ReadOnlySpan<byte> span) => BasicString.InsertSpanCopy(index, span);
     public void InsertSpanMove(long index, Span<byte> span) => BasicString.InsertSpanMove(index, span);
-    public void InsertString(Encoding encoding, long index, ReadOnlySpan<char> str) => BasicString.InsertString(encoding, index, str);
-    public void InsertString(long index, ReadOnlySpan<char> str) => BasicString.InsertString(IntrinsicEncoding, index, str);
+    public void InsertString(long index, ReadOnlySpan<char> str) => BasicString.InsertString(index, str);
     public readonly int LastIndexOf(in byte item) => BasicString.LastIndexOf(in item);
     public readonly int LastIndexOf(in byte item, int index) => BasicString.LastIndexOf(in item, index);
     public readonly int LastIndexOf(in byte item, int index, int count) => BasicString.LastIndexOf(in item, index, count);
     public readonly int LastIndexOf(ReadOnlySpan<byte> subsequence) => BasicString.LastIndexOf(subsequence);
     public readonly int LastIndexOf(ReadOnlySpan<byte> subsequence, int index) => BasicString.LastIndexOf(subsequence, index);
     public readonly int LastIndexOf(ReadOnlySpan<byte> subsequence, int index, int count) => BasicString.LastIndexOf(subsequence, index, count);
-    public readonly int LastIndexOfString(Encoding encoding, ReadOnlySpan<char> str) => BasicString.LastIndexOfString(encoding, str);
-    public readonly int LastIndexOfString(Encoding encoding, ReadOnlySpan<char> str, int index) => BasicString.LastIndexOfString(encoding, str, index);
-    public readonly int LastIndexOfString(Encoding encoding, ReadOnlySpan<char> str, int index, int count) => BasicString.LastIndexOfString(encoding, str, index, count);
-    public readonly long LongIndexOfString(Encoding encoding, ReadOnlySpan<char> str) => BasicString.LongIndexOfString(encoding, str);
-    public readonly long LongIndexOfString(Encoding encoding, ReadOnlySpan<char> str, long index) => BasicString.LongIndexOfString(encoding, str, index);
-    public readonly long LongIndexOfString(Encoding encoding, ReadOnlySpan<char> str, long index, long count) => BasicString.LongIndexOfString(encoding, str, index, count);
-    public readonly int LastIndexOfString(ReadOnlySpan<char> str) => BasicString.LastIndexOfString(IntrinsicEncoding, str);
-    public readonly int LastIndexOfString(ReadOnlySpan<char> str, int index) => BasicString.LastIndexOfString(IntrinsicEncoding, str, index);
-    public readonly int LastIndexOfString(ReadOnlySpan<char> str, int index, int count) => BasicString.LastIndexOfString(IntrinsicEncoding, str, index, count);
+    public readonly int LastIndexOfString(ReadOnlySpan<char> str) => BasicString.LastIndexOfString(str);
+    public readonly int LastIndexOfString(ReadOnlySpan<char> str, int index) => BasicString.LastIndexOfString(str, index);
+    public readonly int LastIndexOfString(ReadOnlySpan<char> str, int index, int count) => BasicString.LastIndexOfString(str, index, count);
+    public readonly long LongIndexOfString(ReadOnlySpan<char> str) => BasicString.LongIndexOfString(str);
+    public readonly long LongIndexOfString(ReadOnlySpan<char> str, long index) => BasicString.LongIndexOfString(str, index);
+    public readonly long LongIndexOfString(ReadOnlySpan<char> str, long index, long count) => BasicString.LongIndexOfString(str, index, count);
     public readonly long LongFindIndex(Predicate<byte> match) => BasicString.LongFindIndex(match);
     public readonly long LongFindIndex(long startIndex, Predicate<byte> match) => BasicString.LongFindIndex(startIndex, match);
     public readonly long LongFindIndex(long startIndex, long count, Predicate<byte> match) => BasicString.LongFindIndex(startIndex, count, match);
@@ -154,9 +142,6 @@ public unsafe struct StdString
     public readonly long LongIndexOf(byte* subsequence, IntPtr subsequenceLength) => BasicString.LongIndexOf(subsequence, subsequenceLength);
     public readonly long LongIndexOf(byte* subsequence, IntPtr subsequenceLength, long index) => BasicString.LongIndexOf(subsequence, subsequenceLength, index);
     public readonly long LongIndexOf(byte* subsequence, IntPtr subsequenceLength, long index, long count) => BasicString.LongIndexOf(subsequence, subsequenceLength, index, count);
-    public readonly long LongIndexOfString(ReadOnlySpan<char> str) => BasicString.LongIndexOfString(IntrinsicEncoding, str);
-    public readonly long LongIndexOfString(ReadOnlySpan<char> str, long index) => BasicString.LongIndexOfString(IntrinsicEncoding, str, index);
-    public readonly long LongIndexOfString(ReadOnlySpan<char> str, long index, long count) => BasicString.LongIndexOfString(IntrinsicEncoding, str, index, count);
     public readonly long LongLastIndexOf(in byte item) => BasicString.LongLastIndexOf(in item);
     public readonly long LongLastIndexOf(in byte item, long index) => BasicString.LongLastIndexOf(in item, index);
     public readonly long LongLastIndexOf(in byte item, long index, long count) => BasicString.LongLastIndexOf(in item, index, count);
@@ -166,12 +151,9 @@ public unsafe struct StdString
     public readonly long LongLastIndexOf(byte* subsequence, IntPtr subsequenceLength) => BasicString.LongLastIndexOf(subsequence, subsequenceLength);
     public readonly long LongLastIndexOf(byte* subsequence, IntPtr subsequenceLength, long index) => BasicString.LongLastIndexOf(subsequence, subsequenceLength, index);
     public readonly long LongLastIndexOf(byte* subsequence, IntPtr subsequenceLength, long index, long count) => BasicString.LongLastIndexOf(subsequence, subsequenceLength, index, count);
-    public readonly long LongLastIndexOfString(Encoding encoding, ReadOnlySpan<char> str) => BasicString.LongLastIndexOfString(encoding, str);
-    public readonly long LongLastIndexOfString(Encoding encoding, ReadOnlySpan<char> str, long index) => BasicString.LongLastIndexOfString(encoding, str, index);
-    public readonly long LongLastIndexOfString(Encoding encoding, ReadOnlySpan<char> str, long index, long count) => BasicString.LongLastIndexOfString(encoding, str, index, count);
-    public readonly long LongLastIndexOfString(ReadOnlySpan<char> str) => BasicString.LongLastIndexOfString(IntrinsicEncoding, str);
-    public readonly long LongLastIndexOfString(ReadOnlySpan<char> str, long index) => BasicString.LongLastIndexOfString(IntrinsicEncoding, str, index);
-    public readonly long LongLastIndexOfString(ReadOnlySpan<char> str, long index, long count) => BasicString.LongLastIndexOfString(IntrinsicEncoding, str, index, count);
+    public readonly long LongLastIndexOfString(ReadOnlySpan<char> str) => BasicString.LongLastIndexOfString(str);
+    public readonly long LongLastIndexOfString(ReadOnlySpan<char> str, long index) => BasicString.LongLastIndexOfString(str, index);
+    public readonly long LongLastIndexOfString(ReadOnlySpan<char> str, long index, long count) => BasicString.LongLastIndexOfString(str, index, count);
     public bool Remove(in byte item) => BasicString.Remove(in item);
     public long RemoveAll(Predicate<byte> match) => BasicString.RemoveAll(match);
     public void RemoveAt(long index) => BasicString.RemoveAt(index);
@@ -192,7 +174,6 @@ public unsafe struct StdString
     public void Resize(long newSize) => BasicString.Resize(newSize);
     public void Resize(long newSize, in byte defaultValue) => BasicString.Resize(newSize, in defaultValue);
     public long SetCapacity(long newCapacity) => BasicString.SetCapacity(newCapacity);
-    public readonly string Decode(Encoding encoding) => BasicString.Decode(encoding);
 
     [Obsolete($"Use {nameof(AsSpan)} instead.")]
     public readonly ReadOnlySpan<byte> Slice(int start) => AsSpan(start);

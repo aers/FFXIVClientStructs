@@ -6,9 +6,10 @@ using FFXIVClientStructs.FFXIV.Client.System.Memory;
 namespace FFXIVClientStructs.STD.StdHelpers;
 
 [StructLayout(LayoutKind.Sequential)]
-public unsafe struct RedBlackTree<T, TOperation> : IEquatable<RedBlackTree<T, TOperation>>
+public unsafe struct RedBlackTree<T, TMemorySpace>
+    : IEquatable<RedBlackTree<T, TMemorySpace>>
     where T : unmanaged
-    where TOperation : IStaticNativeObjectOperation<T> {
+    where TMemorySpace : IStaticMemorySpace {
     public Node* Head;
     public long LongCount;
 
@@ -20,8 +21,8 @@ public unsafe struct RedBlackTree<T, TOperation> : IEquatable<RedBlackTree<T, TO
         Black,
     }
 
-    public readonly RedBlackTree<T, TOperation>* Pointer =>
-        (RedBlackTree<T, TOperation>*) Unsafe.AsPointer(ref Unsafe.AsRef(in this));
+    public readonly RedBlackTree<T, TMemorySpace>* Pointer =>
+        (RedBlackTree<T, TMemorySpace>*) Unsafe.AsPointer(ref Unsafe.AsRef(in this));
 
     /// <summary>
     /// Gets the rightmost node in subtree at <paramref name="node"/>.
@@ -41,9 +42,9 @@ public unsafe struct RedBlackTree<T, TOperation> : IEquatable<RedBlackTree<T, TO
         return node;
     }
 
-    public readonly bool Equals(in RedBlackTree<T, TOperation> other) => Head == other.Head && LongCount == other.LongCount;
-    readonly bool IEquatable<RedBlackTree<T, TOperation>>.Equals(RedBlackTree<T, TOperation> other) => Equals(other);
-    public readonly override bool Equals(object? obj) => obj is RedBlackTree<T, TOperation> t && Equals(t);
+    public readonly bool Equals(in RedBlackTree<T, TMemorySpace> other) => Head == other.Head && LongCount == other.LongCount;
+    readonly bool IEquatable<RedBlackTree<T, TMemorySpace>>.Equals(RedBlackTree<T, TMemorySpace> other) => Equals(other);
+    public readonly override bool Equals(object? obj) => obj is RedBlackTree<T, TMemorySpace> t && Equals(t);
 
     public void EraseHead() {
         if (Head is null)
@@ -233,7 +234,7 @@ public unsafe struct RedBlackTree<T, TOperation> : IEquatable<RedBlackTree<T, TO
         var tryNode = result.Location.Parent;
         while (!tryNode->_Isnil) {
             result.Location.Parent = tryNode;
-            if (TOperation.Compare(key, tryNode->_Myval) < 0) {
+            if (StdOps<T>.Compare(key, tryNode->_Myval) < 0) {
                 result.Location.Child = TreeChild.Left;
                 result.Bound = tryNode;
                 tryNode = tryNode->_Left;
@@ -253,7 +254,7 @@ public unsafe struct RedBlackTree<T, TOperation> : IEquatable<RedBlackTree<T, TO
         var tryNode = result.Location.Parent;
         while (!tryNode->_Isnil) {
             result.Location.Parent = tryNode;
-            if (TOperation.Compare(key, tryNode->_Myval) <= 0) {
+            if (StdOps<T>.Compare(key, tryNode->_Myval) <= 0) {
                 result.Location.Child = TreeChild.Left;
                 result.Bound = tryNode;
                 tryNode = tryNode->_Left;
@@ -268,10 +269,9 @@ public unsafe struct RedBlackTree<T, TOperation> : IEquatable<RedBlackTree<T, TO
 
     public readonly override int GetHashCode() => HashCode.Combine((nint)Head, LongCount);
 
-    public Node* GetOrCreateHead<TMemorySpace>()
-        where TMemorySpace : IStaticMemorySpace {
+    public Node* GetOrCreateHead() {
         if (Head is null)
-            Head = Node.BuyHeadNode<TMemorySpace>();
+            Head = Node.BuyHeadNode();
         return Head;
     }
 
@@ -404,17 +404,16 @@ public unsafe struct RedBlackTree<T, TOperation> : IEquatable<RedBlackTree<T, TO
         wherenode->_Parent = promotingNode;
     }
 
-    public bool TryInsertEmpty<TMemorySpace>(in T key, out Node* node)
-        where TMemorySpace : IStaticMemorySpace {
+    public bool TryInsertEmpty(in T key, out Node* node) {
         var loc = FindLowerBound(key);
-        if (loc.Bound is not null && !loc.Bound->_Isnil && TOperation.ContentEquals(loc.Bound->_Myval, key)) {
+        if (loc.Bound is not null && !loc.Bound->_Isnil && StdOps<T>.ContentEquals(loc.Bound->_Myval, key)) {
             node = null;
             return false;
         }
 
         if (loc.Location.Parent is null)
-            loc.Location = new TreeId { Parent = GetOrCreateHead<TMemorySpace>()->_Parent, Child = TreeChild.Right };
-        node = Insert(loc.Location, Node.BuyNode<TMemorySpace>(Head));
+            loc.Location = new TreeId { Parent = GetOrCreateHead()->_Parent, Child = TreeChild.Right };
+        node = Insert(loc.Location, Node.BuyNode(Head));
         return true;
     }
 
@@ -445,8 +444,7 @@ public unsafe struct RedBlackTree<T, TOperation> : IEquatable<RedBlackTree<T, TO
         public byte _19;
         public T _Myval;
 
-        public static Node* BuyHeadNode<TMemorySpace>()
-            where TMemorySpace : IStaticMemorySpace {
+        public static Node* BuyHeadNode(){
             var n = (Node*)TMemorySpace.Allocate((nuint)sizeof(Node), 0x10);
             if (n == null)
                 throw new OutOfMemoryException();
@@ -457,8 +455,7 @@ public unsafe struct RedBlackTree<T, TOperation> : IEquatable<RedBlackTree<T, TO
             return n;
         }
 
-        public static Node* BuyNode<TMemorySpace>(Node* head)
-            where TMemorySpace : IStaticMemorySpace {
+        public static Node* BuyNode(Node* head){
             var n = (Node*)TMemorySpace.Allocate((nuint)sizeof(Node), 0x10);
             if (n == null)
                 throw new OutOfMemoryException();
@@ -505,17 +502,17 @@ public unsafe struct RedBlackTree<T, TOperation> : IEquatable<RedBlackTree<T, TO
 
         public static void FreeNode(Node* node) {
             if (!node->_Isnil)
-                TOperation.StaticDispose(ref node->_Myval);
+                StdOps<T>.StaticDispose(ref node->_Myval);
             IMemorySpace.Free(node);
         }
     }
 
     public struct Enumerator : IEnumerable<T>, IEnumerator<T> {
-        private readonly RedBlackTree<T, TOperation>* _owner;
+        private readonly RedBlackTree<T, TMemorySpace>* _owner;
         private readonly bool _ltr;
         private Node* _current;
 
-        internal Enumerator(RedBlackTree<T, TOperation>* owner, bool ltr) {
+        internal Enumerator(RedBlackTree<T, TMemorySpace>* owner, bool ltr) {
             _owner = owner;
             _ltr = ltr;
             Reset();
