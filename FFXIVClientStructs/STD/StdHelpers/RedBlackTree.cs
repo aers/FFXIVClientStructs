@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using FFXIVClientStructs.FFXIV.Client.System.Memory;
 
 namespace FFXIVClientStructs.STD.StdHelpers;
 
 [StructLayout(LayoutKind.Sequential)]
-public unsafe struct RedBlackTree<T, TOperation>
+public unsafe struct RedBlackTree<T, TOperation> : IEquatable<RedBlackTree<T, TOperation>>
     where T : unmanaged
     where TOperation : IStaticNativeObjectOperation<T> {
     public Node* Head;
@@ -18,6 +19,9 @@ public unsafe struct RedBlackTree<T, TOperation>
         Red,
         Black,
     }
+
+    public readonly RedBlackTree<T, TOperation>* Pointer =>
+        (RedBlackTree<T, TOperation>*) Unsafe.AsPointer(ref Unsafe.AsRef(in this));
 
     /// <summary>
     /// Gets the rightmost node in subtree at <paramref name="node"/>.
@@ -37,61 +41,28 @@ public unsafe struct RedBlackTree<T, TOperation>
         return node;
     }
 
-    public Node* GetOrCreateHead<TMemorySpace>()
-        where TMemorySpace : IStaticMemorySpace {
+    public readonly bool Equals(in RedBlackTree<T, TOperation> other) => Head == other.Head && LongCount == other.LongCount;
+    readonly bool IEquatable<RedBlackTree<T, TOperation>>.Equals(RedBlackTree<T, TOperation> other) => Equals(other);
+    public readonly override bool Equals(object? obj) => obj is RedBlackTree<T, TOperation> t && Equals(t);
+
+    public void EraseHead() {
         if (Head is null)
-            Head = Node.BuyHeadNode<TMemorySpace>();
-        return Head;
+            return;
+        EraseTree(Head->_Parent);
+        Node.FreeNode(Head);
+        Head = null;
+        LongCount = 0;
     }
 
-    public Node* Max() => Max(Head);
-
-    public Node* Min() => Min(Head);
-
-    /// <summary>
-    /// Promotes the right node to the root of subtree.
-    /// </summary>
-    public void RotateLeft(Node* wherenode) {
-        var promotingNode = wherenode->_Right;
-        wherenode->_Right = promotingNode->_Left;
-
-        if (!promotingNode->_Left->_Isnil)
-            promotingNode->_Left->_Parent = wherenode;
-
-        promotingNode->_Parent = wherenode->_Parent;
-
-        if (wherenode == Head->_Parent)
-            Head->_Parent = promotingNode;
-        else if (wherenode == wherenode->_Parent->_Left)
-            wherenode->_Parent->_Left = promotingNode;
-        else
-            wherenode->_Parent->_Right = promotingNode;
-
-        promotingNode->_Left = wherenode;
-        wherenode->_Parent = promotingNode;
-    }
-
-    /// <summary>
-    /// Promote the left node to the root of subtree.
-    /// </summary>
-    public void RotateRight(Node* wherenode) {
-        var promotingNode = wherenode->_Left;
-        wherenode->_Left = promotingNode->_Right;
-
-        if (!promotingNode->_Right->_Isnil)
-            promotingNode->_Right->_Parent = wherenode;
-
-        promotingNode->_Parent = wherenode->_Parent;
-
-        if (wherenode == Head->_Parent)
-            Head->_Parent = promotingNode;
-        else if (wherenode == wherenode->_Parent->_Right)
-            wherenode->_Parent->_Right = promotingNode;
-        else
-            wherenode->_Parent->_Left = promotingNode;
-
-        promotingNode->_Right = wherenode;
-        wherenode->_Parent = promotingNode;
+    public void EraseTree(Node* where) {
+        while (!where->_Isnil) {
+            EraseTree(where->_Right);
+            var w = where;
+            var wl = where->_Left;
+            where->_Left = where;
+            where = wl;
+            Node.FreeNode(w);
+        }
     }
 
     public Node* Extract(Node* where) {
@@ -253,6 +224,57 @@ public unsafe struct RedBlackTree<T, TOperation>
         return erasedNode;
     }
 
+    public void ExtractAndErase(Node* node) => Node.FreeNode(Extract(node));
+    
+    public readonly FindResult FindUpperBound(in T key) {
+        if (Head is null)
+            return default;
+        var result = new FindResult { Location = new TreeId { Parent = Head->_Parent, Child = TreeChild.Right }, Bound = Head };
+        var tryNode = result.Location.Parent;
+        while (!tryNode->_Isnil) {
+            result.Location.Parent = tryNode;
+            if (TOperation.Compare(key, tryNode->_Myval) < 0) {
+                result.Location.Child = TreeChild.Left;
+                result.Bound = tryNode;
+                tryNode = tryNode->_Left;
+            } else {
+                result.Location.Child = TreeChild.Right;
+                tryNode = tryNode->_Right;
+            }
+        }
+
+        return result;
+    }
+
+    public readonly FindResult FindLowerBound(in T key) {
+        if (Head is null)
+            return default;
+        var result = new FindResult { Location = new TreeId { Parent = Head->_Parent, Child = TreeChild.Right }, Bound = Head };
+        var tryNode = result.Location.Parent;
+        while (!tryNode->_Isnil) {
+            result.Location.Parent = tryNode;
+            if (TOperation.Compare(key, tryNode->_Myval) <= 0) {
+                result.Location.Child = TreeChild.Left;
+                result.Bound = tryNode;
+                tryNode = tryNode->_Left;
+            } else {
+                result.Location.Child = TreeChild.Right;
+                tryNode = tryNode->_Right;
+            }
+        }
+
+        return result;
+    }
+
+    public readonly override int GetHashCode() => HashCode.Combine((nint)Head, LongCount);
+
+    public Node* GetOrCreateHead<TMemorySpace>()
+        where TMemorySpace : IStaticMemorySpace {
+        if (Head is null)
+            Head = Node.BuyHeadNode<TMemorySpace>();
+        return Head;
+    }
+
     public Node* Insert(TreeId loc, Node* newNode) {
         ++LongCount;
         var head = Head;
@@ -332,70 +354,66 @@ public unsafe struct RedBlackTree<T, TOperation>
         return newNode;
     }
 
-    public void EraseTree(Node* where) {
-        while (!where->_Isnil) {
-            EraseTree(where->_Right);
-            var w = where;
-            var wl = where->_Left;
-            where->_Left = where;
-            where = wl;
-            Node.FreeNode(w);
-        }
+    public readonly Node* Max() => Max(Head);
+
+    public readonly Node* Min() => Min(Head);
+
+    /// <summary>
+    /// Promotes the right node to the root of subtree.
+    /// </summary>
+    public void RotateLeft(Node* wherenode) {
+        var promotingNode = wherenode->_Right;
+        wherenode->_Right = promotingNode->_Left;
+
+        if (!promotingNode->_Left->_Isnil)
+            promotingNode->_Left->_Parent = wherenode;
+
+        promotingNode->_Parent = wherenode->_Parent;
+
+        if (wherenode == Head->_Parent)
+            Head->_Parent = promotingNode;
+        else if (wherenode == wherenode->_Parent->_Left)
+            wherenode->_Parent->_Left = promotingNode;
+        else
+            wherenode->_Parent->_Right = promotingNode;
+
+        promotingNode->_Left = wherenode;
+        wherenode->_Parent = promotingNode;
     }
 
-    public void EraseHead() {
-        if (Head is null)
-            return;
-        EraseTree(Head->_Parent);
-        Node.FreeNode(Head);
-        Head = null;
-        LongCount = 0;
-    }
-    
-    public readonly FindResult FindUpperBound(in T key) {
-        var result = new FindResult { Location = new TreeId { Parent = Head->_Parent, Child = TreeChild.Right }, Bound = Head };
-        var tryNode = result.Location.Parent;
-        while (!tryNode->_Isnil) {
-            result.Location.Parent = tryNode;
-            if (TOperation.Compare(key, tryNode->_Myval) < 0) {
-                result.Location.Child = TreeChild.Left;
-                result.Bound = tryNode;
-                tryNode = tryNode->_Left;
-            } else {
-                result.Location.Child = TreeChild.Right;
-                tryNode = tryNode->_Right;
-            }
-        }
+    /// <summary>
+    /// Promote the left node to the root of subtree.
+    /// </summary>
+    public void RotateRight(Node* wherenode) {
+        var promotingNode = wherenode->_Left;
+        wherenode->_Left = promotingNode->_Right;
 
-        return result;
-    }
+        if (!promotingNode->_Right->_Isnil)
+            promotingNode->_Right->_Parent = wherenode;
 
-    public readonly FindResult FindLowerBound(in T key) {
-        var result = new FindResult { Location = new TreeId { Parent = Head->_Parent, Child = TreeChild.Right }, Bound = Head };
-        var tryNode = result.Location.Parent;
-        while (!tryNode->_Isnil) {
-            result.Location.Parent = tryNode;
-            if (TOperation.Compare(key, tryNode->_Myval) <= 0) {
-                result.Location.Child = TreeChild.Left;
-                result.Bound = tryNode;
-                tryNode = tryNode->_Left;
-            } else {
-                result.Location.Child = TreeChild.Right;
-                tryNode = tryNode->_Right;
-            }
-        }
+        promotingNode->_Parent = wherenode->_Parent;
 
-        return result;
+        if (wherenode == Head->_Parent)
+            Head->_Parent = promotingNode;
+        else if (wherenode == wherenode->_Parent->_Right)
+            wherenode->_Parent->_Right = promotingNode;
+        else
+            wherenode->_Parent->_Left = promotingNode;
+
+        promotingNode->_Right = wherenode;
+        wherenode->_Parent = promotingNode;
     }
 
     public bool TryInsertEmpty<TMemorySpace>(in T key, out Node* node)
         where TMemorySpace : IStaticMemorySpace {
         var loc = FindLowerBound(key);
-        if (TOperation.ContentEquals(loc.Bound->_Myval, key)) {
+        if (loc.Bound is not null && !loc.Bound->_Isnil && TOperation.ContentEquals(loc.Bound->_Myval, key)) {
             node = null;
             return false;
         }
 
+        if (loc.Location.Parent is null)
+            loc.Location = new TreeId { Parent = GetOrCreateHead<TMemorySpace>()->_Parent, Child = TreeChild.Right };
         node = Insert(loc.Location, Node.BuyNode<TMemorySpace>(Head));
         return true;
     }
@@ -465,10 +483,7 @@ public unsafe struct RedBlackTree<T, TOperation>
                 }
             }
 
-            var ret = _Right;
-            while (!ret->_Left->_Isnil)
-                ret = ret->_Left;
-            return ret;
+            return Min(_Right);
         }
 
         public readonly Node* Prev() {
@@ -485,10 +500,7 @@ public unsafe struct RedBlackTree<T, TOperation>
                 }
             }
 
-            var ret = _Left;
-            while (!ret->_Right->_Isnil)
-                ret = ret->_Right;
-            return ret;
+            return Max(_Left);
         }
 
         public static void FreeNode(Node* node) {
@@ -499,10 +511,15 @@ public unsafe struct RedBlackTree<T, TOperation>
     }
 
     public struct Enumerator : IEnumerable<T>, IEnumerator<T> {
-        private readonly Node* _head;
+        private readonly RedBlackTree<T, TOperation>* _owner;
+        private readonly bool _ltr;
         private Node* _current;
 
-        internal Enumerator(Node* head) => _head = head;
+        internal Enumerator(RedBlackTree<T, TOperation>* owner, bool ltr) {
+            _owner = owner;
+            _ltr = ltr;
+            Reset();
+        }
 
         public ref T Current => ref _current->_Myval;
 
@@ -511,15 +528,25 @@ public unsafe struct RedBlackTree<T, TOperation>
         T IEnumerator<T>.Current => Current;
 
         public bool MoveNext() {
-            if (_head == null)
+            if (_owner->Head == null || (_current is not null && _current == _owner->Head))
                 return false;
 
-            var n = _current is null ? Min(_head) : _current->Next();
-            if (n is null || n->_Isnil)
+            if (_ltr)
+                _current = _current == null ? _owner->Head->_Left : _current->Next();
+            else
+                _current = _current == null ? _owner->Head->_Right : _current->Prev();
+            
+            return !_current->_Isnil;
+        }
+
+        public bool DeleteAndMoveNext() {
+            var what = _current;
+            if (what is null || what->_Isnil)
                 return false;
 
-            _current = n;
-            return true;
+            var next = MoveNext();
+            _owner->ExtractAndErase(what);
+            return next;
         }
 
         public void Reset() => _current = null;
@@ -527,8 +554,10 @@ public unsafe struct RedBlackTree<T, TOperation>
         public void Dispose() {
         }
 
-        IEnumerator IEnumerable.GetEnumerator() => new Enumerator(_head);
+        public Enumerator GetEnumerator() => new(_owner, _ltr);
 
-        IEnumerator<T> IEnumerable<T>.GetEnumerator() => new Enumerator(_head);
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+        IEnumerator<T> IEnumerable<T>.GetEnumerator() => GetEnumerator();
     }
 }

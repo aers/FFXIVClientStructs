@@ -516,8 +516,8 @@ public unsafe interface IContinuousStorageContainer<T> : IDisposable, IList, ILi
             throw new ArgumentException(null, nameof(array));
 
         var i = (long)arrayIndex;
-        for (var p = First; p < Last; p++, i++)
-            array[i] = *p;
+        for (var p = First; p < Last; p++)
+            array[i++] = *p;
     }
 
     bool ICollection<T>.Remove(T item) => Remove(item);
