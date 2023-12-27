@@ -7,56 +7,43 @@ namespace FFXIVClientStructs.FFXIV.Client.Network;
 
 [StructLayout(LayoutKind.Explicit, Size = 0xB60)]
 public unsafe partial struct NetworkModule {
-    //Filled from Config
-    [FieldOffset(0x02C)] public int Unk02C;
-    [FieldOffset(0x030)] public int Unk030;
-    [FieldOffset(0x034)] public int Unk034;
-    [FieldOffset(0x038)] public int Unk038;
-    [FieldOffset(0x03C)] public int Unk03C;
-    [FieldOffset(0x040)] public int Unk040;
-    [FieldOffset(0x044)] public int Unk044;
-    [FieldOffset(0x048)] public int Unk048;
-    [FieldOffset(0x04C)] public int Unk04C;
-    [FieldOffset(0x050)] public int Unk050;
-    [FieldOffset(0x054)] public int Unk054;
-
-    //Thesed all hold dns names to neolobbyxx.ffxiv.com coiming from the config
+    [FieldOffset(0x008)] public void* Unk008;
+    [FieldOffset(0x010)] public long Unk010; //Count posibly
+    [FieldOffset(0x018)] public long Unk018;
+    [FieldOffset(0x020)] public long Unk020; //Some count
+    [FieldOffset(0x028)] public int LobbyCount;
+    [FixedSizeArray<uint>(0xC)] [FieldOffset(0x02C)]
+    public fixed byte LobbyPorts[0xC * 0x4];
     [FixedSizeArray<Utf8String>(0xC)] [FieldOffset(0x060)]
-    public fixed byte LobbyServerNames[0xC * 0x68];
-
+    public fixed byte LobbyHosts[0xC * 0x68];
     [FieldOffset(0x540)] public Utf8String Unk540;
 
-    [FieldOffset(0x5A8)] public int Unk5A8; //Set by FUN_14021be20, Os related
-    [FieldOffset(0x5AC)] public int OperatingSystemTypeAndVersion; //Most likely this si an enum
-    //These are all filled with information from config
-    [FieldOffset(0x5B0)] public int Unk548; //ServerPort
-    //4 bytes padding
-    [FieldOffset(0x5B8)] public Utf8String ConfigServerName; //config-dl.ffxiv.com
-    [FieldOffset(0x620)] public int Unk620; //0
-    [FieldOffset(0x624)] public int ConfigServerPort; //ServerPort (443)
-    [FieldOffset(0x628)] public Utf8String DcTravelServerName; //dctravel.ffxiv.com
-    [FieldOffset(0x690)] public short DcTravelServerPort; //ServerPort 54994
-    //6 bytes padding
-    [FieldOffset(0x698)] public Utf8String UnkString698; //Related to 9A8 Seen: neolobby01.ffxiv.com
-    [FieldOffset(0x700)] public short Unk700; //ServerPort 54992
-    //6 bytes padding
-    [FieldOffset(0x708)] public Utf8String UnkString708; //Seen: neolobby03.ffxiv.com
-    [FieldOffset(0x770)] public int Unk770;
-    [FieldOffset(0x774)] public int Unk774;
-    [FieldOffset(0x778)] public int Unk778;
-    [FieldOffset(0x77C)] public int Unk77C; //Sever Port 54992
-    [FieldOffset(0x780)] public Utf8String UnkString780; //Empty
-    [FieldOffset(0x7E8)] public Utf8String Protocol7E8; //Seen: TCP
-    [FieldOffset(0x850)] public long Unk850; //Seen: 0
-    [FieldOffset(0x858)] public Utf8String UnkString858; //Seen: "00000"
-    [FieldOffset(0x8C0)] public Utf8String UnkString8C0; //Empty
-    [FieldOffset(0x928)] public Utf8String UnkString928; //Empty
-    [FieldOffset(0x990)] public long Unk990;
+    [FieldOffset(0x5A8)] public int Unk5A8; //Set by FUN_14021be20, OS related
+    [FieldOffset(0x5AC)] public int OperatingSystemTypeAndVersion; //Most likely this is an enum
+    [FieldOffset(0x5B0)] public uint SaveDataBankPort;
+    [FieldOffset(0x5B8)] public Utf8String SaveDataBankHost; //Config Saves
+    [FieldOffset(0x620)] public uint SaveDataBankMode;
+    [FieldOffset(0x624)] public uint DktWebPort;
+    [FieldOffset(0x628)] public Utf8String DktWebHost; //DC Travel
+    [FieldOffset(0x690)] public uint ActiveLobbyPort;
+    [FieldOffset(0x698)] public Utf8String ActiveLobbyHost;
+    [FieldOffset(0x700)] public uint AlternateLobbyPort;
+    [FieldOffset(0x708)] public Utf8String AlternateLobbyHost;
+    [FieldOffset(0x770)] public uint LobbyRetryCount;
+    [FieldOffset(0x774)] public uint LobbyRetryInterval;
+    [FieldOffset(0x778)] public uint LobbyPing;
+    [FieldOffset(0x77C)] public uint FrontPort;
+    [FieldOffset(0x780)] public Utf8String FrontHost;
+    [FieldOffset(0x7E8)] public Utf8String FrontProtocol;
+    [FieldOffset(0x850)] public bool UseCfgFrontend;
+    [FieldOffset(0x858)] public Utf8String Ticket;
+    [FieldOffset(0x8C0)] public Utf8String World;
+    [FieldOffset(0x928)] public Utf8String ZoneName;
+    [FieldOffset(0x990)] public byte Unk990;
+    [FieldOffset(0x994)] public int Unk994;
     //This region seems to generally hold references to other objects
     [FieldOffset(0x998)] public Unk930Obj* Unk998; //seen in getting FC info
-
-
-    [FieldOffset(0x9A0)] public void* Unk9A0; //Struct is similar to 930Obj
+    [FieldOffset(0x9A0)] public Unk938Obj* Unk9A0; //Struct is similar to 930Obj
     [FieldOffset(0x9A8)] public Unk940Obj* Unk9A8;
     [FieldOffset(0x9B0)] public void* Unk9B0;
     [FieldOffset(0x9B8)] public void* Unk9B8;
@@ -91,23 +78,22 @@ public unsafe partial struct NetworkModule {
     [FieldOffset(0xAA0)] public byte UnkAA0;
     [FieldOffset(0xAA8)] public TimeStruct UnkAA8;
 
-    [FieldOffset(0xAC0)] public void* UnkAC0;
-    [FieldOffset(0xAC8)] public void* UnkAC8;
+    [FieldOffset(0xAC0)] public void* UnkAC0; //related to 998
+    [FieldOffset(0xAC8)] public void* UnkAC8; //related to 9A0
     [FieldOffset(0xAD0)] public TimeStruct UnkAD0;
-    [FieldOffset(0xAE8)] public void* UnkAE8;
+    [FieldOffset(0xAE8)] public void* UnkAE8; //init 0xbb8 (3000)
     [FieldOffset(0xAF0)] public TimeStruct UnkAF0;
     [FieldOffset(0xB08)] public TimeStruct UnkB08;
     [FieldOffset(0xB20)] public int UnkB20; //Init 0x42c80000
-    [FieldOffset(0xB24)] public byte UnkB24;
-    [FieldOffset(0xB28)] public byte UnkB28;
-    [FieldOffset(0xB2C)] public int UnkB2C; //Init 0xFFFFFFFF
-    [FieldOffset(0xB30)] public int UnkB30; //From Config
-    [FieldOffset(0xB34)] public int UnkB34; //From Config
-    [FieldOffset(0xB38)] public int UnkB38; //From Config
-    [FieldOffset(0xB3C)] public int UnkB3C; //From Config
+    [FieldOffset(0xB24)] public byte UnkB24; //Init 0
+    [FieldOffset(0xB28)] public byte UnkB28; //Init 0
+    [FieldOffset(0xB2C)] public int UnkB2C; //Init 0xffffffff
+    [FieldOffset(0xB30)] public int KeepAliveZone;
+    [FieldOffset(0xB34)] public int KeepAliveIntervalZone;
+    [FieldOffset(0xB38)] public int KeepAliveChat;
+    [FieldOffset(0xB3C)] public int KeepAliveIntervalChat;
     [FieldOffset(0xB40)] public TimeStruct UnkB40;
-
-    [FieldOffset(0xB58)] public byte UnkB58; //guessing bool
+    [FieldOffset(0xB58)] public bool IsInCrossWorldDuty; //guessing bool
 
 
     //FUN_14021c0b0
@@ -145,7 +131,7 @@ public unsafe partial struct NetworkModule {
         //FUN_1415858f0 proxies Unk098.FUN_1415ea880(...)
         [StructLayout(LayoutKind.Explicit, Size = 0x118)]
         public partial struct Unk98Obj {
-            [FieldOffset(0x00)] public void** vtbl;
+            [FieldOffset(0x00)] public void** vtbl; //vfunc 0: Dispose
             [FieldOffset(0x008)] public Unk008Obj* Unk008; //Some struct
             [FieldOffset(0x010)] public Unk010Obj* Unk010;
             [FieldOffset(0x040)] public Unknown* Unk040; //Looks like a self referenceing empty vector
@@ -202,6 +188,19 @@ public unsafe partial struct NetworkModule {
                     [FieldOffset(0x000)] public void** vtbl;
                 }
             }
+        }
+    }
+
+    [StructLayout(LayoutKind.Explicit)]
+    public partial struct Unk938Obj {
+        [FieldOffset(0x00)] public Utf8String Unk00;
+        //0x10 byte
+        [FieldOffset(0x78)] public StdVector<ulong> Unk78; //ulong is a placeholder
+        [FieldOffset(0xA0)] public UnkA0Obj* UnkA0;
+
+        [StructLayout(LayoutKind.Explicit)]
+        public partial struct UnkA0Obj {
+            [FieldOffset(0x00)] public void** vtbl;
         }
     }
 

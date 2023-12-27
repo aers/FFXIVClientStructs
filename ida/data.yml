@@ -6,11 +6,11 @@ globals:
   0x141FE5380: g_ClientInstanceLimit
   0x142171820: g_InputManager
   0x142171848: g_InputManager_MouseButtonHoldState
-  #fail 0x142106BE0: g_StackCookie
-  #fail 0x14218DD88: g_InvereStackCookie
+  0x142187be0: g_StackCookie
+  0x142187be8: g_InvereStackCookie
   #fail 0x1421A95F0: argc
   #fail 0x1421A95F8: argv
-  #fail 0x1421AB620: g_OSVersion
+  0x1421a54a0: g_OSVersion
   0x1421AC368: g_CurrentCharaSelectCharacter # Client::Game::Character::Character*
   0x1421AC540: g_CharaSelectCharacterList # see Client::UI::Agent::AgentLobby::CharaSelectCharacterList
   0x1421BE480: g_RenderSkeletonLinkedListStart
@@ -242,13 +242,14 @@ functions:
   0x141545CD0: luaopen_math
   0x141546D60: luaopen_debug
   0x141547850: luaopen_package
-  #fail   0x141585220: std::vector.dtor
+  0x1415f1A90: std::vector.dtor
   0x1415FF170: crc
   0x141659E24: ThrowException
   0x1416806E4: FreeMemory
   0x1400557E0: FreeMemory_2 # nullsub, gets called together with some AllocatorManager vfunc
   0x141688640: _purecall # Ghidra does not have a notation for pure virtual calls
-  #fail   0x14161BA70: MemCpy
+  0x14168867c: _set_purecall_handler
+  0x1416886d0: MemCpy
   0x141688D10: MemSet
   0x1400609E0: MemAlloc
   0x140209A10: MatrixMultiply
@@ -329,15 +330,16 @@ classes:
     funcs:
       0x1415E9600: ctor
       0x1415EAB40: Initialize
-      #fail 0x1415e96e0: GetCharacterData
+      0x1415ea320: GetCharacterData
+      0x1415EB380: dtor
   Application::Network::LobbyClient::LobbyRequestCallback:
     vtbls:
       - ea: 0x141C980F8
     vfuncs:
       0: dtor
     funcs:
-      0x141617700: ctor #fail
-  Clinet::Network::LobbyClient::LobbyCharacterRequestCallback:
+      #fail 0x141617700: ctor
+  Client::Network::LobbyClient::LobbyCharacterRequestCallback:
     vtbls:
       - ea: 0x141c93548 # fail
     funcs:
@@ -477,6 +479,8 @@ classes:
   Application::Network::WorkDefinitions::Base:
     vtbls:
       - ea: 0x1419DD730
+    vfuncs:
+      0: Dispose
   Application::Network::WorkDefinitions::QuestWork:
     vtbls:
       - ea: 0x141A1FB88
@@ -1295,9 +1299,18 @@ classes:
         base: Client::Game::Gauge::JobGauge
   Common::Configuration::ConfigEntry:
     funcs:
+      0x140067D40: SetEmpty
+      0x140067E00: ctor_copy
+      0x140067F60: ctor_empty #type 1
+      0x140067FF0: ctor_int #type 2
+      0x1400680A0: ctor_float #type 3
+      0x140068160: ctor_str #type 4
+      0x140068280: CopyFrom
+      0x1400683E0: IsValueEqual
       0x140068440: SetValueUInt
       0x1400684E0: SetValueFloat
-      0x140069840: SetValueString # Destroys Utf8String
+      0x140068560: SetValueString # Destroys Utf8String
+      0x140068690: SetToDefault
   Common::Configuration::ConfigBase:
     vtbls:
       - ea: 0x1419B0108
@@ -1305,6 +1318,7 @@ classes:
     funcs:
       0x140069200: ctor
       0x140069550: GetConfigOption
+      0x140069500: SetConfigOption
   Common::Configuration::UIConfig:
     vtbls:
       - ea: 0x1419B0128
@@ -1394,7 +1408,7 @@ classes:
       0x140093B20: GetNetworkModuleProxy
       0x140093B40: GetUIModule
       0x140093B60: GetUIClipboard
-      #fail  0x140094620: InitNetworking
+      0x140094620: InitNetworking
       0x140094A20: TaskBegin
       0x140094B60: TaskDraw2DBegin
       0x140094BA0: TaskUpdateInputDevice
@@ -1768,6 +1782,7 @@ classes:
       0x1400ADAA0: GetInfoProxyById
       0x1400ADAC0: GetLocalCharacterName
       0x1400ADB40: GetLocalContentID
+      0x1400ADB90: GetOnlineStatusFlags
       0x1400ADC10: IsOnlineStatusSet
       0x1400ADC90: IsInCrossWorldDuty
   Client::UI::Info::InfoProxyBlacklist:
@@ -2422,8 +2437,9 @@ classes:
     funcs:
       0x14021B020: ctor
       0x14021B070: Initialize
+      0x14021B7F0: dtor
       #fail 0x14021BE40: SetOSTypeAndVersion
-      #fail 0x14021C0b0: FUN_14021c0b0
+      0x14021c440: FUN_14021c440
       0x14021CB20: IsInCrossWorldDuty
   Application::Network::PacketReceiverCallbackInterface:
     vtbls:
@@ -2452,7 +2468,7 @@ classes:
         base: Client::Network::Protocol::Chat::PacketReceiverCallbackInterface
     funcs:
       #fail 0x141295860: ReceiveEvent
-      #fail 0x141499550: HandlePartyInvitePacket
+      0x14149a170: HandlePartyInvitePacket
       0x14149A240: HandleSocialPacket
       0x14149D8B0: HandleMarketBoardOfferingsPacket
       0x14149D970: HandleMarketBoardPurchasePacket
