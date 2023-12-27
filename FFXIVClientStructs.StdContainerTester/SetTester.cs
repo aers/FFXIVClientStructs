@@ -46,6 +46,20 @@ public static unsafe class SetTester {
         set3.UnionWith(set1);
         set3.SymmetricExceptWith(set2);
         Console.WriteLine(string.Join(", ", set3.Select(x => x.ToString())));
+
+        using var set4 = new StdSet<StdWString>();
+        using var ts = new StdWString();
+        ts.AddString("test1");
+        set4.AddCopy(ts);
+        ts.Clear();
+        ts.AddString("test2");
+        set4.AddCopy(ts);
+        ts.Clear();
+        ts.AddString("test1");
+        Console.WriteLine(set4.Contains(ts));
+        ts.AddString("aaa");
+        Console.WriteLine(set4.Contains(ts));
+        Console.WriteLine(string.Join(", ", set4.Select(x => x.ToString())));
     }
 
     private static void DumpNodes<T>(Pointer<RedBlackTree<T>.Node> x)

@@ -229,7 +229,12 @@ public unsafe struct StdBasicString<T, TEncoding, TMemorySpace>
     }
 
     /// <inheritdoc/>
-    public readonly int CompareTo(object? obj) => obj is null ? 1 : CompareTo((StdBasicString<T, TEncoding, TMemorySpace>)obj);
+    public readonly int CompareTo(object? obj) => obj switch {
+        null => 1,
+        StdBasicString<T, TEncoding, TMemorySpace> s => CompareTo(s),
+        IStdBasicString<T> s => CompareTo(s),
+        _ => throw new ArgumentException(null, nameof(obj)),
+    };
 
     /// <inheritdoc cref="IStdVector{T}.Clear"/>
     public void Clear() => ResizeUndefined(0);

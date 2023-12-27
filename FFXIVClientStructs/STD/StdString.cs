@@ -79,7 +79,7 @@ public unsafe struct StdString
     public readonly long BinarySearch(in byte item, IComparer<byte>? comparer) => BasicString.BinarySearch(in item, comparer);
     public readonly long BinarySearch(long index, long count, in byte item, IComparer<byte>? comparer) => BasicString.BinarySearch(index, count, in item, comparer);
     public void Clear() => BasicString.Clear();
-    public readonly int CompareTo(object? obj) => BasicString.CompareTo(obj);
+    public readonly int CompareTo(object? obj) => obj switch { null => 1, StdString s => BasicString.CompareTo(s.BasicString), _ => BasicString.CompareTo(obj) };
     public readonly int CompareTo(IStdVector<byte>? other) => BasicString.CompareTo(other);
     public readonly bool Contains(in byte item) => BasicString.Contains(in item);
     public readonly bool Contains(byte* subsequence, IntPtr length) => BasicString.Contains(subsequence, length);

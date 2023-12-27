@@ -8,7 +8,6 @@ namespace FFXIVClientStructs.STD.Helper;
 /// Taken from ArraySortHelper.
 /// </summary>
 /// <typeparam name="T">The element type.</typeparam>
-/// <typeparam name="StdOps<T>">The operations.</typeparam>
 internal static unsafe class LongPointerSortHelper<T>
     where T : unmanaged {
     private const long IntrosortSizeThreshold = 64;

@@ -67,7 +67,7 @@ public unsafe struct StdWString
     public readonly bool Contains(char* subsequence, IntPtr length) => BasicString.Contains(subsequence, length);
     public readonly bool Contains(ReadOnlySpan<char> subsequence) => BasicString.Contains(subsequence);
     public readonly bool ContainsString(ReadOnlySpan<char> str) => BasicString.ContainsString(str);
-    public readonly int CompareTo(object? obj) => BasicString.CompareTo(obj);
+    public readonly int CompareTo(object? obj) => obj switch { null => 1, StdWString s => BasicString.CompareTo(s.BasicString), _ => BasicString.CompareTo(obj) };
     public readonly int CompareTo(IStdVector<char>? other) => BasicString.CompareTo(other);
     public void Dispose() => BasicString.Dispose();
     public readonly override bool Equals(object? obj) => obj is StdWString s && Equals(s);
