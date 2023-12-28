@@ -7,11 +7,10 @@ namespace FFXIVClientStructs.FFXIV.Client.Network;
 
 [StructLayout(LayoutKind.Explicit, Size = 0xB60)]
 public unsafe partial struct NetworkModule {
-    [FieldOffset(0x028)] public int LobbyCount;
-    [FixedSizeArray<uint>(0xC)] [FieldOffset(0x02C)]
-    public fixed byte LobbyPorts[0xC * 0x4];
-    [FixedSizeArray<Utf8String>(0xC)] [FieldOffset(0x060)]
-    public fixed byte LobbyHosts[0xC * 0x68];
+    [FieldOffset(0x028)] public byte LobbyCount;
+    [FieldOffset(0x02C)] public fixed uint LobbyPorts[12];
+    [FixedSizeArray<Utf8String>(12)]
+    [FieldOffset(0x060)] public fixed byte LobbyHosts[12 * 0x68];
 
     [FieldOffset(0x5AC)] public int OperatingSystemTypeAndVersion; //Most likely this is an enum
     [FieldOffset(0x5B0)] public uint SaveDataBankPort;

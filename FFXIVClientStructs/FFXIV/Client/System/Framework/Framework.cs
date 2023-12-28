@@ -23,8 +23,7 @@ public unsafe partial struct Framework {
     [FieldOffset(0x1670)] public NetworkModuleProxy* NetworkModuleProxy;
     [FieldOffset(0x1678)] public bool IsNetworkModuleInitialized;
     [FieldOffset(0x1679)] public bool EnableNetworking;
-    [FieldOffset(0x1680)] public uint ServerTime;
-    //4bytes
+    [FieldOffset(0x1680)] public long ServerTime;  // TODO: change to uint
     [FieldOffset(0x1688)] public long PerformanceCounterInMilliSeconds;
     [FieldOffset(0x1688)] public long PerformanceCounterInMicroSeconds;
     [FieldOffset(0x1698)] public uint TimerResolutionMillis;
