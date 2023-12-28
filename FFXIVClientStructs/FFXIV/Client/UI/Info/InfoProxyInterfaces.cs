@@ -7,13 +7,6 @@ public unsafe partial struct InfoProxyInterface {
     //For Proxies with a fixed count this is apparently 0
     [FieldOffset(0x10)] public uint EntryCount;
 
-    [VirtualFunction(1)]
-    public partial void Vf1(void* p2, byte p3);
-    //used by the packet handlers
-
-    [VirtualFunction(2)]
-    public partial void AddData();
-
     [VirtualFunction(6)]
     public partial void EndRequest();
 

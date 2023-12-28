@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "FFXIVClientStructs.ResolverTester": {
-      "commandName": "Project",
-      "commandLineArgs": "\"C:\\Games\\SquareEnix\\FINAL FANTASY XIV - A Realm Reborn\\game\\ffxiv_dx11.exe\""
-    }
-  }
-}

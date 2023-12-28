@@ -19,7 +19,6 @@ public unsafe partial struct Framework {
     [FieldOffset(0x460)] public DevConfig DevConfig;
 
     [FieldOffset(0x570)] public SavedAppearanceManager* SavedAppearanceData;
-    [FieldOffset(0x7A8)] public void* ClientArguments; //argc + argv (at +8)
 
     [FieldOffset(0x1670)] public NetworkModuleProxy* NetworkModuleProxy;
     [FieldOffset(0x1678)] public bool IsNetworkModuleInitialized;
@@ -52,7 +51,7 @@ public unsafe partial struct Framework {
 
     [FieldOffset(0x2BF0)] public GameVersion GameVersion;
 
-    [StaticAddress("44 0F B6 C0 48 8B 0D ?? ?? ?? ??", 7, isPointer: true)]
+    [StaticAddress("44 0F B6 C0 48 8B 0D ?? ?? ?? ??", 7, true)]
     public static partial Framework* Instance();
 
     [MemberFunction("E8 ?? ?? ?? ?? 80 7B 1D 01")]
@@ -67,12 +66,9 @@ public unsafe partial struct Framework {
     [MemberFunction("E8 ?? ?? ?? ?? 89 47 2C")]
     public static partial long GetServerTime();
 
-    public string UserPath
-    {
-        get
-        {
-            fixed (char* p = userPath)
-            {
+    public string UserPath {
+        get {
+            fixed (char* p = userPath) {
                 return new string(p);
             }
         }

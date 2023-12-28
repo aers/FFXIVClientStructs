@@ -64,6 +64,6 @@ public enum InfoProxyId : uint {
     CrossWorldLinkShellMember = 30,
     CircleList = 31,
     Circle = 32,
-    CircleFinder = 33,
+    CircleFinder = 33
 
 }

@@ -8,8 +8,6 @@ globals:
   0x142171848: g_InputManager_MouseButtonHoldState
   0x142187be0: g_StackCookie
   0x142187be8: g_InvereStackCookie
-  #fail 0x1421A95F0: argc
-  #fail 0x1421A95F8: argv
   0x1421a54a0: g_OSVersion
   0x1421AC368: g_CurrentCharaSelectCharacter # Client::Game::Character::Character*
   0x1421AC540: g_CharaSelectCharacterList # see Client::UI::Agent::AgentLobby::CharaSelectCharacterList
@@ -338,10 +336,8 @@ classes:
     vfuncs:
       0: dtor
     funcs:
-      #fail 0x141617700: ctor
+      0x14023CF50: RequestCharacterData
   Client::Network::LobbyClient::LobbyCharacterRequestCallback:
-    vtbls:
-      - ea: 0x141c93548 # fail
     funcs:
       0x141618340: ctor
   Client::Game::StatusManager:
@@ -2438,10 +2434,7 @@ classes:
       0x14021B020: ctor
       0x14021B070: Initialize
       0x14021B7F0: dtor
-      #0x14021B870: IsConnected #unsure
       0x14021B890: IsWinSockInitialized
-      #fail 0x14021BE40: SetOSTypeAndVersion
-      0x14021c440: FUN_14021c440
       0x14021CB20: IsInCrossWorldDuty
       0x14021CBA0: GetCurrentInstance
   Application::Network::PacketReceiverCallbackInterface:
@@ -2470,7 +2463,6 @@ classes:
       - ea: 0x141B40F60
         base: Client::Network::Protocol::Chat::PacketReceiverCallbackInterface
     funcs:
-      #fail 0x141295860: ReceiveEvent
       0x14149a170: HandlePartyInvitePacket
       0x14149A240: HandleSocialPacket
       0x14149D8B0: HandleMarketBoardOfferingsPacket
@@ -2571,11 +2563,6 @@ classes:
   Client::UI::Agent::AgentLobby::LobbyData:
     funcs:
       0x140241A90: GetCharacterEntryByIndex
-      #fail 0x14023f310: GetCharacterEntryFromServer
-  Client::UI::Agent::AgentLobby::LobbyData::CharaSelectCharacterEntry:
-    funcs:
-      #fail 0x1416187B0: IsNotLocked
-      #fail 0x141618890: IsNameChangeRequired
   Client::UI::Agent::AgentCursor:
     vtbls:
       - ea: 0x1419DE6D0
