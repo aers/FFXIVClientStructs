@@ -1,3 +1,4 @@
+using System.Collections;
 using FFXIVClientStructs.STD.ContainerInterface;
 using FFXIVClientStructs.STD.Helper;
 
@@ -41,6 +42,7 @@ public unsafe struct StdString
         get => BasicString.Capacity;
         set => BasicString.Capacity = value;
     }
+    public void* RepresentativePointer => BasicString.RepresentativePointer;
     public int Count {
         get => BasicString.Count;
         set => BasicString.Count = value;
@@ -80,14 +82,15 @@ public unsafe struct StdString
     public readonly long BinarySearch(long index, long count, in byte item, IComparer<byte>? comparer) => BasicString.BinarySearch(index, count, in item, comparer);
     public void Clear() => BasicString.Clear();
     public readonly int CompareTo(object? obj) => obj switch { null => 1, StdString s => BasicString.CompareTo(s.BasicString), _ => BasicString.CompareTo(obj) };
-    public readonly int CompareTo(IStdVector<byte>? other) => BasicString.CompareTo(other);
+    public readonly int CompareTo(IStdRandomAccessible<byte>? other) => BasicString.CompareTo(other);
     public readonly bool Contains(in byte item) => BasicString.Contains(in item);
     public readonly bool Contains(byte* subsequence, IntPtr length) => BasicString.Contains(subsequence, length);
     public readonly bool Contains(ReadOnlySpan<byte> subsequence) => BasicString.Contains(subsequence);
     public readonly bool ContainsString(ReadOnlySpan<char> str) => BasicString.ContainsString(str);
+    public readonly void CopyTo(byte[] array, int arrayIndex) => BasicString.CopyTo(array, arrayIndex);
     public void Dispose() => BasicString.Dispose();
     public readonly override bool Equals(object? obj) => obj is StdString s && Equals(s);
-    public readonly bool Equals(IStdVector<byte>? other) => other is StdString s && Equals(s);
+    public readonly bool Equals(IStdRandomAccessible<byte>? other) => other is StdString s && Equals(s);
     public readonly bool Equals(in StdString other) => BasicString.Equals(other.BasicString);
     public readonly bool Exists(Predicate<byte> match) => BasicString.Exists(match);
     public readonly byte? Find(Predicate<byte> match) => BasicString.Find(match);
@@ -98,7 +101,9 @@ public unsafe struct StdString
     public readonly int FindLastIndex(int startIndex, Predicate<byte> match) => BasicString.FindLastIndex(startIndex, match);
     public readonly int FindLastIndex(int startIndex, int count, Predicate<byte> match) => BasicString.FindLastIndex(startIndex, count, match);
     public readonly void ForEach(Action<byte> action) => BasicString.ForEach(action);
-    public readonly IStdVector<byte>.Enumerator GetEnumerator() => BasicString.GetEnumerator();
+    public readonly UnmanagedArrayEnumerator<byte> GetEnumerator() => BasicString.GetEnumerator();
+    readonly IEnumerator<byte> IEnumerable<byte>.GetEnumerator() => GetEnumerator();
+    readonly IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     public readonly override int GetHashCode() => BasicString.GetHashCode();
     public readonly override string ToString() => BasicString.ToString();
     public readonly int IndexOf(in byte item) => BasicString.IndexOf(in item);

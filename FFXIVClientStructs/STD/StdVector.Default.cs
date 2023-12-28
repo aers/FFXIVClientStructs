@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Diagnostics.CodeAnalysis;
 using FFXIVClientStructs.STD.ContainerInterface;
 using FFXIVClientStructs.STD.Helper;
@@ -29,6 +30,7 @@ public unsafe struct StdVector<T> : IStdVector<T>
         readonly get => WithOps.LongCapacity;
         set => WithOps.LongCapacity = value;
     }
+    public readonly void* RepresentativePointer => WithOps.RepresentativePointer;
     public int Count {
         readonly get => WithOps.Count;
         set => WithOps.Count = value;
@@ -58,14 +60,14 @@ public unsafe struct StdVector<T> : IStdVector<T>
     public readonly long BinarySearch(in T item, IComparer<T>? comparer) => WithOps.BinarySearch(item, comparer);
     public readonly long BinarySearch(long index, long count, in T item, IComparer<T>? comparer) => WithOps.BinarySearch(index, count, item, comparer);
     public void Clear() => WithOps.Clear();
-    public readonly IStdVector<T>.Enumerator GetEnumerator() => WithOps.GetEnumerator();
     public readonly bool Contains(in T item) => WithOps.Contains(in item);
     public readonly bool Contains(T* subsequence, IntPtr length) => WithOps.Contains(subsequence, length);
     public readonly bool Contains(ReadOnlySpan<T> subsequence) => WithOps.Contains(subsequence);
     public readonly int CompareTo(object? obj) => WithOps.CompareTo(obj);
-    public readonly int CompareTo(IStdVector<T>? other) => WithOps.CompareTo(other);
+    public readonly int CompareTo(IStdRandomAccessible<T>? other) => WithOps.CompareTo(other);
+    public readonly void CopyTo(T[] array, int arrayIndex) => WithOps.CopyTo(array, arrayIndex);
     public readonly override bool Equals(object? obj) => obj is StdVector<T> v && Equals(v);
-    public readonly bool Equals(IStdVector<T>? other) => other is StdVector<T> v && Equals(v);
+    public readonly bool Equals(IStdRandomAccessible<T>? other) => other is StdVector<T> v && Equals(v);
     public readonly bool Equals(in StdVector<T> other) => WithOps.Equals(other.WithOps);
     public readonly bool Exists(Predicate<T> match) => WithOps.Exists(match);
     public readonly T? Find(Predicate<T> match) => WithOps.Find(match);
@@ -76,6 +78,9 @@ public unsafe struct StdVector<T> : IStdVector<T>
     public readonly int FindLastIndex(int startIndex, Predicate<T> match) => WithOps.FindLastIndex(startIndex, match);
     public readonly int FindLastIndex(int startIndex, int count, Predicate<T> match) => WithOps.FindLastIndex(startIndex, count, match);
     public readonly void ForEach(Action<T> action) => WithOps.ForEach(action);
+    public readonly UnmanagedArrayEnumerator<T> GetEnumerator() => WithOps.GetEnumerator();
+    readonly IEnumerator<T> IEnumerable<T>.GetEnumerator() => GetEnumerator();
+    readonly IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     public readonly int IndexOf(in T item) => WithOps.IndexOf(in item);
     public readonly int IndexOf(in T item, int index) => WithOps.IndexOf(in item, index);
     public readonly int IndexOf(in T item, int index, int count) => WithOps.IndexOf(in item, index, count);

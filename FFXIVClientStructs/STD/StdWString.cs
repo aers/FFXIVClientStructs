@@ -1,3 +1,4 @@
+using System.Collections;
 using FFXIVClientStructs.STD.ContainerInterface;
 using FFXIVClientStructs.STD.Helper;
 
@@ -34,6 +35,7 @@ public unsafe struct StdWString
         readonly get => BasicString.Capacity;
         set => BasicString.Capacity = value;
     }
+    public readonly void* RepresentativePointer => BasicString.RepresentativePointer;
     public int Count {
         readonly get => BasicString.Count;
         set => BasicString.Count = value;
@@ -68,10 +70,11 @@ public unsafe struct StdWString
     public readonly bool Contains(ReadOnlySpan<char> subsequence) => BasicString.Contains(subsequence);
     public readonly bool ContainsString(ReadOnlySpan<char> str) => BasicString.ContainsString(str);
     public readonly int CompareTo(object? obj) => obj switch { null => 1, StdWString s => BasicString.CompareTo(s.BasicString), _ => BasicString.CompareTo(obj) };
-    public readonly int CompareTo(IStdVector<char>? other) => BasicString.CompareTo(other);
+    public readonly int CompareTo(IStdRandomAccessible<char>? other) => BasicString.CompareTo(other);
+    public readonly void CopyTo(char[] array, int arrayIndex) => BasicString.CopyTo(array, arrayIndex);
     public void Dispose() => BasicString.Dispose();
     public readonly override bool Equals(object? obj) => obj is StdWString s && Equals(s);
-    public readonly bool Equals(IStdVector<char>? other) => other is StdWString s && Equals(s);
+    public readonly bool Equals(IStdRandomAccessible<char>? other) => other is StdWString s && Equals(s);
     public readonly bool Equals(in StdWString other) => BasicString.Equals(other.BasicString);
     public readonly bool Exists(Predicate<char> match) => BasicString.Exists(match);
     public readonly char? Find(Predicate<char> match) => BasicString.Find(match);
@@ -82,7 +85,9 @@ public unsafe struct StdWString
     public readonly int FindLastIndex(int startIndex, Predicate<char> match) => BasicString.FindLastIndex(startIndex, match);
     public readonly int FindLastIndex(int startIndex, int count, Predicate<char> match) => BasicString.FindLastIndex(startIndex, count, match);
     public readonly void ForEach(Action<char> action) => BasicString.ForEach(action);
-    public readonly IStdVector<char>.Enumerator GetEnumerator() => BasicString.GetEnumerator();
+    public readonly UnmanagedArrayEnumerator<char> GetEnumerator() => BasicString.GetEnumerator();
+    readonly IEnumerator<char> IEnumerable<char>.GetEnumerator() => GetEnumerator();
+    readonly IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     public readonly override int GetHashCode() => BasicString.GetHashCode();
     public readonly int IndexOf(in char item) => BasicString.IndexOf(in item);
     public readonly int IndexOf(in char item, int index) => BasicString.IndexOf(in item, index);

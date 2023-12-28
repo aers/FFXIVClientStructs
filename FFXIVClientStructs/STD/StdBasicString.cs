@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
@@ -43,17 +44,26 @@ public unsafe struct StdBasicString<T, TEncoding, TMemorySpace>
     public static bool IsMovable => true;
 
     /// <inheritdoc/>
+    public readonly void* RepresentativePointer => First;
+
+    /// <summary>
+    /// The pointer to the first element of the string. <c>null</c> if empty.
+    /// </summary>
     public readonly T* First => IsLargeMode
         ? *(T**)Unsafe.AsPointer(ref Unsafe.AsRef(in BufferBytes[0]))
         : (T*)Unsafe.AsPointer(ref Unsafe.AsRef(in BufferBytes[0]));
 
-    /// <inheritdoc/>
+    /// <summary>
+    /// The pointer to next of the last element of the string. <c>null</c> if empty.
+    /// </summary>
     public readonly T* Last => First + ULongLength;
 
-    /// <inheritdoc/>
+    /// <summary>
+    /// The pointer to the end of the memory allocation. <c>null</c> if empty.
+    /// </summary>
     public readonly T* End => First + ULongCapacity;
 
-    /// <inheritdoc cref="IStdVector{T}.Count"/>
+    /// <inheritdoc cref="IStdRandomAccessible{T}.Count"/>
     public int Count {
         readonly get => checked((int)ULongLength);
         set => Resize(value);
@@ -155,39 +165,13 @@ public unsafe struct StdBasicString<T, TEncoding, TMemorySpace>
     public void AddString(ReadOnlySpan<char> str) => InsertString(LongCount, str);
 
     /// <inheritdoc/>
-    public readonly long BinarySearch(in T item) => BinarySearch(0, LongCount, item, null);
-
+    public readonly long BinarySearch(in T item) => LookupHelper<T, StdBasicString<T, TEncoding, TMemorySpace>>.BinarySearch(in this, 0, LongCount, item, null);
+    
     /// <inheritdoc/>
-    public readonly long BinarySearch(in T item, IComparer<T>? comparer) => BinarySearch(0, LongCount, item, comparer);
-
+    public readonly long BinarySearch(in T item, IComparer<T>? comparer) => LookupHelper<T, StdBasicString<T, TEncoding, TMemorySpace>>.BinarySearch(in this, 0, LongCount, item, comparer);
+    
     /// <inheritdoc/>
-    public readonly long BinarySearch(long index, long count, in T item, IComparer<T>? comparer) =>
-        LongPointerSortHelper<T>.BinarySearch(
-            First,
-            index,
-            CheckedRangeCount(index, count),
-            item,
-            comparer);
-
-    /// <inheritdoc cref="IComparable{T}.CompareTo"/>
-    public readonly int CompareTo(IStdBasicString<T>? other) {
-        if (other is null)
-            return 1;
-
-        var lv = First;
-        var lt = lv + LongCount;
-        var rv = other.First;
-        var rt = rv + other.LongCount;
-        while (lv < lt && rv < rt) {
-            var cmp = Comparer<T>.Default.Compare(*lv, *rv);
-            if (cmp != 0)
-                return cmp;
-            lv++;
-            rv++;
-        }
-
-        return LongCount.CompareTo(other.LongCount);
-    }
+    public readonly long BinarySearch(long index, long count, in T item, IComparer<T>? comparer) => LookupHelper<T, StdBasicString<T, TEncoding, TMemorySpace>>.BinarySearch(in this, index, count, item, comparer);
 
     /// <inheritdoc cref="IComparable{T}.CompareTo"/>
     public readonly int CompareTo(in StdBasicString<T, TEncoding, TMemorySpace> other) {
@@ -210,25 +194,6 @@ public unsafe struct StdBasicString<T, TEncoding, TMemorySpace>
     readonly int IComparable<StdBasicString<T, TEncoding, TMemorySpace>>.CompareTo(StdBasicString<T, TEncoding, TMemorySpace> other) => CompareTo(other);
 
     /// <inheritdoc/>
-    public readonly int CompareTo(IStdVector<T>? other) {
-        if (other is null)
-            return 1;
-        var lv = First;
-        var lt = lv + LongCount;
-        var rv = other.First;
-        var rt = rv + other.LongCount;
-        while (lv < lt && rv < rt) {
-            var cmp = Comparer<T>.Default.Compare(*lv, *rv);
-            if (cmp != 0)
-                return cmp;
-            lv++;
-            rv++;
-        }
-
-        return LongCount.CompareTo(other.LongCount);
-    }
-
-    /// <inheritdoc/>
     public readonly int CompareTo(object? obj) => obj switch {
         null => 1,
         StdBasicString<T, TEncoding, TMemorySpace> s => CompareTo(s),
@@ -236,7 +201,7 @@ public unsafe struct StdBasicString<T, TEncoding, TMemorySpace>
         _ => throw new ArgumentException(null, nameof(obj)),
     };
 
-    /// <inheritdoc cref="IStdVector{T}.Clear"/>
+    /// <inheritdoc cref="IStdRandomAccessible{T}.Clear"/>
     public void Clear() => ResizeUndefined(0);
 
     /// <inheritdoc/>
@@ -247,6 +212,18 @@ public unsafe struct StdBasicString<T, TEncoding, TMemorySpace>
 
     /// <inheritdoc/>
     public readonly bool Contains(ReadOnlySpan<T> subsequence) => LongIndexOf(subsequence) != -1;
+
+    /// <inheritdoc/>
+    public readonly void CopyTo(T[] array, int arrayIndex) {
+        if (arrayIndex < 0 || arrayIndex > array.Length)
+            throw new ArgumentOutOfRangeException(nameof(arrayIndex), arrayIndex, null);
+        if (array.Length - arrayIndex < LongCount)
+            throw new ArgumentException(null, nameof(array));
+
+        var i = (long)arrayIndex;
+        for (var p = First; p < Last; p++)
+            array[i++] = *p;
+    }
 
     /// <inheritdoc/>
     public readonly bool ContainsString(ReadOnlySpan<char> str) => LongIndexOfString(str) != -1;
@@ -261,7 +238,7 @@ public unsafe struct StdBasicString<T, TEncoding, TMemorySpace>
     public readonly override bool Equals(object? obj) => obj is StdBasicString<T, TEncoding, TMemorySpace> sbs && Equals(sbs);
 
     /// <inheritdoc/>
-    public readonly bool Equals(IStdVector<T>? obj) => obj is StdBasicString<T, TEncoding, TMemorySpace> sbs && Equals(sbs);
+    public readonly bool Equals(IStdRandomAccessible<T>? obj) => obj is StdBasicString<T, TEncoding, TMemorySpace> sbs && Equals(sbs);
 
     /// <inheritdoc cref="Equals(object?)"/>
     public readonly bool Equals(in StdBasicString<T, TEncoding, TMemorySpace> other) {
@@ -311,8 +288,17 @@ public unsafe struct StdBasicString<T, TEncoding, TMemorySpace>
             action(*p);
     }
 
-    /// <inheritdoc/>
-    public readonly IStdVector<T>.Enumerator GetEnumerator() => new(First, Last);
+    /// <summary>
+    /// Gets an enumerator for this string.
+    /// </summary>
+    /// <returns>The enumerator returning references to items.</returns>
+    public readonly UnmanagedArrayEnumerator<T> GetEnumerator() => new(First, Last);
+
+    /// <inheritdoc cref="IEnumerable{T}.GetEnumerator"/>
+    readonly IEnumerator<T> IEnumerable<T>.GetEnumerator() => GetEnumerator();
+    
+    /// <inheritdoc cref="IEnumerable.GetEnumerator"/>
+    readonly IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
     /// <inheritdoc/>
     public override int GetHashCode() {
@@ -374,7 +360,7 @@ public unsafe struct StdBasicString<T, TEncoding, TMemorySpace>
             throw new ArgumentOutOfRangeException(nameof(index), index, null);
 
         switch (collection) {
-            case IStdVector<T> isv when isv.PointerEquals(this):
+            case IStdVector<T> isv when isv.RepresentativePointer == RepresentativePointer:
                 // We're inserting this vector into itself.
                 EnsureCapacity(checked(prevCount * 2));
                 CopyInside(index, index + prevCount, prevCount - index);
@@ -459,7 +445,7 @@ public unsafe struct StdBasicString<T, TEncoding, TMemorySpace>
         checked((int)LongLastIndexOf(subsequence, index, count));
 
     /// <inheritdoc/>
-    public readonly int LastIndexOfString(ReadOnlySpan<char> str) => LastIndexOfString(str, 0, Count);
+    public readonly int LastIndexOfString(ReadOnlySpan<char> str) => LastIndexOfString(str, Count - 1, Count);
 
     /// <inheritdoc/>
     public readonly int LastIndexOfString(ReadOnlySpan<char> str, int index) =>
@@ -530,40 +516,22 @@ public unsafe struct StdBasicString<T, TEncoding, TMemorySpace>
     }
 
     /// <inheritdoc/>
-    public void Sort() =>
-        LongPointerSortHelper<T>.Sort(
-            First,
-            LongCount);
+    public void Sort() => LookupHelper<T, StdBasicString<T, TEncoding, TMemorySpace>>.Sort(ref this, 0, LongCount);
 
     /// <inheritdoc/>
-    public void Sort(long index, long count) =>
-        LongPointerSortHelper<T>.Sort(
-            First + index,
-            CheckedRangeCount(index, count));
+    public void Sort(long index, long count) => LookupHelper<T, StdBasicString<T, TEncoding, TMemorySpace>>.Sort(ref this, index, CheckedRangeCount(index, count));
 
     /// <inheritdoc/>
-    public void Sort(IComparer<T>? comparer) =>
-        LongPointerSortHelper<T>.Sort(
-            First,
-            LongCount,
-            comparer);
+    public void Sort(IComparer<T>? comparer) => LookupHelper<T, StdBasicString<T, TEncoding, TMemorySpace>>.Sort(ref this, 0, LongCount, comparer);
 
     /// <inheritdoc/>
-    public void Sort(long index, long count, IComparer<T>? comparer) =>
-        LongPointerSortHelper<T>.Sort(
-            First + index,
-            CheckedRangeCount(index, count),
-            comparer);
+    public void Sort(long index, long count, IComparer<T>? comparer) => LookupHelper<T, StdBasicString<T, TEncoding, TMemorySpace>>.Sort(ref this, index, CheckedRangeCount(index, count), comparer);
 
     /// <inheritdoc/>
     public void Sort(Comparison<T> comparison) => Sort(0, LongCount, comparison);
 
     /// <inheritdoc/>
-    public void Sort(long index, long count, Comparison<T> comparison) =>
-        LongPointerSortHelper<T>.Sort(
-            First + index,
-            CheckedRangeCount(index, count),
-            comparison);
+    public void Sort(long index, long count, Comparison<T> comparison) => LookupHelper<T, StdBasicString<T, TEncoding, TMemorySpace>>.Sort(ref this, index, CheckedRangeCount(index, count), comparison);
 
     /// <inheritdoc/>
     public readonly T[] ToArray() => ToArray(0, LongCount);
@@ -586,124 +554,49 @@ public unsafe struct StdBasicString<T, TEncoding, TMemorySpace>
     public override string ToString() => TEncoding.Encoding.GetString((byte*)First, checked((int)(LongCount * sizeof(T))));
 
     /// <inheritdoc/>
-    public readonly long LongFindIndex(Predicate<T> match) => LongFindIndex(0, LongCount, match);
+    public readonly long LongFindIndex(Predicate<T> match) => LookupHelper<T, StdBasicString<T, TEncoding, TMemorySpace>>.LongFindIndex(in this, match);
 
     /// <inheritdoc/>
-    public readonly long LongFindIndex(long startIndex, Predicate<T> match) => LongFindIndex(startIndex, LongCount - startIndex, match);
+    public readonly long LongFindIndex(long startIndex, Predicate<T> match) => LookupHelper<T, StdBasicString<T, TEncoding, TMemorySpace>>.LongFindIndex(in this, startIndex, match);
 
     /// <inheritdoc/>
-    public readonly long LongFindIndex(long startIndex, long count, Predicate<T> match) {
-        if (startIndex < 0 || startIndex > LongCount)
-            throw new ArgumentOutOfRangeException(nameof(startIndex), startIndex, null);
-
-        if (count < 0 || startIndex > LongCount - count)
-            throw new ArgumentOutOfRangeException(nameof(count), count, null);
-
-        var end = First + startIndex + count;
-        for (var p = First + startIndex; p < end; p++, startIndex++) {
-            if (match(*p))
-                return startIndex;
-        }
-
-        return -1;
-    }
+    public readonly long LongFindIndex(long startIndex, long count, Predicate<T> match) => LookupHelper<T, StdBasicString<T, TEncoding, TMemorySpace>>.LongFindIndex(in this, startIndex, count, match);
 
     /// <inheritdoc/>
-    public readonly long LongFindLastIndex(Predicate<T> match) => LongFindLastIndex(LongCount - 1, LongCount, match);
+    public readonly long LongFindLastIndex(Predicate<T> match) => LookupHelper<T, StdBasicString<T, TEncoding, TMemorySpace>>.LongFindLastIndex(in this, match);
 
     /// <inheritdoc/>
-    public readonly long LongFindLastIndex(long startIndex, Predicate<T> match) => LongFindLastIndex(startIndex, startIndex + 1, match);
+    public readonly long LongFindLastIndex(long startIndex, Predicate<T> match) => LookupHelper<T, StdBasicString<T, TEncoding, TMemorySpace>>.LongFindLastIndex(in this, startIndex, match);
 
     /// <inheritdoc/>
-    public readonly long LongFindLastIndex(long startIndex, long count, Predicate<T> match) {
-        if (LongCount == 0) {
-            if (startIndex != -1)
-                throw new ArgumentOutOfRangeException(nameof(startIndex), startIndex, null);
-        } else {
-            if (startIndex < -1 || startIndex >= LongCount)
-                throw new ArgumentOutOfRangeException(nameof(startIndex), startIndex, null);
-        }
-
-        if (count < 0 || startIndex - count + 1 < 0)
-            throw new ArgumentOutOfRangeException(nameof(count), count, null);
-
-        var end = First + startIndex - count;
-        for (var p = First + startIndex; p >= end; p--, startIndex--) {
-            if (match(*p))
-                return startIndex;
-        }
-
-        return -1;
-    }
+    public readonly long LongFindLastIndex(long startIndex, long count, Predicate<T> match) => LookupHelper<T, StdBasicString<T, TEncoding, TMemorySpace>>.LongFindLastIndex(in this, startIndex, count, match);
 
     /// <inheritdoc/>
-    public readonly long LongIndexOf(in T item) => LongIndexOf(item, 0, LongCount);
+    public readonly long LongIndexOf(in T item) => LookupHelper<T, StdBasicString<T, TEncoding, TMemorySpace>>.LongIndexOf(in this, item);
 
     /// <inheritdoc/>
-    public readonly long LongIndexOf(in T item, long index) => LongIndexOf(item, index, LongCount - index);
+    public readonly long LongIndexOf(in T item, long index) => LookupHelper<T, StdBasicString<T, TEncoding, TMemorySpace>>.LongIndexOf(in this, item, index);
 
     /// <inheritdoc/>
-    public readonly long LongIndexOf(in T item, long index, long count) {
-        if (index < 0 || index > LongCount)
-            throw new ArgumentOutOfRangeException(nameof(index), index, null);
-
-        if (count < 0 || index > LongCount - count)
-            throw new ArgumentOutOfRangeException(nameof(count), count, null);
-
-        var end = First + index + count;
-        for (var p = First + index; p < end; p++, index++) {
-            if (*p == item)
-                return index;
-        }
-
-        return -1;
-    }
+    public readonly long LongIndexOf(in T item, long index, long count) => LookupHelper<T, StdBasicString<T, TEncoding, TMemorySpace>>.LongIndexOf(in this, item, index, count);
 
     /// <inheritdoc/>
-    public readonly long LongIndexOf(ReadOnlySpan<T> subsequence) => LongIndexOf(subsequence, 0, LongCount);
+    public readonly long LongIndexOf(ReadOnlySpan<T> subsequence) => LookupHelper<T, StdBasicString<T, TEncoding, TMemorySpace>>.LongIndexOf(in this, subsequence);
 
     /// <inheritdoc/>
-    public readonly long LongIndexOf(ReadOnlySpan<T> subsequence, long index) => LongIndexOf(subsequence, index, LongCount - index);
+    public readonly long LongIndexOf(ReadOnlySpan<T> subsequence, long index) => LookupHelper<T, StdBasicString<T, TEncoding, TMemorySpace>>.LongIndexOf(in this, subsequence, index);
 
     /// <inheritdoc/>
-    public readonly long LongIndexOf(ReadOnlySpan<T> subsequence, long index, long count) {
-        fixed (T* p = subsequence)
-            return LongIndexOf(p, subsequence.Length, index, count);
-    }
+    public readonly long LongIndexOf(ReadOnlySpan<T> subsequence, long index, long count) => LookupHelper<T, StdBasicString<T, TEncoding, TMemorySpace>>.LongIndexOf(in this, subsequence, index, count);
 
     /// <inheritdoc/>
-    public readonly long LongIndexOf(T* subsequence, nint subsequenceLength) => LongIndexOf(subsequence, subsequenceLength, 0, LongCount);
+    public readonly long LongIndexOf(T* subsequence, nint subsequenceLength) => LookupHelper<T, StdBasicString<T, TEncoding, TMemorySpace>>.LongIndexOf(in this, subsequence, subsequenceLength, 0, LongCount);
 
     /// <inheritdoc/>
-    public readonly long LongIndexOf(T* subsequence, nint subsequenceLength, long index) =>
-        LongIndexOf(subsequence, subsequenceLength, index, LongCount - index);
+    public readonly long LongIndexOf(T* subsequence, nint subsequenceLength, long index) => LookupHelper<T, StdBasicString<T, TEncoding, TMemorySpace>>.LongIndexOf(in this, subsequence, subsequenceLength, index, LongCount - index);
 
     /// <inheritdoc/>
-    public readonly long LongIndexOf(T* subsequence, nint subsequenceLength, long index, long count) {
-        _ = CheckedRangeCount(index, count);
-        if (subsequenceLength < 0)
-            throw new ArgumentOutOfRangeException(nameof(subsequenceLength), subsequenceLength, null);
-        if (subsequenceLength == 0)
-            return index;
-        if (count < subsequenceLength)
-            return -1;
-
-        var test = First + index;
-        var testEnd = test + count - subsequenceLength + 1;
-        for (; test < testEnd; ++test) {
-            if (*subsequence != *test)
-                continue;
-            var s = subsequence + 1;
-            var t = test + 1;
-            nint i = 1;
-            while (i < subsequenceLength && *s++ == *t++)
-                i++;
-            if (i == subsequenceLength)
-                return test - First;
-        }
-
-        return -1;
-    }
+    public readonly long LongIndexOf(T* subsequence, nint subsequenceLength, long index, long count) => LookupHelper<T, StdBasicString<T, TEncoding, TMemorySpace>>.LongIndexOf(in this, subsequence, subsequenceLength, index, count);
 
     /// <inheritdoc/>
     public readonly long LongIndexOfString(ReadOnlySpan<char> str) =>
@@ -724,96 +617,39 @@ public unsafe struct StdBasicString<T, TEncoding, TMemorySpace>
     }
 
     /// <inheritdoc/>
-    public readonly long LongLastIndexOf(in T item) => LongLastIndexOf(item, 0, LongCount);
+    public readonly long LongLastIndexOf(in T item) => LookupHelper<T, StdBasicString<T, TEncoding, TMemorySpace>>.LongLastIndexOf(in this, item);
 
     /// <inheritdoc/>
-    public readonly long LongLastIndexOf(in T item, long index) => LongLastIndexOf(item, index, index + 1);
+    public readonly long LongLastIndexOf(in T item, long index) => LookupHelper<T, StdBasicString<T, TEncoding, TMemorySpace>>.LongLastIndexOf(in this, item, index);
 
     /// <inheritdoc/>
-    public readonly long LongLastIndexOf(in T item, long index, long count) {
-        if (LongCount == 0) {
-            if (index != -1)
-                throw new ArgumentOutOfRangeException(nameof(index), index, null);
-        } else {
-            if (index < -1 || index >= LongCount)
-                throw new ArgumentOutOfRangeException(nameof(index), index, null);
-        }
-
-        if (count < 0 || index - count + 1 < 0)
-            throw new ArgumentOutOfRangeException(nameof(count), count, null);
-
-        var end = First + index - count;
-        for (var p = First + index; p >= end; p--, index--) {
-            if (item == *p)
-                return index;
-        }
-
-        return -1;
-    }
+    public readonly long LongLastIndexOf(in T item, long index, long count) => LookupHelper<T, StdBasicString<T, TEncoding, TMemorySpace>>.LongLastIndexOf(in this, item, index, count);
 
     /// <inheritdoc/>
-    public readonly long LongLastIndexOf(ReadOnlySpan<T> subsequence) => LongLastIndexOf(subsequence, 0, LongCount);
+    public readonly long LongLastIndexOf(ReadOnlySpan<T> subsequence) => LookupHelper<T, StdBasicString<T, TEncoding, TMemorySpace>>.LongLastIndexOf(in this, subsequence);
 
     /// <inheritdoc/>
-    public readonly long LongLastIndexOf(ReadOnlySpan<T> subsequence, long index) => LongLastIndexOf(subsequence, index, index + 1);
+    public readonly long LongLastIndexOf(ReadOnlySpan<T> subsequence, long index) => LookupHelper<T, StdBasicString<T, TEncoding, TMemorySpace>>.LongLastIndexOf(in this, subsequence, index);
 
     /// <inheritdoc/>
-    public readonly long LongLastIndexOf(ReadOnlySpan<T> subsequence, long index, long count) {
-        fixed (T* p = subsequence)
-            return LongLastIndexOf(p, subsequence.Length, index, index + 1);
-    }
+    public readonly long LongLastIndexOf(ReadOnlySpan<T> subsequence, long index, long count) => LookupHelper<T, StdBasicString<T, TEncoding, TMemorySpace>>.LongLastIndexOf(in this, subsequence, index, count);
 
     /// <inheritdoc/>
-    public readonly long LongLastIndexOf(T* subsequence, nint subsequenceLength) => LongLastIndexOf(subsequence, subsequenceLength, 0, LongCount);
+    public readonly long LongLastIndexOf(T* subsequence, nint subsequenceLength) => LookupHelper<T, StdBasicString<T, TEncoding, TMemorySpace>>.LongLastIndexOf(in this, subsequence, subsequenceLength);
 
     /// <inheritdoc/>
-    public readonly long LongLastIndexOf(T* subsequence, nint subsequenceLength, long index) =>
-        LongLastIndexOf(subsequence, subsequenceLength, index, index + 1);
+    public readonly long LongLastIndexOf(T* subsequence, nint subsequenceLength, long index) => LookupHelper<T, StdBasicString<T, TEncoding, TMemorySpace>>.LongLastIndexOf(in this, subsequence, subsequenceLength, index);
 
     /// <inheritdoc/>
-    public readonly long LongLastIndexOf(T* subsequence, nint subsequenceLength, long index, long count) {
-        if (LongCount == 0) {
-            if (index != -1)
-                throw new ArgumentOutOfRangeException(nameof(index), index, null);
-        } else {
-            if (index < -1 || index >= LongCount)
-                throw new ArgumentOutOfRangeException(nameof(index), index, null);
-        }
-
-        if (count < 0 || index > LongCount - count)
-            throw new ArgumentOutOfRangeException(nameof(count), count, null);
-
-        if (subsequenceLength < 0)
-            throw new ArgumentOutOfRangeException(nameof(subsequenceLength), subsequenceLength, null);
-        if (subsequenceLength == 0)
-            return index;
-        if (count < subsequenceLength)
-            return -1;
-
-        var testEnd = First + index;
-        var test = testEnd + count - subsequenceLength;
-        for (; test >= testEnd; --test) {
-            if (*subsequence != *test)
-                continue;
-            var s = subsequence + 1;
-            var t = test + 1;
-            nint i = 1;
-            while (i < subsequenceLength && *s++ == *t++)
-                i++;
-            if (i == subsequenceLength)
-                return test - First;
-        }
-
-        return -1;
-    }
+    public readonly long LongLastIndexOf(T* subsequence, nint subsequenceLength, long index, long count) => LookupHelper<T, StdBasicString<T, TEncoding, TMemorySpace>>.LongLastIndexOf(in this, subsequence, subsequenceLength, index, count);
 
     /// <inheritdoc/>
     public readonly long LongLastIndexOfString(ReadOnlySpan<char> str) =>
-        LongLastIndexOfString(str, 0, LongCount);
+        LongLastIndexOfString(str, LongCount - 1, LongCount);
 
     /// <inheritdoc/>
     public readonly long LongLastIndexOfString(ReadOnlySpan<char> str, long index) =>
-        LongLastIndexOfString(str, index, LongCount - index);
+        LongLastIndexOfString(str, index, index + 1);
 
     /// <inheritdoc/>
     public readonly long LongLastIndexOfString(ReadOnlySpan<char> str, long index, long count) {
