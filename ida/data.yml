@@ -377,6 +377,7 @@ classes:
       0x1404DE200: GetSlotTimeline
       0x1404DE5F0: SetSlotSpeed
       0x1404DE900: GetSlotSpeed
+      0x1404DEB40: GetCurrentActionTimelineTimestamp
       0x1404DF520: SetSlotTimeline
   Client::Game::Character::CharacterData:
     vtbls:
@@ -391,6 +392,8 @@ classes:
       0x141322DB0: SetSlotSpeed
       0x141322F10: GetHeightAdjustActionTimelineRowId
       0x1413239D0: SetLipsOverrideTimeline
+      0x141325430: ClearBannerData
+      0x1413258E0: GetCurrentBannerTimelineTimestamp
   Client::Game::RetainerManager:
     instances:
       - ea: 0x142221DF0
@@ -10862,7 +10865,9 @@ classes:
       - ea: 0x141B4F538
         base: Client::System::Scheduler::Base::SchedulerState
     vfuncs:
+      20: GetActionTimelineKey
       28: GetOwningGameObjectIndex
+      40: GetAnimationLength # C010
     funcs:
       0x1413CEAE0: ctor
   Client::System::Scheduler::Base::SchedulerTimeline:
@@ -10872,6 +10877,7 @@ classes:
     funcs:
       0x141512E90: ctor
       0x141513C00: PlayAction
+      0x141515C60: UpdateBanner
       0x141515E00: LoadTimelineResources
   Client::System::Scheduler::Resource::SchedulerResourceManagement:
     instances:

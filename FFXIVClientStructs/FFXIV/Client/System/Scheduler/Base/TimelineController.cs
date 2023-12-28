@@ -6,4 +6,8 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Scheduler.Base;
 [StructLayout(LayoutKind.Explicit, Size = 0x80)]
 public unsafe partial struct TimelineController {
     [FieldOffset(0)] public SchedulerState SchedulerState;
+
+    // [FieldOffset(0x28)] public nint TmbhData;
+
+    [FieldOffset(0x34)] public float CurrentTimestamp;
 }
