@@ -33,9 +33,9 @@ public unsafe partial struct Framework {
     [FieldOffset(0x16B8)] public float FrameDeltaTime;
     [FieldOffset(0x16C8)] public uint FrameCounter;
     [FieldOffset(0x1768)] public ClientTime ClientTime;
-    [FieldOffset(0x1770)] public long EorzeaTime;
-    [FieldOffset(0x1798)] public long EorzeaTimeOverride;
-    [FieldOffset(0x17A0)] public bool IsEorzeaTimeOverridden;
+    [FieldOffset(0x1770), Obsolete("Use ClientTime.EorzeaTime")] public long EorzeaTime;
+    [FieldOffset(0x1798), Obsolete("Use ClientTime.EorzeaTimeOverride")] public long EorzeaTimeOverride;
+    [FieldOffset(0x17A0), Obsolete("Use ClientTime.IsEorzeaTimeOverridden")] public bool IsEorzeaTimeOverridden;
     [FieldOffset(0x17C4)] public float FrameRate;
     [FieldOffset(0x17D0)] public bool WindowInactive;
 
