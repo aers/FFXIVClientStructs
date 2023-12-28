@@ -2435,6 +2435,8 @@ classes:
       0x14021B070: Initialize
       0x14021B7F0: dtor
       0x14021B890: IsWinSockInitialized
+      0x14021C170: GetCurrentDeviceTimeInMillis
+      0x14021C1F0: GetLobbyCount 
       0x14021CB20: IsInCrossWorldDuty
       0x14021CBA0: GetCurrentInstance
   Application::Network::PacketReceiverCallbackInterface:

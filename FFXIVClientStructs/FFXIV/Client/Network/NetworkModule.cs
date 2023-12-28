@@ -1,7 +1,4 @@
-using System.ComponentModel.DataAnnotations;
-using FFXIVClientStructs.FFXIV.Application.Network;
 using FFXIVClientStructs.FFXIV.Client.System.String;
-using Unknown = nint;
 
 namespace FFXIVClientStructs.FFXIV.Client.Network;
 
@@ -36,6 +33,8 @@ public unsafe partial struct NetworkModule {
     [FieldOffset(0x9C9)] public bool WinSockInitialized;
     [FieldOffset(0x9D0)] public NetworkModulePacketReceiverCallback* PacketReceiverCallback;
 
+    [FieldOffset(0xA74)] public int CurrentDeviceTime; //Timestamp
+    [FieldOffset(0xA78)] public int CurrentDeviceTimeMillis; //Milliseconds for A74
 
     [FieldOffset(0xB26)] public short CurrentInstance;
 

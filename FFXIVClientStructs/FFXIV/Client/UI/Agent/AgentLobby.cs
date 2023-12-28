@@ -62,7 +62,7 @@ public unsafe partial struct LobbyData {
 public unsafe partial struct LobbyUIClient {
     [FieldOffset(0x00)] public void** vtbl;
     [FieldOffset(0x10)] public NetworkModuleProxy* NetworkModuleProxy;
-    //[FieldOffset(0x18)] public ?* NetworkModule; // contains hosts and ports
+    //[FieldOffset(0x18)] public ?* NetworConfig; // contains hosts and ports
 
     [FieldOffset(0x30)] public StdVector<LobbyDataCenterWorldEntry> CurrentDataCenterWorlds;
 
