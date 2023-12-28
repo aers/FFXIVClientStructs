@@ -328,8 +328,8 @@ public unsafe struct StdVector<T, TMemorySpace>
             case IStdVector<T> isv when isv.RepresentativePointer == RepresentativePointer:
                 // We're inserting this vector into itself.
                 EnsureCapacity(checked(prevCount * 2));
-                CopyInsideUnchecked(index, index + prevCount, prevCount - index);
-                CopyInsideUnchecked(0, index, prevCount);
+                ConstructCopyInsideUnchecked(index, index + prevCount, prevCount - index);
+                ConstructCopyInsideUnchecked(0, index, prevCount);
                 Last += prevCount;
                 break;
             case List<T> list:
@@ -441,7 +441,7 @@ public unsafe struct StdVector<T, TMemorySpace>
             throw new InvalidOperationException("Cannot remove from middle when items are not movable");
         StdOps<T>.StaticDispose(ref First[index]);
         Last--;
-        CopyInsideUnchecked(index + 1, index, LongCount - index);
+        ConstructMoveInsideUnchecked(index + 1, index, LongCount - index);
     }
 
     /// <inheritdoc/>
@@ -456,7 +456,7 @@ public unsafe struct StdVector<T, TMemorySpace>
         }
 
         Last -= count;
-        CopyInsideUnchecked(index + count, index, LongCount - index);
+        ConstructMoveInsideUnchecked(index + count, index, LongCount - index);
     }
 
     /// <inheritdoc/>
@@ -693,11 +693,35 @@ public unsafe struct StdVector<T, TMemorySpace>
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private readonly void CopyInsideUnchecked(long fromIndex, long toIndex, long count) =>
-        Buffer.MemoryCopy(First + fromIndex, First + toIndex, count * sizeof(T), count * sizeof(T));
+    private void ConstructCopyInsideUnchecked(long fromIndex, long toIndex, long count) {
+        if (fromIndex == toIndex || count <= 0)
+            return;
+
+        // Buffer.MemoryCopy(First + fromIndex, First + toIndex, count * sizeof(T), count * sizeof(T));
+        if (fromIndex + count > toIndex && toIndex > fromIndex) {
+            while (--count >= 0)
+                StdOps<T>.ConstructCopyInPlace(First[fromIndex + count], out First[toIndex + count]);
+        } else {
+            for (var i = 0L; i < count; i++)
+                StdOps<T>.ConstructCopyInPlace(First[fromIndex + i], out First[toIndex + i]);
+        }
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private readonly void SpliceHoleUnchecked(long index, long count) {
-        CopyInsideUnchecked(index, index + count, LongCount - index);
+    private void ConstructMoveInsideUnchecked(long fromIndex, long toIndex, long count) {
+        if (fromIndex == toIndex || count <= 0)
+            return;
+
+        // Buffer.MemoryCopy(First + fromIndex, First + toIndex, count * sizeof(T), count * sizeof(T));
+        if (fromIndex + count > toIndex && toIndex > fromIndex) {
+            while (--count >= 0)
+                StdOps<T>.ConstructMoveInPlace(ref First[fromIndex + count], out First[toIndex + count]);
+        } else {
+            for (var i = 0L; i < count; i++)
+                StdOps<T>.ConstructMoveInPlace(ref First[fromIndex + i], out First[toIndex + i]);
+        }
     }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private void SpliceHoleUnchecked(long index, long count) => ConstructMoveInsideUnchecked(index, index + count, LongCount - index);
 }

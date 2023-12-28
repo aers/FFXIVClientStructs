@@ -23,13 +23,16 @@ public static class VectorTester {
             testByteVector.Dump();
             testByteVector.Sort(4, testByteVector.LongCount - 4);
             testByteVector.Dump();
-            using (var nrv = NewRandomVector(32, _ => (byte)Rnd.NextInt64()))
+            using (var nrv = NewRandomVector(48, _ => (byte)Rnd.NextInt64()))
                 testByteVector.AddRangeCopy(nrv);
             testByteVector.Dump();
             testByteVector.Clear();
-            testByteVector.Resize(32);
-            testByteVector.Resize(64, 0);
-            testByteVector.Resize(96, 0xFF);
+            testByteVector.SetCapacity(8);
+            testByteVector.Resize(0x10);
+            testByteVector.Resize(0x20, 0);
+            testByteVector.Resize(0x40, 0x40);
+            testByteVector.Resize(0x60, 0x60);
+            testByteVector.Resize(0x140, 0xFF);
             testByteVector.Dump();
 
             try {
