@@ -86,7 +86,7 @@ public unsafe struct StdDeque<T>
 
     public static void ConstructDefaultInPlace(out StdDeque<T> item) => throw new NotImplementedException();
 
-    public static void StaticDispose(ref StdDeque<T> item) => ((IDisposable)item).Dispose();
+    public static void StaticDispose(ref StdDeque<T> item) { }
 
     public static void ConstructCopyInPlace(in StdDeque<T> source, out StdDeque<T> target) => throw new NotImplementedException();
 
@@ -300,8 +300,6 @@ public unsafe struct StdDeque<T>
 
     /// <inheritdoc/>
     public readonly long LongLastIndexOf(T* subsequence, nint subsequenceLength, long index, long count) => LookupHelper<T, StdDeque<T>>.DefaultLongLastIndexOf(in this, subsequence, subsequenceLength, index, count);
-
-    void IDisposable.Dispose() => throw new NotImplementedException();
 
     /// <inheritdoc/>
     public int CompareTo(object? obj) => obj switch {

@@ -8,14 +8,14 @@ using JetBrains.Annotations;
 namespace FFXIVClientStructs.STD;
 
 [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
-public unsafe struct StdSpan<T>
-    : IStdRandomElementModifiable<T>
+public unsafe struct StdSpanReadOnly<T>
+    : IStdRandomElementReadable<T>
     where T : unmanaged {
     private readonly T* _begin;
     private readonly nint _count;
 
-    public StdSpan(ref T firstPinnedObject, nint count) {
-        _begin = (T*)Unsafe.AsPointer(ref firstPinnedObject);
+    public StdSpanReadOnly(ref readonly T firstPinnedObject, nint count) {
+        _begin = (T*)Unsafe.AsPointer(ref Unsafe.AsRef(in firstPinnedObject));
         _count = count;
         if (_count == 0)
             _begin = null;
@@ -23,7 +23,7 @@ public unsafe struct StdSpan<T>
             throw new ArgumentOutOfRangeException(nameof(count), count, null);
     }
 
-    public StdSpan(T* begin, nint count) {
+    public StdSpanReadOnly(T* begin, nint count) {
         _begin = begin;
         _count = count;
         if (_count == 0)
@@ -32,9 +32,9 @@ public unsafe struct StdSpan<T>
             throw new ArgumentOutOfRangeException(nameof(count), count, null);
     }
 
-    public StdSpan(T* begin, long count) : this(begin, (nint)count) { }
+    public StdSpanReadOnly(T* begin, long count) : this(begin, (nint)count) { }
 
-    public StdSpan(Span<T> span) {
+    public StdSpanReadOnly(ReadOnlySpan<T> span) {
         if (span.IsEmpty)
             return;
         _begin = (T*)Unsafe.AsPointer(ref Unsafe.AsRef(in span[0]));
@@ -57,19 +57,19 @@ public unsafe struct StdSpan<T>
     public readonly void* RepresentativePointer => _begin;
 
     /// <inheritdoc cref="IStdRandomElementModifiable{T}.this[long]" />
-    public readonly ref T this[long index] => ref _begin[CheckedIndex(index < 0 ? _count - ~index : index)];
+    public readonly ref readonly T this[long index] => ref _begin[CheckedIndex(index < 0 ? _count - ~index : index)];
 
     /// <inheritdoc cref="IStdRandomElementModifiable{T}.this[int]" />
-    public readonly ref T this[int index] => ref this[(long)index];
+    public readonly ref readonly T this[int index] => ref this[(long)index];
 
     /// <inheritdoc cref="IStdRandomElementModifiable{T}.this[Index]" />
-    public readonly ref T this[Index index] => ref this[index.IsFromEnd ? LongCount - index.Value : index.Value];
+    public readonly ref readonly T this[Index index] => ref this[index.IsFromEnd ? LongCount - index.Value : index.Value];
 
     /// <summary>
     /// Gets a slice of this <see cref="StdSpan{T}"/> for the given range.
     /// </summary>
     /// <param name="range">The range.</param>
-    public readonly StdSpan<T> this[Range range] => this[
+    public readonly StdSpanReadOnly<T> this[Range range] => this[
         range.Start.IsFromEnd ? ~range.Start.Value : range.Start.Value,
         range.End.IsFromEnd ? ~range.End.Value : range.End.Value];
 
@@ -78,7 +78,7 @@ public unsafe struct StdSpan<T>
     /// </summary>
     /// <param name="start">The starting index. Negative numbers will be counted from the end of this span after inverting.</param>
     /// <param name="end">The ending index. Negative numbers will be counted from the end of this span after inverting.</param>
-    public readonly StdSpan<T> this[long start, long end] {
+    public readonly StdSpanReadOnly<T> this[long start, long end] {
         get {
             if (start < 0)
                 start = _count - ~start;
@@ -89,21 +89,21 @@ public unsafe struct StdSpan<T>
             if (end > _count || start > end)
                 throw new ArgumentOutOfRangeException(nameof(end), end, null);
 
-            return new StdSpan<T>(_begin + start, end - start);
+            return new StdSpanReadOnly<T>(_begin + start, end - start);
         }
     }
 
-    public static bool operator ==(StdSpan<T> left, StdSpan<T> right) => left.Equals(right);
+    public static bool operator ==(StdSpanReadOnly<T> left, StdSpanReadOnly<T> right) => left.Equals(right);
 
-    public static bool operator !=(StdSpan<T> left, StdSpan<T> right) => !left.Equals(right);
+    public static bool operator !=(StdSpanReadOnly<T> left, StdSpanReadOnly<T> right) => !left.Equals(right);
 
-    public static implicit operator Span<T>(StdSpan<T> s) => s.AsSpan();
+    public static implicit operator Span<T>(StdSpanReadOnly<T> s) => s.AsSpan();
 
-    public static implicit operator ReadOnlySpan<T>(StdSpan<T> s) => s.AsSpan();
+    public static implicit operator ReadOnlySpan<T>(StdSpanReadOnly<T> s) => s.AsSpan();
 
-    public static implicit operator StdSpanReadOnly<T>(StdSpan<T> s) => new(s._begin, s._count);
+    public static explicit operator StdSpanReadOnly<T>(Span<T> s) => new(s);
 
-    public static explicit operator StdSpan<T>(Span<T> s) => new(s);
+    public static explicit operator StdSpanReadOnly<T>(ReadOnlySpan<T> s) => new(s);
 
     /// <summary>
     /// Gets the <see cref="Span{T}"/> view of this <see cref="StdSpan{T}"/>.
@@ -131,13 +131,13 @@ public unsafe struct StdSpan<T>
         checked((int)CheckedRangeCount(index, count)));
 
     /// <inheritdoc/>
-    public readonly long BinarySearch(in T item) => LookupHelper<T, StdSpan<T>>.BinarySearch(in this, 0, LongCount, item, null);
+    public readonly long BinarySearch(in T item) => LookupHelper<T, StdSpanReadOnly<T>>.BinarySearch(in this, 0, LongCount, item, null);
 
     /// <inheritdoc/>
-    public readonly long BinarySearch(in T item, IComparer<T>? comparer) => LookupHelper<T, StdSpan<T>>.BinarySearch(in this, 0, LongCount, item, comparer);
+    public readonly long BinarySearch(in T item, IComparer<T>? comparer) => LookupHelper<T, StdSpanReadOnly<T>>.BinarySearch(in this, 0, LongCount, item, comparer);
 
     /// <inheritdoc/>
-    public readonly long BinarySearch(long index, long count, in T item, IComparer<T>? comparer) => LookupHelper<T, StdSpan<T>>.BinarySearch(in this, index, count, item, comparer);
+    public readonly long BinarySearch(long index, long count, in T item, IComparer<T>? comparer) => LookupHelper<T, StdSpanReadOnly<T>>.BinarySearch(in this, index, count, item, comparer);
 
     /// <inheritdoc/>
     public readonly bool Contains(in T item) => LongIndexOf(item) != -1;
@@ -230,18 +230,12 @@ public unsafe struct StdSpan<T>
     /// <inheritdoc/>
     public readonly int LastIndexOf(ReadOnlySpan<T> subsequence, int index, int count) => checked((int)LongLastIndexOf(subsequence, index, count));
 
-    /// <inheritdoc/>
-    public void Reverse() => MutateHelper<T, StdSpan<T>>.DefaultReverse(ref this);
-
-    /// <inheritdoc/>
-    public void Reverse(long index, long count) => MutateHelper<T, StdSpan<T>>.DefaultReverse(ref this, index, count);
-
     /// <summary>
     /// Forms a slice out of the current span that begins at a specified index.
     /// </summary>
     /// <param name="start">The index at which to begin the slice.</param>
     /// <returns>A span that consists of all elements of the current span from <paramref name="start"/> to the end of the span.</returns>
-    public StdSpan<T> Slice(long start) => new(_begin + start, CheckedRangeCount(start, _count - start));
+    public StdSpanReadOnly<T> Slice(long start) => new(_begin + start, CheckedRangeCount(start, _count - start));
     
     /// <summary>
     /// Forms a slice out of the current span starting at a specified index for a specified length.
@@ -249,106 +243,88 @@ public unsafe struct StdSpan<T>
     /// <param name="start">The index at which to begin this slice.</param>
     /// <param name="length">The desired length for the slice.</param>
     /// <returns>A span that consists of <paramref name="length"/> elements from the current span starting at <paramref name="start"/>.</returns>
-    public StdSpan<T> Slice(long start, long length) => new(_begin + start, CheckedRangeCount(start, length));
+    public StdSpanReadOnly<T> Slice(long start, long length) => new(_begin + start, CheckedRangeCount(start, length));
 
     /// <inheritdoc/>
-    public void Sort() => MutateHelper<T, StdSpan<T>>.Sort(ref this, 0, LongCount);
+    public readonly T[] ToArray() => LookupHelper<T, StdSpanReadOnly<T>>.DefaultToArray(in this);
 
     /// <inheritdoc/>
-    public void Sort(long index, long count) => MutateHelper<T, StdSpan<T>>.Sort(ref this, index, CheckedRangeCount(index, count));
+    public readonly T[] ToArray(long index) => LookupHelper<T, StdSpanReadOnly<T>>.DefaultToArray(in this, index);
 
     /// <inheritdoc/>
-    public void Sort(IComparer<T>? comparer) => MutateHelper<T, StdSpan<T>>.Sort(ref this, 0, LongCount, comparer);
+    public readonly T[] ToArray(long index, long count) => LookupHelper<T, StdSpanReadOnly<T>>.DefaultToArray(in this, index, count);
 
     /// <inheritdoc/>
-    public void Sort(long index, long count, IComparer<T>? comparer) => MutateHelper<T, StdSpan<T>>.Sort(ref this, index, CheckedRangeCount(index, count), comparer);
+    public readonly long LongFindIndex(Predicate<T> match) => LookupHelper<T, StdSpanReadOnly<T>>.DefaultLongFindIndex(in this, match);
 
     /// <inheritdoc/>
-    public void Sort(Comparison<T> comparison) => Sort(0, LongCount, comparison);
+    public readonly long LongFindIndex(long startIndex, Predicate<T> match) => LookupHelper<T, StdSpanReadOnly<T>>.DefaultLongFindIndex(in this, startIndex, match);
 
     /// <inheritdoc/>
-    public void Sort(long index, long count, Comparison<T> comparison) => MutateHelper<T, StdSpan<T>>.Sort(ref this, index, CheckedRangeCount(index, count), comparison);
+    public readonly long LongFindIndex(long startIndex, long count, Predicate<T> match) => LookupHelper<T, StdSpanReadOnly<T>>.DefaultLongFindIndex(in this, startIndex, count, match);
 
     /// <inheritdoc/>
-    public readonly T[] ToArray() => LookupHelper<T, StdSpan<T>>.DefaultToArray(in this);
+    public readonly long LongFindLastIndex(Predicate<T> match) => LookupHelper<T, StdSpanReadOnly<T>>.DefaultLongFindLastIndex(in this, match);
 
     /// <inheritdoc/>
-    public readonly T[] ToArray(long index) => LookupHelper<T, StdSpan<T>>.DefaultToArray(in this, index);
+    public readonly long LongFindLastIndex(long startIndex, Predicate<T> match) => LookupHelper<T, StdSpanReadOnly<T>>.DefaultLongFindLastIndex(in this, startIndex, match);
 
     /// <inheritdoc/>
-    public readonly T[] ToArray(long index, long count) => LookupHelper<T, StdSpan<T>>.DefaultToArray(in this, index, count);
+    public readonly long LongFindLastIndex(long startIndex, long count, Predicate<T> match) => LookupHelper<T, StdSpanReadOnly<T>>.DefaultLongFindLastIndex(in this, startIndex, count, match);
 
     /// <inheritdoc/>
-    public readonly long LongFindIndex(Predicate<T> match) => LookupHelper<T, StdSpan<T>>.DefaultLongFindIndex(in this, match);
+    public readonly long LongIndexOf(in T item) => LookupHelper<T, StdSpanReadOnly<T>>.DefaultLongIndexOf(in this, item);
 
     /// <inheritdoc/>
-    public readonly long LongFindIndex(long startIndex, Predicate<T> match) => LookupHelper<T, StdSpan<T>>.DefaultLongFindIndex(in this, startIndex, match);
+    public readonly long LongIndexOf(in T item, long index) => LookupHelper<T, StdSpanReadOnly<T>>.DefaultLongIndexOf(in this, item, index);
 
     /// <inheritdoc/>
-    public readonly long LongFindIndex(long startIndex, long count, Predicate<T> match) => LookupHelper<T, StdSpan<T>>.DefaultLongFindIndex(in this, startIndex, count, match);
+    public readonly long LongIndexOf(in T item, long index, long count) => LookupHelper<T, StdSpanReadOnly<T>>.DefaultLongIndexOf(in this, item, index, count);
 
     /// <inheritdoc/>
-    public readonly long LongFindLastIndex(Predicate<T> match) => LookupHelper<T, StdSpan<T>>.DefaultLongFindLastIndex(in this, match);
+    public readonly long LongIndexOf(ReadOnlySpan<T> subsequence) => LookupHelper<T, StdSpanReadOnly<T>>.DefaultLongIndexOf(in this, subsequence);
 
     /// <inheritdoc/>
-    public readonly long LongFindLastIndex(long startIndex, Predicate<T> match) => LookupHelper<T, StdSpan<T>>.DefaultLongFindLastIndex(in this, startIndex, match);
+    public readonly long LongIndexOf(ReadOnlySpan<T> subsequence, long index) => LookupHelper<T, StdSpanReadOnly<T>>.DefaultLongIndexOf(in this, subsequence, index);
 
     /// <inheritdoc/>
-    public readonly long LongFindLastIndex(long startIndex, long count, Predicate<T> match) => LookupHelper<T, StdSpan<T>>.DefaultLongFindLastIndex(in this, startIndex, count, match);
+    public readonly long LongIndexOf(ReadOnlySpan<T> subsequence, long index, long count) => LookupHelper<T, StdSpanReadOnly<T>>.DefaultLongIndexOf(in this, subsequence, index, count);
 
     /// <inheritdoc/>
-    public readonly long LongIndexOf(in T item) => LookupHelper<T, StdSpan<T>>.DefaultLongIndexOf(in this, item);
+    public readonly long LongIndexOf(T* subsequence, nint subsequenceLength) => LookupHelper<T, StdSpanReadOnly<T>>.DefaultLongIndexOf(in this, subsequence, subsequenceLength, 0, LongCount);
 
     /// <inheritdoc/>
-    public readonly long LongIndexOf(in T item, long index) => LookupHelper<T, StdSpan<T>>.DefaultLongIndexOf(in this, item, index);
+    public readonly long LongIndexOf(T* subsequence, nint subsequenceLength, long index) => LookupHelper<T, StdSpanReadOnly<T>>.DefaultLongIndexOf(in this, subsequence, subsequenceLength, index, LongCount - index);
 
     /// <inheritdoc/>
-    public readonly long LongIndexOf(in T item, long index, long count) => LookupHelper<T, StdSpan<T>>.DefaultLongIndexOf(in this, item, index, count);
+    public readonly long LongIndexOf(T* subsequence, nint subsequenceLength, long index, long count) => LookupHelper<T, StdSpanReadOnly<T>>.DefaultLongIndexOf(in this, subsequence, subsequenceLength, index, count);
 
     /// <inheritdoc/>
-    public readonly long LongIndexOf(ReadOnlySpan<T> subsequence) => LookupHelper<T, StdSpan<T>>.DefaultLongIndexOf(in this, subsequence);
+    public readonly long LongLastIndexOf(in T item) => LookupHelper<T, StdSpanReadOnly<T>>.DefaultLongLastIndexOf(in this, item);
 
     /// <inheritdoc/>
-    public readonly long LongIndexOf(ReadOnlySpan<T> subsequence, long index) => LookupHelper<T, StdSpan<T>>.DefaultLongIndexOf(in this, subsequence, index);
+    public readonly long LongLastIndexOf(in T item, long index) => LookupHelper<T, StdSpanReadOnly<T>>.DefaultLongLastIndexOf(in this, item, index);
 
     /// <inheritdoc/>
-    public readonly long LongIndexOf(ReadOnlySpan<T> subsequence, long index, long count) => LookupHelper<T, StdSpan<T>>.DefaultLongIndexOf(in this, subsequence, index, count);
+    public readonly long LongLastIndexOf(in T item, long index, long count) => LookupHelper<T, StdSpanReadOnly<T>>.DefaultLongLastIndexOf(in this, item, index, count);
 
     /// <inheritdoc/>
-    public readonly long LongIndexOf(T* subsequence, nint subsequenceLength) => LookupHelper<T, StdSpan<T>>.DefaultLongIndexOf(in this, subsequence, subsequenceLength, 0, LongCount);
+    public readonly long LongLastIndexOf(ReadOnlySpan<T> subsequence) => LookupHelper<T, StdSpanReadOnly<T>>.DefaultLongLastIndexOf(in this, subsequence);
 
     /// <inheritdoc/>
-    public readonly long LongIndexOf(T* subsequence, nint subsequenceLength, long index) => LookupHelper<T, StdSpan<T>>.DefaultLongIndexOf(in this, subsequence, subsequenceLength, index, LongCount - index);
+    public readonly long LongLastIndexOf(ReadOnlySpan<T> subsequence, long index) => LookupHelper<T, StdSpanReadOnly<T>>.DefaultLongLastIndexOf(in this, subsequence, index);
 
     /// <inheritdoc/>
-    public readonly long LongIndexOf(T* subsequence, nint subsequenceLength, long index, long count) => LookupHelper<T, StdSpan<T>>.DefaultLongIndexOf(in this, subsequence, subsequenceLength, index, count);
+    public readonly long LongLastIndexOf(ReadOnlySpan<T> subsequence, long index, long count) => LookupHelper<T, StdSpanReadOnly<T>>.DefaultLongLastIndexOf(in this, subsequence, index, count);
 
     /// <inheritdoc/>
-    public readonly long LongLastIndexOf(in T item) => LookupHelper<T, StdSpan<T>>.DefaultLongLastIndexOf(in this, item);
+    public readonly long LongLastIndexOf(T* subsequence, nint subsequenceLength) => LookupHelper<T, StdSpanReadOnly<T>>.DefaultLongLastIndexOf(in this, subsequence, subsequenceLength);
 
     /// <inheritdoc/>
-    public readonly long LongLastIndexOf(in T item, long index) => LookupHelper<T, StdSpan<T>>.DefaultLongLastIndexOf(in this, item, index);
+    public readonly long LongLastIndexOf(T* subsequence, nint subsequenceLength, long index) => LookupHelper<T, StdSpanReadOnly<T>>.DefaultLongLastIndexOf(in this, subsequence, subsequenceLength, index);
 
     /// <inheritdoc/>
-    public readonly long LongLastIndexOf(in T item, long index, long count) => LookupHelper<T, StdSpan<T>>.DefaultLongLastIndexOf(in this, item, index, count);
-
-    /// <inheritdoc/>
-    public readonly long LongLastIndexOf(ReadOnlySpan<T> subsequence) => LookupHelper<T, StdSpan<T>>.DefaultLongLastIndexOf(in this, subsequence);
-
-    /// <inheritdoc/>
-    public readonly long LongLastIndexOf(ReadOnlySpan<T> subsequence, long index) => LookupHelper<T, StdSpan<T>>.DefaultLongLastIndexOf(in this, subsequence, index);
-
-    /// <inheritdoc/>
-    public readonly long LongLastIndexOf(ReadOnlySpan<T> subsequence, long index, long count) => LookupHelper<T, StdSpan<T>>.DefaultLongLastIndexOf(in this, subsequence, index, count);
-
-    /// <inheritdoc/>
-    public readonly long LongLastIndexOf(T* subsequence, nint subsequenceLength) => LookupHelper<T, StdSpan<T>>.DefaultLongLastIndexOf(in this, subsequence, subsequenceLength);
-
-    /// <inheritdoc/>
-    public readonly long LongLastIndexOf(T* subsequence, nint subsequenceLength, long index) => LookupHelper<T, StdSpan<T>>.DefaultLongLastIndexOf(in this, subsequence, subsequenceLength, index);
-
-    /// <inheritdoc/>
-    public readonly long LongLastIndexOf(T* subsequence, nint subsequenceLength, long index, long count) => LookupHelper<T, StdSpan<T>>.DefaultLongLastIndexOf(in this, subsequence, subsequenceLength, index, count);
+    public readonly long LongLastIndexOf(T* subsequence, nint subsequenceLength, long index, long count) => LookupHelper<T, StdSpanReadOnly<T>>.DefaultLongLastIndexOf(in this, subsequence, subsequenceLength, index, count);
 
     /// <inheritdoc/>
     public int CompareTo(object? obj) => obj switch {
@@ -358,13 +334,13 @@ public unsafe struct StdSpan<T>
     };
 
     /// <inheritdoc/>
-    public override bool Equals(object? obj) => obj is StdSpan<T> d && Equals(d);
+    public override bool Equals(object? obj) => obj is StdSpanReadOnly<T> d && Equals(d);
 
     /// <inheritdoc/>
-    public readonly bool Equals(IStdRandomElementReadable<T>? other) => other is StdSpan<T> d && Equals(d);
+    public readonly bool Equals(IStdRandomElementReadable<T>? other) => other is StdSpanReadOnly<T> d && Equals(d);
 
     /// <inheritdoc cref="object.Equals(object?)"/>
-    public readonly bool Equals(in StdSpan<T> other) => _begin == other._begin && _count == other._count;
+    public readonly bool Equals(in StdSpanReadOnly<T> other) => _begin == other._begin && _count == other._count;
 
     /// <inheritdoc cref="IEnumerable{T}.GetEnumerator"/>
     public readonly UnmanagedArrayEnumerator<T> GetEnumerator() => new(_begin, _begin + _count);

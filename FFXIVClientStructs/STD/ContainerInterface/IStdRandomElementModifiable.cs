@@ -4,9 +4,7 @@
 /// Base interface for containers with items that are randomly accessible for mutation.
 /// </summary>
 /// <typeparam name="T">The element type.</typeparam>
-public partial interface IStdRandomElementModifiable<T>
-    : IDisposable
-        , IStdRandomElementReadable<T>
+public partial interface IStdRandomElementModifiable<T> : IStdRandomElementReadable<T>
     where T : unmanaged {
     
     /// <summary>

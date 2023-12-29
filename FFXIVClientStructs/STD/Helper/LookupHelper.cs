@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.STD.Helper;
 
 internal static class LookupHelper<T, TOwner>
     where T : unmanaged
-    where TOwner : IStdRandomElementModifiable<T> {
+    where TOwner : IStdRandomElementReadable<T> {
 
     internal static long BinarySearch(ref readonly TOwner owner, long index, long length, T value, IComparer<T>? comparer) {
         comparer ??= Comparer<T>.Default;
