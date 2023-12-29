@@ -10,7 +10,7 @@ namespace FFXIVClientStructs.STD;
 [StructLayout(LayoutKind.Sequential, Size = 0x28)]
 [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
 public unsafe struct StdDeque<T>
-    : IStdRandomMutable<T>
+    : IStdRandomElementModifiable<T>
         , IStaticNativeObjectOperation<StdDeque<T>>
     where T : unmanaged {
     private static readonly int BlockSize = sizeof(T) <= 1 ? 16 :
@@ -32,32 +32,15 @@ public unsafe struct StdDeque<T>
     public ulong MySize; // current length
 
     /// <inheritdoc cref="IStdRandomMutable{T}.Count"/>
-    public int Count {
-        readonly get => checked((int)MySize);
-        set => throw new NotImplementedException();
-    }
+    public readonly int Count => checked((int)MySize);
 
-    /// <inheritdoc/>
-    public long LongCount {
-        readonly get => (long)MySize;
-        set => throw new NotImplementedException();
-    }
+    /// <inheritdoc cref="IStdRandomMutable{T}.LongCount"/>
+    public readonly long LongCount => (long)MySize;
 
     /// <inheritdoc/>
     public readonly void* RepresentativePointer => Map;
 
-    #region Collection interfaces
-
-    readonly bool ICollection.IsSynchronized => false;
-    readonly object ICollection.SyncRoot => Array.Empty<T>();
-
-    // TODO: set values accordingly after implementing IList<T>
-    readonly bool ICollection<T>.IsReadOnly => true;
-    readonly bool IList.IsFixedSize => false;
-    readonly bool IList.IsReadOnly => true;
-
-    #endregion
-
+    /// <inheritdoc cref="IStdRandomElementModifiable{T}.this[long]"/>
     public readonly ref T this[long index] {
         get {
             var actualIndex = MyOff + (ulong)CheckedIndex(index);
@@ -66,22 +49,6 @@ public unsafe struct StdDeque<T>
             return ref Map[block][offset];
         }
     }
-
-    #region Collection interfaces
-
-    T IList<T>.this[int index] {
-        readonly get => this[index];
-        set => this[index] = value;
-    }
-
-    readonly T IReadOnlyList<T>.this[int index] => this[index];
-
-    object? IList.this[int index] {
-        readonly get => this[index];
-        set => this[index] = value is null ? default : (T)value;
-    }
-
-    #endregion
 
     public static int Compare(in StdDeque<T> left, in StdDeque<T> right) {
         var lv = 0;
@@ -124,12 +91,6 @@ public unsafe struct StdDeque<T>
     [Obsolete("Use indexer")]
     public readonly T Get(ulong index) => this[(long)index];
 
-    void IStdRandomMutable<T>.AddCopy(in T item) => throw new NotImplementedException();
-    void IStdRandomMutable<T>.AddMove(ref T item) => throw new NotImplementedException();
-    void IStdRandomMutable<T>.AddRangeCopy(IEnumerable<T> collection) => throw new NotImplementedException();
-    void IStdRandomMutable<T>.AddSpanCopy(ReadOnlySpan<T> span) => throw new NotImplementedException();
-    void IStdRandomMutable<T>.AddSpanMove(Span<T> span) => throw new NotImplementedException();
-
     /// <inheritdoc/>
     public readonly long BinarySearch(in T item) => LookupHelper<T, StdDeque<T>>.BinarySearch(in this, 0, LongCount, item, null);
     
@@ -138,10 +99,6 @@ public unsafe struct StdDeque<T>
     
     /// <inheritdoc/>
     public readonly long BinarySearch(long index, long count, in T item, IComparer<T>? comparer) => LookupHelper<T, StdDeque<T>>.BinarySearch(in this, index, count, item, comparer);
-
-    void ICollection<T>.Clear() => throw new NotImplementedException();
-    void IList.Clear() => throw new NotImplementedException();
-    void IStdRandomMutable<T>.Clear() => throw new NotImplementedException();
 
     /// <inheritdoc/>
     public readonly bool Contains(in T item) => LongIndexOf(item) != -1;
@@ -215,12 +172,6 @@ public unsafe struct StdDeque<T>
     /// <inheritdoc/>
     public readonly int IndexOf(ReadOnlySpan<T> item, int index, int count) => checked((int)LongIndexOf(item, index, count));
 
-    void IStdRandomMutable<T>.InsertCopy(long index, in T item) => throw new NotImplementedException();
-    void IStdRandomMutable<T>.InsertMove(long index, ref T item) => throw new NotImplementedException();
-    void IStdRandomMutable<T>.InsertRangeCopy(long index, IEnumerable<T> collection) => throw new NotImplementedException();
-    void IStdRandomMutable<T>.InsertSpanCopy(long index, ReadOnlySpan<T> span) => throw new NotImplementedException();
-    void IStdRandomMutable<T>.InsertSpanMove(long index, Span<T> span) => throw new NotImplementedException();
-
     /// <inheritdoc/>
     public readonly int LastIndexOf(in T item) => checked((int)LongLastIndexOf(item));
 
@@ -239,118 +190,111 @@ public unsafe struct StdDeque<T>
     /// <inheritdoc/>
     public readonly int LastIndexOf(ReadOnlySpan<T> subsequence, int index, int count) => checked((int)LongLastIndexOf(subsequence, index, count));
 
-    bool IStdRandomMutable<T>.Remove(in T item) => throw new NotImplementedException();
-    long IStdRandomMutable<T>.RemoveAll(Predicate<T> match) => throw new NotImplementedException();
-    void IStdRandomMutable<T>.RemoveAt(long index) => throw new NotImplementedException();
-    void IStdRandomMutable<T>.RemoveRange(long index, long count) => throw new NotImplementedException();
+    /// <inheritdoc/>
+    public void Reverse() => MutateHelper<T, StdDeque<T>>.DefaultReverse(ref this);
 
     /// <inheritdoc/>
-    public void Reverse() => LookupHelper<T, StdDeque<T>>.Reverse(ref this);
+    public void Reverse(long index, long count) => MutateHelper<T, StdDeque<T>>.DefaultReverse(ref this, index, count);
 
     /// <inheritdoc/>
-    public void Reverse(long index, long count) => LookupHelper<T, StdDeque<T>>.Reverse(ref this, index, count);
+    public void Sort() => MutateHelper<T, StdDeque<T>>.Sort(ref this, 0, LongCount);
 
     /// <inheritdoc/>
-    public void Sort() => LookupHelper<T, StdDeque<T>>.Sort(ref this, 0, LongCount);
+    public void Sort(long index, long count) => MutateHelper<T, StdDeque<T>>.Sort(ref this, index, CheckedRangeCount(index, count));
 
     /// <inheritdoc/>
-    public void Sort(long index, long count) => LookupHelper<T, StdDeque<T>>.Sort(ref this, index, CheckedRangeCount(index, count));
+    public void Sort(IComparer<T>? comparer) => MutateHelper<T, StdDeque<T>>.Sort(ref this, 0, LongCount, comparer);
 
     /// <inheritdoc/>
-    public void Sort(IComparer<T>? comparer) => LookupHelper<T, StdDeque<T>>.Sort(ref this, 0, LongCount, comparer);
-
-    /// <inheritdoc/>
-    public void Sort(long index, long count, IComparer<T>? comparer) => LookupHelper<T, StdDeque<T>>.Sort(ref this, index, CheckedRangeCount(index, count), comparer);
+    public void Sort(long index, long count, IComparer<T>? comparer) => MutateHelper<T, StdDeque<T>>.Sort(ref this, index, CheckedRangeCount(index, count), comparer);
 
     /// <inheritdoc/>
     public void Sort(Comparison<T> comparison) => Sort(0, LongCount, comparison);
 
     /// <inheritdoc/>
-    public void Sort(long index, long count, Comparison<T> comparison) => LookupHelper<T, StdDeque<T>>.Sort(ref this, index, CheckedRangeCount(index, count), comparison);
+    public void Sort(long index, long count, Comparison<T> comparison) => MutateHelper<T, StdDeque<T>>.Sort(ref this, index, CheckedRangeCount(index, count), comparison);
 
     /// <inheritdoc/>
-    public readonly T[] ToArray() => LookupHelper<T, StdDeque<T>>.ToArray(in this);
+    public readonly T[] ToArray() => LookupHelper<T, StdDeque<T>>.DefaultToArray(in this);
 
     /// <inheritdoc/>
-    public readonly T[] ToArray(long index) => LookupHelper<T, StdDeque<T>>.ToArray(in this, index);
+    public readonly T[] ToArray(long index) => LookupHelper<T, StdDeque<T>>.DefaultToArray(in this, index);
 
     /// <inheritdoc/>
-    public readonly T[] ToArray(long index, long count) => LookupHelper<T, StdDeque<T>>.ToArray(in this, index, count);
+    public readonly T[] ToArray(long index, long count) => LookupHelper<T, StdDeque<T>>.DefaultToArray(in this, index, count);
 
     /// <inheritdoc/>
-    public readonly long LongFindIndex(Predicate<T> match) => LookupHelper<T, StdDeque<T>>.LongFindIndex(in this, match);
+    public readonly long LongFindIndex(Predicate<T> match) => LookupHelper<T, StdDeque<T>>.DefaultLongFindIndex(in this, match);
 
     /// <inheritdoc/>
-    public readonly long LongFindIndex(long startIndex, Predicate<T> match) => LookupHelper<T, StdDeque<T>>.LongFindIndex(in this, startIndex, match);
+    public readonly long LongFindIndex(long startIndex, Predicate<T> match) => LookupHelper<T, StdDeque<T>>.DefaultLongFindIndex(in this, startIndex, match);
 
     /// <inheritdoc/>
-    public readonly long LongFindIndex(long startIndex, long count, Predicate<T> match) => LookupHelper<T, StdDeque<T>>.LongFindIndex(in this, startIndex, count, match);
+    public readonly long LongFindIndex(long startIndex, long count, Predicate<T> match) => LookupHelper<T, StdDeque<T>>.DefaultLongFindIndex(in this, startIndex, count, match);
 
     /// <inheritdoc/>
-    public readonly long LongFindLastIndex(Predicate<T> match) => LookupHelper<T, StdDeque<T>>.LongFindLastIndex(in this, match);
+    public readonly long LongFindLastIndex(Predicate<T> match) => LookupHelper<T, StdDeque<T>>.DefaultLongFindLastIndex(in this, match);
 
     /// <inheritdoc/>
-    public readonly long LongFindLastIndex(long startIndex, Predicate<T> match) => LookupHelper<T, StdDeque<T>>.LongFindLastIndex(in this, startIndex, match);
+    public readonly long LongFindLastIndex(long startIndex, Predicate<T> match) => LookupHelper<T, StdDeque<T>>.DefaultLongFindLastIndex(in this, startIndex, match);
 
     /// <inheritdoc/>
-    public readonly long LongFindLastIndex(long startIndex, long count, Predicate<T> match) => LookupHelper<T, StdDeque<T>>.LongFindLastIndex(in this, startIndex, count, match);
+    public readonly long LongFindLastIndex(long startIndex, long count, Predicate<T> match) => LookupHelper<T, StdDeque<T>>.DefaultLongFindLastIndex(in this, startIndex, count, match);
 
     /// <inheritdoc/>
-    public readonly long LongIndexOf(in T item) => LookupHelper<T, StdDeque<T>>.LongIndexOf(in this, item);
+    public readonly long LongIndexOf(in T item) => LookupHelper<T, StdDeque<T>>.DefaultLongIndexOf(in this, item);
 
     /// <inheritdoc/>
-    public readonly long LongIndexOf(in T item, long index) => LookupHelper<T, StdDeque<T>>.LongIndexOf(in this, item, index);
+    public readonly long LongIndexOf(in T item, long index) => LookupHelper<T, StdDeque<T>>.DefaultLongIndexOf(in this, item, index);
 
     /// <inheritdoc/>
-    public readonly long LongIndexOf(in T item, long index, long count) => LookupHelper<T, StdDeque<T>>.LongIndexOf(in this, item, index, count);
+    public readonly long LongIndexOf(in T item, long index, long count) => LookupHelper<T, StdDeque<T>>.DefaultLongIndexOf(in this, item, index, count);
 
     /// <inheritdoc/>
-    public readonly long LongIndexOf(ReadOnlySpan<T> subsequence) => LookupHelper<T, StdDeque<T>>.LongIndexOf(in this, subsequence);
+    public readonly long LongIndexOf(ReadOnlySpan<T> subsequence) => LookupHelper<T, StdDeque<T>>.DefaultLongIndexOf(in this, subsequence);
 
     /// <inheritdoc/>
-    public readonly long LongIndexOf(ReadOnlySpan<T> subsequence, long index) => LookupHelper<T, StdDeque<T>>.LongIndexOf(in this, subsequence, index);
+    public readonly long LongIndexOf(ReadOnlySpan<T> subsequence, long index) => LookupHelper<T, StdDeque<T>>.DefaultLongIndexOf(in this, subsequence, index);
 
     /// <inheritdoc/>
-    public readonly long LongIndexOf(ReadOnlySpan<T> subsequence, long index, long count) => LookupHelper<T, StdDeque<T>>.LongIndexOf(in this, subsequence, index, count);
+    public readonly long LongIndexOf(ReadOnlySpan<T> subsequence, long index, long count) => LookupHelper<T, StdDeque<T>>.DefaultLongIndexOf(in this, subsequence, index, count);
 
     /// <inheritdoc/>
-    public readonly long LongIndexOf(T* subsequence, nint subsequenceLength) => LookupHelper<T, StdDeque<T>>.LongIndexOf(in this, subsequence, subsequenceLength, 0, LongCount);
+    public readonly long LongIndexOf(T* subsequence, nint subsequenceLength) => LookupHelper<T, StdDeque<T>>.DefaultLongIndexOf(in this, subsequence, subsequenceLength, 0, LongCount);
 
     /// <inheritdoc/>
-    public readonly long LongIndexOf(T* subsequence, nint subsequenceLength, long index) => LookupHelper<T, StdDeque<T>>.LongIndexOf(in this, subsequence, subsequenceLength, index, LongCount - index);
+    public readonly long LongIndexOf(T* subsequence, nint subsequenceLength, long index) => LookupHelper<T, StdDeque<T>>.DefaultLongIndexOf(in this, subsequence, subsequenceLength, index, LongCount - index);
 
     /// <inheritdoc/>
-    public readonly long LongIndexOf(T* subsequence, nint subsequenceLength, long index, long count) => LookupHelper<T, StdDeque<T>>.LongIndexOf(in this, subsequence, subsequenceLength, index, count);
+    public readonly long LongIndexOf(T* subsequence, nint subsequenceLength, long index, long count) => LookupHelper<T, StdDeque<T>>.DefaultLongIndexOf(in this, subsequence, subsequenceLength, index, count);
 
     /// <inheritdoc/>
-    public readonly long LongLastIndexOf(in T item) => LookupHelper<T, StdDeque<T>>.LongLastIndexOf(in this, item);
+    public readonly long LongLastIndexOf(in T item) => LookupHelper<T, StdDeque<T>>.DefaultLongLastIndexOf(in this, item);
 
     /// <inheritdoc/>
-    public readonly long LongLastIndexOf(in T item, long index) => LookupHelper<T, StdDeque<T>>.LongLastIndexOf(in this, item, index);
+    public readonly long LongLastIndexOf(in T item, long index) => LookupHelper<T, StdDeque<T>>.DefaultLongLastIndexOf(in this, item, index);
 
     /// <inheritdoc/>
-    public readonly long LongLastIndexOf(in T item, long index, long count) => LookupHelper<T, StdDeque<T>>.LongLastIndexOf(in this, item, index, count);
+    public readonly long LongLastIndexOf(in T item, long index, long count) => LookupHelper<T, StdDeque<T>>.DefaultLongLastIndexOf(in this, item, index, count);
 
     /// <inheritdoc/>
-    public readonly long LongLastIndexOf(ReadOnlySpan<T> subsequence) => LookupHelper<T, StdDeque<T>>.LongLastIndexOf(in this, subsequence);
+    public readonly long LongLastIndexOf(ReadOnlySpan<T> subsequence) => LookupHelper<T, StdDeque<T>>.DefaultLongLastIndexOf(in this, subsequence);
 
     /// <inheritdoc/>
-    public readonly long LongLastIndexOf(ReadOnlySpan<T> subsequence, long index) => LookupHelper<T, StdDeque<T>>.LongLastIndexOf(in this, subsequence, index);
+    public readonly long LongLastIndexOf(ReadOnlySpan<T> subsequence, long index) => LookupHelper<T, StdDeque<T>>.DefaultLongLastIndexOf(in this, subsequence, index);
 
     /// <inheritdoc/>
-    public readonly long LongLastIndexOf(ReadOnlySpan<T> subsequence, long index, long count) => LookupHelper<T, StdDeque<T>>.LongLastIndexOf(in this, subsequence, index, count);
+    public readonly long LongLastIndexOf(ReadOnlySpan<T> subsequence, long index, long count) => LookupHelper<T, StdDeque<T>>.DefaultLongLastIndexOf(in this, subsequence, index, count);
 
     /// <inheritdoc/>
-    public readonly long LongLastIndexOf(T* subsequence, nint subsequenceLength) => LookupHelper<T, StdDeque<T>>.LongLastIndexOf(in this, subsequence, subsequenceLength);
+    public readonly long LongLastIndexOf(T* subsequence, nint subsequenceLength) => LookupHelper<T, StdDeque<T>>.DefaultLongLastIndexOf(in this, subsequence, subsequenceLength);
 
     /// <inheritdoc/>
-    public readonly long LongLastIndexOf(T* subsequence, nint subsequenceLength, long index) => LookupHelper<T, StdDeque<T>>.LongLastIndexOf(in this, subsequence, subsequenceLength, index);
+    public readonly long LongLastIndexOf(T* subsequence, nint subsequenceLength, long index) => LookupHelper<T, StdDeque<T>>.DefaultLongLastIndexOf(in this, subsequence, subsequenceLength, index);
 
     /// <inheritdoc/>
-    public readonly long LongLastIndexOf(T* subsequence, nint subsequenceLength, long index, long count) => LookupHelper<T, StdDeque<T>>.LongLastIndexOf(in this, subsequence, subsequenceLength, index, count);
+    public readonly long LongLastIndexOf(T* subsequence, nint subsequenceLength, long index, long count) => LookupHelper<T, StdDeque<T>>.DefaultLongLastIndexOf(in this, subsequence, subsequenceLength, index, count);
 
-    void IStdRandomMutable<T>.Resize(long newSize) => throw new NotImplementedException();
-    void IStdRandomMutable<T>.Resize(long newSize, in T defaultValue) => throw new NotImplementedException();
     void IDisposable.Dispose() => throw new NotImplementedException();
 
     /// <inheritdoc/>

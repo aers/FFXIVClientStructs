@@ -49,7 +49,9 @@ public unsafe struct StdString
     }
     public ref byte this[long index] => ref BasicString[index];
 
+    public static implicit operator Span<byte>(in StdString value) => value.AsSpan();
     public static implicit operator ReadOnlySpan<byte>(in StdString value) => value.AsSpan();
+    public static implicit operator StdSpan<byte>(in StdString value) => value.AsStdSpan();
 
     public static int Compare(in StdString left, in StdString right) => StdBasicString<byte, IStaticEncoding.System, IStaticMemorySpace.Default>.Compare(left.BasicString, right.BasicString);
     public static bool ContentEquals(in StdString left, in StdString right) => StdBasicString<byte, IStaticEncoding.System, IStaticMemorySpace.Default>.ContentEquals(left.BasicString, right.BasicString);
@@ -71,6 +73,9 @@ public unsafe struct StdString
     public readonly Span<byte> AsSpan() => BasicString.AsSpan();
     public readonly Span<byte> AsSpan(long index) => BasicString.AsSpan(index);
     public readonly Span<byte> AsSpan(long index, int count) => BasicString.AsSpan(index, count);
+    public readonly StdSpan<byte> AsStdSpan() => BasicString.AsStdSpan();
+    public readonly StdSpan<byte> AsStdSpan(long index) => BasicString.AsStdSpan(index);
+    public readonly StdSpan<byte> AsStdSpan(long index, long count) => BasicString.AsStdSpan(index, count);
     public void AddCopy(in byte item) => BasicString.AddCopy(in item);
     public void AddMove(ref byte item) => BasicString.AddMove(ref item);
     public void AddRangeCopy(IEnumerable<byte> collection) => BasicString.AddRangeCopy(collection);

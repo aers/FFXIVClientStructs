@@ -42,7 +42,9 @@ public unsafe struct StdWString
     }
     public readonly ref char this[long index] => ref BasicString[index];
 
+    public static implicit operator Span<char>(in StdWString value) => value.AsSpan();
     public static implicit operator ReadOnlySpan<char>(in StdWString value) => value.AsSpan();
+    public static implicit operator StdSpan<char>(in StdWString value) => value.AsStdSpan();
 
     public static int Compare(in StdWString left, in StdWString right) => StdBasicString<char, IStaticEncoding.Unicode, IStaticMemorySpace.Default>.Compare(left.BasicString, right.BasicString);
     public static bool ContentEquals(in StdWString left, in StdWString right) => StdBasicString<char, IStaticEncoding.Unicode, IStaticMemorySpace.Default>.ContentEquals(left.BasicString, right.BasicString);
@@ -55,6 +57,9 @@ public unsafe struct StdWString
     public readonly Span<char> AsSpan() => BasicString.AsSpan();
     public readonly Span<char> AsSpan(long index) => BasicString.AsSpan(index);
     public readonly Span<char> AsSpan(long index, int count) => BasicString.AsSpan(index, count);
+    public readonly StdSpan<char> AsStdSpan() => BasicString.AsStdSpan();
+    public readonly StdSpan<char> AsStdSpan(long index) => BasicString.AsStdSpan(index);
+    public readonly StdSpan<char> AsStdSpan(long index, long count) => BasicString.AsStdSpan(index, count);
     public void AddCopy(in char item) => BasicString.AddCopy(in item);
     public void AddMove(ref char item) => BasicString.AddMove(ref item);
     public void AddRangeCopy(IEnumerable<char> collection) => BasicString.AddRangeCopy(collection);

@@ -51,6 +51,9 @@ public unsafe struct StdVector<T> : IStdVector<T>
     public readonly Span<T> AsSpan() => WithOps.AsSpan();
     public readonly Span<T> AsSpan(long index) => WithOps.AsSpan(index);
     public readonly Span<T> AsSpan(long index, int count) => WithOps.AsSpan(index, count);
+    public readonly StdSpan<T> AsStdSpan() => WithOps.AsStdSpan();
+    public readonly StdSpan<T> AsStdSpan(long index) => WithOps.AsStdSpan(index);
+    public readonly StdSpan<T> AsStdSpan(long index, long count) => WithOps.AsStdSpan(index, count);
     public void AddCopy(in T item) => WithOps.AddCopy(in item);
     public void AddMove(ref T item) => WithOps.AddMove(ref item);
     public void AddRangeCopy(IEnumerable<T> collection) => WithOps.AddRangeCopy(collection);
@@ -64,7 +67,7 @@ public unsafe struct StdVector<T> : IStdVector<T>
     public readonly bool Contains(T* subsequence, IntPtr length) => WithOps.Contains(subsequence, length);
     public readonly bool Contains(ReadOnlySpan<T> subsequence) => WithOps.Contains(subsequence);
     public readonly int CompareTo(object? obj) => WithOps.CompareTo(obj);
-    public readonly int CompareTo(IStdRandomMutable<T>? other) => WithOps.CompareTo(other);
+    public readonly int CompareTo(IStdRandomElementReadable<T>? other) => WithOps.CompareTo(other);
     public readonly void CopyTo(T[] array, int arrayIndex) => WithOps.CopyTo(array, arrayIndex);
     public readonly override bool Equals(object? obj) => obj is StdVector<T> v && Equals(v);
     public readonly bool Equals(IStdRandomElementReadable<T>? other) => other is StdVector<T> v && Equals(v);

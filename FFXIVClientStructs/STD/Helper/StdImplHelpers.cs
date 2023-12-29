@@ -3,7 +3,7 @@ using JetBrains.Annotations;
 
 namespace FFXIVClientStructs.STD.Helper;
 
-public static class StdImplHelpers {
+internal static class StdImplHelpers {
     // [MethodImpl(MethodImplOptions.AggressiveInlining)]
     // internal static bool DefaultEquals<T>(in T v1, in T v2) =>
     //     EqualityComparer<T>.Default.Equals(v1, v2);

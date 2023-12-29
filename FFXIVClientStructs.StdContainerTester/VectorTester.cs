@@ -35,6 +35,14 @@ public static class VectorTester {
             testByteVector.Resize(0x140, 0xFF);
             testByteVector.Dump();
 
+            byte temp = 0;
+            foreach (ref var t in testByteVector)
+                t = temp++;
+            var sp = testByteVector.AsStdSpan();
+            var sp2 = sp[2, -1];
+            var sp3 = sp[2, 4];
+            var sp4 = sp[-5, -1];
+
             try {
                 _ = testByteVector[testByteVector.LongCount];
                 Console.WriteLine("Fail");

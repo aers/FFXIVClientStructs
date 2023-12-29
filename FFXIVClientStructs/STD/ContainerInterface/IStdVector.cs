@@ -39,6 +39,24 @@ public interface IStdVector<T> : IStdRandomMutable<T>
     /// <returns>The span.</returns>
     Span<T> AsSpan(long index, int count);
 
+    /// <summary>
+    /// Gets the <see cref="StdSpan{T}"/> view of this vector.
+    /// </summary>
+    /// <returns>The span.</returns>
+    StdSpan<T> AsStdSpan();
+
+    /// <summary>
+    /// Gets the <see cref="StdSpan{T}"/> view of this vector.
+    /// </summary>
+    /// <returns>The span.</returns>
+    StdSpan<T> AsStdSpan(long index);
+
+    /// <summary>
+    /// Gets the <see cref="StdSpan{T}"/> view of this vector.
+    /// </summary>
+    /// <returns>The span.</returns>
+    StdSpan<T> AsStdSpan(long index, long count);
+
     /// <see cref="List{T}.EnsureCapacity"/>
     long EnsureCapacity(long capacity);
 

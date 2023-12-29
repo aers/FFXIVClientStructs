@@ -17,6 +17,20 @@ public partial interface IStdRandomElementReadable<T> {
     bool IList.IsFixedSize => true;
     bool IList.IsReadOnly => true;
     T IReadOnlyList<T>.this[int index] => this[index];
+
+    T IList<T>.this[int index] {
+        get => this[index];
+        set => throw new NotSupportedException();
+    }
+
+    object? IList.this[int index] {
+        get => this[index];
+        set => throw new NotSupportedException();
+    }
+
+    void ICollection<T>.Add(T item) => throw new NotSupportedException();
+
+    void ICollection<T>.Clear() => throw new NotSupportedException();
     
     void ICollection.CopyTo(Array array, int index) {
         if (array is not T[] typedArray)
@@ -25,6 +39,8 @@ public partial interface IStdRandomElementReadable<T> {
     }
 
     bool ICollection<T>.Contains(T item) => Contains(item);
+
+    bool ICollection<T>.Remove(T item) => throw new NotSupportedException();
 
     int IComparable<IStdRandomElementReadable<T>>.CompareTo(IStdRandomElementReadable<T>? other) {
         if (other is null)
@@ -45,9 +61,23 @@ public partial interface IStdRandomElementReadable<T> {
         return myCount.CompareTo(otherCount);
     }
 
+    int IList.Add(object? value) => throw new NotSupportedException();
+
+    void IList.Clear() => throw new NotSupportedException();
+
     bool IList.Contains(object? value) => value is T typedValue && Contains(typedValue);
 
     int IList.IndexOf(object? value) => value is T typedValue ? IndexOf(typedValue) : -1;
 
     int IList<T>.IndexOf(T item) => IndexOf(item);
+    
+    void IList.Insert(int index, object? value) => throw new NotSupportedException();
+
+    void IList.Remove(object? value) => throw new NotSupportedException();
+
+    void IList.RemoveAt(int index) => throw new NotSupportedException();
+
+    void IList<T>.Insert(int index, T item) => throw new NotSupportedException();
+
+    void IList<T>.RemoveAt(int index) => throw new NotSupportedException();
 }

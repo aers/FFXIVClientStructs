@@ -1,12 +1,27 @@
 ﻿using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using System.Runtime.CompilerServices;
+using FFXIVClientStructs.STD.ContainerInterface;
+using JetBrains.Annotations;
 
 namespace FFXIVClientStructs.STD.Helper;
 
-internal static partial class LookupHelper<T, TOwner> {
+[SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
+internal static class MutateHelper<T, TOwner>
+    where T : unmanaged
+    where TOwner : IStdRandomElementModifiable<T> {
     private const long IntrosortSizeThreshold = 64;
-    
+
+    public static void DefaultReverse(ref TOwner owner) => DefaultReverse(ref owner, 0, owner.LongCount);
+    public static void DefaultReverse(ref TOwner owner, long index, long count) {
+        CheckRangeArguments(in owner, index, count);
+        var l = index;
+        var r = count - 1;
+        for (; l < r; l++, r--)
+            StdOps<T>.Swap(ref owner[l], ref owner[r]);
+    }
+
     internal static void Sort(ref TOwner owner, long offset, long length) =>
         IntrospectiveSort(ref owner, offset, length, Comparer<T>.Default.Compare);
 
@@ -15,29 +30,6 @@ internal static partial class LookupHelper<T, TOwner> {
 
     internal static void Sort(ref TOwner owner, long offset, long length, Comparison<T> comparer) =>
         IntrospectiveSort(ref owner, offset, length, comparer);
-
-    internal static long BinarySearch(ref readonly TOwner owner, long index, long length, T value, IComparer<T>? comparer) {
-        comparer ??= Comparer<T>.Default;
-        return InternalBinarySearch(in owner, index, length, value, comparer);
-    }
-
-    private static long InternalBinarySearch(ref readonly TOwner owner, long index, long length, T value, IComparer<T> comparer) {
-        var lo = index;
-        var hi = index + length - 1;
-        while (lo <= hi) {
-            var i = lo + ((hi - lo) >> 1);
-            var order = comparer.Compare(owner[i], value);
-
-            if (order == 0) return i;
-            if (order < 0) {
-                lo = i + 1;
-            } else {
-                hi = i - 1;
-            }
-        }
-
-        return ~lo;
-    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static void SwapIfGreater(ref TOwner owner, Comparison<T> comparer, long offset, long i, long j) {
@@ -179,5 +171,13 @@ internal static partial class LookupHelper<T, TOwner> {
             }
         }
     }
-}
 
+    [AssertionMethod]
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private static void CheckRangeArguments(ref readonly TOwner owner, long index, long count) {
+        if (index < 0 || index > owner.LongCount)
+            throw new ArgumentOutOfRangeException(nameof(index), index, null);
+        if (count < 0 || count > owner.LongCount - index)
+            throw new ArgumentOutOfRangeException(nameof(count), count, null);
+    }
+}
