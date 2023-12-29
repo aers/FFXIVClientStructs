@@ -39,8 +39,20 @@ public unsafe partial interface IStdRandomElementReadable<T>
     /// <summary>
     /// Gets the read-only reference of the element at given index.
     /// </summary>
-    /// <param name="index">The index.</param>
+    /// <param name="index">The index. Negative numbers will be counted from the end of this span after inverting.</param>
     ref readonly T this[long index] { get; }
+
+    /// <summary>
+    /// Gets the read-only reference of the element at given index.
+    /// </summary>
+    /// <param name="index">The index. Negative numbers will be counted from the end of this span after inverting.</param>
+    new ref readonly T this[int index] { get; }
+
+    /// <summary>
+    /// Gets the read-only reference of the element at given index.
+    /// </summary>
+    /// <param name="index">The index.</param>
+    ref readonly T this[Index index] { get; }
 
     /// <inheritdoc cref="List{T}.BinarySearch(T)"/>
     long BinarySearch(in T item);
@@ -287,5 +299,4 @@ public unsafe partial interface IStdRandomElementReadable<T>
     /// <param name="count">The length of the range to copy to a new array.</param>
     /// <returns>The new array.</returns>
     T[] ToArray(long index, long count);
-
 }

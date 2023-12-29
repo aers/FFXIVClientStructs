@@ -27,27 +27,26 @@ public unsafe struct StdString
     public static bool IsCopiable => StdBasicString<char, IStaticEncoding.System, IStaticMemorySpace.Default>.IsCopiable;
     public static bool IsMovable => StdBasicString<char, IStaticEncoding.System, IStaticMemorySpace.Default>.IsMovable;
 
-    public byte* First => BasicString.First;
-    public byte* Last => BasicString.Last;
-    public byte* End => BasicString.End;
     public long LongCapacity {
-        get => BasicString.LongCapacity;
+        readonly get => BasicString.LongCapacity;
         set => BasicString.LongCapacity = value;
     }
     public long LongCount {
-        get => BasicString.LongCount;
+        readonly get => BasicString.LongCount;
         set => BasicString.LongCount = value;
     }
     int IStdVector<byte>.Capacity {
-        get => BasicString.Capacity;
+        readonly get => BasicString.Capacity;
         set => BasicString.Capacity = value;
     }
     public void* RepresentativePointer => BasicString.RepresentativePointer;
     public int Count {
-        get => BasicString.Count;
+        readonly get => BasicString.Count;
         set => BasicString.Count = value;
     }
-    public ref byte this[long index] => ref BasicString[index];
+    public readonly ref byte this[long index] => ref BasicString[index];
+    public readonly ref byte this[int index] => ref BasicString[index];
+    public readonly ref byte this[Index index] => ref BasicString[index];
 
     public static implicit operator Span<byte>(in StdString value) => value.AsSpan();
     public static implicit operator ReadOnlySpan<byte>(in StdString value) => value.AsSpan();

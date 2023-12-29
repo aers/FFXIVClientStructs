@@ -44,6 +44,8 @@ public unsafe struct StdVector<T> : IStdVector<T>
         set => WithOps.Capacity = value;
     }
     public readonly ref T this[long index] => ref WithOps[index];
+    public readonly ref T this[int index] => ref WithOps[index];
+    public readonly ref T this[Index index] => ref WithOps[index];
 
     public static implicit operator Span<T>(in StdVector<T> value) => value.AsSpan();
     public static implicit operator ReadOnlySpan<T>(in StdVector<T> value) => value.AsSpan();

@@ -20,9 +20,6 @@ public unsafe struct StdWString
     public static bool IsCopiable => StdBasicString<char, IStaticEncoding.Unicode, IStaticMemorySpace.Default>.IsCopiable;
     public static bool IsMovable => StdBasicString<char, IStaticEncoding.Unicode, IStaticMemorySpace.Default>.IsMovable;
 
-    public readonly char* First => BasicString.First;
-    public readonly char* Last => BasicString.Last;
-    public readonly char* End => BasicString.End;
     public long LongCapacity {
         readonly get => BasicString.LongCapacity;
         set => BasicString.LongCapacity = value;
@@ -41,6 +38,8 @@ public unsafe struct StdWString
         set => BasicString.Count = value;
     }
     public readonly ref char this[long index] => ref BasicString[index];
+    public readonly ref char this[int index] => ref BasicString[index];
+    public readonly ref char this[Index index] => ref BasicString[index];
 
     public static implicit operator Span<char>(in StdWString value) => value.AsSpan();
     public static implicit operator ReadOnlySpan<char>(in StdWString value) => value.AsSpan();

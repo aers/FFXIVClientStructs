@@ -40,15 +40,21 @@ public unsafe struct StdDeque<T>
     /// <inheritdoc/>
     public readonly void* RepresentativePointer => Map;
 
-    /// <inheritdoc cref="IStdRandomElementModifiable{T}.this[long]"/>
+    /// <inheritdoc cref="IStdRandomElementModifiable{T}.this[long]" />
     public readonly ref T this[long index] {
         get {
-            var actualIndex = MyOff + (ulong)CheckedIndex(index);
+            var actualIndex = MyOff + (ulong)CheckedIndex(index < 0 ? LongCount - ~index : index);
             var block = (actualIndex / (ulong)BlockSize) & (MapSize - 1);
             var offset = actualIndex % (ulong)BlockSize;
             return ref Map[block][offset];
         }
     }
+
+    /// <inheritdoc cref="IStdRandomElementModifiable{T}.this[int]" />
+    public readonly ref T this[int index] => ref this[(long)index];
+
+    /// <inheritdoc cref="IStdRandomElementModifiable{T}.this[Index]" />
+    public readonly ref T this[Index index] => ref this[index.IsFromEnd ? LongCount - index.Value : index.Value];
 
     public static int Compare(in StdDeque<T> left, in StdDeque<T> right) {
         var lv = 0;

@@ -69,8 +69,14 @@ public unsafe struct StdVector<T, TMemorySpace>
         set => SetCapacity(value);
     }
 
-    /// <inheritdoc cref="IStdRandomMutable{T}.this[long]"/>
-    public readonly ref T this[long index] => ref First[CheckedIndex(index)];
+    /// <inheritdoc cref="IStdRandomElementModifiable{T}.this[long]" />
+    public readonly ref T this[long index] => ref First[CheckedIndex(index < 0 ? LongCount - ~index : index)];
+
+    /// <inheritdoc cref="IStdRandomElementModifiable{T}.this[int]" />
+    public readonly ref T this[int index] => ref this[(long)index];
+
+    /// <inheritdoc cref="IStdRandomElementModifiable{T}.this[Index]" />
+    public readonly ref T this[Index index] => ref this[index.IsFromEnd ? LongCount - index.Value : index.Value];
 
     public static implicit operator Span<T>(in StdVector<T, TMemorySpace> value)
         => value.AsSpan();

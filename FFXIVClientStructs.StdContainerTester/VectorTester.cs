@@ -39,9 +39,12 @@ public static class VectorTester {
             foreach (ref var t in testByteVector)
                 t = temp++;
             var sp = testByteVector.AsStdSpan();
-            var sp2 = sp[2, -1];
+            var sp2 = sp[2, ~1];
+            var sp22 = sp[2..^1];
             var sp3 = sp[2, 4];
-            var sp4 = sp[-5, -1];
+            var sp4 = sp[~5, ~1];
+            var sp5 = sp[~5];
+            var sp55 = sp[^5];
 
             try {
                 _ = testByteVector[testByteVector.LongCount];

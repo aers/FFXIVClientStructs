@@ -16,15 +16,15 @@ public partial interface IStdRandomElementReadable<T> {
 
     bool IList.IsFixedSize => true;
     bool IList.IsReadOnly => true;
-    T IReadOnlyList<T>.this[int index] => this[index];
+    T IReadOnlyList<T>.this[int index] => index < 0 ? throw new IndexOutOfRangeException() : this[index];
 
     T IList<T>.this[int index] {
-        get => this[index];
+        get => this[index < 0 ? throw new IndexOutOfRangeException() : index];
         set => throw new NotSupportedException();
     }
 
     object? IList.this[int index] {
-        get => this[index];
+        get => this[index < 0 ? throw new IndexOutOfRangeException() : index];
         set => throw new NotSupportedException();
     }
 

@@ -56,25 +56,28 @@ public unsafe struct StdSpan<T>
     /// <inheritdoc/>
     public readonly void* RepresentativePointer => _begin;
 
-    /// <inheritdoc cref="IStdRandomElementModifiable{T}.this[long]"/>
-    public readonly ref T this[long index] => ref _begin[CheckedIndex(index)];
-    
-    /// <summary>
-    /// Gets a slice of this <see cref="StdSpan{T}"/> for the given range.
-    /// </summary>
-    /// <param name="range">The range.</param>
-    public readonly StdSpan<T> this[Range range] {
-        get {
-            var (offset, length) = range.GetOffsetAndLength(Count);
-            return new StdSpan<T>(_begin + offset, length);
-        }
-    }
+    /// <inheritdoc cref="IStdRandomElementModifiable{T}.this[long]" />
+    public readonly ref T this[long index] => ref _begin[CheckedIndex(index < 0 ? _count - ~index : index)];
+
+    /// <inheritdoc cref="IStdRandomElementModifiable{T}.this[int]" />
+    public readonly ref T this[int index] => ref this[(long)index];
+
+    /// <inheritdoc cref="IStdRandomElementModifiable{T}.this[Index]" />
+    public readonly ref T this[Index index] => ref this[index.IsFromEnd ? LongCount - index.Value : index.Value];
 
     /// <summary>
     /// Gets a slice of this <see cref="StdSpan{T}"/> for the given range.
     /// </summary>
-    /// <param name="start">The starting index. Negative numbers will be counted from the end of this span.</param>
-    /// <param name="end">The ending index. Negative numbers will be counted from the end of this span.</param>
+    /// <param name="range">The range.</param>
+    public readonly StdSpan<T> this[Range range] => this[
+        range.Start.IsFromEnd ? ~range.Start.Value : range.Start.Value,
+        range.End.IsFromEnd ? ~range.End.Value : range.End.Value];
+
+    /// <summary>
+    /// Gets a slice of this <see cref="StdSpan{T}"/> for the given range.
+    /// </summary>
+    /// <param name="start">The starting index. Negative numbers will be counted from the end of this span after inverting.</param>
+    /// <param name="end">The ending index. Negative numbers will be counted from the end of this span after inverting.</param>
     public readonly StdSpan<T> this[long start, long end] {
         get {
             if (start < 0)

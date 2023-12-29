@@ -5,16 +5,6 @@ namespace FFXIVClientStructs.STD.ContainerInterface;
 public partial interface IStdRandomMutable<T> {
     bool IList.IsFixedSize => false;
 
-    T IList<T>.this[int index] {
-        get => this[index];
-        set => this[index] = value;
-    }
-
-    object? IList.this[int index] {
-        get => this[index];
-        set => this[index] = value is null ? default : (T)value;
-    }
-
     void ICollection<T>.Add(T item) => AddCopy(item);
 
     void ICollection<T>.Clear() => Clear();

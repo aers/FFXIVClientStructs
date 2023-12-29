@@ -89,8 +89,14 @@ public unsafe struct StdBasicString<T, TEncoding, TMemorySpace>
 
     private readonly bool IsLargeMode => ULongCapacity > (ulong)SmallStringCapacity;
 
-    /// <inheritdoc cref="IStdRandomMutable{T}.this[long]"/>
-    public readonly ref T this[long index] => ref First[CheckedIndex(index)];
+    /// <inheritdoc cref="IStdRandomElementModifiable{T}.this[long]" />
+    public readonly ref T this[long index] => ref First[CheckedIndex(index < 0 ? LongCount - ~index : index)];
+
+    /// <inheritdoc cref="IStdRandomElementModifiable{T}.this[int]" />
+    public readonly ref T this[int index] => ref this[(long)index];
+
+    /// <inheritdoc cref="IStdRandomElementModifiable{T}.this[Index]" />
+    public readonly ref T this[Index index] => ref this[index.IsFromEnd ? LongCount - index.Value : index.Value];
 
     public static bool operator ==(in StdBasicString<T, TEncoding, TMemorySpace> l, in StdBasicString<T, TEncoding, TMemorySpace> r) => l.Equals(r);
 

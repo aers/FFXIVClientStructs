@@ -12,11 +12,20 @@ public partial interface IStdRandomElementModifiable<T>
     /// <summary>
     /// Gets the reference of the element at given index.
     /// </summary>
-    /// <param name="index">The index.</param>
+    /// <param name="index">The index. Negative numbers will be counted from the end of this span after inverting.</param>
     new ref T this[long index] { get; }
 
-    /// <inheritdoc/>
-    ref readonly T IStdRandomElementReadable<T>.this[long index] => ref this[index];
+    /// <summary>
+    /// Gets the read-only reference of the element at given index.
+    /// </summary>
+    /// <param name="index">The index. Negative numbers will be counted from the end of this span after inverting.</param>
+    new ref T this[int index] { get; }
+
+    /// <summary>
+    /// Gets the read-only reference of the element at given index.
+    /// </summary>
+    /// <param name="index">The index.</param>
+    new ref T this[Index index] { get; }
 
     /// <inheritdoc cref="List{T}.Reverse()"/>
     void Reverse();
