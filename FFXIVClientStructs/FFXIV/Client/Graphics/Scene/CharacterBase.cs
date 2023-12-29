@@ -52,7 +52,7 @@ public unsafe partial struct CharacterBase {
 
     [FieldOffset(0x258)] public Texture** ColorTableTextures; // each one corresponds to a material, size = SlotCount * 4
 
-    [FieldOffset(0x260)] public Vector3 Tint; // color tint
+    [FieldOffset(0x260)] public Vector3 Tint; // TODO: Should be a Vector4 with next API bump - color tint for the chara base
 
     [FieldOffset(0x2B0)] public float WeatherWetness;  // Set to 1.0f when raining and not covered or umbrella'd
     [FieldOffset(0x2B4)] public float SwimmingWetness; // Set to 1.0f when in water
