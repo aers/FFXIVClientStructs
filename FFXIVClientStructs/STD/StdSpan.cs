@@ -20,7 +20,7 @@ public unsafe struct StdSpan<T>
         if (_count == 0)
             _begin = null;
         else if (_count < 0)
-            throw new ArgumentOutOfRangeException(nameof(count), count, "begin > end?");
+            throw new ArgumentOutOfRangeException(nameof(count), count, null);
     }
 
     public StdSpan(T* begin, nint count) {
@@ -29,7 +29,7 @@ public unsafe struct StdSpan<T>
         if (_count == 0)
             _begin = null;
         else if (_count < 0)
-            throw new ArgumentOutOfRangeException(nameof(count), count, "begin > end?");
+            throw new ArgumentOutOfRangeException(nameof(count), count, null);
     }
 
     public StdSpan(T* begin, long count) : this(begin, (nint)count) { }
