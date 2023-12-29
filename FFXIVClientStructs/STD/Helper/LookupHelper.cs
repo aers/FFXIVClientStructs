@@ -5,7 +5,7 @@ namespace FFXIVClientStructs.STD.Helper;
 
 internal static partial class LookupHelper<T, TOwner>
     where T : unmanaged
-    where TOwner : IStdRandomAccessible<T> {
+    where TOwner : IStdRandomMutable<T> {
 
     public static void Reverse(ref TOwner owner) => Reverse(ref owner, 0, owner.LongCount);
     public static void Reverse(ref TOwner owner, long index, long count) {

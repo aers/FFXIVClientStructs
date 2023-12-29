@@ -63,7 +63,7 @@ public unsafe struct StdBasicString<T, TEncoding, TMemorySpace>
     /// </summary>
     public readonly T* End => First + ULongCapacity;
 
-    /// <inheritdoc cref="IStdRandomAccessible{T}.Count"/>
+    /// <inheritdoc cref="IStdRandomMutable{T}.Count"/>
     public int Count {
         readonly get => checked((int)ULongLength);
         set => Resize(value);
@@ -201,7 +201,7 @@ public unsafe struct StdBasicString<T, TEncoding, TMemorySpace>
         _ => throw new ArgumentException(null, nameof(obj)),
     };
 
-    /// <inheritdoc cref="IStdRandomAccessible{T}.Clear"/>
+    /// <inheritdoc cref="IStdRandomMutable{T}.Clear"/>
     public void Clear() => ResizeUndefined(0);
 
     /// <inheritdoc/>
@@ -238,7 +238,7 @@ public unsafe struct StdBasicString<T, TEncoding, TMemorySpace>
     public readonly override bool Equals(object? obj) => obj is StdBasicString<T, TEncoding, TMemorySpace> sbs && Equals(sbs);
 
     /// <inheritdoc/>
-    public readonly bool Equals(IStdRandomAccessible<T>? obj) => obj is StdBasicString<T, TEncoding, TMemorySpace> sbs && Equals(sbs);
+    public readonly bool Equals(IStdRandomElementReadable<T>? obj) => obj is StdBasicString<T, TEncoding, TMemorySpace> sbs && Equals(sbs);
 
     /// <inheritdoc cref="Equals(object?)"/>
     public readonly bool Equals(in StdBasicString<T, TEncoding, TMemorySpace> other) {

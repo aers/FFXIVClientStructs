@@ -70,11 +70,11 @@ public unsafe struct StdWString
     public readonly bool Contains(ReadOnlySpan<char> subsequence) => BasicString.Contains(subsequence);
     public readonly bool ContainsString(ReadOnlySpan<char> str) => BasicString.ContainsString(str);
     public readonly int CompareTo(object? obj) => obj switch { null => 1, StdWString s => BasicString.CompareTo(s.BasicString), _ => BasicString.CompareTo(obj) };
-    public readonly int CompareTo(IStdRandomAccessible<char>? other) => BasicString.CompareTo(other);
+    public readonly int CompareTo(IStdRandomElementReadable<char>? other) => BasicString.CompareTo(other);
     public readonly void CopyTo(char[] array, int arrayIndex) => BasicString.CopyTo(array, arrayIndex);
     public void Dispose() => BasicString.Dispose();
     public readonly override bool Equals(object? obj) => obj is StdWString s && Equals(s);
-    public readonly bool Equals(IStdRandomAccessible<char>? other) => other is StdWString s && Equals(s);
+    public readonly bool Equals(IStdRandomElementReadable<char>? other) => other is StdWString s && Equals(s);
     public readonly bool Equals(in StdWString other) => BasicString.Equals(other.BasicString);
     public readonly bool Exists(Predicate<char> match) => BasicString.Exists(match);
     public readonly char? Find(Predicate<char> match) => BasicString.Find(match);

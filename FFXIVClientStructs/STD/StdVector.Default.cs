@@ -64,10 +64,10 @@ public unsafe struct StdVector<T> : IStdVector<T>
     public readonly bool Contains(T* subsequence, IntPtr length) => WithOps.Contains(subsequence, length);
     public readonly bool Contains(ReadOnlySpan<T> subsequence) => WithOps.Contains(subsequence);
     public readonly int CompareTo(object? obj) => WithOps.CompareTo(obj);
-    public readonly int CompareTo(IStdRandomAccessible<T>? other) => WithOps.CompareTo(other);
+    public readonly int CompareTo(IStdRandomMutable<T>? other) => WithOps.CompareTo(other);
     public readonly void CopyTo(T[] array, int arrayIndex) => WithOps.CopyTo(array, arrayIndex);
     public readonly override bool Equals(object? obj) => obj is StdVector<T> v && Equals(v);
-    public readonly bool Equals(IStdRandomAccessible<T>? other) => other is StdVector<T> v && Equals(v);
+    public readonly bool Equals(IStdRandomElementReadable<T>? other) => other is StdVector<T> v && Equals(v);
     public readonly bool Equals(in StdVector<T> other) => WithOps.Equals(other.WithOps);
     public readonly bool Exists(Predicate<T> match) => WithOps.Exists(match);
     public readonly T? Find(Predicate<T> match) => WithOps.Find(match);

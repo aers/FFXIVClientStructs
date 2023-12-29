@@ -10,7 +10,7 @@ namespace FFXIVClientStructs.STD;
 [StructLayout(LayoutKind.Sequential, Size = 0x28)]
 [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
 public unsafe struct StdDeque<T>
-    : IStdRandomAccessible<T>
+    : IStdRandomMutable<T>
         , IStaticNativeObjectOperation<StdDeque<T>>
     where T : unmanaged {
     private static readonly int BlockSize = sizeof(T) <= 1 ? 16 :
@@ -31,7 +31,7 @@ public unsafe struct StdDeque<T>
     public ulong MyOff; // offset of current first element
     public ulong MySize; // current length
 
-    /// <inheritdoc cref="IStdRandomAccessible{T}.Count"/>
+    /// <inheritdoc cref="IStdRandomMutable{T}.Count"/>
     public int Count {
         readonly get => checked((int)MySize);
         set => throw new NotImplementedException();
@@ -124,11 +124,11 @@ public unsafe struct StdDeque<T>
     [Obsolete("Use indexer")]
     public readonly T Get(ulong index) => this[(long)index];
 
-    void IStdRandomAccessible<T>.AddCopy(in T item) => throw new NotImplementedException();
-    void IStdRandomAccessible<T>.AddMove(ref T item) => throw new NotImplementedException();
-    void IStdRandomAccessible<T>.AddRangeCopy(IEnumerable<T> collection) => throw new NotImplementedException();
-    void IStdRandomAccessible<T>.AddSpanCopy(ReadOnlySpan<T> span) => throw new NotImplementedException();
-    void IStdRandomAccessible<T>.AddSpanMove(Span<T> span) => throw new NotImplementedException();
+    void IStdRandomMutable<T>.AddCopy(in T item) => throw new NotImplementedException();
+    void IStdRandomMutable<T>.AddMove(ref T item) => throw new NotImplementedException();
+    void IStdRandomMutable<T>.AddRangeCopy(IEnumerable<T> collection) => throw new NotImplementedException();
+    void IStdRandomMutable<T>.AddSpanCopy(ReadOnlySpan<T> span) => throw new NotImplementedException();
+    void IStdRandomMutable<T>.AddSpanMove(Span<T> span) => throw new NotImplementedException();
 
     /// <inheritdoc/>
     public readonly long BinarySearch(in T item) => LookupHelper<T, StdDeque<T>>.BinarySearch(in this, 0, LongCount, item, null);
@@ -141,7 +141,7 @@ public unsafe struct StdDeque<T>
 
     void ICollection<T>.Clear() => throw new NotImplementedException();
     void IList.Clear() => throw new NotImplementedException();
-    void IStdRandomAccessible<T>.Clear() => throw new NotImplementedException();
+    void IStdRandomMutable<T>.Clear() => throw new NotImplementedException();
 
     /// <inheritdoc/>
     public readonly bool Contains(in T item) => LongIndexOf(item) != -1;
@@ -215,11 +215,11 @@ public unsafe struct StdDeque<T>
     /// <inheritdoc/>
     public readonly int IndexOf(ReadOnlySpan<T> item, int index, int count) => checked((int)LongIndexOf(item, index, count));
 
-    void IStdRandomAccessible<T>.InsertCopy(long index, in T item) => throw new NotImplementedException();
-    void IStdRandomAccessible<T>.InsertMove(long index, ref T item) => throw new NotImplementedException();
-    void IStdRandomAccessible<T>.InsertRangeCopy(long index, IEnumerable<T> collection) => throw new NotImplementedException();
-    void IStdRandomAccessible<T>.InsertSpanCopy(long index, ReadOnlySpan<T> span) => throw new NotImplementedException();
-    void IStdRandomAccessible<T>.InsertSpanMove(long index, Span<T> span) => throw new NotImplementedException();
+    void IStdRandomMutable<T>.InsertCopy(long index, in T item) => throw new NotImplementedException();
+    void IStdRandomMutable<T>.InsertMove(long index, ref T item) => throw new NotImplementedException();
+    void IStdRandomMutable<T>.InsertRangeCopy(long index, IEnumerable<T> collection) => throw new NotImplementedException();
+    void IStdRandomMutable<T>.InsertSpanCopy(long index, ReadOnlySpan<T> span) => throw new NotImplementedException();
+    void IStdRandomMutable<T>.InsertSpanMove(long index, Span<T> span) => throw new NotImplementedException();
 
     /// <inheritdoc/>
     public readonly int LastIndexOf(in T item) => checked((int)LongLastIndexOf(item));
@@ -239,10 +239,10 @@ public unsafe struct StdDeque<T>
     /// <inheritdoc/>
     public readonly int LastIndexOf(ReadOnlySpan<T> subsequence, int index, int count) => checked((int)LongLastIndexOf(subsequence, index, count));
 
-    bool IStdRandomAccessible<T>.Remove(in T item) => throw new NotImplementedException();
-    long IStdRandomAccessible<T>.RemoveAll(Predicate<T> match) => throw new NotImplementedException();
-    void IStdRandomAccessible<T>.RemoveAt(long index) => throw new NotImplementedException();
-    void IStdRandomAccessible<T>.RemoveRange(long index, long count) => throw new NotImplementedException();
+    bool IStdRandomMutable<T>.Remove(in T item) => throw new NotImplementedException();
+    long IStdRandomMutable<T>.RemoveAll(Predicate<T> match) => throw new NotImplementedException();
+    void IStdRandomMutable<T>.RemoveAt(long index) => throw new NotImplementedException();
+    void IStdRandomMutable<T>.RemoveRange(long index, long count) => throw new NotImplementedException();
 
     /// <inheritdoc/>
     public void Reverse() => LookupHelper<T, StdDeque<T>>.Reverse(ref this);
@@ -349,14 +349,14 @@ public unsafe struct StdDeque<T>
     /// <inheritdoc/>
     public readonly long LongLastIndexOf(T* subsequence, nint subsequenceLength, long index, long count) => LookupHelper<T, StdDeque<T>>.LongLastIndexOf(in this, subsequence, subsequenceLength, index, count);
 
-    void IStdRandomAccessible<T>.Resize(long newSize) => throw new NotImplementedException();
-    void IStdRandomAccessible<T>.Resize(long newSize, in T defaultValue) => throw new NotImplementedException();
+    void IStdRandomMutable<T>.Resize(long newSize) => throw new NotImplementedException();
+    void IStdRandomMutable<T>.Resize(long newSize, in T defaultValue) => throw new NotImplementedException();
     void IDisposable.Dispose() => throw new NotImplementedException();
 
     /// <inheritdoc/>
     public int CompareTo(object? obj) => obj switch {
         null => 1,
-        IStdRandomAccessible<T> random => random.CompareTo(random),
+        IStdRandomMutable<T> random => random.CompareTo(random),
         _ => throw new ArgumentException(null, nameof(obj)),
     };
 
@@ -364,7 +364,7 @@ public unsafe struct StdDeque<T>
     public override bool Equals(object? obj) => obj is StdDeque<T> d && Equals(d);
 
     /// <inheritdoc/>
-    public readonly bool Equals(IStdRandomAccessible<T>? other) => other is StdDeque<T> d && Equals(d);
+    public readonly bool Equals(IStdRandomElementReadable<T>? other) => other is StdDeque<T> d && Equals(d);
 
     /// <inheritdoc cref="object.Equals(object?)"/>
     public readonly bool Equals(in StdDeque<T> other) => Map == other.Map;

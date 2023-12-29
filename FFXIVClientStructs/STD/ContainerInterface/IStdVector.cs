@@ -7,7 +7,7 @@ namespace FFXIVClientStructs.STD.ContainerInterface;
 /// </summary>
 /// <typeparam name="T">The element type.</typeparam>
 [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
-public interface IStdVector<T> : IStdRandomAccessible<T>
+public interface IStdVector<T> : IStdRandomMutable<T>
     where T : unmanaged {
 
     /// <inheritdoc cref="LongCapacity"/>

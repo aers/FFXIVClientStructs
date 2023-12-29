@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 
-namespace FFXIVClientStructs.STD.ContainerInterface;
+namespace FFXIVClientStructs.STD.Helper;
 
 /// <summary>
 /// Enumerator for an array of unmanaged objects.

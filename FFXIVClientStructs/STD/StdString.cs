@@ -82,7 +82,7 @@ public unsafe struct StdString
     public readonly long BinarySearch(long index, long count, in byte item, IComparer<byte>? comparer) => BasicString.BinarySearch(index, count, in item, comparer);
     public void Clear() => BasicString.Clear();
     public readonly int CompareTo(object? obj) => obj switch { null => 1, StdString s => BasicString.CompareTo(s.BasicString), _ => BasicString.CompareTo(obj) };
-    public readonly int CompareTo(IStdRandomAccessible<byte>? other) => BasicString.CompareTo(other);
+    public readonly int CompareTo(IStdRandomElementReadable<byte>? other) => BasicString.CompareTo(other);
     public readonly bool Contains(in byte item) => BasicString.Contains(in item);
     public readonly bool Contains(byte* subsequence, IntPtr length) => BasicString.Contains(subsequence, length);
     public readonly bool Contains(ReadOnlySpan<byte> subsequence) => BasicString.Contains(subsequence);
@@ -90,7 +90,7 @@ public unsafe struct StdString
     public readonly void CopyTo(byte[] array, int arrayIndex) => BasicString.CopyTo(array, arrayIndex);
     public void Dispose() => BasicString.Dispose();
     public readonly override bool Equals(object? obj) => obj is StdString s && Equals(s);
-    public readonly bool Equals(IStdRandomAccessible<byte>? other) => other is StdString s && Equals(s);
+    public readonly bool Equals(IStdRandomElementReadable<byte>? other) => other is StdString s && Equals(s);
     public readonly bool Equals(in StdString other) => BasicString.Equals(other.BasicString);
     public readonly bool Exists(Predicate<byte> match) => BasicString.Exists(match);
     public readonly byte? Find(Predicate<byte> match) => BasicString.Find(match);

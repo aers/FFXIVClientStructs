@@ -69,7 +69,7 @@ public unsafe struct StdVector<T, TMemorySpace>
         set => SetCapacity(value);
     }
 
-    /// <inheritdoc/>
+    /// <inheritdoc cref="IStdRandomMutable{T}.this[long]"/>
     public readonly ref T this[long index] => ref First[CheckedIndex(index)];
 
     public static implicit operator Span<T>(in StdVector<T, TMemorySpace> value)
@@ -140,7 +140,7 @@ public unsafe struct StdVector<T, TMemorySpace>
     /// <inheritdoc/>
     public readonly int CompareTo(object? obj) => obj switch {
         StdVector<T, TMemorySpace> other => CompareTo(other),
-        IStdRandomAccessible<T> other => CompareTo(other),
+        IStdRandomMutable<T> other => CompareTo(other),
         null => 1,
         _ => throw new ArgumentException(null, nameof(obj)),
     };
@@ -149,7 +149,7 @@ public unsafe struct StdVector<T, TMemorySpace>
     public readonly int CompareTo(in StdVector<T, TMemorySpace> other) => Compare(this, other);
 
     /// <inheritdoc/>
-    public readonly bool Equals(IStdRandomAccessible<T>? other) =>
+    public readonly bool Equals(IStdRandomElementReadable<T>? other) =>
         other is StdVector<T, TMemorySpace> sv && ContentEquals(this, sv);
 
     /// <inheritdoc/>
@@ -207,7 +207,7 @@ public unsafe struct StdVector<T, TMemorySpace>
             item,
             comparer);
 
-    /// <inheritdoc cref="IStdRandomAccessible{T}.Clear"/>
+    /// <inheritdoc cref="IStdRandomMutable{T}.Clear"/>
     public void Clear() {
         if (!StdOps<T>.IsDisposable) {
             Last = First;
