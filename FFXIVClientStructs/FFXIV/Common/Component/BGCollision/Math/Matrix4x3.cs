@@ -4,7 +4,7 @@ namespace FFXIVClientStructs.FFXIV.Common.Component.BGCollision.Math;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x30)]
 public unsafe struct Matrix4x3 {
-    [FieldOffset(0x00)] public fixed float Matrix[12];
+    [FieldOffset(0x00), CExportIgnore] public fixed float Matrix[12];
 
     [FieldOffset(0x00)] public Vector3 Row0;
     [FieldOffset(0x0C)] public Vector3 Row1;
