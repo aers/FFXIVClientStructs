@@ -1488,7 +1488,7 @@ classes:
     funcs:
       0x1404C8780: ctor
       0x1404C8920: dtor
-  Common::Component::BGCollision::ResourceHandle:
+  Common::Component::BGCollision::Resource:
     vtbls:
       - ea: 0x141A01768
         base: Common::Component::Environment::ResourceInterface::ResourceHandleInterface
@@ -1496,8 +1496,10 @@ classes:
     vfuncs:
       0: deldtor
       1: GetPath
-      2: LoadComplete
+      2: LoadSucceeded
       3: LoadFailed
+      4: GetData
+      5: GetSize
   Common::Component::BGCollision::Object:
     vtbls:
       - ea: 0x141A01678

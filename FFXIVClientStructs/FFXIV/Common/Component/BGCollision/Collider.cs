@@ -124,7 +124,7 @@ public unsafe partial struct ColliderStreamed {
     [FieldOffset(0x000)] public Collider Collider; // base class
     //0xA0: base class Common::Component::Excel::ExcelResourceListener, size=8
     [FieldOffset(0x0A8)] public fixed byte PathBase[256]; // root directory of the streamed meshes
-    //0x1A8: ResourceLoadTask* LoadTask;
+    [FieldOffset(0x1A8)] public Resource* Resource;
     [FieldOffset(0x1B0)] public int NumMeshesLoading;
     [FieldOffset(0x1B4)] public bool Loaded;
     [FieldOffset(0x1B8)] public float StreamedMinX;
@@ -170,7 +170,7 @@ public unsafe partial struct ColliderStreamed {
 public unsafe partial struct ColliderMesh {
     [FieldOffset(0x000)] public Collider Collider; // base class
     //0xA0: base class Common::Component::Excel::ExcelResourceListener, size=8
-    //0xA8: ResourceLoadTask* LoadTask
+    [FieldOffset(0x0A8)] public Resource* Resource;
     [FieldOffset(0x0B0)] public byte* MemoryData; // if non-null, the mesh data is built programmatically in memory rather than being loaded from file
     [FieldOffset(0x0B8)] public int TotalPrimitives;
     [FieldOffset(0x0BC)] public bool Dirty; // set when object is moved, on next update matrices will be recalculated
