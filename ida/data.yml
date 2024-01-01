@@ -186,7 +186,7 @@ functions:
   0x1413B9B80: lua_resume
   0x1413B9CD0: lua_yield
   0x1415374D0: lua_gethook
-  0x1415374E0 : lua_gethookcount
+  0x1415374E0: lua_gethookcount
   0x1415374F0: lua_gethookmask
   0x1415376E0: lua_sethook
   0x141537710: lua_setlocal
@@ -725,7 +725,7 @@ classes:
   InventoryContainer:
     funcs:
       0x14071D640: GetInventorySlot  # (this, slotIndex)
-  Client::Game::MJI::MJIManager:  # Island Sanctuary
+  Client::Game::MJI::MJIManager: # Island Sanctuary
     instances:
       - ea: 0x142215520
         pointer: True
@@ -7275,15 +7275,15 @@ classes:
       0x140C73C30: Finalize
   Client::UI::Agent::AgentContentsTimer:
     vtbls:
-     - ea: 0x141A8A910
-       base: Client::UI::Agent::AgentInterface
+      - ea: 0x141A8A910
+        base: Client::UI::Agent::AgentInterface
     funcs:
       0x140D296E0: ctor
       0x140D29870: Finalize
   Client::UI::Agent::AgentGatheringNote:
     vtbls:
-     - ea: 0x141A86720
-       base: Client::UI::Agent::AgentInterface
+      - ea: 0x141A86720
+        base: Client::UI::Agent::AgentInterface
     funcs:
       0x140BED010: ctor
       0x140BED130: Finalize
@@ -7851,7 +7851,7 @@ classes:
       - ea: 0x141ADB2E8
         base: Component::GUI::AtkUnitBase
     funcs:
-        0x140FA8A30: ctor
+      0x140FA8A30: ctor
   Client::UI::AddonFateReward:
     vtbls:
       - ea: 0x141ADCBC8
@@ -7917,7 +7917,7 @@ classes:
       - ea: 0x141A90C78
         base: Component::GUI::AtkUnitBase
     vfuncs:
-        71: Selected
+      71: Selected
     funcs:
       0x140D8C280: ctor
   Client::UI::AddonContextMenuTitle:
@@ -7957,7 +7957,7 @@ classes:
       - ea: 0x141A91CB0
         base: Component::GUI::AtkUnitBase
     funcs:
-        0x140D90C10: ctor
+      0x140D90C10: ctor
   Client::UI::AddonContextIconMenu:
     vtbls:
       - ea: 0x141A92370
@@ -8015,7 +8015,7 @@ classes:
       0x140DBE950: UpdateResult
   Client::UI::AddonLookingForGroupDetail:
     vtbls:
-      - ea : 0x141A97DF8
+      - ea: 0x141A97DF8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x140DC2670: ctor
@@ -8487,7 +8487,7 @@ classes:
   Client::UI::AddonImage3:
     vtbls:
       - ea: 0x141B15B70
-        base:  Client::UI::AddonScreenInfoChild
+        base: Client::UI::AddonScreenInfoChild
   Client::UI::AddonPopUpText:
     vtbls:
       - ea: 0x141B06C18
@@ -9080,7 +9080,7 @@ classes:
       0x1400A8C50: GetBarTarget # static (int mapValue, out bool useLeft) -> hotbarId
   Client::UI::AddonActionCrossEditor:
     vtbls:
-      - ea:  0x141ADE988 
+      - ea: 0x141ADE988
         base: Component::GUI::AtkUnitBase
     funcs:
       0x140FD4F10: ctor
@@ -9283,30 +9283,30 @@ classes:
     funcs:
       0x140ED0D80: ctor
   Client::UI::AddonJobHud:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1D648
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1411808E0: ctor
       0x141180AA0: GetNumberArrayData
     vfuncs:
-        60: UpdateGaugeType
-        72: InitializePointers
-        74: UpdateVisibility
-        75: SetTimeLineLabelDefaults
-        76: UpdateVisibility2
-        77: ChangeGaugeType
-        78: UpdateGaugeData
+      60: UpdateGaugeType
+      72: InitializePointers
+      74: UpdateVisibility
+      75: SetTimeLineLabelDefaults
+      76: UpdateVisibility2
+      77: ChangeGaugeType
+      78: UpdateGaugeData
   Client::UI::AddonJobHud::AddonJobHudGaugeData:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1D5D0
     vfuncs:
       0: Initialize
       1: Copy
   Client::UI::AddonJobHud::AddonJobHudGauge:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1D608
-    vfuncs: 
+    vfuncs:
       0: dtor
       1: Initialize
       2: Finalize
@@ -9316,538 +9316,538 @@ classes:
       6: OnChangeGaugeType
       7: Reset
   Client::UI::AddonJobHudACN0: # the addon named "JobHudACN0" loads the UldResourceHandle "JobHudSCH0"
-    vtbls: 
+    vtbls:
       - ea: 0x141B20708
         base: Client::UI::AddonJobHud
     funcs:
       0x141194840: ctor
   Client::UI::AddonJobHudACN0::AetherflowACNGaugeData:
-    vtbls: 
+    vtbls:
       - ea: 0x141B20638
         base: Client::UI::AddonJobHud::AddonJobHudGaugeData
   Client::UI::AddonJobHudACN0::AetherflowACNGauge:
-    vtbls: 
+    vtbls:
       - ea: 0x141B20688
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudACN0::AetherflowACNGaugeSimple:
-    vtbls: 
+    vtbls:
       - ea: 0x141B206C8
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudAST0:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1D950
         base: Client::UI::AddonJobHud
     funcs:
       0x141182970: ctor
   Client::UI::AddonJobHudAST0::ArcanaGaugeData:
-    vtbls: 
-      - ea: 0x141B1D8C0 
+    vtbls:
+      - ea: 0x141B1D8C0
         base: Client::UI::AddonJobHud::AddonJobHudGaugeData
   Client::UI::AddonJobHudAST0::ArcanaGauge:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1D8D0
         base: Client::UI::AddonJobHud::AddonJobHudGauge
     funcs:
-        0x141181460: ctor
+      0x141181460: ctor
   Client::UI::AddonJobHudAST0::ArcanaGaugeSimple:
-    vtbls: 
-      - ea: 0x141B1D910 
+    vtbls:
+      - ea: 0x141B1D910
         base: Client::UI::AddonJobHud::AddonJobHudGauge
     funcs:
-        0x141181F10: ctor
+      0x141181F10: ctor
   Client::UI::AddonJobHudBLM0:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1DC58
         base: Client::UI::AddonJobHud
     funcs:
-        0x141185150: ctor
+      0x141185150: ctor
   Client::UI::AddonJobHudBLM0::ElementalGaugeData:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1DBC8
         base: Client::UI::AddonJobHud::AddonJobHudGaugeData
   Client::UI::AddonJobHudBLM0::ElementalGauge:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1DBD8
         base: Client::UI::AddonJobHud::AddonJobHudGauge
     funcs:
-        0x141182C50: ctor
+      0x141182C50: ctor
   Client::UI::AddonJobHudBLM0::ElementalGaugeSimple:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1DC18
         base: Client::UI::AddonJobHud::AddonJobHudGauge
     funcs:
-        0x1411841B0: ctor
+      0x1411841B0: ctor
   Client::UI::AddonJobHudBRD0:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1DF60
         base: Client::UI::AddonJobHud
     funcs:
       0x141187840: ctor
   Client::UI::AddonJobHudBRD0::SongGaugeData:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1DED0
         base: Client::UI::AddonJobHud::AddonJobHudGaugeData
   Client::UI::AddonJobHudBRD0::SongGauge:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1DEE0
         base: Client::UI::AddonJobHud::AddonJobHudGauge
     funcs:
       0x141185470: ctor
   Client::UI::AddonJobHudBRD0::SongGaugeSimple:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1DF20
         base: Client::UI::AddonJobHud::AddonJobHudGauge
     funcs:
       0x1411866D0: ctor
   Client::UI::AddonJobHudDNC0:
-    vtbls: 
+    vtbls:
       - ea: 0x141B21C40
         base: Client::UI::AddonJobHud
     funcs:
       0x14119C5E0: ctor
   Client::UI::AddonJobHudDNC0::StepGaugeData:
-    vtbls: 
+    vtbls:
       - ea: 0x141B21BB0
         base: Client::UI::AddonJobHud::AddonJobHudGaugeData
   Client::UI::AddonJobHudDNC0::StepGauge:
-    vtbls: 
+    vtbls:
       - ea: 0x141B21BC0
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudDNC0::StepGaugeSimple:
-    vtbls: 
+    vtbls:
       - ea: 0x141B21C00
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudDNC1:
-    vtbls: 
+    vtbls:
       - ea: 0x141B21F48
         base: Client::UI::AddonJobHud
     funcs:
       0x14119D880: ctor
   Client::UI::AddonJobHudDNC1::FeatherGaugeData:
-    vtbls: 
+    vtbls:
       - ea: 0x141B21EB8
         base: Client::UI::AddonJobHud::AddonJobHudGaugeData
   Client::UI::AddonJobHudDNC1::FeatherGauge:
-    vtbls: 
+    vtbls:
       - ea: 0x141B21EC8
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudDNC1::FeatherGaugeSimple:
-    vtbls: 
+    vtbls:
       - ea: 0x141B21F08
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudDRG0:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1E878
         base: Client::UI::AddonJobHud
     funcs:
       0x14118A6E0: ctor
   Client::UI::AddonJobHudDRG0::DragonGaugeData:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1E7E8
         base: Client::UI::AddonJobHud::AddonJobHudGaugeData
   Client::UI::AddonJobHudDRG0::DragonGauge:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1E7F8
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudDRG0::DragonGaugeSimple:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1E838
         base: Client::UI::AddonJobHud::AddonJobHudGauge
     funcs:
-        0x141189CB0: ctor
+      0x141189CB0: ctor
   Client::UI::AddonJobHudDRK0:
-     vtbls: 
-       - ea: 0x141B1E268
-         base: Client::UI::AddonJobHud
-     funcs:
-       0x141188650: ctor
+    vtbls:
+      - ea: 0x141B1E268
+        base: Client::UI::AddonJobHud
+    funcs:
+      0x141188650: ctor
   Client::UI::AddonJobHudDRK0::BloodGaugeData:
-     vtbls: 
-       - ea: 0x141B1E1D8
-         base: Client::UI::AddonJobHud::AddonJobHudGaugeData
+    vtbls:
+      - ea: 0x141B1E1D8
+        base: Client::UI::AddonJobHud::AddonJobHudGaugeData
   Client::UI::AddonJobHudDRK0::BloodGauge:
-     vtbls: 
-       - ea: 0x141B1E1E8
-         base: Client::UI::AddonJobHud::AddonJobHudGauge
+    vtbls:
+      - ea: 0x141B1E1E8
+        base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudDRK0::BloodGaugeSimple:
-     vtbls: 
-       - ea: 0x141B1E228
-         base: Client::UI::AddonJobHud::AddonJobHudGauge
+    vtbls:
+      - ea: 0x141B1E228
+        base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudDRK1:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1E570
         base: Client::UI::AddonJobHud
     funcs:
       0x141189300: ctor
   Client::UI::AddonJobHudDRK1::DarksideGaugeData:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1E4E0
         base: Client::UI::AddonJobHud::AddonJobHudGaugeData
   Client::UI::AddonJobHudDRK1::DarksideGauge:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1E4F0
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudDRK1::DarksideGaugeSimple:
-    vtbls: 
-      - ea: 0x141B1E530 
+    vtbls:
+      - ea: 0x141B1E530
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudGFF0: #SGE
-    vtbls: 
+    vtbls:
       - ea: 0x141B22860
         base: Client::UI::AddonJobHud
     funcs:
       0x1411A0CF0: ctor
   Client::UI::AddonJobHudGFF0::EukrasiaGaugeData:
-    vtbls: 
+    vtbls:
       - ea: 0x141B227D0
         base: Client::UI::AddonJobHud::AddonJobHudGaugeData
   Client::UI::AddonJobHudGFF0::EukrasiaGauge:
-    vtbls: 
+    vtbls:
       - ea: 0x141B227E0
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudGFF0::EukrasiaGaugeSimple:
-    vtbls: 
+    vtbls:
       - ea: 0x141B22820
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudGFF1: #SGE
-    vtbls: 
+    vtbls:
       - ea: 0x141B22B68
         base: Client::UI::AddonJobHud
     funcs:
       0x1411A1CC0: ctor
   Client::UI::AddonJobHudGFF1::AddersgallGaugeData:
-    vtbls: 
+    vtbls:
       - ea: 0x141B22AD8
         base: Client::UI::AddonJobHud::AddonJobHudGaugeData
   Client::UI::AddonJobHudGFF1::AddersgallGauge:
-    vtbls: 
+    vtbls:
       - ea: 0x141B22AE8
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudGFF1::AddersgallGaugeSimple:
-    vtbls: 
+    vtbls:
       - ea: 0x141B22B28
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudGNB0:
-    vtbls: 
+    vtbls:
       - ea: 0x141B21938
         base: Client::UI::AddonJobHud
     funcs:
       0x14119B860: ctor
   Client::UI::AddonJobHudGNB0::PowderGaugeData:
-    vtbls: 
+    vtbls:
       - ea: 0x141B218A8
         base: Client::UI::AddonJobHud::AddonJobHudGaugeData
   Client::UI::AddonJobHudGNB0::PowderGauge:
-    vtbls: 
+    vtbls:
       - ea: 0x141B218B8
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudGNB0::PowderGaugeSimple:
-    vtbls: 
+    vtbls:
       - ea: 0x141B218F8
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudMCH0:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1EB80
         base: Client::UI::AddonJobHud
     funcs:
       0x14118B820: ctor
   Client::UI::AddonJobHudMCH0::HeatGaugeData:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1EAF0
         base: Client::UI::AddonJobHud::AddonJobHudGaugeData
   Client::UI::AddonJobHudMCH0::HeatGauge:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1EB00
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudMCH0::HeatGaugeSimple:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1EB40
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudMNK0:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1EE88
         base: Client::UI::AddonJobHud
     funcs:
       0x14118CF10: ctor
   Client::UI::AddonJobHudMNK0::MastersGaugeData:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1EDF8
         base: Client::UI::AddonJobHud::AddonJobHudGaugeData
   Client::UI::AddonJobHudMNK0::MastersGauge:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1EE08
         base: Client::UI::AddonJobHud::AddonJobHudGauge
     funcs:
-        0x14118BB90: ctor
+      0x14118BB90: ctor
   Client::UI::AddonJobHudMNK0::MastersGaugeSimple:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1EE48
         base: Client::UI::AddonJobHud::AddonJobHudGauge
     funcs:
-        0x14118C590: ctor
+      0x14118C590: ctor
   Client::UI::AddonJobHudMNK1:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1F190
         base: Client::UI::AddonJobHud
     funcs:
       0x14118DAC0: ctor
   Client::UI::AddonJobHudMNK1::ChakraGaugeData:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1F100
         base: Client::UI::AddonJobHud::AddonJobHudGaugeData
   Client::UI::AddonJobHudMNK1::ChakraGauge:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1F110
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudMNK1::ChakraGaugeSimple:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1F150
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudNIN0:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1F498
         base: Client::UI::AddonJobHud
     funcs:
       0x14118E570: ctor
   Client::UI::AddonJobHudNIN0::NinkiGaugeData:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1F408
         base: Client::UI::AddonJobHud::AddonJobHudGaugeData
   Client::UI::AddonJobHudNIN0::NinkiGauge:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1F418
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudNIN0::NinkiGaugeSimple:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1F458
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudNIN1:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1F7A0
         base: Client::UI::AddonJobHud
     funcs:
       0x14118EF60: ctor
   Client::UI::AddonJobHudNIN1::HutonGaugeData:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1F710
         base: Client::UI::AddonJobHud::AddonJobHudGaugeData
   Client::UI::AddonJobHudNIN1::HutonGauge:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1F720
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudNIN1::HutonGaugeSimple:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1F760
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudPLD0:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1FAA8
         base: Client::UI::AddonJobHud
     funcs:
       0x14118FFE0: ctor
   Client::UI::AddonJobHudPLD0::OathGaugeData:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1FA18
         base: Client::UI::AddonJobHud::AddonJobHudGaugeData
   Client::UI::AddonJobHudPLD0::OathGauge:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1FA28
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudPLD0::OathGaugeSimple:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1FA68
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudRDM0:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1FDB0
         base: Client::UI::AddonJobHud
     funcs:
       0x141191A20: ctor
   Client::UI::AddonJobHudRDM0::BalanceGaugeData:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1FD20
         base: Client::UI::AddonJobHud::AddonJobHudGaugeData
   Client::UI::AddonJobHudRDM0::BalanceGauge:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1FD30
         base: Client::UI::AddonJobHud::AddonJobHudGauge
     funcs:
       0x1411903D0: ctor
   Client::UI::AddonJobHudRDM0::BalanceGaugeSimple:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1FD70
         base: Client::UI::AddonJobHud::AddonJobHudGauge
     funcs:
       0x141191090: ctor
   Client::UI::AddonJobHudRRP0:
-    vtbls: 
+    vtbls:
       - ea: 0x141B22250
         base: Client::UI::AddonJobHud
     funcs:
       0x14119EF70: ctor
   Client::UI::AddonJobHudRRP0::SoulGaugeData:
-    vtbls: 
+    vtbls:
       - ea: 0x141B221C0
         base: Client::UI::AddonJobHud::AddonJobHudGaugeData
   Client::UI::AddonJobHudRRP0::SoulGauge:
-    vtbls: 
+    vtbls:
       - ea: 0x141B221D0
         base: Client::UI::AddonJobHud::AddonJobHudGauge
     funcs:
-        0x14119DBA0: ctor
+      0x14119DBA0: ctor
   Client::UI::AddonJobHudRRP0::SoulGaugeSimple:
-    vtbls: 
+    vtbls:
       - ea: 0x141B22210
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudRRP1:
-    vtbls: 
+    vtbls:
       - ea: 0x141B22558
         base: Client::UI::AddonJobHud
     funcs:
       0x1411A0700: ctor
   Client::UI::AddonJobHudRRP1::DeathGaugeData:
-    vtbls: 
+    vtbls:
       - ea: 0x141B224C8
         base: Client::UI::AddonJobHud::AddonJobHudGaugeData
   Client::UI::AddonJobHudRRP1::DeathGauge:
-    vtbls: 
+    vtbls:
       - ea: 0x141B224D8
         base: Client::UI::AddonJobHud::AddonJobHudGauge
     funcs:
-        0x14119F250: ctor
+      0x14119F250: ctor
   Client::UI::AddonJobHudRRP1::DeathGauge::ShroudStack:
     funcs:
-        0x14119FBE0: OnRequestedUpdate
+      0x14119FBE0: OnRequestedUpdate
   Client::UI::AddonJobHudRRP1::DeathGaugeSimple:
-    vtbls: 
+    vtbls:
       - ea: 0x141B22518
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudSAM0:
-    vtbls: 
+    vtbls:
       - ea: 0x141B200B8
         base: Client::UI::AddonJobHud
     funcs:
       0x141193130: ctor
   Client::UI::AddonJobHudSAM0::KenkiGaugeData:
-    vtbls: 
+    vtbls:
       - ea: 0x141B20028
         base: Client::UI::AddonJobHud::AddonJobHudGaugeData
   Client::UI::AddonJobHudSAM0::KenkiGauge:
-    vtbls: 
+    vtbls:
       - ea: 0x141B20038
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudSAM0::KenkiGaugeSimple:
-    vtbls: 
+    vtbls:
       - ea: 0x141B20078
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudSAM1:
-    vtbls: 
+    vtbls:
       - ea: 0x141B203C0
         base: Client::UI::AddonJobHud
     funcs:
       0x141193D80: ctor
   Client::UI::AddonJobHudSAM1::SenGaugeData:
-    vtbls: 
+    vtbls:
       - ea: 0x141B20330
         base: Client::UI::AddonJobHud::AddonJobHudGaugeData
   Client::UI::AddonJobHudSAM1::SenGauge:
-    vtbls: 
+    vtbls:
       - ea: 0x141B20340
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudSAM1::SenGaugeSimple:
-    vtbls: 
+    vtbls:
       - ea: 0x141B20380
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudSCH0: # the addon named "JobHudSCH0" loads the UldResourceHandle "JobHudSCH1"
-    vtbls: 
+    vtbls:
       - ea: 0x141B20A10
         base: Client::UI::AddonJobHud
     funcs:
       0x141195AD0: ctor
   Client::UI::AddonJobHudSCH0::FaerieGaugeData:
-    vtbls: 
+    vtbls:
       - ea: 0x141B20980
         base: Client::UI::AddonJobHud::AddonJobHudGaugeData
   Client::UI::AddonJobHudSCH0::FaerieGauge:
-    vtbls: 
+    vtbls:
       - ea: 0x141B20990
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudSCH0::FaerieGaugeSimple:
-    vtbls: 
+    vtbls:
       - ea: 0x141B209D0
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudSMN0:
-    vtbls: 
+    vtbls:
       - ea: 0x141B20D18
         base: Client::UI::AddonJobHud
     funcs:
       0x141196600: ctor
   Client::UI::AddonJobHudSMN0::AetherflowSMNGaugeData:
-    vtbls: 
+    vtbls:
       - ea: 0x141B20C88
         base: Client::UI::AddonJobHud::AddonJobHudGaugeData
   Client::UI::AddonJobHudSMN0::AetherflowSMNGauge:
-    vtbls: 
+    vtbls:
       - ea: 0x141B20C98
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudSMN0::AetherflowSMNGaugeSimple:
-    vtbls: 
+    vtbls:
       - ea: 0x141B20CD8
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudSMN1:
-    vtbls: 
+    vtbls:
       - ea: 0x141B21020
         base: Client::UI::AddonJobHud
     funcs:
       0x141198830: ctor
   Client::UI::AddonJobHudSMN1::TranceGaugeData:
-    vtbls: 
+    vtbls:
       - ea: 0x141B20F90
         base: Client::UI::AddonJobHud::AddonJobHudGaugeData
   Client::UI::AddonJobHudSMN1::TranceGauge:
-    vtbls: 
+    vtbls:
       - ea: 0x141B20FA0
         base: Client::UI::AddonJobHud::AddonJobHudGauge
     funcs:
       0x1411968B0: ctor
   Client::UI::AddonJobHudSMN1::TranceGaugeSimple:
-    vtbls: 
+    vtbls:
       - ea: 0x141B20FE0
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudWAR0:
-    vtbls: 
+    vtbls:
       - ea: 0x141B21328
         base: Client::UI::AddonJobHud
     funcs:
       0x141199750: ctor
   Client::UI::AddonJobHudWAR0::BeastGaugeData:
-    vtbls: 
+    vtbls:
       - ea: 0x141B21298
         base: Client::UI::AddonJobHud::AddonJobHudGaugeData
   Client::UI::AddonJobHudWAR0::BeastGauge:
-    vtbls: 
+    vtbls:
       - ea: 0x141B212A8
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudWAR0::BeastGaugeSimple:
-    vtbls: 
+    vtbls:
       - ea: 0x141B212E8
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudWHM0:
-    vtbls: 
+    vtbls:
       - ea: 0x141B21630
         base: Client::UI::AddonJobHud
     funcs:
       0x14119A7D0: ctor
   Client::UI::AddonJobHudWHM0::HealingGaugeData:
-    vtbls: 
+    vtbls:
       - ea: 0x141B215A0
         base: Client::UI::AddonJobHud::AddonJobHudGaugeData
   Client::UI::AddonJobHudWHM0::HealingGauge:
-    vtbls: 
+    vtbls:
       - ea: 0x141B215B0
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudWHM0::HealingGaugeSimple:
-    vtbls: 
+    vtbls:
       - ea: 0x141B215F0
         base: Client::UI::AddonJobHud::AddonJobHudGauge
     funcs:
@@ -10053,10 +10053,10 @@ classes:
     vtbls:
       - ea: 0x141C55650
         base: Client::Game::Object::GameObject
-#  Client::Game::Object::BKJObject:
-#    vtbls:
-#      - ea: 0x141C55650
-#        base: Client::Game::Object::GameObject
+  #  Client::Game::Object::BKJObject:
+  #    vtbls:
+  #      - ea: 0x141C55650
+  #        base: Client::Game::Object::GameObject
   Client::Graphics::JobSystem<Client::Graphics::Culling::CullingManager,Client::Graphics::Culling::CullingJobOpt>:
     vtbls:
       - ea: 0x141B3E810
@@ -10691,3 +10691,15 @@ classes:
   hkaTwoJointsIkSolver:
     funcs:
       0x1417F05C0: ?solve@hkaTwoJointsIkSolver@@SA?AVhkBool@@AEBUSetup@1@AEAVhkaPose@@@Z
+  zlib:
+    funcs:
+      # these names are best guesses based on what things look like on a 1.2.5 version.
+      0x1415FB660: uncompress
+      0x1415FA9F0: inflateInit2_
+      0x1415F8810: inflate
+      0x1415F9FF0: inflateEnd
+      0x1415FA520: inflateReset2
+      0x1415FC550: deflateParams
+      0x1415FCBA0: deflateInit2_
+      0x1415FB740: deflate
+      0x1415FBFD0: deflateEnd
