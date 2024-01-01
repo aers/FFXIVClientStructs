@@ -4,8 +4,7 @@ globals:
   0x1419BD160: g_UIColorTable
   0x141A05970: g_HUDScaleTable
   0x141FE5380: g_ClientInstanceLimit
-  0x142171820: g_InputManager
-  0x142171848: g_InputManager_MouseButtonHoldState
+  0x142171848: g_Client::Game::Control::InputManager_MouseButtonHoldState
   0x142187be0: g_StackCookie
   0x142187be8: g_InverseStackCookie
   0x1421a54a0: g_OSVersion
@@ -90,10 +89,6 @@ functions:
   0x1404999F0: PrepareColorSet
   0x140499CC0: ReadStainingTemplate
   0x1404E93A0: GetAvailablePoses
-  0x1404EDE20: Client::Game::Control::InputManager_GetInputStatus
-  0x140505B30: Client::System::Input::InputData_IsInputIDKeyPress
-  0x140505C40: Client::System::Input::InputData_IsInputIDClicked
-  0x140506580: Client::System::Input::InputData_IsMouseCombinationDragged
   0x14050FE70: RemoveFromList # (AtkEvent**, AtkEvent*) Finds and removes param2 from the param1 list
   0x140539810: GetScaleListEntryFromScale
   0x140548040: GetScaleForListOption
@@ -115,7 +110,6 @@ functions:
   0x1413064B0: Client::Graphics::Kernel::CreateShader # static function
   0x141311460: FilterCustomizeData # ensures NPC specific faces etc aren't on players
   0x1413119B0: NormalizeCustomizeData
-  0x14134BED0: Client::Game::Control::InputManager::IsAutoRunning # static function, might belong in a different class.
   0x1413B7110: lua_close
   0x1413B7190: lua_newstate
   0x1413B7490: lua_index2addr
@@ -253,16 +247,11 @@ functions:
   0x140209A10: MatrixMultiply
   0x140206790: MatrixMultiply2
   0x1402054F0: MatrixVectorMultiply
-  0x140206A90: MatrixInverse
-  0x1402070B0: MatrixInverseMaybe
-  0x140208A60: MakeProjectionMatrix
-  0x140208E30: MakeProjectionMatrix2
   0x14036C930: SubmitConstantBufferUpdate
   0x1400AA930: IsLocalPlayerPartyLeader
   0x1400AA840: IsLocalPlayerInParty
   0x1400AA990: IsPartyMemberByNameOrContentId # (name, contentId)
   0x1400AAAC0: GetPartyMemberClassJobByContentId
-  0x140633110: WorldToViewportPoint
   0x140748FF0: ObjectIdToPlayerObjectId # returns invalid id if objectid is not a player
   0x14076A8E0: ProcessActorControlPacket
   0x14071C480: CreateDummyItemSlot
@@ -342,6 +331,25 @@ classes:
       0x1409312D0: IsInPvPInstance
       0x140931390: IsInPvPArea
       0x1400A85D0: IsInSanctuary # static, more likely Client::UI::IsInSanctuary but it fits here just fine
+  Client::Game::Control::InputManager:
+    instances:
+      - ea: 0x142171820
+        pointer: False
+    funcs:
+      0x1404EDBD0: Update
+      0x1404EDE20: GetInputStatus
+      0x14134BED0: IsAutoRunning # static function, might belong in a different class.
+  Client::Game::Control::EmoteManager:
+    vtbls:
+      - ea: 0x141B5E5C8
+        base: Common::Configuration::ConfigBase::ChangeEventInterface
+    funcs:
+      0x1414214E0: ctor
+      0x141421520: Initialize
+      0x141421560: Terminate
+      0x141421580: ExecuteEmote # (emoteId, targetInfo)
+      0x141421B70: CanExecuteEmote # (emoteId)
+      0x1414222B0: Update
   Application::Network::NetworkModule:
     funcs:
       0x1415E9600: ctor
@@ -400,6 +408,7 @@ classes:
         pointer: False
     funcs:
       0x140D7ED30: Initialize
+      0x140D7EE80: Update
       0x140D7F4A0: GetRetainerBySortedIndex
       0x140D7F4E0: GetRetainerByHiredIndex
       0x140D7F540: GetLastSelectedRetainer
@@ -548,6 +557,8 @@ classes:
         pointer: False
     funcs:
       0x1407BD610: Update
+      0x1407BDA20: UpdateMountAndCompanionMovement # maybe?
+      0x1407BDC70: UpdateGazes
       0x1407BDDF0: DeleteAllModels
       0x1407BDF80: DeleteAllObjects  # IMPORTANT:: DONT EVER CALL THIS FOR REAL OKAY
       0x1407BCFC0: GetFilteredObjectById
@@ -575,6 +586,8 @@ classes:
         pointer: False
     funcs:
       0x1407BBE30: Initialize
+      0x1407BC030: Update
+      0x1407BC090: UpdateCompanions
       0x1407BC100: CreateCharacterAtFirstEmptyIndex
       0x1407BC150: CreateCharacterAtIndex
       0x1407BC2B0: DeleteCharacterAtIndex
@@ -676,6 +689,7 @@ classes:
       0x140745AD0: dtor
       0x140745B40: HasInstance
       0x140745B60: GetInstance
+      0x140745B70: Update
       0x140745C50: Clear
       0x140745D10: RequestPrismBox
       0x1407460A0: RestorePrismBoxItem
@@ -686,6 +700,7 @@ classes:
       - ea: 0x1421EDC40
         pointer: False
     funcs:
+      0x14071E100: Update
       0x14071ED30: GetInventoryContainer  # (this, containerId)
       0x14071ED90: GetInventorySlot  # (this, containerId, slotId)
       0x14071FF00: MoveItemSlot # (srcContainer, srcSlot, dstContainer, dstSlot, 1)
@@ -725,12 +740,16 @@ classes:
       0x1408A28A0: GetInstance
       0x1408A2A50: GetMemberCount
       0x1408A2A70: GetMember
+      0x1409329A0: Update
+      0x1408A28B0: UpdateNotifications
   Client::Game::Housing::HousingManager:
     instances:
       - ea: 0x142215388
         pointer: True
     funcs:
+      0x140B22C20: HasInstance
       0x140B22C40: GetInstance
+      0x140B27AC0: Update
       0x140B25F10: IsOutside
       0x140B25F20: IsInside
       0x140B25F30: IsInWorkshop
@@ -774,6 +793,7 @@ classes:
       0x140B862D0: Destroy    # static
       0x140B86310: GetSingleton  # static
       0x140B86320: Load   # loads in a ton of sub-structs and other info.
+      0x140B867A0: Update
       0x140B86C90: IsFunctionUnlocked # (this, functionId)
       0x140B86D20: RegisterListener
       0x140B86D50: UnregisterListener
@@ -2257,8 +2277,8 @@ classes:
       0x1400CA3F0: OnUpdate_Nameplates
       0x1400CB8A0: IncRefNumberArrayData
       0x1400CB8F0: IncRefStringArrayData
-      0x1400DAD30: UpdateNameplates_BattleChara
-      0x1400DBB80: UpdateNameplates_NPC
+      0x1400DAD30: UpdateBattleCharaNameplates
+      0x1400DBB80: UpdateNpcNameplates
       0x1400DDEF0: IsUIVisible
       0x140568920: DecRefNumberArrayData
       0x140568980: DecRefStringArrayData
@@ -2313,6 +2333,9 @@ classes:
   Common::Configuration::ConfigBase::ChangeEventInterface:
     vtbls:
       - ea: 0x1419A5F58
+    vfuncs:
+      0: dtor
+      1: OnConfigChange
   Client::UI::RaptureAtkHistory:
     vtbls:
       - ea: 0x1419BDCF8
@@ -3524,6 +3547,7 @@ classes:
       0x140485A20: ScreenPointToRay
       0x140485CF0: CalculateViewMatrix
       0x140486470: PrepareRenderCamera
+      0x140633110: WorldToViewportPoint
   Client::Graphics::Singleton<Client::Graphics::Scene::CameraManager>:
     vtbls:
       - ea: 0x1419FECB8
@@ -3951,6 +3975,9 @@ classes:
       - ea: 0x141A03758
     funcs:
       0x1405055C0: ctor
+      0x140505B30: IsInputIDKeyPress
+      0x140505C40: IsInputIDClicked
+      0x140506580: IsMouseCombinationDragged
   Component::GUI::AtkArrayData:
     vtbls:
       - ea: 0x141A059D0
@@ -5273,6 +5300,8 @@ classes:
       0x140749C00: SetPosition
       0x140749CB0: SetRotation
       0x14074ADD0: IsReadyToDraw
+      0x14074B9C0: GetAsCharacter
+      0x14074B9F0: GetAsBattleCharaMaybe # might be some other cast, or even Character too?
       0x14074D770: Initialize
       0x14074D9D0: ctor
   Client::Game::Character::Character:
@@ -5831,6 +5860,12 @@ classes:
     funcs:
       0x1407BCA40: ctor
       0x1407BCD00: Finalize
+  Client::Game::Character::MJILivelyActor:
+    vtbls:
+      - ea: 0x141C3BFF0
+        base: Client::Game::Character::Character
+      - ea: 0x141C3C2B0
+        base: Client::Game::Character::CharacterData
   Client::Game::TitleController:
     vtbls:
       - ea: 0x141A6C190
@@ -5964,6 +5999,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140D3AB00: ctor
+      0x140D3AF00: CanUseEmote
       0x140D68680: Finalize
   Client::UI::Agent::AgentMacro:
     vtbls:
@@ -8789,6 +8825,8 @@ classes:
     vtbls:
       - ea: 0x141AC7010
         base: Client::UI::Atk2DMap
+    funcs:
+      0x140EF3770: ctor
   Client::UI::AddonRelicNoteBook:
     vtbls:
       - ea: 0x141AC7BB8
@@ -10702,6 +10740,9 @@ classes:
     vtbls:
       - ea: 0x141B44DE0
         base: Client::Game::Camera
+    instances:
+      - ea: 0x1421AC358
+        pointer: True
     funcs:
       0x1413835B0: ctor
   Client::Game::Camera3:
@@ -11017,17 +11058,26 @@ classes:
     vtbls:
       - ea: 0x1419A94A8
         base: Client::System::Memory::IMemorySpace
-  Vector3:
+  Common::Math::Vector3:
     funcs:
       0x1401BDAF0: Normalize
-      0x1404C9D30: Normalize2
+      0x1402057D0: TransformWithMatrix4x4
+  Common::Math::Matrix4x4:
+    funcs:
+      0x140206A90: Inverse
+      0x1402070B0: InverseAndReturn
+      0x140208A60: OrthoOffCenterRH # (width, height, nearPlane, farPlane, topBottom, leftRight)
+      0x140208E30: PerspectiveFovLH # (fieldOfViewY, aspectRatio, znearPlane, zfarPlane)
+  Common::Component::BGCollision::Math::Vector3:
+    funcs:
+      0x1404C9D30: Normalize
       0x141935950: ctorRotatedAroundAxis
-  Vector4:
+  Common::Component::BGCollision::Math::Vector4:
     funcs:
       0x1419231A0: ctorMulMatrix
       0x14192D5D0: UnitW
       0x141935680: QuatMultiplyBy
-  Matrix4x4:
+  Common::Component::BGCollision::Math::Matrix4x4:
     funcs:
       0x1419235E0: ctorRotX
       0x141923790: ctorRotY
@@ -11036,7 +11086,7 @@ classes:
       0x141923BE0: ctorTranslation
       0x141923DD0: Invert
       0x14192C010: TransformVector4
-  AABB:
+  Common::Component::BGCollision::Math::AABB:
     funcs:
       0x141926A90: ctorTransformed
   # havok
