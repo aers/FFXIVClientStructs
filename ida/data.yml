@@ -10691,3 +10691,15 @@ classes:
   hkaTwoJointsIkSolver:
     funcs:
       0x1417F05C0: ?solve@hkaTwoJointsIkSolver@@SA?AVhkBool@@AEBUSetup@1@AEAVhkaPose@@@Z
+  zlib:
+    funcs:
+      # these names are best guesses based on what things look like on a 1.2.5 version.
+      0x1415FB660: uncompress
+      0x1415FA9F0: inflateInit2_
+      0x1415F8810: inflate
+      0x1415F9FF0: inflateEnd
+      0x1415FA520: inflateReset2
+      0x1415FC550: deflateParams
+      0x1415FCBA0: deflateInit2_
+      0x1415FB740: deflate
+      0x1415FBFD0: deflateEnd
