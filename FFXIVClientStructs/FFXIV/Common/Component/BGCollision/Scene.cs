@@ -40,8 +40,11 @@ public unsafe partial struct SceneWrapper {
     [VirtualFunction(5)]
     public partial ColliderMesh* AddColliderMesh(ulong layerMask, byte* path, bool a3, Vector3* translation, Vector3* rotation, Vector3* scale);
 
+    /// <summary>
+    /// Create a mesh collider that uses a copy of hardcoded tesselated cylinder geometry.
+    /// </summary>
     [VirtualFunction(6)]
-    public partial ColliderMesh* AddColliderMeshPlaceholder(ulong layerMask, Vector3* translation, Vector3* rotation, Vector3* scale);
+    public partial ColliderMesh* AddColliderMeshCylinder(ulong layerMask, Vector3* translation, Vector3* rotation, Vector3* scale);
 
     [VirtualFunction(7)]
     public partial ColliderBox* AddColliderBox(ulong layerMask, Vector3* translation, Vector3* rotation, Vector3* scale);

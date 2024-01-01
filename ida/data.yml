@@ -1573,7 +1573,7 @@ classes:
       3: HasLoadingColliders
       4: AddColliderStreamed
       5: AddColliderMesh
-      6: AddColliderMeshPlaceholder
+      6: AddColliderMeshCylinder
       7: AddColliderBox
       8: AddColliderCylinder
       9: AddColliderSphere
@@ -1612,7 +1612,7 @@ classes:
       0x14192E9D0: AddColliderStreamed
       0x14192EA70: AddColliderMesh
       0x14192EB30: AddColliderMeshWithTransform
-      0x14192EC30: AddColliderMeshPlaceholder
+      0x14192EC30: AddColliderMeshCylinder
       0x14192ED00: AddColliderBox
       0x14192EDB0: AddColliderCylinder
       0x14192EE60: AddColliderSphere
@@ -1644,7 +1644,7 @@ classes:
       0x141926F10: HasLoadingColliders
       0x141926F30: AddColliderStreamed
       0x141926F50: AddColliderMesh
-      0x141926FA0: AddColliderMeshPlaceholder
+      0x141926FA0: AddColliderMeshCylinder
       0x141926FC0: AddColliderBox
       0x141926FE0: AddColliderCylinder
       0x141927000: AddColliderSphere
@@ -1750,9 +1750,9 @@ classes:
       0x141928F00: ctorSimple
       0x1419291A0: ctor
       0x1419292E0: dtor
-      0x14192A840: CreatePlaceholderMesh
-      0x14192A990: SetPlaceholderBounds
-      0x14192A9E0: SetPlaceholderVertexMaterial
+      0x14192A840: CreateCylinderMesh
+      0x14192A990: SetCylinderMeshBounds
+      0x14192A9E0: SetCylinderMeshVertexMaterial
   Common::Component::BGCollision::ColliderMesh::RayIntersectFunctor:
     vtbls:
       - ea: 0x141D7A388
@@ -1950,7 +1950,7 @@ classes:
       0x1404C81E0: RemoveCollider
       0x1404C8240: AddColliderStreamed
       0x1404C82B0: AddColliderMesh
-      0x1404C8340: AddColliderMeshPlaceholder
+      0x1404C8340: AddColliderMeshCylinder
       0x1404C83E0: AddColliderBox
       0x1404C8470: AddColliderCylinder
       0x1404C8520: AddColliderSphere
