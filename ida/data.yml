@@ -2845,6 +2845,8 @@ classes:
     vtbls:
       - ea: 0x1419FEE58
         base: Client::Graphics::Render::PostBoneDeformerBase
+    vfuncs:
+      0: dtor
   Client::Graphics::Scene::Object:
     vtbls:
       - ea: 0x1419FEA50
@@ -10441,3 +10443,7 @@ classes:
   hkaTwoJointsIkSolver:
     funcs:
       0x1417F05C0: ?solve@hkaTwoJointsIkSolver@@SA?AVhkBool@@AEBUSetup@1@AEAVhkaPose@@@Z
+  hkaCcdIkSolver:
+    funcs:
+      0x1417CE920: ctr
+      0x1417CE950: solve
