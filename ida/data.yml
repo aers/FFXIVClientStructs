@@ -5444,6 +5444,8 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x1409E5540: ctor
+      0x1409E5720: OpenForQuest
+      0x1409E8C00: ShowOnMap
   Client::UI::Agent::AgentActionMenu:
     vtbls:
       - ea: 0x141A89678
