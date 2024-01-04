@@ -7,7 +7,7 @@ globals:
   0x142171820: g_InputManager
   0x142171848: g_InputManager_MouseButtonHoldState
   0x142187be0: g_StackCookie
-  0x142187be8: g_InvereStackCookie
+  0x142187be8: g_InverseStackCookie
   0x1421a54a0: g_OSVersion
   0x1421AC368: g_CurrentCharaSelectCharacter # Client::Game::Character::Character*
   0x1421AC540: g_CharaSelectCharacterList # see Client::UI::Agent::AgentLobby::CharaSelectCharacterList
