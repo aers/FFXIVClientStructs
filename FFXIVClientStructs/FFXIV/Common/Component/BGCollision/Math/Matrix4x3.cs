@@ -1,4 +1,6 @@
-namespace FFXIVClientStructs.FFXIV.Common.Math;
+using FFXIVClientStructs.FFXIV.Common.Math;
+
+namespace FFXIVClientStructs.FFXIV.Common.Component.BGCollision.Math;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x30)]
 public unsafe struct Matrix4x3 {

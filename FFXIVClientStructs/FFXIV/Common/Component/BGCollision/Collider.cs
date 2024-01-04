@@ -1,4 +1,4 @@
-using FFXIVClientStructs.FFXIV.Common.Math;
+using FFXIVClientStructs.FFXIV.Common.Component.BGCollision.Math;
 
 namespace FFXIVClientStructs.FFXIV.Common.Component.BGCollision;
 
