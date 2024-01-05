@@ -8341,6 +8341,8 @@ classes:
   Client::Game::Event::EventHandler:
     vtbls:
       - ea: 0x141A451B0
+    funcs:
+      0x1407C69B0: ctor
   Client::Game::Event::LuaScriptLoader<Client::Game::Event::ModuleBase>:
     vtbls:
       - ea: 0x141A459F0
@@ -8359,6 +8361,8 @@ classes:
     vtbls:
       - ea: 0x141A45A78
         base: Client::Game::Event::EventHandler
+    funcs:
+      0x1407CED30: ctor
   Client::Game::Event::EventSceneModuleImplBase:
     vtbls:
       - ea: 0x141A462D0
@@ -8378,6 +8382,8 @@ classes:
     vtbls:
       - ea: 0x141A48AF0
         base: Client::Game::Event::LuaEventHandler
+    funcs:
+      0x140827F20: ctor
   Client::Game::Event::JournalCallback:
     vtbls:
       - ea: 0x141A4B9F0
@@ -8386,6 +8392,32 @@ classes:
     vtbls:
       - ea: 0x141A4BA00
         base: Client::Game::Event::LuaEventHandler
+    funcs:
+      0x140849C40: ctor
+  Client::Game::Event::QuestBattleDirector:
+    vtbls:
+      - ea: 0x141A4A7A8
+        base: Client::Game::Event::Director
+    funcs:
+      0x140835E70: ctor
+  Client::Game::Event::TreasureHuntDirector:
+    vtbls:
+      - ea: 0x141A601C0
+        base: Client::Game::Event::Director
+    funcs:
+      0x1408D5370: ctor
+  Client::Game::Event::CompanyCraftDirector:
+    vtbls:
+      - ea: 0x141A75640
+        base: Client::Game::Event::Director
+    funcs:
+      0x140B4DE90: ctor
+  Client::Game::Event::DpsChallengeDirectorDirector:
+    vtbls:
+      - ea: 0x141A60AC8
+        base: Client::Game::Event::Director
+    funcs:
+      0x1408D6AC0: ctor
   Client::Game::ReconstructionBoxManager:
     instances:
       - ea: 0x1421F63C0
@@ -8462,18 +8494,26 @@ classes:
     vtbls:
       - ea: 0x141A4DBD0
         base: Client::Game::Event::Director
+    funcs:
+      0x14087FFF0: ctor
   Client::Game::Event::GatheringLeveDirector:
     vtbls:
       - ea: 0x141A5CE00
         base: Client::Game::Event::LeveDirector
+    funcs:
+      0x1408CF970: ctor
   Client::Game::Event::BattleLeveDirector:
     vtbls:
       - ea: 0x141A4E4E8
         base: Client::Game::Event::LeveDirector
+    funcs:
+      0x1408818F0: ctor
   Client::Game::Event::CompanyLeveDirector:
     vtbls:
       - ea: 0x141A5F890
         base: Client::Game::Event::LeveDirector
+    funcs:
+      0x1408D3CE0: ctor
   Client::Game::Gimmick::GimmickBill:
     vtbls:
       - ea: 0x141A5C558
@@ -8482,15 +8522,1466 @@ classes:
     vtbls:
       - ea: 0x141A49420
         base: Client::Game::Event::Director
+    funcs:
+      0x14082CD00: ctor
   Client::Game::InstanceContent::InstanceContentDirector:
     vtbls:
       - ea: 0x141B92558
         base: Client::Game::InstanceContent::ContentDirector
+    funcs:
+      0x1414738B0: ctor
+  Client::Game::InstanceContent::InstanceContentGuildOrderDirector:
+    vtbls:
+      - ea: 0x141BC6D28
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14147D1F0: ctor
+  Client::Game::InstanceContent::InstanceContentPvpDirector:
+    vtbls:
+      - ea: 0x141B62440
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141453760: ctor
+  Client::Game::InstanceContent::InstanceContentCrystallineConflictDirector:
+    vtbls:
+      - ea: 0x141B8A610
+        base: Client::Game::InstanceContent::InstanceContentPvpDirector
+    funcs:
+      0x14145E6C0: ctor
+  Client::Game::InstanceContent::InstanceContentFrontlineDirector:
+    vtbls:
+      - ea: 0x141BD2290
+        base: Client::Game::InstanceContent::InstanceContentPvpDirector
+    funcs:
+      0x141481860: ctor
+  Client::Game::InstanceContent::InstanceContentTreasureHuntDungeonDirector:
+    vtbls:
+      - ea: 0x141BF1AE0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14148C7B0: ctor
+  Client::Game::InstanceContent::InstanceContentRivalWingDirector:
+    vtbls:
+      - ea: 0x141C21E38
+        base: Client::Game::InstanceContent::InstanceContentPvpDirector
+    funcs:
+      0x1414A95C0: ctor
+  Client::Game::InstanceContent::InstanceContentRaidCrystalTower001: # The Labyrinth of the Ancients
+    vtbls:
+      - ea: 0x141BBC568
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14147ACA0: ctor
+  Client::Game::InstanceContent::InstanceContentRaidCrystalTower002: # Syrcus Tower
+    vtbls:
+      - ea: 0x141BBD160
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14147AD90: ctor
+  Client::Game::InstanceContent::InstanceContentRaidWorldOfDarkness: # The World of Darkness
+    vtbls:
+      - ea: 0x141BBDD58
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14147AF90: ctor
+  Client::Game::InstanceContent::InstanceContentRaidSeaBahamut001: # The Binding Coil of Bahamut - Turn 1
+    vtbls:
+      - ea: 0x141BBE950
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14147B130: ctor
+  Client::Game::InstanceContent::InstanceContentRaidSeaBahamut002: # The Binding Coil of Bahamut - Turn 2
+    vtbls:
+      - ea: 0x141BBF548
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14147B1A0: ctor
+  Client::Game::InstanceContent::InstanceContentRaidSeaBahamut003: # The Binding Coil of Bahamut - Turn 3
+    vtbls:
+      - ea: 0x141BC0140
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14147B240: ctor
+  Client::Game::InstanceContent::InstanceContentRaidSeaBahamut004: # The Binding Coil of Bahamut - Turn 4
+    vtbls:
+      - ea: 0x141BC0D38
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14147B2C0: ctor
+  Client::Game::InstanceContent::InstanceContentRaidSeaBahamut005: # The Binding Coil of Bahamut - Turn 5
+    vtbls:
+      - ea: 0x141BC1930
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14147B310: ctor
+  Client::Game::InstanceContent::InstanceContentRaidForestBahamut001: # The Second Coil of Bahamut - Turn 1
+    vtbls:
+      - ea: 0x141BC2528
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14147B3A0: ctor
+  Client::Game::InstanceContent::InstanceContentRaidForestBahamut002: # The Second Coil of Bahamut - Turn 2
+    vtbls:
+      - ea: 0x141BC3120
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14147B440: ctor
+  Client::Game::InstanceContent::InstanceContentRaidForestBahamut003: # The Second Coil of Bahamut - Turn 3
+    vtbls:
+      - ea: 0x141BC3D18
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14147B4A0: ctor
+  Client::Game::InstanceContent::InstanceContentRaidForestBahamut004: # The Second Coil of Bahamut - Turn 4
+    vtbls:
+      - ea: 0x141BC4910
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14147B520: ctor
+  Client::Game::InstanceContent::InstanceContentRaidFinalBahamut001: # The Final Coil of Bahamut - Turn 1
+    vtbls:
+      - ea: 0x141BD8360
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141488790: ctor
+  Client::Game::InstanceContent::InstanceContentRaidFinalBahamut002: # The Final Coil of Bahamut - Turn 2
+    vtbls:
+      - ea: 0x141BD8F58
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141488800: ctor
+  Client::Game::InstanceContent::InstanceContentRaidFinalBahamut003: # The Final Coil of Bahamut - Turn 3
+    vtbls:
+      - ea: 0x141BD9B50
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141488860: ctor
+  Client::Game::InstanceContent::InstanceContentRaidFinalBahamut004: # The Final Coil of Bahamut - Turn 4
+    vtbls:
+      - ea: 0x141BDA748
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414888E0: ctor
+  Client::Game::InstanceContent::InstanceContentRaidForestBahamut001Hard: # The Second Coil of Bahamut (Savage) - Turn 1
+    vtbls:
+      - ea: 0x141BD5380
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414885A0: ctor
+  Client::Game::InstanceContent::InstanceContentRaidForestBahamut002Hard: # The Second Coil of Bahamut (Savage) - Turn 2
+    vtbls:
+      - ea: 0x141BD5F78
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141488640: ctor
+  Client::Game::InstanceContent::InstanceContentRaidForestBahamut003Hard: # The Second Coil of Bahamut (Savage) - Turn 3
+    vtbls:
+      - ea: 0x141BD6B70
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414886A0: ctor
+  Client::Game::InstanceContent::InstanceContentRaidForestBahamut004Hard: # The Second Coil of Bahamut (Savage) - Turn 4
+    vtbls:
+      - ea: 0x141BD7768
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141488720: ctor
+  Client::Game::InstanceContent::InstanceContentRaidVoidArk: # The Void Ark
+    vtbls:
+      - ea: 0x141BE0708
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141488C70: ctor
+  Client::Game::InstanceContent::InstanceContentRaidWeepingCityOfMhach: # The Weeping City of Mhach
+    vtbls:
+      - ea: 0x141BE1300
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141488E00: ctor
+  Client::Game::InstanceContent::InstanceContentRaidDunScaith: # Dun Scaith
+    vtbls:
+      - ea: 0x141BE1EF8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141488EB0: ctor
+  Client::Game::InstanceContent::InstanceContentRaidAlexanderFather001: # Alexander - The Fist of the Father
+    vtbls:
+      - ea: 0x141BDB340
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141488950: ctor
+  Client::Game::InstanceContent::InstanceContentRaidAlexanderFather002: # Alexander - The Cuff of the Father
+    vtbls:
+      - ea: 0x141BDCB30
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141488A30: ctor
+  Client::Game::InstanceContent::InstanceContentRaidAlexanderFather003: # Alexander - The Arm of the Father
+    vtbls:
+      - ea: 0x141BDE320
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141488B10: ctor
+  Client::Game::InstanceContent::InstanceContentRaidAlexanderFather004: # Alexander - The Burden of the Father / Alexander - The Burden of the Father (Savage)
+    vtbls:
+      - ea: 0x141BDFB10
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141488C20: ctor
+  Client::Game::InstanceContent::InstanceContentRaidAlexanderSon001: # Alexander - The Fist of the Son
+    vtbls:
+      - ea: 0x141BE2AF0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141488F20: ctor
+  Client::Game::InstanceContent::InstanceContentRaidAlexanderSon002: # Alexander - The Cuff of the Son
+    vtbls:
+      - ea: 0x141BE42E0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141489000: ctor
+  Client::Game::InstanceContent::InstanceContentRaidAlexanderSon003: # Alexander - The Arm of the Son
+    vtbls:
+      - ea: 0x141BE5AD0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414890E0: ctor
+  Client::Game::InstanceContent::InstanceContentRaidAlexanderSon004: # Alexander - The Burden of the Son / Alexander - The Burden of the Son (Savage)
+    vtbls:
+      - ea: 0x141BE72C0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414891C0: ctor
+  Client::Game::InstanceContent::InstanceContentRaidAlexanderCreator001: # Alexander - The Eyes of the Creator / Alexander - The Eyes of the Creator (Savage)
+    vtbls:
+      - ea: 0x141BE8AB0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414892B0: ctor
+  Client::Game::InstanceContent::InstanceContentRaidAlexanderCreator002: # Alexander - The Breath of the Creator
+    vtbls:
+      - ea: 0x141BE96A8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141489310: ctor
+  Client::Game::InstanceContent::InstanceContentRaidAlexanderCreator003: # Alexander - The Heart of the Creator
+    vtbls:
+      - ea: 0x141BEAE98
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141489710: ctor
+  Client::Game::InstanceContent::InstanceContentRaidAlexanderCreator004: # Alexander - The Soul of the Creator / Alexander - The Soul of the Creator (Savage)
+    vtbls:
+      - ea: 0x141BEC6B8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141489CB0: ctor
+  Client::Game::InstanceContent::InstanceContentRaidAlexanderFather001Savage: # Alexander - The Fist of the Father (Savage)
+    vtbls:
+      - ea: 0x141BDBF38
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414889C0: ctor
+  Client::Game::InstanceContent::InstanceContentRaidAlexanderFather002Savage: # Alexander - The Cuff of the Father (Savage)
+    vtbls:
+      - ea: 0x141BDD728
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141488AA0: ctor
+  Client::Game::InstanceContent::InstanceContentRaidAlexanderFather003Savage: # Alexander - The Arm of the Father (Savage)
+    vtbls:
+      - ea: 0x141BDEF18
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141488B80: ctor
+  Client::Game::InstanceContent::InstanceContentRaidAlexanderSon001Savage: # Alexander - The Fist of the Son (Savage)
+    vtbls:
+      - ea: 0x141BE36E8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141488F90: ctor
+  Client::Game::InstanceContent::InstanceContentRaidAlexanderSon002Savage: # Alexander - The Cuff of the Son (Savage)
+    vtbls:
+      - ea: 0x141BE4ED8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141489070: ctor
+  Client::Game::InstanceContent::InstanceContentRaidAlexanderSon003Savage: # Alexander - The Arm of the Son (Savage)
+    vtbls:
+      - ea: 0x141BE66C8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141489140: ctor
+  Client::Game::InstanceContent::InstanceContentRaidAlexanderCreator002Savage: # Alexander - The Breath of the Creator (Savage)
+    vtbls:
+      - ea: 0x141BEA2A0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414893D0: ctor
+  Client::Game::InstanceContent::InstanceContentRaidAlexanderCreator003Savage: # Alexander - The Heart of the Creator (Savage)
+    vtbls:
+      - ea: 0x141BEBAA8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141489B10: ctor
+  Client::Game::InstanceContent::InstanceContentRaidRoyalCityOfRabanastre: # The Royal City of Rabanastre
+    vtbls:
+      - ea: 0x141C1F6F0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414A8080: ctor
+  Client::Game::InstanceContent::InstanceContentRaidRidoranaLighthouse: # The Ridorana Lighthouse
+    vtbls:
+      - ea: 0x141C20448
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414A8190: ctor
+  Client::Game::InstanceContent::InstanceContentRaidOrbonneMonastery: # The Orbonne Monastery
+    vtbls:
+      - ea: 0x141C21148
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414A8280: ctor
+  Client::Game::InstanceContent::InstanceContentRaidDeltascape001: # Deltascape V1.0 / Deltascape V1.0 (Savage)
+    vtbls:
+      - ea: 0x141C1AEA0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414A7CD0: ctor
+  Client::Game::InstanceContent::InstanceContentRaidDeltascape002: # Deltascape V2.0 / Deltascape V2.0 (Savage)
+    vtbls:
+      - ea: 0x141C1BAA8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414A7D20: ctor
+  Client::Game::InstanceContent::InstanceContentRaidDeltascape003: # Deltascape V3.0 / Deltascape V3.0 (Savage)
+    vtbls:
+      - ea: 0x141C1C6B0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414A7DA0: ctor
+  Client::Game::InstanceContent::InstanceContentRaidDeltascape004: # Deltascape V4.0 / Deltascape V4.0 (Savage)
+    vtbls:
+      - ea: 0x141C1D2B8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414A7E20: ctor
+  Client::Game::InstanceContent::InstanceContentRaidSigmascape001: # Sigmascape V1.0 / Sigmascape V1.0 (Savage)
+    vtbls:
+      - ea: 0x141C236C8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414AB1B0: ctor
+  Client::Game::InstanceContent::InstanceContentRaidSigmascape002: # Sigmascape V2.0 / Sigmascape V2.0 (Savage)
+    vtbls:
+      - ea: 0x141C242E0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414AB230: ctor
+  Client::Game::InstanceContent::InstanceContentRaidSigmascape003: # Sigmascape V3.0 / Sigmascape V3.0 (Savage)
+    vtbls:
+      - ea: 0x141C24EE8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414AB360: ctor
+  Client::Game::InstanceContent::InstanceContentRaidSigmascape004: # Sigmascape V4.0 / Sigmascape V4.0 (Savage)
+    vtbls:
+      - ea: 0x141C25C30
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414AB420: ctor
+  Client::Game::InstanceContent::InstanceContentRaidAlphascape001: # Alphascape V1.0 / Alphascape V1.0 (Savage)
+    vtbls:
+      - ea: 0x141C26870
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414AB4A0: ctor
+  Client::Game::InstanceContent::InstanceContentRaidAlphascape002: # Alphascape V2.0 / Alphascape V2.0 (Savage)
+    vtbls:
+      - ea: 0x141C27478
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414AB540: ctor
+  Client::Game::InstanceContent::InstanceContentRaidAlphascape003: # Alphascape V3.0 / Alphascape V3.0 (Savage)
+    vtbls:
+      - ea: 0x141C28098
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414AB5E0: ctor
+  Client::Game::InstanceContent::InstanceContentRaidAlphascape004: # Alphascape V4.0 / Alphascape V4.0 (Savage)
+    vtbls:
+      - ea: 0x141C28CB0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414AB6A0: ctor
+  Client::Game::InstanceContent::InstanceContentRaidUnendingCoilOfBahamut: # The Unending Coil of Bahamut (Ultimate)
+    vtbls:
+      - ea: 0x141C1DEC0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414A7EB0: ctor
+  Client::Game::InstanceContent::InstanceContentRaidWeaponsRefrain: # The Weapon's Refrain (Ultimate)
+    vtbls:
+      - ea: 0x141C1EAB8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414A7F30: ctor
+  Client::Game::InstanceContent::InstanceContentRaidSeatOfSacrifice: # The Seat of Sacrifice / The Seat of Sacrifice (Extreme)
+    vtbls:
+      - ea: 0x141B69FE8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141455BE0: ctor
+  Client::Game::InstanceContent::InstanceContentRaidCastrumMarinum: # Castrum Marinum / Castrum Marinum (Extreme)
+    vtbls:
+      - ea: 0x141B6ABE0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141455C30: ctor
+  Client::Game::InstanceContent::InstanceContentRaidEpicOfAlexander: # The Epic of Alexander (Ultimate)
+    vtbls:
+      - ea: 0x141B693F0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141455A00: ctor
+  Client::Game::InstanceContent::InstanceContentRaidDragonsongsReprise: # Dragonsong's Reprise (Ultimate)
+    vtbls:
+      - ea: 0x141B8BE60
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141460D70: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonSastasha: # Sastasha
+    vtbls:
+      - ea: 0x141B70F90
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14145B400: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonTamtara: # The Tam-Tara Deepcroft
+    vtbls:
+      - ea: 0x141B71BE0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14145B4B0: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonCopperBell: # Copperbell Mines
+    vtbls:
+      - ea: 0x141B6F6F0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14145B2E0: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonHalatali: # Halatali
+    vtbls:
+      - ea: 0x141B96EE0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141477710: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonResidence: # Haukke Manor
+    vtbls:
+      - ea: 0x141B70338
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14145B370: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonBrayflox: # Brayflox's Longstop
+    vtbls:
+      - ea: 0x141B72840
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14145B540: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonQarn: # The Sunken Temple of Qarn
+    vtbls:
+      - ea: 0x141B986D0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141477B10: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonCuttersCry: # Cutter's Cry
+    vtbls:
+      - ea: 0x141B9AAB8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414781A0: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonDzemael: # Dzemael Darkhold
+    vtbls:
+      - ea: 0x141B9B6B0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141478210: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonAurumVale: # The Aurum Vale
+    vtbls:
+      - ea: 0x141B94AF8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141477580: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonWandererPalace: # The Wanderer's Palace
+    vtbls:
+      - ea: 0x141B992C8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141478030: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonCastrumMeridianum: # Castrum Meridianum
+    vtbls:
+      - ea: 0x141B73480
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14145B590: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonPraetorium: # The Praetorium
+    vtbls:
+      - ea: 0x141B74078
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14145B600: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonRuinsOfAmdapor: # Amdapor Keep
+    vtbls:
+      - ea: 0x141B9C2A8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141478340: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonSirius: # Pharos Sirius
+    vtbls:
+      - ea: 0x141B9CEA0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414783B0: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonCopperBellHard: # Copperbell Mines (Hard)
+    vtbls:
+      - ea: 0x141B93F00
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141477510: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonResidenceHard: # Haukke Manor (Hard)
+    vtbls:
+      - ea: 0x141B956F0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141477610: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonLostCityOfAmdapor: # The Lost City of Amdapor
+    vtbls:
+      - ea: 0x141B9DA98
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141478490: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonHalataliHard: # Halatali (Hard)
+    vtbls:
+      - ea: 0x141B97AD8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141477780: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonBrayfloxHard: # Brayflox's Longstop (Hard)
+    vtbls:
+      - ea: 0x141B962E8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414776A0: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonTreasureIsland?: # Hullbreaker Isle
+    vtbls:
+      - ea: 0x141B9E690
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141478520: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonTamtaraHard: # The Tam-Tara Deepcroft (Hard)
+    vtbls:
+      - ea: 0x141B9F288
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414785C0: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonStoneVigilHard: # The Stone Vigil (Hard)
+    vtbls:
+      - ea: 0x141B99EC0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141478130: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonSnowcloak: # Snowcloak
+    vtbls:
+      - ea: 0x141B77DE0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14145B900: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonSastashaHard: # Sastasha (Hard)
+    vtbls:
+      - ea: 0x141BA0A78
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414786D0: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonQarnHard: # The Sunken Temple of Qarn (Hard)
+    vtbls:
+      - ea: 0x141B9FE80
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141478660: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonKeeperOfTheLake: # The Keeper of the Lake
+    vtbls:
+      - ea: 0x141B771B0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14145B830: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonWandererPalaceHard: # The Wanderer's Palace (Hard)
+    vtbls:
+      - ea: 0x141BA2268
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141478790: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonRuinsOfAmdaporHard: # Amdapor Keep (Hard)
+    vtbls:
+      - ea: 0x141BA1670
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141478740: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonDuskVigil: # The Dusk Vigil
+    vtbls:
+      - ea: 0x141BA5248
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141478B50: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonSohmAl: # Sohm Al
+    vtbls:
+      - ea: 0x141B76590
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14145B7E0: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonAery: # The Aery
+    vtbls:
+      - ea: 0x141B74C70
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14145B6E0: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonVault: # The Vault
+    vtbls:
+      - ea: 0x141B75970
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14145B730: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonGreatGubalLibrary: # The Great Gubal Library
+    vtbls:
+      - ea: 0x141B7C9D0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14145C050: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonAetherochemicalResearchFacility: # The Aetherochemical Research Facility
+    vtbls:
+      - ea: 0x141B7A378
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14145BCA0: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonNeverreap: # Neverreap
+    vtbls:
+      - ea: 0x141BA3A58
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414789A0: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonFractalContinuum: # The Fractal Continuum
+    vtbls:
+      - ea: 0x141BA4650
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141478A00: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonSaintMocianneArboretum: # Saint Mocianne's Arboretum
+    vtbls:
+      - ea: 0x141BA6A38
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141478CA0: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonPharosSiriusHard: # Pharos Sirius (Hard)
+    vtbls:
+      - ea: 0x141BA5E40
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141478C30: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonAntitower: # The Antitower
+    vtbls:
+      - ea: 0x141B79700
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14145BB90: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonLostCityOfAmdaporHard: # The Lost City of Amdapor (Hard)
+    vtbls:
+      - ea: 0x141BA7630
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141478E00: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonSohrKhai: # Sohr Khai
+    vtbls:
+      - ea: 0x141B7B0D0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14145BD40: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonHullbreakerIsleHard: # Hullbreaker Isle (Hard)
+    vtbls:
+      - ea: 0x141BA8228
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141478E70: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonXelphatol: # Xelphatol
+    vtbls:
+      - ea: 0x141B78A28
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14145B950: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonGreatGubalLibraryHard: # The Great Gubal Library (Hard)
+    vtbls:
+      - ea: 0x141BA2E60
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141478820: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonBaelsarWall: # Baelsar's Wall
+    vtbls:
+      - ea: 0x141B7BCF8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14145C000: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonSohmAlHard: # Sohm Al (Hard)
+    vtbls:
+      - ea: 0x141BA8E20
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141478F90: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonSirensongSea: # The Sirensong Sea
+    vtbls:
+      - ea: 0x141B7D628
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14145C1D0: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonShisui: # Shisui of the Violet Tides
+    vtbls:
+      - ea: 0x141BFAED8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414A60D0: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonBardamMettle: # Bardam's Mettle
+    vtbls:
+      - ea: 0x141B7FB78
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14145C630: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonDomaCastle: # Doma Castle
+    vtbls:
+      - ea: 0x141B80800
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14145C6D0: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonCastrumAbania: # Castrum Abania
+    vtbls:
+      - ea: 0x141B7EF30
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14145C5B0: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonAlaMhigo: # Ala Mhigo
+    vtbls:
+      - ea: 0x141B7E2D8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14145C480: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonKuganeCastle: # Kugane Castle
+    vtbls:
+      - ea: 0x141BFD498
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414A6570: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonTempleOfTheFist: # The Temple of the Fist
+    vtbls:
+      - ea: 0x141BFBB18
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414A6400: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonDrownedCityOfSkalla: # The Drowned City of Skalla
+    vtbls:
+      - ea: 0x141B81448
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14145C7A0: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonHellsLid: # Hells' Lid
+    vtbls:
+      - ea: 0x141BFE0F8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414A6610: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonFractalContinuumHard: # The Fractal Continuum (Hard)
+    vtbls:
+      - ea: 0x141BFED78
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414A6660: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonSwallowCompass: # The Swallow's Compass
+    vtbls:
+      - ea: 0x141BFFA50
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414A6770: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonBurn: # The Burn
+    vtbls:
+      - ea: 0x141B820A8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14145C820: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonSaintMocianneArboretumHard: # Saint Mocianne's Arboretum (Hard)
+    vtbls:
+      - ea: 0x141C006B8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414A6810: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonGhimlytDark: # The Ghimlyt Dark
+    vtbls:
+      - ea: 0x141B82CE8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14145C870: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonDohnMheg: # Dohn Mheg
+    vtbls:
+      - ea: 0x141C01380
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414A68F0: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonTwinning: # The Twinning
+    vtbls:
+      - ea: 0x141B63298
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141454540: ctor
+  Client::Game::InstanceContent::InstanceContentDungeonGrandCosmos: # The Grand Cosmos
+    vtbls:
+      - ea: 0x141B63ED8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414545C0: ctor
+  Client::Game::InstanceContent::InstanceContentGuildOrder001: # Basic Training: Enemy Parties
+    vtbls:
+      - ea: 0x141BC7940
+        base: Client::Game::InstanceContent::InstanceContentGuildOrderDirector
+    funcs:
+      0x1414955A0: ctor
+  Client::Game::InstanceContent::InstanceContentGuildOrder002: # Under the Armor
+    vtbls:
+      - ea: 0x141BC8558
+        base: Client::Game::InstanceContent::InstanceContentGuildOrderDirector
+    funcs:
+      0x1414955F0: ctor
+  Client::Game::InstanceContent::InstanceContentGuildOrder003: # Basic Training: Enemy Strongholds
+    vtbls:
+      - ea: 0x141BC9170
+        base: Client::Game::InstanceContent::InstanceContentGuildOrderDirector
+    funcs:
+      0x14147E290: ctor
+  Client::Game::InstanceContent::InstanceContentGuildOrder004: # Hero on the Half Shell
+    vtbls:
+      - ea: 0x141BC9D88
+        base: Client::Game::InstanceContent::InstanceContentGuildOrderDirector
+    funcs:
+      0x141495640: ctor
+  Client::Game::InstanceContent::InstanceContentGuildOrder005: # Pulling Poison Posies
+    vtbls:
+      - ea: 0x141BCA9A0
+        base: Client::Game::InstanceContent::InstanceContentGuildOrderDirector
+    funcs:
+      0x141495690: ctor
+  Client::Game::InstanceContent::InstanceContentGuildOrder006: # Stinging Back
+    vtbls:
+      - ea: 0x141BCB5B8
+        base: Client::Game::InstanceContent::InstanceContentGuildOrderDirector
+    funcs:
+      0x1414956D0: ctor
+  Client::Game::InstanceContent::InstanceContentGuildOrder007: # All's Well that Ends in the Well
+    vtbls:
+      - ea: 0x141BCC1D0
+        base: Client::Game::InstanceContent::InstanceContentGuildOrderDirector
+    funcs:
+      0x141495710: ctor
+  Client::Game::InstanceContent::InstanceContentGuildOrder008: # Flicking Sticks and Taking Names
+    vtbls:
+      - ea: 0x141BCCDE8
+        base: Client::Game::InstanceContent::InstanceContentGuildOrderDirector
+    funcs:
+      0x141495750: ctor
+  Client::Game::InstanceContent::InstanceContentGuildOrder009: # More than a Feeler
+    vtbls:
+      - ea: 0x141BCDA00
+        base: Client::Game::InstanceContent::InstanceContentGuildOrderDirector
+    funcs:
+      0x14147F6C0: ctor
+  Client::Game::InstanceContent::InstanceContentGuildOrder010: # Annoy the Void
+    vtbls:
+      - ea: 0x141BCE618
+        base: Client::Game::InstanceContent::InstanceContentGuildOrderDirector
+    funcs:
+      0x141495790: ctor
+  Client::Game::InstanceContent::InstanceContentGuildOrder011: # Shadow and Claw
+    vtbls:
+      - ea: 0x141BCF230
+        base: Client::Game::InstanceContent::InstanceContentGuildOrderDirector
+    funcs:
+      0x1414957E0: ctor
+  Client::Game::InstanceContent::InstanceContentGuildOrder012: # Long Live the Queen
+    vtbls:
+      - ea: 0x141BCFE48
+        base: Client::Game::InstanceContent::InstanceContentGuildOrderDirector
+    funcs:
+      0x141495830: ctor
+  Client::Game::InstanceContent::InstanceContentGuildOrder013: # Ward Up
+    vtbls:
+      - ea: 0x141BD0A60
+        base: Client::Game::InstanceContent::InstanceContentGuildOrderDirector
+    funcs:
+      0x141495880: ctor
+  Client::Game::InstanceContent::InstanceContentGuildOrder014: # Solemn Trinity
+    vtbls:
+      - ea: 0x141BD1678
+        base: Client::Game::InstanceContent::InstanceContentGuildOrderDirector
+    funcs:
+      0x1414958D0: ctor
+  Client::Game::InstanceContent::InstanceContentBattleNavel: # The Navel
+    vtbls:
+      - ea: 0x141B851A0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14145CB90: ctor
+  Client::Game::InstanceContent::InstanceContentBattlePortaDecumana: # The Porta Decumana
+    vtbls:
+      - ea: 0x141B85DE8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14145CBF0: ctor
+  Client::Game::InstanceContent::InstanceContentBattleNabriales: # The Chrysalis
+    vtbls:
+      - ea: 0x141BB59B0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14147A650: ctor
+  Client::Game::InstanceContent::InstanceContentBattleEpicDhormeChimera: # A Relic Reborn: The Chimera
+    vtbls:
+      - ea: 0x141BAF9F0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14147A380: ctor
+  Client::Game::InstanceContent::InstanceContentBattleEpicHydra: # A Relic Reborn: the Hydra
+    vtbls:
+      - ea: 0x141BB05E8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14147A3D0: ctor
+  Client::Game::InstanceContent::InstanceContentBattleGilgamesh: # Battle on the Big Bridge
+    vtbls:
+      - ea: 0x141BB11E0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14147A420: ctor
+  Client::Game::InstanceContent::InstanceContentBattleUltrosTyphon: # The Dragon's Neck
+    vtbls:
+      - ea: 0x141BB35C8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14147A510: ctor
+  Client::Game::InstanceContent::InstanceContentBattleGilgameshEnkidu: # Battle in the Big Keep
+    vtbls:
+      - ea: 0x141BB65A8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14147A6A0: ctor
+  Client::Game::InstanceContent::InstanceContentBattleGaruda: # The Bowl of Embers (Hard) / The Bowl of Embers (Extreme)
+    vtbls:
+      - ea: 0x141BAA620
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141479590: ctor
+  Client::Game::InstanceContent::InstanceContentBattleIfrit: # The Howling Eye (Hard) / The Howling Eye (Extreme)
+    vtbls:
+      - ea: 0x141BABE10
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14147A0B0: ctor
+  Client::Game::InstanceContent::InstanceContentBattleTitan: # The Navel (Hard) / The Navel (Extreme)
+    vtbls:
+      - ea: 0x141BAB218
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141479E40: ctor
+  Client::Game::InstanceContent::InstanceContentBattleMoogle: # Thornmarch (Hard) / Thornmarch (Extreme)
+    vtbls:
+      - ea: 0x141BACA08
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14147A100: ctor
+  Client::Game::InstanceContent::InstanceContentBattleLeviathan: # The Whorleater (Hard) / The Whorleater (Extreme)
+    vtbls:
+      - ea: 0x141BAEDF0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14147A330: ctor
+  Client::Game::InstanceContent::InstanceContentBattleRamuh: # The Striking Tree (Hard) / The Striking Tree (Extreme)
+    vtbls:
+      - ea: 0x141BB1DD8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14147A470: ctor
+  Client::Game::InstanceContent::InstanceContentBattleShiva: # The Akh Afah Amphitheatre (Hard) / The Akh Afah Amphitheatre (Extreme)
+    vtbls:
+      - ea: 0x141BB29D0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14147A4C0: ctor
+  Client::Game::InstanceContent::InstanceContentBattleOdin: # Urth's Fount
+    vtbls:
+      - ea: 0x141BB41C0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14147A560: ctor
+  Client::Game::InstanceContent::InstanceContentBattleUltimaWeapon: # The Minstrel's Ballad: Ultima's Bane
+    vtbls:
+      - ea: 0x141BAD600
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14147A190: ctor
+  Client::Game::InstanceContent::InstanceContentBattleRavana: # Thok ast Thok (Hard/Extreme)
+    vtbls:
+      - ea: 0x141BB71A0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14147A6F0: ctor
+  Client::Game::InstanceContent::InstanceContentBattleBismarck: # The Limitless Blue (Hard/Extreme)
+    vtbls:
+      - ea: 0x141BB7D98
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14147A840: ctor
+  Client::Game::InstanceContent::InstanceContentBattleThordan: # The Singularity Reactor / The Minstrel's Ballad: Thordan's Reign
+    vtbls:
+      - ea: 0x141BB8990
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14147A8E0: ctor
+  Client::Game::InstanceContent::InstanceContentBattleNidhogg: # The Final Steps of Faith / The Minstrel's Ballad: Nidhogg's Rage
+    vtbls:
+      - ea: 0x141BBA180
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14147A9B0: ctor
+  Client::Game::InstanceContent::InstanceContentBattleSephirot: # Containment Bay S1T7 / Containment Bay S1T7 (Extreme)
+    vtbls:
+      - ea: 0x141BB9588
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14147A950: ctor
+  Client::Game::InstanceContent::InstanceContentBattleSophia: # Containment Bay P1T6 / Containment Bay P1T6 (Extreme)
+    vtbls:
+      - ea: 0x141BBAD78
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14147AA10: ctor
+  Client::Game::InstanceContent::InstanceContentBattleZurvan: # Containment Bay Z1T9 / Containment Bay Z1T9 (Extreme)
+    vtbls:
+      - ea: 0x141BBB970
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14147AB30: ctor
+  Client::Game::InstanceContent::InstanceContentBattleSusano: # The Pool of Tribute / The Pool of Tribute (Extreme)
+    vtbls:
+      - ea: 0x141C14E00
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414A77E0: ctor
+  Client::Game::InstanceContent::InstanceContentBattleLakshmi: # Emanation / Emanation (Extreme)
+    vtbls:
+      - ea: 0x141C159F8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414A78C0: ctor
+  Client::Game::InstanceContent::InstanceContentBattleShinryu: # The Royal Menagerie / The Minstrel's Ballad: Shinryu's Domain
+    vtbls:
+      - ea: 0x141C141F0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414A7750: ctor
+  Client::Game::InstanceContent::InstanceContentBattleTsukuyomi: # Castrum Fluminis / The Minstrel's Ballad: Tsukuyomi's Pain
+    vtbls:
+      - ea: 0x141C17DE0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414A7B30: ctor
+  Client::Game::InstanceContent::InstanceContentBattleYojimbo: # Kugane Ohashi
+    vtbls:
+      - ea: 0x141C18AB8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414A7B90: ctor
+  Client::Game::InstanceContent::InstanceContentBattleRathalos: # The Great Hunt / The Great Hunt (Extreme)
+    vtbls:
+      - ea: 0x141C171E8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414A79B0: ctor
+  Client::Game::InstanceContent::InstanceContentBattleByakko: # The Jade Stoa / The Jade Stoa (Extreme)
+    vtbls:
+      - ea: 0x141C165F0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414A7960: ctor
+  Client::Game::InstanceContent::InstanceContentBattleSuzaku: # Hells' Kier / Hells' Kier (Extreme)
+    vtbls:
+      - ea: 0x141C196B0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414A7BE0: ctor
+  Client::Game::InstanceContent::InstanceContentBattleSeiryu: # The Wreath of Snakes / The Wreath of Snakes (Extreme)
+    vtbls:
+      - ea: 0x141C1A2A8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414A7C40: ctor
+  Client::Game::InstanceContent::InstanceContentBattleElidibus: # The Seat of Sacrifice / The Seat of Sacrifice (Extreme)
+    vtbls:
+      - ea: 0x141B69FE8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141455BE0: ctor
+  Client::Game::InstanceContent::InstanceContentBattleEmeraldWeapon: # Castrum Marinum / Castrum Marinum (Extreme)
+    vtbls:
+      - ea: 0x141B6ABE0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141455C30: ctor
+  Client::Game::InstanceContent::InstanceContentFrontline01: # The Borderland Ruins (Secure) (unconfirmed)
+    vtbls:
+      - ea: 0x141BD2EC8
+        base: Client::Game::InstanceContent::InstanceContentFrontlineDirector
+    funcs:
+      0x141483140: ctor
+  Client::Game::InstanceContent::InstanceContentFrontline02: # Seal Rock (Seize) (unconfirmed)
+    vtbls:
+      - ea: 0x141BD3B10
+        base: Client::Game::InstanceContent::InstanceContentFrontlineDirector
+    funcs:
+      0x141485500: ctor
+  Client::Game::InstanceContent::InstanceContentFrontline03: # The Fields of Glory (Shatter)
+    vtbls:
+      - ea: 0x141BD4748
+        base: Client::Game::InstanceContent::InstanceContentFrontlineDirector
+    funcs:
+      0x141486CA0: ctor
+  Client::Game::InstanceContent::InstanceContentFrontline04: # Onsal Hakair (Danshig Naadam)
+    vtbls:
+      - ea: 0x141B68750
+        base: Client::Game::InstanceContent::InstanceContentFrontlineDirector
+    funcs:
+      0x141454870: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattle:
+    vtbls:
+      - ea: 0x141BA9A18
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141478FE0: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattleASpectacleForTheAges: # A Spectacle for the Ages
+    vtbls:
+      - ea: 0x141BED2B0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141489DB0: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattleABloodyReunion: # A Bloody Reunion
+    vtbls:
+      - ea: 0x141BEDEB8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141489E60: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattleOneLifeForOneWorld: # One Life for One World
+    vtbls:
+      - ea: 0x141BEEAC0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141489F00: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattleCarteneauFlatsHeliodrome: # The Carteneau Flats: Heliodrome
+    vtbls:
+      - ea: 0x141BEF6C8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141489FB0: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattleItProbablyATrap: # It's Probably a Trap
+    vtbls:
+      - ea: 0x141C01FC8
+        base: Client::Game::InstanceContent::InstanceContentQuestBattle
+    funcs:
+      0x1414A6970: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattleInThalName: # In Thal's Name
+    vtbls:
+      - ea: 0x141C09948
+        base: Client::Game::InstanceContent::InstanceContentQuestBattle
+    funcs:
+      0x1414A6ED0: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattleWithHeartAndSteel: # With Heart and Steel
+    vtbls:
+      - ea: 0x141C04488
+        base: Client::Game::InstanceContent::InstanceContentQuestBattle
+    funcs:
+      0x1414A6B30: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattleNaadam: # Naadam
+    vtbls:
+      - ea: 0x141C02BD0
+        base: Client::Game::InstanceContent::InstanceContentQuestBattle
+    funcs:
+      0x1414A6A00: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattleBloodOnTheDeck: # Blood on the Deck
+    vtbls:
+      - ea: 0x141C050B0
+        base: Client::Game::InstanceContent::InstanceContentQuestBattle
+    funcs:
+      0x1414A6BF0: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattleFaceOfTrueEvil: # The Face of True Evil
+    vtbls:
+      - ea: 0x141C05CB8
+        base: Client::Game::InstanceContent::InstanceContentQuestBattle
+    funcs:
+      0x1414A6C50: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattleMatsubaMayhem: # Matsuba Mayhem
+    vtbls:
+      - ea: 0x141C068C0
+        base: Client::Game::InstanceContent::InstanceContentQuestBattle
+    funcs:
+      0x1414A6CB0: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattleBattleOnBekko: # The Battle on Bekko
+    vtbls:
+      - ea: 0x141C074C8
+        base: Client::Game::InstanceContent::InstanceContentQuestBattle
+    funcs:
+      0x1414A6D10: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattleCuriousGorgeMeetsHisMatch: # Curious Gorge Meets His Match
+    vtbls:
+      - ea: 0x141C080D0
+        base: Client::Game::InstanceContent::InstanceContentQuestBattle
+    funcs:
+      0x1414A6D70: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattleOurUnsungHeroes: # Our Unsung Heroes
+    vtbls:
+      - ea: 0x141C08CD8
+        base: Client::Game::InstanceContent::InstanceContentQuestBattle
+    funcs:
+      0x1414A6E00: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattleHeartOfTheProblem: # The Heart of the Problem
+    vtbls:
+      - ea: 0x141C0B158
+        base: Client::Game::InstanceContent::InstanceContentQuestBattle
+    funcs:
+      0x1414A6FF0: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattleDarkAsTheNightSky: # Dark as the Night Sky
+    vtbls:
+      - ea: 0x141C0BD60
+        base: Client::Game::InstanceContent::InstanceContentQuestBattle
+    funcs:
+      0x1414A7080: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattleResonant: # The Resonant
+    vtbls:
+      - ea: 0x141C03870
+        base: Client::Game::InstanceContent::InstanceContentQuestBattle
+    funcs:
+      0x1414A6A80: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattleRaisingTheSword: # Raising the Sword
+    vtbls:
+      - ea: 0x141C0A550
+        base: Client::Game::InstanceContent::InstanceContentQuestBattle
+    funcs:
+      0x1414A6F60: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattleOrphansAndTheBrokenBlade: # The Orphans and the Broken Blade
+    vtbls:
+      - ea: 0x141C0D570
+        base: Client::Game::InstanceContent::InstanceContentQuestBattle
+    funcs:
+      0x1414A71A0: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattleOurCompromise: # Our Compromise
+    vtbls:
+      - ea: 0x141C0E178
+        base: Client::Game::InstanceContent::InstanceContentQuestBattle
+    funcs:
+      0x1414A7230: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattleDragonSound: # Dragon Sound
+    vtbls:
+      - ea: 0x141C0C968
+        base: Client::Game::InstanceContent::InstanceContentQuestBattle
+    funcs:
+      0x1414A7110: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattleWhenClansCollide: # When Clans Collide
+    vtbls:
+      - ea: 0x141C0ED80
+        base: Client::Game::InstanceContent::InstanceContentQuestBattle
+    funcs:
+      0x1414A72C0: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattleInterdimensionalRift: # Interdimensional Rift
+    vtbls:
+      - ea: 0x141C0F988
+        base: Client::Game::InstanceContent::InstanceContentQuestBattle
+    funcs:
+      0x1414A7350: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattleReturnOfTheBull: # Return of the Bull
+    vtbls:
+      - ea: 0x141C105B0
+        base: Client::Game::InstanceContent::InstanceContentQuestBattle
+    funcs:
+      0x1414A7420: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattleEmissaryOfTheDawn: # Emissary of the Dawn
+    vtbls:
+      - ea: 0x141C111B8
+        base: Client::Game::InstanceContent::InstanceContentQuestBattle
+    funcs:
+      0x1414A74B0: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattleWillOfTheMoon: # The Will of the Moon
+    vtbls:
+      - ea: 0x141C11DC0
+        base: Client::Game::InstanceContent::InstanceContentQuestBattle
+    funcs:
+      0x1414A7540: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattleMessengerOfTheWinds: # Messenger of the Winds
+    vtbls:
+      - ea: 0x141C129C8
+        base: Client::Game::InstanceContent::InstanceContentQuestBattle
+    funcs:
+      0x1414A75D0: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattleARequiemForHeroes: # A Requiem for Heroes
+    vtbls:
+      - ea: 0x141C135D0
+        base: Client::Game::InstanceContent::InstanceContentQuestBattle
+    funcs:
+      0x1414A7700: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattleHardenedHeart: # The Hardened Heart
+    vtbls:
+      - ea: 0x141B64B18
+        base: Client::Game::InstanceContent::InstanceContentQuestBattle
+    funcs:
+      0x141454640: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattleComingClean: # Coming Clean
+    vtbls:
+      - ea: 0x141B66328
+        base: Client::Game::InstanceContent::InstanceContentQuestBattle
+    funcs:
+      0x141454770: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattleLegendOfTheNotSoHiddenTemple: # Legend of the Not-so-hidden Temple
+    vtbls:
+      - ea: 0x141B65720
+        base: Client::Game::InstanceContent::InstanceContentQuestBattle
+    funcs:
+      0x1414546A0: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattleAsTheHeartBids: # As the Heart Bids
+    vtbls:
+      - ea: 0x141B66F30
+        base: Client::Game::InstanceContent::InstanceContentQuestBattle
+    funcs:
+      0x1414547C0: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattleSleepNowInSapphire: # Sleep Now in Sapphire
+    vtbls:
+      - ea: 0x141B67B38
+        base: Client::Game::InstanceContent::InstanceContentQuestBattle
+    funcs:
+      0x141454820: ctor
+  Client::Game::InstanceContent::InstanceContentQuestBattleInFromTheCold: # In from the Cold
+    vtbls:
+      - ea: 0x141B83990
+        base: Client::Game::InstanceContent::InstanceContentQuestBattle
+    funcs:
+      0x14145C930: ctor
+  Client::Game::InstanceContent::InstanceContentBeginnerTrainingExercise:
+    vtbls:
+      - ea: 0x141B93150
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141477350: ctor
+  Client::Game::InstanceContent::InstanceContentBeginnerTrainingFinalExercise: # Final Exercise
+    vtbls:
+      - ea: 0x141BF02D0
+        base: Client::Game::InstanceContent::InstanceContentBeginnerTrainingExercise
+    funcs:
+      0x14148A060: ctor
+  Client::Game::InstanceContent::InstanceContentDeepDungeon:
+    vtbls:
+      - ea: 0x141BF0ED0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14148B210: ctor
+  Client::Game::InstanceContent::InstanceContentTreasureHuntDungeon0:
+    vtbls:
+      - ea: 0x141C2A510
+        base: Client::Game::InstanceContent::InstanceContentTreasureHuntDungeonDirector
+    funcs:
+      0x1414ABEC0: ctor
+  Client::Game::InstanceContent::InstanceContentTreasureHuntDungeon1:
+    vtbls:
+      - ea: 0x141BF26E0
+        base: Client::Game::InstanceContent::InstanceContentTreasureHuntDungeonDirector
+    funcs:
+      0x14148D1B0: ctor
+  Client::Game::InstanceContent::InstanceContentSeasonalDungeon1: # The Haunted Manor
+    vtbls:
+      - ea: 0x141BF32E0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14148DD20: ctor
+  Client::Game::InstanceContent::InstanceContentSeasonalDungeon2: # The Valentione's Ceremony
+    vtbls:
+      - ea: 0x141C298D0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414AB900: ctor
+  Client::Game::InstanceContent::InstanceContentRivalWing1:
+    vtbls:
+      - ea: 0x141C22AB0
+        base: Client::Game::InstanceContent::InstanceContentRivalWingDirector
+    funcs:
+      0x1414AB100: ctor
+  Client::Game::InstanceContent::InstanceContentRivalWing2:
+    vtbls:
+      - ea: 0x141C2B128
+        base: Client::Game::InstanceContent::InstanceContentRivalWingDirector
+    funcs:
+      0x1414AC5C0: ctor
+  Client::Game::InstanceContent::InstanceContentMaskedCarnivale:
+    vtbls:
+      - ea: 0x141C2BD40
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414AC8D0: ctor
+  Client::Game::InstanceContent::InstanceContentMahjong:
+    vtbls:
+      - ea: 0x141C2C990
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414ACC80: ctor
+  Client::Game::InstanceContent::InstanceContentAirForceOne: # Air Force One GATE in Gold Saucer
+    vtbls:
+      - ea: 0x141C2D5E0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414ADD20: ctor
+  Client::Game::InstanceContent::InstanceContentOceanFishing:
+    vtbls:
+      - ea: 0x141B6B7F0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141456030: ctor
+  Client::Game::InstanceContent::InstanceContentTripleTriad: # Triple Triad Open Tournament / Triple Triad Invitational Parlor
+    vtbls:
+      - ea: 0x141B6CFF8
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141457FC0: ctor
+  Client::Game::InstanceContent::InstanceContentVariantDungeon1: # The Sil'dihn Subterrane
+    vtbls:
+      - ea: 0x141B8E248
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1414615F0: ctor
+  Client::Game::InstanceContent::InstanceContentVariantDungeon2: # Mount Rokkon
+    vtbls:
+      - ea: 0x141B8D650
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141461170: ctor
+  Client::Game::InstanceContent::InstanceContentVariantDungeon3: # Aloalo Island
+    vtbls:
+      - ea: 0x141B8EE50
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141461750: ctor
+  Client::Game::InstanceContent::InstanceContentCriterionDungeon:
+    vtbls:
+      - ea: 0x141B8FA48
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141461A30: ctor
   Client::Game::InstanceContent::PublicContentDirector:
     vtbls:
       - ea: 0x141C30028
         base: Client::Game::InstanceContent::ContentDirector
     funcs:
+      0x1414B1DE0: ctor
       0x1414BB840: HandleEnterContentInfoPacket  # static
   Client::UI::PopupMenu:
     vtbls:
@@ -10549,6 +12040,8 @@ classes:
     vtbls:
       - ea: 0x141B3D020
         base: Client::Game::Event::Director
+    funcs:
+      0x1412E73E0: ctor
   Client::Game::Fate::FateContext:
     vtbls:
       - ea: 0x141B3D948
