@@ -5011,6 +5011,12 @@ classes:
       0x14068C1D0: ctor
       0x14068C3C0: Finalize
       0x14068E780: IsHotbarEmpty
+      0x14068CBA0: SetAndSaveSlot
+      0x14068C7B0: SetAndSaveFirstAvailableNormalSlot
+      0x14068C860: SetAndSaveFirstAvailableCrossSlot
+      0x14068C910: SetAndSaveFirstGloballyAvailableNormalSlot
+      0x14068C9C0: SetAndSaveFirstGloballyAvailableCrossSlot
+      0x14068CCD0: SetSlotToMacroAndSave
       0x14068CD40: ClearSavedSlotById  # (this, hotbarId, slotId) -> void
       0x140691D50: ExecuteSlot
       0x14068CE30: ExecuteSlotById
@@ -5039,12 +5045,25 @@ classes:
       0x140690F00: IsCrossHotbarLocked
       0x1406916B0: IsDutyAction1Usable
       0x1406916D0: SetDutyActionsPresent             # (this, isPresent) -> void
+      0x1406916E0: IsAnyDutyActionActive
+      0x140691740: SetDutyActionActive
+      0x140691770: GetDutyActionCount
       0x1406917A0: GetDutyActionId                   # (this, slotId) -> uint  - identical to ActionManager's version.
       0x1406917C0: GetDutyActionIdForGeneralActionId # (this, generalActionId) -> uint
       0x1406917F0: SetDutyActionSlot                 # (this, slotId, actionId)
       0x140691900: GetDutyActionSlot                 # (this, slotId) -> DutyActionSlot*
       0x140691960: ExecuteDutyActionSlot             # (this, slotId)
       0x140691A10: IsGeneralActionDutyAction         # (this, generalActionId) -> bool  - utility function? 
+      0x14068E060: GrandCompanyUpdateTask            # (this) -> void
+      0x14068E2E0: PvPStateUpdateTask                # (this) -> void
+      0x14068E400: ToggleWXHBRightFocusFlag
+      0x14068E460: ToggleWXHBLeftFocusFlag
+      0x140691030: SetStandardHotbarShareState
+      0x140691090: SetCrossHotbarShareState
+      0x140692880: DeleteAllHotbars                 # (this, performReset) -> void?
+      0x14068DDE0: PerformMateriaActionMigration
+      0x14068A890: IsActionHighlighted               # (this, commandType, commandId) -> bool
+      0x140692F00: LoadSavedHotbar                   # (this, groupId, hotbarId)
       0x140693BB0: GetInstance  # static
   Client::UI::Misc::RaptureHotbarModule::HotbarSlot:
     funcs:
@@ -5791,7 +5810,7 @@ classes:
     vtbls:
       - ea: 0x141A37A98
         base: Client::UI::Shell::RaptureShellCommandInterface
-  Client::UI::Shell::ShellCommandUnk1416EE8C0:
+  Client::UI::Shell::ShellCommandGraphicPresets:
     vtbls:
       - ea: 0x141A37AB0
         base: Client::UI::Shell::RaptureShellCommandInterface
@@ -5819,11 +5838,11 @@ classes:
     vtbls:
       - ea: 0x141A37B40
         base: Client::UI::Shell::RaptureShellCommandInterface
-  Client::UI::Shell::ShellCommandUnk1416EE968:
+  Client::UI::Shell::ShellCommandEventReset:
     vtbls:
       - ea: 0x141A37B58
         base: Client::UI::Shell::RaptureShellCommandInterface
-  Client::UI::Shell::ShellCommandUnk1416EE990:
+  Client::UI::Shell::ShellCommandDoubleSlashSetGearset:
     vtbls:
       - ea: 0x141A37B80
         base: Client::UI::Shell::RaptureShellCommandInterface
@@ -5881,8 +5900,13 @@ classes:
         base: Client::UI::Misc::RaptureHotbarModule::ClearCallback
     vfuncs:
       0: dtor
+      1: ResetAllHotbars  # (self, RaptureHotbarModule*) -> bool
+      2: ResetPvEHotbarsForClass  # (self, RaptureHotbarModule*, int) -> bool
+      3: ResetPvPHotbarsForClass  # (self, RaptureHotbarModule*, uint) -> bool
     funcs:
       0x140998C50: CancelCast
+      0x140936370: ResetPvEHotbarsForClassAtLevel # (self, int, uint) -> void
+      0x1409369E0: ResetPvPHotbarsForClassInner  # (self, uint) -> void
   Client::Game::UI::MarkingController:
     instances:
       - ea: 0x14220AD90
