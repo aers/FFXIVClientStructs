@@ -17,36 +17,35 @@ public unsafe partial struct Character {
     [FieldOffset(0x0)] public GameObject GameObject;
     [FieldOffset(0x1A0)] public CharacterData CharacterData;
 
+    [Obsolete("Use MovementBytes so that the name can be used for a struct in the future.")]
     [FieldOffset(0x210)] public fixed byte Movement[0x420];
+    [FieldOffset(0x210)] public fixed byte MovementBytes[0x420];
     [FieldOffset(0x630)] public EmoteController EmoteController;
-
-
     [FieldOffset(0x670)] public MountContainer Mount;
     [FieldOffset(0x6D8)] public CompanionContainer Companion;
-
     [FieldOffset(0x6F8)] public DrawDataContainer DrawData;
     [FieldOffset(0x8A0)] public OrnamentContainer Ornament;
     [FieldOffset(0x918)] public ReaperShroudContainer ReaperShroud;
+
     [FieldOffset(0x970)] public ActionTimelineManager ActionTimelineManager;
-    /// <summary>
-    /// The current target for this character's gaze. Can be set independently of soft or hard targets, and may be set
-    /// by NPCs or minions. For players, an action cast will generally target the LookTarget (which generally will be
-    /// the soft target if set, then the hard target).
-    /// </summary>
-    /// <remarks>
-    /// Unlike other GameObjectIDs, this one appears to be set to fully 0 if the player is not looking at anything.
-    /// </remarks>
+    [FieldOffset(0xCB0)] public GazeContainer Gaze;
+
+    /// <inheritdoc cref="GazeController.Gaze.TargetInformation.TargetId"/>
+    [Obsolete("Use Character.Gaze.Controller.GazesSpan[0].TargetInfo.TargetId")]
     [FieldOffset(0xCB0 + 0x50)] public GameObjectID LookTargetId;
 
     [FieldOffset(0x12F0)] public VfxContainer Vfx;
 
-    [FieldOffset(0x1410)] public byte StatusFlags4;
+    [FieldOffset(0x13E0 + 0x30)] public byte StatusFlags4;
+
     [FieldOffset(0x1418)] public CharacterSetup CharacterSetup;
 
     [FieldOffset(0x1920)] public Balloon Balloon;
 
     [FieldOffset(0x1B28)] public float Alpha;
+
     [FieldOffset(0x1B30)] public Companion* CompanionObject; // minion
+
     [FieldOffset(0x1B40)] public fixed byte FreeCompanyTag[6];
 
     /// <summary>
@@ -124,10 +123,7 @@ public unsafe partial struct Character {
     [MemberFunction("E8 ?? ?? ?? ?? B8 ?? ?? ?? ?? 4C 3B F0")]
     public partial void SetSoftTargetId(GameObjectID id);
 
-    public bool IsMounted() {
-        // inlined as of 6.5
-        return this.Mount.MountId != 0;
-    }
+    public bool IsMounted() => Mount.MountId != 0;
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4F ?? E8 ?? ?? ?? ?? 48 8B 4C 24 ??")]
     public partial void SetMode(CharacterModes mode, byte modeParam);
@@ -280,6 +276,36 @@ public unsafe partial struct Character {
             ShroudAttacking = 0x01, // On when the character is using a skill from reaper shroud, can be on for a short time without shroud itself being on.
             ShroudActive = 0x02, // On as long as the transformation is enabled.
             ShroudLoading = 0x0100, // On at the start before the VFX is loaded.
+        }
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x620)]
+    public struct GazeContainer {
+        [FieldOffset(0x00)] public void** ContainerVTable;
+        [FieldOffset(0x08)] public BattleChara* OwnerObject;
+        [FieldOffset(0x10)] public GazeController Controller;
+        /// <summary>
+        /// When using /facecamera, this is the rotation of the camera.<br/>
+        /// When editing banner and the character is following the camera (either with head or eyes), this field holds the position of the camera.
+        /// </summary>
+        [FieldOffset(0x5F0)] public Vector3 CameraVector; // maybe Vector4 with unused W field?
+
+        [FieldOffset(0x600)] public byte FaceCameraFlag; // looks like a bitfield but only with one bit used
+
+        [FieldOffset(0x604)] public Vector2 BannerHeadDirection;
+        [FieldOffset(0x60C)] public Vector2 BannerEyeDirection;
+        [FieldOffset(0x614)] public BannerCameraFollowFlags BannerCameraFollowFlag;
+
+        public bool IsFacingCamera {
+            get => (FaceCameraFlag & 0x1) == 0x1;
+            set => FaceCameraFlag |= 0x1;
+        }
+
+        [Flags]
+        public enum BannerCameraFollowFlags : byte {
+            None = 0,
+            Head = 1,
+            Eyes = 2,
         }
     }
 
