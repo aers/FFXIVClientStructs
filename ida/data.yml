@@ -7581,7 +7581,7 @@ classes:
       - ea: 0x141A5F890
         base: Client::Game::Event::LeveDirector
     funcs:
-      0x1408D3CE0: CVector
+      0x1408D3CE0: ctor
   Client::Game::Gimmick::GimmickBill:
     vtbls:
       - ea: 0x141A5C558
