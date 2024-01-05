@@ -7,6 +7,7 @@ public unsafe partial struct Control {
     [FieldOffset(0x00)] public CameraManager CameraManager;
     [FieldOffset(0x180)] public TargetSystem TargetSystem;
 
+    [FieldOffset(0x5A7B)] public bool IsWalking;
     [FieldOffset(0x5AE8)] public uint LocalPlayerObjectId;
     [FieldOffset(0x5AF0)] public BattleChara* LocalPlayer;
 

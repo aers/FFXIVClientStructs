@@ -29,26 +29,6 @@ public unsafe partial struct EventFramework {
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B D0 48 85 C0 74 ?? 0F B6 88")]
     public partial PublicContentDirector* GetPublicContentDirector();
 
-    public InstanceContentDeepDungeon* GetInstanceContentDeepDungeon() {
-        var director = (EventHandler*)GetContentDirector();
-        if (director == null || director->Info.EventId.Type != EventHandlerType.InstanceContentDirector)
-            return null;
-        var instanceDirector = (InstanceContentDirector*)director;
-        if (instanceDirector->InstanceContentType != InstanceContentType.DeepDungeon)
-            return null;
-        return (InstanceContentDeepDungeon*)director;
-    }
-
-    public InstanceContentOceanFishing* GetInstanceContentOceanFishing() {
-        var director = (EventHandler*)GetContentDirector();
-        if (director == null || director->Info.EventId.Type != EventHandlerType.InstanceContentDirector)
-            return null;
-        var instanceDirector = (InstanceContentDirector*)director;
-        if (instanceDirector->InstanceContentType != InstanceContentType.OceanFishing)
-            return null;
-        return (InstanceContentOceanFishing*)director;
-    }
-
     [MemberFunction("E8 ?? ?? ?? ?? 32 C9 0F B6 D9")]
     public partial EventHandler* GetEventHandlerById(uint id);
     public EventHandler* GetEventHandlerById(ushort id) => GetEventHandlerById((uint)(id | 0x10000));
@@ -58,4 +38,17 @@ public unsafe partial struct EventFramework {
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 18 48 8B 4F 10")]
     public static partial bool CanLeaveCurrentContent();
+
+    private T* GetInstanceContentDirector<T>(InstanceContentType instanceContentType) where T : unmanaged {
+        var instanceDirector = GetInstanceContentDirector();
+        if (instanceDirector == null || instanceDirector->InstanceContentType != instanceContentType)
+            return null;
+        return (T*)instanceDirector;
+    }
+
+    public InstanceContentDeepDungeon* GetInstanceContentDeepDungeon()
+        => GetInstanceContentDirector<InstanceContentDeepDungeon>(InstanceContentType.DeepDungeon);
+
+    public InstanceContentOceanFishing* GetInstanceContentOceanFishing()
+        => GetInstanceContentDirector<InstanceContentOceanFishing>(InstanceContentType.OceanFishing);
 }

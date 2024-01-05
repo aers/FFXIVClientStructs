@@ -61,7 +61,8 @@ public enum AgentId : uint {
     FishingNote = 28,
     FishGuide = 29,
     FishRecord = 30,
-    Journal = 32,
+    [Obsolete("Use QuestJournal")] Journal = 32,
+    QuestJournal = 32,
     ActionMenu = 33,
     Marker = 34,
     Trade = 35,
@@ -431,6 +432,7 @@ public enum AgentId : uint {
     MJIEntrance = 418,
     MJISettings = 419,
     MJIHousingMenu = 420, // new in 6.40
+    MJINekomimiRequest = 422, // favors
 
     ArchiveItem = 423,
 

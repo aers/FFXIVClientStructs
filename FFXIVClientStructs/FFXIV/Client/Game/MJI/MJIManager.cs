@@ -32,6 +32,9 @@ public unsafe partial struct MJIManager {
 
     [FieldOffset(0x128)] public MJIPastureHandler* PastureHandler;
     [FieldOffset(0x130)] public MJIFarmState* FarmState;
+    [FieldOffset(0x140)] public MJIGranariesState* GranariesState;
+
+    [FieldOffset(0x168)] public MJIFavorState* FavorState;
 
     /// <summary>
     /// A struct representing landmark placements on the Island Sanctuary. Each index represents a specific landmark
@@ -80,21 +83,28 @@ public unsafe partial struct MJIManager {
     [FixedSizeArray<MJIFarmPasturePlacement>(3)]
     [FieldOffset(0x2B8)] public fixed byte PasturePlacements[MJIFarmPasturePlacement.Size * 3];
 
+    [FieldOffset(0x2E0)] public ushort RequestDemandCraftId;
+    [FieldOffset(0x2E4)] public int RequestDemandType; // 0 = none, 1 = everything, 2 = specific object
+    [FieldOffset(0x2E8)] public bool DemandDirty; // if true, fields below (popularity and supply/demand are unset)
+
     /// <summary>
     /// A reference to the current set of popularity scores given to craftworks on the player's island. The actual
     /// popularity scores can be pulled from the MJICraftworksPopularity sheet using this value as a Row ID.
+    /// Valid only if DemandDirty == false.
     /// </summary>
     [FieldOffset(0x2F0)] public byte CurrentPopularity;
 
     /// <summary>
     /// A reference to the next cycle's popularity scores (called "predicted demand" in-game). Follows the same rules
     /// as <see cref="CurrentPopularity" />.
+    /// Valid only if DemandDirty == false.
     /// </summary>
     [FieldOffset(0x2F1)] public byte NextPopularity;
 
     /// <summary>
     /// An array of bytes representing the current supply and demand shift for each craftwork that the player can
     /// create. Information for a specific item can be retrieved by querying the RowID for the item under inspection.
+    /// Valid only if DemandDirty == false.
     /// <br /><br />
     /// The current supply value is stored in the upper half of each byte, while the current demand shift is stored in
     /// the lower half.
@@ -195,6 +205,28 @@ public unsafe partial struct MJIManager {
     /// <returns></returns>
     [MemberFunction("E8 ?? ?? ?? ?? 45 33 F6 0F B6 D0")]
     public partial byte GetFarmSlotCount();
+
+    /// <summary>
+    /// Request updated popularity and demand data.
+    /// </summary>
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B CD E8 ?? ?? ?? ?? 32 C0")]
+    public partial void RequestDemandFull();
+
+    /// <summary>
+    /// Schedule specified item to be crafted in a given workshop at a given time.
+    /// </summary>
+    /// <param name="craftObjectId">MJICraftworksObject row id for object to be crafted.</param>
+    /// <param name="startingHour">(slot + 17) % 24, where slot 0 is first hour of the cycle.</param>
+    /// <param name="cycle">0-13 range, this/next week in order.</param>
+    /// <param name="workshop">0-3 range.</param>
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 46 28 41 8D 4E FF")]
+    public partial void ScheduleCraft(ushort craftObjectId, byte startingHour, byte cycle, byte workshop);
+
+    /// <summary>
+    /// Request updated favor data.
+    /// </summary>
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 47 28 C7 00")]
+    public partial void RequestFavorData();
 
     /// <summary>
     /// Check if a specific MJIKeyItem is unlocked by the player.

@@ -4,8 +4,10 @@ globals:
   0x1419BD160: g_UIColorTable
   0x141A05970: g_HUDScaleTable
   0x141FE5380: g_ClientInstanceLimit
-  0x142171820: g_InputManager
-  0x142171848: g_InputManager_MouseButtonHoldState
+  0x142171848: g_Client::Game::Control::InputManager_MouseButtonHoldState
+  0x142187be0: g_StackCookie
+  0x142187be8: g_InverseStackCookie
+  0x1421a54a0: g_OSVersion
   0x1421AC368: g_CurrentCharaSelectCharacter # Client::Game::Character::Character*
   0x1421AC540: g_CharaSelectCharacterList # see Client::UI::Agent::AgentLobby::CharaSelectCharacterList
   0x1421BE480: g_RenderSkeletonLinkedListStart
@@ -73,6 +75,7 @@ functions:
   0x1400622D0: MemoryManager_GetSoundSpace_2
   0x140060AB0: MemoryManager_SpaceAlloc
   0x1400654E0: IsMacClient
+  0x1400951b0: CheckOsTypeAndVersion
   0x1400A6BD0: GetCurrentUnixTimestamp # in seconds
   0x1400A6D00: Client::UI::PlaySoundEffect # this is a static function in the UI namespace, arg1 is the SE
   0x1400A8990: Client::UI::GetUIColor # (idx, &color, &edgeColor)
@@ -86,10 +89,6 @@ functions:
   0x1404999F0: PrepareColorSet
   0x140499CC0: ReadStainingTemplate
   0x1404E93A0: GetAvailablePoses
-  0x1404EDE20: Client::Game::Control::InputManager_GetInputStatus
-  0x140505B30: Client::System::Input::InputData_IsInputIDKeyPress
-  0x140505C40: Client::System::Input::InputData_IsInputIDClicked
-  0x140506580: Client::System::Input::InputData_IsMouseCombinationDragged
   0x14050FE70: RemoveFromList # (AtkEvent**, AtkEvent*) Finds and removes param2 from the param1 list
   0x140539810: GetScaleListEntryFromScale
   0x140548040: GetScaleForListOption
@@ -111,7 +110,6 @@ functions:
   0x1413064B0: Client::Graphics::Kernel::CreateShader # static function
   0x141311460: FilterCustomizeData # ensures NPC specific faces etc aren't on players
   0x1413119B0: NormalizeCustomizeData
-  0x14134BED0: Client::Game::Control::InputManager::IsAutoRunning # static function, might belong in a different class.
   0x1413B7110: lua_close
   0x1413B7190: lua_newstate
   0x1413B7490: lua_index2addr
@@ -186,7 +184,7 @@ functions:
   0x1413B9B80: lua_resume
   0x1413B9CD0: lua_yield
   0x1415374D0: lua_gethook
-  0x1415374E0 : lua_gethookcount
+  0x1415374E0: lua_gethookcount
   0x1415374F0: lua_gethookmask
   0x1415376E0: lua_sethook
   0x141537710: lua_setlocal
@@ -236,32 +234,33 @@ functions:
   0x141545CD0: luaopen_math
   0x141546D60: luaopen_debug
   0x141547850: luaopen_package
+  0x1415f1A90: std::vector.dtor
   0x1415FF170: crc
   0x141659E24: ThrowException
   0x1416806E4: FreeMemory
   0x1400557E0: FreeMemory_2 # nullsub, gets called together with some AllocatorManager vfunc
   0x141688640: _purecall # Ghidra does not have a notation for pure virtual calls
+  0x14168867c: _set_purecall_handler
+  0x1416886d0: MemCpy
   0x141688D10: MemSet
   0x1400609E0: MemAlloc
   0x140209A10: MatrixMultiply
   0x140206790: MatrixMultiply2
   0x1402054F0: MatrixVectorMultiply
-  0x140206A90: MatrixInverse
-  0x1402070B0: MatrixInverseMaybe
-  0x140208A60: MakeProjectionMatrix
-  0x140208E30: MakeProjectionMatrix2
   0x14036C930: SubmitConstantBufferUpdate
   0x1400AA930: IsLocalPlayerPartyLeader
   0x1400AA840: IsLocalPlayerInParty
   0x1400AA990: IsPartyMemberByNameOrContentId # (name, contentId)
   0x1400AAAC0: GetPartyMemberClassJobByContentId
-  0x140633110: WorldToViewportPoint
   0x140748FF0: ObjectIdToPlayerObjectId # returns invalid id if objectid is not a player
   0x14076A8E0: ProcessActorControlPacket
   0x14071C480: CreateDummyItemSlot
   0x140B1E780: IsInMordionGaol # if this returns true, i'm sorry for you
   0x140B71F50: WorldToScreenPoint
   0x14144B630: GetBannerConditionUnlockState
+  0x14145D450: GetInstanceContentCrystallineConflictDirector
+  0x1414ADCE0: GetInstanceContentMahjongDirector
+  0x1414B1440: GetPublicContentDirectorByType # maybe type? could be static id. idk
   0x14170DBC0: OodleNew # oodle code starts here
   0x14170DC30: OodleDelete
   0x14170DC60: rrPrintf_v1
@@ -285,6 +284,24 @@ functions:
   0x14171C9F0: rrArithEncodeInit
   0x14171EF90: rrRandStateMod
   0x14171F1A0: rrRandStateSeed
+  0x1404C9EC0: IntersectSweptSphereTriangleBroad
+  0x1404CC9A0: IntersectRayTriangle
+  0x1404CCC00: IntersectSweptSphereTriangle
+  0x1419245D0: IntersectRayAABB
+  0x1419246D0: IntersectRayAABBWithPoint
+  0x141924BD0: IntersectRayTriangleWithNormal
+  0x1419255A0: PointInCylinder
+  0x1419257D0: IntersectRaySphere
+  0x1419258B0: IntersectRaySphere2
+  0x141925FD0: IntersectRayCylinder
+  0x1419266A0: IntersectSweptSphereLineSegment
+  0x14192CFA0: GetTrianglePlaneNormalY
+  0x14192D780: IntersectCallbackNonHoriz
+  0x14192D7F0: IntersectCallbackMoreOrthoNonHoriz
+  0x14192D8D0: IntersectCallbackAny
+  0x14192D900: IntersectCallbackMoreOrtho
+  0x14192E6E0: CollisionAlloc
+  0x14192E720: CollisionFree
 
 classes:
   Client::Game::UI::RecipeNote:
@@ -314,16 +331,43 @@ classes:
       0x1404DCDE0: IsInGPose  # (probably) static
       0x1404DCE20: IsInIdleCam  # static
       0x1404DD010: IsInInstanceArea
+      0x1404DD150: GetTourismDirector
       0x1409312D0: IsInPvPInstance
       0x140931390: IsInPvPArea
       0x1400A85D0: IsInSanctuary # static, more likely Client::UI::IsInSanctuary but it fits here just fine
+  Client::Game::Control::InputManager:
+    instances:
+      - ea: 0x142171820
+        pointer: False
+    funcs:
+      0x1404EDBD0: Update
+      0x1404EDE20: GetInputStatus
+      0x14134BED0: IsAutoRunning # static function, might belong in a different class.
+  Client::Game::Control::EmoteManager:
+    vtbls:
+      - ea: 0x141B5E5C8
+        base: Common::Configuration::ConfigBase::ChangeEventInterface
+    funcs:
+      0x1414214E0: ctor
+      0x141421520: Initialize
+      0x141421560: Terminate
+      0x141421580: ExecuteEmote # (emoteId, targetInfo)
+      0x141421B70: CanExecuteEmote # (emoteId)
+      0x1414222B0: Update
   Application::Network::NetworkModule:
     funcs:
       0x1415E9600: ctor
       0x1415EAB40: Initialize
+      0x1415ea320: GetCharacterData
+      0x1415EB380: dtor
   Application::Network::LobbyClient::LobbyRequestCallback:
     vtbls:
       - ea: 0x141C980F8
+    vfuncs:
+      0: dtor
+    funcs:
+      0x14023CF50: RequestCharacterData
+  Client::Network::LobbyClient::LobbyCharacterRequestCallback:
     funcs:
       0x141618340: ctor
   Client::Game::StatusManager:
@@ -340,10 +384,12 @@ classes:
     vtbls:
       - ea: 0x141A03218
     funcs:
+      0x1404DDAB0: ctor
       0x1404DDC40: PlayTimeline
       0x1404DE200: GetSlotTimeline
       0x1404DE5F0: SetSlotSpeed
       0x1404DE900: GetSlotSpeed
+      0x1404DEB40: GetCurrentActionTimelineTimestamp
       0x1404DF520: SetSlotTimeline
   Client::Game::Character::CharacterData:
     vtbls:
@@ -358,12 +404,15 @@ classes:
       0x141322DB0: SetSlotSpeed
       0x141322F10: GetHeightAdjustActionTimelineRowId
       0x1413239D0: SetLipsOverrideTimeline
+      0x141325430: ClearBannerData
+      0x1413258E0: GetCurrentBannerTimelineTimestamp
   Client::Game::RetainerManager:
     instances:
       - ea: 0x142221DF0
         pointer: False
     funcs:
       0x140D7ED30: Initialize
+      0x140D7EE80: Update
       0x140D7F4A0: GetRetainerBySortedIndex
       0x140D7F4E0: GetRetainerByHiredIndex
       0x140D7F540: GetLastSelectedRetainer
@@ -390,6 +439,8 @@ classes:
   Client::Graphics::RenderObjectList:
   Client::Graphics::Singleton:
   Client::System::Common::NonCopyable:
+    vfuncs:
+      0: dtor
   Client::System::Crypt::CryptInterface:
   Client::System::Input::InputData::InputCodeModifiedInterface:
   Client::System::Input::SoftKeyboardDeviceInterface::SoftKeyboardInputInterface:
@@ -459,6 +510,8 @@ classes:
   Application::Network::WorkDefinitions::Base:
     vtbls:
       - ea: 0x1419DD730
+    vfuncs:
+      0: Dispose
   Application::Network::WorkDefinitions::QuestWork:
     vtbls:
       - ea: 0x141A1FB88
@@ -508,6 +561,8 @@ classes:
         pointer: False
     funcs:
       0x1407BD610: Update
+      0x1407BDA20: UpdateMountAndCompanionMovement # maybe?
+      0x1407BDC70: UpdateGazes
       0x1407BDDF0: DeleteAllModels
       0x1407BDF80: DeleteAllObjects  # IMPORTANT:: DONT EVER CALL THIS FOR REAL OKAY
       0x1407BCFC0: GetFilteredObjectById
@@ -535,6 +590,8 @@ classes:
         pointer: False
     funcs:
       0x1407BBE30: Initialize
+      0x1407BC030: Update
+      0x1407BC090: UpdateCompanions
       0x1407BC100: CreateCharacterAtFirstEmptyIndex
       0x1407BC150: CreateCharacterAtIndex
       0x1407BC2B0: DeleteCharacterAtIndex
@@ -636,6 +693,7 @@ classes:
       0x140745AD0: dtor
       0x140745B40: HasInstance
       0x140745B60: GetInstance
+      0x140745B70: Update
       0x140745C50: Clear
       0x140745D10: RequestPrismBox
       0x1407460A0: RestorePrismBoxItem
@@ -646,6 +704,7 @@ classes:
       - ea: 0x1421EDC40
         pointer: False
     funcs:
+      0x14071E100: Update
       0x14071ED30: GetInventoryContainer  # (this, containerId)
       0x14071ED90: GetInventorySlot  # (this, containerId, slotId)
       0x14071FF00: MoveItemSlot # (srcContainer, srcSlot, dstContainer, dstSlot, 1)
@@ -685,12 +744,16 @@ classes:
       0x1408A28A0: GetInstance
       0x1408A2A50: GetMemberCount
       0x1408A2A70: GetMember
+      0x1409329A0: Update
+      0x1408A28B0: UpdateNotifications
   Client::Game::Housing::HousingManager:
     instances:
       - ea: 0x142215388
         pointer: True
     funcs:
+      0x140B22C20: HasInstance
       0x140B22C40: GetInstance
+      0x140B27AC0: Update
       0x140B25F10: IsOutside
       0x140B25F20: IsInside
       0x140B25F30: IsInWorkshop
@@ -725,7 +788,7 @@ classes:
   InventoryContainer:
     funcs:
       0x14071D640: GetInventorySlot  # (this, slotIndex)
-  Client::Game::MJI::MJIManager:  # Island Sanctuary
+  Client::Game::MJI::MJIManager: # Island Sanctuary
     instances:
       - ea: 0x142215520
         pointer: True
@@ -734,24 +797,64 @@ classes:
       0x140B862D0: Destroy    # static
       0x140B86310: GetSingleton  # static
       0x140B86320: Load   # loads in a ton of sub-structs and other info.
-      0x140B898A0: ctor
-      0x140B89B40: Finalize
-      0x140B88450: LoadDemandResearchPacket
-      0x140B889D0: IsRecipeUnlocked # (this, recipeId)
-      0x140B88A00: IsPouchItemLocked # (this, pouchItemId)
+      0x140B867A0: Update
       0x140B86C90: IsFunctionUnlocked # (this, functionId)
+      0x140B86D20: RegisterListener
+      0x140B86D50: UnregisterListener
       0x140B86ED0: HandleActorControlPacket
       0x140B87A00: HandleInboundPacket
-      0x140B88E80: GetVisibleMinimapIcons
+      0x140B87E70: HandleSchedulePacket
+      0x140B88100: SetDisplayedCycle
+      0x140B883A0: RequestDemandFull
+      0x140B883F0: RequestDemandSpecific
+      0x140B88450: LoadDemandResearchPacket
+      0x140B88590: ScheduleCraft
+      0x140B88610: CancelScheduledCraft
+      0x140B88650: SetRestCycles
+      0x140B889D0: IsRecipeUnlocked # (this, recipeId)
+      0x140B88A00: IsPouchItemLocked # (this, pouchItemId)
       0x140B88A10: IsItemLocked
+      0x140B88AF0: GetPastureExpectedCollectedLeavings
+      0x140B88B10: GetPastureCollectLeavingsWillOvercap
+      0x140B88B30: GetPastureNoLeavingsToCollect
+      0x140B88B90: GetPastureAnimals
+      0x140B88BB0: GetPastureCaptureState
       0x140B88BD0: GetPastureSlotCount
       0x140B88D60: GetFarmSlotCount
+      0x140B88E40: IsPastureEligibleForCare
+      0x140B88E50: IsFarmEligibleForCare
+      0x140B88E80: GetVisibleMinimapIcons
+      0x140B890F0: GetFavorCraftObjectId
+      0x140B89110: GetFavorNumDelivered
+      0x140B89130: GetFavorDeliveryComplete
+      0x140B89150: GetFavorIsBonus
+      0x140B89170: GetFavorNumScheduled
+      0x140B89190: GetFavorNumRequired
+      0x140B891B0: GetFavorReward
+      0x140B891D0: GetFavorFullBonus
+      0x140B891F0: RequestFavorData
+      0x140B89210: IsFavorDataAvailable
+      0x140B898A0: ctor
+      0x140B89B40: Finalize
   Client::Game::MJI::IslandState:
     funcs:
       0x140B8C830: ctor
   Client::Game::MJI::MJIPastureHandler:
     funcs:
       0x1414E23B0: ctor
+      0x1414E3710: DismissCaretaker
+      0x1414E3790: CollectLeavingsAll
+      0x1414E3810: IsValidAnimal
+      0x1414E3880: OpenUI
+      0x1414E39D0: CalculateExpectedCollectedLeavings
+      0x1414E3A80: CollectAllLeavingsWillOvercap
+      0x1414E3B30: NoLeavingsToCollect
+      0x1414E3CE0: UpdateAvailableLeavings
+      0x1414E4030: EntrustAnimal
+      0x1414E4260: CollectLeavingsSingle
+      0x1414E4300: CollectLeavingsAndReleaseAnimal
+      0x1414E4440: ReleaseAnimal
+      0x1414E4520: ChangeAnimalNickname
       0x1414E4AF0: GetCurrentRoamingMinionCount
       0x1414E4C60: SetMinionPlaceStatus  # (this, minionId, isPlaced)
       0x1414E4710: ExecuteReleaseMinion  # (this, minionId, areaId)
@@ -759,6 +862,49 @@ classes:
   Client::Game::MJI::MJIFarmState:
     funcs:
       0x1414DF100: ctor
+      0x1414DF1A0: dtor
+      0x1414DF270: InitSeedItemIds
+      0x1414DF2D0: Update
+      0x1414DF3A0: CalculateCareCost
+      0x1414DF400: GetSlotData
+      0x1414DF4D0: Entrust
+      0x1414DF520: Dismiss
+      0x1414DF570: CollectSingle
+      0x1414DF5C0: CollectSingleAndDismiss
+      0x1414DF610: UpdateExpectedTotalYield
+      0x1414DF6C0: CollectAll
+      0x1414DF900: UpdatePendingSlot
+      0x1414E02C0: InitCropLayout
+      0x1414E06A0: UpdateCropLayout
+  Client::Game::MJI::MJIFavorState:
+    funcs:
+      0x1414EB3C0: ctor
+      0x1414EB440: dtor
+      0x1414EB4A0: GetNumItemsDelivered
+      0x1414EB550: GetNumItemsRequired
+      0x1414EB600: GetItemReward
+      0x1414EB6C0: RequestData
+      0x1414EB700: ReceiveData
+      0x1414EB7C0: GetRequestData
+  Client::Game::MJI::MJIGranariesState:
+    funcs:
+      0x1414DEC20: ctor
+      0x1414DEC90: dtor
+      0x1414DECA0: CollectResources
+      0x1414DED30: SelectExpeditionStart
+      0x1414DEDC0: SelectExpeditionCommit
+      0x1414DEDF0: InitFromPacket
+      0x1414DEEA0: RefreshAgent
+      0x1414DEEC0: NotifyExpeditionUpdated
+      0x1414DEEE0: OpenUI
+      0x1414DEF00: HasAnyResources
+      0x1414DEFF0: GetActiveExpeditionId
+      0x1414DF010: GetRemainingDays
+      0x1414DF030: GetRareResourcePouchId
+      0x1414DF050: GetRareResourceCount
+      0x1414DF070: GetNormalResourcePouchIds
+      0x1414DF0B0: GetNormalResourceCounts
+      0x1414DF0F0: GetFinishTime
   Client::System::String::Utf8String:
     funcs:
       0x140059B20: ctor  # empty string ctor
@@ -1195,9 +1341,18 @@ classes:
         base: Client::Game::Gauge::JobGauge
   Common::Configuration::ConfigEntry:
     funcs:
+      0x140067D40: SetEmpty
+      0x140067E00: ctor_copy
+      0x140067F60: ctor_empty #type 1
+      0x140067FF0: ctor_int #type 2
+      0x1400680A0: ctor_float #type 3
+      0x140068160: ctor_str #type 4
+      0x140068280: CopyFrom
+      0x1400683E0: IsValueEqual
       0x140068440: SetValueUInt
       0x1400684E0: SetValueFloat
-      0x140069840: SetValueString # Destroys Utf8String
+      0x140068560: SetValueString # Destroys Utf8String
+      0x140068690: SetToDefault
   Common::Configuration::ConfigBase:
     vtbls:
       - ea: 0x1419B0108
@@ -1205,6 +1360,7 @@ classes:
     funcs:
       0x140069200: ctor
       0x140069550: GetConfigOption
+      0x140069500: SetConfigOption
   Common::Configuration::UIConfig:
     vtbls:
       - ea: 0x1419B0128
@@ -1294,6 +1450,7 @@ classes:
       0x140093B20: GetNetworkModuleProxy
       0x140093B40: GetUIModule
       0x140093B60: GetUIClipboard
+      0x140094620: InitNetworking
       0x140094A20: TaskBegin
       0x140094B60: TaskDraw2DBegin
       0x140094BA0: TaskUpdateInputDevice
@@ -1363,18 +1520,516 @@ classes:
   Common::Component::Environment::DebugInterface:
     vtbls:
       - ea: 0x141A015D0
-  Common::Component::BGCollision::BGCollisionModule:
+  Common::Component::BGCollision::IResourceManager:
+    vtbls:
+      - ea: 0x141A015F8
+        base: Common::Component::Environment::AllocatorInterface
+      - ea: 0x141A01638
+        base: Common::Component::Environment::ResourceInterface
+      - ea: 0x141A01650
+        base: Common::Component::Environment::DebugInterface
+    vfuncs:
+      4: StartRaycastVisit
+      5: EndVisit
+      6: EndRaycast
+  Common::Component::BGCollision::ResourceManager:
+    vtbls:
+      - ea: 0x141A01810
+        base: Common::Component::BGCollision::IResourceManager
+      - ea: 0x141A01858
+        base: Common::Component::Environment::ResourceInterface # indirect base, offset 8
+      - ea: 0x141A01870
+        base: Common::Component::Environment::DebugInterface # indirect base, offset 0x10
+      - ea: 0x141A01898
+        base: Client::System::Resource::ResourceEventListener
     funcs:
-      0x1404C7540: ctor
-      0x1404C7660: Initialize
-      0x1404C7B00: Raycast
-      0x1404C9CD0: TaskCollisionUpdate
-      0x1404C7420: TaskBGCollisionModule_OnEndOfFrame
-      0x1413330E0: Raycast1 # not sure where else to put those two for now
-      0x141333130: Raycast2
+      0x1404C8780: ctor
+      0x1404C8920: dtor
+  Common::Component::BGCollision::Resource:
+    vtbls:
+      - ea: 0x141A017A0
+      - ea: 0x141A01768
+        base: Common::Component::Environment::ResourceInterface::ResourceHandleInterface
+    vfuncs:
+      0: dtor
+      1: GetPath
+      2: LoadSucceeded
+      3: LoadFailed
+      4: GetData
+      5: GetSize
   Common::Component::BGCollision::Object:
     vtbls:
       - ea: 0x141A01678
+    vfuncs:
+      0: dtor
+  Common::Component::BGCollision::NodeLink:
+    vtbls:
+      - ea: 0x141D7A0B0
+    vfuncs:
+      0: dtor
+  Common::Component::BGCollision::Node:
+    vtbls:
+      - ea: 0x141D7A0B8
+        base: Common::Component::BGCollision::Object
+      - ea: 0x141D7A0C0
+        base: Common::Component::BGCollision::NodeLink
+  Common::Component::BGCollision::IMesh:
+    vtbls:
+      - ea: 0x141A01680
+    vfuncs:
+      0: dtor
+      1: Clone
+  Common::Component::BGCollision::Mesh:
+    vtbls:
+      - ea: 0x141A01690
+        base: Common::Component::BGCollision::Object
+      - ea: 0x141A016E8
+        base: Common::Component::BGCollision::IMesh
+    vfuncs:
+      2: GetBoundsMin
+      3: GetBoundsMax
+      4: Intersect
+      5: GetNumPrimitives
+      6: GetNumVertices
+      7: GatherVertices
+      8: GetPrimitives
+      9: GetAABB
+      10: Visit
+  Common::Component::BGCollision::MeshSimple:
+    funcs:
+      0x141928A70: ctor
+  Common::Component::BGCollision::MeshPCBLegacy:
+    funcs:
+      0x1419284F0: ctor
+  Common::Component::BGCollision::MeshPCB:
+    vtbls:
+      - ea: 0x141A016F8
+        base: Common::Component::BGCollision::Mesh
+      - ea: 0x141A01750
+        base: Common::Component::BGCollision::IMesh # indirect base, offset 8
+    funcs:
+      0x14192AB60: IntersectImpl
+      0x14192B780: GatherVerticesCompressed
+      0x14192B910: GatherVerticesLocal
+      0x14192BA90: FillResult
+      0x14192BBA0: ctor
+      0x14192BBD0: Finalize
+  Common::Component::BGCollision::SceneWrapperNode:
+    vtbls:
+      - ea: 0x141D79ED0
+        base: Common::Component::BGCollision::Node
+  Common::Component::BGCollision::ISceneWrapper:
+    vtbls:
+      - ea: 0x141D79ED8
+        base: Common::Component::BGCollision::SceneWrapperNode
+      - ea: 0x141D79F68
+        base: Common::Component::BGCollision::NodeLink # indirect base, offset 8
+    vfuncs:
+      1: Clear
+      2: SetStreamingSphere
+      3: HasLoadingColliders
+      4: AddColliderStreamed
+      5: AddColliderMesh
+      6: AddColliderMeshCylinder
+      7: AddColliderBox
+      8: AddColliderCylinder
+      9: AddColliderSphere
+      10: AddColliderPlane
+      11: AddColliderPlaneTwoSided
+      12: RemoveCollider
+      13: UpdateColliders
+      14: Raycast
+      15: ExecuteForEachIntersecting
+      16: FindContainingCollidersCheckLayer
+      17: FindContainingColliders
+  Common::Component::BGCollision::SceneWrapper:
+    vtbls:
+      - ea: 0x141D79F78
+        base: Common::Component::BGCollision::ISceneWrapper
+      - ea: 0x141D7A028
+        base: Common::Component::BGCollision::NodeLink # indirect base, offset 8
+    vfuncs:
+      18: Visit1
+      20: Visit2
+      21: Visit3
+    funcs:
+      0x1419277E0: ctor
+      0x1419278B0: Finalize
+  Common::Component::BGCollision::Scene:
+    vtbls:
+      - ea: 0x141D7A520
+        base: Common::Component::BGCollision::Object
+    funcs:
+      0x14192E770: ctor
+      0x14192E830: dtor2
+      0x14192E890: Clear
+      0x14192E990: GetStreamingSphere
+      0x14192E9C0: AddOrUpdateInQuadtree
+      0x14192E9D0: AddColliderStreamed
+      0x14192EA70: AddColliderMesh
+      0x14192EB30: AddColliderMeshWithTransform
+      0x14192EC30: AddColliderMeshCylinder
+      0x14192ED00: AddColliderBox
+      0x14192EDB0: AddColliderCylinder
+      0x14192EE60: AddColliderSphere
+      0x14192EF10: AddColliderPlane
+      0x14192EFC0: AddColliderPlaneTwoSided
+      0x14192F070: RemoveCollider
+      0x14192F080: UpdateColliders
+      0x14192F1A0: ExecuteForEachIntersecting
+      0x14192F4B0: Raycast
+      0x14192FA70: FindContainingColliders
+      0x14192FBF0: FindContainingCollidersCheckLayer
+      0x14192FD70: Visit1
+      0x14192FEF0: Visit3
+      0x141930010: Visit2
+  Common::Component::BGCollision::SceneManager:
+    vtbls:
+      - ea: 0x141D79F70
+    vfuncs:
+      0: dtor
+    funcs:
+      0x141926B80: ctor
+      0x141926BC0: Finalize
+      0x141926C80: ClearScenes
+      0x141926CB0: Init
+      0x141926D20: UpdateScenes
+      0x141926D90: DeleteAllScenes
+      0x141926E30: CreateScene
+      0x141926E90: DestroyScene
+      0x141926F10: HasLoadingColliders
+      0x141926F30: AddColliderStreamed
+      0x141926F50: AddColliderMesh
+      0x141926FA0: AddColliderMeshCylinder
+      0x141926FC0: AddColliderBox
+      0x141926FE0: AddColliderCylinder
+      0x141927000: AddColliderSphere
+      0x141927020: AddColliderPlane
+      0x141927040: AddColliderPlaneTwoSided
+      0x141927080: RaycastSimple
+      0x141927120: RaycastSimpleLayer
+      0x1419271C0: RaycastSimpleMaterialFilter
+      0x141927260: RaycastNonHoriz
+      0x141927300: RaycastNonHorizMaterialFilter
+      0x1419273C0: SweepSphere
+      0x141927420: SweepSphereLayer
+      0x141927480: SweepSphereMaterialFilter
+      0x1419274E0: SweepSphereNonHoriz
+      0x141927550: SweepSphereNonHorizMaterialFilter
+      0x1419275C0: Raycast
+      0x141927600: FindContainingCollidersCheckLayer
+      0x1419276A0: Alloc
+      0x1419276C0: Free
+      0x1419276E0: StartLoad
+      0x141927700: StopLoad
+      0x141927720: Printf
+      0x1419277C0: ReportError
+  Common::Component::BGCollision::Quadtree:
+    vtbls:
+      - ea: 0x141D7A528
+        base: Common::Component::BGCollision::Object
+    funcs:
+      0x141930230: ctor
+      0x141930440: Finalize
+      0x1419304C0: Add
+  Common::Component::BGCollision::QuadtreeNodeLink:
+    vtbls:
+      - ea: 0x141D7A098
+        base: Common::Component::BGCollision::NodeLink
+  Common::Component::BGCollision::QuadtreeNode:
+    vtbls:
+      - ea: 0x141D7A0A0
+        base: Common::Component::BGCollision::Object
+      - ea: 0x141D7A0A8
+        base: Common::Component::BGCollision::QuadtreeNodeLink
+  Common::Component::BGCollision::Quadtree::ColliderIterator:
+    funcs:
+      0x1419308F0: ctor
+      0x141930AF0: ctorLevel
+      0x141931020: SkipEmptyCells
+  Common::Component::BGCollision::Quadtree::CellIterator:
+    funcs:
+      0x141930E80: Increment
+  Common::Component::BGCollision::Collider:
+    vtbls:
+      - ea: 0x141D7A0C8
+        base: Common::Component::BGCollision::Node
+      - ea: 0x141D7A188
+        base: Common::Component::BGCollision::NodeLink # indirect base, offset 8
+      - ea: 0x141D7A190
+        base: Common::Component::BGCollision::QuadtreeNode
+      - ea: 0x141D7A198
+        base: Common::Component::BGCollision::QuadtreeNodeLink # indirect base, offset 0x28
+    vfuncs:
+      1: Load
+      2: Unload
+      3: WantUnload
+      4: GetMaterial
+      5: GetMaterialId
+      6: GetMaterialMask
+      7: SetMaterial
+      8: SetTranslation
+      9: GetTranslation
+      10: GetWorldBB
+      11: SetRotation
+      12: GetRotation
+      13: SetScale
+      14: GetScale
+      15: GetWorldTransform
+      16: GetInvWorldTransform
+      17: GetColliderType
+      18: Update
+      19: LoadInProgress
+      20: Raycast
+      21: IsInsideCheckLayer
+      22: IsInside
+    funcs:
+      0x14192BD20: ctor
+      0x14192BE90: Finalize
+  Common::Component::BGCollision::ColliderMesh:
+    vtbls:
+      - ea: 0x141D7A270
+        base: Common::Component::BGCollision::Collider
+      - ea: 0x141D7A340
+        base: Common::Component::BGCollision::NodeLink # indirect base, offset 8
+      - ea: 0x141D7A348
+        base: Common::Component::BGCollision::QuadtreeNode # indirect base, offset 0x20
+      - ea: 0x141D7A350
+        base: Common::Component::BGCollision::QuadtreeNodeLink # indirect base, offset 0x28
+      - ea: 0x141D7A358
+        base: Common::Component::Excel::ExcelResourceListener
+    vfuncs:
+      24: CreateMesh
+      25: ClearMesh
+    funcs:
+      0x141928F00: ctorSimple
+      0x1419291A0: ctor
+      0x1419292E0: Finalize
+      0x14192A840: CreateCylinderMesh
+      0x14192A990: SetCylinderMeshBounds
+      0x14192A9E0: SetCylinderMeshVertexMaterial
+  Common::Component::BGCollision::ColliderMesh::RayIntersectFunctor:
+    vtbls:
+      - ea: 0x141D7A388
+    vfuncs:
+      0: dtor
+      1: AcceptIntersection
+    funcs:
+      0x14192C7A0: IntersectCheckMaterial
+      0x14192CAF0: IntersectCheckAdjustedMaterial
+      0x14192CE10: Intersect
+  Common::Component::BGCollision::ColliderMesh::SphereIntersectFunctor:
+    vtbls:
+      - ea: 0x141D7A3B8
+    vfuncs:
+      0: dtor
+      1: AcceptIntersection
+    funcs:
+      0x14192C610: IntersectCheckMaterial
+      0x14192C930: IntersectCheckAdjustedMaterial
+      0x14192CCB0: Intersect
+  Common::Component::BGCollision::ColliderStreamed:
+    vtbls:
+      - ea: 0x141D7A3E8
+        base: Common::Component::BGCollision::Collider
+      - ea: 0x141D7A4E0
+        base: Common::Component::BGCollision::NodeLink # indirect base, offset 8
+      - ea: 0x141D7A4E8
+        base: Common::Component::BGCollision::QuadtreeNode # indirect base, offset 0x20
+      - ea: 0x141D7A4F0
+        base: Common::Component::BGCollision::QuadtreeNodeLink # indirect base, offset 0x28
+      - ea: 0x141D7A4F8
+        base: Common::Component::Excel::ExcelResourceListener
+    funcs:
+      0x14192D990: ctor
+      0x14192DAE0: Finalize
+      0x14192E230: LoadInProgressAroundPoint
+      0x14192E340: AllLoadedAroundPoint
+  Common::Component::BGCollision::ColliderBox:
+    vtbls:
+      - ea: 0x141D7A540
+        base: Common::Component::BGCollision::Collider
+      - ea: 0x141D7A638
+        base: Common::Component::BGCollision::NodeLink # indirect base, offset 8
+      - ea: 0x141D7A640
+        base: Common::Component::BGCollision::QuadtreeNode # indirect base, offset 0x20
+      - ea: 0x141D7A648
+        base: Common::Component::BGCollision::QuadtreeNodeLink # indirect base, offset 0x28
+    vfuncs:
+      24: SweepSphereNonHorizCheckLayer
+      25: SweepSphereSimpleCheckLayerAndMaterial
+      26: SweepSphereSimpleCheckLayer
+      27: SweepSphereSimple
+      28: RaycastNonHorizCheckLayer
+      29: RaycastSimpleCheckLayer
+      30: RaycastSimple
+    funcs:
+      0x1419320D0: ctor
+  Common::Component::BGCollision::ColliderBox::IIntersectFunctor:
+    vtbls:
+      - ea: 0x141D7A530
+    vfuncs:
+      0: dtor
+      1: AcceptIntersection
+  Common::Component::BGCollision::ColliderBox::RayNonHorizIntersectFunctor:
+    vtbls:
+      - ea: 0x141D7A890
+        base: Common::Component::BGCollision::ColliderBox::IIntersectFunctor
+  Common::Component::BGCollision::ColliderBox::RayIntersectFunctor:
+    vtbls:
+      - ea: 0x141D7A8A0
+        base: Common::Component::BGCollision::ColliderBox::IIntersectFunctor
+    funcs:
+      0x141931230: Intersect
+  Common::Component::BGCollision::ColliderBox::SphereNonHorizIntersectFunctor:
+    vtbls:
+      - ea: 0x141D7A8B0
+        base: Common::Component::BGCollision::ColliderBox::IIntersectFunctor
+  Common::Component::BGCollision::ColliderBox::SphereIntersectFunctor:
+    vtbls:
+      - ea: 0x141D7A8C0
+        base: Common::Component::BGCollision::ColliderBox::IIntersectFunctor
+    funcs:
+      0x1419318D0: Intersect
+  Common::Component::BGCollision::ColliderBox::RayNonHorizIntersectFunctor2:
+    vtbls:
+      - ea: 0x141D7A8D0
+        base: Common::Component::BGCollision::ColliderBox::IIntersectFunctor
+  Common::Component::BGCollision::ColliderCylinder:
+    vtbls:
+      - ea: 0x141D7A8F0
+        base: Common::Component::BGCollision::Collider
+      - ea: 0x141D7A9B0
+        base: Common::Component::BGCollision::NodeLink # indirect base, offset 8
+      - ea: 0x141D7A9B8
+        base: Common::Component::BGCollision::QuadtreeNode # indirect base, offset 0x20
+      - ea: 0x141D7A9C0
+        base: Common::Component::BGCollision::QuadtreeNodeLink # indirect base, offset 0x28
+    funcs:
+      0x141933A50: FillResult
+      0x141933E50: RaycastSimple
+      0x141934120: SweepSphereSimple
+      0x1419344C0: ctor
+  Common::Component::BGCollision::ColliderSphere:
+    vtbls:
+      - ea: 0x141D7A9D8
+        base: Common::Component::BGCollision::Collider
+      - ea: 0x141D7AAD0
+        base: Common::Component::BGCollision::NodeLink # indirect base, offset 8
+      - ea: 0x141D7AAD8
+        base: Common::Component::BGCollision::QuadtreeNode # indirect base, offset 0x20
+      - ea: 0x141D7AAE0
+        base: Common::Component::BGCollision::QuadtreeNodeLink # indirect base, offset 0x28
+    vfuncs:
+      24: SweepSphereNonHorizCheckLayer
+      25: SweepSphereSimpleCheckLayerAndMaterial
+      26: SweepSphereSimpleCheckLayer
+      27: SweepSphereSimple
+      28: RaycastNonHorizCheckLayer
+      29: RaycastSimpleCheckLayer
+      30: RaycastSimple
+    funcs:
+      0x141935B30: FillResult
+      0x141935D60: ctor
+  Common::Component::BGCollision::ColliderPlane:
+    vtbls:
+      - ea: 0x141D7AAF8
+        base: Common::Component::BGCollision::Collider
+      - ea: 0x141D7ABF0
+        base: Common::Component::BGCollision::NodeLink # indirect base, offset 8
+      - ea: 0x141D7ABF8
+        base: Common::Component::BGCollision::QuadtreeNode # indirect base, offset 0x20
+      - ea: 0x141D7AC00
+        base: Common::Component::BGCollision::QuadtreeNodeLink # indirect base, offset 0x28
+    vfuncs:
+      24: SweepSphereNonHorizCheckLayer
+      25: SweepSphereSimpleCheckLayerAndMaterial
+      26: SweepSphereSimpleCheckLayer
+      27: SweepSphereSimple
+      28: RaycastNonHorizCheckLayer
+      29: RaycastSimpleCheckLayer
+      30: RaycastSimple
+    funcs:
+      0x1419383B0: ctor
+  Common::Component::BGCollision::ColliderPlaneTwoSided:
+    vtbls:
+      - ea: 0x141D7AC08
+        base: Common::Component::BGCollision::ColliderPlane
+      - ea: 0x141D7AD00
+        base: Common::Component::BGCollision::NodeLink # indirect base, offset 8
+      - ea: 0x141D7AD08
+        base: Common::Component::BGCollision::QuadtreeNode # indirect base, offset 0x20
+      - ea: 0x141D7AD10
+        base: Common::Component::BGCollision::QuadtreeNodeLink # indirect base, offset 0x28
+    funcs:
+      0x141939590: ctor
+
+  Common::Component::BGCollision::ColliderPlane::IIntersectFunctor:
+    vtbls:
+      - ea: 0x141D7AAE8
+    vfuncs:
+      0: dtor
+      1: AcceptIntersection
+  Common::Component::BGCollision::ColliderPlane::RayIntersectFunctor:
+    vtbls:
+      - ea: 0x141D7AD28
+        base: Common::Component::BGCollision::ColliderPlane::IIntersectFunctor
+    funcs:
+      0x141937680: Intersect
+  Common::Component::BGCollision::ColliderPlane::SphereIntersectFunctor:
+    vtbls:
+      - ea: 0x141D7AD48
+        base: Common::Component::BGCollision::ColliderPlane::IIntersectFunctor
+    funcs:
+      0x141937CE0: Intersect
+  Common::Component::BGCollision::BGCollisionModule:
+    funcs:
+      0x1404C7420: TaskBGCollisionModule_OnEndOfFrame
+      0x1404C7450: TaskBGCollisionModule_Update
+      0x1404C7540: ctor
+      0x1404C75F0: dtor
+      0x1404C7660: Initialize
+      0x1404C7770: UpdateTaskFuncImpl
+      0x1404C7800: UpdateTaskFunc
+      0x1404C7810: Shutdown
+      0x1404C78A0: IsLoadInProgress
+      0x1404C7960: RaycastSimple
+      0x1404C7A30: SweepSphere
+      0x1404C7B00: RaycastMaterialFilter
+      0x1404C7C30: SweepSphereMaterialFilter
+      0x1404C7D10: RaycastNonHoriz
+      0x1404C7E00: SweepSphereNonHoriz
+      0x1404C7EF0: SweepSphereNonHorizMaterialFilter
+      0x1404C8010: RaycastNonHorizMaterialFilter
+      0x1404C8150: FindContainingColliders
+      0x1404C81E0: RemoveCollider
+      0x1404C8240: AddColliderStreamed
+      0x1404C82B0: AddColliderMesh
+      0x1404C8340: AddColliderMeshCylinder
+      0x1404C83E0: AddColliderBox
+      0x1404C8470: AddColliderCylinder
+      0x1404C8520: AddColliderSphere
+      0x1404C85C0: AddColliderPlane
+      0x1404C8650: AddColliderPlaneTwoSided
+      0x1404C9CB0: TaskBGCollisionModule_OnEndOfFrameRunner
+      0x1404C9CC0: TaskBGCollisionModule_UpdateTaskRunner
+      0x1404C9CD0: TaskBGCollisionModule_UpdateRunner
+      0x1413330E0: Raycast1 # not sure where else to put those two for now
+      0x141333130: Raycast2
+  Common::Component::BGCollision::RaycastHit:
+    funcs:
+      0x141922450: GetNormalComponents
+      0x1419224D0: GetNormal
+  Common::Component::BGCollision::ColliderList:
+    funcs:
+      0x141922610: Add
+  Common::Component::BGCollision::ColliderUpdatePayload:
+    funcs:
+      0x1419226A0: ctor
+  Common::Component::BGCollision::ColliderUpdateListeners:
+    funcs:
+      0x141922C60: ctor
+      0x141922DA0: Notify
   Common::Component::Environment::ResourceInterface::ResourceHandleInterface:
     vtbls:
       - ea: 0x141A01580
@@ -1624,8 +2279,8 @@ classes:
       0x1400CA3F0: OnUpdate_Nameplates
       0x1400CB8A0: IncRefNumberArrayData
       0x1400CB8F0: IncRefStringArrayData
-      0x1400DAD30: UpdateNameplates_BattleChara
-      0x1400DBB80: UpdateNameplates_NPC
+      0x1400DAD30: UpdateBattleCharaNameplates
+      0x1400DBB80: UpdateNpcNameplates
       0x1400DDEF0: IsUIVisible
       0x140568920: DecRefNumberArrayData
       0x140568980: DecRefStringArrayData
@@ -1667,6 +2322,7 @@ classes:
       0x1400ADAA0: GetInfoProxyById
       0x1400ADAC0: GetLocalCharacterName
       0x1400ADB40: GetLocalContentID
+      0x1400ADB90: GetOnlineStatusFlags
       0x1400ADC10: IsOnlineStatusSet
       0x1400ADC90: IsInCrossWorldDuty
   Client::UI::Info::InfoProxyBlacklist:
@@ -1679,6 +2335,9 @@ classes:
   Common::Configuration::ConfigBase::ChangeEventInterface:
     vtbls:
       - ea: 0x1419A5F58
+    vfuncs:
+      0: dtor
+      1: OnConfigChange
   Client::UI::RaptureAtkHistory:
     vtbls:
       - ea: 0x1419BDCF8
@@ -2321,7 +2980,12 @@ classes:
     funcs:
       0x14021B020: ctor
       0x14021B070: Initialize
+      0x14021B7F0: Finalize
+      0x14021B890: IsWinSockInitialized
+      0x14021C170: GetCurrentDeviceTimeInMillis
+      0x14021C1F0: GetLobbyCount 
       0x14021CB20: IsInCrossWorldDuty
+      0x14021CBA0: GetCurrentInstance
   Application::Network::PacketReceiverCallbackInterface:
     vtbls:
       - ea: 0x1419DC088
@@ -2348,6 +3012,7 @@ classes:
       - ea: 0x141B40F60
         base: Client::Network::Protocol::Chat::PacketReceiverCallbackInterface
     funcs:
+      0x14149a170: HandlePartyInvitePacket
       0x14149A240: HandleSocialPacket
       0x14149D8B0: HandleMarketBoardOfferingsPacket
       0x14149D970: HandleMarketBoardPurchasePacket
@@ -2886,6 +3551,7 @@ classes:
       0x140485A20: ScreenPointToRay
       0x140485CF0: CalculateViewMatrix
       0x140486470: PrepareRenderCamera
+      0x140633110: WorldToViewportPoint
   Client::Graphics::Singleton<Client::Graphics::Scene::CameraManager>:
     vtbls:
       - ea: 0x1419FECB8
@@ -3317,6 +3983,9 @@ classes:
       - ea: 0x141A03758
     funcs:
       0x1405055C0: ctor
+      0x140505B30: IsInputIDKeyPress
+      0x140505C40: IsInputIDClicked
+      0x140506580: IsMouseCombinationDragged
   Component::GUI::AtkArrayData:
     vtbls:
       - ea: 0x141A059D0
@@ -4029,8 +4698,6 @@ classes:
     vtbls:
       - ea: 0x141A10FC0
         base: Client::LayoutEngine::ILayoutInstance
-    vfuncs:
-      0: dtor
   Client::UI::Misc::UserFileManager::UserFileEvent:
     vtbls:
       - ea: 0x141A15480
@@ -4354,6 +5021,12 @@ classes:
       0x14068C1D0: ctor
       0x14068C3C0: Finalize
       0x14068E780: IsHotbarEmpty
+      0x14068CBA0: SetAndSaveSlot
+      0x14068C7B0: SetAndSaveFirstAvailableNormalSlot
+      0x14068C860: SetAndSaveFirstAvailableCrossSlot
+      0x14068C910: SetAndSaveFirstGloballyAvailableNormalSlot
+      0x14068C9C0: SetAndSaveFirstGloballyAvailableCrossSlot
+      0x14068CCD0: SetSlotToMacroAndSave
       0x14068CD40: ClearSavedSlotById  # (this, hotbarId, slotId) -> void
       0x140691D50: ExecuteSlot
       0x14068CE30: ExecuteSlotById
@@ -4382,12 +5055,25 @@ classes:
       0x140690F00: IsCrossHotbarLocked
       0x1406916B0: IsDutyAction1Usable
       0x1406916D0: SetDutyActionsPresent             # (this, isPresent) -> void
+      0x1406916E0: IsAnyDutyActionActive
+      0x140691740: SetDutyActionActive
+      0x140691770: GetDutyActionCount
       0x1406917A0: GetDutyActionId                   # (this, slotId) -> uint  - identical to ActionManager's version.
       0x1406917C0: GetDutyActionIdForGeneralActionId # (this, generalActionId) -> uint
       0x1406917F0: SetDutyActionSlot                 # (this, slotId, actionId)
       0x140691900: GetDutyActionSlot                 # (this, slotId) -> DutyActionSlot*
       0x140691960: ExecuteDutyActionSlot             # (this, slotId)
       0x140691A10: IsGeneralActionDutyAction         # (this, generalActionId) -> bool  - utility function? 
+      0x14068E060: GrandCompanyUpdateTask            # (this) -> void
+      0x14068E2E0: PvPStateUpdateTask                # (this) -> void
+      0x14068E400: ToggleWXHBRightFocusFlag
+      0x14068E460: ToggleWXHBLeftFocusFlag
+      0x140691030: SetStandardHotbarShareState
+      0x140691090: SetCrossHotbarShareState
+      0x140692880: DeleteAllHotbars                 # (this, performReset) -> void?
+      0x14068DDE0: PerformMateriaActionMigration
+      0x14068A890: IsActionHighlighted               # (this, commandType, commandId) -> bool
+      0x140692F00: LoadSavedHotbar                   # (this, groupId, hotbarId)
       0x140693BB0: GetInstance  # static
   Client::UI::Misc::RaptureHotbarModule::HotbarSlot:
     funcs:
@@ -4639,6 +5325,8 @@ classes:
       0x140749C00: SetPosition
       0x140749CB0: SetRotation
       0x14074ADD0: IsReadyToDraw
+      0x14074B9C0: GetAsCharacter
+      0x14074B9F0: GetAsBattleCharaMaybe # might be some other cast, or even Character too?
       0x14074D770: Initialize
       0x14074D9D0: ctor
   Client::Game::Character::Character:
@@ -5134,7 +5822,7 @@ classes:
     vtbls:
       - ea: 0x141A37A98
         base: Client::UI::Shell::RaptureShellCommandInterface
-  Client::UI::Shell::ShellCommandUnk1416EE8C0:
+  Client::UI::Shell::ShellCommandGraphicPresets:
     vtbls:
       - ea: 0x141A37AB0
         base: Client::UI::Shell::RaptureShellCommandInterface
@@ -5162,11 +5850,11 @@ classes:
     vtbls:
       - ea: 0x141A37B40
         base: Client::UI::Shell::RaptureShellCommandInterface
-  Client::UI::Shell::ShellCommandUnk1416EE968:
+  Client::UI::Shell::ShellCommandEventReset:
     vtbls:
       - ea: 0x141A37B58
         base: Client::UI::Shell::RaptureShellCommandInterface
-  Client::UI::Shell::ShellCommandUnk1416EE990:
+  Client::UI::Shell::ShellCommandDoubleSlashSetGearset:
     vtbls:
       - ea: 0x141A37B80
         base: Client::UI::Shell::RaptureShellCommandInterface
@@ -5199,6 +5887,12 @@ classes:
     funcs:
       0x1407BCA40: ctor
       0x1407BCD00: Finalize
+  Client::Game::Character::MJILivelyActor:
+    vtbls:
+      - ea: 0x141C3BFF0
+        base: Client::Game::Character::Character
+      - ea: 0x141C3C2B0
+        base: Client::Game::Character::CharacterData
   Client::Game::TitleController:
     vtbls:
       - ea: 0x141A6C190
@@ -5218,8 +5912,13 @@ classes:
         base: Client::UI::Misc::RaptureHotbarModule::ClearCallback
     vfuncs:
       0: dtor
+      1: ResetAllHotbars  # (self, RaptureHotbarModule*) -> bool
+      2: ResetPvEHotbarsForClass  # (self, RaptureHotbarModule*, int) -> bool
+      3: ResetPvPHotbarsForClass  # (self, RaptureHotbarModule*, uint) -> bool
     funcs:
       0x140998C50: CancelCast
+      0x140936370: ResetPvEHotbarsForClassAtLevel # (self, int, uint) -> void
+      0x1409369E0: ResetPvPHotbarsForClassInner  # (self, uint) -> void
   Client::Game::UI::MarkingController:
     instances:
       - ea: 0x14220AD90
@@ -5332,6 +6031,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140D3AB00: ctor
+      0x140D3AF00: CanUseEmote
       0x140D68680: Finalize
   Client::UI::Agent::AgentMacro:
     vtbls:
@@ -5370,6 +6070,8 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x1409E5540: ctor
+      0x1409E5720: OpenForQuest
+      0x1409E8C00: ShowOnMap
   Client::UI::Agent::AgentActionMenu:
     vtbls:
       - ea: 0x141A89678
@@ -7201,15 +7903,15 @@ classes:
       0x140C73C30: Finalize
   Client::UI::Agent::AgentContentsTimer:
     vtbls:
-     - ea: 0x141A8A910
-       base: Client::UI::Agent::AgentInterface
+      - ea: 0x141A8A910
+        base: Client::UI::Agent::AgentInterface
     funcs:
       0x140D296E0: ctor
       0x140D29870: Finalize
   Client::UI::Agent::AgentGatheringNote:
     vtbls:
-     - ea: 0x141A86720
-       base: Client::UI::Agent::AgentInterface
+      - ea: 0x141A86720
+        base: Client::UI::Agent::AgentInterface
     funcs:
       0x140BED010: ctor
       0x140BED130: Finalize
@@ -7268,6 +7970,89 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x141267020: ctor
+      0x1412674B0: InitScheduleData
+      0x1412678B0: OpenReviewMaterialsUIOnly
+      0x141267950: UpdateScheduleData
+      0x141267BF0: UpdateMaterialAllocation
+      0x141267EE0: HaveDeficit
+      0x141268030: CopyMaterialAllocationFromPouchAgent
+      0x141268150: SetPopularitySupplyDemand
+      0x141268290: UpdateCurScheduleSettingPopularitySupplyDemand
+      0x141268350: SetGroove
+      0x1412684B0: HandleEventMain
+      0x1412686A0: ClearSlot
+      0x141268880: HandleEventClearSlotConfirm
+      0x1412688C0: AskConfirmRegisterPreset
+      0x141268960: HandleEventRegisterPresetConfirm
+      0x1412689B0: OpenRequisiteMaterialsForCurItem
+      0x141268BD0: CopyWorkshopAgenda
+      0x141268C80: AskConfirmClearWorkshop
+      0x141268D00: HandleEventClearWorkshopConfirm
+      0x141268E90: AskAddScheduleUsingSupplyDemand
+      0x141268F10: PasteWorkshopAgenda
+      0x141269370: ShowImpl
+      0x141269480: UpdateImpl
+      0x141269690: UpdateMainAddon
+      0x141269CC0: UpdateWorkshopDerivedData
+      0x14126A100: AskAddSchedule
+      0x14126A1F0: FillScheduleItemsByTheme
+      0x14126A540: FillScheduleItemsByTime
+      0x14126A8D0: RequestDemandAndUpdateSelectedItem
+      0x14126A940: UpdateScheduleSettingAddon
+      0x14126AF60: SetCurrentlySelectedItem
+      0x14126B070: OnScheduleSettingOpened
+      0x14126B2D0: HandleEventScheduleSetting
+      0x14126B4A0: OpenScheduleFreeContextMenu
+      0x14126B590: OpenScheduleUsedContextMenu
+      0x14126B730: AskSchedulePreset
+      0x14126B860: UpdatePresetAddon
+      0x14126B920: FillPresetItems
+      0x14126BAD0: HandleEventSchedulePreset
+      0x14126BBC0: AskDeletePreset
+      0x14126BC40: HandleEventDeletePresetConfirm
+      0x14126BCB0: RegisterPreset
+      0x14126BDE0: SchedulePreset
+      0x14126C020: OpenSetRest
+      0x14126C1D0: AskSetRestConfirm
+      0x14126C400: HandleEventSetRest
+      0x14126C460: HandleEventSetRestConfirm
+      0x14126C660: OpenReviewMaterials
+      0x14126C910: HandleEventReviewMaterials
+      0x14126C9D0: UpdateReviewMaterialsAddon
+      0x14126D110: OpenSupplyDemand
+      0x14126D430: UpdateSupplyDemandAddon
+      0x14126D950: HandleEventSupplyDemand
+      0x14126DE10: AskClearCycleConfirm
+      0x14126DEB0: HandleEventClearCycleConfirm
+      0x14126E070: HandleEventSupplyDemandContextMenu
+      0x14126E240: UpdateRequisiteMaterialsAddon
+      0x14126E620: HandleEventRequisiteMaterials
+      0x14126E680: OpenFavors
+      0x14126E6C0: InitStartReadThemes
+      0x14126E850: InitReadThemeRow
+      0x14126E920: InitStartReadCraftObjects
+      0x14126EAC0: InitReadCraftObjectRow
+      0x14126EBB0: InitFilterCraftsByTheme
+      0x14126EE00: InitStartReadItems
+      0x14126EF60: InitReadItemRow
+      0x14126F000: InitAssignSortIndices
+      0x14126F080: InitAddCraftSortedByName
+      0x14126F1D0: SetDisplayedCycle
+      0x14126F370: GetHoursSinceCycleStart
+  Client::UI::Agent::AgentMJINekomimiRequest:
+    vtbls:
+      - ea: 0x141B3AFC8
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1412726A0: ctor
+      0x141272870: OpenUI
+      0x1412728F0: OpenUIFromCraftSchedule
+      0x141272970: ForceRequestFavorData
+      0x1412729E0: InitData
+      0x141272AB0: UpdateImpl
+      0x141272BA0: UpdateAddon
+      0x141272FA0: TryReceiveFetchedData
+      0x141273120: InitItemData
   Client::UI::Agent::AgentMJIGatheringNoteBook:
     vtbls:
       - ea: 0x141B3B2E0
@@ -7298,6 +8083,31 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x141274010: ctor
+      0x141274360: HandleEventMain
+      0x141274420: HandleEventShipItem
+      0x1412745F0: HandleEventShipItemConfirmOvercap
+      0x141274770: HandleEventShipItemConfirmLeaveDeficit
+      0x1412747C0: HandleEventShipBulk
+      0x141274820: HandleEventShipBulkConfirmOvercap
+      0x141274890: UpdateImpl
+      0x141274950: FirstUpdateAfterInit
+      0x141274AF0: TryUpdateAddon
+      0x141274EF0: AskShipItem
+      0x141275100: ShipItem
+      0x141275290: AskShipBulk
+      0x1412756F0: ShipBulk
+      0x141275960: CheckBulkOvercap
+      0x141275C80: InitStartReadUICategories
+      0x141275E00: InitReadUICategoryRow
+      0x141275ED0: InitStartReadShopItems
+      0x141276030: InitReadShopItemRow
+      0x141276130: InitFillAndSortPerCategoryItems
+      0x1412762D0: InitStartReadItemPouch
+      0x141276420: InitReadItemPouchRow
+      0x141276480: InitStartReadItems
+      0x1412765D0: InitReadItemRow
+      0x141276660: InitStartReadCurrencyItems
+      0x1412767A0: InitReadCurrencyItemRow
   Client::UI::Agent::AgentMJIAnimalManagement:
     vtbls:
       - ea: 0x141B3AC60
@@ -7305,6 +8115,31 @@ classes:
     funcs:
       0x14125AC20: ctor
       0x14125AD30: Finalize
+      0x14125AE20: ShowImpl
+      0x14125AF40: OpenAddon
+      0x14125C200: PrepareForOp
+      0x14125C300: HandleContextMenuEvent
+      0x14125C5B0: HandleEventRelease
+      0x14125C9C0: ConfirmReleaseCaptured
+      0x14125CAA0: AskCollect
+      0x14125CC50: CalculateNumFilledSlots
+      0x14125CEA0: UpdateSlots
+      0x14125D2D0: UpdateAvailableFoods
+      0x14125D490: GetNumItemsInInventory
+      0x14125D540: HandleEventConfirmCollectAll
+      0x14125D680: HandleEventConfirmCollectAllOvercap
+      0x14125D780: Entrust
+      0x14125D8A0: Dismiss
+      0x14125D9B0: CollectSingle
+      0x14125DAD0: CollectAll
+      0x14125DBF0: Release
+      0x14125DCF0: DismissRelease
+      0x14125DF10: ChangeNickname
+      0x14125E130: InitStartReadSheets
+      0x14125E490: InitReadAnimalRow
+      0x14125E640: InitReadPouchItemRow
+      0x14125E740: InitReadItemRow
+      0x14125E870: FindItemDescByItemId
   Client::UI::Agent::AgentMJIFarmManagement:
     vtbls:
       - ea: 0x141B3B1C8
@@ -7312,6 +8147,22 @@ classes:
     funcs:
       0x1412778D0: ctor
       0x1412779D0: Finalize
+      0x141277A40: OpenUI
+      0x141277AB0: ShowImpl
+      0x141278760: PrepareForOp
+      0x141278860: HandleContextMenuEvent
+      0x141278B70: TryFinishInit
+      0x141278D30: ClearSeeds
+      0x141278E60: UpdateEntrustSeeds
+      0x141279090: FindSeedIndexByItemId
+      0x141279140: GetNumItemsInInventory
+      0x1412791F0: HandleEventConfirmCollectAll
+      0x1412792F0: HandleEventConfirmCollectAllOvercap
+      0x141279360: Entrust
+      0x141279480: Dismiss
+      0x141279590: CollectSingle
+      0x1412796B0: CollectAll
+      0x141279810: StartCollectAll
   Client::UI::Agent::AgentMJIEntrance:
     vtbls:
       - ea: 0x141B3B150
@@ -7325,6 +8176,40 @@ classes:
     funcs:
       0x14127B520: ctor
       0x14127B5E0: Finalize
+      0x14127B660: OpenUI
+      0x14127B820: RefreshUI
+      0x14127B860: RefreshExpeditions
+      0x14127BA30: NotifyExpeditionSelected
+      0x14127C0A0: UpdateLoadCowrieItem
+      0x14127C0F0: HandleEventMain
+      0x14127C3B0: HandleEventSelectExpedition
+      0x14127C720: IsExpeditionUnlocked
+      0x14127C7D0: CanNotGatherAnymore
+      0x14127C9A0: CanNotGatherWithoutOvercap
+      0x14127CB90: OpenAddon
+      0x14127D3C0: AskConfirmStart
+      0x14127D520: AskConfirmChangeExtend
+      0x14127D680: AskConfirmChange
+      0x14127D7D0: AskConfirmExtend
+      0x14127D950: RefreshExpeditionSelect
+  Client::UI::Agent::AgentMJIGatheringHouse::AgentData:
+    funcs:
+      0x141279A70: ctor
+      0x141279B10: dtor
+      0x141279C40: Init
+      0x141279D40: Reset
+      0x141279DB0: Update
+      0x141279F40: InitSheets
+      0x141279FE0: SheetsReady
+      0x14127A020: InitResources
+      0x14127A370: InitDerived
+      0x14127A880: GetExpeditionEntry
+      0x14127AA00: GetResourceEntryByItemId
+      0x14127AB10: GetResourceEntryByPouchId
+      0x14127AC20: ResetVectors
+      0x14127AD00: ResetExpeditions
+      0x14127AE90: ResetExpeditionItems
+      0x14127AF20: ResetResources
   Client::UI::Agent::AgentMJIMinionManagement:
     vtbls:
       - ea: 0x141B3B460
@@ -7502,8 +8387,20 @@ classes:
       0x140861C70: ctor
       0x1408624C0: Finalize
       0x14086AC90: ProcessDirectorUpdate
+      0x14086E5C0: GetDirectorByEventId
+      0x14086E610: GetCompanyLeveDirector
       0x14086E670: GetInstanceContentDirector
+      0x14086E6A0: GetCrystallineConflictDirector
+      0x14086E6D0: GetFrontlinesDirector
+      0x14086E700: GetRivalWingDirector
+      0x14086E730: GetTreasureHuntDungeonDirector
+      0x14086E760: GetTourismDirector
+      0x14086E790: GetTripleTriadDirector
+      0x14086E810: GetSkyIslandDirector
+      0x14086E840: GetPublicContentDirector
       0x14086E8D0: GetContentDirector
+      0x14086E8E0: GetQuestBattleDirector
+      0x14086E930: GetGoldSaucerDirector
       0x140873460: GetEventHandlerById
       0x140979FD0: GetCurrentContentType
       0x14097A0A0: GetCurrentContentId
@@ -7603,7 +8500,7 @@ classes:
       - ea: 0x141ADB2E8
         base: Component::GUI::AtkUnitBase
     funcs:
-        0x140FA8A30: ctor
+      0x140FA8A30: ctor
   Client::UI::AddonFateReward:
     vtbls:
       - ea: 0x141ADCBC8
@@ -7669,7 +8566,7 @@ classes:
       - ea: 0x141A90C78
         base: Component::GUI::AtkUnitBase
     vfuncs:
-        71: Selected
+      71: Selected
     funcs:
       0x140D8C280: ctor
   Client::UI::AddonContextMenuTitle:
@@ -7709,7 +8606,7 @@ classes:
       - ea: 0x141A91CB0
         base: Component::GUI::AtkUnitBase
     funcs:
-        0x140D90C10: ctor
+      0x140D90C10: ctor
   Client::UI::AddonContextIconMenu:
     vtbls:
       - ea: 0x141A92370
@@ -7767,7 +8664,7 @@ classes:
       0x140DBE950: UpdateResult
   Client::UI::AddonLookingForGroupDetail:
     vtbls:
-      - ea : 0x141A97DF8
+      - ea: 0x141A97DF8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x140DC2670: ctor
@@ -7981,6 +8878,8 @@ classes:
     vtbls:
       - ea: 0x141AC7010
         base: Client::UI::Atk2DMap
+    funcs:
+      0x140EF3770: ctor
   Client::UI::AddonRelicNoteBook:
     vtbls:
       - ea: 0x141AC7BB8
@@ -8239,7 +9138,7 @@ classes:
   Client::UI::AddonImage3:
     vtbls:
       - ea: 0x141B15B70
-        base:  Client::UI::AddonScreenInfoChild
+        base: Client::UI::AddonScreenInfoChild
   Client::UI::AddonPopUpText:
     vtbls:
       - ea: 0x141B06C18
@@ -8832,7 +9731,7 @@ classes:
       0x1400A8C50: GetBarTarget # static (int mapValue, out bool useLeft) -> hotbarId
   Client::UI::AddonActionCrossEditor:
     vtbls:
-      - ea:  0x141ADE988 
+      - ea: 0x141ADE988
         base: Component::GUI::AtkUnitBase
     funcs:
       0x140FD4F10: ctor
@@ -9035,30 +9934,30 @@ classes:
     funcs:
       0x140ED0D80: ctor
   Client::UI::AddonJobHud:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1D648
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1411808E0: ctor
       0x141180AA0: GetNumberArrayData
     vfuncs:
-        60: UpdateGaugeType
-        72: InitializePointers
-        74: UpdateVisibility
-        75: SetTimeLineLabelDefaults
-        76: UpdateVisibility2
-        77: ChangeGaugeType
-        78: UpdateGaugeData
+      60: UpdateGaugeType
+      72: InitializePointers
+      74: UpdateVisibility
+      75: SetTimeLineLabelDefaults
+      76: UpdateVisibility2
+      77: ChangeGaugeType
+      78: UpdateGaugeData
   Client::UI::AddonJobHud::AddonJobHudGaugeData:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1D5D0
     vfuncs:
       0: Initialize
       1: Copy
   Client::UI::AddonJobHud::AddonJobHudGauge:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1D608
-    vfuncs: 
+    vfuncs:
       0: dtor
       1: Initialize
       2: Finalize
@@ -9068,538 +9967,538 @@ classes:
       6: OnChangeGaugeType
       7: Reset
   Client::UI::AddonJobHudACN0: # the addon named "JobHudACN0" loads the UldResourceHandle "JobHudSCH0"
-    vtbls: 
+    vtbls:
       - ea: 0x141B20708
         base: Client::UI::AddonJobHud
     funcs:
       0x141194840: ctor
   Client::UI::AddonJobHudACN0::AetherflowACNGaugeData:
-    vtbls: 
+    vtbls:
       - ea: 0x141B20638
         base: Client::UI::AddonJobHud::AddonJobHudGaugeData
   Client::UI::AddonJobHudACN0::AetherflowACNGauge:
-    vtbls: 
+    vtbls:
       - ea: 0x141B20688
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudACN0::AetherflowACNGaugeSimple:
-    vtbls: 
+    vtbls:
       - ea: 0x141B206C8
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudAST0:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1D950
         base: Client::UI::AddonJobHud
     funcs:
       0x141182970: ctor
   Client::UI::AddonJobHudAST0::ArcanaGaugeData:
-    vtbls: 
-      - ea: 0x141B1D8C0 
+    vtbls:
+      - ea: 0x141B1D8C0
         base: Client::UI::AddonJobHud::AddonJobHudGaugeData
   Client::UI::AddonJobHudAST0::ArcanaGauge:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1D8D0
         base: Client::UI::AddonJobHud::AddonJobHudGauge
     funcs:
-        0x141181460: ctor
+      0x141181460: ctor
   Client::UI::AddonJobHudAST0::ArcanaGaugeSimple:
-    vtbls: 
-      - ea: 0x141B1D910 
+    vtbls:
+      - ea: 0x141B1D910
         base: Client::UI::AddonJobHud::AddonJobHudGauge
     funcs:
-        0x141181F10: ctor
+      0x141181F10: ctor
   Client::UI::AddonJobHudBLM0:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1DC58
         base: Client::UI::AddonJobHud
     funcs:
-        0x141185150: ctor
+      0x141185150: ctor
   Client::UI::AddonJobHudBLM0::ElementalGaugeData:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1DBC8
         base: Client::UI::AddonJobHud::AddonJobHudGaugeData
   Client::UI::AddonJobHudBLM0::ElementalGauge:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1DBD8
         base: Client::UI::AddonJobHud::AddonJobHudGauge
     funcs:
-        0x141182C50: ctor
+      0x141182C50: ctor
   Client::UI::AddonJobHudBLM0::ElementalGaugeSimple:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1DC18
         base: Client::UI::AddonJobHud::AddonJobHudGauge
     funcs:
-        0x1411841B0: ctor
+      0x1411841B0: ctor
   Client::UI::AddonJobHudBRD0:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1DF60
         base: Client::UI::AddonJobHud
     funcs:
       0x141187840: ctor
   Client::UI::AddonJobHudBRD0::SongGaugeData:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1DED0
         base: Client::UI::AddonJobHud::AddonJobHudGaugeData
   Client::UI::AddonJobHudBRD0::SongGauge:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1DEE0
         base: Client::UI::AddonJobHud::AddonJobHudGauge
     funcs:
       0x141185470: ctor
   Client::UI::AddonJobHudBRD0::SongGaugeSimple:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1DF20
         base: Client::UI::AddonJobHud::AddonJobHudGauge
     funcs:
       0x1411866D0: ctor
   Client::UI::AddonJobHudDNC0:
-    vtbls: 
+    vtbls:
       - ea: 0x141B21C40
         base: Client::UI::AddonJobHud
     funcs:
       0x14119C5E0: ctor
   Client::UI::AddonJobHudDNC0::StepGaugeData:
-    vtbls: 
+    vtbls:
       - ea: 0x141B21BB0
         base: Client::UI::AddonJobHud::AddonJobHudGaugeData
   Client::UI::AddonJobHudDNC0::StepGauge:
-    vtbls: 
+    vtbls:
       - ea: 0x141B21BC0
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudDNC0::StepGaugeSimple:
-    vtbls: 
+    vtbls:
       - ea: 0x141B21C00
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudDNC1:
-    vtbls: 
+    vtbls:
       - ea: 0x141B21F48
         base: Client::UI::AddonJobHud
     funcs:
       0x14119D880: ctor
   Client::UI::AddonJobHudDNC1::FeatherGaugeData:
-    vtbls: 
+    vtbls:
       - ea: 0x141B21EB8
         base: Client::UI::AddonJobHud::AddonJobHudGaugeData
   Client::UI::AddonJobHudDNC1::FeatherGauge:
-    vtbls: 
+    vtbls:
       - ea: 0x141B21EC8
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudDNC1::FeatherGaugeSimple:
-    vtbls: 
+    vtbls:
       - ea: 0x141B21F08
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudDRG0:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1E878
         base: Client::UI::AddonJobHud
     funcs:
       0x14118A6E0: ctor
   Client::UI::AddonJobHudDRG0::DragonGaugeData:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1E7E8
         base: Client::UI::AddonJobHud::AddonJobHudGaugeData
   Client::UI::AddonJobHudDRG0::DragonGauge:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1E7F8
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudDRG0::DragonGaugeSimple:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1E838
         base: Client::UI::AddonJobHud::AddonJobHudGauge
     funcs:
-        0x141189CB0: ctor
+      0x141189CB0: ctor
   Client::UI::AddonJobHudDRK0:
-     vtbls: 
-       - ea: 0x141B1E268
-         base: Client::UI::AddonJobHud
-     funcs:
-       0x141188650: ctor
+    vtbls:
+      - ea: 0x141B1E268
+        base: Client::UI::AddonJobHud
+    funcs:
+      0x141188650: ctor
   Client::UI::AddonJobHudDRK0::BloodGaugeData:
-     vtbls: 
-       - ea: 0x141B1E1D8
-         base: Client::UI::AddonJobHud::AddonJobHudGaugeData
+    vtbls:
+      - ea: 0x141B1E1D8
+        base: Client::UI::AddonJobHud::AddonJobHudGaugeData
   Client::UI::AddonJobHudDRK0::BloodGauge:
-     vtbls: 
-       - ea: 0x141B1E1E8
-         base: Client::UI::AddonJobHud::AddonJobHudGauge
+    vtbls:
+      - ea: 0x141B1E1E8
+        base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudDRK0::BloodGaugeSimple:
-     vtbls: 
-       - ea: 0x141B1E228
-         base: Client::UI::AddonJobHud::AddonJobHudGauge
+    vtbls:
+      - ea: 0x141B1E228
+        base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudDRK1:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1E570
         base: Client::UI::AddonJobHud
     funcs:
       0x141189300: ctor
   Client::UI::AddonJobHudDRK1::DarksideGaugeData:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1E4E0
         base: Client::UI::AddonJobHud::AddonJobHudGaugeData
   Client::UI::AddonJobHudDRK1::DarksideGauge:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1E4F0
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudDRK1::DarksideGaugeSimple:
-    vtbls: 
-      - ea: 0x141B1E530 
+    vtbls:
+      - ea: 0x141B1E530
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudGFF0: #SGE
-    vtbls: 
+    vtbls:
       - ea: 0x141B22860
         base: Client::UI::AddonJobHud
     funcs:
       0x1411A0CF0: ctor
   Client::UI::AddonJobHudGFF0::EukrasiaGaugeData:
-    vtbls: 
+    vtbls:
       - ea: 0x141B227D0
         base: Client::UI::AddonJobHud::AddonJobHudGaugeData
   Client::UI::AddonJobHudGFF0::EukrasiaGauge:
-    vtbls: 
+    vtbls:
       - ea: 0x141B227E0
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudGFF0::EukrasiaGaugeSimple:
-    vtbls: 
+    vtbls:
       - ea: 0x141B22820
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudGFF1: #SGE
-    vtbls: 
+    vtbls:
       - ea: 0x141B22B68
         base: Client::UI::AddonJobHud
     funcs:
       0x1411A1CC0: ctor
   Client::UI::AddonJobHudGFF1::AddersgallGaugeData:
-    vtbls: 
+    vtbls:
       - ea: 0x141B22AD8
         base: Client::UI::AddonJobHud::AddonJobHudGaugeData
   Client::UI::AddonJobHudGFF1::AddersgallGauge:
-    vtbls: 
+    vtbls:
       - ea: 0x141B22AE8
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudGFF1::AddersgallGaugeSimple:
-    vtbls: 
+    vtbls:
       - ea: 0x141B22B28
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudGNB0:
-    vtbls: 
+    vtbls:
       - ea: 0x141B21938
         base: Client::UI::AddonJobHud
     funcs:
       0x14119B860: ctor
   Client::UI::AddonJobHudGNB0::PowderGaugeData:
-    vtbls: 
+    vtbls:
       - ea: 0x141B218A8
         base: Client::UI::AddonJobHud::AddonJobHudGaugeData
   Client::UI::AddonJobHudGNB0::PowderGauge:
-    vtbls: 
+    vtbls:
       - ea: 0x141B218B8
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudGNB0::PowderGaugeSimple:
-    vtbls: 
+    vtbls:
       - ea: 0x141B218F8
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudMCH0:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1EB80
         base: Client::UI::AddonJobHud
     funcs:
       0x14118B820: ctor
   Client::UI::AddonJobHudMCH0::HeatGaugeData:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1EAF0
         base: Client::UI::AddonJobHud::AddonJobHudGaugeData
   Client::UI::AddonJobHudMCH0::HeatGauge:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1EB00
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudMCH0::HeatGaugeSimple:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1EB40
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudMNK0:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1EE88
         base: Client::UI::AddonJobHud
     funcs:
       0x14118CF10: ctor
   Client::UI::AddonJobHudMNK0::MastersGaugeData:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1EDF8
         base: Client::UI::AddonJobHud::AddonJobHudGaugeData
   Client::UI::AddonJobHudMNK0::MastersGauge:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1EE08
         base: Client::UI::AddonJobHud::AddonJobHudGauge
     funcs:
-        0x14118BB90: ctor
+      0x14118BB90: ctor
   Client::UI::AddonJobHudMNK0::MastersGaugeSimple:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1EE48
         base: Client::UI::AddonJobHud::AddonJobHudGauge
     funcs:
-        0x14118C590: ctor
+      0x14118C590: ctor
   Client::UI::AddonJobHudMNK1:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1F190
         base: Client::UI::AddonJobHud
     funcs:
       0x14118DAC0: ctor
   Client::UI::AddonJobHudMNK1::ChakraGaugeData:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1F100
         base: Client::UI::AddonJobHud::AddonJobHudGaugeData
   Client::UI::AddonJobHudMNK1::ChakraGauge:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1F110
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudMNK1::ChakraGaugeSimple:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1F150
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudNIN0:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1F498
         base: Client::UI::AddonJobHud
     funcs:
       0x14118E570: ctor
   Client::UI::AddonJobHudNIN0::NinkiGaugeData:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1F408
         base: Client::UI::AddonJobHud::AddonJobHudGaugeData
   Client::UI::AddonJobHudNIN0::NinkiGauge:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1F418
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudNIN0::NinkiGaugeSimple:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1F458
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudNIN1:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1F7A0
         base: Client::UI::AddonJobHud
     funcs:
       0x14118EF60: ctor
   Client::UI::AddonJobHudNIN1::HutonGaugeData:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1F710
         base: Client::UI::AddonJobHud::AddonJobHudGaugeData
   Client::UI::AddonJobHudNIN1::HutonGauge:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1F720
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudNIN1::HutonGaugeSimple:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1F760
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudPLD0:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1FAA8
         base: Client::UI::AddonJobHud
     funcs:
       0x14118FFE0: ctor
   Client::UI::AddonJobHudPLD0::OathGaugeData:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1FA18
         base: Client::UI::AddonJobHud::AddonJobHudGaugeData
   Client::UI::AddonJobHudPLD0::OathGauge:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1FA28
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudPLD0::OathGaugeSimple:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1FA68
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudRDM0:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1FDB0
         base: Client::UI::AddonJobHud
     funcs:
       0x141191A20: ctor
   Client::UI::AddonJobHudRDM0::BalanceGaugeData:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1FD20
         base: Client::UI::AddonJobHud::AddonJobHudGaugeData
   Client::UI::AddonJobHudRDM0::BalanceGauge:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1FD30
         base: Client::UI::AddonJobHud::AddonJobHudGauge
     funcs:
       0x1411903D0: ctor
   Client::UI::AddonJobHudRDM0::BalanceGaugeSimple:
-    vtbls: 
+    vtbls:
       - ea: 0x141B1FD70
         base: Client::UI::AddonJobHud::AddonJobHudGauge
     funcs:
       0x141191090: ctor
   Client::UI::AddonJobHudRRP0:
-    vtbls: 
+    vtbls:
       - ea: 0x141B22250
         base: Client::UI::AddonJobHud
     funcs:
       0x14119EF70: ctor
   Client::UI::AddonJobHudRRP0::SoulGaugeData:
-    vtbls: 
+    vtbls:
       - ea: 0x141B221C0
         base: Client::UI::AddonJobHud::AddonJobHudGaugeData
   Client::UI::AddonJobHudRRP0::SoulGauge:
-    vtbls: 
+    vtbls:
       - ea: 0x141B221D0
         base: Client::UI::AddonJobHud::AddonJobHudGauge
     funcs:
-        0x14119DBA0: ctor
+      0x14119DBA0: ctor
   Client::UI::AddonJobHudRRP0::SoulGaugeSimple:
-    vtbls: 
+    vtbls:
       - ea: 0x141B22210
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudRRP1:
-    vtbls: 
+    vtbls:
       - ea: 0x141B22558
         base: Client::UI::AddonJobHud
     funcs:
       0x1411A0700: ctor
   Client::UI::AddonJobHudRRP1::DeathGaugeData:
-    vtbls: 
+    vtbls:
       - ea: 0x141B224C8
         base: Client::UI::AddonJobHud::AddonJobHudGaugeData
   Client::UI::AddonJobHudRRP1::DeathGauge:
-    vtbls: 
+    vtbls:
       - ea: 0x141B224D8
         base: Client::UI::AddonJobHud::AddonJobHudGauge
     funcs:
-        0x14119F250: ctor
+      0x14119F250: ctor
   Client::UI::AddonJobHudRRP1::DeathGauge::ShroudStack:
     funcs:
-        0x14119FBE0: OnRequestedUpdate
+      0x14119FBE0: OnRequestedUpdate
   Client::UI::AddonJobHudRRP1::DeathGaugeSimple:
-    vtbls: 
+    vtbls:
       - ea: 0x141B22518
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudSAM0:
-    vtbls: 
+    vtbls:
       - ea: 0x141B200B8
         base: Client::UI::AddonJobHud
     funcs:
       0x141193130: ctor
   Client::UI::AddonJobHudSAM0::KenkiGaugeData:
-    vtbls: 
+    vtbls:
       - ea: 0x141B20028
         base: Client::UI::AddonJobHud::AddonJobHudGaugeData
   Client::UI::AddonJobHudSAM0::KenkiGauge:
-    vtbls: 
+    vtbls:
       - ea: 0x141B20038
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudSAM0::KenkiGaugeSimple:
-    vtbls: 
+    vtbls:
       - ea: 0x141B20078
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudSAM1:
-    vtbls: 
+    vtbls:
       - ea: 0x141B203C0
         base: Client::UI::AddonJobHud
     funcs:
       0x141193D80: ctor
   Client::UI::AddonJobHudSAM1::SenGaugeData:
-    vtbls: 
+    vtbls:
       - ea: 0x141B20330
         base: Client::UI::AddonJobHud::AddonJobHudGaugeData
   Client::UI::AddonJobHudSAM1::SenGauge:
-    vtbls: 
+    vtbls:
       - ea: 0x141B20340
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudSAM1::SenGaugeSimple:
-    vtbls: 
+    vtbls:
       - ea: 0x141B20380
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudSCH0: # the addon named "JobHudSCH0" loads the UldResourceHandle "JobHudSCH1"
-    vtbls: 
+    vtbls:
       - ea: 0x141B20A10
         base: Client::UI::AddonJobHud
     funcs:
       0x141195AD0: ctor
   Client::UI::AddonJobHudSCH0::FaerieGaugeData:
-    vtbls: 
+    vtbls:
       - ea: 0x141B20980
         base: Client::UI::AddonJobHud::AddonJobHudGaugeData
   Client::UI::AddonJobHudSCH0::FaerieGauge:
-    vtbls: 
+    vtbls:
       - ea: 0x141B20990
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudSCH0::FaerieGaugeSimple:
-    vtbls: 
+    vtbls:
       - ea: 0x141B209D0
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudSMN0:
-    vtbls: 
+    vtbls:
       - ea: 0x141B20D18
         base: Client::UI::AddonJobHud
     funcs:
       0x141196600: ctor
   Client::UI::AddonJobHudSMN0::AetherflowSMNGaugeData:
-    vtbls: 
+    vtbls:
       - ea: 0x141B20C88
         base: Client::UI::AddonJobHud::AddonJobHudGaugeData
   Client::UI::AddonJobHudSMN0::AetherflowSMNGauge:
-    vtbls: 
+    vtbls:
       - ea: 0x141B20C98
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudSMN0::AetherflowSMNGaugeSimple:
-    vtbls: 
+    vtbls:
       - ea: 0x141B20CD8
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudSMN1:
-    vtbls: 
+    vtbls:
       - ea: 0x141B21020
         base: Client::UI::AddonJobHud
     funcs:
       0x141198830: ctor
   Client::UI::AddonJobHudSMN1::TranceGaugeData:
-    vtbls: 
+    vtbls:
       - ea: 0x141B20F90
         base: Client::UI::AddonJobHud::AddonJobHudGaugeData
   Client::UI::AddonJobHudSMN1::TranceGauge:
-    vtbls: 
+    vtbls:
       - ea: 0x141B20FA0
         base: Client::UI::AddonJobHud::AddonJobHudGauge
     funcs:
       0x1411968B0: ctor
   Client::UI::AddonJobHudSMN1::TranceGaugeSimple:
-    vtbls: 
+    vtbls:
       - ea: 0x141B20FE0
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudWAR0:
-    vtbls: 
+    vtbls:
       - ea: 0x141B21328
         base: Client::UI::AddonJobHud
     funcs:
       0x141199750: ctor
   Client::UI::AddonJobHudWAR0::BeastGaugeData:
-    vtbls: 
+    vtbls:
       - ea: 0x141B21298
         base: Client::UI::AddonJobHud::AddonJobHudGaugeData
   Client::UI::AddonJobHudWAR0::BeastGauge:
-    vtbls: 
+    vtbls:
       - ea: 0x141B212A8
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudWAR0::BeastGaugeSimple:
-    vtbls: 
+    vtbls:
       - ea: 0x141B212E8
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudWHM0:
-    vtbls: 
+    vtbls:
       - ea: 0x141B21630
         base: Client::UI::AddonJobHud
     funcs:
       0x14119A7D0: ctor
   Client::UI::AddonJobHudWHM0::HealingGaugeData:
-    vtbls: 
+    vtbls:
       - ea: 0x141B215A0
         base: Client::UI::AddonJobHud::AddonJobHudGaugeData
   Client::UI::AddonJobHudWHM0::HealingGauge:
-    vtbls: 
+    vtbls:
       - ea: 0x141B215B0
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudWHM0::HealingGaugeSimple:
-    vtbls: 
+    vtbls:
       - ea: 0x141B215F0
         base: Client::UI::AddonJobHud::AddonJobHudGauge
     funcs:
@@ -9805,10 +10704,10 @@ classes:
     vtbls:
       - ea: 0x141C55650
         base: Client::Game::Object::GameObject
-#  Client::Game::Object::BKJObject:
-#    vtbls:
-#      - ea: 0x141C55650
-#        base: Client::Game::Object::GameObject
+  #  Client::Game::Object::BKJObject:
+  #    vtbls:
+  #      - ea: 0x141C55650
+  #        base: Client::Game::Object::GameObject
   Client::Graphics::JobSystem<Client::Graphics::Culling::CullingManager,Client::Graphics::Culling::CullingJobOpt>:
     vtbls:
       - ea: 0x141B3E810
@@ -9894,6 +10793,9 @@ classes:
     vtbls:
       - ea: 0x141B44DE0
         base: Client::Game::Camera
+    instances:
+      - ea: 0x1421AC358
+        pointer: True
     funcs:
       0x1413835B0: ctor
   Client::Game::Camera3:
@@ -9958,8 +10860,6 @@ classes:
   Client::System::Scheduler::Base::SchedulerState:
     vtbls:
       - ea: 0x141B4DEA0
-    funcs:
-      0x1413C1B50: ctor
   Client::Graphics::Physics::BoneSimulator:
     vtbls:
       - ea: 0x141B5D470
@@ -10049,14 +10949,19 @@ classes:
     instances:
       - ea: 0x14222BAF8
   Client::System::Scheduler::TimelineGroup:
+    vtbls:
+      - ea: 0x141B61288
     funcs:
+      0x14143CAE0: ctor
       0x14143D060: PlayAction
   Client::System::Scheduler::Base::TimelineController:
     vtbls:
       - ea: 0x141B4F538
         base: Client::System::Scheduler::Base::SchedulerState
     vfuncs:
+      20: GetActionTimelineKey
       28: GetOwningGameObjectIndex
+      40: GetAnimationLength # C010
     funcs:
       0x1413CEAE0: ctor
   Client::System::Scheduler::Base::SchedulerTimeline:
@@ -10066,6 +10971,7 @@ classes:
     funcs:
       0x141512E90: ctor
       0x141513C00: PlayAction
+      0x141515C60: UpdateBanner
       0x141515E00: LoadTimelineResources
   Client::System::Scheduler::Resource::SchedulerResourceManagement:
     instances:
@@ -10205,9 +11111,37 @@ classes:
     vtbls:
       - ea: 0x1419A94A8
         base: Client::System::Memory::IMemorySpace
-  Vector3:
+  Common::Math::Vector3:
     funcs:
       0x1401BDAF0: Normalize
+      0x1402057D0: TransformWithMatrix4x4
+  Common::Math::Matrix4x4:
+    funcs:
+      0x140206A90: Inverse
+      0x1402070B0: InverseAndReturn
+      0x140208A60: OrthoOffCenterRH # (width, height, nearPlane, farPlane, topBottom, leftRight)
+      0x140208E30: PerspectiveFovLH # (fieldOfViewY, aspectRatio, znearPlane, zfarPlane)
+  Common::Component::BGCollision::Math::Vector3:
+    funcs:
+      0x1404C9D30: Normalize
+      0x141935950: ctorRotatedAroundAxis
+  Common::Component::BGCollision::Math::Vector4:
+    funcs:
+      0x1419231A0: ctorMulMatrix
+      0x14192D5D0: UnitW
+      0x141935680: QuatMultiplyBy
+  Common::Component::BGCollision::Math::Matrix4x4:
+    funcs:
+      0x1419235E0: ctorRotX
+      0x141923790: ctorRotY
+      0x141923930: ctorRotZ
+      0x141923B10: ctorScale
+      0x141923BE0: ctorTranslation
+      0x141923DD0: Invert
+      0x14192C010: TransformVector4
+  Common::Component::BGCollision::Math::AABB:
+    funcs:
+      0x141926A90: ctorTransformed
   # havok
   hkArrayUtil:
     funcs:
@@ -10447,3 +11381,15 @@ classes:
     funcs:
       0x1417CE920: ctr
       0x1417CE950: solve
+  zlib:
+    funcs:
+      # these names are best guesses based on what things look like on a 1.2.5 version.
+      0x1415FB660: uncompress
+      0x1415FA9F0: inflateInit2_
+      0x1415F8810: inflate
+      0x1415F9FF0: inflateEnd
+      0x1415FA520: inflateReset2
+      0x1415FC550: deflateParams
+      0x1415FCBA0: deflateInit2_
+      0x1415FB740: deflate
+      0x1415FBFD0: deflateEnd

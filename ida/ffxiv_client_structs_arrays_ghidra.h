@@ -150,10 +150,21 @@ struct Client_Game_MJI_MJIAnimal;
 struct Client_Game_MJI_MJIBuildingPlacement;
 struct Client_Game_MJI_MJIFarmPasturePlacement;
 struct Client_Game_MJI_MJIFarmState;
+struct StdVectorunsignedint32;
+struct Client_Game_MJI_MJIFavorState;
+struct Client_Game_MJI_MJIGranariesState;
+struct Client_Game_MJI_MJIGranaryState;
 struct Client_Game_MJI_MJILandmarkPlacement;
 struct Client_Game_MJI_MJIManager;
 struct Client_Game_MJI_MJIMinionSlot;
 struct Client_Game_MJI_MJIPastureHandler;
+struct StdMapunsignedint32StdPairunsignedint32unsignedint32;
+struct StdMap_Nodeunsignedint32StdPairunsignedint32unsignedint32;
+struct StdPairunsignedint32StdPairunsignedint32unsignedint32;
+struct StdPairunsignedint32unsignedint32;
+struct StdMapunsignedint32int32;
+struct StdMap_Nodeunsignedint32int32;
+struct StdPairunsignedint32int32;
 struct Client_Game_MonsterNoteManager;
 struct Client_Game_MonsterNoteRankInfo;
 struct Client_Game_RankData;
@@ -714,7 +725,6 @@ struct StdVectorClientUIAgentLinkedTooltipMarker;
 struct StdVectorClientUIAgentLinkedTooltipMarkerPtr;
 struct StdMapunsignedint32unsignedint32;
 struct StdMap_Nodeunsignedint32unsignedint32;
-struct StdPairunsignedint32unsignedint32;
 struct Client_UI_Agent_MapMarkerInfo;
 struct Client_UI_Agent_MapMarkerBase;
 struct Client_UI_Agent_TempMapMarker;
@@ -726,12 +736,53 @@ struct Client_UI_Agent_AgentMiragePrismMiragePlate;
 struct Client_UI_Agent_MiragePlateItem;
 struct Client_UI_Agent_AgentMiragePrismPrismBox;
 struct Client_UI_Agent_AgentMiragePrismPrismItemDetail;
+struct Client_UI_Agent_AgentMJIAnimalManagement;
+struct StdVectorClientUIAgentAgentMJIAnimalManagementSlot;
+struct StdVectorClientUIAgentAgentMJIAnimalManagementAnimalDesc;
+struct StdVectorClientUIAgentAgentMJIAnimalManagementItemDesc;
+struct StdVectorClientUIAgentAgentMJIAnimalManagementItemDescPtr;
+struct Client_UI_Agent_AgentMJIAnimalManagement_AnimalDesc;
+struct Client_UI_Agent_AgentMJIAnimalManagement_ItemDesc;
+struct Client_UI_Agent_AgentMJIAnimalManagement_Slot;
+struct Client_UI_Agent_AgentMJICraftSchedule;
+struct Client_UI_Agent_AgentMJICraftSchedule_CraftData;
+struct Client_UI_Agent_AgentMJICraftSchedule_EntryData;
+struct Client_UI_Agent_AgentMJICraftSchedule_MaterialAllocation;
+struct Client_UI_Agent_AgentMJICraftSchedule_MaterialAllocationEntry;
+struct Client_UI_Agent_AgentMJICraftSchedule_MaterialData;
+struct Client_UI_Agent_AgentMJICraftSchedule_ScheduleData;
+struct StdVectorClientSystemStringUtf8String;
+struct StdVectorClientUIAgentAgentMJICraftScheduleCraftData;
+struct StdVectorClientUIAgentAgentMJICraftScheduleCraftDataPtr;
+struct Client_UI_Agent_AgentMJICraftSchedule_WorkshopData;
+struct Client_UI_Agent_AgentMJIDisposeShop;
+struct Client_UI_Agent_AgentMJIDisposeShop_AgentData;
+struct StdVectorClientUIAgentAgentMJIDisposeShopItemData;
+struct StdVectorClientUIAgentAgentMJIDisposeShopItemDataPtr;
+struct Client_UI_Agent_AgentMJIDisposeShop_ItemData;
+struct Client_UI_Agent_AgentMJIFarmManagement;
+struct Client_UI_Agent_AgentMJIFarmManagement_Slot;
+struct StdVectorClientUIAgentAgentMJIFarmManagementSeed;
+struct Client_UI_Agent_AgentMJIFarmManagement_Seed;
+struct Client_UI_Agent_AgentMJIGatheringHouse;
+struct Client_UI_Agent_AgentMJIGatheringHouse_StringsData;
+struct Client_UI_Agent_AgentMJIGatheringHouse_AgentData;
+struct StdVectorClientUIAgentAgentMJIGatheringHouseExpeditionData;
+struct StdVectorClientUIAgentAgentMJIGatheringHouseExpeditionDesc;
+struct StdVectorClientUIAgentAgentMJIGatheringHouseExpeditionItem;
+struct StdVectorClientUIAgentAgentMJIGatheringHouseResource;
+struct Client_UI_Agent_AgentMJIGatheringHouse_ExpeditionData;
+struct Client_UI_Agent_AgentMJIGatheringHouse_ExpeditionDesc;
+struct Client_UI_Agent_AgentMJIGatheringHouse_ExpeditionItem;
+struct Client_UI_Agent_AgentMJIGatheringHouse_Resource;
+struct Client_UI_Agent_AgentMJINekomimiRequest;
+struct Client_UI_Agent_AgentMJINekomimiRequest_FavorsData;
+struct Client_UI_Agent_AgentMJINekomimiRequest_ItemData;
 struct Client_UI_Agent_AgentMJIPouch;
 struct Client_UI_Agent_AgentMJIPouch_PouchIndexInfo;
 struct Client_UI_Agent_AgentMJIPouch_PouchInventoryData;
 struct StdVectorClientUIAgentPouchInventoryItem;
 struct StdVectorClientUIAgentPouchInventoryItemPtr;
-struct StdVectorClientSystemStringUtf8String;
 struct Client_UI_Agent_AgentModule;
 struct Client_UI_Agent_AgentMonsterNote;
 struct Client_UI_Agent_AgentMycBattleAreaInfo;
@@ -1019,7 +1070,6 @@ struct Component_GUI_AtkComponentTreeList;
 struct StdVectorComponentGUIAtkComponentTreeListItemPtr;
 struct Component_GUI_AtkComponentTreeList_AtkComponentTreeListVTable;
 struct Component_GUI_AtkComponentTreeListItem;
-struct StdVectorunsignedint32;
 struct StdVectorBytePtr;
 struct Component_GUI_AtkComponentWindow;
 struct Component_GUI_AtkCounterNode;
@@ -2277,6 +2327,7 @@ enum Client_UI_Agent_AgentId /* Size=0x4 */
     MJIEntrance = 418,
     MJISettings = 419,
     MJIHousingMenu = 420,
+    MJINekomimiRequest = 422,
     ArchiveItem = 423,
     VVDNotebook = 425,
     VVDFinder = 426,
@@ -2303,6 +2354,57 @@ enum Client_UI_Agent_AgentInspect_ItemDataFlags /* Size=0x4 */
 {
     None = 0,
     Filled = 8
+};
+
+enum Client_UI_Agent_AgentMJICraftSchedule_DataFlags1 /* Size=0x1 */
+{
+    DataInitialized = 1,
+    MainAddonDirty = 2,
+    MaterialsUpdated = 4,
+    ScheduleSettingAddonDirty = 8,
+    SelectedItemDirty = 16,
+    RequisiteMaterialsAddonDirty = 32,
+    ShowHelp = 64,
+    ReviewMaterialsAddonDirty = 128
+};
+
+enum Client_UI_Agent_AgentMJICraftSchedule_DataFlags2 /* Size=0x1 */
+{
+    PlayScheduleUpdateSFX = 1,
+    ReviewMaterialsOnly = 2,
+    DerivedDataDirty = 4,
+    ScheduleDataAvailable = 8,
+    DisableInteraction = 16
+};
+
+enum Client_UI_Agent_AgentMJICraftSchedule_EntryFlags /* Size=0x4 */
+{
+    InPresent = 1,
+    Linked = 2,
+    Failed = 4,
+    Succeeded = 8,
+    InPast = 16,
+    LinkedToPrev = 32,
+    InProgress = 64,
+    Efficient = 128,
+    ThisWeekFavor = 256,
+    NextWeekFavor = 512
+};
+
+enum Client_UI_Agent_AgentMJIGatheringHouse_Confirmation /* Size=0x4 */
+{
+    None = 0,
+    Start = 1,
+    ChangeExtend = 2,
+    Change = 3,
+    Extend = 4
+};
+
+enum Client_UI_Agent_AgentMJINekomimiRequest_ItemFlags /* Size=0x1 */
+{
+    Initialized = 1,
+    Shipped = 2,
+    Bonus = 4
 };
 
 enum Client_UI_Agent_AgentReadyCheck_ReadyCheckStatus /* Size=0x1 */
@@ -6148,11 +6250,15 @@ __unaligned struct Client_Game_MJI_MJIAnimal /* Size=0x34 */
     /* 0x24 */ byte AnimalType;
     /* 0x25 */ byte FoodLevel;
     /* 0x26 */ byte Mood;
-    /* 0x27 */ unsigned __int16 Leavings;
-    /*      */ byte _gap_0x29;
-    /*      */ byte _gap_0x2A[0x2];
-    /*      */ byte _gap_0x2C[0x4];
-    /*      */ byte _gap_0x30[0x4];
+    /* 0x27 */ bool ManualLeavingsAvailable;
+    /* 0x28 */ bool UnderCare;
+    /* 0x29 */ bool WasUnderCare;
+    /* 0x2A */ bool CareHalted;
+    /*      */ byte _gap_0x2B;
+    /* 0x2C */ unsigned __int32 AutoFoodItemId;
+    /* 0x30 */ byte AutoAvailableLeavings1;
+    /* 0x31 */ byte AutoAvailableLeavings2;
+    /*      */ byte _gap_0x32[0x2];
 };
 
 __unaligned struct Client_Game_MJI_MJIBuildingPlacement /* Size=0x10 */
@@ -6172,11 +6278,22 @@ __unaligned struct Client_Game_MJI_MJIFarmPasturePlacement /* Size=0xC */
     /*     */ byte _gap_0xA[0x2];
 };
 
+__unaligned struct StdVectorunsignedint32 /* Size=0x18 */
+{
+    /* 0x00 */ unsigned __int32* First;
+    /* 0x08 */ unsigned __int32* Last;
+    /* 0x10 */ unsigned __int32* End;
+};
+
 __unaligned struct Client_Game_MJI_MJIFarmState /* Size=0x148 */
 {
     /* 0x000 */ void* vtbl;
     /* 0x008 */ void* vtbl2;
-    /*       */ byte _gap_0x10[0x10];
+    /*       */ byte _gap_0x10[0x8];
+    /* 0x018 */ bool LayoutInitialized;
+    /*       */ byte _gap_0x19;
+    /* 0x01A */ unsigned __int16 ReactionEventObjectRowId;
+    /*       */ byte _gap_0x1C[0x4];
     /* 0x020 */ byte SeedType[0x14];
     /* 0x034 */ byte GrowthLevel[0x14];
     /* 0x048 */ byte WaterLevel[0x14];
@@ -6185,7 +6302,45 @@ __unaligned struct Client_Game_MJI_MJIFarmState /* Size=0x148 */
     /*       */ byte _gap_0x84[0x4];
     /* 0x088 */ unsigned __int32 PlotObjectIndex[0x14];
     /* 0x0D8 */ unsigned __int32 LayoutId[0x14];
-    /*       */ byte _gap_0x128[0x20];
+    /* 0x128 */ StdVectorunsignedint32 SeedItemIds;
+    /* 0x140 */ __int32 ExpectedTotalYield;
+    /* 0x144 */ bool SlotUpdatePending;
+    /* 0x145 */ byte SlotUpdateIndex;
+    /*       */ byte _gap_0x146[0x2];
+};
+
+__unaligned struct Client_Game_MJI_MJIFavorState /* Size=0x50 */
+{
+    /* 0x00 */ Client_Game_MJI_MJIManager* Manager;
+    /*      */ byte _gap_0x8[0x10];
+    /* 0x18 */ byte CraftObjectIds[0x9];
+    /* 0x21 */ byte NumDelivered[0x9];
+    /* 0x2A */ byte Flags1[0x9];
+    /* 0x33 */ byte Flags2[0x9];
+    /* 0x3C */ byte NumScheduled[0x9];
+    /*      */ byte _gap_0x45;
+    /*      */ byte _gap_0x46[0x2];
+    /* 0x48 */ __int32 UpdateState;
+    /*      */ byte _gap_0x4C[0x4];
+};
+
+__unaligned struct Client_Game_MJI_MJIGranaryState /* Size=0x48 */
+{
+    /* 0x00 */ byte ActiveExpeditionId;
+    /* 0x01 */ byte RemainingDays;
+    /* 0x02 */ byte RareResourcePouchId;
+    /*      */ byte _gap_0x3;
+    /* 0x04 */ __int16 RareResourceCount;
+    /* 0x06 */ byte NormalResourcePouchIds[0x14];
+    /* 0x1A */ __int16 NormalResourceCounts[0x14];
+    /*      */ byte _gap_0x42[0x2];
+    /* 0x44 */ unsigned __int32 FinishTime;
+};
+
+__unaligned struct Client_Game_MJI_MJIGranariesState /* Size=0x98 */
+{
+    /* 0x00 */ Client_Game_MJI_MJIGranaryState Granary[0x2];
+    /*      */ byte _gap_0x90[0x8];
 };
 
 __unaligned struct Client_Game_MJI_MJILandmarkPlacement /* Size=0x10 */
@@ -6217,7 +6372,11 @@ __unaligned struct Client_Game_MJI_MJIManager /* Size=0x440 */
     /*       */ byte _gap_0x110[0x18];
     /* 0x128 */ Client_Game_MJI_MJIPastureHandler* PastureHandler;
     /* 0x130 */ Client_Game_MJI_MJIFarmState* FarmState;
-    /*       */ byte _gap_0x138[0x98];
+    /*       */ byte _gap_0x138[0x8];
+    /* 0x140 */ Client_Game_MJI_MJIGranariesState* GranariesState;
+    /*       */ byte _gap_0x148[0x20];
+    /* 0x168 */ Client_Game_MJI_MJIFavorState* FavorState;
+    /*       */ byte _gap_0x170[0x60];
     /*       */ byte _gap_0x1D0[0x4];
     /* 0x1D4 */ Client_Game_MJI_MJILandmarkPlacement LandmarkPlacements[0x5];
     /* 0x224 */ Client_Game_MJI_MJIBuildingPlacement BuildingPlacements[0x6];
@@ -6225,7 +6384,13 @@ __unaligned struct Client_Game_MJI_MJIManager /* Size=0x440 */
     /* 0x294 */ Client_Game_MJI_MJIFarmPasturePlacement FarmPlacements[0x3];
     /* 0x2B8 */ Client_Game_MJI_MJIFarmPasturePlacement PasturePlacements[0x3];
     /*       */ byte _gap_0x2DC[0x4];
-    /*       */ byte _gap_0x2E0[0x10];
+    /* 0x2E0 */ unsigned __int16 RequestDemandCraftId;
+    /*       */ byte _gap_0x2E2[0x2];
+    /* 0x2E4 */ __int32 RequestDemandType;
+    /* 0x2E8 */ bool DemandDirty;
+    /*       */ byte _gap_0x2E9;
+    /*       */ byte _gap_0x2EA[0x2];
+    /*       */ byte _gap_0x2EC[0x4];
     /* 0x2F0 */ byte CurrentPopularity;
     /* 0x2F1 */ byte NextPopularity;
     /* 0x2F2 */ byte SupplyAndDemandShifts[0x5B];
@@ -6256,10 +6421,69 @@ __unaligned struct Client_Game_MJI_MJIMinionSlot /* Size=0xC */
     /*     */ byte _gap_0xB;
 };
 
+__unaligned struct StdPairunsignedint32unsignedint32 /* Size=0x8 */
+{
+    /* 0x0 */ unsigned __int32 Item1;
+    /* 0x4 */ unsigned __int32 Item2;
+};
+
+__unaligned struct StdPairunsignedint32StdPairunsignedint32unsignedint32 /* Size=0xC */
+{
+    /* 0x0 */ unsigned __int32 Item1;
+    /* 0x4 */ StdPairunsignedint32unsignedint32 Item2;
+};
+
+__unaligned struct StdMap_Nodeunsignedint32StdPairunsignedint32unsignedint32 /* Size=0x30 */
+{
+    /* 0x00 */ StdMap_Nodeunsignedint32StdPairunsignedint32unsignedint32* Left;
+    /* 0x08 */ StdMap_Nodeunsignedint32StdPairunsignedint32unsignedint32* Parent;
+    /* 0x10 */ StdMap_Nodeunsignedint32StdPairunsignedint32unsignedint32* Right;
+    /* 0x18 */ byte Color;
+    /* 0x19 */ bool IsNil;
+    /* 0x1A */ byte _18;
+    /* 0x1B */ byte _19;
+    /* 0x1C */ StdPairunsignedint32StdPairunsignedint32unsignedint32 KeyValuePair;
+    /*      */ byte _gap_0x28[0x8];
+};
+
+__unaligned struct StdMapunsignedint32StdPairunsignedint32unsignedint32 /* Size=0x10 */
+{
+    /* 0x00 */ StdMap_Nodeunsignedint32StdPairunsignedint32unsignedint32* Head;
+    /* 0x08 */ unsigned __int64 Count;
+};
+
+__unaligned struct StdPairunsignedint32int32 /* Size=0x8 */
+{
+    /* 0x0 */ unsigned __int32 Item1;
+    /* 0x4 */ __int32 Item2;
+};
+
+__unaligned struct StdMap_Nodeunsignedint32int32 /* Size=0x30 */
+{
+    /* 0x00 */ StdMap_Nodeunsignedint32int32* Left;
+    /* 0x08 */ StdMap_Nodeunsignedint32int32* Parent;
+    /* 0x10 */ StdMap_Nodeunsignedint32int32* Right;
+    /* 0x18 */ byte Color;
+    /* 0x19 */ bool IsNil;
+    /* 0x1A */ byte _18;
+    /* 0x1B */ byte _19;
+    /* 0x1C */ StdPairunsignedint32int32 KeyValuePair;
+    /*      */ byte _gap_0x24[0x4];
+    /*      */ byte _gap_0x28[0x8];
+};
+
+__unaligned struct StdMapunsignedint32int32 /* Size=0x10 */
+{
+    /* 0x00 */ StdMap_Nodeunsignedint32int32* Head;
+    /* 0x08 */ unsigned __int64 Count;
+};
+
 __unaligned struct Client_Game_MJI_MJIPastureHandler /* Size=0xB78 */
 {
     /* 0x000 */ void* vtbl;
-    /*       */ byte _gap_0x8[0x2E0];
+    /*       */ byte _gap_0x8[0x2C0];
+    /* 0x2C8 */ StdMapunsignedint32StdPairunsignedint32unsignedint32 AnimalToLeavingItemIds;
+    /* 0x2D8 */ StdMapunsignedint32int32 AvailableMammetLeavings;
     /* 0x2E8 */ Client_Game_MJI_MJIAnimal MJIAnimals[0x14];
     /* 0x6F8 */ bool RoamingMinions[0x200];
     /* 0x8F8 */ Client_Game_MJI_MJIMinionSlot MinionSlots[0x32];
@@ -14690,12 +14914,6 @@ __unaligned struct StdVectorClientUIAgentLinkedTooltipMarkerPtr /* Size=0x18 */
     /* 0x10 */ Client_UI_Agent_LinkedTooltipMarker** End;
 };
 
-__unaligned struct StdPairunsignedint32unsignedint32 /* Size=0x8 */
-{
-    /* 0x0 */ unsigned __int32 Item1;
-    /* 0x4 */ unsigned __int32 Item2;
-};
-
 __unaligned struct StdMap_Nodeunsignedint32unsignedint32 /* Size=0x30 */
 {
     /* 0x00 */ StdMap_Nodeunsignedint32unsignedint32* Left;
@@ -14916,6 +15134,529 @@ __unaligned struct Client_UI_Agent_AgentMiragePrismPrismItemDetail /* Size=0x58 
     /* 0x54 */ unsigned __int32 ItemId;
 };
 
+__unaligned struct StdVectorClientUIAgentAgentMJIAnimalManagementSlot /* Size=0x18 */
+{
+    /* 0x00 */ Client_UI_Agent_AgentMJIAnimalManagement_Slot* First;
+    /* 0x08 */ Client_UI_Agent_AgentMJIAnimalManagement_Slot* Last;
+    /* 0x10 */ Client_UI_Agent_AgentMJIAnimalManagement_Slot* End;
+};
+
+__unaligned struct StdVectorClientUIAgentAgentMJIAnimalManagementAnimalDesc /* Size=0x18 */
+{
+    /* 0x00 */ Client_UI_Agent_AgentMJIAnimalManagement_AnimalDesc* First;
+    /* 0x08 */ Client_UI_Agent_AgentMJIAnimalManagement_AnimalDesc* Last;
+    /* 0x10 */ Client_UI_Agent_AgentMJIAnimalManagement_AnimalDesc* End;
+};
+
+__unaligned struct StdVectorClientUIAgentAgentMJIAnimalManagementItemDesc /* Size=0x18 */
+{
+    /* 0x00 */ Client_UI_Agent_AgentMJIAnimalManagement_ItemDesc* First;
+    /* 0x08 */ Client_UI_Agent_AgentMJIAnimalManagement_ItemDesc* Last;
+    /* 0x10 */ Client_UI_Agent_AgentMJIAnimalManagement_ItemDesc* End;
+};
+
+__unaligned struct StdVectorClientUIAgentAgentMJIAnimalManagementItemDescPtr /* Size=0x18 */
+{
+    /* 0x00 */ Client_UI_Agent_AgentMJIAnimalManagement_ItemDesc** First;
+    /* 0x08 */ Client_UI_Agent_AgentMJIAnimalManagement_ItemDesc** Last;
+    /* 0x10 */ Client_UI_Agent_AgentMJIAnimalManagement_ItemDesc** End;
+};
+
+__unaligned struct Client_UI_Agent_AgentMJIAnimalManagement /* Size=0x1E0 */
+{
+    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
+    /*       */ byte _gap_0x28[0xA8];
+    /* 0x0D0 */ Component_GUI_AtkEventInterface* OpHandler;
+    /*       */ byte _gap_0xD8[0x28];
+    /* 0x100 */ StdVectorClientUIAgentAgentMJIAnimalManagementSlot Slots;
+    /* 0x118 */ StdVectorClientUIAgentAgentMJIAnimalManagementAnimalDesc AnimalDescs;
+    /* 0x130 */ StdVectorClientUIAgentAgentMJIAnimalManagementItemDesc ItemDescs;
+    /* 0x148 */ StdVectorClientUIAgentAgentMJIAnimalManagementItemDescPtr EntrustAvailableFood;
+    /* 0x160 */ __int32 NumPastureSlots;
+    /* 0x164 */ __int32 CurContextMenuRow;
+    /* 0x168 */ unsigned __int32 PendingReleaseObjectId;
+    /*       */ byte _gap_0x16C[0x4];
+    /* 0x170 */ Client_System_String_Utf8String ProposedNickname;
+    /* 0x1D8 */ bool DuringCapture;
+    /* 0x1D9 */ bool DataInitialized;
+    /* 0x1DA */ bool UpdateNeeded;
+    /*       */ byte _gap_0x1DB;
+    /* 0x1DC */ __int32 ExpectedCollectLeavings;
+};
+
+__unaligned struct Client_UI_Agent_AgentMJIAnimalManagement_AnimalDesc /* Size=0x80 */
+{
+    /* 0x00 */ byte AnimalRowId;
+    /* 0x01 */ byte Rarity;
+    /* 0x02 */ byte Sort;
+    /*      */ byte _gap_0x3;
+    /* 0x04 */ unsigned __int32 IconId;
+    /* 0x08 */ unsigned __int32 Leaving1ItemId;
+    /* 0x0C */ unsigned __int32 Leaving2ItemId;
+    /* 0x10 */ unsigned __int32 BNpcNameId;
+    /*      */ byte _gap_0x14[0x4];
+    /* 0x18 */ Client_System_String_Utf8String Nickname;
+};
+
+__unaligned struct Client_UI_Agent_AgentMJIAnimalManagement_ItemDesc /* Size=0xE0 */
+{
+    /* 0x00 */ unsigned __int32 ItemId;
+    /* 0x04 */ unsigned __int32 CategoryId;
+    /* 0x08 */ unsigned __int32 CountInInventory;
+    /* 0x0C */ unsigned __int32 IconId;
+    /* 0x10 */ Client_System_String_Utf8String Name;
+    /* 0x78 */ Client_System_String_Utf8String Link;
+};
+
+__unaligned struct Client_UI_Agent_AgentMJIAnimalManagement_Slot /* Size=0x170 */
+{
+    /* 0x000 */ unsigned __int32 ObjectId;
+    /*       */ byte _gap_0x4[0x4];
+    /* 0x008 */ Client_UI_Agent_AgentMJIAnimalManagement_AnimalDesc Desc;
+    /* 0x088 */ unsigned __int32 FoodItemId;
+    /* 0x08C */ unsigned __int32 FoodItemCategoryId;
+    /* 0x090 */ unsigned __int32 FoodCount;
+    /* 0x094 */ unsigned __int32 FoodIconId;
+    /* 0x098 */ Client_System_String_Utf8String FoodName;
+    /* 0x100 */ Client_System_String_Utf8String FoodLink;
+    /* 0x168 */ byte Mood;
+    /* 0x169 */ byte FoodLevel;
+    /* 0x16A */ byte AvailLeavings1;
+    /* 0x16B */ byte AvailLeavings2;
+    /* 0x16C */ bool HaveUngatheredLeavings;
+    /* 0x16D */ bool UnderCare;
+    /* 0x16E */ bool CareHalted;
+    /* 0x16F */ bool WasCared;
+};
+
+__unaligned struct Client_UI_Agent_AgentMJICraftSchedule /* Size=0x40 */
+{
+    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
+    /* 0x28 */ Client_UI_Agent_AgentMJICraftSchedule_ScheduleData* Data;
+    /* 0x30 */ __int32* CurReviewMaterialsSortOrder;
+    /* 0x38 */ __int32 CurReviewMaterialsTab;
+    /*      */ byte _gap_0x3C[0x4];
+};
+
+__unaligned struct Client_UI_Agent_AgentMJICraftSchedule_CraftData /* Size=0x98 */
+{
+    /* 0x00 */ unsigned __int16 ItemId;
+    /* 0x02 */ unsigned __int16 ThemeIds[0x3];
+    /* 0x08 */ unsigned __int16 MaterialItemPouchRowIds[0x4];
+    /* 0x10 */ unsigned __int16 MaterialCosts[0x4];
+    /* 0x18 */ unsigned __int16 LevelReq;
+    /* 0x1A */ unsigned __int16 CraftingTime;
+    /* 0x1C */ unsigned __int16 Value;
+    /*      */ byte _gap_0x1E[0x2];
+    /* 0x20 */ unsigned __int16 CraftObjectId;
+    /* 0x22 */ unsigned __int16 CraftIndex;
+    /* 0x24 */ unsigned __int32 IconId;
+    /* 0x28 */ unsigned __int16 SortedByNameIndex;
+    /* 0x2A */ byte NumThemes;
+    /* 0x2B */ bool Favor;
+    /* 0x2C */ byte ThisWeekPopularity;
+    /* 0x2D */ byte NextWeekPopularity;
+    /* 0x2E */ byte Supply;
+    /* 0x2F */ byte DemandShift;
+    /* 0x30 */ Client_System_String_Utf8String Name;
+};
+
+__unaligned struct Client_UI_Agent_AgentMJICraftSchedule_EntryData /* Size=0xC */
+{
+    /* 0x0 */ unsigned __int32 CraftObjectId;
+    /* 0x4 */ Client_UI_Agent_AgentMJICraftSchedule_EntryFlags Flags;
+    /* 0x8 */ byte StartingSlot;
+    /* 0x9 */ byte Duration;
+    /* 0xA */ bool Started;
+    /* 0xB */ bool Efficient;
+};
+
+__unaligned struct Client_UI_Agent_AgentMJICraftSchedule_MaterialAllocationEntry /* Size=0xE0 */
+{
+    /* 0x00 */ unsigned __int16 EntryIndex;
+    /* 0x02 */ unsigned __int16 UsedAmounts[0x6D];
+    /* 0xDC */ unsigned __int32 uDC;
+};
+
+__unaligned struct Client_UI_Agent_AgentMJICraftSchedule_MaterialAllocation /* Size=0x2D8 */
+{
+    /* 0x000 */ Client_UI_Agent_AgentMJICraftSchedule_MaterialAllocationEntry Entries[0x3];
+    /* 0x2A0 */ byte Cycle;
+    /* 0x2A1 */ byte StartingHours[0x18];
+    /* 0x2B9 */ byte CraftIds[0x18];
+    /*       */ byte _gap_0x2D1;
+    /*       */ byte _gap_0x2D2[0x2];
+    /*       */ byte _gap_0x2D4[0x4];
+};
+
+__unaligned struct Client_UI_Agent_AgentMJICraftSchedule_MaterialData /* Size=0x70 */
+{
+    /* 0x00 */ Client_System_String_Utf8String Name;
+    /* 0x68 */ unsigned __int32 IconRowId;
+    /* 0x6C */ unsigned __int32 ItemRowId;
+};
+
+__unaligned struct StdVectorClientSystemStringUtf8String /* Size=0x18 */
+{
+    /* 0x00 */ Client_System_String_Utf8String* First;
+    /* 0x08 */ Client_System_String_Utf8String* Last;
+    /* 0x10 */ Client_System_String_Utf8String* End;
+};
+
+__unaligned struct StdVectorClientUIAgentAgentMJICraftScheduleCraftData /* Size=0x18 */
+{
+    /* 0x00 */ Client_UI_Agent_AgentMJICraftSchedule_CraftData* First;
+    /* 0x08 */ Client_UI_Agent_AgentMJICraftSchedule_CraftData* Last;
+    /* 0x10 */ Client_UI_Agent_AgentMJICraftSchedule_CraftData* End;
+};
+
+__unaligned struct StdVectorClientUIAgentAgentMJICraftScheduleCraftDataPtr /* Size=0x18 */
+{
+    /* 0x00 */ Client_UI_Agent_AgentMJICraftSchedule_CraftData** First;
+    /* 0x08 */ Client_UI_Agent_AgentMJICraftSchedule_CraftData** Last;
+    /* 0x10 */ Client_UI_Agent_AgentMJICraftSchedule_CraftData** End;
+};
+
+__unaligned struct Client_UI_Agent_AgentMJICraftSchedule_WorkshopData /* Size=0x54 */
+{
+    /* 0x00 */ byte NumScheduleEntries;
+    /* 0x01 */ byte NumEfficientCrafts;
+    /*      */ byte _gap_0x2[0x2];
+    /*      */ byte _gap_0x4[0x4];
+    /* 0x08 */ Client_UI_Agent_AgentMJICraftSchedule_EntryData EntryData[0x6];
+    /* 0x50 */ unsigned __int32 UsedTimeSlots;
+};
+
+__unaligned struct Client_UI_Agent_AgentMJICraftSchedule_ScheduleData /* Size=0xB60 */
+{
+    /* 0x000 */ __int32 UpdateState;
+    /* 0x004 */ __int32 OpenedModalAddonHandle;
+    /* 0x008 */ __int32 OpenedModalAddonId;
+    /* 0x00C */ __int32 ReviewMaterialsAddonHandle;
+    /* 0x010 */ __int32 ConfirmAddonHandle;
+    /*       */ byte _gap_0x14[0x4];
+    /*       */ byte _gap_0x18[0xA0];
+    /* 0x0B8 */ StdVectorClientSystemStringUtf8String ThemeNames;
+    /* 0x0D0 */ StdVectorClientUIAgentAgentMJICraftScheduleCraftData Crafts;
+    /* 0x0E8 */ StdVectorClientUIAgentAgentMJICraftScheduleCraftDataPtr UnlockedObjectsPerTheme[0x20];
+    /*       */ byte _gap_0xE8[0x300];
+    /* 0x3E8 */ StdVectorClientUIAgentAgentMJICraftScheduleCraftDataPtr CraftsSortedByName;
+    /* 0x400 */ Client_UI_Agent_AgentMJICraftSchedule_WorkshopData WorkshopSchedules[0x4];
+    /* 0x550 */ Client_UI_Agent_AgentMJICraftSchedule_WorkshopData CopiedSchedule;
+    /*       */ byte _gap_0x5A4[0x4];
+    /* 0x5A8 */ unsigned __int32 CurScheduleSettingCraftIndex;
+    /* 0x5AC */ __int32 CurScheduleSettingWorkshop;
+    /* 0x5B0 */ __int32 CurScheduleSettingStartingSlot;
+    /*       */ byte _gap_0x5B4[0x4];
+    /* 0x5B8 */ Client_UI_Agent_AgentMJICraftSchedule_MaterialData CurScheduleSettingMaterials[0x5];
+    /* 0x7E8 */ byte CurScheduleSettingNumMaterials;
+    /* 0x7E9 */ byte CurScheduleSettingMaterialsInitializedMask;
+    /* 0x7EA */ byte CurScheduleSettingThisWeekPopularity;
+    /* 0x7EB */ byte CurScheduleSettingNextWeekPopularity;
+    /* 0x7EC */ byte CurScheduleSettingSupply;
+    /* 0x7ED */ byte CurScheduleSettingDemandShift;
+    /*       */ byte _gap_0x7EE[0x2];
+    /* 0x7F0 */ __int32 CurSupplyDemandSort;
+    /* 0x7F4 */ byte CurSupplyDemandFilterTime;
+    /* 0x7F5 */ byte CurSupplyDemandFilterCategory;
+    /* 0x7F6 */ byte CurSupplyDemandFilterThisWeekPopularity;
+    /* 0x7F7 */ byte CurSupplyDemandFilterNextWeekPopularity;
+    /* 0x7F8 */ byte CurSupplyDemandFilterSupply;
+    /* 0x7F9 */ byte CurSupplyDemandFilterDemandShift;
+    /* 0x7FA */ byte CurSupplyDemandFilterFavors;
+    /*       */ byte _gap_0x7FB;
+    /* 0x7FC */ __int32 CurContextMenuScheduleEntryWorkshop;
+    /* 0x800 */ __int32 CurContextMenuScheduleEntrySlot;
+    /* 0x804 */ __int32 CurContextMenuSupplyDemandRow;
+    /* 0x808 */ __int32 CurContextMenuPresetIndex;
+    /* 0x80C */ unsigned __int32 Groove;
+    /* 0x810 */ unsigned __int32 RestCycles;
+    /* 0x814 */ unsigned __int32 NewRestCycles;
+    /* 0x818 */ Client_System_String_Utf8String ConfirmPrompt;
+    /* 0x880 */ Client_UI_Agent_AgentMJICraftSchedule_MaterialAllocation MaterialUse;
+    /* 0xB58 */ byte CycleDisplayed;
+    /* 0xB59 */ byte CycleInProgress;
+    /* 0xB5A */ byte HourSinceCycleStart;
+    /* 0xB5B */ byte IslandLevel;
+    /* 0xB5C */ Client_UI_Agent_AgentMJICraftSchedule_DataFlags1 Flags1;
+    /* 0xB5D */ Client_UI_Agent_AgentMJICraftSchedule_DataFlags2 Flags2;
+    /*       */ byte _gap_0xB5E[0x2];
+};
+
+__unaligned struct Client_UI_Agent_AgentMJIDisposeShop /* Size=0x30 */
+{
+    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
+    /* 0x28 */ Client_UI_Agent_AgentMJIDisposeShop_AgentData* Data;
+};
+
+__unaligned struct StdVectorClientUIAgentAgentMJIDisposeShopItemData /* Size=0x18 */
+{
+    /* 0x00 */ Client_UI_Agent_AgentMJIDisposeShop_ItemData* First;
+    /* 0x08 */ Client_UI_Agent_AgentMJIDisposeShop_ItemData* Last;
+    /* 0x10 */ Client_UI_Agent_AgentMJIDisposeShop_ItemData* End;
+};
+
+__unaligned struct StdVectorClientUIAgentAgentMJIDisposeShopItemDataPtr /* Size=0x18 */
+{
+    /* 0x00 */ Client_UI_Agent_AgentMJIDisposeShop_ItemData** First;
+    /* 0x08 */ Client_UI_Agent_AgentMJIDisposeShop_ItemData** Last;
+    /* 0x10 */ Client_UI_Agent_AgentMJIDisposeShop_ItemData** End;
+};
+
+__unaligned struct Client_UI_Agent_AgentMJIDisposeShop_AgentData /* Size=0x170 */
+{
+    /* 0x000 */ __int32 SelectCountAddonHandle;
+    /* 0x004 */ __int32 ConfirmAddonHandle;
+    /* 0x008 */ unsigned __int32 CurrencyIconId[0x2];
+    /* 0x010 */ __int32 CurrencyCount[0x2];
+    /* 0x018 */ __int32 CurrencyStackSize[0x2];
+    /* 0x020 */ unsigned __int32 CurrencyItemId[0x2];
+    /* 0x028 */ byte InitializationState;
+    /* 0x029 */ byte CurSelectedCategory;
+    /* 0x02A */ byte CurShipItemIndex;
+    /* 0x02B */ byte CurBulkShipCheckStage;
+    /* 0x02C */ byte u2C;
+    /*       */ byte _gap_0x2D;
+    /*       */ byte _gap_0x2E[0x2];
+    /* 0x030 */ __int32 CurBulkShiptLimit;
+    /* 0x034 */ __int32 CurShipQuantity;
+    /*       */ byte _gap_0x38[0xA0];
+    /* 0x0D8 */ StdVectorClientSystemStringUtf8String CategoryNames;
+    /* 0x0F0 */ StdVectorClientUIAgentAgentMJIDisposeShopItemData Items;
+    /* 0x108 */ StdVectorClientUIAgentAgentMJIDisposeShopItemDataPtr PerCategoryItems[0x4];
+    /*       */ byte _gap_0x108[0x60];
+    /* 0x168 */ bool DataInitialized;
+    /* 0x169 */ bool AddonDirty;
+    /*       */ byte _gap_0x16A[0x2];
+    /*       */ byte _gap_0x16C[0x4];
+};
+
+__unaligned struct Client_UI_Agent_AgentMJIDisposeShop_ItemData /* Size=0x80 */
+{
+    /* 0x00 */ byte ShopItemRowId;
+    /* 0x01 */ byte ItemIndex;
+    /* 0x02 */ bool UseIslanderCowries;
+    /*      */ byte _gap_0x3;
+    /* 0x04 */ unsigned __int16 CowriesPerItem;
+    /* 0x06 */ byte PouchItemRowId;
+    /* 0x07 */ byte Currency;
+    /* 0x08 */ byte UICategory;
+    /* 0x09 */ byte SortOrder;
+    /*      */ byte _gap_0xA[0x2];
+    /* 0x0C */ unsigned __int32 ItemId;
+    /* 0x10 */ unsigned __int32 IconId;
+    /* 0x14 */ unsigned __int32 CountInInventory;
+    /* 0x18 */ Client_System_String_Utf8String Name;
+};
+
+__unaligned struct Client_UI_Agent_AgentMJIFarmManagement_Slot /* Size=0xF8 */
+{
+    /* 0x00 */ Client_System_String_Utf8String YieldName;
+    /* 0x68 */ unsigned __int32 YieldIconId;
+    /*      */ byte _gap_0x6C[0x4];
+    /* 0x70 */ unsigned __int32 SeedItemId;
+    /* 0x74 */ unsigned __int32 SeedInventoryCount;
+    /* 0x78 */ unsigned __int32 SeedIconId;
+    /*      */ byte _gap_0x7C[0x4];
+    /* 0x80 */ Client_System_String_Utf8String SeedName;
+    /* 0xE8 */ byte WaterLevel;
+    /* 0xE9 */ byte GrowthLevel;
+    /*      */ byte _gap_0xEA[0x2];
+    /* 0xEC */ unsigned __int32 YieldItemId;
+    /* 0xF0 */ unsigned __int32 YieldAvailable;
+    /* 0xF4 */ bool UnderCare;
+    /* 0xF5 */ bool CareHalted;
+    /* 0xF6 */ bool WasUnderCare;
+    /* 0xF7 */ bool Flag8;
+};
+
+__unaligned struct StdVectorClientUIAgentAgentMJIFarmManagementSeed /* Size=0x18 */
+{
+    /* 0x00 */ Client_UI_Agent_AgentMJIFarmManagement_Seed* First;
+    /* 0x08 */ Client_UI_Agent_AgentMJIFarmManagement_Seed* Last;
+    /* 0x10 */ Client_UI_Agent_AgentMJIFarmManagement_Seed* End;
+};
+
+__unaligned struct Client_UI_Agent_AgentMJIFarmManagement /* Size=0x13D8 */
+{
+    /* 0x0000 */ Component_GUI_AgentInterface AgentInterface;
+    /* 0x0028 */ Component_GUI_AtkEventInterface* OpHandler;
+    /*        */ byte _gap_0x30[0x18];
+    /* 0x0048 */ Client_UI_Agent_AgentMJIFarmManagement_Slot Slots[0x14];
+    /* 0x13A8 */ StdVectorClientUIAgentAgentMJIFarmManagementSeed Seeds;
+    /* 0x13C0 */ __int32 NumSlots;
+    /* 0x13C4 */ __int32 CurContextMenuRow;
+    /* 0x13C8 */ __int32 CurContextOpType;
+    /* 0x13CC */ bool DelayShow;
+    /*        */ byte _gap_0x13CD;
+    /*        */ byte _gap_0x13CE[0x2];
+    /* 0x13D0 */ __int32 TotalAvailableYield;
+    /* 0x13D4 */ __int32 ExpectedTotalAvailableYield;
+};
+
+__unaligned struct Client_UI_Agent_AgentMJIFarmManagement_Seed /* Size=0x78 */
+{
+    /* 0x00 */ unsigned __int32 ItemId;
+    /* 0x04 */ unsigned __int32 Count;
+    /* 0x08 */ unsigned __int32 IconId;
+    /*      */ byte _gap_0xC[0x4];
+    /* 0x10 */ Client_System_String_Utf8String Name;
+};
+
+__unaligned struct Client_UI_Agent_AgentMJIGatheringHouse_StringsData /* Size=0x138 */
+{
+    /* 0x000 */ Client_System_String_Utf8String ConfirmText;
+    /* 0x068 */ Client_System_String_Utf8String FinishTimeText[0x2];
+};
+
+__unaligned struct Client_UI_Agent_AgentMJIGatheringHouse /* Size=0x200 */
+{
+    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
+    /* 0x028 */ Client_Game_MJI_MJIManager* Manager;
+    /* 0x030 */ Client_Game_MJI_MJIGranariesState* GranariesState;
+    /* 0x038 */ Client_UI_Agent_AgentMJIGatheringHouse_AgentData* Data;
+    /* 0x040 */ Client_UI_Agent_AgentMJIGatheringHouse_StringsData Strings;
+    /* 0x178 */ __int32 ConfirmAddonHandle;
+    /* 0x17C */ byte CurGranaryIndex;
+    /*       */ byte _gap_0x17D;
+    /*       */ byte _gap_0x17E[0x2];
+    /*       */ byte _gap_0x180[0x8];
+    /* 0x188 */ Client_System_String_Utf8String CurExpeditionName;
+    /* 0x1F0 */ byte CurActiveExpeditionId;
+    /* 0x1F1 */ byte CurSelectedExpeditionId;
+    /* 0x1F2 */ byte CurHoveredExpeditionId;
+    /* 0x1F3 */ byte CurActiveDays;
+    /* 0x1F4 */ byte CurSelectedDays;
+    /*       */ byte _gap_0x1F5;
+    /*       */ byte _gap_0x1F6[0x2];
+    /* 0x1F8 */ __int32 SelectExpeditionAddonHandle;
+    /* 0x1FC */ Client_UI_Agent_AgentMJIGatheringHouse_Confirmation ConfirmType;
+};
+
+__unaligned struct StdVectorClientUIAgentAgentMJIGatheringHouseExpeditionData /* Size=0x18 */
+{
+    /* 0x00 */ Client_UI_Agent_AgentMJIGatheringHouse_ExpeditionData* First;
+    /* 0x08 */ Client_UI_Agent_AgentMJIGatheringHouse_ExpeditionData* Last;
+    /* 0x10 */ Client_UI_Agent_AgentMJIGatheringHouse_ExpeditionData* End;
+};
+
+__unaligned struct StdVectorClientUIAgentAgentMJIGatheringHouseExpeditionDesc /* Size=0x18 */
+{
+    /* 0x00 */ Client_UI_Agent_AgentMJIGatheringHouse_ExpeditionDesc* First;
+    /* 0x08 */ Client_UI_Agent_AgentMJIGatheringHouse_ExpeditionDesc* Last;
+    /* 0x10 */ Client_UI_Agent_AgentMJIGatheringHouse_ExpeditionDesc* End;
+};
+
+__unaligned struct StdVectorClientUIAgentAgentMJIGatheringHouseExpeditionItem /* Size=0x18 */
+{
+    /* 0x00 */ Client_UI_Agent_AgentMJIGatheringHouse_ExpeditionItem* First;
+    /* 0x08 */ Client_UI_Agent_AgentMJIGatheringHouse_ExpeditionItem* Last;
+    /* 0x10 */ Client_UI_Agent_AgentMJIGatheringHouse_ExpeditionItem* End;
+};
+
+__unaligned struct StdVectorClientUIAgentAgentMJIGatheringHouseResource /* Size=0x18 */
+{
+    /* 0x00 */ Client_UI_Agent_AgentMJIGatheringHouse_Resource* First;
+    /* 0x08 */ Client_UI_Agent_AgentMJIGatheringHouse_Resource* Last;
+    /* 0x10 */ Client_UI_Agent_AgentMJIGatheringHouse_Resource* End;
+};
+
+__unaligned struct Client_UI_Agent_AgentMJIGatheringHouse_AgentData /* Size=0xB8 */
+{
+    /* 0x00 */ Client_UI_Agent_AgentMJIGatheringHouse* Owner;
+    /*      */ byte _gap_0x8[0x30];
+    /* 0x38 */ StdVectorClientUIAgentAgentMJIGatheringHouseExpeditionData Expeditions;
+    /* 0x50 */ StdVectorClientUIAgentAgentMJIGatheringHouseExpeditionDesc ExpeditionDescs;
+    /* 0x68 */ StdVectorClientUIAgentAgentMJIGatheringHouseExpeditionItem ExpeditionItems;
+    /* 0x80 */ StdVectorClientUIAgentAgentMJIGatheringHouseResource Resources;
+    /* 0x98 */ StdVectorunsignedint32 ItemsPendingIconUpdate;
+    /* 0xB0 */ bool Initialized;
+    /*      */ byte _gap_0xB1;
+    /*      */ byte _gap_0xB2[0x2];
+    /*      */ byte _gap_0xB4[0x4];
+};
+
+__unaligned struct Client_UI_Agent_AgentMJIGatheringHouse_ExpeditionData /* Size=0x120 */
+{
+    /* 0x000 */ byte ExpeditionId;
+    /*       */ byte _gap_0x1;
+    /*       */ byte _gap_0x2[0x2];
+    /*       */ byte _gap_0x4[0x4];
+    /* 0x008 */ Client_System_String_Utf8String Name;
+    /* 0x070 */ unsigned __int32 NormalItemIds[0x14];
+    /* 0x0C0 */ unsigned __int32 NormalIconIds[0x14];
+    /* 0x110 */ byte NumNormalItems;
+    /*       */ byte _gap_0x111;
+    /*       */ byte _gap_0x112[0x2];
+    /* 0x114 */ unsigned __int32 RareItemId;
+    /* 0x118 */ unsigned __int32 RareIconId;
+    /*       */ byte _gap_0x11C[0x4];
+};
+
+__unaligned struct Client_UI_Agent_AgentMJIGatheringHouse_ExpeditionDesc /* Size=0x8 */
+{
+    /* 0x0 */ byte ExpeditionId;
+    /*     */ byte _gap_0x1;
+    /* 0x2 */ byte RarePouchId;
+    /*     */ byte _gap_0x3;
+    /*     */ byte _gap_0x4[0x2];
+    /* 0x6 */ unsigned __int16 NameId;
+};
+
+__unaligned struct Client_UI_Agent_AgentMJIGatheringHouse_ExpeditionItem /* Size=0x6 */
+{
+    /* 0x0 */ unsigned __int16 ExpeditionId;
+    /*     */ byte _gap_0x2[0x2];
+    /* 0x4 */ byte PouchId;
+    /* 0x5 */ byte u5;
+};
+
+__unaligned struct Client_UI_Agent_AgentMJIGatheringHouse_Resource /* Size=0xC */
+{
+    /* 0x0 */ unsigned __int16 PouchId;
+    /*     */ byte _gap_0x2[0x2];
+    /* 0x4 */ unsigned __int32 ItemId;
+    /* 0x8 */ unsigned __int32 IconId;
+};
+
+__unaligned struct Client_UI_Agent_AgentMJINekomimiRequest /* Size=0x30 */
+{
+    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
+    /* 0x28 */ Client_UI_Agent_AgentMJINekomimiRequest_FavorsData* Data;
+};
+
+__unaligned struct Client_UI_Agent_AgentMJINekomimiRequest_ItemData /* Size=0x80 */
+{
+    /* 0x00 */ unsigned __int16 CraftObjectId;
+    /*      */ byte _gap_0x2[0x2];
+    /* 0x04 */ unsigned __int32 IconRowId;
+    /* 0x08 */ unsigned __int32 ItemRowId;
+    /*      */ byte _gap_0xC[0x4];
+    /* 0x10 */ Client_System_String_Utf8String Name;
+    /* 0x78 */ byte NumShipped;
+    /* 0x79 */ byte NumRequired;
+    /* 0x7A */ byte NumScheduled;
+    /* 0x7B */ byte Reward;
+    /* 0x7C */ Client_UI_Agent_AgentMJINekomimiRequest_ItemFlags Flags;
+    /*      */ byte _gap_0x7D;
+    /*      */ byte _gap_0x7E[0x2];
+};
+
+__unaligned struct Client_UI_Agent_AgentMJINekomimiRequest_FavorsData /* Size=0x318 */
+{
+    /* 0x000 */ __int32 UpdateState;
+    /*       */ byte _gap_0x4[0x4];
+    /* 0x008 */ Client_UI_Agent_AgentMJINekomimiRequest_ItemData Items[0x6];
+    /* 0x308 */ __int32 WeekStartTime;
+    /* 0x30C */ byte FullDeliveryBonus;
+    /*       */ byte _gap_0x30D;
+    /*       */ byte _gap_0x30E[0x2];
+    /* 0x310 */ byte AddonOpened;
+    /* 0x311 */ byte Flags;
+    /*       */ byte _gap_0x312[0x2];
+    /*       */ byte _gap_0x314[0x4];
+};
+
 __unaligned struct Client_UI_Agent_AgentMJIPouch /* Size=0x38 */
 {
     /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
@@ -14941,13 +15682,6 @@ __unaligned struct StdVectorClientUIAgentPouchInventoryItemPtr /* Size=0x18 */
     /* 0x00 */ Client_UI_Agent_PouchInventoryItem** First;
     /* 0x08 */ Client_UI_Agent_PouchInventoryItem** Last;
     /* 0x10 */ Client_UI_Agent_PouchInventoryItem** End;
-};
-
-__unaligned struct StdVectorClientSystemStringUtf8String /* Size=0x18 */
-{
-    /* 0x00 */ Client_System_String_Utf8String* First;
-    /* 0x08 */ Client_System_String_Utf8String* Last;
-    /* 0x10 */ Client_System_String_Utf8String* End;
 };
 
 __unaligned struct Client_UI_Agent_AgentMJIPouch_PouchInventoryData /* Size=0x1A0 */
@@ -18799,13 +19533,6 @@ __unaligned struct Component_GUI_AtkComponentTreeList_AtkComponentTreeListVTable
     /*     */ __int64 _vf30;
     /* 0xF8 */ void (__fastcall *SelectItem)(Component_GUI_AtkComponentTreeList* a1, unsigned __int32 a2, bool a3);
     /* 0x100 */ void (__fastcall *DeselectItem)(Component_GUI_AtkComponentTreeList* a1);
-};
-
-__unaligned struct StdVectorunsignedint32 /* Size=0x18 */
-{
-    /* 0x00 */ unsigned __int32* First;
-    /* 0x08 */ unsigned __int32* Last;
-    /* 0x10 */ unsigned __int32* End;
 };
 
 __unaligned struct StdVectorBytePtr /* Size=0x18 */

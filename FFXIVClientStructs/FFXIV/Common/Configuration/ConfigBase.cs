@@ -48,7 +48,7 @@ public unsafe struct ConfigValue {
 public unsafe partial struct ConfigEntry {
     [FieldOffset(0x0)] public ConfigProperties Properties;
     [FieldOffset(0x10)] public byte* Name; // null-terminated string
-    [FieldOffset(0x18)] public int Type;
+    [FieldOffset(0x18)] public int Type; //1:Empty 2:uint 3:float 4:string
     [FieldOffset(0x20)] public ConfigValue Value;
     [FieldOffset(0x28)] public ConfigBase* Owner;
     [FieldOffset(0x30)] public uint Index;
@@ -88,10 +88,13 @@ public unsafe struct ChangeEventInterface {
 // size = 0x110
 // ctor E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? C6 86 ?? ?? ?? ?? ?? 4C 8D B6 ?? ?? ?? ?? 
 [StructLayout(LayoutKind.Explicit, Size = 0x110)]
-public unsafe struct ConfigBase {
+public unsafe partial struct ConfigBase {
     [FieldOffset(0x0)] public void* vtbl;
     [FieldOffset(0x8)] public ChangeEventInterface* Listener;
     [FieldOffset(0x14)] public uint ConfigCount;
     [FieldOffset(0x18)] public ConfigEntry* ConfigEntry; // array
     [FieldOffset(0x50)] public Utf8String UnkString;
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 63 58")]
+    public partial void* GetConfigOption(uint index);
 }
