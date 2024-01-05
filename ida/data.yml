@@ -3510,6 +3510,8 @@ classes:
     vtbls:
       - ea: 0x1419FEE58
         base: Client::Graphics::Render::PostBoneDeformerBase
+    vfuncs:
+      0: dtor
   Client::Graphics::Scene::Object:
     vtbls:
       - ea: 0x1419FEA50
@@ -3583,6 +3585,7 @@ classes:
       - ea: 0x1419FEF10
         base: Client::Graphics::Scene::DrawObject
     vfuncs:
+      24: UpdateTint
       51: ForceWetness
       52: ResetWetness
       67: FlagSlotForUpdate
@@ -3931,6 +3934,7 @@ classes:
         base: Common::Configuration::ConfigBase::ChangeEventInterface
     funcs:
       0x1404EF1D0: ctor
+      0x1404F5330: ProcessMouseState
       0x1404F78D0: InteractWithObject
       0x1404FB530: OpenObjectInteraction
       0x1404F91B0: GetHardTargetObjectId
@@ -3952,6 +3956,8 @@ classes:
       0x1404F96C0: SetFocusTargetByObjectId
       0x1404FA160: IsObjectInViewRange
       0x1404FA2B0: GetMouseOverObject
+      0x1404FB4A0: HandleRightClick
+      0x1404FB6B0: HandleLeftClick
       0x1404FB9F0: RemoveObjectFromTargets
       0x1404F7EB0: IsObjectOnScreen
   Client::Game::Control::Control:
@@ -5342,6 +5348,8 @@ classes:
     funcs:
       0x140748390: IsCasting
       0x140758E40: GetCompanionOwnerID
+      0x140759050: FreezeMotion
+      0x140759290: ResumeMotion
       0x140759A00: SetTargetId
       0x140759A70: GetTargetId
       0x14075A5C0: GetParentCharacter
@@ -8421,8 +8429,17 @@ classes:
       - ea: 0x141A4B9E8
   Client::Game::Event::EventGPoseController:
     funcs:
+      0x1407FCDD0: IsFaceCameraEnabled
+      0x1407FCDF0: ToggleFaceCamera
+      0x1407FCEB0: IsGazeCameraEnabled
+      0x1407FCED0: ToggleGazeCamera
+      0x1407FCF60: ToggleMotionFreeze
+      0x1407FD390: EnableCameraLight
+      0x1407FD620: DisableCameraLight
+      0x140801400: SetupDefaultTarget
       0x140805350: AddCharacterToGPose
       0x1408054D0: RemoveCharacterFromGPose
+      0x140807300: CycleIdleCamTargets
   Client::Game::Event::LeveDirector:
     vtbls:
       - ea: 0x141A4DBD0
@@ -11360,6 +11377,10 @@ classes:
   hkaTwoJointsIkSolver:
     funcs:
       0x1417F05C0: ?solve@hkaTwoJointsIkSolver@@SA?AVhkBool@@AEBUSetup@1@AEAVhkaPose@@@Z
+  hkaCcdIkSolver:
+    funcs:
+      0x1417CE920: ctr
+      0x1417CE950: solve
   zlib:
     funcs:
       # these names are best guesses based on what things look like on a 1.2.5 version.
