@@ -43,7 +43,8 @@ public unsafe struct Matrix4x3 {
         M11 = M11, M12 = M12, M13 = M13, M14 = 0,
         M21 = M21, M22 = M22, M23 = M23, M24 = 0,
         M31 = M31, M32 = M32, M33 = M33, M34 = 0,
-        M41 = M41, M42 = M42, M43 = M43, M44 = 1 };
+        M41 = M41, M42 = M42, M43 = M43, M44 = 1
+    };
 
     public Vector3 TransformCoordinate(Vector3 local) => new(
         M11 * local.X + M21 * local.Y + M31 * local.Z + M41,

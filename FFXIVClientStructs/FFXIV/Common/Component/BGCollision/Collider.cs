@@ -194,8 +194,7 @@ public unsafe partial struct ColliderMesh {
 /// Box collider - local center is at origin, half-width is 1 in each dimension - so local bounds are (-1,-1,-1) to (1,1,1).
 /// </summary>
 [StructLayout(LayoutKind.Explicit, Size = 0x140)]
-public unsafe partial struct ColliderBox
-{
+public unsafe partial struct ColliderBox {
     [FieldOffset(0x000)] public Collider Collider; // base class
     [FieldOffset(0x0A0)] public Vector3 Translation;
     [FieldOffset(0x0AC)] public Vector3 TranslationPrev;
@@ -211,8 +210,7 @@ public unsafe partial struct ColliderBox
 /// Cylinder collider - local center is at origin, local axis is (0,1,0), half-height and radius are 1 - so local bounds are (-1,-1,-1) to (1,1,1).
 /// </summary>
 [StructLayout(LayoutKind.Explicit, Size = 0x148)]
-public unsafe partial struct ColliderCylinder
-{
+public unsafe partial struct ColliderCylinder {
     [FieldOffset(0x000)] public Collider Collider; // base class
     [FieldOffset(0x0A0)] public Vector3 Translation;
     [FieldOffset(0x0AC)] public Vector3 TranslationPrev;
@@ -230,8 +228,7 @@ public unsafe partial struct ColliderCylinder
 /// At least some parts of the code assume that scale is always uniform.
 /// </summary>
 [StructLayout(LayoutKind.Explicit, Size = 0x150)]
-public unsafe partial struct ColliderSphere
-{
+public unsafe partial struct ColliderSphere {
     [FieldOffset(0x000)] public Collider Collider; // base class
     [FieldOffset(0x0A0)] public bool Dirty;
     [FieldOffset(0x0A4)] public Vector3 Translation;
@@ -249,8 +246,7 @@ public unsafe partial struct ColliderSphere
 /// There are two flavours of planes - one-sided and two-sided (latter is implemented as a derived class without any new fields).
 /// </summary>
 [StructLayout(LayoutKind.Explicit, Size = 0x140)]
-public unsafe partial struct ColliderPlane
-{
+public unsafe partial struct ColliderPlane {
     [FieldOffset(0x000)] public Collider Collider; // base class
     [FieldOffset(0x0A0)] public Vector3 Translation;
     [FieldOffset(0x0AC)] public Vector3 TranslationPrev;
