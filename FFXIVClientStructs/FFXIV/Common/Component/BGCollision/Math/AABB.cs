@@ -1,3 +1,5 @@
+using System.Numerics;
+
 namespace FFXIVClientStructs.FFXIV.Common.Component.BGCollision.Math;
 
 // 3D axis-aligned bounding box
