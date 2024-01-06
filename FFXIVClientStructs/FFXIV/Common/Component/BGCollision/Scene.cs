@@ -92,8 +92,7 @@ public unsafe partial struct SceneWrapper {
 
     [StructLayout(LayoutKind.Explicit, Size = 0x84)]
     public unsafe partial struct ColliderList {
-        [FieldOffset(0x00), FixedSizeArray<Pointer<Collider>>(16)]
-        public fixed byte Colliders[16 * 8];
+        [FieldOffset(0x00), FixedSizeArray<Pointer<Collider>>(16)] public fixed byte Colliders[16 * 8];
         [FieldOffset(0x80)] public int Count;
     }
 }

@@ -31,7 +31,7 @@ public unsafe partial struct Camera {
     public static Vector3 ScreenToWorldPoint(Vector2 screenPoint) {
         var ray = CameraManager.Instance()->CurrentCamera->ScreenPointToRay(screenPoint);
         BGCollisionModule.Raycast(ray.Origin, ray.Direction, out var hit);
-        return hit.Point;
+        return new Vector3(hit.Point.X, hit.Point.Y, hit.Point.Z);
     }
 
     public static Vector2 WorldToScreenPoint(Vector3 worldPoint) {
@@ -44,7 +44,7 @@ public unsafe partial struct Camera {
         var flags = stackalloc int[] { 0x4000, 0x4000, 0, 0 };
         var hit = new RaycastHit();
         var result = BGCollisionModule.Raycast(ray.Origin, ray.Direction, 100000.0f, &hit, flags);
-        worldPos = hit.Point;
+        worldPos = new Vector3(hit.Point.X, hit.Point.Y, hit.Point.Z);
         return result;
     }
 

@@ -76,14 +76,11 @@ public unsafe partial struct RaycastHit {
     [FieldOffset(0x18)] public Vector3 V2;
     [FieldOffset(0x24)] public Vector3 V3;
 
-    [FieldOffset(0x30), Obsolete("Use Normal instead.")]
-    public Vector3 Unk30;
+    [FieldOffset(0x30), Obsolete("Use Normal instead.")] public Vector3 Unk30;
     [FieldOffset(0x30)] public Vector3 Normal; // normal to the collider shape at intersection point; not filled for all collider types
 
-    [FieldOffset(0x40), Obsolete("Use Material instead.")]
-    public int Flags; // layers i guess?
-    [FieldOffset(0x44), Obsolete("Use Material instead.")]
-    public int Unk44; // part of flags?
+    [FieldOffset(0x40), Obsolete("Use Material instead.")] public int Flags; // layers i guess?
+    [FieldOffset(0x44), Obsolete("Use Material instead.")] public int Unk44; // part of flags?
     [FieldOffset(0x40)] public ulong Material; // see notes on collider materials
 
     [FieldOffset(0x48)] public float Distance;
