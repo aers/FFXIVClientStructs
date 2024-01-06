@@ -1,4 +1,4 @@
-namespace FFXIVClientStructs.FFXIV.Common.Component.BGCollision.Math;
+namespace FFXIVClientStructs.FFXIV.Common.Math;
 
 // 3D axis-aligned bounding box
 [StructLayout(LayoutKind.Explicit, Size = 0x18)]

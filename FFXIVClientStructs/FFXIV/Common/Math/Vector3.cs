@@ -1,6 +1,6 @@
 namespace FFXIVClientStructs.FFXIV.Common.Math;
 
-[StructLayout(LayoutKind.Explicit, Size = 0x10)]
+[StructLayout(LayoutKind.Explicit, Size = 0xC)]
 public struct Vector3 : IEquatable<Vector3>, IFormattable {
     [FieldOffset(0x0)] public float X;
     [FieldOffset(0x4)] public float Y;

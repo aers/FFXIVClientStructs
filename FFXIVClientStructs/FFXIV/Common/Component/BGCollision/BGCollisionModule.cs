@@ -1,4 +1,4 @@
-using FFXIVClientStructs.FFXIV.Common.Component.BGCollision.Math;
+using System.Numerics;
 
 namespace FFXIVClientStructs.FFXIV.Common.Component.BGCollision;
 
@@ -45,12 +45,12 @@ public unsafe partial struct BGCollisionModule {
     public partial bool RaycastEx(RaycastHit* hitInfo, Vector3 origin, Vector3 direction, float maxDistance, int layerMask, int* flags);
 
     [MemberFunction("E8 ?? ?? ?? ?? 44 0F B6 F0 84 C0 74 ?? 40 38 BD")]
-    public static partial bool Raycast(Common.Math.Vector3 origin, Common.Math.Vector3 direction, float maxDistance, RaycastHit* hitInfo, int* flags);
+    public static partial bool Raycast(Vector3 origin, Vector3 direction, float maxDistance, RaycastHit* hitInfo, int* flags);
 
     [MemberFunction("48 83 EC 48 48 8B 05 ?? ?? ?? ?? 4D 8B D1")]
-    public static partial bool Raycast2(Common.Math.Vector3 origin, Common.Math.Vector3 direction, float maxDistance, RaycastHit* hitInfo, int* flags);
+    public static partial bool Raycast2(Vector3 origin, Vector3 direction, float maxDistance, RaycastHit* hitInfo, int* flags);
 
-    public static bool Raycast(Common.Math.Vector3 origin, Common.Math.Vector3 direction, out RaycastHit hitInfo, float maxDistance = 1000000f) {
+    public static bool Raycast(Vector3 origin, Vector3 direction, out RaycastHit hitInfo, float maxDistance = 1000000f) {
         var flags = stackalloc int[] { 0x4000, 0, 0x4000, 0 };
         var hit = new RaycastHit();
         var result = Raycast(origin, direction, maxDistance, &hit, flags);
@@ -58,7 +58,7 @@ public unsafe partial struct BGCollisionModule {
         return result;
     }
 
-    public static bool Raycast2(Common.Math.Vector3 origin, Common.Math.Vector3 direction, out RaycastHit hitInfo, float maxDistance = 1000000f) {
+    public static bool Raycast2(Vector3 origin, Vector3 direction, out RaycastHit hitInfo, float maxDistance = 1000000f) {
         var flags = stackalloc int[] { 0x4000, 0, 0x4000, 0 };
         var hit = new RaycastHit();
         var result = Raycast2(origin, direction, maxDistance, &hit, flags);
@@ -66,7 +66,6 @@ public unsafe partial struct BGCollisionModule {
         return result;
     }
 }
-
 
 [StructLayout(LayoutKind.Explicit, Size = 0x58)]
 public unsafe partial struct RaycastHit {
@@ -77,11 +76,14 @@ public unsafe partial struct RaycastHit {
     [FieldOffset(0x18)] public Vector3 V2;
     [FieldOffset(0x24)] public Vector3 V3;
 
-    [FieldOffset(0x30), Obsolete("Use Normal instead.")] public Vector3 Unk30;
+    [FieldOffset(0x30), Obsolete("Use Normal instead.")]
+    public Vector3 Unk30;
     [FieldOffset(0x30)] public Vector3 Normal; // normal to the collider shape at intersection point; not filled for all collider types
 
-    [FieldOffset(0x40), Obsolete("Use Material instead.")] public int Flags; // layers i guess?
-    [FieldOffset(0x44), Obsolete("Use Material instead.")] public int Unk44; // part of flags?
+    [FieldOffset(0x40), Obsolete("Use Material instead.")]
+    public int Flags; // layers i guess?
+    [FieldOffset(0x44), Obsolete("Use Material instead.")]
+    public int Unk44; // part of flags?
     [FieldOffset(0x40)] public ulong Material; // see notes on collider materials
 
     [FieldOffset(0x48)] public float Distance;

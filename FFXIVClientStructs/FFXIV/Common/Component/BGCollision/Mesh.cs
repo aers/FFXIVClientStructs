@@ -1,5 +1,5 @@
 using System.Runtime.CompilerServices;
-using FFXIVClientStructs.FFXIV.Common.Component.BGCollision.Math;
+using FFXIVClientStructs.FFXIV.Common.Math;
 
 namespace FFXIVClientStructs.FFXIV.Common.Component.BGCollision;
 
