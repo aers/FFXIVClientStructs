@@ -58,7 +58,7 @@ public unsafe partial struct BGCollisionModule {
         return result;
     }
 
-    public static bool Raycast2(Common.Math.Vector3 origin, Common.Math.Vector3 direction, out RaycastHit hitInfo, float maxDistance = 1000000f) {
+    public static bool Raycast2(Vector3 origin, Vector3 direction, out RaycastHit hitInfo, float maxDistance = 1000000f) {
         var flags = stackalloc int[] { 0x4000, 0, 0x4000, 0 };
         var hit = new RaycastHit();
         var result = Raycast2(origin, direction, maxDistance, &hit, flags);
