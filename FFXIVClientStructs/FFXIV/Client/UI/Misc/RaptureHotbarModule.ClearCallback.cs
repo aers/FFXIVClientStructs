@@ -3,10 +3,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 public partial struct RaptureHotbarModule {
     [StructLayout(LayoutKind.Explicit, Size = 0x08)]
     public unsafe partial struct ClearCallback {
-        [FieldOffset(0x0)] public void** vtbl;
+        [FieldOffset(0x0), CExportIgnore] public void** vtbl;
 
         [VirtualFunction(0)]
-        public partial void Dtor(bool dispose);
+        public partial void Dtor(bool freeMemory);
         
         /// <summary>
         /// Resets <b>ALL</b> hotbars for the current player to their default states.
