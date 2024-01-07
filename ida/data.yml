@@ -5949,15 +5949,15 @@ classes:
   Client::UI::Misc::RaptureHotbarModule::ClearCallback:
     vtbls:
       - ea: 0x141A6C208
-  Client::Game::UI::Hotbar:
-    vtbls:
-      - ea: 0x141A6C1B8
-        base: Client::UI::Misc::RaptureHotbarModule::ClearCallback
     vfuncs:
       0: dtor
       1: ResetAllHotbars  # (self, RaptureHotbarModule*) -> bool
       2: ResetPvEHotbarsForClass  # (self, RaptureHotbarModule*, int) -> bool
       3: ResetPvPHotbarsForClass  # (self, RaptureHotbarModule*, uint) -> bool
+  Client::Game::UI::Hotbar:
+    vtbls:
+      - ea: 0x141A6C1B8
+        base: Client::UI::Misc::RaptureHotbarModule::ClearCallback
     funcs:
       0x140998C50: CancelCast
       0x140936370: ResetPvEHotbarsForClassAtLevel # (self, int, uint) -> void
