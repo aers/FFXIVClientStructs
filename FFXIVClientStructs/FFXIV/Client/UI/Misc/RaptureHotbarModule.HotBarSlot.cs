@@ -12,7 +12,7 @@ public unsafe partial struct HotBarSlot {
     /// The string that appears when a hotbar slot is hovered over.
     ///
     /// Calculated by concatenating GetDisplayNameForSlot with PopUpKeybindHint (in most cases).
-    [FieldOffset(0x00)] public Utf8String PopUpHelp; // TODO (apiX): Rename to DisplayName
+    [FieldOffset(0x00)] public Utf8String PopUpHelp;
 
     /// The "cost text" to display when 0xCB is in mode 2 or 4.
     ///
