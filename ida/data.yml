@@ -935,16 +935,27 @@ classes:
       0x14005A980: FormatString
       0x14005AE80: GetString
       0x14005CD10: Clear
-      0x14005AFB0: GetSize
       0x14005A240: Concat
+      0x14005A3B0: ConcatCStr
       0x14005A470: Equals
       0x14005A4C0: EqualsString
       0x14005A500: NotEquals
       0x14005A550: NotEqualsString
-      0x14005C950: Compare
+      0x14005AE90: GetLength #count of character
+      0x14005AF30: CalcLength #does not use saved value
+      0x14005AFB0: GetSize
+      0x14005AFC0: GetCharAt
       0x14005AFD0: AddChar
+      0x14005B020: PrependChar
+      0x14005B080: PopBack
+      0x14005B3A0: ToLower
+      0x14005B680: SubStr
+      0x14005B6C0: CopySubStrTo
       0x14005BA30: Append
+      0x14005C950: Compare
       0x14005CEA0: SetSize
+      0x14005DC00: FindLastOfImpl
+      0x14005E100: FindFirstOfImpl
       0x1406502E0: ToInteger # strtoi for utf8string (str, base)
   Component::GUI::AtkValue:
     funcs:
