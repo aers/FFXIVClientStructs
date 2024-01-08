@@ -2264,7 +2264,7 @@ classes:
   Client::System::Input::Cursor:
     vtbls:
       - ea: 0x1419B0378
-    vfuns:
+    vfuncs:
       0: dtor
       4: SetCursorTyp
       5: SetIsCursorVisible
