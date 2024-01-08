@@ -1,13 +1,18 @@
 version: 2023.11.09.0000.0000
 
 globals:
+  0x1419B127C: g_PathSeparator
+  0x1419B1300: g_ConfigFileName
   0x1419BD160: g_UIColorTable
   0x141A05970: g_HUDScaleTable
   0x141FE5380: g_ClientInstanceLimit
   0x142171848: g_Client::Game::Control::InputManager_MouseButtonHoldState
   0x142187be0: g_StackCookie
   0x142187be8: g_InverseStackCookie
-  0x1421a54a0: g_OSVersion
+  0x1421A3470: g_GameWindow # not a pointer
+  0x1421A54A0: g_OSVersion
+  0x1421AC230: g_ThreadManager
+  0x1421AC240: g_FileManager
   0x1421AC368: g_CurrentCharaSelectCharacter # Client::Game::Character::Character*
   0x1421AC540: g_CharaSelectCharacterList # see Client::UI::Agent::AgentLobby::CharaSelectCharacterList
   0x1421BE480: g_RenderSkeletonLinkedListStart
@@ -64,6 +69,9 @@ globals:
   0x142668840: ?s_instance@?$hkSingleton@VhkVtableClassRegistry@@@@2PEAVhkVtableClassRegistry@@EA
 
 functions:
+  0x140058500: WinMain
+  0x1400581B0: std:string::ctor_FromSubStr #(other, idx, len)
+  0x1400582F0: std:string::ctor_FromCharArr #(arr, len)
   0x1400609F0: MemoryManager_AllocDefaultSpace
   0x140060A80: MemoryManager_Alloc
   0x140062190: MemoryManager_GetDefaultSpace
@@ -76,12 +84,15 @@ functions:
   0x140060AB0: MemoryManager_SpaceAlloc
   0x1400654E0: IsMacClient
   0x1400951b0: CheckOsTypeAndVersion
+  0x140067500: GetMyDocumntsFolder #as UTF8String
+  0x1400976D0: CreateDirectoryRecursive
   0x1400A6BD0: GetCurrentUnixTimestamp # in seconds
   0x1400A6D00: Client::UI::PlaySoundEffect # this is a static function in the UI namespace, arg1 is the SE
   0x1400A8990: Client::UI::GetUIColor # (idx, &color, &edgeColor)
   0x1400A89D0: Client::UI::GetNumberAsBoxedChar # (uint) accepts numbers 0-30
   0x1400A8A80: Client::UI::GetNumberAsDigitChars # (uint) accepts numbers 0-999
   0x1401C0590: j_SleepEx
+  0x1401C05A0: j_Sleep
   0x1402ED030: CountdownPointer
   0x140318B30: CleanupCharaSelectCharacters
   0x140335660: std::vector_SetSize
@@ -451,6 +462,8 @@ classes:
   Client::System::Input::InputDeviceManager:
     instances:
       - ea: 0x1421A6FA0
+    funcs:
+      0x14019AD70: ctor # static
   Client::System::Resource::Handle::ResourceHandleFactory:
   Client::UI::Agent::AgentMap::MapMarkerStructSearch:
   Client::UI::Atk2DMap:
@@ -1408,6 +1421,29 @@ classes:
         base: Common::Configuration::ConfigBase::ChangeEventInterface
     funcs:
       0x14008CEB0: ctor
+      0x14008E2F0: GetWindowRectFromConfig
+      0x14008E420: OpenGameWindow
+      0x14008E670: GetVirtualScreenResolution
+      0x14008E6C0: SetFramerateCapByConfigOption
+  Client::System::Framework::GameWindow:
+    funcs:
+      0x1400655D0: SetWindowRect
+      0x1400659A0: SetWindowSize
+      0x140065AF0: GetWindowPos
+      0x140065B50: SetWindowPos
+      0x140065BE0: GetWindowSize
+      0x140065DF0: ScreenToClient
+  Client::System::Framework::CursorManager:
+    vtbls:
+      - ea: 0x1419B0378
+    vfuns:
+      0: dtor
+      4: SetCursorTyp
+      5: SetIsCursorVisible
+      8: SetUSeSoftwareCursor
+      9: GetUSeSoftwareCursor
+      14: IsCursorVisible
+      21: GetIsMouseNotCaptured
   Client::System::Framework::Task:
     vtbls:
       - ea: 0x1419B16C0
@@ -1443,6 +1479,7 @@ classes:
       - ea: 0x1419B1708
         base: Common::Configuration::SystemConfig
     funcs:
+      0x140069970: RegisterChangeEvent
       0x14007A3F0: BuildConfigList
   Client::System::Configuration::DevConfig:
     vtbls:
@@ -1490,7 +1527,9 @@ classes:
       0x1400950E0: TaskHousingEvent
       0x1400950F0: TaskResourceManager
       0x140095100: TaskUpdateGame
+      0x140095930: InitSteamApi
       0x140095F20: Finalize
+      0x140097390: GetSavePath
   Component::Excel::ExcelModuleInterface:
     vtbls:
       - ea: 0x1419B1770
@@ -2656,7 +2695,22 @@ classes:
     vfuncs:
       5: Run
     funcs:
+      0x1401C03B0: ctor
+      0x1401C0400: Dispose
       0x1401C0490: CreateThread
+      0x1401C0550: Wait
+      0x1401C0570: HasFinished
+      0x1401C05B0: SetAffinity
+  Client::System::Threading::ThreadManager:
+    vtbls:
+      - ea: 0x1419D2888
+        base: Client::System::Common::NonCopyable
+    funcs:
+      0x1401C06C0: InitInstance
+      0x1401C0730: ctor
+      0x1401C0780: dtor
+      0x1401C07F0: WaitAll
+      0x1401C0900: AddThread
   Client::System::File::FileInterface:
     vtbls:
       - ea: 0x1419D2BD0
@@ -2664,12 +2718,20 @@ classes:
     vtbls:
       - ea: 0x1419D2BF0
         base: Client::System::Threading::Thread
+    funcs:
+      0x1401C5EF0: ctor 
   Client::System::File::FileManager:
     vtbls:
       - ea: 0x1419D2C20
         base: Client::System::Framework::Task
     funcs:
+      0x1401C7930: GetInstance
       0x1401C79B0: ctor
+  Client::System::File::FileAccessPath:
+    funcs:
+      0x140066360: ctor
+      0x140066380: ctor_FromUtf8Str
+      0x140066F80: Copy
   Client::System::Resource::Handle::ResourceHandle:
     vtbls:
       - ea: 0x1419D4518
@@ -5308,6 +5370,8 @@ classes:
       1: IsSlotCreated
       2: GetSlot
       6: GetSlotCount
+    funcs:
+      0x1406EC180: ctor
   Client::Game::Object::GameObject:
     vtbls:
       - ea: 0x141A1E598

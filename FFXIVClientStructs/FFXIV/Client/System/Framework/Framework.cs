@@ -1,6 +1,7 @@
 using FFXIVClientStructs.FFXIV.Client.Game;
 using FFXIVClientStructs.FFXIV.Client.Network;
 using FFXIVClientStructs.FFXIV.Client.System.Configuration;
+using FFXIVClientStructs.FFXIV.Client.System.File;
 using FFXIVClientStructs.FFXIV.Client.System.Timer;
 using FFXIVClientStructs.FFXIV.Client.UI;
 using FFXIVClientStructs.FFXIV.Common.Component.BGCollision;
@@ -15,10 +16,20 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Framework;
 // ctor E8 ?? ?? ?? ?? 48 8B C8 48 89 05 ?? ?? ?? ?? EB 0A 48 8B CE 
 [StructLayout(LayoutKind.Explicit, Size = 0x35C8)]
 public unsafe partial struct Framework {
-    [FieldOffset(0x10)] public SystemConfig SystemConfig;
-    [FieldOffset(0x460)] public DevConfig DevConfig;
+    [FieldOffset(0x0010)] public SystemConfig SystemConfig;
+    [FieldOffset(0x0460)] public DevConfig DevConfig;
+    [FieldOffset(0x0570)] public SavedAppearanceManager* SavedAppearanceData;
+    [FieldOffset(0x0580)] public byte ClientLanguage;
+    [FieldOffset(0x0588)] public CursorManager* CursorManager;
 
-    [FieldOffset(0x570)] public SavedAppearanceManager* SavedAppearanceData;
+    [FieldOffset(0x0598)] public FileAccessPath ConfigFilePath;
+    [FieldOffset(0x07A8)] public GameWindow* GameWindow;
+    //584 byte
+    [FieldOffset(0x09F8)] public int CursorPosX;
+    [FieldOffset(0x09FC)] public int CursorPosY;
+
+    [FieldOffset(0x1104)] public int CursorPosX2;
+    [FieldOffset(0x1108)] public int CursorPosY2;
 
     [FieldOffset(0x1670)] public NetworkModuleProxy* NetworkModuleProxy;
     [FieldOffset(0x1678)] public bool IsNetworkModuleInitialized;
@@ -39,7 +50,9 @@ public unsafe partial struct Framework {
     [FieldOffset(0x17C4)] public float FrameRate;
     [FieldOffset(0x17D0)] public bool WindowInactive;
 
-    [FieldOffset(0x220C)] private fixed char userPath[260]; // WideChar Array
+    [FieldOffset(0x19EC)] public FileAccessPath GameFilePath;
+    [FieldOffset(0x1DFC)] public FileAccessPath SqPackFilePath;
+    [FieldOffset(0x220C)] public FileAccessPath SaveFilePath;
 
     [FieldOffset(0x2B30)] public ExcelModuleInterface* ExcelModuleInterface;
     [FieldOffset(0x2B38)] public ExdModule* ExdModule;
@@ -49,6 +62,8 @@ public unsafe partial struct Framework {
     [FieldOffset(0x2BC8)] public LuaState LuaState;
 
     [FieldOffset(0x2BF0)] public GameVersion GameVersion;
+
+    [FieldOffset(0x35C0)] public void* SteamApiLibrary;
 
     [StaticAddress("44 0F B6 C0 48 8B 0D ?? ?? ?? ??", 7, true)]
     public static partial Framework* Instance();
@@ -65,11 +80,5 @@ public unsafe partial struct Framework {
     [MemberFunction("E8 ?? ?? ?? ?? 89 47 2C")]
     public static partial long GetServerTime();
 
-    public string UserPath {
-        get {
-            fixed (char* p = userPath) {
-                return new string(p);
-            }
-        }
-    }
+    [Obsolete("Use SaveFilePath.AsString")]public string UserPath => SaveFilePath.AsString;
 }
