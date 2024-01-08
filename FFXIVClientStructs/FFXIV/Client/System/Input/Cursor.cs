@@ -1,13 +1,10 @@
-using FFXIVClientStructs.FFXIV.Client.Network;
 using FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
-using FFXIVClientStructs.FFXIV.Common.Component.BGCollision.Math;
-using FFXIVClientStructs.FFXIV.Common.Math;
 
-namespace FFXIVClientStructs.FFXIV.Client.System.Framework;
+namespace FFXIVClientStructs.FFXIV.Client.System.Input;
 
 //ctor E8 ?? ?? ?? ?? 48 8B C8 EB ?? 48 8B CE 48 89 8F
 [StructLayout(LayoutKind.Explicit, Size = 0x378)]
-public unsafe partial struct CursorManager {
+public unsafe partial struct Cursor {
     [FieldOffset(0x000)] public void* vtbl;
     [FieldOffset(0x009)] public bool UseSoftwareCursor;
     [FieldOffset(0x00B)] public bool IsCursorVisible;

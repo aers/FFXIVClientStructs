@@ -1433,17 +1433,6 @@ classes:
       0x140065B50: SetWindowPos
       0x140065BE0: GetWindowSize
       0x140065DF0: ScreenToClient
-  Client::System::Framework::CursorManager:
-    vtbls:
-      - ea: 0x1419B0378
-    vfuns:
-      0: dtor
-      4: SetCursorTyp
-      5: SetIsCursorVisible
-      8: SetUSeSoftwareCursor
-      9: GetUSeSoftwareCursor
-      14: IsCursorVisible
-      21: GetIsMouseNotCaptured
   Client::System::Framework::Task:
     vtbls:
       - ea: 0x1419B16C0
@@ -2272,6 +2261,17 @@ classes:
     vfuncs:
       3: SetCopyStagingText
       4: ApplyCopyStagingText
+  Client::System::Input::Cursor:
+    vtbls:
+      - ea: 0x1419B0378
+    vfuns:
+      0: dtor
+      4: SetCursorTyp
+      5: SetIsCursorVisible
+      8: SetUSeSoftwareCursor
+      9: GetUSeSoftwareCursor
+      14: IsCursorVisible
+      21: GetIsMouseNotCaptured
   Component::Shell::ShellCommandModule:
     vtbls:
       - ea: 0x1419B2458

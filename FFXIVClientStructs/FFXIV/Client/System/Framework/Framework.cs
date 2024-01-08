@@ -2,6 +2,7 @@ using FFXIVClientStructs.FFXIV.Client.Game;
 using FFXIVClientStructs.FFXIV.Client.Network;
 using FFXIVClientStructs.FFXIV.Client.System.Configuration;
 using FFXIVClientStructs.FFXIV.Client.System.File;
+using FFXIVClientStructs.FFXIV.Client.System.Input;
 using FFXIVClientStructs.FFXIV.Client.System.Timer;
 using FFXIVClientStructs.FFXIV.Client.UI;
 using FFXIVClientStructs.FFXIV.Common.Component.BGCollision;
@@ -20,7 +21,7 @@ public unsafe partial struct Framework {
     [FieldOffset(0x0460)] public DevConfig DevConfig;
     [FieldOffset(0x0570)] public SavedAppearanceManager* SavedAppearanceData;
     [FieldOffset(0x0580)] public byte ClientLanguage;
-    [FieldOffset(0x0588)] public CursorManager* CursorManager;
+    [FieldOffset(0x0588)] public Cursor* Cursor;
 
     [FieldOffset(0x0598)] public FileAccessPath ConfigPath;
     [FieldOffset(0x07A8)] public GameWindow* GameWindow;
