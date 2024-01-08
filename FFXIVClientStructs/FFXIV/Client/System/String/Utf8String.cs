@@ -116,6 +116,27 @@ public unsafe partial struct Utf8String : ICreatable, IDisposable {
     [MemberFunction("E8 ?? ?? ?? ?? 8B 57 ?? 84 C0"), GenerateCStrOverloads]
     public partial bool EqualsString(byte* other);
 
+    [MemberFunction("45 33 C0 4C 8B C9 4C 39 41")]
+    public partial Utf8String* ToLower();
+
+    [MemberFunction("40 53 48 83 EC ?? B8 ?? ?? ?? ?? 48 8B DA 4C 3B C8")]
+    public partial Utf8String* SubString(nint destinationAdress, ulong start, ulong length);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B F8 48 3B C3")]
+    public partial Utf8String* CopySubStrTo(Utf8String* destination, int start, int length);
+
+    [MemberFunction("44 88 4C 24 ?? 48 89 54 24 ?? 48 89 4C 24 ?? 53 41 54")]
+    public partial int FindFirstOf(Utf8String* charsToFind, int startIdx, bool exclude = false);
+
+    [MemberFunction("44 88 4C 24 ?? 53 57 41 56 48 83 EC ?? 48 83 79")]
+    public partial int FindLastOf(Utf8String* toFind, int startIdx, bool exclude = false);
+
+
+    [MemberFunction("48 8B 01 0F B6 04")]
+    public partial byte GetCharAt(ulong idx);
+
+    public byte GetCharAt(int idx) => idx < 0 ? byte.MinValue : GetCharAt((ulong)idx);
+
     [MemberFunction("E8 ?? ?? ?? ?? 40 0F B6 C7 48 8D 35")]
     public static partial Utf8String* Concat(Utf8String* str, Utf8String* buffer, Utf8String* other);
 
