@@ -22,7 +22,7 @@ public unsafe partial struct Framework {
     [FieldOffset(0x0580)] public byte ClientLanguage;
     [FieldOffset(0x0588)] public CursorManager* CursorManager;
 
-    [FieldOffset(0x0598)] public FileAccessPath ConfigFilePath;
+    [FieldOffset(0x0598)] public FileAccessPath ConfigPath;
     [FieldOffset(0x07A8)] public GameWindow* GameWindow;
     //584 byte
     [FieldOffset(0x09F8)] public int CursorPosX;
@@ -50,9 +50,9 @@ public unsafe partial struct Framework {
     [FieldOffset(0x17C4)] public float FrameRate;
     [FieldOffset(0x17D0)] public bool WindowInactive;
 
-    [FieldOffset(0x19EC)] public FileAccessPath GameFilePath;
-    [FieldOffset(0x1DFC)] public FileAccessPath SqPackFilePath;
-    [FieldOffset(0x220C)] public FileAccessPath SaveFilePath;
+    [FieldOffset(0x19EC)] private fixed char gamePath[260];
+    [FieldOffset(0x1DFC)] private fixed char sqPackPath[260];
+    [FieldOffset(0x220C)] private fixed char savePath[260];
 
     [FieldOffset(0x2B30)] public ExcelModuleInterface* ExcelModuleInterface;
     [FieldOffset(0x2B38)] public ExdModule* ExdModule;
@@ -80,5 +80,26 @@ public unsafe partial struct Framework {
     [MemberFunction("E8 ?? ?? ?? ?? 89 47 2C")]
     public static partial long GetServerTime();
 
-    [Obsolete("Use SaveFilePath.AsString")]public string UserPath => SaveFilePath.AsString;
+    [Obsolete("Use SavePath")]public string UserPath => SavePath;
+    public string GamePath 
+        { 
+        get{
+         fixed (char* p = gamePath)
+                    return new string(p);
+        }
+    }
+    public string SqPackPath 
+        { 
+        get{
+         fixed (char* p = sqPackPath)
+                    return new string(p);
+        }
+    }
+    public string SavePath 
+        { 
+        get{
+         fixed (char* p = savePath)
+                    return new string(p);
+        }
+    }
 }
