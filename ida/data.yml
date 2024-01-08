@@ -942,7 +942,7 @@ classes:
       0x14005A500: NotEquals
       0x14005A550: NotEqualsString
       0x14005AE90: GetLength #count of character
-      0x14005AF30: CalcLenght #does not use saved value
+      0x14005AF30: CalcLength #does not use saved value
       0x14005AFB0: GetSize
       0x14005AFC0: GetCharAt
       0x14005AFD0: AddChar
