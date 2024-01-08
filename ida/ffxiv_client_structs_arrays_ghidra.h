@@ -34,6 +34,11 @@ struct Client_Game_Character_EquipmentModelId;
 struct Client_Game_Character_CustomizeData;
 struct Client_Game_Character_Character_OrnamentContainer;
 struct Client_Game_Character_Character_ReaperShroudContainer;
+struct Client_Game_Character_Character_GazeContainer;
+struct Client_Game_Control_GazeController;
+struct Client_Game_Control_GazeController_Gaze;
+struct Client_Game_Control_GazeController_Gaze_TargetInformation;
+struct Common_Math_Vector2;
 struct Client_Game_Character_Character_VfxContainer;
 struct Client_Game_Character_CharacterSetup;
 struct Client_Game_Character_Character_CastInfo;
@@ -47,7 +52,23 @@ struct Client_Game_Control_CameraManager;
 struct Client_Game_Control_Control;
 struct Client_Game_Control_TargetSystem;
 struct Client_Game_Control_GameObjectArray;
+struct Client_Game_Control_GazeController_Gaze_GazeVTable;
+struct Client_Game_Control_GazeController_Gaze_TargetInformation_TargetInformationVTable;
+struct Client_Game_Control_GazeController_GazeControllerVTable;
 struct Client_Game_Control_InputManager;
+struct Client_Game_CurrencyManager;
+struct StdMapunsignedint32ClientGameCurrencyManagerSpecialCurrencyItem;
+struct StdMap_Nodeunsignedint32ClientGameCurrencyManagerSpecialCurrencyItem;
+struct StdPairunsignedint32ClientGameCurrencyManagerSpecialCurrencyItem;
+struct Client_Game_CurrencyManager_SpecialCurrencyItem;
+struct StdMapunsignedint32ClientGameCurrencyManagerCurrencyItem;
+struct StdMap_Nodeunsignedint32ClientGameCurrencyManagerCurrencyItem;
+struct StdPairunsignedint32ClientGameCurrencyManagerCurrencyItem;
+struct Client_Game_CurrencyManager_CurrencyItem;
+struct StdMapunsignedint32ClientGameCurrencyManagerContentCurrencyItem;
+struct StdMap_Nodeunsignedint32ClientGameCurrencyManagerContentCurrencyItem;
+struct StdPairunsignedint32ClientGameCurrencyManagerContentCurrencyItem;
+struct Client_Game_CurrencyManager_ContentCurrencyItem;
 struct Client_Game_Event_Director;
 struct Client_Game_Event_LuaEventHandlerStruct;
 struct Client_Game_Event_EventHandlerStruct;
@@ -190,6 +211,7 @@ struct Client_Game_UI_Buddy_BuddyMember;
 struct Client_Game_UI_Cabinet;
 struct Client_Game_UI_Chain;
 struct Client_Game_UI_ContentsFinder;
+struct Client_Game_UI_ContentsFinderQueueInfo;
 struct Client_Game_UI_ContentsNote;
 struct Client_Game_UI_ExtraInspectDataEntry;
 struct Client_Game_UI_FieldMarker;
@@ -198,6 +220,7 @@ struct Client_Game_UI_HateInfo;
 struct Client_Game_UI_Hater;
 struct Client_Game_UI_HaterInfo;
 struct Client_Game_UI_Hotbar;
+struct Client_Game_UI_Hotbar_HotbarVTable;
 struct Client_Game_UI_Inspect;
 struct Client_Game_UI_LimitBreakController;
 struct Client_Game_UI_Loot;
@@ -305,6 +328,10 @@ struct StdPairClientSystemStringUtf8StringBytePtr;
 struct Client_LayoutEngine_OutdoorAreaLayoutData;
 struct Client_LayoutEngine_OutdoorPlotLayoutData;
 struct Client_LayoutEngine_OutdoorPlotFixtureData;
+struct Client_Network_NetworkModule;
+struct Client_Network_NetworkModulePacketReceiverCallback;
+struct Client_Network_PacketDispatcher;
+struct Client_Network_NetworkModuleProxy;
 struct Client_System_Configuration_DevConfig;
 struct Common_Configuration_DevConfig;
 struct Common_Configuration_ConfigBase;
@@ -314,6 +341,7 @@ struct Client_System_File_FileDescriptor;
 struct Client_System_Framework_Framework;
 struct Client_System_Framework_TaskManager;
 struct Client_System_Framework_TaskManagerOsData;
+struct Client_System_Timer_ClientTime;
 struct Client_System_Framework_GameVersion;
 struct Client_System_Framework_RootTask;
 struct Client_System_Framework_Task;
@@ -787,6 +815,7 @@ struct Client_UI_Agent_AgentModule;
 struct Client_UI_Agent_AgentMonsterNote;
 struct Client_UI_Agent_AgentMycBattleAreaInfo;
 struct Client_UI_Agent_AgentMycItemBox;
+struct Client_UI_Agent_AgentQuestJournal;
 struct Client_UI_Agent_AgentReadyCheck;
 struct Client_UI_Agent_AgentReadyCheck_ReadyCheckEntry;
 struct Client_UI_Agent_AgentRecipeNote;
@@ -1014,8 +1043,47 @@ struct Client_UI_UIModule;
 struct Common_Configuration_ChangeEventInterface;
 struct Client_UI_UIModule_UIModuleVTable;
 struct Common_Component_BGCollision_BGCollisionModule;
+struct System_Numerics_Vector4;
+struct Common_Component_BGCollision_Collider;
+struct Common_Component_BGCollision_QuadtreeNode;
+struct Common_Component_BGCollision_Node;
 struct Common_Component_BGCollision_Object;
+struct Common_Component_BGCollision_NodeLink;
+struct Common_Component_BGCollision_Collider_ColliderVTable;
+struct Common_Component_BGCollision_ColliderBox;
+struct Common_Component_BGCollision_Math_Matrix4x3;
+struct Common_Component_BGCollision_ColliderCylinder;
+struct Common_Component_BGCollision_ColliderMesh;
+struct Common_Component_BGCollision_Math_AABB;
+struct Common_Component_BGCollision_ColliderPlane;
+struct Common_Component_BGCollision_ColliderSphere;
+struct Common_Component_BGCollision_ColliderStreamed;
+struct Common_Component_BGCollision_ColliderStreamed_Element;
+struct Common_Component_BGCollision_ColliderStreamed_FileEntry;
+struct Common_Component_BGCollision_ColliderStreamed_FileHeader;
+struct Common_Component_BGCollision_IMesh;
+struct Common_Component_BGCollision_IMesh_IMeshVTable;
+struct Common_Component_BGCollision_Mesh;
+struct Common_Component_BGCollision_Mesh_MeshVTable;
+struct Common_Component_BGCollision_Mesh_Primitive;
+struct Common_Component_BGCollision_MeshPCB;
+struct Common_Component_BGCollision_MeshPCB_FileHeader;
+struct Common_Component_BGCollision_MeshPCB_FileNode;
+struct Common_Component_BGCollision_NodeLink_NodeLinkVTable;
+struct Common_Component_BGCollision_Object_ObjectVTable;
+struct Common_Component_BGCollision_Quadtree;
+struct Common_Component_BGCollision_QuadtreeNode_Enumerator;
 struct Common_Component_BGCollision_RaycastHit;
+struct Common_Component_BGCollision_RaycastMaterialFilter;
+struct Common_Component_BGCollision_RaycastParams;
+struct Common_Component_BGCollision_Resource;
+struct Common_Component_BGCollision_Resource_ResourceVTable;
+struct Common_Component_BGCollision_Scene;
+struct Common_Component_BGCollision_SceneManager;
+struct Common_Component_BGCollision_SceneManager_SceneManagerVTable;
+struct Common_Component_BGCollision_SceneWrapper;
+struct Common_Component_BGCollision_SceneWrapper_ColliderList;
+struct Common_Component_BGCollision_SceneWrapper_SceneWrapperVTable;
 struct Common_Configuration_ConfigEntry;
 struct Common_Configuration_ConfigProperties;
 struct Common_Configuration_ConfigValue;
@@ -1025,7 +1093,6 @@ struct Common_Configuration_ConfigProperties_UIntProperties;
 struct Common_Lua_lua_State;
 struct Common_Math_Bounds;
 struct Common_Math_Matrix2x2;
-struct Common_Math_Vector2;
 struct Component_Excel_ExcelModule;
 struct Component_Excel_ExcelModule_ExcelModuleVTable;
 struct Component_Excel_ExcelModuleInterface;
@@ -1238,6 +1305,13 @@ enum Client_Game_Character_Character_EurekaElement /* Size=0x1 */
     Water = 6
 };
 
+enum Client_Game_Character_Character_GazeContainer_BannerCameraFollowFlags /* Size=0x1 */
+{
+    None = 0,
+    Head = 1,
+    Eyes = 2
+};
+
 enum Client_Game_Character_Character_ReaperShroudContainer_ShroudFlags /* Size=0x4 */
 {
     ShroudAttacking = 1,
@@ -1294,6 +1368,14 @@ enum Client_Game_Character_DrawDataContainer_WeaponSlot /* Size=0x4 */
     Unk = 2
 };
 
+enum Client_Game_Control_GazeController_Gaze_TargetInformation_TargetInfoType /* Size=0x4 */
+{
+    None = 0,
+    GameObjectID = 1,
+    Unk2 = 2,
+    Unk3 = 3
+};
+
 enum Client_Game_Control_InputManager_MouseButtonHoldState /* Size=0x1 */
 {
     None = 0,
@@ -1348,6 +1430,7 @@ enum Client_Game_Event_EventHandlerStructType /* Size=0x2 */
     TreasureHuntDirector = 32777,
     GoldSaucerDirector = 32778,
     CompanyCraftDirector = 32779,
+    SkyIslandDirector = 32780,
     DpsChallengeDirector = 32781,
     FateDirector = 32794
 };
@@ -1496,11 +1579,24 @@ enum Client_Game_InstanceContent_InstanceContentType /* Size=0x1 */
 {
     Raid = 1,
     Dungeon = 2,
+    GuildOrder = 3,
     Trial = 4,
+    CrystallineConflict = 5,
     Frontlines = 6,
+    QuestBattle = 7,
     BeginnerTraining = 8,
     DeepDungeon = 9,
-    OceanFishing = 16
+    TreasureHuntDungeon = 10,
+    SeasonalDungeon = 11,
+    RivalWing = 12,
+    MaskedCarnivale = 13,
+    Mahjong = 14,
+    GoldSaucer = 15,
+    OceanFishing = 16,
+    UnrealTrial = 17,
+    TripleTriad = 18,
+    VariantDungeon = 19,
+    CriterionDungeon = 20
 };
 
 enum Client_Game_InventoryItem_ItemFlags /* Size=0x1 */
@@ -1710,6 +1806,23 @@ enum Client_Game_UI_ContentsFinder_LootRule /* Size=0x1 */
     Normal = 0,
     GreedOnly = 1,
     Lootmaster = 2
+};
+
+enum Client_Game_UI_ContentsFinderQueueInfo_PoppedContentTypes /* Size=0x1 */
+{
+    None = 0,
+    Roulette = 1,
+    Duty = 2
+};
+
+enum Client_Game_UI_ContentsFinderQueueInfo_QueueStates /* Size=0x1 */
+{
+    None = 0,
+    Pending = 1,
+    Queued = 2,
+    Ready = 3,
+    Accepted = 4,
+    InContent = 5
 };
 
 enum Client_Game_UI_LootMode /* Size=0x4 */
@@ -3621,6 +3734,25 @@ enum Client_UI_Misc_ConfigOption /* Size=0x2 */
     Invalid = -1
 };
 
+enum Client_UI_Misc_CrossHotbarFlags /* Size=0x2 */
+{
+    ChangeSetActive = 1,
+    Active = 2,
+    LeftSideToggleFocus = 4,
+    RightSideToggleFocus = 8,
+    LeftSideHoldFocus = 16,
+    LeftSideFocus = 20,
+    RightSideHoldFocus = 32,
+    RightSideFocus = 40,
+    FadeRestOfScreen = 64,
+    PetHotbarActive = 128,
+    ExpandedHoldLeftFocus = 256,
+    ExpandedHoldRightFocus = 512,
+    WXHBLeftFocus = 1024,
+    WXHBRightFocus = 16384,
+    EditMode = 32768
+};
+
 enum Client_UI_Misc_DataSegment /* Size=0x1 */
 {
     LETTER = 0,
@@ -3925,6 +4057,17 @@ enum Client_UI_UIModule_UiFlags /* Size=0x4 */
     ActionBars = 16,
     Unk32 = 32,
     TargetInfo = 64
+};
+
+enum Common_Component_BGCollision_ColliderType /* Size=0x4 */
+{
+    Streamed = 1,
+    Mesh = 2,
+    Box = 3,
+    Cylinder = 4,
+    Sphere = 5,
+    Plane = 6,
+    PlaneTwoSided = 7
 };
 
 enum Common_Configuration_ConfigType /* Size=0x4 */
@@ -4372,14 +4515,15 @@ __unaligned struct Client_Game_ActionManager /* Size=0x7F0 */
 
 __unaligned struct Client_Game_ActionTimelineDriver /* Size=0x1F0 */
 {
-    /*       */ byte _gap_0x0[0xE0];
-    /* 0x0E0 */ unsigned __int16 TimelineIds[0xD];
-    /*       */ byte _gap_0xFA[0x2];
+    /*       */ byte _gap_0x0[0x70];
+    /* 0x070 */ Client_System_Scheduler_Base_SchedulerTimeline** SchedulerTimelines[0xE];
+    /* 0x0E0 */ unsigned __int16 TimelineIds[0xE];
     /*       */ byte _gap_0xFC[0x4];
     /*       */ byte _gap_0x100[0x50];
     /*       */ byte _gap_0x150[0x4];
-    /* 0x154 */ float TimelineSpeeds[0xD];
-    /*       */ byte _gap_0x188[0x40];
+    /* 0x154 */ float TimelineSpeeds[0xE];
+    /*       */ byte _gap_0x18C[0x4];
+    /*       */ byte _gap_0x190[0x38];
     /* 0x1C8 */ Client_Game_Character_Character* Parent;
     /*       */ byte _gap_0x1D0[0x20];
 };
@@ -4396,21 +4540,28 @@ __unaligned struct Client_Game_ActionTimelineManager /* Size=0x340 */
     /* 0x2E0 */ unsigned __int16 BaseOverride;
     /* 0x2E2 */ unsigned __int16 LipsOverride;
     /*       */ byte _gap_0x2E4[0x4];
-    /*       */ byte _gap_0x2E8[0x28];
+    /*       */ byte _gap_0x2E8[0x18];
+    /* 0x300 */ __int64 BannerTimelineSheet;
+    /* 0x308 */ __int64 BannerTimelineRowDescriptor;
     /* 0x310 */ unsigned __int16 BannerTimelineRowId;
     /* 0x312 */ byte BannerFacialRowId;
     /*       */ byte _gap_0x313;
     /*       */ byte _gap_0x314[0x4];
-    /*       */ byte _gap_0x318[0x10];
-    /*       */ byte _gap_0x328[0x4];
+    /* 0x318 */ float BannerRequestStartTimestamp;
+    /*       */ byte _gap_0x31C[0x4];
+    /*       */ byte _gap_0x320[0x8];
+    /* 0x328 */ unsigned __int32 BannerTimelineNameOffset;
     /* 0x32C */ unsigned __int32 BannerTimelineAdditionalData;
     /* 0x330 */ unsigned __int32 BannerTimelineIcon;
     /* 0x334 */ unsigned __int16 BannerTimelineUnlockCondition;
     /* 0x336 */ unsigned __int16 BannerTimelineSortKey;
     /* 0x338 */ byte BannerTimelineType;
-    /*       */ byte _gap_0x339;
-    /*       */ byte _gap_0x33A[0x2];
-    /*       */ byte _gap_0x33C[0x4];
+    /* 0x339 */ byte BannerTimelineAcceptClassJobCategory;
+    /* 0x33A */ byte BannerTimelineCategory;
+    /*       */ byte _gap_0x33B;
+    /*       */ byte _gap_0x33C[0x2];
+    /* 0x33E */ byte Flags1;
+    /* 0x33F */ byte Flags2;
 };
 
 __unaligned struct Client_System_String_Utf8String /* Size=0x68 */
@@ -4472,7 +4623,22 @@ __unaligned struct Client_Graphics_Scene_Object /* Size=0x80 */
 
 __unaligned struct Common_Math_Matrix4x4 /* Size=0x40 */
 {
-    /*      */ byte _gap_0x0[0x40];
+    /* 0x00 */ float M11;
+    /* 0x04 */ float M12;
+    /* 0x08 */ float M13;
+    /* 0x0C */ float M14;
+    /* 0x10 */ float M21;
+    /* 0x14 */ float M22;
+    /* 0x18 */ float M23;
+    /* 0x1C */ float M24;
+    /* 0x20 */ float M31;
+    /* 0x24 */ float M32;
+    /* 0x28 */ float M33;
+    /* 0x2C */ float M34;
+    /* 0x30 */ float M41;
+    /* 0x34 */ float M42;
+    /* 0x38 */ float M43;
+    /* 0x3C */ float M44;
 };
 
 __unaligned struct Client_Graphics_Scene_Camera /* Size=0xF0 */
@@ -4694,6 +4860,57 @@ __unaligned struct Client_Game_Character_Character_ReaperShroudContainer /* Size
     /*      */ byte _gap_0x48[0x8];
 };
 
+__unaligned struct Client_Game_Control_GazeController_Gaze_TargetInformation /* Size=0x28 */
+{
+    /*      */ byte _gap_0x0[0x8];
+    /* 0x08 */ Client_Game_Control_GazeController_Gaze_TargetInformation_TargetInfoType Type;
+    /*      */ byte _gap_0xC[0x4];
+    /*      */ byte _gap_0x10[0x10];
+    /* 0x20 */ __int32 Unk20;
+    /*      */ byte _gap_0x24[0x4];
+};
+
+__unaligned struct Client_Game_Control_GazeController_Gaze /* Size=0x1E0 */
+{
+    /*       */ byte _gap_0x0[0x10];
+    /* 0x010 */ Client_Game_Control_GazeController_Gaze_TargetInformation TargetInfo;
+    /*       */ byte _gap_0x38[0x1A8];
+};
+
+__unaligned struct Client_Game_Control_GazeController /* Size=0x5E0 */
+{
+    /*       */ byte _gap_0x0[0x10];
+    /* 0x010 */ Client_Game_Character_BattleChara* OwnerObject;
+    /*       */ byte _gap_0x18[0x8];
+    /* 0x020 */ Client_Game_Control_GazeController_Gaze Gazes[0x3];
+    /*       */ byte _gap_0x5C0[0x4];
+    /* 0x5C4 */ __int32 GazesCount;
+    /*       */ byte _gap_0x5C8[0x18];
+};
+
+__unaligned struct Common_Math_Vector2 /* Size=0x8 */
+{
+    /* 0x0 */ float X;
+    /* 0x4 */ float Y;
+};
+
+__unaligned struct Client_Game_Character_Character_GazeContainer /* Size=0x620 */
+{
+    /* 0x000 */ void** ContainerVTable;
+    /* 0x008 */ Client_Game_Character_BattleChara* OwnerObject;
+    /* 0x010 */ Client_Game_Control_GazeController Controller;
+    /* 0x5F0 */ Common_Math_Vector3 CameraVector;
+    /* 0x600 */ byte FaceCameraFlag;
+    /*       */ byte _gap_0x601;
+    /*       */ byte _gap_0x602[0x2];
+    /* 0x604 */ Common_Math_Vector2 BannerHeadDirection;
+    /* 0x60C */ Common_Math_Vector2 BannerEyeDirection;
+    /* 0x614 */ Client_Game_Character_Character_GazeContainer_BannerCameraFollowFlags BannerCameraFollowFlag;
+    /*       */ byte _gap_0x615;
+    /*       */ byte _gap_0x616[0x2];
+    /*       */ byte _gap_0x618[0x8];
+};
+
 __unaligned struct Client_Game_Character_Character_VfxContainer /* Size=0xF0 */
 {
     /* 0x00 */ void** ContainerVTable;
@@ -4720,7 +4937,7 @@ __unaligned struct Client_Game_Character_Character /* Size=0x1BD0 */
     /*        */ byte _gap_0x0[0x1A0];
     /* 0x01A0 */ Client_Game_Character_CharacterData CharacterData;
     /*        */ byte _gap_0x208[0x8];
-    /* 0x0210 */ byte Movement[0x420];
+    /* 0x0210 */ byte MovementBytes[0x420];
     /* 0x0630 */ Client_Game_Control_EmoteController EmoteController;
     /* 0x0670 */ Client_Game_Character_Character_MountContainer Mount;
     /* 0x06D8 */ Client_Game_Character_Character_CompanionContainer Companion;
@@ -4729,9 +4946,8 @@ __unaligned struct Client_Game_Character_Character /* Size=0x1BD0 */
     /* 0x0918 */ Client_Game_Character_Character_ReaperShroudContainer ReaperShroud;
     /*        */ byte _gap_0x968[0x8];
     /* 0x0970 */ Client_Game_ActionTimelineManager ActionTimelineManager;
-    /*        */ byte _gap_0xCB0[0x50];
-    /* 0x0D00 */ Client_Game_Object_GameObjectID LookTargetId;
-    /*        */ byte _gap_0xD08[0x5E8];
+    /* 0x0CB0 */ Client_Game_Character_Character_GazeContainer Gaze;
+    /*        */ byte _gap_0x12D0[0x20];
     /* 0x12F0 */ Client_Game_Character_Character_VfxContainer Vfx;
     /*        */ byte _gap_0x13E0[0x30];
     /* 0x1410 */ byte StatusFlags4;
@@ -4994,15 +5210,151 @@ __unaligned struct Client_Game_Control_Control /* Size=0x5A60 */
 {
     /* 0x0000 */ Client_Game_Control_CameraManager CameraManager;
     /* 0x0180 */ Client_Game_Control_TargetSystem TargetSystem;
-    /*        */ byte _gap_0x54F0[0x5F8];
+    /*        */ byte _gap_0x54F0[0x588];
+    /*        */ byte _gap_0x5A78[0x2];
+    /*        */ byte _gap_0x5A7A;
+    /* 0x5A7B */ bool IsWalking;
+    /*        */ byte _gap_0x5A7C[0x4];
+    /*        */ byte _gap_0x5A80[0x68];
     /* 0x5AE8 */ unsigned __int32 LocalPlayerObjectId;
     /*        */ byte _gap_0x5AEC[0x4];
     /* 0x5AF0 */ Client_Game_Character_BattleChara* LocalPlayer;
 };
 
+__unaligned struct Client_Game_Control_GazeController_Gaze_GazeVTable /* Size=0x1 */
+{
+    /*     */ byte _gap_0x0;
+};
+
+__unaligned struct Client_Game_Control_GazeController_Gaze_TargetInformation_TargetInformationVTable /* Size=0x1 */
+{
+    /*     */ byte _gap_0x0;
+};
+
+__unaligned struct Client_Game_Control_GazeController_GazeControllerVTable /* Size=0x1 */
+{
+    /*     */ byte _gap_0x0;
+};
+
 __unaligned struct Client_Game_Control_InputManager /* Size=0x8 */
 {
     /*     */ byte _gap_0x0[0x8];
+};
+
+__unaligned struct Client_Game_CurrencyManager_SpecialCurrencyItem /* Size=0x20 */
+{
+    /* 0x00 */ byte SpecialId;
+    /*      */ byte _gap_0x1;
+    /*      */ byte _gap_0x2[0x2];
+    /* 0x04 */ unsigned __int32 MaxCount;
+    /* 0x08 */ unsigned __int32 Count;
+    /*      */ byte _gap_0xC[0x4];
+    /*      */ byte _gap_0x10[0x10];
+};
+
+__unaligned struct StdPairunsignedint32ClientGameCurrencyManagerSpecialCurrencyItem /* Size=0x24 */
+{
+    /* 0x00 */ unsigned __int32 Item1;
+    /* 0x04 */ Client_Game_CurrencyManager_SpecialCurrencyItem Item2;
+};
+
+__unaligned struct StdMap_Nodeunsignedint32ClientGameCurrencyManagerSpecialCurrencyItem /* Size=0x48 */
+{
+    /* 0x00 */ StdMap_Nodeunsignedint32ClientGameCurrencyManagerSpecialCurrencyItem* Left;
+    /* 0x08 */ StdMap_Nodeunsignedint32ClientGameCurrencyManagerSpecialCurrencyItem* Parent;
+    /* 0x10 */ StdMap_Nodeunsignedint32ClientGameCurrencyManagerSpecialCurrencyItem* Right;
+    /* 0x18 */ byte Color;
+    /* 0x19 */ bool IsNil;
+    /* 0x1A */ byte _18;
+    /* 0x1B */ byte _19;
+    /* 0x1C */ StdPairunsignedint32ClientGameCurrencyManagerSpecialCurrencyItem KeyValuePair;
+    /*      */ byte _gap_0x40[0x8];
+};
+
+__unaligned struct StdMapunsignedint32ClientGameCurrencyManagerSpecialCurrencyItem /* Size=0x10 */
+{
+    /* 0x00 */ StdMap_Nodeunsignedint32ClientGameCurrencyManagerSpecialCurrencyItem* Head;
+    /* 0x08 */ unsigned __int64 Count;
+};
+
+__unaligned struct Client_Game_CurrencyManager_CurrencyItem /* Size=0x20 */
+{
+    /* 0x00 */ unsigned __int16 MaxCount;
+    /* 0x02 */ unsigned __int16 Count;
+    /* 0x04 */ bool IsUnlimited;
+    /*      */ byte _gap_0x5;
+    /*      */ byte _gap_0x6[0x2];
+    /*      */ byte _gap_0x8[0x18];
+};
+
+__unaligned struct StdPairunsignedint32ClientGameCurrencyManagerCurrencyItem /* Size=0x24 */
+{
+    /* 0x00 */ unsigned __int32 Item1;
+    /* 0x04 */ Client_Game_CurrencyManager_CurrencyItem Item2;
+};
+
+__unaligned struct StdMap_Nodeunsignedint32ClientGameCurrencyManagerCurrencyItem /* Size=0x48 */
+{
+    /* 0x00 */ StdMap_Nodeunsignedint32ClientGameCurrencyManagerCurrencyItem* Left;
+    /* 0x08 */ StdMap_Nodeunsignedint32ClientGameCurrencyManagerCurrencyItem* Parent;
+    /* 0x10 */ StdMap_Nodeunsignedint32ClientGameCurrencyManagerCurrencyItem* Right;
+    /* 0x18 */ byte Color;
+    /* 0x19 */ bool IsNil;
+    /* 0x1A */ byte _18;
+    /* 0x1B */ byte _19;
+    /* 0x1C */ StdPairunsignedint32ClientGameCurrencyManagerCurrencyItem KeyValuePair;
+    /*      */ byte _gap_0x40[0x8];
+};
+
+__unaligned struct StdMapunsignedint32ClientGameCurrencyManagerCurrencyItem /* Size=0x10 */
+{
+    /* 0x00 */ StdMap_Nodeunsignedint32ClientGameCurrencyManagerCurrencyItem* Head;
+    /* 0x08 */ unsigned __int64 Count;
+};
+
+__unaligned struct Client_Game_CurrencyManager_ContentCurrencyItem /* Size=0x20 */
+{
+    /* 0x00 */ unsigned __int16 MaxCount;
+    /*      */ byte _gap_0x2[0x2];
+    /* 0x04 */ unsigned __int16 Count;
+    /*      */ byte _gap_0x6[0x2];
+    /* 0x08 */ bool IsUnlimited;
+    /*      */ byte _gap_0x9;
+    /*      */ byte _gap_0xA[0x2];
+    /*      */ byte _gap_0xC[0x4];
+    /*      */ byte _gap_0x10[0x10];
+};
+
+__unaligned struct StdPairunsignedint32ClientGameCurrencyManagerContentCurrencyItem /* Size=0x24 */
+{
+    /* 0x00 */ unsigned __int32 Item1;
+    /* 0x04 */ Client_Game_CurrencyManager_ContentCurrencyItem Item2;
+};
+
+__unaligned struct StdMap_Nodeunsignedint32ClientGameCurrencyManagerContentCurrencyItem /* Size=0x48 */
+{
+    /* 0x00 */ StdMap_Nodeunsignedint32ClientGameCurrencyManagerContentCurrencyItem* Left;
+    /* 0x08 */ StdMap_Nodeunsignedint32ClientGameCurrencyManagerContentCurrencyItem* Parent;
+    /* 0x10 */ StdMap_Nodeunsignedint32ClientGameCurrencyManagerContentCurrencyItem* Right;
+    /* 0x18 */ byte Color;
+    /* 0x19 */ bool IsNil;
+    /* 0x1A */ byte _18;
+    /* 0x1B */ byte _19;
+    /* 0x1C */ StdPairunsignedint32ClientGameCurrencyManagerContentCurrencyItem KeyValuePair;
+    /*      */ byte _gap_0x40[0x8];
+};
+
+__unaligned struct StdMapunsignedint32ClientGameCurrencyManagerContentCurrencyItem /* Size=0x10 */
+{
+    /* 0x00 */ StdMap_Nodeunsignedint32ClientGameCurrencyManagerContentCurrencyItem* Head;
+    /* 0x08 */ unsigned __int64 Count;
+};
+
+__unaligned struct Client_Game_CurrencyManager /* Size=0x30 */
+{
+    /* 0x00 */ StdMapunsignedint32ClientGameCurrencyManagerSpecialCurrencyItem SpecialItemBucket;
+    /* 0x10 */ StdMapunsignedint32ClientGameCurrencyManagerCurrencyItem ItemBucket;
+    /* 0x20 */ StdMapunsignedint32ClientGameCurrencyManagerContentCurrencyItem ContentItemBucket;
 };
 
 __unaligned struct StdSet_NodeClientGameObjectGameObjectPtr /* Size=0x30 */
@@ -5393,14 +5745,16 @@ __unaligned struct Client_Game_JobGaugeManager /* Size=0x60 */
     /*      */ byte _gap_0x5C[0x4];
 };
 
-__unaligned struct Client_Game_GameMain /* Size=0x58D0 */
+__unaligned struct Client_Game_GameMain /* Size=0x40E0 */
 {
     /* 0x0000 */ unsigned __int32 ActiveFestivals[0x4];
     /*        */ byte _gap_0x10[0x30];
     /* 0x0040 */ unsigned __int32 QueuedFestivals[0x4];
     /*        */ byte _gap_0x50[0xA88];
     /* 0x0AD8 */ Client_Game_JobGaugeManager JobGaugeManager;
-    /*        */ byte _gap_0xB38[0x3550];
+    /*        */ byte _gap_0xB38[0x3548];
+    /* 0x4080 */ unsigned __int32 TerritoryLoadState;
+    /* 0x4084 */ unsigned __int32 NextTerritoryTypeId;
     /* 0x4088 */ unsigned __int32 CurrentTerritoryTypeId;
     /* 0x408C */ unsigned __int32 CurrentTerritoryIntendedUseId;
     /*        */ byte _gap_0x4090[0x4];
@@ -5409,7 +5763,17 @@ __unaligned struct Client_Game_GameMain /* Size=0x58D0 */
     /*        */ byte _gap_0x4098[0x8];
     /* 0x40A0 */ unsigned __int32 CurrentMapId;
     /*        */ byte _gap_0x40A4[0x4];
-    /*        */ byte _gap_0x40A8[0x1828];
+    /*        */ byte _gap_0x40A8[0x8];
+    /* 0x40B0 */ float MilisecondCounter;
+    /* 0x40B4 */ unsigned __int32 RuntimeSeconds;
+    /* 0x40B8 */ bool RuntimeSecondsChanged;
+    /*        */ byte _gap_0x40B9;
+    /*        */ byte _gap_0x40BA[0x2];
+    /* 0x40BC */ float Runtime;
+    /* 0x40C0 */ __int64 CurrentTerritoryTypeRow;
+    /* 0x40C8 */ __int64 CurrentTerritoryIntendedUseRow;
+    /* 0x40D0 */ __int64 NextTerritoryTypeRow;
+    /* 0x40D8 */ __int64 NextTerritoryIntendedUseRow;
 };
 
 __unaligned struct Client_Game_Gauge_AstrologianGauge /* Size=0x10 */
@@ -6888,6 +7252,64 @@ __unaligned struct Client_Game_UI_Chain /* Size=0x8 */
     /* 0x4 */ float MaxTime;
 };
 
+__unaligned struct Client_Game_UI_ContentsFinderQueueInfo /* Size=0x90 */
+{
+    /*      */ byte _gap_0x0[0x4];
+    /* 0x04 */ byte QueuedContentFinderConditionId1;
+    /*      */ byte _gap_0x5;
+    /*      */ byte _gap_0x6[0x2];
+    /*      */ byte _gap_0x8[0x4];
+    /* 0x0C */ byte QueuedContentFinderConditionId2;
+    /*      */ byte _gap_0xD;
+    /*      */ byte _gap_0xE[0x2];
+    /*      */ byte _gap_0x10[0x4];
+    /* 0x14 */ byte QueuedContentFinderConditionId3;
+    /*      */ byte _gap_0x15;
+    /*      */ byte _gap_0x16[0x2];
+    /*      */ byte _gap_0x18[0x4];
+    /* 0x1C */ byte QueuedContentFinderConditionId4;
+    /*      */ byte _gap_0x1D;
+    /*      */ byte _gap_0x1E[0x2];
+    /*      */ byte _gap_0x20[0x4];
+    /* 0x24 */ byte QueuedContentFinderConditionId5;
+    /*      */ byte _gap_0x25;
+    /*      */ byte _gap_0x26[0x2];
+    /* 0x28 */ unsigned __int32 QueuedClassJobId;
+    /*      */ byte _gap_0x2C[0x4];
+    /*      */ byte _gap_0x30[0x10];
+    /* 0x40 */ __int32 EnteredQueueTimestamp;
+    /* 0x44 */ __int32 QueueReadyTimestamp;
+    /*      */ byte _gap_0x48[0x8];
+    /*      */ byte _gap_0x50[0x4];
+    /*      */ byte _gap_0x54;
+    /* 0x55 */ Client_Game_UI_ContentsFinderQueueInfo_QueueStates QueueState;
+    /*      */ byte _gap_0x56[0x2];
+    /*      */ byte _gap_0x58[0x2];
+    /* 0x5A */ byte QueuedContentRouletteId;
+    /*      */ byte _gap_0x5B;
+    /* 0x5C */ signed __int8 PositionInQueue;
+    /*      */ byte _gap_0x5D;
+    /*      */ byte _gap_0x5E[0x2];
+    /*      */ byte _gap_0x60[0x4];
+    /*      */ byte _gap_0x64[0x2];
+    /*      */ byte _gap_0x66;
+    /* 0x67 */ byte AverageWaitTime;
+    /*      */ byte _gap_0x68[0x10];
+    /*      */ byte _gap_0x78[0x4];
+    /* 0x7C */ Client_Game_UI_ContentsFinderQueueInfo_PoppedContentTypes PoppedContentType;
+    /*      */ byte _gap_0x7D;
+    /*      */ byte _gap_0x7E[0x2];
+    /* 0x80 */ unsigned __int32 PoppedContentId;
+    /*      */ byte _gap_0x84[0x4];
+    /* 0x88 */ bool PoppedContentIsUnrestrictedParty;
+    /* 0x89 */ bool PoppedContentIsMinimalIL;
+    /* 0x8A */ bool PoppedContentIsLevelSync;
+    /* 0x8B */ bool PoppedContentIsSilenceEcho;
+    /* 0x8C */ bool PoppedContentIsExplorerMode;
+    /*      */ byte _gap_0x8D;
+    /*      */ byte _gap_0x8E[0x2];
+};
+
 __unaligned struct Client_Game_UI_ContentsFinder /* Size=0xB0 */
 {
     /* 0x00 */ void* vtbl;
@@ -6900,19 +7322,7 @@ __unaligned struct Client_Game_UI_ContentsFinder /* Size=0xB0 */
     /* 0x1D */ bool IsLevelSync;
     /* 0x1E */ bool IsLimitedLevelingRoulette;
     /*      */ byte _gap_0x1F;
-    /*      */ byte _gap_0x20[0x40];
-    /* 0x60 */ __int32 EnteredQueueTimestamp;
-    /*      */ byte _gap_0x64[0x4];
-    /*      */ byte _gap_0x68[0x10];
-    /*      */ byte _gap_0x78[0x4];
-    /* 0x7C */ byte PositionInQueue;
-    /*      */ byte _gap_0x7D;
-    /*      */ byte _gap_0x7E[0x2];
-    /*      */ byte _gap_0x80[0x4];
-    /*      */ byte _gap_0x84[0x2];
-    /*      */ byte _gap_0x86;
-    /* 0x87 */ byte AverageWaitTime;
-    /*      */ byte _gap_0x88[0x28];
+    /* 0x20 */ Client_Game_UI_ContentsFinderQueueInfo QueueInfo;
 };
 
 __unaligned struct Client_Game_UI_ContentsNote /* Size=0xB8 */
@@ -6977,7 +7387,18 @@ __unaligned struct Client_Game_UI_Hater /* Size=0x908 */
 
 __unaligned struct Client_Game_UI_Hotbar /* Size=0x8 */
 {
-    /*     */ byte _gap_0x0[0x8];
+    union {
+    /* 0x0 */ void* vtbl;
+    /* 0x0 */ Client_Game_UI_Hotbar_HotbarVTable* VTable;
+    } _union_0x0;
+};
+
+__unaligned struct Client_Game_UI_Hotbar_HotbarVTable /* Size=0x0 */
+{
+    /*     */ __int64 _vf0;
+    /* 0x8 */ bool (__fastcall *ResetAllHotbars)(Client_Game_UI_Hotbar* a1, Client_UI_Misc_RaptureHotbarModule* a2);
+    /* 0x10 */ bool (__fastcall *ResetPvEHotbarsForClass)(Client_Game_UI_Hotbar* a1, Client_UI_Misc_RaptureHotbarModule* a2, __int32 a3);
+    /* 0x18 */ byte (__fastcall *ResetPvPHotbarsForClass)(Client_Game_UI_Hotbar* a1, Client_UI_Misc_RaptureHotbarModule* a2, unsigned __int32 a3);
 };
 
 __unaligned struct Client_Game_UI_Inspect /* Size=0x268 */
@@ -8188,7 +8609,11 @@ __unaligned struct Client_Graphics_Scene_CharacterBase /* Size=0x8F0 */
     /* 0x2E8 */ Client_Graphics_Render_Material** Materials;
     /* 0x2F0 */ void* EID;
     /* 0x2F8 */ void** IMCArray;
-    /*       */ byte _gap_0x300[0x5F0];
+    /*       */ byte _gap_0x300[0x5E8];
+    /* 0x8E8 */ byte AnimationVariant;
+    /*       */ byte _gap_0x8E9;
+    /*       */ byte _gap_0x8EA[0x2];
+    /*       */ byte _gap_0x8EC[0x4];
 };
 
 __unaligned struct Client_Graphics_Scene_CharacterBase_CharacterBaseVTable /* Size=0x0 */
@@ -8560,6 +8985,93 @@ __unaligned struct Client_LayoutEngine_OutdoorAreaLayoutData /* Size=0x0 */
     /* 0x1F0 */ Client_LayoutEngine_OutdoorPlotLayoutData Plot[0x3C];
 };
 
+__unaligned struct Client_Network_NetworkModule /* Size=0xB60 */
+{
+    /*       */ byte _gap_0x0[0x28];
+    /* 0x028 */ byte LobbyCount;
+    /*       */ byte _gap_0x29;
+    /*       */ byte _gap_0x2A[0x2];
+    /* 0x02C */ unsigned __int32 LobbyPorts[0xC];
+    /*       */ byte _gap_0x5C[0x4];
+    /* 0x060 */ Client_System_String_Utf8String LobbyHosts[0xC];
+    /*       */ byte _gap_0x540[0x68];
+    /*       */ byte _gap_0x5A8[0x4];
+    /* 0x5AC */ __int32 OperatingSystemTypeAndVersion;
+    /* 0x5B0 */ unsigned __int32 SaveDataBankPort;
+    /*       */ byte _gap_0x5B4[0x4];
+    /* 0x5B8 */ Client_System_String_Utf8String SaveDataBankHost;
+    /* 0x620 */ unsigned __int32 SaveDataBankMode;
+    /* 0x624 */ unsigned __int32 DktWebPort;
+    /* 0x628 */ Client_System_String_Utf8String DktWebHost;
+    /* 0x690 */ unsigned __int32 ActiveLobbyPort;
+    /*       */ byte _gap_0x694[0x4];
+    /* 0x698 */ Client_System_String_Utf8String ActiveLobbyHost;
+    /* 0x700 */ unsigned __int32 AlternateLobbyPort;
+    /*       */ byte _gap_0x704[0x4];
+    /* 0x708 */ Client_System_String_Utf8String AlternateLobbyHost;
+    /* 0x770 */ unsigned __int32 LobbyRetryCount;
+    /* 0x774 */ unsigned __int32 LobbyRetryInterval;
+    /* 0x778 */ unsigned __int32 LobbyPing;
+    /* 0x77C */ unsigned __int32 FrontPort;
+    /* 0x780 */ Client_System_String_Utf8String FrontHost;
+    /* 0x7E8 */ Client_System_String_Utf8String FrontProtocol;
+    /* 0x850 */ bool UseCfgFrontend;
+    /*       */ byte _gap_0x851;
+    /*       */ byte _gap_0x852[0x2];
+    /*       */ byte _gap_0x854[0x4];
+    /* 0x858 */ Client_System_String_Utf8String Ticket;
+    /* 0x8C0 */ Client_System_String_Utf8String World;
+    /* 0x928 */ Client_System_String_Utf8String ZoneName;
+    /*       */ byte _gap_0x990[0x38];
+    /*       */ byte _gap_0x9C8;
+    /* 0x9C9 */ bool WinSockInitialized;
+    /*       */ byte _gap_0x9CA[0x2];
+    /*       */ byte _gap_0x9CC[0x4];
+    /* 0x9D0 */ Client_Network_NetworkModulePacketReceiverCallback* PacketReceiverCallback;
+    /*       */ byte _gap_0x9D8[0x98];
+    /*       */ byte _gap_0xA70[0x4];
+    /* 0xA74 */ __int32 CurrentDeviceTime;
+    /* 0xA78 */ __int32 CurrentDeviceTimeMillis;
+    /*       */ byte _gap_0xA7C[0x4];
+    /*       */ byte _gap_0xA80[0xA0];
+    /*       */ byte _gap_0xB20[0x4];
+    /*       */ byte _gap_0xB24[0x2];
+    /* 0xB26 */ __int16 CurrentInstance;
+    /*       */ byte _gap_0xB28[0x8];
+    /* 0xB30 */ __int32 KeepAliveZone;
+    /* 0xB34 */ __int32 KeepAliveIntervalZone;
+    /* 0xB38 */ __int32 KeepAliveChat;
+    /* 0xB3C */ __int32 KeepAliveIntervalChat;
+    /*       */ byte _gap_0xB40[0x18];
+    /* 0xB58 */ bool IsInCrossWorldDuty;
+    /*       */ byte _gap_0xB59;
+    /*       */ byte _gap_0xB5A[0x2];
+    /*       */ byte _gap_0xB5C[0x4];
+};
+
+__unaligned struct Client_Network_PacketDispatcher /* Size=0x1 */
+{
+    /*     */ byte _gap_0x0;
+};
+
+__unaligned struct Client_Network_NetworkModulePacketReceiverCallback /* Size=0x20 */
+{
+    /* 0x00 */ void* vtbl;
+    /* 0x08 */ Client_Network_PacketDispatcher PacketDispatcher;
+    /*      */ byte _gap_0x9;
+    /*      */ byte _gap_0xA[0x2];
+    /*      */ byte _gap_0xC[0x4];
+    /*      */ byte _gap_0x10[0x8];
+    /* 0x18 */ Client_Network_NetworkModuleProxy* NetworkModuleProxy;
+};
+
+__unaligned struct Client_Network_NetworkModuleProxy /* Size=0x20 */
+{
+    /* 0x00 */ void* Vtbl;
+    /* 0x08 */ Client_Network_NetworkModule* NetworkModule;
+    /* 0x10 */ Client_Network_NetworkModulePacketReceiverCallback PacketReceiverCallback;
+};
+
 __unaligned struct Common_Configuration_ConfigBase /* Size=0x110 */
 {
     /* 0x000 */ void* vtbl;
@@ -8630,6 +9142,20 @@ __unaligned struct Client_System_Framework_TaskManager /* Size=0x70 */
     /* 0x68 */ void* UserData;
 };
 
+__unaligned struct Client_System_Timer_ClientTime /* Size=0x40 */
+{
+    /*      */ byte _gap_0x0[0x8];
+    /* 0x08 */ __int64 EorzeaTime;
+    /* 0x10 */ float EorzeaTimeMilliseconds;
+    /*      */ byte _gap_0x14[0x4];
+    /*      */ byte _gap_0x18[0x18];
+    /* 0x30 */ __int64 EorzeaTimeOverride;
+    /* 0x38 */ bool IsEorzeaTimeOverridden;
+    /*      */ byte _gap_0x39;
+    /*      */ byte _gap_0x3A[0x2];
+    /*      */ byte _gap_0x3C[0x4];
+};
+
 __unaligned struct Client_System_Framework_GameVersion /* Size=0x900 */
 {
     /*       */ byte _gap_0x0[0x900];
@@ -8641,13 +9167,23 @@ __unaligned struct Client_System_Framework_Framework /* Size=0x35C8 */
     /* 0x0010 */ Client_System_Configuration_SystemConfig SystemConfig;
     /* 0x0460 */ Client_System_Configuration_DevConfig DevConfig;
     /* 0x0570 */ Client_Game_SavedAppearanceManager* SavedAppearanceData;
-    /*        */ byte _gap_0x578[0x1100];
+    /*        */ byte _gap_0x578[0x10F8];
+    /* 0x1670 */ Client_Network_NetworkModuleProxy* NetworkModuleProxy;
     /* 0x1678 */ bool IsNetworkModuleInitialized;
     /* 0x1679 */ bool EnableNetworking;
     /*        */ byte _gap_0x167A[0x2];
     /*        */ byte _gap_0x167C[0x4];
     /* 0x1680 */ __int64 ServerTime;
-    /*        */ byte _gap_0x1688[0x30];
+    union {
+    /* 0x1688 */ __int64 PerformanceCounterInMilliSeconds;
+    /* 0x1688 */ __int64 PerformanceCounterInMicroSeconds;
+    } _union_0x1688;
+    /*        */ byte _gap_0x1690[0x8];
+    /* 0x1698 */ unsigned __int32 TimerResolutionMillis;
+    /*        */ byte _gap_0x169C[0x4];
+    /* 0x16A0 */ __int64 PerformanceCounterFrequency;
+    /* 0x16A8 */ __int64 PerformanceCounterValue;
+    /*        */ byte _gap_0x16B0[0x8];
     /* 0x16B8 */ float FrameDeltaTime;
     /*        */ byte _gap_0x16BC[0x4];
     /*        */ byte _gap_0x16C0[0x8];
@@ -8655,14 +9191,7 @@ __unaligned struct Client_System_Framework_Framework /* Size=0x35C8 */
     /*        */ byte _gap_0x16CC[0x4];
     /*        */ byte _gap_0x16D0[0x28];
     /* 0x16F8 */ Client_System_Framework_TaskManager TaskManager;
-    /*        */ byte _gap_0x1768[0x8];
-    /* 0x1770 */ __int64 EorzeaTime;
-    /*        */ byte _gap_0x1778[0x20];
-    /* 0x1798 */ __int64 EorzeaTimeOverride;
-    /* 0x17A0 */ bool IsEorzeaTimeOverridden;
-    /*        */ byte _gap_0x17A1;
-    /*        */ byte _gap_0x17A2[0x2];
-    /*        */ byte _gap_0x17A4[0x4];
+    /* 0x1768 */ Client_System_Timer_ClientTime ClientTime;
     /*        */ byte _gap_0x17A8[0x18];
     /*        */ byte _gap_0x17C0[0x4];
     /* 0x17C4 */ float FrameRate;
@@ -8943,7 +9472,12 @@ __unaligned struct Client_System_Scheduler_Base_SchedulerState /* Size=0x18 */
 
 __unaligned struct Client_System_Scheduler_Base_SchedulerTimeline /* Size=0x280 */
 {
-    /*       */ byte _gap_0x0[0x188];
+    /*       */ byte _gap_0x0[0x98];
+    /* 0x098 */ Client_System_Scheduler_Resource_SchedulerResource* SchedulerResource;
+    /*       */ byte _gap_0xA0[0x8];
+    /* 0x0A8 */ byte* ActionTimelineKey;
+    /* 0x0B0 */ byte* FaceLibraryPath;
+    /*       */ byte _gap_0xB8[0xD0];
     /*       */ byte _gap_0x188[0x4];
     /* 0x18C */ unsigned __int32 OwningGameObjectIndex;
     /*       */ byte _gap_0x190[0xF0];
@@ -8985,7 +9519,10 @@ __unaligned struct Client_System_Scheduler_Base_SchedulerTimeline_SchedulerTimel
 __unaligned struct Client_System_Scheduler_Base_TimelineController /* Size=0x80 */
 {
     /* 0x00 */ Client_System_Scheduler_Base_SchedulerState SchedulerState;
-    /*      */ byte _gap_0x18[0x68];
+    /*      */ byte _gap_0x18[0x18];
+    /*      */ byte _gap_0x30[0x4];
+    /* 0x34 */ float CurrentTimestamp;
+    /*      */ byte _gap_0x38[0x48];
 };
 
 __unaligned struct Client_System_Scheduler_Resource_SchedulerResource_ResourceName /* Size=0x40 */
@@ -14762,7 +15299,10 @@ __unaligned struct StdVectorClientUIAgentLobbyDataCenterWorldEntry /* Size=0x18 
 
 __unaligned struct Client_UI_Agent_LobbyUIClient /* Size=0x848 */
 {
-    /*       */ byte _gap_0x0[0x30];
+    /* 0x000 */ void** vtbl;
+    /*       */ byte _gap_0x8[0x8];
+    /* 0x010 */ Client_Network_NetworkModuleProxy* NetworkModuleProxy;
+    /*       */ byte _gap_0x18[0x18];
     /* 0x030 */ StdVectorClientUIAgentLobbyDataCenterWorldEntry CurrentDataCenterWorlds;
     /* 0x048 */ Client_UI_Agent_LobbySubscriptionInfo* SubscriptionInfo;
     /*       */ byte _gap_0x50[0x7F8];
@@ -14804,7 +15344,12 @@ __unaligned struct Client_UI_Agent_AgentLobby /* Size=0x1DF8 */
     /* 0x10F2 */ __int16 WorldIndex;
     /* 0x10F4 */ unsigned __int16 WorldId;
     /*        */ byte _gap_0x10F6[0x2];
-    /*        */ byte _gap_0x10F8[0x18];
+    /*        */ byte _gap_0x10F8[0x8];
+    /*        */ byte _gap_0x1100[0x4];
+    /* 0x1104 */ bool RequestedDataReady;
+    /*        */ byte _gap_0x1105;
+    /*        */ byte _gap_0x1106[0x2];
+    /*        */ byte _gap_0x1108[0x8];
     /* 0x1110 */ unsigned __int32 IdleTime;
     /*        */ byte _gap_0x1114[0x4];
     /*        */ byte _gap_0x1118[0x110];
@@ -14812,7 +15357,13 @@ __unaligned struct Client_UI_Agent_AgentLobby /* Size=0x1DF8 */
     /*        */ byte _gap_0x1229;
     /*        */ byte _gap_0x122A[0x2];
     /*        */ byte _gap_0x122C[0x4];
-    /*        */ byte _gap_0x1230[0xB70];
+    /*        */ byte _gap_0x1230[0x10];
+    /* 0x1240 */ __int64 RequestContentId;
+    /* 0x1248 */ byte RequestCharaterIndex;
+    /*        */ byte _gap_0x1249;
+    /*        */ byte _gap_0x124A[0x2];
+    /*        */ byte _gap_0x124C[0x4];
+    /*        */ byte _gap_0x1250[0xB50];
     /*        */ byte _gap_0x1DA0[0x4];
     /* 0x1DA4 */ bool HasShownCharacterNotFound;
     /*        */ byte _gap_0x1DA5;
@@ -15748,6 +16299,39 @@ __unaligned struct Client_UI_Agent_AgentMycItemBox /* Size=0x58 */
     /*      */ byte _gap_0x48[0x10];
 };
 
+__unaligned struct Client_UI_Agent_AgentQuestJournal /* Size=0x280 */
+{
+    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
+    /*       */ byte _gap_0x28[0x28];
+    /*       */ byte _gap_0x50[0x4];
+    /*       */ byte _gap_0x54[0x2];
+    /* 0x056 */ byte JournalCategoryIds[0x34];
+    /* 0x08A */ bool IsDisplayingCompletedQuests;
+    /*       */ byte _gap_0x8B;
+    /*       */ byte _gap_0x8C[0x4];
+    /* 0x090 */ byte SelectedSection;
+    /* 0x091 */ byte SelectedGenreIndex;
+    /* 0x092 */ byte NumSelectableGenres;
+    /*       */ byte _gap_0x93;
+    /*       */ byte _gap_0x94[0x4];
+    /*       */ byte _gap_0x98[0x8];
+    /* 0x0A0 */ unsigned __int32 SelectedQuestId;
+    /* 0x0A4 */ unsigned __int32 SelectedQuestType;
+    /* 0x0A8 */ unsigned __int32 SelectedCompletedQuestId;
+    /*       */ byte _gap_0xAC[0x4];
+    /*       */ byte _gap_0xB0[0x40];
+    /*       */ byte _gap_0xF0[0x4];
+    /* 0x0F4 */ unsigned __int32 SearchFlag;
+    /* 0x0F8 */ Client_System_String_Utf8String SearchTerm;
+    /*       */ byte _gap_0x160[0x20];
+    /* 0x180 */ Client_System_String_Utf8String SearchTerm2;
+    /*       */ byte _gap_0x1E8[0x50];
+    /* 0x238 */ Component_Excel_ExcelSheet* QuestSheet;
+    /*       */ byte _gap_0x240[0x8];
+    /* 0x248 */ Component_Excel_ExcelSheet* LeveSheet;
+    /*       */ byte _gap_0x250[0x30];
+};
+
 __unaligned struct Client_UI_Agent_AgentReadyCheck_ReadyCheckEntry /* Size=0x10 */
 {
     /* 0x00 */ __int64 ContentID;
@@ -16284,7 +16868,7 @@ __unaligned struct Client_UI_Agent_CharaSelectCharacterEntry /* Size=0x6F8 */
 {
     /*       */ byte _gap_0x0[0x8];
     /* 0x008 */ unsigned __int64 ContentId;
-    /*       */ byte _gap_0x10;
+    /* 0x010 */ byte Index;
     /* 0x011 */ Client_UI_Agent_CharaSelectCharacterEntryLoginFlags LoginFlags;
     /*       */ byte _gap_0x12[0x2];
     /*       */ byte _gap_0x14[0x4];
@@ -17594,7 +18178,7 @@ __unaligned struct Client_UI_Misc_DutyActionSlot /* Size=0xE8 */
 {
     /* 0x00 */ Client_UI_Misc_HotBarSlot Slot;
     /* 0xE0 */ byte PrimaryCostType;
-    /*      */ byte _gap_0xE1;
+    /* 0xE1 */ bool IsActive;
     /*      */ byte _gap_0xE2[0x2];
     /*      */ byte _gap_0xE4[0x4];
 };
@@ -18038,9 +18622,10 @@ __unaligned struct Client_UI_Misc_RaptureHotbarModule /* Size=0x288F8 */
     /* 0x00000 */ Client_UI_Misc_UserFileManager_UserFileEvent UserFileEvent;
     /* 0x00040 */ void** InputCodeModifiedInterfaceVTable;
     /* 0x00048 */ Client_UI_UIModule* UiModule;
-    /*         */ byte _gap_0x50;
+    /* 0x00050 */ bool ModuleReady;
     /* 0x00051 */ byte ActiveHotbarClassJobId;
-    /*         */ byte _gap_0x52[0x2];
+    /* 0x00052 */ bool DatFileLoadedSuccessfully;
+    /*         */ byte _gap_0x53;
     /*         */ byte _gap_0x54[0x4];
     /*         */ byte _gap_0x58[0x20];
     /*         */ byte _gap_0x78[0x4];
@@ -18052,8 +18637,12 @@ __unaligned struct Client_UI_Misc_RaptureHotbarModule /* Size=0x288F8 */
     /* 0x11890 */ Client_UI_Misc_HotBarSlot ScratchSlot;
     /* 0x11970 */ unsigned __int32 PetHotbarMode;
     /* 0x11974 */ Client_UI_Misc_SavedHotBarGroup SavedHotBars[0x41];
-    /*         */ byte _gap_0x28714[0x4];
-    /*         */ byte _gap_0x28718[0x8];
+    /* 0x28714 */ Client_UI_Misc_CrossHotbarFlags CrossHotbarFlags;
+    /*         */ byte _gap_0x28716[0x2];
+    /* 0x28718 */ unsigned __int32 GrandCompanyId;
+    /* 0x2871C */ bool PvPHotbarsActive;
+    /* 0x2871D */ bool ShowPvPHotbarSwapNotification;
+    /*         */ byte _gap_0x2871E[0x2];
     /* 0x28720 */ Client_UI_Misc_DutyActionSlot DutyActionSlots[0x2];
     /* 0x288F0 */ bool DutyActionsPresent;
     /*         */ byte _gap_0x288F1;
@@ -18905,14 +19494,412 @@ __unaligned struct Client_UI_UIModule_UIModuleVTable /* Size=0x0 */
     /* 0x610 */ bool (__fastcall *IsMainCommandUnlocked)(Client_UI_UIModule* a1, unsigned __int32 a2);
 };
 
-__unaligned struct Common_Component_BGCollision_BGCollisionModule /* Size=0xC0 */
+__unaligned struct System_Numerics_Vector4 /* Size=0x0 */
 {
-    /*      */ byte _gap_0x0[0xC0];
+    /* 0x0 */ float X;
+    /* 0x4 */ float Y;
+    /* 0x8 */ float Z;
+    /* 0xC */ float W;
+};
+
+__unaligned struct Common_Component_BGCollision_BGCollisionModule /* Size=0xA0 */
+{
+    /*      */ byte _gap_0x0;
+    /* 0x01 */ bool ShuttingDown;
+    /*      */ byte _gap_0x2[0x2];
+    /*      */ byte _gap_0x4[0x4];
+    /* 0x08 */ void* ResourceManager;
+    /* 0x10 */ Common_Component_BGCollision_SceneManager* SceneManager;
+    /* 0x18 */ __int64 UpdateTaskLock;
+    /*      */ byte _gap_0x20[0x28];
+    /* 0x48 */ Client_System_Framework_Task WaitForUpdateTask;
+    /* 0x80 */ __int64 UpdateFinishedEvent;
+    /* 0x88 */ __int32 LoadInProgressCounter;
+    /* 0x8C */ System_Numerics_Vector4 ForcedStreamingSphere;
+    /*      */ byte _gap_0x8C[0x4];
+    /*      */ byte _gap_0x90[0x10];
 };
 
 __unaligned struct Common_Component_BGCollision_Object /* Size=0x8 */
 {
-    /*     */ byte _gap_0x0[0x8];
+    /* 0x0 */ Common_Component_BGCollision_Object_ObjectVTable* VTable;
+};
+
+__unaligned struct Common_Component_BGCollision_NodeLink /* Size=0x18 */
+{
+    /* 0x00 */ Common_Component_BGCollision_NodeLink_NodeLinkVTable* VTable;
+    /* 0x08 */ Common_Component_BGCollision_Node* Prev;
+    /* 0x10 */ Common_Component_BGCollision_Node* Next;
+};
+
+__unaligned struct Common_Component_BGCollision_Node /* Size=0x20 */
+{
+    /* 0x00 */ Common_Component_BGCollision_Object Object;
+    /* 0x08 */ Common_Component_BGCollision_NodeLink NodeLink;
+};
+
+__unaligned struct Common_Component_BGCollision_QuadtreeNode /* Size=0x20 */
+{
+    /* 0x00 */ Common_Component_BGCollision_Node Node;
+};
+
+__unaligned struct Common_Component_BGCollision_Collider /* Size=0xA0 */
+{
+    /*      */ byte _gap_0x0[0x20];
+    /* 0x20 */ Common_Component_BGCollision_QuadtreeNode QuadtreeNode;
+    /*      */ byte _gap_0x40[0x4];
+    /* 0x44 */ unsigned __int32 NumRefs;
+    /* 0x48 */ Common_Component_BGCollision_Scene* Scene;
+    /*      */ byte _gap_0x50[0x18];
+    /* 0x68 */ unsigned __int64 LayerMask;
+    /* 0x70 */ unsigned __int64 ObjectMaterialValue;
+    /* 0x78 */ unsigned __int64 ObjectMaterialMask;
+    /* 0x80 */ float LastTranslationDeltaY;
+    /* 0x84 */ byte VisibilityFlags;
+    /*      */ byte _gap_0x85;
+    /*      */ byte _gap_0x86[0x2];
+    /*      */ byte _gap_0x88[0x18];
+};
+
+__unaligned struct Common_Component_BGCollision_Collider_ColliderVTable /* Size=0x0 */
+{
+    /*     */ __int64 _vf0;
+    /* 0x8 */ void (__fastcall *Load)(Common_Component_BGCollision_Collider* a1, byte* a2);
+    /* 0x10 */ void (__fastcall *Unload)(Common_Component_BGCollision_Collider* a1);
+    /* 0x18 */ bool (__fastcall *WantUnload)(Common_Component_BGCollision_Collider* a1);
+    /* 0x20 */ void (__fastcall *GetMaterial)(Common_Component_BGCollision_Collider* a1, unsigned __int64* a2, unsigned __int64* a3);
+    /* 0x28 */ unsigned __int64 (__fastcall *GetMaterialId)(Common_Component_BGCollision_Collider* a1);
+    /* 0x30 */ unsigned __int64 (__fastcall *GetMaterialMask)(Common_Component_BGCollision_Collider* a1);
+    /* 0x38 */ void (__fastcall *SetMaterial)(Common_Component_BGCollision_Collider* a1, unsigned __int64 a2, unsigned __int64 a3);
+    /* 0x40 */ void (__fastcall *SetTranslation)(Common_Component_BGCollision_Collider* a1, System_Numerics_Vector3* a2);
+    /* 0x48 */ void (__fastcall *GetTranslation)(Common_Component_BGCollision_Collider* a1, System_Numerics_Vector3* a2);
+    /* 0x50 */ void (__fastcall *GetWorldBB)(Common_Component_BGCollision_Collider* a1, Common_Component_BGCollision_Math_AABB* a2);
+    /* 0x58 */ void (__fastcall *SetRotation)(Common_Component_BGCollision_Collider* a1, System_Numerics_Vector3* a2);
+    /* 0x60 */ void (__fastcall *GetRotation)(Common_Component_BGCollision_Collider* a1, System_Numerics_Vector3* a2);
+    /* 0x68 */ void (__fastcall *SetScale)(Common_Component_BGCollision_Collider* a1, System_Numerics_Vector3* a2);
+    /* 0x70 */ void (__fastcall *GetScale)(Common_Component_BGCollision_Collider* a1, System_Numerics_Vector3* a2);
+    /* 0x78 */ void (__fastcall *GetWorldTransform)(Common_Component_BGCollision_Collider* a1, System_Numerics_Matrix4x4* a2);
+    /* 0x80 */ void (__fastcall *GetInvWorldTransform)(Common_Component_BGCollision_Collider* a1, System_Numerics_Matrix4x4* a2);
+    /* 0x88 */ Common_Component_BGCollision_ColliderType (__fastcall *GetColliderType)(Common_Component_BGCollision_Collider* a1);
+    /* 0x90 */ bool (__fastcall *Update)(Common_Component_BGCollision_Collider* a1);
+    /* 0x98 */ bool (__fastcall *LoadInProgress)(Common_Component_BGCollision_Collider* a1);
+    /* 0xA0 */ bool (__fastcall *Raycast)(Common_Component_BGCollision_Collider* a1, Common_Component_BGCollision_RaycastHit* a2, unsigned __int64 a3, Common_Component_BGCollision_RaycastParams* a4);
+    /* 0xA8 */ bool (__fastcall *IsInsideCheckLayer)(Common_Component_BGCollision_Collider* a1, unsigned __int64 a2, System_Numerics_Vector3* a3);
+    /* 0xB0 */ bool (__fastcall *IsInside)(Common_Component_BGCollision_Collider* a1, System_Numerics_Vector3* a2);
+};
+
+__unaligned struct Common_Component_BGCollision_Math_Matrix4x3 /* Size=0x30 */
+{
+    /*      */ byte _gap_0x0[0x4];
+    /* 0x04 */ float M12;
+    /* 0x08 */ float M13;
+    /*      */ byte _gap_0xC[0x4];
+    /* 0x10 */ float M22;
+    /* 0x14 */ float M23;
+    /*      */ byte _gap_0x18[0x4];
+    /* 0x1C */ float M32;
+    /* 0x20 */ float M33;
+    /*      */ byte _gap_0x24[0x4];
+    /* 0x28 */ float M42;
+    /* 0x2C */ float M43;
+};
+
+__unaligned struct Common_Component_BGCollision_ColliderBox /* Size=0x140 */
+{
+    /* 0x000 */ Common_Component_BGCollision_Collider Collider;
+    /* 0x0A0 */ System_Numerics_Vector3 Translation;
+    /*       */ byte _gap_0xA0[0x8];
+    /*       */ byte _gap_0xA8[0x4];
+    /* 0x0AC */ System_Numerics_Vector3 TranslationPrev;
+    /*       */ byte _gap_0xAC[0x4];
+    /*       */ byte _gap_0xB0[0x8];
+    /* 0x0B8 */ System_Numerics_Vector3 Rotation;
+    /*       */ byte _gap_0xB8[0x8];
+    /*       */ byte _gap_0xC0[0x4];
+    /* 0x0C4 */ System_Numerics_Vector3 RotationPrev;
+    /*       */ byte _gap_0xC4[0x4];
+    /*       */ byte _gap_0xC8[0x8];
+    /* 0x0D0 */ System_Numerics_Vector3 Scale;
+    /*       */ byte _gap_0xD0[0x8];
+    /*       */ byte _gap_0xD8[0x4];
+    /* 0x0DC */ Common_Component_BGCollision_Math_Matrix4x3 World;
+    /* 0x10C */ Common_Component_BGCollision_Math_Matrix4x3 InvWorld;
+    /* 0x13C */ bool Dirty;
+    /*       */ byte _gap_0x13D;
+    /*       */ byte _gap_0x13E[0x2];
+};
+
+__unaligned struct Common_Component_BGCollision_ColliderCylinder /* Size=0x148 */
+{
+    /* 0x000 */ Common_Component_BGCollision_Collider Collider;
+    /* 0x0A0 */ System_Numerics_Vector3 Translation;
+    /*       */ byte _gap_0xA0[0x8];
+    /*       */ byte _gap_0xA8[0x4];
+    /* 0x0AC */ System_Numerics_Vector3 TranslationPrev;
+    /*       */ byte _gap_0xAC[0x4];
+    /*       */ byte _gap_0xB0[0x8];
+    /* 0x0B8 */ System_Numerics_Vector3 Rotation;
+    /*       */ byte _gap_0xB8[0x8];
+    /*       */ byte _gap_0xC0[0x4];
+    /* 0x0C4 */ System_Numerics_Vector3 RotationPrev;
+    /*       */ byte _gap_0xC4[0x4];
+    /*       */ byte _gap_0xC8[0x8];
+    /* 0x0D0 */ System_Numerics_Vector3 Scale;
+    /*       */ byte _gap_0xD0[0x8];
+    /*       */ byte _gap_0xD8[0x4];
+    /* 0x0DC */ float Radius;
+    /* 0x0E0 */ Common_Component_BGCollision_Math_Matrix4x3 World;
+    /* 0x110 */ Common_Component_BGCollision_Math_Matrix4x3 InvWorld;
+    /* 0x140 */ bool Dirty;
+    /*       */ byte _gap_0x141;
+    /*       */ byte _gap_0x142[0x2];
+    /*       */ byte _gap_0x144[0x4];
+};
+
+__unaligned struct Common_Component_BGCollision_Math_AABB /* Size=0x18 */
+{
+    /* 0x00 */ System_Numerics_Vector3 Min;
+    /*      */ byte _gap_0x0[0x8];
+    /*      */ byte _gap_0x8[0x4];
+    /* 0x0C */ System_Numerics_Vector3 Max;
+    /*      */ byte _gap_0xC[0x4];
+    /*      */ byte _gap_0x10[0x8];
+};
+
+__unaligned struct Common_Component_BGCollision_ColliderMesh /* Size=0x198 */
+{
+    /* 0x000 */ Common_Component_BGCollision_Collider Collider;
+    /*       */ byte _gap_0xA0[0x8];
+    /* 0x0A8 */ Common_Component_BGCollision_Resource* Resource;
+    /* 0x0B0 */ byte* MemoryData;
+    /* 0x0B8 */ __int32 TotalPrimitives;
+    /* 0x0BC */ bool Dirty;
+    /* 0x0BD */ bool MeshIsSimple;
+    /* 0x0BE */ bool Loaded;
+    /*       */ byte _gap_0xBF;
+    /* 0x0C0 */ float InvScaleX;
+    /*       */ byte _gap_0xC4[0x4];
+    /* 0x0C8 */ Common_Component_BGCollision_Mesh* Mesh;
+    /* 0x0D0 */ __int32 TotalChildren;
+    /* 0x0D4 */ System_Numerics_Vector3 Translation;
+    /*       */ byte _gap_0xD4[0x4];
+    /*       */ byte _gap_0xD8[0x8];
+    /* 0x0E0 */ System_Numerics_Vector3 Rotation;
+    /*       */ byte _gap_0xE0[0x8];
+    /*       */ byte _gap_0xE8[0x4];
+    /* 0x0EC */ System_Numerics_Vector3 Scale;
+    /*       */ byte _gap_0xEC[0x4];
+    /*       */ byte _gap_0xF0[0x8];
+    /* 0x0F8 */ System_Numerics_Vector3 TranslationPrev;
+    /*       */ byte _gap_0xF8[0x8];
+    /*       */ byte _gap_0x100[0x4];
+    /* 0x104 */ System_Numerics_Vector3 RotationPrev;
+    /*       */ byte _gap_0x104[0x4];
+    /*       */ byte _gap_0x108[0x8];
+    /* 0x110 */ Common_Component_BGCollision_Math_Matrix4x3 World;
+    /* 0x140 */ Common_Component_BGCollision_Math_Matrix4x3 InvWorld;
+    /* 0x170 */ System_Numerics_Vector4 BoundingSphere;
+    /*       */ byte _gap_0x170[0x10];
+    /* 0x180 */ Common_Component_BGCollision_Math_AABB WorldBoundingBox;
+};
+
+__unaligned struct Common_Component_BGCollision_ColliderPlane /* Size=0x140 */
+{
+    /* 0x000 */ Common_Component_BGCollision_Collider Collider;
+    /* 0x0A0 */ System_Numerics_Vector3 Translation;
+    /*       */ byte _gap_0xA0[0x8];
+    /*       */ byte _gap_0xA8[0x4];
+    /* 0x0AC */ System_Numerics_Vector3 TranslationPrev;
+    /*       */ byte _gap_0xAC[0x4];
+    /*       */ byte _gap_0xB0[0x8];
+    /* 0x0B8 */ System_Numerics_Vector3 Rotation;
+    /*       */ byte _gap_0xB8[0x8];
+    /*       */ byte _gap_0xC0[0x4];
+    /* 0x0C4 */ System_Numerics_Vector3 RotationPrev;
+    /*       */ byte _gap_0xC4[0x4];
+    /*       */ byte _gap_0xC8[0x8];
+    /* 0x0D0 */ System_Numerics_Vector3 Scale;
+    /*       */ byte _gap_0xD0[0x8];
+    /*       */ byte _gap_0xD8[0x4];
+    /* 0x0DC */ Common_Component_BGCollision_Math_Matrix4x3 World;
+    /* 0x10C */ Common_Component_BGCollision_Math_Matrix4x3 InvWorld;
+    /* 0x13C */ bool Dirty;
+    /* 0x13D */ bool TwoSided;
+    /*       */ byte _gap_0x13E[0x2];
+};
+
+__unaligned struct Common_Component_BGCollision_ColliderSphere /* Size=0x150 */
+{
+    /* 0x000 */ Common_Component_BGCollision_Collider Collider;
+    /* 0x0A0 */ bool Dirty;
+    /*       */ byte _gap_0xA1;
+    /*       */ byte _gap_0xA2[0x2];
+    /* 0x0A4 */ System_Numerics_Vector3 Translation;
+    /*       */ byte _gap_0xA4[0x4];
+    /*       */ byte _gap_0xA8[0x8];
+    /* 0x0B0 */ System_Numerics_Vector3 TranslationPrev;
+    /*       */ byte _gap_0xB0[0x8];
+    /*       */ byte _gap_0xB8[0x4];
+    /* 0x0BC */ System_Numerics_Vector3 Rotation;
+    /*       */ byte _gap_0xBC[0x4];
+    /*       */ byte _gap_0xC0[0x8];
+    /* 0x0C8 */ System_Numerics_Vector3 RotationPrev;
+    /*       */ byte _gap_0xC8[0x8];
+    /*       */ byte _gap_0xD0[0x4];
+    /* 0x0D4 */ System_Numerics_Vector3 Scale;
+    /*       */ byte _gap_0xD4[0x4];
+    /*       */ byte _gap_0xD8[0x8];
+    /* 0x0E0 */ System_Numerics_Vector3 ScalePrev;
+    /*       */ byte _gap_0xE0[0x8];
+    /*       */ byte _gap_0xE8[0x4];
+    /* 0x0EC */ Common_Component_BGCollision_Math_Matrix4x3 World;
+    /* 0x11C */ Common_Component_BGCollision_Math_Matrix4x3 InvWorld;
+    /*       */ byte _gap_0x14C[0x4];
+};
+
+__unaligned struct Common_Component_BGCollision_ColliderStreamed /* Size=0x1E0 */
+{
+    /* 0x000 */ Common_Component_BGCollision_Collider Collider;
+    /*       */ byte _gap_0xA0[0x8];
+    /* 0x0A8 */ byte PathBase[0x100];
+    /* 0x1A8 */ Common_Component_BGCollision_Resource* Resource;
+    /* 0x1B0 */ __int32 NumMeshesLoading;
+    /* 0x1B4 */ bool Loaded;
+    /*       */ byte _gap_0x1B5;
+    /*       */ byte _gap_0x1B6[0x2];
+    /* 0x1B8 */ float StreamedMinX;
+    /* 0x1BC */ float StreamedMinZ;
+    /* 0x1C0 */ float StreamedMaxX;
+    /* 0x1C4 */ float StreamedMaxZ;
+    /* 0x1C8 */ Common_Component_BGCollision_ColliderStreamed_FileHeader* Header;
+    /* 0x1D0 */ Common_Component_BGCollision_ColliderStreamed_FileEntry* Entries;
+    /* 0x1D8 */ Common_Component_BGCollision_ColliderStreamed_Element* Elements;
+};
+
+__unaligned struct Common_Component_BGCollision_ColliderStreamed_Element /* Size=0x20 */
+{
+    /* 0x00 */ __int32 MeshId;
+    /*      */ byte _gap_0x4[0x4];
+    /* 0x08 */ Common_Component_BGCollision_ColliderMesh* Mesh;
+    /* 0x10 */ float MinX;
+    /* 0x14 */ float MinZ;
+    /* 0x18 */ float MaxX;
+    /* 0x1C */ float MaxZ;
+};
+
+__unaligned struct Common_Component_BGCollision_ColliderStreamed_FileEntry /* Size=0x20 */
+{
+    /* 0x00 */ __int32 MeshId;
+    /* 0x04 */ Common_Component_BGCollision_Math_AABB Bounds;
+    /*      */ byte _gap_0x1C[0x4];
+};
+
+__unaligned struct Common_Component_BGCollision_ColliderStreamed_FileHeader /* Size=0x20 */
+{
+    /* 0x00 */ __int32 NumMeshes;
+    /* 0x04 */ Common_Component_BGCollision_Math_AABB Bounds;
+    /*      */ byte _gap_0x1C[0x4];
+};
+
+__unaligned struct Common_Component_BGCollision_IMesh /* Size=0x8 */
+{
+    /* 0x0 */ Common_Component_BGCollision_IMesh_IMeshVTable* VTable;
+};
+
+__unaligned struct Common_Component_BGCollision_IMesh_IMeshVTable /* Size=0x0 */
+{
+    /* 0x0 */ void (__fastcall *Dtor)(Common_Component_BGCollision_IMesh* a1, byte a2);
+};
+
+__unaligned struct Common_Component_BGCollision_Mesh /* Size=0x18 */
+{
+    union {
+    /* 0x00 */ Common_Component_BGCollision_Object Object;
+    /* 0x00 */ Common_Component_BGCollision_Mesh_MeshVTable* VTable;
+    } _union_0x0;
+    /* 0x08 */ Common_Component_BGCollision_IMesh IMesh;
+    /* 0x10 */ Common_Component_BGCollision_ColliderMesh* OwnerCollider;
+};
+
+__unaligned struct Common_Component_BGCollision_Mesh_MeshVTable /* Size=0x0 */
+{
+    /* 0x0 */ void (__fastcall *Dtor)(Common_Component_BGCollision_Mesh* a1, byte a2);
+    /*     */ __int64 _vf1;
+    /* 0x10 */ System_Numerics_Vector3* (__fastcall *GetBoundsMin)(Common_Component_BGCollision_Mesh* a1);
+    /* 0x18 */ System_Numerics_Vector3* (__fastcall *GetBoundsMax)(Common_Component_BGCollision_Mesh* a1);
+    /* 0x20 */ bool (__fastcall *Intersect)(Common_Component_BGCollision_Mesh* a1, System_Numerics_Matrix4x4* a2, Common_Component_BGCollision_RaycastHit* a3, Common_Component_BGCollision_RaycastParams* a4);
+    /* 0x28 */ unsigned __int16 (__fastcall *GetNumPrimitives)(Common_Component_BGCollision_Mesh* a1);
+    /* 0x30 */ unsigned __int32 (__fastcall *GetNumVertices)(Common_Component_BGCollision_Mesh* a1);
+    /* 0x38 */ void (__fastcall *GatherVertices)(Common_Component_BGCollision_Mesh* a1, System_Numerics_Matrix4x4* a2, System_Numerics_Vector3* a3);
+    /* 0x40 */ Common_Component_BGCollision_Mesh_Primitive* (__fastcall *GetPrimitives)(Common_Component_BGCollision_Mesh* a1);
+    /* 0x48 */ void (__fastcall *GetAABB)(Common_Component_BGCollision_Mesh* a1, Common_Component_BGCollision_Math_AABB* a2);
+};
+
+__unaligned struct Common_Component_BGCollision_Mesh_Primitive /* Size=0xC */
+{
+    /* 0x0 */ byte V1;
+    /* 0x1 */ byte V2;
+    /* 0x2 */ byte V3;
+    /*     */ byte _gap_0x3;
+    /* 0x4 */ unsigned __int64 Material;
+};
+
+__unaligned struct Common_Component_BGCollision_MeshPCB /* Size=0x20 */
+{
+    /* 0x00 */ Common_Component_BGCollision_Mesh Mesh;
+    /* 0x18 */ Common_Component_BGCollision_MeshPCB_FileNode* RootNode;
+};
+
+__unaligned struct Common_Component_BGCollision_MeshPCB_FileHeader /* Size=0x10 */
+{
+    /*      */ byte _gap_0x0[0x4];
+    /* 0x04 */ __int32 Version;
+    /* 0x08 */ __int32 TotalChildNodes;
+    /* 0x0C */ __int32 TotalPrimitives;
+};
+
+__unaligned struct Common_Component_BGCollision_MeshPCB_FileNode /* Size=0x30 */
+{
+    /* 0x00 */ unsigned __int64 Header;
+    /* 0x08 */ __int32 Child1Offset;
+    /* 0x0C */ __int32 Child2Offset;
+    /* 0x10 */ Common_Component_BGCollision_Math_AABB LocalBounds;
+    /* 0x28 */ unsigned __int16 NumVertsCompressed;
+    /* 0x2A */ unsigned __int16 NumPrims;
+    /* 0x2C */ unsigned __int16 NumVertsRaw;
+    /*      */ byte _gap_0x2E[0x2];
+};
+
+struct Common_Component_BGCollision_NodeEnumerator; /* Size=unknown due to generic type with parameters */
+__unaligned struct Common_Component_BGCollision_NodeLink_NodeLinkVTable /* Size=0x0 */
+{
+    /* 0x0 */ void (__fastcall *Dtor)(Common_Component_BGCollision_NodeLink* a1, byte a2);
+};
+
+__unaligned struct Common_Component_BGCollision_Object_ObjectVTable /* Size=0x0 */
+{
+    /* 0x0 */ void (__fastcall *Dtor)(Common_Component_BGCollision_Object* a1, byte a2);
+};
+
+__unaligned struct Common_Component_BGCollision_Quadtree /* Size=0x40 */
+{
+    /* 0x00 */ Common_Component_BGCollision_Object Object;
+    /* 0x08 */ float MinX;
+    /* 0x0C */ float MaxX;
+    /* 0x10 */ float LeafSizeX;
+    /* 0x14 */ float MinZ;
+    /* 0x18 */ float MaxZ;
+    /* 0x1C */ float LeafSizeZ;
+    /* 0x20 */ __int32 NumLevels;
+    /*      */ byte _gap_0x24[0x4];
+    /* 0x28 */ Common_Component_BGCollision_QuadtreeNode* Nodes;
+    /* 0x30 */ __int32 NumNodes;
+    /*      */ byte _gap_0x34[0x4];
+    /* 0x38 */ Common_Component_BGCollision_SceneManager* Owner;
+};
+
+__unaligned struct Common_Component_BGCollision_QuadtreeNode_Enumerator /* Size=0x0 */
+{
 };
 
 __unaligned struct Common_Component_BGCollision_RaycastHit /* Size=0x58 */
@@ -18929,13 +19916,120 @@ __unaligned struct Common_Component_BGCollision_RaycastHit /* Size=0x58 */
     /* 0x24 */ System_Numerics_Vector3 V3;
     /*      */ byte _gap_0x24[0x4];
     /*      */ byte _gap_0x28[0x8];
-    /* 0x30 */ System_Numerics_Vector3 Unk30;
+    /* 0x30 */ System_Numerics_Vector3 Normal;
     /*      */ byte _gap_0x30[0x10];
-    /* 0x40 */ __int32 Flags;
-    /* 0x44 */ __int32 Unk44;
+    /* 0x40 */ unsigned __int64 Material;
     /* 0x48 */ float Distance;
     /*      */ byte _gap_0x4C[0x4];
     /* 0x50 */ Common_Component_BGCollision_Object* Object;
+};
+
+__unaligned struct Common_Component_BGCollision_RaycastMaterialFilter /* Size=0x10 */
+{
+    /* 0x00 */ unsigned __int64 Mask;
+    /* 0x08 */ unsigned __int64 Value;
+};
+
+__unaligned struct Common_Component_BGCollision_RaycastParams /* Size=0x40 */
+{
+    /* 0x00 */ __int32 Algorithm;
+    /*      */ byte _gap_0x4[0x4];
+    /* 0x08 */ System_Numerics_Vector4* Origin;
+    /* 0x10 */ System_Numerics_Vector3* Direction;
+    /* 0x18 */ float* MaxDistance;
+    /* 0x20 */ float MaxPlaneNormalY;
+    /*      */ byte _gap_0x24[0x4];
+    /* 0x28 */ Common_Component_BGCollision_RaycastMaterialFilter* MaterialFilter;
+    /* 0x30 */ unsigned __int64 ObjectMaterialValue;
+    /* 0x38 */ unsigned __int64 ObjectMaterialMask;
+};
+
+__unaligned struct Common_Component_BGCollision_Resource /* Size=0x88 */
+{
+    /* 0x00 */ Common_Component_BGCollision_Resource_ResourceVTable* VTable;
+    /*      */ byte _gap_0x8[0x8];
+    /* 0x10 */ Common_Component_BGCollision_Resource* PrevResource;
+    /* 0x18 */ Common_Component_BGCollision_Resource* NextResource;
+    /* 0x20 */ Client_System_Resource_Handle_ResourceHandle* Handle;
+    /* 0x28 */ byte Path[0x50];
+    /* 0x78 */ void* Listener;
+    /*      */ byte _gap_0x80[0x8];
+};
+
+__unaligned struct Common_Component_BGCollision_Resource_ResourceVTable /* Size=0x0 */
+{
+    /* 0x0 */ void (__fastcall *Dtor)(Common_Component_BGCollision_Resource* a1, byte a2);
+    /* 0x8 */ byte* (__fastcall *GetPath)(Common_Component_BGCollision_Resource* a1);
+    /* 0x10 */ bool (__fastcall *LoadSucceeded)(Common_Component_BGCollision_Resource* a1);
+    /* 0x18 */ bool (__fastcall *LoadFailed)(Common_Component_BGCollision_Resource* a1);
+    /* 0x20 */ byte* (__fastcall *GetData)(Common_Component_BGCollision_Resource* a1);
+    /* 0x28 */ unsigned __int32 (__fastcall *GetSize)(Common_Component_BGCollision_Resource* a1);
+};
+
+__unaligned struct Common_Component_BGCollision_Scene /* Size=0x40 */
+{
+    /* 0x00 */ Common_Component_BGCollision_Object Object;
+    /* 0x08 */ Common_Component_BGCollision_SceneManager* Manager;
+    /* 0x10 */ Common_Component_BGCollision_Collider* FirstCollider;
+    /* 0x18 */ __int32 NumColliders;
+    /*      */ byte _gap_0x1C[0x4];
+    /* 0x20 */ System_Numerics_Vector4 StreamingSphere;
+    /*      */ byte _gap_0x20[0x10];
+    /* 0x30 */ __int32 NumLoading;
+    /*      */ byte _gap_0x34[0x4];
+    /* 0x38 */ Common_Component_BGCollision_Quadtree* Quadtree;
+};
+
+__unaligned struct Common_Component_BGCollision_SceneManager /* Size=0x38 */
+{
+    /* 0x00 */ Common_Component_BGCollision_SceneManager_SceneManagerVTable* VTable;
+    /* 0x08 */ void* ResourceManager;
+    /*      */ byte _gap_0x10[0x8];
+    /* 0x18 */ Common_Component_BGCollision_SceneWrapper* FirstScene;
+    /* 0x20 */ __int32 NumScenes;
+    /*      */ byte _gap_0x24[0x4];
+    /* 0x28 */ System_Numerics_Vector4 StreamingSphere;
+    /*      */ byte _gap_0x28[0x10];
+};
+
+__unaligned struct Common_Component_BGCollision_SceneManager_SceneManagerVTable /* Size=0x0 */
+{
+    /* 0x0 */ void (__fastcall *Dtor)(Common_Component_BGCollision_SceneManager* a1, byte a2);
+};
+
+__unaligned struct Common_Component_BGCollision_SceneWrapper /* Size=0x30 */
+{
+    /*      */ byte _gap_0x0[0x20];
+    /* 0x20 */ Common_Component_BGCollision_SceneManager* Manager;
+    /* 0x28 */ Common_Component_BGCollision_Scene* Scene;
+};
+
+__unaligned struct Common_Component_BGCollision_SceneWrapper_ColliderList /* Size=0x84 */
+{
+    /* 0x00 */ Common_Component_BGCollision_Collider* Colliders[0x10];
+    /* 0x80 */ __int32 Count;
+};
+
+__unaligned struct Common_Component_BGCollision_SceneWrapper_SceneWrapperVTable /* Size=0x0 */
+{
+    /*     */ __int64 _vf0;
+    /* 0x8 */ void (__fastcall *Clear)(Common_Component_BGCollision_SceneWrapper* a1);
+    /* 0x10 */ void (__fastcall *SetStreamingSphere)(Common_Component_BGCollision_SceneWrapper* a1, float a2, float a3, float a4, float a5);
+    /* 0x18 */ bool (__fastcall *HasLoadingColliders)(Common_Component_BGCollision_SceneWrapper* a1);
+    /* 0x20 */ Common_Component_BGCollision_ColliderStreamed* (__fastcall *AddColliderStreamed)(Common_Component_BGCollision_SceneWrapper* a1, unsigned __int64 a2, byte* a3, bool a4);
+    /* 0x28 */ Common_Component_BGCollision_ColliderMesh* (__fastcall *AddColliderMesh)(Common_Component_BGCollision_SceneWrapper* a1, unsigned __int64 a2, byte* a3, bool a4, System_Numerics_Vector3* a5, System_Numerics_Vector3* a6, System_Numerics_Vector3* a7);
+    /* 0x30 */ Common_Component_BGCollision_ColliderMesh* (__fastcall *AddColliderMeshCylinder)(Common_Component_BGCollision_SceneWrapper* a1, unsigned __int64 a2, System_Numerics_Vector3* a3, System_Numerics_Vector3* a4, System_Numerics_Vector3* a5);
+    /* 0x38 */ Common_Component_BGCollision_ColliderBox* (__fastcall *AddColliderBox)(Common_Component_BGCollision_SceneWrapper* a1, unsigned __int64 a2, System_Numerics_Vector3* a3, System_Numerics_Vector3* a4, System_Numerics_Vector3* a5);
+    /* 0x40 */ Common_Component_BGCollision_ColliderCylinder* (__fastcall *AddColliderCylinder)(Common_Component_BGCollision_SceneWrapper* a1, unsigned __int64 a2, System_Numerics_Vector3* a3, System_Numerics_Vector3* a4, System_Numerics_Vector3* a5);
+    /* 0x48 */ Common_Component_BGCollision_ColliderSphere* (__fastcall *AddColliderSphere)(Common_Component_BGCollision_SceneWrapper* a1, unsigned __int64 a2, System_Numerics_Vector3* a3, System_Numerics_Vector3* a4, System_Numerics_Vector3* a5);
+    /* 0x50 */ Common_Component_BGCollision_ColliderPlane* (__fastcall *AddColliderPlane)(Common_Component_BGCollision_SceneWrapper* a1, unsigned __int64 a2, System_Numerics_Vector3* a3, System_Numerics_Vector3* a4, System_Numerics_Vector3* a5);
+    /* 0x58 */ Common_Component_BGCollision_ColliderPlane* (__fastcall *AddColliderPlaneTwoSided)(Common_Component_BGCollision_SceneWrapper* a1, unsigned __int64 a2, System_Numerics_Vector3* a3, System_Numerics_Vector3* a4, System_Numerics_Vector3* a5);
+    /* 0x60 */ void (__fastcall *RemoveCollider)(Common_Component_BGCollision_SceneWrapper* a1, Common_Component_BGCollision_Collider* a2);
+    /* 0x68 */ void (__fastcall *UpdateColliders)(Common_Component_BGCollision_SceneWrapper* a1);
+    /* 0x70 */ bool (__fastcall *Raycast)(Common_Component_BGCollision_SceneWrapper* a1, Common_Component_BGCollision_RaycastHit* a2, unsigned __int64 a3, Common_Component_BGCollision_RaycastParams* a4);
+    /* 0x78 */ bool (__fastcall *ExecuteForEachIntersecting)(Common_Component_BGCollision_SceneWrapper* a1, void* a2, unsigned __int64 a3, Common_Component_BGCollision_RaycastMaterialFilter* a4, System_Numerics_Vector3* a5, System_Numerics_Vector3* a6, float a7);
+    /* 0x80 */ bool (__fastcall *FindContainingCollidersCheckLayer)(Common_Component_BGCollision_SceneWrapper* a1, Common_Component_BGCollision_SceneWrapper_ColliderList* a2, unsigned __int64 a3, System_Numerics_Vector3* a4);
+    /* 0x88 */ bool (__fastcall *FindContainingColliders)(Common_Component_BGCollision_SceneWrapper* a1, Common_Component_BGCollision_SceneWrapper_ColliderList* a2, System_Numerics_Vector3* a3);
 };
 
 __unaligned struct Common_Configuration_ConfigProperties /* Size=0x10 */
@@ -18994,13 +20088,10 @@ __unaligned struct Common_Math_Bounds /* Size=0x10 */
 
 __unaligned struct Common_Math_Matrix2x2 /* Size=0x10 */
 {
-    /*      */ byte _gap_0x0[0x10];
-};
-
-__unaligned struct Common_Math_Vector2 /* Size=0x8 */
-{
-    /* 0x0 */ float X;
-    /* 0x4 */ float Y;
+    /* 0x00 */ float M11;
+    /* 0x04 */ float M12;
+    /* 0x08 */ float M21;
+    /* 0x0C */ float M22;
 };
 
 __unaligned struct Component_Excel_ExcelModule /* Size=0x818 */
