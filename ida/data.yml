@@ -2266,12 +2266,12 @@ classes:
       - ea: 0x1419B0378
     vfuncs:
       0: dtor
-      4: SetCursorTyp
-      5: SetIsCursorVisible
-      8: SetUSeSoftwareCursor
-      9: GetUSeSoftwareCursor
+      4: SetCursorType
+      5: SetCursorVisibility
+      8: SetUseSoftwareCursor
+      9: GetUseSoftwareCursor
       14: IsCursorVisible
-      21: GetIsMouseNotCaptured
+      21: IsMouseNotCaptured
   Component::Shell::ShellCommandModule:
     vtbls:
       - ea: 0x1419B2458
