@@ -2,7 +2,7 @@ using FFXIVClientStructs.FFXIV.Client.Game.Character;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Control;
 
-[StructLayout(LayoutKind.Explicit, Size = 0x5A60)]
+[StructLayout(LayoutKind.Explicit, Size = 0x5B00)]
 public unsafe partial struct Control {
     [FieldOffset(0x00)] public CameraManager CameraManager;
     [FieldOffset(0x180)] public TargetSystem TargetSystem;

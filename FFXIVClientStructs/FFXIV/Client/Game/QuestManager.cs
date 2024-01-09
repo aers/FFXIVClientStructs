@@ -3,7 +3,7 @@ using FFXIVClientStructs.FFXIV.Application.Network.WorkDefinitions;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
-[StructLayout(LayoutKind.Explicit, Size = 0xF40)]
+[StructLayout(LayoutKind.Explicit, Size = 0xF58)]
 public unsafe partial struct QuestManager {
     [FixedSizeArray<QuestWork>(30)]
     [FieldOffset(0x10)] public fixed byte NormalQuests[0x18 * 30];
