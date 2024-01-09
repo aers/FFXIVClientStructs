@@ -244,7 +244,7 @@ public abstract class ExporterBase {
         sb.AppendLine("{");
 
         foreach (var fieldInfo in fields) {
-            if (SetProperty(type, header, fieldInfo, false, fieldInfo.GetFieldOffset(), padFill, sb, pad, null, ref offset))
+            if (SetProperty(type, header, fieldInfo, false, fieldInfo.GetFieldOffset(), padFill, sb, pad, null, ref offset, structSize))
                 return;
         }
 
@@ -331,12 +331,12 @@ public abstract class ExporterBase {
                 var layoutObjects = structLayout.Objects;
                 if (isStruct) {
                     sb.AppendLine("    struct {");
-                    if (layoutObjects.Any(layoutObject => SetProperty(type, header, layoutObject.Info, isUnion, layoutObject.Offset, padFill, sb, pad, fields.GetNextLayout(grouping), ref offset))) {
+                    if (layoutObjects.Any(layoutObject => SetProperty(type, header, layoutObject.Info, isUnion, layoutObject.Offset, padFill, sb, pad, fields.GetNextLayout(grouping), ref offset, structSize))) {
                         return;
                     }
 
                     sb.AppendLine($"    }} _union_struct_0x{structLayout.Offset():X};");
-                } else if (SetProperty(type, header, layoutObjects[0].Info, isUnion, layoutObjects[0].Offset, padFill, sb, pad, fields.GetNextLayout(grouping), ref offset)) return;
+                } else if (SetProperty(type, header, layoutObjects[0].Info, isUnion, layoutObjects[0].Offset, padFill, sb, pad, fields.GetNextLayout(grouping), ref offset, structSize)) return;
             }
 
             if (!isUnion)
@@ -365,7 +365,7 @@ public abstract class ExporterBase {
         return sb.ToString();
     }
 
-    private bool SetProperty(Type type, StringBuilder header, FieldInfo fieldInfo, bool isUnion, int fieldOffset, string padFill, StringBuilder sb, int pad, UnionLayout? nextLayout, ref int offset) {
+    private bool SetProperty(Type type, StringBuilder header, FieldInfo fieldInfo, bool isUnion, int fieldOffset, string padFill, StringBuilder sb, int pad, UnionLayout? nextLayout, ref int offset, int structSize) {
         var fieldType = fieldInfo.FieldType;
         int fieldSize;
 
@@ -374,6 +374,15 @@ public abstract class ExporterBase {
                 FillVFuncGap(ref offset, fieldOffset, padFill, sb);
             else
                 FillGaps(ref offset, fieldOffset, padFill, sb);
+        }
+
+        if (offset > structSize && structSize != 0) {
+            var error = $"Current offset exceeded the struct's size (0x{offset:X} > 0x{structSize:X}): {FixFullName(type)}.{fieldInfo.Name}";
+            Debug.WriteLine(error);
+            Console.WriteLine(error);
+            ExporterStatics.ErrorListDictionary.TryAdd(type, error);
+            Errored = true;
+            return true;
         }
 
         if (offset > fieldOffset) {
