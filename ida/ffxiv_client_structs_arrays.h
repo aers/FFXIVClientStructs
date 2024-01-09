@@ -43,6 +43,8 @@ struct Client::Game::Character::Character::VfxContainer;
 struct Client::Game::Character::CharacterSetup;
 struct Client::Game::Character::Character::CastInfo;
 struct Client::Game::Character::Character::CharacterVTable;
+struct Client::Game::StatusManager;
+struct Client::Game::Status;
 struct Client::Game::Character::Character::ForayInfo;
 struct Client::Game::Character::CharacterManager;
 struct Client::Game::Character::Companion;
@@ -99,6 +101,7 @@ struct Client::Game::Event::EventSceneModuleImplBase;
 struct Client::Game::Event::EventGPoseController;
 struct Common::Lua::LuaThread;
 struct Common::Lua::LuaState;
+struct Common::Lua::lua_State;
 struct Client::Game::Event::EventState;
 struct Client::Game::Fate::FateContext;
 struct System::Numerics::Vector3;
@@ -133,8 +136,6 @@ struct Client::Game::GcArmyMember;
 struct Client::Game::GcArmyManager;
 struct Client::Game::Group::GroupManager;
 struct Client::Game::Group::PartyMember;
-struct Client::Game::StatusManager;
-struct Client::Game::Status;
 struct Client::Game::Housing::HousingFurniture;
 struct Client::Game::Housing::HousingManager;
 struct Client::Game::Housing::HousingObjectManager;
@@ -192,6 +193,7 @@ struct Client::Game::RankData;
 struct Client::Game::Object::ClientObjectManager;
 struct Client::Game::Object::GameObject;
 struct Client::Game::Object::GameObject::GameObjectVTable;
+struct Client::Graphics::Scene::DrawObject;
 struct Client::Game::Object::GameObjectManager;
 struct Client::Game::QuestManager;
 struct Client::Game::RaceChocoboManager;
@@ -221,6 +223,14 @@ struct Client::Game::UI::Hater;
 struct Client::Game::UI::HaterInfo;
 struct Client::Game::UI::Hotbar;
 struct Client::Game::UI::Hotbar::HotbarVTable;
+struct Client::UI::Misc::RaptureHotbarModule;
+struct Client::UI::Misc::UserFileManager::UserFileEvent;
+struct Client::UI::Misc::HotBar;
+struct Client::UI::Misc::HotBarSlot;
+struct Client::UI::Misc::SavedHotBarGroup;
+struct Client::UI::Misc::SavedHotBar;
+struct Client::UI::Misc::SavedHotBarSlot;
+struct Client::UI::Misc::DutyActionSlot;
 struct Client::Game::UI::Inspect;
 struct Client::Game::UI::LimitBreakController;
 struct Client::Game::UI::Loot;
@@ -306,7 +316,6 @@ struct Client::Graphics::Scene::CharacterBase;
 struct Client::Graphics::Scene::CharacterBase::CharacterBaseVTable;
 struct Client::Graphics::Scene::CharacterUtility;
 struct Client::Graphics::Scene::Demihuman;
-struct Client::Graphics::Scene::DrawObject;
 struct Client::Graphics::Scene::EnvLocation;
 struct Client::Graphics::Scene::EnvScene;
 struct Client::Graphics::Scene::EnvSpace;
@@ -402,6 +411,7 @@ struct Client::UI::AddonAOZNotebook::SpellbookBlock;
 struct Client::UI::AddonAOZNotebook::ActiveActions;
 struct Client::UI::AddonBank;
 struct Client::UI::AddonBank::AddonBankVTable;
+struct Component::GUI::AtkValue;
 struct Client::UI::AddonBannerEditor;
 struct Client::UI::AddonCastBar;
 struct Client::UI::AddonCharacterInspect;
@@ -860,7 +870,6 @@ struct Client::UI::Agent::CharaSelectCharacterMapping;
 struct Client::UI::Agent::CharaSelectRetainerInfo;
 struct Client::UI::Agent::ContentsFinderRewards;
 struct Client::UI::Agent::ContextMenu;
-struct Component::GUI::AtkValue;
 struct Client::UI::Agent::DeepDungeonStatusData;
 struct Client::UI::Agent::DeepDungeonStatusItem;
 struct Client::UI::Agent::EfficiencyCalculation;
@@ -948,7 +957,6 @@ struct Client::UI::Info::InfoProxySearchComment;
 struct Client::UI::Info::MarketBoardListing;
 struct Client::UI::Info::PlayerRetainerInfo;
 struct Client::UI::Misc::AcquaintanceModule;
-struct Client::UI::Misc::UserFileManager::UserFileEvent;
 struct Client::UI::Misc::AcquaintanceModule::Acquaintance;
 struct Client::UI::Misc::AcquaintanceModule::AcquaintanceModuleVTable;
 struct Client::UI::Misc::AddonConfig;
@@ -961,13 +969,10 @@ struct Client::UI::Misc::CharaView::CharaViewVTable;
 struct Client::UI::Misc::CharaViewPortrait::CharaViewPortraitVTable;
 struct Client::UI::Misc::ConfigModule;
 struct Client::UI::Misc::ConfigModule::Option;
-struct Client::UI::Misc::DutyActionSlot;
-struct Client::UI::Misc::HotBarSlot;
 struct Client::UI::Misc::ExportedPortraitData;
 struct Client::UI::Misc::FieldMarkerModule;
 struct Client::UI::Misc::FieldMarkerPreset;
 struct Client::UI::Misc::GamePresetPoint;
-struct Client::UI::Misc::HotBar;
 struct Client::UI::Misc::HotBarUiIntermediate;
 struct Client::UI::Misc::InputTimerModule;
 struct Client::UI::Misc::InputTimerModule::InputTimerData;
@@ -994,10 +999,6 @@ struct Client::UI::Misc::RaptureGearsetModule;
 struct Client::UI::Misc::RaptureGearsetModule::GearsetEntry;
 struct Client::UI::Misc::RaptureGearsetModule::GearsetItem;
 struct Client::UI::Misc::RaptureGearsetModule::RaptureGearsetModuleVTable;
-struct Client::UI::Misc::RaptureHotbarModule;
-struct Client::UI::Misc::SavedHotBarGroup;
-struct Client::UI::Misc::SavedHotBar;
-struct Client::UI::Misc::SavedHotBarSlot;
 struct Client::UI::Misc::RaptureLogModule;
 struct Common::Log::LogModule;
 struct StdVectorint32;
@@ -1031,6 +1032,9 @@ struct Client::UI::RaptureAtkUnitManager;
 struct Client::UI::RaptureAtkModule::NamePlateInfo;
 struct Client::UI::RaptureAtkModule::RaptureAtkModuleVTable;
 struct Client::UI::RaptureAtkUnitManager::RaptureAtkUnitManagerVTable;
+struct Component::GUI::NumberArrayData;
+struct Component::GUI::AtkArrayData;
+struct Component::GUI::StringArrayData;
 struct Client::UI::Shell::RaptureShellModule;
 struct Client::UI::UI3DModule;
 struct Client::UI::UI3DModule::MemberInfo;
@@ -1042,6 +1046,7 @@ struct Client::UI::UIInputData;
 struct Client::UI::UIModule;
 struct Common::Configuration::ChangeEventInterface;
 struct Client::UI::UIModule::UIModuleVTable;
+struct Component::Excel::ExcelModuleInterface;
 struct Common::Component::BGCollision::BGCollisionModule;
 struct System::Numerics::Vector4;
 struct Common::Component::BGCollision::Collider;
@@ -1050,11 +1055,14 @@ struct Common::Component::BGCollision::Node;
 struct Common::Component::BGCollision::Object;
 struct Common::Component::BGCollision::NodeLink;
 struct Common::Component::BGCollision::Collider::ColliderVTable;
+struct Common::Component::BGCollision::Math::AABB;
+struct System::Numerics::Matrix4x4;
+struct Common::Component::BGCollision::RaycastHit;
+struct Common::Component::BGCollision::RaycastParams;
 struct Common::Component::BGCollision::ColliderBox;
 struct Common::Component::BGCollision::Math::Matrix4x3;
 struct Common::Component::BGCollision::ColliderCylinder;
 struct Common::Component::BGCollision::ColliderMesh;
-struct Common::Component::BGCollision::Math::AABB;
 struct Common::Component::BGCollision::ColliderPlane;
 struct Common::Component::BGCollision::ColliderSphere;
 struct Common::Component::BGCollision::ColliderStreamed;
@@ -1073,9 +1081,7 @@ struct Common::Component::BGCollision::NodeLink::NodeLinkVTable;
 struct Common::Component::BGCollision::Object::ObjectVTable;
 struct Common::Component::BGCollision::Quadtree;
 struct Common::Component::BGCollision::QuadtreeNode::Enumerator;
-struct Common::Component::BGCollision::RaycastHit;
 struct Common::Component::BGCollision::RaycastMaterialFilter;
-struct Common::Component::BGCollision::RaycastParams;
 struct Common::Component::BGCollision::Resource;
 struct Common::Component::BGCollision::Resource::ResourceVTable;
 struct Common::Component::BGCollision::Scene;
@@ -1090,18 +1096,15 @@ struct Common::Configuration::ConfigValue;
 struct Common::Configuration::ConfigProperties::FloatProperties;
 struct Common::Configuration::ConfigProperties::StringProperties;
 struct Common::Configuration::ConfigProperties::UIntProperties;
-struct Common::Lua::lua_State;
 struct Common::Math::Bounds;
 struct Common::Math::Matrix2x2;
 struct Component::Excel::ExcelModule;
 struct Component::Excel::ExcelModule::ExcelModuleVTable;
-struct Component::Excel::ExcelModuleInterface;
-struct Component::Excel::ExcelModuleInterface::ExcelModuleInterfaceVTable;
 struct Component::Excel::ExcelSheet;
+struct Component::Excel::ExcelModuleInterface::ExcelModuleInterfaceVTable;
 struct Component::Excel::ExcelSheet::ColumnInfo;
 struct Component::Exd::ExdModule;
 struct Component::GUI::AgentInterface::AgentInterfaceVTable;
-struct Component::GUI::AtkArrayData;
 struct Component::GUI::AtkArrayDataHolder;
 struct Component::GUI::AtkCollisionNode;
 struct Component::GUI::AtkResNode;
@@ -1120,8 +1123,8 @@ struct Component::GUI::AtkComponentInputBase;
 struct Component::GUI::AtkComponentJournalCanvas;
 struct Component::GUI::AtkComponentList;
 struct Component::GUI::AtkComponentList::AtkComponentListVTable;
-struct Component::GUI::AtkComponentList::ListItem;
 struct Component::GUI::AtkComponentListItemRenderer;
+struct Component::GUI::AtkComponentList::ListItem;
 struct Component::GUI::AtkComponentNode;
 struct Component::GUI::AtkComponentNumericInput;
 struct Component::GUI::AtkUldComponentDataNumericInput;
@@ -1153,6 +1156,7 @@ struct Component::GUI::AtkTextureResourceManager;
 struct StdLinkedListComponentGUIAtkTextureResourcePtr;
 struct StdLinkedList::NodeComponentGUIAtkTextureResourcePtr;
 struct Component::GUI::AtkModule::AtkModuleVTable;
+struct Component::GUI::ExtendArrayData;
 struct Component::GUI::AtkNineGridNode;
 struct Component::GUI::AtkResNode::AtkResNodeVTable;
 struct Component::GUI::AtkSimpleTween::AtkSimpleTweenVTable;
@@ -1211,11 +1215,8 @@ struct Component::GUI::AtkUldWidgetInfo;
 struct Component::GUI::AtkUnitBase::AtkUnitBaseVTable;
 struct Component::GUI::AtkUnitList;
 struct Component::GUI::AtkUnitManager;
-struct Component::GUI::ExtendArrayData;
-struct Component::GUI::NumberArrayData;
 struct Component::GUI::SimpleTweenAnimation;
 struct Component::GUI::SimpleTweenValue;
-struct Component::GUI::StringArrayData;
 struct Component::GUI::ULD::AtkUldComponentDataTab;
 struct Component::Text::TextModule::TextModuleVTable;
 struct Shader::CameraLight;
@@ -5027,6 +5028,34 @@ __unaligned struct Client::Game::Character::Character::CastInfo /* Size=0x170 */
     /*       */ byte _gap_0x160[0x10];
 };
 
+__unaligned struct Client::Game::Status /* Size=0xC */
+{
+    /* 0x0 */ unsigned __int16 StatusID;
+    /*     */ byte _gap_0x2[0x2];
+    /* 0x4 */ float RemainingTime;
+    /* 0x8 */ unsigned __int32 SourceID;
+};
+
+__unaligned struct Client::Game::StatusManager /* Size=0x2F0 */
+{
+    /* 0x000 */ Client::Game::Character::Character* Owner;
+    /* 0x008 */ Client::Game::Status Status[0x3C];
+    /* 0x2D8 */ unsigned __int32 Flags1;
+    /* 0x2DC */ unsigned __int16 Flags2;
+    /*       */ byte _gap_0x2DE[0x2];
+    /* 0x2E0 */ __int64 Unk_178;
+    /* 0x2E8 */ byte NumValidStatuses;
+    /*       */ byte _gap_0x2E9;
+    /*       */ byte _gap_0x2EA[0x2];
+    /*       */ byte _gap_0x2EC[0x4];
+};
+
+__unaligned struct Client::Game::Character::Character::ForayInfo /* Size=0x2 */
+{
+    /* 0x0 */ byte ForayRank;
+    /* 0x1 */ Client::Game::Character::Character::EurekaElement Element;
+};
+
 __unaligned struct Client::Game::Character::Character::CharacterVTable /* Size=0x0 */
 {
     /*     */ __int64 _vf0;
@@ -5119,12 +5148,6 @@ __unaligned struct Client::Game::Character::Character::CharacterVTable /* Size=0
     /* 0x2B8 */ bool (__fastcall *IsMount)(Client::Game::Character::Character* a1);
 };
 
-__unaligned struct Client::Game::Character::Character::ForayInfo /* Size=0x2 */
-{
-    /* 0x0 */ byte ForayRank;
-    /* 0x1 */ Client::Game::Character::Character::EurekaElement Element;
-};
-
 __unaligned struct Client::Game::Character::CharacterManager /* Size=0x338 */
 {
     /* 0x000 */ Client::Game::Character::BattleChara* BattleCharaList[0x64];
@@ -5206,7 +5229,7 @@ __unaligned struct Client::Game::Control::TargetSystem /* Size=0x5370 */
     /*        */ byte _gap_0x5308[0x68];
 };
 
-__unaligned struct Client::Game::Control::Control /* Size=0x5A60 */
+__unaligned struct Client::Game::Control::Control /* Size=0x5B00 */
 {
     /* 0x0000 */ Client::Game::Control::CameraManager CameraManager;
     /* 0x0180 */ Client::Game::Control::TargetSystem TargetSystem;
@@ -5219,6 +5242,7 @@ __unaligned struct Client::Game::Control::Control /* Size=0x5A60 */
     /* 0x5AE8 */ unsigned __int32 LocalPlayerObjectId;
     /*        */ byte _gap_0x5AEC[0x4];
     /* 0x5AF0 */ Client::Game::Character::BattleChara* LocalPlayer;
+    /*        */ byte _gap_0x5AF8[0x8];
 };
 
 __unaligned struct Client::Game::Control::GazeController::Gaze::GazeVTable /* Size=0x1 */
@@ -5587,6 +5611,11 @@ __unaligned struct Client::Game::Event::EventSceneModule /* Size=0x31C0 */
     /*        */ byte _gap_0x28[0x1C8];
     /* 0x01F0 */ Client::Game::Event::EventGPoseController EventGPoseController;
     /*        */ byte _gap_0x1F0[0x2FD0];
+};
+
+__unaligned struct Common::Lua::lua_State /* Size=0xB0 */
+{
+    /*      */ byte _gap_0x0[0xB0];
 };
 
 __unaligned struct Common::Lua::LuaState /* Size=0x28 */
@@ -6063,28 +6092,6 @@ __unaligned struct Client::Game::GcArmyManager /* Size=0x10 */
     /* 0x00 */ Client::Game::GcArmyData* Data;
     /* 0x08 */ unsigned __int32 LastMissionCompleteNotificationTimestamp;
     /* 0x0C */ unsigned __int32 LastTrainingCompleteNotificationTimestamp;
-};
-
-__unaligned struct Client::Game::Status /* Size=0xC */
-{
-    /* 0x0 */ unsigned __int16 StatusID;
-    /*     */ byte _gap_0x2[0x2];
-    /* 0x4 */ float RemainingTime;
-    /* 0x8 */ unsigned __int32 SourceID;
-};
-
-__unaligned struct Client::Game::StatusManager /* Size=0x2F0 */
-{
-    /* 0x000 */ Client::Game::Character::Character* Owner;
-    /* 0x008 */ Client::Game::Status Status[0x3C];
-    /* 0x2D8 */ unsigned __int32 Flags1;
-    /* 0x2DC */ unsigned __int16 Flags2;
-    /*       */ byte _gap_0x2DE[0x2];
-    /* 0x2E0 */ __int64 Unk_178;
-    /* 0x2E8 */ byte NumValidStatuses;
-    /*       */ byte _gap_0x2E9;
-    /*       */ byte _gap_0x2EA[0x2];
-    /*       */ byte _gap_0x2EC[0x4];
 };
 
 __unaligned struct Client::Game::Group::PartyMember /* Size=0x390 */
@@ -6930,6 +6937,16 @@ __unaligned struct Client::Game::Object::GameObject /* Size=0x1A0 */
     /*       */ byte _gap_0x160[0x40];
 };
 
+__unaligned struct Client::Graphics::Scene::DrawObject /* Size=0x90 */
+{
+    /* 0x00 */ Client::Graphics::Scene::Object Object;
+    /*      */ byte _gap_0x80[0x8];
+    /* 0x88 */ byte Flags;
+    /*      */ byte _gap_0x89;
+    /*      */ byte _gap_0x8A[0x2];
+    /*      */ byte _gap_0x8C[0x4];
+};
+
 __unaligned struct Client::Game::Object::GameObject::GameObjectVTable /* Size=0x0 */
 {
     /*     */ __int64 _vf0;
@@ -7011,7 +7028,7 @@ __unaligned struct Client::Game::Object::GameObjectManager /* Size=0x3888 */
     /*        */ byte _gap_0x3848[0x40];
 };
 
-__unaligned struct Client::Game::QuestManager /* Size=0xF40 */
+__unaligned struct Client::Game::QuestManager /* Size=0xF58 */
 {
     /*       */ byte _gap_0x0[0x10];
     /* 0x010 */ Application::Network::WorkDefinitions::QuestWork NormalQuests[0x1E];
@@ -7033,6 +7050,9 @@ __unaligned struct Client::Game::QuestManager /* Size=0xF40 */
     /*       */ byte _gap_0xF44[0x4];
     /*       */ byte _gap_0xF48[0x8];
     /* 0xF50 */ byte NumAcceptedLeveQuests;
+    /*       */ byte _gap_0xF51;
+    /*       */ byte _gap_0xF52[0x2];
+    /*       */ byte _gap_0xF54[0x4];
 };
 
 __unaligned struct Client::Game::RaceChocoboManager /* Size=0x26 */
@@ -7107,7 +7127,7 @@ __unaligned struct Client::Game::RetainerManager::Retainer /* Size=0x48 */
     /*      */ byte _gap_0x40[0x8];
 };
 
-__unaligned struct Client::Game::RetainerManager /* Size=0x2E8 */
+__unaligned struct Client::Game::RetainerManager /* Size=0x310 */
 {
     /* 0x000 */ Client::Game::RetainerManager::Retainer Retainers[0xA];
     /* 0x2D0 */ byte DisplayOrder[0xA];
@@ -7116,6 +7136,8 @@ __unaligned struct Client::Game::RetainerManager /* Size=0x2E8 */
     /*       */ byte _gap_0x2DC[0x4];
     /* 0x2E0 */ unsigned __int64 LastSelectedRetainerId;
     /* 0x2E8 */ unsigned __int32 RetainerObjectId;
+    /*       */ byte _gap_0x2EC[0x4];
+    /*       */ byte _gap_0x2F0[0x20];
 };
 
 __unaligned struct Client::Game::SatisfactionSupplyManager /* Size=0x31F */
@@ -7391,6 +7413,111 @@ __unaligned struct Client::Game::UI::Hotbar /* Size=0x8 */
     /* 0x0 */ void* vtbl;
     /* 0x0 */ Client::Game::UI::Hotbar::HotbarVTable* VTable;
     } _union_0x0;
+};
+
+__unaligned struct Client::UI::Misc::UserFileManager::UserFileEvent /* Size=0x40 */
+{
+    /* 0x00 */ Client::UI::Misc::UserFileManager::UserFileEvent::UserFileEventVTable* VTable;
+    /* 0x08 */ unsigned __int64 CharacterContentID;
+    /* 0x10 */ __int64 UserFileManager;
+    /* 0x18 */ __int64 TempDataPtr;
+    /* 0x20 */ unsigned __int32 TempDataBytesWritten;
+    /*      */ byte _gap_0x24[0x4];
+    /*      */ byte _gap_0x28[0x8];
+    /* 0x30 */ byte FileName[0xC];
+    /* 0x3C */ bool Unk3C;
+    /* 0x3D */ bool IsSavePending;
+    /* 0x3E */ bool HasChanges;
+    /* 0x3F */ bool IsVirtual;
+};
+
+__unaligned struct Client::UI::Misc::HotBarSlot /* Size=0xE0 */
+{
+    /* 0x00 */ Client::System::String::Utf8String PopUpHelp;
+    /* 0x68 */ byte CostText[0x20];
+    /* 0x88 */ byte PopUpKeybindHint[0x20];
+    /* 0xA8 */ byte KeybindHint[0x10];
+    /* 0xB8 */ unsigned __int32 CommandId;
+    /* 0xBC */ unsigned __int32 IconA;
+    /* 0xC0 */ unsigned __int32 IconB;
+    /* 0xC4 */ unsigned __int16 UNK_0xC4;
+    /*      */ byte _gap_0xC6;
+    /* 0xC7 */ Client::UI::Misc::HotbarSlotType CommandType;
+    /* 0xC8 */ Client::UI::Misc::HotbarSlotType IconTypeA;
+    /* 0xC9 */ Client::UI::Misc::HotbarSlotType IconTypeB;
+    /* 0xCA */ byte CostType;
+    /* 0xCB */ byte CostDisplayMode;
+    /* 0xCC */ __int32 Icon;
+    /* 0xD0 */ unsigned __int32 CostValue;
+    /* 0xD4 */ unsigned __int32 UNK_0xD4;
+    /* 0xD8 */ unsigned __int32 UNK_0xD8;
+    /* 0xDC */ byte UNK_0xDC;
+    /* 0xDD */ byte UNK_0xDD;
+    /* 0xDE */ byte UNK_0xDE;
+    /* 0xDF */ byte IsLoaded;
+};
+
+__unaligned struct Client::UI::Misc::HotBar /* Size=0xE00 */
+{
+    /* 0x000 */ Client::UI::Misc::HotBarSlot Slots[0x10];
+};
+
+__unaligned struct Client::UI::Misc::SavedHotBarSlot /* Size=0x5 */
+{
+    /* 0x0 */ Client::UI::Misc::HotbarSlotType CommandType;
+    /* 0x1 */ unsigned __int32 CommandId;
+};
+
+__unaligned struct Client::UI::Misc::SavedHotBar /* Size=0x50 */
+{
+    /* 0x00 */ Client::UI::Misc::SavedHotBarSlot Slots[0x10];
+};
+
+__unaligned struct Client::UI::Misc::SavedHotBarGroup /* Size=0x5A0 */
+{
+    /* 0x000 */ Client::UI::Misc::SavedHotBar HotBars[0x12];
+};
+
+__unaligned struct Client::UI::Misc::DutyActionSlot /* Size=0xE8 */
+{
+    /* 0x00 */ Client::UI::Misc::HotBarSlot Slot;
+    /* 0xE0 */ byte PrimaryCostType;
+    /* 0xE1 */ bool IsActive;
+    /*      */ byte _gap_0xE2[0x2];
+    /*      */ byte _gap_0xE4[0x4];
+};
+
+__unaligned struct Client::UI::Misc::RaptureHotbarModule /* Size=0x288F8 */
+{
+    /* 0x00000 */ Client::UI::Misc::UserFileManager::UserFileEvent UserFileEvent;
+    /* 0x00040 */ void** InputCodeModifiedInterfaceVTable;
+    /* 0x00048 */ Client::UI::UIModule* UiModule;
+    /* 0x00050 */ bool ModuleReady;
+    /* 0x00051 */ byte ActiveHotbarClassJobId;
+    /* 0x00052 */ bool DatFileLoadedSuccessfully;
+    /*         */ byte _gap_0x53;
+    /*         */ byte _gap_0x54[0x4];
+    /*         */ byte _gap_0x58[0x20];
+    /*         */ byte _gap_0x78[0x4];
+    /* 0x0007C */ byte HotbarShareStateBitmask[0x4];
+    /*         */ byte _gap_0x80[0x10];
+    /* 0x00090 */ Client::UI::Misc::HotBar HotBars[0x12];
+    /* 0x0FC90 */ Client::UI::Misc::HotBar PetHotBar;
+    /* 0x10A90 */ Client::UI::Misc::HotBar PetCrossHotBar;
+    /* 0x11890 */ Client::UI::Misc::HotBarSlot ScratchSlot;
+    /* 0x11970 */ unsigned __int32 PetHotbarMode;
+    /* 0x11974 */ Client::UI::Misc::SavedHotBarGroup SavedHotBars[0x41];
+    /* 0x28714 */ Client::UI::Misc::CrossHotbarFlags CrossHotbarFlags;
+    /*         */ byte _gap_0x28716[0x2];
+    /* 0x28718 */ unsigned __int32 GrandCompanyId;
+    /* 0x2871C */ bool PvPHotbarsActive;
+    /* 0x2871D */ bool ShowPvPHotbarSwapNotification;
+    /*         */ byte _gap_0x2871E[0x2];
+    /* 0x28720 */ Client::UI::Misc::DutyActionSlot DutyActionSlots[0x2];
+    /* 0x288F0 */ bool DutyActionsPresent;
+    /*         */ byte _gap_0x288F1;
+    /*         */ byte _gap_0x288F2[0x2];
+    /*         */ byte _gap_0x288F4[0x4];
 };
 
 __unaligned struct Client::Game::UI::Hotbar::HotbarVTable /* Size=0x0 */
@@ -7793,12 +7920,12 @@ __unaligned struct Client::Game::UI::PvPProfile /* Size=0x7C */
     /* 0x78 */ unsigned __int32 RivalWingsWeeklyMatchesWon;
 };
 
-__unaligned struct Client::Game::UI::RecipeNote /* Size=0x610 */
+__unaligned struct Client::Game::UI::RecipeNote /* Size=0x628 */
 {
     /* 0x000 */ unsigned __int32 Jobs[0x8];
     /*       */ byte _gap_0x20[0x98];
     /* 0x0B8 */ Client::Game::UI::RecipeNote::RecipeData* RecipeList;
-    /*       */ byte _gap_0xC0[0x550];
+    /*       */ byte _gap_0xC0[0x568];
 };
 
 __unaligned struct Client::Game::UI::RecipeNote::RecipeCrystal /* Size=0x2 */
@@ -7807,11 +7934,14 @@ __unaligned struct Client::Game::UI::RecipeNote::RecipeCrystal /* Size=0x2 */
     /* 0x1 */ byte Amount;
 };
 
-__unaligned struct Client::Game::UI::RecipeNote::RecipeData /* Size=0x3B0 */
+__unaligned struct Client::Game::UI::RecipeNote::RecipeData /* Size=0x3D0 */
 {
     /* 0x000 */ Client::Game::UI::RecipeNote::RecipeEntry* Recipes;
     /*       */ byte _gap_0x8[0x3B0];
     /* 0x3B8 */ unsigned __int16 SelectedIndex;
+    /*       */ byte _gap_0x3BA[0x2];
+    /*       */ byte _gap_0x3BC[0x4];
+    /*       */ byte _gap_0x3C0[0x10];
 };
 
 __unaligned struct Client::Game::UI::RecipeNote::RecipeIngredient /* Size=0x88 */
@@ -7996,7 +8126,7 @@ __unaligned struct Client::Game::UI::UIState /* Size=0x17D10 */
     /* 0x03D18 */ Client::Game::UI::Loot Loot;
     /*         */ byte _gap_0x43B8[0x628];
     /* 0x049E0 */ Client::Game::UI::RecipeNote RecipeNote;
-    /*         */ byte _gap_0x4FF0[0x6570];
+    /*         */ byte _gap_0x5008[0x6558];
     /* 0x0B560 */ Client::Game::Event::Director* ActiveDirector;
     /*         */ byte _gap_0xB568[0x140];
     /* 0x0B6A8 */ Client::Game::Fate::FateDirector* FateDirector;
@@ -8742,16 +8872,6 @@ __unaligned struct Client::Graphics::Scene::Demihuman /* Size=0x978 */
     /* 0x960 */ unsigned __int32 SlotFreeCompanyCrestBitfield;
     /*       */ byte _gap_0x964[0x4];
     /*       */ byte _gap_0x968[0x10];
-};
-
-__unaligned struct Client::Graphics::Scene::DrawObject /* Size=0x90 */
-{
-    /* 0x00 */ Client::Graphics::Scene::Object Object;
-    /*      */ byte _gap_0x80[0x8];
-    /* 0x88 */ byte Flags;
-    /*      */ byte _gap_0x89;
-    /*      */ byte _gap_0x8A[0x2];
-    /*      */ byte _gap_0x8C[0x4];
 };
 
 __unaligned struct Client::Graphics::Scene::EnvLocation /* Size=0xC0 */
@@ -10092,6 +10212,13 @@ __unaligned struct Client::UI::AddonAOZNotebook /* Size=0xCC8 */
 __unaligned struct Client::UI::AddonBank /* Size=0x298 */
 {
     /*       */ byte _gap_0x0[0x298];
+};
+
+__unaligned struct Component::GUI::AtkValue /* Size=0x10 */
+{
+    /* 0x00 */ Component::GUI::ValueType Type;
+    /*      */ byte _gap_0x4[0x4];
+    /*      */ byte _gap_0x8[0x8];
 };
 
 __unaligned struct Client::UI::AddonBank::AddonBankVTable /* Size=0x0 */
@@ -16516,7 +16643,7 @@ __unaligned struct Client::UI::Agent::SalvageResult /* Size=0x8 */
     /* 0x4 */ __int32 Quantity;
 };
 
-__unaligned struct Client::UI::Agent::AgentSalvage /* Size=0x190 */
+__unaligned struct Client::UI::Agent::AgentSalvage /* Size=0x3D0 */
 {
     /* 0x000 */ Component::GUI::AgentInterface AgentInterface;
     /*       */ byte _gap_0x28[0x8];
@@ -16539,6 +16666,7 @@ __unaligned struct Client::UI::Agent::AgentSalvage /* Size=0x190 */
     /*       */ byte _gap_0x3A0[0x4];
     /* 0x3A4 */ unsigned __int32 DesynthItemId;
     /* 0x3A8 */ Client::UI::Agent::SalvageResult DesynthResults[0x3];
+    /*       */ byte _gap_0x3C0[0x10];
 };
 
 __unaligned struct Client::UI::Agent::AgentSalvage::SalvageListItem /* Size=0x88 */
@@ -16929,13 +17057,6 @@ __unaligned struct Client::UI::Agent::ContentsFinderRewards /* Size=0x20 */
     } _union_0x0;
     /*      */ byte _gap_0x4[0x4];
     /*      */ byte _gap_0x8[0x18];
-};
-
-__unaligned struct Component::GUI::AtkValue /* Size=0x10 */
-{
-    /* 0x00 */ Component::GUI::ValueType Type;
-    /*      */ byte _gap_0x4[0x4];
-    /*      */ byte _gap_0x8[0x8];
 };
 
 __unaligned struct Client::UI::Agent::ContextMenu /* Size=0x678 */
@@ -17993,22 +18114,6 @@ __unaligned struct Client::UI::Info::PlayerRetainerInfo /* Size=0x78 */
     /* 0x10 */ Client::System::String::Utf8String Name;
 };
 
-__unaligned struct Client::UI::Misc::UserFileManager::UserFileEvent /* Size=0x40 */
-{
-    /* 0x00 */ Client::UI::Misc::UserFileManager::UserFileEvent::UserFileEventVTable* VTable;
-    /* 0x08 */ unsigned __int64 CharacterContentID;
-    /* 0x10 */ __int64 UserFileManager;
-    /* 0x18 */ __int64 TempDataPtr;
-    /* 0x20 */ unsigned __int32 TempDataBytesWritten;
-    /*      */ byte _gap_0x24[0x4];
-    /*      */ byte _gap_0x28[0x8];
-    /* 0x30 */ byte FileName[0xC];
-    /* 0x3C */ bool Unk3C;
-    /* 0x3D */ bool IsSavePending;
-    /* 0x3E */ bool HasChanges;
-    /* 0x3F */ bool IsVirtual;
-};
-
 __unaligned struct Client::UI::Misc::AcquaintanceModule::Acquaintance /* Size=0xE0 */
 {
     /* 0x00 */ Client::System::String::Utf8String Name;
@@ -18148,41 +18253,6 @@ __unaligned struct Client::UI::Misc::ConfigModule::Option /* Size=0x20 */
     /*      */ byte _gap_0x1E[0x2];
 };
 
-__unaligned struct Client::UI::Misc::HotBarSlot /* Size=0xE0 */
-{
-    /* 0x00 */ Client::System::String::Utf8String PopUpHelp;
-    /* 0x68 */ byte CostText[0x20];
-    /* 0x88 */ byte PopUpKeybindHint[0x20];
-    /* 0xA8 */ byte KeybindHint[0x10];
-    /* 0xB8 */ unsigned __int32 CommandId;
-    /* 0xBC */ unsigned __int32 IconA;
-    /* 0xC0 */ unsigned __int32 IconB;
-    /* 0xC4 */ unsigned __int16 UNK_0xC4;
-    /*      */ byte _gap_0xC6;
-    /* 0xC7 */ Client::UI::Misc::HotbarSlotType CommandType;
-    /* 0xC8 */ Client::UI::Misc::HotbarSlotType IconTypeA;
-    /* 0xC9 */ Client::UI::Misc::HotbarSlotType IconTypeB;
-    /* 0xCA */ byte CostType;
-    /* 0xCB */ byte CostDisplayMode;
-    /* 0xCC */ __int32 Icon;
-    /* 0xD0 */ unsigned __int32 CostValue;
-    /* 0xD4 */ unsigned __int32 UNK_0xD4;
-    /* 0xD8 */ unsigned __int32 UNK_0xD8;
-    /* 0xDC */ byte UNK_0xDC;
-    /* 0xDD */ byte UNK_0xDD;
-    /* 0xDE */ byte UNK_0xDE;
-    /* 0xDF */ byte IsLoaded;
-};
-
-__unaligned struct Client::UI::Misc::DutyActionSlot /* Size=0xE8 */
-{
-    /* 0x00 */ Client::UI::Misc::HotBarSlot Slot;
-    /* 0xE0 */ byte PrimaryCostType;
-    /* 0xE1 */ bool IsActive;
-    /*      */ byte _gap_0xE2[0x2];
-    /*      */ byte _gap_0xE4[0x4];
-};
-
 __unaligned struct Client::UI::Misc::ExportedPortraitData /* Size=0x34 */
 {
     /* 0x00 */ Common::Math::HalfVector4 CameraPosition;
@@ -18238,11 +18308,6 @@ __unaligned struct Client::UI::Misc::FieldMarkerModule /* Size=0xC78 */
     /* 0x000 */ Client::UI::Misc::UserFileManager::UserFileEvent UserFileEvent;
     /* 0x040 */ Client::UI::Misc::FieldMarkerPreset PresetArray[0x1E];
     /*       */ byte _gap_0xC70[0x8];
-};
-
-__unaligned struct Client::UI::Misc::HotBar /* Size=0xE00 */
-{
-    /* 0x000 */ Client::UI::Misc::HotBarSlot Slots[0x10];
 };
 
 __unaligned struct Client::UI::Misc::HotBarUiIntermediate /* Size=0x43 */
@@ -18599,55 +18664,6 @@ __unaligned struct Client::UI::Misc::RaptureGearsetModule::GearsetItem /* Size=0
 __unaligned struct Client::UI::Misc::RaptureGearsetModule::RaptureGearsetModuleVTable /* Size=0x1 */
 {
     /*     */ byte _gap_0x0;
-};
-
-__unaligned struct Client::UI::Misc::SavedHotBarSlot /* Size=0x5 */
-{
-    /* 0x0 */ Client::UI::Misc::HotbarSlotType CommandType;
-    /* 0x1 */ unsigned __int32 CommandId;
-};
-
-__unaligned struct Client::UI::Misc::SavedHotBar /* Size=0x50 */
-{
-    /* 0x00 */ Client::UI::Misc::SavedHotBarSlot Slots[0x10];
-};
-
-__unaligned struct Client::UI::Misc::SavedHotBarGroup /* Size=0x5A0 */
-{
-    /* 0x000 */ Client::UI::Misc::SavedHotBar HotBars[0x12];
-};
-
-__unaligned struct Client::UI::Misc::RaptureHotbarModule /* Size=0x288F8 */
-{
-    /* 0x00000 */ Client::UI::Misc::UserFileManager::UserFileEvent UserFileEvent;
-    /* 0x00040 */ void** InputCodeModifiedInterfaceVTable;
-    /* 0x00048 */ Client::UI::UIModule* UiModule;
-    /* 0x00050 */ bool ModuleReady;
-    /* 0x00051 */ byte ActiveHotbarClassJobId;
-    /* 0x00052 */ bool DatFileLoadedSuccessfully;
-    /*         */ byte _gap_0x53;
-    /*         */ byte _gap_0x54[0x4];
-    /*         */ byte _gap_0x58[0x20];
-    /*         */ byte _gap_0x78[0x4];
-    /* 0x0007C */ byte HotbarShareStateBitmask[0x4];
-    /*         */ byte _gap_0x80[0x10];
-    /* 0x00090 */ Client::UI::Misc::HotBar HotBars[0x12];
-    /* 0x0FC90 */ Client::UI::Misc::HotBar PetHotBar;
-    /* 0x10A90 */ Client::UI::Misc::HotBar PetCrossHotBar;
-    /* 0x11890 */ Client::UI::Misc::HotBarSlot ScratchSlot;
-    /* 0x11970 */ unsigned __int32 PetHotbarMode;
-    /* 0x11974 */ Client::UI::Misc::SavedHotBarGroup SavedHotBars[0x41];
-    /* 0x28714 */ Client::UI::Misc::CrossHotbarFlags CrossHotbarFlags;
-    /*         */ byte _gap_0x28716[0x2];
-    /* 0x28718 */ unsigned __int32 GrandCompanyId;
-    /* 0x2871C */ bool PvPHotbarsActive;
-    /* 0x2871D */ bool ShowPvPHotbarSwapNotification;
-    /*         */ byte _gap_0x2871E[0x2];
-    /* 0x28720 */ Client::UI::Misc::DutyActionSlot DutyActionSlots[0x2];
-    /* 0x288F0 */ bool DutyActionsPresent;
-    /*         */ byte _gap_0x288F1;
-    /*         */ byte _gap_0x288F2[0x2];
-    /*         */ byte _gap_0x288F4[0x4];
 };
 
 __unaligned struct StdVectorint32 /* Size=0x18 */
@@ -19061,6 +19077,30 @@ __unaligned struct Client::UI::RaptureAtkModule::RaptureAtkModuleVTable /* Size=
     /* 0x1D0 */ void (__fastcall *Update)(Client::UI::RaptureAtkModule* a1, float a2);
 };
 
+__unaligned struct Component::GUI::AtkArrayData /* Size=0x20 */
+{
+    /* 0x00 */ void* vtbl;
+    /* 0x08 */ __int32 Size;
+    /* 0x0C */ byte SubscribedAddons[0x10];
+    /* 0x1C */ byte Unk1C;
+    /* 0x1D */ byte SubscribedAddonsCount;
+    /* 0x1E */ byte UpdateState;
+    /* 0x1F */ signed __int8 RefCount;
+};
+
+__unaligned struct Component::GUI::NumberArrayData /* Size=0x28 */
+{
+    /* 0x00 */ Component::GUI::AtkArrayData AtkArrayData;
+    /* 0x20 */ __int32* IntArray;
+};
+
+__unaligned struct Component::GUI::StringArrayData /* Size=0x30 */
+{
+    /* 0x00 */ Component::GUI::AtkArrayData AtkArrayData;
+    /* 0x20 */ byte** StringArray;
+    /* 0x28 */ byte** ManagedStringArray;
+};
+
 __unaligned struct Client::UI::RaptureAtkUnitManager::RaptureAtkUnitManagerVTable /* Size=0x0 */
 {
     /*     */ __int64 _vf0;
@@ -19293,6 +19333,12 @@ __unaligned struct Client::UI::UIModule /* Size=0xEE030 */
     /*         */ byte _gap_0x30[0x380];
     /* 0x003B0 */ Client::UI::RaptureAtkHistory AtkHistory[0x13];
     /*         */ byte _gap_0x7D8[0xED858];
+};
+
+__unaligned struct Component::Excel::ExcelModuleInterface /* Size=0x10 */
+{
+    /* 0x00 */ Component::Excel::ExcelModuleInterface::ExcelModuleInterfaceVTable* VTable;
+    /* 0x08 */ Component::Exd::ExdModule* ExdModule;
 };
 
 __unaligned struct Client::UI::UIModule::UIModuleVTable /* Size=0x0 */
@@ -19561,6 +19607,72 @@ __unaligned struct Common::Component::BGCollision::Collider /* Size=0xA0 */
     /*      */ byte _gap_0x88[0x18];
 };
 
+__unaligned struct Common::Component::BGCollision::Math::AABB /* Size=0x18 */
+{
+    /* 0x00 */ System::Numerics::Vector3 Min;
+    /*      */ byte _gap_0x0[0x8];
+    /*      */ byte _gap_0x8[0x4];
+    /* 0x0C */ System::Numerics::Vector3 Max;
+    /*      */ byte _gap_0xC[0x4];
+    /*      */ byte _gap_0x10[0x8];
+};
+
+__unaligned struct System::Numerics::Matrix4x4 /* Size=0x0 */
+{
+    /* 0x0 */ float M11;
+    /* 0x4 */ float M12;
+    /* 0x8 */ float M13;
+    /* 0xC */ float M14;
+    /* 0x10 */ float M21;
+    /* 0x14 */ float M22;
+    /* 0x18 */ float M23;
+    /* 0x1C */ float M24;
+    /* 0x20 */ float M31;
+    /* 0x24 */ float M32;
+    /* 0x28 */ float M33;
+    /* 0x2C */ float M34;
+    /* 0x30 */ float M41;
+    /* 0x34 */ float M42;
+    /* 0x38 */ float M43;
+    /* 0x3C */ float M44;
+};
+
+__unaligned struct Common::Component::BGCollision::RaycastHit /* Size=0x58 */
+{
+    /* 0x00 */ System::Numerics::Vector3 Point;
+    /*      */ byte _gap_0x0[0x8];
+    /*      */ byte _gap_0x8[0x4];
+    /* 0x0C */ System::Numerics::Vector3 V1;
+    /*      */ byte _gap_0xC[0x4];
+    /*      */ byte _gap_0x10[0x8];
+    /* 0x18 */ System::Numerics::Vector3 V2;
+    /*      */ byte _gap_0x18[0x8];
+    /*      */ byte _gap_0x20[0x4];
+    /* 0x24 */ System::Numerics::Vector3 V3;
+    /*      */ byte _gap_0x24[0x4];
+    /*      */ byte _gap_0x28[0x8];
+    /* 0x30 */ System::Numerics::Vector3 Normal;
+    /*      */ byte _gap_0x30[0x10];
+    /* 0x40 */ unsigned __int64 Material;
+    /* 0x48 */ float Distance;
+    /*      */ byte _gap_0x4C[0x4];
+    /* 0x50 */ Common::Component::BGCollision::Object* Object;
+};
+
+__unaligned struct Common::Component::BGCollision::RaycastParams /* Size=0x40 */
+{
+    /* 0x00 */ __int32 Algorithm;
+    /*      */ byte _gap_0x4[0x4];
+    /* 0x08 */ System::Numerics::Vector4* Origin;
+    /* 0x10 */ System::Numerics::Vector3* Direction;
+    /* 0x18 */ float* MaxDistance;
+    /* 0x20 */ float MaxPlaneNormalY;
+    /*      */ byte _gap_0x24[0x4];
+    /* 0x28 */ Common::Component::BGCollision::RaycastMaterialFilter* MaterialFilter;
+    /* 0x30 */ unsigned __int64 ObjectMaterialValue;
+    /* 0x38 */ unsigned __int64 ObjectMaterialMask;
+};
+
 __unaligned struct Common::Component::BGCollision::Collider::ColliderVTable /* Size=0x0 */
 {
     /*     */ __int64 _vf0;
@@ -19654,16 +19766,6 @@ __unaligned struct Common::Component::BGCollision::ColliderCylinder /* Size=0x14
     /*       */ byte _gap_0x141;
     /*       */ byte _gap_0x142[0x2];
     /*       */ byte _gap_0x144[0x4];
-};
-
-__unaligned struct Common::Component::BGCollision::Math::AABB /* Size=0x18 */
-{
-    /* 0x00 */ System::Numerics::Vector3 Min;
-    /*      */ byte _gap_0x0[0x8];
-    /*      */ byte _gap_0x8[0x4];
-    /* 0x0C */ System::Numerics::Vector3 Max;
-    /*      */ byte _gap_0xC[0x4];
-    /*      */ byte _gap_0x10[0x8];
 };
 
 __unaligned struct Common::Component::BGCollision::ColliderMesh /* Size=0x198 */
@@ -19821,6 +19923,15 @@ __unaligned struct Common::Component::BGCollision::Mesh /* Size=0x18 */
     /* 0x10 */ Common::Component::BGCollision::ColliderMesh* OwnerCollider;
 };
 
+__unaligned struct Common::Component::BGCollision::Mesh::Primitive /* Size=0xC */
+{
+    /* 0x0 */ byte V1;
+    /* 0x1 */ byte V2;
+    /* 0x2 */ byte V3;
+    /*     */ byte _gap_0x3;
+    /* 0x4 */ unsigned __int64 Material;
+};
+
 __unaligned struct Common::Component::BGCollision::Mesh::MeshVTable /* Size=0x0 */
 {
     /* 0x0 */ void (__fastcall *Dtor)(Common::Component::BGCollision::Mesh* a1, byte a2);
@@ -19833,15 +19944,6 @@ __unaligned struct Common::Component::BGCollision::Mesh::MeshVTable /* Size=0x0 
     /* 0x38 */ void (__fastcall *GatherVertices)(Common::Component::BGCollision::Mesh* a1, System::Numerics::Matrix4x4* a2, System::Numerics::Vector3* a3);
     /* 0x40 */ Common::Component::BGCollision::Mesh::Primitive* (__fastcall *GetPrimitives)(Common::Component::BGCollision::Mesh* a1);
     /* 0x48 */ void (__fastcall *GetAABB)(Common::Component::BGCollision::Mesh* a1, Common::Component::BGCollision::Math::AABB* a2);
-};
-
-__unaligned struct Common::Component::BGCollision::Mesh::Primitive /* Size=0xC */
-{
-    /* 0x0 */ byte V1;
-    /* 0x1 */ byte V2;
-    /* 0x2 */ byte V3;
-    /*     */ byte _gap_0x3;
-    /* 0x4 */ unsigned __int64 Material;
 };
 
 __unaligned struct Common::Component::BGCollision::MeshPCB /* Size=0x20 */
@@ -19902,46 +20004,10 @@ __unaligned struct Common::Component::BGCollision::QuadtreeNode::Enumerator /* S
 {
 };
 
-__unaligned struct Common::Component::BGCollision::RaycastHit /* Size=0x58 */
-{
-    /* 0x00 */ System::Numerics::Vector3 Point;
-    /*      */ byte _gap_0x0[0x8];
-    /*      */ byte _gap_0x8[0x4];
-    /* 0x0C */ System::Numerics::Vector3 V1;
-    /*      */ byte _gap_0xC[0x4];
-    /*      */ byte _gap_0x10[0x8];
-    /* 0x18 */ System::Numerics::Vector3 V2;
-    /*      */ byte _gap_0x18[0x8];
-    /*      */ byte _gap_0x20[0x4];
-    /* 0x24 */ System::Numerics::Vector3 V3;
-    /*      */ byte _gap_0x24[0x4];
-    /*      */ byte _gap_0x28[0x8];
-    /* 0x30 */ System::Numerics::Vector3 Normal;
-    /*      */ byte _gap_0x30[0x10];
-    /* 0x40 */ unsigned __int64 Material;
-    /* 0x48 */ float Distance;
-    /*      */ byte _gap_0x4C[0x4];
-    /* 0x50 */ Common::Component::BGCollision::Object* Object;
-};
-
 __unaligned struct Common::Component::BGCollision::RaycastMaterialFilter /* Size=0x10 */
 {
     /* 0x00 */ unsigned __int64 Mask;
     /* 0x08 */ unsigned __int64 Value;
-};
-
-__unaligned struct Common::Component::BGCollision::RaycastParams /* Size=0x40 */
-{
-    /* 0x00 */ __int32 Algorithm;
-    /*      */ byte _gap_0x4[0x4];
-    /* 0x08 */ System::Numerics::Vector4* Origin;
-    /* 0x10 */ System::Numerics::Vector3* Direction;
-    /* 0x18 */ float* MaxDistance;
-    /* 0x20 */ float MaxPlaneNormalY;
-    /*      */ byte _gap_0x24[0x4];
-    /* 0x28 */ Common::Component::BGCollision::RaycastMaterialFilter* MaterialFilter;
-    /* 0x30 */ unsigned __int64 ObjectMaterialValue;
-    /* 0x38 */ unsigned __int64 ObjectMaterialMask;
 };
 
 __unaligned struct Common::Component::BGCollision::Resource /* Size=0x88 */
@@ -20073,11 +20139,6 @@ __unaligned struct Common::Configuration::ConfigProperties::UIntProperties /* Si
     /* 0x8 */ unsigned __int32 MaxValue;
 };
 
-__unaligned struct Common::Lua::lua_State /* Size=0xB0 */
-{
-    /*      */ byte _gap_0x0[0xB0];
-};
-
 __unaligned struct Common::Math::Bounds /* Size=0x10 */
 {
     /* 0x00 */ System::Drawing::Point Pos1;
@@ -20098,27 +20159,6 @@ __unaligned struct Component::Excel::ExcelModule /* Size=0x818 */
 {
     /* 0x000 */ Component::Excel::ExcelModule::ExcelModuleVTable* VTable;
     /*       */ byte _gap_0x8[0x810];
-};
-
-__unaligned struct Component::Excel::ExcelModule::ExcelModuleVTable /* Size=0x0 */
-{
-    /*     */ __int64 _vf0;
-    /* 0x8 */ Component::Excel::ExcelSheet* (__fastcall *GetSheetByIndex)(Component::Excel::ExcelModule* a1, unsigned __int32 a2);
-    /* 0x10 */ Component::Excel::ExcelSheet* (__fastcall *GetSheetByName)(Component::Excel::ExcelModule* a1, byte* a2);
-    /* 0x18 */ void (__fastcall *LoadSheet)(Component::Excel::ExcelModule* a1, byte* a2, byte a3, byte a4);
-};
-
-__unaligned struct Component::Excel::ExcelModuleInterface /* Size=0x10 */
-{
-    /* 0x00 */ Component::Excel::ExcelModuleInterface::ExcelModuleInterfaceVTable* VTable;
-    /* 0x08 */ Component::Exd::ExdModule* ExdModule;
-};
-
-__unaligned struct Component::Excel::ExcelModuleInterface::ExcelModuleInterfaceVTable /* Size=0x0 */
-{
-    /*     */ __int64 _vf0;
-    /* 0x8 */ Component::Excel::ExcelSheet* (__fastcall *GetSheetByIndex)(Component::Excel::ExcelModuleInterface* a1, unsigned __int32 a2);
-    /* 0x10 */ Component::Excel::ExcelSheet* (__fastcall *GetSheetByName)(Component::Excel::ExcelModuleInterface* a1, byte* a2);
 };
 
 __unaligned struct Component::Excel::ExcelSheet /* Size=0x110 */
@@ -20146,6 +20186,21 @@ __unaligned struct Component::Excel::ExcelSheet /* Size=0x110 */
     /*       */ byte _gap_0xD8[0x38];
 };
 
+__unaligned struct Component::Excel::ExcelModule::ExcelModuleVTable /* Size=0x0 */
+{
+    /*     */ __int64 _vf0;
+    /* 0x8 */ Component::Excel::ExcelSheet* (__fastcall *GetSheetByIndex)(Component::Excel::ExcelModule* a1, unsigned __int32 a2);
+    /* 0x10 */ Component::Excel::ExcelSheet* (__fastcall *GetSheetByName)(Component::Excel::ExcelModule* a1, byte* a2);
+    /* 0x18 */ void (__fastcall *LoadSheet)(Component::Excel::ExcelModule* a1, byte* a2, byte a3, byte a4);
+};
+
+__unaligned struct Component::Excel::ExcelModuleInterface::ExcelModuleInterfaceVTable /* Size=0x0 */
+{
+    /*     */ __int64 _vf0;
+    /* 0x8 */ Component::Excel::ExcelSheet* (__fastcall *GetSheetByIndex)(Component::Excel::ExcelModuleInterface* a1, unsigned __int32 a2);
+    /* 0x10 */ Component::Excel::ExcelSheet* (__fastcall *GetSheetByName)(Component::Excel::ExcelModuleInterface* a1, byte* a2);
+};
+
 __unaligned struct Component::Excel::ExcelSheet::ColumnInfo /* Size=0x0 */
 {
     /* 0x0 */ unsigned __int16 Type;
@@ -20170,17 +20225,6 @@ __unaligned struct Component::GUI::AgentInterface::AgentInterfaceVTable /* Size=
     /*     */ __int64 _vf6;
     /*     */ __int64 _vf7;
     /* 0x40 */ unsigned __int32 (__fastcall *GetAddonID)(Component::GUI::AgentInterface* a1);
-};
-
-__unaligned struct Component::GUI::AtkArrayData /* Size=0x20 */
-{
-    /* 0x00 */ void* vtbl;
-    /* 0x08 */ __int32 Size;
-    /* 0x0C */ byte SubscribedAddons[0x10];
-    /* 0x1C */ byte Unk1C;
-    /* 0x1D */ byte SubscribedAddonsCount;
-    /* 0x1E */ byte UpdateState;
-    /* 0x1F */ signed __int8 RefCount;
 };
 
 __unaligned struct Component::GUI::AtkArrayDataHolder /* Size=0x50 */
@@ -20365,14 +20409,15 @@ __unaligned struct Component::GUI::AtkComponentIconText /* Size=0xE8 */
     /*      */ byte _gap_0xC0[0x28];
 };
 
-__unaligned struct Component::GUI::AtkComponentInputBase /* Size=0xF0 */
+__unaligned struct Component::GUI::AtkComponentInputBase /* Size=0x1E0 */
 {
-    /* 0x00 */ Component::GUI::AtkComponentBase AtkComponentBase;
-    /*      */ byte _gap_0xC0[0x8];
-    /* 0xC8 */ Component::GUI::AtkTextNode* AtkTextNode;
-    /*      */ byte _gap_0xD0[0x10];
-    /* 0xE0 */ Client::System::String::Utf8String UnkText1;
+    /* 0x000 */ Component::GUI::AtkComponentBase AtkComponentBase;
+    /*       */ byte _gap_0xC0[0x8];
+    /* 0x0C8 */ Component::GUI::AtkTextNode* AtkTextNode;
+    /*       */ byte _gap_0xD0[0x10];
+    /* 0x0E0 */ Client::System::String::Utf8String UnkText1;
     /* 0x148 */ Client::System::String::Utf8String UnkText2;
+    /*       */ byte _gap_0x1B0[0x30];
 };
 
 __unaligned struct Component::GUI::AtkComponentJournalCanvas /* Size=0x520 */
@@ -20408,6 +20453,16 @@ __unaligned struct Component::GUI::AtkComponentList /* Size=0x1A8 */
     /* 0x193 */ bool IsUpdatePending;
     /*       */ byte _gap_0x194[0x4];
     /*       */ byte _gap_0x198[0x10];
+};
+
+__unaligned struct Component::GUI::AtkComponentListItemRenderer /* Size=0x1A8 */
+{
+    /* 0x000 */ Component::GUI::AtkComponentButton AtkComponentButton;
+    /* 0x0F0 */ Component::GUI::AtkDragDropInterface AtkDragDropInterface;
+    /*       */ byte _gap_0x120[0x60];
+    /*       */ byte _gap_0x180[0x4];
+    /* 0x184 */ __int32 ListItemIndex;
+    /*       */ byte _gap_0x188[0x20];
 };
 
 __unaligned struct Component::GUI::AtkComponentList::AtkComponentListVTable /* Size=0x0 */
@@ -20461,16 +20516,6 @@ __unaligned struct Component::GUI::AtkComponentList::ListItem /* Size=0x18 */
     /*      */ byte _gap_0x16[0x2];
 };
 
-__unaligned struct Component::GUI::AtkComponentListItemRenderer /* Size=0x1A8 */
-{
-    /* 0x000 */ Component::GUI::AtkComponentButton AtkComponentButton;
-    /* 0x0F0 */ Component::GUI::AtkDragDropInterface AtkDragDropInterface;
-    /*       */ byte _gap_0x120[0x60];
-    /*       */ byte _gap_0x180[0x4];
-    /* 0x184 */ __int32 ListItemIndex;
-    /*       */ byte _gap_0x188[0x20];
-};
-
 __unaligned struct Component::GUI::AtkComponentNode /* Size=0xB8 */
 {
     /* 0x00 */ Component::GUI::AtkResNode AtkResNode;
@@ -20515,7 +20560,7 @@ __unaligned struct Component::GUI::AtkUldComponentDataNumericInput /* Size=0x3C 
 __unaligned struct Component::GUI::AtkComponentNumericInput /* Size=0x338 */
 {
     /* 0x000 */ Component::GUI::AtkComponentInputBase AtkComponentInputBase;
-    /*       */ byte _gap_0xF0[0x208];
+    /*       */ byte _gap_0x1E0[0x118];
     /* 0x2F8 */ Component::GUI::AtkUldComponentDataNumericInput Data;
     /*       */ byte _gap_0x334[0x4];
 };
@@ -20551,7 +20596,7 @@ __unaligned struct Component::GUI::AtkComponentSlider /* Size=0x100 */
 __unaligned struct Component::GUI::AtkComponentTextInput /* Size=0x600 */
 {
     /* 0x000 */ Component::GUI::AtkComponentInputBase AtkComponentInputBase;
-    /*       */ byte _gap_0xF0[0x190];
+    /*       */ byte _gap_0x1E0[0xA0];
     /* 0x280 */ Client::System::String::Utf8String UnkText1;
     /* 0x2E8 */ Client::System::String::Utf8String UnkText2;
     /* 0x350 */ Client::System::String::Utf8String UnkText3;
@@ -20803,6 +20848,12 @@ __unaligned struct Component::GUI::AtkModule /* Size=0x82A0 */
     /*        */ byte _gap_0x5CC5;
     /*        */ byte _gap_0x5CC6[0x2];
     /*        */ byte _gap_0x5CC8[0x25D8];
+};
+
+__unaligned struct Component::GUI::ExtendArrayData /* Size=0x28 */
+{
+    /* 0x00 */ Component::GUI::AtkArrayData AtkArrayData;
+    /* 0x20 */ void** DataArray;
 };
 
 __unaligned struct Component::GUI::AtkModule::AtkModuleVTable /* Size=0x0 */
@@ -21498,18 +21549,6 @@ __unaligned struct Component::GUI::AtkUnitManager /* Size=0x9C90 */
     /*        */ byte _gap_0x9150[0xB40];
 };
 
-__unaligned struct Component::GUI::ExtendArrayData /* Size=0x28 */
-{
-    /* 0x00 */ Component::GUI::AtkArrayData AtkArrayData;
-    /* 0x20 */ void** DataArray;
-};
-
-__unaligned struct Component::GUI::NumberArrayData /* Size=0x28 */
-{
-    /* 0x00 */ Component::GUI::AtkArrayData AtkArrayData;
-    /* 0x20 */ __int32* IntArray;
-};
-
 __unaligned struct Component::GUI::SimpleTweenAnimation /* Size=0x20 */
 {
     /* 0x00 */ Component::GUI::SimpleTweenAnimation* Next;
@@ -21524,13 +21563,6 @@ __unaligned struct Component::GUI::SimpleTweenValue /* Size=0x8 */
 {
     /* 0x0 */ Component::GUI::SimpleTweenValueType Type;
     /* 0x4 */ float Value;
-};
-
-__unaligned struct Component::GUI::StringArrayData /* Size=0x30 */
-{
-    /* 0x00 */ Component::GUI::AtkArrayData AtkArrayData;
-    /* 0x20 */ byte** StringArray;
-    /* 0x28 */ byte** ManagedStringArray;
 };
 
 __unaligned struct Component::GUI::ULD::AtkUldComponentDataTab /* Size=0x24 */
