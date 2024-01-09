@@ -137,6 +137,16 @@ public abstract class ExporterBase {
             return;
         }
 
+        while (type.IsPointer)
+            type = type.GetElementType()!;
+
+        if (_knownTypes.Contains(type) || type.IsPrimitive || type.IsInterface || type.IsBlocked())
+            return;
+
+        if (type.IsFixedBuffer()) {
+            return;
+        }
+
         if (type.IsStruct()) {
             if (type.Namespace!.StartsWith(ExporterStatics.StdNamespacePrefix[..^1]))
                 ProcessStdStruct(type, header);
@@ -353,14 +363,20 @@ public abstract class ExporterBase {
         header.AppendLine(sb.ToString());
     }
 
-    private string BuildFunctionDefinition(FieldInfo fieldInfo) {
+    private string BuildFunctionDefinition(FieldInfo fieldInfo, StringBuilder header) {
         var sb = new StringBuilder();
         var fieldType = fieldInfo.FieldType;
-        sb.Append(fieldType.GetFunctionPointerReturnType().FixTypeName(FixFullName));
+        var funcPtr = fieldType.GetFunctionPointerReturnType();
+        var funcPtrParams = fieldType.GetFunctionPointerParameterTypes();
+        ProcessType(funcPtr, header);
+        foreach (var funcPtrParam in funcPtrParams) {
+            ProcessType(funcPtrParam, header);
+        }
+        sb.Append(funcPtr.FixTypeName(FixFullName));
         sb.Append(" (__fastcall *");
         sb.Append(fieldInfo.Name);
         sb.Append(")(");
-        sb.Append(string.Join(", ", fieldType.GetFunctionPointerParameterTypes().Select(t => t.FixTypeName(FixFullName)).Select((t, i) => t + $" a{i + 1}")));
+        sb.Append(string.Join(", ", funcPtrParams.Select(t => t.FixTypeName(FixFullName)).Select((t, i) => t + $" a{i + 1}")));
         sb.Append(')');
         return sb.ToString();
     }
@@ -431,7 +447,7 @@ public abstract class ExporterBase {
                 ExporterStatics.WarningListDictionary.TryAdd(type, warn);
             }
         } else if (fieldType.IsFunctionPointer || fieldType.IsUnmanagedFunctionPointer) {
-            sb.AppendLine(string.Format($"    /* 0x{{0:X{pad}}} */ {BuildFunctionDefinition(fieldInfo)};", fieldOffset));
+            sb.AppendLine(string.Format($"    /* 0x{{0:X{pad}}} */ {BuildFunctionDefinition(fieldInfo, header)};", fieldOffset));
 
             fieldSize = 8;
         } else {
