@@ -5,6 +5,6 @@ public unsafe partial struct AuthSessionTicketResponseCallback {
     [FieldOffset(0x0)] public SteamCallbackBase SteamCallbackBase;
 
     [VirtualFunction(1)]
-    public partial void Run(SteamTypes.AuthSessionTicketResponse* outResponse);
+    public partial void Run(SteamTypes.AuthSessionTicketResponse* outCallbackParams);
 }
 

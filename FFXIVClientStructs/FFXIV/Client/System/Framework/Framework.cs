@@ -66,12 +66,18 @@ public unsafe partial struct Framework {
     [FieldOffset(0x2BF0)] public GameVersion GameVersion;
     
     /// <summary>
+    /// Set if <c>IsSteam</c> was set for this instance as part of <c>SetupSteamApi</c>. Set even if loading the Steam API
+    /// fails for some reason.
+    /// </summary>
+    [FieldOffset(0x35B4)] public bool IsSteamGame;
+    
+    /// <summary>
     /// Access the Steam API wrapper/interface.
     /// </summary>
     /// <remarks>
     /// The struct backed by this API should not be considered stable. If you use this, you are signing up for API breakage.
     /// </remarks>
-    [FieldOffset(0x35B8)] public SteamApi SteamApi;
+    [FieldOffset(0x35B8)] public SteamApi* SteamApi;
 
     /// <summary>
     /// Handle (type HMODULE) of steam_api64.dll

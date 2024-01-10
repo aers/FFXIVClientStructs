@@ -5,5 +5,5 @@ public unsafe partial struct GamepadTextInputDismissedCallback {
     [FieldOffset(0x0)] public SteamCallbackBase SteamCallbackBase;
 
     [VirtualFunction(1)]
-    public partial void Run(SteamTypes.GamepadTextInputDismissedData* outData);
+    public partial void Run(SteamTypes.GamepadTextInputDismissedData* outCallbackParams);
 }
