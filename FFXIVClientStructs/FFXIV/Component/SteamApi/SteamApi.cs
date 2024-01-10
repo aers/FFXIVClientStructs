@@ -50,4 +50,12 @@ public unsafe partial struct SteamApi {
 
     [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC 30 48 8B E9 41 8B D9 48 8D 0D ?? ?? ?? ?? 41 8B F8")]
     public partial bool ShowFloatingGamepadTextInput(int fieldXPosition, int fieldYPosition, int textFieldWidth, int textFieldHeight);
+
+    /// <summary>
+    /// Method called by <see cref="GamepadTextInputDismissedCallback"/> when the gamepad text input has returned.
+    /// Stores results in <see cref="VirtualKeyboardEnteredText"/>, and sets <see cref="VirtualKeyboardOpened"/> to false.
+    /// </summary>
+    /// <param name="callbackEvent">The callback event that triggered this dump</param>
+    [MemberFunction("40 53 48 83 EC 20 80 3A 00")]
+    public partial void DumpEnteredGamepadText(SteamTypes.GamepadTextInputDismissedData* callbackEvent);
 }

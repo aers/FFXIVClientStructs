@@ -12542,7 +12542,7 @@ classes:
       0x140634F90: IsRunningOnSteamDeck
       0x140634FD0: ShowGamepadTextInput
       0x140635050: ShowFloatingGamepadTextInput
-      0x1406350F0: GetEnteredGamepadText
+      0x1406350F0: DumpEnteredGamepadText
   Component::SteamApi::SteamCallbackBase:
     vtbls:
       - ea: 0x141A16B10  # the true vtbl
