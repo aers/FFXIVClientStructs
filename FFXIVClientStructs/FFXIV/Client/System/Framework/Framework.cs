@@ -64,7 +64,10 @@ public unsafe partial struct Framework {
 
     [FieldOffset(0x2BF0)] public GameVersion GameVersion;
 
-    [FieldOffset(0x35C0)] public void* SteamApiLibrary;
+    /// <summary>
+    /// Handle (type HMODULE) of steam_api64.dll
+    /// </summary>
+    [FieldOffset(0x35C0)] public nint SteamApiLibraryHandle;
 
     [StaticAddress("44 0F B6 C0 48 8B 0D ?? ?? ?? ??", 7, true)]
     public static partial Framework* Instance();
