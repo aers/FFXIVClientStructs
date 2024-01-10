@@ -260,7 +260,6 @@ functions:
   0x14144B630: GetBannerConditionUnlockState
   0x14145D450: GetInstanceContentCrystallineConflictDirector
   0x1414ADCE0: GetInstanceContentMahjongDirector
-  0x1414B1440: GetPublicContentDirectorByType # maybe type? could be static id. idk
   0x14170DBC0: OodleNew # oodle code starts here
   0x14170DC30: OodleDelete
   0x14170DC60: rrPrintf_v1
@@ -8492,6 +8491,7 @@ classes:
       0x14097A0A0: GetCurrentContentId
       0x14097A120: CanLeaveCurrentContent # static
       0x14097BAB0: GetContentFinderCondition
+      0x1414B1440: GetPublicContentDirectorByType # static
   Client::Game::Event::EventHandlerModule:
     vtbls:
       - ea: 0x141A4B938
