@@ -51,9 +51,9 @@ public unsafe partial struct Framework {
     [FieldOffset(0x17C4)] public float FrameRate;
     [FieldOffset(0x17D0)] public bool WindowInactive;
 
-    [FieldOffset(0x19EC)] private fixed char gamePath[260];
-    [FieldOffset(0x1DFC)] private fixed char sqPackPath[260];
-    [FieldOffset(0x220C)] private fixed char savePath[260];
+    [FieldOffset(0x19EC)] private fixed char gamePath[260]; // WideChar Array
+    [FieldOffset(0x1DFC)] private fixed char sqPackPath[260]; // WideChar Array
+    [FieldOffset(0x220C)] private fixed char userPath[260]; // WideChar Array
 
     [FieldOffset(0x2B30)] public ExcelModuleInterface* ExcelModuleInterface;
     [FieldOffset(0x2B38)] public ExdModule* ExdModule;
@@ -81,7 +81,6 @@ public unsafe partial struct Framework {
     [MemberFunction("E8 ?? ?? ?? ?? 89 47 2C")]
     public static partial long GetServerTime();
 
-    [Obsolete("Use SavePath")]public string UserPath => SavePath;
     public string GamePath 
         { 
         get{
@@ -96,10 +95,10 @@ public unsafe partial struct Framework {
                     return new string(p);
         }
     }
-    public string SavePath 
+    public string UserPath 
         { 
         get{
-         fixed (char* p = savePath)
+         fixed (char* p = userPath)
                     return new string(p);
         }
     }
