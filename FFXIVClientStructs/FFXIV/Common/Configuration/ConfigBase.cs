@@ -96,5 +96,5 @@ public unsafe partial struct ConfigBase {
     [FieldOffset(0x50)] public Utf8String UnkString;
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 63 58")]
-    public partial void* GetConfigOption(uint index);
+    public partial ConfigEntry* GetConfigOption(uint index);
 }

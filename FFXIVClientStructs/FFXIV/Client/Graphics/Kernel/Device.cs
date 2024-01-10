@@ -16,8 +16,11 @@ public unsafe partial struct Device {
     [FieldOffset(0x94)] public float GammaCorrection;
     [FieldOffset(0x98)] public int ColorFilter;
     [FieldOffset(0x9C)] public float ColorFilterRange;
+    [FieldOffset(0xA4)] public int FrameRateDivider;
+    [FieldOffset(0x1B0)] public void* hWnd;
     [FieldOffset(0x1C0)] public uint NewWidth;
     [FieldOffset(0x1C4)] public uint NewHeight;
+    [FieldOffset(0x1C8)] public int FrameRate;
     [FieldOffset(0x220)] public int D3DFeatureLevel; // D3D_FEATURE_LEVEL enum
     [FieldOffset(0x228)] public void* DXGIFactory; // IDXGIFactory1
     [FieldOffset(0x230)] public void* DXGIOutput; // IDXGIOutput6
