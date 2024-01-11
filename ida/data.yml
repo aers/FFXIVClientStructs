@@ -10134,16 +10134,16 @@ classes:
         base: Client::Game::InstanceContent::PublicContentDirector
     funcs:
       0x1414B6D70: ctor
-  Client::Game::InstanceContent::PuclicContentBozja:
+  Client::Game::InstanceContent::PublicContentBozja:
     vtbls:
       - ea: 0x141C36828
         base: Client::Game::InstanceContent::PublicContentDirector
     funcs:
       0x1414B8A00: ctor
-  Client::Game::InstanceContent::PuclicContentSoutherFront:
+  Client::Game::InstanceContent::PublicContentSoutherFront:
     vtbls:
       - ea: 0x141C373D0
-        base: Client::Game::InstanceContent::PuclicContentBozja
+        base: Client::Game::InstanceContent::PublicContentBozja
     funcs:
       0x1414B9210: ctor
   Client::Game::InstanceContent::PublicContentDelubrum:
@@ -10158,10 +10158,10 @@ classes:
         base: Client::Game::InstanceContent::PublicContentDirector
     funcs:
       0x1414B9740: ctor
-  Client::Game::InstanceContent::PuclicContentZadnor:
+  Client::Game::InstanceContent::PublicContentZadnor:
     vtbls:
       - ea: 0x141C37F78
-        base: Client::Game::InstanceContent::PuclicContentBozja
+        base: Client::Game::InstanceContent::PublicContentBozja
     funcs:
       0x1414B92C0: ctor
   Client::Game::InstanceContent::PublicContentMJI:
