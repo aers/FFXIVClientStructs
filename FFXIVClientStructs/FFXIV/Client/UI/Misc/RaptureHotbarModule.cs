@@ -65,7 +65,7 @@ public unsafe partial struct RaptureHotbarModule {
     /// Dead field?
     /// </summary>
     [FieldOffset(0x80)] internal fixed byte HotbarShareStateBitmask2[4];
-    
+
     [FieldOffset(0x88)] public ClearCallback* ClearCallbackPtr;
 
     /// <summary>

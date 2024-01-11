@@ -2,7 +2,7 @@ using FFXIVClientStructs.FFXIV.Client.Game;
 using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 
-namespace FFXIVClientStructs.FFXIV.Client.UI.Misc; 
+namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
 // ToDo: Wrap in RaptureHotbarModule partial struct for namespacing (API 10)
 [StructLayout(LayoutKind.Explicit, Size = Size)]

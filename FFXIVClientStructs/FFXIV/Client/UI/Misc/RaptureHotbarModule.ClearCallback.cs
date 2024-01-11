@@ -7,7 +7,7 @@ public partial struct RaptureHotbarModule {
 
         [VirtualFunction(0)]
         public partial void Dtor(bool freeMemory);
-        
+
         /// <summary>
         /// Resets <b>ALL</b> hotbars for the current player to their default states.
         /// </summary>
@@ -15,7 +15,7 @@ public partial struct RaptureHotbarModule {
         /// <returns>Returns true</returns>
         [VirtualFunction(1)]
         public partial bool ResetAllHotbars(RaptureHotbarModule* raptureHotbarModule);
-        
+
         /// <summary>
         /// Resets the PvE hotbars for the specified class at that class' current level.
         /// </summary>
@@ -24,7 +24,7 @@ public partial struct RaptureHotbarModule {
         /// <returns>Returns true.</returns>
         [VirtualFunction(2)]
         public partial bool ResetPvEHotbarsForClass(RaptureHotbarModule* raptureHotbarModule, int classJobId);
-        
+
         /// <summary>
         /// Resets the PvP hotbars for the specified ClassJobId to their default values.
         /// Has no effect if the specified class job ID doesn't have PVP actions.

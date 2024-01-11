@@ -84,19 +84,19 @@ public unsafe partial struct Framework {
     [MemberFunction("E8 ?? ?? ?? ?? 89 47 2C")]
     public static partial long GetServerTime();
 
-    public string GamePath { 
+    public string GamePath {
         get {
             fixed (char* p = gamePath)
                 return new string(p);
         }
     }
-    public string SqPackPath { 
+    public string SqPackPath {
         get {
             fixed (char* p = sqPackPath)
                 return new string(p);
         }
     }
-    public string UserPath { 
+    public string UserPath {
         get {
             fixed (char* p = userPath)
                 return new string(p);

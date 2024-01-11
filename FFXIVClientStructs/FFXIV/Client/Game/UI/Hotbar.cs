@@ -7,7 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 public unsafe partial struct Hotbar {
     [FieldOffset(0x0), Obsolete("Use ClearCallback->vtbl")]
     public void* vtbl;
-    
+
     [FieldOffset(0x0)] public RaptureHotbarModule.ClearCallback* ClearCallback;
 
     /// <inheritdoc cref="RaptureHotbarModule.ClearCallback.ResetAllHotbars"/>

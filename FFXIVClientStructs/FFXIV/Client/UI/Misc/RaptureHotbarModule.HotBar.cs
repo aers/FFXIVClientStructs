@@ -1,6 +1,6 @@
 using System.Runtime.CompilerServices;
 
-namespace FFXIVClientStructs.FFXIV.Client.UI.Misc; 
+namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
 // ToDo: Wrap in RaptureHotbarModule partial struct for namespacing (API 10)
 [StructLayout(LayoutKind.Explicit, Size = Size)]
