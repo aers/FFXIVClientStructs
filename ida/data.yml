@@ -10083,6 +10083,12 @@ classes:
     funcs:
       0x1414B1DE0: ctor
       0x1414BB840: HandleEnterContentInfoPacket  # static
+  Client::Game::InstanceContent::PublicContentMJI:
+    vtbls:
+      - ea: 0x141C35CA8
+        base: Client::Game::InstanceContent::PublicContentDirector
+    funcs:
+      0x1414B7110: ctor
   Client::UI::PopupMenu:
     vtbls:
       - ea: 0x141A8F010
