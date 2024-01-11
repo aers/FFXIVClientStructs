@@ -9,6 +9,7 @@ using FFXIVClientStructs.FFXIV.Common.Component.BGCollision;
 using FFXIVClientStructs.FFXIV.Common.Lua;
 using FFXIVClientStructs.FFXIV.Component.Excel;
 using FFXIVClientStructs.FFXIV.Component.Exd;
+using FFXIVClientStructs.FFXIV.Component.SteamApi;
 
 namespace FFXIVClientStructs.FFXIV.Client.System.Framework;
 // Client::System::Framework::Framework
@@ -63,6 +64,20 @@ public unsafe partial struct Framework {
     [FieldOffset(0x2BC8)] public LuaState LuaState;
 
     [FieldOffset(0x2BF0)] public GameVersion GameVersion;
+    
+    /// <summary>
+    /// Set if <c>IsSteam</c> was set for this instance as part of <c>SetupSteamApi</c>. Set even if loading the Steam API
+    /// fails for some reason.
+    /// </summary>
+    [FieldOffset(0x35B4)] public bool IsSteamGame;
+    
+    /// <summary>
+    /// Access the Steam API wrapper/interface.
+    /// </summary>
+    /// <remarks>
+    /// The struct backed by this API should not be considered stable. If you use this, you are signing up for API breakage.
+    /// </remarks>
+    [FieldOffset(0x35B8)] public SteamApi* SteamApi;
 
     /// <summary>
     /// Handle (type HMODULE) of steam_api64.dll
@@ -83,6 +98,14 @@ public unsafe partial struct Framework {
 
     [MemberFunction("E8 ?? ?? ?? ?? 89 47 2C")]
     public static partial long GetServerTime();
+
+    /// <summary>
+    /// Checks if the Steam API has been initialized by checking whether the <see cref="SteamApi"/> pointer is valid,
+    /// and whether the sub-struct reports itself as ready.
+    /// </summary>
+    /// <returns>Returns true if the API is ready, false otherwise.</returns>
+    [MemberFunction("E8 ?? ?? ?? ?? 88 43 08 84 C0 74 16")]
+    public partial bool IsSteamApiInitialized();
 
     public string GamePath {
         get {

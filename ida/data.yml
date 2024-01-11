@@ -52,6 +52,10 @@ globals:
   0x1421FBFB8: g_Client::Game::UI::Chain.RemainingTime # not a pointer
   0x1421FBFBC: g_Client::Game::UI::Chain.MaxTime # not a pointer
   0x1422152D0: g_Conditions # bool array, size is Condition sheet row count
+  0x1421741D0: g_Component::SteamApi::InterfaceContext::ISteamFriends
+  0x1421741B8: g_Component::SteamApi::InterfaceContext::ISteamUser
+  0x142174200: g_Component::SteamApi::InterfaceContext::ISteamApps
+  0x1421741E8: g_Component::SteamApi::InterfaceContext::ISteamUtils
   0x1421AC1D0: g_SomeOtherRenderingState
   0x1421BE514: g_InvSqrt3
   0x142188E28: g_OodleNew
@@ -1526,7 +1530,9 @@ classes:
       0x1400950E0: TaskHousingEvent
       0x1400950F0: TaskResourceManager
       0x140095100: TaskUpdateGame
-      0x140095930: InitSteamApi
+      0x140095930: SetupSteamApi
+      0x140095A60: TeardownSteamApi
+      0x140095AC0: IsSteamApiInitialized
       0x140095F20: Finalize
       0x140097390: GetSavePath
   Component::Excel::ExcelModuleInterface:
@@ -12529,6 +12535,64 @@ classes:
     funcs:
       0x14144EB50: ctor
       0x14144ECD0: Finalize
+  Component::SteamApi::SteamApi:
+    funcs:
+      0x140634AC0: ctor
+      0x140634BC0: dtor
+      0x140634C40: SteamApiInit
+      0x140634D70: RunSteamCallbacks
+      0x140634DB0: EndAuthSession
+      0x140634E20: ClearSessionData
+      0x140634E60: GetDLCData
+      0x140634F60: GetSteamServerTime  # static
+      0x140634F90: IsRunningOnSteamDeck
+      0x140634FD0: ShowGamepadTextInput
+      0x140635050: ShowFloatingGamepadTextInput
+      0x1406350F0: DumpEnteredGamepadText
+  Component::SteamApi::SteamCallbackBase:
+    vtbls:
+      - ea: 0x141A16B10  # the true vtbl
+    vfuncs:
+      0: RunExtended  # (void* param, bool bIoFailure, long hSteamApiCall);
+      1: Run          # (void* param)
+      2: GetSize
+      3: Dtor
+  Component::SteamApi::SteamCallbackBase2:
+    vtbls: 
+      - ea: 0x141A16B50
+        base: Component::SteamApi::SteamCallbackBase
+  Component::SteamApi::Callbacks::AuthSessionTicketResponseCallback:
+    vtbls:
+      - ea: 0x141A16B30
+        base: Component::SteamApi::SteamCallbackBase
+  Component::SteamApi::Callbacks::FloatingGamepadTextInputDismissedCallback:
+    vtbls:
+      - ea: 0x141A16B70
+        base: Component::SteamApi::SteamCallbackBase2
+  Component::SteamApi::Callbacks::GamepadTextInputDismissedCallback:
+    vtbls:
+      - ea: 0x141A16B90
+        base: Component::SteamApi::SteamCallbackBase
+  Component::SteamApi::Interface::ISteamApps:
+    instances:
+      - ea: 0x142174200
+    funcs:
+      0x140635400: GetInterface
+  Component::SteamApi::Interface::ISteamFriends:
+    instances:
+      - ea: 0x1421741D0
+    funcs:
+      0x140635430: GetInterface
+  Component::SteamApi::Interface::ISteamUser:
+    instances:
+      - ea: 0x1421741B8
+    funcs:
+      0x140635460: GetInterface
+  Component::SteamApi::Interface::ISteamUtils:
+    instances:
+      - ea: 0x1421741E8
+    funcs:
+      0x140635490: GetInterface
   Client::Game::Object::HousingObject:
     vtbls:
       - ea: 0x141C2E500
