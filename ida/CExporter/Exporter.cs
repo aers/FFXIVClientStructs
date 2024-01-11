@@ -204,7 +204,7 @@ public abstract class ExporterBase {
 
                 var offsetMin = unionLayout.Layouts.Min(t => t.Offset());
                 var offsetMax = unionLayout.Size() + offsetMin;
-                var others = fields.Where(t => t.Offset() >= offsetMin && t.Offset() < offsetMax).ToList();
+                var others = fields.Where(t => t.Offset() > offsetMin && t.Offset() < offsetMax).ToList();
                 if (others.Count == 0) tries++;
                 fields.RemoveAll(others.Contains);
                 var minKey = unionLayout.Layouts.FindIndex(t => t.Size() < unionLayout.Size());
