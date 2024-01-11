@@ -2815,7 +2815,6 @@ classes:
     funcs:
       0x1401C06C0: InitInstance
       0x1401C0730: ctor
-      0x1401C0780: dtor
       0x1401C07F0: WaitAll
       0x1401C0900: AddThread
   Client::System::File::FileInterface:
