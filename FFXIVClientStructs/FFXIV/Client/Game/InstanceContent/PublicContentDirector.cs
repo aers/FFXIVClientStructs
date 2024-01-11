@@ -17,7 +17,7 @@ public unsafe partial struct PublicContentDirector {
     public static partial nint HandleEnterContentInfoPacket(EnterContentInfo* packet);
 }
 
-public enum PublicContentDirectorType : uint {
+public enum PublicContentDirectorType : byte {
     BondingCeremony = 1,
     TripleTriad = 2,
     Eureka = 3,
