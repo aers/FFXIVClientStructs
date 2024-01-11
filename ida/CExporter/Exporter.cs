@@ -272,8 +272,10 @@ public abstract class ExporterBase {
         if (type == typeof(void))
             return;
 
-        if (type.Name == "Pointer`1" && type.Namespace == ExporterStatics.InteropNamespacePrefix[..^1])
+        if (type.Name == "Pointer`1" && type.Namespace == ExporterStatics.InteropNamespacePrefix[..^1]) {
+            ProcessType(type.GenericTypeArguments[0], header);
             return;
+        }
 
         _knownTypes.Add(type);
 
