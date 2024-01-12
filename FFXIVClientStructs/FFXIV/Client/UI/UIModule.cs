@@ -44,6 +44,9 @@ public unsafe partial struct UIModule {
     [VirtualFunction(7)]
     public partial RaptureAtkModule* GetRaptureAtkModule();
 
+    [VirtualFunction(8)]
+    internal partial RaptureAtkModule* GetRaptureAtkModule2();
+
     [VirtualFunction(9)]
     public partial RaptureShellModule* GetRaptureShellModule();
 

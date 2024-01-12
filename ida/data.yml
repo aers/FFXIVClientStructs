@@ -352,6 +352,15 @@ classes:
       0x1409312D0: IsInPvPInstance
       0x140931390: IsInPvPArea
       0x1400A85D0: IsInSanctuary # static, more likely Client::UI::IsInSanctuary but it fits here just fine
+  Client::Game::BGMSystem:
+    instances:
+      - ea: 0x1421DFB10
+        pointer: False
+    funcs:
+      0x140700A20: Initialize
+      0x140700A70: dtor
+      0x140700AB0: Update
+      0x1407127E0: ctor
   Client::Game::Control::InputManager:
     instances:
       - ea: 0x142171820
@@ -442,6 +451,7 @@ classes:
       - ea: 0x1421F6480
         pointer: False
     funcs:
+      0x1408BD170: ReadPacket
       0x1408BC7F0: Initialize
       0x1408BCB20: GetUsedAllowances
       0x1408BCB70: GetResetTimestamp
@@ -470,6 +480,7 @@ classes:
       - ea: 0x1421A6FA0
     funcs:
       0x14019AD70: ctor # static
+      0x140093980: GetInstance
   Client::System::Resource::Handle::ResourceHandleFactory:
   Client::UI::Agent::AgentMap::MapMarkerStructSearch:
   Client::UI::Atk2DMap:
@@ -764,6 +775,9 @@ classes:
       0x140735E80: GetGoldSaucerCoin
       0x14144D020: GetSpecialItemId #static
       0x140735B80: GetLimitedTomestoneWeeklyLimit #static
+  Client::Game::InventoryContainer:
+    funcs:
+      0x14071D640: GetInventorySlot  # (this, slotIndex)
   Client::Game::MonsterNoteManager:
     instances:
       - ea: 0x1421FB050
@@ -822,9 +836,16 @@ classes:
   Client::Game::Housing::WorkshopTerritory:
     vtbls:
       - ea: 0x141A75590
-  InventoryContainer:
+  Client::Game::HWDManager: # Diadem
+    instances:
+      - ea: 0x142215510
+        pointer: True
+    vtbls:
+      - ea: 0x141A82B08
     funcs:
-      0x14071D640: GetInventorySlot  # (this, slotIndex)
+      0x140B84940: Initialize
+      0x140B849D0: Destroy
+      0x140B84A00: GetInstance
   Client::Game::MJI::MJIManager: # Island Sanctuary
     instances:
       - ea: 0x142215520
@@ -1074,6 +1095,7 @@ classes:
       - ea: 0x1421FBFD8
         pointer: False
     funcs:
+      0x140937E80: ReadPacket
       0x140938E50: SetCharacterName
       0x140939DB0: GetGrandCompanyRank
       0x14093A710: GetBeastTribeRank
@@ -1125,6 +1147,7 @@ classes:
         pointer: False
     funcs:
       0x140974EC0: ctor
+      0x140975630: ReadPacket
   Client::Game::UI::Buddy.CompanionStats:
     instances:
       - ea: 0x1421FEBD0
@@ -1136,6 +1159,7 @@ classes:
       - ea: 0x1421FEC54
         pointer: False
     funcs:
+      0x140976D80: ReadPacket
       0x1409770E0: GetRank
       0x140976FE0: GetCurrentRankExperience
       0x140977050: GetCurrentRankNeededExperience
@@ -1173,11 +1197,13 @@ classes:
     vtbls:
       - ea: 0x141A6D238
     funcs:
+      0x14097F350: ReadPacket
       0x14097F720: IsCategoryUnlocked
   Client::Game::UI::RelicNote:
     vtbls:
       - ea: 0x141A6D240
     funcs:
+      0x14097FDF0: ReadPacket
       0x14097FFA0: GetRelicID
       0x14097FFB0: GetRelicNoteID
       0x14097FFC0: GetMonsterProgress
@@ -1202,6 +1228,7 @@ classes:
       - ea: 0x14220DF20
         pointer: False
     funcs:
+      0x14098AF00: ReadPacket
       0x14098B680: GetKillCount
       0x14098B5C0: GetObtainedMobHuntOrderRowId
       0x14098B550: GetAvailableMobHuntOrderRowId
@@ -1511,6 +1538,7 @@ classes:
       0x140093B20: GetNetworkModuleProxy
       0x140093B40: GetUIModule
       0x140093B60: GetUIClipboard
+      0x140093B70: GetUIInputData
       0x140094620: InitNetworking
       0x140094A20: TaskBegin
       0x140094B60: TaskDraw2DBegin
@@ -2418,6 +2446,8 @@ classes:
     vtbls:
       - ea: 0x1419BDCF8
         base: Component::GUI::AtkModuleInterface::AtkHistoryInterface
+    funcs:
+      0x1400EB900: ctor
   Client::UI::Info::InfoProxyCommonlist:
     vtbls:
       - ea: 0x1419BDE38
@@ -5312,7 +5342,9 @@ classes:
       0x1406DFCF0: DeleteBanner
   Client::UI::Misc::BannerModuleEntry:
     funcs:
+      0x14066B720: j_ctor
       0x14066B740: ctor
+      0x14066B800: Equals
       0x14096C7C0: GenerateChecksum # static
   Client::UI::Misc::CharaView:
     vtbls:
@@ -7659,6 +7691,12 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140ACA500: ctor
+  Client::UI::Agent::AgentHwdGathererInspection:
+    vtbls:
+      - ea: 0x141A739E8
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140ACA920: ctor
   Client::UI::Agent::AgentHwdScore:
     vtbls:
       - ea: 0x141A73A70
@@ -11573,8 +11611,6 @@ classes:
       77: ChangeGaugeType
       78: UpdateGaugeData
   Client::UI::AddonJobHud::AddonJobHudGaugeData:
-    vtbls:
-      - ea: 0x141B1D5D0
     vfuncs:
       0: Initialize
       1: Copy
