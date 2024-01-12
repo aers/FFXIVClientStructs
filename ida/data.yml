@@ -5279,8 +5279,12 @@ classes:
       0x1406BDE90: AddHistoryEntry
   Client::UI::Misc::RecommendEquipModule:
     funcs:
+      0x1406BEC20: Setup # (this, race, sex, level, classJob, grandCompany, pvpRank)
       0x1406BEF20: ctor
-      0x1406BF340: SetupRecommendationList
+      0x1406BEFC0: Update
+      0x1406BF340: SetupFromPlayerState
+      0x1406BF3F0: SetupForClassJob
+      0x1406BF480: Clear
       0x1406BF4E0: EquipRecommended
   Client::UI::Misc::RetainerCommentModule:
     vtbls:
