@@ -49,6 +49,9 @@ globals:
   0x142212F72: g_Client::Game::UI::UnlockedCompanionsMask  # not a pointer
   0x142212F4E: g_Client::Game::UI::UnlockedHowToBitmask  # not a pointer
   0x142212FB2: g_Client::Game::UI::ChocoboTaxiStandsBitmask  # not a pointer
+  0x142212FBE: g_Client::Game::UI::CutsceneSeenBitmask  # not a pointer
+  0x14221305D: g_Client::Game::UI::UnlockedTripleTriadCardsBitmask  # not a pointer
+  0x142213090: g_Client::Game::UI::UnlockedTripleTriadCardsCount  # not a pointer
   0x1421FBFB8: g_Client::Game::UI::Chain.RemainingTime # not a pointer
   0x1421FBFBC: g_Client::Game::UI::Chain.MaxTime # not a pointer
   0x1422152D0: g_Conditions # bool array, size is Condition sheet row count
