@@ -67,7 +67,7 @@ public unsafe partial struct UIState {
     // Size: (CutsceneWorkIndexSheet.Max(row => row.WorkIndex) + 7) >> 3
     [FieldOffset(0x17A1E)] public fixed byte CutsceneSeenBitmask[(1272 + 7) >> 3];
 
-    // Ref: "48 39 2D ?? ?? ?? ?? 75 03"
+    // Ref: UIState#IsTripleTriadCardUnlocked
     // Size: TripleTriadCard.RowCount >> 3
     [FieldOffset(0x17ABD)] public fixed byte UnlockedTripleTriadCardsBitmask[409 >> 3];
     [FieldOffset(0x17AF8)] public ulong UnlockedTripleTriadCardsCount;
