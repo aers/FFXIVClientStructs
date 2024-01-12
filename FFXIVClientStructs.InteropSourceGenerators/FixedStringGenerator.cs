@@ -83,7 +83,7 @@ internal sealed class FixedStringGenerator : IIncrementalGenerator {
         }
 
         public void RenderFixedString(IndentedStringBuilder builder) {
-            builder.AppendLine($"public string {PropertyName} {{ get {{ fixed (byte* p = {FieldName}) {{ var str = Encoding.UTF8.GetString(p, {MaxLength}); var nullIdx = str.IndexOf('\0'); return nullIdx >= 0 ? str[..nullIdx] : str; }} }} }}");
+            builder.AppendLine($"public string {PropertyName} {{ get {{ fixed (byte* ptr = {FieldName}) {{ var str = Encoding.UTF8.GetString(ptr, {MaxLength:X}); var nullIdx = str.IndexOf('\\0'); return nullIdx >= 0 ? str[..nullIdx] : str; }} }} }}");
         }
     }
 
@@ -91,7 +91,6 @@ internal sealed class FixedStringGenerator : IIncrementalGenerator {
         public string RenderSource() {
             IndentedStringBuilder builder = new();
 
-            builder.AppendLine("using System.Runtime.CompilerServices;");
             builder.AppendLine("using System.Text;");
 
             StructInfo.RenderStart(builder);
