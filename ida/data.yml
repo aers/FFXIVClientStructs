@@ -11611,6 +11611,8 @@ classes:
       77: ChangeGaugeType
       78: UpdateGaugeData
   Client::UI::AddonJobHud::AddonJobHudGaugeData:
+    vtbls:
+      - ea: 0x141B1D5F8
     vfuncs:
       0: Initialize
       1: Copy
