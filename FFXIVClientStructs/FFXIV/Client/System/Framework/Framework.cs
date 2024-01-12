@@ -64,13 +64,13 @@ public unsafe partial struct Framework {
     [FieldOffset(0x2BC8)] public LuaState LuaState;
 
     [FieldOffset(0x2BF0)] public GameVersion GameVersion;
-    
+
     /// <summary>
     /// Set if <c>IsSteam</c> was set for this instance as part of <c>SetupSteamApi</c>. Set even if loading the Steam API
     /// fails for some reason.
     /// </summary>
     [FieldOffset(0x35B4)] public bool IsSteamGame;
-    
+
     /// <summary>
     /// Access the Steam API wrapper/interface.
     /// </summary>
