@@ -89,6 +89,9 @@ public unsafe partial struct UIModule {
     [VirtualFunction(23)]
     public partial void* GetFlagStatusModule();
 
+    [VirtualFunction(24)]
+    public partial RecipeFavoriteModule* GetRecipeFavoriteModule();
+
     [VirtualFunction(26)]
     public partial RaptureUiDataModule* GetRaptureUiDataModule();
 

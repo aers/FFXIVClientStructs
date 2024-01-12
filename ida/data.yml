@@ -4895,6 +4895,7 @@ classes:
       21: GetLetterDataModule
       22: GetRetainerTaskDataModule
       23: GetFlagStatusModule
+      24: GetRecipeFavoriteModule
       26: GetRaptureUiDataModule
       30: GetRaptureTeleportHistory
       32: GetRecommendEquipModule
@@ -5270,6 +5271,16 @@ classes:
     vtbls:
       - ea: 0x141A1C698
         base: Client::UI::Misc::UserFileManager::UserFileEvent
+  Client::UI::Misc::RecipeFavoriteModule:
+    vtbls:
+      - ea: 0x141A1C4D8
+        base: Client::UI::Misc::UserFileManager::UserFileEvent
+    funcs:
+      0x1406B1A40: ctor
+      0x1406B1C50: IsFavorited
+      0x1406B1CB0: GetEntry
+      0x1406B1EA0: Unfavorite
+      0x1406B1F50: Favorite
   Client::UI::Misc::RaptureTeleportHistory:
     vtbls:
       - ea: 0x141A1C700
