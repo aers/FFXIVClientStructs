@@ -269,7 +269,6 @@ functions:
   0x1400AAAC0: GetPartyMemberClassJobByContentId
   0x140748FF0: ObjectIdToPlayerObjectId # returns invalid id if objectid is not a player
   0x14076A8E0: ProcessActorControlPacket
-  0x14071C480: CreateDummyItemSlot
   0x140B1E780: IsInMordionGaol # if this returns true, i'm sorry for you
   0x140B71F50: WorldToScreenPoint
   0x14144B630: GetBannerConditionUnlockState
@@ -761,6 +760,29 @@ classes:
       0x140735E80: GetGoldSaucerCoin
       0x14144D020: GetSpecialItemId #static
       0x140735B80: GetLimitedTomestoneWeeklyLimit #static
+  Client::Game::InventoryItem:
+    funcs:
+      0x140181950: GetItemId
+      0x140181A80: GetCondition
+      0x140181C70: GetGlamourId
+      0x140181CB0: GetSpiritbond
+      0x140181D10: GetStain
+      0x14032EF00: GetSpiritbond2
+      0x14032EF50: GetMateriaId
+      0x1406E0A20: GetMateriaGrade
+      0x14071C480: ctor
+      0x14071C4C0: Copy
+      0x14071C680: Equals
+      0x14071C710: Clear
+      0x14071C750: SetItemId
+      0x14071C810: GetLinkedItem
+      0x14071CC00: GetQuantity
+      0x14071CCB0: SetQuantity
+      0x14071CCE0: GetSpiritbond3
+      0x14071CD40: GetConditionPercentage
+      0x14071CD80: GetMateriaCount
+      0x14073B490: GetEquipErrorLogMessageId # (this, race, sex, level, classJob, grandCompany, pvpRank, itemRow)
+      0x1407482D0: GetCrafterContentId
   Client::Game::MonsterNoteManager:
     instances:
       - ea: 0x1421FB050
