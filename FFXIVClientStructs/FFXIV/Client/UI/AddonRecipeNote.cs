@@ -184,27 +184,27 @@ public unsafe struct AddonRecipeNote {
     [FieldOffset(0x810)] public AtkComponentTextInput* Unk810;
     [FieldOffset(0x818)] public AddonRecipeNote* this818;
 
-    [FieldOffset(0xB50)] public char* UnkB50;
-    [FieldOffset(0xB60)] public char* UnkB60;
-    [FieldOffset(0xB70)] public char* UnkB70;
-    [FieldOffset(0xB80)] public char* UnkB80;
-    [FieldOffset(0xB90)] public char* UnkB90;
-    [FieldOffset(0xBA0)] public char* UnkBA0;
-    [FieldOffset(0xBB0)] public char* UnkBB0;
-    [FieldOffset(0xBC0)] public char* UnkBC0;
-    [FieldOffset(0xBD0)] public char* UnkBD0;
-    [FieldOffset(0xBE0)] public char* UnkBE0;
-    [FieldOffset(0xBF0)] public char* UnkBF0;
-    [FieldOffset(0xC00)] public char* UnkC00;
-    [FieldOffset(0xC10)] public char* UnkC10;
+    [FieldOffset(0xB50)] public char* UnkB50; // TODO: change to byte*
+    [FieldOffset(0xB60)] public char* UnkB60; // TODO: change to byte*
+    [FieldOffset(0xB70)] public char* UnkB70; // TODO: change to byte*
+    [FieldOffset(0xB80)] public char* UnkB80; // TODO: change to byte*
+    [FieldOffset(0xB90)] public char* UnkB90; // TODO: change to byte*
+    [FieldOffset(0xBA0)] public char* UnkBA0; // TODO: change to byte*
+    [FieldOffset(0xBB0)] public char* UnkBB0; // TODO: change to byte*
+    [FieldOffset(0xBC0)] public char* UnkBC0; // TODO: change to byte*
+    [FieldOffset(0xBD0)] public char* UnkBD0; // TODO: change to byte*
+    [FieldOffset(0xBE0)] public char* UnkBE0; // TODO: change to byte*
+    [FieldOffset(0xBF0)] public char* UnkBF0; // TODO: change to byte*
+    [FieldOffset(0xC00)] public char* UnkC00; // TODO: change to byte*
+    [FieldOffset(0xC10)] public char* UnkC10; // TODO: change to byte*
 
-    [FieldOffset(0x2138)] public char* Unk2138;
-    [FieldOffset(0x2140)] public char* Unk2140;
-    [FieldOffset(0x2148)] public char* Unk2148;
-    [FieldOffset(0x2150)] public char* Unk2150;
-    [FieldOffset(0x2158)] public char* Unk2158;
-    [FieldOffset(0x2160)] public char* Unk2160;
-    [FieldOffset(0x2168)] public char* Unk2168;
-    [FieldOffset(0x2170)] public char* Unk2170;
-    [FieldOffset(0x2178)] public char* Unk2178;
+    [FieldOffset(0x2138)] public char* Unk2138; // TODO: change to byte*
+    [FieldOffset(0x2140)] public char* Unk2140; // TODO: change to byte*
+    [FieldOffset(0x2148)] public char* Unk2148; // TODO: change to byte*
+    [FieldOffset(0x2150)] public char* Unk2150; // TODO: change to byte*
+    [FieldOffset(0x2158)] public char* Unk2158; // TODO: change to byte*
+    [FieldOffset(0x2160)] public char* Unk2160; // TODO: change to byte*
+    [FieldOffset(0x2168)] public char* Unk2168; // TODO: change to byte*
+    [FieldOffset(0x2170)] public char* Unk2170; // TODO: change to byte*
+    [FieldOffset(0x2178)] public char* Unk2178; // TODO: change to byte*
 }
