@@ -9032,18 +9032,6 @@ classes:
         base: Client::Game::InstanceContent::InstanceContentDirector
     funcs:
       0x1414A7F30: ctor
-  Client::Game::InstanceContent::InstanceContentRaidSeatOfSacrifice: # The Seat of Sacrifice / The Seat of Sacrifice (Extreme)
-    vtbls:
-      - ea: 0x141B69FE8
-        base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x141455BE0: ctor
-  Client::Game::InstanceContent::InstanceContentRaidCastrumMarinum: # Castrum Marinum / Castrum Marinum (Extreme)
-    vtbls:
-      - ea: 0x141B6ABE0
-        base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x141455C30: ctor
   Client::Game::InstanceContent::InstanceContentRaidEpicOfAlexander: # The Epic of Alexander (Ultimate)
     vtbls:
       - ea: 0x141B693F0
@@ -9773,25 +9761,25 @@ classes:
   Client::Game::InstanceContent::InstanceContentQuestBattleASpectacleForTheAges: # A Spectacle for the Ages
     vtbls:
       - ea: 0x141BED2B0
-        base: Client::Game::InstanceContent::InstanceContentDirector
+        base: Client::Game::InstanceContent::InstanceContentQuestBattle
     funcs:
       0x141489DB0: ctor
   Client::Game::InstanceContent::InstanceContentQuestBattleABloodyReunion: # A Bloody Reunion
     vtbls:
       - ea: 0x141BEDEB8
-        base: Client::Game::InstanceContent::InstanceContentDirector
+        base: Client::Game::InstanceContent::InstanceContentQuestBattle
     funcs:
       0x141489E60: ctor
   Client::Game::InstanceContent::InstanceContentQuestBattleOneLifeForOneWorld: # One Life for One World
     vtbls:
       - ea: 0x141BEEAC0
-        base: Client::Game::InstanceContent::InstanceContentDirector
+        base: Client::Game::InstanceContent::InstanceContentQuestBattle
     funcs:
       0x141489F00: ctor
   Client::Game::InstanceContent::InstanceContentQuestBattleCarteneauFlatsHeliodrome: # The Carteneau Flats: Heliodrome
     vtbls:
       - ea: 0x141BEF6C8
-        base: Client::Game::InstanceContent::InstanceContentDirector
+        base: Client::Game::InstanceContent::InstanceContentQuestBattle
     funcs:
       0x141489FB0: ctor
   Client::Game::InstanceContent::InstanceContentQuestBattleItProbablyATrap: # It's Probably a Trap
