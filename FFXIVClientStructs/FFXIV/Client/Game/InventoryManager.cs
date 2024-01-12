@@ -123,11 +123,17 @@ public enum InventoryType : uint {
 
     Currency = 2000,
     Crystals = 2001,
+    MailEdit = 2002, // used by LetterEditor
     Mail = 2003,
     KeyItems = 2004,
     HandIn = 2005,
+    Unknown2006 = 2006,
     DamagedGear = 2007,
+    Unknown2008 = 2008,
     Examine = 2009,
+    Reclaim = 2010, // LegacyItemStorage, HousingWithdrawStorage
+    HousingExteriorAppearanceEdit = 2011,
+    HousingInteriorAppearanceEdit = 2012,
     ReconstructionBuyback = 2013, // Doman Enclave Reconstruction Reclamation Box
 
     ArmoryOffHand = 3200,
