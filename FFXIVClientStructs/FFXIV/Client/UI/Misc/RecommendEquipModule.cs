@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 public unsafe partial struct RecommendEquipModule {
     public static RecommendEquipModule* Instance() => Framework.Instance()->GetUiModule()->GetRecommendEquipModule();
 
-    [FieldOffset(0), Obsolete("Use IsUpdating and IsSetupForDifferentClassJob")] public uint Unk0;
+    [FieldOffset(0), Obsolete("Use IsUpdating and IsSetupForDifferentClassJob")] public uint Unk00;
     [FieldOffset(0x00)] public bool IsUpdating;
     [FieldOffset(0x01)] public bool IsSetupForDifferentClassJob;
     [FieldOffset(0x04), Obsolete("Use CurrentSlotIndex")] public uint SlotCount;
