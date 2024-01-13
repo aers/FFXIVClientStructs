@@ -4901,6 +4901,7 @@ classes:
       34: GetInfoModule
       36: GetAgentModule
       38: GetUI3DModule
+      41: GetEmoteHistoryModule
       55: GetInputTimerModule
       57: GetRetainerCommentModule
       58: GetBannerModule
@@ -4987,6 +4988,19 @@ classes:
       0x140629CB0: Finalize
       0x14062A3E0: Update
       0x14062A860: HandleInputUpdate
+  Client::UI::Misc::EmoteHistoryModule:
+    vtbls:
+      - ea: 0x141A1C848
+        base: Client::UI::Misc::UserFileManager::UserFileEvent
+    funcs:
+      0x1406C0400: ctor
+      0x1406C05F0: AddToHistory
+      0x1406C0670: RemoveFromHistory
+      0x1406C0740: AddToFavorites
+      0x1406C07C0: SetFavorite
+      0x1406C0810: SwapFavorites
+      0x1406C0BD0: IsUnseen
+      0x1406C0C20: SetSeen
   Client::System::Crypt::SimpleString:
     vtbls:
       - ea: 0x141A16880
