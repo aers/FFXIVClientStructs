@@ -4961,6 +4961,7 @@ classes:
       38: GetUI3DModule
       41: GetEmoteHistoryModule
       42: GetMinionListModule
+      43: GetMountListModule
       55: GetInputTimerModule
       57: GetRetainerCommentModule
       58: GetBannerModule
@@ -5089,6 +5090,23 @@ classes:
       0x1406C13F0: SwapFavorites
       0x1406C1440: HasAnyFavorites
       0x1406C1460: HasFreeFavoriteSlots
+  Client::UI::Misc::MountListModule:
+    vtbls:
+      - ea: 0x141A1C918
+        base: Client::UI::Misc::UserFileManager::UserFileEvent
+    funcs:
+      0x1406C1570: ctor
+      0x1406C1860: GetUnseenMountPtrById
+      0x1406C18B0: GetUnseenMountPtr
+      0x1406C18D0: AddToUnseenMounts
+      0x1406C1980: RemoveFromUnseenMounts
+      0x1406C1A30: GetFavoritePtrById
+      0x1406C1A80: GetFavoritePtr
+      0x1406C1AA0: AddToFavorites
+      0x1406C1B60: RemoveFromFavorites
+      0x1406C1BE0: SwapFavorites
+      0x1406C1C30: HasAnyFavorites
+      0x1406C1C50: HasFreeFavoriteSlots
   Client::System::Crypt::SimpleString:
     vtbls:
       - ea: 0x141A16880
