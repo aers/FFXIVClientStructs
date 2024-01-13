@@ -44,6 +44,8 @@ public unsafe partial struct RaptureTextModule {
 
     public enum NameFormatterIdConverter : uint
     {
+        None = 0,
+
         // ObjStr
         ObjStr_BNpcName = 2,
         ObjStr_ENpcResident = 3,
@@ -55,9 +57,6 @@ public unsafe partial struct RaptureTextModule {
         ObjStr_Companion = 9,
         // 10-11 unused
         // ObjStr_Item = 12, // does not work?
-
-        // Item
-        Item = 0,
 
         // ActStr
         ActStr_Trait = 0,
@@ -84,7 +83,7 @@ public unsafe partial struct RaptureTextModule {
     public static partial byte* FormatName(NameFormatterPlaceholder placeholder, uint id, NameFormatterIdConverter idConverter, int intParam2 = 1);
     
     public static byte* GetItemName(uint id, int intParam2 = 1)
-        => FormatName(NameFormatterPlaceholder.Item, id, NameFormatterIdConverter.Item, intParam2);
+        => FormatName(NameFormatterPlaceholder.Item, id, NameFormatterIdConverter.None, intParam2);
 
     public static byte* GetBNpcName(uint id, int intParam2 = 1)
         => FormatName(NameFormatterPlaceholder.ObjStr, id, NameFormatterIdConverter.ObjStr_BNpcName, intParam2);
