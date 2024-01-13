@@ -4962,6 +4962,7 @@ classes:
       41: GetEmoteHistoryModule
       42: GetMinionListModule
       43: GetMountListModule
+      44: GetEmjModule
       55: GetInputTimerModule
       57: GetRetainerCommentModule
       58: GetBannerModule
@@ -5107,6 +5108,12 @@ classes:
       0x1406C1BE0: SwapFavorites
       0x1406C1C30: HasAnyFavorites
       0x1406C1C50: HasFreeFavoriteSlots
+  Client::UI::Misc::EmjModule:
+    vtbls:
+      - ea: 0x141A1C980
+        base: Client::UI::Misc::UserFileManager::UserFileEvent
+    funcs:
+      0x1406C1DA0: ctor
   Client::System::Crypt::SimpleString:
     vtbls:
       - ea: 0x141A16880
