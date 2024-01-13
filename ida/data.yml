@@ -4958,6 +4958,7 @@ classes:
       34: GetInfoModule
       36: GetAgentModule
       38: GetUI3DModule
+      42: GetMinionListModule
       55: GetInputTimerModule
       57: GetRetainerCommentModule
       58: GetBannerModule
@@ -5044,6 +5045,23 @@ classes:
       0x140629CB0: Finalize
       0x14062A3E0: Update
       0x14062A860: HandleInputUpdate
+  Client::UI::Misc::MinionListModule:
+    vtbls:
+      - ea: 0x141A1C8B0
+        base: Client::UI::Misc::UserFileManager::UserFileEvent
+    funcs:
+      0x1406C0E30: ctor
+      0x1406C1120: GetUnseenCompanionsPtrById
+      0x1406C1160: GetUnseenCompanionsPtr
+      0x1406C1180: AddToUnseenCompanions
+      0x1406C1200: RemoveFromUnseenCompanions
+      0x1406C12A0: IsFavorite
+      0x1406C12E0: GetFavoritePtr
+      0x1406C1300: AddToFavorites
+      0x1406C1390: RemoveFromFavorites
+      0x1406C13F0: SwapFavorites
+      0x1406C1440: HasAnyFavorites
+      0x1406C1460: HasFreeFavoriteSlots
   Client::System::Crypt::SimpleString:
     vtbls:
       - ea: 0x141A16880
