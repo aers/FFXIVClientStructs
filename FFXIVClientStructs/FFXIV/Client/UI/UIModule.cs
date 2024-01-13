@@ -98,6 +98,9 @@ public unsafe partial struct UIModule {
     [VirtualFunction(32)]
     public partial RecommendEquipModule* GetRecommendEquipModule();
 
+    [VirtualFunction(33)]
+    public partial PvpSetModule* GetPvpSetModule();
+
     [VirtualFunction(34)]
     public partial InfoModule* GetInfoModule();
 

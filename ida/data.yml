@@ -4987,6 +4987,12 @@ classes:
       0x140629CB0: Finalize
       0x14062A3E0: Update
       0x14062A860: HandleInputUpdate
+  Client::UI::Misc::PvpSetModule:
+    vtbls:
+      - ea: 0x141A1C7D0
+        base: Client::UI::Misc::UserFileManager::UserFileEvent
+    funcs:
+      0x1406BF860: ctor
   Client::System::Crypt::SimpleString:
     vtbls:
       - ea: 0x141A16880
