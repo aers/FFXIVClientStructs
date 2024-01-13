@@ -131,6 +131,9 @@ public unsafe partial struct UIModule {
     [VirtualFunction(43)]
     public partial MountListModule* GetMountListModule();
 
+    [VirtualFunction(45)]
+    public partial AozNoteModule* GetAozNoteModule();
+
     [VirtualFunction(49)]
     public partial FieldMarkerModule* GetFieldMarkerModule();
 
