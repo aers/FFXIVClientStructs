@@ -98,6 +98,9 @@ public unsafe partial struct UIModule {
     [VirtualFunction(26)]
     public partial RaptureUiDataModule* GetRaptureUiDataModule();
 
+    [VirtualFunction(29)]
+    public partial GoldSaucerModule* GetGoldSaucerModule();
+
     [VirtualFunction(30)]
     public partial void* GetRaptureTeleportHistory();
 

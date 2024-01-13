@@ -4952,6 +4952,7 @@ classes:
       23: GetFlagStatusModule
       24: GetRecipeFavoriteModule
       26: GetRaptureUiDataModule
+      29: GetGoldSaucerModule
       30: GetRaptureTeleportHistory
       32: GetRecommendEquipModule
       34: GetInfoModule
@@ -5311,6 +5312,22 @@ classes:
       0x1406A7250: ctor
       0x1406A7410: Finalize
       0x1406A9260: SearchForItem
+  Client::UI::Misc::GoldSaucerModule:
+    vtbls:
+      - ea: 0x141A1C560
+        base: Client::UI::Misc::UserFileManager::UserFileEvent
+    funcs:
+      0x1406B3110: ctor
+      0x1406B3B00: SetDeckName
+      0x1406B3B70: SetDeckCard
+      0x1406B3BA0: GetDeck
+      0x1406B3BC0: SetHotbarMinion
+      0x1406B3C10: GetHotbarMinion
+      0x1406B3C60: GetHotbarMinionArray # no xrefs
+      0x1406B3C70: AddUnseenCard
+      0x1406B3D50: RemoveUnseenCard
+      0x1406B3E20: IsUnseenCard
+      0x1406B3E50: GetUnseenCardsArray
   Client::UI::Misc::ItemOrderModule:
     vtbls:
       - ea: 0x141A1C5C8
