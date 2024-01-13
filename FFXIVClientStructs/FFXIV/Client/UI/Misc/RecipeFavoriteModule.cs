@@ -31,8 +31,8 @@ public unsafe partial struct RecipeFavoriteModule {
     public partial bool IsFavorited(byte craftType, ushort recipeID);
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B CD 48 8B C5")]
-    public partial uint Unfavorite(byte craftType, ushort recipeID); // returns LogMessage RowId
+    public partial uint RemoveFromFavorites(byte craftType, ushort recipeID); // returns LogMessage RowId
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B F8 49 8B CE")]
-    public partial uint Favorite(byte craftType, ushort recipeID); // returns LogMessage RowId
+    public partial uint AddToFavorites(byte craftType, ushort recipeID); // returns LogMessage RowId
 }

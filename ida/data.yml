@@ -5279,8 +5279,8 @@ classes:
       0x1406B1A40: ctor
       0x1406B1C50: IsFavorited
       0x1406B1CB0: GetEntry
-      0x1406B1EA0: Unfavorite
-      0x1406B1F50: Favorite
+      0x1406B1EA0: RemoveFromFavorites
+      0x1406B1F50: AddToFavorites
   Client::UI::Misc::RaptureTeleportHistory:
     vtbls:
       - ea: 0x141A1C700
