@@ -5084,6 +5084,8 @@ classes:
     vtbls:
       - ea: 0x141A1C310
         base: Client::UI::Misc::UserFileManager::UserFileEvent
+    funcs:
+      0x14069BFB0: ctor
   Client::UI::Misc::ConfigModule:
     vtbls:
       - ea: 0x141A1BC60
@@ -5339,10 +5341,20 @@ classes:
     vtbls:
       - ea: 0x141A1C630
         base: Client::UI::Misc::UserFileManager::UserFileEvent
+    funcs:
+      0x1406B8170: ctor
   Client::UI::Misc::RetainerTaskDataModule:
     vtbls:
       - ea: 0x141A1C698
         base: Client::UI::Misc::UserFileManager::UserFileEvent
+    funcs:
+      0x1406B8630: ctor
+  Client::UI::Misc::FlagStatusModule:
+    vtbls:
+      - ea: 0x141A1C470
+        base: Client::UI::Misc::UserFileManager::UserFileEvent
+    funcs:
+      0x1406B0CB0: ctor
   Client::UI::Misc::RecipeFavoriteModule:
     vtbls:
       - ea: 0x141A1C4D8

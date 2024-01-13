@@ -84,13 +84,13 @@ public unsafe partial struct UIModule {
     public partial UiSavePackModule* GetUiSavePackModule();
 
     [VirtualFunction(21)]
-    public partial void* GetLetterDataModule();
+    public partial LetterDataModule* GetLetterDataModule();
 
     [VirtualFunction(22)]
-    public partial void* GetRetainerTaskDataModule();
+    public partial RetainerTaskDataModule* GetRetainerTaskDataModule();
 
     [VirtualFunction(23)]
-    public partial void* GetFlagStatusModule();
+    public partial FlagStatusModule* GetFlagStatusModule();
 
     [VirtualFunction(24)]
     public partial RecipeFavoriteModule* GetRecipeFavoriteModule();
@@ -102,7 +102,7 @@ public unsafe partial struct UIModule {
     public partial GoldSaucerModule* GetGoldSaucerModule();
 
     [VirtualFunction(30)]
-    public partial void* GetRaptureTeleportHistory();
+    public partial RaptureTeleportHistory* GetRaptureTeleportHistory();
 
     [VirtualFunction(32)]
     public partial RecommendEquipModule* GetRecommendEquipModule();
@@ -132,10 +132,10 @@ public unsafe partial struct UIModule {
     public partial UIInputData* GetUIInputData();
 
     [VirtualFunction(66)]
-    public partial void* GetUIInputModule();
+    public partial UIInputModule* GetUIInputModule();
 
     [VirtualFunction(68)]
-    public partial void* GetLogFilterConfig();
+    public partial LogFilterConfig* GetLogFilterConfig();
 
     [VirtualFunction(76)]
     public partial bool EnterGPose();
