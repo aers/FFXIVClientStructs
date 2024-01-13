@@ -4897,6 +4897,7 @@ classes:
       23: GetFlagStatusModule
       26: GetRaptureUiDataModule
       30: GetRaptureTeleportHistory
+      31: GetItemContextCustomizeModule
       32: GetRecommendEquipModule
       34: GetInfoModule
       36: GetAgentModule
@@ -4987,6 +4988,12 @@ classes:
       0x140629CB0: Finalize
       0x14062A3E0: Update
       0x14062A860: HandleInputUpdate
+  Client::UI::Misc::ItemContextCustomizeModule:
+    vtbls:
+      - ea: 0x141A1C768
+        base: Client::UI::Misc::UserFileManager::UserFileEvent
+    funcs:
+      0x1406BE4D0: ResetAll
   Client::System::Crypt::SimpleString:
     vtbls:
       - ea: 0x141A16880
