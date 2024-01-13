@@ -4958,6 +4958,7 @@ classes:
       34: GetInfoModule
       36: GetAgentModule
       38: GetUI3DModule
+      45: GetAozNoteModule
       55: GetInputTimerModule
       57: GetRetainerCommentModule
       58: GetBannerModule
@@ -5044,6 +5045,17 @@ classes:
       0x140629CB0: Finalize
       0x14062A3E0: Update
       0x14062A860: HandleInputUpdate
+  Client::UI::Misc::AozNoteModule:
+    vtbls:
+      - ea: 0x141A15E48
+        base: Client::UI::Misc::UserFileManager::UserFileEvent
+    funcs:
+      0x1406C2430: ctor
+      0x1406C2D10: GetActiveSetCustomNamePtr
+      0x1406C2D30: HasActiveSetCustomName
+      0x1406C2D50: SetActiveSetCustomName
+      0x1406C2DB0: LoadActiveSetHotBars
+      0x1406C2EA0: SaveActiveSetHotBars
   Client::System::Crypt::SimpleString:
     vtbls:
       - ea: 0x141A16880
