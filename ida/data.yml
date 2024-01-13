@@ -9,10 +9,7 @@ globals:
   0x142171848: g_Client::Game::Control::InputManager_MouseButtonHoldState
   0x142187be0: g_StackCookie
   0x142187be8: g_InverseStackCookie
-  0x1421A3470: g_GameWindow # not a pointer
   0x1421A54A0: g_OSVersion
-  0x1421AC230: g_ThreadManager
-  0x1421AC240: g_FileManager
   0x1421AC368: g_CurrentCharaSelectCharacter # Client::Game::Character::Character*
   0x1421AC540: g_CharaSelectCharacterList # see Client::UI::Agent::AgentLobby::CharaSelectCharacterList
   0x1421BE480: g_RenderSkeletonLinkedListStart
@@ -1526,6 +1523,9 @@ classes:
       0x140212DB0: SetMicPosition
       0x1402138A0: SetVolume #(this, type, float: volume
   Client::System::Framework::GameWindow:
+    instances:
+      - ea: 0x1421A3470
+        pointer: false
     funcs:
       0x1400655D0: SetWindowRect
       0x1400659A0: SetWindowSize
@@ -2807,6 +2807,8 @@ classes:
       0x1401C0570: HasFinished
       0x1401C05B0: SetAffinity
   Client::System::Threading::ThreadManager:
+    instances: 
+      - ea: 0x1421AC230
     vtbls:
       - ea: 0x1419D2888
         base: Client::System::Common::NonCopyable
@@ -2826,6 +2828,8 @@ classes:
     funcs:
       0x1401C5EF0: ctor 
   Client::System::File::FileManager:
+    instances:
+      - ea: 0x1421AC240
     vtbls:
       - ea: 0x1419D2C20
         base: Client::System::Framework::Task
