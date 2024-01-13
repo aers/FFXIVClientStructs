@@ -12977,22 +12977,22 @@ classes:
     instances:
       - ea: 0x14216C218
     funcs:
-      0x1406352C0: GetInterface
+      0x1406352C0: FindOrCreateInterface
   Component::SteamApi::Interface::ISteamFriends:
     instances:
       - ea: 0x14216C1E8
     funcs:
-      0x1406352F0: GetInterface
+      0x1406352F0: FindOrCreateInterface
   Component::SteamApi::Interface::ISteamUser:
     instances:
       - ea: 0x14216C1D0
     funcs:
-      0x140635320: GetInterface
+      0x140635320: FindOrCreateInterface
   Component::SteamApi::Interface::ISteamUtils:
     instances:
       - ea: 0x14216C200
     funcs:
-      0x140635350: GetInterface
+      0x140635350: FindOrCreateInterface
   Client::Game::Object::HousingObject:
     vtbls:
       - ea: 0x141C26260
