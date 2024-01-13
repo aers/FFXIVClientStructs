@@ -36,4 +36,11 @@ public unsafe partial struct EmoteHistoryModule {
 
     [MemberFunction("4C 8B C9 66 85 D2 74 4F")]
     public partial void SetSeen(ushort emoteId);
+
+    public bool RemoveFromFavorites(ushort emoteId) {
+        for (var i = 0; i < 20; i++)
+            if (Favorites[i] == emoteId)
+                return SetFavoriteEmote(i, 0);
+        return false;
+    }
 }
