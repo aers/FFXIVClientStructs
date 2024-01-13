@@ -1491,6 +1491,40 @@ classes:
       0x14008E420: OpenGameWindow
       0x14008E670: GetVirtualScreenResolution
       0x14008E6C0: SetFramerateCapByConfigOption
+      0x14008EBA0: SetMasterVolume #(this, volume(0-100), saveToConfig)
+      0x14008EE00: SetMicPosition
+  Client::Sound::SoundManager: #base: Client::System::Common::NonCopyable
+    instances:
+      - ea: 0x1421AC308
+    vtbls:
+      - ea: 0x1419DB500
+        base: Client::System::Resource::ResourceEventListener
+      - ea: 0x1419DB528
+        base: Client::System::Threading::Thread
+    funcs:
+      0x140210820: GetEffectiveVolume
+      0x140210BF0: ctor
+      0x140211DF0: SetAlwaysOn
+      0x140211E10: SetWindowInactive
+      0x140211F40: SetMasterVolume
+      0x140211F70: GetMasterVolume
+      0x140211F80: GetActiveVolume
+      0x140211F90: SetEqualizerType
+      0x140212460: SetMasterEnabled
+      0x1402124c0: SetBgmEnabled
+      0x1402125e0: SetSoundEffectsEnabled
+      0x140212700: SetVoiceEnabled
+      0x1402127c0: SetEnvironmentEnabled
+      0x140212760: SetSystemEnabled
+      0x1402128C0: SetPerformEnabled
+      0x140212920: SetBgmAlways
+      0x140212A40: SetSoundEffectAlways
+      0x140212B60: SetVoiceAlways
+      0x140212BC0: SetSystemAlways
+      0x140212C20: SetEnvironmentAlways
+      0x140212D20: SetPerformAlways
+      0x140212DB0: SetMicPosition
+      0x1402138A0: SetVolume #(this, type, float: volume
   Client::System::Framework::GameWindow:
     funcs:
       0x1400655D0: SetWindowRect
