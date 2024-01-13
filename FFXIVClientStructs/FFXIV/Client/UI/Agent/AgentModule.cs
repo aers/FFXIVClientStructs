@@ -373,7 +373,7 @@ public enum AgentId : uint {
     PerformanceReadyCheck = 360,
 
     HwdAetherGauge = 364,
-
+    HwdGathererInspection = 365,
     HwdScore = 366,
 
     HwdMonument = 368,
