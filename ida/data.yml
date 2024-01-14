@@ -4964,6 +4964,7 @@ classes:
       43: GetMountListModule
       44: GetEmjModule
       45: GetAozNoteModule
+      47: GetAchievementListModule
       55: GetInputTimerModule
       57: GetRetainerCommentModule
       58: GetBannerModule
@@ -5126,6 +5127,17 @@ classes:
       0x1406C2D50: SetActiveSetCustomName
       0x1406C2DB0: LoadActiveSetHotBars
       0x1406C2EA0: SaveActiveSetHotBars
+  Client::UI::Misc::AchievementListModule:
+    vtbls:
+      - ea: 0x141A1CA50
+        base: Client::UI::Misc::UserFileManager::UserFileEvent
+    funcs:
+      0x1406C4CF0: ctor
+      0x1406C4F10: UpdateWatchlistCount
+      0x1406C4F40: AddToWatchlist
+      0x1406C4FE0: RemoveFromWatchlist
+      0x1406C5090: IsOnWatchlist
+      0x1406C50C0: IsWatchlistFull
   Client::System::Crypt::SimpleString:
     vtbls:
       - ea: 0x141A16880
