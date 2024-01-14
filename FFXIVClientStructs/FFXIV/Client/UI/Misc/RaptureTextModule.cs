@@ -47,61 +47,61 @@ public unsafe partial struct RaptureTextModule {
         => FormatName(NameFormatterPlaceholder.Item, id, NameFormatterIdConverter.None, intParam2);
 
     public static byte* GetBNpcName(uint id, int intParam2 = 1)
-        => FormatName(NameFormatterPlaceholder.ObjStr, id, NameFormatterIdConverter.ObjStr_BNpcName, intParam2);
+        => FormatName(NameFormatterPlaceholder.ObjStr, id, NameFormatterIdConverter.BNpcName, intParam2);
 
     public static byte* GetENpcResidentName(uint id, int intParam2 = 1)
-        => FormatName(NameFormatterPlaceholder.ObjStr, id, NameFormatterIdConverter.ObjStr_ENpcResident, intParam2);
+        => FormatName(NameFormatterPlaceholder.ObjStr, id, NameFormatterIdConverter.ENpcResident, intParam2);
 
     public static byte* GetTreasureName(uint id, int intParam2 = 1)
-        => FormatName(NameFormatterPlaceholder.ObjStr, id, NameFormatterIdConverter.ObjStr_Treasure, intParam2);
+        => FormatName(NameFormatterPlaceholder.ObjStr, id, NameFormatterIdConverter.Treasure, intParam2);
 
     public static byte* GetAetheryteName(uint id, int intParam2 = 1)
-        => FormatName(NameFormatterPlaceholder.ObjStr, id, NameFormatterIdConverter.ObjStr_Aetheryte, intParam2);
+        => FormatName(NameFormatterPlaceholder.ObjStr, id, NameFormatterIdConverter.Aetheryte, intParam2);
 
     public static byte* GetGatheringPointName(uint id, int intParam2 = 1)
-        => FormatName(NameFormatterPlaceholder.ObjStr, id, NameFormatterIdConverter.ObjStr_GatheringPointName, intParam2);
+        => FormatName(NameFormatterPlaceholder.ObjStr, id, NameFormatterIdConverter.GatheringPointName, intParam2);
 
     public static byte* GetEObjName(uint id, int intParam2 = 1)
-        => FormatName(NameFormatterPlaceholder.ObjStr, id, NameFormatterIdConverter.ObjStr_EObjName, intParam2);
+        => FormatName(NameFormatterPlaceholder.ObjStr, id, NameFormatterIdConverter.EObjName, intParam2);
 
     public static byte* GetCompanionName(uint id, int intParam2 = 1)
-        => FormatName(NameFormatterPlaceholder.ObjStr, id, NameFormatterIdConverter.ObjStr_Companion, intParam2);
+        => FormatName(NameFormatterPlaceholder.ObjStr, id, NameFormatterIdConverter.Companion, intParam2);
 
     public static byte* GetTraitName(uint id, int intParam2 = 1)
-        => FormatName(NameFormatterPlaceholder.ActStr, id, NameFormatterIdConverter.ActStr_Trait, intParam2);
+        => FormatName(NameFormatterPlaceholder.ActStr, id, NameFormatterIdConverter.Trait, intParam2);
 
     public static byte* GetActionName(uint id, int intParam2 = 1)
-        => FormatName(NameFormatterPlaceholder.ActStr, id, NameFormatterIdConverter.ActStr_Action, intParam2);
+        => FormatName(NameFormatterPlaceholder.ActStr, id, NameFormatterIdConverter.Action, intParam2);
 
     public static byte* GetEventActionName(uint id, int intParam2 = 1)
-        => FormatName(NameFormatterPlaceholder.ActStr, id, NameFormatterIdConverter.ActStr_EventAction, intParam2);
+        => FormatName(NameFormatterPlaceholder.ActStr, id, NameFormatterIdConverter.EventAction, intParam2);
 
     public static byte* GetGeneralActionName(uint id, int intParam2 = 1)
-        => FormatName(NameFormatterPlaceholder.ActStr, id, NameFormatterIdConverter.ActStr_GeneralAction, intParam2);
+        => FormatName(NameFormatterPlaceholder.ActStr, id, NameFormatterIdConverter.GeneralAction, intParam2);
 
     public static byte* GetBuddyActionName(uint id, int intParam2 = 1)
-        => FormatName(NameFormatterPlaceholder.ActStr, id, NameFormatterIdConverter.ActStr_BuddyAction, intParam2);
+        => FormatName(NameFormatterPlaceholder.ActStr, id, NameFormatterIdConverter.BuddyAction, intParam2);
 
     public static byte* GetMainCommandName(uint id, int intParam2 = 1)
-        => FormatName(NameFormatterPlaceholder.ActStr, id, NameFormatterIdConverter.ActStr_MainCommand, intParam2);
+        => FormatName(NameFormatterPlaceholder.ActStr, id, NameFormatterIdConverter.MainCommand, intParam2);
 
     public static byte* GetCraftActionName(uint id, int intParam2 = 1)
-        => FormatName(NameFormatterPlaceholder.ActStr, id, NameFormatterIdConverter.ActStr_CraftAction, intParam2);
+        => FormatName(NameFormatterPlaceholder.ActStr, id, NameFormatterIdConverter.CraftAction, intParam2);
 
     public static byte* GetPetActionName(uint id, int intParam2 = 1)
-        => FormatName(NameFormatterPlaceholder.ActStr, id, NameFormatterIdConverter.ActStr_PetAction, intParam2);
+        => FormatName(NameFormatterPlaceholder.ActStr, id, NameFormatterIdConverter.PetAction, intParam2);
 
     public static byte* GetCompanyActionName(uint id, int intParam2 = 1)
-        => FormatName(NameFormatterPlaceholder.ActStr, id, NameFormatterIdConverter.ActStr_CompanyAction, intParam2);
+        => FormatName(NameFormatterPlaceholder.ActStr, id, NameFormatterIdConverter.CompanyAction, intParam2);
 
     public static byte* GetMountName(uint id, int intParam2 = 1)
-        => FormatName(NameFormatterPlaceholder.ActStr, id, NameFormatterIdConverter.ActStr_Mount, intParam2);
+        => FormatName(NameFormatterPlaceholder.ActStr, id, NameFormatterIdConverter.Mount, intParam2);
 
     public static byte* GetBgcArmyActionName(uint id, int intParam2 = 1)
-        => FormatName(NameFormatterPlaceholder.ActStr, id, NameFormatterIdConverter.ActStr_BgcArmyAction, intParam2);
+        => FormatName(NameFormatterPlaceholder.ActStr, id, NameFormatterIdConverter.BgcArmyAction, intParam2);
 
     public static byte* GetOrnamentName(uint id, int intParam2 = 1)
-        => FormatName(NameFormatterPlaceholder.ActStr, id, NameFormatterIdConverter.ActStr_Ornament, intParam2);
+        => FormatName(NameFormatterPlaceholder.ActStr, id, NameFormatterIdConverter.Ornament, intParam2);
 }
 
 public enum NameFormatterPlaceholder : int {
@@ -114,34 +114,34 @@ public enum NameFormatterIdConverter : uint {
     None = 0,
 
     // ObjStr
-    ObjStr_BNpcName = 2,
-    ObjStr_ENpcResident = 3,
-    ObjStr_Treasure = 4,
-    ObjStr_Aetheryte = 5,
-    ObjStr_GatheringPointName = 6,
-    ObjStr_EObjName = 7,
-    // ObjStr_Mount = 8, // does not work?
-    ObjStr_Companion = 9,
+    BNpcName = 2,
+    ENpcResident = 3,
+    Treasure = 4,
+    Aetheryte = 5,
+    GatheringPointName = 6,
+    EObjName = 7,
+    // Mount = 8, // does not work?
+    Companion = 9,
     // 10-11 unused
-    // ObjStr_Item = 12, // does not work?
+    // Item = 12, // does not work?
 
     // ActStr
-    ActStr_Trait = 0,
-    ActStr_Action = 1,
-    // ActStr_Item = 2, // does not work?
-    // ActStr_EventItem = 3, // does not work?
-    ActStr_EventAction = 4,
-    // ActStr_EObjName = 5, // does not work?
-    ActStr_GeneralAction = 5,
-    ActStr_BuddyAction = 6,
-    ActStr_MainCommand = 7,
-    // ActStr_Companion = 8, // unresolved, use ObjStr_Companion
-    ActStr_CraftAction = 9,
-    ActStr_Action2 = 10,
-    ActStr_PetAction = 11,
-    ActStr_CompanyAction = 12,
-    ActStr_Mount = 13,
+    Trait = 0,
+    Action = 1,
+    // Item = 2, // does not work?
+    // EventItem = 3, // does not work?
+    EventAction = 4,
+    // EObjName = 5, // does not work?
+    GeneralAction = 5,
+    BuddyAction = 6,
+    MainCommand = 7,
+    // Companion = 8, // unresolved, use Companion
+    CraftAction = 9,
+    Action2 = 10,
+    PetAction = 11,
+    CompanyAction = 12,
+    Mount = 13,
     // 14-18 unused
-    ActStr_BgcArmyAction = 19,
-    ActStr_Ornament = 20,
+    BgcArmyAction = 19,
+    Ornament = 20,
 }
