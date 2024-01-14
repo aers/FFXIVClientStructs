@@ -35,9 +35,14 @@ public unsafe partial struct RaptureTextModule {
     [MemberFunction("E8 ?? ?? ?? ?? 4C 8B C0 48 8B 4D 88")]
     public partial byte* FormatTimeSpan(uint seconds, bool alternativeMinutesGlyph = false);
 
+    /// <remarks> Singular only. The usage of intParam2 is unknown. </remarks>
+    /// <returns>
+    /// A pointer to a null terminated string containing the formatted name.<br/>
+    /// It was observed, that it can return a nullptr when the excel page was not loaded. Try calling it again in subsequent frames.
+    /// </returns>
     [MemberFunction("E9 ?? ?? ?? ?? 48 8D 47 30")]
     public static partial byte* FormatName(NameFormatterPlaceholder placeholder, uint id, NameFormatterIdConverter idConverter, int intParam2 = 1);
-    
+
     public static byte* GetItemName(uint id, int intParam2 = 1)
         => FormatName(NameFormatterPlaceholder.Item, id, NameFormatterIdConverter.None, intParam2);
 
@@ -98,15 +103,13 @@ public unsafe partial struct RaptureTextModule {
     public static byte* GetOrnamentName(uint id, int intParam2 = 1)
         => FormatName(NameFormatterPlaceholder.ActStr, id, NameFormatterIdConverter.ActStr_Ornament, intParam2);
 
-    public enum NameFormatterPlaceholder : int
-    {
+    public enum NameFormatterPlaceholder : int {
         ObjStr = 0,
         Item = 1,   // bypasses IdConverter
         ActStr = 2,
     }
 
-    public enum NameFormatterIdConverter : uint
-    {
+    public enum NameFormatterIdConverter : uint {
         None = 0,
 
         // ObjStr
