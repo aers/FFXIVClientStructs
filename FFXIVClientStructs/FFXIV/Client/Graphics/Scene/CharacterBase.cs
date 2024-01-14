@@ -3,6 +3,7 @@ using FFXIVClientStructs.FFXIV.Client.Game.Character;
 using FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
 using FFXIVClientStructs.FFXIV.Client.Graphics.Physics;
 using FFXIVClientStructs.FFXIV.Client.Graphics.Render;
+using FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 using FFXIVClientStructs.FFXIV.Common.Math;
 
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
@@ -89,6 +90,12 @@ public unsafe partial struct CharacterBase {
 
     [MemberFunction("E8 ?? ?? ?? ?? 40 F6 C7 01 74 3A 40 F6 C7 04 75 27 48 85 DB 74 2F 48 8B 05 ?? ?? ?? ?? 48 8B D3 48 8B 48 30")]
     public partial void Destroy();
+
+    [MemberFunction("40 55 56 41 56 48 83 EC ?? 80 BA")]
+    public partial Texture* PrepareColorTable(MaterialResourceHandle* material, byte stainId); // aka PrepareColorSet
+
+    [MemberFunction("40 55 56 41 56 48 83 EC ?? 80 BA")]
+    public partial void ReadStainingTemplate(MaterialResourceHandle* material, byte stainId, Half* colorTable);
 
     [VirtualFunction(50)]
     public partial ModelType GetModelType();
