@@ -94,7 +94,7 @@ public unsafe partial struct CharacterBase {
     [MemberFunction("40 55 56 41 56 48 83 EC ?? 80 BA")]
     public partial Texture* PrepareColorTable(MaterialResourceHandle* material, byte stainId); // aka PrepareColorSet
 
-    [MemberFunction("40 55 56 41 56 48 83 EC ?? 80 BA")]
+    [MemberFunction("E8 ?? ?? ?? ?? 49 8B DF 48 8B 0D")]
     public partial void ReadStainingTemplate(MaterialResourceHandle* material, byte stainId, Half* colorTable);
 
     [VirtualFunction(50)]
