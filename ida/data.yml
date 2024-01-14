@@ -5220,6 +5220,7 @@ classes:
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
       0x14144E940: ctor
+      0x14144EA80: SaveActions
   Client::UI::Misc::TofuModule:
     vtbls:
       - ea: 0x141A1BC88

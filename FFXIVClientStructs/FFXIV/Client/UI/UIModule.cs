@@ -152,6 +152,9 @@ public unsafe partial struct UIModule {
     [VirtualFunction(58)]
     public partial BannerModule* GetBannerModule();
 
+    [VirtualFunction(62)]
+    public partial VVDActionModule* GetVVDActionModule();
+
     [VirtualFunction(65)]
     public partial UIInputData* GetUIInputData();
 
