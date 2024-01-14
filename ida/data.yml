@@ -4965,6 +4965,7 @@ classes:
       44: GetEmjModule
       45: GetAozNoteModule
       47: GetAchievementListModule
+      48: GetGroupPoseModule
       55: GetInputTimerModule
       57: GetRetainerCommentModule
       58: GetBannerModule
@@ -5138,6 +5139,14 @@ classes:
       0x1406C4FE0: RemoveFromWatchlist
       0x1406C5090: IsOnWatchlist
       0x1406C50C0: IsWatchlistFull
+  Client::UI::Misc::GroupPoseModule:
+    vtbls:
+      - ea: 0x141A1CAB8
+        base: Client::UI::Misc::UserFileManager::UserFileEvent
+    funcs:
+      0x1406C5130: ctor
+      0x1406C52D0: SaveCameraSettings
+      0x1406C5350: SaveLightingSettings
   Client::System::Crypt::SimpleString:
     vtbls:
       - ea: 0x141A16880

@@ -137,6 +137,9 @@ public unsafe partial struct UIModule {
     [VirtualFunction(47)]
     public partial AchievementListModule* GetAchievementListModule();
 
+    [VirtualFunction(48)]
+    public partial GroupPoseModule* GetGroupPoseModule();
+
     [VirtualFunction(49)]
     public partial FieldMarkerModule* GetFieldMarkerModule();
 
