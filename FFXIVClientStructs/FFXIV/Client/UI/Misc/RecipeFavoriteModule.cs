@@ -1,3 +1,4 @@
+using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Client.UI.Misc.UserFileManager;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
@@ -7,6 +8,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 // ctor "E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 49 8B D4 E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 49 8B D4 E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? E8"
 [StructLayout(LayoutKind.Explicit, Size = 0x188)]
 public unsafe partial struct RecipeFavoriteModule {
+    public static RecipeFavoriteModule* Instance() => Framework.Instance()->GetUiModule()->GetRecipeFavoriteModule();
+
     [FieldOffset(0)] public UserFileEvent UserFileEvent;
 
     [FixedSizeArray<CraftingTypeEntry>(8)]
