@@ -44,6 +44,9 @@ public unsafe partial struct UIModule {
     [VirtualFunction(7)]
     public partial RaptureAtkModule* GetRaptureAtkModule();
 
+    [VirtualFunction(8)]
+    internal partial RaptureAtkModule* GetRaptureAtkModule2();
+
     [VirtualFunction(9)]
     public partial RaptureShellModule* GetRaptureShellModule();
 
@@ -89,11 +92,20 @@ public unsafe partial struct UIModule {
     [VirtualFunction(23)]
     public partial void* GetFlagStatusModule();
 
+    [VirtualFunction(24)]
+    public partial RecipeFavoriteModule* GetRecipeFavoriteModule();
+
     [VirtualFunction(26)]
     public partial RaptureUiDataModule* GetRaptureUiDataModule();
 
+    [VirtualFunction(29)]
+    public partial GoldSaucerModule* GetGoldSaucerModule();
+
     [VirtualFunction(30)]
     public partial void* GetRaptureTeleportHistory();
+
+    [VirtualFunction(31)]
+    public partial ItemContextCustomizeModule* GetItemContextCustomizeModule();
 
     [VirtualFunction(32)]
     public partial RecommendEquipModule* GetRecommendEquipModule();

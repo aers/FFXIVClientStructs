@@ -1,3 +1,5 @@
+using FFXIVClientStructs.FFXIV.Client.System.Memory;
+
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
 //ctor i guess 40 53 48 83 EC 20 48 8B D9 45 33 C9 B9
@@ -89,10 +91,20 @@ public unsafe partial struct InventoryContainer {
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x38)]
-public unsafe struct InventoryItem {
+public unsafe partial struct InventoryItem : ICreatable {
     [FieldOffset(0x00)] public InventoryType Container;
     [FieldOffset(0x04)] public short Slot;
+    /// <summary>
+    /// Indicates whether this InventoryItem is symbolic, serving as a link to another InventoryItem<br/>
+    /// identified by the <see cref="LinkedItemSlot"/> and <see cref="LinkedInventoryType"/>.
+    /// </summary>
+    [FieldOffset(0x06)] public bool IsSymbolic;
+    /// <remarks> Only used if <see cref="IsSymbolic"/> is <c>false</c>. </remarks>
     [FieldOffset(0x08)] public uint ItemID;
+    /// <remarks> Only used if <see cref="IsSymbolic"/> is <c>true</c>. </remarks>
+    [FieldOffset(0x08)] public ushort LinkedItemSlot;
+    /// <remarks> Only used if <see cref="IsSymbolic"/> is <c>true</c>. </remarks>
+    [FieldOffset(0x0A)] public ushort LinkedInventoryType;
     [FieldOffset(0x0C)] public uint Quantity;
     [FieldOffset(0x10)] public ushort Spiritbond;
     [FieldOffset(0x12)] public ushort Condition;
@@ -111,6 +123,66 @@ public unsafe struct InventoryItem {
         Relic = 4,
         Collectable = 8
     }
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 45 A8")]
+    public partial void Ctor();
+
+    [MemberFunction("8B 42 08 4C 8B C1")]
+    public partial bool Equals(InventoryItem* other);
+
+    /// <summary>Copies the values from the other InventoryItem and, if it's symbolic, resolves its linked item.</summary>
+    [MemberFunction("E9 ?? ?? ?? ?? 48 8D 4B 48")]
+    public partial bool Copy(InventoryItem* other);
+
+    /// <summary>
+    /// Resolves a symbolic InventoryItem, returning a pointer to the linked InventoryItem or to itself if not symbolic.
+    /// </summary>
+    /// <remarks>
+    /// If the resolved InventoryItem is also symbolic, it will NOT resolve this one too.<br/>
+    /// Instead, this function must be called in a loop until the original InventoryItem is found (<see cref="IsSymbolic"/> == <c>false</c>).
+    /// </remarks>
+    [MemberFunction("E8 ?? ?? ?? ?? 38 58 06")]
+    public partial InventoryItem* GetLinkedItem();
+
+    /// <summary>Gets the item id from the original InventoryItem or itself if not symbolic.</summary>
+    [MemberFunction("E8 ?? ?? ?? ?? 41 3B 06")]
+    public partial uint GetItemId();
+
+    /// <summary>Gets the quantity from the original InventoryItem or itself if not symbolic.</summary>
+    [MemberFunction("E8 ?? ?? ?? ?? 2B C6")]
+    public partial uint GetQuantity();
+
+    /// <summary>Gets the spiritbond value from the original InventoryItem or itself if not symbolic.</summary>
+    [MemberFunction("E8 ?? ?? ?? ?? 66 41 3B 85")]
+    public partial ushort GetSpiritbond();
+
+    /// <summary>Gets the condition from the original InventoryItem or itself if not symbolic.</summary>
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B7 F0 EB 04")]
+    public partial ushort GetCondition();
+
+    /// <summary>Gets the crafter's content id from the original InventoryItem or itself if not symbolic.</summary>
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B D8 EB 04")]
+    public partial ulong GetCrafterContentId();
+
+    /// <summary>Gets the stain from the original InventoryItem or itself if not symbolic.</summary>
+    [MemberFunction("E8 ?? ?? ?? ?? 3A 43 08")]
+    public partial byte GetStain();
+
+    /// <summary>Gets the glamour id from the original InventoryItem or itself if not symbolic.</summary>
+    [MemberFunction("E9 ?? ?? ?? ?? 8B 43 30")]
+    public partial uint GetGlamourId();
+
+    /// <summary>Gets the materia id from the specified slot of the original InventoryItem or itself if not symbolic.</summary>
+    [MemberFunction("E8 ?? ?? ?? ?? EB 10 32 C0")]
+    public partial ushort GetMateriaId(byte materiaSlot);
+
+    /// <summary>Gets the materia grade from the specified slot of the original InventoryItem or itself if not symbolic.</summary>
+    [MemberFunction("E8 ?? ?? ?? ?? 42 3A 04 33")]
+    public partial byte GetMateriaGrade(byte materiaSlot);
+
+    /// <summary>Gets the materia count from the original InventoryItem or itself if not symbolic.</summary>
+    [MemberFunction("E8 ?? ?? ?? ?? 3A 47 67")]
+    public partial byte GetMateriaCount();
 }
 
 public enum InventoryType : uint {
@@ -123,11 +195,17 @@ public enum InventoryType : uint {
 
     Currency = 2000,
     Crystals = 2001,
+    MailEdit = 2002, // used by LetterEditor
     Mail = 2003,
     KeyItems = 2004,
     HandIn = 2005,
+    Unknown2006 = 2006,
     DamagedGear = 2007,
+    Unknown2008 = 2008,
     Examine = 2009,
+    Reclaim = 2010, // LegacyItemStorage, HousingWithdrawStorage
+    HousingExteriorAppearanceEdit = 2011,
+    HousingInteriorAppearanceEdit = 2012,
     ReconstructionBuyback = 2013, // Doman Enclave Reconstruction Reclamation Box
 
     ArmoryOffHand = 3200,
