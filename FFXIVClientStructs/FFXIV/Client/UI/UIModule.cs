@@ -122,6 +122,9 @@ public unsafe partial struct UIModule {
     [VirtualFunction(38)]
     public partial UI3DModule* GetUI3DModule();
 
+    [VirtualFunction(41)]
+    public partial EmoteHistoryModule* GetEmoteHistoryModule();
+
     [VirtualFunction(49)]
     public partial FieldMarkerModule* GetFieldMarkerModule();
 
