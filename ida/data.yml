@@ -4956,6 +4956,7 @@ classes:
       30: GetRaptureTeleportHistory
       31: GetItemContextCustomizeModule
       32: GetRecommendEquipModule
+      33: GetPvpSetModule
       34: GetInfoModule
       36: GetAgentModule
       38: GetUI3DModule
@@ -4964,9 +4965,10 @@ classes:
       43: GetMountListModule
       44: GetEmjModule
       45: GetAozNoteModule
-      46: GetCrossworldLinkShellModule
+      46: GetCrossWorldLinkShellModule
       47: GetAchievementListModule
       48: GetGroupPoseModule
+      49: GetFieldMarkerModule
       51: GetMycNoteModule
       52: GetOrnamentListModule
       53: GetMycItemModule
@@ -5139,7 +5141,7 @@ classes:
       0x1406C2D50: SetActiveSetCustomName
       0x1406C2DB0: LoadActiveSetHotBars
       0x1406C2EA0: SaveActiveSetHotBars
-  Client::UI::Misc::CrossworldLinkShellModule:
+  Client::UI::Misc::CrossWorldLinkShellModule:
     vtbls:
       - ea: 0x141A1C9E8
         base: Client::UI::Misc::UserFileManager::UserFileEvent
