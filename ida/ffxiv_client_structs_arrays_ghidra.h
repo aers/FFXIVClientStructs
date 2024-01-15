@@ -348,6 +348,8 @@ struct Client_Network_NetworkModule;
 struct Client_Network_NetworkModulePacketReceiverCallback;
 struct Client_Network_PacketDispatcher;
 struct Client_Network_NetworkModuleProxy;
+struct Client_Sound_SoundManager;
+struct Client_System_Threading_Thread;
 struct Client_System_Configuration_DevConfig;
 struct Common_Configuration_DevConfig;
 struct Common_Configuration_ConfigBase;
@@ -397,7 +399,6 @@ struct Client_System_Scheduler_Base_SchedulerTimeline_SchedulerTimelineVTable;
 struct Client_System_Scheduler_Resource_SchedulerResource;
 struct Client_System_Scheduler_Resource_SchedulerResource_ResourceName;
 struct Client_System_Scheduler_Resource_SchedulerResourceManagement;
-struct Client_System_Threading_Thread;
 struct Client_System_Threading_ThreadManager;
 struct Client_UI_ActionBarSlot;
 struct Client_UI_ActionInfo;
@@ -1001,9 +1002,13 @@ struct Client_UI_Misc_ExportedPortraitData;
 struct Client_UI_Misc_FieldMarkerModule;
 struct Client_UI_Misc_FieldMarkerPreset;
 struct Client_UI_Misc_GamePresetPoint;
+struct Client_UI_Misc_FlagStatusModule;
+struct Client_UI_Misc_GoldSaucerModule;
+struct Client_UI_Misc_GoldSaucerModule_TripleTriadDeck;
 struct Client_UI_Misc_HotBarUiIntermediate;
 struct Client_UI_Misc_InputTimerModule;
 struct Client_UI_Misc_InputTimerModule_InputTimerData;
+struct Client_UI_Misc_ItemContextCustomizeModule;
 struct Client_UI_Misc_ItemFinderModule;
 struct Client_UI_Misc_ItemFinderModuleResult;
 struct Client_UI_Misc_ItemFinderModuleRetainerResult;
@@ -1017,12 +1022,16 @@ struct StdMap_Nodeunsignedint64ClientUIMiscItemOrderModuleSorterPtr;
 struct StdPairunsignedint64ClientUIMiscItemOrderModuleSorterPtr;
 struct Client_UI_Misc_ItemOrderModuleSorterPreviousOrderEntry;
 struct Client_UI_Misc_ItemOrderModuleSorterSortFunctionEntry;
+struct Client_UI_Misc_LetterDataModule;
+struct Client_UI_Misc_LogFilterConfig;
 struct Client_UI_Misc_LogMessageSource;
 struct Client_UI_Misc_PronounModule;
 struct Component_Text_TextChecker;
 struct Component_Text_MacroDecoder;
 struct StdVectorint64;
 struct Client_UI_Misc_PronounModule_PronounModuleVTable;
+struct Client_UI_Misc_PvpSetModule;
+struct Client_UI_Misc_PvpSetModule_AdditionalPvpActions;
 struct Client_UI_Misc_RaptureGearsetModule;
 struct Client_UI_Misc_RaptureGearsetModule_GearsetEntry;
 struct Client_UI_Misc_RaptureGearsetModule_GearsetItem;
@@ -1035,6 +1044,7 @@ struct StdVectorint32;
 struct StdVectorByte;
 struct Client_UI_Misc_RaptureLogModuleTab;
 struct Client_UI_Misc_RaptureMacroModule;
+struct Client_UI_Misc_RaptureTeleportHistory;
 struct Client_UI_Misc_RaptureTextModule;
 struct Component_Text_TextModule;
 struct Component_Text_Localize;
@@ -1047,9 +1057,13 @@ struct StdMap_NodeClientSystemStringUtf8StringComponentTextMacroEncoderMacroCode
 struct StdPairClientSystemStringUtf8StringComponentTextMacroEncoderMacroCodeDescription;
 struct Component_Text_MacroEncoder_MacroCodeDescription;
 struct Client_UI_Misc_RaptureUiDataModule;
+struct Client_UI_Misc_RecipeFavoriteModule;
+struct Client_UI_Misc_RecipeFavoriteModule_CraftingTypeEntry;
+struct Client_UI_Misc_RecipeFavoriteModule_RecipeEntry;
 struct Client_UI_Misc_RecommendEquipModule;
 struct Client_UI_Misc_RetainerCommentModule;
 struct Client_UI_Misc_RetainerCommentModule_RetainerComment;
+struct Client_UI_Misc_RetainerTaskDataModule;
 struct Client_UI_Misc_ScreenLog;
 struct Client_UI_Misc_UiSavePackModule;
 struct Client_UI_Misc_UiSavePackModule_UiSavePackModuleVTable;
@@ -1081,6 +1095,7 @@ struct Client_UI_UI3DModule_MemberInfo;
 struct Client_UI_UI3DModule_UnkInfo;
 struct Client_UI_UIClipboard;
 struct Client_UI_UIInputData;
+struct Client_UI_UIInputModule;
 struct Client_UI_UIModule;
 struct Client_UI_UIModule_UIModuleVTable;
 struct Component_Excel_ExcelModuleInterface;
@@ -1237,6 +1252,18 @@ struct Component_GUI_AtkUnitBase_AtkUnitBaseVTable;
 struct Component_GUI_SimpleTweenAnimation;
 struct Component_GUI_SimpleTweenValue;
 struct Component_GUI_ULD_AtkUldComponentDataTab;
+struct Component_SteamApi_Callbacks_AuthSessionTicketResponseCallback;
+struct Component_SteamApi_SteamCallbackBase;
+struct Component_SteamApi_Callbacks_AuthSessionTicketResponseCallback_AuthSessionTicketResponseCallbackVTable;
+struct Component_SteamApi_SteamTypes_AuthSessionTicketResponse;
+struct Component_SteamApi_Callbacks_FloatingGamepadTextInputDismissedCallback;
+struct Component_SteamApi_Callbacks_FloatingGamepadTextInputDismissedCallback_FloatingGamepadTextInputDismissedCallbackVTable;
+struct Component_SteamApi_Callbacks_GamepadTextInputDismissedCallback;
+struct Component_SteamApi_Callbacks_GamepadTextInputDismissedCallback_GamepadTextInputDismissedCallbackVTable;
+struct Component_SteamApi_SteamTypes_GamepadTextInputDismissedData;
+struct Component_SteamApi_SteamApi;
+struct Component_SteamApi_SteamTypes_CSteamId;
+struct Component_SteamApi_SteamCallbackBase_SteamCallbackBaseVTable;
 struct Component_Text_TextModule_TextModuleVTable;
 struct Shader_CameraLight;
 struct Shader_CameraParameter;
@@ -1651,11 +1678,17 @@ enum Client_Game_InventoryType /* Size=0x4 */
     EquippedItems = 1000,
     Currency = 2000,
     Crystals = 2001,
+    MailEdit = 2002,
     Mail = 2003,
     KeyItems = 2004,
     HandIn = 2005,
+    Unknown2006 = 2006,
     DamagedGear = 2007,
+    Unknown2008 = 2008,
     Examine = 2009,
+    Reclaim = 2010,
+    HousingExteriorAppearanceEdit = 2011,
+    HousingInteriorAppearanceEdit = 2012,
     ReconstructionBuyback = 2013,
     ArmoryOffHand = 3200,
     ArmoryHead = 3201,
@@ -2002,6 +2035,23 @@ enum Client_Graphics_Scene_ObjectType /* Size=0x4 */
     EnvSpace = 7,
     EnvLocation = 8,
     Unk_Type9 = 9
+};
+
+enum Client_Sound_SoundManager_SoundChannel /* Size=0x4 */
+{
+    Bgm1 = 1,
+    Se1 = 2,
+    Voice = 3,
+    System = 4,
+    Env1 = 5,
+    Se2 = 6,
+    Se3 = 7,
+    Bgm2 = 8,
+    Bgm3 = 9,
+    Env2 = 11,
+    Env3 = 12,
+    Bgm4 = 16,
+    Perform = 17
 };
 
 enum Client_System_File_FileMode /* Size=0x4 */
@@ -2426,6 +2476,7 @@ enum Client_UI_Agent_AgentId /* Size=0x4 */
     PerformanceGamepadGuide = 358,
     PerformanceReadyCheck = 360,
     HwdAetherGauge = 364,
+    HwdGathererInspection = 365,
     HwdScore = 366,
     HwdMonument = 368,
     McGuffin = 369,
@@ -4441,6 +4492,12 @@ enum Component_GUI_ValueType /* Size=0x4 */
     Texture = 10,
     AllocatedString = 38,
     AllocatedVector = 41
+};
+
+enum Component_SteamApi_SteamCallbackBase_SteamCallbackFlags /* Size=0x1 */
+{
+    Registered = 1,
+    GameServer = 2
 };
 
 
@@ -7002,8 +7059,15 @@ __unaligned struct Client_Game_InventoryItem /* Size=0x38 */
 {
     /* 0x00 */ Client_Game_InventoryType Container;
     /* 0x04 */ __int16 Slot;
-    /*      */ byte _gap_0x6[0x2];
+    /* 0x06 */ bool IsSymbolic;
+    union {
     /* 0x08 */ unsigned __int32 ItemID;
+    struct {
+    /* 0x08 */ unsigned __int16 LinkedItemSlot;
+    /* 0x0A */ unsigned __int16 LinkedInventoryType;
+    } _union_struct_0x8;
+    } _union_0x8;
+    /*      */ byte _gap_0xB;
     /* 0x0C */ unsigned __int32 Quantity;
     /* 0x10 */ unsigned __int16 Spiritbond;
     /* 0x12 */ unsigned __int16 Condition;
@@ -8617,9 +8681,10 @@ __unaligned struct Client_Game_UI_UIState /* Size=0x17D10 */
     /* 0x17A12 */ byte ChocoboTaxiStandsBitmask[0xB];
     /*         */ byte _gap_0x17A1D;
     /* 0x17A1E */ byte CutsceneSeenBitmask[0x9F];
-    /*         */ byte _gap_0x17ABD;
-    /*         */ byte _gap_0x17ABE[0x2];
-    /*         */ byte _gap_0x17AC0[0x250];
+    /* 0x17ABD */ byte UnlockedTripleTriadCardsBitmask[0x33];
+    /*         */ byte _gap_0x17AF0[0x8];
+    /* 0x17AF8 */ unsigned __int64 UnlockedTripleTriadCardsCount;
+    /*         */ byte _gap_0x17B00[0x210];
 };
 
 __unaligned struct Client_Graphics_Animation_AnimationResourceHandle /* Size=0x0 */
@@ -9715,6 +9780,48 @@ __unaligned struct Client_Network_NetworkModuleProxy /* Size=0x20 */
     /* 0x10 */ Client_Network_NetworkModulePacketReceiverCallback PacketReceiverCallback;
 };
 
+__unaligned struct Client_System_Threading_Thread /* Size=0x28 */
+{
+    /* 0x00 */ byte** args;
+    /* 0x08 */ __int64 EventHandle;
+    /* 0x10 */ __int64 ThreadHandle;
+    /* 0x18 */ __int32 ThreadId;
+    /* 0x1C */ __int32 AffinityMask;
+    /*      */ byte _gap_0x20[0x8];
+};
+
+__unaligned struct Client_Sound_SoundManager /* Size=0x1C88 */
+{
+    /* 0x0000 */ __int64 ResourceEventListener;
+    /* 0x0008 */ Client_System_Threading_Thread Thread;
+    /*        */ byte _gap_0x30;
+    /* 0x0031 */ bool Disabled;
+    /*        */ byte _gap_0x32[0x2];
+    /* 0x0034 */ float MasterVolume;
+    /* 0x0038 */ float ActiveVolume;
+    /* 0x003C */ float Volume[0x13];
+    /* 0x0088 */ float UnkVolume2[0x13];
+    /* 0x00D4 */ float UnkVolume3[0x13];
+    /* 0x0120 */ float UnkVolume4[0x13];
+    /* 0x016C */ bool ChannelMutedArray[0x13];
+    /* 0x017F */ bool ChannelAlwayOn[0x13];
+    /*        */ byte _gap_0x192[0x2];
+    /*        */ byte _gap_0x194[0x4];
+    /*        */ byte _gap_0x198[0x30];
+    /*        */ byte _gap_0x1C8;
+    /* 0x01C9 */ bool MasterEnabled;
+    /* 0x01CA */ bool IsSoundAlways;
+    /* 0x01CB */ bool SoundEnabled;
+    /* 0x01CC */ bool WindowInactive;
+    /*        */ byte _gap_0x1CD;
+    /*        */ byte _gap_0x1CE[0x2];
+    /*        */ byte _gap_0x1D0[0xD0];
+    /* 0x02A0 */ __int64 CriticalSection;
+    /*        */ byte _gap_0x2A8[0x20];
+    /* 0x02C8 */ __int64 EventHandle;
+    /*        */ byte _gap_0x2D0[0x19B8];
+};
+
 __unaligned struct Common_Configuration_ConfigBase /* Size=0x110 */
 {
     /* 0x000 */ void* vtbl;
@@ -9754,8 +9861,8 @@ __unaligned struct Client_System_Configuration_SystemConfig /* Size=0x450 */
 
 __unaligned struct Client_System_File_FileAccessPath /* Size=0x210 */
 {
-    /* 0x000 */ char Buffer[0x104];
-    /* 0x208 */ char* LongStringPtr;
+    /* 0x000 */ wchar_t Buffer[0x104];
+    /* 0x208 */ wchar_t* LongStringPtr;
 };
 
 __unaligned struct Client_System_File_FileDescriptor /* Size=0x278 */
@@ -9916,10 +10023,18 @@ __unaligned struct Client_System_Framework_Framework /* Size=0x35C8 */
     /*        */ byte _gap_0x2B58[0x8];
     /* 0x2B60 */ Client_UI_UIModule* UIModule;
     /* 0x2B68 */ Client_UI_UIClipboard* UIClipboard;
-    /*        */ byte _gap_0x2B70[0x58];
+    /*        */ byte _gap_0x2B70[0x8];
+    /* 0x2B78 */ Client_System_Framework_EnvironmentManager* EnvironmentManager;
+    /* 0x2B80 */ Client_Sound_SoundManager* SoundManager;
+    /*        */ byte _gap_0x2B88[0x40];
     /* 0x2BC8 */ Common_Lua_LuaState LuaState;
     /* 0x2BF0 */ Client_System_Framework_GameVersion GameVersion;
-    /*        */ byte _gap_0x34F0[0xD0];
+    /*        */ byte _gap_0x34F0[0xC0];
+    /*        */ byte _gap_0x35B0[0x4];
+    /* 0x35B4 */ bool IsSteamGame;
+    /*        */ byte _gap_0x35B5;
+    /*        */ byte _gap_0x35B6[0x2];
+    /* 0x35B8 */ Component_SteamApi_SteamApi* SteamApi;
     /* 0x35C0 */ __int64 SteamApiLibraryHandle;
 };
 
@@ -9938,7 +10053,7 @@ __unaligned struct Client_System_Framework_GameWindow /* Size=0x0 */
     /* 0x58 */ __int32 MinWidth;
     /* 0x5C */ __int32 MinHeight;
     /*     */ byte _gap_0x60[0x20];
-    /* 0x80 */ char Username[0x101];
+    /* 0x80 */ wchar_t Username[0x101];
 };
 
 __unaligned struct Client_System_Framework_RootTask /* Size=0x78 */
@@ -10299,16 +10414,6 @@ __unaligned struct Client_System_Scheduler_Resource_SchedulerResourceManagement 
     /* 0x10 */ void* Unknown;
     /* 0x18 */ unsigned __int64 NumResources;
     /*      */ byte _gap_0x20[0x38];
-};
-
-__unaligned struct Client_System_Threading_Thread /* Size=0x28 */
-{
-    /* 0x00 */ byte** args;
-    /* 0x08 */ __int64 EventHandle;
-    /* 0x10 */ __int64 ThreadHandle;
-    /* 0x18 */ __int32 ThreadId;
-    /* 0x1C */ __int32 AffinityMask;
-    /*      */ byte _gap_0x20[0x8];
 };
 
 __unaligned struct Client_System_Threading_ThreadManager /* Size=0x1048 */
@@ -10896,7 +11001,7 @@ __unaligned struct Client_UI_AddonAOZNotebook_SpellbookBlock /* Size=0x48 */
     /* 0x20 */ Component_GUI_AtkTextNode* AtkTextNode;
     /* 0x28 */ Component_GUI_AtkResNode* AtkResNode1;
     /* 0x30 */ Component_GUI_AtkResNode* AtkResNode2;
-    /* 0x38 */ char* Name;
+    /* 0x38 */ wchar_t* Name;
     /* 0x40 */ unsigned __int32 ActionID;
     /*      */ byte _gap_0x44[0x4];
 };
@@ -10905,7 +11010,7 @@ __unaligned struct Client_UI_AddonAOZNotebook_ActiveActions /* Size=0x20 */
 {
     /* 0x00 */ Component_GUI_AtkComponentDragDrop* AtkComponentDragDrop;
     /* 0x08 */ Component_GUI_AtkTextNode* AtkTextNode;
-    /* 0x10 */ char* Name;
+    /* 0x10 */ wchar_t* Name;
     /* 0x18 */ __int32 ActionID;
     /*      */ byte _gap_0x1C[0x4];
 };
@@ -14139,41 +14244,41 @@ __unaligned struct Client_UI_AddonRecipeNote /* Size=0x3B90 */
     /* 0x0810 */ Component_GUI_AtkComponentTextInput* Unk810;
     /* 0x0818 */ Client_UI_AddonRecipeNote* this818;
     /*        */ byte _gap_0x820[0x330];
-    /* 0x0B50 */ char* UnkB50;
+    /* 0x0B50 */ wchar_t* UnkB50;
     /*        */ byte _gap_0xB58[0x8];
-    /* 0x0B60 */ char* UnkB60;
+    /* 0x0B60 */ wchar_t* UnkB60;
     /*        */ byte _gap_0xB68[0x8];
-    /* 0x0B70 */ char* UnkB70;
+    /* 0x0B70 */ wchar_t* UnkB70;
     /*        */ byte _gap_0xB78[0x8];
-    /* 0x0B80 */ char* UnkB80;
+    /* 0x0B80 */ wchar_t* UnkB80;
     /*        */ byte _gap_0xB88[0x8];
-    /* 0x0B90 */ char* UnkB90;
+    /* 0x0B90 */ wchar_t* UnkB90;
     /*        */ byte _gap_0xB98[0x8];
-    /* 0x0BA0 */ char* UnkBA0;
+    /* 0x0BA0 */ wchar_t* UnkBA0;
     /*        */ byte _gap_0xBA8[0x8];
-    /* 0x0BB0 */ char* UnkBB0;
+    /* 0x0BB0 */ wchar_t* UnkBB0;
     /*        */ byte _gap_0xBB8[0x8];
-    /* 0x0BC0 */ char* UnkBC0;
+    /* 0x0BC0 */ wchar_t* UnkBC0;
     /*        */ byte _gap_0xBC8[0x8];
-    /* 0x0BD0 */ char* UnkBD0;
+    /* 0x0BD0 */ wchar_t* UnkBD0;
     /*        */ byte _gap_0xBD8[0x8];
-    /* 0x0BE0 */ char* UnkBE0;
+    /* 0x0BE0 */ wchar_t* UnkBE0;
     /*        */ byte _gap_0xBE8[0x8];
-    /* 0x0BF0 */ char* UnkBF0;
+    /* 0x0BF0 */ wchar_t* UnkBF0;
     /*        */ byte _gap_0xBF8[0x8];
-    /* 0x0C00 */ char* UnkC00;
+    /* 0x0C00 */ wchar_t* UnkC00;
     /*        */ byte _gap_0xC08[0x8];
-    /* 0x0C10 */ char* UnkC10;
+    /* 0x0C10 */ wchar_t* UnkC10;
     /*        */ byte _gap_0xC18[0x1520];
-    /* 0x2138 */ char* Unk2138;
-    /* 0x2140 */ char* Unk2140;
-    /* 0x2148 */ char* Unk2148;
-    /* 0x2150 */ char* Unk2150;
-    /* 0x2158 */ char* Unk2158;
-    /* 0x2160 */ char* Unk2160;
-    /* 0x2168 */ char* Unk2168;
-    /* 0x2170 */ char* Unk2170;
-    /* 0x2178 */ char* Unk2178;
+    /* 0x2138 */ wchar_t* Unk2138;
+    /* 0x2140 */ wchar_t* Unk2140;
+    /* 0x2148 */ wchar_t* Unk2148;
+    /* 0x2150 */ wchar_t* Unk2150;
+    /* 0x2158 */ wchar_t* Unk2158;
+    /* 0x2160 */ wchar_t* Unk2160;
+    /* 0x2168 */ wchar_t* Unk2168;
+    /* 0x2170 */ wchar_t* Unk2170;
+    /* 0x2178 */ wchar_t* Unk2178;
     /*        */ byte _gap_0x2180[0x1A10];
 };
 
@@ -19217,6 +19322,27 @@ __unaligned struct Client_UI_Misc_FieldMarkerModule /* Size=0xC78 */
     /*       */ byte _gap_0xC70[0x8];
 };
 
+__unaligned struct Client_UI_Misc_FlagStatusModule /* Size=0xB0 */
+{
+    /* 0x00 */ Client_UI_Misc_UserFileManager_UserFileEvent UserFileEvent;
+    /*      */ byte _gap_0x40[0x70];
+};
+
+__unaligned struct Client_UI_Misc_GoldSaucerModule_TripleTriadDeck /* Size=0x3A */
+{
+    /* 0x00 */ byte NameBytes[0x30];
+    /* 0x30 */ unsigned __int16 Cards[0x5];
+};
+
+__unaligned struct Client_UI_Misc_GoldSaucerModule /* Size=0x2C8 */
+{
+    /* 0x000 */ Client_UI_Misc_UserFileManager_UserFileEvent UserFileEvent;
+    /* 0x040 */ Client_UI_Misc_GoldSaucerModule_TripleTriadDeck Decks[0xA];
+    /* 0x284 */ unsigned __int16 HotbarMinions[0x17];
+    /*       */ byte _gap_0x2B2[0x2];
+    /* 0x2B4 */ unsigned __int16 UnseenCards[0xA];
+};
+
 __unaligned struct Client_UI_Misc_HotBarUiIntermediate /* Size=0x43 */
 {
     /* 0x00 */ Client_System_String_Utf8String* PopUpHelpText;
@@ -19277,6 +19403,14 @@ __unaligned struct Client_UI_Misc_InputTimerModule /* Size=0x4F8 */
     /* 0x05C */ Client_UI_Misc_InputTimerModule_InputTimerData ControllerInputTimers[0x10];
     /* 0x3DC */ Client_UI_Misc_InputTimerModule_InputTimerData MouseInputTimers[0x5];
     /*       */ byte _gap_0x4F4[0x4];
+};
+
+__unaligned struct Client_UI_Misc_ItemContextCustomizeModule /* Size=0x190 */
+{
+    /* 0x000 */ Client_UI_Misc_UserFileManager_UserFileEvent UserFileEvent;
+    /* 0x040 */ byte FirstTier[0x80];
+    /* 0x0C0 */ byte SecondTier[0x80];
+    /*       */ byte _gap_0x140[0x50];
 };
 
 __unaligned struct Client_UI_Misc_ItemFinderModule /* Size=0x11D0 */
@@ -19498,6 +19632,18 @@ __unaligned struct Client_UI_Misc_ItemOrderModuleSorterSortFunctionEntry /* Size
     /*      */ byte _gap_0xC[0x4];
 };
 
+__unaligned struct Client_UI_Misc_LetterDataModule /* Size=0xA48 */
+{
+    /* 0x000 */ Client_UI_Misc_UserFileManager_UserFileEvent UserFileEvent;
+    /*       */ byte _gap_0x40[0xA08];
+};
+
+__unaligned struct Client_UI_Misc_LogFilterConfig /* Size=0x528 */
+{
+    /* 0x000 */ Client_UI_Misc_UserFileManager_UserFileEvent UserFileEvent;
+    /*       */ byte _gap_0x40[0x4E8];
+};
+
 __unaligned struct Client_UI_Misc_LogMessageSource /* Size=0x10 */
 {
     /* 0x00 */ unsigned __int64 ContentId;
@@ -19546,6 +19692,19 @@ __unaligned struct Client_UI_Misc_PronounModule_PronounModuleVTable /* Size=0x0 
 {
     /*     */ __int64 _vf0;
     /* 0x8 */ Client_System_String_Utf8String* (__fastcall *ProcessString)(Client_UI_Misc_PronounModule* a1, Client_System_String_Utf8String* a2, bool a3, __int32 a4);
+};
+
+__unaligned struct Client_UI_Misc_PvpSetModule_AdditionalPvpActions /* Size=0x4 */
+{
+    /* 0x0 */ unsigned __int16 ActionId1;
+    /* 0x2 */ unsigned __int16 ActionId2;
+};
+
+__unaligned struct Client_UI_Misc_PvpSetModule /* Size=0x98 */
+{
+    /* 0x00 */ Client_UI_Misc_UserFileManager_UserFileEvent UserFileEvent;
+    /* 0x40 */ Client_UI_Misc_PvpSetModule_AdditionalPvpActions AdditionalActions[0x14];
+    /*      */ byte _gap_0x90[0x8];
 };
 
 __unaligned struct Client_UI_Misc_RaptureGearsetModule_GearsetItem /* Size=0x1C */
@@ -19680,6 +19839,12 @@ __unaligned struct Client_UI_Misc_RaptureMacroModule /* Size=0x51AA8 */
     /*         */ byte _gap_0x51A98[0x10];
 };
 
+__unaligned struct Client_UI_Misc_RaptureTeleportHistory /* Size=0xC0 */
+{
+    /* 0x00 */ Client_UI_Misc_UserFileManager_UserFileEvent UserFileEvent;
+    /*      */ byte _gap_0x40[0x80];
+};
+
 __unaligned struct StdPairClientSystemStringUtf8Stringint64 /* Size=0x70 */
 {
     /* 0x00 */ Client_System_String_Utf8String Item1;
@@ -19798,35 +19963,41 @@ __unaligned struct Client_UI_Misc_RaptureUiDataModule /* Size=0x5958 */
     /*        */ byte _gap_0x40[0x5918];
 };
 
+__unaligned struct Client_UI_Misc_RecipeFavoriteModule_RecipeEntry /* Size=0x4 */
+{
+    /* 0x0 */ unsigned __int16 RecipeId;
+    /* 0x2 */ bool IsFavorite;
+    /*     */ byte _gap_0x3;
+};
+
+__unaligned struct Client_UI_Misc_RecipeFavoriteModule_CraftingTypeEntry /* Size=0x28 */
+{
+    /* 0x00 */ Client_UI_Misc_RecipeFavoriteModule_RecipeEntry Recipes[0xA];
+};
+
+__unaligned struct Client_UI_Misc_RecipeFavoriteModule /* Size=0x188 */
+{
+    /* 0x000 */ Client_UI_Misc_UserFileManager_UserFileEvent UserFileEvent;
+    /*       */ byte _gap_0x40[0x2];
+    /* 0x042 */ Client_UI_Misc_RecipeFavoriteModule_CraftingTypeEntry CraftingTypes[0x8];
+    /*       */ byte _gap_0x182[0x2];
+    /*       */ byte _gap_0x184[0x4];
+};
+
 __unaligned struct Client_UI_Misc_RecommendEquipModule /* Size=0x80 */
 {
-    /* 0x00 */ unsigned __int32 Unk00;
-    /* 0x04 */ unsigned __int32 SlotCount;
-    /* 0x08 */ Client_Game_InventoryItem* EquippedMainHand;
-    /* 0x10 */ Client_Game_InventoryItem* EquippedOffHand;
-    /* 0x18 */ Client_Game_InventoryItem* EquippedHead;
-    /* 0x20 */ Client_Game_InventoryItem* EquippedBody;
-    /* 0x28 */ Client_Game_InventoryItem* EquippedHands;
-    /* 0x30 */ Client_Game_InventoryItem* EquippedWaist;
-    /* 0x38 */ Client_Game_InventoryItem* EquippedLegs;
-    /* 0x40 */ Client_Game_InventoryItem* EquippedFeet;
-    /* 0x48 */ Client_Game_InventoryItem* EquippedEars;
-    /* 0x50 */ Client_Game_InventoryItem* EquippedNeck;
-    /* 0x58 */ Client_Game_InventoryItem* EquippedWrist;
-    /* 0x60 */ Client_Game_InventoryItem* EquippedLeftRing;
-    /* 0x68 */ Client_Game_InventoryItem* EquippedRightRing;
-    /* 0x70 */ Client_Game_InventoryItem* EquippedSoulCrystal;
-    union {
-    /* 0x78 */ void* Unk00_15;
-    struct {
+    /* 0x00 */ bool IsUpdating;
+    /* 0x01 */ bool IsSetupForDifferentClassJob;
+    /*      */ byte _gap_0x2[0x2];
+    /* 0x04 */ unsigned __int32 CurrentSlotIndex;
+    /* 0x08 */ Client_Game_InventoryItem* RecommendedItems[0xE];
     /* 0x78 */ unsigned __int16 Level;
-    /* 0x7A */ byte Unk7A;
-    /* 0x7B */ byte Unk7B;
+    /* 0x7A */ byte Race;
+    /* 0x7B */ byte Sex;
     /* 0x7C */ byte ClassJob;
-    /* 0x7D */ byte Unk7D;
-    /* 0x7E */ byte Unk7E;
-    } _union_struct_0x78;
-    } _union_0x78;
+    /* 0x7D */ byte GrandCompany;
+    /* 0x7E */ byte PvpRank;
+    /*      */ byte _gap_0x7F;
 };
 
 __unaligned struct Client_UI_Misc_RetainerCommentModule_RetainerComment /* Size=0x88 */
@@ -19844,6 +20015,12 @@ __unaligned struct Client_UI_Misc_RetainerCommentModule /* Size=0x5A0 */
     /*       */ byte _gap_0x40[0x8];
     /* 0x048 */ Client_UI_Misc_RetainerCommentModule_RetainerComment Retainers[0xA];
     /*       */ byte _gap_0x598[0x8];
+};
+
+__unaligned struct Client_UI_Misc_RetainerTaskDataModule /* Size=0xB0 */
+{
+    /* 0x00 */ Client_UI_Misc_UserFileManager_UserFileEvent UserFileEvent;
+    /*      */ byte _gap_0x40[0x70];
 };
 
 __unaligned struct Client_UI_Misc_ScreenLog /* Size=0x1 */
@@ -20403,10 +20580,15 @@ __unaligned struct Client_UI_UIInputData /* Size=0xA20 */
     /*       */ byte _gap_0x781;
     /*       */ byte _gap_0x782[0x2];
     /*       */ byte _gap_0x784[0x4];
-    /* 0x788 */ char LastKeyChar;
+    /* 0x788 */ wchar_t LastKeyChar;
     /*       */ byte _gap_0x78A[0x2];
     /*       */ byte _gap_0x78C[0x4];
     /*       */ byte _gap_0x790[0x290];
+};
+
+__unaligned struct Client_UI_UIInputModule /* Size=0xF0 */
+{
+    /*      */ byte _gap_0x0[0xF0];
 };
 
 __unaligned struct Client_UI_UIModule /* Size=0xEE030 */
@@ -20436,7 +20618,7 @@ __unaligned struct Client_UI_UIModule_UIModuleVTable /* Size=0x0 */
     /* 0x28 */ Component_Excel_ExcelModuleInterface* (__fastcall *GetExcelModule)(Client_UI_UIModule* a1);
     /* 0x30 */ Client_UI_Misc_RaptureTextModule* (__fastcall *GetRaptureTextModule)(Client_UI_UIModule* a1);
     /* 0x38 */ Client_UI_RaptureAtkModule* (__fastcall *GetRaptureAtkModule)(Client_UI_UIModule* a1);
-    /*     */ __int64 _vf8;
+    /* 0x40 */ Client_UI_RaptureAtkModule* (__fastcall *GetRaptureAtkModule2)(Client_UI_UIModule* a1);
     /* 0x48 */ Client_UI_Shell_RaptureShellModule* (__fastcall *GetRaptureShellModule)(Client_UI_UIModule* a1);
     /* 0x50 */ Client_UI_Misc_PronounModule* (__fastcall *GetPronounModule)(Client_UI_UIModule* a1);
     /* 0x58 */ Client_UI_Misc_RaptureLogModule* (__fastcall *GetRaptureLogModule)(Client_UI_UIModule* a1);
@@ -20449,19 +20631,19 @@ __unaligned struct Client_UI_UIModule_UIModuleVTable /* Size=0x0 */
     /* 0x90 */ Client_UI_Misc_ConfigModule* (__fastcall *GetConfigModule)(Client_UI_UIModule* a1);
     /* 0x98 */ Client_UI_Misc_AddonConfig* (__fastcall *GetAddonConfig)(Client_UI_UIModule* a1);
     /* 0xA0 */ Client_UI_Misc_UiSavePackModule* (__fastcall *GetUiSavePackModule)(Client_UI_UIModule* a1);
-    /* 0xA8 */ void* (__fastcall *GetLetterDataModule)(Client_UI_UIModule* a1);
-    /* 0xB0 */ void* (__fastcall *GetRetainerTaskDataModule)(Client_UI_UIModule* a1);
-    /* 0xB8 */ void* (__fastcall *GetFlagStatusModule)(Client_UI_UIModule* a1);
-    /*     */ __int64 _vf24;
+    /* 0xA8 */ Client_UI_Misc_LetterDataModule* (__fastcall *GetLetterDataModule)(Client_UI_UIModule* a1);
+    /* 0xB0 */ Client_UI_Misc_RetainerTaskDataModule* (__fastcall *GetRetainerTaskDataModule)(Client_UI_UIModule* a1);
+    /* 0xB8 */ Client_UI_Misc_FlagStatusModule* (__fastcall *GetFlagStatusModule)(Client_UI_UIModule* a1);
+    /* 0xC0 */ Client_UI_Misc_RecipeFavoriteModule* (__fastcall *GetRecipeFavoriteModule)(Client_UI_UIModule* a1);
     /*     */ __int64 _vf25;
     /* 0xD0 */ Client_UI_Misc_RaptureUiDataModule* (__fastcall *GetRaptureUiDataModule)(Client_UI_UIModule* a1);
     /*     */ __int64 _vf27;
     /*     */ __int64 _vf28;
-    /*     */ __int64 _vf29;
-    /* 0xF0 */ void* (__fastcall *GetRaptureTeleportHistory)(Client_UI_UIModule* a1);
-    /*     */ __int64 _vf31;
+    /* 0xE8 */ Client_UI_Misc_GoldSaucerModule* (__fastcall *GetGoldSaucerModule)(Client_UI_UIModule* a1);
+    /* 0xF0 */ Client_UI_Misc_RaptureTeleportHistory* (__fastcall *GetRaptureTeleportHistory)(Client_UI_UIModule* a1);
+    /* 0xF8 */ Client_UI_Misc_ItemContextCustomizeModule* (__fastcall *GetItemContextCustomizeModule)(Client_UI_UIModule* a1);
     /* 0x100 */ Client_UI_Misc_RecommendEquipModule* (__fastcall *GetRecommendEquipModule)(Client_UI_UIModule* a1);
-    /*     */ __int64 _vf33;
+    /* 0x108 */ Client_UI_Misc_PvpSetModule* (__fastcall *GetPvpSetModule)(Client_UI_UIModule* a1);
     /* 0x110 */ Client_UI_Info_InfoModule* (__fastcall *GetInfoModule)(Client_UI_UIModule* a1);
     /*     */ __int64 _vf35;
     /* 0x120 */ Client_UI_Agent_AgentModule* (__fastcall *GetAgentModule)(Client_UI_UIModule* a1);
@@ -20494,9 +20676,9 @@ __unaligned struct Client_UI_UIModule_UIModuleVTable /* Size=0x0 */
     /*     */ __int64 _vf63;
     /*     */ __int64 _vf64;
     /* 0x208 */ Client_UI_UIInputData* (__fastcall *GetUIInputData)(Client_UI_UIModule* a1);
-    /* 0x210 */ void* (__fastcall *GetUIInputModule)(Client_UI_UIModule* a1);
+    /* 0x210 */ Client_UI_UIInputModule* (__fastcall *GetUIInputModule)(Client_UI_UIModule* a1);
     /*     */ __int64 _vf67;
-    /* 0x220 */ void* (__fastcall *GetLogFilterConfig)(Client_UI_UIModule* a1);
+    /* 0x220 */ Client_UI_Misc_LogFilterConfig* (__fastcall *GetLogFilterConfig)(Client_UI_UIModule* a1);
     /*     */ __int64 _vf69;
     /*     */ __int64 _vf70;
     /*     */ __int64 _vf71;
@@ -22442,6 +22624,114 @@ __unaligned struct Component_GUI_ULD_AtkUldComponentDataTab /* Size=0x24 */
     /* 0x0C */ unsigned __int32 Nodes[0x4];
     /* 0x1C */ unsigned __int32 TextId;
     /* 0x20 */ unsigned __int32 GroupId;
+};
+
+__unaligned struct Component_SteamApi_SteamCallbackBase /* Size=0x10 */
+{
+    union {
+    /* 0x00 */ void** vtbl;
+    /* 0x00 */ Component_SteamApi_SteamCallbackBase_SteamCallbackBaseVTable* VTable;
+    } _union_0x0;
+    /* 0x08 */ Component_SteamApi_SteamCallbackBase_SteamCallbackFlags Flags;
+    /*      */ byte _gap_0x9;
+    /*      */ byte _gap_0xA[0x2];
+    /* 0x0C */ __int32 CallbackId;
+};
+
+__unaligned struct Component_SteamApi_Callbacks_AuthSessionTicketResponseCallback /* Size=0x10 */
+{
+    union {
+    /* 0x00 */ Component_SteamApi_SteamCallbackBase SteamCallbackBase;
+    /* 0x00 */ Component_SteamApi_Callbacks_AuthSessionTicketResponseCallback_AuthSessionTicketResponseCallbackVTable* VTable;
+    } _union_0x0;
+};
+
+__unaligned struct Component_SteamApi_SteamTypes_AuthSessionTicketResponse /* Size=0x8 */
+{
+    /* 0x0 */ unsigned __int32 HAuthTicket;
+    /* 0x4 */ __int32 EResult;
+};
+
+__unaligned struct Component_SteamApi_Callbacks_AuthSessionTicketResponseCallback_AuthSessionTicketResponseCallbackVTable /* Size=0x0 */
+{
+    /*     */ __int64 _vf0;
+    /* 0x8 */ void (__fastcall *Run)(Component_SteamApi_Callbacks_AuthSessionTicketResponseCallback* a1, Component_SteamApi_SteamTypes_AuthSessionTicketResponse* a2);
+};
+
+__unaligned struct Component_SteamApi_Callbacks_FloatingGamepadTextInputDismissedCallback /* Size=0x10 */
+{
+    union {
+    /* 0x00 */ Component_SteamApi_SteamCallbackBase SteamCallbackBase;
+    /* 0x00 */ Component_SteamApi_Callbacks_FloatingGamepadTextInputDismissedCallback_FloatingGamepadTextInputDismissedCallbackVTable* VTable;
+    } _union_0x0;
+};
+
+__unaligned struct Component_SteamApi_Callbacks_FloatingGamepadTextInputDismissedCallback_FloatingGamepadTextInputDismissedCallbackVTable /* Size=0x0 */
+{
+    /*     */ __int64 _vf0;
+    /* 0x8 */ void (__fastcall *Run)(Component_SteamApi_Callbacks_FloatingGamepadTextInputDismissedCallback* a1, void* a2);
+};
+
+__unaligned struct Component_SteamApi_Callbacks_GamepadTextInputDismissedCallback /* Size=0x10 */
+{
+    union {
+    /* 0x00 */ Component_SteamApi_SteamCallbackBase SteamCallbackBase;
+    /* 0x00 */ Component_SteamApi_Callbacks_GamepadTextInputDismissedCallback_GamepadTextInputDismissedCallbackVTable* VTable;
+    } _union_0x0;
+};
+
+__unaligned struct Component_SteamApi_SteamTypes_GamepadTextInputDismissedData /* Size=0x12 */
+{
+    /* 0x00 */ bool Submitted;
+    /*      */ byte _gap_0x1;
+    /*      */ byte _gap_0x2[0x2];
+    /* 0x04 */ unsigned __int32 SubmittedTextSize;
+    /* 0x08 */ unsigned __int32 AppId;
+    /*      */ byte _gap_0xC[0x4];
+    /*      */ byte _gap_0x10[0x2];
+};
+
+__unaligned struct Component_SteamApi_Callbacks_GamepadTextInputDismissedCallback_GamepadTextInputDismissedCallbackVTable /* Size=0x0 */
+{
+    /*     */ __int64 _vf0;
+    /* 0x8 */ void (__fastcall *Run)(Component_SteamApi_Callbacks_GamepadTextInputDismissedCallback* a1, Component_SteamApi_SteamTypes_GamepadTextInputDismissedData* a2);
+};
+
+__unaligned struct Component_SteamApi_SteamTypes_CSteamId /* Size=0x8 */
+{
+    /* 0x0 */ unsigned __int64 RawSteamId;
+};
+
+__unaligned struct Component_SteamApi_SteamApi /* Size=0x4D0 */
+{
+    /*       */ byte _gap_0x0[0x408];
+    /* 0x408 */ bool SteamApiInitialized;
+    /*       */ byte _gap_0x409;
+    /*       */ byte _gap_0x40A[0x2];
+    /* 0x40C */ float TimeSinceLastCallbackRun;
+    /* 0x410 */ unsigned __int32 SteamAppId;
+    /* 0x414 */ Component_SteamApi_SteamTypes_CSteamId SteamLocalUserId;
+    /*       */ byte _gap_0x41C[0x4];
+    /* 0x420 */ void* PersonaNamePtr;
+    /* 0x428 */ bool AuthTicketPresent;
+    /*       */ byte _gap_0x429;
+    /*       */ byte _gap_0x42A[0x2];
+    /* 0x42C */ Component_SteamApi_SteamTypes_AuthSessionTicketResponse AuthTicket;
+    /* 0x434 */ bool VirtualKeyboardOpened;
+    /*       */ byte _gap_0x435;
+    /*       */ byte _gap_0x436[0x2];
+    /* 0x438 */ Client_System_String_Utf8String VirtualKeyboardEnteredText;
+    /* 0x4A0 */ Component_SteamApi_Callbacks_AuthSessionTicketResponseCallback AuthSessionTicketResponseCallback;
+    /* 0x4B0 */ Component_SteamApi_Callbacks_FloatingGamepadTextInputDismissedCallback FloatingGamepadTextInputDismissedCallback;
+    /* 0x4C0 */ Component_SteamApi_Callbacks_GamepadTextInputDismissedCallback GamepadTextInputDismissedCallback;
+};
+
+__unaligned struct Component_SteamApi_SteamCallbackBase_SteamCallbackBaseVTable /* Size=0x0 */
+{
+    /* 0x0 */ void (__fastcall *RunExtended)(Component_SteamApi_SteamCallbackBase* a1, void* a2, bool a3, __int64 a4);
+    /* 0x8 */ void (__fastcall *Run)(Component_SteamApi_SteamCallbackBase* a1, void* a2);
+    /* 0x10 */ __int64 (__fastcall *GetSize)(Component_SteamApi_SteamCallbackBase* a1);
+    /* 0x18 */ void (__fastcall *Dtor)(Component_SteamApi_SteamCallbackBase* a1, bool a2);
 };
 
 __unaligned struct Component_Text_TextModule_TextModuleVTable /* Size=0x0 */

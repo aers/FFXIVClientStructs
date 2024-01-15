@@ -348,6 +348,8 @@ struct Client::Network::NetworkModule;
 struct Client::Network::NetworkModulePacketReceiverCallback;
 struct Client::Network::PacketDispatcher;
 struct Client::Network::NetworkModuleProxy;
+struct Client::Sound::SoundManager;
+struct Client::System::Threading::Thread;
 struct Client::System::Configuration::DevConfig;
 struct Common::Configuration::DevConfig;
 struct Common::Configuration::ConfigBase;
@@ -397,7 +399,6 @@ struct Client::System::Scheduler::Base::SchedulerTimeline::SchedulerTimelineVTab
 struct Client::System::Scheduler::Resource::SchedulerResource;
 struct Client::System::Scheduler::Resource::SchedulerResource::ResourceName;
 struct Client::System::Scheduler::Resource::SchedulerResourceManagement;
-struct Client::System::Threading::Thread;
 struct Client::System::Threading::ThreadManager;
 struct Client::UI::ActionBarSlot;
 struct Client::UI::ActionInfo;
@@ -1001,9 +1002,13 @@ struct Client::UI::Misc::ExportedPortraitData;
 struct Client::UI::Misc::FieldMarkerModule;
 struct Client::UI::Misc::FieldMarkerPreset;
 struct Client::UI::Misc::GamePresetPoint;
+struct Client::UI::Misc::FlagStatusModule;
+struct Client::UI::Misc::GoldSaucerModule;
+struct Client::UI::Misc::GoldSaucerModule::TripleTriadDeck;
 struct Client::UI::Misc::HotBarUiIntermediate;
 struct Client::UI::Misc::InputTimerModule;
 struct Client::UI::Misc::InputTimerModule::InputTimerData;
+struct Client::UI::Misc::ItemContextCustomizeModule;
 struct Client::UI::Misc::ItemFinderModule;
 struct Client::UI::Misc::ItemFinderModuleResult;
 struct Client::UI::Misc::ItemFinderModuleRetainerResult;
@@ -1017,12 +1022,16 @@ struct StdMap::Nodeunsignedint64ClientUIMiscItemOrderModuleSorterPtr;
 struct StdPairunsignedint64ClientUIMiscItemOrderModuleSorterPtr;
 struct Client::UI::Misc::ItemOrderModuleSorterPreviousOrderEntry;
 struct Client::UI::Misc::ItemOrderModuleSorterSortFunctionEntry;
+struct Client::UI::Misc::LetterDataModule;
+struct Client::UI::Misc::LogFilterConfig;
 struct Client::UI::Misc::LogMessageSource;
 struct Client::UI::Misc::PronounModule;
 struct Component::Text::TextChecker;
 struct Component::Text::MacroDecoder;
 struct StdVectorint64;
 struct Client::UI::Misc::PronounModule::PronounModuleVTable;
+struct Client::UI::Misc::PvpSetModule;
+struct Client::UI::Misc::PvpSetModule::AdditionalPvpActions;
 struct Client::UI::Misc::RaptureGearsetModule;
 struct Client::UI::Misc::RaptureGearsetModule::GearsetEntry;
 struct Client::UI::Misc::RaptureGearsetModule::GearsetItem;
@@ -1035,6 +1044,7 @@ struct StdVectorint32;
 struct StdVectorByte;
 struct Client::UI::Misc::RaptureLogModuleTab;
 struct Client::UI::Misc::RaptureMacroModule;
+struct Client::UI::Misc::RaptureTeleportHistory;
 struct Client::UI::Misc::RaptureTextModule;
 struct Component::Text::TextModule;
 struct Component::Text::Localize;
@@ -1047,9 +1057,13 @@ struct StdMap::NodeClientSystemStringUtf8StringComponentTextMacroEncoderMacroCod
 struct StdPairClientSystemStringUtf8StringComponentTextMacroEncoderMacroCodeDescription;
 struct Component::Text::MacroEncoder::MacroCodeDescription;
 struct Client::UI::Misc::RaptureUiDataModule;
+struct Client::UI::Misc::RecipeFavoriteModule;
+struct Client::UI::Misc::RecipeFavoriteModule::CraftingTypeEntry;
+struct Client::UI::Misc::RecipeFavoriteModule::RecipeEntry;
 struct Client::UI::Misc::RecommendEquipModule;
 struct Client::UI::Misc::RetainerCommentModule;
 struct Client::UI::Misc::RetainerCommentModule::RetainerComment;
+struct Client::UI::Misc::RetainerTaskDataModule;
 struct Client::UI::Misc::ScreenLog;
 struct Client::UI::Misc::UiSavePackModule;
 struct Client::UI::Misc::UiSavePackModule::UiSavePackModuleVTable;
@@ -1081,6 +1095,7 @@ struct Client::UI::UI3DModule::MemberInfo;
 struct Client::UI::UI3DModule::UnkInfo;
 struct Client::UI::UIClipboard;
 struct Client::UI::UIInputData;
+struct Client::UI::UIInputModule;
 struct Client::UI::UIModule;
 struct Client::UI::UIModule::UIModuleVTable;
 struct Component::Excel::ExcelModuleInterface;
@@ -1237,6 +1252,18 @@ struct Component::GUI::AtkUnitBase::AtkUnitBaseVTable;
 struct Component::GUI::SimpleTweenAnimation;
 struct Component::GUI::SimpleTweenValue;
 struct Component::GUI::ULD::AtkUldComponentDataTab;
+struct Component::SteamApi::Callbacks::AuthSessionTicketResponseCallback;
+struct Component::SteamApi::SteamCallbackBase;
+struct Component::SteamApi::Callbacks::AuthSessionTicketResponseCallback::AuthSessionTicketResponseCallbackVTable;
+struct Component::SteamApi::SteamTypes::AuthSessionTicketResponse;
+struct Component::SteamApi::Callbacks::FloatingGamepadTextInputDismissedCallback;
+struct Component::SteamApi::Callbacks::FloatingGamepadTextInputDismissedCallback::FloatingGamepadTextInputDismissedCallbackVTable;
+struct Component::SteamApi::Callbacks::GamepadTextInputDismissedCallback;
+struct Component::SteamApi::Callbacks::GamepadTextInputDismissedCallback::GamepadTextInputDismissedCallbackVTable;
+struct Component::SteamApi::SteamTypes::GamepadTextInputDismissedData;
+struct Component::SteamApi::SteamApi;
+struct Component::SteamApi::SteamTypes::CSteamId;
+struct Component::SteamApi::SteamCallbackBase::SteamCallbackBaseVTable;
 struct Component::Text::TextModule::TextModuleVTable;
 struct Shader::CameraLight;
 struct Shader::CameraParameter;
@@ -1651,11 +1678,17 @@ enum Client::Game::InventoryType: unsigned __int32
     EquippedItems = 1000,
     Currency = 2000,
     Crystals = 2001,
+    MailEdit = 2002,
     Mail = 2003,
     KeyItems = 2004,
     HandIn = 2005,
+    Unknown2006 = 2006,
     DamagedGear = 2007,
+    Unknown2008 = 2008,
     Examine = 2009,
+    Reclaim = 2010,
+    HousingExteriorAppearanceEdit = 2011,
+    HousingInteriorAppearanceEdit = 2012,
     ReconstructionBuyback = 2013,
     ArmoryOffHand = 3200,
     ArmoryHead = 3201,
@@ -2002,6 +2035,23 @@ enum Client::Graphics::Scene::ObjectType: __int32
     EnvSpace = 7,
     EnvLocation = 8,
     Unk_Type9 = 9
+};
+
+enum Client::Sound::SoundManager::SoundChannel: __int32
+{
+    Bgm1 = 1,
+    Se1 = 2,
+    Voice = 3,
+    System = 4,
+    Env1 = 5,
+    Se2 = 6,
+    Se3 = 7,
+    Bgm2 = 8,
+    Bgm3 = 9,
+    Env2 = 11,
+    Env3 = 12,
+    Bgm4 = 16,
+    Perform = 17
 };
 
 enum Client::System::File::FileMode: unsigned __int32
@@ -2426,6 +2476,7 @@ enum Client::UI::Agent::AgentId: unsigned __int32
     PerformanceGamepadGuide = 358,
     PerformanceReadyCheck = 360,
     HwdAetherGauge = 364,
+    HwdGathererInspection = 365,
     HwdScore = 366,
     HwdMonument = 368,
     McGuffin = 369,
@@ -4441,6 +4492,12 @@ enum Component::GUI::ValueType: __int32
     Texture = 10,
     AllocatedString = 38,
     AllocatedVector = 41
+};
+
+enum Component::SteamApi::SteamCallbackBase::SteamCallbackFlags: byte
+{
+    Registered = 1,
+    GameServer = 2
 };
 
 
@@ -7002,8 +7059,15 @@ __unaligned struct Client::Game::InventoryItem /* Size=0x38 */
 {
     /* 0x00 */ Client::Game::InventoryType Container;
     /* 0x04 */ __int16 Slot;
-    /*      */ byte _gap_0x6[0x2];
+    /* 0x06 */ bool IsSymbolic;
+    union {
     /* 0x08 */ unsigned __int32 ItemID;
+    struct {
+    /* 0x08 */ unsigned __int16 LinkedItemSlot;
+    /* 0x0A */ unsigned __int16 LinkedInventoryType;
+    } _union_struct_0x8;
+    } _union_0x8;
+    /*      */ byte _gap_0xB;
     /* 0x0C */ unsigned __int32 Quantity;
     /* 0x10 */ unsigned __int16 Spiritbond;
     /* 0x12 */ unsigned __int16 Condition;
@@ -8617,9 +8681,10 @@ __unaligned struct Client::Game::UI::UIState /* Size=0x17D10 */
     /* 0x17A12 */ byte ChocoboTaxiStandsBitmask[0xB];
     /*         */ byte _gap_0x17A1D;
     /* 0x17A1E */ byte CutsceneSeenBitmask[0x9F];
-    /*         */ byte _gap_0x17ABD;
-    /*         */ byte _gap_0x17ABE[0x2];
-    /*         */ byte _gap_0x17AC0[0x250];
+    /* 0x17ABD */ byte UnlockedTripleTriadCardsBitmask[0x33];
+    /*         */ byte _gap_0x17AF0[0x8];
+    /* 0x17AF8 */ unsigned __int64 UnlockedTripleTriadCardsCount;
+    /*         */ byte _gap_0x17B00[0x210];
 };
 
 __unaligned struct Client::Graphics::Animation::AnimationResourceHandle /* Size=0x0 */
@@ -9715,6 +9780,48 @@ __unaligned struct Client::Network::NetworkModuleProxy /* Size=0x20 */
     /* 0x10 */ Client::Network::NetworkModulePacketReceiverCallback PacketReceiverCallback;
 };
 
+__unaligned struct Client::System::Threading::Thread /* Size=0x28 */
+{
+    /* 0x00 */ byte** args;
+    /* 0x08 */ __int64 EventHandle;
+    /* 0x10 */ __int64 ThreadHandle;
+    /* 0x18 */ __int32 ThreadId;
+    /* 0x1C */ __int32 AffinityMask;
+    /*      */ byte _gap_0x20[0x8];
+};
+
+__unaligned struct Client::Sound::SoundManager /* Size=0x1C88 */
+{
+    /* 0x0000 */ __int64 ResourceEventListener;
+    /* 0x0008 */ Client::System::Threading::Thread Thread;
+    /*        */ byte _gap_0x30;
+    /* 0x0031 */ bool Disabled;
+    /*        */ byte _gap_0x32[0x2];
+    /* 0x0034 */ float MasterVolume;
+    /* 0x0038 */ float ActiveVolume;
+    /* 0x003C */ float Volume[0x13];
+    /* 0x0088 */ float UnkVolume2[0x13];
+    /* 0x00D4 */ float UnkVolume3[0x13];
+    /* 0x0120 */ float UnkVolume4[0x13];
+    /* 0x016C */ bool ChannelMutedArray[0x13];
+    /* 0x017F */ bool ChannelAlwayOn[0x13];
+    /*        */ byte _gap_0x192[0x2];
+    /*        */ byte _gap_0x194[0x4];
+    /*        */ byte _gap_0x198[0x30];
+    /*        */ byte _gap_0x1C8;
+    /* 0x01C9 */ bool MasterEnabled;
+    /* 0x01CA */ bool IsSoundAlways;
+    /* 0x01CB */ bool SoundEnabled;
+    /* 0x01CC */ bool WindowInactive;
+    /*        */ byte _gap_0x1CD;
+    /*        */ byte _gap_0x1CE[0x2];
+    /*        */ byte _gap_0x1D0[0xD0];
+    /* 0x02A0 */ __int64 CriticalSection;
+    /*        */ byte _gap_0x2A8[0x20];
+    /* 0x02C8 */ __int64 EventHandle;
+    /*        */ byte _gap_0x2D0[0x19B8];
+};
+
 __unaligned struct Common::Configuration::ConfigBase /* Size=0x110 */
 {
     /* 0x000 */ void* vtbl;
@@ -9754,8 +9861,8 @@ __unaligned struct Client::System::Configuration::SystemConfig /* Size=0x450 */
 
 __unaligned struct Client::System::File::FileAccessPath /* Size=0x210 */
 {
-    /* 0x000 */ char Buffer[0x104];
-    /* 0x208 */ char* LongStringPtr;
+    /* 0x000 */ wchar_t Buffer[0x104];
+    /* 0x208 */ wchar_t* LongStringPtr;
 };
 
 __unaligned struct Client::System::File::FileDescriptor /* Size=0x278 */
@@ -9916,10 +10023,18 @@ __unaligned struct Client::System::Framework::Framework /* Size=0x35C8 */
     /*        */ byte _gap_0x2B58[0x8];
     /* 0x2B60 */ Client::UI::UIModule* UIModule;
     /* 0x2B68 */ Client::UI::UIClipboard* UIClipboard;
-    /*        */ byte _gap_0x2B70[0x58];
+    /*        */ byte _gap_0x2B70[0x8];
+    /* 0x2B78 */ Client::System::Framework::EnvironmentManager* EnvironmentManager;
+    /* 0x2B80 */ Client::Sound::SoundManager* SoundManager;
+    /*        */ byte _gap_0x2B88[0x40];
     /* 0x2BC8 */ Common::Lua::LuaState LuaState;
     /* 0x2BF0 */ Client::System::Framework::GameVersion GameVersion;
-    /*        */ byte _gap_0x34F0[0xD0];
+    /*        */ byte _gap_0x34F0[0xC0];
+    /*        */ byte _gap_0x35B0[0x4];
+    /* 0x35B4 */ bool IsSteamGame;
+    /*        */ byte _gap_0x35B5;
+    /*        */ byte _gap_0x35B6[0x2];
+    /* 0x35B8 */ Component::SteamApi::SteamApi* SteamApi;
     /* 0x35C0 */ __int64 SteamApiLibraryHandle;
 };
 
@@ -9938,7 +10053,7 @@ __unaligned struct Client::System::Framework::GameWindow /* Size=0x0 */
     /* 0x58 */ __int32 MinWidth;
     /* 0x5C */ __int32 MinHeight;
     /*     */ byte _gap_0x60[0x20];
-    /* 0x80 */ char Username[0x101];
+    /* 0x80 */ wchar_t Username[0x101];
 };
 
 __unaligned struct Client::System::Framework::RootTask /* Size=0x78 */
@@ -10299,16 +10414,6 @@ __unaligned struct Client::System::Scheduler::Resource::SchedulerResourceManagem
     /* 0x10 */ void* Unknown;
     /* 0x18 */ unsigned __int64 NumResources;
     /*      */ byte _gap_0x20[0x38];
-};
-
-__unaligned struct Client::System::Threading::Thread /* Size=0x28 */
-{
-    /* 0x00 */ byte** args;
-    /* 0x08 */ __int64 EventHandle;
-    /* 0x10 */ __int64 ThreadHandle;
-    /* 0x18 */ __int32 ThreadId;
-    /* 0x1C */ __int32 AffinityMask;
-    /*      */ byte _gap_0x20[0x8];
 };
 
 __unaligned struct Client::System::Threading::ThreadManager /* Size=0x1048 */
@@ -10896,7 +11001,7 @@ __unaligned struct Client::UI::AddonAOZNotebook::SpellbookBlock /* Size=0x48 */
     /* 0x20 */ Component::GUI::AtkTextNode* AtkTextNode;
     /* 0x28 */ Component::GUI::AtkResNode* AtkResNode1;
     /* 0x30 */ Component::GUI::AtkResNode* AtkResNode2;
-    /* 0x38 */ char* Name;
+    /* 0x38 */ wchar_t* Name;
     /* 0x40 */ unsigned __int32 ActionID;
     /*      */ byte _gap_0x44[0x4];
 };
@@ -10905,7 +11010,7 @@ __unaligned struct Client::UI::AddonAOZNotebook::ActiveActions /* Size=0x20 */
 {
     /* 0x00 */ Component::GUI::AtkComponentDragDrop* AtkComponentDragDrop;
     /* 0x08 */ Component::GUI::AtkTextNode* AtkTextNode;
-    /* 0x10 */ char* Name;
+    /* 0x10 */ wchar_t* Name;
     /* 0x18 */ __int32 ActionID;
     /*      */ byte _gap_0x1C[0x4];
 };
@@ -14139,41 +14244,41 @@ __unaligned struct Client::UI::AddonRecipeNote /* Size=0x3B90 */
     /* 0x0810 */ Component::GUI::AtkComponentTextInput* Unk810;
     /* 0x0818 */ Client::UI::AddonRecipeNote* this818;
     /*        */ byte _gap_0x820[0x330];
-    /* 0x0B50 */ char* UnkB50;
+    /* 0x0B50 */ wchar_t* UnkB50;
     /*        */ byte _gap_0xB58[0x8];
-    /* 0x0B60 */ char* UnkB60;
+    /* 0x0B60 */ wchar_t* UnkB60;
     /*        */ byte _gap_0xB68[0x8];
-    /* 0x0B70 */ char* UnkB70;
+    /* 0x0B70 */ wchar_t* UnkB70;
     /*        */ byte _gap_0xB78[0x8];
-    /* 0x0B80 */ char* UnkB80;
+    /* 0x0B80 */ wchar_t* UnkB80;
     /*        */ byte _gap_0xB88[0x8];
-    /* 0x0B90 */ char* UnkB90;
+    /* 0x0B90 */ wchar_t* UnkB90;
     /*        */ byte _gap_0xB98[0x8];
-    /* 0x0BA0 */ char* UnkBA0;
+    /* 0x0BA0 */ wchar_t* UnkBA0;
     /*        */ byte _gap_0xBA8[0x8];
-    /* 0x0BB0 */ char* UnkBB0;
+    /* 0x0BB0 */ wchar_t* UnkBB0;
     /*        */ byte _gap_0xBB8[0x8];
-    /* 0x0BC0 */ char* UnkBC0;
+    /* 0x0BC0 */ wchar_t* UnkBC0;
     /*        */ byte _gap_0xBC8[0x8];
-    /* 0x0BD0 */ char* UnkBD0;
+    /* 0x0BD0 */ wchar_t* UnkBD0;
     /*        */ byte _gap_0xBD8[0x8];
-    /* 0x0BE0 */ char* UnkBE0;
+    /* 0x0BE0 */ wchar_t* UnkBE0;
     /*        */ byte _gap_0xBE8[0x8];
-    /* 0x0BF0 */ char* UnkBF0;
+    /* 0x0BF0 */ wchar_t* UnkBF0;
     /*        */ byte _gap_0xBF8[0x8];
-    /* 0x0C00 */ char* UnkC00;
+    /* 0x0C00 */ wchar_t* UnkC00;
     /*        */ byte _gap_0xC08[0x8];
-    /* 0x0C10 */ char* UnkC10;
+    /* 0x0C10 */ wchar_t* UnkC10;
     /*        */ byte _gap_0xC18[0x1520];
-    /* 0x2138 */ char* Unk2138;
-    /* 0x2140 */ char* Unk2140;
-    /* 0x2148 */ char* Unk2148;
-    /* 0x2150 */ char* Unk2150;
-    /* 0x2158 */ char* Unk2158;
-    /* 0x2160 */ char* Unk2160;
-    /* 0x2168 */ char* Unk2168;
-    /* 0x2170 */ char* Unk2170;
-    /* 0x2178 */ char* Unk2178;
+    /* 0x2138 */ wchar_t* Unk2138;
+    /* 0x2140 */ wchar_t* Unk2140;
+    /* 0x2148 */ wchar_t* Unk2148;
+    /* 0x2150 */ wchar_t* Unk2150;
+    /* 0x2158 */ wchar_t* Unk2158;
+    /* 0x2160 */ wchar_t* Unk2160;
+    /* 0x2168 */ wchar_t* Unk2168;
+    /* 0x2170 */ wchar_t* Unk2170;
+    /* 0x2178 */ wchar_t* Unk2178;
     /*        */ byte _gap_0x2180[0x1A10];
 };
 
@@ -19217,6 +19322,27 @@ __unaligned struct Client::UI::Misc::FieldMarkerModule /* Size=0xC78 */
     /*       */ byte _gap_0xC70[0x8];
 };
 
+__unaligned struct Client::UI::Misc::FlagStatusModule /* Size=0xB0 */
+{
+    /* 0x00 */ Client::UI::Misc::UserFileManager::UserFileEvent UserFileEvent;
+    /*      */ byte _gap_0x40[0x70];
+};
+
+__unaligned struct Client::UI::Misc::GoldSaucerModule::TripleTriadDeck /* Size=0x3A */
+{
+    /* 0x00 */ byte NameBytes[0x30];
+    /* 0x30 */ unsigned __int16 Cards[0x5];
+};
+
+__unaligned struct Client::UI::Misc::GoldSaucerModule /* Size=0x2C8 */
+{
+    /* 0x000 */ Client::UI::Misc::UserFileManager::UserFileEvent UserFileEvent;
+    /* 0x040 */ Client::UI::Misc::GoldSaucerModule::TripleTriadDeck Decks[0xA];
+    /* 0x284 */ unsigned __int16 HotbarMinions[0x17];
+    /*       */ byte _gap_0x2B2[0x2];
+    /* 0x2B4 */ unsigned __int16 UnseenCards[0xA];
+};
+
 __unaligned struct Client::UI::Misc::HotBarUiIntermediate /* Size=0x43 */
 {
     /* 0x00 */ Client::System::String::Utf8String* PopUpHelpText;
@@ -19277,6 +19403,14 @@ __unaligned struct Client::UI::Misc::InputTimerModule /* Size=0x4F8 */
     /* 0x05C */ Client::UI::Misc::InputTimerModule::InputTimerData ControllerInputTimers[0x10];
     /* 0x3DC */ Client::UI::Misc::InputTimerModule::InputTimerData MouseInputTimers[0x5];
     /*       */ byte _gap_0x4F4[0x4];
+};
+
+__unaligned struct Client::UI::Misc::ItemContextCustomizeModule /* Size=0x190 */
+{
+    /* 0x000 */ Client::UI::Misc::UserFileManager::UserFileEvent UserFileEvent;
+    /* 0x040 */ byte FirstTier[0x80];
+    /* 0x0C0 */ byte SecondTier[0x80];
+    /*       */ byte _gap_0x140[0x50];
 };
 
 __unaligned struct Client::UI::Misc::ItemFinderModule /* Size=0x11D0 */
@@ -19498,6 +19632,18 @@ __unaligned struct Client::UI::Misc::ItemOrderModuleSorterSortFunctionEntry /* S
     /*      */ byte _gap_0xC[0x4];
 };
 
+__unaligned struct Client::UI::Misc::LetterDataModule /* Size=0xA48 */
+{
+    /* 0x000 */ Client::UI::Misc::UserFileManager::UserFileEvent UserFileEvent;
+    /*       */ byte _gap_0x40[0xA08];
+};
+
+__unaligned struct Client::UI::Misc::LogFilterConfig /* Size=0x528 */
+{
+    /* 0x000 */ Client::UI::Misc::UserFileManager::UserFileEvent UserFileEvent;
+    /*       */ byte _gap_0x40[0x4E8];
+};
+
 __unaligned struct Client::UI::Misc::LogMessageSource /* Size=0x10 */
 {
     /* 0x00 */ unsigned __int64 ContentId;
@@ -19546,6 +19692,19 @@ __unaligned struct Client::UI::Misc::PronounModule::PronounModuleVTable /* Size=
 {
     /*     */ __int64 _vf0;
     /* 0x8 */ Client::System::String::Utf8String* (__fastcall *ProcessString)(Client::UI::Misc::PronounModule* a1, Client::System::String::Utf8String* a2, bool a3, __int32 a4);
+};
+
+__unaligned struct Client::UI::Misc::PvpSetModule::AdditionalPvpActions /* Size=0x4 */
+{
+    /* 0x0 */ unsigned __int16 ActionId1;
+    /* 0x2 */ unsigned __int16 ActionId2;
+};
+
+__unaligned struct Client::UI::Misc::PvpSetModule /* Size=0x98 */
+{
+    /* 0x00 */ Client::UI::Misc::UserFileManager::UserFileEvent UserFileEvent;
+    /* 0x40 */ Client::UI::Misc::PvpSetModule::AdditionalPvpActions AdditionalActions[0x14];
+    /*      */ byte _gap_0x90[0x8];
 };
 
 __unaligned struct Client::UI::Misc::RaptureGearsetModule::GearsetItem /* Size=0x1C */
@@ -19680,6 +19839,12 @@ __unaligned struct Client::UI::Misc::RaptureMacroModule /* Size=0x51AA8 */
     /*         */ byte _gap_0x51A98[0x10];
 };
 
+__unaligned struct Client::UI::Misc::RaptureTeleportHistory /* Size=0xC0 */
+{
+    /* 0x00 */ Client::UI::Misc::UserFileManager::UserFileEvent UserFileEvent;
+    /*      */ byte _gap_0x40[0x80];
+};
+
 __unaligned struct StdPairClientSystemStringUtf8Stringint64 /* Size=0x70 */
 {
     /* 0x00 */ Client::System::String::Utf8String Item1;
@@ -19798,35 +19963,41 @@ __unaligned struct Client::UI::Misc::RaptureUiDataModule /* Size=0x5958 */
     /*        */ byte _gap_0x40[0x5918];
 };
 
+__unaligned struct Client::UI::Misc::RecipeFavoriteModule::RecipeEntry /* Size=0x4 */
+{
+    /* 0x0 */ unsigned __int16 RecipeId;
+    /* 0x2 */ bool IsFavorite;
+    /*     */ byte _gap_0x3;
+};
+
+__unaligned struct Client::UI::Misc::RecipeFavoriteModule::CraftingTypeEntry /* Size=0x28 */
+{
+    /* 0x00 */ Client::UI::Misc::RecipeFavoriteModule::RecipeEntry Recipes[0xA];
+};
+
+__unaligned struct Client::UI::Misc::RecipeFavoriteModule /* Size=0x188 */
+{
+    /* 0x000 */ Client::UI::Misc::UserFileManager::UserFileEvent UserFileEvent;
+    /*       */ byte _gap_0x40[0x2];
+    /* 0x042 */ Client::UI::Misc::RecipeFavoriteModule::CraftingTypeEntry CraftingTypes[0x8];
+    /*       */ byte _gap_0x182[0x2];
+    /*       */ byte _gap_0x184[0x4];
+};
+
 __unaligned struct Client::UI::Misc::RecommendEquipModule /* Size=0x80 */
 {
-    /* 0x00 */ unsigned __int32 Unk00;
-    /* 0x04 */ unsigned __int32 SlotCount;
-    /* 0x08 */ Client::Game::InventoryItem* EquippedMainHand;
-    /* 0x10 */ Client::Game::InventoryItem* EquippedOffHand;
-    /* 0x18 */ Client::Game::InventoryItem* EquippedHead;
-    /* 0x20 */ Client::Game::InventoryItem* EquippedBody;
-    /* 0x28 */ Client::Game::InventoryItem* EquippedHands;
-    /* 0x30 */ Client::Game::InventoryItem* EquippedWaist;
-    /* 0x38 */ Client::Game::InventoryItem* EquippedLegs;
-    /* 0x40 */ Client::Game::InventoryItem* EquippedFeet;
-    /* 0x48 */ Client::Game::InventoryItem* EquippedEars;
-    /* 0x50 */ Client::Game::InventoryItem* EquippedNeck;
-    /* 0x58 */ Client::Game::InventoryItem* EquippedWrist;
-    /* 0x60 */ Client::Game::InventoryItem* EquippedLeftRing;
-    /* 0x68 */ Client::Game::InventoryItem* EquippedRightRing;
-    /* 0x70 */ Client::Game::InventoryItem* EquippedSoulCrystal;
-    union {
-    /* 0x78 */ void* Unk00_15;
-    struct {
+    /* 0x00 */ bool IsUpdating;
+    /* 0x01 */ bool IsSetupForDifferentClassJob;
+    /*      */ byte _gap_0x2[0x2];
+    /* 0x04 */ unsigned __int32 CurrentSlotIndex;
+    /* 0x08 */ Client::Game::InventoryItem* RecommendedItems[0xE];
     /* 0x78 */ unsigned __int16 Level;
-    /* 0x7A */ byte Unk7A;
-    /* 0x7B */ byte Unk7B;
+    /* 0x7A */ byte Race;
+    /* 0x7B */ byte Sex;
     /* 0x7C */ byte ClassJob;
-    /* 0x7D */ byte Unk7D;
-    /* 0x7E */ byte Unk7E;
-    } _union_struct_0x78;
-    } _union_0x78;
+    /* 0x7D */ byte GrandCompany;
+    /* 0x7E */ byte PvpRank;
+    /*      */ byte _gap_0x7F;
 };
 
 __unaligned struct Client::UI::Misc::RetainerCommentModule::RetainerComment /* Size=0x88 */
@@ -19844,6 +20015,12 @@ __unaligned struct Client::UI::Misc::RetainerCommentModule /* Size=0x5A0 */
     /*       */ byte _gap_0x40[0x8];
     /* 0x048 */ Client::UI::Misc::RetainerCommentModule::RetainerComment Retainers[0xA];
     /*       */ byte _gap_0x598[0x8];
+};
+
+__unaligned struct Client::UI::Misc::RetainerTaskDataModule /* Size=0xB0 */
+{
+    /* 0x00 */ Client::UI::Misc::UserFileManager::UserFileEvent UserFileEvent;
+    /*      */ byte _gap_0x40[0x70];
 };
 
 __unaligned struct Client::UI::Misc::ScreenLog /* Size=0x1 */
@@ -20403,10 +20580,15 @@ __unaligned struct Client::UI::UIInputData /* Size=0xA20 */
     /*       */ byte _gap_0x781;
     /*       */ byte _gap_0x782[0x2];
     /*       */ byte _gap_0x784[0x4];
-    /* 0x788 */ char LastKeyChar;
+    /* 0x788 */ wchar_t LastKeyChar;
     /*       */ byte _gap_0x78A[0x2];
     /*       */ byte _gap_0x78C[0x4];
     /*       */ byte _gap_0x790[0x290];
+};
+
+__unaligned struct Client::UI::UIInputModule /* Size=0xF0 */
+{
+    /*      */ byte _gap_0x0[0xF0];
 };
 
 __unaligned struct Client::UI::UIModule /* Size=0xEE030 */
@@ -20436,7 +20618,7 @@ __unaligned struct Client::UI::UIModule::UIModuleVTable /* Size=0x0 */
     /* 0x28 */ Component::Excel::ExcelModuleInterface* (__fastcall *GetExcelModule)(Client::UI::UIModule* a1);
     /* 0x30 */ Client::UI::Misc::RaptureTextModule* (__fastcall *GetRaptureTextModule)(Client::UI::UIModule* a1);
     /* 0x38 */ Client::UI::RaptureAtkModule* (__fastcall *GetRaptureAtkModule)(Client::UI::UIModule* a1);
-    /*     */ __int64 _vf8;
+    /* 0x40 */ Client::UI::RaptureAtkModule* (__fastcall *GetRaptureAtkModule2)(Client::UI::UIModule* a1);
     /* 0x48 */ Client::UI::Shell::RaptureShellModule* (__fastcall *GetRaptureShellModule)(Client::UI::UIModule* a1);
     /* 0x50 */ Client::UI::Misc::PronounModule* (__fastcall *GetPronounModule)(Client::UI::UIModule* a1);
     /* 0x58 */ Client::UI::Misc::RaptureLogModule* (__fastcall *GetRaptureLogModule)(Client::UI::UIModule* a1);
@@ -20449,19 +20631,19 @@ __unaligned struct Client::UI::UIModule::UIModuleVTable /* Size=0x0 */
     /* 0x90 */ Client::UI::Misc::ConfigModule* (__fastcall *GetConfigModule)(Client::UI::UIModule* a1);
     /* 0x98 */ Client::UI::Misc::AddonConfig* (__fastcall *GetAddonConfig)(Client::UI::UIModule* a1);
     /* 0xA0 */ Client::UI::Misc::UiSavePackModule* (__fastcall *GetUiSavePackModule)(Client::UI::UIModule* a1);
-    /* 0xA8 */ void* (__fastcall *GetLetterDataModule)(Client::UI::UIModule* a1);
-    /* 0xB0 */ void* (__fastcall *GetRetainerTaskDataModule)(Client::UI::UIModule* a1);
-    /* 0xB8 */ void* (__fastcall *GetFlagStatusModule)(Client::UI::UIModule* a1);
-    /*     */ __int64 _vf24;
+    /* 0xA8 */ Client::UI::Misc::LetterDataModule* (__fastcall *GetLetterDataModule)(Client::UI::UIModule* a1);
+    /* 0xB0 */ Client::UI::Misc::RetainerTaskDataModule* (__fastcall *GetRetainerTaskDataModule)(Client::UI::UIModule* a1);
+    /* 0xB8 */ Client::UI::Misc::FlagStatusModule* (__fastcall *GetFlagStatusModule)(Client::UI::UIModule* a1);
+    /* 0xC0 */ Client::UI::Misc::RecipeFavoriteModule* (__fastcall *GetRecipeFavoriteModule)(Client::UI::UIModule* a1);
     /*     */ __int64 _vf25;
     /* 0xD0 */ Client::UI::Misc::RaptureUiDataModule* (__fastcall *GetRaptureUiDataModule)(Client::UI::UIModule* a1);
     /*     */ __int64 _vf27;
     /*     */ __int64 _vf28;
-    /*     */ __int64 _vf29;
-    /* 0xF0 */ void* (__fastcall *GetRaptureTeleportHistory)(Client::UI::UIModule* a1);
-    /*     */ __int64 _vf31;
+    /* 0xE8 */ Client::UI::Misc::GoldSaucerModule* (__fastcall *GetGoldSaucerModule)(Client::UI::UIModule* a1);
+    /* 0xF0 */ Client::UI::Misc::RaptureTeleportHistory* (__fastcall *GetRaptureTeleportHistory)(Client::UI::UIModule* a1);
+    /* 0xF8 */ Client::UI::Misc::ItemContextCustomizeModule* (__fastcall *GetItemContextCustomizeModule)(Client::UI::UIModule* a1);
     /* 0x100 */ Client::UI::Misc::RecommendEquipModule* (__fastcall *GetRecommendEquipModule)(Client::UI::UIModule* a1);
-    /*     */ __int64 _vf33;
+    /* 0x108 */ Client::UI::Misc::PvpSetModule* (__fastcall *GetPvpSetModule)(Client::UI::UIModule* a1);
     /* 0x110 */ Client::UI::Info::InfoModule* (__fastcall *GetInfoModule)(Client::UI::UIModule* a1);
     /*     */ __int64 _vf35;
     /* 0x120 */ Client::UI::Agent::AgentModule* (__fastcall *GetAgentModule)(Client::UI::UIModule* a1);
@@ -20494,9 +20676,9 @@ __unaligned struct Client::UI::UIModule::UIModuleVTable /* Size=0x0 */
     /*     */ __int64 _vf63;
     /*     */ __int64 _vf64;
     /* 0x208 */ Client::UI::UIInputData* (__fastcall *GetUIInputData)(Client::UI::UIModule* a1);
-    /* 0x210 */ void* (__fastcall *GetUIInputModule)(Client::UI::UIModule* a1);
+    /* 0x210 */ Client::UI::UIInputModule* (__fastcall *GetUIInputModule)(Client::UI::UIModule* a1);
     /*     */ __int64 _vf67;
-    /* 0x220 */ void* (__fastcall *GetLogFilterConfig)(Client::UI::UIModule* a1);
+    /* 0x220 */ Client::UI::Misc::LogFilterConfig* (__fastcall *GetLogFilterConfig)(Client::UI::UIModule* a1);
     /*     */ __int64 _vf69;
     /*     */ __int64 _vf70;
     /*     */ __int64 _vf71;
@@ -22442,6 +22624,114 @@ __unaligned struct Component::GUI::ULD::AtkUldComponentDataTab /* Size=0x24 */
     /* 0x0C */ unsigned __int32 Nodes[0x4];
     /* 0x1C */ unsigned __int32 TextId;
     /* 0x20 */ unsigned __int32 GroupId;
+};
+
+__unaligned struct Component::SteamApi::SteamCallbackBase /* Size=0x10 */
+{
+    union {
+    /* 0x00 */ void** vtbl;
+    /* 0x00 */ Component::SteamApi::SteamCallbackBase::SteamCallbackBaseVTable* VTable;
+    } _union_0x0;
+    /* 0x08 */ Component::SteamApi::SteamCallbackBase::SteamCallbackFlags Flags;
+    /*      */ byte _gap_0x9;
+    /*      */ byte _gap_0xA[0x2];
+    /* 0x0C */ __int32 CallbackId;
+};
+
+__unaligned struct Component::SteamApi::Callbacks::AuthSessionTicketResponseCallback /* Size=0x10 */
+{
+    union {
+    /* 0x00 */ Component::SteamApi::SteamCallbackBase SteamCallbackBase;
+    /* 0x00 */ Component::SteamApi::Callbacks::AuthSessionTicketResponseCallback::AuthSessionTicketResponseCallbackVTable* VTable;
+    } _union_0x0;
+};
+
+__unaligned struct Component::SteamApi::SteamTypes::AuthSessionTicketResponse /* Size=0x8 */
+{
+    /* 0x0 */ unsigned __int32 HAuthTicket;
+    /* 0x4 */ __int32 EResult;
+};
+
+__unaligned struct Component::SteamApi::Callbacks::AuthSessionTicketResponseCallback::AuthSessionTicketResponseCallbackVTable /* Size=0x0 */
+{
+    /*     */ __int64 _vf0;
+    /* 0x8 */ void (__fastcall *Run)(Component::SteamApi::Callbacks::AuthSessionTicketResponseCallback* a1, Component::SteamApi::SteamTypes::AuthSessionTicketResponse* a2);
+};
+
+__unaligned struct Component::SteamApi::Callbacks::FloatingGamepadTextInputDismissedCallback /* Size=0x10 */
+{
+    union {
+    /* 0x00 */ Component::SteamApi::SteamCallbackBase SteamCallbackBase;
+    /* 0x00 */ Component::SteamApi::Callbacks::FloatingGamepadTextInputDismissedCallback::FloatingGamepadTextInputDismissedCallbackVTable* VTable;
+    } _union_0x0;
+};
+
+__unaligned struct Component::SteamApi::Callbacks::FloatingGamepadTextInputDismissedCallback::FloatingGamepadTextInputDismissedCallbackVTable /* Size=0x0 */
+{
+    /*     */ __int64 _vf0;
+    /* 0x8 */ void (__fastcall *Run)(Component::SteamApi::Callbacks::FloatingGamepadTextInputDismissedCallback* a1, void* a2);
+};
+
+__unaligned struct Component::SteamApi::Callbacks::GamepadTextInputDismissedCallback /* Size=0x10 */
+{
+    union {
+    /* 0x00 */ Component::SteamApi::SteamCallbackBase SteamCallbackBase;
+    /* 0x00 */ Component::SteamApi::Callbacks::GamepadTextInputDismissedCallback::GamepadTextInputDismissedCallbackVTable* VTable;
+    } _union_0x0;
+};
+
+__unaligned struct Component::SteamApi::SteamTypes::GamepadTextInputDismissedData /* Size=0x12 */
+{
+    /* 0x00 */ bool Submitted;
+    /*      */ byte _gap_0x1;
+    /*      */ byte _gap_0x2[0x2];
+    /* 0x04 */ unsigned __int32 SubmittedTextSize;
+    /* 0x08 */ unsigned __int32 AppId;
+    /*      */ byte _gap_0xC[0x4];
+    /*      */ byte _gap_0x10[0x2];
+};
+
+__unaligned struct Component::SteamApi::Callbacks::GamepadTextInputDismissedCallback::GamepadTextInputDismissedCallbackVTable /* Size=0x0 */
+{
+    /*     */ __int64 _vf0;
+    /* 0x8 */ void (__fastcall *Run)(Component::SteamApi::Callbacks::GamepadTextInputDismissedCallback* a1, Component::SteamApi::SteamTypes::GamepadTextInputDismissedData* a2);
+};
+
+__unaligned struct Component::SteamApi::SteamTypes::CSteamId /* Size=0x8 */
+{
+    /* 0x0 */ unsigned __int64 RawSteamId;
+};
+
+__unaligned struct Component::SteamApi::SteamApi /* Size=0x4D0 */
+{
+    /*       */ byte _gap_0x0[0x408];
+    /* 0x408 */ bool SteamApiInitialized;
+    /*       */ byte _gap_0x409;
+    /*       */ byte _gap_0x40A[0x2];
+    /* 0x40C */ float TimeSinceLastCallbackRun;
+    /* 0x410 */ unsigned __int32 SteamAppId;
+    /* 0x414 */ Component::SteamApi::SteamTypes::CSteamId SteamLocalUserId;
+    /*       */ byte _gap_0x41C[0x4];
+    /* 0x420 */ void* PersonaNamePtr;
+    /* 0x428 */ bool AuthTicketPresent;
+    /*       */ byte _gap_0x429;
+    /*       */ byte _gap_0x42A[0x2];
+    /* 0x42C */ Component::SteamApi::SteamTypes::AuthSessionTicketResponse AuthTicket;
+    /* 0x434 */ bool VirtualKeyboardOpened;
+    /*       */ byte _gap_0x435;
+    /*       */ byte _gap_0x436[0x2];
+    /* 0x438 */ Client::System::String::Utf8String VirtualKeyboardEnteredText;
+    /* 0x4A0 */ Component::SteamApi::Callbacks::AuthSessionTicketResponseCallback AuthSessionTicketResponseCallback;
+    /* 0x4B0 */ Component::SteamApi::Callbacks::FloatingGamepadTextInputDismissedCallback FloatingGamepadTextInputDismissedCallback;
+    /* 0x4C0 */ Component::SteamApi::Callbacks::GamepadTextInputDismissedCallback GamepadTextInputDismissedCallback;
+};
+
+__unaligned struct Component::SteamApi::SteamCallbackBase::SteamCallbackBaseVTable /* Size=0x0 */
+{
+    /* 0x0 */ void (__fastcall *RunExtended)(Component::SteamApi::SteamCallbackBase* a1, void* a2, bool a3, __int64 a4);
+    /* 0x8 */ void (__fastcall *Run)(Component::SteamApi::SteamCallbackBase* a1, void* a2);
+    /* 0x10 */ __int64 (__fastcall *GetSize)(Component::SteamApi::SteamCallbackBase* a1);
+    /* 0x18 */ void (__fastcall *Dtor)(Component::SteamApi::SteamCallbackBase* a1, bool a2);
 };
 
 __unaligned struct Component::Text::TextModule::TextModuleVTable /* Size=0x0 */
