@@ -15,8 +15,8 @@ public unsafe partial struct AddonJobHudBLM0 {
     public partial struct ElementalGaugeData {
         [FieldOffset(0x00)] public AddonJobHudGaugeData GaugeData;
         [FieldOffset(0x08)] public fixed byte Prerequisites[5];
-        [FieldOffset(0x10)] public int AstralFireStacks;
-        [FieldOffset(0x14)] public int UmbralIceStacks;
+        [FieldOffset(0x10)] public int ElementStacks; // Positive = Fire, Negative = Ice
+        [FieldOffset(0x14)] public int ElementStackMax;
         [FieldOffset(0x18)] public int ElementTimeLeft;
         [FieldOffset(0x1C)] public int ElementMaxTime;
         [FieldOffset(0x20)] public int UmbralHearts;
