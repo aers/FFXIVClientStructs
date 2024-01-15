@@ -335,6 +335,7 @@ public abstract class ExporterBase {
 
             var isUnion = layouts.Count > 1;
             if (isUnion) {
+                FillGaps(ref offset, fieldOffset, padFill, sb);
                 sb.AppendLine("    union {");
             }
 
