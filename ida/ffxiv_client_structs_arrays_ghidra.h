@@ -5072,11 +5072,11 @@ __unaligned struct Client_Game_Control_GazeController_Gaze_TargetInformation /* 
 {
     /*      */ byte _gap_0x0[0x8];
     /* 0x08 */ Client_Game_Control_GazeController_Gaze_TargetInformation_TargetInfoType Type;
+    /*      */ byte _gap_0xC[0x4];
     union {
     /* 0x10 */ Client_Game_Object_GameObjectID TargetId;
     /* 0x10 */ Common_Math_Vector3 Unk10;
     } _union_0x10;
-    /*      */ byte _gap_0x1C[0x4];
     /* 0x20 */ __int32 Unk20;
     /*      */ byte _gap_0x24[0x4];
 };
@@ -5189,12 +5189,11 @@ __unaligned struct Client_Game_Character_Character /* Size=0x1BD0 */
     /*        */ byte _gap_0x1BAC[0x4];
     /* 0x1BB0 */ unsigned __int16 CurrentWorld;
     /* 0x1BB2 */ unsigned __int16 HomeWorld;
+    /*        */ byte _gap_0x1BB4[0x2];
     union {
     /* 0x1BB6 */ byte EventState;
     /* 0x1BB6 */ Client_Game_Character_Character_CharacterModes Mode;
     } _union_0x1BB6;
-    /*        */ byte _gap_0x1BB5;
-    /*        */ byte _gap_0x1BB6;
     /* 0x1BB7 */ byte ModeParam;
     /*        */ byte _gap_0x1BB8[0x2];
     /*        */ byte _gap_0x1BBA;
@@ -7060,6 +7059,7 @@ __unaligned struct Client_Game_InventoryItem /* Size=0x38 */
     /* 0x00 */ Client_Game_InventoryType Container;
     /* 0x04 */ __int16 Slot;
     /* 0x06 */ bool IsSymbolic;
+    /*      */ byte _gap_0x7;
     union {
     /* 0x08 */ unsigned __int32 ItemID;
     struct {
@@ -7067,7 +7067,6 @@ __unaligned struct Client_Game_InventoryItem /* Size=0x38 */
     /* 0x0A */ unsigned __int16 LinkedInventoryType;
     } _union_struct_0x8;
     } _union_0x8;
-    /*      */ byte _gap_0xB;
     /* 0x0C */ unsigned __int32 Quantity;
     /* 0x10 */ unsigned __int16 Spiritbond;
     /* 0x12 */ unsigned __int16 Condition;
@@ -9628,11 +9627,12 @@ __unaligned struct Client_LayoutEngine_LayoutManager /* Size=0x98 */
     /* 0x38 */ unsigned __int32 FestivalStatus;
     /*      */ byte _gap_0x3C[0x4];
     /* 0x40 */ unsigned __int32 ActiveFestivals[0x4];
+    /*      */ byte _gap_0x50[0x30];
     union {
     /* 0x80 */ void* HousingController;
     /* 0x80 */ Client_LayoutEngine_OutdoorAreaLayoutData* OutdoorAreaData;
     } _union_0x80;
-    /*      */ byte _gap_0x58[0x38];
+    /*      */ byte _gap_0x88[0x8];
     /* 0x90 */ Client_LayoutEngine_IndoorAreaLayoutData* IndoorAreaData;
 };
 
@@ -11082,6 +11082,7 @@ __unaligned struct StdVectorComponentGUIAtkValue /* Size=0x18 */
 __unaligned struct Component_GUI_AtkValue /* Size=0x10 */
 {
     /* 0x00 */ Component_GUI_ValueType Type;
+    /*      */ byte _gap_0x4[0x4];
     union {
     /* 0x08 */ __int32 Int;
     /* 0x08 */ unsigned __int32 UInt;
@@ -11091,7 +11092,6 @@ __unaligned struct Component_GUI_AtkValue /* Size=0x10 */
     /* 0x08 */ StdVectorComponentGUIAtkValue* Vector;
     /* 0x08 */ Client_Graphics_Kernel_Texture* Texture;
     } _union_0x8;
-    /*      */ byte _gap_0xC[0x4];
 };
 
 __unaligned struct Client_UI_AddonBank_AddonBankVTable /* Size=0x0 */
@@ -11745,6 +11745,7 @@ __unaligned struct Client_UI_AddonGuildLeve /* Size=0x18F0 */
     /* 0x0228 */ Component_GUI_AtkComponentTreeList* AtkComponentTreeList228;
     /* 0x0230 */ Component_GUI_AtkComponentRadioButton* FieldcraftButton;
     /* 0x0238 */ Component_GUI_AtkComponentRadioButton* TradecraftButton;
+    /*        */ byte _gap_0x240[0x8];
     union {
     /* 0x0248 */ Component_GUI_AtkComponentRadioButton* CarpenterButton;
     /* 0x0248 */ Component_GUI_AtkComponentRadioButton* MinerButton;
@@ -11757,7 +11758,6 @@ __unaligned struct Client_UI_AddonGuildLeve /* Size=0x18F0 */
     /* 0x0258 */ Component_GUI_AtkComponentRadioButton* ArmorerButton;
     /* 0x0258 */ Component_GUI_AtkComponentRadioButton* FisherButton;
     } _union_0x258;
-    /*        */ byte _gap_0x258[0x8];
     /* 0x0260 */ Component_GUI_AtkComponentRadioButton* GoldsmithButton;
     /* 0x0268 */ Component_GUI_AtkComponentRadioButton* LeatherworkerButton;
     /* 0x0270 */ Component_GUI_AtkComponentRadioButton* WeaverButton;
@@ -17660,12 +17660,13 @@ __unaligned struct Client_UI_Agent_AgentReconstructionBox /* Size=0x240 */
     /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
     /*       */ byte _gap_0x28[0x28];
     /* 0x050 */ Client_UI_Agent_AgentItemDonationInfo ItemDonationArray[0xA];
+    /*       */ byte _gap_0x140[0xD8];
+    /*       */ byte _gap_0x218[0x4];
     union {
     /* 0x21C */ __int32 LimitedTotal;
     /* 0x21C */ __int32 UnlimitedTotal;
     } _union_0x21C;
-    /*       */ byte _gap_0x144[0x4];
-    /*       */ byte _gap_0x148[0xF8];
+    /*       */ byte _gap_0x220[0x20];
 };
 
 __unaligned struct Client_UI_Agent_AgentRequest /* Size=0x460 */
@@ -18381,6 +18382,7 @@ __unaligned struct Client_UI_Agent_MycItemCategory /* Size=0x184 */
 
 __unaligned struct Client_UI_Agent_MycItemBoxData /* Size=0x1580 */
 {
+    /*        */ byte _gap_0x0[0x8];
     union {
     /* 0x0008 */ Client_UI_Agent_MycItemCategory ItemCacheArray[0x7];
     struct {
@@ -18405,7 +18407,7 @@ __unaligned struct Client_UI_Agent_MycItemBoxData /* Size=0x1580 */
     /* 0x13BC */ Client_UI_Agent_MycItemCategory ItemRelatedHolster;
     } _union_struct_0xAA4;
     } _union_0xAA4;
-    /*        */ byte _gap_0x1538[0x18];
+    /*        */ byte _gap_0x1540[0x10];
     /* 0x1550 */ __int32 HolsterCurrentTab;
     /*        */ byte _gap_0x1554[0x4];
     /* 0x1558 */ __int32 LastSelectedActionId;
