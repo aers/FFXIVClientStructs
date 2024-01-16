@@ -2815,7 +2815,6 @@ classes:
     funcs:
       0x1401C06C0: InitInstance
       0x1401C0730: ctor
-      0x1401C0780: dtor
       0x1401C07F0: WaitAll
       0x1401C0900: AddThread
   Client::System::File::FileInterface:
@@ -10412,12 +10411,90 @@ classes:
     funcs:
       0x1414B1DE0: ctor
       0x1414BB840: HandleEnterContentInfoPacket  # static
+  Client::Game::InstanceContent::PublicContentBonding:
+    vtbls:
+      - ea: 0x141C30BC8
+        base: Client::Game::InstanceContent::PublicContentDirector
+    funcs:
+      0x1414B2DF0: ctor
+  Client::Game::InstanceContent::PublicContentTripleTriad:
+    vtbls:
+      - ea: 0x141C31748
+        base: Client::Game::InstanceContent::PublicContentDirector
+    funcs:
+      0x1414B3370: ctor
+  Client::Game::InstanceContent::PublicContentEureka:
+    vtbls:
+      - ea: 0x141C322C8
+        base: Client::Game::InstanceContent::PublicContentDirector
+    funcs:
+      0x1414B4550: ctor
+  Client::Game::InstanceContent::PublicContentRising:
+    vtbls:
+      - ea: 0x141C33A28
+        base: Client::Game::InstanceContent::PublicContentDirector
+    funcs:
+      0x1414B6090: ctor
+  Client::Game::InstanceContent::PublicContentLeapOfFaith:
+    vtbls:
+      - ea: 0x141C345A8
+        base: Client::Game::InstanceContent::PublicContentDirector
+    funcs:
+      0x1414B6970: ctor
+  Client::Game::InstanceContent::PublicContentEurekaHydatos:
+    vtbls:
+      - ea: 0x141C32E78
+        base: Client::Game::InstanceContent::PublicContentEureka
+    funcs:
+      0x1414B5C00: ctor
+  Client::Game::InstanceContent::PublicContentDiadem:
+    vtbls:
+      - ea: 0x141C35128
+        base: Client::Game::InstanceContent::PublicContentDirector
+    funcs:
+      0x1414B6D70: ctor
+  Client::Game::InstanceContent::PublicContentBozja:
+    vtbls:
+      - ea: 0x141C36828
+        base: Client::Game::InstanceContent::PublicContentDirector
+    funcs:
+      0x1414B8A00: ctor
+  Client::Game::InstanceContent::PublicContentSoutherFront:
+    vtbls:
+      - ea: 0x141C373D0
+        base: Client::Game::InstanceContent::PublicContentBozja
+    funcs:
+      0x1414B9210: ctor
+  Client::Game::InstanceContent::PublicContentDelubrum:
+    vtbls:
+      - ea: 0x141C396D0
+        base: Client::Game::InstanceContent::PublicContentDirector
+    funcs:
+      0x1414B96B0: ctor
+  Client::Game::InstanceContent::PublicContentDelubrumSavage:
+    vtbls:
+      - ea: 0x141C3A280
+        base: Client::Game::InstanceContent::PublicContentDirector
+    funcs:
+      0x1414B9740: ctor
+  Client::Game::InstanceContent::PublicContentZadnor:
+    vtbls:
+      - ea: 0x141C37F78
+        base: Client::Game::InstanceContent::PublicContentBozja
+    funcs:
+      0x1414B92C0: ctor
   Client::Game::InstanceContent::PublicContentMJI:
     vtbls:
       - ea: 0x141C35CA8
         base: Client::Game::InstanceContent::PublicContentDirector
     funcs:
       0x1414B7110: ctor
+  Client::Game::InstanceContent::PublicContentFSG:
+    vtbls:
+      - ea: 0x141C3AE30
+        base: Client::Game::InstanceContent::PublicContentDirector
+    funcs:
+      0x1414B9DE0: ctor
   Client::UI::PopupMenu:
     vtbls:
       - ea: 0x141A8F010
