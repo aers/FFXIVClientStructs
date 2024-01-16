@@ -122,6 +122,24 @@ public unsafe partial struct UIModule {
     [VirtualFunction(38)]
     public partial UI3DModule* GetUI3DModule();
 
+    [VirtualFunction(41)]
+    public partial EmoteHistoryModule* GetEmoteHistoryModule();
+
+    [VirtualFunction(42)]
+    public partial MinionListModule* GetMinionListModule();
+
+    [VirtualFunction(43)]
+    public partial MountListModule* GetMountListModule();
+
+    [VirtualFunction(45)]
+    public partial AozNoteModule* GetAozNoteModule();
+
+    [VirtualFunction(47)]
+    public partial AchievementListModule* GetAchievementListModule();
+
+    [VirtualFunction(48)]
+    public partial GroupPoseModule* GetGroupPoseModule();
+
     [VirtualFunction(49)]
     public partial FieldMarkerModule* GetFieldMarkerModule();
 
@@ -133,6 +151,9 @@ public unsafe partial struct UIModule {
 
     [VirtualFunction(58)]
     public partial BannerModule* GetBannerModule();
+
+    [VirtualFunction(62)]
+    public partial VVDActionModule* GetVVDActionModule();
 
     [VirtualFunction(65)]
     public partial UIInputData* GetUIInputData();

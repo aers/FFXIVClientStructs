@@ -4994,12 +4994,32 @@ classes:
       30: GetRaptureTeleportHistory
       31: GetItemContextCustomizeModule
       32: GetRecommendEquipModule
+      33: GetPvpSetModule
       34: GetInfoModule
       36: GetAgentModule
       38: GetUI3DModule
+      41: GetEmoteHistoryModule
+      42: GetMinionListModule
+      43: GetMountListModule
+      44: GetEmjModule
+      45: GetAozNoteModule
+      46: GetCrossWorldLinkShellModule
+      47: GetAchievementListModule
+      48: GetGroupPoseModule
+      49: GetFieldMarkerModule
+      51: GetMycNoteModule
+      52: GetOrnamentListModule
+      53: GetMycItemModule
+      54: GetGroupPoseStampModule
       55: GetInputTimerModule
+      56: GetMcAggreModule
       57: GetRetainerCommentModule
       58: GetBannerModule
+      59: GetAdventureNoteModule
+      60: GetAktkNoteModule
+      61: GetVVDNoteModule
+      62: GetVVDActionModule
+      63: GetTofuModule
       64: GetFishingModule
       65: GetUIInputData
       66: GetUIInputModule
@@ -5095,6 +5115,162 @@ classes:
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
       0x1406BE4D0: ResetAll
+  Client::UI::Misc::EmoteHistoryModule:
+    vtbls:
+      - ea: 0x141A1C848
+        base: Client::UI::Misc::UserFileManager::UserFileEvent
+    funcs:
+      0x1406C0400: ctor
+      0x1406C05F0: AddToHistory
+      0x1406C0670: RemoveFromHistory
+      0x1406C0740: AddToFavorites
+      0x1406C07C0: SetFavorite
+      0x1406C0810: SwapFavorites
+      0x1406C0BD0: IsUnseen
+      0x1406C0C20: SetSeen
+  Client::UI::Misc::MinionListModule:
+    vtbls:
+      - ea: 0x141A1C8B0
+        base: Client::UI::Misc::UserFileManager::UserFileEvent
+    funcs:
+      0x1406C0E30: ctor
+      0x1406C1120: GetUnseenCompanionsPtrById
+      0x1406C1160: GetUnseenCompanionsPtr
+      0x1406C1180: AddToUnseenCompanions
+      0x1406C1200: RemoveFromUnseenCompanions
+      0x1406C12A0: IsFavorite
+      0x1406C12E0: GetFavoritePtr
+      0x1406C1300: AddToFavorites
+      0x1406C1390: RemoveFromFavorites
+      0x1406C13F0: SwapFavorites
+      0x1406C1440: HasAnyFavorites
+      0x1406C1460: HasFreeFavoriteSlots
+  Client::UI::Misc::MountListModule:
+    vtbls:
+      - ea: 0x141A1C918
+        base: Client::UI::Misc::UserFileManager::UserFileEvent
+    funcs:
+      0x1406C1570: ctor
+      0x1406C1860: GetUnseenMountPtrById
+      0x1406C18B0: GetUnseenMountPtr
+      0x1406C18D0: AddToUnseenMounts
+      0x1406C1980: RemoveFromUnseenMounts
+      0x1406C1A30: GetFavoritePtrById
+      0x1406C1A80: GetFavoritePtr
+      0x1406C1AA0: AddToFavorites
+      0x1406C1B60: RemoveFromFavorites
+      0x1406C1BE0: SwapFavorites
+      0x1406C1C30: HasAnyFavorites
+      0x1406C1C50: HasFreeFavoriteSlots
+  Client::UI::Misc::EmjModule:
+    vtbls:
+      - ea: 0x141A1C980
+        base: Client::UI::Misc::UserFileManager::UserFileEvent
+    funcs:
+      0x1406C1DA0: ctor
+  Client::UI::Misc::AozNoteModule:
+    vtbls:
+      - ea: 0x141A15E48
+        base: Client::UI::Misc::UserFileManager::UserFileEvent
+    funcs:
+      0x1406C2430: ctor
+      0x1406C2D10: GetActiveSetCustomNamePtr
+      0x1406C2D30: HasActiveSetCustomName
+      0x1406C2D50: SetActiveSetCustomName
+      0x1406C2DB0: LoadActiveSetHotBars
+      0x1406C2EA0: SaveActiveSetHotBars
+  Client::UI::Misc::CrossWorldLinkShellModule:
+    vtbls:
+      - ea: 0x141A1C9E8
+        base: Client::UI::Misc::UserFileManager::UserFileEvent
+    funcs:
+      0x1406C3920: ctor
+  Client::UI::Misc::AchievementListModule:
+    vtbls:
+      - ea: 0x141A1CA50
+        base: Client::UI::Misc::UserFileManager::UserFileEvent
+    funcs:
+      0x1406C4CF0: ctor
+      0x1406C4F10: UpdateWatchlistCount
+      0x1406C4F40: AddToWatchlist
+      0x1406C4FE0: RemoveFromWatchlist
+      0x1406C5090: IsOnWatchlist
+      0x1406C50C0: IsWatchlistFull
+  Client::UI::Misc::GroupPoseModule:
+    vtbls:
+      - ea: 0x141A1CAB8
+        base: Client::UI::Misc::UserFileManager::UserFileEvent
+    funcs:
+      0x1406C5130: ctor
+      0x1406C52D0: SaveCameraSettings
+      0x1406C5350: SaveLightingSettings
+  Client::UI::Misc::MycNoteModule:
+    vtbls:
+      - ea: 0x141A1CBF8
+        base: Client::UI::Misc::UserFileManager::UserFileEvent
+    funcs:
+      0x1406C6FA0: ctor
+  Client::UI::Misc::OrnamentListModule:
+    vtbls:
+      - ea: 0x141A1CC60
+        base: Client::UI::Misc::UserFileManager::UserFileEvent
+    funcs:
+      0x1406C7290: ctor
+  Client::UI::Misc::MycItemModule:
+    vtbls:
+      - ea: 0x141A1CCC8
+        base: Client::UI::Misc::UserFileManager::UserFileEvent
+    funcs:
+      0x1406C7680: ctor
+  Client::UI::Misc::GroupPoseStampModule:
+    vtbls:
+      - ea: 0x141A1CD30
+        base: Client::UI::Misc::UserFileManager::UserFileEvent
+    funcs:
+      0x1406C8120: ctor
+  Client::UI::Misc::McAggreModule:
+    vtbls:
+      - ea: 0x141A1BE38
+        base: Client::UI::Misc::UserFileManager::UserFileEvent
+    funcs:
+      0x14066CCB0: ctor
+  Client::UI::Misc::AdventureNoteModule:
+    vtbls:
+      - ea: 0x141A1CE00
+        base: Client::UI::Misc::UserFileManager::UserFileEvent
+    funcs:
+      0x1406C98E0: ctor
+  Client::UI::Misc::AktkNoteModule:
+    vtbls:
+      - ea: 0x141A1CE68
+        base: Client::UI::Misc::UserFileManager::UserFileEvent
+    funcs:
+      0x1406C9C70: ctor
+  Client::UI::Misc::VVDNoteModule:
+    vtbls:
+      - ea: 0x141B620A0
+        base: Client::UI::Misc::UserFileManager::UserFileEvent
+    funcs:
+      0x14144E5E0: ctor
+  Client::UI::Misc::VVDActionModule:
+    vtbls:
+      - ea: 0x141B62118
+        base: Client::UI::Misc::UserFileManager::UserFileEvent
+    funcs:
+      0x14144E940: ctor
+      0x14144EA80: SaveActions
+  Client::UI::Misc::TofuModule:
+    vtbls:
+      - ea: 0x141A1BC88
+        base: Client::UI::Misc::UserFileManager::UserFileEvent
+    funcs:
+      0x14066A470: ctor
+  Client::UI::Misc::FishingModule:
+    vtbls:
+      - ea: 0x141A1CED0
+        base: Client::UI::Misc::UserFileManager::UserFileEvent
+    funcs:
+      0x1406C9F50: ctor
   Client::System::Crypt::SimpleString:
     vtbls:
       - ea: 0x141A16880
