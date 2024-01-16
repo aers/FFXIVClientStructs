@@ -124,6 +124,7 @@ public struct Vector2 : IEquatable<Vector2>, IFormattable {
 
     public static implicit operator System.Numerics.Vector2(Vector2 v) => new(v.X, v.Y);
     public static implicit operator Vector2(System.Numerics.Vector2 v) => new(v.X, v.Y);
+    public static implicit operator Vector2(System.Drawing.Point p) => new(p.X, p.Y);
 
     public static Vector2 operator +(Vector2 a, Vector2 b) => new(a.X + b.X, a.Y + b.Y);
     public static Vector2 operator -(Vector2 a, Vector2 b) => new(a.X - b.X, a.Y - b.Y);

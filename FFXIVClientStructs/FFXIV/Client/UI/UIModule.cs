@@ -17,8 +17,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 public unsafe partial struct UIModule {
     public static UIModule* Instance() => Framework.Instance()->GetUiModule();
 
-    [FieldOffset(0x0)] public void* vtbl;
-    [FieldOffset(0x0)] public void** vfunc;
+    // CExporterIgnore so it only exports the VTable from source generation
+    [FieldOffset(0x0), CExportIgnore] public void* vtbl;
+    [FieldOffset(0x0), CExportIgnore] public void** vfunc;
     [FieldOffset(0x8)] public void** AtkModuleEvent;
     [FieldOffset(0x10)] public void** ExcelLanguageEvent;
     [FieldOffset(0x18)] public ChangeEventInterface ChangeEventInterface;
@@ -42,6 +43,9 @@ public unsafe partial struct UIModule {
 
     [VirtualFunction(7)]
     public partial RaptureAtkModule* GetRaptureAtkModule();
+
+    [VirtualFunction(8)]
+    internal partial RaptureAtkModule* GetRaptureAtkModule2();
 
     [VirtualFunction(9)]
     public partial RaptureShellModule* GetRaptureShellModule();
@@ -80,22 +84,34 @@ public unsafe partial struct UIModule {
     public partial UiSavePackModule* GetUiSavePackModule();
 
     [VirtualFunction(21)]
-    public partial void* GetLetterDataModule();
+    public partial LetterDataModule* GetLetterDataModule();
 
     [VirtualFunction(22)]
-    public partial void* GetRetainerTaskDataModule();
+    public partial RetainerTaskDataModule* GetRetainerTaskDataModule();
 
     [VirtualFunction(23)]
-    public partial void* GetFlagStatusModule();
+    public partial FlagStatusModule* GetFlagStatusModule();
+
+    [VirtualFunction(24)]
+    public partial RecipeFavoriteModule* GetRecipeFavoriteModule();
 
     [VirtualFunction(26)]
     public partial RaptureUiDataModule* GetRaptureUiDataModule();
 
+    [VirtualFunction(29)]
+    public partial GoldSaucerModule* GetGoldSaucerModule();
+
     [VirtualFunction(30)]
-    public partial void* GetRaptureTeleportHistory();
+    public partial RaptureTeleportHistory* GetRaptureTeleportHistory();
+
+    [VirtualFunction(31)]
+    public partial ItemContextCustomizeModule* GetItemContextCustomizeModule();
 
     [VirtualFunction(32)]
     public partial RecommendEquipModule* GetRecommendEquipModule();
+
+    [VirtualFunction(33)]
+    public partial PvpSetModule* GetPvpSetModule();
 
     [VirtualFunction(34)]
     public partial InfoModule* GetInfoModule();
@@ -105,6 +121,24 @@ public unsafe partial struct UIModule {
 
     [VirtualFunction(38)]
     public partial UI3DModule* GetUI3DModule();
+
+    [VirtualFunction(41)]
+    public partial EmoteHistoryModule* GetEmoteHistoryModule();
+
+    [VirtualFunction(42)]
+    public partial MinionListModule* GetMinionListModule();
+
+    [VirtualFunction(43)]
+    public partial MountListModule* GetMountListModule();
+
+    [VirtualFunction(45)]
+    public partial AozNoteModule* GetAozNoteModule();
+
+    [VirtualFunction(47)]
+    public partial AchievementListModule* GetAchievementListModule();
+
+    [VirtualFunction(48)]
+    public partial GroupPoseModule* GetGroupPoseModule();
 
     [VirtualFunction(49)]
     public partial FieldMarkerModule* GetFieldMarkerModule();
@@ -118,14 +152,17 @@ public unsafe partial struct UIModule {
     [VirtualFunction(58)]
     public partial BannerModule* GetBannerModule();
 
+    [VirtualFunction(62)]
+    public partial VVDActionModule* GetVVDActionModule();
+
     [VirtualFunction(65)]
     public partial UIInputData* GetUIInputData();
 
     [VirtualFunction(66)]
-    public partial void* GetUIInputModule();
+    public partial UIInputModule* GetUIInputModule();
 
     [VirtualFunction(68)]
-    public partial void* GetLogFilterConfig();
+    public partial LogFilterConfig* GetLogFilterConfig();
 
     [VirtualFunction(76)]
     public partial bool EnterGPose();

@@ -3,7 +3,7 @@ using FFXIVClientStructs.FFXIV.Application.Network.WorkDefinitions;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
-[StructLayout(LayoutKind.Explicit, Size = 0xF40)]
+[StructLayout(LayoutKind.Explicit, Size = 0xF58)]
 public unsafe partial struct QuestManager {
     [FixedSizeArray<QuestWork>(30)]
     [FieldOffset(0x10)] public fixed byte NormalQuests[0x18 * 30];
@@ -56,6 +56,14 @@ public unsafe partial struct QuestManager {
      * <remarks>This is a helper method to handle trimming uints down to the game-requested ushort.</remarks>
      */
     public bool IsQuestAccepted(uint questId) => IsQuestAccepted((ushort)(questId & 0xFFFF));
+
+    /// <summary>
+    /// Check if a recipe has been crafted (= completed) before.
+    /// </summary>
+    /// <param name="recipeId">The RowId of the Recipe Sheet.</param>
+    /// <returns>Returns <c>true</c> if the recipe has been completed, <c>false</c> otherwise.</returns>
+    [MemberFunction("40 53 48 83 EC 20 8B D9 81 F9")]
+    public static partial bool IsRecipeComplete(uint recipeId);
 
     /// <summary>
     /// Check if a specific levequest has been completed.

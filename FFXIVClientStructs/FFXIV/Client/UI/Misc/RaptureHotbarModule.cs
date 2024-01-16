@@ -1,5 +1,6 @@
 using System.Runtime.CompilerServices;
 using FFXIVClientStructs.FFXIV.Client.Game;
+using FFXIVClientStructs.FFXIV.Client.Game.UI;
 using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Client.UI.Misc.UserFileManager;
@@ -14,17 +15,58 @@ public unsafe partial struct RaptureHotbarModule {
     public static RaptureHotbarModule* Instance() => Framework.Instance()->GetUiModule()->GetRaptureHotbarModule();
 
     [FieldOffset(0)] public UserFileEvent UserFileEvent; // to 0x40
+    [FieldOffset(0x40)] public void** InputCodeModifiedInterfaceVTable;
     [FieldOffset(0x48)] public UIModule* UiModule;
+
+    /// <summary>
+    /// Set in RaptureHotbarModule's ReadFile after all processing/loading appears to have been completed.
+    /// Might also (probably does?) signify all migrations and version checks have been completed and everything
+    /// is stable.
+    /// </summary>
+    [FieldOffset(0x50)] public bool ModuleReady;
 
     /// <summary>
     /// The ID of the ClassJob associated with the currently-active hotbars.
     /// </summary>
+    /// <remarks>
+    /// Can have a bit set at 0x80 if <see cref="ModuleReady"/> is false, though the meaning of this flag is unclear.
+    /// </remarks>
     [FieldOffset(0x51)] public byte ActiveHotbarClassJobId;
+
+    /// <summary>
+    /// Appears to be set if HOTBAR.DAT was loaded from disk successfully. Set to 0 if decryption fails or
+    /// the file read errors out. Does not appear to track migration state. Set in ReadFile.
+    /// </summary>
+    [FieldOffset(0x52)] public bool DatFileLoadedSuccessfully;
+
+    // PvE hotbars starting from MCH onwards, appears to track whether a hotbar was initialized?
+    [FieldOffset(0x54)] internal fixed bool ExpacJobHotbarsCreated[12];
+
+    // PvP hotbars for all jobs, appears to track if it's been initialized. 
+    [FieldOffset(0x60)] internal fixed bool PvPHotbarsCreated[22];
+
+    // ????? maybe AllowResets?
+    [FieldOffset(0x76)] internal bool ClearCallbackPresent;
+
+    /// <summary>
+    /// A state field to track the current materia melding state (locked - 1 / standard - 2 / advanced - 3), and whether
+    /// the hotbars were migrated to replace actions or not.
+    /// </summary>
+    [FieldOffset(0x78)] internal uint MateriaMeldState;
 
     /// <summary>
     /// A bitfield representing whether a specific hotbar is to be considered "shared" or not.
     /// </summary>
     [FieldOffset(0x7C)] public fixed byte HotbarShareStateBitmask[4];
+
+    /// <summary>
+    /// Another bitmask that appears to be related to hotbar sharing state.
+    /// Initialized to 0x3E3F8 (default share state) on game start, but doesn't ever appear to be updated or read elsewhere.
+    /// Dead field?
+    /// </summary>
+    [FieldOffset(0x80)] internal fixed byte HotbarShareStateBitmask2[4];
+
+    [FieldOffset(0x88)] public ClearCallback* ClearCallbackPtr;
 
     /// <summary>
     /// An array of all active hotbars loaded and available to the player. This field tracks both normal hotbars
@@ -44,6 +86,12 @@ public unsafe partial struct RaptureHotbarModule {
     /// </summary>
     [FieldOffset(0x11890)] public HotBarSlot ScratchSlot;
 
+    // No idea how this field works. Observed so far:
+    // 15 (0x0E) - Quest mount (?)
+    // 18 (0x12) - Mount/FashionAccessory
+    // 34 (0x22) - Carbuncle up
+    // Seems to control something with overriding the main bar too?
+    [FieldOffset(0x11970)] public uint PetHotbarMode;
 
     /// <summary>
     /// A field containing all saved hotbars, as persisted to disk. This field tracks both normal and cross hotbars, at
@@ -56,6 +104,44 @@ public unsafe partial struct RaptureHotbarModule {
     /// </remarks>
     [FixedSizeArray<SavedHotBarGroup>(65)]
     [FieldOffset(0x11974)] public fixed byte SavedHotBars[65 * SavedHotBarGroup.Size];
+
+    [FieldOffset(0x28714)] public CrossHotbarFlags CrossHotbarFlags;
+
+    /// <summary>
+    /// Field to track the player's current Grand Company. Used for emote refresh/update purposes.
+    /// </summary>
+    /// <remarks>
+    /// If this field is out of sync with game state, it will be updated on the next frame. Setting
+    /// this field manually appears to have no effect (?).
+    /// </remarks>
+    [FieldOffset(0x28718)] public uint GrandCompanyId;
+
+    /// <summary>
+    /// Field to indicate whether the PvP hotbar is currently active or not.
+    /// </summary>
+    /// <remarks>
+    /// If this field is out of sync with the game's PVP state, it will be updated on the next frame. Setting
+    /// this field manually will not enable the PvP hotbars.
+    /// </remarks>
+    [FieldOffset(0x2871C)] public bool PvPHotbarsActive;
+
+    /// <summary>
+    /// Field to indicate that the PvP hotbar swap notification (AgentPvpScreenInformation) needs to be shown.
+    /// This field is set to <c>false</c> after the agent has been shown.
+    /// </summary>
+    [FieldOffset(0x2871D)] public bool ShowPvPHotbarSwapNotification;
+
+    /// <summary>
+    /// Hotbar slots representing available Duty Actions (see also <see cref="ActionManager.GetDutyActionId"/>).
+    /// </summary>
+    [FixedSizeArray<DutyActionSlot>(2)]
+    [FieldOffset(0x28720)] public fixed byte DutyActionSlots[2 * DutyActionSlot.Size];
+
+    /// <summary>
+    /// Sets whether Duty Actions are present or not. Controls whether to show the appropriate UI element and whether
+    /// to rewrite the special DutyAction General Actions.
+    /// </summary>
+    [FieldOffset(0x288F0)] public bool DutyActionsPresent;
 
     [MemberFunction("E9 ?? ?? ?? ?? 48 8D 91 ?? ?? ?? ?? E9")]
     public partial byte ExecuteSlot(HotBarSlot* hotbarSlot);
@@ -151,6 +237,19 @@ public unsafe partial struct RaptureHotbarModule {
         RaptureHotbarModule* hotbarModule, HotBarSlot* slot);
 
     /// <summary>
+    /// Gets whether the specified action should be highlighted with ants in the UI.
+    /// Internally calls <see cref="ActionManager.IsActionHighlighted"/>.
+    /// </summary>
+    /// <remarks>
+    /// This method does not appear in any code paths.
+    /// </remarks>
+    /// <param name="commandType">The type of the command to look up.</param>
+    /// <param name="commandId">The ID of the command to look up.</param>
+    /// <returns>Returns <c>true</c> if the action would be highlighted, <c>false</c> otherwise.</returns>
+    [MemberFunction("40 53 48 83 EC 20 44 0F B6 CA 41 8B D8")]
+    public partial bool IsActionHighlighted(HotbarSlotType commandType, uint commandId);
+
+    /// <summary>
     /// Helper method to check if a specific hotbar is to be shared between all classes or not.
     /// </summary>
     /// <remarks>
@@ -162,6 +261,60 @@ public unsafe partial struct RaptureHotbarModule {
     public bool IsHotbarShared(uint hotbarId) {
         return ((1 << ((int)hotbarId & 7)) & this.HotbarShareStateBitmask[hotbarId >> 3]) > 0;
     }
+
+    /// <summary>
+    /// Sets a hotbar slot and triggers a save for it automatically via <see cref="WriteSavedSlot"/>. This will
+    /// trigger a save against the currently-active hotbar group.
+    /// </summary>
+    /// <remarks>
+    /// Caution must be taken to ensure invalid hotbar/slot IDs are not passed into this method, as game-provided
+    /// sanity checks seem to not be present for this method.
+    /// </remarks>
+    /// <param name="hotbarId">The hotbar ID to set and write.</param>
+    /// <param name="slotId">The slot ID to set and write.</param>
+    /// <param name="commandType">The command type to set.</param>
+    /// <param name="commandId">The command ID to set.</param>
+    /// <param name="ignoreSharedHotbars">Unclear use, appears to ignore writing to shared slots if set.</param>
+    /// <param name="allowSaveToPvP">If in PVP mode, allow saving to PVP hotbars. No effect if not in PVP mode.</param>
+    [MemberFunction("E8 ?? ?? ?? ?? B0 01 EB B9")]
+    public partial void SetAndSaveSlot(uint hotbarId, uint slotId, HotbarSlotType commandType, uint commandId,
+        bool ignoreSharedHotbars = false, bool allowSaveToPvP = true);
+
+    /// <summary>
+    /// Attempt to add the specified action to the first free slot of the specified hotbar.
+    /// </summary>
+    /// <param name="hotbarId">The hotbar ID to save this action to. Is not validated; must be between 0 and 9 inclusive.</param>
+    /// <param name="commandType">The command type to save.</param>
+    /// <param name="commandId">The command ID to save.</param>
+    /// <returns>Returns <c>true</c> if the save is successful, false otherwise.</returns>
+    [MemberFunction("E8 ?? ?? ?? ?? EB 62 83 7C 24")]
+    public partial bool SetAndSaveFirstAvailableNormalSlot(uint hotbarId, HotbarSlotType commandType, uint commandId);
+
+    /// <summary>
+    /// Attempt to add the specified action to the first free slot of the specified cross hotbar.
+    /// </summary>
+    /// <param name="hotbarId">The cross hotbar ID to save this action to. is not validated; must be 0 to 8 inclusive.</param>
+    /// <param name="commandType">The command type to save.</param>
+    /// <param name="commandId">The command ID to save.</param>
+    /// <returns>Returns <c>true</c> if the save is successful, false otherwise.</returns>
+    [MemberFunction("E8 ?? ?? ?? ?? EB 62 83 7C 24")]
+    public partial bool SetAndSaveFirstAvailableCrossSlot(uint hotbarId, HotbarSlotType commandType, uint commandId);
+
+    /// <summary>
+    /// Attempt to add the specified action to the first free slot of *any* normal hotbar.
+    /// </summary>
+    /// <param name="commandType">The command type to save.</param>
+    /// <param name="commandId">The command ID to save.</param>
+    /// <returns>Returns <c>true</c> if the save is successful, false otherwise.</returns>
+    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 83 FD 0A")]
+    public partial bool SetAndSaveFirstGloballyAvailableNormalSlot(HotbarSlotType commandType, uint commandId);
+
+    /// <summary>
+    /// Attempt to add the specified action to the first free slot of *any* normal hotbar.
+    /// </summary>
+    /// <inheritdoc cref="SetAndSaveFirstGloballyAvailableNormalSlot"/>
+    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 83 FD 08")]
+    public partial bool SetAndSaveFirstGloballyAvailableCrossSlot(HotbarSlotType commandType, uint commandId);
 
     /// <summary>
     /// Dumps a hotbar slot into a specific save slot within <see cref="SavedHotBars"/> and prepares a file save. Used
@@ -177,6 +330,23 @@ public unsafe partial struct RaptureHotbarModule {
     [MemberFunction("E8 ?? ?? ?? ?? EB 57 48 8D 9F ?? ?? ?? ??")]
     public partial void WriteSavedSlot(uint classJobId, uint hotbarId, uint slotId, HotBarSlot* slotSource,
         bool ignoreSharedHotbars, bool isPvpSlot);
+
+    /// <summary>
+    /// Clears the specified hotbar slot <em>and</em> the backing saved hotbar slot in the same ClassJob ID. 
+    /// </summary>
+    /// <param name="hotbarId">The saved hotbar ID to select.</param>
+    /// <param name="slotId">The saved slot ID to clear.</param>
+    [MemberFunction("E8 ?? ?? ?? ?? FF C7 83 FF 10 7C E3")]
+    public partial void ClearSavedSlotById(uint hotbarId, uint slotId);
+
+    /// <summary>
+    /// Loads the specified saved hotbar from <see cref="SavedHotBars"/> into the live hotbar. Will automatically
+    /// respect PVP mode. Will not reload from disk.
+    /// </summary>
+    /// <param name="classJobId">The ClassJob ID to retrieve a hotbar from.</param>
+    /// <param name="hotbarId">The hotbar ID to retrieve.</param>
+    [MemberFunction("E8 ?? ?? ?? ?? FF C7 83 FF 12")]
+    public partial void LoadSavedHotbar(uint classJobId, uint hotbarId);
 
     /// <summary>
     /// Get the Saved Hotbar Index for the PVP hotbar for a specific ClassJob, for use in <see cref="SavedHotBarsSpan"/>. 
@@ -195,311 +365,57 @@ public unsafe partial struct RaptureHotbarModule {
     /// <returns>The EXD Row ID for the ClassJob this hotbar is intended for. If zero, this is a shared hotbar.</returns>
     [MemberFunction("E8 ?? ?? ?? ?? 41 0F B6 CD BA")]
     public partial uint GetClassJobIdForSavedHotbarIndex(int savedHotbarIndex);
+
+    /// <summary>
+    /// Sets the value of <see cref="DutyActionsPresent"/>.
+    /// </summary>
+    /// <param name="present">Whether to show/enable duty actions or not.</param>
+    [MemberFunction("E8 ?? ?? ?? ?? 80 7B 28 01 75 1C")]
+    public partial void SetDutyActionsPresent(bool present);
+
+    /// <summary>
+    /// Gets the specified <see cref="DutyActionSlot"/>, returning slot 0 if an invalid ID is passed in.
+    /// </summary>
+    /// <param name="index">The index of the slot (0 or 1) to retrieve.</param>
+    /// <returns>Returns a pointer to the DutyActionSlot.</returns>
+    [MemberFunction("E8 ?? ?? ?? ?? 42 8B 3C FB")]
+    public partial DutyActionSlot* GetDutyActionSlot(uint index);
+
+    /// <summary>
+    /// Sets the specified DutyAction slot to hold the target action ID. Only takes effect if index is 0 or 1.
+    /// </summary>
+    /// <param name="index">The index of the DutyAction slot to edit.</param>
+    /// <param name="actionId">The ID of the action to set in this slot.</param>
+    [MemberFunction("E8 ?? ?? ?? ?? 40 FE C5 4D 8D 76 04")]
+    public partial void SetDutyActionSlot(uint index, uint actionId);
+
+    /// <summary>
+    /// Executes the specified DutyAction slot. Does not appear to validate that the slot is in an executable state.
+    /// </summary>
+    /// <param name="index">The index of the slot to execute. If greater than 1, slot 0 is executed.</param>
+    /// <returns>Returns true always (?)</returns>
+    [MemberFunction("48 83 EC 28 85 D2 78 25")]
+    public partial bool ExecuteDutyActionSlot(uint index);
 }
 
-[StructLayout(LayoutKind.Explicit, Size = Size)]
-public unsafe partial struct HotBar {
-    public const int Size = HotBarSlot.Size * 16;
+[Flags]
+public enum CrossHotbarFlags : ushort {
+    ChangeSetActive = 1 << 0,
+    Active = 1 << 1,
+    LeftSideToggleFocus = 1 << 2,
+    RightSideToggleFocus = 1 << 3,
+    LeftSideHoldFocus = 1 << 4,
+    RightSideHoldFocus = 1 << 5,
+    FadeRestOfScreen = 1 << 6,
+    PetHotbarActive = 1 << 7,
+    ExpandedHoldLeftFocus = 1 << 8,
+    ExpandedHoldRightFocus = 1 << 9,
+    WXHBLeftFocus = 1 << 10,
 
-    [FixedSizeArray<HotBarSlot>(16)]
-    [FieldOffset(0x00)] public fixed byte Slots[16 * HotBarSlot.Size];
+    WXHBRightFocus = 1 << 14,
+    EditMode = 1 << 15,
 
-    /// <summary>
-    /// Helper method to return a pointer to a specific HotBarSlot, as certain APIs are much happier with a
-    /// pointer rather than a fixed reference.
-    /// </summary>
-    /// <param name="id">A hotbar slot ID between 0 and 15.</param>
-    /// <returns>Returns a pointer to a HotBarSlot, or null if an invalid ID was passed.</returns>
-    public HotBarSlot* GetHotbarSlot(uint id) {
-        if (id > 15) return null;
-
-        return (HotBarSlot*)Unsafe.AsPointer(ref SlotsSpan[(int)id]);
-    }
-}
-
-[StructLayout(LayoutKind.Explicit, Size = Size)]
-public unsafe partial struct HotBarSlot {
-    public const int Size = 0xE0;
-
-    /// The string that appears when a hotbar slot is hovered over.
-    ///
-    /// Calculated by concatenating GetDisplayNameForSlot with PopUpKeybindHint (in most cases).
-    [FieldOffset(0x00)] public Utf8String PopUpHelp;
-
-    /// The "cost text" to display when 0xCB is in mode 2 or 4.
-    ///
-    /// This is generally filled with a flexible MP cost (e.g. "All" for certain BLM spells) or "x 123" for items.
-    [FieldOffset(0x68)] public fixed byte CostText[0x20];
-
-    /// A human-friendly display of the keybind used for this hotbar slot.
-    ///
-    /// This text will generally lead with a space and have wrapping brackets, e.g. " [Ctrl-3]".
-    [FieldOffset(0x88)] public fixed byte PopUpKeybindHint[0x20];
-
-    /// A less-friendly version of the keybind used for this hotbar slot.
-    ///
-    /// The actual use of this field is unknown, but it appears to be related to the hint in the top-left of the hotbar
-    /// UI.
-    [FieldOffset(0xA8)] public fixed byte KeybindHint[0x10];
-
-    /// The ID of the action that will be executed when this slot is triggered. Action type is determined by the
-    /// CommandType field.
-    [FieldOffset(0xB8)] public uint CommandId;
-
-    /// UNKNOWN. Appears to be the original action ID associated with this hotbar slot before adjustment.
-    ///
-    /// Note that this is *not* a reference to an icon ID; it must be combined with IconTypeA.
-    [FieldOffset(0xBC)] public uint IconA;
-
-    /// Appears to be the action ID that will be used to generate this hotbar slot icon.
-    ///
-    /// This field exists to allow a hotbar slot to have the appearance of one action, but in reality trigger a
-    /// different action. For example, PvP combos will use this to track the "active" action.
-    ///
-    /// Note that this is *not* a reference to an icon directly.
-    [FieldOffset(0xC0)] public uint IconB;
-
-    /// Unknown field with offset 0xC4 (196), possibly overloaded
-    ///
-    /// Appears to have relation to the following:
-    /// - Lost Finds Items appear to set this value to 1
-    /// - In PVP actions, the high byte controls combo icon and the low byte counts which action the combo is on
-    [FieldOffset(0xC4)] public ushort UNK_0xC4;
-
-    // 0xC6 (198) does not appear to be referenced *anywhere*. Nothing ever reads or writes to it, save for a zero-out
-    // operation. 
-
-    /// The HotbarSlotType of the action that will be executed when this hotbar slot is triggered.
-    [FieldOffset(0xC7)] public HotbarSlotType CommandType;
-
-    /// UNKNOWN. Appears to be the original action type associated with this hotbar slot before adjustment/loading.
-    [FieldOffset(0xC8)] public HotbarSlotType IconTypeA;
-
-    /// Appears to be the HotbarSlotType used to determine the icon to display on this hotbar slot.
-    ///
-    /// See notes on IconB for more information as to how this field is used.
-    [FieldOffset(0xC9)] public HotbarSlotType IconTypeB;
-
-    /// Appears to be the "primary cost" of this action, mapping down to 0, 1, 2, 4, 5, 6, 7.
-    ///
-    /// Controls the color of the displayed cost when 0xCB is 1 or 2:
-    /// - 0: White
-    /// - 1: Green (HP)
-    /// - 2: Light Pink (MP)
-    /// - 3: Orange
-    /// - 4: Pink (DoH - CP)
-    /// - 5: Yellow (DoL - GP)
-    /// - 6: Blue (Job Gauge?)
-    /// - 7: Bright Yellow (Rival Wings - CE)
-    /// - All others: Grey
-    [FieldOffset(0xCA)] public byte CostType;
-
-    /// Appears to control display of the primary cost of the action (0xCA). 
-    ///
-    /// - 1: Displays action cost from 0xD0 in bottom left (e.g. for Actions or Craft Actions)
-    /// - 2: Mode 1, but display a custom string from CostText instead (generally "All" on Actions with PrimaryCost = 4)
-    /// - 3: Displays the value of 0xD0 in the bottom right (e.g. for Gearsets/UNK_0x17)
-    /// - 4: Mode 3, but display a custom string from CostText instead (generally "x {count}" for Items)
-    /// - 0/255: No display, all other cases
-    [FieldOffset(0xCB)] public byte CostDisplayMode;
-
-    /// The icon ID that is currently being displayed on this hotbar slot. 
-    [FieldOffset(0xCC)] public int Icon;
-
-    /// UNKNOWN. Appears to be the "cost" of an action.
-    ///
-    /// For items, this field holds the number of items of that type currently present in inventory.
-    ///
-    /// For actions that have some cost (MP, job bar, etc.), this appears to be the relevant value shown in the bottom
-    /// left of the action.
-    [FieldOffset(0xD0)] public uint CostValue;
-
-    /// UNKNOWN. Appears to be Recipe specific. References the resulting Item ID of the recipe on the hotbar slot.
-    [FieldOffset(0xD4)] public uint UNK_0xD4;
-
-    /// UNKNOWN. Appears to be Recipe specific. References the CraftType for the recipe on the hotbar slot
-    [FieldOffset(0xD8)] public uint UNK_0xD8;
-
-    /// UNKNOWN. Appears to be Recipe specific to check if a recipe is valid.
-    ///
-    /// Set to 1 when the recipe results in a nonzero number of items (???).
-    ///
-    /// If 0, the tooltip for this slot will display message noting the recipe is deleted.
-    /// If 1, the tooltip for this slot will display the name and crafting class for that recipe.
-    [FieldOffset(0xDC)] public byte UNK_0xDC;
-
-    /// UNKNOWN. Appears to be Recipe specific.
-    ///
-    /// Always set to 1, apparently? 
-    [FieldOffset(0xDD)] public byte UNK_0xDD;
-
-    /// UNKNOWN. Appears to control UI display mode (icon and displayed name) in some way
-    ///
-    /// Known values so far:
-    /// - 2: Appears to be set for adjusted actions (e.g. upgraded spells/weaponskills)
-    /// - 3: Appears to mark a PVP combo action
-    /// - 4: Set on Squadron Order - Disengage, maybe others
-    /// - 5: Set for Lost Finds Items (?)
-    /// - 0/255: "generic"
-    [FieldOffset(0xDE)] public byte UNK_0xDE;
-
-    /// <summary>
-    /// A "boolean" representing if this specific hotbar slot has been fully loaded. False for empty slots and slots
-    /// that have yet to be loaded in the UI.
-    /// </summary>
-    /// <remarks>
-    /// This appears to initialize as 0 and is set to 1 when the hotbar slot appears on a visible hotbar. It will not
-    /// reset if the slot is hidden (and subsequently outdated).
-    /// </remarks>
-    [FieldOffset(0xDF)] public byte IsLoaded; // ?
-
-    /// <summary>
-    /// Check if this hotbar slot is considered "empty" or not.
-    /// </summary>
-    /// <remarks>
-    /// Borrows game logic of checking for a non-zero command ID. Kept as a byte for API compatibility though this
-    /// probably should be a bool instead.
-    /// </remarks>
-    public bool IsEmpty => this.CommandId == 0;
-
-    [MemberFunction("E8 ?? ?? ?? ?? 4C 39 6F 08")]
-    public partial void Set(UIModule* uiModule, HotbarSlotType type, uint id);
-
-    /// <summary>
-    /// Update the command of this hotbar slot to the specified value. This will not trigger a file save and will only
-    /// update the in-memory struct defined here.
-    /// </summary>
-    /// <param name="type">The <see cref="HotbarSlotType"/> that this slot should trigger.</param>
-    /// <param name="id">The ID of the command that this slot should trigger.</param>
-    public void Set(HotbarSlotType type, uint id) =>
-        Set(Framework.Instance()->GetUiModule(), type, id);
-
-    /// <summary>
-    /// Populates HotBarSlot.Icon with information from IconB/IconTypeB. 
-    /// </summary>
-    /// <returns>Returns true if no icon was loaded (??)</returns>
-    [MemberFunction("40 53 48 83 EC 20 44 8B 81 ?? ?? ?? ?? 48 8B D9 0F B6 91 ?? ?? ?? ?? E8 ?? ?? ?? ?? 85 C0")]
-    public partial bool LoadIconFromSlotB();
-
-    /// <summary>
-    /// Get an icon ID for a hotbar slot, with specified appearance slot type and action ID.
-    ///
-    /// This method appears to exist to allow certain action types (specifically macros it seems?) to have a different
-    /// appearance than the actual CommandType/CommandId called by this hotbar slot.
-    /// </summary>
-    /// <param name="slotType">The appearance slot type to use. Virtually almost always IconTypeB.</param>
-    /// <param name="actionId">The appearance action ID to use. Virtually almost always IconB.</param>
-    /// <returns>Returns an int of the icon that should be used for this hotbar slot.</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 85 C0 89 83 ?? ?? ?? ?? 0F 94 C0")]
-    public partial int GetIconIdForSlot(HotbarSlotType slotType, uint actionId);
-
-    /// <summary>
-    /// Get the final name for a hotbar slot, taking into account the specified appearance slot type and action ID.
-    ///
-    /// This method is virtually almost always called using the parameters from IconTypeB and IconB.
-    ///
-    /// When slot field 0xDE is set to 3, this method will instead override the passed in slotType and actionId with
-    /// the values present in IconTypeA and IconA. 
-    /// </summary>
-    /// <param name="slotType">The appearance slot type to use. Virtually almost always IconTypeB.</param>
-    /// <param name="actionId">The appearance action ID to use. Virtually almost always IconB.</param>
-    /// <returns>Returns a string representation of the name to be displayed to the user for this hotbar slot.</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B CB 48 85 C0 75 12")]
-    public partial byte* GetDisplayNameForSlot(HotbarSlotType slotType, uint actionId);
-
-    /// <summary>
-    /// Retrieves a <see cref="ActionType"/> for the specified hotbar slot type.
-    /// </summary>
-    /// <remarks>
-    /// This method doesn't actually read any data from the HotBarSlot it's a member of.
-    /// </remarks>
-    /// <param name="type">A HotbarSlotType to check against.</param>
-    /// <returns>Returns an ActionType if found, else 0xFFFFFFFF.</returns>
-    [MemberFunction("FF CA 83 FA 1E")]
-    public partial ActionType GetActionTypeForSlotType(HotbarSlotType type);
-
-    /// <summary>
-    /// Gets the number of charges currently available for the specified hotbar slot (based on the icon present in
-    /// IconB). If this hotbar slot references an action that does not use charges, this will return either 0 or 1.
-    /// </summary>
-    /// <returns>Returns a uint.</returns>
-    [MemberFunction("40 53 48 83 EC 40 8B 99 ?? ?? ?? ??")]
-    public partial uint GetRecastChargesFromSlotB();
-}
-
-#region Saved Bars
-
-[StructLayout(LayoutKind.Explicit, Size = Size)]
-public unsafe partial struct SavedHotBarGroup {
-    public const int Size = SavedHotBar.Size * 18;
-
-    [FixedSizeArray<SavedHotBar>(18)]
-    [FieldOffset(0x00)] public fixed byte HotBars[SavedHotBar.Size * 18];
-}
-
-[StructLayout(LayoutKind.Explicit, Size = Size)]
-public unsafe partial struct SavedHotBar {
-    public const int Size = SavedHotBarSlot.Size * 16;
-
-    [FixedSizeArray<SavedHotBarSlot>(16)]
-    [FieldOffset(0x00)] public fixed byte Slots[SavedHotBarSlot.Size * 16];
-
-    /// <summary>
-    /// Helper method to return a pointer to a specific HotBarSlot, as certain APIs are much happier with a
-    /// pointer rather than a fixed reference.
-    /// </summary>
-    /// <param name="id">A hotbar slot ID between 0 and 15.</param>
-    /// <returns>Returns a pointer to a HotBarSlot, or null if an invalid ID was passed.</returns>
-    public SavedHotBarSlot* GetSavedHotBarSlot(uint id) {
-        if (id > 15) return null;
-
-        return (SavedHotBarSlot*)Unsafe.AsPointer(ref this.Slots[id]);
-    }
-}
-
-[StructLayout(LayoutKind.Explicit, Size = Size)]
-public struct SavedHotBarSlot {
-    public const int Size = 0x05;
-
-    [FieldOffset(0x00)] public HotbarSlotType CommandType;
-    [FieldOffset(0x01)] public uint CommandId;
-}
-
-#endregion
-
-public enum HotbarSlotType : byte {
-    Empty = 0x00,
-    Action = 0x01,
-    Item = 0x02,
-
-    EventItem = 0x04,
-
-    Emote = 0x06,
-    Macro = 0x07,
-    Marker = 0x08,
-    CraftAction = 0x09,
-    GeneralAction = 0x0A,
-    BuddyAction = 0x0B,
-    MainCommand = 0x0C,
-    Companion = 0x0D,
-
-    GearSet = 0x0F,
-    PetAction = 0x10,
-    Mount = 0x11,
-    FieldMarker = 0x12,
-
-    Recipe = 0x14,
-    ChocoboRaceAbility = 0x15,
-    ChocoboRaceItem = 0x16,
-    Unk_0x17 = 0x17, // seems to be a legacy type, possibly PvP related based on associated icon 000785
-    ExtraCommand = 0x18,
-    PvPQuickChat = 0x19,
-    PvPCombo = 0x1A,
-    BgcArmyAction = 0x1B,
-
-    Unk_0x1C = 0x1C, // seems to be a legacy type, possibly performance instrument related based on associated icon 000782
-    PerformanceInstrument = 0x1D,
-    Collection = 0x1E,
-    Ornament = 0x1F,
-    LostFindsItem = 0x20
+    // helpers
+    LeftSideFocus = LeftSideHoldFocus | LeftSideToggleFocus,
+    RightSideFocus = RightSideHoldFocus | RightSideToggleFocus,
 }

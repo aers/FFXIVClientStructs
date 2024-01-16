@@ -26,6 +26,9 @@ public unsafe partial struct OutdoorAreaLayoutData {
 
     [MemberFunction("E8 ?? ?? ?? ?? 44 0F B6 0E 41 80 F9 FF")]
     public partial void SetFixture(uint plot, uint part, uint fixtureId);
+
+    [MemberFunction("40 55 48 83 EC 30 41 0F B6 E9")]
+    public partial void SetFixtureStain(uint plot, uint part, byte stain);
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x1D0)]
@@ -36,11 +39,16 @@ public unsafe partial struct OutdoorPlotLayoutData {
 
     [MemberFunction("E9 ?? ?? ?? ?? 48 89 5C 24 ?? 48 8D 0C AD")]
     public partial void SetFixture(uint part, uint fixture, uint a4 = 0xFFFFFFFF);
+
+    [MemberFunction("E9 ?? ?? ?? ?? 48 89 5C 24 ?? 48 89 74 24 ?? 4A 8D 34 8D")]
+    public partial void SetFixtureStain(uint part, byte stain);
+
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x28)]
 public struct OutdoorPlotFixtureData {
     [FieldOffset(0x00)] public ushort FixtureId;
+    [FieldOffset(0x02)] public byte StainId;
 }
 
 [StructLayout(LayoutKind.Explicit)]

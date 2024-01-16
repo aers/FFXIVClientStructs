@@ -20,3 +20,10 @@ jobs:
       - name: Run CExporter
         working-directory: ./ida
         run: dotnet run --project CExporter/CExporter.csproj -c Release
+      - name: Tar CExport
+        run: tar -czvf CExport.tar.gz ./ida/*.h
+      - uses: actions/upload-artifact@v3
+        with:
+          name: CExport
+          path: CExport.tar.gz
+          retention-days: 7

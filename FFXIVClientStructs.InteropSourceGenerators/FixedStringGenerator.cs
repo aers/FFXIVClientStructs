@@ -83,7 +83,12 @@ internal sealed class FixedStringGenerator : IIncrementalGenerator {
         }
 
         public void RenderFixedString(IndentedStringBuilder builder) {
-            builder.AppendLine($"public string {PropertyName} {{ get {{ fixed (byte* p = {FieldName}) {{ var str = Encoding.UTF8.GetString(p, {MaxLength}); var nullIdx = str.IndexOf('\0'); return nullIdx >= 0 ? str[..nullIdx] : str; }} }} }}");
+            builder.AppendLine($"public string {PropertyName} {{");
+            using (builder.Indent()) {
+                builder.AppendLine($"get {{ fixed (byte* ptr = {FieldName}) {{ var str = Encoding.UTF8.GetString(ptr, 0x{MaxLength:X}); var nullIdx = str.IndexOf('\\0'); return nullIdx >= 0 ? str[..nullIdx] : str; }} }}");
+                builder.AppendLine($"set {{ fixed (byte* ptr = {FieldName}) {{ var bytes = Encoding.UTF8.GetBytes(value ?? string.Empty); var lastBytePos = Math.Min(bytes.Length, 0x{MaxLength:X} - 1); Marshal.Copy(bytes, 0, (nint)ptr, lastBytePos); ptr[lastBytePos] = 0; }} }}");
+            }
+            builder.AppendLine("}");
         }
     }
 
@@ -91,7 +96,6 @@ internal sealed class FixedStringGenerator : IIncrementalGenerator {
         public string RenderSource() {
             IndentedStringBuilder builder = new();
 
-            builder.AppendLine("using System.Runtime.CompilerServices;");
             builder.AppendLine("using System.Text;");
 
             StructInfo.RenderStart(builder);

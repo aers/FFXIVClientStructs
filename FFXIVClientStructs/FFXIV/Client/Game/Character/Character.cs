@@ -15,39 +15,37 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 [VTableAddress("48 8D 05 ?? ?? ?? ?? 48 8B D9 48 89 01 48 8D 05 ?? ?? ?? ?? 48 89 81 ?? ?? ?? ?? 48 81 C1 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 8B ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 8B ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 35", 3)]
 public unsafe partial struct Character {
     [FieldOffset(0x0)] public GameObject GameObject;
-
     [FieldOffset(0x1A0)] public CharacterData CharacterData;
 
+    [Obsolete("Use MovementBytes so that the name can be used for a struct in the future.")]
     [FieldOffset(0x210)] public fixed byte Movement[0x420];
+    [FieldOffset(0x210)] public fixed byte MovementBytes[0x420];
     [FieldOffset(0x630)] public EmoteController EmoteController;
-
-
     [FieldOffset(0x670)] public MountContainer Mount;
     [FieldOffset(0x6D8)] public CompanionContainer Companion;
-
     [FieldOffset(0x6F8)] public DrawDataContainer DrawData;
     [FieldOffset(0x8A0)] public OrnamentContainer Ornament;
     [FieldOffset(0x918)] public ReaperShroudContainer ReaperShroud;
+
     [FieldOffset(0x970)] public ActionTimelineManager ActionTimelineManager;
-    /// <summary>
-    /// The current target for this character's gaze. Can be set independently of soft or hard targets, and may be set
-    /// by NPCs or minions. For players, an action cast will generally target the LookTarget (which generally will be
-    /// the soft target if set, then the hard target).
-    /// </summary>
-    /// <remarks>
-    /// Unlike other GameObjectIDs, this one appears to be set to fully 0 if the player is not looking at anything.
-    /// </remarks>
+    [FieldOffset(0xCB0)] public GazeContainer Gaze;
+
+    /// <inheritdoc cref="GazeController.Gaze.TargetInformation.TargetId"/>
+    [Obsolete("Use Character.Gaze.Controller.GazesSpan[0].TargetInfo.TargetId")]
     [FieldOffset(0xCB0 + 0x50)] public GameObjectID LookTargetId;
 
     [FieldOffset(0x12F0)] public VfxContainer Vfx;
 
-    [FieldOffset(0x1410)] public byte StatusFlags4;
+    [FieldOffset(0x13E0 + 0x30)] public byte StatusFlags4;
+
     [FieldOffset(0x1418)] public CharacterSetup CharacterSetup;
 
     [FieldOffset(0x1920)] public Balloon Balloon;
 
     [FieldOffset(0x1B28)] public float Alpha;
+
     [FieldOffset(0x1B30)] public Companion* CompanionObject; // minion
+
     [FieldOffset(0x1B40)] public fixed byte FreeCompanyTag[6];
 
     /// <summary>
@@ -78,6 +76,8 @@ public unsafe partial struct Character {
     [FieldOffset(0x1BB6)] public byte EventState; // Leave for backwards compat. See Mode.
     [FieldOffset(0x1BB6)] public CharacterModes Mode;
     [FieldOffset(0x1BB7)] public byte ModeParam; // Different purpose depending on mode. See CharacterModes for more info.
+
+    [FieldOffset(0x1BBB)] public byte FreeCompanyCrestBitfield; // & 0x01 for offhand weapon, & 0x02 for head, & 0x04 for top, ..., & 0x20 for feet
 
     // Note: These 2 status flags might be just an ushort instead of 2 separate bytes.
 
@@ -123,10 +123,7 @@ public unsafe partial struct Character {
     [MemberFunction("E8 ?? ?? ?? ?? B8 ?? ?? ?? ?? 4C 3B F0")]
     public partial void SetSoftTargetId(GameObjectID id);
 
-    public bool IsMounted() {
-        // inlined as of 6.5
-        return this.Mount.MountId != 0;
-    }
+    public bool IsMounted() => Mount.MountId != 0;
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4F ?? E8 ?? ?? ?? ?? 48 8B 4C 24 ??")]
     public partial void SetMode(CharacterModes mode, byte modeParam);
@@ -226,25 +223,34 @@ public unsafe partial struct Character {
         [FieldOffset(0x20)] public byte Flags;
         [FieldOffset(0x24)] public fixed uint MountedObjectIds[7];
 
+        [MemberFunction("E8 ?? ?? ?? ?? 8B 43 ?? 41 89 46")]
+        public partial void CreateAndSetupMount(short mountId, uint buddyModelTop, uint buddyModelBody, uint buddyModelLegs, byte buddyStain, byte unk6, byte unk7);
+
         [MemberFunction("E8 ?? ?? ?? ?? 48 8B 43 ?? 80 B8 ?? ?? ?? ?? ?? 74 ?? 0F B6 90")]
         public partial void SetupMount(short mountId, uint buddyModelTop, uint buddyModelBody, uint buddyModelLegs, byte buddyStain);
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]
-    public struct CompanionContainer {
+    public partial struct CompanionContainer {
         [FieldOffset(0x00)] public void** ContainerVTable;
         [FieldOffset(0x08)] public BattleChara* OwnerObject;
         [FieldOffset(0x10)] public Companion* CompanionObject;
         //used if minion is summoned but the object slot is taken by a mount
         [FieldOffset(0x18)] public ushort CompanionId;
+
+        [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 ?? 66 44 89 7F")]
+        public partial void SetupCompanion(short companionId, uint param);
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x78)]
-    public struct OrnamentContainer {
+    public partial struct OrnamentContainer {
         [FieldOffset(0x00)] public void** ContainerVTable;
         [FieldOffset(0x08)] public BattleChara* OwnerObject;
         [FieldOffset(0x10)] public Ornament* OrnamentObject;
         [FieldOffset(0x18)] public ushort OrnamentId;
+
+        [MemberFunction("E8 ?? ?? ?? ?? 48 8B 7B ?? 0F B7 97")]
+        public partial void SetupOrnament(short ornamentId, uint param);
     }
 
     // Reaper Shroud seems to be mostly hardcoded.
@@ -270,6 +276,36 @@ public unsafe partial struct Character {
             ShroudAttacking = 0x01, // On when the character is using a skill from reaper shroud, can be on for a short time without shroud itself being on.
             ShroudActive = 0x02, // On as long as the transformation is enabled.
             ShroudLoading = 0x0100, // On at the start before the VFX is loaded.
+        }
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x620)]
+    public struct GazeContainer {
+        [FieldOffset(0x00)] public void** ContainerVTable;
+        [FieldOffset(0x08)] public BattleChara* OwnerObject;
+        [FieldOffset(0x10)] public GazeController Controller;
+        /// <summary>
+        /// When using /facecamera, this is the rotation of the camera.<br/>
+        /// When editing banner and the character is following the camera (either with head or eyes), this field holds the position of the camera.
+        /// </summary>
+        [FieldOffset(0x5F0)] public Vector3 CameraVector; // maybe Vector4 with unused W field?
+
+        [FieldOffset(0x600)] public byte FaceCameraFlag; // looks like a bitfield but only with one bit used
+
+        [FieldOffset(0x604)] public Vector2 BannerHeadDirection;
+        [FieldOffset(0x60C)] public Vector2 BannerEyeDirection;
+        [FieldOffset(0x614)] public BannerCameraFollowFlags BannerCameraFollowFlag;
+
+        public bool IsFacingCamera {
+            get => (FaceCameraFlag & 0x1) == 0x1;
+            set => FaceCameraFlag |= 0x1;
+        }
+
+        [Flags]
+        public enum BannerCameraFollowFlags : byte {
+            None = 0,
+            Head = 1,
+            Eyes = 2,
         }
     }
 

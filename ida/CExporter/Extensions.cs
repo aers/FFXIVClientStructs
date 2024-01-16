@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using FFXIVClientStructs.Interop.Attributes;
 
 namespace CExporter;
 
@@ -17,11 +18,11 @@ public static class TypeExtensions {
         return type != typeof(decimal) && type is { IsValueType: true, IsPrimitive: false, IsEnum: false };
     }
 
-    public static string FixTypeName(this Type type, Func<Type, string> unhandled) =>
+    public static string FixTypeName(this Type type, Func<Type, bool, string> unhandled, bool shouldLower = true) =>
         type switch {
             _ when type == typeof(void) || type == typeof(void*) || type == typeof(void**) ||
-                   type == typeof(char) || type == typeof(char*) || type == typeof(char**) ||
-                   type == typeof(byte) || type == typeof(byte*) || type == typeof(byte**) => type.Name.ToLower(),
+                   type == typeof(byte) || type == typeof(byte*) || type == typeof(byte**) => shouldLower ? type.Name.ToLower() : type.Name,
+            _ when type == typeof(char) => "wchar_t",
             _ when type == typeof(bool) => "bool",
             _ when type == typeof(float) => "float",
             _ when type == typeof(double) => "double",
@@ -32,6 +33,7 @@ public static class TypeExtensions {
             _ when type == typeof(uint) => "unsigned __int32",
             _ when type == typeof(ulong) || type == typeof(nuint) => "unsigned __int64",
             _ when type == typeof(sbyte) => "signed __int8",
+            _ when type == typeof(char*) => "wchar_t*",
             _ when type == typeof(short*) => "__int16*",
             _ when type == typeof(ushort*) => "unsigned __int16*",
             _ when type == typeof(int*) => "__int32*",
@@ -40,16 +42,16 @@ public static class TypeExtensions {
             _ when type == typeof(ulong*) || type == typeof(nuint*) => "unsigned __int64*",
             _ when type == typeof(float*) => "float*",
             _ when type == typeof(Half) => "__int16", // Half is a struct that is 2 bytes long and does not exist in C so we just use __int16
-            _ => unhandled(type)
+            _ => unhandled(type, shouldLower)
         };
 
     public static int SizeOf(this Type type) {
         // Marshal.SizeOf doesn't work correctly because the assembly is unmarshaled, and more specifically, it sets booleans as 4 bytes long...
         return type switch {
             _ when type == typeof(sbyte) || type == typeof(byte) || type == typeof(bool) => 1,
-            _ when type == typeof(short) || type == typeof(ushort) || type == typeof(Half) => 2,
+            _ when type == typeof(char) || type == typeof(short) || type == typeof(ushort) || type == typeof(Half) => 2,
             _ when type == typeof(int) || type == typeof(uint) || type == typeof(float) => 4,
-            _ when type == typeof(long) || type == typeof(ulong) || type == typeof(double) || type.IsPointer => 8,
+            _ when type == typeof(long) || type == typeof(ulong) || type == typeof(double) || type.IsPointer || type.IsFunctionPointer || type.IsUnmanagedFunctionPointer || (type.Name == "Pointer`1" && type.Namespace == ExporterStatics.InteropNamespacePrefix[..^1]) => 8,
             _ when type.IsStruct() => type.StructLayoutAttribute?.Size ?? (int?)typeof(Unsafe).GetMethod("SizeOf")?.MakeGenericMethod(type).Invoke(null, null) ?? 0,
             _ => (int?)typeof(Unsafe).GetMethod("SizeOf")?.MakeGenericMethod(type).Invoke(null, null) ?? 0
         };
@@ -68,12 +70,23 @@ public static class FieldInfoExtensions {
         return attr != null;
     }
 
-    public static Type GetFixedType(this FieldInfo info) {
-        return info.GetCustomAttributes(typeof(FixedBufferAttribute), false).Cast<FixedBufferAttribute>().Single().ElementType;
+    public static Tuple<Type, int> GetFixed(this FieldInfo info) {
+        var attributes = info.GetCustomAttributes();
+        var array = attributes.Where(t => t.GetType().Name.Contains("FixedSizeArrayAttribute"));
+        if (array.Any()) {
+            var fsattr = (dynamic)array.First();
+            var type = (Type)fsattr.GetType();
+            return Tuple.Create(type.GenericTypeArguments[0], (int)fsattr.Count);
+        }
+        var attr = info.GetCustomAttributes(typeof(FixedBufferAttribute), false).Cast<FixedBufferAttribute>().Single();
+        if (attr == null)
+            throw new Exception("Field is not fixed");
+        return new Tuple<Type, int>(attr.ElementType, attr.Length);
     }
 
-    public static int GetFixedSize(this FieldInfo info) {
-        return info.GetCustomAttributes(typeof(FixedBufferAttribute), false).Cast<FixedBufferAttribute>().Single().Length;
+    public static int GetFixedLength(this FieldInfo info) {
+        var (type, length) = info.GetFixed();
+        return length * type.SizeOf();
     }
 
     public static int GetFieldOffset(this FieldInfo info) {

@@ -5,9 +5,9 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 //   Component::GUI::AtkComponentBase
 //     Component::GUI::AtkEventListener
 
-// size = 0x1D8
+// size = 0x1E0
 // ctor E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 C7 86 ?? ?? ?? ?? ?? ?? ?? ?? 48 89 06 
-[StructLayout(LayoutKind.Explicit, Size = 0xF0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x1E0)]
 public unsafe struct AtkComponentInputBase {
     [FieldOffset(0x0)] public AtkComponentBase AtkComponentBase;
     [FieldOffset(0xC8)] public AtkTextNode* AtkTextNode;
