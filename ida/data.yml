@@ -10468,13 +10468,13 @@ classes:
   Client::Game::InstanceContent::PublicContentDelubrum:
     vtbls:
       - ea: 0x141C31598
-        base: Client::Game::InstanceContent::PublicContentDirector
+        base: Client::Game::InstanceContent::PublicContentBozja
     funcs:
       0x1414BA650: ctor
   Client::Game::InstanceContent::PublicContentDelubrumSavage:
     vtbls:
       - ea: 0x141C32148
-        base: Client::Game::InstanceContent::PublicContentDirector
+        base: Client::Game::InstanceContent::PublicContentDelubrum
     funcs:
       0x1414BA6E0: ctor
   Client::Game::InstanceContent::PublicContentZadnor:
