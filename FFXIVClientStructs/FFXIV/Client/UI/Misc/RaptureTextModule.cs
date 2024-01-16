@@ -34,4 +34,114 @@ public unsafe partial struct RaptureTextModule {
     /// <returns>string containing one of 23h, 59m, 59s</returns>
     [MemberFunction("E8 ?? ?? ?? ?? 4C 8B C0 48 8B 4D 88")]
     public partial byte* FormatTimeSpan(uint seconds, bool alternativeMinutesGlyph = false);
+
+    /// <remarks> Singular only. The usage of intParam2 is unknown. </remarks>
+    /// <returns>
+    /// A pointer to a null terminated string containing the formatted name.<br/>
+    /// It was observed, that it can return a nullptr when the excel page was not loaded. Try calling it again in subsequent frames.
+    /// </returns>
+    [MemberFunction("E9 ?? ?? ?? ?? 48 8D 47 30")]
+    public static partial byte* FormatName(NameFormatterPlaceholder placeholder, int id, NameFormatterIdConverter idConverter, int intParam2 = 1);
+
+    public static byte* GetItemName(int id, int intParam2 = 1)
+        => FormatName(NameFormatterPlaceholder.Item, id, NameFormatterIdConverter.None, intParam2);
+
+    public static byte* GetBNpcName(int id, int intParam2 = 1)
+        => FormatName(NameFormatterPlaceholder.ObjStr, id, NameFormatterIdConverter.BNpcName, intParam2);
+
+    public static byte* GetENpcResidentName(int id, int intParam2 = 1)
+        => FormatName(NameFormatterPlaceholder.ObjStr, id, NameFormatterIdConverter.ENpcResident, intParam2);
+
+    public static byte* GetTreasureName(int id, int intParam2 = 1)
+        => FormatName(NameFormatterPlaceholder.ObjStr, id, NameFormatterIdConverter.Treasure, intParam2);
+
+    public static byte* GetAetheryteName(int id, int intParam2 = 1)
+        => FormatName(NameFormatterPlaceholder.ObjStr, id, NameFormatterIdConverter.Aetheryte, intParam2);
+
+    public static byte* GetGatheringPointName(int id, int intParam2 = 1)
+        => FormatName(NameFormatterPlaceholder.ObjStr, id, NameFormatterIdConverter.GatheringPointName, intParam2);
+
+    public static byte* GetEObjName(int id, int intParam2 = 1)
+        => FormatName(NameFormatterPlaceholder.ObjStr, id, NameFormatterIdConverter.EObjName, intParam2);
+
+    public static byte* GetCompanionName(int id, int intParam2 = 1)
+        => FormatName(NameFormatterPlaceholder.ObjStr, id, NameFormatterIdConverter.Companion, intParam2);
+
+    public static byte* GetTraitName(int id, int intParam2 = 1)
+        => FormatName(NameFormatterPlaceholder.ActStr, id, NameFormatterIdConverter.Trait, intParam2);
+
+    public static byte* GetActionName(int id, int intParam2 = 1)
+        => FormatName(NameFormatterPlaceholder.ActStr, id, NameFormatterIdConverter.Action, intParam2);
+
+    public static byte* GetEventActionName(int id, int intParam2 = 1)
+        => FormatName(NameFormatterPlaceholder.ActStr, id, NameFormatterIdConverter.EventAction, intParam2);
+
+    public static byte* GetGeneralActionName(int id, int intParam2 = 1)
+        => FormatName(NameFormatterPlaceholder.ActStr, id, NameFormatterIdConverter.GeneralAction, intParam2);
+
+    public static byte* GetBuddyActionName(int id, int intParam2 = 1)
+        => FormatName(NameFormatterPlaceholder.ActStr, id, NameFormatterIdConverter.BuddyAction, intParam2);
+
+    public static byte* GetMainCommandName(int id, int intParam2 = 1)
+        => FormatName(NameFormatterPlaceholder.ActStr, id, NameFormatterIdConverter.MainCommand, intParam2);
+
+    public static byte* GetCraftActionName(int id, int intParam2 = 1)
+        => FormatName(NameFormatterPlaceholder.ActStr, id, NameFormatterIdConverter.CraftAction, intParam2);
+
+    public static byte* GetPetActionName(int id, int intParam2 = 1)
+        => FormatName(NameFormatterPlaceholder.ActStr, id, NameFormatterIdConverter.PetAction, intParam2);
+
+    public static byte* GetCompanyActionName(int id, int intParam2 = 1)
+        => FormatName(NameFormatterPlaceholder.ActStr, id, NameFormatterIdConverter.CompanyAction, intParam2);
+
+    public static byte* GetMountName(int id, int intParam2 = 1)
+        => FormatName(NameFormatterPlaceholder.ActStr, id, NameFormatterIdConverter.Mount, intParam2);
+
+    public static byte* GetBgcArmyActionName(int id, int intParam2 = 1)
+        => FormatName(NameFormatterPlaceholder.ActStr, id, NameFormatterIdConverter.BgcArmyAction, intParam2);
+
+    public static byte* GetOrnamentName(int id, int intParam2 = 1)
+        => FormatName(NameFormatterPlaceholder.ActStr, id, NameFormatterIdConverter.Ornament, intParam2);
+}
+
+public enum NameFormatterPlaceholder : int {
+    ObjStr = 0,
+    Item = 1,   // bypasses IdConverter
+    ActStr = 2,
+}
+
+public enum NameFormatterIdConverter : uint {
+    None = 0,
+
+    // ObjStr
+    BNpcName = 2,
+    ENpcResident = 3,
+    Treasure = 4,
+    Aetheryte = 5,
+    GatheringPointName = 6,
+    EObjName = 7,
+    // Mount = 8, // does not work?
+    Companion = 9,
+    // 10-11 unused
+    // Item = 12, // does not work?
+
+    // ActStr
+    Trait = 0,
+    Action = 1,
+    // Item = 2, // does not work?
+    // EventItem = 3, // does not work?
+    EventAction = 4,
+    // EObjName = 5, // does not work?
+    GeneralAction = 5,
+    BuddyAction = 6,
+    MainCommand = 7,
+    // Companion = 8, // unresolved, use Companion
+    CraftAction = 9,
+    Action2 = 10,
+    PetAction = 11,
+    CompanyAction = 12,
+    Mount = 13,
+    // 14-18 unused
+    BgcArmyAction = 19,
+    Ornament = 20,
 }

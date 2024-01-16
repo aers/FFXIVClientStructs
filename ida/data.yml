@@ -5191,6 +5191,7 @@ classes:
       - ea: 0x141A1C170
         base: Component::Excel::ExcelLanguageEvent
     funcs:
+      0x1400A63D0: FormatName # static
       0x14066F800: ctor
       0x1406704A0: Finalize
       0x140671120: GetAddonText
