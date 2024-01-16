@@ -46,7 +46,7 @@ globals:
   0x14220AEF2: g_Client::Game::UI::UnlockedCompanionsMask  # not a pointer
   0x14220AECE: g_Client::Game::UI::UnlockedHowToBitmask  # not a pointer
   0x14220AF32: g_Client::Game::UI::ChocoboTaxiStandsBitmask  # not a pointer
-#fail   0x142212FBE: g_Client::Game::UI::CutsceneSeenBitmask  # not a pointer
+  0x14220AF3E: g_Client::Game::UI::CutsceneSeenBitmask  # not a pointer
   0x14220AFDD: g_Client::Game::UI::UnlockedTripleTriadCardsBitmask  # not a pointer
   0x14220B010: g_Client::Game::UI::UnlockedTripleTriadCardsCount  # not a pointer
   0x1421F3F38: g_Client::Game::UI::Chain.RemainingTime # not a pointer
@@ -874,7 +874,7 @@ classes:
       0x140B863D0: Destroy    # static
       0x140B86410: GetSingleton  # static
       0x140B86420: Load   # loads in a ton of sub-structs and other info.
-#fail       0x140B867A0: Update
+      0x140B868B0: Update
       0x140B86DF0: IsFunctionUnlocked # (this, functionId)
       0x140B86E80: RegisterListener
       0x140B86EB0: UnregisterListener
@@ -3169,7 +3169,7 @@ classes:
       0x14021AE40: ctor
       0x14021AE90: Initialize
       0x14021B610: Finalize
-#fail       0x14021B890: IsWinSockInitialized
+      0x14021B6B0: IsWinSockInitialized
       0x14021BF90: GetCurrentDeviceTimeInMillis
       0x14021C010: GetLobbyCount 
       0x14021C940: IsInCrossWorldDuty
@@ -8472,7 +8472,7 @@ classes:
       0x14126CAA0: OpenSetRest
       0x14126CC50: AskSetRestConfirm
       0x14126CE80: HandleEventSetRest
-#fail       0x14126C460: HandleEventSetRestConfirm
+      0x14126CEE0: HandleEventSetRestConfirm
       0x14126D150: OpenReviewMaterials
       0x14126D400: HandleEventReviewMaterials
       0x14126D4C0: UpdateReviewMaterialsAddon
