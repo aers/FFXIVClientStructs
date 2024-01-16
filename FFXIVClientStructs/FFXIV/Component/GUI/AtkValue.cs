@@ -36,7 +36,7 @@ public unsafe partial struct AtkValue {
     [GenerateCStrOverloads]
     public partial void SetString(byte* value);
 
-    [MemberFunction("E8 ?? ?? ?? ?? F7 DE")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 06 4C 8D 4C 24 ?? 44 8B C3")]
     public partial void ChangeType(ValueType type);
 
     [MemberFunction("E8 ?? ?? ?? ?? 33 FF 89 7C 24")]
