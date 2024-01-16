@@ -225,7 +225,7 @@ public unsafe partial struct HotBarSlot {
     /// <param name="slotType">The slot type to look up and return information for.</param>
     /// <param name="actionId">The action ID to look up and return information for.</param>
     /// <returns>Returns the cost text for this HotBarSlot.</returns>
-    [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 30 0F B6 C2 41 8B D8")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 74 26 80 38 00")]
     public partial uint GetCostTextForSlot(HotbarSlotType slotType, uint actionId);
 
     /// <summary>
