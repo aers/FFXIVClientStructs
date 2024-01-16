@@ -1720,7 +1720,7 @@ classes:
     vtbls:
       - ea: 0x141D720B8
         base: Common::Component::BGCollision::Object
-#fail       - ea: 0x141D7A0C0
+      - ea: 0x141D720C0
         base: Common::Component::BGCollision::NodeLink
   Common::Component::BGCollision::IMesh:
     vtbls:
@@ -1730,9 +1730,9 @@ classes:
       1: Clone
   Common::Component::BGCollision::Mesh:
     vtbls:
-#fail       - ea: 0x141A01690
+      - ea: 0x141A03528
         base: Common::Component::BGCollision::Object
-#fail       - ea: 0x141A016E8
+      - ea: 0x141A03580
         base: Common::Component::BGCollision::IMesh
     vfuncs:
       2: GetBoundsMin
@@ -1771,7 +1771,7 @@ classes:
     vtbls:
       - ea: 0x141D71ED8
         base: Common::Component::BGCollision::SceneWrapperNode
-#fail       - ea: 0x141D79F68
+      - ea: 0x141D71F68
         base: Common::Component::BGCollision::NodeLink # indirect base, offset 8
     vfuncs:
       1: Clear
