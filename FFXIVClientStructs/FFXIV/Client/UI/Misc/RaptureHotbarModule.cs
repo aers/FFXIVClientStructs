@@ -297,7 +297,7 @@ public unsafe partial struct RaptureHotbarModule {
     /// <param name="commandType">The command type to save.</param>
     /// <param name="commandId">The command ID to save.</param>
     /// <returns>Returns <c>true</c> if the save is successful, false otherwise.</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? EB 62 83 7C 24")]
+    [MemberFunction("E8 ?? ?? ?? ?? EB 5D 83 7C 24")]
     public partial bool SetAndSaveFirstAvailableCrossSlot(uint hotbarId, HotbarSlotType commandType, uint commandId);
 
     /// <summary>
