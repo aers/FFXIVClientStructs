@@ -42,7 +42,7 @@ public unsafe partial struct InstanceContentOceanFishing {
     // the function that sets the data -> "48 8D 81 ?? ?? ?? ?? B9 ?? ?? ?? ?? 0F 1F 40 ?? 48 8D 80"
     // Offsets can be found with "48 89 5C 24 ? 48 89 74 24 ? 57 48 81 EC ? ? ? ? 48 8B 05 ? ? ? ? 48 33 C4 48 89 84 24 ? ? ? ? 48 8B F1 48 8D 4C 24"
     // these are only valid when Status is Finished
-    [FieldOffset(0x2100)] public byte AllResultSize; 
+    [FieldOffset(0x2100)] public byte AllResultSize;
     [FieldOffset(0x2101)] public byte LocalIndexInAllResult;
     [FieldOffset(0x2102)] public IndividualResultStruct IndividualResult;
     [FieldOffset(0x2124)] public AllResultStruct LocalPlayerAllResult;
