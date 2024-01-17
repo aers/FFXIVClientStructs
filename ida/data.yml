@@ -5015,7 +5015,7 @@ classes:
       57: GetRetainerCommentModule
       58: GetBannerModule
       59: GetAdventureNoteModule
-      60: GetAktkNoteModule
+      60: GetAkatsukiNoteModule
       61: GetVVDNoteModule
       62: GetVVDActionModule
       63: GetTofuModule
@@ -5239,7 +5239,7 @@ classes:
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
       0x1406C97A0: ctor
-  Client::UI::Misc::AktkNoteModule:
+  Client::UI::Misc::AkatsukiNoteModule:
     vtbls:
       - ea: 0x141A1F028
         base: Client::UI::Misc::UserFileManager::UserFileEvent
