@@ -1,6 +1,8 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game.MJI;
 
-// ctor 1414E1770 ? - extends EventHandler
+// Client::Game::MJI::MJIPastureHandler
+//   Client::Game::Event::EventHandler
+// ctor "48 89 6C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC 20 BA ?? ?? ?? ?? 48 8B F9"
 [StructLayout(LayoutKind.Explicit, Size = 0xB78)]
 public unsafe partial struct MJIPastureHandler {
     [FieldOffset(0x0)] public void* vtbl;

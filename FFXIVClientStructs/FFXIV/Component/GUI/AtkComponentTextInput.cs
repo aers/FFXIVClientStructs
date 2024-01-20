@@ -1,15 +1,14 @@
 using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
+
 // Component::GUI::AtkComponentTextInput
 //   Component::GUI::AtkComponentInputBase
 //     Component::GUI::AtkComponentBase
 //       Component::GUI::AtkEventListener
 //   Component::GUI::AtkTextInput::AtkTextInputEventInterface
 //   Client::System::Input::SoftKeyboardDeviceInterface::SoftKeyboardInputInterface
-
-// size = 0x600
-// common CreateAtkComponent function 8B FA 33 DB E8 ?? ?? ?? ?? 
+// common CreateAtkComponent function "E8 ?? ?? ?? ?? 48 8B F8 48 85 C0 0F 84 ?? ?? ?? ?? 49 8B 0F"
 // type 7
 [StructLayout(LayoutKind.Explicit, Size = 0x600)]
 public struct AtkComponentTextInput {

@@ -1,5 +1,6 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game.MJI;
 
+// Client::Game::MJI::MJIGranaryState
 [StructLayout(LayoutKind.Explicit, Size = 0x48)]
 public unsafe partial struct MJIGranaryState {
     public const int MaxNormalResources = 20;
@@ -13,6 +14,8 @@ public unsafe partial struct MJIGranaryState {
     [FieldOffset(0x44)] public uint FinishTime; // unix timestamp
 }
 
+// Client::Game::MJI::MJIGranariesState
+// ctor "48 89 7C 24 ?? 45 33 D2 48 8D 51 02"
 [StructLayout(LayoutKind.Explicit, Size = 0x98)]
 public unsafe partial struct MJIGranariesState {
     public const int MaxGranaries = 2;

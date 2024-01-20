@@ -1,6 +1,5 @@
 using FFXIVClientStructs.FFXIV.Component.GUI;
 using static FFXIVClientStructs.FFXIV.Client.UI.AddonJobHud;
-using static FFXIVClientStructs.FFXIV.Client.UI.AddonJobHudRRP1.DeathGaugeSimple;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 

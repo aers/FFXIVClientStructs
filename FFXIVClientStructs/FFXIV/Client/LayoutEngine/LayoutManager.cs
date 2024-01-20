@@ -10,7 +10,6 @@ public unsafe partial struct LayoutManager {
     [FieldOffset(0x80)] public OutdoorAreaLayoutData* OutdoorAreaData;
     [FieldOffset(0x90)] public IndoorAreaLayoutData* IndoorAreaData;
 
-
     [MemberFunction("E8 ?? ?? ?? ?? 33 C0 48 83 C4 38 C3 33 C0")]
     public partial void SetInteriorFixture(int floor, int part, int fixtureId, byte unk = 255);
 
@@ -20,7 +19,6 @@ public unsafe partial struct LayoutManager {
 
 [StructLayout(LayoutKind.Explicit)]
 public unsafe partial struct OutdoorAreaLayoutData {
-
     [FixedSizeArray<OutdoorPlotLayoutData>(60)]
     [FieldOffset(0x1F0)] public fixed byte Plot[60 * 0x1D0];
 
@@ -33,7 +31,6 @@ public unsafe partial struct OutdoorAreaLayoutData {
 
 [StructLayout(LayoutKind.Explicit, Size = 0x1D0)]
 public unsafe partial struct OutdoorPlotLayoutData {
-
     [FixedSizeArray<OutdoorPlotFixtureData>(8)]
     [FieldOffset(0x28)] public fixed byte Fixture[8 * 0x28];
 
@@ -42,7 +39,6 @@ public unsafe partial struct OutdoorPlotLayoutData {
 
     [MemberFunction("E9 ?? ?? ?? ?? 48 89 5C 24 ?? 48 89 74 24 ?? 4A 8D 34 8D")]
     public partial void SetFixtureStain(uint part, byte stain);
-
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x28)]

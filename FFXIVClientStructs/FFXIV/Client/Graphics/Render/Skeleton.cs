@@ -3,9 +3,9 @@ using FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 using FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
+
 // Client::Graphics::Render::Skeleton
 //   Client::Graphics::ReferencedClassBase
-
 [StructLayout(LayoutKind.Explicit, Size = 0x100)]
 public unsafe struct Skeleton {
     [FieldOffset(0x0)] public ReferencedClassBase ReferencedClassBase;

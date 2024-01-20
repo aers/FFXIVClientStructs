@@ -23,13 +23,13 @@ public struct hkJob {
         User0 = HavokMax,
         //HK_JOB_TYPE_USER_1,
         Max
-    };
+    }
 
     public enum hkJobSpuType {
         Invalid,
         Enabled,
         Disabled,
-    };
+    }
 
     public byte JobSubType;
     public hkEnum<hkJobType, byte> JobType;

@@ -120,5 +120,5 @@ public unsafe partial struct MeshPCB {
                 throw new ArgumentOutOfRangeException("Vertex index out of range");
             }
         }
-    };
-};
+    }
+}

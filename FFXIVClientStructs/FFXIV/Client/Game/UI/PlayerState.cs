@@ -6,6 +6,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 // ctor "48 81 C1 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? C6 83"
 [StructLayout(LayoutKind.Explicit, Size = 0x818)]
 public unsafe partial struct PlayerState {
+    [StaticAddress("48 8D 0D ?? ?? ?? ?? 4D 8B F9", 3)]
+    public static partial PlayerState* Instance();
+
     [FieldOffset(0x00)] public byte IsLoaded;
     [FieldOffset(0x01)] public fixed byte CharacterName[64];
     [FieldOffset(0x41)] public fixed byte PSNOnlineID[17];
@@ -156,9 +159,6 @@ public unsafe partial struct PlayerState {
     [FieldOffset(0x770)] public byte MentorVersion; // latest is 2
 
     [FieldOffset(0x774)] public fixed uint DesynthesisLevels[8];
-
-    [StaticAddress("48 8D 0D ?? ?? ?? ?? 4D 8B F9", 3)]
-    public static partial PlayerState* Instance();
 
     public bool IsLegacy => (QuestSpecialFlags & 1) != 0;
     public bool IsWarriorOfLight => (QuestSpecialFlags & 2) != 0;
@@ -318,7 +318,7 @@ public unsafe partial struct PlayerState {
     /// 5 = whether player is in possession of the journal
     /// </param>
     [MemberFunction("E8 ?? ?? ?? ?? 3B C3 0F 93 C0")]
-    private partial uint _getWeeklyBingoFlagsValue(uint mode);
+    private partial uint GetWeeklyBingoFlagsValue(uint mode);
 
     /// <summary>Returns whether the Wondrous Tails Journal has expired or not.</summary>
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 1D 48 8B 4B 10")]
@@ -347,10 +347,10 @@ public unsafe partial struct PlayerState {
     public DateTime WeeklyBingoExpireDateTime => DateTime.UnixEpoch.AddSeconds(GetWeeklyBingoExpireUnixTimestamp());
 
     /// <summary>Returns the current number of second chance points.</summary>
-    public uint WeeklyBingoNumSecondChancePoints => _getWeeklyBingoFlagsValue(3);
+    public uint WeeklyBingoNumSecondChancePoints => GetWeeklyBingoFlagsValue(3);
 
     /// <summary>Returns whether the player is in possession of the journal or not.</summary>
-    public bool HasWeeklyBingoJournal => _getWeeklyBingoFlagsValue(5) != 0;
+    public bool HasWeeklyBingoJournal => GetWeeklyBingoFlagsValue(5) != 0;
 
     /// <summary>Returns the number of placed stickers.</summary>
     public int WeeklyBingoNumPlacedStickers => BitOperations.PopCount(_weeklyBingoStickers);
@@ -398,7 +398,6 @@ public unsafe partial struct PlayerState {
     public partial bool IsPlayerStateFlagSet(PlayerStateFlag flag);
 
     #endregion
-
 }
 
 public enum PlayerStateFlag : uint {
@@ -420,4 +419,4 @@ public enum PoseType : byte {
     Doze = 4,
     Umbrella = 5,
     Accessory = 6,
-};
+}

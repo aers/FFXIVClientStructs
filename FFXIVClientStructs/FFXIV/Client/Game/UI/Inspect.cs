@@ -42,10 +42,10 @@ public unsafe struct Inspect {
     /// 5 = Bozja: Time Remaining
     /// </remarks>
     [FixedArray(typeof(ExtraInspectDataEntry), 3)]
-    [FieldOffset(0x24C)] public fixed byte ExtraInspectData[8 * 3];
+    [FieldOffset(0x24C)] public fixed byte ExtraInspectData[3 * 0x8];
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 8)]
+[StructLayout(LayoutKind.Explicit, Size = 0x8)]
 public struct ExtraInspectDataEntry {
     [FieldOffset(0x00)] public int Key;
     [FieldOffset(0x04)] public int Value;

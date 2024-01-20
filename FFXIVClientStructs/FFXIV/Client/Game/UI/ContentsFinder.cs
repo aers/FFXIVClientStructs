@@ -24,7 +24,7 @@ public unsafe partial struct ContentsFinder {
     [FieldOffset(0x87)] public byte AverageWaitTime; // In minutes
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 53 06 49 8B CE")]
-    public partial uint SetJoinInProgress(bool isUnrestrictedParty);
+    public partial uint SetJoinInProgress(bool isUnrestrictedParty); // TODO: actually part of Client::UI::AddonContentsFinder
 
     [Obsolete("Use ContentsFinder.QueueInfo.GetEnteredQueueDateTime()")]
     public DateTime GetEnteredQueueDateTime() => DateTime.UnixEpoch.AddSeconds(QueueInfo.EnteredQueueTimestamp);

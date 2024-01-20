@@ -1,5 +1,7 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game.MJI;
 
+// Client::Game::MJI::IslandState
+// ctor "48 89 7C 24 ?? 33 FF 66 C7 01"
 [StructLayout(LayoutKind.Explicit, Size = 0xE8)]
 public unsafe struct IslandState {
     // Unknown!! This flag *appears* to control island state for quite a few things and is read *a lot* by Lua, but I

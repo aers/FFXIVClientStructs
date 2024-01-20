@@ -2,6 +2,9 @@ using FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 
+// Client::Game::Event::DirectorModule
+//   Client::Game::Event::ModuleBase
+// ctor "E8 ?? ?? ?? ?? 48 8B 15 ?? ?? ?? ?? 49 8D 8D ?? ?? ?? ?? 48 81 C2 ?? ?? ?? ?? E8 ?? ?? ?? ?? 49 8D 8D"
 [StructLayout(LayoutKind.Explicit, Size = 0xA0)]
 public unsafe struct DirectorModule {
     [FieldOffset(0x00)] public ModuleBase ModuleBase;

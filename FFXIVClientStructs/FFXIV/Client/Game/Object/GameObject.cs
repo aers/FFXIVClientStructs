@@ -4,25 +4,9 @@ using FFXIVClientStructs.FFXIV.Common.Math;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Object;
 
-// if (ObjectID == 0xE0000000)
-//   if (Companion && Companion.HasOwner && Companion.ObjectID == 0xE0000000) ObjectID = Parent.ObjectID, Type = 4
-//   if (DataID == 0 || (ObjectIndex >= 200 && ObjectIndex < 244)) ObjectID = ObjectIndex, Type = 2
-//   if (DataID != 0) ObjectID = DataID, Type = 1
-// else ObjectID = ObjectID, Type = 0
-[StructLayout(LayoutKind.Explicit, Size = 0x8)]
-public struct GameObjectID {
-    [FieldOffset(0x0)] public uint ObjectID;
-    [FieldOffset(0x4)] public byte Type;
-
-    public static unsafe implicit operator ulong(GameObjectID id) => *(ulong*)&id;
-    public static unsafe implicit operator GameObjectID(ulong id) => *(GameObjectID*)&id;
-}
-
 // Client::Game::Object::GameObject
+// ctor "E8 ?? ?? ?? ?? 48 8D 8E ?? ?? ?? ?? 48 89 AE ?? ?? ?? ?? 48 8B D3"
 // base class for game objects in the world
-
-// size = 0x1A0
-// ctor E8 ?? ?? ?? ?? 48 8D 8E ?? ?? ?? ?? 48 89 AE ?? ?? ?? ?? 48 8B D7 
 [StructLayout(LayoutKind.Explicit, Size = 0x1A0)]
 [VTableAddress("48 8d 05 ?? ?? ?? ?? c7 81 80 00 00 00 00 00 00 00", 3)]
 public unsafe partial struct GameObject {
@@ -111,6 +95,20 @@ public unsafe partial struct GameObject {
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 ?? 48 8B 17 45 33 C9")]
     public partial bool IsReadyToDraw();
+}
+
+// if (ObjectID == 0xE0000000)
+//   if (Companion && Companion.HasOwner && Companion.ObjectID == 0xE0000000) ObjectID = Parent.ObjectID, Type = 4
+//   if (DataID == 0 || (ObjectIndex >= 200 && ObjectIndex < 244)) ObjectID = ObjectIndex, Type = 2
+//   if (DataID != 0) ObjectID = DataID, Type = 1
+// else ObjectID = ObjectID, Type = 0
+[StructLayout(LayoutKind.Explicit, Size = 0x8)]
+public struct GameObjectID {
+    [FieldOffset(0x0)] public uint ObjectID;
+    [FieldOffset(0x4)] public byte Type;
+
+    public static unsafe implicit operator ulong(GameObjectID id) => *(ulong*)&id;
+    public static unsafe implicit operator GameObjectID(ulong id) => *(GameObjectID*)&id;
 }
 
 public enum ObjectKind : byte {

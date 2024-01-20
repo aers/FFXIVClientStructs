@@ -2,14 +2,6 @@ using FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
-public enum AtkLoadState : byte {
-    Unloaded = 0,
-    ResourceLoading = 1,
-    TexturesLoading = 2,
-    Loaded = 3,
-    LoadError = 4
-}
-
 // used in both addons (AtkUnitBase derived classes) and components (AtkComponentBase derived classes) to read data from uld files
 // also used to render UI components
 [StructLayout(LayoutKind.Explicit, Size = 0x90)]
@@ -91,4 +83,12 @@ public unsafe partial struct AtkUldManager {
 
     [MemberFunction("E8 ?? ?? ?? ?? 49 8B 4F 10 41 8B C4")]
     public partial void UpdateDrawNodeList();
+}
+
+public enum AtkLoadState : byte {
+    Unloaded = 0,
+    ResourceLoading = 1,
+    TexturesLoading = 2,
+    Loaded = 3,
+    LoadError = 4
 }
