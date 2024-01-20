@@ -11,10 +11,14 @@ public unsafe partial struct Buddy {
 
         [FieldOffset(0x8)] public uint MaxHealth;
 
-        // Chocobo: Mount
-        // Pet: Pet (summons)
-        // Squadron: Unused
-        // Trust: DawnGrowMember
+        // |----------|----------------|
+        // | Type     | Sheet          |
+        // |----------|----------------|
+        // | Chocobo  | Mount          |
+        // | Pet      | Pet            |
+        // | Squadron | Unused         |
+        // | Trust    | DawnGrowMember |
+        // |----------|----------------|
         [FieldOffset(0xC)] public byte DataID;
         [FieldOffset(0xD)] public byte Synced;
         [FieldOffset(0x10)] public StatusManager StatusManager;
@@ -90,7 +94,9 @@ public unsafe struct PetInfo {
 }
 
 // Squadron, Trust, Duty Support
-[StructLayout(LayoutKind.Explicit, Size = 0x2C)]
+[StructLayout(LayoutKind.Explicit, Size = 0x28)]
 public unsafe struct DutyHelperInfo {
     [FieldOffset(0)] public Buddy.BuddyMember* DutyHelpers; // 7 members
+    [FieldOffset(0x9)] public bool HasHelpers;
+    [FieldOffset(0xC)] public fixed uint ENpcIds[7];
 }
