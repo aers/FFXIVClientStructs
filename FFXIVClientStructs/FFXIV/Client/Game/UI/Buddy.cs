@@ -24,32 +24,66 @@ public unsafe partial struct Buddy {
     [FieldOffset(0x300)] public BuddyMember Pet; // Carbuncle, Eos/Selene, Machinists Rook Autoturret/Automaton Queen, Whitemages Lilybell, probably more
     [FixedSizeArray<BuddyMember>(7)]
     [FieldOffset(0x600)] public fixed byte BattleBuddies[0x300 * 7]; // BuddyMember array for Squadron/Trust
-    [FieldOffset(0x1B00)] public BuddyMember* CompanionPtr;
-    [FieldOffset(0x1B08)] public float TimeLeft;
-    [FieldOffset(0x1B0C)] private fixed byte BuddyEquipUnlockBitmask[96 >> 3]; // number of BuddyEquip rows >> 3
-    [FieldOffset(0x1B18)] private byte BardingHead;
-    [FieldOffset(0x1B19)] private byte BardingChest;
-    [FieldOffset(0x1B1A)] private byte BardingFeet;
-    [FieldOffset(0x1B1B)] public fixed byte Name[21];
-    [FieldOffset(0x1B30)] public uint CurrentXP;
-    [FieldOffset(0x1B34)] public byte Rank;
-    [FieldOffset(0x1B35)] public byte Stars;
-    [FieldOffset(0x1B36)] public byte SkillPoints;
-    [FieldOffset(0x1B37)] public byte DefenderLevel;
-    [FieldOffset(0x1B38)] public byte AttackerLevel;
-    [FieldOffset(0x1B39)] public byte HealerLevel;
-    [FieldOffset(0x1B3A)] public byte ActiveCommand;
-    [FieldOffset(0x1B3B)] public byte FavoriteFeed;
-    [FieldOffset(0x1B3C)] public byte CurrentColorStainId;
-    [FieldOffset(0x1B3D)] public byte Mounted; // bool
-    [FieldOffset(0x1B48)] public BuddyMember* PetPtr;
-    [FieldOffset(0x1B58)] public BuddyMember* SquadronTrustPtr;
+    [FieldOffset(0x1B00)] public CompanionInfo CompanionInfo;
+    [FieldOffset(0x1B00), Obsolete("Use CompanionInfo.Companion")] public BuddyMember* CompanionPtr;
+    [FieldOffset(0x1B08), Obsolete("Use CompanionInfo.TimeLeft")] public float TimeLeft;
+    [FieldOffset(0x1B0C), Obsolete("Use CompanionInfo.BuddyEquipUnlockBitmask")] private fixed byte BuddyEquipUnlockBitmask[96 >> 3]; // number of BuddyEquip rows >> 3
+    [FieldOffset(0x1B18), Obsolete("Use CompanionInfo.BardingHead")] private byte BardingHead;
+    [FieldOffset(0x1B19), Obsolete("Use CompanionInfo.BardingChest")] private byte BardingChest;
+    [FieldOffset(0x1B1A), Obsolete("Use CompanionInfo.BardingFeet")] private byte BardingFeet;
+    [FieldOffset(0x1B1B), Obsolete("Use CompanionInfo.NameBytes or CompanionInfo.Name for a string")] public fixed byte Name[21];
+    [FieldOffset(0x1B30), Obsolete("Use CompanionInfo.CurrentXP")] public uint CurrentXP;
+    [FieldOffset(0x1B34), Obsolete("Use CompanionInfo.Rank")] public byte Rank;
+    [FieldOffset(0x1B35), Obsolete("Use CompanionInfo.Stars")] public byte Stars;
+    [FieldOffset(0x1B36), Obsolete("Use CompanionInfo.SkillPoints")] public byte SkillPoints;
+    [FieldOffset(0x1B37), Obsolete("Use CompanionInfo.DefenderLevel")] public byte DefenderLevel;
+    [FieldOffset(0x1B38), Obsolete("Use CompanionInfo.AttackerLevel")] public byte AttackerLevel;
+    [FieldOffset(0x1B39), Obsolete("Use CompanionInfo.HealerLevel")] public byte HealerLevel;
+    [FieldOffset(0x1B3A), Obsolete("Use CompanionInfo.ActiveCommand")] public byte ActiveCommand;
+    [FieldOffset(0x1B3B), Obsolete("Use CompanionInfo.FavoriteFeed")] public byte FavoriteFeed;
+    [FieldOffset(0x1B3C), Obsolete("Use CompanionInfo.CurrentColorStainId")] public byte CurrentColorStainId;
+    [FieldOffset(0x1B3D), Obsolete("Use CompanionInfo.Mounted")] public byte Mounted; // bool
+    [FieldOffset(0x1B48)] public PetInfo PetInfo;
+    [FieldOffset(0x1B48), Obsolete("Use PetInfo.Pet")] public BuddyMember* PetPtr;
+    [FieldOffset(0x1B58)] public SquadronTrustInfo SquadronTrustInfo;
+    [FieldOffset(0x1B58), Obsolete("Use SquadronTrustInfo.SquadronTrust")] public BuddyMember* SquadronTrustPtr;
 
-    public bool IsBuddyEquipUnlocked(uint buddyEquipId) {
-        fixed (BuddyMember** ptr = &CompanionPtr)
-            return IsBuddyEquipUnlockedInternal(ptr, buddyEquipId);
-    }
+    [Obsolete("Use CompanionInfo.IsBuddyEquipUnlocked")]
+    public bool IsBuddyEquipUnlocked(uint buddyEquipId)
+        => CompanionInfo.IsBuddyEquipUnlocked(buddyEquipId);
+}
+
+[StructLayout(LayoutKind.Explicit, Size = 0x48)]
+public unsafe partial struct CompanionInfo {
+    [FieldOffset(0)] public Buddy.BuddyMember* Companion;
+    [FieldOffset(0x8)] public float TimeLeft;
+    [FieldOffset(0xC)] private fixed byte BuddyEquipUnlockBitmask[96 >> 3]; // number of BuddyEquip rows >> 3
+    [FieldOffset(0x18)] private byte BardingHead;
+    [FieldOffset(0x19)] private byte BardingChest;
+    [FieldOffset(0x1A)] private byte BardingFeet;
+    [FieldOffset(0x1B), FixedString("Name")] public fixed byte NameBytes[21];
+    [FieldOffset(0x30)] public uint CurrentXP;
+    [FieldOffset(0x34)] public byte Rank;
+    [FieldOffset(0x35)] public byte Stars;
+    [FieldOffset(0x36)] public byte SkillPoints;
+    [FieldOffset(0x37)] public byte DefenderLevel;
+    [FieldOffset(0x38)] public byte AttackerLevel;
+    [FieldOffset(0x39)] public byte HealerLevel;
+    [FieldOffset(0x3A)] public byte ActiveCommand;
+    [FieldOffset(0x3B)] public byte FavoriteFeed;
+    [FieldOffset(0x3C)] public byte CurrentColorStainId;
+    [FieldOffset(0x3D)] public byte Mounted; // bool
 
     [MemberFunction("E9 ?? ?? ?? ?? 0F B7 50 02 41 B8")]
-    private static partial bool IsBuddyEquipUnlockedInternal(BuddyMember** companionPtr, uint buddyEquipId);
+    public partial bool IsBuddyEquipUnlocked(uint buddyEquipId);
+}
+
+[StructLayout(LayoutKind.Explicit, Size = 0x10)]
+public unsafe partial struct PetInfo {
+    [FieldOffset(0)] public Buddy.BuddyMember* Pet;
+}
+
+[StructLayout(LayoutKind.Explicit, Size = 0x2C)]
+public unsafe partial struct SquadronTrustInfo {
+    [FieldOffset(0)] public Buddy.BuddyMember* SquadronTrust;
 }

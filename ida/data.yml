@@ -1231,10 +1231,7 @@ classes:
     funcs:
       0x140974F60: ctor
       0x1409756D0: ReadPacket
-  Client::Game::UI::Buddy::BuddyMember:
-    instances:
-      - ea: 0x1421F6B50
-        pointer: False
+  Client::Game::UI::Buddy::CompanionInfo:
     funcs:
       0x140973B30: IsBuddyEquipUnlocked
   Client::Game::UI::PvPProfile:
