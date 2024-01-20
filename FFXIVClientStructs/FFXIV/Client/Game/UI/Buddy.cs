@@ -20,10 +20,10 @@ public unsafe partial struct Buddy {
         [FieldOffset(0x10)] public StatusManager StatusManager;
     }
 
-    [FieldOffset(0x0)] public BuddyMember Companion; // Chocobo Companion
-    [FieldOffset(0x300)] public BuddyMember Pet; // Carbuncle, Eos/Selene, Machinists Rook Autoturret/Automaton Queen, Whitemages Lilybell, probably more
+    [FieldOffset(0x0)] public BuddyMember Companion;
+    [FieldOffset(0x300)] public BuddyMember Pet;
     [FixedSizeArray<BuddyMember>(7)]
-    [FieldOffset(0x600)] public fixed byte BattleBuddies[0x300 * 7]; // BuddyMember array for Squadron/Trust
+    [FieldOffset(0x600)] public fixed byte BattleBuddies[0x300 * 7]; // BuddyMember array for Squadron/Trust // TODO: move this to offset 0 and make it 9 entries in length
     [FieldOffset(0x1B00)] public CompanionInfo CompanionInfo;
     [FieldOffset(0x1B00), Obsolete("Use CompanionInfo.Companion")] public BuddyMember* CompanionPtr;
     [FieldOffset(0x1B08), Obsolete("Use CompanionInfo.TimeLeft")] public float TimeLeft;
@@ -45,14 +45,17 @@ public unsafe partial struct Buddy {
     [FieldOffset(0x1B3D), Obsolete("Use CompanionInfo.Mounted")] public byte Mounted; // bool
     [FieldOffset(0x1B48)] public PetInfo PetInfo;
     [FieldOffset(0x1B48), Obsolete("Use PetInfo.Pet")] public BuddyMember* PetPtr;
-    [FieldOffset(0x1B58)] public SquadronTrustInfo SquadronTrustInfo;
-    [FieldOffset(0x1B58), Obsolete("Use SquadronTrustInfo.SquadronTrust")] public BuddyMember* SquadronTrustPtr;
+    [FieldOffset(0x1B58)] public DutyHelperInfo DutyHelperInfo;
+    [FieldOffset(0x1B58), Obsolete("Use DutyHelperInfo.DutyHelpers")] public BuddyMember* SquadronTrustPtr;
 
     [Obsolete("Use CompanionInfo.IsBuddyEquipUnlocked")]
     public bool IsBuddyEquipUnlocked(uint buddyEquipId)
         => CompanionInfo.IsBuddyEquipUnlocked(buddyEquipId);
 }
 
+// sizes for Info structs are estimated
+
+// Chocobo Companion
 [StructLayout(LayoutKind.Explicit, Size = 0x48)]
 public unsafe partial struct CompanionInfo {
     [FieldOffset(0)] public Buddy.BuddyMember* Companion;
@@ -78,12 +81,14 @@ public unsafe partial struct CompanionInfo {
     public partial bool IsBuddyEquipUnlocked(uint buddyEquipId);
 }
 
+// Carbuncle, Eos/Selene, Machinists Rook Autoturret/Automaton Queen, Whitemages Lilybell, probably more
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
 public unsafe partial struct PetInfo {
     [FieldOffset(0)] public Buddy.BuddyMember* Pet;
 }
 
+// Squadron, Trust, Duty Support
 [StructLayout(LayoutKind.Explicit, Size = 0x2C)]
-public unsafe partial struct SquadronTrustInfo {
-    [FieldOffset(0)] public Buddy.BuddyMember* SquadronTrust;
+public unsafe partial struct DutyHelperInfo {
+    [FieldOffset(0)] public Buddy.BuddyMember* DutyHelpers; // 7 members
 }
