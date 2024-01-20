@@ -20,8 +20,8 @@ public unsafe partial struct Buddy {
         [FieldOffset(0x10)] public StatusManager StatusManager;
     }
 
-    [FieldOffset(0x0)] public BuddyMember Companion;
-    [FieldOffset(0x300)] public BuddyMember Pet;
+    [FieldOffset(0x0)] public BuddyMember Companion; // Chocobo Companion
+    [FieldOffset(0x300)] public BuddyMember Pet; // Carbuncle, Eos/Selene, Machinists Rook Autoturret/Automaton Queen, Whitemages Lilybell, probably more
     [FixedSizeArray<BuddyMember>(7)]
     [FieldOffset(0x600)] public fixed byte BattleBuddies[0x300 * 7]; // BuddyMember array for Squadron/Trust
     [FieldOffset(0x1B00)] public BuddyMember* CompanionPtr;

@@ -23,7 +23,6 @@ globals:
   0x1421EA6C8: g_CharacterManager_CompanionMemoryPtr
   0x1421EA6F8: g_GameObjectManager_ObjectList
   0x1421EB9B0: g_GameObjectManager_ObjectListEnd
-  # 0x142203000: g_TitleController # commented out because it no longer has an xref
   0x1421F3F38: g_Client::Game::UI::Chain.RemainingTime # not a pointer
   0x1421F3F3C: g_Client::Game::UI::Chain.MaxTime # not a pointer
   0x1421F3FBC: g_Client::Game::UI::PlayerState.ObjectId
@@ -1232,7 +1231,7 @@ classes:
     funcs:
       0x140974F60: ctor
       0x1409756D0: ReadPacket
-  Client::Game::UI::Buddy.CompanionStats:
+  Client::Game::UI::Buddy::BuddyMember:
     instances:
       - ea: 0x1421F6B50
         pointer: False
@@ -1342,12 +1341,26 @@ classes:
       0: dtor
     funcs:
       0x140960DC0: ClearFieldMarkers
-  Client::Game::UI::LimitBreakController:
+  Client::Game::LimitBreakController:
     instances:
       - ea: 0x142202FF0
         pointer: False
     vtbls:
       - ea: 0x141A62818
+    vfuncs:
+      0: dtor
+  Client::Game::TitleController:
+    vtbls:
+      - ea: 0x141A62820
+    vfuncs:
+      0: dtor
+    funcs:
+      0x1409625A0: SetTitle
+  Client::Game::TitleList:
+    instances:
+      - ea: 0x142203008
+    vtbls:
+      - ea: 0x141A62828
     vfuncs:
       0: dtor
   Client::Game::UI::RouletteController:
@@ -6454,16 +6467,6 @@ classes:
         base: Client::Game::Character::Character
       - ea: 0x141C34180
         base: Client::Game::Character::CharacterData
-  Client::Game::TitleController:
-    vtbls:
-      - ea: 0x141A62820
-    vfuncs:
-      0: dtor
-  Client::Game::TitleList:
-    vtbls:
-      - ea: 0x141A62828
-    vfuncs:
-      0: dtor
   Client::UI::Misc::RaptureHotbarModule::ClearCallback:
     vtbls:
       - ea: 0x141A627E0
