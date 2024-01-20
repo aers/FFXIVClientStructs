@@ -315,6 +315,7 @@ functions:
   0x14192EA40: IntersectCallbackMoreOrtho
   0x14192F820: CollisionAlloc
   0x14192F860: CollisionFree
+  0x1415FF240: ReadSqpkChunk
 
 classes:
   Client::Game::UI::RecipeNote:
