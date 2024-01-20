@@ -31,7 +31,6 @@ globals:
   0x1421F6BA8: g_Client::Game::UI::Buddy.BattleBuddyListPtr
   0x1421FEA80: g_Client::Game::UI::ActiveDirector
   0x1421FEBC8: g_Client::Game::UI::FateDirector
-  0x142203008: g_TitleList # TODO: add "B8 ?? ?? ?? ?? 44 0F B7 C2 4C 8B C9" - IsTitleUnlocked
   0x142205DA0: g_Client::Game::UI::ContentsFinder::LootRules
   0x142205DA1: g_Client::Game::UI::ContentsFinder::UnrestrictedParty
   0x142205DA2: g_Client::Game::UI::ContentsFinder::MinimalIL
@@ -1352,7 +1351,7 @@ classes:
     vfuncs:
       0: dtor
     funcs:
-      0x1409625A0: SetTitle
+      0x1409625A0: SendTitleIdUpdate # better use Client::Game::Character::Character.SendTitleIdUpdate
   Client::Game::TitleList:
     instances:
       - ea: 0x142203008
@@ -1360,6 +1359,8 @@ classes:
       - ea: 0x141A62828
     vfuncs:
       0: dtor
+    funcs:
+      0x140962710: IsTitleUnlocked
   Client::Game::UI::RouletteController:
     instances:
       - ea: 0x142205CB8
@@ -5902,6 +5903,7 @@ classes:
       0x1407599B0: SetSoftTargetId
       0x140759A30: GetSoftTargetId
       0x140759EE0: CalculateHeight
+      0x14075A5A0: SendTitleIdUpdate
       0x14075A620: SetMode
       0x14075C540: Finalize
       0x1407BCAE0: ctor

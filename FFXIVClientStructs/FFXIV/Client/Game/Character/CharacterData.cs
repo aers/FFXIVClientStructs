@@ -22,7 +22,7 @@ public unsafe struct CharacterData {
     [FieldOffset(0x30)] public ushort CraftingPoints;
     [FieldOffset(0x32)] public ushort MaxCraftingPoints;
     [FieldOffset(0x34)] public short TransformationId;
-    [FieldOffset(0x36)] public short StatusEffectVFXId; // outdated since TitleID moved here
+    [FieldOffset(0x36), Obsolete("Outdated - offset of TitleID")] public short StatusEffectVFXId;
     [FieldOffset(0x36)] public ushort TitleID;
 
     [FieldOffset(0x3A)] public byte ClassJob;

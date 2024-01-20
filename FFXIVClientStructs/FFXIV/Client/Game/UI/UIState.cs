@@ -36,6 +36,8 @@ public unsafe partial struct UIState {
     [FieldOffset(0xB7F0)] public Map Map;
     [FieldOffset(0xF7F0)] public MarkingController MarkingController;
     [FieldOffset(0xFAD0)] public LimitBreakController LimitBreakController;
+    [FieldOffset(0xFAE0)] public void* TitleController;
+    [FieldOffset(0xFAE8)] public TitleList TitleList;
 
     [FieldOffset(0x12798)] public RouletteController RouletteController;
     [FieldOffset(0x12868)] public ContentsFinder ContentsFinder;
