@@ -3,10 +3,11 @@ using FFXIVClientStructs.FFXIV.Client.Game.Fate;
 using FFXIVClientStructs.FFXIV.Component.Exd;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
+
+// Client::Game::UI::UIState
+// ctor "E8 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? 48 83 C4 28 E9 ?? ?? ?? ?? 48 83 EC 28 33 D2"
 // this is a large object holding most of the other objects in the Client::Game::UI namespace
 // all data in here is used for UI display
-
-// ctor "E8 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? 48 83 C4 28 E9 ?? ?? ?? ?? 48 83 EC 28 33 D2"
 [StructLayout(LayoutKind.Explicit, Size = 0x17D10)] // its at least this big, may be a few bytes bigger
 public unsafe partial struct UIState {
     [FieldOffset(0x00)] public Hotbar Hotbar;

@@ -3,10 +3,9 @@ using System.Text;
 using FFXIVClientStructs.FFXIV.Client.System.Memory;
 
 namespace FFXIVClientStructs.FFXIV.Client.System.String;
-// Client::System::String::Utf8String
 
-// size = 0x68
-// ctor E8 ?? ?? ?? ?? 44 2B F7 
+// Client::System::String::Utf8String
+// ctor "E8 ?? ?? ?? ?? 44 2B F7"
 [StructLayout(LayoutKind.Explicit, Size = 0x68)]
 public unsafe partial struct Utf8String : ICreatable, IDisposable {
     [FieldOffset(0x0)] public byte* StringPtr; // pointer to null-terminated string

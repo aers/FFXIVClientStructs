@@ -8,7 +8,6 @@ namespace FFXIVClientStructs.FFXIV.Common.Component.BGCollision;
 /// </summary>
 [StructLayout(LayoutKind.Explicit, Size = 0x40)]
 public unsafe partial struct Quadtree {
-
     [FieldOffset(0x00)] public Object Object; // base class
     [FieldOffset(0x08)] public float MinX;
     [FieldOffset(0x0C)] public float MaxX;
@@ -49,7 +48,7 @@ public unsafe partial struct Quadtree {
         c = (c & 0x0000FFFF) | ((c & 0xFFFF0000) >> 8);
         return c;
     }
-};
+}
 
 // QuadtreeNode is derived from Node, but has no extra members - it's used to have two links (in scene object list and quadtree node object list) in colliders
 [StructLayout(LayoutKind.Explicit, Size = 0x20)]

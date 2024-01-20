@@ -1,8 +1,6 @@
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
-// Client::Graphics::Kernel::ShaderNode
 
-// size = 0x38
-// inlined ctor
+// Client::Graphics::Kernel::ShaderNode
 [StructLayout(LayoutKind.Explicit, Size = 0x38)]
 public unsafe struct ShaderNode {
     [StructLayout(LayoutKind.Explicit, Size = 0x8)]

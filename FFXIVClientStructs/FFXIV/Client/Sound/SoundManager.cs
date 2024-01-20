@@ -5,7 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Sound;
 // Client::Sound::SoundManager:
 //   Client::System::Resource::ResourceEventListener
 //   Client::System::Threading::Thread
-//ctor E8 ?? ?? ?? ?? EB ?? 48 8B C6 BA ?? ?? ?? ?? 48 89 87 ?? ?? ?? ?? 49 8B CF
+//ctor "E8 ?? ?? ?? ?? EB ?? 48 8B C6 BA ?? ?? ?? ?? 48 89 87 ?? ?? ?? ?? 49 8B CF"
 [StructLayout(LayoutKind.Explicit, Size = 0x1C88)]
 public unsafe partial struct SoundManager {
     [FieldOffset(0x0000)] public nint ResourceEventListener;
@@ -53,6 +53,5 @@ public unsafe partial struct SoundManager {
         Env3 = 12,
         Bgm4 = 16,
         Perform = 17
-
     }
 }

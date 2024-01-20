@@ -1,7 +1,6 @@
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
-// Component::GUI::AtkEventListenerUnk1
-// size = 0x60?
 
+// Component::GUI::AtkEventListenerUnk1
 [StructLayout(LayoutKind.Explicit, Size = 0x60)]
 public unsafe struct AtkEventListenerUnk1 {
     [FieldOffset(0x0)] public void* vtbl;

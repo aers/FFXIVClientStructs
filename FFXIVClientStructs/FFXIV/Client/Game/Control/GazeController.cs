@@ -4,6 +4,8 @@ using FFXIVClientStructs.FFXIV.Common.Math;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Control;
 
+// Client::Game::Control::GazeController
+// ctor "48 89 5C 24 ?? 48 8D 05 ?? ?? ?? ?? BA"
 [VTableAddress("48 89 5C 24 ?? 48 8D 05 ?? ?? ?? ?? BA", 8)]
 [StructLayout(LayoutKind.Explicit, Size = 0x5E0)]
 public unsafe partial struct GazeController {

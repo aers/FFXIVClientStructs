@@ -1,5 +1,6 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
+// Client::Game::UI::Buddy
 // ctor "E8 ?? ?? ?? ?? 48 89 AB ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 AB"
 [StructLayout(LayoutKind.Explicit, Size = 0x1B80)]
 public unsafe partial struct Buddy {
@@ -45,11 +46,10 @@ public unsafe partial struct Buddy {
     [FieldOffset(0x1B58)] public BuddyMember* SquadronTrustPtr;
 
     public bool IsBuddyEquipUnlocked(uint buddyEquipId) {
-        fixed (byte* p = BuddyEquipUnlockBitmask) {
-            return IsBuddyEquipUnlockedInternal(p, buddyEquipId);
-        }
+        fixed (BuddyMember** ptr = &CompanionPtr)
+            return IsBuddyEquipUnlockedInternal(ptr, buddyEquipId);
     }
 
     [MemberFunction("E9 ?? ?? ?? ?? 0F B7 50 02 41 B8")]
-    private static partial bool IsBuddyEquipUnlockedInternal(void* ptr, uint buddyEquipId);
+    private static partial bool IsBuddyEquipUnlockedInternal(BuddyMember** companionPtr, uint buddyEquipId);
 }

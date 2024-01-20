@@ -1,10 +1,10 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
 // Client::Game::UI::RouletteController
-// ctor inlined in UIState_ctor
 [StructLayout(LayoutKind.Explicit, Size = 0x70)]
 public unsafe partial struct RouletteController {
-    public static RouletteController* Instance() => &UIState.Instance()->RouletteController;
+    [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 8B 0E", 3)]
+    public static partial RouletteController* Instance();
 
     /// <summary>
     /// Provides the number of minutes remaining on the penalty.

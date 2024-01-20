@@ -1,5 +1,11 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
 
+// Client::Game::InstanceContent::InstanceContentDirector
+//   Client::Game::InstanceContent::ContentDirector
+//     Client::Game::Event::Director
+//       Client::Game::Event::LuaEventHandler
+//         Client::Game::Event::EventHandler
+// ctor "E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 80 E3 01"
 [StructLayout(LayoutKind.Explicit, Size = 0x1CB0)]
 public unsafe struct InstanceContentDirector {
     [FieldOffset(0x00)] public ContentDirector ContentDirector;

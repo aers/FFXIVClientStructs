@@ -23,17 +23,16 @@ globals:
   0x1421EA6C8: g_CharacterManager_CompanionMemoryPtr
   0x1421EA6F8: g_GameObjectManager_ObjectList
   0x1421EB9B0: g_GameObjectManager_ObjectListEnd
-  0x1421F3FC0: g_LocalContentId
-  0x1421F47A0: g_Client::Game::UI::Inspect # not a pointer
-  0x1421F6B58: g_Client::Game::UI::Buddy.CompanionStats.TimeRemaining  # not a pointer
-  0x1421F6BA8: g_Client::Game::UI::Buddy.BattleBuddyListPtr # Member of UIState
-  0x1421F6C58: g_Client::Game::UI::ContentsNote # not a pointer
-  0x1421F6D10: g_Client::Game::UI::RelicNote # not a pointer
+  # 0x142203000: g_TitleController # commented out because it no longer has an xref
+  0x1421F3F38: g_Client::Game::UI::Chain.RemainingTime # not a pointer
+  0x1421F3F3C: g_Client::Game::UI::Chain.MaxTime # not a pointer
+  0x1421F3FBC: g_Client::Game::UI::PlayerState.ObjectId
+  0x1421F3FC0: g_Client::Game::UI::PlayerState.ContentId
+  0x1421F6B58: g_Client::Game::UI::Buddy.CompanionStats.TimeRemaining
+  0x1421F6BA8: g_Client::Game::UI::Buddy.BattleBuddyListPtr
   0x1421FEA80: g_Client::Game::UI::ActiveDirector
   0x1421FEBC8: g_Client::Game::UI::FateDirector
-  0x1421FED10: g_Client::Game::UI::Map # not a pointer
-  # 0x142203000: g_TitleController # commented out because it no longer has an xref
-  0x142203008: g_TitleList
+  0x142203008: g_TitleList # TODO: add "B8 ?? ?? ?? ?? 44 0F B7 C2 4C 8B C9" - IsTitleUnlocked
   0x142205DA0: g_Client::Game::UI::ContentsFinder::LootRules
   0x142205DA1: g_Client::Game::UI::ContentsFinder::UnrestrictedParty
   0x142205DA2: g_Client::Game::UI::ContentsFinder::MinimalIL
@@ -43,14 +42,12 @@ globals:
   0x142205DA6: g_Client::Game::UI::ContentsFinder::LimitedLevelingRoulette
   0x14220AE74: g_Client::Game::UI::UnlockLinkBitmask  # not a pointer
   0x14220AEB4: g_Client::Game::UI::UnlockedAetherytesBitmask  # not a pointer
-  0x14220AEF2: g_Client::Game::UI::UnlockedCompanionsMask  # not a pointer
   0x14220AECE: g_Client::Game::UI::UnlockedHowToBitmask  # not a pointer
+  0x14220AEF2: g_Client::Game::UI::UnlockedCompanionsMask  # not a pointer
   0x14220AF32: g_Client::Game::UI::ChocoboTaxiStandsBitmask  # not a pointer
   0x14220AF3E: g_Client::Game::UI::CutsceneSeenBitmask  # not a pointer
   0x14220AFDD: g_Client::Game::UI::UnlockedTripleTriadCardsBitmask  # not a pointer
   0x14220B010: g_Client::Game::UI::UnlockedTripleTriadCardsCount  # not a pointer
-  0x1421F3F38: g_Client::Game::UI::Chain.RemainingTime # not a pointer
-  0x1421F3F3C: g_Client::Game::UI::Chain.MaxTime # not a pointer
   0x14220D2C0: g_Conditions # bool array, size is Condition sheet row count
   0x14216C1E8: g_Component::SteamApi::InterfaceContext::ISteamFriends
   0x14216C1D0: g_Component::SteamApi::InterfaceContext::ISteamUser
@@ -76,16 +73,6 @@ functions:
   0x140058500: WinMain
   0x1400581B0: std:string::ctor_FromSubStr #(other, idx, len)
   0x1400582F0: std:string::ctor_FromCharArr #(arr, len)
-  0x1400609F0: MemoryManager_AllocDefaultSpace
-  0x140060A80: MemoryManager_Alloc
-  0x140062190: MemoryManager_GetDefaultSpace
-  0x140062250: MemoryManager_GetApricotSpace
-  0x140062270: MemoryManager_GetAnimationSpace
-  0x140062290: MemoryManager_GetUISpace
-  0x140062310: MemoryManager_GetFileSpace
-  0x1400622B0: MemoryManager_GetSoundSpace_1
-  0x1400622D0: MemoryManager_GetSoundSpace_2
-  0x140060AB0: MemoryManager_SpaceAlloc
   0x1400654E0: IsMacClient
   0x1400951B0: CheckOsTypeAndVersion
   0x140067500: GetMyDocumntsFolder #as UTF8String
@@ -317,21 +304,18 @@ functions:
   0x14192F860: CollisionFree
 
 classes:
-  Client::Game::UI::RecipeNote:
-    instances:
-      - ea: 0x1421F7F00
-        pointer: False
+  MemoryManager:
     funcs:
-      0x140942890: CancelCrafting
-      0x140943800: IsRecipeUnlocked # (this, recipeId)  # no xrefs
-      0x140943870: GetCraftTypeLevel
-      0x140943D70: FirstRecipeIndex
-      0x140943D30: GetRecipeByIndex # (this, index)
-      0x140943DB0: GetSelectedRecipe
-      0x140944910: Initialize
-      0x140946BA0: CancelCraftingPassthrough
-      0x140946CA0: InitializeStructs
-      0x140947910: ClearFunctionPointers
+      0x1400609F0: AllocDefaultSpace
+      0x140060A80: Alloc
+      0x140062190: GetDefaultSpace
+      0x140062250: GetApricotSpace
+      0x140062270: GetAnimationSpace
+      0x140062290: GetUISpace
+      0x140062310: GetFileSpace
+      0x1400622B0: GetSoundSpace_1
+      0x1400622D0: GetSoundSpace_2
+      0x140060AB0: SpaceAlloc
   Client::Game::GameMain:
     instances:
       - ea: 0x1421BA4F8
@@ -341,10 +325,12 @@ classes:
       0x1404DAD50: Terminate
       0x1404DB0A0: Update
       0x1404DD600: ctor
+      0x1404DB9E0: QueueActiveFestivals
       0x1404DCCA0: IsInGPose  # (probably) static
       0x1404DCCE0: IsInIdleCam  # static
       0x1404DCED0: IsInInstanceArea
       0x1404DD010: GetTourismDirector
+      0x1404DD3B0: SetActiveFestivals
       0x140931330: IsInPvPInstance
       0x1409313F0: IsInPvPArea
       0x1400A85D0: IsInSanctuary # static, more likely Client::UI::IsInSanctuary but it fits here just fine
@@ -586,6 +572,7 @@ classes:
       - ea: 0x1421EA6E0
         pointer: False
     funcs:
+      0x1407BD3A0: Initialize
       0x1407BD5D0: Update
       0x1407BD9E0: UpdateMountAndCompanionMovement # maybe?
       0x1407BDC30: UpdateGazes
@@ -595,7 +582,6 @@ classes:
       0x1407BD150: UpdateObjectArrays
       0x1407BD370: UpdateObjectArraysWrapper
       0x1407BD380: UpdateObjectArraysWrapper2
-      0x1407BD3A0: ClearObjectArrays
   Client::Game::Object::ClientObjectManager: # non-networked objects
     instances:
       - ea: 0x14221A7C0
@@ -748,6 +734,7 @@ classes:
       - ea: 0x1421E5C50
         pointer: False
     funcs:
+      0x140747A90: ctor
       0x14071DFB0: Update
       0x14071EBE0: GetInventoryContainer  # (this, containerId)
       0x14071EC40: GetInventorySlot  # (this, containerId, slotId)
@@ -821,16 +808,20 @@ classes:
       - ea: 0x14220D330
         pointer: True
     funcs:
+      0x140B28090: ctor
+      0x140B28140: dtor
+      0x140B22C70: Initialize
       0x140B22D20: HasInstance
       0x140B22D40: GetInstance
       0x140B27BC0: Update
       0x140B26010: IsOutside
       0x140B26020: IsInside
       0x140B26030: IsInWorkshop
+      0x140B26140: GetCurrentDivision
       0x140B268C0: HasHousePermissions
       0x140B26100: GetCurrentPlot
       0x140B261B0: GetCurrentWard
-      0x140B269C0: GetIndoorTerritoryHouseId
+      0x140B269C0: GetCurrentHouseId
       0x140B26C90: GetCurrentRoom
       0x140B26210: GetCurrentFloor # 0 - Ground Level, 1 - Upstairs, 10 - Downstairs
       0x140B262A0: GetInvertedBrightness # 0-5, higher is darker
@@ -917,6 +908,9 @@ classes:
     funcs:
       0x140B8CDA0: ctor
   Client::Game::MJI::MJIPastureHandler:
+    vtbls:
+      - ea: 0x141C408A8
+        base: Client::Game::Event::EventHandler
     funcs:
       0x1414E3350: ctor
       0x1414E46B0: DismissCaretaker
@@ -937,9 +931,11 @@ classes:
       0x1414E56B0: ExecuteReleaseMinion  # (this, minionId, areaId)
       0x1414E5840: ExecuteRecallMinion   # (this, minionId)
   Client::Game::MJI::MJIFarmState:
+    vtbls:
+      - ea: 0x141C403C8
     funcs:
       0x1414E00A0: ctor
-      0x1414E0140: dtor
+      0x1414E0140: Finalize
       0x1414E0210: InitSeedItemIds
       0x1414E0270: Update
       0x1414E0340: CalculateCareCost
@@ -1063,6 +1059,7 @@ classes:
       0x1405376A0: SeardNodeById
       0x140537700: SearchNodeByIndex
       0x140537770: GetDuplicatedNode
+      0x140534EF0: UpdateDrawNodeList
   Component::GUI::AtkTimeline:
     funcs:
       0x14056D5E0: GetStartFrameIdxForLabelId
@@ -1109,6 +1106,30 @@ classes:
       0x1414B2420: IsPublicContentUnlocked   # static
       0x1414B24B0: IsPublicContentCompleted  # static
       0x14099A040: Terminate
+  Client::Game::UI::Hotbar: # located at 0x0 of UIState
+    vtbls:
+      - ea: 0x141A627A0
+        base: Client::UI::Misc::RaptureHotbarModule::ClearCallback
+    funcs:
+      0x140998CF0: CancelCast
+      0x140936410: ResetPvEHotbarsForClassAtLevel # (self, int, uint) -> void
+      0x140936A80: ResetPvPHotbarsForClassInner  # (self, uint) -> void
+  Client::Game::UI::Hate:
+    instances:
+      - ea: 0x1421F3528
+        pointer: False
+  Client::Game::UI::Hater:
+    instances:
+      - ea: 0x1421F3630
+        pointer: False
+  Client::Game::UI::Chain:
+    instances:
+      - ea: 0x1421F3F38
+        pointer: False
+  Client::Game::UI::WeaponState:
+    instances:
+      - ea: 0x1421F3F40
+        pointer: False
   Client::Game::UI::PlayerState:
     instances:
       - ea: 0x1421F3F58
@@ -1129,7 +1150,7 @@ classes:
       0x14093ADE0: SetAdventureExPhaseComplete
       0x14093AE30: IsAdventureExPhaseComplete
       0x14093B100: IsAdventureComplete
-      0x14093B9B0: IsFolkloreTomeUnlocked     # DoL unlockable books
+      0x14093B9B0: IsFolkloreBookUnlocked     # DoL unlockable books
       0x14093CE00: IsMcGuffinUnlocked
       0x14093D100: IsFramersKitUnlocked
       0x14093BEA0: GetWeeklyBingoFlagsValue
@@ -1152,14 +1173,58 @@ classes:
       0x14093D1F0: Initialize
       0x1409AA5D0: ctor
       0x14093DF30: GetAttributeByIndex # (this, index)
-  Client::Game::UI::WeaponState:
-    instances:
-      - ea: 0x1421F3F40
-        pointer: False
   Client::Game::UI::Revive:
+    instances:
+      - ea: 0x1421F4770
+        pointer: False
     vtbls:
       - ea: 0x141A62788
         base: Component::GUI::AtkModuleInterface::AtkEventInterface
+  Client::Game::UI::Inspect:
+    instances:
+      - ea: 0x1421F47A0
+        pointer: False
+  Client::Game::UI::Telepo:
+    instances:
+      - ea: 0x1421F4A18
+        pointer: False
+    vtbls:
+      - ea: 0x141A628A8
+        base: Component::GUI::AtkModuleInterface::AtkEventInterface
+    vfuncs:
+      2: dtor
+    funcs:
+      0x14096D410: ctor
+      0x14096D570: IsSelectUseTicketInactive
+      0x14096D6D0: UpdateAetheryteList
+      0x14096E250: Teleport
+      0x14096F4A0: TeleportWithTickets
+      0x14096F530: InvokeSelectUseTicket
+  Client::Game::UI::Telepo::SelectUseTicketInvoker:
+    vtbls:
+      - ea: 0x141A62890
+        base: Component::GUI::AtkModuleInterface::AtkEventInterface
+    vfuncs:
+      2: dtor
+  Client::Game::UI::Cabinet:
+    instances:
+      - ea: 0x1421F4A70
+        pointer: False
+    funcs:
+      0x14096FE90: IsItemInCabinet # row id of Cabinet sheet, not Item
+  Client::Game::UI::Achievement:
+    instances:
+      - ea: 0x1421F4AF8
+        pointer: False
+    vtbls:
+      - ea: 0x141A628C0
+    funcs:
+      0x140970080: Initialize
+      0x1409704A0: IsComplete
+      0x1409701F0: RequestAchievementProgress
+      0x140970540: ReceiveAchievementProgress
+    vfuncs:
+      0: dtor
   Client::Game::UI::Buddy:
     instances:
       - ea: 0x1421F5050
@@ -1179,10 +1244,10 @@ classes:
         pointer: False
     funcs:
       0x140976E20: ReadPacket
-      0x140977180: GetRank
-      0x140977080: GetCurrentRankExperience
-      0x1409770F0: GetCurrentRankNeededExperience
-      0x140977110: GetTotalExperience
+      0x140977180: GetPvPRank
+      0x140977080: GetPvPCurrentRankExperience
+      0x1409770F0: GetPvPCurrentRankNeededExperience
+      0x140977110: GetPvPTotalExperience
       0x1409777C0: SetSeriesCurrentRank
       0x1409777D0: GetSeriesCurrentRank
       0x1409777E0: SetSeriesClaimedRank
@@ -1193,32 +1258,19 @@ classes:
       0x140977840: SetPreviousSeriesRank
       0x140977850: GetPreviousSeriesRank
       0x140977860: HasPreviousSeriesRank
-  Client::Game::UI::Cabinet:
-    instances:
-      - ea: 0x1421F4A70
-        pointer: False
-    funcs:
-      0x14096FE90: IsItemInCabinet        # item is a cabinet-specific ID, not generic Item.
-  Client::Game::UI::Achievement:
-    instances:
-      - ea: 0x1421F4AF8
-        pointer: False
-    vtbls:
-      - ea: 0x141A628C0
-    funcs:
-      0x140970080: Initialize
-      0x1409704A0: IsAchievementComplete
-      0x1409701F0: RequestAchievementProgress
-      0x140970540: ReceiveAchievementProgress
-    vfuncs:
-      0: dtor
   Client::Game::UI::ContentsNote:
+    instances:
+      - ea: 0x1421F6C58
+        pointer: False
     vtbls:
       - ea: 0x141A63840
     funcs:
       0x14097F3F0: ReadPacket
       0x14097F7C0: IsCategoryUnlocked
   Client::Game::UI::RelicNote:
+    instances:
+      - ea: 0x1421F6D10
+        pointer: False
     vtbls:
       - ea: 0x141A63848
     funcs:
@@ -1230,51 +1282,47 @@ classes:
       0x140980140: IsFateComplete
       0x140980180: IsLeveComplete
   Client::Game::UI::AreaInstance:
-    vtbls:
-      - ea: 0x141A63868
-        base: Component::GUI::AtkModuleInterface::AtkEventInterface
     instances:
       - ea: 0x1421F6D70
         pointer: False
+    vtbls:
+      - ea: 0x141A63868
+        base: Component::GUI::AtkModuleInterface::AtkEventInterface
     funcs:
       0x140983F30: SetInstance
       0x140983F40: GetInstance
       0x140983F50: IsInstancedArea
-  Client::Game::UI::MobHunt:
-    vtbls:
-      - ea: 0x141A638C8
-    instances:
-      - ea: 0x142205EA0
-        pointer: False
-    funcs:
-      0x14098AFA0: ReadPacket
-      0x14098B720: GetKillCount
-      0x14098B660: GetObtainedMobHuntOrderRowId
-      0x14098B5F0: GetAvailableMobHuntOrderRowId
-      0x14098BE90: GetMarkIndexFromItemId
-      0x14098BEE0: IsMarkBillUnlocked
-  Client::Game::UI::RouletteController:
-    vtbls:
-      - ea: 0x141A63838
-    instances:
-      - ea: 0x142205CB8
-        pointer: False
-    funcs:
-      0x14097B830: GetPenaltyRemainingInMinutes
-      0x14097DE50: IsRouletteIncomplete
-  Client::Game::UI::ContentsFinder:
-    vtbls:
-      - ea: 0x141A638A8
-    instances:
-      - ea: 0x142205D88
-        pointer: False
   Client::Game::UI::Loot:
-    vtbls:
-      - ea: 0x141A638B0
-        base: Component::GUI::AtkModuleInterface::AtkEventInterface
     instances:
       - ea: 0x1421F7238
         pointer: False
+    vtbls:
+      - ea: 0x141A638B0
+        base: Component::GUI::AtkModuleInterface::AtkEventInterface
+    funcs:
+      0x140988BC0: ctor
+  Client::Game::UI::RecipeNote:
+    instances:
+      - ea: 0x1421F7F00
+        pointer: False
+    funcs:
+      0x1409445F0: ctor
+      0x140942890: CancelCrafting
+      0x140943800: IsRecipeUnlocked # (this, recipeId)  # no xrefs
+      0x140943870: GetCraftTypeLevel
+      0x140943D70: FirstRecipeIndex
+      0x140943D30: GetRecipeByIndex # (this, index)
+      0x140943DB0: GetSelectedRecipe
+      0x140944910: Initialize
+      0x140946BA0: CancelCraftingPassthrough
+      0x140946CA0: InitializeStructs
+      0x140947910: ClearFunctionPointers
+  Client::Game::UI::Map:
+    instances:
+      - ea: 0x1421FED10
+        pointer: False
+    funcs:
+      0x1409659D0: ctor
   Client::Game::UI::Map::MapMarkerData:
     funcs:
       0x1409656E0: SetData # (int levelId, Utf8String* tooltip, uint iconId, float x, float y, float z, float radius, ushort territoryTypeId, uint mapId, uint placeNameZoneId, uint placeNameId, ushort recommendedLevel, char a14) -> MapMarkerData*
@@ -1284,6 +1332,52 @@ classes:
       0x14099C3A0: AddActionLogMessage
       0x14099CAB0: AddToScreenLogWithLogMessageId  # this converts log message id to screen log kind and calls below function
       0x14099CB90: AddToScreenLogWithScreenLogKind
+  Client::Game::UI::MarkingController:
+    instances:
+      - ea: 0x142202D10
+        pointer: False
+    vtbls:
+      - ea: 0x141A62810
+    vfuncs:
+      0: dtor
+    funcs:
+      0x140960DC0: ClearFieldMarkers
+  Client::Game::UI::LimitBreakController:
+    instances:
+      - ea: 0x142202FF0
+        pointer: False
+    vtbls:
+      - ea: 0x141A62818
+    vfuncs:
+      0: dtor
+  Client::Game::UI::RouletteController:
+    instances:
+      - ea: 0x142205CB8
+        pointer: False
+    vtbls:
+      - ea: 0x141A63838
+    funcs:
+      0x14097B830: GetPenaltyRemainingInMinutes
+      0x14097DE50: IsRouletteIncomplete
+  Client::Game::UI::ContentsFinder:
+    instances:
+      - ea: 0x142205D88
+        pointer: False
+    vtbls:
+      - ea: 0x141A638A8
+  Client::Game::UI::MobHunt:
+    instances:
+      - ea: 0x142205EA0
+        pointer: False
+    vtbls:
+      - ea: 0x141A638C8
+    funcs:
+      0x14098AFA0: ReadPacket
+      0x14098B720: GetKillCount
+      0x14098B660: GetObtainedHuntOrderRowId
+      0x14098B5F0: GetAvailableHuntOrderRowId
+      0x14098BE90: GetMarkIndexFromItemId
+      0x14098BEE0: IsMarkBillUnlocked
   Client::Game::ActionManager:
     instances:
       - ea: 0x14216EAE0
@@ -1295,6 +1389,7 @@ classes:
       0x140049570: StaticInitializer
       0x1400AB790: GetCurrentComboActionId
       0x1409BB700: GetActionRange
+      0x1409BB830: CanUseActionOnTarget
       0x1409BBAD0: GetActionInRangeOrLoS
       0x1409BC0F0: GetAdjustedCastTime
       0x1409BC9C0: GetAdjustedRecastTime
@@ -1310,11 +1405,11 @@ classes:
       0x1409C4E10: CanPlayerClassUseAction
       0x1409C95E0: UseAction
       0x1409CA090: UseComboAction
-      0x1409CAA30: GetRecastTimerActive
+      0x1409CAA30: IsRecastTimerActive
       0x1409CADC0: StartCooldown
-      0x1409CB170: GetRecastTimerElapsed
-      0x1409CB1B0: GetRecastTimerElapsedForGroup # (this, groupId) -> float
-      0x1409CB1E0: SetRecastTimerElapsed # (this, actionType, actionId, newElapsed) -> *RecastDetail
+      0x1409CB170: GetRecastTimeElapsed
+      0x1409CB1B0: GetRecastTimeElapsedForGroup # (this, groupId) -> float
+      0x1409CB1E0: SetRecastTimeElapsed # (this, actionType, actionId, newElapsed) -> *RecastDetail
       0x1409CB220: GetRecastTime
       0x1409CB2B0: GetRecastTimeForGroup  # (this, groupId) -> float
       0x1409CB330: UpdateRecastFromNetwork
@@ -1555,7 +1650,7 @@ classes:
       - ea: 0x1419B2C60
     funcs:
       0x140095D70: ctor
-      0x14019C2F0: SetTask
+      0x14019C2F0: AddTask
   Common::Game::Time::GameTime:
     vtbls:
       - ea: 0x1419B2C68
@@ -2375,6 +2470,8 @@ classes:
       9: GetUseSoftwareCursor
       14: IsCursorVisible
       21: IsMouseNotCaptured
+    funcs:
+      0x140086790: ctor
   Component::Shell::ShellCommandModule:
     vtbls:
       - ea: 0x1419B3878
@@ -2807,7 +2904,7 @@ classes:
       0x1401C0390: HasFinished
       0x1401C03D0: SetAffinity
   Client::System::Threading::ThreadManager:
-    instances: 
+    instances:
       - ea: 0x1421A4240
     vtbls:
       - ea: 0x1419D3DE8
@@ -2825,7 +2922,7 @@ classes:
       - ea: 0x1419D4150
         base: Client::System::Threading::Thread
     funcs:
-      0x1401C5D10: ctor 
+      0x1401C5D10: ctor
   Client::System::File::FileManager:
     instances:
       - ea: 0x1421A4250
@@ -2861,6 +2958,7 @@ classes:
       - ea: 0x1419D5D78
         base: Client::System::Resource::Handle::DefaultResourceHandle
     funcs:
+      0x1401CD6A0: ctor
       0x1401CE020: LoadTexFiles
       0x1401CDE30: LoadShpkFiles
   Client::System::Resource::Handle::ShaderPackageResourceHandle:
@@ -3171,7 +3269,7 @@ classes:
       0x14021B610: Finalize
       0x14021B6B0: IsWinSockInitialized
       0x14021BF90: GetCurrentDeviceTimeInMillis
-      0x14021C010: GetLobbyCount 
+      0x14021C010: GetLobbyCount
       0x14021C940: IsInCrossWorldDuty
       0x14021C9C0: GetCurrentInstance
   Application::Network::PacketReceiverCallbackInterface:
@@ -3200,6 +3298,7 @@ classes:
       - ea: 0x141B37F30
         base: Client::Network::Protocol::Chat::PacketReceiverCallbackInterface
     funcs:
+      0x1412ECF10: ReceiveEvent
       0x14149B100: HandlePartyInvitePacket
       0x14149B1D0: HandleSocialPacket
       0x14149E850: HandleMarketBoardOfferingsPacket
@@ -4082,6 +4181,7 @@ classes:
       0x1404CDCB0: GetSheetByIndex  # (ExdModule* this, int nSheetIndex) -> ExcelSheet*
       0x1404CDC90: GetSheetByName  # (ExdModule* this, char* pcszName) -> ExcelSheet*
       0x14067B930: IsColumnRsv  # (ExdModule* this, int nSheetIndex, int nRowId, int nSubRowId, int nColumnIndex) -> bool
+      0x1406F2020: GetItemRowById
   Client::System::Scheduler::ScheduleManagement:
     vtbls:
       - ea: 0x141A03C18
@@ -4835,6 +4935,16 @@ classes:
         base: Client::LayoutEngine::IManagerBase
     funcs:
       0x1405C32E0: ctor
+      0x1405C9B70: SetInteriorFixture
+      0x1405C5E80: SetActiveFestivals
+  Client::LayoutEngine::OutdoorAreaLayoutData:
+    funcs:
+      0x1405AC010: SetFixture
+      0x1405AC190: SetFixtureStain
+  Client::LayoutEngine::OutdoorPlotLayoutData:
+    funcs:
+      0x1405ABA00: SetFixture
+      0x1405ABBF0: SetFixtureStain
   Client::LayoutEngine::Streaming::StreamingManager:
     vtbls:
       - ea: 0x141A0B850
@@ -5445,7 +5555,7 @@ classes:
       0x1406916B0: SetDutyActionSlot                 # (this, slotId, actionId)
       0x1406917C0: GetDutyActionSlot                 # (this, slotId) -> DutyActionSlot*
       0x140691820: ExecuteDutyActionSlot             # (this, slotId)
-      0x1406918D0: IsGeneralActionDutyAction         # (this, generalActionId) -> bool  - utility function? 
+      0x1406918D0: IsGeneralActionDutyAction         # (this, generalActionId) -> bool  - utility function?
       0x14068DF20: GrandCompanyUpdateTask            # (this) -> void
       0x14068E1A0: PvPStateUpdateTask                # (this) -> void
       0x14068E2C0: ToggleWXHBRightFocusFlag
@@ -5489,7 +5599,7 @@ classes:
       0x14068BEB0: SetPopUpHelpForSlot
       0x1406899B0: IsSlotUsable              # (this, HotbarSlotType, uint) -> bool
       0x1406E0CD0: IsSlotActionTargetInRange # (this) -> bool
-      0x14068A7A0: IsSlotActionTargetInRange2 # (this, HotbarSlotType, uint) -> bool 
+      0x14068A7A0: IsSlotActionTargetInRange2 # (this, HotbarSlotType, uint) -> bool
       0x14068A9E0: GetIntermediateActionType # (this) -> IntermediateActionType - ultimately passed to the NumberArray
       0x14068AEB0: PopulateIntermediateCooldownInfo # (this, HotBarUiIntermediate*)  - used for array population?
       0x14068AD50: GetAdjustedCommandId  # ???
@@ -6362,54 +6472,6 @@ classes:
       1: ResetAllHotbars  # (self, RaptureHotbarModule*) -> bool
       2: ResetPvEHotbarsForClass  # (self, RaptureHotbarModule*, int) -> bool
       3: ResetPvPHotbarsForClass  # (self, RaptureHotbarModule*, uint) -> bool
-  Client::Game::UI::Hotbar:
-    vtbls:
-      - ea: 0x141A627A0
-        base: Client::UI::Misc::RaptureHotbarModule::ClearCallback
-    funcs:
-      0x140998CF0: CancelCast
-      0x140936410: ResetPvEHotbarsForClassAtLevel # (self, int, uint) -> void
-      0x140936A80: ResetPvPHotbarsForClassInner  # (self, uint) -> void
-  Client::Game::UI::MarkingController:
-    instances:
-      - ea: 0x142202D10
-        pointer: False
-    vtbls:
-      - ea: 0x141A62810
-    vfuncs:
-      0: dtor
-    funcs:
-      0x140960DC0: ClearFieldMarkers
-  Client::Game::LimitBreakController:
-    instances:
-      - ea: 0x142202FF0
-        pointer: False
-    vtbls:
-      - ea: 0x141A62818
-    vfuncs:
-      0: dtor
-  Client::Game::UI::Telepo::SelectUseTicketInvoker:
-    vtbls:
-      - ea: 0x141A62890
-        base: Component::GUI::AtkModuleInterface::AtkEventInterface
-    vfuncs:
-      2: dtor
-  Client::Game::UI::Telepo:
-    instances:
-      - ea: 0x1421F4A18
-        pointer: False
-    vtbls:
-      - ea: 0x141A628A8
-        base: Component::GUI::AtkModuleInterface::AtkEventInterface
-    vfuncs:
-      2: dtor
-    funcs:
-      0x14096D410: ctor
-      0x14096D570: IsSelectUseTicketInactive
-      0x14096D6D0: UpdateAetheryteList
-      0x14096E250: Teleport
-      0x14096F4A0: TeleportWithTicket
-      0x14096F530: InvokeSelectUseTicket
   Client::UI::Agent::AgentHUD:
     vtbls:
       - ea: 0x141A7CF60
@@ -8892,7 +8954,7 @@ classes:
       0x140870A80: GetGoldSaucerDirector
       0x1408755B0: GetEventHandlerById
       0x14097A070: GetCurrentContentType
-      0x14097A140: GetCurrentContentId
+      0x14097A140: GetCurrentContentId # static
       0x14097A1C0: CanLeaveCurrentContent # static
       0x14097BB50: GetContentFinderCondition
       0x1414B23E0: GetPublicContentDirectorByType # static
@@ -8919,6 +8981,7 @@ classes:
       - ea: 0x141A41E98
   Client::Game::Event::EventGPoseController:
     funcs:
+      0x1407FC4B0: ctor
       0x1407FEE80: IsFaceCameraEnabled
       0x1407FEEA0: ToggleFaceCamera
       0x1407FEF60: IsGazeCameraEnabled
@@ -12958,7 +13021,7 @@ classes:
       2: GetSize
       3: Dtor
   Component::SteamApi::SteamCallbackBase2:
-    vtbls: 
+    vtbls:
       - ea: 0x141A189F0
         base: Component::SteamApi::SteamCallbackBase
   Component::SteamApi::Callbacks::AuthSessionTicketResponseCallback:

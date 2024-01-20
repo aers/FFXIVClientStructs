@@ -1,5 +1,12 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
 
+// Client::Game::InstanceContent::InstanceContentDeepDungeon
+//   Client::Game::InstanceContent::InstanceContentDirector
+//     Client::Game::InstanceContent::ContentDirector
+//       Client::Game::Event::Director
+//         Client::Game::Event::LuaEventHandler
+//           Client::Game::Event::EventHandler
+// ctor "E9 ?? ?? ?? ?? 3D ?? ?? ?? ?? 77 73 3D"
 [StructLayout(LayoutKind.Explicit, Size = 0x27D8)]
 public unsafe partial struct InstanceContentDeepDungeon {
     [FieldOffset(0x00)] public InstanceContentDirector InstanceContentDirector;

@@ -2,6 +2,10 @@ using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 
+// Client::Game::Event::Director
+//   Client::Game::Event::LuaEventHandler
+//     Client::Game::Event::EventHandler
+// ctor "E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 07 0F B7 03"
 [StructLayout(LayoutKind.Explicit, Size = 0x4B8)]
 public unsafe struct Director {
     [FieldOffset(0x00)] public LuaEventHandler LuaEventHandler;

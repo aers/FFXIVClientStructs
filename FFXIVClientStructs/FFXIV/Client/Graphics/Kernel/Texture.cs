@@ -11,11 +11,8 @@ public enum TextureFormat : uint {
 //     Client::Graphics::Kernel::DelayedReleaseClassBase
 //       Client::Graphics::ReferencedClassBase
 //   Client::Graphics::Kernel::Notifier
-
+// ctor "E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 41 B9 ?? ?? ?? ?? 48 89 07 48 8B CF"
 // renderer texture object, contains platform specific render objects (DX9/DX11/PS3/PS4)
-
-// size = 0xA8
-// ctor E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 41 B9 ?? ?? ?? ?? 48 89 07 48 8B CF
 [StructLayout(LayoutKind.Explicit, Size = 0xC0)]
 public unsafe partial struct Texture {
     [FieldOffset(0x00)] public void* vtbl;

@@ -2,6 +2,8 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
+// Client::Game::UI::Revive
+//   Component::GUI::AtkModuleInterface::AtkEventInterface
 [StructLayout(LayoutKind.Explicit, Size = 0x30)]
 public struct Revive {
     [FieldOffset(0x00)] public AtkEventInterface AtkEventInterface;
