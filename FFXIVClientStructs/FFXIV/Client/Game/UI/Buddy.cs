@@ -83,12 +83,14 @@ public unsafe partial struct CompanionInfo {
 
 // Carbuncle, Eos/Selene, Machinists Rook Autoturret/Automaton Queen, Whitemages Lilybell, probably more
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
-public unsafe partial struct PetInfo {
+public unsafe struct PetInfo {
     [FieldOffset(0)] public Buddy.BuddyMember* Pet;
+    [FieldOffset(0x8)] public byte Order; // PetAction RowId
+    [FieldOffset(0x9)] public byte Stance; // PetAction RowId
 }
 
 // Squadron, Trust, Duty Support
 [StructLayout(LayoutKind.Explicit, Size = 0x2C)]
-public unsafe partial struct DutyHelperInfo {
+public unsafe struct DutyHelperInfo {
     [FieldOffset(0)] public Buddy.BuddyMember* DutyHelpers; // 7 members
 }
