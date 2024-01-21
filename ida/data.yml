@@ -1008,6 +1008,7 @@ classes:
       0x14005B680: SubStr
       0x14005B6C0: CopySubStrTo
       0x14005BA30: Append
+      0x14005C310: Replace
       0x14005C950: Compare
       0x14005CEA0: SetSize
       0x14005DC00: FindLastOfImpl
