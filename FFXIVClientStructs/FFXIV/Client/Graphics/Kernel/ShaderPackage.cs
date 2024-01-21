@@ -20,7 +20,7 @@ public unsafe struct ShaderPackage {
     public struct ConstantSamplerUnknown {
         [FieldOffset(0x0)] public uint CRC;
         /// <summary>
-        /// Cross-reference this with <see cref="Material.TextureEntry.Id"/>.
+        /// Cross-reference this with <see cref="Material.TextureEntry.Id"/> and <see cref="PVShader.ResourceEntry.Id"/>.
         /// </summary>
         [FieldOffset(0x4)] public uint Id;
         /// <summary>
