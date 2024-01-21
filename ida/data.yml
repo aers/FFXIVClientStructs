@@ -503,6 +503,8 @@ classes:
         base: Component::Text::TextModuleInterface
       - ea: 0x141A1A270
         base: Component::Text::MacroDecoder
+    vfuncs:
+      16: FormatString
   Component::Text::TextModuleInterface:
     vtbls:
       - ea: 0x141A1A138
@@ -5181,6 +5183,7 @@ classes:
       155: ShowTextRelicAtma
       157: HideGoldSaucerReward_2
       163: ShowHousingHarvest
+      165: OpenMiniGame
       166: HideHousingHarvest
       167: ShowImage
       168: ShowText
