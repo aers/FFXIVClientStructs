@@ -16,7 +16,8 @@ public unsafe partial struct TextModule {
     [VirtualFunction(7)]
     public partial Utf8String* EncodeString(Utf8String* ouput, Utf8String* input);
 
-    [VirtualFunction(8)] [GenerateCStrOverloads]
+    [VirtualFunction(8)]
+    [GenerateCStrOverloads]
     public partial int EncodeMacro(byte* input, Utf8String* output);
 
     [VirtualFunction(9)]
