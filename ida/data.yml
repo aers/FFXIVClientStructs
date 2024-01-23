@@ -505,6 +505,7 @@ classes:
         base: Component::Text::MacroDecoder
     vfuncs:
       16: FormatString
+      17: ProcessNoun
   Component::Text::TextModuleInterface:
     vtbls:
       - ea: 0x141A1A138
@@ -517,6 +518,48 @@ classes:
     vtbls:
       - ea: 0x141A1A1C0
         base: Component::Excel::ExcelLanguageEvent
+    funcs:
+      0x140646540: ProcessNoun
+  Component::Text::Localize::Noun:
+    vfuncs:
+      0: dtor
+      1: Resolve
+  Component::Text::Localize::NounEn:
+    vtbls:
+      - ea: 0x141A1A438
+        base: Component::Text::Localize::Noun
+    funcs:
+      0x14064A200: ctor
+  Component::Text::Localize::NounDe:
+    vtbls:
+      - ea: 0x141A1A448
+        base: Component::Text::Localize::Noun
+    funcs:
+      0x14064A530: ctor
+  Component::Text::Localize::NounFr:
+    vtbls:
+      - ea: 0x141A1A458
+        base: Component::Text::Localize::Noun
+    funcs:
+      0x14064AC90: ctor
+  Component::Text::Localize::NounCh:
+    vtbls:
+      - ea: 0x141A1A468
+        base: Component::Text::Localize::Noun
+    funcs:
+      0x14064B070: ctor
+  Component::Text::Localize::NounKo:
+    vtbls:
+      - ea: 0x141A1A808
+        base: Component::Text::Localize::Noun
+    funcs:
+      0x14064B290: ctor
+  Component::Text::Localize::NounJa:
+    vtbls:
+      - ea: 0x141A1A428
+        base: Component::Text::Localize::Noun
+    funcs:
+      0x14064A000: ctor
   SQEX::CDev::Engine::Sd::SdMemoryAllocator:
   SQEX::CDev::Engine::Sd::Driver::BankController:
   Client::System::Scheduler::Base::LinkList:
@@ -1738,6 +1781,7 @@ classes:
     vfuncs:
       1: GetSheetByIndex
       2: GetSheetByName
+      3: GetLanguage
   Common::Component::Excel::ExcelModuleInterface: # these are two different classes
     vtbls:
       - ea: 0x141D72DA0
