@@ -10,6 +10,9 @@ public unsafe partial struct SoftKeyboardDevice {
     [VirtualFunction(1)]
     public partial bool Initialize();
     
+    [VirtualFunction(2)]
+    public partial void DumpInput();
+    
     [VirtualFunction(3)]
     public partial nint Disable();
 
@@ -17,10 +20,10 @@ public unsafe partial struct SoftKeyboardDevice {
     public partial nint IsEnabled();
 
     [VirtualFunction(5)]
-    public partial nint BindToInput(nint targetSoftKeyboardInputInterface);
+    public partial nint OpenSoftKeyboard(SoftKeyboardDeviceInterface.SoftKeyboardInputInterface* targetInterface);
 
     [VirtualFunction(6)]
-    public partial void UnbindFromInput(); // called from AtkComponentTextInput#vf4 and AtkComponentTextInput#Finalize
+    public partial void CloseSoftKeyboard(); // called from AtkComponentTextInput#vf4 and AtkComponentTextInput#Finalize
 
     [VirtualFunction(7)]
     public partial void IsBoundToInput();
