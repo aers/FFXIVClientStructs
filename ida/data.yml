@@ -467,6 +467,12 @@ classes:
   Client::System::Crypt::CryptInterface:
   Client::System::Input::InputData::InputCodeModifiedInterface:
   Client::System::Input::SoftKeyboardDeviceInterface::SoftKeyboardInputInterface:
+    vtbls:
+      - ea: 0x141A07890
+    vfuncs:
+      0: dtor
+      2: ApplyInput
+      4: GetMaxTextLength
   Client::System::Input::TextServiceInterface:
   Client::System::Input::TextServiceInterface::TextServiceEvent:
     vtbls:
@@ -500,6 +506,10 @@ classes:
     vfuncs:
       0: ReceiveEvent
   Component::GUI::AtkTextInput::AtkTextInputEventInterface:
+    vtbls:
+      - ea: 0x141A084D0
+    vfuncs:
+      0: dtor
   Component::GUI::AtkTextInput:
     vtbls:
       - ea: 0x141A084F8
@@ -581,6 +591,24 @@ classes:
       0x140549A10: HandleInput
       0x14054B3D0: SetFocus
       0x14054BED0: HandleFocus
+  Client::System::Input::SoftKeyboardDevice:
+    vtbls:
+      - ea: 0x141B58700
+    vfuncs:
+      0: dtor
+      1: Initialize       # called in AtkModule_Initialize
+      2: DumpInput        # called every frame from AtkModule_HandleInput
+      3: Disable          # called as part of UIModule_Finalize 
+      4: IsEnabled
+      5: BindToInput      # (this, AtkComponentTextInput+1E8) - in 140577A90
+      6: UnbindFromInput  # nullsub in SteamGamepadTextInput, so unsure
+      7: IsBoundToInput
+  Client::System::Input::SoftKeyboards::SteamGamepadTextInput:
+    vtbls:
+      - ea: 0x141B58748
+        base: Client::System::Input::SoftKeyboardDevice
+    funcs:
+      0x1414453A0: ctor
   Client::Game::Object::GameObjectManager: # all game objects
     instances:
       - ea: 0x1421EA6E0
@@ -4662,6 +4690,10 @@ classes:
     vtbls:
       - ea: 0x141A09178
         base: Component::GUI::AtkComponentInputBase
+      - ea: 0x141A09218
+        base: Component::GUI::AtkTextInput::AtkTextInputEventInterface
+      - ea: 0x141A09240
+        base: Client::System::Input::SoftKeyboardDeviceInterface::SoftKeyboardInputInterface
     funcs:
       0x1405741E0: ctor
       0x140574370: Finalize

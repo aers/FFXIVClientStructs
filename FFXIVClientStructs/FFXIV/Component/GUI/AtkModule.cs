@@ -1,3 +1,4 @@
+using FFXIVClientStructs.FFXIV.Client.System.Input;
 using FFXIVClientStructs.FFXIV.Client.UI;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
@@ -21,6 +22,8 @@ public unsafe partial struct AtkModule {
     [FieldOffset(0x1B90)] public AtkArrayDataHolder AtkArrayDataHolder;
 
     [FieldOffset(0x5CC4)] public byte ActiveColorThemeType;
+
+    [FieldOffset(0x8150)] public SoftKeyboardDevice SoftKeyboardDevice;
 
     [VirtualFunction(9)]
     public partial NumberArrayData* GetNumberArrayData(int index);
