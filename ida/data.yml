@@ -1054,6 +1054,7 @@ classes:
       0x14005C310: Replace
       0x14005C950: Compare
       0x14005CEA0: SetSize
+      0x14005D310: IndexOf
       0x14005DC00: FindLastOfImpl
       0x14005E100: FindFirstOfImpl
       0x1406501A0: ToInteger # strtoi for utf8string (str, base)
