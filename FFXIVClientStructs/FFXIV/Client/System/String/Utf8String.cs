@@ -121,6 +121,8 @@ public unsafe partial struct Utf8String : ICreatable, IDisposable {
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B C8 EB A3")]
     public partial Utf8String* ToUpper(bool firstCharOnly = false, bool everyWord = false, bool a4 = false, byte* excludeWord = null);
 
+    public Utf8String* ToTitleCase() => ToUpper(true, true);
+
     [MemberFunction("40 53 48 83 EC ?? B8 ?? ?? ?? ?? 48 8B DA 4C 3B C8")]
     public partial Utf8String* SubString(nint destinationAdress, ulong start, ulong length);
 
