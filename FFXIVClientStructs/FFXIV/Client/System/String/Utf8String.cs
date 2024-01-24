@@ -127,6 +127,9 @@ public unsafe partial struct Utf8String : ICreatable, IDisposable {
     [MemberFunction("E8 ?? ?? ?? ?? 48 8D 4D A7 E8 ?? ?? ?? ?? EB 18")]
     public partial Utf8String* Replace(Utf8String* toFind, Utf8String* replacement);
 
+    [MemberFunction("E8 ?? ?? ?? ?? 80 7D 97 00")]
+    public partial int IndexOf(Utf8String* toFind, int startIdx = 0);
+
     [MemberFunction("44 88 4C 24 ?? 48 89 54 24 ?? 48 89 4C 24 ?? 53 41 54")]
     public partial int FindFirstOf(Utf8String* charsToFind, int startIdx, bool exclude = false);
 
