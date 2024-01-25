@@ -43,6 +43,8 @@ public unsafe partial struct UIState {
     [FieldOffset(0x12868)] public ContentsFinder ContentsFinder;
     [FieldOffset(0x12980)] public MobHunt MobHunt;
 
+    // [Patch 6.55] 0x17710: Adventurer Plate data
+
     // Ref: UIState#IsUnlockLinkUnlocked (relative to uistate)
     // Size: Offset of UnlockedAetherytesBitmask - Offset of UnlockLinkBitmask
     [FieldOffset(0x17954)] public fixed byte UnlockLinkBitmask[0x40];

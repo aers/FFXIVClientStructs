@@ -116,6 +116,9 @@ public unsafe partial struct UIModule {
     [VirtualFunction(34)]
     public partial InfoModule* GetInfoModule();
 
+    [VirtualFunction(35)]
+    public partial UIModuleHelpers* GetUIModuleHelpers();
+
     [VirtualFunction(36)]
     public partial AgentModule* GetAgentModule();
 

@@ -5478,6 +5478,16 @@ classes:
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
       0x1406C9E10: ctor
+  Client::UI::Misc::CurrencySettingHelper:
+    vtbls:
+      - ea: 0x141B592D8
+    funcs:
+      0x14144EAC0: GetDefaultCurrencySetting
+      0x14144E9A0: GetRotationArray
+      0x14144E9B0: GetRotationCount
+  Client::UI::Misc::BannerModuleHelper:
+    vtbls:
+      - ea: 0x141B592B8
   Client::System::Crypt::SimpleString:
     vtbls:
       - ea: 0x141A185C0

@@ -11,4 +11,9 @@ public unsafe partial struct FlagStatusModule {
     public static FlagStatusModule* Instance() => Framework.Instance()->GetUiModule()->GetFlagStatusModule();
 
     [FieldOffset(0)] public UserFileEvent UserFileEvent;
+
+    /// <remarks>
+    /// 13 = Default Currency Setting (Index of Rotation array in UIModule.Helpers.CurrencySettings)
+    /// </remarks>
+    [FieldOffset(0x1A4)] public fixed byte Flags[64];
 }
