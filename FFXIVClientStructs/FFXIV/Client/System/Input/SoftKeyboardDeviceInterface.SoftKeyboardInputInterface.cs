@@ -16,7 +16,7 @@ public partial struct SoftKeyboardDeviceInterface {
         public partial void WriteString(Utf8String* stringToWrite);
 
         [VirtualFunction(4)]
-        public partial uint GetMaxLength();
+        public partial uint GetInputMaxLength();
     }
     
 }

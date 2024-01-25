@@ -8,7 +8,7 @@ public unsafe partial struct SoftKeyboardDevice {
     public partial void Dtor(bool freeMemory);
     
     [VirtualFunction(1)]
-    public partial bool Initialize();
+    public partial bool Enable();
     
     [VirtualFunction(2)]
     public partial void DumpInput();
@@ -26,5 +26,5 @@ public unsafe partial struct SoftKeyboardDevice {
     public partial void CloseSoftKeyboard(); // called from AtkComponentTextInput#vf4 and AtkComponentTextInput#Finalize
 
     [VirtualFunction(7)]
-    public partial void IsBoundToInput();
+    public partial void IsSoftKeyboardOpen();
 }
