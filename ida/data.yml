@@ -1124,6 +1124,7 @@ classes:
   Component::GUI::AtkUldManager:
     funcs:
       0x140531B00: SetupFromULDResourceHandle
+      0x1405330E0: CreateTimeline
       0x140534080: ReadTPHD
       0x140534290: ReadASHDAndLoadTextures
       0x140534770: CreateAtkNode
