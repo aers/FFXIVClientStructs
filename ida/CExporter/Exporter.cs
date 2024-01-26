@@ -175,7 +175,7 @@ public abstract class ExporterBase {
     }
 
     private List<UnionLayout> GetStructLayout(Type type) {
-        var fields = type.GetFields()
+        var fields = type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
             .Where(fieldInfo => !Attribute.IsDefined(fieldInfo, typeof(ObsoleteAttribute)))
             .Where(fieldInfo => !Attribute.IsDefined(fieldInfo, typeof(CExportIgnoreAttribute)))
             .Where(fieldInfo => !fieldInfo.IsLiteral) // not constants
