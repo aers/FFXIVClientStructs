@@ -4825,6 +4825,7 @@ classes:
     funcs:
       0x1405741E0: ctor
       0x140574370: Finalize
+      0x140572DE0: SetText
   Component::GUI::AtkComponentNumericInput:
     vtbls:
       - ea: 0x141A09278
