@@ -22,7 +22,7 @@ public unsafe partial struct Framework {
     [FieldOffset(0x0460)] public DevConfig DevConfig;
     [FieldOffset(0x0570)] public SavedAppearanceManager* SavedAppearanceData;
     [FieldOffset(0x0580)] public byte ClientLanguage;
-    [FieldOffset(0x0581)] public char Region;
+    [FieldOffset(0x0581)] public byte Region;
     [FieldOffset(0x0588)] public Cursor* Cursor;
     [FieldOffset(0x0590)] public nint CallerWindow;
     [FieldOffset(0x0598)] public FileAccessPath ConfigPath;
