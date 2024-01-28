@@ -1665,7 +1665,8 @@ classes:
       0x14008EED0: InitSoundManagerConfig #static
       0x14008F110: InitEqualizerType #static
       0x14008F1E0: InitSpatialAudio #static
-      0x14008f270: InitCursor #static
+      0x14008F270: InitCursor #static
+      0x140090470: GetConfigOptionForSoundType #static
   Client::Sound::SoundManager: #base: Client::System::Common::NonCopyable
     instances:
       - ea: 0x1421A4318
