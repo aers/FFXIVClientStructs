@@ -18,7 +18,9 @@ public unsafe partial struct SoundManager {
     [FieldOffset(0x00D4)] public fixed float UnkVolume3[0x13]; // All are 1.0f
     [FieldOffset(0x0120)] public fixed float UnkVolume4[0x13]; // All are 1.0f
     [FieldOffset(0x016C)] public fixed bool ChannelMutedArray[0x13];
-    [FieldOffset(0x017F)] public fixed bool ChannelAlwayOn[0x13];
+    [FieldOffset(0x017F)] public fixed bool ChannelAlwaysOn[0x13];
+    [Obsolete("Use ChannelAlwaysOn")] [FieldOffset(0x017F)]
+    public fixed bool ChannelAlwayOn[0x13];
 
     [FieldOffset(0x01C9)] public bool MasterEnabled;
     [FieldOffset(0x01CA)] public bool IsSoundAlways;
@@ -27,7 +29,7 @@ public unsafe partial struct SoundManager {
 
     [FieldOffset(0x02A0)] public nint CriticalSection;
 
-    [FieldOffset(0x2C8)] public nint EventHandle;
+    [FieldOffset(0x02C8)] public nint EventHandle;
 
     [MemberFunction("F3 0F 10 0D ?? ?? ?? ?? 48 63 C2")]
     public partial float GetEffectiveVolume(int channel);
