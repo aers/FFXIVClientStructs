@@ -2528,10 +2528,18 @@ classes:
       5: SetCursorVisibility
       8: SetUseSoftwareCursor
       9: GetUseSoftwareCursor
+      10: SetUseOsHardwareCursor
+      11: GetUseOsHardwareCursor
+      12: SetSoftwareCursorScale
+      13: GetSoftwareCursorScale
       14: IsCursorVisible
+      19: SetShowSoftwareCursorTrajectory
       21: IsMouseNotCaptured
+      22: UnloadSoftwareCursor
+      23: LoadCursor #(this, type, name)
     funcs:
       0x140086790: ctor
+      0x140086F90: SetHardwareCursorSize
   Component::Shell::ShellCommandModule:
     vtbls:
       - ea: 0x1419B3878
