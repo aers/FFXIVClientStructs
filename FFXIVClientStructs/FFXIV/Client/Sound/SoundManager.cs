@@ -6,6 +6,10 @@ namespace FFXIVClientStructs.FFXIV.Client.Sound;
 //   Client::System::Resource::ResourceEventListener
 //   Client::System::Threading::Thread
 //ctor "E8 ?? ?? ?? ?? EB ?? 48 8B C6 BA ?? ?? ?? ?? 48 89 87 ?? ?? ?? ?? 49 8B CF"
+/// <summary>
+/// This class is the low level handler for sound related functions and abstracts from the operating system.
+/// The functions in this class are not intended by SE to be used directly and do not have proper checks for correct values.
+/// </summary>
 [StructLayout(LayoutKind.Explicit, Size = 0x1C88)]
 public unsafe partial struct SoundManager {
     [FieldOffset(0x0000)] public nint ResourceEventListener;
@@ -31,14 +35,26 @@ public unsafe partial struct SoundManager {
 
     [FieldOffset(0x02C8)] public nint EventHandle;
 
+    /// <summary>
+    /// Calculates effective volume
+    /// </summary>
+    /// <param name="channel">The specific sound channel. This is different from the channels visible to the user</param>
+    /// <returns>Volume in the ange 0-1</returns>
     [MemberFunction("F3 0F 10 0D ?? ?? ?? ?? 48 63 C2")]
     public partial float GetEffectiveVolume(int channel);
 
+    ///<inheritdoc cref="GetEffectiveVolume(int)"/>
     public float GetEffectiveVolume(SoundChannel channel) => GetEffectiveVolume((int)channel);
 
+    /// <summary>
+    /// Sets channel volume
+    /// </summary>
+    /// <param name="channel">The specific sound channel. This is different from the channels visible to the user</param>
+    /// <param name="volume">Volume in the ange 0-1</param>
     [MemberFunction("E8 ?? ?? ?? ?? FF C7 D1 EB 75 ?? 48 8B 74 24")]
     public partial void SetVolume(int channel, float volume, int p3 = 100);
 
+    ///<inheritdoc cref="SetVolume(int,float,int)"/>
     public void SetVolume(SoundChannel channel, float volume, int p3 = 100) => SetVolume((int)channel, volume, p3);
 
     public enum SoundChannel : int {
