@@ -12741,6 +12741,12 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14111ECE0: ctor
+  Client::UI::AddonMoogleCollectionRewardList:
+    vtbls:
+      - ea: 0x141AFF940
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1411241D0: ctor
   Client::UI::AddonFGSCountDown:
     vtbls:
       - ea: 0x141B0CC40
