@@ -11065,7 +11065,7 @@ classes:
       0x140FC3C90: ctor
   Client::UI::AddonCabinetWithdraw:
     vtbls:
-      - ea: 0x141AFF940
+      - ea: 0x141AD4A58
         base: Component::GUI::AtkUnitBase
     funcs:
       0x140FD09B0: ctor
