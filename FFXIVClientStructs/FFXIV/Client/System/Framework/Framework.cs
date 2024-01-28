@@ -22,8 +22,9 @@ public unsafe partial struct Framework {
     [FieldOffset(0x0460)] public DevConfig DevConfig;
     [FieldOffset(0x0570)] public SavedAppearanceManager* SavedAppearanceData;
     [FieldOffset(0x0580)] public byte ClientLanguage;
+    [FieldOffset(0x0581)] public char Region;
     [FieldOffset(0x0588)] public Cursor* Cursor;
-
+    [FieldOffset(0x0590)] public nint CallerWindow;
     [FieldOffset(0x0598)] public FileAccessPath ConfigPath;
     [FieldOffset(0x07A8)] public GameWindow* GameWindow;
     //584 byte
@@ -36,19 +37,23 @@ public unsafe partial struct Framework {
     [FieldOffset(0x1670)] public NetworkModuleProxy* NetworkModuleProxy;
     [FieldOffset(0x1678)] public bool IsNetworkModuleInitialized;
     [FieldOffset(0x1679)] public bool EnableNetworking;
-    [FieldOffset(0x1680)] public long ServerTime;  // TODO: change to uint
+    [FieldOffset(0x1680)] public long ServerTime; // TODO: change to uint
     [FieldOffset(0x1688)] public long PerformanceCounterInMilliSeconds;
     [FieldOffset(0x1688)] public long PerformanceCounterInMicroSeconds;
     [FieldOffset(0x1698)] public uint TimerResolutionMillis;
     [FieldOffset(0x16A0)] public long PerformanceCounterFrequency;
     [FieldOffset(0x16A8)] public long PerformanceCounterValue;
-    [FieldOffset(0x16F8)] public TaskManager TaskManager;
     [FieldOffset(0x16B8)] public float FrameDeltaTime;
+    [FieldOffset(0x16C0)] public float FrameDeltaTimeOverride;
     [FieldOffset(0x16C8)] public uint FrameCounter;
+    [FieldOffset(0x16F8)] public TaskManager TaskManager;
     [FieldOffset(0x1768)] public ClientTime ClientTime;
-    [FieldOffset(0x1770), Obsolete("Use ClientTime.EorzeaTime")] public long EorzeaTime;
-    [FieldOffset(0x1798), Obsolete("Use ClientTime.EorzeaTimeOverride")] public long EorzeaTimeOverride;
-    [FieldOffset(0x17A0), Obsolete("Use ClientTime.IsEorzeaTimeOverridden")] public bool IsEorzeaTimeOverridden;
+    [FieldOffset(0x1770)] [Obsolete("Use ClientTime.EorzeaTime")]
+    public long EorzeaTime;
+    [FieldOffset(0x1798)] [Obsolete("Use ClientTime.EorzeaTimeOverride")]
+    public long EorzeaTimeOverride;
+    [FieldOffset(0x17A0)] [Obsolete("Use ClientTime.IsEorzeaTimeOverridden")]
+    public bool IsEorzeaTimeOverridden;
     [FieldOffset(0x17C4)] public float FrameRate;
     [FieldOffset(0x17D0)] public bool WindowInactive;
 
