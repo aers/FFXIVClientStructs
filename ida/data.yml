@@ -635,6 +635,8 @@ classes:
       6: CloseSoftKeyboard # nullsub in SteamGamepadTextInput, so unsure. random guess!
       7: IsSoftKeyboardOpen
   Client::System::Input::SoftKeyboards::SteamGamepadSoftKeyboard:
+    # n.b. might be Client::System::Input::SoftKeyboardDevice depending on how SE internals look.
+    # Preferring to be explicit here.
     vtbls:
       - ea: 0x141B58748
         base: Client::System::Input::SoftKeyboardDeviceInterface

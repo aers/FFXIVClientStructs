@@ -78,8 +78,8 @@ public unsafe partial struct SteamApi {
     /// This method requires Steam be in Big Picture Mode <em>and</em> the Steam Overlay to be enabled for the game.
     /// See <a href="https://partner.steamgames.com/doc/api/ISteamUtils#ShowFloatingGamepadTextInput">the Steam API docs</a> for more information.
     /// </summary>
-    /// <param name="fieldXPosition">The X coordinate of the top left of the focus text field, relative to the middle of the game window.</param>
-    /// <param name="fieldYPosition">The Y coordinate of the top left of the focused text field, relative to the middle of the game window.</param>
+    /// <param name="fieldXPosition">The X coordinate of the top left of the focused text field, relative to the center of the game window.</param>
+    /// <param name="fieldYPosition">The Y coordinate of the top left of the focused text field, relative to the center of the game window.</param>
     /// <param name="textFieldWidth">The width of the focused text field.</param>
     /// <param name="textFieldHeight">The height of the focused text field.</param>
     /// <returns>Returns <c>true</c> if the virtual keyboard was successfully opened, <c>false</c> otherwise.</returns>
