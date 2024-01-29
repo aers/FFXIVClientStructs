@@ -591,7 +591,7 @@ classes:
       0x140549A10: HandleInput
       0x14054B3D0: SetFocus
       0x14054BED0: HandleFocus
-  Client::System::Input::SoftKeyboardDevice:
+  Client::System::Input::SoftKeyboardDeviceInterface:
     vtbls:
       - ea: 0x141B58700
     vfuncs:
@@ -606,7 +606,7 @@ classes:
   Client::System::Input::SoftKeyboards::SteamGamepadSoftKeyboard:
     vtbls:
       - ea: 0x141B58748
-        base: Client::System::Input::SoftKeyboardDevice
+        base: Client::System::Input::SoftKeyboardDeviceInterface
     funcs:
       0x1414453A0: ctor
   Client::Game::Object::GameObjectManager: # all game objects

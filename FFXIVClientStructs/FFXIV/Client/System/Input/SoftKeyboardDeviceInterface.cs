@@ -1,7 +1,7 @@
 namespace FFXIVClientStructs.FFXIV.Client.System.Input;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x08)]
-public unsafe partial struct SoftKeyboardDevice {
+public unsafe partial struct SoftKeyboardDeviceInterface {
     [FieldOffset(0x00), CExportIgnore] public void** vtbl;
 
     [VirtualFunction(0)] 
@@ -20,7 +20,7 @@ public unsafe partial struct SoftKeyboardDevice {
     public partial nint IsEnabled();
 
     [VirtualFunction(5)]
-    public partial nint OpenSoftKeyboard(SoftKeyboardDeviceInterface.SoftKeyboardInputInterface* targetInterface);
+    public partial nint OpenSoftKeyboard(SoftKeyboardInputInterface* targetInterface);
 
     [VirtualFunction(6)]
     public partial void CloseSoftKeyboard(); // called from AtkComponentTextInput#vf4 and AtkComponentTextInput#Finalize

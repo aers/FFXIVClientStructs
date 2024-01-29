@@ -1,4 +1,4 @@
-using FFXIVClientStructs.FFXIV.Client.System.Input;
+using FFXIVClientStructs.FFXIV.Client.System.Input.SoftKeyboards;
 using FFXIVClientStructs.FFXIV.Client.UI;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
@@ -23,7 +23,9 @@ public unsafe partial struct AtkModule {
 
     [FieldOffset(0x5CC4)] public byte ActiveColorThemeType;
 
-    [FieldOffset(0x8150)] public SoftKeyboardDevice SoftKeyboardDevice;
+    // probably an #IFDEF WINDOWS here or something specifically creating a Steam keyboard.
+    // hope they don't add more soft keyboards later!
+    [FieldOffset(0x8150)] public SteamGamepadSoftKeyboard SoftKeyboardDevice;
 
     [VirtualFunction(9)]
     public partial NumberArrayData* GetNumberArrayData(int index);

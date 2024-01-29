@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Input.SoftKeyboards;
 // likewise, no sane sigs for StaticVTable
 [StructLayout(LayoutKind.Explicit, Size = 0x18)]
 public unsafe partial struct SteamGamepadSoftKeyboard {
-    [FieldOffset(0x00)] public SoftKeyboardDevice* SoftKeyboardDevice;
+    [FieldOffset(0x00)] public SoftKeyboardDeviceInterface* SoftKeyboardDeviceInterface;
 
     [FieldOffset(0x08)] public byte Enabled;
     [FieldOffset(0x10)] public SoftKeyboardDeviceInterface.SoftKeyboardInputInterface* TargetInputInterface;
