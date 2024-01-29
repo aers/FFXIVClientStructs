@@ -102,6 +102,7 @@ functions:
   0x1400A8760: IsClassJobAGatherer  # static, (classJobId) -> bool
   0x1400A8720: IsClassJobAJob       # static, (classJobId, ClassJobExd*?) -> bool
   0x1400A88E0: GetClassJobParentId  # static, (classJobId, ClassJobExd*?) -> uint
+  0x140879470: IsGatheringTypeRare  # static, takes RowId of GatheringType
   0x14099CEF0: GetTeleportCost
   0x140B1EBF0: SetCondition
   0x140B1F420: IsLocalPlayerLalafell
@@ -6687,6 +6688,10 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140A10CB0: ctor
+  Client::UI::Agent::AgentColorant::ColorantCharaView:
+    vtbls:
+      - ea: 0x141A80B28
+        base: Client::UI::Misc::CharaView
   Client::UI::Agent::AgentColorant:
     vtbls:
       - ea: 0x141A80B98
@@ -6713,6 +6718,10 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140D2EB10: ctor
+  Client::UI::Agent::AgentInspect::InspectCharaView:
+    vtbls:
+      - ea: 0x141A7DD60
+        base: Client::UI::Misc::CharaView
   Client::UI::Agent::AgentInspect:
     vtbls:
       - ea: 0x141A7DDC8
@@ -6941,6 +6950,10 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140C255E0: ctor
+  Client::UI::Agent::AgentGearSet::GearsetCharaView:
+    vtbls:
+      - ea: 0x141A64A78
+        base: Client::UI::Misc::CharaView
   Client::UI::Agent::AgentGearSet:
     vtbls:
       - ea: 0x141A7D090
@@ -7872,12 +7885,17 @@ classes:
         base: Client::UI::Agent::AgentItemDetailBase
     funcs:
       0x140AE9A70: ctor
+  Client::UI::Agent::AgentMiragePrismMiragePlate::MiragePrismMiragePlateCharaView:
+    vtbls:
+      - ea: 0x141A6AAD0
+        base: Client::UI::Misc::CharaView
   Client::UI::Agent::AgentMiragePrismMiragePlate:
     vtbls:
       - ea: 0x141A6AB38
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140AEA1E0: ctor
+      0x140AEBB50: OpenForGearset
   Client::UI::Agent::AgentPerformanceMode:
     vtbls:
       - ea: 0x141A68DF0
@@ -8282,7 +8300,7 @@ classes:
       0x140AB2CD0: ctor
   Client::UI::Agent::AgentTryon::TryonCharaView:
     vtbls:
-      - ea: 0x141A80B28
+      - ea: 0x141A64A78
         base: Client::UI::Misc::CharaView
   Client::UI::Agent::AgentTryon:
     vtbls:
