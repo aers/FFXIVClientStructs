@@ -845,7 +845,7 @@ classes:
       0x1406E08E0: GetMateriaGrade
       0x14071C330: ctor
       0x14071C370: Copy
-      0x14071C530: Equals
+      0x14071C530: EqualTo
       0x14071C5C0: Clear
       0x14071C600: SetItemId
       0x14071C6C0: GetLinkedItem
@@ -5845,7 +5845,7 @@ classes:
     funcs:
       0x14066B5E0: j_ctor
       0x14066B600: ctor
-      0x14066B6C0: Equals
+      0x14066B6C0: EqualTo
       0x14096C860: GenerateChecksum # static
   Client::UI::Misc::CharaView:
     vtbls:

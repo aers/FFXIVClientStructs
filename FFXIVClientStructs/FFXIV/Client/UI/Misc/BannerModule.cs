@@ -114,7 +114,11 @@ public unsafe partial struct BannerModuleEntry {
     // [FieldOffset(0x8F)] public byte Unk8F;
 
     [MemberFunction("0F B7 42 7C 66 39 41 7C")]
+    [Obsolete("Renamed to EqualTo")]
     public partial bool Equals(BannerModuleEntry* other);
+
+    [MemberFunction("0F B7 42 7C 66 39 41 7C")]
+    public partial bool EqualTo(BannerModuleEntry* other);
 
     /// <param name="itemIds">A pointer to 14 Item Ids</param>
     /// <param name="stainIds">A pointer to 14 Stain Ids</param>
