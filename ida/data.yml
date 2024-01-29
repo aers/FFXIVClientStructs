@@ -10791,6 +10791,14 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x140DFA020: ctor
+  Client::UI::AddonItemSearch:
+    vtbls:
+      - ea: 0x141A8D5E0
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140DBAB80: ctor
+      0x140DBD9C0: RunSearch
+      0x140DBD740: SetModeFilter
   Client::UI::AddonItemSearchResult:
     vtbls:
       - ea: 0x141A8D820
