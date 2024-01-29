@@ -15,8 +15,8 @@ public unsafe partial struct AddonItemSearch {
     [FieldOffset(0x230)] public SearchMode Mode;
     [FieldOffset(0x234)] public int SelectedFilter;
 
-    [FieldOffset(0x238)] public Utf8String* SearchText;
-    [FieldOffset(0x2A0)] public Utf8String* SearchText2;
+    [FieldOffset(0x238)] public Utf8String SearchText;
+    [FieldOffset(0x2A0)] public Utf8String SearchText2;
 
     [FixedSizeArray<Utf8String>(96)]
     [FieldOffset(0x4A8)] public fixed byte FilterLabels[96 * 0x68];
