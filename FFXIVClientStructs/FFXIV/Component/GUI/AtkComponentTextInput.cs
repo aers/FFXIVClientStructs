@@ -1,3 +1,4 @@
+using FFXIVClientStructs.FFXIV.Client.System.Input;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
@@ -13,6 +14,13 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [StructLayout(LayoutKind.Explicit, Size = 0x600)]
 public unsafe partial struct AtkComponentTextInput {
     [FieldOffset(0x0)] public AtkComponentInputBase AtkComponentInputBase;
+
+    [FieldOffset(0x1E0), CExportIgnore] public void** AtkTextInputEventInterfaceVtbl;
+    [FieldOffset(0x1E8)] public SoftKeyboardDeviceInterface.SoftKeyboardInputInterface SoftKeyboardInputInterface; // implemented by class
+
+    [FieldOffset(0x250)] public uint MaxTextLength;
+    [FieldOffset(0x254)] public uint MaxTextLength2; // no idea when one of these are used over the other
+    
     [FieldOffset(0x280)] public Utf8String UnkText1;
     [FieldOffset(0x2E8)] public Utf8String UnkText2;
     [FieldOffset(0x350)] public Utf8String UnkText3;
