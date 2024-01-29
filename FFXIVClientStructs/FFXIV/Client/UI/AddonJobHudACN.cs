@@ -1,4 +1,3 @@
-using System.Drawing;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 using static FFXIVClientStructs.FFXIV.Client.UI.AddonJobHud;
 

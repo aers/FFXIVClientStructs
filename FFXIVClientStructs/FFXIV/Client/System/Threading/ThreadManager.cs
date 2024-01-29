@@ -1,5 +1,3 @@
-using FFXIVClientStructs.FFXIV.Client.System.File;
-
 namespace FFXIVClientStructs.FFXIV.Client.System.Threading;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x1048)]

@@ -16,9 +16,13 @@ public unsafe partial struct TextModule {
     [VirtualFunction(7)]
     public partial Utf8String* EncodeString(Utf8String* ouput, Utf8String* input);
 
-    [VirtualFunction(8), GenerateCStrOverloads]
+    [VirtualFunction(8)]
+    [GenerateCStrOverloads]
     public partial int EncodeMacro(byte* input, Utf8String* output);
 
     [VirtualFunction(9)]
     public partial Utf8String* ProcessMacroCode(Utf8String* output, byte* input);
+
+    [VirtualFunction(16)] //args is a pointer to a deque with the args, if any
+    public partial bool FormatString(byte* input, void* args, Utf8String* output);
 }

@@ -7,10 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 //   Client::Graphics::Scene::CharacterBase
 //     Client::Graphics::Scene::DrawObject
 //       Client::Graphics::Scene::Object
-
-// size = 0x920
-// ctor E8 ?? ?? ?? ?? 48 8D 54 24 ?? 48 89 44 3E
-
+// ctor "E8 ?? ?? ?? ?? 48 8D 55 EF 48 89 44 3E"
 [StructLayout(LayoutKind.Explicit, Size = 0x920)]
 public unsafe struct Weapon {
     [FieldOffset(0x0)] public CharacterBase CharacterBase;

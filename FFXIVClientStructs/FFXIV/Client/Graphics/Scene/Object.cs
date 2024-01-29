@@ -1,11 +1,10 @@
 using FFXIVClientStructs.FFXIV.Common.Math;
 
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
+
 // Client::Graphics::Scene::Object
 // base class for all graphics objects
-
-// size = 0x80
-// ctor - inlined in all derived class ctors
+// ctor inlined in all derived class ctors
 [StructLayout(LayoutKind.Explicit, Size = 0x80)]
 public unsafe partial struct Object {
     [FieldOffset(0x18)] public Object* ParentObject;

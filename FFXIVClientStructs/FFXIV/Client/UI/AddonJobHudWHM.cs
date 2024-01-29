@@ -1,6 +1,5 @@
 using FFXIVClientStructs.FFXIV.Component.GUI;
 using static FFXIVClientStructs.FFXIV.Client.UI.AddonJobHud;
-using static FFXIVClientStructs.FFXIV.Client.UI.AddonJobHudAST0;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 

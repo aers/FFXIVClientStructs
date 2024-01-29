@@ -2,12 +2,11 @@ using FFXIVClientStructs.FFXIV.Client.System.Memory;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
+
 // Component::GUI::AtkCounterNode
 //   Component::GUI::AtkResNode
 //     Component::GUI::AtkEventTarget
-
-// size = 0x128
-// common CreateAtkNode function E8 ?? ?? ?? ?? 48 8B 4E 08 49 8B D5 
+// common CreateAtkNode function "E8 ?? ?? ?? ?? 48 8B 4C 24 ?? 48 8B 51 08"
 // type 5
 [StructLayout(LayoutKind.Explicit, Size = 0x130)]
 public unsafe partial struct AtkCounterNode : ICreatable {

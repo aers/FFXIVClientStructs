@@ -4,49 +4,10 @@ using FFXIVClientStructs.FFXIV.Common.Math;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
-public enum NodeType : ushort {
-    Res = 1,
-    Image = 2,
-    Text = 3,
-    NineGrid = 4,
-    Counter = 5,
-
-    Collision = 8,
-    UnknownNode10 = 10 // new 6.5
-    // Component: >=1000
-}
-
-// 'visible' will change visibility immediately, the rest rely on other stuff to happen so they dont do anything
-// top and bottom assumed based on a scrollbar, lots of left-aligned text has AnchorLeft set
-[Flags]
-public enum NodeFlags : ushort {
-    AnchorTop = 0x01,
-    AnchorLeft = 0x02,
-    AnchorBottom = 0x04,
-    AnchorRight = 0x08,
-    Visible = 0x10,
-    Enabled = 0x20, // this is like, "button can be clicked" etc
-    Clip = 0x40,
-    Fill = 0x80,
-
-    HasCollision =
-        0x100, // set if node type == 8, might be "HasCollision", also set if Unk2 first bit is set (https://github.com/NotAdam/Lumina/blob/714a1d8b9c4e182b411e7c68330d49a5dfccb9bc/src/Lumina/Data/Parsing/Uld/UldRoot.cs#L273)
-    RespondToMouse = 0x200, // this also gets set if the above flag is set
-    Focusable = 0x400,
-    Droppable = 0x800,
-    IsTopNode = 0x1000,
-    EmitsEvents = 0x2000,
-    UseDepthBasedPriority = 0x4000,
-    UnkFlag2 = 0x8000
-}
-
 // Component::GUI::AtkResNode
 //   Component::GUI::AtkEventTarget
-
+// ctor "E9 ?? ?? ?? ?? 33 C0 48 83 C4 20 5B C3 66 90"
 // base class for all UI "nodes" which represent elements of the UI
-
-// size = 0xA8
-// ctor E9 ?? ?? ?? ?? 33 C0 48 83 C4 20 5B C3 66 90 
 [StructLayout(LayoutKind.Explicit, Size = 0xB0)]
 public unsafe partial struct AtkResNode : ICreatable {
     [FieldOffset(0x0)] public AtkEventTarget AtkEventTarget;
@@ -265,4 +226,40 @@ public unsafe partial struct AtkResNode : ICreatable {
 
     [VirtualFunction(2)]
     public partial void UpdateFromTimeline();
+}
+
+public enum NodeType : ushort {
+    Res = 1,
+    Image = 2,
+    Text = 3,
+    NineGrid = 4,
+    Counter = 5,
+
+    Collision = 8,
+    UnknownNode10 = 10 // new 6.5
+    // Component: >=1000
+}
+
+// 'visible' will change visibility immediately, the rest rely on other stuff to happen so they dont do anything
+// top and bottom assumed based on a scrollbar, lots of left-aligned text has AnchorLeft set
+[Flags]
+public enum NodeFlags : ushort {
+    AnchorTop = 0x01,
+    AnchorLeft = 0x02,
+    AnchorBottom = 0x04,
+    AnchorRight = 0x08,
+    Visible = 0x10,
+    Enabled = 0x20, // this is like, "button can be clicked" etc
+    Clip = 0x40,
+    Fill = 0x80,
+
+    HasCollision =
+        0x100, // set if node type == 8, might be "HasCollision", also set if Unk2 first bit is set (https://github.com/NotAdam/Lumina/blob/714a1d8b9c4e182b411e7c68330d49a5dfccb9bc/src/Lumina/Data/Parsing/Uld/UldRoot.cs#L273)
+    RespondToMouse = 0x200, // this also gets set if the above flag is set
+    Focusable = 0x400,
+    Droppable = 0x800,
+    IsTopNode = 0x1000,
+    EmitsEvents = 0x2000,
+    UseDepthBasedPriority = 0x4000,
+    UnkFlag2 = 0x8000
 }

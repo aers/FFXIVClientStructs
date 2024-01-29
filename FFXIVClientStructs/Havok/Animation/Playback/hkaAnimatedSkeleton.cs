@@ -6,7 +6,7 @@ public unsafe partial struct hkaAnimatedSkeleton {
     public struct BoneAnnotation {
         public ushort BoneID;
         public hkaAnnotationTrack.Annotation Annotation;
-    };
+    }
 
     public hkReferencedObject hkReferencedObject;
     public hkaAnimationControlListener hkaAnimationControlListener;

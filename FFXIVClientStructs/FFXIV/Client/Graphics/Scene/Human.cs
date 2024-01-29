@@ -6,13 +6,12 @@ using FFXIVClientStructs.FFXIV.Common.Math;
 using FFXIVClientStructs.FFXIV.Shader;
 
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
+
 // Client::Graphics::Scene::Human
 //   Client::Graphics::Scene::CharacterBase
 //     Client::Graphics::Scene::DrawObject
 //       Client::Graphics::Scene::Object
-
-// size = 0xA80
-// ctor E8 ?? ?? ?? ?? 48 8B F8 48 85 C0 74 28 48 8D 55 D7
+// ctor "E8 ?? ?? ?? ?? 48 8B F8 48 85 C0 74 28 48 8D 55 D7"
 [StructLayout(LayoutKind.Explicit, Size = 0xA80)]
 public unsafe partial struct Human {
     [FieldOffset(0x0)] public CharacterBase CharacterBase;

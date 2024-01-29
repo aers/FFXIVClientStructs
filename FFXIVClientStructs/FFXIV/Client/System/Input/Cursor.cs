@@ -2,7 +2,8 @@ using FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 
 namespace FFXIVClientStructs.FFXIV.Client.System.Input;
 
-//ctor E8 ?? ?? ?? ?? 48 8B C8 EB ?? 48 8B CE 48 89 8F
+// Client::System::Input::Cursor
+//ctor "E8 ?? ?? ?? ?? 48 8B C8 EB ?? 48 8B CE 48 89 8F"
 [StructLayout(LayoutKind.Explicit, Size = 0x378)]
 public unsafe partial struct Cursor {
     [FieldOffset(0x000)] public void* vtbl;
@@ -15,5 +16,4 @@ public unsafe partial struct Cursor {
     [FixedSizeArray<Pointer<byte>>(16)]
     [FieldOffset(0x238)] public fixed byte CursorNames[8 * 16];
     [FieldOffset(0x2C8)] public TextureResourceHandle* SoftwareCursorTexture;
-
 }

@@ -18,7 +18,7 @@ public unsafe struct hkaSampleBlendJob {
             BlendModeAdditive = (1 << 5),
             HasPartitions = (1 << 6),
             Deprecated = (1 << 7),
-        };
+        }
 
         public uint FrameIndex;
         public float FrameDelta;
@@ -33,7 +33,7 @@ public unsafe struct hkaSampleBlendJob {
         public float* FloatsOut;
         public hkaSkeleton.Partition* PartitionArray;
         public short NumPartitions;
-    };
+    }
 
     public hkJob hkJob;
     public hkaAnimatedSkeleton* Skeleton;

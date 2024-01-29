@@ -2,6 +2,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x40E0)]
 public unsafe partial struct GameMain {
+    [StaticAddress("48 8D 0D ?? ?? ?? ?? 38 05", 3)]
+    public static partial GameMain* Instance();
+
     [FieldOffset(0x0)] public fixed uint ActiveFestivals[4];
 
     [FieldOffset(0x40)] public fixed uint QueuedFestivals[4];
@@ -25,9 +28,6 @@ public unsafe partial struct GameMain {
     [FieldOffset(0x40C8)] public nint CurrentTerritoryIntendedUseRow;
     [FieldOffset(0x40D0)] public nint NextTerritoryTypeRow;
     [FieldOffset(0x40D8)] public nint NextTerritoryIntendedUseRow;
-
-    [StaticAddress("48 8D 0D ?? ?? ?? ?? 38 05", 3)]
-    public static partial GameMain* Instance();
 
     [MemberFunction("E8 ?? ?? ?? ?? 44 8B B3 ?? ?? ?? ?? 33 FF")]
     public partial bool IsInInstanceArea();

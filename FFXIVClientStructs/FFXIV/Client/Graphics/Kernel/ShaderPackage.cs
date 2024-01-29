@@ -1,11 +1,10 @@
 using FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
+
 // Client::Graphics::Kernel::ShaderPackage
 //   Client::Graphics::ReferencedClassBase
-
-// ctor E8 ?? ?? ?? ?? 8B 55 18 48 8B F0
-// size = 0x418
+// ctor "E8 ?? ?? ?? ?? 8B 55 18 48 8B D8"
 [StructLayout(LayoutKind.Explicit, Size = 0x418)]
 public unsafe struct ShaderPackage {
     public const ushort SamplerSlotMaterial = 2;
@@ -21,7 +20,7 @@ public unsafe struct ShaderPackage {
     public struct ConstantSamplerUnknown {
         [FieldOffset(0x0)] public uint CRC;
         /// <summary>
-        /// Cross-reference this with <see cref="Material.TextureEntry.Id"/>.
+        /// Cross-reference this with <see cref="Material.TextureEntry.Id"/> and <see cref="PVShader.ResourceEntry.Id"/>.
         /// </summary>
         [FieldOffset(0x4)] public uint Id;
         /// <summary>

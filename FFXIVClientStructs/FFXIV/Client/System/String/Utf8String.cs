@@ -3,10 +3,9 @@ using System.Text;
 using FFXIVClientStructs.FFXIV.Client.System.Memory;
 
 namespace FFXIVClientStructs.FFXIV.Client.System.String;
-// Client::System::String::Utf8String
 
-// size = 0x68
-// ctor E8 ?? ?? ?? ?? 44 2B F7 
+// Client::System::String::Utf8String
+// ctor "E8 ?? ?? ?? ?? 44 2B F7"
 [StructLayout(LayoutKind.Explicit, Size = 0x68)]
 public unsafe partial struct Utf8String : ICreatable, IDisposable {
     [FieldOffset(0x0)] public byte* StringPtr; // pointer to null-terminated string
@@ -125,12 +124,17 @@ public unsafe partial struct Utf8String : ICreatable, IDisposable {
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B F8 48 3B C3")]
     public partial Utf8String* CopySubStrTo(Utf8String* destination, int start, int length);
 
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 4D A7 E8 ?? ?? ?? ?? EB 18")]
+    public partial Utf8String* Replace(Utf8String* toFind, Utf8String* replacement);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 80 7D 97 00")]
+    public partial int IndexOf(Utf8String* toFind, int startIdx = 0);
+
     [MemberFunction("44 88 4C 24 ?? 48 89 54 24 ?? 48 89 4C 24 ?? 53 41 54")]
     public partial int FindFirstOf(Utf8String* charsToFind, int startIdx, bool exclude = false);
 
     [MemberFunction("44 88 4C 24 ?? 53 57 41 56 48 83 EC ?? 48 83 79")]
     public partial int FindLastOf(Utf8String* toFind, int startIdx, bool exclude = false);
-
 
     [MemberFunction("48 8B 01 0F B6 04")]
     public partial byte GetCharAt(ulong idx);

@@ -4,6 +4,9 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
+// Client::UI::Misc::CharaViewPortrait
+//   Client::UI::Misc::CharaView
+// ctor "E8 ?? ?? ?? ?? 48 8B F8 45 33 C0"
 [StructLayout(LayoutKind.Explicit, Size = 0x3C0)]
 public unsafe partial struct CharaViewPortrait : ICreatable {
     [FieldOffset(0)] public CharaView Base;

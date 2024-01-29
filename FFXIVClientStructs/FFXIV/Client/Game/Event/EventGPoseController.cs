@@ -1,5 +1,7 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 
+// Client::Game::Event::EventGPoseController
+// ctor "E8 ?? ?? ?? ?? 80 A3 ?? ?? ?? ?? ?? B8 ?? ?? ?? ?? 48 89 83"
 [StructLayout(LayoutKind.Explicit)]
 public unsafe partial struct EventGPoseController {
     [MemberFunction("E8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 80 BE 8C 00 00 00 02")]
@@ -28,5 +30,4 @@ public unsafe partial struct EventGPoseController {
 
     [MemberFunction("48 83 EC ?? 83 FA ?? 73 ?? 8B C2 48 89 5C 24 ?? 48 8D 1C ?? 48 8B 8B")]
     public partial void DisableCameraLight(uint index);
-
 }

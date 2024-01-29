@@ -1,6 +1,5 @@
 namespace FFXIVClientStructs.FFXIV.Client.System.Threading;
 
-//vtbl
 [StructLayout(LayoutKind.Explicit, Size = 0x28)]
 public unsafe struct Thread {
     [FieldOffset(0x00)] public byte** args;
