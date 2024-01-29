@@ -7893,6 +7893,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140AEA1E0: ctor
+      0x140AEBB50: OpenForGearset
   Client::UI::Agent::AgentPerformanceMode:
     vtbls:
       - ea: 0x141A68DF0

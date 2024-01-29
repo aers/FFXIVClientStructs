@@ -1,3 +1,4 @@
+using FFXIVClientStructs.FFXIV.Client.Game;
 using FFXIVClientStructs.FFXIV.Client.UI.Misc;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
@@ -7,11 +8,18 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [StructLayout(LayoutKind.Explicit, Size = 0x350)]
 public unsafe partial struct AgentMiragePrismMiragePlate {
     [FieldOffset(0x00)] public AgentInterface AgentInterface;
+
     [FieldOffset(0x78)] public MiragePrismMiragePlateCharaView CharaView;
 
     [FixedSizeArray<MiragePlateItem>(14)]
     [Obsolete("Use MiragePlateCharaView.Base.Items")]
     [FieldOffset(0x148)] public unsafe fixed byte PlateItems[14 * 0x20]; // 14 * MiragePlateItem
+
+    /// <remarks>
+    /// The game checks <see cref="GameMain.IsInSanctuary"/> before calling this, and if false, it prints LogMessage 4316: "Unable to apply glamour plates here.".
+    /// </remarks>
+    [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 30 8B FA 66 44 89 4C 24")]
+    public partial void OpenForGearset(int gearsetId, int glamourSetLink, ushort openerAddonId = 0);
 
     // Client::UI::Agent::AgentMiragePrismMiragePlate::MiragePrismMiragePlateCharaView
     //   Client::UI::Misc::CharaView
