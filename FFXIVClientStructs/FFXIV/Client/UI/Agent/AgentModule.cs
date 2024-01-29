@@ -445,7 +445,7 @@ public enum AgentId : uint {
     TurnBreak = 432,
 
     SXTBattleLog = 434,
-
+    MoogleCollection = 435,
     FGSEnterDialog = 436,
     FGSStageIntro = 437,
     FGSHud = 438,

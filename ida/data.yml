@@ -8868,6 +8868,10 @@ classes:
     vtbls:
       - ea: 0x141A66A38
         base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentMoogleCollection:
+    vtbls:
+      - ea: 0x141B32930
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentFGSEnterDialog:
     vtbls:
       - ea: 0x141A7B380
@@ -11069,7 +11073,7 @@ classes:
       0x140FC3C90: ctor
   Client::UI::AddonCabinetWithdraw:
     vtbls:
-      - ea: 0x141AFF940
+      - ea: 0x141AD4A58
         base: Component::GUI::AtkUnitBase
     funcs:
       0x140FD09B0: ctor
@@ -12739,6 +12743,18 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1410CFC70: ctor
+  Client::UI::AddonMoogleCollection:
+    vtbls:
+      - ea: 0x141AFF700
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x14111ECE0: ctor
+  Client::UI::AddonMoogleCollectionRewardList:
+    vtbls:
+      - ea: 0x141AFF940
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1411241D0: ctor
   Client::UI::AddonFGSCountDown:
     vtbls:
       - ea: 0x141B0CC40
