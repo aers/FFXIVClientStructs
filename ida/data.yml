@@ -1078,6 +1078,7 @@ classes:
       0x14005AFD0: AddChar
       0x14005B020: PrependChar
       0x14005B080: PopBack
+      0x14005B1B0: ToUpper
       0x14005B3A0: ToLower
       0x14005B680: SubStr
       0x14005B6C0: CopySubStrTo
