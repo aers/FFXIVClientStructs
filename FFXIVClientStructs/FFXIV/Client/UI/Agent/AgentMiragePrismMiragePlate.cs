@@ -57,8 +57,8 @@ public unsafe partial struct AgentMiragePrismMiragePlate {
     }
 }
 
+// TODO: Obsolete: It's the same as CharaViewItem. Remove with AgentMiragePrismMiragePlate.PlateItems.
 [StructLayout(LayoutKind.Explicit, Size = 0x20)]
-[Obsolete("Same as CharaViewItem")]
 public struct MiragePlateItem {
     [FieldOffset(0x00)] public byte EquipType;
     [FieldOffset(0x01)] public byte EquipSlotCategory;
