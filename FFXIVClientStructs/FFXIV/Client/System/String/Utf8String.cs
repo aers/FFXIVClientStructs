@@ -119,7 +119,7 @@ public unsafe partial struct Utf8String : ICreatable, IDisposable {
     public partial Utf8String* ToLower();
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B C8 EB A3")]
-    public partial Utf8String* ToUpper(bool firstCharOnly = false, bool everyWord = false, bool a4 = false, byte* excludeWord = null);
+    public partial Utf8String* ToUpper(bool firstCharOnly = false, bool everyWord = false, bool normalizeVowels = false, byte* excludeWord = null);
 
     public Utf8String* ToTitleCase() => ToUpper(true, true);
 
