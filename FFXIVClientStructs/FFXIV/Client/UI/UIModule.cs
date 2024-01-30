@@ -34,6 +34,84 @@ public unsafe partial struct UIModule {
     [FixedSizeArray<RaptureAtkHistory>(19)]
     [FieldOffset(0x3B0)] public fixed byte AtkHistory[19 * 0x38];
 
+    [FieldOffset(0x7E4)] public uint FrameCount;
+    [FieldOffset(0x7E8)] internal ExcelModule* ExcelModule;
+    [FieldOffset(0x7F0)] internal RaptureTextModule RaptureTextModule;
+    // [FieldOffset(0x1650)] internal CompletionModule CompletionModule;
+    [FieldOffset(0x19C8)] internal RaptureLogModule RaptureLogModule;
+    // [FieldOffset(0x4E50)] internal UserFileManager UserFileManager;
+    [FieldOffset(0x4E70)] internal RaptureMacroModule RaptureMacroModule;
+    [FieldOffset(0x56918)] internal RaptureHotbarModule RaptureHotbarModule;
+    [FieldOffset(0x7F210)] internal RaptureGearsetModule RaptureGearsetModule;
+    [FieldOffset(0x8A880)] internal AcquaintanceModule AcquaintanceModule;
+    [FieldOffset(0x8B978)] internal ItemOrderModule ItemOrderModule;
+    [FieldOffset(0x8BA50)] internal ItemFinderModule ItemFinderModule;
+    [FieldOffset(0x8CC20)] internal AddonConfig AddonConfig;
+    [FieldOffset(0x8CC88)] internal LogFilterConfig LogFilterConfig;
+    [FieldOffset(0x8D1B0)] internal UiSavePackModule UiSavePackModule;
+    [FieldOffset(0x8D200)] internal LetterDataModule LetterDataModule;
+    [FieldOffset(0x8DC48)] internal RetainerTaskDataModule RetainerTaskDataModule;
+    [FieldOffset(0x8DCF8)] internal FlagStatusModule FlagStatusModule;
+    [FieldOffset(0x8DFA0)] internal RecipeFavoriteModule RecipeFavoriteModule;
+    // [FieldOffset(0x8E128)] internal CraftModule CraftModule;
+    [FieldOffset(0x8E180)] internal RaptureUiDataModule RaptureUiDataModule;
+    // [FieldOffset(0x93C68)] internal Vf27Struct;
+    // [FieldOffset(0x93C88)] internal Vf28Struct;
+    // [FieldOffset(0x93CB0)] internal UnkStruct93CB0;
+    [FieldOffset(0x93CC8)] internal GoldSaucerModule GoldSaucerModule;
+    [FieldOffset(0x93F90)] internal RaptureTeleportHistory RaptureTeleportHistory;
+    [FieldOffset(0x94050)] internal ItemContextCustomizeModule ItemContextCustomizeModule;
+    [FieldOffset(0x941E0)] internal RecommendEquipModule RecommendEquipModule;
+    [FieldOffset(0x94260)] internal PvpSetModule PvpSetModule;
+    // [FieldOffset(0x942F8)] internal Vf39Struct;
+    // [FieldOffset(0x94308)] internal Vf40Struct;
+    [FieldOffset(0x94318)] internal EmoteHistoryModule EmoteHistoryModule;
+    [FieldOffset(0x94490)] internal MinionListModule MinionListModule;
+    [FieldOffset(0x94528)] internal MountListModule MountListModule;
+    // [FieldOffset(0x945C0)] internal EmjModule EmjModule;
+    [FieldOffset(0x94680)] internal AozNoteModule AozNoteModule;
+    // [FieldOffset(0x953A8)] internal CrossworldLinkShellModule CrossworldLinkShellModule;
+    [FieldOffset(0x95998)] internal AchievementListModule AchievementListModule;
+    [FieldOffset(0x95A20)] internal GroupPoseModule GroupPoseModule;
+    [FieldOffset(0x95B50)] internal FieldMarkerModule FieldMarkerModule;
+    // [FieldOffset(0x967C8)] UnkStdMap967C8?
+    // [FieldOffset(0x967D8)] internal MycNoteModule MycNoteModule;
+    // [FieldOffset(0x96888)] internal OrnamentListModule OrnamentListModule;
+    // [FieldOffset(0x968E0)] internal MycItemModule MycItemModule;
+    // [FieldOffset(0x969F8)] internal GroupPoseStampModule GroupPoseStampModule;
+    [FieldOffset(0x9FCF0)] internal InputTimerModule InputTimerModule;
+    // [FieldOffset(0xA01E8)] internal McAggreModule McAggreModule;
+    [FieldOffset(0xA0490)] internal RetainerCommentModule RetainerCommentModule;
+    [FieldOffset(0xA0A30)] internal BannerModule BannerModule;
+    // [FieldOffset(0xA0A78)] internal AdventureNoteModule AdventureNoteModule;
+    // [FieldOffset(0xA0AD0)] internal AkatsukiNoteModule AkatsukiNoteModule;
+    // [FieldOffset(0xA0BB0)] internal VVDNoteModule VVDNoteModule;
+    [FieldOffset(0xA0C18)] internal VVDActionModule VVDActionModule;
+    // [FieldOffset(0xA0C60)] internal TofuModule TofuModule;
+    // [FieldOffset(0xA0CA8)] internal FishingModule FishingModule;
+    // [FieldOffset(0xA0D60)] internal Vf69Struct;
+    [FieldOffset(0xA0DF8)] internal ConfigModule ConfigModule;
+    [FieldOffset(0xAF3C0)] internal RaptureShellModule RaptureShellModule;
+    [FieldOffset(0xB05C8)] internal PronounModule PronounModule;
+
+    [FieldOffset(0xB0980)] internal UI3DModule UI3DModule;
+    [FieldOffset(0xC2560)] internal RaptureAtkModule RaptureAtkModule;
+    [FieldOffset(0xEB4F8)] internal InfoModule InfoModule;
+    [FieldOffset(0xED168)] internal UIModuleHelpers UIModuleHelpers;
+    [FieldOffset(0xED178)] internal Utf8String AddonSheetName;
+
+    [FieldOffset(0xED1E8)] internal Utf8String UIColorSheetName;
+
+    [FieldOffset(0xED260)] internal Utf8String CompletionSheetName;
+    [FieldOffset(0xED2C8)] internal Utf8String UnkED2C8;
+    [FieldOffset(0xED330)] internal Utf8String UnkED330;
+    [FieldOffset(0xED398)] internal Utf8String UnkED398;
+    [FieldOffset(0xED400)] public Utf8String LastTalkName;
+    [FieldOffset(0xED468)] public Utf8String LastTalkText;
+    [FieldOffset(0xED4D0)] internal UIInputData UIInputData;
+    [FieldOffset(0xEDEF0)] internal UIInputModule UIInputModule;
+    // [FieldOffset(0xEDFE0)] internal Vf67Struct;
+
     [VirtualFunction(5)]
     public partial ExcelModuleInterface* GetExcelModule();
 
