@@ -172,8 +172,17 @@ public unsafe partial struct UIModule {
     [VirtualFunction(24)]
     public partial RecipeFavoriteModule* GetRecipeFavoriteModule();
 
+    // [VirtualFunction(25)]
+    // public partial CraftModule* GetCraftModule();
+
     [VirtualFunction(26)]
     public partial RaptureUiDataModule* GetRaptureUiDataModule();
+
+    // [VirtualFunction(27)]
+    // public partial Vf27Struct* GetVf27Struct();
+
+    // [VirtualFunction(28)]
+    // public partial Vf28Struct* GetVf28Struct();
 
     [VirtualFunction(29)]
     public partial GoldSaucerModule* GetGoldSaucerModule();
@@ -199,8 +208,17 @@ public unsafe partial struct UIModule {
     [VirtualFunction(36)]
     public partial AgentModule* GetAgentModule();
 
+    // [VirtualFunction(37)]
+    // public partial UIModule* GetAfterAgentsPtr(); // points to the field right after the last Agent in AgentModule
+
     [VirtualFunction(38)]
     public partial UI3DModule* GetUI3DModule();
+
+    // [VirtualFunction(39)]
+    // public partial Vf39Struct* GetVf39Struct();
+
+    // [VirtualFunction(40)]
+    // public partial Vf40Struct* GetVf40Struct();
 
     [VirtualFunction(41)]
     public partial EmoteHistoryModule* GetEmoteHistoryModule();
@@ -211,8 +229,14 @@ public unsafe partial struct UIModule {
     [VirtualFunction(43)]
     public partial MountListModule* GetMountListModule();
 
+    // [VirtualFunction(44)]
+    // public partial EmjModule* GetEmjModule();
+
     [VirtualFunction(45)]
     public partial AozNoteModule* GetAozNoteModule();
+
+    // [VirtualFunction(46)]
+    // public partial CrossWorldLinkShellModule* GetCrossWorldLinkShellModule();
 
     [VirtualFunction(47)]
     public partial AchievementListModule* GetAchievementListModule();
@@ -223,8 +247,26 @@ public unsafe partial struct UIModule {
     [VirtualFunction(49)]
     public partial FieldMarkerModule* GetFieldMarkerModule();
 
+    // [VirtualFunction(50)]
+    // public partial StdMap* GetUnkStdMap967C8();
+
+    // [VirtualFunction(51)]
+    // public partial MycNoteModule* GetMycNoteModule();
+
+    // [VirtualFunction(52)]
+    // public partial OrnamentListModule* GetOrnamentListModule();
+
+    // [VirtualFunction(53)]
+    // public partial MycItemModule* GetMycItemModule();
+
+    // [VirtualFunction(54)]
+    // public partial GroupPoseStampModule* GetGroupPoseStampModule();
+
     [VirtualFunction(55)]
     public partial InputTimerModule* GetInputTimerModule();
+
+    // [VirtualFunction(56)]
+    // public partial McAggreModule* GetMcAggreModule();
 
     [VirtualFunction(57)]
     public partial RetainerCommentModule* GetRetainerCommentModule();
@@ -232,8 +274,23 @@ public unsafe partial struct UIModule {
     [VirtualFunction(58)]
     public partial BannerModule* GetBannerModule();
 
+    // [VirtualFunction(59)]
+    // public partial AdventureNoteModule* GetAdventureNoteModule();
+
+    // [VirtualFunction(60)]
+    // public partial AkatsukiNoteModule* GetAkatsukiNoteModule();
+
+    // [VirtualFunction(61)]
+    // public partial GetVVDNoteModule* GetGetVVDNoteModule();
+
     [VirtualFunction(62)]
     public partial VVDActionModule* GetVVDActionModule();
+
+    // [VirtualFunction(63)]
+    // public partial TofuModule* GetTofuModule();
+
+    // [VirtualFunction(64)]
+    // public partial FishingModule* GetFishingModule();
 
     [VirtualFunction(65)]
     public partial UIInputData* GetUIInputData();
@@ -241,8 +298,20 @@ public unsafe partial struct UIModule {
     [VirtualFunction(66)]
     public partial UIInputModule* GetUIInputModule();
 
+    // [VirtualFunction(67)]
+    // public partial Vf67Struct* GetVf67Struct();
+
     [VirtualFunction(68)]
     public partial LogFilterConfig* GetLogFilterConfig();
+
+    // [VirtualFunction(69)]
+    // public partial Vf69Struct* GetVf69Struct();
+
+    // [VirtualFunction(70)]
+    // public partial void EnableCutsceneInputMode();
+
+    // [VirtualFunction(71)]
+    // public partial void DisableCutsceneInputMode();
 
     [VirtualFunction(76)]
     public partial bool EnterGPose();
@@ -261,6 +330,12 @@ public unsafe partial struct UIModule {
 
     [VirtualFunction(81)]
     public partial bool IsInIdleCam();
+
+    [VirtualFunction(90)]
+    public partial void ShowEurekaHud();
+
+    [VirtualFunction(91)]
+    public partial void HideEurekaHud();
 
     [VirtualFunction(107)]
     public partial void AddAtkHistoryEntry(Utf8String* text, int historyIdx);
