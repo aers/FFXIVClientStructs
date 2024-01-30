@@ -20,7 +20,7 @@ public unsafe partial struct AtkComponentTextInput {
 
     [FieldOffset(0x250)] public uint MaxTextLength;
     [FieldOffset(0x254)] public uint MaxTextLength2; // no idea when one of these are used over the other
-    
+
     [FieldOffset(0x280)] public Utf8String UnkText1;
     [FieldOffset(0x2E8)] public Utf8String UnkText2;
     [FieldOffset(0x350)] public Utf8String UnkText3;

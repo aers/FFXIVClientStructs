@@ -53,7 +53,7 @@ public unsafe partial struct SteamApi {
     /// <returns>Returns an unsigned integer containing the Unix epoch according to Steam.</returns>
     [MemberFunction("48 83 EC 28 48 8D 0D ?? ?? ?? ?? FF 15 ?? ?? ?? ?? 48 8B 08")]
     public partial uint GetSteamServerTime();
-    
+
     /// <summary>
     /// Ask the Steam API if Steam is currently running on a Steam Deck.
     /// See <a href="https://partner.steamgames.com/doc/api/ISteamUtils#IsSteamRunningOnSteamDeck">the Steam API docs</a> for more information.

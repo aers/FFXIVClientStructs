@@ -27,7 +27,7 @@ public static class SteamTypes {
         public uint AccountType => (byte)((RawSteamId >> 52) & 0xF);
         public uint AccountInstance => (uint)((RawSteamId >> 32) & 0xFFFFF);
     }
-    
+
     /// <summary>
     /// A structure that represents a Steam API context. This is used by <c>SteamInternal_ContextInit</c>
     /// to manage and maintain a pointer to an instance of an arbitrary Steam API type.
@@ -35,7 +35,7 @@ public static class SteamTypes {
     [StructLayout(LayoutKind.Explicit, Size = Size)]
     public unsafe struct SteamInterfaceContext {
         public const int Size = 0x18;
-        
+
         [FieldOffset(0x0)] public delegate* unmanaged<void*, void*> FindOrCreateInterfaceFPtr;
         [FieldOffset(0x8)] public nuint Counter;
         [FieldOffset(0x10)] public void* CachedInterfacePtr;

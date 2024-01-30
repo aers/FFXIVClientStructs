@@ -3,7 +3,7 @@ using FFXIVClientStructs.FFXIV.Client.System.String;
 namespace FFXIVClientStructs.FFXIV.Client.System.Input;
 
 public partial struct SoftKeyboardDeviceInterface {
-    
+
     [StructLayout(LayoutKind.Explicit, Size = 0x8)]
     public unsafe partial struct SoftKeyboardInputInterface {
         [FieldOffset(0x0), CExportIgnore] public void** vtbl;
@@ -18,5 +18,5 @@ public partial struct SoftKeyboardDeviceInterface {
         [VirtualFunction(4)]
         public partial uint GetInputMaxLength();
     }
-    
+
 }

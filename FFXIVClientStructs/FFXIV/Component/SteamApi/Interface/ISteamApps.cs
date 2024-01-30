@@ -15,6 +15,6 @@ public unsafe partial struct ISteamApps {
 
     /// <inheritdoc cref="SteamTypes.SteamInterfaceContext.GetInterface"/>
     public static nint GetInterface() => Instance()->SteamInterfaceContext.GetInterface();
-    
+
     [FieldOffset(0x0)] public SteamTypes.SteamInterfaceContext SteamInterfaceContext;
 }

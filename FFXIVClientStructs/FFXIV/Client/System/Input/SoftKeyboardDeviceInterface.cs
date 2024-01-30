@@ -4,15 +4,15 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Input;
 public unsafe partial struct SoftKeyboardDeviceInterface {
     [FieldOffset(0x00), CExportIgnore] public void** vtbl;
 
-    [VirtualFunction(0)] 
+    [VirtualFunction(0)]
     public partial void Dtor(bool freeMemory);
-    
+
     [VirtualFunction(1)]
     public partial bool Enable();
-    
+
     [VirtualFunction(2)]
     public partial void DumpInput();
-    
+
     [VirtualFunction(3)]
     public partial nint Disable();
 

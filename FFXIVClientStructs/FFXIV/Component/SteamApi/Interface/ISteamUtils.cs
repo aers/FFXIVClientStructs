@@ -12,9 +12,9 @@ public unsafe partial struct ISteamUtils {
     /// </summary>
     [StaticAddress("48 8D 0D ?? ?? ?? ?? FF 15 ?? ?? ?? ?? 48 8B 08 48 8B 01 48 83 C4 28 48 FF A0 10 01 00 00", 3)]
     public static partial ISteamUtils* Instance();
-    
+
     /// <inheritdoc cref="SteamTypes.SteamInterfaceContext.GetInterface"/>
     public static nint GetInterface() => Instance()->SteamInterfaceContext.GetInterface();
-    
+
     [FieldOffset(0x0)] public SteamTypes.SteamInterfaceContext SteamInterfaceContext;
 }
