@@ -1,10 +1,10 @@
 namespace FFXIVClientStructs.Attributes;
 
-
 /// <summary>
 /// Describes a Fixed Buffer to assist with automatic parsing.
 /// </summary>
 [AttributeUsage(AttributeTargets.Field)]
+[Obsolete("Use FFXIVClientStructs.Interop.Attributes.FixedSizeArrayAttribute instead")]
 public class FixedArrayAttribute : Attribute {
     public FixedArrayAttribute(Type type, int count) {
         Type = type;

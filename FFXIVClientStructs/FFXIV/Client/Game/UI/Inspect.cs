@@ -3,7 +3,7 @@ using FFXIVClientStructs.FFXIV.Client.Game.Character;
 namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x278)]
-public unsafe struct Inspect {
+public unsafe partial struct Inspect {
     [FieldOffset(0xC)] public uint ObjectID;
     [FieldOffset(0x10)] public byte Type;
     [FieldOffset(0x12)] public short WorldId;
@@ -42,7 +42,7 @@ public unsafe struct Inspect {
     /// 4 = Bozja: Resistance Rank<br/>
     /// 5 = Bozja: Time Remaining
     /// </remarks>
-    [FixedArray(typeof(ExtraInspectDataEntry), 3)]
+    [FixedSizeArray<ExtraInspectDataEntry>(3)]
     [FieldOffset(0x25B)] public fixed byte ExtraInspectData[3 * 0x8];
 }
 
