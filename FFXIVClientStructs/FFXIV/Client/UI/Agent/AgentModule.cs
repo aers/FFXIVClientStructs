@@ -348,7 +348,7 @@ public enum AgentId : uint {
     AozContentResult = 329,
     WorldTravel = 330,
     RideShooting = 331, //Airforce One
-
+    RideShootingResult = 332,
     Credit = 333,
     EmjSetting = 334, //Mahjong Settings
     RetainerList = 335,
