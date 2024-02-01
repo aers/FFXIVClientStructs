@@ -9033,6 +9033,8 @@ classes:
     instances:
       - ea: 0x1421EDF40
         pointer: False
+    vtbls:
+      - ea: 0x141A5DDF8
     funcs:
       0x1408E8470: ctor
       0x1408E8520: dtor
