@@ -1,19 +1,17 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
-[StructLayout(LayoutKind.Explicit, Size = 0x10)]
+[StructLayout(LayoutKind.Explicit, Size = 0xA8)]
 public unsafe partial struct ReconstructionBoxManager {
-    [StaticAddress("48 8B 15 ?? ?? ?? ?? 48 8B C8 48 8B 5C 24", 3)]
+    [StaticAddress("48 8B 15 ?? ?? ?? ?? 48 8B C8 48 8B 5C 24", 3, isPointer: true)]
     public static partial ReconstructionBoxManager* Instance();
 
-    [FieldOffset(0x00)] public ReconstructionBoxData* ReconstructionBoxData;
-    [FieldOffset(0x08)] public void* UnknownDataPointer;
-}
+    [FieldOffset(0x8)] public bool Loaded;
 
-[StructLayout(LayoutKind.Explicit, Size = 0xA8)]
-public struct ReconstructionBoxData {
-    [FieldOffset(0xA0)]
-    public ushort Donated;
+    [FieldOffset(0xA0)] public ushort Donated;
+    [FieldOffset(0xA2)] public ushort Progress;
 
-    [FieldOffset(0xA6)]
-    public ushort Allowance;
+    /// <remarks> Add 100 to get the correct value. </remarks>
+    [FieldOffset(0xA4)] public byte Factor;
+
+    [FieldOffset(0xA6)] public ushort Allowance;
 }
