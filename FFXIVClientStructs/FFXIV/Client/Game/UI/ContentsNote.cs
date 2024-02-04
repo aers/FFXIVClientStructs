@@ -9,8 +9,8 @@ public unsafe partial struct ContentsNote {
     [FieldOffset(0x08)] public fixed byte CompletionFlags[11];
     [FieldOffset(0x1C)] public byte SelectedTab;
     [FieldOffset(0x1D)] public byte DisplayCount;
-    [FieldOffset(0x20)] public fixed int DisplayID[17];
-    [FieldOffset(0x64)] public fixed int DisplayStatus[17];
+    [FieldOffset(0x20)] public fixed int DisplayID[19];
+    [FieldOffset(0x6C)] public fixed int DisplayStatus[19];
 
     public bool IsContentNoteComplete(int index) {
         var offsetIndex = index - 1;
