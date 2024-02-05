@@ -5191,7 +5191,7 @@ __unaligned struct Common_Math_Quaternion /* Size=0x10 */
 __unaligned struct Client_Graphics_Scene_Object /* Size=0x80 */
 {
     /* 0x00 */ Client_Graphics_Scene_ObjectVTable* VTable;
-    /*      */ byte _gap_0x0[0x18];
+    /*      */ byte _gap_0x8[0x10];
     /* 0x18 */ Client_Graphics_Scene_Object* ParentObject;
     /* 0x20 */ Client_Graphics_Scene_Object* PreviousSiblingObject;
     /* 0x28 */ Client_Graphics_Scene_Object* NextSiblingObject;
@@ -5387,7 +5387,7 @@ __unaligned struct Client_Game_Event_EventId /* Size=0x4 */
 __unaligned struct Client_Game_Object_GameObject /* Size=0x1A0 */
 {
     /* 0x000 */ Client_Game_Object_GameObjectVTable* VTable;
-    /*       */ byte _gap_0x0[0x10];
+    /*       */ byte _gap_0x8[0x8];
     /* 0x010 */ Common_Math_Vector3 DefaultPosition;
     /* 0x020 */ float DefaultRotation;
     /*       */ byte _gap_0x24[0x4];
@@ -9790,7 +9790,6 @@ struct Client_Game_SavedAppearanceManagerVTable
 __unaligned struct Client_Game_SavedAppearanceManager /* Size=0x9EB8 */
 {
     /* 0x0000 */ Client_Game_SavedAppearanceManagerVTable* VTable;
-    /*        */ byte _gap_0x0[0x8];
     /* 0x0008 */ Client_Game_SavedAppearanceSlot Slot[0x28];
     /*        */ byte _gap_0x3208[0x6CB0];
 };
@@ -10056,7 +10055,6 @@ struct Client_UI_Misc_UserFileManager_UserFileEventVTable
 __unaligned struct Client_UI_Misc_UserFileManager_UserFileEvent /* Size=0x40 */
 {
     /* 0x00 */ Client_UI_Misc_UserFileManager_UserFileEventVTable* VTable;
-    /*      */ byte _gap_0x0[0x8];
     /* 0x08 */ unsigned __int64 CharacterContentID;
     /* 0x10 */ __int64 UserFileManager;
     /* 0x18 */ __int64 TempDataPtr;
@@ -11648,7 +11646,6 @@ __unaligned struct StdString /* Size=0x20 */
 __unaligned struct Client_System_Resource_Handle_ResourceHandle /* Size=0xB0 */
 {
     /* 0x00 */ Client_System_Resource_Handle_ResourceHandleVTable* VTable;
-    /*      */ byte _gap_0x0[0x8];
     /* 0x08 */ Client_System_Resource_Handle_ResourceHandleType Type;
     /* 0x0C */ unsigned __int32 FileType;
     /* 0x10 */ unsigned __int32 Id;
@@ -12801,7 +12798,6 @@ struct Client_System_Input_ClipBoardVTable
 __unaligned struct Client_System_Input_ClipBoard /* Size=0xD8 */
 {
     /* 0x00 */ Client_System_Input_ClipBoardVTable* VTable;
-    /*      */ byte _gap_0x0[0x8];
     /* 0x08 */ Client_System_String_Utf8String SystemClipboardText;
     /* 0x70 */ Client_System_String_Utf8String CopyStagingText;
 };
@@ -12839,7 +12835,6 @@ struct Client_System_Input_SoftKeyboardDeviceInterface_SoftKeyboardInputInterfac
 __unaligned struct Client_System_Input_SoftKeyboardDeviceInterface_SoftKeyboardInputInterface /* Size=0x8 */
 {
     /* 0x0 */ Client_System_Input_SoftKeyboardDeviceInterface_SoftKeyboardInputInterfaceVTable* VTable;
-    /*     */ byte _gap_0x0[0x8];
 };
 
 struct Client_System_Input_SoftKeyboardDeviceInterfaceVTable
@@ -12857,7 +12852,6 @@ struct Client_System_Input_SoftKeyboardDeviceInterfaceVTable
 __unaligned struct Client_System_Input_SoftKeyboardDeviceInterface /* Size=0x8 */
 {
     /* 0x0 */ Client_System_Input_SoftKeyboardDeviceInterfaceVTable* VTable;
-    /*     */ byte _gap_0x0[0x8];
 };
 
 struct Client_System_Input_SoftKeyboards_SteamGamepadSoftKeyboardVTable
@@ -13726,7 +13720,6 @@ __unaligned struct StdVectorComponentGUISimpleTweenAnimation /* Size=0x18 */
 __unaligned struct Component_GUI_AtkSimpleTween /* Size=0x50 */
 {
     /* 0x00 */ Component_GUI_AtkSimpleTweenVTable* VTable;
-    /*      */ byte _gap_0x0[0x8];
     /* 0x08 */ Component_GUI_SimpleTweenState State;
     /*      */ byte _gap_0xC[0x4];
     /* 0x10 */ Component_GUI_AtkResNode* Node;
@@ -22619,7 +22612,6 @@ struct Component_GUI_AtkDragDropInterfaceVTable
 __unaligned struct Component_GUI_AtkDragDropInterface /* Size=0x30 */
 {
     /* 0x00 */ Component_GUI_AtkDragDropInterfaceVTable* VTable;
-    /*      */ byte _gap_0x0[0x8];
     /* 0x08 */ Component_GUI_AtkComponentNode* ComponentNode;
     /* 0x10 */ Component_GUI_AtkResNode* ActiveNode;
     /*      */ byte _gap_0x18[0x18];
@@ -26567,7 +26559,6 @@ struct Component_GUI_AtkTextureVTable
 __unaligned struct Component_GUI_AtkTexture /* Size=0x18 */
 {
     /* 0x00 */ Component_GUI_AtkTextureVTable* VTable;
-    /*      */ byte _gap_0x0[0x8];
     union {
     /* 0x08 */ Component_GUI_AtkTextureResource* Resource;
     /* 0x08 */ void* Crest;
@@ -26750,7 +26741,6 @@ __unaligned struct Client_UI_Misc_CharaViewItem /* Size=0x20 */
 __unaligned struct Client_UI_Misc_CharaView /* Size=0x2C8 */
 {
     /* 0x000 */ Client_UI_Misc_CharaViewVTable* VTable;
-    /*       */ byte _gap_0x0[0x8];
     /* 0x008 */ unsigned __int32 State;
     /* 0x00C */ unsigned __int32 ClientObjectId;
     /* 0x010 */ unsigned __int32 ClientObjectIndex;
@@ -33086,7 +33076,6 @@ __unaligned struct Component_Text_TextChecker /* Size=0xF8 */
 __unaligned struct Client_UI_Misc_PronounModule /* Size=0x3B0 */
 {
     /* 0x000 */ Client_UI_Misc_PronounModuleVTable* VTable;
-    /*       */ byte _gap_0x0[0x8];
     /* 0x008 */ Component_Excel_ExcelModuleInterface* ExcelModuleInterface;
     /* 0x010 */ Client_UI_Misc_RaptureTextModule* RaptureTextModule;
     /* 0x018 */ Component_Excel_ExcelSheet* TextCommandParamSheet;
@@ -33224,7 +33213,6 @@ struct Client_UI_Misc_RaptureHotbarModule_ClearCallbackVTable
 __unaligned struct Client_UI_Misc_RaptureHotbarModule_ClearCallback /* Size=0x8 */
 {
     /* 0x0 */ Client_UI_Misc_RaptureHotbarModule_ClearCallbackVTable* VTable;
-    /*     */ byte _gap_0x0[0x8];
 };
 
 __unaligned struct StdVectorint32 /* Size=0x18 */
@@ -33448,7 +33436,6 @@ __unaligned struct Component_Text_MacroEncoder /* Size=0x310 */
 __unaligned struct Component_Text_TextModule /* Size=0x510 */
 {
     /* 0x000 */ Component_Text_TextModuleVTable* VTable;
-    /*       */ byte _gap_0x0[0x8];
     /* 0x008 */ Component_Text_MacroDecoder MacroDecoder;
     /* 0x068 */ Component_Excel_ExcelModuleInterface* ExcelModuleInterface;
     /* 0x070 */ Component_Text_Localize Localize;
@@ -33732,7 +33719,7 @@ struct Client_UI_RaptureAtkHistoryVTable
 __unaligned struct Client_UI_RaptureAtkHistory /* Size=0x38 */
 {
     /* 0x00 */ Client_UI_RaptureAtkHistoryVTable* VTable;
-    /*      */ byte _gap_0x0[0x10];
+    /*      */ byte _gap_0x8[0x8];
     /* 0x10 */ Client_System_String_Utf8String** Entries;
     /* 0x18 */ __int64 Tail;
     /* 0x20 */ __int64 Head;
@@ -33839,7 +33826,7 @@ __unaligned struct Component_GUI_AtkArrayDataHolder /* Size=0x50 */
 __unaligned struct Component_GUI_AtkModule /* Size=0x82A0 */
 {
     /* 0x0000 */ Component_GUI_AtkModuleVTable* VTable;
-    /*        */ byte _gap_0x0[0x128];
+    /*        */ byte _gap_0x8[0x120];
     /* 0x0128 */ Component_GUI_AtkStage* AtkStage;
     /*        */ byte _gap_0x130[0x120];
     /* 0x0250 */ Component_GUI_AtkTextureResourceManager AtkTextureResourceManager;
@@ -34268,7 +34255,6 @@ struct Component_Excel_ExcelModuleInterfaceVTable
 __unaligned struct Component_Excel_ExcelModuleInterface /* Size=0x10 */
 {
     /* 0x00 */ Component_Excel_ExcelModuleInterfaceVTable* VTable;
-    /*      */ byte _gap_0x0[0x8];
     /* 0x08 */ Component_Exd_ExdModule* ExdModule;
 };
 
@@ -34474,7 +34460,6 @@ struct Client_UI_UIModuleVTable
 __unaligned struct Client_UI_UIModule /* Size=0xEE030 */
 {
     /* 0x00000 */ Client_UI_UIModuleVTable* VTable;
-    /*         */ byte _gap_0x0[0x8];
     /* 0x00008 */ void** AtkModuleEvent;
     /* 0x00010 */ void** ExcelLanguageEvent;
     /* 0x00018 */ Common_Configuration_ChangeEventInterface ChangeEventInterface;
@@ -34517,7 +34502,6 @@ struct Common_Component_BGCollision_ObjectVTable
 __unaligned struct Common_Component_BGCollision_Object /* Size=0x8 */
 {
     /* 0x0 */ Common_Component_BGCollision_ObjectVTable* VTable;
-    /*     */ byte _gap_0x0[0x8];
 };
 
 __unaligned struct Common_Component_BGCollision_Math_AABB /* Size=0x18 */
@@ -34626,7 +34610,6 @@ struct Common_Component_BGCollision_NodeLinkVTable
 __unaligned struct Common_Component_BGCollision_NodeLink /* Size=0x18 */
 {
     /* 0x00 */ Common_Component_BGCollision_NodeLinkVTable* VTable;
-    /*      */ byte _gap_0x0[0x8];
     /* 0x08 */ Common_Component_BGCollision_Node* Prev;
     /* 0x10 */ Common_Component_BGCollision_Node* Next;
 };
@@ -35068,7 +35051,6 @@ struct Common_Component_BGCollision_IMeshVTable
 __unaligned struct Common_Component_BGCollision_IMesh /* Size=0x8 */
 {
     /* 0x0 */ Common_Component_BGCollision_IMeshVTable* VTable;
-    /*     */ byte _gap_0x0[0x8];
 };
 
 __unaligned struct Common_Component_BGCollision_Mesh_Primitive /* Size=0xC */
@@ -35201,7 +35183,7 @@ struct Common_Component_BGCollision_ResourceVTable
 __unaligned struct Common_Component_BGCollision_Resource /* Size=0x88 */
 {
     /* 0x00 */ Common_Component_BGCollision_ResourceVTable* VTable;
-    /*      */ byte _gap_0x0[0x10];
+    /*      */ byte _gap_0x8[0x8];
     /* 0x10 */ Common_Component_BGCollision_Resource* PrevResource;
     /* 0x18 */ Common_Component_BGCollision_Resource* NextResource;
     /* 0x20 */ Client_System_Resource_Handle_ResourceHandle* Handle;
@@ -35240,7 +35222,6 @@ struct Common_Component_BGCollision_SceneManagerVTable
 __unaligned struct Common_Component_BGCollision_SceneManager /* Size=0x38 */
 {
     /* 0x00 */ Common_Component_BGCollision_SceneManagerVTable* VTable;
-    /*      */ byte _gap_0x0[0x8];
     /* 0x08 */ void* ResourceManager;
     /*      */ byte _gap_0x10[0x8];
     /* 0x18 */ Common_Component_BGCollision_SceneWrapper* FirstScene;
@@ -35351,7 +35332,7 @@ struct Component_Excel_ExcelModuleVTable
 __unaligned struct Component_Excel_ExcelModule /* Size=0x818 */
 {
     /* 0x000 */ Component_Excel_ExcelModuleVTable* VTable;
-    /*       */ byte _gap_0x0[0x818];
+    /*       */ byte _gap_0x8[0x810];
 };
 
 __unaligned struct Component_Excel_ExcelSheet_ColumnInfo /* Size=0x0 */

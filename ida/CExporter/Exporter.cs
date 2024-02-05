@@ -358,6 +358,8 @@ public abstract class ExporterBase {
                 if (structLayout.Name == "VTable") {
                     var vtableName = ProcessVTable(structLayout, type, header);
                     sb.AppendLine($"    /* 0x{new string('0', padFill.Length - 2)} */ {vtableName}* VTable;");
+                    if(!isUnion)
+                        offset += 8;
                 } else {
                     var isStruct = structLayout.Objects.Count > 1;
                     var layoutObjects = structLayout.Objects;

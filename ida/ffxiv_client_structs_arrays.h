@@ -5191,7 +5191,7 @@ __unaligned struct Common::Math::Quaternion /* Size=0x10 */
 __unaligned struct Client::Graphics::Scene::Object /* Size=0x80 */
 {
     /* 0x00 */ Client::Graphics::Scene::ObjectVTable* VTable;
-    /*      */ byte _gap_0x0[0x18];
+    /*      */ byte _gap_0x8[0x10];
     /* 0x18 */ Client::Graphics::Scene::Object* ParentObject;
     /* 0x20 */ Client::Graphics::Scene::Object* PreviousSiblingObject;
     /* 0x28 */ Client::Graphics::Scene::Object* NextSiblingObject;
@@ -5387,7 +5387,7 @@ __unaligned struct Client::Game::Event::EventId /* Size=0x4 */
 __unaligned struct Client::Game::Object::GameObject /* Size=0x1A0 */
 {
     /* 0x000 */ Client::Game::Object::GameObjectVTable* VTable;
-    /*       */ byte _gap_0x0[0x10];
+    /*       */ byte _gap_0x8[0x8];
     /* 0x010 */ Common::Math::Vector3 DefaultPosition;
     /* 0x020 */ float DefaultRotation;
     /*       */ byte _gap_0x24[0x4];
@@ -9790,7 +9790,6 @@ struct Client::Game::SavedAppearanceManagerVTable
 __unaligned struct Client::Game::SavedAppearanceManager /* Size=0x9EB8 */
 {
     /* 0x0000 */ Client::Game::SavedAppearanceManagerVTable* VTable;
-    /*        */ byte _gap_0x0[0x8];
     /* 0x0008 */ Client::Game::SavedAppearanceSlot Slot[0x28];
     /*        */ byte _gap_0x3208[0x6CB0];
 };
@@ -10056,7 +10055,6 @@ struct Client::UI::Misc::UserFileManager::UserFileEventVTable
 __unaligned struct Client::UI::Misc::UserFileManager::UserFileEvent /* Size=0x40 */
 {
     /* 0x00 */ Client::UI::Misc::UserFileManager::UserFileEventVTable* VTable;
-    /*      */ byte _gap_0x0[0x8];
     /* 0x08 */ unsigned __int64 CharacterContentID;
     /* 0x10 */ __int64 UserFileManager;
     /* 0x18 */ __int64 TempDataPtr;
@@ -11648,7 +11646,6 @@ __unaligned struct StdString /* Size=0x20 */
 __unaligned struct Client::System::Resource::Handle::ResourceHandle /* Size=0xB0 */
 {
     /* 0x00 */ Client::System::Resource::Handle::ResourceHandleVTable* VTable;
-    /*      */ byte _gap_0x0[0x8];
     /* 0x08 */ Client::System::Resource::Handle::ResourceHandleType Type;
     /* 0x0C */ unsigned __int32 FileType;
     /* 0x10 */ unsigned __int32 Id;
@@ -12801,7 +12798,6 @@ struct Client::System::Input::ClipBoardVTable
 __unaligned struct Client::System::Input::ClipBoard /* Size=0xD8 */
 {
     /* 0x00 */ Client::System::Input::ClipBoardVTable* VTable;
-    /*      */ byte _gap_0x0[0x8];
     /* 0x08 */ Client::System::String::Utf8String SystemClipboardText;
     /* 0x70 */ Client::System::String::Utf8String CopyStagingText;
 };
@@ -12839,7 +12835,6 @@ struct Client::System::Input::SoftKeyboardDeviceInterface::SoftKeyboardInputInte
 __unaligned struct Client::System::Input::SoftKeyboardDeviceInterface::SoftKeyboardInputInterface /* Size=0x8 */
 {
     /* 0x0 */ Client::System::Input::SoftKeyboardDeviceInterface::SoftKeyboardInputInterfaceVTable* VTable;
-    /*     */ byte _gap_0x0[0x8];
 };
 
 struct Client::System::Input::SoftKeyboardDeviceInterfaceVTable
@@ -12857,7 +12852,6 @@ struct Client::System::Input::SoftKeyboardDeviceInterfaceVTable
 __unaligned struct Client::System::Input::SoftKeyboardDeviceInterface /* Size=0x8 */
 {
     /* 0x0 */ Client::System::Input::SoftKeyboardDeviceInterfaceVTable* VTable;
-    /*     */ byte _gap_0x0[0x8];
 };
 
 struct Client::System::Input::SoftKeyboards::SteamGamepadSoftKeyboardVTable
@@ -13726,7 +13720,6 @@ __unaligned struct StdVectorComponentGUISimpleTweenAnimation /* Size=0x18 */
 __unaligned struct Component::GUI::AtkSimpleTween /* Size=0x50 */
 {
     /* 0x00 */ Component::GUI::AtkSimpleTweenVTable* VTable;
-    /*      */ byte _gap_0x0[0x8];
     /* 0x08 */ Component::GUI::SimpleTweenState State;
     /*      */ byte _gap_0xC[0x4];
     /* 0x10 */ Component::GUI::AtkResNode* Node;
@@ -22619,7 +22612,6 @@ struct Component::GUI::AtkDragDropInterfaceVTable
 __unaligned struct Component::GUI::AtkDragDropInterface /* Size=0x30 */
 {
     /* 0x00 */ Component::GUI::AtkDragDropInterfaceVTable* VTable;
-    /*      */ byte _gap_0x0[0x8];
     /* 0x08 */ Component::GUI::AtkComponentNode* ComponentNode;
     /* 0x10 */ Component::GUI::AtkResNode* ActiveNode;
     /*      */ byte _gap_0x18[0x18];
@@ -26567,7 +26559,6 @@ struct Component::GUI::AtkTextureVTable
 __unaligned struct Component::GUI::AtkTexture /* Size=0x18 */
 {
     /* 0x00 */ Component::GUI::AtkTextureVTable* VTable;
-    /*      */ byte _gap_0x0[0x8];
     union {
     /* 0x08 */ Component::GUI::AtkTextureResource* Resource;
     /* 0x08 */ void* Crest;
@@ -26750,7 +26741,6 @@ __unaligned struct Client::UI::Misc::CharaViewItem /* Size=0x20 */
 __unaligned struct Client::UI::Misc::CharaView /* Size=0x2C8 */
 {
     /* 0x000 */ Client::UI::Misc::CharaViewVTable* VTable;
-    /*       */ byte _gap_0x0[0x8];
     /* 0x008 */ unsigned __int32 State;
     /* 0x00C */ unsigned __int32 ClientObjectId;
     /* 0x010 */ unsigned __int32 ClientObjectIndex;
@@ -33086,7 +33076,6 @@ __unaligned struct Component::Text::TextChecker /* Size=0xF8 */
 __unaligned struct Client::UI::Misc::PronounModule /* Size=0x3B0 */
 {
     /* 0x000 */ Client::UI::Misc::PronounModuleVTable* VTable;
-    /*       */ byte _gap_0x0[0x8];
     /* 0x008 */ Component::Excel::ExcelModuleInterface* ExcelModuleInterface;
     /* 0x010 */ Client::UI::Misc::RaptureTextModule* RaptureTextModule;
     /* 0x018 */ Component::Excel::ExcelSheet* TextCommandParamSheet;
@@ -33224,7 +33213,6 @@ struct Client::UI::Misc::RaptureHotbarModule::ClearCallbackVTable
 __unaligned struct Client::UI::Misc::RaptureHotbarModule::ClearCallback /* Size=0x8 */
 {
     /* 0x0 */ Client::UI::Misc::RaptureHotbarModule::ClearCallbackVTable* VTable;
-    /*     */ byte _gap_0x0[0x8];
 };
 
 __unaligned struct StdVectorint32 /* Size=0x18 */
@@ -33448,7 +33436,6 @@ __unaligned struct Component::Text::MacroEncoder /* Size=0x310 */
 __unaligned struct Component::Text::TextModule /* Size=0x510 */
 {
     /* 0x000 */ Component::Text::TextModuleVTable* VTable;
-    /*       */ byte _gap_0x0[0x8];
     /* 0x008 */ Component::Text::MacroDecoder MacroDecoder;
     /* 0x068 */ Component::Excel::ExcelModuleInterface* ExcelModuleInterface;
     /* 0x070 */ Component::Text::Localize Localize;
@@ -33732,7 +33719,7 @@ struct Client::UI::RaptureAtkHistoryVTable
 __unaligned struct Client::UI::RaptureAtkHistory /* Size=0x38 */
 {
     /* 0x00 */ Client::UI::RaptureAtkHistoryVTable* VTable;
-    /*      */ byte _gap_0x0[0x10];
+    /*      */ byte _gap_0x8[0x8];
     /* 0x10 */ Client::System::String::Utf8String** Entries;
     /* 0x18 */ __int64 Tail;
     /* 0x20 */ __int64 Head;
@@ -33839,7 +33826,7 @@ __unaligned struct Component::GUI::AtkArrayDataHolder /* Size=0x50 */
 __unaligned struct Component::GUI::AtkModule /* Size=0x82A0 */
 {
     /* 0x0000 */ Component::GUI::AtkModuleVTable* VTable;
-    /*        */ byte _gap_0x0[0x128];
+    /*        */ byte _gap_0x8[0x120];
     /* 0x0128 */ Component::GUI::AtkStage* AtkStage;
     /*        */ byte _gap_0x130[0x120];
     /* 0x0250 */ Component::GUI::AtkTextureResourceManager AtkTextureResourceManager;
@@ -34268,7 +34255,6 @@ struct Component::Excel::ExcelModuleInterfaceVTable
 __unaligned struct Component::Excel::ExcelModuleInterface /* Size=0x10 */
 {
     /* 0x00 */ Component::Excel::ExcelModuleInterfaceVTable* VTable;
-    /*      */ byte _gap_0x0[0x8];
     /* 0x08 */ Component::Exd::ExdModule* ExdModule;
 };
 
@@ -34474,7 +34460,6 @@ struct Client::UI::UIModuleVTable
 __unaligned struct Client::UI::UIModule /* Size=0xEE030 */
 {
     /* 0x00000 */ Client::UI::UIModuleVTable* VTable;
-    /*         */ byte _gap_0x0[0x8];
     /* 0x00008 */ void** AtkModuleEvent;
     /* 0x00010 */ void** ExcelLanguageEvent;
     /* 0x00018 */ Common::Configuration::ChangeEventInterface ChangeEventInterface;
@@ -34517,7 +34502,6 @@ struct Common::Component::BGCollision::ObjectVTable
 __unaligned struct Common::Component::BGCollision::Object /* Size=0x8 */
 {
     /* 0x0 */ Common::Component::BGCollision::ObjectVTable* VTable;
-    /*     */ byte _gap_0x0[0x8];
 };
 
 __unaligned struct Common::Component::BGCollision::Math::AABB /* Size=0x18 */
@@ -34626,7 +34610,6 @@ struct Common::Component::BGCollision::NodeLinkVTable
 __unaligned struct Common::Component::BGCollision::NodeLink /* Size=0x18 */
 {
     /* 0x00 */ Common::Component::BGCollision::NodeLinkVTable* VTable;
-    /*      */ byte _gap_0x0[0x8];
     /* 0x08 */ Common::Component::BGCollision::Node* Prev;
     /* 0x10 */ Common::Component::BGCollision::Node* Next;
 };
@@ -35068,7 +35051,6 @@ struct Common::Component::BGCollision::IMeshVTable
 __unaligned struct Common::Component::BGCollision::IMesh /* Size=0x8 */
 {
     /* 0x0 */ Common::Component::BGCollision::IMeshVTable* VTable;
-    /*     */ byte _gap_0x0[0x8];
 };
 
 __unaligned struct Common::Component::BGCollision::Mesh::Primitive /* Size=0xC */
@@ -35201,7 +35183,7 @@ struct Common::Component::BGCollision::ResourceVTable
 __unaligned struct Common::Component::BGCollision::Resource /* Size=0x88 */
 {
     /* 0x00 */ Common::Component::BGCollision::ResourceVTable* VTable;
-    /*      */ byte _gap_0x0[0x10];
+    /*      */ byte _gap_0x8[0x8];
     /* 0x10 */ Common::Component::BGCollision::Resource* PrevResource;
     /* 0x18 */ Common::Component::BGCollision::Resource* NextResource;
     /* 0x20 */ Client::System::Resource::Handle::ResourceHandle* Handle;
@@ -35240,7 +35222,6 @@ struct Common::Component::BGCollision::SceneManagerVTable
 __unaligned struct Common::Component::BGCollision::SceneManager /* Size=0x38 */
 {
     /* 0x00 */ Common::Component::BGCollision::SceneManagerVTable* VTable;
-    /*      */ byte _gap_0x0[0x8];
     /* 0x08 */ void* ResourceManager;
     /*      */ byte _gap_0x10[0x8];
     /* 0x18 */ Common::Component::BGCollision::SceneWrapper* FirstScene;
@@ -35351,7 +35332,7 @@ struct Component::Excel::ExcelModuleVTable
 __unaligned struct Component::Excel::ExcelModule /* Size=0x818 */
 {
     /* 0x000 */ Component::Excel::ExcelModuleVTable* VTable;
-    /*       */ byte _gap_0x0[0x818];
+    /*       */ byte _gap_0x8[0x810];
 };
 
 __unaligned struct Component::Excel::ExcelSheet::ColumnInfo /* Size=0x0 */
