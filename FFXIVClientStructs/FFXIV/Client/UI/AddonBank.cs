@@ -11,6 +11,6 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 public unsafe partial struct AddonBank {
     [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
 
-    [VirtualFunction(47)]
+    [VirtualFunction(48), Obsolete("Use AtkUnitBase.OnSetup")]
     public partial void OnSetup(uint a2, AtkValue* atkValues);
 }
