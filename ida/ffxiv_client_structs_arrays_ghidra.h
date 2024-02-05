@@ -10,33 +10,34 @@ struct Client_Game_ComboDetail;
 struct Client_Game_Object_GameObjectID;
 struct Client_Game_ActionTimelineDriver;
 struct Client_System_Scheduler_Base_SchedulerTimeline;
+struct Client_System_Scheduler_Base_SchedulerTimelineVTable;
 struct Client_System_Scheduler_Base_TimelineController;
 struct Client_System_Scheduler_Base_SchedulerState;
-struct Client_System_Scheduler_Base_SchedulerTimelineVTable;
 struct Client_Game_ActionTimelineManager;
 struct Client_Game_Balloon;
 struct Client_System_String_Utf8String;
 struct Client_Game_Camera;
 struct Client_Game_CameraBase;
 struct Client_Graphics_Scene_Camera;
+struct Client_Graphics_Scene_CameraVTable;
 struct Client_Graphics_Scene_Object;
 struct Client_Graphics_Scene_ObjectVTable;
 struct Common_Math_Vector3;
 struct Common_Math_Quaternion;
-struct Client_Graphics_Scene_CameraVTable;
 struct Common_Math_Matrix4x4;
 struct Client_Game_Camera3;
 struct Client_Game_Camera4;
 struct Client_Game_Character_BattleChara;
-struct Client_Game_Character_Character;
+struct Client_Game_Character_BattleCharaVTable;
 struct Client_Game_Object_GameObject;
 struct Client_Game_Object_GameObjectVTable;
 struct Client_Graphics_Scene_DrawObject;
 struct Client_Graphics_Scene_DrawObjectVTable;
 struct Client_Game_Event_EventId;
-struct Client_Game_Character_CharacterVTable;
 struct Client_Game_StatusManager;
 struct Client_Game_Status;
+struct Client_Game_Character_Character;
+struct Client_Game_Character_CharacterVTable;
 struct Client_Game_Character_Character_CastInfo;
 struct Client_Game_Character_Character_ForayInfo;
 struct Client_Game_Character_CharacterData;
@@ -57,7 +58,6 @@ struct Client_Game_Control_GazeController_Gaze_TargetInformation;
 struct Common_Math_Vector2;
 struct Client_Game_Character_Character_VfxContainer;
 struct Client_Game_Character_CharacterSetup;
-struct Client_Game_Character_BattleCharaVTable;
 struct Client_Game_Character_Character_CharacterVTable;
 struct Client_Game_Character_CharacterManager;
 struct Client_Game_Character_Companion;
@@ -167,9 +167,9 @@ struct Client_Game_InstanceContent_ContentDirector;
 struct Client_Game_InstanceContent_ContentDirectorVTable;
 struct Client_Game_InstanceContent_ContentDirector_ContentDirectorVTable;
 struct Client_Game_InstanceContent_InstanceContentDeepDungeon;
+struct Client_Game_InstanceContent_InstanceContentDeepDungeonVTable;
 struct Client_Game_InstanceContent_InstanceContentDirector;
 struct Client_Game_InstanceContent_InstanceContentDirectorVTable;
-struct Client_Game_InstanceContent_InstanceContentDeepDungeonVTable;
 struct Client_Game_InstanceContent_InstanceContentDeepDungeon_DeepDungeonPartyInfo;
 struct Client_Game_InstanceContent_InstanceContentDeepDungeon_DeepDungeonItemInfo;
 struct Client_Game_InstanceContent_InstanceContentDeepDungeon_DeepDungeonChestInfo;
@@ -250,9 +250,9 @@ struct Client_Game_UI_HaterInfo;
 struct Client_Game_UI_Hotbar;
 struct Client_Game_UI_HotbarVTable;
 struct Client_UI_Misc_RaptureHotbarModule;
+struct Client_UI_Misc_RaptureHotbarModuleVTable;
 struct Client_UI_Misc_UserFileManager_UserFileEvent;
 struct Client_UI_Misc_UserFileManager_UserFileEventVTable;
-struct Client_UI_Misc_RaptureHotbarModuleVTable;
 struct Client_UI_Misc_HotBar;
 struct Client_UI_Misc_HotBarSlot;
 struct Client_UI_Misc_SavedHotBarGroup;
@@ -398,9 +398,9 @@ struct Client_System_File_FileDescriptor;
 struct Client_System_File_FileManager;
 struct Client_System_File_FileThread;
 struct Client_System_Framework_EnvironmentManager;
+struct Client_System_Framework_EnvironmentManagerVTable;
 struct Client_System_Framework_Task;
 struct Client_System_Framework_TaskVTable;
-struct Client_System_Framework_EnvironmentManagerVTable;
 struct Common_Configuration_ChangeEventInterface;
 struct Client_System_Framework_Framework;
 struct Client_System_Framework_TaskManager;
@@ -462,19 +462,17 @@ struct Client_System_Threading_ThreadManager;
 struct Client_UI_ActionBarSlot;
 struct Client_UI_ActionInfo;
 struct Client_UI_AddonActionBar;
-struct Client_UI_AddonActionBarX;
-struct Client_UI_AddonActionBarBase;
+struct Client_UI_AddonActionBarVTable;
 struct Component_GUI_AtkUnitBase;
-struct Component_GUI_AtkEventListener;
 struct Component_GUI_AtkUnitBaseVTable;
 struct Component_GUI_AtkEvent;
 struct Component_GUI_AtkCollisionNode;
+struct Component_GUI_AtkCollisionNodeVTable;
 struct Component_GUI_AtkResNode;
-struct Component_GUI_AtkEventTarget;
 struct Component_GUI_AtkResNodeVTable;
+struct Component_GUI_AtkEventTarget;
 struct Component_GUI_AtkEventManager;
 struct Common_Math_Matrix2x2;
-struct Component_GUI_AtkCollisionNodeVTable;
 struct Common_Math_Bounds;
 struct System_Drawing_Point;
 struct Component_GUI_AtkValue;
@@ -482,6 +480,7 @@ struct StdVectorComponentGUIAtkValue;
 struct Component_GUI_NumberArrayData;
 struct Component_GUI_AtkArrayData;
 struct Component_GUI_StringArrayData;
+struct Component_GUI_AtkEventListener;
 struct Component_GUI_AtkUldManager;
 struct StdLinkedListComponentGUIAtkUldManagerDuplicateObjectListPtr;
 struct StdLinkedList_NodeComponentGUIAtkUldManagerDuplicateObjectListPtr;
@@ -489,11 +488,12 @@ struct Component_GUI_AtkUldManager_DuplicateObjectList;
 struct Component_GUI_AtkSimpleTween;
 struct Component_GUI_AtkSimpleTweenVTable;
 struct StdVectorComponentGUISimpleTweenAnimation;
+struct Client_UI_AddonActionBarBase;
 struct Client_UI_AddonActionBarBaseVTable;
 struct StdVectorClientUIActionBarSlot;
+struct Client_UI_AddonActionBarX;
 struct Client_UI_AddonActionBarXVTable;
 struct Client_UI_AddonActionBarX_Dimensions;
-struct Client_UI_AddonActionBarVTable;
 struct Client_UI_AddonActionBarBase_AddonActionBarBaseVTable;
 struct Client_UI_AddonActionCross;
 struct Client_UI_AddonActionCrossVTable;
@@ -889,15 +889,15 @@ struct Client_UI_AddonWeeklyPuzzle_GameTileRow;
 struct Client_UI_AddonWeeklyPuzzle_GameTileItem;
 struct Client_UI_Agent_ActionData;
 struct Client_UI_Agent_AgentActionMenu;
+struct Client_UI_Agent_AgentActionMenuVTable;
 struct Component_GUI_AgentInterface;
 struct Component_GUI_AgentInterfaceVTable;
-struct Client_UI_Agent_AgentActionMenuVTable;
 struct StdVectorClientUIAgentActionData;
 struct StdVectorClientUIAgentExtraCommandData;
 struct Client_UI_Agent_AgentAirshipExplorationResult;
+struct Client_UI_Agent_AgentAirshipExplorationResultVTable;
 struct Client_UI_Agent_AgentExplorationResultInterface;
 struct Client_UI_Agent_AgentExplorationResultInterfaceVTable;
-struct Client_UI_Agent_AgentAirshipExplorationResultVTable;
 struct Client_UI_Agent_AgentAozContentBriefing;
 struct Client_UI_Agent_AgentAozContentBriefingVTable;
 struct Client_UI_Agent_AgentAozContentResult;
@@ -930,11 +930,11 @@ struct Client_UI_Agent_AgentCharaCard;
 struct Client_UI_Agent_AgentCharaCardVTable;
 struct Client_UI_Agent_AgentCharaCard_Storage;
 struct Client_UI_Misc_CharaViewPortrait;
+struct Client_UI_Misc_CharaViewPortraitVTable;
 struct Client_UI_Misc_CharaView;
 struct Client_UI_Misc_CharaViewVTable;
 struct Client_UI_Misc_CharaViewCharacterData;
 struct Client_UI_Misc_CharaViewItem;
-struct Client_UI_Misc_CharaViewPortraitVTable;
 struct Common_Math_Vector4;
 struct Client_UI_Agent_AgentChatLog;
 struct Client_UI_Agent_AgentChatLogVTable;
@@ -1227,19 +1227,19 @@ struct Client_UI_Info_CrossRealmGroup;
 struct Client_UI_Info_CrossRealmMember;
 struct Client_UI_Info_InfoModule;
 struct Client_UI_Info_InfoProxy17;
+struct Client_UI_Info_InfoProxy17VTable;
 struct Client_UI_Info_InfoProxyInterface;
 struct Client_UI_Info_InfoProxyInterfaceVTable;
-struct Client_UI_Info_InfoProxy17VTable;
 struct Client_UI_Info_InfoProxy20;
 struct Client_UI_Info_InfoProxy20VTable;
 struct Client_UI_Info_InfoProxy21;
-struct Client_UI_Info_InfoProxyInvitedList;
-struct Client_UI_Info_InfoProxyCommonList;
+struct Client_UI_Info_InfoProxy21VTable;
 struct Client_UI_Info_InfoProxyPageInterface;
 struct Client_UI_Info_InfoProxyPageInterfaceVTable;
-struct Client_UI_Info_InfoProxyCommonListVTable;
+struct Client_UI_Info_InfoProxyInvitedList;
 struct Client_UI_Info_InfoProxyInvitedListVTable;
-struct Client_UI_Info_InfoProxy21VTable;
+struct Client_UI_Info_InfoProxyCommonList;
+struct Client_UI_Info_InfoProxyCommonListVTable;
 struct Client_UI_Info_InfoProxy22;
 struct Client_UI_Info_InfoProxy22VTable;
 struct Client_UI_Info_InfoProxy23;
@@ -1270,10 +1270,10 @@ struct Client_UI_Info_InfoProxyCommonList_CharacterIndex;
 struct Client_UI_Info_InfoProxyCrossRealm;
 struct Client_UI_Info_InfoProxyCrossRealmVTable;
 struct Client_UI_Info_InfoProxyCrossWorldLinkShell;
+struct Client_UI_Info_InfoProxyCrossWorldLinkShellVTable;
 struct Client_UI_Info_InfoProxyInvitedInterface;
 struct Client_UI_Info_InfoProxyInvitedInterfaceVTable;
 struct Client_UI_Info_InfoProxyInvitedInterface_Unk18;
-struct Client_UI_Info_InfoProxyCrossWorldLinkShellVTable;
 struct Client_UI_Info_InfoProxyCrossWorldLinkShell_CWLSEntry;
 struct Client_UI_Info_InfoProxyCrossWorldLinkShellMember;
 struct Client_UI_Info_InfoProxyCrossWorldLinkShellMemberVTable;
@@ -1317,19 +1317,19 @@ struct Client_UI_Info_PlayerRetainerInfo;
 struct Client_UI_Misc_AchievementListModule;
 struct Client_UI_Misc_AchievementListModuleVTable;
 struct Client_UI_Misc_AcquaintanceModule;
-struct Client_UI_Misc_AcquaintanceModule_Acquaintance;
 struct Client_UI_Misc_AcquaintanceModuleVTable;
+struct Client_UI_Misc_AcquaintanceModule_Acquaintance;
 struct Client_UI_Misc_AcquaintanceModule_AcquaintanceModuleVTable;
 struct Client_UI_Misc_AddonConfig;
 struct Client_UI_Misc_AddonConfigVTable;
 struct Client_UI_Misc_AddonConfigData;
 struct Client_UI_Misc_AozNoteModule;
+struct Client_UI_Misc_AozNoteModuleVTable;
 struct Client_UI_Misc_AozNoteModule_ActiveSet;
 struct Client_UI_Misc_AozNoteModule_AozHotBar;
 struct Client_UI_Misc_AozNoteModule_AozCrossHotBar;
 struct Client_UI_Misc_AozNoteModule_AozHotBarMacroFlag;
 struct Client_UI_Misc_AozNoteModule_AozCrossHotBarMacroFlag;
-struct Client_UI_Misc_AozNoteModuleVTable;
 struct Client_UI_Misc_BannerModule;
 struct Client_UI_Misc_BannerModuleVTable;
 struct Client_UI_Misc_BannerModuleData;
@@ -1341,14 +1341,14 @@ struct Client_UI_Misc_EmoteHistoryModule;
 struct Client_UI_Misc_EmoteHistoryModuleVTable;
 struct Client_UI_Misc_ExportedPortraitData;
 struct Client_UI_Misc_FieldMarkerModule;
+struct Client_UI_Misc_FieldMarkerModuleVTable;
 struct Client_UI_Misc_FieldMarkerPreset;
 struct Client_UI_Misc_GamePresetPoint;
-struct Client_UI_Misc_FieldMarkerModuleVTable;
 struct Client_UI_Misc_FlagStatusModule;
 struct Client_UI_Misc_FlagStatusModuleVTable;
 struct Client_UI_Misc_GoldSaucerModule;
-struct Client_UI_Misc_GoldSaucerModule_TripleTriadDeck;
 struct Client_UI_Misc_GoldSaucerModuleVTable;
+struct Client_UI_Misc_GoldSaucerModule_TripleTriadDeck;
 struct Client_UI_Misc_GroupPoseModule;
 struct Client_UI_Misc_GroupPoseModuleVTable;
 struct Client_UI_Misc_GroupPoseModule_Light;
@@ -1362,11 +1362,11 @@ struct Client_UI_Misc_ItemFinderModuleVTable;
 struct Client_UI_Misc_ItemFinderModuleResult;
 struct Client_UI_Misc_ItemFinderModuleRetainerResult;
 struct Client_UI_Misc_ItemOrderModule;
+struct Client_UI_Misc_ItemOrderModuleVTable;
 struct Client_UI_Misc_ItemOrderModuleSorter;
 struct StdVectorClientUIMiscItemOrderModuleSorterItemEntryPtr;
 struct Client_UI_Misc_ItemOrderModuleSorterItemEntry;
 struct StdVectorClientUIMiscItemOrderModuleSorterSortFunctionEntry;
-struct Client_UI_Misc_ItemOrderModuleVTable;
 struct StdMapunsignedint64ClientUIMiscItemOrderModuleSorterPtr;
 struct StdMap_Nodeunsignedint64ClientUIMiscItemOrderModuleSorterPtr;
 struct StdPairunsignedint64ClientUIMiscItemOrderModuleSorterPtr;
@@ -1388,12 +1388,12 @@ struct Component_Text_MacroDecoder;
 struct StdVectorint64;
 struct Client_UI_Misc_PronounModule_PronounModuleVTable;
 struct Client_UI_Misc_PvpSetModule;
-struct Client_UI_Misc_PvpSetModule_AdditionalPvpActions;
 struct Client_UI_Misc_PvpSetModuleVTable;
+struct Client_UI_Misc_PvpSetModule_AdditionalPvpActions;
 struct Client_UI_Misc_RaptureGearsetModule;
+struct Client_UI_Misc_RaptureGearsetModuleVTable;
 struct Client_UI_Misc_RaptureGearsetModule_GearsetEntry;
 struct Client_UI_Misc_RaptureGearsetModule_GearsetItem;
-struct Client_UI_Misc_RaptureGearsetModuleVTable;
 struct Client_UI_Misc_RaptureGearsetModule_RaptureGearsetModuleVTable;
 struct Client_UI_Misc_RaptureHotbarModule_ClearCallback;
 struct Client_UI_Misc_RaptureHotbarModule_ClearCallbackVTable;
@@ -1408,6 +1408,7 @@ struct Client_UI_Misc_RaptureMacroModuleVTable;
 struct Client_UI_Misc_RaptureTeleportHistory;
 struct Client_UI_Misc_RaptureTeleportHistoryVTable;
 struct Client_UI_Misc_RaptureTextModule;
+struct Client_UI_Misc_RaptureTextModuleVTable;
 struct Component_Text_TextModule;
 struct Component_Text_TextModuleVTable;
 struct Component_Text_Localize;
@@ -1419,17 +1420,16 @@ struct StdMapClientSystemStringUtf8StringComponentTextMacroEncoderMacroCodeDescr
 struct StdMap_NodeClientSystemStringUtf8StringComponentTextMacroEncoderMacroCodeDescription;
 struct StdPairClientSystemStringUtf8StringComponentTextMacroEncoderMacroCodeDescription;
 struct Component_Text_MacroEncoder_MacroCodeDescription;
-struct Client_UI_Misc_RaptureTextModuleVTable;
 struct Client_UI_Misc_RaptureUiDataModule;
 struct Client_UI_Misc_RaptureUiDataModuleVTable;
 struct Client_UI_Misc_RecipeFavoriteModule;
+struct Client_UI_Misc_RecipeFavoriteModuleVTable;
 struct Client_UI_Misc_RecipeFavoriteModule_CraftingTypeEntry;
 struct Client_UI_Misc_RecipeFavoriteModule_RecipeEntry;
-struct Client_UI_Misc_RecipeFavoriteModuleVTable;
 struct Client_UI_Misc_RecommendEquipModule;
 struct Client_UI_Misc_RetainerCommentModule;
-struct Client_UI_Misc_RetainerCommentModule_RetainerComment;
 struct Client_UI_Misc_RetainerCommentModuleVTable;
+struct Client_UI_Misc_RetainerCommentModule_RetainerComment;
 struct Client_UI_Misc_RetainerTaskDataModule;
 struct Client_UI_Misc_RetainerTaskDataModuleVTable;
 struct Client_UI_Misc_ScreenLog;
@@ -1444,6 +1444,7 @@ struct Client_UI_RaptureAtkHistory;
 struct Client_UI_RaptureAtkHistoryVTable;
 struct Client_UI_RaptureAtkHistory_RaptureAtkHistoryVTable;
 struct Client_UI_RaptureAtkModule;
+struct Client_UI_RaptureAtkModuleVTable;
 struct Component_GUI_AtkModule;
 struct Component_GUI_AtkModuleVTable;
 struct Component_GUI_ExtendArrayData;
@@ -1452,11 +1453,10 @@ struct StdLinkedListComponentGUIAtkTextureResourcePtr;
 struct StdLinkedList_NodeComponentGUIAtkTextureResourcePtr;
 struct Component_GUI_AtkTextureResource;
 struct Component_GUI_AtkArrayDataHolder;
-struct Client_UI_RaptureAtkModuleVTable;
 struct Client_UI_RaptureAtkUnitManager;
+struct Client_UI_RaptureAtkUnitManagerVTable;
 struct Component_GUI_AtkUnitManager;
 struct Component_GUI_AtkUnitList;
-struct Client_UI_RaptureAtkUnitManagerVTable;
 struct Client_UI_RaptureAtkModule_NamePlateInfo;
 struct Client_UI_RaptureAtkModule_RaptureAtkModuleVTable;
 struct Client_UI_RaptureAtkUnitManager_RaptureAtkUnitManagerVTable;
@@ -1478,19 +1478,19 @@ struct Client_UI_UIModule_UIModuleVTable;
 struct Common_Component_BGCollision_BGCollisionModule;
 struct System_Numerics_Vector4;
 struct Common_Component_BGCollision_Collider;
-struct Common_Component_BGCollision_Node;
+struct Common_Component_BGCollision_ColliderVTable;
 struct Common_Component_BGCollision_Object;
 struct Common_Component_BGCollision_ObjectVTable;
+struct Common_Component_BGCollision_Math_AABB;
+struct System_Numerics_Matrix4x4;
+struct Common_Component_BGCollision_RaycastHit;
+struct Common_Component_BGCollision_RaycastParams;
+struct Common_Component_BGCollision_Node;
 struct Common_Component_BGCollision_NodeVTable;
 struct Common_Component_BGCollision_NodeLink;
 struct Common_Component_BGCollision_NodeLinkVTable;
 struct Common_Component_BGCollision_QuadtreeNode;
 struct Common_Component_BGCollision_QuadtreeNodeVTable;
-struct Common_Component_BGCollision_ColliderVTable;
-struct Common_Component_BGCollision_Math_AABB;
-struct System_Numerics_Matrix4x4;
-struct Common_Component_BGCollision_RaycastHit;
-struct Common_Component_BGCollision_RaycastParams;
 struct Common_Component_BGCollision_Collider_ColliderVTable;
 struct Common_Component_BGCollision_ColliderBox;
 struct Common_Component_BGCollision_ColliderBoxVTable;
@@ -1664,9 +1664,9 @@ struct Component_GUI_SimpleTweenAnimation;
 struct Component_GUI_SimpleTweenValue;
 struct Component_GUI_ULD_AtkUldComponentDataTab;
 struct Component_SteamApi_Callbacks_AuthSessionTicketResponseCallback;
+struct Component_SteamApi_Callbacks_AuthSessionTicketResponseCallbackVTable;
 struct Component_SteamApi_SteamCallbackBase;
 struct Component_SteamApi_SteamCallbackBaseVTable;
-struct Component_SteamApi_Callbacks_AuthSessionTicketResponseCallbackVTable;
 struct Component_SteamApi_SteamTypes_AuthSessionTicketResponse;
 struct Component_SteamApi_Callbacks_AuthSessionTicketResponseCallback_AuthSessionTicketResponseCallbackVTable;
 struct Component_SteamApi_Callbacks_FloatingGamepadTextInputDismissedCallback;
@@ -5095,21 +5095,6 @@ __unaligned struct Client_Game_ActionManager /* Size=0x7F0 */
     /*       */ byte _gap_0x1A0[0x650];
 };
 
-__unaligned struct Client_System_Scheduler_Base_SchedulerState /* Size=0x18 */
-{
-    /* 0x00 */ void** vtbl;
-    /*      */ byte _gap_0x8[0x10];
-};
-
-__unaligned struct Client_System_Scheduler_Base_TimelineController /* Size=0x80 */
-{
-    /* 0x00 */ Client_System_Scheduler_Base_SchedulerState SchedulerState;
-    /*      */ byte _gap_0x18[0x18];
-    /*      */ byte _gap_0x30[0x4];
-    /* 0x34 */ float CurrentTimestamp;
-    /*      */ byte _gap_0x38[0x48];
-};
-
 struct Client_System_Scheduler_Base_SchedulerTimelineVTable
 {
     /*      */ __int64 _vf0;
@@ -5143,11 +5128,26 @@ struct Client_System_Scheduler_Base_SchedulerTimelineVTable
     /* 0xE0 */ __int32 (__fastcall *GetOwningGameObjectIndex)(Client_System_Scheduler_Base_SchedulerTimeline* a1);
 };
 
+__unaligned struct Client_System_Scheduler_Base_SchedulerState /* Size=0x18 */
+{
+    /* 0x00 */ void** vtbl;
+    /*      */ byte _gap_0x8[0x10];
+};
+
+__unaligned struct Client_System_Scheduler_Base_TimelineController /* Size=0x80 */
+{
+    /* 0x00 */ Client_System_Scheduler_Base_SchedulerState SchedulerState;
+    /*      */ byte _gap_0x18[0x18];
+    /*      */ byte _gap_0x30[0x4];
+    /* 0x34 */ float CurrentTimestamp;
+    /*      */ byte _gap_0x38[0x48];
+};
+
 __unaligned struct Client_System_Scheduler_Base_SchedulerTimeline /* Size=0x280 */
 {
     union {
-    /* 0x000 */ Client_System_Scheduler_Base_TimelineController TimelineController;
     /* 0x000 */ Client_System_Scheduler_Base_SchedulerTimelineVTable* VTable;
+    /* 0x000 */ Client_System_Scheduler_Base_TimelineController TimelineController;
     } _union_0x0;
     /*       */ byte _gap_0x80[0x18];
     /* 0x098 */ Client_System_Scheduler_Resource_SchedulerResource* SchedulerResource;
@@ -5305,8 +5305,8 @@ __unaligned struct Common_Math_Matrix4x4 /* Size=0x40 */
 __unaligned struct Client_Graphics_Scene_Camera /* Size=0xF0 */
 {
     union {
-    /* 0x00 */ Client_Graphics_Scene_Object Object;
     /* 0x00 */ Client_Graphics_Scene_CameraVTable* VTable;
+    /* 0x00 */ Client_Graphics_Scene_Object Object;
     } _union_0x0;
     /* 0x80 */ Common_Math_Vector3 LookAtVector;
     /* 0x90 */ Common_Math_Vector3 Vector_1;
@@ -5370,8 +5370,8 @@ struct Client_Graphics_Scene_DrawObjectVTable
 __unaligned struct Client_Graphics_Scene_DrawObject /* Size=0x90 */
 {
     union {
-    /* 0x00 */ Client_Graphics_Scene_Object Object;
     /* 0x00 */ Client_Graphics_Scene_DrawObjectVTable* VTable;
+    /* 0x00 */ Client_Graphics_Scene_Object Object;
     } _union_0x0;
     /*      */ byte _gap_0x80[0x8];
     /* 0x88 */ byte Flags;
@@ -5920,8 +5920,8 @@ __unaligned struct Client_Game_Character_CharacterSetup /* Size=0x18 */
 __unaligned struct Client_Game_Character_Character /* Size=0x1BD0 */
 {
     union {
-    /* 0x0000 */ Client_Game_Object_GameObject GameObject;
     /* 0x0000 */ Client_Game_Character_CharacterVTable* VTable;
+    /* 0x0000 */ Client_Game_Object_GameObject GameObject;
     } _union_0x0;
     /* 0x01A0 */ Client_Game_Character_CharacterData CharacterData;
     /*        */ byte _gap_0x208[0x8];
@@ -6075,8 +6075,8 @@ struct Client_Game_Character_BattleCharaVTable
 __unaligned struct Client_Game_Character_BattleChara /* Size=0x2F80 */
 {
     union {
-    /* 0x0000 */ Client_Game_Character_Character Character;
     /* 0x0000 */ Client_Game_Character_BattleCharaVTable* VTable;
+    /* 0x0000 */ Client_Game_Character_Character Character;
     } _union_0x0;
     /*        */ byte _gap_0x1BD0[0x13B0];
 };
@@ -6277,8 +6277,8 @@ struct Client_Game_Character_CompanionVTable
 __unaligned struct Client_Game_Character_Companion /* Size=0x1C90 */
 {
     union {
-    /* 0x0000 */ Client_Game_Character_Character Character;
     /* 0x0000 */ Client_Game_Character_CompanionVTable* VTable;
+    /* 0x0000 */ Client_Game_Character_Character Character;
     } _union_0x0;
     /*        */ byte _gap_0x1BD0[0xC0];
 };
@@ -6378,8 +6378,8 @@ struct Client_Game_Character_OrnamentVTable
 __unaligned struct Client_Game_Character_Ornament /* Size=0x1BF0 */
 {
     union {
-    /* 0x0000 */ Client_Game_Character_Character Character;
     /* 0x0000 */ Client_Game_Character_OrnamentVTable* VTable;
+    /* 0x0000 */ Client_Game_Character_Character Character;
     } _union_0x0;
     /* 0x1BD0 */ unsigned __int32 OrnamentId;
     /* 0x1BD4 */ byte AttachmentPoint;
@@ -7927,8 +7927,8 @@ struct Client_Game_InstanceContent_ContentDirectorVTable
 __unaligned struct Client_Game_InstanceContent_ContentDirector /* Size=0xC48 */
 {
     union {
-    /* 0x000 */ Client_Game_Event_Director Director;
     /* 0x000 */ Client_Game_InstanceContent_ContentDirectorVTable* VTable;
+    /* 0x000 */ Client_Game_Event_Director Director;
     } _union_0x0;
     /*       */ byte _gap_0x4B8[0x750];
     /* 0xC08 */ float ContentTimeLeft;
@@ -8254,6 +8254,324 @@ __unaligned struct Client_Game_InstanceContent_ContentDirector_ContentDirectorVT
     /* 0x9C8 */ unsigned __int32 (__fastcall *GetContentTimeMax)(Client_Game_InstanceContent_ContentDirector* a1);
 };
 
+struct Client_Game_InstanceContent_InstanceContentDeepDungeonVTable
+{
+    /*       */ __int64 _vf0;
+    /*       */ __int64 _vf1;
+    /*       */ __int64 _vf2;
+    /*       */ __int64 _vf3;
+    /*       */ __int64 _vf4;
+    /*       */ __int64 _vf5;
+    /*       */ __int64 _vf6;
+    /*       */ __int64 _vf7;
+    /*       */ __int64 _vf8;
+    /*       */ __int64 _vf9;
+    /*       */ __int64 _vf10;
+    /*       */ __int64 _vf11;
+    /*       */ __int64 _vf12;
+    /*       */ __int64 _vf13;
+    /*       */ __int64 _vf14;
+    /*       */ __int64 _vf15;
+    /*       */ __int64 _vf16;
+    /*       */ __int64 _vf17;
+    /*       */ __int64 _vf18;
+    /*       */ __int64 _vf19;
+    /*       */ __int64 _vf20;
+    /*       */ __int64 _vf21;
+    /*       */ __int64 _vf22;
+    /*       */ __int64 _vf23;
+    /*       */ __int64 _vf24;
+    /*       */ __int64 _vf25;
+    /*       */ __int64 _vf26;
+    /*       */ __int64 _vf27;
+    /*       */ __int64 _vf28;
+    /*       */ __int64 _vf29;
+    /*       */ __int64 _vf30;
+    /*       */ __int64 _vf31;
+    /*       */ __int64 _vf32;
+    /*       */ __int64 _vf33;
+    /*       */ __int64 _vf34;
+    /*       */ __int64 _vf35;
+    /*       */ __int64 _vf36;
+    /*       */ __int64 _vf37;
+    /*       */ __int64 _vf38;
+    /*       */ __int64 _vf39;
+    /*       */ __int64 _vf40;
+    /*       */ __int64 _vf41;
+    /*       */ __int64 _vf42;
+    /*       */ __int64 _vf43;
+    /*       */ __int64 _vf44;
+    /*       */ __int64 _vf45;
+    /*       */ __int64 _vf46;
+    /*       */ __int64 _vf47;
+    /*       */ __int64 _vf48;
+    /*       */ __int64 _vf49;
+    /*       */ __int64 _vf50;
+    /*       */ __int64 _vf51;
+    /*       */ __int64 _vf52;
+    /*       */ __int64 _vf53;
+    /*       */ __int64 _vf54;
+    /*       */ __int64 _vf55;
+    /*       */ __int64 _vf56;
+    /*       */ __int64 _vf57;
+    /*       */ __int64 _vf58;
+    /*       */ __int64 _vf59;
+    /*       */ __int64 _vf60;
+    /*       */ __int64 _vf61;
+    /*       */ __int64 _vf62;
+    /*       */ __int64 _vf63;
+    /*       */ __int64 _vf64;
+    /*       */ __int64 _vf65;
+    /*       */ __int64 _vf66;
+    /*       */ __int64 _vf67;
+    /*       */ __int64 _vf68;
+    /*       */ __int64 _vf69;
+    /*       */ __int64 _vf70;
+    /*       */ __int64 _vf71;
+    /*       */ __int64 _vf72;
+    /*       */ __int64 _vf73;
+    /*       */ __int64 _vf74;
+    /*       */ __int64 _vf75;
+    /*       */ __int64 _vf76;
+    /*       */ __int64 _vf77;
+    /*       */ __int64 _vf78;
+    /*       */ __int64 _vf79;
+    /*       */ __int64 _vf80;
+    /*       */ __int64 _vf81;
+    /*       */ __int64 _vf82;
+    /*       */ __int64 _vf83;
+    /*       */ __int64 _vf84;
+    /*       */ __int64 _vf85;
+    /*       */ __int64 _vf86;
+    /*       */ __int64 _vf87;
+    /*       */ __int64 _vf88;
+    /*       */ __int64 _vf89;
+    /*       */ __int64 _vf90;
+    /*       */ __int64 _vf91;
+    /*       */ __int64 _vf92;
+    /*       */ __int64 _vf93;
+    /*       */ __int64 _vf94;
+    /*       */ __int64 _vf95;
+    /*       */ __int64 _vf96;
+    /*       */ __int64 _vf97;
+    /*       */ __int64 _vf98;
+    /*       */ __int64 _vf99;
+    /*       */ __int64 _vf100;
+    /*       */ __int64 _vf101;
+    /*       */ __int64 _vf102;
+    /*       */ __int64 _vf103;
+    /*       */ __int64 _vf104;
+    /*       */ __int64 _vf105;
+    /*       */ __int64 _vf106;
+    /*       */ __int64 _vf107;
+    /*       */ __int64 _vf108;
+    /*       */ __int64 _vf109;
+    /*       */ __int64 _vf110;
+    /*       */ __int64 _vf111;
+    /*       */ __int64 _vf112;
+    /*       */ __int64 _vf113;
+    /*       */ __int64 _vf114;
+    /*       */ __int64 _vf115;
+    /*       */ __int64 _vf116;
+    /*       */ __int64 _vf117;
+    /*       */ __int64 _vf118;
+    /*       */ __int64 _vf119;
+    /*       */ __int64 _vf120;
+    /*       */ __int64 _vf121;
+    /*       */ __int64 _vf122;
+    /*       */ __int64 _vf123;
+    /*       */ __int64 _vf124;
+    /*       */ __int64 _vf125;
+    /*       */ __int64 _vf126;
+    /*       */ __int64 _vf127;
+    /*       */ __int64 _vf128;
+    /*       */ __int64 _vf129;
+    /*       */ __int64 _vf130;
+    /*       */ __int64 _vf131;
+    /*       */ __int64 _vf132;
+    /*       */ __int64 _vf133;
+    /*       */ __int64 _vf134;
+    /*       */ __int64 _vf135;
+    /*       */ __int64 _vf136;
+    /*       */ __int64 _vf137;
+    /*       */ __int64 _vf138;
+    /*       */ __int64 _vf139;
+    /*       */ __int64 _vf140;
+    /*       */ __int64 _vf141;
+    /*       */ __int64 _vf142;
+    /*       */ __int64 _vf143;
+    /*       */ __int64 _vf144;
+    /*       */ __int64 _vf145;
+    /*       */ __int64 _vf146;
+    /*       */ __int64 _vf147;
+    /*       */ __int64 _vf148;
+    /*       */ __int64 _vf149;
+    /*       */ __int64 _vf150;
+    /*       */ __int64 _vf151;
+    /*       */ __int64 _vf152;
+    /*       */ __int64 _vf153;
+    /*       */ __int64 _vf154;
+    /*       */ __int64 _vf155;
+    /*       */ __int64 _vf156;
+    /*       */ __int64 _vf157;
+    /*       */ __int64 _vf158;
+    /*       */ __int64 _vf159;
+    /*       */ __int64 _vf160;
+    /*       */ __int64 _vf161;
+    /*       */ __int64 _vf162;
+    /*       */ __int64 _vf163;
+    /*       */ __int64 _vf164;
+    /*       */ __int64 _vf165;
+    /*       */ __int64 _vf166;
+    /*       */ __int64 _vf167;
+    /*       */ __int64 _vf168;
+    /*       */ __int64 _vf169;
+    /*       */ __int64 _vf170;
+    /*       */ __int64 _vf171;
+    /*       */ __int64 _vf172;
+    /*       */ __int64 _vf173;
+    /*       */ __int64 _vf174;
+    /*       */ __int64 _vf175;
+    /*       */ __int64 _vf176;
+    /*       */ __int64 _vf177;
+    /*       */ __int64 _vf178;
+    /*       */ __int64 _vf179;
+    /*       */ __int64 _vf180;
+    /*       */ __int64 _vf181;
+    /*       */ __int64 _vf182;
+    /*       */ __int64 _vf183;
+    /*       */ __int64 _vf184;
+    /*       */ __int64 _vf185;
+    /*       */ __int64 _vf186;
+    /*       */ __int64 _vf187;
+    /*       */ __int64 _vf188;
+    /*       */ __int64 _vf189;
+    /*       */ __int64 _vf190;
+    /*       */ __int64 _vf191;
+    /*       */ __int64 _vf192;
+    /*       */ __int64 _vf193;
+    /*       */ __int64 _vf194;
+    /*       */ __int64 _vf195;
+    /*       */ __int64 _vf196;
+    /*       */ __int64 _vf197;
+    /*       */ __int64 _vf198;
+    /*       */ __int64 _vf199;
+    /*       */ __int64 _vf200;
+    /*       */ __int64 _vf201;
+    /*       */ __int64 _vf202;
+    /*       */ __int64 _vf203;
+    /*       */ __int64 _vf204;
+    /*       */ __int64 _vf205;
+    /*       */ __int64 _vf206;
+    /*       */ __int64 _vf207;
+    /*       */ __int64 _vf208;
+    /*       */ __int64 _vf209;
+    /*       */ __int64 _vf210;
+    /*       */ __int64 _vf211;
+    /*       */ __int64 _vf212;
+    /*       */ __int64 _vf213;
+    /*       */ __int64 _vf214;
+    /*       */ __int64 _vf215;
+    /*       */ __int64 _vf216;
+    /*       */ __int64 _vf217;
+    /*       */ __int64 _vf218;
+    /*       */ __int64 _vf219;
+    /*       */ __int64 _vf220;
+    /*       */ __int64 _vf221;
+    /*       */ __int64 _vf222;
+    /*       */ __int64 _vf223;
+    /*       */ __int64 _vf224;
+    /*       */ __int64 _vf225;
+    /*       */ __int64 _vf226;
+    /*       */ __int64 _vf227;
+    /*       */ __int64 _vf228;
+    /*       */ __int64 _vf229;
+    /*       */ __int64 _vf230;
+    /*       */ __int64 _vf231;
+    /*       */ __int64 _vf232;
+    /*       */ __int64 _vf233;
+    /*       */ __int64 _vf234;
+    /*       */ __int64 _vf235;
+    /*       */ __int64 _vf236;
+    /*       */ __int64 _vf237;
+    /*       */ __int64 _vf238;
+    /*       */ __int64 _vf239;
+    /*       */ __int64 _vf240;
+    /*       */ __int64 _vf241;
+    /*       */ __int64 _vf242;
+    /*       */ __int64 _vf243;
+    /*       */ __int64 _vf244;
+    /*       */ __int64 _vf245;
+    /*       */ __int64 _vf246;
+    /*       */ __int64 _vf247;
+    /*       */ __int64 _vf248;
+    /*       */ __int64 _vf249;
+    /*       */ __int64 _vf250;
+    /*       */ __int64 _vf251;
+    /*       */ __int64 _vf252;
+    /*       */ __int64 _vf253;
+    /*       */ __int64 _vf254;
+    /*       */ __int64 _vf255;
+    /*       */ __int64 _vf256;
+    /*       */ __int64 _vf257;
+    /*       */ __int64 _vf258;
+    /*       */ __int64 _vf259;
+    /*       */ __int64 _vf260;
+    /*       */ __int64 _vf261;
+    /*       */ __int64 _vf262;
+    /*       */ __int64 _vf263;
+    /*       */ __int64 _vf264;
+    /*       */ __int64 _vf265;
+    /*       */ __int64 _vf266;
+    /*       */ __int64 _vf267;
+    /*       */ __int64 _vf268;
+    /*       */ __int64 _vf269;
+    /*       */ __int64 _vf270;
+    /*       */ __int64 _vf271;
+    /*       */ __int64 _vf272;
+    /*       */ __int64 _vf273;
+    /*       */ __int64 _vf274;
+    /*       */ __int64 _vf275;
+    /*       */ __int64 _vf276;
+    /*       */ __int64 _vf277;
+    /*       */ __int64 _vf278;
+    /*       */ __int64 _vf279;
+    /*       */ __int64 _vf280;
+    /*       */ __int64 _vf281;
+    /*       */ __int64 _vf282;
+    /*       */ __int64 _vf283;
+    /*       */ __int64 _vf284;
+    /*       */ __int64 _vf285;
+    /*       */ __int64 _vf286;
+    /*       */ __int64 _vf287;
+    /*       */ __int64 _vf288;
+    /*       */ __int64 _vf289;
+    /*       */ __int64 _vf290;
+    /*       */ __int64 _vf291;
+    /*       */ __int64 _vf292;
+    /*       */ __int64 _vf293;
+    /*       */ __int64 _vf294;
+    /*       */ __int64 _vf295;
+    /*       */ __int64 _vf296;
+    /*       */ __int64 _vf297;
+    /*       */ __int64 _vf298;
+    /*       */ __int64 _vf299;
+    /*       */ __int64 _vf300;
+    /*       */ __int64 _vf301;
+    /*       */ __int64 _vf302;
+    /*       */ __int64 _vf303;
+    /*       */ __int64 _vf304;
+    /*       */ __int64 _vf305;
+    /*       */ __int64 _vf306;
+    /*       */ __int64 _vf307;
+    /*       */ __int64 _vf308;
+    /*       */ __int64 _vf309;
+    /*       */ __int64 _vf310;
+    /*       */ __int64 _vf311;
+    /*       */ __int64 _vf312;
+    /* 0x9C8 */ unsigned __int32 (__fastcall *GetContentTimeMax)(Client_Game_InstanceContent_ContentDirector* a1);
+};
+
 struct Client_Game_InstanceContent_InstanceContentDirectorVTable
 {
     /*       */ __int64 _vf0;
@@ -8575,8 +8893,8 @@ struct Client_Game_InstanceContent_InstanceContentDirectorVTable
 __unaligned struct Client_Game_InstanceContent_InstanceContentDirector /* Size=0x1CB0 */
 {
     union {
-    /* 0x0000 */ Client_Game_InstanceContent_ContentDirector ContentDirector;
     /* 0x0000 */ Client_Game_InstanceContent_InstanceContentDirectorVTable* VTable;
+    /* 0x0000 */ Client_Game_InstanceContent_ContentDirector ContentDirector;
     } _union_0x0;
     /*        */ byte _gap_0xC48[0x80];
     /*        */ byte _gap_0xCC8[0x4];
@@ -8588,324 +8906,6 @@ __unaligned struct Client_Game_InstanceContent_InstanceContentDirector /* Size=0
     /*        */ byte _gap_0xCE5;
     /*        */ byte _gap_0xCE6[0x2];
     /*        */ byte _gap_0xCE8[0xFC8];
-};
-
-struct Client_Game_InstanceContent_InstanceContentDeepDungeonVTable
-{
-    /*       */ __int64 _vf0;
-    /*       */ __int64 _vf1;
-    /*       */ __int64 _vf2;
-    /*       */ __int64 _vf3;
-    /*       */ __int64 _vf4;
-    /*       */ __int64 _vf5;
-    /*       */ __int64 _vf6;
-    /*       */ __int64 _vf7;
-    /*       */ __int64 _vf8;
-    /*       */ __int64 _vf9;
-    /*       */ __int64 _vf10;
-    /*       */ __int64 _vf11;
-    /*       */ __int64 _vf12;
-    /*       */ __int64 _vf13;
-    /*       */ __int64 _vf14;
-    /*       */ __int64 _vf15;
-    /*       */ __int64 _vf16;
-    /*       */ __int64 _vf17;
-    /*       */ __int64 _vf18;
-    /*       */ __int64 _vf19;
-    /*       */ __int64 _vf20;
-    /*       */ __int64 _vf21;
-    /*       */ __int64 _vf22;
-    /*       */ __int64 _vf23;
-    /*       */ __int64 _vf24;
-    /*       */ __int64 _vf25;
-    /*       */ __int64 _vf26;
-    /*       */ __int64 _vf27;
-    /*       */ __int64 _vf28;
-    /*       */ __int64 _vf29;
-    /*       */ __int64 _vf30;
-    /*       */ __int64 _vf31;
-    /*       */ __int64 _vf32;
-    /*       */ __int64 _vf33;
-    /*       */ __int64 _vf34;
-    /*       */ __int64 _vf35;
-    /*       */ __int64 _vf36;
-    /*       */ __int64 _vf37;
-    /*       */ __int64 _vf38;
-    /*       */ __int64 _vf39;
-    /*       */ __int64 _vf40;
-    /*       */ __int64 _vf41;
-    /*       */ __int64 _vf42;
-    /*       */ __int64 _vf43;
-    /*       */ __int64 _vf44;
-    /*       */ __int64 _vf45;
-    /*       */ __int64 _vf46;
-    /*       */ __int64 _vf47;
-    /*       */ __int64 _vf48;
-    /*       */ __int64 _vf49;
-    /*       */ __int64 _vf50;
-    /*       */ __int64 _vf51;
-    /*       */ __int64 _vf52;
-    /*       */ __int64 _vf53;
-    /*       */ __int64 _vf54;
-    /*       */ __int64 _vf55;
-    /*       */ __int64 _vf56;
-    /*       */ __int64 _vf57;
-    /*       */ __int64 _vf58;
-    /*       */ __int64 _vf59;
-    /*       */ __int64 _vf60;
-    /*       */ __int64 _vf61;
-    /*       */ __int64 _vf62;
-    /*       */ __int64 _vf63;
-    /*       */ __int64 _vf64;
-    /*       */ __int64 _vf65;
-    /*       */ __int64 _vf66;
-    /*       */ __int64 _vf67;
-    /*       */ __int64 _vf68;
-    /*       */ __int64 _vf69;
-    /*       */ __int64 _vf70;
-    /*       */ __int64 _vf71;
-    /*       */ __int64 _vf72;
-    /*       */ __int64 _vf73;
-    /*       */ __int64 _vf74;
-    /*       */ __int64 _vf75;
-    /*       */ __int64 _vf76;
-    /*       */ __int64 _vf77;
-    /*       */ __int64 _vf78;
-    /*       */ __int64 _vf79;
-    /*       */ __int64 _vf80;
-    /*       */ __int64 _vf81;
-    /*       */ __int64 _vf82;
-    /*       */ __int64 _vf83;
-    /*       */ __int64 _vf84;
-    /*       */ __int64 _vf85;
-    /*       */ __int64 _vf86;
-    /*       */ __int64 _vf87;
-    /*       */ __int64 _vf88;
-    /*       */ __int64 _vf89;
-    /*       */ __int64 _vf90;
-    /*       */ __int64 _vf91;
-    /*       */ __int64 _vf92;
-    /*       */ __int64 _vf93;
-    /*       */ __int64 _vf94;
-    /*       */ __int64 _vf95;
-    /*       */ __int64 _vf96;
-    /*       */ __int64 _vf97;
-    /*       */ __int64 _vf98;
-    /*       */ __int64 _vf99;
-    /*       */ __int64 _vf100;
-    /*       */ __int64 _vf101;
-    /*       */ __int64 _vf102;
-    /*       */ __int64 _vf103;
-    /*       */ __int64 _vf104;
-    /*       */ __int64 _vf105;
-    /*       */ __int64 _vf106;
-    /*       */ __int64 _vf107;
-    /*       */ __int64 _vf108;
-    /*       */ __int64 _vf109;
-    /*       */ __int64 _vf110;
-    /*       */ __int64 _vf111;
-    /*       */ __int64 _vf112;
-    /*       */ __int64 _vf113;
-    /*       */ __int64 _vf114;
-    /*       */ __int64 _vf115;
-    /*       */ __int64 _vf116;
-    /*       */ __int64 _vf117;
-    /*       */ __int64 _vf118;
-    /*       */ __int64 _vf119;
-    /*       */ __int64 _vf120;
-    /*       */ __int64 _vf121;
-    /*       */ __int64 _vf122;
-    /*       */ __int64 _vf123;
-    /*       */ __int64 _vf124;
-    /*       */ __int64 _vf125;
-    /*       */ __int64 _vf126;
-    /*       */ __int64 _vf127;
-    /*       */ __int64 _vf128;
-    /*       */ __int64 _vf129;
-    /*       */ __int64 _vf130;
-    /*       */ __int64 _vf131;
-    /*       */ __int64 _vf132;
-    /*       */ __int64 _vf133;
-    /*       */ __int64 _vf134;
-    /*       */ __int64 _vf135;
-    /*       */ __int64 _vf136;
-    /*       */ __int64 _vf137;
-    /*       */ __int64 _vf138;
-    /*       */ __int64 _vf139;
-    /*       */ __int64 _vf140;
-    /*       */ __int64 _vf141;
-    /*       */ __int64 _vf142;
-    /*       */ __int64 _vf143;
-    /*       */ __int64 _vf144;
-    /*       */ __int64 _vf145;
-    /*       */ __int64 _vf146;
-    /*       */ __int64 _vf147;
-    /*       */ __int64 _vf148;
-    /*       */ __int64 _vf149;
-    /*       */ __int64 _vf150;
-    /*       */ __int64 _vf151;
-    /*       */ __int64 _vf152;
-    /*       */ __int64 _vf153;
-    /*       */ __int64 _vf154;
-    /*       */ __int64 _vf155;
-    /*       */ __int64 _vf156;
-    /*       */ __int64 _vf157;
-    /*       */ __int64 _vf158;
-    /*       */ __int64 _vf159;
-    /*       */ __int64 _vf160;
-    /*       */ __int64 _vf161;
-    /*       */ __int64 _vf162;
-    /*       */ __int64 _vf163;
-    /*       */ __int64 _vf164;
-    /*       */ __int64 _vf165;
-    /*       */ __int64 _vf166;
-    /*       */ __int64 _vf167;
-    /*       */ __int64 _vf168;
-    /*       */ __int64 _vf169;
-    /*       */ __int64 _vf170;
-    /*       */ __int64 _vf171;
-    /*       */ __int64 _vf172;
-    /*       */ __int64 _vf173;
-    /*       */ __int64 _vf174;
-    /*       */ __int64 _vf175;
-    /*       */ __int64 _vf176;
-    /*       */ __int64 _vf177;
-    /*       */ __int64 _vf178;
-    /*       */ __int64 _vf179;
-    /*       */ __int64 _vf180;
-    /*       */ __int64 _vf181;
-    /*       */ __int64 _vf182;
-    /*       */ __int64 _vf183;
-    /*       */ __int64 _vf184;
-    /*       */ __int64 _vf185;
-    /*       */ __int64 _vf186;
-    /*       */ __int64 _vf187;
-    /*       */ __int64 _vf188;
-    /*       */ __int64 _vf189;
-    /*       */ __int64 _vf190;
-    /*       */ __int64 _vf191;
-    /*       */ __int64 _vf192;
-    /*       */ __int64 _vf193;
-    /*       */ __int64 _vf194;
-    /*       */ __int64 _vf195;
-    /*       */ __int64 _vf196;
-    /*       */ __int64 _vf197;
-    /*       */ __int64 _vf198;
-    /*       */ __int64 _vf199;
-    /*       */ __int64 _vf200;
-    /*       */ __int64 _vf201;
-    /*       */ __int64 _vf202;
-    /*       */ __int64 _vf203;
-    /*       */ __int64 _vf204;
-    /*       */ __int64 _vf205;
-    /*       */ __int64 _vf206;
-    /*       */ __int64 _vf207;
-    /*       */ __int64 _vf208;
-    /*       */ __int64 _vf209;
-    /*       */ __int64 _vf210;
-    /*       */ __int64 _vf211;
-    /*       */ __int64 _vf212;
-    /*       */ __int64 _vf213;
-    /*       */ __int64 _vf214;
-    /*       */ __int64 _vf215;
-    /*       */ __int64 _vf216;
-    /*       */ __int64 _vf217;
-    /*       */ __int64 _vf218;
-    /*       */ __int64 _vf219;
-    /*       */ __int64 _vf220;
-    /*       */ __int64 _vf221;
-    /*       */ __int64 _vf222;
-    /*       */ __int64 _vf223;
-    /*       */ __int64 _vf224;
-    /*       */ __int64 _vf225;
-    /*       */ __int64 _vf226;
-    /*       */ __int64 _vf227;
-    /*       */ __int64 _vf228;
-    /*       */ __int64 _vf229;
-    /*       */ __int64 _vf230;
-    /*       */ __int64 _vf231;
-    /*       */ __int64 _vf232;
-    /*       */ __int64 _vf233;
-    /*       */ __int64 _vf234;
-    /*       */ __int64 _vf235;
-    /*       */ __int64 _vf236;
-    /*       */ __int64 _vf237;
-    /*       */ __int64 _vf238;
-    /*       */ __int64 _vf239;
-    /*       */ __int64 _vf240;
-    /*       */ __int64 _vf241;
-    /*       */ __int64 _vf242;
-    /*       */ __int64 _vf243;
-    /*       */ __int64 _vf244;
-    /*       */ __int64 _vf245;
-    /*       */ __int64 _vf246;
-    /*       */ __int64 _vf247;
-    /*       */ __int64 _vf248;
-    /*       */ __int64 _vf249;
-    /*       */ __int64 _vf250;
-    /*       */ __int64 _vf251;
-    /*       */ __int64 _vf252;
-    /*       */ __int64 _vf253;
-    /*       */ __int64 _vf254;
-    /*       */ __int64 _vf255;
-    /*       */ __int64 _vf256;
-    /*       */ __int64 _vf257;
-    /*       */ __int64 _vf258;
-    /*       */ __int64 _vf259;
-    /*       */ __int64 _vf260;
-    /*       */ __int64 _vf261;
-    /*       */ __int64 _vf262;
-    /*       */ __int64 _vf263;
-    /*       */ __int64 _vf264;
-    /*       */ __int64 _vf265;
-    /*       */ __int64 _vf266;
-    /*       */ __int64 _vf267;
-    /*       */ __int64 _vf268;
-    /*       */ __int64 _vf269;
-    /*       */ __int64 _vf270;
-    /*       */ __int64 _vf271;
-    /*       */ __int64 _vf272;
-    /*       */ __int64 _vf273;
-    /*       */ __int64 _vf274;
-    /*       */ __int64 _vf275;
-    /*       */ __int64 _vf276;
-    /*       */ __int64 _vf277;
-    /*       */ __int64 _vf278;
-    /*       */ __int64 _vf279;
-    /*       */ __int64 _vf280;
-    /*       */ __int64 _vf281;
-    /*       */ __int64 _vf282;
-    /*       */ __int64 _vf283;
-    /*       */ __int64 _vf284;
-    /*       */ __int64 _vf285;
-    /*       */ __int64 _vf286;
-    /*       */ __int64 _vf287;
-    /*       */ __int64 _vf288;
-    /*       */ __int64 _vf289;
-    /*       */ __int64 _vf290;
-    /*       */ __int64 _vf291;
-    /*       */ __int64 _vf292;
-    /*       */ __int64 _vf293;
-    /*       */ __int64 _vf294;
-    /*       */ __int64 _vf295;
-    /*       */ __int64 _vf296;
-    /*       */ __int64 _vf297;
-    /*       */ __int64 _vf298;
-    /*       */ __int64 _vf299;
-    /*       */ __int64 _vf300;
-    /*       */ __int64 _vf301;
-    /*       */ __int64 _vf302;
-    /*       */ __int64 _vf303;
-    /*       */ __int64 _vf304;
-    /*       */ __int64 _vf305;
-    /*       */ __int64 _vf306;
-    /*       */ __int64 _vf307;
-    /*       */ __int64 _vf308;
-    /*       */ __int64 _vf309;
-    /*       */ __int64 _vf310;
-    /*       */ __int64 _vf311;
-    /*       */ __int64 _vf312;
-    /* 0x9C8 */ unsigned __int32 (__fastcall *GetContentTimeMax)(Client_Game_InstanceContent_ContentDirector* a1);
 };
 
 __unaligned struct Client_Game_InstanceContent_InstanceContentDeepDungeon_DeepDungeonPartyInfo /* Size=0x8 */
@@ -8932,8 +8932,8 @@ __unaligned struct Client_Game_InstanceContent_InstanceContentDeepDungeon_DeepDu
 __unaligned struct Client_Game_InstanceContent_InstanceContentDeepDungeon /* Size=0x27D8 */
 {
     union {
-    /* 0x0000 */ Client_Game_InstanceContent_InstanceContentDirector InstanceContentDirector;
     /* 0x0000 */ Client_Game_InstanceContent_InstanceContentDeepDungeonVTable* VTable;
+    /* 0x0000 */ Client_Game_InstanceContent_InstanceContentDirector InstanceContentDirector;
     } _union_0x0;
     /*        */ byte _gap_0x1CB0[0x98];
     /* 0x1D48 */ Client_Game_InstanceContent_InstanceContentDeepDungeon_DeepDungeonPartyInfo Party[0x4];
@@ -9305,8 +9305,8 @@ __unaligned struct Client_Game_InstanceContent_InstanceContentOceanFishing_AllRe
 __unaligned struct Client_Game_InstanceContent_InstanceContentOceanFishing /* Size=0x2300 */
 {
     union {
-    /* 0x0000 */ Client_Game_InstanceContent_InstanceContentDirector InstanceContentDirector;
     /* 0x0000 */ Client_Game_InstanceContent_InstanceContentOceanFishingVTable* VTable;
+    /* 0x0000 */ Client_Game_InstanceContent_InstanceContentDirector InstanceContentDirector;
     } _union_0x0;
     /*        */ byte _gap_0x1CB0[0x20];
     /* 0x1CD0 */ unsigned __int32 CurrentRoute;
@@ -9663,8 +9663,8 @@ struct Client_Game_InstanceContent_PublicContentDirectorVTable
 __unaligned struct Client_Game_InstanceContent_PublicContentDirector /* Size=0x1090 */
 {
     union {
-    /* 0x0000 */ Client_Game_InstanceContent_ContentDirector ContentDirector;
     /* 0x0000 */ Client_Game_InstanceContent_PublicContentDirectorVTable* VTable;
+    /* 0x0000 */ Client_Game_InstanceContent_ContentDirector ContentDirector;
     } _union_0x0;
     /* 0x0C48 */ unsigned __int32 NameOffset;
     /* 0x0C4C */ unsigned __int32 MapIcon;
@@ -10721,12 +10721,12 @@ __unaligned struct Client_UI_Misc_DutyActionSlot /* Size=0xE8 */
 __unaligned struct Client_UI_Misc_RaptureHotbarModule /* Size=0x288F8 */
 {
     union {
+    /* 0x00000 */ Client_UI_Misc_RaptureHotbarModuleVTable* VTable;
     struct {
     /* 0x00000 */ Client_UI_Misc_UserFileManager_UserFileEvent UserFileEvent;
     /* 0x00040 */ void** InputCodeModifiedInterfaceVTable;
     /* 0x00048 */ Client_UI_UIModule* UiModule;
     } _union_struct_0x0;
-    /* 0x00000 */ Client_UI_Misc_RaptureHotbarModuleVTable* VTable;
     } _union_0x0;
     /* 0x00050 */ bool ModuleReady;
     /* 0x00051 */ byte ActiveHotbarClassJobId;
@@ -10771,8 +10771,8 @@ struct Client_Game_UI_HotbarVTable
 __unaligned struct Client_Game_UI_Hotbar /* Size=0x8 */
 {
     union {
-    /* 0x0 */ Client_UI_Misc_RaptureHotbarModule_ClearCallback* ClearCallback;
     /* 0x0 */ Client_Game_UI_HotbarVTable* VTable;
+    /* 0x0 */ Client_UI_Misc_RaptureHotbarModule_ClearCallback* ClearCallback;
     } _union_0x0;
 };
 
@@ -11378,8 +11378,8 @@ __unaligned struct Client_Game_UI_WeaponState /* Size=0x18 */
 __unaligned struct Client_Game_UI_UIState /* Size=0x17D10 */
 {
     union {
-    /* 0x00000 */ Client_Game_UI_Hotbar Hotbar;
     /* 0x00000 */ Client_Game_UI_UIStateVTable* VTable;
+    /* 0x00000 */ Client_Game_UI_Hotbar Hotbar;
     } _union_0x0;
     /* 0x00008 */ Client_Game_UI_Hate Hate;
     /* 0x00110 */ Client_Game_UI_Hater Hater;
@@ -11752,8 +11752,8 @@ struct Client_Graphics_Kernel_TextureVTable
 __unaligned struct Client_Graphics_Kernel_Texture /* Size=0xC0 */
 {
     union {
-    /* 0x00 */ void* vtbl;
     /* 0x00 */ Client_Graphics_Kernel_TextureVTable* VTable;
+    /* 0x00 */ void* vtbl;
     } _union_0x0;
     /*      */ byte _gap_0x8[0x18];
     /* 0x20 */ Client_Graphics_Kernel_Notifier Notifier;
@@ -12132,13 +12132,13 @@ struct Client_Graphics_Scene_CharacterBaseVTable
 __unaligned struct Client_Graphics_Scene_CharacterBase /* Size=0x8F0 */
 {
     union {
+    /* 0x000 */ Client_Graphics_Scene_CharacterBaseVTable* VTable;
     struct {
     /* 0x000 */ Client_Graphics_Scene_DrawObject DrawObject;
     /* 0x090 */ byte UnkFlags_01;
     /* 0x091 */ byte UnkFlags_02;
     /* 0x092 */ byte UnkFlags_03;
     } _union_struct_0x0;
-    /* 0x000 */ Client_Graphics_Scene_CharacterBaseVTable* VTable;
     } _union_0x0;
     /* 0x098 */ __int32 SlotCount;
     /*       */ byte _gap_0x9C[0x4];
@@ -12479,8 +12479,8 @@ struct Client_Graphics_Scene_DemihumanVTable
 __unaligned struct Client_Graphics_Scene_Demihuman /* Size=0x978 */
 {
     union {
-    /* 0x000 */ Client_Graphics_Scene_CharacterBase CharacterBase;
     /* 0x000 */ Client_Graphics_Scene_DemihumanVTable* VTable;
+    /* 0x000 */ Client_Graphics_Scene_CharacterBase CharacterBase;
     } _union_0x0;
     /*       */ byte _gap_0x8F0[0x38];
     union {
@@ -12508,8 +12508,8 @@ struct Client_Graphics_Scene_EnvLocationVTable
 __unaligned struct Client_Graphics_Scene_EnvLocation /* Size=0xC0 */
 {
     union {
-    /* 0x00 */ Client_Graphics_Scene_DrawObject DrawObject;
     /* 0x00 */ Client_Graphics_Scene_EnvLocationVTable* VTable;
+    /* 0x00 */ Client_Graphics_Scene_DrawObject DrawObject;
     } _union_0x0;
     /*      */ byte _gap_0x90[0x30];
 };
@@ -12524,8 +12524,8 @@ struct Client_Graphics_Scene_EnvSpaceVTable
 __unaligned struct Client_Graphics_Scene_EnvSpace /* Size=0xD0 */
 {
     union {
-    /* 0x00 */ Client_Graphics_Scene_DrawObject DrawObject;
     /* 0x00 */ Client_Graphics_Scene_EnvSpaceVTable* VTable;
+    /* 0x00 */ Client_Graphics_Scene_DrawObject DrawObject;
     } _union_0x0;
     /*      */ byte _gap_0x90[0x20];
     /* 0xB0 */ Client_Graphics_Scene_EnvLocation* EnvLocation;
@@ -12648,8 +12648,8 @@ struct Client_Graphics_Scene_HumanVTable
 __unaligned struct Client_Graphics_Scene_Human /* Size=0xA80 */
 {
     union {
-    /* 0x000 */ Client_Graphics_Scene_CharacterBase CharacterBase;
     /* 0x000 */ Client_Graphics_Scene_HumanVTable* VTable;
+    /* 0x000 */ Client_Graphics_Scene_CharacterBase CharacterBase;
     } _union_0x0;
     /* 0x8F0 */ Client_Game_Character_CustomizeData Customize;
     /*       */ byte _gap_0x90A[0x2];
@@ -12803,8 +12803,8 @@ struct Client_Graphics_Scene_MonsterVTable
 __unaligned struct Client_Graphics_Scene_Monster /* Size=0x920 */
 {
     union {
-    /* 0x000 */ Client_Graphics_Scene_CharacterBase CharacterBase;
     /* 0x000 */ Client_Graphics_Scene_MonsterVTable* VTable;
+    /* 0x000 */ Client_Graphics_Scene_CharacterBase CharacterBase;
     } _union_0x0;
     /* 0x8F0 */ unsigned __int16 ModelSetId;
     /* 0x8F2 */ unsigned __int16 SecondaryId;
@@ -12941,8 +12941,8 @@ struct Client_Graphics_Scene_WeaponVTable
 __unaligned struct Client_Graphics_Scene_Weapon /* Size=0x920 */
 {
     union {
-    /* 0x000 */ Client_Graphics_Scene_CharacterBase CharacterBase;
     /* 0x000 */ Client_Graphics_Scene_WeaponVTable* VTable;
+    /* 0x000 */ Client_Graphics_Scene_CharacterBase CharacterBase;
     } _union_0x0;
     /* 0x8F0 */ unsigned __int16 ModelSetId;
     /* 0x8F2 */ unsigned __int16 SecondaryId;
@@ -12971,8 +12971,8 @@ struct Client_Graphics_Scene_WorldVTable
 __unaligned struct Client_Graphics_Scene_World /* Size=0x160 */
 {
     union {
-    /* 0x000 */ Client_Graphics_Scene_Object Object;
     /* 0x000 */ Client_Graphics_Scene_WorldVTable* VTable;
+    /* 0x000 */ Client_Graphics_Scene_Object Object;
     } _union_0x0;
     /*       */ byte _gap_0x80[0xE0];
 };
@@ -13290,8 +13290,8 @@ struct Client_System_Framework_TaskVTable
 __unaligned struct Client_System_Framework_Task /* Size=0x38 */
 {
     union {
-    /* 0x00 */ void* vtbl;
     /* 0x00 */ Client_System_Framework_TaskVTable* VTable;
+    /* 0x00 */ void* vtbl;
     } _union_0x0;
     /* 0x08 */ void* Runner;
     /* 0x10 */ Client_System_Framework_Framework* Framework;
@@ -13317,8 +13317,8 @@ __unaligned struct Common_Configuration_ChangeEventInterface /* Size=0x18 */
 __unaligned struct Client_System_Framework_EnvironmentManager /* Size=0x698 */
 {
     union {
-    /* 0x000 */ Client_System_Framework_Task Task;
     /* 0x000 */ Client_System_Framework_EnvironmentManagerVTable* VTable;
+    /* 0x000 */ Client_System_Framework_Task Task;
     } _union_0x0;
     /* 0x038 */ Common_Configuration_ChangeEventInterface ChangeEventInterface;
     /*       */ byte _gap_0x50[0x648];
@@ -13482,8 +13482,8 @@ struct Client_System_Framework_RootTaskVTable
 __unaligned struct Client_System_Framework_RootTask /* Size=0x78 */
 {
     union {
-    /* 0x00 */ Client_System_Framework_Task Task;
     /* 0x00 */ Client_System_Framework_RootTaskVTable* VTable;
+    /* 0x00 */ Client_System_Framework_Task Task;
     } _union_0x0;
     /* 0x38 */ Client_System_Framework_Task UnkTask;
     /*      */ byte _gap_0x70[0x8];
@@ -13611,8 +13611,8 @@ struct Client_System_Input_SoftKeyboards_SteamGamepadSoftKeyboardVTable
 __unaligned struct Client_System_Input_SoftKeyboards_SteamGamepadSoftKeyboard /* Size=0x18 */
 {
     union {
-    /* 0x00 */ Client_System_Input_SoftKeyboardDeviceInterface SoftKeyboardDeviceInterface;
     /* 0x00 */ Client_System_Input_SoftKeyboards_SteamGamepadSoftKeyboardVTable* VTable;
+    /* 0x00 */ Client_System_Input_SoftKeyboardDeviceInterface SoftKeyboardDeviceInterface;
     } _union_0x0;
     /* 0x08 */ byte Enabled;
     /*      */ byte _gap_0x9;
@@ -13683,8 +13683,8 @@ struct Client_System_Resource_Handle_MaterialResourceHandleVTable
 __unaligned struct Client_System_Resource_Handle_MaterialResourceHandle /* Size=0x108 */
 {
     union {
-    /* 0x000 */ Client_System_Resource_Handle_ResourceHandle ResourceHandle;
     /* 0x000 */ Client_System_Resource_Handle_MaterialResourceHandleVTable* VTable;
+    /* 0x000 */ Client_System_Resource_Handle_ResourceHandle ResourceHandle;
     } _union_0x0;
     /*       */ byte _gap_0xB0[0x8];
     /* 0x0B8 */ unsigned __int64 Length;
@@ -13814,8 +13814,8 @@ __unaligned struct StdMapBytePtrint16 /* Size=0x10 */
 __unaligned struct Client_System_Resource_Handle_ModelResourceHandle /* Size=0x260 */
 {
     union {
-    /* 0x000 */ Client_System_Resource_Handle_ResourceHandle ResourceHandle;
     /* 0x000 */ Client_System_Resource_Handle_ModelResourceHandleVTable* VTable;
+    /* 0x000 */ Client_System_Resource_Handle_ResourceHandle ResourceHandle;
     } _union_0x0;
     /*       */ byte _gap_0xB0[0x158];
     /* 0x208 */ StdMapBytePtrint16 Attributes;
@@ -13903,8 +13903,8 @@ struct Client_System_Resource_Handle_ShaderPackageResourceHandleVTable
 __unaligned struct Client_System_Resource_Handle_ShaderPackageResourceHandle /* Size=0x0 */
 {
     union {
-    /* 0x0 */ Client_System_Resource_Handle_ResourceHandle ResourceHandle;
     /* 0x0 */ Client_System_Resource_Handle_ShaderPackageResourceHandleVTable* VTable;
+    /* 0x0 */ Client_System_Resource_Handle_ResourceHandle ResourceHandle;
     } _union_0x0;
     /* 0xB0 */ Client_Graphics_Kernel_ShaderPackage* ShaderPackage;
 };
@@ -13963,8 +13963,8 @@ __unaligned struct Client_System_Resource_Handle_SkeletonResourceHandle_Skeleton
 __unaligned struct Client_System_Resource_Handle_SkeletonResourceHandle /* Size=0x0 */
 {
     union {
-    /* 0x0 */ Client_System_Resource_Handle_ResourceHandle ResourceHandle;
     /* 0x0 */ Client_System_Resource_Handle_SkeletonResourceHandleVTable* VTable;
+    /* 0x0 */ Client_System_Resource_Handle_ResourceHandle ResourceHandle;
     } _union_0x0;
     /*     */ byte _gap_0xB0[0x18];
     /* 0xC8 */ unsigned __int32 BoneCount;
@@ -14016,8 +14016,8 @@ struct Client_System_Resource_Handle_TextureResourceHandleVTable
 __unaligned struct Client_System_Resource_Handle_TextureResourceHandle /* Size=0x140 */
 {
     union {
-    /* 0x000 */ Client_System_Resource_Handle_ResourceHandle ResourceHandle;
     /* 0x000 */ Client_System_Resource_Handle_TextureResourceHandleVTable* VTable;
+    /* 0x000 */ Client_System_Resource_Handle_ResourceHandle ResourceHandle;
     } _union_0x0;
     /*       */ byte _gap_0xB0[0x68];
     /* 0x118 */ Client_Graphics_Kernel_Texture* Texture;
@@ -14221,14 +14221,6 @@ __unaligned struct Client_UI_ActionInfo /* Size=0x38 */
     /*      */ byte _gap_0x28[0x10];
 };
 
-__unaligned struct Component_GUI_AtkEventListener /* Size=0x8 */
-{
-    union {
-    /* 0x0 */ void* vtbl;
-    /* 0x0 */ void** vfunc;
-    } _union_0x0;
-};
-
 __unaligned struct Component_GUI_AtkEvent /* Size=0x30 */
 {
     /* 0x00 */ Component_GUI_AtkResNode* Node;
@@ -14244,19 +14236,19 @@ __unaligned struct Component_GUI_AtkEvent /* Size=0x30 */
     /* 0x30 */ byte Flags;
 };
 
+struct Component_GUI_AtkResNodeVTable
+{
+    /*      */ __int64 _vf0;
+    /* 0x08 */ void (__fastcall *Destroy)(Component_GUI_AtkResNode* a1, bool a2);
+    /* 0x10 */ void (__fastcall *UpdateFromTimeline)(Component_GUI_AtkResNode* a1);
+};
+
 __unaligned struct Component_GUI_AtkEventTarget /* Size=0x8 */
 {
     union {
     /* 0x0 */ void* vtbl;
     /* 0x0 */ void** vfunc;
     } _union_0x0;
-};
-
-struct Component_GUI_AtkResNodeVTable
-{
-    /*      */ __int64 _vf0;
-    /* 0x08 */ void (__fastcall *Destroy)(Component_GUI_AtkResNode* a1, bool a2);
-    /* 0x10 */ void (__fastcall *UpdateFromTimeline)(Component_GUI_AtkResNode* a1);
 };
 
 __unaligned struct Component_GUI_AtkEventManager /* Size=0x8 */
@@ -14275,8 +14267,8 @@ __unaligned struct Common_Math_Matrix2x2 /* Size=0x10 */
 __unaligned struct Component_GUI_AtkResNode /* Size=0xB0 */
 {
     union {
-    /* 0x00 */ Component_GUI_AtkEventTarget AtkEventTarget;
     /* 0x00 */ Component_GUI_AtkResNodeVTable* VTable;
+    /* 0x00 */ Component_GUI_AtkEventTarget AtkEventTarget;
     } _union_0x0;
     /* 0x08 */ unsigned __int32 NodeID;
     /*      */ byte _gap_0xC[0x4];
@@ -14334,8 +14326,8 @@ struct Component_GUI_AtkCollisionNodeVTable
 __unaligned struct Component_GUI_AtkCollisionNode /* Size=0xC0 */
 {
     union {
-    /* 0x00 */ Component_GUI_AtkResNode AtkResNode;
     /* 0x00 */ Component_GUI_AtkCollisionNodeVTable* VTable;
+    /* 0x00 */ Component_GUI_AtkResNode AtkResNode;
     } _union_0x0;
     /* 0xB0 */ unsigned __int16 CollisionType;
     /* 0xB2 */ unsigned __int16 Uses;
@@ -14471,6 +14463,14 @@ struct Component_GUI_AtkUnitBaseVTable
     /* 0x1F0 */ void (__fastcall *OnMouseOut)(Component_GUI_AtkUnitBase* a1);
 };
 
+__unaligned struct Component_GUI_AtkEventListener /* Size=0x8 */
+{
+    union {
+    /* 0x0 */ void* vtbl;
+    /* 0x0 */ void** vfunc;
+    } _union_0x0;
+};
+
 __unaligned struct Component_GUI_AtkUldManager_DuplicateObjectList /* Size=0x10 */
 {
     /* 0x00 */ Component_GUI_AtkComponentNode* NodeList;
@@ -14558,8 +14558,8 @@ __unaligned struct Component_GUI_AtkSimpleTween /* Size=0x50 */
 __unaligned struct Component_GUI_AtkUnitBase /* Size=0x220 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkEventListener AtkEventListener;
     /* 0x000 */ Component_GUI_AtkUnitBaseVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkEventListener AtkEventListener;
     } _union_0x0;
     /* 0x008 */ byte Name[0x20];
     /* 0x028 */ Component_GUI_AtkUldManager UldManager;
@@ -14710,8 +14710,8 @@ __unaligned struct StdVectorClientUIActionBarSlot /* Size=0x18 */
 __unaligned struct Client_UI_AddonActionBarBase /* Size=0x248 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonActionBarBaseVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /* 0x220 */ StdVectorClientUIActionBarSlot ActionBarSlotVector;
     /* 0x238 */ __int16 CurrentPulsingSlots;
@@ -14727,6 +14727,89 @@ __unaligned struct Client_UI_AddonActionBarBase /* Size=0x248 */
     /*       */ byte _gap_0x244;
     /* 0x245 */ bool DisplayPetBar;
     /*       */ byte _gap_0x246[0x2];
+};
+
+struct Client_UI_AddonActionBarVTable
+{
+    /*       */ __int64 _vf0;
+    /*       */ __int64 _vf1;
+    /* 0x010 */ void (__fastcall *ReceiveEvent)(Component_GUI_AtkUnitBase* a1, Component_GUI_AtkEventType a2, __int32 a3, Component_GUI_AtkEvent* a4, __int64 a5);
+    /* 0x018 */ bool (__fastcall *Open)(Component_GUI_AtkUnitBase* a1, unsigned __int32 a2);
+    /* 0x020 */ bool (__fastcall *Close)(Component_GUI_AtkUnitBase* a1, bool a2);
+    /* 0x028 */ void (__fastcall *Show)(Component_GUI_AtkUnitBase* a1, bool a2, unsigned __int32 a3);
+    /* 0x030 */ void (__fastcall *Hide)(Component_GUI_AtkUnitBase* a1, bool a2, bool a3, unsigned __int32 a4);
+    /* 0x038 */ void (__fastcall *SetPosition)(Component_GUI_AtkUnitBase* a1, __int16 a2, __int16 a3);
+    /* 0x040 */ void (__fastcall *SetX)(Component_GUI_AtkUnitBase* a1, __int16 a2);
+    /* 0x048 */ void (__fastcall *SetY)(Component_GUI_AtkUnitBase* a1, __int16 a2);
+    /* 0x050 */ __int16 (__fastcall *GetX)(Component_GUI_AtkUnitBase* a1);
+    /* 0x058 */ __int16 (__fastcall *GetY)(Component_GUI_AtkUnitBase* a1);
+    /* 0x060 */ void (__fastcall *GetPosition)(Component_GUI_AtkUnitBase* a1, __int16* a2, __int16* a3);
+    /* 0x068 */ void (__fastcall *SetAlpha)(Component_GUI_AtkUnitBase* a1, byte a2);
+    /* 0x070 */ void (__fastcall *SetScale)(Component_GUI_AtkUnitBase* a1, float a2, bool a3);
+    /* 0x078 */ void (__fastcall *GetSize)(Component_GUI_AtkUnitBase* a1, __int16* a2, __int16* a3, bool a4);
+    /* 0x080 */ void (__fastcall *Hide2)(Component_GUI_AtkUnitBase* a1);
+    /* 0x088 */ signed __int8 (__fastcall *SetScaleToHudLayoutScale)(Component_GUI_AtkUnitBase* a1);
+    /* 0x090 */ bool (__fastcall *ShouldCollideWithWindow)(Component_GUI_AtkUnitBase* a1, Component_GUI_AtkCollisionNode* a2);
+    /*       */ __int64 _vf19;
+    /*       */ __int64 _vf20;
+    /*       */ __int64 _vf21;
+    /* 0x0B0 */ bool (__fastcall *ShouldIgnoreInputs)(Component_GUI_AtkUnitBase* a1);
+    /* 0x0B8 */ Component_GUI_AtkResNode* (__fastcall *GetRootNode)(Component_GUI_AtkUnitBase* a1);
+    /*       */ __int64 _vf24;
+    /*       */ __int64 _vf25;
+    /* 0x0D0 */ void (__fastcall *GetWindowBounds)(Component_GUI_AtkUnitBase* a1, Common_Math_Bounds* a2);
+    /*       */ __int64 _vf27;
+    /*       */ __int64 _vf28;
+    /* 0x0E8 */ void (__fastcall *GetRootBounds)(Component_GUI_AtkUnitBase* a1, Common_Math_Bounds* a2);
+    /*       */ __int64 _vf30;
+    /*       */ __int64 _vf31;
+    /*       */ __int64 _vf32;
+    /*       */ __int64 _vf33;
+    /*       */ __int64 _vf34;
+    /*       */ __int64 _vf35;
+    /* 0x120 */ void (__fastcall *Focus)(Component_GUI_AtkUnitBase* a1);
+    /*       */ __int64 _vf37;
+    /*       */ __int64 _vf38;
+    /*       */ __int64 _vf39;
+    /* 0x140 */ void (__fastcall *Initialize)(Component_GUI_AtkUnitBase* a1);
+    /* 0x148 */ void (__fastcall *Finalizer)(Component_GUI_AtkUnitBase* a1);
+    /* 0x150 */ void (__fastcall *Update)(Component_GUI_AtkUnitBase* a1, float a2);
+    /* 0x158 */ void (__fastcall *Draw)(Component_GUI_AtkUnitBase* a1);
+    /*       */ __int64 _vf44;
+    /*       */ __int64 _vf45;
+    /* 0x170 */ bool (__fastcall *CheckWindowCollisionAtCoords)(Component_GUI_AtkUnitBase* a1, __int16 a2, __int16 a3);
+    /*       */ __int64 _vf47;
+    /* 0x180 */ void (__fastcall *OnSetup)(Component_GUI_AtkUnitBase* a1, unsigned __int32 a2, Component_GUI_AtkValue* a3);
+    /*       */ __int64 _vf49;
+    /* 0x190 */ void (__fastcall *OnRefresh)(Component_GUI_AtkUnitBase* a1, unsigned __int32 a2, Component_GUI_AtkValue* a3);
+    /* 0x198 */ void (__fastcall *OnUpdate)(Component_GUI_AtkUnitBase* a1, Component_GUI_NumberArrayData** a2, Component_GUI_StringArrayData** a3);
+    /*       */ __int64 _vf52;
+    /* 0x1A8 */ void (__fastcall *FireCloseCallback)(Component_GUI_AtkUnitBase* a1);
+    /*       */ __int64 _vf54;
+    /*       */ __int64 _vf55;
+    /*       */ __int64 _vf56;
+    /*       */ __int64 _vf57;
+    /*       */ __int64 _vf58;
+    /*       */ __int64 _vf59;
+    /*       */ __int64 _vf60;
+    /* 0x1E8 */ void (__fastcall *OnMouseOver)(Component_GUI_AtkUnitBase* a1);
+    /* 0x1F0 */ void (__fastcall *OnMouseOut)(Component_GUI_AtkUnitBase* a1);
+    /*       */ __int64 _vf63;
+    /*       */ __int64 _vf64;
+    /*       */ __int64 _vf65;
+    /*       */ __int64 _vf66;
+    /*       */ __int64 _vf67;
+    /*       */ __int64 _vf68;
+    /*       */ __int64 _vf69;
+    /*       */ __int64 _vf70;
+    /*       */ __int64 _vf71;
+    /*       */ __int64 _vf72;
+    /*       */ __int64 _vf73;
+    /*       */ __int64 _vf74;
+    /*       */ __int64 _vf75;
+    /*       */ __int64 _vf76;
+    /*       */ __int64 _vf77;
+    /* 0x270 */ void (__fastcall *PulseActionBarSlot)(Client_UI_AddonActionBarBase* a1, __int32 a2);
 };
 
 struct Client_UI_AddonActionBarXVTable
@@ -14821,8 +14904,8 @@ __unaligned struct Client_UI_AddonActionBarX_Dimensions /* Size=0x4 */
 __unaligned struct Client_UI_AddonActionBarX /* Size=0x298 */
 {
     union {
-    /* 0x000 */ Client_UI_AddonActionBarBase AddonActionBarBase;
     /* 0x000 */ Client_UI_AddonActionBarXVTable* VTable;
+    /* 0x000 */ Client_UI_AddonActionBarBase AddonActionBarBase;
     } _union_0x0;
     /* 0x248 */ Component_GUI_AtkTextNode* HotbarNumIconTextNode;
     /* 0x250 */ Component_GUI_AtkCollisionNode* HotbarNumIconCollisionNode;
@@ -14838,94 +14921,11 @@ __unaligned struct Client_UI_AddonActionBarX /* Size=0x298 */
     /*       */ byte _gap_0x294[0x4];
 };
 
-struct Client_UI_AddonActionBarVTable
-{
-    /*       */ __int64 _vf0;
-    /*       */ __int64 _vf1;
-    /* 0x010 */ void (__fastcall *ReceiveEvent)(Component_GUI_AtkUnitBase* a1, Component_GUI_AtkEventType a2, __int32 a3, Component_GUI_AtkEvent* a4, __int64 a5);
-    /* 0x018 */ bool (__fastcall *Open)(Component_GUI_AtkUnitBase* a1, unsigned __int32 a2);
-    /* 0x020 */ bool (__fastcall *Close)(Component_GUI_AtkUnitBase* a1, bool a2);
-    /* 0x028 */ void (__fastcall *Show)(Component_GUI_AtkUnitBase* a1, bool a2, unsigned __int32 a3);
-    /* 0x030 */ void (__fastcall *Hide)(Component_GUI_AtkUnitBase* a1, bool a2, bool a3, unsigned __int32 a4);
-    /* 0x038 */ void (__fastcall *SetPosition)(Component_GUI_AtkUnitBase* a1, __int16 a2, __int16 a3);
-    /* 0x040 */ void (__fastcall *SetX)(Component_GUI_AtkUnitBase* a1, __int16 a2);
-    /* 0x048 */ void (__fastcall *SetY)(Component_GUI_AtkUnitBase* a1, __int16 a2);
-    /* 0x050 */ __int16 (__fastcall *GetX)(Component_GUI_AtkUnitBase* a1);
-    /* 0x058 */ __int16 (__fastcall *GetY)(Component_GUI_AtkUnitBase* a1);
-    /* 0x060 */ void (__fastcall *GetPosition)(Component_GUI_AtkUnitBase* a1, __int16* a2, __int16* a3);
-    /* 0x068 */ void (__fastcall *SetAlpha)(Component_GUI_AtkUnitBase* a1, byte a2);
-    /* 0x070 */ void (__fastcall *SetScale)(Component_GUI_AtkUnitBase* a1, float a2, bool a3);
-    /* 0x078 */ void (__fastcall *GetSize)(Component_GUI_AtkUnitBase* a1, __int16* a2, __int16* a3, bool a4);
-    /* 0x080 */ void (__fastcall *Hide2)(Component_GUI_AtkUnitBase* a1);
-    /* 0x088 */ signed __int8 (__fastcall *SetScaleToHudLayoutScale)(Component_GUI_AtkUnitBase* a1);
-    /* 0x090 */ bool (__fastcall *ShouldCollideWithWindow)(Component_GUI_AtkUnitBase* a1, Component_GUI_AtkCollisionNode* a2);
-    /*       */ __int64 _vf19;
-    /*       */ __int64 _vf20;
-    /*       */ __int64 _vf21;
-    /* 0x0B0 */ bool (__fastcall *ShouldIgnoreInputs)(Component_GUI_AtkUnitBase* a1);
-    /* 0x0B8 */ Component_GUI_AtkResNode* (__fastcall *GetRootNode)(Component_GUI_AtkUnitBase* a1);
-    /*       */ __int64 _vf24;
-    /*       */ __int64 _vf25;
-    /* 0x0D0 */ void (__fastcall *GetWindowBounds)(Component_GUI_AtkUnitBase* a1, Common_Math_Bounds* a2);
-    /*       */ __int64 _vf27;
-    /*       */ __int64 _vf28;
-    /* 0x0E8 */ void (__fastcall *GetRootBounds)(Component_GUI_AtkUnitBase* a1, Common_Math_Bounds* a2);
-    /*       */ __int64 _vf30;
-    /*       */ __int64 _vf31;
-    /*       */ __int64 _vf32;
-    /*       */ __int64 _vf33;
-    /*       */ __int64 _vf34;
-    /*       */ __int64 _vf35;
-    /* 0x120 */ void (__fastcall *Focus)(Component_GUI_AtkUnitBase* a1);
-    /*       */ __int64 _vf37;
-    /*       */ __int64 _vf38;
-    /*       */ __int64 _vf39;
-    /* 0x140 */ void (__fastcall *Initialize)(Component_GUI_AtkUnitBase* a1);
-    /* 0x148 */ void (__fastcall *Finalizer)(Component_GUI_AtkUnitBase* a1);
-    /* 0x150 */ void (__fastcall *Update)(Component_GUI_AtkUnitBase* a1, float a2);
-    /* 0x158 */ void (__fastcall *Draw)(Component_GUI_AtkUnitBase* a1);
-    /*       */ __int64 _vf44;
-    /*       */ __int64 _vf45;
-    /* 0x170 */ bool (__fastcall *CheckWindowCollisionAtCoords)(Component_GUI_AtkUnitBase* a1, __int16 a2, __int16 a3);
-    /*       */ __int64 _vf47;
-    /* 0x180 */ void (__fastcall *OnSetup)(Component_GUI_AtkUnitBase* a1, unsigned __int32 a2, Component_GUI_AtkValue* a3);
-    /*       */ __int64 _vf49;
-    /* 0x190 */ void (__fastcall *OnRefresh)(Component_GUI_AtkUnitBase* a1, unsigned __int32 a2, Component_GUI_AtkValue* a3);
-    /* 0x198 */ void (__fastcall *OnUpdate)(Component_GUI_AtkUnitBase* a1, Component_GUI_NumberArrayData** a2, Component_GUI_StringArrayData** a3);
-    /*       */ __int64 _vf52;
-    /* 0x1A8 */ void (__fastcall *FireCloseCallback)(Component_GUI_AtkUnitBase* a1);
-    /*       */ __int64 _vf54;
-    /*       */ __int64 _vf55;
-    /*       */ __int64 _vf56;
-    /*       */ __int64 _vf57;
-    /*       */ __int64 _vf58;
-    /*       */ __int64 _vf59;
-    /*       */ __int64 _vf60;
-    /* 0x1E8 */ void (__fastcall *OnMouseOver)(Component_GUI_AtkUnitBase* a1);
-    /* 0x1F0 */ void (__fastcall *OnMouseOut)(Component_GUI_AtkUnitBase* a1);
-    /*       */ __int64 _vf63;
-    /*       */ __int64 _vf64;
-    /*       */ __int64 _vf65;
-    /*       */ __int64 _vf66;
-    /*       */ __int64 _vf67;
-    /*       */ __int64 _vf68;
-    /*       */ __int64 _vf69;
-    /*       */ __int64 _vf70;
-    /*       */ __int64 _vf71;
-    /*       */ __int64 _vf72;
-    /*       */ __int64 _vf73;
-    /*       */ __int64 _vf74;
-    /*       */ __int64 _vf75;
-    /*       */ __int64 _vf76;
-    /*       */ __int64 _vf77;
-    /* 0x270 */ void (__fastcall *PulseActionBarSlot)(Client_UI_AddonActionBarBase* a1, __int32 a2);
-};
-
 __unaligned struct Client_UI_AddonActionBar /* Size=0x2B8 */
 {
     union {
-    /* 0x000 */ Client_UI_AddonActionBarX AddonActionBarX;
     /* 0x000 */ Client_UI_AddonActionBarVTable* VTable;
+    /* 0x000 */ Client_UI_AddonActionBarX AddonActionBarX;
     } _union_0x0;
     /*       */ byte _gap_0x298[0x8];
     /* 0x2A0 */ Component_GUI_AtkComponentBase* CycleUpArrow;
@@ -15124,8 +15124,8 @@ struct Component_GUI_AtkComponentNodeVTable
 __unaligned struct Component_GUI_AtkComponentNode /* Size=0xB8 */
 {
     union {
-    /* 0x00 */ Component_GUI_AtkResNode AtkResNode;
     /* 0x00 */ Component_GUI_AtkComponentNodeVTable* VTable;
+    /* 0x00 */ Component_GUI_AtkResNode AtkResNode;
     } _union_0x0;
     /* 0xB0 */ Component_GUI_AtkComponentBase* Component;
 };
@@ -15148,8 +15148,8 @@ struct Component_GUI_AtkComponentBaseVTable
 __unaligned struct Component_GUI_AtkComponentBase /* Size=0xC0 */
 {
     union {
-    /* 0x00 */ Component_GUI_AtkEventListener AtkEventListener;
     /* 0x00 */ Component_GUI_AtkComponentBaseVTable* VTable;
+    /* 0x00 */ Component_GUI_AtkEventListener AtkEventListener;
     } _union_0x0;
     /* 0x08 */ Component_GUI_AtkUldManager UldManager;
     /*      */ byte _gap_0x98[0x8];
@@ -15189,8 +15189,8 @@ __unaligned struct Client_UI_AddonActionCross_ControlGuide /* Size=0x48 */
 __unaligned struct Client_UI_AddonActionCross /* Size=0x710 */
 {
     union {
-    /* 0x000 */ Client_UI_AddonActionBarBase ActionBarBase;
     /* 0x000 */ Client_UI_AddonActionCrossVTable* VTable;
+    /* 0x000 */ Client_UI_AddonActionBarBase ActionBarBase;
     } _union_0x0;
     /* 0x248 */ Client_UI_AddonActionCross_ChangeSetUI ChangeSet;
     /* 0x3A0 */ Component_GUI_AtkComponentNode* PadlockNode;
@@ -15302,8 +15302,8 @@ struct Client_UI_AddonActionCrossEditorVTable
 __unaligned struct Client_UI_AddonActionCrossEditor /* Size=0x250 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonActionCrossEditorVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /* 0x220 */ Component_GUI_AtkTextNode* HeadingText;
     /* 0x228 */ Component_GUI_AtkTextNode* InstructionText;
@@ -15399,8 +15399,8 @@ struct Client_UI_AddonActionDoubleCrossBaseVTable
 __unaligned struct Client_UI_AddonActionDoubleCrossBase /* Size=0x2F8 */
 {
     union {
-    /* 0x000 */ Client_UI_AddonActionBarBase ActionBarBase;
     /* 0x000 */ Client_UI_AddonActionDoubleCrossBaseVTable* VTable;
+    /* 0x000 */ Client_UI_AddonActionBarBase ActionBarBase;
     } _union_0x0;
     /* 0x248 */ Component_GUI_AtkResNode* ContainerNode;
     /* 0x250 */ Component_GUI_AtkComponentNode* SlotContainerL;
@@ -15493,8 +15493,8 @@ struct Client_UI_AddonActionMenuVTable
 __unaligned struct Client_UI_AddonActionMenu /* Size=0x1720 */
 {
     union {
-    /* 0x0000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x0000 */ Client_UI_AddonActionMenuVTable* VTable;
+    /* 0x0000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /* 0x0220 */ Component_GUI_AtkComponentList* ActionList;
     /* 0x0228 */ Component_GUI_AtkComponentList* TraitList;
@@ -15618,8 +15618,8 @@ __unaligned struct Client_UI_AddonAOZNotebook_ActiveActions /* Size=0x20 */
 __unaligned struct Client_UI_AddonAOZNotebook /* Size=0xCC8 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonAOZNotebookVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /*       */ byte _gap_0x220[0xE8];
     /* 0x308 */ Client_UI_AddonAOZNotebook_SpellbookBlock SpellbookBlock01;
@@ -15736,8 +15736,8 @@ struct Client_UI_AddonBankVTable
 __unaligned struct Client_UI_AddonBank /* Size=0x298 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonBankVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /*       */ byte _gap_0x220[0x78];
 };
@@ -15864,8 +15864,8 @@ struct Client_UI_AddonBannerEditorVTable
 __unaligned struct Client_UI_AddonBannerEditor /* Size=0x4E8 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonBannerEditorVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /*       */ byte _gap_0x220[0xB8];
     /* 0x2D8 */ Component_GUI_AtkComponentDropDownList* PresetDropdown;
@@ -15981,8 +15981,8 @@ struct Client_UI_AddonCastBarVTable
 __unaligned struct Client_UI_AddonCastBar /* Size=0x500 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonCastBarVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /* 0x220 */ Client_System_String_Utf8String CastName;
     /*       */ byte _gap_0x288[0x30];
@@ -16064,8 +16064,8 @@ struct Client_UI_AddonCharacterInspectVTable
 __unaligned struct Client_UI_AddonCharacterInspect /* Size=0x500 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonCharacterInspectVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /*       */ byte _gap_0x220[0x210];
     /* 0x430 */ Component_GUI_AtkComponentBase* PreviewComponent;
@@ -16142,8 +16142,8 @@ struct Client_UI_AddonChatLogPanelVTable
 __unaligned struct Client_UI_AddonChatLogPanel /* Size=0x3D0 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonChatLogPanelVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /*       */ byte _gap_0x220[0x60];
     /* 0x280 */ Component_GUI_AtkTextNode* ChatText;
@@ -16237,8 +16237,8 @@ struct Client_UI_AddonChocoboBreedTrainingVTable
 __unaligned struct Client_UI_AddonChocoboBreedTraining /* Size=0x230 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonChocoboBreedTrainingVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /* 0x220 */ Component_GUI_AtkComponentButton* CommenceButton;
     /* 0x228 */ Component_GUI_AtkComponentButton* CancelButton;
@@ -16321,8 +16321,8 @@ struct Component_GUI_AtkTextNodeVTable
 __unaligned struct Component_GUI_AtkTextNode /* Size=0x160 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkResNode AtkResNode;
     /* 0x000 */ Component_GUI_AtkTextNodeVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkResNode AtkResNode;
     } _union_0x0;
     /* 0x0B0 */ unsigned __int32 TextId;
     /* 0x0B4 */ Client_Graphics_ByteColor TextColor;
@@ -16366,8 +16366,8 @@ struct Component_GUI_AtkComponentButtonVTable
 __unaligned struct Component_GUI_AtkComponentButton /* Size=0xF0 */
 {
     union {
-    /* 0x00 */ Component_GUI_AtkComponentBase AtkComponentBase;
     /* 0x00 */ Component_GUI_AtkComponentButtonVTable* VTable;
+    /* 0x00 */ Component_GUI_AtkComponentBase AtkComponentBase;
     } _union_0x0;
     /* 0xC0 */ __int16 Left;
     /* 0xC2 */ __int16 Top;
@@ -16383,8 +16383,8 @@ __unaligned struct Component_GUI_AtkComponentButton /* Size=0xF0 */
 __unaligned struct Client_UI_AddonContentsFinder /* Size=0x16C8 */
 {
     union {
-    /* 0x0000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x0000 */ Client_UI_AddonContentsFinderVTable* VTable;
+    /* 0x0000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /*        */ byte _gap_0x220[0x98];
     /* 0x02B8 */ Component_GUI_AtkComponentButton* JoinButton;
@@ -16503,8 +16503,8 @@ struct Client_UI_AddonContentsFinderConfirmVTable
 __unaligned struct Client_UI_AddonContentsFinderConfirm /* Size=0x2A0 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonContentsFinderConfirmVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /*       */ byte _gap_0x220[0x8];
     /* 0x228 */ Component_GUI_AtkTextNode* AtkTextNode228;
@@ -16593,8 +16593,8 @@ struct Client_UI_AddonContextIconMenuVTable
 __unaligned struct Client_UI_AddonContextIconMenu /* Size=0x2B0 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonContextIconMenuVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /* 0x220 */ __int32 EntryCount;
     /*       */ byte _gap_0x224[0x4];
@@ -16684,8 +16684,8 @@ struct Client_UI_AddonContextMenuVTable
 __unaligned struct Client_UI_AddonContextMenu /* Size=0x2A0 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonContextMenuVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /*       */ byte _gap_0x220[0x80];
 };
@@ -16760,8 +16760,8 @@ struct Client_UI_AddonCutSceneSelectStringVTable
 __unaligned struct Client_UI_AddonCutSceneSelectString /* Size=0x248 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonCutSceneSelectStringVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /*       */ byte _gap_0x220[0x10];
     /* 0x230 */ Component_GUI_AtkComponentList* OptionList;
@@ -16846,8 +16846,8 @@ struct Client_UI_AddonDtrVTable
 __unaligned struct Client_UI_AddonDtr /* Size=0x368 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonDtrVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /* 0x220 */ Client_System_String_Utf8String TimeModeTooltip;
     /* 0x288 */ Client_System_String_Utf8String NetworkInfoTooltip;
@@ -16938,8 +16938,8 @@ struct Client_UI_AddonEnemyListVTable
 __unaligned struct Client_UI_AddonEnemyList /* Size=0x278 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonEnemyListVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /* 0x220 */ Component_GUI_AtkComponentButton** EnemyOneComponent;
     /*       */ byte _gap_0x228[0x48];
@@ -17021,8 +17021,8 @@ struct Client_UI_AddonExpVTable
 __unaligned struct Client_UI_AddonExp /* Size=0x290 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonExpVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /*       */ byte _gap_0x220[0x50];
     /* 0x270 */ byte ClassJob;
@@ -17106,8 +17106,8 @@ struct Client_UI_AddonFateRewardVTable
 __unaligned struct Client_UI_AddonFateReward /* Size=0x570 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonFateRewardVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /* 0x220 */ Component_GUI_AtkResNode* AtkResNode220;
     /* 0x228 */ Component_GUI_AtkImageNode* AtkImageNode228;
@@ -17210,8 +17210,8 @@ __unaligned struct Client_UI_AddonFieldMarkerInfo /* Size=0x18 */
 __unaligned struct Client_UI_AddonFieldMarker /* Size=0x598 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonFieldMarkerVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /*       */ byte _gap_0x220[0x10];
     /* 0x230 */ __int32 HoveredButtonIndex;
@@ -17297,8 +17297,8 @@ struct Client_UI_AddonFriendListVTable
 __unaligned struct Client_UI_AddonFriendList /* Size=0x380 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonFriendListVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /*       */ byte _gap_0x220[0xD0];
     /* 0x2F0 */ Component_GUI_AtkComponentList* FriendList;
@@ -17382,8 +17382,8 @@ struct Client_UI_AddonGatheringVTable
 __unaligned struct Client_UI_AddonGathering /* Size=0x300 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonGatheringVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /* 0x220 */ Component_GUI_AtkResNode* UnkResNode220;
     /* 0x228 */ Component_GUI_AtkComponentCheckBox* GatheredItemComponentCheckBox1;
@@ -17491,8 +17491,8 @@ struct Client_UI_AddonGatheringMasterpieceVTable
 __unaligned struct Client_UI_AddonGatheringMasterpiece /* Size=0x7F8 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonGatheringMasterpieceVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /*       */ byte _gap_0x220[0x168];
     /* 0x388 */ Component_GUI_AtkComponentDragDrop* CollectDragDrop;
@@ -17569,8 +17569,8 @@ struct Client_UI_AddonGcArmyCaptureVTable
 __unaligned struct Client_UI_AddonGcArmyCapture /* Size=0x268 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonGcArmyCaptureVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /* 0x220 */ Component_GUI_AtkComponentButton* DeployButton;
     /* 0x228 */ Component_GUI_AtkComponentList* MissionList;
@@ -17653,8 +17653,8 @@ struct Client_UI_AddonGcArmyExpeditionVTable
 __unaligned struct Client_UI_AddonGcArmyExpedition /* Size=0x2E8 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonGcArmyExpeditionVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /* 0x220 */ Component_GUI_AtkComponentButton* DeployButton;
     /* 0x228 */ Component_GUI_AtkComponentList* MissionList;
@@ -17750,8 +17750,8 @@ struct Client_UI_AddonGcArmyExpeditionResultVTable
 __unaligned struct Client_UI_AddonGcArmyExpeditionResult /* Size=0x228 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonGcArmyExpeditionResultVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /* 0x220 */ Component_GUI_AtkComponentButton* CompleteButton;
 };
@@ -17841,8 +17841,8 @@ struct Component_GUI_AtkComponentRadioButtonVTable
 __unaligned struct Component_GUI_AtkComponentRadioButton /* Size=0xF8 */
 {
     union {
-    /* 0x00 */ Component_GUI_AtkComponentBase AtkComponentBase;
     /* 0x00 */ Component_GUI_AtkComponentRadioButtonVTable* VTable;
+    /* 0x00 */ Component_GUI_AtkComponentBase AtkComponentBase;
     } _union_0x0;
     /*      */ byte _gap_0xC0[0x38];
 };
@@ -17850,8 +17850,8 @@ __unaligned struct Component_GUI_AtkComponentRadioButton /* Size=0xF8 */
 __unaligned struct Client_UI_AddonGoldSaucerInfo /* Size=0x310 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonGoldSaucerInfoVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /* 0x220 */ __int32 SelectedCategory;
     /* 0x224 */ __int32 SelectedSubCategory;
@@ -17936,8 +17936,8 @@ struct Client_UI_AddonGrandCompanySupplyListVTable
 __unaligned struct Client_UI_AddonGrandCompanySupplyList /* Size=0x760 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonGrandCompanySupplyListVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /*       */ byte _gap_0x220[0x60];
     /* 0x280 */ Component_GUI_AtkComponentList* SupplyProvisioningList;
@@ -18030,8 +18030,8 @@ struct Client_UI_AddonGrandCompanySupplyRewardVTable
 __unaligned struct Client_UI_AddonGrandCompanySupplyReward /* Size=0x230 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonGrandCompanySupplyRewardVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /* 0x220 */ Component_GUI_AtkComponentButton* DeliverButton;
     /* 0x228 */ Component_GUI_AtkComponentButton* CancelButton;
@@ -18107,8 +18107,8 @@ struct Client_UI_AddonGSInfoCardDeckVTable
 __unaligned struct Client_UI_AddonGSInfoCardDeck /* Size=0x228 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonGSInfoCardDeckVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /* 0x220 */ Component_GUI_AtkComponentList* DeckList;
 };
@@ -18183,8 +18183,8 @@ struct Client_UI_AddonGSInfoCardListVTable
 __unaligned struct Client_UI_AddonGSInfoCardList /* Size=0x540 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonGSInfoCardListVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /*       */ byte _gap_0x220[0x128];
     /* 0x348 */ Component_GUI_AtkResNode* PageSelection;
@@ -18281,8 +18281,8 @@ struct Client_UI_AddonGSInfoChocoboParamVTable
 __unaligned struct Client_UI_AddonGSInfoChocoboParam /* Size=0x248 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonGSInfoChocoboParamVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /*       */ byte _gap_0x220[0x18];
     /* 0x238 */ Component_GUI_AtkComponentBase* RaceAbility1;
@@ -18359,8 +18359,8 @@ struct Client_UI_AddonGSInfoEmjVTable
 __unaligned struct Client_UI_AddonGSInfoEmj /* Size=0x258 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonGSInfoEmjVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /* 0x220 */ Component_GUI_AtkTextNode* MatchesPlayed;
     /* 0x228 */ Component_GUI_AtkTextNode* CurrentRating;
@@ -18441,8 +18441,8 @@ struct Client_UI_AddonGSInfoGeneralVTable
 __unaligned struct Client_UI_AddonGSInfoGeneral /* Size=0x250 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonGSInfoGeneralVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /* 0x220 */ Component_GUI_AtkComponentBase* MGPAmountDisplay;
     /* 0x228 */ Component_GUI_AtkComponentBase* TournamentMatches;
@@ -18522,8 +18522,8 @@ struct Client_UI_AddonGSInfoMinionBattleVTable
 __unaligned struct Client_UI_AddonGSInfoMinionBattle /* Size=0x248 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonGSInfoMinionBattleVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /* 0x220 */ Component_GUI_AtkComponentBase* TournamentMatches;
     /* 0x228 */ Component_GUI_AtkComponentBase* TournamentWins;
@@ -18602,8 +18602,8 @@ struct Client_UI_AddonGuildLeveVTable
 __unaligned struct Client_UI_AddonGuildLeve /* Size=0x18F0 */
 {
     union {
-    /* 0x0000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x0000 */ Client_UI_AddonGuildLeveVTable* VTable;
+    /* 0x0000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /*        */ byte _gap_0x220[0x8];
     /* 0x0228 */ Component_GUI_AtkComponentTreeList* AtkComponentTreeList228;
@@ -18722,8 +18722,8 @@ struct Client_UI_AddonHudLayoutScreenVTable
 __unaligned struct Client_UI_AddonHudLayoutScreen /* Size=0x8E8 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonHudLayoutScreenVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /*       */ byte _gap_0x220[0xA8];
     /* 0x2C8 */ Client_UI_AddonHudLayoutWindow* HudLayoutWindow;
@@ -18804,8 +18804,8 @@ struct Client_UI_AddonHudLayoutWindowVTable
 __unaligned struct Client_UI_AddonHudLayoutWindow /* Size=0x268 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonHudLayoutWindowVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /*       */ byte _gap_0x220[0x18];
     /* 0x238 */ Component_GUI_AtkComponentButton* SaveButton;
@@ -18882,8 +18882,8 @@ struct Client_UI_AddonImageVTable
 __unaligned struct Client_UI_AddonImage /* Size=0x290 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonImageVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /*       */ byte _gap_0x220[0x40];
     /* 0x260 */ Component_GUI_AtkResNode* ResNode1;
@@ -18979,8 +18979,8 @@ struct Client_UI_AddonItemInspectionListVTable
 __unaligned struct Client_UI_AddonItemInspectionList /* Size=0x1230 */
 {
     union {
-    /* 0x0000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x0000 */ Client_UI_AddonItemInspectionListVTable* VTable;
+    /* 0x0000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /*        */ byte _gap_0x220[0x1010];
 };
@@ -19055,8 +19055,8 @@ struct Client_UI_AddonItemInspectionResultVTable
 __unaligned struct Client_UI_AddonItemInspectionResult /* Size=0x2F8 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonItemInspectionResultVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /*       */ byte _gap_0x220[0xD8];
 };
@@ -19131,8 +19131,8 @@ struct Client_UI_AddonItemSearchVTable
 __unaligned struct Client_UI_AddonItemSearch /* Size=0x3EE0 */
 {
     union {
-    /* 0x0000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x0000 */ Client_UI_AddonItemSearchVTable* VTable;
+    /* 0x0000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /*        */ byte _gap_0x220[0x10];
     /* 0x0230 */ Client_UI_AddonItemSearch_SearchMode Mode;
@@ -19223,8 +19223,8 @@ struct Client_UI_AddonItemSearchResultVTable
 __unaligned struct Client_UI_AddonItemSearchResult /* Size=0x3D0 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonItemSearchResultVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /* 0x220 */ Component_GUI_AtkComponentIcon* ItemIcon;
     /* 0x228 */ Component_GUI_AtkTextNode* ItemName;
@@ -19308,8 +19308,8 @@ struct Client_UI_AddonJobHudVTable
 __unaligned struct Client_UI_AddonJobHud /* Size=0x260 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonJobHudVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /* 0x220 */ byte Unk220;
     /* 0x221 */ bool UseSimpleGauge;
@@ -19452,8 +19452,8 @@ __unaligned struct Client_UI_AddonJobHudACN0_AetherflowACNGaugeSimple /* Size=0x
 __unaligned struct Client_UI_AddonJobHudACN0 /* Size=0x340 */
 {
     union {
-    /* 0x000 */ Client_UI_AddonJobHud JobHud;
     /* 0x000 */ Client_UI_AddonJobHudACN0VTable* VTable;
+    /* 0x000 */ Client_UI_AddonJobHud JobHud;
     } _union_0x0;
     /* 0x260 */ Client_UI_AddonJobHudACN0_AetherflowACNGaugeData DataPrevious;
     /* 0x270 */ Client_UI_AddonJobHudACN0_AetherflowACNGaugeData DataCurrent;
@@ -19593,8 +19593,8 @@ __unaligned struct Client_UI_AddonJobHudAST0_ArcanaGaugeSimple /* Size=0xC0 */
 __unaligned struct Client_UI_AddonJobHudAST0 /* Size=0x468 */
 {
     union {
-    /* 0x000 */ Client_UI_AddonJobHud JobHud;
     /* 0x000 */ Client_UI_AddonJobHudAST0VTable* VTable;
+    /* 0x000 */ Client_UI_AddonJobHud JobHud;
     } _union_0x0;
     /* 0x260 */ Client_UI_AddonJobHudAST0_ArcanaGaugeData DataPrevious;
     /* 0x2A0 */ Client_UI_AddonJobHudAST0_ArcanaGaugeData DataCurrent;
@@ -19776,8 +19776,8 @@ __unaligned struct Client_UI_AddonJobHudBLM0_ElementalGaugeSimple /* Size=0xA8 *
 __unaligned struct Client_UI_AddonJobHudBLM0 /* Size=0x4E0 */
 {
     union {
-    /* 0x000 */ Client_UI_AddonJobHud JobHud;
     /* 0x000 */ Client_UI_AddonJobHudBLM0VTable* VTable;
+    /* 0x000 */ Client_UI_AddonJobHud JobHud;
     } _union_0x0;
     /* 0x260 */ Client_UI_AddonJobHudBLM0_ElementalGaugeData DataPrevious;
     /* 0x298 */ Client_UI_AddonJobHudBLM0_ElementalGaugeData DataCurrent;
@@ -19930,8 +19930,8 @@ __unaligned struct Client_UI_AddonJobHudBRD0_SongGaugeSimple /* Size=0xE0 */
 __unaligned struct Client_UI_AddonJobHudBRD0 /* Size=0x4C0 */
 {
     union {
-    /* 0x000 */ Client_UI_AddonJobHud JobHud;
     /* 0x000 */ Client_UI_AddonJobHudBRD0VTable* VTable;
+    /* 0x000 */ Client_UI_AddonJobHud JobHud;
     } _union_0x0;
     /* 0x260 */ Client_UI_AddonJobHudBRD0_SongGaugeData DataPrevious;
     /* 0x2A0 */ Client_UI_AddonJobHudBRD0_SongGaugeData DataCurrent;
@@ -20054,8 +20054,8 @@ __unaligned struct Client_UI_AddonJobHudDNC0_StepGaugeSimple /* Size=0x68 */
 __unaligned struct Client_UI_AddonJobHudDNC0 /* Size=0x398 */
 {
     union {
-    /* 0x000 */ Client_UI_AddonJobHud JobHud;
     /* 0x000 */ Client_UI_AddonJobHudDNC0VTable* VTable;
+    /* 0x000 */ Client_UI_AddonJobHud JobHud;
     } _union_0x0;
     /* 0x260 */ Client_UI_AddonJobHudDNC0_StepGaugeData DataPrevious;
     /* 0x290 */ Client_UI_AddonJobHudDNC0_StepGaugeData DataCurrent;
@@ -20186,8 +20186,8 @@ __unaligned struct Client_UI_AddonJobHudDNC1_FeatherGaugeSimple /* Size=0x70 */
 __unaligned struct Client_UI_AddonJobHudDNC1 /* Size=0x3A8 */
 {
     union {
-    /* 0x000 */ Client_UI_AddonJobHud JobHud;
     /* 0x000 */ Client_UI_AddonJobHudDNC1VTable* VTable;
+    /* 0x000 */ Client_UI_AddonJobHud JobHud;
     } _union_0x0;
     /* 0x260 */ Client_UI_AddonJobHudDNC1_FeatherGaugeData DataPrevious;
     /* 0x280 */ Client_UI_AddonJobHudDNC1_FeatherGaugeData DataCurrent;
@@ -20320,8 +20320,8 @@ __unaligned struct Client_UI_AddonJobHudDRG0_DragonGaugeSimple /* Size=0x90 */
 __unaligned struct Client_UI_AddonJobHudDRG0 /* Size=0x398 */
 {
     union {
-    /* 0x000 */ Client_UI_AddonJobHud JobHud;
     /* 0x000 */ Client_UI_AddonJobHudDRG0VTable* VTable;
+    /* 0x000 */ Client_UI_AddonJobHud JobHud;
     } _union_0x0;
     /* 0x260 */ Client_UI_AddonJobHudDRG0_DragonGaugeData DataPrevious;
     /* 0x288 */ Client_UI_AddonJobHudDRG0_DragonGaugeData DataCurrent;
@@ -20433,8 +20433,8 @@ __unaligned struct Client_UI_AddonJobHudDRK0_BloodGaugeSimple /* Size=0x40 */
 __unaligned struct Client_UI_AddonJobHudDRK0 /* Size=0x318 */
 {
     union {
-    /* 0x000 */ Client_UI_AddonJobHud JobHud;
     /* 0x000 */ Client_UI_AddonJobHudDRK0VTable* VTable;
+    /* 0x000 */ Client_UI_AddonJobHud JobHud;
     } _union_0x0;
     /* 0x260 */ Client_UI_AddonJobHudDRK0_BloodGaugeData DataPrevious;
     /* 0x278 */ Client_UI_AddonJobHudDRK0_BloodGaugeData DataCurrent;
@@ -20549,8 +20549,8 @@ __unaligned struct Client_UI_AddonJobHudDRK1_DarksideGaugeSimple /* Size=0x48 */
 __unaligned struct Client_UI_AddonJobHudDRK1 /* Size=0x338 */
 {
     union {
-    /* 0x000 */ Client_UI_AddonJobHud JobHud;
     /* 0x000 */ Client_UI_AddonJobHudDRK1VTable* VTable;
+    /* 0x000 */ Client_UI_AddonJobHud JobHud;
     } _union_0x0;
     /* 0x260 */ Client_UI_AddonJobHudDRK1_DarksideGaugeData DataPrevious;
     /* 0x278 */ Client_UI_AddonJobHudDRK1_DarksideGaugeData DataCurrent;
@@ -20657,8 +20657,8 @@ __unaligned struct Client_UI_AddonJobHudGFF0_EukrasiaGaugeSimple /* Size=0x20 */
 __unaligned struct Client_UI_AddonJobHudGFF0 /* Size=0x2C0 */
 {
     union {
-    /* 0x000 */ Client_UI_AddonJobHud JobHud;
     /* 0x000 */ Client_UI_AddonJobHudGFF0VTable* VTable;
+    /* 0x000 */ Client_UI_AddonJobHud JobHud;
     } _union_0x0;
     /* 0x260 */ Client_UI_AddonJobHudGFF0_EukrasiaGaugeData DataPrevious;
     /* 0x270 */ Client_UI_AddonJobHudGFF0_EukrasiaGaugeData DataCurrent;
@@ -20778,8 +20778,8 @@ __unaligned struct Client_UI_AddonJobHudGFF1_AddersgallGaugeSimple /* Size=0x60 
 __unaligned struct Client_UI_AddonJobHudGFF1 /* Size=0x370 */
 {
     union {
-    /* 0x000 */ Client_UI_AddonJobHud JobHud;
     /* 0x000 */ Client_UI_AddonJobHudGFF1VTable* VTable;
+    /* 0x000 */ Client_UI_AddonJobHud JobHud;
     } _union_0x0;
     /* 0x260 */ Client_UI_AddonJobHudGFF1_AddersgallGaugeData DataPrevious;
     /* 0x280 */ Client_UI_AddonJobHudGFF1_AddersgallGaugeData DataCurrent;
@@ -20888,8 +20888,8 @@ __unaligned struct Client_UI_AddonJobHudGNB0_PowderGaugeSimple /* Size=0x68 */
 __unaligned struct Client_UI_AddonJobHudGNB0 /* Size=0x358 */
 {
     union {
-    /* 0x000 */ Client_UI_AddonJobHud JobHud;
     /* 0x000 */ Client_UI_AddonJobHudGNB0VTable* VTable;
+    /* 0x000 */ Client_UI_AddonJobHud JobHud;
     } _union_0x0;
     /* 0x260 */ Client_UI_AddonJobHudGNB0_PowderGaugeData DataPrevious;
     /* 0x270 */ Client_UI_AddonJobHudGNB0_PowderGaugeData DataCurrent;
@@ -21027,8 +21027,8 @@ __unaligned struct Client_UI_AddonJobHudMCH0_HeatGaugeSimple /* Size=0x70 */
 __unaligned struct Client_UI_AddonJobHudMCH0 /* Size=0x3B8 */
 {
     union {
-    /* 0x000 */ Client_UI_AddonJobHud JobHud;
     /* 0x000 */ Client_UI_AddonJobHudMCH0VTable* VTable;
+    /* 0x000 */ Client_UI_AddonJobHud JobHud;
     } _union_0x0;
     /* 0x260 */ Client_UI_AddonJobHudMCH0_HeatGaugeData DataPrevious;
     /* 0x298 */ Client_UI_AddonJobHudMCH0_HeatGaugeData DataCurrent;
@@ -21154,8 +21154,8 @@ __unaligned struct Client_UI_AddonJobHudMNK0_MastersGaugeSimple /* Size=0xC0 */
 __unaligned struct Client_UI_AddonJobHudMNK0 /* Size=0x420 */
 {
     union {
-    /* 0x000 */ Client_UI_AddonJobHud JobHud;
     /* 0x000 */ Client_UI_AddonJobHudMNK0VTable* VTable;
+    /* 0x000 */ Client_UI_AddonJobHud JobHud;
     } _union_0x0;
     /* 0x260 */ Client_UI_AddonJobHudMNK0_MastersGaugeData DataPrevious;
     /* 0x288 */ Client_UI_AddonJobHudMNK0_MastersGaugeData DataCurrent;
@@ -21260,8 +21260,8 @@ __unaligned struct Client_UI_AddonJobHudMNK1_ChakraGaugeSimple /* Size=0x48 */
 __unaligned struct Client_UI_AddonJobHudMNK1 /* Size=0x308 */
 {
     union {
-    /* 0x000 */ Client_UI_AddonJobHud JobHud;
     /* 0x000 */ Client_UI_AddonJobHudMNK1VTable* VTable;
+    /* 0x000 */ Client_UI_AddonJobHud JobHud;
     } _union_0x0;
     /* 0x260 */ Client_UI_AddonJobHudMNK1_ChakraGaugeData DataPrevious;
     /* 0x270 */ Client_UI_AddonJobHudMNK1_ChakraGaugeData DataCurrent;
@@ -21374,8 +21374,8 @@ __unaligned struct Client_UI_AddonJobHudNIN0_NinkiGaugeSimple /* Size=0x38 */
 __unaligned struct Client_UI_AddonJobHudNIN0 /* Size=0x308 */
 {
     union {
-    /* 0x000 */ Client_UI_AddonJobHud JobHud;
     /* 0x000 */ Client_UI_AddonJobHudNIN0VTable* VTable;
+    /* 0x000 */ Client_UI_AddonJobHud JobHud;
     } _union_0x0;
     /* 0x260 */ Client_UI_AddonJobHudNIN0_NinkiGaugeData DataPrevious;
     /* 0x278 */ Client_UI_AddonJobHudNIN0_NinkiGaugeData DataCurrent;
@@ -21486,8 +21486,8 @@ __unaligned struct Client_UI_AddonJobHudNIN1_HutonGaugeSimple /* Size=0x28 */
 __unaligned struct Client_UI_AddonJobHudNIN1 /* Size=0x320 */
 {
     union {
-    /* 0x000 */ Client_UI_AddonJobHud JobHud;
     /* 0x000 */ Client_UI_AddonJobHudNIN1VTable* VTable;
+    /* 0x000 */ Client_UI_AddonJobHud JobHud;
     } _union_0x0;
     /* 0x260 */ Client_UI_AddonJobHudNIN1_HutonGaugeData DataPrevious;
     /* 0x278 */ Client_UI_AddonJobHudNIN1_HutonGaugeData DataCurrent;
@@ -21601,8 +21601,8 @@ __unaligned struct Client_UI_AddonJobHudPLD0_OathGaugeSimple /* Size=0x48 */
 __unaligned struct Client_UI_AddonJobHudPLD0 /* Size=0x330 */
 {
     union {
-    /* 0x000 */ Client_UI_AddonJobHud JobHud;
     /* 0x000 */ Client_UI_AddonJobHudPLD0VTable* VTable;
+    /* 0x000 */ Client_UI_AddonJobHud JobHud;
     } _union_0x0;
     /* 0x260 */ Client_UI_AddonJobHudPLD0_OathGaugeData DataPrevious;
     /* 0x278 */ Client_UI_AddonJobHudPLD0_OathGaugeData DataCurrent;
@@ -21750,8 +21750,8 @@ struct Component_GUI_AtkComponentTextNineGridVTable
 __unaligned struct Component_GUI_AtkComponentTextNineGrid /* Size=0xD8 */
 {
     union {
-    /* 0x00 */ Component_GUI_AtkComponentBase AtkComponentBase;
     /* 0x00 */ Component_GUI_AtkComponentTextNineGridVTable* VTable;
+    /* 0x00 */ Component_GUI_AtkComponentBase AtkComponentBase;
     } _union_0x0;
     /* 0xC0 */ Component_GUI_AtkTextNode* AtkTextNode;
     /* 0xC8 */ Component_GUI_AtkResNode* OwnerNode;
@@ -21786,8 +21786,8 @@ __unaligned struct Client_UI_AddonJobHudRDM0_BalanceGaugeSimple /* Size=0x90 */
 __unaligned struct Client_UI_AddonJobHudRDM0 /* Size=0x440 */
 {
     union {
-    /* 0x000 */ Client_UI_AddonJobHud JobHud;
     /* 0x000 */ Client_UI_AddonJobHudRDM0VTable* VTable;
+    /* 0x000 */ Client_UI_AddonJobHud JobHud;
     } _union_0x0;
     /* 0x260 */ Client_UI_AddonJobHudRDM0_BalanceGaugeData DataPrevious;
     /* 0x288 */ Client_UI_AddonJobHudRDM0_BalanceGaugeData DataCurrent;
@@ -21919,8 +21919,8 @@ __unaligned struct Client_UI_AddonJobHudRRP0_SoulGaugeSimple /* Size=0x50 */
 __unaligned struct Client_UI_AddonJobHudRRP0 /* Size=0x3F8 */
 {
     union {
-    /* 0x000 */ Client_UI_AddonJobHud JobHud;
     /* 0x000 */ Client_UI_AddonJobHudRRP0VTable* VTable;
+    /* 0x000 */ Client_UI_AddonJobHud JobHud;
     } _union_0x0;
     /* 0x260 */ Client_UI_AddonJobHudRRP0_SoulGaugeData DataPrevious;
     /* 0x288 */ Client_UI_AddonJobHudRRP0_SoulGaugeData DataCurrent;
@@ -22049,8 +22049,8 @@ __unaligned struct Client_UI_AddonJobHudRRP1_DeathGaugeSimple /* Size=0xD8 */
 __unaligned struct Client_UI_AddonJobHudRRP1 /* Size=0x490 */
 {
     union {
-    /* 0x000 */ Client_UI_AddonJobHud JobHud;
     /* 0x000 */ Client_UI_AddonJobHudRRP1VTable* VTable;
+    /* 0x000 */ Client_UI_AddonJobHud JobHud;
     } _union_0x0;
     /* 0x260 */ Client_UI_AddonJobHudRRP1_DeathGaugeData DataPrevious;
     /* 0x280 */ Client_UI_AddonJobHudRRP1_DeathGaugeData DataCurrent;
@@ -22186,8 +22186,8 @@ __unaligned struct Client_UI_AddonJobHudSAM0_KenkiGaugeSimple /* Size=0x60 */
 __unaligned struct Client_UI_AddonJobHudSAM0 /* Size=0x380 */
 {
     union {
-    /* 0x000 */ Client_UI_AddonJobHud JobHud;
     /* 0x000 */ Client_UI_AddonJobHudSAM0VTable* VTable;
+    /* 0x000 */ Client_UI_AddonJobHud JobHud;
     } _union_0x0;
     /* 0x260 */ Client_UI_AddonJobHudSAM0_KenkiGaugeData DataPrevious;
     /* 0x278 */ Client_UI_AddonJobHudSAM0_KenkiGaugeData DataCurrent;
@@ -22310,8 +22310,8 @@ __unaligned struct Client_UI_AddonJobHudSAM1_SenGaugeSimple /* Size=0x58 */
 __unaligned struct Client_UI_AddonJobHudSAM1 /* Size=0x328 */
 {
     union {
-    /* 0x000 */ Client_UI_AddonJobHud JobHud;
     /* 0x000 */ Client_UI_AddonJobHudSAM1VTable* VTable;
+    /* 0x000 */ Client_UI_AddonJobHud JobHud;
     } _union_0x0;
     /* 0x260 */ Client_UI_AddonJobHudSAM1_SenGaugeData DataPrevious;
     /* 0x270 */ Client_UI_AddonJobHudSAM1_SenGaugeData DataCurrent;
@@ -22443,8 +22443,8 @@ __unaligned struct Client_UI_AddonJobHudSCH0_FaerieGaugeSimple /* Size=0x58 */
 __unaligned struct Client_UI_AddonJobHudSCH0 /* Size=0x388 */
 {
     union {
-    /* 0x000 */ Client_UI_AddonJobHud JobHud;
     /* 0x000 */ Client_UI_AddonJobHudSCH0VTable* VTable;
+    /* 0x000 */ Client_UI_AddonJobHud JobHud;
     } _union_0x0;
     /* 0x260 */ Client_UI_AddonJobHudSCH0_FaerieGaugeData DataPrevious;
     /* 0x280 */ Client_UI_AddonJobHudSCH0_FaerieGaugeData DataCurrent;
@@ -22557,8 +22557,8 @@ __unaligned struct Client_UI_AddonJobHudSMN0_AetherflowSMNGaugeSimple /* Size=0x
 __unaligned struct Client_UI_AddonJobHudSMN0 /* Size=0x2F0 */
 {
     union {
-    /* 0x000 */ Client_UI_AddonJobHud JobHud;
     /* 0x000 */ Client_UI_AddonJobHudSMN0VTable* VTable;
+    /* 0x000 */ Client_UI_AddonJobHud JobHud;
     } _union_0x0;
     /* 0x260 */ Client_UI_AddonJobHudSMN0_AetherflowSMNGaugeData DataPrevious;
     /* 0x270 */ Client_UI_AddonJobHudSMN0_AetherflowSMNGaugeData DataCurrent;
@@ -22722,8 +22722,8 @@ __unaligned struct Client_UI_AddonJobHudSMN1_TranceGaugeSimple /* Size=0xD8 */
 __unaligned struct Client_UI_AddonJobHudSMN1 /* Size=0x4B0 */
 {
     union {
-    /* 0x000 */ Client_UI_AddonJobHud JobHud;
     /* 0x000 */ Client_UI_AddonJobHudSMN1VTable* VTable;
+    /* 0x000 */ Client_UI_AddonJobHud JobHud;
     } _union_0x0;
     /* 0x260 */ Client_UI_AddonJobHudSMN1_TranceGaugeData DataPrevious;
     /* 0x298 */ Client_UI_AddonJobHudSMN1_TranceGaugeData DataCurrent;
@@ -22836,8 +22836,8 @@ __unaligned struct Client_UI_AddonJobHudWAR0_BeastGaugeSimple /* Size=0x40 */
 __unaligned struct Client_UI_AddonJobHudWAR0 /* Size=0x328 */
 {
     union {
-    /* 0x000 */ Client_UI_AddonJobHud JobHud;
     /* 0x000 */ Client_UI_AddonJobHudWAR0VTable* VTable;
+    /* 0x000 */ Client_UI_AddonJobHud JobHud;
     } _union_0x0;
     /* 0x260 */ Client_UI_AddonJobHudWAR0_BeastGaugeData DataPrevious;
     /* 0x278 */ Client_UI_AddonJobHudWAR0_BeastGaugeData DataCurrent;
@@ -22988,8 +22988,8 @@ __unaligned struct Component_GUI_AtkComponentGaugeBar_GaugeFill /* Size=0x18 */
 __unaligned struct Component_GUI_AtkComponentGaugeBar /* Size=0x1A8 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkComponentBase AtkComponentBase;
     /* 0x000 */ Component_GUI_AtkComponentGaugeBarVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkComponentBase AtkComponentBase;
     } _union_0x0;
     /* 0x0C0 */ Component_GUI_AtkComponentGaugeBar_GaugeValueTransitionData TransitionData[0x2];
     /* 0x100 */ Component_GUI_AtkComponentGaugeBar_GaugeValue Values[0x2];
@@ -23034,8 +23034,8 @@ __unaligned struct Client_UI_AddonJobHudWHM0_HealingGaugeSimple /* Size=0xA0 */
 __unaligned struct Client_UI_AddonJobHudWHM0 /* Size=0x3B0 */
 {
     union {
-    /* 0x000 */ Client_UI_AddonJobHud JobHud;
     /* 0x000 */ Client_UI_AddonJobHudWHM0VTable* VTable;
+    /* 0x000 */ Client_UI_AddonJobHud JobHud;
     } _union_0x0;
     /* 0x260 */ Client_UI_AddonJobHudWHM0_HealingGaugeData DataPrevious;
     /* 0x280 */ Client_UI_AddonJobHudWHM0_HealingGaugeData DataCurrent;
@@ -23113,8 +23113,8 @@ struct Client_UI_AddonJournalDetailVTable
 __unaligned struct Client_UI_AddonJournalDetail /* Size=0x2F8 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonJournalDetailVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /*       */ byte _gap_0x220[0x10];
     /* 0x230 */ Component_GUI_AtkComponentScrollBar* ScrollBarNode;
@@ -23211,8 +23211,8 @@ struct Client_UI_AddonJournalResultVTable
 __unaligned struct Client_UI_AddonJournalResult /* Size=0x288 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonJournalResultVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /* 0x220 */ Component_GUI_AtkImageNode* AtkImageNode220;
     /* 0x228 */ Component_GUI_AtkImageNode* AtkImageNode228;
@@ -23297,8 +23297,8 @@ struct Client_UI_AddonLookingForGroupDetailVTable
 __unaligned struct Client_UI_AddonLookingForGroupDetail /* Size=0x3E8 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonLookingForGroupDetailVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /*       */ byte _gap_0x220[0x28];
     /* 0x248 */ Component_GUI_AtkComponentButton* JoinPartyButton;
@@ -23432,8 +23432,8 @@ __unaligned struct Client_UI_AddonLotteryDaily_GameBoardNumbers /* Size=0x24 */
 __unaligned struct Client_UI_AddonLotteryDaily /* Size=0x408 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonLotteryDailyVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /* 0x220 */ Client_UI_AddonLotteryDaily_GameTileBoard GameBoard;
     /* 0x268 */ Client_UI_AddonLotteryDaily_LaneTileSelector LaneSelector;
@@ -23588,8 +23588,8 @@ __unaligned struct Component_GUI_AtkDragDropInterface /* Size=0x30 */
 __unaligned struct Component_GUI_AtkComponentDragDrop /* Size=0x110 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkComponentBase AtkComponentBase;
     /* 0x000 */ Component_GUI_AtkComponentDragDropVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkComponentBase AtkComponentBase;
     } _union_0x0;
     /* 0x0C0 */ Component_GUI_AtkDragDropInterface AtkDragDropInterface;
     /*       */ byte _gap_0xF0[0x8];
@@ -23600,8 +23600,8 @@ __unaligned struct Component_GUI_AtkComponentDragDrop /* Size=0x110 */
 __unaligned struct Client_UI_AddonMacro /* Size=0x30B0 */
 {
     union {
-    /* 0x0000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x0000 */ Client_UI_AddonMacroVTable* VTable;
+    /* 0x0000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /*        */ byte _gap_0x220[0x98];
     /* 0x02B8 */ Component_GUI_AtkComponentDragDrop* DragDropComponent[0x64];
@@ -23691,8 +23691,8 @@ struct Client_UI_AddonMaterializeDialogVTable
 __unaligned struct Client_UI_AddonMaterializeDialog /* Size=0x248 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonMaterializeDialogVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /* 0x220 */ Component_GUI_AtkTextNode* Text;
     /* 0x228 */ Component_GUI_AtkComponentIcon* ItemIcon;
@@ -23771,8 +23771,8 @@ struct Client_UI_AddonMateriaRetrieveDialogVTable
 __unaligned struct Client_UI_AddonMateriaRetrieveDialog /* Size=0x220 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonMateriaRetrieveDialogVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
 };
 
@@ -23846,8 +23846,8 @@ struct Client_UI_AddonMobHuntVTable
 __unaligned struct Client_UI_AddonMobHunt /* Size=0x248 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonMobHuntVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /* 0x220 */ Component_GUI_AtkComponentButton* NextPageButton;
     /* 0x228 */ Component_GUI_AtkComponentButton* PreviousPageButton;
@@ -23937,8 +23937,8 @@ __unaligned struct Client_UI_AddonNamePlate_BakePlateRenderer /* Size=0x240 */
 __unaligned struct Client_UI_AddonNamePlate /* Size=0x470 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonNamePlateVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /* 0x220 */ Client_UI_AddonNamePlate_BakePlateRenderer BakePlate;
     /* 0x460 */ Client_UI_AddonNamePlate_NamePlateObject* NamePlateObjectArray;
@@ -24070,8 +24070,8 @@ __unaligned struct Client_UI_LootItemInfo /* Size=0x28 */
 __unaligned struct Client_UI_AddonNeedGreed /* Size=0x510 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonNeedGreedVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /* 0x220 */ Client_UI_LootItemInfo Items[0x10];
     /*       */ byte _gap_0x4A0[0x58];
@@ -24218,8 +24218,8 @@ __unaligned struct Client_UI_AddonPartyList_TrustMembers /* Size=0x6C8 */
 __unaligned struct Client_UI_AddonPartyList /* Size=0x13E0 */
 {
     union {
-    /* 0x0000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x0000 */ Client_UI_AddonPartyListVTable* VTable;
+    /* 0x0000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /* 0x0220 */ Client_UI_AddonPartyList_PartyMembers PartyMember;
     /* 0x09E0 */ Client_UI_AddonPartyList_TrustMembers TrustMember;
@@ -24325,8 +24325,8 @@ struct Client_UI_AddonRaceChocoboResultVTable
 __unaligned struct Client_UI_AddonRaceChocoboResult /* Size=0x2C8 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonRaceChocoboResultVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /*       */ byte _gap_0x220[0x48];
     /* 0x268 */ Component_GUI_AtkComponentButton* LeaveButton;
@@ -24419,8 +24419,8 @@ __unaligned struct Client_UI_RaidFinderDutyEntry /* Size=0x140 */
 __unaligned struct Client_UI_AddonRaidFinder /* Size=0xF00 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonRaidFinderVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /*       */ byte _gap_0x220[0x68];
     /* 0x288 */ Component_GUI_AtkComponentList* DutyList;
@@ -24515,8 +24515,8 @@ struct Client_UI_AddonRecipeNoteVTable
 __unaligned struct Client_UI_AddonRecipeNote /* Size=0x3B90 */
 {
     union {
-    /* 0x0000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x0000 */ Client_UI_AddonRecipeNoteVTable* VTable;
+    /* 0x0000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /* 0x0220 */ Component_GUI_AtkTextNode* CurrentJobLevel;
     /* 0x0228 */ Component_GUI_AtkTextNode* CurrentJobName;
@@ -24805,8 +24805,8 @@ struct Client_UI_AddonReconstructionBoxVTable
 __unaligned struct Client_UI_AddonReconstructionBox /* Size=0x440 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonReconstructionBoxVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /*       */ byte _gap_0x220[0x38];
     /* 0x258 */ Client_UI_AddonItemDonationInfo DonationInfoArray[0xA];
@@ -24893,8 +24893,8 @@ __unaligned struct Client_UI_AddonRelicNoteBook_TargetNode /* Size=0x28 */
 __unaligned struct Client_UI_AddonRelicNoteBook /* Size=0xAA8 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonRelicNoteBookVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /* 0x220 */ Component_GUI_AtkImageNode* CornerImage;
     /* 0x228 */ Component_GUI_AtkComponentBase* WeaponImageContainer;
@@ -25004,8 +25004,8 @@ struct Client_UI_AddonRepairVTable
 __unaligned struct Client_UI_AddonRepair /* Size=0xF7E8 */
 {
     union {
-    /* 0x0000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x0000 */ Client_UI_AddonRepairVTable* VTable;
+    /* 0x0000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /*        */ byte _gap_0x220[0x8];
     /* 0x0228 */ Component_GUI_AtkTextNode* UnusedText1;
@@ -25093,8 +25093,8 @@ struct Client_UI_AddonRequestVTable
 __unaligned struct Client_UI_AddonRequest /* Size=0x2E0 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonRequestVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /* 0x220 */ Component_GUI_AtkCollisionNode* AtkCollisionNode220;
     /* 0x228 */ Component_GUI_AtkComponentIcon* AtkComponentIcon228;
@@ -25193,8 +25193,8 @@ struct Client_UI_AddonRetainerItemTransferListVTable
 __unaligned struct Client_UI_AddonRetainerItemTransferList /* Size=0x2C8 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonRetainerItemTransferListVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /* 0x220 */ Component_GUI_AtkTextNode* SomeText;
     /* 0x228 */ Component_GUI_AtkComponentButton* ConfirmButton;
@@ -25280,8 +25280,8 @@ struct Client_UI_AddonRetainerItemTransferProgressVTable
 __unaligned struct Client_UI_AddonRetainerItemTransferProgress /* Size=0x240 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonRetainerItemTransferProgressVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /* 0x220 */ Component_GUI_AtkTextNode* EntrustAllItemsButton;
     /* 0x228 */ Component_GUI_AtkComponentButton* CloseWindowButton;
@@ -25366,8 +25366,8 @@ struct Client_UI_AddonRetainerListVTable
 __unaligned struct Client_UI_AddonRetainerList /* Size=0x8 */
 {
     union {
-    /* 0x0 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x0 */ Client_UI_AddonRetainerListVTable* VTable;
+    /* 0x0 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
 };
 
@@ -25493,8 +25493,8 @@ struct Client_UI_AddonRetainerSellVTable
 __unaligned struct Client_UI_AddonRetainerSell /* Size=0x278 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonRetainerSellVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /* 0x220 */ Component_GUI_AtkComponentButton* Confirm;
     /* 0x228 */ Component_GUI_AtkComponentButton* Cancel;
@@ -25579,8 +25579,8 @@ struct Client_UI_AddonRetainerTaskAskVTable
 __unaligned struct Client_UI_AddonRetainerTaskAsk /* Size=0x2B8 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonRetainerTaskAskVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /*       */ byte _gap_0x220[0x88];
     /* 0x2A8 */ Component_GUI_AtkComponentButton* AssignButton;
@@ -25709,8 +25709,8 @@ struct Client_UI_AddonRetainerTaskListVTable
 __unaligned struct Client_UI_AddonRetainerTaskList /* Size=0x8 */
 {
     union {
-    /* 0x0 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x0 */ Client_UI_AddonRetainerTaskListVTable* VTable;
+    /* 0x0 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
 };
 
@@ -25836,8 +25836,8 @@ struct Client_UI_AddonRetainerTaskResultVTable
 __unaligned struct Client_UI_AddonRetainerTaskResult /* Size=0x258 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonRetainerTaskResultVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /*       */ byte _gap_0x220[0x20];
     /* 0x240 */ Component_GUI_AtkComponentButton* ReassignButton;
@@ -25967,8 +25967,8 @@ struct Client_UI_AddonSalvageDialogVTable
 __unaligned struct Client_UI_AddonSalvageDialog /* Size=0x250 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonSalvageDialogVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /*       */ byte _gap_0x220[0x8];
     /* 0x228 */ Component_GUI_AtkComponentButton* DesynthesizeButton;
@@ -26067,8 +26067,8 @@ __unaligned struct Client_UI_AddonSalvageItemSelector_SalvageItem /* Size=0x30 *
 __unaligned struct Client_UI_AddonSalvageItemSelector /* Size=0x1CF8 */
 {
     union {
-    /* 0x0000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x0000 */ Client_UI_AddonSalvageItemSelectorVTable* VTable;
+    /* 0x0000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /*        */ byte _gap_0x220[0x8];
     /* 0x0228 */ Client_UI_Agent_AgentSalvage_SalvageItemCategory SelectedCategory;
@@ -26149,8 +26149,8 @@ struct Client_UI_AddonSatisfactionSupplyVTable
 __unaligned struct Client_UI_AddonSatisfactionSupply /* Size=0x670 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonSatisfactionSupplyVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /*       */ byte _gap_0x220[0x4];
     /* 0x224 */ __int32 HoveredElementIndex;
@@ -26248,8 +26248,8 @@ __unaligned struct Client_UI_AddonSelectIconString_PopupMenuDerive /* Size=0x68 
 __unaligned struct Client_UI_AddonSelectIconString /* Size=0x2A8 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonSelectIconStringVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /*       */ byte _gap_0x220[0x18];
     /* 0x238 */ Client_UI_AddonSelectIconString_PopupMenuDerive PopupMenu;
@@ -26326,8 +26326,8 @@ struct Client_UI_AddonSelectOkVTable
 __unaligned struct Client_UI_AddonSelectOk /* Size=0x2A8 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonSelectOkVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /* 0x220 */ Component_GUI_AtkTextNode* PromptText;
     /* 0x228 */ Component_GUI_AtkComponentButton* OkButton;
@@ -26410,8 +26410,8 @@ __unaligned struct Client_UI_AddonSelectString_PopupMenuDerive /* Size=0x70 */
 __unaligned struct Client_UI_AddonSelectString /* Size=0x2A8 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonSelectStringVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /* 0x220 */ Client_UI_AddonSelectString_PopupMenuDerive PopupMenu;
     /*       */ byte _gap_0x290[0x18];
@@ -26539,8 +26539,8 @@ struct Client_UI_AddonSelectYesnoVTable
 __unaligned struct Client_UI_AddonSelectYesno /* Size=0x2D0 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonSelectYesnoVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /* 0x220 */ Component_GUI_AtkTextNode* PromptText;
     /* 0x228 */ Component_GUI_AtkComponentButton* YesButton;
@@ -26632,8 +26632,8 @@ struct Client_UI_AddonShopCardDialogVTable
 __unaligned struct Client_UI_AddonShopCardDialog /* Size=0x230 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonShopCardDialogVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /* 0x220 */ Component_GUI_AtkComponentNumericInput* CardQuantityInput;
     /*       */ byte _gap_0x228[0x8];
@@ -26709,8 +26709,8 @@ struct Client_UI_AddonSocialVTable
 __unaligned struct Client_UI_AddonSocial /* Size=0x320 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonSocialVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /*       */ byte _gap_0x220[0x70];
     /* 0x290 */ Component_GUI_AtkComponentRadioButton* PartyMembersRadioButton;
@@ -26799,8 +26799,8 @@ __unaligned struct Client_UI_AddonSynthesis_CraftEffect /* Size=0x20 */
 __unaligned struct Client_UI_AddonSynthesis /* Size=0x8A8 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonSynthesisVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /*       */ byte _gap_0x220[0x18];
     /* 0x238 */ Component_GUI_AtkComponentButton* QuitButton;
@@ -26936,8 +26936,8 @@ __unaligned struct Component_GUI_AtkEventListenerUnk1 /* Size=0x60 */
 __unaligned struct Client_UI_AddonTalk /* Size=0xE80 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonTalkVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /* 0x220 */ Component_GUI_AtkTextNode* AtkTextNode220;
     /* 0x228 */ Component_GUI_AtkTextNode* AtkTextNode228;
@@ -27029,8 +27029,8 @@ struct Client_UI_AddonTeleportVTable
 __unaligned struct Client_UI_AddonTeleport /* Size=0x3A0 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonTeleportVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /* 0x220 */ Component_GUI_AtkComponentRadioButton* TabHeaderAll;
     /* 0x228 */ Component_GUI_AtkComponentRadioButton* TabHeaderLaNoscea;
@@ -27226,8 +27226,8 @@ __unaligned struct Client_UI_StickerSlotList /* Size=0x590 */
 __unaligned struct Client_UI_AddonWeeklyBingo /* Size=0x23C8 */
 {
     union {
-    /* 0x0000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x0000 */ Client_UI_AddonWeeklyBingoVTable* VTable;
+    /* 0x0000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /* 0x0220 */ Client_UI_DutySlotList DutySlotList;
     /* 0x18E8 */ Client_UI_StringThing StringThing;
@@ -27347,8 +27347,8 @@ __unaligned struct Client_UI_AddonWeeklyPuzzle_GameTileBoard /* Size=0x6C0 */
 __unaligned struct Client_UI_AddonWeeklyPuzzle /* Size=0xD00 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /* 0x000 */ Client_UI_AddonWeeklyPuzzleVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     } _union_0x0;
     /* 0x220 */ Client_UI_AddonWeeklyPuzzle_RewardPanelItem RewardPanelCommander;
     /* 0x248 */ Client_UI_AddonWeeklyPuzzle_RewardPanelItem RewardPanelCoffer;
@@ -27403,8 +27403,8 @@ struct Component_GUI_AgentInterfaceVTable
 __unaligned struct Component_GUI_AgentInterface /* Size=0x28 */
 {
     union {
-    /* 0x00 */ Component_GUI_AtkEventInterface AtkEventInterface;
     /* 0x00 */ Component_GUI_AgentInterfaceVTable* VTable;
+    /* 0x00 */ Component_GUI_AtkEventInterface AtkEventInterface;
     } _union_0x0;
     /*      */ byte _gap_0x8[0x8];
     /* 0x10 */ Client_UI_UIModule* UiModule;
@@ -27443,8 +27443,8 @@ __unaligned struct StdVectorClientUIAgentExtraCommandData /* Size=0x18 */
 __unaligned struct Client_UI_Agent_AgentActionMenu /* Size=0x2E8 */
 {
     union {
-    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x000 */ Client_UI_Agent_AgentActionMenuVTable* VTable;
+    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /*       */ byte _gap_0x28[0x8];
     /* 0x030 */ unsigned __int32 JobIconId;
@@ -27487,6 +27487,19 @@ __unaligned struct Client_UI_Agent_AgentActionMenu /* Size=0x2E8 */
     /*       */ byte _gap_0x2E4[0x4];
 };
 
+struct Client_UI_Agent_AgentAirshipExplorationResultVTable
+{
+    /* 0x00 */ void* (__fastcall *ReceiveEvent)(Component_GUI_AgentInterface* a1, void* a2, Component_GUI_AtkValue* a3, unsigned __int32 a4, unsigned __int64 a5);
+    /*      */ __int64 _vf1;
+    /*      */ __int64 _vf2;
+    /* 0x18 */ void (__fastcall *Show)(Component_GUI_AgentInterface* a1);
+    /* 0x20 */ void (__fastcall *Hide)(Component_GUI_AgentInterface* a1);
+    /* 0x28 */ bool (__fastcall *IsAgentActive)(Component_GUI_AgentInterface* a1);
+    /*      */ __int64 _vf6;
+    /*      */ __int64 _vf7;
+    /* 0x40 */ unsigned __int32 (__fastcall *GetAddonID)(Component_GUI_AgentInterface* a1);
+};
+
 struct Client_UI_Agent_AgentExplorationResultInterfaceVTable
 {
     /* 0x00 */ void* (__fastcall *ReceiveEvent)(Component_GUI_AgentInterface* a1, void* a2, Component_GUI_AtkValue* a3, unsigned __int32 a4, unsigned __int64 a5);
@@ -27503,32 +27516,19 @@ struct Client_UI_Agent_AgentExplorationResultInterfaceVTable
 __unaligned struct Client_UI_Agent_AgentExplorationResultInterface /* Size=0x38 */
 {
     union {
-    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x00 */ Client_UI_Agent_AgentExplorationResultInterfaceVTable* VTable;
+    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /* 0x28 */ unsigned __int32 ItemId;
     /*      */ byte _gap_0x2C[0x4];
     /* 0x30 */ Client_UI_Agent_ExplorationResultData* Data;
 };
 
-struct Client_UI_Agent_AgentAirshipExplorationResultVTable
-{
-    /* 0x00 */ void* (__fastcall *ReceiveEvent)(Component_GUI_AgentInterface* a1, void* a2, Component_GUI_AtkValue* a3, unsigned __int32 a4, unsigned __int64 a5);
-    /*      */ __int64 _vf1;
-    /*      */ __int64 _vf2;
-    /* 0x18 */ void (__fastcall *Show)(Component_GUI_AgentInterface* a1);
-    /* 0x20 */ void (__fastcall *Hide)(Component_GUI_AgentInterface* a1);
-    /* 0x28 */ bool (__fastcall *IsAgentActive)(Component_GUI_AgentInterface* a1);
-    /*      */ __int64 _vf6;
-    /*      */ __int64 _vf7;
-    /* 0x40 */ unsigned __int32 (__fastcall *GetAddonID)(Component_GUI_AgentInterface* a1);
-};
-
 __unaligned struct Client_UI_Agent_AgentAirshipExplorationResult /* Size=0x38 */
 {
     union {
-    /* 0x00 */ Client_UI_Agent_AgentExplorationResultInterface Interface;
     /* 0x00 */ Client_UI_Agent_AgentAirshipExplorationResultVTable* VTable;
+    /* 0x00 */ Client_UI_Agent_AgentExplorationResultInterface Interface;
     } _union_0x0;
 };
 
@@ -27548,8 +27548,8 @@ struct Client_UI_Agent_AgentAozContentBriefingVTable
 __unaligned struct Client_UI_Agent_AgentAozContentBriefing /* Size=0x1A0 */
 {
     union {
-    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x000 */ Client_UI_Agent_AgentAozContentBriefingVTable* VTable;
+    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /* 0x028 */ Client_UI_Agent_AozContentData* AozContentData;
     /* 0x030 */ Client_System_String_Utf8String WeeklyNoviceTitle;
@@ -27587,8 +27587,8 @@ struct Client_UI_Agent_AgentAozContentResultVTable
 __unaligned struct Client_UI_Agent_AgentAozContentResult /* Size=0x30 */
 {
     union {
-    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x00 */ Client_UI_Agent_AgentAozContentResultVTable* VTable;
+    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /* 0x28 */ Client_UI_Agent_AozContentResultData* AozContentResultData;
 };
@@ -27609,8 +27609,8 @@ struct Client_UI_Agent_AgentArchiveItemVTable
 __unaligned struct Client_UI_Agent_AgentArchiveItem /* Size=0x30 */
 {
     union {
-    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x00 */ Client_UI_Agent_AgentArchiveItemVTable* VTable;
+    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /* 0x28 */ Client_UI_Agent_ArchiveItem* ArchiveItem;
 };
@@ -27631,8 +27631,8 @@ struct Client_UI_Agent_AgentBannerEditorVTable
 __unaligned struct Client_UI_Agent_AgentBannerEditor /* Size=0x38 */
 {
     union {
-    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x00 */ Client_UI_Agent_AgentBannerEditorVTable* VTable;
+    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /* 0x28 */ Client_UI_Agent_AgentBannerEditorState* EditorState;
     /*      */ byte _gap_0x30[0x8];
@@ -27788,8 +27788,8 @@ struct Client_UI_Agent_AgentBannerInterfaceVTable
 __unaligned struct Client_UI_Agent_AgentBannerInterface /* Size=0x30 */
 {
     union {
-    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x00 */ Client_UI_Agent_AgentBannerInterfaceVTable* VTable;
+    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /* 0x28 */ Client_UI_Agent_AgentBannerInterface_Storage* Data;
 };
@@ -27867,8 +27867,8 @@ struct Client_UI_Agent_AgentBannerMIPVTable
 __unaligned struct Client_UI_Agent_AgentBannerMIP /* Size=0x38 */
 {
     union {
-    /* 0x00 */ Client_UI_Agent_AgentBannerInterface AgentBannerInterface;
     /* 0x00 */ Client_UI_Agent_AgentBannerMIPVTable* VTable;
+    /* 0x00 */ Client_UI_Agent_AgentBannerInterface AgentBannerInterface;
     } _union_0x0;
     /*      */ byte _gap_0x30[0x8];
 };
@@ -27889,8 +27889,8 @@ struct Client_UI_Agent_AgentBannerPartyVTable
 __unaligned struct Client_UI_Agent_AgentBannerParty /* Size=0x38 */
 {
     union {
-    /* 0x00 */ Client_UI_Agent_AgentBannerInterface AgentBannerInterface;
     /* 0x00 */ Client_UI_Agent_AgentBannerPartyVTable* VTable;
+    /* 0x00 */ Client_UI_Agent_AgentBannerInterface AgentBannerInterface;
     } _union_0x0;
     /*      */ byte _gap_0x30[0x8];
 };
@@ -27911,8 +27911,8 @@ struct Client_UI_Agent_AgentBlacklistVTable
 __unaligned struct Client_UI_Agent_AgentBlacklist /* Size=0x110 */
 {
     union {
-    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x000 */ Client_UI_Agent_AgentBlacklistVTable* VTable;
+    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /* 0x028 */ Client_UI_Info_InfoProxyBlacklist* InfoProxy;
     /* 0x030 */ Client_System_String_Utf8String SelectedPlayerName;
@@ -27939,8 +27939,8 @@ struct Client_UI_Agent_AgentCharaCardVTable
 __unaligned struct Client_UI_Agent_AgentCharaCard /* Size=0x38 */
 {
     union {
-    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x00 */ Client_UI_Agent_AgentCharaCardVTable* VTable;
+    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /* 0x28 */ Client_UI_Agent_AgentCharaCard_Storage* Data;
     /*      */ byte _gap_0x30[0x8];
@@ -28035,8 +28035,8 @@ __unaligned struct Common_Math_Vector4 /* Size=0x10 */
 __unaligned struct Client_UI_Misc_CharaViewPortrait /* Size=0x3C0 */
 {
     union {
-    /* 0x000 */ Client_UI_Misc_CharaView Base;
     /* 0x000 */ Client_UI_Misc_CharaViewPortraitVTable* VTable;
+    /* 0x000 */ Client_UI_Misc_CharaView Base;
     } _union_0x0;
     /*       */ byte _gap_0x2C8[0x8];
     /* 0x2D0 */ Common_Math_Vector4 CameraPosition;
@@ -28136,8 +28136,8 @@ struct Client_UI_Agent_AgentChatLogVTable
 __unaligned struct Client_UI_Agent_AgentChatLog /* Size=0x2B8 */
 {
     union {
-    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x000 */ Client_UI_Agent_AgentChatLogVTable* VTable;
+    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /*       */ byte _gap_0x28[0x18];
     /* 0x040 */ Client_UI_Agent_ChatChannel CurrentChannel;
@@ -28170,8 +28170,8 @@ struct Client_UI_Agent_AgentColorant_ColorantCharaViewVTable
 __unaligned struct Client_UI_Agent_AgentColorant_ColorantCharaView /* Size=0x2D8 */
 {
     union {
-    /* 0x000 */ Client_UI_Misc_CharaView Base;
     /* 0x000 */ Client_UI_Agent_AgentColorant_ColorantCharaViewVTable* VTable;
+    /* 0x000 */ Client_UI_Misc_CharaView Base;
     } _union_0x0;
     /* 0x2C8 */ unsigned __int32 Unk2C8;
     /* 0x2CC */ unsigned __int32 ObjectID;
@@ -28188,8 +28188,8 @@ __unaligned struct Client_UI_Agent_AgentColorant_ColorantCharaView /* Size=0x2D8
 __unaligned struct Client_UI_Agent_AgentColorant /* Size=0x3F0 */
 {
     union {
-    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x000 */ Client_UI_Agent_AgentColorantVTable* VTable;
+    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /*       */ byte _gap_0x28[0xE0];
     /* 0x108 */ Client_UI_Agent_AgentColorant_ColorantCharaView CharaView;
@@ -28212,8 +28212,8 @@ struct Client_UI_Agent_AgentCompanyCraftMaterialVTable
 __unaligned struct Client_UI_Agent_AgentCompanyCraftMaterial /* Size=0xE8 */
 {
     union {
-    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x00 */ Client_UI_Agent_AgentCompanyCraftMaterialVTable* VTable;
+    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /*      */ byte _gap_0x28[0x68];
     /*      */ byte _gap_0x90[0x4];
@@ -28256,8 +28256,8 @@ __unaligned struct Client_UI_Agent_ItemReward /* Size=0x130 */
 __unaligned struct Client_UI_Agent_AgentContentsFinder /* Size=0x20E8 */
 {
     union {
-    /* 0x0000 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x0000 */ Client_UI_Agent_AgentContentsFinderVTable* VTable;
+    /* 0x0000 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /*        */ byte _gap_0x28[0x10];
     /* 0x0038 */ Client_System_String_Utf8String Description;
@@ -28358,8 +28358,8 @@ __unaligned struct Client_UI_Info_InfoProxyCommonList_CharacterData /* Size=0x68
 __unaligned struct Client_UI_Agent_AgentContext /* Size=0x1750 */
 {
     union {
-    /* 0x0000 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x0000 */ Client_UI_Agent_AgentContextVTable* VTable;
+    /* 0x0000 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     union {
     /* 0x0028 */ byte ContextMenuArray[0xCF0];
@@ -28416,8 +28416,8 @@ struct Client_UI_Agent_AgentCraftActionSimulatorVTable
 __unaligned struct Client_UI_Agent_AgentCraftActionSimulator /* Size=0x90 */
 {
     union {
-    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x00 */ Client_UI_Agent_AgentCraftActionSimulatorVTable* VTable;
+    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /* 0x28 */ Client_UI_Agent_ProgressEfficiencyCalculations* Progress;
     /*      */ byte _gap_0x30[0x10];
@@ -28441,8 +28441,8 @@ struct Client_UI_Agent_AgentCrossWorldLinkshellVTable
 __unaligned struct Client_UI_Agent_AgentCrossWorldLinkshell /* Size=0x158 */
 {
     union {
-    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x000 */ Client_UI_Agent_AgentCrossWorldLinkshellVTable* VTable;
+    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /*       */ byte _gap_0x28[0xF8];
     /* 0x120 */ byte SelectedCWLSIndex;
@@ -28468,8 +28468,8 @@ struct Client_UI_Agent_AgentDeepDungeonInspectVTable
 __unaligned struct Client_UI_Agent_AgentDeepDungeonInspect /* Size=0x30 */
 {
     union {
-    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x00 */ Client_UI_Agent_AgentDeepDungeonInspectVTable* VTable;
+    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /* 0x28 */ Client_UI_Agent_AgentDeepDungeonInspect_AgentDeepDungeonInspectData* Data;
 };
@@ -28514,8 +28514,8 @@ struct Client_UI_Agent_AgentDeepDungeonMapVTable
 __unaligned struct Client_UI_Agent_AgentDeepDungeonMap /* Size=0x30 */
 {
     union {
-    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x00 */ Client_UI_Agent_AgentDeepDungeonMapVTable* VTable;
+    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /* 0x28 */ Client_UI_Agent_AgentDeepDungeonMapData* Data;
 };
@@ -28546,8 +28546,8 @@ struct Client_UI_Agent_AgentDeepDungeonStatusVTable
 __unaligned struct Client_UI_Agent_AgentDeepDungeonStatus /* Size=0x30 */
 {
     union {
-    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x00 */ Client_UI_Agent_AgentDeepDungeonStatusVTable* VTable;
+    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /* 0x28 */ Client_UI_Agent_DeepDungeonStatusData* Data;
 };
@@ -28574,8 +28574,8 @@ struct Client_UI_Agent_AgentFieldMarkerVTable
 __unaligned struct Client_UI_Agent_AgentFieldMarker /* Size=0xCE0 */
 {
     union {
-    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x000 */ Client_UI_Agent_AgentFieldMarkerVTable* VTable;
+    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /*       */ byte _gap_0x28[0x8];
     /*       */ byte _gap_0x30[0x4];
@@ -28605,8 +28605,8 @@ struct Client_UI_Agent_AgentFishGuideVTable
 __unaligned struct Client_UI_Agent_AgentFishGuide /* Size=0x1A8 */
 {
     union {
-    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x000 */ Client_UI_Agent_AgentFishGuideVTable* VTable;
+    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /*       */ byte _gap_0x28[0x180];
 };
@@ -28633,8 +28633,8 @@ __unaligned struct Client_UI_Agent_AgentFreeCompany_FreeCompanyActionTimer /* Si
 __unaligned struct Client_UI_Agent_AgentFreeCompany /* Size=0xAD8 */
 {
     union {
-    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x000 */ Client_UI_Agent_AgentFreeCompanyVTable* VTable;
+    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /* 0x028 */ void* vtbl2;
     /* 0x030 */ void* vtbl3;
@@ -28687,8 +28687,8 @@ __unaligned struct Client_UI_Agent_CrestData /* Size=0x8 */
 __unaligned struct Client_UI_Agent_AgentFreeCompanyCrestEditor /* Size=0x70 */
 {
     union {
-    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x00 */ Client_UI_Agent_AgentFreeCompanyCrestEditorVTable* VTable;
+    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /*      */ byte _gap_0x28[0x38];
     /* 0x60 */ Client_UI_Agent_CrestData OriginalCrest;
@@ -28719,8 +28719,8 @@ __unaligned struct Client_UI_Agent_AgentFreeCompanyProfile_FCProfile /* Size=0x6
 __unaligned struct Client_UI_Agent_AgentFreeCompanyProfile /* Size=0x27C */
 {
     union {
-    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x000 */ Client_UI_Agent_AgentFreeCompanyProfileVTable* VTable;
+    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /* 0x028 */ __int64 RequestID;
     /* 0x030 */ __int64 UnkID2;
@@ -28768,8 +28768,8 @@ struct Client_UI_Agent_AgentFriendListVTable
 __unaligned struct Client_UI_Agent_AgentFriendList /* Size=0xC8 */
 {
     union {
-    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x00 */ Client_UI_Agent_AgentFriendListVTable* VTable;
+    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /* 0x28 */ Client_UI_Info_InfoProxyFriendList* InfoProxy;
     /* 0x30 */ Client_System_String_Utf8String SelectedPlayerName;
@@ -28799,8 +28799,8 @@ struct Client_UI_Agent_AgentGatheringNoteVTable
 __unaligned struct Client_UI_Agent_AgentGatheringNote /* Size=0x178 */
 {
     union {
-    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x000 */ Client_UI_Agent_AgentGatheringNoteVTable* VTable;
+    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /*       */ byte _gap_0x28[0x90];
     /* 0x0B8 */ Client_UI_Agent_GatheringAreaInfo* GatheringAreaInfo;
@@ -28823,8 +28823,8 @@ struct Client_UI_Agent_AgentGcArmyExpeditionVTable
 __unaligned struct Client_UI_Agent_AgentGcArmyExpedition /* Size=0x48 */
 {
     union {
-    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x00 */ Client_UI_Agent_AgentGcArmyExpeditionVTable* VTable;
+    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /* 0x28 */ Client_UI_Agent_GcArmyExpeditionData* ExpeditionData;
     /*      */ byte _gap_0x30[0x10];
@@ -28856,8 +28856,8 @@ struct Client_UI_Agent_AgentGearSet_GearsetCharaViewVTable
 __unaligned struct Client_UI_Agent_AgentGearSet_GearsetCharaView /* Size=0x2D8 */
 {
     union {
-    /* 0x000 */ Client_UI_Misc_CharaView Base;
     /* 0x000 */ Client_UI_Agent_AgentGearSet_GearsetCharaViewVTable* VTable;
+    /* 0x000 */ Client_UI_Misc_CharaView Base;
     } _union_0x0;
     /* 0x2C8 */ bool UpdateVisibility;
     /* 0x2C9 */ bool UpdateItems;
@@ -28873,8 +28873,8 @@ __unaligned struct Client_UI_Agent_AgentGearSet_GearsetCharaView /* Size=0x2D8 *
 __unaligned struct Client_UI_Agent_AgentGearSet /* Size=0xB00 */
 {
     union {
-    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x000 */ Client_UI_Agent_AgentGearSetVTable* VTable;
+    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /*       */ byte _gap_0x28[0x7E0];
     /* 0x808 */ Client_UI_Agent_AgentGearSet_GearsetCharaView CharaView;
@@ -28897,8 +28897,8 @@ struct Client_UI_Agent_AgentGoldSaucerVTable
 __unaligned struct Client_UI_Agent_AgentGoldSaucer /* Size=0x210 */
 {
     union {
-    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x000 */ Client_UI_Agent_AgentGoldSaucerVTable* VTable;
+    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /*       */ byte _gap_0x28[0x30];
     /*       */ byte _gap_0x58[0x2];
@@ -28929,8 +28929,8 @@ struct Client_UI_Agent_AgentGrandCompanySupplyVTable
 __unaligned struct Client_UI_Agent_AgentGrandCompanySupply /* Size=0x98 */
 {
     union {
-    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x00 */ Client_UI_Agent_AgentGrandCompanySupplyVTable* VTable;
+    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /*      */ byte _gap_0x28[0x38];
     /* 0x60 */ Client_UI_Agent_SupplyProvisioningData* SupplyProvisioningData;
@@ -28976,8 +28976,8 @@ __unaligned struct Client_UI_Agent_AgentHousingPlant_SelectableItem /* Size=0x10
 __unaligned struct Client_UI_Agent_AgentHousingPlant /* Size=0x950 */
 {
     union {
-    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x000 */ Client_UI_Agent_AgentHousingPlantVTable* VTable;
+    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /*       */ byte _gap_0x28[0x18];
     /* 0x040 */ unsigned __int32 ContextAddonId;
@@ -29016,8 +29016,8 @@ __unaligned struct Client_UI_Agent_HudPartyMember /* Size=0x20 */
 __unaligned struct Client_UI_Agent_AgentHUD /* Size=0x4BA0 */
 {
     union {
-    /* 0x0000 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x0000 */ Client_UI_Agent_AgentHUDVTable* VTable;
+    /* 0x0000 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /*        */ byte _gap_0x28[0xC90];
     /* 0x0CB8 */ __int32 CompanionSummonTimer;
@@ -29052,8 +29052,8 @@ struct Client_UI_Agent_AgentHudLayoutVTable
 __unaligned struct Client_UI_Agent_AgentHudLayout /* Size=0x78 */
 {
     union {
-    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x00 */ Client_UI_Agent_AgentHudLayoutVTable* VTable;
+    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /*      */ byte _gap_0x28[0x48];
     /* 0x70 */ bool NeedToSave;
@@ -29096,8 +29096,8 @@ __unaligned struct Client_UI_Agent_AgentIKDFishingLog_PotentialCatchSpot /* Size
 __unaligned struct Client_UI_Agent_AgentIKDFishingLog /* Size=0x460 */
 {
     union {
-    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x000 */ Client_UI_Agent_AgentIKDFishingLogVTable* VTable;
+    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /* 0x028 */ unsigned __int32 RouteId;
     /* 0x02C */ unsigned __int32 SpotId[0x3];
@@ -29132,8 +29132,8 @@ struct Client_UI_Agent_AgentIKDResultVTable
 __unaligned struct Client_UI_Agent_AgentIKDResult /* Size=0x30 */
 {
     union {
-    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x00 */ Client_UI_Agent_AgentIKDResultVTable* VTable;
+    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /* 0x28 */ Client_UI_Agent_AgentIKDResult_ResultData* Data;
 };
@@ -29270,16 +29270,16 @@ struct Client_UI_Agent_AgentInspect_InspectCharaViewVTable
 __unaligned struct Client_UI_Agent_AgentInspect_InspectCharaView /* Size=0x2C8 */
 {
     union {
-    /* 0x000 */ Client_UI_Misc_CharaView Base;
     /* 0x000 */ Client_UI_Agent_AgentInspect_InspectCharaViewVTable* VTable;
+    /* 0x000 */ Client_UI_Misc_CharaView Base;
     } _union_0x0;
 };
 
 __unaligned struct Client_UI_Agent_AgentInspect /* Size=0x820 */
 {
     union {
-    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x000 */ Client_UI_Agent_AgentInspectVTable* VTable;
+    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /* 0x028 */ unsigned __int32 RequestObjectID;
     /* 0x02C */ unsigned __int32 RequestSearchCommentOID;
@@ -29319,8 +29319,8 @@ struct Client_UI_Agent_AgentInventoryContextVTable
 __unaligned struct Client_UI_Agent_AgentInventoryContext /* Size=0x778 */
 {
     union {
-    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x000 */ Client_UI_Agent_AgentInventoryContextVTable* VTable;
+    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /* 0x028 */ unsigned __int32 BlockingAddonId;
     /* 0x02C */ __int32 ContexItemStartIndex;
@@ -29373,8 +29373,8 @@ struct Client_UI_Agent_AgentItemDetailVTable
 __unaligned struct Client_UI_Agent_AgentItemDetail /* Size=0x150 */
 {
     union {
-    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x000 */ Client_UI_Agent_AgentItemDetailVTable* VTable;
+    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /*       */ byte _gap_0x28[0x110];
     /* 0x138 */ unsigned __int32 ItemId;
@@ -29405,8 +29405,8 @@ struct Client_UI_Agent_AgentItemSearchVTable
 __unaligned struct Client_UI_Agent_AgentItemSearch /* Size=0x37F0 */
 {
     union {
-    /* 0x0000 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x0000 */ Client_UI_Agent_AgentItemSearchVTable* VTable;
+    /* 0x0000 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /*        */ byte _gap_0x28[0x32D8];
     /*        */ byte _gap_0x3300[0x4];
@@ -29441,8 +29441,8 @@ struct Client_UI_Agent_AgentLinkshellVTable
 __unaligned struct Client_UI_Agent_AgentLinkshell /* Size=0xD8 */
 {
     union {
-    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x00 */ Client_UI_Agent_AgentLinkshellVTable* VTable;
+    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /*      */ byte _gap_0x28[0x80];
     /* 0xA8 */ byte SelectedLSIndex;
@@ -29591,8 +29591,8 @@ __unaligned struct Client_UI_Agent_LobbyData /* Size=0x9C0 */
 __unaligned struct Client_UI_Agent_AgentLobby /* Size=0x1DF8 */
 {
     union {
-    /* 0x0000 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x0000 */ Client_UI_Agent_AgentLobbyVTable* VTable;
+    /* 0x0000 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /*        */ byte _gap_0x28[0x18];
     /* 0x0040 */ Client_UI_Agent_LobbyData LobbyData;
@@ -29659,8 +29659,8 @@ struct Client_UI_Agent_AgentLootVTable
 __unaligned struct Client_UI_Agent_AgentLoot /* Size=0x90 */
 {
     union {
-    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x00 */ Client_UI_Agent_AgentLootVTable* VTable;
+    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /*      */ byte _gap_0x28[0x4];
     /* 0x2C */ byte HoveredSlotIndex;
@@ -29719,8 +29719,8 @@ __unaligned struct Client_UI_Agent_AgentMacro_MacroHistoryEvent /* Size=0xD20 */
 __unaligned struct Client_UI_Agent_AgentMacro /* Size=0xEB18 */
 {
     union {
-    /* 0x0000 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x0000 */ Client_UI_Agent_AgentMacroVTable* VTable;
+    /* 0x0000 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /* 0x0028 */ Client_UI_Misc_RaptureMacroModule_Macro ClipboardMacro;
     /* 0x06B0 */ Component_Excel_ExcelSheet* TextCommandParamSheet;
@@ -29892,8 +29892,8 @@ __unaligned struct Client_UI_Agent_QuestLinkContainer /* Size=0xB58 */
 __unaligned struct Client_UI_Agent_AgentMap /* Size=0x12AB8 */
 {
     union {
-    /* 0x00000 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x00000 */ Client_UI_Agent_AgentMapVTable* VTable;
+    /* 0x00000 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /*         */ byte _gap_0x28[0xC0];
     /* 0x000E8 */ StdVectorClientUIAgentLinkedTooltipMarker MinimapMSQLinkedTooltipMarkers;
@@ -29988,8 +29988,8 @@ struct Client_UI_Agent_AgentMiragePrismMiragePlate_MiragePrismMiragePlateCharaVi
 __unaligned struct Client_UI_Agent_AgentMiragePrismMiragePlate_MiragePrismMiragePlateCharaView /* Size=0x2D8 */
 {
     union {
-    /* 0x000 */ Client_UI_Misc_CharaView Base;
     /* 0x000 */ Client_UI_Agent_AgentMiragePrismMiragePlate_MiragePrismMiragePlateCharaViewVTable* VTable;
+    /* 0x000 */ Client_UI_Misc_CharaView Base;
     } _union_0x0;
     /* 0x2C8 */ bool IsUpdatePending;
     /*       */ byte _gap_0x2C9;
@@ -30001,8 +30001,8 @@ __unaligned struct Client_UI_Agent_AgentMiragePrismMiragePlate_MiragePrismMirage
 __unaligned struct Client_UI_Agent_AgentMiragePrismMiragePlate /* Size=0x350 */
 {
     union {
-    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x000 */ Client_UI_Agent_AgentMiragePrismMiragePlateVTable* VTable;
+    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /*       */ byte _gap_0x28[0x50];
     /* 0x078 */ Client_UI_Agent_AgentMiragePrismMiragePlate_MiragePrismMiragePlateCharaView CharaView;
@@ -30024,8 +30024,8 @@ struct Client_UI_Agent_AgentMiragePrismPrismBoxVTable
 __unaligned struct Client_UI_Agent_AgentMiragePrismPrismBox /* Size=0x80 */
 {
     union {
-    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x00 */ Client_UI_Agent_AgentMiragePrismPrismBoxVTable* VTable;
+    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /* 0x28 */ Client_UI_Agent_MiragePrismPrismBoxData* Data;
     /*      */ byte _gap_0x30[0x8];
@@ -30054,8 +30054,8 @@ struct Client_UI_Agent_AgentMiragePrismPrismItemDetailVTable
 __unaligned struct Client_UI_Agent_AgentMiragePrismPrismItemDetail /* Size=0x58 */
 {
     union {
-    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x00 */ Client_UI_Agent_AgentMiragePrismPrismItemDetailVTable* VTable;
+    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /*      */ byte _gap_0x28[0x28];
     /*      */ byte _gap_0x50[0x4];
@@ -30116,8 +30116,8 @@ __unaligned struct StdVectorClientUIAgentAgentMJIAnimalManagementItemDescPtr /* 
 __unaligned struct Client_UI_Agent_AgentMJIAnimalManagement /* Size=0x1E0 */
 {
     union {
-    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x000 */ Client_UI_Agent_AgentMJIAnimalManagementVTable* VTable;
+    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /*       */ byte _gap_0x28[0xA8];
     /* 0x0D0 */ Component_GUI_AtkEventInterface* OpHandler;
@@ -30189,8 +30189,8 @@ struct Client_UI_Agent_AgentMJICraftScheduleVTable
 __unaligned struct Client_UI_Agent_AgentMJICraftSchedule /* Size=0x40 */
 {
     union {
-    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x00 */ Client_UI_Agent_AgentMJICraftScheduleVTable* VTable;
+    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /* 0x28 */ Client_UI_Agent_AgentMJICraftSchedule_ScheduleData* Data;
     /* 0x30 */ __int32* CurReviewMaterialsSortOrder;
@@ -30359,8 +30359,8 @@ struct Client_UI_Agent_AgentMJIDisposeShopVTable
 __unaligned struct Client_UI_Agent_AgentMJIDisposeShop /* Size=0x30 */
 {
     union {
-    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x00 */ Client_UI_Agent_AgentMJIDisposeShopVTable* VTable;
+    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /* 0x28 */ Client_UI_Agent_AgentMJIDisposeShop_AgentData* Data;
 };
@@ -30469,8 +30469,8 @@ __unaligned struct StdVectorClientUIAgentAgentMJIFarmManagementSeed /* Size=0x18
 __unaligned struct Client_UI_Agent_AgentMJIFarmManagement /* Size=0x13D8 */
 {
     union {
-    /* 0x0000 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x0000 */ Client_UI_Agent_AgentMJIFarmManagementVTable* VTable;
+    /* 0x0000 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /* 0x0028 */ Component_GUI_AtkEventInterface* OpHandler;
     /*        */ byte _gap_0x30[0x18];
@@ -30517,8 +30517,8 @@ __unaligned struct Client_UI_Agent_AgentMJIGatheringHouse_StringsData /* Size=0x
 __unaligned struct Client_UI_Agent_AgentMJIGatheringHouse /* Size=0x200 */
 {
     union {
-    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x000 */ Client_UI_Agent_AgentMJIGatheringHouseVTable* VTable;
+    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /* 0x028 */ Client_Game_MJI_MJIManager* Manager;
     /* 0x030 */ Client_Game_MJI_MJIGranariesState* GranariesState;
@@ -30643,8 +30643,8 @@ struct Client_UI_Agent_AgentMJINekomimiRequestVTable
 __unaligned struct Client_UI_Agent_AgentMJINekomimiRequest /* Size=0x30 */
 {
     union {
-    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x00 */ Client_UI_Agent_AgentMJINekomimiRequestVTable* VTable;
+    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /* 0x28 */ Client_UI_Agent_AgentMJINekomimiRequest_FavorsData* Data;
 };
@@ -30697,8 +30697,8 @@ struct Client_UI_Agent_AgentMJIPouchVTable
 __unaligned struct Client_UI_Agent_AgentMJIPouch /* Size=0x38 */
 {
     union {
-    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x00 */ Client_UI_Agent_AgentMJIPouchVTable* VTable;
+    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /* 0x28 */ Client_UI_Agent_AgentMJIPouch_PouchIndexInfo* InventoryIndex;
     /* 0x30 */ Client_UI_Agent_AgentMJIPouch_PouchInventoryData* InventoryData;
@@ -30782,8 +30782,8 @@ struct Client_UI_Agent_AgentMonsterNoteVTable
 __unaligned struct Client_UI_Agent_AgentMonsterNote /* Size=0x68 */
 {
     union {
-    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x00 */ Client_UI_Agent_AgentMonsterNoteVTable* VTable;
+    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /* 0x28 */ StdVectorClientSystemStringUtf8String StringVector;
     /* 0x40 */ unsigned __int32 BaseId;
@@ -30819,8 +30819,8 @@ struct Client_UI_Agent_AgentMycBattleAreaInfoVTable
 __unaligned struct Client_UI_Agent_AgentMycBattleAreaInfo /* Size=0x48 */
 {
     union {
-    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x00 */ Client_UI_Agent_AgentMycBattleAreaInfoVTable* VTable;
+    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /* 0x28 */ Client_UI_Agent_MycDynamicEventData* MycDynamicEventData;
     /*      */ byte _gap_0x30[0x18];
@@ -30842,8 +30842,8 @@ struct Client_UI_Agent_AgentMycItemBoxVTable
 __unaligned struct Client_UI_Agent_AgentMycItemBox /* Size=0x58 */
 {
     union {
-    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x00 */ Client_UI_Agent_AgentMycItemBoxVTable* VTable;
+    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /*      */ byte _gap_0x28[0x18];
     /* 0x40 */ Client_UI_Agent_MycItemBoxData* ItemBoxData;
@@ -30866,8 +30866,8 @@ struct Client_UI_Agent_AgentQuestJournalVTable
 __unaligned struct Client_UI_Agent_AgentQuestJournal /* Size=0x280 */
 {
     union {
-    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x000 */ Client_UI_Agent_AgentQuestJournalVTable* VTable;
+    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /*       */ byte _gap_0x28[0x28];
     /*       */ byte _gap_0x50[0x4];
@@ -30924,8 +30924,8 @@ __unaligned struct Client_UI_Agent_AgentReadyCheck_ReadyCheckEntry /* Size=0x10 
 __unaligned struct Client_UI_Agent_AgentReadyCheck /* Size=0x3B0 */
 {
     union {
-    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x000 */ Client_UI_Agent_AgentReadyCheckVTable* VTable;
+    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /*       */ byte _gap_0x28[0x88];
     /* 0x0B0 */ Client_UI_Agent_AgentReadyCheck_ReadyCheckEntry ReadyCheckEntries[0x30];
@@ -30956,8 +30956,8 @@ __unaligned struct StdDequeClientSystemStringUtf8String /* Size=0x28 */
 __unaligned struct Client_UI_Agent_AgentRecipeNote /* Size=0x568 */
 {
     union {
-    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x000 */ Client_UI_Agent_AgentRecipeNoteVTable* VTable;
+    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /*       */ byte _gap_0x28[0x388];
     /* 0x3B0 */ __int32 SelectedCraftType;
@@ -31003,8 +31003,8 @@ struct Client_UI_Agent_AgentReconstructionBoxVTable
 __unaligned struct Client_UI_Agent_AgentReconstructionBox /* Size=0x240 */
 {
     union {
-    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x000 */ Client_UI_Agent_AgentReconstructionBoxVTable* VTable;
+    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /*       */ byte _gap_0x28[0x28];
     /* 0x050 */ Client_UI_Agent_AgentItemDonationInfo ItemDonationArray[0xA];
@@ -31033,8 +31033,8 @@ struct Client_UI_Agent_AgentRequestVTable
 __unaligned struct Client_UI_Agent_AgentRequest /* Size=0x460 */
 {
     union {
-    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x000 */ Client_UI_Agent_AgentRequestVTable* VTable;
+    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /*       */ byte _gap_0x28[0xE8];
     /*       */ byte _gap_0x110[0x4];
@@ -31064,8 +31064,8 @@ struct Client_UI_Agent_AgentRetainerItemTransferVTable
 __unaligned struct Client_UI_Agent_AgentRetainerItemTransfer /* Size=0x38 */
 {
     union {
-    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x00 */ Client_UI_Agent_AgentRetainerItemTransferVTable* VTable;
+    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /* 0x28 */ Client_UI_Agent_AgentRetainerItemTransferData* Data;
     /*      */ byte _gap_0x30[0x8];
@@ -31118,8 +31118,8 @@ __unaligned struct Client_UI_Agent_AgentRetainerList_Retainer /* Size=0x70 */
 __unaligned struct Client_UI_Agent_AgentRetainerList /* Size=0x5B8 */
 {
     union {
-    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x000 */ Client_UI_Agent_AgentRetainerListVTable* VTable;
+    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /*       */ byte _gap_0x28[0x8];
     /* 0x030 */ unsigned __int32 RetainerListOpenedTime;
@@ -31149,8 +31149,8 @@ struct Client_UI_Agent_AgentRetainerTaskVTable
 __unaligned struct Client_UI_Agent_AgentRetainerTask /* Size=0x90 */
 {
     union {
-    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x00 */ Client_UI_Agent_AgentRetainerTaskVTable* VTable;
+    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /* 0x28 */ unsigned __int32 DisplayType;
     /*      */ byte _gap_0x2C[0x4];
@@ -31191,8 +31191,8 @@ struct Client_UI_Agent_AgentReviveVTable
 __unaligned struct Client_UI_Agent_AgentRevive /* Size=0xB8 */
 {
     union {
-    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x00 */ Client_UI_Agent_AgentReviveVTable* VTable;
+    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /* 0x28 */ Client_Game_UI_Revive* Revive;
     /*      */ byte _gap_0x30[0x8];
@@ -31228,8 +31228,8 @@ __unaligned struct Client_UI_Agent_SalvageResult /* Size=0x8 */
 __unaligned struct Client_UI_Agent_AgentSalvage /* Size=0x3D0 */
 {
     union {
-    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x000 */ Client_UI_Agent_AgentSalvageVTable* VTable;
+    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /*       */ byte _gap_0x28[0x8];
     /* 0x030 */ Client_UI_Agent_AgentSalvage_SalvageItemCategory SelectedCategory;
@@ -31311,8 +31311,8 @@ __unaligned struct Client_UI_Agent_AgentSatisfactionSupply_ItemInfo /* Size=0x3C
 __unaligned struct Client_UI_Agent_AgentSatisfactionSupply /* Size=0x500 */
 {
     union {
-    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x000 */ Client_UI_Agent_AgentSatisfactionSupplyVTable* VTable;
+    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /*       */ byte _gap_0x28[0x18];
     /* 0x040 */ Client_UI_Agent_AgentSatisfactionSupply_SatisfactionSupplyNpcInfo NpcInfo;
@@ -31373,8 +31373,8 @@ struct Client_UI_Agent_AgentScenarioTreeVTable
 __unaligned struct Client_UI_Agent_AgentScenarioTree /* Size=0x30 */
 {
     union {
-    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x00 */ Client_UI_Agent_AgentScenarioTreeVTable* VTable;
+    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /* 0x28 */ Client_UI_Agent_AgentScenarioTree_AgentScenarioTreeData* Data;
 };
@@ -31421,8 +31421,8 @@ __unaligned struct Client_UI_Agent_BalloonSlot /* Size=0x8 */
 __unaligned struct Client_UI_Agent_AgentScreenLog /* Size=0x3F0 */
 {
     union {
-    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x000 */ Client_UI_Agent_AgentScreenLogVTable* VTable;
+    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /*       */ byte _gap_0x28[0x328];
     /* 0x350 */ StdDequeClientUIAgentBalloonInfo BalloonQueue;
@@ -31451,8 +31451,8 @@ struct Client_UI_Agent_AgentShopVTable
 __unaligned struct Client_UI_Agent_AgentShop /* Size=0x120 */
 {
     union {
-    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x000 */ Client_UI_Agent_AgentShopVTable* VTable;
+    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /*       */ byte _gap_0x28[0x60];
     /* 0x088 */ Component_GUI_AtkEventInterface* EventReceiver;
@@ -31516,8 +31516,8 @@ struct Client_UI_Agent_AgentStatus_StatusCharaViewVTable
 __unaligned struct Client_UI_Agent_AgentStatus_StatusCharaView /* Size=0x2D0 */
 {
     union {
-    /* 0x000 */ Client_UI_Misc_CharaView Base;
     /* 0x000 */ Client_UI_Agent_AgentStatus_StatusCharaViewVTable* VTable;
+    /* 0x000 */ Client_UI_Misc_CharaView Base;
     } _union_0x0;
     /* 0x2C8 */ unsigned __int32 MainhandItemID;
     /* 0x2CC */ bool DrawWeapon;
@@ -31528,8 +31528,8 @@ __unaligned struct Client_UI_Agent_AgentStatus_StatusCharaView /* Size=0x2D0 */
 __unaligned struct Client_UI_Agent_AgentStatus /* Size=0x358 */
 {
     union {
-    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x000 */ Client_UI_Agent_AgentStatusVTable* VTable;
+    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /*       */ byte _gap_0x28[0x58];
     /* 0x080 */ Client_UI_Agent_AgentStatus_StatusCharaView CharaView;
@@ -31552,8 +31552,8 @@ struct Client_UI_Agent_AgentSubmersibleExplorationResultVTable
 __unaligned struct Client_UI_Agent_AgentSubmersibleExplorationResult /* Size=0x38 */
 {
     union {
-    /* 0x00 */ Client_UI_Agent_AgentExplorationResultInterface Interface;
     /* 0x00 */ Client_UI_Agent_AgentSubmersibleExplorationResultVTable* VTable;
+    /* 0x00 */ Client_UI_Agent_AgentExplorationResultInterface Interface;
     } _union_0x0;
 };
 
@@ -31573,8 +31573,8 @@ struct Client_UI_Agent_AgentTeleportVTable
 __unaligned struct Client_UI_Agent_AgentTeleport /* Size=0x90 */
 {
     union {
-    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x00 */ Client_UI_Agent_AgentTeleportVTable* VTable;
+    /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /*      */ byte _gap_0x28[0x38];
     /* 0x60 */ __int32 AetheryteCount;
@@ -31607,8 +31607,8 @@ struct Client_UI_Agent_AgentTryon_TryonCharaViewVTable
 __unaligned struct Client_UI_Agent_AgentTryon_TryonCharaView /* Size=0x2D0 */
 {
     union {
-    /* 0x000 */ Client_UI_Misc_CharaView Base;
     /* 0x000 */ Client_UI_Agent_AgentTryon_TryonCharaViewVTable* VTable;
+    /* 0x000 */ Client_UI_Misc_CharaView Base;
     } _union_0x0;
     /* 0x2C8 */ bool DoUpdate;
     /* 0x2C9 */ bool HideOtherEquipment;
@@ -31622,8 +31622,8 @@ __unaligned struct Client_UI_Agent_AgentTryon_TryonCharaView /* Size=0x2D0 */
 __unaligned struct Client_UI_Agent_AgentTryon /* Size=0x670 */
 {
     union {
-    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x000 */ Client_UI_Agent_AgentTryonVTable* VTable;
+    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
     /* 0x028 */ Client_UI_Agent_AgentTryon_TryonCharaView CharaView;
     /*       */ byte _gap_0x2F8[0x378];
@@ -32198,8 +32198,8 @@ struct Client_UI_Info_InfoProxyInterfaceVTable
 __unaligned struct Client_UI_Info_InfoProxyInterface /* Size=0x18 */
 {
     union {
-    /* 0x00 */ void** vtbl;
     /* 0x00 */ Client_UI_Info_InfoProxyInterfaceVTable* VTable;
+    /* 0x00 */ void** vtbl;
     } _union_0x0;
     /* 0x08 */ Client_UI_UIModule* UiModule;
     /* 0x10 */ unsigned __int32 EntryCount;
@@ -32221,8 +32221,8 @@ struct Client_UI_Info_InfoProxy17VTable
 __unaligned struct Client_UI_Info_InfoProxy17 /* Size=0x1F8 */
 {
     union {
-    /* 0x000 */ Client_UI_Info_InfoProxyInterface InfoProxyInterface;
     /* 0x000 */ Client_UI_Info_InfoProxy17VTable* VTable;
+    /* 0x000 */ Client_UI_Info_InfoProxyInterface InfoProxyInterface;
     } _union_0x0;
     /*       */ byte _gap_0x18[0x20];
     /* 0x038 */ Client_System_String_Utf8String UnkString0;
@@ -32245,8 +32245,8 @@ struct Client_UI_Info_InfoProxy20VTable
 __unaligned struct Client_UI_Info_InfoProxy20 /* Size=0x28 */
 {
     union {
-    /* 0x00 */ Client_UI_Info_InfoProxyInterface InfoProxyInterface;
     /* 0x00 */ Client_UI_Info_InfoProxy20VTable* VTable;
+    /* 0x00 */ Client_UI_Info_InfoProxyInterface InfoProxyInterface;
     } _union_0x0;
     /*      */ byte _gap_0x18[0x10];
 };
@@ -32271,10 +32271,44 @@ struct Client_UI_Info_InfoProxyPageInterfaceVTable
 __unaligned struct Client_UI_Info_InfoProxyPageInterface /* Size=0x20 */
 {
     union {
-    /* 0x00 */ Client_UI_Info_InfoProxyInterface InfoProxyInterface;
     /* 0x00 */ Client_UI_Info_InfoProxyPageInterfaceVTable* VTable;
+    /* 0x00 */ Client_UI_Info_InfoProxyInterface InfoProxyInterface;
     } _union_0x0;
     /*      */ byte _gap_0x18[0x8];
+};
+
+struct Client_UI_Info_InfoProxy21VTable
+{
+    /*      */ __int64 _vf0;
+    /*      */ __int64 _vf1;
+    /*      */ __int64 _vf2;
+    /*      */ __int64 _vf3;
+    /*      */ __int64 _vf4;
+    /*      */ __int64 _vf5;
+    /* 0x30 */ void (__fastcall *EndRequest)(Client_UI_Info_InfoProxyInterface* a1);
+    /* 0x38 */ unsigned __int32 (__fastcall *GetEntryCount)(Client_UI_Info_InfoProxyInterface* a1);
+    /*      */ __int64 _vf8;
+    /*      */ __int64 _vf9;
+    /*      */ __int64 _vf10;
+    /*      */ __int64 _vf11;
+    /* 0x60 */ bool (__fastcall *AddPage)(Client_UI_Info_InfoProxyPageInterface* a1, void* a2);
+};
+
+struct Client_UI_Info_InfoProxyInvitedListVTable
+{
+    /*      */ __int64 _vf0;
+    /*      */ __int64 _vf1;
+    /*      */ __int64 _vf2;
+    /*      */ __int64 _vf3;
+    /*      */ __int64 _vf4;
+    /*      */ __int64 _vf5;
+    /* 0x30 */ void (__fastcall *EndRequest)(Client_UI_Info_InfoProxyInterface* a1);
+    /* 0x38 */ unsigned __int32 (__fastcall *GetEntryCount)(Client_UI_Info_InfoProxyInterface* a1);
+    /*      */ __int64 _vf8;
+    /*      */ __int64 _vf9;
+    /*      */ __int64 _vf10;
+    /*      */ __int64 _vf11;
+    /* 0x60 */ bool (__fastcall *AddPage)(Client_UI_Info_InfoProxyPageInterface* a1, void* a2);
 };
 
 struct Client_UI_Info_InfoProxyCommonListVTable
@@ -32297,8 +32331,8 @@ struct Client_UI_Info_InfoProxyCommonListVTable
 __unaligned struct Client_UI_Info_InfoProxyCommonList /* Size=0xB8 */
 {
     union {
-    /* 0x00 */ Client_UI_Info_InfoProxyPageInterface InfoProxyPageInterface;
     /* 0x00 */ Client_UI_Info_InfoProxyCommonListVTable* VTable;
+    /* 0x00 */ Client_UI_Info_InfoProxyPageInterface InfoProxyPageInterface;
     } _union_0x0;
     /* 0x20 */ Client_System_String_Utf8String Unk20;
     /* 0x88 */ byte Unk88;
@@ -32318,54 +32352,20 @@ __unaligned struct Client_UI_Info_InfoProxyCommonList /* Size=0xB8 */
     /*      */ byte _gap_0xB0[0x8];
 };
 
-struct Client_UI_Info_InfoProxyInvitedListVTable
-{
-    /*      */ __int64 _vf0;
-    /*      */ __int64 _vf1;
-    /*      */ __int64 _vf2;
-    /*      */ __int64 _vf3;
-    /*      */ __int64 _vf4;
-    /*      */ __int64 _vf5;
-    /* 0x30 */ void (__fastcall *EndRequest)(Client_UI_Info_InfoProxyInterface* a1);
-    /* 0x38 */ unsigned __int32 (__fastcall *GetEntryCount)(Client_UI_Info_InfoProxyInterface* a1);
-    /*      */ __int64 _vf8;
-    /*      */ __int64 _vf9;
-    /*      */ __int64 _vf10;
-    /*      */ __int64 _vf11;
-    /* 0x60 */ bool (__fastcall *AddPage)(Client_UI_Info_InfoProxyPageInterface* a1, void* a2);
-};
-
 __unaligned struct Client_UI_Info_InfoProxyInvitedList /* Size=0xC8 */
 {
     union {
-    /* 0x00 */ Client_UI_Info_InfoProxyCommonList InfoProxyCommonList;
     /* 0x00 */ Client_UI_Info_InfoProxyInvitedListVTable* VTable;
+    /* 0x00 */ Client_UI_Info_InfoProxyCommonList InfoProxyCommonList;
     } _union_0x0;
     /*      */ byte _gap_0xB8[0x10];
-};
-
-struct Client_UI_Info_InfoProxy21VTable
-{
-    /*      */ __int64 _vf0;
-    /*      */ __int64 _vf1;
-    /*      */ __int64 _vf2;
-    /*      */ __int64 _vf3;
-    /*      */ __int64 _vf4;
-    /*      */ __int64 _vf5;
-    /* 0x30 */ void (__fastcall *EndRequest)(Client_UI_Info_InfoProxyInterface* a1);
-    /* 0x38 */ unsigned __int32 (__fastcall *GetEntryCount)(Client_UI_Info_InfoProxyInterface* a1);
-    /*      */ __int64 _vf8;
-    /*      */ __int64 _vf9;
-    /*      */ __int64 _vf10;
-    /*      */ __int64 _vf11;
-    /* 0x60 */ bool (__fastcall *AddPage)(Client_UI_Info_InfoProxyPageInterface* a1, void* a2);
 };
 
 __unaligned struct Client_UI_Info_InfoProxy21 /* Size=0xC8 */
 {
     union {
-    /* 0x00 */ Client_UI_Info_InfoProxyInvitedList InfoProxyInvitedList;
     /* 0x00 */ Client_UI_Info_InfoProxy21VTable* VTable;
+    /* 0x00 */ Client_UI_Info_InfoProxyInvitedList InfoProxyInvitedList;
     } _union_0x0;
 };
 
@@ -32389,8 +32389,8 @@ struct Client_UI_Info_InfoProxy22VTable
 __unaligned struct Client_UI_Info_InfoProxy22 /* Size=0xC8 */
 {
     union {
-    /* 0x00 */ Client_UI_Info_InfoProxyInvitedList InfoProxyInvitedList;
     /* 0x00 */ Client_UI_Info_InfoProxy22VTable* VTable;
+    /* 0x00 */ Client_UI_Info_InfoProxyInvitedList InfoProxyInvitedList;
     } _union_0x0;
 };
 
@@ -32414,8 +32414,8 @@ struct Client_UI_Info_InfoProxy23VTable
 __unaligned struct Client_UI_Info_InfoProxy23 /* Size=0xA20 */
 {
     union {
-    /* 0x000 */ Client_UI_Info_InfoProxyCommonList InfoProxyCommonList;
     /* 0x000 */ Client_UI_Info_InfoProxy23VTable* VTable;
+    /* 0x000 */ Client_UI_Info_InfoProxyCommonList InfoProxyCommonList;
     } _union_0x0;
     /*       */ byte _gap_0xB8[0x968];
 };
@@ -32435,8 +32435,8 @@ struct Client_UI_Info_InfoProxy24VTable
 __unaligned struct Client_UI_Info_InfoProxy24 /* Size=0x188 */
 {
     union {
-    /* 0x000 */ Client_UI_Info_InfoProxyInterface InfoProxyInterface;
     /* 0x000 */ Client_UI_Info_InfoProxy24VTable* VTable;
+    /* 0x000 */ Client_UI_Info_InfoProxyInterface InfoProxyInterface;
     } _union_0x0;
     /*       */ byte _gap_0x18[0x20];
     /* 0x038 */ Client_System_String_Utf8String UnkString0;
@@ -32460,8 +32460,8 @@ struct Client_UI_Info_InfoProxy25VTable
 __unaligned struct Client_UI_Info_InfoProxy25 /* Size=0x418 */
 {
     union {
-    /* 0x000 */ Client_UI_Info_InfoProxyInterface InfoProxyInterface;
     /* 0x000 */ Client_UI_Info_InfoProxy25VTable* VTable;
+    /* 0x000 */ Client_UI_Info_InfoProxyInterface InfoProxyInterface;
     } _union_0x0;
     /*       */ byte _gap_0x18[0x20];
     /* 0x038 */ Client_System_String_Utf8String UnkString0;
@@ -32487,8 +32487,8 @@ struct Client_UI_Info_InfoProxy26VTable
 __unaligned struct Client_UI_Info_InfoProxy26 /* Size=0x28 */
 {
     union {
-    /* 0x00 */ Client_UI_Info_InfoProxyInterface InfoProxyInterface;
     /* 0x00 */ Client_UI_Info_InfoProxy26VTable* VTable;
+    /* 0x00 */ Client_UI_Info_InfoProxyInterface InfoProxyInterface;
     } _union_0x0;
     /*      */ byte _gap_0x18[0x10];
 };
@@ -32508,8 +32508,8 @@ struct Client_UI_Info_InfoProxy27VTable
 __unaligned struct Client_UI_Info_InfoProxy27 /* Size=0x28 */
 {
     union {
-    /* 0x00 */ Client_UI_Info_InfoProxyInterface InfoProxyInterface;
     /* 0x00 */ Client_UI_Info_InfoProxy27VTable* VTable;
+    /* 0x00 */ Client_UI_Info_InfoProxyInterface InfoProxyInterface;
     } _union_0x0;
     /*      */ byte _gap_0x18[0x10];
 };
@@ -32529,8 +32529,8 @@ struct Client_UI_Info_InfoProxy28VTable
 __unaligned struct Client_UI_Info_InfoProxy28 /* Size=0x110 */
 {
     union {
-    /* 0x000 */ Client_UI_Info_InfoProxyInterface InfoProxyInterface;
     /* 0x000 */ Client_UI_Info_InfoProxy28VTable* VTable;
+    /* 0x000 */ Client_UI_Info_InfoProxyInterface InfoProxyInterface;
     } _union_0x0;
     /*       */ byte _gap_0x18[0x20];
     /* 0x038 */ Client_System_String_Utf8String UnkString0;
@@ -32558,8 +32558,8 @@ struct Client_UI_Info_InfoProxyBlacklistVTable
 __unaligned struct Client_UI_Info_InfoProxyBlacklist /* Size=0x1A00 */
 {
     union {
-    /* 0x0000 */ Client_UI_Info_InfoProxyPageInterface InfoProxyPageInterface;
     /* 0x0000 */ Client_UI_Info_InfoProxyBlacklistVTable* VTable;
+    /* 0x0000 */ Client_UI_Info_InfoProxyPageInterface InfoProxyPageInterface;
     } _union_0x0;
     /* 0x0020 */ __int64 ContentIdArray[0xC8];
     /* 0x0660 */ Client_System_String_Utf8String Unk660;
@@ -32593,8 +32593,8 @@ __unaligned struct Client_UI_Info_InfoProxyCatalogSearch_Entry /* Size=0x8 */
 __unaligned struct Client_UI_Info_InfoProxyCatalogSearch /* Size=0x3C8 */
 {
     union {
-    /* 0x000 */ Client_UI_Info_InfoProxyPageInterface InfoProxyPageInterface;
     /* 0x000 */ Client_UI_Info_InfoProxyCatalogSearchVTable* VTable;
+    /* 0x000 */ Client_UI_Info_InfoProxyPageInterface InfoProxyPageInterface;
     } _union_0x0;
     /*       */ byte _gap_0x20[0x8];
     /* 0x028 */ Client_System_String_Utf8String Query;
@@ -32625,8 +32625,8 @@ __unaligned struct Client_UI_Info_InfoProxyCircle_Unk1 /* Size=0xF0 */
 __unaligned struct Client_UI_Info_InfoProxyCircle /* Size=0x6BB8 */
 {
     union {
-    /* 0x0000 */ Client_UI_Info_InfoProxyInterface InfoProxyInterface;
     /* 0x0000 */ Client_UI_Info_InfoProxyCircleVTable* VTable;
+    /* 0x0000 */ Client_UI_Info_InfoProxyInterface InfoProxyInterface;
     } _union_0x0;
     /*        */ byte _gap_0x18[0x8];
     /* 0x0020 */ Client_System_String_Utf8String UnkString0020;
@@ -32696,8 +32696,8 @@ struct Client_UI_Info_InfoProxyCircleFinderVTable
 __unaligned struct Client_UI_Info_InfoProxyCircleFinder /* Size=0x1C8 */
 {
     union {
-    /* 0x000 */ Client_UI_Info_InfoProxyInterface InfoProxyInterface;
     /* 0x000 */ Client_UI_Info_InfoProxyCircleFinderVTable* VTable;
+    /* 0x000 */ Client_UI_Info_InfoProxyInterface InfoProxyInterface;
     } _union_0x0;
     /*       */ byte _gap_0x18[0x88];
     /* 0x0A0 */ Client_System_String_Utf8String UnkString0;
@@ -32725,8 +32725,8 @@ struct Client_UI_Info_InfoProxyCircleListVTable
 __unaligned struct Client_UI_Info_InfoProxyCircleList /* Size=0x1E0 */
 {
     union {
-    /* 0x000 */ Client_UI_Info_InfoProxyInterface InfoProxyInterface;
     /* 0x000 */ Client_UI_Info_InfoProxyCircleListVTable* VTable;
+    /* 0x000 */ Client_UI_Info_InfoProxyInterface InfoProxyInterface;
     } _union_0x0;
     /*       */ byte _gap_0x18[0x20];
     /* 0x038 */ Client_System_String_Utf8String UnkString0;
@@ -32765,8 +32765,8 @@ struct Client_UI_Info_InfoProxyCrossRealmVTable
 __unaligned struct Client_UI_Info_InfoProxyCrossRealm /* Size=0x1620 */
 {
     union {
-    /* 0x0000 */ Client_UI_Info_InfoProxyInterface InfoProxyInterface;
     /* 0x0000 */ Client_UI_Info_InfoProxyCrossRealmVTable* VTable;
+    /* 0x0000 */ Client_UI_Info_InfoProxyInterface InfoProxyInterface;
     } _union_0x0;
     /*        */ byte _gap_0x18[0x370];
     /*        */ byte _gap_0x388[0x4];
@@ -32782,6 +32782,18 @@ __unaligned struct Client_UI_Info_InfoProxyCrossRealm /* Size=0x1620 */
     /*        */ byte _gap_0x398[0x8];
     /* 0x03A0 */ Client_UI_Info_CrossRealmGroup CrossRealmGroupArray[0x6];
     /*        */ byte _gap_0x1450[0x1D0];
+};
+
+struct Client_UI_Info_InfoProxyCrossWorldLinkShellVTable
+{
+    /*      */ __int64 _vf0;
+    /*      */ __int64 _vf1;
+    /*      */ __int64 _vf2;
+    /*      */ __int64 _vf3;
+    /*      */ __int64 _vf4;
+    /*      */ __int64 _vf5;
+    /* 0x30 */ void (__fastcall *EndRequest)(Client_UI_Info_InfoProxyInterface* a1);
+    /* 0x38 */ unsigned __int32 (__fastcall *GetEntryCount)(Client_UI_Info_InfoProxyInterface* a1);
 };
 
 struct Client_UI_Info_InfoProxyInvitedInterfaceVTable
@@ -32805,22 +32817,10 @@ __unaligned struct Client_UI_Info_InfoProxyInvitedInterface_Unk18 /* Size=0x10 *
 __unaligned struct Client_UI_Info_InfoProxyInvitedInterface /* Size=0x28 */
 {
     union {
-    /* 0x00 */ Client_UI_Info_InfoProxyInterface InfoProxynterface;
     /* 0x00 */ Client_UI_Info_InfoProxyInvitedInterfaceVTable* VTable;
+    /* 0x00 */ Client_UI_Info_InfoProxyInterface InfoProxynterface;
     } _union_0x0;
     /* 0x18 */ Client_UI_Info_InfoProxyInvitedInterface_Unk18 Unk18Obj;
-};
-
-struct Client_UI_Info_InfoProxyCrossWorldLinkShellVTable
-{
-    /*      */ __int64 _vf0;
-    /*      */ __int64 _vf1;
-    /*      */ __int64 _vf2;
-    /*      */ __int64 _vf3;
-    /*      */ __int64 _vf4;
-    /*      */ __int64 _vf5;
-    /* 0x30 */ void (__fastcall *EndRequest)(Client_UI_Info_InfoProxyInterface* a1);
-    /* 0x38 */ unsigned __int32 (__fastcall *GetEntryCount)(Client_UI_Info_InfoProxyInterface* a1);
 };
 
 __unaligned struct Client_UI_Info_InfoProxyCrossWorldLinkShell_CWLSEntry /* Size=0x88 */
@@ -32837,8 +32837,8 @@ __unaligned struct Client_UI_Info_InfoProxyCrossWorldLinkShell_CWLSEntry /* Size
 __unaligned struct Client_UI_Info_InfoProxyCrossWorldLinkShell /* Size=0x558 */
 {
     union {
-    /* 0x000 */ Client_UI_Info_InfoProxyInvitedInterface InfoProxyInvitedInterface;
     /* 0x000 */ Client_UI_Info_InfoProxyCrossWorldLinkShellVTable* VTable;
+    /* 0x000 */ Client_UI_Info_InfoProxyInvitedInterface InfoProxyInvitedInterface;
     } _union_0x0;
     /* 0x028 */ unsigned __int32 NumInvites;
     /*       */ byte _gap_0x2C[0x4];
@@ -32872,8 +32872,8 @@ struct Client_UI_Info_InfoProxyCrossWorldLinkShellMemberVTable
 __unaligned struct Client_UI_Info_InfoProxyCrossWorldLinkShellMember /* Size=0xD0 */
 {
     union {
-    /* 0x00 */ Client_UI_Info_InfoProxyCommonList InfoProxyCommonList;
     /* 0x00 */ Client_UI_Info_InfoProxyCrossWorldLinkShellMemberVTable* VTable;
+    /* 0x00 */ Client_UI_Info_InfoProxyCommonList InfoProxyCommonList;
     } _union_0x0;
     /*      */ byte _gap_0xB8[0x18];
 };
@@ -32907,8 +32907,8 @@ __unaligned struct Client_UI_Info_InfoProxyFreeCompany_RankData /* Size=0x58 */
 __unaligned struct Client_UI_Info_InfoProxyFreeCompany /* Size=0x6E8 */
 {
     union {
-    /* 0x000 */ Client_UI_Info_InfoProxyInterface InfoProxyInterface;
     /* 0x000 */ Client_UI_Info_InfoProxyFreeCompanyVTable* VTable;
+    /* 0x000 */ Client_UI_Info_InfoProxyInterface InfoProxyInterface;
     } _union_0x0;
     /*       */ byte _gap_0x18[0x8];
     /* 0x020 */ void* Unk20;
@@ -32958,8 +32958,8 @@ struct Client_UI_Info_InfoProxyFreeCompanyCreateVTable
 __unaligned struct Client_UI_Info_InfoProxyFreeCompanyCreate /* Size=0x118 */
 {
     union {
-    /* 0x000 */ Client_UI_Info_InfoProxyInvitedInterface InfoProxyUnk3Interface;
     /* 0x000 */ Client_UI_Info_InfoProxyFreeCompanyCreateVTable* VTable;
+    /* 0x000 */ Client_UI_Info_InfoProxyInvitedInterface InfoProxyUnk3Interface;
     } _union_0x0;
     /*       */ byte _gap_0x28[0x20];
     /* 0x048 */ Client_System_String_Utf8String UnkString0;
@@ -32986,8 +32986,8 @@ struct Client_UI_Info_InfoProxyFreeCompanyMemberVTable
 __unaligned struct Client_UI_Info_InfoProxyFreeCompanyMember /* Size=0xD0 */
 {
     union {
-    /* 0x00 */ Client_UI_Info_InfoProxyCommonList InfoProxyCommonList;
     /* 0x00 */ Client_UI_Info_InfoProxyFreeCompanyMemberVTable* VTable;
+    /* 0x00 */ Client_UI_Info_InfoProxyCommonList InfoProxyCommonList;
     } _union_0x0;
     /* 0xB8 */ unsigned __int64 FreeCompanyID;
     /*      */ byte _gap_0xC0[0x10];
@@ -33018,8 +33018,8 @@ __unaligned struct Client_UI_Info_InfoProxyFriendList_StrBuf /* Size=0x40 */
 __unaligned struct Client_UI_Info_InfoProxyFriendList /* Size=0x3AD0 */
 {
     union {
-    /* 0x0000 */ Client_UI_Info_InfoProxyCommonList InfoProxyCommonList;
     /* 0x0000 */ Client_UI_Info_InfoProxyFriendListVTable* VTable;
+    /* 0x0000 */ Client_UI_Info_InfoProxyCommonList InfoProxyCommonList;
     } _union_0x0;
     /*        */ byte _gap_0xB8[0x20];
     /* 0x00D8 */ Client_System_String_Utf8String Str2;
@@ -33077,12 +33077,12 @@ __unaligned struct Client_UI_Info_LastPurchasedMarketboardItem /* Size=0x0 */
 __unaligned struct Client_UI_Info_InfoProxyItemSearch /* Size=0x5B98 */
 {
     union {
+    /* 0x0000 */ Client_UI_Info_InfoProxyItemSearchVTable* VTable;
     struct {
     /* 0x0000 */ Client_UI_Info_InfoProxyPageInterface InfoProxyPageInterface;
     /* 0x0020 */ unsigned __int32 SearchItemId;
     /* 0x0030 */ byte InternalListings[0x47E0];
     } _union_struct_0x0;
-    /* 0x0000 */ Client_UI_Info_InfoProxyItemSearchVTable* VTable;
     } _union_0x0;
     /*        */ byte _gap_0x4804[0x4];
     /*        */ byte _gap_0x4808[0x8];
@@ -33160,8 +33160,8 @@ __unaligned struct Client_UI_Info_InfoProxyLetter_Letter /* Size=0xA0 */
 __unaligned struct Client_UI_Info_InfoProxyLetter /* Size=0x5250 */
 {
     union {
-    /* 0x0000 */ Client_UI_Info_InfoProxyPageInterface InfoProxyPageInterface;
     /* 0x0000 */ Client_UI_Info_InfoProxyLetterVTable* VTable;
+    /* 0x0000 */ Client_UI_Info_InfoProxyPageInterface InfoProxyPageInterface;
     } _union_0x0;
     /*        */ byte _gap_0x20[0x4];
     /* 0x0024 */ byte NumAtachments;
@@ -33199,8 +33199,8 @@ __unaligned struct Client_UI_Info_InfoProxyLinkShell_Entry /* Size=0x18 */
 __unaligned struct Client_UI_Info_InfoProxyLinkShell /* Size=0x1E8 */
 {
     union {
-    /* 0x000 */ Client_UI_Info_InfoProxyInterface InfoProxyInterface;
     /* 0x000 */ Client_UI_Info_InfoProxyLinkShellVTable* VTable;
+    /* 0x000 */ Client_UI_Info_InfoProxyInterface InfoProxyInterface;
     } _union_0x0;
     /*       */ byte _gap_0x18[0x20];
     /* 0x038 */ Client_System_String_Utf8String UnkString0;
@@ -33224,8 +33224,8 @@ struct Client_UI_Info_InfoProxyLinkShellChatVTable
 __unaligned struct Client_UI_Info_InfoProxyLinkShellChat /* Size=0x58 */
 {
     union {
-    /* 0x00 */ Client_UI_Info_InfoProxyInterface InfoProxyInterface;
     /* 0x00 */ Client_UI_Info_InfoProxyLinkShellChatVTable* VTable;
+    /* 0x00 */ Client_UI_Info_InfoProxyInterface InfoProxyInterface;
     } _union_0x0;
     /*      */ byte _gap_0x18[0x40];
 };
@@ -33250,8 +33250,8 @@ struct Client_UI_Info_InfoProxyLinkshellMemberVTable
 __unaligned struct Client_UI_Info_InfoProxyLinkshellMember /* Size=0xD0 */
 {
     union {
-    /* 0x00 */ Client_UI_Info_InfoProxyCommonList InfoProxyCommonList;
     /* 0x00 */ Client_UI_Info_InfoProxyLinkshellMemberVTable* VTable;
+    /* 0x00 */ Client_UI_Info_InfoProxyCommonList InfoProxyCommonList;
     } _union_0x0;
     /*      */ byte _gap_0xB8[0x18];
 };
@@ -33293,8 +33293,8 @@ struct Client_UI_Info_InfoProxyPartyVTable
 __unaligned struct Client_UI_Info_InfoProxyParty /* Size=0x348 */
 {
     union {
-    /* 0x000 */ Client_UI_Info_InfoProxyCommonList InfoProxyCommonList;
     /* 0x000 */ Client_UI_Info_InfoProxyPartyVTable* VTable;
+    /* 0x000 */ Client_UI_Info_InfoProxyCommonList InfoProxyCommonList;
     } _union_0x0;
     /*       */ byte _gap_0xB8[0x30];
     /* 0x0E8 */ void* UnkE8;
@@ -33318,8 +33318,8 @@ struct Client_UI_Info_InfoProxyPartyInviteVTable
 __unaligned struct Client_UI_Info_InfoProxyPartyInvite /* Size=0x148 */
 {
     union {
-    /* 0x000 */ Client_UI_Info_InfoProxyInvitedInterface InfoProxyInvitedInterface;
     /* 0x000 */ Client_UI_Info_InfoProxyPartyInviteVTable* VTable;
+    /* 0x000 */ Client_UI_Info_InfoProxyInvitedInterface InfoProxyInvitedInterface;
     } _union_0x0;
     /*       */ byte _gap_0x28[0x10];
     /*       */ byte _gap_0x38[0x4];
@@ -33352,8 +33352,8 @@ struct Client_UI_Info_InfoProxySearchVTable
 __unaligned struct Client_UI_Info_InfoProxySearch /* Size=0x178 */
 {
     union {
-    /* 0x000 */ Client_UI_Info_InfoProxyCommonList InfoProxyCommonList;
     /* 0x000 */ Client_UI_Info_InfoProxySearchVTable* VTable;
+    /* 0x000 */ Client_UI_Info_InfoProxyCommonList InfoProxyCommonList;
     } _union_0x0;
     /*       */ byte _gap_0xB8[0xC0];
 };
@@ -33373,8 +33373,8 @@ struct Client_UI_Info_InfoProxySearchCommentVTable
 __unaligned struct Client_UI_Info_InfoProxySearchComment /* Size=0x240 */
 {
     union {
-    /* 0x000 */ Client_UI_Info_InfoProxyInterface InfoProxyInterface;
     /* 0x000 */ Client_UI_Info_InfoProxySearchCommentVTable* VTable;
+    /* 0x000 */ Client_UI_Info_InfoProxyInterface InfoProxyInterface;
     } _union_0x0;
     /*       */ byte _gap_0x18[0x8];
     /* 0x020 */ void* Unk20;
@@ -33443,27 +33443,17 @@ struct Client_UI_Misc_AchievementListModuleVTable
 __unaligned struct Client_UI_Misc_AchievementListModule /* Size=0x88 */
 {
     union {
+    /* 0x00 */ Client_UI_Misc_AchievementListModuleVTable* VTable;
     struct {
     /* 0x00 */ Client_UI_Misc_UserFileManager_UserFileEvent UserFileEvent;
     /* 0x42 */ unsigned __int16 Watchlist[0x1E];
     } _union_struct_0x0;
-    /* 0x00 */ Client_UI_Misc_AchievementListModuleVTable* VTable;
     } _union_0x0;
     /*      */ byte _gap_0x7C[0x4];
     /* 0x80 */ byte WatchlistCount;
     /*      */ byte _gap_0x81;
     /*      */ byte _gap_0x82[0x2];
     /*      */ byte _gap_0x84[0x4];
-};
-
-__unaligned struct Client_UI_Misc_AcquaintanceModule_Acquaintance /* Size=0xE0 */
-{
-    /* 0x00 */ Client_System_String_Utf8String Name;
-    /* 0x68 */ Client_System_String_Utf8String WorldName;
-    /* 0xD0 */ unsigned __int16 WorldId;
-    /*      */ byte _gap_0xD2[0x2];
-    /*      */ byte _gap_0xD4[0x4];
-    /* 0xD8 */ unsigned __int64 ContentId;
 };
 
 struct Client_UI_Misc_AcquaintanceModuleVTable
@@ -33483,14 +33473,24 @@ struct Client_UI_Misc_AcquaintanceModuleVTable
     /* 0x60 */ void (__fastcall *SaveFile)(Client_UI_Misc_UserFileManager_UserFileEvent* a1, bool a2);
 };
 
+__unaligned struct Client_UI_Misc_AcquaintanceModule_Acquaintance /* Size=0xE0 */
+{
+    /* 0x00 */ Client_System_String_Utf8String Name;
+    /* 0x68 */ Client_System_String_Utf8String WorldName;
+    /* 0xD0 */ unsigned __int16 WorldId;
+    /*      */ byte _gap_0xD2[0x2];
+    /*      */ byte _gap_0xD4[0x4];
+    /* 0xD8 */ unsigned __int64 ContentId;
+};
+
 __unaligned struct Client_UI_Misc_AcquaintanceModule /* Size=0x10F8 */
 {
     union {
+    /* 0x0000 */ Client_UI_Misc_AcquaintanceModuleVTable* VTable;
     struct {
     /* 0x0000 */ Client_UI_Misc_UserFileManager_UserFileEvent UserFileEvent;
     /* 0x0040 */ Client_UI_Misc_AcquaintanceModule_Acquaintance TellHistory[0x10];
     } _union_struct_0x0;
-    /* 0x0000 */ Client_UI_Misc_AcquaintanceModuleVTable* VTable;
     } _union_0x0;
     /* 0x0E40 */ unsigned __int32 NumTellHistoryEntries;
     /*        */ byte _gap_0xE44[0x4];
@@ -33522,8 +33522,8 @@ struct Client_UI_Misc_AddonConfigVTable
 __unaligned struct Client_UI_Misc_AddonConfig /* Size=0x68 */
 {
     union {
-    /* 0x00 */ Client_UI_Misc_UserFileManager_UserFileEvent UserFileEvent;
     /* 0x00 */ Client_UI_Misc_AddonConfigVTable* VTable;
+    /* 0x00 */ Client_UI_Misc_UserFileManager_UserFileEvent UserFileEvent;
     } _union_0x0;
     /* 0x50 */ Client_UI_Misc_AddonConfigData* ModuleData;
     /*      */ byte _gap_0x58[0x10];
@@ -33535,6 +33535,23 @@ __unaligned struct Client_UI_Misc_AddonConfigData /* Size=0x9E90 */
     /*        */ byte _gap_0x68[0x9E20];
     /* 0x9E88 */ __int32 CurrentHudLayout;
     /*        */ byte _gap_0x9E8C[0x4];
+};
+
+struct Client_UI_Misc_AozNoteModuleVTable
+{
+    /*      */ __int64 _vf0;
+    /* 0x08 */ bool (__fastcall *ReadFile)(Client_UI_Misc_UserFileManager_UserFileEvent* a1, bool a2, byte* a3, unsigned __int16 a4, unsigned __int32 a5);
+    /* 0x10 */ unsigned __int32 (__fastcall *WriteFile)(Client_UI_Misc_UserFileManager_UserFileEvent* a1, byte* a2, unsigned __int32 a3);
+    /*      */ __int64 _vf3;
+    /* 0x20 */ unsigned __int32 (__fastcall *GetFileSize)(Client_UI_Misc_UserFileManager_UserFileEvent* a1);
+    /* 0x28 */ unsigned __int32 (__fastcall *GetDataSize)(Client_UI_Misc_UserFileManager_UserFileEvent* a1);
+    /* 0x30 */ unsigned __int16 (__fastcall *GetFileVersion)(Client_UI_Misc_UserFileManager_UserFileEvent* a1);
+    /* 0x38 */ unsigned __int16 (__fastcall *GetFileType)(Client_UI_Misc_UserFileManager_UserFileEvent* a1);
+    /*      */ __int64 _vf8;
+    /* 0x48 */ bool (__fastcall *GetHasChanges)(Client_UI_Misc_UserFileManager_UserFileEvent* a1);
+    /* 0x50 */ byte (__fastcall *GetIsSavePending)(Client_UI_Misc_UserFileManager_UserFileEvent* a1);
+    /* 0x58 */ void (__fastcall *SetCharacterContentId)(Client_UI_Misc_UserFileManager_UserFileEvent* a1, unsigned __int64 a2);
+    /* 0x60 */ void (__fastcall *SaveFile)(Client_UI_Misc_UserFileManager_UserFileEvent* a1, bool a2);
 };
 
 __unaligned struct Client_UI_Misc_AozNoteModule_AozHotBar /* Size=0xC */
@@ -33569,31 +33586,14 @@ __unaligned struct Client_UI_Misc_AozNoteModule_ActiveSet /* Size=0x290 */
     /*       */ byte _gap_0x28E[0x2];
 };
 
-struct Client_UI_Misc_AozNoteModuleVTable
-{
-    /*      */ __int64 _vf0;
-    /* 0x08 */ bool (__fastcall *ReadFile)(Client_UI_Misc_UserFileManager_UserFileEvent* a1, bool a2, byte* a3, unsigned __int16 a4, unsigned __int32 a5);
-    /* 0x10 */ unsigned __int32 (__fastcall *WriteFile)(Client_UI_Misc_UserFileManager_UserFileEvent* a1, byte* a2, unsigned __int32 a3);
-    /*      */ __int64 _vf3;
-    /* 0x20 */ unsigned __int32 (__fastcall *GetFileSize)(Client_UI_Misc_UserFileManager_UserFileEvent* a1);
-    /* 0x28 */ unsigned __int32 (__fastcall *GetDataSize)(Client_UI_Misc_UserFileManager_UserFileEvent* a1);
-    /* 0x30 */ unsigned __int16 (__fastcall *GetFileVersion)(Client_UI_Misc_UserFileManager_UserFileEvent* a1);
-    /* 0x38 */ unsigned __int16 (__fastcall *GetFileType)(Client_UI_Misc_UserFileManager_UserFileEvent* a1);
-    /*      */ __int64 _vf8;
-    /* 0x48 */ bool (__fastcall *GetHasChanges)(Client_UI_Misc_UserFileManager_UserFileEvent* a1);
-    /* 0x50 */ byte (__fastcall *GetIsSavePending)(Client_UI_Misc_UserFileManager_UserFileEvent* a1);
-    /* 0x58 */ void (__fastcall *SetCharacterContentId)(Client_UI_Misc_UserFileManager_UserFileEvent* a1, unsigned __int64 a2);
-    /* 0x60 */ void (__fastcall *SaveFile)(Client_UI_Misc_UserFileManager_UserFileEvent* a1, bool a2);
-};
-
 __unaligned struct Client_UI_Misc_AozNoteModule /* Size=0xD28 */
 {
     union {
+    /* 0x000 */ Client_UI_Misc_AozNoteModuleVTable* VTable;
     struct {
     /* 0x000 */ Client_UI_Misc_UserFileManager_UserFileEvent UserFileEvent;
     /* 0x040 */ Client_UI_Misc_AozNoteModule_ActiveSet ActiveSets[0x5];
     } _union_struct_0x0;
-    /* 0x000 */ Client_UI_Misc_AozNoteModuleVTable* VTable;
     } _union_0x0;
     /*       */ byte _gap_0xD10[0x18];
 };
@@ -33618,11 +33618,11 @@ struct Client_UI_Misc_BannerModuleVTable
 __unaligned struct Client_UI_Misc_BannerModule /* Size=0x48 */
 {
     union {
+    /* 0x00 */ Client_UI_Misc_BannerModuleVTable* VTable;
     struct {
     /* 0x00 */ Client_UI_Misc_UserFileManager_UserFileEvent UserFileEvent;
     /* 0x40 */ Client_UI_Misc_BannerModuleData* Data;
     } _union_struct_0x0;
-    /* 0x00 */ Client_UI_Misc_BannerModuleVTable* VTable;
     } _union_0x0;
 };
 
@@ -33702,12 +33702,12 @@ struct Client_UI_Misc_EmoteHistoryModuleVTable
 __unaligned struct Client_UI_Misc_EmoteHistoryModule /* Size=0x178 */
 {
     union {
+    /* 0x000 */ Client_UI_Misc_EmoteHistoryModuleVTable* VTable;
     struct {
     /* 0x000 */ Client_UI_Misc_UserFileManager_UserFileEvent UserFileEvent;
     /* 0x042 */ unsigned __int16 History[0x6];
     /* 0x04E */ unsigned __int16 Favorites[0x14];
     } _union_struct_0x0;
-    /* 0x000 */ Client_UI_Misc_EmoteHistoryModuleVTable* VTable;
     } _union_0x0;
     /*       */ byte _gap_0x74[0x2];
     /* 0x076 */ byte SeenEmotesBitmask[0x1];
@@ -33742,6 +33742,23 @@ __unaligned struct Client_UI_Misc_ExportedPortraitData /* Size=0x34 */
     /* 0x32 */ unsigned __int16 BannerBg;
 };
 
+struct Client_UI_Misc_FieldMarkerModuleVTable
+{
+    /*      */ __int64 _vf0;
+    /* 0x08 */ bool (__fastcall *ReadFile)(Client_UI_Misc_UserFileManager_UserFileEvent* a1, bool a2, byte* a3, unsigned __int16 a4, unsigned __int32 a5);
+    /* 0x10 */ unsigned __int32 (__fastcall *WriteFile)(Client_UI_Misc_UserFileManager_UserFileEvent* a1, byte* a2, unsigned __int32 a3);
+    /*      */ __int64 _vf3;
+    /* 0x20 */ unsigned __int32 (__fastcall *GetFileSize)(Client_UI_Misc_UserFileManager_UserFileEvent* a1);
+    /* 0x28 */ unsigned __int32 (__fastcall *GetDataSize)(Client_UI_Misc_UserFileManager_UserFileEvent* a1);
+    /* 0x30 */ unsigned __int16 (__fastcall *GetFileVersion)(Client_UI_Misc_UserFileManager_UserFileEvent* a1);
+    /* 0x38 */ unsigned __int16 (__fastcall *GetFileType)(Client_UI_Misc_UserFileManager_UserFileEvent* a1);
+    /*      */ __int64 _vf8;
+    /* 0x48 */ bool (__fastcall *GetHasChanges)(Client_UI_Misc_UserFileManager_UserFileEvent* a1);
+    /* 0x50 */ byte (__fastcall *GetIsSavePending)(Client_UI_Misc_UserFileManager_UserFileEvent* a1);
+    /* 0x58 */ void (__fastcall *SetCharacterContentId)(Client_UI_Misc_UserFileManager_UserFileEvent* a1, unsigned __int64 a2);
+    /* 0x60 */ void (__fastcall *SaveFile)(Client_UI_Misc_UserFileManager_UserFileEvent* a1, bool a2);
+};
+
 __unaligned struct Client_UI_Misc_GamePresetPoint /* Size=0xC */
 {
     /* 0x0 */ __int32 X;
@@ -33765,31 +33782,14 @@ __unaligned struct Client_UI_Misc_FieldMarkerPreset /* Size=0x68 */
     /* 0x64 */ __int32 Timestamp;
 };
 
-struct Client_UI_Misc_FieldMarkerModuleVTable
-{
-    /*      */ __int64 _vf0;
-    /* 0x08 */ bool (__fastcall *ReadFile)(Client_UI_Misc_UserFileManager_UserFileEvent* a1, bool a2, byte* a3, unsigned __int16 a4, unsigned __int32 a5);
-    /* 0x10 */ unsigned __int32 (__fastcall *WriteFile)(Client_UI_Misc_UserFileManager_UserFileEvent* a1, byte* a2, unsigned __int32 a3);
-    /*      */ __int64 _vf3;
-    /* 0x20 */ unsigned __int32 (__fastcall *GetFileSize)(Client_UI_Misc_UserFileManager_UserFileEvent* a1);
-    /* 0x28 */ unsigned __int32 (__fastcall *GetDataSize)(Client_UI_Misc_UserFileManager_UserFileEvent* a1);
-    /* 0x30 */ unsigned __int16 (__fastcall *GetFileVersion)(Client_UI_Misc_UserFileManager_UserFileEvent* a1);
-    /* 0x38 */ unsigned __int16 (__fastcall *GetFileType)(Client_UI_Misc_UserFileManager_UserFileEvent* a1);
-    /*      */ __int64 _vf8;
-    /* 0x48 */ bool (__fastcall *GetHasChanges)(Client_UI_Misc_UserFileManager_UserFileEvent* a1);
-    /* 0x50 */ byte (__fastcall *GetIsSavePending)(Client_UI_Misc_UserFileManager_UserFileEvent* a1);
-    /* 0x58 */ void (__fastcall *SetCharacterContentId)(Client_UI_Misc_UserFileManager_UserFileEvent* a1, unsigned __int64 a2);
-    /* 0x60 */ void (__fastcall *SaveFile)(Client_UI_Misc_UserFileManager_UserFileEvent* a1, bool a2);
-};
-
 __unaligned struct Client_UI_Misc_FieldMarkerModule /* Size=0xC78 */
 {
     union {
+    /* 0x000 */ Client_UI_Misc_FieldMarkerModuleVTable* VTable;
     struct {
     /* 0x000 */ Client_UI_Misc_UserFileManager_UserFileEvent UserFileEvent;
     /* 0x040 */ Client_UI_Misc_FieldMarkerPreset PresetArray[0x1E];
     } _union_struct_0x0;
-    /* 0x000 */ Client_UI_Misc_FieldMarkerModuleVTable* VTable;
     } _union_0x0;
     /*       */ byte _gap_0xC70[0x8];
 };
@@ -33814,16 +33814,10 @@ struct Client_UI_Misc_FlagStatusModuleVTable
 __unaligned struct Client_UI_Misc_FlagStatusModule /* Size=0xB0 */
 {
     union {
-    /* 0x00 */ Client_UI_Misc_UserFileManager_UserFileEvent UserFileEvent;
     /* 0x00 */ Client_UI_Misc_FlagStatusModuleVTable* VTable;
+    /* 0x00 */ Client_UI_Misc_UserFileManager_UserFileEvent UserFileEvent;
     } _union_0x0;
     /*      */ byte _gap_0x50[0x60];
-};
-
-__unaligned struct Client_UI_Misc_GoldSaucerModule_TripleTriadDeck /* Size=0x3A */
-{
-    /* 0x00 */ byte NameBytes[0x30];
-    /* 0x30 */ unsigned __int16 Cards[0x5];
 };
 
 struct Client_UI_Misc_GoldSaucerModuleVTable
@@ -33843,14 +33837,20 @@ struct Client_UI_Misc_GoldSaucerModuleVTable
     /* 0x60 */ void (__fastcall *SaveFile)(Client_UI_Misc_UserFileManager_UserFileEvent* a1, bool a2);
 };
 
+__unaligned struct Client_UI_Misc_GoldSaucerModule_TripleTriadDeck /* Size=0x3A */
+{
+    /* 0x00 */ byte NameBytes[0x30];
+    /* 0x30 */ unsigned __int16 Cards[0x5];
+};
+
 __unaligned struct Client_UI_Misc_GoldSaucerModule /* Size=0x2C8 */
 {
     union {
+    /* 0x000 */ Client_UI_Misc_GoldSaucerModuleVTable* VTable;
     struct {
     /* 0x000 */ Client_UI_Misc_UserFileManager_UserFileEvent UserFileEvent;
     /* 0x040 */ Client_UI_Misc_GoldSaucerModule_TripleTriadDeck Decks[0xA];
     } _union_struct_0x0;
-    /* 0x000 */ Client_UI_Misc_GoldSaucerModuleVTable* VTable;
     } _union_0x0;
     /* 0x284 */ unsigned __int16 HotbarMinions[0x17];
     /*       */ byte _gap_0x2B2[0x2];
@@ -33891,11 +33891,11 @@ __unaligned struct Client_UI_Misc_GroupPoseModule_Light /* Size=0x30 */
 __unaligned struct Client_UI_Misc_GroupPoseModule /* Size=0x130 */
 {
     union {
+    /* 0x000 */ Client_UI_Misc_GroupPoseModuleVTable* VTable;
     struct {
     /* 0x000 */ Client_UI_Misc_UserFileManager_UserFileEvent UserFileEvent;
     /* 0x04C */ float CameraAngle;
     } _union_struct_0x0;
-    /* 0x000 */ Client_UI_Misc_GroupPoseModuleVTable* VTable;
     } _union_0x0;
     /*       */ byte _gap_0x50[0x10];
     /* 0x060 */ float CameraRotation;
@@ -34000,11 +34000,11 @@ struct Client_UI_Misc_ItemContextCustomizeModuleVTable
 __unaligned struct Client_UI_Misc_ItemContextCustomizeModule /* Size=0x190 */
 {
     union {
+    /* 0x000 */ Client_UI_Misc_ItemContextCustomizeModuleVTable* VTable;
     struct {
     /* 0x000 */ Client_UI_Misc_UserFileManager_UserFileEvent UserFileEvent;
     /* 0x040 */ byte FirstTier[0x80];
     } _union_struct_0x0;
-    /* 0x000 */ Client_UI_Misc_ItemContextCustomizeModuleVTable* VTable;
     } _union_0x0;
     /* 0x0C0 */ byte SecondTier[0x80];
     /*       */ byte _gap_0x140[0x50];
@@ -34030,11 +34030,11 @@ struct Client_UI_Misc_ItemFinderModuleVTable
 __unaligned struct Client_UI_Misc_ItemFinderModule /* Size=0x11D0 */
 {
     union {
+    /* 0x0000 */ Client_UI_Misc_ItemFinderModuleVTable* VTable;
     struct {
     /* 0x0000 */ Client_UI_Misc_UserFileManager_UserFileEvent UserFileEvent;
     /* 0x0040 */ unsigned __int32 RequestItemIds[0x18];
     } _union_struct_0x0;
-    /* 0x0000 */ Client_UI_Misc_ItemFinderModuleVTable* VTable;
     } _union_0x0;
     /* 0x00A0 */ bool IsRequestUnfulfilled;
     /* 0x00A1 */ bool IsCabinetCached;
@@ -34142,6 +34142,23 @@ __unaligned struct Client_UI_Misc_ItemFinderModuleRetainerResult /* Size=0x0 */
     /* 0x78 */ __int32 Page5CountCollectible;
 };
 
+struct Client_UI_Misc_ItemOrderModuleVTable
+{
+    /*      */ __int64 _vf0;
+    /* 0x08 */ bool (__fastcall *ReadFile)(Client_UI_Misc_UserFileManager_UserFileEvent* a1, bool a2, byte* a3, unsigned __int16 a4, unsigned __int32 a5);
+    /* 0x10 */ unsigned __int32 (__fastcall *WriteFile)(Client_UI_Misc_UserFileManager_UserFileEvent* a1, byte* a2, unsigned __int32 a3);
+    /*      */ __int64 _vf3;
+    /* 0x20 */ unsigned __int32 (__fastcall *GetFileSize)(Client_UI_Misc_UserFileManager_UserFileEvent* a1);
+    /* 0x28 */ unsigned __int32 (__fastcall *GetDataSize)(Client_UI_Misc_UserFileManager_UserFileEvent* a1);
+    /* 0x30 */ unsigned __int16 (__fastcall *GetFileVersion)(Client_UI_Misc_UserFileManager_UserFileEvent* a1);
+    /* 0x38 */ unsigned __int16 (__fastcall *GetFileType)(Client_UI_Misc_UserFileManager_UserFileEvent* a1);
+    /*      */ __int64 _vf8;
+    /* 0x48 */ bool (__fastcall *GetHasChanges)(Client_UI_Misc_UserFileManager_UserFileEvent* a1);
+    /* 0x50 */ byte (__fastcall *GetIsSavePending)(Client_UI_Misc_UserFileManager_UserFileEvent* a1);
+    /* 0x58 */ void (__fastcall *SetCharacterContentId)(Client_UI_Misc_UserFileManager_UserFileEvent* a1, unsigned __int64 a2);
+    /* 0x60 */ void (__fastcall *SaveFile)(Client_UI_Misc_UserFileManager_UserFileEvent* a1, bool a2);
+};
+
 __unaligned struct Client_UI_Misc_ItemOrderModuleSorterItemEntry /* Size=0xC */
 {
     /* 0x0 */ unsigned __int16 Page;
@@ -34182,23 +34199,6 @@ __unaligned struct Client_UI_Misc_ItemOrderModuleSorter /* Size=0x68 */
     /*      */ byte _gap_0x60[0x8];
 };
 
-struct Client_UI_Misc_ItemOrderModuleVTable
-{
-    /*      */ __int64 _vf0;
-    /* 0x08 */ bool (__fastcall *ReadFile)(Client_UI_Misc_UserFileManager_UserFileEvent* a1, bool a2, byte* a3, unsigned __int16 a4, unsigned __int32 a5);
-    /* 0x10 */ unsigned __int32 (__fastcall *WriteFile)(Client_UI_Misc_UserFileManager_UserFileEvent* a1, byte* a2, unsigned __int32 a3);
-    /*      */ __int64 _vf3;
-    /* 0x20 */ unsigned __int32 (__fastcall *GetFileSize)(Client_UI_Misc_UserFileManager_UserFileEvent* a1);
-    /* 0x28 */ unsigned __int32 (__fastcall *GetDataSize)(Client_UI_Misc_UserFileManager_UserFileEvent* a1);
-    /* 0x30 */ unsigned __int16 (__fastcall *GetFileVersion)(Client_UI_Misc_UserFileManager_UserFileEvent* a1);
-    /* 0x38 */ unsigned __int16 (__fastcall *GetFileType)(Client_UI_Misc_UserFileManager_UserFileEvent* a1);
-    /*      */ __int64 _vf8;
-    /* 0x48 */ bool (__fastcall *GetHasChanges)(Client_UI_Misc_UserFileManager_UserFileEvent* a1);
-    /* 0x50 */ byte (__fastcall *GetIsSavePending)(Client_UI_Misc_UserFileManager_UserFileEvent* a1);
-    /* 0x58 */ void (__fastcall *SetCharacterContentId)(Client_UI_Misc_UserFileManager_UserFileEvent* a1, unsigned __int64 a2);
-    /* 0x60 */ void (__fastcall *SaveFile)(Client_UI_Misc_UserFileManager_UserFileEvent* a1, bool a2);
-};
-
 __unaligned struct StdPairunsignedint64ClientUIMiscItemOrderModuleSorterPtr /* Size=0x10 */
 {
     /* 0x00 */ unsigned __int64 Item1;
@@ -34228,12 +34228,12 @@ __unaligned struct StdMapunsignedint64ClientUIMiscItemOrderModuleSorterPtr /* Si
 __unaligned struct Client_UI_Misc_ItemOrderModule /* Size=0xD8 */
 {
     union {
+    /* 0x00 */ Client_UI_Misc_ItemOrderModuleVTable* VTable;
     struct {
     /* 0x00 */ Client_UI_Misc_UserFileManager_UserFileEvent UserFileEvent;
     /* 0x40 */ Client_UI_Misc_ItemOrderModuleSorter* InventorySorter;
     /* 0x48 */ Client_UI_Misc_ItemOrderModuleSorter* ArmourySorter[0xC];
     } _union_struct_0x0;
-    /* 0x00 */ Client_UI_Misc_ItemOrderModuleVTable* VTable;
     } _union_0x0;
     /* 0xA8 */ Client_UI_Misc_ItemOrderModuleSorter* ArmouryWaistSorter;
     /* 0xB0 */ unsigned __int64 ActiveRetainerId;
@@ -34277,8 +34277,8 @@ struct Client_UI_Misc_LetterDataModuleVTable
 __unaligned struct Client_UI_Misc_LetterDataModule /* Size=0xA48 */
 {
     union {
-    /* 0x000 */ Client_UI_Misc_UserFileManager_UserFileEvent UserFileEvent;
     /* 0x000 */ Client_UI_Misc_LetterDataModuleVTable* VTable;
+    /* 0x000 */ Client_UI_Misc_UserFileManager_UserFileEvent UserFileEvent;
     } _union_0x0;
     /*       */ byte _gap_0x50[0x9F8];
 };
@@ -34303,8 +34303,8 @@ struct Client_UI_Misc_LogFilterConfigVTable
 __unaligned struct Client_UI_Misc_LogFilterConfig /* Size=0x528 */
 {
     union {
-    /* 0x000 */ Client_UI_Misc_UserFileManager_UserFileEvent UserFileEvent;
     /* 0x000 */ Client_UI_Misc_LogFilterConfigVTable* VTable;
+    /* 0x000 */ Client_UI_Misc_UserFileManager_UserFileEvent UserFileEvent;
     } _union_0x0;
     /*       */ byte _gap_0x50[0x4D8];
 };
@@ -34337,11 +34337,11 @@ struct Client_UI_Misc_MinionListModuleVTable
 __unaligned struct Client_UI_Misc_MinionListModule /* Size=0x98 */
 {
     union {
+    /* 0x00 */ Client_UI_Misc_MinionListModuleVTable* VTable;
     struct {
     /* 0x00 */ Client_UI_Misc_UserFileManager_UserFileEvent UserFileEvent;
     /* 0x42 */ unsigned __int16 UnseenCompanions[0xA];
     } _union_struct_0x0;
-    /* 0x00 */ Client_UI_Misc_MinionListModuleVTable* VTable;
     } _union_0x0;
     /*      */ byte _gap_0x54[0x2];
     /* 0x56 */ unsigned __int16 Favorites[0x1E];
@@ -34369,11 +34369,11 @@ struct Client_UI_Misc_MountListModuleVTable
 __unaligned struct Client_UI_Misc_MountListModule /* Size=0x98 */
 {
     union {
+    /* 0x00 */ Client_UI_Misc_MountListModuleVTable* VTable;
     struct {
     /* 0x00 */ Client_UI_Misc_UserFileManager_UserFileEvent UserFileEvent;
     /* 0x42 */ unsigned __int16 UnseenMounts[0xA];
     } _union_struct_0x0;
-    /* 0x00 */ Client_UI_Misc_MountListModuleVTable* VTable;
     } _union_0x0;
     /*      */ byte _gap_0x54[0x2];
     /* 0x56 */ unsigned __int16 Favorites[0x1E];
@@ -34430,12 +34430,6 @@ __unaligned struct Client_UI_Misc_PronounModule_PronounModuleVTable /* Size=0x0 
     /* 0x8 */ Client_System_String_Utf8String* (__fastcall *ProcessString)(Client_UI_Misc_PronounModule* a1, Client_System_String_Utf8String* a2, bool a3, __int32 a4);
 };
 
-__unaligned struct Client_UI_Misc_PvpSetModule_AdditionalPvpActions /* Size=0x4 */
-{
-    /* 0x0 */ unsigned __int16 ActionId1;
-    /* 0x2 */ unsigned __int16 ActionId2;
-};
-
 struct Client_UI_Misc_PvpSetModuleVTable
 {
     /*      */ __int64 _vf0;
@@ -34453,19 +34447,42 @@ struct Client_UI_Misc_PvpSetModuleVTable
     /* 0x60 */ void (__fastcall *SaveFile)(Client_UI_Misc_UserFileManager_UserFileEvent* a1, bool a2);
 };
 
+__unaligned struct Client_UI_Misc_PvpSetModule_AdditionalPvpActions /* Size=0x4 */
+{
+    /* 0x0 */ unsigned __int16 ActionId1;
+    /* 0x2 */ unsigned __int16 ActionId2;
+};
+
 __unaligned struct Client_UI_Misc_PvpSetModule /* Size=0x98 */
 {
     union {
+    /* 0x00 */ Client_UI_Misc_PvpSetModuleVTable* VTable;
     struct {
     /* 0x00 */ Client_UI_Misc_UserFileManager_UserFileEvent UserFileEvent;
     /* 0x40 */ Client_UI_Misc_PvpSetModule_AdditionalPvpActions AdditionalActions[0x14];
     } _union_struct_0x0;
-    /* 0x00 */ Client_UI_Misc_PvpSetModuleVTable* VTable;
     } _union_0x0;
     /* 0x90 */ byte Unk90;
     /*      */ byte _gap_0x91;
     /*      */ byte _gap_0x92[0x2];
     /*      */ byte _gap_0x94[0x4];
+};
+
+struct Client_UI_Misc_RaptureGearsetModuleVTable
+{
+    /*      */ __int64 _vf0;
+    /* 0x08 */ bool (__fastcall *ReadFile)(Client_UI_Misc_UserFileManager_UserFileEvent* a1, bool a2, byte* a3, unsigned __int16 a4, unsigned __int32 a5);
+    /* 0x10 */ unsigned __int32 (__fastcall *WriteFile)(Client_UI_Misc_UserFileManager_UserFileEvent* a1, byte* a2, unsigned __int32 a3);
+    /*      */ __int64 _vf3;
+    /* 0x20 */ unsigned __int32 (__fastcall *GetFileSize)(Client_UI_Misc_UserFileManager_UserFileEvent* a1);
+    /* 0x28 */ unsigned __int32 (__fastcall *GetDataSize)(Client_UI_Misc_UserFileManager_UserFileEvent* a1);
+    /* 0x30 */ unsigned __int16 (__fastcall *GetFileVersion)(Client_UI_Misc_UserFileManager_UserFileEvent* a1);
+    /* 0x38 */ unsigned __int16 (__fastcall *GetFileType)(Client_UI_Misc_UserFileManager_UserFileEvent* a1);
+    /*      */ __int64 _vf8;
+    /* 0x48 */ bool (__fastcall *GetHasChanges)(Client_UI_Misc_UserFileManager_UserFileEvent* a1);
+    /* 0x50 */ byte (__fastcall *GetIsSavePending)(Client_UI_Misc_UserFileManager_UserFileEvent* a1);
+    /* 0x58 */ void (__fastcall *SetCharacterContentId)(Client_UI_Misc_UserFileManager_UserFileEvent* a1, unsigned __int64 a2);
+    /* 0x60 */ void (__fastcall *SaveFile)(Client_UI_Misc_UserFileManager_UserFileEvent* a1, bool a2);
 };
 
 __unaligned struct Client_UI_Misc_RaptureGearsetModule_GearsetItem /* Size=0x1C */
@@ -34511,31 +34528,14 @@ __unaligned struct Client_UI_Misc_RaptureGearsetModule_GearsetEntry /* Size=0x1C
     } _union_0x38;
 };
 
-struct Client_UI_Misc_RaptureGearsetModuleVTable
-{
-    /*      */ __int64 _vf0;
-    /* 0x08 */ bool (__fastcall *ReadFile)(Client_UI_Misc_UserFileManager_UserFileEvent* a1, bool a2, byte* a3, unsigned __int16 a4, unsigned __int32 a5);
-    /* 0x10 */ unsigned __int32 (__fastcall *WriteFile)(Client_UI_Misc_UserFileManager_UserFileEvent* a1, byte* a2, unsigned __int32 a3);
-    /*      */ __int64 _vf3;
-    /* 0x20 */ unsigned __int32 (__fastcall *GetFileSize)(Client_UI_Misc_UserFileManager_UserFileEvent* a1);
-    /* 0x28 */ unsigned __int32 (__fastcall *GetDataSize)(Client_UI_Misc_UserFileManager_UserFileEvent* a1);
-    /* 0x30 */ unsigned __int16 (__fastcall *GetFileVersion)(Client_UI_Misc_UserFileManager_UserFileEvent* a1);
-    /* 0x38 */ unsigned __int16 (__fastcall *GetFileType)(Client_UI_Misc_UserFileManager_UserFileEvent* a1);
-    /*      */ __int64 _vf8;
-    /* 0x48 */ bool (__fastcall *GetHasChanges)(Client_UI_Misc_UserFileManager_UserFileEvent* a1);
-    /* 0x50 */ byte (__fastcall *GetIsSavePending)(Client_UI_Misc_UserFileManager_UserFileEvent* a1);
-    /* 0x58 */ void (__fastcall *SetCharacterContentId)(Client_UI_Misc_UserFileManager_UserFileEvent* a1, unsigned __int64 a2);
-    /* 0x60 */ void (__fastcall *SaveFile)(Client_UI_Misc_UserFileManager_UserFileEvent* a1, bool a2);
-};
-
 __unaligned struct Client_UI_Misc_RaptureGearsetModule /* Size=0xB670 */
 {
     union {
+    /* 0x0000 */ Client_UI_Misc_RaptureGearsetModuleVTable* VTable;
     struct {
     /* 0x0000 */ Client_UI_Misc_UserFileManager_UserFileEvent UserFileEvent;
     /* 0x0048 */ Client_UI_Misc_RaptureGearsetModule_GearsetEntry Entries[0x64];
     } _union_struct_0x0;
-    /* 0x0000 */ Client_UI_Misc_RaptureGearsetModuleVTable* VTable;
     } _union_0x0;
     /*        */ byte _gap_0xAF40[0x4F0];
     /*        */ byte _gap_0xB430[0x4];
@@ -34640,11 +34640,11 @@ struct Client_UI_Misc_RaptureMacroModuleVTable
 __unaligned struct Client_UI_Misc_RaptureMacroModule /* Size=0x51AA8 */
 {
     union {
+    /* 0x00000 */ Client_UI_Misc_RaptureMacroModuleVTable* VTable;
     struct {
     /* 0x00000 */ Client_UI_Misc_UserFileManager_UserFileEvent UserFileEvent;
     /* 0x00040 */ Client_UI_Misc_RaptureTextModule* RaptureTextModule;
     } _union_struct_0x0;
-    /* 0x00000 */ Client_UI_Misc_RaptureMacroModuleVTable* VTable;
     } _union_0x0;
     /*         */ byte _gap_0x50[0x8];
     /* 0x00058 */ Client_UI_Misc_RaptureMacroModule_Macro Individual[0x64];
@@ -34672,8 +34672,8 @@ struct Client_UI_Misc_RaptureTeleportHistoryVTable
 __unaligned struct Client_UI_Misc_RaptureTeleportHistory /* Size=0xC0 */
 {
     union {
-    /* 0x00 */ Client_UI_Misc_UserFileManager_UserFileEvent UserFileEvent;
     /* 0x00 */ Client_UI_Misc_RaptureTeleportHistoryVTable* VTable;
+    /* 0x00 */ Client_UI_Misc_UserFileManager_UserFileEvent UserFileEvent;
     } _union_0x0;
     /*      */ byte _gap_0x50[0x70];
 };
@@ -34825,8 +34825,8 @@ struct Client_UI_Misc_RaptureTextModuleVTable
 __unaligned struct Client_UI_Misc_RaptureTextModule /* Size=0xE60 */
 {
     union {
-    /* 0x000 */ Component_Text_TextModule TextModule;
     /* 0x000 */ Client_UI_Misc_RaptureTextModuleVTable* VTable;
+    /* 0x000 */ Component_Text_TextModule TextModule;
     } _union_0x0;
     /* 0x510 */ void** ExecNonMacroFunc;
     /* 0x518 */ void** ExcelLanguageEvent;
@@ -34856,22 +34856,10 @@ struct Client_UI_Misc_RaptureUiDataModuleVTable
 __unaligned struct Client_UI_Misc_RaptureUiDataModule /* Size=0x5958 */
 {
     union {
-    /* 0x0000 */ Client_UI_Misc_UserFileManager_UserFileEvent UserFileEvent;
     /* 0x0000 */ Client_UI_Misc_RaptureUiDataModuleVTable* VTable;
+    /* 0x0000 */ Client_UI_Misc_UserFileManager_UserFileEvent UserFileEvent;
     } _union_0x0;
     /*        */ byte _gap_0x50[0x5908];
-};
-
-__unaligned struct Client_UI_Misc_RecipeFavoriteModule_RecipeEntry /* Size=0x4 */
-{
-    /* 0x0 */ unsigned __int16 RecipeId;
-    /* 0x2 */ bool IsFavorite;
-    /*     */ byte _gap_0x3;
-};
-
-__unaligned struct Client_UI_Misc_RecipeFavoriteModule_CraftingTypeEntry /* Size=0x28 */
-{
-    /* 0x00 */ Client_UI_Misc_RecipeFavoriteModule_RecipeEntry Recipes[0xA];
 };
 
 struct Client_UI_Misc_RecipeFavoriteModuleVTable
@@ -34891,14 +34879,26 @@ struct Client_UI_Misc_RecipeFavoriteModuleVTable
     /* 0x60 */ void (__fastcall *SaveFile)(Client_UI_Misc_UserFileManager_UserFileEvent* a1, bool a2);
 };
 
+__unaligned struct Client_UI_Misc_RecipeFavoriteModule_RecipeEntry /* Size=0x4 */
+{
+    /* 0x0 */ unsigned __int16 RecipeId;
+    /* 0x2 */ bool IsFavorite;
+    /*     */ byte _gap_0x3;
+};
+
+__unaligned struct Client_UI_Misc_RecipeFavoriteModule_CraftingTypeEntry /* Size=0x28 */
+{
+    /* 0x00 */ Client_UI_Misc_RecipeFavoriteModule_RecipeEntry Recipes[0xA];
+};
+
 __unaligned struct Client_UI_Misc_RecipeFavoriteModule /* Size=0x188 */
 {
     union {
+    /* 0x000 */ Client_UI_Misc_RecipeFavoriteModuleVTable* VTable;
     struct {
     /* 0x000 */ Client_UI_Misc_UserFileManager_UserFileEvent UserFileEvent;
     /* 0x042 */ Client_UI_Misc_RecipeFavoriteModule_CraftingTypeEntry CraftingTypes[0x8];
     } _union_struct_0x0;
-    /* 0x000 */ Client_UI_Misc_RecipeFavoriteModuleVTable* VTable;
     } _union_0x0;
     /*       */ byte _gap_0x180[0x8];
 };
@@ -34919,15 +34919,6 @@ __unaligned struct Client_UI_Misc_RecommendEquipModule /* Size=0x80 */
     /*      */ byte _gap_0x7F;
 };
 
-__unaligned struct Client_UI_Misc_RetainerCommentModule_RetainerComment /* Size=0x88 */
-{
-    /* 0x00 */ unsigned __int64 Id;
-    /* 0x08 */ byte Comment[0x5B];
-    /*      */ byte _gap_0x63;
-    /*      */ byte _gap_0x64[0x4];
-    /*      */ byte _gap_0x68[0x20];
-};
-
 struct Client_UI_Misc_RetainerCommentModuleVTable
 {
     /*      */ __int64 _vf0;
@@ -34945,14 +34936,23 @@ struct Client_UI_Misc_RetainerCommentModuleVTable
     /* 0x60 */ void (__fastcall *SaveFile)(Client_UI_Misc_UserFileManager_UserFileEvent* a1, bool a2);
 };
 
+__unaligned struct Client_UI_Misc_RetainerCommentModule_RetainerComment /* Size=0x88 */
+{
+    /* 0x00 */ unsigned __int64 Id;
+    /* 0x08 */ byte Comment[0x5B];
+    /*      */ byte _gap_0x63;
+    /*      */ byte _gap_0x64[0x4];
+    /*      */ byte _gap_0x68[0x20];
+};
+
 __unaligned struct Client_UI_Misc_RetainerCommentModule /* Size=0x5A0 */
 {
     union {
+    /* 0x000 */ Client_UI_Misc_RetainerCommentModuleVTable* VTable;
     struct {
     /* 0x000 */ Client_UI_Misc_UserFileManager_UserFileEvent UserFileEvent;
     /* 0x048 */ Client_UI_Misc_RetainerCommentModule_RetainerComment Retainers[0xA];
     } _union_struct_0x0;
-    /* 0x000 */ Client_UI_Misc_RetainerCommentModuleVTable* VTable;
     } _union_0x0;
     /*       */ byte _gap_0x590[0x10];
 };
@@ -34977,8 +34977,8 @@ struct Client_UI_Misc_RetainerTaskDataModuleVTable
 __unaligned struct Client_UI_Misc_RetainerTaskDataModule /* Size=0xB0 */
 {
     union {
-    /* 0x00 */ Client_UI_Misc_UserFileManager_UserFileEvent UserFileEvent;
     /* 0x00 */ Client_UI_Misc_RetainerTaskDataModuleVTable* VTable;
+    /* 0x00 */ Client_UI_Misc_UserFileManager_UserFileEvent UserFileEvent;
     } _union_0x0;
     /*      */ byte _gap_0x50[0x60];
 };
@@ -35009,8 +35009,8 @@ struct Client_UI_Misc_UiSavePackModuleVTable
 __unaligned struct Client_UI_Misc_UiSavePackModule /* Size=0x50 */
 {
     union {
-    /* 0x00 */ Client_UI_Misc_UserFileManager_UserFileEvent UserFileEvent;
     /* 0x00 */ Client_UI_Misc_UiSavePackModuleVTable* VTable;
+    /* 0x00 */ Client_UI_Misc_UserFileManager_UserFileEvent UserFileEvent;
     } _union_0x0;
 };
 
@@ -35069,12 +35069,12 @@ struct Client_UI_Misc_VVDActionModuleVTable
 __unaligned struct Client_UI_Misc_VVDActionModule /* Size=0x48 */
 {
     union {
+    /* 0x00 */ Client_UI_Misc_VVDActionModuleVTable* VTable;
     struct {
     /* 0x00 */ Client_UI_Misc_UserFileManager_UserFileEvent UserFileEvent;
     /* 0x40 */ byte Action1;
     /* 0x41 */ byte Action2;
     } _union_struct_0x0;
-    /* 0x00 */ Client_UI_Misc_VVDActionModuleVTable* VTable;
     } _union_0x0;
 };
 
@@ -35310,6 +35310,24 @@ struct Client_UI_RaptureAtkModuleVTable
     /* 0x1D0 */ void (__fastcall *Update)(Client_UI_RaptureAtkModule* a1, float a2);
 };
 
+struct Client_UI_RaptureAtkUnitManagerVTable
+{
+    /*        */ __int64 _vf0;
+    /*        */ __int64 _vf1;
+    /*        */ __int64 _vf2;
+    /*        */ __int64 _vf3;
+    /*        */ __int64 _vf4;
+    /*        */ __int64 _vf5;
+    /*        */ __int64 _vf6;
+    /*        */ __int64 _vf7;
+    /* 0x0040 */ bool (__fastcall *ShowAddonByID)(Client_UI_RaptureAtkUnitManager* a1, unsigned __int16 a2, bool a3);
+    /*        */ __int64 _vf9;
+    /*        */ __int64 _vf10;
+    /* 0x0058 */ void (__fastcall *UpdateAddonByID)(Client_UI_RaptureAtkUnitManager* a1, unsigned __int16 a2, Component_GUI_NumberArrayData** a3, Component_GUI_StringArrayData** a4, bool a5);
+    /*        */ byte _gap_0x60[0x9C28];
+    /* 0x9C88 */ Client_UI_RaptureAtkModuleFlags Flags;
+};
+
 __unaligned struct Component_GUI_AtkUnitList /* Size=0x810 */
 {
     /* 0x000 */ void* vtbl;
@@ -35344,29 +35362,11 @@ __unaligned struct Component_GUI_AtkUnitManager /* Size=0x9C90 */
     /*        */ byte _gap_0x9150[0xB40];
 };
 
-struct Client_UI_RaptureAtkUnitManagerVTable
-{
-    /*        */ __int64 _vf0;
-    /*        */ __int64 _vf1;
-    /*        */ __int64 _vf2;
-    /*        */ __int64 _vf3;
-    /*        */ __int64 _vf4;
-    /*        */ __int64 _vf5;
-    /*        */ __int64 _vf6;
-    /*        */ __int64 _vf7;
-    /* 0x0040 */ bool (__fastcall *ShowAddonByID)(Client_UI_RaptureAtkUnitManager* a1, unsigned __int16 a2, bool a3);
-    /*        */ __int64 _vf9;
-    /*        */ __int64 _vf10;
-    /* 0x0058 */ void (__fastcall *UpdateAddonByID)(Client_UI_RaptureAtkUnitManager* a1, unsigned __int16 a2, Component_GUI_NumberArrayData** a3, Component_GUI_StringArrayData** a4, bool a5);
-    /*        */ byte _gap_0x60[0x9C28];
-    /* 0x9C88 */ Client_UI_RaptureAtkModuleFlags Flags;
-};
-
 __unaligned struct Client_UI_RaptureAtkUnitManager /* Size=0x9D18 */
 {
     union {
-    /* 0x0000 */ Component_GUI_AtkUnitManager AtkUnitManager;
     /* 0x0000 */ Client_UI_RaptureAtkUnitManagerVTable* VTable;
+    /* 0x0000 */ Component_GUI_AtkUnitManager AtkUnitManager;
     } _union_0x0;
     /*        */ byte _gap_0x9C90[0x70];
     /* 0x9D00 */ Client_UI_UIModule_UiFlags UiFlags;
@@ -35393,8 +35393,8 @@ __unaligned struct Client_UI_RaptureAtkModule_NamePlateInfo /* Size=0x248 */
 __unaligned struct Client_UI_RaptureAtkModule /* Size=0x28F98 */
 {
     union {
-    /* 0x00000 */ Component_GUI_AtkModule AtkModule;
     /* 0x00000 */ Client_UI_RaptureAtkModuleVTable* VTable;
+    /* 0x00000 */ Component_GUI_AtkModule AtkModule;
     } _union_0x0;
     /*         */ byte _gap_0x82A0[0x550];
     /*         */ byte _gap_0x87F0[0x4];
@@ -36186,46 +36186,6 @@ __unaligned struct Common_Component_BGCollision_Object /* Size=0x8 */
     /*     */ byte _gap_0x0[0x8];
 };
 
-struct Common_Component_BGCollision_NodeVTable
-{
-    /* 0x0 */ void (__fastcall *Dtor)(Common_Component_BGCollision_Object* a1, byte a2);
-};
-
-struct Common_Component_BGCollision_NodeLinkVTable
-{
-    /* 0x0 */ void (__fastcall *Dtor)(Common_Component_BGCollision_NodeLink* a1, byte a2);
-};
-
-__unaligned struct Common_Component_BGCollision_NodeLink /* Size=0x18 */
-{
-    /* 0x00 */ Common_Component_BGCollision_NodeLinkVTable* VTable;
-    /*      */ byte _gap_0x0[0x8];
-    /* 0x08 */ Common_Component_BGCollision_Node* Prev;
-    /* 0x10 */ Common_Component_BGCollision_Node* Next;
-};
-
-__unaligned struct Common_Component_BGCollision_Node /* Size=0x20 */
-{
-    union {
-    /* 0x00 */ Common_Component_BGCollision_Object Object;
-    /* 0x00 */ Common_Component_BGCollision_NodeVTable* VTable;
-    } _union_0x0;
-    /* 0x08 */ Common_Component_BGCollision_NodeLink NodeLink;
-};
-
-struct Common_Component_BGCollision_QuadtreeNodeVTable
-{
-    /* 0x0 */ void (__fastcall *Dtor)(Common_Component_BGCollision_Object* a1, byte a2);
-};
-
-__unaligned struct Common_Component_BGCollision_QuadtreeNode /* Size=0x20 */
-{
-    union {
-    /* 0x00 */ Common_Component_BGCollision_Node Node;
-    /* 0x00 */ Common_Component_BGCollision_QuadtreeNodeVTable* VTable;
-    } _union_0x0;
-};
-
 __unaligned struct Common_Component_BGCollision_Math_AABB /* Size=0x18 */
 {
     /* 0x00 */ System_Numerics_Vector3 Min;
@@ -36319,9 +36279,50 @@ struct Common_Component_BGCollision_ColliderVTable
     /* 0xB0 */ bool (__fastcall *IsInside)(Common_Component_BGCollision_Collider* a1, System_Numerics_Vector3* a2);
 };
 
+struct Common_Component_BGCollision_NodeVTable
+{
+    /* 0x0 */ void (__fastcall *Dtor)(Common_Component_BGCollision_Object* a1, byte a2);
+};
+
+struct Common_Component_BGCollision_NodeLinkVTable
+{
+    /* 0x0 */ void (__fastcall *Dtor)(Common_Component_BGCollision_NodeLink* a1, byte a2);
+};
+
+__unaligned struct Common_Component_BGCollision_NodeLink /* Size=0x18 */
+{
+    /* 0x00 */ Common_Component_BGCollision_NodeLinkVTable* VTable;
+    /*      */ byte _gap_0x0[0x8];
+    /* 0x08 */ Common_Component_BGCollision_Node* Prev;
+    /* 0x10 */ Common_Component_BGCollision_Node* Next;
+};
+
+__unaligned struct Common_Component_BGCollision_Node /* Size=0x20 */
+{
+    union {
+    /* 0x00 */ Common_Component_BGCollision_NodeVTable* VTable;
+    /* 0x00 */ Common_Component_BGCollision_Object Object;
+    } _union_0x0;
+    /* 0x08 */ Common_Component_BGCollision_NodeLink NodeLink;
+};
+
+struct Common_Component_BGCollision_QuadtreeNodeVTable
+{
+    /* 0x0 */ void (__fastcall *Dtor)(Common_Component_BGCollision_Object* a1, byte a2);
+};
+
+__unaligned struct Common_Component_BGCollision_QuadtreeNode /* Size=0x20 */
+{
+    union {
+    /* 0x00 */ Common_Component_BGCollision_QuadtreeNodeVTable* VTable;
+    /* 0x00 */ Common_Component_BGCollision_Node Node;
+    } _union_0x0;
+};
+
 __unaligned struct Common_Component_BGCollision_Collider /* Size=0xA0 */
 {
     union {
+    /* 0x00 */ Common_Component_BGCollision_ColliderVTable* VTable;
     struct {
     /* 0x00 */ Common_Component_BGCollision_Node Node;
     /* 0x20 */ Common_Component_BGCollision_QuadtreeNode QuadtreeNode;
@@ -36333,7 +36334,6 @@ __unaligned struct Common_Component_BGCollision_Collider /* Size=0xA0 */
     /* 0x80 */ float LastTranslationDeltaY;
     /* 0x84 */ byte VisibilityFlags;
     } _union_struct_0x0;
-    /* 0x00 */ Common_Component_BGCollision_ColliderVTable* VTable;
     } _union_0x0;
 };
 
@@ -36422,12 +36422,12 @@ __unaligned struct Common_Component_BGCollision_Math_Matrix4x3 /* Size=0x30 */
 __unaligned struct Common_Component_BGCollision_ColliderBox /* Size=0x140 */
 {
     union {
+    /* 0x000 */ Common_Component_BGCollision_ColliderBoxVTable* VTable;
     struct {
     /* 0x000 */ Common_Component_BGCollision_Collider Collider;
     /* 0x0A0 */ System_Numerics_Vector3 Translation;
     /* 0x0AC */ System_Numerics_Vector3 TranslationPrev;
     } _union_struct_0x0;
-    /* 0x000 */ Common_Component_BGCollision_ColliderBoxVTable* VTable;
     } _union_0x0;
     /* 0x0B8 */ System_Numerics_Vector3 Rotation;
     /*       */ byte _gap_0xB8[0x8];
@@ -36475,12 +36475,12 @@ struct Common_Component_BGCollision_ColliderCylinderVTable
 __unaligned struct Common_Component_BGCollision_ColliderCylinder /* Size=0x148 */
 {
     union {
+    /* 0x000 */ Common_Component_BGCollision_ColliderCylinderVTable* VTable;
     struct {
     /* 0x000 */ Common_Component_BGCollision_Collider Collider;
     /* 0x0A0 */ System_Numerics_Vector3 Translation;
     /* 0x0AC */ System_Numerics_Vector3 TranslationPrev;
     } _union_struct_0x0;
-    /* 0x000 */ Common_Component_BGCollision_ColliderCylinderVTable* VTable;
     } _union_0x0;
     /* 0x0B8 */ System_Numerics_Vector3 Rotation;
     /*       */ byte _gap_0xB8[0x8];
@@ -36530,12 +36530,12 @@ struct Common_Component_BGCollision_ColliderMeshVTable
 __unaligned struct Common_Component_BGCollision_ColliderMesh /* Size=0x198 */
 {
     union {
+    /* 0x000 */ Common_Component_BGCollision_ColliderMeshVTable* VTable;
     struct {
     /* 0x000 */ Common_Component_BGCollision_Collider Collider;
     /* 0x0A8 */ Common_Component_BGCollision_Resource* Resource;
     /* 0x0B0 */ byte* MemoryData;
     } _union_struct_0x0;
-    /* 0x000 */ Common_Component_BGCollision_ColliderMeshVTable* VTable;
     } _union_0x0;
     /* 0x0B8 */ __int32 TotalPrimitives;
     /* 0x0BC */ bool Dirty;
@@ -36598,12 +36598,12 @@ struct Common_Component_BGCollision_ColliderPlaneVTable
 __unaligned struct Common_Component_BGCollision_ColliderPlane /* Size=0x140 */
 {
     union {
+    /* 0x000 */ Common_Component_BGCollision_ColliderPlaneVTable* VTable;
     struct {
     /* 0x000 */ Common_Component_BGCollision_Collider Collider;
     /* 0x0A0 */ System_Numerics_Vector3 Translation;
     /* 0x0AC */ System_Numerics_Vector3 TranslationPrev;
     } _union_struct_0x0;
-    /* 0x000 */ Common_Component_BGCollision_ColliderPlaneVTable* VTable;
     } _union_0x0;
     /* 0x0B8 */ System_Numerics_Vector3 Rotation;
     /*       */ byte _gap_0xB8[0x8];
@@ -36651,13 +36651,13 @@ struct Common_Component_BGCollision_ColliderSphereVTable
 __unaligned struct Common_Component_BGCollision_ColliderSphere /* Size=0x150 */
 {
     union {
+    /* 0x000 */ Common_Component_BGCollision_ColliderSphereVTable* VTable;
     struct {
     /* 0x000 */ Common_Component_BGCollision_Collider Collider;
     /* 0x0A0 */ bool Dirty;
     /* 0x0A4 */ System_Numerics_Vector3 Translation;
     /* 0x0B0 */ System_Numerics_Vector3 TranslationPrev;
     } _union_struct_0x0;
-    /* 0x000 */ Common_Component_BGCollision_ColliderSphereVTable* VTable;
     } _union_0x0;
     /*       */ byte _gap_0xB8[0x4];
     /* 0x0BC */ System_Numerics_Vector3 Rotation;
@@ -36707,11 +36707,11 @@ struct Common_Component_BGCollision_ColliderStreamedVTable
 __unaligned struct Common_Component_BGCollision_ColliderStreamed /* Size=0x1E0 */
 {
     union {
+    /* 0x000 */ Common_Component_BGCollision_ColliderStreamedVTable* VTable;
     struct {
     /* 0x000 */ Common_Component_BGCollision_Collider Collider;
     /* 0x0A8 */ byte PathBase[0x100];
     } _union_struct_0x0;
-    /* 0x000 */ Common_Component_BGCollision_ColliderStreamedVTable* VTable;
     } _union_0x0;
     /*       */ byte _gap_0x1A0[0x8];
     /* 0x1A8 */ Common_Component_BGCollision_Resource* Resource;
@@ -36795,8 +36795,8 @@ struct Common_Component_BGCollision_MeshVTable
 __unaligned struct Common_Component_BGCollision_Mesh /* Size=0x18 */
 {
     union {
-    /* 0x00 */ Common_Component_BGCollision_Object Object;
     /* 0x00 */ Common_Component_BGCollision_MeshVTable* VTable;
+    /* 0x00 */ Common_Component_BGCollision_Object Object;
     } _union_0x0;
     /* 0x08 */ Common_Component_BGCollision_IMesh IMesh;
     /* 0x10 */ Common_Component_BGCollision_ColliderMesh* OwnerCollider;
@@ -36833,11 +36833,11 @@ struct Common_Component_BGCollision_MeshPCBVTable
 __unaligned struct Common_Component_BGCollision_MeshPCB /* Size=0x20 */
 {
     union {
+    /* 0x00 */ Common_Component_BGCollision_MeshPCBVTable* VTable;
     struct {
     /* 0x00 */ Common_Component_BGCollision_Mesh Mesh;
     /* 0x18 */ Common_Component_BGCollision_MeshPCB_FileNode* RootNode;
     } _union_struct_0x0;
-    /* 0x00 */ Common_Component_BGCollision_MeshPCBVTable* VTable;
     } _union_0x0;
 };
 
@@ -36880,8 +36880,8 @@ struct Common_Component_BGCollision_QuadtreeVTable
 __unaligned struct Common_Component_BGCollision_Quadtree /* Size=0x40 */
 {
     union {
-    /* 0x00 */ Common_Component_BGCollision_Object Object;
     /* 0x00 */ Common_Component_BGCollision_QuadtreeVTable* VTable;
+    /* 0x00 */ Common_Component_BGCollision_Object Object;
     } _union_0x0;
     /* 0x08 */ float MinX;
     /* 0x0C */ float MaxX;
@@ -36950,8 +36950,8 @@ struct Common_Component_BGCollision_SceneVTable
 __unaligned struct Common_Component_BGCollision_Scene /* Size=0x40 */
 {
     union {
-    /* 0x00 */ Common_Component_BGCollision_Object Object;
     /* 0x00 */ Common_Component_BGCollision_SceneVTable* VTable;
+    /* 0x00 */ Common_Component_BGCollision_Object Object;
     } _union_0x0;
     /* 0x08 */ Common_Component_BGCollision_SceneManager* Manager;
     /* 0x10 */ Common_Component_BGCollision_Collider* FirstCollider;
@@ -37018,12 +37018,12 @@ struct Common_Component_BGCollision_SceneWrapperVTable
 __unaligned struct Common_Component_BGCollision_SceneWrapper /* Size=0x30 */
 {
     union {
+    /* 0x00 */ Common_Component_BGCollision_SceneWrapperVTable* VTable;
     struct {
     /* 0x00 */ Common_Component_BGCollision_Node Node;
     /* 0x20 */ Common_Component_BGCollision_SceneManager* Manager;
     /* 0x28 */ Common_Component_BGCollision_Scene* Scene;
     } _union_struct_0x0;
-    /* 0x00 */ Common_Component_BGCollision_SceneWrapperVTable* VTable;
     } _union_0x0;
 };
 
@@ -37187,8 +37187,8 @@ struct Component_GUI_AtkComponentCheckBoxVTable
 __unaligned struct Component_GUI_AtkComponentCheckBox /* Size=0x110 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkComponentButton AtkComponentButton;
     /* 0x000 */ Component_GUI_AtkComponentCheckBoxVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkComponentButton AtkComponentButton;
     } _union_0x0;
     /*       */ byte _gap_0xF0[0x20];
 };
@@ -37211,8 +37211,8 @@ struct Component_GUI_AtkComponentDropDownListVTable
 __unaligned struct Component_GUI_AtkComponentDropDownList /* Size=0xE0 */
 {
     union {
-    /* 0x00 */ Component_GUI_AtkComponentBase AtkComponentBase;
     /* 0x00 */ Component_GUI_AtkComponentDropDownListVTable* VTable;
+    /* 0x00 */ Component_GUI_AtkComponentBase AtkComponentBase;
     } _union_0x0;
     /* 0xC0 */ Component_GUI_AtkComponentCheckBox* Checkbox;
     /* 0xC8 */ Component_GUI_AtkComponentList* List;
@@ -37241,8 +37241,8 @@ struct Component_GUI_AtkComponentGuildLeveCardVTable
 __unaligned struct Component_GUI_AtkComponentGuildLeveCard /* Size=0xF0 */
 {
     union {
-    /* 0x00 */ Component_GUI_AtkComponentBase AtkComponentBase;
     /* 0x00 */ Component_GUI_AtkComponentGuildLeveCardVTable* VTable;
+    /* 0x00 */ Component_GUI_AtkComponentBase AtkComponentBase;
     } _union_0x0;
     /*      */ byte _gap_0xC0[0x30];
 };
@@ -37265,8 +37265,8 @@ struct Component_GUI_AtkComponentHoldButtonVTable
 __unaligned struct Component_GUI_AtkComponentHoldButton /* Size=0x120 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkComponentButton AtkComponentButton;
     /* 0x000 */ Component_GUI_AtkComponentHoldButtonVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkComponentButton AtkComponentButton;
     } _union_0x0;
     /*       */ byte _gap_0xF0[0x30];
 };
@@ -37289,8 +37289,8 @@ struct Component_GUI_AtkComponentIconVTable
 __unaligned struct Component_GUI_AtkComponentIcon /* Size=0x118 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkComponentBase AtkComponentBase;
     /* 0x000 */ Component_GUI_AtkComponentIconVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkComponentBase AtkComponentBase;
     } _union_0x0;
     /* 0x0C0 */ __int64 IconId;
     /* 0x0C8 */ Component_GUI_AtkUldAsset* Texture;
@@ -37324,8 +37324,8 @@ struct Component_GUI_AtkComponentIconTextVTable
 __unaligned struct Component_GUI_AtkComponentIconText /* Size=0xE8 */
 {
     union {
-    /* 0x00 */ Component_GUI_AtkComponentBase AtkComponentBase;
     /* 0x00 */ Component_GUI_AtkComponentIconTextVTable* VTable;
+    /* 0x00 */ Component_GUI_AtkComponentBase AtkComponentBase;
     } _union_0x0;
     /*      */ byte _gap_0xC0[0x28];
 };
@@ -37348,8 +37348,8 @@ struct Component_GUI_AtkComponentInputBaseVTable
 __unaligned struct Component_GUI_AtkComponentInputBase /* Size=0x1E0 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkComponentBase AtkComponentBase;
     /* 0x000 */ Component_GUI_AtkComponentInputBaseVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkComponentBase AtkComponentBase;
     } _union_0x0;
     /*       */ byte _gap_0xC0[0x8];
     /* 0x0C8 */ Component_GUI_AtkTextNode* AtkTextNode;
@@ -37377,8 +37377,8 @@ struct Component_GUI_AtkComponentJournalCanvasVTable
 __unaligned struct Component_GUI_AtkComponentJournalCanvas /* Size=0x520 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkComponentBase AtkComponentBase;
     /* 0x000 */ Component_GUI_AtkComponentJournalCanvasVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkComponentBase AtkComponentBase;
     } _union_0x0;
     /*       */ byte _gap_0xC0[0x460];
 };
@@ -37401,8 +37401,8 @@ struct Component_GUI_AtkComponentListItemRendererVTable
 __unaligned struct Component_GUI_AtkComponentListItemRenderer /* Size=0x1A8 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkComponentButton AtkComponentButton;
     /* 0x000 */ Component_GUI_AtkComponentListItemRendererVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkComponentButton AtkComponentButton;
     } _union_0x0;
     /* 0x0F0 */ Component_GUI_AtkDragDropInterface AtkDragDropInterface;
     /*       */ byte _gap_0x120[0x60];
@@ -37455,8 +37455,8 @@ struct Component_GUI_AtkComponentListVTable
 __unaligned struct Component_GUI_AtkComponentList /* Size=0x1A8 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkComponentBase AtkComponentBase;
     /* 0x000 */ Component_GUI_AtkComponentListVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkComponentBase AtkComponentBase;
     } _union_0x0;
     /* 0x0C0 */ Component_GUI_AtkComponentListItemRenderer* FirstAtkComponentListItemRenderer;
     /* 0x0C8 */ Component_GUI_AtkComponentScrollBar* AtkComponentScrollBarC8;
@@ -37588,8 +37588,8 @@ __unaligned struct Component_GUI_AtkUldComponentDataNumericInput /* Size=0x3C */
 __unaligned struct Component_GUI_AtkComponentNumericInput /* Size=0x338 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkComponentInputBase AtkComponentInputBase;
     /* 0x000 */ Component_GUI_AtkComponentNumericInputVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkComponentInputBase AtkComponentInputBase;
     } _union_0x0;
     /*       */ byte _gap_0x1E0[0x118];
     /* 0x2F8 */ Component_GUI_AtkUldComponentDataNumericInput Data;
@@ -37614,8 +37614,8 @@ struct Component_GUI_AtkComponentPortraitVTable
 __unaligned struct Component_GUI_AtkComponentPortrait /* Size=0xE8 */
 {
     union {
-    /* 0x00 */ Component_GUI_AtkComponentBase AtkComponentBase;
     /* 0x00 */ Component_GUI_AtkComponentPortraitVTable* VTable;
+    /* 0x00 */ Component_GUI_AtkComponentBase AtkComponentBase;
     } _union_0x0;
     /* 0xC0 */ Component_GUI_AtkImageNode* CharacterImageNode;
     /* 0xC8 */ Component_GUI_AtkImageNode* FrameImageNode;
@@ -37642,8 +37642,8 @@ struct Component_GUI_AtkComponentScrollBarVTable
 __unaligned struct Component_GUI_AtkComponentScrollBar /* Size=0x140 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkComponentBase AtkComponentBase;
     /* 0x000 */ Component_GUI_AtkComponentScrollBarVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkComponentBase AtkComponentBase;
     } _union_0x0;
     /*       */ byte _gap_0xC0[0x80];
 };
@@ -37666,8 +37666,8 @@ struct Component_GUI_AtkComponentSliderVTable
 __unaligned struct Component_GUI_AtkComponentSlider /* Size=0x100 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkComponentBase AtkComponentBase;
     /* 0x000 */ Component_GUI_AtkComponentSliderVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkComponentBase AtkComponentBase;
     } _union_0x0;
     /*       */ byte _gap_0xC0[0x40];
 };
@@ -37690,8 +37690,8 @@ struct Component_GUI_AtkComponentTextInputVTable
 __unaligned struct Component_GUI_AtkComponentTextInput /* Size=0x600 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkComponentInputBase AtkComponentInputBase;
     /* 0x000 */ Component_GUI_AtkComponentTextInputVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkComponentInputBase AtkComponentInputBase;
     } _union_0x0;
     /*       */ byte _gap_0x1E0[0x8];
     /* 0x1E8 */ Client_System_Input_SoftKeyboardDeviceInterface_SoftKeyboardInputInterface SoftKeyboardInputInterface;
@@ -37774,8 +37774,8 @@ __unaligned struct StdVectorComponentGUIAtkComponentTreeListItemPtr /* Size=0x18
 __unaligned struct Component_GUI_AtkComponentTreeList /* Size=0x228 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkComponentList AtkComponentList;
     /* 0x000 */ Component_GUI_AtkComponentTreeListVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkComponentList AtkComponentList;
     } _union_0x0;
     /* 0x1A8 */ StdVectorComponentGUIAtkComponentTreeListItemPtr Items;
     /*       */ byte _gap_0x1C0[0x58];
@@ -37841,8 +37841,8 @@ struct Component_GUI_AtkComponentWindowVTable
 __unaligned struct Component_GUI_AtkComponentWindow /* Size=0x108 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkComponentBase AtkComponentBase;
     /* 0x000 */ Component_GUI_AtkComponentWindowVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkComponentBase AtkComponentBase;
     } _union_0x0;
     /*       */ byte _gap_0xC0[0x48];
 };
@@ -37857,8 +37857,8 @@ struct Component_GUI_AtkCounterNodeVTable
 __unaligned struct Component_GUI_AtkCounterNode /* Size=0x130 */
 {
     union {
-    /* 0x000 */ Component_GUI_AtkResNode AtkResNode;
     /* 0x000 */ Component_GUI_AtkCounterNodeVTable* VTable;
+    /* 0x000 */ Component_GUI_AtkResNode AtkResNode;
     } _union_0x0;
     /* 0x0B0 */ Component_GUI_AtkUldPartsList* PartsList;
     /* 0x0B8 */ unsigned __int32 PartId;
@@ -37945,8 +37945,8 @@ struct Component_GUI_AtkImageNodeVTable
 __unaligned struct Component_GUI_AtkImageNode /* Size=0xC0 */
 {
     union {
-    /* 0x00 */ Component_GUI_AtkResNode AtkResNode;
     /* 0x00 */ Component_GUI_AtkImageNodeVTable* VTable;
+    /* 0x00 */ Component_GUI_AtkResNode AtkResNode;
     } _union_0x0;
     /* 0xB0 */ Component_GUI_AtkUldPartsList* PartsList;
     /* 0xB8 */ unsigned __int16 PartId;
@@ -38001,8 +38001,8 @@ struct Component_GUI_AtkNineGridNodeVTable
 __unaligned struct Component_GUI_AtkNineGridNode /* Size=0xD0 */
 {
     union {
-    /* 0x00 */ Component_GUI_AtkResNode AtkResNode;
     /* 0x00 */ Component_GUI_AtkNineGridNodeVTable* VTable;
+    /* 0x00 */ Component_GUI_AtkResNode AtkResNode;
     } _union_0x0;
     /* 0xB0 */ Component_GUI_AtkUldPartsList* PartsList;
     /* 0xB8 */ unsigned __int32 PartID;
@@ -38636,8 +38636,8 @@ struct Component_SteamApi_SteamCallbackBaseVTable
 __unaligned struct Component_SteamApi_SteamCallbackBase /* Size=0x10 */
 {
     union {
-    /* 0x00 */ void** vtbl;
     /* 0x00 */ Component_SteamApi_SteamCallbackBaseVTable* VTable;
+    /* 0x00 */ void** vtbl;
     } _union_0x0;
     /* 0x08 */ Component_SteamApi_SteamCallbackBase_SteamCallbackFlags Flags;
     /*      */ byte _gap_0x9;
@@ -38662,8 +38662,8 @@ struct Component_SteamApi_Callbacks_AuthSessionTicketResponseCallbackVTable
 __unaligned struct Component_SteamApi_Callbacks_AuthSessionTicketResponseCallback /* Size=0x10 */
 {
     union {
-    /* 0x00 */ Component_SteamApi_SteamCallbackBase SteamCallbackBase;
     /* 0x00 */ Component_SteamApi_Callbacks_AuthSessionTicketResponseCallbackVTable* VTable;
+    /* 0x00 */ Component_SteamApi_SteamCallbackBase SteamCallbackBase;
     } _union_0x0;
 };
 
@@ -38684,8 +38684,8 @@ struct Component_SteamApi_Callbacks_FloatingGamepadTextInputDismissedCallbackVTa
 __unaligned struct Component_SteamApi_Callbacks_FloatingGamepadTextInputDismissedCallback /* Size=0x10 */
 {
     union {
-    /* 0x00 */ Component_SteamApi_SteamCallbackBase SteamCallbackBase;
     /* 0x00 */ Component_SteamApi_Callbacks_FloatingGamepadTextInputDismissedCallbackVTable* VTable;
+    /* 0x00 */ Component_SteamApi_SteamCallbackBase SteamCallbackBase;
     } _union_0x0;
 };
 
@@ -38717,8 +38717,8 @@ struct Component_SteamApi_Callbacks_GamepadTextInputDismissedCallbackVTable
 __unaligned struct Component_SteamApi_Callbacks_GamepadTextInputDismissedCallback /* Size=0x10 */
 {
     union {
-    /* 0x00 */ Component_SteamApi_SteamCallbackBase SteamCallbackBase;
     /* 0x00 */ Component_SteamApi_Callbacks_GamepadTextInputDismissedCallbackVTable* VTable;
+    /* 0x00 */ Component_SteamApi_SteamCallbackBase SteamCallbackBase;
     } _union_0x0;
 };
 

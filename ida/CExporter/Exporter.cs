@@ -204,7 +204,7 @@ public abstract class ExporterBase {
                 }
                 });
             else
-                fields.First(t => t.Offset() == 0).Layouts.Add(vTable);
+                fields.First(t => t.Offset() == 0).Layouts.Insert(0, vTable);
         }
 
         fields = fields.OrderBy(unionLayout => unionLayout.Offset()).ToList();
