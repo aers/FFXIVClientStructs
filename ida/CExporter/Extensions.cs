@@ -62,6 +62,11 @@ public static class TypeExtensions {
             _ when type == typeof(Half) => true,
             _ => false
         };
+
+    public static Type? GetUnderlyingTypeFromOffset(this Type type) {
+        var fields = type.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+        return fields.FirstOrDefault(t => t.FieldType.IsStruct() && t.GetFieldOffset() == 0)?.FieldType;
+    }
 }
 
 public static class FieldInfoExtensions {
