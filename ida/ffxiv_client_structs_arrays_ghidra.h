@@ -382,6 +382,11 @@ struct Client_System_Framework_Task_TaskVTable;
 struct Client_System_Input_ClipBoard;
 struct Client_System_Input_ClipBoard_ClipBoardVTable;
 struct Client_System_Input_Cursor;
+struct Client_System_Input_SoftKeyboardDeviceInterface;
+struct Client_System_Input_SoftKeyboardDeviceInterface_SoftKeyboardDeviceInterfaceVTable;
+struct Client_System_Input_SoftKeyboardDeviceInterface_SoftKeyboardInputInterface;
+struct Client_System_Input_SoftKeyboardDeviceInterface_SoftKeyboardInputInterface_SoftKeyboardInputInterfaceVTable;
+struct Client_System_Input_SoftKeyboards_SteamGamepadSoftKeyboard;
 struct Client_System_Memory_IMemorySpace;
 struct Client_System_Memory_IMemorySpace_IMemorySpaceVTable;
 struct Client_System_Resource_Handle_MaterialResourceHandle;
@@ -493,6 +498,7 @@ struct Client_UI_AddonImage;
 struct Client_UI_AddonItemDonationInfo;
 struct Client_UI_AddonItemInspectionList;
 struct Client_UI_AddonItemInspectionResult;
+struct Client_UI_AddonItemSearch;
 struct Client_UI_AddonItemSearchResult;
 struct Client_UI_AddonJobHud;
 struct Client_UI_AddonJobHud_AddonJobHudGauge;
@@ -738,6 +744,8 @@ struct Client_UI_Misc_CharaViewCharacterData;
 struct Client_UI_Misc_CharaViewItem;
 struct Common_Math_Vector4;
 struct Client_UI_Agent_AgentChatLog;
+struct Client_UI_Agent_AgentColorant;
+struct Client_UI_Agent_AgentColorant_ColorantCharaView;
 struct Client_UI_Agent_AgentCompanyCraftMaterial;
 struct Client_UI_Agent_AgentContentsFinder;
 struct Client_UI_Agent_ItemReward;
@@ -764,6 +772,8 @@ struct Client_UI_Agent_AgentFreeCompanyProfile_FCProfile;
 struct Client_UI_Agent_AgentFriendList;
 struct Client_UI_Agent_AgentGatheringNote;
 struct Client_UI_Agent_AgentGcArmyExpedition;
+struct Client_UI_Agent_AgentGearSet;
+struct Client_UI_Agent_AgentGearSet_GearsetCharaView;
 struct Client_UI_Agent_AgentGoldSaucer;
 struct Client_UI_Agent_AgentGrandCompanySupply;
 struct Client_UI_Agent_AgentHousingPlant;
@@ -785,6 +795,7 @@ struct Client_UI_Agent_AgentInspect;
 struct Client_UI_Agent_AgentInspect_ItemData;
 struct Client_UI_Agent_AgentInspect_ItemData_ColorRGB;
 struct Client_UI_Agent_AgentInspect_FreeCompanyData;
+struct Client_UI_Agent_AgentInspect_InspectCharaView;
 struct Client_UI_Agent_AgentInventoryContext;
 struct Client_UI_Agent_AgentItemDetail;
 struct Client_UI_Agent_AgentItemDonationInfo;
@@ -820,7 +831,7 @@ struct Client_UI_Agent_MiniMapMarker;
 struct Client_UI_Agent_QuestLinkContainer;
 struct Client_UI_Agent_QuestLinkMarker;
 struct Client_UI_Agent_AgentMiragePrismMiragePlate;
-struct Client_UI_Agent_MiragePlateItem;
+struct Client_UI_Agent_AgentMiragePrismMiragePlate_MiragePrismMiragePlateCharaView;
 struct Client_UI_Agent_AgentMiragePrismPrismBox;
 struct Client_UI_Agent_AgentMiragePrismPrismItemDetail;
 struct Client_UI_Agent_AgentMJIAnimalManagement;
@@ -902,9 +913,12 @@ struct StdDequeClientUIAgentBalloonInfo;
 struct Client_UI_Agent_BalloonSlot;
 struct Client_UI_Agent_AgentShop;
 struct Client_UI_Agent_AgentShop_ShopItem;
+struct Client_UI_Agent_AgentStatus;
+struct Client_UI_Agent_AgentStatus_StatusCharaView;
 struct Client_UI_Agent_AgentSubmersibleExplorationResult;
 struct Client_UI_Agent_AgentTeleport;
 struct Client_UI_Agent_AgentTryon;
+struct Client_UI_Agent_AgentTryon_TryonCharaView;
 struct Client_UI_Agent_AgentTryon_AgentTryonVTable;
 struct Client_UI_Agent_AozArrangementData;
 struct Client_UI_Agent_AozContentData;
@@ -930,6 +944,7 @@ struct Client_UI_Agent_HudPartyMemberEnmity;
 struct Client_UI_Agent_LobbyDataCenterWorldEntry;
 struct Client_UI_Agent_LobbySubscriptionInfo;
 struct Client_UI_Agent_LobbyUIClient_LobbyUIClientVTable;
+struct Client_UI_Agent_MiragePlateItem;
 struct Client_UI_Agent_MiragePrismPrismBoxData;
 struct Client_UI_Agent_PrismBoxItem;
 struct Client_UI_Agent_PrismBoxCrystallizeItem;
@@ -1286,6 +1301,11 @@ struct Component_SteamApi_Callbacks_FloatingGamepadTextInputDismissedCallback_Fl
 struct Component_SteamApi_Callbacks_GamepadTextInputDismissedCallback;
 struct Component_SteamApi_Callbacks_GamepadTextInputDismissedCallback_GamepadTextInputDismissedCallbackVTable;
 struct Component_SteamApi_SteamTypes_GamepadTextInputDismissedData;
+struct Component_SteamApi_Interface_ISteamApps;
+struct Component_SteamApi_SteamTypes_SteamInterfaceContext;
+struct Component_SteamApi_Interface_ISteamFriends;
+struct Component_SteamApi_Interface_ISteamUser;
+struct Component_SteamApi_Interface_ISteamUtils;
 struct Component_SteamApi_SteamApi;
 struct Component_SteamApi_SteamTypes_CSteamId;
 struct Component_SteamApi_SteamCallbackBase_SteamCallbackBaseVTable;
@@ -2179,6 +2199,18 @@ enum Client_UI_ActionCrossSelect /* Size=0x4 */
     DoubleCrossRight = 6
 };
 
+enum Client_UI_AddonItemSearch_SearchMode /* Size=0x4 */
+{
+    Normal = 0,
+    ArmsFilter = 1,
+    EquipmentFilter = 2,
+    ItemsFilter = 3,
+    HousingFilter = 4,
+    Wishlist = 5,
+    Favorites = 6,
+    Unset = 7
+};
+
 enum Client_UI_Agent_ActionStatus /* Size=0x1 */
 {
     Available = 0,
@@ -2513,6 +2545,7 @@ enum Client_UI_Agent_AgentId /* Size=0x4 */
     AozContentResult = 329,
     WorldTravel = 330,
     RideShooting = 331,
+    RideShootingResult = 332,
     Credit = 333,
     EmjSetting = 334,
     RetainerList = 335,
@@ -2589,6 +2622,7 @@ enum Client_UI_Agent_AgentId /* Size=0x4 */
     BannerMIP = 431,
     TurnBreak = 432,
     SXTBattleLog = 434,
+    MoogleCollection = 435,
     FGSEnterDialog = 436,
     FGSStageIntro = 437,
     FGSHud = 438,
@@ -8037,9 +8071,8 @@ __unaligned struct Client_Game_UI_ContentsNote /* Size=0xB8 */
     /* 0x1C */ byte SelectedTab;
     /* 0x1D */ byte DisplayCount;
     /*      */ byte _gap_0x1E[0x2];
-    /* 0x20 */ __int32 DisplayID[0x11];
-    /* 0x64 */ __int32 DisplayStatus[0x11];
-    /*      */ byte _gap_0xA8[0x10];
+    /* 0x20 */ __int32 DisplayID[0x13];
+    /* 0x6C */ __int32 DisplayStatus[0x13];
 };
 
 __unaligned struct Client_Game_UI_ExtraInspectDataEntry /* Size=0x8 */
@@ -8261,7 +8294,7 @@ __unaligned struct Client_Game_UI_Inspect /* Size=0x278 */
     /*       */ byte _gap_0x256[0x2];
     /*       */ byte _gap_0x258[0x2];
     /*       */ byte _gap_0x25A;
-    /* 0x25B */ byte ExtraInspectData[0x18];
+    /* 0x25B */ Client_Game_UI_ExtraInspectDataEntry ExtraInspectData[0x3];
     /*       */ byte _gap_0x273;
     /*       */ byte _gap_0x274[0x4];
 };
@@ -10326,6 +10359,47 @@ __unaligned struct Client_System_Input_Cursor /* Size=0x378 */
     /*       */ byte _gap_0x2D0[0xA8];
 };
 
+__unaligned struct Client_System_Input_SoftKeyboardDeviceInterface /* Size=0x8 */
+{
+    /* 0x0 */ Client_System_Input_SoftKeyboardDeviceInterface_SoftKeyboardDeviceInterfaceVTable* VTable;
+};
+
+__unaligned struct Client_System_Input_SoftKeyboardDeviceInterface_SoftKeyboardInputInterface /* Size=0x8 */
+{
+    /* 0x0 */ Client_System_Input_SoftKeyboardDeviceInterface_SoftKeyboardInputInterface_SoftKeyboardInputInterfaceVTable* VTable;
+};
+
+__unaligned struct Client_System_Input_SoftKeyboardDeviceInterface_SoftKeyboardDeviceInterfaceVTable /* Size=0x0 */
+{
+    /* 0x0 */ void (__fastcall *Dtor)(Client_System_Input_SoftKeyboardDeviceInterface* a1, bool a2);
+    /* 0x8 */ bool (__fastcall *Enable)(Client_System_Input_SoftKeyboardDeviceInterface* a1);
+    /* 0x10 */ void (__fastcall *DumpInput)(Client_System_Input_SoftKeyboardDeviceInterface* a1);
+    /* 0x18 */ __int64 (__fastcall *Disable)(Client_System_Input_SoftKeyboardDeviceInterface* a1);
+    /* 0x20 */ __int64 (__fastcall *IsEnabled)(Client_System_Input_SoftKeyboardDeviceInterface* a1);
+    /* 0x28 */ __int64 (__fastcall *OpenSoftKeyboard)(Client_System_Input_SoftKeyboardDeviceInterface* a1, Client_System_Input_SoftKeyboardDeviceInterface_SoftKeyboardInputInterface* a2);
+    /* 0x30 */ void (__fastcall *CloseSoftKeyboard)(Client_System_Input_SoftKeyboardDeviceInterface* a1);
+    /* 0x38 */ void (__fastcall *IsSoftKeyboardOpen)(Client_System_Input_SoftKeyboardDeviceInterface* a1);
+};
+
+__unaligned struct Client_System_Input_SoftKeyboardDeviceInterface_SoftKeyboardInputInterface_SoftKeyboardInputInterfaceVTable /* Size=0x0 */
+{
+    /* 0x0 */ void (__fastcall *Dtor)(Client_System_Input_SoftKeyboardDeviceInterface_SoftKeyboardInputInterface* a1, bool a2);
+    /*     */ __int64 _vf1;
+    /* 0x10 */ void (__fastcall *WriteString)(Client_System_Input_SoftKeyboardDeviceInterface_SoftKeyboardInputInterface* a1, Client_System_String_Utf8String* a2);
+    /*     */ __int64 _vf3;
+    /* 0x20 */ unsigned __int32 (__fastcall *GetInputMaxLength)(Client_System_Input_SoftKeyboardDeviceInterface_SoftKeyboardInputInterface* a1);
+};
+
+__unaligned struct Client_System_Input_SoftKeyboards_SteamGamepadSoftKeyboard /* Size=0x18 */
+{
+    /* 0x00 */ Client_System_Input_SoftKeyboardDeviceInterface SoftKeyboardDeviceInterface;
+    /* 0x08 */ byte Enabled;
+    /*      */ byte _gap_0x9;
+    /*      */ byte _gap_0xA[0x2];
+    /*      */ byte _gap_0xC[0x4];
+    /* 0x10 */ Client_System_Input_SoftKeyboardDeviceInterface_SoftKeyboardInputInterface* TargetInputInterface;
+};
+
 __unaligned struct Client_System_Memory_IMemorySpace /* Size=0x0 */
 {
     /* 0x0 */ Client_System_Memory_IMemorySpace_IMemorySpaceVTable* VTable;
@@ -12103,6 +12177,28 @@ __unaligned struct Client_UI_AddonItemInspectionResult /* Size=0x2F8 */
 {
     /* 0x000 */ Component_GUI_AtkUnitBase AtkUnitBase;
     /*       */ byte _gap_0x220[0xD8];
+};
+
+__unaligned struct Client_UI_AddonItemSearch /* Size=0x3EE0 */
+{
+    /* 0x0000 */ Component_GUI_AtkUnitBase AtkUnitBase;
+    /*        */ byte _gap_0x220[0x10];
+    /* 0x0230 */ Client_UI_AddonItemSearch_SearchMode Mode;
+    /* 0x0234 */ __int32 SelectedFilter;
+    /* 0x0238 */ Client_System_String_Utf8String SearchText;
+    /* 0x02A0 */ Client_System_String_Utf8String SearchText2;
+    /*        */ byte _gap_0x308[0x1A0];
+    /* 0x04A8 */ Client_System_String_Utf8String FilterLabels[0x60];
+    /*        */ byte _gap_0x2BA8[0x208];
+    /* 0x2DB0 */ Component_GUI_AtkComponentTextInput* SearchTextInput;
+    /* 0x2DB8 */ Component_GUI_AtkComponentButton* SearchButton;
+    /*        */ byte _gap_0x2DC0[0x20];
+    /* 0x2DE0 */ Component_GUI_AtkComponentList* ResultsList;
+    /*        */ byte _gap_0x2DE8[0x10F0];
+    /*        */ byte _gap_0x3ED8[0x2];
+    /*        */ byte _gap_0x3EDA;
+    /* 0x3EDB */ bool PartialMatch;
+    /*        */ byte _gap_0x3EDC[0x4];
 };
 
 __unaligned struct Client_UI_AddonItemSearchResult /* Size=0x3D0 */
@@ -15965,6 +16061,29 @@ __unaligned struct Client_UI_Agent_AgentChatLog /* Size=0x2B8 */
     /*       */ byte _gap_0xB0[0x208];
 };
 
+__unaligned struct Client_UI_Agent_AgentColorant_ColorantCharaView /* Size=0x2D8 */
+{
+    /* 0x000 */ Client_UI_Misc_CharaView Base;
+    /* 0x2C8 */ unsigned __int32 Unk2C8;
+    /* 0x2CC */ unsigned __int32 ObjectID;
+    /* 0x2D0 */ bool DoUpdate;
+    /* 0x2D1 */ bool HideOtherEquipment;
+    /* 0x2D2 */ bool GearPreview;
+    /* 0x2D3 */ bool HideVisor;
+    /* 0x2D4 */ bool HideWeapon;
+    /* 0x2D5 */ bool CloseVisor;
+    /* 0x2D6 */ bool DrawWeapon;
+    /* 0x2D7 */ byte SelectedStain;
+};
+
+__unaligned struct Client_UI_Agent_AgentColorant /* Size=0x3F0 */
+{
+    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
+    /*       */ byte _gap_0x28[0xE0];
+    /* 0x108 */ Client_UI_Agent_AgentColorant_ColorantCharaView CharaView;
+    /*       */ byte _gap_0x3E0[0x10];
+};
+
 __unaligned struct Client_UI_Agent_AgentCompanyCraftMaterial /* Size=0xE8 */
 {
     /* 0x00 */ Component_GUI_AgentInterface AgentInterface;
@@ -16351,6 +16470,28 @@ __unaligned struct Client_UI_Agent_AgentGcArmyExpedition /* Size=0x48 */
     /* 0x44 */ __int32 SelectedRow;
 };
 
+__unaligned struct Client_UI_Agent_AgentGearSet_GearsetCharaView /* Size=0x2D8 */
+{
+    /* 0x000 */ Client_UI_Misc_CharaView Base;
+    /* 0x2C8 */ bool UpdateVisibility;
+    /* 0x2C9 */ bool UpdateItems;
+    /* 0x2CA */ bool HideVisor;
+    /* 0x2CB */ bool HideWeapon;
+    /* 0x2CC */ bool CloseVisor;
+    /* 0x2CD */ bool DrawWeapon;
+    /* 0x2CE */ bool CharacterDisplayMode;
+    /*       */ byte _gap_0x2CF;
+    /* 0x2D0 */ Client_UI_Misc_RaptureGearsetModule_GearsetEntry* Gearset;
+};
+
+__unaligned struct Client_UI_Agent_AgentGearSet /* Size=0xB00 */
+{
+    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
+    /*       */ byte _gap_0x28[0x7E0];
+    /* 0x808 */ Client_UI_Agent_AgentGearSet_GearsetCharaView CharaView;
+    /*       */ byte _gap_0xAE0[0x20];
+};
+
 __unaligned struct Client_UI_Agent_AgentGoldSaucer /* Size=0x210 */
 {
     /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
@@ -16604,7 +16745,12 @@ __unaligned struct Client_UI_Agent_AgentInspect_FreeCompanyData /* Size=0x86 */
     /* 0x1E */ Client_System_String_Utf8String GuildName;
 };
 
-__unaligned struct Client_UI_Agent_AgentInspect /* Size=0x554 */
+__unaligned struct Client_UI_Agent_AgentInspect_InspectCharaView /* Size=0x2C8 */
+{
+    /* 0x000 */ Client_UI_Misc_CharaView Base;
+};
+
+__unaligned struct Client_UI_Agent_AgentInspect /* Size=0x820 */
 {
     /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
     /* 0x028 */ unsigned __int32 RequestObjectID;
@@ -16626,6 +16772,7 @@ __unaligned struct Client_UI_Agent_AgentInspect /* Size=0x554 */
     /* 0x544 */ unsigned __int32 UnkObj544;
     /* 0x548 */ Client_UI_Info_InfoProxySearchComment* InfoProxySearchComment;
     /* 0x550 */ Client_UI_Info_InfoProxyFreeCompany* InfoProxyFreeCompany;
+    /* 0x558 */ Client_UI_Agent_AgentInspect_InspectCharaView CharaView;
 };
 
 __unaligned struct Client_UI_Agent_AgentInventoryContext /* Size=0x778 */
@@ -17161,25 +17308,21 @@ __unaligned struct Client_UI_Agent_AgentMap /* Size=0x12AB8 */
     /*         */ byte _gap_0x74E8[0xB5D0];
 };
 
-__unaligned struct Client_UI_Agent_MiragePlateItem /* Size=0x20 */
+__unaligned struct Client_UI_Agent_AgentMiragePrismMiragePlate_MiragePrismMiragePlateCharaView /* Size=0x2D8 */
 {
-    /* 0x00 */ byte EquipType;
-    /* 0x01 */ byte EquipSlotCategory;
-    /*      */ byte _gap_0x2;
-    /* 0x03 */ byte Stain;
-    /*      */ byte _gap_0x4[0x4];
-    /* 0x08 */ unsigned __int32 ItemId;
-    /*      */ byte _gap_0xC[0x4];
-    /* 0x10 */ unsigned __int64 ModelMain;
-    /* 0x18 */ unsigned __int64 ModelSub;
+    /* 0x000 */ Client_UI_Misc_CharaView Base;
+    /* 0x2C8 */ bool IsUpdatePending;
+    /*       */ byte _gap_0x2C9;
+    /*       */ byte _gap_0x2CA[0x2];
+    /* 0x2CC */ unsigned __int32 Flags;
+    /*       */ byte _gap_0x2D0[0x8];
 };
 
 __unaligned struct Client_UI_Agent_AgentMiragePrismMiragePlate /* Size=0x350 */
 {
     /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
-    /*       */ byte _gap_0x28[0x120];
-    /* 0x148 */ Client_UI_Agent_MiragePlateItem PlateItems[0xE];
-    /*       */ byte _gap_0x308[0x48];
+    /*       */ byte _gap_0x28[0x50];
+    /* 0x078 */ Client_UI_Agent_AgentMiragePrismMiragePlate_MiragePrismMiragePlateCharaView CharaView;
 };
 
 __unaligned struct Client_UI_Agent_AgentMiragePrismPrismBox /* Size=0x80 */
@@ -18250,6 +18393,23 @@ __unaligned struct Client_UI_Agent_AgentShop_ShopItem /* Size=0x240 */
     /*       */ byte _gap_0x228[0x18];
 };
 
+__unaligned struct Client_UI_Agent_AgentStatus_StatusCharaView /* Size=0x2D0 */
+{
+    /* 0x000 */ Client_UI_Misc_CharaView Base;
+    /* 0x2C8 */ unsigned __int32 MainhandItemID;
+    /* 0x2CC */ bool DrawWeapon;
+    /*       */ byte _gap_0x2CD;
+    /*       */ byte _gap_0x2CE[0x2];
+};
+
+__unaligned struct Client_UI_Agent_AgentStatus /* Size=0x358 */
+{
+    /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
+    /*       */ byte _gap_0x28[0x58];
+    /* 0x080 */ Client_UI_Agent_AgentStatus_StatusCharaView CharaView;
+    /*       */ byte _gap_0x350[0x8];
+};
+
 __unaligned struct Client_UI_Agent_AgentSubmersibleExplorationResult /* Size=0x38 */
 {
     /* 0x00 */ Client_UI_Agent_AgentExplorationResultInterface Interface;
@@ -18265,10 +18425,23 @@ __unaligned struct Client_UI_Agent_AgentTeleport /* Size=0x90 */
     /*      */ byte _gap_0x70[0x20];
 };
 
+__unaligned struct Client_UI_Agent_AgentTryon_TryonCharaView /* Size=0x2D0 */
+{
+    /* 0x000 */ Client_UI_Misc_CharaView Base;
+    /* 0x2C8 */ bool DoUpdate;
+    /* 0x2C9 */ bool HideOtherEquipment;
+    /* 0x2CA */ bool HideVisor;
+    /* 0x2CB */ bool HideWeapon;
+    /* 0x2CC */ bool CloseVisor;
+    /* 0x2CD */ bool DrawWeapon;
+    /*       */ byte _gap_0x2CE[0x2];
+};
+
 __unaligned struct Client_UI_Agent_AgentTryon /* Size=0x670 */
 {
     /* 0x000 */ Component_GUI_AgentInterface AgentInterface;
-    /*       */ byte _gap_0x28[0x648];
+    /* 0x028 */ Client_UI_Agent_AgentTryon_TryonCharaView CharaView;
+    /*       */ byte _gap_0x2F8[0x378];
 };
 
 __unaligned struct Client_UI_Agent_AgentTryon_AgentTryonVTable /* Size=0x1 */
@@ -18558,6 +18731,19 @@ __unaligned struct Client_UI_Agent_LobbySubscriptionInfo /* Size=0x40 */
 __unaligned struct Client_UI_Agent_LobbyUIClient_LobbyUIClientVTable /* Size=0x1 */
 {
     /*     */ byte _gap_0x0;
+};
+
+__unaligned struct Client_UI_Agent_MiragePlateItem /* Size=0x20 */
+{
+    /* 0x00 */ byte EquipType;
+    /* 0x01 */ byte EquipSlotCategory;
+    /*      */ byte _gap_0x2;
+    /* 0x03 */ byte Stain;
+    /*      */ byte _gap_0x4[0x4];
+    /* 0x08 */ unsigned __int32 ItemId;
+    /*      */ byte _gap_0xC[0x4];
+    /* 0x10 */ unsigned __int64 ModelMain;
+    /* 0x18 */ unsigned __int64 ModelSub;
 };
 
 __unaligned struct Client_UI_Agent_PrismBoxItem /* Size=0x88 */
@@ -20600,7 +20786,9 @@ __unaligned struct Component_GUI_AtkModule /* Size=0x82A0 */
     /* 0x5CC4 */ byte ActiveColorThemeType;
     /*        */ byte _gap_0x5CC5;
     /*        */ byte _gap_0x5CC6[0x2];
-    /*        */ byte _gap_0x5CC8[0x25D8];
+    /*        */ byte _gap_0x5CC8[0x2488];
+    /* 0x8150 */ Client_System_Input_SoftKeyboards_SteamGamepadSoftKeyboard SoftKeyboardDevice;
+    /*        */ byte _gap_0x8168[0x138];
 };
 
 __unaligned struct Component_GUI_AtkUnitList /* Size=0x810 */
@@ -22182,7 +22370,12 @@ __unaligned struct Component_GUI_AtkComponentSlider /* Size=0x100 */
 __unaligned struct Component_GUI_AtkComponentTextInput /* Size=0x600 */
 {
     /* 0x000 */ Component_GUI_AtkComponentInputBase AtkComponentInputBase;
-    /*       */ byte _gap_0x1E0[0xA0];
+    /*       */ byte _gap_0x1E0[0x8];
+    /* 0x1E8 */ Client_System_Input_SoftKeyboardDeviceInterface_SoftKeyboardInputInterface SoftKeyboardInputInterface;
+    /*       */ byte _gap_0x1F0[0x60];
+    /* 0x250 */ unsigned __int32 MaxTextLength;
+    /* 0x254 */ unsigned __int32 MaxTextLength2;
+    /*       */ byte _gap_0x258[0x28];
     /* 0x280 */ Client_System_String_Utf8String UnkText1;
     /* 0x2E8 */ Client_System_String_Utf8String UnkText2;
     /* 0x350 */ Client_System_String_Utf8String UnkText3;
@@ -22510,7 +22703,8 @@ __unaligned struct Component_GUI_AtkStage /* Size=0x75E00 */
     /* 0x00038 */ Component_GUI_AtkArrayDataHolder* AtkArrayDataHolder;
     /*         */ byte _gap_0x40[0x20];
     /* 0x00060 */ Client_UI_Misc_RaptureTextModule* RaptureTextModule;
-    /*         */ byte _gap_0x68[0x10];
+    /* 0x00068 */ Client_System_Input_SoftKeyboardDeviceInterface* SoftKeyboardDevice;
+    /*         */ byte _gap_0x70[0x8];
     /* 0x00078 */ Component_GUI_AtkDragDropManager DragDropManager;
     /*         */ byte _gap_0x140[0x28];
     /* 0x00168 */ Component_GUI_AtkTooltipManager TooltipManager;
@@ -23109,6 +23303,33 @@ __unaligned struct Component_SteamApi_Callbacks_GamepadTextInputDismissedCallbac
 {
     /*     */ __int64 _vf0;
     /* 0x8 */ void (__fastcall *Run)(Component_SteamApi_Callbacks_GamepadTextInputDismissedCallback* a1, Component_SteamApi_SteamTypes_GamepadTextInputDismissedData* a2);
+};
+
+__unaligned struct Component_SteamApi_SteamTypes_SteamInterfaceContext /* Size=0x18 */
+{
+    /* 0x00 */ void* (__fastcall *FindOrCreateInterfaceFPtr)(void* a1);
+    /* 0x08 */ unsigned __int64 Counter;
+    /* 0x10 */ void* CachedInterfacePtr;
+};
+
+__unaligned struct Component_SteamApi_Interface_ISteamApps /* Size=0x18 */
+{
+    /* 0x00 */ Component_SteamApi_SteamTypes_SteamInterfaceContext SteamInterfaceContext;
+};
+
+__unaligned struct Component_SteamApi_Interface_ISteamFriends /* Size=0x18 */
+{
+    /* 0x00 */ Component_SteamApi_SteamTypes_SteamInterfaceContext SteamInterfaceContext;
+};
+
+__unaligned struct Component_SteamApi_Interface_ISteamUser /* Size=0x18 */
+{
+    /* 0x00 */ Component_SteamApi_SteamTypes_SteamInterfaceContext SteamInterfaceContext;
+};
+
+__unaligned struct Component_SteamApi_Interface_ISteamUtils /* Size=0x18 */
+{
+    /* 0x00 */ Component_SteamApi_SteamTypes_SteamInterfaceContext SteamInterfaceContext;
 };
 
 __unaligned struct Component_SteamApi_SteamTypes_CSteamId /* Size=0x8 */
