@@ -14810,8 +14810,8 @@ struct Client::UI::AddonBankVTable
     /*       */ __int64 _vf44;
     /*       */ __int64 _vf45;
     /* 0x170 */ bool (__fastcall *CheckWindowCollisionAtCoords)(Component::GUI::AtkUnitBase* a1, __int16 a2, __int16 a3);
-    /* 0x178 */ void (__fastcall *OnSetup)(Client::UI::AddonBank* a1, unsigned __int32 a2, Component::GUI::AtkValue* a3);
-    /* 0x180 */ void (__fastcall *OnSetup)(Component::GUI::AtkUnitBase* a1, unsigned __int32 a2, Component::GUI::AtkValue* a3);
+    /*       */ __int64 _vf47;
+    /* 0x180 */ void (__fastcall *OnSetup)(Client::UI::AddonBank* a1, unsigned __int32 a2, Component::GUI::AtkValue* a3);
     /*       */ __int64 _vf49;
     /* 0x190 */ void (__fastcall *OnRefresh)(Component::GUI::AtkUnitBase* a1, unsigned __int32 a2, Component::GUI::AtkValue* a3);
     /* 0x198 */ void (__fastcall *OnUpdate)(Component::GUI::AtkUnitBase* a1, Component::GUI::NumberArrayData** a2, Component::GUI::StringArrayData** a3);
@@ -24362,8 +24362,8 @@ struct Client::UI::AddonRetainerListVTable
     /*       */ __int64 _vf44;
     /*       */ __int64 _vf45;
     /* 0x170 */ bool (__fastcall *CheckWindowCollisionAtCoords)(Component::GUI::AtkUnitBase* a1, __int16 a2, __int16 a3);
-    /* 0x178 */ void (__fastcall *OnSetup)(Client::UI::AddonRetainerList* a1, unsigned __int32 a2, Component::GUI::AtkValue* a3);
-    /* 0x180 */ void (__fastcall *OnSetup)(Component::GUI::AtkUnitBase* a1, unsigned __int32 a2, Component::GUI::AtkValue* a3);
+    /*       */ __int64 _vf47;
+    /* 0x180 */ void (__fastcall *OnSetup)(Client::UI::AddonRetainerList* a1, unsigned __int32 a2, Component::GUI::AtkValue* a3);
     /*       */ __int64 _vf49;
     /* 0x190 */ void (__fastcall *OnRefresh)(Component::GUI::AtkUnitBase* a1, unsigned __int32 a2, Component::GUI::AtkValue* a3);
     /* 0x198 */ void (__fastcall *OnUpdate)(Component::GUI::AtkUnitBase* a1, Component::GUI::NumberArrayData** a2, Component::GUI::StringArrayData** a3);
@@ -24523,8 +24523,8 @@ struct Client::UI::AddonRetainerTaskAskVTable
     /*       */ __int64 _vf44;
     /*       */ __int64 _vf45;
     /* 0x170 */ bool (__fastcall *CheckWindowCollisionAtCoords)(Component::GUI::AtkUnitBase* a1, __int16 a2, __int16 a3);
-    /* 0x178 */ void (__fastcall *OnSetup)(Client::UI::AddonRetainerTaskAsk* a1, unsigned __int32 a2, Component::GUI::AtkValue* a3);
-    /* 0x180 */ void (__fastcall *OnSetup)(Component::GUI::AtkUnitBase* a1, unsigned __int32 a2, Component::GUI::AtkValue* a3);
+    /*       */ __int64 _vf47;
+    /* 0x180 */ void (__fastcall *OnSetup)(Client::UI::AddonRetainerTaskAsk* a1, unsigned __int32 a2, Component::GUI::AtkValue* a3);
     /*       */ __int64 _vf49;
     /* 0x190 */ void (__fastcall *OnRefresh)(Component::GUI::AtkUnitBase* a1, unsigned __int32 a2, Component::GUI::AtkValue* a3);
     /* 0x198 */ void (__fastcall *OnUpdate)(Component::GUI::AtkUnitBase* a1, Component::GUI::NumberArrayData** a2, Component::GUI::StringArrayData** a3);
@@ -24601,8 +24601,8 @@ struct Client::UI::AddonRetainerTaskListVTable
     /*       */ __int64 _vf44;
     /*       */ __int64 _vf45;
     /* 0x170 */ bool (__fastcall *CheckWindowCollisionAtCoords)(Component::GUI::AtkUnitBase* a1, __int16 a2, __int16 a3);
-    /* 0x178 */ void (__fastcall *OnSetup)(Client::UI::AddonRetainerTaskList* a1, unsigned __int32 a2, Component::GUI::AtkValue* a3);
-    /* 0x180 */ void (__fastcall *OnSetup)(Component::GUI::AtkUnitBase* a1, unsigned __int32 a2, Component::GUI::AtkValue* a3);
+    /*       */ __int64 _vf47;
+    /* 0x180 */ void (__fastcall *OnSetup)(Client::UI::AddonRetainerTaskList* a1, unsigned __int32 a2, Component::GUI::AtkValue* a3);
     /*       */ __int64 _vf49;
     /* 0x190 */ void (__fastcall *OnRefresh)(Component::GUI::AtkUnitBase* a1, unsigned __int32 a2, Component::GUI::AtkValue* a3);
     /* 0x198 */ void (__fastcall *OnUpdate)(Component::GUI::AtkUnitBase* a1, Component::GUI::NumberArrayData** a2, Component::GUI::StringArrayData** a3);
@@ -24676,8 +24676,8 @@ struct Client::UI::AddonRetainerTaskResultVTable
     /*       */ __int64 _vf44;
     /*       */ __int64 _vf45;
     /* 0x170 */ bool (__fastcall *CheckWindowCollisionAtCoords)(Component::GUI::AtkUnitBase* a1, __int16 a2, __int16 a3);
-    /* 0x178 */ void (__fastcall *OnSetup)(Client::UI::AddonRetainerTaskResult* a1, unsigned __int32 a2, Component::GUI::AtkValue* a3);
-    /* 0x180 */ void (__fastcall *OnSetup)(Component::GUI::AtkUnitBase* a1, unsigned __int32 a2, Component::GUI::AtkValue* a3);
+    /*       */ __int64 _vf47;
+    /* 0x180 */ void (__fastcall *OnSetup)(Client::UI::AddonRetainerTaskResult* a1, unsigned __int32 a2, Component::GUI::AtkValue* a3);
     /*       */ __int64 _vf49;
     /* 0x190 */ void (__fastcall *OnRefresh)(Component::GUI::AtkUnitBase* a1, unsigned __int32 a2, Component::GUI::AtkValue* a3);
     /* 0x198 */ void (__fastcall *OnUpdate)(Component::GUI::AtkUnitBase* a1, Component::GUI::NumberArrayData** a2, Component::GUI::StringArrayData** a3);
@@ -25192,8 +25192,8 @@ struct Client::UI::AddonSelectStringVTable
     /*       */ __int64 _vf44;
     /*       */ __int64 _vf45;
     /* 0x170 */ bool (__fastcall *CheckWindowCollisionAtCoords)(Component::GUI::AtkUnitBase* a1, __int16 a2, __int16 a3);
-    /* 0x178 */ void (__fastcall *OnSetup)(Client::UI::AddonSelectString* a1, unsigned __int32 a2, Component::GUI::AtkValue* a3);
-    /* 0x180 */ void (__fastcall *OnSetup)(Component::GUI::AtkUnitBase* a1, unsigned __int32 a2, Component::GUI::AtkValue* a3);
+    /*       */ __int64 _vf47;
+    /* 0x180 */ void (__fastcall *OnSetup)(Client::UI::AddonSelectString* a1, unsigned __int32 a2, Component::GUI::AtkValue* a3);
     /*       */ __int64 _vf49;
     /* 0x190 */ void (__fastcall *OnRefresh)(Component::GUI::AtkUnitBase* a1, unsigned __int32 a2, Component::GUI::AtkValue* a3);
     /* 0x198 */ void (__fastcall *OnUpdate)(Component::GUI::AtkUnitBase* a1, Component::GUI::NumberArrayData** a2, Component::GUI::StringArrayData** a3);

@@ -643,7 +643,7 @@ public abstract class ExporterBase {
         }
     }
 
-    private static StructLayout GetVTableLayout(Type type) {
+    private StructLayout GetVTableLayout(Type type) {
         StructLayout layout = new();
         layout.Name = "VTable";
         layout.SetSize(8);
@@ -668,6 +668,15 @@ public abstract class ExporterBase {
             layout.Objects.AddRange(underlyingLayout.Objects.Where(layoutObject => layout.Objects.All(t => t.Offset != layoutObject.Offset)));
         }
         layout.Objects = layout.Objects.OrderBy(obj => obj.Offset).ToList();
+        var names = layout.Objects.Select(obj => obj.Info.Name).ToList();
+
+        if (names.Count == names.Distinct().Count()) return layout;
+
+        var error = $"VTable for {type.FixTypeName(FixFullName, false)} has duplicate names";
+        Debug.WriteLine(error);
+        Console.WriteLine(error);
+        ExporterStatics.ErrorListDictionary.TryAdd(type, error);
+
         return layout;
     }
 }
