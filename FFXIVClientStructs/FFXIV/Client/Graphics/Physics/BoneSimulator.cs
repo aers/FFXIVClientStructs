@@ -13,4 +13,5 @@ public unsafe struct BoneSimulator {
     [FieldOffset(0x20)] public Vector3 CharacterPosition;
     [FieldOffset(0x30)] public Vector3 Gravity;
     [FieldOffset(0x40)] public Vector3 Wind;
+    [FieldOffset(0x54)] public float Spring; // Default is ~60, intense jitter happens above that value. Lesser values remove the spring in the bone.
 }
