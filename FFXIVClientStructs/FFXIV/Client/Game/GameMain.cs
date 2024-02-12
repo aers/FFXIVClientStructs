@@ -5,9 +5,9 @@ public unsafe partial struct GameMain {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? 38 05", 3)]
     public static partial GameMain* Instance();
 
-    [FieldOffset(0x0)] public fixed uint ActiveFestivals[4];
+    [FieldOffset(0x0)] public fixed uint ActiveFestivals[4]; // TODO: add FixedSizeArray with a struct that splits it into two ushorts, Id and Phase
 
-    [FieldOffset(0x40)] public fixed uint QueuedFestivals[4];
+    [FieldOffset(0x40)] public fixed uint QueuedFestivals[4]; // TODO: add FixedSizeArray with a struct that splits it into two ushorts, Id and Phase
 
     [FieldOffset(0xAD8)] public JobGaugeManager JobGaugeManager;
 
