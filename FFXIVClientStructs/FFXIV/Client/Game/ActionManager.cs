@@ -93,7 +93,7 @@ public unsafe partial struct ActionManager {
     /// <param name="actionType">The type of action to check.</param>
     /// <param name="actionId">The ID of the action to check.</param>
     /// <returns>Returns true if the action is off-cooldown or slidecastable.</returns>
-    [MemberFunction("77 49 80 3B 00")]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 0F 84 ?? ?? ?? ?? F6 05 ?? ?? ?? ?? ?? 74 2C")]
     public partial bool IsActionOffCooldown(ActionType actionType, uint actionId);
 
     /// <summary>
