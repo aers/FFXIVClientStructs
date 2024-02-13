@@ -7052,7 +7052,7 @@ classes:
       0x140C250A0: ctor
   Client::UI::Agent::AgentGearSet::GearsetCharaView:
     vtbls:
-      - ea: 0x141A64248
+      - ea: 0x141A7C4D8
         base: Client::UI::Misc::CharaView
   Client::UI::Agent::AgentGearSet:
     vtbls:
