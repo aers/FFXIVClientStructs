@@ -86,7 +86,7 @@ functions:
   0x140181DF0: GetTime
   0x1401C03B0: j_SleepEx
   0x1401C03C0: j_Sleep
-  0x14021ADB0: GetCharForLanguage
+  0x14021ADB0: GetLanguageCode
   0x1402ECEC0: CountdownPointer
   0x1403189C0: CleanupCharaSelectCharacters
   0x140335520: std::vector_SetSize
