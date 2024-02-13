@@ -3,12 +3,11 @@ using FFXIVClientStructs.FFXIV.Client.Game.Object;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
+
 // Client::UI::Agent::AgentHUD
 //   Client::UI::Agent::AgentInterface
 //     Component::GUI::AtkModuleInterface::AtkEventInterface
-
-// size = 0x4600
-// ctor E8 ?? ?? ?? ?? EB 03 49 8B C4 45 33 C9 48 89 46 40
+// ctor "E8 ?? ?? ?? ?? EB 03 48 8B C5 45 33 C9 48 89 47 40"
 [Agent(AgentId.Hud)]
 [StructLayout(LayoutKind.Explicit, Size = 0x4BA0)]
 public unsafe partial struct AgentHUD {

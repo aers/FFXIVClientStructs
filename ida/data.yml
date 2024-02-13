@@ -1124,6 +1124,7 @@ classes:
   Component::GUI::AtkUldManager:
     funcs:
       0x140531B00: SetupFromULDResourceHandle
+      0x1405330E0: CreateTimeline
       0x140534080: ReadTPHD
       0x140534290: ReadASHDAndLoadTextures
       0x140534770: CreateAtkNode
@@ -3436,8 +3437,14 @@ classes:
       - ea: 0x1419DEE68
     funcs:
       0x140225850: ctor
+      0x14022B000: Finalize
+      0x14022B060: Update
       0x14022B250: GetAgentByInternalID
       0x14022B260: GetAgentByInternalID_2  # dupe?
+      0x14022B300: HideAgent
+      0x14022B320: HideAgentIfActive
+      0x14022B370: IsAgentActive
+      0x14022B0E0: HideAll
   Client::UI::Agent::AgentEventFade:
     vtbls:
       - ea: 0x1419E02D0
@@ -5172,7 +5179,7 @@ classes:
   Client::UI::UIModuleInterface:
     vtbls:
       - ea: 0x141A173E0
-    vfuncs: # todo: check new vfuncs
+    vfuncs:
       0: dtor
       4: Abort
       5: GetExcelModule
@@ -5195,7 +5202,9 @@ classes:
       22: GetRetainerTaskDataModule
       23: GetFlagStatusModule
       24: GetRecipeFavoriteModule
+      24: GetCraftModule
       26: GetRaptureUiDataModule
+      27: GetAfterAgentsPtr # points to the field right after the last Agent in AgentModule
       29: GetGoldSaucerModule
       30: GetRaptureTeleportHistory
       31: GetItemContextCustomizeModule
@@ -5213,6 +5222,7 @@ classes:
       47: GetAchievementListModule
       48: GetGroupPoseModule
       49: GetFieldMarkerModule
+      50: GetUnkFieldMarkerModuleMap # FieldMarkerModule+0xC78
       51: GetMycNoteModule
       52: GetOrnamentListModule
       53: GetMycItemModule
@@ -5238,6 +5248,8 @@ classes:
       79: EnterIdleCam
       80: ExitIdleCam
       81: IsInIdleCam
+      87: ShowDeepDungeonHud
+      88: HideDeepDungeonHud
       90: ShowEurekaHud
       91: HideEurekaHud
       97: OpenMycInfo
@@ -5252,6 +5264,7 @@ classes:
       112: ShowContentIntroduction
       113: IsContentIntroductionInvisible
       114: HideContentIntroduction
+      123: SetCursorVisibility
       124: ToggleCursor
       138: ShowEventFadeIn
       139: ShowEventFadeOut
@@ -5478,6 +5491,16 @@ classes:
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
       0x1406C9E10: ctor
+  Client::UI::Misc::CurrencySettingHelper:
+    vtbls:
+      - ea: 0x141B592D8
+    funcs:
+      0x14144EAC0: GetDefaultCurrencySetting
+      0x14144E9A0: GetRotationArray
+      0x14144E9B0: GetRotationCount
+  Client::UI::Misc::BannerModuleHelper:
+    vtbls:
+      - ea: 0x141B592B8
   Client::System::Crypt::SimpleString:
     vtbls:
       - ea: 0x141A185C0

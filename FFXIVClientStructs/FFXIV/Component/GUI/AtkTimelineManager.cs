@@ -1,7 +1,6 @@
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
-// ctor @ sub_140532AA0
-// Component::GUI::AtkUldManager_CreateTimeline(Component::GUI::AtkUldManager *a1, Client::System::Memory::IMemorySpace *memorySpace, __int64 a3, __int64 a4, unsigned __int16 a5)
+// ctor inlined "E8 ?? ?? ?? ?? 48 8B CD E8 ?? ?? ?? ?? 48 8B CF"
 [StructLayout(LayoutKind.Explicit, Size = 0x58)]
 public unsafe struct AtkTimelineManager {
     [FieldOffset(0x00)] public AtkTimelineResource* Resources;
