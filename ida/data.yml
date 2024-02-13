@@ -45,7 +45,7 @@ globals:
   0x142209F5E: g_Client::Game::UI::UnlockedHowToBitmask  # not a pointer
   0x142209F82: g_Client::Game::UI::UnlockedCompanionsMask  # not a pointer
   0x142209FC2: g_Client::Game::UI::ChocoboTaxiStandsBitmask  # not a pointer
-#fail   0x14220AF3E: g_Client::Game::UI::CutsceneSeenBitmask  # not a pointer
+  0x142209FCE: g_Client::Game::UI::CutsceneSeenBitmask  # not a pointer
   0x14220A06D: g_Client::Game::UI::UnlockedTripleTriadCardsBitmask  # not a pointer
   0x14220A0A0: g_Client::Game::UI::UnlockedTripleTriadCardsCount  # not a pointer
   0x14220C350: g_Conditions # bool array, size is Condition sheet row count
@@ -60,7 +60,7 @@ globals:
   0x14217FEB0: g_OodlePrintf
   0x14264F870: ?hkaSkeletonMapperClass@@3VhkClass@@B
   0x14264F8F0: ?hkaAnimationContainerClass@@3VhkClass@@B
-#fail   0x142651820: ?hkReferencedObjectClass@@3VhkClass@@B
+  0x142651CA0: ?hkReferencedObjectClass@@3VhkClass@@B
   0x14265B0C0: ?hkMonitorStream__m_instance@@3V?$hkThreadLocalData@PEAVhkMonitorStream@@@@A
   0x14265D230: ?hkMeshShapeClass@@3VhkClass@@B
   0x14265DB60: ?hkSkinnedRefMeshShapeClass@@3VhkClass@@B
@@ -1844,7 +1844,7 @@ classes:
   Common::Component::Excel::ExcelModuleInterface: # these are two different classes
     vtbls:
       - ea: 0x141D71440
-#fail       - ea: 0x141D72E30
+      - ea: 0x141D714D0
         base: Common::Component::Excel::ExcelResourceListener
     vfuncs:
       1: GetSheetByIndex
@@ -1933,7 +1933,7 @@ classes:
     vtbls:
       - ea: 0x141D70758
         base: Common::Component::BGCollision::Object
-#fail       - ea: 0x141D720C0
+      - ea: 0x141D70760
         base: Common::Component::BGCollision::NodeLink
   Common::Component::BGCollision::IMesh:
     vtbls:
@@ -1943,9 +1943,9 @@ classes:
       1: Clone
   Common::Component::BGCollision::Mesh:
     vtbls:
-#fail       - ea: 0x141A03528
+      - ea: 0x141A02918
         base: Common::Component::BGCollision::Object
-#fail       - ea: 0x141A03580
+      - ea: 0x141A02970
         base: Common::Component::BGCollision::IMesh
     vfuncs:
       2: GetBoundsMin
@@ -1984,7 +1984,7 @@ classes:
     vtbls:
       - ea: 0x141D70578
         base: Common::Component::BGCollision::SceneWrapperNode
-#fail       - ea: 0x141D71F68
+      - ea: 0x141D70608
         base: Common::Component::BGCollision::NodeLink # indirect base, offset 8
     vfuncs:
       1: Clear
@@ -2690,7 +2690,7 @@ classes:
       7: GetEntryCount
   Client::UI::Info::InfoProxyPageInterface:
     vtbls:
-#fail       - ea: 0x1419BEAD0
+      - ea: 0x1419BE820
         base: Client::UI::Info::InfoProxyInterface
     vfuncs:
       12: AddPage
@@ -3393,7 +3393,7 @@ classes:
       0x14021AE40: ctor
       0x14021AE90: Initialize
       0x14021B610: Finalize
-#fail       0x14021B6B0: IsWinSockInitialized
+      0x14021B6B0: IsWinSockInitialized
       0x14021BF90: GetCurrentDeviceTimeInMillis
       0x14021C010: GetLobbyCount
       0x14021C940: IsInCrossWorldDuty
@@ -3930,8 +3930,6 @@ classes:
     vtbls:
       - ea: 0x1419FFF68
         base: Client::Graphics::Render::PostBoneDeformerBase
-    vfuncs:
-      0: dtor
   Client::Graphics::Scene::Object:
     vtbls:
       - ea: 0x1419FFB60
@@ -5944,7 +5942,7 @@ classes:
       0x1406CC810: ctor
   Client::SupportDesk::SupportDesk:
     vtbls:
-#fail       - ea: 0x141B89070
+      - ea: 0x141B884F8
     funcs:
       0x141465D60: ctor
   Client::UI::Misc::CharaViewPortrait:
@@ -6154,7 +6152,7 @@ classes:
       - ea: 0x141A2A940
   Client::UI::Shell::RaptureShellCommandInterface:
     vtbls:
-#fail       - ea: 0x141A2B180
+      - ea: 0x141A2A950
         base: Component::Shell::ShellCommandInterface
   Client::UI::Shell::RaptureShellModule:
     vtbls:
@@ -6475,7 +6473,7 @@ classes:
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandHotbarBase:
     vtbls:
-#fail       - ea: 0x141A2DFD0
+      - ea: 0x141A2D7A0
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandHotbar:
     vtbls:
@@ -10629,13 +10627,13 @@ classes:
   Client::Game::InstanceContent::InstanceContentVariantDungeon2: # Mount Rokkon
     vtbls:
       - ea: 0x141B842E0
-        base: Client::Game::InstanceContent::InstanceContentDirector
+        base: Client::Game::InstanceContent::InstanceContentVariantDungeon1
     funcs:
       0x141461CB0: ctor
   Client::Game::InstanceContent::InstanceContentVariantDungeon3: # Aloalo Island
     vtbls:
       - ea: 0x141B85AE0
-        base: Client::Game::InstanceContent::InstanceContentDirector
+        base: Client::Game::InstanceContent::InstanceContentVariantDungeon1
     funcs:
       0x141462290: ctor
   Client::Game::InstanceContent::InstanceContentCriterionDungeon:
