@@ -83,6 +83,10 @@ functions:
   0x1400A8990: Client::UI::GetUIColor # (idx, &color, &edgeColor)
   0x1400A89D0: Client::UI::GetNumberAsBoxedChar # (uint) accepts numbers 0-30
   0x1400A8A80: Client::UI::GetNumberAsDigitChars # (uint) accepts numbers 0-999
+  0x1400AAEF0: IsHomeWorldId
+  0x1400AAF50: IsCurrentWorldId
+  0x1400AAFE0: GetHomeWorldId
+  0x1400AB030: GetCurrentWorldId
   0x140181DF0: GetTime
   0x1401C03B0: j_SleepEx
   0x1401C03C0: j_Sleep
