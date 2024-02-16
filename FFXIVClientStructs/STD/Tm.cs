@@ -41,4 +41,14 @@ public unsafe partial struct Tm {
 
     public void SetTime(int timestamp)
         => SetTime(DateTimeOffset.FromUnixTimeSeconds(timestamp).DateTime);
+
+    public DateTime AsDateTime()
+        => new(
+            tm_year + 1900,
+            tm_mon + 1,
+            tm_mday + 1,
+            tm_hour,
+            tm_min,
+            tm_sec
+        );
 }
