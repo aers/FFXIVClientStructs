@@ -17,8 +17,9 @@ public unsafe partial struct MacroDecoder {
 // |-------|---------------|----------------------------------------------------------|
 // | Index | Type          | Label                                                    |
 // |-------|---------------|----------------------------------------------------------|
-// |     0 | Utf8StringPtr | Player Name                                              |
-// |     1 | BytePtr       | Player Name                                              |
+// |     0 | Utf8String    | Player Name                                              |
+// |     1 | String        | Log Message Name 1                                       |
+// |     2 | String        | Log Message Name 2                                       |
 // |     3 | Integer       | Player Sex                                               |
 // |    10 | Integer       | Eorzea Time Hours                                        |
 // |    11 | Integer       | Eorzea Time Minutes                                      |
@@ -46,7 +47,7 @@ public unsafe partial struct MacroDecoder {
 // |    41 | Integer       | Log Text Colors - Battle - Enfeebing Effects             |
 // |    42 | Integer       | Log Text Colors - General - Echo                         |
 // |    43 | Integer       | Log Text Colors - General - System Messages              |
-// |    54 | Utf8StringPtr | Companion Name                                           |
+// |    54 | Utf8String    | Companion Name                                           |
 // |    56 | Integer       | Log Text Colors - General - Battle System Messages       |
 // |    57 | Integer       | Log Text Colors - General - Gathering System Messages    |
 // |    58 | Integer       | Log Text Colors - General - Error Messages               |
