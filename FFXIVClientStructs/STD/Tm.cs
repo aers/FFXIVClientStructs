@@ -1,10 +1,7 @@
 namespace FFXIVClientStructs.STD;
 
 [StructLayout(LayoutKind.Sequential, Pack = 4)]
-public unsafe partial struct Tm {
-    [StaticAddress("48 8D 1D ?? ?? ?? ?? 8B 43 20", 3)]
-    public static partial Tm* GetMacroTime();
-
+public unsafe struct Tm {
     public int tm_sec;
     public int tm_min;
     public int tm_hour;
