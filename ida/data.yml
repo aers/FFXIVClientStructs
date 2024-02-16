@@ -93,6 +93,7 @@ functions:
   0x14021ADB0: GetLanguageCode
   0x1402ECEF0: CountdownPointer
   0x1403189F0: CleanupCharaSelectCharacters
+  0x1403292A0: GetGlobalTextParameter
   0x140335550: std::vector_SetSize
   0x140655200: GetGameObjectByIndex
   0x1404998E0: PrepareColorSet
@@ -102,6 +103,8 @@ functions:
   0x140539710: GetScaleListEntryFromScale
   0x140547F40: GetScaleForListOption
   0x140597810: Component::GUI::TextModuleInterface::GetTextLabelByID
+  0x14064B940: GetLocalTextParameter
+  0x14064FF20: FormatNumber
   0x14067E890: ConvertLogMessageIdToCharaLogKind
   0x140765910: ExecuteCommand
   0x1400A8360: InDeepDungeon
@@ -526,6 +529,9 @@ classes:
     vfuncs:
       16: FormatString
       17: ProcessNoun
+    funcs:
+      0x14063D690: ReadExpression
+      0x14063DF20: ReadParameter
   Component::Text::TextModuleInterface:
     vtbls:
       - ea: 0x141A19528

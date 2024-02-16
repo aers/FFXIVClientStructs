@@ -23,6 +23,6 @@ public unsafe partial struct TextModule {
     [VirtualFunction(9)]
     public partial Utf8String* ProcessMacroCode(Utf8String* output, byte* input);
 
-    [VirtualFunction(16)] //args is a pointer to a deque with the args, if any
-    public partial bool FormatString(byte* input, void* args, Utf8String* output);
+    [VirtualFunction(16)]
+    public partial bool FormatString(byte* input, StdDeque<TextParameter>* localParameters, Utf8String* output);
 }
