@@ -1,5 +1,6 @@
 using FFXIVClientStructs.FFXIV.Client.Game.Character;
 using FFXIVClientStructs.FFXIV.Client.Network;
+using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Component.Excel;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
@@ -49,6 +50,14 @@ public unsafe partial struct LobbyData {
     [FieldOffset(0x8)] public LobbyUIClient LobbyUIClient;
 
     [FieldOffset(0x858)] public StdVector<Pointer<CharaSelectCharacterEntry>> CharaSelectEntries;
+
+    [FieldOffset(0x878)] public ulong ContentId;
+    [FieldOffset(0x880)] public Utf8String HomeWorldName;
+    [FieldOffset(0x8E8)] public Utf8String HomeWorldName2;
+    [FieldOffset(0x950)] public Utf8String CurrentWorldName;
+
+    [FieldOffset(0x9BC)] public ushort CurrentWorldId;
+    [FieldOffset(0x9BE)] public ushort HomeWorldId;
 
     [MemberFunction("40 53 56 41 57 48 83 EC 20 33 DB")]
     public partial CharaSelectCharacterEntry* GetCharacterEntryFromServer(byte index, long contentId);
