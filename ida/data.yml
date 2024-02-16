@@ -58,6 +58,7 @@ globals:
   0x14217FE98: g_OodleNew
   0x14217FEA0: g_OodleDelete
   0x14217FEB0: g_OodlePrintf
+  0x1421B8AE8: g_MacroTime
   0x14264F870: ?hkaSkeletonMapperClass@@3VhkClass@@B
   0x14264F8F0: ?hkaAnimationContainerClass@@3VhkClass@@B
   0x142651CA0: ?hkReferencedObjectClass@@3VhkClass@@B
@@ -529,9 +530,6 @@ classes:
     vfuncs:
       16: FormatString
       17: ProcessNoun
-    funcs:
-      0x14063D690: ReadExpression
-      0x14063DF20: ReadParameter
   Component::Text::TextModuleInterface:
     vtbls:
       - ea: 0x141A19528
@@ -5558,6 +5556,9 @@ classes:
   Component::Text::MacroDecoder:
     vtbls:
       - ea: 0x141A191B0
+    funcs:
+      0x14063D690: ReadExpression
+      0x14063DF20: ReadParameter
   Component::Text::MacroEncoder:
     vtbls:
       - ea: 0x141A19368

@@ -5,6 +5,9 @@ public unsafe partial struct MacroDecoder {
     [FieldOffset(0x08)] public StdVector<nint> DecoderFuncs; // idx is the macro code byte
 
     [FieldOffset(0x38)] public StdDeque<TextParameter> GlobalParameters;
+
+    [StaticAddress("48 8D 1D ?? ?? ?? ?? 8B 43 20", 3)]
+    public static partial Tm* GetMacroTime();
 }
 
 //
