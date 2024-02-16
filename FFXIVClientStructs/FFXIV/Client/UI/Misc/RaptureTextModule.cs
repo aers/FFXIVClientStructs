@@ -17,6 +17,9 @@ public unsafe partial struct RaptureTextModule {
     [FieldOffset(0x528)] public TextChecker TextChecker;
     [FieldOffset(0x620)] public ExcelSheet* AddonSheet;
 
+    [FieldOffset(0x908)] public StdDeque<TextParameter> LocalTextParameters;
+    //[FieldOffset(0x930)] public StdDeque<TextParameter> ItemColorParameters;
+
     [MemberFunction("E9 ?? ?? ?? ?? 80 EA 20")]
     public partial byte* GetAddonText(uint addonId);
 

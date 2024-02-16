@@ -52,6 +52,7 @@ public unsafe partial struct SoundManager {
     /// </summary>
     /// <param name="channel">The specific sound channel. This is different from the channels visible to the user</param>
     /// <param name="volume">Volume in the ange 0-1</param>
+    /// <param name="p3">unknown</param>
     [MemberFunction("E8 ?? ?? ?? ?? FF C7 D1 EB 75 ?? 48 8B 74 24")]
     public partial void SetVolume(int channel, float volume, int p3 = 100);
 
