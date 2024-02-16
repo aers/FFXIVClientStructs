@@ -530,9 +530,6 @@ classes:
     vfuncs:
       16: FormatString
       17: ProcessNoun
-    funcs:
-      0x14063D690: ReadExpression
-      0x14063DF20: ReadParameter
   Component::Text::TextModuleInterface:
     vtbls:
       - ea: 0x141A19528
@@ -5559,6 +5556,9 @@ classes:
   Component::Text::MacroDecoder:
     vtbls:
       - ea: 0x141A191B0
+    funcs:
+      0x14063D690: ReadExpression
+      0x14063DF20: ReadParameter
   Component::Text::MacroEncoder:
     vtbls:
       - ea: 0x141A19368

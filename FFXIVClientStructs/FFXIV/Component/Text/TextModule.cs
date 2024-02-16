@@ -25,7 +25,4 @@ public unsafe partial struct TextModule {
 
     [VirtualFunction(16)]
     public partial bool FormatString(byte* input, StdDeque<TextParameter>* localParameters, Utf8String* output);
-
-    [StaticAddress("48 8D 1D ?? ?? ?? ?? 8B 43 20", 3)]
-    public static partial Tm* GetMacroTime();
 }
