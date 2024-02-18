@@ -28,10 +28,10 @@ public unsafe struct Tm {
         tm_sec = dateTime.Second;
         tm_min = dateTime.Minute;
         tm_hour = dateTime.Hour;
-        tm_mday = dateTime.Day - 1;
+        tm_mday = dateTime.Day;
         tm_mon = dateTime.Month - 1;
         tm_year = dateTime.Year - 1900;
-        tm_wday = (int)dateTime.DayOfWeek - 1;
+        tm_wday = (int)dateTime.DayOfWeek;
         tm_yday = dateTime.DayOfYear - 1;
         tm_isdst = dateTime.IsDaylightSavingTime() ? 1 : 0;
     }
@@ -43,7 +43,7 @@ public unsafe struct Tm {
         => new(
             tm_year + 1900,
             tm_mon + 1,
-            tm_mday + 1,
+            tm_mday,
             tm_hour,
             tm_min,
             tm_sec
