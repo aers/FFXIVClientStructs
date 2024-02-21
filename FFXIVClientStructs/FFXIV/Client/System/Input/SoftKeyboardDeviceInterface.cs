@@ -11,20 +11,20 @@ public unsafe partial struct SoftKeyboardDeviceInterface {
     public partial bool Enable();
 
     [VirtualFunction(2)]
-    public partial void DumpInput();
+    public partial void DumpInput(); // called from Component::GUI::AtkModule_HandleInput
 
     [VirtualFunction(3)]
-    public partial nint Disable();
+    public partial void Disable();
 
     [VirtualFunction(4)]
-    public partial nint IsEnabled();
+    public partial bool IsEnabled();
 
     [VirtualFunction(5)]
-    public partial nint OpenSoftKeyboard(SoftKeyboardInputInterface* targetInterface);
+    public partial bool OpenSoftKeyboard(SoftKeyboardInputInterface* targetInterface);
 
     [VirtualFunction(6)]
     public partial void CloseSoftKeyboard(); // called from AtkComponentTextInput#vf4 and AtkComponentTextInput#Finalize
 
     [VirtualFunction(7)]
-    public partial void IsSoftKeyboardOpen();
+    public partial bool IsSoftKeyboardOpen();
 }
