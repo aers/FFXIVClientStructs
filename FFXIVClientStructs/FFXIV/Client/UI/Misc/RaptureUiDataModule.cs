@@ -12,6 +12,10 @@ public unsafe partial struct RaptureUiDataModule {
 
     [FieldOffset(0)] public UserFileEvent UserFileEvent;
 
+    [FieldOffset(0x4D8)] public fixed ushort PartyListTankOrder[16];
+    [FieldOffset(0x4F8)] public fixed ushort PartyListHealerOrder[16];
+    [FieldOffset(0x518)] public fixed ushort PartyListDpsOrder[16];
+
     [MemberFunction("4C 8B D1 41 83 F9 06")]
     public partial void MJI_SetWorkshopPreset(uint presetIndex, uint* mjiCraftWorksObjectList, uint listCount);
 
