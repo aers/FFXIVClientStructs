@@ -146,7 +146,7 @@ public unsafe partial struct Character {
     [VirtualFunction(81)]
     public partial CastInfo* GetCastInfo();
 
-    [VirtualFunction(85)]
+    [VirtualFunction(81)]
     public partial ForayInfo* GetForayInfo();
 
     [VirtualFunction(87)]
