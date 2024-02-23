@@ -34,6 +34,7 @@ public class Program {
                 sw.WriteLine(value);
                 Console.WriteLine(value);
             }
+            sw.Close();
             throw new Exception("Exporter failed to export all types some error happened");
         }
         sw.Close();
