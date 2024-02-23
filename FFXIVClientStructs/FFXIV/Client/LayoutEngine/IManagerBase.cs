@@ -11,9 +11,9 @@ public unsafe partial struct IManagerBase {
     [VirtualFunction(1)]
     public partial void Initialize();
 
-    [VirtualFunction(1)]
+    [VirtualFunction(2)]
     public partial void Deinitialize();
 
-    [VirtualFunction(2)]
+    [VirtualFunction(3)]
     public partial void Update(float* dt);
 }
