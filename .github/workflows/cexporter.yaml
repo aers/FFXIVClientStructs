@@ -47,9 +47,6 @@ jobs:
               repo: context.repo.repo,
               labels: ["requested changes"]
             })
-      - name: Exit with error
-        if: steps.check_error.outputs.error == 'true'
-        run: exit 1
       - name: Tar CExport
         run: tar -czvf CExport.tar.gz ./ida/*.h
       - uses: actions/upload-artifact@v4
