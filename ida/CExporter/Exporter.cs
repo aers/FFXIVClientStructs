@@ -446,7 +446,7 @@ public abstract class ExporterBase {
         }
 
         if (offset > fieldOffset) {
-            var error = $"Current offset exceeded the next field's offset (0x{offset:X} > 0x{fieldOffset:X}): {FixFullName(type)}.{fieldInfo.Name}";
+            var error = $"Current offset conflicts with another field's offset (0x{offset:X} > 0x{fieldOffset:X}): {FixFullName(type)}.{fieldInfo.Name}";
             Debug.WriteLine(error);
             Console.WriteLine(error);
             ExporterStatics.ErrorListDictionary.TryAdd(type, error);
