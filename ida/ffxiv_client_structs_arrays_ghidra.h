@@ -3211,7 +3211,7 @@ enum Client_UI_Info_InfoProxyCommonList_CharacterData_OnlineStatus /* Size=0x8 *
     SharingDuty = 2199023255552,
     SimilarDuty = 4398046511104,
     InDuty = 8796093022208,
-    TrailAdventurer = 17592186044416,
+    TrialAdventurer = 17592186044416,
     FreeCompany = 35184372088832,
     GrandCompany = 70368744177664,
     Online = 140737488355328
@@ -12883,11 +12883,11 @@ struct Client_System_Input_SoftKeyboardDeviceInterfaceVTable
     /* 0x00 */ void (__fastcall *Dtor)(Client_System_Input_SoftKeyboardDeviceInterface* a1, bool a2);
     /* 0x08 */ bool (__fastcall *Enable)(Client_System_Input_SoftKeyboardDeviceInterface* a1);
     /* 0x10 */ void (__fastcall *DumpInput)(Client_System_Input_SoftKeyboardDeviceInterface* a1);
-    /* 0x18 */ __int64 (__fastcall *Disable)(Client_System_Input_SoftKeyboardDeviceInterface* a1);
-    /* 0x20 */ __int64 (__fastcall *IsEnabled)(Client_System_Input_SoftKeyboardDeviceInterface* a1);
-    /* 0x28 */ __int64 (__fastcall *OpenSoftKeyboard)(Client_System_Input_SoftKeyboardDeviceInterface* a1, Client_System_Input_SoftKeyboardDeviceInterface_SoftKeyboardInputInterface* a2);
+    /* 0x18 */ void (__fastcall *Disable)(Client_System_Input_SoftKeyboardDeviceInterface* a1);
+    /* 0x20 */ bool (__fastcall *IsEnabled)(Client_System_Input_SoftKeyboardDeviceInterface* a1);
+    /* 0x28 */ bool (__fastcall *OpenSoftKeyboard)(Client_System_Input_SoftKeyboardDeviceInterface* a1, Client_System_Input_SoftKeyboardDeviceInterface_SoftKeyboardInputInterface* a2);
     /* 0x30 */ void (__fastcall *CloseSoftKeyboard)(Client_System_Input_SoftKeyboardDeviceInterface* a1);
-    /* 0x38 */ void (__fastcall *IsSoftKeyboardOpen)(Client_System_Input_SoftKeyboardDeviceInterface* a1);
+    /* 0x38 */ bool (__fastcall *IsSoftKeyboardOpen)(Client_System_Input_SoftKeyboardDeviceInterface* a1);
 };
 
 __unaligned struct Client_System_Input_SoftKeyboardDeviceInterface /* Size=0x8 */
@@ -12900,11 +12900,11 @@ struct Client_System_Input_SoftKeyboards_SteamGamepadSoftKeyboardVTable
     /* 0x00 */ void (__fastcall *Dtor)(Client_System_Input_SoftKeyboardDeviceInterface* a1, bool a2);
     /* 0x08 */ bool (__fastcall *Enable)(Client_System_Input_SoftKeyboardDeviceInterface* a1);
     /* 0x10 */ void (__fastcall *DumpInput)(Client_System_Input_SoftKeyboardDeviceInterface* a1);
-    /* 0x18 */ __int64 (__fastcall *Disable)(Client_System_Input_SoftKeyboardDeviceInterface* a1);
-    /* 0x20 */ __int64 (__fastcall *IsEnabled)(Client_System_Input_SoftKeyboardDeviceInterface* a1);
-    /* 0x28 */ __int64 (__fastcall *OpenSoftKeyboard)(Client_System_Input_SoftKeyboardDeviceInterface* a1, Client_System_Input_SoftKeyboardDeviceInterface_SoftKeyboardInputInterface* a2);
+    /* 0x18 */ void (__fastcall *Disable)(Client_System_Input_SoftKeyboardDeviceInterface* a1);
+    /* 0x20 */ bool (__fastcall *IsEnabled)(Client_System_Input_SoftKeyboardDeviceInterface* a1);
+    /* 0x28 */ bool (__fastcall *OpenSoftKeyboard)(Client_System_Input_SoftKeyboardDeviceInterface* a1, Client_System_Input_SoftKeyboardDeviceInterface_SoftKeyboardInputInterface* a2);
     /* 0x30 */ void (__fastcall *CloseSoftKeyboard)(Client_System_Input_SoftKeyboardDeviceInterface* a1);
-    /* 0x38 */ void (__fastcall *IsSoftKeyboardOpen)(Client_System_Input_SoftKeyboardDeviceInterface* a1);
+    /* 0x38 */ bool (__fastcall *IsSoftKeyboardOpen)(Client_System_Input_SoftKeyboardDeviceInterface* a1);
 };
 
 __unaligned struct Client_System_Input_SoftKeyboards_SteamGamepadSoftKeyboard /* Size=0x18 */
@@ -33576,7 +33576,11 @@ __unaligned struct Client_UI_Misc_RaptureUiDataModule /* Size=0x5AE8 */
     /* 0x0000 */ Client_UI_Misc_RaptureUiDataModuleVTable* VTable;
     /* 0x0000 */ Client_UI_Misc_UserFileManager_UserFileEvent UserFileEvent;
     } _union_0x0;
-    /*        */ byte _gap_0x50[0x5A98];
+    /*        */ byte _gap_0x50[0x488];
+    /* 0x04D8 */ unsigned __int16 PartyListTankOrder[0x10];
+    /* 0x04F8 */ unsigned __int16 PartyListHealerOrder[0x10];
+    /* 0x0518 */ unsigned __int16 PartyListDpsOrder[0x10];
+    /*        */ byte _gap_0x538[0x55B0];
 };
 
 struct Client_UI_Misc_RecipeFavoriteModuleVTable
