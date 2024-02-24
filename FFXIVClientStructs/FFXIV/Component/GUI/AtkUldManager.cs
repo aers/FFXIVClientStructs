@@ -44,7 +44,9 @@ public unsafe partial struct AtkUldManager {
     [FieldOffset(0x89)] public AtkLoadState LoadedState; // 3 is fully loaded
 
     [MemberFunction("F6 81 ?? ?? ?? ?? ?? 44 8B CA")]
-    public partial AtkResNode* SearchNodeById(uint id);
+    private partial AtkResNode* SearchNodeByIdInternal(uint id);
+
+    public AtkResNode* SearchNodeById(uint id) => Objects == null ? null : SearchNodeByIdInternal(id);
 
     [MemberFunction("48 89 5C 24 ?? 57 48 83 EC ?? 8B FA 33 DB E8")]
     public partial AtkComponentBase* CreateAtkComponent(ComponentType type);
