@@ -1148,7 +1148,7 @@ classes:
       0x140537260: SetDuplicateNodeInfo
       0x140537540: ExpandNodeListSize
       0x140537BA0: DuplicateComponentNode
-      0x1405376E0: SeardNodeById
+      0x1405376E0: SearchNodeById
       0x140537740: SearchNodeByIndex
       0x1405377B0: GetDuplicatedNode
       0x140534F30: UpdateDrawNodeList
