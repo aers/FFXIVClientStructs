@@ -2,6 +2,7 @@ using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
+[InfoProxy(InfoProxyId.LinkShell)]
 [StructLayout(LayoutKind.Explicit, Size = 0x1E8)]
 public unsafe partial struct InfoProxyLinkShell {
     [FieldOffset(0x000)] public InfoProxyInterface InfoProxyInterface;
