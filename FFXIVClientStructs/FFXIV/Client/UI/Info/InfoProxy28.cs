@@ -2,7 +2,6 @@ using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
-[InfoProxy(InfoProxyId.PvPTeam)]
 [StructLayout(LayoutKind.Explicit, Size = 0x110)]
 public unsafe partial struct InfoProxy28 {
     [FieldOffset(0x00)] public InfoProxyInterface InfoProxyInterface;
