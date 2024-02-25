@@ -11,7 +11,7 @@ public unsafe partial struct EmoteController {
     [FieldOffset(0x16)] public ushort Unk1; // Seems to be 1 when close enough to a target that height adjustment is needed, maybe.
     [FieldOffset(0x18)] public GameObjectID Target;
     [FieldOffset(0x21)] public byte CPoseState;
-    
+
     [MemberFunction("E8 ?? ?? ?? ?? 8B F8 83 F8 FF 0F 84 ?? ?? ?? ?? 8B CF")]
     public partial int GetPoseKind();
 
