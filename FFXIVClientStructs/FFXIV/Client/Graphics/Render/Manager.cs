@@ -9,6 +9,11 @@ public unsafe partial struct Manager {
     [FixedSizeArray<View>(32)]
     [FieldOffset(0x8)] public fixed byte ViewArray[32 * 0x5A0]; // 32x Client::Graphics::Render::View
 
+    [FieldOffset(0x13660)] public ModelRenderer ModelRenderer;
+
+    [StaticAddress("48 8B 05 ?? ?? ?? ?? 48 69 D1", 3, true)]
+    public static partial Manager* Instance();
+
     public enum RenderViews : uint {
         OmniShadow0 = 0,
         OmniShadow1,
