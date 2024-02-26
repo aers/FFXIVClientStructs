@@ -29,7 +29,7 @@ jobs:
       run: |
         dotnet tool install -g Microsoft.DotNet.ApiCompat.Tool
         testout=$(apicompat -l ida/cs-main/FFXIVClientStructs.dll -r ida/cs-pr/FFXIVClientStructs.dll)
-        if [ "$testout" != "" ]; then
+        if [ "$testout" != "APICompat ran successfully without finding any breaking changes." ]; then
           echo "Breaking changes detected"
           echo "breaking=true" >> $GITHUB_OUTPUT
         else
