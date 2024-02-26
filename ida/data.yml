@@ -2666,6 +2666,7 @@ classes:
       0x1400B5310: Finalize
       0x1400B56B0: ChangeUiMode
       0x1400B66C0: OpenAddon
+      0x1400B6B10: OpenAddonByAgent
       0x1400B6E40: OpenYesNo
       0x1400CA3F0: OnUpdate_Nameplates
       0x1400CB8A0: IncRefNumberArrayData
@@ -10837,6 +10838,7 @@ classes:
         base: Component::GUI::AtkUnitBase
     vfuncs:
       71: Selected
+      72: OnMenuSelected
     funcs:
       0x140D8C300: ctor
   Client::UI::AddonContextMenuTitle:
