@@ -29096,7 +29096,6 @@ __unaligned struct Client_UI_Agent_AgentMJICraftSchedule_ScheduleData /* Size=0x
     /* 0x0B8 */ StdVectorClientSystemStringUtf8String ThemeNames;
     /* 0x0D0 */ StdVectorClientUIAgentAgentMJICraftScheduleCraftData Crafts;
     /* 0x0E8 */ StdVectorClientUIAgentAgentMJICraftScheduleCraftDataPtr UnlockedObjectsPerTheme[0x20];
-    /*       */ byte _gap_0xE8[0x300];
     /* 0x3E8 */ StdVectorClientUIAgentAgentMJICraftScheduleCraftDataPtr CraftsSortedByName;
     /* 0x400 */ Client_UI_Agent_AgentMJICraftSchedule_WorkshopData WorkshopSchedules[0x4];
     /* 0x550 */ Client_UI_Agent_AgentMJICraftSchedule_WorkshopData CopiedSchedule;
@@ -29215,7 +29214,6 @@ __unaligned struct Client_UI_Agent_AgentMJIDisposeShop_AgentData /* Size=0x170 *
     /* 0x0D8 */ StdVectorClientSystemStringUtf8String CategoryNames;
     /* 0x0F0 */ StdVectorClientUIAgentAgentMJIDisposeShopItemData Items;
     /* 0x108 */ StdVectorClientUIAgentAgentMJIDisposeShopItemDataPtr PerCategoryItems[0x4];
-    /*       */ byte _gap_0x108[0x60];
     /* 0x168 */ bool DataInitialized;
     /* 0x169 */ bool AddonDirty;
     /*       */ byte _gap_0x16A[0x2];
@@ -33884,7 +33882,6 @@ __unaligned struct Component_GUI_AtkTextureResourceManager /* Size=0x58 */
     /* 0x28 */ __int32 IconLanguageSheetId;
     /* 0x2C */ __int32 IconLanguage;
     /* 0x30 */ StdPairunsignedint32unsignedint32 LocalizedIconRange[0x4];
-    /*      */ byte _gap_0x30[0x20];
     /* 0x50 */ unsigned __int32 LocalizedIconRangeCount;
     /*      */ byte _gap_0x54[0x4];
 };
