@@ -43,7 +43,7 @@ public unsafe partial struct RaptureAtkModule {
     public partial bool DecRefStringArrayData(int index);
 
     [MemberFunction("E8 ?? ?? ?? ?? 66 89 46 50")]
-    public partial ushort OpenAddon(ushort addonNameId, uint valueCount, AtkValue* values, AgentInterface* parentAgent, ulong unk, ushort parentAddonId, int unk2);
+    public partial ushort OpenAddon(uint addonNameId, uint valueCount, AtkValue* values, AgentInterface* parentAgent, ulong unk, ushort parentAddonId, int unk2);
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F B7 C0 48 83 C4 60")]
     public partial ushort OpenAddonByAgent(byte* addonName, AtkUnitBase* addon, int valueCount, AtkValue* values, AgentInterface* agent, nint a7, ushort parentAddonId);
