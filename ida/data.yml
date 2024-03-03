@@ -6,11 +6,17 @@ globals:
   0x1419BE410: g_UIColorTable
   0x141A06EC8: g_HUDScaleTable
   0x141FDC380: g_ClientInstanceLimit
+  0x141FDC410: g_WindowStyle
+  0x141FDD498: g_FPS
   0x141FE0D38: g_LanguageCharArr # byte[] no pointer
   0x142168868: g_Client::Game::Control::InputManager_MouseButtonHoldState
   0x14217EC50: g_StackCookie
   0x14217EC58: g_InverseStackCookie
+  0x14219A968: g_stdout
+  0x14219A400: g_ffxiv_dx11_module
   0x14219C3F0: g_ThreadLocalPerformanceFrequency
+  0x14219C408: g_FrameCountAccum # accumulates over a second to calc FPS
+  0x14219C40c: g_FrameTimeAccum # accumulates over a second to calc FPS
   0x14219C520: g_OSVersion
   0x1421A33E0: g_CurrentCharaSelectCharacter # Client::Game::Character::Character*
   0x1421A35F0: g_CharaSelectCharacterList # see Client::UI::Agent::AgentLobby::CharaSelectCharacterList
@@ -18,6 +24,9 @@ globals:
   0x1421B5508: g_RenderSkeletonLinkedListEnd
   0x1421B5560: g_RenderModelLinkedListStart
   0x1421B5568: g_RenderModelLinkedListEnd
+  0x1421B5C08: g_animationFactorRemainder
+  0x1421B5C0C: g_animationFactor #percentage of a 30fps frame rendered this frame
+  0x1421B8AE0: g_PerformanceFrequency
   0x1421C3158: g_LocalPlayerObjectID
   0x1421C3160: g_LocalPlayer
   0x1421E93C0: g_LastTextCommand
@@ -74,9 +83,14 @@ functions:
   0x140058500: WinMain
   0x1400581B0: std:string::ctor_FromSubStr #(other, idx, len)
   0x1400582F0: std:string::ctor_FromCharArr #(arr, len)
+  0x140059700: GetStdOut
+  0x140059710: vsprintf_s
+  0x140059770: vswprintf_s
   0x1400654E0: IsMacClient
+  0x140065F50: SpecialFreeMemory
   0x1400951B0: CheckOsTypeAndVersion
-  0x140067500: GetMyDocumntsFolder #as UTF8String
+  0x140067100: CopyUInt
+  0x140067500: GetMyDocumentsFolder #as UTF8String
   0x140096470: GetPerformanceFrequency
   0x1400976D0: CreateDirectoryRecursive
   0x1400A6BD0: GetCurrentUnixTimestamp # in seconds
@@ -97,8 +111,10 @@ functions:
   0x1403292A0: GetGlobalTextParameter
   0x140335550: std::vector_SetSize
   0x140655200: GetGameObjectByIndex
+  0x140419710: UpdateAnimFactor
   0x1404998E0: PrepareColorSet
   0x140499BB0: ReadStainingTemplate
+  0x1404BDDA0: StartSpursJobEntityWorkerThread
   0x1404E9290: GetAvailablePoses
   0x14050FD70: RemoveFromList # (AtkEvent**, AtkEvent*) Finds and removes param2 from the param1 list
   0x140539710: GetScaleListEntryFromScale
@@ -124,6 +140,7 @@ functions:
   0x141306EC0: Client::Graphics::Kernel::CreateShader # static function
   0x141311E60: FilterCustomizeData # ensures NPC specific faces etc aren't on players
   0x1413123B0: NormalizeCustomizeData
+  0x1413A7BC0: InitWinsockDLL
   0x1413B7B30: lua_close
   0x1413B7BB0: lua_newstate
   0x1413B7EB0: lua_index2addr
@@ -251,12 +268,17 @@ functions:
   0x1415F2830: std::vector.dtor
   0x1415FFF10: crc
   0x14165ABD4: ThrowException
+  0x1416CB394: rand
+  0x1416CB3C0: srand
   0x141681494: FreeMemory
   0x1400557E0: FreeMemory_2 # nullsub, gets called together with some AllocatorManager vfunc
   0x1416893F0: _purecall # Ghidra does not have a notation for pure virtual calls
   0x14168942C: _set_purecall_handler
+  0x1416954C0: _invalid_parameter_noinfo
+  0x1416954E0: _invalid_parameter_noinfo_noreturn
   0x141689480: MemCpy
   0x141689AC0: MemSet
+  0x140060760: StaticMalloc #uses MemoryManager if avail, but fail saves malloc
   0x1400609E0: MemAlloc
   0x140209830: MatrixMultiply
   0x1402065B0: MatrixMultiply2
@@ -334,10 +356,13 @@ classes:
       - ea: 0x1421B9578
         pointer: False
     funcs:
+      0x140047C70: ctorStatic
+      0x1419A06C0: dtorStatic
       0x1404DAA00: Initialize
       0x1404DAD80: Terminate
       0x1404DB0D0: Update
       0x1404DD630: ctor
+      0x1404DD700: dtor
       0x1404DBA10: QueueActiveFestivals
       0x1404DCCD0: IsInGPose  # (probably) static
       0x1404DCD10: IsInIdleCam  # static
@@ -378,9 +403,35 @@ classes:
   Application::Network::NetworkModule:
     funcs:
       0x1415EA3B0: ctor
-      0x1415EB8F0: Initialize
+      0x1415EADE0: dtor
       0x1415EB0D0: GetCharacterData
-      0x1415EC130: dtor
+      0x1415EB8F0: Initialize
+      0x1415EB950: InitializeLobbyConnection
+      0x1415EC130: dtorHelper
+      0x1415F14F0: Update
+  Client:Network::ZoneConnection:
+    funcs:
+      0x1415F2DD0: dtor
+  Client:Network::ChatConnection:
+    funcs:
+      0x1415F3440: dtor
+    Client:Network::LobbyConnectionBase:
+      vtbls:
+        - ea: 0x141c8F490
+      vfuncs:
+        0: Dispose
+      funcs:
+        0x14161C500: ctor
+        0x14161d5a0: dtor
+    Client:Network::LobbyConnection:
+      vtbls:
+        - ea: 0x141C83CA8
+          base: Client:Network::LobbyConnectionBase
+      funcs:
+        0x1415F3870: ctor
+        0x1415F3980: dtor
+        0x1415F4D50: SetWorld
+        0x1415F4E10: SetZone
   Application::Network::LobbyClient::LobbyRequestCallback:
     vtbls:
       - ea: 0x141C8E798
@@ -680,16 +731,22 @@ classes:
       0x1412E2FC0: CreateEventObject
       0x1412E30A0: CreateAreaObject
       0x1412E3190: DeleteObjectByIndex
+      x1412E32F0: DeleteAllObjects
       0x1412E3460: CalculateNextAvailableIndex
       0x1412E3510: GetObjectByIndex
       0x1412E35F0: IsValidClientObject
+      0x1412E3610: IsValidClientObjectIndex
       0x1412E3630: GetIndexByObject
+      0x1412E3660: SetObjectAt #(idx, object)
+      0x1412E3690: RemoveObjectAt
+      0x1412E36D0: HasObjectAt
   Client::Game::Character::CharacterManager: # networked characters
     instances:
       - ea: 0x1421E9430
         pointer: False
     funcs:
       0x1407BB8A0: Initialize
+      0x1412e2CE0: Destroy
       0x1407BBAA0: Update
       0x1407BBB00: UpdateCompanions
       0x1407BBB70: CreateCharacterAtFirstEmptyIndex
@@ -1276,6 +1333,8 @@ classes:
     instances:
       - ea: 0x1421F3830
         pointer: False
+    funcs:
+      0x14096C770: HandleExaminePacket
   Client::Game::UI::Telepo:
     instances:
       - ea: 0x1421F3AA8
@@ -1655,6 +1714,8 @@ classes:
       0x140069200: ctor
       0x140069550: GetConfigOption
       0x140069500: SetConfigOption
+      0x140069970: RegisterChangeEvent
+      0x1400699E0: UnRegisterChangeEvent
   Common::Configuration::UIConfig:
     vtbls:
       - ea: 0x1419B13D8
@@ -1747,22 +1808,26 @@ classes:
         pointer: false
     funcs:
       0x1400655D0: SetWindowRect
+      0x140065890: Show # (bool maximized)
       0x1400659A0: SetWindowSize
       0x140065AF0: GetWindowPos
       0x140065B50: SetWindowPos
+      0x140065B90: ClientToScreen
       0x140065BE0: GetWindowSize
+      0x140065C40: SetResizeBorder #(bool canResize, bool silent)
       0x140065DF0: ScreenToClient
   Client::System::Framework::Task:
     vtbls:
       - ea: 0x1419B2AC8
     vfuncs:
-      0: dtor
+      0: Dispose
       1: Execute_arg1 # arg 1 is always an event object
       2: Execute_arg2
     funcs:
       0x1400965B0: TaskRunner_arg1 # these are used to run static tasks, vfuncs are for Task subclasses
       0x1400965C0: TaskRunner_arg2
       0x1400965D0: TaskRunner_arg3
+      0x14019B340: dtor
   Client::System::Framework::TaskManager::RootTask:
     vtbls:
       - ea: 0x1419B2AE0
@@ -1772,9 +1837,13 @@ classes:
       - ea: 0x14219E040
     vtbls:
       - ea: 0x1419B2AF8
+    vfuncs:
+      0: Dispose
     funcs:
       0x140095D70: ctor
+      0x14019C230: dtor
       0x14019C2F0: AddTask
+      0x14019C360: ExecuteAllTasks
   Common::Game::Time::GameTime:
     vtbls:
       - ea: 0x1419B2B00
@@ -1921,12 +1990,7 @@ classes:
       - ea: 0x141A029F0
         base: Common::Component::Environment::ResourceInterface::ResourceHandleInterface
     vfuncs:
-      0: dtor
-      1: GetPath
-      2: LoadSucceeded
-      3: LoadFailed
-      4: GetData
-      5: GetSize
+      0: Dispose
   Common::Component::BGCollision::Object:
     vtbls:
       - ea: 0x141A02900
@@ -2403,6 +2467,13 @@ classes:
   Common::Component::Environment::ResourceInterface::ResourceHandleInterface:
     vtbls:
       - ea: 0x141A02808
+    vfuncs:
+      0: Dispose
+      1: GetPath
+      2: LoadSucceeded
+      3: LoadFailed
+      4: GetData
+      5: GetSize
   Common::Component::Excel::LinkList<Component::Exd::ExdModuleResourceHandle>:
     vtbls:
       - ea: 0x141A02D80
@@ -2741,14 +2812,18 @@ classes:
       - ea: 0x1419BF0D0
         base: Client::UI::Info::InfoProxyPageInterface
     vfuncs:
+      8: ClearListData
+      15: GetCurrentLocationName
+      26: Compare #By IsOnline
       29: CompareHomeworld
     funcs:
       0x1400ECF80: ctor
       0x1400ED0A0: Finalize
+      0x1400ED750: ClearListDataImpl
       0x1400EDEC0: GetContentIDForEntry
       0x1400EDEE0: SearchEntryByName
       0x1400EDFE0: GetEntry
-      0x1400EE640: SearchEntryByContenID
+      0x1400EE640: SearchEntryByContentID
       0x1400EE890: SwapData
   Client::UI::Info::InfoProxySearchComment:
     vtbls:
@@ -3030,6 +3105,7 @@ classes:
       - ea: 0x1419D39A8
         base: Client::System::Common::NonCopyable
     vfuncs:
+      1: RequestStop
       5: Run
     funcs:
       0x1401C01D0: ctor
@@ -3052,12 +3128,15 @@ classes:
   Client::System::File::FileInterface:
     vtbls:
       - ea: 0x1419D3D20
+    vfuncs:
+      0: Dispose
   Client::System::File::FileThread:
     vtbls:
       - ea: 0x1419D3D40
         base: Client::System::Threading::Thread
     funcs:
       0x1401C5D10: ctor
+      0x1401C5E00: dtor
   Client::System::File::FileManager:
     instances:
       - ea: 0x1421A32D0
@@ -3067,6 +3146,8 @@ classes:
     funcs:
       0x1401C7750: GetInstance
       0x1401C77D0: ctor
+      0x1401C7AA0: dtor
+      0x1401C8590: CreateFileThread
   Client::System::File::FileAccessPath:
     funcs:
       0x140066360: ctor
@@ -3401,12 +3482,17 @@ classes:
     funcs:
       0x14021AE40: ctor
       0x14021AE90: Initialize
+      0x14021B600: Update
       0x14021B610: Finalize
       0x14021B6B0: IsWinSockInitialized
+      0x14021B810: SetLanguage
+      0x14021BF40: GetCurrentDeviceTime
       0x14021BF90: GetCurrentDeviceTimeInMillis
       0x14021C010: GetLobbyCount
       0x14021C940: IsInCrossWorldDuty
+      0x14021C9A0: SetCurrentInstance
       0x14021C9C0: GetCurrentInstance
+      0x14021B690: HasZoneConnection
   Application::Network::PacketReceiverCallbackInterface:
     vtbls:
       - ea: 0x1419DD1B8
@@ -3448,6 +3534,8 @@ classes:
         base: Client::Network::PacketDispatcher #Client::Network::Protocol::Zone::PacketReceiverCallbackInterface
       - ea: 0x1419DD1F8
         base: Client::Network::Protocol::Chat::PacketReceiverCallbackInterface
+    funcs:
+      0x14021CAD0: ctor
   Client::UI::Agent::AgentInterface:
     vtbls:
       - ea: 0x1419DE450
@@ -4165,6 +4253,14 @@ classes:
       0x1404B73A0: ctor
       0x1404B73D0: nullsub_1
       0x1404B7400: LoadDataFiles
+  Client::System::Task::SpursManager:
+    vtbls:
+      - ea: 0x141A01BA8
+    vfuncs:
+      0: Dispose
+    funcs:
+      0x1404BE280: ctor
+      0x1404Be380: dtor
   Client::System::Task::SpursJobEntityWorkerThread:
     instances:
       - ea: 0x1421B8B40
@@ -4308,8 +4404,12 @@ classes:
   Component::Exd::ExdModule:
     vtbls:
       - ea: 0x141A02E58
+    vfuncs:
+      0: Dispose
     funcs:
       0x1404CDAE0: ctor
+      0x1404CDB70: dtor
+      0x1404CDC00: Load
       0x1404CDC50: ChangeLanguage
       0x1404CDF40: GetRowBySheetAndRowId  # (ExdModule* this, ExcelSheet* pSheet, int nRowId) -> ExcelRow*
       0x1404CE0D0: GetRowBySheetAndRowIndex  # (ExdModule* this, ExcelSheet* pSheet, int nRowIndex) -> ExcelRow*
@@ -4369,6 +4469,7 @@ classes:
       0x1404F5220: ProcessMouseState
       0x1404F77C0: InteractWithObject
       0x1404FB420: OpenObjectInteraction
+      0x1404F82D0: Update
       0x1404F90A0: GetHardTargetObjectId
       0x1404F90C0: GetHardTargetId
       0x1404F90E0: GetHardTarget
@@ -5247,7 +5348,7 @@ classes:
       22: GetRetainerTaskDataModule
       23: GetFlagStatusModule
       24: GetRecipeFavoriteModule
-      24: GetCraftModule
+      25: GetCraftModule
       26: GetRaptureUiDataModule
       27: GetAfterAgentsPtr # points to the field right after the last Agent in AgentModule
       29: GetGoldSaucerModule
@@ -5366,6 +5467,7 @@ classes:
     funcs:
       0x140628D00: ctor
       0x140629700: Finalize
+      0x140629BD0: Initialize
       0x140629E30: Update
       0x14062A2B0: HandleInputUpdate
       0x14062A380: ShouldLimitFps
@@ -5592,6 +5694,7 @@ classes:
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
       0x14069BA00: ctor
+      0x14069BB80: Initialize
   Client::UI::Misc::ConfigModule:
     vtbls:
       - ea: 0x141A1D060
@@ -8012,6 +8115,8 @@ classes:
     vtbls:
       - ea: 0x141A685C0
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A9BC10: ctor
   Client::UI::Agent::AgentFashion:
     vtbls:
       - ea: 0x141A7A0D0
@@ -8142,6 +8247,8 @@ classes:
     vtbls:
       - ea: 0x141A64020
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1409DF560: ctor
   Client::UI::Agent::AgentDawn:
     vtbls:
       - ea: 0x141A692B0
