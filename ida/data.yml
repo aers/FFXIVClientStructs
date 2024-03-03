@@ -731,7 +731,7 @@ classes:
       0x1412E2FC0: CreateEventObject
       0x1412E30A0: CreateAreaObject
       0x1412E3190: DeleteObjectByIndex
-      x1412E32F0: DeleteAllObjects
+      0x1412E32F0: DeleteAllObjects
       0x1412E3460: CalculateNextAvailableIndex
       0x1412E3510: GetObjectByIndex
       0x1412E35F0: IsValidClientObject
