@@ -53,4 +53,7 @@ public unsafe partial struct EventFramework {
 
     public InstanceContentOceanFishing* GetInstanceContentOceanFishing()
         => GetInstanceContentDirector<InstanceContentOceanFishing>(InstanceContentType.OceanFishing);
+
+    public CraftEventHandler* GetCraftEventHandler()
+        => (CraftEventHandler*)GetEventHandlerById(0xA0001);
 }
