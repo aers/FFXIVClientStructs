@@ -12,7 +12,7 @@ public enum CraftStateFlags : uint {
     AdvancedTouchProc = 1 << 28,
     ObservedProc = 1 << 29,
     NoMoreCarefulObservation = 1 << 30,
-    NoMoreFocusedSynthesis = 1u << 31
+    NoMoreHeartAndSoul = 1u << 31
 }
 
 [Flags]
