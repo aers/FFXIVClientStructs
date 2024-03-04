@@ -15753,6 +15753,16 @@ struct Client_UI_AddonContextMenuVTable
     /*       */ __int64 _vf60;
     /* 0x1E8 */ void (__fastcall *OnMouseOver)(Component_GUI_AtkUnitBase* a1);
     /* 0x1F0 */ void (__fastcall *OnMouseOut)(Component_GUI_AtkUnitBase* a1);
+    /*       */ __int64 _vf63;
+    /*       */ __int64 _vf64;
+    /*       */ __int64 _vf65;
+    /*       */ __int64 _vf66;
+    /*       */ __int64 _vf67;
+    /*       */ __int64 _vf68;
+    /*       */ __int64 _vf69;
+    /*       */ __int64 _vf70;
+    /*       */ __int64 _vf71;
+    /* 0x240 */ bool (__fastcall *OnMenuSelected)(Client_UI_AddonContextMenu* a1, __int32 a2, byte a3);
 };
 
 __unaligned struct Client_UI_AddonContextMenu /* Size=0x2A0 */
