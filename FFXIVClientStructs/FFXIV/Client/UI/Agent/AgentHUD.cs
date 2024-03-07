@@ -39,6 +39,9 @@ public unsafe partial struct AgentHUD {
 
     [MemberFunction("48 85 D2 74 7F 48 89 5C 24")]
     public partial void OpenContextMenuFromTarget(GameObject* gameObject);
+
+    [MemberFunction("E8 ?? ?? ?? ?? EB ?? 48 8B CB E8 ?? ?? ?? ?? 48 8B D8")]
+    public partial byte* GetMainCommandString(uint commandId, bool includeKeybind = true, bool includeNewIndicator = false);
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x0C)]
