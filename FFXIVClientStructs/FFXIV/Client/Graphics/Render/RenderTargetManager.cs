@@ -44,6 +44,11 @@ public unsafe partial struct RenderTargetManager {
     [FixedSizeArray<Pointer<Texture>>(49)]
     [FieldOffset(0x270)] public fixed byte RenderTargetArray2[8 * 49];
 
+    [FieldOffset(0x470)] public ushort DynamicResolutionActualTargetHeight; // seems to copy TargetHeight into ActualTargetHeight?
+    [FieldOffset(0x472)] public ushort DynamicResolutionTargetHeight;
+    [FieldOffset(0x474)] public ushort DynamicResolutionMaximumHeight;
+    [FieldOffset(0x476)] public ushort DynamicResolutionMinimumHeight;
+
     [StaticAddress("48 8B 0D ?? ?? ?? ?? 48 8B B1 ?? ?? ?? ??", 3, isPointer: true)]
     public static partial RenderTargetManager* Instance();
 
