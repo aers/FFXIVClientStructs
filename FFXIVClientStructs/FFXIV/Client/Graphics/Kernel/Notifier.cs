@@ -1,7 +1,6 @@
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
-// Client::Graphics::Kernel::Notifier
 
-// size = 0x18
+// Client::Graphics::Kernel::Notifier
 [StructLayout(LayoutKind.Explicit, Size = 0x18)]
 public unsafe struct Notifier {
     [FieldOffset(0x00)] public void* vtbl;

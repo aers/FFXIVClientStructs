@@ -3,12 +3,11 @@ using FFXIVClientStructs.FFXIV.Client.Game.Object;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
+
 // Client::UI::Agent::AgentHUD
 //   Client::UI::Agent::AgentInterface
 //     Component::GUI::AtkModuleInterface::AtkEventInterface
-
-// size = 0x4600
-// ctor E8 ?? ?? ?? ?? EB 03 49 8B C4 45 33 C9 48 89 46 40
+// ctor "E8 ?? ?? ?? ?? EB 03 48 8B C5 45 33 C9 48 89 47 40"
 [Agent(AgentId.Hud)]
 [StructLayout(LayoutKind.Explicit, Size = 0x4BA0)]
 public unsafe partial struct AgentHUD {
@@ -40,6 +39,9 @@ public unsafe partial struct AgentHUD {
 
     [MemberFunction("48 85 D2 74 7F 48 89 5C 24")]
     public partial void OpenContextMenuFromTarget(GameObject* gameObject);
+
+    [MemberFunction("E8 ?? ?? ?? ?? EB ?? 48 8B CB E8 ?? ?? ?? ?? 48 8B D8")]
+    public partial byte* GetMainCommandString(uint commandId, bool includeKeybind = true, bool includeNewIndicator = false);
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x0C)]

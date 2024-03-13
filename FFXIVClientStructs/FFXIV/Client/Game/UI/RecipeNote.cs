@@ -2,8 +2,9 @@ using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
-// ctor "E8 ?? ?? ?? ?? 48 8D 8B ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 8B ?? ?? ?? ?? E8 ?? ?? ?? ?? B9 ?? ?? ?? ?? 48 89 AB"
-[StructLayout(LayoutKind.Explicit, Size = 0x610)]
+// Client::Game::UI::RecipeNote
+// ctor "E8 ?? ?? ?? ?? 48 8D 8B ?? ?? ?? ?? E8 ?? ?? ?? ?? B9 ?? ?? ?? ?? 48 89 AB"
+[StructLayout(LayoutKind.Explicit, Size = 0x628)]
 public unsafe partial struct RecipeNote {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? 81 FE ?? ?? ?? ?? 75 0F", 3)]
     public static partial RecipeNote* Instance();
@@ -12,7 +13,7 @@ public unsafe partial struct RecipeNote {
 
     [FieldOffset(0xB8)] public RecipeData* RecipeList;
 
-    [StructLayout(LayoutKind.Explicit, Size = 0x3B0)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x3D0)]
     public struct RecipeData {
         [FieldOffset(0x000)] public RecipeEntry* Recipes;
         [FieldOffset(0x3B8)] public ushort SelectedIndex;

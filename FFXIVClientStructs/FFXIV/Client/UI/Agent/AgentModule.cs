@@ -2,10 +2,9 @@ using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
-// Client::UI::Agent::AgentModule
 
-// size = 0xDB8
-// ctor E8 ?? ?? ?? ?? 48 8B 85 ?? ?? ?? ?? 49 8B CF 48 89 87
+// Client::UI::Agent::AgentModule
+// ctor "E8 ?? ?? ?? ?? 48 8B 85 ?? ?? ?? ?? 49 8B CE 48 89 87"
 [StructLayout(LayoutKind.Explicit, Size = 0xDF8)]
 public unsafe partial struct AgentModule {
     public static AgentModule* Instance() => Framework.Instance()->GetUiModule()->GetAgentModule();
@@ -61,7 +60,8 @@ public enum AgentId : uint {
     FishingNote = 28,
     FishGuide = 29,
     FishRecord = 30,
-    Journal = 32,
+    [Obsolete("Renamed to QuestJournal")] Journal = 32,
+    QuestJournal = 32,
     ActionMenu = 33,
     Marker = 34,
     Trade = 35,
@@ -130,7 +130,8 @@ public enum AgentId : uint {
     GrandCompanyRank = 93,
     GrandCompanySupply = 94,
     GrandCompanyExchange = 95,
-    Gearset = 96,
+    [Obsolete("Renamed to GearSet")] Gearset = 96,
+    GearSet = 96,
     SupportMain = 97,
     SupportList = 98,
     SupportView = 99,
@@ -346,7 +347,7 @@ public enum AgentId : uint {
     AozContentResult = 329,
     WorldTravel = 330,
     RideShooting = 331, //Airforce One
-
+    RideShootingResult = 332,
     Credit = 333,
     EmjSetting = 334, //Mahjong Settings
     RetainerList = 335,
@@ -372,7 +373,7 @@ public enum AgentId : uint {
     PerformanceReadyCheck = 360,
 
     HwdAetherGauge = 364,
-
+    HwdGathererInspection = 365,
     HwdScore = 366,
 
     HwdMonument = 368,
@@ -444,7 +445,7 @@ public enum AgentId : uint {
     TurnBreak = 432,
 
     SXTBattleLog = 434,
-
+    MoogleCollection = 435,
     FGSEnterDialog = 436,
     FGSStageIntro = 437,
     FGSHud = 438,

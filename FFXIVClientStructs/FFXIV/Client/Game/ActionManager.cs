@@ -3,10 +3,13 @@ using FFXIVClientStructs.FFXIV.Common.Math;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
+// Client::Game::ActionManager
 [StructLayout(LayoutKind.Explicit, Size = 0x7F0)]
 public unsafe partial struct ActionManager {
-    [FieldOffset(0x60)] public ComboDetail Combo;
+    [StaticAddress("48 8D 0D ?? ?? ?? ?? F3 0F 10 13", 3)]
+    public static partial ActionManager* Instance();
 
+    [FieldOffset(0x60)] public ComboDetail Combo;
     [FieldOffset(0x68)] public bool ActionQueued;
     [FieldOffset(0x6C)] public ActionType QueuedActionType;
     [FieldOffset(0x70)] public uint QueuedActionId;
@@ -14,9 +17,6 @@ public unsafe partial struct ActionManager {
     [FieldOffset(0x80)] public uint QueueType;
 
     [FieldOffset(0x13C)] public fixed uint BlueMageActions[24];
-
-    [StaticAddress("48 8D 0D ?? ?? ?? ?? F3 0F 10 13", 3)]
-    public static partial ActionManager* Instance();
 
     [MemberFunction("E8 ?? ?? ?? ?? EB 64 B1 01")]
     public partial bool UseAction(ActionType actionType, uint actionID, ulong targetID = 0xE000_0000, uint a4 = 0, uint a5 = 0, uint a6 = 0, void* a7 = null);
@@ -93,7 +93,7 @@ public unsafe partial struct ActionManager {
     /// <param name="actionType">The type of action to check.</param>
     /// <param name="actionId">The ID of the action to check.</param>
     /// <returns>Returns true if the action is off-cooldown or slidecastable.</returns>
-    [MemberFunction("77 49 80 3B 00")]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 0F 84 ?? ?? ?? ?? F6 05 ?? ?? ?? ?? ?? 74 2C")]
     public partial bool IsActionOffCooldown(ActionType actionType, uint actionId);
 
     /// <summary>

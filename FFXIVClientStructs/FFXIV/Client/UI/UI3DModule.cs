@@ -3,9 +3,9 @@ using FFXIVClientStructs.FFXIV.Client.Game.Object;
 using FFXIVClientStructs.FFXIV.Common.Math;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
-// Client::UI::UI3DModule
 
-// ctor E8 ?? ?? ?? ?? 48 8B 44 24 ?? 4C 8D BF ?? ?? ?? ?? 
+// Client::UI::UI3DModule
+// ctor "E8 ?? ?? ?? ?? 48 8B 44 24 ?? 4C 8D B7"
 [StructLayout(LayoutKind.Explicit, Size = 0x11BE0)]
 public unsafe partial struct UI3DModule {
     // Client::UI::UI3DModule::MapInfo

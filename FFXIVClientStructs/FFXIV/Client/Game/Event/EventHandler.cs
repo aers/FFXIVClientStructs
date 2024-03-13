@@ -3,6 +3,8 @@ using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 
+// Client::Game::Event::EventHandler
+// ctor "E8 ?? ?? ?? ?? 45 33 D2 48 8D 05"
 [StructLayout(LayoutKind.Explicit, Size = 0x210)]
 public unsafe struct EventHandler {
     [FieldOffset(0x08)] public StdSet<Pointer<GameObject>> EventObjects;
@@ -75,6 +77,7 @@ public enum EventHandlerType : ushort {
     TreasureHuntDirector = 0x8009,
     GoldSaucerDirector = 0x800A,
     CompanyCraftDirector = 0x800B,
+    SkyIslandDirector = 0x800C,
     DpsChallengeDirector = 0x800D,
     FateDirector = 0x801A
 }

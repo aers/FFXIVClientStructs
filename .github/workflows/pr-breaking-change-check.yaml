@@ -1,0 +1,81 @@
+name: Breaking Change Check
+
+on:
+  pull_request_target:
+    types:
+      - opened
+      - synchronize
+      - reopened
+    branches:
+      - main
+    paths:
+      - 'FFXIVClientStructs/**/*.cs'
+  
+jobs:
+  build-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - name: Install dependencies for PR branch
+        run: dotnet restore
+      - name: Build PR branch
+        run: dotnet build FFXIVClientStructs/FFXIVClientStructs.csproj --output ida/cs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cs-pr
+          path: ida/cs/FFXIVClientStructs.dll
+          retention-days: 1
+  
+  build-main:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install dependencies for Main branch
+        run: dotnet restore
+      - name: Build Main branch
+        run: dotnet build FFXIVClientStructs/FFXIVClientStructs.csproj --output ida/cs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cs-main
+          path: ida/cs/FFXIVClientStructs.dll
+          retention-days: 1
+
+  check-breaking-changes:
+    runs-on: ubuntu-latest
+    needs: [build-pr, build-main]
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/download-artifact@v4
+      with:
+        name: cs-pr
+        path: ida/cs-pr
+    - uses: actions/download-artifact@v4
+      with:
+        name: cs-main
+        path: ida/cs-main
+    - name: Check for breaking changes
+      id: breaking_changes
+      run: |
+        dotnet tool install -g Microsoft.DotNet.ApiCompat.Tool
+        testout=$(apicompat -l ida/cs-main/FFXIVClientStructs.dll -r ida/cs-pr/FFXIVClientStructs.dll)
+        echo $testout
+        if [[ "$testout" == *"exists on ida/cs-main/FFXIVClientStructs.dll but not on ida/cs-pr/FFXIVClientStructs.dll"* ]]; then
+          echo "Breaking changes detected"
+          echo "breaking=true" >> $GITHUB_OUTPUT
+        else
+          echo "No breaking changes detected"
+          echo "breaking=false" >> $GITHUB_OUTPUT
+        fi
+    - name: Add tag to PR
+      if: steps.breaking_changes.outputs.breaking == 'true'
+      uses: actions/github-script@v7
+      with:
+        script: |
+          github.rest.issues.addLabels({
+            issue_number: context.payload.pull_request.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            labels: ["breaking change"]
+          })

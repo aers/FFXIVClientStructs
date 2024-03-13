@@ -357,3 +357,4 @@ MigrationBackup/
 
 # VSCode
 .vscode/
+ida/errors.txt

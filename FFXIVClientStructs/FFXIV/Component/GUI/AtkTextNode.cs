@@ -4,41 +4,12 @@ using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
-[Flags]
-public enum TextFlags {
-    AutoAdjustNodeSize = 0x01,
-    Bold = 0x02,
-    Italic = 0x04,
-    Edge = 0x08,
-    Glare = 0x10,
-    Emboss = 0x20,
-    WordWrap = 0x40,
-    MultiLine = 0x80
-}
-
-[Flags]
-public enum TextFlags2 {
-    Ellipsis = 0x04
-}
-
-public enum FontType : byte {
-    Axis = 0x0,
-    MiedingerMed = 0x1,
-    Miedinger = 0x2,
-    TrumpGothic = 0x3,
-    Jupiter = 0x4,
-    JupiterLarge = 0x5,
-}
-
 // Component::GUI::AtkTextNode
 //   Component::GUI::AtkResNode
 //     Component::GUI::AtkEventTarget
-
-// simple text node
-
-// size = 0x158
-// common CreateAtkNode function E8 ?? ?? ?? ?? 48 8B 4E 08 49 8B D5 
+// common CreateAtkNode function "E8 ?? ?? ?? ?? 48 8B 4C 24 ?? 48 8B 51 08"
 // type 3
+// simple text node
 [StructLayout(LayoutKind.Explicit, Size = 0x160)]
 public unsafe partial struct AtkTextNode : ICreatable {
     [FieldOffset(0x0)] public AtkResNode AtkResNode;
@@ -114,4 +85,30 @@ public unsafe partial struct AtkTextNode : ICreatable {
         get => (FontType)((AlignmentFontType & 0xF0) >> 4);
         set => SetFont(value);
     }
+}
+
+[Flags]
+public enum TextFlags {
+    AutoAdjustNodeSize = 0x01,
+    Bold = 0x02,
+    Italic = 0x04,
+    Edge = 0x08,
+    Glare = 0x10,
+    Emboss = 0x20,
+    WordWrap = 0x40,
+    MultiLine = 0x80
+}
+
+[Flags]
+public enum TextFlags2 {
+    Ellipsis = 0x04
+}
+
+public enum FontType : byte {
+    Axis = 0x0,
+    MiedingerMed = 0x1,
+    Miedinger = 0x2,
+    TrumpGothic = 0x3,
+    Jupiter = 0x4,
+    JupiterLarge = 0x5,
 }

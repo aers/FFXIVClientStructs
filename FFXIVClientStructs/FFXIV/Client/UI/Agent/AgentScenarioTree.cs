@@ -2,8 +2,10 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
-// ctor E8 ?? ?? ?? ?? EB 03 48 8B C5 33 D2 48 89 47 58
-
+// Client::UI::Agent::AgentScenarioTree
+//   Client::UI::Agent::AgentInterface
+//     Component::GUI::AtkModuleInterface::AtkEventInterface
+// ctor "E8 ?? ?? ?? ?? EB 03 48 8B C5 33 D2 48 89 47 58"
 [StructLayout(LayoutKind.Explicit, Size = 0x30)]
 [Agent(AgentId.ScenarioTree)]
 public unsafe partial struct AgentScenarioTree {

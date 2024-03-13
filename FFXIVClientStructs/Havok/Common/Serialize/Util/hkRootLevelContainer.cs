@@ -6,7 +6,7 @@ public unsafe partial struct hkRootLevelContainer {
         public hkStringPtr Name;
         public hkStringPtr ClassName;
         public hkRefPtr<hkReferencedObject> Variant;
-    };
+    }
 
     public hkArray<NamedVariant> NamedVariants;
 

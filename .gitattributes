@@ -1,3 +1,5 @@
 # Auto detect text files and perform LF normalization
 * text eol=crlf
 *.png binary
+
+ida/ffxiv_client_structs*.h linguist-generated=true

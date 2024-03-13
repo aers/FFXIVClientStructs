@@ -1,6 +1,8 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game.MJI;
 
-// vast majority of struct info from E8 ?? ?? ?? ?? 8B 4C 24 24 E8
+// Client::Game::MJI::MJIFarmState
+// ctor "E8 ?? ?? ?? ?? EB 03 48 8B C7 33 D2 48 89 83 ?? ?? ?? ?? 45 33 C0 8D 4A 01"
+// vast majority of struct info from "E8 ?? ?? ?? ?? 8B 4C 24 24 E8"
 [StructLayout(LayoutKind.Explicit, Size = 0x148)]
 public unsafe partial struct MJIFarmState {
     [FieldOffset(0x00)] public void* vtbl;

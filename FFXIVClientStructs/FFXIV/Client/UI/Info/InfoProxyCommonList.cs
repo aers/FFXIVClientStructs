@@ -107,6 +107,8 @@ public unsafe partial struct InfoProxyCommonList {
             SharingDuty = 1ul << 41,
             SimilarDuty = 1ul << 42,
             InDuty = 1ul << 43,
+            TrialAdventurer = 1ul << 44,
+            [Obsolete("Typo fixed, use TrialAdventurer")]
             TrailAdventurer = 1ul << 44,
             FreeCompany = 1ul << 45,
             GrandCompany = 1ul << 46,

@@ -27,12 +27,18 @@ public class Program {
         Console.Clear();
         Console.SetCursorPosition(0, 0);
 #endif
+        var sw = new StreamWriter(File.OpenWrite(Path.Combine(dir.FullName, "errors.txt")));
 
         if (exporter.Errored) {
-            foreach (var (_, value) in ExporterStatics.ErrorListDictionary)
+            foreach (var (_, value) in ExporterStatics.ErrorListDictionary) {
+                sw.WriteLine(value);
                 Console.WriteLine(value);
-            throw new Exception("Exporter failed to export all types some error happened");
+            }
+            sw.Close();
+            Console.WriteLine("Exporter failed to export all types some error happened");
+            return;
         }
+        sw.Close();
 
         // ReSharper disable once InvertIf
         if (ExporterStatics.WarningListDictionary.Count > 0)

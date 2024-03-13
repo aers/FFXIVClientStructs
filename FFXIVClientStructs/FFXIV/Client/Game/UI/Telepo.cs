@@ -1,22 +1,21 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
-// Client::Game::UI::Telepo
 
-// size = 0x58
-// ctor E8 ?? ?? ?? ?? 89 B3 ?? ?? ?? ?? 48 8D 8B ?? ?? ?? ?? 48 8D 05
+// Client::Game::UI::Telepo
+// ctor "E8 ?? ?? ?? ?? BE ?? ?? ?? ?? 89 AB"
 [StructLayout(LayoutKind.Explicit, Size = 0x58)]
 public unsafe partial struct Telepo {
+    [StaticAddress("48 8D 0D ?? ?? ?? ?? 48 8B 12", 3)]
+    public static partial Telepo* Instance();
+
     [FieldOffset(0x00)] public void* vtbl;
     [FieldOffset(0x10)] public StdVector<TeleportInfo> TeleportList;
     [FieldOffset(0x28)] public SelectUseTicketInvoker UseTicketInvoker;
-
-    [StaticAddress("48 8D 0D ?? ?? ?? ?? 48 8B 12", 3)]
-    public static partial Telepo* Instance();
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4B 10 84 C0 48 8B 01 74 2C")]
     public partial bool Teleport(uint aetheryteID, byte subIndex);
 
     [MemberFunction("E8 ?? ?? ?? ?? 49 89 47 68")]
-    public partial void* UpdateAetheryteList();
+    public partial void* UpdateAetheryteList(); // TODO: returns StdVector<TeleportInfo>* (the TeleportList field)
 
     /// Territories have aetherstream coordinates X and Y, an associated ExpansionValue and an associated Plane in TerritoryTypeTelepo.
     /// Planes have relays described in the TelepoRelay sheet, every pair of planes has an associated entry territory, exit territory and cost organized in a 6x6 matrix.

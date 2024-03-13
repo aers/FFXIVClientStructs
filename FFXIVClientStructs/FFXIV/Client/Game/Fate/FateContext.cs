@@ -3,6 +3,8 @@ using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Fate;
 
+// Client::Game::Fate::FateContext
+// ctor "48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 66 89 51 18"
 [StructLayout(LayoutKind.Explicit, Size = 0x1040)]
 public struct FateContext {
     [FieldOffset(0x18)] public ushort FateId;

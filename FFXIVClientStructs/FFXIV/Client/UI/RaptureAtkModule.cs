@@ -16,7 +16,7 @@ public unsafe partial struct RaptureAtkModule {
     [FieldOffset(0x0)] public AtkModule AtkModule;
 
     [FieldOffset(0x87F7)] public AgentUpdateFlags AgentUpdateFlag; // reset happens in RaptureAtkModule_OnUpdate
-    [FieldOffset(0x10D40)] public Utf8String* AddonNames; // pointer to an array of 853 Utf8Strings
+    [FieldOffset(0x10D40)] public Utf8String* AddonNames; // TODO: change to StdVector<Utf8String>
 
     [FieldOffset(0x10E20)] public AgentModule AgentModule;
 
@@ -41,6 +41,12 @@ public unsafe partial struct RaptureAtkModule {
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 46 58 48 85 C0")]
     public partial bool DecRefStringArrayData(int index);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 66 89 46 50")]
+    public partial ushort OpenAddon(uint addonNameId, uint valueCount, AtkValue* values, AgentInterface* parentAgent, ulong unk, ushort parentAddonId, int unk2);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B7 C0 48 83 C4 60")]
+    public partial ushort OpenAddonByAgent(byte* addonName, AtkUnitBase* addon, int valueCount, AtkValue* values, AgentInterface* agent, nint a7, ushort parentAddonId);
 
     [VirtualFunction(39)]
     public partial void SetUiVisibility(bool uiVisible);

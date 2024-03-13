@@ -1,4 +1,6 @@
 using FFXIVClientStructs.FFXIV.Client.Game.Character;
+using FFXIVClientStructs.FFXIV.Client.Network;
+using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Component.Excel;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
@@ -26,10 +28,13 @@ public unsafe partial struct AgentLobby {
     [FieldOffset(0x10F2)] public short WorldIndex; // index in CurrentDataCenterWorlds
     [FieldOffset(0x10F4)] public ushort WorldId;
 
+    [FieldOffset(0x1104)] public bool RequestedDataReady;
     [FieldOffset(0x1110)] public uint IdleTime;
 
     [FieldOffset(0x1228)] public bool TemporaryLocked; // "Please wait and try logging in later."
 
+    [FieldOffset(0x1240)] public long RequestContentId;
+    [FieldOffset(0x1248)] public byte RequestCharaterIndex;
     [FieldOffset(0x1DA4)] public bool HasShownCharacterNotFound; // "The character you last logged out with in this play environment could not be found on the current data center."
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 07 C6 86 ?? ?? ?? ?? ?? 48 8B 8C 24")]
@@ -46,15 +51,27 @@ public unsafe partial struct LobbyData {
 
     [FieldOffset(0x858)] public StdVector<Pointer<CharaSelectCharacterEntry>> CharaSelectEntries;
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 74 95")]
+    [FieldOffset(0x878)] public ulong ContentId;
+    [FieldOffset(0x880)] public Utf8String HomeWorldName;
+    [FieldOffset(0x8E8)] public Utf8String HomeWorldName2;
+    [FieldOffset(0x950)] public Utf8String CurrentWorldName;
+
+    [FieldOffset(0x9BC)] public ushort CurrentWorldId;
+    [FieldOffset(0x9BE)] public ushort HomeWorldId;
+
+    [MemberFunction("40 53 56 41 57 48 83 EC 20 33 DB")]
+    public partial CharaSelectCharacterEntry* GetCharacterEntryFromServer(byte index, long contentId);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 74 2C 48 8D 48 2C")]
     public partial CharaSelectCharacterEntry* GetCharacterEntryByIndex(int a2, int worldIndex, int characterMappingIndex);
 }
 
 [VTableAddress("48 8D 05 ?? ?? ?? ?? 48 8B F9 48 89 01 48 81 C1 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 8F", 3)]
 [StructLayout(LayoutKind.Explicit, Size = 0x848)]
 public unsafe partial struct LobbyUIClient {
-    //[FieldOffset(0x10)] public NetworkModuleProxy* NetworkModuleProxy;
-    //[FieldOffset(0x18)] public ?* SomeNetworkConfig; // contains hosts and ports
+    [FieldOffset(0x00), Obsolete("Use LobbyUIClient.StaticAddressPointers.VTable")] public void** vtbl;
+    [FieldOffset(0x10)] public NetworkModuleProxy* NetworkModuleProxy;
+    //[FieldOffset(0x18)] public ?* NetworConfig; // contains hosts and ports
 
     [FieldOffset(0x30)] public StdVector<LobbyDataCenterWorldEntry> CurrentDataCenterWorlds;
 
@@ -81,9 +98,9 @@ public unsafe struct LobbySubscriptionInfo // name probably totally wrong
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x6F8)]
-public unsafe struct CharaSelectCharacterEntry {
+public unsafe partial struct CharaSelectCharacterEntry {
     [FieldOffset(0x8)] public ulong ContentId;
-
+    [FieldOffset(0x10)] public byte Index;
     [FieldOffset(0x11)] public CharaSelectCharacterEntryLoginFlags LoginFlags;
 
     [FieldOffset(0x18)] public ushort CurrentWorldId;
@@ -97,6 +114,9 @@ public unsafe struct CharaSelectCharacterEntry {
     [FieldOffset(0x4A0)] public StdVector<Pointer<CharaSelectRetainerInfo>> RetainerInfo;
 
     [FieldOffset(0x4C0)] public CharaSelectCharacterInfo CharacterInfo; // x2?
+
+    [MemberFunction("0F B6 41 ?? 84 05 ?? ?? ?? ?? 0F 94 C0")]
+    public partial bool IsNotLocked();
 }
 
 public enum CharaSelectCharacterEntryLoginFlags : byte {
@@ -105,7 +125,7 @@ public enum CharaSelectCharacterEntryLoginFlags : byte {
     NameChangeRequired = 2, // Lobby#26: "A name change is required to log in with this character."
     ExpansionMissing = 4, // Lobby#68: "To log in with this character you must first install <ExVersion>."
 
-    DCTraveling = 16, // Lobby#1175: "This character is currently visiting the <value> data center."
+    DCTraveling = 16 // Lobby#1175: "This character is currently visiting the <value> data center."
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x58)]
@@ -121,7 +141,7 @@ public unsafe struct CharaSelectRetainerInfo {
 public enum CharaSelectRetainerInfoLoginFlags : ushort {
     None = 0,
 
-    NameChangeRequired = 4, // Lobby#66: "Please change your retainer's name after retrieving your character's data./To log in with this character you must first change your retainer's name."
+    NameChangeRequired = 4 // Lobby#66: "Please change your retainer's name after retrieving your character's data./To log in with this character you must first change your retainer's name."
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x1E2)]
@@ -176,7 +196,7 @@ public enum CharaSelectCharacterConfigFlags : ushort {
     // ? = 0x08,
     StoreNewItemsInArmouryChest = 0x10,
     StoreCraftedItemsInInventory = 0x20,
-    CloseVisor = 0x40,
+    CloseVisor = 0x40
     // ? = 0x80
 }
 

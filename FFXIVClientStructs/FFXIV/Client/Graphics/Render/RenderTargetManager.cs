@@ -1,10 +1,10 @@
 using FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
 
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
+
 // Client::Graphics::Render::RenderTargetManager
 //   Client::Graphics::Singleton
 //   Client::Graphics::Kernel::Notifier
-
 // WARNING: THIS IS OUT OF DATE
 [StructLayout(LayoutKind.Explicit, Size = 0x4A0)]
 public unsafe partial struct RenderTargetManager {

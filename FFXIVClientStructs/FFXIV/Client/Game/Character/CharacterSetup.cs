@@ -1,5 +1,7 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 
+// Client::Game::Character::CharacterSetup
+// ctor "80 61 10 FC 48 8D 05"
 [StructLayout(LayoutKind.Explicit, Size = 0x18)]
 public unsafe partial struct CharacterSetup {
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 9F ?? ?? ?? ?? 48 8D 8F")]

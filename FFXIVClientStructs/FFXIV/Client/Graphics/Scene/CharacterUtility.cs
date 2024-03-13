@@ -6,6 +6,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x410)]
 public unsafe partial struct CharacterUtility {
+    [StaticAddress("48 8B 05 ?? ?? ?? ?? 83 B9", 3, true)]
+    public static partial CharacterUtility* Instance();
+
     public const int ResourceHandleCount = 87;
 
     [FieldOffset(0x0)] public void* vtbl;
@@ -18,7 +21,4 @@ public unsafe partial struct CharacterUtility {
 
     public readonly ConstantBufferPointer<Vector4> LegacyBodyDecalColorTypedCBuffer => new(LegacyBodyDecalColorCBuffer);
     public readonly ConstantBufferPointer<Vector4> FreeCompanyCrestColorTypedCBuffer => new(FreeCompanyCrestColorCBuffer);
-
-    [StaticAddress("48 8B 05 ?? ?? ?? ?? 83 B9", 3, true)]
-    public static partial CharacterUtility* Instance();
 }

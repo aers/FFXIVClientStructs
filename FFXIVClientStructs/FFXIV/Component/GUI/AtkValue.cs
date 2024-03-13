@@ -13,6 +13,7 @@ public enum ValueType {
     String8 = 0x8,
     Vector = 0x9,
     Texture = 0xA,
+    AtkValues = 0xB,
     AllocatedString = 0x26,
     AllocatedVector = 0x29
 }
@@ -29,12 +30,13 @@ public unsafe partial struct AtkValue {
     [FieldOffset(0x8)] public byte Byte;
     [FieldOffset(0x8)] public StdVector<AtkValue>* Vector;
     [FieldOffset(0x8)] public Texture* Texture;
+    [FieldOffset(0x8)] public AtkValue* AtkValues;
 
     [MemberFunction("E8 ?? ?? ?? ?? 41 03 ED")]
     [GenerateCStrOverloads]
     public partial void SetString(byte* value);
 
-    [MemberFunction("E8 ?? ?? ?? ?? F7 DE")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 06 4C 8D 4C 24 ?? 44 8B C3")]
     public partial void ChangeType(ValueType type);
 
     [MemberFunction("E8 ?? ?? ?? ?? 33 FF 89 7C 24")]

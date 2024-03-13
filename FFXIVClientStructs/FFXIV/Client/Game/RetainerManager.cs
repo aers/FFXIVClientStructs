@@ -1,6 +1,6 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
-[StructLayout(LayoutKind.Explicit, Size = 0x2E8)]
+[StructLayout(LayoutKind.Explicit, Size = 0x310)]
 public unsafe partial struct RetainerManager {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? 48 8B 18", 3)]
     public static partial RetainerManager* Instance();
