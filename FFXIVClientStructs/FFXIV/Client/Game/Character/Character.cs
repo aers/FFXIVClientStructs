@@ -146,8 +146,8 @@ public unsafe partial struct Character {
     [VirtualFunction(81)]
     public partial CastInfo* GetCastInfo();
 
-    [VirtualFunction(81)]
-    public partial ForayInfo* GetForayInfo();
+    // [VirtualFunction(81)]
+    // public partial ForayInfo* GetForayInfo();
 
     [VirtualFunction(87)]
     public partial bool IsMount();
