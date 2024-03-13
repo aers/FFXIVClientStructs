@@ -17,17 +17,17 @@ jobs:
     steps:
     - uses: actions/checkout@v4
       with:
-        ref: ${{ github.base_ref }}
+        ref: ${{ github.event.pull_request.head.sha }}
     - name: Install dependencies for main branch
       run: dotnet restore
     - name: Build main branch
-      run: dotnet build FFXIVClientStructs/FFXIVClientStructs.csproj --output ida/cs-main/
+      run: dotnet build FFXIVClientStructs/FFXIVClientStructs.csproj --output ida/cs-pr/
     - name: Switch to PR branch
-      run: git checkout ${{ github.event.pull_request.head.sha }}
+      run: git checkout ${{ github.base_ref }}
     - name: Install dependencies for PR branch
       run: dotnet restore
     - name: Build PR branch
-      run: dotnet build FFXIVClientStructs/FFXIVClientStructs.csproj --output ida/cs-pr/
+      run: dotnet build FFXIVClientStructs/FFXIVClientStructs.csproj --output ida/cs-main/
     - name: Check for breaking changes
       id: breaking_changes
       run: |
