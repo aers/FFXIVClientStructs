@@ -15,5 +15,5 @@ public unsafe partial struct BattleChara {
 
     public StatusManager* GetStatusManager => Character.GetStatusManager();
     public Character.CastInfo* GetCastInfo => Character.GetCastInfo();
-    public Character.ForayInfo* GetForayInfo => Character.GetForayInfo();
+    // public Character.ForayInfo* GetForayInfo => Character.GetForayInfo();
 }
