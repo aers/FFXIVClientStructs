@@ -23,7 +23,7 @@ jobs:
     - name: Build main branch
       run: dotnet build FFXIVClientStructs/FFXIVClientStructs.csproj --output ida/cs-main/
     - name: Switch to PR branch
-      run: git checkout ${{ github.sha }}
+      run: git checkout ${{ github.event.pull_request.head.sha }}
     - name: Install dependencies for PR branch
       run: dotnet restore
     - name: Build PR branch
