@@ -61,7 +61,7 @@ jobs:
         dotnet tool install -g Microsoft.DotNet.ApiCompat.Tool
         testout=$(apicompat -l ida/cs-main/FFXIVClientStructs.dll -r ida/cs-pr/FFXIVClientStructs.dll)
         echo $testout
-        if [[ "$testout" == *"exists on ida/cs-main/FFXIVClientStructs.dll but not on ida/cs-pr/FFXIVClientStructs.dll"* ]]; then
+        if [ "$testout" != "APICompat ran successfully without finding any breaking changes." ]; then
           echo "Breaking changes detected"
           echo "breaking=true" >> $GITHUB_OUTPUT
         else
