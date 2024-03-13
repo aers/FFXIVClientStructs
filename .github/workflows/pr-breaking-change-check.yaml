@@ -12,22 +12,49 @@ on:
       - 'FFXIVClientStructs/**/*.cs'
   
 jobs:
-  test:
+  build-pr:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - name: Install dependencies for PR branch
+        run: dotnet restore
+      - name: Build PR branch
+        run: dotnet build FFXIVClientStructs/FFXIVClientStructs.csproj --output ida/cs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cs-pr
+          path: ida/cs/FFXIVClientStructs.dll
+          retention-days: 1
+  
+  build-main:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install dependencies for Main branch
+        run: dotnet restore
+      - name: Build Main branch
+        run: dotnet build FFXIVClientStructs/FFXIVClientStructs.csproj --output ida/cs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cs-main
+          path: ida/cs/FFXIVClientStructs.dll
+          retention-days: 1
+
+  check-breaking-changes:
+    runs-on: ubuntu-latest
+    needs: [build-pr, build-main]
+    steps:
     - uses: actions/checkout@v4
+    - uses: actions/download-artifact@v4
       with:
-        ref: ${{ github.event.pull_request.head.sha }}
-    - name: Install dependencies for main branch
-      run: dotnet restore
-    - name: Build main branch
-      run: dotnet build FFXIVClientStructs/FFXIVClientStructs.csproj --output ida/cs-pr/
-    - name: Switch to PR branch
-      run: git checkout origin/${{ github.base_ref }}
-    - name: Install dependencies for PR branch
-      run: dotnet restore
-    - name: Build PR branch
-      run: dotnet build FFXIVClientStructs/FFXIVClientStructs.csproj --output ida/cs-main/
+        name: cs-pr
+        path: ida/cs-pr
+    - uses: actions/download-artifact@v4
+      with:
+        name: cs-main
+        path: ida/cs-main
     - name: Check for breaking changes
       id: breaking_changes
       run: |
