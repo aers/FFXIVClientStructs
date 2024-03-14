@@ -2,6 +2,7 @@ using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Common.Log;
 using FFXIVClientStructs.FFXIV.Component.Excel;
+using FFXIVClientStructs.FFXIV.Component.Text;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
@@ -16,6 +17,12 @@ public unsafe partial struct RaptureLogModule {
 
     [FieldOffset(0xE8)] public ExcelModuleInterface* ExcelModuleInterface;
     [FieldOffset(0xF0)] public RaptureTextModule* RaptureTextModule;
+    // [FieldOffset(0xF8)] public nint UnkF8Struct; // some struct that gets grabbed in PrintMessage is at least 0x528 in size but unsure what it is
+
+    [FieldOffset(0x100)] public MacroDecoder* MacroDecoder;
+    [FieldOffset(0x108)] internal Utf8String RawLogMessage; // unsure if this is the right name for this field
+
+    [FieldOffset(0x3E0)] internal Utf8String LogMessage; // unsure if this is the right name for this field
 
     [FixedSizeArray<RaptureLogModuleTab>(5)]
     [FieldOffset(0x530)] public fixed byte ChatTabs[5 * 0x928];
