@@ -56,8 +56,8 @@ jobs:
         name: cs-main
         path: ida/cs-main
     - name: Check for breaking changes
-      uses: wolfcomp/dotnet-compat-checker@v1.0.1
+      uses: wolfcomp/dotnet-compat-checker@v1.0.4
       with:
         left: ida/cs-main/FFXIVClientStructs.dll
         right: ida/cs-pr/FFXIVClientStructs.dll
-        tag: breaking changes
+        tag: breaking change
