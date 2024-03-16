@@ -2,6 +2,7 @@ using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Common.Log;
 using FFXIVClientStructs.FFXIV.Component.Excel;
+using FFXIVClientStructs.FFXIV.Component.GUI;
 using FFXIVClientStructs.FFXIV.Component.Text;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
@@ -14,12 +15,13 @@ public unsafe partial struct RaptureLogModule {
     public static RaptureLogModule* Instance() => Framework.Instance()->GetUiModule()->GetRaptureLogModule();
 
     [FieldOffset(0x00)] public LogModule LogModule;
-    [FieldOffset(0x80)] internal Utf8String TempString;
+    [FieldOffset(0x80)] internal Utf8String Unk80;
     [FieldOffset(0xE8)] public UIModule* UIModule;
     [FieldOffset(0xF0)] public ExcelModuleInterface* ExcelModuleInterface;
     [FieldOffset(0xF8)] public RaptureTextModule* RaptureTextModule;
-
-    [FieldOffset(0x100)] public MacroDecoder* MacroDecoder;
+    
+    [FieldOffset(0x100)] public AtkFontCodeModule* AtkFontCodeModule;
+    [FieldOffset(0x100), Obsolete("Use AtkFontCodeModule instead")] public MacroDecoder* MacroDecoder; // should be named AtkFontCodeModule but waiting for the struct to be made first
     [FixedSizeArray<Utf8String>(10)]
     [FieldOffset(0x108)] internal fixed byte TempParseMessage[0x68 * 10];
 

@@ -17,14 +17,27 @@ public unsafe partial struct RaptureTextModule {
     [FieldOffset(0x520)] public UIModule* UiModule;
     [FieldOffset(0x528)] public TextChecker TextChecker;
     [FieldOffset(0x620)] public ExcelSheet* AddonSheet;
-    [FixedSizeArray<Utf8String>(7)]
-    [FieldOffset(0x630)] internal fixed byte TempStrings[7 * 0x68]; // this isn't actually an array in the game code, but memory is spaced in a way that it is faster to type it as one
+
+    [FieldOffset(0x630 + 0 * 0x68)] public Utf8String Unk630;
+    [FieldOffset(0x630 + 1 * 0x68)] public Utf8String Unk698;
+    [FieldOffset(0x630 + 2 * 0x68)] public Utf8String Unk700;
+    [FieldOffset(0x630 + 3 * 0x68)] public Utf8String Unk768;
+    [FieldOffset(0x630 + 4 * 0x68)] public Utf8String Unk7D0;
+    [FieldOffset(0x630 + 5 * 0x68)] public Utf8String Unk838;
+    [FieldOffset(0x630 + 6 * 0x68)] public Utf8String Unk8A0;
 
     [FieldOffset(0x908)] public StdDeque<TextParameter> LocalTextParameters;
     //[FieldOffset(0x930)] public StdDeque<TextParameter> ItemColorParameters;
 
-    [FixedSizeArray<Utf8String>(9)]
-    [FieldOffset(0x958)] internal fixed byte TempStrings2[9 * 0x68]; // this isn't actually an array in the game code, but memory is spaced in a way that it is faster to type it as one
+    [FieldOffset(0x958 + 0 * 0x68)] public Utf8String Unk958;
+    [FieldOffset(0x958 + 1 * 0x68)] public Utf8String Unk9C0;
+    [FieldOffset(0x958 + 2 * 0x68)] public Utf8String UnkA28;
+    [FieldOffset(0x958 + 3 * 0x68)] public Utf8String UnkA90;
+    [FieldOffset(0x958 + 4 * 0x68)] public Utf8String UnkAF8;
+    [FieldOffset(0x958 + 5 * 0x68)] public Utf8String UnkB60;
+    [FieldOffset(0x958 + 6 * 0x68)] public Utf8String UnBC8;
+    [FieldOffset(0x958 + 7 * 0x68)] public Utf8String UnC30;
+    [FieldOffset(0x958 + 8 * 0x68)] public Utf8String UnC98;
 
     // [FieldOffset(0xD18)] public nint UnkD18; // some kind of sub structure
 
