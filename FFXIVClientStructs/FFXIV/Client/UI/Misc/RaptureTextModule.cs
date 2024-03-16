@@ -1,4 +1,5 @@
 using FFXIVClientStructs.FFXIV.Client.System.Framework;
+using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Component.Excel;
 using FFXIVClientStructs.FFXIV.Component.Text;
 
@@ -16,9 +17,16 @@ public unsafe partial struct RaptureTextModule {
     [FieldOffset(0x520)] public UIModule* UiModule;
     [FieldOffset(0x528)] public TextChecker TextChecker;
     [FieldOffset(0x620)] public ExcelSheet* AddonSheet;
+    [FixedSizeArray<Utf8String>(7)]
+    [FieldOffset(0x630)] internal fixed byte TempStrings[7 * 0x68]; // this isn't actually an array in the game code, but memory is spaced in a way that it is faster to type it as one
 
     [FieldOffset(0x908)] public StdDeque<TextParameter> LocalTextParameters;
     //[FieldOffset(0x930)] public StdDeque<TextParameter> ItemColorParameters;
+
+    [FixedSizeArray<Utf8String>(9)]
+    [FieldOffset(0x958)] internal fixed byte TempStrings2[9 * 0x68]; // this isn't actually an array in the game code, but memory is spaced in a way that it is faster to type it as one
+
+    // [FieldOffset(0xD18)] public nint UnkD18; // some kind of sub structure
 
     [MemberFunction("E9 ?? ?? ?? ?? 80 EA 20")]
     public partial byte* GetAddonText(uint addonId);

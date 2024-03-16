@@ -14,15 +14,14 @@ public unsafe partial struct RaptureLogModule {
     public static RaptureLogModule* Instance() => Framework.Instance()->GetUiModule()->GetRaptureLogModule();
 
     [FieldOffset(0x00)] public LogModule LogModule;
-
-    [FieldOffset(0xE8)] public ExcelModuleInterface* ExcelModuleInterface;
-    [FieldOffset(0xF0)] public RaptureTextModule* RaptureTextModule;
-    // [FieldOffset(0xF8)] public nint UnkF8Struct; // some struct that gets grabbed in PrintMessage is at least 0x528 in size but unsure what it is
+    [FieldOffset(0x80)] internal Utf8String TempString;
+    [FieldOffset(0xE8)] public UIModule* UIModule;
+    [FieldOffset(0xF0)] public ExcelModuleInterface* ExcelModuleInterface;
+    [FieldOffset(0xF8)] public RaptureTextModule* RaptureTextModule;
 
     [FieldOffset(0x100)] public MacroDecoder* MacroDecoder;
-    [FieldOffset(0x108)] internal Utf8String RawLogMessage; // unsure if this is the right name for this field
-
-    [FieldOffset(0x3E0)] internal Utf8String LogMessage; // unsure if this is the right name for this field
+    [FixedSizeArray<Utf8String>(10)]
+    [FieldOffset(0x108)] internal fixed byte TempParseMessage[0x68 * 10];
 
     [FixedSizeArray<RaptureLogModuleTab>(5)]
     [FieldOffset(0x530)] public fixed byte ChatTabs[5 * 0x928];
