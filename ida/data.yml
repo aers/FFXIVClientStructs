@@ -882,6 +882,20 @@ classes:
         pointer: False
     funcs:
       0x140932420: Initialize
+  Client::Game::CSBonusManager:
+    instances:
+      - ea: 0x1421F2538
+        pointer: True
+    funcs:
+      0x140932E50: ctor
+      0x140932FC0: Initialize
+      0x140933010: dtor
+      0x140933210: RequestData
+      0x140933270: GetSeedBasePtr
+      0x140933280: GetSeasonTarget
+      0x1409332A0: GetIsOpenMission
+      0x1409332B0: GetSeedBase
+      0x1409332C0: PrintDebugInfo
   Client::Game::GcArmyManager:
     instances:
       - ea: 0x1421ECFF8
