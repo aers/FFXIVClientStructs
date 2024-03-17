@@ -22,6 +22,8 @@ public unsafe partial struct RaptureAtkModule {
 
     [FieldOffset(0x11C20)] public RaptureAtkUnitManager RaptureAtkUnitManager;
 
+    [FieldOffset(0x1B934)] public bool IsUiFading; // true whenever FadeMiddleBack is active
+
     [FieldOffset(0x1BBB8)] public int NameplateInfoCount;
     [FieldOffset(0x1BBC0)] public NamePlateInfo NamePlateInfoArray; // 0-50, &NamePlateInfoArray[i]
 
