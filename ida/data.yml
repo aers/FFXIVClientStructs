@@ -317,6 +317,10 @@ functions:
   0x1415FEEA0: ReadSqpkChunk
 
 classes:
+  Common::TimePoint:
+    funcs:
+      0x1400965F0: Now
+      0x1404BD3A0: ctor
   MemoryManager:
     funcs:
       0x1400609F0: AllocDefaultSpace
@@ -1813,7 +1817,7 @@ classes:
       0x140093B40: GetUIModule
       0x140093B60: GetUIClipboard
       0x140093B70: GetUIInputData
-      0x140094620: InitNetworking
+      0x140094620: UpdateNetworking
       0x140094A20: TaskBegin
       0x140094B60: TaskDraw2DBegin
       0x140094BA0: TaskUpdateInputDevice
@@ -1842,6 +1846,8 @@ classes:
       0x140097020: InitGamePath
       0x140097250: InitSqPackPath
       0x140097390: GetSavePath
+      0x140097670: SetDataPathType
+      0x1400976B0: GetProgramName
   Component::Excel::ExcelModuleInterface:
     vtbls:
       - ea: 0x1419B2B78
@@ -2586,10 +2592,13 @@ classes:
       3: SetCopyStagingText
       4: ApplyCopyStagingText
   Client::System::Input::Cursor:
+    instances:
+      - ea: 0x14219A780
     vtbls:
       - ea: 0x1419B1778
     vfuncs:
       0: dtor
+      2: Update
       4: SetCursorType
       5: SetCursorVisibility
       8: SetUseSoftwareCursor

@@ -6,6 +6,7 @@ using FFXIVClientStructs.FFXIV.Client.System.File;
 using FFXIVClientStructs.FFXIV.Client.System.Input;
 using FFXIVClientStructs.FFXIV.Client.System.Timer;
 using FFXIVClientStructs.FFXIV.Client.UI;
+using FFXIVClientStructs.FFXIV.Common;
 using FFXIVClientStructs.FFXIV.Common.Component.BGCollision;
 using FFXIVClientStructs.FFXIV.Common.Lua;
 using FFXIVClientStructs.FFXIV.Component.Excel;
@@ -37,14 +38,29 @@ public unsafe partial struct Framework {
     [FieldOffset(0x1670)] public NetworkModuleProxy* NetworkModuleProxy;
     [FieldOffset(0x1678)] public bool IsNetworkModuleInitialized;
     [FieldOffset(0x1679)] public bool EnableNetworking;
-    [FieldOffset(0x1680)] public long ServerTime; // TODO: change to uint
-    [FieldOffset(0x1688)] public long PerformanceCounterInMilliSeconds;
-    [FieldOffset(0x1688)] public long PerformanceCounterInMicroSeconds;
+    [FieldOffset(0x1680)] public TimePoint UtcTime;
+    [Obsolete("Use UtcTime.Timestamp")] [FieldOffset(0x1680)] public long ServerTime; // TODO: change to uint
+    [Obsolete("Use UtcTime.CpuMilliSeconds")] [FieldOffset(0x1688)] public long PerformanceCounterInMilliSeconds;
+    [Obsolete("Use UtcTime.CpuMicroSeconds")] [FieldOffset(0x1688)] public long PerformanceCounterInMicroSeconds;
     [FieldOffset(0x1698)] public uint TimerResolutionMillis;
     [FieldOffset(0x16A0)] public long PerformanceCounterFrequency;
     [FieldOffset(0x16A8)] public long PerformanceCounterValue;
+    /// <summary>
+    /// Frame time (in seconds) to use for calculating animations, tasks, game logic and such. This is not necessarily the real time since the last frame.
+    /// </summary>
     [FieldOffset(0x16B8)] public float FrameDeltaTime;
+    /// <summary>
+    /// Holds the unaltered real time since last frame in seconds.
+    /// </summary>
+    [FieldOffset(0x16BC)] public float RealFrameDeltaTime;
+    /// <summary>
+    /// If set to anything non-zero, overrides <see cref="FrameDeltaTime"/>. Has lower precedence than <see cref="FrameDeltaTimeOverride2"/>.
+    /// </summary>
     [FieldOffset(0x16C0)] public float FrameDeltaTimeOverride;
+    /// <summary>
+    /// If non-zero <see cref="FrameDeltaTime"/> is multiplied with this.
+    /// </summary>
+    [FieldOffset(0x16C4)] public float FrameDeltaFactor;
     [FieldOffset(0x16C8)] public uint FrameCounter;
     [FieldOffset(0x16F8)] public TaskManager TaskManager;
     [FieldOffset(0x1768)] public ClientTime ClientTime;
@@ -58,7 +74,17 @@ public unsafe partial struct Framework {
     [Obsolete("Use ClientTime.IsEorzeaTimeOverridden")]
     public bool IsEorzeaTimeOverridden;
     [FieldOffset(0x17C4)] public float FrameRate;
+    /// <summary>
+    /// If true <see cref="FrameDeltaTime"/> is set to 0.
+    /// </summary>
+    [FieldOffset(0x17C8)] public bool DiscardFrame;
+    /// <summary>
+    /// If set to anything non-zero, overrides <see cref="FrameDeltaTime"/>. If negative <see cref="FrameDeltaTimeOverride"/> is used and 60fps as a fallback.
+    /// </summary>
+    [FieldOffset(0x17CC)] public float FrameDeltaTimeOverride2;
     [FieldOffset(0x17D0)] public bool WindowInactive;
+    
+    [FieldOffset(0x17E0)] public int DataPathType;
 
     [FieldOffset(0x19EC)] private fixed char gamePath[260]; // WideChar Array
     [FieldOffset(0x1DFC)] private fixed char sqPackPath[260]; // WideChar Array
@@ -75,6 +101,9 @@ public unsafe partial struct Framework {
 
     [FieldOffset(0x2BF0)] public GameVersion GameVersion;
 
+    [FieldOffset(0x3500)] public bool UseWatchDogThread;
+
+    [FieldOffset(0x3510)] public int FramesUntilDebugCheck;
     /// <summary>
     /// Set if <c>IsSteam</c> was set for this instance as part of <c>SetupSteamApi</c>. Set even if loading the Steam API
     /// fails for some reason.
