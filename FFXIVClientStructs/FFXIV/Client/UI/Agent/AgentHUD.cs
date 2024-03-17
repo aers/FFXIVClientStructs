@@ -1,5 +1,7 @@
 using FFXIVClientStructs.FFXIV.Client.Game.Character;
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
+using FFXIVClientStructs.FFXIV.Client.Game.UI;
+using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
@@ -13,11 +15,11 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 public unsafe partial struct AgentHUD {
     [FieldOffset(0x0)] public AgentInterface AgentInterface;
 
-    //[FieldOffset(0x9C0)] public uint CurrentTargetId;
-    //[FieldOffset(0x9C8)] public int TargetCounter;
-    //[FieldOffset(0x9D0)] public uint TargetPartyMemberId;
-    //[FieldOffset(0x9D8)] public int TargetSwitchToSelfCounter;
-    //[FieldOffset(0x9DC)] public uint CurrentBattleCharaTargetLevel;
+    [FieldOffset(0xAB0)] public uint CurrentTargetId;
+    [FieldOffset(0xAB8)] public int TargetCounter;
+    [FieldOffset(0xAC0)] public uint TargetPartyMemberId;
+    [FieldOffset(0xAC8)] public int TargetSwitchToSelfCounter;
+    [FieldOffset(0x9DC)] public uint CurrentBattleCharaTargetLevel;
 
     [FieldOffset(0xCB8)] public int CompanionSummonTimer;
 
@@ -29,7 +31,23 @@ public unsafe partial struct AgentHUD {
     [FieldOffset(0x12C4)] public fixed uint RaidMemberIds[40];
     [FieldOffset(0x1364)] public int RaidGroupSize;
 
+    [FixedSizeArray<HudPartyMemberEnmity>(10)]
+    [FieldOffset(0x1378)] public fixed byte HudPartyMemberEnmityEntries[0x0C * 10];
+    [FixedSizeArray<Pointer<HudPartyMemberEnmity>>(10)]
+    [FieldOffset(0x13F0)] public fixed byte HudPartyMemberEnmityPtrs[0x8 * 10];
+    [Obsolete("Use HudPartyMemberEnmityEntriesSpan or HudPartyMemberEnmityPtrsSpan")]
     [FieldOffset(0x13F0)] public HudPartyMemberEnmity* PartyEnmityList;
+
+    /// <remarks>
+    /// 0 = mineral deposit and lush vegetation patch<br/>
+    /// 1 = legendary mineral deposit<br/>
+    /// 2 = unspoiled lush vegetation patch<br/>
+    /// </remarks>
+    [FixedSizeArray<HudMiniMapGatheringMarker>(6)]
+    [FieldOffset(0x3B00)] public fixed byte MiniMapGatheringMarkers[0xA8 * 6];
+
+    [FieldOffset(0x4808)] public StdVector<MapMarkerData> MapMarkers;
+    [FieldOffset(0x4820)] public StdVector<Pointer<MapMarkerData>> MapMarkerPtrs;
 
     [MemberFunction("48 8B 81 ?? ?? ?? ?? 44 8B C2 83 E2 1F")]
     public partial bool IsMainCommandEnabled(uint mainCommandId);
@@ -48,7 +66,7 @@ public unsafe partial struct AgentHUD {
 public struct HudPartyMemberEnmity {
     [FieldOffset(0x00)] public uint ObjectId;
     [FieldOffset(0x04)] public int Enmity;
-    [FieldOffset(0x08)] public int Index;
+    [FieldOffset(0x08)] public int Index; // TODO: change to short
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x20)]
@@ -57,4 +75,13 @@ public unsafe struct HudPartyMember {
     [FieldOffset(0x8)] public byte* Name;
     [FieldOffset(0x10)] public ulong ContentId;
     [FieldOffset(0x18)] public uint ObjectId;
+}
+
+[StructLayout(LayoutKind.Explicit, Size = 0xA8)]
+public struct HudMiniMapGatheringMarker
+{
+    [FieldOffset(0x00)] public Utf8String TooltipText;
+    [FieldOffset(0x68)] public MapMarkerBase MapMarker;
+    [FieldOffset(0xA0)] public ushort RecommendedLevel; // maybe?
+    [FieldOffset(0xA2)] public byte ShouldRender;
 }
