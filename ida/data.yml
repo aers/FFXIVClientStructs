@@ -419,10 +419,10 @@ classes:
       vtbls:
         - ea: 0x141c8F490
       vfuncs:
-        0: Dispose
+        0: dtor
       funcs:
         0x14161C500: ctor
-        0x14161d5a0: dtor
+        0x14161d5a0: Finalize
     Client:Network::LobbyConnection:
       vtbls:
         - ea: 0x141C83CA8
@@ -1838,10 +1838,10 @@ classes:
     vtbls:
       - ea: 0x1419B2AF8
     vfuncs:
-      0: Dispose
+      0: dtor
     funcs:
       0x140095D70: ctor
-      0x14019C230: dtor
+      0x14019C230: Finalize
       0x14019C2F0: AddTask
       0x14019C360: ExecuteAllTasks
   Common::Game::Time::GameTime:
@@ -1990,7 +1990,7 @@ classes:
       - ea: 0x141A029F0
         base: Common::Component::Environment::ResourceInterface::ResourceHandleInterface
     vfuncs:
-      0: Dispose
+      0: dtor
   Common::Component::BGCollision::Object:
     vtbls:
       - ea: 0x141A02900
@@ -2468,7 +2468,7 @@ classes:
     vtbls:
       - ea: 0x141A02808
     vfuncs:
-      0: Dispose
+      0: dtor
       1: GetPath
       2: LoadSucceeded
       3: LoadFailed
@@ -2794,7 +2794,7 @@ classes:
         base: Client::UI::Info::InfoProxyPageInterface
     funcs:
       0x1400B2F10: ctor
-      0x14017C310: dtor2
+      0x14017C310: Finalize
   Common::Configuration::ConfigBase::ChangeEventInterface:
     vtbls:
       - ea: 0x1419A6F58
@@ -2895,7 +2895,7 @@ classes:
         base: Client::UI::Info::InfoProxyInterface
     funcs:
       0x1401024E0: ctor
-      0x140102580: dtor2
+      0x140102580: Finalize
   Client::UI::Info::InfoProxyItemSearch:
     vtbls:
       - ea: 0x1419C04F8
@@ -2921,7 +2921,7 @@ classes:
         base: Client::UI::Info::InfoProxyPageInterface
     funcs:
       0x140106A80: ctor
-      0x14017C7F0: dtor2
+      0x14017C7F0: Finalize
   Client::UI::Info::InfoProxyLinkshellMember:
     vtbls:
       - ea: 0x1419C0868
@@ -2941,7 +2941,7 @@ classes:
         base: Client::UI::Info::InfoProxyPageInterface
     funcs:
       0x14010BDD0: ctor
-      0x14017C7B0: dtor2
+      0x14017C7B0: Finalize
   Client::UI::Info::InfoProxySearch:
     vtbls:
       - ea: 0x1419C0AD8
@@ -2954,14 +2954,14 @@ classes:
         base: Client::UI::Info::InfoProxyPageInterface
     funcs:
       0x14010E010: ctor
-      0x14010E0A0: dtor2
+      0x14010E0A0: Finalize
   Client::UI::Info::InfoProxyFreeCompanyCreate:
     vtbls:
       - ea: 0x1419C0C38
         base: Client::UI::Info::InfoProxyInvitedInterface
     funcs:
       0x14010EAA0: ctor
-      0x14010EB50: dtor2
+      0x14010EB50: Finalize
   Client::UI::Info::InfoProxyFreeCompanyMember:
     vtbls:
       - ea: 0x1419C0CC8
@@ -3002,7 +3002,7 @@ classes:
         base: Client::UI::Info::InfoProxyInterface
     funcs:
       0x140111F00: ctor
-      0x140111FB0: dtor2
+      0x140111FB0: Finalize
   Client::UI::Info::InfoProxy25:
     vtbls:
       - ea: 0x1419C1278
@@ -3129,7 +3129,7 @@ classes:
     vtbls:
       - ea: 0x1419D3D20
     vfuncs:
-      0: Dispose
+      0: dtor
   Client::System::File::FileThread:
     vtbls:
       - ea: 0x1419D3D40
@@ -4257,10 +4257,10 @@ classes:
     vtbls:
       - ea: 0x141A01BA8
     vfuncs:
-      0: Dispose
+      0: dtor
     funcs:
       0x1404BE280: ctor
-      0x1404Be380: dtor
+      0x1404Be380: Finalize
   Client::System::Task::SpursJobEntityWorkerThread:
     instances:
       - ea: 0x1421B8B40
@@ -9048,7 +9048,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140CFC9E0: ctor
-      0x140CFCA10: dtor2
+      0x140CFCA10: Finalize
       0x140CFCA70: ViewArchiveItem
   Client::UI::Agent::AgentVVDNotebook:
     vtbls:
