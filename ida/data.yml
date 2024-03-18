@@ -89,7 +89,6 @@ functions:
   0x1400654E0: IsMacClient
   0x140065F50: SpecialFreeMemory
   0x1400951B0: CheckOsTypeAndVersion
-  0x140067100: CopyUInt
   0x140067500: GetMyDocumentsFolder #as UTF8String
   0x140096470: GetPerformanceFrequency
   0x1400976D0: CreateDirectoryRecursive
@@ -415,23 +414,23 @@ classes:
   Client:Network::ChatConnection:
     funcs:
       0x1415F3440: dtor
-    Client:Network::LobbyConnectionBase:
-      vtbls:
-        - ea: 0x141c8F490
-      vfuncs:
-        0: dtor
-      funcs:
-        0x14161C500: ctor
-        0x14161d5a0: Finalize
-    Client:Network::LobbyConnection:
-      vtbls:
-        - ea: 0x141C83CA8
-          base: Client:Network::LobbyConnectionBase
-      funcs:
-        0x1415F3870: ctor
-        0x1415F3980: dtor
-        0x1415F4D50: SetWorld
-        0x1415F4E10: SetZone
+  Application::Network::LobbyClient::LobbyClientMixin:
+    vtbls:
+      - ea: 0x141c8F490
+    vfuncs:
+      0: dtor
+    funcs:
+      0x14161C500: ctor
+      0x14161d5a0: Finalize
+  Application::Network::LobbyClientModule:
+    vtbls:
+      - ea: 0x141C83CA8
+        base: Application::Network::LobbyClient::LobbyClientMixin
+    funcs:
+      0x1415F3870: ctor
+      0x1415F3980: dtor
+      0x1415F4D50: SetWorld
+      0x1415F4E10: SetZone
   Application::Network::LobbyClient::LobbyRequestCallback:
     vtbls:
       - ea: 0x141C8E798
@@ -1820,14 +1819,14 @@ classes:
     vtbls:
       - ea: 0x1419B2AC8
     vfuncs:
-      0: Dispose
+      0: dtor
       1: Execute_arg1 # arg 1 is always an event object
       2: Execute_arg2
     funcs:
       0x1400965B0: TaskRunner_arg1 # these are used to run static tasks, vfuncs are for Task subclasses
       0x1400965C0: TaskRunner_arg2
       0x1400965D0: TaskRunner_arg3
-      0x14019B340: dtor
+      0x14019B340: Finalize
   Client::System::Framework::TaskManager::RootTask:
     vtbls:
       - ea: 0x1419B2AE0
