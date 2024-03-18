@@ -39,9 +39,9 @@ public unsafe partial struct Framework {
     [FieldOffset(0x1678)] public bool IsNetworkModuleInitialized;
     [FieldOffset(0x1679)] public bool EnableNetworking;
     [FieldOffset(0x1680)] public TimePoint UtcTime;
-    [Obsolete("Use UtcTime.Timestamp")] [FieldOffset(0x1680)] public long ServerTime; // TODO: change to uint
-    [Obsolete("Use UtcTime.CpuMilliSeconds")] [FieldOffset(0x1688)] public long PerformanceCounterInMilliSeconds;
-    [Obsolete("Use UtcTime.CpuMicroSeconds")] [FieldOffset(0x1688)] public long PerformanceCounterInMicroSeconds;
+    [Obsolete("Use UtcTime.Timestamp")][FieldOffset(0x1680)] public long ServerTime; // TODO: change to uint
+    [Obsolete("Use UtcTime.CpuMilliSeconds")][FieldOffset(0x1688)] public long PerformanceCounterInMilliSeconds;
+    [Obsolete("Use UtcTime.CpuMicroSeconds")][FieldOffset(0x1688)] public long PerformanceCounterInMicroSeconds;
     [FieldOffset(0x1698)] public uint TimerResolutionMillis;
     [FieldOffset(0x16A0)] public long PerformanceCounterFrequency;
     [FieldOffset(0x16A8)] public long PerformanceCounterValue;
@@ -83,7 +83,7 @@ public unsafe partial struct Framework {
     /// </summary>
     [FieldOffset(0x17CC)] public float FrameDeltaTimeOverride2;
     [FieldOffset(0x17D0)] public bool WindowInactive;
-    
+
     [FieldOffset(0x17E0)] public int DataPathType;
 
     [FieldOffset(0x19EC)] private fixed char gamePath[260]; // WideChar Array

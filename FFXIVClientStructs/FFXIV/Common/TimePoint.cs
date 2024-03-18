@@ -1,4 +1,4 @@
-﻿namespace FFXIVClientStructs.FFXIV.Common;
+namespace FFXIVClientStructs.FFXIV.Common;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x18)]
 public struct TimePoint {
