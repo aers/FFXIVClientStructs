@@ -9,10 +9,19 @@ public unsafe partial struct GoldSaucerManager {
 
     [FieldOffset(0x28)] public GFateDirector* CurrentGFateDirector;
 
-    // Unknown TripleTriadTournament data here
-    [FieldOffset(0x50)] internal uint UnkTripleTriadTournamentTimestamp;
+    [FieldOffset(0x50)] public uint WeeklyLotOffsetTime;
 
-    [FieldOffset(0x58)] internal byte UnkTripleTriadTournamentFlags;
+    [FieldOffset(0x58)] public GoldSaucerFlag Flags;
+}
 
-    [FieldOffset(0x5C)] internal uint UnkTripleTriadTournamentTimeBase;
+[Flags]
+public enum GoldSaucerFlag : byte {
+    Unk0 = 1 << 0,
+    ChocoboRaceTutorialClear = 1 << 1,
+    Unk2 = 1 << 2,
+    Unk3 = 1 << 3,
+    Unk4 = 1 << 4,
+    ChocoboRaceAllOpen = 1 << 5,
+    Unk6 = 1 << 6,
+    Unk7 = 1 << 7,
 }

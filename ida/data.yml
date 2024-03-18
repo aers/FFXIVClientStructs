@@ -714,12 +714,21 @@ classes:
       0x140B688B0: Initialize
       0x140B68940: dtor
       0x140B68990: GetInstance
+      0x140B68810: IsRunningGate
+      0x140B687F0: IsAcceptingGate
+      0x140B68840: GetRunningGateType
+      0x140B68860: GetRunningGatePositionType
+      0x140B68750: IsJoinedGATE
+      0x140B687A0: IsFinishedGATE
   Client::Game::GoldSaucer::GFateDirector:
     vtbls:
       - ea: 0x141A6FA30
         base: Client::Game::Event::GoldSaucerDirector
     funcs:
       0x140B6C0F0: ctor
+    vfuncs:
+      3: IsRunningGate
+      294: IsAcceptingGate
   Client::Game::GoldSaucer::RaceChocoboDirector: # Chocobo Race
     vtbls:
       - ea: 0x141A6D7C8
