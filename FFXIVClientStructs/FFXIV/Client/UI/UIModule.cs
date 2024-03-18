@@ -281,7 +281,7 @@ public unsafe partial struct UIModule {
     // public partial AkatsukiNoteModule* GetAkatsukiNoteModule();
 
     // [VirtualFunction(61)]
-    // public partial GetVVDNoteModule* GetGetVVDNoteModule();
+    // public partial VVDNoteModule* GetVVDNoteModule();
 
     [VirtualFunction(62)]
     public partial VVDActionModule* GetVVDActionModule();
