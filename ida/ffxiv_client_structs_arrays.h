@@ -392,6 +392,7 @@ struct Client::System::Framework::Task;
 struct Client::System::Framework::TaskVTable;
 struct Common::Configuration::ChangeEventInterface;
 struct Client::System::Framework::Framework;
+struct Common::TimePoint;
 struct Client::System::Framework::TaskManager;
 struct Client::System::Framework::TaskManagerOsData;
 struct Client::System::Timer::ClientTime;
@@ -11425,7 +11426,12 @@ __unaligned struct Client::Graphics::Render::RenderTargetManager /* Size=0x4A0 *
     /*       */ byte _gap_0x26A[0x2];
     /*       */ byte _gap_0x26C[0x4];
     /* 0x270 */ Client::Graphics::Kernel::Texture* RenderTargetArray2[0x31];
-    /*       */ byte _gap_0x3F8[0xA8];
+    /*       */ byte _gap_0x3F8[0x78];
+    /* 0x470 */ unsigned __int16 DynamicResolutionActualTargetHeight;
+    /* 0x472 */ unsigned __int16 DynamicResolutionTargetHeight;
+    /* 0x474 */ unsigned __int16 DynamicResolutionMaximumHeight;
+    /* 0x476 */ unsigned __int16 DynamicResolutionMinimumHeight;
+    /*       */ byte _gap_0x478[0x28];
 };
 
 __unaligned struct Client::Graphics::Transform /* Size=0x30 */
@@ -12651,6 +12657,14 @@ __unaligned struct Client::System::Framework::EnvironmentManager /* Size=0x698 *
     /*       */ byte _gap_0x88[0x610];
 };
 
+__unaligned struct Common::TimePoint /* Size=0x18 */
+{
+    /* 0x00 */ unsigned __int32 TimeStamp;
+    /*      */ byte _gap_0x4[0x4];
+    /* 0x08 */ unsigned __int64 CpuMilliSeconds;
+    /* 0x10 */ unsigned __int64 CpuMicroSeconds;
+};
+
 __unaligned struct Client::System::Framework::TaskManagerOsData /* Size=0x4C */
 {
     /*      */ byte _gap_0x0[0x40];
@@ -12720,21 +12734,16 @@ __unaligned struct Client::System::Framework::Framework /* Size=0x35C8 */
     /* 0x1679 */ bool EnableNetworking;
     /*        */ byte _gap_0x167A[0x2];
     /*        */ byte _gap_0x167C[0x4];
-    /* 0x1680 */ __int64 ServerTime;
-    union {
-    /* 0x1688 */ __int64 PerformanceCounterInMilliSeconds;
-    /* 0x1688 */ __int64 PerformanceCounterInMicroSeconds;
-    } _union_0x1688;
-    /*        */ byte _gap_0x1690[0x8];
+    /* 0x1680 */ Common::TimePoint UtcTime;
     /* 0x1698 */ unsigned __int32 TimerResolutionMillis;
     /*        */ byte _gap_0x169C[0x4];
     /* 0x16A0 */ __int64 PerformanceCounterFrequency;
     /* 0x16A8 */ __int64 PerformanceCounterValue;
     /*        */ byte _gap_0x16B0[0x8];
     /* 0x16B8 */ float FrameDeltaTime;
-    /*        */ byte _gap_0x16BC[0x4];
+    /* 0x16BC */ float RealFrameDeltaTime;
     /* 0x16C0 */ float FrameDeltaTimeOverride;
-    /*        */ byte _gap_0x16C4[0x4];
+    /* 0x16C4 */ float FrameDeltaFactor;
     /* 0x16C8 */ unsigned __int32 FrameCounter;
     /*        */ byte _gap_0x16CC[0x4];
     /*        */ byte _gap_0x16D0[0x28];
@@ -12743,12 +12752,18 @@ __unaligned struct Client::System::Framework::Framework /* Size=0x35C8 */
     /*        */ byte _gap_0x17A8[0x18];
     /*        */ byte _gap_0x17C0[0x4];
     /* 0x17C4 */ float FrameRate;
-    /*        */ byte _gap_0x17C8[0x8];
+    /* 0x17C8 */ bool DiscardFrame;
+    /*        */ byte _gap_0x17C9;
+    /*        */ byte _gap_0x17CA[0x2];
+    /* 0x17CC */ float FrameDeltaTimeOverride2;
     /* 0x17D0 */ bool WindowInactive;
     /*        */ byte _gap_0x17D1;
     /*        */ byte _gap_0x17D2[0x2];
     /*        */ byte _gap_0x17D4[0x4];
-    /*        */ byte _gap_0x17D8[0x210];
+    /*        */ byte _gap_0x17D8[0x8];
+    /* 0x17E0 */ __int32 DataPathType;
+    /*        */ byte _gap_0x17E4[0x4];
+    /*        */ byte _gap_0x17E8[0x200];
     /*        */ byte _gap_0x19E8[0x4];
     /* 0x19EC */ wchar_t gamePath[0x104];
     /*        */ byte _gap_0x1BF4[0x4];
@@ -12774,7 +12789,15 @@ __unaligned struct Client::System::Framework::Framework /* Size=0x35C8 */
     /*        */ byte _gap_0x2B88[0x40];
     /* 0x2BC8 */ Common::Lua::LuaState LuaState;
     /* 0x2BF0 */ Client::System::Framework::GameVersion GameVersion;
-    /*        */ byte _gap_0x34F0[0xC0];
+    /*        */ byte _gap_0x34F0[0x10];
+    /* 0x3500 */ bool UseWatchDogThread;
+    /*        */ byte _gap_0x3501;
+    /*        */ byte _gap_0x3502[0x2];
+    /*        */ byte _gap_0x3504[0x4];
+    /*        */ byte _gap_0x3508[0x8];
+    /* 0x3510 */ __int32 FramesUntilDebugCheck;
+    /*        */ byte _gap_0x3514[0x4];
+    /*        */ byte _gap_0x3518[0x98];
     /*        */ byte _gap_0x35B0[0x4];
     /* 0x35B4 */ bool IsSteamGame;
     /*        */ byte _gap_0x35B5;
