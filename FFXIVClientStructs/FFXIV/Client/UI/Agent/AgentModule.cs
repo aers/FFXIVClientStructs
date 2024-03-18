@@ -207,7 +207,13 @@ public enum AgentId : uint {
 
     GoldSaucerMiniGame = 171,
     TrippleTriad = 172,
+    TripleTriadRuleAnnounce = 173,
+    TripleTriadRuleSetting = 174,
 
+    TripleTriadSchedule = 176,
+    TripleTriadRanking = 177,
+    TripleTriadTournamentResult = 178,
+    TripleTriadTournamentMatchList = 179,
     LotteryDaily = 180,
     AetherialWheel = 181,
     LotteryWeekly = 182,

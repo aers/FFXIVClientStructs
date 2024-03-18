@@ -8626,6 +8626,42 @@ classes:
     funcs:
       0x140B9B480: ctor
       0x140B9B700: Finalize
+  Client::UI::Agent::TripleTriadRuleAnnounce:
+    vtbls:
+      - ea: 0x141A7A668
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140BCD9D0: ctor
+  Client::UI::Agent::TripleTriadRuleSetting:
+    vtbls:
+      - ea: 0x141A7A6E0
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140BCDF60: ctor
+  Client::UI::Agent::TripleTriadSchedule:
+    vtbls:
+      - ea: 0x141A79960
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140BB1BD0: ctor
+  Client::UI::Agent::TripleTriadRanking:
+    vtbls:
+      - ea: 0x141A7A7E0
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140BD0A80: ctor
+  Client::UI::Agent::TripleTriadTournamentResult:
+    vtbls:
+      - ea: 0x141A79558
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140BA1CD0: ctor
+  Client::UI::Agent::TripleTriadTournamentMatchList:
+    vtbls:
+      - ea: 0x141A7A858
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140BD13D0: ctor
   Client::UI::Agent::AgentConfigBase:
     vtbls:
       - ea: 0x1419DF618
@@ -12197,6 +12233,72 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141138EC0: ctor
+  Client::UI::AddonTripleTriad:
+    vtbls:
+      - ea: 0x141B22358
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1411DEAB0: ctor
+  Client::UI::AddonTripleTriadRule:
+    vtbls:
+      - ea: 0x141B230D8
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1411E5750: ctor
+  Client::UI::AddonTripleTriadRuleAnnounce:
+    vtbls:
+      - ea: 0x141B23798
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1411E68C0: ctor
+  Client::UI::AddonTripleTriadRuleSetting:
+    vtbls:
+      - ea: 0x141B239D8
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1411E69B0: ctor
+  Client::UI::AddonTripleTriadSelDeck:
+    vtbls:
+      - ea: 0x141B22C58
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1411E4A80: ctor
+  Client::UI::AddonTripleTriadDeckConfirmation:
+    vtbls:
+      - ea: 0x141B23E58
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1411E7A30: ctor
+  Client::UI::AddonTripleTriadRanking:
+    vtbls:
+      - ea: 0x141B22E98
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1411E5070: ctor
+  Client::UI::AddonTripleTriadTournamentMatchList:
+    vtbls:
+      - ea: 0x141B24998
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1411EBD60: ctor
+  Client::UI::AddonTripleTriadTournamentSchedule:
+    vtbls:
+      - ea: 0x141B23558
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1411E60F0: ctor
+  Client::UI::AddonTripleTriadRoundResult:
+    vtbls:
+      - ea: 0x141B242D8
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1411E8560: ctor
+  Client::UI::AddonTripleTriadTournamentResult:
+    vtbls:
+      - ea: 0x141B24518
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1411E92E0: ctor
   Client::UI::AddonGoldSaucerInfo:
     vtbls:
       - ea: 0x141B24E18
