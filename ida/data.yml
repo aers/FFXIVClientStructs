@@ -412,10 +412,10 @@ classes:
       0x1415EB950: InitializeLobbyConnection
       0x1415EC130: dtorHelper
       0x1415F14F0: Update
-  Client:Network::ZoneConnection:
+  Application:Network::ZoneConnection:
     funcs:
       0x1415F2DD0: dtor
-  Client:Network::ChatConnection:
+  Application:Network::ChatConnection:
     funcs:
       0x1415F3440: dtor
   Application::Network::LobbyClient::LobbyClientMixin:
@@ -794,7 +794,7 @@ classes:
   Client::Game::GoldSaucer::GFateClimbingDirector: # Cliffhanger
     vtbls:
       - ea: 0x141A703B8
-        base: Client::Game::Event::GoldSaucerDirector
+        base: Client::Game::GoldSaucer::GFateDirector
     funcs:
       0x140B6CF90: ctor # unused, because inlined
   Client::Game::GoldSaucer::GFateStelthDirector:
@@ -2091,8 +2091,6 @@ classes:
       - ea: 0x141A02A28
       - ea: 0x141A029F0
         base: Common::Component::Environment::ResourceInterface::ResourceHandleInterface
-    vfuncs:
-      0: dtor
   Common::Component::BGCollision::Object:
     vtbls:
       - ea: 0x141A02900
@@ -3241,7 +3239,7 @@ classes:
         base: Client::System::Threading::Thread
     funcs:
       0x1401C5D10: ctor
-      0x1401C5E00: dtor
+      0x1401C5E00: Finalize
   Client::System::File::FileManager:
     instances:
       - ea: 0x1421A32D0
@@ -4510,10 +4508,10 @@ classes:
     vtbls:
       - ea: 0x141A02E58
     vfuncs:
-      0: Dispose
+      0: dtor
     funcs:
       0x1404CDAE0: ctor
-      0x1404CDB70: dtor
+      0x1404CDB70: Finalize
       0x1404CDC00: Load
       0x1404CDC50: ChangeLanguage
       0x1404CDF40: GetRowBySheetAndRowId  # (ExdModule* this, ExcelSheet* pSheet, int nRowId) -> ExcelRow*
