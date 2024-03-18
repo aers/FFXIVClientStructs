@@ -706,6 +706,80 @@ classes:
       0x1407BC0C0: LookupBuddyByOwnerObject
       0x1407BC140: LookupPetByOwnerObject
       0x1407BC220: LookupBattleNpcPartsByObjectId
+  Client::Game::GoldSaucer::GoldSaucerManager:
+    instances:
+      - ea: 0x14220C4F0
+        pointer: True
+    funcs:
+      0x140B688B0: Initialize
+      0x140B68940: dtor
+      0x140B68990: GetInstance
+  Client::Game::GoldSaucer::GFateDirector:
+    vtbls:
+      - ea: 0x141A6FA30
+        base: Client::Game::Event::GoldSaucerDirector
+    funcs:
+      0x140B6C0F0: ctor
+  Client::Game::GoldSaucer::RaceChocoboDirector: # Chocobo Race
+    vtbls:
+      - ea: 0x141A6D7C8
+        base: Client::Game::Event::GoldSaucerDirector
+    funcs:
+      0x140B587F0: ctor
+  Client::Game::GoldSaucer::GFateClimbingDirector: # Cliffhanger
+    vtbls:
+      - ea: 0x141A703B8
+        base: Client::Game::Event::GoldSaucerDirector
+    funcs:
+      0x140B6CF90: ctor # unused, because inlined
+  Client::Game::GoldSaucer::GFateStelthDirector:
+    vtbls:
+      - ea: 0x141A70D50
+        base: Client::Game::GoldSaucer::GFateDirector
+    funcs:
+      0x140B6D660: ctor
+  Client::Game::GoldSaucer::GFateHiddenObjectDirector:
+    vtbls:
+      - ea: 0x141A716D8
+        base: Client::Game::GoldSaucer::GFateDirector
+    funcs:
+      0x140B6DC50: ctor
+  Client::Game::GoldSaucer::GFateDanceDirector:
+    vtbls:
+      - ea: 0x141A72070
+        base: Client::Game::GoldSaucer::GFateDirector
+    funcs:
+      0x140B6E5F0: ctor
+  Client::Game::GoldSaucer::GFateRouletteDirector: # Any Way the Wind Blows
+    vtbls:
+      - ea: 0x141A72A08
+        base: Client::Game::GoldSaucer::GFateDirector
+    funcs:
+      0x140B6EE10: ctor # unused, because inlined
+  Client::Game::GoldSaucer::VerminionDirector: # Lord of Verminion
+    vtbls:
+      - ea: 0x141A73390
+        base: Client::Game::Event::GoldSaucerDirector
+    funcs:
+      0x140B6F300: ctor
+  Client::Game::GoldSaucer::GFateClimbing2Director: # Leap of Faith
+    vtbls:
+      - ea: 0x141A73CB8
+        base: Client::Game::GoldSaucer::GFateDirector
+    funcs:
+      0x140B75BF0: ctor # unused, because inlined
+  Client::Game::GoldSaucer::GFateRideShootingDirector: # Air Force One
+    vtbls:
+      - ea: 0x141A74640
+        base: Client::Game::GoldSaucer::GFateDirector
+    funcs:
+      0x140B75F60: ctor # unused, because inlined
+  Client::Game::GoldSaucer::GFateYojimboDirector: # The Slice Is Right
+    vtbls:
+      - ea: 0x141A74FD8
+        base: Client::Game::GoldSaucer::GFateDirector
+    funcs:
+      0x140B762C0: ctor # unused, because inlined
   Client::Game::RaceChocoboManager:
     instances:
       - ea: 0x14220C4F8
@@ -9040,6 +9114,8 @@ classes:
       - ea: 0x141A3AE30
     funcs:
       0x1407C8510: ctor
+    vfuncs:
+      0: dtor
   Client::Game::Event::LuaScriptLoader<Client::Game::Event::ModuleBase>:
     vtbls:
       - ea: 0x141A3B670
@@ -9109,12 +9185,18 @@ classes:
         base: Client::Game::Event::Director
     funcs:
       0x140B4DA40: ctor
-  Client::Game::Event::DpsChallengeDirectorDirector:
+  Client::Game::Event::DpsChallengeDirector:
     vtbls:
       - ea: 0x141A56748
         base: Client::Game::Event::Director
     funcs:
       0x1408D86C0: ctor
+  Client::Game::Event::GoldSaucerDirector:
+    vtbls:
+      - ea: 0x141A6CE60
+        base: Client::Game::Event::Director
+    funcs:
+      0x140B56B70: ctor
   Client::Game::ReconstructionBoxManager:
     instances:
       - ea: 0x1421ECFD0
