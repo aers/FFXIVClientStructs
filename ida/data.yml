@@ -7130,6 +7130,8 @@ classes:
     vtbls:
       - ea: 0x141A7FB20
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140D0F710: ctor
   Client::UI::Agent::AgentLegacyItemStorage:
     vtbls:
       - ea: 0x141A7D660
@@ -7422,6 +7424,8 @@ classes:
     vtbls:
       - ea: 0x141A65150
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A27E70: ctor
   Client::UI::Agent::AgentRelicNoteBook:
     vtbls:
       - ea: 0x141A64A78
@@ -7468,6 +7472,8 @@ classes:
     vtbls:
       - ea: 0x141A65340
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A2FFA0: ctor
   Client::UI::Agent::AgentMiniGame:
     vtbls:
       - ea: 0x1419E40C0
@@ -7578,6 +7584,8 @@ classes:
     vtbls:
       - ea: 0x141A7E788
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140C91020: ctor
   Client::UI::Agent::AgentLovmParty:
     vtbls:
       - ea: 0x141A79E58
@@ -7736,10 +7744,14 @@ classes:
     vtbls:
       - ea: 0x141A657B8
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A3BC60: ctor
   Client::UI::Agent::AgentSkyIsland2Result:
     vtbls:
       - ea: 0x141A65618
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A38650: ctor
   Client::UI::Agent::AgentBeginnersMansionProblem:
     vtbls:
       - ea: 0x141A7F9B8
@@ -7951,10 +7963,14 @@ classes:
     vtbls:
       - ea: 0x141A68D58
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140AADA80: ctor
   Client::UI::Agent::AgentAquariumSetting:
     vtbls:
       - ea: 0x141A7F500
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140CFA1A0: ctor
   Client::UI::Agent::AgentDeepDungeonMenu:
     vtbls:
       - ea: 0x141A67AD8
@@ -7966,6 +7982,8 @@ classes:
     vtbls:
       - ea: 0x141A67808
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A75DB0: ctor
   Client::UI::Agent::AgentItemAppraisal:
     vtbls:
       - ea: 0x141A7D2F0
@@ -8002,22 +8020,32 @@ classes:
     vtbls:
       - ea: 0x141A7CA30
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140C39380: ctor
   Client::UI::Agent::AgentPvpScreenInformationHotBar:
     vtbls:
       - ea: 0x141A7E930
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140C9ADD0: ctor
   Client::UI::Agent::AgentPvpWelcome:
     vtbls:
       - ea: 0x141A66B18
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A57160: ctor
   Client::UI::Agent::AgentJobHudNotice:
     vtbls:
       - ea: 0x141A7D5E8
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140C6EAA0: ctor
   Client::UI::Agent::AgentUserPolicyPerformance:
     vtbls:
       - ea: 0x141A66750
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A53650: ctor
   Client::UI::Agent::AgentPvpTeamInputString:
     vtbls:
       - ea: 0x1419E3278
@@ -8026,6 +8054,8 @@ classes:
     vtbls:
       - ea: 0x1419E34F0
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1402F20A0: ctor
   Client::UI::Agent::AgentPvPTeam:
     vtbls:
       - ea: 0x1419E35F0
@@ -8104,6 +8134,8 @@ classes:
     vtbls:
       - ea: 0x141A685C0
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A9BC10: ctor
   Client::UI::Agent::AgentFashion:
     vtbls:
       - ea: 0x141A7A0D0
@@ -8115,6 +8147,8 @@ classes:
     vtbls:
       - ea: 0x141A682E8
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A96EA0: ctor
   Client::UI::Agent::AgentHousingGuestBook:
     vtbls:
       - ea: 0x141B2FFA0
@@ -8147,6 +8181,8 @@ classes:
     vtbls:
       - ea: 0x141A6A3F8
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140AED760: ctor
   Client::UI::Agent::AgentDescription:
     vtbls:
       - ea: 0x141A806F8
@@ -8157,10 +8193,14 @@ classes:
     vtbls:
       - ea: 0x141A7F238
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140CE22B0: ctor
   Client::UI::Agent::AgentFreeShop:
     vtbls:
       - ea: 0x141A80F48
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140D500B0: ctor
   Client::UI::Agent::AgentAozNoteBook:
     vtbls:
       - ea: 0x141A7F2C0
@@ -8176,6 +8216,8 @@ classes:
     vtbls:
       - ea: 0x141A66AA0
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A56E60: ctor
   Client::UI::Agent::AgentEmj:
     vtbls:
       - ea: 0x141A7A1D8
@@ -8234,6 +8276,8 @@ classes:
     vtbls:
       - ea: 0x141A64020
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1409DF560: ctor
   Client::UI::Agent::AgentDawn:
     vtbls:
       - ea: 0x141A692B0
@@ -8380,6 +8424,8 @@ classes:
     vtbls:
       - ea: 0x141A7D160
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140C4F0B0: ctor
   Client::UI::Agent::AgentMycWarResultNotebook:
     vtbls:
       - ea: 0x141A699D8
@@ -8427,6 +8473,8 @@ classes:
     vtbls:
       - ea: 0x141A7C0F8
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140BE8700: ctor
   Client::UI::Agent::AgentStarlightGiftBox:
     vtbls:
       - ea: 0x141A6A130
@@ -8496,6 +8544,8 @@ classes:
     vtbls:
       - ea: 0x141A68E70
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140AB0FB0: ctor
   Client::UI::Agent::AgentPvPMKSIntroduction:
     vtbls:
       - ea: 0x141A68F80
@@ -9058,11 +9108,13 @@ classes:
       - ea: 0x141B30D88
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140A57160: ctor
+      0x141285690: ctor
   Client::UI::Agent::AgentMJIHousingMenu:
     vtbls:
       - ea: 0x141B30CF8
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x14127FB80: ctor
   Client::UI::Agent::AgentArchiveItem:
     vtbls:
       - ea: 0x141A7F590
@@ -9127,30 +9179,44 @@ classes:
     vtbls:
       - ea: 0x141A66208
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A42FB0: ctor
   Client::UI::Agent::AgentMoogleCollection:
     vtbls:
       - ea: 0x141B315C0
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x14129F8B0: ctor
   Client::UI::Agent::AgentFGSEnterDialog:
     vtbls:
       - ea: 0x141A7AA10
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140BD3A50: ctor
   Client::UI::Agent::AgentFGSStageIntro:
     vtbls:
       - ea: 0x141A7A998
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140BD3190: ctor
   Client::UI::Agent::AgentFGSHud:
     vtbls:
       - ea: 0x141A7A8D0
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140BD2510: ctor
   Client::UI::Agent::AgentFGSWinner:
     vtbls:
       - ea: 0x141A7AB00
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140BD41E0: ctor
   Client::UI::Agent::AgentFGSResult:
     vtbls:
       - ea: 0x141A7AA88
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140BD3E10: ctor
   Client::Game::UI::GameEventCallback:
     vtbls:
       - ea: 0x141A3AD80
