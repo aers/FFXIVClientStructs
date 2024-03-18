@@ -762,6 +762,89 @@ classes:
       0x1407BC0C0: LookupBuddyByOwnerObject
       0x1407BC140: LookupPetByOwnerObject
       0x1407BC220: LookupBattleNpcPartsByObjectId
+  Client::Game::GoldSaucer::GoldSaucerManager:
+    instances:
+      - ea: 0x14220C4F0
+        pointer: True
+    funcs:
+      0x140B688B0: Initialize
+      0x140B68940: dtor
+      0x140B68990: GetInstance
+      0x140B68810: IsRunningGate
+      0x140B687F0: IsAcceptingGate
+      0x140B68840: GetRunningGateType
+      0x140B68860: GetRunningGatePositionType
+      0x140B68750: IsJoinedGATE
+      0x140B687A0: IsFinishedGATE
+  Client::Game::GoldSaucer::GFateDirector:
+    vtbls:
+      - ea: 0x141A6FA30
+        base: Client::Game::Event::GoldSaucerDirector
+    funcs:
+      0x140B6C0F0: ctor
+    vfuncs:
+      3: IsRunningGate
+      294: IsAcceptingGate
+  Client::Game::GoldSaucer::RaceChocoboDirector: # Chocobo Race
+    vtbls:
+      - ea: 0x141A6D7C8
+        base: Client::Game::Event::GoldSaucerDirector
+    funcs:
+      0x140B587F0: ctor
+  Client::Game::GoldSaucer::GFateClimbingDirector: # Cliffhanger
+    vtbls:
+      - ea: 0x141A703B8
+        base: Client::Game::Event::GoldSaucerDirector
+    funcs:
+      0x140B6CF90: ctor # unused, because inlined
+  Client::Game::GoldSaucer::GFateStelthDirector:
+    vtbls:
+      - ea: 0x141A70D50
+        base: Client::Game::GoldSaucer::GFateDirector
+    funcs:
+      0x140B6D660: ctor
+  Client::Game::GoldSaucer::GFateHiddenObjectDirector:
+    vtbls:
+      - ea: 0x141A716D8
+        base: Client::Game::GoldSaucer::GFateDirector
+    funcs:
+      0x140B6DC50: ctor
+  Client::Game::GoldSaucer::GFateDanceDirector:
+    vtbls:
+      - ea: 0x141A72070
+        base: Client::Game::GoldSaucer::GFateDirector
+    funcs:
+      0x140B6E5F0: ctor
+  Client::Game::GoldSaucer::GFateRouletteDirector: # Any Way the Wind Blows
+    vtbls:
+      - ea: 0x141A72A08
+        base: Client::Game::GoldSaucer::GFateDirector
+    funcs:
+      0x140B6EE10: ctor # unused, because inlined
+  Client::Game::GoldSaucer::VerminionDirector: # Lord of Verminion
+    vtbls:
+      - ea: 0x141A73390
+        base: Client::Game::Event::GoldSaucerDirector
+    funcs:
+      0x140B6F300: ctor
+  Client::Game::GoldSaucer::GFateClimbing2Director: # Leap of Faith
+    vtbls:
+      - ea: 0x141A73CB8
+        base: Client::Game::GoldSaucer::GFateDirector
+    funcs:
+      0x140B75BF0: ctor # unused, because inlined
+  Client::Game::GoldSaucer::GFateRideShootingDirector: # Air Force One
+    vtbls:
+      - ea: 0x141A74640
+        base: Client::Game::GoldSaucer::GFateDirector
+    funcs:
+      0x140B75F60: ctor # unused, because inlined
+  Client::Game::GoldSaucer::GFateYojimboDirector: # The Slice Is Right
+    vtbls:
+      - ea: 0x141A74FD8
+        base: Client::Game::GoldSaucer::GFateDirector
+    funcs:
+      0x140B762C0: ctor # unused, because inlined
   Client::Game::RaceChocoboManager:
     instances:
       - ea: 0x14220C4F8
@@ -7163,6 +7246,8 @@ classes:
     vtbls:
       - ea: 0x141A7FB20
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140D0F710: ctor
   Client::UI::Agent::AgentLegacyItemStorage:
     vtbls:
       - ea: 0x141A7D660
@@ -7455,6 +7540,8 @@ classes:
     vtbls:
       - ea: 0x141A65150
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A27E70: ctor
   Client::UI::Agent::AgentRelicNoteBook:
     vtbls:
       - ea: 0x141A64A78
@@ -7501,6 +7588,8 @@ classes:
     vtbls:
       - ea: 0x141A65340
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A2FFA0: ctor
   Client::UI::Agent::AgentMiniGame:
     vtbls:
       - ea: 0x1419E40C0
@@ -7611,6 +7700,8 @@ classes:
     vtbls:
       - ea: 0x141A7E788
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140C91020: ctor
   Client::UI::Agent::AgentLovmParty:
     vtbls:
       - ea: 0x141A79E58
@@ -7769,10 +7860,14 @@ classes:
     vtbls:
       - ea: 0x141A657B8
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A3BC60: ctor
   Client::UI::Agent::AgentSkyIsland2Result:
     vtbls:
       - ea: 0x141A65618
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A38650: ctor
   Client::UI::Agent::AgentBeginnersMansionProblem:
     vtbls:
       - ea: 0x141A7F9B8
@@ -7984,10 +8079,14 @@ classes:
     vtbls:
       - ea: 0x141A68D58
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140AADA80: ctor
   Client::UI::Agent::AgentAquariumSetting:
     vtbls:
       - ea: 0x141A7F500
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140CFA1A0: ctor
   Client::UI::Agent::AgentDeepDungeonMenu:
     vtbls:
       - ea: 0x141A67AD8
@@ -7999,6 +8098,8 @@ classes:
     vtbls:
       - ea: 0x141A67808
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A75DB0: ctor
   Client::UI::Agent::AgentItemAppraisal:
     vtbls:
       - ea: 0x141A7D2F0
@@ -8035,22 +8136,32 @@ classes:
     vtbls:
       - ea: 0x141A7CA30
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140C39380: ctor
   Client::UI::Agent::AgentPvpScreenInformationHotBar:
     vtbls:
       - ea: 0x141A7E930
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140C9ADD0: ctor
   Client::UI::Agent::AgentPvpWelcome:
     vtbls:
       - ea: 0x141A66B18
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A57160: ctor
   Client::UI::Agent::AgentJobHudNotice:
     vtbls:
       - ea: 0x141A7D5E8
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140C6EAA0: ctor
   Client::UI::Agent::AgentUserPolicyPerformance:
     vtbls:
       - ea: 0x141A66750
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A53650: ctor
   Client::UI::Agent::AgentPvpTeamInputString:
     vtbls:
       - ea: 0x1419E3278
@@ -8059,6 +8170,8 @@ classes:
     vtbls:
       - ea: 0x1419E34F0
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1402F20A0: ctor
   Client::UI::Agent::AgentPvPTeam:
     vtbls:
       - ea: 0x1419E35F0
@@ -8150,6 +8263,8 @@ classes:
     vtbls:
       - ea: 0x141A682E8
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A96EA0: ctor
   Client::UI::Agent::AgentHousingGuestBook:
     vtbls:
       - ea: 0x141B2FFA0
@@ -8182,6 +8297,8 @@ classes:
     vtbls:
       - ea: 0x141A6A3F8
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140AED760: ctor
   Client::UI::Agent::AgentDescription:
     vtbls:
       - ea: 0x141A806F8
@@ -8192,10 +8309,14 @@ classes:
     vtbls:
       - ea: 0x141A7F238
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140CE22B0: ctor
   Client::UI::Agent::AgentFreeShop:
     vtbls:
       - ea: 0x141A80F48
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140D500B0: ctor
   Client::UI::Agent::AgentAozNoteBook:
     vtbls:
       - ea: 0x141A7F2C0
@@ -8211,6 +8332,8 @@ classes:
     vtbls:
       - ea: 0x141A66AA0
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A56E60: ctor
   Client::UI::Agent::AgentEmj:
     vtbls:
       - ea: 0x141A7A1D8
@@ -8417,6 +8540,8 @@ classes:
     vtbls:
       - ea: 0x141A7D160
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140C4F0B0: ctor
   Client::UI::Agent::AgentMycWarResultNotebook:
     vtbls:
       - ea: 0x141A699D8
@@ -8464,6 +8589,8 @@ classes:
     vtbls:
       - ea: 0x141A7C0F8
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140BE8700: ctor
   Client::UI::Agent::AgentStarlightGiftBox:
     vtbls:
       - ea: 0x141A6A130
@@ -8533,6 +8660,8 @@ classes:
     vtbls:
       - ea: 0x141A68E70
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140AB0FB0: ctor
   Client::UI::Agent::AgentPvPMKSIntroduction:
     vtbls:
       - ea: 0x141A68F80
@@ -8663,6 +8792,42 @@ classes:
     funcs:
       0x140B9B480: ctor
       0x140B9B700: Finalize
+  Client::UI::Agent::TripleTriadRuleAnnounce:
+    vtbls:
+      - ea: 0x141A7A668
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140BCD9D0: ctor
+  Client::UI::Agent::TripleTriadRuleSetting:
+    vtbls:
+      - ea: 0x141A7A6E0
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140BCDF60: ctor
+  Client::UI::Agent::TripleTriadSchedule:
+    vtbls:
+      - ea: 0x141A79960
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140BB1BD0: ctor
+  Client::UI::Agent::TripleTriadRanking:
+    vtbls:
+      - ea: 0x141A7A7E0
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140BD0A80: ctor
+  Client::UI::Agent::TripleTriadTournamentResult:
+    vtbls:
+      - ea: 0x141A79558
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140BA1CD0: ctor
+  Client::UI::Agent::TripleTriadTournamentMatchList:
+    vtbls:
+      - ea: 0x141A7A858
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140BD13D0: ctor
   Client::UI::Agent::AgentConfigBase:
     vtbls:
       - ea: 0x1419DF618
@@ -9059,11 +9224,13 @@ classes:
       - ea: 0x141B30D88
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140A57160: ctor
+      0x141285690: ctor
   Client::UI::Agent::AgentMJIHousingMenu:
     vtbls:
       - ea: 0x141B30CF8
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x14127FB80: ctor
   Client::UI::Agent::AgentArchiveItem:
     vtbls:
       - ea: 0x141A7F590
@@ -9128,30 +9295,44 @@ classes:
     vtbls:
       - ea: 0x141A66208
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A42FB0: ctor
   Client::UI::Agent::AgentMoogleCollection:
     vtbls:
       - ea: 0x141B315C0
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x14129F8B0: ctor
   Client::UI::Agent::AgentFGSEnterDialog:
     vtbls:
       - ea: 0x141A7AA10
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140BD3A50: ctor
   Client::UI::Agent::AgentFGSStageIntro:
     vtbls:
       - ea: 0x141A7A998
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140BD3190: ctor
   Client::UI::Agent::AgentFGSHud:
     vtbls:
       - ea: 0x141A7A8D0
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140BD2510: ctor
   Client::UI::Agent::AgentFGSWinner:
     vtbls:
       - ea: 0x141A7AB00
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140BD41E0: ctor
   Client::UI::Agent::AgentFGSResult:
     vtbls:
       - ea: 0x141A7AA88
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140BD3E10: ctor
   Client::Game::UI::GameEventCallback:
     vtbls:
       - ea: 0x141A3AD80
@@ -9160,6 +9341,8 @@ classes:
       - ea: 0x141A3AE30
     funcs:
       0x1407C8510: ctor
+    vfuncs:
+      0: dtor
   Client::Game::Event::LuaScriptLoader<Client::Game::Event::ModuleBase>:
     vtbls:
       - ea: 0x141A3B670
@@ -9229,12 +9412,18 @@ classes:
         base: Client::Game::Event::Director
     funcs:
       0x140B4DA40: ctor
-  Client::Game::Event::DpsChallengeDirectorDirector:
+  Client::Game::Event::DpsChallengeDirector:
     vtbls:
       - ea: 0x141A56748
         base: Client::Game::Event::Director
     funcs:
       0x1408D86C0: ctor
+  Client::Game::Event::GoldSaucerDirector:
+    vtbls:
+      - ea: 0x141A6CE60
+        base: Client::Game::Event::Director
+    funcs:
+      0x140B56B70: ctor
   Client::Game::ReconstructionBoxManager:
     instances:
       - ea: 0x1421ECFD0
@@ -12226,6 +12415,72 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141138EC0: ctor
+  Client::UI::AddonTripleTriad:
+    vtbls:
+      - ea: 0x141B22358
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1411DEAB0: ctor
+  Client::UI::AddonTripleTriadRule:
+    vtbls:
+      - ea: 0x141B230D8
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1411E5750: ctor
+  Client::UI::AddonTripleTriadRuleAnnounce:
+    vtbls:
+      - ea: 0x141B23798
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1411E68C0: ctor
+  Client::UI::AddonTripleTriadRuleSetting:
+    vtbls:
+      - ea: 0x141B239D8
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1411E69B0: ctor
+  Client::UI::AddonTripleTriadSelDeck:
+    vtbls:
+      - ea: 0x141B22C58
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1411E4A80: ctor
+  Client::UI::AddonTripleTriadDeckConfirmation:
+    vtbls:
+      - ea: 0x141B23E58
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1411E7A30: ctor
+  Client::UI::AddonTripleTriadRanking:
+    vtbls:
+      - ea: 0x141B22E98
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1411E5070: ctor
+  Client::UI::AddonTripleTriadTournamentMatchList:
+    vtbls:
+      - ea: 0x141B24998
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1411EBD60: ctor
+  Client::UI::AddonTripleTriadTournamentSchedule:
+    vtbls:
+      - ea: 0x141B23558
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1411E60F0: ctor
+  Client::UI::AddonTripleTriadRoundResult:
+    vtbls:
+      - ea: 0x141B242D8
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1411E8560: ctor
+  Client::UI::AddonTripleTriadTournamentResult:
+    vtbls:
+      - ea: 0x141B24518
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1411E92E0: ctor
   Client::UI::AddonGoldSaucerInfo:
     vtbls:
       - ea: 0x141B24E18
