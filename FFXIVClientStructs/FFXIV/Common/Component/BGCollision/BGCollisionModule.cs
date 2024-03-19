@@ -42,18 +42,18 @@ public unsafe partial struct BGCollisionModule {
     [FieldOffset(0x8C)] public Vector4 ForcedStreamingSphere; // w is radius; if w<0, the rest of the components are ignored and instead camera position is used as center with radius=120
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 41 0F B6 D6")] // ex to avoid generated name collision
-    public partial bool RaycastEx(RaycastHit* hitInfo, Vector3 origin, Vector3 direction, float maxDistance, int layerMask, int* flags);
+    public partial bool RaycastEx(RaycastHit* hitInfo, Vector3* origin, Vector3* direction, float maxDistance, int layerMask, int* flags);
 
     [MemberFunction("E8 ?? ?? ?? ?? 44 0F B6 F0 84 C0 74 ?? 40 38 BD")]
-    public static partial bool Raycast(Vector3 origin, Vector3 direction, float maxDistance, RaycastHit* hitInfo, int* flags);
+    public static partial bool Raycast(Vector3* origin, Vector3* direction, float maxDistance, RaycastHit* hitInfo, int* flags);
 
     [MemberFunction("48 83 EC 48 48 8B 05 ?? ?? ?? ?? 4D 8B D1")]
-    public static partial bool Raycast2(Vector3 origin, Vector3 direction, float maxDistance, RaycastHit* hitInfo, int* flags);
+    public static partial bool Raycast2(Vector3* origin, Vector3* direction, float maxDistance, RaycastHit* hitInfo, int* flags);
 
     public static bool Raycast(Vector3 origin, Vector3 direction, out RaycastHit hitInfo, float maxDistance = 1000000f) {
         var flags = stackalloc int[] { 0x4000, 0, 0x4000, 0 };
         var hit = new RaycastHit();
-        var result = Raycast(origin, direction, maxDistance, &hit, flags);
+        var result = Raycast(&origin, &direction, maxDistance, &hit, flags);
         hitInfo = hit;
         return result;
     }
@@ -61,7 +61,7 @@ public unsafe partial struct BGCollisionModule {
     public static bool Raycast2(Vector3 origin, Vector3 direction, out RaycastHit hitInfo, float maxDistance = 1000000f) {
         var flags = stackalloc int[] { 0x4000, 0, 0x4000, 0 };
         var hit = new RaycastHit();
-        var result = Raycast2(origin, direction, maxDistance, &hit, flags);
+        var result = Raycast2(&origin, &direction, maxDistance, &hit, flags);
         hitInfo = hit;
         return result;
     }
