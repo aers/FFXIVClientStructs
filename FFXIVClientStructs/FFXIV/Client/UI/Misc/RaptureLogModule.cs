@@ -19,7 +19,7 @@ public unsafe partial struct RaptureLogModule {
     [FieldOffset(0xE8)] public UIModule* UIModule;
     [FieldOffset(0xF0)] public ExcelModuleInterface* ExcelModuleInterface;
     [FieldOffset(0xF8)] public RaptureTextModule* RaptureTextModule;
-    
+
     [FieldOffset(0x100)] public AtkFontCodeModule* AtkFontCodeModule;
     [FieldOffset(0x100), Obsolete("Use AtkFontCodeModule instead")] public MacroDecoder* MacroDecoder; // should be named AtkFontCodeModule but waiting for the struct to be made first
     [FixedSizeArray<Utf8String>(10)]

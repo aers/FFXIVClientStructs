@@ -78,8 +78,7 @@ public unsafe struct HudPartyMember {
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0xA8)]
-public struct HudMiniMapGatheringMarker
-{
+public struct HudMiniMapGatheringMarker {
     [FieldOffset(0x00)] public Utf8String TooltipText;
     [FieldOffset(0x68)] public MapMarkerBase MapMarker;
     [FieldOffset(0xA0)] public ushort RecommendedLevel; // maybe?
