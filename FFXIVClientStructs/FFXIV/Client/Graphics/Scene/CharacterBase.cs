@@ -47,6 +47,10 @@ public unsafe partial struct CharacterBase {
     [FieldOffset(0x150)]
     public BonePhysicsModule* BonePhysicsModule; // Client::Graphics::Physics::BonePhysicsModule ptr
 
+    [FieldOffset(0x158)] public ModelRenderer.Callback RenderModelCallback;
+    [FieldOffset(0x178)] public ModelRenderer.Callback RenderMaterialCallback;
+    [FieldOffset(0x198)] public ModelRenderer.Callback UnkCallback3;
+
     [FieldOffset(0x224)] public float VfxScale;
     [FieldOffset(0x240)] public ConstantBuffer* CharacterDataCBuffer; // Size has been observed to be 0x50, contents may be InstanceParameter
 
@@ -106,6 +110,12 @@ public unsafe partial struct CharacterBase {
         Monster = 3,
         Weapon = 4,
     }
+
+    [VirtualFunction(61)]
+    public partial nint OnRenderModel(Model* model);
+
+    [VirtualFunction(62)]
+    public partial nint OnRenderMaterial(ModelRenderer.OnRenderMaterialParams* param);
 
     [VirtualFunction(67)]
     public partial ulong FlagSlotForUpdate(uint slot, EquipmentModelId* slotBytes);
