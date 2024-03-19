@@ -581,14 +581,14 @@ class SemanticVersion():
     date: int
     patch: int
     build: int
-
+    
     def __init__(self, year: int, month: int, date: int, patch: int, build: int = 0) -> None:
         self.year = year
         self.month = month
         self.date = date
         self.patch = patch
         self.build = build
-
+    
     def __lt__(self, other: 'SemanticVersion') -> bool:
         return self.year < other.year or self.month < other.month or self.date < other.date or self.patch < other.patch or self.build < other.build
     
@@ -637,6 +637,16 @@ def get_latest_schema() -> dict[SemanticVersion, str]:
     assets = dict(sorted(assets.items()))
     return assets
 
+def get_latest_schema_url(ver: SemanticVersion) -> str:
+    latest_release = get_latest_schema()
+    # check if the current version can be retrieved
+    if ver in latest_release:
+        return latest_release[ver]
+    # grab the version before the current version if it can't be retrieved
+    for version in latest_release:
+        if version < ver:
+            return latest_release[version]
+
 def get_definitions(schema: dict[str, str]) -> list[Definition]:
     defs = []
     for field in schema:
@@ -681,7 +691,7 @@ exd_struct_map = {}
 exd_schema_map = {}
 
 with TemporaryFile() as schema:
-    schema.write(get_url(get_latest_schema()[game_data.repositories[0].version], True))
+    schema.write(get_url(get_latest_schema_url(game_data.repositories[0].version), True))
     schema.seek(0)
     schemaZip = ZipFile(schema)
 
