@@ -69,6 +69,7 @@ struct Client_Game_Control_Control;
 struct Client_Game_Control_TargetSystem;
 struct Client_Game_Control_GameObjectArray;
 struct Client_Game_Control_InputManager;
+struct Client_Game_CSBonusManager;
 struct Client_Game_CurrencyManager;
 struct StdMapunsignedint32ClientGameCurrencyManagerSpecialCurrencyItem;
 struct StdMap_Nodeunsignedint32ClientGameCurrencyManagerSpecialCurrencyItem;
@@ -113,6 +114,7 @@ struct Common_Lua_LuaThread;
 struct Common_Lua_LuaState;
 struct Common_Lua_lua_State;
 struct Client_Game_Event_EventState;
+struct Client_Game_Event_GoldSaucerDirector;
 struct Client_Game_Fate_FateContext;
 struct System_Numerics_Vector3;
 struct Client_Game_Fate_FateDirector;
@@ -144,6 +146,9 @@ struct Client_Game_Gauge_GunbreakerGauge;
 struct Client_Game_GcArmyData;
 struct Client_Game_GcArmyMember;
 struct Client_Game_GcArmyManager;
+struct Client_Game_GoldSaucer_GFateDirector;
+struct Client_Game_GoldSaucer_GFateDirectorVTable;
+struct Client_Game_GoldSaucerManager;
 struct Client_Game_Group_GroupManager;
 struct Client_Game_Group_PartyMember;
 struct Client_Game_Housing_HousingFurniture;
@@ -296,11 +301,13 @@ struct Client_Graphics_Environment_EnvSimulator;
 struct Client_Graphics_Render_ShadowCamera;
 struct Client_Graphics_Render_Camera;
 struct Client_Graphics_ReferencedClassBase;
+struct Client_Graphics_JobSystem;
 struct Client_Graphics_Kernel_ConstantBuffer;
 struct Client_Graphics_Kernel_Device;
 struct Client_Graphics_Kernel_Notifier;
 struct Client_Graphics_Kernel_PixelShader;
 struct Client_Graphics_Kernel_PVShader;
+struct Client_Graphics_Kernel_Shader;
 struct Client_Graphics_Kernel_PVShader_ResourceEntry;
 struct Client_Graphics_Kernel_ShaderNode;
 struct Client_Graphics_Kernel_ShaderNode_ShaderPass;
@@ -314,6 +321,8 @@ struct Client_Graphics_Kernel_CVectorClientGraphicsKernelShaderNodePtr;
 struct StdVectorClientGraphicsKernelShaderNodePtr;
 struct Client_Graphics_Kernel_ShaderPackage_ConstantSamplerUnknown;
 struct Client_Graphics_Kernel_ShaderPackage_MaterialElement;
+struct Client_Graphics_Kernel_ShaderSceneKey;
+struct Client_Graphics_Kernel_ShaderSubViewKey;
 struct Client_Graphics_Kernel_SwapChain;
 struct Client_Graphics_Kernel_Texture;
 struct Client_Graphics_Kernel_TextureVTable;
@@ -326,9 +335,13 @@ struct Client_Graphics_Render_Manager;
 struct Client_Graphics_Render_View;
 struct Common_Math_Rectangle;
 struct Client_Graphics_Render_SubView;
+struct Client_Graphics_Render_ModelRenderer;
 struct Client_Graphics_Render_Material;
 struct Client_Graphics_Render_Material_TextureEntry;
 struct Client_Graphics_Render_Model;
+struct Client_Graphics_Render_ModelRenderer_Callback;
+struct Client_Graphics_Render_ModelRenderer_OnRenderMaterialParams;
+struct Client_Graphics_Render_ModelRenderer_OnRenderModelParams;
 struct Client_Graphics_Render_OffscreenRenderingManager;
 struct Client_Graphics_Render_PartialSkeleton;
 struct FFXIVClientStructs_Havok_hkaSampleBlendJob;
@@ -422,6 +435,8 @@ struct Client_System_Resource_Handle_ModelResourceHandleVTable;
 struct StdMapBytePtrint16;
 struct StdMap_NodeBytePtrint16;
 struct StdPairBytePtrint16;
+struct Client_System_Resource_Handle_ShaderCodeResourceHandle;
+struct Client_System_Resource_Handle_ShaderCodeResourceHandleVTable;
 struct Client_System_Resource_Handle_ShaderPackageResourceHandle;
 struct Client_System_Resource_Handle_ShaderPackageResourceHandleVTable;
 struct Client_System_Resource_Handle_SkeletonResourceHandle;
@@ -969,6 +984,10 @@ struct Client_UI_Agent_AgentHousingPlant_SelectableItem;
 struct Client_UI_Agent_AgentHUD;
 struct Client_UI_Agent_AgentHUDVTable;
 struct Client_UI_Agent_HudPartyMember;
+struct Client_UI_Agent_HudPartyMemberEnmity;
+struct Client_UI_Agent_HudMiniMapGatheringMarker;
+struct Client_UI_Agent_MapMarkerBase;
+struct StdVectorClientGameUIMapMarkerDataPtr;
 struct Client_UI_Agent_AgentHudLayout;
 struct Client_UI_Agent_AgentHudLayoutVTable;
 struct Client_UI_Agent_AgentIKDFishingLog;
@@ -1024,7 +1043,6 @@ struct Client_UI_Agent_LinkedTooltipMarker;
 struct StdMapunsignedint32unsignedint32;
 struct StdMap_Nodeunsignedint32unsignedint32;
 struct Client_UI_Agent_MapMarkerInfo;
-struct Client_UI_Agent_MapMarkerBase;
 struct Client_UI_Agent_TempMapMarker;
 struct Client_UI_Agent_FlagMapMarker;
 struct Client_UI_Agent_MiniMapMarker;
@@ -1173,7 +1191,6 @@ struct Client_UI_Agent_OpenMapInfo;
 struct Client_UI_Agent_GcArmyExpeditionData;
 struct Client_UI_Agent_MissionInfo;
 struct Client_UI_Agent_GrandCompanyItem;
-struct Client_UI_Agent_HudPartyMemberEnmity;
 struct Client_UI_Agent_LobbyDataCenterWorldEntry;
 struct Client_UI_Agent_LobbySubscriptionInfo;
 struct Client_UI_Agent_MiragePlateItem;
@@ -1542,6 +1559,7 @@ struct Component_GUI_AtkCursor;
 struct Component_GUI_AtkDragDropManager;
 struct Component_GUI_AtkEventDispatcher;
 struct StdVectorComponentGUIAtkEventPtr;
+struct Component_GUI_AtkFontCodeModule;
 struct Component_GUI_AtkImageNode;
 struct Component_GUI_AtkImageNodeVTable;
 struct Component_GUI_AtkInputManager;
@@ -1935,6 +1953,28 @@ enum Client_Game_GcArmyMemberFlag /* Size=0x1 */
     OnSquadronMission = 1,
     InTraining = 2,
     ReturnedFromMission = 4
+};
+
+enum Client_Game_GoldSaucer_GFateDirectorFlag /* Size=0x4 */
+{
+    IsJoined = 1,
+    IsFinished = 2,
+    Unk2 = 4,
+    Unk3 = 8,
+    Unk4 = 16,
+    Unk5 = 32
+};
+
+enum Client_Game_GoldSaucerFlag /* Size=0x1 */
+{
+    Unk0 = 1,
+    ChocoboRaceTutorialClear = 2,
+    Unk2 = 4,
+    Unk3 = 8,
+    Unk4 = 16,
+    ChocoboRaceAllOpen = 32,
+    Unk6 = 64,
+    Unk7 = 128
 };
 
 enum Client_Game_Housing_ApartmentBuildingState /* Size=0x1 */
@@ -2742,6 +2782,12 @@ enum Client_UI_Agent_AgentId /* Size=0x4 */
     ChocoboRace = 169,
     GoldSaucerMiniGame = 171,
     TrippleTriad = 172,
+    TripleTriadRuleAnnounce = 173,
+    TripleTriadRuleSetting = 174,
+    TripleTriadSchedule = 176,
+    TripleTriadRanking = 177,
+    TripleTriadTournamentResult = 178,
+    TripleTriadTournamentMatchList = 179,
     LotteryDaily = 180,
     AetherialWheel = 181,
     LotteryWeekly = 182,
@@ -6324,6 +6370,39 @@ __unaligned struct Client_Game_Control_InputManager /* Size=0x8 */
     /*     */ byte _gap_0x0[0x8];
 };
 
+__unaligned struct Client_Game_CSBonusManager /* Size=0x178 */
+{
+    /*       */ byte _gap_0x0[0x8];
+    /* 0x008 */ unsigned __int16 State;
+    /*       */ byte _gap_0xA[0x2];
+    /* 0x00C */ unsigned __int32 BaseTime;
+    /* 0x010 */ unsigned __int32 SeasonTarget;
+    /* 0x014 */ byte IsOpenShop;
+    /* 0x015 */ byte IsOpenMission;
+    /*       */ byte _gap_0x16[0x2];
+    /* 0x018 */ unsigned __int32 SeedBase;
+    /*       */ byte _gap_0x1C[0x4];
+    /*       */ byte _gap_0x20[0x8];
+    /*       */ byte _gap_0x28[0x4];
+    /* 0x02C */ byte WBAchieveFlag[0x14];
+    /* 0x040 */ byte PMAchieveFlag[0x14];
+    /* 0x054 */ byte MMAchieveFlag[0x4];
+    /*       */ byte _gap_0x58[0x20];
+    /*       */ byte _gap_0x78[0x4];
+    /* 0x07C */ byte WBReceiveFlag[0x14];
+    /* 0x090 */ byte PMReceiveFlag[0x14];
+    /* 0x0A4 */ byte MMReceiveFlag[0x4];
+    /*       */ byte _gap_0xA8[0x10];
+    /*       */ byte _gap_0xB8[0x2];
+    /* 0x0BA */ byte WBCount;
+    /*       */ byte _gap_0xBB;
+    /* 0x0BC */ byte PMCount;
+    /*       */ byte _gap_0xBD;
+    /* 0x0BE */ byte MMCount;
+    /*       */ byte _gap_0xBF;
+    /*       */ byte _gap_0xC0[0xB8];
+};
+
 __unaligned struct Client_Game_CurrencyManager_SpecialCurrencyItem /* Size=0x20 */
 {
     /* 0x00 */ byte SpecialId;
@@ -6711,6 +6790,12 @@ __unaligned struct Client_Game_Event_EventFramework /* Size=0x3C10 */
     /*        */ byte _gap_0x3408[0x30];
     /* 0x3438 */ Client_Game_Event_EventState EventState2;
     /*        */ byte _gap_0x3468[0x7A8];
+};
+
+__unaligned struct Client_Game_Event_GoldSaucerDirector /* Size=0x678 */
+{
+    /* 0x000 */ Client_Game_Event_Director Director;
+    /*       */ byte _gap_0x4B8[0x1C0];
 };
 
 __unaligned struct System_Numerics_Vector3 /* Size=0x0 */
@@ -7167,6 +7252,347 @@ __unaligned struct Client_Game_GcArmyManager /* Size=0x10 */
     /* 0x00 */ Client_Game_GcArmyData* Data;
     /* 0x08 */ unsigned __int32 LastMissionCompleteNotificationTimestamp;
     /* 0x0C */ unsigned __int32 LastTrainingCompleteNotificationTimestamp;
+};
+
+struct Client_Game_GoldSaucer_GFateDirectorVTable
+{
+    /*       */ __int64 _vf0;
+    /*       */ __int64 _vf1;
+    /*       */ __int64 _vf2;
+    /* 0x018 */ bool (__fastcall *IsRunningGate)(Client_Game_GoldSaucer_GFateDirector* a1);
+    /*       */ __int64 _vf4;
+    /*       */ __int64 _vf5;
+    /*       */ __int64 _vf6;
+    /*       */ __int64 _vf7;
+    /*       */ __int64 _vf8;
+    /*       */ __int64 _vf9;
+    /*       */ __int64 _vf10;
+    /*       */ __int64 _vf11;
+    /*       */ __int64 _vf12;
+    /*       */ __int64 _vf13;
+    /*       */ __int64 _vf14;
+    /*       */ __int64 _vf15;
+    /*       */ __int64 _vf16;
+    /*       */ __int64 _vf17;
+    /*       */ __int64 _vf18;
+    /*       */ __int64 _vf19;
+    /*       */ __int64 _vf20;
+    /*       */ __int64 _vf21;
+    /*       */ __int64 _vf22;
+    /*       */ __int64 _vf23;
+    /*       */ __int64 _vf24;
+    /*       */ __int64 _vf25;
+    /*       */ __int64 _vf26;
+    /*       */ __int64 _vf27;
+    /*       */ __int64 _vf28;
+    /*       */ __int64 _vf29;
+    /*       */ __int64 _vf30;
+    /*       */ __int64 _vf31;
+    /*       */ __int64 _vf32;
+    /*       */ __int64 _vf33;
+    /*       */ __int64 _vf34;
+    /*       */ __int64 _vf35;
+    /*       */ __int64 _vf36;
+    /*       */ __int64 _vf37;
+    /*       */ __int64 _vf38;
+    /*       */ __int64 _vf39;
+    /*       */ __int64 _vf40;
+    /*       */ __int64 _vf41;
+    /*       */ __int64 _vf42;
+    /*       */ __int64 _vf43;
+    /*       */ __int64 _vf44;
+    /*       */ __int64 _vf45;
+    /*       */ __int64 _vf46;
+    /*       */ __int64 _vf47;
+    /*       */ __int64 _vf48;
+    /*       */ __int64 _vf49;
+    /*       */ __int64 _vf50;
+    /*       */ __int64 _vf51;
+    /*       */ __int64 _vf52;
+    /*       */ __int64 _vf53;
+    /*       */ __int64 _vf54;
+    /*       */ __int64 _vf55;
+    /*       */ __int64 _vf56;
+    /*       */ __int64 _vf57;
+    /*       */ __int64 _vf58;
+    /*       */ __int64 _vf59;
+    /*       */ __int64 _vf60;
+    /*       */ __int64 _vf61;
+    /*       */ __int64 _vf62;
+    /*       */ __int64 _vf63;
+    /*       */ __int64 _vf64;
+    /*       */ __int64 _vf65;
+    /*       */ __int64 _vf66;
+    /*       */ __int64 _vf67;
+    /*       */ __int64 _vf68;
+    /*       */ __int64 _vf69;
+    /*       */ __int64 _vf70;
+    /*       */ __int64 _vf71;
+    /*       */ __int64 _vf72;
+    /*       */ __int64 _vf73;
+    /*       */ __int64 _vf74;
+    /*       */ __int64 _vf75;
+    /*       */ __int64 _vf76;
+    /*       */ __int64 _vf77;
+    /*       */ __int64 _vf78;
+    /*       */ __int64 _vf79;
+    /*       */ __int64 _vf80;
+    /*       */ __int64 _vf81;
+    /*       */ __int64 _vf82;
+    /*       */ __int64 _vf83;
+    /*       */ __int64 _vf84;
+    /*       */ __int64 _vf85;
+    /*       */ __int64 _vf86;
+    /*       */ __int64 _vf87;
+    /*       */ __int64 _vf88;
+    /*       */ __int64 _vf89;
+    /*       */ __int64 _vf90;
+    /*       */ __int64 _vf91;
+    /*       */ __int64 _vf92;
+    /*       */ __int64 _vf93;
+    /*       */ __int64 _vf94;
+    /*       */ __int64 _vf95;
+    /*       */ __int64 _vf96;
+    /*       */ __int64 _vf97;
+    /*       */ __int64 _vf98;
+    /*       */ __int64 _vf99;
+    /*       */ __int64 _vf100;
+    /*       */ __int64 _vf101;
+    /*       */ __int64 _vf102;
+    /*       */ __int64 _vf103;
+    /*       */ __int64 _vf104;
+    /*       */ __int64 _vf105;
+    /*       */ __int64 _vf106;
+    /*       */ __int64 _vf107;
+    /*       */ __int64 _vf108;
+    /*       */ __int64 _vf109;
+    /*       */ __int64 _vf110;
+    /*       */ __int64 _vf111;
+    /*       */ __int64 _vf112;
+    /*       */ __int64 _vf113;
+    /*       */ __int64 _vf114;
+    /*       */ __int64 _vf115;
+    /*       */ __int64 _vf116;
+    /*       */ __int64 _vf117;
+    /*       */ __int64 _vf118;
+    /*       */ __int64 _vf119;
+    /*       */ __int64 _vf120;
+    /*       */ __int64 _vf121;
+    /*       */ __int64 _vf122;
+    /*       */ __int64 _vf123;
+    /*       */ __int64 _vf124;
+    /*       */ __int64 _vf125;
+    /*       */ __int64 _vf126;
+    /*       */ __int64 _vf127;
+    /*       */ __int64 _vf128;
+    /*       */ __int64 _vf129;
+    /*       */ __int64 _vf130;
+    /*       */ __int64 _vf131;
+    /*       */ __int64 _vf132;
+    /*       */ __int64 _vf133;
+    /*       */ __int64 _vf134;
+    /*       */ __int64 _vf135;
+    /*       */ __int64 _vf136;
+    /*       */ __int64 _vf137;
+    /*       */ __int64 _vf138;
+    /*       */ __int64 _vf139;
+    /*       */ __int64 _vf140;
+    /*       */ __int64 _vf141;
+    /*       */ __int64 _vf142;
+    /*       */ __int64 _vf143;
+    /*       */ __int64 _vf144;
+    /*       */ __int64 _vf145;
+    /*       */ __int64 _vf146;
+    /*       */ __int64 _vf147;
+    /*       */ __int64 _vf148;
+    /*       */ __int64 _vf149;
+    /*       */ __int64 _vf150;
+    /*       */ __int64 _vf151;
+    /*       */ __int64 _vf152;
+    /*       */ __int64 _vf153;
+    /*       */ __int64 _vf154;
+    /*       */ __int64 _vf155;
+    /*       */ __int64 _vf156;
+    /*       */ __int64 _vf157;
+    /*       */ __int64 _vf158;
+    /*       */ __int64 _vf159;
+    /*       */ __int64 _vf160;
+    /*       */ __int64 _vf161;
+    /*       */ __int64 _vf162;
+    /*       */ __int64 _vf163;
+    /*       */ __int64 _vf164;
+    /*       */ __int64 _vf165;
+    /*       */ __int64 _vf166;
+    /*       */ __int64 _vf167;
+    /*       */ __int64 _vf168;
+    /*       */ __int64 _vf169;
+    /*       */ __int64 _vf170;
+    /*       */ __int64 _vf171;
+    /*       */ __int64 _vf172;
+    /*       */ __int64 _vf173;
+    /*       */ __int64 _vf174;
+    /*       */ __int64 _vf175;
+    /*       */ __int64 _vf176;
+    /*       */ __int64 _vf177;
+    /*       */ __int64 _vf178;
+    /*       */ __int64 _vf179;
+    /*       */ __int64 _vf180;
+    /*       */ __int64 _vf181;
+    /*       */ __int64 _vf182;
+    /*       */ __int64 _vf183;
+    /*       */ __int64 _vf184;
+    /*       */ __int64 _vf185;
+    /*       */ __int64 _vf186;
+    /*       */ __int64 _vf187;
+    /*       */ __int64 _vf188;
+    /*       */ __int64 _vf189;
+    /*       */ __int64 _vf190;
+    /*       */ __int64 _vf191;
+    /*       */ __int64 _vf192;
+    /*       */ __int64 _vf193;
+    /*       */ __int64 _vf194;
+    /*       */ __int64 _vf195;
+    /*       */ __int64 _vf196;
+    /*       */ __int64 _vf197;
+    /*       */ __int64 _vf198;
+    /*       */ __int64 _vf199;
+    /*       */ __int64 _vf200;
+    /*       */ __int64 _vf201;
+    /*       */ __int64 _vf202;
+    /*       */ __int64 _vf203;
+    /*       */ __int64 _vf204;
+    /*       */ __int64 _vf205;
+    /*       */ __int64 _vf206;
+    /*       */ __int64 _vf207;
+    /*       */ __int64 _vf208;
+    /*       */ __int64 _vf209;
+    /*       */ __int64 _vf210;
+    /*       */ __int64 _vf211;
+    /*       */ __int64 _vf212;
+    /*       */ __int64 _vf213;
+    /*       */ __int64 _vf214;
+    /*       */ __int64 _vf215;
+    /*       */ __int64 _vf216;
+    /*       */ __int64 _vf217;
+    /*       */ __int64 _vf218;
+    /*       */ __int64 _vf219;
+    /*       */ __int64 _vf220;
+    /*       */ __int64 _vf221;
+    /*       */ __int64 _vf222;
+    /*       */ __int64 _vf223;
+    /*       */ __int64 _vf224;
+    /*       */ __int64 _vf225;
+    /*       */ __int64 _vf226;
+    /*       */ __int64 _vf227;
+    /*       */ __int64 _vf228;
+    /*       */ __int64 _vf229;
+    /*       */ __int64 _vf230;
+    /*       */ __int64 _vf231;
+    /*       */ __int64 _vf232;
+    /*       */ __int64 _vf233;
+    /*       */ __int64 _vf234;
+    /*       */ __int64 _vf235;
+    /*       */ __int64 _vf236;
+    /*       */ __int64 _vf237;
+    /*       */ __int64 _vf238;
+    /*       */ __int64 _vf239;
+    /*       */ __int64 _vf240;
+    /*       */ __int64 _vf241;
+    /*       */ __int64 _vf242;
+    /*       */ __int64 _vf243;
+    /*       */ __int64 _vf244;
+    /*       */ __int64 _vf245;
+    /*       */ __int64 _vf246;
+    /*       */ __int64 _vf247;
+    /*       */ __int64 _vf248;
+    /*       */ __int64 _vf249;
+    /*       */ __int64 _vf250;
+    /*       */ __int64 _vf251;
+    /*       */ __int64 _vf252;
+    /*       */ __int64 _vf253;
+    /*       */ __int64 _vf254;
+    /*       */ __int64 _vf255;
+    /*       */ __int64 _vf256;
+    /*       */ __int64 _vf257;
+    /*       */ __int64 _vf258;
+    /*       */ __int64 _vf259;
+    /*       */ __int64 _vf260;
+    /*       */ __int64 _vf261;
+    /*       */ __int64 _vf262;
+    /*       */ __int64 _vf263;
+    /*       */ __int64 _vf264;
+    /*       */ __int64 _vf265;
+    /*       */ __int64 _vf266;
+    /*       */ __int64 _vf267;
+    /*       */ __int64 _vf268;
+    /*       */ __int64 _vf269;
+    /*       */ __int64 _vf270;
+    /*       */ __int64 _vf271;
+    /*       */ __int64 _vf272;
+    /*       */ __int64 _vf273;
+    /*       */ __int64 _vf274;
+    /*       */ __int64 _vf275;
+    /*       */ __int64 _vf276;
+    /*       */ __int64 _vf277;
+    /*       */ __int64 _vf278;
+    /*       */ __int64 _vf279;
+    /*       */ __int64 _vf280;
+    /*       */ __int64 _vf281;
+    /*       */ __int64 _vf282;
+    /*       */ __int64 _vf283;
+    /*       */ __int64 _vf284;
+    /*       */ __int64 _vf285;
+    /*       */ __int64 _vf286;
+    /*       */ __int64 _vf287;
+    /*       */ __int64 _vf288;
+    /*       */ __int64 _vf289;
+    /*       */ __int64 _vf290;
+    /*       */ __int64 _vf291;
+    /*       */ __int64 _vf292;
+    /*       */ __int64 _vf293;
+    /* 0x930 */ bool (__fastcall *IsAcceptingGate)(Client_Game_GoldSaucer_GFateDirector* a1);
+};
+
+__unaligned struct Client_Game_GoldSaucer_GFateDirector /* Size=0x808 */
+{
+    union {
+    /* 0x000 */ Client_Game_GoldSaucer_GFateDirectorVTable* VTable;
+    /* 0x000 */ Client_Game_Event_GoldSaucerDirector GoldSaucerDirector;
+    } _union_0x0;
+    /* 0x678 */ Client_System_String_Utf8String MapMarkerTooltipText;
+    /* 0x6E0 */ unsigned __int32 MapMarkerLevelId;
+    /*       */ byte _gap_0x6E4[0x4];
+    /* 0x6E8 */ unsigned __int32 MapMarkerIconId;
+    /*       */ byte _gap_0x6EC[0x4];
+    /*       */ byte _gap_0x6F0[0x70];
+    /* 0x760 */ unsigned __int32 ObjectIds[0x20];
+    /* 0x7E0 */ unsigned __int32 EndTimestamp;
+    /*       */ byte _gap_0x7E4[0x4];
+    /*       */ byte _gap_0x7E8[0x4];
+    /* 0x7EC */ unsigned __int16 BgmId;
+    /*       */ byte _gap_0x7EE[0x2];
+    /* 0x7F0 */ unsigned __int16 ScreenImageId1;
+    /* 0x7F2 */ unsigned __int16 ScreenImageId2;
+    /* 0x7F4 */ unsigned __int16 ScreenImageId3;
+    /* 0x7F6 */ byte GateType;
+    /* 0x7F7 */ byte GatePositionType;
+    /*       */ byte _gap_0x7F8[0x4];
+    /* 0x7FC */ Client_Game_GoldSaucer_GFateDirectorFlag Flags;
+    /*       */ byte _gap_0x800[0x8];
+};
+
+__unaligned struct Client_Game_GoldSaucerManager /* Size=0x68 */
+{
+    /*      */ byte _gap_0x0[0x28];
+    /* 0x28 */ Client_Game_GoldSaucer_GFateDirector* CurrentGFateDirector;
+    /*      */ byte _gap_0x30[0x20];
+    /* 0x50 */ unsigned __int32 WeeklyLotOffsetTime;
+    /*      */ byte _gap_0x54[0x4];
+    /* 0x58 */ Client_Game_GoldSaucerFlag Flags;
+    /*      */ byte _gap_0x59;
+    /*      */ byte _gap_0x5A[0x2];
+    /*      */ byte _gap_0x5C[0x4];
+    /*      */ byte _gap_0x60[0x8];
 };
 
 __unaligned struct Client_Game_Group_PartyMember /* Size=0x390 */
@@ -10961,6 +11387,15 @@ __unaligned struct Client_Graphics_Environment_EnvManager /* Size=0x910 */
     /*       */ byte _gap_0x8F8[0x18];
 };
 
+__unaligned struct Client_Graphics_JobSystem /* Size=0xC0 */
+{
+    /* 0x00 */ void* Vtbl;
+    /*      */ byte _gap_0x8[0x18];
+    /* 0x20 */ void* CallbackThisArg;
+    /* 0x28 */ void (__fastcall *CallbackFunction)(void* a1, void* a2);
+    /*      */ byte _gap_0x30[0x90];
+};
+
 __unaligned struct Client_Graphics_Kernel_ConstantBuffer /* Size=0x70 */
 {
     /*      */ byte _gap_0x0[0x20];
@@ -11017,9 +11452,16 @@ __unaligned struct Client_Graphics_Kernel_Notifier /* Size=0x18 */
     /* 0x10 */ Client_Graphics_Kernel_Notifier* Prev;
 };
 
+__unaligned struct Client_Graphics_Kernel_Shader /* Size=0x20 */
+{
+    /* 0x00 */ void* Vtbl;
+    /*      */ byte _gap_0x8[0x18];
+};
+
 __unaligned struct Client_Graphics_Kernel_PVShader /* Size=0x60 */
 {
-    /*      */ byte _gap_0x0[0x28];
+    /* 0x00 */ Client_Graphics_Kernel_Shader Shader;
+    /*      */ byte _gap_0x20[0x8];
     /* 0x28 */ Client_Graphics_Kernel_PVShader_ResourceEntry* ConstantBuffers;
     /* 0x30 */ Client_Graphics_Kernel_PVShader_ResourceEntry* Samplers;
     /* 0x38 */ Client_Graphics_Kernel_PVShader_ResourceEntry* Unknowns;
@@ -11171,6 +11613,20 @@ __unaligned struct Client_Graphics_Kernel_ShaderPackage_MaterialElement /* Size=
     /* 0x6 */ unsigned __int16 Size;
 };
 
+__unaligned struct Client_Graphics_Kernel_ShaderSceneKey /* Size=0x10 */
+{
+    /* 0x00 */ void* Vtbl;
+    /* 0x08 */ unsigned __int32 KeyCRC;
+    /* 0x0C */ unsigned __int32 ValueCRC;
+};
+
+__unaligned struct Client_Graphics_Kernel_ShaderSubViewKey /* Size=0x10 */
+{
+    /* 0x00 */ void* Vtbl;
+    /* 0x08 */ unsigned __int32 KeyCRC;
+    /* 0x0C */ unsigned __int32 ValueCRC;
+};
+
 __unaligned struct Client_Graphics_Kernel_SwapChain /* Size=0x70 */
 {
     /*      */ byte _gap_0x0[0x38];
@@ -11303,11 +11759,35 @@ __unaligned struct Client_Graphics_Render_View /* Size=0x5A0 */
     /* 0x020 */ Client_Graphics_Render_SubView SubViewArray[0x10];
 };
 
+__unaligned struct Client_Graphics_Render_ModelRenderer /* Size=0x228 */
+{
+    /* 0x000 */ void* Vtbl;
+    /* 0x008 */ unsigned __int32 LightDirectionId;
+    /* 0x00C */ unsigned __int32 WorldViewMatrixId;
+    /* 0x010 */ unsigned __int32 JointMatrixArrayId;
+    /* 0x014 */ unsigned __int32 SelectionModelParameterId;
+    /* 0x018 */ unsigned __int32 SamplerNormalId;
+    /* 0x01C */ unsigned __int32 SamplerIndexId;
+    /* 0x020 */ unsigned __int32 SamplerViewPositionId;
+    /*       */ byte _gap_0x24[0x4];
+    /* 0x028 */ Client_Graphics_Kernel_ShaderSceneKey SceneKeys[0x6];
+    /* 0x088 */ Client_Graphics_Kernel_ShaderSubViewKey SubViewKeys[0x3];
+    /* 0x0B8 */ Client_System_Resource_Handle_ShaderCodeResourceHandle* CharacterSelectionModelVS;
+    /* 0x0C0 */ Client_System_Resource_Handle_ShaderCodeResourceHandle* CharacterSelectionModelPS;
+    /* 0x0C8 */ Client_System_Resource_Handle_TextureResourceHandle* DitherTexture;
+    /* 0x0D0 */ Client_System_Resource_Handle_ShaderPackageResourceHandle* CharacterGlassShaderPackage;
+    /* 0x0D8 */ Client_System_Resource_Handle_ShaderCodeResourceHandle* CharacterMultiViewportGS;
+    /*       */ byte _gap_0xE0[0x88];
+    /* 0x168 */ Client_Graphics_JobSystem JobSystem;
+};
+
 __unaligned struct Client_Graphics_Render_Manager /* Size=0x2D750 */
 {
     /* 0x00000 */ void* Vtbl;
     /* 0x00008 */ Client_Graphics_Render_View ViewArray[0x20];
-    /*         */ byte _gap_0xB408[0x22348];
+    /*         */ byte _gap_0xB408[0x8258];
+    /* 0x13660 */ Client_Graphics_Render_ModelRenderer ModelRenderer;
+    /*         */ byte _gap_0x13888[0x19EC8];
 };
 
 __unaligned struct Client_Graphics_Render_Material /* Size=0x40 */
@@ -11343,7 +11823,8 @@ __unaligned struct Client_Graphics_Render_Model /* Size=0xF0 */
     /* 0x30 */ Client_System_Resource_Handle_ModelResourceHandle* ModelResourceHandle;
     /*      */ byte _gap_0x38[0x8];
     /* 0x40 */ Client_Graphics_Render_Skeleton* Skeleton;
-    /*      */ byte _gap_0x48[0x10];
+    /* 0x48 */ Client_Graphics_Render_ModelRenderer_Callback* RenderModelCallback;
+    /* 0x50 */ Client_Graphics_Render_ModelRenderer_Callback* RenderMaterialCallback;
     /* 0x58 */ void** BoneList;
     /* 0x60 */ __int32 BoneCount;
     /*      */ byte _gap_0x64[0x4];
@@ -11354,6 +11835,28 @@ __unaligned struct Client_Graphics_Render_Model /* Size=0xF0 */
     /*      */ byte _gap_0xA8[0x40];
     /* 0xE8 */ unsigned __int32 SlotIndex;
     /*      */ byte _gap_0xEC[0x4];
+};
+
+__unaligned struct Client_Graphics_Render_ModelRenderer_Callback /* Size=0x20 */
+{
+    /* 0x00 */ void* Function;
+    /* 0x08 */ void* ThisArg;
+    /* 0x10 */ void* SubFunction;
+    /*      */ byte _gap_0x18[0x8];
+};
+
+__unaligned struct Client_Graphics_Render_ModelRenderer_OnRenderMaterialParams /* Size=0x18 */
+{
+    /* 0x00 */ Client_Graphics_Render_Model* Model;
+    /* 0x08 */ unsigned __int32 MaterialIndex;
+    /*      */ byte _gap_0xC[0x4];
+    /* 0x10 */ unsigned __int16* OutFlags;
+};
+
+__unaligned struct Client_Graphics_Render_ModelRenderer_OnRenderModelParams /* Size=0x20 */
+{
+    /* 0x00 */ Client_Graphics_Render_Model* Model;
+    /*      */ byte _gap_0x8[0x18];
 };
 
 __unaligned struct Client_Graphics_Render_OffscreenRenderingManager /* Size=0x190 */
@@ -11530,8 +12033,8 @@ struct Client_Graphics_Scene_CharacterBaseVTable
     /*       */ __int64 _vf58;
     /*       */ __int64 _vf59;
     /*       */ __int64 _vf60;
-    /*       */ __int64 _vf61;
-    /*       */ __int64 _vf62;
+    /* 0x1E8 */ __int64 (__fastcall *OnRenderModel)(Client_Graphics_Scene_CharacterBase* a1, Client_Graphics_Render_Model* a2);
+    /* 0x1F0 */ __int64 (__fastcall *OnRenderMaterial)(Client_Graphics_Scene_CharacterBase* a1, Client_Graphics_Render_ModelRenderer_OnRenderMaterialParams* a2);
     /*       */ __int64 _vf63;
     /*       */ __int64 _vf64;
     /*       */ __int64 _vf65;
@@ -11578,16 +12081,18 @@ __unaligned struct Client_Graphics_Scene_CharacterBase /* Size=0x8F0 */
     /* 0x090 */ byte UnkFlags_01;
     /* 0x091 */ byte UnkFlags_02;
     /* 0x092 */ byte UnkFlags_03;
+    /* 0x098 */ __int32 SlotCount;
+    /* 0x0A0 */ Client_Graphics_Render_Skeleton* Skeleton;
     } _union_struct_0x0;
     } _union_0x0;
-    /* 0x098 */ __int32 SlotCount;
-    /*       */ byte _gap_0x9C[0x4];
-    /* 0x0A0 */ Client_Graphics_Render_Skeleton* Skeleton;
     /* 0x0A8 */ Client_Graphics_Render_Model** Models;
     /*       */ byte _gap_0xB0[0x98];
     /* 0x148 */ void* PostBoneDeformer;
     /* 0x150 */ Client_Graphics_Physics_BonePhysicsModule* BonePhysicsModule;
-    /*       */ byte _gap_0x158[0xC8];
+    /* 0x158 */ Client_Graphics_Render_ModelRenderer_Callback RenderModelCallback;
+    /* 0x178 */ Client_Graphics_Render_ModelRenderer_Callback RenderMaterialCallback;
+    /* 0x198 */ Client_Graphics_Render_ModelRenderer_Callback UnkCallback3;
+    /*       */ byte _gap_0x1B8[0x68];
     /*       */ byte _gap_0x220[0x4];
     /* 0x224 */ float VfxScale;
     /*       */ byte _gap_0x228[0x18];
@@ -11774,8 +12279,8 @@ struct Client_Graphics_Scene_DemihumanVTable
     /*       */ __int64 _vf58;
     /*       */ __int64 _vf59;
     /*       */ __int64 _vf60;
-    /*       */ __int64 _vf61;
-    /*       */ __int64 _vf62;
+    /* 0x1E8 */ __int64 (__fastcall *OnRenderModel)(Client_Graphics_Scene_CharacterBase* a1, Client_Graphics_Render_Model* a2);
+    /* 0x1F0 */ __int64 (__fastcall *OnRenderMaterial)(Client_Graphics_Scene_CharacterBase* a1, Client_Graphics_Render_ModelRenderer_OnRenderMaterialParams* a2);
     /*       */ __int64 _vf63;
     /*       */ __int64 _vf64;
     /*       */ __int64 _vf65;
@@ -11943,8 +12448,8 @@ struct Client_Graphics_Scene_HumanVTable
     /*       */ __int64 _vf58;
     /*       */ __int64 _vf59;
     /*       */ __int64 _vf60;
-    /*       */ __int64 _vf61;
-    /*       */ __int64 _vf62;
+    /* 0x1E8 */ __int64 (__fastcall *OnRenderModel)(Client_Graphics_Scene_CharacterBase* a1, Client_Graphics_Render_Model* a2);
+    /* 0x1F0 */ __int64 (__fastcall *OnRenderMaterial)(Client_Graphics_Scene_CharacterBase* a1, Client_Graphics_Render_ModelRenderer_OnRenderMaterialParams* a2);
     /*       */ __int64 _vf63;
     /*       */ __int64 _vf64;
     /*       */ __int64 _vf65;
@@ -12098,8 +12603,8 @@ struct Client_Graphics_Scene_MonsterVTable
     /*       */ __int64 _vf58;
     /*       */ __int64 _vf59;
     /*       */ __int64 _vf60;
-    /*       */ __int64 _vf61;
-    /*       */ __int64 _vf62;
+    /* 0x1E8 */ __int64 (__fastcall *OnRenderModel)(Client_Graphics_Scene_CharacterBase* a1, Client_Graphics_Render_Model* a2);
+    /* 0x1F0 */ __int64 (__fastcall *OnRenderMaterial)(Client_Graphics_Scene_CharacterBase* a1, Client_Graphics_Render_ModelRenderer_OnRenderMaterialParams* a2);
     /*       */ __int64 _vf63;
     /*       */ __int64 _vf64;
     /*       */ __int64 _vf65;
@@ -12229,8 +12734,8 @@ struct Client_Graphics_Scene_WeaponVTable
     /*       */ __int64 _vf58;
     /*       */ __int64 _vf59;
     /*       */ __int64 _vf60;
-    /*       */ __int64 _vf61;
-    /*       */ __int64 _vf62;
+    /* 0x1E8 */ __int64 (__fastcall *OnRenderModel)(Client_Graphics_Scene_CharacterBase* a1, Client_Graphics_Render_Model* a2);
+    /* 0x1F0 */ __int64 (__fastcall *OnRenderMaterial)(Client_Graphics_Scene_CharacterBase* a1, Client_Graphics_Render_ModelRenderer_OnRenderMaterialParams* a2);
     /*       */ __int64 _vf63;
     /*       */ __int64 _vf64;
     /*       */ __int64 _vf65;
@@ -13136,6 +13641,54 @@ __unaligned struct Client_System_Resource_Handle_ModelResourceHandle /* Size=0x2
     /*       */ byte _gap_0x218[0x10];
     /* 0x228 */ StdMapBytePtrint16 Shapes;
     /*       */ byte _gap_0x238[0x28];
+};
+
+struct Client_System_Resource_Handle_ShaderCodeResourceHandleVTable
+{
+    /*       */ __int64 _vf0;
+    /*       */ __int64 _vf1;
+    /*       */ __int64 _vf2;
+    /*       */ __int64 _vf3;
+    /*       */ __int64 _vf4;
+    /*       */ __int64 _vf5;
+    /* 0x030 */ byte (__fastcall *GetUserData)(Client_System_Resource_Handle_ResourceHandle* a1);
+    /*       */ __int64 _vf7;
+    /*       */ __int64 _vf8;
+    /*       */ __int64 _vf9;
+    /*       */ __int64 _vf10;
+    /*       */ __int64 _vf11;
+    /*       */ __int64 _vf12;
+    /*       */ __int64 _vf13;
+    /*       */ __int64 _vf14;
+    /*       */ __int64 _vf15;
+    /*       */ __int64 _vf16;
+    /* 0x088 */ unsigned __int64 (__fastcall *GetLength)(Client_System_Resource_Handle_ResourceHandle* a1);
+    /*       */ __int64 _vf18;
+    /*       */ __int64 _vf19;
+    /*       */ __int64 _vf20;
+    /*       */ __int64 _vf21;
+    /*       */ __int64 _vf22;
+    /* 0x0B8 */ byte* (__fastcall *GetData)(Client_System_Resource_Handle_ResourceHandle* a1);
+    /*       */ __int64 _vf24;
+    /*       */ __int64 _vf25;
+    /*       */ __int64 _vf26;
+    /*       */ __int64 _vf27;
+    /*       */ __int64 _vf28;
+    /*       */ __int64 _vf29;
+    /*       */ __int64 _vf30;
+    /* 0x0F8 */ bool (__fastcall *LoadIntoKernel)(Client_System_Resource_Handle_ResourceHandle* a1);
+    /*       */ __int64 _vf32;
+    /* 0x108 */ bool (__fastcall *Load)(Client_System_Resource_Handle_ResourceHandle* a1, void* a2, bool a3);
+};
+
+__unaligned struct Client_System_Resource_Handle_ShaderCodeResourceHandle /* Size=0xC0 */
+{
+    union {
+    /* 0x00 */ Client_System_Resource_Handle_ShaderCodeResourceHandleVTable* VTable;
+    /* 0x00 */ Client_System_Resource_Handle_ResourceHandle ResourceHandle;
+    } _union_0x0;
+    /* 0xB0 */ Client_Graphics_Kernel_Shader* Shader;
+    /*      */ byte _gap_0xB8[0x8];
 };
 
 struct Client_System_Resource_Handle_ShaderPackageResourceHandleVTable
@@ -27842,13 +28395,69 @@ __unaligned struct Client_UI_Agent_HudPartyMember /* Size=0x20 */
     /*      */ byte _gap_0x1C[0x4];
 };
 
+__unaligned struct Client_UI_Agent_HudPartyMemberEnmity /* Size=0xC */
+{
+    /* 0x0 */ unsigned __int32 ObjectId;
+    /* 0x4 */ __int32 Enmity;
+    /* 0x8 */ __int32 Index;
+};
+
+__unaligned struct Client_UI_Agent_MapMarkerBase /* Size=0x38 */
+{
+    /* 0x00 */ byte SubtextOrientation;
+    /* 0x01 */ byte SubtextStyle;
+    /* 0x02 */ unsigned __int16 IconFlags;
+    /* 0x04 */ unsigned __int32 IconId;
+    /* 0x08 */ unsigned __int32 SecondaryIconId;
+    /* 0x0C */ __int32 Scale;
+    /* 0x10 */ byte* Subtext;
+    /* 0x18 */ byte Index;
+    /*      */ byte _gap_0x19;
+    /*      */ byte _gap_0x1A[0x2];
+    /*      */ byte _gap_0x1C[0x4];
+    /*      */ byte _gap_0x20[0x8];
+    /*      */ byte _gap_0x28[0x4];
+    /* 0x2C */ __int16 X;
+    /* 0x2E */ __int16 Y;
+    /*      */ byte _gap_0x30[0x8];
+};
+
+__unaligned struct Client_UI_Agent_HudMiniMapGatheringMarker /* Size=0xA8 */
+{
+    /* 0x00 */ Client_System_String_Utf8String TooltipText;
+    /* 0x68 */ Client_UI_Agent_MapMarkerBase MapMarker;
+    /* 0xA0 */ unsigned __int16 RecommendedLevel;
+    /* 0xA2 */ byte ShouldRender;
+    /*      */ byte _gap_0xA3;
+    /*      */ byte _gap_0xA4[0x4];
+};
+
+__unaligned struct StdVectorClientGameUIMapMarkerDataPtr /* Size=0x18 */
+{
+    /* 0x00 */ Client_Game_UI_MapMarkerData** First;
+    /* 0x08 */ Client_Game_UI_MapMarkerData** Last;
+    /* 0x10 */ Client_Game_UI_MapMarkerData** End;
+};
+
 __unaligned struct Client_UI_Agent_AgentHUD /* Size=0x4BA0 */
 {
     union {
     /* 0x0000 */ Client_UI_Agent_AgentHUDVTable* VTable;
     /* 0x0000 */ Component_GUI_AgentInterface AgentInterface;
     } _union_0x0;
-    /*        */ byte _gap_0x28[0xC90];
+    /*        */ byte _gap_0x28[0x9B0];
+    /*        */ byte _gap_0x9D8[0x4];
+    /* 0x09DC */ unsigned __int32 CurrentBattleCharaTargetLevel;
+    /*        */ byte _gap_0x9E0[0xD0];
+    /* 0x0AB0 */ unsigned __int32 CurrentTargetId;
+    /*        */ byte _gap_0xAB4[0x4];
+    /* 0x0AB8 */ __int32 TargetCounter;
+    /*        */ byte _gap_0xABC[0x4];
+    /* 0x0AC0 */ unsigned __int32 TargetPartyMemberId;
+    /*        */ byte _gap_0xAC4[0x4];
+    /* 0x0AC8 */ __int32 TargetSwitchToSelfCounter;
+    /*        */ byte _gap_0xACC[0x4];
+    /*        */ byte _gap_0xAD0[0x1E8];
     /* 0x0CB8 */ __int32 CompanionSummonTimer;
     /*        */ byte _gap_0xCBC[0x4];
     /*        */ byte _gap_0xCC0[0x8];
@@ -27860,9 +28469,15 @@ __unaligned struct Client_UI_Agent_AgentHUD /* Size=0x4BA0 */
     /* 0x12C0 */ unsigned __int32 PartyTitleAddonId;
     /* 0x12C4 */ unsigned __int32 RaidMemberIds[0x28];
     /* 0x1364 */ __int32 RaidGroupSize;
-    /*        */ byte _gap_0x1368[0x88];
-    /* 0x13F0 */ Client_UI_Agent_HudPartyMemberEnmity* PartyEnmityList;
-    /*        */ byte _gap_0x13F8[0x37A8];
+    /*        */ byte _gap_0x1368[0x10];
+    /* 0x1378 */ Client_UI_Agent_HudPartyMemberEnmity HudPartyMemberEnmityEntries[0xA];
+    /* 0x13F0 */ Client_UI_Agent_HudPartyMemberEnmity* HudPartyMemberEnmityPtrs[0xA];
+    /*        */ byte _gap_0x1440[0x26C0];
+    /* 0x3B00 */ Client_UI_Agent_HudMiniMapGatheringMarker MiniMapGatheringMarkers[0x6];
+    /*        */ byte _gap_0x3EF0[0x918];
+    /* 0x4808 */ StdVectorClientGameUIMapMarkerData MapMarkers;
+    /* 0x4820 */ StdVectorClientGameUIMapMarkerDataPtr MapMarkerPtrs;
+    /*        */ byte _gap_0x4838[0x368];
 };
 
 struct Client_UI_Agent_AgentHudLayoutVTable
@@ -28632,26 +29247,6 @@ __unaligned struct StdMapunsignedint32unsignedint32 /* Size=0x10 */
 {
     /* 0x00 */ StdMap_Nodeunsignedint32unsignedint32* Head;
     /* 0x08 */ unsigned __int64 Count;
-};
-
-__unaligned struct Client_UI_Agent_MapMarkerBase /* Size=0x38 */
-{
-    /* 0x00 */ byte SubtextOrientation;
-    /* 0x01 */ byte SubtextStyle;
-    /* 0x02 */ unsigned __int16 IconFlags;
-    /* 0x04 */ unsigned __int32 IconId;
-    /* 0x08 */ unsigned __int32 SecondaryIconId;
-    /* 0x0C */ __int32 Scale;
-    /* 0x10 */ byte* Subtext;
-    /* 0x18 */ byte Index;
-    /*      */ byte _gap_0x19;
-    /*      */ byte _gap_0x1A[0x2];
-    /*      */ byte _gap_0x1C[0x4];
-    /*      */ byte _gap_0x20[0x8];
-    /*      */ byte _gap_0x28[0x4];
-    /* 0x2C */ __int16 X;
-    /* 0x2E */ __int16 Y;
-    /*      */ byte _gap_0x30[0x8];
 };
 
 __unaligned struct Client_UI_Agent_MapMarkerInfo /* Size=0x48 */
@@ -30699,13 +31294,6 @@ __unaligned struct Client_UI_Agent_GrandCompanyItem /* Size=0xA0 */
     /* 0x9A */ byte TurnInAvailable;
     /* 0x9B */ byte Bonus;
     /*      */ byte _gap_0x9C[0x4];
-};
-
-__unaligned struct Client_UI_Agent_HudPartyMemberEnmity /* Size=0xC */
-{
-    /* 0x0 */ unsigned __int32 ObjectId;
-    /* 0x4 */ __int32 Enmity;
-    /* 0x8 */ __int32 Index;
 };
 
 __unaligned struct Client_UI_Agent_LobbyDataCenterWorldEntry /* Size=0x54 */
@@ -33172,7 +33760,8 @@ __unaligned struct Component_Text_MacroDecoder /* Size=0x60 */
 __unaligned struct Component_Text_TextChecker /* Size=0xF8 */
 {
     /* 0x00 */ Component_Text_MacroDecoder MacroDecoder;
-    /*      */ byte _gap_0x60[0x98];
+    /*      */ byte _gap_0x60[0x30];
+    /* 0x90 */ Client_System_String_Utf8String Unk90;
 };
 
 __unaligned struct Client_UI_Misc_PronounModule /* Size=0x3B0 */
@@ -33353,10 +33942,13 @@ __unaligned struct Client_UI_Misc_RaptureLogModuleTab /* Size=0x928 */
 __unaligned struct Client_UI_Misc_RaptureLogModule /* Size=0x3488 */
 {
     /* 0x0000 */ Common_Log_LogModule LogModule;
-    /*        */ byte _gap_0x80[0x68];
-    /* 0x00E8 */ Component_Excel_ExcelModuleInterface* ExcelModuleInterface;
-    /* 0x00F0 */ Client_UI_Misc_RaptureTextModule* RaptureTextModule;
-    /*        */ byte _gap_0xF8[0x438];
+    /* 0x0080 */ Client_System_String_Utf8String Unk80;
+    /* 0x00E8 */ Client_UI_UIModule* UIModule;
+    /* 0x00F0 */ Component_Excel_ExcelModuleInterface* ExcelModuleInterface;
+    /* 0x00F8 */ Client_UI_Misc_RaptureTextModule* RaptureTextModule;
+    /* 0x0100 */ Component_GUI_AtkFontCodeModule* AtkFontCodeModule;
+    /* 0x0108 */ Client_System_String_Utf8String TempParseMessage[0xA];
+    /*        */ byte _gap_0x518[0x18];
     /* 0x0530 */ Client_UI_Misc_RaptureLogModuleTab ChatTabs[0x5];
     /*        */ byte _gap_0x32F8[0xF0];
     /* 0x33E8 */ byte ChatTabsPendingReload[0x4];
@@ -33579,9 +34171,26 @@ __unaligned struct Client_UI_Misc_RaptureTextModule /* Size=0xE60 */
     /* 0x520 */ Client_UI_UIModule* UiModule;
     /* 0x528 */ Component_Text_TextChecker TextChecker;
     /* 0x620 */ Component_Excel_ExcelSheet* AddonSheet;
-    /*       */ byte _gap_0x628[0x2E0];
+    /*       */ byte _gap_0x628[0x8];
+    /* 0x630 */ Client_System_String_Utf8String Unk630;
+    /* 0x698 */ Client_System_String_Utf8String Unk698;
+    /* 0x700 */ Client_System_String_Utf8String Unk700;
+    /* 0x768 */ Client_System_String_Utf8String Unk768;
+    /* 0x7D0 */ Client_System_String_Utf8String Unk7D0;
+    /* 0x838 */ Client_System_String_Utf8String Unk838;
+    /* 0x8A0 */ Client_System_String_Utf8String Unk8A0;
     /* 0x908 */ StdDequeComponentTextTextParameter LocalTextParameters;
-    /*       */ byte _gap_0x930[0x530];
+    /*       */ byte _gap_0x930[0x28];
+    /* 0x958 */ Client_System_String_Utf8String Unk958;
+    /* 0x9C0 */ Client_System_String_Utf8String Unk9C0;
+    /* 0xA28 */ Client_System_String_Utf8String UnkA28;
+    /* 0xA90 */ Client_System_String_Utf8String UnkA90;
+    /* 0xAF8 */ Client_System_String_Utf8String UnkAF8;
+    /* 0xB60 */ Client_System_String_Utf8String UnkB60;
+    /* 0xBC8 */ Client_System_String_Utf8String UnBC8;
+    /* 0xC30 */ Client_System_String_Utf8String UnC30;
+    /* 0xC98 */ Client_System_String_Utf8String UnC98;
+    /*       */ byte _gap_0xD00[0x160];
 };
 
 struct Client_UI_Misc_RaptureUiDataModuleVTable
@@ -34083,7 +34692,11 @@ __unaligned struct Client_UI_RaptureAtkUnitManager /* Size=0x9D18 */
     /*        */ byte _gap_0x9C90[0x70];
     /* 0x9D00 */ Client_UI_UIModule_UiFlags UiFlags;
     /*        */ byte _gap_0x9D04[0x4];
-    /*        */ byte _gap_0x9D08[0x10];
+    /*        */ byte _gap_0x9D08[0x8];
+    /*        */ byte _gap_0x9D10[0x4];
+    /* 0x9D14 */ bool IsUiFading;
+    /*        */ byte _gap_0x9D15;
+    /*        */ byte _gap_0x9D16[0x2];
 };
 
 __unaligned struct Client_UI_RaptureAtkModule_NamePlateInfo /* Size=0x248 */
@@ -36202,6 +36815,12 @@ __unaligned struct Component_GUI_AtkEventDispatcher /* Size=0x28 */
     /* 0x00 */ Component_GUI_AtkEventManager* AtkEventManager;
     /* 0x08 */ StdVectorComponentGUIAtkEventPtr Events;
     /*      */ byte _gap_0x20[0x8];
+};
+
+__unaligned struct Component_GUI_AtkFontCodeModule /* Size=0x1580 */
+{
+    /* 0x0000 */ Component_Text_MacroDecoder MacroDecoder;
+    /*        */ byte _gap_0x60[0x1520];
 };
 
 struct Component_GUI_AtkImageNodeVTable
