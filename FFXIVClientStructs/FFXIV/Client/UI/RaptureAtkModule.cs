@@ -15,6 +15,8 @@ public unsafe partial struct RaptureAtkModule {
 
     [FieldOffset(0x0)] public AtkModule AtkModule;
 
+    [FieldOffset(0x82C0)] public ushort UiMode; // 0 = In Lobby, 1 = In Game
+
     [FieldOffset(0x87F7)] public AgentUpdateFlags AgentUpdateFlag; // reset happens in RaptureAtkModule_OnUpdate
     [FieldOffset(0x10D40)] public Utf8String* AddonNames; // TODO: change to StdVector<Utf8String>
 
