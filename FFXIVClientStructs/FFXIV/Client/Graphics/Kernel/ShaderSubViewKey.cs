@@ -1,10 +1,7 @@
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
 
-// Client::Graphics::Kernel::ShaderSceneKey
-// Client::Graphics::Kernel::ShaderSubViewKey
-// These two classes are nominally different, but structurally identical.
 [StructLayout(LayoutKind.Explicit, Size = Size)]
-public unsafe partial struct ShaderKey {
+public unsafe partial struct ShaderSubViewKey {
     internal const int Size = 0x10;
 
     [FieldOffset(0)] public void* Vtbl;
