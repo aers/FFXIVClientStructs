@@ -432,7 +432,7 @@ classes:
         base: Application::Network::LobbyClient::LobbyClientMixin
     funcs:
       0x1415F3870: ctor
-      0x1415F3980: dtor
+      0x1415F3980: Finalize
       0x1415F4D50: SetWorld
       0x1415F4E10: SetZone
   Application::Network::LobbyClient::LobbyRequestCallback:
@@ -1982,7 +1982,6 @@ classes:
       0x140093B40: GetUIModule
       0x140093B60: GetUIClipboard
       0x140093B70: GetUIInputData
-      0x140094620: UpdateNetworking
       0x140094A20: TaskBegin
       0x140094B60: TaskDraw2DBegin
       0x140094BA0: TaskUpdateInputDevice
@@ -3249,7 +3248,7 @@ classes:
     funcs:
       0x1401C7750: GetInstance
       0x1401C77D0: ctor
-      0x1401C7AA0: dtor
+      0x1401C7AA0: Finalize
       0x1401C8590: CreateFileThread
   Client::System::File::FileAccessPath:
     funcs:
