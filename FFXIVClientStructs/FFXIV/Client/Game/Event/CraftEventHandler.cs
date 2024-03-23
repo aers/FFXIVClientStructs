@@ -41,7 +41,7 @@ public enum CraftCondition : byte {
 
 [StructLayout(LayoutKind.Explicit, Size = 0x4C0)]
 public unsafe struct CraftEventHandler {
-    [FieldOffset(0x0)] public EventHandler Base;
+    [FieldOffset(0x0)] public EventHandler EventHandler;
     [FieldOffset(0x210)] public fixed byte RecipeExcelRow[106];
     [FieldOffset(0x320)] public Utf8String RecipeName;
     [FieldOffset(0x388)] public fixed byte RecipeLevelTableExcelRow[20];
