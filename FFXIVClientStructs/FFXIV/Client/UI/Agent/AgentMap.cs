@@ -36,7 +36,15 @@ public unsafe partial struct AgentMap {
 
     [FieldOffset(0x3860), FixedSizeArray<MapMarkerBase>(12)]
     public fixed byte WarpMarkerArray[0x38 * 12]; // 12 * MapMarkerBase
+    [Obsolete("Use MiniMapGatheringMarkersSpan")]
     [FieldOffset(0x3B00)] public fixed byte UnkArray2[0xA8 * 6];
+    /// <remarks>
+    /// 0 = mineral deposit and lush vegetation patch<br/>
+    /// 1 = legendary mineral deposit<br/>
+    /// 2 = unspoiled lush vegetation patch<br/>
+    /// </remarks>
+    [FixedSizeArray<HudMiniMapGatheringMarker>(6)]
+    [FieldOffset(0x3B00)] public fixed byte MiniMapGatheringMarkers[0xA8 * 6];
     [FieldOffset(0x3EF0), FixedSizeArray<MiniMapMarker>(100)]
     public fixed byte MiniMapMarkerArray[0x40 * 100]; // 100 * MiniMapMarker
 

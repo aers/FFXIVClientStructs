@@ -38,14 +38,6 @@ public unsafe partial struct AgentHUD {
     [Obsolete("Use HudPartyMemberEnmityEntriesSpan or HudPartyMemberEnmityPtrsSpan")]
     [FieldOffset(0x13F0)] public HudPartyMemberEnmity* PartyEnmityList;
 
-    /// <remarks>
-    /// 0 = mineral deposit and lush vegetation patch<br/>
-    /// 1 = legendary mineral deposit<br/>
-    /// 2 = unspoiled lush vegetation patch<br/>
-    /// </remarks>
-    [FixedSizeArray<HudMiniMapGatheringMarker>(6)]
-    [FieldOffset(0x3B00)] public fixed byte MiniMapGatheringMarkers[0xA8 * 6];
-
     [FieldOffset(0x4808)] public StdVector<MapMarkerData> MapMarkers;
     [FieldOffset(0x4820)] public StdVector<Pointer<MapMarkerData>> MapMarkerPtrs;
 
