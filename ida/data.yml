@@ -83,6 +83,7 @@ functions:
   0x140058500: WinMain
   0x1400581B0: std::string::ctor_FromSubStr #(other, idx, len)
   0x1400582F0: std::string::ctor_FromCharArr #(arr, len)
+  0x14165ABE0: std::_Xlength_error
   0x140185520: std::deque::_Growmap
   0x140059700: GetStdOut
   0x140059710: vsprintf_s
@@ -5789,7 +5790,7 @@ classes:
       0x140131C60: SetInteger
   std::deque<Component::Text::TextParameter>:
     funcs:
-      0x140187200: ResetMap
+      0x140187200: _Reset_map
   Client::System::Data::Bit:
     vtbls:
       - ea: 0x141A18158
