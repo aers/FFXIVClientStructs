@@ -68,11 +68,3 @@ public unsafe struct HudPartyMember {
     [FieldOffset(0x10)] public ulong ContentId;
     [FieldOffset(0x18)] public uint ObjectId;
 }
-
-[StructLayout(LayoutKind.Explicit, Size = 0xA8)]
-public struct HudMiniMapGatheringMarker {
-    [FieldOffset(0x00)] public Utf8String TooltipText;
-    [FieldOffset(0x68)] public MapMarkerBase MapMarker;
-    [FieldOffset(0xA0)] public ushort RecommendedLevel; // maybe?
-    [FieldOffset(0xA2)] public byte ShouldRender;
-}
