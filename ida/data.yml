@@ -5856,10 +5856,39 @@ classes:
       0x14066F2B0: ctor
       0x14066FF50: Finalize
       0x140670BD0: GetAddonText
-      0x140671DA0: FormatAddonText
-      0x140672050: FormatAddonText2
-      0x140676A00: FormatAddonText3
-      0x140677060: FormatAddonText4
+      0x140670C80: FormatAddonText1<string>
+      0x140670E40: FormatAddonText1<string,int>
+      0x140671110: FormatAddonText1<string,int,uint>
+      0x1406714E0: FormatAddonText1<string,string>
+      0x1406717D0: FormatAddonText1<string,string,string>
+      0x140671C00: FormatAddonText1<int>
+      0x140671DA0: FormatAddonText1<int,int>
+      0x140672050: FormatAddonText1<int,int,uint>
+      0x140672400: FormatAddonText1<int,int,uint,uint>
+      0x1406728D0: FormatAddonText1<int,string>
+      0x140672BE0: FormatAddonText2<string>
+      0x140672DA0: FormatAddonText2<string,int>
+      0x140673070: FormatAddonText2<string,int,uint>
+      0x140673440: FormatAddonText2<string,int,uint,uint>
+      0x140673920: FormatAddonText2<string,int,uint,uint,uint>
+      0x140673F10: FormatAddonText2<string,int,uint,uint,uint,uint>
+      0x140674550: FormatAddonText2<string,int,uint,uint,uint,uint,uint>
+      0x140674BE0: FormatAddonText2<string,string>
+      0x140674ED0: FormatAddonText2<string,string,string>
+      0x140675300: FormatAddonText2<string,string,uint>
+      0x140675700: FormatAddonText2<string,string,uint,uint>
+      0x140675C10: FormatAddonText2<string,string,uint,uint,uint>
+      0x140676220: FormatAddonText2<string,string,string,uint,uint>
+      0x140676860: FormatAddonText2<int>
+      0x140676A00: FormatAddonText2<int,int>
+      0x140676CB0: FormatAddonText2<int,int,uint>
+      0x140677060: FormatAddonText2<int,int,uint,uint>
+      0x140677530: FormatAddonText2<int,int,uint,uint,uint>
+      0x140677B10: FormatAddonText2<int,int,uint,uint,uint,uint>
+      0x140678140: FormatAddonText2<int,int,uint,uint,uint,uint,uint>
+      0x1406787C0: FormatAddonText2<int,string>
+      0x140678A90: FormatAddonText2<int,int,string>
+      0x140678E80: FormatAddonText2<int,string,uint>
       0x140679710: FormatTimeSpan
       0x14067AD40: Update
       0x14067B650: FormatAddonTextApply
