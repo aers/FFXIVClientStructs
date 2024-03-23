@@ -36,7 +36,15 @@ public unsafe partial struct AgentMap {
 
     [FieldOffset(0x3860), FixedSizeArray<MapMarkerBase>(12)]
     public fixed byte WarpMarkerArray[0x38 * 12]; // 12 * MapMarkerBase
+    [Obsolete("Use MiniMapGatheringMarkersSpan")]
     [FieldOffset(0x3B00)] public fixed byte UnkArray2[0xA8 * 6];
+    /// <remarks>
+    /// 0 = mineral deposit and lush vegetation patch<br/>
+    /// 1 = legendary mineral deposit<br/>
+    /// 2 = unspoiled lush vegetation patch<br/>
+    /// </remarks>
+    [FixedSizeArray<MiniMapGatheringMarker>(6)]
+    [FieldOffset(0x3B00)] public fixed byte MiniMapGatheringMarkers[0xA8 * 6];
     [FieldOffset(0x3EF0), FixedSizeArray<MiniMapMarker>(100)]
     public fixed byte MiniMapMarkerArray[0x40 * 100]; // 100 * MiniMapMarker
 
@@ -180,13 +188,12 @@ public struct MapMarkerInfo {
     [FieldOffset(0x44)] public byte MapMarkerSubKey;
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x108)]
-public struct TempMapMarker {
+[StructLayout(LayoutKind.Explicit, Size = 0xA8)]
+public struct MiniMapGatheringMarker {
     [FieldOffset(0x00)] public Utf8String TooltipText;
     [FieldOffset(0x68)] public MapMarkerBase MapMarker;
-
-    [FieldOffset(0xA8)] public uint StyleFlags;
-    [FieldOffset(0xAC)] public uint Type;
+    [FieldOffset(0xA0)] public ushort RecommendedLevel; // maybe?
+    [FieldOffset(0xA2)] public byte ShouldRender;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x40)]
@@ -195,6 +202,15 @@ public struct MiniMapMarker {
     [FieldOffset(0x02)] public ushort DataKey;
 
     [FieldOffset(0x08)] public MapMarkerBase MapMarker;
+}
+
+[StructLayout(LayoutKind.Explicit, Size = 0x108)]
+public struct TempMapMarker {
+    [FieldOffset(0x00)] public Utf8String TooltipText;
+    [FieldOffset(0x68)] public MapMarkerBase MapMarker;
+
+    [FieldOffset(0xA8)] public uint StyleFlags;
+    [FieldOffset(0xAC)] public uint Type;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0xB8)]
