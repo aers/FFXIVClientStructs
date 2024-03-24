@@ -4686,6 +4686,7 @@ classes:
   Component::GUI::AtkTimer:
     vtbls:
       - ea: 0x141A05230
+        base: Component::GUI::AtkEventTarget
   Component::GUI::AtkTooltipManager:
     vtbls:
       - ea: 0x141A05250
@@ -4755,6 +4756,10 @@ classes:
       0x14053C360: GetSingleton2
       0x140548590: GetSingleton3
       0x1405A0E90: Finalize
+  Component::GUI::AtkFontCodeModule:
+    vtbls:
+      - ea: 0x141A057C0
+        base: Component::Text::MacroDecoder
   Component::GUI::AtkCursor:
     funcs:
       0x140510990: Show
@@ -4775,6 +4780,7 @@ classes:
   Component::GUI::AtkDialogue:
     vtbls:
       - ea: 0x141A05280
+        base: Component::GUI::AtkEventListener
   Component::GUI::AtkResNode:
     vtbls:
       - ea: 0x141A05C10
