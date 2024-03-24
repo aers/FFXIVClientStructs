@@ -27,7 +27,7 @@ public unsafe partial struct AtkModule {
 
     [FieldOffset(0x5CC4)] public byte ActiveColorThemeType;
 
-    // [FieldOffset(0x5D00)] public UnkMacroDecoder; // ctor "E8 ?? ?? ?? ?? 48 8D 9E ?? ?? ?? ?? 33 D2 48 89 3B"
+    [FieldOffset(0x5D00)] public AtkFontCodeModule AtkFontCodeModule;
     [FieldOffset(0x7280)] internal StdVector<nint> CallbackHandlerFunctions;
     [FieldOffset(0x7298)] public UIModule* UIModulePtr;
     //[FieldOffset(0x72A0)] internal StdMap<?,?> AgentAddonMapping; // maybe?

@@ -21,7 +21,7 @@ public unsafe partial struct RaptureLogModule {
     [FieldOffset(0xF8)] public RaptureTextModule* RaptureTextModule;
 
     [FieldOffset(0x100)] public AtkFontCodeModule* AtkFontCodeModule;
-    [FieldOffset(0x100), Obsolete("Use AtkFontCodeModule instead")] public MacroDecoder* MacroDecoder; // should be named AtkFontCodeModule but waiting for the struct to be made first
+    [FieldOffset(0x100), Obsolete("Use AtkFontCodeModule instead")] public MacroDecoder* MacroDecoder;
     [FixedSizeArray<Utf8String>(10)]
     [FieldOffset(0x108)] internal fixed byte TempParseMessage[0x68 * 10];
 
