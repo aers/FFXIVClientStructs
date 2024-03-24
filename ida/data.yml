@@ -81,8 +81,10 @@ globals:
 
 functions:
   0x140058500: WinMain
-  0x1400581B0: std:string::ctor_FromSubStr #(other, idx, len)
-  0x1400582F0: std:string::ctor_FromCharArr #(arr, len)
+  0x1400581B0: std::string::ctor_FromSubStr #(other, idx, len)
+  0x1400582F0: std::string::ctor_FromCharArr #(arr, len)
+  0x14165ABE0: std::_Xlength_error
+  0x140185520: std::deque::_Growmap
   0x140059700: GetStdOut
   0x140059710: vsprintf_s
   0x140059770: vswprintf_s
@@ -5762,6 +5764,7 @@ classes:
     vtbls:
       - ea: 0x141A17000
     funcs:
+      0x14063CF50: ctor
       0x14063D6F0: ReadExpression
       0x14063DF80: ReadParameter
   Component::Text::MacroEncoder:
@@ -5777,6 +5780,17 @@ classes:
     vtbls:
       - ea: 0x141A171C0
         base: Component::Text::MacroDecoder
+  Component::Text::ReferencedUtf8String:
+    funcs:
+      0x1403272F0: Create
+  Component::Text::TextParameter:
+    funcs:
+      0x140131D50: SetReferencedUtf8String
+      0x140131CD0: SetString
+      0x140131C60: SetInteger
+  std::deque<Component::Text::TextParameter>:
+    funcs:
+      0x140187200: _Reset_map
   Client::System::Data::Bit:
     vtbls:
       - ea: 0x141A18158
