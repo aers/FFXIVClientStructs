@@ -106,7 +106,7 @@ public unsafe partial struct InventoryItem : ICreatable {
     /// <remarks> Only used if <see cref="IsSymbolic"/> is <c>true</c>. </remarks>
     [FieldOffset(0x0A)] public ushort LinkedInventoryType;
     [FieldOffset(0x0C)] public uint Quantity;
-    [FieldOffset(0x10)] public ushort Spiritbond;
+    [FieldOffset(0x10)] public ushort Spiritbond; // TODO: This field is also used for the collectability value. Not sure if it's the same data type. See also: GetSpiritbond()
     [FieldOffset(0x12)] public ushort Condition;
     [FieldOffset(0x14)] public ItemFlags Flags;
     [FieldOffset(0x18)] public ulong CrafterContentID;

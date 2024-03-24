@@ -124,6 +124,8 @@ functions:
   0x14064B9A0: GetLocalTextParameter
   0x14064FF80: FormatNumber
   0x14067E8F0: ConvertLogMessageIdToCharaLogKind
+  0x1406F1940: GetItemName # (uint itemId, byte itemKind, Component::Exd::Sheets::Item* itemRow, bool withLinkPrefix) -> byte*
+  0x1406F1BC0: GetItemIcon # (uint itemId, Component::Exd::Sheets::Item* itemRow) -> uint
   0x1407658C0: ExecuteCommand
   0x1400A8300: InDeepDungeon
   0x1400A8550: IsUnconscious
@@ -132,6 +134,7 @@ functions:
   0x1400A8700: IsClassJobAGatherer  # static, (classJobId) -> bool
   0x1400A86C0: IsClassJobAJob       # static, (classJobId, ClassJobExd*?) -> bool
   0x1400A8880: GetClassJobParentId  # static, (classJobId, ClassJobExd*?) -> uint
+  0x1400AB950: OpenWebURL
   0x140877980: IsGatheringTypeRare  # static, takes RowId of GatheringType
   0x14099C9D0: GetTeleportCost
   0x140B1E720: SetCondition
@@ -548,6 +551,9 @@ classes:
   Component::GUI::AtkExternalInterface:
     vtbls:
       - ea: 0x141A05350
+    vfuncs:
+      0: dtor
+      1: DispatchCallback
   Component::GUI::AtkManagedInterface:
   Component::GUI::AtkModuleEvent:
     vtbls:
@@ -1437,6 +1443,11 @@ classes:
         pointer: False
     funcs:
       0x14096C7A0: HandleExaminePacket
+  Client::Game::UI::NpcTrade:
+    vtbls:
+      - ea: 0x141A696E0
+    funcs:
+      0x140962F50: ctor
   Client::Game::UI::Telepo:
     instances:
       - ea: 0x1421F2708
@@ -2740,6 +2751,9 @@ classes:
     vtbls:
       - ea: 0x1419B31E8
         base: Client::System::Input::TextServiceInterface
+    funcs:
+      0x1400982A0: ctor
+      0x1400982F0: Finalize
   Client::System::Input::ClipBoardInterface:
     vtbls:
       - ea: 0x141A353B0
@@ -2826,6 +2840,9 @@ classes:
     funcs:
       0x1400AE8E0: ctor
       0x14017CBD0: Finalize
+  Client::UI::RaptureAtkColorDataManager:
+    vtbls:
+      - ea: 0x1419BEA10
   Client::UI::RaptureAtkModule:
     vtbls:
       - ea: 0x1419BEB10
@@ -2851,6 +2868,17 @@ classes:
       0x1400DDE90: IsUIVisible
       0x140568810: DecRefNumberArrayData
       0x140568870: DecRefStringArrayData
+  Client::UI::RaptureAtkModule::ItemCache:
+    vtbls:
+      - ea: 0x1419BEAB0
+  Client::UI::RaptureAtkModule::InventoryCache:
+    vtbls:
+      - ea: 0x1419BEAD0
+        base: Client::UI::RaptureAtkModule::ItemCache
+  Client::UI::RaptureAtkModule::CrystalCache:
+    vtbls:
+      - ea: 0x1419BEAF0
+        base: Client::UI::RaptureAtkModule::ItemCache
   Component::GUI::AtkModuleInterface::AtkHistoryInterface:
     vtbls:
       - ea: 0x1419BE5F0
@@ -4655,6 +4683,9 @@ classes:
       - ea: 0x141A05198
     funcs:
       0x14050A1D0: ctor
+  Component::GUI::AtkTimer:
+    vtbls:
+      - ea: 0x141A05230
   Component::GUI::AtkTooltipManager:
     vtbls:
       - ea: 0x141A05250
@@ -4730,12 +4761,20 @@ classes:
       0x140510A20: Hide
       0x140510AB0: SetCursorType
       0x140510B60: SetVisible
+  Component::GUI::AtkFontAnalyzer:
+    vtbls:
+      - ea: 0x141A057B8
+    funcs:
+      0x140523480: ctor
   Component::GUI::AtkDragDropManager:
     vtbls:
       - ea: 0x141A05268
         base: Component::GUI::AtkEventListener
     funcs:
       0x140513680: ctor
+  Component::GUI::AtkDialogue:
+    vtbls:
+      - ea: 0x141A05280
   Component::GUI::AtkResNode:
     vtbls:
       - ea: 0x141A05C10
@@ -4954,6 +4993,7 @@ classes:
       0x14053D060: GetComponentListById
       0x14053D100: GetTextNodeById
       0x14053D160: GetImageNodeById
+      0x140538F30: FireCallbackAndHideOrClose
       0x14053D260: FireCallback
       0x14053F910: UpdateCollisionNodeList
   Component::GUI::AtkComponentBase:
@@ -5052,6 +5092,8 @@ classes:
       26: IsAddonReady
       39: SetUIVisibility
       58: Update
+      60: IsUISceneGameMain
+      61: GetColorThemeTypeForUIScene
       63: OpenMapWithMapLink
     funcs:
       0x14056A580: ctor
@@ -5059,6 +5101,7 @@ classes:
       0x14056AFF0: Initialize
       0x14056B410: HandleInput
       0x14056B810: IsTextInputActive
+      0x14056B690: SetUIScene
   Component::GUI::AtkComponentCheckBox:
     vtbls:
       - ea: 0x141A06908
@@ -5796,6 +5839,9 @@ classes:
       - ea: 0x141A18158
     funcs:
       0x1406556D0: ctor
+  Client::System::Data::Unique:
+    vtbls:
+      - ea: 0x141A18160
   Client::UI::Misc::AcquaintanceModule:
     vtbls:
       - ea: 0x141A1B578
@@ -5924,6 +5970,15 @@ classes:
       0x140685240: GetContentIdForLogMessage
       0x1406852D0: GetLogMessage
       0x140685DC0: GetLogMessageDetail
+  Component::Prohibit::ProhibitModuleInterface:
+    vtbls:
+      - ea: 0x141A35548
+  Component::Prohibit::ProhibitModule:
+    vtbls:
+      - ea: 0x141A35588
+        base: Component::Prohibit::ProhibitModuleInterface
+    funcs:
+      0x1407BA650: ctor
   Client::UI::Misc::RaptureHotbarModule:
     vtbls:
       - ea: 0x141A1B4A0
