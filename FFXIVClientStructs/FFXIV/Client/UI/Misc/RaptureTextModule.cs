@@ -39,7 +39,14 @@ public unsafe partial struct RaptureTextModule {
     [FieldOffset(0x958 + 7 * 0x68)] public Utf8String UnC30;
     [FieldOffset(0x958 + 8 * 0x68)] public Utf8String UnC98;
 
-    // [FieldOffset(0xD18)] public nint UnkD18; // some kind of sub structure
+    // [FieldOffset(0xD18)] public RowWrapper<Addon>* AddonRowCache; // only for the first 4000 Addon rows
+
+    [FieldOffset(0xE18)] internal ExcelSheet* AchievementSheet;
+    [FieldOffset(0xE20)] internal ExcelSheet* StatusSheet;
+    [FieldOffset(0xE28)] internal ExcelSheet* HowToSheet;
+    [FieldOffset(0xE30)] internal ExcelSheet* AkatsukiNoteStringSheet;
+    [FieldOffset(0xE38)] public int SoundId;
+    [FieldOffset(0xE3C)] public int IsJingle;
 
     [MemberFunction("E9 ?? ?? ?? ?? 80 EA 20")]
     public partial byte* GetAddonText(uint addonId);

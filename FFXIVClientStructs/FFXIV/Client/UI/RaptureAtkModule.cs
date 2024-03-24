@@ -1,6 +1,8 @@
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Client.UI.Agent;
+using FFXIVClientStructs.FFXIV.Client.UI.Misc;
+using FFXIVClientStructs.FFXIV.Component.Excel;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
@@ -17,17 +19,47 @@ public unsafe partial struct RaptureAtkModule {
 
     [FieldOffset(0x82C0)] public ushort UiMode; // 0 = In Lobby, 1 = In Game
 
+    [FieldOffset(0x8338)] internal Utf8String Unk8338;
+    [FixedSizeArray<Utf8String>(6)]
+    [FieldOffset(0x83A0)] internal fixed byte Unk83A0[0x68 * 6];
+    [FieldOffset(0x8610)] public Utf8String ItalicOn; // <italic(1)>
+    [FieldOffset(0x8678)] public Utf8String ItalicOff; // <italic(0)>
+    [FieldOffset(0x86E0)] public Utf8String BoldOn; // <bold(1)>
+    [FieldOffset(0x8748)] public Utf8String BoldOff; // <bold(0)>
+
     [FieldOffset(0x87F7)] public AgentUpdateFlags AgentUpdateFlag; // reset happens in RaptureAtkModule_OnUpdate
+    [FieldOffset(0x87F8)] internal fixed byte AddonAllocators[0x28 * 853];
     [FieldOffset(0x10D40)] public Utf8String* AddonNames; // TODO: change to StdVector<Utf8String>
+    [FieldOffset(0x10D58)] public AddonConfig* AddonConfigPtr;
 
+    [FieldOffset(0x10E10)] public UIModule* UIModulePtr;
+    [FieldOffset(0x10E18)] public RaptureLogModule* RaptureLogModulePtr;
     [FieldOffset(0x10E20)] public AgentModule AgentModule;
-
     [FieldOffset(0x11C20)] public RaptureAtkUnitManager RaptureAtkUnitManager;
+    [FieldOffset(0x1B938)] public RaptureAtkColorDataManager RaptureAtkColorDataManager;
 
     [FieldOffset(0x1BBB8)] public int NameplateInfoCount;
+    [Obsolete($"Use {nameof(NamePlateInfoEntriesSpan)}")]
     [FieldOffset(0x1BBC0)] public NamePlateInfo NamePlateInfoArray; // 0-50, &NamePlateInfoArray[i]
+    [FixedSizeArray<NamePlateInfo>(50)]
+    [FieldOffset(0x1BBC0)] public fixed byte NamePlateInfoEntries[0x248 * 50];
 
+    [FixedSizeArray<CrystalCache>(18)]
+    [FieldOffset(0x22EA8)] public fixed byte CrystalItemCache[0x98 * 18];
+    [FieldOffset(0x23958)] public ItemCache* KeyItemCache; // ptr to 120 entries
+    [FieldOffset(0x23960)] public ItemCache* EquippedItemCache; // ptr to 14 entries
+    [FixedSizeArray<InventoryCache>(160)]
+    [FieldOffset(0x23968)] public fixed byte InventoryItemCache[0x88 * 160]; // see "E8 ?? ?? ?? ?? 48 8B 07 8D 55 05", only 140 slots are processed, unused?
+    [FieldOffset(0x28E68)] public uint InventoryItemCacheSlotCount;
+    [FieldOffset(0x28E6C)] public uint GilCap;
+
+    [FieldOffset(0x28EB0)] public uint LocalPlayerClassJobId;
+    [FieldOffset(0x28EB4)] public uint LocalPlayerLevel;
+
+    [FieldOffset(0x28F48)] internal ExcelSheet* AddonParamSheet;
     [FieldOffset(0x28F50)] public AtkTexture CharaViewDefaultBackgroundTexture; // "ui/common/CharacterBg.tex" (or _hr1 variant)
+
+    [FieldOffset(0x28F90)] internal nint ShellCommands; // only 1 function "48 83 EC 38 4C 8B C2 C7 44 24" to open links?
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 44 24 ?? 48 89 9F")]
     public partial bool ChangeUiMode(uint uiMode);
@@ -73,6 +105,32 @@ public unsafe partial struct RaptureAtkModule {
         [FieldOffset(0x244)] public bool IsDirty;
 
         public bool IsPrefixTitle => ((Flags >> (8 * 3)) & 0xFF) == 1;
+    }
+
+    // Client::UI::RaptureAtkModule::ItemCache
+    [StructLayout(LayoutKind.Explicit, Size = 0x88)]
+    public struct ItemCache {
+        [FieldOffset(0x8)] public Utf8String Name;
+        [FieldOffset(0x70)] public uint Id;
+        [FieldOffset(0x74)] public uint IconId;
+        [FieldOffset(0x78)] public uint StackSize;
+        [FieldOffset(0x7C)] public byte EquipSlotCategory;
+        [FieldOffset(0x7D)] public byte AdditionalData; // if FilterGroup == 15
+        [FieldOffset(0x7E)] public byte LevelEquip;
+        [FieldOffset(0x7F)] public byte SubStatCategory;
+        [FieldOffset(0x80)] public short LevelItem;
+    }
+
+    // Client::UI::RaptureAtkModule::InventoryCache
+    [StructLayout(LayoutKind.Explicit, Size = 0x88)]
+    public struct InventoryCache {
+        [FieldOffset(0)] public ItemCache ItemCache;
+    }
+
+    // Client::UI::RaptureAtkModule::CrystalCache
+    [StructLayout(LayoutKind.Explicit, Size = 0x98)]
+    public struct CrystalCache {
+        [FieldOffset(0)] public ItemCache ItemCache;
     }
 
     [Flags]

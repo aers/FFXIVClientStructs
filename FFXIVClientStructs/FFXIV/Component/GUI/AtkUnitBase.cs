@@ -91,7 +91,7 @@ public unsafe partial struct AtkUnitBase {
     public partial byte FireCallbackInt(int callbackValue);
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B 44 24 20 C1 E8 05")]
-    public partial void FireCallback(int valueCount, AtkValue* values, void* a4 = null);
+    public partial void FireCallback(int valueCount, AtkValue* values, void* a4 = null); // TODO: a4 is a bool to hide/close the window (depends on flag +0x188 & 1)
 
     [MemberFunction("E8 ?? ?? ?? ?? F6 46 40 0F")]
     public partial void UpdateCollisionNodeList(bool clearFocus);
