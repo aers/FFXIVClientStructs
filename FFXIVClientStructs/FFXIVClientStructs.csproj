@@ -18,6 +18,7 @@
           -->
     </PropertyGroup>
     <ItemGroup>
+        <PackageReference Include="JetBrains.Annotations" Version="2021.2.0" />
         <ProjectReference Include="..\FFXIVClientStructs.InteropSourceGenerators\FFXIVClientStructs.InteropSourceGenerators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
     </ItemGroup>
 </Project>

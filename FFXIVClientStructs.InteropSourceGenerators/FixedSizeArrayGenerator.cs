@@ -95,6 +95,7 @@ internal sealed class FixedSizeArrayGenerator : IIncrementalGenerator {
 
         public void RenderFixedSizeArraySpan(IndentedStringBuilder builder) {
             builder.AppendLine($"public Span<{TypeName}> {FieldName}Span => new(Unsafe.AsPointer(ref {FieldName}[0]), {Count});");
+            builder.AppendLine($"public Span<{TypeName}> {FieldName}StdSpan => new(Unsafe.AsPointer(ref {FieldName}[0]), {Count});");
         }
     }
 
