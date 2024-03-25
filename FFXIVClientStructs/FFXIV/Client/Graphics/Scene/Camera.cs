@@ -1,6 +1,7 @@
 using FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
 using FFXIVClientStructs.FFXIV.Common.Component.BGCollision;
 using FFXIVClientStructs.FFXIV.Common.Math;
+using SystemVec3 = System.Numerics.Vector3;
 
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 
@@ -43,7 +44,9 @@ public unsafe partial struct Camera {
         var ray = ScreenPointToRay(screenPos);
         var flags = stackalloc int[] { 0x4000, 0x4000, 0, 0 };
         var hit = new RaycastHit();
-        var result = BGCollisionModule.Raycast(ray.Origin, ray.Direction, 100000.0f, &hit, flags);
+        var origin = (SystemVec3)ray.Origin;
+        var direction = (SystemVec3)ray.Direction;
+        var result = BGCollisionModule.Raycast(&origin, &direction, 100000.0f, &hit, flags);
         worldPos = hit.Point;
         return result;
     }
