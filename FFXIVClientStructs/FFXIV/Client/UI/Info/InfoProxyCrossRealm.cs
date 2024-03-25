@@ -19,9 +19,6 @@ public unsafe partial struct InfoProxyCrossRealm {
     [FixedSizeArray<CrossRealmGroup>(6)]
     [FieldOffset(0x3A0)] public fixed byte CrossRealmGroupArray[6 * 0x2C8];
 
-    [MemberFunction("E8 ?? ?? ?? ?? 80 B8 ?? ?? ?? ?? ?? 74 5D")]
-    public static partial InfoProxyCrossRealm* Instance();
-
     [MemberFunction("E8 ?? ?? ?? ?? F6 D8 1A C0")]
     public static partial bool IsCrossRealmParty();
 
@@ -65,7 +62,7 @@ public unsafe struct CrossRealmMember {
     [FieldOffset(0x22)] public short HomeWorld;
     [FieldOffset(0x24)] public short CurrentWorld;
     [FieldOffset(0x26)] public byte ClassJobId;
-    [FieldOffset(0x2B)] public fixed byte Name[30];
+    [FieldOffset(0x2B)] public fixed byte Name[32];
     [FieldOffset(0x50)] public byte MemberIndex;
     [FieldOffset(0x51)] public byte GroupIndex;
     [FieldOffset(0x53)] public byte IsPartyLeader;

@@ -1,6 +1,7 @@
 using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
+
 [InfoProxy(InfoProxyId.Letter)]
 [StructLayout(LayoutKind.Explicit, Size = 0x5250)]
 public unsafe partial struct InfoProxyLetter {
