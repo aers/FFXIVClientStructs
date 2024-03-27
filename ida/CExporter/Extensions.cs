@@ -51,7 +51,7 @@ public static class TypeExtensions {
             _ when type == typeof(char) || type == typeof(short) || type == typeof(ushort) || type == typeof(Half) => 2,
             _ when type == typeof(int) || type == typeof(uint) || type == typeof(float) => 4,
             _ when type == typeof(long) || type == typeof(ulong) || type == typeof(double) || type.IsPointer || type.IsFunctionPointer || type.IsUnmanagedFunctionPointer || (type.Name == "Pointer`1" && type.Namespace == ExporterStatics.InteropNamespacePrefix[..^1]) => 8,
-            _ when type.IsStruct() && !type.IsGenericType => type.StructLayoutAttribute?.Size ?? (int?)typeof(Unsafe).GetMethod("SizeOf")?.MakeGenericMethod(type).Invoke(null, null) ?? 0,
+            _ when type.IsStruct() && !type.IsGenericType && (type.StructLayoutAttribute?.Value ?? LayoutKind.Sequential) != LayoutKind.Sequential => type.StructLayoutAttribute?.Size ?? (int?)typeof(Unsafe).GetMethod("SizeOf")?.MakeGenericMethod(type).Invoke(null, null) ?? 0,
             _ when type.IsEnum => Enum.GetUnderlyingType(type).SizeOf(),
             _ when type.IsGenericType => Marshal.SizeOf(Activator.CreateInstance(type)!),
             _ => (int?)typeof(Unsafe).GetMethod("SizeOf")?.MakeGenericMethod(type).Invoke(null, null) ?? 0
@@ -67,6 +67,28 @@ public static class TypeExtensions {
     public static Type? GetUnderlyingTypeFromOffset(this Type type) {
         var fields = type.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
         return fields.FirstOrDefault(t => t.FieldType.IsStruct() && t.GetFieldOffset() == 0)?.FieldType;
+    }
+
+    public static string GetNamespace(this Type type) {
+        var ns = type.Namespace!;
+        var offset = ns.IndexOf('.', ns.IndexOf('.') + 1) + 1;
+        return offset == 0 ? "" : ns[offset..];
+    }
+
+    public static bool IsHavok(this Type type) {
+        return type.Namespace?.StartsWith(ExporterStatics.HavokNamespacePrefix) ?? false;
+    }
+
+    public static bool IsStd(this Type type) {
+        return type.Namespace?.StartsWith(ExporterStatics.StdNamespacePrefix) ?? false;
+    }
+
+    public static bool IsXiv(this Type type) {
+        return type.Namespace?.StartsWith(ExporterStatics.FFXIVNamespacePrefix) ?? false;
+    }
+
+    public static bool IsPointer(this Type type) {
+        return type.IsPointer || type.IsFunctionPointer || type.IsUnmanagedFunctionPointer || (type.Name == "Pointer`1" && type.Namespace == ExporterStatics.InteropNamespacePrefix[..^1]);
     }
 }
 
