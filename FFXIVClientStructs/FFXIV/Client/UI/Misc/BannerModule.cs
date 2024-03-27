@@ -82,6 +82,8 @@ public unsafe partial struct BannerModuleEntry {
     [FieldOffset(0x5C)] public short DirectionalLightingVerticalAngle;
     [FieldOffset(0x5E)] public short DirectionalLightingHorizontalAngle;
     [FieldOffset(0x60)] public byte Race; // CustomizeData[0]
+    [FieldOffset(0x61)] public byte Sex; // CustomizeData[1]
+    [Obsolete("Renamed to Sex")]
     [FieldOffset(0x61)] public byte Gender; // CustomizeData[1]
     [FieldOffset(0x62)] public byte Height; // CustomizeData[3]
     [FieldOffset(0x63)] public byte Tribe; // CustomizeData[4]
