@@ -85,7 +85,7 @@ public unsafe partial struct CharaView : ICreatable {
 
 [StructLayout(LayoutKind.Explicit, Size = 0x68)]
 public unsafe partial struct CharaViewCharacterData : ICreatable {
-    [FieldOffset(0)] public CustomizeData CustomizeData; // see Glamourer.Customization.CharacterCustomization
+    [FieldOffset(0)] public CustomizeData CustomizeData;
     //[FieldOffset(0x1A)] public byte Unk1A;
     //[FieldOffset(0x1B)] public byte Unk1B;
     [FieldOffset(0x1C)] public fixed uint ItemIds[14];
