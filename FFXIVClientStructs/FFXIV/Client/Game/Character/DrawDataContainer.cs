@@ -126,6 +126,8 @@ public unsafe partial struct CustomizeData {
     [FieldOffset(0x00)] public byte Race;
     [FieldOffset(0x01)] public byte Sex;
     [FieldOffset(0x02)] public byte BodyType;
+    [FieldOffset(0x04)] public byte Tribe;
+    [Obsolete("Renamed to Tribe")]
     [FieldOffset(0x04)] public byte Clan;
     [FieldOffset(0x14)] public byte LipColorFurPattern;
 
