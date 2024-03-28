@@ -37,6 +37,7 @@ public unsafe partial struct UIState {
     [FieldOffset(0x5550)] public FishRecord FishRecord;
     [FieldOffset(0x5830)] public Journal Journal;
     [FieldOffset(0x9F78)] public QuestUI QuestUI;
+    [FieldOffset(0xAF48)] public QuestTodoList QuestTodoList;
 
     [FieldOffset(0xB560)] public Director* ActiveDirector;
     [FieldOffset(0xB6A8)] public FateDirector* FateDirector;
