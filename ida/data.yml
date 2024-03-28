@@ -1750,6 +1750,12 @@ classes:
         pointer: False
     vtbls:
       - ea: 0x141A6A728
+  Client::Game::UI::TripleTriad:
+    instances:
+      - ea: 0x142203D50
+        pointer: False
+    vtbls:
+      - ea: 0x141A6A738
   Client::Game::ActionManager:
     instances:
       - ea: 0x14216C9D0

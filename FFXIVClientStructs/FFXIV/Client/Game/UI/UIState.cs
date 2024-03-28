@@ -55,6 +55,7 @@ public unsafe partial struct UIState {
     [FieldOffset(0x12918)] public Wedding Wedding;
     [FieldOffset(0x12980)] public MobHunt MobHunt;
     [FieldOffset(0x12B18)] public WeatherForecast WeatherForecast;
+    [FieldOffset(0x12B40)] public TripleTriad TripleTriad;
 
     // [Patch 6.55] 0x17710: Adventurer Plate data
 
