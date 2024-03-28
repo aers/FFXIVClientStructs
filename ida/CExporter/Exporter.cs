@@ -408,13 +408,13 @@ public class ProcessedStructConverter : IYamlTypeConverter {
             ProcessedFieldConverter.Instance.WriteYaml(emitter, field, field.GetType());
         }
         emitter.Emit(new SequenceEnd());
-        emitter.Emit(new Scalar("virtual_function"));
+        emitter.Emit(new Scalar("virtual_functions"));
         emitter.Emit(new SequenceStart(null, null, true, SequenceStyle.Block));
         foreach (var virtualFunction in s.VirtualFunctions) {
             ProcessedVirtualFunctionConverter.Instance.WriteYaml(emitter, virtualFunction, virtualFunction.GetType());
         }
         emitter.Emit(new SequenceEnd());
-        emitter.Emit(new Scalar("member_function"));
+        emitter.Emit(new Scalar("member_functions"));
         emitter.Emit(new SequenceStart(null, null, true, SequenceStyle.Block));
         foreach (var memberFunction in s.MemberFunctions) {
             ProcessedMemberFunctionConverter.Instance.WriteYaml(emitter, memberFunction, memberFunction.GetType());

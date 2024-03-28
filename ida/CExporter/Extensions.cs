@@ -21,7 +21,7 @@ public static class TypeExtensions {
         type switch {
             _ when type == typeof(void) || type == typeof(byte) || type == typeof(byte*) || type == typeof(byte**) => shouldLower ? type.Name.ToLower() : type.Name,
             _ when type == typeof(char) => "wchar_t",
-            _ when type == typeof(bool) => "bool",
+            _ when type == typeof(bool) => "byte",
             _ when type == typeof(float) => "float",
             _ when type == typeof(double) => "double",
             _ when type == typeof(short) => "__int16",

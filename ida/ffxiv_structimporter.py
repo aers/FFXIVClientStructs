@@ -78,6 +78,11 @@ def get_tinfo_from_type(raw_type: str):
 
     return ptr_tinfo
 
+def get_opinfo_from_type(raw_type: str):
+    opinf = ida_nalt.opinfo_t()
+    opinf.tid = ida_struct.get_struc_id(raw_type)
+    return opinf
+
 def run():
     yaml = yload(open(os.path.join(os.path.dirname(os.path.realpath(__file__)), "ffxiv_structs.yml")))
     for enum in yaml["enums"]:
@@ -108,7 +113,24 @@ def run():
             if field_type == '__fastcall':
                 continue
             ida_struct.add_struc_member(s, field_name, offset, get_idc_type_from_ida_type(field_type), None, get_size_from_ida_type(field_type))
-            meminfo = ida_struct.get_member_by_name(s, name)
+            meminfo = ida_struct.get_member_by_name(s, field_name)
             ida_struct.set_member_tinfo(s, meminfo, 0, get_tinfo_from_type(field_type), 0)
+
+    for struct in yaml["structs"]:
+        fullname = struct["type"]
+        name = struct["name"]
+        size = struct["size"]
+        ida_struct.del_struc(ida_struct.get_struc(ida_struct.get_struc_id(fullname + "_VTable")))
+        s = ida_struct.get_struc(ida_struct.add_struc(-1, fullname + "_VTable"))
+        for virt_func in struct["virtual_functions"]:
+            offset = virt_func["offset"]
+            field_name = virt_func["name"]
+            field_type = virt_func["type"]
+            ida_struct.add_struc_member(s, field_name, offset, get_idc_type_from_ida_type(field_type), None, get_size_from_ida_type(field_type))
+            meminfo = ida_struct.get_member_by_name(s, field_name)
+            ida_struct.set_member_tinfo(s, meminfo, 0, get_tinfo_from_type(field_type), 0)
+            ida_bytes.create_data(offset, get_idc_type_from_ida_type(field_type), get_size_from_ida_type(field_type), ida_ida.struflag())
+            ida_bytes.opinfo_t(get_opinfo_from_type(field_type))
+
 
 run()
