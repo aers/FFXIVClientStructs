@@ -60,6 +60,7 @@ public unsafe partial struct UIState {
     [FieldOffset(0x14068)] public LovmRanking LovmRanking;
     [FieldOffset(0x15CA8)] public CollectablesShop CollectablesShop;
     [FieldOffset(0x15F60)] public QTE QTE;
+    [FieldOffset(0x15F88)] public Emj Emj;
 
     // [Patch 6.55] 0x17710: Adventurer Plate data
 

@@ -1775,6 +1775,10 @@ classes:
     vtbls:
       - ea: 0x141A6A750
         base: Component::GUI::AtkModuleInterface::AtkEventInterface
+  Client::Game::UI::Emj:
+    instances:
+      - ea: 0x142207198
+        pointer: False
   Client::Game::ActionManager:
     instances:
       - ea: 0x14216C9D0
