@@ -1445,6 +1445,9 @@ classes:
     funcs:
       0x14096C7A0: HandleExaminePacket
   Client::Game::UI::NpcTrade:
+    instances:
+      - ea: 0x1421FC448
+        pointer: False
     vtbls:
       - ea: 0x141A696E0
     funcs:
