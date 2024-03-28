@@ -1760,6 +1760,10 @@ classes:
     instances:
       - ea: 0x142205260
         pointer: False
+  Client::Game::UI::LovmRanking:
+    instances:
+      - ea: 0x142205278
+        pointer: False
   Client::Game::ActionManager:
     instances:
       - ea: 0x14216C9D0

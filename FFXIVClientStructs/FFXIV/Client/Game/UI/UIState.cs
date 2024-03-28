@@ -57,6 +57,7 @@ public unsafe partial struct UIState {
     [FieldOffset(0x12B18)] public WeatherForecast WeatherForecast;
     [FieldOffset(0x12B40)] public TripleTriad TripleTriad;
     [FieldOffset(0x12B40)] public EurekaElementalEdit EurekaElementalEdit;
+    [FieldOffset(0x14068)] public LovmRanking LovmRanking;
 
     // [Patch 6.55] 0x17710: Adventurer Plate data
 
