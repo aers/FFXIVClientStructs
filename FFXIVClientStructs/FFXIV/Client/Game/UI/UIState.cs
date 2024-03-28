@@ -95,7 +95,7 @@ public unsafe partial struct UIState {
     // Ref: UIState#IsTripleTriadCardUnlocked
     // Size: TripleTriadCard.RowCount >> 3
     [FieldOffset(0x17ABD)] public fixed byte UnlockedTripleTriadCardsBitmask[409 >> 3];
-    [FieldOffset(0x17AF8)] public ulong UnlockedTripleTriadCardsCount;
+    [FieldOffset(0x17AF0)] public ulong UnlockedTripleTriadCardsCount;
 
     [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B 8B ?? ?? ?? ?? 48 8B 01", 3)]
     public static partial UIState* Instance();
