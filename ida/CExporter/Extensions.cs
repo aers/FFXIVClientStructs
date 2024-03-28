@@ -17,7 +17,7 @@ public static class TypeExtensions {
         return type != typeof(decimal) && type is { IsValueType: true, IsPrimitive: false, IsEnum: false };
     }
 
-    public static string FixTypeName(this Type type, Func<Type, bool, string> unhandled, bool shouldLower = true) =>
+    public static string FixTypeName(this Type? type, Func<Type, bool, string> unhandled, bool shouldLower = true) =>
         type switch {
             _ when type == typeof(void) || type == typeof(void*) || type == typeof(void**) ||
                    type == typeof(byte) || type == typeof(byte*) || type == typeof(byte**) => shouldLower ? type.Name.ToLower() : type.Name,
@@ -51,50 +51,57 @@ public static class TypeExtensions {
             _ when type == typeof(char) || type == typeof(short) || type == typeof(ushort) || type == typeof(Half) => 2,
             _ when type == typeof(int) || type == typeof(uint) || type == typeof(float) => 4,
             _ when type == typeof(long) || type == typeof(ulong) || type == typeof(double) || type.IsPointer || type.IsFunctionPointer || type.IsUnmanagedFunctionPointer || (type.Name == "Pointer`1" && type.Namespace == ExporterStatics.InteropNamespacePrefix[..^1]) => 8,
-            _ when type.IsStruct() && !type.IsGenericType => type.StructLayoutAttribute?.Size ?? (int?)typeof(Unsafe).GetMethod("SizeOf")?.MakeGenericMethod(type).Invoke(null, null) ?? 0,
+            _ when type.IsStruct() && !type.IsGenericType && (type.StructLayoutAttribute?.Value ?? LayoutKind.Sequential) != LayoutKind.Sequential => type.StructLayoutAttribute?.Size ?? (int?)typeof(Unsafe).GetMethod("SizeOf")?.MakeGenericMethod(type).Invoke(null, null) ?? 0,
             _ when type.IsEnum => Enum.GetUnderlyingType(type).SizeOf(),
             _ when type.IsGenericType => Marshal.SizeOf(Activator.CreateInstance(type)!),
             _ => (int?)typeof(Unsafe).GetMethod("SizeOf")?.MakeGenericMethod(type).Invoke(null, null) ?? 0
         };
     }
 
-    public static bool IsBlocked(this Type type) =>
-        type switch {
-            _ when type == typeof(Half) => true,
-            _ => false
-        };
+    public static string GetNamespace(this Type type) {
+        var ns = type.Namespace!;
+        var offset = ns.IndexOf('.', ns.IndexOf('.') + 1) + 1;
+        return offset == 0 ? "" : ns[offset..];
+    }
 
-    public static Type? GetUnderlyingTypeFromOffset(this Type type) {
-        var fields = type.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-        return fields.FirstOrDefault(t => t.FieldType.IsStruct() && t.GetFieldOffset() == 0)?.FieldType;
+    public static string GetFullname(this Type type) {
+        return type.Namespace + "." + type.Name;
+    }
+
+    public static bool IsHavok(this Type type) {
+        return type.GetFullname().StartsWith(ExporterStatics.HavokNamespacePrefix);
+    }
+
+    public static bool IsStd(this Type type) {
+        return type.GetFullname().StartsWith(ExporterStatics.StdNamespacePrefix);
+    }
+
+    public static bool IsXiv(this Type type) {
+        return type.GetFullname().StartsWith(ExporterStatics.FFXIVNamespacePrefix);
+    }
+
+    public static bool IsInterop(this Type type) {
+        return type.GetFullname().StartsWith(ExporterStatics.InteropNamespacePrefix);
+    }
+
+    public static bool IsPointer(this Type type) {
+        return type.IsPointer || type.IsFunctionPointer || type.IsUnmanagedFunctionPointer || (type.Name == "Pointer`1" && type.Namespace == ExporterStatics.InteropNamespacePrefix[..^1]);
+    }
+
+    public static string SanitizeName(this Type type) {
+        var name = type.FullName ?? type.Namespace! + "." + type.Name;
+        if (type.IsHavok() || type.IsStd() || type.IsXiv() | type.IsInterop()) {
+            var offset = name.IndexOf('.', name.IndexOf('.') + 1) + 1;
+            name = name[offset..];
+        }
+        if (!type.IsGenericType) return name;
+        name = name[..name.IndexOf('`')];
+        name += "<" + string.Join(", ", type.GenericTypeArguments.Select(t => t.SanitizeName())) + ">";
+        return name;
     }
 }
 
 public static class FieldInfoExtensions {
-    public static bool IsFixed(this FieldInfo info) {
-        var attr = info.GetCustomAttributes(typeof(FixedBufferAttribute), false).Cast<FixedBufferAttribute>().FirstOrDefault();
-        return attr != null;
-    }
-
-    public static Tuple<Type, int> GetFixed(this FieldInfo info) {
-        var attributes = info.GetCustomAttributes();
-        var array = attributes.Where(t => t.GetType().Name.Contains("FixedSizeArrayAttribute"));
-        if (array.Any()) {
-            var fsattr = (dynamic)array.First();
-            var type = (Type)fsattr.GetType();
-            return Tuple.Create(type.GenericTypeArguments[0], (int)fsattr.Count);
-        }
-        var attr = info.GetCustomAttributes(typeof(FixedBufferAttribute), false).Cast<FixedBufferAttribute>().Single();
-        if (attr == null)
-            throw new Exception("Field is not fixed");
-        return new Tuple<Type, int>(attr.ElementType, attr.Length);
-    }
-
-    public static int GetFixedLength(this FieldInfo info) {
-        var (type, length) = info.GetFixed();
-        return length * type.SizeOf();
-    }
-
     public static int GetFieldOffset(this FieldInfo info) {
         var attrs = info.GetCustomAttributes(typeof(FieldOffsetAttribute), false);
         return attrs.Length != 0 ? attrs.Cast<FieldOffsetAttribute>().Single().Value : GetFieldOffsetSequential(info);
@@ -114,13 +121,6 @@ public static class FieldInfoExtensions {
     }
 }
 public static class Extensions {
-    internal static UnionLayout? GetNextLayout(this List<UnionLayout> layouts, UnionLayout layout) {
-        var index = layouts.IndexOf(layout);
-        if (index == -1 || index == layouts.Count - 1)
-            return null;
-        return layouts[index + 1];
-    }
-
     public static void WriteFile(this FileInfo file, string content) {
         using var stream = file.CreateText();
         stream.Write(content);
