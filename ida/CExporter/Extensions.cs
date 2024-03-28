@@ -58,17 +58,6 @@ public static class TypeExtensions {
         };
     }
 
-    public static bool IsBlocked(this Type type) =>
-        type switch {
-            _ when type == typeof(Half) => true,
-            _ => false
-        };
-
-    public static Type? GetUnderlyingTypeFromOffset(this Type type) {
-        var fields = type.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-        return fields.FirstOrDefault(t => t.FieldType.IsStruct() && t.GetFieldOffset() == 0)?.FieldType;
-    }
-
     public static string GetNamespace(this Type type) {
         var ns = type.Namespace!;
         var offset = ns.IndexOf('.', ns.IndexOf('.') + 1) + 1;
@@ -113,30 +102,6 @@ public static class TypeExtensions {
 }
 
 public static class FieldInfoExtensions {
-    public static bool IsFixed(this FieldInfo info) {
-        var attr = info.GetCustomAttributes(typeof(FixedBufferAttribute), false).Cast<FixedBufferAttribute>().FirstOrDefault();
-        return attr != null;
-    }
-
-    public static Tuple<Type, int> GetFixed(this FieldInfo info) {
-        var attributes = info.GetCustomAttributes();
-        var array = attributes.Where(t => t.GetType().Name.Contains("FixedSizeArrayAttribute"));
-        if (array.Any()) {
-            var fsattr = (dynamic)array.First();
-            var type = (Type)fsattr.GetType();
-            return Tuple.Create(type.GenericTypeArguments[0], (int)fsattr.Count);
-        }
-        var attr = info.GetCustomAttributes(typeof(FixedBufferAttribute), false).Cast<FixedBufferAttribute>().Single();
-        if (attr == null)
-            throw new Exception("Field is not fixed");
-        return new Tuple<Type, int>(attr.ElementType, attr.Length);
-    }
-
-    public static int GetFixedLength(this FieldInfo info) {
-        var (type, length) = info.GetFixed();
-        return length * type.SizeOf();
-    }
-
     public static int GetFieldOffset(this FieldInfo info) {
         var attrs = info.GetCustomAttributes(typeof(FieldOffsetAttribute), false);
         return attrs.Length != 0 ? attrs.Cast<FieldOffsetAttribute>().Single().Value : GetFieldOffsetSequential(info);
@@ -156,13 +121,6 @@ public static class FieldInfoExtensions {
     }
 }
 public static class Extensions {
-    internal static UnionLayout? GetNextLayout(this List<UnionLayout> layouts, UnionLayout layout) {
-        var index = layouts.IndexOf(layout);
-        if (index == -1 || index == layouts.Count - 1)
-            return null;
-        return layouts[index + 1];
-    }
-
     public static void WriteFile(this FileInfo file, string content) {
         using var stream = file.CreateText();
         stream.Write(content);
