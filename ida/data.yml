@@ -1558,6 +1558,13 @@ classes:
       0x140983A10: SetInstance
       0x140983A20: GetInstance
       0x140983A30: IsInstancedArea
+  Client::Game::UI::RelicSphereUpgrade:
+    instances:
+      - ea: 0x1421F4A88
+        pointer: False
+    vtbls:
+      - ea: 0x141A6A6D8
+        base: Component::GUI::AtkModuleInterface::AtkEventInterface
   Client::Game::UI::Loot:
     instances:
       - ea: 0x1421F4F28
