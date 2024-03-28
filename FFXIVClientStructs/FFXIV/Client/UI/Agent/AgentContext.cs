@@ -32,6 +32,8 @@ public unsafe partial struct AgentContext {
     [FieldOffset(0xF0A)] public short YesNoTargetHomeWorldId;
     [FieldOffset(0xF0C)] public byte YesNoEventId;
 
+    [FieldOffset(0xF10)] public int TargetSex;
+    [Obsolete("Renamed to TargetSex")]
     [FieldOffset(0xF10)] public int TargetGender;
     [FieldOffset(0xF14)] public uint TargetMountSeats;
 

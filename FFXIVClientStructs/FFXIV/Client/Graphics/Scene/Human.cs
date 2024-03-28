@@ -74,8 +74,8 @@ public unsafe partial struct Human {
 
     // Updates the customize array and, if not skipEquipment the equip array.
     // data needs to be 26 bytes if not skipEquipment and 66 bytes otherwise.
-    // Returns false and does nothing if the given race, gender or body type is not equal to the current one, 
-    // or if the race is Hyur and one clan is Highlander and the other Midlander.
+    // Returns false and does nothing if the given race, sex or body type is not equal to the current one, 
+    // or if the race is Hyur and one tribe is Highlander and the other Midlander.
     [MemberFunction("E8 ?? ?? ?? ?? 41 0F B6 C5 66 41 89 86")]
     public partial bool UpdateDrawData(byte* data, bool skipEquipment);
 
