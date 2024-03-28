@@ -14,10 +14,24 @@ public class Program {
             dir = dir.GetDirectories("ida/CExporter", SearchOption.AllDirectories).First().Parent!;
         }
 
+        Console.WriteLine("::group::Processing Structs");
         Exporter.ProcessTypes();
+        Console.WriteLine("::endgroup::");
 
         foreach (var warning in ExporterStatics.WarningList) {
             Console.WriteLine(warning);
         }
+
+        foreach (var error in ExporterStatics.ErrorList) {
+            Console.Error.WriteLine(error);
+        }
+        if (ExporterStatics.ErrorList.Count > 0) {
+            Environment.Exit(1);
+        }
+
+        Console.WriteLine("::group::Writing Files");
+        Exporter.WriteIDA(dir);
+
+        Console.WriteLine("::endgroup::");
     }
 }

@@ -18,6 +18,9 @@ public static class ExporterStatics {
     public static Dictionary<Type, string> WarningListDictionary = new();
     public static List<string> WarningList = [];
     public static List<string> ErrorList = [];
+
+    public static string Separator = "::";
+    public static bool IsIDA => Separator == "::";
 #pragma warning restore CA2211
 
     public static Type[] GetXIVTypes() {

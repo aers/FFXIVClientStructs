@@ -17,7 +17,7 @@ public static class TypeExtensions {
         return type != typeof(decimal) && type is { IsValueType: true, IsPrimitive: false, IsEnum: false };
     }
 
-    public static string FixTypeName(this Type type, Func<Type, bool, string> unhandled, bool shouldLower = true) =>
+    public static string FixTypeName(this Type? type, Func<Type, bool, string> unhandled, bool shouldLower = true) =>
         type switch {
             _ when type == typeof(void) || type == typeof(void*) || type == typeof(void**) ||
                    type == typeof(byte) || type == typeof(byte*) || type == typeof(byte**) => shouldLower ? type.Name.ToLower() : type.Name,
@@ -75,20 +75,40 @@ public static class TypeExtensions {
         return offset == 0 ? "" : ns[offset..];
     }
 
+    public static string GetFullname(this Type type) {
+        return type.Namespace + "." + type.Name;
+    }
+
     public static bool IsHavok(this Type type) {
-        return type.Namespace?.StartsWith(ExporterStatics.HavokNamespacePrefix) ?? false;
+        return type.GetFullname().StartsWith(ExporterStatics.HavokNamespacePrefix);
     }
 
     public static bool IsStd(this Type type) {
-        return type.Namespace?.StartsWith(ExporterStatics.StdNamespacePrefix) ?? false;
+        return type.GetFullname().StartsWith(ExporterStatics.StdNamespacePrefix);
     }
 
     public static bool IsXiv(this Type type) {
-        return type.Namespace?.StartsWith(ExporterStatics.FFXIVNamespacePrefix) ?? false;
+        return type.GetFullname().StartsWith(ExporterStatics.FFXIVNamespacePrefix);
+    }
+
+    public static bool IsInterop(this Type type) {
+        return type.GetFullname().StartsWith(ExporterStatics.InteropNamespacePrefix);
     }
 
     public static bool IsPointer(this Type type) {
         return type.IsPointer || type.IsFunctionPointer || type.IsUnmanagedFunctionPointer || (type.Name == "Pointer`1" && type.Namespace == ExporterStatics.InteropNamespacePrefix[..^1]);
+    }
+
+    public static string SanitizeName(this Type type) {
+        var name = type.FullName ?? type.Namespace! + "." + type.Name;
+        if (type.IsHavok() || type.IsStd() || type.IsXiv() | type.IsInterop()) {
+            var offset = name.IndexOf('.', name.IndexOf('.') + 1) + 1;
+            name = name[offset..];
+        }
+        if (!type.IsGenericType) return name;
+        name = name[..name.IndexOf('`')];
+        name += "<" + string.Join(", ", type.GenericTypeArguments.Select(t => t.SanitizeName())) + ">";
+        return name;
     }
 }
 
