@@ -57,7 +57,7 @@ public unsafe partial struct UIState {
     [FieldOffset(0x12980)] public MobHunt MobHunt;
     [FieldOffset(0x12B18)] public WeatherForecast WeatherForecast;
     [FieldOffset(0x12B40)] public TripleTriad TripleTriad;
-    [FieldOffset(0x12B40)] public EurekaElementalEdit EurekaElementalEdit;
+    [FieldOffset(0x14050)] public EurekaElementalEdit EurekaElementalEdit;
     [FieldOffset(0x14068)] public LovmRanking LovmRanking;
     [FieldOffset(0x15CA8)] public CollectablesShop CollectablesShop;
     [FieldOffset(0x15F60)] public QTE QTE;
