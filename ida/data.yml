@@ -1713,6 +1713,12 @@ classes:
     funcs:
       0x14097B310: GetPenaltyRemainingInMinutes
       0x14097D930: IsRouletteIncomplete
+  Client::Game::UI::GuildOrderReward:
+    instances:
+      - ea: 0x142203A18
+        pointer: False
+    vtbls:
+      - ea: 0x141A69728
   Client::Game::UI::ContentsFinder:
     instances:
       - ea: 0x142203A78

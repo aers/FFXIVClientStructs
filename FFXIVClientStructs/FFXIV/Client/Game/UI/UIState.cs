@@ -50,6 +50,7 @@ public unsafe partial struct UIState {
     [FieldOffset(0xFAE8)] public TitleList TitleList;
 
     [FieldOffset(0x12798)] public RouletteController RouletteController;
+    [FieldOffset(0x12808)] public GuildOrderReward GuildOrderReward;
     [FieldOffset(0x12868)] public ContentsFinder ContentsFinder;
     [FieldOffset(0x12980)] public MobHunt MobHunt;
 
