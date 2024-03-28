@@ -1608,6 +1608,13 @@ classes:
       0x140946680: CancelCraftingPassthrough
       0x140946780: InitializeStructs
       0x1409473F0: ClearFunctionPointers
+  Client::Game::UI::FishingNote:
+    instances:
+      - ea: 0x1421F6710
+        pointer: False
+    funcs:
+      0x140947DE0: ctor
+      0x140947C80: Initialize
   Client::Game::UI::Map:
     instances:
       - ea: 0x1421FCA00
