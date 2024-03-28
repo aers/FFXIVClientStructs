@@ -1793,6 +1793,12 @@ classes:
       0x1409931D0: ctor
       0x140993310: Initialize
       0x1409938B0: Update
+  Client::Game::UI::CharaCard:
+    instances:
+      - ea: 0x142208920
+        pointer: False
+    funcs:
+      0x140994470: ctor
   Client::Game::ActionManager:
     instances:
       - ea: 0x14216C9D0

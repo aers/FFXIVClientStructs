@@ -63,7 +63,8 @@ public unsafe partial struct UIState {
     [FieldOffset(0x15F60)] public QTE QTE;
     [FieldOffset(0x15F88)] public Emj Emj;
     [FieldOffset(0x15FC0)] public GoldSaucerYell GoldSaucerYell;
-    // 0x17710: temporarily stores CharaCard (AdventurerPlate + Portrait) update packets, size 0x1B8, offset is overlapping GoldSaucerYell by 0x10 bytes?!
+    [FieldOffset(0x17710)] public CharaCard CharaCard;
+    // 0x178C8: unknown struct, size 0x58
 
     // Ref: UIState#IsUnlockLinkUnlocked (relative to uistate)
     // Size: Offset of UnlockedAetherytesBitmask - Offset of UnlockLinkBitmask
