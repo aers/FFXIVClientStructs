@@ -1565,6 +1565,13 @@ classes:
     vtbls:
       - ea: 0x141A6A6D8
         base: Component::GUI::AtkModuleInterface::AtkEventInterface
+  Client::Game::UI::DailyQuestSupply:
+    instances:
+      - ea: 0x1421F4B00
+        pointer: False
+    vtbls:
+      - ea: 0x141A6A6E0
+        base: Component::GUI::AtkModuleInterface::AtkEventInterface
   Client::Game::UI::Loot:
     instances:
       - ea: 0x1421F4F28

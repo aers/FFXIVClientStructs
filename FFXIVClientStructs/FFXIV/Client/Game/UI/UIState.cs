@@ -28,6 +28,7 @@ public unsafe partial struct UIState {
     [FieldOffset(0x3808)] public TradeMultiple TradeMultiple;
     [FieldOffset(0x3850)] public AreaInstance AreaInstance; // at vtbl - 0x10
     [FieldOffset(0x3878)] public RelicSphereUpgrade RelicSphereUpgrade;
+    [FieldOffset(0x38F0)] public DailyQuestSupply DailyQuestSupply;
     [FieldOffset(0x3D18)] public Loot Loot;
 
     [FieldOffset(0x49E0)] public RecipeNote RecipeNote;
