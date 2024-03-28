@@ -285,11 +285,11 @@ public class ProcessedEnumConverter : IYamlTypeConverter {
         if (value is not ProcessedEnum e) return;
         emitter.Emit(new MappingStart());
         emitter.Emit(new Scalar("type"));
-        emitter.Emit(new Scalar(e.EnumType.FixTypeName((t, _) => t.SanitizeName())));
+        emitter.Emit(new Scalar(e.EnumType.FixTypeName((t, _) => t.SanitizeName()).Replace("+", ExporterStatics.Separator)));
         emitter.Emit(new Scalar("name"));
         emitter.Emit(new Scalar(e.EnumName));
         emitter.Emit(new Scalar("underlying"));
-        emitter.Emit(new Scalar(e.EnumType.GetEnumUnderlyingType().FixTypeName((t, _) => t.SanitizeName())));
+        emitter.Emit(new Scalar(e.EnumType.GetEnumUnderlyingType().FixTypeName((t, _) => t.SanitizeName()).Replace("+", ExporterStatics.Separator)));
         emitter.Emit(new Scalar("namespace"));
         emitter.Emit(new Scalar(e.EnumNamespace));
         emitter.Emit(new Scalar("values"));
@@ -311,7 +311,7 @@ public class ProcessedFieldConverter : IYamlTypeConverter {
         if (value is not ProcessedField f) return;
         emitter.Emit(new MappingStart());
         emitter.Emit(new Scalar("type"));
-        emitter.Emit(new Scalar(f.FieldType.FixTypeName((t, _) => t.SanitizeName())));
+        emitter.Emit(new Scalar(f.FieldType.FixTypeName((t, _) => t.SanitizeName()).Replace("+", ExporterStatics.Separator)));
         emitter.Emit(new Scalar("name"));
         emitter.Emit(new Scalar(f.FieldName));
         if (f.FieldOffset >= 0) {
@@ -330,7 +330,7 @@ public class ProcessedStructConverter : IYamlTypeConverter {
         if (value is not ProcessedStruct s) return;
         emitter.Emit(new MappingStart());
         emitter.Emit(new Scalar("type"));
-        emitter.Emit(new Scalar(s.StructType.FixTypeName((t, _) => t.SanitizeName())));
+        emitter.Emit(new Scalar(s.StructType.FixTypeName((t, _) => t.SanitizeName()).Replace("+", ExporterStatics.Separator)));
         emitter.Emit(new Scalar("name"));
         emitter.Emit(new Scalar(s.StructName));
         emitter.Emit(new Scalar("namespace"));
@@ -367,7 +367,7 @@ public class ProcessedMemberFunctionConverter : IYamlTypeConverter {
         emitter.Emit(new Scalar("signature"));
         emitter.Emit(new Scalar(m.MemberFunctionSignature));
         emitter.Emit(new Scalar("return_type"));
-        emitter.Emit(new Scalar(m.MemberFunctionReturnType.FixTypeName((t, _) => t.SanitizeName())));
+        emitter.Emit(new Scalar(m.MemberFunctionReturnType.FixTypeName((t, _) => t.SanitizeName()).Replace("+", ExporterStatics.Separator)));
         emitter.Emit(new Scalar("parameters"));
         emitter.Emit(new SequenceStart(null, null, true, SequenceStyle.Block));
         foreach (var parameter in m.MemberFunctionParameters) {
