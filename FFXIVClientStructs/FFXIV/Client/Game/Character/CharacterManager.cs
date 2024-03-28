@@ -13,6 +13,9 @@ public unsafe partial struct CharacterManager {
     [StaticAddress("8B D0 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B D8 48 85 C0 74 3A", 5)]
     public static partial CharacterManager* Instance();
 
+    [StaticAddress("48 89 05 ?? ?? ?? ?? 48 8B 49 08", 3, true)]
+    public static partial BattleChara* GetLocalPlayer(); // g_LocalPlayer
+
     [MemberFunction("E8 ?? ?? ?? ?? 48 89 84 1D")]
     public partial BattleChara* LookupBattleCharaByObjectId(uint objectId);
 
