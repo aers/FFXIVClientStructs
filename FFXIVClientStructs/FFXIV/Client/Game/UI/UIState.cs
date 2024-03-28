@@ -52,6 +52,7 @@ public unsafe partial struct UIState {
     [FieldOffset(0x12798)] public RouletteController RouletteController;
     [FieldOffset(0x12808)] public GuildOrderReward GuildOrderReward;
     [FieldOffset(0x12868)] public ContentsFinder ContentsFinder;
+    [FieldOffset(0x12918)] public Wedding Wedding;
     [FieldOffset(0x12980)] public MobHunt MobHunt;
 
     // [Patch 6.55] 0x17710: Adventurer Plate data

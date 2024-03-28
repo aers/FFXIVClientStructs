@@ -1725,6 +1725,12 @@ classes:
         pointer: False
     vtbls:
       - ea: 0x141A6A700
+  Client::Game::UI::Wedding:
+    instances:
+      - ea: 0x142203B28
+        pointer: False
+    vtbls:
+      - ea: 0x141A6A730
   Client::Game::UI::MobHunt:
     instances:
       - ea: 0x142203B90
