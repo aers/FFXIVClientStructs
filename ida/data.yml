@@ -1543,6 +1543,10 @@ classes:
       0x14097FBE0: IsDungeonComplete
       0x14097FC20: IsFateComplete
       0x14097FC60: IsLeveComplete
+  Client::Game::UI::TradeMultiple:
+    vtbls:
+      - ea: 0x141A6A6A8
+        base: Component::GUI::AtkModuleInterface::AtkEventInterface
   Client::Game::UI::AreaInstance:
     instances:
       - ea: 0x1421F4A60
