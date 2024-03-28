@@ -1744,6 +1744,12 @@ classes:
       0x14098B0D0: GetAvailableHuntOrderRowId
       0x14098B970: GetMarkIndexFromItemId
       0x14098B9C0: IsMarkBillUnlocked
+  Client::Game::UI::WeatherForecast:
+    instances:
+      - ea: 0x142203D28
+        pointer: False
+    vtbls:
+      - ea: 0x141A6A728
   Client::Game::ActionManager:
     instances:
       - ea: 0x14216C9D0
