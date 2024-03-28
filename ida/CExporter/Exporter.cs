@@ -182,10 +182,10 @@ ReExport:
                     VirtualFunctionName = f.Name,
                     Offset = f.GetFieldOffset(),
                     VirtualFunctionReturnType = f.FieldType.GetFunctionPointerReturnType(),
-                    VirtualFunctionParameters = f.FieldType.GetFunctionPointerParameterTypes().Select(p => new ProcessedField {
+                    VirtualFunctionParameters = f.FieldType.GetFunctionPointerParameterTypes().Select((p, i) => new ProcessedField {
                         FieldType = p,
-                        FieldOffset = 0,
-                        FieldName = p.Name
+                        FieldOffset = -1,
+                        FieldName = 'a' + (i + 1).ToString()
                     }).ToArray()
                 }).ToArray();
             }
@@ -208,7 +208,7 @@ ReExport:
                             MemberFunctionReturnType = memberFunctionReturnType,
                             MemberFunctionParameters = memberFunctionParameters.Select(p => new ProcessedField {
                                 FieldType = p.ParameterType,
-                                FieldOffset = 0,
+                                FieldOffset = -1,
                                 FieldName = p.Name!
                             }).ToArray()
                         },
@@ -314,8 +314,10 @@ public class ProcessedFieldConverter : IYamlTypeConverter {
         emitter.Emit(new Scalar(f.FieldType.FixTypeName((t, _) => t.SanitizeName())));
         emitter.Emit(new Scalar("name"));
         emitter.Emit(new Scalar(f.FieldName));
-        emitter.Emit(new Scalar("offset"));
-        emitter.Emit(new Scalar(f.FieldOffset.ToString()));
+        if (f.FieldOffset >= 0) {
+            emitter.Emit(new Scalar("offset"));
+            emitter.Emit(new Scalar(f.FieldOffset.ToString()));
+        }
         emitter.Emit(new MappingEnd());
     }
     public static readonly IYamlTypeConverter Instance = new ProcessedFieldConverter();
@@ -357,7 +359,7 @@ public class ProcessedStructConverter : IYamlTypeConverter {
 }
 
 public class ProcessedMemberFunctionConverter : IYamlTypeConverter {
-        public bool Accepts(Type type) => type == typeof(ProcessedMemberFunction);
+    public bool Accepts(Type type) => type == typeof(ProcessedMemberFunction);
     public object? ReadYaml(IParser parser, Type type) => throw new NotImplementedException();
     public void WriteYaml(IEmitter emitter, object? value, Type type) {
         if (value is not ProcessedMemberFunction m) return;
