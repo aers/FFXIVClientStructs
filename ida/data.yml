@@ -1572,6 +1572,10 @@ classes:
     vtbls:
       - ea: 0x141A6A6E0
         base: Component::GUI::AtkModuleInterface::AtkEventInterface
+  Client::Game::UI::RidePillon:
+    instances:
+      - ea: 0x1421F4EE8
+        pointer: False
   Client::Game::UI::Loot:
     instances:
       - ea: 0x1421F4F28
