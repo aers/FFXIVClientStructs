@@ -1585,6 +1585,13 @@ classes:
         base: Component::GUI::AtkModuleInterface::AtkEventInterface
     funcs:
       0x1409886A0: ctor
+  Client::Game::UI::GatheringNote:
+    instances:
+      - ea: 0x1421F55C8
+        pointer: False
+    funcs:
+      0x14093EB40: ctor
+      0x14093ED40: Initialize
   Client::Game::UI::RecipeNote:
     instances:
       - ea: 0x1421F5BF0
