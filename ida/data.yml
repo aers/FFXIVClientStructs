@@ -1768,6 +1768,13 @@ classes:
     instances:
       - ea: 0x142206EB8
         pointer: False
+  Client::Game::UI::QTE:
+    instances:
+      - ea: 0x142207170
+        pointer: False
+    vtbls:
+      - ea: 0x141A6A750
+        base: Component::GUI::AtkModuleInterface::AtkEventInterface
   Client::Game::ActionManager:
     instances:
       - ea: 0x14216C9D0
