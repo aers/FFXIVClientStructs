@@ -1704,6 +1704,12 @@ classes:
       0: dtor
     funcs:
       0x1409621F0: IsTitleUnlocked
+  Client::Game::UI::GCSupply:
+    instances:
+      - ea: 0x142200D80
+        pointer: False
+    funcs:
+      0x1409A9CC0: ctor
   Client::Game::UI::RouletteController:
     instances:
       - ea: 0x1422039A8
