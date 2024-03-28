@@ -17,10 +17,9 @@ public static class TypeExtensions {
         return type != typeof(decimal) && type is { IsValueType: true, IsPrimitive: false, IsEnum: false };
     }
 
-    public static string FixTypeName(this Type? type, Func<Type, bool, string> unhandled, bool shouldLower = true) =>
+    public static string FixTypeName(this Type type, Func<Type, bool, string> unhandled, bool shouldLower = true) =>
         type switch {
-            _ when type == typeof(void) || type == typeof(void*) || type == typeof(void**) ||
-                   type == typeof(byte) || type == typeof(byte*) || type == typeof(byte**) => shouldLower ? type.Name.ToLower() : type.Name,
+            _ when type == typeof(void) || type == typeof(byte) || type == typeof(byte*) || type == typeof(byte**) => shouldLower ? type.Name.ToLower() : type.Name,
             _ when type == typeof(char) => "wchar_t",
             _ when type == typeof(bool) => "bool",
             _ when type == typeof(float) => "float",
@@ -31,7 +30,7 @@ public static class TypeExtensions {
             _ when type == typeof(ushort) => "unsigned __int16",
             _ when type == typeof(uint) => "unsigned __int32",
             _ when type == typeof(ulong) || type == typeof(nuint) => "unsigned __int64",
-            _ when type == typeof(sbyte) => "signed __int8",
+            _ when type == typeof(sbyte) => "__int8",
             _ when type == typeof(char*) => "wchar_t*",
             _ when type == typeof(short*) => "__int16*",
             _ when type == typeof(ushort*) => "unsigned __int16*",
@@ -41,11 +40,12 @@ public static class TypeExtensions {
             _ when type == typeof(ulong*) || type == typeof(nuint*) => "unsigned __int64*",
             _ when type == typeof(float*) => "float*",
             _ when type == typeof(Half) => "__int16", // Half is a struct that is 2 bytes long and does not exist in C so we just use __int16
+            _ when type == typeof(void*) => "__int64",
+            _ when type == typeof(void**) => "__int64*",
             _ => unhandled(type, shouldLower)
         };
 
     public static int SizeOf(this Type type) {
-        // Marshal.SizeOf doesn't work correctly because the assembly is unmarshaled, and more specifically, it sets booleans as 4 bytes long...
         return type switch {
             _ when type == typeof(sbyte) || type == typeof(byte) || type == typeof(bool) => 1,
             _ when type == typeof(char) || type == typeof(short) || type == typeof(ushort) || type == typeof(Half) => 2,
@@ -54,7 +54,7 @@ public static class TypeExtensions {
             _ when type.IsStruct() && !type.IsGenericType && (type.StructLayoutAttribute?.Value ?? LayoutKind.Sequential) != LayoutKind.Sequential => type.StructLayoutAttribute?.Size ?? (int?)typeof(Unsafe).GetMethod("SizeOf")?.MakeGenericMethod(type).Invoke(null, null) ?? 0,
             _ when type.IsEnum => Enum.GetUnderlyingType(type).SizeOf(),
             _ when type.IsGenericType => Marshal.SizeOf(Activator.CreateInstance(type)!),
-            _ => (int?)typeof(Unsafe).GetMethod("SizeOf")?.MakeGenericMethod(type).Invoke(null, null) ?? 0
+            _ => 0
         };
     }
 
@@ -89,14 +89,21 @@ public static class TypeExtensions {
     }
 
     public static string SanitizeName(this Type type) {
+        if(type.IsPointer || type.IsFunctionPointer || type.IsUnmanagedFunctionPointer) return type.GetElementType()!.FixTypeName((t, _) => t.SanitizeName()) + "*";
         var name = type.FullName ?? type.Namespace! + "." + type.Name;
         if (type.IsHavok() || type.IsStd() || type.IsXiv() | type.IsInterop()) {
             var offset = name.IndexOf('.', name.IndexOf('.') + 1) + 1;
             name = name[offset..];
         }
         if (!type.IsGenericType) return name;
+        switch (type.Name) {
+            case "Pointer`1" when type.Namespace == ExporterStatics.InteropNamespacePrefix[..^1]:
+                return type.GenericTypeArguments[0].FixTypeName((t, _) => t.SanitizeName()) + "*";
+            case "hkRefPtr`1" when type.Namespace == ExporterStatics.HavokNamespacePrefix[..^1]:
+                return type.GenericTypeArguments[0].FixTypeName((t, _) => t.SanitizeName()) + "*";
+        }
         name = name[..name.IndexOf('`')];
-        name += "<" + string.Join(", ", type.GenericTypeArguments.Select(t => t.SanitizeName())) + ">";
+        name += "<" + string.Join(", ", type.GenericTypeArguments.Select(t => t.FixTypeName((t, _) => t.SanitizeName()))) + ">";
         return name;
     }
 }

@@ -4,12 +4,11 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using FFXIVClientStructs.Attributes;
-using FFXIVClientStructs.Interop;
 using FFXIVClientStructs.Interop.Attributes;
 using YamlDotNet.Core;
 using YamlDotNet.Core.Events;
-using YamlDotNet.RepresentationModel;
 using YamlDotNet.Serialization;
+using YamlDotNet.Serialization.NamingConventions;
 
 namespace CExporter;
 
@@ -85,6 +84,13 @@ public class Exporter {
             }
         }
 
+        foreach (var field in _structs.SelectMany(t => t.Fields)) {
+            if (!field.FieldType.IsStruct()) continue;
+            if (_structs.Any(t => t.StructType == field.FieldType)) continue;
+            if (remaining.Contains(field.FieldType)) continue;
+            remaining.Add(field.FieldType);
+        }
+
         Console.WriteLine($"Third pass took {DateTime.UtcNow - now:g}");
 
         now = DateTime.UtcNow;
@@ -123,13 +129,14 @@ ProcessRemaining:
 ReExport:
         foreach (var @struct in _structs.Where(t => !structsOrdered.Contains(t))) {
             var types = structsOrdered.Select(t => t.StructType).ToArray();
-            if (@struct.Dependencies.Any(t => types.Contains(t)) && !@struct.Dependencies.All(t => types.Contains(t))) continue;
+            if (!@struct.Dependencies.All(t => types.Contains(t))) continue;
             structsOrdered = [.. structsOrdered, @struct];
         }
 
         if (structsOrdered.Length != _structs.Count) goto ReExport;
 
         var serializer = new SerializerBuilder()
+            .WithNamingConvention(UnderscoredNamingConvention.Instance)
             .WithTypeConverter(ProcessedStructConverter.Instance)
             .WithTypeConverter(ProcessedEnumConverter.Instance)
             .WithTypeConverter(ProcessedFieldConverter.Instance)
@@ -137,7 +144,7 @@ ReExport:
             .WithTypeConverter(ProcessedMemberFunctionConverter.Instance)
             .Build();
         var yaml = serializer.Serialize(new YamlExport {
-            Enums = _enums.ToArray(),
+            Enums = [.. _enums],
             Structs = structsOrdered
         });
 
@@ -162,6 +169,7 @@ ReExport:
         if (_structs.Any(t => t.StructType == type)) return null;
         if (_enums.Any(t => t.EnumType == type)) return null;
         if (type.IsFixedBuffer()) return null;
+        if (type.IsPointer) type = type.GetElementType()!;
 
         if (type.IsEnum) {
             var processedEnum = new ProcessedEnum {
@@ -220,10 +228,34 @@ ReExport:
                 StructType = type,
                 StructName = type.Name,
                 StructNamespace = type.GetNamespace(),
-                Fields = type.GetFields(_bindingFlags).Where(t => !ExporterStatics.IgnoredTypeNames.Contains(t.Name) && t.GetCustomAttribute<ObsoleteAttribute>() == null && t.GetCustomAttribute<CExportIgnoreAttribute>() == null).Select(f => new ProcessedField {
-                    FieldType = f.FieldType,
-                    FieldOffset = f.GetFieldOffset(),
-                    FieldName = f.Name
+                StructSize = type.SizeOf(),
+                Fields = type.GetFields(_bindingFlags).Where(t => !ExporterStatics.IgnoredTypeNames.Contains(t.Name) && t.GetCustomAttribute<ObsoleteAttribute>() == null && t.GetCustomAttribute<CExportIgnoreAttribute>() == null).Select(f => {
+                    if (f.FieldType.IsFunctionPointer || f.FieldType.IsUnmanagedFunctionPointer) {
+                        return new ProcessedFunctionField {
+                            FieldType = f.FieldType,
+                            FieldOffset = f.GetFieldOffset(),
+                            FieldName = f.Name,
+                            FunctionReturnType = f.FieldType.GetFunctionPointerReturnType(),
+                            FunctionParameters = f.FieldType.GetFunctionPointerParameterTypes().Select((p, i) => new ProcessedField {
+                                FieldType = p,
+                                FieldOffset = -1,
+                                FieldName = 'a' + (i + 1).ToString()
+                            }).ToArray()
+                        };
+                    }
+                    if (f.FieldType.IsFixedBuffer()) {
+                        return new ProcessedFixedField {
+                            FieldType = f.FieldType.GetFields()[0].FieldType,
+                            FieldOffset = f.GetFieldOffset(),
+                            FieldName = f.Name,
+                            FixedSize = f.FieldType.StructLayoutAttribute!.Size
+                        };
+                    }
+                    return new ProcessedField {
+                        FieldType = f.FieldType,
+                        FieldOffset = f.GetFieldOffset(),
+                        FieldName = f.Name
+                    };
                 }).ToArray(),
                 VirtualFunctions = virtualFunctions,
                 MemberFunctions = memberFunctionsArray
@@ -246,10 +278,20 @@ public class ProcessedField {
     public required int FieldOffset;
 }
 
+public class ProcessedFixedField : ProcessedField {
+    public required int FixedSize;
+}
+
+public class ProcessedFunctionField : ProcessedField {
+    public required Type FunctionReturnType;
+    public required ProcessedField[] FunctionParameters;
+}
+
 public class ProcessedStruct {
     public required Type StructType;
     public required string StructName;
     public required string StructNamespace;
+    public required int StructSize;
     public required ProcessedField[] Fields;
     public required ProcessedVirtualFunction[] VirtualFunctions;
     public required ProcessedMemberFunction[] MemberFunctions;
@@ -285,11 +327,11 @@ public class ProcessedEnumConverter : IYamlTypeConverter {
         if (value is not ProcessedEnum e) return;
         emitter.Emit(new MappingStart());
         emitter.Emit(new Scalar("type"));
-        emitter.Emit(new Scalar(e.EnumType.FixTypeName((t, _) => t.SanitizeName()).Replace("+", ExporterStatics.Separator)));
+        emitter.Emit(new Scalar(e.EnumType.FixTypeName((t, _) => t.SanitizeName()).Replace("+", ExporterStatics.Separator).Replace(".", ExporterStatics.Separator)));
         emitter.Emit(new Scalar("name"));
         emitter.Emit(new Scalar(e.EnumName));
         emitter.Emit(new Scalar("underlying"));
-        emitter.Emit(new Scalar(e.EnumType.GetEnumUnderlyingType().FixTypeName((t, _) => t.SanitizeName()).Replace("+", ExporterStatics.Separator)));
+        emitter.Emit(new Scalar(e.EnumType.GetEnumUnderlyingType().FixTypeName((t, _) => t.SanitizeName()).Replace("+", ExporterStatics.Separator).Replace(".", ExporterStatics.Separator)));
         emitter.Emit(new Scalar("namespace"));
         emitter.Emit(new Scalar(e.EnumNamespace));
         emitter.Emit(new Scalar("values"));
@@ -311,12 +353,35 @@ public class ProcessedFieldConverter : IYamlTypeConverter {
         if (value is not ProcessedField f) return;
         emitter.Emit(new MappingStart());
         emitter.Emit(new Scalar("type"));
-        emitter.Emit(new Scalar(f.FieldType.FixTypeName((t, _) => t.SanitizeName()).Replace("+", ExporterStatics.Separator)));
+        if (f.FieldType.IsFunctionPointer || f.FieldType.IsUnmanagedFunctionPointer) {
+            emitter.Emit(new Scalar("__fastcall"));
+        } else {
+            emitter.Emit(new Scalar(f.FieldType.FixTypeName((t, _) => t.SanitizeName()).Replace("+", ExporterStatics.Separator).Replace(".", ExporterStatics.Separator)));
+        }
         emitter.Emit(new Scalar("name"));
         emitter.Emit(new Scalar(f.FieldName));
         if (f.FieldOffset >= 0) {
             emitter.Emit(new Scalar("offset"));
             emitter.Emit(new Scalar(f.FieldOffset.ToString()));
+        }
+        if (f is ProcessedFunctionField func) {
+            emitter.Emit(new Scalar("returnType"));
+            emitter.Emit(new Scalar(func.FunctionReturnType.FixTypeName((t, _) => t.SanitizeName()).Replace("+", ExporterStatics.Separator).Replace(".", ExporterStatics.Separator)));
+            emitter.Emit(new Scalar("parameters"));
+            emitter.Emit(new SequenceStart(null, null, true, SequenceStyle.Block));
+            foreach (var p in func.FunctionParameters) {
+                emitter.Emit(new MappingStart());
+                emitter.Emit(new Scalar("type"));
+                emitter.Emit(new Scalar(p.FieldType.FixTypeName((t, _) => t.SanitizeName()).Replace("+", ExporterStatics.Separator).Replace(".", ExporterStatics.Separator)));
+                emitter.Emit(new Scalar("name"));
+                emitter.Emit(new Scalar(p.FieldName));
+                emitter.Emit(new MappingEnd());
+            }
+            emitter.Emit(new SequenceEnd());
+        }
+        if (f is ProcessedFixedField fix) {
+            emitter.Emit(new Scalar("size"));
+            emitter.Emit(new Scalar(fix.FixedSize.ToString()));
         }
         emitter.Emit(new MappingEnd());
     }
@@ -330,12 +395,14 @@ public class ProcessedStructConverter : IYamlTypeConverter {
         if (value is not ProcessedStruct s) return;
         emitter.Emit(new MappingStart());
         emitter.Emit(new Scalar("type"));
-        emitter.Emit(new Scalar(s.StructType.FixTypeName((t, _) => t.SanitizeName()).Replace("+", ExporterStatics.Separator)));
+        emitter.Emit(new Scalar(s.StructType.FixTypeName((t, _) => t.SanitizeName()).Replace("+", ExporterStatics.Separator).Replace(".", ExporterStatics.Separator)));
         emitter.Emit(new Scalar("name"));
         emitter.Emit(new Scalar(s.StructName));
         emitter.Emit(new Scalar("namespace"));
         emitter.Emit(new Scalar(s.StructNamespace));
-        emitter.Emit(new Scalar("field"));
+        emitter.Emit(new Scalar("size"));
+        emitter.Emit(new Scalar(s.StructSize.ToString()));
+        emitter.Emit(new Scalar("fields"));
         emitter.Emit(new SequenceStart(null, null, true, SequenceStyle.Block));
         foreach (var field in s.Fields) {
             ProcessedFieldConverter.Instance.WriteYaml(emitter, field, field.GetType());
@@ -367,7 +434,7 @@ public class ProcessedMemberFunctionConverter : IYamlTypeConverter {
         emitter.Emit(new Scalar("signature"));
         emitter.Emit(new Scalar(m.MemberFunctionSignature));
         emitter.Emit(new Scalar("return_type"));
-        emitter.Emit(new Scalar(m.MemberFunctionReturnType.FixTypeName((t, _) => t.SanitizeName()).Replace("+", ExporterStatics.Separator)));
+        emitter.Emit(new Scalar(m.MemberFunctionReturnType.FixTypeName((t, _) => t.SanitizeName()).Replace("+", ExporterStatics.Separator).Replace(".", ExporterStatics.Separator)));
         emitter.Emit(new Scalar("parameters"));
         emitter.Emit(new SequenceStart(null, null, true, SequenceStyle.Block));
         foreach (var parameter in m.MemberFunctionParameters) {
@@ -391,7 +458,7 @@ public class ProcessedVirtualFunctionConverter : IYamlTypeConverter {
         emitter.Emit(new Scalar("offset"));
         emitter.Emit(new Scalar(v.Offset.ToString()));
         emitter.Emit(new Scalar("return_type"));
-        emitter.Emit(new Scalar(v.VirtualFunctionReturnType.FixTypeName((t, _) => t.SanitizeName())));
+        emitter.Emit(new Scalar(v.VirtualFunctionReturnType.FixTypeName((t, _) => t.SanitizeName()).Replace("+", ExporterStatics.Separator).Replace(".", ExporterStatics.Separator)));
         emitter.Emit(new Scalar("parameters"));
         emitter.Emit(new SequenceStart(null, null, true, SequenceStyle.Block));
         foreach (var parameter in v.VirtualFunctionParameters) {
