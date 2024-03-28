@@ -1349,6 +1349,7 @@ classes:
         pointer: False
     funcs:
       0x140999570: Initialize
+      0x14099A0A0: Update
       0x1409AAD40: ctor
       0x140996D60: SetUnlockLinkValue
       0x140996E00: IsUnlockLinkUnlocked
