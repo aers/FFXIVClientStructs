@@ -1615,6 +1615,13 @@ classes:
     funcs:
       0x140947DE0: ctor
       0x140947C80: Initialize
+  Client::Game::UI::FishRecord:
+    instances:
+      - ea: 0x1421F67E0
+        pointer: False
+    funcs:
+      0x14094A5C0: Initialize
+      0x14094A7C0: Finalize
   Client::Game::UI::Map:
     instances:
       - ea: 0x1421FCA00
