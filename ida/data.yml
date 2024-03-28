@@ -1756,6 +1756,10 @@ classes:
         pointer: False
     vtbls:
       - ea: 0x141A6A738
+  Client::Game::UI::EurekaElementalEdit:
+    instances:
+      - ea: 0x142205260
+        pointer: False
   Client::Game::ActionManager:
     instances:
       - ea: 0x14216C9D0
