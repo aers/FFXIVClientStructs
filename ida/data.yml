@@ -1622,6 +1622,18 @@ classes:
     funcs:
       0x14094A5C0: Initialize
       0x14094A7C0: Finalize
+  Client::Game::UI::ScenarioTextReader:
+    vtbls:
+      - ea: 0x141A69688
+  Client::Game::UI::Journal:
+    instances:
+      - ea: 0x1421F6A40
+        pointer: False
+    vtbls:
+      - ea: 0x141A69698
+        base: Client::Game::UI::ScenarioTextReader
+    funcs:
+      0x14094B670: ctor
   Client::Game::UI::Map:
     instances:
       - ea: 0x1421FCA00
