@@ -1634,6 +1634,15 @@ classes:
         base: Client::Game::UI::ScenarioTextReader
     funcs:
       0x14094B670: ctor
+  Client::Game::UI::QuestUI:
+    instances:
+      - ea: 0x1421FB188
+        pointer: False
+    vtbls:
+      - ea: 0x141A696A8
+        base: Client::Game::UI::ScenarioTextReader
+    funcs:
+      0x140957BB0: ctor
   Client::Game::UI::Map:
     instances:
       - ea: 0x1421FCA00
