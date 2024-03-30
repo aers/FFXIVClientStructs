@@ -169,14 +169,21 @@ ReExport:
                             MemberFunctionSignature = memberFunctionAddress!.Signature,
                             MemberFunctionName = memberFunction.Name,
                             MemberFunctionReturnType = memberFunctionReturnType,
-                            MemberFunctionParameters = memberFunctionParameters.Select(p => {
+                            MemberFunctionParameters = [
+                                new ProcessedField {
+                                    FieldTypeOverride = memberFunctionClass.FullSanitizeName() + "*",
+                                    FieldType = memberFunctionClass,
+                                    FieldOffset = -1,
+                                    FieldName = "this"
+                                },
+                                ..memberFunctionParameters.Select(p => {
                                 _processType.Add(p.ParameterType);
                                 return new ProcessedField {
                                     FieldType = p.ParameterType,
                                     FieldOffset = -1,
                                     FieldName = p.Name!
                                 };
-                            }).ToArray()
+                            }).ToArray()]
                         },
                     ];
                 }
@@ -237,6 +244,7 @@ public class YamlExport {
 }
 
 public class ProcessedField {
+    public string? FieldTypeOverride;
     public required Type FieldType;
     public required string FieldName;
     public required int FieldOffset;
@@ -320,7 +328,7 @@ public class ProcessedFieldConverter : IYamlTypeConverter {
         if (f.FieldType.IsFunctionPointer || f.FieldType.IsUnmanagedFunctionPointer) {
             emitter.Emit(new Scalar("__fastcall"));
         } else {
-            emitter.Emit(new Scalar(f.FieldType.FullSanitizeName()));
+            emitter.Emit(new Scalar(f.FieldTypeOverride ?? f.FieldType.FullSanitizeName()));
         }
         emitter.Emit(new Scalar("name"));
         emitter.Emit(new Scalar(f.FieldName));
@@ -336,7 +344,7 @@ public class ProcessedFieldConverter : IYamlTypeConverter {
             foreach (var p in func.FunctionParameters) {
                 emitter.Emit(new MappingStart());
                 emitter.Emit(new Scalar("type"));
-                emitter.Emit(new Scalar(p.FieldType.FullSanitizeName()));
+                emitter.Emit(new Scalar(p.FieldTypeOverride ?? p.FieldType.FullSanitizeName()));
                 emitter.Emit(new Scalar("name"));
                 emitter.Emit(new Scalar(p.FieldName));
                 emitter.Emit(new MappingEnd());
@@ -409,6 +417,7 @@ public class ProcessedMemberFunctionConverter : IYamlTypeConverter {
         emitter.Emit(new SequenceEnd());
         emitter.Emit(new MappingEnd());
     }
+
     public static readonly IYamlTypeConverter Instance = new ProcessedMemberFunctionConverter();
 }
 
