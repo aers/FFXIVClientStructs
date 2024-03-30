@@ -1,6 +1,7 @@
 from yaml import safe_load
 import os
 from abc import abstractmethod
+from time import time
 
 
 class DefinedBase:
@@ -423,38 +424,48 @@ if api is None:
 if api is None:
     raise Exception("Unable to load IDA or Ghidra")
 
+start_time = time()
+
+def get_time():
+    val = round(time() - start_time, 6).__str__()
+    while val.split(".")[-1].__len__() < 6:
+        val += "0"
+    return val 
+
 def run():
+    print("{0} Loading yaml".format(get_time()))
     yaml = api.get_yaml()
 
-    print("Deleting old structs")
+    print("{0} Deleting old enums".format(get_time()))
     for struct in yaml.structs[::-1]:
         api.delete_struct(struct)
 
-    print("Deleting old enums and creating new ones")
+    print("{0} Deleting old enums and creating new ones".format(get_time()))
     for enum in yaml.enums:
         api.delete_enum(enum)
         api.create_enum(enum)
 
-    print("Creating new structs")
+    print("{0} Creating new structs".format(get_time()))
     for struct in yaml.structs:
         api.create_struct(struct)
 
-    print("Creating members for structs")
+    print("{0} Creating members for structs".format(get_time()))
     for struct in yaml.structs:
         api.create_struct_members(struct)
 
-    print("Creating vtables for structs")
+    print("{0} Creating vtables for structs".format(get_time()))
     for struct in yaml.structs:
         if struct.virtual_functions != []:
             api.create_vtable(struct)
 
-    print("Mapping unions/vtables for structs")
+    print("{0} Mapping unions/vtables for structs".format(get_time()))
     for struct in yaml.structs:
         api.create_union(struct)
 
     for struct in yaml.structs:
-        print("Updating member functions for {0}".format(struct.type))
-        for member_func in struct.member_functions:
-            api.update_member_func(member_func)
+        if struct.member_functions != []:
+            print("{0} Updating member functions for {1}".format(get_time(), struct.type))
+            for member_func in struct.member_functions:
+                api.update_member_func(member_func)
 
 run()
