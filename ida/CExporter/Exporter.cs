@@ -16,6 +16,7 @@ public class Exporter {
     private static List<ProcessedEnum> _enums = [];
     private static List<ProcessedStruct> _structs = [];
     private static BindingFlags _bindingFlags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance;
+    private static List<Type> _processType = [];
 
     public static void ProcessTypes() {
         var havokTypes = ExporterStatics.GetHavokTypes();
@@ -24,8 +25,8 @@ public class Exporter {
         Console.WriteLine($"Found {havokTypes.Length} havok types");
         Console.WriteLine($"Found {xivTypes.Length} xiv types");
 
-        var havokStructs = havokTypes.Where(t => t.IsStruct() && !t.IsGenericType).ToArray();
-        var xivStructs = xivTypes.Where(t => t.IsStruct() && !t.IsGenericType).ToArray();
+        var havokStructs = havokTypes.Where(t => t.IsStruct() && !t.IsGenericType && !t.IsFixedBuffer()).ToArray();
+        var xivStructs = xivTypes.Where(t => t.IsStruct() && !t.IsGenericType && !t.IsFixedBuffer()).ToArray();
 
         Console.WriteLine($"Filtered havok to {havokStructs.Length} structs");
         Console.WriteLine($"Filtered xiv to {xivStructs.Length} structs");
@@ -38,86 +39,23 @@ public class Exporter {
 
         Console.WriteLine($"First pass took {DateTime.UtcNow - now:g}");
 
+        var count = 0;
         now = DateTime.UtcNow;
 
-        foreach (var @struct in _structs) {
-            foreach (var virtualFunction in @struct.VirtualFunctions) {
-                foreach (var field in virtualFunction.VirtualFunctionParameters) {
-                    if (!field.FieldType.IsStruct()) continue;
-                    if (field.FieldType.SizeOf() > 8 && !field.FieldType.IsPointer) {
-                        ExporterStatics.WarningList.Add($"{@struct.StructNamespace}.{@struct.StructName} method {virtualFunction.VirtualFunctionName} has parameter `{field.FieldName}` with type {field.FieldType.Name} not as a pointer. C# will handle this as a stack pointer reference but correct typing would be `{field.FieldType.Name}* {field.FieldName}`");
-                    }
-                    if (_structs.Any(t => t.StructType == field.FieldType)) continue;
-                    ProcessType(field.FieldType);
-                }
+        while (_processType.Count > 0) {
+            var tmp = _processType
+                .Where(t => t is { IsUnmanagedFunctionPointer: false, IsFunctionPointer: false })
+                .ToArray();
+            _processType.Clear();
+            foreach (var @struct in tmp) {
+                ProcessType(@struct);
             }
-            foreach (var memberFunction in @struct.MemberFunctions) {
-                foreach (var field in memberFunction.MemberFunctionParameters) {
-                    if (!field.FieldType.IsStruct()) continue;
-                    if (field.FieldType.SizeOf() > 8 && !field.FieldType.IsPointer && !@struct.StructType.IsHavok()) {
-                        var fullName = string.IsNullOrWhiteSpace(@struct.StructNamespace) ? $"{@struct.StructNamespace}.{@struct.StructName}" : @struct.StructName;
-                        ExporterStatics.WarningList.Add($"{fullName} method {memberFunction.MemberFunctionName} has parameter `{field.FieldName}` with type {field.FieldType.Name} not as a pointer. C# will handle this as a stack pointer reference but correct typing would be `{field.FieldType.Name}* {field.FieldName}`");
-                    }
-                }
-            }
+
+
+            count++;
         }
 
-        Console.WriteLine($"Second pass took {DateTime.UtcNow - now:g}");
-
-        now = DateTime.UtcNow;
-
-        var remaining = new List<Type>();
-
-        foreach (var processed in _structs.SelectMany(t => t.Fields.Select(f => PreProcessType(f.FieldType))).ToArray()) {
-            switch (processed) {
-                case null:
-                    break;
-                case ProcessedStruct s:
-                    if (_structs.Any(t => t.StructType == s.StructType)) continue;
-                    _structs.Add(s);
-                    remaining.AddRange(s.Fields.Select(t => t.FieldType));
-                    break;
-                case ProcessedEnum e:
-                    if (_enums.Any(t => t.EnumType == e.EnumType)) continue;
-                    _enums.Add(e);
-                    break;
-            }
-        }
-
-        foreach (var field in _structs.SelectMany(t => t.Fields)) {
-            if (!field.FieldType.IsStruct()) continue;
-            if (_structs.Any(t => t.StructType == field.FieldType)) continue;
-            if (remaining.Contains(field.FieldType)) continue;
-            remaining.Add(field.FieldType);
-        }
-
-        Console.WriteLine($"Third pass took {DateTime.UtcNow - now:g}");
-
-        now = DateTime.UtcNow;
-
-ProcessRemaining:
-        var remainingTypes = remaining.Distinct().ToArray();
-        remaining.Clear();
-        foreach (var type in remainingTypes) {
-            var processed = PreProcessType(type);
-            switch (processed) {
-                case null:
-                    break;
-                case ProcessedStruct s:
-                    if (_structs.Any(t => t.StructType == s.StructType)) continue;
-                    _structs.Add(s);
-                    remaining.AddRange(s.Fields.Select(t => t.FieldType));
-                    break;
-                case ProcessedEnum e:
-                    if (_enums.Any(t => t.EnumType == e.EnumType)) continue;
-                    _enums.Add(e);
-                    break;
-            }
-        }
-
-        if (remaining.Any()) goto ProcessRemaining;
-
-        Console.WriteLine($"Fourth pass took {DateTime.UtcNow - now:g}");
+        Console.WriteLine($"Second pass took {DateTime.UtcNow - now:g} running a total of {count} times");
 
         Console.WriteLine($"Processed {_enums.Count} enums and {_structs.Count} structs");
     }
@@ -166,12 +104,12 @@ ReExport:
     }
 
     private static object? PreProcessType(Type type) {
-        if (_structs.Any(t => t.StructType == type)) return null;
-        if (_enums.Any(t => t.EnumType == type)) return null;
         if (type.IsFixedBuffer()) return null;
-        if (type.IsPointer) type = type.GetElementType()!;
+        while (type.IsPointer) type = type.GetElementType()!;
+        while (type.IsGenericPointer()) type = type.GenericTypeArguments[0];
 
         if (type.IsEnum) {
+            if (_enums.Any(t => t.EnumType.FullSanitizeName() == type.FullSanitizeName())) return null;
             var processedEnum = new ProcessedEnum {
                 EnumType = type,
                 EnumName = type.Name,
@@ -181,20 +119,35 @@ ReExport:
 
             _enums.Add(processedEnum);
         } else if (type.IsStruct()) {
+            while (type.IsPointer) type = type.GetElementType()!;
+            while (type.IsGenericPointer()) type = type.GenericTypeArguments[0];
+            if (type.IsFunctionPointer || type.IsUnmanagedFunctionPointer) {
+                foreach (var functionPointerParameterType in type.GetFunctionPointerParameterTypes()) {
+                    ProcessType(functionPointerParameterType);
+                    type = type.GetFunctionPointerReturnType();
+                }
+            }
+            if (!type.IsStruct() || type.IsEnum) return null;
+            if (_structs.Any(t => t.StructType.FullSanitizeName() == type.FullSanitizeName())) return null;
             var vtable = type.GetField("VTable", _bindingFlags)?.FieldType;
             ProcessedVirtualFunction[] virtualFunctions = [];
             if (vtable != null) {
-                while (vtable.IsPointer)
-                    vtable = vtable.GetElementType()!;
-                virtualFunctions = vtable.GetFields(_bindingFlags).Select(f => new ProcessedVirtualFunction {
-                    VirtualFunctionName = f.Name,
-                    Offset = f.GetFieldOffset(),
-                    VirtualFunctionReturnType = f.FieldType.GetFunctionPointerReturnType(),
-                    VirtualFunctionParameters = f.FieldType.GetFunctionPointerParameterTypes().Select((p, i) => new ProcessedField {
-                        FieldType = p,
-                        FieldOffset = -1,
-                        FieldName = 'a' + (i + 1).ToString()
-                    }).ToArray()
+                vtable = vtable.GetElementType()!;
+                virtualFunctions = vtable.GetFields(_bindingFlags).Select(f => {
+                    _processType.Add(f.FieldType.GetFunctionPointerReturnType());
+                    return new ProcessedVirtualFunction {
+                        VirtualFunctionName = f.Name,
+                        Offset = f.GetFieldOffset(),
+                        VirtualFunctionReturnType = f.FieldType.GetFunctionPointerReturnType(),
+                        VirtualFunctionParameters = f.FieldType.GetFunctionPointerParameterTypes().Select((p, i) => {
+                            _processType.Add(p);
+                            return new ProcessedField {
+                                FieldType = p,
+                                FieldOffset = -1,
+                                FieldName = 'a' + (i + 1).ToString()
+                            };
+                        }).ToArray()
+                    };
                 }).ToArray();
             }
 
@@ -207,6 +160,7 @@ ReExport:
                     if (memberFunctionAddress == null) continue;
                     var memberFunctionParameters = memberFunction.GetParameters();
                     var memberFunctionReturnType = memberFunction.ReturnType;
+                    _processType.Add(memberFunctionReturnType);
                     memberFunctionsArray =
                     [
                         .. memberFunctionsArray,
@@ -214,10 +168,13 @@ ReExport:
                             MemberFunctionSignature = memberFunctionAddress!.Signature,
                             MemberFunctionName = memberFunction.Name,
                             MemberFunctionReturnType = memberFunctionReturnType,
-                            MemberFunctionParameters = memberFunctionParameters.Select(p => new ProcessedField {
-                                FieldType = p.ParameterType,
-                                FieldOffset = -1,
-                                FieldName = p.Name!
+                            MemberFunctionParameters = memberFunctionParameters.Select(p => {
+                                _processType.Add(p.ParameterType);
+                                return new ProcessedField {
+                                    FieldType = p.ParameterType,
+                                    FieldOffset = -1,
+                                    FieldName = p.Name!
+                                };
                             }).ToArray()
                         },
                     ];
@@ -231,19 +188,24 @@ ReExport:
                 StructSize = type.SizeOf(),
                 Fields = type.GetFields(_bindingFlags).Where(t => !ExporterStatics.IgnoredTypeNames.Contains(t.Name) && t.GetCustomAttribute<ObsoleteAttribute>() == null && t.GetCustomAttribute<CExportIgnoreAttribute>() == null).Select(f => {
                     if (f.FieldType.IsFunctionPointer || f.FieldType.IsUnmanagedFunctionPointer) {
+                        _processType.Add(f.FieldType.GetFunctionPointerReturnType());
                         return new ProcessedFunctionField {
                             FieldType = f.FieldType,
                             FieldOffset = f.GetFieldOffset(),
                             FieldName = f.Name,
                             FunctionReturnType = f.FieldType.GetFunctionPointerReturnType(),
-                            FunctionParameters = f.FieldType.GetFunctionPointerParameterTypes().Select((p, i) => new ProcessedField {
-                                FieldType = p,
-                                FieldOffset = -1,
-                                FieldName = 'a' + (i + 1).ToString()
+                            FunctionParameters = f.FieldType.GetFunctionPointerParameterTypes().Select((p, i) => {
+                                _processType.Add(p);
+                                return new ProcessedField {
+                                    FieldType = p,
+                                    FieldOffset = -1,
+                                    FieldName = 'a' + (i + 1).ToString()
+                                };
                             }).ToArray()
                         };
                     }
                     if (f.FieldType.IsFixedBuffer()) {
+                        _processType.Add(f.FieldType.GetFields()[0].FieldType);
                         return new ProcessedFixedField {
                             FieldType = f.FieldType.GetFields()[0].FieldType,
                             FieldOffset = f.GetFieldOffset(),
@@ -251,6 +213,7 @@ ReExport:
                             FixedSize = f.FieldType.StructLayoutAttribute!.Size
                         };
                     }
+                    _processType.Add(f.FieldType);
                     return new ProcessedField {
                         FieldType = f.FieldType,
                         FieldOffset = f.GetFieldOffset(),
@@ -327,11 +290,11 @@ public class ProcessedEnumConverter : IYamlTypeConverter {
         if (value is not ProcessedEnum e) return;
         emitter.Emit(new MappingStart());
         emitter.Emit(new Scalar("type"));
-        emitter.Emit(new Scalar(e.EnumType.FixTypeName((t, _) => t.SanitizeName()).Replace("+", ExporterStatics.Separator).Replace(".", ExporterStatics.Separator)));
+        emitter.Emit(new Scalar(e.EnumType.FullSanitizeName()));
         emitter.Emit(new Scalar("name"));
         emitter.Emit(new Scalar(e.EnumName));
         emitter.Emit(new Scalar("underlying"));
-        emitter.Emit(new Scalar(e.EnumType.GetEnumUnderlyingType().FixTypeName((t, _) => t.SanitizeName()).Replace("+", ExporterStatics.Separator).Replace(".", ExporterStatics.Separator)));
+        emitter.Emit(new Scalar(e.EnumType.FullSanitizeName()));
         emitter.Emit(new Scalar("namespace"));
         emitter.Emit(new Scalar(e.EnumNamespace));
         emitter.Emit(new Scalar("values"));
@@ -356,7 +319,7 @@ public class ProcessedFieldConverter : IYamlTypeConverter {
         if (f.FieldType.IsFunctionPointer || f.FieldType.IsUnmanagedFunctionPointer) {
             emitter.Emit(new Scalar("__fastcall"));
         } else {
-            emitter.Emit(new Scalar(f.FieldType.FixTypeName((t, _) => t.SanitizeName()).Replace("+", ExporterStatics.Separator).Replace(".", ExporterStatics.Separator)));
+            emitter.Emit(new Scalar(f.FieldType.FullSanitizeName()));
         }
         emitter.Emit(new Scalar("name"));
         emitter.Emit(new Scalar(f.FieldName));
@@ -365,14 +328,14 @@ public class ProcessedFieldConverter : IYamlTypeConverter {
             emitter.Emit(new Scalar(f.FieldOffset.ToString()));
         }
         if (f is ProcessedFunctionField func) {
-            emitter.Emit(new Scalar("returnType"));
-            emitter.Emit(new Scalar(func.FunctionReturnType.FixTypeName((t, _) => t.SanitizeName()).Replace("+", ExporterStatics.Separator).Replace(".", ExporterStatics.Separator)));
+            emitter.Emit(new Scalar("return_type"));
+            emitter.Emit(new Scalar(func.FunctionReturnType.FullSanitizeName()));
             emitter.Emit(new Scalar("parameters"));
             emitter.Emit(new SequenceStart(null, null, true, SequenceStyle.Block));
             foreach (var p in func.FunctionParameters) {
                 emitter.Emit(new MappingStart());
                 emitter.Emit(new Scalar("type"));
-                emitter.Emit(new Scalar(p.FieldType.FixTypeName((t, _) => t.SanitizeName()).Replace("+", ExporterStatics.Separator).Replace(".", ExporterStatics.Separator)));
+                emitter.Emit(new Scalar(p.FieldType.FullSanitizeName()));
                 emitter.Emit(new Scalar("name"));
                 emitter.Emit(new Scalar(p.FieldName));
                 emitter.Emit(new MappingEnd());
@@ -395,7 +358,7 @@ public class ProcessedStructConverter : IYamlTypeConverter {
         if (value is not ProcessedStruct s) return;
         emitter.Emit(new MappingStart());
         emitter.Emit(new Scalar("type"));
-        emitter.Emit(new Scalar(s.StructType.FixTypeName((t, _) => t.SanitizeName()).Replace("+", ExporterStatics.Separator).Replace(".", ExporterStatics.Separator)));
+        emitter.Emit(new Scalar(s.StructType.FullSanitizeName()));
         emitter.Emit(new Scalar("name"));
         emitter.Emit(new Scalar(s.StructName));
         emitter.Emit(new Scalar("namespace"));
@@ -434,7 +397,7 @@ public class ProcessedMemberFunctionConverter : IYamlTypeConverter {
         emitter.Emit(new Scalar("signature"));
         emitter.Emit(new Scalar(m.MemberFunctionSignature));
         emitter.Emit(new Scalar("return_type"));
-        emitter.Emit(new Scalar(m.MemberFunctionReturnType.FixTypeName((t, _) => t.SanitizeName()).Replace("+", ExporterStatics.Separator).Replace(".", ExporterStatics.Separator)));
+        emitter.Emit(new Scalar(m.MemberFunctionReturnType.FullSanitizeName()));
         emitter.Emit(new Scalar("parameters"));
         emitter.Emit(new SequenceStart(null, null, true, SequenceStyle.Block));
         foreach (var parameter in m.MemberFunctionParameters) {
@@ -458,7 +421,7 @@ public class ProcessedVirtualFunctionConverter : IYamlTypeConverter {
         emitter.Emit(new Scalar("offset"));
         emitter.Emit(new Scalar(v.Offset.ToString()));
         emitter.Emit(new Scalar("return_type"));
-        emitter.Emit(new Scalar(v.VirtualFunctionReturnType.FixTypeName((t, _) => t.SanitizeName()).Replace("+", ExporterStatics.Separator).Replace(".", ExporterStatics.Separator)));
+        emitter.Emit(new Scalar(v.VirtualFunctionReturnType.FullSanitizeName()));
         emitter.Emit(new Scalar("parameters"));
         emitter.Emit(new SequenceStart(null, null, true, SequenceStyle.Block));
         foreach (var parameter in v.VirtualFunctionParameters) {

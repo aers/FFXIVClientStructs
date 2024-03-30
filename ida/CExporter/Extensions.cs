@@ -85,7 +85,11 @@ public static class TypeExtensions {
     }
 
     public static bool IsPointer(this Type type) {
-        return type.IsPointer || type.IsFunctionPointer || type.IsUnmanagedFunctionPointer || (type.Name == "Pointer`1" && type.Namespace == ExporterStatics.InteropNamespacePrefix[..^1]);
+        return type.IsPointer || type.IsFunctionPointer || type.IsUnmanagedFunctionPointer || type.IsGenericPointer();
+    }
+
+    public static bool IsGenericPointer(this Type type) {
+        return (type.Name == "Pointer`1" && type.Namespace == ExporterStatics.InteropNamespacePrefix[..^1]) || (type.Name == "hkRefPtr`1" && type.Namespace == ExporterStatics.HavokNamespacePrefix[..^1]);
     }
 
     public static string SanitizeName(this Type type) {
@@ -106,6 +110,8 @@ public static class TypeExtensions {
         name += "<" + string.Join(", ", type.GenericTypeArguments.Select(t => t.FixTypeName((t, _) => t.SanitizeName()))) + ">";
         return name;
     }
+
+    public static string FullSanitizeName(this Type type) => type.FixTypeName((t, _) => t.SanitizeName()).Replace("+", ExporterStatics.Separator).Replace(".", ExporterStatics.Separator);
 }
 
 public static class FieldInfoExtensions {
