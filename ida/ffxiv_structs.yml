@@ -1,7 +1,7 @@
 enums:
 - type: Common::Lua::LuaType
   name: LuaType
-  underlying: Common::Lua::LuaType
+  underlying: __int32
   namespace: Common.Lua
   values:
     None: -1
@@ -18,7 +18,7 @@ enums:
     Upval: 10
 - type: Common::Component::BGCollision::ColliderType
   name: ColliderType
-  underlying: Common::Component::BGCollision::ColliderType
+  underlying: __int32
   namespace: Common.Component.BGCollision
   values:
     Streamed: 1
@@ -30,7 +30,7 @@ enums:
     PlaneTwoSided: 7
 - type: Component::Text::TextParameterType
   name: TextParameterType
-  underlying: Component::Text::TextParameterType
+  underlying: __int8
   namespace: Component.Text
   values:
     Uninitialized: -1
@@ -39,14 +39,14 @@ enums:
     String: 2
 - type: Component::SteamApi::SteamCallbackBase::SteamCallbackFlags
   name: SteamCallbackFlags
-  underlying: Component::SteamApi::SteamCallbackBase::SteamCallbackFlags
+  underlying: byte
   namespace: Component.SteamApi
   values:
     Registered: 1
     GameServer: 2
 - type: Component::GUI::IconComponentFlags
   name: IconComponentFlags
-  underlying: Component::GUI::IconComponentFlags
+  underlying: unsigned __int32
   namespace: Component.GUI
   values:
     None: 0
@@ -58,7 +58,7 @@ enums:
     InventoryItem: 2048
 - type: Component::GUI::AtkEventType
   name: AtkEventType
-  underlying: Component::GUI::AtkEventType
+  underlying: byte
   namespace: Component.GUI
   values:
     MouseDown: 3
@@ -92,7 +92,7 @@ enums:
     WindowChangeScale: 69
 - type: Component::GUI::AtkCursor::CursorType
   name: CursorType
-  underlying: Component::GUI::AtkCursor::CursorType
+  underlying: byte
   namespace: Component.GUI
   values:
     Arrow: 0
@@ -115,7 +115,7 @@ enums:
     Hidden: 17
 - type: Component::GUI::NodeType
   name: NodeType
-  underlying: Component::GUI::NodeType
+  underlying: unsigned __int16
   namespace: Component.GUI
   values:
     Res: 1
@@ -127,7 +127,7 @@ enums:
     UnknownNode10: 10
 - type: Component::GUI::NodeFlags
   name: NodeFlags
-  underlying: Component::GUI::NodeFlags
+  underlying: unsigned __int16
   namespace: Component.GUI
   values:
     AnchorTop: 1
@@ -148,7 +148,7 @@ enums:
     UnkFlag2: 32768
 - type: Component::GUI::SimpleTweenValueType
   name: SimpleTweenValueType
-  underlying: Component::GUI::SimpleTweenValueType
+  underlying: unsigned __int32
   namespace: Component.GUI
   values:
     X: 0
@@ -162,7 +162,7 @@ enums:
     NodeText: 8
 - type: Component::GUI::SimpleTweenState
   name: SimpleTweenState
-  underlying: Component::GUI::SimpleTweenState
+  underlying: unsigned __int32
   namespace: Component.GUI
   values:
     None: 0
@@ -170,7 +170,7 @@ enums:
     Complete: 2
 - type: Component::GUI::AlignmentType
   name: AlignmentType
-  underlying: Component::GUI::AlignmentType
+  underlying: __int32
   namespace: Component.GUI
   values:
     TopLeft: 0
@@ -184,7 +184,7 @@ enums:
     BottomRight: 8
 - type: Component::GUI::FontType
   name: FontType
-  underlying: Component::GUI::FontType
+  underlying: byte
   namespace: Component.GUI
   values:
     Axis: 0
@@ -195,7 +195,7 @@ enums:
     JupiterLarge: 5
 - type: Component::GUI::TextureType
   name: TextureType
-  underlying: Component::GUI::TextureType
+  underlying: byte
   namespace: Component.GUI
   values:
     Resource: 1
@@ -203,7 +203,7 @@ enums:
     KernelTexture: 3
 - type: Component::GUI::AtkTimelineJumpBehavior
   name: AtkTimelineJumpBehavior
-  underlying: Component::GUI::AtkTimelineJumpBehavior
+  underlying: byte
   namespace: Component.GUI
   values:
     Start: 0
@@ -212,7 +212,7 @@ enums:
     Initialize: 3
 - type: Component::GUI::AtkTimelineKeyGroupType
   name: AtkTimelineKeyGroupType
-  underlying: Component::GUI::AtkTimelineKeyGroupType
+  underlying: unsigned __int16
   namespace: Component.GUI
   values:
     Float2: 0
@@ -226,7 +226,7 @@ enums:
     None: 65535
 - type: Component::GUI::AtkTimelineMask
   name: AtkTimelineMask
-  underlying: Component::GUI::AtkTimelineMask
+  underlying: byte
   namespace: Component.GUI
   values:
     Position: 1
@@ -239,14 +239,14 @@ enums:
     ActiveLabel: 128
 - type: Component::GUI::AtkTimelineFlags
   name: AtkTimelineFlags
-  underlying: Component::GUI::AtkTimelineFlags
+  underlying: byte
   namespace: Component.GUI
   values:
     IsAnimated: 64
     UnknownFlag: 128
 - type: Component::GUI::AtkTimelineInterpolation
   name: AtkTimelineInterpolation
-  underlying: Component::GUI::AtkTimelineInterpolation
+  underlying: byte
   namespace: Component.GUI
   values:
     None: 0
@@ -254,7 +254,7 @@ enums:
     Smooth: 2
 - type: Component::GUI::AtkTooltipManager::AtkTooltipType
   name: AtkTooltipType
-  underlying: Component::GUI::AtkTooltipManager::AtkTooltipType
+  underlying: byte
   namespace: Component.GUI
   values:
     Text: 1
@@ -263,7 +263,7 @@ enums:
     Action: 4
 - type: Component::GUI::ComponentType
   name: ComponentType
-  underlying: Component::GUI::ComponentType
+  underlying: byte
   namespace: Component.GUI
   values:
     Base: 0
@@ -294,7 +294,7 @@ enums:
     Portrait: 25
 - type: Component::GUI::AtkLoadState
   name: AtkLoadState
-  underlying: Component::GUI::AtkLoadState
+  underlying: byte
   namespace: Component.GUI
   values:
     Unloaded: 0
@@ -304,7 +304,7 @@ enums:
     LoadError: 4
 - type: Component::GUI::ValueType
   name: ValueType
-  underlying: Component::GUI::ValueType
+  underlying: __int32
   namespace: Component.GUI
   values:
     Int: 3
@@ -320,7 +320,7 @@ enums:
     AllocatedVector: 41
 - type: Client::UI::ActionBarLayout
   name: ActionBarLayout
-  underlying: Client::UI::ActionBarLayout
+  underlying: byte
   namespace: Client.UI
   values:
     Layout12X1: 0
@@ -331,7 +331,7 @@ enums:
     Layout1X12: 5
 - type: Client::UI::GSInfoCardListFilterMode
   name: GSInfoCardListFilterMode
-  underlying: Client::UI::GSInfoCardListFilterMode
+  underlying: __int32
   namespace: Client.UI
   values:
     DisplayAllCards: 14
@@ -339,7 +339,7 @@ enums:
     DisplayUnownedCards: 9
 - type: Client::UI::AddonItemSearch::SearchMode
   name: SearchMode
-  underlying: Client::UI::AddonItemSearch::SearchMode
+  underlying: unsigned __int32
   namespace: Client.UI
   values:
     Normal: 0
@@ -352,7 +352,7 @@ enums:
     Unset: 7
 - type: Client::UI::RaidFinderEntryFlags
   name: RaidFinderEntryFlags
-  underlying: Client::UI::RaidFinderEntryFlags
+  underlying: byte
   namespace: Client.UI
   values:
     AvailableForSelection: 1
@@ -363,7 +363,7 @@ enums:
     Extreme: 64
 - type: Client::UI::Agent::AgentSalvage::SalvageItemCategory
   name: SalvageItemCategory
-  underlying: Client::UI::Agent::AgentSalvage::SalvageItemCategory
+  underlying: __int32
   namespace: Client.UI.Agent
   values:
     InventoryEquipment: 0
@@ -376,7 +376,7 @@ enums:
     Equipped: 7
 - type: Client::UI::RaptureAtkModule::AgentUpdateFlags
   name: AgentUpdateFlags
-  underlying: Client::UI::RaptureAtkModule::AgentUpdateFlags
+  underlying: byte
   namespace: Client.UI
   values:
     None: 0
@@ -389,7 +389,7 @@ enums:
     HousingInventoryUpdate: 64
 - type: Client::UI::RaptureAtkModuleFlags
   name: RaptureAtkModuleFlags
-  underlying: Client::UI::RaptureAtkModuleFlags
+  underlying: byte
   namespace: Client.UI
   values:
     None: 0
@@ -403,7 +403,7 @@ enums:
     Unk80: 128
 - type: Client::UI::UIModule::UiFlags
   name: UiFlags
-  underlying: Client::UI::UIModule::UiFlags
+  underlying: __int32
   namespace: Client.UI
   values:
     Shortcuts: 1
@@ -415,7 +415,7 @@ enums:
     TargetInfo: 64
 - type: Client::UI::GamepadButtonsFlags
   name: GamepadButtonsFlags
-  underlying: Client::UI::GamepadButtonsFlags
+  underlying: unsigned __int16
   namespace: Client.UI
   values:
     None: 0
@@ -437,7 +437,7 @@ enums:
     Start: 32768
 - type: Client::UI::MouseButtonFlags
   name: MouseButtonFlags
-  underlying: Client::UI::MouseButtonFlags
+  underlying: __int32
   namespace: Client.UI
   values:
     LBUTTON: 1
@@ -447,7 +447,7 @@ enums:
     XBUTTON2: 16
 - type: Client::Game::ActionType
   name: ActionType
-  underlying: Client::Game::ActionType
+  underlying: byte
   namespace: Client.Game
   values:
     None: 0
@@ -473,7 +473,7 @@ enums:
     Ornament: 20
 - type: Client::Game::InventoryType
   name: InventoryType
-  underlying: Client::Game::InventoryType
+  underlying: unsigned __int32
   namespace: Client.Game
   values:
     Inventory1: 0
@@ -552,7 +552,7 @@ enums:
     HousingInteriorStoreroom8: 27008
 - type: Client::UI::Misc::HotbarSlotType
   name: HotbarSlotType
-  underlying: Client::UI::Misc::HotbarSlotType
+  underlying: byte
   namespace: Client.UI.Misc
   values:
     Empty: 0
@@ -586,7 +586,7 @@ enums:
     LostFindsItem: 32
 - type: Client::UI::Misc::CrossHotbarFlags
   name: CrossHotbarFlags
-  underlying: Client::UI::Misc::CrossHotbarFlags
+  underlying: unsigned __int16
   namespace: Client.UI.Misc
   values:
     ChangeSetActive: 1
@@ -606,7 +606,7 @@ enums:
     RightSideFocus: 40
 - type: Client::UI::Info::InfoProxyCommonList::DisplayGroup
   name: DisplayGroup
-  underlying: Client::UI::Info::InfoProxyCommonList::DisplayGroup
+  underlying: __int8
   namespace: Client.UI.Info
   values:
     All: -1
@@ -620,7 +620,7 @@ enums:
     Club: 7
 - type: Client::UI::Agent::GrandCompany
   name: GrandCompany
-  underlying: Client::UI::Agent::GrandCompany
+  underlying: byte
   namespace: Client.UI.Agent
   values:
     None: 0
@@ -629,7 +629,7 @@ enums:
     ImmortalFlames: 3
 - type: Client::UI::Agent::AozWeeklyFlags
   name: AozWeeklyFlags
-  underlying: Client::UI::Agent::AozWeeklyFlags
+  underlying: byte
   namespace: Client.UI.Agent
   values:
     None: 0
@@ -639,7 +639,7 @@ enums:
     Advanced: 8
 - type: Client::UI::Misc::BannerGearVisibilityFlag
   name: BannerGearVisibilityFlag
-  underlying: Client::UI::Misc::BannerGearVisibilityFlag
+  underlying: unsigned __int32
   namespace: Client.UI.Misc
   values:
     None: 0
@@ -648,7 +648,7 @@ enums:
     VisorClosed: 4
 - type: Client::UI::Agent::AgentBannerEditorState::EditorOpenType
   name: EditorOpenType
-  underlying: Client::UI::Agent::AgentBannerEditorState::EditorOpenType
+  underlying: __int32
   namespace: Client.UI.Agent
   values:
     Portrait: 0
@@ -656,7 +656,7 @@ enums:
     AdventurerPlate: 2
 - type: Client::UI::Agent::ChatChannel
   name: ChatChannel
-  underlying: Client::UI::Agent::ChatChannel
+  underlying: __int32
   namespace: Client.UI.Agent
   values:
     Say: 1
@@ -664,7 +664,7 @@ enums:
     Alliance: 3
 - type: Client::UI::Agent::ActionStatus
   name: ActionStatus
-  underlying: Client::UI::Agent::ActionStatus
+  underlying: byte
   namespace: Client.UI.Agent
   values:
     Available: 0
@@ -672,7 +672,7 @@ enums:
     NotCurrentlyAvailable: 3
 - type: Client::UI::Agent::CharaSelectCharacterEntryLoginFlags
   name: CharaSelectCharacterEntryLoginFlags
-  underlying: Client::UI::Agent::CharaSelectCharacterEntryLoginFlags
+  underlying: byte
   namespace: Client.UI.Agent
   values:
     None: 0
@@ -682,14 +682,14 @@ enums:
     DCTraveling: 16
 - type: Client::UI::Agent::CharaSelectRetainerInfoLoginFlags
   name: CharaSelectRetainerInfoLoginFlags
-  underlying: Client::UI::Agent::CharaSelectRetainerInfoLoginFlags
+  underlying: unsigned __int16
   namespace: Client.UI.Agent
   values:
     None: 0
     NameChangeRequired: 4
 - type: Client::UI::Agent::CharaSelectCharacterConfigFlags
   name: CharaSelectCharacterConfigFlags
-  underlying: Client::UI::Agent::CharaSelectCharacterConfigFlags
+  underlying: unsigned __int16
   namespace: Client.UI.Agent
   values:
     None: 0
@@ -701,7 +701,7 @@ enums:
     CloseVisor: 64
 - type: Client::UI::Agent::MapType
   name: MapType
-  underlying: Client::UI::Agent::MapType
+  underlying: unsigned __int32
   namespace: Client.UI.Agent
   values:
     SharedFate: 0
@@ -716,7 +716,7 @@ enums:
     Bozja: 9
 - type: Client::UI::Agent::AgentMJIGatheringHouse::Confirmation
   name: Confirmation
-  underlying: Client::UI::Agent::AgentMJIGatheringHouse::Confirmation
+  underlying: __int32
   namespace: Client.UI.Agent
   values:
     None: 0
@@ -726,7 +726,7 @@ enums:
     Extend: 4
 - type: Client::UI::Agent::MycDynamicEventState
   name: MycDynamicEventState
-  underlying: Client::UI::Agent::MycDynamicEventState
+  underlying: byte
   namespace: Client.UI.Agent
   values:
     None: 0
@@ -735,7 +735,7 @@ enums:
     Underway: 3
 - type: Client::System::Resource::ResourceCategory
   name: ResourceCategory
-  underlying: Client::System::Resource::ResourceCategory
+  underlying: __int32
   namespace: Client.System.Resource
   values:
     Common: 0
@@ -756,7 +756,7 @@ enums:
     MaxCount: 20
 - type: Client::System::Resource::Handle::ResourceHandleType::HandleCategory
   name: HandleCategory
-  underlying: Client::System::Resource::Handle::ResourceHandleType::HandleCategory
+  underlying: unsigned __int16
   namespace: Client.System.Resource.Handle
   values:
     Common: 0
@@ -777,7 +777,7 @@ enums:
     MaxCount: 20
 - type: Client::System::File::FileMode
   name: FileMode
-  underlying: Client::System::File::FileMode
+  underlying: unsigned __int32
   namespace: Client.System.File
   values:
     LoadUnpackedResource: 0
@@ -787,7 +787,7 @@ enums:
     LoadSqPackResource: 11
 - type: Client::Graphics::Scene::CharacterBase::ModelType
   name: ModelType
-  underlying: Client::Graphics::Scene::CharacterBase::ModelType
+  underlying: byte
   namespace: Client.Graphics.Scene
   values:
     Human: 1
@@ -796,7 +796,7 @@ enums:
     Weapon: 4
 - type: Client::Graphics::Scene::ObjectType
   name: ObjectType
-  underlying: Client::Graphics::Scene::ObjectType
+  underlying: __int32
   namespace: Client.Graphics.Scene
   values:
     Object: 0
@@ -811,14 +811,14 @@ enums:
     Unk_Type9: 9
 - type: Client::Graphics::Kernel::TextureFormat
   name: TextureFormat
-  underlying: Client::Graphics::Kernel::TextureFormat
+  underlying: unsigned __int32
   namespace: Client.Graphics.Kernel
   values:
     R8G8B8A8: 5200
     D24S8: 16976
 - type: Client::Graphics::Kernel::VertexShader::Input
   name: Input
-  underlying: Client::Graphics::Kernel::VertexShader::Input
+  underlying: unsigned __int32
   namespace: Client.Graphics.Kernel
   values:
     Position: 1
@@ -840,14 +840,14 @@ enums:
     Depth: 65536
 - type: Client::Game::BalloonType
   name: BalloonType
-  underlying: Client::Game::BalloonType
+  underlying: unsigned __int32
   namespace: Client.Game
   values:
     Timer: 0
     Unknown: 1
 - type: Client::Game::BalloonState
   name: BalloonState
-  underlying: Client::Game::BalloonState
+  underlying: unsigned __int32
   namespace: Client.Game
   values:
     Waiting: 0
@@ -856,7 +856,7 @@ enums:
     Inactive: 3
 - type: Client::Game::GcArmyMemberFlag
   name: GcArmyMemberFlag
-  underlying: Client::Game::GcArmyMemberFlag
+  underlying: byte
   namespace: Client.Game
   values:
     None: 0
@@ -865,7 +865,7 @@ enums:
     ReturnedFromMission: 4
 - type: Client::Game::GoldSaucerFlag
   name: GoldSaucerFlag
-  underlying: Client::Game::GoldSaucerFlag
+  underlying: byte
   namespace: Client.Game
   values:
     Unk0: 1
@@ -878,7 +878,7 @@ enums:
     Unk7: 128
 - type: Client::Game::InventoryItem::ItemFlags
   name: ItemFlags
-  underlying: Client::Game::InventoryItem::ItemFlags
+  underlying: byte
   namespace: Client.Game
   values:
     None: 0
@@ -888,7 +888,7 @@ enums:
     Collectable: 8
 - type: Client::Game::SatisfactionSupplyNpc
   name: SatisfactionSupplyNpc
-  underlying: Client::Game::SatisfactionSupplyNpc
+  underlying: __int16
   namespace: Client.Game
   values:
     ZhloeAliapoh: 1
@@ -903,7 +903,7 @@ enums:
     Margrat: 10
 - type: Client::Game::UI::Achievement::AchievementState
   name: AchievementState
-  underlying: Client::Game::UI::Achievement::AchievementState
+  underlying: __int32
   namespace: Client.Game.UI
   values:
     Invalid: 0
@@ -911,7 +911,7 @@ enums:
     Loaded: 2
 - type: Client::Game::UI::Cabinet::CabinetState
   name: CabinetState
-  underlying: Client::Game::UI::Cabinet::CabinetState
+  underlying: __int32
   namespace: Client.Game.UI
   values:
     Invalid: 0
@@ -919,7 +919,7 @@ enums:
     Loaded: 2
 - type: Client::Game::UI::ContentsFinder::LootRule
   name: LootRule
-  underlying: Client::Game::UI::ContentsFinder::LootRule
+  underlying: byte
   namespace: Client.Game.UI
   values:
     Normal: 0
@@ -927,7 +927,7 @@ enums:
     Lootmaster: 2
 - type: Client::Game::UI::ContentsFinderQueueInfo::QueueStates
   name: QueueStates
-  underlying: Client::Game::UI::ContentsFinderQueueInfo::QueueStates
+  underlying: byte
   namespace: Client.Game.UI
   values:
     None: 0
@@ -938,7 +938,7 @@ enums:
     InContent: 5
 - type: Client::Game::UI::ContentsFinderQueueInfo::PoppedContentTypes
   name: PoppedContentTypes
-  underlying: Client::Game::UI::ContentsFinderQueueInfo::PoppedContentTypes
+  underlying: byte
   namespace: Client.Game.UI
   values:
     None: 0
@@ -946,7 +946,7 @@ enums:
     Duty: 2
 - type: Client::Game::UI::RollState
   name: RollState
-  underlying: Client::Game::UI::RollState
+  underlying: __int32
   namespace: Client.Game.UI
   values:
     UpToNeed: 0
@@ -957,7 +957,7 @@ enums:
     Unknown: 28
 - type: Client::Game::UI::RollResult
   name: RollResult
-  underlying: Client::Game::UI::RollResult
+  underlying: __int32
   namespace: Client.Game.UI
   values:
     UnAwarded: 0
@@ -968,7 +968,7 @@ enums:
     Unknown: 7
 - type: Client::Game::UI::LootMode
   name: LootMode
-  underlying: Client::Game::UI::LootMode
+  underlying: __int32
   namespace: Client.Game.UI
   values:
     Normal: 0
@@ -978,7 +978,7 @@ enums:
     Unknown: 4
 - type: Client::Game::UI::PlayerState::WeeklyBingoTaskStatus
   name: WeeklyBingoTaskStatus
-  underlying: Client::Game::UI::PlayerState::WeeklyBingoTaskStatus
+  underlying: __int32
   namespace: Client.Game.UI
   values:
     Open: 0
@@ -986,7 +986,7 @@ enums:
     Claimed: 2
 - type: Client::Game::UI::PlayerStateFlag
   name: PlayerStateFlag
-  underlying: Client::Game::UI::PlayerStateFlag
+  underlying: unsigned __int32
   namespace: Client.Game.UI
   values:
     IsLoginSecurityToken: 1
@@ -999,7 +999,7 @@ enums:
     Unknown14: 14
 - type: Client::Game::Object::ObjectHighlightColor
   name: ObjectHighlightColor
-  underlying: Client::Game::Object::ObjectHighlightColor
+  underlying: byte
   namespace: Client.Game.Object
   values:
     None: 0
@@ -1012,7 +1012,7 @@ enums:
     Black: 7
 - type: Client::Game::Object::ObjectTargetableFlags
   name: ObjectTargetableFlags
-  underlying: Client::Game::Object::ObjectTargetableFlags
+  underlying: byte
   namespace: Client.Game.Object
   values:
     IsTargetable: 2
@@ -1020,7 +1020,7 @@ enums:
     ReadyToDraw: 64
 - type: Client::Game::MJI::MJIMinimapIcons
   name: MJIMinimapIcons
-  underlying: Client::Game::MJI::MJIMinimapIcons
+  underlying: byte
   namespace: Client.Game.MJI
   values:
     Trees: 1
@@ -1030,7 +1030,7 @@ enums:
     Aquatic: 16
 - type: Client::Game::MJI::MJIAllowedVisitors
   name: MJIAllowedVisitors
-  underlying: Client::Game::MJI::MJIAllowedVisitors
+  underlying: byte
   namespace: Client.Game.MJI
   values:
     Friends: 1
@@ -1038,7 +1038,7 @@ enums:
     Party: 4
 - type: Client::Game::InstanceContent::InstanceContentType
   name: InstanceContentType
-  underlying: Client::Game::InstanceContent::InstanceContentType
+  underlying: byte
   namespace: Client.Game.InstanceContent
   values:
     Raid: 1
@@ -1063,7 +1063,7 @@ enums:
     CriterionDungeon: 20
 - type: Client::Game::InstanceContent::InstanceContentOceanFishing::OceanFishingStatus
   name: OceanFishingStatus
-  underlying: Client::Game::InstanceContent::InstanceContentOceanFishing::OceanFishingStatus
+  underlying: unsigned __int32
   namespace: Client.Game.InstanceContent
   values:
     WaitingForPlayers: 0
@@ -1073,7 +1073,7 @@ enums:
     Finished: 4
 - type: Client::Game::InstanceContent::PublicContentDirectorType
   name: PublicContentDirectorType
-  underlying: Client::Game::InstanceContent::PublicContentDirectorType
+  underlying: byte
   namespace: Client.Game.InstanceContent
   values:
     BondingCeremony: 1
@@ -1088,7 +1088,7 @@ enums:
     FallGuys: 10
 - type: Client::Game::Housing::PlotState
   name: PlotState
-  underlying: Client::Game::Housing::PlotState
+  underlying: byte
   namespace: Client.Game.Housing
   values:
     None: 0
@@ -1097,7 +1097,7 @@ enums:
     OwnedEstate: 3
 - type: Client::Game::Housing::PlotSize
   name: PlotSize
-  underlying: Client::Game::Housing::PlotSize
+  underlying: byte
   namespace: Client.Game.Housing
   values:
     Small: 0
@@ -1105,14 +1105,14 @@ enums:
     Large: 2
 - type: Client::Game::Housing::PlotOwnerType
   name: PlotOwnerType
-  underlying: Client::Game::Housing::PlotOwnerType
+  underlying: unsigned __int32
   namespace: Client.Game.Housing
   values:
     FreeCompany: 0
     Individual: 2
 - type: Client::Game::Housing::SubmarineRating
   name: SubmarineRating
-  underlying: Client::Game::Housing::SubmarineRating
+  underlying: byte
   namespace: Client.Game.Housing
   values:
     SS: 0
@@ -1122,7 +1122,7 @@ enums:
     C: 4
 - type: Client::Game::GoldSaucer::GFateDirectorFlag
   name: GFateDirectorFlag
-  underlying: Client::Game::GoldSaucer::GFateDirectorFlag
+  underlying: unsigned __int32
   namespace: Client.Game.GoldSaucer
   values:
     IsJoined: 1
@@ -1133,7 +1133,7 @@ enums:
     Unk5: 32
 - type: Client::Game::Gauge::EnochianFlags
   name: EnochianFlags
-  underlying: Client::Game::Gauge::EnochianFlags
+  underlying: byte
   namespace: Client.Game.Gauge
   values:
     None: 0
@@ -1141,7 +1141,7 @@ enums:
     Paradox: 2
 - type: Client::Game::Gauge::AetherFlags
   name: AetherFlags
-  underlying: Client::Game::Gauge::AetherFlags
+  underlying: byte
   namespace: Client.Game.Gauge
   values:
     None: 0
@@ -1157,7 +1157,7 @@ enums:
     GarudaReady: 128
 - type: Client::Game::Gauge::SongFlags
   name: SongFlags
-  underlying: Client::Game::Gauge::SongFlags
+  underlying: byte
   namespace: Client.Game.Gauge
   values:
     None: 0
@@ -1172,7 +1172,7 @@ enums:
     WanderersMinuetCoda: 64
 - type: Client::Game::Gauge::BeastChakraType
   name: BeastChakraType
-  underlying: Client::Game::Gauge::BeastChakraType
+  underlying: byte
   namespace: Client.Game.Gauge
   values:
     None: 0
@@ -1181,14 +1181,14 @@ enums:
     Raptor: 3
 - type: Client::Game::Gauge::NadiFlags
   name: NadiFlags
-  underlying: Client::Game::Gauge::NadiFlags
+  underlying: byte
   namespace: Client.Game.Gauge
   values:
     Lunar: 2
     Solar: 4
 - type: Client::Game::Gauge::KaeshiAction
   name: KaeshiAction
-  underlying: Client::Game::Gauge::KaeshiAction
+  underlying: byte
   namespace: Client.Game.Gauge
   values:
     Higanbana: 1
@@ -1197,7 +1197,7 @@ enums:
     Namikiri: 4
 - type: Client::Game::Gauge::SenFlags
   name: SenFlags
-  underlying: Client::Game::Gauge::SenFlags
+  underlying: byte
   namespace: Client.Game.Gauge
   values:
     None: 0
@@ -1206,7 +1206,7 @@ enums:
     Ka: 4
 - type: Client::Game::Event::CraftStateFlags
   name: CraftStateFlags
-  underlying: Client::Game::Event::CraftStateFlags
+  underlying: unsigned __int32
   namespace: Client.Game.Event
   values:
     Unk1: 1
@@ -1219,7 +1219,7 @@ enums:
     NoMoreHeartAndSoul: 2147483648
 - type: Client::Game::Event::CraftCondition
   name: CraftCondition
-  underlying: Client::Game::Event::CraftCondition
+  underlying: byte
   namespace: Client.Game.Event
   values:
     Normal: 1
@@ -1234,7 +1234,7 @@ enums:
     GoodOmen: 10
 - type: Client::Game::Event::CraftFlags
   name: CraftFlags
-  underlying: Client::Game::Event::CraftFlags
+  underlying: unsigned __int32
   namespace: Client.Game.Event
   values:
     ExecutingAction2: 1
@@ -1245,7 +1245,7 @@ enums:
     Unk3: 32
 - type: Client::Game::Event::EventHandlerType
   name: EventHandlerType
-  underlying: Client::Game::Event::EventHandlerType
+  underlying: unsigned __int16
   namespace: Client.Game.Event
   values:
     Quest: 1
@@ -1298,7 +1298,7 @@ enums:
     FateDirector: 32794
 - type: Client::Game::Character::Character::CharacterModes
   name: CharacterModes
-  underlying: Client::Game::Character::Character::CharacterModes
+  underlying: byte
   namespace: Client.Game.Character
   values:
     None: 0
@@ -1313,7 +1313,7 @@ enums:
     Performance: 16
 - type: Client::Game::Character::CharacterSetup::CopyFlags
   name: CopyFlags
-  underlying: Client::Game::Character::CharacterSetup::CopyFlags
+  underlying: unsigned __int32
   namespace: Client.Game.Character
   values:
     None: 0
@@ -1330,7 +1330,7 @@ enums:
     Ornament: 4194304
 - type: Client::Game::Character::DrawDataContainer::EquipmentSlot
   name: EquipmentSlot
-  underlying: Client::Game::Character::DrawDataContainer::EquipmentSlot
+  underlying: unsigned __int32
   namespace: Client.Game.Character
   values:
     Head: 0
@@ -1345,7 +1345,7 @@ enums:
     LFinger: 9
 - type: Client::Game::Character::DrawDataContainer::WeaponSlot
   name: WeaponSlot
-  underlying: Client::Game::Character::DrawDataContainer::WeaponSlot
+  underlying: unsigned __int32
   namespace: Client.Game.Character
   values:
     MainHand: 0
@@ -1353,7 +1353,7 @@ enums:
     Unk: 2
 - type: Client::UI::Misc::ConfigOption
   name: ConfigOption
-  underlying: Client::UI::Misc::ConfigOption
+  underlying: __int16
   namespace: Client.UI.Misc
   values:
     Invalid: -1
@@ -2241,7 +2241,7 @@ enums:
     HotbarDispLookNum: 818
 - type: Client::UI::Misc::RaptureGearsetModule::GearsetItemFlag
   name: GearsetItemFlag
-  underlying: Client::UI::Misc::RaptureGearsetModule::GearsetItemFlag
+  underlying: byte
   namespace: Client.UI.Misc
   values:
     None: 0
@@ -2255,7 +2255,7 @@ enums:
     Unknown80: 128
 - type: Client::UI::Misc::RaptureGearsetModule::GearsetFlag
   name: GearsetFlag
-  underlying: Client::UI::Misc::RaptureGearsetModule::GearsetFlag
+  underlying: byte
   namespace: Client.UI.Misc
   values:
     None: 0
@@ -2269,7 +2269,7 @@ enums:
     Unknown80: 128
 - type: Client::UI::Info::InfoProxyCommonList::CharacterData::OnlineStatus
   name: OnlineStatus
-  underlying: Client::UI::Info::InfoProxyCommonList::CharacterData::OnlineStatus
+  underlying: unsigned __int64
   namespace: Client.UI.Info
   values:
     Offline: 0
@@ -2322,7 +2322,7 @@ enums:
     Online: 140737488355328
 - type: Client::UI::Info::InfoProxyCommonList::CharacterData::Language
   name: Language
-  underlying: Client::UI::Info::InfoProxyCommonList::CharacterData::Language
+  underlying: byte
   namespace: Client.UI.Info
   values:
     JP: 0
@@ -2332,7 +2332,7 @@ enums:
     None: 255
 - type: Client::UI::Info::InfoProxyCommonList::CharacterData::LanguageMask
   name: LanguageMask
-  underlying: Client::UI::Info::InfoProxyCommonList::CharacterData::LanguageMask
+  underlying: byte
   namespace: Client.UI.Info
   values:
     None: 0
@@ -2342,7 +2342,7 @@ enums:
     FR: 8
 - type: Client::UI::Agent::AgentFreeCompanyProfile::FCProfile::FocusType
   name: FocusType
-  underlying: Client::UI::Agent::AgentFreeCompanyProfile::FCProfile::FocusType
+  underlying: unsigned __int16
   namespace: Client.UI.Agent
   values:
     None: 0
@@ -2357,7 +2357,7 @@ enums:
     PvP: 256
 - type: Client::UI::Agent::AgentFreeCompanyProfile::FCProfile::SeekingType
   name: SeekingType
-  underlying: Client::UI::Agent::AgentFreeCompanyProfile::FCProfile::SeekingType
+  underlying: unsigned __int16
   namespace: Client.UI.Agent
   values:
     None: 0
@@ -2368,7 +2368,7 @@ enums:
     Gatherer: 16
 - type: Client::UI::Agent::AgentFreeCompanyProfile::FCProfile::ActiveType
   name: ActiveType
-  underlying: Client::UI::Agent::AgentFreeCompanyProfile::FCProfile::ActiveType
+  underlying: byte
   namespace: Client.UI.Agent
   values:
     None: 0
@@ -2377,14 +2377,14 @@ enums:
     Always: 3
 - type: Client::UI::Agent::AgentFreeCompanyProfile::FCProfile::RecruitmentType
   name: RecruitmentType
-  underlying: Client::UI::Agent::AgentFreeCompanyProfile::FCProfile::RecruitmentType
+  underlying: byte
   namespace: Client.UI.Agent
   values:
     Closed: 0
     Open: 1
 - type: Client::UI::Agent::AgentInspect::ItemData::IconFlagsTopRight
   name: IconFlagsTopRight
-  underlying: Client::UI::Agent::AgentInspect::ItemData::IconFlagsTopRight
+  underlying: byte
   namespace: Client.UI.Agent
   values:
     None: 0
@@ -2392,7 +2392,7 @@ enums:
     Glamoured: 4
 - type: Client::UI::Agent::AgentMJICraftSchedule::DataFlags1
   name: DataFlags1
-  underlying: Client::UI::Agent::AgentMJICraftSchedule::DataFlags1
+  underlying: byte
   namespace: Client.UI.Agent
   values:
     DataInitialized: 1
@@ -2405,7 +2405,7 @@ enums:
     ReviewMaterialsAddonDirty: 128
 - type: Client::UI::Agent::AgentMJICraftSchedule::DataFlags2
   name: DataFlags2
-  underlying: Client::UI::Agent::AgentMJICraftSchedule::DataFlags2
+  underlying: byte
   namespace: Client.UI.Agent
   values:
     PlayScheduleUpdateSFX: 1
@@ -2415,7 +2415,7 @@ enums:
     DisableInteraction: 16
 - type: Client::UI::Agent::AgentMJICraftSchedule::EntryFlags
   name: EntryFlags
-  underlying: Client::UI::Agent::AgentMJICraftSchedule::EntryFlags
+  underlying: unsigned __int32
   namespace: Client.UI.Agent
   values:
     InPresent: 1
@@ -2430,7 +2430,7 @@ enums:
     NextWeekFavor: 512
 - type: Client::UI::Agent::AgentMJINekomimiRequest::ItemFlags
   name: ItemFlags
-  underlying: Client::UI::Agent::AgentMJINekomimiRequest::ItemFlags
+  underlying: byte
   namespace: Client.UI.Agent
   values:
     Initialized: 1
@@ -2438,7 +2438,7 @@ enums:
     Bonus: 4
 - type: Client::UI::Agent::AgentReadyCheck::ReadyCheckStatus
   name: ReadyCheckStatus
-  underlying: Client::UI::Agent::AgentReadyCheck::ReadyCheckStatus
+  underlying: byte
   namespace: Client.UI.Agent
   values:
     Unknown: 0
@@ -2448,7 +2448,7 @@ enums:
     MemberNotPresent: 4
 - type: Client::Game::RetainerManager::RetainerTown
   name: RetainerTown
-  underlying: Client::Game::RetainerManager::RetainerTown
+  underlying: byte
   namespace: Client.Game
   values:
     LimsaLominsa: 1
@@ -2460,7 +2460,7 @@ enums:
     OldSharlayan: 12
 - type: Client::Game::Character::Character::EurekaElement
   name: EurekaElement
-  underlying: Client::Game::Character::Character::EurekaElement
+  underlying: byte
   namespace: Client.Game.Character
   values:
     None: 0
@@ -2472,7 +2472,7 @@ enums:
     Water: 6
 - type: Client::Game::Character::Character::ReaperShroudContainer::ShroudFlags
   name: ShroudFlags
-  underlying: Client::Game::Character::Character::ReaperShroudContainer::ShroudFlags
+  underlying: unsigned __int32
   namespace: Client.Game.Character
   values:
     ShroudAttacking: 1
@@ -2480,7 +2480,7 @@ enums:
     ShroudLoading: 256
 - type: Client::Game::Character::Character::GazeContainer::BannerCameraFollowFlags
   name: BannerCameraFollowFlags
-  underlying: Client::Game::Character::Character::GazeContainer::BannerCameraFollowFlags
+  underlying: byte
   namespace: Client.Game.Character
   values:
     None: 0
@@ -2488,7 +2488,7 @@ enums:
     Eyes: 2
 - type: Client::Game::Control::GazeController::Gaze::TargetInformation::TargetInfoType
   name: TargetInfoType
-  underlying: Client::Game::Control::GazeController::Gaze::TargetInformation::TargetInfoType
+  underlying: __int32
   namespace: Client.Game.Control
   values:
     None: 0
@@ -2497,7 +2497,7 @@ enums:
     Unk3: 3
 - type: hkaAnimation::AnimationType
   name: AnimationType
-  underlying: hkaAnimation::AnimationType
+  underlying: __int32
   namespace: ''
   values:
     UnknownAnimation: 0
@@ -2509,7 +2509,7 @@ enums:
     ReferencePoseAnimation: 6
 - type: hkaAnimatedReferenceFrame::hkaReferenceFrameTypeEnum
   name: hkaReferenceFrameTypeEnum
-  underlying: hkaAnimatedReferenceFrame::hkaReferenceFrameTypeEnum
+  underlying: __int32
   namespace: ''
   values:
     Unknown: 0
@@ -2517,7 +2517,7 @@ enums:
     Parametric: 2
 - type: hkaDefaultAnimationControl::EaseStatusEnum
   name: EaseStatusEnum
-  underlying: hkaDefaultAnimationControl::EaseStatusEnum
+  underlying: __int32
   namespace: ''
   values:
     EasingIn: 0
@@ -2526,21 +2526,21 @@ enums:
     EasedOut: 3
 - type: hkaPose::PoseSpace
   name: PoseSpace
-  underlying: hkaPose::PoseSpace
+  underlying: __int32
   namespace: ''
   values:
     ModelSpace: 0
     LocalSpace: 1
 - type: hkaPose::PropagateOrNot
   name: PropagateOrNot
-  underlying: hkaPose::PropagateOrNot
+  underlying: __int32
   namespace: ''
   values:
     DontPropagate: 0
     Propagate: 1
 - type: hkResult::hkResultEnum
   name: hkResultEnum
-  underlying: hkResult::hkResultEnum
+  underlying: __int32
   namespace: ''
   values:
     Success: 0
@@ -5820,7 +5820,6 @@ structs:
 - type: Client::UI::Misc::GamePresetPoint
   name: GamePresetPoint
   namespace: Client.UI.Misc
-  size: 0
   fields:
   - type: __int32
     name: X
@@ -5836,7 +5835,6 @@ structs:
 - type: Client::UI::Misc::FieldMarkerPreset
   name: FieldMarkerPreset
   namespace: Client.UI.Misc
-  size: 0
   fields:
   - type: Client::UI::Misc::GamePresetPoint
     name: A
@@ -6268,7 +6266,6 @@ structs:
 - type: Client::UI::Misc::ScreenLog
   name: ScreenLog
   namespace: Client.UI.Misc
-  size: 0
   fields: []
   virtual_functions: []
   member_functions: []
@@ -8137,7 +8134,7 @@ structs:
 - type: Client::Network::PacketDispatcher
   name: PacketDispatcher
   namespace: Client.Network
-  size: 0
+  size: 8
   fields: []
   virtual_functions: []
   member_functions:
@@ -9387,7 +9384,6 @@ structs:
 - type: Client::Game::Conditions
   name: Conditions
   namespace: Client.Game
-  size: 0
   fields:
   - type: byte
     name: Flags
@@ -10827,7 +10823,6 @@ structs:
 - type: Client::Game::UI::MapMarkerContainer
   name: MapMarkerContainer
   namespace: Client.Game.UI
-  size: 0
   fields:
   - type: Client::Game::UI::MapMarkerContainer::LinkedList*
     name: List
@@ -11701,7 +11696,6 @@ structs:
 - type: Client::Game::MJI::MJIWorkshops
   name: MJIWorkshops
   namespace: Client.Game.MJI
-  size: 0
   fields:
   - type: __int64
     name: vtbl
@@ -11731,7 +11725,6 @@ structs:
 - type: Client::Game::MJI::MJIGranaries
   name: MJIGranaries
   namespace: Client.Game.MJI
-  size: 0
   fields:
   - type: __int64
     name: vtbl
@@ -12930,7 +12923,7 @@ structs:
 - type: Client::Game::Event::EventGPoseController
   name: EventGPoseController
   namespace: Client.Game.Event
-  size: 11712
+  size: 12160
   fields: []
   virtual_functions: []
   member_functions:
@@ -13525,7 +13518,6 @@ structs:
 - type: Common::Component::BGCollision::QuadtreeNode::Enumerator
   name: Enumerator
   namespace: Common.Component.BGCollision
-  size: 0
   fields:
   - type: Common::Component::BGCollision::QuadtreeNode*
     name: _head
@@ -13637,7 +13629,6 @@ structs:
 - type: Component::Excel::ExcelSheet::ColumnInfo
   name: ColumnInfo
   namespace: Component.Excel
-  size: 0
   fields:
   - type: unsigned __int16
     name: Type
@@ -19130,7 +19121,6 @@ structs:
 - type: Client::Graphics::Scene::Object::SiblingEnumerator
   name: SiblingEnumerator
   namespace: Client.Graphics.Scene
-  size: 0
   fields:
   - type: Client::Graphics::Scene::Object*
     name: _first
@@ -19397,7 +19387,6 @@ structs:
 - type: Client::Game::UI::MapMarkerContainer::LinkedList
   name: LinkedList
   namespace: Client.Game.UI
-  size: 0
   fields:
   - type: Client::Game::UI::MapMarkerNode*
     name: First
@@ -20273,7 +20262,6 @@ structs:
 - type: hkaAnimationControlListener
   name: hkaAnimationControlListener
   namespace: ''
-  size: 0
   fields:
   - type: __int64
     name: vtbl
@@ -20283,7 +20271,6 @@ structs:
 - type: hkaJobDoneNotifier
   name: hkaJobDoneNotifier
   namespace: ''
-  size: 0
   fields:
   - type: __int64
     name: hkSemaphore
@@ -20296,14 +20283,12 @@ structs:
 - type: hkaSkeletonUtils
   name: hkaSkeletonUtils
   namespace: ''
-  size: 0
   fields: []
   virtual_functions: []
   member_functions: []
 - type: hkStringPtr
   name: hkStringPtr
   namespace: ''
-  size: 0
   fields:
   - type: byte*
     name: StringAndFlag
@@ -20313,7 +20298,6 @@ structs:
 - type: hkQuaternionf
   name: hkQuaternionf
   namespace: ''
-  size: 0
   fields:
   - type: float
     name: X
@@ -20381,7 +20365,6 @@ structs:
 - type: hkSimdFloat32
   name: hkSimdFloat32
   namespace: ''
-  size: 0
   fields:
   - type: float
     name: f32
@@ -20392,7 +20375,6 @@ structs:
 - type: hkVector4f
   name: hkVector4f
   namespace: ''
-  size: 0
   fields:
   - type: float
     name: X
@@ -20411,7 +20393,6 @@ structs:
 - type: hkBaseObject
   name: hkBaseObject
   namespace: ''
-  size: 0
   fields:
   - type: hkBaseObject::hkBaseObjectVtbl*
     name: vfptr
@@ -20437,7 +20418,6 @@ structs:
 - type: hkClass
   name: hkClass
   namespace: ''
-  size: 0
   fields: []
   virtual_functions: []
   member_functions: []
@@ -20490,7 +20470,6 @@ structs:
 - type: hkIstream
   name: hkIstream
   namespace: ''
-  size: 0
   fields:
   - type: hkReferencedObject
     name: hkReferencedObject
@@ -20556,7 +20535,6 @@ structs:
 - type: hkStreamReader
   name: hkStreamReader
   namespace: ''
-  size: 0
   fields: []
   virtual_functions: []
   member_functions: []
@@ -20573,7 +20551,6 @@ structs:
 - type: hkAabb
   name: hkAabb
   namespace: ''
-  size: 0
   fields:
   - type: hkVector4f
     name: Min
@@ -20586,7 +20563,6 @@ structs:
 - type: hkLocalFrame
   name: hkLocalFrame
   namespace: ''
-  size: 0
   fields:
   - type: hkReferencedObject
     name: hkReferencedObject
@@ -20596,7 +20572,6 @@ structs:
 - type: hkRefVariant
   name: hkRefVariant
   namespace: ''
-  size: 0
   fields:
   - type: hkReferencedObject*
     name: hkRefPtr
@@ -20616,7 +20591,6 @@ structs:
 - type: hkResult
   name: hkResult
   namespace: ''
-  size: 0
   fields:
   - type: hkResult::hkResultEnum
     name: Result
@@ -20626,7 +20600,6 @@ structs:
 - type: hkxMesh
   name: hkxMesh
   namespace: ''
-  size: 0
   fields:
   - type: hkReferencedObject
     name: hkReferencedObject
@@ -20678,14 +20651,12 @@ structs:
 - type: hkSerializeUtil
   name: hkSerializeUtil
   namespace: ''
-  size: 0
   fields: []
   virtual_functions: []
   member_functions: []
 - type: hkaAnimation::DataChunk
   name: DataChunk
   namespace: ''
-  size: 0
   fields:
   - type: byte*
     name: Data
@@ -20698,7 +20669,6 @@ structs:
 - type: hkaAnimationBinding::DefaultStruct
   name: DefaultStruct
   namespace: ''
-  size: 0
   fields:
   - type: __int32
     name: DefaultOffsets
@@ -20712,7 +20682,6 @@ structs:
 - type: hkaAnnotationTrack::Annotation
   name: Annotation
   namespace: ''
-  size: 0
   fields:
   - type: float
     name: Time
@@ -20725,7 +20694,6 @@ structs:
 - type: hkaSkeletonMapperData::PartitionMappingRange
   name: PartitionMappingRange
   namespace: ''
-  size: 0
   fields:
   - type: __int32
     name: StartMappingIndex
@@ -20738,7 +20706,6 @@ structs:
 - type: hkaDefaultAnimationControl::hkaDefaultAnimationControlListener
   name: hkaDefaultAnimationControlListener
   namespace: ''
-  size: 0
   fields:
   - type: __int64
     name: vtbl
@@ -20748,7 +20715,6 @@ structs:
 - type: hkaAnimatedSkeleton::BoneAnnotation
   name: BoneAnnotation
   namespace: ''
-  size: 0
   fields:
   - type: unsigned __int16
     name: BoneID
@@ -20761,7 +20727,6 @@ structs:
 - type: hkaSkeleton::LocalFrameOnBone
   name: LocalFrameOnBone
   namespace: ''
-  size: 0
   fields:
   - type: hkLocalFrame*
     name: LocalFrame
@@ -20774,7 +20739,6 @@ structs:
 - type: hkaSkeleton::Partition
   name: Partition
   namespace: ''
-  size: 0
   fields:
   - type: hkStringPtr
     name: Name
@@ -20790,7 +20754,6 @@ structs:
 - type: hkBaseObject::hkBaseObjectVtbl
   name: hkBaseObjectVtbl
   namespace: ''
-  size: 0
   fields:
   - type: __int64
     name: dtor
@@ -20803,7 +20766,6 @@ structs:
 - type: hkRootLevelContainer::NamedVariant
   name: NamedVariant
   namespace: ''
-  size: 0
   fields:
   - type: hkStringPtr
     name: Name
@@ -20819,7 +20781,6 @@ structs:
 - type: System::Drawing::Point
   name: Point
   namespace: ''
-  size: 0
   fields:
   - type: __int32
     name: x
@@ -20832,7 +20793,6 @@ structs:
 - type: __int16
   name: Half
   namespace: ''
-  size: 2
   fields:
   - type: unsigned __int16
     name: _value
@@ -20842,14 +20802,12 @@ structs:
 - type: void
   name: Void
   namespace: ''
-  size: 0
   fields: []
   virtual_functions: []
   member_functions: []
 - type: StdVector<__int32>
   name: StdVector`1
   namespace: ''
-  size: 24
   fields:
   - type: __int32*
     name: First
@@ -20865,7 +20823,6 @@ structs:
 - type: StdVector<byte>
   name: StdVector`1
   namespace: ''
-  size: 24
   fields:
   - type: byte*
     name: First
@@ -20881,7 +20838,6 @@ structs:
 - type: System::Numerics::Vector3
   name: Vector3
   namespace: ''
-  size: 0
   fields:
   - type: float
     name: X
@@ -20897,7 +20853,6 @@ structs:
 - type: System::Numerics::Vector4
   name: Vector4
   namespace: ''
-  size: 0
   fields:
   - type: float
     name: X
@@ -20916,7 +20871,6 @@ structs:
 - type: System::Numerics::Matrix4x4
   name: Matrix4x4
   namespace: ''
-  size: 0
   fields:
   - type: float
     name: M11
@@ -20971,7 +20925,6 @@ structs:
 - type: StdMap<Client::System::String::Utf8String, __int64>
   name: StdMap`2
   namespace: ''
-  size: 16
   fields:
   - type: StdMap<Client::System::String::Utf8String, __int64>*
     name: Head
@@ -20984,7 +20937,6 @@ structs:
 - type: StdVector<__int64>
   name: StdVector`1
   namespace: ''
-  size: 24
   fields:
   - type: __int64*
     name: First
@@ -21000,7 +20952,6 @@ structs:
 - type: StdDeque<Component::Text::TextParameter>
   name: StdDeque`1
   namespace: ''
-  size: 40
   fields:
   - type: __int64
     name: ContainerBase
@@ -21022,7 +20973,6 @@ structs:
 - type: StdMap<Client::System::String::Utf8String, Component::Text::MacroEncoder::MacroCodeDescription>
   name: StdMap`2
   namespace: ''
-  size: 16
   fields:
   - type: StdMap<Client::System::String::Utf8String, Component::Text::MacroEncoder::MacroCodeDescription>*
     name: Head
@@ -21035,7 +20985,6 @@ structs:
 - type: StdVector<Client::System::String::Utf8String>
   name: StdVector`1
   namespace: ''
-  size: 24
   fields:
   - type: Client::System::String::Utf8String*
     name: First
@@ -21051,7 +21000,6 @@ structs:
 - type: StdVector<Component::GUI::AtkComponentTreeListItem*>
   name: StdVector`1
   namespace: ''
-  size: 24
   fields:
   - type: Component::GUI::AtkComponentTreeListItem**
     name: First
@@ -21067,7 +21015,6 @@ structs:
 - type: StdVector<unsigned __int32>
   name: StdVector`1
   namespace: ''
-  size: 24
   fields:
   - type: unsigned __int32*
     name: First
@@ -21083,7 +21030,6 @@ structs:
 - type: StdVector<byte*>
   name: StdVector`1
   namespace: ''
-  size: 24
   fields:
   - type: byte**
     name: First
@@ -21099,7 +21045,6 @@ structs:
 - type: StdVector<Component::GUI::AtkEvent*>
   name: StdVector`1
   namespace: ''
-  size: 24
   fields:
   - type: Component::GUI::AtkEvent**
     name: First
@@ -21115,7 +21060,6 @@ structs:
 - type: StdVector<Component::GUI::SimpleTweenAnimation>
   name: StdVector`1
   namespace: ''
-  size: 24
   fields:
   - type: Component::GUI::SimpleTweenAnimation*
     name: First
@@ -21131,7 +21075,6 @@ structs:
 - type: StdLinkedList<Component::GUI::AtkTextureResource*>
   name: StdLinkedList`1
   namespace: ''
-  size: 24
   fields:
   - type: StdLinkedList<Component::GUI::AtkTextureResource*>*
     name: End
@@ -21147,7 +21090,6 @@ structs:
 - type: StdPair<float, float>
   name: StdPair`2
   namespace: ''
-  size: 8
   fields:
   - type: float
     name: Item1
@@ -21160,7 +21102,6 @@ structs:
 - type: StdMap<Component::GUI::AtkResNode*, Component::GUI::AtkTooltipManager::AtkTooltipInfo*>
   name: StdMap`2
   namespace: ''
-  size: 16
   fields:
   - type: StdMap<Component::GUI::AtkResNode*, Component::GUI::AtkTooltipManager::AtkTooltipInfo*>*
     name: Head
@@ -21173,7 +21114,6 @@ structs:
 - type: StdLinkedList<Component::GUI::AtkUldManager::DuplicateObjectList*>
   name: StdLinkedList`1
   namespace: ''
-  size: 24
   fields:
   - type: StdLinkedList<Component::GUI::AtkUldManager::DuplicateObjectList*>*
     name: End
@@ -21189,7 +21129,6 @@ structs:
 - type: StdVector<Component::GUI::AtkValue>
   name: StdVector`1
   namespace: ''
-  size: 24
   fields:
   - type: Component::GUI::AtkValue*
     name: First
@@ -21205,7 +21144,6 @@ structs:
 - type: StdVector<Client::UI::ActionBarSlot>
   name: StdVector`1
   namespace: ''
-  size: 24
   fields:
   - type: Client::UI::ActionBarSlot*
     name: First
@@ -21221,7 +21159,6 @@ structs:
 - type: StdMap<unsigned __int64, Client::UI::Misc::ItemOrderModuleSorter*>
   name: StdMap`2
   namespace: ''
-  size: 16
   fields:
   - type: StdMap<unsigned __int64, Client::UI::Misc::ItemOrderModuleSorter*>*
     name: Head
@@ -21234,7 +21171,6 @@ structs:
 - type: StdVector<Client::UI::Misc::ItemOrderModuleSorterItemEntry*>
   name: StdVector`1
   namespace: ''
-  size: 24
   fields:
   - type: Client::UI::Misc::ItemOrderModuleSorterItemEntry**
     name: First
@@ -21250,7 +21186,6 @@ structs:
 - type: StdVector<Client::UI::Misc::ItemOrderModuleSorterSortFunctionEntry>
   name: StdVector`1
   namespace: ''
-  size: 24
   fields:
   - type: Client::UI::Misc::ItemOrderModuleSorterSortFunctionEntry*
     name: First
@@ -21266,7 +21201,6 @@ structs:
 - type: StdVector<Client::UI::Agent::ActionData>
   name: StdVector`1
   namespace: ''
-  size: 24
   fields:
   - type: Client::UI::Agent::ActionData*
     name: First
@@ -21282,7 +21216,6 @@ structs:
 - type: StdVector<Client::UI::Agent::ExtraCommandData>
   name: StdVector`1
   namespace: ''
-  size: 24
   fields:
   - type: Client::UI::Agent::ExtraCommandData*
     name: First
@@ -21298,7 +21231,6 @@ structs:
 - type: StdVector<Client::Game::UI::MapMarkerData>
   name: StdVector`1
   namespace: ''
-  size: 24
   fields:
   - type: Client::Game::UI::MapMarkerData*
     name: First
@@ -21314,7 +21246,6 @@ structs:
 - type: StdVector<Client::Game::UI::MapMarkerData*>
   name: StdVector`1
   namespace: ''
-  size: 24
   fields:
   - type: Client::Game::UI::MapMarkerData**
     name: First
@@ -21330,7 +21261,6 @@ structs:
 - type: StdVector<Client::UI::Agent::CharaSelectCharacterEntry*>
   name: StdVector`1
   namespace: ''
-  size: 24
   fields:
   - type: Client::UI::Agent::CharaSelectCharacterEntry**
     name: First
@@ -21346,7 +21276,6 @@ structs:
 - type: StdVector<Client::UI::Agent::LobbyDataCenterWorldEntry>
   name: StdVector`1
   namespace: ''
-  size: 24
   fields:
   - type: Client::UI::Agent::LobbyDataCenterWorldEntry*
     name: First
@@ -21362,7 +21291,6 @@ structs:
 - type: StdVector<Client::UI::Agent::CharaSelectRetainerInfo*>
   name: StdVector`1
   namespace: ''
-  size: 24
   fields:
   - type: Client::UI::Agent::CharaSelectRetainerInfo**
     name: First
@@ -21378,7 +21306,6 @@ structs:
 - type: StdVector<Client::UI::Agent::AgentMacro::TextCommandEntry>
   name: StdVector`1
   namespace: ''
-  size: 24
   fields:
   - type: Client::UI::Agent::AgentMacro::TextCommandEntry*
     name: First
@@ -21394,7 +21321,6 @@ structs:
 - type: StdVector<Client::UI::Agent::LinkedTooltipMarker>
   name: StdVector`1
   namespace: ''
-  size: 24
   fields:
   - type: Client::UI::Agent::LinkedTooltipMarker*
     name: First
@@ -21410,7 +21336,6 @@ structs:
 - type: StdVector<Client::UI::Agent::LinkedTooltipMarker*>
   name: StdVector`1
   namespace: ''
-  size: 24
   fields:
   - type: Client::UI::Agent::LinkedTooltipMarker**
     name: First
@@ -21426,7 +21351,6 @@ structs:
 - type: StdMap<unsigned __int32, unsigned __int32>
   name: StdMap`2
   namespace: ''
-  size: 16
   fields:
   - type: StdMap<unsigned __int32, unsigned __int32>*
     name: Head
@@ -21439,7 +21363,6 @@ structs:
 - type: StdVector<Client::UI::Agent::AgentMJIAnimalManagement::Slot>
   name: StdVector`1
   namespace: ''
-  size: 24
   fields:
   - type: Client::UI::Agent::AgentMJIAnimalManagement::Slot*
     name: First
@@ -21455,7 +21378,6 @@ structs:
 - type: StdVector<Client::UI::Agent::AgentMJIAnimalManagement::AnimalDesc>
   name: StdVector`1
   namespace: ''
-  size: 24
   fields:
   - type: Client::UI::Agent::AgentMJIAnimalManagement::AnimalDesc*
     name: First
@@ -21471,7 +21393,6 @@ structs:
 - type: StdVector<Client::UI::Agent::AgentMJIAnimalManagement::ItemDesc>
   name: StdVector`1
   namespace: ''
-  size: 24
   fields:
   - type: Client::UI::Agent::AgentMJIAnimalManagement::ItemDesc*
     name: First
@@ -21487,7 +21408,6 @@ structs:
 - type: StdVector<Client::UI::Agent::AgentMJIAnimalManagement::ItemDesc*>
   name: StdVector`1
   namespace: ''
-  size: 24
   fields:
   - type: Client::UI::Agent::AgentMJIAnimalManagement::ItemDesc**
     name: First
@@ -21503,7 +21423,6 @@ structs:
 - type: StdVector<Client::UI::Agent::AgentMJIFarmManagement::Seed>
   name: StdVector`1
   namespace: ''
-  size: 24
   fields:
   - type: Client::UI::Agent::AgentMJIFarmManagement::Seed*
     name: First
@@ -21519,7 +21438,6 @@ structs:
 - type: StdDeque<Client::System::String::Utf8String>
   name: StdDeque`1
   namespace: ''
-  size: 40
   fields:
   - type: __int64
     name: ContainerBase
@@ -21541,7 +21459,6 @@ structs:
 - type: StdDeque<Client::UI::Agent::BalloonInfo>
   name: StdDeque`1
   namespace: ''
-  size: 40
   fields:
   - type: __int64
     name: ContainerBase
@@ -21563,7 +21480,6 @@ structs:
 - type: StdVector<Client::Game::UI::TeleportInfo>
   name: StdVector`1
   namespace: ''
-  size: 24
   fields:
   - type: Client::Game::UI::TeleportInfo*
     name: First
@@ -21579,7 +21495,6 @@ structs:
 - type: StdMap<byte*, __int16>
   name: StdMap`2
   namespace: ''
-  size: 16
   fields:
   - type: StdMap<byte*, __int16>*
     name: Head
@@ -21612,7 +21527,6 @@ structs:
 - type: StdMap<unsigned __int32, hkaSkeletonMapper*>
   name: StdMap`2
   namespace: ''
-  size: 16
   fields:
   - type: StdMap<unsigned __int32, hkaSkeletonMapper*>*
     name: Head
@@ -21625,7 +21539,6 @@ structs:
 - type: StdMap<Client::System::String::Utf8String, byte*>
   name: StdMap`2
   namespace: ''
-  size: 16
   fields:
   - type: StdMap<Client::System::String::Utf8String, byte*>*
     name: Head
@@ -21638,7 +21551,6 @@ structs:
 - type: StdVector<Client::Graphics::Physics::BoneSimulator*>
   name: StdVector`1
   namespace: ''
-  size: 24
   fields:
   - type: Client::Graphics::Physics::BoneSimulator**
     name: First
@@ -21654,7 +21566,6 @@ structs:
 - type: StdMap<unsigned __int32, Client::Game::CurrencyManager::SpecialCurrencyItem>
   name: StdMap`2
   namespace: ''
-  size: 16
   fields:
   - type: StdMap<unsigned __int32, Client::Game::CurrencyManager::SpecialCurrencyItem>*
     name: Head
@@ -21667,7 +21578,6 @@ structs:
 - type: StdMap<unsigned __int32, Client::Game::CurrencyManager::CurrencyItem>
   name: StdMap`2
   namespace: ''
-  size: 16
   fields:
   - type: StdMap<unsigned __int32, Client::Game::CurrencyManager::CurrencyItem>*
     name: Head
@@ -21680,7 +21590,6 @@ structs:
 - type: StdMap<unsigned __int32, Client::Game::CurrencyManager::ContentCurrencyItem>
   name: StdMap`2
   namespace: ''
-  size: 16
   fields:
   - type: StdMap<unsigned __int32, Client::Game::CurrencyManager::ContentCurrencyItem>*
     name: Head
@@ -21693,7 +21602,6 @@ structs:
 - type: StdList<Client::Game::UI::MarkerInfo>
   name: StdList`1
   namespace: ''
-  size: 16
   fields:
   - type: StdList<Client::Game::UI::MarkerInfo>*
     name: Head
@@ -21706,7 +21614,6 @@ structs:
 - type: StdMap<unsigned __int32, StdPair<unsigned __int32, unsigned __int32>>
   name: StdMap`2
   namespace: ''
-  size: 16
   fields:
   - type: StdMap<unsigned __int32, StdPair<unsigned __int32, unsigned __int32>>*
     name: Head
@@ -21719,7 +21626,6 @@ structs:
 - type: StdMap<unsigned __int32, __int32>
   name: StdMap`2
   namespace: ''
-  size: 16
   fields:
   - type: StdMap<unsigned __int32, __int32>*
     name: Head
@@ -21732,7 +21638,6 @@ structs:
 - type: StdVector<Client::Game::Object::GameObjectID>
   name: StdVector`1
   namespace: ''
-  size: 24
   fields:
   - type: Client::Game::Object::GameObjectID*
     name: First
@@ -21748,7 +21653,6 @@ structs:
 - type: StdVector<Client::Game::Fate::FateContext*>
   name: StdVector`1
   namespace: ''
-  size: 24
   fields:
   - type: Client::Game::Fate::FateContext**
     name: First
@@ -21764,7 +21668,6 @@ structs:
 - type: StdVector<Client::Game::Event::Director*>
   name: StdVector`1
   namespace: ''
-  size: 24
   fields:
   - type: Client::Game::Event::Director**
     name: First
@@ -21780,7 +21683,6 @@ structs:
 - type: StdMap<unsigned __int16, StdPair<__int64, __int64>>
   name: StdMap`2
   namespace: ''
-  size: 16
   fields:
   - type: StdMap<unsigned __int16, StdPair<__int64, __int64>>*
     name: Head
@@ -21793,7 +21695,6 @@ structs:
 - type: StdSet<Client::Game::Object::GameObject*>
   name: StdSet`1
   namespace: ''
-  size: 16
   fields:
   - type: StdSet<Client::Game::Object::GameObject*>*
     name: Head
@@ -21806,7 +21707,6 @@ structs:
 - type: StdMap<unsigned __int32, Client::Game::Event::EventHandler*>
   name: StdMap`2
   namespace: ''
-  size: 16
   fields:
   - type: StdMap<unsigned __int32, Client::Game::Event::EventHandler*>*
     name: Head
@@ -21819,7 +21719,6 @@ structs:
 - type: StdMap<__int64, Client::Game::Event::LuaActor>
   name: StdMap`2
   namespace: ''
-  size: 16
   fields:
   - type: StdMap<__int64, Client::Game::Event::LuaActor>*
     name: Head
@@ -21832,7 +21731,6 @@ structs:
 - type: StdVector<Client::UI::Agent::AgentMJICraftSchedule::CraftData>
   name: StdVector`1
   namespace: ''
-  size: 24
   fields:
   - type: Client::UI::Agent::AgentMJICraftSchedule::CraftData*
     name: First
@@ -21848,7 +21746,6 @@ structs:
 - type: StdVector<Client::UI::Agent::AgentMJICraftSchedule::CraftData*>
   name: StdVector`1
   namespace: ''
-  size: 24
   fields:
   - type: Client::UI::Agent::AgentMJICraftSchedule::CraftData**
     name: First
@@ -21864,7 +21761,6 @@ structs:
 - type: StdVector<Client::UI::Agent::AgentMJIDisposeShop::ItemData>
   name: StdVector`1
   namespace: ''
-  size: 24
   fields:
   - type: Client::UI::Agent::AgentMJIDisposeShop::ItemData*
     name: First
@@ -21880,7 +21776,6 @@ structs:
 - type: StdVector<Client::UI::Agent::AgentMJIGatheringHouse::ExpeditionData>
   name: StdVector`1
   namespace: ''
-  size: 24
   fields:
   - type: Client::UI::Agent::AgentMJIGatheringHouse::ExpeditionData*
     name: First
@@ -21896,7 +21791,6 @@ structs:
 - type: StdVector<Client::UI::Agent::AgentMJIGatheringHouse::ExpeditionDesc>
   name: StdVector`1
   namespace: ''
-  size: 24
   fields:
   - type: Client::UI::Agent::AgentMJIGatheringHouse::ExpeditionDesc*
     name: First
@@ -21912,7 +21806,6 @@ structs:
 - type: StdVector<Client::UI::Agent::AgentMJIGatheringHouse::ExpeditionItem>
   name: StdVector`1
   namespace: ''
-  size: 24
   fields:
   - type: Client::UI::Agent::AgentMJIGatheringHouse::ExpeditionItem*
     name: First
@@ -21928,7 +21821,6 @@ structs:
 - type: StdVector<Client::UI::Agent::AgentMJIGatheringHouse::Resource>
   name: StdVector`1
   namespace: ''
-  size: 24
   fields:
   - type: Client::UI::Agent::AgentMJIGatheringHouse::Resource*
     name: First
@@ -21944,7 +21836,6 @@ structs:
 - type: StdVector<Client::UI::Agent::PouchInventoryItem>
   name: StdVector`1
   namespace: ''
-  size: 24
   fields:
   - type: Client::UI::Agent::PouchInventoryItem*
     name: First
@@ -21960,7 +21851,6 @@ structs:
 - type: StdVector<Client::UI::Agent::PouchInventoryItem*>
   name: StdVector`1
   namespace: ''
-  size: 24
   fields:
   - type: Client::UI::Agent::PouchInventoryItem**
     name: First
@@ -21976,7 +21866,6 @@ structs:
 - type: StdMap<unsigned __int32, StdMap<unsigned __int32, Client::System::Resource::Handle::ResourceHandle*>*>
   name: StdMap`2
   namespace: ''
-  size: 16
   fields:
   - type: StdMap<unsigned __int32, StdMap<unsigned __int32, Client::System::Resource::Handle::ResourceHandle*>*>*
     name: Head
@@ -21989,7 +21878,6 @@ structs:
 - type: hkArray<hkaAnnotationTrack>
   name: hkArray`1
   namespace: ''
-  size: 16
   fields:
   - type: hkaAnnotationTrack*
     name: Data
@@ -22005,7 +21893,6 @@ structs:
 - type: hkArray<__int16>
   name: hkArray`1
   namespace: ''
-  size: 16
   fields:
   - type: __int16*
     name: Data
@@ -22021,7 +21908,6 @@ structs:
 - type: hkEnum<hkaAnimationBinding::BlendHintEnum, __int8>
   name: hkEnum`2
   namespace: ''
-  size: 1
   fields:
   - type: __int8
     name: Storage
@@ -22031,7 +21917,6 @@ structs:
 - type: hkArray<hkaAnnotationTrack::Annotation>
   name: hkArray`1
   namespace: ''
-  size: 16
   fields:
   - type: hkaAnnotationTrack::Annotation*
     name: Data
@@ -22047,7 +21932,6 @@ structs:
 - type: hkArray<hkaMeshBinding::Mapping>
   name: hkArray`1
   namespace: ''
-  size: 16
   fields:
   - type: hkaMeshBinding::Mapping*
     name: Data
@@ -22063,7 +21947,6 @@ structs:
 - type: hkArray<hkTransformf>
   name: hkArray`1
   namespace: ''
-  size: 16
   fields:
   - type: hkTransformf*
     name: Data
@@ -22079,7 +21962,6 @@ structs:
 - type: hkArray<hkaSkeleton*>
   name: hkArray`1
   namespace: ''
-  size: 16
   fields:
   - type: hkaSkeleton**
     name: Data
@@ -22095,7 +21977,6 @@ structs:
 - type: hkArray<hkaAnimation*>
   name: hkArray`1
   namespace: ''
-  size: 16
   fields:
   - type: hkaAnimation**
     name: Data
@@ -22111,7 +21992,6 @@ structs:
 - type: hkArray<hkaAnimationBinding*>
   name: hkArray`1
   namespace: ''
-  size: 16
   fields:
   - type: hkaAnimationBinding**
     name: Data
@@ -22127,7 +22007,6 @@ structs:
 - type: hkArray<hkaBoneAttachment*>
   name: hkArray`1
   namespace: ''
-  size: 16
   fields:
   - type: hkaBoneAttachment**
     name: Data
@@ -22143,7 +22022,6 @@ structs:
 - type: hkArray<hkaMeshBinding*>
   name: hkArray`1
   namespace: ''
-  size: 16
   fields:
   - type: hkaMeshBinding**
     name: Data
@@ -22159,7 +22037,6 @@ structs:
 - type: hkArray<hkaSkeletonMapperData::PartitionMappingRange>
   name: hkArray`1
   namespace: ''
-  size: 16
   fields:
   - type: hkaSkeletonMapperData::PartitionMappingRange*
     name: Data
@@ -22175,7 +22052,6 @@ structs:
 - type: hkArray<hkaSkeletonMapperData::SimpleMapping>
   name: hkArray`1
   namespace: ''
-  size: 16
   fields:
   - type: hkaSkeletonMapperData::SimpleMapping*
     name: Data
@@ -22191,7 +22067,6 @@ structs:
 - type: hkArray<hkaSkeletonMapperData::ChainMapping>
   name: hkArray`1
   namespace: ''
-  size: 16
   fields:
   - type: hkaSkeletonMapperData::ChainMapping*
     name: Data
@@ -22207,7 +22082,6 @@ structs:
 - type: hkEnum<hkaSkeletonMapperData::MappingType, __int32>
   name: hkEnum`2
   namespace: ''
-  size: 4
   fields:
   - type: __int32
     name: Storage
@@ -22217,7 +22091,6 @@ structs:
 - type: hkArray<hkaDefaultAnimationControl::hkaDefaultAnimationControlListener>
   name: hkArray`1
   namespace: ''
-  size: 16
   fields:
   - type: hkaDefaultAnimationControl::hkaDefaultAnimationControlListener*
     name: Data
@@ -22233,7 +22106,6 @@ structs:
 - type: hkArray<byte>
   name: hkArray`1
   namespace: ''
-  size: 16
   fields:
   - type: byte*
     name: Data
@@ -22249,7 +22121,6 @@ structs:
 - type: hkArray<hkaAnimationControlListener*>
   name: hkArray`1
   namespace: ''
-  size: 16
   fields:
   - type: hkaAnimationControlListener**
     name: Data
@@ -22265,7 +22136,6 @@ structs:
 - type: hkArray<hkaDefaultAnimationControl*>
   name: hkArray`1
   namespace: ''
-  size: 16
   fields:
   - type: hkaDefaultAnimationControl**
     name: Data
@@ -22281,7 +22151,6 @@ structs:
 - type: hkArray<hkQsTransformf>
   name: hkArray`1
   namespace: ''
-  size: 16
   fields:
   - type: hkQsTransformf*
     name: Data
@@ -22297,7 +22166,6 @@ structs:
 - type: hkArray<unsigned __int32>
   name: hkArray`1
   namespace: ''
-  size: 16
   fields:
   - type: unsigned __int32*
     name: Data
@@ -22313,7 +22181,6 @@ structs:
 - type: hkArray<float>
   name: hkArray`1
   namespace: ''
-  size: 16
   fields:
   - type: float*
     name: Data
@@ -22329,7 +22196,6 @@ structs:
 - type: hkArray<hkaBone>
   name: hkArray`1
   namespace: ''
-  size: 16
   fields:
   - type: hkaBone*
     name: Data
@@ -22345,7 +22211,6 @@ structs:
 - type: hkArray<hkStringPtr>
   name: hkArray`1
   namespace: ''
-  size: 16
   fields:
   - type: hkStringPtr*
     name: Data
@@ -22361,7 +22226,6 @@ structs:
 - type: hkArray<hkaSkeleton::LocalFrameOnBone>
   name: hkArray`1
   namespace: ''
-  size: 16
   fields:
   - type: hkaSkeleton::LocalFrameOnBone*
     name: Data
@@ -22377,7 +22241,6 @@ structs:
 - type: hkArray<hkaSkeleton::Partition>
   name: hkArray`1
   namespace: ''
-  size: 16
   fields:
   - type: hkaSkeleton::Partition*
     name: Data
@@ -22393,7 +22256,6 @@ structs:
 - type: hkEnum<hkJob::hkJobType, byte>
   name: hkEnum`2
   namespace: ''
-  size: 1
   fields:
   - type: byte
     name: Storage
@@ -22403,7 +22265,6 @@ structs:
 - type: hkEnum<hkJob::hkJobSpuType, byte>
   name: hkEnum`2
   namespace: ''
-  size: 1
   fields:
   - type: byte
     name: Storage
@@ -22413,7 +22274,6 @@ structs:
 - type: hkArray<hkResource*>
   name: hkArray`1
   namespace: ''
-  size: 16
   fields:
   - type: hkResource**
     name: Data
@@ -22429,7 +22289,6 @@ structs:
 - type: hkArray<hkRootLevelContainer::NamedVariant>
   name: hkArray`1
   namespace: ''
-  size: 16
   fields:
   - type: hkRootLevelContainer::NamedVariant*
     name: Data
@@ -22445,7 +22304,6 @@ structs:
 - type: hkFlags<hkaSampleBlendJob::SingleAnimation::SampleFlags, __int32>
   name: hkFlags`2
   namespace: ''
-  size: 4
   fields:
   - type: __int32
     name: Storage
@@ -22455,7 +22313,6 @@ structs:
 - type: hkEnum<hkSerializeUtil::ErrorDetails::ErrorID, __int32>
   name: hkEnum`2
   namespace: ''
-  size: 4
   fields:
   - type: __int32
     name: Storage
@@ -22465,7 +22322,6 @@ structs:
 - type: hkFlags<hkSerializeUtil::SaveOptionBits, __int32>
   name: hkFlags`2
   namespace: ''
-  size: 4
   fields:
   - type: __int32
     name: Storage
@@ -22475,7 +22331,6 @@ structs:
 - type: hkFlags<hkSerializeUtil::LoadOptionBits, __int32>
   name: hkFlags`2
   namespace: ''
-  size: 4
   fields:
   - type: __int32
     name: Storage
@@ -22485,7 +22340,6 @@ structs:
 - type: StdVector<Client::Graphics::Kernel::VertexShader*>
   name: StdVector`1
   namespace: ''
-  size: 24
   fields:
   - type: Client::Graphics::Kernel::VertexShader**
     name: First
@@ -22501,7 +22355,6 @@ structs:
 - type: StdVector<Client::Graphics::Kernel::PixelShader*>
   name: StdVector`1
   namespace: ''
-  size: 24
   fields:
   - type: Client::Graphics::Kernel::PixelShader**
     name: First
@@ -22517,7 +22370,6 @@ structs:
 - type: StdVector<Client::Graphics::Kernel::ShaderNode*>
   name: StdVector`1
   namespace: ''
-  size: 24
   fields:
   - type: Client::Graphics::Kernel::ShaderNode**
     name: First
@@ -36145,7 +35997,7 @@ structs:
 - type: Client::Network::NetworkModulePacketReceiverCallback
   name: NetworkModulePacketReceiverCallback
   namespace: Client.Network
-  size: 32
+  size: 40
   fields:
   - type: __int64
     name: vtbl
@@ -37122,7 +36974,6 @@ structs:
 - type: Client::Game::UI::MapMarkerNode
   name: MapMarkerNode
   namespace: Client.Game.UI
-  size: 0
   fields:
   - type: Client::Game::UI::MapMarkerNode*
     name: Next
@@ -39094,7 +38945,6 @@ structs:
 - type: hkaAnimation
   name: hkaAnimation
   namespace: ''
-  size: 0
   fields:
   - type: hkReferencedObject
     name: hkReferencedObject
@@ -39122,7 +38972,6 @@ structs:
 - type: hkaAnimationBinding
   name: hkaAnimationBinding
   namespace: ''
-  size: 0
   fields:
   - type: hkReferencedObject
     name: hkReferencedObject
@@ -39150,7 +38999,6 @@ structs:
 - type: hkaAnnotationTrack
   name: hkaAnnotationTrack
   namespace: ''
-  size: 0
   fields:
   - type: hkStringPtr
     name: TrackName
@@ -39163,7 +39011,6 @@ structs:
 - type: hkaMeshBinding
   name: hkaMeshBinding
   namespace: ''
-  size: 0
   fields:
   - type: hkReferencedObject
     name: hkReferencedObject
@@ -39191,7 +39038,6 @@ structs:
 - type: hkaAnimationContainer
   name: hkaAnimationContainer
   namespace: ''
-  size: 0
   fields:
   - type: hkReferencedObject
     name: hkReferencedObject
@@ -39216,7 +39062,6 @@ structs:
 - type: hkaAnimatedReferenceFrame
   name: hkaAnimatedReferenceFrame
   namespace: ''
-  size: 0
   fields:
   - type: hkReferencedObject
     name: hkReferencedObject
@@ -39229,7 +39074,6 @@ structs:
 - type: hkaAnimationControl
   name: hkaAnimationControl
   namespace: ''
-  size: 0
   fields:
   - type: hkReferencedObject
     name: hkReferencedObject
@@ -39270,7 +39114,6 @@ structs:
 - type: hkaAnimatedSkeleton
   name: hkaAnimatedSkeleton
   namespace: ''
-  size: 0
   fields:
   - type: hkReferencedObject
     name: hkReferencedObject
@@ -39406,7 +39249,6 @@ structs:
 - type: hkaBone
   name: hkaBone
   namespace: ''
-  size: 0
   fields:
   - type: hkStringPtr
     name: Name
@@ -39419,7 +39261,6 @@ structs:
 - type: hkaPose
   name: hkaPose
   namespace: ''
-  size: 0
   fields:
   - type: hkaSkeleton*
     name: Skeleton
@@ -39544,7 +39385,6 @@ structs:
 - type: hkaSkeleton
   name: hkaSkeleton
   namespace: ''
-  size: 0
   fields:
   - type: hkReferencedObject
     name: hkReferencedObject
@@ -39697,7 +39537,6 @@ structs:
 - type: hkRotationf
   name: hkRotationf
   namespace: ''
-  size: 0
   fields:
   - type: hkMatrix3f
     name: hkMatrix3f
@@ -39707,7 +39546,6 @@ structs:
 - type: hkTransformf
   name: hkTransformf
   namespace: ''
-  size: 0
   fields:
   - type: hkRotationf
     name: Rotation
@@ -39720,7 +39558,6 @@ structs:
 - type: hkQsTransformf
   name: hkQsTransformf
   namespace: ''
-  size: 0
   fields:
   - type: hkVector4f
     name: Translation
@@ -39756,7 +39593,6 @@ structs:
 - type: hkJob
   name: hkJob
   namespace: ''
-  size: 0
   fields:
   - type: byte
     name: JobSubType
@@ -39778,7 +39614,6 @@ structs:
 - type: hkLoader
   name: hkLoader
   namespace: ''
-  size: 0
   fields:
   - type: hkReferencedObject
     name: hkReferencedObject
@@ -39796,7 +39631,6 @@ structs:
 - type: hkRootLevelContainer
   name: hkRootLevelContainer
   namespace: ''
-  size: 0
   fields:
   - type: hkArray<hkRootLevelContainer::NamedVariant>
     name: NamedVariants
@@ -39820,7 +39654,6 @@ structs:
 - type: hkaAnimation::TrackAnnotation
   name: TrackAnnotation
   namespace: ''
-  size: 0
   fields:
   - type: unsigned __int16
     name: TrackId
@@ -39833,7 +39666,6 @@ structs:
 - type: hkaMeshBinding::Mapping
   name: Mapping
   namespace: ''
-  size: 0
   fields:
   - type: hkArray<__int16>
     name: _Mapping
@@ -39843,7 +39675,6 @@ structs:
 - type: hkaSkeletonMapperData::SimpleMapping
   name: SimpleMapping
   namespace: ''
-  size: 0
   fields:
   - type: __int16
     name: BoneA
@@ -39859,7 +39690,6 @@ structs:
 - type: hkaSkeletonMapperData::ChainMapping
   name: ChainMapping
   namespace: ''
-  size: 0
   fields:
   - type: __int16
     name: StartBoneA
@@ -39884,7 +39714,6 @@ structs:
 - type: hkaDefaultAnimationControl::hkaDefaultAnimationControlMapperData
   name: hkaDefaultAnimationControlMapperData
   namespace: ''
-  size: 0
   fields:
   - type: hkReferencedObject
     name: hkReferencedObject
@@ -39906,7 +39735,6 @@ structs:
 - type: hkaSampleBlendJob::SingleAnimation
   name: SingleAnimation
   namespace: ''
-  size: 0
   fields:
   - type: unsigned __int32
     name: FrameIndex
@@ -39992,7 +39820,6 @@ structs:
 - type: Client::Graphics::Kernel::CVector<Client::Graphics::Kernel::VertexShader*>
   name: CVector`1
   namespace: Client.Graphics.Kernel
-  size: 32
   fields:
   - type: __int64
     name: vtbl
@@ -40005,7 +39832,6 @@ structs:
 - type: Client::Graphics::Kernel::CVector<Client::Graphics::Kernel::PixelShader*>
   name: CVector`1
   namespace: Client.Graphics.Kernel
-  size: 32
   fields:
   - type: __int64
     name: vtbl
@@ -40018,7 +39844,6 @@ structs:
 - type: Client::Graphics::Kernel::CVector<Client::Graphics::Kernel::ShaderNode*>
   name: CVector`1
   namespace: Client.Graphics.Kernel
-  size: 32
   fields:
   - type: __int64
     name: vtbl
@@ -44276,7 +44101,6 @@ structs:
 - type: hkaSkeletonMapperData
   name: hkaSkeletonMapperData
   namespace: ''
-  size: 0
   fields:
   - type: hkaSkeleton*
     name: SkeletonA
@@ -44316,7 +44140,6 @@ structs:
 - type: hkaDefaultAnimationControl
   name: hkaDefaultAnimationControl
   namespace: ''
-  size: 0
   fields:
   - type: hkaAnimationControl
     name: hkaAnimationControl
@@ -44379,7 +44202,6 @@ structs:
 - type: hkaSampleBlendJob
   name: hkaSampleBlendJob
   namespace: ''
-  size: 0
   fields:
   - type: hkJob
     name: hkJob
@@ -44446,7 +44268,6 @@ structs:
 - type: hkaBoneAttachment
   name: hkaBoneAttachment
   namespace: ''
-  size: 0
   fields:
   - type: hkReferencedObject
     name: hkReferencedObject
@@ -45805,7 +45626,6 @@ structs:
 - type: hkaSkeletonMapper
   name: hkaSkeletonMapper
   namespace: ''
-  size: 0
   fields:
   - type: hkReferencedObject
     name: hkReferencedObject

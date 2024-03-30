@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using FFXIVClientStructs.Attributes;
 using FFXIVClientStructs.Interop.Attributes;
 using YamlDotNet.Core;
@@ -294,7 +295,7 @@ public class ProcessedEnumConverter : IYamlTypeConverter {
         emitter.Emit(new Scalar("name"));
         emitter.Emit(new Scalar(e.EnumName));
         emitter.Emit(new Scalar("underlying"));
-        emitter.Emit(new Scalar(e.EnumType.FullSanitizeName()));
+        emitter.Emit(new Scalar(e.EnumType.GetEnumUnderlyingType().FullSanitizeName()));
         emitter.Emit(new Scalar("namespace"));
         emitter.Emit(new Scalar(e.EnumNamespace));
         emitter.Emit(new Scalar("values"));
@@ -363,8 +364,10 @@ public class ProcessedStructConverter : IYamlTypeConverter {
         emitter.Emit(new Scalar(s.StructName));
         emitter.Emit(new Scalar("namespace"));
         emitter.Emit(new Scalar(s.StructNamespace));
-        emitter.Emit(new Scalar("size"));
-        emitter.Emit(new Scalar(s.StructSize.ToString()));
+        if (s.StructType.StructLayoutAttribute?.Value == LayoutKind.Explicit) {
+            emitter.Emit(new Scalar("size"));
+            emitter.Emit(new Scalar(s.StructSize.ToString()));
+        }
         emitter.Emit(new Scalar("fields"));
         emitter.Emit(new SequenceStart(null, null, true, SequenceStyle.Block));
         foreach (var field in s.Fields) {
