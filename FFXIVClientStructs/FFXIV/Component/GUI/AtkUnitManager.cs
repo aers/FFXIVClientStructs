@@ -24,4 +24,18 @@ public struct AtkUnitManager {
     [FieldOffset(0x7920)] public AtkUnitList UnitList16;
     [FieldOffset(0x8130)] public AtkUnitList UnitList17;
     [FieldOffset(0x8940)] public AtkUnitList UnitList18;
+    [FieldOffset(0x9C88)] public AtkUnitManagerFlags Flags;
+}
+
+[Flags]
+public enum AtkUnitManagerFlags : byte {
+    None = 0x00,
+    Unk01 = 0x01,
+    Unk02 = 0x02,
+    UiHidden = 0x04,
+    Unk08 = 0x08,
+    Unk10 = 0x10,
+    Unk20 = 0x20,
+    Unk40 = 0x40,
+    Unk80 = 0x80,
 }

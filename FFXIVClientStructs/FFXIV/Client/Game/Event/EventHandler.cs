@@ -23,7 +23,7 @@ public struct EventHandlerInfo {
 
 [StructLayout(LayoutKind.Explicit, Size = 0x04)]
 public struct EventId {
-    [FieldOffset(0x00)] public uint Id;
+    [FieldOffset(0x00), CExportIgnore] public uint Id;
     [FieldOffset(0x00)] public ushort EntryId;
     [FieldOffset(0x02)] public EventHandlerType Type; //TODO: rename to ContentId
     public static implicit operator uint(EventId id) => id.Id;

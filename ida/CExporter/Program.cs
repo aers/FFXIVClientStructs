@@ -18,6 +18,8 @@ public class Program {
         Exporter.ProcessTypes();
         Console.WriteLine("::endgroup::");
 
+        Exporter.VerifyNoFieldOverlap();
+
         foreach (var warning in ExporterStatics.WarningList) {
             Console.WriteLine(warning);
         }
@@ -25,13 +27,14 @@ public class Program {
         foreach (var error in ExporterStatics.ErrorList) {
             Console.Error.WriteLine(error);
         }
+#if DEBUG
         if (ExporterStatics.ErrorList.Count > 0) {
             Environment.Exit(1);
         }
+#else
+        new FileInfo(Path.Combine(dir.FullName, "errors.txt")).WriteFile(string.Join("\n", ExporterStatics.ErrorList));
+#endif
 
-        Console.WriteLine("::group::Writing Files");
-        Exporter.WriteIDA(dir);
-
-        Console.WriteLine("::endgroup::");
+        Exporter.Write(dir);
     }
 }

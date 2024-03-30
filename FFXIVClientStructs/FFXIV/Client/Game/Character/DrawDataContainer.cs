@@ -145,7 +145,7 @@ public struct WeaponModelId {
     [FieldOffset(4)] public ushort Variant;
     [FieldOffset(6)] public byte Stain;
 
-    [FieldOffset(0)] public ulong Value;
+    [FieldOffset(0), CExportIgnore] public ulong Value;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 4)]
@@ -154,5 +154,5 @@ public struct EquipmentModelId {
     [FieldOffset(2)] public byte Variant;
     [FieldOffset(3)] public byte Stain;
 
-    [FieldOffset(0)] public uint Value;
+    [FieldOffset(0), CExportIgnore] public uint Value;
 }

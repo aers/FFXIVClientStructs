@@ -302,6 +302,20 @@ enums:
     TexturesLoading: 2
     Loaded: 3
     LoadError: 4
+- type: Component::GUI::AtkUnitManagerFlags
+  name: AtkUnitManagerFlags
+  underlying: byte
+  namespace: Component.GUI
+  values:
+    None: 0
+    Unk01: 1
+    Unk02: 2
+    UiHidden: 4
+    Unk08: 8
+    Unk10: 16
+    Unk20: 32
+    Unk40: 64
+    Unk80: 128
 - type: Component::GUI::ValueType
   name: ValueType
   underlying: __int32
@@ -387,20 +401,6 @@ enums:
     UnlocksUpdate: 16
     MainCommandEnabledStateUpdate: 32
     HousingInventoryUpdate: 64
-- type: Client::UI::RaptureAtkModuleFlags
-  name: RaptureAtkModuleFlags
-  underlying: byte
-  namespace: Client.UI
-  values:
-    None: 0
-    Unk01: 1
-    Unk02: 2
-    UiHidden: 4
-    Unk08: 8
-    Unk10: 16
-    Unk20: 32
-    Unk40: 64
-    Unk80: 128
 - type: Client::UI::UIModule::UiFlags
   name: UiFlags
   underlying: __int32
@@ -4966,6 +4966,9 @@ structs:
   - type: Component::GUI::AtkUnitList
     name: UnitList18
     offset: 35136
+  - type: Component::GUI::AtkUnitManagerFlags
+    name: Flags
+    offset: 40072
   virtual_functions: []
   member_functions: []
 - type: Component::GUI::AtkValue
@@ -5490,9 +5493,6 @@ structs:
   - type: Component::GUI::AtkUnitManager
     name: AtkUnitManager
     offset: 0
-  - type: Client::UI::RaptureAtkModuleFlags
-    name: Flags
-    offset: 40072
   - type: Client::UI::UIModule::UiFlags
     name: UiFlags
     offset: 40192
@@ -6951,9 +6951,6 @@ structs:
   namespace: Client.UI.Agent
   size: 8
   fields:
-  - type: unsigned __int64
-    name: Data
-    offset: 0
   - type: byte
     name: Charge
     offset: 0
@@ -7711,9 +7708,6 @@ structs:
   namespace: Client.System.Resource.Handle
   size: 4
   fields:
-  - type: unsigned __int32
-    name: Value
-    offset: 0
   - type: Client::System::Resource::Handle::ResourceHandleType::HandleCategory
     name: Category
     offset: 0
@@ -10000,12 +9994,6 @@ structs:
   - type: unsigned __int32
     name: ItemID
     offset: 8
-  - type: unsigned __int16
-    name: LinkedItemSlot
-    offset: 8
-  - type: unsigned __int16
-    name: LinkedInventoryType
-    offset: 10
   - type: unsigned __int32
     name: Quantity
     offset: 12
@@ -13467,9 +13455,6 @@ structs:
   namespace: Client.Game.Event
   size: 4
   fields:
-  - type: unsigned __int32
-    name: Id
-    offset: 0
   - type: unsigned __int16
     name: EntryId
     offset: 0
@@ -13804,9 +13789,6 @@ structs:
   - type: byte
     name: Stain
     offset: 6
-  - type: unsigned __int64
-    name: Value
-    offset: 0
   virtual_functions: []
   member_functions: []
 - type: Client::Game::Character::EquipmentModelId
@@ -13823,9 +13805,6 @@ structs:
   - type: byte
     name: Stain
     offset: 3
-  - type: unsigned __int32
-    name: Value
-    offset: 0
   virtual_functions: []
   member_functions: []
 - type: Application::Network::WorkDefinitions::BeastReputationWork
@@ -35075,9 +35054,6 @@ structs:
   - type: unsigned __int32
     name: OwnerAddonId
     offset: 1736
-  - type: __int32
-    name: YesNoPosition
-    offset: 1740
   - type: __int16
     name: YesNoX
     offset: 1740

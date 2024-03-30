@@ -61,7 +61,18 @@ public class Exporter {
         Console.WriteLine($"Processed {_enums.Count} enums and {_structs.Count} structs");
     }
 
-    public static void WriteIDA(DirectoryInfo dir) {
+    public static void VerifyNoFieldOverlap() {
+        foreach (var processedStruct in _structs) {
+            var sizes = processedStruct.Fields.Select(t => new { StartOffset = t.FieldOffset, EndOffset = t.FieldOffset + t.FieldType.SizeOf(), Field = t.FieldName }).ToArray();
+            foreach (var size in sizes) {
+                if (sizes.Where(t => t != size && t.StartOffset < size.StartOffset).Any(t => t.EndOffset > size.StartOffset && t.StartOffset != size.StartOffset)) {
+                    ExporterStatics.ErrorList.Add($"Field overlap detected in {processedStruct.StructType.FullSanitizeName()} with field {size.Field}");
+                }
+            }
+        }
+    }
+
+    public static void Write(DirectoryInfo dir) {
         var structsOrdered = Array.Empty<ProcessedStruct>();
 // make sure we have all the dependencies for each struct before we write them
 
