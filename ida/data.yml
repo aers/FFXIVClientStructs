@@ -2787,7 +2787,7 @@ classes:
       11: GetUseOsHardwareCursor
       12: SetSoftwareCursorScale
       13: GetSoftwareCursorScale
-      14: IsCursorVisible
+      14: GetCursorVisibility
       19: SetShowSoftwareCursorTrajectory
       21: IsMouseNotCaptured
       22: UnloadSoftwareCursor
@@ -3658,6 +3658,7 @@ classes:
       0x14149E5C0: HandleMarketBoardPurchasePacket
       0x14149F060: HandleMarketBoardHistoryPacket
       0x14149E460: HandleMarketBoardItemRequestStartPacket
+      0x14130DD20: ctor
   Client::Network::NetworkModulePacketReceiverCallback: # derives Application::Network::PacketReceiverCallbackInterface & Client::Network::PacketDispatcher
     vtbls:
       - ea: 0x1419DC458
