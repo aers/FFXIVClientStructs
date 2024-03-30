@@ -12930,7 +12930,7 @@ structs:
 - type: Client::Game::Event::EventGPoseController
   name: EventGPoseController
   namespace: Client.Game.Event
-  size: 0
+  size: 11712
   fields: []
   virtual_functions: []
   member_functions:
