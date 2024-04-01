@@ -112,6 +112,8 @@ functions:
   0x140329280: GetGlobalTextParameter
   0x140335530: std::vector_SetSize
   0x140655260: GetGameObjectByIndex
+  0x1406554A0: GetRandomInteger
+  0x140655500: GetRandomFloat
   0x1404196F0: UpdateAnimFactor
   0x1404998C0: PrepareColorSet
   0x140499B90: ReadStainingTemplate
@@ -4409,6 +4411,7 @@ classes:
     funcs:
       0x1404C2BC0: ctor
       0x1404C2BF0: ctor_FromState
+      0x1404C2C20: Finalize
       0x1404C2F10: GetTop
       0x1404C2F20: SetTop
       0x1404C3000: LoadString
@@ -4474,6 +4477,7 @@ classes:
     funcs:
       0x1404C5B20: ctor_FromState
       0x1404C5B70: ctor
+      0x1404C5B50: Finalize
   Client::Game::Event::CustomTalkEventHandler:
     vtbls:
       - ea: 0x141A48508
@@ -9444,6 +9448,7 @@ classes:
       0x1407C6E90: ctor
     vfuncs:
       0: dtor
+      197: GetTitle # lua function "GetEventHandlerTitle"
   Client::Game::Event::LuaScriptLoader<Client::Game::Event::ModuleBase>:
     vtbls:
       - ea: 0x141A42E48
@@ -9467,6 +9472,246 @@ classes:
   Client::Game::Event::EventSceneModuleImplBase:
     vtbls:
       - ea: 0x141A43728
+    vfuncs:
+      0: dtor
+      1: ContinueBattleBGM
+      2: ContinueEventBGM
+      3: StopEventBGM
+      4: ContinueEventBGMUntilWarp
+      5: LastingBGM
+      6: ResetBGM
+      7: DisableSceneSkip
+      8: EnableSceneSkip
+      9: PlayCutScene
+      10: GetCutSceneMultiResult
+      11: FadeIn
+      12: FadeOut
+      13: PlaySharedGroupTimeline
+      14: CheckSharedGroupTimelineState
+      15: SetSharedGroupTimelineState
+      16: WaitForSharedGroupTimeline
+      17: PlayQuestGimmickReaction
+      18: ResetGimmickSharedGroupTimelineStateByIndexes
+      19: Talk
+      20: TalkAsync
+      21: SystemTalk
+      22: CloseTalk
+      23: OK
+      24: YesNo
+      25: YesNoCount
+      26: YesNoCheck
+      27: YesNoAddon
+      28: YesNoAddonCheck
+      29: YesNoStartFate
+      30: YesNoItem
+      31: Menu
+      32: List
+      33: Letter
+      34: LeveAccepted
+      35: LeveCompleted
+      36: LeveStart
+      37: LeveSuccess
+      38: LeveFailed
+      39: ScreenImage
+      40: ScreenImageAndTextSimple
+      41: LoadEventPicture
+      42: WaitForLoadEventPicture
+      43: EventPicture
+      44: EventPictureOffset
+      45: LearningAction
+      46: LearningQuestRewardAction
+      47: LearningTrait
+      48: BattleTalk
+      49: Prompt
+      50: PromptName
+      51: NpcRepair
+      52: CutSceneReplay
+      53: CompanyChest
+      54: FreeCompanyExchange
+      55: FreeCompanyCrestEditor
+      56: FreeCompanyCrestDecal
+      57: MateriaMeld
+      58: Materialize
+      59: SuspendedMateriaExchange
+      60: SuspendedMateriaSell
+      61: LegacyItemStorage
+      62: HousingKickStorage
+      63: Cabinet
+      64: ItemSearchWidget
+      65: ScenarioMessage
+      66: LogMessage
+      67: BalloonTalk
+      68: ScreenGC
+      69: Inventory
+      70: CloseInventory
+      71: GrandCompanyRankUp
+      72: FCOrganizeSheet
+      73: TripleTriadCardToCoin
+      74: GoldSaucerBuyCoin
+      75: InputNumeric
+      76: ContentFinder
+      77: ContentFinderByCondition
+      78: HousingPortal
+      79: HousingGardeningPlant
+      80: HousingGardeningPlantFertilizer
+      81: RefreshMonsterNote
+      82: GrayoutMenu
+      83: IconMenu
+      84: GridMenu
+      85: ResultMenu
+      86: CancelNpcTrade
+      87: NpcTrade
+      88: MateriaTrade
+      89: RelicSphereUpgrade
+      90: HousingPersonalRoomPortal
+      91: MiniGame
+      92: MobHuntBoard
+      93: HousingBuddyList
+      94: HousingBuddySelectReward
+      95: HousingBuddySelectFood
+      96: HousingBuddyMenu
+      97: Wedding
+      98: HousingWheelControlMenu
+      99: HousingWheelSelectEnergy
+      100: HouseRetainerSaleHistory
+      101: HouseRetainerSaleItem
+      102: OpenSelectString
+      103: SkyIslandAetherialExchange
+      104: TutorialContent
+      105: HousingPlantPotSeed
+      106: HousingPlantPotFertilize
+      107: LogMessageContentOpen
+      108: MentorQualified
+      109: MentorConfirm
+      110: OpenLuaUI
+      111: ShortTalk
+      112: ShortTalkWithLineVoice
+      113: CloseShortTalk
+      114: FakeNotice
+      115: Wait
+      116: WaitForPan
+      117: WaitForFade
+      118: WaitForDolly
+      119: WaitForZoom
+      120: WaitForGyro
+      121: WaitForOrbit
+      122: PlayScreenShake
+      123: StopScreenShake
+      124: PlaySE
+      125: MakeRetainer
+      126: HairMake
+      127: WaitForBuildHouse
+      128: Logout
+      129: Shutdown
+      130: SetNpcTradeItem
+      131: PlayStaffRoll
+      132: PlayToBeContinued
+      133: UpdownPan
+      134: SidePan
+      135: UpdownDolly
+      136: SideDolly
+      137: Zoom
+      138: Gyro
+      139: Orbit
+      140: ChangeBGMVolume
+      141: ChangeEnvSoundVolume
+      142: ResetEnvSoundVolume
+      143: PlayCamera
+      144: PlayTwoShotCamera
+      145: PlayLandscapeCamera
+      146: PlayIdleCamera
+      147: PlayWorldPositionCamera
+      148: PlayTargetRelationCamera
+      149: FollowLookAt
+      150: CameraCollisionMode
+      151: PlayHandShake
+      152: StopHandShake
+      153: PlayBGM
+      154: StopBGM
+      155: InvisibleStandCharacter
+      156: InvisibleStandObject
+      157: RevisibleStandObject
+      158: DOF
+      159: DisableDOF
+      160: ColorFilter
+      161: DisableColorFilter
+      162: Vignetting
+      163: DisableVignetting
+      164: Weather
+      165: WorldTime
+      166: GetHouseSize
+      167: PlayHousingCamera
+      168: WaitForFeedBuddy
+      169: WaitForIdleCamera
+      170: GroupPose
+      171: PlayEventVfx
+      172: StopEventVfx
+      173: KickTriggerEventVfx
+      174: WhiteFadeIn
+      175: WhiteFadeOut
+      176: WaitForWhiteFade
+      177: PlayTargetAimingCamera
+      178: PlayDirectionalAimingCamera
+      179: StopAimingCamera
+      180: Position
+      181: PositionCamera
+      182: ResetPosition
+      183: Visible
+      184: Direction
+      185: Distance
+      186: PlayActionTimeline
+      187: CancelActionTimeline
+      188: CancelActionTimelineAll
+      189: WaitForActionTimeline
+      190: PlayEmote
+      191: CancelEmote
+      192: WaitForEmote
+      193: TurnTo
+      194: TurnToObject
+      195: TurnToLayout
+      196: TurnToCamera
+      197: TurnToDefault
+      198: WaitForTurn
+      199: Idle
+      200: LookAt
+      201: LookAtLayout
+      202: LookAtCamera
+      203: LookAtDefault
+      204: WaitForLookAt
+      205: EyeLookAt
+      206: EyeLookAtYawPitch
+      207: Move
+      208: WaitForMove
+      209: PathMove
+      210: WaitForPathMove
+      211: FootStep
+      212: EndEventRollback
+      213: PlayVfx
+      215: EnableVfx
+      216: DisableVfx
+      217: Transparency
+      218: WaitForTransparency
+      219: WalkIn
+      220: WalkOut
+      221: PathWalkIn
+      222: PathWalkOut
+      223: FlyIn # also "SwimIn"
+      224: FlyOut # also "SwimOut"
+      225: BattleMode
+      226: BattleModeEx
+      227: EquipWeapon
+      228: EquipArmor
+      229: Equip
+      230: EquipQuestModel
+      231: AutoShake
+      232: AutoShakeBugFix236127
+      233: SetMount
+      234: SetFlying
+      235: IsSwimming
+      236: SetLodHigh
+      237: IsItemObtainable
+      238: CheckItemsObtainable
+      239: CheckItemsObtainableRareCheck
   Client::Game::Event::EventSceneModuleUsualImpl:
     vtbls:
       - ea: 0x141A43EA8
@@ -9485,6 +9730,8 @@ classes:
         base: Client::Game::Event::LuaEventHandler
     funcs:
       0x1408284E0: ctor
+      0x140964E70: ShowTodo # lua function "ShowDirectorTodo"
+      0x140964E80: HideTodo # lua function "HideDirectorTodo"
   Client::Game::Event::JournalCallback:
     vtbls:
       - ea: 0x141A48E48
