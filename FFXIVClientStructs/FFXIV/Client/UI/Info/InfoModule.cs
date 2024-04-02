@@ -35,11 +35,7 @@ public unsafe partial struct InfoModule {
 }
 
 public enum InfoProxyId : uint {
-    //ShellCommandChatLinkShell refers to 3,18
-    //Party Decline, PartyInv,PartyJoin  refer to 2
     //ShellCommandDice refers to  3, 13(Fc), 18 ,24
-    //AgentChatLogvf9 refers to 18
-    //15 and 16 are the same class
     Party = 0,
     Party2 = 1,
     PartyInvite = 2,
