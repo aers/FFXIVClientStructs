@@ -27,8 +27,8 @@ globals:
   0x1421C5D08: g_animationFactorRemainder
   0x1421C5D0C: g_animationFactor #percentage of a 30fps frame rendered this frame
   0x1421C8BE0: g_PerformanceFrequency
-  0x1421D3268: g_LocalPlayerObjectID
-  0x1421D3270: g_LocalPlayer
+  0x1421D3268: g_Client::Game::Control::Control_LocalPlayerObjectID
+  0x1421D3270: g_Client::Game::Control::Control_LocalPlayer
   0x1421F94B0: g_LastTextCommand
   0x1421F9840: g_CharacterManager_BattleCharaMemoryPtr
   0x1421F9848: g_CharacterManager_CompanionMemoryPtr
