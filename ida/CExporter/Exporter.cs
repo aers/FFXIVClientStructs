@@ -65,9 +65,11 @@ public class Exporter {
         foreach (var processedStruct in _structs) {
             var sizes = processedStruct.Fields.Select(t => new { StartOffset = t.FieldOffset, EndOffset = t.FieldOffset + t.FieldType.SizeOf(), Field = t.FieldName }).ToArray();
             foreach (var size in sizes) {
-                if (sizes.Where(t => t != size && t.StartOffset < size.StartOffset).Any(t => t.EndOffset > size.StartOffset && t.StartOffset != size.StartOffset)) {
+                var checks = sizes.Where(t => t != size && t.StartOffset <= size.StartOffset).ToArray();
+                if (checks.Any(t => t.EndOffset > size.StartOffset && t.StartOffset != size.StartOffset))
                     ExporterStatics.ErrorList.Add($"Field overlap detected in {processedStruct.StructType.FullSanitizeName()} with field {size.Field}");
-                }
+                if(checks.Any(t => t.StartOffset == size.StartOffset))
+                    ExporterStatics.ErrorList.Add($"Union fields not currently supported. Detected in  {processedStruct.StructType.FullSanitizeName()} with field {size.Field}");
             }
         }
     }
@@ -200,12 +202,49 @@ ReExport:
                 }
             }
 
+            var fields = type.GetFields(_bindingFlags);
+            var unionFields = fields.Where(t => t.GetCustomAttribute<ObsoleteAttribute>() == null && t.GetCustomAttribute<CExportIgnoreAttribute>() == null && t.GetCustomAttribute<CExporterUnionAttribute>() != null).ToArray();
+
+            if (unionFields.Any()) {
+                var unions = new List<ProcessedStruct>();
+                foreach (var unionField in unionFields) {
+                    var attr = unionField.GetCustomAttribute<CExporterUnionAttribute>()!;
+                    var index = unions.FindIndex(t => t.StructName == attr.Union);
+                    if(index == -1)
+                        unions.Add(new ProcessedStruct {
+                            StructType = type,
+                            StructName = attr.Union,
+                            StructNamespace = type.FullSanitizeName(),
+                            StructSize = -1,
+                            Fields = [
+                                new ProcessedField {
+                                    FieldType = unionField.FieldType,
+                                    FieldOffset = unionField.GetFieldOffset(),
+                                    FieldName = unionField.Name
+                                }
+                            ],
+                            VirtualFunctions = [],
+                            MemberFunctions = [],
+                            StructTypeOverride = type.FullSanitizeName() + $"{ExporterStatics.Separator}{attr.Union}"
+                        });
+                    else
+                        unions[index].Fields = [
+                            ..unions[index].Fields,
+                            new ProcessedField {
+                                FieldType = unionField.FieldType,
+                                FieldOffset = unionField.GetFieldOffset(),
+                                FieldName = unionField.Name
+                            }
+                        ];
+                }
+            }
+
             var processedStruct = new ProcessedStruct {
                 StructType = type,
                 StructName = type.Name,
                 StructNamespace = type.GetNamespace(),
                 StructSize = type.SizeOf(),
-                Fields = type.GetFields(_bindingFlags).Where(t => !ExporterStatics.IgnoredTypeNames.Contains(t.Name) && t.GetCustomAttribute<ObsoleteAttribute>() == null && t.GetCustomAttribute<CExportIgnoreAttribute>() == null).Select(f => {
+                Fields = fields.Where(t => !ExporterStatics.IgnoredTypeNames.Contains(t.Name) && t.GetCustomAttribute<ObsoleteAttribute>() == null && t.GetCustomAttribute<CExportIgnoreAttribute>() == null && t.GetCustomAttribute<CExporterUnionAttribute>() == null).Select(f => {
                     if (f.FieldType.IsFunctionPointer || f.FieldType.IsUnmanagedFunctionPointer) {
                         _processType.Add(f.FieldType.GetFunctionPointerReturnType());
                         return new ProcessedFunctionField {
@@ -271,6 +310,7 @@ public class ProcessedFunctionField : ProcessedField {
 }
 
 public class ProcessedStruct {
+    public string? StructTypeOverride;
     public required Type StructType;
     public required string StructName;
     public required string StructNamespace;
@@ -347,24 +387,28 @@ public class ProcessedFieldConverter : IYamlTypeConverter {
             emitter.Emit(new Scalar("offset"));
             emitter.Emit(new Scalar(f.FieldOffset.ToString()));
         }
-        if (f is ProcessedFunctionField func) {
-            emitter.Emit(new Scalar("return_type"));
-            emitter.Emit(new Scalar(func.FunctionReturnType.FullSanitizeName()));
-            emitter.Emit(new Scalar("parameters"));
-            emitter.Emit(new SequenceStart(null, null, true, SequenceStyle.Block));
-            foreach (var p in func.FunctionParameters) {
-                emitter.Emit(new MappingStart());
-                emitter.Emit(new Scalar("type"));
-                emitter.Emit(new Scalar(p.FieldTypeOverride ?? p.FieldType.FullSanitizeName()));
-                emitter.Emit(new Scalar("name"));
-                emitter.Emit(new Scalar(p.FieldName));
-                emitter.Emit(new MappingEnd());
+        switch (f) {
+            case ProcessedFunctionField func:
+            {
+                emitter.Emit(new Scalar("return_type"));
+                emitter.Emit(new Scalar(func.FunctionReturnType.FullSanitizeName()));
+                emitter.Emit(new Scalar("parameters"));
+                emitter.Emit(new SequenceStart(null, null, true, SequenceStyle.Block));
+                foreach (var p in func.FunctionParameters) {
+                    emitter.Emit(new MappingStart());
+                    emitter.Emit(new Scalar("type"));
+                    emitter.Emit(new Scalar(p.FieldTypeOverride ?? p.FieldType.FullSanitizeName()));
+                    emitter.Emit(new Scalar("name"));
+                    emitter.Emit(new Scalar(p.FieldName));
+                    emitter.Emit(new MappingEnd());
+                }
+                emitter.Emit(new SequenceEnd());
+                break;
             }
-            emitter.Emit(new SequenceEnd());
-        }
-        if (f is ProcessedFixedField fix) {
-            emitter.Emit(new Scalar("size"));
-            emitter.Emit(new Scalar(fix.FixedSize.ToString()));
+            case ProcessedFixedField fix:
+                emitter.Emit(new Scalar("size"));
+                emitter.Emit(new Scalar(fix.FixedSize.ToString()));
+                break;
         }
         emitter.Emit(new MappingEnd());
     }
@@ -378,7 +422,7 @@ public class ProcessedStructConverter : IYamlTypeConverter {
         if (value is not ProcessedStruct s) return;
         emitter.Emit(new MappingStart());
         emitter.Emit(new Scalar("type"));
-        emitter.Emit(new Scalar(s.StructType.FullSanitizeName()));
+        emitter.Emit(new Scalar(!string.IsNullOrWhiteSpace(s.StructTypeOverride) ? s.StructTypeOverride : s.StructType.FullSanitizeName()));
         emitter.Emit(new Scalar("name"));
         emitter.Emit(new Scalar(s.StructName));
         emitter.Emit(new Scalar("namespace"));
