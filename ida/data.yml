@@ -1351,6 +1351,7 @@ classes:
         pointer: False
     funcs:
       0x140999570: Initialize
+      0x14099A0A0: Update
       0x1409AAD40: ctor
       0x140996D60: SetUnlockLinkValue
       0x140996E00: IsUnlockLinkUnlocked
@@ -1446,6 +1447,9 @@ classes:
     funcs:
       0x14096C7A0: HandleExaminePacket
   Client::Game::UI::NpcTrade:
+    instances:
+      - ea: 0x1421FC448
+        pointer: False
     vtbls:
       - ea: 0x141A696E0
     funcs:
@@ -1544,6 +1548,10 @@ classes:
       0x14097FBE0: IsDungeonComplete
       0x14097FC20: IsFateComplete
       0x14097FC60: IsLeveComplete
+  Client::Game::UI::TradeMultiple:
+    vtbls:
+      - ea: 0x141A6A6A8
+        base: Component::GUI::AtkModuleInterface::AtkEventInterface
   Client::Game::UI::AreaInstance:
     instances:
       - ea: 0x1421F4A60
@@ -1555,6 +1563,24 @@ classes:
       0x140983A10: SetInstance
       0x140983A20: GetInstance
       0x140983A30: IsInstancedArea
+  Client::Game::UI::RelicSphereUpgrade:
+    instances:
+      - ea: 0x1421F4A88
+        pointer: False
+    vtbls:
+      - ea: 0x141A6A6D8
+        base: Component::GUI::AtkModuleInterface::AtkEventInterface
+  Client::Game::UI::DailyQuestSupply:
+    instances:
+      - ea: 0x1421F4B00
+        pointer: False
+    vtbls:
+      - ea: 0x141A6A6E0
+        base: Component::GUI::AtkModuleInterface::AtkEventInterface
+  Client::Game::UI::RidePillon:
+    instances:
+      - ea: 0x1421F4EE8
+        pointer: False
   Client::Game::UI::Loot:
     instances:
       - ea: 0x1421F4F28
@@ -1564,6 +1590,13 @@ classes:
         base: Component::GUI::AtkModuleInterface::AtkEventInterface
     funcs:
       0x1409886A0: ctor
+  Client::Game::UI::GatheringNote:
+    instances:
+      - ea: 0x1421F55C8
+        pointer: False
+    funcs:
+      0x14093EB40: ctor
+      0x14093ED40: Initialize
   Client::Game::UI::RecipeNote:
     instances:
       - ea: 0x1421F5BF0
@@ -1580,6 +1613,50 @@ classes:
       0x140946680: CancelCraftingPassthrough
       0x140946780: InitializeStructs
       0x1409473F0: ClearFunctionPointers
+  Client::Game::UI::FishingNote:
+    instances:
+      - ea: 0x1421F6710
+        pointer: False
+    funcs:
+      0x140947DE0: ctor
+      0x140947C80: Initialize
+  Client::Game::UI::FishRecord:
+    instances:
+      - ea: 0x1421F67E0
+        pointer: False
+    funcs:
+      0x14094A5C0: Initialize
+      0x14094A7C0: Finalize
+  Client::Game::UI::ScenarioTextReader:
+    vtbls:
+      - ea: 0x141A69688
+  Client::Game::UI::Journal:
+    instances:
+      - ea: 0x1421F6A40
+        pointer: False
+    vtbls:
+      - ea: 0x141A69698
+        base: Client::Game::UI::ScenarioTextReader
+    funcs:
+      0x14094B670: ctor
+  Client::Game::UI::QuestUI:
+    instances:
+      - ea: 0x1421FB188
+        pointer: False
+    vtbls:
+      - ea: 0x141A696A8
+        base: Client::Game::UI::ScenarioTextReader
+    funcs:
+      0x140957BB0: ctor
+  Client::Game::UI::QuestTodoList:
+    instances:
+      - ea: 0x1421FC158
+        pointer: False
+    vtbls:
+      - ea: 0x141A696D0
+        base: Client::Game::UI::ScenarioTextReader
+    funcs:
+      0x14095B810: ctor
   Client::Game::UI::Map:
     instances:
       - ea: 0x1421FCA00
@@ -1629,6 +1706,12 @@ classes:
       0: dtor
     funcs:
       0x1409621F0: IsTitleUnlocked
+  Client::Game::UI::GCSupply:
+    instances:
+      - ea: 0x142200D80
+        pointer: False
+    funcs:
+      0x1409A9CC0: ctor
   Client::Game::UI::RouletteController:
     instances:
       - ea: 0x1422039A8
@@ -1638,12 +1721,24 @@ classes:
     funcs:
       0x14097B310: GetPenaltyRemainingInMinutes
       0x14097D930: IsRouletteIncomplete
+  Client::Game::UI::GuildOrderReward:
+    instances:
+      - ea: 0x142203A18
+        pointer: False
+    vtbls:
+      - ea: 0x141A69728
   Client::Game::UI::ContentsFinder:
     instances:
       - ea: 0x142203A78
         pointer: False
     vtbls:
       - ea: 0x141A6A700
+  Client::Game::UI::Wedding:
+    instances:
+      - ea: 0x142203B28
+        pointer: False
+    vtbls:
+      - ea: 0x141A6A730
   Client::Game::UI::MobHunt:
     instances:
       - ea: 0x142203B90
@@ -1657,6 +1752,55 @@ classes:
       0x14098B0D0: GetAvailableHuntOrderRowId
       0x14098B970: GetMarkIndexFromItemId
       0x14098B9C0: IsMarkBillUnlocked
+  Client::Game::UI::WeatherForecast:
+    instances:
+      - ea: 0x142203D28
+        pointer: False
+    vtbls:
+      - ea: 0x141A6A728
+  Client::Game::UI::TripleTriad:
+    instances:
+      - ea: 0x142203D50
+        pointer: False
+    vtbls:
+      - ea: 0x141A6A738
+  Client::Game::UI::EurekaElementalEdit:
+    instances:
+      - ea: 0x142205260
+        pointer: False
+  Client::Game::UI::LovmRanking:
+    instances:
+      - ea: 0x142205278
+        pointer: False
+  Client::Game::UI::CollectablesShop:
+    instances:
+      - ea: 0x142206EB8
+        pointer: False
+  Client::Game::UI::QTE:
+    instances:
+      - ea: 0x142207170
+        pointer: False
+    vtbls:
+      - ea: 0x141A6A750
+        base: Component::GUI::AtkModuleInterface::AtkEventInterface
+  Client::Game::UI::Emj:
+    instances:
+      - ea: 0x142207198
+        pointer: False
+  Client::Game::UI::GoldSaucerYell:
+    instances:
+      - ea: 0x1422071D0
+        pointer: False
+    funcs:
+      0x1409931D0: ctor
+      0x140993310: Initialize
+      0x1409938B0: Update
+  Client::Game::UI::CharaCard:
+    instances:
+      - ea: 0x142208920
+        pointer: False
+    funcs:
+      0x140994470: ctor
   Client::Game::ActionManager:
     instances:
       - ea: 0x14216C9D0

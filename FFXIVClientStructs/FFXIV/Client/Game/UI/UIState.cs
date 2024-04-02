@@ -25,12 +25,22 @@ public unsafe partial struct UIState {
     [FieldOffset(0x36B4)] public PvPProfile PvPProfile;
     [FieldOffset(0x3738)] public ContentsNote ContentsNote;
     [FieldOffset(0x37F0)] public RelicNote RelicNote;
+    [FieldOffset(0x3808)] public TradeMultiple TradeMultiple;
     [FieldOffset(0x3850)] public AreaInstance AreaInstance; // at vtbl - 0x10
+    [FieldOffset(0x3878)] public RelicSphereUpgrade RelicSphereUpgrade;
+    [FieldOffset(0x38F0)] public DailyQuestSupply DailyQuestSupply;
+    [FieldOffset(0x3CD8)] public RidePillon RidePillon;
     [FieldOffset(0x3D18)] public Loot Loot;
-
+    [FieldOffset(0x43B8)] public GatheringNote GatheringNote;
     [FieldOffset(0x49E0)] public RecipeNote RecipeNote;
-
+    [FieldOffset(0x5500)] public FishingNote FishingNote;
+    [FieldOffset(0x5550)] public FishRecord FishRecord;
+    [FieldOffset(0x5830)] public Journal Journal;
+    [FieldOffset(0x9F78)] public QuestUI QuestUI;
+    [FieldOffset(0xAF48)] public QuestTodoList QuestTodoList;
+    [FieldOffset(0xB238)] public NpcTrade NpcTrade;
     [FieldOffset(0xB560)] public Director* ActiveDirector;
+
     [FieldOffset(0xB6A8)] public FateDirector* FateDirector;
 
     [FieldOffset(0xB7F0)] public Map Map;
@@ -39,11 +49,22 @@ public unsafe partial struct UIState {
     [FieldOffset(0xFAE0)] public void* TitleController;
     [FieldOffset(0xFAE8)] public TitleList TitleList;
 
+    [FieldOffset(0xFB70)] public GCSupply GCSupply;
     [FieldOffset(0x12798)] public RouletteController RouletteController;
+    [FieldOffset(0x12808)] public GuildOrderReward GuildOrderReward;
     [FieldOffset(0x12868)] public ContentsFinder ContentsFinder;
+    [FieldOffset(0x12918)] public Wedding Wedding;
     [FieldOffset(0x12980)] public MobHunt MobHunt;
-
-    // [Patch 6.55] 0x17710: Adventurer Plate data
+    [FieldOffset(0x12B18)] public WeatherForecast WeatherForecast;
+    [FieldOffset(0x12B40)] public TripleTriad TripleTriad;
+    [FieldOffset(0x14050)] public EurekaElementalEdit EurekaElementalEdit;
+    [FieldOffset(0x14068)] public LovmRanking LovmRanking;
+    [FieldOffset(0x15CA8)] public CollectablesShop CollectablesShop;
+    [FieldOffset(0x15F60)] public QTE QTE;
+    [FieldOffset(0x15F88)] public Emj Emj;
+    [FieldOffset(0x15FC0)] public GoldSaucerYell GoldSaucerYell;
+    [FieldOffset(0x17710)] public CharaCard CharaCard;
+    // 0x178C8: unknown struct, size 0x58
 
     // Ref: UIState#IsUnlockLinkUnlocked (relative to uistate)
     // Size: Offset of UnlockedAetherytesBitmask - Offset of UnlockLinkBitmask
@@ -74,7 +95,7 @@ public unsafe partial struct UIState {
     // Ref: UIState#IsTripleTriadCardUnlocked
     // Size: TripleTriadCard.RowCount >> 3
     [FieldOffset(0x17ABD)] public fixed byte UnlockedTripleTriadCardsBitmask[409 >> 3];
-    [FieldOffset(0x17AF8)] public ulong UnlockedTripleTriadCardsCount;
+    [FieldOffset(0x17AF0)] public ulong UnlockedTripleTriadCardsCount;
 
     [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B 8B ?? ?? ?? ?? 48 8B 01", 3)]
     public static partial UIState* Instance();
