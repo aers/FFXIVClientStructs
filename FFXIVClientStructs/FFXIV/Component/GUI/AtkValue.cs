@@ -23,14 +23,14 @@ public unsafe partial struct AtkValue {
     [FieldOffset(0x0)] public ValueType Type;
 
     // union field
-    [FieldOffset(0x8)] public int Int;
-    [FieldOffset(0x8)] public uint UInt;
-    [FieldOffset(0x8)] public byte* String; // char*
-    [FieldOffset(0x8)] public float Float;
-    [FieldOffset(0x8)] public byte Byte;
-    [FieldOffset(0x8)] public StdVector<AtkValue>* Vector;
-    [FieldOffset(0x8)] public Texture* Texture;
-    [FieldOffset(0x8)] public AtkValue* AtkValues;
+    [FieldOffset(0x8), CExporterUnion("Union.Int")] public int Int;
+    [FieldOffset(0x8), CExporterUnion("Union.UInt")] public uint UInt;
+    [FieldOffset(0x8), CExporterUnion("Union.String")] public byte* String; // char*
+    [FieldOffset(0x8), CExporterUnion("Union.Float")] public float Float;
+    [FieldOffset(0x8), CExporterUnion("Union.Byte")] public byte Byte;
+    [FieldOffset(0x8), CExporterUnion("Union.Vector")] public StdVector<AtkValue>* Vector;
+    [FieldOffset(0x8), CExporterUnion("Union.Texture")] public Texture* Texture;
+    [FieldOffset(0x8), CExporterUnion("Union.AtkValues")] public AtkValue* AtkValues;
 
     [MemberFunction("E8 ?? ?? ?? ?? 41 03 ED")]
     [GenerateCStrOverloads]
