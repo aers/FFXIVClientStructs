@@ -3075,6 +3075,14 @@ classes:
         base: Client::UI::Info::InfoProxyPageInterface
     funcs:
       0x14010BE00: ctor
+      0x14010CA70: GetNumOfDeniedLetters
+      0x14010CA80: GetNumAttachments
+      0x14010CA90: GetNumNewLetters
+      0x14010CAA0: GetLetterBoxUsage
+      0x14010CAC0: GetNumLettersFromPurchases
+      0x14010CAD0: GetNumLettersFromGameMasters
+      0x14010CAE0: HasLettersFromGameMasters
+      0x14010CAF0: HasLettersFromSupportDesk
       0x14017C7A0: Finalize
   Client::UI::Info::InfoProxySearch:
     vtbls:
@@ -6962,6 +6970,7 @@ classes:
       0x140C06330: IsMainCommandEnabled
       0x140C06360: SetMainCommandEnabledState
       0x140C0A6B0: UpdateParty
+      0x140C0BEF0: UpdateDTR
       0x140C0E6F0: UpdateHotBar
       0x140C1BE70: OpenContextMenuFromTarget
       0x140C1ECC0: GetMainCommandString  # MainCommand exd
