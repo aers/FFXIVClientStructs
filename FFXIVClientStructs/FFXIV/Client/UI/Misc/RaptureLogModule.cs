@@ -15,7 +15,8 @@ public unsafe partial struct RaptureLogModule {
     public static RaptureLogModule* Instance() => Framework.Instance()->GetUiModule()->GetRaptureLogModule();
 
     [FieldOffset(0x00)] public LogModule LogModule;
-    [FieldOffset(0x80)] internal Utf8String Unk80;
+    /// <remarks> Always <c>0x1F</c>, used as column terminator in <see cref="LogModule.LogMessageData"/>. </remarks>
+    [FieldOffset(0x80)] internal Utf8String LogMessageDataTerminator;
     [FieldOffset(0xE8)] public UIModule* UIModule;
     [FieldOffset(0xF0)] public ExcelModuleInterface* ExcelModuleInterface;
     [FieldOffset(0xF8)] public RaptureTextModule* RaptureTextModule;
@@ -25,10 +26,23 @@ public unsafe partial struct RaptureLogModule {
     [FixedSizeArray<Utf8String>(10)]
     [FieldOffset(0x108)] internal fixed byte TempParseMessage[0x68 * 10];
 
-    [FixedSizeArray<RaptureLogModuleTab>(5)]
-    [FieldOffset(0x530)] public fixed byte ChatTabs[5 * 0x928];
+    [FieldOffset(0x520)] internal ExcelSheet* LogKindSheet;
 
-    [FieldOffset(0x33E8)] public fixed byte ChatTabsPendingReload[4]; // set to 1 to reload the tab, see "48 8D 9F ?? ?? ?? ?? 48 8D B7 ?? ?? ?? ?? 80 3B 00"
+    [FixedSizeArray<RaptureLogModuleTab>(5)]
+    [FieldOffset(0x530)] public fixed byte ChatTabs[0x928 * 5];
+
+    [FieldOffset(0x33D8)] internal ExcelSheet* LogMessageSheet;
+
+    [Obsolete("Use ChatTabIsPendingReload")]
+    [FieldOffset(0x33E8)] public fixed byte ChatTabsPendingReload[4];
+    /// <remarks> Set to <c>true</c> to reload the tab. </remarks>
+    [FieldOffset(0x33E8)] public fixed bool ChatTabIsPendingReload[4];
+    /// <remarks> Controlled by config options <c>LogTimeDisp</c>, <c>LogTimeDispLog2</c>, <c>LogTimeDispLog3</c> and <c>LogTimeDispLog4</c>. </remarks>
+    [FieldOffset(0x33ED)] public fixed bool ChatTabShouldDisplayTime[4];
+    /// <remarks> Controlled by config option <c>LogTimeSettingType</c>. </remarks>
+    [FieldOffset(0x33F2)] public bool UseServerTime;
+    /// <remarks> Controlled by config option <c>LogTimeDispType</c>. </remarks>
+    [FieldOffset(0x33F3)] public bool Use12HourClock;
 
     [FieldOffset(0x3478)] public LogMessageSource* MsgSourceArray;
     [FieldOffset(0x3480)] public int MsgSourceArrayLength;
