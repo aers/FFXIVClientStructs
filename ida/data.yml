@@ -3812,7 +3812,7 @@ classes:
       0x14149E740: HandleMarketBoardPurchasePacket
       0x14149F1E0: HandleMarketBoardHistoryPacket
       0x14149E5E0: HandleMarketBoardItemRequestStartPacket
-      0x14130DD20: ctor
+# wrong offset      0x14130DD20: ctor
   Client::Network::NetworkModulePacketReceiverCallback: # derives Application::Network::PacketReceiverCallbackInterface & Client::Network::PacketDispatcher
     vtbls:
       - ea: 0x1419DD6D0
