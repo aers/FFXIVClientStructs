@@ -15,5 +15,5 @@ public unsafe partial struct Control {
     public static partial Control* Instance();
 
     [StaticAddress("48 89 05 ?? ?? ?? ?? 48 8B 49 08", 3, true)]
-    public static partial BattleChara* GetLocalPlayer(); // g_LocalPlayer
+    public static partial BattleChara* GetLocalPlayer(); // g_Client::Game::Control::Control_LocalPlayer
 }
