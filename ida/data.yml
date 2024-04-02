@@ -6478,7 +6478,7 @@ classes:
       6: GetName
       7: GetRadius
       8: GetHeight
-      11: GetGender
+      11: GetSex
       16: EnableDraw
       17: DisableDraw
       21: SetDrawObject

@@ -20,6 +20,8 @@ public unsafe partial struct GameObject {
     [FieldOffset(0x88)] public ushort ObjectIndex; // index in object table
     [FieldOffset(0x8C)] public byte ObjectKind;
     [FieldOffset(0x8D)] public byte SubKind;
+    [FieldOffset(0x8E)] public byte Sex;
+    [Obsolete("Renamed to Sex")]
     [FieldOffset(0x8E)] public byte Gender;
     [FieldOffset(0x90)] public byte YalmDistanceFromPlayerX;
     [FieldOffset(0x91)] public byte TargetStatus; // Goes from 6 to 2 when selecting a target and flashing a highlight
