@@ -1,6 +1,8 @@
 using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
+
+[InfoProxy(InfoProxyId.CatalogSearch)]
 [StructLayout(LayoutKind.Explicit, Size = 0x3C8)]
 public unsafe partial struct InfoProxyCatalogSearch {
     [FieldOffset(0x000)] public InfoProxyPageInterface InfoProxyPageInterface;
