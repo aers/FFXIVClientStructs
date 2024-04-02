@@ -5976,6 +5976,7 @@ classes:
       0x140685240: GetContentIdForLogMessage
       0x1406852D0: GetLogMessage
       0x140685DC0: GetLogMessageDetail
+      0x140687D30: FormatLogMessage
   Component::Prohibit::ProhibitModuleInterface:
     vtbls:
       - ea: 0x141A35548
