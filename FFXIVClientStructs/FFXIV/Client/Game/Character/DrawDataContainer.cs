@@ -166,10 +166,10 @@ public unsafe partial struct CustomizeData {
 
     public byte EyeShape => (byte)(Data[0x10] & 0b_0111_1111);
     public bool SmallIris => (byte)(Data[0x10] & 0b_1000_0000) != 0;
-    
+
     public byte Mouth => (byte)(Data[0x13] & 0b_0111_1111);
     public bool Lipstick => (byte)(Data[0x13] & 0b_1000_0000) != 0;
-    
+
     public byte FacePaint => (byte)(Data[0x18] & 0b_0111_1111);
     public bool FacePaintReversed => (byte)(Data[0x18] & 0b_1000_0000) != 0;
 
