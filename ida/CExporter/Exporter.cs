@@ -62,7 +62,7 @@ public class Exporter {
     }
 
     public static void VerifyNoFieldOverlap() {
-        foreach (var processedStruct in _structs) {
+        foreach (var processedStruct in _structs.Where(t => !t.IsUnion)) {
             var sizes = processedStruct.Fields.Select(t => new { StartOffset = t.FieldOffset, EndOffset = t.FieldOffset + t.FieldType.SizeOf(), Field = t.FieldName }).ToArray();
             foreach (var size in sizes) {
                 var checks = sizes.Where(t => t != size && t.StartOffset <= size.StartOffset).ToArray();
@@ -205,42 +205,65 @@ ReExport:
             var fields = type.GetFields(_bindingFlags);
             var unionFields = fields.Where(t => t.GetCustomAttribute<ObsoleteAttribute>() == null && t.GetCustomAttribute<CExportIgnoreAttribute>() == null && t.GetCustomAttribute<CExporterUnionAttribute>() != null).ToArray();
 
+            var unionOffsets = new Dictionary<CExporterUnionAttribute, FieldInfo>();
+
             if (unionFields.Any()) {
                 var unions = new List<ProcessedStruct>();
                 foreach (var unionField in unionFields) {
                     var attr = unionField.GetCustomAttribute<CExporterUnionAttribute>()!;
-                    var index = unions.FindIndex(t => t.StructName == attr.Union);
+                    if (!unionOffsets.TryGetValue(attr, out var unionStartField)) {
+                        unionOffsets[attr] = unionField;
+                        unionStartField = unionField;
+                    }
+                    var index = attr.IsStruct ? unions.FindIndex(t => t.StructName == attr.Struct) : unions.FindIndex(t => t.StructName == attr.Union);
                     if(index == -1)
                         unions.Add(new ProcessedStruct {
                             StructType = type,
-                            StructName = attr.Union,
-                            StructNamespace = type.FullSanitizeName(),
+                            IsUnion = !attr.IsStruct,
+                            StructName = attr.IsStruct ? attr.Struct : attr.Union,
+                            StructNamespace = type.FullSanitizeName() + (attr.IsStruct ? $"{ExporterStatics.Separator}{attr.Union}" : ""),
                             StructSize = -1,
                             Fields = [
                                 new ProcessedField {
                                     FieldType = unionField.FieldType,
-                                    FieldOffset = unionField.GetFieldOffset(),
+                                    FieldOffset = unionField.GetFieldOffset() - unionStartField.GetFieldOffset(),
                                     FieldName = unionField.Name
                                 }
                             ],
                             VirtualFunctions = [],
                             MemberFunctions = [],
-                            StructTypeOverride = type.FullSanitizeName() + $"{ExporterStatics.Separator}{attr.Union}"
+                            StructTypeOverride = type.FullSanitizeName() + $"{ExporterStatics.Separator}{attr.Union}{(attr.IsStruct ? $"{ExporterStatics.Separator}{attr.Struct}" : "")}"
                         });
                     else
                         unions[index].Fields = [
                             ..unions[index].Fields,
                             new ProcessedField {
                                 FieldType = unionField.FieldType,
-                                FieldOffset = unionField.GetFieldOffset(),
+                                FieldOffset = unionField.GetFieldOffset() - unionStartField.GetFieldOffset(),
                                 FieldName = unionField.Name
                             }
                         ];
+                }
+                foreach (var subStruct in unions.Where(t => !t.IsUnion)) {
+                    var unionName = subStruct.StructNamespace.Split(ExporterStatics.Separator)[^1];
+                    var unionNamespace = subStruct.StructNamespace[..subStruct.StructNamespace.LastIndexOf(ExporterStatics.Separator, StringComparison.Ordinal)];
+                    var unionStructIndex = unions.FindIndex(t => t.StructName == unionNamespace && t.StructName == unionName);
+                    var unionStruct = unions[unionStructIndex];
+                    unionStruct.Fields = [
+                        ..unionStruct.Fields,
+                        new ProcessedField {
+                            FieldType = type,
+                            FieldOffset = 0,
+                            FieldName = subStruct.StructName
+                        }
+                    ];
+                    unions[unionStructIndex] = unionStruct;
                 }
             }
 
             var processedStruct = new ProcessedStruct {
                 StructType = type,
+                IsUnion = type.GetCustomAttribute<CExporterStructUnionAttribute>() != null,
                 StructName = type.Name,
                 StructNamespace = type.GetNamespace(),
                 StructSize = type.SizeOf(),
@@ -311,6 +334,7 @@ public class ProcessedFunctionField : ProcessedField {
 
 public class ProcessedStruct {
     public string? StructTypeOverride;
+    public bool IsUnion;
     public required Type StructType;
     public required string StructName;
     public required string StructNamespace;

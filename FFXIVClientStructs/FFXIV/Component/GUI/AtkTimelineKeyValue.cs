@@ -2,7 +2,7 @@ using FFXIVClientStructs.FFXIV.Client.Graphics;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
-[StructLayout(LayoutKind.Explicit, Size = 0x08)]
+[StructLayout(LayoutKind.Explicit, Size = 0x08), CExporterStructUnion]
 public struct AtkTimelineKeyValue {
     [FieldOffset(0x00)] public StdPair<float, float> Float2;
     [FieldOffset(0x00)] public float Float;

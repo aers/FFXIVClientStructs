@@ -9,9 +9,9 @@ public unsafe partial struct AtkTexture : ICreatable {
     [FieldOffset(0x0), CExportIgnore] public void* vtbl;
 
     // union type
-    [FieldOffset(0x8)] public AtkTextureResource* Resource;
-    [FieldOffset(0x8)] public void* Crest;
-    [FieldOffset(0x8)] public Texture* KernelTexture;
+    [FieldOffset(0x8), CExporterUnion("Union.Texture")] public AtkTextureResource* Resource;
+    [FieldOffset(0x8), CExporterUnion("Union.Texture")] public void* Crest;
+    [FieldOffset(0x8), CExporterUnion("Union.Texture")] public Texture* KernelTexture;
     [FieldOffset(0x10)] public TextureType TextureType;
     [FieldOffset(0x11), Obsolete("Use IsTextureReady() instead")] public bool TextureReady;
     [FieldOffset(0x11)] private bool CachedIsTextureReady; // Use IsTextureReady() to get this
