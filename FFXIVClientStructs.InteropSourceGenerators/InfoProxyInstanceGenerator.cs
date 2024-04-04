@@ -1,4 +1,4 @@
-﻿using System.Collections.Immutable;
+using System.Collections.Immutable;
 using FFXIVClientStructs.InteropGenerator;
 using FFXIVClientStructs.InteropSourceGenerators.Extensions;
 using FFXIVClientStructs.InteropSourceGenerators.Models;
@@ -11,7 +11,7 @@ namespace FFXIVClientStructs.InteropSourceGenerators;
 [Generator]
 public class InfoProxyInstanceGenerator : IIncrementalGenerator {
     private const string InfoProxyAttributeName = "FFXIVClientStructs.Attributes.InfoProxyAttribute";
-    
+
     public void Initialize(IncrementalGeneratorInitializationContext context) {
         IncrementalValuesProvider<(Validation<DiagnosticInfo, StructInfo> StructInfo,
             Validation<DiagnosticInfo, InfoProxyInfo> InfoProxyInfo)> structAndInfoProxyInfos =
@@ -75,7 +75,7 @@ public class InfoProxyInstanceGenerator : IIncrementalGenerator {
 
         return builder.ToString();
     }
-    
+
     internal sealed record InfoProxyInfo(StructInfo StructInfo, uint InfoProxyId) {
         public static Validation<DiagnosticInfo, InfoProxyInfo> GetFromRoslyn(
             StructDeclarationSyntax structSyntax, INamedTypeSymbol namedTypeSymbol) {
@@ -91,7 +91,7 @@ public class InfoProxyInstanceGenerator : IIncrementalGenerator {
                 new InfoProxyInfo(structInfo, infoProxyId));
         }
     }
-    
+
     private sealed record StructWithInfoProxyInfos
         (StructInfo StructInfo, InfoProxyInfo InfoProxyInfo) {
         public string RenderSource() {
