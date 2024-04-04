@@ -3380,6 +3380,49 @@ structs:
     - type: System::Numerics::Vector3*
       name: a3
   member_functions: []
+- type: Common::Component::BGCollision::Math::Matrix4x3
+  name: Matrix4x3
+  namespace: Common.Component.BGCollision.Math
+  size: 48
+  fields:
+  - type: float
+    name: M11
+    offset: 0
+  - type: float
+    name: M12
+    offset: 4
+  - type: float
+    name: M13
+    offset: 8
+  - type: float
+    name: M21
+    offset: 12
+  - type: float
+    name: M22
+    offset: 16
+  - type: float
+    name: M23
+    offset: 20
+  - type: float
+    name: M31
+    offset: 24
+  - type: float
+    name: M32
+    offset: 28
+  - type: float
+    name: M33
+    offset: 32
+  - type: float
+    name: M41
+    offset: 36
+  - type: float
+    name: M42
+    offset: 40
+  - type: float
+    name: M43
+    offset: 44
+  virtual_functions: []
+  member_functions: []
 - type: Component::Text::TextParameter
   name: TextParameter
   namespace: Component.Text
@@ -4979,30 +5022,6 @@ structs:
   - type: Component::GUI::ValueType
     name: Type
     offset: 0
-  - type: __int32
-    name: Int
-    offset: 8
-  - type: unsigned __int32
-    name: UInt
-    offset: 8
-  - type: byte*
-    name: String
-    offset: 8
-  - type: float
-    name: Float
-    offset: 8
-  - type: byte
-    name: Byte
-    offset: 8
-  - type: StdVector<Component::GUI::AtkValue>*
-    name: Vector
-    offset: 8
-  - type: Client::Graphics::Kernel::Texture*
-    name: Texture
-    offset: 8
-  - type: Component::GUI::AtkValue*
-    name: AtkValues
-    offset: 8
   virtual_functions: []
   member_functions:
   - signature: E8 ?? ?? ?? ?? 41 03 ED
@@ -5493,6 +5512,9 @@ structs:
   - type: Component::GUI::AtkUnitManager
     name: AtkUnitManager
     offset: 0
+  - type: Component::GUI::AtkEventInterface
+    name: AtkEventInterface
+    offset: 40080
   - type: Client::UI::UIModule::UiFlags
     name: UiFlags
     offset: 40192
@@ -6554,7 +6576,7 @@ structs:
   - type: byte
     name: Name
     offset: 43
-    size: 30
+    size: 32
   - type: byte
     name: MemberIndex
     offset: 80
@@ -10801,6 +10823,20 @@ structs:
     offset: 4
   virtual_functions: []
   member_functions: []
+- type: Client::Game::UI::CharaCard
+  name: CharaCard
+  namespace: Client.Game.UI
+  size: 456
+  fields: []
+  virtual_functions: []
+  member_functions: []
+- type: Client::Game::UI::CollectablesShop
+  name: CollectablesShop
+  namespace: Client.Game.UI
+  size: 696
+  fields: []
+  virtual_functions: []
+  member_functions: []
 - type: Client::Game::UI::ContentsFinderQueueInfo
   name: ContentsFinderQueueInfo
   namespace: Client.Game.UI
@@ -10888,6 +10924,72 @@ structs:
     name: DisplayStatus
     offset: 108
     size: 76
+  virtual_functions: []
+  member_functions: []
+- type: Client::Game::UI::DailyQuestSupply
+  name: DailyQuestSupply
+  namespace: Client.Game.UI
+  size: 1000
+  fields:
+  - type: Component::GUI::AtkEventInterface
+    name: AtkEventInterface
+    offset: 0
+  virtual_functions: []
+  member_functions: []
+- type: Client::Game::UI::Emj
+  name: Emj
+  namespace: Client.Game.UI
+  size: 56
+  fields: []
+  virtual_functions: []
+  member_functions: []
+- type: Client::Game::UI::EurekaElementalEdit
+  name: EurekaElementalEdit
+  namespace: Client.Game.UI
+  size: 24
+  fields: []
+  virtual_functions: []
+  member_functions: []
+- type: Client::Game::UI::FishingNote
+  name: FishingNote
+  namespace: Client.Game.UI
+  size: 80
+  fields: []
+  virtual_functions: []
+  member_functions: []
+- type: Client::Game::UI::FishRecord
+  name: FishRecord
+  namespace: Client.Game.UI
+  size: 736
+  fields: []
+  virtual_functions: []
+  member_functions: []
+- type: Client::Game::UI::GatheringNote
+  name: GatheringNote
+  namespace: Client.Game.UI
+  size: 1576
+  fields: []
+  virtual_functions: []
+  member_functions: []
+- type: Client::Game::UI::GCSupply
+  name: GCSupply
+  namespace: Client.Game.UI
+  size: 11304
+  fields: []
+  virtual_functions: []
+  member_functions: []
+- type: Client::Game::UI::GoldSaucerYell
+  name: GoldSaucerYell
+  namespace: Client.Game.UI
+  size: 5968
+  fields: []
+  virtual_functions: []
+  member_functions: []
+- type: Client::Game::UI::GuildOrderReward
+  name: GuildOrderReward
+  namespace: Client.Game.UI
+  size: 96
+  fields: []
   virtual_functions: []
   member_functions: []
 - type: Client::Game::UI::Hate
@@ -11023,6 +11125,13 @@ structs:
     offset: 4
   virtual_functions: []
   member_functions: []
+- type: Client::Game::UI::Journal
+  name: Journal
+  namespace: Client.Game.UI
+  size: 18248
+  fields: []
+  virtual_functions: []
+  member_functions: []
 - type: Client::Game::UI::LimitBreakController
   name: LimitBreakController
   namespace: Client.Game.UI
@@ -11094,6 +11203,13 @@ structs:
   - type: Client::Game::UI::LootMode
     name: LootMode
     offset: 56
+  virtual_functions: []
+  member_functions: []
+- type: Client::Game::UI::LovmRanking
+  name: LovmRanking
+  namespace: Client.Game.UI
+  size: 7232
+  fields: []
   virtual_functions: []
   member_functions: []
 - type: Client::Game::UI::MapMarkerData
@@ -11236,6 +11352,13 @@ structs:
       name: this
     - type: byte
       name: markIndex
+- type: Client::Game::UI::NpcTrade
+  name: NpcTrade
+  namespace: Client.Game.UI
+  size: 808
+  fields: []
+  virtual_functions: []
+  member_functions: []
 - type: Client::Game::UI::PlayerState
   name: PlayerState
   namespace: Client.Game.UI
@@ -11861,10 +11984,34 @@ structs:
     parameters:
     - type: Client::Game::UI::PvPProfile*
       name: this
+- type: Client::Game::UI::QTE
+  name: QTE
+  namespace: Client.Game.UI
+  size: 40
+  fields:
+  - type: Component::GUI::AtkEventInterface
+    name: AtkEventInterface
+    offset: 0
+  virtual_functions: []
+  member_functions: []
+- type: Client::Game::UI::QuestTodoList
+  name: QuestTodoList
+  namespace: Client.Game.UI
+  size: 752
+  fields: []
+  virtual_functions: []
+  member_functions: []
+- type: Client::Game::UI::QuestUI
+  name: QuestUI
+  namespace: Client.Game.UI
+  size: 4048
+  fields: []
+  virtual_functions: []
+  member_functions: []
 - type: Client::Game::UI::RecipeNote
   name: RecipeNote
   namespace: Client.Game.UI
-  size: 1576
+  size: 2840
   fields:
   - type: unsigned __int32
     name: Jobs
@@ -11909,6 +12056,16 @@ structs:
     offset: 20
   virtual_functions: []
   member_functions: []
+- type: Client::Game::UI::RelicSphereUpgrade
+  name: RelicSphereUpgrade
+  namespace: Client.Game.UI
+  size: 120
+  fields:
+  - type: Component::GUI::AtkEventInterface
+    name: AtkEventInterface
+    offset: 0
+  virtual_functions: []
+  member_functions: []
 - type: Client::Game::UI::Revive
   name: Revive
   namespace: Client.Game.UI
@@ -11923,6 +12080,24 @@ structs:
   - type: byte
     name: ReviveState
     offset: 36
+  virtual_functions: []
+  member_functions: []
+- type: Client::Game::UI::RidePillon
+  name: RidePillon
+  namespace: Client.Game.UI
+  size: 64
+  fields:
+  - type: unsigned __int32
+    name: Unk0
+    offset: 0
+  - type: unsigned __int32
+    name: Unk4
+    offset: 4
+    size: 28
+  - type: unsigned __int32
+    name: Unk20
+    offset: 4
+    size: 28
   virtual_functions: []
   member_functions: []
 - type: Client::Game::UI::RouletteController
@@ -12012,6 +12187,74 @@ structs:
     offset: 40
   virtual_functions: []
   member_functions: []
+- type: Client::Game::UI::TradeMultiple
+  name: TradeMultiple
+  namespace: Client.Game.UI
+  size: 72
+  fields:
+  - type: Component::GUI::AtkEventInterface
+    name: AtkEventInterface
+    offset: 0
+  - type: unsigned __int32
+    name: Unk10
+    offset: 16
+  - type: unsigned __int32
+    name: Unk14
+    offset: 20
+  - type: unsigned __int32
+    name: Unk18
+    offset: 24
+  - type: unsigned __int32
+    name: Unk1C
+    offset: 28
+  - type: unsigned __int32
+    name: Unk20
+    offset: 32
+  - type: unsigned __int16
+    name: MateriaId1
+    offset: 36
+  - type: unsigned __int16
+    name: MateriaId2
+    offset: 38
+  - type: unsigned __int16
+    name: MateriaId3
+    offset: 40
+  - type: unsigned __int16
+    name: MateriaId4
+    offset: 42
+  - type: unsigned __int16
+    name: MateriaId5
+    offset: 44
+  - type: unsigned __int16
+    name: Quantity1
+    offset: 48
+  - type: unsigned __int16
+    name: Quantity2
+    offset: 52
+  - type: unsigned __int16
+    name: Quantity3
+    offset: 56
+  - type: unsigned __int16
+    name: Quantity4
+    offset: 60
+  - type: unsigned __int16
+    name: Quantity5
+    offset: 64
+  - type: unsigned __int32
+    name: Unk44
+    offset: 68
+  virtual_functions: []
+  member_functions: []
+- type: Client::Game::UI::TripleTriad
+  name: TripleTriad
+  namespace: Client.Game.UI
+  size: 5392
+  fields:
+  - type: Component::GUI::AtkEventInterface
+    name: AtkEventInterface
+    offset: 0
+  virtual_functions: []
+  member_functions: []
 - type: Client::Game::UI::WeaponState
   name: WeaponState
   namespace: Client.Game.UI
@@ -12032,6 +12275,20 @@ structs:
   - type: byte
     name: IsAutoAttacking
     offset: 16
+  virtual_functions: []
+  member_functions: []
+- type: Client::Game::UI::WeatherForecast
+  name: WeatherForecast
+  namespace: Client.Game.UI
+  size: 32
+  fields: []
+  virtual_functions: []
+  member_functions: []
+- type: Client::Game::UI::Wedding
+  name: Wedding
+  namespace: Client.Game.UI
+  size: 104
+  fields: []
   virtual_functions: []
   member_functions: []
 - type: Client::Game::Object::ClientObjectManager
@@ -13758,11 +14015,59 @@ structs:
     name: BodyType
     offset: 2
   - type: byte
-    name: Clan
+    name: Height
+    offset: 3
+  - type: byte
+    name: Tribe
     offset: 4
+  - type: byte
+    name: Face
+    offset: 5
+  - type: byte
+    name: Hairstyle
+    offset: 6
+  - type: byte
+    name: SkinColor
+    offset: 8
+  - type: byte
+    name: EyeColorRight
+    offset: 9
+  - type: byte
+    name: HairColor
+    offset: 10
+  - type: byte
+    name: HighlightsColor
+    offset: 11
+  - type: byte
+    name: TattooColor
+    offset: 13
+  - type: byte
+    name: Eyebrows
+    offset: 14
+  - type: byte
+    name: EyeColorLeft
+    offset: 15
+  - type: byte
+    name: Nose
+    offset: 17
+  - type: byte
+    name: Jaw
+    offset: 18
   - type: byte
     name: LipColorFurPattern
     offset: 20
+  - type: byte
+    name: MuscleMass
+    offset: 21
+  - type: byte
+    name: TailShape
+    offset: 22
+  - type: byte
+    name: BustSize
+    offset: 23
+  - type: byte
+    name: FacePaintColor
+    offset: 25
   virtual_functions: []
   member_functions:
   - signature: E8 ?? ?? ?? ?? 33 DB 48 8D 75
@@ -21673,21 +21978,6 @@ structs:
     offset: 16
   virtual_functions: []
   member_functions: []
-- type: StdVector<Component::GUI::AtkValue>
-  name: StdVector`1
-  namespace: ''
-  fields:
-  - type: Component::GUI::AtkValue*
-    name: First
-    offset: 0
-  - type: Component::GUI::AtkValue*
-    name: Last
-    offset: 8
-  - type: Component::GUI::AtkValue*
-    name: End
-    offset: 16
-  virtual_functions: []
-  member_functions: []
 - type: StdVector<Client::UI::ActionBarSlot>
   name: StdVector`1
   namespace: ''
@@ -23582,6 +23872,151 @@ structs:
     offset: 472
   virtual_functions: []
   member_functions: []
+- type: Common::Component::BGCollision::ColliderBox
+  name: ColliderBox
+  namespace: Common.Component.BGCollision
+  size: 320
+  fields:
+  - type: Common::Component::BGCollision::Collider
+    name: Collider
+    offset: 0
+  - type: System::Numerics::Vector3
+    name: Translation
+    offset: 160
+  - type: System::Numerics::Vector3
+    name: TranslationPrev
+    offset: 172
+  - type: System::Numerics::Vector3
+    name: Rotation
+    offset: 184
+  - type: System::Numerics::Vector3
+    name: RotationPrev
+    offset: 196
+  - type: System::Numerics::Vector3
+    name: Scale
+    offset: 208
+  - type: Common::Component::BGCollision::Math::Matrix4x3
+    name: World
+    offset: 220
+  - type: Common::Component::BGCollision::Math::Matrix4x3
+    name: InvWorld
+    offset: 268
+  - type: byte
+    name: Dirty
+    offset: 316
+  virtual_functions: []
+  member_functions: []
+- type: Common::Component::BGCollision::ColliderCylinder
+  name: ColliderCylinder
+  namespace: Common.Component.BGCollision
+  size: 328
+  fields:
+  - type: Common::Component::BGCollision::Collider
+    name: Collider
+    offset: 0
+  - type: System::Numerics::Vector3
+    name: Translation
+    offset: 160
+  - type: System::Numerics::Vector3
+    name: TranslationPrev
+    offset: 172
+  - type: System::Numerics::Vector3
+    name: Rotation
+    offset: 184
+  - type: System::Numerics::Vector3
+    name: RotationPrev
+    offset: 196
+  - type: System::Numerics::Vector3
+    name: Scale
+    offset: 208
+  - type: float
+    name: Radius
+    offset: 220
+  - type: Common::Component::BGCollision::Math::Matrix4x3
+    name: World
+    offset: 224
+  - type: Common::Component::BGCollision::Math::Matrix4x3
+    name: InvWorld
+    offset: 272
+  - type: byte
+    name: Dirty
+    offset: 320
+  virtual_functions: []
+  member_functions: []
+- type: Common::Component::BGCollision::ColliderSphere
+  name: ColliderSphere
+  namespace: Common.Component.BGCollision
+  size: 336
+  fields:
+  - type: Common::Component::BGCollision::Collider
+    name: Collider
+    offset: 0
+  - type: byte
+    name: Dirty
+    offset: 160
+  - type: System::Numerics::Vector3
+    name: Translation
+    offset: 164
+  - type: System::Numerics::Vector3
+    name: TranslationPrev
+    offset: 176
+  - type: System::Numerics::Vector3
+    name: Rotation
+    offset: 188
+  - type: System::Numerics::Vector3
+    name: RotationPrev
+    offset: 200
+  - type: System::Numerics::Vector3
+    name: Scale
+    offset: 212
+  - type: System::Numerics::Vector3
+    name: ScalePrev
+    offset: 224
+  - type: Common::Component::BGCollision::Math::Matrix4x3
+    name: World
+    offset: 236
+  - type: Common::Component::BGCollision::Math::Matrix4x3
+    name: InvWorld
+    offset: 284
+  virtual_functions: []
+  member_functions: []
+- type: Common::Component::BGCollision::ColliderPlane
+  name: ColliderPlane
+  namespace: Common.Component.BGCollision
+  size: 320
+  fields:
+  - type: Common::Component::BGCollision::Collider
+    name: Collider
+    offset: 0
+  - type: System::Numerics::Vector3
+    name: Translation
+    offset: 160
+  - type: System::Numerics::Vector3
+    name: TranslationPrev
+    offset: 172
+  - type: System::Numerics::Vector3
+    name: Rotation
+    offset: 184
+  - type: System::Numerics::Vector3
+    name: RotationPrev
+    offset: 196
+  - type: System::Numerics::Vector3
+    name: Scale
+    offset: 208
+  - type: Common::Component::BGCollision::Math::Matrix4x3
+    name: World
+    offset: 220
+  - type: Common::Component::BGCollision::Math::Matrix4x3
+    name: InvWorld
+    offset: 268
+  - type: byte
+    name: Dirty
+    offset: 316
+  - type: byte
+    name: TwoSided
+    offset: 317
+  virtual_functions: []
+  member_functions: []
 - type: Common::Component::BGCollision::Mesh
   name: Mesh
   namespace: Common.Component.BGCollision
@@ -23745,61 +24180,6 @@ structs:
   - type: System::Numerics::Vector3
     name: Max
     offset: 12
-  virtual_functions: []
-  member_functions: []
-- type: Common::Component::BGCollision::Math::Matrix4x3
-  name: Matrix4x3
-  namespace: Common.Component.BGCollision.Math
-  size: 48
-  fields:
-  - type: System::Numerics::Vector3
-    name: Row0
-    offset: 0
-  - type: System::Numerics::Vector3
-    name: Row1
-    offset: 12
-  - type: System::Numerics::Vector3
-    name: Row2
-    offset: 24
-  - type: System::Numerics::Vector3
-    name: Row3
-    offset: 36
-  - type: float
-    name: M11
-    offset: 0
-  - type: float
-    name: M12
-    offset: 4
-  - type: float
-    name: M13
-    offset: 8
-  - type: float
-    name: M21
-    offset: 12
-  - type: float
-    name: M22
-    offset: 16
-  - type: float
-    name: M23
-    offset: 20
-  - type: float
-    name: M31
-    offset: 24
-  - type: float
-    name: M32
-    offset: 28
-  - type: float
-    name: M33
-    offset: 32
-  - type: float
-    name: M41
-    offset: 36
-  - type: float
-    name: M42
-    offset: 40
-  - type: float
-    name: M43
-    offset: 44
   virtual_functions: []
   member_functions: []
 - type: Component::Text::Localize
@@ -30692,7 +31072,7 @@ structs:
     name: Race
     offset: 96
   - type: byte
-    name: Gender
+    name: Sex
     offset: 97
   - type: byte
     name: Height
@@ -31971,7 +32351,7 @@ structs:
     name: LogModule
     offset: 0
   - type: Client::System::String::Utf8String
-    name: Unk80
+    name: LogMessageDataTerminator
     offset: 128
   - type: Client::UI::UIModule*
     name: UIModule
@@ -31989,14 +32369,30 @@ structs:
     name: TempParseMessage
     offset: 264
     size: 1040
+  - type: Component::Excel::ExcelSheet*
+    name: LogKindSheet
+    offset: 1312
   - type: byte
     name: ChatTabs
     offset: 1328
     size: 11720
+  - type: Component::Excel::ExcelSheet*
+    name: LogMessageSheet
+    offset: 13272
   - type: byte
-    name: ChatTabsPendingReload
+    name: ChatTabIsPendingReload
     offset: 13288
     size: 4
+  - type: byte
+    name: ChatTabShouldDisplayTime
+    offset: 13293
+    size: 4
+  - type: byte
+    name: UseServerTime
+    offset: 13298
+  - type: byte
+    name: Use12HourClock
+    offset: 13299
   - type: Client::UI::Misc::LogMessageSource*
     name: MsgSourceArray
     offset: 13432
@@ -33244,12 +33640,30 @@ structs:
   - type: Client::UI::Info::InfoProxyPageInterface
     name: InfoProxyPageInterface
     offset: 0
-  - type: byte
-    name: NumAtachments
+  - type: unsigned __int32
+    name: NumOfDeniedLetters
+    offset: 32
+  - type: unsigned __int16
+    name: NumAttachments
     offset: 36
+  - type: byte
+    name: NumNewLetters
+    offset: 38
   - type: byte
     name: NumLettersFromFriends
     offset: 39
+  - type: byte
+    name: NumLettersFromPurchases
+    offset: 40
+  - type: byte
+    name: NumLettersFromGameMasters
+    offset: 41
+  - type: byte
+    name: HasLettersFromGameMasters
+    offset: 42
+  - type: byte
+    name: HasLettersFromSupportDesk
+    offset: 43
   - type: byte
     name: NumPurchases
     offset: 40
@@ -34096,7 +34510,7 @@ structs:
     name: YesNoEventId
     offset: 3852
   - type: __int32
-    name: TargetGender
+    name: TargetSex
     offset: 3856
   - type: unsigned __int32
     name: TargetMountSeats
@@ -38268,15 +38682,48 @@ structs:
   - type: Client::Game::UI::RelicNote
     name: RelicNote
     offset: 14320
+  - type: Client::Game::UI::TradeMultiple
+    name: TradeMultiple
+    offset: 14344
   - type: Client::Game::UI::AreaInstance
     name: AreaInstance
     offset: 14416
+  - type: Client::Game::UI::RelicSphereUpgrade
+    name: RelicSphereUpgrade
+    offset: 14456
+  - type: Client::Game::UI::DailyQuestSupply
+    name: DailyQuestSupply
+    offset: 14576
+  - type: Client::Game::UI::RidePillon
+    name: RidePillon
+    offset: 15576
   - type: Client::Game::UI::Loot
     name: Loot
     offset: 15640
+  - type: Client::Game::UI::GatheringNote
+    name: GatheringNote
+    offset: 17336
   - type: Client::Game::UI::RecipeNote
     name: RecipeNote
     offset: 18912
+  - type: Client::Game::UI::FishingNote
+    name: FishingNote
+    offset: 21760
+  - type: Client::Game::UI::FishRecord
+    name: FishRecord
+    offset: 21840
+  - type: Client::Game::UI::Journal
+    name: Journal
+    offset: 22576
+  - type: Client::Game::UI::QuestUI
+    name: QuestUI
+    offset: 40824
+  - type: Client::Game::UI::QuestTodoList
+    name: QuestTodoList
+    offset: 44872
+  - type: Client::Game::UI::NpcTrade
+    name: NpcTrade
+    offset: 45624
   - type: Client::Game::Event::Director*
     name: ActiveDirector
     offset: 46432
@@ -38298,15 +38745,51 @@ structs:
   - type: Client::Game::TitleList
     name: TitleList
     offset: 64232
+  - type: Client::Game::UI::GCSupply
+    name: GCSupply
+    offset: 64368
   - type: Client::Game::UI::RouletteController
     name: RouletteController
     offset: 75672
+  - type: Client::Game::UI::GuildOrderReward
+    name: GuildOrderReward
+    offset: 75784
   - type: Client::Game::UI::ContentsFinder
     name: ContentsFinder
     offset: 75880
+  - type: Client::Game::UI::Wedding
+    name: Wedding
+    offset: 76056
   - type: Client::Game::UI::MobHunt
     name: MobHunt
     offset: 76160
+  - type: Client::Game::UI::WeatherForecast
+    name: WeatherForecast
+    offset: 76568
+  - type: Client::Game::UI::TripleTriad
+    name: TripleTriad
+    offset: 76608
+  - type: Client::Game::UI::EurekaElementalEdit
+    name: EurekaElementalEdit
+    offset: 82000
+  - type: Client::Game::UI::LovmRanking
+    name: LovmRanking
+    offset: 82024
+  - type: Client::Game::UI::CollectablesShop
+    name: CollectablesShop
+    offset: 89256
+  - type: Client::Game::UI::QTE
+    name: QTE
+    offset: 89952
+  - type: Client::Game::UI::Emj
+    name: Emj
+    offset: 89992
+  - type: Client::Game::UI::GoldSaucerYell
+    name: GoldSaucerYell
+    offset: 90048
+  - type: Client::Game::UI::CharaCard
+    name: CharaCard
+    offset: 96016
   - type: byte
     name: UnlockLinkBitmask
     offset: 96596
@@ -38337,7 +38820,7 @@ structs:
     size: 51
   - type: unsigned __int64
     name: UnlockedTripleTriadCardsCount
-    offset: 97016
+    offset: 97008
   virtual_functions: []
   member_functions:
   - signature: E8 ?? ?? ?? ?? 88 45 80
@@ -38428,7 +38911,7 @@ structs:
     name: SubKind
     offset: 141
   - type: byte
-    name: Gender
+    name: Sex
     offset: 142
   - type: byte
     name: YalmDistanceFromPlayerX
@@ -41294,151 +41777,6 @@ structs:
     offset: 384
   virtual_functions: []
   member_functions: []
-- type: Common::Component::BGCollision::ColliderBox
-  name: ColliderBox
-  namespace: Common.Component.BGCollision
-  size: 320
-  fields:
-  - type: Common::Component::BGCollision::Collider
-    name: Collider
-    offset: 0
-  - type: System::Numerics::Vector3
-    name: Translation
-    offset: 160
-  - type: System::Numerics::Vector3
-    name: TranslationPrev
-    offset: 172
-  - type: System::Numerics::Vector3
-    name: Rotation
-    offset: 184
-  - type: System::Numerics::Vector3
-    name: RotationPrev
-    offset: 196
-  - type: System::Numerics::Vector3
-    name: Scale
-    offset: 208
-  - type: Common::Component::BGCollision::Math::Matrix4x3
-    name: World
-    offset: 220
-  - type: Common::Component::BGCollision::Math::Matrix4x3
-    name: InvWorld
-    offset: 268
-  - type: byte
-    name: Dirty
-    offset: 316
-  virtual_functions: []
-  member_functions: []
-- type: Common::Component::BGCollision::ColliderCylinder
-  name: ColliderCylinder
-  namespace: Common.Component.BGCollision
-  size: 328
-  fields:
-  - type: Common::Component::BGCollision::Collider
-    name: Collider
-    offset: 0
-  - type: System::Numerics::Vector3
-    name: Translation
-    offset: 160
-  - type: System::Numerics::Vector3
-    name: TranslationPrev
-    offset: 172
-  - type: System::Numerics::Vector3
-    name: Rotation
-    offset: 184
-  - type: System::Numerics::Vector3
-    name: RotationPrev
-    offset: 196
-  - type: System::Numerics::Vector3
-    name: Scale
-    offset: 208
-  - type: float
-    name: Radius
-    offset: 220
-  - type: Common::Component::BGCollision::Math::Matrix4x3
-    name: World
-    offset: 224
-  - type: Common::Component::BGCollision::Math::Matrix4x3
-    name: InvWorld
-    offset: 272
-  - type: byte
-    name: Dirty
-    offset: 320
-  virtual_functions: []
-  member_functions: []
-- type: Common::Component::BGCollision::ColliderSphere
-  name: ColliderSphere
-  namespace: Common.Component.BGCollision
-  size: 336
-  fields:
-  - type: Common::Component::BGCollision::Collider
-    name: Collider
-    offset: 0
-  - type: byte
-    name: Dirty
-    offset: 160
-  - type: System::Numerics::Vector3
-    name: Translation
-    offset: 164
-  - type: System::Numerics::Vector3
-    name: TranslationPrev
-    offset: 176
-  - type: System::Numerics::Vector3
-    name: Rotation
-    offset: 188
-  - type: System::Numerics::Vector3
-    name: RotationPrev
-    offset: 200
-  - type: System::Numerics::Vector3
-    name: Scale
-    offset: 212
-  - type: System::Numerics::Vector3
-    name: ScalePrev
-    offset: 224
-  - type: Common::Component::BGCollision::Math::Matrix4x3
-    name: World
-    offset: 236
-  - type: Common::Component::BGCollision::Math::Matrix4x3
-    name: InvWorld
-    offset: 284
-  virtual_functions: []
-  member_functions: []
-- type: Common::Component::BGCollision::ColliderPlane
-  name: ColliderPlane
-  namespace: Common.Component.BGCollision
-  size: 320
-  fields:
-  - type: Common::Component::BGCollision::Collider
-    name: Collider
-    offset: 0
-  - type: System::Numerics::Vector3
-    name: Translation
-    offset: 160
-  - type: System::Numerics::Vector3
-    name: TranslationPrev
-    offset: 172
-  - type: System::Numerics::Vector3
-    name: Rotation
-    offset: 184
-  - type: System::Numerics::Vector3
-    name: RotationPrev
-    offset: 196
-  - type: System::Numerics::Vector3
-    name: Scale
-    offset: 208
-  - type: Common::Component::BGCollision::Math::Matrix4x3
-    name: World
-    offset: 220
-  - type: Common::Component::BGCollision::Math::Matrix4x3
-    name: InvWorld
-    offset: 268
-  - type: byte
-    name: Dirty
-    offset: 316
-  - type: byte
-    name: TwoSided
-    offset: 317
-  virtual_functions: []
-  member_functions: []
 - type: Component::GUI::AtkCollisionNode
   name: AtkCollisionNode
   namespace: Component.GUI
@@ -43909,7 +44247,7 @@ structs:
     name: FilterLevel
     offset: 113160
   - type: byte
-    name: FilterGender
+    name: FilterSex
     offset: 113162
   - type: Client::System::String::Utf8String
     name: FilterString

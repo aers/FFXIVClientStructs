@@ -69,7 +69,7 @@ public class Exporter {
                 if (checks.Any(t => t.EndOffset > size.StartOffset && t.StartOffset != size.StartOffset))
                     ExporterStatics.ErrorList.Add($"Field overlap detected in {processedStruct.StructType.FullSanitizeName()} with field {size.Field}");
                 if(checks.Any(t => t.StartOffset == size.StartOffset))
-                    ExporterStatics.ErrorList.Add($"Union fields not currently supported. Detected in  {processedStruct.StructType.FullSanitizeName()} with field {size.Field}");
+                    ExporterStatics.ErrorList.Add($"Union field detected but not defined in {processedStruct.StructType.FullSanitizeName()} with field {size.Field}");
             }
         }
     }
