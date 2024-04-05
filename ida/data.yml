@@ -8801,6 +8801,12 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140C4F1D0: ctor
+  Client::UI::Agent::AgentCollectablesShop:
+    vtbls:
+      - ea: 0x141A8B230
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140D14F10: ctor
   Client::UI::Agent::AgentMycWarResultNotebook:
     vtbls:
       - ea: 0x141A749B8
@@ -8826,6 +8832,12 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140ADDDA0: ctor
+  Client::UI::Agent::AgentMycDuelRequest:
+    vtbls:
+      - ea: 0x141A75008
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140AE3B30: ctor
   Client::UI::Agent::AgentMycBattleAreaInfo:
     vtbls:
       - ea: 0x141A74EF8

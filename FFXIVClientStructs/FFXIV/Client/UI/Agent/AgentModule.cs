@@ -387,12 +387,12 @@ public enum AgentId : uint {
     IKDResult = 373,
     IKDMission = 374,
     InclusionShop = 375, // Item Exchange
-
+    CollectablesShop = 376,
     MycWarResultNotebook = 377,
     MycInfo = 378, // Bozja Info
     MycItemBox = 379, // Bozja Lost Finds Cache
     MycItemBag = 380, // Bozja Lost Finds Holster
-
+    MycDuelRequest = 381,
     MycBattleAreaInfo = 382, // Bozja Recruitment
 
     OrnamentNoteBook = 384, //Accessories
