@@ -158,6 +158,10 @@ public unsafe partial struct PlayerState {
 
     #endregion
 
+    /// <remarks> For easier access, use <see cref="GetContentLevel"/>. </remarks>
+    [FixedSizeArray<ContentLevel>(3)]
+    [FieldOffset(0x6E0)] public fixed byte ContentLevels[0x8 * 3];
+
     [FieldOffset(0x770)] public byte MentorVersion; // latest is 2
 
     [FieldOffset(0x774)] public fixed uint DesynthesisLevels[8];
@@ -167,6 +171,32 @@ public unsafe partial struct PlayerState {
 
     public float GetDesynthesisLevel(uint classJobId)
         => classJobId is < 8 or > 15 ? 0 : DesynthesisLevels[classJobId - 8] / 100f;
+
+    /// <summary>
+    /// Get level for content.<br/>
+    /// Only loaded inside the relevant content.<br/>
+    /// <br/>
+    /// <code>
+    /// |-----|-------------|------------------------------|
+    /// | Key | Content     | Usage                        |
+    /// |-----|-------------|------------------------------|
+    /// |   1 | Rival Wings | ManeuversArmor RowId         |
+    /// |   2 | Eureka      | Effective Elemental Level    |
+    /// |   3 | Eureka      | Is Elemental Level Synced    |
+    /// |   4 | Eureka      | Current Elemental Level      |
+    /// |   5 | Bozja       | Current Resistance Rank      |
+    /// |-----|-------------|------------------------------|
+    /// </code>
+    /// </summary>
+    public uint GetContentLevel(uint key) {
+        for (var i = 0; i < 3; i++) {
+            var entry = ContentLevelsSpan.GetPointer(i);
+            if (entry->Key == key) {
+                return entry->Value;
+            }
+        }
+        return 0;
+    }
 
     [MemberFunction("E8 ?? ?? ?? ?? 41 3A 86")]
     public partial byte GetGrandCompanyRank();
@@ -400,6 +430,12 @@ public unsafe partial struct PlayerState {
     public partial bool IsPlayerStateFlagSet(PlayerStateFlag flag);
 
     #endregion
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x8)]
+    public struct ContentLevel {
+        [FieldOffset(0x0)] public uint Key;
+        [FieldOffset(0x8)] public uint Value;
+    }
 }
 
 public enum PlayerStateFlag : uint {
