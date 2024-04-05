@@ -39,7 +39,7 @@ public enum AgentId : uint {
     EventFade = 8,
     Context = 9,
     InventoryContext = 10,
-    Config = 11, //ConfigSystem
+    Config = 11, // ConfigSystem
     ConfigLog = 12,
     ConfigLogColor = 13,
     Configkey = 14,
@@ -60,17 +60,17 @@ public enum AgentId : uint {
     FishingNote = 28,
     FishGuide = 29,
     FishRecord = 30,
+
     [Obsolete("Renamed to QuestJournal")] Journal = 32,
     QuestJournal = 32,
     ActionMenu = 33,
     Marker = 34,
     Trade = 35,
     ScreenLog = 36,
-    // NPCTrade,
-    Request = 37,
+    Request = 37, // NPCTrade
     Status = 38,
     Map = 39,
-    Loot = 40, //NeedGreed
+    Loot = 40, // NeedGreed
     Repair = 41,
 
     Materialize = 43,
@@ -90,7 +90,6 @@ public enum AgentId : uint {
     SocialFriendList = 57,
     Linkshell = 58,
     SocialPartyMember = 59,
-
     // PartyInvite,
     SocialSearch = 61,
     SocialDetail = 62,
@@ -104,15 +103,13 @@ public enum AgentId : uint {
     Cutscene = 70,
     CutsceneReplay = 71,
     MonsterNote = 72,
-    ItemSearch = 73, //MarketBoard
+    ItemSearch = 73, // MarketBoard
     GoldSaucerReward = 74,
-    FateProgress = 75, //Shared FATE
+    FateProgress = 75, // Shared FATE
     Catch = 76,
     FreeCompany = 77,
-
     // FreeCompanyOrganizeSheet,
     FreeCompanyProfile = 79,
-
     FreeCompanyProfileEdit = 80,
     // FreeCompanyInvite,
     FreeCompanyInputString = 82,
@@ -121,7 +118,8 @@ public enum AgentId : uint {
     FreeCompanyCrestEditor = 85,
     FreeCompanyCrestDecal = 86,
 
-    // FreeCompanyPetition = 85,
+    // FreeCompanyPetition = ?,
+
     ArmouryBoard = 88,
     HowtoList = 89,
     Cabinet = 90,
@@ -196,7 +194,7 @@ public enum AgentId : uint {
     ItemCompare = 159,
     DailyQuestSupply = 160,
     MobHunt = 161,
-    PatchMark = 162, //SelectOk?
+    PatchMark = 162, // SelectOk?
     HousingWithdrawStorage = 163,
     WeatherReport = 164,
 
@@ -219,7 +217,7 @@ public enum AgentId : uint {
     LotteryWeekly = 182,
     GoldSaucer = 183,
     TripleTriadCoinExchange = 184,
-    ShopExchangeCoin = 185, //MGP Exchange
+    ShopExchangeCoin = 185, // MGP Exchange
     JournalAccept = 186,
     JournalResult = 187,
     LeveQuest = 188,
@@ -236,7 +234,7 @@ public enum AgentId : uint {
     AetherCurrent = 199,
     FreeCompanyCreditShop = 200,
     Currency = 201,
-    PuryfyItemSelector = 202, //Aetherial Reduction
+    PuryfyItemSelector = 202, // Aetherial Reduction
 
     LovmParty = 204,
     LovmRanking = 205,
@@ -245,25 +243,25 @@ public enum AgentId : uint {
     CharacterTitleSelect = 208,
     LovmResult = 209,
     LovmPaletteEdit = 210,
-    SkyIslandFinder = 211, //Exploratory Missions
+    SkyIslandFinder = 211, // Exploratory Missions
     SkyIslandFinderSetting = 212,
     SkyIslandResult = 213,
     SkyIsland2Result = 214,
     ItemContextCustomize = 215,
-    BeginnersMansionProblem = 216, //Hall of the Novice
-    DpsChallenge = 217, //Stone, Sky, Sea
+    BeginnersMansionProblem = 216, // Hall of the Novice
+    DpsChallenge = 217, // Stone, Sky, Sea
     PlayGuide = 218,
     WebLauncher = 219,
     WebGuidance = 220,
     Orchestrion = 221,
-    BeginnerChatList = 222, //Novice Network
+    BeginnerChatList = 222, // Novice Network
 
     ReturnerDialog = 225,
     OrchestrionInn = 226,
     HousingEditContainer = 227,
     ConfigPartyListRoleSort = 228,
     RecommendEquip = 229,
-    YkwNote = 230, //yokai watch medallium
+    YkwNote = 230, // Yo-kai Watch Medallium
     ContentsFinderMenu = 231,
     RaidFinder = 232,
     GcArmyExpedition = 233,
@@ -282,8 +280,8 @@ public enum AgentId : uint {
     MansionSelectRoom = 246,
     OrchestrionPlayList = 247,
     CountDownSettingDialog = 248,
-    WeeklyBingo = 249, //Wondrous Tails
-    WeeklyPuzzle = 250, //Faux Hollows
+    WeeklyBingo = 249, // Wondrous Tails
+    WeeklyPuzzle = 250, // Faux Hollows
     CameraSetting = 251,
     PvPDuelRequest = 252,
     PvPHeader = 253,
@@ -294,8 +292,8 @@ public enum AgentId : uint {
     DeepDungeonMenu = 259,
 
     DeepDungeonResult = 261,
-    ItemAppraisal = 262, //DeepDungeon Appraisal
-    ItemInspection = 263, //Lockbox
+    ItemAppraisal = 262, // DeepDungeon Appraisal
+    ItemInspection = 263, // Lockbox
     RecipeItemContext = 264, // context menus for RecipeTree and RecipeList, constructor inlined
     ContactList = 265,
 
@@ -324,9 +322,9 @@ public enum AgentId : uint {
     InventoryBuddy = 297,
     ContentsReplayPlayer = 298,
     ContentsReplaySetting = 299,
-    MiragePrismPrismBox = 300, //Glamour Dresser
+    MiragePrismPrismBox = 300, // Glamour Dresser
     MiragePrismPrismItemDetail = 301,
-    MiragePrismMiragePlate = 302, //Glamour Plates
+    MiragePrismMiragePlate = 302, // Glamour Plates
     PerformanceMode = 303,
 
     Fashion = 306,
@@ -338,36 +336,35 @@ public enum AgentId : uint {
     ReconstructionBuyback = 313,
     CrossWorldLinkShell = 314,
     MiragePrismENpcSatisfaction = 315,
-    Description = 316, //Frontline/Bozja Description
+    Description = 316, // Frontline/Bozja Description
     Alarm = 317,
 
     FreeShop = 320,
-    AozNotebook = 321, //Bluemage Spells
+    AozNotebook = 321, // Bluemage Spells
     RhythmAction = 322,
     WeddingNotification = 323,
-
     Emj = 324, //Mahjong
 
     EmjIntro = 327,
-    AozContentBriefing = 328, //Masked Carnivale
+    AozContentBriefing = 328, // Masked Carnivale
     AozContentResult = 329,
     WorldTravel = 330,
-    RideShooting = 331, //Airforce One
+    RideShooting = 331, // Airforce One
     RideShootingResult = 332,
     Credit = 333,
-    EmjSetting = 334, //Mahjong Settings
+    EmjSetting = 334, // Mahjong Settings
     RetainerList = 335,
     QIBCStatus = 336,
 
-    Dawn = 340, //Trust
-    DawnStory = 341, //Duty Support
+    Dawn = 340, // Trust
+    DawnStory = 341, // Duty Support
     HousingCatalogPreview = 342,
 
     SubmersibleExplorationMapSelect = 344,
     QuestRedo = 345,
     QuestRedoHud = 346,
 
-    CircleList = 348, //Fellowships
+    CircleList = 348, // Fellowships
     CircleBook = 349,
 
     CircleFinder = 354,
@@ -383,23 +380,20 @@ public enum AgentId : uint {
     HwdScore = 366,
 
     HwdMonument = 368,
-    McGuffin = 369, //Collection
+    McGuffin = 369, // Collection
     CraftActionSimulator = 370,
-
-    //Ocean Fishing
-    IKDSchedule = 371,
+    IKDSchedule = 371, //Ocean Fishing
     IKDFishingLog = 372,
     IKDResult = 373,
     IKDMission = 374,
-
-    InclusionShop = 375, //Item Exchange
+    InclusionShop = 375, // Item Exchange
 
     MycWarResultNotebook = 377,
-    MycInfo = 378, //Bozja Info
-    MycItemBox = 379, //Bozja Lost Finds Cache
-    MycItemBag = 380, //Bozja Lost Finds Holster
+    MycInfo = 378, // Bozja Info
+    MycItemBox = 379, // Bozja Lost Finds Cache
+    MycItemBag = 380, // Bozja Lost Finds Holster
 
-    MycBattleAreaInfo = 382, //Bozja Recruitment
+    MycBattleAreaInfo = 382, // Bozja Recruitment
 
     OrnamentNoteBook = 384, //Accessories
 
@@ -409,7 +403,7 @@ public enum AgentId : uint {
     SpearFishing = 389,
     Omikuji = 390,
     FittingShop = 391,
-    AkatsukiNote = 392, //Unending Codex
+    AkatsukiNote = 392, // Unending Codex
     ExHotbarEditor = 393,
     BannerList = 394, // Portraits
     BannerEditor = 395, // Portrait Editor
@@ -438,8 +432,8 @@ public enum AgentId : uint {
     MJIEntrance = 418,
     MJISettings = 419,
     MJIHousingMenu = 420, // new in 6.40
-    MJINekomimiRequest = 422, // favors
 
+    MJINekomimiRequest = 422, // favors
     ArchiveItem = 423,
 
     VVDNotebook = 425,
