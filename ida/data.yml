@@ -1626,9 +1626,14 @@ classes:
     funcs:
       0x14094A6B0: Initialize
       0x14094A8B0: Finalize
+  Client::Game::UI::ScenarioTextSheetWaiter:
+    vtbls:
+      - ea: 0x141A6E308
+  Client::Game::SheetWaiter:
   Client::Game::UI::ScenarioTextReader:
     vtbls:
       - ea: 0x141A6D120
+        base: Client::Game::SheetWaiter
   Client::Game::UI::Journal:
     instances:
       - ea: 0x142207ED0
@@ -1647,6 +1652,10 @@ classes:
         base: Client::Game::UI::ScenarioTextReader
     funcs:
       0x140957CA0: ctor
+  Client::Game::Event::ListenItemCallback<Client::Game::UI::QuestTodoList>:
+    vtbls:
+      - ea: 0x141A6D150
+        base: Client::Game::Event::ListenItemCallbackInterface
   Client::Game::UI::QuestTodoList:
     instances:
       - ea: 0x14220D5E8
@@ -2171,6 +2180,14 @@ classes:
       0x140097330: GetSavePath
       0x140097610: SetDataPathType
       0x140097650: GetProgramName
+  Client::Game::SheetWaiterBase:
+  Common::Component::Excel::ExcelSheetWaiter:
+    vtbls:
+      - ea: 0x141D81228
+        base: Client::Game::SheetWaiterBase
+    funcs:
+      0x14193CEA0: ctor
+      0x14193CF10: Finalize
   Component::Excel::ExcelModuleInterface:
     vtbls:
       - ea: 0x1419B2F40
@@ -3014,6 +3031,10 @@ classes:
       0x1400DDE90: IsUIVisible
       0x140568940: DecRefNumberArrayData
       0x1405689A0: DecRefStringArrayData
+  Client::UI::ExdSheetWaiter:
+    vtbls:
+      - ea: 0x1419BF158
+        base: Common::Component::Excel::ExcelSheetWaiter
   Client::UI::RaptureAtkModule::ItemCache:
     vtbls:
       - ea: 0x1419BF178
@@ -9607,6 +9628,15 @@ classes:
   Client::Game::UI::GameEventCallback:
     vtbls:
       - ea: 0x141A45D40
+  Client::Game::Event::FormatStringCallbackInterface:
+    vtbls:
+      - ea: 0x141A45D50
+  Client::Game::Event::ActionTimelineCallbackInterface:
+    vtbls:
+      - ea: 0x141A45D68
+  Client::Game::Event::ListenItemCallbackInterface:
+    vtbls:
+      - ea: 0x141A45D80
   Client::Game::Event::EventHandler:
     vtbls:
       - ea: 0x141A45DF0
@@ -9898,6 +9928,15 @@ classes:
       0x14082A0E0: ctor
       0x140964F60: ShowTodo # lua function "ShowDirectorTodo"
       0x140964F70: HideTodo # lua function "HideDirectorTodo"
+  Client::Game::CallbackSheetWaiter<Client::Game::UI::QuestTodoList>:
+    vtbls:
+      - ea: 0x141A6E368
+  Client::Game::Event::CraftEventHandler:
+    vtbls:
+      - ea: 0x141A4D788
+        base: Client::Game::Event::EventHandler
+    funcs:
+      0x14087E660: ctor
   Client::Game::Event::JournalCallback:
     vtbls:
       - ea: 0x141A4C630
@@ -10044,6 +10083,10 @@ classes:
     vtbls:
       - ea: 0x141A4A060
         base: Client::Game::Event::Director
+    vfuncs:
+      292: GetCurrentLevel
+      293: GetMaxLevel
+      319: SetExperience
     funcs:
       0x14082EEC0: ctor
   Client::Game::InstanceContent::InstanceContentDirector:
@@ -11535,6 +11578,20 @@ classes:
         base: Client::Game::InstanceContent::PublicContentDirector
     funcs:
       0x1414B7B40: ctor
+  Client::Game::InstanceContent::DynamicEventContainer:
+    vtbls:
+      - ea: 0x141B3ED38
+        base: Client::Game::InstanceContent::ContentSheetWaiterInterface
+    funcs:
+      0x1412F24D0: ctor
+      0x1412F2550: Finalize
+  Client::Game::InstanceContent::DynamicEvent:
+    vtbls:
+      - ea: 0x141C4AE38
+        base: Common::Component::Excel::ExcelSheetWaiter
+    funcs:
+      0x1414D8DA0: ctor
+      0x1414D8E60: Finalize
   Client::Game::InstanceContent::PublicContentBozja:
     vtbls:
       - ea: 0x141C3AAE8
