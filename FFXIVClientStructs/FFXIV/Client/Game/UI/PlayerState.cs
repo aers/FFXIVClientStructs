@@ -158,9 +158,9 @@ public unsafe partial struct PlayerState {
 
     #endregion
 
-    /// <remarks> For easier access, use <see cref="GetContentLevel"/>. </remarks>
-    [FixedSizeArray<ContentLevel>(3)]
-    [FieldOffset(0x6E0)] public fixed byte ContentLevels[0x8 * 3];
+    /// <remarks> For easier access, use <see cref="GetContentValue"/>. </remarks>
+    [FixedSizeArray<StdPair<uint, uint>>(3)]
+    [FieldOffset(0x6E0)] public fixed byte ContentKeyValueData[0x8 * 3];
 
     [FieldOffset(0x770)] public byte MentorVersion; // latest is 2
 
@@ -173,7 +173,7 @@ public unsafe partial struct PlayerState {
         => classJobId is < 8 or > 15 ? 0 : DesynthesisLevels[classJobId - 8] / 100f;
 
     /// <summary>
-    /// Get level for content.<br/>
+    /// Retrieves the value associated with the given key from ContentKeyValueData.<br/>
     /// Only loaded inside the relevant content.<br/>
     /// <br/>
     /// <code>
@@ -188,11 +188,11 @@ public unsafe partial struct PlayerState {
     /// |-----|-------------|------------------------------|
     /// </code>
     /// </summary>
-    public uint GetContentLevel(uint key) {
+    public uint GetContentValue(uint key) {
         for (var i = 0; i < 3; i++) {
-            var entry = ContentLevelsSpan.GetPointer(i);
-            if (entry->Key == key) {
-                return entry->Value;
+            var entry = ContentKeyValueDataSpan.GetPointer(i);
+            if (entry->Item1 == key) {
+                return entry->Item2;
             }
         }
         return 0;
@@ -430,12 +430,6 @@ public unsafe partial struct PlayerState {
     public partial bool IsPlayerStateFlagSet(PlayerStateFlag flag);
 
     #endregion
-
-    [StructLayout(LayoutKind.Explicit, Size = 0x8)]
-    public struct ContentLevel {
-        [FieldOffset(0x0)] public uint Key;
-        [FieldOffset(0x8)] public uint Value;
-    }
 }
 
 public enum PlayerStateFlag : uint {
