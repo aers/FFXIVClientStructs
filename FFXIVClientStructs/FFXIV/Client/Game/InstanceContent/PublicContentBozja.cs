@@ -34,7 +34,7 @@ public unsafe partial struct DynamicEvent {
     // [FieldOffset(0)] public ExcelSheetWaiter ExcelSheetWaiter;
     [FieldOffset(0x38)] public uint LGBEventObject;
     [FieldOffset(0x3C)] public uint LGBMapRange;
-    [FieldOffset(0x40)] public uint Quest;
+    [FieldOffset(0x40)] public uint Quest; // RowId of Quest Sheet
     [FieldOffset(0x44)] public uint Announce; // RowId of LogMessage Sheet
     [FieldOffset(0x48)] public ushort Unknown0;
     [FieldOffset(0x4A)] public ushort Unknown1;
@@ -57,7 +57,7 @@ public unsafe partial struct DynamicEvent {
     [FieldOffset(0x68)] public Utf8String Name;
     [FieldOffset(0xD0)] public Utf8String Description;
     [FieldOffset(0x138)] public uint IconObjective0;
-    [FieldOffset(0x13C)] public byte Unknown3Again;
+    [FieldOffset(0x13C)] public byte MaxParticipants2;
     [FieldOffset(0x158)] public MapMarkerData MapMarker;
 }
 
