@@ -11598,7 +11598,7 @@ classes:
         base: Client::Game::InstanceContent::PublicContentDirector
     funcs:
       0x1414B97D0: ctor
-  Client::Game::InstanceContent::PublicContentSoutherFront:
+  Client::Game::InstanceContent::PublicContentSouthernFront:
     vtbls:
       - ea: 0x141C3B690
         base: Client::Game::InstanceContent::PublicContentBozja
