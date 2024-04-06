@@ -1626,14 +1626,21 @@ classes:
     funcs:
       0x14094A6B0: Initialize
       0x14094A8B0: Finalize
+  Client::Game::SheetWaiterBase:
+#    vtbls:
+#      - ea:
+#        base: Common::Component::Excel::ExcelSheetWaiter
+  Client::Game::SheetWaiter<Client::Game::UI::ScenarioTextReader>:
+#    vtbls:
+#      - ea:
+#        base: Client::Game::SheetWaiterBase
   Client::Game::UI::ScenarioTextSheetWaiter:
     vtbls:
       - ea: 0x141A6E308
-  Client::Game::SheetWaiter:
+        base: Client::Game::SheetWaiter<Client::Game::UI::ScenarioTextReader>
   Client::Game::UI::ScenarioTextReader:
     vtbls:
       - ea: 0x141A6D120
-        base: Client::Game::SheetWaiter
   Client::Game::UI::Journal:
     instances:
       - ea: 0x142207ED0
@@ -2180,11 +2187,9 @@ classes:
       0x140097330: GetSavePath
       0x140097610: SetDataPathType
       0x140097650: GetProgramName
-  Client::Game::SheetWaiterBase:
   Common::Component::Excel::ExcelSheetWaiter:
     vtbls:
       - ea: 0x141D81228
-        base: Client::Game::SheetWaiterBase
     funcs:
       0x14193CEA0: ctor
       0x14193CF10: Finalize
