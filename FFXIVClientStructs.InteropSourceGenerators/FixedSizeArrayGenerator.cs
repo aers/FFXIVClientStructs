@@ -58,7 +58,7 @@ internal sealed class FixedSizeArrayGenerator : IIncrementalGenerator {
         });
     }
 
-    internal sealed record FixedSizeArrayInfo(string FieldName, string TypeName, int Count) {
+    internal sealed record FixedSizeArrayInfo(string FieldName, string TypeName, int Count, string Attributes) {
         public static Validation<DiagnosticInfo, FixedSizeArrayInfo> GetFromRoslyn(IFieldSymbol fieldSymbol) {
             Validation<DiagnosticInfo, IFieldSymbol> validSymbol =
                 (fieldSymbol.IsFixedSizeBuffer
@@ -90,11 +90,11 @@ internal sealed class FixedSizeArrayGenerator : IIncrementalGenerator {
                 attribute.GetValidAttributeArgument<int>("Count", 0, AttributeName, fieldSymbol);
 
             return (validSymbol, validType, validCount).Apply((symbol, type, count) =>
-                new FixedSizeArrayInfo(symbol.Name, type, count));
+                new FixedSizeArrayInfo(symbol.Name, type, count, new AttributePropagationProvider(fieldSymbol).Output));
         }
 
         public void RenderFixedSizeArraySpan(IndentedStringBuilder builder) {
-            builder.AppendLine($"public Span<{TypeName}> {FieldName}Span => new(Unsafe.AsPointer(ref {FieldName}[0]), {Count});");
+            builder.AppendLine($"{Attributes}public Span<{TypeName}> {FieldName}Span => new(Unsafe.AsPointer(ref {FieldName}[0]), {Count});");
         }
     }
 
