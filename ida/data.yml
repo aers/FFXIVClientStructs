@@ -11786,7 +11786,7 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x140D96AC0: ctor
-  Client::UI::AddonFriendList:
+  Client::UI::AddonSocialList:
     vtbls:
       - ea: 0x141A95EA0
         base: Component::GUI::AtkUnitBase
@@ -11798,6 +11798,12 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x140DA4450: ctor
+  Client::UI::AddonPartyMemberList:
+    vtbls:
+      - ea: 0x141A96340
+        base: Client::UI::AddonSocialList
+    funcs:
+      0x140DA7EC0: ctor
   Client::UI::AddonRequest:
     vtbls:
       - ea: 0x141A96EB0
@@ -13216,7 +13222,7 @@ classes:
   Client::UI::AddonJobHudACN0::AetherflowACNGaugeData:
     vtbls:
       - ea: 0x141B21438
-        base: Client::UI::AddonJobHud::AddonJobHudGaugeData
+        base: Client::UI::AddonJobHudACN0::AetherflowACNGaugeSimple
   Client::UI::AddonJobHudACN0::AetherflowACNGauge:
     vtbls:
       - ea: 0x141B21488
