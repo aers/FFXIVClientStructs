@@ -23,21 +23,9 @@ public unsafe partial struct Utf8String : ICreatable, IDisposable {
     public readonly ref readonly byte this[int index] => ref AsSpan()[index];
 
     public Utf8String() => Ctor();
-
-    public Utf8String(byte* str) {
-        Ctor();
-        SetString(str);
-    }
-
-    public Utf8String(string str) {
-        Ctor();
-        SetString(str);
-    }
-
-    public Utf8String(ReadOnlySpan<byte> str) {
-        Ctor();
-        SetString(str);
-    }
+    public Utf8String(byte* str) : this() => SetString(str);
+    public Utf8String(string str) : this() => SetString(str);
+    public Utf8String(ReadOnlySpan<byte> str) : this() => SetString(str);
     
     public readonly ReadOnlySpan<byte> AsSpan() => new(StringPtr, Length);
 
