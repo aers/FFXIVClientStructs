@@ -54,8 +54,16 @@ public static class TypeExtensions {
             _ when type.IsStruct() && !type.IsGenericType && (type.StructLayoutAttribute?.Value ?? LayoutKind.Sequential) != LayoutKind.Sequential => type.StructLayoutAttribute?.Size ?? (int?)typeof(Unsafe).GetMethod("SizeOf")?.MakeGenericMethod(type).Invoke(null, null) ?? 0,
             _ when type.IsEnum => Enum.GetUnderlyingType(type).SizeOf(),
             _ when type.IsGenericType => Marshal.SizeOf(Activator.CreateInstance(type)!),
-            _ => 0
+            _ => GetSizeOf(type)
         };
+    }
+
+    private static int GetSizeOf(this Type type) {
+        try {
+            return Marshal.SizeOf(Activator.CreateInstance(type)!);
+        } catch {
+            return 0;
+        }
     }
 
     public static string GetNamespace(this Type type) {
@@ -93,7 +101,7 @@ public static class TypeExtensions {
     }
 
     public static string SanitizeName(this Type type) {
-        if(type.IsPointer || type.IsFunctionPointer || type.IsUnmanagedFunctionPointer) return type.GetElementType()!.FixTypeName((t, _) => t.SanitizeName()) + "*";
+        if (type.IsPointer || type.IsFunctionPointer || type.IsUnmanagedFunctionPointer) return type.GetElementType()!.FixTypeName((t, _) => t.SanitizeName()) + "*";
         var name = type.FullName ?? type.Namespace! + "." + type.Name;
         if (type.IsHavok() || type.IsStd() || type.IsXiv() | type.IsInterop()) {
             var offset = name.IndexOf('.', name.IndexOf('.') + 1) + 1;

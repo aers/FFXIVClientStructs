@@ -16,7 +16,7 @@ public unsafe partial struct InfoProxyLetter {
     [FieldOffset(0x29)] public byte NumLettersFromGameMasters; // 10 max
     [FieldOffset(0x2A)] public bool HasLettersFromGameMasters;
     [FieldOffset(0x2B)] public bool HasLettersFromSupportDesk;
-    [FieldOffset(0x28)] public byte NumPurchases;
+    [FieldOffset(0x28), Obsolete("Use NumLettersFromPurchases")] public byte NumPurchases;
     [FixedSizeArray<Letter>(130)]
     [FieldOffset(0x30)] public fixed byte Letters[130 * 0xA0];
     //0xCC0 After

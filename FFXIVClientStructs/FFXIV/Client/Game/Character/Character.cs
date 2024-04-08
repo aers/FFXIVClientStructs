@@ -72,7 +72,7 @@ public unsafe partial struct Character {
     [FieldOffset(0x1BB0)] public ushort CurrentWorld;
     [FieldOffset(0x1BB2)] public ushort HomeWorld;
 
-    [FieldOffset(0x1BB6)] public byte EventState; // Leave for backwards compat. See Mode.
+    [FieldOffset(0x1BB6), Obsolete("Use Mode")] public byte EventState; // Leave for backwards compat. See Mode.
     [FieldOffset(0x1BB6)] public CharacterModes Mode;
     [FieldOffset(0x1BB7)] public byte ModeParam; // Different purpose depending on mode. See CharacterModes for more info.
 

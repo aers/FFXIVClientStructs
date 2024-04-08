@@ -6,8 +6,8 @@ namespace FFXIVClientStructs.STD;
 [StructLayout(LayoutKind.Explicit, Size = 0x20)]
 public unsafe struct StdString {
     // if (Length < 16) uses Buffer else uses BufferPtr
-    [FieldOffset(0x0)] public byte* BufferPtr;
-    [FieldOffset(0x0)] public fixed byte Buffer[16];
+    [FieldOffset(0x0), CExporterUnion("Union.Buffer")] public byte* BufferPtr;
+    [FieldOffset(0x0), CExporterUnion("Union.Buffer")] public fixed byte Buffer[16];
     /// <summary>
     /// This string's length, as a <see cref="ulong"/>.
     /// </summary>

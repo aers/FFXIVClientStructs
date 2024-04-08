@@ -1071,6 +1071,15 @@ enums:
     Fishing: 2
     NewZone: 3
     Finished: 4
+- type: Client::Game::InstanceContent::DynamicEventState
+  name: DynamicEventState
+  underlying: byte
+  namespace: Client.Game.InstanceContent
+  values:
+    Inactive: 0
+    Register: 1
+    Warmup: 2
+    Battle: 3
 - type: Client::Game::InstanceContent::PublicContentDirectorType
   name: PublicContentDirectorType
   underlying: byte
@@ -3428,15 +3437,6 @@ structs:
   namespace: Component.Text
   size: 24
   fields:
-  - type: __int32
-    name: IntValue
-    offset: 0
-  - type: byte*
-    name: StringValue
-    offset: 0
-  - type: Component::Text::ReferencedUtf8String*
-    name: ReferencedUtf8StringValue
-    offset: 0
   - type: __int64
     name: ValuePtr
     offset: 8
@@ -3666,9 +3666,6 @@ structs:
   fields:
   - type: __int64
     name: vtbl
-    offset: 0
-  - type: __int64*
-    name: vfunc
     offset: 0
   - type: byte*
     name: SheetName
@@ -3926,9 +3923,6 @@ structs:
   - type: __int64
     name: vtbl
     offset: 0
-  - type: __int64*
-    name: vfunc
-    offset: 0
   virtual_functions: []
   member_functions: []
 - type: Component::GUI::AtkEventListenerUnk1
@@ -3938,9 +3932,6 @@ structs:
   fields:
   - type: __int64
     name: vtbl
-    offset: 0
-  - type: __int64*
-    name: vfunc
     offset: 0
   - type: __int64
     name: Unk
@@ -4000,9 +3991,6 @@ structs:
   fields:
   - type: __int64
     name: vtbl
-    offset: 0
-  - type: __int64*
-    name: vfunc
     offset: 0
   virtual_functions: []
   member_functions: []
@@ -4073,15 +4061,6 @@ structs:
   namespace: Component.GUI
   size: 24
   fields:
-  - type: Component::GUI::AtkTextureResource*
-    name: Resource
-    offset: 8
-  - type: __int64
-    name: Crest
-    offset: 8
-  - type: Client::Graphics::Kernel::Texture*
-    name: KernelTexture
-    offset: 8
   - type: Component::GUI::TextureType
     name: TextureType
     offset: 16
@@ -5975,37 +5954,37 @@ structs:
     offset: 0
   - type: Client::UI::Misc::GamePresetPoint
     name: B
-    offset: 0
+    offset: 12
   - type: Client::UI::Misc::GamePresetPoint
     name: C
-    offset: 0
+    offset: 24
   - type: Client::UI::Misc::GamePresetPoint
     name: D
-    offset: 0
+    offset: 36
   - type: Client::UI::Misc::GamePresetPoint
     name: One
-    offset: 0
+    offset: 48
   - type: Client::UI::Misc::GamePresetPoint
     name: Two
-    offset: 0
+    offset: 60
   - type: Client::UI::Misc::GamePresetPoint
     name: Three
-    offset: 0
+    offset: 72
   - type: Client::UI::Misc::GamePresetPoint
     name: Four
-    offset: 0
+    offset: 84
   - type: byte
     name: ActiveMarkers
-    offset: 0
+    offset: 96
   - type: byte
     name: Reserved
-    offset: 1
+    offset: 97
   - type: unsigned __int16
     name: ContentFinderConditionId
-    offset: 2
+    offset: 98
   - type: __int32
     name: Timestamp
-    offset: 4
+    offset: 100
   virtual_functions: []
   member_functions: []
 - type: Client::UI::Misc::InputTimerModule
@@ -7327,6 +7306,27 @@ structs:
     size: 360
   virtual_functions: []
   member_functions: []
+- type: Client::UI::Agent::MycItemBoxData
+  name: MycItemBoxData
+  namespace: Client.UI.Agent
+  size: 5504
+  fields:
+  - type: byte
+    name: ItemCacheArray
+    offset: 8
+    size: 2716
+  - type: byte
+    name: ItemHolsterArray
+    offset: 2724
+    size: 2716
+  - type: __int32
+    name: HolsterCurrentTab
+    offset: 5456
+  - type: __int32
+    name: LastSelectedActionId
+    offset: 5464
+  virtual_functions: []
+  member_functions: []
 - type: Client::UI::Agent::MycItemCategory
   name: MycItemCategory
   namespace: Client.UI.Agent
@@ -7670,6 +7670,17 @@ structs:
   - type: float
     name: CurrentTimestamp
     offset: 52
+  virtual_functions: []
+  member_functions: []
+- type: Client::System::Resource::ResourceGraph
+  name: ResourceGraph
+  namespace: Client.System.Resource
+  size: 3200
+  fields:
+  - type: byte
+    name: ContainerArray
+    offset: 0
+    size: 3360
   virtual_functions: []
   member_functions: []
 - type: Client::System::Resource::ResourceManager
@@ -8355,9 +8366,6 @@ structs:
     name: ActiveFestivals
     offset: 64
     size: 16
-  - type: __int64
-    name: HousingController
-    offset: 128
   - type: Client::LayoutEngine::OutdoorAreaLayoutData*
     name: OutdoorAreaData
     offset: 128
@@ -10125,6 +10133,19 @@ structs:
     parameters:
     - type: Client::Game::InventoryItem*
       name: this
+- type: Client::Game::JobGaugeManager
+  name: JobGaugeManager
+  namespace: Client.Game
+  size: 96
+  fields:
+  - type: Client::Game::Gauge::JobGauge*
+    name: CurrentGauge
+    offset: 0
+  - type: byte
+    name: ClassJobID
+    offset: 88
+  virtual_functions: []
+  member_functions: []
 - type: Client::Game::MirageManager
   name: MirageManager
   namespace: Client.Game
@@ -10493,12 +10514,6 @@ structs:
   - type: unsigned __int16
     name: StatusID
     offset: 0
-  - type: unsigned __int16
-    name: Param
-    offset: 2
-  - type: byte
-    name: StackCount
-    offset: 2
   - type: float
     name: RemainingTime
     offset: 4
@@ -11636,6 +11651,10 @@ structs:
     name: WeeklyBingoUnk63
     offset: 1753
   - type: byte
+    name: ContentKeyValueData
+    offset: 1760
+    size: 24
+  - type: byte
     name: MentorVersion
     offset: 1904
   - type: unsigned __int32
@@ -12096,7 +12115,7 @@ structs:
     size: 28
   - type: unsigned __int32
     name: Unk20
-    offset: 4
+    offset: 32
     size: 28
   virtual_functions: []
   member_functions: []
@@ -12389,19 +12408,19 @@ structs:
     size: 4
   - type: byte
     name: GlamourLevel
-    offset: 8
+    offset: 12
     size: 4
   - type: byte
     name: HoursToCompletion
-    offset: 8
+    offset: 16
     size: 4
   - type: byte
     name: BuildingLevel
-    offset: 8
+    offset: 20
     size: 4
   - type: byte
     name: UnderConstruction
-    offset: 8
+    offset: 24
     size: 4
   virtual_functions: []
   member_functions: []
@@ -12418,19 +12437,19 @@ structs:
     size: 2
   - type: byte
     name: GlamourLevel
-    offset: 8
+    offset: 10
     size: 2
   - type: byte
     name: HoursToCompletion
-    offset: 8
+    offset: 12
     size: 2
   - type: byte
     name: BuildingLevel
-    offset: 8
+    offset: 14
     size: 2
   - type: byte
     name: UnderConstruction
-    offset: 8
+    offset: 16
     size: 2
   virtual_functions: []
   member_functions: []
@@ -12654,6 +12673,96 @@ structs:
   - type: byte
     name: PopAreaId
     offset: 10
+  virtual_functions: []
+  member_functions: []
+- type: Client::Game::InstanceContent::DynamicEventContainer
+  name: DynamicEventContainer
+  namespace: Client.Game.InstanceContent
+  size: 6952
+  fields:
+  - type: byte
+    name: Events
+    offset: 8
+    size: 6912
+  virtual_functions: []
+  member_functions: []
+- type: Client::Game::InstanceContent::DynamicEvent
+  name: DynamicEvent
+  namespace: Client.Game.InstanceContent
+  size: 432
+  fields:
+  - type: unsigned __int32
+    name: LGBEventObject
+    offset: 56
+  - type: unsigned __int32
+    name: LGBMapRange
+    offset: 60
+  - type: unsigned __int32
+    name: Quest
+    offset: 64
+  - type: unsigned __int32
+    name: Announce
+    offset: 68
+  - type: unsigned __int16
+    name: Unknown0
+    offset: 72
+  - type: unsigned __int16
+    name: Unknown1
+    offset: 74
+  - type: unsigned __int16
+    name: Unknown2
+    offset: 76
+  - type: byte
+    name: EventType
+    offset: 78
+  - type: byte
+    name: EnemyType
+    offset: 79
+  - type: byte
+    name: MaxParticipants
+    offset: 80
+  - type: byte
+    name: Unknown4
+    offset: 81
+  - type: byte
+    name: Unknown5
+    offset: 82
+  - type: unsigned __int32
+    name: StartTimestamp
+    offset: 84
+  - type: unsigned __int32
+    name: SecondsLeft
+    offset: 88
+  - type: unsigned __int32
+    name: SecondsDuration
+    offset: 92
+  - type: Client::Game::InstanceContent::DynamicEventState
+    name: State
+    offset: 99
+  - type: byte
+    name: Participants
+    offset: 101
+  - type: byte
+    name: Progress
+    offset: 102
+  - type: byte
+    name: SingleBattle
+    offset: 83
+  - type: Client::System::String::Utf8String
+    name: Name
+    offset: 104
+  - type: Client::System::String::Utf8String
+    name: Description
+    offset: 208
+  - type: unsigned __int32
+    name: IconObjective0
+    offset: 312
+  - type: byte
+    name: MaxParticipants2
+    offset: 316
+  - type: Client::Game::UI::MapMarkerData
+    name: MapMarker
+    offset: 344
   virtual_functions: []
   member_functions: []
 - type: Client::Game::Housing::HousingManager
@@ -14001,10 +14110,6 @@ structs:
   namespace: Client.Game.Character
   size: 26
   fields:
-  - type: byte
-    name: Data
-    offset: 0
-    size: 26
   - type: byte
     name: Race
     offset: 0
@@ -15523,10 +15628,6 @@ structs:
   - type: Component::GUI::AtkResNode*
     name: SongsPlayed
     offset: 200
-  - type: byte
-    name: SongIcon
-    offset: 152
-    size: 24
   virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudBRD0::SongGaugeSimple
@@ -15588,9 +15689,6 @@ structs:
     name: SongIcon
     offset: 176
     size: 24
-  - type: byte
-    name: RadiantFinaleStatus
-    offset: 96
   virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudDNC0::StepGaugeData
@@ -18267,48 +18365,6 @@ structs:
     name: Items
     offset: 56
     size: 392
-  - type: Client::UI::Misc::RaptureGearsetModule::GearsetItem
-    name: MainHand
-    offset: 56
-  - type: Client::UI::Misc::RaptureGearsetModule::GearsetItem
-    name: OffHand
-    offset: 84
-  - type: Client::UI::Misc::RaptureGearsetModule::GearsetItem
-    name: Head
-    offset: 112
-  - type: Client::UI::Misc::RaptureGearsetModule::GearsetItem
-    name: Body
-    offset: 140
-  - type: Client::UI::Misc::RaptureGearsetModule::GearsetItem
-    name: Hands
-    offset: 168
-  - type: Client::UI::Misc::RaptureGearsetModule::GearsetItem
-    name: Belt
-    offset: 196
-  - type: Client::UI::Misc::RaptureGearsetModule::GearsetItem
-    name: Legs
-    offset: 224
-  - type: Client::UI::Misc::RaptureGearsetModule::GearsetItem
-    name: Feet
-    offset: 252
-  - type: Client::UI::Misc::RaptureGearsetModule::GearsetItem
-    name: Ears
-    offset: 280
-  - type: Client::UI::Misc::RaptureGearsetModule::GearsetItem
-    name: Neck
-    offset: 308
-  - type: Client::UI::Misc::RaptureGearsetModule::GearsetItem
-    name: Wrists
-    offset: 336
-  - type: Client::UI::Misc::RaptureGearsetModule::GearsetItem
-    name: RingRight
-    offset: 364
-  - type: Client::UI::Misc::RaptureGearsetModule::GearsetItem
-    name: RingLeft
-    offset: 392
-  - type: Client::UI::Misc::RaptureGearsetModule::GearsetItem
-    name: SoulStone
-    offset: 420
   virtual_functions: []
   member_functions: []
 - type: Client::UI::Misc::RaptureHotbarModule::ClearCallback
@@ -19815,9 +19871,6 @@ structs:
     name: CategoryMaps
     offset: 0
     size: 160
-  - type: StdMap<unsigned __int32, StdMap<unsigned __int32, Client::System::Resource::Handle::ResourceHandle*>*>*
-    name: MainMap
-    offset: 0
   virtual_functions: []
   member_functions: []
 - type: Client::System::Resource::Handle::MaterialResourceHandle::TextureEntry
@@ -21064,12 +21117,6 @@ structs:
   - type: Client::Game::Control::GazeController::Gaze::TargetInformation::TargetInfoType
     name: Type
     offset: 8
-  - type: Client::Game::Object::GameObjectID
-    name: TargetId
-    offset: 16
-  - type: Common::Math::Vector3
-    name: Unk10
-    offset: 16
   - type: __int32
     name: Unk20
     offset: 32
@@ -21108,6 +21155,113 @@ structs:
   fields:
   - type: byte*
     name: StringAndFlag
+    offset: 0
+  virtual_functions: []
+  member_functions: []
+- type: hkMatrix3f
+  name: hkMatrix3f
+  namespace: ''
+  size: 48
+  fields:
+  - type: float
+    name: M00
+    offset: 0
+  - type: float
+    name: M10
+    offset: 4
+  - type: float
+    name: M20
+    offset: 8
+  - type: float
+    name: pad
+    offset: 12
+  - type: float
+    name: M01
+    offset: 16
+  - type: float
+    name: M11
+    offset: 20
+  - type: float
+    name: M21
+    offset: 24
+  - type: float
+    name: pad2
+    offset: 28
+  - type: float
+    name: M02
+    offset: 32
+  - type: float
+    name: M12
+    offset: 36
+  - type: float
+    name: M22
+    offset: 40
+  - type: float
+    name: pad3
+    offset: 44
+  virtual_functions: []
+  member_functions: []
+- type: hkMatrix4f
+  name: hkMatrix4f
+  namespace: ''
+  size: 64
+  fields:
+  - type: float
+    name: M00
+    offset: 0
+  - type: float
+    name: M10
+    offset: 4
+  - type: float
+    name: M20
+    offset: 8
+  - type: float
+    name: M30
+    offset: 12
+  - type: float
+    name: M01
+    offset: 16
+  - type: float
+    name: M11
+    offset: 20
+  - type: float
+    name: M21
+    offset: 24
+  - type: float
+    name: M31
+    offset: 28
+  - type: float
+    name: M02
+    offset: 32
+  - type: float
+    name: M12
+    offset: 36
+  - type: float
+    name: M22
+    offset: 40
+  - type: float
+    name: M32
+    offset: 44
+  - type: float
+    name: M03
+    offset: 48
+  - type: float
+    name: M13
+    offset: 52
+  - type: float
+    name: M23
+    offset: 56
+  - type: float
+    name: M33
+    offset: 60
+  virtual_functions: []
+  member_functions: []
+- type: hkRotationf
+  name: hkRotationf
+  namespace: ''
+  fields:
+  - type: hkMatrix3f
+    name: hkMatrix3f
     offset: 0
   virtual_functions: []
   member_functions: []
@@ -21405,7 +21559,7 @@ structs:
     offset: 0
   - type: hkVector4f
     name: Max
-    offset: 0
+    offset: 16
   virtual_functions: []
   member_functions: []
 - type: hkLocalFrame
@@ -21528,7 +21682,7 @@ structs:
     size: 24
   - type: byte
     name: BlendHint
-    offset: 0
+    offset: 24
   virtual_functions: []
   member_functions: []
 - type: hkaAnnotationTrack::Annotation
@@ -21597,10 +21751,10 @@ structs:
     offset: 0
   - type: __int16
     name: StartBoneIndex
-    offset: 0
+    offset: 8
   - type: __int16
     name: NumBones
-    offset: 2
+    offset: 10
   virtual_functions: []
   member_functions: []
 - type: hkBaseObject::hkBaseObjectVtbl
@@ -21624,10 +21778,10 @@ structs:
     offset: 0
   - type: hkStringPtr
     name: ClassName
-    offset: 0
+    offset: 8
   - type: hkReferencedObject*
     name: Variant
-    offset: 0
+    offset: 16
   virtual_functions: []
   member_functions: []
 - type: System::Drawing::Point
@@ -22346,13 +22500,6 @@ structs:
   namespace: ''
   size: 32
   fields:
-  - type: byte*
-    name: BufferPtr
-    offset: 0
-  - type: byte
-    name: Buffer
-    offset: 0
-    size: 16
   - type: unsigned __int64
     name: Length
     offset: 16
@@ -22698,18 +22845,6 @@ structs:
   - type: Client::UI::Agent::PouchInventoryItem**
     name: End
     offset: 16
-  virtual_functions: []
-  member_functions: []
-- type: StdMap<unsigned __int32, StdMap<unsigned __int32, Client::System::Resource::Handle::ResourceHandle*>*>
-  name: StdMap`2
-  namespace: ''
-  fields:
-  - type: StdMap<unsigned __int32, StdMap<unsigned __int32, Client::System::Resource::Handle::ResourceHandle*>*>*
-    name: Head
-    offset: 0
-  - type: unsigned __int64
-    name: Count
-    offset: 8
   virtual_functions: []
   member_functions: []
 - type: hkArray<hkaAnnotationTrack>
@@ -27809,15 +27944,6 @@ structs:
     name: TradecraftButton
     offset: 568
   - type: Component::GUI::AtkComponentRadioButton*
-    name: CarpenterButton
-    offset: 584
-  - type: Component::GUI::AtkComponentRadioButton*
-    name: BlacksmithButton
-    offset: 592
-  - type: Component::GUI::AtkComponentRadioButton*
-    name: ArmorerButton
-    offset: 600
-  - type: Component::GUI::AtkComponentRadioButton*
     name: GoldsmithButton
     offset: 608
   - type: Component::GUI::AtkComponentRadioButton*
@@ -27832,27 +27958,9 @@ structs:
   - type: Component::GUI::AtkComponentRadioButton*
     name: CulinarianButton
     offset: 640
-  - type: Component::GUI::AtkComponentRadioButton*
-    name: MinerButton
-    offset: 584
-  - type: Component::GUI::AtkComponentRadioButton*
-    name: BotanistButton
-    offset: 592
-  - type: Component::GUI::AtkComponentRadioButton*
-    name: FisherButton
-    offset: 600
   - type: Component::GUI::AtkResNode*
     name: AtkResNode288
     offset: 648
-  - type: Client::System::String::Utf8String
-    name: CarpenterString
-    offset: 656
-  - type: Client::System::String::Utf8String
-    name: BlacksmithString
-    offset: 760
-  - type: Client::System::String::Utf8String
-    name: ArmorerString
-    offset: 864
   - type: Client::System::String::Utf8String
     name: GoldsmithString
     offset: 968
@@ -27868,15 +27976,6 @@ structs:
   - type: Client::System::String::Utf8String
     name: CulinarianString
     offset: 1384
-  - type: Client::System::String::Utf8String
-    name: MinerString
-    offset: 656
-  - type: Client::System::String::Utf8String
-    name: BotanistString
-    offset: 760
-  - type: Client::System::String::Utf8String
-    name: FisherString
-    offset: 864
   - type: Component::GUI::AtkComponentButton*
     name: JournalButton
     offset: 1488
@@ -33665,9 +33764,6 @@ structs:
     name: HasLettersFromSupportDesk
     offset: 43
   - type: byte
-    name: NumPurchases
-    offset: 40
-  - type: byte
     name: Letters
     offset: 48
     size: 20800
@@ -34006,15 +34102,6 @@ structs:
     name: Arrangements
     offset: 74
     size: 366
-  - type: Client::UI::Agent::AozArrangementData
-    name: Act1Arrangement
-    offset: 74
-  - type: Client::UI::Agent::AozArrangementData
-    name: Act2Arrangement
-    offset: 196
-  - type: Client::UI::Agent::AozArrangementData
-    name: Act3Arrangement
-    offset: 318
   - type: Client::System::String::Utf8String
     name: NoviceString
     offset: 552
@@ -34028,15 +34115,6 @@ structs:
     name: WeeklyRewards
     offset: 864
     size: 24
-  - type: Client::UI::Agent::AozWeeklyReward
-    name: NoviceRewards
-    offset: 864
-  - type: Client::UI::Agent::AozWeeklyReward
-    name: ModerateRewards
-    offset: 872
-  - type: Client::UI::Agent::AozWeeklyReward
-    name: AdvancedRewards
-    offset: 880
   - type: float
     name: _UnkFloat
     offset: 892
@@ -34458,12 +34536,6 @@ structs:
     name: ContextMenuArray
     offset: 40
     size: 3312
-  - type: Client::UI::Agent::ContextMenu
-    name: MainContextMenu
-    offset: 40
-  - type: Client::UI::Agent::ContextMenu
-    name: SubContextMenu
-    offset: 1696
   - type: Client::UI::Agent::ContextMenu*
     name: CurrentContextMenu
     offset: 3352
@@ -36500,69 +36572,6 @@ structs:
     offset: 64
   virtual_functions: []
   member_functions: []
-- type: Client::UI::Agent::MycItemBoxData
-  name: MycItemBoxData
-  namespace: Client.UI.Agent
-  size: 5504
-  fields:
-  - type: byte
-    name: ItemCacheArray
-    offset: 8
-    size: 2716
-  - type: Client::UI::Agent::MycItemCategory
-    name: OffensiveCache
-    offset: 8
-  - type: Client::UI::Agent::MycItemCategory
-    name: DefensiveCache
-    offset: 396
-  - type: Client::UI::Agent::MycItemCategory
-    name: RestorativeCache
-    offset: 784
-  - type: Client::UI::Agent::MycItemCategory
-    name: BeneficialCache
-    offset: 1172
-  - type: Client::UI::Agent::MycItemCategory
-    name: TacticalCache
-    offset: 1560
-  - type: Client::UI::Agent::MycItemCategory
-    name: DetrimentalCache
-    offset: 1948
-  - type: Client::UI::Agent::MycItemCategory
-    name: ItemRelatedCache
-    offset: 2336
-  - type: byte
-    name: ItemHolsterArray
-    offset: 2724
-    size: 2716
-  - type: Client::UI::Agent::MycItemCategory
-    name: OffensiveHolster
-    offset: 2724
-  - type: Client::UI::Agent::MycItemCategory
-    name: DefensiveHolster
-    offset: 3112
-  - type: Client::UI::Agent::MycItemCategory
-    name: RestorativeHolster
-    offset: 3500
-  - type: Client::UI::Agent::MycItemCategory
-    name: BeneficialHolster
-    offset: 3888
-  - type: Client::UI::Agent::MycItemCategory
-    name: TacticalHolster
-    offset: 4276
-  - type: Client::UI::Agent::MycItemCategory
-    name: DetrimentalHolster
-    offset: 4664
-  - type: Client::UI::Agent::MycItemCategory
-    name: ItemRelatedHolster
-    offset: 5052
-  - type: __int32
-    name: HolsterCurrentTab
-    offset: 5456
-  - type: __int32
-    name: LastSelectedActionId
-    offset: 5464
-  virtual_functions: []
-  member_functions: []
 - type: Client::UI::Agent::AgentQuestJournal
   name: AgentQuestJournal
   namespace: Client.UI.Agent
@@ -36723,7 +36732,7 @@ structs:
     offset: 540
   - type: __int32
     name: UnlimitedTotal
-    offset: 540
+    offset: 544
   virtual_functions: []
   member_functions: []
 - type: Client::UI::Agent::AgentRequest
@@ -37241,62 +37250,6 @@ structs:
       name: delta
     - type: byte
       name: a3
-- type: Client::System::Resource::ResourceGraph
-  name: ResourceGraph
-  namespace: Client.System.Resource
-  size: 3200
-  fields:
-  - type: byte
-    name: ContainerArray
-    offset: 0
-    size: 3200
-  - type: Client::System::Resource::ResourceGraph::CategoryContainer
-    name: CommonContainer
-    offset: 0
-  - type: Client::System::Resource::ResourceGraph::CategoryContainer
-    name: BgCommonContainer
-    offset: 160
-  - type: Client::System::Resource::ResourceGraph::CategoryContainer
-    name: BgContainer
-    offset: 320
-  - type: Client::System::Resource::ResourceGraph::CategoryContainer
-    name: CutContainer
-    offset: 480
-  - type: Client::System::Resource::ResourceGraph::CategoryContainer
-    name: CharaContainer
-    offset: 640
-  - type: Client::System::Resource::ResourceGraph::CategoryContainer
-    name: ShaderContainer
-    offset: 800
-  - type: Client::System::Resource::ResourceGraph::CategoryContainer
-    name: UiContainer
-    offset: 960
-  - type: Client::System::Resource::ResourceGraph::CategoryContainer
-    name: SoundContainer
-    offset: 1120
-  - type: Client::System::Resource::ResourceGraph::CategoryContainer
-    name: VfxContainer
-    offset: 1280
-  - type: Client::System::Resource::ResourceGraph::CategoryContainer
-    name: UiScriptContainer
-    offset: 1440
-  - type: Client::System::Resource::ResourceGraph::CategoryContainer
-    name: ExdContainer
-    offset: 1600
-  - type: Client::System::Resource::ResourceGraph::CategoryContainer
-    name: GameScriptContainer
-    offset: 1760
-  - type: Client::System::Resource::ResourceGraph::CategoryContainer
-    name: MusicContainer
-    offset: 1920
-  - type: Client::System::Resource::ResourceGraph::CategoryContainer
-    name: SqpackTestContainer
-    offset: 2880
-  - type: Client::System::Resource::ResourceGraph::CategoryContainer
-    name: DebugContainer
-    offset: 3040
-  virtual_functions: []
-  member_functions: []
 - type: Client::System::Resource::Handle::ResourceHandle
   name: ResourceHandle
   namespace: Client.System.Resource.Handle
@@ -38212,6 +38165,97 @@ structs:
       name: count
     - type: byte
       name: isUnlimited
+- type: Client::Game::GameMain
+  name: GameMain
+  namespace: Client.Game
+  size: 16608
+  fields:
+  - type: unsigned __int32
+    name: ActiveFestivals
+    offset: 0
+    size: 16
+  - type: unsigned __int32
+    name: QueuedFestivals
+    offset: 64
+    size: 16
+  - type: Client::Game::JobGaugeManager
+    name: JobGaugeManager
+    offset: 2776
+  - type: unsigned __int32
+    name: TerritoryLoadState
+    offset: 16512
+  - type: unsigned __int32
+    name: NextTerritoryTypeId
+    offset: 16516
+  - type: unsigned __int32
+    name: CurrentTerritoryTypeId
+    offset: 16520
+  - type: unsigned __int32
+    name: CurrentTerritoryIntendedUseId
+    offset: 16524
+  - type: unsigned __int16
+    name: CurrentContentFinderConditionId
+    offset: 16532
+  - type: unsigned __int32
+    name: CurrentMapId
+    offset: 16544
+  - type: float
+    name: MilisecondCounter
+    offset: 16560
+  - type: unsigned __int32
+    name: RuntimeSeconds
+    offset: 16564
+  - type: byte
+    name: RuntimeSecondsChanged
+    offset: 16568
+  - type: float
+    name: Runtime
+    offset: 16572
+  - type: __int64
+    name: CurrentTerritoryTypeRow
+    offset: 16576
+  - type: __int64
+    name: CurrentTerritoryIntendedUseRow
+    offset: 16584
+  - type: __int64
+    name: NextTerritoryTypeRow
+    offset: 16592
+  - type: __int64
+    name: NextTerritoryIntendedUseRow
+    offset: 16600
+  virtual_functions: []
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 44 8B B3 ?? ?? ?? ?? 33 FF
+    return_type: byte
+    parameters:
+    - type: Client::Game::GameMain*
+      name: this
+  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 8B 44 24 60 48 8D 8D
+    return_type: void
+    parameters:
+    - type: Client::Game::GameMain*
+      name: this
+    - type: unsigned __int32
+      name: festival1
+    - type: unsigned __int32
+      name: festival2
+    - type: unsigned __int32
+      name: festival3
+    - type: unsigned __int32
+      name: festival4
+  - signature: E8 ?? ?? ?? ?? 80 63 50 FE
+    return_type: void
+    parameters:
+    - type: Client::Game::GameMain*
+      name: this
+    - type: unsigned __int32
+      name: festival1
+    - type: unsigned __int32
+      name: festival2
+    - type: unsigned __int32
+      name: festival3
+    - type: unsigned __int32
+      name: festival4
 - type: Client::Game::GcArmyData
   name: GcArmyData
   namespace: Client.Game
@@ -38251,79 +38295,6 @@ structs:
   - type: byte
     name: MemberCount
     offset: 1136
-  virtual_functions: []
-  member_functions: []
-- type: Client::Game::JobGaugeManager
-  name: JobGaugeManager
-  namespace: Client.Game
-  size: 96
-  fields:
-  - type: Client::Game::Gauge::JobGauge*
-    name: CurrentGauge
-    offset: 0
-  - type: Client::Game::Gauge::JobGauge
-    name: EmptyGauge
-    offset: 8
-  - type: Client::Game::Gauge::WhiteMageGauge
-    name: WhiteMage
-    offset: 8
-  - type: Client::Game::Gauge::ScholarGauge
-    name: Scholar
-    offset: 8
-  - type: Client::Game::Gauge::AstrologianGauge
-    name: Astrologian
-    offset: 8
-  - type: Client::Game::Gauge::SageGauge
-    name: Sage
-    offset: 8
-  - type: Client::Game::Gauge::BardGauge
-    name: Bard
-    offset: 8
-  - type: Client::Game::Gauge::MachinistGauge
-    name: Machinist
-    offset: 8
-  - type: Client::Game::Gauge::DancerGauge
-    name: Dancer
-    offset: 8
-  - type: Client::Game::Gauge::BlackMageGauge
-    name: BlackMage
-    offset: 8
-  - type: Client::Game::Gauge::SummonerGauge
-    name: Summoner
-    offset: 8
-  - type: Client::Game::Gauge::RedMageGauge
-    name: RedMage
-    offset: 8
-  - type: Client::Game::Gauge::MonkGauge
-    name: Monk
-    offset: 8
-  - type: Client::Game::Gauge::DragoonGauge
-    name: Dragoon
-    offset: 8
-  - type: Client::Game::Gauge::NinjaGauge
-    name: Ninja
-    offset: 8
-  - type: Client::Game::Gauge::SamuraiGauge
-    name: Samurai
-    offset: 8
-  - type: Client::Game::Gauge::ReaperGauge
-    name: Reaper
-    offset: 8
-  - type: Client::Game::Gauge::DarkKnightGauge
-    name: DarkKnight
-    offset: 8
-  - type: Client::Game::Gauge::PaladinGauge
-    name: Paladin
-    offset: 8
-  - type: Client::Game::Gauge::WarriorGauge
-    name: Warrior
-    offset: 8
-  - type: Client::Game::Gauge::GunbreakerGauge
-    name: Gunbreaker
-    offset: 8
-  - type: byte
-    name: ClassJobID
-    offset: 88
   virtual_functions: []
   member_functions: []
 - type: Client::Game::SavedAppearanceSlot
@@ -38501,7 +38472,7 @@ structs:
     name: BuddyHealerLevel
     offset: 596
   - type: byte
-    name: ExtraInspectData
+    name: ContentKeyValueData
     offset: 603
     size: 24
   virtual_functions: []
@@ -40734,19 +40705,19 @@ structs:
     offset: 16
   - type: hkaAnimation*
     name: Animation
-    offset: 16
-  - type: hkArray<__int16>
-    name: TransformTrackToBoneIndices
     offset: 24
   - type: hkArray<__int16>
+    name: TransformTrackToBoneIndices
+    offset: 32
+  - type: hkArray<__int16>
     name: FloatTrackToFloatSlotIndices
-    offset: 40
+    offset: 48
   - type: hkArray<__int16>
     name: PartitionIndices
-    offset: 56
+    offset: 64
   - type: hkEnum<hkaAnimationBinding::BlendHintEnum, __int8>
     name: BlendHint
-    offset: 72
+    offset: 80
   virtual_functions: []
   member_functions: []
 - type: hkaAnnotationTrack
@@ -40758,7 +40729,7 @@ structs:
     offset: 0
   - type: hkArray<hkaAnnotationTrack::Annotation>
     name: Annotations
-    offset: 0
+    offset: 8
   virtual_functions: []
   member_functions: []
 - type: hkaMeshBinding
@@ -40776,16 +40747,16 @@ structs:
     offset: 24
   - type: hkStringPtr
     name: Name
-    offset: 24
+    offset: 32
   - type: hkaSkeleton*
     name: Skeleton
-    offset: 24
+    offset: 40
   - type: hkArray<hkaMeshBinding::Mapping>
     name: Mappings
-    offset: 32
+    offset: 48
   - type: hkArray<hkTransformf>
     name: BoneFromSkinMeshTransforms
-    offset: 48
+    offset: 64
   virtual_functions: []
   member_functions: []
 - type: hkaAnimationContainer
@@ -40880,19 +40851,19 @@ structs:
     offset: 16
   - type: __int64
     name: Padding
-    offset: 16
+    offset: 24
   - type: hkArray<hkaDefaultAnimationControl*>
     name: AnimationControls
-    offset: 16
+    offset: 32
   - type: hkaSkeleton*
     name: Skeleton
-    offset: 32
+    offset: 48
   - type: float
     name: ReferencePoseWeightThreshold
-    offset: 40
+    offset: 56
   - type: __int32
     name: NumQuantizedAnimations
-    offset: 44
+    offset: 60
   virtual_functions: []
   member_functions:
   - signature: E8 ?? ?? ?? ?? EB ?? 48 8B C3 48 89 07 48 83 C7
@@ -41040,7 +41011,31 @@ structs:
     offset: 0
   - type: byte
     name: LockTranslation
+    offset: 8
+  virtual_functions: []
+  member_functions: []
+- type: hkaBoneAttachment
+  name: hkaBoneAttachment
+  namespace: ''
+  fields:
+  - type: hkReferencedObject
+    name: hkReferencedObject
     offset: 0
+  - type: hkStringPtr
+    name: OriginalSkeletonName
+    offset: 16
+  - type: hkMatrix4f
+    name: BoneFromAttachment
+    offset: 24
+  - type: hkRefVariant
+    name: Attachment
+    offset: 88
+  - type: hkStringPtr
+    name: Name
+    offset: 96
+  - type: __int16
+    name: BoneIndex
+    offset: 104
   virtual_functions: []
   member_functions: []
 - type: hkaPose
@@ -41221,153 +41216,25 @@ structs:
     offset: 16
   - type: hkArray<__int16>
     name: ParentIndices
-    offset: 16
+    offset: 24
   - type: hkArray<hkaBone>
     name: Bones
-    offset: 32
+    offset: 40
   - type: hkArray<hkQsTransformf>
     name: ReferencePose
-    offset: 48
+    offset: 56
   - type: hkArray<float>
     name: ReferenceFloats
-    offset: 64
+    offset: 72
   - type: hkArray<hkStringPtr>
     name: FloatSlots
-    offset: 80
+    offset: 88
   - type: hkArray<hkaSkeleton::LocalFrameOnBone>
     name: LocalFrames
-    offset: 96
+    offset: 104
   - type: hkArray<hkaSkeleton::Partition>
     name: Partitions
-    offset: 112
-  virtual_functions: []
-  member_functions: []
-- type: hkMatrix3f
-  name: hkMatrix3f
-  namespace: ''
-  size: 0
-  fields:
-  - type: float
-    name: M00
-    offset: 0
-  - type: float
-    name: M10
-    offset: 4
-  - type: float
-    name: M20
-    offset: 8
-  - type: float
-    name: pad
-    offset: 12
-  - type: float
-    name: M01
-    offset: 16
-  - type: float
-    name: M11
-    offset: 20
-  - type: float
-    name: M21
-    offset: 24
-  - type: float
-    name: pad2
-    offset: 28
-  - type: float
-    name: M02
-    offset: 32
-  - type: float
-    name: M12
-    offset: 36
-  - type: float
-    name: M22
-    offset: 40
-  - type: float
-    name: pad3
-    offset: 44
-  - type: hkVector4f
-    name: Column0
-    offset: 0
-  - type: hkVector4f
-    name: Column1
-    offset: 16
-  - type: hkVector4f
-    name: Column2
-    offset: 32
-  virtual_functions: []
-  member_functions: []
-- type: hkMatrix4f
-  name: hkMatrix4f
-  namespace: ''
-  size: 0
-  fields:
-  - type: float
-    name: M00
-    offset: 0
-  - type: float
-    name: M10
-    offset: 4
-  - type: float
-    name: M20
-    offset: 8
-  - type: float
-    name: M30
-    offset: 12
-  - type: float
-    name: M01
-    offset: 16
-  - type: float
-    name: M11
-    offset: 20
-  - type: float
-    name: M21
-    offset: 24
-  - type: float
-    name: M31
-    offset: 28
-  - type: float
-    name: M02
-    offset: 32
-  - type: float
-    name: M12
-    offset: 36
-  - type: float
-    name: M22
-    offset: 40
-  - type: float
-    name: M32
-    offset: 44
-  - type: float
-    name: M03
-    offset: 48
-  - type: float
-    name: M13
-    offset: 52
-  - type: float
-    name: M23
-    offset: 56
-  - type: float
-    name: M33
-    offset: 60
-  - type: hkVector4f
-    name: Column0
-    offset: 0
-  - type: hkVector4f
-    name: Column1
-    offset: 16
-  - type: hkVector4f
-    name: Column2
-    offset: 32
-  - type: hkVector4f
-    name: Column3
-    offset: 48
-  virtual_functions: []
-  member_functions: []
-- type: hkRotationf
-  name: hkRotationf
-  namespace: ''
-  fields:
-  - type: hkMatrix3f
-    name: hkMatrix3f
-    offset: 0
+    offset: 120
   virtual_functions: []
   member_functions: []
 - type: hkTransformf
@@ -41379,7 +41246,7 @@ structs:
     offset: 0
   - type: hkVector4f
     name: Translation
-    offset: 0
+    offset: 48
   virtual_functions: []
   member_functions: []
 - type: hkQsTransformf
@@ -41391,10 +41258,10 @@ structs:
     offset: 0
   - type: hkQuaternionf
     name: Rotation
-    offset: 0
+    offset: 16
   - type: hkVector4f
     name: Scale
-    offset: 0
+    offset: 32
   virtual_functions: []
   member_functions:
   - signature: E8 ?? ?? ?? ?? 0F 28 5D F0 44 0F 28 55
@@ -41549,7 +41416,7 @@ structs:
     offset: 8
   - type: hkQsTransformf
     name: EndAFromBTransform
-    offset: 8
+    offset: 56
   virtual_functions: []
   member_functions: []
 - type: hkaDefaultAnimationControl::hkaDefaultAnimationControlMapperData
@@ -41595,28 +41462,28 @@ structs:
     size: 336
   - type: __int32
     name: NumChunks
-    offset: 16
+    offset: 352
   - type: hkFlags<hkaSampleBlendJob::SingleAnimation::SampleFlags, __int32>
     name: Flags
-    offset: 20
+    offset: 356
   - type: __int32
     name: NumBones
-    offset: 24
+    offset: 360
   - type: __int32
     name: NumFloats
-    offset: 28
+    offset: 364
   - type: hkQsTransformf*
     name: BonesOut
-    offset: 32
+    offset: 368
   - type: float*
     name: FloatsOut
-    offset: 40
+    offset: 376
   - type: hkaSkeleton::Partition*
     name: PartitionArray
-    offset: 48
+    offset: 384
   - type: __int16
     name: NumPartitions
-    offset: 56
+    offset: 392
   virtual_functions: []
   member_functions: []
 - type: hkSerializeUtil::ErrorDetails
@@ -42935,10 +42802,10 @@ structs:
     offset: 0
   - type: Component::GUI::AtkComponentBase*
     name: CycleUpArrow
-    offset: 672
+    offset: 664
   - type: Component::GUI::AtkComponentBase*
     name: CycleDownArrow
-    offset: 680
+    offset: 672
   - type: Component::GUI::AtkComponentCheckBox*
     name: PadlockCheckbox
     offset: 680
@@ -44864,9 +44731,6 @@ structs:
   - type: Client::Graphics::Scene::CharacterBase
     name: CharacterBase
     offset: 0
-  - type: __int64
-    name: _slotDecalBase
-    offset: 2344
   - type: Client::System::Resource::Handle::TextureResourceHandle*
     name: HeadDecal
     offset: 2344
@@ -44956,9 +44820,6 @@ structs:
   - type: unsigned __int16
     name: FurId
     offset: 2368
-  - type: __int64
-    name: _slotDecalBase
-    offset: 2432
   - type: Client::System::Resource::Handle::TextureResourceHandle*
     name: HeadDecal
     offset: 2432
@@ -45290,97 +45151,6 @@ structs:
     offset: 512
   virtual_functions: []
   member_functions: []
-- type: Client::Game::GameMain
-  name: GameMain
-  namespace: Client.Game
-  size: 16608
-  fields:
-  - type: unsigned __int32
-    name: ActiveFestivals
-    offset: 0
-    size: 16
-  - type: unsigned __int32
-    name: QueuedFestivals
-    offset: 64
-    size: 16
-  - type: Client::Game::JobGaugeManager
-    name: JobGaugeManager
-    offset: 2776
-  - type: unsigned __int32
-    name: TerritoryLoadState
-    offset: 16512
-  - type: unsigned __int32
-    name: NextTerritoryTypeId
-    offset: 16516
-  - type: unsigned __int32
-    name: CurrentTerritoryTypeId
-    offset: 16520
-  - type: unsigned __int32
-    name: CurrentTerritoryIntendedUseId
-    offset: 16524
-  - type: unsigned __int16
-    name: CurrentContentFinderConditionId
-    offset: 16532
-  - type: unsigned __int32
-    name: CurrentMapId
-    offset: 16544
-  - type: float
-    name: MilisecondCounter
-    offset: 16560
-  - type: unsigned __int32
-    name: RuntimeSeconds
-    offset: 16564
-  - type: byte
-    name: RuntimeSecondsChanged
-    offset: 16568
-  - type: float
-    name: Runtime
-    offset: 16572
-  - type: __int64
-    name: CurrentTerritoryTypeRow
-    offset: 16576
-  - type: __int64
-    name: CurrentTerritoryIntendedUseRow
-    offset: 16584
-  - type: __int64
-    name: NextTerritoryTypeRow
-    offset: 16592
-  - type: __int64
-    name: NextTerritoryIntendedUseRow
-    offset: 16600
-  virtual_functions: []
-  member_functions:
-  - signature: E8 ?? ?? ?? ?? 44 8B B3 ?? ?? ?? ?? 33 FF
-    return_type: byte
-    parameters:
-    - type: Client::Game::GameMain*
-      name: this
-  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 8B 44 24 60 48 8D 8D
-    return_type: void
-    parameters:
-    - type: Client::Game::GameMain*
-      name: this
-    - type: unsigned __int32
-      name: festival1
-    - type: unsigned __int32
-      name: festival2
-    - type: unsigned __int32
-      name: festival3
-    - type: unsigned __int32
-      name: festival4
-  - signature: E8 ?? ?? ?? ?? 80 63 50 FE
-    return_type: void
-    parameters:
-    - type: Client::Game::GameMain*
-      name: this
-    - type: unsigned __int32
-      name: festival1
-    - type: unsigned __int32
-      name: festival2
-    - type: unsigned __int32
-      name: festival3
-    - type: unsigned __int32
-      name: festival4
 - type: Client::Game::Housing::HousingOutdoorTerritory
   name: HousingOutdoorTerritory
   namespace: Client.Game.Housing
@@ -45576,9 +45346,6 @@ structs:
   - type: unsigned __int16
     name: HomeWorld
     offset: 7090
-  - type: byte
-    name: EventState
-    offset: 7094
   - type: Client::Game::Character::Character::CharacterModes
     name: Mode
     offset: 7094
@@ -46093,10 +45860,10 @@ structs:
     offset: 112
   - type: byte
     name: KeepUnmappedLocal
-    offset: 112
+    offset: 160
   - type: hkEnum<hkaSkeletonMapperData::MappingType, __int32>
     name: Type
-    offset: 113
+    offset: 161
   virtual_functions: []
   member_functions: []
 - type: hkaDefaultAnimationControl
@@ -46108,52 +45875,52 @@ structs:
     offset: 0
   - type: float
     name: MasterWeight
-    offset: 0
+    offset: 88
   - type: float
     name: PlaybackSpeed
-    offset: 4
+    offset: 92
   - type: unsigned __int32
     name: OverflowCount
-    offset: 8
+    offset: 96
   - type: unsigned __int32
     name: UnderflowCount
-    offset: 12
+    offset: 100
   - type: __int32
     name: MaxCycles
-    offset: 16
+    offset: 104
   - type: unsigned __int32
     name: pad
-    offset: 20
+    offset: 108
   - type: hkVector4f
     name: EaseInCurve
-    offset: 24
+    offset: 112
   - type: hkVector4f
     name: EaseOutCurve
-    offset: 24
+    offset: 128
   - type: float
     name: EaseInvDuration
-    offset: 24
+    offset: 144
   - type: float
     name: EaseT
-    offset: 28
+    offset: 148
   - type: hkaDefaultAnimationControl::EaseStatusEnum
     name: EaseStatus
-    offset: 32
+    offset: 152
   - type: float
     name: CropStartAmountLocalTime
-    offset: 36
+    offset: 156
   - type: float
     name: CropEndAmountLocalTime
-    offset: 40
+    offset: 160
   - type: unsigned __int32
     name: pad2
-    offset: 44
+    offset: 164
   - type: hkArray<hkaDefaultAnimationControl::hkaDefaultAnimationControlListener>
     name: DefaultListeners
-    offset: 48
+    offset: 168
   - type: hkaDefaultAnimationControl::hkaDefaultAnimationControlMapperData*
     name: Mapper
-    offset: 64
+    offset: 184
   virtual_functions: []
   member_functions:
   - signature: 48 89 5C 24 ?? 57 48 83 EC 20 48 8B DA 48 8B F9 48 8B 52 38
@@ -46172,85 +45939,61 @@ structs:
     offset: 0
   - type: hkaAnimatedSkeleton*
     name: Skeleton
-    offset: 0
+    offset: 8
   - type: hkQsTransformf*
     name: ReferenceBones
-    offset: 8
+    offset: 16
   - type: float*
     name: ReferenceFloats
-    offset: 16
+    offset: 24
   - type: hkaBone*
     name: Bones
-    offset: 24
+    offset: 32
   - type: __int16*
     name: ParentIndices
-    offset: 32
+    offset: 40
   - type: hkaSampleBlendJob::SingleAnimation*
     name: Animations
-    offset: 40
+    offset: 48
   - type: hkQsTransformf*
     name: BonesOut
-    offset: 48
+    offset: 56
   - type: float*
     name: FloatsOut
-    offset: 56
+    offset: 64
   - type: hkaJobDoneNotifier
     name: JobDoneNotifier
-    offset: 64
+    offset: 72
   - type: __int16
     name: NumBones
-    offset: 64
+    offset: 88
   - type: __int16
     name: NumSkeletonBones
-    offset: 66
+    offset: 90
   - type: __int32
     name: NumFloats
-    offset: 68
+    offset: 92
   - type: __int32
     name: ChunkBufferSize
-    offset: 72
+    offset: 96
   - type: float
     name: ReferencePoseWeightThreshold
-    offset: 76
+    offset: 100
   - type: unsigned __int16
     name: NumAnimationsAllocated
-    offset: 80
+    offset: 104
   - type: unsigned __int16
     name: NumAnims
-    offset: 82
+    offset: 106
   - type: byte
     name: ConvertToModel
-    offset: 84
+    offset: 108
   - type: byte
     name: SampleOnly
-    offset: 85
+    offset: 109
   - type: byte
     name: UseSlerpForQuantized
-    offset: 86
-  virtual_functions: []
-  member_functions: []
-- type: hkaBoneAttachment
-  name: hkaBoneAttachment
-  namespace: ''
-  fields:
-  - type: hkReferencedObject
-    name: hkReferencedObject
-    offset: 0
-  - type: hkStringPtr
-    name: OriginalSkeletonName
-    offset: 16
-  - type: hkMatrix4f
-    name: BoneFromAttachment
-    offset: 16
-  - type: hkRefVariant
-    name: Attachment
-    offset: 16
-  - type: hkStringPtr
-    name: Name
-    offset: 16
-  - type: __int16
-    name: BoneIndex
-    offset: 16
+    offset: 110
   virtual_functions: []
   member_functions: []
 - type: Component::GUI::AtkTimelineKeyFrame
@@ -47778,6 +47521,65 @@ structs:
     offset: 3191
   virtual_functions: []
   member_functions: []
+- type: Client::Game::InstanceContent::PublicContentEureka
+  name: PublicContentEureka
+  namespace: Client.Game.InstanceContent
+  size: 4808
+  fields:
+  - type: Client::Game::InstanceContent::PublicContentDirector
+    name: PublicContentDirector
+    offset: 0
+  - type: unsigned __int16
+    name: Unk1090
+    offset: 4240
+  - type: unsigned __int16
+    name: Unk1092
+    offset: 4242
+  - type: byte
+    name: MaxElementalLevel
+    offset: 4244
+  - type: unsigned __int32
+    name: CurrentExperience
+    offset: 4248
+  - type: unsigned __int32
+    name: NeededExperience
+    offset: 4252
+  - type: unsigned __int16
+    name: MagiaAetherCharge
+    offset: 4256
+  - type: byte
+    name: Fire
+    offset: 4258
+  - type: byte
+    name: Ice
+    offset: 4259
+  - type: byte
+    name: Wind
+    offset: 4260
+  - type: byte
+    name: Earth
+    offset: 4261
+  - type: byte
+    name: Lightning
+    offset: 4262
+  - type: byte
+    name: Water
+    offset: 4263
+  - type: byte
+    name: Magicite
+    offset: 4264
+  - type: byte
+    name: MagiaAether
+    offset: 4265
+  - type: byte
+    name: PublicContentTextDataStrings
+    offset: 4272
+    size: 416
+  - type: Client::System::String::Utf8String
+    name: Unk1250
+    offset: 4688
+  virtual_functions: []
+  member_functions: []
 - type: Client::Game::GoldSaucer::GFateDirector
   name: GFateDirector
   namespace: Client.Game.GoldSaucer
@@ -47897,5 +47699,24 @@ structs:
   - type: byte
     name: HoardCount
     offset: 7634
+  virtual_functions: []
+  member_functions: []
+- type: Client::Game::InstanceContent::PublicContentBozja
+  name: PublicContentBozja
+  namespace: Client.Game.InstanceContent
+  size: 11448
+  fields:
+  - type: Client::Game::InstanceContent::PublicContentDirector
+    name: PublicContentDirector
+    offset: 0
+  - type: Client::Game::InstanceContent::DynamicEventContainer
+    name: DynamicEventContainer
+    offset: 4248
+  - type: unsigned __int32
+    name: CurrentExperience
+    offset: 11200
+  - type: unsigned __int32
+    name: NeededExperience
+    offset: 11204
   virtual_functions: []
   member_functions: []

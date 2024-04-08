@@ -6,7 +6,7 @@ public unsafe partial struct LayoutManager {
     [FieldOffset(0x20)] public uint TerritoryTypeId;
     [FieldOffset(0x38)] public uint FestivalStatus; // SetActiveFestivals will not allow a change when not 5 or 0
     [FieldOffset(0x40)] public fixed uint ActiveFestivals[4];
-    [FieldOffset(0x80)] public void* HousingController;
+    [FieldOffset(0x80), Obsolete("Use OutdoorAreaData")] public void* HousingController;
     [FieldOffset(0x80)] public OutdoorAreaLayoutData* OutdoorAreaData;
     [FieldOffset(0x90)] public IndoorAreaLayoutData* IndoorAreaData;
 

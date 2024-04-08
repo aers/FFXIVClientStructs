@@ -11,7 +11,7 @@ public unsafe partial struct AgentReconstructionBox {
     [FieldOffset(0x50)] public fixed byte ItemDonationArray[0x18 * 10];
 
     [FieldOffset(0x21C)] public int LimitedTotal; // Actual Donation amount if it exceeds weekly budget
-    [FieldOffset(0x21C)] public int UnlimitedTotal; // Total attempted donation amount, can exceed weekly budget
+    [FieldOffset(0x220)] public int UnlimitedTotal; // Total attempted donation amount, can exceed weekly budget
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x18)]

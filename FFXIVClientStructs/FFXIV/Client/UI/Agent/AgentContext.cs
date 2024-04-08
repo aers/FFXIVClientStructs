@@ -11,9 +11,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 public unsafe partial struct AgentContext {
     [FieldOffset(0x00)] public AgentInterface AgentInterface;
 
+    [FixedSizeArray<ContextMenu>(2)]
     [FieldOffset(0x28)] public fixed byte ContextMenuArray[0x678 * 2];
-    [FieldOffset(0x28)] public ContextMenu MainContextMenu;
-    [FieldOffset(0x6A0)] public ContextMenu SubContextMenu;
+    [FieldOffset(0x28), Obsolete("Use ContextMenuArraySpan[0]")] public ContextMenu MainContextMenu;
+    [FieldOffset(0x6A0), Obsolete("Use ContextMenuArraySpan[0]")] public ContextMenu SubContextMenu;
     [FieldOffset(0xD18)] public ContextMenu* CurrentContextMenu;
     [FieldOffset(0xD20)] public Utf8String ContextMenuTitle;
     [FieldOffset(0xD88)] public Point Position;

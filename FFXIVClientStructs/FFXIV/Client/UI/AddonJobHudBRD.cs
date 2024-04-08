@@ -57,7 +57,7 @@ public unsafe partial struct AddonJobHudBRD0 {
         [FieldOffset(0xC8)] public AtkResNode* SongsPlayed;
 
         [FixedSizeArray<Pointer<AtkComponentBase>>(3)]
-        [FieldOffset(0x98)] public fixed byte SongIcon[3 * 0x08];
+        [FieldOffset(0x98), Obsolete("Use WandererRepertoireArrow")] public fixed byte SongIcon[3 * 0x08];
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0xE0)]
@@ -87,7 +87,7 @@ public unsafe partial struct AddonJobHudBRD0 {
         [FixedSizeArray<Pointer<AtkComponentBase>>(3)]
         [FieldOffset(0xB0)] public fixed byte SongIcon[3 * 0x08];
 
-        [FieldOffset(0x60)] public byte RadiantFinaleStatus;
+        [FieldOffset(0x60), Obsolete("Uses wrong offset same as SoulVoiceTickmark")] public byte RadiantFinaleStatus;
     }
 
     [FieldOffset(0x260)] public SongGaugeData DataPrevious;
