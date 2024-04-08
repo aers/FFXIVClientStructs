@@ -11797,6 +11797,12 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x140DA4450: ctor
+  Client::UI::AddonPartyMemberList:
+    vtbls:
+      - ea: 0x141A96340
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140DA7EC0: ctor
   Client::UI::AddonRequest:
     vtbls:
       - ea: 0x141A96EB0
