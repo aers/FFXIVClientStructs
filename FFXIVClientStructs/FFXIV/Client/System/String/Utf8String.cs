@@ -24,6 +24,21 @@ public unsafe partial struct Utf8String : ICreatable, IDisposable {
 
     public Utf8String() => Ctor();
 
+    public Utf8String(byte* str) {
+        Ctor();
+        SetString(str);
+    }
+
+    public Utf8String(string str) {
+        Ctor();
+        SetString(str);
+    }
+
+    public Utf8String(ReadOnlySpan<byte> str) {
+        Ctor();
+        SetString(str);
+    }
+    
     public readonly ReadOnlySpan<byte> AsSpan() => new(StringPtr, Length);
 
     public readonly ReadOnlySpan<byte> Slice(int start) => AsSpan().Slice(start);
