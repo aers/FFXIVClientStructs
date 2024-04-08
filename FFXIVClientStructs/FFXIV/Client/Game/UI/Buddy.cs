@@ -64,10 +64,10 @@ public unsafe partial struct Buddy {
 public unsafe partial struct CompanionInfo {
     [FieldOffset(0)] public Buddy.BuddyMember* Companion;
     [FieldOffset(0x8)] public float TimeLeft;
-    [FieldOffset(0xC)] private fixed byte BuddyEquipUnlockBitmask[96 >> 3]; // number of BuddyEquip rows >> 3
-    [FieldOffset(0x18)] private byte BardingHead;
-    [FieldOffset(0x19)] private byte BardingChest;
-    [FieldOffset(0x1A)] private byte BardingFeet;
+    [FieldOffset(0xC)] public fixed byte BuddyEquipUnlockBitmask[96 >> 3]; // number of BuddyEquip rows >> 3
+    [FieldOffset(0x18)] public byte BardingHead;
+    [FieldOffset(0x19)] public byte BardingChest;
+    [FieldOffset(0x1A)] public byte BardingFeet;
     [FieldOffset(0x1B), FixedString("Name")] public fixed byte NameBytes[21];
     [FieldOffset(0x30)] public uint CurrentXP;
     [FieldOffset(0x34)] public byte Rank;
