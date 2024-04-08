@@ -13,7 +13,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 public unsafe partial struct Demihuman {
     [FieldOffset(0x0)] public CharacterBase CharacterBase;
 
-    [FieldOffset(0x928), Obsolete("Use HeadDecal")] private nint _slotDecalBase;
+    [FieldOffset(0x928), CExportIgnore] private nint _slotDecalBase;
     [FieldOffset(0x928)] public TextureResourceHandle* HeadDecal;
     [FieldOffset(0x930)] public TextureResourceHandle* TopDecal;
     [FieldOffset(0x938)] public TextureResourceHandle* ArmsDecal;
