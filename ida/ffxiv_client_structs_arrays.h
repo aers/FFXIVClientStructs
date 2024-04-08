@@ -167,6 +167,9 @@ struct Client::Game::Housing::HousingWorkshopSubmersibleSubData;
 struct Client::Game::Housing::HousingWorkshopTerritory;
 struct Client::Game::InstanceContent::ContentDirector;
 struct Client::Game::InstanceContent::ContentDirectorVTable;
+struct Client::Game::InstanceContent::DynamicEvent;
+struct Client::Game::UI::MapMarkerData;
+struct Client::Game::InstanceContent::DynamicEventContainer;
 struct Client::Game::InstanceContent::InstanceContentDeepDungeon;
 struct Client::Game::InstanceContent::InstanceContentDeepDungeonVTable;
 struct Client::Game::InstanceContent::InstanceContentDirector;
@@ -179,8 +182,12 @@ struct Client::Game::InstanceContent::InstanceContentOceanFishingVTable;
 struct Client::Game::InstanceContent::InstanceContentOceanFishing::FishDataStruct;
 struct Client::Game::InstanceContent::InstanceContentOceanFishing::IndividualResultStruct;
 struct Client::Game::InstanceContent::InstanceContentOceanFishing::AllResultStruct;
+struct Client::Game::InstanceContent::PublicContentBozja;
+struct Client::Game::InstanceContent::PublicContentBozjaVTable;
 struct Client::Game::InstanceContent::PublicContentDirector;
 struct Client::Game::InstanceContent::PublicContentDirectorVTable;
+struct Client::Game::InstanceContent::PublicContentEureka;
+struct Client::Game::InstanceContent::PublicContentEurekaVTable;
 struct Client::Game::InventoryContainer;
 struct Client::Game::InventoryItem;
 struct Client::Game::InventoryManager;
@@ -237,11 +244,23 @@ struct Client::Game::UI::PetInfo;
 struct Client::Game::UI::DutyHelperInfo;
 struct Client::Game::UI::Cabinet;
 struct Client::Game::UI::Chain;
+struct Client::Game::UI::CharaCard;
+struct Client::Game::UI::CollectablesShop;
 struct Client::Game::UI::ContentsFinder;
 struct Client::Game::UI::ContentsFinderQueueInfo;
 struct Client::Game::UI::ContentsNote;
+struct Client::Game::UI::DailyQuestSupply;
+struct Component::GUI::AtkEventInterface;
+struct Client::Game::UI::Emj;
+struct Client::Game::UI::EurekaElementalEdit;
 struct Client::Game::UI::ExtraInspectDataEntry;
 struct Client::Game::UI::FieldMarker;
+struct Client::Game::UI::FishingNote;
+struct Client::Game::UI::FishRecord;
+struct Client::Game::UI::GatheringNote;
+struct Client::Game::UI::GCSupply;
+struct Client::Game::UI::GoldSaucerYell;
+struct Client::Game::UI::GuildOrderReward;
 struct Client::Game::UI::Hate;
 struct Client::Game::UI::HateInfo;
 struct Client::Game::UI::Hater;
@@ -259,9 +278,11 @@ struct Client::UI::Misc::SavedHotBar;
 struct Client::UI::Misc::SavedHotBarSlot;
 struct Client::UI::Misc::DutyActionSlot;
 struct Client::Game::UI::Inspect;
+struct Client::Game::UI::Journal;
 struct Client::Game::UI::LimitBreakController;
 struct Client::Game::UI::Loot;
 struct Client::Game::UI::LootItem;
+struct Client::Game::UI::LovmRanking;
 struct Client::Game::UI::Map;
 struct Client::Game::UI::MarkerInfo;
 struct StdVectorClientGameUIMapMarkerData;
@@ -269,30 +290,38 @@ struct StdListClientGameUIMarkerInfo;
 struct StdList::NodeClientGameUIMarkerInfo;
 struct Client::Game::UI::MapMarkerContainer;
 struct Client::Game::UI::MapMarkerContainer::LinkedList;
-struct Client::Game::UI::MapMarkerData;
 struct Client::Game::UI::MapMarkerNode;
 struct Client::Game::UI::MarkingController;
 struct Client::Game::UI::MobHunt;
 struct Client::Game::UI::MobHunt::KillCounts;
+struct Client::Game::UI::NpcTrade;
 struct Client::Game::UI::PlayerState;
 struct Client::Game::UI::PvPProfile;
+struct Client::Game::UI::QTE;
+struct Client::Game::UI::QuestTodoList;
+struct Client::Game::UI::QuestUI;
 struct Client::Game::UI::RecipeNote;
 struct Client::Game::UI::RecipeNote::RecipeCrystal;
 struct Client::Game::UI::RecipeNote::RecipeData;
 struct Client::Game::UI::RecipeNote::RecipeEntry;
 struct Client::Game::UI::RecipeNote::RecipeIngredient;
 struct Client::Game::UI::RelicNote;
+struct Client::Game::UI::RelicSphereUpgrade;
 struct Client::Game::UI::Revive;
-struct Component::GUI::AtkEventInterface;
+struct Client::Game::UI::RidePillon;
 struct Client::Game::UI::RouletteController;
 struct Client::Game::UI::SelectUseTicketInvoker;
 struct Client::Game::UI::Telepo;
 struct StdVectorClientGameUITeleportInfo;
 struct Client::Game::UI::TeleportInfo;
 struct Client::Game::UI::TerritoryInfo;
+struct Client::Game::UI::TradeMultiple;
+struct Client::Game::UI::TripleTriad;
 struct Client::Game::UI::UIState;
 struct Client::Game::UI::UIStateVTable;
 struct Client::Game::UI::WeaponState;
+struct Client::Game::UI::Wedding;
+struct Client::Game::UI::WeatherForecast;
 struct Client::Graphics::Animation::AnimationResourceHandle;
 struct Client::Graphics::ByteColor;
 struct Client::Graphics::Environment::EnvManager;
@@ -2058,6 +2087,14 @@ enum Client::Game::Housing::SubmarineRating: byte
     C = 4
 };
 
+enum Client::Game::InstanceContent::DynamicEventState: byte
+{
+    Inactive = 0,
+    Register = 1,
+    Warmup = 2,
+    Battle = 3
+};
+
 enum Client::Game::InstanceContent::InstanceContentOceanFishing::OceanFishingStatus: unsigned __int32
 {
     WaitingForPlayers = 0,
@@ -2982,10 +3019,12 @@ enum Client::UI::Agent::AgentId: unsigned __int32
     IKDResult = 373,
     IKDMission = 374,
     InclusionShop = 375,
+    CollectablesShop = 376,
     MycWarResultNotebook = 377,
     MycInfo = 378,
     MycItemBox = 379,
     MycItemBag = 380,
+    MycDuelRequest = 381,
     MycBattleAreaInfo = 382,
     OrnamentNoteBook = 384,
     TourismMenu = 386,
@@ -5517,7 +5556,7 @@ __unaligned struct Client::Game::Object::GameObject /* Size=0x1A0 */
     /*       */ byte _gap_0x8A[0x2];
     /* 0x08C */ byte ObjectKind;
     /* 0x08D */ byte SubKind;
-    /* 0x08E */ byte Gender;
+    /* 0x08E */ byte Sex;
     /*       */ byte _gap_0x8F;
     /* 0x090 */ byte YalmDistanceFromPlayerX;
     /* 0x091 */ byte TargetStatus;
@@ -5825,8 +5864,24 @@ __unaligned struct Client::Game::Character::CustomizeData /* Size=0x1A */
     /* 0x00 */ byte Race;
     /* 0x01 */ byte Sex;
     /* 0x02 */ byte BodyType;
-    /* 0x04 */ byte Clan;
+    /* 0x03 */ byte Height;
+    /* 0x04 */ byte Tribe;
+    /* 0x05 */ byte Face;
+    /* 0x06 */ byte Hairstyle;
+    /* 0x08 */ byte SkinColor;
+    /* 0x09 */ byte EyeColorRight;
+    /* 0x0A */ byte HairColor;
+    /* 0x0B */ byte HighlightsColor;
+    /* 0x0D */ byte TattooColor;
+    /* 0x0E */ byte Eyebrows;
+    /* 0x0F */ byte EyeColorLeft;
+    /* 0x11 */ byte Nose;
+    /* 0x12 */ byte Jaw;
     /* 0x14 */ byte LipColorFurPattern;
+    /* 0x15 */ byte MuscleMass;
+    /* 0x16 */ byte TailShape;
+    /* 0x17 */ byte BustSize;
+    /* 0x19 */ byte FacePaintColor;
     } _union_struct_0x0;
     } _union_0x0;
 };
@@ -8290,6 +8345,71 @@ __unaligned struct Client::Game::InstanceContent::ContentDirector /* Size=0xC48 
     /*       */ byte _gap_0xC10[0x38];
 };
 
+__unaligned struct Client::Game::UI::MapMarkerData /* Size=0x48 */
+{
+    /* 0x00 */ unsigned __int32 LevelId;
+    /* 0x04 */ unsigned __int32 ObjectiveId;
+    /* 0x08 */ Client::System::String::Utf8String* TooltipString;
+    /* 0x10 */ unsigned __int32 IconId;
+    /*      */ byte _gap_0x14[0x4];
+    /* 0x18 */ float X;
+    /* 0x1C */ float Y;
+    /* 0x20 */ float Z;
+    /* 0x24 */ float Radius;
+    /*      */ byte _gap_0x28[0x4];
+    /* 0x2C */ unsigned __int32 MapId;
+    /* 0x30 */ unsigned __int32 PlaceNameZoneId;
+    /* 0x34 */ unsigned __int32 PlaceNameId;
+    /*      */ byte _gap_0x38[0x4];
+    /* 0x3C */ unsigned __int16 RecommendedLevel;
+    /* 0x3E */ unsigned __int16 TerritoryTypeId;
+    /*      */ byte _gap_0x40[0x8];
+};
+
+__unaligned struct Client::Game::InstanceContent::DynamicEvent /* Size=0x1B0 */
+{
+    /*       */ byte _gap_0x0[0x38];
+    /* 0x038 */ unsigned __int32 LGBEventObject;
+    /* 0x03C */ unsigned __int32 LGBMapRange;
+    /* 0x040 */ unsigned __int32 Quest;
+    /* 0x044 */ unsigned __int32 Announce;
+    /* 0x048 */ unsigned __int16 Unknown0;
+    /* 0x04A */ unsigned __int16 Unknown1;
+    /* 0x04C */ unsigned __int16 Unknown2;
+    /* 0x04E */ byte EventType;
+    /* 0x04F */ byte EnemyType;
+    /* 0x050 */ byte MaxParticipants;
+    /* 0x051 */ byte Unknown4;
+    /* 0x052 */ byte Unknown5;
+    /* 0x053 */ byte SingleBattle;
+    /* 0x054 */ unsigned __int32 StartTimestamp;
+    /* 0x058 */ unsigned __int32 SecondsLeft;
+    /* 0x05C */ unsigned __int32 SecondsDuration;
+    /*       */ byte _gap_0x60[0x2];
+    /*       */ byte _gap_0x62;
+    /* 0x063 */ Client::Game::InstanceContent::DynamicEventState State;
+    /*       */ byte _gap_0x64;
+    /* 0x065 */ byte Participants;
+    /* 0x066 */ byte Progress;
+    /*       */ byte _gap_0x67;
+    /* 0x068 */ Client::System::String::Utf8String Name;
+    /* 0x0D0 */ Client::System::String::Utf8String Description;
+    /* 0x138 */ unsigned __int32 IconObjective0;
+    /* 0x13C */ byte MaxParticipants2;
+    /*       */ byte _gap_0x13D;
+    /*       */ byte _gap_0x13E[0x2];
+    /*       */ byte _gap_0x140[0x18];
+    /* 0x158 */ Client::Game::UI::MapMarkerData MapMarker;
+    /*       */ byte _gap_0x1A0[0x10];
+};
+
+__unaligned struct Client::Game::InstanceContent::DynamicEventContainer /* Size=0x1B28 */
+{
+    /*        */ byte _gap_0x0[0x8];
+    /* 0x0008 */ Client::Game::InstanceContent::DynamicEvent Events[0x10];
+    /*        */ byte _gap_0x1B08[0x20];
+};
+
 struct Client::Game::InstanceContent::InstanceContentDeepDungeonVTable
 {
     /*       */ __int64 _vf0;
@@ -9378,6 +9498,324 @@ __unaligned struct Client::Game::InstanceContent::InstanceContentOceanFishing /*
     /*        */ byte _gap_0x22F8[0x8];
 };
 
+struct Client::Game::InstanceContent::PublicContentBozjaVTable
+{
+    /*       */ __int64 _vf0;
+    /*       */ __int64 _vf1;
+    /*       */ __int64 _vf2;
+    /*       */ __int64 _vf3;
+    /*       */ __int64 _vf4;
+    /*       */ __int64 _vf5;
+    /*       */ __int64 _vf6;
+    /*       */ __int64 _vf7;
+    /*       */ __int64 _vf8;
+    /*       */ __int64 _vf9;
+    /*       */ __int64 _vf10;
+    /*       */ __int64 _vf11;
+    /*       */ __int64 _vf12;
+    /*       */ __int64 _vf13;
+    /*       */ __int64 _vf14;
+    /*       */ __int64 _vf15;
+    /*       */ __int64 _vf16;
+    /*       */ __int64 _vf17;
+    /*       */ __int64 _vf18;
+    /*       */ __int64 _vf19;
+    /*       */ __int64 _vf20;
+    /*       */ __int64 _vf21;
+    /*       */ __int64 _vf22;
+    /*       */ __int64 _vf23;
+    /*       */ __int64 _vf24;
+    /*       */ __int64 _vf25;
+    /*       */ __int64 _vf26;
+    /*       */ __int64 _vf27;
+    /*       */ __int64 _vf28;
+    /*       */ __int64 _vf29;
+    /*       */ __int64 _vf30;
+    /*       */ __int64 _vf31;
+    /*       */ __int64 _vf32;
+    /*       */ __int64 _vf33;
+    /*       */ __int64 _vf34;
+    /*       */ __int64 _vf35;
+    /*       */ __int64 _vf36;
+    /*       */ __int64 _vf37;
+    /*       */ __int64 _vf38;
+    /*       */ __int64 _vf39;
+    /*       */ __int64 _vf40;
+    /*       */ __int64 _vf41;
+    /*       */ __int64 _vf42;
+    /*       */ __int64 _vf43;
+    /*       */ __int64 _vf44;
+    /*       */ __int64 _vf45;
+    /*       */ __int64 _vf46;
+    /*       */ __int64 _vf47;
+    /*       */ __int64 _vf48;
+    /*       */ __int64 _vf49;
+    /*       */ __int64 _vf50;
+    /*       */ __int64 _vf51;
+    /*       */ __int64 _vf52;
+    /*       */ __int64 _vf53;
+    /*       */ __int64 _vf54;
+    /*       */ __int64 _vf55;
+    /*       */ __int64 _vf56;
+    /*       */ __int64 _vf57;
+    /*       */ __int64 _vf58;
+    /*       */ __int64 _vf59;
+    /*       */ __int64 _vf60;
+    /*       */ __int64 _vf61;
+    /*       */ __int64 _vf62;
+    /*       */ __int64 _vf63;
+    /*       */ __int64 _vf64;
+    /*       */ __int64 _vf65;
+    /*       */ __int64 _vf66;
+    /*       */ __int64 _vf67;
+    /*       */ __int64 _vf68;
+    /*       */ __int64 _vf69;
+    /*       */ __int64 _vf70;
+    /*       */ __int64 _vf71;
+    /*       */ __int64 _vf72;
+    /*       */ __int64 _vf73;
+    /*       */ __int64 _vf74;
+    /*       */ __int64 _vf75;
+    /*       */ __int64 _vf76;
+    /*       */ __int64 _vf77;
+    /*       */ __int64 _vf78;
+    /*       */ __int64 _vf79;
+    /*       */ __int64 _vf80;
+    /*       */ __int64 _vf81;
+    /*       */ __int64 _vf82;
+    /*       */ __int64 _vf83;
+    /*       */ __int64 _vf84;
+    /*       */ __int64 _vf85;
+    /*       */ __int64 _vf86;
+    /*       */ __int64 _vf87;
+    /*       */ __int64 _vf88;
+    /*       */ __int64 _vf89;
+    /*       */ __int64 _vf90;
+    /*       */ __int64 _vf91;
+    /*       */ __int64 _vf92;
+    /*       */ __int64 _vf93;
+    /*       */ __int64 _vf94;
+    /*       */ __int64 _vf95;
+    /*       */ __int64 _vf96;
+    /*       */ __int64 _vf97;
+    /*       */ __int64 _vf98;
+    /*       */ __int64 _vf99;
+    /*       */ __int64 _vf100;
+    /*       */ __int64 _vf101;
+    /*       */ __int64 _vf102;
+    /*       */ __int64 _vf103;
+    /*       */ __int64 _vf104;
+    /*       */ __int64 _vf105;
+    /*       */ __int64 _vf106;
+    /*       */ __int64 _vf107;
+    /*       */ __int64 _vf108;
+    /*       */ __int64 _vf109;
+    /*       */ __int64 _vf110;
+    /*       */ __int64 _vf111;
+    /*       */ __int64 _vf112;
+    /*       */ __int64 _vf113;
+    /*       */ __int64 _vf114;
+    /*       */ __int64 _vf115;
+    /*       */ __int64 _vf116;
+    /*       */ __int64 _vf117;
+    /*       */ __int64 _vf118;
+    /*       */ __int64 _vf119;
+    /*       */ __int64 _vf120;
+    /*       */ __int64 _vf121;
+    /*       */ __int64 _vf122;
+    /*       */ __int64 _vf123;
+    /*       */ __int64 _vf124;
+    /*       */ __int64 _vf125;
+    /*       */ __int64 _vf126;
+    /*       */ __int64 _vf127;
+    /*       */ __int64 _vf128;
+    /*       */ __int64 _vf129;
+    /*       */ __int64 _vf130;
+    /*       */ __int64 _vf131;
+    /*       */ __int64 _vf132;
+    /*       */ __int64 _vf133;
+    /*       */ __int64 _vf134;
+    /*       */ __int64 _vf135;
+    /*       */ __int64 _vf136;
+    /*       */ __int64 _vf137;
+    /*       */ __int64 _vf138;
+    /*       */ __int64 _vf139;
+    /*       */ __int64 _vf140;
+    /*       */ __int64 _vf141;
+    /*       */ __int64 _vf142;
+    /*       */ __int64 _vf143;
+    /*       */ __int64 _vf144;
+    /*       */ __int64 _vf145;
+    /*       */ __int64 _vf146;
+    /*       */ __int64 _vf147;
+    /*       */ __int64 _vf148;
+    /*       */ __int64 _vf149;
+    /*       */ __int64 _vf150;
+    /*       */ __int64 _vf151;
+    /*       */ __int64 _vf152;
+    /*       */ __int64 _vf153;
+    /*       */ __int64 _vf154;
+    /*       */ __int64 _vf155;
+    /*       */ __int64 _vf156;
+    /*       */ __int64 _vf157;
+    /*       */ __int64 _vf158;
+    /*       */ __int64 _vf159;
+    /*       */ __int64 _vf160;
+    /*       */ __int64 _vf161;
+    /*       */ __int64 _vf162;
+    /*       */ __int64 _vf163;
+    /*       */ __int64 _vf164;
+    /*       */ __int64 _vf165;
+    /*       */ __int64 _vf166;
+    /*       */ __int64 _vf167;
+    /*       */ __int64 _vf168;
+    /*       */ __int64 _vf169;
+    /*       */ __int64 _vf170;
+    /*       */ __int64 _vf171;
+    /*       */ __int64 _vf172;
+    /*       */ __int64 _vf173;
+    /*       */ __int64 _vf174;
+    /*       */ __int64 _vf175;
+    /*       */ __int64 _vf176;
+    /*       */ __int64 _vf177;
+    /*       */ __int64 _vf178;
+    /*       */ __int64 _vf179;
+    /*       */ __int64 _vf180;
+    /*       */ __int64 _vf181;
+    /*       */ __int64 _vf182;
+    /*       */ __int64 _vf183;
+    /*       */ __int64 _vf184;
+    /*       */ __int64 _vf185;
+    /*       */ __int64 _vf186;
+    /*       */ __int64 _vf187;
+    /*       */ __int64 _vf188;
+    /*       */ __int64 _vf189;
+    /*       */ __int64 _vf190;
+    /*       */ __int64 _vf191;
+    /*       */ __int64 _vf192;
+    /*       */ __int64 _vf193;
+    /*       */ __int64 _vf194;
+    /*       */ __int64 _vf195;
+    /*       */ __int64 _vf196;
+    /*       */ __int64 _vf197;
+    /*       */ __int64 _vf198;
+    /*       */ __int64 _vf199;
+    /*       */ __int64 _vf200;
+    /*       */ __int64 _vf201;
+    /*       */ __int64 _vf202;
+    /*       */ __int64 _vf203;
+    /*       */ __int64 _vf204;
+    /*       */ __int64 _vf205;
+    /*       */ __int64 _vf206;
+    /*       */ __int64 _vf207;
+    /*       */ __int64 _vf208;
+    /*       */ __int64 _vf209;
+    /*       */ __int64 _vf210;
+    /*       */ __int64 _vf211;
+    /*       */ __int64 _vf212;
+    /*       */ __int64 _vf213;
+    /*       */ __int64 _vf214;
+    /*       */ __int64 _vf215;
+    /*       */ __int64 _vf216;
+    /*       */ __int64 _vf217;
+    /*       */ __int64 _vf218;
+    /*       */ __int64 _vf219;
+    /*       */ __int64 _vf220;
+    /*       */ __int64 _vf221;
+    /*       */ __int64 _vf222;
+    /*       */ __int64 _vf223;
+    /*       */ __int64 _vf224;
+    /*       */ __int64 _vf225;
+    /*       */ __int64 _vf226;
+    /*       */ __int64 _vf227;
+    /*       */ __int64 _vf228;
+    /*       */ __int64 _vf229;
+    /*       */ __int64 _vf230;
+    /*       */ __int64 _vf231;
+    /*       */ __int64 _vf232;
+    /*       */ __int64 _vf233;
+    /*       */ __int64 _vf234;
+    /*       */ __int64 _vf235;
+    /*       */ __int64 _vf236;
+    /*       */ __int64 _vf237;
+    /*       */ __int64 _vf238;
+    /*       */ __int64 _vf239;
+    /*       */ __int64 _vf240;
+    /*       */ __int64 _vf241;
+    /*       */ __int64 _vf242;
+    /*       */ __int64 _vf243;
+    /*       */ __int64 _vf244;
+    /*       */ __int64 _vf245;
+    /*       */ __int64 _vf246;
+    /*       */ __int64 _vf247;
+    /*       */ __int64 _vf248;
+    /*       */ __int64 _vf249;
+    /*       */ __int64 _vf250;
+    /*       */ __int64 _vf251;
+    /*       */ __int64 _vf252;
+    /*       */ __int64 _vf253;
+    /*       */ __int64 _vf254;
+    /*       */ __int64 _vf255;
+    /*       */ __int64 _vf256;
+    /*       */ __int64 _vf257;
+    /*       */ __int64 _vf258;
+    /*       */ __int64 _vf259;
+    /*       */ __int64 _vf260;
+    /*       */ __int64 _vf261;
+    /*       */ __int64 _vf262;
+    /*       */ __int64 _vf263;
+    /*       */ __int64 _vf264;
+    /*       */ __int64 _vf265;
+    /*       */ __int64 _vf266;
+    /*       */ __int64 _vf267;
+    /*       */ __int64 _vf268;
+    /*       */ __int64 _vf269;
+    /*       */ __int64 _vf270;
+    /*       */ __int64 _vf271;
+    /*       */ __int64 _vf272;
+    /*       */ __int64 _vf273;
+    /*       */ __int64 _vf274;
+    /*       */ __int64 _vf275;
+    /*       */ __int64 _vf276;
+    /*       */ __int64 _vf277;
+    /*       */ __int64 _vf278;
+    /*       */ __int64 _vf279;
+    /*       */ __int64 _vf280;
+    /*       */ __int64 _vf281;
+    /*       */ __int64 _vf282;
+    /*       */ __int64 _vf283;
+    /*       */ __int64 _vf284;
+    /*       */ __int64 _vf285;
+    /*       */ __int64 _vf286;
+    /*       */ __int64 _vf287;
+    /*       */ __int64 _vf288;
+    /*       */ __int64 _vf289;
+    /*       */ __int64 _vf290;
+    /*       */ __int64 _vf291;
+    /*       */ __int64 _vf292;
+    /*       */ __int64 _vf293;
+    /*       */ __int64 _vf294;
+    /*       */ __int64 _vf295;
+    /*       */ __int64 _vf296;
+    /*       */ __int64 _vf297;
+    /*       */ __int64 _vf298;
+    /*       */ __int64 _vf299;
+    /*       */ __int64 _vf300;
+    /*       */ __int64 _vf301;
+    /*       */ __int64 _vf302;
+    /*       */ __int64 _vf303;
+    /*       */ __int64 _vf304;
+    /*       */ __int64 _vf305;
+    /*       */ __int64 _vf306;
+    /*       */ __int64 _vf307;
+    /*       */ __int64 _vf308;
+    /*       */ __int64 _vf309;
+    /*       */ __int64 _vf310;
+    /*       */ __int64 _vf311;
+    /*       */ __int64 _vf312;
+    /* 0x9C8 */ unsigned __int32 (__fastcall *GetContentTimeMax)(Client::Game::InstanceContent::ContentDirector* a1);
+};
+
 struct Client::Game::InstanceContent::PublicContentDirectorVTable
 {
     /*       */ __int64 _vf0;
@@ -9720,6 +10158,366 @@ __unaligned struct Client::Game::InstanceContent::PublicContentDirector /* Size=
     /* 0x0C76 */ Client::Game::InstanceContent::PublicContentDirectorType Type;
     /* 0x0C77 */ byte Unknown4;
     /*        */ byte _gap_0xC78[0x418];
+};
+
+__unaligned struct Client::Game::InstanceContent::PublicContentBozja /* Size=0x2CB8 */
+{
+    union {
+    /* 0x0000 */ Client::Game::InstanceContent::PublicContentBozjaVTable* VTable;
+    /* 0x0000 */ Client::Game::InstanceContent::PublicContentDirector PublicContentDirector;
+    } _union_0x0;
+    /*        */ byte _gap_0x1090[0x8];
+    /* 0x1098 */ Client::Game::InstanceContent::DynamicEventContainer DynamicEventContainer;
+    /* 0x2BC0 */ unsigned __int32 CurrentExperience;
+    /* 0x2BC4 */ unsigned __int32 NeededExperience;
+    /*        */ byte _gap_0x2BC8[0xF0];
+};
+
+struct Client::Game::InstanceContent::PublicContentEurekaVTable
+{
+    /*       */ __int64 _vf0;
+    /*       */ __int64 _vf1;
+    /*       */ __int64 _vf2;
+    /*       */ __int64 _vf3;
+    /*       */ __int64 _vf4;
+    /*       */ __int64 _vf5;
+    /*       */ __int64 _vf6;
+    /*       */ __int64 _vf7;
+    /*       */ __int64 _vf8;
+    /*       */ __int64 _vf9;
+    /*       */ __int64 _vf10;
+    /*       */ __int64 _vf11;
+    /*       */ __int64 _vf12;
+    /*       */ __int64 _vf13;
+    /*       */ __int64 _vf14;
+    /*       */ __int64 _vf15;
+    /*       */ __int64 _vf16;
+    /*       */ __int64 _vf17;
+    /*       */ __int64 _vf18;
+    /*       */ __int64 _vf19;
+    /*       */ __int64 _vf20;
+    /*       */ __int64 _vf21;
+    /*       */ __int64 _vf22;
+    /*       */ __int64 _vf23;
+    /*       */ __int64 _vf24;
+    /*       */ __int64 _vf25;
+    /*       */ __int64 _vf26;
+    /*       */ __int64 _vf27;
+    /*       */ __int64 _vf28;
+    /*       */ __int64 _vf29;
+    /*       */ __int64 _vf30;
+    /*       */ __int64 _vf31;
+    /*       */ __int64 _vf32;
+    /*       */ __int64 _vf33;
+    /*       */ __int64 _vf34;
+    /*       */ __int64 _vf35;
+    /*       */ __int64 _vf36;
+    /*       */ __int64 _vf37;
+    /*       */ __int64 _vf38;
+    /*       */ __int64 _vf39;
+    /*       */ __int64 _vf40;
+    /*       */ __int64 _vf41;
+    /*       */ __int64 _vf42;
+    /*       */ __int64 _vf43;
+    /*       */ __int64 _vf44;
+    /*       */ __int64 _vf45;
+    /*       */ __int64 _vf46;
+    /*       */ __int64 _vf47;
+    /*       */ __int64 _vf48;
+    /*       */ __int64 _vf49;
+    /*       */ __int64 _vf50;
+    /*       */ __int64 _vf51;
+    /*       */ __int64 _vf52;
+    /*       */ __int64 _vf53;
+    /*       */ __int64 _vf54;
+    /*       */ __int64 _vf55;
+    /*       */ __int64 _vf56;
+    /*       */ __int64 _vf57;
+    /*       */ __int64 _vf58;
+    /*       */ __int64 _vf59;
+    /*       */ __int64 _vf60;
+    /*       */ __int64 _vf61;
+    /*       */ __int64 _vf62;
+    /*       */ __int64 _vf63;
+    /*       */ __int64 _vf64;
+    /*       */ __int64 _vf65;
+    /*       */ __int64 _vf66;
+    /*       */ __int64 _vf67;
+    /*       */ __int64 _vf68;
+    /*       */ __int64 _vf69;
+    /*       */ __int64 _vf70;
+    /*       */ __int64 _vf71;
+    /*       */ __int64 _vf72;
+    /*       */ __int64 _vf73;
+    /*       */ __int64 _vf74;
+    /*       */ __int64 _vf75;
+    /*       */ __int64 _vf76;
+    /*       */ __int64 _vf77;
+    /*       */ __int64 _vf78;
+    /*       */ __int64 _vf79;
+    /*       */ __int64 _vf80;
+    /*       */ __int64 _vf81;
+    /*       */ __int64 _vf82;
+    /*       */ __int64 _vf83;
+    /*       */ __int64 _vf84;
+    /*       */ __int64 _vf85;
+    /*       */ __int64 _vf86;
+    /*       */ __int64 _vf87;
+    /*       */ __int64 _vf88;
+    /*       */ __int64 _vf89;
+    /*       */ __int64 _vf90;
+    /*       */ __int64 _vf91;
+    /*       */ __int64 _vf92;
+    /*       */ __int64 _vf93;
+    /*       */ __int64 _vf94;
+    /*       */ __int64 _vf95;
+    /*       */ __int64 _vf96;
+    /*       */ __int64 _vf97;
+    /*       */ __int64 _vf98;
+    /*       */ __int64 _vf99;
+    /*       */ __int64 _vf100;
+    /*       */ __int64 _vf101;
+    /*       */ __int64 _vf102;
+    /*       */ __int64 _vf103;
+    /*       */ __int64 _vf104;
+    /*       */ __int64 _vf105;
+    /*       */ __int64 _vf106;
+    /*       */ __int64 _vf107;
+    /*       */ __int64 _vf108;
+    /*       */ __int64 _vf109;
+    /*       */ __int64 _vf110;
+    /*       */ __int64 _vf111;
+    /*       */ __int64 _vf112;
+    /*       */ __int64 _vf113;
+    /*       */ __int64 _vf114;
+    /*       */ __int64 _vf115;
+    /*       */ __int64 _vf116;
+    /*       */ __int64 _vf117;
+    /*       */ __int64 _vf118;
+    /*       */ __int64 _vf119;
+    /*       */ __int64 _vf120;
+    /*       */ __int64 _vf121;
+    /*       */ __int64 _vf122;
+    /*       */ __int64 _vf123;
+    /*       */ __int64 _vf124;
+    /*       */ __int64 _vf125;
+    /*       */ __int64 _vf126;
+    /*       */ __int64 _vf127;
+    /*       */ __int64 _vf128;
+    /*       */ __int64 _vf129;
+    /*       */ __int64 _vf130;
+    /*       */ __int64 _vf131;
+    /*       */ __int64 _vf132;
+    /*       */ __int64 _vf133;
+    /*       */ __int64 _vf134;
+    /*       */ __int64 _vf135;
+    /*       */ __int64 _vf136;
+    /*       */ __int64 _vf137;
+    /*       */ __int64 _vf138;
+    /*       */ __int64 _vf139;
+    /*       */ __int64 _vf140;
+    /*       */ __int64 _vf141;
+    /*       */ __int64 _vf142;
+    /*       */ __int64 _vf143;
+    /*       */ __int64 _vf144;
+    /*       */ __int64 _vf145;
+    /*       */ __int64 _vf146;
+    /*       */ __int64 _vf147;
+    /*       */ __int64 _vf148;
+    /*       */ __int64 _vf149;
+    /*       */ __int64 _vf150;
+    /*       */ __int64 _vf151;
+    /*       */ __int64 _vf152;
+    /*       */ __int64 _vf153;
+    /*       */ __int64 _vf154;
+    /*       */ __int64 _vf155;
+    /*       */ __int64 _vf156;
+    /*       */ __int64 _vf157;
+    /*       */ __int64 _vf158;
+    /*       */ __int64 _vf159;
+    /*       */ __int64 _vf160;
+    /*       */ __int64 _vf161;
+    /*       */ __int64 _vf162;
+    /*       */ __int64 _vf163;
+    /*       */ __int64 _vf164;
+    /*       */ __int64 _vf165;
+    /*       */ __int64 _vf166;
+    /*       */ __int64 _vf167;
+    /*       */ __int64 _vf168;
+    /*       */ __int64 _vf169;
+    /*       */ __int64 _vf170;
+    /*       */ __int64 _vf171;
+    /*       */ __int64 _vf172;
+    /*       */ __int64 _vf173;
+    /*       */ __int64 _vf174;
+    /*       */ __int64 _vf175;
+    /*       */ __int64 _vf176;
+    /*       */ __int64 _vf177;
+    /*       */ __int64 _vf178;
+    /*       */ __int64 _vf179;
+    /*       */ __int64 _vf180;
+    /*       */ __int64 _vf181;
+    /*       */ __int64 _vf182;
+    /*       */ __int64 _vf183;
+    /*       */ __int64 _vf184;
+    /*       */ __int64 _vf185;
+    /*       */ __int64 _vf186;
+    /*       */ __int64 _vf187;
+    /*       */ __int64 _vf188;
+    /*       */ __int64 _vf189;
+    /*       */ __int64 _vf190;
+    /*       */ __int64 _vf191;
+    /*       */ __int64 _vf192;
+    /*       */ __int64 _vf193;
+    /*       */ __int64 _vf194;
+    /*       */ __int64 _vf195;
+    /*       */ __int64 _vf196;
+    /*       */ __int64 _vf197;
+    /*       */ __int64 _vf198;
+    /*       */ __int64 _vf199;
+    /*       */ __int64 _vf200;
+    /*       */ __int64 _vf201;
+    /*       */ __int64 _vf202;
+    /*       */ __int64 _vf203;
+    /*       */ __int64 _vf204;
+    /*       */ __int64 _vf205;
+    /*       */ __int64 _vf206;
+    /*       */ __int64 _vf207;
+    /*       */ __int64 _vf208;
+    /*       */ __int64 _vf209;
+    /*       */ __int64 _vf210;
+    /*       */ __int64 _vf211;
+    /*       */ __int64 _vf212;
+    /*       */ __int64 _vf213;
+    /*       */ __int64 _vf214;
+    /*       */ __int64 _vf215;
+    /*       */ __int64 _vf216;
+    /*       */ __int64 _vf217;
+    /*       */ __int64 _vf218;
+    /*       */ __int64 _vf219;
+    /*       */ __int64 _vf220;
+    /*       */ __int64 _vf221;
+    /*       */ __int64 _vf222;
+    /*       */ __int64 _vf223;
+    /*       */ __int64 _vf224;
+    /*       */ __int64 _vf225;
+    /*       */ __int64 _vf226;
+    /*       */ __int64 _vf227;
+    /*       */ __int64 _vf228;
+    /*       */ __int64 _vf229;
+    /*       */ __int64 _vf230;
+    /*       */ __int64 _vf231;
+    /*       */ __int64 _vf232;
+    /*       */ __int64 _vf233;
+    /*       */ __int64 _vf234;
+    /*       */ __int64 _vf235;
+    /*       */ __int64 _vf236;
+    /*       */ __int64 _vf237;
+    /*       */ __int64 _vf238;
+    /*       */ __int64 _vf239;
+    /*       */ __int64 _vf240;
+    /*       */ __int64 _vf241;
+    /*       */ __int64 _vf242;
+    /*       */ __int64 _vf243;
+    /*       */ __int64 _vf244;
+    /*       */ __int64 _vf245;
+    /*       */ __int64 _vf246;
+    /*       */ __int64 _vf247;
+    /*       */ __int64 _vf248;
+    /*       */ __int64 _vf249;
+    /*       */ __int64 _vf250;
+    /*       */ __int64 _vf251;
+    /*       */ __int64 _vf252;
+    /*       */ __int64 _vf253;
+    /*       */ __int64 _vf254;
+    /*       */ __int64 _vf255;
+    /*       */ __int64 _vf256;
+    /*       */ __int64 _vf257;
+    /*       */ __int64 _vf258;
+    /*       */ __int64 _vf259;
+    /*       */ __int64 _vf260;
+    /*       */ __int64 _vf261;
+    /*       */ __int64 _vf262;
+    /*       */ __int64 _vf263;
+    /*       */ __int64 _vf264;
+    /*       */ __int64 _vf265;
+    /*       */ __int64 _vf266;
+    /*       */ __int64 _vf267;
+    /*       */ __int64 _vf268;
+    /*       */ __int64 _vf269;
+    /*       */ __int64 _vf270;
+    /*       */ __int64 _vf271;
+    /*       */ __int64 _vf272;
+    /*       */ __int64 _vf273;
+    /*       */ __int64 _vf274;
+    /*       */ __int64 _vf275;
+    /*       */ __int64 _vf276;
+    /*       */ __int64 _vf277;
+    /*       */ __int64 _vf278;
+    /*       */ __int64 _vf279;
+    /*       */ __int64 _vf280;
+    /*       */ __int64 _vf281;
+    /*       */ __int64 _vf282;
+    /*       */ __int64 _vf283;
+    /*       */ __int64 _vf284;
+    /*       */ __int64 _vf285;
+    /*       */ __int64 _vf286;
+    /*       */ __int64 _vf287;
+    /*       */ __int64 _vf288;
+    /*       */ __int64 _vf289;
+    /*       */ __int64 _vf290;
+    /*       */ __int64 _vf291;
+    /*       */ __int64 _vf292;
+    /*       */ __int64 _vf293;
+    /*       */ __int64 _vf294;
+    /*       */ __int64 _vf295;
+    /*       */ __int64 _vf296;
+    /*       */ __int64 _vf297;
+    /*       */ __int64 _vf298;
+    /*       */ __int64 _vf299;
+    /*       */ __int64 _vf300;
+    /*       */ __int64 _vf301;
+    /*       */ __int64 _vf302;
+    /*       */ __int64 _vf303;
+    /*       */ __int64 _vf304;
+    /*       */ __int64 _vf305;
+    /*       */ __int64 _vf306;
+    /*       */ __int64 _vf307;
+    /*       */ __int64 _vf308;
+    /*       */ __int64 _vf309;
+    /*       */ __int64 _vf310;
+    /*       */ __int64 _vf311;
+    /*       */ __int64 _vf312;
+    /* 0x9C8 */ unsigned __int32 (__fastcall *GetContentTimeMax)(Client::Game::InstanceContent::ContentDirector* a1);
+};
+
+__unaligned struct Client::Game::InstanceContent::PublicContentEureka /* Size=0x12C8 */
+{
+    union {
+    /* 0x0000 */ Client::Game::InstanceContent::PublicContentEurekaVTable* VTable;
+    /* 0x0000 */ Client::Game::InstanceContent::PublicContentDirector PublicContentDirector;
+    } _union_0x0;
+    /* 0x1090 */ unsigned __int16 Unk1090;
+    /* 0x1092 */ unsigned __int16 Unk1092;
+    /* 0x1094 */ byte MaxElementalLevel;
+    /*        */ byte _gap_0x1095;
+    /*        */ byte _gap_0x1096[0x2];
+    /* 0x1098 */ unsigned __int32 CurrentExperience;
+    /* 0x109C */ unsigned __int32 NeededExperience;
+    /* 0x10A0 */ unsigned __int16 MagiaAetherCharge;
+    /* 0x10A2 */ byte Fire;
+    /* 0x10A3 */ byte Ice;
+    /* 0x10A4 */ byte Wind;
+    /* 0x10A5 */ byte Earth;
+    /* 0x10A6 */ byte Lightning;
+    /* 0x10A7 */ byte Water;
+    /* 0x10A8 */ byte Magicite;
+    /* 0x10A9 */ byte MagiaAether;
+    /*        */ byte _gap_0x10AA[0x2];
+    /*        */ byte _gap_0x10AC[0x4];
+    /* 0x10B0 */ Client::System::String::Utf8String PublicContentTextDataStrings[0x4];
+    /* 0x1250 */ Client::System::String::Utf8String Unk1250;
+    /*        */ byte _gap_0x12B8[0x10];
 };
 
 __unaligned struct Client::Game::InventoryContainer /* Size=0x18 */
@@ -10437,6 +11235,16 @@ __unaligned struct Client::Game::UI::Chain /* Size=0x8 */
     /* 0x4 */ float MaxTime;
 };
 
+__unaligned struct Client::Game::UI::CharaCard /* Size=0x1C8 */
+{
+    /*       */ byte _gap_0x0[0x1C8];
+};
+
+__unaligned struct Client::Game::UI::CollectablesShop /* Size=0x2B8 */
+{
+    /*       */ byte _gap_0x0[0x2B8];
+};
+
 __unaligned struct Client::Game::UI::ContentsFinderQueueInfo /* Size=0x90 */
 {
     /*      */ byte _gap_0x0[0x4];
@@ -10524,6 +11332,27 @@ __unaligned struct Client::Game::UI::ContentsNote /* Size=0xB8 */
     /* 0x6C */ __int32 DisplayStatus[0x13];
 };
 
+__unaligned struct Component::GUI::AtkEventInterface /* Size=0x8 */
+{
+    /* 0x0 */ void** vtbl;
+};
+
+__unaligned struct Client::Game::UI::DailyQuestSupply /* Size=0x3E8 */
+{
+    /* 0x000 */ Component::GUI::AtkEventInterface AtkEventInterface;
+    /*       */ byte _gap_0x8[0x3E0];
+};
+
+__unaligned struct Client::Game::UI::Emj /* Size=0x38 */
+{
+    /*      */ byte _gap_0x0[0x38];
+};
+
+__unaligned struct Client::Game::UI::EurekaElementalEdit /* Size=0x18 */
+{
+    /*      */ byte _gap_0x0[0x18];
+};
+
 __unaligned struct Client::Game::UI::ExtraInspectDataEntry /* Size=0x8 */
 {
     /* 0x0 */ __int32 Key;
@@ -10540,6 +11369,36 @@ __unaligned struct Client::Game::UI::FieldMarker /* Size=0x20 */
     /* 0x1C */ bool Active;
     /*      */ byte _gap_0x1D;
     /*      */ byte _gap_0x1E[0x2];
+};
+
+__unaligned struct Client::Game::UI::FishingNote /* Size=0x50 */
+{
+    /*      */ byte _gap_0x0[0x50];
+};
+
+__unaligned struct Client::Game::UI::FishRecord /* Size=0x2E0 */
+{
+    /*       */ byte _gap_0x0[0x2E0];
+};
+
+__unaligned struct Client::Game::UI::GatheringNote /* Size=0x628 */
+{
+    /*       */ byte _gap_0x0[0x628];
+};
+
+__unaligned struct Client::Game::UI::GCSupply /* Size=0x2C28 */
+{
+    /*        */ byte _gap_0x0[0x2C28];
+};
+
+__unaligned struct Client::Game::UI::GoldSaucerYell /* Size=0x1750 */
+{
+    /*        */ byte _gap_0x0[0x1750];
+};
+
+__unaligned struct Client::Game::UI::GuildOrderReward /* Size=0x60 */
+{
+    /*      */ byte _gap_0x0[0x60];
 };
 
 __unaligned struct Client::Game::UI::HateInfo /* Size=0x8 */
@@ -10782,9 +11641,14 @@ __unaligned struct Client::Game::UI::Inspect /* Size=0x278 */
     /*       */ byte _gap_0x256[0x2];
     /*       */ byte _gap_0x258[0x2];
     /*       */ byte _gap_0x25A;
-    /* 0x25B */ Client::Game::UI::ExtraInspectDataEntry ExtraInspectData[0x3];
+    /* 0x25B */ StdPairunsignedint32unsignedint32 ContentKeyValueData[0x3];
     /*       */ byte _gap_0x273;
     /*       */ byte _gap_0x274[0x4];
+};
+
+__unaligned struct Client::Game::UI::Journal /* Size=0x4748 */
+{
+    /*        */ byte _gap_0x0[0x4748];
 };
 
 __unaligned struct Client::Game::UI::LimitBreakController /* Size=0x10 */
@@ -10826,6 +11690,11 @@ __unaligned struct Client::Game::UI::Loot /* Size=0x6A0 */
     /* 0x678 */ unsigned __int32 UnkObjectId2;
     /*       */ byte _gap_0x67C[0x4];
     /*       */ byte _gap_0x680[0x20];
+};
+
+__unaligned struct Client::Game::UI::LovmRanking /* Size=0x1C40 */
+{
+    /*        */ byte _gap_0x0[0x1C40];
 };
 
 __unaligned struct StdVectorClientGameUIMapMarkerData /* Size=0x18 */
@@ -10893,27 +11762,6 @@ __unaligned struct Client::Game::UI::MapMarkerContainer::LinkedList /* Size=0x0 
     /* 0x8 */ Client::Game::UI::MapMarkerNode* Last;
 };
 
-__unaligned struct Client::Game::UI::MapMarkerData /* Size=0x48 */
-{
-    /* 0x00 */ unsigned __int32 LevelId;
-    /* 0x04 */ unsigned __int32 ObjectiveId;
-    /* 0x08 */ Client::System::String::Utf8String* TooltipString;
-    /* 0x10 */ unsigned __int32 IconId;
-    /*      */ byte _gap_0x14[0x4];
-    /* 0x18 */ float X;
-    /* 0x1C */ float Y;
-    /* 0x20 */ float Z;
-    /* 0x24 */ float Radius;
-    /*      */ byte _gap_0x28[0x4];
-    /* 0x2C */ unsigned __int32 MapId;
-    /* 0x30 */ unsigned __int32 PlaceNameZoneId;
-    /* 0x34 */ unsigned __int32 PlaceNameId;
-    /*      */ byte _gap_0x38[0x4];
-    /* 0x3C */ unsigned __int16 RecommendedLevel;
-    /* 0x3E */ unsigned __int16 TerritoryTypeId;
-    /*      */ byte _gap_0x40[0x8];
-};
-
 __unaligned struct Client::Game::UI::MapMarkerNode /* Size=0x0 */
 {
     /* 0x0 */ Client::Game::UI::MapMarkerNode* Next;
@@ -10943,6 +11791,11 @@ __unaligned struct Client::Game::UI::MobHunt /* Size=0x198 */
     /* 0x01A */ byte ObtainedMarkId[0x12];
     /* 0x02C */ Client::Game::UI::MobHunt::KillCounts CurrentKills[0x12];
     /* 0x194 */ __int32 ObtainedFlags;
+};
+
+__unaligned struct Client::Game::UI::NpcTrade /* Size=0x328 */
+{
+    /*       */ byte _gap_0x0[0x328];
 };
 
 __unaligned struct Client::Game::UI::PlayerState /* Size=0x818 */
@@ -11072,7 +11925,8 @@ __unaligned struct Client::Game::UI::PlayerState /* Size=0x818 */
     /* 0x6D9 */ bool WeeklyBingoUnk63;
     /*       */ byte _gap_0x6DA[0x2];
     /*       */ byte _gap_0x6DC[0x4];
-    /*       */ byte _gap_0x6E0[0x90];
+    /* 0x6E0 */ StdPairunsignedint32unsignedint32 ContentKeyValueData[0x3];
+    /*       */ byte _gap_0x6F8[0x78];
     /* 0x770 */ byte MentorVersion;
     /*       */ byte _gap_0x771;
     /*       */ byte _gap_0x772[0x2];
@@ -11139,12 +11993,28 @@ __unaligned struct Client::Game::UI::PvPProfile /* Size=0x7C */
     /* 0x78 */ unsigned __int32 RivalWingsWeeklyMatchesWon;
 };
 
-__unaligned struct Client::Game::UI::RecipeNote /* Size=0x628 */
+__unaligned struct Client::Game::UI::QTE /* Size=0x28 */
+{
+    /* 0x00 */ Component::GUI::AtkEventInterface AtkEventInterface;
+    /*      */ byte _gap_0x8[0x20];
+};
+
+__unaligned struct Client::Game::UI::QuestTodoList /* Size=0x2F0 */
+{
+    /*       */ byte _gap_0x0[0x2F0];
+};
+
+__unaligned struct Client::Game::UI::QuestUI /* Size=0xFD0 */
+{
+    /*       */ byte _gap_0x0[0xFD0];
+};
+
+__unaligned struct Client::Game::UI::RecipeNote /* Size=0xB18 */
 {
     /* 0x000 */ unsigned __int32 Jobs[0x8];
     /*       */ byte _gap_0x20[0x98];
     /* 0x0B8 */ Client::Game::UI::RecipeNote::RecipeData* RecipeList;
-    /*       */ byte _gap_0xC0[0x568];
+    /*       */ byte _gap_0xC0[0xA58];
 };
 
 __unaligned struct Client::Game::UI::RecipeNote::RecipeCrystal /* Size=0x2 */
@@ -11227,9 +12097,10 @@ __unaligned struct Client::Game::UI::RelicNote /* Size=0x18 */
     /* 0x14 */ __int32 ObjectiveProgress;
 };
 
-__unaligned struct Component::GUI::AtkEventInterface /* Size=0x8 */
+__unaligned struct Client::Game::UI::RelicSphereUpgrade /* Size=0x78 */
 {
-    /* 0x0 */ void** vtbl;
+    /* 0x00 */ Component::GUI::AtkEventInterface AtkEventInterface;
+    /*      */ byte _gap_0x8[0x70];
 };
 
 __unaligned struct Client::Game::UI::Revive /* Size=0x30 */
@@ -11244,6 +12115,16 @@ __unaligned struct Client::Game::UI::Revive /* Size=0x30 */
     /*      */ byte _gap_0x25;
     /*      */ byte _gap_0x26[0x2];
     /*      */ byte _gap_0x28[0x8];
+};
+
+__unaligned struct Client::Game::UI::RidePillon /* Size=0x40 */
+{
+    /* 0x00 */ unsigned __int32 Unk0;
+    union {
+    /* 0x04 */ unsigned __int32 Unk4[0x7];
+    /* 0x04 */ unsigned __int32 Unk20[0x7];
+    } _union_0x4;
+    /*      */ byte _gap_0x20[0x20];
 };
 
 __unaligned struct Client::Game::UI::RouletteController /* Size=0x70 */
@@ -11302,6 +12183,40 @@ __unaligned struct Client::Game::UI::TerritoryInfo /* Size=0x60 */
     /*      */ byte _gap_0x30[0x30];
 };
 
+__unaligned struct Client::Game::UI::TradeMultiple /* Size=0x48 */
+{
+    /* 0x00 */ Component::GUI::AtkEventInterface AtkEventInterface;
+    /*      */ byte _gap_0x8[0x8];
+    /* 0x10 */ unsigned __int32 Unk10;
+    /* 0x14 */ unsigned __int32 Unk14;
+    /* 0x18 */ unsigned __int32 Unk18;
+    /* 0x1C */ unsigned __int32 Unk1C;
+    /* 0x20 */ unsigned __int32 Unk20;
+    /* 0x24 */ unsigned __int16 MateriaId1;
+    /* 0x26 */ unsigned __int16 MateriaId2;
+    /* 0x28 */ unsigned __int16 MateriaId3;
+    /* 0x2A */ unsigned __int16 MateriaId4;
+    /* 0x2C */ unsigned __int16 MateriaId5;
+    /*      */ byte _gap_0x2E[0x2];
+    /* 0x30 */ unsigned __int16 Quantity1;
+    /*      */ byte _gap_0x32[0x2];
+    /* 0x34 */ unsigned __int16 Quantity2;
+    /*      */ byte _gap_0x36[0x2];
+    /* 0x38 */ unsigned __int16 Quantity3;
+    /*      */ byte _gap_0x3A[0x2];
+    /* 0x3C */ unsigned __int16 Quantity4;
+    /*      */ byte _gap_0x3E[0x2];
+    /* 0x40 */ unsigned __int16 Quantity5;
+    /*      */ byte _gap_0x42[0x2];
+    /* 0x44 */ unsigned __int32 Unk44;
+};
+
+__unaligned struct Client::Game::UI::TripleTriad /* Size=0x1510 */
+{
+    /* 0x0000 */ Component::GUI::AtkEventInterface AtkEventInterface;
+    /*        */ byte _gap_0x8[0x1508];
+};
+
 struct Client::Game::UI::UIStateVTable
 {
     /*      */ __int64 _vf0;
@@ -11324,6 +12239,16 @@ __unaligned struct Client::Game::UI::WeaponState /* Size=0x18 */
     /*      */ byte _gap_0x11;
     /*      */ byte _gap_0x12[0x2];
     /*      */ byte _gap_0x14[0x4];
+};
+
+__unaligned struct Client::Game::UI::Wedding /* Size=0x68 */
+{
+    /*      */ byte _gap_0x0[0x68];
+};
+
+__unaligned struct Client::Game::UI::WeatherForecast /* Size=0x20 */
+{
+    /*      */ byte _gap_0x0[0x20];
 };
 
 __unaligned struct Client::Game::UI::UIState /* Size=0x17D10 */
@@ -11349,13 +12274,21 @@ __unaligned struct Client::Game::UI::UIState /* Size=0x17D10 */
     /*         */ byte _gap_0x3730[0x8];
     /* 0x03738 */ Client::Game::UI::ContentsNote ContentsNote;
     /* 0x037F0 */ Client::Game::UI::RelicNote RelicNote;
-    /*         */ byte _gap_0x3808[0x48];
+    /* 0x03808 */ Client::Game::UI::TradeMultiple TradeMultiple;
     /* 0x03850 */ Client::Game::UI::AreaInstance AreaInstance;
-    /*         */ byte _gap_0x3878[0x4A0];
+    /* 0x03878 */ Client::Game::UI::RelicSphereUpgrade RelicSphereUpgrade;
+    /* 0x038F0 */ Client::Game::UI::DailyQuestSupply DailyQuestSupply;
+    /* 0x03CD8 */ Client::Game::UI::RidePillon RidePillon;
     /* 0x03D18 */ Client::Game::UI::Loot Loot;
-    /*         */ byte _gap_0x43B8[0x628];
+    /* 0x043B8 */ Client::Game::UI::GatheringNote GatheringNote;
     /* 0x049E0 */ Client::Game::UI::RecipeNote RecipeNote;
-    /*         */ byte _gap_0x5008[0x6558];
+    /*         */ byte _gap_0x54F8[0x8];
+    /* 0x05500 */ Client::Game::UI::FishingNote FishingNote;
+    /* 0x05550 */ Client::Game::UI::FishRecord FishRecord;
+    /* 0x05830 */ Client::Game::UI::Journal Journal;
+    /* 0x09F78 */ Client::Game::UI::QuestUI QuestUI;
+    /* 0x0AF48 */ Client::Game::UI::QuestTodoList QuestTodoList;
+    /* 0x0B238 */ Client::Game::UI::NpcTrade NpcTrade;
     /* 0x0B560 */ Client::Game::Event::Director* ActiveDirector;
     /*         */ byte _gap_0xB568[0x140];
     /* 0x0B6A8 */ Client::Game::Fate::FateDirector* FateDirector;
@@ -11365,13 +12298,24 @@ __unaligned struct Client::Game::UI::UIState /* Size=0x17D10 */
     /* 0x0FAD0 */ Client::Game::UI::LimitBreakController LimitBreakController;
     /* 0x0FAE0 */ void* TitleController;
     /* 0x0FAE8 */ Client::Game::TitleList TitleList;
-    /*         */ byte _gap_0xFB50[0x2C48];
+    /*         */ byte _gap_0xFB50[0x20];
+    /* 0x0FB70 */ Client::Game::UI::GCSupply GCSupply;
     /* 0x12798 */ Client::Game::UI::RouletteController RouletteController;
-    /*         */ byte _gap_0x12808[0x60];
+    /* 0x12808 */ Client::Game::UI::GuildOrderReward GuildOrderReward;
     /* 0x12868 */ Client::Game::UI::ContentsFinder ContentsFinder;
-    /*         */ byte _gap_0x12918[0x68];
+    /* 0x12918 */ Client::Game::UI::Wedding Wedding;
     /* 0x12980 */ Client::Game::UI::MobHunt MobHunt;
-    /*         */ byte _gap_0x12B18[0x4E38];
+    /* 0x12B18 */ Client::Game::UI::WeatherForecast WeatherForecast;
+    /*         */ byte _gap_0x12B38[0x8];
+    /* 0x12B40 */ Client::Game::UI::TripleTriad TripleTriad;
+    /* 0x14050 */ Client::Game::UI::EurekaElementalEdit EurekaElementalEdit;
+    /* 0x14068 */ Client::Game::UI::LovmRanking LovmRanking;
+    /* 0x15CA8 */ Client::Game::UI::CollectablesShop CollectablesShop;
+    /* 0x15F60 */ Client::Game::UI::QTE QTE;
+    /* 0x15F88 */ Client::Game::UI::Emj Emj;
+    /* 0x15FC0 */ Client::Game::UI::GoldSaucerYell GoldSaucerYell;
+    /* 0x17710 */ Client::Game::UI::CharaCard CharaCard;
+    /*         */ byte _gap_0x178D8[0x78];
     /*         */ byte _gap_0x17950[0x4];
     /* 0x17954 */ byte UnlockLinkBitmask[0x40];
     /* 0x17994 */ byte UnlockedAetherytesBitmask[0x1A];
@@ -11381,9 +12325,8 @@ __unaligned struct Client::Game::UI::UIState /* Size=0x17D10 */
     /*         */ byte _gap_0x17A1D;
     /* 0x17A1E */ byte CutsceneSeenBitmask[0x9F];
     /* 0x17ABD */ byte UnlockedTripleTriadCardsBitmask[0x33];
-    /*         */ byte _gap_0x17AF0[0x8];
-    /* 0x17AF8 */ unsigned __int64 UnlockedTripleTriadCardsCount;
-    /*         */ byte _gap_0x17B00[0x210];
+    /* 0x17AF0 */ unsigned __int64 UnlockedTripleTriadCardsCount;
+    /*         */ byte _gap_0x17AF8[0x218];
 };
 
 __unaligned struct Client::Graphics::Animation::AnimationResourceHandle /* Size=0x0 */
@@ -27151,7 +28094,7 @@ __unaligned struct Client::UI::Misc::BannerModuleEntry /* Size=0x90 */
     /* 0x5C */ __int16 DirectionalLightingVerticalAngle;
     /* 0x5E */ __int16 DirectionalLightingHorizontalAngle;
     /* 0x60 */ byte Race;
-    /* 0x61 */ byte Gender;
+    /* 0x61 */ byte Sex;
     /* 0x62 */ byte Height;
     /* 0x63 */ byte Tribe;
     /* 0x64 */ byte DirectionalLightingColorRed;
@@ -27860,7 +28803,7 @@ __unaligned struct Client::UI::Agent::AgentContext /* Size=0x1750 */
     /* 0x0F0C */ byte YesNoEventId;
     /*        */ byte _gap_0xF0D;
     /*        */ byte _gap_0xF0E[0x2];
-    /* 0x0F10 */ __int32 TargetGender;
+    /* 0x0F10 */ __int32 TargetSex;
     /* 0x0F14 */ unsigned __int32 TargetMountSeats;
     /*        */ byte _gap_0xF18[0x820];
     /* 0x1738 */ void* UpdateChecker;
@@ -31471,7 +32414,7 @@ __unaligned struct Client::UI::Agent::MiragePrismPrismBoxData /* Size=0x1BAE0 */
     /* 0x1BA00 */ Client::UI::Agent::AgentMiragePrismMiragePlate* AgentMiragePrismMiragePlate;
     /* 0x1BA08 */ byte FilterLevel;
     /*         */ byte _gap_0x1BA09;
-    /* 0x1BA0A */ byte FilterGender;
+    /* 0x1BA0A */ byte FilterSex;
     /*         */ byte _gap_0x1BA0B;
     /*         */ byte _gap_0x1BA0C[0x4];
     /* 0x1BA10 */ Client::System::String::Utf8String FilterString;
@@ -31643,9 +32586,8 @@ __unaligned struct Client::UI::Info::CrossRealmMember /* Size=0x58 */
     /*      */ byte _gap_0x27;
     /*      */ byte _gap_0x28[0x2];
     /*      */ byte _gap_0x2A;
-    /* 0x2B */ byte Name[0x1E];
-    /*      */ byte _gap_0x49;
-    /*      */ byte _gap_0x4A[0x2];
+    /* 0x2B */ byte Name[0x20];
+    /*      */ byte _gap_0x4B;
     /*      */ byte _gap_0x4C[0x4];
     /* 0x50 */ byte MemberIndex;
     /* 0x51 */ byte GroupIndex;
@@ -32627,14 +33569,17 @@ __unaligned struct Client::UI::Info::InfoProxyLetter /* Size=0x5250 */
     /* 0x0000 */ Client::UI::Info::InfoProxyLetterVTable* VTable;
     /* 0x0000 */ Client::UI::Info::InfoProxyPageInterface InfoProxyPageInterface;
     } _union_0x0;
-    /*        */ byte _gap_0x20[0x4];
-    /* 0x0024 */ byte NumAtachments;
-    /*        */ byte _gap_0x25;
-    /*        */ byte _gap_0x26;
+    /* 0x0020 */ unsigned __int32 NumOfDeniedLetters;
+    /* 0x0024 */ unsigned __int16 NumAttachments;
+    /* 0x0026 */ byte NumNewLetters;
     /* 0x0027 */ byte NumLettersFromFriends;
+    union {
+    /* 0x0028 */ byte NumLettersFromPurchases;
     /* 0x0028 */ byte NumPurchases;
-    /*        */ byte _gap_0x29;
-    /*        */ byte _gap_0x2A[0x2];
+    } _union_0x28;
+    /* 0x0029 */ byte NumLettersFromGameMasters;
+    /* 0x002A */ bool HasLettersFromGameMasters;
+    /* 0x002B */ bool HasLettersFromSupportDesk;
     /*        */ byte _gap_0x2C[0x4];
     /* 0x0030 */ Client::UI::Info::InfoProxyLetter::Letter Letters[0x82];
     /*        */ byte _gap_0x5170[0x8];
@@ -34029,18 +34974,27 @@ __unaligned struct Client::UI::Misc::RaptureLogModuleTab /* Size=0x928 */
 __unaligned struct Client::UI::Misc::RaptureLogModule /* Size=0x3488 */
 {
     /* 0x0000 */ Common::Log::LogModule LogModule;
-    /* 0x0080 */ Client::System::String::Utf8String Unk80;
+    /* 0x0080 */ Client::System::String::Utf8String LogMessageDataTerminator;
     /* 0x00E8 */ Client::UI::UIModule* UIModule;
     /* 0x00F0 */ Component::Excel::ExcelModuleInterface* ExcelModuleInterface;
     /* 0x00F8 */ Client::UI::Misc::RaptureTextModule* RaptureTextModule;
     /* 0x0100 */ Component::GUI::AtkFontCodeModule* AtkFontCodeModule;
     /* 0x0108 */ Client::System::String::Utf8String TempParseMessage[0xA];
-    /*        */ byte _gap_0x518[0x18];
+    /*        */ byte _gap_0x518[0x8];
+    /* 0x0520 */ Component::Excel::ExcelSheet* LogKindSheet;
+    /*        */ byte _gap_0x528[0x8];
     /* 0x0530 */ Client::UI::Misc::RaptureLogModuleTab ChatTabs[0x5];
-    /*        */ byte _gap_0x32F8[0xF0];
-    /* 0x33E8 */ byte ChatTabsPendingReload[0x4];
-    /*        */ byte _gap_0x33EC[0x4];
-    /*        */ byte _gap_0x33F0[0x88];
+    /*        */ byte _gap_0x32F8[0xE0];
+    /* 0x33D8 */ Component::Excel::ExcelSheet* LogMessageSheet;
+    /*        */ byte _gap_0x33E0[0x8];
+    /* 0x33E8 */ bool ChatTabIsPendingReload[0x4];
+    /*        */ byte _gap_0x33EC;
+    /* 0x33ED */ bool ChatTabShouldDisplayTime[0x4];
+    /*        */ byte _gap_0x33F1;
+    /* 0x33F2 */ bool UseServerTime;
+    /* 0x33F3 */ bool Use12HourClock;
+    /*        */ byte _gap_0x33F4[0x4];
+    /*        */ byte _gap_0x33F8[0x80];
     /* 0x3478 */ Client::UI::Misc::LogMessageSource* MsgSourceArray;
     /* 0x3480 */ __int32 MsgSourceArrayLength;
     /*        */ byte _gap_0x3484[0x4];
@@ -34835,7 +35789,8 @@ __unaligned struct Client::UI::RaptureAtkUnitManager /* Size=0x9D18 */
     /* 0x0000 */ Client::UI::RaptureAtkUnitManagerVTable* VTable;
     /* 0x0000 */ Component::GUI::AtkUnitManager AtkUnitManager;
     } _union_0x0;
-    /*        */ byte _gap_0x9C90[0x70];
+    /* 0x9C90 */ Component::GUI::AtkEventInterface AtkEventInterface;
+    /*        */ byte _gap_0x9C98[0x68];
     /* 0x9D00 */ Client::UI::UIModule::UiFlags UiFlags;
     /*        */ byte _gap_0x9D04[0x4];
     /*        */ byte _gap_0x9D08[0x8];
