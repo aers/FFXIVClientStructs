@@ -50,13 +50,14 @@ class DefinedField(DefinedFuncParam):
         self.params = params
 
 class DefinedStruct(DefinedBase):
-    def __init__(self, name, type, namespace, fields, size, virtual_functions, member_functions):
-        # type: (str, str, str, list[DefinedField], int | None, list[DefinedVFunc], list[DefinedMemFunc]) -> None
+    def __init__(self, name, type, namespace, fields, size, virtual_functions, member_functions, union):
+        # type: (str, str, str, list[DefinedField], int | None, list[DefinedVFunc], list[DefinedMemFunc], str) -> None
         super(DefinedStruct, self).__init__(name, type, namespace)
         self.fields = fields
         self.size = size
         self.virtual_functions = virtual_functions
         self.member_functions = member_functions
+        self.union = bool(union)
 
 class DefinedExport:
     def __init__(self, enums, structs) -> None:
@@ -158,9 +159,9 @@ class BaseApi:
                     parameters.append(DefinedFuncParam(param["name"], param["type"]))
                 member_functions.append(DefinedMemFunc(memfunc["signature"], memfunc["return_type"], parameters))
             if "size" in struct:
-                structs.append(DefinedStruct(struct["name"], struct["type"], struct["namespace"], fields, struct["size"], virtual_functions, member_functions))
+                structs.append(DefinedStruct(struct["name"], struct["type"], struct["namespace"], fields, struct["size"], virtual_functions, member_functions, struct["union"]))
             else:
-                structs.append(DefinedStruct(struct["name"], struct["type"], struct["namespace"], fields, None, virtual_functions, member_functions))
+                structs.append(DefinedStruct(struct["name"], struct["type"], struct["namespace"], fields, None, virtual_functions, member_functions, struct["union"]))
         return DefinedExport(enums, structs)
 
 api = None
@@ -286,7 +287,7 @@ if api is None:
             def create_struct(self, struct):
                 # type: (DefinedStruct) -> None
                 fullname = self.clean_name(struct.type)
-                ida_struct.add_struc(-1, fullname)
+                ida_struct.add_struc(-1, fullname, struct.union)
                 s = 0
                 if struct.virtual_functions != []:
                     s = ida_struct.add_struc(-1, fullname + "VTable")
