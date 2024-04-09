@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using FFXIVClientStructs.Attributes;
 
 namespace CExporter;
 
@@ -44,5 +45,16 @@ public static class ExporterStatics {
         }
 
         return definedTypes.Where(t => t.FullName!.StartsWith(HavokNamespacePrefix) && !t.FullName.EndsWith("VTable")).ToArray();
+    }
+}
+
+internal class CExporterUnionCompare : IEqualityComparer<CExporterUnionAttribute> {
+    public bool Equals(CExporterUnionAttribute? x, CExporterUnionAttribute? y) {
+        return x is { IsStruct: var xb, Struct: var xs, Union: var xu } && 
+               y is { IsStruct: var yb, Struct: var ys, Union: var yu } &&
+               (xb == yb ? xs == ys && xu == yu : xu == yu);
+    }
+    public int GetHashCode(CExporterUnionAttribute obj) {
+        return obj.IsStruct ? HashCode.Combine(obj.Union, obj.Struct) : HashCode.Combine(obj.Union);
     }
 }

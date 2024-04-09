@@ -205,7 +205,7 @@ ReExport:
             var fields = type.GetFields(_bindingFlags);
             var unionFields = fields.Where(t => t.GetCustomAttribute<ObsoleteAttribute>() == null && t.GetCustomAttribute<CExportIgnoreAttribute>() == null && t.GetCustomAttribute<CExporterUnionAttribute>() != null).ToArray();
 
-            var unionOffsets = new Dictionary<CExporterUnionAttribute, FieldInfo>();
+            var unionOffsets = new Dictionary<CExporterUnionAttribute, FieldInfo>(new CExporterUnionCompare());
 
             if (unionFields.Any()) {
                 var unions = new List<ProcessedStruct>();
@@ -222,7 +222,7 @@ ReExport:
                             IsUnion = !attr.IsStruct,
                             StructName = attr.IsStruct ? attr.Struct : attr.Union,
                             StructNamespace = type.FullSanitizeName() + (attr.IsStruct ? $"{ExporterStatics.Separator}{attr.Union}" : ""),
-                            StructSize = -1,
+                            StructSize = 0,
                             Fields = [
                                 new ProcessedField {
                                     FieldType = unionField.FieldType,
@@ -259,6 +259,7 @@ ReExport:
                     ];
                     unions[unionStructIndex] = unionStruct;
                 }
+                _structs.AddRange(unions);
             }
 
             var processedStruct = new ProcessedStruct {
@@ -304,6 +305,19 @@ ReExport:
                 VirtualFunctions = virtualFunctions,
                 MemberFunctions = memberFunctionsArray
             };
+
+            foreach (var (unionAttr, fieldInfo) in unionOffsets) {
+                processedStruct.Fields = [
+                    ..processedStruct.Fields,
+                    new ProcessedField {
+                        FieldType = fieldInfo.FieldType,
+                        FieldOffset = fieldInfo.GetFieldOffset(),
+                        FieldName = unionAttr.Union,
+                        FieldTypeOverride = type.FullSanitizeName() + $"{ExporterStatics.Separator}{unionAttr.Union}"
+                    }
+                ];
+                processedStruct.Fields = [.. processedStruct.Fields.OrderBy(t => t.FieldOffset)];
+            }
 
             _structs.Add(processedStruct);
         }
@@ -451,7 +465,9 @@ public class ProcessedStructConverter : IYamlTypeConverter {
         emitter.Emit(new Scalar(s.StructName));
         emitter.Emit(new Scalar("namespace"));
         emitter.Emit(new Scalar(s.StructNamespace));
-        if (s.StructType.StructLayoutAttribute?.Value == LayoutKind.Explicit) {
+        emitter.Emit(new Scalar("union"));
+        emitter.Emit(new Scalar(s.IsUnion.ToString()));
+        if (s.StructType.StructLayoutAttribute?.Value == LayoutKind.Explicit && s.StructSize != 0) {
             emitter.Emit(new Scalar("size"));
             emitter.Emit(new Scalar(s.StructSize.ToString()));
         }
