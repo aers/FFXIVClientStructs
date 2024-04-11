@@ -9052,6 +9052,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140A04620: ctor
+      0x140A04710: SearchForRecipesUsingItem
   Client::UI::Agent::AgentTeleport:
     vtbls:
       - ea: 0x141A71490
