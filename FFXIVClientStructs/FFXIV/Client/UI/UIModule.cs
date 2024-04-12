@@ -55,9 +55,8 @@ public unsafe partial struct UIModule {
     [FieldOffset(0x8DFA0)] internal RecipeFavoriteModule RecipeFavoriteModule;
     // [FieldOffset(0x8E128)] internal CraftModule CraftModule;
     [FieldOffset(0x8E180)] internal RaptureUiDataModule RaptureUiDataModule;
-    // [FieldOffset(0x93C68)] internal Vf27Struct;
-    // [FieldOffset(0x93C88)] internal Vf28Struct;
-    // [FieldOffset(0x93CB0)] internal UnkStruct93CB0;
+    [FieldOffset(0x93C68)] internal DataCenterHelper DataCenterHelper;
+    [FieldOffset(0x93C88)] internal WorldHelper WorldHelper;
     [FieldOffset(0x93CC8)] internal GoldSaucerModule GoldSaucerModule;
     [FieldOffset(0x93F90)] internal RaptureTeleportHistory RaptureTeleportHistory;
     [FieldOffset(0x94050)] internal ItemContextCustomizeModule ItemContextCustomizeModule;
@@ -178,11 +177,11 @@ public unsafe partial struct UIModule {
     [VirtualFunction(26)]
     public partial RaptureUiDataModule* GetRaptureUiDataModule();
 
-    // [VirtualFunction(27)]
-    // public partial Vf27Struct* GetVf27Struct();
+    [VirtualFunction(27)]
+    public partial DataCenterHelper* GetDataCenterHelper();
 
-    // [VirtualFunction(28)]
-    // public partial Vf28Struct* GetVf28Struct();
+    [VirtualFunction(28)]
+    public partial WorldHelper* GetWorldHelper();
 
     [VirtualFunction(29)]
     public partial GoldSaucerModule* GetGoldSaucerModule();

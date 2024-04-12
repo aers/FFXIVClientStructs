@@ -599,9 +599,12 @@ classes:
       - ea: 0x141A1A668
     vfuncs:
       0: dtor
+      1: GetGlobalParameters
+      3: FormatUtf8String
       7: EncodeString
       8: EncodeMacro
       9: ProcessMacroCode
+      16: FormatString # using byte* as input
   Component::Text::Localize::Localize:
     vtbls:
       - ea: 0x141A1A6F0
@@ -5685,7 +5688,8 @@ classes:
       24: GetRecipeFavoriteModule
       25: GetCraftModule
       26: GetRaptureUiDataModule
-      27: GetAfterAgentsPtr # points to the field right after the last Agent in AgentModule
+      27: GetDataCenterHelper
+      28: GetWorldHelper
       29: GetGoldSaucerModule
       30: GetRaptureTeleportHistory
       31: GetItemContextCustomizeModule
@@ -6318,6 +6322,30 @@ classes:
       0x1406A8A50: Update
       0x1406A6FF0: Finalize
       0x1406A8E40: SearchForItem
+  Client::UI::Misc::DataCenterHelper:
+    vtbls:
+      - ea: 0x141A1EEB0
+    vfuncs:
+      0: dtor
+    funcs:
+      0x1406B1D40: ctor
+      0x1406B1D80: Finalize
+      0x1406B1E90: PopulateForRegion # a2 is a pointer to the region id (byte)
+      0x1406B2260: GetDataCenterByIndex # unused
+      0x1406B22E0: GetDataCenterByRowId # unused
+      0x1406B22E0: GetDataCenterNameByRowId # unused
+  Client::UI::Misc::WorldHelper:
+    vtbls:
+      - ea: 0x141A1EEC8
+    vfuncs:
+      0: dtor
+    funcs:
+      0x1406B2560: ctor
+      0x1406B2630: Finalize
+      0x1406B26C0: Populate
+      0x1406B2B50: GetWorldById
+      0x1406B2BD0: GetWorldNameById
+      0x1406B2C30: GetWorldIdByName
   Client::UI::Misc::GoldSaucerModule:
     vtbls:
       - ea: 0x141A1EED0
