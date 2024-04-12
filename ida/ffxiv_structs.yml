@@ -2572,6 +2572,40 @@ structs:
     offset: 16
   virtual_functions: []
   member_functions: []
+- type: Common::Math::HalfVector2
+  name: HalfVector2
+  namespace: Common.Math
+  union: False
+  size: 4
+  fields:
+  - type: __int16
+    name: X
+    offset: 0
+  - type: __int16
+    name: Y
+    offset: 2
+  virtual_functions: []
+  member_functions: []
+- type: Common::Math::HalfVector4
+  name: HalfVector4
+  namespace: Common.Math
+  union: False
+  size: 8
+  fields:
+  - type: __int16
+    name: X
+    offset: 0
+  - type: __int16
+    name: Y
+    offset: 2
+  - type: __int16
+    name: Z
+    offset: 4
+  - type: __int16
+    name: W
+    offset: 6
+  virtual_functions: []
+  member_functions: []
 - type: Common::Math::Matrix2x2
   name: Matrix2x2
   namespace: Common.Math
@@ -5136,7 +5170,7 @@ structs:
   - type: byte
     name: Byte
     offset: 0
-  - type: StdVector<Component::GUI::AtkValue>*
+  - type: StdVector_Component::GUI::AtkValue*
     name: Vector
     offset: 0
   - type: Client::Graphics::Kernel::Texture*
@@ -6074,6 +6108,124 @@ structs:
       name: this
     - type: __int32
       name: bannerIndex
+- type: Client::UI::Misc::BannerModuleEntry
+  name: BannerModuleEntry
+  namespace: Client.UI.Misc
+  union: False
+  size: 144
+  fields:
+  - type: byte
+    name: BannerTimelineName
+    offset: 0
+    size: 64
+  - type: Common::Math::HalfVector4
+    name: CameraPosition
+    offset: 68
+  - type: Common::Math::HalfVector4
+    name: CameraTarget
+    offset: 76
+  - type: Common::Math::HalfVector2
+    name: HeadDirection
+    offset: 84
+  - type: Common::Math::HalfVector2
+    name: EyeDirection
+    offset: 88
+  - type: __int16
+    name: DirectionalLightingVerticalAngle
+    offset: 92
+  - type: __int16
+    name: DirectionalLightingHorizontalAngle
+    offset: 94
+  - type: byte
+    name: Race
+    offset: 96
+  - type: byte
+    name: Sex
+    offset: 97
+  - type: byte
+    name: Height
+    offset: 98
+  - type: byte
+    name: Tribe
+    offset: 99
+  - type: byte
+    name: DirectionalLightingColorRed
+    offset: 100
+  - type: byte
+    name: DirectionalLightingColorGreen
+    offset: 101
+  - type: byte
+    name: DirectionalLightingColorBlue
+    offset: 102
+  - type: byte
+    name: AmbientLightingColorRed
+    offset: 103
+  - type: byte
+    name: AmbientLightingColorGreen
+    offset: 104
+  - type: byte
+    name: AmbientLightingColorBlue
+    offset: 105
+  - type: float
+    name: AnimationProgress
+    offset: 108
+  - type: unsigned __int32
+    name: BannerTimelineIcon
+    offset: 112
+  - type: unsigned __int32
+    name: LastUpdated
+    offset: 116
+  - type: unsigned __int32
+    name: Checksum
+    offset: 120
+  - type: unsigned __int16
+    name: BannerBg
+    offset: 124
+  - type: unsigned __int16
+    name: BannerFrame
+    offset: 126
+  - type: unsigned __int16
+    name: BannerDecoration
+    offset: 128
+  - type: unsigned __int16
+    name: BannerTimeline
+    offset: 130
+  - type: __int16
+    name: ImageRotation
+    offset: 132
+  - type: byte
+    name: BannerIndex
+    offset: 134
+  - type: byte
+    name: BannerId
+    offset: 135
+  - type: byte
+    name: BannerTimelineClassJobCategory
+    offset: 136
+  - type: byte
+    name: Expression
+    offset: 137
+  - type: byte
+    name: CameraZoom
+    offset: 138
+  - type: byte
+    name: DirectionalLightingBrightness
+    offset: 139
+  - type: byte
+    name: AmbientLightingBrightness
+    offset: 140
+  - type: byte
+    name: HasBannerTimelineCustomName
+    offset: 141
+  virtual_functions: []
+  member_functions:
+  - signature: 0F B7 42 7C 66 39 41 7C
+    return_type: byte
+    parameters:
+    - type: Client::UI::Misc::BannerModuleEntry*
+      name: this
+    - type: Client::UI::Misc::BannerModuleEntry*
+      name: other
 - type: Client::UI::Misc::CharaViewItem
   name: CharaViewItem
   namespace: Client.UI.Misc
@@ -6107,6 +6259,74 @@ structs:
   - type: unsigned __int64
     name: ModelSub
     offset: 24
+  virtual_functions: []
+  member_functions: []
+- type: Client::UI::Misc::ExportedPortraitData
+  name: ExportedPortraitData
+  namespace: Client.UI.Misc
+  union: False
+  size: 52
+  fields:
+  - type: Common::Math::HalfVector4
+    name: CameraPosition
+    offset: 0
+  - type: Common::Math::HalfVector4
+    name: CameraTarget
+    offset: 8
+  - type: __int16
+    name: ImageRotation
+    offset: 16
+  - type: byte
+    name: CameraZoom
+    offset: 18
+  - type: unsigned __int16
+    name: BannerTimeline
+    offset: 20
+  - type: float
+    name: AnimationProgress
+    offset: 24
+  - type: byte
+    name: Expression
+    offset: 28
+  - type: Common::Math::HalfVector2
+    name: HeadDirection
+    offset: 30
+  - type: Common::Math::HalfVector2
+    name: EyeDirection
+    offset: 34
+  - type: byte
+    name: DirectionalLightingColorRed
+    offset: 38
+  - type: byte
+    name: DirectionalLightingColorGreen
+    offset: 39
+  - type: byte
+    name: DirectionalLightingColorBlue
+    offset: 40
+  - type: byte
+    name: DirectionalLightingBrightness
+    offset: 41
+  - type: __int16
+    name: DirectionalLightingVerticalAngle
+    offset: 42
+  - type: __int16
+    name: DirectionalLightingHorizontalAngle
+    offset: 44
+  - type: byte
+    name: AmbientLightingColorRed
+    offset: 46
+  - type: byte
+    name: AmbientLightingColorGreen
+    offset: 47
+  - type: byte
+    name: AmbientLightingColorBlue
+    offset: 48
+  - type: byte
+    name: AmbientLightingBrightness
+    offset: 49
+  - type: unsigned __int16
+    name: BannerBg
+    offset: 50
   virtual_functions: []
   member_functions: []
 - type: Client::UI::Misc::ConfigModule
@@ -8811,7 +9031,7 @@ structs:
   - type: Client::LayoutEngine::LayoutManager*
     name: ActiveLayout
     offset: 32
-  - type: StdMap<Client::System::String::Utf8String, byte*>*
+  - type: StdMap_Client::System::String::Utf8String__bytePtr*
     name: RsvMap
     offset: 536
   virtual_functions: []
@@ -20622,6 +20842,62 @@ structs:
     offset: 2
   virtual_functions: []
   member_functions: []
+- type: Client::System::Resource::Handle::MaterialResourceHandle::ColorTableRow
+  name: ColorTableRow
+  namespace: Client.System.Resource.Handle
+  union: False
+  size: 32
+  fields:
+  - type: __int16
+    name: DiffuseRed
+    offset: 0
+  - type: __int16
+    name: DiffuseGreen
+    offset: 2
+  - type: __int16
+    name: DiffuseBlue
+    offset: 4
+  - type: __int16
+    name: SpecularStrength
+    offset: 6
+  - type: __int16
+    name: SpecularRed
+    offset: 8
+  - type: __int16
+    name: SpecularGreen
+    offset: 10
+  - type: __int16
+    name: SpecularBlue
+    offset: 12
+  - type: __int16
+    name: GlossStrength
+    offset: 14
+  - type: __int16
+    name: EmissiveRed
+    offset: 16
+  - type: __int16
+    name: EmissiveGreen
+    offset: 18
+  - type: __int16
+    name: EmissiveBlue
+    offset: 20
+  - type: __int16
+    name: TileIndexW
+    offset: 22
+  - type: __int16
+    name: TileScaleUU
+    offset: 24
+  - type: __int16
+    name: TileScaleUV
+    offset: 26
+  - type: __int16
+    name: TileScaleVU
+    offset: 28
+  - type: __int16
+    name: TileScaleVV
+    offset: 30
+  virtual_functions: []
+  member_functions: []
 - type: Client::System::Resource::Handle::MaterialResourceHandle::StainTableRow
   name: StainTableRow
   namespace: Client.System.Resource.Handle
@@ -22621,24 +22897,7 @@ structs:
     offset: 4
   virtual_functions: []
   member_functions: []
-- type: __int16
-  name: Half
-  namespace: ''
-  union: False
-  fields:
-  - type: unsigned __int16
-    name: _value
-    offset: 0
-  virtual_functions: []
-  member_functions: []
-- type: void
-  name: Void
-  namespace: ''
-  union: False
-  fields: []
-  virtual_functions: []
-  member_functions: []
-- type: StdVector<__int32>
+- type: StdVector___int32
   name: StdVector`1
   namespace: ''
   union: False
@@ -22654,7 +22913,7 @@ structs:
     offset: 16
   virtual_functions: []
   member_functions: []
-- type: StdVector<byte>
+- type: StdVector_byte
   name: StdVector`1
   namespace: ''
   union: False
@@ -22760,12 +23019,12 @@ structs:
     offset: 60
   virtual_functions: []
   member_functions: []
-- type: StdMap<Client::System::String::Utf8String, __int64>
+- type: StdMap_Client::System::String::Utf8String____int64
   name: StdMap`2
   namespace: ''
   union: False
   fields:
-  - type: StdMap<Client::System::String::Utf8String, __int64>*
+  - type: StdMap::Node_Client::System::String::Utf8String____int64*
     name: Head
     offset: 0
   - type: unsigned __int64
@@ -22773,7 +23032,7 @@ structs:
     offset: 8
   virtual_functions: []
   member_functions: []
-- type: StdVector<__int64>
+- type: StdVector___int64
   name: StdVector`1
   namespace: ''
   union: False
@@ -22789,7 +23048,7 @@ structs:
     offset: 16
   virtual_functions: []
   member_functions: []
-- type: StdDeque<Component::Text::TextParameter>
+- type: StdDeque_Component::Text::TextParameter
   name: StdDeque`1
   namespace: ''
   union: False
@@ -22811,12 +23070,12 @@ structs:
     offset: 32
   virtual_functions: []
   member_functions: []
-- type: StdMap<Client::System::String::Utf8String, Component::Text::MacroEncoder::MacroCodeDescription>
+- type: StdMap_Client::System::String::Utf8String__Component::Text::MacroEncoder::MacroCodeDescription
   name: StdMap`2
   namespace: ''
   union: False
   fields:
-  - type: StdMap<Client::System::String::Utf8String, Component::Text::MacroEncoder::MacroCodeDescription>*
+  - type: StdMap::Node_Client::System::String::Utf8String__Component::Text::MacroEncoder::MacroCodeDescription*
     name: Head
     offset: 0
   - type: unsigned __int64
@@ -22824,7 +23083,7 @@ structs:
     offset: 8
   virtual_functions: []
   member_functions: []
-- type: StdVector<Client::System::String::Utf8String>
+- type: StdVector_Client::System::String::Utf8String
   name: StdVector`1
   namespace: ''
   union: False
@@ -22840,7 +23099,7 @@ structs:
     offset: 16
   virtual_functions: []
   member_functions: []
-- type: StdVector<Component::GUI::AtkComponentTreeListItem*>
+- type: StdVector_Component::GUI::AtkComponentTreeListItemPtr
   name: StdVector`1
   namespace: ''
   union: False
@@ -22856,7 +23115,7 @@ structs:
     offset: 16
   virtual_functions: []
   member_functions: []
-- type: StdVector<unsigned __int32>
+- type: StdVector_unsigned__int32
   name: StdVector`1
   namespace: ''
   union: False
@@ -22872,7 +23131,7 @@ structs:
     offset: 16
   virtual_functions: []
   member_functions: []
-- type: StdVector<byte*>
+- type: StdVector_bytePtr
   name: StdVector`1
   namespace: ''
   union: False
@@ -22888,7 +23147,7 @@ structs:
     offset: 16
   virtual_functions: []
   member_functions: []
-- type: StdVector<Component::GUI::AtkEvent*>
+- type: StdVector_Component::GUI::AtkEventPtr
   name: StdVector`1
   namespace: ''
   union: False
@@ -22904,7 +23163,7 @@ structs:
     offset: 16
   virtual_functions: []
   member_functions: []
-- type: StdVector<Component::GUI::SimpleTweenAnimation>
+- type: StdVector_Component::GUI::SimpleTweenAnimation
   name: StdVector`1
   namespace: ''
   union: False
@@ -22920,15 +23179,15 @@ structs:
     offset: 16
   virtual_functions: []
   member_functions: []
-- type: StdLinkedList<Component::GUI::AtkTextureResource*>
+- type: StdLinkedList_Component::GUI::AtkTextureResourcePtr
   name: StdLinkedList`1
   namespace: ''
   union: False
   fields:
-  - type: StdLinkedList<Component::GUI::AtkTextureResource*>*
+  - type: StdLinkedList::Node_Component::GUI::AtkTextureResourcePtr*
     name: End
     offset: 0
-  - type: StdLinkedList<Component::GUI::AtkTextureResource*>*
+  - type: StdLinkedList::Node_Component::GUI::AtkTextureResourcePtr*
     name: Start
     offset: 8
   - type: unsigned __int32
@@ -22936,7 +23195,7 @@ structs:
     offset: 16
   virtual_functions: []
   member_functions: []
-- type: StdPair<float, float>
+- type: StdPair_float__float
   name: StdPair`2
   namespace: ''
   union: False
@@ -22949,12 +23208,12 @@ structs:
     offset: 4
   virtual_functions: []
   member_functions: []
-- type: StdMap<Component::GUI::AtkResNode*, Component::GUI::AtkTooltipManager::AtkTooltipInfo*>
+- type: StdMap_Component::GUI::AtkResNodePtr__Component::GUI::AtkTooltipManager::AtkTooltipInfoPtr
   name: StdMap`2
   namespace: ''
   union: False
   fields:
-  - type: StdMap<Component::GUI::AtkResNode*, Component::GUI::AtkTooltipManager::AtkTooltipInfo*>*
+  - type: StdMap::Node_Component::GUI::AtkResNodePtr__Component::GUI::AtkTooltipManager::AtkTooltipInfoPtr*
     name: Head
     offset: 0
   - type: unsigned __int64
@@ -22962,15 +23221,15 @@ structs:
     offset: 8
   virtual_functions: []
   member_functions: []
-- type: StdLinkedList<Component::GUI::AtkUldManager::DuplicateObjectList*>
+- type: StdLinkedList_Component::GUI::AtkUldManager::DuplicateObjectListPtr
   name: StdLinkedList`1
   namespace: ''
   union: False
   fields:
-  - type: StdLinkedList<Component::GUI::AtkUldManager::DuplicateObjectList*>*
+  - type: StdLinkedList::Node_Component::GUI::AtkUldManager::DuplicateObjectListPtr*
     name: End
     offset: 0
-  - type: StdLinkedList<Component::GUI::AtkUldManager::DuplicateObjectList*>*
+  - type: StdLinkedList::Node_Component::GUI::AtkUldManager::DuplicateObjectListPtr*
     name: Start
     offset: 8
   - type: unsigned __int32
@@ -22978,7 +23237,23 @@ structs:
     offset: 16
   virtual_functions: []
   member_functions: []
-- type: StdVector<Client::UI::ActionBarSlot>
+- type: StdVector_Component::GUI::AtkValue
+  name: StdVector`1
+  namespace: ''
+  union: False
+  fields:
+  - type: Component::GUI::AtkValue*
+    name: First
+    offset: 0
+  - type: Component::GUI::AtkValue*
+    name: Last
+    offset: 8
+  - type: Component::GUI::AtkValue*
+    name: End
+    offset: 16
+  virtual_functions: []
+  member_functions: []
+- type: StdVector_Client::UI::ActionBarSlot
   name: StdVector`1
   namespace: ''
   union: False
@@ -22994,12 +23269,12 @@ structs:
     offset: 16
   virtual_functions: []
   member_functions: []
-- type: StdMap<unsigned __int64, Client::UI::Misc::ItemOrderModuleSorter*>
+- type: StdMap_unsigned__int64__Client::UI::Misc::ItemOrderModuleSorterPtr
   name: StdMap`2
   namespace: ''
   union: False
   fields:
-  - type: StdMap<unsigned __int64, Client::UI::Misc::ItemOrderModuleSorter*>*
+  - type: StdMap::Node_unsigned__int64__Client::UI::Misc::ItemOrderModuleSorterPtr*
     name: Head
     offset: 0
   - type: unsigned __int64
@@ -23007,7 +23282,7 @@ structs:
     offset: 8
   virtual_functions: []
   member_functions: []
-- type: StdVector<Client::UI::Misc::ItemOrderModuleSorterItemEntry*>
+- type: StdVector_Client::UI::Misc::ItemOrderModuleSorterItemEntryPtr
   name: StdVector`1
   namespace: ''
   union: False
@@ -23023,7 +23298,7 @@ structs:
     offset: 16
   virtual_functions: []
   member_functions: []
-- type: StdVector<Client::UI::Misc::ItemOrderModuleSorterSortFunctionEntry>
+- type: StdVector_Client::UI::Misc::ItemOrderModuleSorterSortFunctionEntry
   name: StdVector`1
   namespace: ''
   union: False
@@ -23039,7 +23314,7 @@ structs:
     offset: 16
   virtual_functions: []
   member_functions: []
-- type: StdVector<Client::UI::Agent::ActionData>
+- type: StdVector_Client::UI::Agent::ActionData
   name: StdVector`1
   namespace: ''
   union: False
@@ -23055,7 +23330,7 @@ structs:
     offset: 16
   virtual_functions: []
   member_functions: []
-- type: StdVector<Client::UI::Agent::ExtraCommandData>
+- type: StdVector_Client::UI::Agent::ExtraCommandData
   name: StdVector`1
   namespace: ''
   union: False
@@ -23071,7 +23346,7 @@ structs:
     offset: 16
   virtual_functions: []
   member_functions: []
-- type: StdVector<Client::Game::UI::MapMarkerData>
+- type: StdVector_Client::Game::UI::MapMarkerData
   name: StdVector`1
   namespace: ''
   union: False
@@ -23087,7 +23362,7 @@ structs:
     offset: 16
   virtual_functions: []
   member_functions: []
-- type: StdVector<Client::Game::UI::MapMarkerData*>
+- type: StdVector_Client::Game::UI::MapMarkerDataPtr
   name: StdVector`1
   namespace: ''
   union: False
@@ -23103,7 +23378,7 @@ structs:
     offset: 16
   virtual_functions: []
   member_functions: []
-- type: StdVector<Client::UI::Agent::CharaSelectCharacterEntry*>
+- type: StdVector_Client::UI::Agent::CharaSelectCharacterEntryPtr
   name: StdVector`1
   namespace: ''
   union: False
@@ -23119,7 +23394,7 @@ structs:
     offset: 16
   virtual_functions: []
   member_functions: []
-- type: StdVector<Client::UI::Agent::LobbyDataCenterWorldEntry>
+- type: StdVector_Client::UI::Agent::LobbyDataCenterWorldEntry
   name: StdVector`1
   namespace: ''
   union: False
@@ -23135,7 +23410,7 @@ structs:
     offset: 16
   virtual_functions: []
   member_functions: []
-- type: StdVector<Client::UI::Agent::CharaSelectRetainerInfo*>
+- type: StdVector_Client::UI::Agent::CharaSelectRetainerInfoPtr
   name: StdVector`1
   namespace: ''
   union: False
@@ -23151,7 +23426,7 @@ structs:
     offset: 16
   virtual_functions: []
   member_functions: []
-- type: StdVector<Client::UI::Agent::AgentMacro::TextCommandEntry>
+- type: StdVector_Client::UI::Agent::AgentMacro::TextCommandEntry
   name: StdVector`1
   namespace: ''
   union: False
@@ -23167,7 +23442,7 @@ structs:
     offset: 16
   virtual_functions: []
   member_functions: []
-- type: StdVector<Client::UI::Agent::LinkedTooltipMarker>
+- type: StdVector_Client::UI::Agent::LinkedTooltipMarker
   name: StdVector`1
   namespace: ''
   union: False
@@ -23183,7 +23458,7 @@ structs:
     offset: 16
   virtual_functions: []
   member_functions: []
-- type: StdVector<Client::UI::Agent::LinkedTooltipMarker*>
+- type: StdVector_Client::UI::Agent::LinkedTooltipMarkerPtr
   name: StdVector`1
   namespace: ''
   union: False
@@ -23199,12 +23474,12 @@ structs:
     offset: 16
   virtual_functions: []
   member_functions: []
-- type: StdMap<unsigned __int32, unsigned __int32>
+- type: StdMap_unsigned__int32__unsigned__int32
   name: StdMap`2
   namespace: ''
   union: False
   fields:
-  - type: StdMap<unsigned __int32, unsigned __int32>*
+  - type: StdMap::Node_unsigned__int32__unsigned__int32*
     name: Head
     offset: 0
   - type: unsigned __int64
@@ -23212,7 +23487,7 @@ structs:
     offset: 8
   virtual_functions: []
   member_functions: []
-- type: StdVector<Client::UI::Agent::AgentMJIAnimalManagement::Slot>
+- type: StdVector_Client::UI::Agent::AgentMJIAnimalManagement::Slot
   name: StdVector`1
   namespace: ''
   union: False
@@ -23228,7 +23503,7 @@ structs:
     offset: 16
   virtual_functions: []
   member_functions: []
-- type: StdVector<Client::UI::Agent::AgentMJIAnimalManagement::AnimalDesc>
+- type: StdVector_Client::UI::Agent::AgentMJIAnimalManagement::AnimalDesc
   name: StdVector`1
   namespace: ''
   union: False
@@ -23244,7 +23519,7 @@ structs:
     offset: 16
   virtual_functions: []
   member_functions: []
-- type: StdVector<Client::UI::Agent::AgentMJIAnimalManagement::ItemDesc>
+- type: StdVector_Client::UI::Agent::AgentMJIAnimalManagement::ItemDesc
   name: StdVector`1
   namespace: ''
   union: False
@@ -23260,7 +23535,7 @@ structs:
     offset: 16
   virtual_functions: []
   member_functions: []
-- type: StdVector<Client::UI::Agent::AgentMJIAnimalManagement::ItemDesc*>
+- type: StdVector_Client::UI::Agent::AgentMJIAnimalManagement::ItemDescPtr
   name: StdVector`1
   namespace: ''
   union: False
@@ -23276,7 +23551,7 @@ structs:
     offset: 16
   virtual_functions: []
   member_functions: []
-- type: StdVector<Client::UI::Agent::AgentMJIFarmManagement::Seed>
+- type: StdVector_Client::UI::Agent::AgentMJIFarmManagement::Seed
   name: StdVector`1
   namespace: ''
   union: False
@@ -23292,7 +23567,7 @@ structs:
     offset: 16
   virtual_functions: []
   member_functions: []
-- type: StdDeque<Client::System::String::Utf8String>
+- type: StdDeque_Client::System::String::Utf8String
   name: StdDeque`1
   namespace: ''
   union: False
@@ -23314,7 +23589,7 @@ structs:
     offset: 32
   virtual_functions: []
   member_functions: []
-- type: StdDeque<Client::UI::Agent::BalloonInfo>
+- type: StdDeque_Client::UI::Agent::BalloonInfo
   name: StdDeque`1
   namespace: ''
   union: False
@@ -23336,7 +23611,7 @@ structs:
     offset: 32
   virtual_functions: []
   member_functions: []
-- type: StdVector<Client::Game::UI::TeleportInfo>
+- type: StdVector_Client::Game::UI::TeleportInfo
   name: StdVector`1
   namespace: ''
   union: False
@@ -23352,12 +23627,12 @@ structs:
     offset: 16
   virtual_functions: []
   member_functions: []
-- type: StdMap<byte*, __int16>
+- type: StdMap_bytePtr____int16
   name: StdMap`2
   namespace: ''
   union: False
   fields:
-  - type: StdMap<byte*, __int16>*
+  - type: StdMap::Node_bytePtr____int16*
     name: Head
     offset: 0
   - type: unsigned __int64
@@ -23373,9 +23648,10 @@ structs:
   - type: byte*
     name: BufferPtr
     offset: 0
-  - type: StdString::<Buffer>e__FixedBuffer
+  - type: byte
     name: Buffer
     offset: 0
+    size: 16
   virtual_functions: []
   member_functions: []
 - type: StdString
@@ -23395,12 +23671,12 @@ structs:
     offset: 24
   virtual_functions: []
   member_functions: []
-- type: StdMap<unsigned __int32, hkaSkeletonMapper*>
+- type: StdMap_unsigned__int32__hkaSkeletonMapperPtr
   name: StdMap`2
   namespace: ''
   union: False
   fields:
-  - type: StdMap<unsigned __int32, hkaSkeletonMapper*>*
+  - type: StdMap::Node_unsigned__int32__hkaSkeletonMapperPtr*
     name: Head
     offset: 0
   - type: unsigned __int64
@@ -23408,12 +23684,12 @@ structs:
     offset: 8
   virtual_functions: []
   member_functions: []
-- type: StdMap<Client::System::String::Utf8String, byte*>
+- type: StdMap_Client::System::String::Utf8String__bytePtr
   name: StdMap`2
   namespace: ''
   union: False
   fields:
-  - type: StdMap<Client::System::String::Utf8String, byte*>*
+  - type: StdMap::Node_Client::System::String::Utf8String__bytePtr*
     name: Head
     offset: 0
   - type: unsigned __int64
@@ -23421,7 +23697,7 @@ structs:
     offset: 8
   virtual_functions: []
   member_functions: []
-- type: StdVector<Client::Graphics::Physics::BoneSimulator*>
+- type: StdVector_Client::Graphics::Physics::BoneSimulatorPtr
   name: StdVector`1
   namespace: ''
   union: False
@@ -23437,12 +23713,12 @@ structs:
     offset: 16
   virtual_functions: []
   member_functions: []
-- type: StdMap<unsigned __int32, Client::Game::CurrencyManager::SpecialCurrencyItem>
+- type: StdMap_unsigned__int32__Client::Game::CurrencyManager::SpecialCurrencyItem
   name: StdMap`2
   namespace: ''
   union: False
   fields:
-  - type: StdMap<unsigned __int32, Client::Game::CurrencyManager::SpecialCurrencyItem>*
+  - type: StdMap::Node_unsigned__int32__Client::Game::CurrencyManager::SpecialCurrencyItem*
     name: Head
     offset: 0
   - type: unsigned __int64
@@ -23450,12 +23726,12 @@ structs:
     offset: 8
   virtual_functions: []
   member_functions: []
-- type: StdMap<unsigned __int32, Client::Game::CurrencyManager::CurrencyItem>
+- type: StdMap_unsigned__int32__Client::Game::CurrencyManager::CurrencyItem
   name: StdMap`2
   namespace: ''
   union: False
   fields:
-  - type: StdMap<unsigned __int32, Client::Game::CurrencyManager::CurrencyItem>*
+  - type: StdMap::Node_unsigned__int32__Client::Game::CurrencyManager::CurrencyItem*
     name: Head
     offset: 0
   - type: unsigned __int64
@@ -23463,12 +23739,12 @@ structs:
     offset: 8
   virtual_functions: []
   member_functions: []
-- type: StdMap<unsigned __int32, Client::Game::CurrencyManager::ContentCurrencyItem>
+- type: StdMap_unsigned__int32__Client::Game::CurrencyManager::ContentCurrencyItem
   name: StdMap`2
   namespace: ''
   union: False
   fields:
-  - type: StdMap<unsigned __int32, Client::Game::CurrencyManager::ContentCurrencyItem>*
+  - type: StdMap::Node_unsigned__int32__Client::Game::CurrencyManager::ContentCurrencyItem*
     name: Head
     offset: 0
   - type: unsigned __int64
@@ -23476,12 +23752,12 @@ structs:
     offset: 8
   virtual_functions: []
   member_functions: []
-- type: StdList<Client::Game::UI::MarkerInfo>
+- type: StdList_Client::Game::UI::MarkerInfo
   name: StdList`1
   namespace: ''
   union: False
   fields:
-  - type: StdList<Client::Game::UI::MarkerInfo>*
+  - type: StdList::Node_Client::Game::UI::MarkerInfo*
     name: Head
     offset: 0
   - type: unsigned __int64
@@ -23489,12 +23765,12 @@ structs:
     offset: 8
   virtual_functions: []
   member_functions: []
-- type: StdMap<unsigned __int32, StdPair<unsigned __int32, unsigned __int32>>
+- type: StdMap_unsigned__int32__StdPair_unsigned__int32__unsigned__int32
   name: StdMap`2
   namespace: ''
   union: False
   fields:
-  - type: StdMap<unsigned __int32, StdPair<unsigned __int32, unsigned __int32>>*
+  - type: StdMap::Node_unsigned__int32__StdPair_unsigned__int32__unsigned__int32*
     name: Head
     offset: 0
   - type: unsigned __int64
@@ -23502,12 +23778,12 @@ structs:
     offset: 8
   virtual_functions: []
   member_functions: []
-- type: StdMap<unsigned __int32, __int32>
+- type: StdMap_unsigned__int32____int32
   name: StdMap`2
   namespace: ''
   union: False
   fields:
-  - type: StdMap<unsigned __int32, __int32>*
+  - type: StdMap::Node_unsigned__int32____int32*
     name: Head
     offset: 0
   - type: unsigned __int64
@@ -23515,7 +23791,7 @@ structs:
     offset: 8
   virtual_functions: []
   member_functions: []
-- type: StdVector<Client::Game::Object::GameObjectID>
+- type: StdVector_Client::Game::Object::GameObjectID
   name: StdVector`1
   namespace: ''
   union: False
@@ -23531,7 +23807,7 @@ structs:
     offset: 16
   virtual_functions: []
   member_functions: []
-- type: StdVector<Client::Game::Fate::FateContext*>
+- type: StdVector_Client::Game::Fate::FateContextPtr
   name: StdVector`1
   namespace: ''
   union: False
@@ -23547,7 +23823,7 @@ structs:
     offset: 16
   virtual_functions: []
   member_functions: []
-- type: StdVector<Client::Game::Event::Director*>
+- type: StdVector_Client::Game::Event::DirectorPtr
   name: StdVector`1
   namespace: ''
   union: False
@@ -23563,12 +23839,12 @@ structs:
     offset: 16
   virtual_functions: []
   member_functions: []
-- type: StdMap<unsigned __int16, StdPair<__int64, __int64>>
+- type: StdMap_unsigned__int16__StdPair___int64____int64
   name: StdMap`2
   namespace: ''
   union: False
   fields:
-  - type: StdMap<unsigned __int16, StdPair<__int64, __int64>>*
+  - type: StdMap::Node_unsigned__int16__StdPair___int64____int64*
     name: Head
     offset: 0
   - type: unsigned __int64
@@ -23576,12 +23852,12 @@ structs:
     offset: 8
   virtual_functions: []
   member_functions: []
-- type: StdSet<Client::Game::Object::GameObject*>
+- type: StdSet_Client::Game::Object::GameObjectPtr
   name: StdSet`1
   namespace: ''
   union: False
   fields:
-  - type: StdSet<Client::Game::Object::GameObject*>*
+  - type: StdSet::Node_Client::Game::Object::GameObjectPtr*
     name: Head
     offset: 0
   - type: unsigned __int64
@@ -23589,12 +23865,12 @@ structs:
     offset: 8
   virtual_functions: []
   member_functions: []
-- type: StdMap<unsigned __int32, Client::Game::Event::EventHandler*>
+- type: StdMap_unsigned__int32__Client::Game::Event::EventHandlerPtr
   name: StdMap`2
   namespace: ''
   union: False
   fields:
-  - type: StdMap<unsigned __int32, Client::Game::Event::EventHandler*>*
+  - type: StdMap::Node_unsigned__int32__Client::Game::Event::EventHandlerPtr*
     name: Head
     offset: 0
   - type: unsigned __int64
@@ -23602,12 +23878,12 @@ structs:
     offset: 8
   virtual_functions: []
   member_functions: []
-- type: StdMap<__int64, Client::Game::Event::LuaActor>
+- type: StdMap___int64__Client::Game::Event::LuaActor
   name: StdMap`2
   namespace: ''
   union: False
   fields:
-  - type: StdMap<__int64, Client::Game::Event::LuaActor>*
+  - type: StdMap::Node___int64__Client::Game::Event::LuaActor*
     name: Head
     offset: 0
   - type: unsigned __int64
@@ -23615,7 +23891,7 @@ structs:
     offset: 8
   virtual_functions: []
   member_functions: []
-- type: StdVector<Client::UI::Agent::AgentMJICraftSchedule::CraftData>
+- type: StdVector_Client::UI::Agent::AgentMJICraftSchedule::CraftData
   name: StdVector`1
   namespace: ''
   union: False
@@ -23631,7 +23907,7 @@ structs:
     offset: 16
   virtual_functions: []
   member_functions: []
-- type: StdVector<Client::UI::Agent::AgentMJICraftSchedule::CraftData*>
+- type: StdVector_Client::UI::Agent::AgentMJICraftSchedule::CraftDataPtr
   name: StdVector`1
   namespace: ''
   union: False
@@ -23647,7 +23923,7 @@ structs:
     offset: 16
   virtual_functions: []
   member_functions: []
-- type: StdVector<Client::UI::Agent::AgentMJIDisposeShop::ItemData>
+- type: StdVector_Client::UI::Agent::AgentMJIDisposeShop::ItemData
   name: StdVector`1
   namespace: ''
   union: False
@@ -23663,7 +23939,7 @@ structs:
     offset: 16
   virtual_functions: []
   member_functions: []
-- type: StdVector<Client::UI::Agent::AgentMJIGatheringHouse::ExpeditionData>
+- type: StdVector_Client::UI::Agent::AgentMJIGatheringHouse::ExpeditionData
   name: StdVector`1
   namespace: ''
   union: False
@@ -23679,7 +23955,7 @@ structs:
     offset: 16
   virtual_functions: []
   member_functions: []
-- type: StdVector<Client::UI::Agent::AgentMJIGatheringHouse::ExpeditionDesc>
+- type: StdVector_Client::UI::Agent::AgentMJIGatheringHouse::ExpeditionDesc
   name: StdVector`1
   namespace: ''
   union: False
@@ -23695,7 +23971,7 @@ structs:
     offset: 16
   virtual_functions: []
   member_functions: []
-- type: StdVector<Client::UI::Agent::AgentMJIGatheringHouse::ExpeditionItem>
+- type: StdVector_Client::UI::Agent::AgentMJIGatheringHouse::ExpeditionItem
   name: StdVector`1
   namespace: ''
   union: False
@@ -23711,7 +23987,7 @@ structs:
     offset: 16
   virtual_functions: []
   member_functions: []
-- type: StdVector<Client::UI::Agent::AgentMJIGatheringHouse::Resource>
+- type: StdVector_Client::UI::Agent::AgentMJIGatheringHouse::Resource
   name: StdVector`1
   namespace: ''
   union: False
@@ -23727,7 +24003,7 @@ structs:
     offset: 16
   virtual_functions: []
   member_functions: []
-- type: StdVector<Client::UI::Agent::PouchInventoryItem>
+- type: StdVector_Client::UI::Agent::PouchInventoryItem
   name: StdVector`1
   namespace: ''
   union: False
@@ -23743,7 +24019,7 @@ structs:
     offset: 16
   virtual_functions: []
   member_functions: []
-- type: StdVector<Client::UI::Agent::PouchInventoryItem*>
+- type: StdVector_Client::UI::Agent::PouchInventoryItemPtr
   name: StdVector`1
   namespace: ''
   union: False
@@ -23759,7 +24035,7 @@ structs:
     offset: 16
   virtual_functions: []
   member_functions: []
-- type: hkArray<hkaAnnotationTrack>
+- type: hkArray_hkaAnnotationTrack
   name: hkArray`1
   namespace: ''
   union: False
@@ -23775,7 +24051,7 @@ structs:
     offset: 12
   virtual_functions: []
   member_functions: []
-- type: hkArray<__int16>
+- type: hkArray___int16
   name: hkArray`1
   namespace: ''
   union: False
@@ -23791,7 +24067,7 @@ structs:
     offset: 12
   virtual_functions: []
   member_functions: []
-- type: hkEnum<hkaAnimationBinding::BlendHintEnum, __int8>
+- type: hkEnum_hkaAnimationBinding::BlendHintEnum____int8
   name: hkEnum`2
   namespace: ''
   union: False
@@ -23801,7 +24077,7 @@ structs:
     offset: 0
   virtual_functions: []
   member_functions: []
-- type: hkArray<hkaAnnotationTrack::Annotation>
+- type: hkArray_hkaAnnotationTrack::Annotation
   name: hkArray`1
   namespace: ''
   union: False
@@ -23817,7 +24093,7 @@ structs:
     offset: 12
   virtual_functions: []
   member_functions: []
-- type: hkArray<hkaMeshBinding::Mapping>
+- type: hkArray_hkaMeshBinding::Mapping
   name: hkArray`1
   namespace: ''
   union: False
@@ -23833,7 +24109,7 @@ structs:
     offset: 12
   virtual_functions: []
   member_functions: []
-- type: hkArray<hkTransformf>
+- type: hkArray_hkTransformf
   name: hkArray`1
   namespace: ''
   union: False
@@ -23849,7 +24125,7 @@ structs:
     offset: 12
   virtual_functions: []
   member_functions: []
-- type: hkArray<hkaSkeleton*>
+- type: hkArray_hkaSkeletonPtr
   name: hkArray`1
   namespace: ''
   union: False
@@ -23865,7 +24141,7 @@ structs:
     offset: 12
   virtual_functions: []
   member_functions: []
-- type: hkArray<hkaAnimation*>
+- type: hkArray_hkaAnimationPtr
   name: hkArray`1
   namespace: ''
   union: False
@@ -23881,7 +24157,7 @@ structs:
     offset: 12
   virtual_functions: []
   member_functions: []
-- type: hkArray<hkaAnimationBinding*>
+- type: hkArray_hkaAnimationBindingPtr
   name: hkArray`1
   namespace: ''
   union: False
@@ -23897,7 +24173,7 @@ structs:
     offset: 12
   virtual_functions: []
   member_functions: []
-- type: hkArray<hkaBoneAttachment*>
+- type: hkArray_hkaBoneAttachmentPtr
   name: hkArray`1
   namespace: ''
   union: False
@@ -23913,7 +24189,7 @@ structs:
     offset: 12
   virtual_functions: []
   member_functions: []
-- type: hkArray<hkaMeshBinding*>
+- type: hkArray_hkaMeshBindingPtr
   name: hkArray`1
   namespace: ''
   union: False
@@ -23929,7 +24205,7 @@ structs:
     offset: 12
   virtual_functions: []
   member_functions: []
-- type: hkArray<hkaSkeletonMapperData::PartitionMappingRange>
+- type: hkArray_hkaSkeletonMapperData::PartitionMappingRange
   name: hkArray`1
   namespace: ''
   union: False
@@ -23945,7 +24221,7 @@ structs:
     offset: 12
   virtual_functions: []
   member_functions: []
-- type: hkArray<hkaSkeletonMapperData::SimpleMapping>
+- type: hkArray_hkaSkeletonMapperData::SimpleMapping
   name: hkArray`1
   namespace: ''
   union: False
@@ -23961,7 +24237,7 @@ structs:
     offset: 12
   virtual_functions: []
   member_functions: []
-- type: hkArray<hkaSkeletonMapperData::ChainMapping>
+- type: hkArray_hkaSkeletonMapperData::ChainMapping
   name: hkArray`1
   namespace: ''
   union: False
@@ -23977,7 +24253,7 @@ structs:
     offset: 12
   virtual_functions: []
   member_functions: []
-- type: hkEnum<hkaSkeletonMapperData::MappingType, __int32>
+- type: hkEnum_hkaSkeletonMapperData::MappingType____int32
   name: hkEnum`2
   namespace: ''
   union: False
@@ -23987,7 +24263,7 @@ structs:
     offset: 0
   virtual_functions: []
   member_functions: []
-- type: hkArray<hkaDefaultAnimationControl::hkaDefaultAnimationControlListener>
+- type: hkArray_hkaDefaultAnimationControl::hkaDefaultAnimationControlListener
   name: hkArray`1
   namespace: ''
   union: False
@@ -24003,7 +24279,7 @@ structs:
     offset: 12
   virtual_functions: []
   member_functions: []
-- type: hkArray<byte>
+- type: hkArray_byte
   name: hkArray`1
   namespace: ''
   union: False
@@ -24019,7 +24295,7 @@ structs:
     offset: 12
   virtual_functions: []
   member_functions: []
-- type: hkArray<hkaAnimationControlListener*>
+- type: hkArray_hkaAnimationControlListenerPtr
   name: hkArray`1
   namespace: ''
   union: False
@@ -24035,7 +24311,7 @@ structs:
     offset: 12
   virtual_functions: []
   member_functions: []
-- type: hkArray<hkaDefaultAnimationControl*>
+- type: hkArray_hkaDefaultAnimationControlPtr
   name: hkArray`1
   namespace: ''
   union: False
@@ -24051,7 +24327,7 @@ structs:
     offset: 12
   virtual_functions: []
   member_functions: []
-- type: hkArray<hkQsTransformf>
+- type: hkArray_hkQsTransformf
   name: hkArray`1
   namespace: ''
   union: False
@@ -24067,7 +24343,7 @@ structs:
     offset: 12
   virtual_functions: []
   member_functions: []
-- type: hkArray<unsigned __int32>
+- type: hkArray_unsigned__int32
   name: hkArray`1
   namespace: ''
   union: False
@@ -24083,7 +24359,7 @@ structs:
     offset: 12
   virtual_functions: []
   member_functions: []
-- type: hkArray<float>
+- type: hkArray_float
   name: hkArray`1
   namespace: ''
   union: False
@@ -24099,7 +24375,7 @@ structs:
     offset: 12
   virtual_functions: []
   member_functions: []
-- type: hkArray<hkaBone>
+- type: hkArray_hkaBone
   name: hkArray`1
   namespace: ''
   union: False
@@ -24115,7 +24391,7 @@ structs:
     offset: 12
   virtual_functions: []
   member_functions: []
-- type: hkArray<hkStringPtr>
+- type: hkArray_hkStringPtr
   name: hkArray`1
   namespace: ''
   union: False
@@ -24131,7 +24407,7 @@ structs:
     offset: 12
   virtual_functions: []
   member_functions: []
-- type: hkArray<hkaSkeleton::LocalFrameOnBone>
+- type: hkArray_hkaSkeleton::LocalFrameOnBone
   name: hkArray`1
   namespace: ''
   union: False
@@ -24147,7 +24423,7 @@ structs:
     offset: 12
   virtual_functions: []
   member_functions: []
-- type: hkArray<hkaSkeleton::Partition>
+- type: hkArray_hkaSkeleton::Partition
   name: hkArray`1
   namespace: ''
   union: False
@@ -24163,7 +24439,7 @@ structs:
     offset: 12
   virtual_functions: []
   member_functions: []
-- type: hkEnum<hkJob::hkJobType, byte>
+- type: hkEnum_hkJob::hkJobType__byte
   name: hkEnum`2
   namespace: ''
   union: False
@@ -24173,7 +24449,7 @@ structs:
     offset: 0
   virtual_functions: []
   member_functions: []
-- type: hkEnum<hkJob::hkJobSpuType, byte>
+- type: hkEnum_hkJob::hkJobSpuType__byte
   name: hkEnum`2
   namespace: ''
   union: False
@@ -24183,7 +24459,7 @@ structs:
     offset: 0
   virtual_functions: []
   member_functions: []
-- type: hkArray<hkResource*>
+- type: hkArray_hkResourcePtr
   name: hkArray`1
   namespace: ''
   union: False
@@ -24199,7 +24475,7 @@ structs:
     offset: 12
   virtual_functions: []
   member_functions: []
-- type: hkArray<hkRootLevelContainer::NamedVariant>
+- type: hkArray_hkRootLevelContainer::NamedVariant
   name: hkArray`1
   namespace: ''
   union: False
@@ -24215,7 +24491,7 @@ structs:
     offset: 12
   virtual_functions: []
   member_functions: []
-- type: hkFlags<hkaSampleBlendJob::SingleAnimation::SampleFlags, __int32>
+- type: hkFlags_hkaSampleBlendJob::SingleAnimation::SampleFlags____int32
   name: hkFlags`2
   namespace: ''
   union: False
@@ -24225,7 +24501,7 @@ structs:
     offset: 0
   virtual_functions: []
   member_functions: []
-- type: hkEnum<hkSerializeUtil::ErrorDetails::ErrorID, __int32>
+- type: hkEnum_hkSerializeUtil::ErrorDetails::ErrorID____int32
   name: hkEnum`2
   namespace: ''
   union: False
@@ -24235,7 +24511,7 @@ structs:
     offset: 0
   virtual_functions: []
   member_functions: []
-- type: hkFlags<hkSerializeUtil::SaveOptionBits, __int32>
+- type: hkFlags_hkSerializeUtil::SaveOptionBits____int32
   name: hkFlags`2
   namespace: ''
   union: False
@@ -24245,7 +24521,7 @@ structs:
     offset: 0
   virtual_functions: []
   member_functions: []
-- type: hkFlags<hkSerializeUtil::LoadOptionBits, __int32>
+- type: hkFlags_hkSerializeUtil::LoadOptionBits____int32
   name: hkFlags`2
   namespace: ''
   union: False
@@ -24255,7 +24531,39 @@ structs:
     offset: 0
   virtual_functions: []
   member_functions: []
-- type: StdVector<Client::Graphics::Kernel::VertexShader*>
+- type: StdLinkedList::Node_Component::GUI::AtkTextureResourcePtr
+  name: Node
+  namespace: ''
+  union: False
+  fields:
+  - type: Component::GUI::AtkTextureResource*
+    name: Value
+    offset: 0
+  - type: StdLinkedList::Node_Component::GUI::AtkTextureResourcePtr*
+    name: Next
+    offset: 8
+  - type: StdLinkedList::Node_Component::GUI::AtkTextureResourcePtr*
+    name: Previous
+    offset: 16
+  virtual_functions: []
+  member_functions: []
+- type: StdLinkedList::Node_Component::GUI::AtkUldManager::DuplicateObjectListPtr
+  name: Node
+  namespace: ''
+  union: False
+  fields:
+  - type: Component::GUI::AtkUldManager::DuplicateObjectList*
+    name: Value
+    offset: 0
+  - type: StdLinkedList::Node_Component::GUI::AtkUldManager::DuplicateObjectListPtr*
+    name: Next
+    offset: 8
+  - type: StdLinkedList::Node_Component::GUI::AtkUldManager::DuplicateObjectListPtr*
+    name: Previous
+    offset: 16
+  virtual_functions: []
+  member_functions: []
+- type: StdVector_Client::Graphics::Kernel::VertexShaderPtr
   name: StdVector`1
   namespace: ''
   union: False
@@ -24271,7 +24579,7 @@ structs:
     offset: 16
   virtual_functions: []
   member_functions: []
-- type: StdVector<Client::Graphics::Kernel::PixelShader*>
+- type: StdVector_Client::Graphics::Kernel::PixelShaderPtr
   name: StdVector`1
   namespace: ''
   union: False
@@ -24287,7 +24595,7 @@ structs:
     offset: 16
   virtual_functions: []
   member_functions: []
-- type: StdVector<Client::Graphics::Kernel::ShaderNode*>
+- type: StdVector_Client::Graphics::Kernel::ShaderNodePtr
   name: StdVector`1
   namespace: ''
   union: False
@@ -24301,6 +24609,245 @@ structs:
   - type: Client::Graphics::Kernel::ShaderNode**
     name: End
     offset: 16
+  virtual_functions: []
+  member_functions: []
+- type: StdSet::Node_Client::Game::Object::GameObjectPtr
+  name: Node
+  namespace: ''
+  union: False
+  fields:
+  - type: StdSet::Node_Client::Game::Object::GameObjectPtr*
+    name: Left
+    offset: 0
+  - type: StdSet::Node_Client::Game::Object::GameObjectPtr*
+    name: Parent
+    offset: 8
+  - type: StdSet::Node_Client::Game::Object::GameObjectPtr*
+    name: Right
+    offset: 16
+  - type: byte
+    name: Color
+    offset: 24
+  - type: byte
+    name: IsNil
+    offset: 25
+  - type: byte
+    name: _18
+    offset: 26
+  - type: byte
+    name: _19
+    offset: 27
+  - type: Client::Game::Object::GameObject*
+    name: Key
+    offset: 28
+  virtual_functions: []
+  member_functions: []
+- type: StdPair_Client::System::String::Utf8String____int64
+  name: StdPair`2
+  namespace: ''
+  union: False
+  fields:
+  - type: Client::System::String::Utf8String
+    name: Item1
+    offset: 0
+  - type: __int64
+    name: Item2
+    offset: 104
+  virtual_functions: []
+  member_functions: []
+- type: StdPair_Client::System::String::Utf8String__Component::Text::MacroEncoder::MacroCodeDescription
+  name: StdPair`2
+  namespace: ''
+  union: False
+  fields:
+  - type: Client::System::String::Utf8String
+    name: Item1
+    offset: 0
+  - type: Component::Text::MacroEncoder::MacroCodeDescription
+    name: Item2
+    offset: 104
+  virtual_functions: []
+  member_functions: []
+- type: StdPair_Component::GUI::AtkResNodePtr__Component::GUI::AtkTooltipManager::AtkTooltipInfoPtr
+  name: StdPair`2
+  namespace: ''
+  union: False
+  fields:
+  - type: Component::GUI::AtkResNode*
+    name: Item1
+    offset: 0
+  - type: Component::GUI::AtkTooltipManager::AtkTooltipInfo*
+    name: Item2
+    offset: 8
+  virtual_functions: []
+  member_functions: []
+- type: StdPair_unsigned__int64__Client::UI::Misc::ItemOrderModuleSorterPtr
+  name: StdPair`2
+  namespace: ''
+  union: False
+  fields:
+  - type: unsigned __int64
+    name: Item1
+    offset: 0
+  - type: Client::UI::Misc::ItemOrderModuleSorter*
+    name: Item2
+    offset: 8
+  virtual_functions: []
+  member_functions: []
+- type: StdPair_unsigned__int32__unsigned__int32
+  name: StdPair`2
+  namespace: ''
+  union: False
+  fields:
+  - type: unsigned __int32
+    name: Item1
+    offset: 0
+  - type: unsigned __int32
+    name: Item2
+    offset: 4
+  virtual_functions: []
+  member_functions: []
+- type: StdPair_bytePtr____int16
+  name: StdPair`2
+  namespace: ''
+  union: False
+  fields:
+  - type: byte*
+    name: Item1
+    offset: 0
+  - type: __int16
+    name: Item2
+    offset: 8
+  virtual_functions: []
+  member_functions: []
+- type: StdPair_unsigned__int32__hkaSkeletonMapperPtr
+  name: StdPair`2
+  namespace: ''
+  union: False
+  fields:
+  - type: unsigned __int32
+    name: Item1
+    offset: 0
+  - type: hkaSkeletonMapper*
+    name: Item2
+    offset: 4
+  virtual_functions: []
+  member_functions: []
+- type: StdPair_Client::System::String::Utf8String__bytePtr
+  name: StdPair`2
+  namespace: ''
+  union: False
+  fields:
+  - type: Client::System::String::Utf8String
+    name: Item1
+    offset: 0
+  - type: byte*
+    name: Item2
+    offset: 104
+  virtual_functions: []
+  member_functions: []
+- type: StdPair_unsigned__int32__Client::Game::CurrencyManager::SpecialCurrencyItem
+  name: StdPair`2
+  namespace: ''
+  union: False
+  fields:
+  - type: unsigned __int32
+    name: Item1
+    offset: 0
+  - type: Client::Game::CurrencyManager::SpecialCurrencyItem
+    name: Item2
+    offset: 4
+  virtual_functions: []
+  member_functions: []
+- type: StdPair_unsigned__int32__Client::Game::CurrencyManager::CurrencyItem
+  name: StdPair`2
+  namespace: ''
+  union: False
+  fields:
+  - type: unsigned __int32
+    name: Item1
+    offset: 0
+  - type: Client::Game::CurrencyManager::CurrencyItem
+    name: Item2
+    offset: 4
+  virtual_functions: []
+  member_functions: []
+- type: StdPair_unsigned__int32__Client::Game::CurrencyManager::ContentCurrencyItem
+  name: StdPair`2
+  namespace: ''
+  union: False
+  fields:
+  - type: unsigned __int32
+    name: Item1
+    offset: 0
+  - type: Client::Game::CurrencyManager::ContentCurrencyItem
+    name: Item2
+    offset: 4
+  virtual_functions: []
+  member_functions: []
+- type: StdPair_unsigned__int32__StdPair_unsigned__int32__unsigned__int32
+  name: StdPair`2
+  namespace: ''
+  union: False
+  fields:
+  - type: unsigned __int32
+    name: Item1
+    offset: 0
+  - type: StdPair_unsigned__int32__unsigned__int32
+    name: Item2
+    offset: 4
+  virtual_functions: []
+  member_functions: []
+- type: StdPair_unsigned__int32____int32
+  name: StdPair`2
+  namespace: ''
+  union: False
+  fields:
+  - type: unsigned __int32
+    name: Item1
+    offset: 0
+  - type: __int32
+    name: Item2
+    offset: 4
+  virtual_functions: []
+  member_functions: []
+- type: StdPair_unsigned__int32__Client::Game::Event::EventHandlerPtr
+  name: StdPair`2
+  namespace: ''
+  union: False
+  fields:
+  - type: unsigned __int32
+    name: Item1
+    offset: 0
+  - type: Client::Game::Event::EventHandler*
+    name: Item2
+    offset: 4
+  virtual_functions: []
+  member_functions: []
+- type: StdPair___int64__Client::Game::Event::LuaActor
+  name: StdPair`2
+  namespace: ''
+  union: False
+  fields:
+  - type: __int64
+    name: Item1
+    offset: 0
+  - type: Client::Game::Event::LuaActor
+    name: Item2
+    offset: 8
+  virtual_functions: []
+  member_functions: []
+- type: StdPair___int64____int64
+  name: StdPair`2
+  namespace: ''
+  union: False
+  fields:
+  - type: __int64
+    name: Item1
+    offset: 0
+  - type: __int64
+    name: Item2
+    offset: 8
   virtual_functions: []
   member_functions: []
 - type: Shader::CameraParameter
@@ -24458,40 +25005,6 @@ structs:
     offset: 8
   virtual_functions: []
   member_functions: []
-- type: Common::Math::HalfVector2
-  name: HalfVector2
-  namespace: Common.Math
-  union: False
-  size: 4
-  fields:
-  - type: __int16
-    name: X
-    offset: 0
-  - type: __int16
-    name: Y
-    offset: 2
-  virtual_functions: []
-  member_functions: []
-- type: Common::Math::HalfVector4
-  name: HalfVector4
-  namespace: Common.Math
-  union: False
-  size: 8
-  fields:
-  - type: __int16
-    name: X
-    offset: 0
-  - type: __int16
-    name: Y
-    offset: 2
-  - type: __int16
-    name: Z
-    offset: 4
-  - type: __int16
-    name: W
-    offset: 6
-  virtual_functions: []
-  member_functions: []
 - type: Common::Log::LogModule
   name: LogModule
   namespace: Common.Log
@@ -24504,10 +25017,10 @@ structs:
   - type: __int32
     name: LogMessageCount
     offset: 20
-  - type: StdVector<__int32>
+  - type: StdVector___int32
     name: LogMessageIndex
     offset: 72
-  - type: StdVector<byte>
+  - type: StdVector_byte
     name: LogMessageData
     offset: 96
   virtual_functions: []
@@ -25306,7 +25819,7 @@ structs:
   - type: __int64
     name: ExcelSheet
     offset: 16
-  - type: StdMap<Client::System::String::Utf8String, __int64>
+  - type: StdMap_Client::System::String::Utf8String____int64
     name: UnkMap
     offset: 24
   virtual_functions: []
@@ -25317,10 +25830,10 @@ structs:
   union: False
   size: 96
   fields:
-  - type: StdVector<__int64>
+  - type: StdVector___int64
     name: DecoderFuncs
     offset: 8
-  - type: StdDeque<Component::Text::TextParameter>
+  - type: StdDeque_Component::Text::TextParameter
     name: GlobalParameters
     offset: 56
   virtual_functions: []
@@ -25331,7 +25844,7 @@ structs:
   union: False
   size: 784
   fields:
-  - type: StdMap<Client::System::String::Utf8String, Component::Text::MacroEncoder::MacroCodeDescription>
+  - type: StdMap_Client::System::String::Utf8String__Component::Text::MacroEncoder::MacroCodeDescription
     name: MacroCodeMap
     offset: 8
   - type: __int32
@@ -25346,7 +25859,7 @@ structs:
   - type: Client::System::String::Utf8String
     name: Str3
     offset: 240
-  - type: StdVector<Client::System::String::Utf8String>
+  - type: StdVector_Client::System::String::Utf8String
     name: MacroTokens
     offset: 344
   - type: Client::System::String::Utf8String
@@ -25484,7 +25997,7 @@ structs:
       name: a1
     - type: byte*
       name: a2
-    - type: StdDeque<Component::Text::TextParameter>*
+    - type: StdDeque_Component::Text::TextParameter*
       name: a3
     - type: Client::System::String::Utf8String*
       name: a4
@@ -25685,10 +26198,10 @@ structs:
   union: False
   size: 72
   fields:
-  - type: StdVector<unsigned __int32>
+  - type: StdVector_unsigned__int32
     name: UIntValues
     offset: 0
-  - type: StdVector<byte*>
+  - type: StdVector_bytePtr
     name: StringValues
     offset: 24
   - type: Component::GUI::AtkComponentListItemRenderer*
@@ -25746,7 +26259,7 @@ structs:
   - type: Component::GUI::AtkEventManager*
     name: AtkEventManager
     offset: 0
-  - type: StdVector<Component::GUI::AtkEvent*>
+  - type: StdVector_Component::GUI::AtkEventPtr
     name: Events
     offset: 8
   virtual_functions: []
@@ -26222,7 +26735,7 @@ structs:
   - type: float
     name: Duration
     offset: 28
-  - type: StdVector<Component::GUI::SimpleTweenAnimation>
+  - type: StdVector_Component::GUI::SimpleTweenAnimation
     name: Animations
     offset: 32
   - type: __int32
@@ -26473,7 +26986,7 @@ structs:
   union: False
   size: 88
   fields:
-  - type: StdLinkedList<Component::GUI::AtkTextureResource*>
+  - type: StdLinkedList_Component::GUI::AtkTextureResourcePtr
     name: LoadedTextures
     offset: 0
   - type: __int32
@@ -26520,7 +27033,7 @@ structs:
   - type: Component::GUI::AtkEventListener
     name: AtkEventListener
     offset: 0
-  - type: StdMap<Component::GUI::AtkResNode*, Component::GUI::AtkTooltipManager::AtkTooltipInfo*>
+  - type: StdMap_Component::GUI::AtkResNodePtr__Component::GUI::AtkTooltipManager::AtkTooltipInfoPtr
     name: TooltipMap
     offset: 8
   - type: Component::GUI::AtkStage*
@@ -26734,7 +27247,7 @@ structs:
   - type: Component::GUI::AtkResNode**
     name: NodeList
     offset: 80
-  - type: StdLinkedList<Component::GUI::AtkUldManager::DuplicateObjectList*>
+  - type: StdLinkedList_Component::GUI::AtkUldManager::DuplicateObjectListPtr
     name: DuplicateObjectsList
     offset: 88
   - type: Component::GUI::AtkResNode*
@@ -27345,7 +27858,7 @@ structs:
   - type: Component::GUI::AtkUnitBase
     name: AtkUnitBase
     offset: 0
-  - type: StdVector<Client::UI::ActionBarSlot>
+  - type: StdVector_Client::UI::ActionBarSlot
     name: ActionBarSlotVector
     offset: 544
   - type: __int16
@@ -32321,124 +32834,6 @@ structs:
       name: this
     - type: __int32
       name: bannerIndex
-- type: Client::UI::Misc::BannerModuleEntry
-  name: BannerModuleEntry
-  namespace: Client.UI.Misc
-  union: False
-  size: 144
-  fields:
-  - type: byte
-    name: BannerTimelineName
-    offset: 0
-    size: 64
-  - type: Common::Math::HalfVector4
-    name: CameraPosition
-    offset: 68
-  - type: Common::Math::HalfVector4
-    name: CameraTarget
-    offset: 76
-  - type: Common::Math::HalfVector2
-    name: HeadDirection
-    offset: 84
-  - type: Common::Math::HalfVector2
-    name: EyeDirection
-    offset: 88
-  - type: __int16
-    name: DirectionalLightingVerticalAngle
-    offset: 92
-  - type: __int16
-    name: DirectionalLightingHorizontalAngle
-    offset: 94
-  - type: byte
-    name: Race
-    offset: 96
-  - type: byte
-    name: Sex
-    offset: 97
-  - type: byte
-    name: Height
-    offset: 98
-  - type: byte
-    name: Tribe
-    offset: 99
-  - type: byte
-    name: DirectionalLightingColorRed
-    offset: 100
-  - type: byte
-    name: DirectionalLightingColorGreen
-    offset: 101
-  - type: byte
-    name: DirectionalLightingColorBlue
-    offset: 102
-  - type: byte
-    name: AmbientLightingColorRed
-    offset: 103
-  - type: byte
-    name: AmbientLightingColorGreen
-    offset: 104
-  - type: byte
-    name: AmbientLightingColorBlue
-    offset: 105
-  - type: float
-    name: AnimationProgress
-    offset: 108
-  - type: unsigned __int32
-    name: BannerTimelineIcon
-    offset: 112
-  - type: unsigned __int32
-    name: LastUpdated
-    offset: 116
-  - type: unsigned __int32
-    name: Checksum
-    offset: 120
-  - type: unsigned __int16
-    name: BannerBg
-    offset: 124
-  - type: unsigned __int16
-    name: BannerFrame
-    offset: 126
-  - type: unsigned __int16
-    name: BannerDecoration
-    offset: 128
-  - type: unsigned __int16
-    name: BannerTimeline
-    offset: 130
-  - type: __int16
-    name: ImageRotation
-    offset: 132
-  - type: byte
-    name: BannerIndex
-    offset: 134
-  - type: byte
-    name: BannerId
-    offset: 135
-  - type: byte
-    name: BannerTimelineClassJobCategory
-    offset: 136
-  - type: byte
-    name: Expression
-    offset: 137
-  - type: byte
-    name: CameraZoom
-    offset: 138
-  - type: byte
-    name: DirectionalLightingBrightness
-    offset: 139
-  - type: byte
-    name: AmbientLightingBrightness
-    offset: 140
-  - type: byte
-    name: HasBannerTimelineCustomName
-    offset: 141
-  virtual_functions: []
-  member_functions:
-  - signature: 0F B7 42 7C 66 39 41 7C
-    return_type: byte
-    parameters:
-    - type: Client::UI::Misc::BannerModuleEntry*
-      name: this
-    - type: Client::UI::Misc::BannerModuleEntry*
-      name: other
 - type: Client::UI::Misc::CharaViewCharacterData
   name: CharaViewCharacterData
   namespace: Client.UI.Misc
@@ -32480,74 +32875,6 @@ structs:
     parameters:
     - type: Client::UI::Misc::CharaViewCharacterData*
       name: this
-- type: Client::UI::Misc::ExportedPortraitData
-  name: ExportedPortraitData
-  namespace: Client.UI.Misc
-  union: False
-  size: 52
-  fields:
-  - type: Common::Math::HalfVector4
-    name: CameraPosition
-    offset: 0
-  - type: Common::Math::HalfVector4
-    name: CameraTarget
-    offset: 8
-  - type: __int16
-    name: ImageRotation
-    offset: 16
-  - type: byte
-    name: CameraZoom
-    offset: 18
-  - type: unsigned __int16
-    name: BannerTimeline
-    offset: 20
-  - type: float
-    name: AnimationProgress
-    offset: 24
-  - type: byte
-    name: Expression
-    offset: 28
-  - type: Common::Math::HalfVector2
-    name: HeadDirection
-    offset: 30
-  - type: Common::Math::HalfVector2
-    name: EyeDirection
-    offset: 34
-  - type: byte
-    name: DirectionalLightingColorRed
-    offset: 38
-  - type: byte
-    name: DirectionalLightingColorGreen
-    offset: 39
-  - type: byte
-    name: DirectionalLightingColorBlue
-    offset: 40
-  - type: byte
-    name: DirectionalLightingBrightness
-    offset: 41
-  - type: __int16
-    name: DirectionalLightingVerticalAngle
-    offset: 42
-  - type: __int16
-    name: DirectionalLightingHorizontalAngle
-    offset: 44
-  - type: byte
-    name: AmbientLightingColorRed
-    offset: 46
-  - type: byte
-    name: AmbientLightingColorGreen
-    offset: 47
-  - type: byte
-    name: AmbientLightingColorBlue
-    offset: 48
-  - type: byte
-    name: AmbientLightingBrightness
-    offset: 49
-  - type: unsigned __int16
-    name: BannerBg
-    offset: 50
-  virtual_functions: []
-  member_functions: []
 - type: Client::UI::Misc::EmoteHistoryModule
   name: EmoteHistoryModule
   namespace: Client.UI.Misc
@@ -33070,7 +33397,7 @@ structs:
   - type: unsigned __int64
     name: ActiveRetainerId
     offset: 176
-  - type: StdMap<unsigned __int64, Client::UI::Misc::ItemOrderModuleSorter*>
+  - type: StdMap_unsigned__int64__Client::UI::Misc::ItemOrderModuleSorterPtr
     name: RetainerSorter
     offset: 184
   - type: Client::UI::Misc::ItemOrderModuleSorter*
@@ -33090,7 +33417,7 @@ structs:
   - type: Client::Game::InventoryType
     name: InventoryType
     offset: 0
-  - type: StdVector<Client::UI::Misc::ItemOrderModuleSorterItemEntry*>
+  - type: StdVector_Client::UI::Misc::ItemOrderModuleSorterItemEntryPtr
     name: Items
     offset: 8
   - type: __int32
@@ -33102,7 +33429,7 @@ structs:
   - type: __int32
     name: PercentComplete
     offset: 60
-  - type: StdVector<Client::UI::Misc::ItemOrderModuleSorterSortFunctionEntry>
+  - type: StdVector_Client::UI::Misc::ItemOrderModuleSorterSortFunctionEntry
     name: SortFunctions
     offset: 64
   - type: Client::UI::Misc::ItemOrderModuleSorterPreviousOrderEntry*
@@ -33952,7 +34279,7 @@ structs:
   - type: Client::System::String::Utf8String
     name: Unk8A0
     offset: 2208
-  - type: StdDeque<Component::Text::TextParameter>
+  - type: StdDeque_Component::Text::TextParameter
     name: LocalTextParameters
     offset: 2312
   - type: Client::System::String::Utf8String
@@ -35159,49 +35486,49 @@ structs:
   - type: unsigned __int32
     name: OpenUpgradeActionId
     offset: 96
-  - type: StdVector<Client::UI::Agent::ActionData>
+  - type: StdVector_Client::UI::Agent::ActionData
     name: ClassActionList
     offset: 104
-  - type: StdVector<Client::UI::Agent::ActionData>
+  - type: StdVector_Client::UI::Agent::ActionData
     name: JobActionList
     offset: 128
-  - type: StdVector<Client::UI::Agent::ActionData>
+  - type: StdVector_Client::UI::Agent::ActionData
     name: TraitList
     offset: 152
-  - type: StdVector<Client::UI::Agent::ActionData>
+  - type: StdVector_Client::UI::Agent::ActionData
     name: GeneralList
     offset: 176
-  - type: StdVector<Client::UI::Agent::ActionData>
+  - type: StdVector_Client::UI::Agent::ActionData
     name: CompanionOrderList
     offset: 200
-  - type: StdVector<Client::UI::Agent::ActionData>
+  - type: StdVector_Client::UI::Agent::ActionData
     name: SquadronOrderList
     offset: 224
-  - type: StdVector<Client::UI::Agent::ActionData>
+  - type: StdVector_Client::UI::Agent::ActionData
     name: MainCommandList
     offset: 248
-  - type: StdVector<Client::UI::Agent::ActionData>
+  - type: StdVector_Client::UI::Agent::ActionData
     name: PetActionList
     offset: 272
-  - type: StdVector<Client::UI::Agent::ActionData>
+  - type: StdVector_Client::UI::Agent::ActionData
     name: PetOrderList
     offset: 296
-  - type: StdVector<Client::UI::Agent::ActionData>
+  - type: StdVector_Client::UI::Agent::ActionData
     name: PerformanceList
     offset: 320
-  - type: StdVector<Client::UI::Agent::ActionData>
+  - type: StdVector_Client::UI::Agent::ActionData
     name: ExtraList
     offset: 344
-  - type: StdVector<Client::UI::Agent::ActionData>
+  - type: StdVector_Client::UI::Agent::ActionData
     name: CombatRoleActionList
     offset: 368
-  - type: StdVector<Client::UI::Agent::ActionData>
+  - type: StdVector_Client::UI::Agent::ActionData
     name: GatheringRoleActionList
     offset: 392
   - type: Client::System::String::Utf8String
     name: ClassJobTitle
     offset: 480
-  - type: StdVector<Client::UI::Agent::ExtraCommandData>
+  - type: StdVector_Client::UI::Agent::ExtraCommandData
     name: ExtraCommandData
     offset: 696
   - type: __int64
@@ -36682,10 +37009,10 @@ structs:
     name: HudPartyMemberEnmityPtrs
     offset: 5104
     size: 80
-  - type: StdVector<Client::Game::UI::MapMarkerData>
+  - type: StdVector_Client::Game::UI::MapMarkerData
     name: MapMarkers
     offset: 18440
-  - type: StdVector<Client::Game::UI::MapMarkerData*>
+  - type: StdVector_Client::Game::UI::MapMarkerDataPtr
     name: MapMarkerPtrs
     offset: 18464
   virtual_functions: []
@@ -36986,7 +37313,7 @@ structs:
   - type: Client::Network::NetworkModuleProxy*
     name: NetworkModuleProxy
     offset: 16
-  - type: StdVector<Client::UI::Agent::LobbyDataCenterWorldEntry>
+  - type: StdVector_Client::UI::Agent::LobbyDataCenterWorldEntry
     name: CurrentDataCenterWorlds
     offset: 48
   - type: Client::UI::Agent::LobbySubscriptionInfo*
@@ -37157,7 +37484,7 @@ structs:
   - type: unsigned __int32
     name: TextCommandListAddonId
     offset: 2948
-  - type: StdVector<Client::UI::Agent::AgentMacro::TextCommandEntry>
+  - type: StdVector_Client::UI::Agent::AgentMacro::TextCommandEntry
     name: TextCommands
     offset: 3024
   - type: __int32
@@ -37190,13 +37517,13 @@ structs:
   - type: Component::GUI::AgentInterface
     name: AgentInterface
     offset: 0
-  - type: StdVector<Client::UI::Agent::LinkedTooltipMarker>
+  - type: StdVector_Client::UI::Agent::LinkedTooltipMarker
     name: MinimapMSQLinkedTooltipMarkers
     offset: 232
-  - type: StdVector<Client::UI::Agent::LinkedTooltipMarker*>
+  - type: StdVector_Client::UI::Agent::LinkedTooltipMarkerPtr
     name: MinimapMSQLinkedTooltipMarkersList
     offset: 256
-  - type: StdMap<unsigned __int32, unsigned __int32>
+  - type: StdMap_unsigned__int32__unsigned__int32
     name: SymbolMap
     offset: 280
   - type: Client::System::String::Utf8String
@@ -37564,16 +37891,16 @@ structs:
   - type: Component::GUI::AtkEventInterface*
     name: OpHandler
     offset: 208
-  - type: StdVector<Client::UI::Agent::AgentMJIAnimalManagement::Slot>
+  - type: StdVector_Client::UI::Agent::AgentMJIAnimalManagement::Slot
     name: Slots
     offset: 256
-  - type: StdVector<Client::UI::Agent::AgentMJIAnimalManagement::AnimalDesc>
+  - type: StdVector_Client::UI::Agent::AgentMJIAnimalManagement::AnimalDesc
     name: AnimalDescs
     offset: 280
-  - type: StdVector<Client::UI::Agent::AgentMJIAnimalManagement::ItemDesc>
+  - type: StdVector_Client::UI::Agent::AgentMJIAnimalManagement::ItemDesc
     name: ItemDescs
     offset: 304
-  - type: StdVector<Client::UI::Agent::AgentMJIAnimalManagement::ItemDesc*>
+  - type: StdVector_Client::UI::Agent::AgentMJIAnimalManagement::ItemDescPtr
     name: EntrustAvailableFood
     offset: 328
   - type: __int32
@@ -37659,7 +37986,7 @@ structs:
     name: Slots
     offset: 72
     size: 4960
-  - type: StdVector<Client::UI::Agent::AgentMJIFarmManagement::Seed>
+  - type: StdVector_Client::UI::Agent::AgentMJIFarmManagement::Seed
     name: Seeds
     offset: 5032
   - type: __int32
@@ -37817,7 +38144,7 @@ structs:
   - type: Component::GUI::AgentInterface
     name: AgentInterface
     offset: 0
-  - type: StdVector<Client::System::String::Utf8String>
+  - type: StdVector_Client::System::String::Utf8String
     name: StringVector
     offset: 40
   - type: unsigned __int32
@@ -38010,7 +38337,7 @@ structs:
   - type: byte
     name: RecipeSearchHistorySelected
     offset: 1176
-  - type: StdDeque<Client::System::String::Utf8String>
+  - type: StdDeque_Client::System::String::Utf8String
     name: RecipeSearchHistory
     offset: 1184
   virtual_functions: []
@@ -38040,6 +38367,24 @@ structs:
       name: a3
     - type: byte
       name: pushHistory
+- type: Client::UI::Agent::AgentRecipeProductList
+  name: AgentRecipeProductList
+  namespace: Client.UI.Agent
+  union: False
+  size: 48
+  fields:
+  - type: Component::GUI::AgentInterface
+    name: AgentInterface
+    offset: 0
+  virtual_functions: []
+  member_functions:
+  - signature: 48 89 5C 24 ?? 57 48 83 EC ?? 8B FA B8
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentRecipeProductList*
+      name: this
+    - type: unsigned __int32
+      name: itemId
 - type: Client::UI::Agent::AgentReconstructionBox
   name: AgentReconstructionBox
   namespace: Client.UI.Agent
@@ -38442,7 +38787,7 @@ structs:
   - type: Component::GUI::AgentInterface
     name: AgentInterface
     offset: 0
-  - type: StdDeque<Client::UI::Agent::BalloonInfo>
+  - type: StdDeque_Client::UI::Agent::BalloonInfo
     name: BalloonQueue
     offset: 848
   - type: byte
@@ -38507,7 +38852,7 @@ structs:
   - type: __int32
     name: AetheryteCount
     offset: 96
-  - type: StdVector<Client::Game::UI::TeleportInfo>*
+  - type: StdVector_Client::Game::UI::TeleportInfo*
     name: AetheryteList
     offset: 104
   virtual_functions: []
@@ -38714,10 +39059,10 @@ structs:
   - type: hkaSkeleton*
     name: HavokSkeleton
     offset: 208
-  - type: StdMap<unsigned __int32, hkaSkeletonMapper*>
+  - type: StdMap_unsigned__int32__hkaSkeletonMapperPtr
     name: SkeletonMapperDict1
     offset: 216
-  - type: StdMap<unsigned __int32, hkaSkeletonMapper*>
+  - type: StdMap_unsigned__int32__hkaSkeletonMapperPtr
     name: SkeletonMapperDict2
     offset: 232
   - type: Common::Math::Matrix4x4*
@@ -39051,19 +39396,19 @@ structs:
   union: False
   size: 120
   fields:
-  - type: StdVector<Client::Graphics::Physics::BoneSimulator*>
+  - type: StdVector_Client::Graphics::Physics::BoneSimulatorPtr
     name: BoneSimulator_1
     offset: 0
-  - type: StdVector<Client::Graphics::Physics::BoneSimulator*>
+  - type: StdVector_Client::Graphics::Physics::BoneSimulatorPtr
     name: BoneSimulator_2
     offset: 24
-  - type: StdVector<Client::Graphics::Physics::BoneSimulator*>
+  - type: StdVector_Client::Graphics::Physics::BoneSimulatorPtr
     name: BoneSimulator_3
     offset: 48
-  - type: StdVector<Client::Graphics::Physics::BoneSimulator*>
+  - type: StdVector_Client::Graphics::Physics::BoneSimulatorPtr
     name: BoneSimulator_4
     offset: 72
-  - type: StdVector<Client::Graphics::Physics::BoneSimulator*>
+  - type: StdVector_Client::Graphics::Physics::BoneSimulatorPtr
     name: BoneSimulator_5
     offset: 96
   virtual_functions: []
@@ -39461,13 +39806,13 @@ structs:
   union: False
   size: 48
   fields:
-  - type: StdMap<unsigned __int32, Client::Game::CurrencyManager::SpecialCurrencyItem>
+  - type: StdMap_unsigned__int32__Client::Game::CurrencyManager::SpecialCurrencyItem
     name: SpecialItemBucket
     offset: 0
-  - type: StdMap<unsigned __int32, Client::Game::CurrencyManager::CurrencyItem>
+  - type: StdMap_unsigned__int32__Client::Game::CurrencyManager::CurrencyItem
     name: ItemBucket
     offset: 16
-  - type: StdMap<unsigned __int32, Client::Game::CurrencyManager::ContentCurrencyItem>
+  - type: StdMap_unsigned__int32__Client::Game::CurrencyManager::ContentCurrencyItem
     name: ContentItemBucket
     offset: 32
   virtual_functions: []
@@ -39853,29 +40198,29 @@ structs:
     name: LevequestData
     offset: 4472
     size: 2304
-  - type: StdVector<Client::Game::UI::MapMarkerData>
+  - type: StdVector_Client::Game::UI::MapMarkerData
     name: ActiveLevequest
     offset: 6896
-  - type: StdList<Client::Game::UI::MarkerInfo>
+  - type: StdList_Client::Game::UI::MarkerInfo
     name: UnacceptedQuests
     offset: 6936
-  - type: StdList<Client::Game::UI::MarkerInfo>
+  - type: StdList_Client::Game::UI::MarkerInfo
     name: GuildLeveAssignments
     offset: 7008
-  - type: StdList<Client::Game::UI::MarkerInfo>
+  - type: StdList_Client::Game::UI::MarkerInfo
     name: GuildOrderGuides
     offset: 7080
   - type: byte
     name: HousingData
     offset: 7096
     size: 8928
-  - type: StdList<Client::Game::UI::MarkerInfo>
+  - type: StdList_Client::Game::UI::MarkerInfo
     name: TripleTriad
     offset: 16024
-  - type: StdList<Client::Game::UI::MarkerInfo>
+  - type: StdList_Client::Game::UI::MarkerInfo
     name: CustomTalk
     offset: 16040
-  - type: StdList<Client::Game::UI::MarkerInfo>
+  - type: StdList_Client::Game::UI::MarkerInfo
     name: GemstoneTraders
     offset: 16208
   virtual_functions: []
@@ -39892,7 +40237,7 @@ structs:
   - type: Client::System::String::Utf8String
     name: Label
     offset: 8
-  - type: StdVector<Client::Game::UI::MapMarkerData>
+  - type: StdVector_Client::Game::UI::MapMarkerData
     name: MarkerData
     offset: 112
   - type: byte
@@ -39948,7 +40293,7 @@ structs:
   - type: __int64
     name: vtbl
     offset: 0
-  - type: StdVector<Client::Game::UI::TeleportInfo>
+  - type: StdVector_Client::Game::UI::TeleportInfo
     name: TeleportList
     offset: 16
   - type: Client::Game::UI::SelectUseTicketInvoker
@@ -40565,7 +40910,7 @@ structs:
     name: LayoutId
     offset: 216
     size: 80
-  - type: StdVector<unsigned __int32>
+  - type: StdVector_unsigned__int32
     name: SeedItemIds
     offset: 296
   - type: __int32
@@ -40779,10 +41124,10 @@ structs:
   - type: __int64
     name: vtbl
     offset: 0
-  - type: StdMap<unsigned __int32, StdPair<unsigned __int32, unsigned __int32>>
+  - type: StdMap_unsigned__int32__StdPair_unsigned__int32__unsigned__int32
     name: AnimalToLeavingItemIds
     offset: 712
-  - type: StdMap<unsigned __int32, __int32>
+  - type: StdMap_unsigned__int32____int32
     name: AvailableMammetLeavings
     offset: 728
   - type: byte
@@ -40905,7 +41250,7 @@ structs:
   union: False
   size: 184
   fields:
-  - type: StdVector<Client::Game::Object::GameObjectID>
+  - type: StdVector_Client::Game::Object::GameObjectID
     name: Unk_Vector
     offset: 0
   - type: Client::System::String::Utf8String
@@ -40917,7 +41262,7 @@ structs:
   - type: Client::Game::Fate::FateContext*
     name: CurrentFate
     offset: 136
-  - type: StdVector<Client::Game::Fate::FateContext*>
+  - type: StdVector_Client::Game::Fate::FateContextPtr
     name: Fates
     offset: 144
   - type: unsigned __int16
@@ -40944,10 +41289,10 @@ structs:
   - type: Client::Game::Event::ModuleBase
     name: ModuleBase
     offset: 0
-  - type: StdVector<Client::Game::Event::Director*>
+  - type: StdVector_Client::Game::Event::DirectorPtr
     name: DirectorList
     offset: 64
-  - type: StdMap<unsigned __int16, StdPair<__int64, __int64>>
+  - type: StdMap_unsigned__int16__StdPair___int64____int64
     name: DirectorFactories
     offset: 88
   - type: Client::Game::InstanceContent::ContentDirector*
@@ -40978,10 +41323,10 @@ structs:
   - type: Client::Game::Event::ModuleBase
     name: ModuleBase
     offset: 0
-  - type: StdMap<unsigned __int32, Client::Game::Event::EventHandler*>
+  - type: StdMap_unsigned__int32__Client::Game::Event::EventHandlerPtr
     name: EventHandlerMap
     offset: 64
-  - type: StdMap<unsigned __int16, StdPair<__int64, __int64>>
+  - type: StdMap_unsigned__int16__StdPair___int64____int64
     name: EventHandlerFactories
     offset: 80
   - type: Client::Game::Event::CraftEventHandler*
@@ -41027,7 +41372,7 @@ structs:
   - type: Client::Game::Event::ModuleBase
     name: ModuleBase
     offset: 0
-  - type: StdMap<__int64, Client::Game::Event::LuaActor>
+  - type: StdMap___int64__Client::Game::Event::LuaActor
     name: ActorMap
     offset: 64
   virtual_functions: []
@@ -41753,17 +42098,17 @@ structs:
   - type: __int32
     name: ConfirmAddonHandle
     offset: 16
-  - type: StdVector<Client::System::String::Utf8String>
+  - type: StdVector_Client::System::String::Utf8String
     name: ThemeNames
     offset: 184
-  - type: StdVector<Client::UI::Agent::AgentMJICraftSchedule::CraftData>
+  - type: StdVector_Client::UI::Agent::AgentMJICraftSchedule::CraftData
     name: Crafts
     offset: 208
   - type: byte
     name: UnlockedObjectsPerTheme
     offset: 232
     size: 768
-  - type: StdVector<Client::UI::Agent::AgentMJICraftSchedule::CraftData*>
+  - type: StdVector_Client::UI::Agent::AgentMJICraftSchedule::CraftDataPtr
     name: CraftsSortedByName
     offset: 1000
   - type: byte
@@ -41924,10 +42269,10 @@ structs:
   - type: __int32
     name: CurShipQuantity
     offset: 52
-  - type: StdVector<Client::System::String::Utf8String>
+  - type: StdVector_Client::System::String::Utf8String
     name: CategoryNames
     offset: 216
-  - type: StdVector<Client::UI::Agent::AgentMJIDisposeShop::ItemData>
+  - type: StdVector_Client::UI::Agent::AgentMJIDisposeShop::ItemData
     name: Items
     offset: 240
   - type: byte
@@ -41951,19 +42296,19 @@ structs:
   - type: Client::UI::Agent::AgentMJIGatheringHouse*
     name: Owner
     offset: 0
-  - type: StdVector<Client::UI::Agent::AgentMJIGatheringHouse::ExpeditionData>
+  - type: StdVector_Client::UI::Agent::AgentMJIGatheringHouse::ExpeditionData
     name: Expeditions
     offset: 56
-  - type: StdVector<Client::UI::Agent::AgentMJIGatheringHouse::ExpeditionDesc>
+  - type: StdVector_Client::UI::Agent::AgentMJIGatheringHouse::ExpeditionDesc
     name: ExpeditionDescs
     offset: 80
-  - type: StdVector<Client::UI::Agent::AgentMJIGatheringHouse::ExpeditionItem>
+  - type: StdVector_Client::UI::Agent::AgentMJIGatheringHouse::ExpeditionItem
     name: ExpeditionItems
     offset: 104
-  - type: StdVector<Client::UI::Agent::AgentMJIGatheringHouse::Resource>
+  - type: StdVector_Client::UI::Agent::AgentMJIGatheringHouse::Resource
     name: Resources
     offset: 128
-  - type: StdVector<unsigned __int32>
+  - type: StdVector_unsigned__int32
     name: ItemsPendingIconUpdate
     offset: 152
   - type: byte
@@ -41977,83 +42322,27 @@ structs:
   union: False
   size: 416
   fields:
-  - type: StdVector<Client::UI::Agent::PouchInventoryItem>
+  - type: StdVector_Client::UI::Agent::PouchInventoryItem
     name: Inventory
     offset: 120
-  - type: StdVector<Client::UI::Agent::PouchInventoryItem*>
+  - type: StdVector_Client::UI::Agent::PouchInventoryItemPtr
     name: Materials
     offset: 144
-  - type: StdVector<Client::UI::Agent::PouchInventoryItem*>
+  - type: StdVector_Client::UI::Agent::PouchInventoryItemPtr
     name: Produce
     offset: 168
-  - type: StdVector<Client::UI::Agent::PouchInventoryItem*>
+  - type: StdVector_Client::UI::Agent::PouchInventoryItemPtr
     name: StockStores
     offset: 192
-  - type: StdVector<Client::UI::Agent::PouchInventoryItem*>
+  - type: StdVector_Client::UI::Agent::PouchInventoryItemPtr
     name: Tools
     offset: 216
-  - type: StdVector<Client::System::String::Utf8String>
+  - type: StdVector_Client::System::String::Utf8String
     name: InventoryNames
     offset: 240
   - type: unsigned __int32
     name: MJIItemPouchItemCount
     offset: 264
-  virtual_functions: []
-  member_functions: []
-- type: Client::System::Resource::Handle::MaterialResourceHandle::ColorTableRow
-  name: ColorTableRow
-  namespace: Client.System.Resource.Handle
-  union: False
-  size: 32
-  fields:
-  - type: __int16
-    name: DiffuseRed
-    offset: 0
-  - type: __int16
-    name: DiffuseGreen
-    offset: 2
-  - type: __int16
-    name: DiffuseBlue
-    offset: 4
-  - type: __int16
-    name: SpecularStrength
-    offset: 6
-  - type: __int16
-    name: SpecularRed
-    offset: 8
-  - type: __int16
-    name: SpecularGreen
-    offset: 10
-  - type: __int16
-    name: SpecularBlue
-    offset: 12
-  - type: __int16
-    name: GlossStrength
-    offset: 14
-  - type: __int16
-    name: EmissiveRed
-    offset: 16
-  - type: __int16
-    name: EmissiveGreen
-    offset: 18
-  - type: __int16
-    name: EmissiveBlue
-    offset: 20
-  - type: __int16
-    name: TileIndexW
-    offset: 22
-  - type: __int16
-    name: TileScaleUU
-    offset: 24
-  - type: __int16
-    name: TileScaleUV
-    offset: 26
-  - type: __int16
-    name: TileScaleVU
-    offset: 28
-  - type: __int16
-    name: TileScaleVV
-    offset: 30
   virtual_functions: []
   member_functions: []
 - type: Client::Game::Control::GazeController::Gaze
@@ -42090,7 +42379,7 @@ structs:
   - type: hkaAnimatedReferenceFrame*
     name: ExtractedMotion
     offset: 32
-  - type: hkArray<hkaAnnotationTrack>
+  - type: hkArray_hkaAnnotationTrack
     name: AnnotationTracks
     offset: 40
   virtual_functions: []
@@ -42109,16 +42398,16 @@ structs:
   - type: hkaAnimation*
     name: Animation
     offset: 24
-  - type: hkArray<__int16>
+  - type: hkArray___int16
     name: TransformTrackToBoneIndices
     offset: 32
-  - type: hkArray<__int16>
+  - type: hkArray___int16
     name: FloatTrackToFloatSlotIndices
     offset: 48
-  - type: hkArray<__int16>
+  - type: hkArray___int16
     name: PartitionIndices
     offset: 64
-  - type: hkEnum<hkaAnimationBinding::BlendHintEnum, __int8>
+  - type: hkEnum_hkaAnimationBinding::BlendHintEnum____int8
     name: BlendHint
     offset: 80
   virtual_functions: []
@@ -42131,7 +42420,7 @@ structs:
   - type: hkStringPtr
     name: TrackName
     offset: 0
-  - type: hkArray<hkaAnnotationTrack::Annotation>
+  - type: hkArray_hkaAnnotationTrack::Annotation
     name: Annotations
     offset: 8
   virtual_functions: []
@@ -42156,10 +42445,10 @@ structs:
   - type: hkaSkeleton*
     name: Skeleton
     offset: 40
-  - type: hkArray<hkaMeshBinding::Mapping>
+  - type: hkArray_hkaMeshBinding::Mapping
     name: Mappings
     offset: 48
-  - type: hkArray<hkTransformf>
+  - type: hkArray_hkTransformf
     name: BoneFromSkinMeshTransforms
     offset: 64
   virtual_functions: []
@@ -42172,19 +42461,19 @@ structs:
   - type: hkReferencedObject
     name: hkReferencedObject
     offset: 0
-  - type: hkArray<hkaSkeleton*>
+  - type: hkArray_hkaSkeletonPtr
     name: Skeletons
     offset: 16
-  - type: hkArray<hkaAnimation*>
+  - type: hkArray_hkaAnimationPtr
     name: Animations
     offset: 32
-  - type: hkArray<hkaAnimationBinding*>
+  - type: hkArray_hkaAnimationBindingPtr
     name: Bindings
     offset: 48
-  - type: hkArray<hkaBoneAttachment*>
+  - type: hkArray_hkaBoneAttachmentPtr
     name: Attachments
     offset: 64
-  - type: hkArray<hkaMeshBinding*>
+  - type: hkArray_hkaMeshBindingPtr
     name: Skins
     offset: 80
   virtual_functions: []
@@ -42216,16 +42505,16 @@ structs:
   - type: float
     name: Weight
     offset: 20
-  - type: hkArray<byte>
+  - type: hkArray_byte
     name: TransformTrackWeights
     offset: 24
-  - type: hkArray<byte>
+  - type: hkArray_byte
     name: FloatTrackWeights
     offset: 40
   - type: hkaAnimationBinding*
     name: Binding
     offset: 56
-  - type: hkArray<hkaAnimationControlListener*>
+  - type: hkArray_hkaAnimationControlListenerPtr
     name: Listeners
     offset: 64
   - type: float
@@ -42261,7 +42550,7 @@ structs:
   - type: __int64
     name: Padding
     offset: 24
-  - type: hkArray<hkaDefaultAnimationControl*>
+  - type: hkArray_hkaDefaultAnimationControlPtr
     name: AnimationControls
     offset: 32
   - type: hkaSkeleton*
@@ -42457,13 +42746,13 @@ structs:
   - type: hkaSkeleton*
     name: Skeleton
     offset: 0
-  - type: hkArray<hkQsTransformf>
+  - type: hkArray_hkQsTransformf
     name: LocalPose
     offset: 8
-  - type: hkArray<hkQsTransformf>
+  - type: hkArray_hkQsTransformf
     name: ModelPose
     offset: 24
-  - type: hkArray<unsigned __int32>
+  - type: hkArray_unsigned__int32
     name: BoneFlags
     offset: 40
   - type: byte
@@ -42472,7 +42761,7 @@ structs:
   - type: byte
     name: LocalInSync
     offset: 57
-  - type: hkArray<float>
+  - type: hkArray_float
     name: FloatSlotValues
     offset: 58
   virtual_functions: []
@@ -42486,7 +42775,7 @@ structs:
       name: space
     - type: hkaSkeleton*
       name: skeleton
-    - type: hkArray<hkQsTransformf>*
+    - type: hkArray_hkQsTransformf*
       name: pose
   - signature: 40 53 48 83 EC 30 4C 89 01
     return_type: void
@@ -42502,12 +42791,12 @@ structs:
     - type: __int32
       name: numBones
   - signature: E8 ?? ?? ?? ?? 48 8B 4C 24 ?? 48 8B D0 E8 ?? ?? ?? ?? 48 83 C4 20
-    return_type: hkArray<hkQsTransformf>*
+    return_type: hkArray_hkQsTransformf*
     parameters:
     - type: hkaPose*
       name: this
   - signature: 40 53 48 83 EC 20 48 8B D9 E8 ?? ?? ?? ?? 48 8D 43 18
-    return_type: hkArray<hkQsTransformf>*
+    return_type: hkArray_hkQsTransformf*
     parameters:
     - type: hkaPose*
       name: this
@@ -42516,14 +42805,14 @@ structs:
     parameters:
     - type: hkaPose*
       name: this
-    - type: hkArray<hkQsTransformf>*
+    - type: hkArray_hkQsTransformf*
       name: poseLocal
   - signature: 48 8B 01 4C 8B C1 4C 63 48 30 48 8B 02 48 8B 51 18
     return_type: void
     parameters:
     - type: hkaPose*
       name: this
-    - type: hkArray<hkQsTransformf>*
+    - type: hkArray_hkQsTransformf*
       name: poseModel
   - signature: 4C 8B DC 53 48 81 EC ?? ?? ?? ?? 80 79 39 00
     return_type: void
@@ -42552,17 +42841,17 @@ structs:
     - type: hkaPose::PropagateOrNot
       name: propagateOrNot
   - signature: E8 ?? ?? ?? ?? 4D 8B 4E 40
-    return_type: hkArray<hkQsTransformf>*
+    return_type: hkArray_hkQsTransformf*
     parameters:
     - type: hkaPose*
       name: this
   - signature: E8 ?? ?? ?? ?? 48 8B 8F ?? ?? ?? ?? 8B 58 08
-    return_type: hkArray<hkQsTransformf>*
+    return_type: hkArray_hkQsTransformf*
     parameters:
     - type: hkaPose*
       name: this
   - signature: E8 ?? ?? ?? ?? EB 05 E8 ?? ?? ?? ?? 4D 8B 4E 40
-    return_type: hkArray<hkQsTransformf>*
+    return_type: hkArray_hkQsTransformf*
     parameters:
     - type: hkaPose*
       name: this
@@ -42597,7 +42886,7 @@ structs:
       name: space
     - type: hkaSkeleton*
       name: skeleton
-    - type: hkArray<hkQsTransformf>*
+    - type: hkArray_hkQsTransformf*
       name: pose
   - signature: E8 ?? ?? ?? ?? 0F 28 2F
     return_type: hkQsTransformf*
@@ -42627,25 +42916,25 @@ structs:
   - type: hkStringPtr
     name: Name
     offset: 16
-  - type: hkArray<__int16>
+  - type: hkArray___int16
     name: ParentIndices
     offset: 24
-  - type: hkArray<hkaBone>
+  - type: hkArray_hkaBone
     name: Bones
     offset: 40
-  - type: hkArray<hkQsTransformf>
+  - type: hkArray_hkQsTransformf
     name: ReferencePose
     offset: 56
-  - type: hkArray<float>
+  - type: hkArray_float
     name: ReferenceFloats
     offset: 72
-  - type: hkArray<hkStringPtr>
+  - type: hkArray_hkStringPtr
     name: FloatSlots
     offset: 88
-  - type: hkArray<hkaSkeleton::LocalFrameOnBone>
+  - type: hkArray_hkaSkeleton::LocalFrameOnBone
     name: LocalFrames
     offset: 104
-  - type: hkArray<hkaSkeleton::Partition>
+  - type: hkArray_hkaSkeleton::Partition
     name: Partitions
     offset: 120
   virtual_functions: []
@@ -42715,10 +43004,10 @@ structs:
   - type: byte
     name: JobSubType
     offset: 0
-  - type: hkEnum<hkJob::hkJobType, byte>
+  - type: hkEnum_hkJob::hkJobType__byte
     name: JobType
     offset: 1
-  - type: hkEnum<hkJob::hkJobSpuType, byte>
+  - type: hkEnum_hkJob::hkJobSpuType__byte
     name: SpuType
     offset: 2
   - type: unsigned __int16
@@ -42737,7 +43026,7 @@ structs:
   - type: hkReferencedObject
     name: hkReferencedObject
     offset: 0
-  - type: hkArray<hkResource*>
+  - type: hkArray_hkResourcePtr
     name: LoadedData
     offset: 16
   virtual_functions: []
@@ -42754,7 +43043,7 @@ structs:
   namespace: ''
   union: False
   fields:
-  - type: hkArray<hkRootLevelContainer::NamedVariant>
+  - type: hkArray_hkRootLevelContainer::NamedVariant
     name: NamedVariants
     offset: 0
   virtual_functions: []
@@ -42795,7 +43084,7 @@ structs:
   namespace: ''
   union: False
   fields:
-  - type: hkArray<__int16>
+  - type: hkArray___int16
     name: _Mapping
     offset: 0
   virtual_functions: []
@@ -42852,13 +43141,13 @@ structs:
   - type: hkaSkeletonMapper*
     name: Mapper
     offset: 16
-  - type: hkArray<__int16>
+  - type: hkArray___int16
     name: SrcBoneToTrackIndices
     offset: 24
-  - type: hkArray<__int16>
+  - type: hkArray___int16
     name: DstBoneToTrackIndices
     offset: 40
-  - type: hkArray<__int16>
+  - type: hkArray___int16
     name: DstTrackToBoneIndices
     offset: 56
   virtual_functions: []
@@ -42887,7 +43176,7 @@ structs:
   - type: __int32
     name: NumChunks
     offset: 352
-  - type: hkFlags<hkaSampleBlendJob::SingleAnimation::SampleFlags, __int32>
+  - type: hkFlags_hkaSampleBlendJob::SingleAnimation::SampleFlags____int32
     name: Flags
     offset: 356
   - type: __int32
@@ -42916,7 +43205,7 @@ structs:
   union: False
   size: 16
   fields:
-  - type: hkEnum<hkSerializeUtil::ErrorDetails::ErrorID, __int32>
+  - type: hkEnum_hkSerializeUtil::ErrorDetails::ErrorID____int32
     name: Id
     offset: 0
   - type: hkStringPtr
@@ -42930,7 +43219,7 @@ structs:
   union: False
   size: 4
   fields:
-  - type: hkFlags<hkSerializeUtil::SaveOptionBits, __int32>
+  - type: hkFlags_hkSerializeUtil::SaveOptionBits____int32
     name: Flags
     offset: 0
   virtual_functions: []
@@ -42941,7 +43230,7 @@ structs:
   union: False
   size: 24
   fields:
-  - type: hkFlags<hkSerializeUtil::LoadOptionBits, __int32>
+  - type: hkFlags_hkSerializeUtil::LoadOptionBits____int32
     name: Flags
     offset: 0
   - type: hkClassNameRegistry*
@@ -42952,7 +43241,7 @@ structs:
     offset: 16
   virtual_functions: []
   member_functions: []
-- type: Client::Graphics::Kernel::CVector<Client::Graphics::Kernel::VertexShader*>
+- type: Client::Graphics::Kernel::CVector_Client::Graphics::Kernel::VertexShaderPtr
   name: CVector`1
   namespace: Client.Graphics.Kernel
   union: False
@@ -42960,12 +43249,12 @@ structs:
   - type: __int64
     name: vtbl
     offset: 0
-  - type: StdVector<Client::Graphics::Kernel::VertexShader*>
+  - type: StdVector_Client::Graphics::Kernel::VertexShaderPtr
     name: Vector
     offset: 8
   virtual_functions: []
   member_functions: []
-- type: Client::Graphics::Kernel::CVector<Client::Graphics::Kernel::PixelShader*>
+- type: Client::Graphics::Kernel::CVector_Client::Graphics::Kernel::PixelShaderPtr
   name: CVector`1
   namespace: Client.Graphics.Kernel
   union: False
@@ -42973,12 +43262,12 @@ structs:
   - type: __int64
     name: vtbl
     offset: 0
-  - type: StdVector<Client::Graphics::Kernel::PixelShader*>
+  - type: StdVector_Client::Graphics::Kernel::PixelShaderPtr
     name: Vector
     offset: 8
   virtual_functions: []
   member_functions: []
-- type: Client::Graphics::Kernel::CVector<Client::Graphics::Kernel::ShaderNode*>
+- type: Client::Graphics::Kernel::CVector_Client::Graphics::Kernel::ShaderNodePtr
   name: CVector`1
   namespace: Client.Graphics.Kernel
   union: False
@@ -42986,9 +43275,503 @@ structs:
   - type: __int64
     name: vtbl
     offset: 0
-  - type: StdVector<Client::Graphics::Kernel::ShaderNode*>
+  - type: StdVector_Client::Graphics::Kernel::ShaderNodePtr
     name: Vector
     offset: 8
+  virtual_functions: []
+  member_functions: []
+- type: StdMap::Node_Client::System::String::Utf8String____int64
+  name: Node
+  namespace: ''
+  union: False
+  fields:
+  - type: StdMap::Node_Client::System::String::Utf8String____int64*
+    name: Left
+    offset: 0
+  - type: StdMap::Node_Client::System::String::Utf8String____int64*
+    name: Parent
+    offset: 8
+  - type: StdMap::Node_Client::System::String::Utf8String____int64*
+    name: Right
+    offset: 16
+  - type: byte
+    name: Color
+    offset: 24
+  - type: byte
+    name: IsNil
+    offset: 25
+  - type: byte
+    name: _18
+    offset: 26
+  - type: byte
+    name: _19
+    offset: 27
+  - type: StdPair_Client::System::String::Utf8String____int64
+    name: KeyValuePair
+    offset: 28
+  virtual_functions: []
+  member_functions: []
+- type: StdMap::Node_Client::System::String::Utf8String__Component::Text::MacroEncoder::MacroCodeDescription
+  name: Node
+  namespace: ''
+  union: False
+  fields:
+  - type: StdMap::Node_Client::System::String::Utf8String__Component::Text::MacroEncoder::MacroCodeDescription*
+    name: Left
+    offset: 0
+  - type: StdMap::Node_Client::System::String::Utf8String__Component::Text::MacroEncoder::MacroCodeDescription*
+    name: Parent
+    offset: 8
+  - type: StdMap::Node_Client::System::String::Utf8String__Component::Text::MacroEncoder::MacroCodeDescription*
+    name: Right
+    offset: 16
+  - type: byte
+    name: Color
+    offset: 24
+  - type: byte
+    name: IsNil
+    offset: 25
+  - type: byte
+    name: _18
+    offset: 26
+  - type: byte
+    name: _19
+    offset: 27
+  - type: StdPair_Client::System::String::Utf8String__Component::Text::MacroEncoder::MacroCodeDescription
+    name: KeyValuePair
+    offset: 28
+  virtual_functions: []
+  member_functions: []
+- type: StdMap::Node_Component::GUI::AtkResNodePtr__Component::GUI::AtkTooltipManager::AtkTooltipInfoPtr
+  name: Node
+  namespace: ''
+  union: False
+  fields:
+  - type: StdMap::Node_Component::GUI::AtkResNodePtr__Component::GUI::AtkTooltipManager::AtkTooltipInfoPtr*
+    name: Left
+    offset: 0
+  - type: StdMap::Node_Component::GUI::AtkResNodePtr__Component::GUI::AtkTooltipManager::AtkTooltipInfoPtr*
+    name: Parent
+    offset: 8
+  - type: StdMap::Node_Component::GUI::AtkResNodePtr__Component::GUI::AtkTooltipManager::AtkTooltipInfoPtr*
+    name: Right
+    offset: 16
+  - type: byte
+    name: Color
+    offset: 24
+  - type: byte
+    name: IsNil
+    offset: 25
+  - type: byte
+    name: _18
+    offset: 26
+  - type: byte
+    name: _19
+    offset: 27
+  - type: StdPair_Component::GUI::AtkResNodePtr__Component::GUI::AtkTooltipManager::AtkTooltipInfoPtr
+    name: KeyValuePair
+    offset: 28
+  virtual_functions: []
+  member_functions: []
+- type: StdMap::Node_unsigned__int64__Client::UI::Misc::ItemOrderModuleSorterPtr
+  name: Node
+  namespace: ''
+  union: False
+  fields:
+  - type: StdMap::Node_unsigned__int64__Client::UI::Misc::ItemOrderModuleSorterPtr*
+    name: Left
+    offset: 0
+  - type: StdMap::Node_unsigned__int64__Client::UI::Misc::ItemOrderModuleSorterPtr*
+    name: Parent
+    offset: 8
+  - type: StdMap::Node_unsigned__int64__Client::UI::Misc::ItemOrderModuleSorterPtr*
+    name: Right
+    offset: 16
+  - type: byte
+    name: Color
+    offset: 24
+  - type: byte
+    name: IsNil
+    offset: 25
+  - type: byte
+    name: _18
+    offset: 26
+  - type: byte
+    name: _19
+    offset: 27
+  - type: StdPair_unsigned__int64__Client::UI::Misc::ItemOrderModuleSorterPtr
+    name: KeyValuePair
+    offset: 28
+  virtual_functions: []
+  member_functions: []
+- type: StdMap::Node_unsigned__int32__unsigned__int32
+  name: Node
+  namespace: ''
+  union: False
+  fields:
+  - type: StdMap::Node_unsigned__int32__unsigned__int32*
+    name: Left
+    offset: 0
+  - type: StdMap::Node_unsigned__int32__unsigned__int32*
+    name: Parent
+    offset: 8
+  - type: StdMap::Node_unsigned__int32__unsigned__int32*
+    name: Right
+    offset: 16
+  - type: byte
+    name: Color
+    offset: 24
+  - type: byte
+    name: IsNil
+    offset: 25
+  - type: byte
+    name: _18
+    offset: 26
+  - type: byte
+    name: _19
+    offset: 27
+  - type: StdPair_unsigned__int32__unsigned__int32
+    name: KeyValuePair
+    offset: 28
+  virtual_functions: []
+  member_functions: []
+- type: StdMap::Node_bytePtr____int16
+  name: Node
+  namespace: ''
+  union: False
+  fields:
+  - type: StdMap::Node_bytePtr____int16*
+    name: Left
+    offset: 0
+  - type: StdMap::Node_bytePtr____int16*
+    name: Parent
+    offset: 8
+  - type: StdMap::Node_bytePtr____int16*
+    name: Right
+    offset: 16
+  - type: byte
+    name: Color
+    offset: 24
+  - type: byte
+    name: IsNil
+    offset: 25
+  - type: byte
+    name: _18
+    offset: 26
+  - type: byte
+    name: _19
+    offset: 27
+  - type: StdPair_bytePtr____int16
+    name: KeyValuePair
+    offset: 28
+  virtual_functions: []
+  member_functions: []
+- type: StdMap::Node_unsigned__int32__hkaSkeletonMapperPtr
+  name: Node
+  namespace: ''
+  union: False
+  fields:
+  - type: StdMap::Node_unsigned__int32__hkaSkeletonMapperPtr*
+    name: Left
+    offset: 0
+  - type: StdMap::Node_unsigned__int32__hkaSkeletonMapperPtr*
+    name: Parent
+    offset: 8
+  - type: StdMap::Node_unsigned__int32__hkaSkeletonMapperPtr*
+    name: Right
+    offset: 16
+  - type: byte
+    name: Color
+    offset: 24
+  - type: byte
+    name: IsNil
+    offset: 25
+  - type: byte
+    name: _18
+    offset: 26
+  - type: byte
+    name: _19
+    offset: 27
+  - type: StdPair_unsigned__int32__hkaSkeletonMapperPtr
+    name: KeyValuePair
+    offset: 28
+  virtual_functions: []
+  member_functions: []
+- type: StdMap::Node_Client::System::String::Utf8String__bytePtr
+  name: Node
+  namespace: ''
+  union: False
+  fields:
+  - type: StdMap::Node_Client::System::String::Utf8String__bytePtr*
+    name: Left
+    offset: 0
+  - type: StdMap::Node_Client::System::String::Utf8String__bytePtr*
+    name: Parent
+    offset: 8
+  - type: StdMap::Node_Client::System::String::Utf8String__bytePtr*
+    name: Right
+    offset: 16
+  - type: byte
+    name: Color
+    offset: 24
+  - type: byte
+    name: IsNil
+    offset: 25
+  - type: byte
+    name: _18
+    offset: 26
+  - type: byte
+    name: _19
+    offset: 27
+  - type: StdPair_Client::System::String::Utf8String__bytePtr
+    name: KeyValuePair
+    offset: 28
+  virtual_functions: []
+  member_functions: []
+- type: StdMap::Node_unsigned__int32__Client::Game::CurrencyManager::SpecialCurrencyItem
+  name: Node
+  namespace: ''
+  union: False
+  fields:
+  - type: StdMap::Node_unsigned__int32__Client::Game::CurrencyManager::SpecialCurrencyItem*
+    name: Left
+    offset: 0
+  - type: StdMap::Node_unsigned__int32__Client::Game::CurrencyManager::SpecialCurrencyItem*
+    name: Parent
+    offset: 8
+  - type: StdMap::Node_unsigned__int32__Client::Game::CurrencyManager::SpecialCurrencyItem*
+    name: Right
+    offset: 16
+  - type: byte
+    name: Color
+    offset: 24
+  - type: byte
+    name: IsNil
+    offset: 25
+  - type: byte
+    name: _18
+    offset: 26
+  - type: byte
+    name: _19
+    offset: 27
+  - type: StdPair_unsigned__int32__Client::Game::CurrencyManager::SpecialCurrencyItem
+    name: KeyValuePair
+    offset: 28
+  virtual_functions: []
+  member_functions: []
+- type: StdMap::Node_unsigned__int32__Client::Game::CurrencyManager::CurrencyItem
+  name: Node
+  namespace: ''
+  union: False
+  fields:
+  - type: StdMap::Node_unsigned__int32__Client::Game::CurrencyManager::CurrencyItem*
+    name: Left
+    offset: 0
+  - type: StdMap::Node_unsigned__int32__Client::Game::CurrencyManager::CurrencyItem*
+    name: Parent
+    offset: 8
+  - type: StdMap::Node_unsigned__int32__Client::Game::CurrencyManager::CurrencyItem*
+    name: Right
+    offset: 16
+  - type: byte
+    name: Color
+    offset: 24
+  - type: byte
+    name: IsNil
+    offset: 25
+  - type: byte
+    name: _18
+    offset: 26
+  - type: byte
+    name: _19
+    offset: 27
+  - type: StdPair_unsigned__int32__Client::Game::CurrencyManager::CurrencyItem
+    name: KeyValuePair
+    offset: 28
+  virtual_functions: []
+  member_functions: []
+- type: StdMap::Node_unsigned__int32__Client::Game::CurrencyManager::ContentCurrencyItem
+  name: Node
+  namespace: ''
+  union: False
+  fields:
+  - type: StdMap::Node_unsigned__int32__Client::Game::CurrencyManager::ContentCurrencyItem*
+    name: Left
+    offset: 0
+  - type: StdMap::Node_unsigned__int32__Client::Game::CurrencyManager::ContentCurrencyItem*
+    name: Parent
+    offset: 8
+  - type: StdMap::Node_unsigned__int32__Client::Game::CurrencyManager::ContentCurrencyItem*
+    name: Right
+    offset: 16
+  - type: byte
+    name: Color
+    offset: 24
+  - type: byte
+    name: IsNil
+    offset: 25
+  - type: byte
+    name: _18
+    offset: 26
+  - type: byte
+    name: _19
+    offset: 27
+  - type: StdPair_unsigned__int32__Client::Game::CurrencyManager::ContentCurrencyItem
+    name: KeyValuePair
+    offset: 28
+  virtual_functions: []
+  member_functions: []
+- type: StdList::Node_Client::Game::UI::MarkerInfo
+  name: Node
+  namespace: ''
+  union: False
+  fields:
+  - type: StdList::Node_Client::Game::UI::MarkerInfo*
+    name: Next
+    offset: 0
+  - type: StdList::Node_Client::Game::UI::MarkerInfo*
+    name: Previous
+    offset: 8
+  - type: Client::Game::UI::MarkerInfo
+    name: Value
+    offset: 16
+  virtual_functions: []
+  member_functions: []
+- type: StdMap::Node_unsigned__int32__StdPair_unsigned__int32__unsigned__int32
+  name: Node
+  namespace: ''
+  union: False
+  fields:
+  - type: StdMap::Node_unsigned__int32__StdPair_unsigned__int32__unsigned__int32*
+    name: Left
+    offset: 0
+  - type: StdMap::Node_unsigned__int32__StdPair_unsigned__int32__unsigned__int32*
+    name: Parent
+    offset: 8
+  - type: StdMap::Node_unsigned__int32__StdPair_unsigned__int32__unsigned__int32*
+    name: Right
+    offset: 16
+  - type: byte
+    name: Color
+    offset: 24
+  - type: byte
+    name: IsNil
+    offset: 25
+  - type: byte
+    name: _18
+    offset: 26
+  - type: byte
+    name: _19
+    offset: 27
+  - type: StdPair_unsigned__int32__StdPair_unsigned__int32__unsigned__int32
+    name: KeyValuePair
+    offset: 28
+  virtual_functions: []
+  member_functions: []
+- type: StdMap::Node_unsigned__int32____int32
+  name: Node
+  namespace: ''
+  union: False
+  fields:
+  - type: StdMap::Node_unsigned__int32____int32*
+    name: Left
+    offset: 0
+  - type: StdMap::Node_unsigned__int32____int32*
+    name: Parent
+    offset: 8
+  - type: StdMap::Node_unsigned__int32____int32*
+    name: Right
+    offset: 16
+  - type: byte
+    name: Color
+    offset: 24
+  - type: byte
+    name: IsNil
+    offset: 25
+  - type: byte
+    name: _18
+    offset: 26
+  - type: byte
+    name: _19
+    offset: 27
+  - type: StdPair_unsigned__int32____int32
+    name: KeyValuePair
+    offset: 28
+  virtual_functions: []
+  member_functions: []
+- type: StdMap::Node_unsigned__int32__Client::Game::Event::EventHandlerPtr
+  name: Node
+  namespace: ''
+  union: False
+  fields:
+  - type: StdMap::Node_unsigned__int32__Client::Game::Event::EventHandlerPtr*
+    name: Left
+    offset: 0
+  - type: StdMap::Node_unsigned__int32__Client::Game::Event::EventHandlerPtr*
+    name: Parent
+    offset: 8
+  - type: StdMap::Node_unsigned__int32__Client::Game::Event::EventHandlerPtr*
+    name: Right
+    offset: 16
+  - type: byte
+    name: Color
+    offset: 24
+  - type: byte
+    name: IsNil
+    offset: 25
+  - type: byte
+    name: _18
+    offset: 26
+  - type: byte
+    name: _19
+    offset: 27
+  - type: StdPair_unsigned__int32__Client::Game::Event::EventHandlerPtr
+    name: KeyValuePair
+    offset: 28
+  virtual_functions: []
+  member_functions: []
+- type: StdMap::Node___int64__Client::Game::Event::LuaActor
+  name: Node
+  namespace: ''
+  union: False
+  fields:
+  - type: StdMap::Node___int64__Client::Game::Event::LuaActor*
+    name: Left
+    offset: 0
+  - type: StdMap::Node___int64__Client::Game::Event::LuaActor*
+    name: Parent
+    offset: 8
+  - type: StdMap::Node___int64__Client::Game::Event::LuaActor*
+    name: Right
+    offset: 16
+  - type: byte
+    name: Color
+    offset: 24
+  - type: byte
+    name: IsNil
+    offset: 25
+  - type: byte
+    name: _18
+    offset: 26
+  - type: byte
+    name: _19
+    offset: 27
+  - type: StdPair___int64__Client::Game::Event::LuaActor
+    name: KeyValuePair
+    offset: 28
+  virtual_functions: []
+  member_functions: []
+- type: StdPair_unsigned__int16__StdPair___int64____int64
+  name: StdPair`2
+  namespace: ''
+  union: False
+  fields:
+  - type: unsigned __int16
+    name: Item1
+    offset: 0
+  - type: StdPair___int64____int64
+    name: Item2
+    offset: 2
   virtual_functions: []
   member_functions: []
 - type: Shader::InstanceParameter
@@ -43794,7 +44577,7 @@ structs:
   - type: Component::GUI::AtkComponentList
     name: AtkComponentList
     offset: 0
-  - type: StdVector<Component::GUI::AtkComponentTreeListItem*>
+  - type: StdVector_Component::GUI::AtkComponentTreeListItemPtr
     name: Items
     offset: 424
   - type: byte
@@ -44020,7 +44803,7 @@ structs:
   - type: Component::GUI::AtkFontCodeModule
     name: AtkFontCodeModule
     offset: 23808
-  - type: StdVector<__int64>
+  - type: StdVector___int64
     name: CallbackHandlerFunctions
     offset: 29312
   - type: Client::UI::UIModule*
@@ -44229,7 +45012,7 @@ structs:
   union: True
   size: 8
   fields:
-  - type: StdPair<float, float>
+  - type: StdPair_float__float
     name: Float2
     offset: 0
   - type: float
@@ -45448,7 +46231,7 @@ structs:
   - type: Client::UI::Agent::LobbyUIClient
     name: LobbyUIClient
     offset: 8
-  - type: StdVector<Client::UI::Agent::CharaSelectCharacterEntry*>
+  - type: StdVector_Client::UI::Agent::CharaSelectCharacterEntryPtr
     name: CharaSelectEntries
     offset: 2136
   - type: unsigned __int64
@@ -45528,7 +46311,7 @@ structs:
     name: RawJson
     offset: 140
     size: 1024
-  - type: StdVector<Client::UI::Agent::CharaSelectRetainerInfo*>
+  - type: StdVector_Client::UI::Agent::CharaSelectRetainerInfoPtr
     name: RetainerInfo
     offset: 1184
   - type: Client::UI::Agent::CharaSelectCharacterInfo
@@ -45681,10 +46464,10 @@ structs:
   - type: Client::System::Resource::Handle::ResourceHandle
     name: ResourceHandle
     offset: 0
-  - type: StdMap<byte*, __int16>
+  - type: StdMap_bytePtr____int16
     name: Attributes
     offset: 520
-  - type: StdMap<byte*, __int16>
+  - type: StdMap_bytePtr____int16
     name: Shapes
     offset: 552
   virtual_functions: []
@@ -46480,13 +47263,13 @@ structs:
   - type: Client::Graphics::ReferencedClassBase
     name: ReferencedClassBase
     offset: 0
-  - type: Client::Graphics::Kernel::CVector<Client::Graphics::Kernel::VertexShader*>
+  - type: Client::Graphics::Kernel::CVector_Client::Graphics::Kernel::VertexShaderPtr
     name: VertexShaders
     offset: 16
-  - type: Client::Graphics::Kernel::CVector<Client::Graphics::Kernel::PixelShader*>
+  - type: Client::Graphics::Kernel::CVector_Client::Graphics::Kernel::PixelShaderPtr
     name: PixelShaders
     offset: 48
-  - type: Client::Graphics::Kernel::CVector<Client::Graphics::Kernel::ShaderNode*>
+  - type: Client::Graphics::Kernel::CVector_Client::Graphics::Kernel::ShaderNodePtr
     name: ShaderNodes
     offset: 80
   - type: unsigned __int16
@@ -46781,7 +47564,7 @@ structs:
   union: False
   size: 528
   fields:
-  - type: StdSet<Client::Game::Object::GameObject*>
+  - type: StdSet_Client::Game::Object::GameObjectPtr
     name: EventObjects
     offset: 8
   - type: Client::Game::Event::EventSceneModuleUsualImpl*
@@ -47446,22 +48229,22 @@ structs:
   - type: hkaSkeleton*
     name: SkeletonB
     offset: 8
-  - type: hkArray<__int16>
+  - type: hkArray___int16
     name: PartitionMap
     offset: 16
-  - type: hkArray<hkaSkeletonMapperData::PartitionMappingRange>
+  - type: hkArray_hkaSkeletonMapperData::PartitionMappingRange
     name: SimpleMappingPartitionRanges
     offset: 32
-  - type: hkArray<hkaSkeletonMapperData::PartitionMappingRange>
+  - type: hkArray_hkaSkeletonMapperData::PartitionMappingRange
     name: ChainMappingPartitionRanges
     offset: 48
-  - type: hkArray<hkaSkeletonMapperData::SimpleMapping>
+  - type: hkArray_hkaSkeletonMapperData::SimpleMapping
     name: SimpleMappings
     offset: 64
-  - type: hkArray<hkaSkeletonMapperData::ChainMapping>
+  - type: hkArray_hkaSkeletonMapperData::ChainMapping
     name: ChainMappings
     offset: 80
-  - type: hkArray<__int16>
+  - type: hkArray___int16
     name: UnmappedBones
     offset: 96
   - type: hkQsTransformf
@@ -47470,7 +48253,7 @@ structs:
   - type: byte
     name: KeepUnmappedLocal
     offset: 160
-  - type: hkEnum<hkaSkeletonMapperData::MappingType, __int32>
+  - type: hkEnum_hkaSkeletonMapperData::MappingType____int32
     name: Type
     offset: 161
   virtual_functions: []
@@ -47525,7 +48308,7 @@ structs:
   - type: unsigned __int32
     name: pad2
     offset: 164
-  - type: hkArray<hkaDefaultAnimationControl::hkaDefaultAnimationControlListener>
+  - type: hkArray_hkaDefaultAnimationControl::hkaDefaultAnimationControlListener
     name: DefaultListeners
     offset: 168
   - type: hkaDefaultAnimationControl::hkaDefaultAnimationControlMapperData*
@@ -47605,6 +48388,37 @@ structs:
   - type: byte
     name: UseSlerpForQuantized
     offset: 110
+  virtual_functions: []
+  member_functions: []
+- type: StdMap::Node_unsigned__int16__StdPair___int64____int64
+  name: Node
+  namespace: ''
+  union: False
+  fields:
+  - type: StdMap::Node_unsigned__int16__StdPair___int64____int64*
+    name: Left
+    offset: 0
+  - type: StdMap::Node_unsigned__int16__StdPair___int64____int64*
+    name: Parent
+    offset: 8
+  - type: StdMap::Node_unsigned__int16__StdPair___int64____int64*
+    name: Right
+    offset: 16
+  - type: byte
+    name: Color
+    offset: 24
+  - type: byte
+    name: IsNil
+    offset: 25
+  - type: byte
+    name: _18
+    offset: 26
+  - type: byte
+    name: _19
+    offset: 27
+  - type: StdPair_unsigned__int16__StdPair___int64____int64
+    name: KeyValuePair
+    offset: 28
   virtual_functions: []
   member_functions: []
 - type: Component::GUI::AtkTimelineKeyFrame

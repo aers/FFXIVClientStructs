@@ -5,16 +5,39 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
+using Microsoft.VisualBasic;
 
 namespace CExporter;
 
 public static class TypeExtensions {
+    public static Regex StdNodeRegex = new(@"^`[1-9]\+Node", RegexOptions.Compiled);
+
     public static bool IsFixedBuffer(this Type type) {
         return type.Name.EndsWith("e__FixedBuffer");
     }
 
     public static bool IsStruct(this Type type) {
         return type != typeof(decimal) && type is { IsValueType: true, IsPrimitive: false, IsEnum: false };
+    }
+
+    public static bool IsBaseType(this Type type) {
+        while (true) {
+            if (type.IsPointer) {
+                type = type.GetElementType()!;
+                continue;
+            }
+            if (type.IsGenericPointer()) {
+                type = type.GenericTypeArguments[0];
+                continue;
+            }
+            return type == typeof(void) || type == typeof(bool) || type == typeof(char) ||
+                   type == typeof(sbyte) || type == typeof(byte) || type == typeof(short) ||
+                   type == typeof(ushort) || type == typeof(int) || type == typeof(uint) ||
+                   type == typeof(long) || type == typeof(ulong) || type == typeof(float) ||
+                   type == typeof(double) || type == typeof(decimal) || type == typeof(nint) ||
+                   type == typeof(nuint) || type == typeof(Half);
+        }
     }
 
     public static string FixTypeName(this Type type, Func<Type, bool, string> unhandled, bool shouldLower = true) =>
@@ -114,12 +137,34 @@ public static class TypeExtensions {
             case "hkRefPtr`1" when type.Namespace == ExporterStatics.HavokNamespacePrefix[..^1]:
                 return type.GenericTypeArguments[0].FixTypeName((t, _) => t.SanitizeName()) + "*";
         }
-        name = name[..name.IndexOf('`')];
+        var tmp = name[name.IndexOf('`')..];
+        if (StdNodeRegex.IsMatch(tmp)) {
+            name = name[..name.IndexOf('`')] + "." + StdNodeRegex.Match(tmp).Value[3..];
+        } else {
+            name = name[..name.IndexOf('`')];
+        }
         name += "<" + string.Join(", ", type.GenericTypeArguments.Select(t => t.FixTypeName((t, _) => t.SanitizeName()))) + ">";
         return name;
     }
 
-    public static string FullSanitizeName(this Type type) => type.FixTypeName((t, _) => t.SanitizeName()).Replace("+", ExporterStatics.Separator).Replace(".", ExporterStatics.Separator);
+    public static string FixPtrName(this string name) {
+        var count = 0;
+        while (name[^(count+1)] == '*')
+            count++;
+        return name[..^count].Replace("*", "Ptr") + new string('*', count);
+    }
+
+    public static string FullSanitizeName(this Type type) {
+        var name = type.FixTypeName((t, _) => t.SanitizeName()).Replace("+", ExporterStatics.Separator).Replace(".", ExporterStatics.Separator).FixPtrName();
+        var spl = name.Split("<");
+        if (spl.Length == 1) return name;
+        for (var i = 1; i < spl.Length; i++) {
+            var tmp = spl[i];
+            tmp = tmp.Replace(">", "").Replace("unsigned ", "unsigned").Replace(", ", "__");
+            spl[i] = tmp;
+        }
+        return string.Join("_", spl);
+    }
 }
 
 public static class FieldInfoExtensions {

@@ -14,9 +14,7 @@ public class Program {
             dir = dir.GetDirectories("ida/CExporter", SearchOption.AllDirectories).First().Parent!;
         }
 
-        Console.WriteLine("::group::Processing Structs");
         Exporter.ProcessTypes();
-        Console.WriteLine("::endgroup::");
 
         Exporter.VerifyNoFieldOverlap();
 
