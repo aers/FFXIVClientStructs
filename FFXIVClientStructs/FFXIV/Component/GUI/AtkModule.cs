@@ -2,6 +2,7 @@ using FFXIVClientStructs.FFXIV.Client.System.Input;
 using FFXIVClientStructs.FFXIV.Client.System.Input.SoftKeyboards;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Client.UI;
+using FFXIVClientStructs.FFXIV.Component.Excel;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
@@ -11,6 +12,8 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 public unsafe partial struct AtkModule {
     [FieldOffset(0x0), CExportIgnore] public void* vtbl;
     [FieldOffset(0x8)] public AtkExternalInterface AtkExternalInterface;
+
+    [FieldOffset(0x20)] public ExcelSheet* AddonSheet;
 
     [FieldOffset(0x128)] public AtkStage* AtkStage;
     [FieldOffset(0x130)] internal nint Resources;
