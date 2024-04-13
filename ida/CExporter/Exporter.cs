@@ -521,6 +521,8 @@ public class ProcessedMemberFunctionConverter : IYamlTypeConverter {
         emitter.Emit(new Scalar(m.MemberFunctionSignature));
         emitter.Emit(new Scalar("return_type"));
         emitter.Emit(new Scalar(m.MemberFunctionReturnType.FullSanitizeName()));
+        emitter.Emit(new Scalar("name"));
+        emitter.Emit(new Scalar(m.MemberFunctionName));
         emitter.Emit(new Scalar("parameters"));
         emitter.Emit(new SequenceStart(null, null, true, SequenceStyle.Block));
         foreach (var parameter in m.MemberFunctionParameters) {

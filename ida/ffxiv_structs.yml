@@ -2807,11 +2807,13 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? FF C7 03 F8
     return_type: __int32
+    name: lua_gettop
     parameters:
     - type: Common::Lua::lua_State*
       name: this
   - signature: E8 ?? ?? ?? ?? 48 83 EB 04
     return_type: void
+    name: lua_settop
     parameters:
     - type: Common::Lua::lua_State*
       name: this
@@ -2819,6 +2821,7 @@ structs:
       name: idx
   - signature: E8 ?? ?? ?? ?? 80 38 23
     return_type: byte*
+    name: lua_tolstring
     parameters:
     - type: Common::Lua::lua_State*
       name: this
@@ -2828,6 +2831,7 @@ structs:
       name: len
   - signature: E8 ?? ?? ?? ?? 0F 28 D0 48 8D 15
     return_type: double
+    name: lua_tonumber
     parameters:
     - type: Common::Lua::lua_State*
       name: this
@@ -2835,6 +2839,7 @@ structs:
       name: idx
   - signature: E8 ?? ?? ?? ?? FF CD BA
     return_type: void
+    name: lua_pushvalue
     parameters:
     - type: Common::Lua::lua_State*
       name: this
@@ -2842,6 +2847,7 @@ structs:
       name: idx
   - signature: E8 ?? ?? ?? ?? 4D 8B 06 41 8B D7
     return_type: void
+    name: lua_pushcclosure
     parameters:
     - type: Common::Lua::lua_State*
       name: this
@@ -2851,6 +2857,7 @@ structs:
       name: n
   - signature: E8 ?? ?? ?? ?? 8B 56 ?? 85 D2 0F 88
     return_type: void
+    name: lua_setfield
     parameters:
     - type: Common::Lua::lua_State*
       name: this
@@ -2860,6 +2867,7 @@ structs:
       name: k
   - signature: E8 ?? ?? ?? ?? 48 8B 4F ?? 48 85 ED
     return_type: void
+    name: lua_getfield
     parameters:
     - type: Common::Lua::lua_State*
       name: this
@@ -2869,6 +2877,7 @@ structs:
       name: k
   - signature: E8 ?? ?? ?? ?? 33 C9 40 F6 C6
     return_type: void
+    name: lua_remove
     parameters:
     - type: Common::Lua::lua_State*
       name: this
@@ -2876,6 +2885,7 @@ structs:
       name: idx
   - signature: E8 ?? ?? ?? ?? 8B D8 85 C0 74 6F
     return_type: __int32
+    name: lua_pcall
     parameters:
     - type: Common::Lua::lua_State*
       name: this
@@ -2887,6 +2897,7 @@ structs:
       name: errfunc
   - signature: 48 83 EC 38 48 89 54 24 ?? 48 8D 15
     return_type: __int32
+    name: luaL_loadbuffer
     parameters:
     - type: Common::Lua::lua_State*
       name: this
@@ -2898,6 +2909,7 @@ structs:
       name: name
   - signature: E8 ?? ?? ?? ?? 8B D8 85 C0 75 ?? 40 84 ED
     return_type: __int32
+    name: luaL_loadfile
     parameters:
     - type: Common::Lua::lua_State*
       name: this
@@ -2905,6 +2917,7 @@ structs:
       name: filename
   - signature: E8 ?? ?? ?? ?? 3B C3 74 0D
     return_type: Common::Lua::LuaType
+    name: lua_type
     parameters:
     - type: Common::Lua::lua_State*
       name: this
@@ -2912,6 +2925,7 @@ structs:
       name: idx
   - signature: E8 ?? ?? ?? ?? 41 8B D3
     return_type: __int64
+    name: index2adr
     parameters:
     - type: Common::Lua::lua_State*
       name: this
@@ -2919,11 +2933,13 @@ structs:
       name: idx
   - signature: 40 57 48 83 EC ?? BA ?? ?? ?? ?? 48 8B F9 E8 ?? ?? ?? ?? 4C 8D 05
     return_type: __int32
+    name: luaB_tostring
     parameters:
     - type: Common::Lua::lua_State*
       name: this
   - signature: E8 ?? ?? ?? ?? 85 C0 75 ?? 0F 28 CE
     return_type: __int32
+    name: lua_next
     parameters:
     - type: Common::Lua::lua_State*
       name: this
@@ -2931,11 +2947,13 @@ structs:
       name: idx
   - signature: E8 ?? ?? ?? ?? 41 2B ED
     return_type: void
+    name: lua_pushnil
     parameters:
     - type: Common::Lua::lua_State*
       name: this
   - signature: E8 ?? ?? ?? ?? 85 C0 74 ?? 4C 8B C5
     return_type: __int32
+    name: lua_getmetatable
     parameters:
     - type: Common::Lua::lua_State*
       name: this
@@ -2943,6 +2961,7 @@ structs:
       name: idx
   - signature: E8 ?? ?? ?? ?? FF C7 3B FE 7E
     return_type: void
+    name: lua_call
     parameters:
     - type: Common::Lua::lua_State*
       name: this
@@ -3525,6 +3544,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? EB 11 48 83 F8 02
     return_type: void
+    name: SetReferencedUtf8String
     parameters:
     - type: Component::Text::TextParameter*
       name: this
@@ -3532,6 +3552,7 @@ structs:
       name: ptr
   - signature: E8 ?? ?? ?? ?? 48 FF 45 1F
     return_type: void
+    name: SetString
     parameters:
     - type: Component::Text::TextParameter*
       name: this
@@ -3539,6 +3560,7 @@ structs:
       name: ptr
   - signature: E8 ?? ?? ?? ?? EB 31 85 D2
     return_type: void
+    name: SetInteger
     parameters:
     - type: Component::Text::TextParameter*
       name: this
@@ -3665,6 +3687,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 0F 57 F6 48 85 C0
     return_type: __int64
+    name: GetEntryByIndex
     parameters:
     - type: Component::Exd::ExdModule*
       name: this
@@ -3674,6 +3697,7 @@ structs:
       name: rowId
   - signature: 48 89 5C 24 ?? 57 48 83 EC 40 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 44 24 ?? 41 8B F8
     return_type: __int64
+    name: GetSheetRowById
     parameters:
     - type: Component::Exd::ExdModule*
       name: this
@@ -3852,6 +3876,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? EB 47 33 F6 8B CE 48 8B 47 18
     return_type: Component::GUI::NumberArrayData*
+    name: GetNumberArrayData
     parameters:
     - type: Component::GUI::AtkArrayDataHolder*
       name: this
@@ -3859,6 +3884,7 @@ structs:
       name: index
   - signature: E8 ?? ?? ?? ?? EB 47 33 F6 8B CE 48 8B 47 30
     return_type: Component::GUI::StringArrayData*
+    name: GetStringArrayData
     parameters:
     - type: Component::GUI::AtkArrayDataHolder*
       name: this
@@ -3866,6 +3892,7 @@ structs:
       name: index
   - signature: E8 ?? ?? ?? ?? EB 3C 33 FF
     return_type: Component::GUI::ExtendArrayData*
+    name: GetExtendArrayData
     parameters:
     - type: Component::GUI::AtkArrayDataHolder*
       name: this
@@ -3893,16 +3920,19 @@ structs:
   member_functions:
   - signature: 48 83 EC ?? 80 79 ?? ?? 74 ?? C6 41
     return_type: void
+    name: Hide
     parameters:
     - type: Component::GUI::AtkCursor*
       name: this
   - signature: 48 83 EC 58 80 79 1A 00 75 6C
     return_type: void
+    name: Show
     parameters:
     - type: Component::GUI::AtkCursor*
       name: this
   - signature: E8 ?? ?? ?? ?? 83 BE ?? ?? ?? ?? ?? 41 B8
     return_type: void
+    name: SetVisible
     parameters:
     - type: Component::GUI::AtkCursor*
       name: this
@@ -3910,6 +3940,7 @@ structs:
       name: visible
   - signature: E8 ?? ?? ?? ?? C6 47 1B 01
     return_type: void
+    name: SetCursorType
     parameters:
     - type: Component::GUI::AtkCursor*
       name: this
@@ -4001,6 +4032,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 8D 53 9C
     return_type: void
+    name: SetEventIsHandled
     parameters:
     - type: Component::GUI::AtkEvent*
       name: this
@@ -4050,6 +4082,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 44 88 BF
     return_type: void
+    name: RegisterEvent
     parameters:
     - type: Component::GUI::AtkEventManager*
       name: this
@@ -4067,6 +4100,7 @@ structs:
       name: systemEvent
   - signature: 48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 41 56 41 57 48 83 EC ?? 48 8B 05 ?? ?? ?? ?? 45 32 D2
     return_type: void
+    name: UnregisterEvent
     parameters:
     - type: Component::GUI::AtkEventManager*
       name: this
@@ -4198,11 +4232,13 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 8B 87 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? 4C 89 BF
     return_type: void
+    name: Ctor
     parameters:
     - type: Component::GUI::AtkTexture*
       name: this
   - signature: E8 ?? ?? ?? ?? 41 8D 84 24 ?? ?? ?? ??
     return_type: __int32
+    name: LoadIconTexture
     parameters:
     - type: Component::GUI::AtkTexture*
       name: this
@@ -4212,6 +4248,7 @@ structs:
       name: version
   - signature: E8 ?? ?? ?? ?? 4C 8B 6C 24 ?? 4C 8B 5C 24
     return_type: __int32
+    name: LoadTexture
     parameters:
     - type: Component::GUI::AtkTexture*
       name: this
@@ -4221,21 +4258,25 @@ structs:
       name: version
   - signature: E8 ?? ?? ?? ?? C6 43 10 02
     return_type: __int32
+    name: ReleaseTexture
     parameters:
     - type: Component::GUI::AtkTexture*
       name: this
   - signature: 80 79 10 01 75 44
     return_type: __int32
+    name: GetLoadState
     parameters:
     - type: Component::GUI::AtkTexture*
       name: this
   - signature: 0F B6 41 11 48 8B D1
     return_type: byte
+    name: IsTextureReady
     parameters:
     - type: Component::GUI::AtkTexture*
       name: this
   - signature: E8 ?? ?? ?? ?? 8B 57 ?? 4C 8B C0 48 8B CB E8 ?? ?? ?? ?? 48 8B 5C 24 ?? B0
     return_type: Client::Graphics::Kernel::Texture*
+    name: GetKernelTexture
     parameters:
     - type: Component::GUI::AtkTexture*
       name: this
@@ -4311,6 +4352,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 0F BF 4B 10
     return_type: void
+    name: PlayAnimation
     parameters:
     - type: Component::GUI::AtkTimeline*
       name: this
@@ -4324,6 +4366,7 @@ structs:
       name: endTime
   - signature: E9 ?? ?? ?? ?? C3 48 83 EC 48
     return_type: void
+    name: UpdateChildTimelines
     parameters:
     - type: Component::GUI::AtkTimeline*
       name: this
@@ -4331,6 +4374,7 @@ structs:
       name: frameTime
   - signature: E8 ?? ?? ?? ?? 84 C0 74 7D 48 8B 43 20
     return_type: void
+    name: GetInterpolatedValue
     parameters:
     - type: Component::GUI::AtkTimeline*
       name: this
@@ -5197,6 +5241,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 41 03 ED
     return_type: void
+    name: SetString
     parameters:
     - type: Component::GUI::AtkValue*
       name: this
@@ -5204,6 +5249,7 @@ structs:
       name: value
   - signature: E8 ?? ?? ?? ?? 48 8B 06 4C 8D 4C 24 ?? 44 8B C3
     return_type: void
+    name: ChangeType
     parameters:
     - type: Component::GUI::AtkValue*
       name: this
@@ -5211,6 +5257,7 @@ structs:
       name: type
   - signature: E8 ?? ?? ?? ?? 33 FF 89 7C 24
     return_type: void
+    name: CreateArray
     parameters:
     - type: Component::GUI::AtkValue*
       name: this
@@ -5246,6 +5293,7 @@ structs:
   member_functions:
   - signature: 3B 51 08 7D 28
     return_type: void
+    name: SetValue
     parameters:
     - type: Component::GUI::NumberArrayData*
       name: this
@@ -5276,6 +5324,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? F6 47 14 08
     return_type: void
+    name: SetValue
     parameters:
     - type: Component::GUI::StringArrayData*
       name: this
@@ -5291,6 +5340,7 @@ structs:
       name: silent
   - signature: E8 ?? ?? ?? ?? 48 8B 4F 10 41 0F B6 9F
     return_type: void
+    name: SetValueForced
     parameters:
     - type: Component::GUI::StringArrayData*
       name: this
@@ -5776,6 +5826,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 8B F8 41 B0 01
     return_type: Component::GUI::AtkUnitBase*
+    name: GetAddonByName
     parameters:
     - type: Client::UI::RaptureAtkUnitManager*
       name: this
@@ -5785,6 +5836,7 @@ structs:
       name: index
   - signature: E8 ?? ?? ?? ?? 8B 6B 20
     return_type: Component::GUI::AtkUnitBase*
+    name: GetAddonById
     parameters:
     - type: Client::UI::RaptureAtkUnitManager*
       name: this
@@ -6060,6 +6112,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8D 4D 28
     return_type: void
+    name: ExecuteMacro
     parameters:
     - type: Client::UI::Shell::RaptureShellModule*
       name: this
@@ -6067,6 +6120,7 @@ structs:
       name: macro
   - signature: E8 ?? ?? ?? ?? 84 C0 0F 84 ?? ?? ?? ?? 48 8B 4C 24 ?? 48 B8
     return_type: byte
+    name: TryGetMacroIconCommand
     parameters:
     - type: Client::UI::Shell::RaptureShellModule*
       name: this
@@ -6098,11 +6152,13 @@ structs:
   member_functions:
   - signature: 40 56 48 83 EC 20 80 B9 ?? ?? ?? ?? ?? 48 8B F1 7C 08
     return_type: Client::UI::Misc::BannerModuleEntry*
+    name: CreateBanner
     parameters:
     - type: Client::UI::Misc::BannerModuleData*
       name: this
   - signature: 48 89 5C 24 ?? 57 48 83 EC 20 48 63 FA 48 8B D9 85 D2 0F 88
     return_type: byte
+    name: DeleteBanner
     parameters:
     - type: Client::UI::Misc::BannerModuleData*
       name: this
@@ -6221,6 +6277,7 @@ structs:
   member_functions:
   - signature: 0F B7 42 7C 66 39 41 7C
     return_type: byte
+    name: Equals
     parameters:
     - type: Client::UI::Misc::BannerModuleEntry*
       name: this
@@ -6801,11 +6858,13 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? BB ?? ?? ?? ?? 41 C6 46
     return_type: byte
+    name: SetupRecommendedGear
     parameters:
     - type: Client::UI::Misc::RecommendEquipModule*
       name: this
   - signature: 41 54 41 55 41 56 41 57 48 83 EC 28 80 39 00
     return_type: byte
+    name: Setup
     parameters:
     - type: Client::UI::Misc::RecommendEquipModule*
       name: this
@@ -6823,11 +6882,13 @@ structs:
       name: pvpRank
   - signature: E8 ?? ?? ?? ?? BB ?? ?? ?? ?? 41 C6 46
     return_type: byte
+    name: SetupFromPlayerState
     parameters:
     - type: Client::UI::Misc::RecommendEquipModule*
       name: this
   - signature: 48 89 5C 24 ?? 57 48 83 EC 20 0F B6 FA 48 8B D9 E8 ?? ?? ?? ?? 84 C0 75 0B
     return_type: byte
+    name: SetupForClassJob
     parameters:
     - type: Client::UI::Misc::RecommendEquipModule*
       name: this
@@ -6835,11 +6896,13 @@ structs:
       name: classJobId
   - signature: E8 ?? ?? ?? ?? EB 07 C7 43 ?? ?? ?? ?? ?? 48 8B 03
     return_type: void
+    name: EquipRecommendedGear
     parameters:
     - type: Client::UI::Misc::RecommendEquipModule*
       name: this
   - signature: 48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 33 F6 66 C7 01
     return_type: void
+    name: Clear
     parameters:
     - type: Client::UI::Misc::RecommendEquipModule*
       name: this
@@ -7779,6 +7842,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 0F B7 A8
     return_type: Component::GUI::AgentInterface*
+    name: GetAgentByInternalID
     parameters:
     - type: Client::UI::Agent::AgentModule*
       name: this
@@ -8006,16 +8070,19 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 44 2B F7
     return_type: void
+    name: Ctor
     parameters:
     - type: Client::System::String::Utf8String*
       name: this
   - signature: E8 ?? ?? ?? ?? 49 83 6E
     return_type: void
+    name: Dtor
     parameters:
     - type: Client::System::String::Utf8String*
       name: this
   - signature: E8 ?? ?? ?? ?? EB 30 40 84 F6
     return_type: void
+    name: SetString
     parameters:
     - type: Client::System::String::Utf8String*
       name: this
@@ -8023,6 +8090,7 @@ structs:
       name: cStr
   - signature: E8 ?? ?? ?? ?? 48 3B DD
     return_type: void
+    name: Copy
     parameters:
     - type: Client::System::String::Utf8String*
       name: this
@@ -8030,11 +8098,13 @@ structs:
       name: other
   - signature: E8 ?? ?? ?? ?? 85 ED 79
     return_type: void
+    name: Clear
     parameters:
     - type: Client::System::String::Utf8String*
       name: this
   - signature: E9 ?? ?? ?? ?? 48 2B D8
     return_type: byte
+    name: EqualsUtf8
     parameters:
     - type: Client::System::String::Utf8String*
       name: this
@@ -8042,6 +8112,7 @@ structs:
       name: other
   - signature: E8 ?? ?? ?? ?? 8B 57 ?? 84 C0
     return_type: byte
+    name: EqualsString
     parameters:
     - type: Client::System::String::Utf8String*
       name: this
@@ -8049,11 +8120,13 @@ structs:
       name: other
   - signature: 45 33 C0 4C 8B C9 4C 39 41
     return_type: Client::System::String::Utf8String*
+    name: ToLower
     parameters:
     - type: Client::System::String::Utf8String*
       name: this
   - signature: E8 ?? ?? ?? ?? 48 8B C8 EB A3
     return_type: Client::System::String::Utf8String*
+    name: ToUpper
     parameters:
     - type: Client::System::String::Utf8String*
       name: this
@@ -8067,6 +8140,7 @@ structs:
       name: excludeWord
   - signature: 40 53 48 83 EC ?? B8 ?? ?? ?? ?? 48 8B DA 4C 3B C8
     return_type: Client::System::String::Utf8String*
+    name: SubString
     parameters:
     - type: Client::System::String::Utf8String*
       name: this
@@ -8078,6 +8152,7 @@ structs:
       name: length
   - signature: E8 ?? ?? ?? ?? 48 8B F8 48 3B C3
     return_type: Client::System::String::Utf8String*
+    name: CopySubStrTo
     parameters:
     - type: Client::System::String::Utf8String*
       name: this
@@ -8089,6 +8164,7 @@ structs:
       name: length
   - signature: E8 ?? ?? ?? ?? 48 8D 4D A7 E8 ?? ?? ?? ?? EB 18
     return_type: Client::System::String::Utf8String*
+    name: Replace
     parameters:
     - type: Client::System::String::Utf8String*
       name: this
@@ -8098,6 +8174,7 @@ structs:
       name: replacement
   - signature: E8 ?? ?? ?? ?? 80 7D 97 00
     return_type: __int32
+    name: IndexOf
     parameters:
     - type: Client::System::String::Utf8String*
       name: this
@@ -8107,6 +8184,7 @@ structs:
       name: startIdx
   - signature: 44 88 4C 24 ?? 48 89 54 24 ?? 48 89 4C 24 ?? 53 41 54
     return_type: __int32
+    name: FindFirstOf
     parameters:
     - type: Client::System::String::Utf8String*
       name: this
@@ -8118,6 +8196,7 @@ structs:
       name: exclude
   - signature: 44 88 4C 24 ?? 53 57 41 56 48 83 EC ?? 48 83 79
     return_type: __int32
+    name: FindLastOf
     parameters:
     - type: Client::System::String::Utf8String*
       name: this
@@ -8129,6 +8208,7 @@ structs:
       name: exclude
   - signature: 48 8B 01 0F B6 04
     return_type: byte
+    name: GetCharAt
     parameters:
     - type: Client::System::String::Utf8String*
       name: this
@@ -8204,6 +8284,7 @@ structs:
   member_functions:
   - signature: 44 8B 12 4D 8B D8 41 0F B7 C2 49 C1 EA 18
     return_type: Client::System::Resource::Handle::ResourceHandle*
+    name: FindResourceHandle
     parameters:
     - type: Client::System::Resource::ResourceManager*
       name: this
@@ -8215,6 +8296,7 @@ structs:
       name: hash
   - signature: E8 ?? ?? 00 00 48 8D 8F ?? ?? 00 00 48 89 87 ?? ?? 00 00
     return_type: Client::System::Resource::Handle::ResourceHandle*
+    name: GetResourceSync
     parameters:
     - type: Client::System::Resource::ResourceManager*
       name: this
@@ -8230,6 +8312,7 @@ structs:
       name: unknown
   - signature: E8 ?? ?? ?? 00 48 8B D8 EB ?? F0 FF 83 ?? ?? 00 00
     return_type: Client::System::Resource::Handle::ResourceHandle*
+    name: GetResourceAsync
     parameters:
     - type: Client::System::Resource::ResourceManager*
       name: this
@@ -8584,6 +8667,7 @@ structs:
   member_functions:
   - signature: 8B C2 48 6B D0 78 48 03 51 58
     return_type: void
+    name: AddTask
     parameters:
     - type: Client::System::Framework::TaskManager*
       name: this
@@ -8728,6 +8812,7 @@ structs:
   member_functions:
   - signature: F3 0F 10 0D ?? ?? ?? ?? 48 63 C2
     return_type: float
+    name: GetEffectiveVolume
     parameters:
     - type: Client::Sound::SoundManager*
       name: this
@@ -8735,6 +8820,7 @@ structs:
       name: channel
   - signature: E8 ?? ?? ?? ?? FF C7 D1 EB 75 ?? 48 8B 74 24
     return_type: void
+    name: SetVolume
     parameters:
     - type: Client::Sound::SoundManager*
       name: this
@@ -8863,6 +8949,7 @@ structs:
   member_functions:
   - signature: 48 89 5C 24 ?? 56 48 83 EC 20 4C 8B 09
     return_type: void
+    name: ReceiveEvent
     parameters:
     - type: Client::Network::PacketDispatcher*
       name: this
@@ -8872,6 +8959,7 @@ structs:
       name: p3
   - signature: 48 89 5C 24 ?? 56 48 83 EC ?? 48 8B 0D ?? ?? ?? ?? 48 8B F2
     return_type: void
+    name: HandleSocialPacket
     parameters:
     - type: Client::Network::PacketDispatcher*
       name: this
@@ -8903,6 +8991,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 33 C0 48 83 C4 38 C3 33 C0
     return_type: void
+    name: SetInteriorFixture
     parameters:
     - type: Client::LayoutEngine::LayoutManager*
       name: this
@@ -8916,6 +9005,7 @@ structs:
       name: unk
   - signature: E8 ?? ?? ?? ?? 8B C5 EB 6A
     return_type: void
+    name: SetActiveFestivals
     parameters:
     - type: Client::LayoutEngine::LayoutManager*
       name: this
@@ -8934,6 +9024,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 44 0F B6 0E 41 80 F9 FF
     return_type: void
+    name: SetFixture
     parameters:
     - type: Client::LayoutEngine::OutdoorAreaLayoutData*
       name: this
@@ -8945,6 +9036,7 @@ structs:
       name: fixtureId
   - signature: 40 55 48 83 EC 30 41 0F B6 E9
     return_type: void
+    name: SetFixtureStain
     parameters:
     - type: Client::LayoutEngine::OutdoorAreaLayoutData*
       name: this
@@ -8968,6 +9060,7 @@ structs:
   member_functions:
   - signature: E9 ?? ?? ?? ?? 48 89 5C 24 ?? 48 8D 0C AD
     return_type: void
+    name: SetFixture
     parameters:
     - type: Client::LayoutEngine::OutdoorPlotLayoutData*
       name: this
@@ -8979,6 +9072,7 @@ structs:
       name: a4
   - signature: E9 ?? ?? ?? ?? 48 89 5C 24 ?? 48 89 74 24 ?? 4A 8D 34 8D
     return_type: void
+    name: SetFixtureStain
     parameters:
     - type: Client::LayoutEngine::OutdoorPlotLayoutData*
       name: this
@@ -9402,6 +9496,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 80 7D ?? ?? 0F B7 08
     return_type: unsigned __int16*
+    name: OnRenderMaterial
     parameters:
     - type: Client::Graphics::Render::ModelRenderer*
       name: this
@@ -9630,6 +9725,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 49 8B 7E ?? 45 33 ED
     return_type: __int64
+    name: LoadSourcePointer
     parameters:
     - type: Client::Graphics::Kernel::ConstantBuffer*
       name: this
@@ -9712,6 +9808,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 89 06 8B C3
     return_type: Client::Graphics::Kernel::ConstantBuffer*
+    name: CreateConstantBuffer
     parameters:
     - type: Client::Graphics::Kernel::Device*
       name: this
@@ -9723,6 +9820,7 @@ structs:
       name: unk
   - signature: E8 ?? ?? ?? ?? 8B 0F 48 8D 54 24
     return_type: Client::Graphics::Kernel::Texture*
+    name: CreateTexture2D
     parameters:
     - type: Client::Graphics::Kernel::Device*
       name: this
@@ -9924,6 +10022,7 @@ structs:
   member_functions:
   - signature: E9 ?? ?? ?? ?? 8B 02 25
     return_type: byte
+    name: InitializeContents
     parameters:
     - type: Client::Graphics::Kernel::Texture*
       name: this
@@ -10022,6 +10121,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 4C 8B BC 24 ?? ?? ?? ?? 4C 8D 9C 24 ?? ?? ?? ?? 49 8B 5B ??
     return_type: void
+    name: PlayTimeline
     parameters:
     - type: Client::Game::ActionTimelineDriver*
       name: this
@@ -10031,6 +10131,7 @@ structs:
       name: a3
   - signature: E8 ?? ?? ?? ?? 48 8B 7B 08 48 81 C7
     return_type: void
+    name: SetSlotSpeed
     parameters:
     - type: Client::Game::ActionTimelineDriver*
       name: this
@@ -10040,6 +10141,7 @@ structs:
       name: speed
   - signature: E8 ?? ?? ?? ?? 48 8B 46 ?? 0F 28 D0
     return_type: float
+    name: GetSlotSpeed
     parameters:
     - type: Client::Game::ActionTimelineDriver*
       name: this
@@ -10047,6 +10149,7 @@ structs:
       name: slot
   - signature: E8 ?? ?? ?? ?? 0F B7 F8 8D 8F
     return_type: unsigned __int16
+    name: GetSlotTimeline
     parameters:
     - type: Client::Game::ActionTimelineDriver*
       name: this
@@ -10054,6 +10157,7 @@ structs:
       name: slot
   - signature: E8 ?? ?? ?? ?? 41 0F B7 C6 4D 8B CC
     return_type: void
+    name: SetSlotTimeline
     parameters:
     - type: Client::Game::ActionTimelineDriver*
       name: this
@@ -10131,6 +10235,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 44 0F B7 F8 45 85 FF
     return_type: unsigned __int32
+    name: GetHeightAdjustActionTimelineRowId
     parameters:
     - type: Client::Game::ActionTimelineManager*
       name: this
@@ -10140,6 +10245,7 @@ structs:
       name: emoteId
   - signature: E8 ?? ?? ?? ?? 0F 28 D6 41 8B D7
     return_type: void
+    name: SetSlotSpeed
     parameters:
     - type: Client::Game::ActionTimelineManager*
       name: this
@@ -10149,6 +10255,7 @@ structs:
       name: speed
   - signature: E8 ?? ?? ?? ?? 48 83 C7 ?? 48 83 EE ?? 75 ?? 48 8B 74 24 ?? 48 8B 6C 24
     return_type: void
+    name: SetLipsOverrideTimeline
     parameters:
     - type: Client::Game::ActionTimelineManager*
       name: this
@@ -10156,6 +10263,7 @@ structs:
       name: actionTimelineId
   - signature: E8 ?? ?? ?? ?? 84 C0 74 ?? 80 8E ?? ?? ?? ?? ?? 48 8D 8B
     return_type: byte
+    name: CalculateAndApplyOverallSpeed
     parameters:
     - type: Client::Game::ActionTimelineManager*
       name: this
@@ -10277,11 +10385,13 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 8B F0 41 8B DF
     return_type: unsigned __int32
+    name: GetMemberCount
     parameters:
     - type: Client::Game::GcArmyManager*
       name: this
   - signature: E8 ?? ?? ?? ?? 48 63 3B
     return_type: Client::Game::GcArmyMember*
+    name: GetMember
     parameters:
     - type: Client::Game::GcArmyManager*
       name: this
@@ -10424,6 +10534,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 44 0F BE C7
     return_type: Client::Game::InventoryContainer*
+    name: GetInventoryContainer
     parameters:
     - type: Client::Game::InventoryManager*
       name: this
@@ -10431,6 +10542,7 @@ structs:
       name: inventoryType
   - signature: E8 ?? ?? ?? ?? 33 C9 38 48 06
     return_type: Client::Game::InventoryItem*
+    name: GetInventorySlot
     parameters:
     - type: Client::Game::InventoryManager*
       name: this
@@ -10440,6 +10552,7 @@ structs:
       name: index
   - signature: E8 ?? ?? ?? ?? 8B 53 F1
     return_type: __int32
+    name: GetInventoryItemCount
     parameters:
     - type: Client::Game::InventoryManager*
       name: this
@@ -10455,6 +10568,7 @@ structs:
       name: minCollectability
   - signature: E8 ?? ?? ?? ?? 03 F8 BB
     return_type: __int32
+    name: GetItemCountInContainer
     parameters:
     - type: Client::Game::InventoryManager*
       name: this
@@ -10468,6 +10582,7 @@ structs:
       name: minCollectability
   - signature: E8 ?? ?? ?? ?? 33 DB 89 5E 08
     return_type: __int32
+    name: MoveItemSlot
     parameters:
     - type: Client::Game::InventoryManager*
       name: this
@@ -10483,6 +10598,7 @@ structs:
       name: unk
   - signature: E8 ?? ?? ?? ?? 85 C0 7F 6D
     return_type: unsigned __int32
+    name: GetEquippedItemIdForSlot
     parameters:
     - type: Client::Game::InventoryManager*
       name: this
@@ -10490,46 +10606,55 @@ structs:
       name: slotId
   - signature: E8 ?? ?? ?? ?? 42 8B 74 A5
     return_type: byte
+    name: GetPermittedGearsetCount
     parameters:
     - type: Client::Game::InventoryManager*
       name: this
   - signature: E8 ?? ?? ?? ?? 44 8B E8 44 3B E0
     return_type: unsigned __int32
+    name: GetEmptySlotsInBag
     parameters:
     - type: Client::Game::InventoryManager*
       name: this
   - signature: E8 ?? ?? ?? ?? 3B 44 24 58
     return_type: unsigned __int32
+    name: GetGil
     parameters:
     - type: Client::Game::InventoryManager*
       name: this
   - signature: E8 ?? ?? ?? ?? 03 D8 3B F3
     return_type: unsigned __int32
+    name: GetRetainerGil
     parameters:
     - type: Client::Game::InventoryManager*
       name: this
   - signature: E8 ?? ?? ?? ?? 8B F8 39 BB
     return_type: unsigned __int32
+    name: GetFreeCompanyGil
     parameters:
     - type: Client::Game::InventoryManager*
       name: this
   - signature: E8 ?? ?? ?? ?? 3B C3 73 25
     return_type: unsigned __int32
+    name: GetGoldSaucerCoin
     parameters:
     - type: Client::Game::InventoryManager*
       name: this
   - signature: E8 ?? ?? ?? ?? 2B E8 8B C5 EB 61
     return_type: unsigned __int32
+    name: GetWolfMarks
     parameters:
     - type: Client::Game::InventoryManager*
       name: this
   - signature: E9 ?? ?? ?? ?? 83 FB 1D
     return_type: unsigned __int32
+    name: GetAlliedSeals
     parameters:
     - type: Client::Game::InventoryManager*
       name: this
   - signature: E8 ?? ?? ?? ?? 0F B7 4D 6C
     return_type: unsigned __int32
+    name: GetCompanySeals
     parameters:
     - type: Client::Game::InventoryManager*
       name: this
@@ -10537,6 +10662,7 @@ structs:
       name: grandcompanyId
   - signature: E8 ?? ?? ?? ?? 2B C3 EB 11
     return_type: unsigned __int32
+    name: GetMaxCompanySeals
     parameters:
     - type: Client::Game::InventoryManager*
       name: this
@@ -10544,6 +10670,7 @@ structs:
       name: grandcompanyId
   - signature: E8 ?? ?? ?? ?? 8B CE 2B E8
     return_type: unsigned __int32
+    name: GetTomestoneCount
     parameters:
     - type: Client::Game::InventoryManager*
       name: this
@@ -10551,6 +10678,7 @@ structs:
       name: tomestoneItemId
   - signature: E8 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? 8B D8 E8 ?? ?? ?? ?? 8B 55 F7
     return_type: __int32
+    name: GetLimitedTomestoneCount
     parameters:
     - type: Client::Game::InventoryManager*
       name: this
@@ -10578,6 +10706,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 8B 57 F0
     return_type: Client::Game::InventoryItem*
+    name: GetInventorySlot
     parameters:
     - type: Client::Game::InventoryContainer*
       name: this
@@ -10634,11 +10763,13 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 8D 45 A8
     return_type: void
+    name: Ctor
     parameters:
     - type: Client::Game::InventoryItem*
       name: this
   - signature: 8B 42 08 4C 8B C1
     return_type: byte
+    name: Equals
     parameters:
     - type: Client::Game::InventoryItem*
       name: this
@@ -10646,6 +10777,7 @@ structs:
       name: other
   - signature: E9 ?? ?? ?? ?? 48 8D 4B 48
     return_type: byte
+    name: Copy
     parameters:
     - type: Client::Game::InventoryItem*
       name: this
@@ -10653,46 +10785,55 @@ structs:
       name: other
   - signature: E8 ?? ?? ?? ?? 38 58 06
     return_type: Client::Game::InventoryItem*
+    name: GetLinkedItem
     parameters:
     - type: Client::Game::InventoryItem*
       name: this
   - signature: E8 ?? ?? ?? ?? 41 3B 06
     return_type: unsigned __int32
+    name: GetItemId
     parameters:
     - type: Client::Game::InventoryItem*
       name: this
   - signature: E8 ?? ?? ?? ?? 2B C6
     return_type: unsigned __int32
+    name: GetQuantity
     parameters:
     - type: Client::Game::InventoryItem*
       name: this
   - signature: E8 ?? ?? ?? ?? 66 41 3B 85
     return_type: unsigned __int16
+    name: GetSpiritbond
     parameters:
     - type: Client::Game::InventoryItem*
       name: this
   - signature: E8 ?? ?? ?? ?? 0F B7 F0 EB 04
     return_type: unsigned __int16
+    name: GetCondition
     parameters:
     - type: Client::Game::InventoryItem*
       name: this
   - signature: E8 ?? ?? ?? ?? 48 8B D8 EB 04
     return_type: unsigned __int64
+    name: GetCrafterContentId
     parameters:
     - type: Client::Game::InventoryItem*
       name: this
   - signature: E8 ?? ?? ?? ?? 3A 43 08
     return_type: byte
+    name: GetStain
     parameters:
     - type: Client::Game::InventoryItem*
       name: this
   - signature: E8 ?? ?? ?? ?? 39 33 75
     return_type: unsigned __int32
+    name: GetGlamourId
     parameters:
     - type: Client::Game::InventoryItem*
       name: this
   - signature: E8 ?? ?? ?? ?? EB 10 32 C0
     return_type: unsigned __int16
+    name: GetMateriaId
     parameters:
     - type: Client::Game::InventoryItem*
       name: this
@@ -10700,6 +10841,7 @@ structs:
       name: materiaSlot
   - signature: E8 ?? ?? ?? ?? 42 3A 04 33
     return_type: byte
+    name: GetMateriaGrade
     parameters:
     - type: Client::Game::InventoryItem*
       name: this
@@ -10707,6 +10849,7 @@ structs:
       name: materiaSlot
   - signature: E8 ?? ?? ?? ?? 3A 47 67
     return_type: byte
+    name: GetMateriaCount
     parameters:
     - type: Client::Game::InventoryItem*
       name: this
@@ -10747,6 +10890,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 84 C0 74 0F 41 B0 01
     return_type: byte
+    name: RestorePrismBoxItem
     parameters:
     - type: Client::Game::MirageManager*
       name: this
@@ -10842,6 +10986,7 @@ structs:
   member_functions:
   - signature: 45 33 C0 48 8D 41 18 66 39 10
     return_type: byte
+    name: IsQuestAccepted
     parameters:
     - type: Client::Game::QuestManager*
       name: this
@@ -10849,6 +10994,7 @@ structs:
       name: questId
   - signature: E8 ?? ?? ?? ?? 48 8B 0D ?? ?? ?? ?? 88 45 80
     return_type: byte
+    name: IsLevequestComplete
     parameters:
     - type: Client::Game::QuestManager*
       name: this
@@ -10856,6 +11002,7 @@ structs:
       name: levequestId
   - signature: 45 33 C9 48 81 C1 ?? ?? ?? ?? 45 8D 51 02
     return_type: unsigned __int32
+    name: GetBeastTribeAllowance
     parameters:
     - type: Client::Game::QuestManager*
       name: this
@@ -10985,6 +11132,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 85 C0 74 05 4C 39 20
     return_type: Client::Game::RetainerManager::Retainer*
+    name: GetRetainerBySortedIndex
     parameters:
     - type: Client::Game::RetainerManager*
       name: this
@@ -10992,11 +11140,13 @@ structs:
       name: sortedIndex
   - signature: E8 ?? ?? ?? ?? 48 8B CB 8B E8 E8 ?? ?? ?? FF 8B
     return_type: byte
+    name: GetRetainerCount
     parameters:
     - type: Client::Game::RetainerManager*
       name: this
   - signature: E8 ?? ?? ?? ?? 0F B6 78 29
     return_type: Client::Game::RetainerManager::Retainer*
+    name: GetActiveRetainer
     parameters:
     - type: Client::Game::RetainerManager*
       name: this
@@ -11039,11 +11189,13 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 2B F0 E8 ?? ?? ?? ?? 8B CB
     return_type: __int32
+    name: GetUsedAllowances
     parameters:
     - type: Client::Game::SatisfactionSupplyManager*
       name: this
   - signature: E8 ?? ?? ?? ?? 8B D0 48 8B CB E8 ?? ?? ?? ?? E8
     return_type: __int32
+    name: GetResetTimestamp
     parameters:
     - type: Client::Game::SatisfactionSupplyManager*
       name: this
@@ -11143,6 +11295,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 3C 01 74 B7
     return_type: byte
+    name: HasStatus
     parameters:
     - type: Client::Game::StatusManager*
       name: this
@@ -11152,6 +11305,7 @@ structs:
       name: sourceId
   - signature: E8 ?? ?? ?? ?? 85 C0 79 ?? 48 8B 15
     return_type: __int32
+    name: GetStatusIndex
     parameters:
     - type: Client::Game::StatusManager*
       name: this
@@ -11161,6 +11315,7 @@ structs:
       name: sourceId
   - signature: 83 FA 3C 72 04 0F 57 C0
     return_type: float
+    name: GetRemainingTime
     parameters:
     - type: Client::Game::StatusManager*
       name: this
@@ -11168,6 +11323,7 @@ structs:
       name: statusIndex
   - signature: E8 ?? ?? ?? ?? 3D ?? ?? ?? ?? 74 45
     return_type: unsigned __int32
+    name: GetStatusId
     parameters:
     - type: Client::Game::StatusManager*
       name: this
@@ -11175,6 +11331,7 @@ structs:
       name: statusIndex
   - signature: E8 ?? ?? ?? ?? 3B 44 24 28
     return_type: unsigned __int32
+    name: GetSourceId
     parameters:
     - type: Client::Game::StatusManager*
       name: this
@@ -11182,6 +11339,7 @@ structs:
       name: statusIndex
   - signature: E8 ?? ?? ?? ?? 49 8B CE E8 ?? ?? ?? ?? 84 C0 74 4E
     return_type: void
+    name: AddStatus
     parameters:
     - type: Client::Game::StatusManager*
       name: this
@@ -11193,6 +11351,7 @@ structs:
       name: u3
   - signature: E8 ?? ?? ?? ?? 83 FF 3C
     return_type: void
+    name: RemoveStatus
     parameters:
     - type: Client::Game::StatusManager*
       name: this
@@ -11223,6 +11382,7 @@ structs:
   member_functions:
   - signature: B8 ?? ?? ?? ?? 44 0F B7 C2 4C 8B C9
     return_type: byte
+    name: IsTitleUnlocked
     parameters:
     - type: Client::Game::TitleList*
       name: this
@@ -11260,6 +11420,7 @@ structs:
   member_functions:
   - signature: 48 83 EC ?? C7 81 ?? ?? ?? ?? ?? ?? ?? ?? 45 33 C9
     return_type: void
+    name: RequestAchievementProgress
     parameters:
     - type: Client::Game::UI::Achievement*
       name: this
@@ -11267,6 +11428,7 @@ structs:
       name: id
   - signature: C7 81 ?? ?? ?? ?? ?? ?? ?? ?? 89 91 ?? ?? ?? ?? 44 89 81
     return_type: void
+    name: ReceiveAchievementProgress
     parameters:
     - type: Client::Game::UI::Achievement*
       name: this
@@ -11278,6 +11440,7 @@ structs:
       name: max
   - signature: E8 ?? ?? ?? ?? 04 30
     return_type: byte
+    name: IsComplete
     parameters:
     - type: Client::Game::UI::Achievement*
       name: this
@@ -11363,6 +11526,7 @@ structs:
   member_functions:
   - signature: E9 ?? ?? ?? ?? 0F B7 50 02 41 B8
     return_type: byte
+    name: IsBuddyEquipUnlocked
     parameters:
     - type: Client::Game::UI::CompanionInfo*
       name: this
@@ -11420,6 +11584,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 84 C0 74 16 8B CB
     return_type: byte
+    name: IsItemInCabinet
     parameters:
     - type: Client::Game::UI::Cabinet*
       name: this
@@ -11727,11 +11892,13 @@ structs:
   member_functions:
   - signature: 48 83 EC 38 33 D2 C7 44 24 ?? ?? ?? ?? ?? 45 33 C9
     return_type: void
+    name: CancelCast
     parameters:
     - type: Client::Game::UI::Hotbar*
       name: this
   - signature: 40 53 56 41 56 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 48 8B 0D
     return_type: void
+    name: ResetPvEHotbarsForClassAtLevel
     parameters:
     - type: Client::Game::UI::Hotbar*
       name: this
@@ -11741,6 +11908,7 @@ structs:
       name: classLevel
   - signature: 41 56 41 57 48 83 EC 68 48 8B 0D
     return_type: void
+    name: ResetPvPHotbarsForClassInner
     parameters:
     - type: Client::Game::UI::Hotbar*
       name: this
@@ -11961,6 +12129,7 @@ structs:
   member_functions:
   - signature: 4C 8B C9 80 FA 12
     return_type: __int32
+    name: GetKillCount
     parameters:
     - type: Client::Game::UI::MobHunt*
       name: this
@@ -11970,6 +12139,7 @@ structs:
       name: mobIndex
   - signature: E8 ?? ?? ?? ?? 89 44 24 38 45 33 FF
     return_type: __int32
+    name: GetObtainedHuntOrderRowId
     parameters:
     - type: Client::Game::UI::MobHunt*
       name: this
@@ -11977,6 +12147,7 @@ structs:
       name: markIndex
   - signature: E8 ?? ?? ?? ?? 48 8B 57 28 48 8D 0D
     return_type: __int32
+    name: GetAvailableHuntOrderRowId
     parameters:
     - type: Client::Game::UI::MobHunt*
       name: this
@@ -11984,6 +12155,7 @@ structs:
       name: markIndex
   - signature: E8 ?? ?? ?? ?? 44 0F B6 E0 3C 12
     return_type: __int32
+    name: GetMarkIndexFromItemId
     parameters:
     - type: Client::Game::UI::MobHunt*
       name: this
@@ -11991,6 +12163,7 @@ structs:
       name: itemId
   - signature: 48 89 5C 24 ?? 56 48 83 EC 20 40 32 F6
     return_type: byte
+    name: IsMarkBillUnlocked
     parameters:
     - type: Client::Game::UI::MobHunt*
       name: this
@@ -12296,11 +12469,13 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 41 3A 86
     return_type: byte
+    name: GetGrandCompanyRank
     parameters:
     - type: Client::Game::UI::PlayerState*
       name: this
   - signature: E8 ?? ?? ?? ?? BE ?? ?? ?? ?? 84 C0 75 0C
     return_type: byte
+    name: GetBeastTribeRank
     parameters:
     - type: Client::Game::UI::PlayerState*
       name: this
@@ -12308,11 +12483,13 @@ structs:
       name: beastTribeIndex
   - signature: 0F B6 81 ?? ?? ?? ?? 4C 8D 4C 24 ??
     return_type: byte
+    name: IsMeisterFlagMaxCount
     parameters:
     - type: Client::Game::UI::PlayerState*
       name: this
   - signature: E8 ?? ?? ?? ?? 84 C0 74 04 41 0F AB F4
     return_type: byte
+    name: IsMeisterFlag
     parameters:
     - type: Client::Game::UI::PlayerState*
       name: this
@@ -12320,6 +12497,7 @@ structs:
       name: classJobId
   - signature: E8 ?? ?? ?? ?? 38 43 45
     return_type: byte
+    name: IsMeisterFlagAndHasSoulStoneEquipped
     parameters:
     - type: Client::Game::UI::PlayerState*
       name: this
@@ -12327,6 +12505,7 @@ structs:
       name: classJobId
   - signature: E8 ?? ?? ?? ?? 84 C0 74 5D 8B CB
     return_type: byte
+    name: IsMountUnlocked
     parameters:
     - type: Client::Game::UI::PlayerState*
       name: this
@@ -12334,6 +12513,7 @@ structs:
       name: mountId
   - signature: E8 ?? ?? ?? ?? BA ?? ?? ?? ?? 41 0F B6 CE
     return_type: byte
+    name: IsOrnamentUnlocked
     parameters:
     - type: Client::Game::UI::PlayerState*
       name: this
@@ -12341,6 +12521,7 @@ structs:
       name: ornamentId
   - signature: E8 ?? ?? ?? ?? 88 44 3B 08
     return_type: byte
+    name: IsOrchestrionRollUnlocked
     parameters:
     - type: Client::Game::UI::PlayerState*
       name: this
@@ -12348,6 +12529,7 @@ structs:
       name: rollId
   - signature: E8 ?? ?? ?? ?? 0F B6 4D 9A
     return_type: byte
+    name: IsSecretRecipeBookUnlocked
     parameters:
     - type: Client::Game::UI::PlayerState*
       name: this
@@ -12355,6 +12537,7 @@ structs:
       name: tomeId
   - signature: E9 ?? ?? ?? ?? 0F B7 57 70
     return_type: byte
+    name: IsFolkloreBookUnlocked
     parameters:
     - type: Client::Game::UI::PlayerState*
       name: this
@@ -12362,6 +12545,7 @@ structs:
       name: tomeId
   - signature: 8D 42 ?? 3C ?? 77 ?? 4C 8B 89
     return_type: byte
+    name: IsMcGuffinUnlocked
     parameters:
     - type: Client::Game::UI::PlayerState*
       name: this
@@ -12369,6 +12553,7 @@ structs:
       name: mcGuffinId
   - signature: E9 ?? ?? ?? ?? 33 FF 0F 1F 40 00
     return_type: byte
+    name: IsFramersKitUnlocked
     parameters:
     - type: Client::Game::UI::PlayerState*
       name: this
@@ -12376,6 +12561,7 @@ structs:
       name: kitId
   - signature: 4C 8B C9 85 D2 74 48
     return_type: byte
+    name: IsAetherCurrentZoneComplete
     parameters:
     - type: Client::Game::UI::PlayerState*
       name: this
@@ -12383,6 +12569,7 @@ structs:
       name: territoryTypeColumn32
   - signature: E8 ?? ?? ?? ?? 88 84 24 ?? ?? ?? ?? 4D 85 F6
     return_type: byte
+    name: IsAdventureExPhaseComplete
     parameters:
     - type: Client::Game::UI::PlayerState*
       name: this
@@ -12390,6 +12577,7 @@ structs:
       name: adventureExPhaseId
   - signature: 81 FA ?? ?? ?? ?? 73 1F 0F B6 C2
     return_type: byte
+    name: IsAdventureComplete
     parameters:
     - type: Client::Game::UI::PlayerState*
       name: this
@@ -12397,6 +12585,7 @@ structs:
       name: adventureId
   - signature: E8 ?? ?? ?? ?? 3B C3 0F 93 C0
     return_type: unsigned __int32
+    name: GetWeeklyBingoFlagsValue
     parameters:
     - type: Client::Game::UI::PlayerState*
       name: this
@@ -12404,16 +12593,19 @@ structs:
       name: mode
   - signature: E8 ?? ?? ?? ?? 84 C0 74 1D 48 8B 4B 10
     return_type: byte
+    name: IsWeeklyBingoExpired
     parameters:
     - type: Client::Game::UI::PlayerState*
       name: this
   - signature: 8B 81 ?? ?? ?? ?? C1 E8 04 25
     return_type: unsigned __int32
+    name: GetWeeklyBingoExpireUnixTimestamp
     parameters:
     - type: Client::Game::UI::PlayerState*
       name: this
   - signature: E8 ?? ?? ?? ?? 41 8B D7 88 06
     return_type: byte
+    name: IsWeeklyBingoStickerPlaced
     parameters:
     - type: Client::Game::UI::PlayerState*
       name: this
@@ -12421,6 +12613,7 @@ structs:
       name: index
   - signature: 48 8B C1 83 FA 10
     return_type: Client::Game::UI::PlayerState::WeeklyBingoTaskStatus
+    name: GetWeeklyBingoTaskStatus
     parameters:
     - type: Client::Game::UI::PlayerState*
       name: this
@@ -12428,36 +12621,43 @@ structs:
       name: index
   - signature: E8 ?? ?? ?? ?? 0F B6 C0 0F AF C3
     return_type: unsigned __int32
+    name: GetWeeklyBingoExpMultiplier
     parameters:
     - type: Client::Game::UI::PlayerState*
       name: this
   - signature: E8 ?? ?? ?? ?? 84 C0 74 0D B0 02
     return_type: byte
+    name: IsMentor
     parameters:
     - type: Client::Game::UI::PlayerState*
       name: this
   - signature: E8 ?? ?? ?? ?? 44 8B 7C 24 ?? 84 C0
     return_type: byte
+    name: IsBattleMentor
     parameters:
     - type: Client::Game::UI::PlayerState*
       name: this
   - signature: E8 ?? ?? ?? ?? 8D 73 1A
     return_type: byte
+    name: IsTradeMentor
     parameters:
     - type: Client::Game::UI::PlayerState*
       name: this
   - signature: 0F B6 81 ?? ?? ?? ?? F6 D0 0F B6 C0
     return_type: byte
+    name: IsNovice
     parameters:
     - type: Client::Game::UI::PlayerState*
       name: this
   - signature: E8 ?? ?? ?? ?? 88 46 43
     return_type: byte
+    name: IsReturner
     parameters:
     - type: Client::Game::UI::PlayerState*
       name: this
   - signature: E8 ?? ?? ?? ?? 3A D8 75 2E
     return_type: byte
+    name: IsPlayerStateFlagSet
     parameters:
     - type: Client::Game::UI::PlayerState*
       name: this
@@ -12587,51 +12787,61 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 3A 46 4F
     return_type: byte
+    name: GetPvPRank
     parameters:
     - type: Client::Game::UI::PvPProfile*
       name: this
   - signature: 0F B6 15 ?? ?? ?? ?? 8D 42 FF 3C 02 77 0F
     return_type: unsigned __int32
+    name: GetPvPTotalExperience
     parameters:
     - type: Client::Game::UI::PvPProfile*
       name: this
   - signature: E8 ?? ?? ?? ?? 49 8B CC 8B F0
     return_type: unsigned __int32
+    name: GetPvPCurrentRankExperience
     parameters:
     - type: Client::Game::UI::PvPProfile*
       name: this
   - signature: 0F B6 15 ?? ?? ?? ?? 8D 42 FF 3C 02 77 07
     return_type: unsigned __int32
+    name: GetPvPCurrentRankNeededExperience
     parameters:
     - type: Client::Game::UI::PvPProfile*
       name: this
   - signature: E8 ?? ?? ?? ?? 0F B6 F0 8B FE
     return_type: byte
+    name: GetSeriesCurrentRank
     parameters:
     - type: Client::Game::UI::PvPProfile*
       name: this
   - signature: E8 ?? ?? ?? ?? 0F B6 C0 FF C0 3B D8
     return_type: byte
+    name: GetSeriesClaimedRank
     parameters:
     - type: Client::Game::UI::PvPProfile*
       name: this
   - signature: 0F B7 41 22 C3 CC
     return_type: unsigned __int16
+    name: GetSeriesExperience
     parameters:
     - type: Client::Game::UI::PvPProfile*
       name: this
   - signature: 80 79 24 00 0F 95 C0
     return_type: byte
+    name: HasPreviousSeriesRank
     parameters:
     - type: Client::Game::UI::PvPProfile*
       name: this
   - signature: E8 ?? ?? ?? ?? EB 05 E8 ?? ?? ?? ?? 0F B6 C0
     return_type: byte
+    name: GetPreviousSeriesRank
     parameters:
     - type: Client::Game::UI::PvPProfile*
       name: this
   - signature: E8 ?? ?? ?? ?? 0F B6 F8 EB 02 33 FF BA ?? ?? ?? ?? 49 8D 4E 50
     return_type: byte
+    name: GetPreviousSeriesClaimedRank
     parameters:
     - type: Client::Game::UI::PvPProfile*
       name: this
@@ -12679,6 +12889,7 @@ structs:
   member_functions:
   - signature: 4C 8B 81 ?? ?? ?? ?? 44 8B D2
     return_type: byte
+    name: IsRecipeUnlocked
     parameters:
     - type: Client::Game::UI::RecipeNote*
       name: this
@@ -12686,6 +12897,7 @@ structs:
       name: recipeId
   - signature: 40 53 48 83 EC 20 83 FA 07
     return_type: unsigned __int16
+    name: GetCraftTypeLevel
     parameters:
     - type: Client::Game::UI::RecipeNote*
       name: this
@@ -12769,6 +12981,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 8B 0E 3B C8
     return_type: unsigned __int32
+    name: GetPenaltyRemainingInMinutes
     parameters:
     - type: Client::Game::UI::RouletteController*
       name: this
@@ -12776,6 +12989,7 @@ structs:
       name: index
   - signature: 48 83 EC 28 84 D2 75 07 32 C0
     return_type: byte
+    name: IsRouletteIncomplete
     parameters:
     - type: Client::Game::UI::RouletteController*
       name: this
@@ -12826,6 +13040,7 @@ structs:
   member_functions:
   - signature: 48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 80 79 ?? 00 41 0F B6 F8 8B F2
     return_type: byte
+    name: TeleportWithTickets
     parameters:
     - type: Client::Game::UI::SelectUseTicketInvoker*
       name: this
@@ -12968,6 +13183,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 83 F8 FF 74 C3
     return_type: unsigned __int32
+    name: CreateBattleCharacter
     parameters:
     - type: Client::Game::Object::ClientObjectManager*
       name: this
@@ -12977,6 +13193,7 @@ structs:
       name: param
   - signature: E8 ?? ?? ?? ?? 48 8B F0 48 85 C0 74 4E 48 8B 10
     return_type: Client::Game::Object::GameObject*
+    name: GetObjectByIndex
     parameters:
     - type: Client::Game::Object::ClientObjectManager*
       name: this
@@ -12984,6 +13201,7 @@ structs:
       name: id
   - signature: E8 ?? ?? ?? ?? 48 8B 5E ?? 8B E8
     return_type: unsigned __int32
+    name: GetIndexByObject
     parameters:
     - type: Client::Game::Object::ClientObjectManager*
       name: this
@@ -12991,6 +13209,7 @@ structs:
       name: character
   - signature: E8 ?? ?? ?? ?? C7 07 ?? ?? ?? ?? 48 8B 05
     return_type: void
+    name: DeleteObjectByIndex
     parameters:
     - type: Client::Game::Object::ClientObjectManager*
       name: this
@@ -13000,6 +13219,7 @@ structs:
       name: param
   - signature: E8 ?? ?? ?? ?? 8B F8 48 8B CB 83 F8 FF
     return_type: unsigned __int32
+    name: CalculateNextAvailableIndex
     parameters:
     - type: Client::Game::Object::ClientObjectManager*
       name: this
@@ -13205,6 +13425,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? C7 83 ?? ?? ?? ?? ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8D 54 24
     return_type: void
+    name: CollectResources
     parameters:
     - type: Client::Game::MJI::MJIGranariesState*
       name: this
@@ -13212,6 +13433,7 @@ structs:
       name: granaryIndex
   - signature: 48 83 EC 38 45 0F B6 C9
     return_type: void
+    name: SelectExpeditionCommit
     parameters:
     - type: Client::Game::MJI::MJIGranariesState*
       name: this
@@ -13451,41 +13673,49 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 41 BD ?? ?? ?? ?? 48 8D 4D A0
     return_type: byte
+    name: GetInvertedBrightness
     parameters:
     - type: Client::Game::Housing::HousingManager*
       name: this
   - signature: 48 8B 49 10 48 85 C9 74 53
     return_type: byte
+    name: HasHousePermissions
     parameters:
     - type: Client::Game::Housing::HousingManager*
       name: this
   - signature: E8 ?? ?? ?? ?? 48 8D 4B D0 33 D2
     return_type: byte
+    name: IsInside
     parameters:
     - type: Client::Game::Housing::HousingManager*
       name: this
   - signature: E8 ?? ?? ?? ?? 0F B6 C0 3B 46 3C
     return_type: __int8
+    name: GetCurrentWard
     parameters:
     - type: Client::Game::Housing::HousingManager*
       name: this
   - signature: E8 ?? ?? ?? ?? 84 C0 74 0B 0F B6 C8 E8 ?? ?? ?? ?? 0F B6 D8
     return_type: byte
+    name: GetCurrentDivision
     parameters:
     - type: Client::Game::Housing::HousingManager*
       name: this
   - signature: E8 ?? ?? ?? ?? 0F B7 D8 E8 ?? ?? ?? ?? 48 8B C8
     return_type: __int16
+    name: GetCurrentRoom
     parameters:
     - type: Client::Game::Housing::HousingManager*
       name: this
   - signature: E8 ?? ?? ?? ?? 0F B6 D8 3C FF
     return_type: __int8
+    name: GetCurrentPlot
     parameters:
     - type: Client::Game::Housing::HousingManager*
       name: this
   - signature: E8 ?? ?? ?? ?? 83 CA FF 48 8B D8 8D 4A 02
     return_type: __int64
+    name: GetCurrentHouseId
     parameters:
     - type: Client::Game::Housing::HousingManager*
       name: this
@@ -13908,6 +14138,7 @@ structs:
   member_functions:
   - signature: 48 8D 81 ?? ?? ?? ?? 84 D2
     return_type: Client::Game::Group::GroupManager*
+    name: GetNextInstance
     parameters:
     - type: Client::Game::Group::GroupManager*
       name: this
@@ -13915,6 +14146,7 @@ structs:
       name: getNextInstance
   - signature: E8 ?? ?? ?? ?? EB B8 E8
     return_type: byte
+    name: IsObjectIDInParty
     parameters:
     - type: Client::Game::Group::GroupManager*
       name: this
@@ -13922,6 +14154,7 @@ structs:
       name: objectID
   - signature: 33 C0 44 8B CA F6 81
     return_type: byte
+    name: IsObjectIDInAlliance
     parameters:
     - type: Client::Game::Group::GroupManager*
       name: this
@@ -13929,6 +14162,7 @@ structs:
       name: objectID
   - signature: 48 63 81 ?? ?? ?? ?? 85 C0 78 14
     return_type: byte
+    name: IsObjectIDPartyLeader
     parameters:
     - type: Client::Game::Group::GroupManager*
       name: this
@@ -13936,6 +14170,7 @@ structs:
       name: objectID
   - signature: 48 89 5C 24 ?? 48 89 7C 24 ?? 44 0F B6 99
     return_type: byte
+    name: IsCharacterInPartyByName
     parameters:
     - type: Client::Game::Group::GroupManager*
       name: this
@@ -13943,6 +14178,7 @@ structs:
       name: name
   - signature: 83 FA 14 72 03
     return_type: Client::Game::Group::PartyMember*
+    name: GetAllianceMemberByIndex
     parameters:
     - type: Client::Game::Group::GroupManager*
       name: this
@@ -13950,6 +14186,7 @@ structs:
       name: index
   - signature: F6 81 ?? ?? ?? ?? ?? 4C 8B C9 74 1E
     return_type: Client::Game::Group::PartyMember*
+    name: GetAllianceMemberByGroupAndIndex
     parameters:
     - type: Client::Game::Group::GroupManager*
       name: this
@@ -13959,6 +14196,7 @@ structs:
       name: index
   - signature: 85 D2 78 19 0F B6 81
     return_type: Client::Game::Group::PartyMember*
+    name: GetPartyMemberByIndex
     parameters:
     - type: Client::Game::Group::GroupManager*
       name: this
@@ -13966,6 +14204,7 @@ structs:
       name: index
   - signature: E8 ?? ?? ?? ?? 48 8B D8 4C 8B 07
     return_type: Client::Game::Group::PartyMember*
+    name: GetPartyMemberByContentId
     parameters:
     - type: Client::Game::Group::GroupManager*
       name: this
@@ -13973,6 +14212,7 @@ structs:
       name: contentId
   - signature: E8 ?? ?? ?? ?? 83 FF 32
     return_type: Client::Game::Group::PartyMember*
+    name: GetPartyMemberByObjectId
     parameters:
     - type: Client::Game::Group::GroupManager*
       name: this
@@ -14458,6 +14698,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 80 BE 8C 00 00 00 02
     return_type: void
+    name: AddCharacterToGPose
     parameters:
     - type: Client::Game::Event::EventGPoseController*
       name: this
@@ -14467,6 +14708,7 @@ structs:
       name: a1
   - signature: 45 33 D2 4C 8D 81 38 2A 00 00 41 8B C2 4C 8B C9 49 3B 10 ?? ?? FF C0 49 83 C0 18 83 F8 1E ?? ?? ?? 8B
     return_type: void
+    name: RemoveCharacterFromGPose
     parameters:
     - type: Client::Game::Event::EventGPoseController*
       name: this
@@ -14474,26 +14716,31 @@ structs:
       name: character
   - signature: E8 ?? ?? ?? ?? 38 83 ?? ?? ?? ?? 0F 85
     return_type: byte
+    name: IsFaceCameraEnabled
     parameters:
     - type: Client::Game::Event::EventGPoseController*
       name: this
   - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 33 D2 48 8B CB E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? B2
     return_type: void
+    name: ToggleFaceCamera
     parameters:
     - type: Client::Game::Event::EventGPoseController*
       name: this
   - signature: E8 ?? ?? ?? ?? 41 0F B6 BD ?? ?? ?? ?? 49 8D 4E
     return_type: byte
+    name: IsGazeCameraEnabled
     parameters:
     - type: Client::Game::Event::EventGPoseController*
       name: this
   - signature: 48 8B 05 ?? ?? ?? ?? 4C 8B C1 48 85 C0 74 ?? 48 83 B8 ?? ?? ?? ?? ?? 75 ?? 8B 90 ?? ?? ?? ?? 85 D2 74 ?? EB ?? 48 8B 90 ?? ?? ?? ?? 48 8B 80 ?? ?? ?? ?? 48 85 C0 74 ?? 48 8B 00 48 8B 48 ?? 48 8B 40 ?? 48 FF C9 48 23 CA 48 8B 0C ?? 8B 51 ?? 81 FA ?? ?? ?? ?? 75 ?? 41 0F B6 88
     return_type: void
+    name: ToggleGazeCamera
     parameters:
     - type: Client::Game::Event::EventGPoseController*
       name: this
   - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? F3 0F 10 96
     return_type: void
+    name: ToggleMotionFreeze
     parameters:
     - type: Client::Game::Event::EventGPoseController*
       name: this
@@ -14501,6 +14748,7 @@ structs:
       name: allCharacters
   - signature: E8 ?? ?? ?? ?? 4C 39 26 0F 84
     return_type: void
+    name: EnableCameraLight
     parameters:
     - type: Client::Game::Event::EventGPoseController*
       name: this
@@ -14508,6 +14756,7 @@ structs:
       name: index
   - signature: 48 83 EC ?? 83 FA ?? 73 ?? 8B C2 48 89 5C 24 ?? 48 8D 1C ?? 48 8B 8B
     return_type: void
+    name: DisableCameraLight
     parameters:
     - type: Client::Game::Event::EventGPoseController*
       name: this
@@ -14605,6 +14854,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 8B F8 83 F8 FF 0F 84 ?? ?? ?? ?? 8B CF
     return_type: __int32
+    name: GetPoseKind
     parameters:
     - type: Client::Game::Control::EmoteController*
       name: this
@@ -14758,6 +15008,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 89 84 1D
     return_type: Client::Game::Character::BattleChara*
+    name: LookupBattleCharaByObjectId
     parameters:
     - type: Client::Game::Character::CharacterManager*
       name: this
@@ -14765,6 +15016,7 @@ structs:
       name: objectId
   - signature: E8 ?? ?? ?? ?? 48 8B F8 48 85 C0 74 3A 0F B7 4C 24
     return_type: Client::Game::Character::BattleChara*
+    name: LookupBattleCharaByName
     parameters:
     - type: Client::Game::Character::CharacterManager*
       name: this
@@ -14776,6 +15028,7 @@ structs:
       name: world
   - signature: E8 ?? ?? ?? ?? 49 8D 4D 20 48 89 44 24
     return_type: Client::Game::Character::BattleChara*
+    name: LookupBuddyByOwnerObject
     parameters:
     - type: Client::Game::Character::CharacterManager*
       name: this
@@ -14783,6 +15036,7 @@ structs:
       name: owner
   - signature: E8 ?? ?? ?? ?? 48 8B D8 EB ?? 83 FA
     return_type: Client::Game::Character::BattleChara*
+    name: LookupPetByOwnerObject
     parameters:
     - type: Client::Game::Character::CharacterManager*
       name: this
@@ -14798,6 +15052,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 0F B6 9F ?? ?? ?? ?? 48 8D 8F
     return_type: unsigned __int64
+    name: CopyFromCharacter
     parameters:
     - type: Client::Game::Character::CharacterSetup*
       name: this
@@ -14807,6 +15062,7 @@ structs:
       name: flags
   - signature: E8 ?? ?? ?? ?? 45 0F B6 86 ?? ?? ?? ?? 48 8D 8F
     return_type: void
+    name: SetupBNpc
     parameters:
     - type: Client::Game::Character::CharacterSetup*
       name: this
@@ -14887,6 +15143,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 33 DB 48 8D 75
     return_type: byte
+    name: NormalizeCustomizeData
     parameters:
     - type: Client::Game::Character::CustomizeData*
       name: this
@@ -15390,6 +15647,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 C7 C2
     return_type: void
+    name: Ctor
     parameters:
     - type: Component::GUI::AtkTooltipManager::AtkTooltipArgs*
       name: this
@@ -19308,6 +19566,7 @@ structs:
   member_functions:
   - signature: 48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 8B FA 89 11
     return_type: void
+    name: SetIcon
     parameters:
     - type: Client::UI::Misc::RaptureMacroModule::Macro*
       name: this
@@ -19315,6 +19574,7 @@ structs:
       name: iconId
   - signature: E8 ?? ?? ?? ?? 49 8B CE E8 ?? ?? ?? ?? 48 8B 4D
     return_type: Client::UI::Misc::RaptureMacroModule::Macro*
+    name: Copy
     parameters:
     - type: Client::UI::Misc::RaptureMacroModule::Macro*
       name: this
@@ -19322,11 +19582,13 @@ structs:
       name: other
   - signature: E8 ?? ?? ?? ?? 48 63 96 ?? ?? ?? ?? 83 FA
     return_type: void
+    name: Clear
     parameters:
     - type: Client::UI::Misc::RaptureMacroModule::Macro*
       name: this
   - signature: E8 ?? ?? ?? ?? 48 8B 4F ?? 84 C0 48 8B 01 75
     return_type: byte
+    name: IsEmpty
     parameters:
     - type: Client::UI::Misc::RaptureMacroModule::Macro*
       name: this
@@ -21642,6 +21904,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 0F B6 06 3C
     return_type: __int64
+    name: LoadCharacterSound
     parameters:
     - type: Client::Game::Character::Character::VfxContainer*
       name: this
@@ -21691,6 +21954,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 8B 43 ?? 41 89 46
     return_type: void
+    name: CreateAndSetupMount
     parameters:
     - type: Client::Game::Character::Character::MountContainer*
       name: this
@@ -21710,6 +21974,7 @@ structs:
       name: unk7
   - signature: E8 ?? ?? ?? ?? 48 8B 43 ?? 80 B8 ?? ?? ?? ?? ?? 74 ?? 0F B6 90
     return_type: void
+    name: SetupMount
     parameters:
     - type: Client::Game::Character::Character::MountContainer*
       name: this
@@ -21745,6 +22010,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 84 C0 74 ?? 66 44 89 7F
     return_type: void
+    name: SetupCompanion
     parameters:
     - type: Client::Game::Character::Character::CompanionContainer*
       name: this
@@ -21774,6 +22040,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 8B 7B ?? 0F B7 97
     return_type: void
+    name: SetupOrnament
     parameters:
     - type: Client::Game::Character::Character::OrnamentContainer*
       name: this
@@ -22356,6 +22623,7 @@ structs:
   member_functions:
   - signature: F3 0F 11 54 24 ?? 48 83 EC 38
     return_type: void
+    name: setAxisAngle1
     parameters:
     - type: hkQuaternionf*
       name: this
@@ -22365,6 +22633,7 @@ structs:
       name: angle
   - signature: E8 ?? ?? ?? ?? 44 0F 28 2D
     return_type: void
+    name: setAxisAngle2
     parameters:
     - type: hkQuaternionf*
       name: this
@@ -22374,6 +22643,7 @@ structs:
       name: angle
   - signature: 48 8B C4 F3 0F 11 58
     return_type: void
+    name: setFromEulerAngles1
     parameters:
     - type: hkQuaternionf*
       name: this
@@ -22385,6 +22655,7 @@ structs:
       name: yaw
   - signature: 48 8B C4 48 81 EC ?? ?? ?? ?? 66 0F 6F 25
     return_type: void
+    name: setFromEulerAngles2
     parameters:
     - type: hkQuaternionf*
       name: this
@@ -22396,6 +22667,7 @@ structs:
       name: yaw
   - signature: E8 ?? ?? ?? ?? 0F 28 0C 1F
     return_type: void
+    name: setSlerp
     parameters:
     - type: hkQuaternionf*
       name: this
@@ -22407,11 +22679,13 @@ structs:
       name: t
   - signature: 48 83 EC 48 0F 28 1D
     return_type: hkSimdFloat32
+    name: getAngleSr
     parameters:
     - type: hkQuaternionf*
       name: this
   - signature: 0F 28 11 F3 0F 11 4C 24
     return_type: byte
+    name: isOk
     parameters:
     - type: hkQuaternionf*
       name: this
@@ -22473,6 +22747,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 89 77 18 4C 8D 9C 24 ?? ?? ?? ??
     return_type: void
+    name: RemoveReference
     parameters:
     - type: hkReferencedObject*
       name: this
@@ -22546,6 +22821,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 33 FF 41 39 7C 24
     return_type: void
+    name: Ctor1
     parameters:
     - type: hkIstream*
       name: this
@@ -22553,6 +22829,7 @@ structs:
       name: sr
   - signature: E8 ?? ?? ?? ?? 4C 8B C3 48 8B D7 48 8B 48 10
     return_type: void
+    name: Ctor2
     parameters:
     - type: hkIstream*
       name: this
@@ -22560,6 +22837,7 @@ structs:
       name: filename
   - signature: E8 ?? ?? ?? ?? 48 8B 0D ?? ?? ?? ?? 4C 8B CF
     return_type: void
+    name: Ctor3
     parameters:
     - type: hkIstream*
       name: this
@@ -22569,16 +22847,19 @@ structs:
       name: memSize
   - signature: E8 ?? ?? ?? ?? EB 3D 48 85 FF
     return_type: void
+    name: Dtor
     parameters:
     - type: hkIstream*
       name: this
   - signature: E8 ?? ?? ?? ?? 80 38 00 74 19
     return_type: byte
+    name: isOk
     parameters:
     - type: hkIstream*
       name: this
   - signature: 48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 54 41 56 41 57 48 83 EC 20 48 8B E9
     return_type: __int32
+    name: getline
     parameters:
     - type: hkIstream*
       name: this
@@ -22604,6 +22885,7 @@ structs:
   member_functions:
   - signature: 48 89 5C 24 ?? 57 48 83 EC 20 C7 41 ?? ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 01 48 8B F9 48 C7 41 ?? ?? ?? ?? ?? 4C 8B C2 48 8B 0D ?? ?? ?? ?? 48 8D 54 24 ?? 41 B9 ?? ?? ?? ?? 48 8B 01 FF 50 28
     return_type: void
+    name: Ctor
     parameters:
     - type: hkOstream*
       name: this
@@ -22611,6 +22893,7 @@ structs:
       name: filename
   - signature: E8 ?? ?? ?? ?? 44 8B 44 24 ?? 4C 8B 7C 24 ??
     return_type: void
+    name: Dtor
     parameters:
     - type: hkOstream*
       name: this
@@ -22667,6 +22950,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 49 8D 4E 10 E8 ?? ?? ?? ?? 48 85 C0
     return_type: void
+    name: set
     parameters:
     - type: hkRefVariant*
       name: this
@@ -22676,6 +22960,7 @@ structs:
       name: k
   - signature: 48 8B 11 48 85 D2 74 0E
     return_type: hkClass*
+    name: getClass
     parameters:
     - type: hkRefVariant*
       name: this
@@ -25073,6 +25358,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 0F B6 5E 73
     return_type: byte
+    name: SetValueUInt
     parameters:
     - type: Common::Configuration::ConfigEntry*
       name: this
@@ -25082,6 +25368,7 @@ structs:
       name: unk
   - signature: E8 ?? ?? ?? ?? 48 8B 8E ?? ?? ?? ?? 33 DB 38 9F
     return_type: byte
+    name: SetValueFloat
     parameters:
     - type: Common::Configuration::ConfigEntry*
       name: this
@@ -25089,6 +25376,7 @@ structs:
       name: value
   - signature: E8 ?? ?? ?? ?? EB 46 F3 0F 10 0B
     return_type: byte
+    name: SetValueString
     parameters:
     - type: Common::Configuration::ConfigEntry*
       name: this
@@ -25119,6 +25407,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 63 58
     return_type: Common::Configuration::ConfigEntry*
+    name: GetConfigOption
     parameters:
     - type: Common::Configuration::ConfigBase*
       name: this
@@ -25189,6 +25478,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 84 C0 41 0F B6 D6
     return_type: byte
+    name: RaycastEx
     parameters:
     - type: Common::Component::BGCollision::BGCollisionModule*
       name: this
@@ -25878,6 +26168,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? FF CF 89 7C 24 ?? EB
     return_type: __int32
+    name: EncodeParameter
     parameters:
     - type: Component::Text::MacroEncoder*
       name: this
@@ -25891,6 +26182,7 @@ structs:
       name: outExtraParams
   - signature: E8 ?? ?? ?? ?? 8B F8 83 F8 ?? 0F 8C
     return_type: __int32
+    name: EncodeMacro
     parameters:
     - type: Component::Text::MacroEncoder*
       name: this
@@ -25902,6 +26194,7 @@ structs:
       name: outNumCharsRead
   - signature: E8 ?? ?? ?? ?? 8B D8 83 F8 ?? 7C ?? 49 8D 8E
     return_type: void
+    name: EncodeString
     parameters:
     - type: Component::Text::MacroEncoder*
       name: this
@@ -26048,26 +26341,31 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 8B D8 48 8B CB 48 89 9F
     return_type: void
+    name: Ctor
     parameters:
     - type: Component::SteamApi::SteamApi*
       name: this
   - signature: 48 89 5C 24 ?? 57 48 83 EC 20 48 8B D9 FF 15 ?? ?? ?? ?? 48 8D 8B
     return_type: void
+    name: Dtor
     parameters:
     - type: Component::SteamApi::SteamApi*
       name: this
   - signature: 48 83 EC 28 48 8D 0D ?? ?? ?? ?? FF 15 ?? ?? ?? ?? 48 8B 08
     return_type: unsigned __int32
+    name: GetSteamServerTime
     parameters:
     - type: Component::SteamApi::SteamApi*
       name: this
   - signature: E8 ?? ?? ?? ?? 84 C0 74 45 48 8D 15
     return_type: byte
+    name: IsRunningOnSteamDeck
     parameters:
     - type: Component::SteamApi::SteamApi*
       name: this
   - signature: 48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 30 48 8B F1 8B FA 48 81 C1
     return_type: byte
+    name: ShowGamepadTextInput
     parameters:
     - type: Component::SteamApi::SteamApi*
       name: this
@@ -26075,6 +26373,7 @@ structs:
       name: maxChars
   - signature: 48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC 30 48 8B E9 41 8B D9 48 8D 0D ?? ?? ?? ?? 41 8B F8
     return_type: byte
+    name: ShowFloatingGamepadTextInput
     parameters:
     - type: Component::SteamApi::SteamApi*
       name: this
@@ -26088,6 +26387,7 @@ structs:
       name: textFieldHeight
   - signature: 40 53 48 83 EC 20 80 3A 00
     return_type: void
+    name: DumpEnteredGamepadText
     parameters:
     - type: Component::SteamApi::SteamApi*
       name: this
@@ -26425,91 +26725,109 @@ structs:
   member_functions:
   - signature: E9 ?? ?? ?? ?? 33 C0 48 83 C4 20 5B C3 66 90
     return_type: void
+    name: Ctor
     parameters:
     - type: Component::GUI::AtkResNode*
       name: this
   - signature: E8 ?? ?? ?? ?? 8B 54 FB 04
     return_type: Component::GUI::AtkImageNode*
+    name: GetAsAtkImageNode
     parameters:
     - type: Component::GUI::AtkResNode*
       name: this
   - signature: E8 ?? ?? ?? ?? 44 8B 97
     return_type: Component::GUI::AtkTextNode*
+    name: GetAsAtkTextNode
     parameters:
     - type: Component::GUI::AtkResNode*
       name: this
   - signature: E8 ?? ?? ?? ?? B2 01 48 89 47 08
     return_type: Component::GUI::AtkNineGridNode*
+    name: GetAsAtkNineGridNode
     parameters:
     - type: Component::GUI::AtkResNode*
       name: this
   - signature: E8 ?? ?? ?? ?? 8D 0C BF 03 C9
     return_type: Component::GUI::AtkCounterNode*
+    name: GetAsAtkCounterNode
     parameters:
     - type: Component::GUI::AtkResNode*
       name: this
   - signature: E8 ?? ?? ?? ?? 48 8D 1C 76
     return_type: Component::GUI::AtkCollisionNode*
+    name: GetAsAtkCollisionNode
     parameters:
     - type: Component::GUI::AtkResNode*
       name: this
   - signature: E8 ?? ?? ?? ?? 44 8D 4F 30
     return_type: Component::GUI::AtkComponentNode*
+    name: GetAsAtkComponentNode
     parameters:
     - type: Component::GUI::AtkResNode*
       name: this
   - signature: E8 ?? ?? ?? ?? 44 8D 7F
     return_type: Component::GUI::AtkComponentBase*
+    name: GetComponent
     parameters:
     - type: Component::GUI::AtkResNode*
       name: this
   - signature: E8 ?? ?? ?? ?? 41 B1 08
     return_type: Component::GUI::AtkComponentList*
+    name: GetAsAtkComponentList
     parameters:
     - type: Component::GUI::AtkResNode*
       name: this
   - signature: E8 ?? ?? ?? ?? 41 8D 55 56
     return_type: Component::GUI::AtkComponentDropDownList*
+    name: GetAsAtkComponentDropdownList
     parameters:
     - type: Component::GUI::AtkResNode*
       name: this
   - signature: E8 ?? ?? ?? ?? 8D 56 F1
     return_type: Component::GUI::AtkComponentRadioButton*
+    name: GetAsAtkComponentRadioButton
     parameters:
     - type: Component::GUI::AtkResNode*
       name: this
   - signature: E8 ?? ?? ?? ?? 42 8B 14 3B
     return_type: Component::GUI::AtkComponentScrollBar*
+    name: GetAsAtkComponentScrollBar
     parameters:
     - type: Component::GUI::AtkResNode*
       name: this
   - signature: E8 ?? ?? ?? ?? 48 8B 0B 41 B8 ?? ?? ?? ?? 48 89 83
     return_type: Component::GUI::AtkComponentJournalCanvas*
+    name: GetAsAtkJournalCanvas
     parameters:
     - type: Component::GUI::AtkResNode*
       name: this
   - signature: E8 ?? ?? ?? ?? 48 89 43 D0
     return_type: Component::GUI::AtkComponentButton*
+    name: GetAsAtkComponentButton
     parameters:
     - type: Component::GUI::AtkResNode*
       name: this
   - signature: E8 ?? ?? ?? ?? 8D 55 1E
     return_type: Component::GUI::AtkComponentCheckBox*
+    name: GetAsAtkComponentCheckBox
     parameters:
     - type: Component::GUI::AtkResNode*
       name: this
   - signature: E8 ?? ?? ?? ?? 8B 54 1C 60
     return_type: Component::GUI::AtkComponentTextNineGrid*
+    name: GetAsAtkTextNineGrid
     parameters:
     - type: Component::GUI::AtkResNode*
       name: this
   - signature: E8 ?? ?? ?? ?? 48 8B 8E ?? ?? ?? ?? BA ?? ?? ?? ?? 48 89 86 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B 86
     return_type: Component::GUI::AtkComponentHoldButton*
+    name: GetAsAtkHoldButton
     parameters:
     - type: Component::GUI::AtkResNode*
       name: this
   - signature: E8 ?? ?? ?? ?? C1 E7 0C
     return_type: void
+    name: AddEvent
     parameters:
     - type: Component::GUI::AtkResNode*
       name: this
@@ -26525,6 +26843,7 @@ structs:
       name: isSystemEvent
   - signature: E8 ?? ?? ?? ?? 44 38 7D 67
     return_type: void
+    name: RemoveEvent
     parameters:
     - type: Component::GUI::AtkResNode*
       name: this
@@ -26538,6 +26857,7 @@ structs:
       name: isSystemEvent
   - signature: E8 ?? ?? ?? ?? 8B 5C 24 2C
     return_type: void
+    name: GetBounds
     parameters:
     - type: Component::GUI::AtkResNode*
       name: this
@@ -26545,6 +26865,7 @@ structs:
       name: outBounds
   - signature: 48 85 C9 74 0B 8B 41 44
     return_type: void
+    name: GetPositionFloat
     parameters:
     - type: Component::GUI::AtkResNode*
       name: this
@@ -26554,6 +26875,7 @@ structs:
       name: outY
   - signature: E8 ?? ?? ?? ?? 48 83 C5 30
     return_type: void
+    name: SetPositionFloat
     parameters:
     - type: Component::GUI::AtkResNode*
       name: this
@@ -26563,6 +26885,7 @@ structs:
       name: Y
   - signature: E8 ?? ?? ?? ?? 0F B7 03 4C 8D 44 24
     return_type: void
+    name: GetPositionShort
     parameters:
     - type: Component::GUI::AtkResNode*
       name: this
@@ -26572,6 +26895,7 @@ structs:
       name: outY
   - signature: E8 ?? ?? ?? ?? 8D 56 B5
     return_type: void
+    name: SetPositionShort
     parameters:
     - type: Component::GUI::AtkResNode*
       name: this
@@ -26581,6 +26905,7 @@ structs:
       name: Y
   - signature: 48 85 C9 74 0B 8B 41 4C
     return_type: void
+    name: GetScale
     parameters:
     - type: Component::GUI::AtkResNode*
       name: this
@@ -26590,16 +26915,19 @@ structs:
       name: outY
   - signature: E8 ?? ?? ?? ?? 48 8B CB F3 0F 59 C6
     return_type: float
+    name: GetScaleX
     parameters:
     - type: Component::GUI::AtkResNode*
       name: this
   - signature: E8 ?? ?? ?? ?? 49 8D 7E 1E
     return_type: float
+    name: GetScaleY
     parameters:
     - type: Component::GUI::AtkResNode*
       name: this
   - signature: E8 ?? ?? ?? ?? F3 41 0F 58 F9
     return_type: void
+    name: SetScale
     parameters:
     - type: Component::GUI::AtkResNode*
       name: this
@@ -26609,6 +26937,7 @@ structs:
       name: Y
   - signature: E9 ?? ?? ?? ?? F3 0F 5E CA
     return_type: void
+    name: SetScaleX
     parameters:
     - type: Component::GUI::AtkResNode*
       name: this
@@ -26616,6 +26945,7 @@ structs:
       name: x
   - signature: E8 ?? ?? ?? ?? 0F B7 D5 48 8B CF
     return_type: void
+    name: SetScaleY
     parameters:
     - type: Component::GUI::AtkResNode*
       name: this
@@ -26623,16 +26953,19 @@ structs:
       name: y
   - signature: E8 ?? ?? ?? ?? 49 8B 4C FE
     return_type: float
+    name: GetX
     parameters:
     - type: Component::GUI::AtkResNode*
       name: this
   - signature: E8 ?? ?? ?? ?? 0F BE 43 10
     return_type: float
+    name: GetY
     parameters:
     - type: Component::GUI::AtkResNode*
       name: this
   - signature: E8 ?? ?? ?? ?? 0F BF 07
     return_type: void
+    name: SetX
     parameters:
     - type: Component::GUI::AtkResNode*
       name: this
@@ -26640,6 +26973,7 @@ structs:
       name: x
   - signature: E8 ?? ?? ?? ?? 66 03 BE
     return_type: void
+    name: SetY
     parameters:
     - type: Component::GUI::AtkResNode*
       name: this
@@ -26647,16 +26981,19 @@ structs:
       name: y
   - signature: E8 ?? ?? ?? ?? 66 03 C0
     return_type: unsigned __int16
+    name: GetWidth
     parameters:
     - type: Component::GUI::AtkResNode*
       name: this
   - signature: E8 ?? ?? ?? ?? 8B 54 3B 08
     return_type: unsigned __int16
+    name: GetHeight
     parameters:
     - type: Component::GUI::AtkResNode*
       name: this
   - signature: E8 ?? ?? ?? ?? 66 2B F7
     return_type: void
+    name: SetWidth
     parameters:
     - type: Component::GUI::AtkResNode*
       name: this
@@ -26664,6 +27001,7 @@ structs:
       name: width
   - signature: E8 ?? ?? ?? ?? 80 7B 61 00
     return_type: void
+    name: SetHeight
     parameters:
     - type: Component::GUI::AtkResNode*
       name: this
@@ -26671,6 +27009,7 @@ structs:
       name: height
   - signature: E8 ?? ?? ?? ?? 48 83 C7 08 48 83 EB 01 75 DC
     return_type: void
+    name: ToggleVisibility
     parameters:
     - type: Component::GUI::AtkResNode*
       name: this
@@ -26678,6 +27017,7 @@ structs:
       name: enable
   - signature: E8 ?? ?? ?? ?? 45 33 F6 48 8D B3 48 05 00 00
     return_type: void
+    name: SetAlpha
     parameters:
     - type: Component::GUI::AtkResNode*
       name: this
@@ -26685,11 +27025,13 @@ structs:
       name: alpha
   - signature: E8 ?? ?? ?? ?? 66 85 C0 75 48
     return_type: unsigned __int16
+    name: GetPriority
     parameters:
     - type: Component::GUI::AtkResNode*
       name: this
   - signature: E8 ?? ?? ?? ?? 8D 56 02 49 8B CD
     return_type: void
+    name: SetPriority
     parameters:
     - type: Component::GUI::AtkResNode*
       name: this
@@ -26697,6 +27039,7 @@ structs:
       name: priority
   - signature: E8 ?? ?? ?? ?? FF C6 3B F5 72 E5 BA ?? ?? ?? ??
     return_type: void
+    name: SetUseDepthBasedPriority
     parameters:
     - type: Component::GUI::AtkResNode*
       name: this
@@ -26704,16 +27047,19 @@ structs:
       name: enable
   - signature: E8 ?? ?? ?? ?? 66 83 F8 66 75 3F
     return_type: unsigned __int16
+    name: GetTimelineLabel
     parameters:
     - type: Component::GUI::AtkResNode*
       name: this
   - signature: 48 85 C9 74 12 48 8B 41 10
     return_type: void
+    name: EnableTimeline
     parameters:
     - type: Component::GUI::AtkResNode*
       name: this
   - signature: E8 ?? ?? ?? ?? 40 FE C5 49 83 C7 04
     return_type: void
+    name: DisableTimeline
     parameters:
     - type: Component::GUI::AtkResNode*
       name: this
@@ -26757,16 +27103,19 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 89 6B 58
     return_type: void
+    name: Ctor
     parameters:
     - type: Component::GUI::AtkSimpleTween*
       name: this
   - signature: E9 ?? ?? ?? ?? 48 83 B9 ?? ?? ?? ?? ?? 74 8E
     return_type: void
+    name: Clear
     parameters:
     - type: Component::GUI::AtkSimpleTween*
       name: this
   - signature: E8 ?? ?? ?? ?? 44 8B 87 ?? ?? ?? ?? 4C 8B CF
     return_type: void
+    name: Prepare
     parameters:
     - type: Component::GUI::AtkSimpleTween*
       name: this
@@ -26782,11 +27131,13 @@ structs:
       name: easingFactor
   - signature: E8 ?? ?? ?? ?? FF 4F 5C
     return_type: void
+    name: Execute
     parameters:
     - type: Component::GUI::AtkSimpleTween*
       name: this
   - signature: 48 83 EC 48 0F B6 44 24 ?? 4C 8B D1
     return_type: void
+    name: RegisterEvent
     parameters:
     - type: Component::GUI::AtkSimpleTween*
       name: this
@@ -26802,6 +27153,7 @@ structs:
       name: systemEvent
   - signature: 0F B6 44 24 ?? 48 83 C1 40
     return_type: void
+    name: UnregisterEvent
     parameters:
     - type: Component::GUI::AtkSimpleTween*
       name: this
@@ -26815,6 +27167,7 @@ structs:
       name: systemEvent
   - signature: 48 83 EC 28 0F 57 C0 83 FA 08
     return_type: float
+    name: GetNodeValue
     parameters:
     - type: Component::GUI::AtkSimpleTween*
       name: this
@@ -26822,6 +27175,7 @@ structs:
       name: type
   - signature: E8 ?? ?? ?? ?? 48 8B 5B 08 48 85 DB 75 DF
     return_type: void
+    name: SetNodeValue
     parameters:
     - type: Component::GUI::AtkSimpleTween*
       name: this
@@ -26831,6 +27185,7 @@ structs:
       name: value
   - signature: E8 ?? ?? ?? ?? EB 31 48 63 50 38
     return_type: void
+    name: Update
     parameters:
     - type: Component::GUI::AtkSimpleTween*
       name: this
@@ -26914,11 +27269,13 @@ structs:
   member_functions:
   - signature: 40 53 48 83 EC 20 48 8D 05 ?? ?? ?? ?? 48 8B D9 48 89 01 33 C0 48 89 41 18 89 41 08 89 41 40 88 81 ?? ?? ?? ?? 48 89 41 10 48 89 41 20 48 89 41 28 48 89 41 30 48 89 41 38 89 81 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 8D 8B ?? ?? ?? ?? 48 89 03 E8 ?? ?? ?? ?? 48 8B C3 48 83 C4 20 5B C3 CC CC CC CC CC CC CC CC CC CC CC CC CC 48 8B C1
     return_type: void
+    name: Ctor
     parameters:
     - type: Component::GUI::AtkTextNode*
       name: this
   - signature: E8 ?? ?? ?? ?? 8D 4E 32
     return_type: void
+    name: SetText
     parameters:
     - type: Component::GUI::AtkTextNode*
       name: this
@@ -26926,11 +27283,13 @@ structs:
       name: str
   - signature: E8 ?? ?? ?? ?? 80 38 00 74 27
     return_type: byte*
+    name: GetText
     parameters:
     - type: Component::GUI::AtkTextNode*
       name: this
   - signature: E8 ?? ?? ?? ?? 8D 4E 5A
     return_type: void
+    name: SetNumber
     parameters:
     - type: Component::GUI::AtkTextNode*
       name: this
@@ -26946,11 +27305,13 @@ structs:
       name: addZeroPadding
   - signature: E8 ?? ?? ?? ?? 48 83 C4 28 5F 5D
     return_type: void
+    name: ResizeNodeForCurrentText
     parameters:
     - type: Component::GUI::AtkTextNode*
       name: this
   - signature: E8 ?? ?? ?? ?? 0F B7 6D 08
     return_type: void
+    name: GetTextDrawSize
     parameters:
     - type: Component::GUI::AtkTextNode*
       name: this
@@ -26968,6 +27329,7 @@ structs:
       name: considerScale
   - signature: E8 ?? ?? ?? ?? 49 8B 0E 48 8B 9E
     return_type: void
+    name: SetAlignment
     parameters:
     - type: Component::GUI::AtkTextNode*
       name: this
@@ -26975,6 +27337,7 @@ structs:
       name: alignmentType
   - signature: E8 ?? ?? ?? ?? 45 33 C0 B2 18
     return_type: void
+    name: SetFont
     parameters:
     - type: Component::GUI::AtkTextNode*
       name: this
@@ -27043,6 +27406,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 43 88 34 26
     return_type: void
+    name: AddTooltip
     parameters:
     - type: Component::GUI::AtkTooltipManager*
       name: this
@@ -27056,6 +27420,7 @@ structs:
       name: tooltipArgs
   - signature: E8 ?? ?? ?? ?? 45 33 C9 45 8D 44 24
     return_type: void
+    name: RemoveTooltip
     parameters:
     - type: Component::GUI::AtkTooltipManager*
       name: this
@@ -27063,6 +27428,7 @@ structs:
       name: targetNode
   - signature: E8 ?? ?? ?? ?? EB 24 66 83 FA 22
     return_type: void
+    name: ShowTooltip
     parameters:
     - type: Component::GUI::AtkTooltipManager*
       name: this
@@ -27082,6 +27448,7 @@ structs:
       name: unk8
   - signature: E8 ?? ?? ?? ?? 41 F6 C5 08
     return_type: void
+    name: HideTooltip
     parameters:
     - type: Component::GUI::AtkTooltipManager*
       name: this
@@ -27272,6 +27639,7 @@ structs:
   member_functions:
   - signature: F6 81 ?? ?? ?? ?? ?? 44 8B CA
     return_type: Component::GUI::AtkResNode*
+    name: SearchNodeByIdInternal
     parameters:
     - type: Component::GUI::AtkUldManager*
       name: this
@@ -27279,6 +27647,7 @@ structs:
       name: id
   - signature: 48 89 5C 24 ?? 57 48 83 EC ?? 8B FA 33 DB E8
     return_type: Component::GUI::AtkComponentBase*
+    name: CreateAtkComponent
     parameters:
     - type: Component::GUI::AtkUldManager*
       name: this
@@ -27286,6 +27655,7 @@ structs:
       name: type
   - signature: E8 ?? ?? ?? ?? 48 8B 4C 24 ?? 48 8B 51 08
     return_type: Component::GUI::AtkResNode*
+    name: CreateAtkNode
     parameters:
     - type: Component::GUI::AtkUldManager*
       name: this
@@ -27293,6 +27663,7 @@ structs:
       name: type
   - signature: E8 ?? ?? ?? ?? 49 8B 4F 10 41 8B C4
     return_type: void
+    name: UpdateDrawNodeList
     parameters:
     - type: Component::GUI::AtkUldManager*
       name: this
@@ -27683,11 +28054,13 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 0F BF CB 0F 28 F8
     return_type: float
+    name: GetScale
     parameters:
     - type: Component::GUI::AtkUnitBase*
       name: this
   - signature: E8 ?? ?? ?? ?? F2 0F 10 77
     return_type: void
+    name: SetSize
     parameters:
     - type: Component::GUI::AtkUnitBase*
       name: this
@@ -27697,6 +28070,7 @@ structs:
       name: height
   - signature: E8 ?? ?? ?? ?? 40 2A C7
     return_type: float
+    name: GetScaledWidth
     parameters:
     - type: Component::GUI::AtkUnitBase*
       name: this
@@ -27704,6 +28078,7 @@ structs:
       name: getScaledWidth
   - signature: E8 ?? ?? ?? ?? 0F B7 57 5A
     return_type: float
+    name: GetScaledHeight
     parameters:
     - type: Component::GUI::AtkUnitBase*
       name: this
@@ -27711,11 +28086,13 @@ structs:
       name: getScaledHeight
   - signature: E8 ?? ?? ?? ?? 0F BF 45 00
     return_type: float
+    name: GetGlobalUIScale
     parameters:
     - type: Component::GUI::AtkUnitBase*
       name: this
   - signature: E8 ?? ?? ?? ?? 4C 8D 34 ED
     return_type: Component::GUI::AtkResNode*
+    name: GetNodeById
     parameters:
     - type: Component::GUI::AtkUnitBase*
       name: this
@@ -27723,6 +28100,7 @@ structs:
       name: nodeId
   - signature: E8 ?? ?? ?? ?? 8D 56 1E
     return_type: Component::GUI::AtkTextNode*
+    name: GetTextNodeById
     parameters:
     - type: Component::GUI::AtkUnitBase*
       name: this
@@ -27730,6 +28108,7 @@ structs:
       name: nodeId
   - signature: E8 ?? ?? ?? ?? 8D 53 16
     return_type: Component::GUI::AtkImageNode*
+    name: GetImageNodeById
     parameters:
     - type: Component::GUI::AtkUnitBase*
       name: this
@@ -27737,6 +28116,7 @@ structs:
       name: nodeId
   - signature: E8 ?? ?? ?? ?? 8D 53 1B
     return_type: Component::GUI::AtkComponentButton*
+    name: GetButtonNodeById
     parameters:
     - type: Component::GUI::AtkUnitBase*
       name: this
@@ -27744,6 +28124,7 @@ structs:
       name: nodeId
   - signature: E8 ?? ?? ?? ?? 41 B1 01 48 89 87
     return_type: Component::GUI::AtkComponentList*
+    name: GetComponentListById
     parameters:
     - type: Component::GUI::AtkUnitBase*
       name: this
@@ -27751,6 +28132,7 @@ structs:
       name: nodeId
   - signature: E8 ?? ?? ?? ?? 8D 55 9F
     return_type: Component::GUI::AtkComponentNode*
+    name: GetComponentNodeById
     parameters:
     - type: Component::GUI::AtkUnitBase*
       name: this
@@ -27758,6 +28140,7 @@ structs:
       name: nodeId
   - signature: E9 ?? ?? ?? ?? 83 FB 15
     return_type: byte
+    name: FireCallbackInt
     parameters:
     - type: Component::GUI::AtkUnitBase*
       name: this
@@ -27765,6 +28148,7 @@ structs:
       name: callbackValue
   - signature: E8 ?? ?? ?? ?? 8B 44 24 20 C1 E8 05
     return_type: void
+    name: FireCallback
     parameters:
     - type: Component::GUI::AtkUnitBase*
       name: this
@@ -27776,6 +28160,7 @@ structs:
       name: a4
   - signature: E8 ?? ?? ?? ?? F6 46 40 0F
     return_type: void
+    name: UpdateCollisionNodeList
     parameters:
     - type: Component::GUI::AtkUnitBase*
       name: this
@@ -27783,6 +28168,7 @@ structs:
       name: clearFocus
   - signature: E8 ?? ?? ?? ?? 8D 77 02
     return_type: byte
+    name: SetFocusNode
     parameters:
     - type: Component::GUI::AtkUnitBase*
       name: this
@@ -27794,6 +28180,7 @@ structs:
       name: a4
   - signature: E8 ?? ?? ?? ?? 44 8D 43 7A
     return_type: void
+    name: SubscribeAtkArrayData
     parameters:
     - type: Component::GUI::AtkUnitBase*
       name: this
@@ -27803,6 +28190,7 @@ structs:
       name: arrayIndex
   - signature: E8 ?? ?? ?? ?? 45 33 C9 8D 56 01
     return_type: void
+    name: UnsubscribeAtkArrayData
     parameters:
     - type: Component::GUI::AtkUnitBase*
       name: this
@@ -27814,6 +28202,7 @@ structs:
       name: clean
   - signature: E9 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 8D 15
     return_type: byte
+    name: LoadUldByName
     parameters:
     - type: Component::GUI::AtkUnitBase*
       name: this
@@ -27825,6 +28214,7 @@ structs:
       name: a4
   - signature: E8 ?? ?? ?? ?? 8D 53 24
     return_type: void
+    name: SetOpenTransition
     parameters:
     - type: Component::GUI::AtkUnitBase*
       name: this
@@ -27838,6 +28228,7 @@ structs:
       name: scale
   - signature: E8 ?? ?? ?? ?? 8D 55 06 48 8B CE
     return_type: void
+    name: SetCloseTransition
     parameters:
     - type: Component::GUI::AtkUnitBase*
       name: this
@@ -29728,6 +30119,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 8B DE 48 8D BC 24
     return_type: void
+    name: RunSearch
     parameters:
     - type: Client::UI::AddonItemSearch*
       name: this
@@ -29735,6 +30127,7 @@ structs:
       name: ignoreFilters
   - signature: E8 ?? ?? ?? ?? EB 40 41 8D 40 FD
     return_type: void
+    name: SetModeFilter
     parameters:
     - type: Client::UI::AddonItemSearch*
       name: this
@@ -32612,11 +33005,13 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 80 3D ?? ?? ?? ?? ?? 74 29
     return_type: void
+    name: OnClipboardDataChanged
     parameters:
     - type: Client::UI::UIClipboard*
       name: this
   - signature: 48 8B C1 48 8B 89 ?? ?? ?? ?? 48 3B D1
     return_type: void
+    name: OnClipboardViewerChainChanged
     parameters:
     - type: Client::UI::UIClipboard*
       name: this
@@ -32644,11 +33039,13 @@ structs:
   member_functions:
   - signature: C6 81 ?? ?? ?? ?? ?? 48 8D 41 42
     return_type: void
+    name: UpdateWatchlistCount
     parameters:
     - type: Client::UI::Misc::AchievementListModule*
       name: this
   - signature: 48 83 EC 28 44 0F B7 D2 4C 8D 41 42
     return_type: byte
+    name: AddToWatchlist
     parameters:
     - type: Client::UI::Misc::AchievementListModule*
       name: this
@@ -32656,6 +33053,7 @@ structs:
       name: achievementId
   - signature: E8 ?? ?? ?? ?? EB 13 40 84 F6
     return_type: byte
+    name: RemoveFromWatchlist
     parameters:
     - type: Client::UI::Misc::AchievementListModule*
       name: this
@@ -32663,6 +33061,7 @@ structs:
       name: achievementId
   - signature: E8 ?? ?? ?? ?? 84 C0 48 63 43 70
     return_type: byte
+    name: IsOnWatchlist
     parameters:
     - type: Client::UI::Misc::AchievementListModule*
       name: this
@@ -32670,6 +33069,7 @@ structs:
       name: achievementId
   - signature: 33 D2 48 8D 41 42
     return_type: byte
+    name: IsWatchlistFull
     parameters:
     - type: Client::UI::Misc::AchievementListModule*
       name: this
@@ -32693,6 +33093,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 49 8B 45 00 49 8B CD FF 50 48
     return_type: void
+    name: ClearTellHistory
     parameters:
     - type: Client::UI::Misc::AcquaintanceModule*
       name: this
@@ -32714,6 +33115,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 33 C0 EB 15
     return_type: __int64
+    name: ChangeHudLayout
     parameters:
     - type: Client::UI::Misc::AddonConfig*
       name: this
@@ -32754,6 +33156,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? EB 0B 41 8B 17
     return_type: byte*
+    name: GetActiveSetCustomNamePtr
     parameters:
     - type: Client::UI::Misc::AozNoteModule*
       name: this
@@ -32761,6 +33164,7 @@ structs:
       name: activeSetIndex
   - signature: E8 ?? ?? ?? ?? 84 C0 74 0C 8B D3 48 8B CD
     return_type: byte
+    name: HasActiveSetCustomName
     parameters:
     - type: Client::UI::Misc::AozNoteModule*
       name: this
@@ -32768,6 +33172,7 @@ structs:
       name: activeSetIndex
   - signature: 41 0F 10 00 8B C2 48 69 D0 ?? ?? ?? ?? 0F 11 84 0A
     return_type: void
+    name: SetActiveSetCustomName
     parameters:
     - type: Client::UI::Misc::AozNoteModule*
       name: this
@@ -32777,6 +33182,7 @@ structs:
       name: name
   - signature: E8 ?? ?? ?? ?? 48 69 F6
     return_type: void
+    name: SaveActiveSetHotBars
     parameters:
     - type: Client::UI::Misc::AozNoteModule*
       name: this
@@ -32784,6 +33190,7 @@ structs:
       name: activeSetIndex
   - signature: E8 ?? ?? ?? ?? 33 D2 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 3C 24 40 0F 94 C7
     return_type: void
+    name: LoadActiveSetHotBars
     parameters:
     - type: Client::UI::Misc::AozNoteModule*
       name: this
@@ -32805,11 +33212,13 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 8B F8 48 85 C0 74 47 41 8B D6
     return_type: Client::UI::Misc::BannerModuleEntry*
+    name: CreateBanner
     parameters:
     - type: Client::UI::Misc::BannerModule*
       name: this
   - signature: E8 ?? ?? ?? ?? 40 0A F0 FF C3 48 FF C7 83 FB 6E 72 D6 40 0F B6 C6 48 8B 8C 24 ?? ?? ?? ?? 48 33 CC E8 ?? ?? ?? ?? 4C 8D 9C 24 ?? ?? ?? ?? 49 8B 5B 18 49 8B 6B 20 49 8B 73 28 49 8B E3 5F C3 CC CC
     return_type: byte
+    name: DeleteBanner
     parameters:
     - type: Client::UI::Misc::BannerModule*
       name: this
@@ -32817,11 +33226,13 @@ structs:
       name: bannerId
   - signature: E8 ?? ?? ?? ?? 83 F8 6E 7C 15
     return_type: byte
+    name: GetNextId
     parameters:
     - type: Client::UI::Misc::BannerModule*
       name: this
   - signature: E8 ?? ?? ?? ?? 0F B7 40 7E
     return_type: Client::UI::Misc::BannerModuleEntry*
+    name: GetBannerById
     parameters:
     - type: Client::UI::Misc::BannerModule*
       name: this
@@ -32829,6 +33240,7 @@ structs:
       name: bannerId
   - signature: E8 ?? ?? ?? ?? 85 C0 79 0C
     return_type: __int32
+    name: GetBannerIdByBannerIndex
     parameters:
     - type: Client::UI::Misc::BannerModule*
       name: this
@@ -32867,11 +33279,13 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 4C 8D 45 10 48 8B CF
     return_type: void
+    name: Ctor
     parameters:
     - type: Client::UI::Misc::CharaViewCharacterData*
       name: this
   - signature: E9 ?? ?? ?? ?? 41 0F B6 40 ?? 88 42 62
     return_type: void
+    name: ImportLocalPlayerEquipment
     parameters:
     - type: Client::UI::Misc::CharaViewCharacterData*
       name: this
@@ -32900,6 +33314,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 8B 43 20 85 C0 74 17
     return_type: byte
+    name: AddToHistory
     parameters:
     - type: Client::UI::Misc::EmoteHistoryModule*
       name: this
@@ -32907,6 +33322,7 @@ structs:
       name: emoteId
   - signature: E8 ?? ?? ?? ?? 0F B7 4F 42
     return_type: byte
+    name: RemoveFromHistory
     parameters:
     - type: Client::UI::Misc::EmoteHistoryModule*
       name: this
@@ -32914,6 +33330,7 @@ structs:
       name: emoteId
   - signature: 40 53 48 83 EC 20 45 33 C9 4C 8D 41 4E
     return_type: byte
+    name: AddToFavorites
     parameters:
     - type: Client::UI::Misc::EmoteHistoryModule*
       name: this
@@ -32921,6 +33338,7 @@ structs:
       name: emoteId
   - signature: 48 83 EC 28 83 FA 14 72 07
     return_type: byte
+    name: SetFavoriteEmote
     parameters:
     - type: Client::UI::Misc::EmoteHistoryModule*
       name: this
@@ -32930,6 +33348,7 @@ structs:
       name: emoteId
   - signature: 48 83 EC 28 83 FA 14 73 3D
     return_type: byte
+    name: SwapFavorites
     parameters:
     - type: Client::UI::Misc::EmoteHistoryModule*
       name: this
@@ -32939,6 +33358,7 @@ structs:
       name: favoriteSlotIndex2
   - signature: 4C 8B C1 66 85 D2 75 07
     return_type: byte
+    name: IsUnseen
     parameters:
     - type: Client::UI::Misc::EmoteHistoryModule*
       name: this
@@ -32946,6 +33366,7 @@ structs:
       name: emoteId
   - signature: 4C 8B C9 66 85 D2 74 4F
     return_type: void
+    name: SetSeen
     parameters:
     - type: Client::UI::Misc::EmoteHistoryModule*
       name: this
@@ -33006,6 +33427,7 @@ structs:
   member_functions:
   - signature: 48 89 5C 24 ?? 57 48 81 EC ?? ?? ?? ?? 48 63 DA
     return_type: void
+    name: SetDeckName
     parameters:
     - type: Client::UI::Misc::GoldSaucerModule*
       name: this
@@ -33015,6 +33437,7 @@ structs:
       name: name
   - signature: 83 FA 09 77 1D
     return_type: void
+    name: SetDeckCard
     parameters:
     - type: Client::UI::Misc::GoldSaucerModule*
       name: this
@@ -33026,6 +33449,7 @@ structs:
       name: cardId
   - signature: E8 ?? ?? ?? ?? 33 C9 48 2B D8
     return_type: Client::UI::Misc::GoldSaucerModule::TripleTriadDeck*
+    name: GetDeck
     parameters:
     - type: Client::UI::Misc::GoldSaucerModule*
       name: this
@@ -33033,6 +33457,7 @@ structs:
       name: deckIndex
   - signature: E8 ?? ?? ?? ?? 44 0F B7 C3 8B D6
     return_type: void
+    name: SetHotbarMinion
     parameters:
     - type: Client::UI::Misc::GoldSaucerModule*
       name: this
@@ -33042,6 +33467,7 @@ structs:
       name: companionId
   - signature: E8 ?? ?? ?? ?? 8B D6 0F B7 D8
     return_type: unsigned __int16
+    name: GetHotbarMinion
     parameters:
     - type: Client::UI::Misc::GoldSaucerModule*
       name: this
@@ -33049,6 +33475,7 @@ structs:
       name: slotIndex
   - signature: 48 83 EC 28 33 C0 4C 8D 81
     return_type: __int32
+    name: AddUnseenCard
     parameters:
     - type: Client::UI::Misc::GoldSaucerModule*
       name: this
@@ -33056,6 +33483,7 @@ structs:
       name: cardId
   - signature: 40 57 48 83 EC 20 45 33 C9 48 8D B9
     return_type: __int32
+    name: RemoveUnseenCard
     parameters:
     - type: Client::UI::Misc::GoldSaucerModule*
       name: this
@@ -33063,6 +33491,7 @@ structs:
       name: cardId
   - signature: E8 ?? ?? ?? ?? 8D 55 10 0F B6 F8
     return_type: byte
+    name: IsUnseenCard
     parameters:
     - type: Client::UI::Misc::GoldSaucerModule*
       name: this
@@ -33128,6 +33557,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 8D 7B 28 41 8D 76 02
     return_type: void
+    name: ResetAll
     parameters:
     - type: Client::UI::Misc::ItemContextCustomizeModule*
       name: this
@@ -33207,6 +33637,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 33 F6 41 83 FC
     return_type: void
+    name: SearchForItem
     parameters:
     - type: Client::UI::Misc::ItemFinderModule*
       name: this
@@ -33480,6 +33911,7 @@ structs:
   member_functions:
   - signature: 48 83 EC 28 44 0F B7 D2 4C 8B C9 32 C0
     return_type: byte
+    name: AddToUnseenCompanions
     parameters:
     - type: Client::UI::Misc::MinionListModule*
       name: this
@@ -33487,6 +33919,7 @@ structs:
       name: companionId
   - signature: E8 ?? ?? ?? ?? 0F B7 D3 48 8B CE E8
     return_type: byte
+    name: RemoveFromUnseenCompanions
     parameters:
     - type: Client::UI::Misc::MinionListModule*
       name: this
@@ -33494,6 +33927,7 @@ structs:
       name: companionId
   - signature: E8 ?? ?? ?? ?? 48 85 C0 8D 5D 03
     return_type: byte
+    name: IsFavorite
     parameters:
     - type: Client::UI::Misc::MinionListModule*
       name: this
@@ -33501,6 +33935,7 @@ structs:
       name: companionId
   - signature: E8 ?? ?? ?? ?? 49 8B 86 ?? ?? ?? ?? 49 8B 4E 10
     return_type: byte
+    name: AddToFavorites
     parameters:
     - type: Client::UI::Misc::MinionListModule*
       name: this
@@ -33508,6 +33943,7 @@ structs:
       name: companionId
   - signature: E8 ?? ?? ?? ?? 4D 8B 86 ?? ?? ?? ?? 49 8D 96
     return_type: byte
+    name: RemoveFromFavorites
     parameters:
     - type: Client::UI::Misc::MinionListModule*
       name: this
@@ -33515,6 +33951,7 @@ structs:
       name: companionId
   - signature: E8 ?? ?? ?? ?? 4C 8B 8E ?? ?? ?? ?? 4C 8D 44 24 ?? 49 83 C1 03
     return_type: byte
+    name: SwapFavorites
     parameters:
     - type: Client::UI::Misc::MinionListModule*
       name: this
@@ -33524,11 +33961,13 @@ structs:
       name: favoriteSlotIndex2
   - signature: E8 ?? ?? ?? ?? 84 C0 48 8D 93 ?? ?? ?? ?? 48 8B CB
     return_type: byte
+    name: HasAnyFavorites
     parameters:
     - type: Client::UI::Misc::MinionListModule*
       name: this
   - signature: E8 ?? ?? ?? ?? 84 C0 0F 84 ?? ?? ?? ?? 49 8B 96 ?? ?? ?? ?? 49 8B CE
     return_type: byte
+    name: HasFreeFavoriteSlots
     parameters:
     - type: Client::UI::Misc::MinionListModule*
       name: this
@@ -33553,6 +33992,7 @@ structs:
   member_functions:
   - signature: 48 83 EC 28 44 0F B7 DA
     return_type: byte
+    name: AddToUnseenMounts
     parameters:
     - type: Client::UI::Misc::MountListModule*
       name: this
@@ -33560,6 +34000,7 @@ structs:
       name: orderId
   - signature: 48 83 EC 28 32 C0
     return_type: byte
+    name: RemoveFromUnseenMounts
     parameters:
     - type: Client::UI::Misc::MountListModule*
       name: this
@@ -33567,6 +34008,7 @@ structs:
       name: orderId
   - signature: 48 83 EC 28 44 0F B7 D2 4C 8B C9 45 32 C0 66 90 41 0F B6 C0 66 83 7C 41 ?? ?? 74 10 41 FE C0 41 80 F8 1E 72 EB 33 C0 48 83 C4 28 C3 32 C9 45 0F B7 C2
     return_type: byte
+    name: AddToFavorites
     parameters:
     - type: Client::UI::Misc::MountListModule*
       name: this
@@ -33574,6 +34016,7 @@ structs:
       name: orderId
   - signature: 48 83 EC 28 45 32 C0 44 0F B7 CA
     return_type: byte
+    name: RemoveFromFavorites
     parameters:
     - type: Client::UI::Misc::MountListModule*
       name: this
@@ -33628,6 +34071,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 8B 5C 24 ?? EB 0C
     return_type: Client::Game::Object::GameObject*
+    name: ResolvePlaceholder
     parameters:
     - type: Client::UI::Misc::PronounModule*
       name: this
@@ -33675,6 +34119,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 8D 4E 02
     return_type: Client::UI::Misc::RaptureGearsetModule::GearsetEntry*
+    name: GetGearset
     parameters:
     - type: Client::UI::Misc::RaptureGearsetModule*
       name: this
@@ -33682,6 +34127,7 @@ structs:
       name: gearsetId
   - signature: E8 ?? ?? ?? ?? 8B D8 81 FB
     return_type: __int32
+    name: FindGearsetIDByName
     parameters:
     - type: Client::UI::Misc::RaptureGearsetModule*
       name: this
@@ -33689,6 +34135,7 @@ structs:
       name: gearsetName
   - signature: E8 ?? ?? ?? ?? 4C 8D 0D ?? ?? ?? ?? 84 C0
     return_type: byte
+    name: IsValidGearset
     parameters:
     - type: Client::UI::Misc::RaptureGearsetModule*
       name: this
@@ -33696,6 +34143,7 @@ structs:
       name: gearsetId
   - signature: 48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 48 8B F9 41 0F B6 F0 48 8D 0D
     return_type: __int32
+    name: EquipGearset
     parameters:
     - type: Client::UI::Misc::RaptureGearsetModule*
       name: this
@@ -33705,11 +34153,13 @@ structs:
       name: glamourPlateId
   - signature: E8 ?? ?? ?? ?? EB 07 8B D5 E8 ?? ?? ?? ?? 8B E8
     return_type: __int8
+    name: CreateGearset
     parameters:
     - type: Client::UI::Misc::RaptureGearsetModule*
       name: this
   - signature: E8 ?? ?? ?? ?? 80 BE ?? ?? ?? ?? ?? 74 20 48 8B 16
     return_type: void
+    name: DeleteGearset
     parameters:
     - type: Client::UI::Misc::RaptureGearsetModule*
       name: this
@@ -33717,6 +34167,7 @@ structs:
       name: gearsetId
   - signature: E8 ?? ?? ?? ?? 8B E8 83 F8 ?? 0F 8E ?? ?? ?? ?? 80 BE
     return_type: void
+    name: UpdateGearset
     parameters:
     - type: Client::UI::Misc::RaptureGearsetModule*
       name: this
@@ -33724,6 +34175,7 @@ structs:
       name: gearsetId
   - signature: E8 ?? ?? ?? ?? 8B E8 83 F8 FE 0F 8E ?? ?? ?? ?? 80 BF
     return_type: __int32
+    name: ReassignGearsetId
     parameters:
     - type: Client::UI::Misc::RaptureGearsetModule*
       name: this
@@ -33733,6 +34185,7 @@ structs:
       name: newGearsetId
   - signature: E8 ?? ?? ?? ?? 48 8B 03 48 8B CB FF 50 20 41 88 7E 08
     return_type: void
+    name: LinkGlamourPlate
     parameters:
     - type: Client::UI::Misc::RaptureGearsetModule*
       name: this
@@ -33742,6 +34195,7 @@ structs:
       name: glamourPlateId
   - signature: E8 ?? ?? ?? ?? 84 C0 75 0E 8B D3
     return_type: byte
+    name: HasLinkedGlamourPlate
     parameters:
     - type: Client::UI::Misc::RaptureGearsetModule*
       name: this
@@ -33749,6 +34203,7 @@ structs:
       name: gearsetId
   - signature: 45 33 C0 83 FA 64
     return_type: __int32
+    name: GetClassJobIconForGearset
     parameters:
     - type: Client::UI::Misc::RaptureGearsetModule*
       name: this
@@ -33756,6 +34211,7 @@ structs:
       name: gearsetId
   - signature: E8 ?? ?? ?? ?? 0F B6 C0 41 3B C7
     return_type: __int8
+    name: GetBannerIndex
     parameters:
     - type: Client::UI::Misc::RaptureGearsetModule*
       name: this
@@ -33763,6 +34219,7 @@ structs:
       name: gearsetId
   - signature: E8 ?? ?? ?? ?? 48 8B 7C 24 ?? 40 FE C6
     return_type: void
+    name: SetBannerIndex
     parameters:
     - type: Client::UI::Misc::RaptureGearsetModule*
       name: this
@@ -33772,6 +34229,7 @@ structs:
       name: bannerIndex
   - signature: E8 ?? ?? ?? ?? 84 C0 74 3F 48 8B 03
     return_type: byte
+    name: HasLinkedBanner
     parameters:
     - type: Client::UI::Misc::RaptureGearsetModule*
       name: this
@@ -33853,6 +34311,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 4C 39 6F 08
     return_type: void
+    name: Set
     parameters:
     - type: Client::UI::Misc::HotBarSlot*
       name: this
@@ -33864,11 +34323,13 @@ structs:
       name: id
   - signature: 40 53 48 83 EC 20 44 8B 81 ?? ?? ?? ?? 48 8B D9 0F B6 91 ?? ?? ?? ?? E8 ?? ?? ?? ?? 85 C0
     return_type: byte
+    name: LoadIconFromSlotB
     parameters:
     - type: Client::UI::Misc::HotBarSlot*
       name: this
   - signature: E8 ?? ?? ?? ?? 40 0A F0 44 8B 83
     return_type: byte
+    name: LoadCostDataForSlot
     parameters:
     - type: Client::UI::Misc::HotBarSlot*
       name: this
@@ -33876,6 +34337,7 @@ structs:
       name: isLoaded
   - signature: E8 ?? ?? ?? ?? 85 C0 89 83 ?? ?? ?? ?? 0F 94 C0
     return_type: __int32
+    name: GetIconIdForSlot
     parameters:
     - type: Client::UI::Misc::HotBarSlot*
       name: this
@@ -33885,6 +34347,7 @@ structs:
       name: actionId
   - signature: E8 ?? ?? ?? ?? 48 8B CB 48 85 C0 75 12
     return_type: byte*
+    name: GetDisplayNameForSlot
     parameters:
     - type: Client::UI::Misc::HotBarSlot*
       name: this
@@ -33894,6 +34357,7 @@ structs:
       name: actionId
   - signature: 48 89 5C 24 ?? 57 48 83 EC 30 0F B6 C2 41 8B D8
     return_type: unsigned __int32
+    name: GetCostValueForSlot
     parameters:
     - type: Client::UI::Misc::HotBarSlot*
       name: this
@@ -33903,6 +34367,7 @@ structs:
       name: actionId
   - signature: E8 ?? ?? ?? ?? 48 85 C0 74 26 80 38 00
     return_type: unsigned __int32
+    name: GetCostTextForSlot
     parameters:
     - type: Client::UI::Misc::HotBarSlot*
       name: this
@@ -33912,6 +34377,7 @@ structs:
       name: actionId
   - signature: FF CA 83 FA 1E
     return_type: Client::Game::ActionType
+    name: GetActionTypeForSlotType
     parameters:
     - type: Client::UI::Misc::HotBarSlot*
       name: this
@@ -33919,11 +34385,13 @@ structs:
       name: type
   - signature: 40 53 48 83 EC 40 8B 99 ?? ?? ?? ??
     return_type: unsigned __int32
+    name: GetRecastChargesFromSlotB
     parameters:
     - type: Client::UI::Misc::HotBarSlot*
       name: this
   - signature: E8 ?? ?? ?? ?? 88 47 3E E9
     return_type: byte
+    name: IsSlotUsable
     parameters:
     - type: Client::UI::Misc::HotBarSlot*
       name: this
@@ -33933,11 +34401,13 @@ structs:
       name: actionId
   - signature: E8 ?? ?? ?? ?? 88 47 40 48 8B D7
     return_type: byte
+    name: IsSlotActionTargetInRange
     parameters:
     - type: Client::UI::Misc::HotBarSlot*
       name: this
   - signature: 40 53 48 83 EC 20 41 8B D8 80 FA 11
     return_type: byte
+    name: IsSlotActionTargetInRange2
     parameters:
     - type: Client::UI::Misc::HotBarSlot*
       name: this
@@ -33947,6 +34417,7 @@ structs:
       name: actionId
   - signature: E8 ?? ?? ?? ?? 89 47 24 E9
     return_type: __int32
+    name: GetSlotActionCooldownPercentage
     parameters:
     - type: Client::UI::Misc::HotBarSlot*
       name: this
@@ -34033,6 +34504,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 39 9E ?? ?? ?? ?? 7E 4B
     return_type: unsigned __int32
+    name: PrintMessage
     parameters:
     - type: Client::UI::Misc::RaptureLogModule*
       name: this
@@ -34048,6 +34520,7 @@ structs:
       name: silent
   - signature: E8 ?? ?? ?? ?? 44 03 FB
     return_type: void
+    name: ShowLogMessage
     parameters:
     - type: Client::UI::Misc::RaptureLogModule*
       name: this
@@ -34055,6 +34528,7 @@ structs:
       name: logMessageID
   - signature: E8 ?? ?? ?? ?? 32 C0 EB 17
     return_type: void
+    name: ShowLogMessageUInt
     parameters:
     - type: Client::UI::Misc::RaptureLogModule*
       name: this
@@ -34064,6 +34538,7 @@ structs:
       name: value
   - signature: E8 ?? ?? ?? ?? 0F B7 46 32
     return_type: void
+    name: ShowLogMessageUInt2
     parameters:
     - type: Client::UI::Misc::RaptureLogModule*
       name: this
@@ -34075,6 +34550,7 @@ structs:
       name: value2
   - signature: E8 ?? ?? ?? ?? 40 84 ED 74 0A 8B D7
     return_type: void
+    name: ShowLogMessageUInt3
     parameters:
     - type: Client::UI::Misc::RaptureLogModule*
       name: this
@@ -34088,6 +34564,7 @@ structs:
       name: value3
   - signature: E8 ?? ?? ?? ?? EB 68 48 8B 07
     return_type: void
+    name: ShowLogMessageString
     parameters:
     - type: Client::UI::Misc::RaptureLogModule*
       name: this
@@ -34097,6 +34574,7 @@ structs:
       name: value
   - signature: E8 ?? ?? ?? ?? FE 44 24 50
     return_type: void
+    name: PrintString
     parameters:
     - type: Client::UI::Misc::RaptureLogModule*
       name: this
@@ -34104,6 +34582,7 @@ structs:
       name: str
   - signature: 4C 8B 81 ?? ?? ?? ?? 4D 85 C0 74 17
     return_type: unsigned __int64
+    name: GetContentIdForLogMessage
     parameters:
     - type: Client::UI::Misc::RaptureLogModule*
       name: this
@@ -34111,6 +34590,7 @@ structs:
       name: index
   - signature: E8 ?? ?? ?? ?? 84 C0 0F 84 ?? ?? ?? ?? 48 8D 96 ?? ?? ?? ?? 48 8D 4C 24
     return_type: byte
+    name: GetLogMessage
     parameters:
     - type: Client::UI::Misc::RaptureLogModule*
       name: this
@@ -34120,6 +34600,7 @@ structs:
       name: str
   - signature: E8 ?? ?? ?? ?? 84 C0 74 ?? 0F B6 85 ?? ?? ?? ?? 48 8D 8D
     return_type: byte
+    name: GetLogMessageDetail
     parameters:
     - type: Client::UI::Misc::RaptureLogModule*
       name: this
@@ -34171,6 +34652,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 32 DB 83 C6 F9
     return_type: Client::UI::Misc::RaptureMacroModule::Macro*
+    name: GetMacro
     parameters:
     - type: Client::UI::Misc::RaptureMacroModule*
       name: this
@@ -34180,6 +34662,7 @@ structs:
       name: index
   - signature: E8 ?? ?? ?? ?? 48 8D 4C 24 ?? E8 ?? ?? ?? ?? 44 8B 83 ?? ?? ?? ??
     return_type: void
+    name: ReplaceMacroLines
     parameters:
     - type: Client::UI::Misc::RaptureMacroModule*
       name: this
@@ -34189,6 +34672,7 @@ structs:
       name: lines
   - signature: E8 ?? ?? ?? ?? 44 8B 87 ?? ?? ?? ?? B2 01
     return_type: void
+    name: AppendMacroLines
     parameters:
     - type: Client::UI::Misc::RaptureMacroModule*
       name: this
@@ -34198,6 +34682,7 @@ structs:
       name: lines
   - signature: E8 ?? ?? ?? ?? 83 F8 0F B9 ?? ?? ?? ??
     return_type: unsigned __int32
+    name: GetLineCount
     parameters:
     - type: Client::UI::Misc::RaptureMacroModule*
       name: this
@@ -34205,6 +34690,7 @@ structs:
       name: macro
   - signature: E8 ?? ?? ?? ?? 48 8D 4C 24 ?? E8 ?? ?? ?? ?? 48 8D 8C 24 ?? ?? ?? ?? E8 ?? ?? ?? ?? 41 FE C7
     return_type: void
+    name: SetMacroLines
     parameters:
     - type: Client::UI::Misc::RaptureMacroModule*
       name: this
@@ -34216,6 +34702,7 @@ structs:
       name: lines
   - signature: 45 85 C0 75 04 88 51 3D
     return_type: void
+    name: SetSavePendingFlag
     parameters:
     - type: Client::UI::Misc::RaptureMacroModule*
       name: this
@@ -34331,6 +34818,7 @@ structs:
   member_functions:
   - signature: E9 ?? ?? ?? ?? 80 EA 20
     return_type: byte*
+    name: GetAddonText
     parameters:
     - type: Client::UI::Misc::RaptureTextModule*
       name: this
@@ -34338,6 +34826,7 @@ structs:
       name: addonId
   - signature: E8 ?? ?? ?? ?? 44 8B 7D D7
     return_type: byte*
+    name: FormatAddonText2
     parameters:
     - type: Client::UI::Misc::RaptureTextModule*
       name: this
@@ -34349,6 +34838,7 @@ structs:
       name: intParam2
   - signature: E8 ?? ?? ?? ?? EB 55 FF 50 30
     return_type: byte*
+    name: FormatAddonText3
     parameters:
     - type: Client::UI::Misc::RaptureTextModule*
       name: this
@@ -34362,6 +34852,7 @@ structs:
       name: intParam3
   - signature: E8 ?? ?? ?? ?? 4C 8B C0 48 8B 4D 88
     return_type: byte*
+    name: FormatTimeSpan
     parameters:
     - type: Client::UI::Misc::RaptureTextModule*
       name: this
@@ -34394,6 +34885,7 @@ structs:
   member_functions:
   - signature: 4C 8B D1 41 83 F9 06
     return_type: void
+    name: MJI_SetWorkshopPreset
     parameters:
     - type: Client::UI::Misc::RaptureUiDataModule*
       name: this
@@ -34420,6 +34912,7 @@ structs:
   member_functions:
   - signature: 48 63 C2 45 0F B7 C8
     return_type: Client::UI::Misc::RecipeFavoriteModule::RecipeEntry*
+    name: GetEntry
     parameters:
     - type: Client::UI::Misc::RecipeFavoriteModule*
       name: this
@@ -34429,6 +34922,7 @@ structs:
       name: recipeID
   - signature: 85 D2 78 32 48 63 C2
     return_type: byte
+    name: IsFavorited
     parameters:
     - type: Client::UI::Misc::RecipeFavoriteModule*
       name: this
@@ -34438,6 +34932,7 @@ structs:
       name: recipeID
   - signature: E8 ?? ?? ?? ?? 8B CD 48 8B C5
     return_type: unsigned __int32
+    name: RemoveFromFavorites
     parameters:
     - type: Client::UI::Misc::RecipeFavoriteModule*
       name: this
@@ -34447,6 +34942,7 @@ structs:
       name: recipeID
   - signature: E8 ?? ?? ?? ?? 8B F8 49 8B CE
     return_type: unsigned __int32
+    name: AddToFavorites
     parameters:
     - type: Client::UI::Misc::RecipeFavoriteModule*
       name: this
@@ -34471,6 +34967,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 8B BC 24 ?? ?? ?? ?? 48 8B B4 24 ?? ?? ?? ?? 49 8B 4E 10
     return_type: void
+    name: SetComment
     parameters:
     - type: Client::UI::Misc::RetainerCommentModule*
       name: this
@@ -34480,6 +34977,7 @@ structs:
       name: comment
   - signature: 32 C0 0F 1F 40 00 66 66 0F 1F 84 ?? 00 00 00 00 44 0F B6 C0 4C 8D 51
     return_type: byte*
+    name: GetComment
     parameters:
     - type: Client::UI::Misc::RetainerCommentModule*
       name: this
@@ -34534,6 +35032,7 @@ structs:
   member_functions:
   - signature: 48 83 EC 28 88 51 40
     return_type: byte
+    name: SaveActions
     parameters:
     - type: Client::UI::Misc::VVDActionModule*
       name: this
@@ -34573,6 +35072,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 8B 55 68
     return_type: Client::UI::Info::InfoProxyInterface*
+    name: GetInfoProxyById
     parameters:
     - type: Client::UI::Info::InfoModule*
       name: this
@@ -34580,6 +35080,7 @@ structs:
       name: id
   - signature: 48 8B 81 ?? ?? ?? ?? 0F B6 CA 48 D3 E8
     return_type: byte
+    name: IsOnlineStatusSet
     parameters:
     - type: Client::UI::Info::InfoModule*
       name: this
@@ -34587,6 +35088,7 @@ structs:
       name: id
   - signature: E8 ?? ?? ?? ?? 44 8B 8C 24 ?? ?? ?? ?? 84 C0
     return_type: byte
+    name: IsInCrossWorldDuty
     parameters:
     - type: Client::UI::Info::InfoModule*
       name: this
@@ -34936,6 +35438,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 8B D0 48 8B CB E8 ?? ?? ?? ?? 41 C6 46
     return_type: unsigned __int64
+    name: GetContentIDForEntry
     parameters:
     - type: Client::UI::Info::InfoProxyCommonList*
       name: this
@@ -34943,6 +35446,7 @@ structs:
       name: idx
   - signature: E8 ?? ?? ?? ?? 48 85 FF 74 55
     return_type: Client::UI::Info::InfoProxyCommonList::CharacterData*
+    name: GetEntry
     parameters:
     - type: Client::UI::Info::InfoProxyCommonList*
       name: this
@@ -34950,6 +35454,7 @@ structs:
       name: idx
   - signature: E8 ?? ?? ?? ?? 48 8B 13 45 33 C9
     return_type: void
+    name: ApplyFilters
     parameters:
     - type: Client::UI::Info::InfoProxyCommonList*
       name: this
@@ -35058,6 +35563,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? EB 2F E8
     return_type: void
+    name: RequestDataForCharacter
     parameters:
     - type: Client::UI::Info::InfoProxyFreeCompany*
       name: this
@@ -35222,6 +35728,7 @@ structs:
   member_functions:
   - signature: 41 83 F8 14 77 3C
     return_type: void
+    name: ProcessItemHistory
     parameters:
     - type: Client::UI::Info::InfoProxyItemSearch*
       name: this
@@ -35233,6 +35740,7 @@ structs:
       name: a4
   - signature: 44 88 4C 24 ?? 44 89 44 24 ?? 48 89 54 24 ?? 53
     return_type: __int64
+    name: ProcessItemHistory_Internal
     parameters:
     - type: Client::UI::Info::InfoProxyItemSearch*
       name: this
@@ -35244,6 +35752,7 @@ structs:
       name: a4
   - signature: E8 ?? ?? ?? ?? 8B 5B 04 85 DB
     return_type: __int64
+    name: ProcessRequestResult
     parameters:
     - type: Client::UI::Info::InfoProxyItemSearch*
       name: this
@@ -35261,6 +35770,7 @@ structs:
       name: a7
   - signature: 41 83 F8 0A 0F 87 ?? ?? ?? ?? 55
     return_type: __int64
+    name: ProcessPlayerRetainerInfo
     parameters:
     - type: Client::UI::Info::InfoProxyItemSearch*
       name: this
@@ -35270,6 +35780,7 @@ structs:
       name: retainerCount
   - signature: 40 56 48 8B C2
     return_type: byte
+    name: SetLastPurchasedItem
     parameters:
     - type: Client::UI::Info::InfoProxyItemSearch*
       name: this
@@ -35642,6 +36153,7 @@ structs:
   member_functions:
   - signature: 4C 8B C1 80 FA 03
     return_type: byte
+    name: IsWeeklyChallengeComplete
     parameters:
     - type: Client::UI::Agent::AgentAozContentBriefing*
       name: this
@@ -35743,6 +36255,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 8B 9C 24 ?? ?? ?? ?? C7 06
     return_type: __int64
+    name: ViewArchiveItem
     parameters:
     - type: Client::UI::Agent::AgentArchiveItem*
       name: this
@@ -35778,6 +36291,7 @@ structs:
   member_functions:
   - signature: 48 89 5C 24 ?? 57 48 83 EC 30 48 83 3D ?? ?? ?? ?? ?? 8B FA 48 8B D9 0F 84
     return_type: void
+    name: OpenForGearset
     parameters:
     - type: Client::UI::Agent::AgentBannerEditor*
       name: this
@@ -35858,11 +36372,13 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 33 D2 48 8B CE E8 ?? ?? ?? ?? 48 8B 8E
     return_type: void
+    name: Save
     parameters:
     - type: Client::UI::Agent::AgentBannerEditorState*
       name: this
   - signature: 48 89 5C 24 ?? 48 89 7C 24 ?? 80 79 2C 00
     return_type: __int32
+    name: GetPresetIndex
     parameters:
     - type: Client::UI::Agent::AgentBannerEditorState*
       name: this
@@ -35874,6 +36390,7 @@ structs:
       name: accentIndex
   - signature: E8 ?? ?? ?? ?? 44 0A E8 45 8B C7
     return_type: void
+    name: SetFrame
     parameters:
     - type: Client::UI::Agent::AgentBannerEditorState*
       name: this
@@ -35881,6 +36398,7 @@ structs:
       name: frameId
   - signature: E8 ?? ?? ?? ?? 4C 8B 64 24 ?? 44 0A E8
     return_type: void
+    name: SetAccent
     parameters:
     - type: Client::UI::Agent::AgentBannerEditorState*
       name: this
@@ -35888,6 +36406,7 @@ structs:
       name: accentId
   - signature: E8 ?? ?? ?? ?? 32 C0 48 8B 4D 37
     return_type: void
+    name: SetHasChanged
     parameters:
     - type: Client::UI::Agent::AgentBannerEditorState*
       name: this
@@ -35971,6 +36490,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8B 4B 10 48 8D BB
     return_type: void
+    name: OpenCharaCardForContentId
     parameters:
     - type: Client::UI::Agent::AgentCharaCard*
       name: this
@@ -35978,6 +36498,7 @@ structs:
       name: contentId
   - signature: 48 85 D2 74 6D 48 89 5C 24
     return_type: void
+    name: OpenCharaCardForObject
     parameters:
     - type: Client::UI::Agent::AgentCharaCard*
       name: this
@@ -36002,6 +36523,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 81 FF ?? ?? ?? ?? 75 20
     return_type: byte
+    name: InsertTextCommandParam
     parameters:
     - type: Client::UI::Agent::AgentChatLog*
       name: this
@@ -36076,6 +36598,7 @@ structs:
   member_functions:
   - signature: 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 81 EC ?? ?? ?? ?? 48 8B F9 41 0F B6 E8
     return_type: __int64
+    name: OpenRegularDuty
     parameters:
     - type: Client::UI::Agent::AgentContentsFinder*
       name: this
@@ -36085,6 +36608,7 @@ structs:
       name: a2
   - signature: E9 ?? ?? ?? ?? 8B 93 ?? ?? ?? ?? 48 83 C4 20
     return_type: __int64
+    name: OpenRouletteDuty
     parameters:
     - type: Client::UI::Agent::AgentContentsFinder*
       name: this
@@ -36195,6 +36719,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 45 88 7C 24
     return_type: void
+    name: OpenContextMenu
     parameters:
     - type: Client::UI::Agent::AgentContext*
       name: this
@@ -36204,6 +36729,7 @@ structs:
       name: closeExisting
   - signature: 41 0F B6 C0 89 91
     return_type: void
+    name: OpenContextMenuForAddon
     parameters:
     - type: Client::UI::Agent::AgentContext*
       name: this
@@ -36213,11 +36739,13 @@ structs:
       name: bindToOwner
   - signature: E8 ?? ?? ?? ?? 44 39 A3 ?? ?? ?? ?? 0F 86
     return_type: byte
+    name: OpenSubMenu
     parameters:
     - type: Client::UI::Agent::AgentContext*
       name: this
   - signature: E8 ?? ?? ?? ?? 48 8D 4D E0 E9 ?? ?? ?? ?? 48 8B CB E8 ?? ?? ?? ?? 0F B7 93
     return_type: void
+    name: OpenYesNo
     parameters:
     - type: Client::UI::Agent::AgentContext*
       name: this
@@ -36233,11 +36761,13 @@ structs:
       name: setOwner
   - signature: E8 ?? ?? ?? ?? 40 80 F6
     return_type: void
+    name: ClearMenu
     parameters:
     - type: Client::UI::Agent::AgentContext*
       name: this
   - signature: E8 ?? ?? ?? ?? 41 BF ?? ?? ?? ?? 48 8D 44 24 ?? 41 8B D7
     return_type: void
+    name: SetMenuTitle
     parameters:
     - type: Client::UI::Agent::AgentContext*
       name: this
@@ -36245,6 +36775,7 @@ structs:
       name: text
   - signature: E8 ?? ?? ?? ?? FF CE 48 FF CF
     return_type: void
+    name: AddMenuItem
     parameters:
     - type: Client::UI::Agent::AgentContext*
       name: this
@@ -36260,6 +36791,7 @@ structs:
       name: submenu
   - signature: E8 ?? ?? ?? ?? 49 69 D6
     return_type: void
+    name: AddMenuItem2
     parameters:
     - type: Client::UI::Agent::AgentContext*
       name: this
@@ -36275,6 +36807,7 @@ structs:
       name: submenu
   - signature: 48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 48 8B 99 ?? ?? ?? ?? 4C 8B D1
     return_type: void
+    name: AddContextMenuItem
     parameters:
     - type: Client::UI::Agent::AgentContext*
       name: this
@@ -36290,6 +36823,7 @@ structs:
       name: copyText
   - signature: E8 ?? ?? ?? ?? 4D 85 F6 74 3F
     return_type: void
+    name: AddContextMenuItem2
     parameters:
     - type: Client::UI::Agent::AgentContext*
       name: this
@@ -36562,6 +37096,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 44 0F B6 83
     return_type: void
+    name: OpenForItemId
     parameters:
     - type: Client::UI::Agent::AgentFishGuide*
       name: this
@@ -36761,6 +37296,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? EB 63 48 83 F8
     return_type: void
+    name: OpenGatherableByItemId
     parameters:
     - type: Client::UI::Agent::AgentGatheringNote*
       name: this
@@ -37019,6 +37555,7 @@ structs:
   member_functions:
   - signature: 48 8B 81 ?? ?? ?? ?? 44 8B C2 83 E2 1F
     return_type: byte
+    name: IsMainCommandEnabled
     parameters:
     - type: Client::UI::Agent::AgentHUD*
       name: this
@@ -37026,6 +37563,7 @@ structs:
       name: mainCommandId
   - signature: E8 ?? ?? ?? ?? 41 B0 01 EB 27
     return_type: byte
+    name: SetMainCommandEnabledState
     parameters:
     - type: Client::UI::Agent::AgentHUD*
       name: this
@@ -37035,6 +37573,7 @@ structs:
       name: enabled
   - signature: 48 85 D2 74 7F 48 89 5C 24
     return_type: void
+    name: OpenContextMenuFromTarget
     parameters:
     - type: Client::UI::Agent::AgentHUD*
       name: this
@@ -37042,6 +37581,7 @@ structs:
       name: gameObject
   - signature: E8 ?? ?? ?? ?? EB ?? 48 8B CB E8 ?? ?? ?? ?? 48 8B D8
     return_type: byte*
+    name: GetMainCommandString
     parameters:
     - type: Client::UI::Agent::AgentHUD*
       name: this
@@ -37198,6 +37738,7 @@ structs:
   member_functions:
   - signature: 83 B9 ?? ?? ?? ?? ?? 7E ?? 39 91
     return_type: void
+    name: OpenForItemSlot
     parameters:
     - type: Client::UI::Agent::AgentInventoryContext*
       name: this
@@ -37211,6 +37752,7 @@ structs:
       name: addonId
   - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 89 7C 24 ??
     return_type: __int64
+    name: UseItem
     parameters:
     - type: Client::UI::Agent::AgentInventoryContext*
       name: this
@@ -37224,6 +37766,7 @@ structs:
       name: a5
   - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 85 C0 74 ?? 0F B7 48
     return_type: void
+    name: DiscardItem
     parameters:
     - type: Client::UI::Agent::AgentInventoryContext*
       name: this
@@ -37239,6 +37782,7 @@ structs:
       name: position
   - signature: E8 ?? ?? ?? ?? 48 83 C4 ?? 5B C3 8B 83
     return_type: void
+    name: LowerItemQuality
     parameters:
     - type: Client::UI::Agent::AgentInventoryContext*
       name: this
@@ -37501,6 +38045,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8B 49 ?? 0F B7 9E
     return_type: void
+    name: OpenMacro
     parameters:
     - type: Client::UI::Agent::AgentMacro*
       name: this
@@ -37650,6 +38195,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8B 4B 10 48 85 C9
     return_type: void
+    name: SetFlagMapMarker
     parameters:
     - type: Client::UI::Agent::AgentMap*
       name: this
@@ -37665,6 +38211,7 @@ structs:
       name: iconId
   - signature: E8 ?? ?? ?? ?? 48 8B 5C 24 ?? B0 ?? 48 8B B4 24
     return_type: void
+    name: OpenMapByMapId
     parameters:
     - type: Client::UI::Agent::AgentMap*
       name: this
@@ -37672,6 +38219,7 @@ structs:
       name: mapId
   - signature: E8 ?? ?? ?? ?? 49 8B 45 28 48 8D 8C 24
     return_type: void
+    name: OpenMap
     parameters:
     - type: Client::UI::Agent::AgentMap*
       name: this
@@ -37679,6 +38227,7 @@ structs:
       name: data
   - signature: 48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 7C 24 ?? 41 54 41 55 41 56 48 83 EC 20
     return_type: void
+    name: AddGatheringTempMarker
     parameters:
     - type: Client::UI::Agent::AgentMap*
       name: this
@@ -37696,16 +38245,19 @@ structs:
       name: tooltip
   - signature: 40 53 48 83 EC ?? B2 ?? C6 81 ?? ?? ?? ?? ?? 48 8B D9 E8 ?? ?? ?? ?? 33 D2
     return_type: void
+    name: ResetMiniMapMarkers
     parameters:
     - type: Client::UI::Agent::AgentMap*
       name: this
   - signature: 40 53 48 83 EC ?? 48 8B D9 C6 81 ?? ?? ?? ?? ?? 48 C7 81
     return_type: void
+    name: ResetMapMarkers
     parameters:
     - type: Client::UI::Agent::AgentMap*
       name: this
   - signature: E8 ?? ?? ?? ?? 40 B6 01 C7 44 24 ?? ?? ?? ?? ?? BA ?? ?? ?? ?? 48 8B CF E8 ?? ?? ?? ?? 84 C0 74 15
     return_type: void
+    name: ShowMap
     parameters:
     - type: Client::UI::Agent::AgentMap*
       name: this
@@ -37951,6 +38503,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 8B 45 28 48 8B 7C 24
     return_type: void
+    name: SetDisplayedCycle
     parameters:
     - type: Client::UI::Agent::AgentMJICraftSchedule*
       name: this
@@ -38064,6 +38617,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 84 C0 75 0A 66 FF C6
     return_type: byte
+    name: IsExpeditionUnlocked
     parameters:
     - type: Client::UI::Agent::AgentMJIGatheringHouse*
       name: this
@@ -38274,6 +38828,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 8B 74 24 ?? 48 8B 7C 24 ?? 48 83 C4 30 5B C3 48 8B CB
     return_type: void
+    name: OpenForQuest
     parameters:
     - type: Client::UI::Agent::AgentQuestJournal*
       name: this
@@ -38287,6 +38842,7 @@ structs:
       name: keepOpen
   - signature: E8 ?? ?? ?? ?? EB 24 8B 56 20
     return_type: void
+    name: ShowOnMap
     parameters:
     - type: Client::UI::Agent::AgentQuestJournal*
       name: this
@@ -38344,6 +38900,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 83 F8 06
     return_type: void
+    name: OpenRecipeByItemId
     parameters:
     - type: Client::UI::Agent::AgentRecipeNote*
       name: this
@@ -38351,6 +38908,7 @@ structs:
       name: itemID
   - signature: 48 89 5C 24 ?? 57 48 83 EC 20 83 B9 ?? ?? ?? ?? ?? 8B FA 48 8B D9 0F 85 ?? ?? ?? ??
     return_type: void
+    name: OpenRecipeByRecipeIdInternal
     parameters:
     - type: Client::UI::Agent::AgentRecipeNote*
       name: this
@@ -38358,6 +38916,7 @@ structs:
       name: internalRecipeID
   - signature: 48 89 5C 24 ?? 48 89 6C 24 ?? 56 48 83 EC 20 80 B9 ?? ?? ?? ?? ??
     return_type: void
+    name: SearchRecipe
     parameters:
     - type: Client::UI::Agent::AgentRecipeNote*
       name: this
@@ -38380,6 +38939,7 @@ structs:
   member_functions:
   - signature: 48 89 5C 24 ?? 57 48 83 EC ?? 8B FA B8
     return_type: void
+    name: SearchForRecipesUsingItem
     parameters:
     - type: Client::UI::Agent::AgentRecipeProductList*
       name: this
@@ -38586,11 +39146,13 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 8B 7C 24 ?? C7 85
     return_type: __int64
+    name: ItemListRefresh
     parameters:
     - type: Client::UI::Agent::AgentSalvage*
       name: this
   - signature: E8 ?? ?? ?? ?? 41 81 BD ?? ?? ?? ?? ?? ?? ?? ?? 7D 1A
     return_type: __int64
+    name: ItemListAdd
     parameters:
     - type: Client::UI::Agent::AgentSalvage*
       name: this
@@ -38888,6 +39450,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 8B F0 48 63 83
     return_type: byte*
+    name: GetResourceData
     parameters:
     - type: Client::System::Scheduler::Resource::SchedulerResource*
       name: this
@@ -38924,11 +39487,13 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 83 7F ?? ?? 75 ?? 0F B6 87
     return_type: unsigned __int64
+    name: LoadTimelineResources
     parameters:
     - type: Client::System::Scheduler::Base::SchedulerTimeline*
       name: this
   - signature: E8 ?? ?? ?? ?? EB CA 48 8B 4C 24
     return_type: void
+    name: UpdateBanner
     parameters:
     - type: Client::System::Scheduler::Base::SchedulerTimeline*
       name: this
@@ -39010,11 +39575,13 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 C7 03 ?? ?? ?? ?? C6 83
     return_type: byte
+    name: DecRef
     parameters:
     - type: Client::System::Resource::Handle::ResourceHandle*
       name: this
   - signature: E8 ?? ?? ?? ?? 41 8B 46 30 C1 E0 05
     return_type: byte
+    name: IncRef
     parameters:
     - type: Client::System::Resource::Handle::ResourceHandle*
       name: this
@@ -39109,6 +39676,7 @@ structs:
   member_functions:
   - signature: 48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 41 8B F8 41 0F B6 F1
     return_type: void
+    name: SetVolume
     parameters:
     - type: Client::System::Framework::EnvironmentManager*
       name: this
@@ -39120,6 +39688,7 @@ structs:
       name: saveToConfig
   - signature: E8 ?? ?? ?? ?? 48 8B 8F ?? ?? ?? ?? 41 B1 ?? 41 83 C8
     return_type: void
+    name: SetMasterVolume
     parameters:
     - type: Client::System::Framework::EnvironmentManager*
       name: this
@@ -39165,6 +39734,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 66 85 C0 74 19
     return_type: unsigned __int32
+    name: GetLastWorldID
     parameters:
     - type: Client::System::Configuration::SystemConfig*
       name: this
@@ -39204,11 +39774,13 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? EB ?? 49 8B 85
     return_type: byte
+    name: IsInCrossWorlDuty
     parameters:
     - type: Client::Network::NetworkModuleProxy*
       name: this
   - signature: E8 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? 0F B7 F0 E8 ?? ?? ?? ?? 8B D8
     return_type: __int16
+    name: GetCurrentInstance
     parameters:
     - type: Client::Network::NetworkModuleProxy*
       name: this
@@ -39256,6 +39828,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 4C 8B E0 48 8B EB
     return_type: void
+    name: ScreenPointToRay
     parameters:
     - type: Client::Graphics::Scene::Camera*
       name: this
@@ -39385,6 +39958,7 @@ structs:
   member_functions:
   - signature: 48 8B 05 ?? ?? ?? ?? 8B CA 48 8B 84 C8
     return_type: Client::Graphics::Kernel::Texture*
+    name: GetCharaViewTexture
     parameters:
     - type: Client::Graphics::Render::RenderTargetManager*
       name: this
@@ -39579,6 +40153,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? EB 64 B1 01
     return_type: byte
+    name: UseAction
     parameters:
     - type: Client::Game::ActionManager*
       name: this
@@ -39598,6 +40173,7 @@ structs:
       name: a7
   - signature: E8 ?? ?? ?? ?? 3C 01 0F 85 ?? ?? ?? ?? EB 46
     return_type: byte
+    name: UseActionLocation
     parameters:
     - type: Client::Game::ActionManager*
       name: this
@@ -39613,6 +40189,7 @@ structs:
       name: a4
   - signature: E8 ?? ?? ?? ?? 3D ?? ?? ?? ?? 74 42
     return_type: unsigned __int32
+    name: GetActionStatus
     parameters:
     - type: Client::Game::ActionManager*
       name: this
@@ -39630,6 +40207,7 @@ structs:
       name: outOptExtraInfo
   - signature: E8 ?? ?? ?? ?? 8B F8 3B DF
     return_type: unsigned __int32
+    name: GetAdjustedActionId
     parameters:
     - type: Client::Game::ActionManager*
       name: this
@@ -39637,6 +40215,7 @@ structs:
       name: actionID
   - signature: E8 ?? ?? ?? ?? 83 7F 4C 01 44 0F 28 C8
     return_type: float
+    name: GetRecastTime
     parameters:
     - type: Client::Game::ActionManager*
       name: this
@@ -39646,6 +40225,7 @@ structs:
       name: actionID
   - signature: E8 ?? ?? ?? ?? 0F 28 F8 F3 0F 5C FE
     return_type: float
+    name: GetRecastTimeForGroup
     parameters:
     - type: Client::Game::ActionManager*
       name: this
@@ -39653,6 +40233,7 @@ structs:
       name: recastGroupId
   - signature: E8 ?? ?? ?? ?? F3 0F 5C F0 49 8B CD
     return_type: float
+    name: GetRecastTimeElapsed
     parameters:
     - type: Client::Game::ActionManager*
       name: this
@@ -39662,6 +40243,7 @@ structs:
       name: actionID
   - signature: E8 ?? ?? ?? ?? 3C 01 74 19 FF C3
     return_type: byte
+    name: IsRecastTimerActive
     parameters:
     - type: Client::Game::ActionManager*
       name: this
@@ -39671,6 +40253,7 @@ structs:
       name: actionID
   - signature: E8 ?? ?? ?? ?? 8B D0 48 8B CD 8B F0
     return_type: __int32
+    name: GetRecastGroup
     parameters:
     - type: Client::Game::ActionManager*
       name: this
@@ -39680,6 +40263,7 @@ structs:
       name: actionID
   - signature: E8 ?? ?? ?? ?? 8B 4F 44 33 D2
     return_type: __int32
+    name: GetAdditionalRecastGroup
     parameters:
     - type: Client::Game::ActionManager*
       name: this
@@ -39689,6 +40273,7 @@ structs:
       name: actionId
   - signature: 40 53 48 83 EC ?? 48 63 DA 85 D2
     return_type: Client::Game::RecastDetail*
+    name: GetRecastGroupDetail
     parameters:
     - type: Client::Game::ActionManager*
       name: this
@@ -39696,6 +40281,7 @@ structs:
       name: recastGroup
   - signature: E8 ?? ?? ?? ?? 85 C0 75 94
     return_type: unsigned __int32
+    name: CheckActionResources
     parameters:
     - type: Client::Game::ActionManager*
       name: this
@@ -39707,6 +40293,7 @@ structs:
       name: actionData
   - signature: E8 ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? FF 50 18
     return_type: __int64
+    name: StartCooldown
     parameters:
     - type: Client::Game::ActionManager*
       name: this
@@ -39716,6 +40303,7 @@ structs:
       name: actionId
   - signature: E8 ?? ?? ?? ?? 84 C0 0F 84 ?? ?? ?? ?? F6 05 ?? ?? ?? ?? ?? 74 2C
     return_type: byte
+    name: IsActionOffCooldown
     parameters:
     - type: Client::Game::ActionManager*
       name: this
@@ -39725,6 +40313,7 @@ structs:
       name: actionId
   - signature: E8 ?? ?? ?? ?? 88 47 40 EB 36
     return_type: byte
+    name: IsActionTargetInRange
     parameters:
     - type: Client::Game::ActionManager*
       name: this
@@ -39734,6 +40323,7 @@ structs:
       name: actionId
   - signature: 48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 50 8B FA 44 8B C2
     return_type: unsigned __int32
+    name: GetCurrentCharges
     parameters:
     - type: Client::Game::ActionManager*
       name: this
@@ -39741,6 +40331,7 @@ structs:
       name: actionId
   - signature: 48 8B C4 48 89 68 ?? 48 89 70 ?? 41 56 48 83 EC
     return_type: void
+    name: AssignBlueMageActionToSlot
     parameters:
     - type: Client::Game::ActionManager*
       name: this
@@ -39750,6 +40341,7 @@ structs:
       name: actionId
   - signature: E8 ?? ?? ?? ?? 89 06 33 D2
     return_type: unsigned __int32
+    name: GetActiveBlueMageActionInSlot
     parameters:
     - type: Client::Game::ActionManager*
       name: this
@@ -39757,6 +40349,7 @@ structs:
       name: slot
   - signature: 48 89 6C 24 ?? 48 89 74 24 ?? 41 56 48 83 EC ?? 48 63 EA 4C 8B F1
     return_type: void
+    name: SwapBlueMageActionSlots
     parameters:
     - type: Client::Game::ActionManager*
       name: this
@@ -39766,6 +40359,7 @@ structs:
       name: slotB
   - signature: 40 53 55 57 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 33 DB
     return_type: byte
+    name: SetBlueMageActions
     parameters:
     - type: Client::Game::ActionManager*
       name: this
@@ -39773,6 +40367,7 @@ structs:
       name: actionArray
   - signature: E8 ?? ?? ?? ?? 48 8B CB 88 47 41
     return_type: byte
+    name: IsActionHighlighted
     parameters:
     - type: Client::Game::ActionManager*
       name: this
@@ -39819,6 +40414,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 8B D8 EB 11
     return_type: unsigned __int32
+    name: GetItemIdBySpecialId
     parameters:
     - type: Client::Game::CurrencyManager*
       name: this
@@ -39826,6 +40422,7 @@ structs:
       name: specialId
   - signature: E8 ?? ?? ?? ?? 3B C3 76 0A
     return_type: unsigned __int32
+    name: GetItemCount
     parameters:
     - type: Client::Game::CurrencyManager*
       name: this
@@ -39833,6 +40430,7 @@ structs:
       name: itemId
   - signature: E8 ?? ?? ?? ?? 0F B7 CF 03 CB
     return_type: unsigned __int32
+    name: GetItemMaxCount
     parameters:
     - type: Client::Game::CurrencyManager*
       name: this
@@ -39840,6 +40438,7 @@ structs:
       name: itemId
   - signature: E8 ?? ?? ?? ?? 39 06
     return_type: unsigned __int32
+    name: GetItemCountRemaining
     parameters:
     - type: Client::Game::CurrencyManager*
       name: this
@@ -39847,6 +40446,7 @@ structs:
       name: itemId
   - signature: E8 ?? ?? ?? ?? 84 C0 41 8B CD
     return_type: byte
+    name: HasItem
     parameters:
     - type: Client::Game::CurrencyManager*
       name: this
@@ -39854,6 +40454,7 @@ structs:
       name: itemId
   - signature: E8 ?? ?? ?? ?? 84 C0 75 32 8B D7
     return_type: byte
+    name: IsItemLimited
     parameters:
     - type: Client::Game::CurrencyManager*
       name: this
@@ -39861,6 +40462,7 @@ structs:
       name: itemId
   - signature: 48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 40 41 8B D8
     return_type: void
+    name: SetItemData
     parameters:
     - type: Client::Game::CurrencyManager*
       name: this
@@ -40091,6 +40693,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 0F B6 53 06 49 8B CE
     return_type: unsigned __int32
+    name: SetJoinInProgress
     parameters:
     - type: Client::Game::UI::ContentsFinder*
       name: this
@@ -40303,6 +40906,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 8B 4B 10 84 C0 48 8B 01 74 2C
     return_type: byte
+    name: Teleport
     parameters:
     - type: Client::Game::UI::Telepo*
       name: this
@@ -40312,6 +40916,7 @@ structs:
       name: subIndex
   - signature: E8 ?? ?? ?? ?? 49 89 47 68
     return_type: __int64
+    name: UpdateAetheryteList
     parameters:
     - type: Client::Game::UI::Telepo*
       name: this
@@ -40509,6 +41114,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 88 45 80
     return_type: byte
+    name: IsUnlockLinkUnlocked
     parameters:
     - type: Client::Game::UI::UIState*
       name: this
@@ -40516,6 +41122,7 @@ structs:
       name: unlockLink
   - signature: E8 ?? ?? ?? ?? 84 C0 74 CE
     return_type: byte
+    name: IsUnlockLinkUnlockedOrQuestCompleted
     parameters:
     - type: Client::Game::UI::UIState*
       name: this
@@ -40527,6 +41134,7 @@ structs:
       name: a4
   - signature: E8 ?? ?? ?? ?? 83 F8 01 75 03
     return_type: __int64
+    name: IsItemActionUnlocked
     parameters:
     - type: Client::Game::UI::UIState*
       name: this
@@ -40534,6 +41142,7 @@ structs:
       name: itemExdPtr
   - signature: E8 ?? ?? ?? ?? 8D 7B 78
     return_type: byte
+    name: IsTripleTriadCardUnlocked
     parameters:
     - type: Client::Game::UI::UIState*
       name: this
@@ -40541,6 +41150,7 @@ structs:
       name: cardId
   - signature: E9 ?? ?? ?? ?? 8B 13 41 B8 ?? ?? ?? ?? 8B CA
     return_type: byte
+    name: IsEmoteUnlocked
     parameters:
     - type: Client::Game::UI::UIState*
       name: this
@@ -40548,6 +41158,7 @@ structs:
       name: emoteId
   - signature: E8 ?? ?? ?? ?? 84 C0 41 0F B6 CE
     return_type: byte
+    name: IsCutsceneSeen
     parameters:
     - type: Client::Game::UI::UIState*
       name: this
@@ -40555,6 +41166,7 @@ structs:
       name: cutsceneId
   - signature: E8 ?? ?? ?? ?? 48 8B F8 E8 ?? ?? ?? ?? 49 8D 9F
     return_type: __int32
+    name: GetNextMapAllowanceTimestamp
     parameters:
     - type: Client::Game::UI::UIState*
       name: this
@@ -40745,6 +41357,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 0F 28 74 24 ?? 80 3D
     return_type: void
+    name: SetDrawOffset
     parameters:
     - type: Client::Game::Object::GameObject*
       name: this
@@ -40756,6 +41369,7 @@ structs:
       name: z
   - signature: E8 ?? ?? ?? ?? 83 FE 4F
     return_type: void
+    name: Rotate
     parameters:
     - type: Client::Game::Object::GameObject*
       name: this
@@ -40763,6 +41377,7 @@ structs:
       name: value
   - signature: E8 ?? ?? ?? ?? 83 4B 70 01
     return_type: void
+    name: SetPosition
     parameters:
     - type: Client::Game::Object::GameObject*
       name: this
@@ -40774,6 +41389,7 @@ structs:
       name: z
   - signature: E8 ?? ?? ?? ?? 84 C0 74 ?? 48 8B 17 45 33 C9
     return_type: byte
+    name: IsReadyToDraw
     parameters:
     - type: Client::Game::Object::GameObject*
       name: this
@@ -40926,6 +41542,7 @@ structs:
   member_functions:
   - signature: 48 89 5C 24 ?? 57 48 83 EC 30 41 8B D8 8B FA E8 ?? ?? ?? ?? 48 85 C0
     return_type: void
+    name: Entrust
     parameters:
     - type: Client::Game::MJI::MJIFarmState*
       name: this
@@ -40935,6 +41552,7 @@ structs:
       name: seedItemId
   - signature: E8 ?? ?? ?? ?? EB 22 48 8D 4E 10 E8 ?? ?? ?? ?? 48 8D 4E 20 8B D8
     return_type: void
+    name: Dismiss
     parameters:
     - type: Client::Game::MJI::MJIFarmState*
       name: this
@@ -40942,6 +41560,7 @@ structs:
       name: slot
   - signature: E8 ?? ?? ?? ?? EB 4C 48 8D 4E 10
     return_type: void
+    name: CollectSingle
     parameters:
     - type: Client::Game::MJI::MJIFarmState*
       name: this
@@ -40949,6 +41568,7 @@ structs:
       name: slot
   - signature: E8 ?? ?? ?? ?? EB 6B E8 ?? ?? ?? ?? 48 85 C0
     return_type: void
+    name: CollectSingleAndDismiss
     parameters:
     - type: Client::Game::MJI::MJIFarmState*
       name: this
@@ -40956,11 +41576,13 @@ structs:
       name: slot
   - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8D 4E 20 E8 ?? ?? ?? ?? 0F B6 D8
     return_type: void
+    name: UpdateExpectedTotalYield
     parameters:
     - type: Client::Game::MJI::MJIFarmState*
       name: this
   - signature: E8 ?? ?? ?? ?? 84 C0 75 12 C7 07
     return_type: byte
+    name: CollectAll
     parameters:
     - type: Client::Game::MJI::MJIFarmState*
       name: this
@@ -41051,6 +41673,7 @@ structs:
   member_functions:
   - signature: 0F B7 C2 80 E2 07
     return_type: byte
+    name: IsRecipeUnlocked
     parameters:
     - type: Client::Game::MJI::MJIManager*
       name: this
@@ -41058,6 +41681,7 @@ structs:
       name: recipeId
   - signature: 0F B7 C2 0F B6 44 08
     return_type: byte
+    name: IsPouchItemLocked
     parameters:
     - type: Client::Game::MJI::MJIManager*
       name: this
@@ -41065,6 +41689,7 @@ structs:
       name: itemId
   - signature: E8 ?? ?? ?? ?? 84 C0 74 04 33 ED
     return_type: byte
+    name: IsItemLocked
     parameters:
     - type: Client::Game::MJI::MJIManager*
       name: this
@@ -41072,6 +41697,7 @@ structs:
       name: itemId
   - signature: E8 ?? ?? ?? ?? 44 3A F0
     return_type: byte
+    name: IsFunctionUnlocked
     parameters:
     - type: Client::Game::MJI::MJIManager*
       name: this
@@ -41079,26 +41705,31 @@ structs:
       name: functionId
   - signature: E8 ?? ?? ?? ?? 85 47 40
     return_type: Client::Game::MJI::MJIMinimapIcons
+    name: GetVisibleMinimapIcons
     parameters:
     - type: Client::Game::MJI::MJIManager*
       name: this
   - signature: E8 ?? ?? ?? ?? 44 0F B6 C0 48 8D 9E
     return_type: byte
+    name: GetPastureSlotCount
     parameters:
     - type: Client::Game::MJI::MJIManager*
       name: this
   - signature: E8 ?? ?? ?? ?? 45 33 F6 0F B6 D0
     return_type: byte
+    name: GetFarmSlotCount
     parameters:
     - type: Client::Game::MJI::MJIManager*
       name: this
   - signature: E8 ?? ?? ?? ?? 48 8B CD E8 ?? ?? ?? ?? 32 C0
     return_type: void
+    name: RequestDemandFull
     parameters:
     - type: Client::Game::MJI::MJIManager*
       name: this
   - signature: E8 ?? ?? ?? ?? 48 8B 46 28 41 8D 4E FF
     return_type: void
+    name: ScheduleCraft
     parameters:
     - type: Client::Game::MJI::MJIManager*
       name: this
@@ -41112,6 +41743,7 @@ structs:
       name: workshop
   - signature: E8 ?? ?? ?? ?? 48 8B 47 28 C7 00
     return_type: void
+    name: RequestFavorData
     parameters:
     - type: Client::Game::MJI::MJIManager*
       name: this
@@ -41146,11 +41778,13 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? EB 72 48 8D 4D 10
     return_type: void
+    name: CollectLeavingsAll
     parameters:
     - type: Client::Game::MJI::MJIPastureHandler*
       name: this
   - signature: E8 ?? ?? ?? ?? 3A C3 72 1E
     return_type: byte
+    name: GetCurrentRoamingMinionCount
     parameters:
     - type: Client::Game::MJI::MJIPastureHandler*
       name: this
@@ -41275,6 +41909,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 8D 4C 24 ?? 48 85 C0 75
     return_type: Client::Game::Fate::FateContext*
+    name: GetFateById
     parameters:
     - type: Client::Game::Fate::FateManager*
       name: this
@@ -41411,6 +42046,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? F7 80
     return_type: Client::Game::Camera*
+    name: GetActiveCamera
     parameters:
     - type: Client::Game::Control::CameraManager*
       name: this
@@ -41467,16 +42103,19 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 4C 8B F8 EB 13
     return_type: unsigned __int64
+    name: GetCurrentTargetID
     parameters:
     - type: Client::Game::Control::TargetSystem*
       name: this
   - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 83 C0 ED
     return_type: Client::Game::Object::GameObject*
+    name: GetCurrentTarget
     parameters:
     - type: Client::Game::Control::TargetSystem*
       name: this
   - signature: 48 85 D2 74 2C 4C 63 89
     return_type: byte
+    name: IsObjectInViewRange
     parameters:
     - type: Client::Game::Control::TargetSystem*
       name: this
@@ -41484,6 +42123,7 @@ structs:
       name: obj
   - signature: 40 53 48 81 EC ?? ?? ?? ?? 83 BA
     return_type: byte
+    name: IsObjectOnScreen
     parameters:
     - type: Client::Game::Control::TargetSystem*
       name: this
@@ -41491,6 +42131,7 @@ structs:
       name: obj
   - signature: E9 ?? ?? ?? ?? 48 8B 01 FF 50 08
     return_type: unsigned __int64
+    name: InteractWithObject
     parameters:
     - type: Client::Game::Control::TargetSystem*
       name: this
@@ -41500,6 +42141,7 @@ structs:
       name: checkLineOfSight
   - signature: E9 ?? ?? ?? ?? 8B C0 48 8D 0D
     return_type: void
+    name: OpenObjectInteraction
     parameters:
     - type: Client::Game::Control::TargetSystem*
       name: this
@@ -41507,6 +42149,7 @@ structs:
       name: obj
   - signature: E8 ?? ?? ?? ?? 48 8B D8 48 85 DB 74 ?? 48 8B CB
     return_type: Client::Game::Object::GameObject*
+    name: GetMouseOverObject
     parameters:
     - type: Client::Game::Control::TargetSystem*
       name: this
@@ -41580,6 +42223,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 41 B5 ?? FF C6
     return_type: void
+    name: LoadEquipment
     parameters:
     - type: Client::Game::Character::DrawDataContainer*
       name: this
@@ -41591,6 +42235,7 @@ structs:
       name: force
   - signature: E8 ?? ?? ?? ?? 44 8B 9E
     return_type: void
+    name: LoadWeapon
     parameters:
     - type: Client::Game::Character::DrawDataContainer*
       name: this
@@ -41608,6 +42253,7 @@ structs:
       name: unk4
   - signature: E8 ?? ?? ?? ?? 0F B6 86 ?? ?? ?? ?? A8 08
     return_type: void
+    name: HideWeapons
     parameters:
     - type: Client::Game::Character::DrawDataContainer*
       name: this
@@ -41615,6 +42261,7 @@ structs:
       name: hide
   - signature: E8 ?? ?? ?? ?? 45 85 F6 75 92
     return_type: void
+    name: HideHeadgear
     parameters:
     - type: Client::Game::Character::DrawDataContainer*
       name: this
@@ -41624,6 +42271,7 @@ structs:
       name: hide
   - signature: E8 ?? ?? ?? ?? 0F B6 97 ?? ?? ?? ?? 48 8B CF C0 EA
     return_type: void
+    name: SetVisor
     parameters:
     - type: Client::Game::Character::DrawDataContainer*
       name: this
@@ -42524,6 +43172,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 8B CB 48 89 07
     return_type: void
+    name: Ctor1
     parameters:
     - type: hkaAnimationControl*
       name: this
@@ -42531,6 +43180,7 @@ structs:
       name: binding
   - signature: 48 63 41 48 45 33 C9
     return_type: void
+    name: RemoveAnimationControlListener
     parameters:
     - type: hkaAnimationControl*
       name: this
@@ -42566,6 +43216,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? EB ?? 48 8B C3 48 89 07 48 83 C7
     return_type: hkaAnimatedSkeleton*
+    name: Ctor1
     parameters:
     - type: hkaAnimatedSkeleton*
       name: this
@@ -42573,11 +43224,13 @@ structs:
       name: skeleton
   - signature: 48 89 5C 24 ?? 41 56 48 83 EC 20 48 8D 05
     return_type: void
+    name: Dtor
     parameters:
     - type: hkaAnimatedSkeleton*
       name: this
   - signature: 48 83 EC 38 48 89 5C 24 ?? 48 89 74 24
     return_type: void
+    name: stepDeltaTime
     parameters:
     - type: hkaAnimatedSkeleton*
       name: this
@@ -42585,6 +43238,7 @@ structs:
       name: time
   - signature: 48 83 EC 38 4D 8B C8 C6 44 24 ?? ?? 4C 8B 41 30
     return_type: void
+    name: sampleAndCombineAnimations
     parameters:
     - type: hkaAnimatedSkeleton*
       name: this
@@ -42594,6 +43248,7 @@ structs:
       name: floatSlotsOut
   - signature: 48 83 EC 38 8B 44 24 60 C6 44 24 ?? ?? 89 44 24 20 E8 ?? ?? ?? ?? 48 83 C4 38 C3 CC CC CC CC CC CC CC CC CC CC CC CC CC CC CC CC CC CC CC CC CC 66 44 89 44 24
     return_type: void
+    name: sampleAndCombinePartialAnimations
     parameters:
     - type: hkaAnimatedSkeleton*
       name: this
@@ -42607,6 +43262,7 @@ structs:
       name: maxFloatSlots
   - signature: 66 44 89 44 24 ?? 48 83 EC 48 33 C0
     return_type: void
+    name: sampleAndCombineSingleBone
     parameters:
     - type: hkaAnimatedSkeleton*
       name: this
@@ -42616,6 +43272,7 @@ structs:
       name: bone
   - signature: 66 44 89 44 24 ?? 48 83 EC 48 48 89 54 24
     return_type: void
+    name: sampleAndCombineSingleSlot
     parameters:
     - type: hkaAnimatedSkeleton*
       name: this
@@ -42625,6 +43282,7 @@ structs:
       name: slot
   - signature: 48 83 EC 48 41 8B C1
     return_type: void
+    name: sampleAndCombineIndividualBones
     parameters:
     - type: hkaAnimatedSkeleton*
       name: this
@@ -42636,6 +43294,7 @@ structs:
       name: numBones
   - signature: 48 83 EC 48 48 89 54 24 ?? 33 D2
     return_type: void
+    name: sampleAndCombineIndividualSlots
     parameters:
     - type: hkaAnimatedSkeleton*
       name: this
@@ -42647,6 +43306,7 @@ structs:
       name: numSlots
   - signature: 48 8B C4 48 81 EC ?? ?? ?? ?? 48 89 58 10 49 8B D8
     return_type: void
+    name: getDeltaReferenceFrame
     parameters:
     - type: hkaAnimatedSkeleton*
       name: this
@@ -42656,6 +43316,7 @@ structs:
       name: deltaMotionOut
   - signature: 48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 8B 41 2C 48 8B DA
     return_type: void
+    name: addAnimationControl
     parameters:
     - type: hkaAnimatedSkeleton*
       name: this
@@ -42663,6 +43324,7 @@ structs:
       name: animation
   - signature: 40 53 48 83 EC 20 48 63 41 28
     return_type: void
+    name: removeAnimationControl
     parameters:
     - type: hkaAnimatedSkeleton*
       name: this
@@ -42670,6 +43332,7 @@ structs:
       name: animation
   - signature: 48 89 5C 24 ?? 4C 89 4C 24 ?? 44 89 44 24 ?? 48 89 4C 24 ?? 55 56 57 41 54 41 55 41 56 41 57 48 8D AC 24
     return_type: void
+    name: sampleAndCombineInternal
     parameters:
     - type: hkaAnimatedSkeleton*
       name: this
@@ -42685,6 +43348,7 @@ structs:
       name: partial
   - signature: 48 8B C4 4C 89 48 20 4C 89 40 18 89 50 10 48 89 48 08 55 53 56 57 41 54
     return_type: void
+    name: sampleAndCombineIndividual
     parameters:
     - type: hkaAnimatedSkeleton*
       name: this
@@ -42768,6 +43432,7 @@ structs:
   member_functions:
   - signature: 40 53 48 83 EC 20 4C 89 01 33 C0
     return_type: void
+    name: Ctor1
     parameters:
     - type: hkaPose*
       name: this
@@ -42779,6 +43444,7 @@ structs:
       name: pose
   - signature: 40 53 48 83 EC 30 4C 89 01
     return_type: void
+    name: Ctor2
     parameters:
     - type: hkaPose*
       name: this
@@ -42792,16 +43458,19 @@ structs:
       name: numBones
   - signature: E8 ?? ?? ?? ?? 48 8B 4C 24 ?? 48 8B D0 E8 ?? ?? ?? ?? 48 83 C4 20
     return_type: hkArray_hkQsTransformf*
+    name: GetSyncedPoseLocalSpace
     parameters:
     - type: hkaPose*
       name: this
   - signature: 40 53 48 83 EC 20 48 8B D9 E8 ?? ?? ?? ?? 48 8D 43 18
     return_type: hkArray_hkQsTransformf*
+    name: GetSyncedPoseModelSpace
     parameters:
     - type: hkaPose*
       name: this
   - signature: 48 8B 01 4C 8B C1 4C 63 48 30 48 8B 02 48 8B 51 08
     return_type: void
+    name: SetPoseLocalSpace
     parameters:
     - type: hkaPose*
       name: this
@@ -42809,6 +43478,7 @@ structs:
       name: poseLocal
   - signature: 48 8B 01 4C 8B C1 4C 63 48 30 48 8B 02 48 8B 51 18
     return_type: void
+    name: SetPoseModelSpace
     parameters:
     - type: hkaPose*
       name: this
@@ -42816,16 +43486,19 @@ structs:
       name: poseModel
   - signature: 4C 8B DC 53 48 81 EC ?? ?? ?? ?? 80 79 39 00
     return_type: void
+    name: SyncLocalSpace
     parameters:
     - type: hkaPose*
       name: this
   - signature: 48 83 EC 18 80 79 38 00
     return_type: void
+    name: SyncModelSpace
     parameters:
     - type: hkaPose*
       name: this
   - signature: 4C 8B DC 53 55 56 57 41 54 41 56 48 81 EC
     return_type: hkQsTransformf*
+    name: AccessBoneLocalSpace
     parameters:
     - type: hkaPose*
       name: this
@@ -42833,6 +43506,7 @@ structs:
       name: boneIdx
   - signature: 48 8B C4 89 50 10 53 57
     return_type: hkQsTransformf*
+    name: AccessBoneModelSpace
     parameters:
     - type: hkaPose*
       name: this
@@ -42842,36 +43516,43 @@ structs:
       name: propagateOrNot
   - signature: E8 ?? ?? ?? ?? 4D 8B 4E 40
     return_type: hkArray_hkQsTransformf*
+    name: AccessSyncedPoseLocalSpace
     parameters:
     - type: hkaPose*
       name: this
   - signature: E8 ?? ?? ?? ?? 48 8B 8F ?? ?? ?? ?? 8B 58 08
     return_type: hkArray_hkQsTransformf*
+    name: AccessSyncedPoseModelSpace
     parameters:
     - type: hkaPose*
       name: this
   - signature: E8 ?? ?? ?? ?? EB 05 E8 ?? ?? ?? ?? 4D 8B 4E 40
     return_type: hkArray_hkQsTransformf*
+    name: AccessUnsyncedPoseLocalSpace
     parameters:
     - type: hkaPose*
       name: this
   - signature: 48 8B 01 4C 8B C9
     return_type: void
+    name: SetToReferencePose
     parameters:
     - type: hkaPose*
       name: this
   - signature: 48 89 5C 24 ?? 57 48 83 EC 20 48 8B 01 48 8B D9 48 63 78 30
     return_type: void
+    name: EnforceSkeletonConstraintsLocalSpace
     parameters:
     - type: hkaPose*
       name: this
   - signature: 40 53 48 83 EC 30 48 8B 01 48 8B D9 48 89 74 24
     return_type: void
+    name: EnforceSkeletonConstraintsModelSpace
     parameters:
     - type: hkaPose*
       name: this
   - signature: 48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 0F 28 05
     return_type: void
+    name: GetModelSpaceAabb
     parameters:
     - type: hkaPose*
       name: this
@@ -42879,6 +43560,7 @@ structs:
       name: aabbOut
   - signature: 48 89 5C 24 ?? 48 89 6C 24 ?? 56 57 41 56 48 83 EC 30 48 8B 01 49 8B E9
     return_type: void
+    name: Init
     parameters:
     - type: hkaPose*
       name: this
@@ -42890,6 +43572,7 @@ structs:
       name: pose
   - signature: E8 ?? ?? ?? ?? 0F 28 2F
     return_type: hkQsTransformf*
+    name: CalculateBoneModelSpace
     parameters:
     - type: hkaPose*
       name: this
@@ -42897,11 +43580,13 @@ structs:
       name: boneIdx
   - signature: 48 89 5C 24 ?? 48 8B 01 45 33 C0
     return_type: byte
+    name: CheckPoseValidity
     parameters:
     - type: hkaPose*
       name: this
   - signature: 48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC ?? 48 8B 01 33 FF
     return_type: byte
+    name: CheckPoseTransformsValidity
     parameters:
     - type: hkaPose*
       name: this
@@ -42970,6 +43655,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 0F 28 5D F0 44 0F 28 55
     return_type: void
+    name: get4x4ColumnMajor
     parameters:
     - type: hkQsTransformf*
       name: this
@@ -42977,6 +43663,7 @@ structs:
       name: p
   - signature: E9 ?? ?? ?? ?? CC CC CC CC CC CC CC CC CC CC CC 0F 28 02
     return_type: byte
+    name: set4x4ColumnMajor
     parameters:
     - type: hkQsTransformf*
       name: this
@@ -42984,6 +43671,7 @@ structs:
       name: p
   - signature: 40 53 48 81 EC ?? ?? ?? ?? 48 8B C2 48 8B D9 48 8B C8 48 8D 54 24 ?? E8 ?? ?? ?? ?? 0F 28 44 24 ?? 33 C0 38 84 24 ?? ?? ?? ?? 0F 28 4C 24 ?? 0F 29 03 0F 94 C0 0F 28 44 24 ?? 0F 29 43 20 0F 29 4B 10 48 81 C4 ?? ?? ?? ?? 5B C3 CC CC CC CC CC CC CC CC CC CC CC CC CC CC CC CC CC CC CC CC CC 48 83 EC 48
     return_type: byte
+    name: set
     parameters:
     - type: hkQsTransformf*
       name: this
@@ -42991,6 +43679,7 @@ structs:
       name: m
   - signature: 48 83 EC 48 0F 29 74 24 ?? 0F 28 31
     return_type: byte
+    name: isOk
     parameters:
     - type: hkQsTransformf*
       name: this
@@ -43033,6 +43722,7 @@ structs:
   member_functions:
   - signature: 48 89 5C 24 ?? 57 48 83 EC 20 48 8B F9 48 8B DA 48 8B 0D ?? ?? ?? ?? 48 8B 01 FF 50 20 4C 8B 0F 48 8B D3 4C 8B C0 48 8B CF 48 8B 5C 24 ?? 48 83 C4 20 5F 49 FF 61 40
     return_type: hkRootLevelContainer*
+    name: load
     parameters:
     - type: hkLoader*
       name: this
@@ -43050,6 +43740,7 @@ structs:
   member_functions:
   - signature: 48 89 5C 24 ?? 48 89 6C 24 ?? 57 48 83 EC 20 33 DB 48 8B EA
     return_type: __int64
+    name: findObjectByType
     parameters:
     - type: hkRootLevelContainer*
       name: this
@@ -43059,6 +43750,7 @@ structs:
       name: prevObject
   - signature: E8 ?? ?? ?? ?? 44 8B 45 1B
     return_type: __int64
+    name: findObjectByName
     parameters:
     - type: hkRootLevelContainer*
       name: this
@@ -43881,11 +44573,13 @@ structs:
   member_functions:
   - signature: E9 ?? ?? ?? ?? 45 33 C9 4C 8B C0 33 D2 B9 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 85 C0 74 5D
     return_type: void
+    name: Ctor
     parameters:
     - type: Component::GUI::AtkCollisionNode*
       name: this
   - signature: E8 ?? ?? ?? ?? 84 C0 75 1E FE C3
     return_type: byte
+    name: CheckCollisionAtCoords
     parameters:
     - type: Component::GUI::AtkCollisionNode*
       name: this
@@ -43931,6 +44625,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 4C 8B F0 BF
     return_type: Component::GUI::AtkResNode*
+    name: GetTextNodeById
     parameters:
     - type: Component::GUI::AtkComponentBase*
       name: this
@@ -43938,6 +44633,7 @@ structs:
       name: id
   - signature: E8 ?? ?? ?? ?? 8D 56 9C
     return_type: Component::GUI::AtkResNode*
+    name: GetImageNodeById
     parameters:
     - type: Component::GUI::AtkComponentBase*
       name: this
@@ -43945,6 +44641,7 @@ structs:
       name: id
   - signature: E8 ?? ?? ?? ?? 8B 53 FC
     return_type: Component::GUI::AtkResNode*
+    name: GetScrollBarNodeById
     parameters:
     - type: Component::GUI::AtkComponentBase*
       name: this
@@ -43952,6 +44649,7 @@ structs:
       name: id
   - signature: E9 ?? ?? ?? ?? 48 85 C0 74 61
     return_type: void
+    name: PlayTimelineAnimation
     parameters:
     - type: Component::GUI::AtkComponentBase*
       name: this
@@ -43959,6 +44657,7 @@ structs:
       name: labelId
   - signature: E8 ?? ?? ?? ?? 41 3A C6 74 22
     return_type: byte
+    name: IsAnimated
     parameters:
     - type: Component::GUI::AtkComponentBase*
       name: this
@@ -44024,6 +44723,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 83 F8 FF 74 40
     return_type: __int32
+    name: GetIconId
     parameters:
     - type: Component::GUI::AtkComponentDragDrop*
       name: this
@@ -44052,6 +44752,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 45 89 3E
     return_type: void
+    name: SelectItem
     parameters:
     - type: Component::GUI::AtkComponentDropDownList*
       name: this
@@ -44059,11 +44760,13 @@ structs:
       name: index
   - signature: E8 ?? ?? ?? ?? 88 9F ?? ?? ?? ?? E9
     return_type: void
+    name: DeselectItem
     parameters:
     - type: Component::GUI::AtkComponentDropDownList*
       name: this
   - signature: E8 ?? ?? ?? ?? 83 FD 18
     return_type: __int32
+    name: GetSelectedItemIndex
     parameters:
     - type: Component::GUI::AtkComponentDropDownList*
       name: this
@@ -44124,11 +44827,13 @@ structs:
   member_functions:
   - signature: 45 33 D2 48 8D 05 ?? ?? ?? ?? 4C 89 51 08
     return_type: void
+    name: Ctor
     parameters:
     - type: Component::GUI::AtkComponentGaugeBar*
       name: this
   - signature: E8 ?? ?? ?? ?? 49 8B 44 24 20 45 33 C9
     return_type: void
+    name: SetGaugeValue
     parameters:
     - type: Component::GUI::AtkComponentGaugeBar*
       name: this
@@ -44360,6 +45065,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 45 38 A4 3E
     return_type: void
+    name: SetItemLabel
     parameters:
     - type: Component::GUI::AtkComponentList*
       name: this
@@ -44369,6 +45075,7 @@ structs:
       name: text
   - signature: E8 ?? ?? ?? ?? 89 5C 24 28 48 8B 5C 24
     return_type: byte*
+    name: GetItemLabel
     parameters:
     - type: Component::GUI::AtkComponentList*
       name: this
@@ -44376,6 +45083,7 @@ structs:
       name: index
   - signature: 83 FA FF 0F 8E
     return_type: void
+    name: DispatchItemEvent
     parameters:
     - type: Component::GUI::AtkComponentList*
       name: this
@@ -44430,6 +45138,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 81 4E ?? ?? ?? ?? ?? EB 07
     return_type: void
+    name: SetValue
     parameters:
     - type: Component::GUI::AtkComponentNumericInput*
       name: this
@@ -44528,6 +45237,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 45 32 C0 8B D6
     return_type: void
+    name: SetText
     parameters:
     - type: Component::GUI::AtkComponentTextInput*
       name: this
@@ -44558,11 +45268,13 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 8B F8 48 85 C0 0F 84 ?? ?? ?? ?? 49 8B 0F
     return_type: void
+    name: Ctor
     parameters:
     - type: Component::GUI::AtkComponentTextNineGrid*
       name: this
   - signature: E8 ?? ?? ?? ?? 48 FF C7 48 83 C3 0C
     return_type: void
+    name: SetText
     parameters:
     - type: Component::GUI::AtkComponentTextNineGrid*
       name: this
@@ -44603,11 +45315,13 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 8B D8 45 85 ED
     return_type: Component::GUI::AtkComponentTreeListItem*
+    name: CreateItem
     parameters:
     - type: Component::GUI::AtkComponentTreeList*
       name: this
   - signature: E8 ?? ?? ?? ?? 44 38 60 45
     return_type: Component::GUI::AtkComponentTreeListItem*
+    name: GetItem
     parameters:
     - type: Component::GUI::AtkComponentTreeList*
       name: this
@@ -44615,6 +45329,7 @@ structs:
       name: index
   - signature: E8 ?? ?? ?? ?? 44 39 BD
     return_type: void
+    name: LoadAtkValues
     parameters:
     - type: Component::GUI::AtkComponentTreeList*
       name: this
@@ -44636,6 +45351,7 @@ structs:
       name: a9
   - signature: E8 ?? ?? ?? ?? 44 88 AB ?? ?? ?? ?? 80 4F 42 10
     return_type: void
+    name: ExpandGroupExclusively
     parameters:
     - type: Component::GUI::AtkComponentTreeList*
       name: this
@@ -44691,11 +45407,13 @@ structs:
   member_functions:
   - signature: E9 ?? ?? ?? ?? 45 33 C9 4C 8B C0 33 D2 B9 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 85 C0 0F 84 ?? ?? ?? ?? 48 8B C8 48 83 C4 20 5B E9 ?? ?? ?? ?? 45 33 C9 4C 8B C0 33 D2 B9 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 85 C0 74 5D
     return_type: void
+    name: Ctor
     parameters:
     - type: Component::GUI::AtkCounterNode*
       name: this
   - signature: E8 ?? ?? ?? ?? 48 8B 0E 8D 04 9B
     return_type: void
+    name: SetNumber
     parameters:
     - type: Component::GUI::AtkCounterNode*
       name: this
@@ -44703,6 +45421,7 @@ structs:
       name: number
   - signature: E8 ?? ?? ?? ?? 41 FF C5 49 83 C4 10
     return_type: void
+    name: SetText
     parameters:
     - type: Component::GUI::AtkCounterNode*
       name: this
@@ -44710,6 +45429,7 @@ structs:
       name: text
   - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 8D 41 FA
     return_type: void
+    name: UpdateWidth
     parameters:
     - type: Component::GUI::AtkCounterNode*
       name: this
@@ -44738,11 +45458,13 @@ structs:
   member_functions:
   - signature: E9 ?? ?? ?? ?? 45 33 C9 4C 8B C0 33 D2 B9 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 85 C0 0F 84 ?? ?? ?? ?? 48 8B C8 48 83 C4 20 5B E9 ?? ?? ?? ?? 45 33 C9 4C 8B C0 33 D2 B9 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 85 C0 0F 84 ?? ?? ?? ?? 48 8B C8 48 83 C4 20 5B E9 ?? ?? ?? ?? 45 33 C9 4C 8B C0 33 D2 B9 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 85 C0 0F 84 ?? ?? ?? ?? 48 8B C8 48 83 C4 20 5B E9 ?? ?? ?? ?? 45 33 C9 4C 8B C0 33 D2 B9 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 85 C0 0F 84 ?? ?? ?? ??
     return_type: void
+    name: Ctor
     parameters:
     - type: Component::GUI::AtkImageNode*
       name: this
   - signature: E8 ?? ?? ?? ?? 48 8B 8D ?? ?? ?? ?? 48 8B 71 08
     return_type: void
+    name: LoadTexture
     parameters:
     - type: Component::GUI::AtkImageNode*
       name: this
@@ -44752,6 +45474,7 @@ structs:
       name: version
   - signature: E8 ?? ?? ?? ?? 8D 43 76
     return_type: void
+    name: LoadIconTexture
     parameters:
     - type: Component::GUI::AtkImageNode*
       name: this
@@ -44761,6 +45484,7 @@ structs:
       name: version
   - signature: E8 ?? ?? ?? ?? 85 FF 78 1E
     return_type: void
+    name: UnloadTexture
     parameters:
     - type: Component::GUI::AtkImageNode*
       name: this
@@ -44886,6 +45610,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 84 C0 75 BA 40 84 FF
     return_type: byte
+    name: IsTextInputActive
     parameters:
     - type: Component::GUI::AtkModule*
       name: this
@@ -44926,6 +45651,7 @@ structs:
   member_functions:
   - signature: E9 ?? ?? ?? ?? 45 33 C9 4C 8B C0 33 D2 B9 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 85 C0 0F 84 ?? ?? ?? ?? 48 8B C8 48 83 C4 20 5B E9 ?? ?? ?? ?? 45 33 C9 4C 8B C0 33 D2 B9 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 85 C0 0F 84 ?? ?? ?? ?? 48 8B C8 48 83 C4 20 5B E9 ?? ?? ?? ?? 45 33 C9 4C 8B C0 33 D2 B9 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 85 C0 74 5D
     return_type: void
+    name: Ctor
     parameters:
     - type: Component::GUI::AtkNineGridNode*
       name: this
@@ -44983,26 +45709,31 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 3B F0 0F 85
     return_type: Component::GUI::AtkResNode*
+    name: GetFocus
     parameters:
     - type: Component::GUI::AtkStage*
       name: this
   - signature: E8 ?? ?? ?? ?? 48 8B 6C 24 ?? 80 BB
     return_type: void
+    name: ClearFocus
     parameters:
     - type: Component::GUI::AtkStage*
       name: this
   - signature: E8 ?? ?? ?? ?? 48 8B CB 4C 8B 70 50
     return_type: Component::GUI::NumberArrayData**
+    name: GetNumberArrayData
     parameters:
     - type: Component::GUI::AtkStage*
       name: this
   - signature: E8 ?? ?? ?? ?? 4C 8B 37
     return_type: Component::GUI::StringArrayData**
+    name: GetStringArrayData
     parameters:
     - type: Component::GUI::AtkStage*
       name: this
   - signature: E8 ?? ?? ?? ?? 4C 8B 70 10
     return_type: Component::GUI::ExtendArrayData**
+    name: GetExtendArrayData
     parameters:
     - type: Component::GUI::AtkStage*
       name: this
@@ -45257,6 +45988,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 0F B6 44 24 ?? 48 89 9F
     return_type: byte
+    name: ChangeUiMode
     parameters:
     - type: Client::UI::RaptureAtkModule*
       name: this
@@ -45264,6 +45996,7 @@ structs:
       name: uiMode
   - signature: E8 ?? ?? ?? ?? 48 39 77 28 0F 84
     return_type: byte
+    name: IncRefNumberArrayData
     parameters:
     - type: Client::UI::RaptureAtkModule*
       name: this
@@ -45271,6 +46004,7 @@ structs:
       name: index
   - signature: E8 ?? ?? ?? ?? 48 8B 75 28
     return_type: byte
+    name: DecRefNumberArrayData
     parameters:
     - type: Client::UI::RaptureAtkModule*
       name: this
@@ -45278,6 +46012,7 @@ structs:
       name: index
   - signature: E8 ?? ?? ?? ?? 49 83 7E ?? ?? 74 0D
     return_type: byte
+    name: IncRefStringArrayData
     parameters:
     - type: Client::UI::RaptureAtkModule*
       name: this
@@ -45285,6 +46020,7 @@ structs:
       name: index
   - signature: E8 ?? ?? ?? ?? 48 8B 46 58 48 85 C0
     return_type: byte
+    name: DecRefStringArrayData
     parameters:
     - type: Client::UI::RaptureAtkModule*
       name: this
@@ -45292,6 +46028,7 @@ structs:
       name: index
   - signature: E8 ?? ?? ?? ?? 66 89 46 50
     return_type: unsigned __int16
+    name: OpenAddon
     parameters:
     - type: Client::UI::RaptureAtkModule*
       name: this
@@ -45311,6 +46048,7 @@ structs:
       name: unk2
   - signature: E8 ?? ?? ?? ?? 0F B7 C0 48 83 C4 60
     return_type: unsigned __int16
+    name: OpenAddonByAgent
     parameters:
     - type: Client::UI::RaptureAtkModule*
       name: this
@@ -45407,11 +46145,13 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 41 80 A6 ?? ?? ?? ?? ?? 48 8D 05
     return_type: void
+    name: Ctor
     parameters:
     - type: Client::UI::Misc::CharaView*
       name: this
   - signature: 0F 10 02 0F 11 41 48
     return_type: void
+    name: SetCustomizeData
     parameters:
     - type: Client::UI::Misc::CharaView*
       name: this
@@ -45419,6 +46159,7 @@ structs:
       name: data
   - signature: E8 ?? ?? ?? ?? EB 27 8B D6
     return_type: void
+    name: Render
     parameters:
     - type: Client::UI::Misc::CharaView*
       name: this
@@ -45426,16 +46167,19 @@ structs:
       name: frameIndex
   - signature: E8 ?? ?? ?? ?? 48 85 C0 75 05 0F 57 C9
     return_type: Client::Game::Character::Character*
+    name: GetCharacter
     parameters:
     - type: Client::UI::Misc::CharaView*
       name: this
   - signature: E8 ?? ?? ?? ?? 49 8D 4F 10 88 85
     return_type: byte
+    name: IsAnimationPaused
     parameters:
     - type: Client::UI::Misc::CharaView*
       name: this
   - signature: E8 ?? ?? ?? ?? B2 01 48 8B CE E8 ?? ?? ?? ?? 32 C0
     return_type: void
+    name: ToggleAnimationPlayback
     parameters:
     - type: Client::UI::Misc::CharaView*
       name: this
@@ -45443,6 +46187,7 @@ structs:
       name: paused
   - signature: E8 ?? ?? ?? ?? 48 8B 47 28 BA
     return_type: void
+    name: UnequipGear
     parameters:
     - type: Client::UI::Misc::CharaView*
       name: this
@@ -45452,6 +46197,7 @@ structs:
       name: characterLoaded
   - signature: E8 ?? ?? ?? ?? 45 33 DB FF C3
     return_type: void
+    name: SetItemSlotData
     parameters:
     - type: Client::UI::Misc::CharaView*
       name: this
@@ -45467,6 +46213,7 @@ structs:
       name: a6
   - signature: E8 ?? ?? ?? ?? B1 01 0F B6 86
     return_type: void
+    name: ToggleDrawWeapon
     parameters:
     - type: Client::UI::Misc::CharaView*
       name: this
@@ -45617,11 +46364,13 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 89 83 ?? ?? ?? ?? EB 0B
     return_type: void
+    name: Ctor
     parameters:
     - type: Client::UI::Misc::CharaViewPortrait*
       name: this
   - signature: E8 ?? ?? ?? ?? 48 8B 43 10 C6 80 ?? ?? ?? ?? ?? 48 8B 4B 10
     return_type: void
+    name: Initialize
     parameters:
     - type: Client::UI::Misc::CharaViewPortrait*
       name: this
@@ -45637,11 +46386,13 @@ structs:
       name: a6
   - signature: E8 ?? ?? ?? ?? 49 8B 4C 24 ?? 48 8B 01 FF 90
     return_type: void
+    name: ResetCamera
     parameters:
     - type: Client::UI::Misc::CharaViewPortrait*
       name: this
   - signature: E8 ?? ?? ?? ?? 0F B7 43 10 48 8D 4C 24
     return_type: void
+    name: SetCameraPosition
     parameters:
     - type: Client::UI::Misc::CharaViewPortrait*
       name: this
@@ -45651,11 +46402,13 @@ structs:
       name: target
   - signature: E8 ?? ?? ?? ?? 0F B7 93 ?? ?? ?? ?? 0F 28 D0
     return_type: float
+    name: GetAnimationTime
     parameters:
     - type: Client::UI::Misc::CharaViewPortrait*
       name: this
   - signature: E8 ?? ?? ?? ?? 0F B6 96 ?? ?? ?? ?? 48 8B 8E ?? ?? ?? ?? E8 ?? ?? ?? ?? BB
     return_type: void
+    name: SetAmbientLightingColor
     parameters:
     - type: Client::UI::Misc::CharaViewPortrait*
       name: this
@@ -45667,6 +46420,7 @@ structs:
       name: blue
   - signature: E8 ?? ?? ?? ?? BB ?? ?? ?? ?? 48 8D 45 C7 8B D3 33 C9 0F 1F 40 00
     return_type: void
+    name: SetAmbientLightingBrightness
     parameters:
     - type: Client::UI::Misc::CharaViewPortrait*
       name: this
@@ -45674,6 +46428,7 @@ structs:
       name: brightness
   - signature: E8 ?? ?? ?? ?? 0F B6 96 ?? ?? ?? ?? 48 8B 8E ?? ?? ?? ?? E8 ?? ?? ?? ?? 44 0F B7 86
     return_type: void
+    name: SetDirectionalLightingColor
     parameters:
     - type: Client::UI::Misc::CharaViewPortrait*
       name: this
@@ -45685,6 +46440,7 @@ structs:
       name: blue
   - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8D 4F 20 E8 ?? ?? ?? ?? 44 0F B7 83
     return_type: void
+    name: SetDirectionalLightingBrightness
     parameters:
     - type: Client::UI::Misc::CharaViewPortrait*
       name: this
@@ -45692,6 +46448,7 @@ structs:
       name: brightness
   - signature: E8 ?? ?? ?? ?? EB 5A 48 8D 4F 20
     return_type: void
+    name: SetDirectionalLightingAngle
     parameters:
     - type: Client::UI::Misc::CharaViewPortrait*
       name: this
@@ -45701,6 +46458,7 @@ structs:
       name: horizontal
   - signature: E8 ?? ?? ?? ?? EB 17 48 8D 4F 20
     return_type: void
+    name: SetCameraZoom
     parameters:
     - type: Client::UI::Misc::CharaViewPortrait*
       name: this
@@ -45708,6 +46466,7 @@ structs:
       name: zoom
   - signature: E8 ?? ?? ?? ?? 41 B5 01 49 63 46 48
     return_type: void
+    name: SetBackground
     parameters:
     - type: Client::UI::Misc::CharaViewPortrait*
       name: this
@@ -45715,6 +46474,7 @@ structs:
       name: id
   - signature: E8 ?? ?? ?? ?? 48 89 BC 24 ?? ?? ?? ?? 84 DB
     return_type: void
+    name: SetPose
     parameters:
     - type: Client::UI::Misc::CharaViewPortrait*
       name: this
@@ -45722,6 +46482,7 @@ structs:
       name: id
   - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 0F B7 93
     return_type: void
+    name: SetPoseTimed
     parameters:
     - type: Client::UI::Misc::CharaViewPortrait*
       name: this
@@ -45731,6 +46492,7 @@ structs:
       name: time
   - signature: E8 ?? ?? ?? ?? 84 DB 0F 84 ?? ?? ?? ?? 48 63 87 ?? ?? ?? ?? 45 33 C9
     return_type: void
+    name: SetExpression
     parameters:
     - type: Client::UI::Misc::CharaViewPortrait*
       name: this
@@ -45738,6 +46500,7 @@ structs:
       name: id
   - signature: E8 ?? ?? ?? ?? 0F B7 45 F2
     return_type: __int64
+    name: ExportPortraitData
     parameters:
     - type: Client::UI::Misc::CharaViewPortrait*
       name: this
@@ -45745,6 +46508,7 @@ structs:
       name: output
   - signature: E8 ?? ?? ?? ?? 83 BE ?? ?? ?? ?? ?? 4C 8B B4 24 ?? ?? ?? ?? 74 2D
     return_type: __int64
+    name: ImportPortraitData
     parameters:
     - type: Client::UI::Misc::CharaViewPortrait*
       name: this
@@ -45752,11 +46516,13 @@ structs:
       name: input
   - signature: E8 ?? ?? ?? ?? F3 0F 10 53 ?? 48 8B CF
     return_type: void
+    name: ApplyCameraPositions
     parameters:
     - type: Client::UI::Misc::CharaViewPortrait*
       name: this
   - signature: E8 ?? ?? ?? ?? 0F B7 43 24 66 85 C0 75 05 0F 28 D6 EB 35 0F B7 D0 8B CA 8B C2 C1 E9 0A 81 E2 ?? ?? ?? ?? 83 E1 1F C1 E0 10 C1 E1 17 25 ?? ?? ?? ?? 81 C1 ?? ?? ?? ?? C1 E2 0D 0B C8 0B CA 89 4C 24 40
     return_type: void
+    name: SetHeadDirection
     parameters:
     - type: Client::UI::Misc::CharaViewPortrait*
       name: this
@@ -45766,6 +46532,7 @@ structs:
       name: a3
   - signature: E8 ?? ?? ?? ?? 44 0F B6 4B ?? 48 8B CF 44 0F B6 43 ?? 0F B6 53 26 E8 ?? ?? ?? ?? 48 8B 4F 18 0F B6 43 29 F3 0F 10 35 ?? ?? ?? ?? 88 87 ?? ?? ?? ?? 48 85 C9 74 13 0F B6 C0 66 0F 6E C8 0F 5B C9 F3 0F 5E CE E8 ?? ?? ?? ?? 0F B7 43 2C 0F B7 53 2A 48 8B 4F 18 66 89 97 ?? ?? ?? ?? 66 89 87 ?? ?? ?? ?? 48 85 C9 74 17 98 66 0F 6E D0 0F BF C2 0F 5B D2 66 0F 6E C8 0F 5B C9 E8 ?? ?? ?? ?? 44 0F B6 4B ?? 48 8B CF 44 0F B6 43 ?? 0F B6 53 2E E8 ?? ?? ?? ?? 48 8B 4F 18 0F B6 43 31 88 87 ?? ?? ?? ?? 48 85 C9 74 13 0F B6 C0 66 0F 6E C8 0F 5B C9 F3 0F 5E CE E8 ?? ?? ?? ?? 0F B7 43 32 48 8B 5C 24
     return_type: void
+    name: SetEyeDirection
     parameters:
     - type: Client::UI::Misc::CharaViewPortrait*
       name: this
@@ -45775,16 +46542,19 @@ structs:
       name: a3
   - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8B 8E ?? ?? ?? ?? 48 8B 01
     return_type: void
+    name: ResetEyeDirection
     parameters:
     - type: Client::UI::Misc::CharaViewPortrait*
       name: this
   - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8B 8E ?? ?? ?? ?? E8 ?? ?? ?? ?? E9
     return_type: void
+    name: ResetHeadDirection
     parameters:
     - type: Client::UI::Misc::CharaViewPortrait*
       name: this
   - signature: E8 ?? ?? ?? ?? 48 8B DD BA ?? ?? ?? ?? 48 C1 E3 04 49 03 DE
     return_type: void
+    name: ToggleCharacterVisibility
     parameters:
     - type: Client::UI::Misc::CharaViewPortrait*
       name: this
@@ -45792,6 +46562,7 @@ structs:
       name: visible
   - signature: E8 ?? ?? ?? ?? 0F B6 45 92 C7 83
     return_type: void
+    name: ToggleGearVisibility
     parameters:
     - type: Client::UI::Misc::CharaViewPortrait*
       name: this
@@ -45893,6 +46664,7 @@ structs:
   member_functions:
   - signature: E9 ?? ?? ?? ?? 48 8D 91 ?? ?? ?? ?? E9
     return_type: byte
+    name: ExecuteSlot
     parameters:
     - type: Client::UI::Misc::RaptureHotbarModule*
       name: this
@@ -45900,6 +46672,7 @@ structs:
       name: hotbarSlot
   - signature: 83 FA 12 77 28 41 83 F8 10
     return_type: byte
+    name: ExecuteSlotById
     parameters:
     - type: Client::UI::Misc::RaptureHotbarModule*
       name: this
@@ -45909,6 +46682,7 @@ structs:
       name: slotId
   - signature: E8 ?? ?? ?? ?? EB 1A FF 50 68 44 0F B6 83
     return_type: void
+    name: DeleteMacroSlots
     parameters:
     - type: Client::UI::Misc::RaptureHotbarModule*
       name: this
@@ -45918,6 +46692,7 @@ structs:
       name: macroIndex
   - signature: E8 ?? ?? ?? ?? 8B 83 ?? ?? ?? ?? 39 87
     return_type: void
+    name: ReloadMacroSlots
     parameters:
     - type: Client::UI::Misc::RaptureHotbarModule*
       name: this
@@ -45927,6 +46702,7 @@ structs:
       name: macroIndex
   - signature: E8 ?? ?? ?? ?? 49 8B 4D 40 48 8B 01 FF 50 40
     return_type: void
+    name: ReloadGearsetSlots
     parameters:
     - type: Client::UI::Misc::RaptureHotbarModule*
       name: this
@@ -45934,6 +46710,7 @@ structs:
       name: gearsetId
   - signature: E8 ?? ?? ?? ?? 48 8B 4E 10 48 8B 01 FF 50 40 48 8B 5C 24
     return_type: void
+    name: ReassignGearsetId
     parameters:
     - type: Client::UI::Misc::RaptureHotbarModule*
       name: this
@@ -45943,6 +46720,7 @@ structs:
       name: oldGearsetId
   - signature: E8 ?? ?? ?? ?? 48 8B 9C 24 ?? ?? ?? ?? 32 C0 48 8B 4C 24
     return_type: void
+    name: DeleteGearsetSlots
     parameters:
     - type: Client::UI::Misc::RaptureHotbarModule*
       name: this
@@ -45950,11 +46728,13 @@ structs:
       name: gearsetId
   - signature: E8 ?? ?? ?? ?? 8B C5 48 8B 4C 24 ?? 48 33 CC E8 ?? ?? ?? ?? 48 8B 9C 24
     return_type: void
+    name: ReloadAllMacroSlots
     parameters:
     - type: Client::UI::Misc::RaptureHotbarModule*
       name: this
   - signature: 83 FA 12 77 23
     return_type: Client::UI::Misc::HotBarSlot*
+    name: GetSlotById
     parameters:
     - type: Client::UI::Misc::RaptureHotbarModule*
       name: this
@@ -45964,6 +46744,7 @@ structs:
       name: slotId
   - signature: 40 53 48 83 EC 20 44 0F B6 CA 41 8B D8
     return_type: byte
+    name: IsActionHighlighted
     parameters:
     - type: Client::UI::Misc::RaptureHotbarModule*
       name: this
@@ -45973,6 +46754,7 @@ structs:
       name: commandId
   - signature: E8 ?? ?? ?? ?? B0 01 EB B9
     return_type: void
+    name: SetAndSaveSlot
     parameters:
     - type: Client::UI::Misc::RaptureHotbarModule*
       name: this
@@ -45990,6 +46772,7 @@ structs:
       name: allowSaveToPvP
   - signature: E8 ?? ?? ?? ?? EB 62 83 7C 24
     return_type: byte
+    name: SetAndSaveFirstAvailableNormalSlot
     parameters:
     - type: Client::UI::Misc::RaptureHotbarModule*
       name: this
@@ -46001,6 +46784,7 @@ structs:
       name: commandId
   - signature: E8 ?? ?? ?? ?? EB 5D 83 7C 24
     return_type: byte
+    name: SetAndSaveFirstAvailableCrossSlot
     parameters:
     - type: Client::UI::Misc::RaptureHotbarModule*
       name: this
@@ -46012,6 +46796,7 @@ structs:
       name: commandId
   - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 83 FD 0A
     return_type: byte
+    name: SetAndSaveFirstGloballyAvailableNormalSlot
     parameters:
     - type: Client::UI::Misc::RaptureHotbarModule*
       name: this
@@ -46021,6 +46806,7 @@ structs:
       name: commandId
   - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 83 FD 08
     return_type: byte
+    name: SetAndSaveFirstGloballyAvailableCrossSlot
     parameters:
     - type: Client::UI::Misc::RaptureHotbarModule*
       name: this
@@ -46030,6 +46816,7 @@ structs:
       name: commandId
   - signature: E8 ?? ?? ?? ?? EB 57 48 8D 9F ?? ?? ?? ??
     return_type: void
+    name: WriteSavedSlot
     parameters:
     - type: Client::UI::Misc::RaptureHotbarModule*
       name: this
@@ -46047,6 +46834,7 @@ structs:
       name: isPvpSlot
   - signature: E8 ?? ?? ?? ?? FF C7 83 FF 10 7C E3
     return_type: void
+    name: ClearSavedSlotById
     parameters:
     - type: Client::UI::Misc::RaptureHotbarModule*
       name: this
@@ -46056,6 +46844,7 @@ structs:
       name: slotId
   - signature: E8 ?? ?? ?? ?? FF C7 83 FF 12
     return_type: void
+    name: LoadSavedHotbar
     parameters:
     - type: Client::UI::Misc::RaptureHotbarModule*
       name: this
@@ -46065,6 +46854,7 @@ structs:
       name: hotbarId
   - signature: 48 89 5C 24 ?? 57 48 83 EC 20 8B CA 41 0F B6 F8
     return_type: __int32
+    name: GetPvPSavedHotbarIndexForClassJobId
     parameters:
     - type: Client::UI::Misc::RaptureHotbarModule*
       name: this
@@ -46074,6 +46864,7 @@ structs:
       name: negOneOnInvalid
   - signature: E8 ?? ?? ?? ?? 41 0F B6 CD BA
     return_type: unsigned __int32
+    name: GetClassJobIdForSavedHotbarIndex
     parameters:
     - type: Client::UI::Misc::RaptureHotbarModule*
       name: this
@@ -46081,6 +46872,7 @@ structs:
       name: savedHotbarIndex
   - signature: E8 ?? ?? ?? ?? 80 7B 28 01 75 1C
     return_type: void
+    name: SetDutyActionsPresent
     parameters:
     - type: Client::UI::Misc::RaptureHotbarModule*
       name: this
@@ -46088,6 +46880,7 @@ structs:
       name: present
   - signature: E8 ?? ?? ?? ?? 42 8B 3C FB
     return_type: Client::UI::Misc::DutyActionSlot*
+    name: GetDutyActionSlot
     parameters:
     - type: Client::UI::Misc::RaptureHotbarModule*
       name: this
@@ -46095,6 +46888,7 @@ structs:
       name: index
   - signature: E8 ?? ?? ?? ?? 40 FE C5 4D 8D 76 04
     return_type: void
+    name: SetDutyActionSlot
     parameters:
     - type: Client::UI::Misc::RaptureHotbarModule*
       name: this
@@ -46104,6 +46898,7 @@ structs:
       name: actionId
   - signature: 48 83 EC 28 85 D2 78 25
     return_type: byte
+    name: ExecuteDutyActionSlot
     parameters:
     - type: Client::UI::Misc::RaptureHotbarModule*
       name: this
@@ -46256,6 +47051,7 @@ structs:
   member_functions:
   - signature: 40 53 56 41 57 48 83 EC 20 33 DB
     return_type: Client::UI::Agent::CharaSelectCharacterEntry*
+    name: GetCharacterEntryFromServer
     parameters:
     - type: Client::UI::Agent::LobbyData*
       name: this
@@ -46265,6 +47061,7 @@ structs:
       name: contentId
   - signature: E8 ?? ?? ?? ?? 48 85 C0 74 2C 48 8D 48 2C
     return_type: Client::UI::Agent::CharaSelectCharacterEntry*
+    name: GetCharacterEntryByIndex
     parameters:
     - type: Client::UI::Agent::LobbyData*
       name: this
@@ -46321,6 +47118,7 @@ structs:
   member_functions:
   - signature: 0F B6 41 ?? 84 05 ?? ?? ?? ?? 0F 94 C0
     return_type: byte
+    name: IsNotLocked
     parameters:
     - type: Client::UI::Agent::CharaSelectCharacterEntry*
       name: this
@@ -46447,11 +47245,13 @@ structs:
   member_functions:
   - signature: 4C 8B DC 49 89 5B ?? 49 89 73 ?? 55 57 41 55
     return_type: byte
+    name: LoadTexFiles
     parameters:
     - type: Client::System::Resource::Handle::MaterialResourceHandle*
       name: this
   - signature: 48 89 5C 24 ?? 57 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 44 0F B7 89
     return_type: byte
+    name: LoadShpkFiles
     parameters:
     - type: Client::System::Resource::Handle::MaterialResourceHandle*
       name: this
@@ -46474,6 +47274,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 44 8B CD 48 89 44 24
     return_type: byte*
+    name: GetMaterialFileNameBySlot
     parameters:
     - type: Client::System::Resource::Handle::ModelResourceHandle*
       name: this
@@ -46639,21 +47440,25 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 80 7B 1D 01
     return_type: Client::UI::UIModule*
+    name: GetUiModule
     parameters:
     - type: Client::System::Framework::Framework*
       name: this
   - signature: E8 ?? ?? ?? ?? 4C 8B 44 24 ?? 48 8B C8 48 8B D3
     return_type: Client::UI::UIClipboard*
+    name: GetUIClipboard
     parameters:
     - type: Client::System::Framework::Framework*
       name: this
   - signature: 80 B9 ?? ?? ?? ?? 00 74 ?? 48 8B 81 ?? ?? ?? ?? C3
     return_type: Client::Network::NetworkModuleProxy*
+    name: GetNetworkModuleProxy
     parameters:
     - type: Client::System::Framework::Framework*
       name: this
   - signature: E8 ?? ?? ?? ?? 88 43 08 84 C0 74 16
     return_type: byte
+    name: IsSteamApiInitialized
     parameters:
     - type: Client::System::Framework::Framework*
       name: this
@@ -46969,11 +47774,13 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 40 F6 C7 01 74 3A 40 F6 C7 04 75 27 48 85 DB 74 2F 48 8B 05 ?? ?? ?? ?? 48 8B D3 48 8B 48 30
     return_type: void
+    name: Destroy
     parameters:
     - type: Client::Graphics::Scene::CharacterBase*
       name: this
   - signature: 40 55 56 41 56 48 83 EC ?? 80 BA
     return_type: Client::Graphics::Kernel::Texture*
+    name: PrepareColorTable
     parameters:
     - type: Client::Graphics::Scene::CharacterBase*
       name: this
@@ -46983,6 +47790,7 @@ structs:
       name: stainId
   - signature: E8 ?? ?? ?? ?? 49 8B DF 48 8B 0D
     return_type: void
+    name: ReadStainingTemplate
     parameters:
     - type: Client::Graphics::Scene::CharacterBase*
       name: this
@@ -47026,6 +47834,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 41 0F 10 07
     return_type: byte
+    name: SetupFromData
     parameters:
     - type: Client::Graphics::Scene::Demihuman*
       name: this
@@ -47146,6 +47955,7 @@ structs:
   member_functions:
   - signature: 48 8B ?? 53 55 57 48 83 ?? ?? 48 8B
     return_type: byte
+    name: SetupVisor
     parameters:
     - type: Client::Graphics::Scene::Human*
       name: this
@@ -47155,6 +47965,7 @@ structs:
       name: visorState
   - signature: E8 ?? ?? ?? ?? 41 0F B6 C5 66 41 89 86
     return_type: byte
+    name: UpdateDrawData
     parameters:
     - type: Client::Graphics::Scene::Human*
       name: this
@@ -47164,6 +47975,7 @@ structs:
       name: skipEquipment
   - signature: 48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 48 8B F9 48 8B EA 48 81 C1
     return_type: byte
+    name: SetupFromCharacterData
     parameters:
     - type: Client::Graphics::Scene::Human*
       name: this
@@ -47194,6 +48006,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 33 C0 48 8D 4D
     return_type: byte
+    name: SetupFromData
     parameters:
     - type: Client::Graphics::Scene::Monster*
       name: this
@@ -47494,11 +48307,13 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 44 8B B3 ?? ?? ?? ?? 33 FF
     return_type: byte
+    name: IsInInstanceArea
     parameters:
     - type: Client::Game::GameMain*
       name: this
   - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 8B 44 24 60 48 8D 8D
     return_type: void
+    name: QueueActiveFestivals
     parameters:
     - type: Client::Game::GameMain*
       name: this
@@ -47512,6 +48327,7 @@ structs:
       name: festival4
   - signature: E8 ?? ?? ?? ?? 80 63 50 FE
     return_type: void
+    name: SetActiveFestivals
     parameters:
     - type: Client::Game::GameMain*
       name: this
@@ -47553,6 +48369,7 @@ structs:
   member_functions:
   - signature: 40 56 57 48 83 EC 38 0F B6 FA
     return_type: __int32
+    name: GetPlotIcon
     parameters:
     - type: Client::Game::Housing::HousingOutdoorTerritory*
       name: this
@@ -47764,11 +48581,13 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 49 3B C7 0F 84
     return_type: unsigned __int64
+    name: GetTargetId
     parameters:
     - type: Client::Game::Character::Character*
       name: this
   - signature: E8 ?? ?? ?? ?? 48 3B FD 74 36
     return_type: void
+    name: SetTargetId
     parameters:
     - type: Client::Game::Character::Character*
       name: this
@@ -47776,11 +48595,13 @@ structs:
       name: id
   - signature: E8 ?? ?? ?? ?? 49 3B C5
     return_type: Client::Game::Object::GameObjectID
+    name: GetSoftTargetId
     parameters:
     - type: Client::Game::Character::Character*
       name: this
   - signature: E8 ?? ?? ?? ?? B8 ?? ?? ?? ?? 4C 3B F0
     return_type: void
+    name: SetSoftTargetId
     parameters:
     - type: Client::Game::Character::Character*
       name: this
@@ -47788,6 +48609,7 @@ structs:
       name: id
   - signature: E8 ?? ?? ?? ?? 48 8B 4F ?? E8 ?? ?? ?? ?? 48 8B 4C 24 ??
     return_type: void
+    name: SetMode
     parameters:
     - type: Client::Game::Character::Character*
       name: this
@@ -47797,11 +48619,13 @@ structs:
       name: modeParam
   - signature: E8 ?? ?? ?? ?? 48 85 C0 48 0F 45 F8
     return_type: Client::Game::Character::Character*
+    name: GetParentCharacter
     parameters:
     - type: Client::Game::Character::Character*
       name: this
   - signature: E8 ?? ?? ?? ?? F3 0F 59 C7 48 8B CE
     return_type: float
+    name: CalculateHeight
     parameters:
     - type: Client::Game::Character::Character*
       name: this
@@ -47835,6 +48659,7 @@ structs:
   member_functions:
   - signature: 48 89 5C 24 ?? 41 54 41 56 41 57 48 83 EC ?? 4D 8B F8
     return_type: void
+    name: SetupOrnament
     parameters:
     - type: Client::Game::Character::Ornament*
       name: this
@@ -48318,6 +49143,7 @@ structs:
   member_functions:
   - signature: 48 89 5C 24 ?? 57 48 83 EC 20 48 8B DA 48 8B F9 48 8B 52 38
     return_type: void
+    name: Ctor1
     parameters:
     - type: hkaDefaultAnimationControl*
       name: this
@@ -49555,6 +50381,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 84 C0 74 07 C6 86 ?? ?? ?? ?? ?? 48 8B 8C 24
     return_type: void
+    name: UpdateCharaSelectDisplay
     parameters:
     - type: Client::UI::Agent::AgentLobby*
       name: this
@@ -49564,6 +50391,7 @@ structs:
       name: a2
   - signature: E8 ?? ?? ?? ?? EB 4A 84 C0
     return_type: void
+    name: OpenLoginWaitDialog
     parameters:
     - type: Client::UI::Agent::AgentLobby*
       name: this
@@ -49585,6 +50413,7 @@ structs:
   member_functions:
   - signature: 48 89 5C 24 ?? 57 48 83 EC 30 8B FA 66 44 89 4C 24
     return_type: void
+    name: OpenForGearset
     parameters:
     - type: Client::UI::Agent::AgentMiragePrismMiragePlate*
       name: this
@@ -49744,21 +50573,25 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 8B D0 48 85 C0 74 ?? 8D 43
     return_type: Client::Game::InstanceContent::ContentDirector*
+    name: GetContentDirector
     parameters:
     - type: Client::Game::Event::EventFramework*
       name: this
   - signature: E8 ?? ?? ?? ?? 0F B6 98
     return_type: Client::Game::InstanceContent::InstanceContentDirector*
+    name: GetInstanceContentDirector
     parameters:
     - type: Client::Game::Event::EventFramework*
       name: this
   - signature: E8 ?? ?? ?? ?? 48 8B D0 48 85 C0 74 ?? 0F B6 88
     return_type: Client::Game::InstanceContent::PublicContentDirector*
+    name: GetPublicContentDirector
     parameters:
     - type: Client::Game::Event::EventFramework*
       name: this
   - signature: E8 ?? ?? ?? ?? 32 C9 0F B6 D9
     return_type: Client::Game::Event::EventHandler*
+    name: GetEventHandlerById
     parameters:
     - type: Client::Game::Event::EventFramework*
       name: this

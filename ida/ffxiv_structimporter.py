@@ -35,11 +35,12 @@ class DefinedVFunc:
         self.parameters = parameters
 
 class DefinedMemFunc:
-    def __init__(self, signature, return_type, parameters):
-        # type: (str, str, list[DefinedFuncParam]) -> None
+    def __init__(self, signature, return_type, parameters, name):
+        # type: (str, str, list[DefinedFuncParam], str) -> None
         self.signature = signature
         self.return_type = return_type
         self.parameters = parameters
+        self.name = name
 
 class DefinedField(DefinedFuncParam):
     def __init__(self, name, type, offset):
@@ -127,8 +128,8 @@ class BaseApi:
         """
     
     @abstractmethod
-    def update_member_func(self, member_func):
-        # type: (DefinedMemFunc) -> None
+    def update_member_func(self, member_func, struct):
+        # type: (DefinedMemFunc, DefinedStruct) -> None
         """
         Updates a member function in the database.
         """
@@ -142,7 +143,7 @@ class BaseApi:
     
     def get_yaml(self):
         # type: () -> DefinedExport
-        dic = safe_load(open(self.get_file_path))
+        dic = safe_load(open(self.get_file_path)) # type: dict[str, dict[str, list[dict[str, str | int | list[dict[str, str | int]]]]]]
         enums = []
         structs = []
         for enum in dic["enums"]:
@@ -170,7 +171,7 @@ class BaseApi:
                 parameters = []
                 for param in memfunc["parameters"]:
                     parameters.append(DefinedFuncParam(param["name"], param["type"]))
-                member_functions.append(DefinedMemFunc(memfunc["signature"], memfunc["return_type"], parameters))
+                member_functions.append(DefinedMemFunc(memfunc["signature"], memfunc["return_type"], parameters, memfunc["name"]))
             if "size" in struct:
                 structs.append(DefinedStruct(struct["name"], struct["type"], struct["namespace"], fields, struct["size"], virtual_functions, member_functions, struct["union"]))
             else:
@@ -190,6 +191,7 @@ if api is None:
         import ida_search
         import ida_ida
         import ida_typeinf
+        import ida_funcs
     except ImportError:
         print("Warning: Unable to load IDA")
     else:
@@ -285,6 +287,37 @@ if api is None:
             def search_binary(self, ea, pattern, flag):
                 # type: (int, str, int) -> int
                 return ida_search.find_binary(ea, flag & 1 and ida_ida.cvar.inf.max_ea or ida_ida.cvar.inf.min_ea, pattern, 16, flag)
+            
+            def get_func_ea(self, pattern):
+                # type: (str) -> int
+                ea = self.search_binary(0, pattern, ida_search.SEARCH_DOWN)
+
+                if ida_funcs.get_func(ea) is None:
+                    finf = ida_funcs.func_t()
+                    finf.start_ea = ea
+                    finf.end_ea = idc.BADADDR
+                    ida_funcs.add_func_ex(finf)
+
+                if ida_funcs.get_func(ea).start_ea == ea:
+                    return ea
+                mnem = idc.print_insn_mnem(ea)
+                if not mnem:
+                    return idc.BADADDR
+                
+                opType0 = idc.get_operand_type(ea, 0)
+                if mnem == "jmp" or mnem == "call" or mnem[0] == 'j':
+                    if opType0 != idc.o_near and opType0 != idc.o_mem:
+                        print("Error: Can't follow opType0 {0}".format(self.opTypeAsName(opType0)))
+                        return idc.BADADDR
+                    return idc.get_operand_value(ea, 0)
+                
+                if idc.next_head(ea) == ea + idc.get_item_size(ea) and idc.is_flow(idc.get_full_flags(idc.next_head(ea))):
+                    return idc.next_head(ea)
+                    
+            def opTypeAsName(self, n):
+                for item in [x for x in dir(idc) if x.startswith('o_')]:
+                    if getattr(idc, item) == n: return item
+                    
 
             @property
             def get_file_path(self):
@@ -343,6 +376,9 @@ if api is None:
                         ida_struct.add_struc_member(s, field_name, offset, self.get_idc_type_from_ida_type(field_type), None, self.get_size_from_ida_type(field_type))
                     meminfo = ida_struct.get_member_by_name(s, field_name)
                     ida_struct.set_member_tinfo(s, meminfo, 0, self.get_tinfo_from_type(field_type), 0)
+                for field in struct.fields:
+                    meminfo = ida_struct.get_member_by_name(s, field.name)
+                    field_type = self.clean_name(field.type)
                     if hasattr(field, 'size') and field.size != 0:
                         ida_struct.set_member_tinfo(s, meminfo, 0, self.get_tinfo_from_type(field_type, field.size), 0)
                 if struct.size is not None and struct.size != 0:
@@ -392,9 +428,12 @@ if api is None:
                     meminfo = ida_struct.get_member_by_name(s, "vtable")
                     ida_struct.set_member_tinfo(s, meminfo, 0, self.get_tinfo_from_type(fullname + "VTable*"), 0)
 
-            def update_member_func(self, member_func):
-                # type: (DefinedMemFunc) -> None
-                ea = self.search_binary(0, member_func.signature, ida_search.SEARCH_DOWN)
+            def update_member_func(self, member_func, struct):
+                # type: (DefinedMemFunc, DefinedStruct) -> None
+                ea = self.get_func_ea(member_func.signature)
+                if ida_funcs.get_func_name(ea) == f'sub_{ea:X}':
+                    func_name = f'{self.clean_name(struct.type)}_{member_func.name}'
+                    idc.set_name(ea, func_name)                    
                 field_type = self.clean_name(member_func.return_type) + " (__fastcall)("
                 for param in member_func.parameters:
                     field_type += " " + self.clean_name(param.type) + " " + param.name + ","
@@ -447,8 +486,8 @@ if api is None:
                 # type: (DefinedStruct) -> None
                 pass
             
-            def update_member_func(self, member_func):
-                # type: (DefinedMemFunc) -> None
+            def update_member_func(self, member_func, struct):
+                # type: (DefinedMemFunc, DefinedStruct) -> None
                 pass
             
 
@@ -497,6 +536,6 @@ def run():
         if struct.member_functions != []:
             print("{0} Updating member functions for {1}".format(get_time(), struct.type))
             for member_func in struct.member_functions:
-                api.update_member_func(member_func)
+                api.update_member_func(member_func, struct)
 
 run()
