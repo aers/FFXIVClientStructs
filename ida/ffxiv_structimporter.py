@@ -415,6 +415,15 @@ if api is None:
                     ida_struct.add_struc_member(s, field_name, offset, self.get_idc_type_from_ida_type('__int64'), None, self.get_size_from_ida_type('__int64'))
                     meminfo = ida_struct.get_member_by_name(s, field_name)
                     ida_struct.set_member_tinfo(s, meminfo, 0, self.get_tinfo_from_type(field_type), 0)
+                if struct.fields != [] and struct.fields[0].offset == 0:
+                    sub = ida_struct.get_struc(ida_struct.get_struc_id(self.clean_name(struct.fields[0].type) + "VTable"))
+                    if sub is not None:
+                        for mem in sub.members:
+                            subtif = ida_typeinf.tinfo_t()
+                            ida_struct.get_member_tinfo(subtif, mem)
+                            ida_struct.add_struc_member(s, ida_struct.get_member_name(mem.id), mem.soff, self.get_idc_type_from_ida_type("__int64"), None, self.get_size_from_ida_type("__int64"))
+                            meminfo = ida_struct.get_member_by_name(s, ida_struct.get_member_name(mem.id))
+                            ida_struct.set_member_tinfo(s, meminfo, 0, subtif, 0)
                 size = int(ida_struct.get_struc_size(s)/8)
                 for i in range(size):
                     if(ida_struct.get_member_id(s, i*8) == idc.BADADDR):
