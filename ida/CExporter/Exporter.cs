@@ -94,6 +94,16 @@ public class Exporter {
         }
     }
 
+    public static void VerifyNoNameOverlap(Dictionary<string, List<string>> check) {
+        foreach (var processedStruct in _structs) {
+            foreach (var processedStructField in processedStruct.Fields) {
+                if (!check.TryGetValue(processedStruct.StructType.FullSanitizeName(), out var checkStrings)) continue;
+                if (checkStrings.Contains(processedStructField.FieldName))
+                    ExporterStatics.ErrorList.Add($"Field name overlap detected in {processedStruct.StructType.FullSanitizeName()} with field {processedStructField.FieldName}");
+            }
+        }
+    }
+
     public static void Write(DirectoryInfo dir) {
         var structsOrdered = Array.Empty<ProcessedStruct>();
 // make sure we have all the dependencies for each struct before we write them

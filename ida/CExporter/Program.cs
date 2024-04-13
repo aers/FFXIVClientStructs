@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using YamlDotNet.Serialization;
 
 namespace CExporter;
 
@@ -17,6 +19,18 @@ public class Program {
         Exporter.ProcessTypes();
 
         Exporter.VerifyNoFieldOverlap();
+
+        var dataPath = Path.Combine(dir.FullName, "data.yml");
+
+        var data = new DeserializerBuilder()
+            .IgnoreUnmatchedProperties()
+            .Build()
+            .Deserialize<DataDefinition>(File.ReadAllText(dataPath));
+        var dataCheck = data.classes.SelectMany(t => t.Value != null && t.Value.funcs != null ? t.Value.funcs.Values.Select(f => new KeyValuePair<string, string>(t.Key, f)) : new List<KeyValuePair<string, string>>())
+            .Concat(data.classes.SelectMany(t => t.Value != null && t.Value.vfuncs != null ? t.Value.vfuncs.Values.Select(f => new KeyValuePair<string, string>(t.Key, f)) : new List<KeyValuePair<string, string>>()))
+            .GroupBy(t => t.Key).ToDictionary(t => t.Key, t => t.Select(f => f.Value).ToList());
+
+        Exporter.VerifyNoNameOverlap(dataCheck);
 
         foreach (var warning in ExporterStatics.WarningList) {
             Console.WriteLine(warning);
