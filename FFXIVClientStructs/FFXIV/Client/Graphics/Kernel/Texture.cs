@@ -15,7 +15,7 @@ public enum TextureFormat : uint {
 // renderer texture object, contains platform specific render objects (DX9/DX11/PS3/PS4)
 [StructLayout(LayoutKind.Explicit, Size = 0xC0)]
 public unsafe partial struct Texture {
-    [FieldOffset(0x00)] public void* vtbl;
+    [FieldOffset(0x00), CExportIgnore] public void* vtbl;
     [FieldOffset(0x20)] public Notifier Notifier;
     [FieldOffset(0x38)] public uint Width;
     [FieldOffset(0x3C)] public uint Height;

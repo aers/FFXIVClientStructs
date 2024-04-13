@@ -3607,9 +3607,6 @@ structs:
   union: False
   size: 16
   fields:
-  - type: __int64*
-    name: vtbl
-    offset: 0
   - type: Component::SteamApi::SteamCallbackBase::SteamCallbackFlags
     name: Flags
     offset: 8
@@ -6887,9 +6884,6 @@ structs:
   union: False
   size: 24
   fields:
-  - type: __int64*
-    name: vtbl
-    offset: 0
   - type: Client::UI::UIModule*
     name: UiModule
     offset: 8
@@ -8233,9 +8227,6 @@ structs:
   size: 56
   fields:
   - type: __int64
-    name: vtbl
-    offset: 0
-  - type: __int64
     name: Runner
     offset: 8
   - type: Client::System::Framework::Framework*
@@ -9386,9 +9377,6 @@ structs:
   union: False
   size: 192
   fields:
-  - type: __int64
-    name: vtbl
-    offset: 0
   - type: Client::Graphics::Kernel::Notifier
     name: Notifier
     offset: 32
