@@ -464,8 +464,10 @@ if api is None:
 
             def update_member_func(self, member_func, struct):
                 # type: (DefinedMemFunc, DefinedStruct) -> None
-                func_name = f'{self.clean_name(struct.type)}_{member_func.name}'
-                ea = self.get_func_ea_by_name(func_name) or self.get_func_ea_by_sig(member_func.signature) 
+                func_name = f'{self.clean_name(struct.type)}.{member_func.name}'
+                ea = self.get_func_ea_by_name(func_name) 
+                if ea == idc.BADADDR:
+                    ea = self.get_func_ea_by_sig(member_func.signature)
                 if ida_funcs.get_func_name(ea) == f'sub_{ea:X}':
                     idc.set_name(ea, func_name)
                 field_type = self.clean_name(member_func.return_type) + " (__fastcall)("
