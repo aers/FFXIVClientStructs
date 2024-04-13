@@ -195,7 +195,8 @@ if api is None:
     else:
         # noinspection PyUnresolvedReferences
         class IdaApi(BaseApi):
-            def get_idc_type_from_ida_type(self, type: str):
+            def get_idc_type_from_ida_type(self, type):
+                # type: (str) -> int
                 if(type == 'unsigned __int8' or type == '__int8' or type == 'bool' or type == 'char' or type == 'unsigned char' or type == 'byte'):
                     return ida_bytes.byte_flag()
                 elif(type == 'unsigned __int16' or type == '__int16'):
@@ -209,13 +210,15 @@ if api is None:
                 else:
                     return ida_bytes.stru_flag()
                 
-            def is_signed(self, type: str):
+            def is_signed(self, type):
+                # type: (str) -> bool
                 if(type == '__int8' or type == '__int16' or type == '__int32' or type == '__int64' or type == 'int' or type == '_DWORD'):
                     return True
                 else:
                     return False
 
-            def get_size_from_ida_type(self, type: str):
+            def get_size_from_ida_type(self, type):
+                # type: (str) -> int
                 if(type == 'unsigned __int8' or type == '__int8' or type == 'bool' or type == 'char' or type == 'unsigned char' or type == 'byte'):
                     return 1
                 elif(type == 'unsigned __int16' or type == '__int16'):
@@ -229,7 +232,8 @@ if api is None:
                 else:
                     return ida_struct.get_struc_size(ida_struct.get_struc_id(type))
                     
-            def get_tinfo_from_type(self, raw_type: str, array_size: int = 0):
+            def get_tinfo_from_type(self, raw_type, array_size = 0):
+                # type: (str, int) -> idaapi.tinfo_t
                 """
                 Retrieve a tinfo_t from a raw type string.
                 """
@@ -265,18 +269,21 @@ if api is None:
 
                 return ptr_tinfo
 
-            def get_opinfo_from_type(self, raw_type: str):
+            def get_opinfo_from_type(self, raw_type):
+                # type: (str) -> ida_nalt.opinfo_t
                 opinf = ida_nalt.opinfo_t()
                 opinf.tid = ida_struct.get_struc_id(raw_type)
                 return opinf
             
             def clean_name(self, name):
+                # type: (str) -> str
                 ret = name.replace("<", "__").replace("*>", "Ptr").replace(">", "").replace("*, ", "Ptr_").replace(", ","_")
                 if name.count("<") > 0:
                     return ret.replace(" ", "")
                 return ret
             
             def search_binary(self, ea, pattern, flag):
+                # type: (int, str, int) -> int
                 return ida_search.find_binary(ea, flag & 1 and ida_ida.cvar.inf.max_ea or ida_ida.cvar.inf.min_ea, pattern, 16, flag)
 
             @property
