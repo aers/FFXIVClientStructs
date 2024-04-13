@@ -1,13 +1,11 @@
-from ffxiv_idarename import load_data as ffxiv_idarename
-from ffxiv_structimporter import run as ffxiv_structimporter
-from ffxiv_exdgetters import run as ffxiv_exdgetters
+from os import path
 import idautils
 import ida_auto
 import idc
 
-ffxiv_idarename()
-ffxiv_exdgetters()
-ffxiv_structimporter()
+exec(open(path.join(path.dirname(path.realpath(__file__)), "ffxiv_idarename.py")).read())
+exec(open(path.join(path.dirname(path.realpath(__file__)), "ffxiv_exdgetters.py")).read())
+exec(open(path.join(path.dirname(path.realpath(__file__)), "ffxiv_structimporter.py")).read())
 
 for s in idautils.Segments():
     start = idc.get_segm_start(s)
