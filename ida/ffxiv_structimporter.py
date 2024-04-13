@@ -354,14 +354,18 @@ if api is None:
             def delete_struct(self, struct):
                 # type: (DefinedStruct) -> None
                 fullname = self.clean_name(struct.type)
-                ida_struct.del_struc(ida_struct.get_struc(ida_struct.get_struc_id(fullname)))
+                s = ida_struct.get_struc(ida_struct.get_struc_id(fullname))
+                if s is not None and ida_struct.get_struc_size(s) != 0:
+                    ida_struct.del_struc_members(s, 0, ida_struct.get_struc_last_offset(s) + 1)
                 ida_struct.del_struc(ida_struct.get_struc(ida_struct.get_struc_id(fullname + "VTable")))
                 ida_struct.del_struc(ida_struct.get_struc(ida_struct.get_struc_id(fullname + "Union")))
+
             
             def create_struct(self, struct):
                 # type: (DefinedStruct) -> None
                 fullname = self.clean_name(struct.type)
-                ida_struct.add_struc(-1, fullname, struct.union)
+                if ida_struct.get_struc_id(fullname) == idaapi.BADADDR:
+                    ida_struct.add_struc(-1, fullname, struct.union)
                 s = 0
                 if struct.virtual_functions != []:
                     s = ida_struct.add_struc(-1, fullname + "VTable")
