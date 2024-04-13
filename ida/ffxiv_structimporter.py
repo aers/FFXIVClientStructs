@@ -209,6 +209,8 @@ if api is None:
                     return ida_bytes.qword_flag()
                 elif(type == 'float'):
                     return ida_bytes.float_flag()
+                elif ida_struct.get_struc_id(type) == idaapi.BADADDR:
+                    return ida_bytes.enum_flag()
                 else:
                     return ida_bytes.stru_flag()
                 
@@ -271,10 +273,16 @@ if api is None:
 
                 return ptr_tinfo
 
-            def get_opinfo_from_type(self, raw_type):
+            def get_struct_opinfo_from_type(self, raw_type):
                 # type: (str) -> ida_nalt.opinfo_t
                 opinf = ida_nalt.opinfo_t()
                 opinf.tid = ida_struct.get_struc_id(raw_type)
+                return opinf
+            
+            def get_enum_opinfo_from_type(self, raw_type):
+                # type: (str) -> ida_nalt.opinfo_t
+                opinf = ida_nalt.opinfo_t()
+                opinf.ec.tid = ida_enum.get_enum(raw_type)
                 return opinf
             
             def clean_name(self, name):
@@ -371,7 +379,9 @@ if api is None:
                             field_type += " " + self.clean_name(param.type) + " " + param.name + ","
                         field_type = field_type[:-1] + ")"
                     if self.get_idc_type_from_ida_type(field_type) == ida_bytes.stru_flag():
-                        ida_struct.add_struc_member(s, field_name, offset, self.get_idc_type_from_ida_type(field_type), self.get_opinfo_from_type(field_type), self.get_size_from_ida_type(field_type))
+                        ida_struct.add_struc_member(s, field_name, offset, self.get_idc_type_from_ida_type(field_type), self.get_struct_opinfo_from_type(field_type), self.get_size_from_ida_type(field_type))
+                    if self.get_idc_type_from_ida_type(field_type) == ida_bytes.enum_flag():
+                        ida_struct.add_struc_member(s, field_name, offset, self.get_idc_type_from_ida_type(field_type), self.get_enum_opinfo_from_type(field_type), self.get_size_from_ida_type(field_type))
                     else:
                         ida_struct.add_struc_member(s, field_name, offset, self.get_idc_type_from_ida_type(field_type), None, self.get_size_from_ida_type(field_type))
                     meminfo = ida_struct.get_member_by_name(s, field_name)
@@ -413,13 +423,13 @@ if api is None:
                     field_type = self.clean_name(field.type)
                     field_name = field.name
                     if self.get_idc_type_from_ida_type(field_type) == ida_bytes.stru_flag():
-                        ida_struct.add_struc_member(union_struc, field_name, idaapi.BADADDR, self.get_idc_type_from_ida_type(field_type), self.get_opinfo_from_type(field_type), self.get_size_from_ida_type(field_type))
+                        ida_struct.add_struc_member(union_struc, field_name, idaapi.BADADDR, self.get_idc_type_from_ida_type(field_type), self.get_struct_opinfo_from_type(field_type), self.get_size_from_ida_type(field_type))
                     else:
                         ida_struct.add_struc_member(union_struc, field_name, idaapi.BADADDR, self.get_idc_type_from_ida_type(field_type), None, self.get_size_from_ida_type(field_type))
                     meminfo = ida_struct.get_member_by_name(union_struc, field_name)
                     ida_struct.set_member_tinfo(union_struc, meminfo, 0, self.get_tinfo_from_type(field_type), 0)
                     s = ida_struct.get_struc(ida_struct.get_struc_id(fullname))
-                    ida_struct.add_struc_member(s, "union", 0, self.get_idc_type_from_ida_type(fullname + "Union"), self.get_opinfo_from_type(fullname + "Union"), self.get_size_from_ida_type(fullname + "Union"))
+                    ida_struct.add_struc_member(s, "union", 0, self.get_idc_type_from_ida_type(fullname + "Union"), self.get_struct_opinfo_from_type(fullname + "Union"), self.get_size_from_ida_type(fullname + "Union"))
                     meminfo = ida_struct.get_member_by_name(s, "union")
                     ida_struct.set_member_tinfo(s, meminfo, 0, self.get_tinfo_from_type(fullname + "Union"), 0)
                 elif struct.virtual_functions != []:
