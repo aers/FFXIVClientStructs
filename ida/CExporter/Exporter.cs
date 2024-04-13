@@ -156,12 +156,29 @@ ReExport:
             };
         }
         if (field.FieldType.IsFixedBuffer()) {
-            _processType.Add(field.FieldType.GetFields()[0].FieldType);
+            var arr = field.GetCustomAttributes().Where(t => t.GetType().Name.Contains("FixedSizeArrayAttribute")).ToArray();
+            var size = field.FieldType.StructLayoutAttribute!.Size;
+            if (arr.Length != 0) {
+                var type = arr[0].GetType();
+                size = (int)type.GetProperty("Count")!.GetValue(arr[0])!;
+                var elementType = type.GenericTypeArguments[0];
+                _processType.Add(elementType);
+                return new ProcessedFixedField {
+                    FieldType = elementType,
+                    FieldOffset = field.GetFieldOffset() - offset,
+                    FieldName = field.Name,
+                    FixedSize = size
+                };
+            }
+            var fixedType = field.FieldType.GetFields()[0].FieldType;
+            _processType.Add(fixedType);
+            if (fixedType.IsBaseType())
+                size /= fixedType.SizeOf();
             return new ProcessedFixedField {
-                FieldType = field.FieldType.GetFields()[0].FieldType,
+                FieldType = fixedType,
                 FieldOffset = field.GetFieldOffset() - offset,
                 FieldName = field.Name,
-                FixedSize = field.FieldType.StructLayoutAttribute!.Size
+                FixedSize = size
             };
         }
         _processType.Add(field.FieldType);
