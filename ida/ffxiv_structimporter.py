@@ -42,12 +42,23 @@ class DefinedMemFunc:
         self.parameters = parameters
 
 class DefinedField(DefinedFuncParam):
-    def __init__(self, name, type, offset, return_type, params):
-        # type: (str, str, int, str | None, list[DefinedFuncParam] | None) -> None
+    def __init__(self, name, type, offset):
+        # type: (str, str, int, str | None) -> None
         super(DefinedField, self).__init__(name, type)
         self.offset = offset
+
+class DefinedFuncField(DefinedField):
+    def __init__(self, name, type, offset, return_type, params):
+        # type: (str, str, int, str | None, list[DefinedFuncParam] | None) -> None
+        super(DefinedFuncField, self).__init__(name, type, offset)
         self.return_type = return_type
         self.params = params
+
+class DefinedFixedField(DefinedField):
+    def __init__(self, name, type, offset, size):
+        # type: (str, str, int, str | None) -> None
+        super(DefinedFixedField, self).__init__(name, type, offset)
+        self.size = size
 
 class DefinedStruct(DefinedBase):
     def __init__(self, name, type, namespace, fields, size, virtual_functions, member_functions, union):
@@ -141,13 +152,15 @@ class BaseApi:
             virtual_functions = []
             member_functions = []
             for field in struct["fields"]:
+                if "size" in field:
+                    fields.append(DefinedFixedField(field["name"], field["type"], field["offset"], field["size"]))
                 if "return_type" in field:
                     parameters = []
                     for param in field["parameters"]:
                         parameters.append(DefinedFuncParam(param["name"], param["type"]))
-                    fields.append(DefinedField(field["name"], field["type"], field["offset"], field["return_type"], parameters))
+                    fields.append(DefinedFuncField(field["name"], field["type"], field["offset"], field["return_type"], parameters))
                 else:
-                    fields.append(DefinedField(field["name"], field["type"], field["offset"], None, None))
+                    fields.append(DefinedField(field["name"], field["type"], field["offset"]))
             for vfunc in struct["virtual_functions"]:
                 parameters = []
                 for param in vfunc["parameters"]:
@@ -216,7 +229,7 @@ if api is None:
                 else:
                     return ida_struct.get_struc_size(ida_struct.get_struc_id(type))
                     
-            def get_tinfo_from_type(self, raw_type: str):
+            def get_tinfo_from_type(self, raw_type: str, array_size: int = 0):
                 """
                 Retrieve a tinfo_t from a raw type string.
                 """
@@ -241,6 +254,14 @@ if api is None:
                             return None
                 else:
                     ptr_tinfo = type_tinfo
+
+                if array_size > 0:
+                    array_tinfo = idaapi.tinfo_t()
+                    if not array_tinfo.create_array(ptr_tinfo, array_size):
+                        print("! failed to create array")
+                        return None
+
+                    ptr_tinfo = array_tinfo
 
                 return ptr_tinfo
 
@@ -315,6 +336,8 @@ if api is None:
                         ida_struct.add_struc_member(s, field_name, offset, self.get_idc_type_from_ida_type(field_type), None, self.get_size_from_ida_type(field_type))
                     meminfo = ida_struct.get_member_by_name(s, field_name)
                     ida_struct.set_member_tinfo(s, meminfo, 0, self.get_tinfo_from_type(field_type), 0)
+                    if hasattr(field, 'size') and field.size != 0:
+                        ida_struct.set_member_tinfo(s, meminfo, 0, self.get_tinfo_from_type(field_type, field.size), 0)
                 if struct.size is not None and struct.size != 0:
                     size = struct.size - 1
                     if struct.size != ida_struct.get_struc_size(s):
