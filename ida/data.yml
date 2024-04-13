@@ -3251,8 +3251,8 @@ classes:
       0x14010CA40: GetLetterBoxUsage
       0x14010CA60: GetNumLettersFromPurchases
       0x14010CA70: GetNumLettersFromGameMasters
-      0x14010CA80: HasLettersFromGameMasters
-      0x14010CA90: HasLettersFromSupportDesk
+      0x14010CA80: GetHasLettersFromGameMasters
+      0x14010CA90: GetHasLettersFromSupportDesk
       0x14017C8D0: Finalize
   Client::UI::Info::InfoProxySearch:
     vtbls:
