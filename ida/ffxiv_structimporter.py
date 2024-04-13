@@ -415,6 +415,12 @@ if api is None:
                     ida_struct.add_struc_member(s, field_name, offset, self.get_idc_type_from_ida_type('__int64'), None, self.get_size_from_ida_type('__int64'))
                     meminfo = ida_struct.get_member_by_name(s, field_name)
                     ida_struct.set_member_tinfo(s, meminfo, 0, self.get_tinfo_from_type(field_type), 0)
+                size = int(ida_struct.get_struc_size(s)/8)
+                for i in range(size):
+                    if(ida_struct.get_member_id(s, i*8) == idc.BADADDR):
+                        ida_struct.add_struc_member(s, f"vf{i}", i*8, self.get_idc_type_from_ida_type("__int64"), None, self.get_size_from_ida_type("__int64"))
+                        meminfo = ida_struct.get_member_by_name(s, f"vf{i}")
+                        ida_struct.set_member_tinfo(s, meminfo, 0, self.get_tinfo_from_type("__int64"), 0)
             
             def create_union(self, struct):
                 # type: (DefinedStruct) -> None
