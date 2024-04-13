@@ -9930,6 +9930,8 @@ classes:
     vtbls:
       - ea: 0x141A49730
         base: Client::Game::Event::LuaEventHandler
+    vfuncs:
+      267: PopulateMapMarkers # (this, ushort territoryTypeId, StdVector<MapMarkerData>* markerVector)
     funcs:
       0x14082A0E0: ctor
       0x140964F60: ShowTodo # lua function "ShowDirectorTodo"
