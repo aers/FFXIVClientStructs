@@ -192,6 +192,7 @@ if api is None:
         import ida_ida
         import ida_typeinf
         import ida_funcs
+        import ida_name
     except ImportError:
         print("Warning: Unable to load IDA")
     else:
@@ -296,7 +297,11 @@ if api is None:
                 # type: (int, str, int) -> int
                 return ida_search.find_binary(ea, flag & 1 and ida_ida.cvar.inf.max_ea or ida_ida.cvar.inf.min_ea, pattern, 16, flag)
             
-            def get_func_ea(self, pattern):
+            def get_func_ea_by_name(self, name):
+                # type: (str) -> int
+                return ida_name.get_name_ea(0, name)
+
+            def get_func_ea_by_sig(self, pattern):
                 # type: (str) -> int
                 ea = self.search_binary(0, pattern, ida_search.SEARCH_DOWN)
 
@@ -440,10 +445,10 @@ if api is None:
 
             def update_member_func(self, member_func, struct):
                 # type: (DefinedMemFunc, DefinedStruct) -> None
-                ea = self.get_func_ea(member_func.signature)
+                func_name = f'{self.clean_name(struct.type)}_{member_func.name}'
+                ea = self.get_func_ea_by_name(func_name) or self.get_func_ea_by_sig(member_func.signature) 
                 if ida_funcs.get_func_name(ea) == f'sub_{ea:X}':
-                    func_name = f'{self.clean_name(struct.type)}_{member_func.name}'
-                    idc.set_name(ea, func_name)                    
+                    idc.set_name(ea, func_name)
                 field_type = self.clean_name(member_func.return_type) + " (__fastcall)("
                 for param in member_func.parameters:
                     field_type += " " + self.clean_name(param.type) + " " + param.name + ","
