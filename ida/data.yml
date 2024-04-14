@@ -3887,6 +3887,46 @@ classes:
       0x14022B470: HideAgentIfActive
       0x14022B4C0: IsAgentActive
       0x14022B230: HideAll
+      0x140225660: GetAgentScenarioTree
+      0x140225670: GetAgentMateriaAttach
+      0x140225680: GetAgentGoldSaucerReward
+      0x140225690: GetAgentCharacterTitleSelect
+      0x1402256A0: GetAgentReadyCheck
+      0x1402256C0: GetAgentHwdMonument
+      0x1402256D0: GetAgentMycItemBox
+      0x1402256E0: GetAgentMycItemBag
+      0x1402256F0: GetAgentMycDuelRequest
+      0x140225700: GetAgentMycBattleAreaInfo
+      0x140225710: GetAgentTourismMenu
+      0x140225720: GetAgentMJIHud
+      0x140225730: GetAgentMJIPouch
+      0x140225740: GetAgentMJIBuilding
+      0x140225750: GetAgentMJIBuildingMove
+      0x140225760: GetAgentMJICraftSchedule
+      0x140225770: GetAgentMJICraftSales
+      0x140225790: GetAgentMJINekomimiRequest
+      0x1402257A0: GetAgentTripleTriadRuleAnnounce
+      0x1402257B0: GetAgentTripleTriadRuleSetting
+      0x1402257D0: GetAgentTripleTriadTournamentMatchList
+      0x1402257F0: GetAgentPerformanceMode
+      0x140225810: GetAgentCutsceneReplay
+      0x140225820: GetAgentPvPHeader
+      0x140225840: GetAgentBannerList
+      0x140225850: GetAgentBannerEditor
+      0x140225860: GetAgentBannerUpdateView
+      0x140225880: GetAgentFittingShop
+      0x140225890: GetAgentCharaCard
+      0x1402258A0: GetAgentCharaCardDesignSetting
+      0x1402258B0: GetAgentCharaCardProfileSetting
+      0x1402258D0: GetAgentEmjIntro
+      0x1402258E0: GetAgentMap
+      0x1402258F0: GetAgentTofuList
+      0x140225920: GetAgentBannerParty
+      0x140225930: GetAgentBannerMIP
+      0x140225960: GetAgentSXTBattleLog
+      0x140225970: GetAgentFGSHud
+      0x140225980: GetAgentContext
+      0x140225990: GetAgentInventoryContext
   Client::UI::Agent::AgentEventFade:
     vtbls:
       - ea: 0x1419E0140
