@@ -4744,12 +4744,6 @@ classes:
       0x1404C5C50: ctor_FromState
       0x1404C5CA0: ctor
       0x1404C5C80: Finalize
-  Client::Game::Event::CustomTalkEventHandler:
-    vtbls:
-      - ea: 0x141A4BCF0
-        base: Client::Game::Event::LuaEventHandler
-    funcs:
-      0x140839F60: ctor
   Client::Game::Event::LuaActor:
     vtbls:
       - ea: 0x141A52DA8
@@ -10053,22 +10047,343 @@ classes:
   Client::Game::CallbackSheetWaiter<Client::Game::UI::QuestTodoList>:
     vtbls:
       - ea: 0x141A6E368
-  Client::Game::Event::CraftEventHandler:
-    vtbls:
-      - ea: 0x141A4D788
-        base: Client::Game::Event::EventHandler
-    funcs:
-      0x14087E660: ctor
-  Client::Game::Event::JournalCallback:
-    vtbls:
-      - ea: 0x141A4C630
-        base: Client::Game::UI::GameEventCallback
-  Client::Game::Event::QuestEventHandler:
+  Client::Game::Event::QuestEventHandler: # 0x01
     vtbls:
       - ea: 0x141A4C640
         base: Client::Game::Event::LuaEventHandler
     funcs:
       0x14084BE00: ctor
+  Client::Game::Event::WarpEventHandler: # 0x02
+    vtbls:
+      - ea: 0x141A52518
+        base: Client::Game::Event::LuaEventHandler
+    funcs:
+      0x14089BD20: ctor
+  Client::Game::Event::GatheringEventHandler: # 0x03
+    vtbls:
+      - ea: 0x141A4CED0
+        base: Client::Game::Event::EventHandler
+    funcs:
+      0x14087ADC0: ctor
+  Client::Game::Event::ShopEventHandler: # 0x04
+    vtbls:
+      - ea: 0x141A4AB88
+        base: Client::Game::Event::EventHandler
+    funcs:
+      0x1408329D0: ctor
+  Client::Game::Event::AetheryteEventHandler: # 0x05
+    vtbls:
+      - ea: 0x141A48EC8
+        base: Client::Game::Event::LuaEventHandler
+    funcs:
+      0x140825C00: ctor
+  Client::Game::Event::GuildleveAssignmentEventHandler: # 0x06
+    vtbls:
+      - ea: 0x141A4FA48
+        base: Client::Game::Event::LuaEventHandler
+    funcs:
+      0x140888320: ctor
+  Client::Game::Event::DefaultTalkEventHandler: # 0x09
+    vtbls:
+      - ea: 0x141A56AE8
+        base: Client::Game::Event::EventHandler
+    funcs:
+      0x1408BCFB0: ctor
+  Client::Game::Event::CraftEventHandler: # 0x0A
+    vtbls:
+      - ea: 0x141A4D788
+        base: Client::Game::Event::EventHandler
+    funcs:
+      0x14087E660: ctor
+  Client::Game::Event::CustomTalkEventHandler: # 0x0B
+    vtbls:
+      - ea: 0x141A4BCF0
+        base: Client::Game::Event::LuaEventHandler
+    funcs:
+      0x140839F60: ctor
+  Client::Game::Event::CompanyLeveOfficerEventHandler: # 0x0C
+    vtbls:
+      - ea: 0x141A55988
+        base: Client::Game::Event::LuaEventHandler
+    funcs:
+      0x1408B6550: ctor
+  Client::Game::Event::ArrayEventHandler: # 0x0D
+    vtbls:
+      - ea: 0x141A4DFD0
+        base: Client::Game::Event::EventHandler
+  Client::Game::Event::CraftLeveClientEventHandler: # 0x0E
+    vtbls:
+      - ea: 0x141A502A0
+        base: Client::Game::Event::LuaEventHandler
+    funcs:
+      0x14088FA80: ctor
+  Client::Game::Gimmick::GimmickEventHandler:
+    vtbls:
+      - ea: 0x141C441F8
+        base: Client::Game::Event::LuaEventHandler
+    funcs:
+      0x1414CA4C0: ctor
+  Client::Game::Gimmick::GimmickAccessor: # 0x0F
+    vtbls:
+      - ea: 0x141C44AA0
+        base: Client::Game::Gimmick::GimmickEventHandler
+    funcs:
+      0x1414CB300: ctor
+  Client::Game::Gimmick::GimmickBill: # 0x10
+    vtbls:
+      - ea: 0x141A5D198
+        base: Client::Game::Gimmick::GimmickEventHandler
+  Client::Game::Gimmick::GimmickRect: # 0x11
+    vtbls:
+      - ea: 0x141C45348
+        base: Client::Game::Gimmick::GimmickEventHandler
+    funcs:
+      0x1414CBA10: ctor
+  Client::Game::Event::ChocoboTaxiStandEventHandler: # 0x12
+    vtbls:
+      - ea: 0x141A5C940
+        base: Client::Game::Event::LuaEventHandler
+    funcs:
+      0x1408D0A60: ctor
+  Client::Game::Event::OpeningEventHandler: # 0x13
+    vtbls:
+      - ea: 0x141A5C0E8
+        base: Client::Game::Event::LuaEventHandler
+    funcs:
+      0x1408CFA30: ctor
+  Client::Game::Event::ExitRangeEventHandler: # 0x14
+    vtbls:
+      - ea: 0x141A51CC0
+        base: Client::Game::Event::LuaEventHandler
+  Client::Game::Event::FishingEventHandler: # 0x15
+    vtbls:
+      - ea: 0x141A50B58
+        base: Client::Game::Event::EventHandler
+    funcs:
+      0x140894520: ctor
+  Client::Game::Event::GCShopEventHandler: # 0x16
+    vtbls:
+      - ea: 0x141A59E70
+        base: Client::Game::Event::EventHandler
+    funcs:
+      0x1408C7D50: ctor
+  Client::Game::InstanceContent::ContentTalkEventHandler:
+    vtbls:
+      - ea: 0x141BFA098
+        base: Client::Game::Event::LuaEventHandler
+    funcs:
+      0x14148F860: ctor
+  Client::Game::Event::GuildOrderGuideEventHandler: # 0x17
+    vtbls:
+      - ea: 0x141BFB228
+        base: Client::Game::InstanceContent::ContentTalkEventHandler
+    funcs:
+      0x141491240: ctor
+  Client::Game::InstanceContent::GuildOrderOfficerEventHandler: # 0x18
+    vtbls:
+      - ea: 0x141BFBAE8
+        base: Client::Game::InstanceContent::ContentTalkEventHandler
+    funcs:
+      0x141491D50: ctor
+  Client::Game::InstanceContent::ContentNpcEventHandler: # 0x19
+    vtbls:
+      - ea: 0x141BFA958
+        base: Client::Game::InstanceContent::ContentTalkEventHandler
+    funcs:
+      0x1414909E0: ctor
+  Client::Game::Event::StoryEventHandler: # 0x1A
+    vtbls:
+      - ea: 0x141A573E8
+        base: Client::Game::Event::LuaEventHandler
+    funcs:
+      0x1408C04F0: ctor
+  Client::Game::Event::SpecialShopEventHandler: # 0x1B
+    vtbls:
+      - ea: 0x141A595F0
+        base: Client::Game::Event::EventHandler
+    funcs:
+      0x1408C3980: ctor
+  Client::Game::InstanceContent::DeepDungeonEventHandler: # 0x1C
+    vtbls:
+      - ea: 0x141BFDF30
+        base: Client::Game::InstanceContent::ContentTalkEventHandler
+    funcs:
+      0x1414931D0: ctor
+  Client::Game::InstanceContent::InstanceContentGuideEventHandler: # 0x1D
+    vtbls:
+      - ea: 0x141BFC3A8
+        base: Client::Game::Event::EventHandler
+    funcs:
+      0x141492280: ctor
+  Client::Game::Event::AethernetEventHandler: # 0x1E
+    vtbls:
+      - ea: 0x141A57CB8
+        base: Client::Game::Event::EventHandler
+    funcs:
+      0x1408C1E40: ctor
+  Client::Game::Event::SwitchTalkEventHandler: # 0x1F
+    vtbls:
+      - ea: 0x141A584F8
+        base: Client::Game::Event::EventHandler
+  Client::Game::Event::AdventureEventHandler: # 0x21
+    vtbls:
+      - ea: 0x141A5E358
+        base: Client::Game::Event::EventHandler
+    funcs:
+      0x1408D3A30: ctor
+  Client::Game::Event::DailyQuestSupplyEventHandler::UIListener:
+    vtbls:
+      - ea: 0x141A55038
+  Client::Game::Event::DailyQuestSupplyEventHandler: # 0x22
+    vtbls:
+      - ea: 0x141A55050
+        base: Client::Game::Event::EventHandler
+  Client::Game::Event::TripleTriadEventHandler: # 0x23
+    vtbls:
+      - ea: 0x141A790E0
+        base: Client::Game::Event::EventHandler
+    funcs:
+      0x140B63F00: ctor
+  Client::Game::Event::GoldSaucerArcadeMachineEventHandler: # 0x24
+    vtbls:
+      - ea: 0x141A80950
+        base: Client::Game::Event::EventHandler
+    funcs:
+      0x140B76FE0: ctor
+  Client::Game::Event::LotteryDailyEventHandler: # 0x25
+    vtbls:
+      - ea: 0x141A7A1B8
+        base: Client::Game::Event::EventHandler
+    funcs:
+      0x140B6B900: ctor
+  Client::Game::Event::LotteryWeeklyEventHandler: # 0x26
+    vtbls:
+      - ea: 0x141A811C8
+        base: Client::Game::Event::EventHandler
+    funcs:
+      0x140B79610: ctor
+  Client::Game::Event::RaceChocoboRegistrarEventHandler: # 0x27
+    vtbls:
+      - ea: 0x141A81A30
+        base: Client::Game::Event::EventHandler
+    funcs:
+      0x140B7B1F0: ctor
+  Client::Game::Event::GoldSaucerTalkEventHandler: # 0x29
+    vtbls:
+      - ea: 0x141A82AE8
+        base: Client::Game::Event::EventHandler
+  Client::Game::Event::FreeCompanyCreditShopEventHandler: # 0x2A
+    vtbls:
+      - ea: 0x141A52DC8
+        base: Client::Game::Event::EventHandler
+    funcs:
+      0x1408A08A0: ctor
+  Client::Game::Event::AetherCurrentEventHandler: # 0x2B
+    vtbls:
+      - ea: 0x141A5EB98
+        base: Client::Game::Event::EventHandler
+  Client::Game::Event::ContentEntryEventHandler: # 0x2C
+    vtbls:
+      - ea: 0x141C47690
+        base: Client::Game::Event::EventHandler
+  Client::Game::Event::VerminionEventHandler: # 0x2D
+    vtbls:
+      - ea: 0x141A82280
+        base: Client::Game::Event::EventHandler
+    funcs:
+      0x140B7C2D0: ctor
+  Client::Game::Event::SkyIslandEntranceEventHandler: # 0x2E
+    vtbls:
+      - ea: 0x141A76C40
+        base: Client::Game::InstanceContent::ContentTalkEventHandler
+    funcs:
+      0x140B4DD60: ctor
+  Client::Game::Event::DpsChallengeOfficerEventHandler: # 0x2F
+    vtbls:
+      - ea: 0x141A53EA0
+        base: Client::Game::Event::EventHandler
+  Client::Game::Event::BeginnerTrainingOfficerEventHandler: # 0x30
+    vtbls:
+      - ea: 0x141BFD570
+        base: Client::Game::InstanceContent::ContentNpcEventHandler
+    funcs:
+      0x141492EE0: ctor
+  Client::Game::Event::RetainerBuybackEventHandler: # 0x31
+    vtbls:
+      - ea: 0x141A5A718
+        base: Client::Game::Event::EventHandler
+  Client::Game::Event::TopicSelectEventHandler: # 0x32
+    vtbls:
+      - ea: 0x141A5F3D8
+        base: Client::Game::Event::EventHandler
+  Client::Game::Event::LotteryExchangeShopEventHandler: # 0x34
+    vtbls:
+      - ea: 0x141A5AFC8
+        base: Client::Game::Event::LuaEventHandler
+    funcs:
+      0x1408CAC10: ctor
+  Client::Game::Event::DisposalShopEventHandler: # 0x35
+    vtbls:
+      - ea: 0x141A5B850
+        base: Client::Game::Event::EventHandler
+    funcs:
+      0x1408CD040: ctor
+  Client::Game::Event::PreHandlerEventHandler: # 0x36
+    vtbls:
+      - ea: 0x141A58D50
+        base: Client::Game::Event::EventHandler
+  Client::Game::Event::TripleTriadCompetitionEventHandler: # 0x37
+    vtbls:
+      - ea: 0x141A5FC30
+        base: Client::Game::Event::EventHandler
+    funcs:
+      0x1408D56A0: ctor
+  Client::Game::Event::SalvageEventHandler: # 0x39
+    vtbls:
+      - ea: 0x141C336C0
+        base: Client::Game::Event::EventHandler
+    funcs:
+      0x1414B1990: ctor
+  Client::Game::Event::DesynthesisEventHandler:
+    vtbls:
+      - ea: 0x141B47AE0
+        base: Client::Game::Event::SalvageEventHandler
+    funcs:
+      0x141398580: ctor
+  Client::Game::Event::MateriaExtractionEventHandler:
+    vtbls:
+      - ea: 0x141C4F870
+        base: Client::Game::Event::SalvageEventHandler
+    funcs:
+      0x1414FB0B0: ctor
+  Client::Game::Event::AetherialReductionEventHandler:
+    vtbls:
+      - ea: 0x141B484D0
+        base: Client::Game::Event::SalvageEventHandler
+    funcs:
+      0x141399410: ctor
+  Client::Game::Event::InclusionShopEventHandler: # 0x3A
+    vtbls:
+      - ea: 0x141C480C8
+        base: Client::Game::Event::EventHandler
+    funcs:
+      0x1414D1170: ctor
+  Client::Game::Event::CollectablesShopEventHandler: # 0x3B
+    vtbls:
+      - ea: 0x141C48B08
+        base: Client::Game::Event::EventHandler
+    funcs:
+      0x1414D1A10: ctor
+  Client::Game::Event::EventPathMoveEventHandler: # 0x3D
+    vtbls:
+      - ea: 0x141C494D0
+        base: Client::Game::Event::EventHandler
+    funcs:
+      0x1414D2200: ctor
+  Client::Game::Event::JournalCallback:
+    vtbls:
+      - ea: 0x141A4C630
+        base: Client::Game::UI::GameEventCallback
   Client::Game::Event::QuestBattleDirector:
     vtbls:
       - ea: 0x141A4B3E8
@@ -10197,10 +10512,6 @@ classes:
         base: Client::Game::Event::LeveDirector
     funcs:
       0x1408D5F40: ctor
-  Client::Game::Gimmick::GimmickBill:
-    vtbls:
-      - ea: 0x141A5D198
-        base: Client::Game::Gimmick::GimmickEventHandler
   Client::Game::InstanceContent::ContentDirector:
     vtbls:
       - ea: 0x141A4A060
@@ -14351,18 +14662,6 @@ classes:
     vtbls:
       - ea: 0x141C327C0
         base: Client::Game::Object::GameObject
-  Client::Game::Gimmick::GimmickEventHandler:
-    vtbls:
-      - ea: 0x141C441F8
-        base: Client::Game::Event::LuaEventHandler
-  Client::Game::Gimmick::Gimmick_Unk1:
-    vtbls:
-      - ea: 0x141C44AA0
-        base: Client::Game::Gimmick::GimmickEventHandler
-  Client::Game::Gimmick::GimmickRect:
-    vtbls:
-      - ea: 0x141C45348
-        base: Client::Game::Gimmick::GimmickEventHandler
   Client::Game::Object::HousingCombinedObject:
     vtbls:
       - ea: 0x141C4B2D0
