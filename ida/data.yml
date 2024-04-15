@@ -1680,7 +1680,7 @@ classes:
       0x1409655A0: ctor
   Client::Game::UI::Map::MapMarkerData:
     funcs:
-      0x1409652B0: SetData # (int levelId, Utf8String* tooltip, uint iconId, float x, float y, float z, float radius, ushort territoryTypeId, uint mapId, uint placeNameZoneId, uint placeNameId, ushort recommendedLevel, char a14) -> MapMarkerData*
+      0x1409652B0: SetData
   Client::Game::BattleLog:
     funcs:
       0x14099B090: AddLogMessage
@@ -9970,6 +9970,8 @@ classes:
     vtbls:
       - ea: 0x141A49730
         base: Client::Game::Event::LuaEventHandler
+    vfuncs:
+      267: PopulateMapMarkers # (this, ushort territoryTypeId, StdVector<MapMarkerData>* markerVector)
     funcs:
       0x14082A0E0: ctor
       0x140964F60: ShowTodo # lua function "ShowDirectorTodo"

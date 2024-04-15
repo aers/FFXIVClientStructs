@@ -60,6 +60,22 @@ public unsafe partial struct MapMarkerData {
 
     [FieldOffset(0x3C)] public ushort RecommendedLevel;
     [FieldOffset(0x3E)] public ushort TerritoryTypeId;
+
+    [MemberFunction("E8 ?? ?? ?? ?? 80 7B 42 02 75 06")]
+    public partial MapMarkerData* SetData(
+        uint levelId,
+        Utf8String* tooltipString,
+        uint iconId,
+        float x,
+        float y,
+        float z,
+        uint radius,
+        ushort territoryTypeId,
+        uint mapId,
+        uint placeNameZoneId,
+        uint placeNameId,
+        ushort recommendedLevel,
+        sbyte a14 = -1);
 }
 
 /// <summary>

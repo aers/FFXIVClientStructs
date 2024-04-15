@@ -1,3 +1,4 @@
+using FFXIVClientStructs.FFXIV.Client.Game.UI;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
@@ -7,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 //     Client::Game::Event::EventHandler
 // ctor "E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 07 0F B7 03"
 [StructLayout(LayoutKind.Explicit, Size = 0x4B8)]
-public unsafe struct Director {
+public unsafe partial struct Director {
     [FieldOffset(0x00)] public LuaEventHandler LuaEventHandler;
     [FieldOffset(0x330)] public EventHandlerInfo* EventHandlerInfo;
     [FieldOffset(0x338)] public uint ContentId;
@@ -17,4 +18,7 @@ public unsafe struct Director {
     [FieldOffset(0x350)] public Utf8String String0;
     [FieldOffset(0x3B8)] public Utf8String String1;
     [FieldOffset(0x420)] public Utf8String String2;
+
+    [VirtualFunction(267)]
+    public partial void PopulateMapMarkers(ushort territoryTypeId, StdVector<MapMarkerData>* markerVector);
 }
