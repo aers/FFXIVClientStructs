@@ -1157,6 +1157,8 @@ struct Client::UI::Agent::AgentReadyCheck::ReadyCheckEntry;
 struct Client::UI::Agent::AgentRecipeNote;
 struct Client::UI::Agent::AgentRecipeNoteVTable;
 struct StdDequeClientSystemStringUtf8String;
+struct Client::UI::Agent::AgentRecipeProductList;
+struct Client::UI::Agent::AgentRecipeProductListVTable;
 struct Client::UI::Agent::AgentReconstructionBox;
 struct Client::UI::Agent::AgentReconstructionBoxVTable;
 struct Client::UI::Agent::AgentRequest;
@@ -15754,12 +15756,9 @@ __unaligned struct Client::UI::AddonActionBar /* Size=0x2B8 */
     /* 0x000 */ Client::UI::AddonActionBarVTable* VTable;
     /* 0x000 */ Client::UI::AddonActionBarX AddonActionBarX;
     } _union_0x0;
-    /*       */ byte _gap_0x298[0x8];
-    /* 0x2A0 */ Component::GUI::AtkComponentBase* CycleUpArrow;
-    union {
-    /* 0x2A8 */ Component::GUI::AtkComponentBase* CycleDownArrow;
+    /* 0x298 */ Component::GUI::AtkComponentBase* CycleUpArrow;
+    /* 0x2A0 */ Component::GUI::AtkComponentBase* CycleDownArrow;
     /* 0x2A8 */ Component::GUI::AtkComponentCheckBox* PadlockCheckbox;
-    } _union_0x2A8;
     /*       */ byte _gap_0x2B0;
     /* 0x2B1 */ byte HotbarIdPet;
     /*       */ byte _gap_0x2B2;
@@ -20583,15 +20582,13 @@ __unaligned struct Client::UI::AddonJobHudBRD0::SongGauge /* Size=0x100 */
     /* 0x070 */ __int32 ApexArrowStatus;
     /*       */ byte _gap_0x74[0x4];
     /* 0x078 */ Component::GUI::AtkComponentBase* ArmyRepertoireNote[0x4];
-    union {
     /* 0x098 */ Component::GUI::AtkComponentBase* WandererRepertoireArrow[0x3];
-    /* 0x098 */ Component::GUI::AtkComponentBase* SongIcon[0x3];
-    } _union_0x98;
     /* 0x0B0 */ Component::GUI::AtkResNode* SongBarContainer;
     /* 0x0B8 */ Component::GUI::AtkResNode* SongBarFill;
     /* 0x0C0 */ Component::GUI::AtkResNode* SongsPlayedContainer;
     /* 0x0C8 */ Component::GUI::AtkResNode* SongsPlayed;
-    /*       */ byte _gap_0xD0[0x30];
+    /* 0x0D0 */ Component::GUI::AtkComponentBase* SongIcon[0x3];
+    /*       */ byte _gap_0xE8[0x18];
 };
 
 __unaligned struct Client::UI::AddonJobHudBRD0::SongGaugeSimple /* Size=0xE0 */
@@ -20607,16 +20604,17 @@ __unaligned struct Client::UI::AddonJobHudBRD0::SongGaugeSimple /* Size=0xE0 */
     /* 0x48 */ Component::GUI::AtkResNode* SoulVoiceContainer;
     /* 0x50 */ Component::GUI::AtkComponentTextNineGrid* SoulVoiceValueDisplay;
     /* 0x58 */ Component::GUI::AtkComponentGaugeBar* SoulVoiceGaugeBar;
-    union {
     /* 0x60 */ Component::GUI::AtkResNode* SoulVoiceTickmark;
-    /* 0x60 */ byte RadiantFinaleStatus;
-    } _union_0x60;
     /* 0x68 */ Component::GUI::AtkComponentBase* ArmyRepertoireGem[0x4];
     /* 0x88 */ Component::GUI::AtkComponentBase* WandererRepertoireGem[0x3];
     /* 0xA0 */ Component::GUI::AtkResNode* SongsPlayedContainer;
     /* 0xA8 */ Component::GUI::AtkResNode* SongsPlayed;
     /* 0xB0 */ Component::GUI::AtkComponentBase* SongIcon[0x3];
-    /*      */ byte _gap_0xC8[0x18];
+    /* 0xC8 */ byte RadiantFinaleStatus;
+    /*      */ byte _gap_0xC9;
+    /*      */ byte _gap_0xCA[0x2];
+    /*      */ byte _gap_0xCC[0x4];
+    /*      */ byte _gap_0xD0[0x10];
 };
 
 __unaligned struct Client::UI::AddonJobHudBRD0 /* Size=0x4C0 */
@@ -31438,6 +31436,28 @@ __unaligned struct Client::UI::Agent::AgentRecipeNote /* Size=0x568 */
     /*       */ byte _gap_0x49C[0x4];
     /* 0x4A0 */ StdDequeClientSystemStringUtf8String RecipeSearchHistory;
     /*       */ byte _gap_0x4C8[0xA0];
+};
+
+struct Client::UI::Agent::AgentRecipeProductListVTable
+{
+    /* 0x00 */ void* (__fastcall *ReceiveEvent)(Component::GUI::AgentInterface* a1, void* a2, Component::GUI::AtkValue* a3, unsigned __int32 a4, unsigned __int64 a5);
+    /*      */ __int64 _vf1;
+    /*      */ __int64 _vf2;
+    /* 0x18 */ void (__fastcall *Show)(Component::GUI::AgentInterface* a1);
+    /* 0x20 */ void (__fastcall *Hide)(Component::GUI::AgentInterface* a1);
+    /* 0x28 */ bool (__fastcall *IsAgentActive)(Component::GUI::AgentInterface* a1);
+    /*      */ __int64 _vf6;
+    /*      */ __int64 _vf7;
+    /* 0x40 */ unsigned __int32 (__fastcall *GetAddonID)(Component::GUI::AgentInterface* a1);
+};
+
+__unaligned struct Client::UI::Agent::AgentRecipeProductList /* Size=0x30 */
+{
+    union {
+    /* 0x00 */ Client::UI::Agent::AgentRecipeProductListVTable* VTable;
+    /* 0x00 */ Component::GUI::AgentInterface AgentInterface;
+    } _union_0x0;
+    /*      */ byte _gap_0x28[0x8];
 };
 
 struct Client::UI::Agent::AgentReconstructionBoxVTable
