@@ -1,4 +1,5 @@
 using System.Numerics;
+using FFXIVClientStructs.FFXIV.Client.Game.UI;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
@@ -11,6 +12,11 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [StructLayout(LayoutKind.Explicit, Size = 0x12AB8)]
 public unsafe partial struct AgentMap {
     [FieldOffset(0x0)] public AgentInterface AgentInterface;
+
+    /// <summary> Pointers to markers in <see cref="EventMarkers"/>. </summary>
+    [FieldOffset(0x88)] public StdVector<Pointer<MapMarkerData>> EventMarkersPtrs;
+    /// <summary> Includes markers from FateManager, EventFramework and SequentialEvent (whatever that is). </summary>
+    [FieldOffset(0xA0)] public StdVector<MapMarkerData> EventMarkers;
 
     // [MinimapLinkedMarkers] Name could be better, this contains the tooltips and linked locations of minimap MSQ markers that have arrows telling you where to go.
     // These do not contain any of the other arrow markers.
