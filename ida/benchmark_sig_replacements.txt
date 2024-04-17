@@ -76,7 +76,6 @@
 "40 53 48 83 EC 20 41 8B D8 80 FA 11" = "" # Client.UI.Misc.HotBarSlot.IsSlotActionTargetInRange2 (no xrefs)
 "41 83 F8 14 77 3C" = "" # Client.UI.Info.InfoProxyItemSearch.ProcessItemHistory (can't find it, but found the function it calls: E8 ?? ?? ?? ?? 48 8B 74 24 ?? 4C 8B 64 24 ?? 48 83 C4 48)
 "E8 ?? ?? ?? ?? 48 8B F0 48 85 C0 74 4E 48 8B 10" = "" # Client.Game.Object.ClientObjectManager.GetObjectByIndex (inlined in sub_1415B56A0)
-"E8 ?? ?? ?? ?? 0F 28 74 24 ?? 0F B6 F0" = "" # Client.Game.GameMain.IsInGPose (inlined, just use UIModule.IsInGPose)
 "40 56 48 83 EC 20 80 B9 ?? ?? ?? ?? ?? 48 8B F1 7C 08" = "" # Client.UI.Misc.BannerModuleData.CreateBanner (can't find it)
 "E8 ?? ?? ?? ?? 40 0A F0 FF C3 48 FF C7 83 FB 6E 72 D6 40 0F B6 C6 48 8B 8C 24 ?? ?? ?? ?? 48 33 CC E8 ?? ?? ?? ?? 4C 8D 9C 24 ?? ?? ?? ?? 49 8B 5B 18 49 8B 6B 20 49 8B 73 28 49 8B E3 5F C3 CC CC" = "" # Client.UI.Misc.BannerModule.DeleteBanner (inlined in Client.UI.Misc.BannerModuleData.DeleteBanner)
 "E8 ?? ?? ?? ?? 48 8B F8 48 85 C0 74 47 41 8B D6" = "" # Client.UI.Misc.BannerModule.CreateBanner (can't find it)
@@ -417,6 +416,7 @@
 "E8 ?? ?? ?? ?? 89 43 48 48 83 C4 20" = "E8 ?? ?? ?? ?? 89 43 58 48 8B 4D F0" # Client.UI.Misc.BannerModuleEntry.GenerateChecksum
 "48 89 5C 24 ?? 57 48 83 EC 20 48 63 FA 48 8B D9 85 D2 0F 88" = "E8 ?? ?? ?? ?? 44 0A F0 FF C3 48 FF C7 83 FB 6E 72 D6 48 8B 5C 24 ??" # Client.UI.Misc.BannerModuleData.DeleteBanner
 "E8 ?? ?? ?? ?? 48 8B CB 88 47 41" = "E8 ?? ?? ?? ?? 88 46 41" # Client.Game.ActionManager.IsActionHighlighted
+"E8 ?? ?? ?? ?? 0F 28 74 24 ?? 0F B6 F0" = "E8 ?? ?? ?? ?? 83 7E 08 00 4C 8D 2D ?? ?? ?? ??" # Client.Game.GameMain.IsInGPose
 
 # Signatures with Multiple Matches:
 "E8 ?? ?? ?? ?? 2B C6" = "E8 ?? ?? ?? ?? 2B C6 89 43 0C" # Client.Game.InventoryItem.GetQuantity
