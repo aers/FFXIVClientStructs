@@ -31,7 +31,7 @@ public static class ExporterStatics {
             definedTypes = ex.Types.Where(t => t != null).ToArray()!;
         }
 
-        return definedTypes.Where(t => t.FullName!.StartsWith(FFXIVNamespacePrefix) && !t.FullName.EndsWith("VTable")).ToArray();
+        return definedTypes.Where(t => t.FullName!.StartsWith(FFXIVNamespacePrefix) && !t.FullName.EndsWith("VTable") && t.GetCustomAttribute<CExportIgnoreAttribute>() == null).ToArray();
     }
 
     public static Type[] GetHavokTypes() {
@@ -44,7 +44,7 @@ public static class ExporterStatics {
             definedTypes = ex.Types.Where(t => t != null).ToArray()!;
         }
 
-        return definedTypes.Where(t => t.FullName!.StartsWith(HavokNamespacePrefix) && !t.FullName.EndsWith("VTable")).ToArray();
+        return definedTypes.Where(t => t.FullName!.StartsWith(HavokNamespacePrefix) && !t.FullName.EndsWith("VTable") && t.GetCustomAttribute<CExportIgnoreAttribute>() == null).ToArray();
     }
 }
 

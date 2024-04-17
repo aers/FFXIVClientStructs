@@ -17,7 +17,7 @@ public unsafe partial struct LayoutManager {
     public partial void SetActiveFestivals(uint* festivalArray); // Array of exactly 4 festivals. Use 0 for none.
 }
 
-[StructLayout(LayoutKind.Explicit)]
+[StructLayout(LayoutKind.Explicit, Size = 0x7080)]
 public unsafe partial struct OutdoorAreaLayoutData {
     [FixedSizeArray<OutdoorPlotLayoutData>(60)]
     [FieldOffset(0x1F0)] public fixed byte Plot[60 * 0x1D0];
@@ -47,7 +47,7 @@ public struct OutdoorPlotFixtureData {
     [FieldOffset(0x02)] public byte StainId;
 }
 
-[StructLayout(LayoutKind.Explicit)]
+[StructLayout(LayoutKind.Explicit, Size = 0x84)]
 public unsafe struct IndoorAreaLayoutData {
     [FieldOffset(0x28)] public IndoorFloorLayoutData Floor0;
     [FieldOffset(0x3C)] public IndoorFloorLayoutData Floor1;
@@ -55,7 +55,7 @@ public unsafe struct IndoorAreaLayoutData {
     [FieldOffset(0x80)] public float LightLevel;
 }
 
-[StructLayout(LayoutKind.Explicit)]
+[StructLayout(LayoutKind.Explicit, Size = 0x14)]
 public unsafe struct IndoorFloorLayoutData {
     [FieldOffset(0x00)] public int Part0;
     [FieldOffset(0x04)] public int Part1;

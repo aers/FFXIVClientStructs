@@ -1,3 +1,5 @@
+using FFXIVClientStructs.FFXIV.Client.System.String;
+
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
 // max known: 79
@@ -57,9 +59,9 @@ public unsafe partial struct AtkEvent {
     [FieldOffset(0x10)] public AtkEventListener* Listener; // listener of event
     [FieldOffset(0x18)] public uint Param; // arg3 of ReceiveEvent
     [FieldOffset(0x20)] public AtkEvent* NextEvent;
-    [FieldOffset(0x28)] public AtkEventType Type;
+    [FieldOffset(0x28)] public AtkEventType Type; // TODO: Change enum to uint
     [FieldOffset(0x29)] public byte Unk29;
-    [FieldOffset(0x30)] public byte Flags; // 0: handled, 5: force handled (see AtkEvent::SetEventIsHandled)
+    [FieldOffset(0x2A)] public byte Flags; // 0: handled, 5: force handled (see AtkEvent::SetEventIsHandled)
 
     [MemberFunction("E8 ?? ?? ?? ?? 8D 53 9C")]
     public partial void SetEventIsHandled(bool forced = false);

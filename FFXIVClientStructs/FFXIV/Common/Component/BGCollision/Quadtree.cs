@@ -55,6 +55,7 @@ public unsafe partial struct Quadtree {
 public unsafe partial struct QuadtreeNode {
     [FieldOffset(0)] public Node Node;
 
+    [CExportIgnore]
     public unsafe ref struct Enumerator {
         private QuadtreeNode* _head;
         private Collider* _next;

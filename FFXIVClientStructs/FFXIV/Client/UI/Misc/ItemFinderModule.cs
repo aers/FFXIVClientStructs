@@ -98,7 +98,7 @@ public unsafe struct ItemFinderModuleResult {
     [FieldOffset(0x1F3)] public byte Unk1F3;
 }
 
-[StructLayout(LayoutKind.Explicit)]
+[StructLayout(LayoutKind.Explicit, Size = 0x7C)]
 public unsafe struct ItemFinderModuleRetainerResult {
     [FieldOffset(0x00)] public ItemFinderModuleRetainerResult* Next;
 

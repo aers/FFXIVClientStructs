@@ -90,6 +90,8 @@ public class Exporter {
                     ExporterStatics.ErrorList.Add($"Field overlap detected in {processedStruct.StructType.FullSanitizeName()} with field {size.Field}");
                 if(checks.Any(t => t.StartOffset == size.StartOffset))
                     ExporterStatics.ErrorList.Add($"Union field detected but not defined in {processedStruct.StructType.FullSanitizeName()} with field {size.Field}");
+                if(size.StartOffset >= processedStruct.StructSize)
+                    ExporterStatics.ErrorList.Add($"Field offset exceeds struct size in {processedStruct.StructType.FullSanitizeName()} with field {size.Field}");
             }
         }
     }

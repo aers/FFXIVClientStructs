@@ -4059,7 +4059,7 @@ structs:
     offset: 41
   - type: byte
     name: Flags
-    offset: 48
+    offset: 42
   virtual_functions: []
   member_functions:
   - signature: E8 ?? ?? ?? ?? 8D 53 9C
@@ -4167,6 +4167,7 @@ structs:
   name: AtkInputManager
   namespace: Component.GUI
   union: False
+  size: 8
   fields:
   - type: Component::GUI::AtkTextInput*
     name: TextInput
@@ -5506,6 +5507,7 @@ structs:
   name: MoveableAddonInfoStruct
   namespace: Client.UI
   union: False
+  size: 80
   fields:
   - type: Client::UI::AddonHudLayoutScreen*
     name: hudLayoutScreen
@@ -6398,6 +6400,7 @@ structs:
   name: ItemFinderModuleRetainerResult
   namespace: Client.UI.Misc
   union: False
+  size: 124
   fields:
   - type: Client::UI::Misc::ItemFinderModuleRetainerResult*
     name: Next
@@ -6981,6 +6984,7 @@ structs:
   name: LastPurchasedMarketboardItem
   namespace: Client.UI.Info
   union: False
+  size: 36
   fields:
   - type: unsigned __int64
     name: SellingRetainerContentId
@@ -8183,6 +8187,7 @@ structs:
   name: GameWindow
   namespace: Client.System.Framework
   union: False
+  size: 642
   fields:
   - type: unsigned __int64
     name: ArgumentCount
@@ -8649,6 +8654,7 @@ structs:
   name: IndoorFloorLayoutData
   namespace: Client.LayoutEngine
   union: False
+  size: 20
   fields:
   - type: __int32
     name: Part0
@@ -8852,6 +8858,7 @@ structs:
   name: ResidentResourceManager
   namespace: Client.Graphics.Scene
   union: False
+  size: 32
   fields:
   - type: unsigned __int32
     name: ResourceCount
@@ -11211,7 +11218,39 @@ structs:
     name: TerritoryTypeId
     offset: 62
   virtual_functions: []
-  member_functions: []
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 80 7B 42 02 75 06
+    return_type: Client::Game::UI::MapMarkerData*
+    name: SetData
+    parameters:
+    - type: Client::Game::UI::MapMarkerData*
+      name: this
+    - type: unsigned __int32
+      name: levelId
+    - type: Client::System::String::Utf8String*
+      name: tooltipString
+    - type: unsigned __int32
+      name: iconId
+    - type: float
+      name: x
+    - type: float
+      name: y
+    - type: float
+      name: z
+    - type: unsigned __int32
+      name: radius
+    - type: unsigned __int16
+      name: territoryTypeId
+    - type: unsigned __int32
+      name: mapId
+    - type: unsigned __int32
+      name: placeNameZoneId
+    - type: unsigned __int32
+      name: placeNameId
+    - type: unsigned __int16
+      name: recommendedLevel
+    - type: __int8
+      name: a14
 - type: Client::Game::UI::MapMarkerContainer
   name: MapMarkerContainer
   namespace: Client.Game.UI
@@ -13618,22 +13657,6 @@ structs:
   - type: __int32
     name: TotalPrimitives
     offset: 12
-  virtual_functions: []
-  member_functions: []
-- type: Common::Component::BGCollision::QuadtreeNode::Enumerator
-  name: Enumerator
-  namespace: Common.Component.BGCollision
-  union: False
-  fields:
-  - type: Common::Component::BGCollision::QuadtreeNode*
-    name: _head
-    offset: 0
-  - type: Common::Component::BGCollision::Collider*
-    name: _next
-    offset: 8
-  - type: Common::Component::BGCollision::Collider*
-    name: _current
-    offset: 16
   virtual_functions: []
   member_functions: []
 - type: Common::Component::BGCollision::SceneWrapper::ColliderList
@@ -20096,6 +20119,7 @@ structs:
   name: ColorRGB
   namespace: Client.UI.Agent
   union: False
+  size: 3
   fields:
   - type: byte
     name: B
@@ -36682,6 +36706,7 @@ structs:
   name: ShaderPackageResourceHandle
   namespace: Client.System.Resource.Handle
   union: False
+  size: 184
   fields:
   - type: Client::System::Resource::Handle::ResourceHandle
     name: ResourceHandle
@@ -36695,6 +36720,7 @@ structs:
   name: SkeletonResourceHandle
   namespace: Client.System.Resource.Handle
   union: False
+  size: 312
   fields:
   - type: Client::System::Resource::Handle::ResourceHandle
     name: ResourceHandle
@@ -36901,6 +36927,7 @@ structs:
   name: IndoorAreaLayoutData
   namespace: Client.LayoutEngine
   union: False
+  size: 132
   fields:
   - type: Client::LayoutEngine::IndoorFloorLayoutData
     name: Floor0
@@ -39458,10 +39485,44 @@ structs:
     size: 16
   virtual_functions: []
   member_functions: []
+- type: Client::Game::Housing::HousingOutdoorTerritory
+  name: HousingOutdoorTerritory
+  namespace: Client.Game.Housing
+  union: False
+  size: 44592
+  fields:
+  - type: __int8
+    name: StandingInPlot
+    offset: 38568
+  - type: __int8
+    name: EditingFixturesOfPlot
+    offset: 38570
+  - type: __int8
+    name: EditingFurnishingsOfPlot
+    offset: 38576
+  - type: Client::Game::Housing::PlotDetail
+    name: Plot
+    offset: 38584
+    size: 60
+  - type: Client::Game::Housing::ApartmentBuildingState
+    name: ApartmentBuilding
+    offset: 39544
+    size: 2
+  virtual_functions: []
+  member_functions:
+  - signature: 40 56 57 48 83 EC 38 0F B6 FA
+    return_type: __int32
+    name: GetPlotIcon
+    parameters:
+    - type: Client::Game::Housing::HousingOutdoorTerritory*
+      name: this
+    - type: byte
+      name: plot
 - type: Client::Game::Housing::HousingTerritory
   name: HousingTerritory
   namespace: Client.Game.Housing
   union: False
+  size: 41312
   fields:
   - type: Client::Game::Housing::HousingFurniture
     name: Furniture
@@ -46246,6 +46307,7 @@ structs:
   name: OutdoorAreaLayoutData
   namespace: Client.LayoutEngine
   union: False
+  size: 28800
   fields:
   - type: Client::LayoutEngine::OutdoorPlotLayoutData
     name: Plot
@@ -47549,42 +47611,6 @@ structs:
     parameters:
     - type: Client::Game::UI::UIState*
       name: this
-- type: Client::Game::Housing::HousingOutdoorTerritory
-  name: HousingOutdoorTerritory
-  namespace: Client.Game.Housing
-  union: False
-  size: 44592
-  fields:
-  - type: Client::Game::Housing::HousingTerritory
-    name: HousingTerritory
-    offset: 0
-  - type: __int8
-    name: StandingInPlot
-    offset: 38568
-  - type: __int8
-    name: EditingFixturesOfPlot
-    offset: 38570
-  - type: __int8
-    name: EditingFurnishingsOfPlot
-    offset: 38576
-  - type: Client::Game::Housing::PlotDetail
-    name: Plot
-    offset: 38584
-    size: 60
-  - type: Client::Game::Housing::ApartmentBuildingState
-    name: ApartmentBuilding
-    offset: 39544
-    size: 2
-  virtual_functions: []
-  member_functions:
-  - signature: 40 56 57 48 83 EC 38 0F B6 FA
-    return_type: __int32
-    name: GetPlotIcon
-    parameters:
-    - type: Client::Game::Housing::HousingOutdoorTerritory*
-      name: this
-    - type: byte
-      name: plot
 - type: Client::Game::Housing::HousingWorkshopAirshipData
   name: HousingWorkshopAirshipData
   namespace: Client.Game.Housing
@@ -49313,6 +49339,12 @@ structs:
   - type: Component::GUI::AgentInterface
     name: AgentInterface
     offset: 0
+  - type: StdVector_Client::Game::UI::MapMarkerDataPtr
+    name: EventMarkersPtrs
+    offset: 136
+  - type: StdVector_Client::Game::UI::MapMarkerData
+    name: EventMarkers
+    offset: 160
   - type: StdVector_Client::UI::Agent::LinkedTooltipMarker
     name: MinimapMSQLinkedTooltipMarkers
     offset: 232
@@ -49705,7 +49737,17 @@ structs:
   - type: Client::System::String::Utf8String
     name: String2
     offset: 1056
-  virtual_functions: []
+  virtual_functions:
+  - name: PopulateMapMarkers
+    offset: 2136
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::Director*
+      name: a1
+    - type: unsigned __int16
+      name: a2
+    - type: StdVector_Client::Game::UI::MapMarkerData*
+      name: a3
   member_functions: []
 - type: Client::Game::Event::EventFramework
   name: EventFramework

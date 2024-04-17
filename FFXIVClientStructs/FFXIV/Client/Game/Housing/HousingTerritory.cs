@@ -4,7 +4,7 @@ using FFXIVClientStructs.FFXIV.Common.Math;
 namespace FFXIVClientStructs.FFXIV.Client.Game.Housing;
 
 // 0xA160 for Indoor, 0xAE30 for Outdoor
-[StructLayout(LayoutKind.Explicit)]
+[StructLayout(LayoutKind.Explicit, Size = 0xA160)]
 public unsafe partial struct HousingTerritory {
     [FixedSizeArray<HousingFurniture>(732)]
     [FieldOffset(0x10)] public fixed byte Furniture[732 * 0x30];

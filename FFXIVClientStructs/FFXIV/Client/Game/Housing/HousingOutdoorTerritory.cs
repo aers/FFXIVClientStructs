@@ -2,7 +2,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Housing;
 
 [StructLayout(LayoutKind.Explicit, Size = 0xAE30)]
 public unsafe partial struct HousingOutdoorTerritory {
-    [FieldOffset(0x00)] public HousingTerritory HousingTerritory;
+    [FieldOffset(0x00), CExportIgnore] public HousingTerritory HousingTerritory; // this should be renamed to IndoorHousingTerritory and the fields from HousingTerritory should be copied to here
 
     /// <summary>
     /// Get the Icon ID used for map icons in housing areas.

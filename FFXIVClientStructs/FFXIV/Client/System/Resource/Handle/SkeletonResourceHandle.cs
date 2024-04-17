@@ -3,7 +3,7 @@ using FFXIVClientStructs.Havok;
 
 namespace FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 
-[StructLayout(LayoutKind.Explicit)]
+[StructLayout(LayoutKind.Explicit, Size = 0x138)]
 public unsafe struct SkeletonResourceHandle {
     [StructLayout(LayoutKind.Explicit, Size = 0x30)]
     public struct SkeletonHeader {

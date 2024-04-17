@@ -19,7 +19,7 @@ public unsafe struct AddonHudLayoutScreen {
     [FieldOffset(0x7B0)] public MoveableAddonInfoStruct* SelectedAddon;
 }
 
-[StructLayout(LayoutKind.Explicit)]
+[StructLayout(LayoutKind.Explicit, Size = 0x50)]
 public unsafe struct MoveableAddonInfoStruct {
     [FieldOffset(0x20)] public AddonHudLayoutScreen* hudLayoutScreen;
     [FieldOffset(0x28)] public AtkUnitBase* SelectedAtkUnit;
