@@ -156,6 +156,7 @@ public static class TypeExtensions {
 
     public static string FullSanitizeName(this Type type) {
         var name = type.FixTypeName((t, _) => t.SanitizeName()).Replace("+", ExporterStatics.Separator).Replace(".", ExporterStatics.Separator).FixPtrName();
+        return name;
         var spl = name.Split("<");
         if (spl.Length == 1) return name;
         for (var i = 1; i < spl.Length; i++) {

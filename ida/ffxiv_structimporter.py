@@ -59,7 +59,7 @@ class DefinedFuncField(DefinedField):
         # type: (str, str, int, str | None, list[DefinedFuncParam] | None) -> None
         super(DefinedFuncField, self).__init__(name, type, offset)
         self.return_type = return_type
-        self.params = params
+        self.parameters = params
 
 
 class DefinedFixedField(DefinedField):
@@ -196,7 +196,7 @@ class BaseApi:
                             field["name"], field["type"], field["offset"], field["size"]
                         )
                     )
-                if "return_type" in field:
+                elif "return_type" in field:
                     parameters = []
                     for param in field["parameters"]:
                         parameters.append(
@@ -378,19 +378,14 @@ if api is None:
                 type_tinfo = ida_typeinf.tinfo_t()
                 ptr_tinfo = None
 
-                ptr_count = raw_type.count("*")
                 type = raw_type.rstrip("*")
+                ptr_count = len(raw_type) - len(type)
 
-                if not type_tinfo.get_named_type(idaapi.get_idati(), type):
-                    terminated = type + ";"
-                    if (
-                        idaapi.parse_decl(
-                            type_tinfo, idaapi.get_idati(), terminated, idaapi.PT_SIL
-                        )
-                        is None
-                    ):
-                        print("! failed to parse type '{0}'".format(type))
-                        return None
+                type_tinfo.get_named_type(idaapi.get_idati(), type)
+                terminated = type + ";"
+                idaapi.parse_decl(
+                    type_tinfo, idaapi.get_idati(), terminated, idaapi.PT_SIL
+                )
 
                 if ptr_count > 0:
                     ptr_tinfo = idaapi.tinfo_t()
@@ -411,6 +406,22 @@ if api is None:
 
                 return ptr_tinfo
 
+            def get_tinfo_from_func_data(self, data):
+                # type: (DefinedFuncField) -> idaapi.tinfo_t
+                tinfo = ida_typeinf.tinfo_t()
+                func_data = ida_typeinf.func_type_data_t()
+                func_data.cc = ida_typeinf.CM_CC_FASTCALL
+                func_data.rettype = self.get_tinfo_from_type(data.return_type)
+                for param in data.parameters:
+                    arg = ida_typeinf.funcarg_t()
+                    arg.type = self.get_tinfo_from_type(param.type)
+                    arg.name = param.name
+                    func_data.push_back(arg)
+
+                tinfo.create_func(func_data)
+                print(tinfo)
+                return tinfo
+
             def get_struct_opinfo_from_type(self, raw_type):
                 # type: (str) -> ida_nalt.opinfo_t
                 opinf = ida_nalt.opinfo_t()
@@ -425,16 +436,7 @@ if api is None:
 
             def clean_name(self, name):
                 # type: (str) -> str
-                ret = (
-                    name.replace("<", "__")
-                    .replace("*>", "Ptr")
-                    .replace(">", "")
-                    .replace("*, ", "Ptr_")
-                    .replace(", ", "_")
-                )
-                if name.count("<") > 0:
-                    return ret.replace(" ", "")
-                return ret
+                return name
 
             def search_binary(self, ea, pattern, flag):
                 # type: (int, str, int) -> int
@@ -545,19 +547,21 @@ if api is None:
                     field_name = field.name
                     field_type = self.clean_name(field.type)
                     if field_type == "__fastcall":
-                        field_type = (
-                            self.clean_name(field.return_type) + " (__fastcall)("
+                        ida_struct.add_struc_member(
+                            s,
+                            field_name,
+                            offset,
+                            self.get_idc_type_from_ida_type("__int64"),
+                            None,
+                            self.get_size_from_ida_type("__int64"),
                         )
-                        for param in field.params:
-                            field_type += (
-                                " "
-                                + self.clean_name(param.type)
-                                + " "
-                                + param.name
-                                + ","
-                            )
-                        field_type = field_type[:-1] + ")"
-                    if (
+                        field_type = self.clean_name(field.return_type)
+                        field_type = field_type + "(__fastcall* " + field_name + ")("
+                        for param in field.parameters:
+                            field_type = field_type + self.clean_name(param.type) + ""
+                            field_type = field_type + param.name + ","
+                        field_type = field_type[:-2] + ")"
+                    elif (
                         self.get_idc_type_from_ida_type(field_type)
                         == ida_bytes.stru_flag()
                     ):
@@ -569,7 +573,7 @@ if api is None:
                             self.get_struct_opinfo_from_type(field_type),
                             self.get_size_from_ida_type(field_type),
                         )
-                    if (
+                    elif (
                         self.get_idc_type_from_ida_type(field_type)
                         == ida_bytes.enum_flag()
                     ):
@@ -624,14 +628,6 @@ if api is None:
                 for virt_func in struct.virtual_functions:
                     offset = virt_func.offset
                     field_name = virt_func.name
-                    field_type = (
-                        self.clean_name(virt_func.return_type) + " (__fastcall)("
-                    )
-                    for param in virt_func.parameters:
-                        field_type += (
-                            " " + self.clean_name(param.type) + " " + param.name + ","
-                        )
-                    field_type = field_type[:-1] + ")"
                     ida_struct.add_struc_member(
                         s,
                         field_name,
@@ -641,6 +637,13 @@ if api is None:
                         self.get_size_from_ida_type("__int64"),
                     )
                     meminfo = ida_struct.get_member_by_name(s, field_name)
+                    field_type = self.clean_name(virt_func.return_type)
+                    field_type = field_type + "(__fastcall* " + field_name + ")("
+                    for param in virt_func.parameters:
+                        field_type = field_type + self.clean_name(param.type) + ""
+                        field_type = field_type + param.name + ","
+                    field_type = field_type[:-2] + ")"
+
                     ida_struct.set_member_tinfo(
                         s, meminfo, 0, self.get_tinfo_from_type(field_type), 0
                     )
@@ -773,16 +776,20 @@ if api is None:
                     ea = self.get_func_ea_by_sig(member_func.signature)
                 if ida_funcs.get_func_name(ea) == f"sub_{ea:X}":
                     idc.set_name(ea, func_name)
-                field_type = self.clean_name(member_func.return_type) + " (__fastcall)("
+                tif = ida_typeinf.tinfo_t()
+                ida_typeinf.guess_tinfo(tif, ea)
+                func_data = ida_typeinf.func_type_data_t()
+                tif.get_func_details(func_data)
+                func_data.clear()
+                func_data.cc = ida_typeinf.CM_CC_FASTCALL
+                func_data.rettype = self.get_tinfo_from_type(member_func.return_type)
                 for param in member_func.parameters:
-                    field_type += (
-                        " " + self.clean_name(param.type) + " " + param.name + ","
-                    )
-                if member_func.parameters != []:
-                    field_type = field_type[:-1] + ")"
-                else:
-                    field_type = field_type + ")"
-                tif = self.get_tinfo_from_type(field_type)
+                    arg = ida_typeinf.funcarg_t()
+                    arg.type = self.get_tinfo_from_type(param.type)
+                    arg.name = param.name
+                    func_data.push_back(arg)
+                tif.create_func(func_data)
+                print(tif)
                 ida_typeinf.apply_tinfo(ea, tif, ida_typeinf.TINFO_DEFINITE)
 
             def should_update_member_func(self):
@@ -806,12 +813,6 @@ if api is None:
         print("Warning: Unable to load Ghidra")
     else:
         # noinspection PyUnresolvedReferences
-        yn = askYesNo(
-            "Struct Importer",
-            "This script is not yet finished and will not import all modules. Continue?",
-        )
-        if not yn:
-            raise Exception("User cancelled script")
 
         class GhidraApi(BaseApi):
             def get_size_from_type(self, name):
@@ -850,12 +851,47 @@ if api is None:
                         return dt.getLength()
                     return 0
 
+            def get_ghidra_type(self, name):
+                if name == "__int8":
+                    return "byte"
+                elif name == "__int16":
+                    return "short"
+                elif name == "unsigned __int16":
+                    return "ushort"
+                elif name == "__int32":
+                    return "int"
+                elif name == "unsigned __int32" or name == "_DWORD":
+                    return "uint"
+                elif name == "__int64":
+                    return "longlong"
+                elif name == "unsigned __int64":
+                    return "ulonglong"
+                elif name == "__int8*":
+                    return "byte*"
+                elif name == "__int16*":
+                    return "short*"
+                elif name == "unsigned __int16*":
+                    return "ushort*"
+                elif name == "__int32*":
+                    return "int*"
+                elif name == "unsigned __int32*":
+                    return "uint*"
+                elif name == "__int64*":
+                    return "longlong*"
+                elif name == "unsigned __int64*":
+                    return "ulonglong*"
+                elif name == "__fastcall":
+                    return "void*"
+                return name
+
             def get_category_path(self, typename):
                 # type: (str) -> CategoryPath
                 syms = SymbolPathParser.parse(typename)
                 return CategoryPath("/" + "/".join(syms.subList(0, syms.size() - 1)))
 
             def get_datatype(self, typename):
+                # type: (str) -> DataType
+                typename = self.get_ghidra_type(typename)
                 dtm = currentProgram.getDataTypeManager()
                 dt = dtm.getDataType("/" + "/".join(SymbolPathParser.parse(typename)))
                 if typename.endswith("*"):
@@ -863,14 +899,14 @@ if api is None:
                 return dt
 
             def create_datatype(self, datatype):
-                # type: (DataType) -> None
+                # type: (DataType) -> DataType
                 dtm = currentProgram.getDataTypeManager()
                 old = dtm.getDataType(datatype.getDataTypePath())
                 if old is not None:
-                    dtm.replaceDataType(old, datatype, False)
+                    old.replaceWith(datatype)
+                    return old
                 else:
-                    dtm.addDataType(datatype, None)
-                    dtm.addDataType(dtm.getPointer(datatype, 8), None)
+                    return dtm.addDataType(datatype, None)
 
             @property
             def get_file_path(self):
@@ -880,6 +916,8 @@ if api is None:
 
             def create_enum(self, enum):
                 # type: (DefinedEnum) -> None
+                if monitor.isCancelled():
+                    return
                 dt = EnumDataType(enum.name, self.get_size_from_type(enum.underlying))
                 dt.setCategoryPath(self.get_category_path(enum.type))
                 for value in enum.values:
@@ -888,9 +926,6 @@ if api is None:
 
             def delete_enum(self, enum):
                 # type: (DefinedEnum) -> None
-                # dtm = currentProgram.getDataTypeManager()
-                # dt = dtm.getDataType(self.get_category_path(enum.type), enum.name)
-                # dtm.remove(dt, monitor)
                 pass
 
             def delete_struct(self, struct):
@@ -899,7 +934,18 @@ if api is None:
 
             def create_struct(self, struct):
                 # type: (DefinedStruct) -> None
-                dt = StructureDataType(struct.name, int(struct.size or "0"))
+                if monitor.isCancelled():
+                    return
+
+                name = struct.name
+                syms = SymbolPathParser.parse(struct.type)
+                if syms.size() > 0:
+                    name = syms.getLast()
+
+                if struct.union:
+                    dt = UnionDataType(name)
+                else:
+                    dt = StructureDataType(name, int(struct.size or "0"))
                 dt.setCategoryPath(self.get_category_path(struct.type))
                 self.create_datatype(dt)
 
@@ -907,62 +953,57 @@ if api is None:
                 # type: (DefinedStruct) -> None
                 dt = self.get_datatype(struct.type)
                 if dt is None:
-                    # print("DataType Missing for {0}".format(struct.type))
                     return
-                # if dt.isZeroLength():
-                #     print("Size Missing: {0}".format(dt.getDataTypePath()))
-                #     return
 
                 dtsize = dt.getLength() if not dt.isZeroLength() else 0
-                if dtsize == 0 and struct.virtual_functions != []:
+                if dtsize == 0 and struct.virtual_functions != [] and not struct.union:
                     dt.growStructure(8)
 
                 for field in struct.fields:
+                    if monitor.isCancelled():
+                        return
+
                     offset = field.offset
                     dtsize = dt.getLength() if not dt.isZeroLength() else 0
-                    if offset == 0 and struct.virtual_functions != []:
-                        continue
+
                     ft = self.get_datatype(field.type)
                     if ft is None:
                         continue
 
-                    comp = dt.getComponentContaining(offset)
-                    comptype = None if comp is None else comp.getDataType()
-                    if comp and not Undefined.isUndefined(comptype) and comptype != ft:
-                        print(
-                            "Overlapping Field {0} (off=0x{1:X}) and {2} (type={3}) in {4}".format(
-                                field.name,
-                                offset,
-                                comp.getFieldName(),
-                                comptype.getName(),
-                                struct.type,
-                            )
-                        )
-                        continue
+                    if isinstance(field, DefinedFixedField):
+                        ft = ArrayDataType(ft, int(field.size), ft.getLength() or -1)
 
-                    if dtsize <= offset and not struct.size:
-                        dt.growStructure(((offset - dtsize) or 0) + ft.getLength())
+                    if not struct.union:
+                        if dtsize <= offset and not struct.size:
+                            dt.growStructure(((offset - dtsize) or 0) + ft.getLength())
 
-                    if (
-                        dt.getLength() <= offset
-                        or dt.getLength() < offset + ft.getLength()
-                    ):
-                        print(
-                            "Field {0} (off=0x{1:X} size=0x{2:X}) not within Struct {3} (size=0x{4:X})".format(
-                                field.name,
-                                offset,
-                                ft.getLength(),
-                                dt.getDataTypePath(),
-                                dt.getLength(),
+                        if (
+                            dt.getLength() <= offset
+                            or dt.getLength() < offset + ft.getLength()
+                        ):
+                            print(
+                                "Field {0} (off=0x{1:X} size=0x{2:X}) not within Struct {3} (size=0x{4:X})".format(
+                                    field.name,
+                                    offset,
+                                    ft.getLength(),
+                                    dt.getDataTypePath(),
+                                    dt.getLength(),
+                                )
                             )
-                        )
-                        break
-                    # print("[{0}] field={1} off={2} dtsize={3} zero={4}".format(dt.getDataTypePath(), field.name, field.offset, dt.getLength(), dt.isZeroLength()))
-                    dt.replaceAtOffset(offset, ft, -1, field.name, "")
+                            break
+
+                        dt.replaceAtOffset(offset, ft, -1, field.name, "")
+                    else:
+                        dt.add(ft, ft.getLength(), field.name, "")
 
             def create_vtable(self, struct):
                 # type: (DefinedStruct) -> None
-                pass
+                dt = self.get_datatype(struct.type)
+                comp = dt.getComponentContaining(0)
+                if comp is None or Undefined.isUndefined(comp.getDataType()):
+                    dtm = currentProgram.getDataTypeManager()
+                    vt = dtm.getPointer(dtm.getPointer(VoidDataType.dataType), 8)
+                    dt.replaceAtOffset(0, vt, -1, "VTable", "vtable placeholder")
 
             def create_union(self, struct):
                 # type: (DefinedStruct) -> None
