@@ -1,3 +1,6 @@
+# @category __UserScripts
+# @menupath Tools.Scripts.ffxiv_structimport
+
 from yaml import safe_load
 import os
 from abc import abstractmethod
@@ -12,7 +15,7 @@ class DefinedBase:
         self.namespace = namespace
 
 
-class DefinedEnum(DefinedBase):
+class DefinedEnum(DefinedBase, object):
     def __init__(self, name, type, underlying, namespace, values):
         # type: (str, str, str, str, dict[str, int]) -> None
         super(DefinedEnum, self).__init__(name, type, namespace)
@@ -47,14 +50,14 @@ class DefinedMemFunc:
         self.name = name
 
 
-class DefinedField(DefinedFuncParam):
+class DefinedField(DefinedFuncParam, object):
     def __init__(self, name, type, offset):
         # type: (str, str, int, str | None) -> None
         super(DefinedField, self).__init__(name, type)
         self.offset = offset
 
 
-class DefinedFuncField(DefinedField):
+class DefinedFuncField(DefinedField, object):
     def __init__(self, name, type, offset, return_type, params):
         # type: (str, str, int, str | None, list[DefinedFuncParam] | None) -> None
         super(DefinedFuncField, self).__init__(name, type, offset)
@@ -62,14 +65,14 @@ class DefinedFuncField(DefinedField):
         self.parameters = params
 
 
-class DefinedFixedField(DefinedField):
+class DefinedFixedField(DefinedField, object):
     def __init__(self, name, type, offset, size):
         # type: (str, str, int, str | None) -> None
         super(DefinedFixedField, self).__init__(name, type, offset)
         self.size = size
 
 
-class DefinedStruct(DefinedBase):
+class DefinedStruct(DefinedBase, object):
     def __init__(
         self,
         name,
@@ -91,7 +94,7 @@ class DefinedStruct(DefinedBase):
 
 
 class DefinedExport:
-    def __init__(self, enums, structs) -> None:
+    def __init__(self, enums, structs):
         # type: (list[DefinedEnum], list[DefinedStruct]) -> None
         self.enums = enums
         self.structs = structs
@@ -674,13 +677,13 @@ if api is None:
                     if ida_struct.get_member_id(s, i * 8) == idc.BADADDR:
                         ida_struct.add_struc_member(
                             s,
-                            f"vf{i}",
+                            "vf{0}".format(i),
                             i * 8,
                             self.get_idc_type_from_ida_type("__int64"),
                             None,
                             self.get_size_from_ida_type("__int64"),
                         )
-                        meminfo = ida_struct.get_member_by_name(s, f"vf{i}")
+                        meminfo = ida_struct.get_member_by_name(s, "vf{0}".format(i))
                         ida_struct.set_member_tinfo(
                             s, meminfo, 0, self.get_tinfo_from_type("__int64"), 0
                         )
@@ -770,11 +773,13 @@ if api is None:
 
             def update_member_func(self, member_func, struct):
                 # type: (DefinedMemFunc, DefinedStruct) -> None
-                func_name = f"{self.clean_name(struct.type)}.{member_func.name}"
+                func_name = "{0}.{1}".format(
+                    self.clean_name(struct.type), member_func.name
+                )
                 ea = self.get_func_ea_by_name(func_name)
                 if ea == idc.BADADDR:
                     ea = self.get_func_ea_by_sig(member_func.signature)
-                if ida_funcs.get_func_name(ea) == f"sub_{ea:X}":
+                if ida_funcs.get_func_name(ea) == "sub_{0:X}".format(ea):
                     idc.set_name(ea, func_name)
                 tif = ida_typeinf.tinfo_t()
                 ida_typeinf.guess_tinfo(tif, ea)
@@ -805,6 +810,7 @@ if api is None:
 if api is None:
     try:
         import ghidra
+        import re
 
         from ghidra.program.model.data import *
         from ghidra.app.util import SymbolPathParser
@@ -817,41 +823,24 @@ if api is None:
         class GhidraApi(BaseApi):
             def get_size_from_type(self, name):
                 # type: (str) -> int
-                if (
-                    name == "unsigned __int8"
-                    or name == "__int8"
-                    or name == "bool"
-                    or name == "char"
-                    or name == "unsigned char"
-                    or name == "byte"
-                ):
-                    return 1
-                elif name == "unsigned __int16" or name == "__int16":
-                    return 2
-                elif (
-                    name == "unsigned __int32"
-                    or name == "__int32"
-                    or name == "int"
-                    or name == "unsigned int"
-                    or name == "_DWORD"
-                    or name == "float"
-                ):
-                    return 4
-                elif (
-                    name == "unsigned __int64"
-                    or name == "__int64"
-                    or name == "__fastcall"
-                    or name.endswith("*")
-                ):
-                    return 8
-                else:
-                    dtm = currentProgram.getDataTypeManager()
-                    dt = dtm.getDataType("/" + "/".join(SymbolPathParser.parse(name)))
-                    if dt is not None:
-                        return dt.getLength()
-                    return 0
+                dt = self.get_datatype(name)
+                if dt is not None:
+                    return dt.getLength()
+                return 0
+
+            def fix_generic_name(self, name):
+                # type: (str) -> str
+                if "<" not in name:
+                    return name
+                for match in re.finditer(r"unsigned __[\w*]{3,}|[:\w*]{3,}", name):
+                    tn = self.get_ghidra_type(
+                        SymbolPathParser.parse(match.group(0)).getLast()
+                    )
+                    name = name.replace(match.group(0), tn)
+                return name
 
             def get_ghidra_type(self, name):
+                # type: (str) -> str
                 if name == "__int8":
                     return "byte"
                 elif name == "__int16":
@@ -891,11 +880,17 @@ if api is None:
 
             def get_datatype(self, typename):
                 # type: (str) -> DataType
-                typename = self.get_ghidra_type(typename)
+                raw_type = self.get_ghidra_type(typename)
+                typename = raw_type.rstrip("*")
+                pointer_count = len(raw_type) - len(typename)
+
+                syms = SymbolPathParser.parse(typename)
+                syms[-1] = self.fix_generic_name(syms.getLast())
+
                 dtm = currentProgram.getDataTypeManager()
-                dt = dtm.getDataType("/" + "/".join(SymbolPathParser.parse(typename)))
-                if typename.endswith("*"):
-                    return dtm.getPointer(dt, 8)
+                dt = dtm.getDataType("/" + "/".join(syms))
+                for i in range(pointer_count):
+                    dt = dtm.getPointer(dt)
                 return dt
 
             def create_datatype(self, datatype):
@@ -942,6 +937,7 @@ if api is None:
                 if syms.size() > 0:
                     name = syms.getLast()
 
+                name = self.fix_generic_name(name)
                 if struct.union:
                     dt = UnionDataType(name)
                 else:
@@ -963,7 +959,7 @@ if api is None:
                     if monitor.isCancelled():
                         return
 
-                    offset = field.offset
+                    offset = int(field.offset)
                     dtsize = dt.getLength() if not dt.isZeroLength() else 0
 
                     ft = self.get_datatype(field.type)
@@ -998,19 +994,21 @@ if api is None:
 
             def create_vtable(self, struct):
                 # type: (DefinedStruct) -> None
+                if monitor.isCancelled():
+                    return
                 dt = self.get_datatype(struct.type)
                 comp = dt.getComponentContaining(0)
                 if comp is None or Undefined.isUndefined(comp.getDataType()):
                     dtm = currentProgram.getDataTypeManager()
-                    vt = dtm.getPointer(dtm.getPointer(VoidDataType.dataType), 8)
+                    vt = dtm.getPointer(dtm.getPointer(VoidDataType.dataType))
                     dt.replaceAtOffset(0, vt, -1, "VTable", "vtable placeholder")
 
             def create_union(self, struct):
                 # type: (DefinedStruct) -> None
                 pass
 
-            def update_member_func(self, member_func):
-                # type: (DefinedMemFunc) -> None
+            def update_member_func(self, member_func, struct):
+                # type: (DefinedMemFunc, DefinedStruct) -> None
                 pass
 
             def should_update_member_func(self):
