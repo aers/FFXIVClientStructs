@@ -1,15 +1,3 @@
-# VTableAddressAttribute offset changes:
-# Client.UI.RaptureAtkModule::VTable: 5 => 3
-# Client.Game.Control.InputManager.GetMouseButtonHoldState: 2 -> 4
-# Client.Game.Control.GazeController::VTable: 4 -> 3
-# Client.Game.Control.GazeController+Gaze+TargetInformation::VTable: 6 -> 3
-
-# StaticAddress offset changes:
-# Client.UI.Agent.CharaSelectCharacterList.GetCurrentCharacter: 3 -> 5
-# Client.System.Framework.Framework.Instance: 7 -> 6
-# Client.Game.UI.RouletteController.Instance: 3 -> 6
-# Client.Game.MirageManager.Instance: 3 -> 5
-
 # Manual fixes:
 "E8 ?? ?? ?? ?? 4D 39 BE" = "E8 ?? ?? ?? ?? 48 63 45 80" # Client::UI::UIModule.PlaySound
 "E8 ?? ?? ?? ?? 3A 43 08" = "0F B6 41 7D 4C 8B CA" # Client.Game.InventoryItem.GetStain (takes new index param now)
