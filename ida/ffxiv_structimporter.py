@@ -519,10 +519,10 @@ if api is None:
                         s, 0, ida_struct.get_struc_last_offset(s) + 1
                     )
                 ida_struct.del_struc(
-                    ida_struct.get_struc(ida_struct.get_struc_id(fullname + "VTable"))
+                    ida_struct.get_struc(ida_struct.get_struc_id(fullname + "Union"))
                 )
                 ida_struct.del_struc(
-                    ida_struct.get_struc(ida_struct.get_struc_id(fullname + "Union"))
+                    ida_struct.get_struc(ida_struct.get_struc_id(fullname + "VTable"))
                 )
 
             def create_struct(self, struct):
