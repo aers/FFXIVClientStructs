@@ -20,12 +20,9 @@
 "E9 ?? ?? ?? ?? 45 33 C9 4C 8B C0 33 D2 B9 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 85 C0 0F 84 ?? ?? ?? ?? 48 8B C8 48 83 C4 20 5B E9 ?? ?? ?? ?? 45 33 C9 4C 8B C0 33 D2 B9 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 85 C0 0F 84 ?? ?? ?? ?? 48 8B C8 48 83 C4 20 5B E9 ?? ?? ?? ?? 45 33 C9 4C 8B C0 33 D2 B9 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 85 C0 74 5D" = "" # Component.GUI.AtkNineGridNode.Ctor (uses AtkResNode ctor and slaps vtable on it)
 "E9 ?? ?? ?? ?? 45 33 C9 4C 8B C0 33 D2 B9 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 85 C0 0F 84 ?? ?? ?? ?? 48 8B C8 48 83 C4 20 5B E9 ?? ?? ?? ?? 45 33 C9 4C 8B C0 33 D2 B9 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 85 C0 74 5D" = "" # Component.GUI.AtkCounterNode.Ctor (uses AtkResNode ctor and slaps vtable on it)
 "E9 ?? ?? ?? ?? 45 33 C9 4C 8B C0 33 D2 B9 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 85 C0 74 5D" = "" # Component.GUI.AtkCollisionNode.Ctor (uses AtkResNode ctor and slaps vtable on it)
-"E8 ?? ?? ?? ?? 84 C0 75 0A 66 FF C6" = "" # Client.UI.Agent.AgentMJIGatheringHouse.IsExpeditionUnlocked (inlined at 0x141541283)
 "E8 ?? ?? ?? ?? 48 85 C0 74 2C 48 8D 48 2C" = "" # Client.UI.Agent.LobbyData.GetCharacterEntryByIndex (inlined, example at 0x1402E7F02)
 "E8 ?? ?? ?? ?? 49 8B DF 48 8B 0D" = "" # Client.Graphics.Scene.CharacterBase.ReadStainingTemplate (reworked, PrepareColorSet: E8 ?? ?? ?? ?? 49 89 04 3E)
-"40 55 48 83 EC 30 41 0F B6 E9" = "" # Client.LayoutEngine.OutdoorAreaLayoutData.SetFixtureStain (can't find it)
 "E8 ?? ?? ?? ?? 44 0F B6 0E 41 80 F9 FF" = "" # Client.LayoutEngine.OutdoorAreaLayoutData.SetFixture (no xrefs: 40 55 41 56 48 83 EC 38 49 63 E8)
-"E8 ?? ?? ?? ?? 33 C0 48 83 C4 38 C3 33 C0" = "" # Client.LayoutEngine.LayoutManager.SetInteriorFixture (can't find it, 48 83 EC 28 4C 8B D2 8B D1)
 "48 89 5C 24 ?? 56 48 83 EC 20 4C 8B 09" = "" # Client.Network.PacketDispatcher.ReceiveEvent (invalid already - some FateManager stuff)
 "E8 ?? ?? ?? ?? 48 8B F8 48 85 C0 0F 84 ?? ?? ?? ?? 49 8B 0F" = "" # Component.GUI.AtkComponentTextNineGrid.Ctor (inlined)
 "E9 ?? ?? ?? ?? 48 85 C0 74 61" = "" # Component.GUI.AtkComponentBase.PlayTimelineAnimation (inlined, see AtkComponentButton_SetEnabledState (0x1406656D0))
@@ -43,20 +40,11 @@
 "E8 ?? ?? ?? ?? EB 31 85 D2" = "" # Component.Text.TextParameter.SetInteger (inlined)
 "E8 ?? ?? ?? ?? 48 FF 45 1F" = "" # Component.Text.TextParameter.SetString (inlined)
 "E8 ?? ?? ?? ?? EB 11 48 83 F8 02" = "" # Component.Text.TextParameter.SetReferencedUtf8String (inlined)
-"E8 ?? ?? ?? ?? C6 45 E8 01" = "" # Component.Text.ReferencedUtf8String.Create (inlined?)
-"E8 ?? ?? ?? ?? 0F B7 C0 48 83 C4 60" = "" # Client.UI.RaptureAtkModule.OpenAddonByAgent (inlined at 0x1400DD905)
-"45 33 C9 48 81 C1 ?? ?? ?? ?? 45 8D 51 02" = "" # Client.Game.QuestManager.GetBeastTribeAllowance (inlined 0x1409C4E30)
-"E8 ?? ?? ?? ?? 3A C3 72 1E" = "" # Client.Game.MJI.MJIPastureHandler.GetCurrentRoamingMinionCount (inlined 0x14184BE4E)
-"E8 ?? ?? ?? ?? EB 72 48 8D 4D 10" = "" # Client.Game.MJI.MJIPastureHandler.CollectLeavingsAll (inlined 0x14184EBA7)
+"E8 ?? ?? ?? ?? C6 45 E8 01" = "" # Component.Text.ReferencedUtf8String.Create (inlined)
+"E8 ?? ?? ?? ?? EB 72 48 8D 4D 10" = "" # Client.Game.MJI.MJIPastureHandler.CollectLeavingsAll (inlined at 0x14184EBA7, 0x14184AA80 without xrefs and CC sig)
 "E8 ?? ?? ?? ?? 48 8B F0 48 85 C0 75 12 48 FF C7" = "" # Client.Game.Object.GameObjectManager.GetGameObjectByIndex (inlined 0x14078750E)
-"E8 ?? ?? ?? ?? 0F B6 54 24 ?? 8B 44 24 30" = "" # Client.UI.Misc.RaptureHotbarModule.GetSlotAppearance (inlined in sub_1407BE4B0)
-"E8 ?? ?? ?? ?? 83 F8 0F B9 ?? ?? ?? ??" = "" # Client.UI.Misc.RaptureMacroModule.GetLineCount (inlined in sub_14079F570)
-"40 53 48 83 EC 20 41 8B D8 80 FA 11" = "" # Client.UI.Misc.HotBarSlot.IsSlotActionTargetInRange2 (no xrefs)
-"41 83 F8 14 77 3C" = "" # Client.UI.Info.InfoProxyItemSearch.ProcessItemHistory (can't find it, but found the function it calls: E8 ?? ?? ?? ?? 48 8B 74 24 ?? 4C 8B 64 24 ?? 48 83 C4 48)
-"E8 ?? ?? ?? ?? 48 8B F0 48 85 C0 74 4E 48 8B 10" = "" # Client.Game.Object.ClientObjectManager.GetObjectByIndex (inlined in sub_1415B56A0)
 "40 56 48 83 EC 20 80 B9 ?? ?? ?? ?? ?? 48 8B F1 7C 08" = "" # Client.UI.Misc.BannerModuleData.CreateBanner (inlined in BannerModule_CreateBanner/sub_14079DDF0)
 "E8 ?? ?? ?? ?? 40 0A F0 FF C3 48 FF C7 83 FB 6E 72 D6 40 0F B6 C6 48 8B 8C 24 ?? ?? ?? ?? 48 33 CC E8 ?? ?? ?? ?? 4C 8D 9C 24 ?? ?? ?? ?? 49 8B 5B 18 49 8B 6B 20 49 8B 73 28 49 8B E3 5F C3 CC CC" = "" # Client.UI.Misc.BannerModule.DeleteBanner (inlined, BannerModuleData_DeleteBanner = sub_14079DF80)
-"40 53 48 83 EC ?? 48 63 DA 85 D2" = "" # Client.Game.ActionManager.GetRecastGroupDetail (inlined in sub_140B31E50)
 
 # Failed Signatures:
 "E8 ?? ?? ?? ?? 48 8B 87 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? 4C 89 BF" = "E8 ?? ?? ?? ?? 48 8B 87 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? 45 33 ED" # Component.GUI.AtkTexture.Ctor
@@ -417,6 +405,18 @@
 "E9 ?? ?? ?? ?? C3 48 83 EC 48" = "40 53 48 83 EC 30 0F B7 41 2A" # Component.GUI.AtkTimeline.UpdateChildTimelines
 "48 89 5C 24 ?? 41 54 41 56 41 57 48 83 EC ?? 4D 8B F8" = "E8 ?? ?? ?? ?? 48 8D 7B 24" # Client.Game.Character.Ornament.SetupOrnament
 "48 83 EC 48 48 8B 05 ?? ?? ?? ?? 4D 8B D1" = "E8 ?? ?? ?? ?? 44 0F B6 F0 84 C0 75 54" # Common.Component.BGCollision.BGCollisionModule.Raycast2
+"E8 ?? ?? ?? ?? 0F B6 54 24 ?? 8B 44 24 30" = "48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 30 48 8B DA 49 8B F0" # Client.UI.Misc.RaptureHotbarModule.GetSlotAppearance (no xrefs)
+"40 55 48 83 EC 30 41 0F B6 E9" = "40 55 48 83 EC 20 41 0F B6 E9" # Client.LayoutEngine.OutdoorAreaLayoutData.SetFixtureStain (no xrefs)
+"41 83 F8 14 77 3C" = "40 57 41 56 48 83 EC 48 83 3A 00" # Client.UI.Info.InfoProxyItemSearch.ProcessItemHistory (1 param less)
+"40 53 48 83 EC ?? 48 63 DA 85 D2" = "40 53 48 83 EC 20 48 63 DA 85 D2 78 50" # Client.Game.ActionManager.GetRecastGroupDetail (no xrefs)
+"45 33 C9 48 81 C1 ?? ?? ?? ?? 45 8D 51 02" = "33 C0 4C 8B C1 66 39 81 ?? ?? ?? ?? 0F 94 C0" # Client.Game.QuestManager.GetBeastTribeAllowance
+"E8 ?? ?? ?? ?? 83 F8 0F B9 ?? ?? ?? ??" = "E8 ?? ?? ?? ?? 8B F8 85 C0 7E 35" # Client.UI.Misc.RaptureMacroModule.GetLineCount
+"E8 ?? ?? ?? ?? 33 C0 48 83 C4 38 C3 33 C0" = "48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 4C 8B 91 ?? ?? ?? ?? 41 8B F9" # Client.LayoutEngine.LayoutManager.SetInteriorFixture (no xrefs)
+"E8 ?? ?? ?? ?? 0F B7 C0 48 83 C4 60" = "48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC 40 4C 8B F2 41 8B E9" # Client.UI.RaptureAtkModule.OpenAddonByAgent (no xrefs)
+"E8 ?? ?? ?? ?? 48 8B F0 48 85 C0 74 4E 48 8B 10" = "48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 41 54 41 55 41 56 41 57 48 83 EC 20 0F B7 EA" # Client.Game.Object.ClientObjectManager.GetObjectByIndex (no xrefs)
+"E8 ?? ?? ?? ?? 84 C0 75 0A 66 FF C6" = "48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 48 8B FA 48 8B F1 48 85 D2 74 31" # Client.UI.Agent.AgentMJIGatheringHouse.IsExpeditionUnlocked (no xrefs)
+"E8 ?? ?? ?? ?? 3A C3 72 1E" = "32 C0 4C 8D 81 ?? ?? ?? ?? 41 B9 ?? ?? ?? ?? 90 41 81 38 ?? ?? ?? ??" # Client.Game.MJI.MJIPastureHandler.GetCurrentRoamingMinionCount (no xrefs)
+"40 53 48 83 EC 20 41 8B D8 80 FA 11" = "40 53 48 83 EC ?? 44 0F B6 CA 41 8B D8 41 8B D1 83 EA ?? 74 ?? 83 EA" # Client.UI.Misc.HotBarSlot.IsSlotActionTargetInRange2 (no xrefs)
 
 # Signatures with Multiple Matches:
 "E8 ?? ?? ?? ?? 2B C6" = "E8 ?? ?? ?? ?? 2B C6 89 43 0C" # Client.Game.InventoryItem.GetQuantity
