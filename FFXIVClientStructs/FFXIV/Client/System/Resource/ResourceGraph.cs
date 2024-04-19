@@ -33,8 +33,8 @@ public unsafe partial struct ResourceGraph {
         [FieldOffset(0x0), Obsolete("Use CategoryMapsSpan[0]")] public CategoryMap* MainMap;
     }
 
-    [FixedSizeArray<CategoryContainer>(0x15)]
-    [FieldOffset(0x0)] public fixed byte ContainerArray[0xA0 * 0x15];
+    [FixedSizeArray<CategoryContainer>(0x14)]
+    [FieldOffset(0x0)] public fixed byte ContainerArray[0xA0 * 0x14];
 
     [FieldOffset(0x000), Obsolete("Use ContainerArraySpan[0]")] public CategoryContainer CommonContainer;
     [FieldOffset(0x0A0), Obsolete("Use ContainerArraySpan[1]")] public CategoryContainer BgCommonContainer;
