@@ -492,6 +492,14 @@ if api is None:
                     if getattr(idc, item) == n:
                         return item
 
+            def delete_struct_members(self, fullname):
+                # type: (str) -> None
+                s = ida_struct.get_struc(ida_struct.get_struc_id(fullname))
+                if s is not None and ida_struct.get_struc_size(s) != 0:
+                    ida_struct.del_struc_members(
+                        s, 0, ida_struct.get_struc_last_offset(s) + 1
+                    )
+
             @property
             def get_file_path(self):
                 return os.path.join(
@@ -516,17 +524,9 @@ if api is None:
             def delete_struct(self, struct):
                 # type: (DefinedStruct) -> None
                 fullname = self.clean_name(struct.type)
-                s = ida_struct.get_struc(ida_struct.get_struc_id(fullname))
-                if s is not None and ida_struct.get_struc_size(s) != 0:
-                    ida_struct.del_struc_members(
-                        s, 0, ida_struct.get_struc_last_offset(s) + 1
-                    )
-                ida_struct.del_struc(
-                    ida_struct.get_struc(ida_struct.get_struc_id(fullname + "Union"))
-                )
-                ida_struct.del_struc(
-                    ida_struct.get_struc(ida_struct.get_struc_id(fullname + "VTable"))
-                )
+                self.delete_struct_members(fullname)
+                self.delete_struct_members(fullname + "Union")
+                self.delete_struct_members(fullname + "VTable")
 
             def create_struct(self, struct):
                 # type: (DefinedStruct) -> None
