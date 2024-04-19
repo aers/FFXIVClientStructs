@@ -43,7 +43,6 @@
 "E8 ?? ?? ?? ?? EB 31 85 D2" = "" # Component.Text.TextParameter.SetInteger (inlined)
 "E8 ?? ?? ?? ?? 48 FF 45 1F" = "" # Component.Text.TextParameter.SetString (inlined)
 "E8 ?? ?? ?? ?? EB 11 48 83 F8 02" = "" # Component.Text.TextParameter.SetReferencedUtf8String (inlined)
-"48 83 EC 48 48 8B 05 ?? ?? ?? ?? 4D 8B D1" = "" # Common.Component.BGCollision.BGCollisionModule.Raycast2 (no xrefs, bad sig, just no)
 "E8 ?? ?? ?? ?? C6 45 E8 01" = "" # Component.Text.ReferencedUtf8String.Create (inlined?)
 "E8 ?? ?? ?? ?? 0F B7 C0 48 83 C4 60" = "" # Client.UI.RaptureAtkModule.OpenAddonByAgent (inlined at 0x1400DD905)
 "45 33 C9 48 81 C1 ?? ?? ?? ?? 45 8D 51 02" = "" # Client.Game.QuestManager.GetBeastTribeAllowance (inlined 0x1409C4E30)
@@ -417,6 +416,7 @@
 "E8 ?? ?? ?? ?? 3C 01 0F 85 ?? ?? ?? ?? EB 46" = "E8 ?? ?? ?? ?? 41 3A C5 0F 85 ?? ?? ?? ??" # Client.Game.ActionManager.UseActionLocation
 "E9 ?? ?? ?? ?? C3 48 83 EC 48" = "40 53 48 83 EC 30 0F B7 41 2A" # Component.GUI.AtkTimeline.UpdateChildTimelines
 "48 89 5C 24 ?? 41 54 41 56 41 57 48 83 EC ?? 4D 8B F8" = "E8 ?? ?? ?? ?? 48 8D 7B 24" # Client.Game.Character.Ornament.SetupOrnament
+"48 83 EC 48 48 8B 05 ?? ?? ?? ?? 4D 8B D1" = "E8 ?? ?? ?? ?? 44 0F B6 F0 84 C0 75 54" # Common.Component.BGCollision.BGCollisionModule.Raycast2
 
 # Signatures with Multiple Matches:
 "E8 ?? ?? ?? ?? 2B C6" = "E8 ?? ?? ?? ?? 2B C6 89 43 0C" # Client.Game.InventoryItem.GetQuantity
