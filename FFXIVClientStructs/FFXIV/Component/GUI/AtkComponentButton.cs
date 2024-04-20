@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 // common CreateAtkComponent function "E8 ?? ?? ?? ?? 48 8B F8 48 85 C0 0F 84 ?? ?? ?? ?? 49 8B 0F"
 // type 1
 [StructLayout(LayoutKind.Explicit, Size = 0xF0)]
-public unsafe struct AtkComponentButton {
+public unsafe partial struct AtkComponentButton {
     [FieldOffset(0x0)] public AtkComponentBase AtkComponentBase;
 
     // based on the text size
@@ -19,4 +19,14 @@ public unsafe struct AtkComponentButton {
     [FieldOffset(0xE8)] public uint Flags;
 
     public bool IsEnabled => AtkComponentBase.OwnerNode->AtkResNode.NodeFlags.HasFlag(NodeFlags.Enabled);
+
+    /// <remarks> Used by AtkComponentCheckBox and AtkComponentRadioButton. </remarks>
+    public bool IsChecked {
+        get => (Flags & (1 << 18)) != 0;
+        set => SetChecked(value);
+    }
+
+    /// <remarks> Used by AtkComponentCheckBox and AtkComponentRadioButton. </remarks>
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B7 DD")]
+    public partial void SetChecked(bool isChecked);
 }

@@ -5295,6 +5295,7 @@ classes:
       0x140552790: ctor
       0x14057DCC0: Finalize
       0x1405A46E0: GetOwnerNode
+      0x140552450: SetChecked
   Component::GUI::AtkComponentIcon:
     vtbls:
       - ea: 0x141A08D48
