@@ -299,7 +299,6 @@ functions:
   0x14076A330: ProcessActorControlPacket
   0x140B1E450: IsInMordionGaol # if this returns true, i'm sorry for you
   0x140B71C20: WorldToScreenPoint
-  0x14144C430: GetBannerConditionUnlockState
   0x14145E250: GetInstanceContentCrystallineConflictDirector
   0x1414AEAB0: GetInstanceContentMahjongDirector
   0x14170EB20: OodleNew # oodle code starts here
@@ -4827,6 +4826,9 @@ classes:
       0x1404CDDD0: GetSheetByName  # (ExdModule* this, char* pcszName) -> ExcelSheet*
       0x14067B650: IsColumnRsv  # (ExdModule* this, int nSheetIndex, int nRowId, int nSubRowId, int nColumnIndex) -> bool
       0x1406F1D40: GetItemRowById
+  Component::Exd::Sheets::BannerCondition:
+    funcs:
+      0x14144C430: GetBannerConditionUnlockState
   Client::System::Scheduler::ScheduleManagement:
     vtbls:
       - ea: 0x141A03AA8
