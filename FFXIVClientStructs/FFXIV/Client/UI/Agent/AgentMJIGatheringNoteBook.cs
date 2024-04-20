@@ -13,7 +13,7 @@ public unsafe partial struct AgentMJIGatheringNoteBook {
     public readonly partial void SelectItem(uint itemIndex);
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x1A0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x1D0)]
 public struct AgentMJIGatheringNoteBookData {
     [FieldOffset(0)] public uint Status;
 
