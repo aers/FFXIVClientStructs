@@ -5270,6 +5270,7 @@ classes:
       0x14053D290: GetImageNodeById
       0x140539060: FireCallbackAndHideOrClose
       0x14053D390: FireCallback
+      0x14053DFB0: MoveDelta
       0x14053FA40: UpdateCollisionNodeList
   Component::GUI::AtkComponentBase:
     vtbls:
