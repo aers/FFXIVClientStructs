@@ -116,6 +116,8 @@ functions:
   0x1406555D0: GetRandomInteger
   0x140655630: GetRandomFloat
   0x140419820: UpdateAnimFactor
+  0x140483FF0: GetActionTimelineKey
+  0x140484020: GetWeaponTimelineKey
   0x1404999F0: PrepareColorSet
   0x140499CC0: ReadStainingTemplate
   0x1404BDEB0: StartSpursJobEntityWorkerThread
@@ -14425,11 +14427,12 @@ classes:
   Client::System::Scheduler::ActionTimelineManager:
     vtbls:
       - ea: 0x141B48F58
+    instances:
+      - ea: 0x142232C68
     funcs:
       0x14139B030: CreateInstance
       0x14139B080: ctor
-    instances:
-      - ea: 0x142232C68
+      0x14139B420: PreloadActionTmbByKey
   Client::System::Scheduler::TimelineGroup:
     vtbls:
       - ea: 0x141B64698
