@@ -11,6 +11,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 public partial struct AgentStatus {
     [FieldOffset(0x00)] public AgentInterface AgentInterface;
 
+    [FieldOffset(0x3C)] public byte TabIndex;
+
     [FieldOffset(0x80)] public StatusCharaView CharaView;
 
     // Client::UI::Agent::AgentStatus::StatusCharaView

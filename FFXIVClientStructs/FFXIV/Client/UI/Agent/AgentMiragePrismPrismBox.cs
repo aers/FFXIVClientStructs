@@ -12,6 +12,9 @@ public unsafe partial struct AgentMiragePrismPrismBox {
     [FieldOffset(0x39)] public byte TabIndex;
     [FieldOffset(0x3A)] public byte PageIndex;
     [FieldOffset(0x48)] public InventoryItem TempDyeItem;
+
+    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 0F B6 43 3A")]
+    public partial void UpdateItems(bool resetTabIndex, bool a2);
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x1BAE0)]

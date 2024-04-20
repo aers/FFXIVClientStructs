@@ -7454,6 +7454,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140A49220: ctor
+      0x140A4ABA0: TeleportToAetheryte
   Client::UI::Agent::AgentSocial:
     vtbls:
       - ea: 0x1419E0998
@@ -8515,6 +8516,8 @@ classes:
     vtbls:
       - ea: 0x1419DFFD8
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1402826A0: AddItemContextMenuEntries
   Client::UI::Agent::AgentContactList:
     vtbls:
       - ea: 0x1419E33E8
@@ -8628,6 +8631,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140AE5430: ctor
+      0x140AE7F40: UpdateItems
   Client::UI::Agent::AgentMiragePrismItemDetail:
     vtbls:
       - ea: 0x141A75200
@@ -9160,6 +9164,8 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x1409F3CB0: ctor
+      0x1409F3D50: OpenByRecipeId
+      0x1409F47C0: OpenRecipeResultItemContextMenu
   Client::UI::Agent::AgentRecipeProductList:
     vtbls:
       - ea: 0x141A6F910
@@ -9467,6 +9473,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x14127E840: ctor
+      0x14127EE30: SelectItem
   Client::UI::Agent::AgentMJIRecipeNoteBook:
     vtbls:
       - ea: 0x141B3C778
@@ -9631,6 +9638,8 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x141289950: ctor
+      0x14128B8C0: HandleCommand
+      0x14128C740: GetSelectedMinionId
   Client::UI::Agent::AgentMJISettings:
     vtbls:
       - ea: 0x141B3C5E8
@@ -11763,8 +11772,13 @@ classes:
     vfuncs:
       3: OnItemSelected
     funcs:
-
       0x140D80190: Finalize
+  Client::UI::TabController:
+    vtbls:
+      - ea: 0x141A8FE68
+        base: Component::GUI::AtkEventListener
+    funcs:
+      0x140D85D50: ctor
   Client::UI::AddonFadeMiddleBack:
     vtbls:
       - ea: 0x141A90590
@@ -11807,6 +11821,7 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x140FA7660: ctor
+      0x140FA8760: SetTab
   Client::UI::AddonBuddyAction:
     vtbls:
       - ea: 0x141ADC1C8
@@ -12053,6 +12068,7 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x140ED3180: ctor
+      0x140ED5940: SetTab
   Client::UI::AddonCharacterStatus:
     vtbls:
       - ea: 0x141AC5A48
@@ -12071,6 +12087,7 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x140F86BE0: ctor
+      0x140F879C0: SetTab
   Client::UI::AddonCharacterRepute:
     vtbls:
       - ea: 0x141AD7200
@@ -12095,12 +12112,14 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x140FEF900: ctor
+      0x140FF0550: SetTab
   Client::UI::AddonFateProgress:
     vtbls:
       - ea: 0x141ADD628
         base: Component::GUI::AtkUnitBase
     funcs:
       0x140FBCA10: ctor
+      0x140FBD050: SetTab
   Client::UI::AddonFishingNote:
     vtbls:
       - ea: 0x141AC7CE0
@@ -12189,6 +12208,7 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x140F0C350: ctor
+      0x140F10310: SetTab
   Client::UI::AddonAOZNotebookPresetList:
     vtbls:
       - ea: 0x141AC9F40
@@ -12220,6 +12240,8 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x140FC37E0: ctor
+      0x140FC5240: NextTab
+      0x140FC52F0: PreviousTab
   Client::UI::AddonCabinetWithdraw:
     vtbls:
       - ea: 0x141ADEF68
@@ -13260,42 +13282,57 @@ classes:
         base: Client::UI::AddonInventoryInterface
     funcs:
       0x140EC1C80: ctor
+      0x140EC2A00: SetTab
+      0x140EC2B20: SwitchToKeyItems
   Client::UI::AddonInventoryBuddy:
     vtbls:
       - ea: 0x141AE66A0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x140FFF9D0: ctor
+      0x141001170: SetTab
   Client::UI::AddonInventoryEvent:
     vtbls:
       - ea: 0x141AC42C8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x140EC7EB0: ctor
+      0x140EC8F30: SetTab
+      0x140EC8E50: SwitchToInventory
   Client::UI::AddonInventoryExpansion:
     vtbls:
       - ea: 0x141AC4548
         base: Client::UI::AddonInventoryInterface
     funcs:
       0x140EC9570: ctor
+      0x140ECA7E0: SetTab
   Client::UI::AddonInventoryLarge:
     vtbls:
       - ea: 0x141AC3E08
         base: Client::UI::AddonInventoryInterface
     funcs:
       0x140EC4DF0: ctor
+      0x140EC6440: SetTab
   Client::UI::AddonInventoryRetainer:
     vtbls:
       - ea: 0x141AC4E88
         base: Component::GUI::AtkUnitBase
     funcs:
       0x140ECD620: ctor
+      0x140ECE690: SetTab
   Client::UI::AddonInventoryRetainerLarge:
     vtbls:
       - ea: 0x141AC5588
         base: Component::GUI::AtkUnitBase
     funcs:
       0x140ED0E40: ctor
+      0x140ED20D0: SetTab
+  Client::UI::AddonInventoryGrid:
+    vtbls:
+      - ea: 0x141AC3988
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140EC3150: ctor
   Client::UI::AddonJobHud:
     vtbls:
       - ea: 0x141B1E448
@@ -13878,6 +13915,7 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x140F02100: ctor
+      0x140F05F70: SwitchToFavorites
   Client::UI::AddonMinionNoteBook:
     vtbls:
       - ea: 0x141AC9430

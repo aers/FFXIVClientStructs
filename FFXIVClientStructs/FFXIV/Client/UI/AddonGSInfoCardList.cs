@@ -7,6 +7,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 public unsafe partial struct AddonGSInfoCardList {
     [FieldOffset(0x00)] public AtkUnitBase AtkUnitBase;
 
+    [FieldOffset(0x298)] public TabController TabController;
+
     [FieldOffset(0x348)] public AtkResNode* PageSelection;
 
     [FixedSizeArray<Pointer<AtkComponentButton>>(9)]
