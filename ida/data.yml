@@ -5031,6 +5031,8 @@ classes:
     vtbls:
       - ea: 0x141A08420
         base: Component::Text::MacroDecoder
+    funcs:
+      0x1405247D0: CalculateLines
   Component::GUI::AtkCursor:
     funcs:
       0x140510AC0: Show
