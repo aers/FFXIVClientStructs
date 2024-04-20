@@ -7,7 +7,10 @@ public unsafe partial struct NetworkModuleProxy {
     [FieldOffset(0x10), Obsolete("Wrongly defined overflows struct size")] public NetworkModulePacketReceiverCallback PacketReceiverCallback;
 
     [MemberFunction("E8 ?? ?? ?? ?? EB ?? 49 8B 85")]
-    public partial bool IsInCrossWorlDuty();
+    public partial bool IsInCrossWorldDuty();
+
+    [Obsolete("Renamed to IsInCrossWorldDuty")]
+    public bool IsInCrossWorlDuty() => IsInCrossWorldDuty();
 
     /// <summary>
     /// Gets current instance<br/>
