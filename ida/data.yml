@@ -3838,7 +3838,6 @@ classes:
       - ea: 0x141B42D80
         base: Client::Network::Protocol::Chat::PacketReceiverCallbackInterface
     funcs:
-      0x1412ECC20: ReceiveEvent
       0x14149AF70: HandlePartyInvitePacket
       0x14149B040: HandleSocialPacket
       0x14149E680: HandleMarketBoardOfferingsPacket
