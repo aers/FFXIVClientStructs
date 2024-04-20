@@ -903,6 +903,19 @@ if api is None:
                 else:
                     return dtm.addDataType(datatype, None)
 
+            def create_function_def(self, func):
+                # type: (DefinedVFunc) -> FunctionDefinitionDataType
+                fd = FunctionDefinitionDataType(func.name)
+                return_type = self.get_datatype(func.return_type)
+                fd.setReturnType(return_type)
+                args = []
+                for arg in func.parameters:
+                    arg_type = self.get_datatype(arg.type)
+                    ad = ParameterDefinitionImpl(arg.name, arg_type, None)
+                    args.append(ad)
+                fd.setArguments(args)
+                return fd
+
             @property
             def get_file_path(self):
                 return os.path.join(
@@ -996,16 +1009,97 @@ if api is None:
                 # type: (DefinedStruct) -> None
                 if monitor.isCancelled():
                     return
+                dtm = currentProgram.getDataTypeManager()
                 dt = self.get_datatype(struct.type)
-                comp = dt.getComponentContaining(0)
-                if comp is None or Undefined.isUndefined(comp.getDataType()):
-                    dtm = currentProgram.getDataTypeManager()
-                    vt = dtm.getPointer(dtm.getPointer(VoidDataType.dataType))
-                    dt.replaceAtOffset(0, vt, -1, "VTable", "vtable placeholder")
+
+                vt_type = StructureDataType("VTable", 0)
+                vt_type.setCategoryPath(
+                    CategoryPath(dt.getCategoryPath(), [dt.getName()])
+                )
+                vt_type = self.create_datatype(vt_type)
+                if struct.fields != [] and struct.fields[0].offset == 0:
+                    u_type = UnionDataType("Union")
+                    u_type.setCategoryPath(
+                        CategoryPath(dt.getCategoryPath(), [dt.getName()])
+                    )
+                    u_type.add(dtm.getPointer(vt_type), -1, "VTable", "")
+                    comp = dt.getComponentContaining(0)
+                    if comp and not Undefined.isUndefined(comp.getDataType()):
+                        u_type.add(
+                            comp.getDataType(), -1, comp.getFieldName(), "parent class"
+                        )
+                    self.create_datatype(u_type)
+
+                last_offset = int(struct.virtual_functions[-1].offset)
+                for func in struct.virtual_functions:
+                    func_def = self.create_function_def(func)
+                    func_def.setCategoryPath(
+                        CategoryPath(vt_type.getCategoryPath(), [vt_type.getName()])
+                    )
+                    vt_type.insertAtOffset(
+                        int(func.offset),
+                        dtm.getPointer(func_def),
+                        -1,
+                        func.name,
+                        "vf{0}".format(int(func.offset) / 8),
+                    )
+
+                void_ptr = dtm.getPointer(VoidDataType.dataType)
+                for offset in range(last_offset):
+                    dtc = vt_type.getComponentContaining(offset)
+                    if not dtc or Undefined.isUndefined(dtc.getDataType()):
+                        vt_type.replaceAtOffset(
+                            offset, void_ptr, -1, "vf{0}".format(offset / 8), ""
+                        )
 
             def create_union(self, struct):
                 # type: (DefinedStruct) -> None
-                pass
+                if monitor.isCancelled() or not struct.virtual_functions:
+                    return
+
+                dtm = currentProgram.getDataTypeManager()
+                void_ptr = dtm.getPointer(VoidDataType.dataType)
+                dt = self.get_datatype(struct.type)
+                u_type = self.get_datatype(struct.type + "::Union")
+                vt_type = self.get_datatype(struct.type + "::VTable")
+
+                if vt_type:
+                    dtc = dt.getComponentContaining(0)
+                    while dtc and not Undefined.isUndefined(dtc.getDataType()):
+                        if monitor.isCancelled():
+                            return
+                        parent = dtc.getDataType()
+                        parent_vt = dtm.getDataType(
+                            CategoryPath(parent.getCategoryPath(), [parent.getName()]),
+                            "VTable",
+                        )
+                        if parent_vt:
+                            if parent_vt.getLength() > vt_type.getLength():
+                                vt_type.replaceWith(parent_vt)
+                            else:
+                                for c in parent_vt.getComponents():
+                                    if (
+                                        vt_type.getComponentContaining(c.getOffset())
+                                        .getDataType()
+                                        .equals(void_ptr)
+                                    ):
+                                        vt_type.replaceAtOffset(
+                                            c.getOffset(),
+                                            c.getDataType(),
+                                            -1,
+                                            c.getFieldName(),
+                                            c.getComment(),
+                                        )
+                            dtc = parent_vt.getComponentContaining(0)
+                        else:
+                            break
+
+                if u_type and struct.fields != [] and struct.fields[0].offset == 0:
+                    dt.replaceAtOffset(
+                        0, u_type, -1, "Union", "vtable and parent union"
+                    )
+                elif vt_type:
+                    dt.replaceAtOffset(0, dtm.getPointer(vt_type), -1, "VTable", "")
 
             def update_member_func(self, member_func, struct):
                 # type: (DefinedMemFunc, DefinedStruct) -> None
