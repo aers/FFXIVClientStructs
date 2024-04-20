@@ -5336,6 +5336,7 @@ classes:
       45: GetSelectedItemAtkResNode
     funcs:
       0x140560DA0: ctor
+      0x140559C60: SetItemCount
       0x14055B1A0: SetItemLabel
       0x14055B260: GetItemLabel
       0x1405604C0: DispatchItemEvent

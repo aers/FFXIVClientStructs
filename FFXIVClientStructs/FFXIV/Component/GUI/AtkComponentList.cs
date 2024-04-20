@@ -47,6 +47,9 @@ public unsafe partial struct AtkComponentList {
     [VirtualFunction(36)]
     public partial int GetItemCount();
 
+    [MemberFunction("E8 ?? ?? ?? ?? 41 FE 85")]
+    public partial void SetItemCount(int value);
+
     /// <remarks> Used by <see cref="AtkComponentDropDownList"/>. </remarks>
     [MemberFunction("E8 ?? ?? ?? ?? 45 38 A4 3E"), GenerateCStrOverloads]
     public partial void SetItemLabel(int index, byte* text);
