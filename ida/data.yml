@@ -5421,6 +5421,9 @@ classes:
     funcs:
       0x140571730: ctor
       0x140571820: Finalize
+      0x140571590: SetMinValue
+      0x1405715B0: SetMaxValue
+      0x1405715D0: SetValue
   Component::GUI::AtkComponentInputBase:
     vtbls:
       - ea: 0x141A09778
