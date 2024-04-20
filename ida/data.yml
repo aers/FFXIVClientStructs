@@ -4834,7 +4834,7 @@ classes:
       0x1406F1D40: GetItemRowById
   Component::Exd::Sheets::BannerCondition:
     funcs:
-      0x14144C430: GetBannerConditionUnlockState
+      0x14144C430: GetUnlockState
   Client::System::Scheduler::ScheduleManagement:
     vtbls:
       - ea: 0x141A03AA8
