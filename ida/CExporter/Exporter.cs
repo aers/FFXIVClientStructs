@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using FFXIVClientStructs.Attributes;
-using FFXIVClientStructs.FFXIV.Component.GUI;
 using FFXIVClientStructs.Interop.Attributes;
-using FFXIVClientStructs.STD;
+using Pastel;
 using YamlDotNet.Core;
 using YamlDotNet.Core.Events;
 using YamlDotNet.Serialization;
@@ -71,7 +71,7 @@ public class Exporter {
             foreach (var @struct in tmp) {
                 ProcessType(@struct);
             }
-            
+
             Console.WriteLine($"{PassString(count++)} took {DateTime.UtcNow - now:g}");
 
             now = DateTime.UtcNow;
@@ -81,17 +81,19 @@ public class Exporter {
         Console.WriteLine($"Processed {_enums.Count} enums and {_structs.Count} structs");
     }
 
-    public static void VerifyNoFieldOverlap() {
+    public static void VerifyNoOverlap() {
         foreach (var processedStruct in _structs.Where(t => !t.IsUnion)) {
             var sizes = processedStruct.Fields.Select(t => new { StartOffset = t.FieldOffset, EndOffset = t.FieldOffset + t.FieldType.SizeOf(), Field = t.FieldName }).ToArray();
             foreach (var size in sizes) {
                 var checks = sizes.Where(t => t != size && t.StartOffset <= size.StartOffset).ToArray();
                 if (checks.Any(t => t.EndOffset > size.StartOffset && t.StartOffset != size.StartOffset))
-                    ExporterStatics.ErrorList.Add($"Field overlap detected in {processedStruct.StructType.FullSanitizeName()} with field {size.Field}");
-                if(checks.Any(t => t.StartOffset == size.StartOffset))
-                    ExporterStatics.ErrorList.Add($"Union field detected but not defined in {processedStruct.StructType.FullSanitizeName()} with field {size.Field}");
-                if(size.StartOffset >= processedStruct.StructSize)
-                    ExporterStatics.ErrorList.Add($"Field offset exceeds struct size in {processedStruct.StructType.FullSanitizeName()} with field {size.Field}");
+                    ExporterStatics.ErrorList.Add($"Field overlap detected in {processedStruct.StructType.FullSanitizeName().Pastel(Color.MediumSlateBlue)} with field {size.Field.Pastel(Color.BlueViolet)}");
+                if (checks.Any(t => t.StartOffset == size.StartOffset))
+                    ExporterStatics.ErrorList.Add($"Union field detected but not defined in {processedStruct.StructType.FullSanitizeName().Pastel(Color.MediumSlateBlue)} with field {size.Field.Pastel(Color.BlueViolet)}");
+                if (size.StartOffset >= processedStruct.StructSize)
+                    ExporterStatics.ErrorList.Add($"Field offset exceeds struct size in {processedStruct.StructType.FullSanitizeName().Pastel(Color.MediumSlateBlue)} with field {size.Field.Pastel(Color.BlueViolet)}");
+                if (size.EndOffset > processedStruct.StructSize)
+                    ExporterStatics.ErrorList.Add($"Field size exceeds struct size in {processedStruct.StructType.FullSanitizeName().Pastel(Color.MediumSlateBlue)} with field {size.Field.Pastel(Color.BlueViolet)}");
             }
         }
     }
@@ -101,7 +103,7 @@ public class Exporter {
             foreach (var processedStructField in processedStruct.Fields) {
                 if (!check.TryGetValue(processedStruct.StructType.FullSanitizeName(), out var checkStrings)) continue;
                 if (checkStrings.Contains(processedStructField.FieldName))
-                    ExporterStatics.ErrorList.Add($"Field name overlap detected in {processedStruct.StructType.FullSanitizeName()} with field {processedStructField.FieldName}");
+                    ExporterStatics.ErrorList.Add($"Field name overlap detected in {processedStruct.StructType.FullSanitizeName().Pastel(Color.Blue)} with field {processedStructField.FieldName.Pastel(Color.BlueViolet)}");
             }
         }
     }
@@ -242,7 +244,7 @@ ReExport:
                             return new ProcessedField {
                                 FieldType = p,
                                 FieldOffset = -1,
-                                FieldName = 'a' + (i + 1).ToString()
+                                FieldName = i == 0 ? "this" : $"a{i + 1}"
                             };
                         }).ToArray()
                     };
@@ -314,8 +316,7 @@ ReExport:
                             MemberFunctions = [],
                             StructTypeOverride = type.FullSanitizeName() + $"{ExporterStatics.Separator}{attr.Union}{(attr.IsStruct ? $"{ExporterStatics.Separator}{attr.Struct}" : "")}"
                         });
-                    }
-                    else
+                    } else
                         unions[index].Fields = [
                             ..unions[index].Fields,
                             ProcessField(unionField, unionStartField.GetFieldOffset())
@@ -472,23 +473,22 @@ public class ProcessedFieldConverter : IYamlTypeConverter {
             emitter.Emit(new Scalar(f.FieldOffset.ToString()));
         }
         switch (f) {
-            case ProcessedFunctionField func:
-            {
-                emitter.Emit(new Scalar("return_type"));
-                emitter.Emit(new Scalar(func.FunctionReturnType.FullSanitizeName()));
-                emitter.Emit(new Scalar("parameters"));
-                emitter.Emit(new SequenceStart(null, null, true, SequenceStyle.Block));
-                foreach (var p in func.FunctionParameters) {
-                    emitter.Emit(new MappingStart());
-                    emitter.Emit(new Scalar("type"));
-                    emitter.Emit(new Scalar(p.FieldTypeOverride ?? p.FieldType.FullSanitizeName()));
-                    emitter.Emit(new Scalar("name"));
-                    emitter.Emit(new Scalar(p.FieldName));
-                    emitter.Emit(new MappingEnd());
+            case ProcessedFunctionField func: {
+                    emitter.Emit(new Scalar("return_type"));
+                    emitter.Emit(new Scalar(func.FunctionReturnType.FullSanitizeName()));
+                    emitter.Emit(new Scalar("parameters"));
+                    emitter.Emit(new SequenceStart(null, null, true, SequenceStyle.Block));
+                    foreach (var p in func.FunctionParameters) {
+                        emitter.Emit(new MappingStart());
+                        emitter.Emit(new Scalar("type"));
+                        emitter.Emit(new Scalar(p.FieldTypeOverride ?? p.FieldType.FullSanitizeName()));
+                        emitter.Emit(new Scalar("name"));
+                        emitter.Emit(new Scalar(p.FieldName));
+                        emitter.Emit(new MappingEnd());
+                    }
+                    emitter.Emit(new SequenceEnd());
+                    break;
                 }
-                emitter.Emit(new SequenceEnd());
-                break;
-            }
             case ProcessedFixedField fix:
                 emitter.Emit(new Scalar("size"));
                 emitter.Emit(new Scalar(fix.FixedSize.ToString()));

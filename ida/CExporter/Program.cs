@@ -18,7 +18,7 @@ public class Program {
 
         Exporter.ProcessTypes();
 
-        Exporter.VerifyNoFieldOverlap();
+        Exporter.VerifyNoOverlap();
 
         var dataPath = Path.Combine(dir.FullName, "data.yml");
 
