@@ -3107,7 +3107,7 @@ structs:
     return_type: void
     parameters:
     - type: Common::Component::BGCollision::IMesh*
-      name: a1
+      name: this
     - type: byte
       name: a2
   member_functions: []
@@ -3123,7 +3123,7 @@ structs:
     return_type: void
     parameters:
     - type: Common::Component::BGCollision::Object*
-      name: a1
+      name: this
     - type: byte
       name: a2
   member_functions: []
@@ -3145,7 +3145,7 @@ structs:
     return_type: void
     parameters:
     - type: Common::Component::BGCollision::NodeLink*
-      name: a1
+      name: this
     - type: byte
       name: a2
   member_functions: []
@@ -3243,7 +3243,7 @@ structs:
     return_type: void
     parameters:
     - type: Common::Component::BGCollision::Resource*
-      name: a1
+      name: this
     - type: byte
       name: a2
   - name: GetPath
@@ -3251,31 +3251,31 @@ structs:
     return_type: byte*
     parameters:
     - type: Common::Component::BGCollision::Resource*
-      name: a1
+      name: this
   - name: LoadSucceeded
     offset: 16
     return_type: byte
     parameters:
     - type: Common::Component::BGCollision::Resource*
-      name: a1
+      name: this
   - name: LoadFailed
     offset: 24
     return_type: byte
     parameters:
     - type: Common::Component::BGCollision::Resource*
-      name: a1
+      name: this
   - name: GetData
     offset: 32
     return_type: byte*
     parameters:
     - type: Common::Component::BGCollision::Resource*
-      name: a1
+      name: this
   - name: GetSize
     offset: 40
     return_type: unsigned __int32
     parameters:
     - type: Common::Component::BGCollision::Resource*
-      name: a1
+      name: this
   member_functions: []
 - type: Common::Component::BGCollision::SceneWrapper
   name: SceneWrapper
@@ -3298,13 +3298,13 @@ structs:
     return_type: void
     parameters:
     - type: Common::Component::BGCollision::SceneWrapper*
-      name: a1
+      name: this
   - name: SetStreamingSphere
     offset: 16
     return_type: void
     parameters:
     - type: Common::Component::BGCollision::SceneWrapper*
-      name: a1
+      name: this
     - type: float
       name: a2
     - type: float
@@ -3318,13 +3318,13 @@ structs:
     return_type: byte
     parameters:
     - type: Common::Component::BGCollision::SceneWrapper*
-      name: a1
+      name: this
   - name: AddColliderStreamed
     offset: 32
     return_type: Common::Component::BGCollision::ColliderStreamed*
     parameters:
     - type: Common::Component::BGCollision::SceneWrapper*
-      name: a1
+      name: this
     - type: unsigned __int64
       name: a2
     - type: byte*
@@ -3336,7 +3336,7 @@ structs:
     return_type: Common::Component::BGCollision::ColliderMesh*
     parameters:
     - type: Common::Component::BGCollision::SceneWrapper*
-      name: a1
+      name: this
     - type: unsigned __int64
       name: a2
     - type: byte*
@@ -3354,7 +3354,7 @@ structs:
     return_type: Common::Component::BGCollision::ColliderMesh*
     parameters:
     - type: Common::Component::BGCollision::SceneWrapper*
-      name: a1
+      name: this
     - type: unsigned __int64
       name: a2
     - type: System::Numerics::Vector3*
@@ -3368,7 +3368,7 @@ structs:
     return_type: Common::Component::BGCollision::ColliderBox*
     parameters:
     - type: Common::Component::BGCollision::SceneWrapper*
-      name: a1
+      name: this
     - type: unsigned __int64
       name: a2
     - type: System::Numerics::Vector3*
@@ -3382,7 +3382,7 @@ structs:
     return_type: Common::Component::BGCollision::ColliderCylinder*
     parameters:
     - type: Common::Component::BGCollision::SceneWrapper*
-      name: a1
+      name: this
     - type: unsigned __int64
       name: a2
     - type: System::Numerics::Vector3*
@@ -3396,7 +3396,7 @@ structs:
     return_type: Common::Component::BGCollision::ColliderSphere*
     parameters:
     - type: Common::Component::BGCollision::SceneWrapper*
-      name: a1
+      name: this
     - type: unsigned __int64
       name: a2
     - type: System::Numerics::Vector3*
@@ -3410,7 +3410,7 @@ structs:
     return_type: Common::Component::BGCollision::ColliderPlane*
     parameters:
     - type: Common::Component::BGCollision::SceneWrapper*
-      name: a1
+      name: this
     - type: unsigned __int64
       name: a2
     - type: System::Numerics::Vector3*
@@ -3424,7 +3424,7 @@ structs:
     return_type: Common::Component::BGCollision::ColliderPlane*
     parameters:
     - type: Common::Component::BGCollision::SceneWrapper*
-      name: a1
+      name: this
     - type: unsigned __int64
       name: a2
     - type: System::Numerics::Vector3*
@@ -3438,7 +3438,7 @@ structs:
     return_type: void
     parameters:
     - type: Common::Component::BGCollision::SceneWrapper*
-      name: a1
+      name: this
     - type: Common::Component::BGCollision::Collider*
       name: a2
   - name: UpdateColliders
@@ -3446,13 +3446,13 @@ structs:
     return_type: void
     parameters:
     - type: Common::Component::BGCollision::SceneWrapper*
-      name: a1
+      name: this
   - name: Raycast
     offset: 112
     return_type: byte
     parameters:
     - type: Common::Component::BGCollision::SceneWrapper*
-      name: a1
+      name: this
     - type: Common::Component::BGCollision::RaycastHit*
       name: a2
     - type: unsigned __int64
@@ -3464,7 +3464,7 @@ structs:
     return_type: byte
     parameters:
     - type: Common::Component::BGCollision::SceneWrapper*
-      name: a1
+      name: this
     - type: __int64
       name: a2
     - type: unsigned __int64
@@ -3482,7 +3482,7 @@ structs:
     return_type: byte
     parameters:
     - type: Common::Component::BGCollision::SceneWrapper*
-      name: a1
+      name: this
     - type: Common::Component::BGCollision::SceneWrapper::ColliderList*
       name: a2
     - type: unsigned __int64
@@ -3494,7 +3494,7 @@ structs:
     return_type: byte
     parameters:
     - type: Common::Component::BGCollision::SceneWrapper*
-      name: a1
+      name: this
     - type: Common::Component::BGCollision::SceneWrapper::ColliderList*
       name: a2
     - type: System::Numerics::Vector3*
@@ -3619,7 +3619,7 @@ structs:
     return_type: void
     parameters:
     - type: Component::SteamApi::SteamCallbackBase*
-      name: a1
+      name: this
     - type: __int64
       name: a2
     - type: byte
@@ -3631,7 +3631,7 @@ structs:
     return_type: void
     parameters:
     - type: Component::SteamApi::SteamCallbackBase*
-      name: a1
+      name: this
     - type: __int64
       name: a2
   - name: GetSize
@@ -3639,13 +3639,13 @@ structs:
     return_type: __int64
     parameters:
     - type: Component::SteamApi::SteamCallbackBase*
-      name: a1
+      name: this
   - name: Dtor
     offset: 24
     return_type: void
     parameters:
     - type: Component::SteamApi::SteamCallbackBase*
-      name: a1
+      name: this
     - type: byte
       name: a2
   member_functions: []
@@ -3664,7 +3664,7 @@ structs:
     return_type: void
     parameters:
     - type: Component::SteamApi::Callbacks::AuthSessionTicketResponseCallback*
-      name: a1
+      name: this
     - type: Component::SteamApi::SteamTypes::AuthSessionTicketResponse*
       name: a2
   member_functions: []
@@ -3683,7 +3683,7 @@ structs:
     return_type: void
     parameters:
     - type: Component::SteamApi::Callbacks::FloatingGamepadTextInputDismissedCallback*
-      name: a1
+      name: this
     - type: __int64
       name: a2
   member_functions: []
@@ -3702,7 +3702,7 @@ structs:
     return_type: void
     parameters:
     - type: Component::SteamApi::Callbacks::GamepadTextInputDismissedCallback*
-      name: a1
+      name: this
     - type: Component::SteamApi::SteamTypes::GamepadTextInputDismissedData*
       name: a2
   member_functions: []
@@ -3749,7 +3749,7 @@ structs:
     return_type: Component::Excel::ExcelSheet*
     parameters:
     - type: Component::Excel::ExcelModule*
-      name: a1
+      name: this
     - type: unsigned __int32
       name: a2
   - name: GetSheetByName
@@ -3757,7 +3757,7 @@ structs:
     return_type: Component::Excel::ExcelSheet*
     parameters:
     - type: Component::Excel::ExcelModule*
-      name: a1
+      name: this
     - type: byte*
       name: a2
   - name: LoadSheet
@@ -3765,7 +3765,7 @@ structs:
     return_type: void
     parameters:
     - type: Component::Excel::ExcelModule*
-      name: a1
+      name: this
     - type: byte*
       name: a2
     - type: byte
@@ -3788,7 +3788,7 @@ structs:
     return_type: Component::Excel::ExcelSheet*
     parameters:
     - type: Component::Excel::ExcelModuleInterface*
-      name: a1
+      name: this
     - type: unsigned __int32
       name: a2
   - name: GetSheetByName
@@ -3796,7 +3796,7 @@ structs:
     return_type: Component::Excel::ExcelSheet*
     parameters:
     - type: Component::Excel::ExcelModuleInterface*
-      name: a1
+      name: this
     - type: byte*
       name: a2
   member_functions: []
@@ -3998,7 +3998,7 @@ structs:
     return_type: void
     parameters:
     - type: Component::GUI::AtkDragDropInterface*
-      name: a1
+      name: this
     - type: float*
       name: a2
     - type: float*
@@ -4008,13 +4008,13 @@ structs:
     return_type: Component::GUI::AtkComponentNode*
     parameters:
     - type: Component::GUI::AtkDragDropInterface*
-      name: a1
+      name: this
   - name: SetComponentNode
     offset: 32
     return_type: void
     parameters:
     - type: Component::GUI::AtkDragDropInterface*
-      name: a1
+      name: this
     - type: Component::GUI::AtkComponentNode*
       name: a2
   - name: GetActiveNode
@@ -4022,13 +4022,13 @@ structs:
     return_type: Component::GUI::AtkResNode*
     parameters:
     - type: Component::GUI::AtkDragDropInterface*
-      name: a1
+      name: this
   - name: GetComponent
     offset: 56
     return_type: Component::GUI::AtkComponentBase*
     parameters:
     - type: Component::GUI::AtkDragDropInterface*
-      name: a1
+      name: this
   member_functions: []
 - type: Component::GUI::AtkEvent
   name: AtkEvent
@@ -4259,7 +4259,7 @@ structs:
     return_type: void
     parameters:
     - type: Component::GUI::AtkTexture*
-      name: a1
+      name: this
     - type: byte
       name: a2
   member_functions:
@@ -5770,31 +5770,31 @@ structs:
     return_type: byte
     parameters:
     - type: Client::UI::RaptureAtkHistory*
-      name: a1
+      name: this
   - name: Next
     offset: 16
     return_type: byte
     parameters:
     - type: Client::UI::RaptureAtkHistory*
-      name: a1
+      name: this
   - name: Reset
     offset: 24
     return_type: void
     parameters:
     - type: Client::UI::RaptureAtkHistory*
-      name: a1
+      name: this
   - name: GetCurrent
     offset: 32
     return_type: Client::System::String::Utf8String*
     parameters:
     - type: Client::UI::RaptureAtkHistory*
-      name: a1
+      name: this
   - name: GetCurrent2
     offset: 40
     return_type: Client::System::String::Utf8String*
     parameters:
     - type: Client::UI::RaptureAtkHistory*
-      name: a1
+      name: this
   member_functions: []
 - type: Client::UI::RaptureAtkUnitManager
   name: RaptureAtkUnitManager
@@ -5820,7 +5820,7 @@ structs:
     return_type: byte
     parameters:
     - type: Client::UI::RaptureAtkUnitManager*
-      name: a1
+      name: this
     - type: unsigned __int16
       name: a2
     - type: byte
@@ -5830,7 +5830,7 @@ structs:
     return_type: void
     parameters:
     - type: Client::UI::RaptureAtkUnitManager*
-      name: a1
+      name: this
     - type: unsigned __int16
       name: a2
     - type: Component::GUI::NumberArrayData**
@@ -6770,7 +6770,7 @@ structs:
     return_type: byte
     parameters:
     - type: Client::UI::Misc::UserFileManager::UserFileEvent*
-      name: a1
+      name: this
     - type: byte
       name: a2
     - type: byte*
@@ -6784,7 +6784,7 @@ structs:
     return_type: unsigned __int32
     parameters:
     - type: Client::UI::Misc::UserFileManager::UserFileEvent*
-      name: a1
+      name: this
     - type: byte*
       name: a2
     - type: unsigned __int32
@@ -6794,43 +6794,43 @@ structs:
     return_type: unsigned __int32
     parameters:
     - type: Client::UI::Misc::UserFileManager::UserFileEvent*
-      name: a1
+      name: this
   - name: GetDataSize
     offset: 40
     return_type: unsigned __int32
     parameters:
     - type: Client::UI::Misc::UserFileManager::UserFileEvent*
-      name: a1
+      name: this
   - name: GetFileVersion
     offset: 48
     return_type: unsigned __int16
     parameters:
     - type: Client::UI::Misc::UserFileManager::UserFileEvent*
-      name: a1
+      name: this
   - name: GetFileType
     offset: 56
     return_type: unsigned __int16
     parameters:
     - type: Client::UI::Misc::UserFileManager::UserFileEvent*
-      name: a1
+      name: this
   - name: GetHasChanges
     offset: 72
     return_type: byte
     parameters:
     - type: Client::UI::Misc::UserFileManager::UserFileEvent*
-      name: a1
+      name: this
   - name: GetIsSavePending
     offset: 80
     return_type: byte
     parameters:
     - type: Client::UI::Misc::UserFileManager::UserFileEvent*
-      name: a1
+      name: this
   - name: SetCharacterContentId
     offset: 88
     return_type: void
     parameters:
     - type: Client::UI::Misc::UserFileManager::UserFileEvent*
-      name: a1
+      name: this
     - type: unsigned __int64
       name: a2
   - name: SaveFile
@@ -6838,7 +6838,7 @@ structs:
     return_type: void
     parameters:
     - type: Client::UI::Misc::UserFileManager::UserFileEvent*
-      name: a1
+      name: this
     - type: byte
       name: a2
   member_functions: []
@@ -6899,13 +6899,13 @@ structs:
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxyInterface*
-      name: a1
+      name: this
   - name: GetEntryCount
     offset: 56
     return_type: unsigned __int32
     parameters:
     - type: Client::UI::Info::InfoProxyInterface*
-      name: a1
+      name: this
   member_functions: []
 - type: Client::UI::Info::InfoProxyPageInterface
   name: InfoProxyPageInterface
@@ -6922,7 +6922,7 @@ structs:
     return_type: byte
     parameters:
     - type: Client::UI::Info::InfoProxyPageInterface*
-      name: a1
+      name: this
     - type: __int64
       name: a2
   member_functions: []
@@ -7983,7 +7983,7 @@ structs:
     return_type: __int64
     parameters:
     - type: Client::System::Memory::IMemorySpace*
-      name: a1
+      name: this
     - type: unsigned __int64
       name: a2
     - type: unsigned __int64
@@ -8007,7 +8007,7 @@ structs:
     return_type: void
     parameters:
     - type: Client::System::Input::ClipBoard*
-      name: a1
+      name: this
     - type: Client::System::String::Utf8String*
       name: a2
     - type: Client::System::String::Utf8String*
@@ -8017,13 +8017,13 @@ structs:
     return_type: Client::System::String::Utf8String*
     parameters:
     - type: Client::System::Input::ClipBoard*
-      name: a1
+      name: this
   - name: SetCopyStagingText
     offset: 24
     return_type: void
     parameters:
     - type: Client::System::Input::ClipBoard*
-      name: a1
+      name: this
     - type: Client::System::String::Utf8String*
       name: a2
   - name: ApplyCopyStagingText
@@ -8031,7 +8031,7 @@ structs:
     return_type: void
     parameters:
     - type: Client::System::Input::ClipBoard*
-      name: a1
+      name: this
   member_functions: []
 - type: Client::System::Input::Cursor
   name: Cursor
@@ -8094,7 +8094,7 @@ structs:
     return_type: void
     parameters:
     - type: Client::System::Input::SoftKeyboardDeviceInterface*
-      name: a1
+      name: this
     - type: byte
       name: a2
   - name: Enable
@@ -8102,31 +8102,31 @@ structs:
     return_type: byte
     parameters:
     - type: Client::System::Input::SoftKeyboardDeviceInterface*
-      name: a1
+      name: this
   - name: DumpInput
     offset: 16
     return_type: void
     parameters:
     - type: Client::System::Input::SoftKeyboardDeviceInterface*
-      name: a1
+      name: this
   - name: Disable
     offset: 24
     return_type: void
     parameters:
     - type: Client::System::Input::SoftKeyboardDeviceInterface*
-      name: a1
+      name: this
   - name: IsEnabled
     offset: 32
     return_type: byte
     parameters:
     - type: Client::System::Input::SoftKeyboardDeviceInterface*
-      name: a1
+      name: this
   - name: OpenSoftKeyboard
     offset: 40
     return_type: byte
     parameters:
     - type: Client::System::Input::SoftKeyboardDeviceInterface*
-      name: a1
+      name: this
     - type: Client::System::Input::SoftKeyboardDeviceInterface::SoftKeyboardInputInterface*
       name: a2
   - name: CloseSoftKeyboard
@@ -8134,13 +8134,13 @@ structs:
     return_type: void
     parameters:
     - type: Client::System::Input::SoftKeyboardDeviceInterface*
-      name: a1
+      name: this
   - name: IsSoftKeyboardOpen
     offset: 56
     return_type: byte
     parameters:
     - type: Client::System::Input::SoftKeyboardDeviceInterface*
-      name: a1
+      name: this
   member_functions: []
 - type: Client::System::Input::TextService
   name: TextService
@@ -8252,7 +8252,7 @@ structs:
     return_type: void
     parameters:
     - type: Client::System::Framework::Task*
-      name: a1
+      name: this
     - type: __int64
       name: a2
   member_functions: []
@@ -8564,6 +8564,32 @@ structs:
     offset: 2904
   virtual_functions: []
   member_functions: []
+- type: Client::Network::NetworkModuleProxy
+  name: NetworkModuleProxy
+  namespace: Client.Network
+  union: False
+  size: 32
+  fields:
+  - type: __int64
+    name: Vtbl
+    offset: 0
+  - type: Client::Network::NetworkModule*
+    name: NetworkModule
+    offset: 8
+  virtual_functions: []
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? EB ?? 49 8B 85
+    return_type: byte
+    name: IsInCrossWorlDuty
+    parameters:
+    - type: Client::Network::NetworkModuleProxy*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? 0F B7 F0 E8 ?? ?? ?? ?? 8B D8
+    return_type: __int16
+    name: GetCurrentInstance
+    parameters:
+    - type: Client::Network::NetworkModuleProxy*
+      name: this
 - type: Client::Network::PacketDispatcher
   name: PacketDispatcher
   namespace: Client.Network
@@ -8852,7 +8878,7 @@ structs:
     return_type: Client::Graphics::Scene::ObjectType
     parameters:
     - type: Client::Graphics::Scene::Object*
-      name: a1
+      name: this
   member_functions: []
 - type: Client::Graphics::Scene::ResidentResourceManager
   name: ResidentResourceManager
@@ -9441,13 +9467,13 @@ structs:
     return_type: void
     parameters:
     - type: Client::Graphics::Kernel::Texture*
-      name: a1
+      name: this
   - name: DecRef
     offset: 24
     return_type: void
     parameters:
     - type: Client::Graphics::Kernel::Texture*
-      name: a1
+      name: this
   member_functions:
   - signature: E9 ?? ?? ?? ?? 8B 02 25
     return_type: byte
@@ -11039,7 +11065,7 @@ structs:
     return_type: byte
     parameters:
     - type: Client::Game::UI::Hotbar*
-      name: a1
+      name: this
     - type: Client::UI::Misc::RaptureHotbarModule*
       name: a2
   - name: ResetPvEHotbarsForClass
@@ -11047,7 +11073,7 @@ structs:
     return_type: byte
     parameters:
     - type: Client::Game::UI::Hotbar*
-      name: a1
+      name: this
     - type: Client::UI::Misc::RaptureHotbarModule*
       name: a2
     - type: __int32
@@ -11057,7 +11083,7 @@ structs:
     return_type: byte
     parameters:
     - type: Client::Game::UI::Hotbar*
-      name: a1
+      name: this
     - type: Client::UI::Misc::RaptureHotbarModule*
       name: a2
     - type: unsigned __int32
@@ -16620,6 +16646,59 @@ structs:
     offset: 96
   virtual_functions: []
   member_functions: []
+- type: Client::UI::AddonJobHudWHM0::HealingGaugeSimple
+  name: HealingGaugeSimple
+  namespace: Client.UI
+  union: False
+  size: 160
+  fields:
+  - type: Client::UI::AddonJobHud::AddonJobHudGauge
+    name: Gauge
+    offset: 0
+  - type: Component::GUI::AtkResNode*
+    name: Container
+    offset: 16
+  - type: Component::GUI::AtkComponentBase*
+    name: LilyGem1
+    offset: 24
+  - type: Component::GUI::AtkComponentBase*
+    name: LilyGem2
+    offset: 32
+  - type: Component::GUI::AtkComponentBase*
+    name: LilyGem3
+    offset: 40
+  - type: Component::GUI::AtkResNode*
+    name: LilyGemGlow1
+    offset: 48
+  - type: Component::GUI::AtkResNode*
+    name: LilyGemGlow2
+    offset: 56
+  - type: Component::GUI::AtkResNode*
+    name: LilyGemGlow3
+    offset: 64
+  - type: Component::GUI::AtkResNode*
+    name: BloodLilyContainer
+    offset: 80
+  - type: Component::GUI::AtkComponentBase*
+    name: BloodGem1
+    offset: 88
+  - type: Component::GUI::AtkComponentBase*
+    name: BloodGem2
+    offset: 96
+  - type: Component::GUI::AtkComponentBase*
+    name: BloodGem3
+    offset: 104
+  - type: Component::GUI::AtkResNode*
+    name: BloodGemGlow1
+    offset: 112
+  - type: Component::GUI::AtkResNode*
+    name: BloodGemGlow2
+    offset: 120
+  - type: Component::GUI::AtkResNode*
+    name: BloodGemGlow3
+    offset: 128
+  virtual_functions: []
+  member_functions: []
 - type: Client::UI::AddonLotteryDaily::GameTileRow
   name: GameTileRow
   namespace: Client.UI
@@ -17397,7 +17476,7 @@ structs:
     return_type: void
     parameters:
     - type: Client::UI::Misc::RaptureHotbarModule::ClearCallback*
-      name: a1
+      name: this
     - type: byte
       name: a2
   - name: ResetAllHotbars
@@ -17405,7 +17484,7 @@ structs:
     return_type: byte
     parameters:
     - type: Client::UI::Misc::RaptureHotbarModule::ClearCallback*
-      name: a1
+      name: this
     - type: Client::UI::Misc::RaptureHotbarModule*
       name: a2
   - name: ResetPvEHotbarsForClass
@@ -17413,7 +17492,7 @@ structs:
     return_type: byte
     parameters:
     - type: Client::UI::Misc::RaptureHotbarModule::ClearCallback*
-      name: a1
+      name: this
     - type: Client::UI::Misc::RaptureHotbarModule*
       name: a2
     - type: __int32
@@ -17423,7 +17502,7 @@ structs:
     return_type: byte
     parameters:
     - type: Client::UI::Misc::RaptureHotbarModule::ClearCallback*
-      name: a1
+      name: this
     - type: Client::UI::Misc::RaptureHotbarModule*
       name: a2
     - type: unsigned __int32
@@ -18961,7 +19040,7 @@ structs:
     return_type: void
     parameters:
     - type: Client::System::Input::SoftKeyboardDeviceInterface::SoftKeyboardInputInterface*
-      name: a1
+      name: this
     - type: byte
       name: a2
   - name: WriteString
@@ -18969,7 +19048,7 @@ structs:
     return_type: void
     parameters:
     - type: Client::System::Input::SoftKeyboardDeviceInterface::SoftKeyboardInputInterface*
-      name: a1
+      name: this
     - type: Client::System::String::Utf8String*
       name: a2
   - name: GetInputMaxLength
@@ -18977,7 +19056,7 @@ structs:
     return_type: unsigned __int32
     parameters:
     - type: Client::System::Input::SoftKeyboardDeviceInterface::SoftKeyboardInputInterface*
-      name: a1
+      name: this
   member_functions: []
 - type: Client::Graphics::Scene::Object::SiblingEnumerator
   name: SiblingEnumerator
@@ -20495,7 +20574,7 @@ structs:
     return_type: hkClass*
     parameters:
     - type: hkClassNameRegistry*
-      name: a1
+      name: this
     - type: byte*
       name: a2
   member_functions: []
@@ -20709,7 +20788,7 @@ structs:
     return_type: __int64
     parameters:
     - type: hkResource*
-      name: a1
+      name: this
     - type: byte*
       name: a2
     - type: hkTypeInfoRegistry*
@@ -20730,13 +20809,13 @@ structs:
     return_type: hkTypeInfoRegistry*
     parameters:
     - type: hkBuiltinTypeRegistry*
-      name: a1
+      name: this
   - name: GetClassNameRegistry
     offset: 40
     return_type: hkClassNameRegistry*
     parameters:
     - type: hkBuiltinTypeRegistry*
-      name: a1
+      name: this
   member_functions: []
 - type: hkSerializeUtil
   name: hkSerializeUtil
@@ -23374,7 +23453,7 @@ structs:
     return_type: void
     parameters:
     - type: Common::Component::BGCollision::Collider*
-      name: a1
+      name: this
     - type: byte*
       name: a2
   - name: Unload
@@ -23382,19 +23461,19 @@ structs:
     return_type: void
     parameters:
     - type: Common::Component::BGCollision::Collider*
-      name: a1
+      name: this
   - name: WantUnload
     offset: 24
     return_type: byte
     parameters:
     - type: Common::Component::BGCollision::Collider*
-      name: a1
+      name: this
   - name: GetMaterial
     offset: 32
     return_type: void
     parameters:
     - type: Common::Component::BGCollision::Collider*
-      name: a1
+      name: this
     - type: unsigned __int64*
       name: a2
     - type: unsigned __int64*
@@ -23404,19 +23483,19 @@ structs:
     return_type: unsigned __int64
     parameters:
     - type: Common::Component::BGCollision::Collider*
-      name: a1
+      name: this
   - name: GetMaterialMask
     offset: 48
     return_type: unsigned __int64
     parameters:
     - type: Common::Component::BGCollision::Collider*
-      name: a1
+      name: this
   - name: SetMaterial
     offset: 56
     return_type: void
     parameters:
     - type: Common::Component::BGCollision::Collider*
-      name: a1
+      name: this
     - type: unsigned __int64
       name: a2
     - type: unsigned __int64
@@ -23426,7 +23505,7 @@ structs:
     return_type: void
     parameters:
     - type: Common::Component::BGCollision::Collider*
-      name: a1
+      name: this
     - type: System::Numerics::Vector3*
       name: a2
   - name: GetTranslation
@@ -23434,7 +23513,7 @@ structs:
     return_type: void
     parameters:
     - type: Common::Component::BGCollision::Collider*
-      name: a1
+      name: this
     - type: System::Numerics::Vector3*
       name: a2
   - name: GetWorldBB
@@ -23442,7 +23521,7 @@ structs:
     return_type: void
     parameters:
     - type: Common::Component::BGCollision::Collider*
-      name: a1
+      name: this
     - type: Common::Component::BGCollision::Math::AABB*
       name: a2
   - name: SetRotation
@@ -23450,7 +23529,7 @@ structs:
     return_type: void
     parameters:
     - type: Common::Component::BGCollision::Collider*
-      name: a1
+      name: this
     - type: System::Numerics::Vector3*
       name: a2
   - name: GetRotation
@@ -23458,7 +23537,7 @@ structs:
     return_type: void
     parameters:
     - type: Common::Component::BGCollision::Collider*
-      name: a1
+      name: this
     - type: System::Numerics::Vector3*
       name: a2
   - name: SetScale
@@ -23466,7 +23545,7 @@ structs:
     return_type: void
     parameters:
     - type: Common::Component::BGCollision::Collider*
-      name: a1
+      name: this
     - type: System::Numerics::Vector3*
       name: a2
   - name: GetScale
@@ -23474,7 +23553,7 @@ structs:
     return_type: void
     parameters:
     - type: Common::Component::BGCollision::Collider*
-      name: a1
+      name: this
     - type: System::Numerics::Vector3*
       name: a2
   - name: GetWorldTransform
@@ -23482,7 +23561,7 @@ structs:
     return_type: void
     parameters:
     - type: Common::Component::BGCollision::Collider*
-      name: a1
+      name: this
     - type: System::Numerics::Matrix4x4*
       name: a2
   - name: GetInvWorldTransform
@@ -23490,7 +23569,7 @@ structs:
     return_type: void
     parameters:
     - type: Common::Component::BGCollision::Collider*
-      name: a1
+      name: this
     - type: System::Numerics::Matrix4x4*
       name: a2
   - name: GetColliderType
@@ -23498,25 +23577,25 @@ structs:
     return_type: Common::Component::BGCollision::ColliderType
     parameters:
     - type: Common::Component::BGCollision::Collider*
-      name: a1
+      name: this
   - name: Update
     offset: 144
     return_type: byte
     parameters:
     - type: Common::Component::BGCollision::Collider*
-      name: a1
+      name: this
   - name: LoadInProgress
     offset: 152
     return_type: byte
     parameters:
     - type: Common::Component::BGCollision::Collider*
-      name: a1
+      name: this
   - name: Raycast
     offset: 160
     return_type: byte
     parameters:
     - type: Common::Component::BGCollision::Collider*
-      name: a1
+      name: this
     - type: Common::Component::BGCollision::RaycastHit*
       name: a2
     - type: unsigned __int64
@@ -23528,7 +23607,7 @@ structs:
     return_type: byte
     parameters:
     - type: Common::Component::BGCollision::Collider*
-      name: a1
+      name: this
     - type: unsigned __int64
       name: a2
     - type: System::Numerics::Vector3*
@@ -23538,7 +23617,7 @@ structs:
     return_type: byte
     parameters:
     - type: Common::Component::BGCollision::Collider*
-      name: a1
+      name: this
     - type: System::Numerics::Vector3*
       name: a2
   member_functions: []
@@ -23757,7 +23836,7 @@ structs:
     return_type: void
     parameters:
     - type: Common::Component::BGCollision::Mesh*
-      name: a1
+      name: this
     - type: byte
       name: a2
   - name: GetBoundsMin
@@ -23765,19 +23844,19 @@ structs:
     return_type: System::Numerics::Vector3*
     parameters:
     - type: Common::Component::BGCollision::Mesh*
-      name: a1
+      name: this
   - name: GetBoundsMax
     offset: 24
     return_type: System::Numerics::Vector3*
     parameters:
     - type: Common::Component::BGCollision::Mesh*
-      name: a1
+      name: this
   - name: Intersect
     offset: 32
     return_type: byte
     parameters:
     - type: Common::Component::BGCollision::Mesh*
-      name: a1
+      name: this
     - type: System::Numerics::Matrix4x4*
       name: a2
     - type: Common::Component::BGCollision::RaycastHit*
@@ -23789,19 +23868,19 @@ structs:
     return_type: unsigned __int16
     parameters:
     - type: Common::Component::BGCollision::Mesh*
-      name: a1
+      name: this
   - name: GetNumVertices
     offset: 48
     return_type: unsigned __int32
     parameters:
     - type: Common::Component::BGCollision::Mesh*
-      name: a1
+      name: this
   - name: GatherVertices
     offset: 56
     return_type: void
     parameters:
     - type: Common::Component::BGCollision::Mesh*
-      name: a1
+      name: this
     - type: System::Numerics::Matrix4x4*
       name: a2
     - type: System::Numerics::Vector3*
@@ -23811,13 +23890,13 @@ structs:
     return_type: Common::Component::BGCollision::Mesh::Primitive*
     parameters:
     - type: Common::Component::BGCollision::Mesh*
-      name: a1
+      name: this
   - name: GetAABB
     offset: 72
     return_type: void
     parameters:
     - type: Common::Component::BGCollision::Mesh*
-      name: a1
+      name: this
     - type: Common::Component::BGCollision::Math::AABB*
       name: a2
   member_functions: []
@@ -23859,7 +23938,7 @@ structs:
     return_type: void
     parameters:
     - type: Common::Component::BGCollision::SceneManager*
-      name: a1
+      name: this
     - type: byte
       name: a2
   member_functions: []
@@ -24066,7 +24145,7 @@ structs:
     return_type: Client::System::String::Utf8String*
     parameters:
     - type: Component::Text::TextModule*
-      name: a1
+      name: this
     - type: Client::System::String::Utf8String*
       name: a2
     - type: Client::System::String::Utf8String*
@@ -24076,7 +24155,7 @@ structs:
     return_type: __int32
     parameters:
     - type: Component::Text::TextModule*
-      name: a1
+      name: this
     - type: byte*
       name: a2
     - type: Client::System::String::Utf8String*
@@ -24086,7 +24165,7 @@ structs:
     return_type: Client::System::String::Utf8String*
     parameters:
     - type: Component::Text::TextModule*
-      name: a1
+      name: this
     - type: Client::System::String::Utf8String*
       name: a2
     - type: byte*
@@ -24096,7 +24175,7 @@ structs:
     return_type: byte
     parameters:
     - type: Component::Text::TextModule*
-      name: a1
+      name: this
     - type: byte*
       name: a2
     - type: StdDeque<Component::Text::TextParameter>*
@@ -24267,7 +24346,7 @@ structs:
     return_type: __int64
     parameters:
     - type: Component::GUI::AgentInterface*
-      name: a1
+      name: this
     - type: __int64
       name: a2
     - type: Component::GUI::AtkValue*
@@ -24281,25 +24360,25 @@ structs:
     return_type: void
     parameters:
     - type: Component::GUI::AgentInterface*
-      name: a1
+      name: this
   - name: Hide
     offset: 32
     return_type: void
     parameters:
     - type: Component::GUI::AgentInterface*
-      name: a1
+      name: this
   - name: IsAgentActive
     offset: 40
     return_type: byte
     parameters:
     - type: Component::GUI::AgentInterface*
-      name: a1
+      name: this
   - name: GetAddonID
     offset: 64
     return_type: unsigned __int32
     parameters:
     - type: Component::GUI::AgentInterface*
-      name: a1
+      name: this
   member_functions: []
 - type: Component::GUI::AtkComponentTreeListItem
   name: AtkComponentTreeListItem
@@ -24522,7 +24601,7 @@ structs:
     return_type: void
     parameters:
     - type: Component::GUI::AtkResNode*
-      name: a1
+      name: this
     - type: byte
       name: a2
   - name: UpdateFromTimeline
@@ -24530,7 +24609,7 @@ structs:
     return_type: void
     parameters:
     - type: Component::GUI::AtkResNode*
-      name: a1
+      name: this
   member_functions:
   - signature: E9 ?? ?? ?? ?? 33 C0 48 83 C4 20 5B C3 66 90
     return_type: void
@@ -24908,7 +24987,7 @@ structs:
     return_type: void
     parameters:
     - type: Component::GUI::AtkSimpleTween*
-      name: a1
+      name: this
   member_functions:
   - signature: E8 ?? ?? ?? ?? 89 6B 58
     return_type: void
@@ -25615,7 +25694,7 @@ structs:
     return_type: void
     parameters:
     - type: Component::GUI::AtkUnitBase*
-      name: a1
+      name: this
     - type: Component::GUI::AtkEventType
       name: a2
     - type: __int32
@@ -25629,7 +25708,7 @@ structs:
     return_type: byte
     parameters:
     - type: Component::GUI::AtkUnitBase*
-      name: a1
+      name: this
     - type: unsigned __int32
       name: a2
   - name: Close
@@ -25637,7 +25716,7 @@ structs:
     return_type: byte
     parameters:
     - type: Component::GUI::AtkUnitBase*
-      name: a1
+      name: this
     - type: byte
       name: a2
   - name: Show
@@ -25645,7 +25724,7 @@ structs:
     return_type: void
     parameters:
     - type: Component::GUI::AtkUnitBase*
-      name: a1
+      name: this
     - type: byte
       name: a2
     - type: unsigned __int32
@@ -25655,7 +25734,7 @@ structs:
     return_type: void
     parameters:
     - type: Component::GUI::AtkUnitBase*
-      name: a1
+      name: this
     - type: byte
       name: a2
     - type: byte
@@ -25667,7 +25746,7 @@ structs:
     return_type: void
     parameters:
     - type: Component::GUI::AtkUnitBase*
-      name: a1
+      name: this
     - type: __int16
       name: a2
     - type: __int16
@@ -25677,7 +25756,7 @@ structs:
     return_type: void
     parameters:
     - type: Component::GUI::AtkUnitBase*
-      name: a1
+      name: this
     - type: __int16
       name: a2
   - name: SetY
@@ -25685,7 +25764,7 @@ structs:
     return_type: void
     parameters:
     - type: Component::GUI::AtkUnitBase*
-      name: a1
+      name: this
     - type: __int16
       name: a2
   - name: GetX
@@ -25693,19 +25772,19 @@ structs:
     return_type: __int16
     parameters:
     - type: Component::GUI::AtkUnitBase*
-      name: a1
+      name: this
   - name: GetY
     offset: 88
     return_type: __int16
     parameters:
     - type: Component::GUI::AtkUnitBase*
-      name: a1
+      name: this
   - name: GetPosition
     offset: 96
     return_type: void
     parameters:
     - type: Component::GUI::AtkUnitBase*
-      name: a1
+      name: this
     - type: __int16*
       name: a2
     - type: __int16*
@@ -25715,7 +25794,7 @@ structs:
     return_type: void
     parameters:
     - type: Component::GUI::AtkUnitBase*
-      name: a1
+      name: this
     - type: byte
       name: a2
   - name: SetScale
@@ -25723,7 +25802,7 @@ structs:
     return_type: void
     parameters:
     - type: Component::GUI::AtkUnitBase*
-      name: a1
+      name: this
     - type: float
       name: a2
     - type: byte
@@ -25733,7 +25812,7 @@ structs:
     return_type: void
     parameters:
     - type: Component::GUI::AtkUnitBase*
-      name: a1
+      name: this
     - type: __int16*
       name: a2
     - type: __int16*
@@ -25745,19 +25824,19 @@ structs:
     return_type: void
     parameters:
     - type: Component::GUI::AtkUnitBase*
-      name: a1
+      name: this
   - name: SetScaleToHudLayoutScale
     offset: 136
     return_type: __int8
     parameters:
     - type: Component::GUI::AtkUnitBase*
-      name: a1
+      name: this
   - name: ShouldCollideWithWindow
     offset: 144
     return_type: byte
     parameters:
     - type: Component::GUI::AtkUnitBase*
-      name: a1
+      name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
   - name: ShouldIgnoreInputs
@@ -25765,19 +25844,19 @@ structs:
     return_type: byte
     parameters:
     - type: Component::GUI::AtkUnitBase*
-      name: a1
+      name: this
   - name: GetRootNode
     offset: 184
     return_type: Component::GUI::AtkResNode*
     parameters:
     - type: Component::GUI::AtkUnitBase*
-      name: a1
+      name: this
   - name: GetWindowBounds
     offset: 208
     return_type: void
     parameters:
     - type: Component::GUI::AtkUnitBase*
-      name: a1
+      name: this
     - type: Common::Math::Bounds*
       name: a2
   - name: GetRootBounds
@@ -25785,7 +25864,7 @@ structs:
     return_type: void
     parameters:
     - type: Component::GUI::AtkUnitBase*
-      name: a1
+      name: this
     - type: Common::Math::Bounds*
       name: a2
   - name: Focus
@@ -25793,25 +25872,25 @@ structs:
     return_type: void
     parameters:
     - type: Component::GUI::AtkUnitBase*
-      name: a1
+      name: this
   - name: Initialize
     offset: 320
     return_type: void
     parameters:
     - type: Component::GUI::AtkUnitBase*
-      name: a1
+      name: this
   - name: Finalizer
     offset: 328
     return_type: void
     parameters:
     - type: Component::GUI::AtkUnitBase*
-      name: a1
+      name: this
   - name: Update
     offset: 336
     return_type: void
     parameters:
     - type: Component::GUI::AtkUnitBase*
-      name: a1
+      name: this
     - type: float
       name: a2
   - name: Draw
@@ -25819,13 +25898,13 @@ structs:
     return_type: void
     parameters:
     - type: Component::GUI::AtkUnitBase*
-      name: a1
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
     parameters:
     - type: Component::GUI::AtkUnitBase*
-      name: a1
+      name: this
     - type: __int16
       name: a2
     - type: __int16
@@ -25835,7 +25914,7 @@ structs:
     return_type: void
     parameters:
     - type: Component::GUI::AtkUnitBase*
-      name: a1
+      name: this
     - type: unsigned __int32
       name: a2
     - type: Component::GUI::AtkValue*
@@ -25845,7 +25924,7 @@ structs:
     return_type: void
     parameters:
     - type: Component::GUI::AtkUnitBase*
-      name: a1
+      name: this
     - type: unsigned __int32
       name: a2
     - type: Component::GUI::AtkValue*
@@ -25855,7 +25934,7 @@ structs:
     return_type: void
     parameters:
     - type: Component::GUI::AtkUnitBase*
-      name: a1
+      name: this
     - type: Component::GUI::NumberArrayData**
       name: a2
     - type: Component::GUI::StringArrayData**
@@ -25865,19 +25944,19 @@ structs:
     return_type: void
     parameters:
     - type: Component::GUI::AtkUnitBase*
-      name: a1
+      name: this
   - name: OnMouseOver
     offset: 488
     return_type: void
     parameters:
     - type: Component::GUI::AtkUnitBase*
-      name: a1
+      name: this
   - name: OnMouseOut
     offset: 496
     return_type: void
     parameters:
     - type: Component::GUI::AtkUnitBase*
-      name: a1
+      name: this
   member_functions:
   - signature: E8 ?? ?? ?? ?? 0F BF CB 0F 28 F8
     return_type: float
@@ -26109,7 +26188,7 @@ structs:
     return_type: void
     parameters:
     - type: Client::UI::AddonActionBarBase*
-      name: a1
+      name: this
     - type: __int32
       name: a2
   member_functions: []
@@ -26451,7 +26530,7 @@ structs:
     return_type: void
     parameters:
     - type: Client::UI::AddonBank*
-      name: a1
+      name: this
     - type: unsigned __int32
       name: a2
     - type: Component::GUI::AtkValue*
@@ -26847,7 +26926,7 @@ structs:
     return_type: byte
     parameters:
     - type: Client::UI::AddonContextMenu*
-      name: a1
+      name: this
     - type: __int32
       name: a2
     - type: byte
@@ -28431,6 +28510,26 @@ structs:
     offset: 744
   virtual_functions: []
   member_functions: []
+- type: Client::UI::AddonJobHudWHM0
+  name: AddonJobHudWHM0
+  namespace: Client.UI
+  union: False
+  size: 944
+  fields:
+  - type: Client::UI::AddonJobHud
+    name: JobHud
+    offset: 0
+  - type: Client::UI::AddonJobHudWHM0::HealingGaugeData
+    name: DataPrevious
+    offset: 608
+  - type: Client::UI::AddonJobHudWHM0::HealingGaugeData
+    name: DataCurrent
+    offset: 640
+  - type: Client::UI::AddonJobHudWHM0::HealingGauge
+    name: GaugeStandard
+    offset: 672
+  virtual_functions: []
+  member_functions: []
 - type: Client::UI::AddonJournalDetail
   name: AddonJournalDetail
   namespace: Client.UI
@@ -29819,7 +29918,7 @@ structs:
   name: AddonRetainerList
   namespace: Client.UI
   union: False
-  size: 8
+  size: 608
   fields:
   - type: Component::GUI::AtkUnitBase
     name: AtkUnitBase
@@ -29830,7 +29929,7 @@ structs:
     return_type: void
     parameters:
     - type: Client::UI::AddonRetainerList*
-      name: a1
+      name: this
     - type: unsigned __int32
       name: a2
     - type: Component::GUI::AtkValue*
@@ -29895,7 +29994,7 @@ structs:
     return_type: void
     parameters:
     - type: Client::UI::AddonRetainerTaskAsk*
-      name: a1
+      name: this
     - type: unsigned __int32
       name: a2
     - type: Component::GUI::AtkValue*
@@ -29905,7 +30004,7 @@ structs:
   name: AddonRetainerTaskList
   namespace: Client.UI
   union: False
-  size: 8
+  size: 568
   fields:
   - type: Component::GUI::AtkUnitBase
     name: AtkUnitBase
@@ -29916,7 +30015,7 @@ structs:
     return_type: void
     parameters:
     - type: Client::UI::AddonRetainerTaskList*
-      name: a1
+      name: this
     - type: unsigned __int32
       name: a2
     - type: Component::GUI::AtkValue*
@@ -29943,7 +30042,7 @@ structs:
     return_type: void
     parameters:
     - type: Client::UI::AddonRetainerTaskResult*
-      name: a1
+      name: this
     - type: unsigned __int32
       name: a2
     - type: Component::GUI::AtkValue*
@@ -30060,7 +30159,7 @@ structs:
     return_type: void
     parameters:
     - type: Client::UI::AddonSelectString*
-      name: a1
+      name: this
     - type: unsigned __int32
       name: a2
     - type: Component::GUI::AtkValue*
@@ -31773,7 +31872,7 @@ structs:
     return_type: Client::System::String::Utf8String*
     parameters:
     - type: Client::UI::Misc::PronounModule*
-      name: a1
+      name: this
     - type: Client::System::String::Utf8String*
       name: a2
     - type: byte
@@ -32506,7 +32605,7 @@ structs:
     return_type: __int64
     parameters:
     - type: Client::UI::Misc::UiSavePackModule*
-      name: a1
+      name: this
     - type: byte
       name: a2
   member_functions: []
@@ -33167,7 +33266,7 @@ structs:
     return_type: __int64
     parameters:
     - type: Client::UI::Info::InfoProxyItemSearch*
-      name: a1
+      name: this
     - type: __int64
       name: a2
     - type: unsigned __int32
@@ -33177,31 +33276,31 @@ structs:
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxyItemSearch*
-      name: a1
+      name: this
   - name: ClearData
     offset: 24
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxyItemSearch*
-      name: a1
+      name: this
   - name: RequestData
     offset: 40
     return_type: byte
     parameters:
     - type: Client::UI::Info::InfoProxyItemSearch*
-      name: a1
+      name: this
   - name: EndRequest
     offset: 48
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxyItemSearch*
-      name: a1
+      name: this
   - name: AddPage
     offset: 96
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxyItemSearch*
-      name: a1
+      name: this
     - type: __int64
       name: a2
   member_functions:
@@ -36574,7 +36673,7 @@ structs:
     return_type: __int32
     parameters:
     - type: Client::System::Scheduler::Base::SchedulerTimeline*
-      name: a1
+      name: this
   member_functions:
   - signature: E8 ?? ?? ?? ?? 83 7F ?? ?? 75 ?? 0F B6 87
     return_type: unsigned __int64
@@ -36601,7 +36700,7 @@ structs:
   - type: Client::System::Resource::ResourceGraph::CategoryContainer
     name: ContainerArray
     offset: 0
-    size: 21
+    size: 20
   virtual_functions: []
   member_functions: []
 - type: Client::System::Resource::Handle::ResourceHandle
@@ -36646,31 +36745,31 @@ structs:
     return_type: byte
     parameters:
     - type: Client::System::Resource::Handle::ResourceHandle*
-      name: a1
+      name: this
   - name: GetLength
     offset: 136
     return_type: unsigned __int64
     parameters:
     - type: Client::System::Resource::Handle::ResourceHandle*
-      name: a1
+      name: this
   - name: GetData
     offset: 184
     return_type: byte*
     parameters:
     - type: Client::System::Resource::Handle::ResourceHandle*
-      name: a1
+      name: this
   - name: LoadIntoKernel
     offset: 248
     return_type: byte
     parameters:
     - type: Client::System::Resource::Handle::ResourceHandle*
-      name: a1
+      name: this
   - name: Load
     offset: 264
     return_type: byte
     parameters:
     - type: Client::System::Resource::Handle::ResourceHandle*
-      name: a1
+      name: this
     - type: __int64
       name: a2
     - type: byte
@@ -36860,35 +36959,6 @@ structs:
     offset: 24
   virtual_functions: []
   member_functions: []
-- type: Client::Network::NetworkModuleProxy
-  name: NetworkModuleProxy
-  namespace: Client.Network
-  union: False
-  size: 32
-  fields:
-  - type: __int64
-    name: Vtbl
-    offset: 0
-  - type: Client::Network::NetworkModule*
-    name: NetworkModule
-    offset: 8
-  - type: Client::Network::NetworkModulePacketReceiverCallback
-    name: PacketReceiverCallback
-    offset: 16
-  virtual_functions: []
-  member_functions:
-  - signature: E8 ?? ?? ?? ?? EB ?? 49 8B 85
-    return_type: byte
-    name: IsInCrossWorlDuty
-    parameters:
-    - type: Client::Network::NetworkModuleProxy*
-      name: this
-  - signature: E8 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? 0F B7 F0 E8 ?? ?? ?? ?? 8B D8
-    return_type: __int16
-    name: GetCurrentInstance
-    parameters:
-    - type: Client::Network::NetworkModuleProxy*
-      name: this
 - type: Client::LayoutEngine::OutdoorPlotLayoutData
   name: OutdoorPlotLayoutData
   namespace: Client.LayoutEngine
@@ -38952,61 +39022,61 @@ structs:
     return_type: Client::Game::Object::GameObjectID
     parameters:
     - type: Client::Game::Object::GameObject*
-      name: a1
+      name: this
   - name: GetObjectKind
     offset: 16
     return_type: byte
     parameters:
     - type: Client::Game::Object::GameObject*
-      name: a1
+      name: this
   - name: GetIsTargetable
     offset: 32
     return_type: byte
     parameters:
     - type: Client::Game::Object::GameObject*
-      name: a1
+      name: this
   - name: GetName
     offset: 48
     return_type: byte*
     parameters:
     - type: Client::Game::Object::GameObject*
-      name: a1
+      name: this
   - name: GetRadius
     offset: 56
     return_type: float
     parameters:
     - type: Client::Game::Object::GameObject*
-      name: a1
+      name: this
   - name: GetHeight
     offset: 64
     return_type: float
     parameters:
     - type: Client::Game::Object::GameObject*
-      name: a1
+      name: this
   - name: EnableDraw
     offset: 128
     return_type: void
     parameters:
     - type: Client::Game::Object::GameObject*
-      name: a1
+      name: this
   - name: DisableDraw
     offset: 136
     return_type: void
     parameters:
     - type: Client::Game::Object::GameObject*
-      name: a1
+      name: this
   - name: GetDrawObject
     offset: 216
     return_type: Client::Graphics::Scene::DrawObject*
     parameters:
     - type: Client::Game::Object::GameObject*
-      name: a1
+      name: this
   - name: Highlight
     offset: 240
     return_type: void
     parameters:
     - type: Client::Game::Object::GameObject*
-      name: a1
+      name: this
     - type: Client::Game::Object::ObjectHighlightColor
       name: a2
   - name: SetReadyToDraw
@@ -39014,31 +39084,31 @@ structs:
     return_type: void
     parameters:
     - type: Client::Game::Object::GameObject*
-      name: a1
+      name: this
   - name: GetNpcID
     offset: 376
     return_type: unsigned __int32
     parameters:
     - type: Client::Game::Object::GameObject*
-      name: a1
+      name: this
   - name: IsDead
     offset: 456
     return_type: byte
     parameters:
     - type: Client::Game::Object::GameObject*
-      name: a1
+      name: this
   - name: IsNotMounted
     offset: 464
     return_type: byte
     parameters:
     - type: Client::Game::Object::GameObject*
-      name: a1
+      name: this
   - name: IsCharacter
     offset: 488
     return_type: byte
     parameters:
     - type: Client::Game::Object::GameObject*
-      name: a1
+      name: this
   member_functions:
   - signature: E8 ?? ?? ?? ?? 0F 28 74 24 ?? 80 3D
     return_type: void
@@ -42886,13 +42956,13 @@ structs:
     return_type: void
     parameters:
     - type: Component::GUI::AtkComponentBase*
-      name: a1
+      name: this
   - name: SetEnabledState
     offset: 80
     return_type: __int64
     parameters:
     - type: Component::GUI::AtkComponentBase*
-      name: a1
+      name: this
     - type: byte
       name: a2
   member_functions:
@@ -43272,7 +43342,7 @@ structs:
     return_type: Component::GUI::AtkComponentListItemRenderer*
     parameters:
     - type: Component::GUI::AtkComponentList*
-      name: a1
+      name: this
     - type: __int32
       name: a2
   - name: SetItemDisabledState
@@ -43280,7 +43350,7 @@ structs:
     return_type: void
     parameters:
     - type: Component::GUI::AtkComponentList*
-      name: a1
+      name: this
     - type: __int32
       name: a2
     - type: byte
@@ -43290,7 +43360,7 @@ structs:
     return_type: byte
     parameters:
     - type: Component::GUI::AtkComponentList*
-      name: a1
+      name: this
     - type: __int32
       name: a2
   - name: SetItemHighlightedState
@@ -43298,7 +43368,7 @@ structs:
     return_type: void
     parameters:
     - type: Component::GUI::AtkComponentList*
-      name: a1
+      name: this
     - type: __int32
       name: a2
     - type: byte
@@ -43310,7 +43380,7 @@ structs:
     return_type: byte
     parameters:
     - type: Component::GUI::AtkComponentList*
-      name: a1
+      name: this
     - type: __int32
       name: a2
   - name: SelectItem
@@ -43318,7 +43388,7 @@ structs:
     return_type: void
     parameters:
     - type: Component::GUI::AtkComponentList*
-      name: a1
+      name: this
     - type: __int32
       name: a2
     - type: byte
@@ -43328,13 +43398,13 @@ structs:
     return_type: void
     parameters:
     - type: Component::GUI::AtkComponentList*
-      name: a1
+      name: this
   - name: GetItemCount
     offset: 288
     return_type: __int32
     parameters:
     - type: Component::GUI::AtkComponentList*
-      name: a1
+      name: this
   member_functions:
   - signature: E8 ?? ?? ?? ?? 45 38 A4 3E
     return_type: void
@@ -43574,7 +43644,7 @@ structs:
     return_type: void
     parameters:
     - type: Component::GUI::AtkComponentTreeList*
-      name: a1
+      name: this
     - type: unsigned __int32
       name: a2
     - type: byte
@@ -43584,7 +43654,7 @@ structs:
     return_type: void
     parameters:
     - type: Component::GUI::AtkComponentTreeList*
-      name: a1
+      name: this
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 8B D8 45 85 ED
     return_type: Component::GUI::AtkComponentTreeListItem*
@@ -43853,7 +43923,7 @@ structs:
     return_type: Component::GUI::NumberArrayData*
     parameters:
     - type: Component::GUI::AtkModule*
-      name: a1
+      name: this
     - type: __int32
       name: a2
   - name: GetStringArrayData
@@ -43861,7 +43931,7 @@ structs:
     return_type: Component::GUI::StringArrayData*
     parameters:
     - type: Component::GUI::AtkModule*
-      name: a1
+      name: this
     - type: __int32
       name: a2
   - name: GetExtendArrayData
@@ -43869,7 +43939,7 @@ structs:
     return_type: Component::GUI::ExtendArrayData*
     parameters:
     - type: Component::GUI::AtkModule*
-      name: a1
+      name: this
     - type: __int32
       name: a2
   - name: IsAddonReady
@@ -43877,7 +43947,7 @@ structs:
     return_type: byte
     parameters:
     - type: Component::GUI::AtkModule*
-      name: a1
+      name: this
     - type: unsigned __int32
       name: a2
   member_functions:
@@ -44480,7 +44550,7 @@ structs:
     return_type: void
     parameters:
     - type: Client::UI::RaptureAtkModule*
-      name: a1
+      name: this
     - type: byte
       name: a2
   - name: Update
@@ -44488,7 +44558,7 @@ structs:
     return_type: void
     parameters:
     - type: Client::UI::RaptureAtkModule*
-      name: a1
+      name: this
     - type: float
       name: a2
   member_functions:
@@ -44678,7 +44748,7 @@ structs:
     return_type: void
     parameters:
     - type: Client::UI::Misc::CharaView*
-      name: a1
+      name: this
     - type: byte
       name: a2
   - name: Initialize
@@ -44686,7 +44756,7 @@ structs:
     return_type: void
     parameters:
     - type: Client::UI::Misc::CharaView*
-      name: a1
+      name: this
     - type: __int64
       name: a2
     - type: __int32
@@ -44698,13 +44768,13 @@ structs:
     return_type: void
     parameters:
     - type: Client::UI::Misc::CharaView*
-      name: a1
+      name: this
   - name: ResetPositions
     offset: 24
     return_type: void
     parameters:
     - type: Client::UI::Misc::CharaView*
-      name: a1
+      name: this
   member_functions:
   - signature: E8 ?? ?? ?? ?? 41 80 A6 ?? ?? ?? ?? ?? 48 8D 05
     return_type: void
@@ -44875,7 +44945,7 @@ structs:
     return_type: void
     parameters:
     - type: Client::UI::Misc::CharaViewPortrait*
-      name: a1
+      name: this
     - type: byte
       name: a2
   - name: Release
@@ -44883,19 +44953,19 @@ structs:
     return_type: void
     parameters:
     - type: Client::UI::Misc::CharaViewPortrait*
-      name: a1
+      name: this
   - name: ResetPositions
     offset: 24
     return_type: void
     parameters:
     - type: Client::UI::Misc::CharaViewPortrait*
-      name: a1
+      name: this
   - name: SetCameraDistance
     offset: 32
     return_type: void
     parameters:
     - type: Client::UI::Misc::CharaViewPortrait*
-      name: a1
+      name: this
     - type: float
       name: a2
   - name: SetCameraYawAndPitch
@@ -44903,7 +44973,7 @@ structs:
     return_type: void
     parameters:
     - type: Client::UI::Misc::CharaViewPortrait*
-      name: a1
+      name: this
     - type: float
       name: a2
     - type: float
@@ -44913,7 +44983,7 @@ structs:
     return_type: void
     parameters:
     - type: Client::UI::Misc::CharaViewPortrait*
-      name: a1
+      name: this
     - type: float
       name: a2
     - type: float
@@ -44923,7 +44993,7 @@ structs:
     return_type: void
     parameters:
     - type: Client::UI::Misc::CharaViewPortrait*
-      name: a1
+      name: this
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 89 83 ?? ?? ?? ?? EB 0B
     return_type: void
@@ -45656,7 +45726,7 @@ structs:
   name: GatheringAreaInfo
   namespace: Client.UI.Agent
   union: False
-  size: 192
+  size: 200
   fields:
   - type: Client::UI::Agent::OpenMapInfo
     name: OpenMapInfo
@@ -46435,13 +46505,13 @@ structs:
     return_type: Client::Graphics::Scene::CharacterBase::ModelType
     parameters:
     - type: Client::Graphics::Scene::CharacterBase*
-      name: a1
+      name: this
   - name: OnRenderModel
     offset: 488
     return_type: __int64
     parameters:
     - type: Client::Graphics::Scene::CharacterBase*
-      name: a1
+      name: this
     - type: Client::Graphics::Render::Model*
       name: a2
   - name: OnRenderMaterial
@@ -46449,7 +46519,7 @@ structs:
     return_type: __int64
     parameters:
     - type: Client::Graphics::Scene::CharacterBase*
-      name: a1
+      name: this
     - type: Client::Graphics::Render::ModelRenderer::OnRenderMaterialParams*
       name: a2
   - name: FlagSlotForUpdate
@@ -46457,7 +46527,7 @@ structs:
     return_type: unsigned __int64
     parameters:
     - type: Client::Graphics::Scene::CharacterBase*
-      name: a1
+      name: this
     - type: unsigned __int32
       name: a2
     - type: Client::Game::Character::EquipmentModelId*
@@ -46467,7 +46537,7 @@ structs:
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::CharacterBase*
-      name: a1
+      name: this
     - type: byte*
       name: a2
     - type: unsigned __int64
@@ -46477,7 +46547,7 @@ structs:
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::CharacterBase*
-      name: a1
+      name: this
     - type: byte*
       name: a2
     - type: unsigned __int64
@@ -46489,7 +46559,7 @@ structs:
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::CharacterBase*
-      name: a1
+      name: this
     - type: byte*
       name: a2
     - type: unsigned __int64
@@ -46501,7 +46571,7 @@ structs:
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::CharacterBase*
-      name: a1
+      name: this
     - type: byte*
       name: a2
     - type: unsigned __int64
@@ -46513,7 +46583,7 @@ structs:
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::CharacterBase*
-      name: a1
+      name: this
     - type: byte*
       name: a2
     - type: unsigned __int64
@@ -46525,7 +46595,7 @@ structs:
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::CharacterBase*
-      name: a1
+      name: this
     - type: byte*
       name: a2
     - type: unsigned __int64
@@ -46539,7 +46609,7 @@ structs:
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::CharacterBase*
-      name: a1
+      name: this
     - type: byte*
       name: a2
     - type: unsigned __int64
@@ -46551,7 +46621,7 @@ structs:
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::CharacterBase*
-      name: a1
+      name: this
     - type: byte*
       name: a2
     - type: unsigned __int64
@@ -46565,7 +46635,7 @@ structs:
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::CharacterBase*
-      name: a1
+      name: this
     - type: byte*
       name: a2
     - type: unsigned __int64
@@ -46577,7 +46647,7 @@ structs:
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::CharacterBase*
-      name: a1
+      name: this
     - type: byte*
       name: a2
     - type: unsigned __int64
@@ -46591,7 +46661,7 @@ structs:
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::CharacterBase*
-      name: a1
+      name: this
     - type: byte*
       name: a2
     - type: unsigned __int64
@@ -46603,7 +46673,7 @@ structs:
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::CharacterBase*
-      name: a1
+      name: this
     - type: byte*
       name: a2
     - type: unsigned __int64
@@ -46617,7 +46687,7 @@ structs:
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::CharacterBase*
-      name: a1
+      name: this
     - type: byte*
       name: a2
     - type: unsigned __int64
@@ -46627,7 +46697,7 @@ structs:
     return_type: byte
     parameters:
     - type: Client::Graphics::Scene::CharacterBase*
-      name: a1
+      name: this
     - type: byte
       name: a2
   - name: SetFreeCompanyCrestVisibleOnSlot
@@ -46635,7 +46705,7 @@ structs:
     return_type: void
     parameters:
     - type: Client::Graphics::Scene::CharacterBase*
-      name: a1
+      name: this
     - type: byte
       name: a2
     - type: byte
@@ -46645,7 +46715,7 @@ structs:
     return_type: void
     parameters:
     - type: Client::Graphics::Scene::CharacterBase*
-      name: a1
+      name: this
     - type: Client::Graphics::Kernel::Texture*
       name: a2
   member_functions:
@@ -47278,7 +47348,7 @@ structs:
     return_type: byte
     parameters:
     - type: Client::Game::SavedAppearanceManager*
-      name: a1
+      name: this
     - type: byte
       name: a2
   - name: GetSlot
@@ -47286,7 +47356,7 @@ structs:
     return_type: Client::Game::SavedAppearanceSlot*
     parameters:
     - type: Client::Game::SavedAppearanceManager*
-      name: a1
+      name: this
     - type: byte
       name: a2
   - name: GetSlotCount
@@ -47294,7 +47364,7 @@ structs:
     return_type: unsigned __int32
     parameters:
     - type: Client::Game::SavedAppearanceManager*
-      name: a1
+      name: this
   member_functions: []
 - type: Client::Game::UI::Map
   name: Map
@@ -47869,62 +47939,6 @@ structs:
       name: this
     - type: byte
       name: state
-- type: Client::UI::AddonJobHudWHM0::HealingGaugeSimple
-  name: HealingGaugeSimple
-  namespace: Client.UI
-  union: False
-  size: 160
-  fields:
-  - type: Client::UI::AddonJobHud::AddonJobHudGauge
-    name: Gauge
-    offset: 0
-  - type: Component::GUI::AtkResNode*
-    name: Container
-    offset: 16
-  - type: Component::GUI::AtkComponentBase*
-    name: LilyGem1
-    offset: 24
-  - type: Component::GUI::AtkComponentBase*
-    name: LilyGem2
-    offset: 32
-  - type: Component::GUI::AtkComponentBase*
-    name: LilyGem3
-    offset: 40
-  - type: Component::GUI::AtkResNode*
-    name: LilyGemGlow1
-    offset: 48
-  - type: Component::GUI::AtkResNode*
-    name: LilyGemGlow2
-    offset: 56
-  - type: Component::GUI::AtkResNode*
-    name: LilyGemGlow3
-    offset: 64
-  - type: Component::GUI::AtkResNode*
-    name: BloodLilyContainer
-    offset: 80
-  - type: Component::GUI::AtkComponentBase*
-    name: BloodGem1
-    offset: 88
-  - type: Component::GUI::AtkComponentBase*
-    name: BloodGem2
-    offset: 96
-  - type: Component::GUI::AtkComponentBase*
-    name: BloodGem3
-    offset: 104
-  - type: Component::GUI::AtkResNode*
-    name: BloodGemGlow1
-    offset: 112
-  - type: Component::GUI::AtkResNode*
-    name: BloodGemGlow2
-    offset: 120
-  - type: Component::GUI::AtkResNode*
-    name: BloodGemGlow3
-    offset: 128
-  - type: Component::GUI::AtkComponentGaugeBar
-    name: LilyTimerGaugeBar
-    offset: 144
-  virtual_functions: []
-  member_functions: []
 - type: Client::UI::AddonPartyList::PartyMembers
   name: PartyMembers
   namespace: Client.UI
@@ -48645,29 +48659,6 @@ structs:
   - type: Component::GUI::AtkTimelineKeyValue
     name: Value
     offset: 12
-  virtual_functions: []
-  member_functions: []
-- type: Client::UI::AddonJobHudWHM0
-  name: AddonJobHudWHM0
-  namespace: Client.UI
-  union: False
-  size: 944
-  fields:
-  - type: Client::UI::AddonJobHud
-    name: JobHud
-    offset: 0
-  - type: Client::UI::AddonJobHudWHM0::HealingGaugeData
-    name: DataPrevious
-    offset: 608
-  - type: Client::UI::AddonJobHudWHM0::HealingGaugeData
-    name: DataCurrent
-    offset: 640
-  - type: Client::UI::AddonJobHudWHM0::HealingGauge
-    name: GaugeStandard
-    offset: 672
-  - type: Client::UI::AddonJobHudWHM0::HealingGaugeSimple
-    name: GaugeSimple
-    offset: 784
   virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonPartyList
@@ -49743,7 +49734,7 @@ structs:
     return_type: void
     parameters:
     - type: Client::Game::Event::Director*
-      name: a1
+      name: this
     - type: unsigned __int16
       name: a2
     - type: StdVector<Client::Game::UI::MapMarkerData>*
@@ -49919,25 +49910,25 @@ structs:
     return_type: Client::Game::StatusManager*
     parameters:
     - type: Client::Game::Character::Character*
-      name: a1
+      name: this
   - name: GetCastInfo
     offset: 648
     return_type: Client::Game::Character::Character::CastInfo*
     parameters:
     - type: Client::Game::Character::Character*
-      name: a1
+      name: this
   - name: GetForayInfo
     offset: 680
     return_type: Client::Game::Character::Character::ForayInfo*
     parameters:
     - type: Client::Game::Character::Character*
-      name: a1
+      name: this
   - name: IsMount
     offset: 696
     return_type: byte
     parameters:
     - type: Client::Game::Character::Character*
-      name: a1
+      name: this
   member_functions:
   - signature: E8 ?? ?? ?? ?? 49 3B C7 0F 84
     return_type: unsigned __int64
@@ -50218,289 +50209,289 @@ structs:
     return_type: Component::Excel::ExcelModuleInterface*
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
   - name: GetRaptureTextModule
     offset: 48
     return_type: Client::UI::Misc::RaptureTextModule*
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
   - name: GetRaptureAtkModule
     offset: 56
     return_type: Client::UI::RaptureAtkModule*
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
   - name: GetRaptureAtkModule2
     offset: 64
     return_type: Client::UI::RaptureAtkModule*
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
   - name: GetRaptureShellModule
     offset: 72
     return_type: Client::UI::Shell::RaptureShellModule*
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
   - name: GetPronounModule
     offset: 80
     return_type: Client::UI::Misc::PronounModule*
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
   - name: GetRaptureLogModule
     offset: 88
     return_type: Client::UI::Misc::RaptureLogModule*
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
   - name: GetRaptureMacroModule
     offset: 96
     return_type: Client::UI::Misc::RaptureMacroModule*
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
   - name: GetRaptureHotbarModule
     offset: 104
     return_type: Client::UI::Misc::RaptureHotbarModule*
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
   - name: GetRaptureGearsetModule
     offset: 112
     return_type: Client::UI::Misc::RaptureGearsetModule*
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
   - name: GetAcquaintanceModule
     offset: 120
     return_type: Client::UI::Misc::AcquaintanceModule*
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
   - name: GetItemOrderModule
     offset: 128
     return_type: Client::UI::Misc::ItemOrderModule*
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
   - name: GetItemFinderModule
     offset: 136
     return_type: Client::UI::Misc::ItemFinderModule*
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
   - name: GetConfigModule
     offset: 144
     return_type: Client::UI::Misc::ConfigModule*
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
   - name: GetAddonConfig
     offset: 152
     return_type: Client::UI::Misc::AddonConfig*
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
   - name: GetUiSavePackModule
     offset: 160
     return_type: Client::UI::Misc::UiSavePackModule*
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
   - name: GetLetterDataModule
     offset: 168
     return_type: Client::UI::Misc::LetterDataModule*
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
   - name: GetRetainerTaskDataModule
     offset: 176
     return_type: Client::UI::Misc::RetainerTaskDataModule*
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
   - name: GetFlagStatusModule
     offset: 184
     return_type: Client::UI::Misc::FlagStatusModule*
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
   - name: GetRecipeFavoriteModule
     offset: 192
     return_type: Client::UI::Misc::RecipeFavoriteModule*
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
   - name: GetRaptureUiDataModule
     offset: 208
     return_type: Client::UI::Misc::RaptureUiDataModule*
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
   - name: GetGoldSaucerModule
     offset: 232
     return_type: Client::UI::Misc::GoldSaucerModule*
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
   - name: GetRaptureTeleportHistory
     offset: 240
     return_type: Client::UI::Misc::RaptureTeleportHistory*
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
   - name: GetItemContextCustomizeModule
     offset: 248
     return_type: Client::UI::Misc::ItemContextCustomizeModule*
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
   - name: GetRecommendEquipModule
     offset: 256
     return_type: Client::UI::Misc::RecommendEquipModule*
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
   - name: GetPvpSetModule
     offset: 264
     return_type: Client::UI::Misc::PvpSetModule*
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
   - name: GetInfoModule
     offset: 272
     return_type: Client::UI::Info::InfoModule*
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
   - name: GetUIModuleHelpers
     offset: 280
     return_type: Client::UI::Misc::UIModuleHelpers*
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
   - name: GetAgentModule
     offset: 288
     return_type: Client::UI::Agent::AgentModule*
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
   - name: GetUI3DModule
     offset: 304
     return_type: Client::UI::UI3DModule*
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
   - name: GetEmoteHistoryModule
     offset: 328
     return_type: Client::UI::Misc::EmoteHistoryModule*
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
   - name: GetMinionListModule
     offset: 336
     return_type: Client::UI::Misc::MinionListModule*
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
   - name: GetMountListModule
     offset: 344
     return_type: Client::UI::Misc::MountListModule*
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
   - name: GetAozNoteModule
     offset: 360
     return_type: Client::UI::Misc::AozNoteModule*
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
   - name: GetAchievementListModule
     offset: 376
     return_type: Client::UI::Misc::AchievementListModule*
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
   - name: GetGroupPoseModule
     offset: 384
     return_type: Client::UI::Misc::GroupPoseModule*
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
   - name: GetFieldMarkerModule
     offset: 392
     return_type: Client::UI::Misc::FieldMarkerModule*
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
   - name: GetInputTimerModule
     offset: 440
     return_type: Client::UI::Misc::InputTimerModule*
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
   - name: GetRetainerCommentModule
     offset: 456
     return_type: Client::UI::Misc::RetainerCommentModule*
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
   - name: GetBannerModule
     offset: 464
     return_type: Client::UI::Misc::BannerModule*
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
   - name: GetVVDActionModule
     offset: 496
     return_type: Client::UI::Misc::VVDActionModule*
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
   - name: GetUIInputData
     offset: 520
     return_type: Client::UI::UIInputData*
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
   - name: GetUIInputModule
     offset: 528
     return_type: Client::UI::UIInputModule*
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
   - name: GetLogFilterConfig
     offset: 544
     return_type: Client::UI::Misc::LogFilterConfig*
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
   - name: EnterGPose
     offset: 608
     return_type: byte
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
   - name: ExitGPose
     offset: 616
     return_type: void
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
   - name: IsInGPose
     offset: 624
     return_type: byte
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
   - name: EnterIdleCam
     offset: 632
     return_type: void
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
     - type: byte
       name: a2
     - type: unsigned __int64
@@ -50510,31 +50501,31 @@ structs:
     return_type: void
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
   - name: IsInIdleCam
     offset: 648
     return_type: byte
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
   - name: ShowEurekaHud
     offset: 720
     return_type: void
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
   - name: HideEurekaHud
     offset: 728
     return_type: void
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
   - name: AddAtkHistoryEntry
     offset: 856
     return_type: void
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
     - type: Client::System::String::Utf8String*
       name: a2
     - type: __int32
@@ -50544,7 +50535,7 @@ structs:
     return_type: void
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
     - type: __int32
       name: a2
   - name: ToggleUi
@@ -50552,7 +50543,7 @@ structs:
     return_type: void
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
     - type: Client::UI::UIModule::UiFlags
       name: a2
     - type: byte
@@ -50564,7 +50555,7 @@ structs:
     return_type: void
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
     - type: byte
       name: a2
     - type: unsigned __int32
@@ -50578,13 +50569,13 @@ structs:
     return_type: void
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
   - name: ShowTextRelicAtma
     offset: 1240
     return_type: void
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
     - type: unsigned __int32
       name: a2
   - name: ShowHousingHarvest
@@ -50592,7 +50583,7 @@ structs:
     return_type: void
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
     - type: unsigned __int32
       name: a2
     - type: __int32
@@ -50604,7 +50595,7 @@ structs:
     return_type: void
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
     - type: unsigned __int32
       name: a2
     - type: byte
@@ -50618,7 +50609,7 @@ structs:
     return_type: void
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
     - type: __int32
       name: a2
     - type: byte*
@@ -50636,7 +50627,7 @@ structs:
     return_type: void
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
     - type: __int32
       name: a2
     - type: __int32
@@ -50646,7 +50637,7 @@ structs:
     return_type: void
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
     - type: byte*
       name: a2
     - type: __int32
@@ -50662,7 +50653,7 @@ structs:
     return_type: void
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
     - type: byte*
       name: a2
     - type: __int32
@@ -50672,7 +50663,7 @@ structs:
     return_type: void
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
     - type: byte*
       name: a2
     - type: byte
@@ -50682,7 +50673,7 @@ structs:
     return_type: void
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
     - type: unsigned __int32
       name: a2
   - name: ShowGetAction
@@ -50690,7 +50681,7 @@ structs:
     return_type: void
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
     - type: Client::Game::ActionType
       name: a2
     - type: unsigned __int32
@@ -50700,7 +50691,7 @@ structs:
     return_type: void
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
     - type: __int32
       name: a2
     - type: byte
@@ -50714,7 +50705,7 @@ structs:
     return_type: void
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
     - type: unsigned __int32
       name: a2
     - type: unsigned __int32
@@ -50726,7 +50717,7 @@ structs:
     return_type: void
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
     - type: __int32
       name: a2
     - type: __int32
@@ -50736,7 +50727,7 @@ structs:
     return_type: void
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
     - type: __int32
       name: a2
     - type: __int32
@@ -50746,7 +50737,7 @@ structs:
     return_type: void
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
     - type: float*
       name: a2
     - type: byte
@@ -50758,7 +50749,7 @@ structs:
     return_type: void
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
     - type: byte*
       name: a2
     - type: byte*
@@ -50772,7 +50763,7 @@ structs:
     return_type: void
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
     - type: byte*
       name: a2
     - type: byte*
@@ -50788,7 +50779,7 @@ structs:
     return_type: void
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
     - type: byte*
       name: a2
     - type: byte*
@@ -50804,7 +50795,7 @@ structs:
     return_type: void
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
     - type: unsigned __int32
       name: a2
   - name: IsMainCommandUnlocked
@@ -50812,7 +50803,7 @@ structs:
     return_type: byte
     parameters:
     - type: Client::UI::UIModule*
-      name: a1
+      name: this
     - type: unsigned __int32
       name: a2
   member_functions: []
@@ -50834,7 +50825,7 @@ structs:
     return_type: unsigned __int32
     parameters:
     - type: Client::Game::InstanceContent::ContentDirector*
-      name: a1
+      name: this
   member_functions: []
 - type: Client::Game::InstanceContent::InstanceContentDirector
   name: InstanceContentDirector
@@ -51097,13 +51088,13 @@ structs:
     return_type: byte
     parameters:
     - type: Client::Game::GoldSaucer::GFateDirector*
-      name: a1
+      name: this
   - name: IsAcceptingGate
     offset: 2352
     return_type: byte
     parameters:
     - type: Client::Game::GoldSaucer::GFateDirector*
-      name: a1
+      name: this
   member_functions: []
 - type: Client::Game::Fate::FateDirector
   name: FateDirector
