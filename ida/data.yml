@@ -3006,6 +3006,10 @@ classes:
       0x1405455B0: GetAddonByName
       0x140545660: GetAddonByNode
       0x140548A50: UpdateDrawOrderIndexes
+  Client::UI::WindowContextMenuHandler:
+    vtbls:
+      - ea: 0x1419BF0C8
+        base: Component::GUI::AtkModuleInterface::AtkEventInterface
   Client::UI::RaptureAtkUnitManager:
     vtbls:
       - ea: 0x1419BEF70
