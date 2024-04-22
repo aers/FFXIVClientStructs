@@ -22,6 +22,7 @@ public unsafe partial struct AgentModule {
     [MemberFunction("E8 ?? ?? ?? ?? 0F B7 A8")]
     public partial AgentInterface* GetAgentByInternalId(AgentId agentID);
 
+    [Obsolete("Use GetAgentByInternalId(AgentId)")]
     public AgentInterface* GetAgentByInternalID(uint agentId)
         => GetAgentByInternalId((AgentId)agentId);
 }

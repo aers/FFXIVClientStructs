@@ -17,6 +17,7 @@ public unsafe partial struct InfoModule {
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 55 68")]
     public partial InfoProxyInterface* GetInfoProxyById(InfoProxyId id);
 
+    [Obsolete("Use GetInfoProxyById(InfoProxyId)")]
     public InfoProxyInterface* GetInfoProxyById(uint id)
         => GetInfoProxyById((InfoProxyId)id);
 

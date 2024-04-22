@@ -100,7 +100,7 @@ public class InfoProxyInstanceGenerator : IIncrementalGenerator {
             StructInfo.RenderStart(builder);
 
             builder.AppendLine();
-            builder.AppendLine($"public static {StructInfo.Name}* Instance() => ({StructInfo.Name}*)InfoModule.Instance()->GetInfoProxyById((uint){InfoProxyInfo.InfoProxyId});");
+            builder.AppendLine($"public static {StructInfo.Name}* Instance() => ({StructInfo.Name}*)InfoModule.Instance()->GetInfoProxyById((InfoProxyId){InfoProxyInfo.InfoProxyId});");
             builder.AppendLine();
 
             StructInfo.RenderEnd(builder);
@@ -113,7 +113,7 @@ public class InfoProxyInstanceGenerator : IIncrementalGenerator {
         }
 
         public void RenderInfoProxyGetter(IndentedStringBuilder builder) {
-            builder.AppendLine($"public {StructInfo.Name}* Get{StructInfo.Name}() => ({StructInfo.Name}*)GetInfoProxyById((uint){InfoProxyInfo.InfoProxyId});");
+            builder.AppendLine($"public {StructInfo.Name}* Get{StructInfo.Name}() => ({StructInfo.Name}*)GetInfoProxyById((InfoProxyId){InfoProxyInfo.InfoProxyId});");
         }
     }
 }
