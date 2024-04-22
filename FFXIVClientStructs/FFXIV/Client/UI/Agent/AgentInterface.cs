@@ -1,4 +1,5 @@
 using FFXIVClientStructs.FFXIV.Client.UI;
+using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
@@ -25,4 +26,7 @@ public unsafe partial struct AgentInterface {
 
     [VirtualFunction(8)]
     public partial uint GetAddonID();
+
+    [MemberFunction("E8 ?? ?? ?? ?? 8B 6E 20")]
+    public partial AgentInterface* GetAgentByInternalId(AgentId agentID);
 }
