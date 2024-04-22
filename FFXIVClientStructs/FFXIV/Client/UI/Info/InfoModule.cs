@@ -14,11 +14,11 @@ public unsafe partial struct InfoModule {
     [FieldOffset(0x1BC8)] public Utf8String UnkString3;
     [FieldOffset(0x1C30)] public ulong OnlineStatusFlags;
 
-    public InfoProxyInterface* GetInfoProxyById(InfoProxyId id)
-        => GetInfoProxyById((uint)id);
-
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 55 68")]
-    public partial InfoProxyInterface* GetInfoProxyById(uint id);
+    public partial InfoProxyInterface* GetInfoProxyById(InfoProxyId id);
+
+    public InfoProxyInterface* GetInfoProxyById(uint id)
+        => GetInfoProxyById((InfoProxyId)id);
 
     /// <summary>
     /// Checks if the local player has a specific online status set.
