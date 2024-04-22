@@ -20,11 +20,10 @@ public unsafe partial struct AgentModule {
     [FieldOffset(0x20)] public fixed byte Agents[441 * 8];
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F B7 A8")]
-    public partial AgentInterface* GetAgentByInternalID(uint agentID);
+    public partial AgentInterface* GetAgentByInternalId(AgentId agentID);
 
-    public AgentInterface* GetAgentByInternalId(AgentId agentId) {
-        return GetAgentByInternalID((uint)agentId);
-    }
+    public AgentInterface* GetAgentByInternalID(uint agentId)
+        => GetAgentByInternalId((AgentId)agentId);
 }
 
 public enum AgentId : uint {
