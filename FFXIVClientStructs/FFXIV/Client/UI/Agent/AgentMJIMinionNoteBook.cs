@@ -9,7 +9,7 @@ public unsafe partial struct AgentMJIMinionNoteBook {
 
     [FieldOffset(0x1DC)] public SelectedMinionInfo SelectedFavoriteMinion;
     [FieldOffset(0x1E0)] public SelectedMinionInfo SelectedNormalMinion;
-    [FieldOffset(0x1E0)] public SelectedMinionInfo SelectedSearchMinion;
+    [FieldOffset(0x1E4)] public SelectedMinionInfo SelectedSearchMinion;
     [FieldOffset(0x1E8)] public SelectedMinionInfo* SelectedMinion;
     [FieldOffset(0x1F0)] public ViewType CurrentView;
 
