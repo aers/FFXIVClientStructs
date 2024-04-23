@@ -21,12 +21,13 @@ public unsafe partial struct AgentRecipeMaterialList {
     [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 20 BA ?? ?? ?? ?? 48 8B D9 E8 ?? ?? ?? ?? 48 8B F8 48 85 C0 74 5A")]
     public readonly partial void OpenRecipeResultItemContextMenu();
 
-    [StructLayout(LayoutKind.Explicit)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x2B0)]
     public struct RecipeData {
-        [FieldOffset(0xB8)] public uint RecipeId;
+        [FieldOffset(0xB8)] public ushort RecipeId;
         [FieldOffset(0xBC)] public uint ResultItemId;
         [FieldOffset(0xC0)] public uint ResultAmount;
         [FieldOffset(0xC4)] public uint ResultItemIconId;
         [FieldOffset(0xC8)] public Utf8String ItemName;
+        [FieldOffset(0x132)] public ushort Amount;
     }
 }
