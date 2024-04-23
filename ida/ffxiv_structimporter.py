@@ -515,7 +515,9 @@ if api is None:
                 if self.is_signed(enum.underlying):
                     ida_enum.set_enum_flag(e, 0x20000)
                 for value in enum.values:
-                    ida_enum.add_enum_member(e, value, enum.values[value])
+                    ida_enum.add_enum_member(
+                        e, "{0}.{1}".format(enum.name, value), enum.values[value]
+                    )
 
             def delete_enum(self, enum):
                 # type: (DefinedEnum) -> None
