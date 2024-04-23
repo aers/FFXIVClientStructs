@@ -39,7 +39,7 @@ public unsafe partial struct AgentContentsFinder {
     public partial void* OpenRouletteDuty(byte roulette, byte a2 = 0);
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x20)]
+[StructLayout(LayoutKind.Explicit, Size = 0x20), CExporterStructUnion]
 public struct ContentsFinderRewards {
     [FieldOffset(0x00)] public int ExpReward;
     [FieldOffset(0x00)] public int GilReward;

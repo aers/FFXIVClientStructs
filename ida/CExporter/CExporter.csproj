@@ -37,6 +37,10 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Pastel" Version="5.0.0" />
+    <PackageReference Include="YamlDotNet" Version="15.1.2" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\..\FFXIVClientStructs\FFXIVClientStructs.csproj" />
   </ItemGroup>
 </Project>

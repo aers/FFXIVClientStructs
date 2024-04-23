@@ -56,10 +56,8 @@ jobs:
       - name: Exit with error
         if: steps.check_error.outputs.error == 'true'
         run: exit 1
-      - name: Tar CExport
-        run: tar -czvf CExport.tar.gz ./ida/*.h
       - uses: actions/upload-artifact@v4
         with:
-          name: CExport
-          path: CExport.tar.gz
+          name: structs.yml
+          path: ./ida/ffxiv_structs.yml
           retention-days: 7

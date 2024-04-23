@@ -167,7 +167,7 @@ public unsafe struct MarketBoardListing {
     [FieldOffset(0xB1)] public byte StainId;
 }
 
-[StructLayout(LayoutKind.Explicit)]
+[StructLayout(LayoutKind.Explicit, Size = 0x24)]
 public struct LastPurchasedMarketboardItem {
     [FieldOffset(0x00)] public ulong SellingRetainerContentId;
     [FieldOffset(0x08)] public ulong ListingId;

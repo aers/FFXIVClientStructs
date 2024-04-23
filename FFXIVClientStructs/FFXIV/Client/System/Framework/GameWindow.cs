@@ -1,6 +1,6 @@
 namespace FFXIVClientStructs.FFXIV.Client.System.Framework;
 
-[StructLayout(LayoutKind.Explicit)]
+[StructLayout(LayoutKind.Explicit, Size = 0x282)]
 public unsafe struct GameWindow {
     [FieldOffset(0x00)] public ulong ArgumentCount;
     [FieldOffset(0x08)] public byte** Arguments; //Points to an array that points to CStr

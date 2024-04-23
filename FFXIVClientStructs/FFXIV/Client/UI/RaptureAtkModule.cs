@@ -89,7 +89,7 @@ public unsafe partial struct RaptureAtkModule {
     public partial void Update(float delta);
 
     public bool IsUiVisible {
-        get => !RaptureAtkUnitManager.Flags.HasFlag(RaptureAtkModuleFlags.UiHidden);
+        get => !RaptureAtkUnitManager.AtkUnitManager.Flags.HasFlag(AtkUnitManagerFlags.UiHidden);
         set => SetUiVisibility(value);
     }
 
@@ -147,6 +147,7 @@ public unsafe partial struct RaptureAtkModule {
 }
 
 [Flags]
+[Obsolete("Use AtkUnitManagerFlags instead")]
 public enum RaptureAtkModuleFlags : byte {
     None = 0x00,
     Unk01 = 0x01,

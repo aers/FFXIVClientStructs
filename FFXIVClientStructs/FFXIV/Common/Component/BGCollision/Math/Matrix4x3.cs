@@ -6,10 +6,10 @@ namespace FFXIVClientStructs.FFXIV.Common.Component.BGCollision.Math;
 public unsafe struct Matrix4x3 {
     [FieldOffset(0x00), CExportIgnore] public fixed float Matrix[12];
 
-    [FieldOffset(0x00)] public Vector3 Row0;
-    [FieldOffset(0x0C)] public Vector3 Row1;
-    [FieldOffset(0x18)] public Vector3 Row2;
-    [FieldOffset(0x24)] public Vector3 Row3; // aka Translation
+    [FieldOffset(0x00), CExportIgnore] public Vector3 Row0;
+    [FieldOffset(0x0C), CExportIgnore] public Vector3 Row1;
+    [FieldOffset(0x18), CExportIgnore] public Vector3 Row2;
+    [FieldOffset(0x24), CExportIgnore] public Vector3 Row3; // aka Translation
 
     [FieldOffset(0x00)] public float M11;
     [FieldOffset(0x04)] public float M12;

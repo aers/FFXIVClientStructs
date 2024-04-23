@@ -77,7 +77,7 @@ public unsafe partial struct AgentInspect {
         [FieldOffset(0x18)] public fixed short ModelSub[4];
         [FieldOffset(0x20)] public InventoryItem* Item; //Init 0 unsure
 
-        [StructLayout(LayoutKind.Explicit)]
+        [StructLayout(LayoutKind.Explicit, Size = 0x3)]
         public struct ColorRGB {
             [FieldOffset(0x0)] public byte B;
             [FieldOffset(0x1)] public byte G;

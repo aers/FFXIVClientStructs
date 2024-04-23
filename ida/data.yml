@@ -2955,7 +2955,7 @@ classes:
       11: GetUseOsHardwareCursor
       12: SetSoftwareCursorScale
       13: GetSoftwareCursorScale
-      14: IsCursorVisible
+      14: GetCursorVisibility
       19: SetShowSoftwareCursorTrajectory
       21: IsMouseNotCaptured
       22: UnloadSoftwareCursor
@@ -3251,8 +3251,8 @@ classes:
       0x14010CA40: GetLetterBoxUsage
       0x14010CA60: GetNumLettersFromPurchases
       0x14010CA70: GetNumLettersFromGameMasters
-      0x14010CA80: HasLettersFromGameMasters
-      0x14010CA90: HasLettersFromSupportDesk
+      0x14010CA80: GetHasLettersFromGameMasters
+      0x14010CA90: GetHasLettersFromSupportDesk
       0x14017C8D0: Finalize
   Client::UI::Info::InfoProxySearch:
     vtbls:
@@ -3838,6 +3838,7 @@ classes:
       0x14149E740: HandleMarketBoardPurchasePacket
       0x14149F1E0: HandleMarketBoardHistoryPacket
       0x14149E5E0: HandleMarketBoardItemRequestStartPacket
+# wrong offset      0x14130DD20: ctor
   Client::Network::NetworkModulePacketReceiverCallback: # derives Application::Network::PacketReceiverCallbackInterface & Client::Network::PacketDispatcher
     vtbls:
       - ea: 0x1419DD6D0

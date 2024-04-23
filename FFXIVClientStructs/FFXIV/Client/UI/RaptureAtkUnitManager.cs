@@ -13,7 +13,7 @@ public unsafe partial struct RaptureAtkUnitManager {
 
     [FieldOffset(0x0)] public AtkUnitManager AtkUnitManager;
 
-    [FieldOffset(0x9C88)] public RaptureAtkModuleFlags Flags;
+    [FieldOffset(0x9C88), Obsolete("Use AtkUnitManager.Flags instead")] public RaptureAtkModuleFlags Flags;
     [FieldOffset(0x9C90)] public AtkEventInterface AtkEventInterface;
 
     [FieldOffset(0x9D00)] public UIModule.UiFlags UiFlags;

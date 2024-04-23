@@ -33,7 +33,7 @@ public unsafe partial struct Human {
     [FieldOffset(0x93E)] public ushort TailEarId; // tXXXX/zXXXX(viera)
     [FieldOffset(0x940)] public ushort FurId;
 
-    [FieldOffset(0x980)] private nint _slotDecalBase;
+    [FieldOffset(0x980), CExportIgnore] private nint _slotDecalBase;
     [FieldOffset(0x980)] public TextureResourceHandle* HeadDecal;
     [FieldOffset(0x988)] public TextureResourceHandle* TopDecal;
     [FieldOffset(0x990)] public TextureResourceHandle* ArmsDecal;

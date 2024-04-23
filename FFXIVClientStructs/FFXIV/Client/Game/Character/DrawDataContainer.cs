@@ -122,7 +122,7 @@ public unsafe partial struct DrawObjectData {
 public unsafe partial struct CustomizeData {
     private const int Count = 0x1A;
 
-    [FieldOffset(0x00)] public fixed byte Data[Count];
+    [FieldOffset(0x00), Obsolete("Use specific fields"), CExportIgnore] public fixed byte Data[Count]; // TODO: Change to private
 
     [FieldOffset(0x00)] public byte Race;
     [FieldOffset(0x01)] public byte Sex;
@@ -186,7 +186,7 @@ public struct WeaponModelId {
     [FieldOffset(4)] public ushort Variant;
     [FieldOffset(6)] public byte Stain;
 
-    [FieldOffset(0)] public ulong Value;
+    [FieldOffset(0), CExportIgnore] public ulong Value;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 4)]
@@ -195,5 +195,5 @@ public struct EquipmentModelId {
     [FieldOffset(2)] public byte Variant;
     [FieldOffset(3)] public byte Stain;
 
-    [FieldOffset(0)] public uint Value;
+    [FieldOffset(0), CExportIgnore] public uint Value;
 }
