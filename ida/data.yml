@@ -3882,8 +3882,8 @@ classes:
       0x1402259A0: ctor
       0x14022B150: Finalize
       0x14022B1B0: Update
-      0x14022B3A0: GetAgentByInternalID
-      0x14022B3B0: GetAgentByInternalID_2  # dupe?
+      0x14022B3A0: GetAgentByInternalId
+      0x14022B3B0: GetAgentByInternalId_2  # dupe?
       0x14022B450: HideAgent
       0x14022B470: HideAgentIfActive
       0x14022B4C0: IsAgentActive
