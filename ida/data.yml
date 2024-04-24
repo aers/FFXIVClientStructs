@@ -3028,9 +3028,12 @@ classes:
       0x1400B6660: OpenAddon
       0x1400B6AB0: OpenAddonByAgent
       0x1400B6DE0: OpenYesNo
+      0x1400B70F0: OpenSelectOk
+      0x1400B7050: OpenSelectOk2
       0x1400CA390: OnUpdate_Nameplates
       0x1400CB840: IncRefNumberArrayData
       0x1400CB890: IncRefStringArrayData
+      0x1400CF0A0: GetStaticAddonName
       0x1400DACD0: UpdateBattleCharaNameplates
       0x1400DBB20: UpdateNpcNameplates
       0x1400DDE90: IsUIVisible
@@ -3968,6 +3971,19 @@ classes:
         base: Application::Network::LobbyClient::LobbyRequestCallback
     funcs:
       0x14023C3F0: ctor
+  Component::GUI::AtkMessageBoxManager::AtkMessageBoxEvent:
+    vtbls:
+      - ea: 0x1419DF580
+  Application::Network::LogoutCallbackInterface:
+    vtbls:
+      - ea: 0x1419DF588
+    vfuncs:
+      1: OnLogout
+  Application::Network::ZoneLoginCallbackInterface:
+    vtbls:
+      - ea: 0x1419DF598
+    vfuncs:
+      1: OnZoneLogin
   Client::UI::Agent::AgentLobby:
     vtbls:
       - ea: 0x1419DF508
@@ -3975,12 +3991,39 @@ classes:
     funcs:
       0x140255960: ctor
       0x140255E00: Finalize
+      0x140259C60: UpdateLobbyUIStage
       0x14025A6A0: UpdateCharaSelectDisplay
+      0x14025BEF0: SetDataCenter
+      0x14025FB20: OpenTitleDCWorldMap
+      0x14025FCC0: OpenTitleConnectDialog
       0x140262790: OpenLoginWaitDialog
+      0x140262D80: OpenLobbyScreenText
+      0x140263620: CloseDialog
       0x140264150: ShowCharacterNotFoundWarning
+      0x140264330: GetLobbyText
+      0x14031A960: SetupLobbyCamera
   Client::UI::Agent::AgentLobby::LobbyData:
     funcs:
       0x140241A00: GetCharacterEntryByIndex
+  Client::UI::Agent::AgentLobby::LobbySubscriptionInfo:
+    funcs:
+      0x14161A230: GetDaysUntilNextVeteranRank
+      0x14161A240: GetDaysRemaining
+      0x14161A250: GetVeteranRewardRank
+      0x14161A260: GetTotalDaysSubscribed
+  Client::UI::Agent::AgentLobby::CharaSelectCharacterEntry:
+    funcs:
+      0x14023BED0: IsAnyRetainerNameChangeRequired
+      0x14023C040: IsInDifferentRegion
+      0x14161A2F0: IsNotLocked
+      0x14161A340: IsMissingExVersionForCharacterEdit
+      0x14161A350: IsDCTraveling
+      0x14161A370: IsUnk32
+      0x14161A380: IsMissingExVersionForLogin
+      0x14161A3D0: IsNameChangeRequired
+  Client::UI::Agent::AgentLobby::CharaSelectRetainerInfo:
+    funcs:
+      0x14161A3E0: IsNameChangeRequired
   Client::UI::Agent::AgentCursor:
     vtbls:
       - ea: 0x1419DFD08
@@ -5318,6 +5361,7 @@ classes:
       10: GetStringArrayData
       11: GetExtendArrayData
       17: SetHandlerFunction
+      21: CloseAddon
       26: IsAddonReady
       39: SetUIVisibility
       58: Update
