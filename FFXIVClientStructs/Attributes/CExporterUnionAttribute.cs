@@ -6,7 +6,7 @@ internal class CExporterUnionAttribute : Attribute {
     public string Union { get; }
     public string Struct { get; }
     public bool IsStruct { get; }
-    
+
     /// <summary>
     /// Creates a struct union with the given name and fields.
     /// </summary>
@@ -33,4 +33,4 @@ internal class CExporterUnionAttribute : Attribute {
 }
 
 [AttributeUsage(AttributeTargets.Struct)]
-internal class CExporterStructUnionAttribute : Attribute {}
+internal class CExporterStructUnionAttribute : Attribute { }

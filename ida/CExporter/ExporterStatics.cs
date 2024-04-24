@@ -50,7 +50,7 @@ public static class ExporterStatics {
 
 internal class CExporterUnionCompare : IEqualityComparer<CExporterUnionAttribute> {
     public bool Equals(CExporterUnionAttribute? x, CExporterUnionAttribute? y) {
-        return x is { IsStruct: var xb, Struct: var xs, Union: var xu } && 
+        return x is { IsStruct: var xb, Struct: var xs, Union: var xu } &&
                y is { IsStruct: var yb, Struct: var ys, Union: var yu } &&
                (xb == yb ? xs == ys && xu == yu : xu == yu);
     }

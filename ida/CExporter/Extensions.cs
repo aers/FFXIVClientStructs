@@ -147,7 +147,7 @@ public static class TypeExtensions {
 
     public static string FixPtrName(this string name) {
         var count = 0;
-        while (name[^(count+1)] == '*')
+        while (name[^(count + 1)] == '*')
             count++;
         return name[..^count].Replace("*", "Ptr") + new string('*', count);
     }

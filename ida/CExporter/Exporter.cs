@@ -275,14 +275,14 @@ ReExport:
                                     FieldOffset = -1,
                                     FieldName = "this"
                                 },
-                                ..memberFunctionParameters.Select(p => {
-                                _processType.Add(p.ParameterType);
-                                return new ProcessedField {
-                                    FieldType = p.ParameterType,
-                                    FieldOffset = -1,
-                                    FieldName = p.Name!
-                                };
-                            }).ToArray()]
+                                .. memberFunctionParameters.Select(p => {
+                                    _processType.Add(p.ParameterType);
+                                    return new ProcessedField {
+                                        FieldType = p.ParameterType,
+                                        FieldOffset = -1,
+                                        FieldName = p.Name!
+                                    };
+                                }).ToArray()]
                         },
                     ];
                 }
@@ -318,7 +318,7 @@ ReExport:
                         });
                     } else
                         unions[index].Fields = [
-                            ..unions[index].Fields,
+                            .. unions[index].Fields,
                             ProcessField(unionField, unionStartField.GetFieldOffset())
                         ];
                     _processType.Add(unionField.FieldType);
@@ -329,7 +329,7 @@ ReExport:
                     var unionStructIndex = unions.FindIndex(t => t.StructName == unionNamespace && t.StructName == unionName);
                     var unionStruct = unions[unionStructIndex];
                     unionStruct.Fields = [
-                        ..unionStruct.Fields,
+                        .. unionStruct.Fields,
                         new ProcessedField {
                             FieldType = type,
                             FieldOffset = 0,
@@ -355,7 +355,7 @@ ReExport:
 
             foreach (var (unionAttr, fieldInfo) in unionOffsets) {
                 processedStruct.Fields = [
-                    ..processedStruct.Fields,
+                    .. processedStruct.Fields,
                     new ProcessedField {
                         FieldType = fieldInfo.FieldType,
                         FieldOffset = fieldInfo.GetFieldOffset(),
