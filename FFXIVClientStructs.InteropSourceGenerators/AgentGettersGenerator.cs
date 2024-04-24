@@ -101,7 +101,7 @@ internal sealed class AgentGettersGenerator : IIncrementalGenerator {
             StructInfo.RenderStart(builder);
 
             builder.AppendLine();
-            builder.AppendLine($"public static {StructInfo.Name}* Instance() => ({StructInfo.Name}*)AgentModule.Instance()->GetAgentByInternalID({AgentInfo.AgentId});");
+            builder.AppendLine($"public static {StructInfo.Name}* Instance() => ({StructInfo.Name}*)AgentModule.Instance()->GetAgentByInternalId((AgentId){AgentInfo.AgentId});");
             builder.AppendLine();
 
             StructInfo.RenderEnd(builder);
@@ -114,7 +114,7 @@ internal sealed class AgentGettersGenerator : IIncrementalGenerator {
         }
 
         public void RenderAgentGetter(IndentedStringBuilder builder) {
-            builder.AppendLine($"public {StructInfo.Name}* Get{StructInfo.Name}() => ({StructInfo.Name}*)GetAgentByInternalID({AgentInfo.AgentId});");
+            builder.AppendLine($"public {StructInfo.Name}* Get{StructInfo.Name}() => ({StructInfo.Name}*)GetAgentByInternalId((AgentId){AgentInfo.AgentId});");
         }
     }
 }
