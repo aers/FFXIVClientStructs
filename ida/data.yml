@@ -68,6 +68,7 @@ globals:
   0x142190000: g_OodleDelete
   0x142190010: g_OodlePrintf
   0x1421C8BE8: g_MacroTime
+  0x14265F8C8: g_SQEX::CDev::Engine::Sd::Driver::SoundDriver
   0x14265F960: ?hkaSkeletonMapperClass@@3VhkClass@@B
   0x14265F9E0: ?hkaAnimationContainerClass@@3VhkClass@@B
   0x142660990: ?hkReferencedObjectClass@@3VhkClass@@B
