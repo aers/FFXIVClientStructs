@@ -5171,17 +5171,30 @@ classes:
         base: Component::GUI::AtkResNode
     funcs:
       0x14052D040: SetText
-      0x14052DB70: SetForegroundColour
+      0x14052DB70: SetTextColor
+      0x14052DB90: SetTextColorRgb
+      0x14052DBB0: GetTextColor
+      0x14052DBD0: SetAlignment
       0x14052DED0: GetTextDrawSize
       0x14052E860: SetNumber
+      0x14052EA30: SetBackgroundColor
+      0x14052EA50: GetText
+      0x14052EA70: GetFontType
+      0x14052EA90: SetFontType
+      0x14052EAB0: GetFontSize
       0x14052EB30: SetFontSize
-      0x14052EC40: SetGlowColour
+      0x14052EC40: SetEdgeColor
+      0x14052EC60: GetEdgeColor
+      0x14052ECA0: ToggleGlare
+      0x14052ED20: ToggleItalic
       0x14052F280: ToggleFixedFontResolution  # this stops text from auto scaling, they turned this on for nameplates in 5.5
+      0x14052F340: SetSelection
+      0x14052F8D0: SetCharSpacing
+      0x14052F8F0: GetCharSpacing
+      0x14052F910: SetLineSpacing
+      0x14052F930: GetLineSpacing
       0x14052FFF0: ToggleFontCache
       0x1405301E0: ResizeNodeForCurrentText
-      0x14052EA50: GetText
-      0x14052EA90: SetFont
-      0x14052DBD0: SetAlignment
       0x1405A0570: ctor
   Component::GUI::AtkNineGridNode:
     vtbls:
