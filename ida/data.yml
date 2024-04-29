@@ -3048,6 +3048,7 @@ classes:
       0x1400DDE90: IsUIVisible
       0x140568940: DecRefNumberArrayData
       0x1405689A0: DecRefStringArrayData
+      0x14056B900: GetAtkFontCodeModule
   Client::UI::ExdSheetWaiter:
     vtbls:
       - ea: 0x1419BF158
@@ -5037,8 +5038,6 @@ classes:
     vtbls:
       - ea: 0x141A08420
         base: Component::Text::MacroDecoder
-    funcs:
-      0x1405247D0: CalculateLines
   Component::GUI::AtkCursor:
     funcs:
       0x140510AC0: Show
