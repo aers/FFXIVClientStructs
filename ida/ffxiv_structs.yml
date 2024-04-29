@@ -1101,8 +1101,10 @@ enums:
     None: 0
     Locked: 1
     NameChangeRequired: 2
-    ExpansionMissing: 4
+    MissingExVersionForLogin: 4
+    MissingExVersionForCharacterEdit: 8
     DCTraveling: 16
+    Unk32: 32
 - type: Client::UI::Agent::CharaSelectRetainerInfoLoginFlags
   name: CharaSelectRetainerInfoLoginFlags
   underlying: unsigned __int16
@@ -7740,6 +7742,9 @@ structs:
   - type: unsigned __int32
     name: DaysRemaining
     offset: 52
+  - type: unsigned __int32
+    name: DaysUntilNextVeteranRank
+    offset: 56
   virtual_functions: []
   member_functions: []
 - type: Client::UI::Agent::CharaSelectRetainerInfo
@@ -8860,6 +8865,62 @@ structs:
       name: volume
     - type: __int32
       name: p3
+  - signature: 48 89 5C 24 ?? 57 48 83 EC 20 80 79 31 00 0F B6 FA 48 8B D9 75 2C
+    return_type: void
+    name: SetMasterEnabled
+    parameters:
+    - type: Client::Sound::SoundManager*
+      name: this
+    - type: byte
+      name: enabled
+  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 49 8B 89 ?? ?? ?? ?? 83 FE 01 0F 94 C2 E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 49 8B 89 ?? ?? ?? ?? 83 FE 01 0F 94 C2 E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 49 8B 89 ?? ?? ?? ?? 83 FE 01 0F 94 C2 E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 49 8B 89 ?? ?? ?? ?? 83 FE 01 0F 94 C2 E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 49 8B 89 ?? ?? ?? ?? 83 FE 01 0F 94 C2 E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 49 8B 89 ?? ?? ?? ?? 8B D6
+    return_type: void
+    name: SetBgmEnabled
+    parameters:
+    - type: Client::Sound::SoundManager*
+      name: this
+    - type: byte
+      name: enabled
+  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 49 8B 89 ?? ?? ?? ?? 83 FE 01 0F 94 C2 E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 49 8B 89 ?? ?? ?? ?? 83 FE 01 0F 94 C2 E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 49 8B 89 ?? ?? ?? ?? 83 FE 01 0F 94 C2 E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 49 8B 89 ?? ?? ?? ?? 83 FE 01 0F 94 C2 E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 49 8B 89 ?? ?? ?? ?? 8B D6
+    return_type: void
+    name: SetSoundEffectsEnabled
+    parameters:
+    - type: Client::Sound::SoundManager*
+      name: this
+    - type: byte
+      name: enabled
+  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 49 8B 89 ?? ?? ?? ?? 83 FE 01 0F 94 C2 E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 49 8B 89 ?? ?? ?? ?? 83 FE 01 0F 94 C2 E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 49 8B 89 ?? ?? ?? ?? 83 FE 01 0F 94 C2 E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 49 8B 89 ?? ?? ?? ?? 8B D6
+    return_type: void
+    name: SetVoiceEnabled
+    parameters:
+    - type: Client::Sound::SoundManager*
+      name: this
+    - type: byte
+      name: enabled
+  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 49 8B 89 ?? ?? ?? ?? 83 FE 01 0F 94 C2 E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 49 8B 89 ?? ?? ?? ?? 83 FE 01 0F 94 C2 E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 49 8B 89 ?? ?? ?? ?? 8B D6
+    return_type: void
+    name: SetSystemEnabled
+    parameters:
+    - type: Client::Sound::SoundManager*
+      name: this
+    - type: byte
+      name: enabled
+  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 49 8B 89 ?? ?? ?? ?? 83 FE 01 0F 94 C2 E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 49 8B 89 ?? ?? ?? ?? 8B D6
+    return_type: void
+    name: SetEnvironmentEnabled
+    parameters:
+    - type: Client::Sound::SoundManager*
+      name: this
+    - type: byte
+      name: enabled
+  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 49 8B 89 ?? ?? ?? ?? 8B D6
+    return_type: void
+    name: SetPerfomEnabled
+    parameters:
+    - type: Client::Sound::SoundManager*
+      name: this
+    - type: byte
+      name: enabled
 - type: Client::Network::NetworkModule
   name: NetworkModule
   namespace: Client.Network
@@ -17730,6 +17791,24 @@ structs:
     offset: 28
   virtual_functions: []
   member_functions: []
+- type: Client::UI::Misc::DataCenterHelper::DataCenter
+  name: DataCenter
+  namespace: Client.UI.Misc
+  union: False
+  size: 34
+  fields:
+  - type: unsigned __int16
+    name: Region
+    offset: 0
+  - type: unsigned __int32
+    name: RowId
+    offset: 2
+  - type: byte
+    name: NameData
+    offset: 6
+    size: 32
+  virtual_functions: []
+  member_functions: []
 - type: Client::UI::Misc::GoldSaucerModule::TripleTriadDeck
   name: TripleTriadDeck
   namespace: Client.UI.Misc
@@ -17989,6 +18068,24 @@ structs:
     name: Comment
     offset: 8
     size: 91
+  virtual_functions: []
+  member_functions: []
+- type: Client::UI::Misc::WorldHelper::World
+  name: World
+  namespace: Client.UI.Misc
+  union: False
+  size: 34
+  fields:
+  - type: byte
+    name: DataCenter
+    offset: 0
+  - type: byte
+    name: IsPublic
+    offset: 1
+  - type: byte
+    name: NameData
+    offset: 2
+    size: 32
   virtual_functions: []
   member_functions: []
 - type: Client::UI::Info::InfoProxyCatalogSearch::Entry
@@ -21761,6 +21858,22 @@ structs:
     offset: 16
   virtual_functions: []
   member_functions: []
+- type: StdVector<Client::UI::Misc::DataCenterHelper::DataCenter>
+  name: StdVector`1
+  namespace: ''
+  union: False
+  fields:
+  - type: Client::UI::Misc::DataCenterHelper::DataCenter*
+    name: First
+    offset: 0
+  - type: Client::UI::Misc::DataCenterHelper::DataCenter*
+    name: Last
+    offset: 8
+  - type: Client::UI::Misc::DataCenterHelper::DataCenter*
+    name: End
+    offset: 16
+  virtual_functions: []
+  member_functions: []
 - type: StdMap<unsigned __int64, Client::UI::Misc::ItemOrderModuleSorter*>
   name: StdMap`2
   namespace: ''
@@ -21804,6 +21917,19 @@ structs:
   - type: Client::UI::Misc::ItemOrderModuleSorterSortFunctionEntry*
     name: End
     offset: 16
+  virtual_functions: []
+  member_functions: []
+- type: StdMap<unsigned __int16, Client::UI::Misc::WorldHelper::World>
+  name: StdMap`2
+  namespace: ''
+  union: False
+  fields:
+  - type: StdMap::Node<unsigned __int16, Client::UI::Misc::WorldHelper::World>*
+    name: Head
+    offset: 0
+  - type: unsigned __int64
+    name: Count
+    offset: 8
   virtual_functions: []
   member_functions: []
 - type: StdVector<Client::UI::Agent::ActionData>
@@ -23244,6 +23370,19 @@ structs:
   - type: Client::UI::Misc::ItemOrderModuleSorter*
     name: Item2
     offset: 8
+  virtual_functions: []
+  member_functions: []
+- type: StdPair<unsigned __int16, Client::UI::Misc::WorldHelper::World>
+  name: StdPair`2
+  namespace: ''
+  union: False
+  fields:
+  - type: unsigned __int16
+    name: Item1
+    offset: 0
+  - type: Client::UI::Misc::WorldHelper::World
+    name: Item2
+    offset: 2
   virtual_functions: []
   member_functions: []
 - type: StdPair<byte*, __int16>
@@ -31446,6 +31585,17 @@ structs:
     parameters:
     - type: Client::UI::Misc::CharaViewCharacterData*
       name: this
+- type: Client::UI::Misc::DataCenterHelper
+  name: DataCenterHelper
+  namespace: Client.UI.Misc
+  union: False
+  size: 32
+  fields:
+  - type: StdVector<Client::UI::Misc::DataCenterHelper::DataCenter>
+    name: DataCenters
+    offset: 8
+  virtual_functions: []
+  member_functions: []
 - type: Client::UI::Misc::EmoteHistoryModule
   name: EmoteHistoryModule
   namespace: Client.UI.Misc
@@ -33049,6 +33199,23 @@ structs:
       name: action1
     - type: byte
       name: action2
+- type: Client::UI::Misc::WorldHelper
+  name: WorldHelper
+  namespace: Client.UI.Misc
+  union: False
+  size: 64
+  fields:
+  - type: StdMap<unsigned __int16, Client::UI::Misc::WorldHelper::World>
+    name: AllWorlds
+    offset: 8
+  - type: StdMap<unsigned __int16, Client::UI::Misc::WorldHelper::World>
+    name: DataCenterWorlds
+    offset: 24
+  - type: byte
+    name: IsLoaded
+    offset: 56
+  virtual_functions: []
+  member_functions: []
 - type: Client::UI::Info::InfoModule
   name: InfoModule
   namespace: Client.UI.Info
@@ -42821,6 +42988,37 @@ structs:
     offset: 28
   virtual_functions: []
   member_functions: []
+- type: StdMap::Node<unsigned __int16, Client::UI::Misc::WorldHelper::World>
+  name: Node
+  namespace: ''
+  union: False
+  fields:
+  - type: StdMap::Node<unsigned __int16, Client::UI::Misc::WorldHelper::World>*
+    name: Left
+    offset: 0
+  - type: StdMap::Node<unsigned __int16, Client::UI::Misc::WorldHelper::World>*
+    name: Parent
+    offset: 8
+  - type: StdMap::Node<unsigned __int16, Client::UI::Misc::WorldHelper::World>*
+    name: Right
+    offset: 16
+  - type: byte
+    name: Color
+    offset: 24
+  - type: byte
+    name: IsNil
+    offset: 25
+  - type: byte
+    name: _18
+    offset: 26
+  - type: byte
+    name: _19
+    offset: 27
+  - type: StdPair<unsigned __int16, Client::UI::Misc::WorldHelper::World>
+    name: KeyValuePair
+    offset: 28
+  virtual_functions: []
+  member_functions: []
 - type: StdMap::Node<byte*, __int16>
   name: Node
   namespace: ''
@@ -44253,6 +44451,9 @@ structs:
   - type: Component::GUI::AtkExternalInterface
     name: AtkExternalInterface
     offset: 8
+  - type: Component::Excel::ExcelSheet*
+    name: AddonSheet
+    offset: 32
   - type: Component::GUI::AtkStage*
     name: AtkStage
     offset: 296
@@ -46282,6 +46483,12 @@ structs:
   - signature: 0F B6 41 ?? 84 05 ?? ?? ?? ?? 0F 94 C0
     return_type: byte
     name: IsNotLocked
+    parameters:
+    - type: Client::UI::Agent::CharaSelectCharacterEntry*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 84 C0 75 0F 48 8B CB
+    return_type: byte
+    name: IsInDifferentRegion
     parameters:
     - type: Client::UI::Agent::CharaSelectCharacterEntry*
       name: this
@@ -49672,20 +49879,45 @@ structs:
   - type: Client::UI::UIModule*
     name: UIModule
     offset: 2560
+  - type: __int64
+    name: TitleScreenMoviePtr
+    offset: 2568
+  - type: unsigned __int32
+    name: AccountExpansion
+    offset: 2608
+  - type: byte
+    name: ShowFreeTrialLogo
+    offset: 2612
+  - type: unsigned __int32
+    name: TitleScreenExpansion
+    offset: 2616
+  - type: byte
+    name: ShowOriginalLogo
+    offset: 2620
   - type: Component::Excel::ExcelSheet*
     name: ErrorSheet
     offset: 2624
   - type: Component::Excel::ExcelSheet*
     name: LobbySheet
     offset: 2632
+  - type: Client::Network::NetworkModuleProxy*
+    name: NetworkModuleProxy
+    offset: 2640
+  - type: StdDeque<Component::Text::TextParameter>
+    name: LobbyTextParameters
+    offset: 2648
+  - type: Client::System::String::Utf8String
+    name: Utf8StringsData
+    offset: 2688
+    size: 13
   - type: __int8
     name: ServiceAccountIndex
     offset: 4320
   - type: __int8
-    name: SelectedCharacterIndex
+    name: HoveredCharacterIndex
     offset: 4321
   - type: unsigned __int64
-    name: SelectedCharacterContentId
+    name: HoveredCharacterContentId
     offset: 4328
   - type: byte
     name: DataCenter
@@ -49696,12 +49928,30 @@ structs:
   - type: unsigned __int16
     name: WorldId
     offset: 4340
+  - type: unsigned __int32
+    name: DialogAddonId
+    offset: 4344
+  - type: unsigned __int32
+    name: DialogAddonId2
+    offset: 4348
+  - type: unsigned __int32
+    name: LobbyScreenTextAddonId
+    offset: 4352
   - type: byte
-    name: RequestedDataReady
+    name: LobbyUpdateStage
     offset: 4356
+  - type: byte
+    name: LobbyUIStage
+    offset: 4359
   - type: unsigned __int32
     name: IdleTime
     offset: 4368
+  - type: unsigned __int64
+    name: SelectedCharacterContentId
+    offset: 4408
+  - type: byte
+    name: IsLoggedIn
+    offset: 4416
   - type: byte
     name: TemporaryLocked
     offset: 4648
@@ -49716,6 +49966,12 @@ structs:
     offset: 7588
   virtual_functions: []
   member_functions:
+  - signature: E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 41 8B D6
+    return_type: void
+    name: UpdateLobbyUIStage
+    parameters:
+    - type: Client::UI::Agent::AgentLobby*
+      name: this
   - signature: E8 ?? ?? ?? ?? 84 C0 74 07 C6 86 ?? ?? ?? ?? ?? 48 8B 8C 24
     return_type: void
     name: UpdateCharaSelectDisplay
@@ -50517,6 +50773,12 @@ structs:
   - type: Client::UI::Misc::RaptureUiDataModule
     name: RaptureUiDataModule
     offset: 582016
+  - type: Client::UI::Misc::DataCenterHelper
+    name: DataCenterHelper
+    offset: 605288
+  - type: Client::UI::Misc::WorldHelper
+    name: WorldHelper
+    offset: 605320
   - type: Client::UI::Misc::GoldSaucerModule
     name: GoldSaucerModule
     offset: 605384
@@ -50740,6 +51002,18 @@ structs:
   - name: GetRaptureUiDataModule
     offset: 208
     return_type: Client::UI::Misc::RaptureUiDataModule*
+    parameters:
+    - type: Client::UI::UIModule*
+      name: this
+  - name: GetDataCenterHelper
+    offset: 216
+    return_type: Client::UI::Misc::DataCenterHelper*
+    parameters:
+    - type: Client::UI::UIModule*
+      name: this
+  - name: GetWorldHelper
+    offset: 224
+    return_type: Client::UI::Misc::WorldHelper*
     parameters:
     - type: Client::UI::UIModule*
       name: this
