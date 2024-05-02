@@ -41,6 +41,8 @@ public struct TeleportInfo {
     [FieldOffset(0x1B)] public byte IsFavourite;
 
     public bool IsSharedHouse => Ward > 0 && Plot > 0;
+    public bool IsApartment => SubIndex == 128 && !IsSharedHouse;
+    [Obsolete("Renamed to IsApartment")]
     public bool IsAppartment => SubIndex == 128 && !IsSharedHouse;
 }
 
