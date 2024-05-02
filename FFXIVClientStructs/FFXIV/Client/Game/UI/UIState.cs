@@ -23,6 +23,7 @@ public unsafe partial struct UIState {
     [FieldOffset(0x15D8)] public Achievement Achievement;
     [FieldOffset(0x1B30)] public Buddy Buddy;
     [FieldOffset(0x36B4)] public PvPProfile PvPProfile;
+    [FieldOffset(0x3730)] internal void* Unk3730; // some UI timer for PvP Results?!
     [FieldOffset(0x3738)] public ContentsNote ContentsNote;
     [FieldOffset(0x37F0)] public RelicNote RelicNote;
     [FieldOffset(0x3808)] public TradeMultiple TradeMultiple;

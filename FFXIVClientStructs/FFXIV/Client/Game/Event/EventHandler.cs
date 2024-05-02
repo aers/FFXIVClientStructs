@@ -42,6 +42,8 @@ public enum EventHandlerType : ushort {
     CustomTalk = 0x000B,
     CompanyLeveOfficer = 0x000C,
     Array = 0x000D,
+    CraftLeveClient = 0x000E,
+    [Obsolete("Use CraftLeveClient")]
     CraftLeve = 0x000E,
     GimmickAccessor = 0x000F,
     GimmickBill = 0x0010,
@@ -56,6 +58,8 @@ public enum EventHandlerType : ushort {
     ContentNpc = 0x0019,
     Story = 0x001A,
     SpecialShop = 0x001B,
+    DeepDungeon = 0x001C,
+    [Obsolete("Use DeepDungeon")]
     ContentTalk = 0x001C,
     InstanceContentGuide = 0x001D,
     HousingAethernet = 0x001E,
@@ -65,8 +69,28 @@ public enum EventHandlerType : ushort {
     DailyQuestSupply = 0x0022,
     TripleTriad = 0x0023,
     GoldSaucerArcadeMachine = 0x0024,
+    LotteryDaily = 0x0025, // Mini Cactpot
+    LotteryWeekly = 0x0026, // Jumbo Cactpot
+    RaceChocoboRegistrar = 0x0027,
+
+    GoldSaucerTalk = 0x0029, // Q'nabyano (responding with GoldSaucerTalk#162) and Reymanaud (responding with GoldSaucerTalk#161) use this
+    FreeCompanyCreditShop = 0x002A,
+    AetherCurrent = 0x002B,
+    ContentEntry = 0x002C,
+    Verminion = 0x002D, // Verminion Tables and Tournament Recordkeeper
+    SkyIslandEntrance = 0x002E,
+    DpsChallengeOfficer = 0x002F, // Stone, Sky, Sea
+    BeginnerTrainingOfficer = 0x0030,
+    RetainerBuyback = 0x0031,
+    TopicSelect = 0x0032,
     LotteryExchangeShop = 0x0034,
+    DisposalShop = 0x0035,
+    PreHandler = 0x0036, // checks quest completion before handling something, for example opening the Scrip Exchange
     TripleTriadCompetition = 0x0037,
+    Salvage = 0x0039, // Desynthesis (0x390000), Materia Extraction (0x390001), Aetherial Reduction (0x390002)
+    InclusionShop = 0x003A,
+    CollectablesShop = 0x003B,
+    EventPathMove = 0x003D, // Argos in Mare Lamentorum uses this
 
     BattleLeveDirector = 0x8001,
     GatheringLeveDirector = 0x8002,
