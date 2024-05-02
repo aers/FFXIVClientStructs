@@ -121,7 +121,7 @@ public unsafe partial struct AgentMap {
     public bool AddMapMarker(Vector3 position, uint icon, int scale = 0, byte* text = null, byte textPosition = 3, byte textStyle = 0) {
         if (MapMarkerCount >= 132) return false;
         if (textPosition is > 0 and < 12)
-            position *= CurrentMapSizeFactorFloat;
+            position *= SelectedMapSizeFactorFloat;
         var marker = stackalloc MapMarkerInfo[1];
         marker->MapMarker.Index = MapMarkerCount;
         marker->MapMarker.X = (short)(position.X * 16.0f);
