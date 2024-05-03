@@ -3143,6 +3143,18 @@ classes:
     funcs:
       0x1400F95B0: ctor
       0x1400FAB00: RequestData
+      0x1400F9E80: SendUpdateData
+      0x1400FA030: SetUpdateClassJobId
+      0x1400FA050: SetUpdateLookingForPartyClassJobIdMask
+      0x1400FA070: SetUpdateOnlineStatus
+      0x1400FA0D0: SetUpdateLanguageMask
+      0x1400FA0F0: SetUpdateSearchComment
+      0x1400FA220: SendOnlineStatusUpdate
+      0x1400FA400: FixOnlineStatusFlag1
+      0x1400FA4C0: FixOnlineStatusFlag2
+      0x1400FA550: GetUpdateData
+      0x1400FA560: GetUpdateSearchComment
+      0x1400FA590: SendUpdateData2 # Checks some TerritoryIntendedUseRow and calls ContentDirector.vf337?
       0x14017C7A0: Finalize
   Client::UI::UIClipboard:
     vtbls:
@@ -6222,6 +6234,7 @@ classes:
       0x140678BC0: FormatAddonText2<int,int,string>
       0x140678FB0: FormatAddonText2<int,string,uint>
       0x140679840: FormatTimeSpan
+      0x14067A010: GetTextChecker
       0x14067AE70: Update
       0x14067B780: FormatAddonTextApply
   Client::UI::Misc::RaptureLogModule:
