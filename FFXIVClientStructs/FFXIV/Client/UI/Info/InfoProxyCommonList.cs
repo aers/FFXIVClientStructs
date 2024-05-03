@@ -32,7 +32,7 @@ public unsafe partial struct InfoProxyCommonList {
     public partial CharacterData* GetEntry(uint idx);
 
     [MemberFunction("E9 ?? ?? ?? ?? 3B 5F 10")]
-    public partial CharacterData* GetEntryByContentId(ulong contentId, int a3 = 0, byte a4 = 0);
+    public partial CharacterData* GetEntryByContentId(ulong contentId, uint nameCrc32 = 0, byte a4 = 0);
 
     [MemberFunction("E8 ?? ?? ?? ?? EB 3C 8D 45 EF"), GenerateCStrOverloads]
     public partial CharacterData* GetEntryByName(byte* characterName, ushort worldId);
