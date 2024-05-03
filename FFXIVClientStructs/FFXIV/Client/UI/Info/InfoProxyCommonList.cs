@@ -7,7 +7,11 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 public unsafe partial struct InfoProxyCommonList {
     [FieldOffset(0x0)] public InfoProxyPageInterface InfoProxyPageInterface;
     [FieldOffset(0x20)] public Utf8String Unk20;
+    [FieldOffset(0x88)] public byte NumberArrayIndex;
+    [Obsolete("Renamed to NumberArrayIndex")]
     [FieldOffset(0x88)] public byte Unk88; //Corresponding ATkModule NumberArrrayIndex
+    [FieldOffset(0x89)] public byte StringArrayIndex;
+    [Obsolete("Renamed to StringArrayIndex")]
     [FieldOffset(0x89)] public byte Unk89; //Corresponding ATkModule StringArrrayIndex
     [FieldOffset(0x8A)] public ushort DataSize;
     [FieldOffset(0x8C)] public ushort DictSize;
@@ -26,6 +30,12 @@ public unsafe partial struct InfoProxyCommonList {
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 85 FF 74 55")]
     public partial CharacterData* GetEntry(uint idx);
+
+    [MemberFunction("E9 ?? ?? ?? ?? 3B 5F 10")]
+    public partial CharacterData* GetEntryByContentId(ulong contentId, uint nameCrc32 = 0, byte a4 = 0);
+
+    [MemberFunction("E8 ?? ?? ?? ?? EB 3C 8D 45 EF"), GenerateCStrOverloads]
+    public partial CharacterData* GetEntryByName(byte* characterName, ushort worldId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 13 45 33 C9")]
     public partial void ApplyFilters();

@@ -3095,7 +3095,7 @@ classes:
       0x1400AD990: Finalize
       0x1400ADA40: GetInfoProxyById
       0x1400ADA60: GetLocalCharacterName
-      0x1400ADAE0: GetLocalContentID
+      0x1400ADAE0: GetLocalContentId
       0x1400ADB30: GetOnlineStatusFlags
       0x1400ADB90: SetOnlineStatusFlags
       0x1400ADBB0: IsOnlineStatusSet
@@ -3133,9 +3133,9 @@ classes:
       0x1400ED040: Finalize
       0x1400ED6F0: ClearListDataImpl
       0x1400EDE60: GetContentIDForEntry
-      0x1400EDE80: SearchEntryByName
+      0x1400EDE80: GetEntryByName
       0x1400EDF80: GetEntry
-      0x1400EE5E0: SearchEntryByContentID
+      0x1400EE5E0: GetEntryByContentId
       0x1400EE830: SwapData
   Client::UI::Info::InfoProxySearchComment:
     vtbls:
@@ -3144,6 +3144,18 @@ classes:
     funcs:
       0x1400F95B0: ctor
       0x1400FAB00: RequestData
+      0x1400F9E80: SendUpdateData
+      0x1400FA030: SetUpdateClassJobId
+      0x1400FA050: SetUpdateLookingForPartyClassJobIdMask
+      0x1400FA070: SetUpdateOnlineStatus
+      0x1400FA0D0: SetUpdateLanguageMask
+      0x1400FA0F0: SetUpdateSearchComment
+      0x1400FA220: SendOnlineStatusUpdate
+      0x1400FA400: FixOnlineStatusFlag1
+      0x1400FA4C0: FixOnlineStatusFlag2
+      0x1400FA550: GetUpdateData
+      0x1400FA560: GetUpdateSearchComment
+      0x1400FA590: PropagateUpdateData
       0x14017C7A0: Finalize
   Client::UI::UIClipboard:
     vtbls:
@@ -6223,6 +6235,7 @@ classes:
       0x140678BC0: FormatAddonText2<int,int,string>
       0x140678FB0: FormatAddonText2<int,string,uint>
       0x140679840: FormatTimeSpan
+      0x14067A010: GetTextChecker
       0x14067AE70: Update
       0x14067B780: FormatAddonTextApply
   Client::UI::Misc::RaptureLogModule:
