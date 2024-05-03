@@ -3154,7 +3154,7 @@ classes:
       0x1400FA4C0: FixOnlineStatusFlag2
       0x1400FA550: GetUpdateData
       0x1400FA560: GetUpdateSearchComment
-      0x1400FA590: SendUpdateData2 # Checks some TerritoryIntendedUseRow and calls ContentDirector.vf337?
+      0x1400FA590: PropagateUpdateData
       0x14017C7A0: Finalize
   Client::UI::UIClipboard:
     vtbls:
