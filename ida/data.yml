@@ -3095,7 +3095,7 @@ classes:
       0x1400AD990: Finalize
       0x1400ADA40: GetInfoProxyById
       0x1400ADA60: GetLocalCharacterName
-      0x1400ADAE0: GetLocalContentID
+      0x1400ADAE0: GetLocalContentId
       0x1400ADB30: GetOnlineStatusFlags
       0x1400ADBB0: IsOnlineStatusSet
       0x1400ADC30: IsInCrossWorldDuty
@@ -3132,9 +3132,9 @@ classes:
       0x1400ED040: Finalize
       0x1400ED6F0: ClearListDataImpl
       0x1400EDE60: GetContentIDForEntry
-      0x1400EDE80: SearchEntryByName
+      0x1400EDE80: GetEntryByName
       0x1400EDF80: GetEntry
-      0x1400EE5E0: SearchEntryByContentID
+      0x1400EE5E0: GetEntryByContentId
       0x1400EE830: SwapData
   Client::UI::Info::InfoProxySearchComment:
     vtbls:
