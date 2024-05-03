@@ -594,7 +594,7 @@ classes:
       - ea: 0x141A1A7A0
         base: Component::Text::MacroDecoder
     vfuncs:
-      16: FormatString
+      16: FormatString # using byte* as input
       17: ProcessNoun
   Component::Text::TextModuleInterface:
     vtbls:
@@ -606,7 +606,6 @@ classes:
       7: EncodeString
       8: EncodeMacro
       9: ProcessMacroCode
-      16: FormatString # using byte* as input
   Component::Text::Localize::Localize:
     vtbls:
       - ea: 0x141A1A6F0
