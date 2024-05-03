@@ -17,21 +17,21 @@ public unsafe partial struct AtkTextNode : ICreatable {
     [FieldOffset(0xB4)] public ByteColor TextColor;
     [FieldOffset(0xB8)] public ByteColor EdgeColor;
     [FieldOffset(0xBC)] public ByteColor BackgroundColor;
-
     [FieldOffset(0xC0)] public Utf8String NodeText;
 
     [FieldOffset(0x130)] public void* UnkPtr_1;
 
     // if text is "asdf" and you selected "sd" this is 2, 3
-    [FieldOffset(0x140)] public uint SelectStart;
-    [FieldOffset(0x144)] public uint SelectEnd;
+    [FieldOffset(0x138)] public uint SelectStart;
+    [FieldOffset(0x13C)] public uint SelectEnd;
+
     [FieldOffset(0x152)] public byte LineSpacing;
     [FieldOffset(0x153)] public byte CharSpacing;
-
-    // alignment bits 0-3 font type bits 4-7
+    /// <remarks>Alignment bits 0-3, Font Type bits 4-7</remarks>
     [FieldOffset(0x154)] public byte AlignmentFontType;
     [FieldOffset(0x155)] public byte FontSize;
     [FieldOffset(0x156)] public byte SheetType;
+
     [FieldOffset(0x158)] public ushort FontCacheHandle;
     [FieldOffset(0x15A)] public byte TextFlags;
     [FieldOffset(0x15B)] public byte TextFlags2;
@@ -48,15 +48,13 @@ public unsafe partial struct AtkTextNode : ICreatable {
     public partial byte* GetText();
 
     [MemberFunction("E8 ?? ?? ?? ?? 8D 4E 5A")]
-    public partial void SetNumber(int num, bool showCommaDelimiters = false, bool showPlusSign = false, byte digits = 0,
-        bool addZeroPadding = false);
+    public partial void SetNumber(int num, bool showCommaDelimiters = false, bool showPlusSign = false, byte digits = 0, bool addZeroPadding = false);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 83 C4 28 5F 5D")]
     public partial void ResizeNodeForCurrentText();
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F B7 6D 08")]
-    public partial void GetTextDrawSize(ushort* outWidth, ushort* outHeight, byte* text = null, int start = 0,
-        int end = -1, bool considerScale = false);
+    public partial void GetTextDrawSize(ushort* outWidth, ushort* outHeight, byte* text = null, int start = 0, int end = -1, bool considerScale = false);
 
     [MemberFunction("E8 ?? ?? ?? ?? 49 8B 0E 48 8B 9E")]
     public partial void SetAlignment(AlignmentType alignmentType);
@@ -101,7 +99,8 @@ public enum TextFlags {
 
 [Flags]
 public enum TextFlags2 {
-    Ellipsis = 0x04
+    Ellipsis = 0x04,
+    FixedFontResolution = 0x10
 }
 
 public enum FontType : byte {

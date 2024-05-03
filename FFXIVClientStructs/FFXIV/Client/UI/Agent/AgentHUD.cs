@@ -15,6 +15,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 public unsafe partial struct AgentHUD {
     [FieldOffset(0x0)] public AgentInterface AgentInterface;
 
+    [FieldOffset(0xAA8)] public uint CastBarAddonId;
+
     [FieldOffset(0xAB0)] public uint CurrentTargetId;
     [FieldOffset(0xAB8)] public int TargetCounter;
     [FieldOffset(0xAC0)] public uint TargetPartyMemberId;

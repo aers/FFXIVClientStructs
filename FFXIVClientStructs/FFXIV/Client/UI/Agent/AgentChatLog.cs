@@ -7,12 +7,14 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 //   Client::UI::Agent::AgentInterface
 //     Component::GUI::AtkModuleInterface::AtkEventInterface
 [Agent(AgentId.ChatLog)]
-[StructLayout(LayoutKind.Explicit, Size = 0x2B8)]
+[StructLayout(LayoutKind.Explicit, Size = 0xB28)]
 public unsafe partial struct AgentChatLog {
     [FieldOffset(0x00)] public AgentInterface AgentInterface;
 
     [FieldOffset(0x40)] public ChatChannel CurrentChannel;
     [FieldOffset(0x48)] public Utf8String ChannelLabel; // ie, "Say", "Party" that displays above the text input
+
+    [FieldOffset(0x948)] public uint ContextItemId;
 
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 81 FF ?? ?? ?? ?? 75 20")]
     public partial bool InsertTextCommandParam(uint textParamId, bool unk);

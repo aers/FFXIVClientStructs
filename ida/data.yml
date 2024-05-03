@@ -116,6 +116,8 @@ functions:
   0x1406555D0: GetRandomInteger
   0x140655630: GetRandomFloat
   0x140419820: UpdateAnimFactor
+  0x140483FF0: GetActionTimelineKey
+  0x140484020: GetWeaponTimelineKey
   0x1404999F0: PrepareColorSet
   0x140499CC0: ReadStainingTemplate
   0x1404BDEB0: StartSpursJobEntityWorkerThread
@@ -299,7 +301,6 @@ functions:
   0x14076A330: ProcessActorControlPacket
   0x140B1E450: IsInMordionGaol # if this returns true, i'm sorry for you
   0x140B71C20: WorldToScreenPoint
-  0x14144C430: GetBannerConditionUnlockState
   0x14145E250: GetInstanceContentCrystallineConflictDirector
   0x1414AEAB0: GetInstanceContentMahjongDirector
   0x14170EB20: OodleNew # oodle code starts here
@@ -3005,6 +3006,10 @@ classes:
       0x1405455B0: GetAddonByName
       0x140545660: GetAddonByNode
       0x140548A50: UpdateDrawOrderIndexes
+  Client::UI::WindowContextMenuHandler:
+    vtbls:
+      - ea: 0x1419BF0C8
+        base: Component::GUI::AtkModuleInterface::AtkEventInterface
   Client::UI::RaptureAtkUnitManager:
     vtbls:
       - ea: 0x1419BEF70
@@ -3043,6 +3048,7 @@ classes:
       0x1400DDE90: IsUIVisible
       0x140568940: DecRefNumberArrayData
       0x1405689A0: DecRefStringArrayData
+      0x14056B900: GetAtkFontCodeModule
   Client::UI::ExdSheetWaiter:
     vtbls:
       - ea: 0x1419BF158
@@ -3851,7 +3857,6 @@ classes:
       - ea: 0x141B42D80
         base: Client::Network::Protocol::Chat::PacketReceiverCallbackInterface
     funcs:
-      0x1412ECC20: ReceiveEvent
       0x14149AF70: HandlePartyInvitePacket
       0x14149B040: HandleSocialPacket
       0x14149E680: HandleMarketBoardOfferingsPacket
@@ -4835,6 +4840,9 @@ classes:
       0x1404CDDD0: GetSheetByName  # (ExdModule* this, char* pcszName) -> ExcelSheet*
       0x14067B650: IsColumnRsv  # (ExdModule* this, int nSheetIndex, int nRowId, int nSubRowId, int nColumnIndex) -> bool
       0x1406F1D40: GetItemRowById
+  Component::Exd::Sheets::BannerCondition:
+    funcs:
+      0x14144C430: GetUnlockState
   Client::System::Scheduler::ScheduleManagement:
     vtbls:
       - ea: 0x141A03AA8
@@ -5170,17 +5178,30 @@ classes:
         base: Component::GUI::AtkResNode
     funcs:
       0x14052D040: SetText
-      0x14052DB70: SetForegroundColour
+      0x14052DB70: SetTextColor
+      0x14052DB90: SetTextColorRgb
+      0x14052DBB0: GetTextColor
+      0x14052DBD0: SetAlignment
       0x14052DED0: GetTextDrawSize
       0x14052E860: SetNumber
+      0x14052EA30: SetBackgroundColor
+      0x14052EA50: GetText
+      0x14052EA70: GetFontType
+      0x14052EA90: SetFontType
+      0x14052EAB0: GetFontSize
       0x14052EB30: SetFontSize
-      0x14052EC40: SetGlowColour
+      0x14052EC40: SetEdgeColor
+      0x14052EC60: GetEdgeColor
+      0x14052ECA0: ToggleGlare
+      0x14052ED20: ToggleItalic
       0x14052F280: ToggleFixedFontResolution  # this stops text from auto scaling, they turned this on for nameplates in 5.5
+      0x14052F340: SetSelection
+      0x14052F8D0: SetCharSpacing
+      0x14052F8F0: GetCharSpacing
+      0x14052F910: SetLineSpacing
+      0x14052F930: GetLineSpacing
       0x14052FFF0: ToggleFontCache
       0x1405301E0: ResizeNodeForCurrentText
-      0x14052EA50: GetText
-      0x14052EA90: SetFont
-      0x14052DBD0: SetAlignment
       0x1405A0570: ctor
   Component::GUI::AtkNineGridNode:
     vtbls:
@@ -5278,6 +5299,7 @@ classes:
       0x14053D290: GetImageNodeById
       0x140539060: FireCallbackAndHideOrClose
       0x14053D390: FireCallback
+      0x14053DFB0: MoveDelta
       0x14053FA40: UpdateCollisionNodeList
   Component::GUI::AtkComponentBase:
     vtbls:
@@ -5303,6 +5325,7 @@ classes:
       0x140552790: ctor
       0x14057DCC0: Finalize
       0x1405A46E0: GetOwnerNode
+      0x140552450: SetChecked
   Component::GUI::AtkComponentIcon:
     vtbls:
       - ea: 0x141A08D48
@@ -5344,6 +5367,7 @@ classes:
       45: GetSelectedItemAtkResNode
     funcs:
       0x140560DA0: ctor
+      0x140559C60: SetItemCount
       0x14055B1A0: SetItemLabel
       0x14055B260: GetItemLabel
       0x1405604C0: DispatchItemEvent
@@ -5427,6 +5451,9 @@ classes:
     funcs:
       0x140571730: ctor
       0x140571820: Finalize
+      0x140571590: SetMinValue
+      0x1405715B0: SetMaxValue
+      0x1405715D0: SetValue
   Component::GUI::AtkComponentInputBase:
     vtbls:
       - ea: 0x141A09778
@@ -7462,6 +7489,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140A49220: ctor
+      0x140A4ABA0: TeleportToAetheryte
   Client::UI::Agent::AgentSocial:
     vtbls:
       - ea: 0x1419E0998
@@ -8523,6 +8551,8 @@ classes:
     vtbls:
       - ea: 0x1419DFFD8
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1402826A0: AddItemContextMenuEntries
   Client::UI::Agent::AgentContactList:
     vtbls:
       - ea: 0x1419E33E8
@@ -8636,6 +8666,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140AE5430: ctor
+      0x140AE7F40: UpdateItems
   Client::UI::Agent::AgentMiragePrismItemDetail:
     vtbls:
       - ea: 0x141A75200
@@ -9168,6 +9199,8 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x1409F3CB0: ctor
+      0x1409F3D50: OpenByRecipeId
+      0x1409F47C0: OpenRecipeResultItemContextMenu
   Client::UI::Agent::AgentRecipeProductList:
     vtbls:
       - ea: 0x141A6F910
@@ -9475,6 +9508,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x14127E840: ctor
+      0x14127EE30: SelectItem
   Client::UI::Agent::AgentMJIRecipeNoteBook:
     vtbls:
       - ea: 0x141B3C778
@@ -9639,6 +9673,8 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x141289950: ctor
+      0x14128B8C0: HandleCommand
+      0x14128C740: GetSelectedMinionId
   Client::UI::Agent::AgentMJISettings:
     vtbls:
       - ea: 0x141B3C5E8
@@ -12088,8 +12124,13 @@ classes:
     vfuncs:
       3: OnItemSelected
     funcs:
-
       0x140D80190: Finalize
+  Client::UI::TabController:
+    vtbls:
+      - ea: 0x141A8FE68
+        base: Component::GUI::AtkEventListener
+    funcs:
+      0x140D85D50: ctor
   Client::UI::AddonFadeMiddleBack:
     vtbls:
       - ea: 0x141A90590
@@ -12132,6 +12173,7 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x140FA7660: ctor
+      0x140FA8760: SetTab
   Client::UI::AddonBuddyAction:
     vtbls:
       - ea: 0x141ADC1C8
@@ -12378,6 +12420,7 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x140ED3180: ctor
+      0x140ED5940: SetTab
   Client::UI::AddonCharacterStatus:
     vtbls:
       - ea: 0x141AC5A48
@@ -12396,6 +12439,7 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x140F86BE0: ctor
+      0x140F879C0: SetTab
   Client::UI::AddonCharacterRepute:
     vtbls:
       - ea: 0x141AD7200
@@ -12420,12 +12464,14 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x140FEF900: ctor
+      0x140FF0550: SetTab
   Client::UI::AddonFateProgress:
     vtbls:
       - ea: 0x141ADD628
         base: Component::GUI::AtkUnitBase
     funcs:
       0x140FBCA10: ctor
+      0x140FBD050: SetTab
   Client::UI::AddonFishingNote:
     vtbls:
       - ea: 0x141AC7CE0
@@ -12514,6 +12560,7 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x140F0C350: ctor
+      0x140F10310: SetTab
   Client::UI::AddonAOZNotebookPresetList:
     vtbls:
       - ea: 0x141AC9F40
@@ -12545,6 +12592,8 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x140FC37E0: ctor
+      0x140FC5240: NextTab
+      0x140FC52F0: PreviousTab
   Client::UI::AddonCabinetWithdraw:
     vtbls:
       - ea: 0x141ADEF68
@@ -13585,42 +13634,57 @@ classes:
         base: Client::UI::AddonInventoryInterface
     funcs:
       0x140EC1C80: ctor
+      0x140EC2A00: SetTab
+      0x140EC2B20: SwitchToKeyItems
   Client::UI::AddonInventoryBuddy:
     vtbls:
       - ea: 0x141AE66A0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x140FFF9D0: ctor
+      0x141001170: SetTab
   Client::UI::AddonInventoryEvent:
     vtbls:
       - ea: 0x141AC42C8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x140EC7EB0: ctor
+      0x140EC8F30: SetTab
+      0x140EC8E50: SwitchToInventory
   Client::UI::AddonInventoryExpansion:
     vtbls:
       - ea: 0x141AC4548
         base: Client::UI::AddonInventoryInterface
     funcs:
       0x140EC9570: ctor
+      0x140ECA7E0: SetTab
   Client::UI::AddonInventoryLarge:
     vtbls:
       - ea: 0x141AC3E08
         base: Client::UI::AddonInventoryInterface
     funcs:
       0x140EC4DF0: ctor
+      0x140EC6440: SetTab
   Client::UI::AddonInventoryRetainer:
     vtbls:
       - ea: 0x141AC4E88
         base: Component::GUI::AtkUnitBase
     funcs:
       0x140ECD620: ctor
+      0x140ECE690: SetTab
   Client::UI::AddonInventoryRetainerLarge:
     vtbls:
       - ea: 0x141AC5588
         base: Component::GUI::AtkUnitBase
     funcs:
       0x140ED0E40: ctor
+      0x140ED20D0: SetTab
+  Client::UI::AddonInventoryGrid:
+    vtbls:
+      - ea: 0x141AC3988
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140EC3150: ctor
   Client::UI::AddonJobHud:
     vtbls:
       - ea: 0x141B1E448
@@ -14203,6 +14267,7 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x140F02100: ctor
+      0x140F05F70: SwitchToFavorites
   Client::UI::AddonMinionNoteBook:
     vtbls:
       - ea: 0x141AC9430
@@ -14691,11 +14756,12 @@ classes:
   Client::System::Scheduler::ActionTimelineManager:
     vtbls:
       - ea: 0x141B48F58
+    instances:
+      - ea: 0x142232C68
     funcs:
       0x14139B030: CreateInstance
       0x14139B080: ctor
-    instances:
-      - ea: 0x142232C68
+      0x14139B420: PreloadActionTmbByKey
   Client::System::Scheduler::TimelineGroup:
     vtbls:
       - ea: 0x141B64698

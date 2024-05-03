@@ -222,4 +222,7 @@ public unsafe partial struct AtkUnitBase {
 
     [MemberFunction("E8 ?? ?? ?? ?? 8D 55 06 48 8B CE")]
     public partial void SetCloseTransition(float duration, short offsetX, short offsetY, float scale);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 0F BF 8C 24 ?? ?? ?? ?? 01 8F")]
+    public partial bool MoveDelta(short* xDelta, short* yDelta);
 }

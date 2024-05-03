@@ -24,14 +24,14 @@ public unsafe partial struct RaptureLogModule {
     [FieldOffset(0x100)] public AtkFontCodeModule* AtkFontCodeModule;
     [FieldOffset(0x100), Obsolete("Use AtkFontCodeModule instead")] public MacroDecoder* MacroDecoder;
     [FixedSizeArray<Utf8String>(10)]
-    [FieldOffset(0x108)] internal fixed byte TempParseMessage[0x68 * 10];
+    [FieldOffset(0x108)] public fixed byte TempParseMessage[0x68 * 10];
 
-    [FieldOffset(0x520)] internal ExcelSheet* LogKindSheet;
+    [FieldOffset(0x520)] public ExcelSheet* LogKindSheet;
 
     [FixedSizeArray<RaptureLogModuleTab>(5)]
     [FieldOffset(0x530)] public fixed byte ChatTabs[0x928 * 5];
 
-    [FieldOffset(0x33D8)] internal ExcelSheet* LogMessageSheet;
+    [FieldOffset(0x33D8)] public ExcelSheet* LogMessageSheet;
 
     [Obsolete("Use ChatTabIsPendingReload")]
     [FieldOffset(0x33E8)] public fixed byte ChatTabsPendingReload[4];
