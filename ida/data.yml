@@ -6454,7 +6454,7 @@ classes:
       0x1406B1E90: PopulateForRegion # a2 is a pointer to the region id (byte)
       0x1406B2260: GetDataCenterByIndex # unused
       0x1406B22E0: GetDataCenterByRowId # unused
-      0x1406B22E0: GetDataCenterNameByRowId # unused
+      0x1406B23C0: GetDataCenterNameByRowId # unused
   Client::UI::Misc::WorldHelper:
     vtbls:
       - ea: 0x141A1EEC8
