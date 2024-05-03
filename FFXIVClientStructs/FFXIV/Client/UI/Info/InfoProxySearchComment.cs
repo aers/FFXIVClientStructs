@@ -18,7 +18,7 @@ public unsafe partial struct InfoProxySearchComment {
     [FieldOffset(0x1D0)] public Utf8String UnkString2;
     [FieldOffset(0x238)] public bool HasUpdateData;
 
-    [StructLayout(LayoutKind.Explicit, Size = 0xD3)]
+    [StructLayout(LayoutKind.Explicit, Size = 0xD8)]
     public struct UpdateDataPacket {
         [FieldOffset(0x00)] public InfoProxyCommonList.CharacterData.OnlineStatus OnlineStatusMask;
         [FieldOffset(0x08)] public ulong LookingForPartyClassJobIdMask;
