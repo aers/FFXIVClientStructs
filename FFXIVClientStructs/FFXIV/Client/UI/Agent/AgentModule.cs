@@ -92,6 +92,8 @@ public enum AgentId : uint {
     SocialPartyMember = 59,
     // PartyInvite,
     SocialSearch = 61,
+    Detail = 62,
+    [Obsolete("Renamed to Detail")]
     SocialDetail = 62,
     LetterList = 63,
     LetterView = 64,
