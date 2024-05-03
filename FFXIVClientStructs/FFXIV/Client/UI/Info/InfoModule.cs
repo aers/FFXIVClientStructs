@@ -21,6 +21,12 @@ public unsafe partial struct InfoModule {
     public InfoProxyInterface* GetInfoProxyById(uint id)
         => GetInfoProxyById((InfoProxyId)id);
 
+    [MemberFunction("E8 ?? ?? ?? ?? 49 83 C9 FF 48 8D 8C 24")]
+    public partial byte* GetLocalCharacterName();
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 39 03")]
+    public partial ulong GetLocalContentId();
+
     /// <summary>
     /// Checks if the local player has a specific online status set.
     /// </summary>
