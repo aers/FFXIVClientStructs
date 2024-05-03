@@ -29,6 +29,14 @@ public unsafe partial struct InfoModule {
     public partial bool IsOnlineStatusSet(uint id);
 
     /// <summary>
+    /// Sets the local player's online status to the specified flag bitmask.
+    /// Sent by the server; devs should not call this manually. May be called multiple times.
+    /// </summary>
+    /// <param name="flags">A bitfield representing set flags.</param>
+    [MemberFunction("48 89 91 ?? ?? ?? ?? 48 8B 89 ?? ?? ?? ?? 48 85 C9 0F 85")]
+    public partial void SetOnlineStatusFlags(ulong flags);
+
+    /// <summary>
     /// Checks if the local player is in a cross world duty.
     /// </summary>
     [MemberFunction("E8 ?? ?? ?? ?? 44 8B 8C 24 ?? ?? ?? ?? 84 C0")]
