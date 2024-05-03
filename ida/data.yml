@@ -3097,6 +3097,7 @@ classes:
       0x1400ADA60: GetLocalCharacterName
       0x1400ADAE0: GetLocalContentID
       0x1400ADB30: GetOnlineStatusFlags
+      0x1400ADB90: SetOnlineStatusFlags
       0x1400ADBB0: IsOnlineStatusSet
       0x1400ADC30: IsInCrossWorldDuty
   Client::UI::Info::InfoProxyBlacklist:
