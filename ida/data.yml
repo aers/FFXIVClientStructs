@@ -5681,11 +5681,23 @@ classes:
         base: Client::LayoutEngine::IManagerBase
     funcs:
       0x1405C1AC0: ctor
+  Client::LayoutEngine::Streaming::InstanceGridTree:
+    vtbls:
+      - ea: 0x141A0BEF0
+        base: Client::System::Common::NonCopyable
   Client::LayoutEngine::Environment::LayoutOBSetManager:
     vtbls:
       - ea: 0x141A0BF60
     funcs:
       0x1405D0D10: ctor
+  Client::LayoutEngine::Layer::LayerManager:
+    vtbls:
+      - ea: 0x141A0BF68
+        base: Client::LayoutEngine::IManagerBase
+  Client::LayoutEngine::Terrain::TerrainManager:
+    vtbls:
+      - ea: 0x141A0BF40
+        base: Client::LayoutEngine::IManagerBase
   Client::LayoutEngine::Environment::LayoutEnvironment:
     vtbls:
       - ea: 0x141A0BF88
@@ -5694,6 +5706,46 @@ classes:
       - ea: 0x141A0BF38
     funcs:
       0x1405CFD50: ctor
+  Client::LayoutEngine::Node::ChildNodeContainer:
+    vtbls:
+      - ea: 0x141A0B928
+        base: Client::System::Common::NonCopyable
+  Client::LayoutEngine::Node::ChildNodeInstance:
+    vtbls:
+      - ea: 0x141A0B930
+        base: Client::System::Common::NonCopyable
+  Client::LayoutEngine::Group::TimeLineContainer:
+    vtbls:
+      - ea: 0x141A0B938
+  Client::LayoutEngine::Housing::HousingEventListener:
+    vtbls:
+      - ea: 0x141A0BF90
+  Client::LayoutEngine::Housing::HousingObjectLayoutInstance:
+    vtbls:
+      - ea: 0x141A0C078
+        base: Client::LayoutEngine::ILayoutInstance
+      - ea: 0x141A0C2F0
+        base: Client::LayoutEngine::Housing::HousingEventListener
+  Client::LayoutEngine::Housing::IndoorObjectLayoutInstance:
+    vtbls:
+      - ea: 0x141A13670
+        base: Client::LayoutEngine::Housing::HousingObjectLayoutInstance
+      - ea: 0x141A138E8
+        base: Client::LayoutEngine::Housing::HousingEventListener
+  Client::LayoutEngine::Housing::OutdoorObjectLayoutInstance:
+    vtbls:
+      - ea: 0x141A139D0
+        base: Client::LayoutEngine::Housing::HousingObjectLayoutInstance
+      - ea: 0x141A13C48
+        base: Client::LayoutEngine::Housing::HousingEventListener
+  Client::LayoutEngine::Node::PointLayoutInstance:
+    vtbls:
+      - ea: 0x141A14090
+        base: Client::LayoutEngine::ILayoutInstance
+  Client::LayoutEngine::Layer::SoundPointLayoutInstanc:
+    vtbls:
+      - ea: 0x141A14548
+        base: Client::LayoutEngine::Node::PointLayoutInstance
   Client::LayoutEngine::Layer::TriggerBoxLayoutInstance:
     vtbls:
       - ea: 0x141A0EE88
@@ -5738,6 +5790,8 @@ classes:
     vtbls:
       - ea: 0x141A129A0
         base: Client::LayoutEngine::ILayoutInstance
+      - ea: 0x141A12C10
+        base: Client::System::Resource::ResourceEventListener
   Client::LayoutEngine::Layer::EventNpcLayoutInstance:
     vtbls:
       - ea: 0x141A0C680
@@ -5758,10 +5812,12 @@ classes:
     vtbls:
       - ea: 0x141A0D0E0
         base: Client::LayoutEngine::Layer::GameObjectLayoutInstance
-  Client::LayoutEngine::Layer::SharedGroupLayoutInstance:
+  Client::LayoutEngine::Group::SharedGroupLayoutInstance:
     vtbls:
       - ea: 0x141A0BC38
         base: Client::LayoutEngine::ILayoutInstance
+      - ea: 0x141A0BEA8
+        base: Client::System::Resource::ResourceEventListener
   Client::LayoutEngine::Layer::TreasureLayoutInstance:
     vtbls:
       - ea: 0x141A0D368
