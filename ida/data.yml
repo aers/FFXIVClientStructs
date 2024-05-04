@@ -1121,7 +1121,7 @@ classes:
   Client::Game::WeatherManager:
     instances:
       - ea: 0x14217E5E0
-        pointer: True
+        pointer: False
     funcs:
       0x140B1CAF0: Initialize
       0x140B1D2D0: GetIndividualWeather
