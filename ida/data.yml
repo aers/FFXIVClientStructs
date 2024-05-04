@@ -1105,6 +1105,29 @@ classes:
   Client::Game::Housing::WorkshopTerritory:
     vtbls:
       - ea: 0x141A761E0
+  Client::Game::WeatherManager::WeatherInterface:
+    vtbls:
+      - ea: 0x141A75600
+    vfuncs:
+      0: dtor
+  Client::Game::WeatherManager::ServerWeather:
+    vtbls:
+      - ea: 0x141A75648
+        base: Client::Game::WeatherManager::WeatherInterface
+  Client::Game::WeatherManager::Weather:
+    vtbls:
+      - ea: 0x141A75808
+        base: Client::Game::WeatherManager::ServerWeather
+  Client::Game::WeatherManager:
+    instances:
+      - ea: 0x14217E5E0
+        pointer: True
+    funcs:
+      0x140B1CAF0: Initialize
+      0x140B1D2D0: GetIndividualWeather
+      0x140B1D390: HasIndividualWeather
+      0x140B1D440: GetWeatherForHour
+      0x140B1D620: GetWeatherForDaytime
   Client::Game::HWDManager: # Diadem
     instances:
       - ea: 0x14221C680
