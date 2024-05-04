@@ -5694,33 +5694,165 @@ classes:
       - ea: 0x141A0BF38
     funcs:
       0x1405CFD50: ctor
-  Client::LayoutEngine::Layer::EnvSpaceLayoutInstance:
+  Client::LayoutEngine::Layer::TriggerBoxLayoutInstance:
     vtbls:
-      - ea: 0x141A0DB08
+      - ea: 0x141A0EE88
+        base: Client::LayoutEngine::ILayoutInstance
+  Client::LayoutEngine::Layer::MarkerLayoutInstance:
+    vtbls:
+      - ea: 0x141A11D48
+        base: Client::LayoutEngine::ILayoutInstance
+  Client::LayoutEngine::Layer::CharacterLayoutInstance:
+    vtbls:
+      - ea: 0x141A0C3D8
+        base: Client::LayoutEngine::ILayoutInstance
+  Client::LayoutEngine::Layer::GameObjectLayoutInstance:
+    vtbls:
+      - ea: 0x141A0CBD0
+        base: Client::LayoutEngine::ILayoutInstance
+  Client::LayoutEngine::Layer::RangeLayoutInstance:
+    vtbls:
+      - ea: 0x141A104E0
+        base: Client::LayoutEngine::ILayoutInstance
+  Client::LayoutEngine::Layer::PathLayoutInstance:
+    vtbls:
+      - ea: 0x141A12C38
         base: Client::LayoutEngine::ILayoutInstance
   Client::LayoutEngine::Layer::BgPartsLayoutInstance:
     vtbls:
       - ea: 0x141A0D898
         base: Client::LayoutEngine::ILayoutInstance
-  Client::LayoutEngine::Layer::EnvLocationLayoutInstance:
-    vtbls:
-      - ea: 0x141A0DD78
-        base: Client::LayoutEngine::ILayoutInstance
   Client::LayoutEngine::Layer::LightLayoutInstance:
     vtbls:
       - ea: 0x141A0DFE8
-        base: Client::LayoutEngine::ILayoutInstance
-  Client::LayoutEngine::Layer::DecalLayoutInstance:
-    vtbls:
-      - ea: 0x141A0E258
         base: Client::LayoutEngine::ILayoutInstance
   Client::LayoutEngine::Layer::VfxLayoutInstance:
     vtbls:
       - ea: 0x141A0E4C8
         base: Client::LayoutEngine::ILayoutInstance
+  Client::LayoutEngine::Layer::PositionMarkerLayoutInstance:
+    vtbls:
+      - ea: 0x141A11FC0
+        base: Client::LayoutEngine::Layer::MarkerLayoutInstance
+  Client::LayoutEngine::Layer::SoundLayoutInstance:
+    vtbls:
+      - ea: 0x141A129A0
+        base: Client::LayoutEngine::ILayoutInstance
+  Client::LayoutEngine::Layer::EventNpcLayoutInstance:
+    vtbls:
+      - ea: 0x141A0C680
+        base: Client::LayoutEngine::Layer::CharacterLayoutInstance
+  Client::LayoutEngine::Layer::BattleNpcLayoutInstance:
+    vtbls:
+      - ea: 0x141A0C928
+        base: Client::LayoutEngine::Layer::CharacterLayoutInstance
+  Client::LayoutEngine::Layer::AetheryteLayoutInstance:
+    vtbls:
+      - ea: 0x141A0CE58
+        base: Client::LayoutEngine::Layer::GameObjectLayoutInstance
+  Client::LayoutEngine::Layer::EnvSpaceLayoutInstance:
+    vtbls:
+      - ea: 0x141A0DB08
+        base: Client::LayoutEngine::ILayoutInstance
+  Client::LayoutEngine::Layer::GatheringLayoutInstance:
+    vtbls:
+      - ea: 0x141A0D0E0
+        base: Client::LayoutEngine::Layer::GameObjectLayoutInstance
+  Client::LayoutEngine::Layer::SharedGroupLayoutInstance:
+    vtbls:
+      - ea: 0x141A0BC38
+        base: Client::LayoutEngine::ILayoutInstance
+  Client::LayoutEngine::Layer::TreasureLayoutInstance:
+    vtbls:
+      - ea: 0x141A0D368
+        base: Client::LayoutEngine::Layer::GameObjectLayoutInstance
   Client::LayoutEngine::Layer::WeaponLayoutInstance:
     vtbls:
       - ea: 0x141A0E738
+        base: Client::LayoutEngine::ILayoutInstance
+  Client::LayoutEngine::Layer::PopRangeLayoutInstance:
+    vtbls:
+      - ea: 0x141A10750
+        base: Client::LayoutEngine::Layer::RangeLayoutInstance
+  Client::LayoutEngine::Layer::ExitRangeLayoutInstance:
+    vtbls:
+      - ea: 0x141A0F100
+        base: Client::LayoutEngine::Layer::TriggerBoxLayoutInstance
+  Client::LayoutEngine::Layer::MapRangeLayoutInstance:
+    vtbls:
+      - ea: 0x141A0F5F0
+        base: Client::LayoutEngine::Layer::TriggerBoxLayoutInstance
+  Client::LayoutEngine::Layer::NaviMeshRangeLayoutInstance:
+    vtbls:
+      - ea: 0x141A109C0
+        base: Client::LayoutEngine::Layer::RangeLayoutInstance
+  Client::LayoutEngine::Layer::EventObjectLayoutInstance:
+    vtbls:
+      - ea: 0x141A0D5F0
+        base: Client::LayoutEngine::Layer::GameObjectLayoutInstance
+  Client::LayoutEngine::Layer::EnvLocationLayoutInstance:
+    vtbls:
+      - ea: 0x141A0DD78
+        base: Client::LayoutEngine::ILayoutInstance
+  Client::LayoutEngine::Layer::EventRangeLayoutInstance:
+    vtbls:
+      - ea: 0x141A10C30
+        base: Client::LayoutEngine::Layer::TriggerBoxLayoutInstance
+  Client::LayoutEngine::Layer::QuestMarkerLayoutInstance:
+    vtbls:
+      - ea: 0x141A12238
+        base: Client::LayoutEngine::Layer::MarkerLayoutInstance
+  Client::LayoutEngine::Layer::CollisionBoxLayoutInstance:
+    vtbls:
+      - ea: 0x141A0F888
+        base: Client::LayoutEngine::Layer::TriggerBoxLayoutInstance
+  Client::LayoutEngine::Layer::DoorRangeLayoutInstance:
+    vtbls:
+      - ea: 0x141A11118
+        base: Client::LayoutEngine::Layer::RangeLayoutInstance
+  Client::LayoutEngine::Layer::LineVfxLayoutInstance:
+    vtbls:
+      - ea: 0x141A10EA8
+        base: Client::LayoutEngine::Layer::RangeLayoutInstance
+  Client::LayoutEngine::Layer::ClientPathLayoutInstance:
+    vtbls:
+      - ea: 0x141A12EB0
+        base: Client::LayoutEngine::Layer::PathLayoutInstance
+  Client::LayoutEngine::Layer::ServerPathLayoutInstance:
+    vtbls:
+      - ea: 0x141A13128
+        base: Client::LayoutEngine::Layer::PathLayoutInstance
+  Client::LayoutEngine::Layer::GimmickRangeLayoutInstance:
+    vtbls:
+      - ea: 0x141A11388
+        base: Client::LayoutEngine::Layer::RangeLayoutInstance
+  Client::LayoutEngine::Layer::TargetMarkerLayoutInstance:
+    vtbls:
+      - ea: 0x141A124B0
+        base: Client::LayoutEngine::Layer::MarkerLayoutInstance
+  Client::LayoutEngine::Layer::ChairMarkerLayoutInstance:
+    vtbls:
+      - ea: 0x141A12728
+        base: Client::LayoutEngine::Layer::MarkerLayoutInstance
+  Client::LayoutEngine::Layer::ClickableRangeLayoutInstance:
+    vtbls:
+      - ea: 0x141A115F8
+        base: Client::LayoutEngine::Layer::RangeLayoutInstance
+  Client::LayoutEngine::Layer::PrefetchRangeLayoutInstance:
+    vtbls:
+      - ea: 0x141A0F378
+        base: Client::LayoutEngine::Layer::TriggerBoxLayoutInstance
+  Client::LayoutEngine::Layer::FateRangeLayoutInstance:
+    vtbls:
+      - ea: 0x141A11AD8
+        base: Client::LayoutEngine::Layer::RangeLayoutInstance
+  Client::LayoutEngine::Layer::SphereCastRangeLayoutInstance:
+    vtbls:
+      - ea: 0x141A11868
+        base: Client::LayoutEngine::Layer::RangeLayoutInstance
+  Client::LayoutEngine::Layer::DecalLayoutInstance:
+    vtbls:
+      - ea: 0x141A0E258
         base: Client::LayoutEngine::ILayoutInstance
   Client::LayoutEngine::Group::TimeLineLayoutInstance:
     vtbls:
@@ -6776,6 +6908,7 @@ classes:
   Client::Game::Character::VfxContainer:
     vtbls:
       - ea: 0x141B44E78
+        base: Client::Game::Character::CharacterSetup
       - ea: 0x141B44EA0
         base: Client::Graphics::Vfx::VfxDataListenner
     funcs:
@@ -6795,6 +6928,7 @@ classes:
   Client::Game::Character::GazeContainer:
     vtbls:
       - ea: 0x141A21CF0
+        base: Client::Game::Character::CharacterSetup
     funcs:
       0x1413278D0: ctor
       0x1413279F0: Update
@@ -10119,6 +10253,10 @@ classes:
   Client::Game::CallbackSheetWaiter<Client::Game::UI::QuestTodoList>:
     vtbls:
       - ea: 0x141A6E368
+  Client::Game::Event::GoldSaucerEventHandler:
+    vtbls:
+      - ea: 0x141A79960
+        base: Client::Game::Event::EventHandler
   Client::Game::Event::QuestEventHandler: # 0x01
     vtbls:
       - ea: 0x141A4C640
@@ -10306,6 +10444,7 @@ classes:
   Client::Game::Event::DailyQuestSupplyEventHandler::UIListener:
     vtbls:
       - ea: 0x141A55038
+        base: Component::GUI::AtkModuleInterface::AtkEventInterface
   Client::Game::Event::DailyQuestSupplyEventHandler: # 0x22
     vtbls:
       - ea: 0x141A55050
@@ -10319,31 +10458,31 @@ classes:
   Client::Game::Event::GoldSaucerArcadeMachineEventHandler: # 0x24
     vtbls:
       - ea: 0x141A80950
-        base: Client::Game::Event::EventHandler
+        base: Client::Game::Event::GoldSaucerEventHandler
     funcs:
       0x140B76FE0: ctor
   Client::Game::Event::LotteryDailyEventHandler: # 0x25
     vtbls:
       - ea: 0x141A7A1B8
-        base: Client::Game::Event::EventHandler
+        base: Client::Game::Event::GoldSaucerEventHandler
     funcs:
       0x140B6B900: ctor
   Client::Game::Event::LotteryWeeklyEventHandler: # 0x26
     vtbls:
       - ea: 0x141A811C8
-        base: Client::Game::Event::EventHandler
+        base: Client::Game::Event::GoldSaucerEventHandler
     funcs:
       0x140B79610: ctor
   Client::Game::Event::RaceChocoboRegistrarEventHandler: # 0x27
     vtbls:
       - ea: 0x141A81A30
-        base: Client::Game::Event::EventHandler
+        base: Client::Game::Event::GoldSaucerEventHandler
     funcs:
       0x140B7B1F0: ctor
   Client::Game::Event::GoldSaucerTalkEventHandler: # 0x29
     vtbls:
       - ea: 0x141A82AE8
-        base: Client::Game::Event::EventHandler
+        base: Client::Game::Event::GoldSaucerEventHandler
   Client::Game::Event::FreeCompanyCreditShopEventHandler: # 0x2A
     vtbls:
       - ea: 0x141A52DC8
@@ -10361,7 +10500,7 @@ classes:
   Client::Game::Event::VerminionEventHandler: # 0x2D
     vtbls:
       - ea: 0x141A82280
-        base: Client::Game::Event::EventHandler
+        base: Client::Game::Event::GoldSaucerEventHandler
     funcs:
       0x140B7C2D0: ctor
   Client::Game::Event::SkyIslandEntranceEventHandler: # 0x2E
