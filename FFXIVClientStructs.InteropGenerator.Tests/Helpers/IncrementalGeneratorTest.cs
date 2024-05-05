@@ -2,14 +2,13 @@
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Testing;
 using Microsoft.CodeAnalysis.Testing;
-using Microsoft.CodeAnalysis.Testing.Verifiers;
 
 namespace FFXIVClientStructs.InteropGenerator.Tests.Helpers;
 
-internal sealed class IncrementalGeneratorTest<TIncrementalGenerator> : CSharpSourceGeneratorTest<EmptySourceGeneratorProvider, XUnitVerifier>
+internal sealed class IncrementalGeneratorTest<TIncrementalGenerator> : CSharpSourceGeneratorTest<EmptySourceGeneratorProvider, DefaultVerifier>
     where TIncrementalGenerator : IIncrementalGenerator, new() {
     
-    public LanguageVersion LanguageVersion { get; set; } = LanguageVersion.Default;
+    private readonly LanguageVersion _languageVersion  = LanguageVersion.Default;
     
     protected override CompilationOptions CreateCompilationOptions()
     {
@@ -21,7 +20,7 @@ internal sealed class IncrementalGeneratorTest<TIncrementalGenerator> : CSharpSo
 
     protected override ParseOptions CreateParseOptions()
     {
-        return ((CSharpParseOptions)base.CreateParseOptions()).WithLanguageVersion(LanguageVersion);
+        return ((CSharpParseOptions)base.CreateParseOptions()).WithLanguageVersion(_languageVersion);
     }
     
     protected override IEnumerable<Type> GetSourceGenerators()

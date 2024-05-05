@@ -6,14 +6,11 @@ namespace FFXIVClientStructs.InteropGenerator.Generator;
 
 [Generator]
 public sealed partial class InteropGenerator : IIncrementalGenerator {
-
-    private const string MarkerAttributeName = "FFXIVClientStructs.InteropGenerator.Runtime.Attributes.GenerateInteropAttribute";
-    
     public void Initialize(IncrementalGeneratorInitializationContext context) {
         // parse all structs and drop invalid results
         IncrementalValuesProvider<StructInfo> structInfos =
             context.SyntaxProvider.ForAttributeWithMetadataName(
-                    MarkerAttributeName,
+                    AttributeNames.GenerateInteropAttribute,
                     static (node, _) => node is StructDeclarationSyntax { AttributeLists.Count: > 0 },
                     static (context, token) => {
                         // not sure if the check is truly necessary

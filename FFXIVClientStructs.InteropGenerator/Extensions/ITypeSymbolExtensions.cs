@@ -1,5 +1,4 @@
-﻿// from the ComputeSharp project
-// https://github.com/Sergio0694/ComputeSharp/blob/main/src/ComputeSharp.SourceGeneration/Extensions/ITypeSymbolExtensions.cs
+﻿// sourced from https://github.com/Sergio0694/ComputeSharp/blob/main/src/ComputeSharp.SourceGeneration/Extensions/ITypeSymbolExtensions.cs
 
 using FFXIVClientStructs.InteropGenerator.Helpers;
 using Microsoft.CodeAnalysis;
@@ -11,6 +10,21 @@ namespace FFXIVClientStructs.InteropGenerator.Extensions;
 /// </summary>
 internal static class ITypeSymbolExtensions
 {
+    /// <summary>
+    /// Checks whether or not a given type symbol has a specified fully qualified metadata name.
+    /// </summary>
+    /// <param name="symbol">The input <see cref="ITypeSymbol"/> instance to check.</param>
+    /// <param name="name">The full name to check.</param>
+    /// <returns>Whether <paramref name="symbol"/> has a full name equals to <paramref name="name"/>.</returns>
+    public static bool HasFullyQualifiedMetadataName(this ITypeSymbol symbol, string name)
+    {
+        using ImmutableArrayBuilder<char> builder = new();
+
+        symbol.AppendFullyQualifiedMetadataName(in builder);
+
+        return builder.WrittenSpan.SequenceEqual(name.AsSpan());
+    }
+    
     /// <summary>
     /// Gets the fully qualified metadata name for a given <see cref="ITypeSymbol"/> instance.
     /// </summary>
