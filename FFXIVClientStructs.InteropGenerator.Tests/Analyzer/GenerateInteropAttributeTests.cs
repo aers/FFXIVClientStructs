@@ -15,6 +15,38 @@ public class GenerateInteropAttribute {
                             {
                             }
                             """;
-        await AnalyzerVerifier<StructGenerationTargetIsNotPartialAnalyzer>.VerifyAnalyzerAsync(code);
+        await AnalyzerVerifier<ContainingStructsMustBePartialAnalyzer>.VerifyAnalyzerAsync(code);
+    }
+
+    [Fact]
+    public async Task TargetStructNestedInNonPartialStruct() {
+        const string code = """
+                            using FFXIVClientStructs.InteropGenerator.Runtime.Attributes;
+
+                            public struct {|CSIG0002:TestStruct|}
+                            {
+                                [GenerateInterop]
+                                public partial struct InnerStruct
+                                {
+                                }
+                            }
+                            """;
+        await AnalyzerVerifier<ContainingStructsMustBePartialAnalyzer>.VerifyAnalyzerAsync(code);
+    }
+
+    [Fact]
+    public async Task TargetStructCannotBeContainedInClass() {
+        const string code = """
+                            using FFXIVClientStructs.InteropGenerator.Runtime.Attributes;
+
+                            public class {|CSIG0003:TestStruct|}
+                            {
+                                [GenerateInterop]
+                                public partial struct InnerStruct
+                                {
+                                }
+                            }
+                            """;
+        await AnalyzerVerifier<ContainingStructsMustBePartialAnalyzer>.VerifyAnalyzerAsync(code);
     }
 }

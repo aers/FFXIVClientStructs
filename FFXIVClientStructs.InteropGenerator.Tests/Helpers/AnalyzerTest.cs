@@ -7,9 +7,7 @@ using Microsoft.CodeAnalysis.Testing;
 namespace FFXIVClientStructs.InteropGenerator.Tests.Helpers;
 
 internal sealed class AnalyzerTest<TAnalyzer> : CSharpAnalyzerTest<TAnalyzer, DefaultVerifier> where TAnalyzer : DiagnosticAnalyzer, new() {
-    private readonly LanguageVersion _languageVersion  = LanguageVersion.Default;
+    private readonly LanguageVersion _languageVersion = LanguageVersion.Default;
 
-    protected override ParseOptions CreateParseOptions() {
-        return ((CSharpParseOptions)base.CreateParseOptions()).WithLanguageVersion(_languageVersion).WithDocumentationMode(DocumentationMode.Diagnose);
-    }
+    protected override ParseOptions CreateParseOptions() => ((CSharpParseOptions)base.CreateParseOptions()).WithLanguageVersion(_languageVersion).WithDocumentationMode(DocumentationMode.Diagnose);
 }

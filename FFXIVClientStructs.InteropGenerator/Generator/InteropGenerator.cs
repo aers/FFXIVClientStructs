@@ -16,13 +16,11 @@ public sealed partial class InteropGenerator : IIncrementalGenerator {
                         // not sure if the check is truly necessary
                         if (context.TargetSymbol is not INamedTypeSymbol structSymbol)
                             return null;
-                        return InteropGenerator.ParseStructInfo(structSymbol, token);
+                        return ParseStructInfo(structSymbol, token);
                     })
                 .Where(static si => si is not null)!;
-        
+
         context.RegisterSourceOutput(structInfos,
-            (sourceContext, item) => {
-                sourceContext.AddSource($"{item.FullyQualifiedMetadataName}.InteropGenerator.g.cs", InteropGenerator.RenderStructInfo(item));
-            });
+            (sourceContext, item) => { sourceContext.AddSource($"{item.FullyQualifiedMetadataName}.InteropGenerator.g.cs", RenderStructInfo(item)); });
     }
 }

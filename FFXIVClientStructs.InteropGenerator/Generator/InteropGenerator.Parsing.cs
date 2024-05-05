@@ -10,7 +10,7 @@ public sealed partial class InteropGenerator {
     private static StructInfo ParseStructInfo(INamedTypeSymbol structSymbol, CancellationToken token) {
         using ImmutableArrayBuilder<string> hierarchy = new();
 
-        for (INamedTypeSymbol? parent = structSymbol;
+        for (var parent = structSymbol;
              parent is not null;
              parent = parent.ContainingType) {
             hierarchy.Add(parent.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat));
@@ -19,7 +19,7 @@ public sealed partial class InteropGenerator {
         return new StructInfo(
             structSymbol.GetFullyQualifiedMetadataName(),
             structSymbol.ContainingNamespace.ToDisplayString(
-                new(typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces)),
+                new SymbolDisplayFormat(typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces)),
             hierarchy.ToImmutable());
     }
 }
