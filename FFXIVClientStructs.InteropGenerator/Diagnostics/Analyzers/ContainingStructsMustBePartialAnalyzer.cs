@@ -39,7 +39,7 @@ public class ContainingStructsMustBePartialAnalyzer : DiagnosticAnalyzer {
                                 typeSymbol.Name));
                         }
                         // check any parents
-                        var parentNode = structSyntax.Parent;
+                        SyntaxNode? parentNode = structSyntax.Parent;
                         while (parentNode is not null) {
                             if (parentNode is ClassDeclarationSyntax classSyntax) {
                                 context.ReportDiagnostic(Diagnostic.Create(

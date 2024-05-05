@@ -97,7 +97,7 @@ internal struct ImmutableArrayBuilder<T> : IDisposable {
 
     /// <inheritdoc cref="ImmutableArray{T}.Builder.ToImmutable" />
     public readonly ImmutableArray<T> ToImmutable() {
-        var array = _writer!.WrittenSpan.ToArray();
+        T[]? array = _writer!.WrittenSpan.ToArray();
 
         return Unsafe.As<T[], ImmutableArray<T>>(ref array);
     }
@@ -110,7 +110,7 @@ internal struct ImmutableArrayBuilder<T> : IDisposable {
 
     /// <inheritdoc />
     public void Dispose() {
-        var writer = _writer;
+        Writer? writer = _writer;
 
         _writer = null;
 
@@ -224,7 +224,7 @@ internal struct ImmutableArrayBuilder<T> : IDisposable {
         /// <inheritdoc />
         IEnumerator<T> IEnumerable<T>.GetEnumerator() {
             T?[] array = _array;
-            var length = _index;
+            int length = _index;
 
             for (var i = 0; i < length; i++) {
                 yield return array[i]!;
@@ -241,7 +241,7 @@ internal struct ImmutableArrayBuilder<T> : IDisposable {
         public Span<T> Advance(int requestedSize) {
             EnsureCapacity(requestedSize);
 
-            var span = _array.AsSpan(_index, requestedSize);
+            Span<T> span = _array.AsSpan(_index, requestedSize);
 
             _index += requestedSize;
 
@@ -279,8 +279,8 @@ internal struct ImmutableArrayBuilder<T> : IDisposable {
         /// <param name="sizeHint">The minimum number of items to ensure space for in <see cref="_array" />.</param>
         [MethodImpl(MethodImplOptions.NoInlining)]
         private void ResizeBuffer(int sizeHint) {
-            var minimumSize = _index + sizeHint;
-            var requestedSize = Math.Max(_array.Length * 2, minimumSize);
+            int minimumSize = _index + sizeHint;
+            int requestedSize = Math.Max(_array.Length * 2, minimumSize);
 
             var newArray = new T[requestedSize];
 

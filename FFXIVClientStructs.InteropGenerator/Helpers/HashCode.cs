@@ -46,7 +46,7 @@ internal struct HashCode {
     /// <returns>The hash code that represents the value.</returns>
     public static int Combine<T1>(T1 value) {
         var hc1 = (uint)(value?.GetHashCode() ?? 0);
-        var hash = MixEmptyState();
+        uint hash = MixEmptyState();
 
         hash += 4;
         hash = QueueRound(hash, hc1);
@@ -66,7 +66,7 @@ internal struct HashCode {
     public static int Combine<T1, T2>(T1 value1, T2 value2) {
         var hc1 = (uint)(value1?.GetHashCode() ?? 0);
         var hc2 = (uint)(value2?.GetHashCode() ?? 0);
-        var hash = MixEmptyState();
+        uint hash = MixEmptyState();
 
         hash += 8;
         hash = QueueRound(hash, hc1);
@@ -90,7 +90,7 @@ internal struct HashCode {
         var hc1 = (uint)(value1?.GetHashCode() ?? 0);
         var hc2 = (uint)(value2?.GetHashCode() ?? 0);
         var hc3 = (uint)(value3?.GetHashCode() ?? 0);
-        var hash = MixEmptyState();
+        uint hash = MixEmptyState();
 
         hash += 12;
         hash = QueueRound(hash, hc1);
@@ -119,14 +119,14 @@ internal struct HashCode {
         var hc3 = (uint)(value3?.GetHashCode() ?? 0);
         var hc4 = (uint)(value4?.GetHashCode() ?? 0);
 
-        Initialize(out var v1, out var v2, out var v3, out var v4);
+        Initialize(out uint v1, out uint v2, out uint v3, out uint v4);
 
         v1 = Round(v1, hc1);
         v2 = Round(v2, hc2);
         v3 = Round(v3, hc3);
         v4 = Round(v4, hc4);
 
-        var hash = MixState(v1, v2, v3, v4);
+        uint hash = MixState(v1, v2, v3, v4);
 
         hash += 16;
         hash = MixFinal(hash);
@@ -155,14 +155,14 @@ internal struct HashCode {
         var hc4 = (uint)(value4?.GetHashCode() ?? 0);
         var hc5 = (uint)(value5?.GetHashCode() ?? 0);
 
-        Initialize(out var v1, out var v2, out var v3, out var v4);
+        Initialize(out uint v1, out uint v2, out uint v3, out uint v4);
 
         v1 = Round(v1, hc1);
         v2 = Round(v2, hc2);
         v3 = Round(v3, hc3);
         v4 = Round(v4, hc4);
 
-        var hash = MixState(v1, v2, v3, v4);
+        uint hash = MixState(v1, v2, v3, v4);
 
         hash += 20;
         hash = QueueRound(hash, hc5);
@@ -195,14 +195,14 @@ internal struct HashCode {
         var hc5 = (uint)(value5?.GetHashCode() ?? 0);
         var hc6 = (uint)(value6?.GetHashCode() ?? 0);
 
-        Initialize(out var v1, out var v2, out var v3, out var v4);
+        Initialize(out uint v1, out uint v2, out uint v3, out uint v4);
 
         v1 = Round(v1, hc1);
         v2 = Round(v2, hc2);
         v3 = Round(v3, hc3);
         v4 = Round(v4, hc4);
 
-        var hash = MixState(v1, v2, v3, v4);
+        uint hash = MixState(v1, v2, v3, v4);
 
         hash += 24;
         hash = QueueRound(hash, hc5);
@@ -239,14 +239,14 @@ internal struct HashCode {
         var hc6 = (uint)(value6?.GetHashCode() ?? 0);
         var hc7 = (uint)(value7?.GetHashCode() ?? 0);
 
-        Initialize(out var v1, out var v2, out var v3, out var v4);
+        Initialize(out uint v1, out uint v2, out uint v3, out uint v4);
 
         v1 = Round(v1, hc1);
         v2 = Round(v2, hc2);
         v3 = Round(v3, hc3);
         v4 = Round(v4, hc4);
 
-        var hash = MixState(v1, v2, v3, v4);
+        uint hash = MixState(v1, v2, v3, v4);
 
         hash += 28;
         hash = QueueRound(hash, hc5);
@@ -287,7 +287,7 @@ internal struct HashCode {
         var hc7 = (uint)(value7?.GetHashCode() ?? 0);
         var hc8 = (uint)(value8?.GetHashCode() ?? 0);
 
-        Initialize(out var v1, out var v2, out var v3, out var v4);
+        Initialize(out uint v1, out uint v2, out uint v3, out uint v4);
 
         v1 = Round(v1, hc1);
         v2 = Round(v2, hc2);
@@ -299,7 +299,7 @@ internal struct HashCode {
         v3 = Round(v3, hc7);
         v4 = Round(v4, hc8);
 
-        var hash = MixState(v1, v2, v3, v4);
+        uint hash = MixState(v1, v2, v3, v4);
 
         hash += 32;
         hash = MixFinal(hash);
@@ -331,8 +331,8 @@ internal struct HashCode {
     /// </summary>
     /// <param name="value">The span.</param>
     public void AddBytes(ReadOnlySpan<byte> value) {
-        ref var pos = ref MemoryMarshal.GetReference(value);
-        ref var end = ref Unsafe.Add(ref pos, value.Length);
+        ref byte pos = ref MemoryMarshal.GetReference(value);
+        ref byte end = ref Unsafe.Add(ref pos, value.Length);
 
         while ((nint)Unsafe.ByteOffset(ref pos, ref end) >= sizeof(int)) {
             Add(Unsafe.ReadUnaligned<int>(ref pos));
@@ -378,8 +378,8 @@ internal struct HashCode {
 
     private void Add(int value) {
         var val = (uint)value;
-        var previousLength = _length++;
-        var position = previousLength % 4;
+        uint previousLength = _length++;
+        uint position = previousLength % 4;
 
         if (position == 0) {
             _queue1 = val;
@@ -404,9 +404,9 @@ internal struct HashCode {
     /// </summary>
     /// <returns>The resulting hashcode from the current instance.</returns>
     public readonly int ToHashCode() {
-        var length = _length;
-        var position = length % 4;
-        var hash = length < 4 ? MixEmptyState() : MixState(_v1, _v2, _v3, _v4);
+        uint length = _length;
+        uint position = length % 4;
+        uint hash = length < 4 ? MixEmptyState() : MixState(_v1, _v2, _v3, _v4);
 
         hash += length * 4;
 

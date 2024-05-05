@@ -20,7 +20,7 @@ internal static class IncrementalGeneratorVerifier<TIncrementalGenerator>
             }
         };
 
-        foreach (var (filename, content) in generatedSources) {
+        foreach ((string filename, string content) in generatedSources) {
             test.TestState.GeneratedSources.Add((typeof(TIncrementalGenerator), filename, SourceText.From(content, Encoding.UTF8)));
         }
 

@@ -17,7 +17,7 @@ public static class ISymbolExtensions {
     /// <param name="attributeData">The resulting attribute, if it was found.</param>
     /// <returns>Whether or not <paramref name="symbol" /> has an attribute with the specified name.</returns>
     public static bool TryGetAttributeWithType(this ISymbol symbol, ITypeSymbol typeSymbol, [NotNullWhen(true)] out AttributeData? attributeData) {
-        foreach (var attribute in symbol.GetAttributes()) {
+        foreach (AttributeData? attribute in symbol.GetAttributes()) {
             if (SymbolEqualityComparer.Default.Equals(attribute.AttributeClass, typeSymbol)) {
                 attributeData = attribute;
 
@@ -38,7 +38,7 @@ public static class ISymbolExtensions {
     /// <param name="attributeData">The resulting attribute data, if found.</param>
     /// <returns>Whether or not <paramref name="symbol" /> has an attribute with the specified name.</returns>
     public static bool TryGetAttributeWithFullyQualifiedMetadataName(this ISymbol symbol, string name, [NotNullWhen(true)] out AttributeData? attributeData) {
-        foreach (var attribute in symbol.GetAttributes()) {
+        foreach (AttributeData? attribute in symbol.GetAttributes()) {
             if (attribute.AttributeClass is { } attributeSymbol &&
                 attributeSymbol.HasFullyQualifiedMetadataName(name)) {
                 attributeData = attribute;

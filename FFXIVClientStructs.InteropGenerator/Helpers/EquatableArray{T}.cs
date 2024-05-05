@@ -88,8 +88,8 @@ internal readonly struct EquatableArray<T>(ImmutableArray<T> array) : IEquatable
 
         if (typeof(T) == typeof(byte)) {
             ReadOnlySpan<T> span = array;
-            ref var r0 = ref MemoryMarshal.GetReference(span);
-            ref var r1 = ref Unsafe.As<T, byte>(ref r0);
+            ref T? r0 = ref MemoryMarshal.GetReference(span);
+            ref byte r1 = ref Unsafe.As<T, byte>(ref r0);
 
             fixed (byte* p = &r1) {
                 ReadOnlySpan<byte> bytes = new(p, span.Length);
@@ -97,7 +97,7 @@ internal readonly struct EquatableArray<T>(ImmutableArray<T> array) : IEquatable
                 hashCode.AddBytes(bytes);
             }
         } else {
-            foreach (var item in array) {
+            foreach (T item in array) {
                 hashCode.Add(item);
             }
         }

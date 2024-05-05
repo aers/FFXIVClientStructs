@@ -11,7 +11,7 @@ internal sealed class IncrementalGeneratorTest<TIncrementalGenerator> : CSharpSo
     private readonly LanguageVersion _languageVersion = LanguageVersion.Default;
 
     protected override CompilationOptions CreateCompilationOptions() {
-        var compilationOptions = base.CreateCompilationOptions();
+        CompilationOptions compilationOptions = base.CreateCompilationOptions();
         return compilationOptions.WithSpecificDiagnosticOptions(
             compilationOptions.SpecificDiagnosticOptions
                 .SetItems(VerifierHelper.NullableWarnings));

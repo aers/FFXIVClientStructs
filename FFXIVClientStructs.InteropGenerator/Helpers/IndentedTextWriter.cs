@@ -148,7 +148,7 @@ internal sealed class IndentedTextWriter : IDisposable {
     public void Write(ReadOnlySpan<char> content, bool isMultiline = false) {
         if (isMultiline) {
             while (content.Length > 0) {
-                var newLineIndex = content.IndexOf(DefaultNewLine.AsSpan());
+                int newLineIndex = content.IndexOf(DefaultNewLine.AsSpan());
 
                 if (newLineIndex < 0) {
                     // There are no new lines left, so the content can be written as a single line
@@ -156,7 +156,7 @@ internal sealed class IndentedTextWriter : IDisposable {
 
                     break;
                 }
-                var line = content[..newLineIndex];
+                ReadOnlySpan<char> line = content[..newLineIndex];
 
                 // Write the current line (if it's empty, we can skip writing the text entirely).
                 // This ensures that raw multiline string literals with blank lines don't have
@@ -326,7 +326,7 @@ internal sealed class IndentedTextWriter : IDisposable {
 
         /// <inheritdoc />
         public void Dispose() {
-            var writer = this.writer;
+            IndentedTextWriter? writer = this.writer;
 
             this.writer = null;
 

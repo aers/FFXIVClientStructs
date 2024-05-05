@@ -17,7 +17,7 @@ public sealed partial class InteropGenerator {
 
         // write opening struct hierarchy in reverse order
         // note we do not need to specify the accessibility here since a partial declared with no accessibility uses the other partial
-        for (var i = structInfo.Hierarchy.Length - 1; i >= 0; i--) {
+        for (int i = structInfo.Hierarchy.Length - 1; i >= 0; i--) {
             writer.WriteLine($"unsafe partial struct {structInfo.Hierarchy[i]}");
             writer.WriteLine("{");
             writer.IncreaseIndent();

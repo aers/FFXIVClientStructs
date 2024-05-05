@@ -70,7 +70,7 @@ internal sealed class ObjectPool<T>(Func<T> factory, int size)
     /// <returns>The returned <typeparamref name="T" /> item to use.</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public T Allocate() {
-        var item = _firstItem;
+        T? item = _firstItem;
 
         if (item is null || item != Interlocked.CompareExchange(ref _firstItem, null, item)) {
             item = AllocateSlow();
@@ -98,8 +98,8 @@ internal sealed class ObjectPool<T>(Func<T> factory, int size)
     /// <returns>The returned <typeparamref name="T" /> item to use.</returns>
     [MethodImpl(MethodImplOptions.NoInlining)]
     private T AllocateSlow() {
-        foreach (ref var element in _items.AsSpan()) {
-            var instance = element.Value;
+        foreach (ref Element element in _items.AsSpan()) {
+            T? instance = element.Value;
 
             if (instance is not null) {
                 if (instance == Interlocked.CompareExchange(ref element.Value, null, instance)) {
@@ -117,7 +117,7 @@ internal sealed class ObjectPool<T>(Func<T> factory, int size)
     /// <param name="obj">The <typeparamref name="T" /> item to return to the pool.</param>
     [MethodImpl(MethodImplOptions.NoInlining)]
     private void FreeSlow(T obj) {
-        foreach (ref var element in _items.AsSpan()) {
+        foreach (ref Element element in _items.AsSpan()) {
             if (element.Value is null) {
                 element.Value = obj;
 
