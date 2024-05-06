@@ -9,6 +9,10 @@ namespace FFXIVClientStructs.InteropGenerator.Extensions;
 ///     Extension methods for <see cref="ISymbol" /> types.
 /// </summary>
 public static class ISymbolExtensions {
+    public static string GetFullyQualifiedName(this ISymbol symbol) {
+        return symbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
+    }
+    
     /// <summary>
     ///     Tries to get an attribute with the specified type.
     /// </summary>

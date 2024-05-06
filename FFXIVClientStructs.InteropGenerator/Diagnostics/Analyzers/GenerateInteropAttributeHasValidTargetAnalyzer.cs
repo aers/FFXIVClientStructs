@@ -9,7 +9,7 @@ using static FFXIVClientStructs.InteropGenerator.Diagnostics.DiagnosticDescripto
 namespace FFXIVClientStructs.InteropGenerator.Diagnostics.Analyzers;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public class ContainingStructsMustBePartialAnalyzer : DiagnosticAnalyzer {
+public class GenerateInteropAttributeHasValidTargetAnalyzer : DiagnosticAnalyzer {
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = [GenerationRequiresPartialStruct, NestedStructMustBeContainedInPartialStruct, NestedStructCannotBeContainedInClass];
 
     public override void Initialize(AnalysisContext context) {

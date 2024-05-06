@@ -15,7 +15,7 @@ public class GenerateInteropAttribute {
                             {
                             }
                             """;
-        await AnalyzerVerifier<ContainingStructsMustBePartialAnalyzer>.VerifyAnalyzerAsync(code);
+        await AnalyzerVerifier<GenerateInteropAttributeHasValidTargetAnalyzer>.VerifyAnalyzerAsync(code);
     }
 
     [Fact]
@@ -31,7 +31,7 @@ public class GenerateInteropAttribute {
                                 }
                             }
                             """;
-        await AnalyzerVerifier<ContainingStructsMustBePartialAnalyzer>.VerifyAnalyzerAsync(code);
+        await AnalyzerVerifier<GenerateInteropAttributeHasValidTargetAnalyzer>.VerifyAnalyzerAsync(code);
     }
 
     [Fact]
@@ -47,6 +47,6 @@ public class GenerateInteropAttribute {
                                 }
                             }
                             """;
-        await AnalyzerVerifier<ContainingStructsMustBePartialAnalyzer>.VerifyAnalyzerAsync(code);
+        await AnalyzerVerifier<GenerateInteropAttributeHasValidTargetAnalyzer>.VerifyAnalyzerAsync(code);
     }
 }
