@@ -108,7 +108,7 @@ enums:
     Linkshell: 58
     SocialPartyMember: 59
     SocialSearch: 61
-    SocialDetail: 62
+    Detail: 62
     LetterList: 63
     LetterView: 64
     LetterEdit: 65
@@ -740,6 +740,14 @@ enums:
     Wishlist: 5
     Favorites: 6
     Unset: 7
+- type: Client::UI::AddonMinionMountBase::ViewType
+  name: ViewType
+  underlying: __int32
+  namespace: Client.UI
+  values:
+    Favorites: 1
+    Normal: 2
+    Search: 3
 - type: Client::UI::RaidFinderEntryFlags
   name: RaidFinderEntryFlags
   underlying: byte
@@ -1041,6 +1049,69 @@ enums:
     Maelstrom: 1
     TwinAdder: 2
     ImmortalFlames: 3
+- type: Client::UI::Info::InfoProxyCommonList::CharacterData::OnlineStatus
+  name: OnlineStatus
+  underlying: unsigned __int64
+  namespace: Client.UI.Info
+  values:
+    Offline: 0
+    GameQA: 2
+    GameMaster: 4
+    GameMasterBlue: 8
+    EventParticipant: 16
+    Disconnected: 32
+    WaitingForFriendListApproval: 64
+    WaitingForLinkshellApproval: 128
+    WaitingForFreeCompanyApproval: 256
+    NotFound: 512
+    OfflineExd: 1024
+    BattleMentor: 2048
+    Busy: 4096
+    PvP: 8192
+    PlayingTripleTriad: 16384
+    ViewingCutscene: 32768
+    UsingAChocoboPorter: 65536
+    AwayFromKeyboard: 131072
+    CameraMode: 262144
+    LookingForRepairs: 524288
+    LookingToRepair: 1048576
+    LookingToMeldMateria: 2097152
+    RolePlaying: 4194304
+    LookingForParty: 8388608
+    SwordForHire: 16777216
+    WaitingForDutyFinder: 33554432
+    RecruitingPartyMembers: 67108864
+    Mentor: 134217728
+    PvEMentor: 268435456
+    TradeMentor: 536870912
+    PvPMentor: 1073741824
+    Returner: 2147483648
+    NewAdventurer: 4294967296
+    AllianceLeader: 8589934592
+    AlliancePartyLeader: 17179869184
+    AlliancePartyMember: 34359738368
+    PartyLeader: 68719476736
+    PartyMember: 137438953472
+    PartyLeaderCrossWorld: 274877906944
+    PartyMemberCrossWorld: 549755813888
+    AnotherWorld: 1099511627776
+    SharingDuty: 2199023255552
+    SimilarDuty: 4398046511104
+    InDuty: 8796093022208
+    TrialAdventurer: 17592186044416
+    FreeCompany: 35184372088832
+    GrandCompany: 70368744177664
+    Online: 140737488355328
+- type: Client::UI::Info::InfoProxyCommonList::CharacterData::LanguageMask
+  name: LanguageMask
+  underlying: byte
+  namespace: Client.UI.Info
+  values:
+    None: 0
+    JP: 1
+    EN: 2
+    DE: 4
+    FR: 8
 - type: Client::UI::Agent::AozWeeklyFlags
   name: AozWeeklyFlags
   underlying: byte
@@ -1149,6 +1220,14 @@ enums:
     ChangeExtend: 2
     Change: 3
     Extend: 4
+- type: Client::UI::Agent::AgentMJIMinionNoteBook::ViewType
+  name: ViewType
+  underlying: byte
+  namespace: Client.UI.Agent
+  values:
+    Favorites: 1
+    Normal: 2
+    Search: 3
 - type: Client::UI::Agent::MycDynamicEventState
   name: MycDynamicEventState
   underlying: byte
@@ -1710,7 +1789,7 @@ enums:
     CustomTalk: 11
     CompanyLeveOfficer: 12
     Array: 13
-    CraftLeve: 14
+    CraftLeveClient: 14
     GimmickAccessor: 15
     GimmickBill: 16
     GimmickRect: 17
@@ -1724,7 +1803,7 @@ enums:
     ContentNpc: 25
     Story: 26
     SpecialShop: 27
-    ContentTalk: 28
+    DeepDungeon: 28
     InstanceContentGuide: 29
     HousingAethernet: 30
     FcTalk: 31
@@ -1733,8 +1812,27 @@ enums:
     DailyQuestSupply: 34
     TripleTriad: 35
     GoldSaucerArcadeMachine: 36
+    LotteryDaily: 37
+    LotteryWeekly: 38
+    RaceChocoboRegistrar: 39
+    GoldSaucerTalk: 41
+    FreeCompanyCreditShop: 42
+    AetherCurrent: 43
+    ContentEntry: 44
+    Verminion: 45
+    SkyIslandEntrance: 46
+    DpsChallengeOfficer: 47
+    BeginnerTrainingOfficer: 48
+    RetainerBuyback: 49
+    TopicSelect: 50
     LotteryExchangeShop: 52
+    DisposalShop: 53
+    PreHandler: 54
     TripleTriadCompetition: 55
+    Salvage: 57
+    InclusionShop: 58
+    CollectablesShop: 59
+    EventPathMove: 61
     BattleLeveDirector: 32769
     GatheringLeveDirector: 32770
     InstanceContentDirector: 32771
@@ -2718,59 +2816,6 @@ enums:
     VisorEnabled: 32
     Unknown40: 64
     Unknown80: 128
-- type: Client::UI::Info::InfoProxyCommonList::CharacterData::OnlineStatus
-  name: OnlineStatus
-  underlying: unsigned __int64
-  namespace: Client.UI.Info
-  values:
-    Offline: 0
-    GameQA: 2
-    GameMaster: 4
-    GameMasterBlue: 8
-    EventParticipant: 16
-    Disconnected: 32
-    WaitingForFriendListApproval: 64
-    WaitingForLinkshellApproval: 128
-    WaitingForFreeCompanyApproval: 256
-    NotFound: 512
-    OfflineExd: 1024
-    BattleMentor: 2048
-    Busy: 4096
-    PvP: 8192
-    PlayingTripleTriad: 16384
-    ViewingCutscene: 32768
-    UsingAChocoboPorter: 65536
-    AwayFromKeyboard: 131072
-    CameraMode: 262144
-    LookingForRepairs: 524288
-    LookingToRepair: 1048576
-    LookingToMeldMateria: 2097152
-    RolePlaying: 4194304
-    LookingForParty: 8388608
-    SwordForHire: 16777216
-    WaitingForDutyFinder: 33554432
-    RecruitingPartyMembers: 67108864
-    Mentor: 134217728
-    PvEMentor: 268435456
-    TradeMentor: 536870912
-    PvPMentor: 1073741824
-    Returner: 2147483648
-    NewAdventurer: 4294967296
-    AllianceLeader: 8589934592
-    AlliancePartyLeader: 17179869184
-    AlliancePartyMember: 34359738368
-    PartyLeader: 68719476736
-    PartyMember: 137438953472
-    PartyLeaderCrossWorld: 274877906944
-    PartyMemberCrossWorld: 549755813888
-    AnotherWorld: 1099511627776
-    SharingDuty: 2199023255552
-    SimilarDuty: 4398046511104
-    InDuty: 8796093022208
-    TrialAdventurer: 17592186044416
-    FreeCompany: 35184372088832
-    GrandCompany: 70368744177664
-    Online: 140737488355328
 - type: Client::UI::Info::InfoProxyCommonList::CharacterData::Language
   name: Language
   underlying: byte
@@ -2781,16 +2826,6 @@ enums:
     DE: 2
     FR: 3
     None: 255
-- type: Client::UI::Info::InfoProxyCommonList::CharacterData::LanguageMask
-  name: LanguageMask
-  underlying: byte
-  namespace: Client.UI.Info
-  values:
-    None: 0
-    JP: 1
-    EN: 2
-    DE: 4
-    FR: 8
 - type: Client::UI::Agent::AgentFreeCompanyProfile::FCProfile::FocusType
   name: FocusType
   underlying: unsigned __int16
@@ -4144,6 +4179,19 @@ structs:
       name: sheet
     - type: unsigned __int32
       name: rowId
+- type: Component::Exd::Sheets::BannerCondition
+  name: BannerCondition
+  namespace: Component.Exd.Sheets
+  union: False
+  fields: []
+  virtual_functions: []
+  member_functions:
+  - signature: 40 53 48 83 EC 20 0F B6 41 29
+    return_type: unsigned __int32
+    name: GetUnlockState
+    parameters:
+    - type: Component::Exd::Sheets::BannerCondition*
+      name: this
 - type: Component::Excel::ExcelModule
   name: ExcelModule
   namespace: Component.Excel
@@ -6213,7 +6261,7 @@ structs:
     name: AtkUnitManager
     offset: 0
   - type: Component::GUI::AtkEventInterface
-    name: AtkEventInterface
+    name: WindowContextMenuHandler
     offset: 40080
   - type: Client::UI::UIModule::UiFlags
     name: UiFlags
@@ -6265,6 +6313,38 @@ structs:
       name: this
     - type: unsigned __int16
       name: id
+- type: Client::UI::TabController
+  name: TabController
+  namespace: Client.UI
+  union: False
+  size: 176
+  fields:
+  - type: Component::GUI::AtkStage*
+    name: AtkStage
+    offset: 8
+  - type: __int32
+    name: TabIndex
+    offset: 128
+  - type: __int32
+    name: TabCount
+    offset: 132
+  - type: __fastcall
+    name: CallbackFunction
+    offset: 144
+    return_type: void
+    parameters:
+    - type: __int32
+      name: a1
+    - type: Component::GUI::AtkUnitBase*
+      name: a2
+  - type: Component::GUI::AtkUnitBase*
+    name: Addon
+    offset: 152
+  - type: byte
+    name: Enabled
+    offset: 168
+  virtual_functions: []
+  member_functions: []
 - type: Client::UI::UIInputData
   name: UIInputData
   namespace: Client.UI
@@ -8023,6 +8103,23 @@ structs:
     offset: 4
   virtual_functions: []
   member_functions: []
+- type: Client::UI::Agent::AgentTelepotTownData
+  name: AgentTelepotTownData
+  namespace: Client.UI.Agent
+  union: False
+  size: 53608
+  fields:
+  - type: byte
+    name: CurrentAetheryte
+    offset: 4
+  - type: byte
+    name: SelectedAetheryte
+    offset: 1802
+  - type: byte
+    name: Flags
+    offset: 1804
+  virtual_functions: []
+  member_functions: []
 - type: Client::System::Timer::ClientTime
   name: ClientTime
   namespace: Client.System.Timer
@@ -8263,6 +8360,22 @@ structs:
       name: this
     - type: unsigned __int64
       name: idx
+- type: Client::System::Scheduler::ActionTimelineManager
+  name: ActionTimelineManager
+  namespace: Client.System.Scheduler
+  union: False
+  size: 184
+  fields: []
+  virtual_functions: []
+  member_functions:
+  - signature: 48 83 EC 38 48 8B 02 C7 44 24
+    return_type: byte
+    name: PreloadActionTmbByKey
+    parameters:
+    - type: Client::System::Scheduler::ActionTimelineManager*
+      name: this
+    - type: byte**
+      name: key
 - type: Client::System::Scheduler::Resource::SchedulerResourceManagement
   name: SchedulerResourceManagement
   namespace: Client.System.Scheduler.Resource
@@ -9046,7 +9159,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? EB ?? 49 8B 85
     return_type: byte
-    name: IsInCrossWorlDuty
+    name: IsInCrossWorldDuty
     parameters:
     - type: Client::Network::NetworkModuleProxy*
       name: this
@@ -14536,6 +14649,32 @@ structs:
     offset: 24
   virtual_functions: []
   member_functions: []
+- type: Client::UI::AddonCharacterClass::ClassEntry
+  name: ClassEntry
+  namespace: Client.UI
+  union: False
+  size: 40
+  fields:
+  - type: unsigned __int32
+    name: Level
+    offset: 0
+  - type: unsigned __int32
+    name: CurrentXP
+    offset: 4
+  - type: unsigned __int32
+    name: LevelMaxXP
+    offset: 8
+  - type: __int64
+    name: DesynthesisLevel
+    offset: 16
+  - type: __int64
+    name: TooltipText
+    offset: 24
+  - type: byte
+    name: IsMaxLevel
+    offset: 32
+  virtual_functions: []
+  member_functions: []
 - type: Client::UI::AddonJobHud::AddonJobHudGaugeData
   name: AddonJobHudGaugeData
   namespace: Client.UI
@@ -18258,6 +18397,30 @@ structs:
   fields: []
   virtual_functions: []
   member_functions: []
+- type: Client::UI::Info::InfoProxySearchComment::UpdateDataPacket
+  name: UpdateDataPacket
+  namespace: Client.UI.Info
+  union: False
+  size: 216
+  fields:
+  - type: Client::UI::Info::InfoProxyCommonList::CharacterData::OnlineStatus
+    name: OnlineStatusMask
+    offset: 0
+  - type: unsigned __int64
+    name: LookingForPartyClassJobIdMask
+    offset: 8
+  - type: byte
+    name: ClassJobId
+    offset: 16
+  - type: Client::UI::Info::InfoProxyCommonList::CharacterData::LanguageMask
+    name: LanguageMask
+    offset: 17
+  - type: byte
+    name: SearchComment
+    offset: 18
+    size: 193
+  virtual_functions: []
+  member_functions: []
 - type: Client::UI::Agent::AgentBannerEditorState::DatasetEntry
   name: DatasetEntry
   namespace: Client.UI.Agent
@@ -19126,6 +19289,58 @@ structs:
     offset: 8
   virtual_functions: []
   member_functions: []
+- type: Client::UI::Agent::AgentMJIGatheringNoteBookData::GatherItem
+  name: GatherItem
+  namespace: Client.UI.Agent
+  union: False
+  size: 128
+  fields:
+  - type: unsigned __int16
+    name: Radius
+    offset: 0
+  - type: __int16
+    name: X
+    offset: 2
+  - type: __int16
+    name: Y
+    offset: 4
+  - type: byte
+    name: Unknown2
+    offset: 6
+  - type: unsigned __int32
+    name: ItemId
+    offset: 8
+  - type: byte
+    name: Sort
+    offset: 12
+  - type: unsigned __int32
+    name: Icon
+    offset: 16
+  - type: byte
+    name: RowId
+    offset: 20
+  - type: Client::System::String::Utf8String
+    name: Name
+    offset: 24
+  virtual_functions: []
+  member_functions: []
+- type: Client::UI::Agent::AgentMJIMinionNoteBook::SelectedMinionInfo
+  name: SelectedMinionInfo
+  namespace: Client.UI.Agent
+  union: False
+  size: 4
+  fields:
+  - type: unsigned __int16
+    name: MinionId
+    offset: 0
+  - type: byte
+    name: TabIndex
+    offset: 2
+  - type: byte
+    name: SlotIndex
+    offset: 3
+  virtual_functions: []
+  member_functions: []
 - type: Client::UI::Agent::AgentMJINekomimiRequest::ItemData
   name: ItemData
   namespace: Client.UI.Agent
@@ -19187,6 +19402,32 @@ structs:
   - type: Client::UI::Agent::AgentReadyCheck::ReadyCheckStatus
     name: Status
     offset: 8
+  virtual_functions: []
+  member_functions: []
+- type: Client::UI::Agent::AgentRecipeMaterialList::RecipeData
+  name: RecipeData
+  namespace: Client.UI.Agent
+  union: False
+  size: 688
+  fields:
+  - type: unsigned __int16
+    name: RecipeId
+    offset: 184
+  - type: unsigned __int32
+    name: ResultItemId
+    offset: 188
+  - type: unsigned __int32
+    name: ResultAmount
+    offset: 192
+  - type: unsigned __int32
+    name: ResultItemIconId
+    offset: 196
+  - type: Client::System::String::Utf8String
+    name: ItemName
+    offset: 200
+  - type: unsigned __int16
+    name: Amount
+    offset: 306
   virtual_functions: []
   member_functions: []
 - type: Client::UI::Agent::AgentRetainerItemTransferData::DuplicateItemEntry
@@ -19813,6 +20054,26 @@ structs:
   - type: unsigned __int32
     name: VentureComplete
     offset: 60
+  virtual_functions: []
+  member_functions: []
+- type: Client::Game::WeatherManager::ServerWeather
+  name: ServerWeather
+  namespace: Client.Game
+  union: False
+  size: 24
+  fields:
+  - type: byte
+    name: NextWeatherId
+    offset: 8
+  - type: byte
+    name: CurrentWeatherId
+    offset: 9
+  - type: float
+    name: DaytimeFadeTimeLeft
+    offset: 12
+  - type: float
+    name: DaytimeFadeLength
+    offset: 16
   virtual_functions: []
   member_functions: []
 - type: Client::Game::UI::Buddy::BuddyMember
@@ -22181,6 +22442,22 @@ structs:
     name: Last
     offset: 8
   - type: Client::UI::Agent::AgentMJIFarmManagement::Seed*
+    name: End
+    offset: 16
+  virtual_functions: []
+  member_functions: []
+- type: StdVector<Client::UI::Agent::AgentMJIGatheringNoteBookData::GatherItem*>
+  name: StdVector`1
+  namespace: ''
+  union: False
+  fields:
+  - type: Client::UI::Agent::AgentMJIGatheringNoteBookData::GatherItem**
+    name: First
+    offset: 0
+  - type: Client::UI::Agent::AgentMJIGatheringNoteBookData::GatherItem**
+    name: Last
+    offset: 8
+  - type: Client::UI::Agent::AgentMJIGatheringNoteBookData::GatherItem**
     name: End
     offset: 16
   virtual_functions: []
@@ -25677,10 +25954,10 @@ structs:
     offset: 304
   - type: unsigned __int32
     name: SelectStart
-    offset: 320
+    offset: 312
   - type: unsigned __int32
     name: SelectEnd
-    offset: 324
+    offset: 316
   - type: byte
     name: LineSpacing
     offset: 338
@@ -26698,6 +26975,16 @@ structs:
       name: offsetY
     - type: float
       name: scale
+  - signature: E8 ?? ?? ?? ?? 0F BF 8C 24 ?? ?? ?? ?? 01 8F
+    return_type: byte
+    name: MoveDelta
+    parameters:
+    - type: Component::GUI::AtkUnitBase*
+      name: this
+    - type: __int16*
+      name: xDelta
+    - type: __int16*
+      name: yDelta
 - type: Client::UI::AddonActionBarBase
   name: AddonActionBarBase
   namespace: Client.UI
@@ -26936,6 +27223,49 @@ structs:
     offset: 5408
   virtual_functions: []
   member_functions: []
+- type: Client::UI::AddonAdventureNoteBook
+  name: AddonAdventureNoteBook
+  namespace: Client.UI
+  union: False
+  size: 1584
+  fields:
+  - type: Component::GUI::AtkUnitBase
+    name: AtkUnitBase
+    offset: 0
+  - type: Client::UI::TabController
+    name: TabController
+    offset: 1392
+  virtual_functions: []
+  member_functions: []
+- type: Client::UI::AddonAetherCurrent
+  name: AddonAetherCurrent
+  namespace: Client.UI
+  union: False
+  size: 608
+  fields:
+  - type: Component::GUI::AtkUnitBase
+    name: AtkUnitBase
+    offset: 0
+  - type: Component::GUI::AtkComponentRadioButton*
+    name: TabPointers
+    offset: 552
+    size: 4
+  - type: __int32
+    name: TabIndex
+    offset: 596
+  - type: __int32
+    name: TabCount
+    offset: 600
+  virtual_functions: []
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 84 C0 74 65 39 9D
+    return_type: void
+    name: SetTab
+    parameters:
+    - type: Client::UI::AddonAetherCurrent*
+      name: this
+    - type: __int32
+      name: tab
 - type: Client::UI::AddonAOZNotebook
   name: AddonAOZNotebook
   namespace: Client.UI
@@ -27065,8 +27395,54 @@ structs:
   - type: Client::UI::AddonAOZNotebook::ActiveActions
     name: ActiveActions24
     offset: 2816
+  - type: __int32
+    name: TabIndex
+    offset: 3248
+  - type: __int32
+    name: TabCount
+    offset: 3252
   virtual_functions: []
-  member_functions: []
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 33 D2 48 8B CD E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 41 8D 40 F7
+    return_type: void
+    name: SetTab
+    parameters:
+    - type: Client::UI::AddonAOZNotebook*
+      name: this
+    - type: __int32
+      name: tab
+    - type: byte
+      name: a3
+- type: Client::UI::AddonArmouryBoard
+  name: AddonArmouryBoard
+  namespace: Client.UI
+  union: False
+  size: 1728
+  fields:
+  - type: Component::GUI::AtkUnitBase
+    name: AtkUnitBase
+    offset: 0
+  - type: __int32
+    name: TabIndex
+    offset: 1680
+  virtual_functions: []
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? EB E0 84 C9
+    return_type: void
+    name: NextTab
+    parameters:
+    - type: Client::UI::AddonArmouryBoard*
+      name: this
+    - type: byte
+      name: a2
+  - signature: 40 53 48 83 EC 20 80 B9 ?? ?? ?? ?? ?? 48 8B D9 75 11
+    return_type: void
+    name: PreviousTab
+    parameters:
+    - type: Client::UI::AddonArmouryBoard*
+      name: this
+    - type: byte
+      name: a2
 - type: Client::UI::AddonBank
   name: AddonBank
   namespace: Client.UI
@@ -27180,6 +27556,32 @@ structs:
     offset: 1251
   virtual_functions: []
   member_functions: []
+- type: Client::UI::AddonBuddy
+  name: AddonBuddy
+  namespace: Client.UI
+  union: False
+  size: 7168
+  fields:
+  - type: Component::GUI::AtkUnitBase
+    name: AtkUnitBase
+    offset: 0
+  - type: __int32
+    name: TabIndex
+    offset: 544
+  - type: Component::GUI::AtkComponentRadioButton*
+    name: RadioButtons
+    offset: 7128
+    size: 3
+  virtual_functions: []
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 3B AF ?? ?? ?? ?? 74 27
+    return_type: void
+    name: SetTab
+    parameters:
+    - type: Client::UI::AddonBuddy*
+      name: this
+    - type: __int32
+      name: tab
 - type: Client::UI::AddonCastBar
   name: AddonCastBar
   namespace: Client.UI
@@ -27200,6 +27602,86 @@ structs:
     offset: 704
   virtual_functions: []
   member_functions: []
+- type: Client::UI::AddonCharacter
+  name: AddonCharacter
+  namespace: Client.UI
+  union: False
+  size: 7168
+  fields:
+  - type: Component::GUI::AtkUnitBase
+    name: AtkUnitBase
+    offset: 0
+  - type: Component::GUI::AtkComponentRadioButton*
+    name: RadioButtons
+    offset: 552
+    size: 4
+  - type: __int32
+    name: TabIndex
+    offset: 1160
+  - type: __int32
+    name: TabCount
+    offset: 1164
+  - type: byte
+    name: EmbeddedAddonLoaded
+    offset: 1261
+  - type: Component::GUI::AtkCollisionNode*
+    name: CharacterPreviewCollisionNode
+    offset: 2984
+  virtual_functions: []
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 83 C6 EE
+    return_type: void
+    name: SetTab
+    parameters:
+    - type: Client::UI::AddonCharacter*
+      name: this
+    - type: __int32
+      name: tab
+- type: Client::UI::AddonCharacterClass
+  name: AddonCharacterClass
+  namespace: Client.UI
+  union: False
+  size: 2096
+  fields:
+  - type: Component::GUI::AtkUnitBase
+    name: AtkUnitBase
+    offset: 0
+  - type: Component::GUI::AtkComponentButton*
+    name: ButtonNodes
+    offset: 544
+    size: 31
+  - type: Component::GUI::AtkComponentButton*
+    name: TabsNode
+    offset: 792
+  - type: Component::GUI::AtkTextNode*
+    name: CurrentXPTextNode
+    offset: 800
+  - type: Component::GUI::AtkTextNode*
+    name: MaxXPTextNode
+    offset: 808
+  - type: Component::GUI::AtkTextNode*
+    name: CurrentDesynthesisLevelTextNode
+    offset: 816
+  - type: Component::GUI::AtkTextNode*
+    name: MaxDesynthesisLevelTextNode
+    offset: 824
+  - type: Client::UI::AddonCharacterClass::ClassEntry
+    name: ClassEntries
+    offset: 832
+    size: 31
+  - type: __int32
+    name: TabIndex
+    offset: 2088
+  virtual_functions: []
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 48 8B 8F ?? ?? ?? ?? 48 8B 01 FF 50 78 48 89 87
+    return_type: void
+    name: SetTab
+    parameters:
+    - type: Client::UI::AddonCharacterClass*
+      name: this
+    - type: __int32
+      name: tab
 - type: Client::UI::AddonCharacterInspect
   name: AddonCharacterInspect
   namespace: Client.UI
@@ -27212,6 +27694,23 @@ structs:
   - type: Component::GUI::AtkComponentBase*
     name: PreviewComponent
     offset: 1072
+  virtual_functions: []
+  member_functions: []
+- type: Client::UI::AddonCharacterRepute
+  name: AddonCharacterRepute
+  namespace: Client.UI
+  union: False
+  size: 672
+  fields:
+  - type: Component::GUI::AtkUnitBase
+    name: AtkUnitBase
+    offset: 0
+  - type: __int32
+    name: SelectedExpansion
+    offset: 660
+  - type: __int32
+    name: ExpansionsCount
+    offset: 664
   virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonChatLogPanel
@@ -27603,6 +28102,36 @@ structs:
     offset: 640
   virtual_functions: []
   member_functions: []
+- type: Client::UI::AddonFateProgress
+  name: AddonFateProgress
+  namespace: Client.UI
+  union: False
+  size: 696
+  fields:
+  - type: Component::GUI::AtkUnitBase
+    name: AtkUnitBase
+    offset: 0
+  - type: byte
+    name: TabCount
+    offset: 560
+  - type: byte
+    name: TabIndex
+    offset: 561
+  - type: byte
+    name: Loaded
+    offset: 562
+  virtual_functions: []
+  member_functions:
+  - signature: 83 FA 01 0F 87 ?? ?? ?? ?? 48 89 5C 24 ?? 48 89 6C 24
+    return_type: void
+    name: SetTab
+    parameters:
+    - type: Client::UI::AddonFateProgress*
+      name: this
+    - type: __int32
+      name: tab
+    - type: Component::GUI::AtkEvent*
+      name: atkEvent
 - type: Client::UI::AddonFateReward
   name: AddonFateReward
   namespace: Client.UI
@@ -27684,6 +28213,20 @@ structs:
   - type: byte
     name: SelectedPage
     offset: 1408
+  virtual_functions: []
+  member_functions: []
+- type: Client::UI::AddonFishGuide2
+  name: AddonFishGuide2
+  namespace: Client.UI
+  union: False
+  size: 2712
+  fields:
+  - type: Component::GUI::AtkUnitBase
+    name: AtkUnitBase
+    offset: 0
+  - type: Client::UI::TabController
+    name: TabController
+    offset: 656
   virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonFriendList
@@ -27953,6 +28496,20 @@ structs:
     offset: 544
   virtual_functions: []
   member_functions: []
+- type: Client::UI::AddonGearSetList
+  name: AddonGearSetList
+  namespace: Client.UI
+  union: False
+  size: 14992
+  fields:
+  - type: Component::GUI::AtkUnitBase
+    name: AtkUnitBase
+    offset: 0
+  - type: byte
+    name: ResetPosition
+    offset: 14989
+  virtual_functions: []
+  member_functions: []
 - type: Client::UI::AddonGoldSaucerInfo
   name: AddonGoldSaucerInfo
   namespace: Client.UI
@@ -28083,6 +28640,9 @@ structs:
   - type: Component::GUI::AtkUnitBase
     name: AtkUnitBase
     offset: 0
+  - type: Client::UI::TabController
+    name: TabController
+    offset: 664
   - type: Component::GUI::AtkResNode*
     name: PageSelection
     offset: 840
@@ -28156,6 +28716,20 @@ structs:
   - type: Component::GUI::AtkComponentBase*
     name: RaceAbility2
     offset: 576
+  virtual_functions: []
+  member_functions: []
+- type: Client::UI::AddonGSInfoEditDeck
+  name: AddonGSInfoEditDeck
+  namespace: Client.UI
+  union: False
+  size: 3456
+  fields:
+  - type: Component::GUI::AtkUnitBase
+    name: AtkUnitBase
+    offset: 0
+  - type: Client::UI::TabController
+    name: TabController
+    offset: 544
   virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonGSInfoGeneral
@@ -28427,6 +29001,189 @@ structs:
     offset: 640
   virtual_functions: []
   member_functions: []
+- type: Client::UI::AddonInventory
+  name: AddonInventory
+  namespace: Client.UI
+  union: False
+  size: 800
+  fields:
+  - type: Component::GUI::AtkUnitBase
+    name: AtkUnitBase
+    offset: 0
+  - type: __int32
+    name: TabIndex
+    offset: 796
+  virtual_functions: []
+  member_functions:
+  - signature: E9 ?? ?? ?? ?? 83 FD 11
+    return_type: void
+    name: SetTab
+    parameters:
+    - type: Client::UI::AddonInventory*
+      name: this
+    - type: __int32
+      name: tab
+- type: Client::UI::AddonInventoryBuddy
+  name: AddonInventoryBuddy
+  namespace: Client.UI
+  union: False
+  size: 1176
+  fields:
+  - type: Component::GUI::AtkUnitBase
+    name: AtkUnitBase
+    offset: 0
+  - type: Component::GUI::AtkComponentRadioButton*
+    name: Tabs
+    offset: 544
+    size: 2
+  - type: Component::GUI::AtkComponentDragDrop*
+    name: Slots
+    offset: 560
+    size: 70
+  - type: byte
+    name: TabIndex
+    offset: 1160
+  virtual_functions: []
+  member_functions:
+  - signature: E9 ?? ?? ?? ?? BA ?? ?? ?? ?? 48 8B 5C 24 ?? 48 83 C4 20
+    return_type: void
+    name: SetTab
+    parameters:
+    - type: Client::UI::AddonInventoryBuddy*
+      name: this
+    - type: byte
+      name: tab
+- type: Client::UI::AddonInventoryEvent
+  name: AddonInventoryEvent
+  namespace: Client.UI
+  union: False
+  size: 784
+  fields:
+  - type: Component::GUI::AtkUnitBase
+    name: AtkUnitBase
+    offset: 0
+  - type: Component::GUI::AtkComponentRadioButton*
+    name: Buttons
+    offset: 600
+    size: 5
+  - type: __int32
+    name: TabIndex
+    offset: 776
+  virtual_functions: []
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? EB 09 83 FF 01
+    return_type: void
+    name: SetTab
+    parameters:
+    - type: Client::UI::AddonInventoryEvent*
+      name: this
+    - type: __int32
+      name: tab
+- type: Client::UI::AddonInventoryExpansion
+  name: AddonInventoryExpansion
+  namespace: Client.UI
+  union: False
+  size: 816
+  fields:
+  - type: Component::GUI::AtkUnitBase
+    name: AtkUnitBase
+    offset: 0
+  - type: __int32
+    name: TabIndex
+    offset: 808
+  virtual_functions: []
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? BB ?? ?? ?? ?? 83 EB 01
+    return_type: void
+    name: SetTab
+    parameters:
+    - type: Client::UI::AddonInventoryExpansion*
+      name: this
+    - type: __int32
+      name: tab
+    - type: byte
+      name: force
+- type: Client::UI::AddonInventoryGrid
+  name: AddonInventoryGrid
+  namespace: Client.UI
+  union: False
+  size: 832
+  fields:
+  - type: Component::GUI::AtkUnitBase
+    name: AtkUnitBase
+    offset: 0
+  - type: Component::GUI::AtkComponentDragDrop*
+    name: Slots
+    offset: 544
+    size: 35
+  virtual_functions: []
+  member_functions: []
+- type: Client::UI::AddonInventoryLarge
+  name: AddonInventoryLarge
+  namespace: Client.UI
+  union: False
+  size: 816
+  fields:
+  - type: Component::GUI::AtkUnitBase
+    name: AtkUnitBase
+    offset: 0
+  - type: __int32
+    name: TabIndex
+    offset: 800
+  virtual_functions: []
+  member_functions:
+  - signature: E9 ?? ?? ?? ?? 41 83 FF 47
+    return_type: void
+    name: SetTab
+    parameters:
+    - type: Client::UI::AddonInventoryLarge*
+      name: this
+    - type: __int32
+      name: tab
+- type: Client::UI::AddonInventoryRetainer
+  name: AddonInventoryRetainer
+  namespace: Client.UI
+  union: False
+  size: 752
+  fields:
+  - type: Component::GUI::AtkUnitBase
+    name: AtkUnitBase
+    offset: 0
+  - type: __int32
+    name: TabIndex
+    offset: 744
+  virtual_functions: []
+  member_functions:
+  - signature: 48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 70 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 44 24 ?? 48 8B F1 48 8B 89
+    return_type: void
+    name: SetTab
+    parameters:
+    - type: Client::UI::AddonInventoryRetainer*
+      name: this
+    - type: __int32
+      name: tab
+- type: Client::UI::AddonInventoryRetainerLarge
+  name: AddonInventoryRetainerLarge
+  namespace: Client.UI
+  union: False
+  size: 776
+  fields:
+  - type: Component::GUI::AtkUnitBase
+    name: AtkUnitBase
+    offset: 0
+  - type: __int32
+    name: TabIndex
+    offset: 752
+  virtual_functions: []
+  member_functions:
+  - signature: E9 ?? ?? ?? ?? 33 D2 E8 ?? ?? ?? ?? 48 83 C4 48
+    return_type: void
+    name: SetTab
+    parameters:
+    - type: Client::UI::AddonInventoryRetainerLarge*
+      name: this
+    - type: __int32
+      name: tab
 - type: Client::UI::AddonItemInspectionList
   name: AddonItemInspectionList
   namespace: Client.UI
@@ -29406,6 +30163,20 @@ structs:
     offset: 1028
   virtual_functions: []
   member_functions: []
+- type: Client::UI::AddonLovmPaletteEdit
+  name: AddonLovmPaletteEdit
+  namespace: Client.UI
+  union: False
+  size: 2576
+  fields:
+  - type: Component::GUI::AtkUnitBase
+    name: AtkUnitBase
+    offset: 0
+  - type: Client::UI::TabController
+    name: TabController
+    offset: 2112
+  virtual_functions: []
+  member_functions: []
 - type: Client::UI::AddonMacro
   name: AddonMacro
   namespace: Client.UI
@@ -29479,6 +30250,66 @@ structs:
     offset: 0
   virtual_functions: []
   member_functions: []
+- type: Client::UI::AddonMinionMountBase
+  name: AddonMinionMountBase
+  namespace: Client.UI
+  union: False
+  size: 3056
+  fields:
+  - type: Component::GUI::AtkUnitBase
+    name: AtkUnitBase
+    offset: 0
+  - type: Client::UI::TabController
+    name: TabController
+    offset: 672
+  - type: Client::UI::AddonMinionMountBase::ViewType
+    name: CurrentView
+    offset: 2240
+  virtual_functions: []
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 8D 42 D3 83 F8 08
+    return_type: void
+    name: SwitchToFavorites
+    parameters:
+    - type: Client::UI::AddonMinionMountBase*
+      name: this
+- type: Client::UI::AddonMiragePrismPrismBox
+  name: AddonMiragePrismPrismBox
+  namespace: Client.UI
+  union: False
+  size: 3112
+  fields:
+  - type: Component::GUI::AtkUnitBase
+    name: AtkUnitBase
+    offset: 0
+  - type: Component::GUI::AtkComponentButton*
+    name: PrevButton
+    offset: 2560
+  - type: Component::GUI::AtkComponentButton*
+    name: NextButton
+    offset: 2568
+  - type: Component::GUI::AtkComponentDropDownList*
+    name: JobDropdown
+    offset: 2640
+  - type: Component::GUI::AtkComponentDropDownList*
+    name: OrderDropdown
+    offset: 2680
+  virtual_functions: []
+  member_functions: []
+- type: Client::UI::AddonMJIMinionNoteBook
+  name: AddonMJIMinionNoteBook
+  namespace: Client.UI
+  union: False
+  size: 1584
+  fields:
+  - type: Component::GUI::AtkUnitBase
+    name: AtkUnitBase
+    offset: 0
+  - type: Client::UI::TabController
+    name: TabController
+    offset: 672
+  virtual_functions: []
+  member_functions: []
 - type: Client::UI::AddonMobHunt
   name: AddonMobHunt
   namespace: Client.UI
@@ -29500,6 +30331,29 @@ structs:
   - type: __int32
     name: CurrentPage
     offset: 568
+  virtual_functions: []
+  member_functions: []
+- type: Client::UI::AddonMYCWarResultNotebook
+  name: AddonMYCWarResultNotebook
+  namespace: Client.UI
+  union: False
+  size: 728
+  fields:
+  - type: Component::GUI::AtkUnitBase
+    name: AtkUnitBase
+    offset: 0
+  - type: Component::GUI::AtkCollisionNode*
+    name: DescriptionCollisionNode
+    offset: 576
+  - type: __int32
+    name: MaxNoteIndex
+    offset: 596
+  - type: __int32
+    name: CurrentNoteIndex
+    offset: 600
+  - type: __int32
+    name: CurrentPageIndex
+    offset: 604
   virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonNamePlate
@@ -29544,6 +30398,20 @@ structs:
   - type: __int32
     name: SelectedItemIndex
     offset: 1288
+  virtual_functions: []
+  member_functions: []
+- type: Client::UI::AddonOrnamentNoteBook
+  name: AddonOrnamentNoteBook
+  namespace: Client.UI
+  union: False
+  size: 1344
+  fields:
+  - type: Component::GUI::AtkUnitBase
+    name: AtkUnitBase
+    offset: 0
+  - type: Client::UI::TabController
+    name: TabController
+    offset: 656
   virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonRaceChocoboResult
@@ -33254,6 +34122,18 @@ structs:
       name: this
     - type: Client::UI::Info::InfoProxyId
       name: id
+  - signature: E8 ?? ?? ?? ?? 49 83 C9 FF 48 8D 8C 24
+    return_type: byte*
+    name: GetLocalCharacterName
+    parameters:
+    - type: Client::UI::Info::InfoModule*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 48 39 03
+    return_type: unsigned __int64
+    name: GetLocalContentId
+    parameters:
+    - type: Client::UI::Info::InfoModule*
+      name: this
   - signature: 48 8B 81 ?? ?? ?? ?? 0F B6 CA 48 D3 E8
     return_type: byte
     name: IsOnlineStatusSet
@@ -33262,6 +34142,14 @@ structs:
       name: this
     - type: unsigned __int32
       name: id
+  - signature: 48 89 91 ?? ?? ?? ?? 48 8B 89 ?? ?? ?? ?? 48 85 C9 0F 85
+    return_type: void
+    name: SetOnlineStatusFlags
+    parameters:
+    - type: Client::UI::Info::InfoModule*
+      name: this
+    - type: unsigned __int64
+      name: flags
   - signature: E8 ?? ?? ?? ?? 44 8B 8C 24 ?? ?? ?? ?? 84 C0
     return_type: byte
     name: IsInCrossWorldDuty
@@ -33584,10 +34472,10 @@ structs:
     name: Unk20
     offset: 32
   - type: byte
-    name: Unk88
+    name: NumberArrayIndex
     offset: 136
   - type: byte
-    name: Unk89
+    name: StringArrayIndex
     offset: 137
   - type: unsigned __int16
     name: DataSize
@@ -33628,6 +34516,28 @@ structs:
       name: this
     - type: unsigned __int32
       name: idx
+  - signature: E9 ?? ?? ?? ?? 3B 5F 10
+    return_type: Client::UI::Info::InfoProxyCommonList::CharacterData*
+    name: GetEntryByContentId
+    parameters:
+    - type: Client::UI::Info::InfoProxyCommonList*
+      name: this
+    - type: unsigned __int64
+      name: contentId
+    - type: unsigned __int32
+      name: nameCrc32
+    - type: byte
+      name: a4
+  - signature: E8 ?? ?? ?? ?? EB 3C 8D 45 EF
+    return_type: Client::UI::Info::InfoProxyCommonList::CharacterData*
+    name: GetEntryByName
+    parameters:
+    - type: Client::UI::Info::InfoProxyCommonList*
+      name: this
+    - type: byte*
+      name: characterName
+    - type: unsigned __int16
+      name: worldId
   - signature: E8 ?? ?? ?? ?? 48 8B 13 45 33 C9
     return_type: void
     name: ApplyFilters
@@ -34059,10 +34969,9 @@ structs:
   - type: __int64
     name: Unk20
     offset: 32
-  - type: byte
-    name: SearchCommentAsByteArr
-    offset: 58
-    size: 62
+  - type: Client::UI::Info::InfoProxySearchComment::UpdateDataPacket
+    name: UpdateData
+    offset: 40
   - type: Client::System::String::Utf8String
     name: SearchComment
     offset: 256
@@ -34072,8 +34981,67 @@ structs:
   - type: Client::System::String::Utf8String
     name: UnkString2
     offset: 464
+  - type: byte
+    name: HasUpdateData
+    offset: 568
   virtual_functions: []
-  member_functions: []
+  member_functions:
+  - signature: 38 51 38 74 0A
+    return_type: void
+    name: SetUpdateClassJobId
+    parameters:
+    - type: Client::UI::Info::InfoProxySearchComment*
+      name: this
+    - type: byte
+      name: classJobId
+  - signature: 48 39 51 30 74 0B
+    return_type: void
+    name: SetUpdateLookingForPartyClassJobIdMask
+    parameters:
+    - type: Client::UI::Info::InfoProxySearchComment*
+      name: this
+    - type: unsigned __int64
+      name: classJobIdMask
+  - signature: E8 ?? ?? ?? ?? 0F B6 53 15
+    return_type: void
+    name: SetUpdateOnlineStatus
+    parameters:
+    - type: Client::UI::Info::InfoProxySearchComment*
+      name: this
+    - type: Client::UI::Info::InfoProxyCommonList::CharacterData::OnlineStatus
+      name: onlineStatus
+  - signature: E8 ?? ?? ?? ?? 48 8D 53 16
+    return_type: void
+    name: SetUpdateLanguageMask
+    parameters:
+    - type: Client::UI::Info::InfoProxySearchComment*
+      name: this
+    - type: Client::UI::Info::InfoProxyCommonList::CharacterData::LanguageMask
+      name: languageMask
+  - signature: E8 ?? ?? ?? ?? 33 D2 48 8B CF E8 ?? ?? ?? ?? 33 C0
+    return_type: void
+    name: SetUpdateSearchComment
+    parameters:
+    - type: Client::UI::Info::InfoProxySearchComment*
+      name: this
+    - type: byte*
+      name: searchComment
+  - signature: 48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 48 8B D9 BF ?? ?? ?? ?? 8B C7
+    return_type: void
+    name: SendOnlineStatusUpdate
+    parameters:
+    - type: Client::UI::Info::InfoProxySearchComment*
+      name: this
+    - type: unsigned __int32
+      name: onlineStatusId
+  - signature: E8 ?? ?? ?? ?? C6 83 ?? ?? ?? ?? ?? 40 84 FF
+    return_type: void
+    name: SendUpdateData
+    parameters:
+    - type: Client::UI::Info::InfoProxySearchComment*
+      name: this
+    - type: Client::UI::Info::InfoProxySearchComment::UpdateDataPacket*
+      name: updateData
 - type: Client::UI::Agent::AgentActionMenu
   name: AgentActionMenu
   namespace: Client.UI.Agent
@@ -34204,6 +35172,20 @@ structs:
   - type: Client::System::String::Utf8String
     name: Description
     offset: 112
+  virtual_functions: []
+  member_functions: []
+- type: Client::UI::Agent::AgentAetherCurrent
+  name: AgentAetherCurrent
+  namespace: Client.UI.Agent
+  union: False
+  size: 104
+  fields:
+  - type: Component::GUI::AgentInterface
+    name: AgentInterface
+    offset: 0
+  - type: byte
+    name: TabIndex
+    offset: 100
   virtual_functions: []
   member_functions: []
 - type: Client::UI::Agent::AgentAozContentBriefing
@@ -34621,7 +35603,7 @@ structs:
   name: AgentChatLog
   namespace: Client.UI.Agent
   union: False
-  size: 696
+  size: 2856
   fields:
   - type: Component::GUI::AgentInterface
     name: AgentInterface
@@ -34632,6 +35614,9 @@ structs:
   - type: Client::System::String::Utf8String
     name: ChannelLabel
     offset: 72
+  - type: unsigned __int32
+    name: ContextItemId
+    offset: 2376
   virtual_functions: []
   member_functions:
   - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 81 FF ?? ?? ?? ?? 75 20
@@ -34686,6 +35671,20 @@ structs:
   - type: Client::System::String::Utf8String
     name: UnkString
     offset: 136
+  virtual_functions: []
+  member_functions: []
+- type: Client::UI::Agent::AgentContentsTimer
+  name: AgentContentsTimer
+  namespace: Client.UI.Agent
+  union: False
+  size: 6176
+  fields:
+  - type: Component::GUI::AgentInterface
+    name: AgentInterface
+    offset: 0
+  - type: unsigned __int32
+    name: ContextMenuItemId
+    offset: 6092
   virtual_functions: []
   member_functions: []
 - type: Client::UI::Agent::AgentContext
@@ -34999,6 +35998,20 @@ structs:
     offset: 288
   virtual_functions: []
   member_functions: []
+- type: Client::UI::Agent::AgentDailyQuestSupply
+  name: AgentDailyQuestSupply
+  namespace: Client.UI.Agent
+  union: False
+  size: 128
+  fields:
+  - type: Component::GUI::AgentInterface
+    name: AgentInterface
+    offset: 0
+  - type: unsigned __int32
+    name: ContextMenuItemId
+    offset: 84
+  virtual_functions: []
+  member_functions: []
 - type: Client::UI::Agent::AgentDeepDungeonInspect
   name: AgentDeepDungeonInspect
   namespace: Client.UI.Agent
@@ -35058,6 +36071,41 @@ structs:
     offset: 8
   virtual_functions: []
   member_functions: []
+- type: Client::UI::Agent::AgentDetail
+  name: AgentDetail
+  namespace: Client.UI.Agent
+  union: False
+  size: 72
+  fields:
+  - type: Component::GUI::AgentInterface
+    name: AgentInterface
+    offset: 0
+  - type: Client::UI::Info::InfoProxySearchComment*
+    name: InfoProxySearchCommentPtr
+    offset: 48
+  - type: byte
+    name: IsBattleMentor
+    offset: 65
+  - type: byte
+    name: IsTradeMentor
+    offset: 66
+  - type: byte
+    name: IsReturner
+    offset: 67
+  virtual_functions: []
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8B 8B ?? ?? ?? ?? BE ?? ?? ?? ??
+    return_type: void
+    name: OpenForCharacterData
+    parameters:
+    - type: Client::UI::Agent::AgentDetail*
+      name: this
+    - type: Client::UI::Info::InfoProxyCommonList::CharacterData*
+      name: characterData
+    - type: Client::UI::Info::InfoProxySearchComment::UpdateDataPacket*
+      name: updateDataPacket
+    - type: __int32
+      name: ownerAddonId
 - type: Client::UI::Agent::AgentExplorationResultInterface
   name: AgentExplorationResultInterface
   namespace: Client.UI.Agent
@@ -35551,6 +36599,9 @@ structs:
   - type: Component::GUI::AgentInterface
     name: AgentInterface
     offset: 0
+  - type: unsigned __int32
+    name: CastBarAddonId
+    offset: 2728
   - type: unsigned __int32
     name: CurrentTargetId
     offset: 2736
@@ -36245,7 +37296,17 @@ structs:
     name: TempDyeItem
     offset: 72
   virtual_functions: []
-  member_functions: []
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 0F B6 43 3A
+    return_type: void
+    name: UpdateItems
+    parameters:
+    - type: Client::UI::Agent::AgentMiragePrismPrismBox*
+      name: this
+    - type: byte
+      name: resetTabIndex
+    - type: byte
+      name: a2
 - type: Client::UI::Agent::PrismBoxItem
   name: PrismBoxItem
   namespace: Client.UI.Agent
@@ -36472,6 +37533,97 @@ structs:
       name: this
     - type: Client::UI::Agent::AgentMJIGatheringHouse::ExpeditionData*
       name: expedition
+- type: Client::UI::Agent::AgentMJIGatheringNoteBook
+  name: AgentMJIGatheringNoteBook
+  namespace: Client.UI.Agent
+  union: False
+  size: 48
+  fields:
+  - type: Component::GUI::AgentInterface
+    name: AgentInterface
+    offset: 0
+  - type: Client::UI::Agent::AgentMJIGatheringNoteBookData*
+    name: Data
+    offset: 40
+  virtual_functions: []
+  member_functions:
+  - signature: 40 53 48 83 EC 20 48 8B 41 28 48 8B D9 89 90
+    return_type: void
+    name: SelectItem
+    parameters:
+    - type: Client::UI::Agent::AgentMJIGatheringNoteBook*
+      name: this
+    - type: unsigned __int32
+      name: itemIndex
+- type: Client::UI::Agent::AgentMJIGatheringNoteBookData
+  name: AgentMJIGatheringNoteBookData
+  namespace: Client.UI.Agent
+  union: False
+  size: 464
+  fields:
+  - type: unsigned __int32
+    name: Status
+    offset: 0
+  - type: unsigned __int32
+    name: ItemCount
+    offset: 112
+  - type: StdVector<Client::UI::Agent::AgentMJIGatheringNoteBookData::GatherItem*>
+    name: SortedGatherItems
+    offset: 192
+  - type: unsigned __int32
+    name: SelectedItemIndex
+    offset: 456
+  - type: byte
+    name: Flags
+    offset: 460
+  virtual_functions: []
+  member_functions: []
+- type: Client::UI::Agent::AgentMJIMinionNoteBook
+  name: AgentMJIMinionNoteBook
+  namespace: Client.UI.Agent
+  union: False
+  size: 520
+  fields:
+  - type: Component::GUI::AgentInterface
+    name: AgentInterface
+    offset: 0
+  - type: Client::UI::Agent::AgentMJIMinionNoteBook::SelectedMinionInfo
+    name: SelectedFavoriteMinion
+    offset: 476
+  - type: Client::UI::Agent::AgentMJIMinionNoteBook::SelectedMinionInfo
+    name: SelectedNormalMinion
+    offset: 480
+  - type: Client::UI::Agent::AgentMJIMinionNoteBook::SelectedMinionInfo
+    name: SelectedSearchMinion
+    offset: 484
+  - type: Client::UI::Agent::AgentMJIMinionNoteBook::SelectedMinionInfo*
+    name: SelectedMinion
+    offset: 488
+  - type: Client::UI::Agent::AgentMJIMinionNoteBook::ViewType
+    name: CurrentView
+    offset: 496
+  virtual_functions: []
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 48 8B 86 ?? ?? ?? ?? 88 58 03
+    return_type: void
+    name: HandleCommand
+    parameters:
+    - type: Client::UI::Agent::AgentMJIMinionNoteBook*
+      name: this
+    - type: __int32*
+      name: flags
+  - signature: E8 ?? ?? ?? ?? 0F B7 D8 85 DB
+    return_type: unsigned __int16
+    name: GetSelectedMinionId
+    parameters:
+    - type: Client::UI::Agent::AgentMJIMinionNoteBook*
+      name: this
+    - type: byte*
+      name: viewType
+    - type: byte*
+      name: currentTabIndex
+    - type: byte*
+      name: currentSlotIndex
 - type: Client::UI::Agent::AgentMJINekomimiRequest
   name: AgentMJINekomimiRequest
   namespace: Client.UI.Agent
@@ -36727,6 +37879,71 @@ structs:
     size: 48
   virtual_functions: []
   member_functions: []
+- type: Client::UI::Agent::AgentRecipeItemContext
+  name: AgentRecipeItemContext
+  namespace: Client.UI.Agent
+  union: False
+  size: 64
+  fields:
+  - type: Component::GUI::AgentInterface
+    name: AgentInterface
+    offset: 0
+  - type: unsigned __int32
+    name: ResultItemId
+    offset: 40
+  virtual_functions: []
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 45 8B C4 41 8B D7
+    return_type: void
+    name: AddItemContextMenuEntries
+    parameters:
+    - type: Client::UI::Agent::AgentRecipeItemContext*
+      name: this
+    - type: unsigned __int32
+      name: itemId
+    - type: byte
+      name: flags
+    - type: byte*
+      name: itemName
+- type: Client::UI::Agent::AgentRecipeMaterialList
+  name: AgentRecipeMaterialList
+  namespace: Client.UI.Agent
+  union: False
+  size: 64
+  fields:
+  - type: Component::GUI::AgentInterface
+    name: AgentInterface
+    offset: 0
+  - type: unsigned __int16
+    name: RecipeId
+    offset: 40
+  - type: unsigned __int32
+    name: Amount
+    offset: 44
+  - type: byte
+    name: WindowLocked
+    offset: 52
+  - type: Client::UI::Agent::AgentRecipeMaterialList::RecipeData*
+    name: Recipe
+    offset: 56
+  virtual_functions: []
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? EB B1 48 8B 4B 28
+    return_type: void
+    name: OpenByRecipeId
+    parameters:
+    - type: Client::UI::Agent::AgentRecipeMaterialList*
+      name: this
+    - type: unsigned __int16
+      name: recipeId
+    - type: unsigned __int32
+      name: amount
+  - signature: 48 89 5C 24 ?? 57 48 83 EC 20 BA ?? ?? ?? ?? 48 8B D9 E8 ?? ?? ?? ?? 48 8B F8 48 85 C0 74 5A
+    return_type: void
+    name: OpenRecipeResultItemContextMenu
+    parameters:
+    - type: Client::UI::Agent::AgentRecipeMaterialList*
+      name: this
 - type: Client::UI::Agent::AgentRecipeNote
   name: AgentRecipeNote
   namespace: Client.UI.Agent
@@ -36736,6 +37953,9 @@ structs:
   - type: Component::GUI::AgentInterface
     name: AgentInterface
     offset: 0
+  - type: unsigned __int32
+    name: ContextMenuResultItemId
+    offset: 920
   - type: __int32
     name: SelectedCraftType
     offset: 944
@@ -37189,6 +38409,28 @@ structs:
     offset: 104
   virtual_functions: []
   member_functions: []
+- type: Client::UI::Agent::AgentTelepotTown
+  name: AgentTelepotTown
+  namespace: Client.UI.Agent
+  union: False
+  size: 48
+  fields:
+  - type: Component::GUI::AgentInterface
+    name: AgentInterface
+    offset: 0
+  - type: Client::UI::Agent::AgentTelepotTownData*
+    name: Data
+    offset: 40
+  virtual_functions: []
+  member_functions:
+  - signature: 48 89 5C 24 ?? 57 48 83 EC 50 0F B6 FA
+    return_type: void
+    name: TeleportToAetheryte
+    parameters:
+    - type: Client::UI::Agent::AgentTelepotTown*
+      name: this
+    - type: byte
+      name: index
 - type: Client::System::Scheduler::Resource::SchedulerResource
   name: SchedulerResource
   namespace: Client.System.Scheduler.Resource
@@ -38650,6 +39892,79 @@ structs:
     offset: 316
   virtual_functions: []
   member_functions: []
+- type: Client::Game::WeatherManager
+  name: WeatherManager
+  namespace: Client.Game
+  union: False
+  size: 112
+  fields:
+  - type: Client::Game::WeatherManager::ServerWeather*
+    name: WeatherPtr
+    offset: 0
+    size: 3
+  - type: Client::Game::WeatherManager::ServerWeather
+    name: Weather
+    offset: 24
+    size: 3
+  - type: byte
+    name: WeatherIndex
+    offset: 96
+  - type: byte
+    name: WeatherId
+    offset: 100
+  - type: byte
+    name: WeatherOverride
+    offset: 101
+  - type: byte
+    name: CurrentDaytimeOffset
+    offset: 102
+  - type: byte
+    name: IndividualWeatherId
+    offset: 103
+  virtual_functions: []
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 0F B6 C8 8D 41 ?? A9
+    return_type: byte
+    name: GetCurrentWeather
+    parameters:
+    - type: Client::Game::WeatherManager*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 44 0F B6 F0 48 8D 73 04
+    return_type: byte
+    name: HasIndividualWeather
+    parameters:
+    - type: Client::Game::WeatherManager*
+      name: this
+    - type: unsigned __int16
+      name: territoryTypeId
+  - signature: E8 ?? ?? ?? ?? 0F B6 C0 33 DB
+    return_type: byte
+    name: GetIndividualWeather
+    parameters:
+    - type: Client::Game::WeatherManager*
+      name: this
+    - type: unsigned __int16
+      name: territoryTypeId
+  - signature: 40 57 48 83 EC 20 0F B7 CA
+    return_type: byte
+    name: GetWeatherForHour
+    parameters:
+    - type: Client::Game::WeatherManager*
+      name: this
+    - type: unsigned __int16
+      name: territoryTypeId
+    - type: __int32
+      name: hourOffset
+  - signature: 46 8D 04 C5 ?? ?? ?? ?? E9
+    return_type: byte
+    name: GetWeatherForDaytime
+    parameters:
+    - type: Client::Game::WeatherManager*
+      name: this
+    - type: unsigned __int16
+      name: territoryTypeId
+    - type: __int32
+      name: daytimeOffset
 - type: Client::Game::UI::Buddy
   name: Buddy
   namespace: Client.Game.UI
@@ -39596,6 +40911,9 @@ structs:
   - type: Client::Game::Event::LuaActor*
     name: LuaActor
     offset: 344
+  - type: Client::Game::Event::EventHandler*
+    name: EventHandler
+    offset: 352
   virtual_functions:
   - name: GetObjectID
     offset: 8
@@ -43646,7 +44964,15 @@ structs:
     name: Flags
     offset: 232
   virtual_functions: []
-  member_functions: []
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 0F B7 DD
+    return_type: void
+    name: SetChecked
+    parameters:
+    - type: Component::GUI::AtkComponentButton*
+      name: this
+    - type: byte
+      name: isChecked
 - type: Component::GUI::AtkComponentCheckBox
   name: AtkComponentCheckBox
   namespace: Component.GUI
@@ -43797,6 +45123,14 @@ structs:
       name: secondaryValue
     - type: byte
       name: instant
+  - signature: E8 ?? ?? ?? ?? 89 AF ?? ?? ?? ?? 48 8B 46 20
+    return_type: void
+    name: SetGaugeRange
+    parameters:
+    - type: Component::GUI::AtkComponentGaugeBar*
+      name: this
+    - type: __int32
+      name: value
 - type: Component::GUI::AtkComponentGuildLeveCard
   name: AtkComponentGuildLeveCard
   namespace: Component.GUI
@@ -44017,6 +45351,14 @@ structs:
     - type: Component::GUI::AtkComponentList*
       name: this
   member_functions:
+  - signature: E8 ?? ?? ?? ?? 41 FE 85
+    return_type: void
+    name: SetItemCount
+    parameters:
+    - type: Component::GUI::AtkComponentList*
+      name: this
+    - type: __int32
+      name: value
   - signature: E8 ?? ?? ?? ?? 45 38 A4 3E
     return_type: void
     name: SetItemLabel
@@ -44127,8 +45469,8 @@ structs:
   union: False
   size: 248
   fields:
-  - type: Component::GUI::AtkComponentBase
-    name: AtkComponentBase
+  - type: Component::GUI::AtkComponentButton
+    name: AtkComponentButton
     offset: 0
   virtual_functions: []
   member_functions: []
@@ -44152,8 +45494,46 @@ structs:
   - type: Component::GUI::AtkComponentBase
     name: AtkComponentBase
     offset: 0
+  - type: __int32
+    name: MinValue
+    offset: 232
+  - type: __int32
+    name: MaxValue
+    offset: 236
+  - type: __int32
+    name: Value
+    offset: 240
+  - type: __int32
+    name: Steps
+    offset: 244
   virtual_functions: []
-  member_functions: []
+  member_functions:
+  - signature: 3B 91 ?? ?? ?? ?? 7F 06
+    return_type: void
+    name: SetMinValue
+    parameters:
+    - type: Component::GUI::AtkComponentSlider*
+      name: this
+    - type: __int32
+      name: minValue
+  - signature: 3B 91 ?? ?? ?? ?? 7C 06
+    return_type: void
+    name: SetMaxValue
+    parameters:
+    - type: Component::GUI::AtkComponentSlider*
+      name: this
+    - type: __int32
+      name: maxValue
+  - signature: E8 ?? ?? ?? ?? 0F B6 43 3C
+    return_type: void
+    name: SetValue
+    parameters:
+    - type: Component::GUI::AtkComponentSlider*
+      name: this
+    - type: __int32
+      name: value
+    - type: byte
+      name: dispatchEvent29
 - type: Component::GUI::AtkComponentTextInput
   name: AtkComponentTextInput
   namespace: Component.GUI
@@ -48096,6 +49476,9 @@ structs:
   - type: Client::Game::UI::PvPProfile
     name: PvPProfile
     offset: 14004
+  - type: __int64
+    name: Unk3730
+    offset: 14128
   - type: Client::Game::UI::ContentsNote
     name: ContentsNote
     offset: 14136
@@ -50243,6 +51626,9 @@ structs:
   - type: Component::GUI::AgentInterface
     name: AgentInterface
     offset: 0
+  - type: byte
+    name: TabIndex
+    offset: 60
   - type: Client::UI::Agent::AgentStatus::StatusCharaView
     name: CharaView
     offset: 128
