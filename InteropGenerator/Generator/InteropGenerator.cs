@@ -1,4 +1,5 @@
-﻿using InteropGenerator.Models;
+﻿using System.Collections.Immutable;
+using InteropGenerator.Models;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
@@ -21,6 +22,22 @@ public sealed partial class InteropGenerator : IIncrementalGenerator {
                 .Where(static si => si is not null)!;
 
         context.RegisterSourceOutput(structInfos,
-            (sourceContext, item) => { sourceContext.AddSource($"{item.FullyQualifiedMetadataName}.InteropGenerator.g.cs", RenderStructInfo(item)); });
+            static (sourceContext, item) => { sourceContext.AddSource($"{item.FullyQualifiedMetadataName}.InteropGenerator.g.cs", RenderStructInfo(item)); });
+
+        IncrementalValueProvider<GeneratorOptions> generatorOptionsProvider = context.AnalyzerConfigOptionsProvider.Select(static (options, _) => {
+            if (!options.GlobalOptions.TryGetValue("build_property.InteropGenerator_InteropNamespace", out string? interopNamespace))
+                interopNamespace = "InteropGenerator";
+
+            return new GeneratorOptions(
+                InteropNamespace: interopNamespace);
+        });
+        
+        IncrementalValueProvider<ImmutableArray<StructInfo>> structInfosWithAddresses = structInfos.Where(static sI => sI.HasSignatures()).Collect();
+        
+        context.RegisterSourceOutput(structInfosWithAddresses.Combine(generatorOptionsProvider),
+            static (SourceProductionContext sourceContext, (ImmutableArray<StructInfo> StructInfos, GeneratorOptions GeneratorOptions) args) => {
+                if (!args.StructInfos.IsEmpty)
+                    sourceContext.AddSource($"{args.GeneratorOptions.InteropNamespace}.Interop.InteropGenerator.g.cs", RenderResolverInitializer(args.StructInfos, args.GeneratorOptions.InteropNamespace));
+            });
     }
 }

@@ -9,16 +9,21 @@ namespace InteropGenerator.Tests.Helpers;
 internal static class IncrementalGeneratorVerifier<TIncrementalGenerator>
     where TIncrementalGenerator : IIncrementalGenerator, new() {
     public static async Task VerifyGeneratorAsync(string source, (string filename, string content) generatedSource)
-        => await VerifyGeneratorAsync(source, new[] { generatedSource });
+        => await VerifyGeneratorAsync(source, [generatedSource]);
 
     public static async Task VerifyGeneratorAsync(string source, params (string filename, string content)[] generatedSources) {
+        const string config = """
+                              build_property.InteropGenerator_InteropNamespace = InteropGeneratorTesting
+                              """;
+                                      
         var test = new IncrementalGeneratorTest<TIncrementalGenerator> {
             TestState = {
                 Sources = { 
                     GlobalUsings.GetSource,
                     source },
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
-                AdditionalReferences = { MetadataReference.CreateFromFile(typeof(GenerateInteropAttribute).Assembly.Location) }
+                AdditionalReferences = { MetadataReference.CreateFromFile(typeof(GenerateInteropAttribute).Assembly.Location) },
+                AnalyzerConfigFiles = { ("/.globalconfig", config) }
             }
         };
 
