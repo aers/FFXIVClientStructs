@@ -26,7 +26,7 @@ public class GenerateInteropAttributeHasValidTargetAnalyzer : DiagnosticAnalyzer
                         return;
 
                     // check for attribute on the type
-                    if (!typeSymbol.TryGetAttributeWithType(generateAttribute, out _))
+                    if (!typeSymbol.HasAttributeWithType(generateAttribute))
                         return;
 
                     // get first syntax of symbol; since all need to be partial we can rely on the compiler to check any extras

@@ -5,4 +5,5 @@ public static class AttributeNames {
 
     public const string GenerateInteropAttribute = Namespace + ".GenerateInteropAttribute";
     public const string MemberFunctionAttribute = Namespace + ".MemberFunctionAttribute";
+    public const string VirtualFunctionAttribute = Namespace + ".VirtualFunctionAttribute";
 }
