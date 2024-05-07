@@ -122,7 +122,7 @@ functions:
   0x140499CC0: ReadStainingTemplate
   0x1404BDEB0: StartSpursJobEntityWorkerThread
   0x1404E93A0: GetAvailablePoses
-  0x14050FE80: RemoveFromList # (AtkEvent**, AtkEvent*) Finds and removes param2 from the param1 list
+  0x14050FE80: RemoveAtkEventFromList # (AtkEvent**, AtkEvent*) Finds and removes param2 from the param1 list
   0x140539820: GetScaleListEntryFromScale
   0x140548050: GetScaleForListOption
   0x1405979A0: Component::GUI::TextModuleInterface::GetTextLabelByID
@@ -130,9 +130,18 @@ functions:
   0x1406500B0: FormatNumber
   0x14067EA20: ConvertLogMessageIdToCharaLogKind
   0x1406F1A70: GetItemName # (uint itemId, byte itemKind, Component::Exd::Sheets::Item* itemRow, bool withLinkPrefix) -> byte*
+  0x1406F1B60: GetEventItemName
   0x1406F1CF0: GetItemIcon # (uint itemId, Component::Exd::Sheets::Item* itemRow) -> uint
+  0x140735230: IsCompanySealItemId
+  0x140735370: GetTomestonesItem
+  0x1407353D0: IsTomestonesItemItemId
+  0x1407357F0: IsAlliedSealItemId
+  0x140735D80: IsItemStainConditionUnlocked
+  0x140736810: IsEventItemItemId
   0x1407659D0: ExecuteCommand
-  0x1400A8300: InDeepDungeon
+  0x1400A8120: IsBoundByDuty56
+  0x1400A82A0: IsDutyRecorderPlayback
+  0x1400A8300: IsInDeepDungeon
   0x1400A8550: IsUnconscious
   0x1400A8560: IsRolePlaying
   0x1400A86F0: IsClassJobACrafter   # static, (classJobId) -> bool
@@ -575,6 +584,9 @@ classes:
       - ea: 0x141A08B70
     vfuncs:
       0: dtor
+  Component::GUI::AtkGrid:
+    vtbls:
+      - ea: 0x141A085D8
   Component::GUI::AtkTextInput:
     vtbls:
       - ea: 0x141A08B98
@@ -1335,6 +1347,9 @@ classes:
       0x1405341D0: ReadTPHD
       0x1405343E0: ReadASHDAndLoadTextures
       0x1405348C0: CreateAtkNode
+      0x140535350: UpdateFromParentNode # (AtkResNode* node, AtkResNode *parent, bool force)
+      0x1405354E0: UpdateNodeTransform
+      0x1405356D0: UpdateNodeColor
       0x140535D40: CreateAtkComponent
       0x1405367D0: Update
       0x1405374B0: SortNodeListByPriority
@@ -1458,6 +1473,10 @@ classes:
       0x14093B090: IsMeisterFlagMaxCount
       0x14093CAC0: GetDesynthesisLevelForClassJob
       0x14093CDC0: Initialize
+      0x14093DDA0: IsCurrentJobCrafter
+      0x14093DDC0: IsCurrentJobGatherer
+      0x14093DDE0: IsCurrentJobLimited
+      0x14093DEE0: GetParentClassJobId
       0x1409AA1A0: ctor
       0x14093DB00: GetAttributeByIndex # (this, index)
   Client::Game::UI::Revive:
@@ -4990,10 +5009,15 @@ classes:
       - ea: 0x141A07DF8
     funcs:
       0x14050A300: ctor
+  Component::GUI::AtkEventTarget:
+    vtbls:
+      - ea: 0x141A07E88
   Component::GUI::AtkTimer:
     vtbls:
       - ea: 0x141A07E90
         base: Component::GUI::AtkEventTarget
+    funcs:
+      0x1405103A0: ctor
   Component::GUI::AtkTooltipManager:
     vtbls:
       - ea: 0x141A07EB0
@@ -5007,13 +5031,18 @@ classes:
       0x140512820: ShowTooltip # similar args to attach tooltip
       0x140512FC0: HideTooltip # (this, addonId, unkBool)
       0x1405132D0: DetachTooltipAddon
-  Component::GUI::AtkEventTarget:
+  Component::GUI::AtkAddonControl:
     vtbls:
       - ea: 0x141A0A6A8
-  Component::GUI::AtkEventListenerUnk: # Used in AddonTalk
-    vtbls:
+        base: Component::GUI::AtkEventTarget
       - ea: 0x141A0A6B0
         base: Component::GUI::AtkEventListener
+    funcs:
+      0x140599170: ctor
+      0x1405992C0: Initialize
+      0x140599B60: Finalize
+      0x140599300: Update
+      0x140599680: Draw
   Component::GUI::AtkSimpleTween:
     vtbls:
       - ea: 0x141A07EF8
@@ -5042,6 +5071,24 @@ classes:
       0x14050F040: IsTextureReady
       0x14050F0F0: ReleaseTexture
       0x14050F220: GetKernelTexture
+  Component::GUI::AtkRenderTexture:
+    vtbls:
+      - ea: 0x141A07E80
+  Component::GUI::AtkCrestFactory:
+    vtbls:
+      - ea: 0x141A07F10
+        base: Component::GUI::AtkTexture
+  Component::GUI::AtkCrest:
+    vtbls:
+      - ea: 0x141A07F18
+  Component::GUI::AtkCrestColorPallete:
+    vtbls:
+      - ea: 0x141A07F20
+        base: Component::GUI::AtkTexture
+  Component::GUI::AtkCrestBasePallete:
+    vtbls:
+      - ea: 0x141A07F28
+        base: Component::GUI::AtkTexture
   Component::GUI::AtkStage:
     instances:
       - ea: 0x1421D3320
@@ -5088,6 +5135,10 @@ classes:
     vtbls:
       - ea: 0x141A07EE0
         base: Component::GUI::AtkEventListener
+  Component::GUI::AtkComponentMap::DiscoveryRenderer:
+    vtbls:
+      - ea: 0x141A09E80
+        base: Component::GUI::AtkImageNodeRenderer
   Component::GUI::AtkResNode:
     vtbls:
       - ea: 0x141A08870
@@ -12342,6 +12393,12 @@ classes:
       3: OnItemSelected
     funcs:
       0x140D80190: Finalize
+  Client::UI::LogViewer:
+    vtbls:
+      - ea: 0x141A8FE30
+        base: Component::GUI::AtkEventListener
+    funcs:
+      0x140D81280: ctor
   Client::UI::TabController:
     vtbls:
       - ea: 0x141A8FE68
