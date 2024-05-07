@@ -16,11 +16,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		ida\data.yml = ida\data.yml
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FFXIVClientStructs.InteropGenerator", "FFXIVClientStructs.InteropGenerator\FFXIVClientStructs.InteropGenerator.csproj", "{2A9B5E8E-0773-4BBC-BD5A-BE534611A57F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InteropGenerator", "InteropGenerator\InteropGenerator.csproj", "{2A9B5E8E-0773-4BBC-BD5A-BE534611A57F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FFXIVClientStructs.InteropGenerator.Runtime", "FFXIVClientStructs.InteropGenerator.Runtime\FFXIVClientStructs.InteropGenerator.Runtime.csproj", "{654A43F0-8678-4986-A64B-444A24176434}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InteropGenerator.Runtime", "InteropGenerator.Runtime\InteropGenerator.Runtime.csproj", "{654A43F0-8678-4986-A64B-444A24176434}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FFXIVClientStructs.InteropGenerator.Tests", "FFXIVClientStructs.InteropGenerator.Tests\FFXIVClientStructs.InteropGenerator.Tests.csproj", "{527062AF-EDDF-41A3-80B7-F902445D8045}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InteropGenerator.Tests", "InteropGenerator.Tests\InteropGenerator.Tests.csproj", "{527062AF-EDDF-41A3-80B7-F902445D8045}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
