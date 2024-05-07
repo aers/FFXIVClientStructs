@@ -63,6 +63,7 @@ public sealed partial class InteropGenerator {
         return new ParameterInfo(
             parameterSymbol.Name,
             parameterSymbol.Type.GetFullyQualifiedName(),
-            parameterSymbol.GetDefaultValueString());
+            parameterSymbol.GetDefaultValueString(),
+            parameterSymbol.RefKind);
     }
 }
