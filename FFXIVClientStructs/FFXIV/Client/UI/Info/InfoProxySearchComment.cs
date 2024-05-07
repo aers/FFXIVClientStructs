@@ -34,7 +34,7 @@ public unsafe partial struct InfoProxySearchComment {
     public partial void SetUpdateLookingForPartyClassJobIdMask(ulong classJobIdMask);
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 53 15")]
-    public partial void SetUpdateOnlineStatus(InfoProxyCommonList.CharacterData.OnlineStatus onlineStatus);
+    public partial void SetUpdateOnlineStatus(InfoProxyCommonList.CharacterData.OnlineStatus onlineStatus, bool skipAwayCheck = false);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8D 53 16")]
     public partial void SetUpdateLanguageMask(InfoProxyCommonList.CharacterData.LanguageMask languageMask);
