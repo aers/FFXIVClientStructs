@@ -32,32 +32,34 @@ public class MethodIsValidForGenerationAnalyzer : DiagnosticAnalyzer {
                         return;
 
                     // validate method is partial
-                    if (methodSymbol.TryGetSyntaxNode(context.CancellationToken, out MethodDeclarationSyntax? methodSyntax)) {
-                        if (!methodSyntax.HasModifier(SyntaxKind.PartialKeyword)) {
-                            context.ReportDiagnostic(Diagnostic.Create(
-                                GenerationRequiresPartialMethod,
-                                methodSyntax.Identifier.GetLocation(),
-                                methodSymbol.Name));
-                        }
+                    if (!methodSymbol.TryGetSyntaxNode(context.CancellationToken, out MethodDeclarationSyntax? methodSyntax))
+                        return;
+
+                    if (!methodSyntax.HasModifier(SyntaxKind.PartialKeyword)) {
+                        context.ReportDiagnostic(Diagnostic.Create(
+                            GenerationRequiresPartialMethod,
+                            methodSyntax.GetLocation(),
+                            methodSymbol.Name));
                     }
-                    
+
+
                     // validate parameters are unmanaged types
                     foreach (IParameterSymbol paramSymbol in methodSymbol.Parameters) {
                         if (!paramSymbol.Type.IsUnmanagedType) {
                             context.ReportDiagnostic(Diagnostic.Create(
                                 MethodParameterMustBeUnmanaged,
-                                paramSymbol.Locations.FirstOrDefault(),
+                                paramSymbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax().GetLocation(),
                                 paramSymbol.Name,
                                 methodSymbol.Name,
                                 paramSymbol.Type.Name));
                         }
                     }
-                    
+
                     // validate return value is unmanaged type
-                    if (methodSymbol is {ReturnsVoid: false, ReturnType.IsUnmanagedType: false }) {
+                    if (methodSymbol is { ReturnsVoid: false, ReturnType.IsUnmanagedType: false }) {
                         context.ReportDiagnostic(Diagnostic.Create(
                             MethodReturnMustBeUnmanaged,
-                            methodSymbol.Locations.FirstOrDefault(),
+                            methodSyntax.GetLocation(),
                             methodSymbol.Name,
                             methodSymbol.ReturnType.Name));
                     }

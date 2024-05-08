@@ -9,7 +9,7 @@ using static InteropGenerator.Diagnostics.DiagnosticDescriptors;
 namespace InteropGenerator.Diagnostics.Analyzers;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public class GenerateInteropAttributeHasValidTargetAnalyzer : DiagnosticAnalyzer {
+public class StructIsValidForGenerationAnalyzer : DiagnosticAnalyzer {
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = [GenerationRequiresPartialStruct, NestedStructMustBeContainedInPartialStruct, NestedStructCannotBeContainedInClass];
 
     public override void Initialize(AnalysisContext context) {
@@ -22,7 +22,7 @@ public class GenerateInteropAttributeHasValidTargetAnalyzer : DiagnosticAnalyzer
                 return;
 
             context.RegisterSymbolAction(context => {
-                    if (context.Symbol is not INamedTypeSymbol { } typeSymbol)
+                    if (context.Symbol is not INamedTypeSymbol { TypeKind: TypeKind.Struct } typeSymbol)
                         return;
 
                     // check for attribute on the type
