@@ -52,12 +52,12 @@ public class MethodAnalyzerTests {
     public async Task TargetMethodContainsInvalidParameters_NoWarn() {
         const string code = """
                             [GenerateInterop]
-                            public partial struct TestStruct
+                            public unsafe partial struct TestStruct
                             {
                                 [MemberFunction("??")]
-                                public partial void TestFunction(int validParam);
+                                public partial void TestFunction(int validParam, void* pointerParam);
                                 
-                                public partial void TestFunction(int validParam) { }
+                                public partial void TestFunction(int validParam, void* pointerParam) { }
                             }
                             """;
         await AnalyzerVerifier<MethodIsValidForGenerationAnalyzer>.VerifyAnalyzerAsync(code);

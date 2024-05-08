@@ -29,17 +29,20 @@ public class SignatureIsValidAnalyzer : DiagnosticAnalyzer {
 
                     if (!attributeData.TryGetConstructorArgument(0, out string? signature))
                         return;
-
-                    if (ContainsInvalidCharacters(signature.AsSpan())) {
+                    
+                    if (signature == string.Empty || 
+                        signature[0] == ' ' ||
+                        signature[^1] == ' ' ||
+                        signature.Split(' ').All(subString => subString.Length != 2)) {
                         context.ReportDiagnostic(Diagnostic.Create(
-                            SignatureContainsInvalidCharacters,
+                            SignatureFormatInvalid,
                             attributeData.GetLocation(),
                             signature));
                     }
-
-                    if (signature.Split(' ').All(subString => subString.Length != 2)) {
+                        
+                    if (ContainsInvalidCharacters(signature)) {
                         context.ReportDiagnostic(Diagnostic.Create(
-                            SignatureFormatInvalid,
+                            SignatureContainsInvalidCharacters,
                             attributeData.GetLocation(),
                             signature));
                     }
@@ -48,7 +51,7 @@ public class SignatureIsValidAnalyzer : DiagnosticAnalyzer {
         });
     }
 
-    private static bool ContainsInvalidCharacters(ReadOnlySpan<char> signature) {
+    private static bool ContainsInvalidCharacters(string signature) {
         foreach (char character in signature) {
             if (character != '?' &&
                 character != ' ' &&

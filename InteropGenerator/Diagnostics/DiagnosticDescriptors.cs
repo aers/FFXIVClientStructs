@@ -77,10 +77,10 @@ internal static class DiagnosticDescriptors {
     public static readonly DiagnosticDescriptor SignatureFormatInvalid = new(
         "CSIG0202",
         "Signature format is invalid",
-        "Signature {0} format is invalid (valid format is 2-character bytes seperated by spaces with ? as the wildcard character)",
+        "Signature {0} format is invalid (valid format is 2-character bytes seperated by spaces with ? as the wildcard character with no leading or trailing spaces)",
         "InteropGenerator.Signature",
         DiagnosticSeverity.Error,
         true,
-        "A signature format is invalid (valid format is 2-character bytes seperated by spaces with ? as the wildcard character)."
+        "A signature format is invalid (valid format is 2-character bytes seperated by spaces with ? as the wildcard character with no leading or trailign spaces)."
     );
 }
