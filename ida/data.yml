@@ -5160,6 +5160,59 @@ classes:
       0x140510BD0: Hide
       0x140510C60: SetCursorType
       0x140510D10: SetVisible
+  Component::GUI::AtkFontAnalyzerBase:
+    vtbls:
+      - ea: 0x141A08188
+    vfuncs:
+      8: dtor
+  Component::GUI::AtkFontAnalyzerFunctor:
+    vtbls:
+      - ea: 0x141A085A8
+  Component::GUI::AtkFontAnalyzerFunctorSelect:
+    vtbls:
+      - ea: 0x141A085B8
+  Component::GUI::AtkFontAnalyzerCount:
+    vtbls:
+      - ea: 0x141A082A8
+        base: Component::GUI::AtkFontAnalyzerBase
+  Component::GUI::AtkFontAnalyzerDrawSize:
+    vtbls:
+      - ea: 0x141A08368
+        base: Component::GUI::AtkFontAnalyzerBase
+  Component::GUI::AtkFontAnalyzerRenderer:
+    vtbls:
+      - ea: 0x141A083C8
+        base: Component::GUI::AtkFontAnalyzerBase
+    funcs:
+      0x140522320: ctor
+  Component::GUI::AtkFontAnalyzerRenderCount:
+    vtbls:
+      - ea: 0x141A08308
+        base: Component::GUI::AtkFontAnalyzerBase
+  Component::GUI::AtkFontAnalyzerSearchPosition:
+    vtbls:
+      - ea: 0x141A08428
+        base: Component::GUI::AtkFontAnalyzerBase
+  Component::GUI::AtkFontAnalyzerCRLFCount:
+    vtbls:
+      - ea: 0x141A081E8
+        base: Component::GUI::AtkFontAnalyzerBase
+  Component::GUI::AtkFontAnalyzerCRLFSearch:
+    vtbls:
+      - ea: 0x141A08248
+        base: Component::GUI::AtkFontAnalyzerBase
+  Component::GUI::AtkFontAnalyzerBuildLink:
+    vtbls:
+      - ea: 0x141A084E8
+        base: Component::GUI::AtkFontAnalyzerBase
+  Component::GUI::AtkFontAnalyzerCreateCache:
+    vtbls:
+      - ea: 0x141A08488
+        base: Component::GUI::AtkFontAnalyzerBase
+  Component::GUI::AtkFontAnalyzerCheckStringOnlyNumSymbol:
+    vtbls:
+      - ea: 0x141A08548
+        base: Component::GUI::AtkFontAnalyzerBase
   Component::GUI::AtkFontAnalyzer:
     vtbls:
       - ea: 0x141A085C8
