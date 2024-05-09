@@ -5018,12 +5018,20 @@ classes:
   Component::GUI::AtkEventTarget:
     vtbls:
       - ea: 0x141A08038
+  Component::GUI::AtkTimerHolder:
+    funcs:
+      0x1405684C0: Update
   Component::GUI::AtkTimer:
     vtbls:
       - ea: 0x141A08040
         base: Component::GUI::AtkEventTarget
+    vfuncs:
+      1: dtor
+      2: OnTick
     funcs:
       0x140510420: ctor
+      0x140510460: Finalize
+      0x140510790: Update
   Component::GUI::AtkTooltipManager:
     vtbls:
       - ea: 0x141A08060
