@@ -5092,6 +5092,15 @@ classes:
   Component::GUI::AtkRenderTexture:
     vtbls:
       - ea: 0x141A08030
+  Component::GUI::AtkCrestManager:
+    vtbls:
+      - ea: 0x141A080B8
+    vfuncs:
+      0: dtor
+    funcs:
+      0x140516EB0: ctor
+      0x140516F50: Initialize
+      0x140517320: Update
   Component::GUI::AtkCrestFactory:
     vtbls:
       - ea: 0x141A080C0
