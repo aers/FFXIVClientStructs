@@ -28,9 +28,10 @@ public unsafe partial struct AtkModule {
     [FieldOffset(0x1BE0)] public AtkTimerHolder AtkTimerHolder;
     [FieldOffset(0x1C00)] public AtkSimpleTweenHolder AtkSimpleTweenHolder;
     [FieldOffset(0x5C08)] public AtkCrestManager AtkCrestManager;
-
+    [FieldOffset(0x5C50)] public AtkUIColorHolder AtkUIColorHolder;
+    [Obsolete($"Use {nameof(AtkUIColorHolder.UIColorSheetName)}")]
     [FieldOffset(0x5C50)] public Utf8String UIColorSheetName;
-
+    [Obsolete($"Use {nameof(AtkUIColorHolder.ActiveColorThemeType)}")]
     [FieldOffset(0x5CC4)] public byte ActiveColorThemeType;
 
     [FieldOffset(0x5D00)] public AtkFontCodeModule AtkFontCodeModule;

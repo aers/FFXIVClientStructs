@@ -5124,6 +5124,11 @@ classes:
     vtbls:
       - ea: 0x141A080D8
         base: Component::GUI::AtkTexture
+  Component::GUI::AtkUIColorHolder:
+    funcs:
+      0x1405286A0: ctor
+      0x140528780: Update
+      0x140528900: GetColor
   Component::GUI::AtkStage:
     instances:
       - ea: 0x1421D53A0
