@@ -23,6 +23,7 @@ public unsafe partial struct AtkStage {
     [FieldOffset(0x78)] public AtkDragDropManager DragDropManager;
     [FieldOffset(0x140)] public AtkGroupManager AtkGroupManager;
     [FieldOffset(0x168)] public AtkTooltipManager TooltipManager;
+    [FieldOffset(0x2C0)] public AtkDialogue AtkDialogue;
     [FieldOffset(0x338)] public AtkCursor AtkCursor;
     [FixedSizeArray<AtkEventDispatcher>(32)]
     [FieldOffset(0x358)] public fixed byte AtkEventDispatcher[0x28 * 32];
