@@ -26,6 +26,7 @@ public unsafe partial struct AtkModule {
     
     [FieldOffset(0x1B90)] public AtkArrayDataHolder AtkArrayDataHolder;
     [FieldOffset(0x1BE0)] public AtkTimerHolder AtkTimerHolder;
+    [FieldOffset(0x1C00)] public AtkSimpleTweenHolder AtkSimpleTweenHolder;
 
     [FieldOffset(0x5C50)] public Utf8String UIColorSheetName;
 

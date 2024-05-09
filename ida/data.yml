@@ -5058,6 +5058,9 @@ classes:
       0x140599380: Update
       0x140599700: Draw
       0x14059A510: GetChildAddonInfoByAtkUnitBase
+  Component::GUI::AtkSimpleTweenHolder:
+    funcs:
+      0x140516980: Update
   Component::GUI::AtkSimpleTween:
     vtbls:
       - ea: 0x141A080A8
