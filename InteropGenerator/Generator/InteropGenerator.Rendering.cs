@@ -31,6 +31,10 @@ public sealed partial class InteropGenerator {
         // write member function pointers & method bodies
         if (!structInfo.MemberFunctions.IsEmpty)
             RenderMemberFunctions(structInfo, writer);
+        
+        // write static address method bodies
+        if (!structInfo.StaticAddresses.IsEmpty)
+            RenderStaticAddresses(structInfo, writer);
 
         // write closing struct hierarchy
         for (var i = 0; i < structInfo.Hierarchy.Length; i++) {
@@ -45,11 +49,13 @@ public sealed partial class InteropGenerator {
         writer.WriteLine("public static class Addresses");
         using (writer.WriteBlock()) {
             foreach(MemberFunctionInfo mfi in structInfo.MemberFunctions)
-                writer.WriteLine(GetAddressString(structInfo, mfi.MethodInfo, mfi.Signature));
+                writer.WriteLine(GetAddressString(structInfo, mfi.MethodInfo, mfi.Signature, mfi.Offset));
+            foreach(StaticAddressInfo sai in structInfo.StaticAddresses)
+                writer.WriteLine(GetAddressString(structInfo, sai.MethodInfo, sai.Signature, sai.Offset));
         }
     }
 
-    private static string GetAddressString(StructInfo structInfo, MethodInfo methodInfo, string signature) {
+    private static string GetAddressString(StructInfo structInfo, MethodInfo methodInfo, string signature, byte offset) {
         // create padded signature
         int paddingNeeded = 8 - (signature.Length / 3 + 1) % 8;
         if (paddingNeeded != 0) {
@@ -83,8 +89,14 @@ public sealed partial class InteropGenerator {
             .Select(x => "0x" + string.Join(string.Empty, x.Reverse()));
 
         string ulongArrayMask = "new ulong[] {" + string.Join(", ", groupedSigMask) + "}";
+        
+        // handle E8 and E9 jumps automatically
+        if (offset == 0 &&
+            signature.StartsWith("E8") ||
+            signature.StartsWith("E9"))
+            offset = 1;
 
-        return $"""public static readonly Address {methodInfo.Name} = new Address("{structInfo.FullyQualifiedMetadataName}.{methodInfo.Name}", "{signature}", {ulongArraySignature}, {ulongArrayMask}, 0);""";
+        return $"""public static readonly Address {methodInfo.Name} = new Address("{structInfo.FullyQualifiedMetadataName}.{methodInfo.Name}", "{signature}", {offset}, {ulongArraySignature}, {ulongArrayMask}, 0);""";
     }
 
     private static void RenderMemberFunctions(StructInfo structInfo, IndentedTextWriter writer) {
@@ -117,6 +129,30 @@ public sealed partial class InteropGenerator {
         }
     }
 
+    private static void RenderStaticAddresses(StructInfo structInfo, IndentedTextWriter writer) {
+        // pointers to static addresses
+        writer.WriteLine("public unsafe static class StaticAddressPointers");
+        using (writer.WriteBlock()) {
+            foreach (StaticAddressInfo sai in structInfo.StaticAddresses) {
+                string pointerText = sai.IsPointer ? "* p" : " ";
+                string pointer = sai.IsPointer ? "*" : string.Empty;
+                writer.WriteLine($"public static {sai.MethodInfo.ReturnType}{pointerText}p{sai.MethodInfo.Name} => ({sai.MethodInfo.ReturnType}{pointer}){structInfo.Name}.Addresses.{sai.MethodInfo.Name}.Value;");
+            }
+        }
+        foreach (StaticAddressInfo sai in structInfo.StaticAddresses) {
+            writer.WriteLine(sai.MethodInfo.GetDeclarationString());
+            string extraPointerText = sai.IsPointer ? "p" : string.Empty;
+            string pointerReturnText = sai.IsPointer ? "*" : string.Empty;
+
+            using (writer.WriteBlock()) {
+                writer.WriteLine($"if (StaticAddressPointers.{extraPointerText}p{sai.MethodInfo.Name} is null)");
+                using (writer.WriteBlock()) {
+                    writer.WriteLine($"""throw new InvalidOperationException("Static address pointer for {structInfo.Name}.{sai.MethodInfo.Name} is null. The resolver was either uninitialized or failed to resolve address with signature {sai.Signature}.");""");
+                }
+                writer.WriteLine($"return {pointerReturnText}StaticAddressPointers.{extraPointerText}p{sai.MethodInfo.Name};");
+            }
+        }
+    }
     private static string RenderResolverInitializer(ImmutableArray<StructInfo> structInfos, string interopNamespace) {
         using IndentedTextWriter writer = new();
         // write file header
@@ -130,6 +166,10 @@ public sealed partial class InteropGenerator {
                     // member function addresses
                     foreach (MemberFunctionInfo mfi in sInfo.MemberFunctions) {
                         writer.WriteLine(GetAddToResolverString(sInfo, mfi.MethodInfo));
+                    }
+                    // static addresses
+                    foreach (StaticAddressInfo sai in sInfo.StaticAddresses) {
+                        writer.WriteLine(GetAddToResolverString(sInfo, sai.MethodInfo));
                     }
                 }
             }

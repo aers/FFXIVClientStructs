@@ -196,16 +196,11 @@ public sealed partial class Resolver {
                     if (count == length) {
                         int outLocation = location;
 
-                        byte firstByte = (byte)address.Bytes[0];
-                        if (firstByte is 0xE8 or 0xE9) {
-                            var jumpOffset = BitConverter.ToInt32(targetSpan.Slice(outLocation + 1, 4));
-                            outLocation = outLocation + 5 + jumpOffset;
-                        }
-
-                        if (address is StaticAddress staticAddress) {
-                            int accessOffset =
-                                BitConverter.ToInt32(targetSpan.Slice(outLocation + staticAddress.Offset, 4));
-                            outLocation = outLocation + staticAddress.Offset + 4 + accessOffset;
+                        if (address.RelativeFollowOffset != 0) // relative follow at offset
+                        {
+                            int relativeOffset =
+                                BitConverter.ToInt32(targetSpan.Slice(outLocation + address.RelativeFollowOffset, 4));
+                            outLocation = outLocation + address.RelativeFollowOffset + 4 + relativeOffset;
                         }
 
                         address.Value = (nuint)(_baseAddress + _textSectionOffset + outLocation);

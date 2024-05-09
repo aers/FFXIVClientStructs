@@ -1,6 +1,7 @@
 ﻿namespace InteropGenerator.Models;
 
-internal sealed record MemberFunctionInfo(
+internal sealed record StaticAddressInfo(
     MethodInfo MethodInfo,
     string Signature,
-    byte Offset);
+    byte Offset,
+    bool IsPointer);
