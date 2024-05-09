@@ -1054,6 +1054,8 @@ classes:
     instances:
       - ea: 0x1422046A8
         pointer: True
+    vtbls:
+      - ea: 0x141A6E5C8
     funcs:
       0x140932F60: ctor
       0x1409330D0: Initialize
@@ -1397,6 +1399,7 @@ classes:
     funcs:
       0x140999650: Initialize
       0x14099A180: Update
+      0x14099A560: UpdateMainCommands
       0x1409AADE0: ctor
       0x140996E40: SetUnlockLinkValue
       0x140996EE0: IsUnlockLinkUnlocked
@@ -5537,6 +5540,11 @@ classes:
       0x14055B220: SetItemLabel
       0x14055B2E0: GetItemLabel
       0x140560540: DispatchItemEvent
+  Component::GUI::ListComponentCallBackInterface:
+    vtbls:
+      - ea: 0x141A09168
+    vfuncs:
+      0: dtor
   Component::GUI::AtkComponentTreeList:
     vtbls:
       - ea: 0x141A092F8
