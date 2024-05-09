@@ -10,6 +10,8 @@ public unsafe partial struct AddonInventoryEvent {
     [FixedSizeArray<Pointer<AtkComponentRadioButton>>(5)]
     [FieldOffset(0x258)] public fixed byte Buttons[8 * 5];
 
+    [FieldOffset(0x290)] public AtkAddonControl AddonControl;
+
     [FieldOffset(0x308)] public int TabIndex;
 
     [MemberFunction("E8 ?? ?? ?? ?? EB 09 83 FF 01")]
