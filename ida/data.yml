@@ -671,7 +671,10 @@ classes:
     vtbls:
       - ea: 0x1419DF088
     vfuncs:
-      0: Dispose
+      0: dtor
+  Application::Network::WorkDefinitions::Base_TypeInfoInterface:
+    vtbls:
+      - ea: 0x141CA1F98
   Application::Network::WorkDefinitions::QuestWork:
     vtbls:
       - ea: 0x141A22AC8
@@ -3009,10 +3012,13 @@ classes:
     funcs:
       0x140086800: ctor
       0x140087000: SetHardwareCursorSize
+  Component::Shell::ShellCommands:
+    vtbls:
+      - ea: 0x141A1B1C8
   Component::Shell::ShellCommandModule:
     vtbls:
       - ea: 0x1419B38A8
-        base: Client::UI::Shell::RaptureShellCommandInterface
+        base: Client::System::Common::NonCopyable
     funcs:
       0x140099EA0: Finalize
       0x14009A920: ExecuteCommandInner
@@ -7211,6 +7217,10 @@ classes:
     vtbls:
       - ea: 0x141A376F0
         base: Client::UI::Shell::RaptureShellCommandInterface
+  Client::UI::Shell::ShellCommandRidePillion:
+    vtbls:
+      - ea: 0x141A37708
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandEcho:
     vtbls:
       - ea: 0x141A37720
@@ -7247,7 +7257,7 @@ classes:
     vtbls:
       - ea: 0x141A37800
         base: Client::UI::Shell::RaptureShellCommandInterface
-  Client::UI::Shell::ShellCommandUnknown1416EC328:
+  Client::UI::Shell::ShellCommandLinkshellIndex:
     vtbls:
       - ea: 0x141A37818
         base: Client::UI::Shell::RaptureShellCommandInterface
@@ -7365,6 +7375,10 @@ classes:
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandCommand:
     vtbls:
+      - ea: 0x141A3A310
+        base: Client::UI::Shell::RaptureShellCommandInterface
+  Client::UI::Shell::ShellCommandAgent:
+    vtbls:
       - ea: 0x141A37B18
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandQuit:
@@ -7379,11 +7393,11 @@ classes:
     vtbls:
       - ea: 0x141A37B90
         base: Component::Shell::DebugCommandInterface
-  Client::UI::Shell::ShellCommandLegacy:
+  Client::UI::Shell::ShellCommandReturn:
     vtbls:
       - ea: 0x141A3A1D8
         base: Client::UI::Shell::RaptureShellCommandInterface
-  Client::UI::Shell::ShellCommandReturn:
+  Client::UI::Shell::ShellCommandLegacy:
     vtbls:
       - ea: 0x141A3A1F0
         base: Client::UI::Shell::RaptureShellCommandInterface
@@ -7439,7 +7453,7 @@ classes:
     vtbls:
       - ea: 0x141A3A3E8
         base: Client::UI::Shell::RaptureShellCommandInterface
-  Client::UI::Shell::ShellCommandIdlingCamera:
+  Client::UI::Shell::ShellCommandIdleCamera:
     vtbls:
       - ea: 0x141A3A400
         base: Client::UI::Shell::RaptureShellCommandInterface
@@ -7455,6 +7469,10 @@ classes:
     vtbls:
       - ea: 0x141A3A448
         base: Client::UI::Shell::RaptureShellCommandInterface
+  Client::UI::Shell::ShellCommandPatchnote:
+    vtbls:
+      - ea: 0x141A3A460
+        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandHud:
     vtbls:
       - ea: 0x141A3A478
@@ -7467,7 +7485,7 @@ classes:
     vtbls:
       - ea: 0x141A3A4A8
         base: Client::UI::Shell::RaptureShellCommandInterface
-  Client::UI::Shell::ShellCommandUnk1416EE8D8:
+  Client::UI::Shell::ShellCommandConfigToggle:
     vtbls:
       - ea: 0x141A3A4C0
         base: Client::UI::Shell::RaptureShellCommandInterface
@@ -7475,11 +7493,11 @@ classes:
     vtbls:
       - ea: 0x141A3A4D8
         base: Client::UI::Shell::RaptureShellCommandInterface
-  Client::UI::Shell::ShellCommandHudReset:
+  Client::UI::Shell::ShellCommandHudClear:
     vtbls:
       - ea: 0x141A3A4F0
         base: Client::UI::Shell::RaptureShellCommandInterface
-  Client::UI::Shell::ShellCommandUiReset:
+  Client::UI::Shell::ShellCommandWidgetReset:
     vtbls:
       - ea: 0x141A3A508
         base: Client::UI::Shell::RaptureShellCommandInterface
@@ -7487,7 +7505,7 @@ classes:
     vtbls:
       - ea: 0x141A3A520
         base: Client::UI::Shell::RaptureShellCommandInterface
-  Client::UI::Shell::ShellCommandUiScale:
+  Client::UI::Shell::ShellCommandWidgetScale:
     vtbls:
       - ea: 0x141A3A538
         base: Client::UI::Shell::RaptureShellCommandInterface
@@ -7511,7 +7529,7 @@ classes:
     vtbls:
       - ea: 0x141A3A5C0
         base: Client::UI::Shell::RaptureShellCommandInterface
-  Client::UI::Shell::ShellCommandConfigToggle:
+  Client::UI::Shell::ShellCommandSoundConfig:
     vtbls:
       - ea: 0x141A3A5E0
         base: Client::UI::Shell::RaptureShellCommandInterface
