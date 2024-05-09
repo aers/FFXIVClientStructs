@@ -9,13 +9,13 @@ public unsafe struct AtkAddonControl {
     [FieldOffset(0x08)] public AtkEventListener EventListener;
     [FieldOffset(0x10)] public StdList<Pointer<ChildAddonInfo>> ChildAddons;
     [FieldOffset(0x20)] public AtkEventManager EventManager;
-    [FieldOffset(0x28)] public AtkUnitBase* Addon;
+    [FieldOffset(0x28)] public AtkUnitBase* ParentAddon;
     [FieldOffset(0x30)] public AtkStage* AtkStage;
     [FieldOffset(0x38)] public AtkCollisionNode* WindowHeaderCollisionNode;
 
     [FieldOffset(0x50)] public ChildAddonInfo* TempChildAddonInfoPtr; // used to send AtkEventType 48
 
-    [FieldOffset(0x5C)] public bool IsParentAddonLinked; // set in AtkAddonControl_Initialize, Addon != 0
+    [FieldOffset(0x5C)] public bool IsParentAddonLinked; // set in AtkAddonControl_Initialize, ParentAddon != 0
     [FieldOffset(0x5D)] public bool IsChildSetupComplete; // set in a loop in AtkAddonControl_Update, false if processing child, true if loop completed
 
     [StructLayout(LayoutKind.Explicit, Size = 0x48)]

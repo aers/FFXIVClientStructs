@@ -5157,6 +5157,8 @@ classes:
     vtbls:
       - ea: 0x141A085D0
         base: Component::Text::MacroDecoder
+    funcs:
+      0x140524370: ctor
   Component::GUI::AtkCursor:
     funcs:
       0x140510B40: Show
@@ -6110,6 +6112,8 @@ classes:
   Client::UI::Misc::InputTimerModule:
     vtbls:
       - ea: 0x141A18590
+    funcs:
+      0x1406981F0: ctor
   Client::UI::UI3DModule::MapInfo:
     vtbls:
       - ea: 0x141A18598
@@ -6303,6 +6307,7 @@ classes:
       - ea: 0x141A1F298
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
+      0x1406BE270: ctor
       0x1406BE120: ResetAll
   Client::UI::Misc::EmoteHistoryModule:
     vtbls:
@@ -6767,6 +6772,8 @@ classes:
     vtbls:
       - ea: 0x141A1ED70
         base: Client::UI::Misc::UserFileManager::UserFileEvent
+    funcs:
+      0x140694C60: ctor
   Client::UI::Misc::PronounModule:
     vtbls:
       - ea: 0x141A1EEB0

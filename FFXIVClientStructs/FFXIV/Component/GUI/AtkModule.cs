@@ -20,6 +20,7 @@ public unsafe partial struct AtkModule {
 
     [FieldOffset(0x250)] public AtkTextureResourceManager AtkTextureResourceManager;
     [FieldOffset(0x2A8)] public RaptureAtkUnitManager* RaptureAtkUnitManager;
+    [FieldOffset(0x2B0)] public AtkInputManager AtkInputManager;
 
     [FieldOffset(0x1B58)] public AtkUnitBase* IntersectingAddon;
     [FieldOffset(0x1B60)] public AtkCollisionNode* IntersectingCollisionNode;
@@ -36,6 +37,7 @@ public unsafe partial struct AtkModule {
 
     [FieldOffset(0x5D00)] public AtkFontCodeModule AtkFontCodeModule;
     [FieldOffset(0x7280)] internal StdVector<nint> CallbackHandlerFunctions;
+    [Obsolete("Wrong type. This points to UIModule+0x8 (AtkModuleEvent*)")]
     [FieldOffset(0x7298)] public UIModule* UIModulePtr;
     //[FieldOffset(0x72A0)] internal StdMap<?,?> AgentAddonMapping; // maybe?
 

@@ -6,6 +6,7 @@ using FFXIVClientStructs.FFXIV.Client.UI.Info;
 using FFXIVClientStructs.FFXIV.Client.UI.Misc;
 using FFXIVClientStructs.FFXIV.Client.UI.Shell;
 using FFXIVClientStructs.FFXIV.Common.Configuration;
+using FFXIVClientStructs.FFXIV.Component.Completion;
 using FFXIVClientStructs.FFXIV.Component.Excel;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
@@ -37,7 +38,7 @@ public unsafe partial struct UIModule {
     [FieldOffset(0x7E4)] public uint FrameCount;
     [FieldOffset(0x7E8)] internal ExcelModule* ExcelModule;
     [FieldOffset(0x7F0)] internal RaptureTextModule RaptureTextModule;
-    // [FieldOffset(0x1650)] internal CompletionModule CompletionModule;
+    [FieldOffset(0x1650)] internal CompletionModule CompletionModule;
     [FieldOffset(0x19C8)] internal RaptureLogModule RaptureLogModule;
     // [FieldOffset(0x4E50)] internal UserFileManager UserFileManager;
     [FieldOffset(0x4E70)] internal RaptureMacroModule RaptureMacroModule;
