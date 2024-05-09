@@ -21,6 +21,7 @@ public unsafe partial struct AtkStage {
     [FieldOffset(0x68)] public SoftKeyboardDeviceInterface* SoftKeyboardDevice;
     [FieldOffset(0x70)] public AtkExternalInterface* AtkExternalInterface;
     [FieldOffset(0x78)] public AtkDragDropManager DragDropManager;
+    [FieldOffset(0x140)] public AtkGroupManager AtkGroupManager;
     [FieldOffset(0x168)] public AtkTooltipManager TooltipManager;
     [FieldOffset(0x338)] public AtkCursor AtkCursor;
     [FixedSizeArray<AtkEventDispatcher>(32)]

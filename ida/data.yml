@@ -5032,6 +5032,14 @@ classes:
       0x140510420: ctor
       0x140510460: Finalize
       0x140510790: Update
+  Component::GUI::AtkGroupManager:
+    vtbls:
+      - ea: 0x141A08058
+    vfuncs:
+      0: dtor
+    funcs:
+      0x140510DD0: ctor
+      0x140510E60: Finalize
   Component::GUI::AtkTooltipManager:
     vtbls:
       - ea: 0x141A08060
