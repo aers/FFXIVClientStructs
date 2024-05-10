@@ -9,7 +9,7 @@ using static InteropGenerator.Diagnostics.DiagnosticDescriptors;
 namespace InteropGenerator.Diagnostics.Analyzers;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public class StructIsValidForGenerationAnalyzer : DiagnosticAnalyzer {
+public class GenerateInteropAttributeIsValidAnalyzer : DiagnosticAnalyzer {
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = [GenerationRequiresPartialStruct, NestedStructMustBeContainedInPartialStruct, NestedStructCannotBeContainedInClass];
 
     public override void Initialize(AnalysisContext context) {

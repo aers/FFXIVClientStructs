@@ -2,5 +2,4 @@
 
 internal sealed record MemberFunctionInfo(
     MethodInfo MethodInfo,
-    string Signature,
-    byte Offset);
+    SignatureInfo SignatureInfo);

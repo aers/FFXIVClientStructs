@@ -4,7 +4,7 @@ using Xunit;
 
 namespace InteropGenerator.Tests.Analyzer;
 
-public class MethodAnalyzerTests {
+public class MemberFunctionAttributeIsValidAnalyzerTests {
     [Fact]
     public async Task TargetMethodMustBePartial_Warn() {
         const string code = """
@@ -15,7 +15,7 @@ public class MethodAnalyzerTests {
                                 public int TestFunction() { return 0; }|}
                             }
                             """;
-        await AnalyzerVerifier<MethodIsValidForGenerationAnalyzer>.VerifyAnalyzerAsync(code);
+        await AnalyzerVerifier<MemberFunctionAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
     }
     
     [Fact]
@@ -30,7 +30,7 @@ public class MethodAnalyzerTests {
                                 public partial int TestFunction() => 0;
                             }
                             """;
-        await AnalyzerVerifier<MethodIsValidForGenerationAnalyzer>.VerifyAnalyzerAsync(code);
+        await AnalyzerVerifier<MemberFunctionAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
     }
     
     [Fact]
@@ -45,7 +45,7 @@ public class MethodAnalyzerTests {
                                 public partial void TestFunction({|CSIG0102:List<string> invalidParam|}) { }
                             }
                             """;
-        await AnalyzerVerifier<MethodIsValidForGenerationAnalyzer>.VerifyAnalyzerAsync(code);
+        await AnalyzerVerifier<MemberFunctionAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
     }
     
     [Fact]
@@ -60,7 +60,7 @@ public class MethodAnalyzerTests {
                                 public partial void TestFunction(int validParam, void* pointerParam) { }
                             }
                             """;
-        await AnalyzerVerifier<MethodIsValidForGenerationAnalyzer>.VerifyAnalyzerAsync(code);
+        await AnalyzerVerifier<MemberFunctionAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
     }
     
     [Fact]
@@ -75,7 +75,7 @@ public class MethodAnalyzerTests {
                                 {|CSIG0103:public partial string TestFunction() { return ""; }|}
                             }
                             """;
-        await AnalyzerVerifier<MethodIsValidForGenerationAnalyzer>.VerifyAnalyzerAsync(code);
+        await AnalyzerVerifier<MemberFunctionAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
     }
     
     [Fact]
@@ -90,6 +90,6 @@ public class MethodAnalyzerTests {
                                 public partial bool TestFunction() { return true; }
                             }
                             """;
-        await AnalyzerVerifier<MethodIsValidForGenerationAnalyzer>.VerifyAnalyzerAsync(code);
+        await AnalyzerVerifier<MemberFunctionAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
     }
 }

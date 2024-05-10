@@ -8,35 +8,34 @@ using static InteropGenerator.Diagnostics.DiagnosticDescriptors;
 
 namespace InteropGenerator.Diagnostics.Analyzers;
 
-[DiagnosticAnalyzer(LanguageNames.CSharp)]
-public class MethodIsValidForGenerationAnalyzer : DiagnosticAnalyzer {
+public abstract class MethodAttributeIsValidAnalyzerBase(string attributeFullyQualifiedMetadataName,
+    ImmutableArray<DiagnosticDescriptor> descriptors) : DiagnosticAnalyzer {
 
-    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = [GenerationRequiresPartialMethod, MethodParameterMustBeUnmanaged, MethodReturnMustBeUnmanaged];
+    public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = 
+        [GenerationRequiresPartialMethod, MethodParameterMustBeUnmanaged, MethodReturnMustBeUnmanaged, ..descriptors];
 
-    public override void Initialize(AnalysisContext context) {
+    public sealed override void Initialize(AnalysisContext context) {
         context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
         context.EnableConcurrentExecution();
 
-        context.RegisterCompilationStartAction(static context => {
-            // get the attribute symbols
-            if (context.Compilation.GetTypeByMetadataName(AttributeNames.MemberFunctionAttribute) is not { } memberFunctionAttribute ||
-                context.Compilation.GetTypeByMetadataName(AttributeNames.VirtualFunctionAttribute) is not { } virtualFunctionAttribute)
-                return;
+        context.RegisterCompilationStartAction(compilationStartAnalysisContext => {
+            // get the attribute symbol
+            if (compilationStartAnalysisContext.Compilation.GetTypeByMetadataName(attributeFullyQualifiedMetadataName) is not { } attributeSymbol)
+              return;
 
-            context.RegisterSymbolAction(context => {
-                    if (context.Symbol is not IMethodSymbol { } methodSymbol)
+            compilationStartAnalysisContext.RegisterSymbolAction(symbolContext => {
+                    if (symbolContext.Symbol is not IMethodSymbol { } methodSymbol)
                         return;
 
-                    if (!methodSymbol.HasAttributeWithType(memberFunctionAttribute) &&
-                        !methodSymbol.HasAttributeWithType(virtualFunctionAttribute))
+                    if (!methodSymbol.HasAttributeWithType(attributeSymbol))
                         return;
 
                     // validate method is partial
-                    if (!methodSymbol.TryGetSyntaxNode(context.CancellationToken, out MethodDeclarationSyntax? methodSyntax))
+                    if (!methodSymbol.TryGetSyntaxNode(symbolContext.CancellationToken, out MethodDeclarationSyntax? methodSyntax))
                         return;
 
                     if (!methodSyntax.HasModifier(SyntaxKind.PartialKeyword)) {
-                        context.ReportDiagnostic(Diagnostic.Create(
+                        symbolContext.ReportDiagnostic(Diagnostic.Create(
                             GenerationRequiresPartialMethod,
                             methodSyntax.GetLocation(),
                             methodSymbol.Name));
@@ -46,7 +45,7 @@ public class MethodIsValidForGenerationAnalyzer : DiagnosticAnalyzer {
                     // validate parameters are unmanaged types
                     foreach (IParameterSymbol paramSymbol in methodSymbol.Parameters) {
                         if (!paramSymbol.Type.IsUnmanagedType) {
-                            context.ReportDiagnostic(Diagnostic.Create(
+                            symbolContext.ReportDiagnostic(Diagnostic.Create(
                                 MethodParameterMustBeUnmanaged,
                                 paramSymbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax().GetLocation(),
                                 paramSymbol.Name,
@@ -56,15 +55,20 @@ public class MethodIsValidForGenerationAnalyzer : DiagnosticAnalyzer {
                     }
 
                     // validate return value is unmanaged type
-                    if (methodSymbol is { ReturnsVoid: false, ReturnType.IsUnmanagedType: false }) {
-                        context.ReportDiagnostic(Diagnostic.Create(
+                    if (methodSymbol is { ReturnsVoid: false, ReturnType.IsUnmanagedType: false } 
+                        or { ReturnType: IPointerTypeSymbol { PointedAtType.IsUnmanagedType: false }}) {
+                        symbolContext.ReportDiagnostic(Diagnostic.Create(
                             MethodReturnMustBeUnmanaged,
                             methodSyntax.GetLocation(),
                             methodSymbol.Name,
                             methodSymbol.ReturnType.Name));
                     }
+                    
+                    ValidateSpecific(symbolContext, methodSymbol, methodSyntax);
                 },
                 SymbolKind.Method);
         });
     }
+
+    protected abstract void ValidateSpecific(SymbolAnalysisContext context, IMethodSymbol methodSymbol, MethodDeclarationSyntax methodSyntax);
 }

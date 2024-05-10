@@ -2,6 +2,5 @@
 
 internal sealed record StaticAddressInfo(
     MethodInfo MethodInfo,
-    string Signature,
-    byte Offset,
+    SignatureInfo SignatureInfo,
     bool IsPointer);

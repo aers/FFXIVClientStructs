@@ -4,7 +4,7 @@ using Xunit;
 
 namespace InteropGenerator.Tests.Analyzer;
 
-public class GenerateInteropAttributeTests {
+public class GenerateInteropAttributeIsValidAnalyzerTests {
     [Fact]
     public async Task TargetStructIsNotPartial_Warn() {
         const string code = """
@@ -13,7 +13,7 @@ public class GenerateInteropAttributeTests {
                             {
                             }
                             """;
-        await AnalyzerVerifier<StructIsValidForGenerationAnalyzer>.VerifyAnalyzerAsync(code);
+        await AnalyzerVerifier<GenerateInteropAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
     }
     
     [Fact]
@@ -24,7 +24,7 @@ public class GenerateInteropAttributeTests {
                             {
                             }
                             """;
-        await AnalyzerVerifier<StructIsValidForGenerationAnalyzer>.VerifyAnalyzerAsync(code);
+        await AnalyzerVerifier<GenerateInteropAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
     }
 
     [Fact]
@@ -38,7 +38,7 @@ public class GenerateInteropAttributeTests {
                                 }
                             }
                             """;
-        await AnalyzerVerifier<StructIsValidForGenerationAnalyzer>.VerifyAnalyzerAsync(code);
+        await AnalyzerVerifier<GenerateInteropAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
     }
     
     [Fact]
@@ -52,7 +52,7 @@ public class GenerateInteropAttributeTests {
                                 }
                             }
                             """;
-        await AnalyzerVerifier<StructIsValidForGenerationAnalyzer>.VerifyAnalyzerAsync(code);
+        await AnalyzerVerifier<GenerateInteropAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
     }
 
     [Fact]
@@ -66,7 +66,7 @@ public class GenerateInteropAttributeTests {
                                 }
                             }
                             """;
-        await AnalyzerVerifier<StructIsValidForGenerationAnalyzer>.VerifyAnalyzerAsync(code);
+        await AnalyzerVerifier<GenerateInteropAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
     }
     
     [Fact]
@@ -79,6 +79,6 @@ public class GenerateInteropAttributeTests {
                                 }
                             }
                             """;
-        await AnalyzerVerifier<StructIsValidForGenerationAnalyzer>.VerifyAnalyzerAsync(code);
+        await AnalyzerVerifier<GenerateInteropAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
     }
 }

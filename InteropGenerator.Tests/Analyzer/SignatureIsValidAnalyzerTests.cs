@@ -4,15 +4,57 @@ using Xunit;
 
 namespace InteropGenerator.Tests.Analyzer;
 
-public class SignatureAnalyzerTests {
+public class SignatureIsValidAnalyzerTests {
     [Fact]
-    public async Task SignatureIsValid_NoWarn() {
+    public async Task SignatureIsValid_MemberFunction_NoWarn() {
         const string code = """
                             [GenerateInterop]
                             public partial struct TestStruct
                             {
                                 [MemberFunction("AB CD EF ?? 01 23 45 67 89")]
                                 public int TestFunction() { return 0; }
+                            }
+                            """;
+
+        await AnalyzerVerifier<SignatureIsValidAnalyzer>.VerifyAnalyzerAsync(code);
+    }
+    
+    [Fact]
+    public async Task SignatureIsValid_StaticAddress_NoWarn() {
+        const string code = """
+                            [GenerateInterop]
+                            public unsafe partial struct TestStruct
+                            {
+                                [StaticAddress("AB CD EF ?? 01 23 45 67 89", 0)]
+                                public static TestStruct* Instance() { return null; }
+                            }
+                            """;
+
+        await AnalyzerVerifier<SignatureIsValidAnalyzer>.VerifyAnalyzerAsync(code);
+    }
+    
+    [Fact]
+    public async Task SignatureIsInvalid_MemberFunction_Warn() {
+        const string code = """
+                            [GenerateInterop]
+                            public partial struct TestStruct
+                            {
+                                [{|CSIG0201:MemberFunction("ab cd ef")|}]
+                                public int TestFunction() { return 0; }
+                            }
+                            """;
+
+        await AnalyzerVerifier<SignatureIsValidAnalyzer>.VerifyAnalyzerAsync(code);
+    }
+    
+    [Fact]
+    public async Task SignatureIsInValid_StaticAddress_Warn() {
+        const string code = """
+                            [GenerateInterop]
+                            public unsafe partial struct TestStruct
+                            {
+                                [{|CSIG0201:StaticAddress("ab cd ef", 0)|}]
+                                public static TestStruct* Instance() { return null; }
                             }
                             """;
 

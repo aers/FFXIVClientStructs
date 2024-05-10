@@ -49,30 +49,18 @@ public sealed partial class InteropGenerator {
         writer.WriteLine("public static class Addresses");
         using (writer.WriteBlock()) {
             foreach(MemberFunctionInfo mfi in structInfo.MemberFunctions)
-                writer.WriteLine(GetAddressString(structInfo, mfi.MethodInfo, mfi.Signature, mfi.Offset));
+                writer.WriteLine(GetAddressString(structInfo, mfi.MethodInfo, mfi.SignatureInfo));
             foreach(StaticAddressInfo sai in structInfo.StaticAddresses)
-                writer.WriteLine(GetAddressString(structInfo, sai.MethodInfo, sai.Signature, sai.Offset));
+                writer.WriteLine(GetAddressString(structInfo, sai.MethodInfo, sai.SignatureInfo));
         }
     }
 
-    private static string GetAddressString(StructInfo structInfo, MethodInfo methodInfo, string signature, byte offset) {
-        // create padded signature
-        int paddingNeeded = 8 - (signature.Length / 3 + 1) % 8;
-        if (paddingNeeded != 0) {
-            Span<char> result = new Span<char>(new char[signature.Length + paddingNeeded * 3]);
-            signature.AsSpan().CopyTo(result);
-
-            ReadOnlySpan<char> repeated = " ??".AsSpan();
-
-            for (int repeatIndex = 0; repeatIndex < paddingNeeded; repeatIndex++) {
-                repeated.CopyTo(result.Slice(signature.Length + repeatIndex * repeated.Length));
-            }
-
-            signature = result.ToString();
-        }
+    private static string GetAddressString(StructInfo structInfo, MethodInfo methodInfo, SignatureInfo signatureInfo) {
+        string paddedSignature = signatureInfo.GetPaddedSignature();
+        int adjustedOffset = signatureInfo.GetRelCallAndJumpAdjustedOffset();
         
         // get signature as ulong array
-        IEnumerable<string> groupedSig = signature.Replace("??", "00").Split()
+        IEnumerable<string> groupedSig = paddedSignature.Replace("??", "00").Split()
             .Select((x, i) => new { Index = i, Value = x })
             .GroupBy(x => x.Index / 8 * 3)
             .Select(x => x.Select(v => v.Value))
@@ -81,7 +69,7 @@ public sealed partial class InteropGenerator {
         string ulongArraySignature = "new ulong[] {" + string.Join(", ", groupedSig) + "}";
         
         // get signature mask as ulong array
-        IEnumerable<string> groupedSigMask = signature.Split()
+        IEnumerable<string> groupedSigMask = paddedSignature.Split()
             .Select(s => s == "??" ? "00" : "FF")
             .Select((x, i) => new { Index = i, Value = x })
             .GroupBy(x => x.Index / 8 * 3)
@@ -89,14 +77,8 @@ public sealed partial class InteropGenerator {
             .Select(x => "0x" + string.Join(string.Empty, x.Reverse()));
 
         string ulongArrayMask = "new ulong[] {" + string.Join(", ", groupedSigMask) + "}";
-        
-        // handle E8 and E9 jumps automatically
-        if (offset == 0 &&
-            signature.StartsWith("E8") ||
-            signature.StartsWith("E9"))
-            offset = 1;
 
-        return $"""public static readonly Address {methodInfo.Name} = new Address("{structInfo.FullyQualifiedMetadataName}.{methodInfo.Name}", "{signature}", {offset}, {ulongArraySignature}, {ulongArrayMask}, 0);""";
+        return $"""public static readonly Address {methodInfo.Name} = new Address("{structInfo.FullyQualifiedMetadataName}.{methodInfo.Name}", "{paddedSignature}", {adjustedOffset}, {ulongArraySignature}, {ulongArrayMask}, 0);""";
     }
 
     private static void RenderMemberFunctions(StructInfo structInfo, IndentedTextWriter writer) {
@@ -115,7 +97,7 @@ public sealed partial class InteropGenerator {
             using (writer.WriteBlock()) {
                 writer.WriteLine($"if (MemberFunctionPointers.{mfi.MethodInfo.Name} is null)");
                 using (writer.WriteBlock()) {
-                    writer.WriteLine($"""throw new InvalidOperationException("Function pointer for {structInfo.Name}.{mfi.MethodInfo.Name} is null. The resolver was either uninitialized or failed to resolve address with signature {mfi.Signature}.");""");
+                    writer.WriteLine($"""throw new InvalidOperationException("Function pointer for {structInfo.Name}.{mfi.MethodInfo.Name} is null. The resolver was either uninitialized or failed to resolve address with signature {mfi.SignatureInfo.Signature}.");""");
                 }
                 if (mfi.MethodInfo.IsStatic) {
                     writer.WriteLine($"{mfi.MethodInfo.GetReturnString()}MemberFunctionPointers.{mfi.MethodInfo.Name}({mfi.MethodInfo.GetParameterNamesString()});");
@@ -147,7 +129,7 @@ public sealed partial class InteropGenerator {
             using (writer.WriteBlock()) {
                 writer.WriteLine($"if (StaticAddressPointers.{extraPointerText}p{sai.MethodInfo.Name} is null)");
                 using (writer.WriteBlock()) {
-                    writer.WriteLine($"""throw new InvalidOperationException("Static address pointer for {structInfo.Name}.{sai.MethodInfo.Name} is null. The resolver was either uninitialized or failed to resolve address with signature {sai.Signature}.");""");
+                    writer.WriteLine($"""throw new InvalidOperationException("Static address pointer for {structInfo.Name}.{sai.MethodInfo.Name} is null. The resolver was either uninitialized or failed to resolve address with signature {sai.SignatureInfo.Signature}.");""");
                 }
                 writer.WriteLine($"return {pointerReturnText}StaticAddressPointers.{extraPointerText}p{sai.MethodInfo.Name};");
             }

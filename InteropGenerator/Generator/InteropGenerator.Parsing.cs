@@ -50,8 +50,7 @@ public sealed partial class InteropGenerator {
 
                 MemberFunctionInfo mfi = new MemberFunctionInfo(
                     methodInfo,
-                    signature,
-                    offset.Value);
+                    new SignatureInfo(signature, offset.Value));
 
                 memberFunctionsBuilder.Add(mfi);
             }
@@ -67,8 +66,7 @@ public sealed partial class InteropGenerator {
 
                 StaticAddressInfo sai = new StaticAddressInfo(
                     methodInfo,
-                    signature,
-                    offset.Value,
+                    new SignatureInfo(signature, offset.Value),
                     isPointer.Value);
 
                 staticAdddressesBuilder.Add(sai);

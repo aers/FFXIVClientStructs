@@ -63,6 +63,36 @@ internal static class DiagnosticDescriptors {
         true,
         "A method marked for generation contains a return value that is of an invalid type."
     );
+    
+    public static readonly DiagnosticDescriptor StaticAddressMethodMustNotHaveParameters = new(
+        "CSIG0104",
+        "Static address method generation target is not allowed to have parameters",
+        "Method {1} has parameters, which is not allowed for a static address method stub",
+        "InteropGenerator.Method",
+        DiagnosticSeverity.Error,
+        true,
+        "A method marked for static address generation is not allowed to have parameters."
+    );
+    
+    public static readonly DiagnosticDescriptor StaticAddressMethodMustBeStatic = new(
+        "CSIG0105",
+        "Static address method generation target must be static",
+        "Method {1} must be static",
+        "InteropGenerator.Method",
+        DiagnosticSeverity.Error,
+        true,
+        "A method marked for static address generation must be static."
+    );
+    
+    public static readonly DiagnosticDescriptor StaticAddressMethodReturnMustBePointer = new(
+        "CSIG0106",
+        "Static address method generation target has a return value that is not a pointer",
+        "The return value of method {0} is type {1}, which is not a pointer type",
+        "InteropGenerator.Method",
+        DiagnosticSeverity.Error,
+        true,
+        "A method marked for static address generation contains a return value that is of an invalid type."
+    );
 
     public static readonly DiagnosticDescriptor SignatureContainsInvalidCharacters = new(
         "CSIG0201",

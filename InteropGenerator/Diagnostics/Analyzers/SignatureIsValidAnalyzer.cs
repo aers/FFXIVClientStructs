@@ -17,14 +17,17 @@ public class SignatureIsValidAnalyzer : DiagnosticAnalyzer {
 
         context.RegisterCompilationStartAction(static context => {
             // get the attribute symbols
-            if (context.Compilation.GetTypeByMetadataName(AttributeNames.MemberFunctionAttribute) is not { } memberFunctionAttribute)
+            if (context.Compilation.GetTypeByMetadataName(AttributeNames.MemberFunctionAttribute) is not { } memberFunctionAttribute||
+                context.Compilation.GetTypeByMetadataName(AttributeNames.StaticAddressAttribute) is not { } staticAddressAttribute)
                 return;
             
             context.RegisterSymbolAction(context => {
                     if (context.Symbol is not IMethodSymbol methodSymbol)
                         return;
 
-                    if (!methodSymbol.TryGetAttributeWithType(memberFunctionAttribute, out AttributeData? attributeData))
+                    // check for signature attributes
+                    if (!methodSymbol.TryGetAttributeWithType(memberFunctionAttribute, out AttributeData? attributeData) &&
+                        !methodSymbol.TryGetAttributeWithType(staticAddressAttribute, out attributeData))
                         return;
 
                     if (!attributeData.TryGetConstructorArgument(0, out string? signature))
