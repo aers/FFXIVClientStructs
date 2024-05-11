@@ -545,6 +545,8 @@ classes:
       2: ApplyInput
       4: GetInputMaxLength
   Client::System::Input::TextServiceInterface:
+    vfuncs:
+      0: dtor
   Client::System::Input::TextServiceInterface::TextServiceEvent:
     vtbls:
       - ea: 0x141A08118
@@ -5572,14 +5574,18 @@ classes:
       10: GetStringArrayData
       11: GetExtendArrayData
       17: SetHandlerFunction
+      18: SetAtkModuleEvent
       21: CloseAddon
       26: IsAddonReady
+      28: ClearFocus
+      36: SetAtkHistory
       39: SetUIVisibility
       58: Update
       60: IsUISceneGameMain
       61: GetColorThemeTypeForUIScene
       63: OpenMapWithMapLink
     funcs:
+      0x140569260: GetAddonIdByName
       0x14056A730: ctor
       0x14056AF40: Finalize
       0x14056B1A0: Initialize
@@ -6502,6 +6508,8 @@ classes:
     vtbls:
       - ea: 0x141A1A7C0
         base: Component::Text::MacroDecoder
+    funcs:
+      0x140643D60: ctor
   Component::Text::ReferencedUtf8String:
     funcs:
       0x1403274A0: Create
