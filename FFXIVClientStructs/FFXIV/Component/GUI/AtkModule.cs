@@ -17,7 +17,7 @@ public unsafe partial struct AtkModule {
 
     [FieldOffset(0x128)] public AtkStage* AtkStage;
     [FieldOffset(0x130)] internal nint Resources;
-
+    [FieldOffset(0x1B8)] public AtkFontManager AtkFontManager;
     [FieldOffset(0x250)] public AtkTextureResourceManager AtkTextureResourceManager;
     [FieldOffset(0x2A8)] public RaptureAtkUnitManager* RaptureAtkUnitManager;
     [FieldOffset(0x2B0)] public AtkInputManager AtkInputManager;
