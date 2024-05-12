@@ -1,6 +1,5 @@
 ﻿using InteropGenerator.Extensions;
 using InteropGenerator.Helpers;
-using Microsoft.CodeAnalysis;
 
 namespace InteropGenerator.Models;
 

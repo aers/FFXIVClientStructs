@@ -3,8 +3,9 @@
 namespace InteropGenerator.Extensions;
 
 /// <summary>
-/// Extension methods for <see cref="IParameterSymbol"/> types.
+///     Extension methods for <see cref="IParameterSymbol" /> types.
 /// </summary>
+// ReSharper disable once InconsistentNaming
 internal static class IParameterSymbolExtensions {
     public static string? GetDefaultValueString(this IParameterSymbol symbol) {
         if (!symbol.HasExplicitDefaultValue)
@@ -14,7 +15,7 @@ internal static class IParameterSymbolExtensions {
 
         if (defaultValue is null)
             return null;
-        
+
         if (defaultValue is bool boolValue)
             return boolValue ? "true" : "false";
 

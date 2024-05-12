@@ -12,9 +12,9 @@ public sealed partial class InteropGenerator {
 
     private static StructInfo ParseStructInfo(INamedTypeSymbol structSymbol, CancellationToken token) {
         // collection info on struct methods
-        ParseMethods(structSymbol, token, out EquatableArray<MemberFunctionInfo> memberFunctions, out EquatableArray<StaticAddressInfo> staticAddresses);
+        ParseMethods(structSymbol, token, out EquatableArray<MemberFunctionInfo> memberFunctions, out EquatableArray<VirtualFunctionInfo> virtualFunctions, out EquatableArray<StaticAddressInfo> staticAddresses);
         token.ThrowIfCancellationRequested();
-        
+
         // get containing types; our analyzer validates structs are contained in a proper hierachy so not needed here
         using ImmutableArrayBuilder<string> hierarchy = new();
 
@@ -23,7 +23,7 @@ public sealed partial class InteropGenerator {
              parent = parent.ContainingType) {
             hierarchy.Add(parent.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat));
         }
-           
+
         // collect all info
         return new StructInfo(
             structSymbol.GetFullyQualifiedMetadataName(),
@@ -31,14 +31,20 @@ public sealed partial class InteropGenerator {
                 new SymbolDisplayFormat(typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces)),
             hierarchy.ToImmutable(),
             memberFunctions,
+            virtualFunctions,
             staticAddresses);
     }
 
-    private static void ParseMethods(INamedTypeSymbol structSymbol, CancellationToken token, out EquatableArray<MemberFunctionInfo> memberFunctions, out EquatableArray<StaticAddressInfo> staticAddresses) {
+    private static void ParseMethods(INamedTypeSymbol structSymbol, CancellationToken token,
+        out EquatableArray<MemberFunctionInfo> memberFunctions,
+        out EquatableArray<VirtualFunctionInfo> virtualFunctions,
+        out EquatableArray<StaticAddressInfo> staticAddresses) {
         using ImmutableArrayBuilder<MemberFunctionInfo> memberFunctionsBuilder = new();
+        using ImmutableArrayBuilder<VirtualFunctionInfo> virtualFunctionBuilder = new();
         using ImmutableArrayBuilder<StaticAddressInfo> staticAdddressesBuilder = new();
 
         foreach (IMethodSymbol methodSymbol in structSymbol.GetMembers().OfType<IMethodSymbol>()) {
+            // check for one of the method generation attributes
             if (methodSymbol.TryGetAttributeWithFullyQualifiedMetadataName(AttributeNames.MemberFunctionAttribute, out AttributeData? mfAttribute)) {
                 if (mfAttribute.ConstructorArguments.Length != 2 ||
                     !mfAttribute.TryGetConstructorArgument(0, out string? signature) ||
@@ -48,33 +54,46 @@ public sealed partial class InteropGenerator {
                 if (!TryParseMethod(methodSymbol, token, out MethodInfo? methodInfo))
                     continue;
 
-                MemberFunctionInfo mfi = new MemberFunctionInfo(
+                var mfi = new MemberFunctionInfo(
                     methodInfo,
                     new SignatureInfo(signature, offset.Value));
 
                 memberFunctionsBuilder.Add(mfi);
-            }
-            else if (methodSymbol.TryGetAttributeWithFullyQualifiedMetadataName(AttributeNames.StaticAddressAttribute, out AttributeData? saAttribute)) {
+            } else if (methodSymbol.TryGetAttributeWithFullyQualifiedMetadataName(AttributeNames.VirtualFunctionAttribute, out AttributeData? vfAttribute)) {
+                if (vfAttribute.ConstructorArguments.Length != 1 ||
+                    !vfAttribute.TryGetConstructorArgument(0, out uint? index))
+                    continue; // ignore malformed attribute
+
+                if (!TryParseMethod(methodSymbol, token, out MethodInfo? methodInfo))
+                    continue;
+
+                var vfi = new VirtualFunctionInfo(
+                    methodInfo,
+                    index.Value);
+
+                virtualFunctionBuilder.Add(vfi);
+            } else if (methodSymbol.TryGetAttributeWithFullyQualifiedMetadataName(AttributeNames.StaticAddressAttribute, out AttributeData? saAttribute)) {
                 if (saAttribute.ConstructorArguments.Length != 3 ||
                     !saAttribute.TryGetConstructorArgument(0, out string? signature) ||
                     !saAttribute.TryGetConstructorArgument(1, out byte? offset) ||
                     !saAttribute.TryGetConstructorArgument(2, out bool? isPointer))
                     continue; // ignore malformed attribute
-                
+
                 if (!TryParseMethod(methodSymbol, token, out MethodInfo? methodInfo))
                     continue;
 
-                StaticAddressInfo sai = new StaticAddressInfo(
+                var sai = new StaticAddressInfo(
                     methodInfo,
                     new SignatureInfo(signature, offset.Value),
                     isPointer.Value);
 
                 staticAdddressesBuilder.Add(sai);
             }
-            
+
             token.ThrowIfCancellationRequested();
         }
         memberFunctions = memberFunctionsBuilder.ToImmutable();
+        virtualFunctions = virtualFunctionBuilder.ToImmutable();
         staticAddresses = staticAdddressesBuilder.ToImmutable();
     }
 
@@ -96,11 +115,9 @@ public sealed partial class InteropGenerator {
         return true;
     }
 
-    private static ParameterInfo ParseParameter(IParameterSymbol parameterSymbol) {
-        return new ParameterInfo(
-            parameterSymbol.Name,
-            parameterSymbol.Type.GetFullyQualifiedName(),
-            parameterSymbol.GetDefaultValueString(),
-            parameterSymbol.RefKind);
-    }
+    private static ParameterInfo ParseParameter(IParameterSymbol parameterSymbol) => new(
+        parameterSymbol.Name,
+        parameterSymbol.Type.GetFullyQualifiedName(),
+        parameterSymbol.GetDefaultValueString(),
+        parameterSymbol.RefKind);
 }

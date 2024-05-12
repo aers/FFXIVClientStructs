@@ -8,7 +8,7 @@ namespace InteropGenerator.Diagnostics.Analyzers;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public class SignatureIsValidAnalyzer : DiagnosticAnalyzer {
-    
+
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = [SignatureContainsInvalidCharacters, SignatureFormatInvalid];
 
     public override void Initialize(AnalysisContext context) {
@@ -17,10 +17,10 @@ public class SignatureIsValidAnalyzer : DiagnosticAnalyzer {
 
         context.RegisterCompilationStartAction(static context => {
             // get the attribute symbols
-            if (context.Compilation.GetTypeByMetadataName(AttributeNames.MemberFunctionAttribute) is not { } memberFunctionAttribute||
+            if (context.Compilation.GetTypeByMetadataName(AttributeNames.MemberFunctionAttribute) is not { } memberFunctionAttribute ||
                 context.Compilation.GetTypeByMetadataName(AttributeNames.StaticAddressAttribute) is not { } staticAddressAttribute)
                 return;
-            
+
             context.RegisterSymbolAction(context => {
                     if (context.Symbol is not IMethodSymbol methodSymbol)
                         return;
@@ -32,8 +32,8 @@ public class SignatureIsValidAnalyzer : DiagnosticAnalyzer {
 
                     if (!attributeData.TryGetConstructorArgument(0, out string? signature))
                         return;
-                    
-                    if (signature == string.Empty || 
+
+                    if (signature == string.Empty ||
                         signature[0] == ' ' ||
                         signature[^1] == ' ' ||
                         signature.Split(' ').All(subString => subString.Length != 2)) {
@@ -42,7 +42,7 @@ public class SignatureIsValidAnalyzer : DiagnosticAnalyzer {
                             attributeData.GetLocation(),
                             signature));
                     }
-                        
+
                     if (ContainsInvalidCharacters(signature)) {
                         context.ReportDiagnostic(Diagnostic.Create(
                             SignatureContainsInvalidCharacters,

@@ -1,5 +1,4 @@
 ﻿using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace InteropGenerator.Diagnostics;
 
@@ -33,7 +32,7 @@ internal static class DiagnosticDescriptors {
         true,
         "A struct was marked with the GenerateInterop attribute but is contained in a class."
     );
-    
+
     public static readonly DiagnosticDescriptor GenerationRequiresPartialMethod = new(
         "CSIG0101",
         "Method generation target is not partial",
@@ -53,7 +52,7 @@ internal static class DiagnosticDescriptors {
         true,
         "A method marked for generation contains a parameter that is of an invalid type."
     );
-    
+
     public static readonly DiagnosticDescriptor MethodReturnMustBeUnmanaged = new(
         "CSIG0103",
         "Method generation target has a return value that is not unmanaged",
@@ -63,7 +62,7 @@ internal static class DiagnosticDescriptors {
         true,
         "A method marked for generation contains a return value that is of an invalid type."
     );
-    
+
     public static readonly DiagnosticDescriptor StaticAddressMethodMustNotHaveParameters = new(
         "CSIG0104",
         "Static address method generation target is not allowed to have parameters",
@@ -73,7 +72,7 @@ internal static class DiagnosticDescriptors {
         true,
         "A method marked for static address generation is not allowed to have parameters."
     );
-    
+
     public static readonly DiagnosticDescriptor StaticAddressMethodMustBeStatic = new(
         "CSIG0105",
         "Static address method generation target must be static",
@@ -83,7 +82,7 @@ internal static class DiagnosticDescriptors {
         true,
         "A method marked for static address generation must be static."
     );
-    
+
     public static readonly DiagnosticDescriptor StaticAddressMethodReturnMustBePointer = new(
         "CSIG0106",
         "Static address method generation target has a return value that is not a pointer",
@@ -103,7 +102,7 @@ internal static class DiagnosticDescriptors {
         true,
         "A signature contains invalid characters (valid characters are A-F, 0-9, ?, and spaces)."
     );
-    
+
     public static readonly DiagnosticDescriptor SignatureFormatInvalid = new(
         "CSIG0202",
         "Signature format is invalid",

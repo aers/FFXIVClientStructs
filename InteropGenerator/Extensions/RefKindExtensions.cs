@@ -1,5 +1,4 @@
-﻿using System.Linq.Expressions;
-using Microsoft.CodeAnalysis;
+﻿using Microsoft.CodeAnalysis;
 
 namespace InteropGenerator.Extensions;
 
