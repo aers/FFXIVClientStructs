@@ -7,6 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [StructLayout(LayoutKind.Explicit, Size = 0xF00)]
 public unsafe partial struct AddonRaidFinder {
     [FieldOffset(0x00)] public AtkUnitBase AtkUnitBase;
+    [FieldOffset(0x220)] public AtkAddonControl AddonControl;
 
     [FieldOffset(0x288)] public AtkComponentList* DutyList;
     [FieldOffset(0x290)] public AtkComponentNode* CategoryDescriptionComponent;

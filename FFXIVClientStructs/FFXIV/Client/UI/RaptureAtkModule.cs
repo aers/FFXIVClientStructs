@@ -35,6 +35,7 @@ public unsafe partial struct RaptureAtkModule {
     [FieldOffset(0x10E10)] public UIModule* UIModulePtr;
     [FieldOffset(0x10E18)] public RaptureLogModule* RaptureLogModulePtr;
     [FieldOffset(0x10E20)] public AgentModule AgentModule;
+    [FieldOffset(0x11C18)] public RaptureHotbarModule* RaptureHotbarModulePtr;
     [FieldOffset(0x11C20)] public RaptureAtkUnitManager RaptureAtkUnitManager;
     [FieldOffset(0x1B938)] public RaptureAtkColorDataManager RaptureAtkColorDataManager;
 

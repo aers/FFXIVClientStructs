@@ -7,6 +7,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 public partial struct AddonInventoryRetainerLarge {
     [FieldOffset(0)] public AtkUnitBase AtkUnitBase;
 
+    [FieldOffset(0x258)] public AtkAddonControl AddonControl;
+
     [FieldOffset(0x2F0)] public int TabIndex;
 
     [MemberFunction("E9 ?? ?? ?? ?? 33 D2 E8 ?? ?? ?? ?? 48 83 C4 48")]

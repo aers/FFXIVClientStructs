@@ -70,7 +70,7 @@ public unsafe partial struct PlayerState {
     // Size: (OrnamentSheet.RowCount + 7) >> 3
     /// <remarks> Use <see cref="IsOrnamentUnlocked"/> </remarks>
     [FieldOffset(0x300)] public fixed byte UnlockedOrnamentsBitmask[(41 + 7) >> 3];
-    [FieldOffset(0x306)] public byte NumOwnedMounts;
+    [FieldOffset(0x306)] public byte NumOwnedMounts; // TODO: change to ushort (see "E9 ?? ?? ?? ?? 8B CA 83 E2 07"+0x3E3)
 
     // Ref: "48 8D 0D ?? ?? ?? ?? 41 0F B6 0C 08 41 B0 01 84 D1 0F 95 C1 24 01 02 C0 0A C8 41 0F B6 C4"
     // Size: (FishParameterSheet.Count(row => row.IsInLog) + 7) >> 3

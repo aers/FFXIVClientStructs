@@ -1,6 +1,6 @@
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
-// Component::GUI::AtkEventListenerUnk1
+[Obsolete("Replaced with AtkAddonControl")]
 [StructLayout(LayoutKind.Explicit, Size = 0x60)]
 public unsafe struct AtkEventListenerUnk1 {
     [FieldOffset(0x0)] public void* vtbl;

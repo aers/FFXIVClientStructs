@@ -545,6 +545,8 @@ classes:
       2: ApplyInput
       4: GetInputMaxLength
   Client::System::Input::TextServiceInterface:
+    vfuncs:
+      0: dtor
   Client::System::Input::TextServiceInterface::TextServiceEvent:
     vtbls:
       - ea: 0x141A08118
@@ -1054,6 +1056,8 @@ classes:
     instances:
       - ea: 0x1422046A8
         pointer: True
+    vtbls:
+      - ea: 0x141A6E5C8
     funcs:
       0x140932F60: ctor
       0x1409330D0: Initialize
@@ -1397,6 +1401,7 @@ classes:
     funcs:
       0x140999650: Initialize
       0x14099A180: Update
+      0x14099A560: UpdateMainCommands
       0x1409AADE0: ctor
       0x140996E40: SetUnlockLinkValue
       0x140996EE0: IsUnlockLinkUnlocked
@@ -5018,12 +5023,28 @@ classes:
   Component::GUI::AtkEventTarget:
     vtbls:
       - ea: 0x141A08038
+  Component::GUI::AtkTimerHolder:
+    funcs:
+      0x1405684C0: Update
   Component::GUI::AtkTimer:
     vtbls:
       - ea: 0x141A08040
         base: Component::GUI::AtkEventTarget
+    vfuncs:
+      1: dtor
+      2: OnTick
     funcs:
       0x140510420: ctor
+      0x140510460: Finalize
+      0x140510790: Update
+  Component::GUI::AtkGroupManager:
+    vtbls:
+      - ea: 0x141A08058
+    vfuncs:
+      0: dtor
+    funcs:
+      0x140510DD0: ctor
+      0x140510E60: Finalize
   Component::GUI::AtkTooltipManager:
     vtbls:
       - ea: 0x141A08060
@@ -5049,6 +5070,10 @@ classes:
       0x140599BE0: Finalize
       0x140599380: Update
       0x140599700: Draw
+      0x14059A510: GetChildAddonInfoByAtkUnitBase
+  Component::GUI::AtkSimpleTweenHolder:
+    funcs:
+      0x140516980: Update
   Component::GUI::AtkSimpleTween:
     vtbls:
       - ea: 0x141A080A8
@@ -5080,6 +5105,15 @@ classes:
   Component::GUI::AtkRenderTexture:
     vtbls:
       - ea: 0x141A08030
+  Component::GUI::AtkCrestManager:
+    vtbls:
+      - ea: 0x141A080B8
+    vfuncs:
+      0: dtor
+    funcs:
+      0x140516EB0: ctor
+      0x140516F50: Initialize
+      0x140517320: Update
   Component::GUI::AtkCrestFactory:
     vtbls:
       - ea: 0x141A080C0
@@ -5095,6 +5129,11 @@ classes:
     vtbls:
       - ea: 0x141A080D8
         base: Component::GUI::AtkTexture
+  Component::GUI::AtkUIColorHolder:
+    funcs:
+      0x1405286A0: ctor
+      0x140528780: Update
+      0x140528900: GetColor
   Component::GUI::AtkStage:
     instances:
       - ea: 0x1421D53A0
@@ -5120,12 +5159,67 @@ classes:
     vtbls:
       - ea: 0x141A085D0
         base: Component::Text::MacroDecoder
+    funcs:
+      0x140524370: ctor
   Component::GUI::AtkCursor:
     funcs:
       0x140510B40: Show
       0x140510BD0: Hide
       0x140510C60: SetCursorType
       0x140510D10: SetVisible
+  Component::GUI::AtkFontAnalyzerBase:
+    vtbls:
+      - ea: 0x141A08188
+    vfuncs:
+      8: dtor
+  Component::GUI::AtkFontAnalyzerFunctor:
+    vtbls:
+      - ea: 0x141A085A8
+  Component::GUI::AtkFontAnalyzerFunctorSelect:
+    vtbls:
+      - ea: 0x141A085B8
+  Component::GUI::AtkFontAnalyzerCount:
+    vtbls:
+      - ea: 0x141A082A8
+        base: Component::GUI::AtkFontAnalyzerBase
+  Component::GUI::AtkFontAnalyzerDrawSize:
+    vtbls:
+      - ea: 0x141A08368
+        base: Component::GUI::AtkFontAnalyzerBase
+  Component::GUI::AtkFontAnalyzerRenderer:
+    vtbls:
+      - ea: 0x141A083C8
+        base: Component::GUI::AtkFontAnalyzerBase
+    funcs:
+      0x140522320: ctor
+  Component::GUI::AtkFontAnalyzerRenderCount:
+    vtbls:
+      - ea: 0x141A08308
+        base: Component::GUI::AtkFontAnalyzerBase
+  Component::GUI::AtkFontAnalyzerSearchPosition:
+    vtbls:
+      - ea: 0x141A08428
+        base: Component::GUI::AtkFontAnalyzerBase
+  Component::GUI::AtkFontAnalyzerCRLFCount:
+    vtbls:
+      - ea: 0x141A081E8
+        base: Component::GUI::AtkFontAnalyzerBase
+  Component::GUI::AtkFontAnalyzerCRLFSearch:
+    vtbls:
+      - ea: 0x141A08248
+        base: Component::GUI::AtkFontAnalyzerBase
+  Component::GUI::AtkFontAnalyzerBuildLink:
+    vtbls:
+      - ea: 0x141A084E8
+        base: Component::GUI::AtkFontAnalyzerBase
+  Component::GUI::AtkFontAnalyzerCreateCache:
+    vtbls:
+      - ea: 0x141A08488
+        base: Component::GUI::AtkFontAnalyzerBase
+  Component::GUI::AtkFontAnalyzerCheckStringOnlyNumSymbol:
+    vtbls:
+      - ea: 0x141A08548
+        base: Component::GUI::AtkFontAnalyzerBase
   Component::GUI::AtkFontAnalyzer:
     vtbls:
       - ea: 0x141A085C8
@@ -5450,6 +5544,11 @@ classes:
       0x14055B220: SetItemLabel
       0x14055B2E0: GetItemLabel
       0x140560540: DispatchItemEvent
+  Component::GUI::ListComponentCallBackInterface:
+    vtbls:
+      - ea: 0x141A09168
+    vfuncs:
+      0: dtor
   Component::GUI::AtkComponentTreeList:
     vtbls:
       - ea: 0x141A092F8
@@ -5475,14 +5574,18 @@ classes:
       10: GetStringArrayData
       11: GetExtendArrayData
       17: SetHandlerFunction
+      18: SetAtkModuleEvent
       21: CloseAddon
       26: IsAddonReady
+      28: ClearFocus
+      36: SetAtkHistory
       39: SetUIVisibility
       58: Update
       60: IsUISceneGameMain
       61: GetColorThemeTypeForUIScene
       63: OpenMapWithMapLink
     funcs:
+      0x140569260: GetAddonIdByName
       0x14056A730: ctor
       0x14056AF40: Finalize
       0x14056B1A0: Initialize
@@ -6015,6 +6118,8 @@ classes:
   Client::UI::Misc::InputTimerModule:
     vtbls:
       - ea: 0x141A18590
+    funcs:
+      0x1406981F0: ctor
   Client::UI::UI3DModule::MapInfo:
     vtbls:
       - ea: 0x141A18598
@@ -6208,6 +6313,7 @@ classes:
       - ea: 0x141A1F298
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
+      0x1406BE270: ctor
       0x1406BE120: ResetAll
   Client::UI::Misc::EmoteHistoryModule:
     vtbls:
@@ -6402,6 +6508,8 @@ classes:
     vtbls:
       - ea: 0x141A1A7C0
         base: Component::Text::MacroDecoder
+    funcs:
+      0x140643D60: ctor
   Component::Text::ReferencedUtf8String:
     funcs:
       0x1403274A0: Create
@@ -6672,6 +6780,8 @@ classes:
     vtbls:
       - ea: 0x141A1ED70
         base: Client::UI::Misc::UserFileManager::UserFileEvent
+    funcs:
+      0x140694C60: ctor
   Client::UI::Misc::PronounModule:
     vtbls:
       - ea: 0x141A1EEB0

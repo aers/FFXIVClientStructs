@@ -13,12 +13,19 @@ public unsafe partial struct AtkStage {
     [FieldOffset(0x18)] public AtkTextureResourceManager* AtkTextureResourceManager;
     [FieldOffset(0x20)] public RaptureAtkUnitManager* RaptureAtkUnitManager;
     [FieldOffset(0x28)] public AtkInputManager* AtkInputManager;
+    [FieldOffset(0x30)] public AtkCollisionManager* AtkCollisionManager;
     [FieldOffset(0x38)] public AtkArrayDataHolder* AtkArrayDataHolder;
+    [FieldOffset(0x40)] public AtkTimerHolder* AtkTimerHolder;
+    [FieldOffset(0x48)] public AtkSimpleTweenHolder* AtkSimpleTweenHolder;
+    [FieldOffset(0x50)] public AtkCrestManager* AtkCrestManager;
+    [FieldOffset(0x58)] public AtkUIColorHolder* AtkUIColorHolder;
     [FieldOffset(0x60)] public RaptureTextModule* RaptureTextModule;
     [FieldOffset(0x68)] public SoftKeyboardDeviceInterface* SoftKeyboardDevice;
     [FieldOffset(0x70)] public AtkExternalInterface* AtkExternalInterface;
     [FieldOffset(0x78)] public AtkDragDropManager DragDropManager;
+    [FieldOffset(0x140)] public AtkGroupManager AtkGroupManager;
     [FieldOffset(0x168)] public AtkTooltipManager TooltipManager;
+    [FieldOffset(0x2C0)] public AtkDialogue AtkDialogue;
     [FieldOffset(0x338)] public AtkCursor AtkCursor;
     [FixedSizeArray<AtkEventDispatcher>(32)]
     [FieldOffset(0x358)] public fixed byte AtkEventDispatcher[0x28 * 32];
