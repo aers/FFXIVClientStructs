@@ -1394,6 +1394,23 @@ classes:
       0x1401DCFE0: GetResourceAsync
       0x1401DD210: GetResourceSync
       0x1401E1A00: Initialize
+  Client::Game::UI::DirectorInfo:
+    funcs:
+      0x140964CC0: SetDirector
+      0x140964F20: SetUpdatePending
+      0x140964F40: UnsetUpdatePending
+      0x140964F50: ShowTodo # lua function "ShowDirectorTodo"
+      0x140964F60: HideTodo # lua function "HideDirectorTodo"
+      0x140964F70: GetTitle
+      0x140964F80: GetIconId
+      0x140964F90: GetDescription
+      0x140964FC0: GetReliefText
+      0x140964FF0: GetEventItemId
+      0x140965030: GetRecommendedLevel
+      0x140965080: GetCompanyLeveDirectorInfo
+      0x1409650C0: GetObjectives
+      0x1409650E0: GetTimeRemaining
+      0x140965120: HasTimer
   Client::Game::UI::UIState:
     instances:
       - ea: 0x142204720
@@ -10199,7 +10216,16 @@ classes:
       0x1407C8B70: ctor
     vfuncs:
       0: dtor
+      6: Terminate
       197: GetTitle # lua function "GetEventHandlerTitle"
+      249: GetDescription
+      250: GetReliefText
+      251: GetTimeRemaining # pass current unix timestamp as a2
+      252: HasTimer
+      254: GetEventItemId
+      256: GetObjectives
+      259: GetRecommendedLevel
+      263: Initialize
   Client::Game::Event::LuaScriptLoader<Client::Game::Event::ModuleBase>:
     vtbls:
       - ea: 0x141A48240
@@ -10481,10 +10507,10 @@ classes:
         base: Client::Game::Event::LuaEventHandler
     vfuncs:
       267: PopulateMapMarkers # (this, ushort territoryTypeId, StdVector<MapMarkerData>* markerVector)
+      286: SetSequence
+      287: Synchronize
     funcs:
       0x14082A1C0: ctor
-      0x140964F50: ShowTodo # lua function "ShowDirectorTodo"
-      0x140964F60: HideTodo # lua function "HideDirectorTodo"
   Client::Game::CallbackSheetWaiter<Client::Game::UI::QuestTodoList>:
     vtbls:
       - ea: 0x141A6FF78
@@ -10967,6 +10993,7 @@ classes:
     vfuncs:
       292: GetCurrentLevel
       293: GetMaxLevel
+      309: GetContentTypeIconId
       319: SetExperience
     funcs:
       0x14082EFA0: ctor

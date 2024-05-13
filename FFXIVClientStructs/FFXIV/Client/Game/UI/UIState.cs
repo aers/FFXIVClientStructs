@@ -40,10 +40,12 @@ public unsafe partial struct UIState {
     [FieldOffset(0x9F78)] public QuestUI QuestUI;
     [FieldOffset(0xAF48)] public QuestTodoList QuestTodoList;
     [FieldOffset(0xB238)] public NpcTrade NpcTrade;
+    [FieldOffset(0xB560)] public DirectorInfo DirectorInfo;
+    [Obsolete("Use DirectorInfo.Director")]
     [FieldOffset(0xB560)] public Director* ActiveDirector;
-
+    [FieldOffset(0xB6A8)] public DirectorInfo FateDirectorInfo;
+    [Obsolete("Use FateDirectorInfo.Director and cast Director to FateDirector*")]
     [FieldOffset(0xB6A8)] public FateDirector* FateDirector;
-
     [FieldOffset(0xB7F0)] public Map Map;
     [FieldOffset(0xF7F0)] public MarkingController MarkingController;
     [FieldOffset(0xFAD0)] public LimitBreakController LimitBreakController;
