@@ -4148,6 +4148,22 @@ structs:
     - type: Component::SteamApi::SteamTypes::GamepadTextInputDismissedData*
       name: a2
   member_functions: []
+- type: Component::Shell::DebugCommandInterface
+  name: DebugCommandInterface
+  namespace: Component.Shell
+  union: False
+  size: 8
+  fields: []
+  virtual_functions: []
+  member_functions: []
+- type: Component::Shell::ShellCommandInterface
+  name: ShellCommandInterface
+  namespace: Component.Shell
+  union: False
+  size: 8
+  fields: []
+  virtual_functions: []
+  member_functions: []
 - type: Component::Exd::ExdModule
   name: ExdModule
   namespace: Component.Exd
@@ -6524,41 +6540,6 @@ structs:
   fields: []
   virtual_functions: []
   member_functions: []
-- type: Client::UI::Shell::RaptureShellModule
-  name: RaptureShellModule
-  namespace: Client.UI.Shell
-  union: False
-  size: 4616
-  fields:
-  - type: __int32
-    name: MacroCurrentLine
-    offset: 704
-  - type: byte
-    name: MacroLocked
-    offset: 691
-  - type: unsigned __int32
-    name: Flags
-    offset: 4608
-  virtual_functions: []
-  member_functions:
-  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8D 4D 28
-    return_type: void
-    name: ExecuteMacro
-    parameters:
-    - type: Client::UI::Shell::RaptureShellModule*
-      name: this
-    - type: Client::UI::Misc::RaptureMacroModule::Macro*
-      name: macro
-  - signature: E8 ?? ?? ?? ?? 84 C0 0F 84 ?? ?? ?? ?? 48 8B 4C 24 ?? 48 B8
-    return_type: byte
-    name: TryGetMacroIconCommand
-    parameters:
-    - type: Client::UI::Shell::RaptureShellModule*
-      name: this
-    - type: Client::UI::Misc::RaptureMacroModule::Macro*
-      name: macro
-    - type: __int64
-      name: resultsOut
 - type: Client::UI::Misc::BannerModuleEntry
   name: BannerModuleEntry
   namespace: Client.UI.Misc
@@ -21936,6 +21917,32 @@ structs:
     offset: 16
   virtual_functions: []
   member_functions: []
+- type: StdMap<unsigned __int32, Component::Shell::ShellCommandInterface*>
+  name: StdMap`2
+  namespace: ''
+  union: False
+  fields:
+  - type: StdMap::Node<unsigned __int32, Component::Shell::ShellCommandInterface*>*
+    name: Head
+    offset: 0
+  - type: unsigned __int64
+    name: Count
+    offset: 8
+  virtual_functions: []
+  member_functions: []
+- type: StdMap<Client::System::String::Utf8String, Component::Shell::DebugCommandInterface*>
+  name: StdMap`2
+  namespace: ''
+  union: False
+  fields:
+  - type: StdMap::Node<Client::System::String::Utf8String, Component::Shell::DebugCommandInterface*>*
+    name: Head
+    offset: 0
+  - type: unsigned __int64
+    name: Count
+    offset: 8
+  virtual_functions: []
+  member_functions: []
 - type: StdVector<Component::GUI::AtkComponentTreeListItem*>
   name: StdVector`1
   namespace: ''
@@ -23623,6 +23630,32 @@ structs:
     offset: 104
   virtual_functions: []
   member_functions: []
+- type: StdPair<unsigned __int32, Component::Shell::ShellCommandInterface*>
+  name: StdPair`2
+  namespace: ''
+  union: False
+  fields:
+  - type: unsigned __int32
+    name: Item1
+    offset: 0
+  - type: Component::Shell::ShellCommandInterface*
+    name: Item2
+    offset: 4
+  virtual_functions: []
+  member_functions: []
+- type: StdPair<Client::System::String::Utf8String, Component::Shell::DebugCommandInterface*>
+  name: StdPair`2
+  namespace: ''
+  union: False
+  fields:
+  - type: Client::System::String::Utf8String
+    name: Item1
+    offset: 0
+  - type: Component::Shell::DebugCommandInterface*
+    name: Item2
+    offset: 104
+  virtual_functions: []
+  member_functions: []
 - type: StdPair<Component::GUI::AtkResNode*, Component::GUI::AtkTooltipManager::AtkTooltipInfo*>
   name: StdPair`2
   namespace: ''
@@ -25144,6 +25177,20 @@ structs:
   - type: Component::SteamApi::SteamTypes::SteamInterfaceContext
     name: SteamInterfaceContext
     offset: 0
+  virtual_functions: []
+  member_functions: []
+- type: Component::Shell::ShellCommands
+  name: ShellCommands
+  namespace: Component.Shell
+  union: False
+  size: 40
+  fields:
+  - type: StdMap<unsigned __int32, Component::Shell::ShellCommandInterface*>
+    name: TextCommands
+    offset: 8
+  - type: StdMap<Client::System::String::Utf8String, Component::Shell::DebugCommandInterface*>
+    name: DebugCommands
+    offset: 24
   virtual_functions: []
   member_functions: []
 - type: Component::GUI::AgentInterface
@@ -35010,6 +35057,8 @@ structs:
       name: this
     - type: Client::UI::Info::InfoProxyCommonList::CharacterData::OnlineStatus
       name: onlineStatus
+    - type: byte
+      name: skipAwayCheck
   - signature: E8 ?? ?? ?? ?? 48 8D 53 16
     return_type: void
     name: SetUpdateLanguageMask
@@ -44244,6 +44293,68 @@ structs:
     offset: 28
   virtual_functions: []
   member_functions: []
+- type: StdMap::Node<unsigned __int32, Component::Shell::ShellCommandInterface*>
+  name: Node
+  namespace: ''
+  union: False
+  fields:
+  - type: StdMap::Node<unsigned __int32, Component::Shell::ShellCommandInterface*>*
+    name: Left
+    offset: 0
+  - type: StdMap::Node<unsigned __int32, Component::Shell::ShellCommandInterface*>*
+    name: Parent
+    offset: 8
+  - type: StdMap::Node<unsigned __int32, Component::Shell::ShellCommandInterface*>*
+    name: Right
+    offset: 16
+  - type: byte
+    name: Color
+    offset: 24
+  - type: byte
+    name: IsNil
+    offset: 25
+  - type: byte
+    name: _18
+    offset: 26
+  - type: byte
+    name: _19
+    offset: 27
+  - type: StdPair<unsigned __int32, Component::Shell::ShellCommandInterface*>
+    name: KeyValuePair
+    offset: 28
+  virtual_functions: []
+  member_functions: []
+- type: StdMap::Node<Client::System::String::Utf8String, Component::Shell::DebugCommandInterface*>
+  name: Node
+  namespace: ''
+  union: False
+  fields:
+  - type: StdMap::Node<Client::System::String::Utf8String, Component::Shell::DebugCommandInterface*>*
+    name: Left
+    offset: 0
+  - type: StdMap::Node<Client::System::String::Utf8String, Component::Shell::DebugCommandInterface*>*
+    name: Parent
+    offset: 8
+  - type: StdMap::Node<Client::System::String::Utf8String, Component::Shell::DebugCommandInterface*>*
+    name: Right
+    offset: 16
+  - type: byte
+    name: Color
+    offset: 24
+  - type: byte
+    name: IsNil
+    offset: 25
+  - type: byte
+    name: _18
+    offset: 26
+  - type: byte
+    name: _19
+    offset: 27
+  - type: StdPair<Client::System::String::Utf8String, Component::Shell::DebugCommandInterface*>
+    name: KeyValuePair
+    offset: 28
+  virtual_functions: []
+  member_functions: []
 - type: StdMap::Node<Component::GUI::AtkResNode*, Component::GUI::AtkTooltipManager::AtkTooltipInfo*>
   name: Node
   namespace: ''
@@ -44821,6 +44932,38 @@ structs:
   - type: Common::Component::BGCollision::Math::AABB
     name: WorldBoundingBox
     offset: 384
+  virtual_functions: []
+  member_functions: []
+- type: Component::Shell::ShellCommandModule
+  name: ShellCommandModule
+  namespace: Component.Shell
+  union: False
+  size: 592
+  fields:
+  - type: Component::Excel::ExcelModuleInterface*
+    name: ExcelModuleInterface
+    offset: 56
+  - type: Client::UI::Misc::RaptureTextModule*
+    name: RaptureTextModule
+    offset: 64
+  - type: Component::Text::TextChecker
+    name: TextChecker
+    offset: 72
+  - type: Component::Shell::ShellCommands
+    name: ShellCommands
+    offset: 320
+  - type: Client::System::String::Utf8String
+    name: CurrentChannel
+    offset: 360
+  - type: Client::System::String::Utf8String
+    name: CommandSheetName
+    offset: 480
+  - type: byte
+    name: CommandColumn
+    offset: 584
+  - type: byte
+    name: AliasColumn
+    offset: 585
   virtual_functions: []
   member_functions: []
 - type: Component::GUI::AtkCollisionNode
@@ -46636,6 +46779,88 @@ structs:
       name: a7
     - type: unsigned __int16
       name: parentAddonId
+- type: Client::UI::Shell::RaptureShellModule
+  name: RaptureShellModule
+  namespace: Client.UI.Shell
+  union: False
+  size: 4616
+  fields:
+  - type: Component::Shell::ShellCommandModule
+    name: ShellCommandModule
+    offset: 0
+  - type: Component::Shell::ShellCommandInterface
+    name: ShellCommandInterface
+    offset: 592
+  - type: Client::UI::UIModule*
+    name: UiModule
+    offset: 600
+  - type: Component::Shell::ShellCommandInterface
+    name: ShellCommandEmote
+    offset: 608
+  - type: Component::Shell::ShellCommandInterface*
+    name: ShellCommandLinkshellIndex
+    offset: 616
+  - type: Component::Shell::ShellCommandInterface*
+    name: ShellCommandChatCrossWorldLinkshell
+    offset: 624
+  - type: Component::Shell::ShellCommandInterface*
+    name: ShellCommandConfigToggle
+    offset: 632
+  - type: Component::Shell::ShellCommandInterface*
+    name: ShellCommandGraphicPresets
+    offset: 640
+  - type: Component::Shell::ShellCommandInterface*
+    name: ShellCommandAgent
+    offset: 648
+  - type: Common::TimePoint
+    name: WaitStartTime
+    offset: 656
+  - type: unsigned __int32
+    name: WaitTimeMs
+    offset: 680
+  - type: byte
+    name: MacroLocked
+    offset: 691
+  - type: __int32
+    name: MacroCurrentLine
+    offset: 704
+  - type: Client::System::String::Utf8String
+    name: MacroLineText
+    offset: 712
+  - type: Client::System::String::Utf8String
+    name: MacroName
+    offset: 824
+  - type: Client::System::String::Utf8String
+    name: MacroLines
+    offset: 928
+    size: 15
+  - type: Client::System::String::Utf8String
+    name: SkippedMacroLines
+    offset: 2488
+    size: 15
+  - type: unsigned __int32
+    name: Flags
+    offset: 4608
+  virtual_functions: []
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8D 4D 28
+    return_type: void
+    name: ExecuteMacro
+    parameters:
+    - type: Client::UI::Shell::RaptureShellModule*
+      name: this
+    - type: Client::UI::Misc::RaptureMacroModule::Macro*
+      name: macro
+  - signature: E8 ?? ?? ?? ?? 84 C0 0F 84 ?? ?? ?? ?? 48 8B 4C 24 ?? 48 B8
+    return_type: byte
+    name: TryGetMacroIconCommand
+    parameters:
+    - type: Client::UI::Shell::RaptureShellModule*
+      name: this
+    - type: Client::UI::Misc::RaptureMacroModule::Macro*
+      name: macro
+    - type: __int64
+      name: resultsOut
 - type: Client::UI::Misc::AozNoteModule
   name: AozNoteModule
   namespace: Client.UI.Misc
@@ -49785,6 +50010,49 @@ structs:
     offset: 680
   virtual_functions: []
   member_functions: []
+- type: Client::Game::Event::QuestEventHandler
+  name: QuestEventHandler
+  namespace: Client.Game.Event
+  union: False
+  size: 1552
+  fields:
+  - type: Client::Game::Event::LuaEventHandler
+    name: LuaEventHandler
+    offset: 0
+  - type: unsigned __int16
+    name: QuestId
+    offset: 824
+  - type: Client::System::String::Utf8String
+    name: Title
+    offset: 832
+  virtual_functions: []
+  member_functions:
+  - signature: 4C 8B DC 55 57 41 54 41 55 48 81 EC
+    return_type: void
+    name: GetTodoArgs
+    parameters:
+    - type: Client::Game::Event::QuestEventHandler*
+      name: this
+    - type: Client::Game::Character::BattleChara*
+      name: localPlayer
+    - type: byte
+      name: idx
+    - type: unsigned __int32*
+      name: arg0
+    - type: unsigned __int32*
+      name: arg1
+    - type: unsigned __int32*
+      name: arg2
+  - signature: E8 ?? ?? ?? ?? 41 88 07 45 33 D2
+    return_type: byte
+    name: IsTodoChecked
+    parameters:
+    - type: Client::Game::Event::QuestEventHandler*
+      name: this
+    - type: Client::Game::Character::BattleChara*
+      name: localPlayer
+    - type: byte
+      name: idx
 - type: Client::Game::Control::Control
   name: Control
   namespace: Client.Game.Control
