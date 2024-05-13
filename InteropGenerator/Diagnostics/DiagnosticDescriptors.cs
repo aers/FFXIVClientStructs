@@ -92,6 +92,16 @@ internal static class DiagnosticDescriptors {
         true,
         "A method marked for static address generation contains a return value that is of an invalid type."
     );
+    
+    public static readonly DiagnosticDescriptor VirtualFunctionMethodMustNotBeStatic = new(
+        "CSIG0107",
+        "Virtual function method generation target must be not static",
+        "Method {1} must be not static",
+        "InteropGenerator.Method",
+        DiagnosticSeverity.Error,
+        true,
+        "A method marked for virtual function generation must not be static."
+    );
 
     public static readonly DiagnosticDescriptor SignatureContainsInvalidCharacters = new(
         "CSIG0201",

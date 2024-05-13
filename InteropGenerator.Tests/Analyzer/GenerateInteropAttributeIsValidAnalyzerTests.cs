@@ -6,6 +6,17 @@ namespace InteropGenerator.Tests.Analyzer;
 
 public class GenerateInteropAttributeIsValidAnalyzerTests {
     [Fact]
+    public async Task TargetStructIsNotPartial_NoWarn() {
+        const string code = """
+                            [GenerateInterop]
+                            public partial struct TestStruct
+                            {
+                            }
+                            """;
+        await AnalyzerVerifier<GenerateInteropAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
+    }
+    
+    [Fact]
     public async Task TargetStructIsNotPartial_Warn() {
         const string code = """
                             [GenerateInterop]
@@ -17,11 +28,14 @@ public class GenerateInteropAttributeIsValidAnalyzerTests {
     }
     
     [Fact]
-    public async Task TargetStructIsNotPartial_NoWarn() {
+    public async Task TargetStructValidNesting_NoWarn() {
         const string code = """
-                            [GenerateInterop]
                             public partial struct TestStruct
                             {
+                                [GenerateInterop]
+                                public partial struct InnerStruct
+                                {
+                                }
                             }
                             """;
         await AnalyzerVerifier<GenerateInteropAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
@@ -41,39 +55,14 @@ public class GenerateInteropAttributeIsValidAnalyzerTests {
         await AnalyzerVerifier<GenerateInteropAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
     }
     
-    [Fact]
-    public async Task TargetStructNestedInNonPartialStruct_NoWarn() {
-        const string code = """
-                            public partial struct TestStruct
-                            {
-                                [GenerateInterop]
-                                public partial struct InnerStruct
-                                {
-                                }
-                            }
-                            """;
-        await AnalyzerVerifier<GenerateInteropAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
-    }
+ 
 
     [Fact]
-    public async Task TargetStructCannotBeContainedInClass_Warn() {
+    public async Task TargetStructNestedInClass_Warn() {
         const string code = """
                             public class {|CSIG0003:TestStruct|}
                             {
                                 [GenerateInterop]
-                                public partial struct InnerStruct
-                                {
-                                }
-                            }
-                            """;
-        await AnalyzerVerifier<GenerateInteropAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
-    }
-    
-    [Fact]
-    public async Task TargetStructCannotBeContainedInClass_NoWarn() {
-        const string code = """
-                            public class TestStruct
-                            {
                                 public partial struct InnerStruct
                                 {
                                 }

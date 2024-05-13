@@ -6,20 +6,7 @@ namespace InteropGenerator.Tests.Analyzer;
 
 public class StaticAddressAttributeIsValidAnalyzerTests {
     [Fact]
-    public async Task TargetMethodMustBePartial_Warn() {
-        const string code = """
-                            [GenerateInterop]
-                            public unsafe partial struct TestStruct
-                            {
-                                {|CSIG0101:[StaticAddress("??", 0)]
-                                public static TestStruct* TestFunction() { return null; }|}
-                            }
-                            """;
-        await AnalyzerVerifier<StaticAddressAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
-    }
-    
-    [Fact]
-    public async Task TargetMethodMustBePartial_NoWarn() {
+    public async Task TargetMethodIsValid_NoWarn() {
         const string code = """
                             [GenerateInterop]
                             public unsafe partial struct TestStruct
@@ -28,6 +15,19 @@ public class StaticAddressAttributeIsValidAnalyzerTests {
                                 public static partial TestStruct* TestFunction();
                                 
                                 public static partial TestStruct* TestFunction() => null;
+                            }
+                            """;
+        await AnalyzerVerifier<StaticAddressAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
+    }
+    
+    [Fact]
+    public async Task TargetMethodMustBePartial_Warn() {
+        const string code = """
+                            [GenerateInterop]
+                            public unsafe partial struct TestStruct
+                            {
+                                {|CSIG0101:[StaticAddress("??", 0)]
+                                public static TestStruct* TestFunction() { return null; }|}
                             }
                             """;
         await AnalyzerVerifier<StaticAddressAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
@@ -49,21 +49,6 @@ public class StaticAddressAttributeIsValidAnalyzerTests {
     }
     
     [Fact]
-    public async Task TargetMethodContainsParameters_NoWarn() {
-        const string code = """
-                            [GenerateInterop]
-                            public unsafe partial struct TestStruct
-                            {
-                                [StaticAddress("??", 0)]
-                                public static partial TestStruct* TestFunction();
-                                
-                                public static partial TestStruct* TestFunction() => null;
-                            }
-                            """;
-        await AnalyzerVerifier<StaticAddressAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
-    }
-    
-    [Fact]
     public async Task TargetMethodContainsInvalidReturn_Warn() {
         const string code = """
                             [GenerateInterop]
@@ -73,21 +58,6 @@ public class StaticAddressAttributeIsValidAnalyzerTests {
                                 public static partial string* TestFunction();|}
                                 
                                 {|CSIG0103:public static partial string* TestFunction() { return null; }|}
-                            }
-                            """;
-        await AnalyzerVerifier<StaticAddressAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
-    }
-    
-    [Fact]
-    public async Task TargetMethodContainsInvalidReturn_NoWarn() {
-        const string code = """
-                            [GenerateInterop]
-                            public unsafe partial struct TestStruct
-                            {
-                                [StaticAddress("??", 0)]
-                                public static partial void* TestFunction();
-                                
-                                public static partial void* TestFunction() { return null; }
                             }
                             """;
         await AnalyzerVerifier<StaticAddressAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
@@ -109,21 +79,6 @@ public class StaticAddressAttributeIsValidAnalyzerTests {
     }
     
     [Fact]
-    public async Task TargetMethodMustBeStatic_NoWarn() {
-        const string code = """
-                            [GenerateInterop]
-                            public unsafe partial struct TestStruct
-                            {
-                                [StaticAddress("??", 0)]
-                                public static partial TestStruct* TestFunction();
-                                
-                                public static partial TestStruct* TestFunction() => null;
-                            }
-                            """;
-        await AnalyzerVerifier<StaticAddressAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
-    }
-    
-    [Fact]
     public async Task TargetMethodContainsNonPointerReturn_Warn() {
         const string code = """
                             [GenerateInterop]
@@ -133,21 +88,6 @@ public class StaticAddressAttributeIsValidAnalyzerTests {
                                 public static partial TestStruct TestFunction();|}
                                 
                                 {|CSIG0106:public static partial TestStruct TestFunction() { return new TestStruct(); }|}
-                            }
-                            """;
-        await AnalyzerVerifier<StaticAddressAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
-    }
-    
-    [Fact]
-    public async Task TargetMethodContainsNonPointerReturn_NoWarn() {
-        const string code = """
-                            [GenerateInterop]
-                            public unsafe partial struct TestStruct
-                            {
-                                [StaticAddress("??", 0)]
-                                public static partial void* TestFunction();
-                                
-                                public static partial void* TestFunction() { return null; }
                             }
                             """;
         await AnalyzerVerifier<StaticAddressAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);

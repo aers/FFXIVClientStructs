@@ -14,5 +14,6 @@
 | CSIG0104 | InteropGenerator.Method | Error | Method marked for static address generation cannot have parameters |
 | CSIG0105 | InteropGenerator.Method | Error | Method marked for static address generation must be static |
 | CSIG0106 | InteropGenerator.Method | Error | Method marked for static address generation must return a pointer type |
+| CSIG0107 | InteropGenerator.Method | Error | Method marked for virtual function generation must not be static |
 | CSIG0201 | InteropGenerator.Signature | Error    | Signature contains invalid characters (valid characters are A-F 0-9 ? and space)                              |
 | CSIG0202 | InteropGenerator.Signature | Error    | Signature format is invalid (must be 2 character bytes seperated by spaces with no leading or trailing space) |

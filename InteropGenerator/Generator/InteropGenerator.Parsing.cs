@@ -15,7 +15,7 @@ public sealed partial class InteropGenerator {
         ParseMethods(structSymbol, token, out EquatableArray<MemberFunctionInfo> memberFunctions, out EquatableArray<VirtualFunctionInfo> virtualFunctions, out EquatableArray<StaticAddressInfo> staticAddresses);
         token.ThrowIfCancellationRequested();
 
-        // get containing types; our analyzer validates structs are contained in a proper hierachy so not needed here
+        // get containing types; our analyzer validates structs are contained in a proper hierarchy so not needed here
         using ImmutableArrayBuilder<string> hierarchy = new();
 
         for (INamedTypeSymbol? parent = structSymbol;
@@ -39,6 +39,7 @@ public sealed partial class InteropGenerator {
         out EquatableArray<MemberFunctionInfo> memberFunctions,
         out EquatableArray<VirtualFunctionInfo> virtualFunctions,
         out EquatableArray<StaticAddressInfo> staticAddresses) {
+        
         using ImmutableArrayBuilder<MemberFunctionInfo> memberFunctionsBuilder = new();
         using ImmutableArrayBuilder<VirtualFunctionInfo> virtualFunctionBuilder = new();
         using ImmutableArrayBuilder<StaticAddressInfo> staticAdddressesBuilder = new();

@@ -6,7 +6,7 @@ using static InteropGenerator.Diagnostics.DiagnosticDescriptors;
 namespace InteropGenerator.Diagnostics.Analyzers;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public class StaticAddressAttributeIsValidAnalyzer() : MethodAttributeIsValidAnalyzerBase(AttributeNames.StaticAddressAttribute, [StaticAddressMethodMustNotHaveParameters, StaticAddressMethodMustBeStatic, StaticAddressMethodReturnMustBePointer]) {
+public sealed class StaticAddressAttributeIsValidAnalyzer() : MethodAttributeIsValidAnalyzerBase(AttributeNames.StaticAddressAttribute, [StaticAddressMethodMustNotHaveParameters, StaticAddressMethodMustBeStatic, StaticAddressMethodReturnMustBePointer]) {
 
     protected override void ValidateSpecific(SymbolAnalysisContext context, IMethodSymbol methodSymbol, MethodDeclarationSyntax methodSyntax) {
         if (!methodSymbol.Parameters.IsEmpty) {

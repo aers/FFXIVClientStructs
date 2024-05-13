@@ -4,20 +4,20 @@ using Xunit;
 
 namespace InteropGenerator.Tests.Analyzer;
 
-public class MemberFunctionAttributeIsValidAnalyzerTests {
+public class VirtualFunctionAttributeIsValidAnalyzerTests {
     [Fact]
     public async Task TargetMethodIsValid_NoWarn() {
         const string code = """
                             [GenerateInterop]
-                            public unsafe partial struct TestStruct
+                            public partial struct TestStruct
                             {
-                                [MemberFunction("??")]
-                                public partial int TestFunction(void* param);
+                                [VirtualFunction(2)]
+                                public partial int TestFunction();
                                 
-                                public partial int TestFunction(void* param) => 0;
+                                public partial int TestFunction() => 0;
                             }
                             """;
-        await AnalyzerVerifier<MemberFunctionAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
+        await AnalyzerVerifier<VirtualFunctionAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
     }
     
     [Fact]
@@ -26,11 +26,11 @@ public class MemberFunctionAttributeIsValidAnalyzerTests {
                             [GenerateInterop]
                             public partial struct TestStruct
                             {
-                                {|CSIG0101:[MemberFunction("??")]
+                                {|CSIG0101:[VirtualFunction(2)]
                                 public int TestFunction() { return 0; }|}
                             }
                             """;
-        await AnalyzerVerifier<MemberFunctionAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
+        await AnalyzerVerifier<VirtualFunctionAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
     }
     
     [Fact]
@@ -39,13 +39,13 @@ public class MemberFunctionAttributeIsValidAnalyzerTests {
                             [GenerateInterop]
                             public partial struct TestStruct
                             {
-                                [MemberFunction("??")]
+                                [VirtualFunction(3)]
                                 public partial void TestFunction({|CSIG0102:List<string> invalidParam|});
                                 
                                 public partial void TestFunction({|CSIG0102:List<string> invalidParam|}) { }
                             }
                             """;
-        await AnalyzerVerifier<MemberFunctionAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
+        await AnalyzerVerifier<VirtualFunctionAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
     }
     
     [Fact]
@@ -54,12 +54,27 @@ public class MemberFunctionAttributeIsValidAnalyzerTests {
                             [GenerateInterop]
                             public partial struct TestStruct
                             {
-                                {|CSIG0103:[MemberFunction("??")]
+                                {|CSIG0103:[VirtualFunction(1)]
                                 public partial string TestFunction();|}
                                 
                                 {|CSIG0103:public partial string TestFunction() { return ""; }|}
                             }
                             """;
-        await AnalyzerVerifier<MemberFunctionAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
+        await AnalyzerVerifier<VirtualFunctionAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
+    }
+
+    [Fact]
+    public async Task TargetMethodCannotBeStatic_Warn() {
+        const string code = """
+                            [GenerateInterop]
+                            public partial struct TestStruct
+                            {
+                                {|CSIG0107:[VirtualFunction(3)]
+                                public static partial bool TestFunction();|}
+                                
+                                {|CSIG0107:public static partial bool TestFunction() { return true; }|}
+                            }
+                            """;
+        await AnalyzerVerifier<VirtualFunctionAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
     }
 }

@@ -48,7 +48,7 @@ public class SignatureIsValidAnalyzerTests {
     }
     
     [Fact]
-    public async Task SignatureIsInValid_StaticAddress_Warn() {
+    public async Task SignatureIsInvalid_StaticAddress_Warn() {
         const string code = """
                             [GenerateInterop]
                             public unsafe partial struct TestStruct
