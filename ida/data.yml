@@ -10388,6 +10388,8 @@ classes:
         base: Client::Game::Event::LuaEventHandler
     funcs:
       0x14084BEE0: ctor
+      0x140858000: IsTodoChecked
+      0x1408580D0: GetTodoArgs
   Client::Game::Event::WarpEventHandler: # 0x02
     vtbls:
       - ea: 0x141A54128
