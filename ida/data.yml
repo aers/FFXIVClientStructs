@@ -5178,6 +5178,7 @@ classes:
   Component::GUI::AtkFontAnalyzerFunctorSelect:
     vtbls:
       - ea: 0x141A085B8
+        base: Component::GUI::AtkFontAnalyzerFunctor
   Component::GUI::AtkFontAnalyzerCount:
     vtbls:
       - ea: 0x141A082A8
@@ -5185,21 +5186,21 @@ classes:
   Component::GUI::AtkFontAnalyzerDrawSize:
     vtbls:
       - ea: 0x141A08368
-        base: Component::GUI::AtkFontAnalyzerBase
+        base: Component::GUI::AtkFontAnalyzerCount
   Component::GUI::AtkFontAnalyzerRenderer:
     vtbls:
       - ea: 0x141A083C8
-        base: Component::GUI::AtkFontAnalyzerBase
+        base: Component::GUI::AtkFontAnalyzerRenderCount
     funcs:
       0x140522320: ctor
   Component::GUI::AtkFontAnalyzerRenderCount:
     vtbls:
       - ea: 0x141A08308
-        base: Component::GUI::AtkFontAnalyzerBase
+        base: Component::GUI::AtkFontAnalyzerCount
   Component::GUI::AtkFontAnalyzerSearchPosition:
     vtbls:
       - ea: 0x141A08428
-        base: Component::GUI::AtkFontAnalyzerBase
+        base: Component::GUI::AtkFontAnalyzerDrawSize
   Component::GUI::AtkFontAnalyzerCRLFCount:
     vtbls:
       - ea: 0x141A081E8
@@ -5211,7 +5212,7 @@ classes:
   Component::GUI::AtkFontAnalyzerBuildLink:
     vtbls:
       - ea: 0x141A084E8
-        base: Component::GUI::AtkFontAnalyzerBase
+        base: Component::GUI::AtkFontAnalyzerDrawSize
   Component::GUI::AtkFontAnalyzerCreateCache:
     vtbls:
       - ea: 0x141A08488
