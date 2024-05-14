@@ -5,9 +5,8 @@ public unsafe partial struct GameMain {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? 38 05", 3)]
     public static partial GameMain* Instance();
 
-    [FieldOffset(0x0)] public fixed uint ActiveFestivals[4]; // TODO: add FixedSizeArray with a struct that splits it into two ushorts, Id and Phase
-
-    [FieldOffset(0x40)] public fixed uint QueuedFestivals[4]; // TODO: add FixedSizeArray with a struct that splits it into two ushorts, Id and Phase
+    [FieldOffset(0x0), FixedSizeArray<Festival>(4)] private fixed byte ActiveFestival[4 * 0x04];
+    [FieldOffset(0x40), FixedSizeArray<Festival>(4)] private fixed byte QueuedFestival[4 * 0x04];
 
     [FieldOffset(0xAD8)] public JobGaugeManager JobGaugeManager;
 
@@ -52,4 +51,10 @@ public unsafe partial struct GameMain {
 
     [MemberFunction("E8 ?? ?? ?? ?? 80 63 50 FE")]
     public partial void SetActiveFestivals(uint festival1, uint festival2, uint festival3, uint festival4); // Applies immediately regardless of client state
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x04)]
+    public struct Festival {
+        [FieldOffset(0x00)] public ushort Id;
+        [FieldOffset(0x02)] public ushort Phase;
+    }
 }

@@ -80,7 +80,7 @@ public unsafe partial struct UI3DModule {
     [FieldOffset(0xF380)] public fixed byte NamePlateObjectInfoPointerArray[50 * 0x8]; // array of Client::UI::UI3DModule::ObjectInfo* for current nameplates
     [FieldOffset(0xF510)] public int NamePlateObjectInfoCount;
     // [FieldOffset(0xF518)] public Bit NamePlateBits; // Client::System::Data::Bit
-    [FixedSizeArray<GameObjectID>(50)]
+    [FixedSizeArray<GameObjectId>(50)]
     [FieldOffset(0xF538)] public fixed byte NamePlateObjectIdList[50 * 0x8]; // array of GameObjectID (see GameObject.cs), ObjectId = E0000000 means it is empty, matches the order of nameplate addon objects
     [FieldOffset(0xF6C8)] public fixed byte NamePlateObjectIdList_2[50 * 0x8]; // seems to contain same data as above, but may be for working data
     [FixedSizeArray<Pointer<ObjectInfo>>(50)]

@@ -122,15 +122,13 @@ public unsafe partial struct DrawObjectData {
 public unsafe partial struct CustomizeData {
     private const int Count = 0x1A;
 
-    [FieldOffset(0x00), Obsolete("Use specific fields"), CExportIgnore] public fixed byte Data[Count]; // TODO: Change to private
+    [FieldOffset(0x00), CExportIgnore] public fixed byte Data[Count];
 
     [FieldOffset(0x00)] public byte Race;
     [FieldOffset(0x01)] public byte Sex;
     [FieldOffset(0x02)] public byte BodyType;
     [FieldOffset(0x03)] public byte Height;
     [FieldOffset(0x04)] public byte Tribe;
-    [Obsolete("Renamed to Tribe")]
-    [FieldOffset(0x04)] public byte Clan;
     [FieldOffset(0x05)] public byte Face;
     [FieldOffset(0x06)] public byte Hairstyle;
     // 0x07: Highlights

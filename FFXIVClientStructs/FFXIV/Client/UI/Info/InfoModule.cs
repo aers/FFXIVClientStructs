@@ -17,10 +17,6 @@ public unsafe partial struct InfoModule {
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 55 68")]
     public partial InfoProxyInterface* GetInfoProxyById(InfoProxyId id);
 
-    [Obsolete("Use GetInfoProxyById(InfoProxyId)")]
-    public InfoProxyInterface* GetInfoProxyById(uint id)
-        => GetInfoProxyById((InfoProxyId)id);
-
     [MemberFunction("E8 ?? ?? ?? ?? 49 83 C9 FF 48 8D 8C 24")]
     public partial byte* GetLocalCharacterName();
 

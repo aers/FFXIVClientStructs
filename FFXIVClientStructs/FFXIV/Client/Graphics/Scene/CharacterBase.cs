@@ -56,7 +56,7 @@ public unsafe partial struct CharacterBase {
 
     [FieldOffset(0x258)] public Texture** ColorTableTextures; // each one corresponds to a material, size = SlotCount * 4
 
-    [FieldOffset(0x260)] public Vector3 Tint; // TODO: Should be a Vector4 with next API bump - color tint for the chara base
+    [FieldOffset(0x260)] public Vector4 Tint;
 
     [FieldOffset(0x2B0)] public float WeatherWetness;  // Set to 1.0f when raining and not covered or umbrella'd
     [FieldOffset(0x2B4)] public float SwimmingWetness; // Set to 1.0f when in water
@@ -80,14 +80,9 @@ public unsafe partial struct CharacterBase {
 
     [FieldOffset(0x8E8)] public byte AnimationVariant; // the "a%04d" part in "%s/animation/a%04d/%s/%s.pap"
 
-    public readonly Span<Pointer<Model>> ModelsSpan
-        => new(Models, SlotCount);
-
-    public readonly Span<Pointer<Texture>> ColorTableTexturesSpan
-        => new(ColorTableTextures, SlotCount * 4);
-
-    public readonly Span<Pointer<Material>> MaterialsSpan
-        => new(Materials, SlotCount * 4);
+    public readonly Span<Pointer<Model>> ModelsSpan => new(Models, SlotCount);
+    public readonly Span<Pointer<Texture>> ColorTableTexturesSpan => new(ColorTableTextures, SlotCount * 4);
+    public readonly Span<Pointer<Material>> MaterialsSpan => new(Materials, SlotCount * 4);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4E 08 48 8B D0 4C 8B 01")]
     public static partial CharacterBase* Create(uint modelId, CustomizeData* customize, EquipmentModelId* equipData /* 10 times, 40 byte */, byte unk);

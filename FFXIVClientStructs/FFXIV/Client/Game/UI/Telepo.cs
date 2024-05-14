@@ -7,15 +7,14 @@ public unsafe partial struct Telepo {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? 48 8B 12", 3)]
     public static partial Telepo* Instance();
 
-    [FieldOffset(0x00)] public void* vtbl;
     [FieldOffset(0x10)] public StdVector<TeleportInfo> TeleportList;
     [FieldOffset(0x28)] public SelectUseTicketInvoker UseTicketInvoker;
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4B 10 84 C0 48 8B 01 74 2C")]
-    public partial bool Teleport(uint aetheryteID, byte subIndex);
+    public partial bool Teleport(uint aetheryteId, byte subIndex);
 
     [MemberFunction("E8 ?? ?? ?? ?? 49 89 47 68")]
-    public partial void* UpdateAetheryteList(); // TODO: returns StdVector<TeleportInfo>* (the TeleportList field)
+    public partial StdVector<TeleportInfo>* UpdateAetheryteList();
 
     /// Territories have aetherstream coordinates X and Y, an associated ExpansionValue and an associated Plane in TerritoryTypeTelepo.
     /// Planes have relays described in the TelepoRelay sheet, every pair of planes has an associated entry territory, exit territory and cost organized in a 6x6 matrix.
@@ -42,8 +41,6 @@ public struct TeleportInfo {
 
     public bool IsSharedHouse => Ward > 0 && Plot > 0;
     public bool IsApartment => SubIndex == 128 && !IsSharedHouse;
-    [Obsolete("Renamed to IsApartment")]
-    public bool IsAppartment => SubIndex == 128 && !IsSharedHouse;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x28)]
@@ -52,5 +49,5 @@ public unsafe partial struct SelectUseTicketInvoker {
     [FieldOffset(0x10)] public Telepo* Telepo;
 
     [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 80 79 ?? 00 41 0F B6 F8 8B F2")]
-    public partial bool TeleportWithTickets(uint aetheryteID, byte subIndex);
+    public partial bool TeleportWithTickets(uint aetheryteId, byte subIndex);
 }

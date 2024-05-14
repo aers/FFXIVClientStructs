@@ -14,7 +14,7 @@ public unsafe partial struct InfoProxyCatalogSearch {
 
     [StructLayout(LayoutKind.Explicit, Size = 0x8)]
     public struct Entry {
-        [FieldOffset(0x0)] public uint ItemID;
+        [FieldOffset(0x0)] public uint ItemId;
         [FieldOffset(0x4)] public uint Count;
     }
 }

@@ -8,11 +8,7 @@ public unsafe partial struct InfoProxyCommonList {
     [FieldOffset(0x0)] public InfoProxyPageInterface InfoProxyPageInterface;
     [FieldOffset(0x20)] public Utf8String Unk20;
     [FieldOffset(0x88)] public byte NumberArrayIndex;
-    [Obsolete("Renamed to NumberArrayIndex")]
-    [FieldOffset(0x88)] public byte Unk88; //Corresponding ATkModule NumberArrrayIndex
     [FieldOffset(0x89)] public byte StringArrayIndex;
-    [Obsolete("Renamed to StringArrayIndex")]
-    [FieldOffset(0x89)] public byte Unk89; //Corresponding ATkModule StringArrrayIndex
     [FieldOffset(0x8A)] public ushort DataSize;
     [FieldOffset(0x8C)] public ushort DictSize;
     [FieldOffset(0x8E)] public ushort Unk8E; //10 * DataSize
@@ -26,7 +22,7 @@ public unsafe partial struct InfoProxyCommonList {
     public readonly ReadOnlySpan<CharacterIndex> CharIndexSpan => new(IndexData, (int)InfoProxyPageInterface.InfoProxyInterface.EntryCount); // It cant be higher than 200 at this time anyways so this is fine
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B D0 48 8B CB E8 ?? ?? ?? ?? 41 C6 46")]
-    public partial ulong GetContentIDForEntry(uint idx);
+    public partial ulong GetContentIdForEntry(uint idx);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 85 FF 74 55")]
     public partial CharacterData* GetEntry(uint idx);
@@ -118,34 +114,32 @@ public unsafe partial struct InfoProxyCommonList {
             SimilarDuty = 1ul << 42,
             InDuty = 1ul << 43,
             TrialAdventurer = 1ul << 44,
-            [Obsolete("Typo fixed, use TrialAdventurer")]
-            TrailAdventurer = 1ul << 44,
             FreeCompany = 1ul << 45,
             GrandCompany = 1ul << 46,
             Online = 1ul << 47,
         }
 
         public enum Language : byte {
-            JP = 0,
-            EN = 1,
-            DE = 2,
-            FR = 3,
+            Jp = 0,
+            En = 1,
+            De = 2,
+            Fr = 3,
             None = 0xFF
         }
 
         [Flags]
         public enum LanguageMask : byte {
             None = 0,
-            JP = 1,
-            EN = 2,
-            DE = 4,
-            FR = 8,
+            Jp = 1,
+            En = 2,
+            De = 4,
+            Fr = 8,
         }
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public struct CharacterIndex {
-        [FieldOffset(0x0)] public ulong ContentID;
+        [FieldOffset(0x0)] public ulong ContentId;
 
         [FieldOffset(0xA)] public ushort HomeWorld;
     }

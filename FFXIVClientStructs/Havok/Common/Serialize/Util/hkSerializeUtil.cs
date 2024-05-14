@@ -4,7 +4,7 @@ public unsafe partial struct hkSerializeUtil {
 
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct ErrorDetails {
-        public enum ErrorID : int {
+        public enum ErrorId : int {
             None = 0x00,
             ReadFailed,
             UnsupportedFormat,
@@ -16,7 +16,7 @@ public unsafe partial struct hkSerializeUtil {
             MaxId,
         }
 
-        [FieldOffset(0x0)] public hkEnum<ErrorID, int> Id;
+        [FieldOffset(0x0)] public hkEnum<ErrorId, int> Id;
         [FieldOffset(0x8)] public hkStringPtr DefaultMessage;
     }
 

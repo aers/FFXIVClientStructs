@@ -16,9 +16,6 @@ public unsafe partial struct Character {
     [FieldOffset(0x0)] public GameObject GameObject;
     [FieldOffset(0x1A0)] public CharacterData CharacterData;
 
-    [Obsolete("Use MovementBytes so that the name can be used for a struct in the future.")]
-    [FieldOffset(0x210)] public fixed byte Movement[0x420];
-    [FieldOffset(0x210)] public fixed byte MovementBytes[0x420];
     [FieldOffset(0x630)] public EmoteController EmoteController;
     [FieldOffset(0x670)] public MountContainer Mount;
     [FieldOffset(0x6D8)] public CompanionContainer Companion;
@@ -28,10 +25,6 @@ public unsafe partial struct Character {
 
     [FieldOffset(0x970)] public ActionTimelineManager ActionTimelineManager;
     [FieldOffset(0xCB0)] public GazeContainer Gaze;
-
-    /// <inheritdoc cref="GazeController.Gaze.TargetInformation.TargetId"/>
-    [Obsolete("Use Character.Gaze.Controller.GazesSpan[0].TargetInfo.TargetId")]
-    [FieldOffset(0xCB0 + 0x50)] public GameObjectID LookTargetId;
 
     [FieldOffset(0x12F0)] public VfxContainer Vfx;
 
@@ -54,7 +47,7 @@ public unsafe partial struct Character {
     /// Developers should generally use <see cref="GetTargetId"/> over reading this field directly, as it will
     /// properly handle resolving the target for the local player.
     /// </remarks>
-    [FieldOffset(0x1B58)] public GameObjectID TargetId;
+    [FieldOffset(0x1B58)] public GameObjectId TargetId;
 
     /// <summary>
     /// The current soft target for this Character. This will not be set for the LocalPlayer.
@@ -63,16 +56,15 @@ public unsafe partial struct Character {
     /// Developers should generally use <see cref="GetSoftTargetId"/> over reading this field directly, as it will
     /// properly handle resolving the soft target for the local player.
     /// </remarks>
-    [FieldOffset(0x1B60)] public GameObjectID SoftTargetId;
+    [FieldOffset(0x1B60)] public GameObjectId SoftTargetId;
 
-    [FieldOffset(0x1B98)] public uint NameID;
+    [FieldOffset(0x1B98)] public uint NameId;
 
-    [FieldOffset(0x1BA8)] public uint CompanionOwnerID;
+    [FieldOffset(0x1BA8)] public uint CompanionOwnerId;
 
     [FieldOffset(0x1BB0)] public ushort CurrentWorld;
     [FieldOffset(0x1BB2)] public ushort HomeWorld;
 
-    [FieldOffset(0x1BB6), Obsolete("Use Mode")] public byte EventState; // Leave for backwards compat. See Mode.
     [FieldOffset(0x1BB6)] public CharacterModes Mode;
     [FieldOffset(0x1BB7)] public byte ModeParam; // Different purpose depending on mode. See CharacterModes for more info.
 
@@ -104,12 +96,11 @@ public unsafe partial struct Character {
     /// target ID from the <see cref="TargetSystem"/>. Used for calculating ToT via /assist.
     /// </summary>
     /// <returns>Returns the object ID of this character's target.</returns>
-    // TODO: Update this return type to GameObjectID with next API bump.
     [MemberFunction("E8 ?? ?? ?? ?? 49 3B C7 0F 84")]
-    public partial ulong GetTargetId();
+    public partial GameObjectId GetTargetId();
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 3B FD 74 36")]
-    public partial void SetTargetId(GameObjectID id);
+    public partial void SetTargetId(GameObjectId id);
 
     /// <summary>
     /// Gets the soft target ID for this character. If this character is the LocalPlayer, this will instead read the
@@ -117,10 +108,10 @@ public unsafe partial struct Character {
     /// </summary>
     /// <returns>Returns the object ID of this character's target.</returns>
     [MemberFunction("E8 ?? ?? ?? ?? 49 3B C5")]
-    public partial GameObjectID GetSoftTargetId();
+    public partial GameObjectId GetSoftTargetId();
 
     [MemberFunction("E8 ?? ?? ?? ?? B8 ?? ?? ?? ?? 4C 3B F0")]
-    public partial void SetSoftTargetId(GameObjectID id);
+    public partial void SetSoftTargetId(GameObjectId id);
 
     public bool IsMounted() => Mount.MountId != 0;
 
@@ -157,11 +148,9 @@ public unsafe partial struct Character {
         [FieldOffset(0x00)] public byte IsCasting;
         [FieldOffset(0x01)] public byte Interruptible;
         [FieldOffset(0x02)] public ActionType ActionType;
-        [FieldOffset(0x04)] public uint ActionID;
-        [FieldOffset(0x08)] public uint Unk_08;
-        [FieldOffset(0x10)] public uint CastTargetID;
+        [FieldOffset(0x04)] public uint ActionId;
+        [FieldOffset(0x10)] public uint CastTargetId;
         [FieldOffset(0x20)] public Vector3 CastLocation;
-        [FieldOffset(0x30)] public uint Unk_30;
         [FieldOffset(0x34)] public float CurrentCastTime;
         [FieldOffset(0x38)] public float TotalCastTime;
         [FieldOffset(0x3C)] public float AdjustedTotalCastTime;
@@ -191,7 +180,7 @@ public unsafe partial struct Character {
             get => ForayRank;
             set => ForayRank = value;
         }
-        [FieldOffset(0x01)] public EurekaElement Element; //only on enemies
+        [FieldOffset(0x01)] public byte Element;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0xF0)]
@@ -297,7 +286,7 @@ public unsafe partial struct Character {
 
         public bool IsFacingCamera {
             get => (FaceCameraFlag & 0x1) == 0x1;
-            set => FaceCameraFlag |= 0x1;
+            set => FaceCameraFlag |= 0x1; //TODO use value?
         }
 
         [Flags]
@@ -306,16 +295,6 @@ public unsafe partial struct Character {
             Head = 1,
             Eyes = 2,
         }
-    }
-
-    public enum EurekaElement : byte {
-        None = 0,
-        Fire = 1,
-        Ice = 2,
-        Wind = 3,
-        Earth = 4,
-        Lightning = 5,
-        Water = 6,
     }
 
     // Seems similar to ConditionFlag in Dalamud but not all flags are valid on the character

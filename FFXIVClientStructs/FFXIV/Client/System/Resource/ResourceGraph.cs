@@ -27,14 +27,14 @@ public enum ResourceCategory {
 public unsafe partial struct ResourceGraph {
     [StructLayout(LayoutKind.Explicit, Size = 0xA0)]
     public partial struct CategoryContainer {
-        [FixedSizeArray<Pointer<CategoryMap>>(0x14)]
-        [FieldOffset(0x0)] public fixed byte CategoryMaps[0x8 * 0x14];
+        [FixedSizeArray<Pointer<CategoryMap>>(20)]
+        [FieldOffset(0x0)] public fixed byte CategoryMaps[0x8 * 20];
 
         [FieldOffset(0x0), Obsolete("Use CategoryMapsSpan[0]")] public CategoryMap* MainMap;
     }
 
-    [FixedSizeArray<CategoryContainer>(0x14)]
-    [FieldOffset(0x0)] public fixed byte ContainerArray[0xA0 * 0x14];
+    [FixedSizeArray<CategoryContainer>(20)]
+    [FieldOffset(0x0)] public fixed byte ContainerArray[0xA0 * 20];
 
     [FieldOffset(0x000), Obsolete("Use ContainerArraySpan[0]")] public CategoryContainer CommonContainer;
     [FieldOffset(0x0A0), Obsolete("Use ContainerArraySpan[1]")] public CategoryContainer BgCommonContainer;

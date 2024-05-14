@@ -1,6 +1,5 @@
 namespace FFXIVClientStructs.Havok;
 
-// TODO
 [StructLayout(LayoutKind.Sequential)]
 public struct hkxMesh {
     hkReferencedObject hkReferencedObject;

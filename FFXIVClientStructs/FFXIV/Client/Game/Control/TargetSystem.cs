@@ -13,7 +13,7 @@ public unsafe partial struct TargetSystem {
     [FieldOffset(0xE0)] public GameObject* MouseOverNameplateTarget;
     [FieldOffset(0xF8)] public GameObject* FocusTarget;
     [FieldOffset(0x110)] public GameObject* PreviousTarget;
-    [FieldOffset(0x140)] public GameObjectID TargetObjectId;
+    [FieldOffset(0x140)] public GameObjectId TargetObjectId;
     [FieldOffset(0x148)] public GameObjectArray ObjectFilterArray0;
 
     [FieldOffset(0x1A98)] public GameObjectArray ObjectFilterArray1;
@@ -29,7 +29,7 @@ public unsafe partial struct TargetSystem {
     public static partial TargetSystem* Instance();
 
     [MemberFunction("E8 ?? ?? ?? ?? 4C 8B F8 EB 13")]
-    public partial ulong GetCurrentTargetID();
+    public partial ulong GetCurrentTargetId();
 
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 83 C0 ED")]
     public partial GameObject* GetCurrentTarget();

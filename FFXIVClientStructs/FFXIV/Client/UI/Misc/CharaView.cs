@@ -50,7 +50,7 @@ public unsafe partial struct CharaView : ICreatable {
     public readonly partial void Dtor(bool freeMemory);
 
     [VirtualFunction(1)]
-    public readonly partial void Initialize(nint agent, int clientObjectId, nint agentCallbackReady);
+    public readonly partial void Initialize(nint agent, uint clientObjectId, nint agentCallbackReady);
 
     [VirtualFunction(2)]
     public readonly partial void Release(); // aka Finalize

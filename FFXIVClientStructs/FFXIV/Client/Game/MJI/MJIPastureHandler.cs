@@ -81,8 +81,6 @@ public unsafe struct MJIAnimal {
     /// </summary>
     [FieldOffset(0x26)] public byte Mood;
 
-    [FieldOffset(0x27), Obsolete("Use ManualLeavingsAvailable & UnderCare fields instead.")] public ushort Leavings; // ?? unsure why this is a ushort.
-
     /// <summary>
     /// True if there are some leavings that you can manually collect.
     /// </summary>
@@ -139,5 +137,5 @@ public struct MJIMinionSlot {
     /// Check if this specific Minion Slot contains a minion or not.
     /// </summary>
     /// <returns>Returns <c>true</c> if a minion is present, <c>false</c> otherwise.</returns>
-    public bool IsSlotPopulated() => this.MinionId != 0;
+    public bool IsSlotPopulated() => MinionId != 0;
 }

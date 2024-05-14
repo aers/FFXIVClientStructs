@@ -13,25 +13,25 @@ public unsafe partial struct ActionManager {
     [FieldOffset(0x68)] public bool ActionQueued;
     [FieldOffset(0x6C)] public ActionType QueuedActionType;
     [FieldOffset(0x70)] public uint QueuedActionId;
-    [FieldOffset(0x78)] public GameObjectID QueuedTargetId;
+    [FieldOffset(0x78)] public GameObjectId QueuedTargetId;
     [FieldOffset(0x80)] public uint QueueType;
 
     [FieldOffset(0x13C)] public fixed uint BlueMageActions[24];
 
     [MemberFunction("E8 ?? ?? ?? ?? EB 64 B1 01")]
-    public partial bool UseAction(ActionType actionType, uint actionID, ulong targetID = 0xE000_0000, uint a4 = 0, uint a5 = 0, uint a6 = 0, void* a7 = null);
+    public partial bool UseAction(ActionType actionType, uint actionId, ulong targetId = 0xE000_0000, uint a4 = 0, uint a5 = 0, uint a6 = 0, void* a7 = null);
 
     [MemberFunction("E8 ?? ?? ?? ?? 3C 01 0F 85 ?? ?? ?? ?? EB 46")]
-    public partial bool UseActionLocation(ActionType actionType, uint actionID, ulong targetID = 0xE000_0000, Vector3* location = null, uint a4 = 0);
+    public partial bool UseActionLocation(ActionType actionType, uint actionId, ulong targetId = 0xE000_0000, Vector3* location = null, uint a4 = 0);
 
     [MemberFunction("E8 ?? ?? ?? ?? 3D ?? ?? ?? ?? 74 42")]
-    public partial uint GetActionStatus(ActionType actionType, uint actionID, ulong targetID = 0xE000_0000, bool checkRecastActive = true, bool checkCastingActive = true, uint* outOptExtraInfo = null);
+    public partial uint GetActionStatus(ActionType actionType, uint actionId, ulong targetId = 0xE000_0000, bool checkRecastActive = true, bool checkCastingActive = true, uint* outOptExtraInfo = null);
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B F8 3B DF")]
-    public partial uint GetAdjustedActionId(uint actionID);
+    public partial uint GetAdjustedActionId(uint actionId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 83 7F 4C 01 44 0F 28 C8")]
-    public partial float GetRecastTime(ActionType actionType, uint actionID);
+    public partial float GetRecastTime(ActionType actionType, uint actionId);
 
     /// <summary>
     /// Gets the recast time (see <see cref="RecastDetail.Total"/> for a specific recast group.
@@ -46,13 +46,13 @@ public unsafe partial struct ActionManager {
     public partial float GetRecastTimeForGroup(int recastGroupId);
 
     [MemberFunction("E8 ?? ?? ?? ?? F3 0F 5C F0 49 8B CD")]
-    public partial float GetRecastTimeElapsed(ActionType actionType, uint actionID);
+    public partial float GetRecastTimeElapsed(ActionType actionType, uint actionId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 3C 01 74 19 FF C3")]
-    public partial bool IsRecastTimerActive(ActionType actionType, uint actionID);
+    public partial bool IsRecastTimerActive(ActionType actionType, uint actionId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B D0 48 8B CD 8B F0")]
-    public partial int GetRecastGroup(int type, uint actionID);
+    public partial int GetRecastGroup(int type, uint actionId);
 
     /// <summary>
     /// Gets the additional recast group for a specific action.
@@ -115,10 +115,10 @@ public unsafe partial struct ActionManager {
     public static partial int GetActionCost(ActionType actionType, uint actionId, byte a3, byte a4, byte a5, byte a6);
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B D6 41 8B CF")]
-    public static partial int GetAdjustedRecastTime(ActionType actionType, uint actionID, byte a3 = 1);
+    public static partial int GetAdjustedRecastTime(ActionType actionType, uint actionId, byte a3 = 1);
 
     [MemberFunction("E8 ?? ?? ?? ?? 85 C0 0F 84 ?? ?? ?? ?? 33 C9")]
-    public static partial int GetAdjustedCastTime(ActionType actionType, uint actionID, byte a3 = 1, byte* a4 = null);
+    public static partial int GetAdjustedCastTime(ActionType actionType, uint actionId, byte a3 = 1, byte* a4 = null);
 
     [MemberFunction("E8 ?? ?? ?? ?? 33 DB 8B C8")]
     public static partial ushort GetMaxCharges(uint actionId, uint level); // 0 for current level
@@ -180,7 +180,7 @@ public struct RecastDetail {
     /// <summary>
     /// The last Action ID that triggered an update for this recast group. 
     /// </summary>
-    [FieldOffset(0x4)] public uint ActionID;
+    [FieldOffset(0x4)] public uint ActionId;
 
     /// <summary>
     /// The current "elapsed" time of this action's recharge. For most actions, this value will be set to zero when the

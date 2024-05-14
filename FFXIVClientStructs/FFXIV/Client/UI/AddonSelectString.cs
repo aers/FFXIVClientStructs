@@ -12,9 +12,6 @@ public unsafe partial struct AddonSelectString {
     [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
     [FieldOffset(0x220)] public PopupMenuDerive PopupMenu;
 
-    [VirtualFunction(48), Obsolete("Use AtkUnitBase.OnSetup")]
-    public partial void OnSetup(uint a2, AtkValue* atkValues);
-
     [StructLayout(LayoutKind.Explicit, Size = 0x70)]
     public struct PopupMenuDerive {
         [FieldOffset(0x0)] public PopupMenu PopupMenu;

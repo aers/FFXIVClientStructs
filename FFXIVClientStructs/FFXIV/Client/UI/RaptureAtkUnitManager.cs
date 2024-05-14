@@ -12,9 +12,6 @@ public unsafe partial struct RaptureAtkUnitManager {
     public static RaptureAtkUnitManager* Instance() => &RaptureAtkModule.Instance()->RaptureAtkUnitManager;
 
     [FieldOffset(0x0)] public AtkUnitManager AtkUnitManager;
-
-    [FieldOffset(0x9C88), Obsolete("Use AtkUnitManager.Flags instead")] public RaptureAtkModuleFlags Flags;
-    [FieldOffset(0x9C90), Obsolete("Renamed to WindowContextMenuHandler")] public AtkEventInterface AtkEventInterface;
     [FieldOffset(0x9C90)] public AtkEventInterface WindowContextMenuHandler;
 
     [FieldOffset(0x9D00)] public UIModule.UiFlags UiFlags;
@@ -29,11 +26,11 @@ public unsafe partial struct RaptureAtkUnitManager {
     public partial AtkUnitBase* GetAddonById(ushort id);
 
     [VirtualFunction(8)]
-    public partial bool ShowAddonByID(ushort addonId, bool show); // True calls AtkUnitBase.Show, False calls AtkUnitBase.Hide
+    public partial bool ShowAddonById(ushort addonId, bool show); // True calls AtkUnitBase.Show, False calls AtkUnitBase.Hide
 
     [VirtualFunction(10)]
     public partial void RefreshAddon(AtkUnitBase* addon, uint numValues, AtkValue* values);
 
     [VirtualFunction(11)]
-    public partial void UpdateAddonByID(ushort addonId, NumberArrayData** numberArrayData, StringArrayData** stringArrayData, bool forced);
+    public partial void UpdateAddonById(ushort addonId, NumberArrayData** numberArrayData, StringArrayData** stringArrayData, bool forced);
 }

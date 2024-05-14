@@ -30,7 +30,7 @@ public unsafe partial struct InstanceContentOceanFishing {
     // After changing zones, seems to tick down independent of the UI and then jump up
     [FieldOffset(0x1CE0)] public uint TimeOffset;
 
-    [FieldOffset(0x1CE4)] public uint WeatherID;
+    [FieldOffset(0x1CE4)] public uint WeatherId;
 
     [FieldOffset(0x1CE8)] public bool SpectralCurrentActive;
 

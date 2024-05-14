@@ -53,7 +53,7 @@ public unsafe partial struct CharaViewPortrait : ICreatable {
     public readonly partial void Dtor(bool freeMemory);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 43 10 C6 80 ?? ?? ?? ?? ?? 48 8B 4B 10")]
-    public readonly partial void Initialize(int clientObjectId, CharaViewCharacterData* characterData, long a4, int a5, long a6); // a4 is set to +0x3A8, a5 is set to +0x3B0, a6 is set to +0x3B8
+    public readonly partial void Initialize(uint clientObjectId, CharaViewCharacterData* characterData, long a4, int a5, long a6); // a4 is set to +0x3A8, a5 is set to +0x3B0, a6 is set to +0x3B8
 
     [VirtualFunction(2)]
     public readonly partial void Release(); // aka Finalize

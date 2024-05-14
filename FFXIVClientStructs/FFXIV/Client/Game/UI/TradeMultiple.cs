@@ -2,11 +2,11 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
-// Client::Game::UI::TradeMultiple
+// Client::Game::UI::MateriaTrade
 //   Component::GUI::AtkModuleInterface::AtkEventInterface
 // Materia Transmutation
 [StructLayout(LayoutKind.Explicit, Size = 0x48)]
-public unsafe struct TradeMultiple {
+public unsafe struct MateriaTrade {
     [FieldOffset(0)] public AtkEventInterface AtkEventInterface;
 
     [FieldOffset(0x10)] public uint Unk10;

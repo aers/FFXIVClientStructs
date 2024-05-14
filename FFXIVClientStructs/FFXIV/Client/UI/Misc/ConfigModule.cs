@@ -23,15 +23,15 @@ public unsafe partial struct ConfigModule {
         public const int Size = 0x20;
         [FieldOffset(0x00)] public void* Unk00;
         [FieldOffset(0x08)] public ulong Unk08;
-        [FieldOffset(0x10)] public ConfigOption OptionID;
+        [FieldOffset(0x10)] public ConfigOption OptionId;
         [FieldOffset(0x14)] public uint Unk14;
         [FieldOffset(0x18)] public uint Unk18;
         [FieldOffset(0x1C)] public ushort Unk1C;
 
         public string GetName() {
-            if ((short)OptionID < 0) return string.Empty;
+            if ((short)OptionId < 0) return string.Empty;
             var sysConfig = Framework.Instance()->SystemConfig;
-            var id = (uint)OptionID;
+            var id = (uint)OptionId;
             byte* namePtr = null;
             if (sysConfig.CommonSystemConfig.ConfigBase.ConfigCount > id) namePtr = (sysConfig.CommonSystemConfig.ConfigBase.ConfigEntry + id)->Name;
             if (namePtr == null && sysConfig.CommonSystemConfig.UiConfig.ConfigCount > id) namePtr = (sysConfig.CommonSystemConfig.UiConfig.ConfigEntry + id)->Name;

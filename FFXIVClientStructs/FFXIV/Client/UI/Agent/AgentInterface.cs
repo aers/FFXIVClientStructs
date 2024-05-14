@@ -24,10 +24,10 @@ public unsafe partial struct AgentInterface {
     public partial bool IsAgentActive();
 
     [VirtualFunction(8)]
-    public partial uint GetAddonID();
+    public partial uint GetAddonId();
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B 6E 20")]
-    public partial AgentInterface* GetAgentByInternalId(AgentId agentID);
+    public partial AgentInterface* GetAgentByInternalId(AgentId agentId);
 
     [MemberFunction("E8 ?? ?? ?? ?? EB 5D 44 8B C5")]
     public partial bool IsAddonReady();

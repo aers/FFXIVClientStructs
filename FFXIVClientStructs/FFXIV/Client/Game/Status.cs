@@ -2,7 +2,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 
 [StructLayout(LayoutKind.Explicit, Size = 0xC)]
 public struct Status {
-    [FieldOffset(0x0)] public ushort StatusID;
+    [FieldOffset(0x0)] public ushort StatusId;
     // this contains different information depending on the type of status
     // debuffs - stack count
     // food/potions - ID of the food/potion in the ItemFood sheet
@@ -11,5 +11,5 @@ public struct Status {
     [FieldOffset(0x2), CExporterUnion("Union.Param")] public byte StackCount;
     [FieldOffset(0x4)] public float RemainingTime;
     // objectID matching the entity that cast the effect - regens will be from the white mage ID etc
-    [FieldOffset(0x8)] public uint SourceID;
+    [FieldOffset(0x8)] public uint SourceId;
 }

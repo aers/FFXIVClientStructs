@@ -5,7 +5,6 @@ public unsafe partial struct ContentsFinder {
     [StaticAddress("0F B6 FA 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 80 78 59 02", 6)]
     public static partial ContentsFinder* Instance();
 
-    [FieldOffset(0x00)] public void* vtbl;
     [FieldOffset(0x18)] public LootRule LootRules;
 
     [FieldOffset(0x19)] public bool IsUnrestrictedParty;
@@ -15,19 +14,6 @@ public unsafe partial struct ContentsFinder {
     [FieldOffset(0x1D)] public bool IsLevelSync;
     [FieldOffset(0x1E)] public bool IsLimitedLevelingRoulette;
     [FieldOffset(0x20)] public ContentsFinderQueueInfo QueueInfo;
-
-    [Obsolete("Use ContentsFinder.QueueInfo.EnteredQueueTimestamp")]
-    [FieldOffset(0x60)] public int EnteredQueueTimestamp;
-    [Obsolete("Use ContentsFinder.QueueInfo.PositionInQueue")]
-    [FieldOffset(0x7C)] public byte PositionInQueue;
-    [Obsolete("Use ContentsFinder.QueueInfo.AverageWaitTime")]
-    [FieldOffset(0x87)] public byte AverageWaitTime; // In minutes
-
-    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 53 06 49 8B CE")]
-    public partial uint SetJoinInProgress(bool isUnrestrictedParty); // TODO: actually part of Client::UI::AddonContentsFinder
-
-    [Obsolete("Use ContentsFinder.QueueInfo.GetEnteredQueueDateTime()")]
-    public DateTime GetEnteredQueueDateTime() => DateTime.UnixEpoch.AddSeconds(QueueInfo.EnteredQueueTimestamp);
 
     public enum LootRule : byte {
         Normal = 0,

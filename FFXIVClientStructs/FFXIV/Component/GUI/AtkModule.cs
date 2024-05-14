@@ -22,24 +22,14 @@ public unsafe partial struct AtkModule {
     [FieldOffset(0x2A8)] public RaptureAtkUnitManager* RaptureAtkUnitManager;
     [FieldOffset(0x2B0)] public AtkInputManager AtkInputManager;
     [FieldOffset(0x1B50)] public AtkCollisionManager AtkCollisionManager;
-    [Obsolete("Use AtkCollisionManager.IntersectingAddon")]
-    [FieldOffset(0x1B58)] public AtkUnitBase* IntersectingAddon;
-    [Obsolete("Use AtkCollisionManager.IntersectingCollisionNode")]
-    [FieldOffset(0x1B60)] public AtkCollisionNode* IntersectingCollisionNode;
     [FieldOffset(0x1B90)] public AtkArrayDataHolder AtkArrayDataHolder;
     [FieldOffset(0x1BE0)] public AtkTimerHolder AtkTimerHolder;
     [FieldOffset(0x1C00)] public AtkSimpleTweenHolder AtkSimpleTweenHolder;
     [FieldOffset(0x5C08)] public AtkCrestManager AtkCrestManager;
     [FieldOffset(0x5C50)] public AtkUIColorHolder AtkUIColorHolder;
-    [Obsolete("Use AtkUIColorHolder.UIColorSheetName")]
-    [FieldOffset(0x5C50)] public Utf8String UIColorSheetName;
-    [Obsolete("Use AtkUIColorHolder.ActiveColorThemeType")]
-    [FieldOffset(0x5CC4)] public byte ActiveColorThemeType;
 
     [FieldOffset(0x5D00)] public AtkFontCodeModule AtkFontCodeModule;
     [FieldOffset(0x7280)] internal StdVector<nint> CallbackHandlerFunctions;
-    [Obsolete("Wrong type. This points to UIModule+0x8 (AtkModuleEvent*)")]
-    [FieldOffset(0x7298)] public UIModule* UIModulePtr;
     //[FieldOffset(0x72A0)] internal StdMap<?,?> AgentAddonMapping; // maybe?
 
     [FieldOffset(0x72B8)] public TextService TextService;

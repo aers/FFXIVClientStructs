@@ -6,8 +6,8 @@ public unsafe partial struct RelicNote {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 84 C0 74 7E", 3)]
     public static partial RelicNote* Instance();
 
-    [FieldOffset(0x08)] public byte RelicID;
-    [FieldOffset(0x09)] public byte RelicNoteID;
+    [FieldOffset(0x08)] public byte RelicId;
+    [FieldOffset(0x09)] public byte RelicNoteId;
     [FieldOffset(0x0A)] public fixed byte MonsterProgress[10];
     [FieldOffset(0x14)] public int ObjectiveProgress;
 

@@ -28,14 +28,13 @@ public unsafe partial struct AgentRecipeNote {
     // Weaver         5         13
     // Alchemist      6         14
     // Culinarian     7         15
-    public void OpenRecipeByRecipeId(uint recipeID)
-        => this.OpenRecipeByRecipeIdInternal(recipeID + 0x10_000);
+    public void OpenRecipeByRecipeId(uint recipeId) => OpenRecipeByRecipeIdInternal(recipeId + 0x10_000);
 
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 83 F8 06")]
-    public partial void OpenRecipeByItemId(uint itemID);
+    public partial void OpenRecipeByItemId(uint itemId);
 
     [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 20 83 B9 ?? ?? ?? ?? ?? 8B FA 48 8B D9 0F 85 ?? ?? ?? ??")]
-    public partial void OpenRecipeByRecipeIdInternal(uint internalRecipeID); // Add 0x10_000 to the Recipe row ID
+    public partial void OpenRecipeByRecipeIdInternal(uint internalRecipeId); // Add 0x10_000 to the Recipe row ID
 
     [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 56 48 83 EC 20 80 B9 ?? ?? ?? ?? ??")]
     public partial void SearchRecipe(Utf8String* text, byte a3, bool pushHistory);

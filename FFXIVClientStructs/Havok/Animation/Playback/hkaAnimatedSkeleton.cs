@@ -4,7 +4,7 @@ namespace FFXIVClientStructs.Havok;
 public unsafe partial struct hkaAnimatedSkeleton {
     [StructLayout(LayoutKind.Sequential)]
     public struct BoneAnnotation {
-        public ushort BoneID;
+        public ushort BoneId;
         public hkaAnnotationTrack.Annotation Annotation;
     }
 

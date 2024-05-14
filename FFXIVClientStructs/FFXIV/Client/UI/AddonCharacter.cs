@@ -14,9 +14,7 @@ public unsafe partial struct AddonCharacter {
     [FieldOffset(0x48C)] public int TabCount;
 
     [FieldOffset(0x490)] public AtkAddonControl AddonControl;
-    [Obsolete($"Use AddonControl.{nameof(AtkAddonControl.IsChildSetupComplete)}")]
-    [FieldOffset(0x4ED)] public bool EmbeddedAddonLoaded;
-
+    
     [FieldOffset(0xBA8)] public AtkCollisionNode* CharacterPreviewCollisionNode;
 
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 83 C6 EE")]

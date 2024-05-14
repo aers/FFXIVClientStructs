@@ -19,7 +19,7 @@ public partial struct AgentStatus {
     [StructLayout(LayoutKind.Explicit, Size = 0x2D0)]
     public struct StatusCharaView {
         [FieldOffset(0)] public CharaView Base;
-        [FieldOffset(0x2C8)] public uint MainhandItemID;
+        [FieldOffset(0x2C8)] public uint MainhandItemId;
         [FieldOffset(0x2CC)] public bool DrawWeapon;
     }
 }

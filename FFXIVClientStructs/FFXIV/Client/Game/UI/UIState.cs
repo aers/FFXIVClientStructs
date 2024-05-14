@@ -26,8 +26,8 @@ public unsafe partial struct UIState {
     [FieldOffset(0x3730)] internal void* Unk3730; // some UI timer for PvP Results?!
     [FieldOffset(0x3738)] public ContentsNote ContentsNote;
     [FieldOffset(0x37F0)] public RelicNote RelicNote;
-    [FieldOffset(0x3808)] public TradeMultiple TradeMultiple;
-    [FieldOffset(0x3850)] public AreaInstance AreaInstance; // at vtbl - 0x10
+    [FieldOffset(0x3808)] public MateriaTrade MateriaTrade;
+    [FieldOffset(0x3850)] public PublicInstance PublicInstance;
     [FieldOffset(0x3878)] public RelicSphereUpgrade RelicSphereUpgrade;
     [FieldOffset(0x38F0)] public DailyQuestSupply DailyQuestSupply;
     [FieldOffset(0x3CD8)] public RidePillon RidePillon;
@@ -53,7 +53,7 @@ public unsafe partial struct UIState {
     [FieldOffset(0xFAE8)] public TitleList TitleList;
 
     [FieldOffset(0xFB70)] public GCSupply GCSupply;
-    [FieldOffset(0x12798)] public RouletteController RouletteController;
+    [FieldOffset(0x12798)] public InstanceContent InstanceContent;
     [FieldOffset(0x12808)] public GuildOrderReward GuildOrderReward;
     [FieldOffset(0x12868)] public ContentsFinder ContentsFinder;
     [FieldOffset(0x12918)] public Wedding Wedding;
@@ -118,8 +118,7 @@ public unsafe partial struct UIState {
     /// progression?) for quest-based checks. Virtually always <c>true</c> in game code.</param>
     /// <returns>Returns true if the unlock link is unlocked or if the quest is completed.</returns>
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 CE")]
-    public partial bool IsUnlockLinkUnlockedOrQuestCompleted(uint unlockLinkOrQuestId, byte minQuestProgression = 0,
-        bool a4 = true);
+    public partial bool IsUnlockLinkUnlockedOrQuestCompleted(uint unlockLinkOrQuestId, byte minQuestProgression = 0, bool a4 = true);
 
     /// <summary>
     /// Check an item (by EXD row) to see if the action associated with the item is unlocked or "obtained/registered."
