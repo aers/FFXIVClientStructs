@@ -33,6 +33,33 @@ internal static class DiagnosticDescriptors {
         "A struct was marked with the GenerateInterop attribute but is contained in a class."
     );
 
+    public static readonly DiagnosticDescriptor GenerationTargetMustUseStructLayoutAttribute = new(
+        "CSIG0004",
+        "Struct generation target must use the StructLayout attribute",
+        "The struct {0} does not have the StructLayout attribute",
+        "InteropGenerator.Struct",
+        DiagnosticSeverity.Error,
+        true,
+        "A struct was marked with the GenerateInterop attribute but is not marked with the StructLayout attribute.");
+    
+    public static readonly DiagnosticDescriptor GenerationTargetMustUseLayoutKindExplicit = new(
+        "CSIG0005",
+        "Struct generation target must use LayoutKind.Explicit",
+        "The struct {0} has the StructLayout attribute but does not use LayoutKind.Explicit",
+        "InteropGenerator.Struct",
+        DiagnosticSeverity.Error,
+        true,
+        "A struct was marked with the GenerateInterop attribute but does not use LayoutKind.Explicit.");
+    
+    public static readonly DiagnosticDescriptor GenerationTargetMustHaveExplicitSize = new(
+        "CSIG0006",
+        "Struct generation target must provide an explicit size",
+        "The struct {0} has the StructLayout attribute but does not provide an explicit size",
+        "InteropGenerator.Struct",
+        DiagnosticSeverity.Error,
+        true,
+        "A struct was marked with the GenerateInterop attribute but does not provide an explicit size.");
+
     public static readonly DiagnosticDescriptor GenerationRequiresPartialMethod = new(
         "CSIG0101",
         "Method generation target is not partial",

@@ -15,6 +15,16 @@ public sealed partial class InteropGenerator {
         ParseMethods(structSymbol, token, out EquatableArray<MemberFunctionInfo> memberFunctions, out EquatableArray<VirtualFunctionInfo> virtualFunctions, out EquatableArray<StaticAddressInfo> staticAddresses);
         token.ThrowIfCancellationRequested();
 
+        // other struct attributes
+        SignatureInfo? virtualTableSignatureInfo = null;
+        if (structSymbol.TryGetAttributeWithFullyQualifiedMetadataName(AttributeNames.VirtualTableAttribute, out AttributeData? virtualTableAttribute)) {
+            if (virtualTableAttribute.TryGetConstructorArgument(0, out string? signature) &&
+                virtualTableAttribute.TryGetConstructorArgument(1, out byte? relativeOffset)) {
+                virtualTableSignatureInfo = new SignatureInfo(signature, relativeOffset.Value);
+            }
+        }
+
+
         // get containing types; our analyzer validates structs are contained in a proper hierarchy so not needed here
         using ImmutableArrayBuilder<string> hierarchy = new();
 
@@ -32,7 +42,8 @@ public sealed partial class InteropGenerator {
             hierarchy.ToImmutable(),
             memberFunctions,
             virtualFunctions,
-            staticAddresses);
+            staticAddresses,
+            virtualTableSignatureInfo);
     }
 
     private static void ParseMethods(INamedTypeSymbol structSymbol, CancellationToken token,

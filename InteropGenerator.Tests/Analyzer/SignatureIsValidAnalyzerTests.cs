@@ -34,6 +34,19 @@ public class SignatureIsValidAnalyzerTests {
     }
     
     [Fact]
+    public async Task SignatureIsValid_VirtualTable_NoWarn() {
+        const string code = """
+                            [VirtualTable("AB CD EF ?? 01 23 45 67 89", 0)]
+                            [GenerateInterop]
+                            public unsafe partial struct TestStruct
+                            {
+                            }
+                            """;
+
+        await AnalyzerVerifier<SignatureIsValidAnalyzer>.VerifyAnalyzerAsync(code);
+    }
+    
+    [Fact]
     public async Task SignatureIsInvalid_MemberFunction_Warn() {
         const string code = """
                             [GenerateInterop]
@@ -55,6 +68,19 @@ public class SignatureIsValidAnalyzerTests {
                             {
                                 [{|CSIG0201:StaticAddress("ab cd ef", 0)|}]
                                 public static TestStruct* Instance() { return null; }
+                            }
+                            """;
+
+        await AnalyzerVerifier<SignatureIsValidAnalyzer>.VerifyAnalyzerAsync(code);
+    }
+    
+    [Fact]
+    public async Task SignatureIsInvalid_VirtualTable_Warn() {
+        const string code = """
+                            [VirtualTable("asdf jkl;", 0)]
+                            [GenerateInterop]
+                            public unsafe partial struct TestStruct
+                            {
                             }
                             """;
 

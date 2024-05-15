@@ -8,8 +8,9 @@ internal sealed record StructInfo(
     EquatableArray<string> Hierarchy,
     EquatableArray<MemberFunctionInfo> MemberFunctions,
     EquatableArray<VirtualFunctionInfo> VirtualFunctions,
-    EquatableArray<StaticAddressInfo> StaticAddresses) {
+    EquatableArray<StaticAddressInfo> StaticAddresses,
+    SignatureInfo? StaticVirtualTableSignature) {
     public string Name => Hierarchy[0];
-    public bool HasSignatures() => !MemberFunctions.IsEmpty || !StaticAddresses.IsEmpty;
-    public bool HasVirtualTable() => !VirtualFunctions.IsEmpty;
+    public bool HasSignatures() => !MemberFunctions.IsEmpty || !StaticAddresses.IsEmpty || StaticVirtualTableSignature is not null;
+    public bool HasVirtualTable() => !VirtualFunctions.IsEmpty || StaticVirtualTableSignature is not null;
 }

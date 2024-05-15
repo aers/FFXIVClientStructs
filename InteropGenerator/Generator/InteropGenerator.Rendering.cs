@@ -65,15 +65,18 @@ public sealed partial class InteropGenerator {
         writer.WriteLine("public static class Addresses");
         using (writer.WriteBlock()) {
             foreach (MemberFunctionInfo mfi in structInfo.MemberFunctions) {
-                writer.WriteLine(GetAddressString(structInfo, mfi.MethodInfo, mfi.SignatureInfo));
+                writer.WriteLine(GetAddressString(structInfo, mfi.MethodInfo.Name, mfi.SignatureInfo));
             }
             foreach (StaticAddressInfo sai in structInfo.StaticAddresses) {
-                writer.WriteLine(GetAddressString(structInfo, sai.MethodInfo, sai.SignatureInfo));
+                writer.WriteLine(GetAddressString(structInfo, sai.MethodInfo.Name, sai.SignatureInfo));
+            }
+            if (structInfo.StaticVirtualTableSignature is not null) {
+                writer.WriteLine(GetAddressString(structInfo, "StaticVirtualTable", structInfo.StaticVirtualTableSignature));
             }
         }
     }
 
-    private static string GetAddressString(StructInfo structInfo, MethodInfo methodInfo, SignatureInfo signatureInfo) {
+    private static string GetAddressString(StructInfo structInfo, string signatureName, SignatureInfo signatureInfo) {
         string paddedSignature = signatureInfo.GetPaddedSignature();
         int adjustedOffset = signatureInfo.GetRelCallAndJumpAdjustedOffset();
 
@@ -96,7 +99,7 @@ public sealed partial class InteropGenerator {
 
         string ulongArrayMask = "new ulong[] {" + string.Join(", ", groupedSigMask) + "}";
 
-        return $"""public static readonly Address {methodInfo.Name} = new Address("{structInfo.FullyQualifiedMetadataName}.{methodInfo.Name}", "{paddedSignature}", {adjustedOffset}, {ulongArraySignature}, {ulongArrayMask}, 0);""";
+        return $"""public static readonly Address {signatureName} = new Address("{structInfo.FullyQualifiedMetadataName}.{signatureName}", "{paddedSignature}", {adjustedOffset}, {ulongArraySignature}, {ulongArrayMask}, 0);""";
     }
 
     private static void RenderVirtualTable(StructInfo structInfo, IndentedTextWriter writer) {
@@ -109,6 +112,9 @@ public sealed partial class InteropGenerator {
             }
         }
         writer.WriteLine($"[FieldOffset(0)] public {structInfo.Name}VirtualTable* VirtualTable;");
+        if (structInfo.StaticVirtualTableSignature is not null) {
+            writer.WriteLine($"public static {structInfo.Name}VirtualTable* StaticVirtualTablePointer => ({structInfo.Name}VirtualTable*)Addresses.StaticVirtualTable.Value;");
+        }
     }
 
     private static void RenderMemberFunctions(StructInfo structInfo, IndentedTextWriter writer) {
@@ -189,11 +195,15 @@ public sealed partial class InteropGenerator {
                 foreach (StructInfo sInfo in structInfos) {
                     // member function addresses
                     foreach (MemberFunctionInfo mfi in sInfo.MemberFunctions) {
-                        writer.WriteLine(GetAddToResolverString(sInfo, mfi.MethodInfo));
+                        writer.WriteLine(GetAddToResolverString(sInfo, mfi.MethodInfo.Name));
                     }
                     // static addresses
                     foreach (StaticAddressInfo sai in sInfo.StaticAddresses) {
-                        writer.WriteLine(GetAddToResolverString(sInfo, sai.MethodInfo));
+                        writer.WriteLine(GetAddToResolverString(sInfo, sai.MethodInfo.Name));
+                    }
+                    // static virtual table
+                    if (sInfo.StaticVirtualTableSignature is not null) {
+                        writer.WriteLine(GetAddToResolverString(sInfo, "StaticVirtualTable"));
                     }
                 }
             }
@@ -202,9 +212,9 @@ public sealed partial class InteropGenerator {
         return writer.ToString();
     }
 
-    private static string GetAddToResolverString(StructInfo structInfo, MethodInfo methodInfo) {
+    private static string GetAddToResolverString(StructInfo structInfo, string signatureName) {
         string namespaceString = string.IsNullOrEmpty(structInfo.Namespace) ? string.Empty : structInfo.Namespace + ".";
         var fullTypeName = $"global::{namespaceString}{string.Join(".", structInfo.Hierarchy.Reverse())}";
-        return $"InteropGenerator.Runtime.Resolver.GetInstance.RegisterAddress({fullTypeName}.Addresses.{methodInfo.Name});";
+        return $"InteropGenerator.Runtime.Resolver.GetInstance.RegisterAddress({fullTypeName}.Addresses.{signatureName});";
     }
 }
