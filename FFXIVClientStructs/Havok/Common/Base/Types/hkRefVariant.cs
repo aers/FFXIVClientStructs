@@ -1,4 +1,7 @@
-namespace FFXIVClientStructs.Havok;
+using FFXIVClientStructs.Havok.Common.Base.Object;
+using FFXIVClientStructs.Havok.Common.Base.Reflection;
+
+namespace FFXIVClientStructs.Havok.Common.Base.Types;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x08)]
 public unsafe partial struct hkRefVariant {

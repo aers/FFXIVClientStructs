@@ -1,4 +1,4 @@
-namespace FFXIVClientStructs.Havok;
+namespace FFXIVClientStructs.Havok.Common.Base.Math.Vector;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
 public unsafe struct hkSimdFloat32 {

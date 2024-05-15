@@ -1,4 +1,9 @@
-namespace FFXIVClientStructs.Havok;
+using FFXIVClientStructs.Havok.Animation.Mapper;
+using FFXIVClientStructs.Havok.Common.Base.Container.Array;
+using FFXIVClientStructs.Havok.Common.Base.Math.Vector;
+using FFXIVClientStructs.Havok.Common.Base.Object;
+
+namespace FFXIVClientStructs.Havok.Animation.Playback.Control.Default;
 
 [StructLayout(LayoutKind.Explicit, Size = 0xC0)]
 public unsafe partial struct hkaDefaultAnimationControl {

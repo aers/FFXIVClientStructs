@@ -1,4 +1,11 @@
-namespace FFXIVClientStructs.Havok;
+using FFXIVClientStructs.Havok.Common.Base.Container.Array;
+using FFXIVClientStructs.Havok.Common.Base.Container.String;
+using FFXIVClientStructs.Havok.Common.Base.Math.QsTransform;
+using FFXIVClientStructs.Havok.Common.Base.Object;
+using FFXIVClientStructs.Havok.Common.Base.Types;
+using FFXIVClientStructs.Havok.Common.Base.Types.Geometry.LocalFrame;
+
+namespace FFXIVClientStructs.Havok.Animation.Rig;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x88)]
 public struct hkaSkeleton {

@@ -1,4 +1,8 @@
-namespace FFXIVClientStructs.Havok;
+using FFXIVClientStructs.Havok.Common.Base.Container.Array;
+using FFXIVClientStructs.Havok.Common.Base.Math.QsTransform;
+using FFXIVClientStructs.Havok.Common.Base.Types.Geometry;
+
+namespace FFXIVClientStructs.Havok.Animation.Rig;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x50)]
 public unsafe partial struct hkaPose {

@@ -1,5 +1,7 @@
 using FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
-using FFXIVClientStructs.Havok;
+using FFXIVClientStructs.Havok.Animation.Playback;
+using FFXIVClientStructs.Havok.Animation.Playback.SampleAndBlend;
+using FFXIVClientStructs.Havok.Animation.Rig;
 
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 

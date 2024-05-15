@@ -1,4 +1,6 @@
-namespace FFXIVClientStructs.Havok;
+using FFXIVClientStructs.Havok.Common.Base.Container.String;
+
+namespace FFXIVClientStructs.Havok.Animation.Rig;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
 public struct hkaBone {

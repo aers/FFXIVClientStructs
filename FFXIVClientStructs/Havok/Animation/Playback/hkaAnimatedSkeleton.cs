@@ -1,4 +1,12 @@
-namespace FFXIVClientStructs.Havok;
+using FFXIVClientStructs.Havok.Animation.Animation;
+using FFXIVClientStructs.Havok.Animation.Playback.Control;
+using FFXIVClientStructs.Havok.Animation.Playback.Control.Default;
+using FFXIVClientStructs.Havok.Animation.Rig;
+using FFXIVClientStructs.Havok.Common.Base.Container.Array;
+using FFXIVClientStructs.Havok.Common.Base.Math.QsTransform;
+using FFXIVClientStructs.Havok.Common.Base.Object;
+
+namespace FFXIVClientStructs.Havok.Animation.Playback;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x40)]
 public unsafe partial struct hkaAnimatedSkeleton {

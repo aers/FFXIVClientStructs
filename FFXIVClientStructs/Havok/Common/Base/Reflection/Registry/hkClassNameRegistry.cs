@@ -1,4 +1,6 @@
-namespace FFXIVClientStructs.Havok;
+using FFXIVClientStructs.Havok.Common.Base.Object;
+
+namespace FFXIVClientStructs.Havok.Common.Base.Reflection.Registry;
 
 // NOTE: this is actually a hkStaticClassNameRegistry : hkClassNameRegistry, which the game uses
 [StructLayout(LayoutKind.Explicit, Size = 0x28)]

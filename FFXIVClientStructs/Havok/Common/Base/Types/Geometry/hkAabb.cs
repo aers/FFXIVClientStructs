@@ -1,4 +1,6 @@
-namespace FFXIVClientStructs.Havok;
+using FFXIVClientStructs.Havok.Common.Base.Math.Vector;
+
+namespace FFXIVClientStructs.Havok.Common.Base.Types.Geometry;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x20)]
 public struct hkAabb {

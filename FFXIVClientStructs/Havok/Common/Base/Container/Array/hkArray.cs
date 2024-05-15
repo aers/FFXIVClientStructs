@@ -1,4 +1,4 @@
-namespace FFXIVClientStructs.Havok;
+namespace FFXIVClientStructs.Havok.Common.Base.Container.Array;
 
 // this can be used as hkArrayBase as well
 [StructLayout(LayoutKind.Sequential)]

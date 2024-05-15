@@ -1,4 +1,4 @@
-namespace FFXIVClientStructs.Havok;
+namespace FFXIVClientStructs.Havok.Common.Base.Container.String;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x08)]
 public unsafe struct hkStringPtr {

@@ -1,4 +1,13 @@
-namespace FFXIVClientStructs.Havok;
+using FFXIVClientStructs.Havok.Common.Base.Container.String;
+using FFXIVClientStructs.Havok.Common.Base.Reflection;
+using FFXIVClientStructs.Havok.Common.Base.Reflection.Registry;
+using FFXIVClientStructs.Havok.Common.Base.System.IO.IStream;
+using FFXIVClientStructs.Havok.Common.Base.System.IO.Reader;
+using FFXIVClientStructs.Havok.Common.Base.System.IO.Writer;
+using FFXIVClientStructs.Havok.Common.Base.Types;
+using FFXIVClientStructs.Havok.Common.Serialize.Resource;
+
+namespace FFXIVClientStructs.Havok.Common.Serialize.Util;
 
 [StructLayout(LayoutKind.Explicit, Size = 0)]
 public unsafe partial struct hkSerializeUtil {

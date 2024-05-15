@@ -1,4 +1,9 @@
-namespace FFXIVClientStructs.Havok;
+using FFXIVClientStructs.Havok.Common.Base.Container.String;
+using FFXIVClientStructs.Havok.Common.Base.Math.Matrix;
+using FFXIVClientStructs.Havok.Common.Base.Object;
+using FFXIVClientStructs.Havok.Common.Base.Types;
+
+namespace FFXIVClientStructs.Havok.Animation.Rig;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x70)]
 public struct hkaBoneAttachment {

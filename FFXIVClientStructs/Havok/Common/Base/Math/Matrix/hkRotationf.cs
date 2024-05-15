@@ -1,4 +1,4 @@
-namespace FFXIVClientStructs.Havok;
+namespace FFXIVClientStructs.Havok.Common.Base.Math.Matrix;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x30)]
 public struct hkRotationf {

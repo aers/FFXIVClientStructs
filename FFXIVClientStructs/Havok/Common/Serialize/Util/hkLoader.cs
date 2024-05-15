@@ -1,4 +1,9 @@
-namespace FFXIVClientStructs.Havok;
+using FFXIVClientStructs.Havok.Common.Base.Container.Array;
+using FFXIVClientStructs.Havok.Common.Base.Object;
+using FFXIVClientStructs.Havok.Common.Base.System.IO.Reader;
+using FFXIVClientStructs.Havok.Common.Serialize.Resource;
+
+namespace FFXIVClientStructs.Havok.Common.Serialize.Util;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x20)]
 public unsafe partial struct hkLoader {

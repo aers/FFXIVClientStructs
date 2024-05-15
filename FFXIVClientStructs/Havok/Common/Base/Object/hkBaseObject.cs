@@ -1,4 +1,4 @@
-namespace FFXIVClientStructs.Havok;
+namespace FFXIVClientStructs.Havok.Common.Base.Object;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x08)]
 public unsafe struct hkBaseObject {

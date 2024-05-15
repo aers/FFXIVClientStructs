@@ -1,4 +1,7 @@
-namespace FFXIVClientStructs.Havok;
+using FFXIVClientStructs.Havok.Common.Base.Container.Array;
+using FFXIVClientStructs.Havok.Common.Base.Container.String;
+
+namespace FFXIVClientStructs.Havok.Animation.Animation;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x18)]
 public struct hkaAnnotationTrack {

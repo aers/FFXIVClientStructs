@@ -1,4 +1,6 @@
-namespace FFXIVClientStructs.Havok;
+using FFXIVClientStructs.Havok.Common.Base.Types;
+
+namespace FFXIVClientStructs.Havok.Common.Base.Thread.JobQueue;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x08)]
 public struct hkJob {

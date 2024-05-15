@@ -1,4 +1,4 @@
-namespace FFXIVClientStructs.Havok;
+namespace FFXIVClientStructs.Havok.Common.Base.Types;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x04)]
 public struct hkResult {

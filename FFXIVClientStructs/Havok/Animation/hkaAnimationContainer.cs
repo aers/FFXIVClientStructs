@@ -1,4 +1,11 @@
-namespace FFXIVClientStructs.Havok;
+using FFXIVClientStructs.Havok.Animation.Animation;
+using FFXIVClientStructs.Havok.Animation.Deform.Skinning;
+using FFXIVClientStructs.Havok.Animation.Rig;
+using FFXIVClientStructs.Havok.Common.Base.Container.Array;
+using FFXIVClientStructs.Havok.Common.Base.Object;
+using FFXIVClientStructs.Havok.Common.Base.Types;
+
+namespace FFXIVClientStructs.Havok.Animation;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x60)]
 public struct hkaAnimationContainer {

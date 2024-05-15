@@ -1,4 +1,8 @@
-namespace FFXIVClientStructs.Havok;
+using FFXIVClientStructs.Havok.Common.Base.Math.Matrix;
+using FFXIVClientStructs.Havok.Common.Base.Math.Quaternion;
+using FFXIVClientStructs.Havok.Common.Base.Math.Vector;
+
+namespace FFXIVClientStructs.Havok.Common.Base.Math.QsTransform;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x30)]
 public unsafe partial struct hkQsTransformf {

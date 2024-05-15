@@ -1,4 +1,9 @@
-namespace FFXIVClientStructs.Havok;
+using FFXIVClientStructs.Havok.Animation.Rig;
+using FFXIVClientStructs.Havok.Common.Base.Container.Array;
+using FFXIVClientStructs.Havok.Common.Base.Math.QsTransform;
+using FFXIVClientStructs.Havok.Common.Base.Types;
+
+namespace FFXIVClientStructs.Havok.Animation.Mapper;
 
 [StructLayout(LayoutKind.Explicit, Size = 0xA8)]
 public struct hkaSkeletonMapperData {

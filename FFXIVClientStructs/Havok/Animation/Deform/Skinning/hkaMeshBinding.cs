@@ -1,4 +1,12 @@
-namespace FFXIVClientStructs.Havok;
+using FFXIVClientStructs.Havok.Animation.Rig;
+using FFXIVClientStructs.Havok.Common.Base.Container.Array;
+using FFXIVClientStructs.Havok.Common.Base.Container.String;
+using FFXIVClientStructs.Havok.Common.Base.Math.Matrix;
+using FFXIVClientStructs.Havok.Common.Base.Object;
+using FFXIVClientStructs.Havok.Common.Base.Types;
+using FFXIVClientStructs.Havok.Common.SceneData.Mesh;
+
+namespace FFXIVClientStructs.Havok.Animation.Deform.Skinning;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x50)]
 public struct hkaMeshBinding {

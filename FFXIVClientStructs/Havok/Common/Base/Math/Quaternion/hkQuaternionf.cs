@@ -1,4 +1,6 @@
-namespace FFXIVClientStructs.Havok;
+using FFXIVClientStructs.Havok.Common.Base.Math.Vector;
+
+namespace FFXIVClientStructs.Havok.Common.Base.Math.Quaternion;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
 public unsafe partial struct hkQuaternionf {

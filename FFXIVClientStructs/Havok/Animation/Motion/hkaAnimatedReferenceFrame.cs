@@ -1,4 +1,6 @@
-namespace FFXIVClientStructs.Havok;
+using FFXIVClientStructs.Havok.Common.Base.Object;
+
+namespace FFXIVClientStructs.Havok.Animation.Motion;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x18)]
 public struct hkaAnimatedReferenceFrame {

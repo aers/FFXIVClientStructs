@@ -1,4 +1,11 @@
-namespace FFXIVClientStructs.Havok;
+using FFXIVClientStructs.Havok.Animation.Animation;
+using FFXIVClientStructs.Havok.Animation.Playback.Multithreaded;
+using FFXIVClientStructs.Havok.Animation.Rig;
+using FFXIVClientStructs.Havok.Common.Base.Math.QsTransform;
+using FFXIVClientStructs.Havok.Common.Base.Thread.JobQueue;
+using FFXIVClientStructs.Havok.Common.Base.Types;
+
+namespace FFXIVClientStructs.Havok.Animation.Playback.SampleAndBlend;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x70)]
 public unsafe struct hkaSampleBlendJob {

@@ -1,4 +1,8 @@
-namespace FFXIVClientStructs.Havok;
+using FFXIVClientStructs.Havok.Common.Base.Container.Array;
+using FFXIVClientStructs.Havok.Common.Base.Math.QsTransform;
+using FFXIVClientStructs.Havok.Common.Base.Types.Geometry;
+
+namespace FFXIVClientStructs.Havok.Animation.Rig;
 
 public unsafe delegate int hkStringCompareFunc(char* a, char* b);
 

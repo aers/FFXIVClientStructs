@@ -1,4 +1,6 @@
-namespace FFXIVClientStructs.Havok;
+using FFXIVClientStructs.Havok.Common.Base.Object;
+
+namespace FFXIVClientStructs.Havok.Animation.Mapper;
 
 [StructLayout(LayoutKind.Explicit, Size = 0xB8)]
 public struct hkaSkeletonMapper {
