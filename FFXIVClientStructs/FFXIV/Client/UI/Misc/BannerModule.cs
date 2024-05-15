@@ -110,7 +110,7 @@ public unsafe partial struct BannerModuleEntry {
     [FieldOffset(0x8D)] public byte HasBannerTimelineCustomName;
 
     [MemberFunction("0F B7 42 7C 66 39 41 7C")]
-    public partial bool Equals(BannerModuleEntry* other);
+    public partial bool IsEqual(BannerModuleEntry* other);
 
     /// <param name="itemIds">A pointer to 14 Item Ids</param>
     /// <param name="stainIds">A pointer to 14 Stain Ids</param>

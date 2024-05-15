@@ -22,8 +22,8 @@ public unsafe partial struct AgentInspect {
     // REatiner/Chocobo: 6 is set
     // Player: 4 is set
     [FieldOffset(0x028)] public uint RequestObjectId;
-    [FieldOffset(0x02C)] public uint RequestSearchCommentOId;
-    [FieldOffset(0x030)] public uint RequestFreeCompanyOId;
+    [FieldOffset(0x02C)] public uint RequestSearchCommentObjectId;
+    [FieldOffset(0x030)] public uint RequestFreeCompanyObjectId;
     [FieldOffset(0x034)] public uint CurrentObjectId;
     [FieldOffset(0x038)] public Utf8String SearchComment;
     [FieldOffset(0x108)] public Utf8String PsnName; //OnlineID: XXXXXXXXX
@@ -53,7 +53,7 @@ public unsafe partial struct AgentInspect {
     [StructLayout(LayoutKind.Explicit, Size = 0x86)]
     public struct FreeCompanyData {
         [FieldOffset(0x00)] public byte Unkown4b0; //Maybe FreeCompany get status 1=Finished
-        [FieldOffset(0x01)] public bool IsPArtOfFreeCOmpany; //HasGuild???????? if 0 Client::UI::RaptureAtkModule.OpenAddon can be called without getting additional infos
+        [FieldOffset(0x01)] public bool IsPartOfFreeCompany; //HasGuild???????? if 0 Client::UI::RaptureAtkModule.OpenAddon can be called without getting additional infos
         [FieldOffset(0x08)] public long Id;
         [FieldOffset(0x10)] public CrestData Crest;
         [FieldOffset(0x18)] public ushort MemberCount;
@@ -89,8 +89,8 @@ public unsafe partial struct AgentInspect {
 
     public void ExamineCharacter(uint objectId) {
         RequestObjectId = objectId;
-        RequestSearchCommentOId = objectId;
-        RequestFreeCompanyOId = objectId;
+        RequestSearchCommentObjectId = objectId;
+        RequestFreeCompanyObjectId = objectId;
         CurrentObjectId = 0xE0000000;
         AgentInterface.Show();
     }

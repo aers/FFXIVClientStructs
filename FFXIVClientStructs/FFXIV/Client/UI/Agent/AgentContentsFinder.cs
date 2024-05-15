@@ -22,8 +22,8 @@ public unsafe partial struct AgentContentsFinder {
     [FixedSizeArray<Utf8String>(10)]
     [FieldOffset(0x1BC8)] public fixed byte Strings[0x68 * 10]; // Tooltips and Category headers, ie "Gil", "Trials (Endwalker)"
 
-    [FixedSizeArray<ContentsRouletteRole>(11)]
-    [FieldOffset(0x2007)] public fixed byte ContentRouletteRoleBonus[11];
+    [FixedSizeArray<byte>(11)]
+    [FieldOffset(0x2007)] public fixed byte ContentRouletteRoleBonus[11]; // TODO: which one do we keep?
 
     [FieldOffset(0x2034)] public uint DutyPenaltyMinutes;
     [FieldOffset(0x2038)] public uint UnkPenaltyMinutes;
@@ -38,6 +38,7 @@ public unsafe partial struct AgentContentsFinder {
     public partial void* OpenRouletteDuty(byte roulette, byte a2 = 0);
 }
 
+// TODO: remove unused struct?
 [StructLayout(LayoutKind.Explicit, Size = 0x20), CExporterStructUnion]
 public struct ContentsFinderRewards {
     [FieldOffset(0x00)] public int ExpReward;
@@ -57,11 +58,4 @@ public struct ItemReward {
     [FieldOffset(0x10)] public uint IconId;
     [FieldOffset(0x18)] public Utf8String TooltipString;
     [FieldOffset(0x88)] public Utf8String UnkString; // This string seems to be unused?
-}
-
-public enum ContentsRouletteRole : byte {
-    Tank = 0,
-    Healer = 1,
-    Dps = 2,
-    None = 3,
 }

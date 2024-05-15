@@ -118,7 +118,7 @@ public unsafe partial struct InventoryItem : ICreatable {
     [Flags]
     public enum ItemFlags : byte {
         None = 0,
-        HQ = 1,
+        Hq = 1,
         CompanyCrestApplied = 2,
         Relic = 4,
         Collectable = 8
@@ -128,7 +128,7 @@ public unsafe partial struct InventoryItem : ICreatable {
     public partial void Ctor();
 
     [MemberFunction("8B 42 08 4C 8B C1")]
-    public partial bool Equals(InventoryItem* other);
+    public partial bool IsEqual(InventoryItem* other);
 
     /// <summary>Copies the values from the other InventoryItem and, if it's symbolic, resolves its linked item.</summary>
     [MemberFunction("E9 ?? ?? ?? ?? 48 8D 4B 48")]

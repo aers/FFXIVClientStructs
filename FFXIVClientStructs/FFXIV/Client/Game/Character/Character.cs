@@ -167,19 +167,7 @@ public unsafe partial struct Character {
 
     [StructLayout(LayoutKind.Explicit, Size = 2)]
     public struct ForayInfo {
-        [FieldOffset(0x00)] public byte ForayRank;
-
-        //bozja
-        public byte ResistanceRank {
-            get => ForayRank;
-            set => ForayRank = value;
-        }
-
-        //eureka
-        public byte ElementalLevel {
-            get => ForayRank;
-            set => ForayRank = value;
-        }
+        [FieldOffset(0x00)] public byte Level;
         [FieldOffset(0x01)] public byte Element;
     }
 
