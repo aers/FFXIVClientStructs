@@ -118,7 +118,7 @@ public unsafe partial struct InventoryItem : ICreatable {
     [Flags]
     public enum ItemFlags : byte {
         None = 0,
-        Hq = 1,
+        HighQuality = 1,
         CompanyCrestApplied = 2,
         Relic = 4,
         Collectable = 8
