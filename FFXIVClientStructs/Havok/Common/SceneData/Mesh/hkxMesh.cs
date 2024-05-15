@@ -1,8 +1,8 @@
 namespace FFXIVClientStructs.Havok;
 
-[StructLayout(LayoutKind.Sequential)]
+[StructLayout(LayoutKind.Explicit, Size = 0x10)]
 public struct hkxMesh {
-    hkReferencedObject hkReferencedObject;
+    [FieldOffset(0x00)] hkReferencedObject hkReferencedObject;
     // hkArray<hkRefPtr<hkxMeshSection>> m_sections;
     // hkArray<hkRefPtr<hkxMesh::UserChannelInfo>> m_userChannelInfos;
 }

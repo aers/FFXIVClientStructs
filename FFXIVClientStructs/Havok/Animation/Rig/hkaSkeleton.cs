@@ -1,29 +1,29 @@
 namespace FFXIVClientStructs.Havok;
 
-[StructLayout(LayoutKind.Sequential)]
+[StructLayout(LayoutKind.Explicit, Size = 0x88)]
 public struct hkaSkeleton {
-    [StructLayout(LayoutKind.Sequential, Pack = 8)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct LocalFrameOnBone {
-        public hkRefPtr<hkLocalFrame> LocalFrame;
-        public short BoneIndex;
+        [FieldOffset(0x00)] public hkRefPtr<hkLocalFrame> LocalFrame;
+        [FieldOffset(0x08)] public short BoneIndex;
     }
 
-    [StructLayout(LayoutKind.Sequential, Pack = 8)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct Partition {
-        public hkStringPtr Name;
-        public short StartBoneIndex;
-        public short NumBones;
+        [FieldOffset(0x00)] public hkStringPtr Name;
+        [FieldOffset(0x08)] public short StartBoneIndex;
+        [FieldOffset(0x0A)] public short NumBones;
     }
 
-    public hkReferencedObject hkReferencedObject;
-    public hkStringPtr Name;
-    public hkArray<short> ParentIndices;
-    public hkArray<hkaBone> Bones;
-    public hkArray<hkQsTransformf> ReferencePose;
-    public hkArray<float> ReferenceFloats;
-    public hkArray<hkStringPtr> FloatSlots;
-    public hkArray<LocalFrameOnBone> LocalFrames;
-    public hkArray<Partition> Partitions;
+    [FieldOffset(0x00)] public hkReferencedObject hkReferencedObject;
+    [FieldOffset(0x10)] public hkStringPtr Name;
+    [FieldOffset(0x18)] public hkArray<short> ParentIndices;
+    [FieldOffset(0x28)] public hkArray<hkaBone> Bones;
+    [FieldOffset(0x38)] public hkArray<hkQsTransformf> ReferencePose;
+    [FieldOffset(0x48)] public hkArray<float> ReferenceFloats;
+    [FieldOffset(0x58)] public hkArray<hkStringPtr> FloatSlots;
+    [FieldOffset(0x68)] public hkArray<LocalFrameOnBone> LocalFrames;
+    [FieldOffset(0x78)] public hkArray<Partition> Partitions;
 
     // [MemberFunction("")]
     // public partial hkLocalFrame* GetLocalFrameForBone(int boneIndex);

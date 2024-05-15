@@ -1,6 +1,6 @@
 namespace FFXIVClientStructs.Havok;
 
-[StructLayout(LayoutKind.Sequential)]
+[StructLayout(LayoutKind.Explicit, Size = 0x10)]
 public struct hkLocalFrame {
-    public hkReferencedObject hkReferencedObject;
+    [FieldOffset(0x00)] public hkReferencedObject hkReferencedObject;
 }

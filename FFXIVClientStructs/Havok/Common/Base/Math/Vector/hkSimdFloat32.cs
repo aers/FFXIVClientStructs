@@ -1,6 +1,6 @@
 namespace FFXIVClientStructs.Havok;
 
-[StructLayout(LayoutKind.Sequential)]
+[StructLayout(LayoutKind.Explicit, Size = 0x10)]
 public unsafe struct hkSimdFloat32 {
-    public fixed float f32[4];
+    [FieldOffset(0x00)] public fixed float f32[4];
 }

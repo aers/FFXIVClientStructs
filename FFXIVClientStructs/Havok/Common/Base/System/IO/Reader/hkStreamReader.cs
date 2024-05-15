@@ -1,6 +1,4 @@
 namespace FFXIVClientStructs.Havok;
 
-[StructLayout(LayoutKind.Sequential)]
-public struct hkStreamReader {
-
-}
+[StructLayout(LayoutKind.Explicit, Size = 0)]
+public struct hkStreamReader;

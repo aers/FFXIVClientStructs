@@ -1,7 +1,7 @@
 namespace FFXIVClientStructs.Havok;
 
-[StructLayout(LayoutKind.Sequential)]
-public unsafe struct hkAabb {
-    public hkVector4f Min;
-    public hkVector4f Max;
+[StructLayout(LayoutKind.Explicit, Size = 0x20)]
+public struct hkAabb {
+    [FieldOffset(0x00)] public hkVector4f Min;
+    [FieldOffset(0x10)] public hkVector4f Max;
 }

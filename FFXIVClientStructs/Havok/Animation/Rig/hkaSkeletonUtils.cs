@@ -2,6 +2,7 @@ namespace FFXIVClientStructs.Havok;
 
 public unsafe delegate int hkStringCompareFunc(char* a, char* b);
 
+[StructLayout(LayoutKind.Explicit, Size = 0)]
 public unsafe partial struct hkaSkeletonUtils {
     [MemberFunction("E8 ?? ?? ?? ?? 41 8B FF 85 DB")]
     public static partial void transformLocalPoseToModelPose(int numTransforms, short* parentIndices, hkQsTransformf* poseLocal, hkQsTransformf* poseModelOut);

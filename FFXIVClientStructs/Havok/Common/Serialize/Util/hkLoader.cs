@@ -1,9 +1,9 @@
 namespace FFXIVClientStructs.Havok;
 
-[StructLayout(LayoutKind.Sequential)]
+[StructLayout(LayoutKind.Explicit, Size = 0x20)]
 public unsafe partial struct hkLoader {
-    public hkReferencedObject hkReferencedObject;
-    public hkArray<Pointer<hkResource>> LoadedData;
+    [FieldOffset(0x00)] public hkReferencedObject hkReferencedObject;
+    [FieldOffset(0x10)] public hkArray<Pointer<hkResource>> LoadedData;
 
     // [MemberFunction("")]
     // public partial hkRootLevelContainer* load(byte* filename );

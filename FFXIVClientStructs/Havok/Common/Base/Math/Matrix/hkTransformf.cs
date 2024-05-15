@@ -1,7 +1,7 @@
 namespace FFXIVClientStructs.Havok;
 
-[StructLayout(LayoutKind.Sequential)]
+[StructLayout(LayoutKind.Explicit, Size = 0x40)]
 public struct hkTransformf {
-    public hkRotationf Rotation;
-    public hkVector4f Translation;
+    [FieldOffset(0x00)] public hkRotationf Rotation;
+    [FieldOffset(0x30)] public hkVector4f Translation;
 }

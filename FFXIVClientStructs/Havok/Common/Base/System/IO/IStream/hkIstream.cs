@@ -1,9 +1,9 @@
 namespace FFXIVClientStructs.Havok;
 
-[StructLayout(LayoutKind.Sequential)]
+[StructLayout(LayoutKind.Explicit, Size = 0x18)]
 public unsafe partial struct hkIstream {
-    public hkReferencedObject hkReferencedObject;
-    public hkRefPtr<hkStreamReader> StreamReader;
+    [FieldOffset(0x00)] public hkReferencedObject hkReferencedObject;
+    [FieldOffset(0x10)] public hkRefPtr<hkStreamReader> StreamReader;
 
     [MemberFunction("E8 ?? ?? ?? ?? 33 FF 41 39 7C 24")]
     public partial void Ctor1(hkStreamReader* sr);

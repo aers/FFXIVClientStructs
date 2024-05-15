@@ -1,6 +1,6 @@
 namespace FFXIVClientStructs.Havok;
 
-[StructLayout(LayoutKind.Sequential)]
+[StructLayout(LayoutKind.Explicit, Size = 0x30)]
 public struct hkRotationf {
-    public hkMatrix3f hkMatrix3f;
+    [FieldOffset(0x00)] public hkMatrix3f hkMatrix3f;
 }

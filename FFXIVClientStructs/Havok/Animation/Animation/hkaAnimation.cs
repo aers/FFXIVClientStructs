@@ -1,6 +1,6 @@
 namespace FFXIVClientStructs.Havok;
 
-[StructLayout(LayoutKind.Sequential)]
+[StructLayout(LayoutKind.Explicit, Size = 0x38)]
 public struct hkaAnimation {
     public enum AnimationType : int {
         UnknownAnimation = 0x0,
@@ -12,23 +12,23 @@ public struct hkaAnimation {
         ReferencePoseAnimation = 0x6,
     }
 
-    [StructLayout(LayoutKind.Sequential, Pack = 8)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public unsafe struct DataChunk {
-        public byte* Data;
-        public uint Size;
+        [FieldOffset(0x00)] public byte* Data;
+        [FieldOffset(0x08)] public uint Size;
     }
 
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public struct TrackAnnotation {
-        public ushort TrackId;
-        public hkaAnnotationTrack.Annotation Annotation;
+        [FieldOffset(0x00)] public ushort TrackId;
+        [FieldOffset(0x08)] public hkaAnnotationTrack.Annotation Annotation;
     }
 
-    public hkReferencedObject hkReferencedObject;
-    public AnimationType Type;
-    public float Duration;
-    public int NumberOfTransformTracks;
-    public int NumberOfFloatTracks;
-    public hkRefPtr<hkaAnimatedReferenceFrame> ExtractedMotion;
-    public hkArray<hkaAnnotationTrack> AnnotationTracks;
+    [FieldOffset(0x00)] public hkReferencedObject hkReferencedObject;
+    [FieldOffset(0x10)] public AnimationType Type;
+    [FieldOffset(0x14)] public float Duration;
+    [FieldOffset(0x18)] public int NumberOfTransformTracks;
+    [FieldOffset(0x1C)] public int NumberOfFloatTracks;
+    [FieldOffset(0x20)] public hkRefPtr<hkaAnimatedReferenceFrame> ExtractedMotion;
+    [FieldOffset(0x28)] public hkArray<hkaAnnotationTrack> AnnotationTracks;
 }

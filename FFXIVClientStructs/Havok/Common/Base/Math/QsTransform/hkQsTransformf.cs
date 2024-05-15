@@ -1,10 +1,10 @@
 namespace FFXIVClientStructs.Havok;
 
-[StructLayout(LayoutKind.Sequential)]
+[StructLayout(LayoutKind.Explicit, Size = 0x30)]
 public unsafe partial struct hkQsTransformf {
-    public hkVector4f Translation;
-    public hkQuaternionf Rotation;
-    public hkVector4f Scale;
+    [FieldOffset(0x00)] public hkVector4f Translation;
+    [FieldOffset(0x10)] public hkQuaternionf Rotation;
+    [FieldOffset(0x20)] public hkVector4f Scale;
 
     // [MemberFunction("")]
     // public partial void setFromTransformNoScale(hkTransformf* transform);

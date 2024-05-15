@@ -1,6 +1,6 @@
 namespace FFXIVClientStructs.Havok;
 
-[StructLayout(LayoutKind.Sequential)]
+[StructLayout(LayoutKind.Explicit, Size = 0x50)]
 public unsafe partial struct hkaPose {
     public enum PoseSpace {
         ModelSpace = 0,
@@ -17,13 +17,13 @@ public unsafe partial struct hkaPose {
         BoneModelDirty = 1,
     }
 
-    public hkaSkeleton* Skeleton;
-    public hkArray<hkQsTransformf> LocalPose;
-    public hkArray<hkQsTransformf> ModelPose;
-    public hkArray<uint> BoneFlags;
-    public byte ModelInSync;
-    public byte LocalInSync;
-    public hkArray<float> FloatSlotValues;
+    [FieldOffset(0x00)] public hkaSkeleton* Skeleton;
+    [FieldOffset(0x08)] public hkArray<hkQsTransformf> LocalPose;
+    [FieldOffset(0x18)] public hkArray<hkQsTransformf> ModelPose;
+    [FieldOffset(0x28)] public hkArray<uint> BoneFlags;
+    [FieldOffset(0x38)] public byte ModelInSync;
+    [FieldOffset(0x39)] public byte LocalInSync;
+    [FieldOffset(0x40)] public hkArray<float> FloatSlotValues;
 
     [MemberFunction("40 53 48 83 EC 20 4C 89 01 33 C0")]
     public partial void Ctor1(PoseSpace space, hkaSkeleton* skeleton, hkArray<hkQsTransformf>* pose);

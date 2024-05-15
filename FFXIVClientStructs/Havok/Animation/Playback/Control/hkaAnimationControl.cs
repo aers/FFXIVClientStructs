@@ -1,15 +1,15 @@
 namespace FFXIVClientStructs.Havok;
 
-[StructLayout(LayoutKind.Sequential, Pack = 8)]
+[StructLayout(LayoutKind.Explicit, Size = 0x58)]
 public unsafe partial struct hkaAnimationControl {
-    public hkReferencedObject hkReferencedObject;
-    public float LocalTime;
-    public float Weight;
-    public hkArray<byte> TransformTrackWeights;
-    public hkArray<byte> FloatTrackWeights;
-    public hkRefPtr<hkaAnimationBinding> Binding;
-    public hkArray<Pointer<hkaAnimationControlListener>> Listeners;
-    public float MotionTrackWeight;
+    [FieldOffset(0x00)] public hkReferencedObject hkReferencedObject;
+    [FieldOffset(0x10)] public float LocalTime;
+    [FieldOffset(0x14)] public float Weight;
+    [FieldOffset(0x18)] public hkArray<byte> TransformTrackWeights;
+    [FieldOffset(0x28)] public hkArray<byte> FloatTrackWeights;
+    [FieldOffset(0x38)] public hkRefPtr<hkaAnimationBinding> Binding;
+    [FieldOffset(0x40)] public hkArray<Pointer<hkaAnimationControlListener>> Listeners;
+    [FieldOffset(0x50)] public float MotionTrackWeight;
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 8B CB 48 89 07")]
     public partial void Ctor1(hkaAnimationBinding* binding);

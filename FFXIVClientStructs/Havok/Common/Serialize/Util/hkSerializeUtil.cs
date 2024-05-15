@@ -1,10 +1,11 @@
 namespace FFXIVClientStructs.Havok;
 
+[StructLayout(LayoutKind.Explicit, Size = 0)]
 public unsafe partial struct hkSerializeUtil {
 
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct ErrorDetails {
-        public enum ErrorId : int {
+        public enum ErrorId {
             None = 0x00,
             ReadFailed,
             UnsupportedFormat,
@@ -21,7 +22,7 @@ public unsafe partial struct hkSerializeUtil {
     }
 
     [Flags]
-    public enum SaveOptionBits : int {
+    public enum SaveOptionBits {
         Default = 0x00,
         TextFormat = 0x01,
         SerializeIgnoredMembers = 0x02,
@@ -35,7 +36,7 @@ public unsafe partial struct hkSerializeUtil {
     }
 
     [Flags]
-    public enum LoadOptionBits : int {
+    public enum LoadOptionBits {
         Default = 0x00,
         FailIfVersioning = 0x01,
         Forced = 0x02,

@@ -1,6 +1,6 @@
 namespace FFXIVClientStructs.Havok;
 
-[StructLayout(LayoutKind.Sequential, Pack = 8)]
+[StructLayout(LayoutKind.Explicit, Size = 0x58)]
 public unsafe struct hkaAnimationBinding {
     public enum BlendHintEnum {
         Normal = 0x0,
@@ -13,11 +13,11 @@ public unsafe struct hkaAnimationBinding {
         public byte BlendHint;
     }
 
-    public hkReferencedObject hkReferencedObject;
-    public hkStringPtr OriginalSkeletonName;
-    public hkRefPtr<hkaAnimation> Animation;
-    public hkArray<short> TransformTrackToBoneIndices;
-    public hkArray<short> FloatTrackToFloatSlotIndices;
-    public hkArray<short> PartitionIndices;
-    public hkEnum<BlendHintEnum, sbyte> BlendHint;
+    [FieldOffset(0x00)] public hkReferencedObject hkReferencedObject;
+    [FieldOffset(0x10)] public hkStringPtr OriginalSkeletonName;
+    [FieldOffset(0x18)] public hkRefPtr<hkaAnimation> Animation;
+    [FieldOffset(0x20)] public hkArray<short> TransformTrackToBoneIndices;
+    [FieldOffset(0x30)] public hkArray<short> FloatTrackToFloatSlotIndices;
+    [FieldOffset(0x40)] public hkArray<short> PartitionIndices;
+    [FieldOffset(0x50)] public hkEnum<BlendHintEnum, sbyte> BlendHint;
 }
