@@ -1394,20 +1394,20 @@ classes:
       0x1401DCFE0: GetResourceAsync
       0x1401DD210: GetResourceSync
       0x1401E1A00: Initialize
-  Client::Game::UI::DirectorInfo:
+  Client::Game::UI::DirectorTodo:
     funcs:
       0x140964CC0: SetDirector
       0x140964F20: SetUpdatePending
       0x140964F40: UnsetUpdatePending
-      0x140964F50: ShowTodo # lua function "ShowDirectorTodo"
-      0x140964F60: HideTodo # lua function "HideDirectorTodo"
+      0x140964F50: Show # lua function "ShowDirectorTodo"
+      0x140964F60: Hide # lua function "HideDirectorTodo"
       0x140964F70: GetTitle
       0x140964F80: GetIconId
       0x140964F90: GetDescription
       0x140964FC0: GetReliefText
       0x140964FF0: GetEventItemId
       0x140965030: GetRecommendedLevel
-      0x140965080: GetCompanyLeveDirectorInfo
+      0x140965080: GetCompanyLeveInfo
       0x1409650C0: GetObjectives
       0x1409650E0: GetTimeRemaining
       0x140965120: HasTimer
