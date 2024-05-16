@@ -10,5 +10,5 @@ public unsafe struct DirectorTodo {
     [FieldOffset(0x70)] public Utf8String Description;
     [FieldOffset(0xD8)] public Utf8String ReliefText;
     [FieldOffset(0x140)] public bool IsFullUpdatePending;
-    [FieldOffset(0x141)] public bool IsTodoShown;
+    [FieldOffset(0x141)] public bool IsShown;
 }
