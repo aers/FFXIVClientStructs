@@ -112,7 +112,7 @@ public unsafe partial struct AgentMap {
         marker->MapMarker.Index = MiniMapMarkerCount;
         marker->MapMarker.X = (short)(position.X * 16.0f);
         marker->MapMarker.Y = (short)(position.Z * 16.0f);
-        marker->MapMarker.Radius = scale;
+        marker->MapMarker.Scale = scale;
         marker->MapMarker.IconId = icon;
         MiniMapMarkerArraySpan[MiniMapMarkerCount++] = *marker;
         return true;
@@ -126,7 +126,7 @@ public unsafe partial struct AgentMap {
         marker->MapMarker.Index = MapMarkerCount;
         marker->MapMarker.X = (short)(position.X * 16.0f);
         marker->MapMarker.Y = (short)(position.Z * 16.0f);
-        marker->MapMarker.Radius = scale;
+        marker->MapMarker.Scale = scale;
         marker->MapMarker.IconId = icon;
         marker->MapMarker.Subtext = text;
         marker->MapMarker.SubtextOrientation = textPosition;
@@ -167,8 +167,7 @@ public unsafe struct MapMarkerBase {
     [FieldOffset(0x02)] public ushort IconFlags;
     [FieldOffset(0x04)] public uint IconId;
     [FieldOffset(0x08)] public uint SecondaryIconId;
-    [FieldOffset(0x0C), Obsolete("Use Radius instead")] public int Scale;
-    [FieldOffset(0x0C)] public int Radius;
+    [FieldOffset(0x0C)] public int Scale;
     [FieldOffset(0x10)] public byte* Subtext;
     [FieldOffset(0x18)] public byte Index;
 
