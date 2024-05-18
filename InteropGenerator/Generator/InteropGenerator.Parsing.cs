@@ -1,5 +1,6 @@
 ﻿using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
+using System.Reflection.Metadata.Ecma335;
 using InteropGenerator.Extensions;
 using InteropGenerator.Helpers;
 using InteropGenerator.Models;
@@ -11,8 +12,12 @@ namespace InteropGenerator.Generator;
 public sealed partial class InteropGenerator {
 
     private static StructInfo ParseStructInfo(INamedTypeSymbol structSymbol, CancellationToken token) {
-        // collection info on struct methods
+        // collect info on struct methods
         ParseMethods(structSymbol, token, out EquatableArray<MemberFunctionInfo> memberFunctions, out EquatableArray<VirtualFunctionInfo> virtualFunctions, out EquatableArray<StaticAddressInfo> staticAddresses);
+        token.ThrowIfCancellationRequested();
+        
+        // collect info on struct fields
+        ParseFields(structSymbol, token, out EquatableArray<FixedSizeArrayInfo> fixedSizeArrays);
         token.ThrowIfCancellationRequested();
 
         // other struct attributes
@@ -43,7 +48,8 @@ public sealed partial class InteropGenerator {
             memberFunctions,
             virtualFunctions,
             staticAddresses,
-            virtualTableSignatureInfo);
+            virtualTableSignatureInfo,
+            fixedSizeArrays);
     }
 
     private static void ParseMethods(INamedTypeSymbol structSymbol, CancellationToken token,
@@ -66,7 +72,7 @@ public sealed partial class InteropGenerator {
                 if (!TryParseMethod(methodSymbol, token, out MethodInfo? methodInfo))
                     continue;
 
-                var mfi = new MemberFunctionInfo(
+                MemberFunctionInfo mfi = new(
                     methodInfo,
                     new SignatureInfo(signature, offset.Value));
 
@@ -79,7 +85,7 @@ public sealed partial class InteropGenerator {
                 if (!TryParseMethod(methodSymbol, token, out MethodInfo? methodInfo))
                     continue;
 
-                var vfi = new VirtualFunctionInfo(
+                VirtualFunctionInfo vfi = new(
                     methodInfo,
                     index.Value);
 
@@ -94,7 +100,7 @@ public sealed partial class InteropGenerator {
                 if (!TryParseMethod(methodSymbol, token, out MethodInfo? methodInfo))
                     continue;
 
-                var sai = new StaticAddressInfo(
+                StaticAddressInfo sai = new(
                     methodInfo,
                     new SignatureInfo(signature, offset.Value),
                     isPointer.Value);
@@ -132,4 +138,37 @@ public sealed partial class InteropGenerator {
         parameterSymbol.Type.GetFullyQualifiedName(),
         parameterSymbol.GetDefaultValueString(),
         parameterSymbol.RefKind);
+
+    private static void ParseFields(INamedTypeSymbol structSymbol, CancellationToken token, out EquatableArray<FixedSizeArrayInfo> fixedSizeArrays) {
+        
+        using ImmutableArrayBuilder<FixedSizeArrayInfo> fixedSizeArrayBuilder = new();
+
+        foreach (IFieldSymbol field in structSymbol.GetMembers().OfType<IFieldSymbol>()) {
+            if (field.Type is not INamedTypeSymbol fieldTypeSymbol)
+                continue;
+            if (field.TryGetAttributeWithFullyQualifiedMetadataName(AttributeNames.FixedSizeArrayAttribute, out _)) {
+                if (!fieldTypeSymbol.IsGenericType || fieldTypeSymbol.TypeArguments.Length != 1) // malformed field
+                    continue;
+                
+                // "FixedSizeArray###"
+                if (fieldTypeSymbol.Name.Length < 14)
+                    continue;
+
+                // try and get size
+                if (!int.TryParse(fieldTypeSymbol.Name[14..], out int size))
+                    continue;
+
+                var fixedSizeArrayInfo = new FixedSizeArrayInfo(
+                    field.Name,
+                    fieldTypeSymbol.TypeArguments[0].GetFullyQualifiedName(),
+                    size
+                );
+                
+                fixedSizeArrayBuilder.Add(fixedSizeArrayInfo);
+            }
+            token.ThrowIfCancellationRequested();
+        }
+
+        fixedSizeArrays = fixedSizeArrayBuilder.ToImmutable();
+    }
 }

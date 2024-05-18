@@ -8,4 +8,5 @@ public static class AttributeNames {
     public const string VirtualFunctionAttribute = Namespace + ".VirtualFunctionAttribute";
     public const string StaticAddressAttribute = Namespace + ".StaticAddressAttribute";
     public const string VirtualTableAttribute = Namespace + ".VirtualTableAttribute";
+    public const string FixedSizeArrayAttribute = Namespace + ".FixedSizeArrayAttribute";
 }

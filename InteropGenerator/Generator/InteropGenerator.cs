@@ -24,20 +24,20 @@ public sealed partial class InteropGenerator : IIncrementalGenerator {
         context.RegisterSourceOutput(structInfos,
             static (sourceContext, item) => { sourceContext.AddSource($"{item.FullyQualifiedMetadataName}.InteropGenerator.g.cs", RenderStructInfo(item, sourceContext.CancellationToken)); });
 
-        IncrementalValueProvider<GeneratorOptions> generatorOptionsProvider = context.AnalyzerConfigOptionsProvider.Select(static (options, _) => {
-            if (!options.GlobalOptions.TryGetValue("build_property.InteropGenerator_InteropNamespace", out string? interopNamespace))
-                interopNamespace = "InteropGenerator";
-
-            return new GeneratorOptions(
-                interopNamespace);
-        });
-
         IncrementalValueProvider<ImmutableArray<StructInfo>> structInfosWithAddresses = structInfos.Where(static sI => sI.HasSignatures()).Collect();
 
-        context.RegisterSourceOutput(structInfosWithAddresses.Combine(generatorOptionsProvider),
-            static (SourceProductionContext sourceContext, (ImmutableArray<StructInfo> StructInfos, GeneratorOptions GeneratorOptions) args) => {
-                if (!args.StructInfos.IsEmpty)
-                    sourceContext.AddSource($"{args.GeneratorOptions.InteropNamespace}.Interop.InteropGenerator.g.cs", RenderResolverInitializer(args.StructInfos, args.GeneratorOptions.InteropNamespace));
+        context.RegisterSourceOutput(structInfosWithAddresses,
+            static (sourceContext, structInfos) => {
+                if (!structInfos.IsEmpty)
+                    sourceContext.AddSource("InteropGenerator.Runtime.Generated.Addresses.g.cs", RenderResolverInitializer(structInfos));
+            });
+
+        IncrementalValueProvider<ImmutableArray<StructInfo>> structInfosWithFixedArrays = structInfos.Where(static sI => !sI.FixedSizeArrays.IsEmpty).Collect();
+        
+        context.RegisterSourceOutput(structInfosWithFixedArrays,
+            static (sourceContext, structInfos) => {
+                if (!structInfos.IsEmpty)
+                    sourceContext.AddSource("InteropGenerator.Runtime.Generated.FixedArrays.g.cs", RenderFixedArrayTypes(structInfos));
             });
     }
 }
