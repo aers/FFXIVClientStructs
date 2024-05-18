@@ -6,19 +6,59 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 // Client::Game::Event::EventHandler
 // ctor "E8 ?? ?? ?? ?? 45 33 D2 48 8D 05"
 [StructLayout(LayoutKind.Explicit, Size = 0x210)]
-public unsafe struct EventHandler {
+public unsafe partial struct EventHandler {
     [FieldOffset(0x08)] public StdSet<Pointer<GameObject>> EventObjects;
     [FieldOffset(0x18)] public EventSceneModuleUsualImpl* EventSceneModule;
     [FieldOffset(0x20)] public EventHandlerInfo Info;
+    [FieldOffset(0x5C)] public uint IconId;
 
     [FieldOffset(0xC8)] public Utf8String UnkString0;
     [FieldOffset(0x168)] public Utf8String UnkString1;
+
+    /// <remarks> You need to pass your own Utf8String, so the game can copy the title into it. </remarks>
+    [VirtualFunction(197)]
+    public partial void GetTitle(Utf8String* title);
+
+    /// <remarks> You need to pass your own Utf8String, so the game can copy the description into it. </remarks>
+    [VirtualFunction(249)]
+    public partial void GetDescription(Utf8String* description);
+
+    /// <remarks> You need to pass your own Utf8String, so the game can copy the relief text into it. </remarks>
+    [VirtualFunction(250)]
+    public partial void GetReliefText(Utf8String* reliefText);
+
+    [VirtualFunction(251)]
+    public partial int GetTimeRemaining(int currentTimestamp);
+
+    [VirtualFunction(252)]
+    public partial bool HasTimer();
+
+    [VirtualFunction(254)]
+    public partial uint GetEventItemId();
+
+    [VirtualFunction(256)]
+    public partial StdVector<EventHandlerObjective>* GetObjectives();
+
+    [VirtualFunction(259)]
+    public partial int GetRecommendedLevel();
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x38)]
 public struct EventHandlerInfo {
     [FieldOffset(0x00)] public EventId EventId;
     [FieldOffset(0x04)] public byte Flags;
+}
+
+[StructLayout(LayoutKind.Explicit, Size = 0x160)]
+public struct EventHandlerObjective {
+    [FieldOffset(0x00)] public bool Enabled;
+    [FieldOffset(0x04)] public int DisplayType;
+    [FieldOffset(0x08)] public Utf8String Label;
+
+    [FieldOffset(0x78)] public int CountCurrent;
+    [FieldOffset(0x7C)] public int CountNeeded;
+    [FieldOffset(0x80)] public ulong TimeLeft;
+    [FieldOffset(0x88)] public uint MapRowId;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x04)]

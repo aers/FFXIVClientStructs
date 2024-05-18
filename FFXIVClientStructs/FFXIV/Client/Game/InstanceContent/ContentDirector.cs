@@ -11,6 +11,8 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
 public partial struct ContentDirector {
     [FieldOffset(0x00)] public Director Director;
 
+    [FieldOffset(0x536)] public byte ContentTypeRowId;
+
     [FieldOffset(0xC08)] public float ContentTimeLeft;
 
     /// <summary>
