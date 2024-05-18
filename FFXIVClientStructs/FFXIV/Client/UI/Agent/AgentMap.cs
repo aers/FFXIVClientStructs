@@ -210,7 +210,7 @@ public struct MiniMapMarker {
     [FieldOffset(0x08)] public MapMarkerBase MapMarker;
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x108)]
+[StructLayout(LayoutKind.Explicit, Size = 0x110)]
 public struct TempMapMarker {
     [FieldOffset(0x00)] public Utf8String TooltipText;
     [FieldOffset(0x68)] public MapMarkerBase MapMarker;
