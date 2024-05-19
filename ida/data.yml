@@ -1188,7 +1188,7 @@ classes:
       0x141430480: HasInstance
       0x141430470: GetInstance
       0x1414304A0: ctor
-      0x141430500: dtor
+      0x141430500: Destroy
   Client::Game::QuestRecompleteManager: # Seasonal Event Replay
     instances:
       - ea: 0x142238B40
