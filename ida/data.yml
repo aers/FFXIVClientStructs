@@ -934,9 +934,9 @@ classes:
     funcs:
       0x1412EC2D0: HasInstance
       0x1412EC2F0: GetInstance
-      0x1412EC300: Create
+      0x1412EC300: ctor
       0x1412EC350: dtor
-      0x1412ECAD0: ctor
+      0x1412ECAD0: Initialize
       0x1412ECB50: Finalize
       0x1412EEDF0: GetFateById
   Client::Game::BattleBuddyList:
