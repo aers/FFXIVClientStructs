@@ -7,6 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [StructLayout(LayoutKind.Explicit, Size = 0x338)]
 public unsafe partial struct AtkComponentNumericInput {
     [FieldOffset(0x0)] public AtkComponentInputBase AtkComponentInputBase;
+    [FieldOffset(0x1F8)] public int Value; // Found through SetValue function
     [FieldOffset(0x2F8)] public AtkUldComponentDataNumericInput Data;
 
     [MemberFunction("E8 ?? ?? ?? ?? 81 4E ?? ?? ?? ?? ?? EB 07")]

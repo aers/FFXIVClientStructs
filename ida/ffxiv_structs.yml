@@ -46333,6 +46333,9 @@ structs:
   - type: Component::GUI::AtkComponentInputBase
     name: AtkComponentInputBase
     offset: 0
+  - type: int
+    name: Value
+    offset: 504
   - type: Component::GUI::AtkUldComponentDataNumericInput
     name: Data
     offset: 760
