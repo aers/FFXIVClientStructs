@@ -372,6 +372,24 @@ if api is None:
                 else:
                     return ida_struct.get_struc_size(ida_struct.get_struc_id(type))
 
+            def get_named_type(self, tinfo, name):
+                # type: (idaapi.tinfo_t, str) -> None
+                if not tinfo.get_named_type(idaapi.get_idati(), name):
+                    tinfo.get_named_type(
+                        idaapi.get_idati(), self.clean_struct_name(name)
+                    )
+
+                if tinfo == name or tinfo == self.clean_struct_name(name):
+                    return
+
+                terminated = name + ";"
+                idaapi.parse_decl(tinfo, idaapi.get_idati(), terminated, idaapi.PT_SIL)
+                if tinfo == name or tinfo == self.clean_struct_name(name):
+                    return
+
+                terminated = self.clean_struct_name(name) + ";"
+                idaapi.parse_decl(tinfo, idaapi.get_idati(), terminated, idaapi.PT_SIL)
+
             def get_tinfo_from_type(self, raw_type, array_size=0):
                 # type: (str, int) -> idaapi.tinfo_t
                 """
@@ -384,11 +402,7 @@ if api is None:
                 type = raw_type.rstrip("*")
                 ptr_count = len(raw_type) - len(type)
 
-                type_tinfo.get_named_type(idaapi.get_idati(), type)
-                terminated = type + ";"
-                idaapi.parse_decl(
-                    type_tinfo, idaapi.get_idati(), terminated, idaapi.PT_SIL
-                )
+                self.get_named_type(type_tinfo, type)
 
                 if ptr_count > 0:
                     ptr_tinfo = idaapi.tinfo_t()
@@ -440,6 +454,17 @@ if api is None:
             def clean_name(self, name):
                 # type: (str) -> str
                 return name
+
+            def clean_struct_name(self, name):
+                # type: (str) -> str
+                return (
+                    name.replace(" ", "")
+                    .replace("unsigned", "u")
+                    .replace("__int64", "long")
+                    .replace("__int32", "int")
+                    .replace("__int16", "short")
+                    .replace("__int8", "byte")
+                )
 
             def search_binary(self, ea, pattern, flag):
                 # type: (int, str, int) -> int
@@ -525,14 +550,14 @@ if api is None:
 
             def delete_struct(self, struct):
                 # type: (DefinedStruct) -> None
-                fullname = self.clean_name(struct.type)
+                fullname = self.clean_struct_name(struct.type)
                 self.delete_struct_members(fullname)
                 self.delete_struct_members(fullname + "Union")
                 self.delete_struct_members(fullname + "VTable")
 
             def create_struct(self, struct):
                 # type: (DefinedStruct) -> None
-                fullname = self.clean_name(struct.type)
+                fullname = self.clean_struct_name(struct.type)
                 if ida_struct.get_struc_id(fullname) == idaapi.BADADDR:
                     ida_struct.add_struc(-1, fullname, struct.union)
                 s = 0
@@ -543,7 +568,7 @@ if api is None:
 
             def create_struct_members(self, struct):
                 # type: (DefinedStruct) -> None
-                fullname = self.clean_name(struct.type)
+                fullname = self.clean_struct_name(struct.type)
                 s = ida_struct.get_struc(ida_struct.get_struc_id(fullname))
                 for field in struct.fields:
                     offset = field.offset
@@ -567,9 +592,12 @@ if api is None:
                             field_type = field_type + param.name + ","
                         field_type = field_type[:-2] + ")"
                     elif (
-                        self.get_idc_type_from_ida_type(field_type)
+                        self.get_idc_type_from_ida_type(
+                            self.clean_struct_name(field_type)
+                        )
                         == ida_bytes.stru_flag()
                     ):
+                        field_type = self.clean_struct_name(field_type)
                         ida_struct.add_struc_member(
                             s,
                             field_name,
