@@ -935,8 +935,8 @@ classes:
       0x1412EC2D0: HasInstance
       0x1412EC2F0: GetInstance
       0x1412EC300: Create
-      0x1412EC350: Destroy
-      0x1412ECAD0: Initialize
+      0x1412EC350: dtor
+      0x1412ECAD0: ctor
       0x1412ECB50: Finalize
       0x1412EEDF0: GetFateById
   Client::Game::BattleBuddyList:
@@ -963,9 +963,9 @@ classes:
       - ea: 0x1421F6E20
         pointer: False
     funcs:
-      0x140746820: ctor
-      0x140745580: Create
-      0x1407455D0: Destroy
+      0x140746820: Initialize
+      0x140745580: ctor
+      0x1407455D0: dtor
       0x140745640: HasInstance
       0x140745660: GetInstance
       0x140745670: Update
@@ -979,8 +979,8 @@ classes:
       - ea: 0x14222AEF0
         pointer: True
     funcs:
-      0x140B8D850: Create
-      0x140B8D8C0: Destroy
+      0x140B8D850: ctor
+      0x140B8D8C0: dtor
       0x140B8D900: Initialize
       0x140B8D9F0: Finalize
       0x140B8D820: HasInstance
@@ -1008,8 +1008,8 @@ classes:
       0x141424530: Initialize
       0x1414245E0: HasInstance
       0x141424600: GetInstance
-      0x141424610: Create
-      0x141424660: Destroy
+      0x141424610: ctor
+      0x141424660: dtor
       0x1414246D0: Request # (this, callbackInterface, commandId, arg1, arg2)
   Client::Game::InventoryManager:
     instances:
@@ -1094,8 +1094,8 @@ classes:
       - ea: 0x1421FF168
         pointer: True
     funcs:
-      0x1408A4B00: Create
-      0x1408A4B50: Destroy
+      0x1408A4B00: ctor
+      0x1408A4B50: dtor
       0x1408A4BC0: HasInstance
       0x1408A4BE0: GetInstance
       0x1408A4D90: GetMemberCount
@@ -1175,8 +1175,8 @@ classes:
     funcs:
       0x1408A8700: HasInstance
       0x1408A8720: GetInstance
-      0x1408A85F0: Create
-      0x1408A86D0: Destroy
+      0x1408A85F0: ctor
+      0x1408A86D0: dtor
   Client::Game::CustomTodoManager: # Studium Deliveries
     vtbls:
       - ea: 0x141B64740
@@ -1187,8 +1187,8 @@ classes:
     funcs:
       0x141430480: HasInstance
       0x141430470: GetInstance
-      0x1414304A0: Create
-      0x141430500: Destroy
+      0x1414304A0: ctor
+      0x141430500: dtor
   Client::Game::QuestRecompleteManager: # Seasonal Event Replay
     instances:
       - ea: 0x142238B40
@@ -1198,8 +1198,8 @@ classes:
       0x14142FF40: Finalize
       0x14142FFF0: HasInstance
       0x14142FFE0: GetInstance
-      0x141430010: Create
-      0x141430060: Destroy
+      0x141430010: ctor
+      0x141430060: dtor
   Client::Game::QuestRedoManager: # New Game+
     instances:
       - ea: 0x14222AEF8
@@ -1209,8 +1209,8 @@ classes:
       0x140B90320: Finalize
       0x140B90460: HasInstance
       0x140B90480: GetInstance
-      0x140B90490: Create
-      0x140B904E0: Destroy
+      0x140B90490: ctor
+      0x140B904E0: dtor
   Client::Game::QuestRedoMapMarkerManager:
     instances:
       - ea: 0x142238B60
@@ -1220,8 +1220,8 @@ classes:
       0x141433010: Finalize
       0x141430C20: HasInstance
       0x141430C10: GetInstance
-      0x141430C40: Create
-      0x141430C90: Destroy
+      0x141430C40: ctor
+      0x141430C90: dtor
   Client::Game::FreeMoveManager:
     instances:
       - ea: 0x142238B28
@@ -1231,8 +1231,8 @@ classes:
       0x14142C940: Finalize
       0x14142CB30: HasInstance
       0x14142CB20: GetInstance
-      0x14142CB50: Create
-      0x14142CBA0: Destroy
+      0x14142CB50: ctor
+      0x14142CBA0: dtor
   Client::Game::SequentialEventManager:
     instances:
       - ea: 0x142238B70
@@ -1242,8 +1242,8 @@ classes:
       0x141433A90: Finalize
       0x141433D70: HasInstance
       0x141433D60: GetInstance
-      0x141433D90: Create
-      0x141433DE0: Destroy
+      0x141433D90: ctor
+      0x141433DE0: dtor
   Client::Game::PathWalkManager:
     instances:
       - ea: 0x142238B80
@@ -1253,8 +1253,8 @@ classes:
       0x141438B00: Finalize
       0x141438750: HasInstance
       0x141438740: GetInstance
-      0x141438770: Create
-      0x1414387C0: Destroy
+      0x141438770: ctor
+      0x1414387C0: dtor
   Client::Game::QuestEffectManager:
     instances:
       - ea: 0x142238B18
@@ -1264,8 +1264,8 @@ classes:
       0x14142B680: Finalize
       0x14142B5D0: HasInstance
       0x14142B5C0: GetInstance
-      0x14142B5F0: Create
-      0x14142B640: Destroy
+      0x14142B5F0: ctor
+      0x14142B640: dtor
   Client::Game::DawnManager:
     instances:
       - ea: 0x1421FF158
@@ -1274,8 +1274,8 @@ classes:
       0x1407C82B0: Initialize
       0x1407C7A70: HasInstance
       0x1407C7A90: GetInstance
-      0x1407C79F0: Create
-      0x1407C7A40: Destroy
+      0x1407C79F0: ctor
+      0x1407C7A40: dtor
   Client::Game::ServerValueCallbackManager:
     instances:
       - ea: 0x142238EE0
@@ -1283,8 +1283,8 @@ classes:
     funcs:
       0x14143AFF0: HasInstance
       0x14143AFE0: GetInstance
-      0x14143B010: Create
-      0x14143B060: Destroy
+      0x14143B010: ctor
+      0x14143B060: dtor
   Client::Game::HWDManager: # Diadem
     instances:
       - ea: 0x14221E6F0
@@ -11034,8 +11034,8 @@ classes:
       - ea: 0x1421FF140
         pointer: False
     funcs:
-      0x1408E8660: Create
-      0x1408E8710: Destroy
+      0x1408E8660: ctor
+      0x1408E8710: dtor
       0x1408E8770: HasInstance
       0x1408E8790: GetInstance
   Client::Game::Event::EventFramework:
@@ -11043,8 +11043,8 @@ classes:
       - ea: 0x1421FF148
         pointer: True
     funcs:
-      0x140863BD0: Create
-      0x140863C30: Destroy
+      0x140863BD0: ctor
+      0x140863C30: dtor
       0x140863C80: GetInstance
       0x140863F70: Initialize
       0x1408647C0: Finalize
