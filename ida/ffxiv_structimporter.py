@@ -525,6 +525,20 @@ if api is None:
                         s, 0, ida_struct.get_struc_last_offset(s) + 1
                     )
 
+            def delete_enum_members(self, enum):
+                # type: (DefinedEnum) -> None
+                e = ida_enum.get_enum(enum.type)
+                for value in enum.values:
+                    mem = ida_enum.get_enum_member_by_name(
+                        "{0}.{1}".format(enum.name, value)
+                    )
+                    ida_enum.del_enum_member(
+                        e,
+                        ida_enum.get_enum_member_value(mem),
+                        ida_enum.get_enum_member_serial(mem),
+                        ida_enum.get_enum_member_bmask(mem),
+                    )
+
             @property
             def get_file_path(self):
                 return os.path.join(
@@ -546,7 +560,7 @@ if api is None:
 
             def delete_enum(self, enum):
                 # type: (DefinedEnum) -> None
-                ida_enum.del_enum(ida_enum.get_enum(enum.type))
+                self.delete_enum_members(enum)
 
             def delete_struct(self, struct):
                 # type: (DefinedStruct) -> None
