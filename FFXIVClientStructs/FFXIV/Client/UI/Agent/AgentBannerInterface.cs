@@ -21,8 +21,6 @@ public unsafe partial struct AgentBannerInterface {
         // dtor: E8 ?? ?? ?? ?? 48 83 EF ?? 75 ?? BA ?? ?? ?? ?? 48 8B CE E8 ?? ?? ?? ?? 48 89 7D
         [StructLayout(LayoutKind.Explicit, Size = CharacterDataSize)]
         public struct CharacterData {
-            [FieldOffset(0x000)] public void** vtbl;
-
             [FieldOffset(0x018)] public Utf8String Name1;
             [FieldOffset(0x080)] public Utf8String Name2;
             [FieldOffset(0x0E8)] public Utf8String UnkString1;

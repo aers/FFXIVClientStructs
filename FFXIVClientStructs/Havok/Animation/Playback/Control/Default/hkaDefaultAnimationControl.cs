@@ -15,9 +15,7 @@ public unsafe partial struct hkaDefaultAnimationControl {
     };
 
     [StructLayout(LayoutKind.Explicit, Size = 0x08)]
-    public struct hkaDefaultAnimationControlListener {
-        [FieldOffset(0x00)] public void* vtbl;
-    }
+    public struct hkaDefaultAnimationControlListener;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x48)]
     public struct hkaDefaultAnimationControlMapperData {

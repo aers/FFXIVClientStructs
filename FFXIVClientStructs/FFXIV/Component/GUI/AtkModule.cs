@@ -10,7 +10,6 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 //   Component::GUI::AtkModuleInterface
 [StructLayout(LayoutKind.Explicit, Size = 0x82A0)]
 public unsafe partial struct AtkModule {
-    [FieldOffset(0x0), CExportIgnore] public void* vtbl;
     [FieldOffset(0x8)] public AtkExternalInterface AtkExternalInterface;
 
     [FieldOffset(0x20)] public ExcelSheet* AddonSheet;

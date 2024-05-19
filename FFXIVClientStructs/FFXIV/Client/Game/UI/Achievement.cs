@@ -9,7 +9,6 @@ public unsafe partial struct Achievement {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 04 30", 3)]
     public static partial Achievement* Instance();
 
-    [FieldOffset(0x00)] public void** vtbl;
     [FieldOffset(0x08)] public AchievementState State;
     [FieldOffset(0x0C)] public fixed byte CompletedAchievements[428];
 

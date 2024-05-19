@@ -5,8 +5,6 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.MJI;
 // ctor "48 89 6C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC 20 BA ?? ?? ?? ?? 48 8B F9"
 [StructLayout(LayoutKind.Explicit, Size = 0xB78)]
 public unsafe partial struct MJIPastureHandler {
-    [FieldOffset(0x0)] public void* vtbl;
-
     // 0x230: AtkEventInterface-derived structure of size 0x30, used by agent to execute operations
 
     /// <summary>

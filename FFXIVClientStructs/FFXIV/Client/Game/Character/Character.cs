@@ -173,9 +173,7 @@ public unsafe partial struct Character {
 
     [StructLayout(LayoutKind.Explicit, Size = 0xF0)]
     public partial struct VfxContainer {
-        [FieldOffset(0x00)] public void** ContainerVTable;
         [FieldOffset(0x08)] public BattleChara* OwnerObject;
-        [FieldOffset(0x10)] public void** VfxListenerVTable;
 
         [FieldOffset(0x18)] public VfxData* VfxData;
         [FieldOffset(0x20)] public VfxData* VfxData2;
@@ -190,7 +188,6 @@ public unsafe partial struct Character {
     //0x10 bytes are from the base class which is just vtable + gameobject ptr (same as Companion-/DrawDataContainer)
     [StructLayout(LayoutKind.Explicit, Size = 0x68)]
     public partial struct MountContainer {
-        [FieldOffset(0x00)] public void** ContainerVTable;
         [FieldOffset(0x08)] public BattleChara* OwnerObject;
         [FieldOffset(0x10)] public Character* MountObject;
         [FieldOffset(0x18)] public ushort MountId;
@@ -208,7 +205,6 @@ public unsafe partial struct Character {
 
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public partial struct CompanionContainer {
-        [FieldOffset(0x00)] public void** ContainerVTable;
         [FieldOffset(0x08)] public BattleChara* OwnerObject;
         [FieldOffset(0x10)] public Companion* CompanionObject;
         //used if minion is summoned but the object slot is taken by a mount
@@ -220,7 +216,6 @@ public unsafe partial struct Character {
 
     [StructLayout(LayoutKind.Explicit, Size = 0x78)]
     public partial struct OrnamentContainer {
-        [FieldOffset(0x00)] public void** ContainerVTable;
         [FieldOffset(0x08)] public BattleChara* OwnerObject;
         [FieldOffset(0x10)] public Ornament* OrnamentObject;
         [FieldOffset(0x18)] public ushort OrnamentId;
@@ -236,9 +231,7 @@ public unsafe partial struct Character {
     // This probably is used by other transformations too, but we have not found any yet.
     [StructLayout(LayoutKind.Explicit, Size = 0x50)]
     public struct ReaperShroudContainer {
-        [FieldOffset(0x00)] public void** ContainerVTable;
         [FieldOffset(0x08)] public BattleChara* OwnerObject;
-        [FieldOffset(0x10)] public void** VfxListenerVTable;
         [FieldOffset(0x18)] public ushort StanceChangeId;
         [FieldOffset(0x1C)] public uint StanceChangeState;
         [FieldOffset(0x20)] public float Timer;
@@ -257,7 +250,6 @@ public unsafe partial struct Character {
 
     [StructLayout(LayoutKind.Explicit, Size = 0x620)]
     public struct GazeContainer {
-        [FieldOffset(0x00)] public void** ContainerVTable;
         [FieldOffset(0x08)] public BattleChara* OwnerObject;
         [FieldOffset(0x10)] public GazeController Controller;
         /// <summary>

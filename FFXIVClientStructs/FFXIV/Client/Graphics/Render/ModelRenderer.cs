@@ -24,8 +24,6 @@ public unsafe partial struct ModelRenderer {
         [FieldOffset(0x10)] public ushort* OutFlags;
     }
 
-    [FieldOffset(0)] public void* Vtbl;
-
     /// <summary> <see cref="ShaderPackage.ConstantSamplerUnknown.Id"/> of the g_LightDirection constant buffer (CRC: 0xEF4E7491). </summary>
     [FieldOffset(0x8)] public uint LightDirectionId;
     /// <summary> <see cref="ShaderPackage.ConstantSamplerUnknown.Id"/> of the g_WorldViewMatrix constant buffer (CRC: 0x76BB3DC0). </summary>

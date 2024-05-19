@@ -6,7 +6,6 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 // ctor "E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 59 ?? 48 89 01 E8"
 [StructLayout(LayoutKind.Explicit, Size = 0x1A8)]
 public unsafe partial struct DrawDataContainer {
-    [FieldOffset(0x000)] public void** Vtable;
     [FieldOffset(0x008)] public Character* Parent;
 
     [FixedSizeArray<DrawObjectData>(3)]
@@ -106,7 +105,6 @@ public unsafe partial struct DrawObjectData {
     public const int Size = 0x70;
 
     [FieldOffset(0x00)] public WeaponModelId ModelId;
-    [FieldOffset(0x10)] public void** VTable;
     [FieldOffset(0x18)] public DrawObject* DrawObject;
     [FieldOffset(0x60)] public byte State;
     [FieldOffset(0x62)] public ushort Flags1;

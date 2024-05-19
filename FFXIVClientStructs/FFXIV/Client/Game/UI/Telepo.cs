@@ -45,7 +45,6 @@ public struct TeleportInfo {
 
 [StructLayout(LayoutKind.Explicit, Size = 0x28)]
 public unsafe partial struct SelectUseTicketInvoker {
-    [FieldOffset(0x00)] public void* vtbl;
     [FieldOffset(0x10)] public Telepo* Telepo;
 
     [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 80 79 ?? 00 41 0F B6 F8 8B F2")]

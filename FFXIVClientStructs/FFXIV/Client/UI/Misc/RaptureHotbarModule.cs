@@ -12,7 +12,6 @@ public unsafe partial struct RaptureHotbarModule {
     public static RaptureHotbarModule* Instance() => Framework.Instance()->GetUiModule()->GetRaptureHotbarModule();
 
     [FieldOffset(0)] public UserFileEvent UserFileEvent; // to 0x40
-    [FieldOffset(0x40)] public void** InputCodeModifiedInterfaceVTable;
     [FieldOffset(0x48)] public UIModule* UiModule;
 
     /// <summary>

@@ -2,7 +2,6 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x18)]
 public unsafe partial struct InfoProxyInterface {
-    [FieldOffset(0x0), CExportIgnore] public void** vtbl;
     [FieldOffset(0x8)] public UIModule* UiModule;
     //For Proxies with a fixed count this is apparently 0
     [FieldOffset(0x10)] public uint EntryCount;
@@ -15,14 +14,13 @@ public unsafe partial struct InfoProxyInterface {
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x28)]
-public unsafe partial struct InfoProxyInvitedInterface {
+public unsafe struct InfoProxyInvitedInterface {
     [FieldOffset(0x0)] public InfoProxyInterface InfoProxynterface;
     [FieldOffset(0x18)] public Unk18 Unk18Obj;
     //There seems to be a pointer to data at 0x20
 
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct Unk18 {
-        [FieldOffset(0x0)] public void* vtbl;
         [FieldOffset(0x8)] public void* Data;
     }
 }

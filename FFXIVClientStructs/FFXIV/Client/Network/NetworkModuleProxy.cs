@@ -2,7 +2,6 @@ namespace FFXIVClientStructs.FFXIV.Client.Network;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x20)]
 public unsafe partial struct NetworkModuleProxy {
-    [FieldOffset(0x00)] public void* Vtbl;
     [FieldOffset(0x08)] public NetworkModule* NetworkModule;
 
     [MemberFunction("E8 ?? ?? ?? ?? EB ?? 49 8B 85")]

@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 [Addon("Teleport")]
 [StructLayout(LayoutKind.Explicit, Size = 0x3A0)]
-public unsafe partial struct AddonTeleport {
+public unsafe struct AddonTeleport {
     [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
     [FieldOffset(0x220)] public AtkComponentRadioButton* TabHeaderAll;
     [FieldOffset(0x228)] public AtkComponentRadioButton* TabHeaderLaNoscea;
@@ -29,7 +29,6 @@ public unsafe partial struct AddonTeleport {
     [FieldOffset(0x298)] public AtkComponentListItemRenderer* TeleportTreeListFirstItem;
 
     // Inlined Class
-    [FieldOffset(0x2A0)] public void* UnknownVtbl;
     [FieldOffset(0x2A8)] public AddonTeleport* Addon;
     [FieldOffset(0x2B0)] public delegate*<void*, AddonTeleport*, void*> UnknownFunction;
     [FieldOffset(0x2B8)] public AtkComponentButton* SettingsButton;
