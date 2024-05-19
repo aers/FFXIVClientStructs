@@ -149,4 +149,22 @@ internal static class DiagnosticDescriptors {
         true,
         "A signature format is invalid (valid format is 2-character bytes seperated by spaces with ? as the wildcard character with no leading or trailign spaces)."
     );
+
+    public static readonly DiagnosticDescriptor FixedSizeArrayFieldMustBePrivate = new(
+        "CSIG0301",
+        "Fixed size array backing field must be private",
+        "The field {0} marked as a fixed size array must be private",
+        "InteropGenerator.Field",
+        DiagnosticSeverity.Error,
+        true,
+        "A field marked with the FixedSizeArray attribute is not marked private.");
+    
+    public static readonly DiagnosticDescriptor FixedSizeArrayFieldMustHaveProperlyNamedType = new(
+        "CSIG0302",
+        "Fixed size array backing field must have a valid type",
+        "The field {0} marked as a fixed size array has type name {0} but the type name must be FixedSizeArray#<T>, where # is the size of the array and T is the type",
+        "InteropGenerator.Field",
+        DiagnosticSeverity.Error,
+        true,
+        "A field marked with the FixedSizeArray attribute has an invalid type format. The type format should be FixedSizeArray#<T>, where # is the size of the array and T is the type.");
 }

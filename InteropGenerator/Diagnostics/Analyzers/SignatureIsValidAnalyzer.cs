@@ -7,7 +7,7 @@ using static InteropGenerator.Diagnostics.DiagnosticDescriptors;
 namespace InteropGenerator.Diagnostics.Analyzers;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public class SignatureIsValidAnalyzer : DiagnosticAnalyzer {
+public sealed class SignatureIsValidAnalyzer : DiagnosticAnalyzer {
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = [SignatureContainsInvalidCharacters, SignatureFormatInvalid];
 

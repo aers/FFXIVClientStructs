@@ -194,6 +194,7 @@ public sealed partial class InteropGenerator {
 
     private static void RenderFixedSizeArrayAccessors(StructInfo structInfo, IndentedTextWriter writer) {
         foreach (FixedSizeArrayInfo fixedSizeArrayInfo in structInfo.FixedSizeArrays) {
+            writer.WriteLine($"""/// <inheritdoc cref="{fixedSizeArrayInfo.FieldName}" />""");
             // public Span<T> FieldName => _fieldName;
             writer.WriteLine($"public Span<{fixedSizeArrayInfo.Type}> {fixedSizeArrayInfo.GetPublicFieldName()} => {fixedSizeArrayInfo.FieldName};");
         }
