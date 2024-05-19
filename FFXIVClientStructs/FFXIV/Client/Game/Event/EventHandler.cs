@@ -15,17 +15,14 @@ public unsafe partial struct EventHandler {
     [FieldOffset(0xC8)] public Utf8String UnkString0;
     [FieldOffset(0x168)] public Utf8String UnkString1;
 
-    /// <remarks> You need to pass your own Utf8String, so the game can copy the title into it. </remarks>
     [VirtualFunction(197)]
-    public partial void GetTitle(Utf8String* title);
+    public partial void GetTitle(Utf8String* outTitle);
 
-    /// <remarks> You need to pass your own Utf8String, so the game can copy the description into it. </remarks>
     [VirtualFunction(249)]
-    public partial void GetDescription(Utf8String* description);
+    public partial void GetDescription(Utf8String* outDescription);
 
-    /// <remarks> You need to pass your own Utf8String, so the game can copy the relief text into it. </remarks>
     [VirtualFunction(250)]
-    public partial void GetReliefText(Utf8String* reliefText);
+    public partial void GetReliefText(Utf8String* outReliefText);
 
     [VirtualFunction(251)]
     public partial int GetTimeRemaining(int currentTimestamp);
