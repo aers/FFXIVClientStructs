@@ -132,7 +132,7 @@ public unsafe partial struct AtkValue : ICreatable, IDisposable {
     public void SetBool(bool value) {
         ReleaseManagedMemory();
         Type = ValueType.Bool;
-        Byte = (byte)(value ? 1 : 0);
+        Bool = value;
     }
 
     public void SetInt(int value) {
