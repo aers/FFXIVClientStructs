@@ -1318,19 +1318,31 @@ classes:
       0x14064FF30: ToInteger # strtoi for utf8string (str, base)
   Component::GUI::AtkValue:
     funcs:
+      0x140507C50: ctor_copy # copy constructor
       0x140507CB0: dtor
       0x140507CF0: GetBool
       0x140507D10: GetInt
       0x140507D30: GetUInt  # these two could be backwards
       0x140507D50: GetFloat
       0x140507D70: GetString
-      0x140507D90: GetUnkPtr # could also be string, returns a pointer size
+      0x140507D90: GetString2
       0x140507DD0: SetString
-      0x140507E60: CopyValue # = operator
-      0x140507ED0: Equals # == operator
-      0x140508090: CreateArray # uses std::vector for array type (9)
+      0x140507E60: Copy # = operator
+      0x140507ED0: EqualTo # == operator
+      0x140508050: GetVectorValue2
+      0x140508070: GetVectorValue3
+      0x140508090: CreateVector
+      0x140508150: CopyVectorValue
+      0x140508180: GetVectorValue
+      0x1405081A0: SetVectorValue
+      0x1405081D0: SetVectorString
       0x140508330: ChangeType
+      0x140508370: CopyManagedMemory
       0x140508540: ReleaseManagedMemory # called by SetString, frees old strings
+      0x1405A52B0: SetBool
+      0x1405A5550: SetInt
+      0x1405A5770: SetString
+      0x1405A57D0: SetUInt
   Component::GUI::AtkEvent:
     funcs:
       0x14050F920: SetEventIsHandled
