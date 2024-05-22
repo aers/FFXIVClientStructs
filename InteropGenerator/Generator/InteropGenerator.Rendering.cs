@@ -53,6 +53,12 @@ public sealed partial class InteropGenerator {
             token.ThrowIfCancellationRequested();
         }
         
+        // write string overloads
+        if (!structInfo.StringOverloads.IsEmpty) {
+            RenderStringOverloads(structInfo, writer);
+            token.ThrowIfCancellationRequested();
+        }
+        
         // write span accessors for fixed size arrays
         if (!structInfo.FixedSizeArrays.IsEmpty) {
             RenderFixedSizeArrayAccessors(structInfo, writer);
@@ -191,6 +197,58 @@ public sealed partial class InteropGenerator {
         }
     }
 
+    private static void RenderStringOverloads(StructInfo structInfo, IndentedTextWriter writer) {
+        foreach (StringOverloadInfo stringOverloadInfo in structInfo.StringOverloads) {
+            // collect valid replacement targets
+            ImmutableArray<string> paramsToOverload = [..stringOverloadInfo.MethodInfo.Parameters.Where(p => p.Type == "byte*" && !stringOverloadInfo.IgnoredParameters.Contains(p.Name)).Select(p => p.Name)];
+
+            // when calling the original function we need the param names, but use "Ptr" for the arguments that have been converted
+            string paramNames = stringOverloadInfo.MethodInfo.GetStringOverloadParameterNamesString(paramsToOverload);
+            
+            // "string" overload
+            writer.WriteLine(stringOverloadInfo.MethodInfo.GetStringOverloadDeclarationString("string", paramsToOverload));
+            using (writer.WriteBlock()) {
+                foreach (string overloadParamName in paramsToOverload) {
+                    // allocate space for string, supporting UTF8 characters
+                    var strLenName = $"{overloadParamName}UTF8StrLen";
+
+                    writer.WriteLine($"int {strLenName} = global::System.Text.Encoding.UTF8.GetByteCount({overloadParamName});");
+                    writer.WriteLine($"Span<byte> {overloadParamName}Bytes = {strLenName} <= 512 ? stackalloc byte[{strLenName} + 1] : new byte[{strLenName} + 1];");
+                    writer.WriteLine($"global::System.Text.Encoding.UTF8.GetBytes({overloadParamName}, {overloadParamName}Bytes);");
+                    writer.WriteLine($"{overloadParamName}Bytes[{strLenName}] = 0;");
+                }
+
+                foreach (string overloadParamName in paramsToOverload) {
+                    writer.WriteLine($"fixed (byte* {overloadParamName}Ptr = {overloadParamName}Bytes)");
+                    writer.WriteLine("{");
+                    writer.IncreaseIndent();
+                }
+
+                writer.WriteLine($"{stringOverloadInfo.MethodInfo.GetReturnString()}{stringOverloadInfo.MethodInfo.Name}({paramNames});");
+
+                foreach (string _ in paramsToOverload) {
+                    writer.DecreaseIndent();
+                    writer.WriteLine("}");
+                }
+            }
+            // "ReadOnlySpan<byte>" overload
+            writer.WriteLine(stringOverloadInfo.MethodInfo.GetStringOverloadDeclarationString("ReadOnlySpan<byte>", paramsToOverload));
+            using (writer.WriteBlock()) {
+                foreach (string overloadParamName in paramsToOverload) {
+                    writer.WriteLine($"fixed (byte* {overloadParamName}Ptr = {overloadParamName})");
+                    writer.WriteLine("{");
+                    writer.IncreaseIndent();
+                }
+
+                writer.WriteLine($"{stringOverloadInfo.MethodInfo.GetReturnString()}{stringOverloadInfo.MethodInfo.Name}({paramNames});");
+
+                foreach (string _ in paramsToOverload) {
+                    writer.DecreaseIndent();
+                    writer.WriteLine("}");
+                }
+            }
+        }
+    }
 
     private static void RenderFixedSizeArrayAccessors(StructInfo structInfo, IndentedTextWriter writer) {
         foreach (FixedSizeArrayInfo fixedSizeArrayInfo in structInfo.FixedSizeArrays) {

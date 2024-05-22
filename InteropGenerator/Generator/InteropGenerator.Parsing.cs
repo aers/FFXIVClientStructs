@@ -13,7 +13,11 @@ public sealed partial class InteropGenerator {
 
     private static StructInfo ParseStructInfo(INamedTypeSymbol structSymbol, CancellationToken token) {
         // collect info on struct methods
-        ParseMethods(structSymbol, token, out EquatableArray<MemberFunctionInfo> memberFunctions, out EquatableArray<VirtualFunctionInfo> virtualFunctions, out EquatableArray<StaticAddressInfo> staticAddresses);
+        ParseMethods(structSymbol, token,
+            out EquatableArray<MemberFunctionInfo> memberFunctions, 
+            out EquatableArray<VirtualFunctionInfo> virtualFunctions,
+            out EquatableArray<StaticAddressInfo> staticAddresses,
+            out EquatableArray<StringOverloadInfo> stringOverloads);
         token.ThrowIfCancellationRequested();
         
         // collect info on struct fields
@@ -48,6 +52,7 @@ public sealed partial class InteropGenerator {
             memberFunctions,
             virtualFunctions,
             staticAddresses,
+            stringOverloads,
             virtualTableSignatureInfo,
             fixedSizeArrays);
     }
@@ -55,41 +60,45 @@ public sealed partial class InteropGenerator {
     private static void ParseMethods(INamedTypeSymbol structSymbol, CancellationToken token,
         out EquatableArray<MemberFunctionInfo> memberFunctions,
         out EquatableArray<VirtualFunctionInfo> virtualFunctions,
-        out EquatableArray<StaticAddressInfo> staticAddresses) {
+        out EquatableArray<StaticAddressInfo> staticAddresses,
+        out EquatableArray<StringOverloadInfo> stringOverloads) {
         
         using ImmutableArrayBuilder<MemberFunctionInfo> memberFunctionsBuilder = new();
         using ImmutableArrayBuilder<VirtualFunctionInfo> virtualFunctionBuilder = new();
-        using ImmutableArrayBuilder<StaticAddressInfo> staticAdddressesBuilder = new();
+        using ImmutableArrayBuilder<StaticAddressInfo> staticAddressesBuilder = new();
+        using ImmutableArrayBuilder<StringOverloadInfo> stringOverloadsBuilder = new();
 
         foreach (IMethodSymbol methodSymbol in structSymbol.GetMembers().OfType<IMethodSymbol>()) {
-            // check for one of the method generation attributes
+            MethodInfo? methodInfo = null;
+            
+            // check for one of the method body generation attributes
             if (methodSymbol.TryGetAttributeWithFullyQualifiedMetadataName(AttributeNames.MemberFunctionAttribute, out AttributeData? mfAttribute)) {
                 if (mfAttribute.ConstructorArguments.Length != 2 ||
                     !mfAttribute.TryGetConstructorArgument(0, out string? signature) ||
                     !mfAttribute.TryGetConstructorArgument(1, out byte? offset))
                     continue; // ignore malformed attribute
 
-                if (!TryParseMethod(methodSymbol, token, out MethodInfo? methodInfo))
+                if (!TryParseMethod(methodSymbol, token, out methodInfo))
                     continue;
 
-                MemberFunctionInfo mfi = new(
+                MemberFunctionInfo memberFunctionInfo = new(
                     methodInfo,
                     new SignatureInfo(signature, offset.Value));
 
-                memberFunctionsBuilder.Add(mfi);
+                memberFunctionsBuilder.Add(memberFunctionInfo);
             } else if (methodSymbol.TryGetAttributeWithFullyQualifiedMetadataName(AttributeNames.VirtualFunctionAttribute, out AttributeData? vfAttribute)) {
                 if (vfAttribute.ConstructorArguments.Length != 1 ||
                     !vfAttribute.TryGetConstructorArgument(0, out uint? index))
                     continue; // ignore malformed attribute
 
-                if (!TryParseMethod(methodSymbol, token, out MethodInfo? methodInfo))
+                if (!TryParseMethod(methodSymbol, token, out methodInfo))
                     continue;
 
-                VirtualFunctionInfo vfi = new(
+                VirtualFunctionInfo virtualFunctionInfo = new(
                     methodInfo,
                     index.Value);
 
-                virtualFunctionBuilder.Add(vfi);
+                virtualFunctionBuilder.Add(virtualFunctionInfo);
             } else if (methodSymbol.TryGetAttributeWithFullyQualifiedMetadataName(AttributeNames.StaticAddressAttribute, out AttributeData? saAttribute)) {
                 if (saAttribute.ConstructorArguments.Length != 3 ||
                     !saAttribute.TryGetConstructorArgument(0, out string? signature) ||
@@ -97,22 +106,47 @@ public sealed partial class InteropGenerator {
                     !saAttribute.TryGetConstructorArgument(2, out bool? isPointer))
                     continue; // ignore malformed attribute
 
-                if (!TryParseMethod(methodSymbol, token, out MethodInfo? methodInfo))
+                if (!TryParseMethod(methodSymbol, token, out methodInfo))
                     continue;
 
-                StaticAddressInfo sai = new(
+                StaticAddressInfo staticAddressInfo = new(
                     methodInfo,
                     new SignatureInfo(signature, offset.Value),
                     isPointer.Value);
 
-                staticAdddressesBuilder.Add(sai);
+                staticAddressesBuilder.Add(staticAddressInfo);
             }
+            
+            // check for string overload, which could be applied to some of the above
+            if (methodSymbol.TryGetAttributeWithFullyQualifiedMetadataName(AttributeNames.GenerateStringOverloads, out _)) {
+                // retrieve method info if it wasn't previously retrieved
+                if (methodInfo is null) {
+                    if (!TryParseMethod(methodSymbol, token, out methodInfo))
+                        continue;
+                }
 
+                using ImmutableArrayBuilder<string> ignoredParametersBuilder = new();
+
+                foreach (IParameterSymbol parameterSymbol in methodSymbol.Parameters) {
+                    if (parameterSymbol.Type.TypeKind == TypeKind.Pointer &&
+                        parameterSymbol.TryGetAttributeWithFullyQualifiedMetadataName(AttributeNames.StringIgnore, out _))
+                        ignoredParametersBuilder.Add(parameterSymbol.Name);
+                }
+
+                StringOverloadInfo stringOverloadInfo = new(
+                    methodInfo,
+                    ignoredParametersBuilder.ToImmutable());
+                
+                stringOverloadsBuilder.Add(stringOverloadInfo);
+
+            }
+            
             token.ThrowIfCancellationRequested();
         }
         memberFunctions = memberFunctionsBuilder.ToImmutable();
         virtualFunctions = virtualFunctionBuilder.ToImmutable();
-        staticAddresses = staticAdddressesBuilder.ToImmutable();
+        staticAddresses = staticAddressesBuilder.ToImmutable();
+        stringOverloads = stringOverloadsBuilder.ToImmutable();
     }
 
     private static bool TryParseMethod(IMethodSymbol methodSymbol, CancellationToken token, [NotNullWhen(true)] out MethodInfo? methodInfo) {

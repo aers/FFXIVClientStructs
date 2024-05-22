@@ -9,6 +9,7 @@ internal sealed record StructInfo(
     EquatableArray<MemberFunctionInfo> MemberFunctions,
     EquatableArray<VirtualFunctionInfo> VirtualFunctions,
     EquatableArray<StaticAddressInfo> StaticAddresses,
+    EquatableArray<StringOverloadInfo> StringOverloads,
     SignatureInfo? StaticVirtualTableSignature,
     EquatableArray<FixedSizeArrayInfo> FixedSizeArrays) {
     public string Name => Hierarchy[0];
