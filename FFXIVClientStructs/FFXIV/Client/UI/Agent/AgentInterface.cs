@@ -13,7 +13,7 @@ public unsafe partial struct AgentInterface {
     [FieldOffset(0x20)] public uint AddonId;
 
     [VirtualFunction(0)]
-    public partial void* ReceiveEvent(void* eventData, AtkValue* values, uint valueCount, ulong eventKind); // TODO: return void
+    public partial void* ReceiveEvent(void* eventData, AtkValue* values, uint valueCount, ulong eventKind); // TODO: return AtkValue* and change "void* eventData" to "AtkValue* returnValue"
 
     [VirtualFunction(3)]
     public partial void Show();
@@ -29,4 +29,7 @@ public unsafe partial struct AgentInterface {
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B 6E 20")]
     public partial AgentInterface* GetAgentByInternalId(AgentId agentID);
+
+    [MemberFunction("E8 ?? ?? ?? ?? EB 5D 44 8B C5")]
+    public partial bool IsAddonReady();
 }

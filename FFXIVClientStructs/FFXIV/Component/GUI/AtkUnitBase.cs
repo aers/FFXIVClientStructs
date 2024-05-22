@@ -20,6 +20,7 @@ public unsafe partial struct AtkUnitBase {
     [FieldOffset(0x110)] public AtkSimpleTween RootNodeTween; // used for open/close transitions
     [FieldOffset(0x160)] public AtkValue* AtkValues;
     [FieldOffset(0x182)] public byte Flags;
+    [FieldOffset(0x189)] public byte UnkFlags189;
     [FieldOffset(0x194)] public uint OpenTransitionDuration;
     [FieldOffset(0x198)] public uint CloseTransitionDuration;
     [FieldOffset(0x1A1)] public byte NumOpenPopups; // used for dialogs and context menus to block inputs via ShouldIgnoreInputs
@@ -53,6 +54,9 @@ public unsafe partial struct AtkUnitBase {
         get => (Flags & 0x20) == 0x20;
         set => Flags = value ? Flags |= 0x20 : Flags &= 0xDF;
     }
+
+    /// <summary> <c>true</c> when Setup is complete. </summary>
+    public readonly bool IsReady => (UnkFlags189 & 0x01) != 0;
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F BF CB 0F 28 F8")]
     public partial float GetScale();
@@ -222,6 +226,9 @@ public unsafe partial struct AtkUnitBase {
 
     [MemberFunction("E8 ?? ?? ?? ?? 8D 55 06 48 8B CE")]
     public partial void SetCloseTransition(float duration, short offsetX, short offsetY, float scale);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 4D 8B C6 48 8B D3 48 8B CF")]
+    public partial bool SetAtkValues(uint numValues, AtkValue* values);
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F BF 8C 24 ?? ?? ?? ?? 01 8F")]
     public partial bool MoveDelta(short* xDelta, short* yDelta);

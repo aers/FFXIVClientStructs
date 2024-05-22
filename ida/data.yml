@@ -3078,6 +3078,7 @@ classes:
         base: Component::GUI::AtkEventListener
     vfuncs:
       8: ShowAddonByID
+      10: RefreshAddon
       11: UpdateAddonByID
     funcs:
       0x14017C1B0: Finalize
@@ -3973,6 +3974,7 @@ classes:
       0x14021D500: GetAgentInventoryContext
       0x14021D4E0: GetAgentContext
       0x14021D550: GetAddonTextById
+      0x14021D3D0: IsAddonReady
   Client::UI::Agent::AgentCharaMake:
     vtbls:
       - ea: 0x1419DEBB8
@@ -5180,6 +5182,7 @@ classes:
       0x140519C70: GetStringArrayData
       0x140519C80: GetExtendArrayData
       0x140519D90: ctor
+      0x14051A310: Update
       0x14053C500: GetSingleton
       0x14053C510: GetSingleton2
       0x140548740: GetSingleton3
@@ -5504,6 +5507,7 @@ classes:
       0x14053D410: FireCallback
       0x14053E030: MoveDelta
       0x14053FAC0: UpdateCollisionNodeList
+      0x140540EC0: SetAtkValues
   Component::GUI::AtkComponentBase:
     vtbls:
       - ea: 0x141A08D90
@@ -5606,6 +5610,7 @@ classes:
       17: SetHandlerFunction
       18: SetAtkModuleEvent
       21: CloseAddon
+      23: RefreshAddon
       26: IsAddonReady
       28: ClearFocus
       36: SetAtkHistory

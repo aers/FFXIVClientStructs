@@ -41,6 +41,10 @@ public enum AtkEventType : byte {
     IconTextRollOut = 57,
     IconTextClick = 58,
 
+    // AtkDialogue
+    UnkAtkDialogue59 = 59, // found in "40 53 48 83 EC 40 80 79 34 00"
+    UnkAtkDialogue60 = 60,
+
     // AtkTimer
     TimerTick = 61,
     TimerEnd = 62,
