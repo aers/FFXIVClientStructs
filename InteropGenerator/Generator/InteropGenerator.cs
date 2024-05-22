@@ -33,7 +33,7 @@ public sealed partial class InteropGenerator : IIncrementalGenerator {
             });
 
         IncrementalValueProvider<ImmutableArray<StructInfo>> structInfosWithFixedArrays = structInfos.Where(static sI => !sI.FixedSizeArrays.IsEmpty).Collect();
-        
+
         context.RegisterSourceOutput(structInfosWithFixedArrays,
             static (sourceContext, structInfos) => {
                 if (!structInfos.IsEmpty)

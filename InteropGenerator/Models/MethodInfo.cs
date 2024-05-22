@@ -19,12 +19,12 @@ internal sealed record MethodInfo(
 
         return $"{Modifiers.Replace(" partial", string.Empty)} {ReturnType} {Name}({parameterTypesAndNamesString})";
     }
-    
+
     public string GetParameterTypeString() => Parameters.Any() ? string.Join(", ", Parameters.Select(p => $"{p.RefKind.GetParameterPrefix()}{p.Type}")) + ", " : "";
 
     public string GetParameterNamesString() => string.Join(", ", Parameters.Select(p => $"{p.RefKind.GetParameterPrefix()}{p.Name}"));
-    
-    public string GetStringOverloadParameterNamesString(ImmutableArray<string> paramsToOverload) => 
+
+    public string GetStringOverloadParameterNamesString(ImmutableArray<string> paramsToOverload) =>
         string.Join(", ", Parameters.Select(p => paramsToOverload.Contains(p.Name) ? $"{p.RefKind.GetParameterPrefix()}{p.Name}Ptr" : $"{p.RefKind.GetParameterPrefix()}{p.Name}"));
 
     private string GetParameterTypesAndNamesString() => string.Join(", ", Parameters.Select(p => $"{p.RefKind.GetParameterPrefix()}{p.Type} {p.Name}"));

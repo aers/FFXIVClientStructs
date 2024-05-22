@@ -25,7 +25,7 @@ public abstract class MethodAttributeIsValidAnalyzerBase(
                 return;
 
             compilationStartAnalysisContext.RegisterSymbolAction(symbolContext => {
-                    if (symbolContext.Symbol is not IMethodSymbol { } methodSymbol)
+                    if (symbolContext.Symbol is not IMethodSymbol methodSymbol)
                         return;
 
                     if (!methodSymbol.HasAttributeWithType(attributeSymbol))

@@ -43,7 +43,7 @@ public sealed class GenerateInteropAttributeIsValidAnalyzer : DiagnosticAnalyzer
                             // can't use TryGetConstructorArgument on non-builtin types
                             if (structLayoutAttributeData.ConstructorArguments.Length >= 1 &&
                                 !structLayoutAttributeData.ConstructorArguments[0].IsNull &&
-                                (LayoutKind) structLayoutAttributeData.ConstructorArguments[0].Value! != LayoutKind.Explicit) {
+                                (LayoutKind)structLayoutAttributeData.ConstructorArguments[0].Value! != LayoutKind.Explicit) {
                                 context.ReportDiagnostic(Diagnostic.Create(
                                     GenerationTargetMustUseLayoutKindExplicit,
                                     structLayoutAttributeData.GetLocation(),

@@ -33,7 +33,7 @@ public sealed class SignatureIsValidAnalyzer : DiagnosticAnalyzer {
 
                     if (!attributeData.TryGetConstructorArgument(0, out string? signature))
                         return;
-                    
+
                     ValidateSignatureAndReportDiagnostics(signature, attributeData.GetLocation(), context);
                 },
                 SymbolKind.Method);

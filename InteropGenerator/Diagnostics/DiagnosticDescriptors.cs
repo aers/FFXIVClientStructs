@@ -41,7 +41,7 @@ internal static class DiagnosticDescriptors {
         DiagnosticSeverity.Error,
         true,
         "A struct was marked with the GenerateInterop attribute but is not marked with the StructLayout attribute.");
-    
+
     public static readonly DiagnosticDescriptor GenerationTargetMustUseLayoutKindExplicit = new(
         "CSIG0005",
         "Struct generation target must use LayoutKind.Explicit",
@@ -50,7 +50,7 @@ internal static class DiagnosticDescriptors {
         DiagnosticSeverity.Error,
         true,
         "A struct was marked with the GenerateInterop attribute but does not use LayoutKind.Explicit.");
-    
+
     public static readonly DiagnosticDescriptor GenerationTargetMustHaveExplicitSize = new(
         "CSIG0006",
         "Struct generation target must provide an explicit size",
@@ -93,7 +93,7 @@ internal static class DiagnosticDescriptors {
     public static readonly DiagnosticDescriptor StaticAddressMethodMustNotHaveParameters = new(
         "CSIG0104",
         "Static address method generation target is not allowed to have parameters",
-        "Method {1} has parameters, which is not allowed for a static address method stub",
+        "Method {0} has parameters, which is not allowed for a static address method stub",
         "InteropGenerator.Method",
         DiagnosticSeverity.Error,
         true,
@@ -103,7 +103,7 @@ internal static class DiagnosticDescriptors {
     public static readonly DiagnosticDescriptor StaticAddressMethodMustBeStatic = new(
         "CSIG0105",
         "Static address method generation target must be static",
-        "Method {1} must be static",
+        "Method {0} must be static",
         "InteropGenerator.Method",
         DiagnosticSeverity.Error,
         true,
@@ -119,15 +119,35 @@ internal static class DiagnosticDescriptors {
         true,
         "A method marked for static address generation contains a return value that is of an invalid type."
     );
-    
+
     public static readonly DiagnosticDescriptor VirtualFunctionMethodMustNotBeStatic = new(
         "CSIG0107",
         "Virtual function method generation target must be not static",
-        "Method {1} must be not static",
+        "Method {0} must be not static",
         "InteropGenerator.Method",
         DiagnosticSeverity.Error,
         true,
         "A method marked for virtual function generation must not be static."
+    );
+
+    public static readonly DiagnosticDescriptor GenerateStringOverloadsMethodMustHaveValidParameter = new(
+        "CSIG0108",
+        "GenerateStringOverloads method generation target must have a valid byte* parameter to overload",
+        "Method {0} must contain a valid string overload parameter (byte*)",
+        "InteropGenerator.Method",
+        DiagnosticSeverity.Error,
+        true,
+        "A method marked for string overload generation contains no valid target parameters."
+    );
+
+    public static readonly DiagnosticDescriptor StringIgnoreMustTargetValidParameter = new(
+        "CSIG0109",
+        "The StringIgnore attribute is used on an invalid parameter",
+        "StringIgnore is used on parameter {0} of type {1}, which is not a valid byte* parameter",
+        "InteropGenerator.Method",
+        DiagnosticSeverity.Error,
+        true,
+        "A method marked for string overload generation has a StringIgnore attribute on an invalid target parameter."
     );
 
     public static readonly DiagnosticDescriptor SignatureContainsInvalidCharacters = new(
@@ -158,7 +178,7 @@ internal static class DiagnosticDescriptors {
         DiagnosticSeverity.Error,
         true,
         "A field marked with the FixedSizeArray attribute is not marked private.");
-    
+
     public static readonly DiagnosticDescriptor FixedSizeArrayFieldMustHaveProperlyNamedType = new(
         "CSIG0302",
         "Fixed size array backing field must have a valid type",

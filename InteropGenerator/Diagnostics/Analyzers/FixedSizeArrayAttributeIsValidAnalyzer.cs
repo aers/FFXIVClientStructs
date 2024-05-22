@@ -1,7 +1,6 @@
 ﻿using System.Collections.Immutable;
 using InteropGenerator.Extensions;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using static InteropGenerator.Diagnostics.DiagnosticDescriptors;
 
@@ -11,7 +10,7 @@ namespace InteropGenerator.Diagnostics.Analyzers;
 public sealed class FixedSizeArrayAttributeIsValidAnalyzer : DiagnosticAnalyzer {
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = [FixedSizeArrayFieldMustBePrivate, FixedSizeArrayFieldMustHaveProperlyNamedType];
-    
+
     public override void Initialize(AnalysisContext context) {
         context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
         context.EnableConcurrentExecution();
@@ -22,7 +21,7 @@ public sealed class FixedSizeArrayAttributeIsValidAnalyzer : DiagnosticAnalyzer 
                 return;
 
             context.RegisterSymbolAction(context => {
-                    if (context.Symbol is not IFieldSymbol { } fieldSymbol)
+                    if (context.Symbol is not IFieldSymbol fieldSymbol)
                         return;
 
                     if (!fieldSymbol.HasAttributeWithType(fixedSizeArrayAttribute))

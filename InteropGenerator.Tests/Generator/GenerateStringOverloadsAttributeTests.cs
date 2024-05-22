@@ -46,7 +46,7 @@ public class GenerateStringOverloadsAttributeTests {
             code,
             ("TestStruct.InteropGenerator.g.cs", result));
     }
-    
+   
     [Fact]
     public async Task GenerateMultipleStringOverloads() {
         const string code = """

@@ -4,9 +4,8 @@ internal sealed record FixedSizeArrayInfo(
     string FieldName,
     string Type,
     int Size) {
-    public string GetPublicFieldName() {
+    public string GetPublicFieldName() =>
         // drop _, capitalize first letter
         // _someFieldName => SomeFieldName
-        return FieldName[1].ToString().ToUpper() + FieldName[2..];
-    }
+        FieldName[1].ToString().ToUpper() + FieldName[2..];
 }

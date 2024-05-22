@@ -1,6 +1,5 @@
 ﻿using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
-using System.Reflection.Metadata.Ecma335;
 using InteropGenerator.Extensions;
 using InteropGenerator.Helpers;
 using InteropGenerator.Models;
@@ -13,13 +12,14 @@ public sealed partial class InteropGenerator {
 
     private static StructInfo ParseStructInfo(INamedTypeSymbol structSymbol, CancellationToken token) {
         // collect info on struct methods
-        ParseMethods(structSymbol, token,
-            out EquatableArray<MemberFunctionInfo> memberFunctions, 
+        ParseMethods(structSymbol,
+            token,
+            out EquatableArray<MemberFunctionInfo> memberFunctions,
             out EquatableArray<VirtualFunctionInfo> virtualFunctions,
             out EquatableArray<StaticAddressInfo> staticAddresses,
             out EquatableArray<StringOverloadInfo> stringOverloads);
         token.ThrowIfCancellationRequested();
-        
+
         // collect info on struct fields
         ParseFields(structSymbol, token, out EquatableArray<FixedSizeArrayInfo> fixedSizeArrays);
         token.ThrowIfCancellationRequested();
@@ -62,7 +62,7 @@ public sealed partial class InteropGenerator {
         out EquatableArray<VirtualFunctionInfo> virtualFunctions,
         out EquatableArray<StaticAddressInfo> staticAddresses,
         out EquatableArray<StringOverloadInfo> stringOverloads) {
-        
+
         using ImmutableArrayBuilder<MemberFunctionInfo> memberFunctionsBuilder = new();
         using ImmutableArrayBuilder<VirtualFunctionInfo> virtualFunctionBuilder = new();
         using ImmutableArrayBuilder<StaticAddressInfo> staticAddressesBuilder = new();
@@ -70,7 +70,7 @@ public sealed partial class InteropGenerator {
 
         foreach (IMethodSymbol methodSymbol in structSymbol.GetMembers().OfType<IMethodSymbol>()) {
             MethodInfo? methodInfo = null;
-            
+
             // check for one of the method body generation attributes
             if (methodSymbol.TryGetAttributeWithFullyQualifiedMetadataName(AttributeNames.MemberFunctionAttribute, out AttributeData? mfAttribute)) {
                 if (mfAttribute.ConstructorArguments.Length != 2 ||
@@ -116,7 +116,7 @@ public sealed partial class InteropGenerator {
 
                 staticAddressesBuilder.Add(staticAddressInfo);
             }
-            
+
             // check for string overload, which could be applied to some of the above
             if (methodSymbol.TryGetAttributeWithFullyQualifiedMetadataName(AttributeNames.GenerateStringOverloads, out _)) {
                 // retrieve method info if it wasn't previously retrieved
@@ -136,11 +136,11 @@ public sealed partial class InteropGenerator {
                 StringOverloadInfo stringOverloadInfo = new(
                     methodInfo,
                     ignoredParametersBuilder.ToImmutable());
-                
+
                 stringOverloadsBuilder.Add(stringOverloadInfo);
 
             }
-            
+
             token.ThrowIfCancellationRequested();
         }
         memberFunctions = memberFunctionsBuilder.ToImmutable();
@@ -174,7 +174,7 @@ public sealed partial class InteropGenerator {
         parameterSymbol.RefKind);
 
     private static void ParseFields(INamedTypeSymbol structSymbol, CancellationToken token, out EquatableArray<FixedSizeArrayInfo> fixedSizeArrays) {
-        
+
         using ImmutableArrayBuilder<FixedSizeArrayInfo> fixedSizeArrayBuilder = new();
 
         foreach (IFieldSymbol field in structSymbol.GetMembers().OfType<IFieldSymbol>()) {
@@ -183,7 +183,7 @@ public sealed partial class InteropGenerator {
             if (field.TryGetAttributeWithFullyQualifiedMetadataName(AttributeNames.FixedSizeArrayAttribute, out _)) {
                 if (!fieldTypeSymbol.IsGenericType || fieldTypeSymbol.TypeArguments.Length != 1) // malformed field
                     continue;
-                
+
                 // "FixedSizeArray###"
                 if (fieldTypeSymbol.Name.Length < 14)
                     continue;
@@ -197,7 +197,7 @@ public sealed partial class InteropGenerator {
                     fieldTypeSymbol.TypeArguments[0].GetFullyQualifiedName(),
                     size
                 );
-                
+
                 fixedSizeArrayBuilder.Add(fixedSizeArrayInfo);
             }
             token.ThrowIfCancellationRequested();
