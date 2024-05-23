@@ -398,10 +398,10 @@ classes:
       - ea: 0x1421E8D18
         pointer: False
     funcs:
-      0x140700670: Initialize
+      0x140700670: ctor
       0x1407006C0: dtor
       0x140700700: Update
-      0x140712300: ctor
+      0x140712300: Initialize
   Client::Game::Control::InputManager:
     instances:
       - ea: 0x14217A860
@@ -936,11 +936,11 @@ classes:
       - ea: 0x14222BD40
         pointer: True
     funcs:
-      0x1412EC2D0: HasValue  # g_FateTablePtr != 0
-      0x1412EC2F0: GetSingleton
-      0x1412EC300: Initialize
-      0x1412ECAD0: ctor
+      0x1412EC2D0: HasInstance
+      0x1412EC2F0: GetInstance
+      0x1412EC300: ctor
       0x1412EC350: dtor
+      0x1412ECAD0: Initialize
       0x1412ECB50: Finalize
       0x1412EEDF0: GetFateById
   Client::Game::BattleBuddyList:
@@ -967,6 +967,7 @@ classes:
       - ea: 0x1421F6E20
         pointer: False
     funcs:
+      0x140746820: Initialize
       0x140745580: ctor
       0x1407455D0: dtor
       0x140745640: HasInstance
@@ -982,8 +983,8 @@ classes:
       - ea: 0x14222AEF0
         pointer: True
     funcs:
-      0x140B8D850: Create
-      0x140B8D8C0: Destroy
+      0x140B8D850: ctor
+      0x140B8D8C0: dtor
       0x140B8D900: Initialize
       0x140B8D9F0: Finalize
       0x140B8D820: HasInstance
@@ -995,6 +996,25 @@ classes:
       0x140B8DE00: IsItemLimited
       0x140B8DED0: GetItemIdBySpecialId
       0x140B8DF50: SetItemData
+  Client::Game::ServerRequestCallbackInterface:
+    vtbls:
+      - ea: 0x141A4B330
+    vfuncs:
+      0: dtor
+      1: OnReceivePacket
+    funcs:
+      0x1414244D0: Finalize
+  Client::Game::ServerRequestCallbackManager:
+    instances:
+      - ea: 0x1422382A8
+        pointer: True
+    funcs:
+      0x141424530: Initialize
+      0x1414245E0: HasInstance
+      0x141424600: GetInstance
+      0x141424610: ctor
+      0x141424660: dtor
+      0x1414246D0: Request # (this, callbackInterface, commandId, arg1, arg2)
   Client::Game::InventoryManager:
     instances:
       - ea: 0x1421F6E50
@@ -1062,10 +1082,11 @@ classes:
         pointer: True
     vtbls:
       - ea: 0x141A6E5C8
+        base: Client::Game::ServerRequestCallbackInterface
     funcs:
-      0x140932F60: ctor
-      0x1409330D0: Initialize
-      0x140933120: dtor
+      0x140932F60: Initialize
+      0x1409330D0: ctor
+      0x140933120: Finalize
       0x140933320: RequestData
       0x140933380: GetSeedBasePtr
       0x140933390: GetSeasonTarget
@@ -1151,14 +1172,132 @@ classes:
       0x140B1D390: HasIndividualWeather
       0x140B1D440: GetWeatherForHour
       0x140B1D620: GetWeatherForDaytime
+  Client::Game::FashionCheckManager: # Fashion Report
+    instances:
+      - ea: 0x1421FF160
+        pointer: True
+    funcs:
+      0x1408A8700: HasInstance
+      0x1408A8720: GetInstance
+      0x1408A85F0: ctor
+      0x1408A86D0: dtor
+  Client::Game::CustomTodoManager: # Studium Deliveries
+    vtbls:
+      - ea: 0x141B64740
+        base: Client::Game::ServerRequestCallbackInterface
+    instances:
+      - ea: 0x142238B50
+        pointer: True
+    funcs:
+      0x141430480: HasInstance
+      0x141430470: GetInstance
+      0x1414304A0: ctor
+      0x141430500: Destroy
+  Client::Game::QuestRecompleteManager: # Seasonal Event Replay
+    instances:
+      - ea: 0x142238B40
+        pointer: True
+    funcs:
+      0x14142FEB0: Initialize
+      0x14142FF40: Finalize
+      0x14142FFF0: HasInstance
+      0x14142FFE0: GetInstance
+      0x141430010: ctor
+      0x141430060: dtor
+  Client::Game::QuestRedoManager: # New Game+
+    instances:
+      - ea: 0x14222AEF8
+        pointer: True
+    funcs:
+      0x140B901B0: Initialize
+      0x140B90320: Finalize
+      0x140B90460: HasInstance
+      0x140B90480: GetInstance
+      0x140B90490: ctor
+      0x140B904E0: dtor
+  Client::Game::QuestRedoMapMarkerManager:
+    instances:
+      - ea: 0x142238B60
+        pointer: True
+    funcs:
+      0x141430B70: Initialize
+      0x141433010: Finalize
+      0x141430C20: HasInstance
+      0x141430C10: GetInstance
+      0x141430C40: ctor
+      0x141430C90: dtor
+  Client::Game::FreeMoveManager:
+    instances:
+      - ea: 0x142238B28
+        pointer: True
+    funcs:
+      0x14142C870: Initialize
+      0x14142C940: Finalize
+      0x14142CB30: HasInstance
+      0x14142CB20: GetInstance
+      0x14142CB50: ctor
+      0x14142CBA0: dtor
+  Client::Game::SequentialEventManager:
+    instances:
+      - ea: 0x142238B70
+        pointer: True
+    funcs:
+      0x1414336F0: Initialize
+      0x141433A90: Finalize
+      0x141433D70: HasInstance
+      0x141433D60: GetInstance
+      0x141433D90: ctor
+      0x141433DE0: dtor
+  Client::Game::PathWalkManager:
+    instances:
+      - ea: 0x142238B80
+        pointer: True
+    funcs:
+      0x1414386B0: Initialize
+      0x141438B00: Finalize
+      0x141438750: HasInstance
+      0x141438740: GetInstance
+      0x141438770: ctor
+      0x1414387C0: dtor
+  Client::Game::QuestEffectManager:
+    instances:
+      - ea: 0x142238B18
+        pointer: True
+    funcs:
+      0x14142B020: Initialize
+      0x14142B680: Finalize
+      0x14142B5D0: HasInstance
+      0x14142B5C0: GetInstance
+      0x14142B5F0: ctor
+      0x14142B640: dtor
+  Client::Game::DawnManager:
+    instances:
+      - ea: 0x1421FF158
+        pointer: True
+    funcs:
+      0x1407C82B0: Initialize
+      0x1407C7A70: HasInstance
+      0x1407C7A90: GetInstance
+      0x1407C79F0: ctor
+      0x1407C7A40: dtor
+  Client::Game::ServerValueCallbackManager:
+    instances:
+      - ea: 0x142238EE0
+        pointer: True
+    funcs:
+      0x14143AFF0: HasInstance
+      0x14143AFE0: GetInstance
+      0x14143B010: ctor
+      0x14143B060: dtor
   Client::Game::HWDManager: # Diadem
     instances:
       - ea: 0x14221E6F0
         pointer: True
     vtbls:
       - ea: 0x141A85618
+        base: Client::Game::ServerRequestCallbackInterface
     funcs:
-      0x140B84610: Initialize
+      0x140B84610: ctor
       0x140B846A0: Destroy
       0x140B846D0: GetInstance
   Client::Game::MJI::MJIManager: # Island Sanctuary
@@ -1166,9 +1305,9 @@ classes:
       - ea: 0x14221E700
         pointer: True
     funcs:
-      0x140B85F50: Initialize # static
-      0x140B85FA0: Destroy    # static
-      0x140B85FE0: GetSingleton  # static
+      0x140B85F50: ctor
+      0x140B85FA0: dtor
+      0x140B85FE0: GetInstance
       0x140B85FF0: Load   # loads in a ton of sub-structs and other info.
       0x140B86480: Update
       0x140B869C0: IsFunctionUnlocked # (this, functionId)
@@ -1207,7 +1346,7 @@ classes:
       0x140B88F20: GetFavorFullBonus
       0x140B88F40: RequestFavorData
       0x140B88F60: IsFavorDataAvailable
-      0x140B895F0: ctor
+      0x140B895F0: Initialize
       0x140B89890: Finalize
   Client::Game::MJI::IslandState:
     funcs:
@@ -1575,6 +1714,7 @@ classes:
         pointer: False
     vtbls:
       - ea: 0x141A6EDC0
+        base: Client::Game::ServerRequestCallbackInterface
     funcs:
       0x14096FC40: Initialize
       0x140970060: IsComplete
@@ -11161,9 +11301,13 @@ classes:
     instances:
       - ea: 0x1421FF140
         pointer: False
+    vtbls:
+      - ea: 0x141A6A198
+    vfuncs:
+      0: dtor
     funcs:
       0x1408E8660: ctor
-      0x1408E8710: dtor
+      0x1408E8710: Destroy
       0x1408E8770: HasInstance
       0x1408E8790: GetInstance
   Client::Game::Event::EventFramework:
@@ -11171,9 +11315,10 @@ classes:
       - ea: 0x1421FF148
         pointer: True
     funcs:
-      0x140863BD0: Initialize
-      0x140863C80: GetSingleton
-      0x140863F70: ctor
+      0x140863BD0: ctor
+      0x140863C30: dtor
+      0x140863C80: GetInstance
+      0x140863F70: Initialize
       0x1408647C0: Finalize
       0x14086CFD0: ProcessDirectorUpdate
       0x140870900: GetDirectorByEventId
