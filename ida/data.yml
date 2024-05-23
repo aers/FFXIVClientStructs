@@ -573,6 +573,10 @@ classes:
   Component::GUI::AtkModuleEvent:
     vtbls:
       - ea: 0x141A17B58
+  Component::GUI::AtkMessageBoxManager:
+    vtbls:
+      - ea: 0x141A088B0
+        base: Common::Component::Excel::ExcelSheetWaiter
   Component::GUI::AtkModuleInterface:
     vtbls:
       - ea: 0x141A088C0
@@ -1318,19 +1322,31 @@ classes:
       0x14064FF30: ToInteger # strtoi for utf8string (str, base)
   Component::GUI::AtkValue:
     funcs:
+      0x140507C50: ctor_copy # copy constructor
       0x140507CB0: dtor
       0x140507CF0: GetBool
       0x140507D10: GetInt
       0x140507D30: GetUInt  # these two could be backwards
       0x140507D50: GetFloat
       0x140507D70: GetString
-      0x140507D90: GetUnkPtr # could also be string, returns a pointer size
+      0x140507D90: GetString2
       0x140507DD0: SetString
-      0x140507E60: CopyValue # = operator
-      0x140507ED0: Equals # == operator
-      0x140508090: CreateArray # uses std::vector for array type (9)
+      0x140507E60: Copy # = operator
+      0x140507ED0: EqualTo # == operator
+      0x140508050: GetVectorValue2
+      0x140508070: GetVectorValue3
+      0x140508090: CreateVector
+      0x140508150: CopyVectorValue
+      0x140508180: GetVectorValue
+      0x1405081A0: SetVectorValue
+      0x1405081D0: SetVectorString
       0x140508330: ChangeType
+      0x140508370: CopyManagedMemory
       0x140508540: ReleaseManagedMemory # called by SetString, frees old strings
+      0x1405A52B0: SetBool
+      0x1405A5550: SetInt
+      0x1405A5770: SetString
+      0x1405A57D0: SetUInt
   Component::GUI::AtkEvent:
     funcs:
       0x14050F920: SetEventIsHandled
@@ -3066,6 +3082,7 @@ classes:
         base: Component::GUI::AtkEventListener
     vfuncs:
       8: ShowAddonByID
+      10: RefreshAddon
       11: UpdateAddonByID
     funcs:
       0x14017C1B0: Finalize
@@ -3961,6 +3978,7 @@ classes:
       0x14021D500: GetAgentInventoryContext
       0x14021D4E0: GetAgentContext
       0x14021D550: GetAddonTextById
+      0x14021D3D0: IsAddonReady
   Client::UI::Agent::AgentCharaMake:
     vtbls:
       - ea: 0x1419DEBB8
@@ -5168,6 +5186,7 @@ classes:
       0x140519C70: GetStringArrayData
       0x140519C80: GetExtendArrayData
       0x140519D90: ctor
+      0x14051A310: Update
       0x14053C500: GetSingleton
       0x14053C510: GetSingleton2
       0x140548740: GetSingleton3
@@ -5492,6 +5511,7 @@ classes:
       0x14053D410: FireCallback
       0x14053E030: MoveDelta
       0x14053FAC0: UpdateCollisionNodeList
+      0x140540EC0: SetAtkValues
   Component::GUI::AtkComponentBase:
     vtbls:
       - ea: 0x141A08D90
@@ -5594,6 +5614,7 @@ classes:
       17: SetHandlerFunction
       18: SetAtkModuleEvent
       21: CloseAddon
+      23: RefreshAddon
       26: IsAddonReady
       28: ClearFocus
       36: SetAtkHistory
@@ -12569,6 +12590,17 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x140D89770: ctor
+  Component::GUI::AtkManagedInterface:
+    vtbls:
+      - ea: 0x141A92688
+  Client::UI::AddonDialogue:
+    vtbls:
+      - ea: 0x141A926A0
+        base: Component::GUI::AtkUnitBase
+      - ea: 0x141A928E0
+        base: Component::GUI::AtkManagedInterface
+    funcs:
+      0x140D89F80: ctor
   Client::UI::AddonFilter:
     vtbls:
       - ea: 0x141A92B38
