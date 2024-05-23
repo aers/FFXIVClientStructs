@@ -573,6 +573,10 @@ classes:
   Component::GUI::AtkModuleEvent:
     vtbls:
       - ea: 0x141A17B58
+  Component::GUI::AtkMessageBoxManager:
+    vtbls:
+      - ea: 0x141A088B0
+        base: Common::Component::Excel::ExcelSheetWaiter
   Component::GUI::AtkModuleInterface:
     vtbls:
       - ea: 0x141A088C0
@@ -12586,6 +12590,17 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x140D89770: ctor
+  Component::GUI::AtkManagedInterface:
+    vtbls:
+      - ea: 0x141A92688
+  Client::UI::AddonDialogue:
+    vtbls:
+      - ea: 0x141A926A0
+        base: Component::GUI::AtkUnitBase
+      - ea: 0x141A928E0
+        base: Component::GUI::AtkManagedInterface
+    funcs:
+      0x140D89F80: ctor
   Client::UI::AddonFilter:
     vtbls:
       - ea: 0x141A92B38
