@@ -10231,6 +10231,18 @@ classes:
   Client::Game::Event::ListenItemCallbackInterface:
     vtbls:
       - ea: 0x141A47990
+  Client::Game::Event::FormatStringCallback<Client::Game::Event::EventHandler>:
+    vtbls:
+      - ea: 0x141A479B8
+        base: Client::Game::Event::FormatStringCallbackInterface
+  Client::Game::Event::ActionTimelineCallback<Client::Game::Event::EventHandler>:
+    vtbls:
+      - ea: 0x141A479D0
+        base: Client::Game::Event::ActionTimelineCallbackInterface
+  Client::Game::Event::ListenItemCallback<Client::Game::Event::EventHandler>:
+    vtbls:
+      - ea: 0x141A479E8
+        base: Client::Game::Event::ListenItemCallbackInterface
   Client::Game::Event::EventHandler:
     vtbls:
       - ea: 0x141A47A00
@@ -10515,6 +10527,236 @@ classes:
     vtbls:
       - ea: 0x141A492A0
         base: Client::Game::Event::EventSceneModuleImplBase
+  Client::Game::Event::EventSceneTaskInterface:
+    vtbls:
+      - ea: 0x141A49A30
+    vfuncs:
+      0: dtor
+  Client::Game::Event::CreateAppearanceTask:
+    vtbls:
+      - ea: 0x141A49A78
+        base: Client::Game::Event::EventSceneTaskInterface
+  Client::Game::Event::BindCharacterByEntityIdTask:
+    vtbls:
+      - ea: 0x141A49AC0
+        base: Client::Game::Event::EventSceneTaskInterface
+  Client::Game::Event::BindCharacterByLayoutIdTask:
+    vtbls:
+      - ea: 0x141A49B08
+        base: Client::Game::Event::EventSceneTaskInterface
+  Client::Game::Event::BindObjectByLayoutIdTask:
+    vtbls:
+      - ea: 0x141A49B98
+        base: Client::Game::Event::EventSceneTaskInterface
+  Client::Game::Event::LoadMovePositionTask:
+    vtbls:
+      - ea: 0x141A49BE0
+        base: Client::Game::Event::EventSceneTaskInterface
+  Client::Game::Event::PlayCutSceneTask:
+    vtbls:
+      - ea: 0x141A49C28
+        base: Client::Game::Event::EventSceneTaskInterface
+    funcs:
+      0x1407F4B60: ctor
+  Client::Game::Event::PrepareCutSceneTask:
+    vtbls:
+      - ea: 0x141A49C70
+        base: Client::Game::Event::EventSceneTaskInterface
+  Client::Game::Event::PostCutSceneTask:
+    vtbls:
+      - ea: 0x141A49CB8
+        base: Client::Game::Event::EventSceneTaskInterface
+  Client::Game::Event::PlayStaffRollTask:
+    vtbls:
+      - ea: 0x141A49D00
+        base: Client::Game::Event::EventSceneTaskInterface
+  Client::Game::Event::PlayToBeContinuedTask:
+    vtbls:
+      - ea: 0x141A49D48
+        base: Client::Game::Event::EventSceneTaskInterface
+  Client::Game::Event::InitializeSceneTask:
+    vtbls:
+      - ea: 0x141A49D90
+        base: Client::Game::Event::EventSceneTaskInterface
+  Client::Game::Event::FinalizeSceneTask:
+    vtbls:
+      - ea: 0x141A49DD8
+        base: Client::Game::Event::EventSceneTaskInterface
+  Client::Game::Event::SetPositionTask:
+    vtbls:
+      - ea: 0x141A49E20
+        base: Client::Game::Event::EventSceneTaskInterface
+  Client::Game::Event::WaitForTimeTask:
+    vtbls:
+      - ea: 0x141A49E68
+        base: Client::Game::Event::EventSceneTaskInterface
+  Client::Game::Event::CancelEventSceneTask:
+    vtbls:
+      - ea: 0x141A49EB0
+        base: Client::Game::Event::EventSceneTaskInterface
+  Client::Game::Event::CharacterTaskBase:
+    vtbls:
+      - ea: 0x141A49EF8
+        base: Client::Game::Event::EventSceneTaskInterface
+  Client::Game::Event::WaitForTurnTask:
+    vtbls:
+      - ea: 0x141A49F48
+        base: Client::Game::Event::CharacterTaskBase
+  Client::Game::Event::WaitForActionTask:
+    vtbls:
+      - ea: 0x141A49F98
+        base: Client::Game::Event::CharacterTaskBase
+  Client::Game::Event::WaitForEmoteTask:
+    vtbls:
+      - ea: 0x141A49FE8
+        base: Client::Game::Event::CharacterTaskBase
+  Client::Game::Event::WaitForLookAtTask:
+    vtbls:
+      - ea: 0x141A4A038
+        base: Client::Game::Event::CharacterTaskBase
+  Client::Game::Event::WaitForMoveTask:
+    vtbls:
+      - ea: 0x141A4A088
+        base: Client::Game::Event::CharacterTaskBase
+  Client::Game::Event::WaitForPathMoveTask:
+    vtbls:
+      - ea: 0x141A4A0D8
+        base: Client::Game::Event::CharacterTaskBase
+  Client::Game::Event::WaitForTransparencyTask:
+    vtbls:
+      - ea: 0x141A4A128
+        base: Client::Game::Event::CharacterTaskBase
+  Client::Game::Event::WaitForSharedGroupTimelineTask:
+    vtbls:
+      - ea: 0x141A4A1C8
+        base: Client::Game::Event::EventSceneTaskInterface
+  Client::Game::Event::WaitForFadeTask:
+    vtbls:
+      - ea: 0x141A4A210
+        base: Client::Game::Event::EventSceneTaskInterface
+  Client::Game::Event::WaitForWhiteFadeTask:
+    vtbls:
+      - ea: 0x141A4A258
+        base: Client::Game::Event::EventSceneTaskInterface
+  Client::Game::Event::WaitForCameraPanTask:
+    vtbls:
+      - ea: 0x141A4A2A0
+        base: Client::Game::Event::EventSceneTaskInterface
+  Client::Game::Event::WaitForCameraDollyTask:
+    vtbls:
+      - ea: 0x141A4A2E8
+        base: Client::Game::Event::EventSceneTaskInterface
+  Client::Game::Event::WaitForCameraZoomTask:
+    vtbls:
+      - ea: 0x141A4A330
+        base: Client::Game::Event::EventSceneTaskInterface
+  Client::Game::Event::WaitForCameraGyroTask:
+    vtbls:
+      - ea: 0x141A4A378
+        base: Client::Game::Event::EventSceneTaskInterface
+  Client::Game::Event::WaitForCameraOrbitTask:
+    vtbls:
+      - ea: 0x141A4A3C0
+        base: Client::Game::Event::EventSceneTaskInterface
+  Client::Game::Event::EquipChangeTask:
+    vtbls:
+      - ea: 0x141A4A408
+        base: Client::Game::Event::EventSceneTaskInterface
+  Client::Game::Event::EquipQuestModelTask:
+    vtbls:
+      - ea: 0x141A4A450
+        base: Client::Game::Event::EventSceneTaskInterface
+  Client::Game::Event::IsItemObtainableTask:
+    vtbls:
+      - ea: 0x141A4A498
+        base: Client::Game::Event::EventSceneTaskInterface
+  Client::Game::Event::CheckItemsObtainableTask:
+    vtbls:
+      - ea: 0x141A4A4E0
+        base: Client::Game::Event::EventSceneTaskInterface
+  Client::Game::Event::CheckItemsObtainableRareCheckTask:
+    vtbls:
+      - ea: 0x141A4A528
+        base: Client::Game::Event::EventSceneTaskInterface
+  Client::Game::Event::IsQuestSetCompletedTask:
+    vtbls:
+      - ea: 0x141A4A570
+        base: Client::Game::Event::EventSceneTaskInterface
+  Client::Game::Event::HairMakeTask:
+    vtbls:
+      - ea: 0x141A4A5B8
+        base: Client::Game::Event::EventSceneTaskInterface
+  Client::Game::Event::WaitForBuildHouseTask:
+    vtbls:
+      - ea: 0x141A4A600
+        base: Client::Game::Event::EventSceneTaskInterface
+  Client::Game::Event::WaitForFeedBuddyTask:
+    vtbls:
+      - ea: 0x141A4A648
+        base: Client::Game::Event::EventSceneTaskInterface
+  Client::Game::Event::RequestRacingChocoboParamTask:
+    vtbls:
+      - ea: 0x141A4A690
+        base: Client::Game::Event::EventSceneTaskInterface
+  Client::Game::Event::RacingChocoboNameTask:
+    vtbls:
+      - ea: 0x141A4A6D8
+        base: Client::Game::Event::EventSceneTaskInterface
+  Client::Game::Event::RequestAirshipsInfoTask:
+    vtbls:
+      - ea: 0x141A4A720
+        base: Client::Game::Event::EventSceneTaskInterface
+  Client::Game::Event::RequestAirshipParamTask:
+    vtbls:
+      - ea: 0x141A4A768
+        base: Client::Game::Event::EventSceneTaskInterface
+  Client::Game::Event::RequestAirshipExplorationResultTask:
+    vtbls:
+      - ea: 0x141A4A7B0
+        base: Client::Game::Event::EventSceneTaskInterface
+  Client::Game::Event::SubmarineWaitCreateExplorationLogTask:
+    vtbls:
+      - ea: 0x141A4A7F8
+        base: Client::Game::Event::EventSceneTaskInterface
+  Client::Game::Event::WaitForRetainerTaskLoadedTask:
+    vtbls:
+      - ea: 0x141A4A840
+        base: Client::Game::Event::EventSceneTaskInterface
+  Client::Game::Event::WaitForCutSceneReplayDataLoadedTask:
+    vtbls:
+      - ea: 0x141A4A888
+        base: Client::Game::Event::EventSceneTaskInterface
+  Client::Game::Event::WaitForIdleCameraTask:
+    vtbls:
+      - ea: 0x141A4A8D0
+        base: Client::Game::Event::EventSceneTaskInterface
+  Client::Game::Event::GroupPoseTask:
+    vtbls:
+      - ea: 0x141A4A918
+        base: Client::Game::Event::EventSceneTaskInterface
+  Client::Game::Event::SnipeTask:
+    vtbls:
+      - ea: 0x141A4A960
+        base: Client::Game::Event::EventSceneTaskInterface
+  Client::Game::Event::FashionCheckTask:
+    vtbls:
+      - ea: 0x141A4A9A8
+        base: Client::Game::Event::EventSceneTaskInterface
+  Client::Game::Event::TalkCallback:
+    vtbls:
+      - ea: 0x141A47230
+        base: Component::GUI::AtkModuleInterface::AtkEventInterface # this should be Client::Game::Event::UICallbackBase<Client::Game::Event::EventHandler> but it's too hard to find
+  Client::Game::Event::FormatStringCallback<Client::Game::Event::TalkCallback>:
+    vtbls:
+      - ea: 0x141A47130
+        base: Client::Game::Event::FormatStringCallbackInterface
+  Client::Game::Event::TalkCallback::TalkEventImpl:
+    vtbls:
+      - ea: 0x141A46FA0
+  Client::Game::Event::TalkCallback::TalkAsyncEventImpl:
+    vtbls:
+      - ea: 0x141A47050
+        base: Client::Game::Event::TalkCallback::TalkEventImpl
   Client::Game::Event::EventSceneModule:
     funcs:
       0x14080AE50: ctor
@@ -10523,6 +10765,11 @@ classes:
     vtbls:
       - ea: 0x141A4AA20
         base: Component::GUI::AtkModuleInterface::AtkEventInterface
+  Client::Game::Event::EventSceneModuleTaskManager:
+    funcs:
+      0x1407FB1B0: ProcessTasks
+      0x1407FB2E0: AddTask
+      0x1407FB360: AddGroupPoseTask
   Client::Game::Event::Director:
     vtbls:
       - ea: 0x141A4B340
