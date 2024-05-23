@@ -10724,6 +10724,7 @@ classes:
   Client::Game::Event::TalkCallback:
     vtbls:
       - ea: 0x141A47230
+        base: Component::GUI::AtkModuleInterface::AtkEventInterface # this should be Client::Game::Event::UICallbackBase<Client::Game::Event::EventHandler> but it's too hard to find
   Client::Game::Event::FormatStringCallback<Client::Game::Event::TalkCallback>:
     vtbls:
       - ea: 0x141A47130
