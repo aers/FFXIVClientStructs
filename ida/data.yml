@@ -8320,6 +8320,7 @@ classes:
     funcs:
       0x140CC2D90: ctor
       0x140CC30F0: Finalize
+      0x140CC34F0: OpenAchievement
   Client::UI::Agent::AgentLicenseViewer:
     vtbls:
       - ea: 0x1419DF8C8
@@ -8479,6 +8480,7 @@ classes:
     funcs:
       0x1402BE3B0: ctor
       0x1402BE6F0: Finalize
+      0x1402C3EA0: OpenListing
   Client::UI::Agent::AgentContentsMvp:
     vtbls:
       - ea: 0x141A8D4D8
