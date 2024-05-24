@@ -6,7 +6,7 @@ namespace InteropGenerator.Runtime.Attributes;
 /// </summary>
 /// <param name="index">Native function index in the class's virtual table</param>
 [AttributeUsage(AttributeTargets.Method)]
-public class VirtualFunctionAttribute(uint index) : Attribute {
+public sealed class VirtualFunctionAttribute(uint index) : Attribute {
 
     public uint Index { get; } = index;
 }

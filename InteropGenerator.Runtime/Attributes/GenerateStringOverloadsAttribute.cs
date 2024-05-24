@@ -10,6 +10,6 @@
 /// In cases where a function has a C string byte* argument and a byte* argument that represents something else, the [StringIgnore] attribute can be applied to a method parameter to ignore it.
 /// </summary>
 [AttributeUsage(AttributeTargets.Method)]
-public class GenerateStringOverloadsAttribute : Attribute {
+public sealed class GenerateStringOverloadsAttribute : Attribute {
     
 }

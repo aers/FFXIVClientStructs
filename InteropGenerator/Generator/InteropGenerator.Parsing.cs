@@ -11,6 +11,13 @@ namespace InteropGenerator.Generator;
 public sealed partial class InteropGenerator {
 
     private static StructInfo ParseStructInfo(INamedTypeSymbol structSymbol, CancellationToken token) {
+        // check if we need to collect extra info for inheritance
+        var isInherited = false;
+        ExtraInheritedStructInfo? inheritedStructInfo = null;
+        if (structSymbol.TryGetAttributeWithFullyQualifiedMetadataName(AttributeNames.GenerateInteropAttribute, out AttributeData? generateInteropAttributeData)) {
+            generateInteropAttributeData.TryGetConstructorArgument(0, out isInherited);
+        }
+        
         // collect info on struct methods
         ParseMethods(structSymbol,
             token,
@@ -21,7 +28,7 @@ public sealed partial class InteropGenerator {
         token.ThrowIfCancellationRequested();
 
         // collect info on struct fields
-        ParseFields(structSymbol, token, out EquatableArray<FixedSizeArrayInfo> fixedSizeArrays);
+        ParseFields(structSymbol, token, isInherited, out EquatableArray<FixedSizeArrayInfo> fixedSizeArrays, out EquatableArray<FieldInfo> publicFields);
         token.ThrowIfCancellationRequested();
 
         // other struct attributes
@@ -33,6 +40,21 @@ public sealed partial class InteropGenerator {
             }
         }
 
+        using ImmutableArrayBuilder<InheritanceInfo> inheritanceInfoBuilder = new();
+        foreach (AttributeData attributeData in structSymbol.GetAttributes()) {
+            if (attributeData.AttributeClass is not { } attributeSymbol) continue;
+            if (!attributeSymbol.HasFullyQualifiedMetadataName(AttributeNames.InheritsAttribute)) continue;
+            if (attributeData.ConstructorArguments.Length != 1 ||
+                !attributeData.TryGetConstructorArgument(0, out int? parentOffset))
+                continue;
+            if (attributeSymbol.TypeArguments.Length != 1) continue;
+
+            InheritanceInfo inheritanceInfo = new(
+                attributeSymbol.TypeArguments[0].GetFullyQualifiedMetadataName(),
+                parentOffset.Value
+            );
+            inheritanceInfoBuilder.Add(inheritanceInfo);
+        }
 
         // get containing types; our analyzer validates structs are contained in a proper hierarchy so not needed here
         using ImmutableArrayBuilder<string> hierarchy = new();
@@ -42,7 +64,17 @@ public sealed partial class InteropGenerator {
              parent = parent.ContainingType) {
             hierarchy.Add(parent.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat));
         }
-
+        
+        // collect extra data for an inherited struct
+        if (isInherited &&
+            structSymbol.TryGetAttributeWithFullyQualifiedMetadataName("System.Runtime.InteropServices.StructLayoutAttribute", out AttributeData? structLayoutAttributeData) &&
+            structLayoutAttributeData.TryGetNamedArgument("Size", out int? size) &&
+            size.HasValue) {
+            inheritedStructInfo = new ExtraInheritedStructInfo(
+                size.Value,
+                publicFields);
+        }
+        
         // collect all info
         return new StructInfo(
             structSymbol.GetFullyQualifiedMetadataName(),
@@ -54,7 +86,9 @@ public sealed partial class InteropGenerator {
             staticAddresses,
             stringOverloads,
             virtualTableSignatureInfo,
-            fixedSizeArrays);
+            fixedSizeArrays,
+            inheritanceInfoBuilder.ToImmutable(),
+            inheritedStructInfo);
     }
 
     private static void ParseMethods(INamedTypeSymbol structSymbol, CancellationToken token,
@@ -173,14 +207,16 @@ public sealed partial class InteropGenerator {
         parameterSymbol.GetDefaultValueString(),
         parameterSymbol.RefKind);
 
-    private static void ParseFields(INamedTypeSymbol structSymbol, CancellationToken token, out EquatableArray<FixedSizeArrayInfo> fixedSizeArrays) {
+    private static void ParseFields(INamedTypeSymbol structSymbol, CancellationToken token, bool isInherited,
+        out EquatableArray<FixedSizeArrayInfo> fixedSizeArrays, out EquatableArray<FieldInfo> publicFields) {
 
         using ImmutableArrayBuilder<FixedSizeArrayInfo> fixedSizeArrayBuilder = new();
+        using ImmutableArrayBuilder<FieldInfo> publicFieldBuilder = new(); 
 
-        foreach (IFieldSymbol field in structSymbol.GetMembers().OfType<IFieldSymbol>()) {
-            if (field.Type is not INamedTypeSymbol fieldTypeSymbol)
+        foreach (IFieldSymbol fieldSymbol in structSymbol.GetMembers().OfType<IFieldSymbol>()) {
+            if (fieldSymbol.Type is not INamedTypeSymbol fieldTypeSymbol)
                 continue;
-            if (field.TryGetAttributeWithFullyQualifiedMetadataName(AttributeNames.FixedSizeArrayAttribute, out _)) {
+            if (fieldSymbol.TryGetAttributeWithFullyQualifiedMetadataName(AttributeNames.FixedSizeArrayAttribute, out _)) {
                 if (!fieldTypeSymbol.IsGenericType || fieldTypeSymbol.TypeArguments.Length != 1) // malformed field
                     continue;
 
@@ -192,17 +228,32 @@ public sealed partial class InteropGenerator {
                 if (!int.TryParse(fieldTypeSymbol.Name[14..], out int size))
                     continue;
 
-                var fixedSizeArrayInfo = new FixedSizeArrayInfo(
-                    field.Name,
+                FixedSizeArrayInfo fixedSizeArrayInfo = new(
+                    fieldSymbol.Name,
                     fieldTypeSymbol.TypeArguments[0].GetFullyQualifiedName(),
                     size
                 );
 
                 fixedSizeArrayBuilder.Add(fixedSizeArrayInfo);
             }
+            if (isInherited && fieldSymbol.DeclaredAccessibility == Accessibility.Public) {
+                if (!fieldSymbol.TryGetAttributeWithFullyQualifiedMetadataName("global::System.Runtime.InteropServices.FieldOffsetAttribute", out AttributeData? fieldOffsetAttributeData))
+                    continue;
+
+                if (!fieldOffsetAttributeData.TryGetConstructorArgument(0, out int fieldOffset))
+                    continue;
+
+                FieldInfo fieldInfo = new(
+                    fieldSymbol.Name,
+                    fieldSymbol.Type.GetFullyQualifiedName(),
+                    fieldOffset);
+                
+                publicFieldBuilder.Add(fieldInfo);
+            }
             token.ThrowIfCancellationRequested();
         }
 
         fixedSizeArrays = fixedSizeArrayBuilder.ToImmutable();
+        publicFields = publicFieldBuilder.ToImmutable();
     }
 }

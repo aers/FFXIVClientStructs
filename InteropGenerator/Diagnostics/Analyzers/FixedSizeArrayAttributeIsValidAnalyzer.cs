@@ -19,7 +19,7 @@ public sealed class FixedSizeArrayAttributeIsValidAnalyzer : DiagnosticAnalyzer 
             // get the attribute symbol
             if (context.Compilation.GetTypeByMetadataName(AttributeNames.FixedSizeArrayAttribute) is not { } fixedSizeArrayAttribute)
                 return;
-
+            
             context.RegisterSymbolAction(context => {
                     if (context.Symbol is not IFieldSymbol fieldSymbol)
                         return;

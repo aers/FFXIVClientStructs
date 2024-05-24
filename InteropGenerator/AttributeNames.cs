@@ -11,4 +11,5 @@ public static class AttributeNames {
     public const string GenerateStringOverloads = Namespace + ".GenerateStringOverloadsAttribute";
     public const string StringIgnore = Namespace + ".StringIgnoreAttribute";
     public const string FixedSizeArrayAttribute = Namespace + ".FixedSizeArrayAttribute";
+    public const string InheritsAttribute = Namespace + ".InheritsAttribute`1";
 }

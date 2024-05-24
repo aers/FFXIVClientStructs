@@ -9,7 +9,7 @@ namespace InteropGenerator.Runtime.Attributes;
 /// <param name="relativeFollowOffset">After resolving signature, offset by this amount and follow the 32-bit relative address found there.</param>
 /// <param name="isPointer">Set to true if the native static address is a pointer. This changes the code generation to avoid necessitating double pointer return values.</param>
 [AttributeUsage(AttributeTargets.Method)]
-public class StaticAddressAttribute(string signature, byte relativeFollowOffset, bool isPointer = false) : Attribute {
+public sealed class StaticAddressAttribute(string signature, byte relativeFollowOffset, bool isPointer = false) : Attribute {
 
     public string Signature { get; } = signature;
     public byte RelativeFollowOffset { get; } = relativeFollowOffset;

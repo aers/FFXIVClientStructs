@@ -4,6 +4,6 @@
 /// Interop Generator attribute used to mark a method parameter as ignored when using the GenerateStringOverloads attribute on the method.
 /// </summary>
 [AttributeUsage(AttributeTargets.Parameter)]
-public class StringIgnoreAttribute : Attribute {
+public sealed class StringIgnoreAttribute : Attribute {
     
 }
