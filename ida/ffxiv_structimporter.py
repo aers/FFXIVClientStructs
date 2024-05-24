@@ -857,6 +857,8 @@ if api is None:
         import re
 
         from ghidra.program.model.data import *
+        from ghidra.program.model.listing import *
+        from ghidra.program.model.symbol import SourceType
         from ghidra.app.util import SymbolPathParser
 
     except ImportError:
@@ -889,11 +891,11 @@ if api is None:
                     return "byte"
                 elif name == "__int16":
                     return "short"
-                elif name == "unsigned __int16":
+                elif name == "unsigned __int16" or name == "unsigned short":
                     return "ushort"
                 elif name == "__int32":
                     return "int"
-                elif name == "unsigned __int32" or name == "_DWORD":
+                elif name == "unsigned __int32" or name == "_DWORD" or name == "unsigned int":
                     return "uint"
                 elif name == "__int64":
                     return "longlong"
@@ -907,7 +909,7 @@ if api is None:
                     return "ushort*"
                 elif name == "__int32*":
                     return "int*"
-                elif name == "unsigned __int32*":
+                elif name == "unsigned __int32*" or name == "unsigned int*":
                     return "uint*"
                 elif name == "__int64*":
                     return "longlong*"
@@ -960,6 +962,21 @@ if api is None:
                 fd.setArguments(args)
                 return fd
 
+            def get_func_by_name(self, name):
+                # type: (str) -> Function
+                funcs = getGlobalFunctions(name)
+                return funcs.first if not funcs.size() == 0 else None
+
+            def create_memberfunc_args(self, member_func):
+                # type: (DefinedMemFunc) -> list[ParameterImpl]
+                arg_vars = []
+                for param in member_func.parameters:
+                    dt = self.get_datatype(param.type)
+                    if not dt:
+                        return []
+                    arg_vars.append(ParameterImpl(param.name, dt, currentProgram))
+                return arg_vars
+
             @property
             def get_file_path(self):
                 return os.path.join(
@@ -970,7 +987,8 @@ if api is None:
                 # type: (DefinedEnum) -> None
                 if monitor.isCancelled():
                     return
-                dt = EnumDataType(enum.name, self.get_size_from_type(enum.underlying))
+                enum_size = self.get_size_from_type(enum.underlying) or 4
+                dt = EnumDataType(enum.name, enum_size)
                 dt.setCategoryPath(self.get_category_path(enum.type))
                 for value in enum.values:
                     dt.add(value, enum.values[value])
@@ -1147,11 +1165,23 @@ if api is None:
 
             def update_member_func(self, member_func, struct):
                 # type: (DefinedMemFunc, DefinedStruct) -> None
-                pass
+                if monitor.isCancelled():
+                    return
+                func_name = "{0}.{1}".format(struct.type, member_func.name)
+                func = self.get_func_by_name(func_name)
+                if not func:
+                    return
+                arg_vars = self.create_memberfunc_args(member_func)
+                return_type = self.get_datatype(member_func.return_type)
+                if not return_type:
+                    return
+                return_var = ReturnParameterImpl(return_type, currentProgram)
+                update_type = Function.FunctionUpdateType.DYNAMIC_STORAGE_ALL_PARAMS
+                func.updateFunction("__fastcall", return_var, arg_vars, update_type, False, SourceType.USER_DEFINED)
 
             def should_update_member_func(self):
-                # Not currently implemented in Ghidra once implemented replace this with a proper askYesNo
-                return False
+                # type: () -> bool
+                return askYesNo("ffxiv_structimporter", "Update member function types?")
 
         api = GhidraApi()
 
