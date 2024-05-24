@@ -32,7 +32,7 @@ public class StaticAddressAttributeTests {
                                   {
                                       if (StaticAddressPointers.pInstance is null)
                                       {
-                                          throw new InvalidOperationException("Static address pointer for TestStruct.Instance is null. The resolver was either uninitialized or failed to resolve address with signature AA BB CC DD ?? ?? ?? ?? AA BB ?? DD.");
+                                          InteropGenerator.Runtime.ThrowHelper.ThrowNullAddress("TestStruct.Instance", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD");
                                       }
                                       return StaticAddressPointers.pInstance;
                                   }
@@ -72,7 +72,7 @@ public class StaticAddressAttributeTests {
                                   {
                                       if (StaticAddressPointers.ppInstance is null)
                                       {
-                                          throw new InvalidOperationException("Static address pointer for TestStruct.Instance is null. The resolver was either uninitialized or failed to resolve address with signature AA BB CC DD ?? ?? ?? ?? AA BB ?? DD.");
+                                          InteropGenerator.Runtime.ThrowHelper.ThrowNullAddress("TestStruct.Instance", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD");
                                       }
                                       return *StaticAddressPointers.ppInstance;
                                   }
@@ -112,7 +112,7 @@ public class StaticAddressAttributeTests {
                                   {
                                       if (StaticAddressPointers.pInstance is null)
                                       {
-                                          throw new InvalidOperationException("Static address pointer for TestStruct.Instance is null. The resolver was either uninitialized or failed to resolve address with signature E8 BB CC DD ?? ?? ?? ?? AA BB ?? DD.");
+                                          InteropGenerator.Runtime.ThrowHelper.ThrowNullAddress("TestStruct.Instance", "E8 BB CC DD ?? ?? ?? ?? AA BB ?? DD");
                                       }
                                       return StaticAddressPointers.pInstance;
                                   }
@@ -152,7 +152,7 @@ public class StaticAddressAttributeTests {
                                   {
                                       if (StaticAddressPointers.pInstance is null)
                                       {
-                                          throw new InvalidOperationException("Static address pointer for TestStruct.Instance is null. The resolver was either uninitialized or failed to resolve address with signature E9 BB CC DD ?? ?? ?? ?? AA BB ?? DD.");
+                                          InteropGenerator.Runtime.ThrowHelper.ThrowNullAddress("TestStruct.Instance", "E9 BB CC DD ?? ?? ?? ?? AA BB ?? DD");
                                       }
                                       return StaticAddressPointers.pInstance;
                                   }
@@ -196,7 +196,7 @@ public class StaticAddressAttributeTests {
                                   {
                                       if (StaticAddressPointers.pInstance is null)
                                       {
-                                          throw new InvalidOperationException("Static address pointer for TestStruct.Instance is null. The resolver was either uninitialized or failed to resolve address with signature AA BB CC DD ?? ?? ?? ?? AA BB ?? DD.");
+                                          InteropGenerator.Runtime.ThrowHelper.ThrowNullAddress("TestStruct.Instance", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD");
                                       }
                                       return StaticAddressPointers.pInstance;
                                   }
@@ -241,7 +241,7 @@ public class StaticAddressAttributeTests {
                                       {
                                           if (StaticAddressPointers.pInstance is null)
                                           {
-                                              throw new InvalidOperationException("Static address pointer for InnerStruct.Instance is null. The resolver was either uninitialized or failed to resolve address with signature AA BB CC DD ?? ?? ?? ?? AA BB ?? DD.");
+                                              InteropGenerator.Runtime.ThrowHelper.ThrowNullAddress("InnerStruct.Instance", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD");
                                           }
                                           return StaticAddressPointers.pInstance;
                                       }
@@ -286,7 +286,7 @@ public class StaticAddressAttributeTests {
                                   {
                                       if (StaticAddressPointers.pInstance is null)
                                       {
-                                          throw new InvalidOperationException("Static address pointer for TestStruct.Instance is null. The resolver was either uninitialized or failed to resolve address with signature AA BB CC DD ?? ?? ?? ?? AA BB ?? DD.");
+                                          InteropGenerator.Runtime.ThrowHelper.ThrowNullAddress("TestStruct.Instance", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD");
                                       }
                                       return StaticAddressPointers.pInstance;
                                   }
@@ -294,7 +294,7 @@ public class StaticAddressAttributeTests {
                                   {
                                       if (StaticAddressPointers.pInstance2 is null)
                                       {
-                                          throw new InvalidOperationException("Static address pointer for TestStruct.Instance2 is null. The resolver was either uninitialized or failed to resolve address with signature AA BB CC DD ?? ?? ?? ?? AA BB ?? DD.");
+                                          InteropGenerator.Runtime.ThrowHelper.ThrowNullAddress("TestStruct.Instance2", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD");
                                       }
                                       return StaticAddressPointers.pInstance2;
                                   }

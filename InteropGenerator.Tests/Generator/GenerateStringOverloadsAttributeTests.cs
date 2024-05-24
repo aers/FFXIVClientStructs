@@ -169,7 +169,7 @@ public class GenerateStringOverloadsAttributeTests {
                                   {
                                       if (MemberFunctionPointers.TestFunction is null)
                                       {
-                                          throw new InvalidOperationException("Function pointer for TestStruct.TestFunction is null. The resolver was either uninitialized or failed to resolve address with signature AA BB CC DD ?? ?? ?? ?? AA BB ?? DD.");
+                                          InteropGenerator.Runtime.ThrowHelper.ThrowNullAddress("TestStruct.TestFunction", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD");
                                       }
                                       return MemberFunctionPointers.TestFunction((TestStruct*)Unsafe.AsPointer(ref this), argOne, stringArg);
                                   }

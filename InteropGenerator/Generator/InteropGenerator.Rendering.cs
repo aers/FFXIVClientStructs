@@ -146,7 +146,7 @@ public sealed partial class InteropGenerator {
             using (writer.WriteBlock()) {
                 writer.WriteLine($"if (MemberFunctionPointers.{mfi.MethodInfo.Name} is null)");
                 using (writer.WriteBlock()) {
-                    writer.WriteLine($"""throw new InvalidOperationException("Function pointer for {structInfo.Name}.{mfi.MethodInfo.Name} is null. The resolver was either uninitialized or failed to resolve address with signature {mfi.SignatureInfo.Signature}.");""");
+                    writer.WriteLine($"""InteropGenerator.Runtime.ThrowHelper.ThrowNullAddress("{structInfo.Name}.{mfi.MethodInfo.Name}", "{mfi.SignatureInfo.Signature}");""");
                 }
                 if (mfi.MethodInfo.IsStatic) {
                     writer.WriteLine($"{mfi.MethodInfo.GetReturnString()}MemberFunctionPointers.{mfi.MethodInfo.Name}({mfi.MethodInfo.GetParameterNamesString()});");
@@ -190,7 +190,7 @@ public sealed partial class InteropGenerator {
             using (writer.WriteBlock()) {
                 writer.WriteLine($"if (StaticAddressPointers.{extraPointerText}p{sai.MethodInfo.Name} is null)");
                 using (writer.WriteBlock()) {
-                    writer.WriteLine($"""throw new InvalidOperationException("Static address pointer for {structInfo.Name}.{sai.MethodInfo.Name} is null. The resolver was either uninitialized or failed to resolve address with signature {sai.SignatureInfo.Signature}.");""");
+                    writer.WriteLine($"""InteropGenerator.Runtime.ThrowHelper.ThrowNullAddress("{structInfo.Name}.{sai.MethodInfo.Name}", "{sai.SignatureInfo.Signature}");""");
                 }
                 writer.WriteLine($"return {pointerReturnText}StaticAddressPointers.{extraPointerText}p{sai.MethodInfo.Name};");
             }

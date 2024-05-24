@@ -32,7 +32,7 @@ public class MemberFunctionAttributeTests {
                                   {
                                       if (MemberFunctionPointers.TestFunction is null)
                                       {
-                                          throw new InvalidOperationException("Function pointer for TestStruct.TestFunction is null. The resolver was either uninitialized or failed to resolve address with signature AA BB CC DD ?? ?? ?? ?? AA BB ?? DD.");
+                                          InteropGenerator.Runtime.ThrowHelper.ThrowNullAddress("TestStruct.TestFunction", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD");
                                       }
                                       return MemberFunctionPointers.TestFunction((TestStruct*)Unsafe.AsPointer(ref this), argOne, argTwo);
                                   }
@@ -72,7 +72,7 @@ public class MemberFunctionAttributeTests {
                                   {
                                       if (MemberFunctionPointers.TestFunction is null)
                                       {
-                                          throw new InvalidOperationException("Function pointer for TestStruct.TestFunction is null. The resolver was either uninitialized or failed to resolve address with signature AA BB CC DD ?? ?? ?? ?? AA BB ?? DD.");
+                                          InteropGenerator.Runtime.ThrowHelper.ThrowNullAddress("TestStruct.TestFunction", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD");
                                       }
                                       return MemberFunctionPointers.TestFunction((TestStruct*)Unsafe.AsPointer(ref this), argOne, argTwo);
                                   }
@@ -112,7 +112,7 @@ public class MemberFunctionAttributeTests {
                                   {
                                       if (MemberFunctionPointers.TestFunction is null)
                                       {
-                                          throw new InvalidOperationException("Function pointer for TestStruct.TestFunction is null. The resolver was either uninitialized or failed to resolve address with signature E8 BB CC DD ?? ?? ?? ?? AA BB ?? DD.");
+                                          InteropGenerator.Runtime.ThrowHelper.ThrowNullAddress("TestStruct.TestFunction", "E8 BB CC DD ?? ?? ?? ?? AA BB ?? DD");
                                       }
                                       return MemberFunctionPointers.TestFunction((TestStruct*)Unsafe.AsPointer(ref this), argOne, argTwo);
                                   }
@@ -152,7 +152,7 @@ public class MemberFunctionAttributeTests {
                                   {
                                       if (MemberFunctionPointers.TestFunction is null)
                                       {
-                                          throw new InvalidOperationException("Function pointer for TestStruct.TestFunction is null. The resolver was either uninitialized or failed to resolve address with signature E9 BB CC DD ?? ?? ?? ?? AA BB ?? DD.");
+                                          InteropGenerator.Runtime.ThrowHelper.ThrowNullAddress("TestStruct.TestFunction", "E9 BB CC DD ?? ?? ?? ?? AA BB ?? DD");
                                       }
                                       return MemberFunctionPointers.TestFunction((TestStruct*)Unsafe.AsPointer(ref this), argOne, argTwo);
                                   }
@@ -192,7 +192,7 @@ public class MemberFunctionAttributeTests {
                                   {
                                       if (MemberFunctionPointers.TestFunction is null)
                                       {
-                                          throw new InvalidOperationException("Function pointer for TestStruct.TestFunction is null. The resolver was either uninitialized or failed to resolve address with signature AA BB CC DD ?? ?? ?? ?? AA BB ?? DD.");
+                                          InteropGenerator.Runtime.ThrowHelper.ThrowNullAddress("TestStruct.TestFunction", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD");
                                       }
                                       MemberFunctionPointers.TestFunction((TestStruct*)Unsafe.AsPointer(ref this), argOne, argTwo);
                                   }
@@ -232,7 +232,7 @@ public class MemberFunctionAttributeTests {
                                   {
                                       if (MemberFunctionPointers.TestFunction is null)
                                       {
-                                          throw new InvalidOperationException("Function pointer for TestStruct.TestFunction is null. The resolver was either uninitialized or failed to resolve address with signature AA BB CC DD ?? ?? ?? ?? AA BB ?? DD.");
+                                          InteropGenerator.Runtime.ThrowHelper.ThrowNullAddress("TestStruct.TestFunction", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD");
                                       }
                                       return MemberFunctionPointers.TestFunction(argOne, argTwo);
                                   }
@@ -277,7 +277,7 @@ public class MemberFunctionAttributeTests {
                                   {
                                       if (MemberFunctionPointers.TestFunction is null)
                                       {
-                                          throw new InvalidOperationException("Function pointer for TestStruct.TestFunction is null. The resolver was either uninitialized or failed to resolve address with signature AA BB CC DD ?? ?? ?? ?? AA BB ?? DD.");
+                                          InteropGenerator.Runtime.ThrowHelper.ThrowNullAddress("TestStruct.TestFunction", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD");
                                       }
                                       return MemberFunctionPointers.TestFunction((TestStruct*)Unsafe.AsPointer(ref this), argOne, argTwo);
                                   }
@@ -285,7 +285,7 @@ public class MemberFunctionAttributeTests {
                                   {
                                       if (MemberFunctionPointers.TestFunction2 is null)
                                       {
-                                          throw new InvalidOperationException("Function pointer for TestStruct.TestFunction2 is null. The resolver was either uninitialized or failed to resolve address with signature ?? ?? AA BB CC DD EE ?? ?? EE CC DD BB AA FF ?? ?? EE ?? ??.");
+                                          InteropGenerator.Runtime.ThrowHelper.ThrowNullAddress("TestStruct.TestFunction2", "?? ?? AA BB CC DD EE ?? ?? EE CC DD BB AA FF ?? ?? EE ?? ??");
                                       }
                                       return MemberFunctionPointers.TestFunction2((TestStruct*)Unsafe.AsPointer(ref this), argOne, argTwo);
                                   }
@@ -325,7 +325,7 @@ public class MemberFunctionAttributeTests {
                                   {
                                       if (MemberFunctionPointers.TestFunction is null)
                                       {
-                                          throw new InvalidOperationException("Function pointer for TestStruct.TestFunction is null. The resolver was either uninitialized or failed to resolve address with signature AA BB CC DD ?? ?? ?? ?? AA BB ?? DD.");
+                                          InteropGenerator.Runtime.ThrowHelper.ThrowNullAddress("TestStruct.TestFunction", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD");
                                       }
                                       return MemberFunctionPointers.TestFunction((TestStruct*)Unsafe.AsPointer(ref this), ref argOne, out argTwo);
                                   }
@@ -369,7 +369,7 @@ public class MemberFunctionAttributeTests {
                                   {
                                       if (MemberFunctionPointers.TestFunction is null)
                                       {
-                                          throw new InvalidOperationException("Function pointer for TestStruct.TestFunction is null. The resolver was either uninitialized or failed to resolve address with signature AA BB CC DD ?? ?? ?? ?? AA BB ?? DD.");
+                                          InteropGenerator.Runtime.ThrowHelper.ThrowNullAddress("TestStruct.TestFunction", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD");
                                       }
                                       return MemberFunctionPointers.TestFunction((TestStruct*)Unsafe.AsPointer(ref this), argOne, argTwo);
                                   }
@@ -414,7 +414,7 @@ public class MemberFunctionAttributeTests {
                                       {
                                           if (MemberFunctionPointers.TestFunction is null)
                                           {
-                                              throw new InvalidOperationException("Function pointer for InnerStruct.TestFunction is null. The resolver was either uninitialized or failed to resolve address with signature AA BB CC DD ?? ?? ?? ?? AA BB ?? DD.");
+                                              InteropGenerator.Runtime.ThrowHelper.ThrowNullAddress("InnerStruct.TestFunction", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD");
                                           }
                                           return MemberFunctionPointers.TestFunction((InnerStruct*)Unsafe.AsPointer(ref this), argOne, argTwo);
                                       }
