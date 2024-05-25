@@ -23,7 +23,7 @@ public class FixedSizeArrayAttributeTests {
                               unsafe partial struct TestStruct
                               {
                                   /// <inheritdoc cref="_tenIntArray" />
-                                  public Span<int> TenIntArray => _tenIntArray;
+                                  [UnscopedRef] public Span<int> TenIntArray => _tenIntArray;
                               }
                               """;
 
@@ -54,9 +54,9 @@ public class FixedSizeArrayAttributeTests {
                               unsafe partial struct TestStruct
                               {
                                   /// <inheritdoc cref="_tenIntArray" />
-                                  public Span<int> TenIntArray => _tenIntArray;
+                                  [UnscopedRef] public Span<int> TenIntArray => _tenIntArray;
                                   /// <inheritdoc cref="_tenUIntArray" />
-                                  public Span<uint> TenUIntArray => _tenUIntArray;
+                                  [UnscopedRef] public Span<uint> TenUIntArray => _tenUIntArray;
                               }
                               """;
 
@@ -87,9 +87,9 @@ public class FixedSizeArrayAttributeTests {
                               unsafe partial struct TestStruct
                               {
                                   /// <inheritdoc cref="_tenIntArray" />
-                                  public Span<int> TenIntArray => _tenIntArray;
+                                  [UnscopedRef] public Span<int> TenIntArray => _tenIntArray;
                                   /// <inheritdoc cref="_fiftySevenUIntArray" />
-                                  public Span<uint> FiftySevenUIntArray => _fiftySevenUIntArray;
+                                  [UnscopedRef] public Span<uint> FiftySevenUIntArray => _fiftySevenUIntArray;
                               }
                               """;
 

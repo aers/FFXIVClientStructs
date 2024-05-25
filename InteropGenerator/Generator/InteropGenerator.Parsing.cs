@@ -237,7 +237,7 @@ public sealed partial class InteropGenerator {
                 fixedSizeArrayBuilder.Add(fixedSizeArrayInfo);
             }
             if (isInherited && fieldSymbol.DeclaredAccessibility == Accessibility.Public) {
-                if (!fieldSymbol.TryGetAttributeWithFullyQualifiedMetadataName("global::System.Runtime.InteropServices.FieldOffsetAttribute", out AttributeData? fieldOffsetAttributeData))
+                if (!fieldSymbol.TryGetAttributeWithFullyQualifiedMetadataName("System.Runtime.InteropServices.FieldOffsetAttribute", out AttributeData? fieldOffsetAttributeData))
                     continue;
 
                 if (!fieldOffsetAttributeData.TryGetConstructorArgument(0, out int fieldOffset))

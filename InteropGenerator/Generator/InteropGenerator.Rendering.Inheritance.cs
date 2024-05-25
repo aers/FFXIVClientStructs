@@ -1,4 +1,5 @@
 ﻿using System.Collections.Immutable;
+using System.Runtime.InteropServices.ComTypes;
 using InteropGenerator.Helpers;
 using InteropGenerator.Models;
 
@@ -38,12 +39,25 @@ public sealed partial class InteropGenerator {
     }
     private static void RenderInheritance(StructInfo structInfo, ImmutableArray<StructInfo> inheritedStructs, CancellationToken token, IndentedTextWriter writer) {
         // resolve the list of inherited structs and their offsets
-        using ImmutableArrayBuilder<(StructInfo inheritedStruct, int offset)> resolvedInheritanceOrder = new();
+        using ImmutableArrayBuilder<(StructInfo inheritedStruct, int offset)> resolvedInheritanceOrderBuilder = new();
 
-        ResolveInheritanceOrder(structInfo, 0, 0, inheritedStructs, resolvedInheritanceOrder);
+        ResolveInheritanceOrder(structInfo, 0, 0, inheritedStructs, resolvedInheritanceOrderBuilder);
 
-        foreach (var thing in resolvedInheritanceOrder.ToImmutable()) {
-            writer.WriteLine($"// {thing.inheritedStruct.Name} {thing.offset}");
+        ImmutableArray<(StructInfo inheritedStruct, int offset)> resolvedInheritanceOrder = resolvedInheritanceOrderBuilder.ToImmutable();
+        
+        // inherited fields
+        foreach ((StructInfo inheritedStruct, int offset) in resolvedInheritanceOrder) {
+            // write parent accessor if its directly inherited
+            if (structInfo.InheritedStructs.Any(inheritanceInfo => inheritanceInfo.InheritedTypeName == inheritedStruct.FullyQualifiedMetadataName)) {
+                writer.WriteLine($"""/// <summary>Inherited parent class accessor for <see cref="{inheritedStruct.FullyQualifiedMetadataName}">{inheritedStruct.Name}</see></summary>""");
+                writer.WriteLine($"[FieldOffset({offset})] public {inheritedStruct.FullyQualifiedMetadataName} {inheritedStruct.Name};");
+            }
+            // write public fields
+            foreach (FieldInfo field in inheritedStruct.ExtraInheritedStructInfo!.PublicFields) {
+                writer.WriteLine($"""/// <inheritdoc cref="{inheritedStruct.FullyQualifiedMetadataName}.{field.Name}" />""");
+                writer.WriteLine($"""/// <remarks>Field inherited from parent class <see cref="{inheritedStruct.FullyQualifiedMetadataName}">{inheritedStruct.Name}</see>.</remarks>""");
+                writer.WriteLine($"[FieldOffset({offset + field.Offset})] public {field.Type} {field.Name};");
+            }
         }
     }
     private static int ResolveInheritanceOrder(StructInfo structInfo, int offset, int index, ImmutableArray<StructInfo> inheritedStructs, ImmutableArrayBuilder<(StructInfo inheritedStruct, int offset)> resolvedInheritanceOrder) {
