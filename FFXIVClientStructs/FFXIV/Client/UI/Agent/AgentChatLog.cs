@@ -33,6 +33,9 @@ public unsafe partial struct AgentChatLog {
 
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 81 FF ?? ?? ?? ?? 75 20")]
     public partial bool InsertTextCommandParam(uint textParamId, bool unk);
+
+    [MemberFunction("E8 ?? ?? ?? ?? EB 7B 49 8B 06")]
+    public partial void LinkItem(uint itemId);
 }
 
 // There are definitely more channels than just these, these were all the ones I could find quickly.
