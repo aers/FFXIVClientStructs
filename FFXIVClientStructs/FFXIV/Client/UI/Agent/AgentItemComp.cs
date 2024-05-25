@@ -2,7 +2,7 @@
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
-[Agent(AgentId.ItemCompare)]
+[Agent(AgentId.ItemComp)]
 [StructLayout(LayoutKind.Explicit, Size = 0x60)]
 public partial struct AgentItemComp {
     [FieldOffset(0x00)] public AgentInterface AgentInterface;
