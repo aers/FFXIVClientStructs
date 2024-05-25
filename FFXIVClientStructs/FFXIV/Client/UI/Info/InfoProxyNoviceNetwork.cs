@@ -1,5 +1,6 @@
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
+[InfoProxy(InfoProxyId.NoviceNetwork)]
 [StructLayout(LayoutKind.Explicit, Size = 0x28)]
 public unsafe partial struct InfoProxyNoviceNetwork {
     [FieldOffset(0x00)] public InfoProxyInterface InfoProxyInterface;
