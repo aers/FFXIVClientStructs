@@ -71,6 +71,7 @@ public enum InfoProxyId : uint {
     //OTherFCStuff = 17,
     LinkShellChat = 18,
     CrossRealmParty = 19,
+    NoviceNetwork = 20,
     CrossWorldLinkShell = 29,
     CrossWorldLinkShellMember = 30,
     CircleList = 31,
