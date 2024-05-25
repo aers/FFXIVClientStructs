@@ -731,7 +731,7 @@ classes:
       0: dtor
       1: Enable            # called in AtkModule_Initialize
       2: DumpInput         # called every frame from AtkModule_HandleInput
-      3: Disable           # called as part of UIModule_Finalize 
+      3: Disable           # called as part of UIModule_Finalize
       4: IsEnabled
       5: OpenSoftKeyboard  # (this, SoftKeyboardInputInterface*) - in 140577A90
       6: CloseSoftKeyboard # nullsub in SteamGamepadTextInput, so unsure. random guess!
@@ -3471,6 +3471,9 @@ classes:
         base: Client::UI::Info::InfoProxyInvitedInterface
     funcs:
       0x1401061D0: ctor
+      0x1401062B0: InviteToParty
+      0x140106490: InviteToPartyContentId
+      0x140106550: InviteToPartyInInstance
   Client::UI::Info::InfoProxyLinkShell:
     vtbls:
       - ea: 0x1419C0998
@@ -8084,6 +8087,8 @@ classes:
         base: Client::UI::Agent::AgentContext::AgentContextUpdateChecker
     funcs:
       0x140291C20: ctor
+      0x140292500: Promote
+      0x140292680: Kick
   Client::UI::Agent::AgentLinkshell:
     vtbls:
       - ea: 0x1419E0E20
