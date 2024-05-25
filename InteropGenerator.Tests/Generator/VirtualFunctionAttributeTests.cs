@@ -27,10 +27,8 @@ public class VirtualFunctionAttributeTests {
                                       [FieldOffset(40)] public delegate* unmanaged[Stdcall] <TestStruct*, int, void*, int> TestFunction;
                                   }
                                   [FieldOffset(0)] public TestStructVirtualTable* VirtualTable;
-                                  public partial int TestFunction(int argOne, void* argTwo)
-                                  {
-                                      return VirtualTable->TestFunction((TestStruct*)Unsafe.AsPointer(ref this), argOne, argTwo);
-                                  }
+                                  [MethodImpl(MethodImplOptions.AggressiveInlining)]
+                                  public partial int TestFunction(int argOne, void* argTwo) => VirtualTable->TestFunction((TestStruct*)Unsafe.AsPointer(ref this), argOne, argTwo);
                               }
                               """;
         
@@ -61,10 +59,8 @@ public class VirtualFunctionAttributeTests {
                                       [FieldOffset(40)] public delegate* unmanaged[Stdcall] <TestStruct*, int, void*, void> TestFunction;
                                   }
                                   [FieldOffset(0)] public TestStructVirtualTable* VirtualTable;
-                                  public partial void TestFunction(int argOne, void* argTwo)
-                                  {
-                                      VirtualTable->TestFunction((TestStruct*)Unsafe.AsPointer(ref this), argOne, argTwo);
-                                  }
+                                  [MethodImpl(MethodImplOptions.AggressiveInlining)]
+                                  public partial void TestFunction(int argOne, void* argTwo) => VirtualTable->TestFunction((TestStruct*)Unsafe.AsPointer(ref this), argOne, argTwo);
                               }
                               """;
         
@@ -99,10 +95,8 @@ public class VirtualFunctionAttributeTests {
                                       [FieldOffset(40)] public delegate* unmanaged[Stdcall] <TestStruct*, int, void*, int> TestFunction;
                                   }
                                   [FieldOffset(0)] public TestStructVirtualTable* VirtualTable;
-                                  public partial int TestFunction(int argOne, void* argTwo)
-                                  {
-                                      return VirtualTable->TestFunction((TestStruct*)Unsafe.AsPointer(ref this), argOne, argTwo);
-                                  }
+                                  [MethodImpl(MethodImplOptions.AggressiveInlining)]
+                                  public partial int TestFunction(int argOne, void* argTwo) => VirtualTable->TestFunction((TestStruct*)Unsafe.AsPointer(ref this), argOne, argTwo);
                               }
                               """;
         
@@ -138,10 +132,8 @@ public class VirtualFunctionAttributeTests {
                                           [FieldOffset(40)] public delegate* unmanaged[Stdcall] <InnerStruct*, int, void*, int> TestFunction;
                                       }
                                       [FieldOffset(0)] public InnerStructVirtualTable* VirtualTable;
-                                      public partial int TestFunction(int argOne, void* argTwo)
-                                      {
-                                          return VirtualTable->TestFunction((InnerStruct*)Unsafe.AsPointer(ref this), argOne, argTwo);
-                                      }
+                                      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+                                      public partial int TestFunction(int argOne, void* argTwo) => VirtualTable->TestFunction((InnerStruct*)Unsafe.AsPointer(ref this), argOne, argTwo);
                                   }
                               }
                               """;
@@ -173,10 +165,8 @@ public class VirtualFunctionAttributeTests {
                                       [FieldOffset(40)] public delegate* unmanaged[Stdcall] <TestStruct*, out int, void*, int> TestFunction;
                                   }
                                   [FieldOffset(0)] public TestStructVirtualTable* VirtualTable;
-                                  public partial int TestFunction(out int argOne, void* argTwo)
-                                  {
-                                      return VirtualTable->TestFunction((TestStruct*)Unsafe.AsPointer(ref this), out argOne, argTwo);
-                                  }
+                                  [MethodImpl(MethodImplOptions.AggressiveInlining)]
+                                  public partial int TestFunction(out int argOne, void* argTwo) => VirtualTable->TestFunction((TestStruct*)Unsafe.AsPointer(ref this), out argOne, argTwo);
                               }
                               """;
         
@@ -211,14 +201,10 @@ public class VirtualFunctionAttributeTests {
                                       [FieldOffset(136)] public delegate* unmanaged[Stdcall] <TestStruct*, void> TestFunction2;
                                   }
                                   [FieldOffset(0)] public TestStructVirtualTable* VirtualTable;
-                                  public partial int TestFunction(int argOne, void* argTwo)
-                                  {
-                                      return VirtualTable->TestFunction((TestStruct*)Unsafe.AsPointer(ref this), argOne, argTwo);
-                                  }
-                                  public partial void TestFunction2()
-                                  {
-                                      VirtualTable->TestFunction2((TestStruct*)Unsafe.AsPointer(ref this));
-                                  }
+                                  [MethodImpl(MethodImplOptions.AggressiveInlining)]
+                                  public partial int TestFunction(int argOne, void* argTwo) => VirtualTable->TestFunction((TestStruct*)Unsafe.AsPointer(ref this), argOne, argTwo);
+                                  [MethodImpl(MethodImplOptions.AggressiveInlining)]
+                                  public partial void TestFunction2() => VirtualTable->TestFunction2((TestStruct*)Unsafe.AsPointer(ref this));
                               }
                               """;
         

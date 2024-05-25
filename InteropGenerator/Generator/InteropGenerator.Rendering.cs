@@ -161,14 +161,12 @@ public sealed partial class InteropGenerator {
     }
 
     private static void RenderVirtualFunctions(StructInfo structInfo, IndentedTextWriter writer) {
-        foreach (VirtualFunctionInfo vfi in structInfo.VirtualFunctions) {
-            writer.WriteLine(vfi.MethodInfo.GetDeclarationString());
-            using (writer.WriteBlock()) {
-                var paramNames = string.Empty;
-                if (vfi.MethodInfo.Parameters.Any())
-                    paramNames = ", " + vfi.MethodInfo.GetParameterNamesString();
-                writer.WriteLine($"{vfi.MethodInfo.GetReturnString()}VirtualTable->{vfi.MethodInfo.Name}(({structInfo.Name}*)Unsafe.AsPointer(ref this){paramNames});");
-            }
+        foreach (VirtualFunctionInfo virtualFunctionInfo in structInfo.VirtualFunctions) {
+            writer.WriteLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
+            var paramNames = string.Empty;
+            if (virtualFunctionInfo.MethodInfo.Parameters.Any())
+                paramNames = ", " + virtualFunctionInfo.MethodInfo.GetParameterNamesString();
+            writer.WriteLine($"{virtualFunctionInfo.MethodInfo.GetDeclarationString()} => VirtualTable->{virtualFunctionInfo.MethodInfo.Name}(({structInfo.Name}*)Unsafe.AsPointer(ref this){paramNames});");
         }
     }
 
