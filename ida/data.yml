@@ -731,7 +731,7 @@ classes:
       0: dtor
       1: Enable            # called in AtkModule_Initialize
       2: DumpInput         # called every frame from AtkModule_HandleInput
-      3: Disable           # called as part of UIModule_Finalize 
+      3: Disable           # called as part of UIModule_Finalize
       4: IsEnabled
       5: OpenSoftKeyboard  # (this, SoftKeyboardInputInterface*) - in 140577A90
       6: CloseSoftKeyboard # nullsub in SteamGamepadTextInput, so unsure. random guess!
@@ -1720,8 +1720,6 @@ classes:
       0x140970060: IsComplete
       0x14096FDB0: RequestAchievementProgress
       0x140970100: ReceiveAchievementProgress
-    vfuncs:
-      0: dtor
   Client::Game::UI::Buddy:
     instances:
       - ea: 0x142206250
@@ -3430,10 +3428,12 @@ classes:
     funcs:
       0x1400F3C90: ctor
       0x14017C9E0: Finalize
-  Client::UI::Info::InfoProxy20:
+  Client::UI::Info::InfoProxyNoviceNetwork:
     vtbls:
       - ea: 0x1419BFB70
         base: Client::UI::Info::InfoProxyInterface
+    funcs:
+      0x1400FADD0: InviteToNoviceNetwork
   Client::UI::Info::InfoProxyFreeCompany:
     vtbls:
       - ea: 0x1419C0558
@@ -3471,6 +3471,9 @@ classes:
         base: Client::UI::Info::InfoProxyInvitedInterface
     funcs:
       0x1401061D0: ctor
+      0x1401062B0: InviteToParty
+      0x140106490: InviteToPartyContentId
+      0x140106550: InviteToPartyInInstance
   Client::UI::Info::InfoProxyLinkShell:
     vtbls:
       - ea: 0x1419C0998
@@ -7872,6 +7875,7 @@ classes:
       0x140CCB0C0: ctor
       0x140CCB2F0: Finalize
       0x140CD03A0: InsertTextCommandParam
+      0x140CD09B0: LinkItem
   Client::UI::Agent::AgentInventory:
     vtbls:
       - ea: 0x141A89E18
@@ -8084,6 +8088,8 @@ classes:
         base: Client::UI::Agent::AgentContext::AgentContextUpdateChecker
     funcs:
       0x140291C20: ctor
+      0x140292500: Promote
+      0x140292680: Kick
   Client::UI::Agent::AgentLinkshell:
     vtbls:
       - ea: 0x1419E0E20
@@ -8320,6 +8326,7 @@ classes:
     funcs:
       0x140CC2D90: ctor
       0x140CC30F0: Finalize
+      0x140CC34F0: OpenById
   Client::UI::Agent::AgentLicenseViewer:
     vtbls:
       - ea: 0x1419DF8C8
@@ -8479,6 +8486,7 @@ classes:
     funcs:
       0x1402BE3B0: ctor
       0x1402BE6F0: Finalize
+      0x1402C3EA0: OpenListing
   Client::UI::Agent::AgentContentsMvp:
     vtbls:
       - ea: 0x141A8D4D8
