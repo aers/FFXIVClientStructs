@@ -30,6 +30,7 @@ public unsafe partial struct RaptureShellModule {
     [FieldOffset(0x3A0)] private fixed byte MacroLines[15 * 0x68];
     [FixedSizeArray<Utf8String>(15)]
     [FieldOffset(0x9B8)] private fixed byte SkippedMacroLines[15 * 0x68];
+    [FieldOffset(0xFD0)] private uint ShellChannel;
 
     [FieldOffset(0x1200)] public uint Flags;
 
@@ -40,4 +41,19 @@ public unsafe partial struct RaptureShellModule {
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 0F 84 ?? ?? ?? ?? 48 8B 4C 24 ?? 48 B8")]
     public partial bool TryGetMacroIconCommand(RaptureMacroModule.Macro* macro, void* resultsOut);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B7 44 37 ??")]
+    public partial void ChangeChatChannel(int channel, uint linkshellIndex, Utf8String* target, byte unknown); // target can be empty string, unknown = 1
+
+    [MemberFunction("E8 ?? ?? ?? ?? 4C 8B 7C 24 ?? EB 34")]
+    public partial byte SetContextTellTarget(Utf8String* playerName, Utf8String* worldName, ushort worldId, ulong contentId, ushort reason, byte unknown);
+
+    [MemberFunction("E8 ?? ?? ?? ?? EB 8A 48 8B 1D")]
+    public partial void SetContextTellTargetInForay(Utf8String* playerName, Utf8String* worldName, ushort worldId, ulong contentId, ushort unknown);
+
+    [MemberFunction("48 89 5C 24 ?? 55 56 57 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 48 8B 02")]
+    public partial bool SetTellTargetInForay(Utf8String* playerName, Utf8String* worldName, ushort worldId, ulong contentId, ushort unknown1, byte unknown2); // unknown2 = 0
+
+    [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 30 8B B9 ?? ?? ?? ?? 48 8B D9 83 FF FE")]
+    public partial void ReplyInSelectedChatMode();
 }

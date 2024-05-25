@@ -34,6 +34,7 @@ public unsafe partial struct UIModule {
 
     [FixedSizeArray<RaptureAtkHistory>(19)]
     [FieldOffset(0x3B0)] public fixed byte AtkHistory[19 * 0x38];
+    [FieldOffset(0x7D8)] public int LinkshellCycle;
 
     [FieldOffset(0x7E4)] public uint FrameCount;
     [FieldOffset(0x7E8)] internal ExcelModule* ExcelModule;
@@ -418,6 +419,12 @@ public unsafe partial struct UIModule {
 
     [VirtualFunction(194)]
     public partial bool IsMainCommandUnlocked(uint command);
+
+    [VirtualFunction(211)]
+    public partial bool RotateLinkshellHistory(int unknown1, ulong unknown2);
+
+    [VirtualFunction(213)]
+    public partial bool RotateCrossLinkshellHistory(int unknown1, ulong unknown2);
 
     [MemberFunction("E8 ?? ?? ?? ?? 4D 39 BE")]
     public static partial bool PlaySound(uint effectId, long a2 = 0, long a3 = 0, byte a4 = 0);
