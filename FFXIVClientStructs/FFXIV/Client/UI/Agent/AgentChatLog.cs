@@ -40,7 +40,7 @@ public unsafe partial struct AgentChatLog {
     public partial void LinkItem(uint itemId);
 
     [MemberFunction("E8 ?? ?? ?? ?? BA ?? ?? ?? ?? 48 8D 4D B0 48 8B F8 E8 ?? ?? ?? ?? 41 8B D6")]
-    public partial nint ChangeChannelName();
+    public partial byte* ChangeChannelName();
 }
 
 // There are definitely more channels than just these, these were all the ones I could find quickly.

@@ -154,7 +154,7 @@ public unsafe partial struct Utf8String : ICreatable, IDisposable {
 
 
     [MemberFunction("E8 ?? ?? ?? ?? EB 0A 48 8D 4C 24 ?? E8 ?? ?? ?? ?? 48 8D 8D")]
-    public static partial void SanitiseString(uint unknown1, nint unknown2); // unknown1 = 0x27F unknown2 = nint.Zero
+    public static partial void SanitiseString(ushort unknown1, Utf8String* unknown2); // unknown1 = 0x27F unknown2 = nint.Zero
 
     public static implicit operator ReadOnlySpan<byte>(in Utf8String value)
         => value.AsSpan();
