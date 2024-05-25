@@ -39,14 +39,16 @@ public sealed partial class InteropGenerator {
     }
     private static void RenderInheritance(StructInfo structInfo, ImmutableArray<StructInfo> inheritedStructs, CancellationToken token, IndentedTextWriter writer) {
         // resolve the list of inherited structs and their offsets
-        using ImmutableArrayBuilder<(StructInfo inheritedStruct, int offset)> resolvedInheritanceOrderBuilder = new();
+        using ImmutableArrayBuilder<(StructInfo inheritedStruct, string path, int offset)> resolvedInheritanceOrderBuilder = new();
 
-        ResolveInheritanceOrder(structInfo, 0, 0, inheritedStructs, resolvedInheritanceOrderBuilder);
+        ResolveInheritanceOrder(structInfo, string.Empty, 0, 0, inheritedStructs, resolvedInheritanceOrderBuilder);
 
-        ImmutableArray<(StructInfo inheritedStruct, int offset)> resolvedInheritanceOrder = resolvedInheritanceOrderBuilder.ToImmutable();
+        ImmutableArray<(StructInfo inheritedStruct, string path, int offset)> resolvedInheritanceOrder = resolvedInheritanceOrderBuilder.ToImmutable();
+        
+        token.ThrowIfCancellationRequested();
         
         // inherited fields
-        foreach ((StructInfo inheritedStruct, int offset) in resolvedInheritanceOrder) {
+        foreach ((StructInfo inheritedStruct, _, int offset) in resolvedInheritanceOrder) {
             // write parent accessor if its directly inherited
             if (structInfo.InheritedStructs.Any(inheritanceInfo => inheritanceInfo.InheritedTypeName == inheritedStruct.FullyQualifiedMetadataName)) {
                 writer.WriteLine($"""/// <summary>Inherited parent class accessor for <see cref="{inheritedStruct.FullyQualifiedMetadataName}">{inheritedStruct.Name}</see></summary>""");
@@ -59,8 +61,20 @@ public sealed partial class InteropGenerator {
                 writer.WriteLine($"[FieldOffset({offset + field.Offset})] public {field.Type} {field.Name};");
             }
         }
+        
+        token.ThrowIfCancellationRequested();
+        
+        // inherited member functions
+        foreach ((StructInfo inheritedStruct, string path, _) in resolvedInheritanceOrder) {
+            if (!inheritedStruct.MemberFunctions.IsEmpty)
+                WriteInheritedMemberFunctions(inheritedStruct, path, writer);
+        }
+        
+        token.ThrowIfCancellationRequested();
+        
     }
-    private static int ResolveInheritanceOrder(StructInfo structInfo, int offset, int index, ImmutableArray<StructInfo> inheritedStructs, ImmutableArrayBuilder<(StructInfo inheritedStruct, int offset)> resolvedInheritanceOrder) {
+    
+    private static int ResolveInheritanceOrder(StructInfo structInfo, string path, int offset, int index, ImmutableArray<StructInfo> inheritedStructs, ImmutableArrayBuilder<(StructInfo inheritedStruct, string path, int offset)> resolvedInheritanceOrder) {
         var processed = 0;
         foreach (InheritanceInfo inheritanceInfo in structInfo.InheritedStructs) {
             // failure earlier in generator, haven't collected all inherited structs
@@ -71,15 +85,27 @@ public sealed partial class InteropGenerator {
                 offset = inheritanceInfo.ParentOffset;
 
             StructInfo currentStruct = inheritedStructs[index + processed];
-
+            string newPath = path == string.Empty ? currentStruct.Name : path + "." +  currentStruct.Name;
+            
             processed += 1;
 
-            processed += ResolveInheritanceOrder(currentStruct, offset, index + processed, inheritedStructs, resolvedInheritanceOrder);
+            processed += ResolveInheritanceOrder(currentStruct, newPath, offset, index + processed, inheritedStructs, resolvedInheritanceOrder);
             
-            resolvedInheritanceOrder.Add((currentStruct, offset));
+            resolvedInheritanceOrder.Add((currentStruct, newPath, offset));
 
             offset += currentStruct.ExtraInheritedStructInfo!.Size;
         }
         return processed;
+    }
+
+    private static void WriteInheritedMemberFunctions(StructInfo inheritedStruct, string path, IndentedTextWriter writer) {
+        foreach (MemberFunctionInfo memberFunctionInfo in inheritedStruct.MemberFunctions) {
+            MethodInfo methodInfo = memberFunctionInfo.MethodInfo;
+            writer.WriteLine($"""/// <inheritdoc cref="{inheritedStruct.FullyQualifiedMetadataName}.{methodInfo.Name}" />""");
+            writer.WriteLine($"""/// <remarks>Method inherited from parent class <see cref="{inheritedStruct.FullyQualifiedMetadataName}">{inheritedStruct.Name}</see>.</remarks>""");
+            writer.WriteLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
+            // public int SomeInheritedMethod(int param, int param2) => Path.To.Parent.SomeInheritedMethod(param, param2);
+            writer.WriteLine($"{methodInfo.GetDeclarationStringWithoutPartial()} => {path}.{methodInfo.Name}({methodInfo.GetParameterNamesString()});");
+        }
     }
 }

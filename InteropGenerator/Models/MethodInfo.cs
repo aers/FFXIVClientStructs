@@ -12,6 +12,8 @@ internal sealed record MethodInfo(
     EquatableArray<ParameterInfo> Parameters) {
 
     public string GetDeclarationString() => $"{Modifiers} {ReturnType} {Name}({GetParameterTypesAndNamesString()})";
+    
+    public string GetDeclarationStringWithoutPartial() => $"{Modifiers.Replace(" partial", string.Empty)} {ReturnType} {Name}({GetParameterTypesAndNamesString()})";
 
     public string GetStringOverloadDeclarationString(string typeReplacement, ImmutableArray<string> paramsToOverload) {
         string parameterTypesAndNamesString = string.Join(", ",
