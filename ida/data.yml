@@ -1720,8 +1720,6 @@ classes:
       0x140970060: IsComplete
       0x14096FDB0: RequestAchievementProgress
       0x140970100: ReceiveAchievementProgress
-    vfuncs:
-      0: dtor
   Client::Game::UI::Buddy:
     instances:
       - ea: 0x142206250

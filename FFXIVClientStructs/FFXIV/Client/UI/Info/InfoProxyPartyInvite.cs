@@ -11,7 +11,7 @@ public unsafe partial struct InfoProxyPartyInvite {
     [FieldOffset(0x048)] public Utf8String IviterName;
     [FieldOffset(0x0B0)] public Utf8String IviterNameWithHomeworld;
 
-    [MemberFunction("E8 ?? ?? ?? ?? 33 C0 EB 51")]
+    [MemberFunction("E8 ?? ?? ?? ?? 33 C0 EB 51"), GenerateCStrOverloads]
     public partial bool InviteToParty(ulong contentId, byte* name, ushort worldId);
 
     [MemberFunction("48 83 EC 38 41 B1 09")]
