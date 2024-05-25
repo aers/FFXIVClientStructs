@@ -374,17 +374,21 @@ if api is None:
 
             def get_named_type(self, tinfo, name):
                 # type: (idaapi.tinfo_t, str) -> None
-                if not tinfo.get_named_type(idaapi.get_idati(), name):
-                    tinfo.get_named_type(
-                        idaapi.get_idati(), self.clean_struct_name(name)
-                    )
-
-                if tinfo == name or tinfo == self.clean_struct_name(name):
-                    return
+                if (
+                    ida_struct.get_struc_id(self.clean_struct_name(name))
+                    != idaapi.BADADDR
+                ):
+                    if not tinfo.get_named_type(idaapi.get_idati(), name):
+                        tinfo.get_named_type(
+                            idaapi.get_idati(), self.clean_struct_name(name)
+                        )
+                        return
 
                 terminated = name + ";"
                 idaapi.parse_decl(tinfo, idaapi.get_idati(), terminated, idaapi.PT_SIL)
-                if tinfo == name or tinfo == self.clean_struct_name(name):
+
+                tinfo_str = tinfo.dstr()
+                if tinfo_str == name or tinfo_str == self.clean_struct_name(name):
                     return
 
                 terminated = self.clean_struct_name(name) + ";"
@@ -423,12 +427,20 @@ if api is None:
 
                 return ptr_tinfo
 
+            def get_void_tinfo(self):
+                # type: () -> idaapi.tinfo_t
+                tinfo = self.get_tinfo_from_type("void (__fastcall)()")
+                return tinfo.get_rettype()
+
             def get_tinfo_from_func_data(self, data):
                 # type: (DefinedFuncField) -> idaapi.tinfo_t
                 tinfo = ida_typeinf.tinfo_t()
                 func_data = ida_typeinf.func_type_data_t()
                 func_data.cc = ida_typeinf.CM_CC_FASTCALL
-                func_data.rettype = self.get_tinfo_from_type(data.return_type)
+                if data.return_type != "void":
+                    func_data.rettype = self.get_tinfo_from_type(data.return_type)
+                else:
+                    func_data.rettype = self.get_void_tinfo()
                 for param in data.parameters:
                     arg = ida_typeinf.funcarg_t()
                     arg.type = self.get_tinfo_from_type(param.type)
@@ -436,7 +448,6 @@ if api is None:
                     func_data.push_back(arg)
 
                 tinfo.create_func(func_data)
-                print(tinfo)
                 return tinfo
 
             def get_struct_opinfo_from_type(self, raw_type):
@@ -831,14 +842,19 @@ if api is None:
                 tif.get_func_details(func_data)
                 func_data.clear()
                 func_data.cc = ida_typeinf.CM_CC_FASTCALL
-                func_data.rettype = self.get_tinfo_from_type(member_func.return_type)
+                if member_func.return_type != "void":
+                    func_data.rettype = self.get_tinfo_from_type(
+                        member_func.return_type
+                    )
+                else:
+                    func_data.rettype = self.get_void_tinfo()
                 for param in member_func.parameters:
                     arg = ida_typeinf.funcarg_t()
                     arg.type = self.get_tinfo_from_type(param.type)
                     arg.name = param.name
                     func_data.push_back(arg)
                 tif.create_func(func_data)
-                print(tif)
+                print(f"updating {func_name} with {tif}")
                 ida_typeinf.apply_tinfo(ea, tif, ida_typeinf.TINFO_DEFINITE)
 
             def should_update_member_func(self):
@@ -895,7 +911,11 @@ if api is None:
                     return "ushort"
                 elif name == "__int32":
                     return "int"
-                elif name == "unsigned __int32" or name == "_DWORD" or name == "unsigned int":
+                elif (
+                    name == "unsigned __int32"
+                    or name == "_DWORD"
+                    or name == "unsigned int"
+                ):
                     return "uint"
                 elif name == "__int64":
                     return "longlong"
@@ -1177,7 +1197,14 @@ if api is None:
                     return
                 return_var = ReturnParameterImpl(return_type, currentProgram)
                 update_type = Function.FunctionUpdateType.DYNAMIC_STORAGE_ALL_PARAMS
-                func.updateFunction("__fastcall", return_var, arg_vars, update_type, False, SourceType.USER_DEFINED)
+                func.updateFunction(
+                    "__fastcall",
+                    return_var,
+                    arg_vars,
+                    update_type,
+                    False,
+                    SourceType.USER_DEFINED,
+                )
 
             def should_update_member_func(self):
                 # type: () -> bool
