@@ -9,7 +9,7 @@ namespace InteropGenerator.Diagnostics.Analyzers;
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class FixedSizeArrayAttributeIsValidAnalyzer : DiagnosticAnalyzer {
 
-    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = [FixedSizeArrayFieldMustBePrivate, FixedSizeArrayFieldMustHaveProperlyNamedType];
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = [FixedSizeArrayFieldMustBeInternal, FixedSizeArrayFieldMustHaveProperlyNamedType, FixedSizeArrayFieldMustHaveProperNaming];
 
     public override void Initialize(AnalysisContext context) {
         context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
@@ -27,9 +27,9 @@ public sealed class FixedSizeArrayAttributeIsValidAnalyzer : DiagnosticAnalyzer 
                     if (!fieldSymbol.HasAttributeWithType(fixedSizeArrayAttribute))
                         return;
 
-                    if (fieldSymbol.DeclaredAccessibility != Accessibility.Private) {
+                    if (fieldSymbol.DeclaredAccessibility != Accessibility.Internal) {
                         context.ReportDiagnostic(Diagnostic.Create(
-                            FixedSizeArrayFieldMustBePrivate,
+                            FixedSizeArrayFieldMustBeInternal,
                             fieldSymbol.Locations.FirstOrDefault(),
                             fieldSymbol.Name));
                     }
@@ -41,6 +41,13 @@ public sealed class FixedSizeArrayAttributeIsValidAnalyzer : DiagnosticAnalyzer 
                             fieldSymbol.Locations.FirstOrDefault(),
                             fieldSymbol.Name,
                             fieldSymbol.Type.ToDisplayString(new SymbolDisplayFormat(genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters))));
+                    }
+
+                    if (!fieldSymbol.Name.StartsWith("_")) {
+                        context.ReportDiagnostic(Diagnostic.Create(
+                            FixedSizeArrayFieldMustHaveProperNaming,
+                            fieldSymbol.Locations.FirstOrDefault(),
+                            fieldSymbol.Name));
                     }
                 },
                 SymbolKind.Field);

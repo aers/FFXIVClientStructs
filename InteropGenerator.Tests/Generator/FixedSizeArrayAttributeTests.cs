@@ -14,7 +14,7 @@ public class FixedSizeArrayAttributeTests {
                             public partial struct TestStruct
                             {
                                 [FixedSizeArray]
-                                private FixedSizeArray10<int> _tenIntArray;
+                                internal FixedSizeArray10<int> _tenIntArray;
                             }
                             """;
 
@@ -42,10 +42,10 @@ public class FixedSizeArrayAttributeTests {
                             public partial struct TestStruct
                             {
                                 [FixedSizeArray]
-                                private FixedSizeArray10<int> _tenIntArray;
+                                internal FixedSizeArray10<int> _tenIntArray;
                                 
                                 [FixedSizeArray]
-                                private FixedSizeArray10<uint> _tenUIntArray;
+                                internal FixedSizeArray10<uint> _tenUIntArray;
                             }
                             """;
 
@@ -75,10 +75,10 @@ public class FixedSizeArrayAttributeTests {
                             public partial struct TestStruct
                             {
                                 [FixedSizeArray]
-                                private FixedSizeArray10<int> _tenIntArray;
+                                internal FixedSizeArray10<int> _tenIntArray;
                                 
                                 [FixedSizeArray]
-                                private FixedSizeArray57<uint> _fiftySevenUIntArray;
+                                internal FixedSizeArray57<uint> _fiftySevenUIntArray;
                             }
                             """;
 

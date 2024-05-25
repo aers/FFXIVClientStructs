@@ -82,9 +82,9 @@ public sealed partial class InteropGenerator {
             if (!inheritedStruct.VirtualFunctions.IsEmpty)
                 RenderInheritedVirtualFunctions(structInfo.Name, inheritedStruct, path, offset, writer);
         }
-        
+
         token.ThrowIfCancellationRequested();
-        
+
         // inherited public methods
         foreach ((StructInfo inheritedStruct, string path, _) in resolvedInheritanceOrder) {
             if (!inheritedStruct.ExtraInheritedStructInfo!.PublicMethods.IsEmpty)
@@ -92,13 +92,23 @@ public sealed partial class InteropGenerator {
         }
 
         token.ThrowIfCancellationRequested();
-        
+
         // inherited string overloads
         // we can just use the regular renderer here since the overloaded function should also be inherited
         foreach ((StructInfo inheritedStruct, _, _) in resolvedInheritanceOrder) {
             if (!inheritedStruct.StringOverloads.IsEmpty)
                 RenderStringOverloads(inheritedStruct, writer);
         }
+        
+        token.ThrowIfCancellationRequested();
+
+        // inherited fixed array accessors
+        foreach ((StructInfo inheritedStruct, string path, _) in resolvedInheritanceOrder) {
+            if (!inheritedStruct.FixedSizeArrays.IsEmpty)
+                RenderInheritedFixedSizeArrayAccessors(inheritedStruct, path, writer);
+        }
+        
+        token.ThrowIfCancellationRequested();
     }
 
     private static int ResolveInheritanceOrder(StructInfo structInfo, string path, int offset, int index, ImmutableArray<StructInfo> inheritedStructs, ImmutableArrayBuilder<(StructInfo inheritedStruct, string path, int offset)> resolvedInheritanceOrder, ref bool hasPrimaryVirtualFunctions) {
@@ -187,6 +197,15 @@ public sealed partial class InteropGenerator {
             writer.WriteLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
             // public int SomeInheritedMethod(int param, int param2) => Path.To.Parent.SomeInheritedMethod(param, param2);
             writer.WriteLine($"{methodInfo.GetDeclarationStringWithoutPartial()} => {path}.{methodInfo.Name}({methodInfo.GetParameterNamesString()});");
+        }
+    }
+    
+    private static void RenderInheritedFixedSizeArrayAccessors(StructInfo inheritedStruct, string path, IndentedTextWriter writer) {
+        foreach (FixedSizeArrayInfo fixedSizeArrayInfo in inheritedStruct.FixedSizeArrays) {
+            writer.WriteLine($"""/// <inheritdoc cref="{inheritedStruct.FullyQualifiedMetadataName}.{fixedSizeArrayInfo.GetPublicFieldName()}" />""");
+            writer.WriteLine($"""/// <remarks>Field inherited from parent class <see cref="{inheritedStruct.FullyQualifiedMetadataName}">{inheritedStruct.Name}</see>.</remarks>""");
+            // [UnscopedRef] public Span<T> FieldName => Path.To.Parent_fieldName;
+            writer.WriteLine($"[UnscopedRef] public Span<{fixedSizeArrayInfo.Type}> {fixedSizeArrayInfo.GetPublicFieldName()} => {path}.{fixedSizeArrayInfo.FieldName};");
         }
     }
 }

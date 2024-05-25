@@ -18,14 +18,14 @@ public class FixedSizeArrayAttributeIsValidAnalyzerTests {
                             [GenerateInterop]
                             public partial struct TestStruct
                             {
-                                [FieldOffset(0)] [FixedSizeArray] private FixedSizeArray10<int> _tenIntArray;
+                                [FieldOffset(0)] [FixedSizeArray] internal FixedSizeArray10<int> _tenIntArray;
                             }
                             """;
         await AnalyzerVerifier<FixedSizeArrayAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
     }
 
     [Fact]
-    public async Task FixedSizeArrayAttributeNotPrivate_Warn() {
+    public async Task FixedSizeArrayAttributeNotInternal_Warn() {
         const string code = """
                             [InlineArray(10)]
                             public struct FixedSizeArray10<T> where T : unmanaged
@@ -56,7 +56,7 @@ public class FixedSizeArrayAttributeIsValidAnalyzerTests {
                             [GenerateInterop]
                             public partial struct TestStruct
                             {
-                                [FieldOffset(0)] [FixedSizeArray] private SomeType10<int> {|CSIG0302:_tenIntArray|};
+                                [FieldOffset(0)] [FixedSizeArray] internal SomeType10<int> {|CSIG0302:_tenIntArray|};
                             }
                             """;
         await AnalyzerVerifier<FixedSizeArrayAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
@@ -75,7 +75,26 @@ public class FixedSizeArrayAttributeIsValidAnalyzerTests {
                             [GenerateInterop]
                             public partial struct TestStruct
                             {
-                                [FieldOffset(0)] [FixedSizeArray] private FixedSizeArrayTen<int> {|CSIG0302:_tenIntArray|};
+                                [FieldOffset(0)] [FixedSizeArray] internal FixedSizeArrayTen<int> {|CSIG0302:_tenIntArray|};
+                            }
+                            """;
+        await AnalyzerVerifier<FixedSizeArrayAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
+    }
+    
+    [Fact]
+    public async Task FixedSizeArrayAttributeImproperFieldName_Warn() {
+        const string code = """
+                            [InlineArray(10)]
+                            public struct FixedSizeArray10<T> where T : unmanaged
+                            {
+                                private T _element0;
+                            }
+
+                            [StructLayout(LayoutKind.Explicit, Size=40)]
+                            [GenerateInterop]
+                            public partial struct TestStruct
+                            {
+                                [FieldOffset(0)] [FixedSizeArray] internal FixedSizeArray10<int> {|CSIG0303:TenIntArray|};
                             }
                             """;
         await AnalyzerVerifier<FixedSizeArrayAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
