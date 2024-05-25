@@ -1459,7 +1459,7 @@ classes:
       0x14005DC00: FindLastOfImpl
       0x14005E100: FindFirstOfImpl
       0x14064FF30: ToInteger # strtoi for utf8string (str, base)
-      0x141445CC0: SanitiseString
+      0x141445CC0: SanitizeString
   Component::GUI::AtkValue:
     funcs:
       0x140507C50: ctor_copy # copy constructor
