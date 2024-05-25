@@ -19,7 +19,7 @@ public class VirtualFunctionAttributeIsValidAnalyzerTests {
                             """;
         await AnalyzerVerifier<VirtualFunctionAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
     }
-    
+
     [Fact]
     public async Task TargetMethodMustBePartial_Warn() {
         const string code = """
@@ -32,7 +32,7 @@ public class VirtualFunctionAttributeIsValidAnalyzerTests {
                             """;
         await AnalyzerVerifier<VirtualFunctionAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
     }
-    
+
     [Fact]
     public async Task TargetMethodContainsInvalidParameters_Warn() {
         const string code = """
@@ -47,7 +47,7 @@ public class VirtualFunctionAttributeIsValidAnalyzerTests {
                             """;
         await AnalyzerVerifier<VirtualFunctionAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
     }
-    
+
     [Fact]
     public async Task TargetMethodContainsInvalidReturn_Warn() {
         const string code = """

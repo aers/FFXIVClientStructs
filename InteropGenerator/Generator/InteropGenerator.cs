@@ -1,5 +1,4 @@
 ﻿using System.Collections.Immutable;
-using System.Net.Sockets;
 using InteropGenerator.Helpers;
 using InteropGenerator.Models;
 using Microsoft.CodeAnalysis;
@@ -37,26 +36,26 @@ public sealed partial class InteropGenerator : IIncrementalGenerator {
             ImmutableArray<StructInfo> structsInherited = structInfos.Right;
 
             using ImmutableArrayBuilder<(StructInfo targetStruct, ImmutableArray<StructInfo> inheritedStructs)> structInheritanceGroupedBuilder = new();
-            
+
             Dictionary<string, ImmutableArray<StructInfo>> tempInheritanceMap = new();
 
             foreach (StructInfo targetStruct in structsWithInheritance) {
                 using ImmutableArrayBuilder<StructInfo> inheritedStructsBuilder = new();
-                
-                foreach(InheritanceInfo inheritedStruct in targetStruct.InheritedStructs)
+
+                foreach (InheritanceInfo inheritedStruct in targetStruct.InheritedStructs) {
                     CollectInheritedStructs(inheritedStruct.InheritedTypeName, structsInherited, tempInheritanceMap, inheritedStructsBuilder);
-                
+                }
+
                 structInheritanceGroupedBuilder.Add((targetStruct, inheritedStructsBuilder.ToImmutable()));
                 token.ThrowIfCancellationRequested();
             }
 
             return structInheritanceGroupedBuilder.ToImmutable();
         });
-        
+
         context.RegisterSourceOutput(structInfosWithInheritedStructs,
-            static (sourceContext, item) => 
-            { sourceContext.AddSource($"{item.targetStruct.FullyQualifiedMetadataName}.Inheritance.InteropGenerator.g.cs", RenderInheritedStructInfo(item.targetStruct, item.inheritedStructs, sourceContext.CancellationToken));});
-        
+            static (sourceContext, item) => { sourceContext.AddSource($"{item.targetStruct.FullyQualifiedMetadataName}.Inheritance.InteropGenerator.g.cs", RenderInheritedStructInfo(item.targetStruct, item.inheritedStructs, sourceContext.CancellationToken)); });
+
         // group structs with addresses to output resolver code
         IncrementalValueProvider<ImmutableArray<StructInfo>> structInfosWithAddresses = structInfos.Where(static sI => sI.HasSignatures()).Collect();
 
@@ -76,7 +75,7 @@ public sealed partial class InteropGenerator : IIncrementalGenerator {
             });
     }
 
-    static void CollectInheritedStructs(string inheritedTypeName, ImmutableArray<StructInfo> validInheritedTypes, Dictionary<string, ImmutableArray<StructInfo>> processedInheritanceMap, ImmutableArrayBuilder<StructInfo> inheritedStructsBuilder) {
+    private static void CollectInheritedStructs(string inheritedTypeName, ImmutableArray<StructInfo> validInheritedTypes, Dictionary<string, ImmutableArray<StructInfo>> processedInheritanceMap, ImmutableArrayBuilder<StructInfo> inheritedStructsBuilder) {
         // check cache for existing processed inheritance tree
         if (processedInheritanceMap.TryGetValue(inheritedTypeName, out ImmutableArray<StructInfo> processedInheritance)) {
             inheritedStructsBuilder.AddRange(processedInheritance.AsSpan());
@@ -87,14 +86,15 @@ public sealed partial class InteropGenerator : IIncrementalGenerator {
         StructInfo? targetInheritedStruct = validInheritedTypes.FirstOrDefault(sInfo => sInfo.FullyQualifiedMetadataName == inheritedTypeName);
         if (targetInheritedStruct == null)
             return;
-        
+
         using ImmutableArrayBuilder<StructInfo> inheritanceHierarchyBuilder = new();
         inheritanceHierarchyBuilder.Add(targetInheritedStruct);
-        
+
         // recursively add child types
         if (targetInheritedStruct.InheritedStructs.Length != 0) {
-            foreach(InheritanceInfo inheritanceInfo in targetInheritedStruct.InheritedStructs)
+            foreach (InheritanceInfo inheritanceInfo in targetInheritedStruct.InheritedStructs) {
                 CollectInheritedStructs(inheritanceInfo.InheritedTypeName, validInheritedTypes, processedInheritanceMap, inheritanceHierarchyBuilder);
+            }
         }
 
         ImmutableArray<StructInfo> inheritanceHierarchy = inheritanceHierarchyBuilder.ToImmutable();

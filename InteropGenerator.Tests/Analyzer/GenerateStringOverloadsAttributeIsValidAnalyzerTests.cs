@@ -18,7 +18,7 @@ public class GenerateStringOverloadsAttributeIsValidAnalyzerTests {
                             """;
         await AnalyzerVerifier<GenerateStringOverloadsAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
     }
-    
+
     [Fact]
     public async Task GenerateStringOverloadsAttributeWithIgnoreIsValid_NoWarn() {
         const string code = """
@@ -32,7 +32,7 @@ public class GenerateStringOverloadsAttributeIsValidAnalyzerTests {
                             """;
         await AnalyzerVerifier<GenerateStringOverloadsAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
     }
-    
+
     [Fact]
     public async Task GenerateStringOverloadsAttributeNoArgument_Warn() {
         const string code = """
@@ -46,7 +46,7 @@ public class GenerateStringOverloadsAttributeIsValidAnalyzerTests {
                             """;
         await AnalyzerVerifier<GenerateStringOverloadsAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
     }
-    
+
     [Fact]
     public async Task GenerateStringOverloadsAttributeNoArgumentBecauseIgnore_Warn() {
         const string code = """
@@ -60,7 +60,7 @@ public class GenerateStringOverloadsAttributeIsValidAnalyzerTests {
                             """;
         await AnalyzerVerifier<GenerateStringOverloadsAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
     }
-    
+
     [Fact]
     public async Task GenerateStringOverloadsAttributeStringIgnoreOnInvalidParameter_Warn() {
         const string code = """

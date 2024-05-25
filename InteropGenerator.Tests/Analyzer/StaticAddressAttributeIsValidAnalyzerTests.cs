@@ -19,7 +19,7 @@ public class StaticAddressAttributeIsValidAnalyzerTests {
                             """;
         await AnalyzerVerifier<StaticAddressAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
     }
-    
+
     [Fact]
     public async Task TargetMethodMustBePartial_Warn() {
         const string code = """
@@ -32,7 +32,7 @@ public class StaticAddressAttributeIsValidAnalyzerTests {
                             """;
         await AnalyzerVerifier<StaticAddressAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
     }
-    
+
     [Fact]
     public async Task TargetMethodContainsParameters_Warn() {
         const string code = """
@@ -47,7 +47,7 @@ public class StaticAddressAttributeIsValidAnalyzerTests {
                             """;
         await AnalyzerVerifier<StaticAddressAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
     }
-    
+
     [Fact]
     public async Task TargetMethodContainsInvalidReturn_Warn() {
         const string code = """
@@ -62,7 +62,7 @@ public class StaticAddressAttributeIsValidAnalyzerTests {
                             """;
         await AnalyzerVerifier<StaticAddressAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
     }
-    
+
     [Fact]
     public async Task TargetMethodMustBeStatic_Warn() {
         const string code = """
@@ -77,7 +77,7 @@ public class StaticAddressAttributeIsValidAnalyzerTests {
                             """;
         await AnalyzerVerifier<StaticAddressAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
     }
-    
+
     [Fact]
     public async Task TargetMethodContainsNonPointerReturn_Warn() {
         const string code = """

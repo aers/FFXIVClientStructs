@@ -9,7 +9,7 @@ public class FixedSizeArrayAttributeTests {
     public async Task GenerateFixedArray() {
         const string code = """
                             using InteropGenerator.Runtime.Generated;
-                            
+
                             [GenerateInterop]
                             public partial struct TestStruct
                             {
@@ -32,7 +32,7 @@ public class FixedSizeArrayAttributeTests {
             ("TestStruct.InteropGenerator.g.cs", result),
             SourceGeneration.GetFixedSizeArraySource([10]));
     }
-    
+
     [Fact]
     public async Task GenerateSameFixedArray() {
         const string code = """
@@ -65,7 +65,7 @@ public class FixedSizeArrayAttributeTests {
             ("TestStruct.InteropGenerator.g.cs", result),
             SourceGeneration.GetFixedSizeArraySource([10]));
     }
-    
+
     [Fact]
     public async Task GenerateDifferentFixedArrays() {
         const string code = """

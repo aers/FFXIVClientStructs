@@ -17,14 +17,16 @@ public sealed partial class InteropGenerator {
         if (structSymbol.TryGetAttributeWithFullyQualifiedMetadataName(AttributeNames.GenerateInteropAttribute, out AttributeData? generateInteropAttributeData)) {
             generateInteropAttributeData.TryGetConstructorArgument(0, out isInherited);
         }
-        
+
         // collect info on struct methods
         ParseMethods(structSymbol,
             token,
+            isInherited,
             out EquatableArray<MemberFunctionInfo> memberFunctions,
             out EquatableArray<VirtualFunctionInfo> virtualFunctions,
             out EquatableArray<StaticAddressInfo> staticAddresses,
-            out EquatableArray<StringOverloadInfo> stringOverloads);
+            out EquatableArray<StringOverloadInfo> stringOverloads,
+            out EquatableArray<MethodInfo> extraPublicMethods);
         token.ThrowIfCancellationRequested();
 
         // collect info on struct fields
@@ -64,7 +66,7 @@ public sealed partial class InteropGenerator {
              parent = parent.ContainingType) {
             hierarchy.Add(parent.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat));
         }
-        
+
         // collect extra data for an inherited struct
         if (isInherited &&
             structSymbol.TryGetAttributeWithFullyQualifiedMetadataName("System.Runtime.InteropServices.StructLayoutAttribute", out AttributeData? structLayoutAttributeData) &&
@@ -72,9 +74,10 @@ public sealed partial class InteropGenerator {
             size.HasValue) {
             inheritedStructInfo = new ExtraInheritedStructInfo(
                 size.Value,
-                publicFields);
+                publicFields,
+                extraPublicMethods);
         }
-        
+
         // collect all info
         return new StructInfo(
             structSymbol.GetFullyQualifiedMetadataName(),
@@ -91,16 +94,18 @@ public sealed partial class InteropGenerator {
             inheritedStructInfo);
     }
 
-    private static void ParseMethods(INamedTypeSymbol structSymbol, CancellationToken token,
+    private static void ParseMethods(INamedTypeSymbol structSymbol, CancellationToken token, bool isInherited,
         out EquatableArray<MemberFunctionInfo> memberFunctions,
         out EquatableArray<VirtualFunctionInfo> virtualFunctions,
         out EquatableArray<StaticAddressInfo> staticAddresses,
-        out EquatableArray<StringOverloadInfo> stringOverloads) {
+        out EquatableArray<StringOverloadInfo> stringOverloads,
+        out EquatableArray<MethodInfo> extraPublicMethods) {
 
         using ImmutableArrayBuilder<MemberFunctionInfo> memberFunctionsBuilder = new();
         using ImmutableArrayBuilder<VirtualFunctionInfo> virtualFunctionBuilder = new();
         using ImmutableArrayBuilder<StaticAddressInfo> staticAddressesBuilder = new();
         using ImmutableArrayBuilder<StringOverloadInfo> stringOverloadsBuilder = new();
+        using ImmutableArrayBuilder<MethodInfo> extraPublicMethodsBuilder = new(); 
 
         foreach (IMethodSymbol methodSymbol in structSymbol.GetMembers().OfType<IMethodSymbol>()) {
             MethodInfo? methodInfo = null;
@@ -149,6 +154,11 @@ public sealed partial class InteropGenerator {
                     isPointer.Value);
 
                 staticAddressesBuilder.Add(staticAddressInfo);
+            } else if (isInherited && methodSymbol.DeclaredAccessibility == Accessibility.Public) {
+                if (!TryParseMethod(methodSymbol, token, out methodInfo))
+                    continue;
+                
+                extraPublicMethodsBuilder.Add(methodInfo);
             }
 
             // check for string overload, which could be applied to some of the above
@@ -181,6 +191,7 @@ public sealed partial class InteropGenerator {
         virtualFunctions = virtualFunctionBuilder.ToImmutable();
         staticAddresses = staticAddressesBuilder.ToImmutable();
         stringOverloads = stringOverloadsBuilder.ToImmutable();
+        extraPublicMethods = extraPublicMethodsBuilder.ToImmutable();
     }
 
     private static bool TryParseMethod(IMethodSymbol methodSymbol, CancellationToken token, [NotNullWhen(true)] out MethodInfo? methodInfo) {
@@ -211,7 +222,7 @@ public sealed partial class InteropGenerator {
         out EquatableArray<FixedSizeArrayInfo> fixedSizeArrays, out EquatableArray<FieldInfo> publicFields) {
 
         using ImmutableArrayBuilder<FixedSizeArrayInfo> fixedSizeArrayBuilder = new();
-        using ImmutableArrayBuilder<FieldInfo> publicFieldBuilder = new(); 
+        using ImmutableArrayBuilder<FieldInfo> publicFieldBuilder = new();
 
         foreach (IFieldSymbol fieldSymbol in structSymbol.GetMembers().OfType<IFieldSymbol>()) {
             if (fieldSymbol.Type is not INamedTypeSymbol fieldTypeSymbol)
@@ -247,7 +258,7 @@ public sealed partial class InteropGenerator {
                     fieldSymbol.Name,
                     fieldSymbol.Type.GetFullyQualifiedName(),
                     fieldOffset);
-                
+
                 publicFieldBuilder.Add(fieldInfo);
             }
             token.ThrowIfCancellationRequested();

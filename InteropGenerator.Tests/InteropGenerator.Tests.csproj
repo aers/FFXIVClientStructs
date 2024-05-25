@@ -27,8 +27,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\InteropGenerator.Runtime\InteropGenerator.Runtime.csproj" />
-    <ProjectReference Include="..\InteropGenerator\InteropGenerator.csproj" />
+    <ProjectReference Include="..\InteropGenerator.Runtime\InteropGenerator.Runtime.csproj"/>
+    <ProjectReference Include="..\InteropGenerator\InteropGenerator.csproj"/>
   </ItemGroup>
 
 </Project>

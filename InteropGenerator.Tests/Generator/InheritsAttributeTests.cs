@@ -14,7 +14,7 @@ public class InheritsAttributeTests {
                             {
                                 [FieldOffset(0)] public int Field0;
                             }
-                            
+
                             [StructLayout(LayoutKind.Explicit, Size=8)]
                             [GenerateInterop]
                             [Inherits<BaseStruct>]
@@ -42,7 +42,7 @@ public class InheritsAttributeTests {
             SourceGeneration.GetEmptyGenerationSource("ChildStruct"),
             ("ChildStruct.Inheritance.InteropGenerator.g.cs", childStructInheritanceCode));
     }
-    
+
     [Fact]
     public async Task BasicFieldInheritanceOffset() {
         const string code = """
@@ -52,7 +52,7 @@ public class InheritsAttributeTests {
                             {
                                 [FieldOffset(16)] public int Field0;
                             }
-                            
+
                             [StructLayout(LayoutKind.Explicit, Size=28)]
                             [GenerateInterop]
                             [Inherits<BaseStruct>]
@@ -80,7 +80,7 @@ public class InheritsAttributeTests {
             SourceGeneration.GetEmptyGenerationSource("ChildStruct"),
             ("ChildStruct.Inheritance.InteropGenerator.g.cs", childStructInheritanceCode));
     }
-    
+
     [Fact]
     public async Task BasicFieldInheritanceExplicitParentOffset() {
         const string code = """
@@ -90,7 +90,7 @@ public class InheritsAttributeTests {
                             {
                                 [FieldOffset(0)] public int Field0;
                             }
-                            
+
                             [StructLayout(LayoutKind.Explicit, Size=24)]
                             [GenerateInterop]
                             [Inherits<BaseStruct>(parentOffset: 16)]
@@ -118,7 +118,7 @@ public class InheritsAttributeTests {
             SourceGeneration.GetEmptyGenerationSource("ChildStruct"),
             ("ChildStruct.Inheritance.InteropGenerator.g.cs", childStructInheritanceCode));
     }
-    
+
     [Fact]
     public async Task ChainedFieldInheritance() {
         const string code = """
@@ -128,7 +128,7 @@ public class InheritsAttributeTests {
                             {
                                 [FieldOffset(0)] public int BaseStruct_Field0;
                             }
-                            
+
                             [StructLayout(LayoutKind.Explicit, Size=8)]
                             [GenerateInterop(true)]
                             [Inherits<BaseStruct>]
@@ -136,7 +136,7 @@ public class InheritsAttributeTests {
                             {
                                 [FieldOffset(4)] public int MiddleStruct_Field4;
                             }
-                            
+
                             [StructLayout(LayoutKind.Explicit, Size=12)]
                             [GenerateInterop]
                             [Inherits<MiddleStruct>]
@@ -181,7 +181,7 @@ public class InheritsAttributeTests {
             ("MiddleStruct.Inheritance.InteropGenerator.g.cs", middleStructInheritanceCode),
             ("ChildStruct.Inheritance.InteropGenerator.g.cs", childStructInheritanceCode));
     }
-    
+
     [Fact]
     public async Task FieldMultipleInheritance() {
         const string code = """
@@ -191,14 +191,14 @@ public class InheritsAttributeTests {
                             {
                                 [FieldOffset(0)] public int BaseStruct_Field0;
                             }
-                            
+
                             [StructLayout(LayoutKind.Explicit, Size=4)]
                             [GenerateInterop(true)]
                             public partial struct BaseStruct2
                             {
                                 [FieldOffset(0)] public int BaseStruct2_Field0;
                             }
-                            
+
                             [StructLayout(LayoutKind.Explicit, Size=12)]
                             [GenerateInterop]
                             [Inherits<BaseStruct>]
@@ -233,7 +233,7 @@ public class InheritsAttributeTests {
             SourceGeneration.GetEmptyGenerationSource("ChildStruct"),
             ("ChildStruct.Inheritance.InteropGenerator.g.cs", childStructInheritanceCode));
     }
-    
+
     [Fact]
     public async Task MemberFunctionInheritance() {
         const string code = """
@@ -244,7 +244,7 @@ public class InheritsAttributeTests {
                                 [MemberFunction("AA BB CC DD ?? ?? ?? ?? AA BB ?? DD")]
                                 public partial int TestFunction(int argOne, void * argTwo);
                             }
-                            
+
                             [StructLayout(LayoutKind.Explicit, Size=8)]
                             [GenerateInterop]
                             [Inherits<BaseStruct>]
@@ -252,29 +252,29 @@ public class InheritsAttributeTests {
                             {
                             }
                             """;
-        
+
         const string baseStructGeneratedCode = """
-                              // <auto-generated/>
-                              unsafe partial struct BaseStruct
-                              {
-                                  public static class Addresses
-                                  {
-                                      public static readonly Address TestFunction = new Address("BaseStruct.TestFunction", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD ?? ?? ?? ??", 0, new ulong[] {0x00000000DDCCBBAA, 0x00000000DD00BBAA}, new ulong[] {0x00000000FFFFFFFF, 0x00000000FF00FFFF}, 0);
-                                  }
-                                  public unsafe static class MemberFunctionPointers
-                                  {
-                                      public static delegate* unmanaged[Stdcall] <BaseStruct*, int, void*, int> TestFunction => (delegate* unmanaged[Stdcall] <BaseStruct*, int, void*, int>) BaseStruct.Addresses.TestFunction.Value;
-                                  }
-                                  public partial int TestFunction(int argOne, void* argTwo)
-                                  {
-                                      if (MemberFunctionPointers.TestFunction is null)
-                                      {
-                                          InteropGenerator.Runtime.ThrowHelper.ThrowNullAddress("BaseStruct.TestFunction", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD");
-                                      }
-                                      return MemberFunctionPointers.TestFunction((BaseStruct*)Unsafe.AsPointer(ref this), argOne, argTwo);
-                                  }
-                              }
-                              """;
+                                               // <auto-generated/>
+                                               unsafe partial struct BaseStruct
+                                               {
+                                                   public static class Addresses
+                                                   {
+                                                       public static readonly Address TestFunction = new Address("BaseStruct.TestFunction", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD ?? ?? ?? ??", 0, new ulong[] {0x00000000DDCCBBAA, 0x00000000DD00BBAA}, new ulong[] {0x00000000FFFFFFFF, 0x00000000FF00FFFF}, 0);
+                                                   }
+                                                   public unsafe static class MemberFunctionPointers
+                                                   {
+                                                       public static delegate* unmanaged[Stdcall] <BaseStruct*, int, void*, int> TestFunction => (delegate* unmanaged[Stdcall] <BaseStruct*, int, void*, int>) BaseStruct.Addresses.TestFunction.Value;
+                                                   }
+                                                   public partial int TestFunction(int argOne, void* argTwo)
+                                                   {
+                                                       if (MemberFunctionPointers.TestFunction is null)
+                                                       {
+                                                           InteropGenerator.Runtime.ThrowHelper.ThrowNullAddress("BaseStruct.TestFunction", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD");
+                                                       }
+                                                       return MemberFunctionPointers.TestFunction((BaseStruct*)Unsafe.AsPointer(ref this), argOne, argTwo);
+                                                   }
+                                               }
+                                               """;
 
         const string childStructInheritanceCode = """
                                                   // <auto-generated/>
@@ -296,7 +296,7 @@ public class InheritsAttributeTests {
             ("ChildStruct.Inheritance.InteropGenerator.g.cs", childStructInheritanceCode),
             SourceGeneration.GetInitializerSource(string.Empty, "BaseStruct", ["TestFunction"]));
     }
-    
+
     [Fact]
     public async Task MemberFunctionChainedInheritance() {
         const string code = """
@@ -307,14 +307,14 @@ public class InheritsAttributeTests {
                                 [MemberFunction("AA BB CC DD ?? ?? ?? ?? AA BB ?? DD")]
                                 public partial int TestFunction(int argOne, void * argTwo);
                             }
-                            
+
                             [StructLayout(LayoutKind.Explicit, Size=8)]
                             [GenerateInterop(true)]
                             [Inherits<BaseStruct>]
                             public partial struct MiddleStruct
                             {
                             }
-                            
+
                             [StructLayout(LayoutKind.Explicit, Size=12)]
                             [GenerateInterop]
                             [Inherits<MiddleStruct>]
@@ -322,42 +322,42 @@ public class InheritsAttributeTests {
                             {
                             }
                             """;
-        
+
         const string baseStructGeneratedCode = """
-                              // <auto-generated/>
-                              unsafe partial struct BaseStruct
-                              {
-                                  public static class Addresses
-                                  {
-                                      public static readonly Address TestFunction = new Address("BaseStruct.TestFunction", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD ?? ?? ?? ??", 0, new ulong[] {0x00000000DDCCBBAA, 0x00000000DD00BBAA}, new ulong[] {0x00000000FFFFFFFF, 0x00000000FF00FFFF}, 0);
-                                  }
-                                  public unsafe static class MemberFunctionPointers
-                                  {
-                                      public static delegate* unmanaged[Stdcall] <BaseStruct*, int, void*, int> TestFunction => (delegate* unmanaged[Stdcall] <BaseStruct*, int, void*, int>) BaseStruct.Addresses.TestFunction.Value;
-                                  }
-                                  public partial int TestFunction(int argOne, void* argTwo)
-                                  {
-                                      if (MemberFunctionPointers.TestFunction is null)
-                                      {
-                                          InteropGenerator.Runtime.ThrowHelper.ThrowNullAddress("BaseStruct.TestFunction", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD");
-                                      }
-                                      return MemberFunctionPointers.TestFunction((BaseStruct*)Unsafe.AsPointer(ref this), argOne, argTwo);
-                                  }
-                              }
-                              """;
+                                               // <auto-generated/>
+                                               unsafe partial struct BaseStruct
+                                               {
+                                                   public static class Addresses
+                                                   {
+                                                       public static readonly Address TestFunction = new Address("BaseStruct.TestFunction", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD ?? ?? ?? ??", 0, new ulong[] {0x00000000DDCCBBAA, 0x00000000DD00BBAA}, new ulong[] {0x00000000FFFFFFFF, 0x00000000FF00FFFF}, 0);
+                                                   }
+                                                   public unsafe static class MemberFunctionPointers
+                                                   {
+                                                       public static delegate* unmanaged[Stdcall] <BaseStruct*, int, void*, int> TestFunction => (delegate* unmanaged[Stdcall] <BaseStruct*, int, void*, int>) BaseStruct.Addresses.TestFunction.Value;
+                                                   }
+                                                   public partial int TestFunction(int argOne, void* argTwo)
+                                                   {
+                                                       if (MemberFunctionPointers.TestFunction is null)
+                                                       {
+                                                           InteropGenerator.Runtime.ThrowHelper.ThrowNullAddress("BaseStruct.TestFunction", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD");
+                                                       }
+                                                       return MemberFunctionPointers.TestFunction((BaseStruct*)Unsafe.AsPointer(ref this), argOne, argTwo);
+                                                   }
+                                               }
+                                               """;
 
         const string middleStructInheritanceCode = """
-                                                  // <auto-generated/>
-                                                  unsafe partial struct MiddleStruct
-                                                  {
-                                                      /// <summary>Inherited parent class accessor for <see cref="BaseStruct">BaseStruct</see></summary>
-                                                      [FieldOffset(0)] public BaseStruct BaseStruct;
-                                                      /// <inheritdoc cref="BaseStruct.TestFunction" />
-                                                      /// <remarks>Method inherited from parent class <see cref="BaseStruct">BaseStruct</see>.</remarks>
-                                                      [MethodImpl(MethodImplOptions.AggressiveInlining)]
-                                                      public int TestFunction(int argOne, void* argTwo) => BaseStruct.TestFunction(argOne, argTwo);
-                                                  }
-                                                  """;
+                                                   // <auto-generated/>
+                                                   unsafe partial struct MiddleStruct
+                                                   {
+                                                       /// <summary>Inherited parent class accessor for <see cref="BaseStruct">BaseStruct</see></summary>
+                                                       [FieldOffset(0)] public BaseStruct BaseStruct;
+                                                       /// <inheritdoc cref="BaseStruct.TestFunction" />
+                                                       /// <remarks>Method inherited from parent class <see cref="BaseStruct">BaseStruct</see>.</remarks>
+                                                       [MethodImpl(MethodImplOptions.AggressiveInlining)]
+                                                       public int TestFunction(int argOne, void* argTwo) => BaseStruct.TestFunction(argOne, argTwo);
+                                                   }
+                                                   """;
 
         const string childStructInheritanceCode = """
                                                   // <auto-generated/>
@@ -381,7 +381,7 @@ public class InheritsAttributeTests {
             ("ChildStruct.Inheritance.InteropGenerator.g.cs", childStructInheritanceCode),
             SourceGeneration.GetInitializerSource(string.Empty, "BaseStruct", ["TestFunction"]));
     }
-    
+
     [Fact]
     public async Task VirtualFunctionInheritance() {
         const string code = """
@@ -392,7 +392,7 @@ public class InheritsAttributeTests {
                                 [VirtualFunction(5)]
                                 public partial int TestFunction(int argOne, void * argTwo);
                             }
-                            
+
                             [StructLayout(LayoutKind.Explicit, Size = 8)]
                             [GenerateInterop]
                             [Inherits<BaseStruct>]
@@ -402,19 +402,19 @@ public class InheritsAttributeTests {
                             """;
 
         const string baseStructGeneratedCode = """
-                              // <auto-generated/>
-                              unsafe partial struct BaseStruct
-                              {
-                                  [StructLayout(LayoutKind.Explicit)]
-                                  public unsafe partial struct BaseStructVirtualTable
-                                  {
-                                      [FieldOffset(40)] public delegate* unmanaged[Stdcall] <BaseStruct*, int, void*, int> TestFunction;
-                                  }
-                                  [FieldOffset(0)] public BaseStructVirtualTable* VirtualTable;
-                                  [MethodImpl(MethodImplOptions.AggressiveInlining)]
-                                  public partial int TestFunction(int argOne, void* argTwo) => VirtualTable->TestFunction((BaseStruct*)Unsafe.AsPointer(ref this), argOne, argTwo);
-                              }
-                              """;
+                                               // <auto-generated/>
+                                               unsafe partial struct BaseStruct
+                                               {
+                                                   [StructLayout(LayoutKind.Explicit)]
+                                                   public unsafe partial struct BaseStructVirtualTable
+                                                   {
+                                                       [FieldOffset(40)] public delegate* unmanaged[Stdcall] <BaseStruct*, int, void*, int> TestFunction;
+                                                   }
+                                                   [FieldOffset(0)] public BaseStructVirtualTable* VirtualTable;
+                                                   [MethodImpl(MethodImplOptions.AggressiveInlining)]
+                                                   public partial int TestFunction(int argOne, void* argTwo) => VirtualTable->TestFunction((BaseStruct*)Unsafe.AsPointer(ref this), argOne, argTwo);
+                                               }
+                                               """;
 
         const string childStructInheritanceGeneratedCode = """
                                                            // <auto-generated/>
@@ -434,14 +434,14 @@ public class InheritsAttributeTests {
                                                                public int TestFunction(int argOne, void* argTwo) => VirtualTable->TestFunction((ChildStruct*)Unsafe.AsPointer(ref this), argOne, argTwo);
                                                            }
                                                            """;
-        
+
         await VerifyIG.VerifyGeneratorAsync(
             code,
             ("BaseStruct.InteropGenerator.g.cs", baseStructGeneratedCode),
             SourceGeneration.GetEmptyGenerationSource("ChildStruct"),
             ("ChildStruct.Inheritance.InteropGenerator.g.cs", childStructInheritanceGeneratedCode));
     }
-    
+
     [Fact]
     public async Task VirtualFunctionInheritanceExistingVirtualTable() {
         const string code = """
@@ -452,7 +452,7 @@ public class InheritsAttributeTests {
                                 [VirtualFunction(5)]
                                 public partial int TestFunction(int argOne, void * argTwo);
                             }
-                            
+
                             [StructLayout(LayoutKind.Explicit, Size = 8)]
                             [GenerateInterop]
                             [Inherits<BaseStruct>]
@@ -464,19 +464,19 @@ public class InheritsAttributeTests {
                             """;
 
         const string baseStructGeneratedCode = """
-                              // <auto-generated/>
-                              unsafe partial struct BaseStruct
-                              {
-                                  [StructLayout(LayoutKind.Explicit)]
-                                  public unsafe partial struct BaseStructVirtualTable
-                                  {
-                                      [FieldOffset(40)] public delegate* unmanaged[Stdcall] <BaseStruct*, int, void*, int> TestFunction;
-                                  }
-                                  [FieldOffset(0)] public BaseStructVirtualTable* VirtualTable;
-                                  [MethodImpl(MethodImplOptions.AggressiveInlining)]
-                                  public partial int TestFunction(int argOne, void* argTwo) => VirtualTable->TestFunction((BaseStruct*)Unsafe.AsPointer(ref this), argOne, argTwo);
-                              }
-                              """;
+                                               // <auto-generated/>
+                                               unsafe partial struct BaseStruct
+                                               {
+                                                   [StructLayout(LayoutKind.Explicit)]
+                                                   public unsafe partial struct BaseStructVirtualTable
+                                                   {
+                                                       [FieldOffset(40)] public delegate* unmanaged[Stdcall] <BaseStruct*, int, void*, int> TestFunction;
+                                                   }
+                                                   [FieldOffset(0)] public BaseStructVirtualTable* VirtualTable;
+                                                   [MethodImpl(MethodImplOptions.AggressiveInlining)]
+                                                   public partial int TestFunction(int argOne, void* argTwo) => VirtualTable->TestFunction((BaseStruct*)Unsafe.AsPointer(ref this), argOne, argTwo);
+                                               }
+                                               """;
 
         const string childStructGeneratedCode = """
                                                 // <auto-generated/>
@@ -509,14 +509,14 @@ public class InheritsAttributeTests {
                                                                public int TestFunction(int argOne, void* argTwo) => VirtualTable->TestFunction((ChildStruct*)Unsafe.AsPointer(ref this), argOne, argTwo);
                                                            }
                                                            """;
-        
+
         await VerifyIG.VerifyGeneratorAsync(
             code,
             ("BaseStruct.InteropGenerator.g.cs", baseStructGeneratedCode),
             ("ChildStruct.InteropGenerator.g.cs", childStructGeneratedCode),
             ("ChildStruct.Inheritance.InteropGenerator.g.cs", childStructInheritanceGeneratedCode));
     }
-    
+
     [Fact]
     public async Task VirtualFunctionInheritanceNotMainParent() {
         const string code = """
@@ -525,14 +525,14 @@ public class InheritsAttributeTests {
                             public partial struct BaseStruct
                             {
                             }
-                            
+
                             [StructLayout(LayoutKind.Explicit, Size=4)]
                             [GenerateInterop(true)]
                             public unsafe partial struct BaseStruct2
                             {
                                 [VirtualFunction(5)] public partial int TestFunction(int argOne, void * argTwo);
                             }
-                            
+
                             [StructLayout(LayoutKind.Explicit, Size=12)]
                             [GenerateInterop]
                             [Inherits<BaseStruct>]
@@ -541,7 +541,7 @@ public class InheritsAttributeTests {
                             {
                             }
                             """;
-        
+
         const string baseStruct2Code = """
                                        // <auto-generated/>
                                        unsafe partial struct BaseStruct2
@@ -579,6 +579,128 @@ public class InheritsAttributeTests {
             SourceGeneration.GetEmptyGenerationSource("ChildStruct"),
             ("ChildStruct.Inheritance.InteropGenerator.g.cs", childStructInheritanceCode));
     }
+    
+        [Fact]
+    public async Task PublicMethodInheritance() {
+        const string code = """
+                            [StructLayout(LayoutKind.Explicit, Size=4)]
+                            [GenerateInterop(true)]
+                            public partial struct BaseStruct
+                            {
+                                public int TestFunction() => 0;
+                                private int TestPrivateFunction() => 0;
+                            }
+
+                            [StructLayout(LayoutKind.Explicit, Size=8)]
+                            [GenerateInterop]
+                            [Inherits<BaseStruct>]
+                            public partial struct ChildStruct
+                            {
+                            }
+                            """;
+
+        const string childStructInheritanceCode = """
+                                                  // <auto-generated/>
+                                                  unsafe partial struct ChildStruct
+                                                  {
+                                                      /// <summary>Inherited parent class accessor for <see cref="BaseStruct">BaseStruct</see></summary>
+                                                      [FieldOffset(0)] public BaseStruct BaseStruct;
+                                                      /// <inheritdoc cref="BaseStruct.TestFunction" />
+                                                      /// <remarks>Method inherited from parent class <see cref="BaseStruct">BaseStruct</see>.</remarks>
+                                                      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+                                                      public int TestFunction() => BaseStruct.TestFunction();
+                                                  }
+                                                  """;
+
+        await VerifyIG.VerifyGeneratorAsync(
+            code,
+            SourceGeneration.GetEmptyGenerationSource("BaseStruct"),
+            SourceGeneration.GetEmptyGenerationSource("ChildStruct"),
+            ("ChildStruct.Inheritance.InteropGenerator.g.cs", childStructInheritanceCode));
+    }
+    
+    [Fact]
+    public async Task StringOverloadsInheritance() {
+        const string code = """
+                            [StructLayout(LayoutKind.Explicit, Size = 4)]
+                            [GenerateInterop(true)]
+                            public unsafe partial struct BaseStruct
+                            {
+                                [GenerateStringOverloads]
+                                public int TestFunction(int argOne, byte* stringArg) { return 0; }
+                            }
+                            
+                            [StructLayout(LayoutKind.Explicit, Size = 8)]
+                            [GenerateInterop]
+                            [Inherits<BaseStruct>]
+                            public partial struct ChildStruct
+                            {
+                            }
+                            """;
+
+        const string baseStructCode = """
+                                      // <auto-generated/>
+                                      unsafe partial struct BaseStruct
+                                      {
+                                          public int TestFunction(int argOne, string stringArg)
+                                          {
+                                              int stringArgUTF8StrLen = global::System.Text.Encoding.UTF8.GetByteCount(stringArg);
+                                              Span<byte> stringArgBytes = stringArgUTF8StrLen <= 512 ? stackalloc byte[stringArgUTF8StrLen + 1] : new byte[stringArgUTF8StrLen + 1];
+                                              global::System.Text.Encoding.UTF8.GetBytes(stringArg, stringArgBytes);
+                                              stringArgBytes[stringArgUTF8StrLen] = 0;
+                                              fixed (byte* stringArgPtr = stringArgBytes)
+                                              {
+                                                  return TestFunction(argOne, stringArgPtr);
+                                              }
+                                          }
+                                          public int TestFunction(int argOne, ReadOnlySpan<byte> stringArg)
+                                          {
+                                              fixed (byte* stringArgPtr = stringArg)
+                                              {
+                                                  return TestFunction(argOne, stringArgPtr);
+                                              }
+                                          }
+                                      }
+                                      """;
+
+        const string childStructGeneratedCode = """
+                                                // <auto-generated/>
+                                                unsafe partial struct ChildStruct
+                                                {
+                                                    /// <summary>Inherited parent class accessor for <see cref="BaseStruct">BaseStruct</see></summary>
+                                                    [FieldOffset(0)] public BaseStruct BaseStruct;
+                                                    /// <inheritdoc cref="BaseStruct.TestFunction" />
+                                                    /// <remarks>Method inherited from parent class <see cref="BaseStruct">BaseStruct</see>.</remarks>
+                                                    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+                                                    public int TestFunction(int argOne, byte* stringArg) => BaseStruct.TestFunction(argOne, stringArg);
+                                                    public int TestFunction(int argOne, string stringArg)
+                                                    {
+                                                        int stringArgUTF8StrLen = global::System.Text.Encoding.UTF8.GetByteCount(stringArg);
+                                                        Span<byte> stringArgBytes = stringArgUTF8StrLen <= 512 ? stackalloc byte[stringArgUTF8StrLen + 1] : new byte[stringArgUTF8StrLen + 1];
+                                                        global::System.Text.Encoding.UTF8.GetBytes(stringArg, stringArgBytes);
+                                                        stringArgBytes[stringArgUTF8StrLen] = 0;
+                                                        fixed (byte* stringArgPtr = stringArgBytes)
+                                                        {
+                                                            return TestFunction(argOne, stringArgPtr);
+                                                        }
+                                                    }
+                                                    public int TestFunction(int argOne, ReadOnlySpan<byte> stringArg)
+                                                    {
+                                                        fixed (byte* stringArgPtr = stringArg)
+                                                        {
+                                                            return TestFunction(argOne, stringArgPtr);
+                                                        }
+                                                    }
+                                                }
+                                                """;
+
+        await VerifyIG.VerifyGeneratorAsync(
+            code,
+            ("BaseStruct.InteropGenerator.g.cs", baseStructCode),
+            SourceGeneration.GetEmptyGenerationSource("ChildStruct"),
+            ("ChildStruct.Inheritance.InteropGenerator.g.cs", childStructGeneratedCode));
+    }
+    
     // [Fact]
     // public async Task ComplexInheritance() {
     //     const string code = """

@@ -12,12 +12,13 @@ internal static class IncrementalGeneratorVerifier<TIncrementalGenerator>
         => await VerifyGeneratorAsync(source, [generatedSource]);
 
     public static async Task VerifyGeneratorAsync(string source, params (string filename, string content)[] generatedSources) {
-                                      
+
         var test = new IncrementalGeneratorTest<TIncrementalGenerator> {
             TestState = {
-                Sources = { 
+                Sources = {
                     GlobalUsings.GetSource,
-                    source },
+                    source
+                },
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
                 AdditionalReferences = { MetadataReference.CreateFromFile(typeof(GenerateInteropAttribute).Assembly.Location) }
             }

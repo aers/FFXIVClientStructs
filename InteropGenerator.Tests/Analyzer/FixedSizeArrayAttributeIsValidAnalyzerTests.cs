@@ -9,11 +9,11 @@ public class FixedSizeArrayAttributeIsValidAnalyzerTests {
     public async Task FixedSizeArrayAttributeIsValid_NoWarn() {
         const string code = """
                             [InlineArray(10)]
-                            public struct FixedSizeArray10<T> where T : unmanaged 
+                            public struct FixedSizeArray10<T> where T : unmanaged
                             {
                                 private T _element0;
                             }
-                            
+
                             [StructLayout(LayoutKind.Explicit, Size=40)]
                             [GenerateInterop]
                             public partial struct TestStruct
@@ -23,7 +23,7 @@ public class FixedSizeArrayAttributeIsValidAnalyzerTests {
                             """;
         await AnalyzerVerifier<FixedSizeArrayAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
     }
-    
+
     [Fact]
     public async Task FixedSizeArrayAttributeNotPrivate_Warn() {
         const string code = """
@@ -42,7 +42,7 @@ public class FixedSizeArrayAttributeIsValidAnalyzerTests {
                             """;
         await AnalyzerVerifier<FixedSizeArrayAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
     }
-    
+
     [Fact]
     public async Task FixedSizeArrayAttributeFieldTypeMustStartWithFixedSizeArray_Warn() {
         const string code = """
@@ -61,7 +61,7 @@ public class FixedSizeArrayAttributeIsValidAnalyzerTests {
                             """;
         await AnalyzerVerifier<FixedSizeArrayAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
     }
-    
+
     [Fact]
     public async Task FixedSizeArrayAttributeFieldTypeMustEndWithSize_Warn() {
         const string code = """

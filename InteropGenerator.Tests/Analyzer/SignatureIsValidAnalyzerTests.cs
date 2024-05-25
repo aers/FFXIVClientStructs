@@ -18,7 +18,7 @@ public class SignatureIsValidAnalyzerTests {
 
         await AnalyzerVerifier<SignatureIsValidAnalyzer>.VerifyAnalyzerAsync(code);
     }
-    
+
     [Fact]
     public async Task SignatureIsValid_StaticAddress_NoWarn() {
         const string code = """
@@ -32,7 +32,7 @@ public class SignatureIsValidAnalyzerTests {
 
         await AnalyzerVerifier<SignatureIsValidAnalyzer>.VerifyAnalyzerAsync(code);
     }
-    
+
     [Fact]
     public async Task SignatureIsValid_VirtualTable_NoWarn() {
         const string code = """
@@ -45,7 +45,7 @@ public class SignatureIsValidAnalyzerTests {
 
         await AnalyzerVerifier<SignatureIsValidAnalyzer>.VerifyAnalyzerAsync(code);
     }
-    
+
     [Fact]
     public async Task SignatureIsInvalid_MemberFunction_Warn() {
         const string code = """
@@ -59,7 +59,7 @@ public class SignatureIsValidAnalyzerTests {
 
         await AnalyzerVerifier<SignatureIsValidAnalyzer>.VerifyAnalyzerAsync(code);
     }
-    
+
     [Fact]
     public async Task SignatureIsInvalid_StaticAddress_Warn() {
         const string code = """
@@ -73,7 +73,7 @@ public class SignatureIsValidAnalyzerTests {
 
         await AnalyzerVerifier<SignatureIsValidAnalyzer>.VerifyAnalyzerAsync(code);
     }
-    
+
     [Fact]
     public async Task SignatureIsInvalid_VirtualTable_Warn() {
         const string code = """
@@ -86,7 +86,7 @@ public class SignatureIsValidAnalyzerTests {
 
         await AnalyzerVerifier<SignatureIsValidAnalyzer>.VerifyAnalyzerAsync(code);
     }
-    
+
     [Fact]
     public async Task SignatureContainsInvalidCharacters_Warn() {
         const string code = """
@@ -100,7 +100,7 @@ public class SignatureIsValidAnalyzerTests {
 
         await AnalyzerVerifier<SignatureIsValidAnalyzer>.VerifyAnalyzerAsync(code);
     }
-    
+
     [Fact]
     public async Task SignatureFormatInvalid_NoSpacesBetweenBytes_Warn() {
         const string code = """
@@ -114,7 +114,7 @@ public class SignatureIsValidAnalyzerTests {
 
         await AnalyzerVerifier<SignatureIsValidAnalyzer>.VerifyAnalyzerAsync(code);
     }
-    
+
     [Fact]
     public async Task SignatureFormatInvalid_LeadingWhitespace_Warn() {
         const string code = """
@@ -128,7 +128,7 @@ public class SignatureIsValidAnalyzerTests {
 
         await AnalyzerVerifier<SignatureIsValidAnalyzer>.VerifyAnalyzerAsync(code);
     }
-    
+
     [Fact]
     public async Task SignatureFormatInvalid_TrailingWhitespace_Warn() {
         const string code = """
@@ -142,7 +142,7 @@ public class SignatureIsValidAnalyzerTests {
 
         await AnalyzerVerifier<SignatureIsValidAnalyzer>.VerifyAnalyzerAsync(code);
     }
-    
+
     [Fact]
     public async Task SignatureFormatInvalid_Empty_Warn() {
         const string code = """

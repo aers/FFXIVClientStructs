@@ -41,12 +41,12 @@ public class GenerateStringOverloadsAttributeTests {
                                   }
                               }
                               """;
-        
+
         await VerifyIG.VerifyGeneratorAsync(
             code,
             ("TestStruct.InteropGenerator.g.cs", result));
     }
-   
+
     [Fact]
     public async Task GenerateMultipleStringOverloads() {
         const string code = """
@@ -93,12 +93,12 @@ public class GenerateStringOverloadsAttributeTests {
                                   }
                               }
                               """;
-        
+
         await VerifyIG.VerifyGeneratorAsync(
             code,
             ("TestStruct.InteropGenerator.g.cs", result));
     }
-    
+
     [Fact]
     public async Task GenerateStringOverloadsWithIgnoredParam() {
         const string code = """
@@ -135,12 +135,12 @@ public class GenerateStringOverloadsAttributeTests {
                                   }
                               }
                               """;
-        
+
         await VerifyIG.VerifyGeneratorAsync(
             code,
             ("TestStruct.InteropGenerator.g.cs", result));
     }
-    
+
     [Fact]
     public async Task GenerateStringOverloadsPartialFunction() {
         const string code = """
@@ -193,7 +193,7 @@ public class GenerateStringOverloadsAttributeTests {
                                   }
                               }
                               """;
-        
+
         await VerifyIG.VerifyGeneratorAsync(
             code,
             ("TestStruct.InteropGenerator.g.cs", result),

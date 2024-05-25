@@ -16,7 +16,7 @@ public class GenerateInteropAttributeIsValidAnalyzerTests {
                             """;
         await AnalyzerVerifier<GenerateInteropAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
     }
-    
+
     [Fact]
     public async Task TargetStructIsNotPartial_Warn() {
         const string code = """
@@ -28,7 +28,7 @@ public class GenerateInteropAttributeIsValidAnalyzerTests {
                             """;
         await AnalyzerVerifier<GenerateInteropAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
     }
-    
+
     [Fact]
     public async Task TargetStructValidNesting_NoWarn() {
         const string code = """
@@ -58,8 +58,7 @@ public class GenerateInteropAttributeIsValidAnalyzerTests {
                             """;
         await AnalyzerVerifier<GenerateInteropAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
     }
-    
- 
+
 
     [Fact]
     public async Task TargetStructNestedInClass_Warn() {
@@ -75,7 +74,7 @@ public class GenerateInteropAttributeIsValidAnalyzerTests {
                             """;
         await AnalyzerVerifier<GenerateInteropAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
     }
-    
+
     [Fact]
     public async Task TargetStructMustHaveStructLayoutAttribute_Warn() {
         const string code = """
@@ -86,7 +85,7 @@ public class GenerateInteropAttributeIsValidAnalyzerTests {
                             """;
         await AnalyzerVerifier<GenerateInteropAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
     }
-    
+
     [Fact]
     public async Task TargetStructMustHaveExplicitLayout_Warn() {
         const string code = """
@@ -98,7 +97,7 @@ public class GenerateInteropAttributeIsValidAnalyzerTests {
                             """;
         await AnalyzerVerifier<GenerateInteropAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
     }
-    
+
     [Fact]
     public async Task TargetStructMustHaveExplicitSize_Warn() {
         const string code = """

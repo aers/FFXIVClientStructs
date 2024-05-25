@@ -68,22 +68,37 @@ public sealed partial class InteropGenerator {
         // inherited member functions
         foreach ((StructInfo inheritedStruct, string path, _) in resolvedInheritanceOrder) {
             if (!inheritedStruct.MemberFunctions.IsEmpty)
-                WriteInheritedMemberFunctions(inheritedStruct, path, writer);
+                RenderInheritedMemberFunctions(inheritedStruct, path, writer);
         }
 
         token.ThrowIfCancellationRequested();
 
         // add entries to the main virtual table for the primary inheritance chain
         if (hasPrimaryVirtualFunctions)
-            WriteInheritedVirtualTable(structInfo, resolvedInheritanceOrder, writer);
+            RenderInheritedVirtualTable(structInfo, resolvedInheritanceOrder, writer);
 
         // inherited virtual function bodies
         foreach ((StructInfo inheritedStruct, string path, int offset) in resolvedInheritanceOrder) {
             if (!inheritedStruct.VirtualFunctions.IsEmpty)
-                WriteInheritedVirtualFunctions(structInfo.Name, inheritedStruct, path, offset, writer);
+                RenderInheritedVirtualFunctions(structInfo.Name, inheritedStruct, path, offset, writer);
         }
         
         token.ThrowIfCancellationRequested();
+        
+        // inherited public methods
+        foreach ((StructInfo inheritedStruct, string path, _) in resolvedInheritanceOrder) {
+            if (!inheritedStruct.ExtraInheritedStructInfo!.PublicMethods.IsEmpty)
+                RenderInheritedPublicMethods(inheritedStruct, path, writer);
+        }
+
+        token.ThrowIfCancellationRequested();
+        
+        // inherited string overloads
+        // we can just use the regular renderer here since the overloaded function should also be inherited
+        foreach ((StructInfo inheritedStruct, _, _) in resolvedInheritanceOrder) {
+            if (!inheritedStruct.StringOverloads.IsEmpty)
+                RenderStringOverloads(inheritedStruct, writer);
+        }
     }
 
     private static int ResolveInheritanceOrder(StructInfo structInfo, string path, int offset, int index, ImmutableArray<StructInfo> inheritedStructs, ImmutableArrayBuilder<(StructInfo inheritedStruct, string path, int offset)> resolvedInheritanceOrder, ref bool hasPrimaryVirtualFunctions) {
@@ -105,7 +120,7 @@ public sealed partial class InteropGenerator {
             processed += ResolveInheritanceOrder(currentStruct, newPath, offset, index + processed, inheritedStructs, resolvedInheritanceOrder, ref hasPrimaryVirtualFunctions);
 
             resolvedInheritanceOrder.Add((currentStruct, newPath, offset));
-            if (offset == 0 && currentStruct.VirtualFunctions.Length != 0)
+            if (offset == 0 && !currentStruct.VirtualFunctions.IsEmpty)
                 hasPrimaryVirtualFunctions = true;
 
             offset += currentStruct.ExtraInheritedStructInfo!.Size;
@@ -113,7 +128,7 @@ public sealed partial class InteropGenerator {
         return processed;
     }
 
-    private static void WriteInheritedMemberFunctions(StructInfo inheritedStruct, string path, IndentedTextWriter writer) {
+    private static void RenderInheritedMemberFunctions(StructInfo inheritedStruct, string path, IndentedTextWriter writer) {
         foreach (MemberFunctionInfo memberFunctionInfo in inheritedStruct.MemberFunctions) {
             MethodInfo methodInfo = memberFunctionInfo.MethodInfo;
             writer.WriteLine($"""/// <inheritdoc cref="{inheritedStruct.FullyQualifiedMetadataName}.{methodInfo.Name}" />""");
@@ -124,7 +139,7 @@ public sealed partial class InteropGenerator {
         }
     }
 
-    private static void WriteInheritedVirtualTable(StructInfo structInfo, ImmutableArray<(StructInfo inheritedStruct, string path, int offset)> resolvedInheritanceOrder, IndentedTextWriter writer) {
+    private static void RenderInheritedVirtualTable(StructInfo structInfo, ImmutableArray<(StructInfo inheritedStruct, string path, int offset)> resolvedInheritanceOrder, IndentedTextWriter writer) {
         // write virtual function pointers from inherited structs using the child struct type as the "this" pointer
         // StructLayout can't be duplicated so only write it if it hasnt been written before
         if (!structInfo.HasVirtualTable())
@@ -147,7 +162,7 @@ public sealed partial class InteropGenerator {
         }
     }
 
-    private static void WriteInheritedVirtualFunctions(string childTypeName, StructInfo inheritedStruct, string path, int offset, IndentedTextWriter writer) {
+    private static void RenderInheritedVirtualFunctions(string childTypeName, StructInfo inheritedStruct, string path, int offset, IndentedTextWriter writer) {
         foreach (VirtualFunctionInfo virtualFunctionInfo in inheritedStruct.VirtualFunctions) {
             MethodInfo methodInfo = virtualFunctionInfo.MethodInfo;
             writer.WriteLine($"""/// <inheritdoc cref="{inheritedStruct.FullyQualifiedMetadataName}.{methodInfo.Name}" />""");
@@ -162,6 +177,16 @@ public sealed partial class InteropGenerator {
             } else {
                 writer.WriteLine($"{methodInfo.GetDeclarationStringWithoutPartial()} => {path}.{methodInfo.Name}({methodInfo.GetParameterNamesString()});");
             }
+        }
+    }
+    
+    private static void RenderInheritedPublicMethods(StructInfo inheritedStruct, string path, IndentedTextWriter writer) {
+        foreach (MethodInfo methodInfo in inheritedStruct.ExtraInheritedStructInfo!.PublicMethods) {
+            writer.WriteLine($"""/// <inheritdoc cref="{inheritedStruct.FullyQualifiedMetadataName}.{methodInfo.Name}" />""");
+            writer.WriteLine($"""/// <remarks>Method inherited from parent class <see cref="{inheritedStruct.FullyQualifiedMetadataName}">{inheritedStruct.Name}</see>.</remarks>""");
+            writer.WriteLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
+            // public int SomeInheritedMethod(int param, int param2) => Path.To.Parent.SomeInheritedMethod(param, param2);
+            writer.WriteLine($"{methodInfo.GetDeclarationStringWithoutPartial()} => {path}.{methodInfo.Name}({methodInfo.GetParameterNamesString()});");
         }
     }
 }

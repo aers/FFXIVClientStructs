@@ -9,39 +9,39 @@ namespace InteropGenerator.Runtime;
 public sealed partial class Resolver {
     private static readonly Lazy<Resolver> Instance = new(() => new Resolver());
 
+    private readonly List<Address> _addresses = new();
+
+    private readonly List<Address>?[] _preResolveArray = new List<Address>[256];
+
+    private nint _baseAddress;
+    private bool _cacheChanged;
+    private FileInfo? _cacheFile;
+    private int _dataSectionOffset;
+    private int _dataSectionSize;
+
+    private bool _hasResolved;
+    private bool _isSetup;
+    private int _rdataSectionOffset;
+    private int _rdataSectionSize;
+    private int _targetLength;
+
+    private nint _targetSpace;
+
+    private ConcurrentDictionary<string, long>? _textCache;
+
+    private int _textSectionOffset;
+    private int _textSectionSize;
+    private int _totalBuckets;
+
     private Resolver() {
     }
 
     public static Resolver GetInstance => Instance.Value;
-
-    private readonly List<Address>?[] _preResolveArray = new List<Address>[256];
-    private int _totalBuckets;
-
-    private readonly List<Address> _addresses = new();
     public IReadOnlyList<Address> Addresses => _addresses.AsReadOnly();
-
-    private ConcurrentDictionary<string, long>? _textCache;
-    private FileInfo? _cacheFile;
-    private bool _cacheChanged = false;
-
-    private nint _baseAddress;
-
-    private nint _targetSpace;
-    private int _targetLength;
-
-    private int _textSectionOffset;
-    private int _textSectionSize;
-    private int _dataSectionOffset;
-    private int _dataSectionSize;
-    private int _rdataSectionOffset;
-    private int _rdataSectionSize;
-
-    private bool _hasResolved = false;
-    private bool _isSetup = false;
 
     public void SetupSearchSpace(nint moduleCopy = 0, FileInfo? cacheFile = null) {
         if (_isSetup) return;
-        ProcessModule? module = Process.GetCurrentProcess().MainModule;
+        var module = Process.GetCurrentProcess().MainModule;
         if (module == null)
             throw new Exception("[FFXIVClientStructs.Resolver] Unable to access process module.");
 
@@ -82,22 +82,22 @@ public sealed partial class Resolver {
         ReadOnlySpan<byte> baseAddress = new(_baseAddress.ToPointer(), _targetLength);
 
         // We don't want to read all of IMAGE_DOS_HEADER or IMAGE_NT_HEADER stuff so we cheat here.
-        int ntNewOffset = BitConverter.ToInt32(baseAddress.Slice(0x3C, 4));
-        ReadOnlySpan<byte> ntHeader = baseAddress[ntNewOffset..];
+        var ntNewOffset = BitConverter.ToInt32(baseAddress.Slice(0x3C, 4));
+        var ntHeader = baseAddress[ntNewOffset..];
 
         // IMAGE_NT_HEADER
-        ReadOnlySpan<byte> fileHeader = ntHeader[4..];
-        short numSections = BitConverter.ToInt16(ntHeader.Slice(6, 2));
+        var fileHeader = ntHeader[4..];
+        var numSections = BitConverter.ToInt16(ntHeader.Slice(6, 2));
 
         // IMAGE_OPTIONAL_HEADER
-        ReadOnlySpan<byte> optionalHeader = fileHeader[20..];
+        var optionalHeader = fileHeader[20..];
 
-        ReadOnlySpan<byte> sectionHeader = optionalHeader[240..]; // IMAGE_OPTIONAL_HEADER64
+        var sectionHeader = optionalHeader[240..]; // IMAGE_OPTIONAL_HEADER64
 
         // IMAGE_SECTION_HEADER
-        ReadOnlySpan<byte> sectionCursor = sectionHeader;
-        for (int i = 0; i < numSections; i++) {
-            long sectionName = BitConverter.ToInt64(sectionCursor);
+        var sectionCursor = sectionHeader;
+        for (var i = 0; i < numSections; i++) {
+            var sectionName = BitConverter.ToInt64(sectionCursor);
 
             // .text
             switch (sectionName) {
@@ -144,10 +144,10 @@ public sealed partial class Resolver {
     }
 
     private bool ResolveFromCache() {
-        foreach (Address address in _addresses) {
+        foreach (var address in _addresses) {
             if (_textCache!.TryGetValue(address.CacheKey, out var offset)) {
                 address.Value = (nuint)(offset + _baseAddress);
-                byte firstByte = (byte)address.Bytes[0];
+                var firstByte = (byte)address.Bytes[0];
                 _preResolveArray[firstByte]!.Remove(address);
                 if (_preResolveArray[firstByte]!.Count == 0) {
                     _preResolveArray[firstByte] = null;
@@ -172,21 +172,21 @@ public sealed partial class Resolver {
                 return;
         }
 
-        ReadOnlySpan<byte> targetSpan = new ReadOnlySpan<byte>(_targetSpace.ToPointer(), _targetLength)[_textSectionOffset..];
+        var targetSpan = new ReadOnlySpan<byte>(_targetSpace.ToPointer(), _targetLength)[_textSectionOffset..];
 
-        for (int location = 0; location < _textSectionSize; location++) {
+        for (var location = 0; location < _textSectionSize; location++) {
             if (_preResolveArray[targetSpan[location]] is not null) {
-                Address[] availableAddresses = _preResolveArray[targetSpan[location]]!.ToArray();
+                var availableAddresses = _preResolveArray[targetSpan[location]]!.ToArray();
 
-                ReadOnlySpan<ulong> targetLocationAsUlong = MemoryMarshal.Cast<byte, ulong>(targetSpan[location..]);
+                var targetLocationAsUlong = MemoryMarshal.Cast<byte, ulong>(targetSpan[location..]);
 
-                int avLen = availableAddresses.Length;
+                var avLen = availableAddresses.Length;
 
-                for (int i = 0; i < avLen; i++) {
-                    Address address = availableAddresses[i];
+                for (var i = 0; i < avLen; i++) {
+                    var address = availableAddresses[i];
 
                     int count;
-                    int length = address.Bytes.Length;
+                    var length = address.Bytes.Length;
 
                     for (count = 0; count < length; count++) {
                         if ((address.Mask[count] & address.Bytes[count]) != (address.Mask[count] & targetLocationAsUlong[count]))
@@ -194,11 +194,11 @@ public sealed partial class Resolver {
                     }
 
                     if (count == length) {
-                        int outLocation = location;
+                        var outLocation = location;
 
                         if (address.RelativeFollowOffset != 0) // relative follow at offset
                         {
-                            int relativeOffset =
+                            var relativeOffset =
                                 BitConverter.ToInt32(targetSpan.Slice(outLocation + address.RelativeFollowOffset, 4));
                             outLocation = outLocation + address.RelativeFollowOffset + 4 + relativeOffset;
                         }
@@ -219,7 +219,7 @@ public sealed partial class Resolver {
                 }
             }
         }
-outLoop:;
+    outLoop: ;
 
         SaveCache();
         _hasResolved = true;
@@ -228,7 +228,7 @@ outLoop:;
     public void RegisterAddress(Address address) {
         _addresses.Add(address);
 
-        byte firstByte = (byte)(address.Bytes[0]);
+        var firstByte = (byte)address.Bytes[0];
 
         if (_preResolveArray[firstByte] is null) {
             _preResolveArray[firstByte] = new List<Address>();

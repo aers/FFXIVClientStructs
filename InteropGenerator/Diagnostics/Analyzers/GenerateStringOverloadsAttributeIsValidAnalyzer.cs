@@ -29,7 +29,7 @@ public sealed class GenerateStringOverloadsAttributeIsValidAnalyzer : Diagnostic
                         return;
 
                     var hasValidParameter = false;
-                    
+
                     foreach (IParameterSymbol parameterSymbol in methodSymbol.Parameters) {
                         bool hasStringIgnore = parameterSymbol.HasAttributeWithType(stringIgnoreAttribute);
                         if (parameterSymbol.Type is not IPointerTypeSymbol { PointedAtType.SpecialType: SpecialType.System_Byte }) {
