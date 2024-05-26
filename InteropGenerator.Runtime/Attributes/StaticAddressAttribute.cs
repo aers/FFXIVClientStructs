@@ -1,3 +1,5 @@
+using System.Collections.Immutable;
+
 namespace InteropGenerator.Runtime.Attributes;
 
 /// <summary>
@@ -6,18 +8,20 @@ namespace InteropGenerator.Runtime.Attributes;
 ///     set isPointer true and leave the return type as a single pointer.
 /// </summary>
 /// <param name="signature">Signature resolving to a reference to the native static address.</param>
-/// <param name="relativeFollowOffset">
+/// <param name="relativeFollowOffsets">
 ///     After resolving signature, offset by this amount and follow the 32-bit relative
-///     address found there.
+///     address found there. Repeats for each entry.
 /// </param>
 /// <param name="isPointer">
 ///     Set to true if the native static address is a pointer. This changes the code generation to
 ///     avoid necessitating double pointer return values.
 /// </param>
 [AttributeUsage(AttributeTargets.Method)]
-public sealed class StaticAddressAttribute(string signature, byte relativeFollowOffset, bool isPointer = false) : Attribute {
+public sealed class StaticAddressAttribute(string signature, byte[] relativeFollowOffsets, bool isPointer = false) : Attribute {
+
+    public StaticAddressAttribute(string signature, byte relativeFollowOffset, bool isPointer = false) : this(signature, [relativeFollowOffset], isPointer) { }
 
     public string Signature { get; } = signature;
-    public byte RelativeFollowOffset { get; } = relativeFollowOffset;
+    public byte[] RelativeFollowOffsets { get; } = relativeFollowOffsets;
     public bool IsPointer { get; } = isPointer;
 }

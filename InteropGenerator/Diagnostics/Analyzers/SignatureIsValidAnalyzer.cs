@@ -19,7 +19,7 @@ public sealed class SignatureIsValidAnalyzer : DiagnosticAnalyzer {
             // get the attribute symbols
             if (context.Compilation.GetTypeByMetadataName(AttributeNames.MemberFunctionAttribute) is not { } memberFunctionAttribute ||
                 context.Compilation.GetTypeByMetadataName(AttributeNames.StaticAddressAttribute) is not { } staticAddressAttribute ||
-                context.Compilation.GetTypeByMetadataName(AttributeNames.VirtualFunctionAttribute) is not { } virtualFunctionAttribute)
+                context.Compilation.GetTypeByMetadataName(AttributeNames.VirtualTableAttribute) is not { } virtualTableAttribute)
                 return;
 
             context.RegisterSymbolAction(context => {
@@ -43,7 +43,7 @@ public sealed class SignatureIsValidAnalyzer : DiagnosticAnalyzer {
                         return;
 
                     // check for signature attribute
-                    if (!structSymbol.TryGetAttributeWithType(virtualFunctionAttribute, out AttributeData? attributeData))
+                    if (!structSymbol.TryGetAttributeWithType(virtualTableAttribute, out AttributeData? attributeData))
                         return;
 
                     if (!attributeData.TryGetConstructorArgument(0, out string? signature))

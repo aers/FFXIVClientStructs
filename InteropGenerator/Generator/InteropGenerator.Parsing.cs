@@ -1,5 +1,6 @@
 ﻿using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.InteropServices.ComTypes;
 using InteropGenerator.Extensions;
 using InteropGenerator.Helpers;
 using InteropGenerator.Models;
@@ -36,9 +37,15 @@ public sealed partial class InteropGenerator {
         // other struct attributes
         SignatureInfo? virtualTableSignatureInfo = null;
         if (structSymbol.TryGetAttributeWithFullyQualifiedMetadataName(AttributeNames.VirtualTableAttribute, out AttributeData? virtualTableAttribute)) {
-            if (virtualTableAttribute.TryGetConstructorArgument(0, out string? signature) &&
-                virtualTableAttribute.TryGetConstructorArgument(1, out byte? relativeOffset)) {
-                virtualTableSignatureInfo = new SignatureInfo(signature, relativeOffset.Value);
+            if (virtualTableAttribute.TryGetConstructorArgument(0, out string? signature)) {
+                if (virtualTableAttribute.ConstructorArguments[1].Kind == TypedConstantKind.Array &&
+                    virtualTableAttribute.TryGetMultiValueConstructorArgument(1, out ImmutableArray<byte>? multipleOffsets)) {
+                    virtualTableSignatureInfo = new SignatureInfo(signature, multipleOffsets.Value);
+                }
+                else if (virtualTableAttribute.TryGetConstructorArgument(1, out byte? singleOffset)) {
+                    ImmutableArray<byte> values = [singleOffset.Value];
+                    virtualTableSignatureInfo = new SignatureInfo(signature, values);
+                }
             }
         }
 
@@ -112,17 +119,29 @@ public sealed partial class InteropGenerator {
 
             // check for one of the method body generation attributes
             if (methodSymbol.TryGetAttributeWithFullyQualifiedMetadataName(AttributeNames.MemberFunctionAttribute, out AttributeData? mfAttribute)) {
-                if (mfAttribute.ConstructorArguments.Length != 2 ||
-                    !mfAttribute.TryGetConstructorArgument(0, out string? signature) ||
-                    !mfAttribute.TryGetConstructorArgument(1, out byte? offset))
-                    continue; // ignore malformed attribute
+                ImmutableArray<byte> relativeOffsets = ImmutableArray<byte>.Empty;
+
+                // get signature 
+                if (!mfAttribute.TryGetConstructorArgument(0, out string? signature))
+                    continue;
+                
+                // if attribute has two arguments, its either a single byte or an array, if neither, attribute is invalid
+                if (mfAttribute.ConstructorArguments.Length == 2) {
+                    if (mfAttribute.ConstructorArguments[1].Kind == TypedConstantKind.Array &&
+                        mfAttribute.TryGetMultiValueConstructorArgument(1, out ImmutableArray<byte>? multipleOffsets))
+                        relativeOffsets = multipleOffsets.Value;
+                    else if (mfAttribute.TryGetConstructorArgument(1, out byte? singleOffset))
+                        relativeOffsets = [singleOffset.Value];
+                    else
+                        continue;
+                }
 
                 if (!TryParseMethod(methodSymbol, token, out methodInfo))
                     continue;
 
                 MemberFunctionInfo memberFunctionInfo = new(
                     methodInfo,
-                    new SignatureInfo(signature, offset.Value));
+                    new SignatureInfo(signature, relativeOffsets));
 
                 memberFunctionsBuilder.Add(memberFunctionInfo);
             } else if (methodSymbol.TryGetAttributeWithFullyQualifiedMetadataName(AttributeNames.VirtualFunctionAttribute, out AttributeData? vfAttribute)) {
@@ -141,16 +160,28 @@ public sealed partial class InteropGenerator {
             } else if (methodSymbol.TryGetAttributeWithFullyQualifiedMetadataName(AttributeNames.StaticAddressAttribute, out AttributeData? saAttribute)) {
                 if (saAttribute.ConstructorArguments.Length != 3 ||
                     !saAttribute.TryGetConstructorArgument(0, out string? signature) ||
-                    !saAttribute.TryGetConstructorArgument(1, out byte? offset) ||
                     !saAttribute.TryGetConstructorArgument(2, out bool? isPointer))
                     continue; // ignore malformed attribute
+
+                ImmutableArray<byte> relativeOffsets;
+                
+                if (saAttribute.ConstructorArguments[1].Kind == TypedConstantKind.Array &&
+                    saAttribute.TryGetMultiValueConstructorArgument(1, out ImmutableArray<byte>? multipleOffsets))
+                {
+                    relativeOffsets = multipleOffsets.Value;
+                }
+                else if (saAttribute.TryGetConstructorArgument(1, out byte? singleOffset)) {
+                    relativeOffsets = [singleOffset.Value];
+                } else {
+                    continue;
+                }
 
                 if (!TryParseMethod(methodSymbol, token, out methodInfo))
                     continue;
 
                 StaticAddressInfo staticAddressInfo = new(
                     methodInfo,
-                    new SignatureInfo(signature, offset.Value),
+                    new SignatureInfo(signature, relativeOffsets),
                     isPointer.Value);
 
                 staticAddressesBuilder.Add(staticAddressInfo);

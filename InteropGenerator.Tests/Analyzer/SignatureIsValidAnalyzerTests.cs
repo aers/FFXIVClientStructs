@@ -77,7 +77,7 @@ public class SignatureIsValidAnalyzerTests {
     [Fact]
     public async Task SignatureIsInvalid_VirtualTable_Warn() {
         const string code = """
-                            [VirtualTable("asdf jkl;", 0)]
+                            [{|CSIG0201:VirtualTable("ab cd ef", 0)|}]
                             [GenerateInterop]
                             public unsafe partial struct TestStruct
                             {

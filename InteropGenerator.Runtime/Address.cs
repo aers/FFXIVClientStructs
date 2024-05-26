@@ -6,17 +6,17 @@ public sealed class Address {
     public readonly ulong[] Mask;
 
     public readonly string Name;
-    public readonly byte RelativeFollowOffset;
+    public readonly byte[] RelativeFollowOffsets;
     public readonly string String;
     public nuint Value;
-    public Address(string name, string @string, byte relativeFollowOffset, ulong[] bytes, ulong[] mask, nuint value) {
+    public Address(string name, string @string, byte[] relativeFollowOffsets, ulong[] bytes, ulong[] mask, nuint value) {
         Name = name;
         String = @string;
-        RelativeFollowOffset = relativeFollowOffset;
+        RelativeFollowOffsets = relativeFollowOffsets;
         Bytes = bytes;
         Mask = mask;
         Value = value;
 
-        CacheKey = relativeFollowOffset == 0 ? $"{String}" : $"{String}+relfollow@0x{RelativeFollowOffset:X}";
+        CacheKey = relativeFollowOffsets.Length == 0 ? $"{String}" : $"{String}+relfollow[{string.Join(',', relativeFollowOffsets)}]";
     }
 }

@@ -196,11 +196,11 @@ public sealed partial class Resolver {
                     if (count == length) {
                         var outLocation = location;
 
-                        if (address.RelativeFollowOffset != 0) // relative follow at offset
+                        foreach(var relOffset in address.RelativeFollowOffsets)
                         {
                             var relativeOffset =
-                                BitConverter.ToInt32(targetSpan.Slice(outLocation + address.RelativeFollowOffset, 4));
-                            outLocation = outLocation + address.RelativeFollowOffset + 4 + relativeOffset;
+                                BitConverter.ToInt32(targetSpan.Slice(outLocation + relOffset, 4));
+                            outLocation = outLocation + relOffset + 4 + relativeOffset;
                         }
 
                         address.Value = (nuint)(_baseAddress + _textSectionOffset + outLocation);

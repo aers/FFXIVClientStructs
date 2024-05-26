@@ -1,6 +1,9 @@
-﻿namespace InteropGenerator.Models;
+﻿using System.Collections.Immutable;
+using InteropGenerator.Helpers;
 
-public record SignatureInfo(string Signature, byte Offset) {
+namespace InteropGenerator.Models;
+
+internal sealed record SignatureInfo(string Signature, EquatableArray<byte> Offsets) {
     public string GetPaddedSignature() {
         int paddingNeeded = 8 - (Signature.Length / 3 + 1) % 8;
         if (paddingNeeded != 0) {
@@ -18,12 +21,12 @@ public record SignatureInfo(string Signature, byte Offset) {
         return Signature;
     }
 
-    public byte GetRelCallAndJumpAdjustedOffset() {
+    public ImmutableArray<byte> GetRelCallAndJumpAdjustedOffset() {
         // handle E8 and E9 jumps automatically
-        if ((Offset == 0 &&
+        if ((Offsets.Length == 0 &&
              Signature.StartsWith("E8")) ||
             Signature.StartsWith("E9"))
-            return 1;
-        return Offset;
+            return [1];
+        return Offsets;
     }
 }

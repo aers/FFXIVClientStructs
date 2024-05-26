@@ -91,7 +91,8 @@ public sealed partial class InteropGenerator {
 
     private static string GetAddressString(StructInfo structInfo, string signatureName, SignatureInfo signatureInfo) {
         string paddedSignature = signatureInfo.GetPaddedSignature();
-        int adjustedOffset = signatureInfo.GetRelCallAndJumpAdjustedOffset();
+        ImmutableArray<byte> relativeOffsets = signatureInfo.GetRelCallAndJumpAdjustedOffset();
+        string offsets = "new byte[] {" + string.Join(", ", relativeOffsets) + "}";
 
         // get signature as ulong array
         IEnumerable<string> groupedSig = paddedSignature.Replace("??", "00").Split()
@@ -112,7 +113,7 @@ public sealed partial class InteropGenerator {
 
         string ulongArrayMask = "new ulong[] {" + string.Join(", ", groupedSigMask) + "}";
 
-        return $"""public static readonly global::InteropGenerator.Runtime.Address {signatureName} = new global::InteropGenerator.Runtime.Address("{structInfo.FullyQualifiedMetadataName}.{signatureName}", "{paddedSignature}", {adjustedOffset}, {ulongArraySignature}, {ulongArrayMask}, 0);""";
+        return $"""public static readonly global::InteropGenerator.Runtime.Address {signatureName} = new global::InteropGenerator.Runtime.Address("{structInfo.FullyQualifiedMetadataName}.{signatureName}", "{paddedSignature}", {offsets}, {ulongArraySignature}, {ulongArrayMask}, 0);""";
     }
 
     private static void RenderVirtualTable(StructInfo structInfo, IndentedTextWriter writer) {
