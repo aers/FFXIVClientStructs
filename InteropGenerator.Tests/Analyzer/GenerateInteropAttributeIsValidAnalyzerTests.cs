@@ -86,10 +86,10 @@ public class GenerateInteropAttributeIsValidAnalyzerTests {
     }
 
     [Fact]
-    public async Task TargetStructMustHaveStructLayoutAttribute_Warn() {
+    public async Task TargetStructNoFieldsDoesntRequireAttribute_NoWarn() {
         const string code = """
                             [GenerateInterop]
-                            public partial struct {|CSIG0004:TestStruct|}
+                            public partial struct TestStruct
                             {
                             }
                             """;
@@ -97,12 +97,39 @@ public class GenerateInteropAttributeIsValidAnalyzerTests {
     }
 
     [Fact]
-    public async Task TargetStructMustHaveExplicitLayout_Warn() {
+    public async Task TargetStructMustHaveStructLayoutAttribute_Warn() {
+        const string code = """
+                            [GenerateInterop]
+                            public partial struct {|CSIG0004:TestStruct|}
+                            {
+                                public int field0;
+                            }
+                            """;
+        await AnalyzerVerifier<GenerateInteropAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
+    }
+
+    [Fact]
+    public async Task TargetStructMustHaveExplicitLayoutIfFields_Warn() {
         const string code = """
                             using System.Runtime.InteropServices;
                             
                             [{|CSIG0005:StructLayout(LayoutKind.Sequential, Size=4)|}]
                             [GenerateInterop]
+                            public partial struct TestStruct
+                            {
+                                public int field0;
+                            }
+                            """;
+        await AnalyzerVerifier<GenerateInteropAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
+    }
+    
+    [Fact]
+    public async Task TargetStructMustHaveExplicitLayoutIfInherited_Warn() {
+        const string code = """
+                            using System.Runtime.InteropServices;
+
+                            [{|CSIG0005:StructLayout(LayoutKind.Sequential, Size=4)|}]
+                            [GenerateInterop(isInherited: true)]
                             public partial struct TestStruct
                             {
                             }
@@ -119,6 +146,7 @@ public class GenerateInteropAttributeIsValidAnalyzerTests {
                             [GenerateInterop]
                             public partial struct TestStruct
                             {
+                                [FieldOffset(0)] public int field0;
                             }
                             """;
         await AnalyzerVerifier<GenerateInteropAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
