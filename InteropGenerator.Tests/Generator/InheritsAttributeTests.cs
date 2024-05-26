@@ -749,4 +749,477 @@ public class InheritsAttributeTests {
             ("ChildStruct.Inheritance.InteropGenerator.g.cs", childStructInheritedCode),
             SourceGeneration.GetFixedSizeArraySource([10]));
     }
+
+    [Fact]
+    public async Task ComplexInheritance() {
+        const string code = """
+                            using System.Runtime.CompilerServices;
+                            using System.Runtime.InteropServices;
+                            using InteropGeneratorTesting;
+                            
+                            // Child        size 32
+                            //   MiddleA    size 12, offset 0
+                            //     BaseA_A  size 4
+                            //     BaseA_B  size 4
+                            //   BaseB      size 4, explicit offset 16
+                            //   MiddleC    size 8, offset 20
+                            //     BaseC    size 4
+                            
+                            [StructLayout(LayoutKind.Explicit, Size=4)]
+                            [GenerateInterop(isInherited: true)]
+                            public unsafe partial struct BaseA_A
+                            {
+                                [FieldOffset(0)] [FixedSizeArray] internal FixedSizeArray4<byte> _baseA_A_field0;
+                                
+                                [VirtualFunction(0)]
+                                public partial void BaseA_A_vf0(int* arg);
+                                
+                                [MemberFunction("E8 ?? ?? ?? ??")]
+                                public partial int BaseA_mf();
+                                
+                                public static void BaseA_StaticFunction() { return; }
+                            }
+                            
+                            [StructLayout(LayoutKind.Explicit, Size=4)]
+                            [GenerateInterop(isInherited: true)]
+                            public unsafe partial struct BaseA_B
+                            {
+                                [FieldOffset(0)] public int BaseA_B_field0;
+                                
+                                [VirtualFunction(0)]
+                                [GenerateStringOverloads]
+                                public partial void BaseA_B_vf0(byte* arg);
+                            }
+                            
+                            [StructLayout(LayoutKind.Explicit, Size=12)]
+                            [GenerateInterop(isInherited: true)]
+                            [Inherits<BaseA_A>]
+                            [Inherits<BaseA_B>]
+                            [VirtualTable("E8 ?? ?? ?? ??", 1)]
+                            public unsafe partial struct MiddleA
+                            {
+                                [FieldOffset(8)] public int MiddleA_field8;
+                                
+                                [VirtualFunction(4)]
+                                public partial void MiddleA_vf4(int* arg);
+                            }
+                            
+                            [StructLayout(LayoutKind.Explicit, Size=4)]
+                            [GenerateInterop(isInherited: true)]
+                            public unsafe partial struct BaseB
+                            {
+                                [FieldOffset(0)] public int BaseB_field0;
+                                
+                                [MemberFunction("E8 ?? ?? ?? ??")]
+                                public partial int BaseB_mf();
+                                
+                                public void BaseB_method() { return; }
+                            }
+                            
+                            [StructLayout(LayoutKind.Explicit, Size=4)]
+                            [GenerateInterop(isInherited: true)]
+                            public unsafe partial struct BaseC
+                            {
+                                [FieldOffset(0)] public int BaseC_field0;
+                                
+                                [VirtualFunction(0)]
+                                public partial void BaseC_vf0(int* arg);
+                                
+                                [StaticAddress("E8 ?? ?? ?? ??", 1)]
+                                public partial byte* BaseC_sa();
+                            }
+                            
+                            [StructLayout(LayoutKind.Explicit, Size=8)]
+                            [GenerateInterop(isInherited: true)]
+                            [Inherits<BaseC>]
+                            public unsafe partial struct MiddleC
+                            {
+                                [FieldOffset(4)] public int MiddleC_field4;
+                                
+                                [MemberFunction("E8 ?? ?? ?? ??")]
+                                public partial int MiddleC_mf();
+                            }
+                            
+                            [StructLayout(LayoutKind.Explicit, Size=32)]
+                            [GenerateInterop]
+                            [Inherits<MiddleA>]
+                            [Inherits<BaseB>(parentOffset: 16)]
+                            [Inherits<MiddleC>]
+                            public unsafe partial struct Child
+                            {
+                                [FieldOffset(28)] public int Child_field28;
+                                
+                                [VirtualFunction(10)]
+                                public partial void Child_vf10(int* arg);
+                            }
+                            """;
+
+        const string baseA_ACode = """
+                                 // <auto-generated/>
+                                 unsafe partial struct BaseA_A
+                                 {
+                                     public static class Addresses
+                                     {
+                                         public static readonly global::InteropGenerator.Runtime.Address BaseA_mf = new global::InteropGenerator.Runtime.Address("BaseA_A.BaseA_mf", "E8 ?? ?? ?? ?? ?? ?? ??", 1, new ulong[] {0x00000000000000E8}, new ulong[] {0x00000000000000FF}, 0);
+                                     }
+                                     [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit)]
+                                     public unsafe partial struct BaseA_AVirtualTable
+                                     {
+                                         [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public delegate* unmanaged[Stdcall] <BaseA_A*, int*, void> BaseA_A_vf0;
+                                     }
+                                     [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public BaseA_AVirtualTable* VirtualTable;
+                                     public unsafe static class MemberFunctionPointers
+                                     {
+                                         public static delegate* unmanaged[Stdcall] <BaseA_A*, int> BaseA_mf => (delegate* unmanaged[Stdcall] <BaseA_A*, int>) BaseA_A.Addresses.BaseA_mf.Value;
+                                     }
+                                     public partial int BaseA_mf()
+                                     {
+                                         if (MemberFunctionPointers.BaseA_mf is null)
+                                         {
+                                             InteropGenerator.Runtime.ThrowHelper.ThrowNullAddress("BaseA_A.BaseA_mf", "E8 ?? ?? ?? ??");
+                                         }
+                                         return MemberFunctionPointers.BaseA_mf((BaseA_A*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this));
+                                     }
+                                     [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                                     public partial void BaseA_A_vf0(int* arg) => VirtualTable->BaseA_A_vf0((BaseA_A*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this), arg);
+                                     /// <inheritdoc cref="_baseA_A_field0" />
+                                     [global::System.Diagnostics.CodeAnalysis.UnscopedRefAttribute] public Span<byte> BaseA_A_field0 => _baseA_A_field0;
+                                 }
+                                 """;
+
+        const string baseA_BCode = """
+                                   // <auto-generated/>
+                                   unsafe partial struct BaseA_B
+                                   {
+                                       [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit)]
+                                       public unsafe partial struct BaseA_BVirtualTable
+                                       {
+                                           [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public delegate* unmanaged[Stdcall] <BaseA_B*, byte*, void> BaseA_B_vf0;
+                                       }
+                                       [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public BaseA_BVirtualTable* VirtualTable;
+                                       [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                                       public partial void BaseA_B_vf0(byte* arg) => VirtualTable->BaseA_B_vf0((BaseA_B*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this), arg);
+                                       public void BaseA_B_vf0(string arg)
+                                       {
+                                           int argUTF8StrLen = global::System.Text.Encoding.UTF8.GetByteCount(arg);
+                                           Span<byte> argBytes = argUTF8StrLen <= 512 ? stackalloc byte[argUTF8StrLen + 1] : new byte[argUTF8StrLen + 1];
+                                           global::System.Text.Encoding.UTF8.GetBytes(arg, argBytes);
+                                           argBytes[argUTF8StrLen] = 0;
+                                           fixed (byte* argPtr = argBytes)
+                                           {
+                                               BaseA_B_vf0(argPtr);
+                                           }
+                                       }
+                                       public void BaseA_B_vf0(ReadOnlySpan<byte> arg)
+                                       {
+                                           fixed (byte* argPtr = arg)
+                                           {
+                                               BaseA_B_vf0(argPtr);
+                                           }
+                                       }
+                                   }
+                                   """;
+
+        const string middleACode = """
+                                   // <auto-generated/>
+                                   unsafe partial struct MiddleA
+                                   {
+                                       public static class Addresses
+                                       {
+                                           public static readonly global::InteropGenerator.Runtime.Address StaticVirtualTable = new global::InteropGenerator.Runtime.Address("MiddleA.StaticVirtualTable", "E8 ?? ?? ?? ?? ?? ?? ??", 1, new ulong[] {0x00000000000000E8}, new ulong[] {0x00000000000000FF}, 0);
+                                       }
+                                       [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit)]
+                                       public unsafe partial struct MiddleAVirtualTable
+                                       {
+                                           [global::System.Runtime.InteropServices.FieldOffsetAttribute(32)] public delegate* unmanaged[Stdcall] <MiddleA*, int*, void> MiddleA_vf4;
+                                       }
+                                       [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public MiddleAVirtualTable* VirtualTable;
+                                       public static MiddleAVirtualTable* StaticVirtualTablePointer => (MiddleAVirtualTable*)Addresses.StaticVirtualTable.Value;
+                                       [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                                       public partial void MiddleA_vf4(int* arg) => VirtualTable->MiddleA_vf4((MiddleA*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this), arg);
+                                   }
+                                   """;
+
+        const string baseBCode = """
+                                 // <auto-generated/>
+                                 unsafe partial struct BaseB
+                                 {
+                                     public static class Addresses
+                                     {
+                                         public static readonly global::InteropGenerator.Runtime.Address BaseB_mf = new global::InteropGenerator.Runtime.Address("BaseB.BaseB_mf", "E8 ?? ?? ?? ?? ?? ?? ??", 1, new ulong[] {0x00000000000000E8}, new ulong[] {0x00000000000000FF}, 0);
+                                     }
+                                     public unsafe static class MemberFunctionPointers
+                                     {
+                                         public static delegate* unmanaged[Stdcall] <BaseB*, int> BaseB_mf => (delegate* unmanaged[Stdcall] <BaseB*, int>) BaseB.Addresses.BaseB_mf.Value;
+                                     }
+                                     public partial int BaseB_mf()
+                                     {
+                                         if (MemberFunctionPointers.BaseB_mf is null)
+                                         {
+                                             InteropGenerator.Runtime.ThrowHelper.ThrowNullAddress("BaseB.BaseB_mf", "E8 ?? ?? ?? ??");
+                                         }
+                                         return MemberFunctionPointers.BaseB_mf((BaseB*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this));
+                                     }
+                                 }
+                                 """;
+
+        const string baseCCode = """
+                                 // <auto-generated/>
+                                 unsafe partial struct BaseC
+                                 {
+                                     public static class Addresses
+                                     {
+                                         public static readonly global::InteropGenerator.Runtime.Address BaseC_sa = new global::InteropGenerator.Runtime.Address("BaseC.BaseC_sa", "E8 ?? ?? ?? ?? ?? ?? ??", 1, new ulong[] {0x00000000000000E8}, new ulong[] {0x00000000000000FF}, 0);
+                                     }
+                                     [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit)]
+                                     public unsafe partial struct BaseCVirtualTable
+                                     {
+                                         [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public delegate* unmanaged[Stdcall] <BaseC*, int*, void> BaseC_vf0;
+                                     }
+                                     [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public BaseCVirtualTable* VirtualTable;
+                                     [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                                     public partial void BaseC_vf0(int* arg) => VirtualTable->BaseC_vf0((BaseC*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this), arg);
+                                     public unsafe static class StaticAddressPointers
+                                     {
+                                         public static byte* pBaseC_sa => (byte*)BaseC.Addresses.BaseC_sa.Value;
+                                     }
+                                     public partial byte* BaseC_sa()
+                                     {
+                                         if (StaticAddressPointers.pBaseC_sa is null)
+                                         {
+                                             InteropGenerator.Runtime.ThrowHelper.ThrowNullAddress("BaseC.BaseC_sa", "E8 ?? ?? ?? ??");
+                                         }
+                                         return StaticAddressPointers.pBaseC_sa;
+                                     }
+                                 }
+                                 """;
+
+        const string middleCCode = """
+                                   // <auto-generated/>
+                                   unsafe partial struct MiddleC
+                                   {
+                                       public static class Addresses
+                                       {
+                                           public static readonly global::InteropGenerator.Runtime.Address MiddleC_mf = new global::InteropGenerator.Runtime.Address("MiddleC.MiddleC_mf", "E8 ?? ?? ?? ?? ?? ?? ??", 1, new ulong[] {0x00000000000000E8}, new ulong[] {0x00000000000000FF}, 0);
+                                       }
+                                       public unsafe static class MemberFunctionPointers
+                                       {
+                                           public static delegate* unmanaged[Stdcall] <MiddleC*, int> MiddleC_mf => (delegate* unmanaged[Stdcall] <MiddleC*, int>) MiddleC.Addresses.MiddleC_mf.Value;
+                                       }
+                                       public partial int MiddleC_mf()
+                                       {
+                                           if (MemberFunctionPointers.MiddleC_mf is null)
+                                           {
+                                               InteropGenerator.Runtime.ThrowHelper.ThrowNullAddress("MiddleC.MiddleC_mf", "E8 ?? ?? ?? ??");
+                                           }
+                                           return MemberFunctionPointers.MiddleC_mf((MiddleC*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this));
+                                       }
+                                   }
+                                   """;
+
+        const string childCode = """
+                                 // <auto-generated/>
+                                 unsafe partial struct Child
+                                 {
+                                     [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit)]
+                                     public unsafe partial struct ChildVirtualTable
+                                     {
+                                         [global::System.Runtime.InteropServices.FieldOffsetAttribute(80)] public delegate* unmanaged[Stdcall] <Child*, int*, void> Child_vf10;
+                                     }
+                                     [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public ChildVirtualTable* VirtualTable;
+                                     [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                                     public partial void Child_vf10(int* arg) => VirtualTable->Child_vf10((Child*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this), arg);
+                                 }
+                                 """;
+
+        const string middleAInheritedCode = """
+                                            // <auto-generated/>
+                                            unsafe partial struct MiddleA
+                                            {
+                                                /// <summary>Inherited parent class accessor for <see cref="BaseA_A">BaseA_A</see></summary>
+                                                [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public BaseA_A BaseA_A;
+                                                /// <summary>Inherited parent class accessor for <see cref="BaseA_B">BaseA_B</see></summary>
+                                                [global::System.Runtime.InteropServices.FieldOffsetAttribute(4)] public BaseA_B BaseA_B;
+                                                /// <inheritdoc cref="BaseA_B.BaseA_B_field0" />
+                                                /// <remarks>Field inherited from parent class <see cref="BaseA_B">BaseA_B</see>.</remarks>
+                                                [global::System.Runtime.InteropServices.FieldOffsetAttribute(4)] public int BaseA_B_field0;
+                                                /// <inheritdoc cref="BaseA_A.BaseA_mf" />
+                                                /// <remarks>Method inherited from parent class <see cref="BaseA_A">BaseA_A</see>.</remarks>
+                                                [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                                                public int BaseA_mf() => BaseA_A.BaseA_mf();
+                                                public unsafe partial struct MiddleAVirtualTable
+                                                {
+                                                    [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public delegate* unmanaged[Stdcall] <MiddleA*, int*, void> BaseA_A_vf0;
+                                                }
+                                                /// <inheritdoc cref="BaseA_A.BaseA_A_vf0" />
+                                                /// <remarks>Method inherited from parent class <see cref="BaseA_A">BaseA_A</see>.</remarks>
+                                                [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                                                public void BaseA_A_vf0(int* arg) => VirtualTable->BaseA_A_vf0((MiddleA*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this), arg);
+                                                /// <inheritdoc cref="BaseA_B.BaseA_B_vf0" />
+                                                /// <remarks>Method inherited from parent class <see cref="BaseA_B">BaseA_B</see>.</remarks>
+                                                [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                                                public void BaseA_B_vf0(byte* arg) => BaseA_B.BaseA_B_vf0(arg);
+                                                public void BaseA_B_vf0(string arg)
+                                                {
+                                                    int argUTF8StrLen = global::System.Text.Encoding.UTF8.GetByteCount(arg);
+                                                    Span<byte> argBytes = argUTF8StrLen <= 512 ? stackalloc byte[argUTF8StrLen + 1] : new byte[argUTF8StrLen + 1];
+                                                    global::System.Text.Encoding.UTF8.GetBytes(arg, argBytes);
+                                                    argBytes[argUTF8StrLen] = 0;
+                                                    fixed (byte* argPtr = argBytes)
+                                                    {
+                                                        BaseA_B_vf0(argPtr);
+                                                    }
+                                                }
+                                                public void BaseA_B_vf0(ReadOnlySpan<byte> arg)
+                                                {
+                                                    fixed (byte* argPtr = arg)
+                                                    {
+                                                        BaseA_B_vf0(argPtr);
+                                                    }
+                                                }
+                                                /// <inheritdoc cref="BaseA_A.BaseA_A_field0" />
+                                                /// <remarks>Field inherited from parent class <see cref="BaseA_A">BaseA_A</see>.</remarks>
+                                                [global::System.Diagnostics.CodeAnalysis.UnscopedRefAttribute] public Span<byte> BaseA_A_field0 => BaseA_A._baseA_A_field0;
+                                            }
+                                            """;
+
+        const string middleCInheritedCode = """
+                                            // <auto-generated/>
+                                            unsafe partial struct MiddleC
+                                            {
+                                                /// <summary>Inherited parent class accessor for <see cref="BaseC">BaseC</see></summary>
+                                                [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public BaseC BaseC;
+                                                /// <inheritdoc cref="BaseC.BaseC_field0" />
+                                                /// <remarks>Field inherited from parent class <see cref="BaseC">BaseC</see>.</remarks>
+                                                [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public int BaseC_field0;
+                                                [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit)]
+                                                public unsafe partial struct MiddleCVirtualTable
+                                                {
+                                                    [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public delegate* unmanaged[Stdcall] <MiddleC*, int*, void> BaseC_vf0;
+                                                }
+                                                [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public MiddleCVirtualTable* VirtualTable;
+                                                /// <inheritdoc cref="BaseC.BaseC_vf0" />
+                                                /// <remarks>Method inherited from parent class <see cref="BaseC">BaseC</see>.</remarks>
+                                                [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                                                public void BaseC_vf0(int* arg) => VirtualTable->BaseC_vf0((MiddleC*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this), arg);
+                                            }
+                                            """;
+
+        const string childInheritedCode = """
+                                            // <auto-generated/>
+                                            unsafe partial struct Child
+                                            {
+                                                /// <inheritdoc cref="BaseA_B.BaseA_B_field0" />
+                                                /// <remarks>Field inherited from parent class <see cref="BaseA_B">BaseA_B</see>.</remarks>
+                                                [global::System.Runtime.InteropServices.FieldOffsetAttribute(4)] public int BaseA_B_field0;
+                                                /// <summary>Inherited parent class accessor for <see cref="MiddleA">MiddleA</see></summary>
+                                                [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public MiddleA MiddleA;
+                                                /// <inheritdoc cref="MiddleA.MiddleA_field8" />
+                                                /// <remarks>Field inherited from parent class <see cref="MiddleA">MiddleA</see>.</remarks>
+                                                [global::System.Runtime.InteropServices.FieldOffsetAttribute(8)] public int MiddleA_field8;
+                                                /// <summary>Inherited parent class accessor for <see cref="BaseB">BaseB</see></summary>
+                                                [global::System.Runtime.InteropServices.FieldOffsetAttribute(16)] public BaseB BaseB;
+                                                /// <inheritdoc cref="BaseB.BaseB_field0" />
+                                                /// <remarks>Field inherited from parent class <see cref="BaseB">BaseB</see>.</remarks>
+                                                [global::System.Runtime.InteropServices.FieldOffsetAttribute(16)] public int BaseB_field0;
+                                                /// <inheritdoc cref="BaseC.BaseC_field0" />
+                                                /// <remarks>Field inherited from parent class <see cref="BaseC">BaseC</see>.</remarks>
+                                                [global::System.Runtime.InteropServices.FieldOffsetAttribute(20)] public int BaseC_field0;
+                                                /// <summary>Inherited parent class accessor for <see cref="MiddleC">MiddleC</see></summary>
+                                                [global::System.Runtime.InteropServices.FieldOffsetAttribute(20)] public MiddleC MiddleC;
+                                                /// <inheritdoc cref="MiddleC.MiddleC_field4" />
+                                                /// <remarks>Field inherited from parent class <see cref="MiddleC">MiddleC</see>.</remarks>
+                                                [global::System.Runtime.InteropServices.FieldOffsetAttribute(24)] public int MiddleC_field4;
+                                                /// <inheritdoc cref="BaseA_A.BaseA_mf" />
+                                                /// <remarks>Method inherited from parent class <see cref="BaseA_A">BaseA_A</see>.</remarks>
+                                                [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                                                public int BaseA_mf() => MiddleA.BaseA_A.BaseA_mf();
+                                                /// <inheritdoc cref="BaseB.BaseB_mf" />
+                                                /// <remarks>Method inherited from parent class <see cref="BaseB">BaseB</see>.</remarks>
+                                                [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                                                public int BaseB_mf() => BaseB.BaseB_mf();
+                                                /// <inheritdoc cref="MiddleC.MiddleC_mf" />
+                                                /// <remarks>Method inherited from parent class <see cref="MiddleC">MiddleC</see>.</remarks>
+                                                [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                                                public int MiddleC_mf() => MiddleC.MiddleC_mf();
+                                                public unsafe partial struct ChildVirtualTable
+                                                {
+                                                    [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public delegate* unmanaged[Stdcall] <Child*, int*, void> BaseA_A_vf0;
+                                                    [global::System.Runtime.InteropServices.FieldOffsetAttribute(32)] public delegate* unmanaged[Stdcall] <Child*, int*, void> MiddleA_vf4;
+                                                }
+                                                /// <inheritdoc cref="BaseA_A.BaseA_A_vf0" />
+                                                /// <remarks>Method inherited from parent class <see cref="BaseA_A">BaseA_A</see>.</remarks>
+                                                [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                                                public void BaseA_A_vf0(int* arg) => VirtualTable->BaseA_A_vf0((Child*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this), arg);
+                                                /// <inheritdoc cref="BaseA_B.BaseA_B_vf0" />
+                                                /// <remarks>Method inherited from parent class <see cref="BaseA_B">BaseA_B</see>.</remarks>
+                                                [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                                                public void BaseA_B_vf0(byte* arg) => MiddleA.BaseA_B.BaseA_B_vf0(arg);
+                                                /// <inheritdoc cref="MiddleA.MiddleA_vf4" />
+                                                /// <remarks>Method inherited from parent class <see cref="MiddleA">MiddleA</see>.</remarks>
+                                                [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                                                public void MiddleA_vf4(int* arg) => VirtualTable->MiddleA_vf4((Child*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this), arg);
+                                                /// <inheritdoc cref="BaseC.BaseC_vf0" />
+                                                /// <remarks>Method inherited from parent class <see cref="BaseC">BaseC</see>.</remarks>
+                                                [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                                                public void BaseC_vf0(int* arg) => MiddleC.BaseC.BaseC_vf0(arg);
+                                                /// <inheritdoc cref="BaseB.BaseB_method" />
+                                                /// <remarks>Method inherited from parent class <see cref="BaseB">BaseB</see>.</remarks>
+                                                [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                                                public void BaseB_method() => BaseB.BaseB_method();
+                                                public void BaseA_B_vf0(string arg)
+                                                {
+                                                    int argUTF8StrLen = global::System.Text.Encoding.UTF8.GetByteCount(arg);
+                                                    Span<byte> argBytes = argUTF8StrLen <= 512 ? stackalloc byte[argUTF8StrLen + 1] : new byte[argUTF8StrLen + 1];
+                                                    global::System.Text.Encoding.UTF8.GetBytes(arg, argBytes);
+                                                    argBytes[argUTF8StrLen] = 0;
+                                                    fixed (byte* argPtr = argBytes)
+                                                    {
+                                                        BaseA_B_vf0(argPtr);
+                                                    }
+                                                }
+                                                public void BaseA_B_vf0(ReadOnlySpan<byte> arg)
+                                                {
+                                                    fixed (byte* argPtr = arg)
+                                                    {
+                                                        BaseA_B_vf0(argPtr);
+                                                    }
+                                                }
+                                                /// <inheritdoc cref="BaseA_A.BaseA_A_field0" />
+                                                /// <remarks>Field inherited from parent class <see cref="BaseA_A">BaseA_A</see>.</remarks>
+                                                [global::System.Diagnostics.CodeAnalysis.UnscopedRefAttribute] public Span<byte> BaseA_A_field0 => MiddleA.BaseA_A._baseA_A_field0;
+                                            }
+                                            """;
+
+        const string resolverCode = """
+                                    // <auto-generated/>
+                                    namespace InteropGeneratorTesting;
+                                    public static class Addresses
+                                    {
+                                        public static void Initialize()
+                                        {
+                                            InteropGenerator.Runtime.Resolver.GetInstance.RegisterAddress(global::BaseA_A.Addresses.BaseA_mf);
+                                            InteropGenerator.Runtime.Resolver.GetInstance.RegisterAddress(global::MiddleA.Addresses.StaticVirtualTable);
+                                            InteropGenerator.Runtime.Resolver.GetInstance.RegisterAddress(global::BaseB.Addresses.BaseB_mf);
+                                            InteropGenerator.Runtime.Resolver.GetInstance.RegisterAddress(global::BaseC.Addresses.BaseC_sa);
+                                            InteropGenerator.Runtime.Resolver.GetInstance.RegisterAddress(global::MiddleC.Addresses.MiddleC_mf);
+                                        }
+                                    }
+                                    """;
+        
+        await VerifyIG.VerifyGeneratorAsync(
+            code,
+            ("BaseA_A.InteropGenerator.g.cs", baseA_ACode),
+            ("BaseA_B.InteropGenerator.g.cs", baseA_BCode),
+            ("MiddleA.InteropGenerator.g.cs", middleACode),
+            ("BaseB.InteropGenerator.g.cs", baseBCode),
+            ("BaseC.InteropGenerator.g.cs", baseCCode),
+            ("MiddleC.InteropGenerator.g.cs", middleCCode),
+            ("Child.InteropGenerator.g.cs", childCode),
+            ("MiddleA.Inheritance.InteropGenerator.g.cs", middleAInheritedCode),
+            ("MiddleC.Inheritance.InteropGenerator.g.cs", middleCInheritedCode),
+            ("Child.Inheritance.InteropGenerator.g.cs", childInheritedCode),
+            ("InteropGeneratorTesting.Addresses.g.cs", resolverCode),
+            SourceGeneration.GetFixedSizeArraySource([4]));
+    }
 }
