@@ -59,6 +59,15 @@ internal static class DiagnosticDescriptors {
         DiagnosticSeverity.Error,
         true,
         "A struct was marked with the GenerateInterop attribute but does not provide an explicit size.");
+    
+    public static readonly DiagnosticDescriptor InheritedStructIsNotMarkedInherited = new(
+        "CSIG0007",
+        "The Inherits attribute targets a struct that is not marked inherited",
+        "Inherits is used on type {0} targeting type {1} but this type is not marked with GenerateInterop's isInheritable parameter",
+        "InteropGenerator.Struct",
+        DiagnosticSeverity.Error,
+        true,
+        "A struct is marked as inheriting a type that is not properly annotated.");
 
     public static readonly DiagnosticDescriptor GenerationRequiresPartialMethod = new(
         "CSIG0101",

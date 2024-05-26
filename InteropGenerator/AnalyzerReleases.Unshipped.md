@@ -11,6 +11,7 @@
 | CSIG0004 | InteropGenerator.Struct    | Error    | Struct generation target should use the StructLayout attribute                                                |
 | CSIG0005 | InteropGenerator.Struct    | Error    | Struct generation target should use LayoutKind.Explicit in the StructLayout attribute                         |
 | CSIG0006 | InteropGenerator.Struct    | Error    | Struct generation target should have a defined size in the StructLayout attribute                             |
+| CSIG0007 | InteropGenerator.Struct    | Error    | Inheritance generation target is attempting to inherit a type that is not marked for inheritance.             |
 | CSIG0101 | InteropGenerator.Method    | Error    | Method generation target is not marked partial                                                                |
 | CSIG0102 | InteropGenerator.Method    | Error    | Method parameters of generation targets must be an unmanaged type                                             |
 | CSIG0103 | InteropGenerator.Method    | Error    | Method return value of a generation target must be an unmanaged type                                          |
