@@ -8,7 +8,7 @@ public class FixedSizeArrayAttributeTests {
     [Fact]
     public async Task GenerateFixedArray() {
         const string code = """
-                            using InteropGenerator.Runtime.Generated;
+                            using InteropGeneratorTesting;
 
                             [GenerateInterop]
                             public partial struct TestStruct
@@ -36,7 +36,7 @@ public class FixedSizeArrayAttributeTests {
     [Fact]
     public async Task GenerateSameFixedArray() {
         const string code = """
-                            using InteropGenerator.Runtime.Generated;
+                            using InteropGeneratorTesting;
 
                             [GenerateInterop]
                             public partial struct TestStruct
@@ -69,7 +69,7 @@ public class FixedSizeArrayAttributeTests {
     [Fact]
     public async Task GenerateDifferentFixedArrays() {
         const string code = """
-                            using InteropGenerator.Runtime.Generated;
+                            using InteropGeneratorTesting;
 
                             [GenerateInterop]
                             public partial struct TestStruct

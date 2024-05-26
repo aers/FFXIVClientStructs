@@ -704,7 +704,7 @@ public class InheritsAttributeTests {
     [Fact]
     public async Task FixedArrayInheritance() {
         const string code = """
-                            using InteropGenerator.Runtime.Generated;
+                            using InteropGeneratorTesting;
 
                             [StructLayout(LayoutKind.Explicit, Size=40)]
                             [GenerateInterop(true)]
