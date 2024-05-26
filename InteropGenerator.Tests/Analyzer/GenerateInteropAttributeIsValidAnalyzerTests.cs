@@ -8,6 +8,8 @@ public class GenerateInteropAttributeIsValidAnalyzerTests {
     [Fact]
     public async Task TargetStructIsNotPartial_NoWarn() {
         const string code = """
+                            using System.Runtime.InteropServices;
+                            
                             [StructLayout(LayoutKind.Explicit, Size=4)]
                             [GenerateInterop]
                             public partial struct TestStruct
@@ -20,6 +22,8 @@ public class GenerateInteropAttributeIsValidAnalyzerTests {
     [Fact]
     public async Task TargetStructIsNotPartial_Warn() {
         const string code = """
+                            using System.Runtime.InteropServices;
+                            
                             [StructLayout(LayoutKind.Explicit, Size=4)]
                             [GenerateInterop]
                             public struct {|CSIG0001:TestStruct|}
@@ -32,6 +36,8 @@ public class GenerateInteropAttributeIsValidAnalyzerTests {
     [Fact]
     public async Task TargetStructValidNesting_NoWarn() {
         const string code = """
+                            using System.Runtime.InteropServices;
+                            
                             public partial struct TestStruct
                             {
                                 [StructLayout(LayoutKind.Explicit, Size=4)]
@@ -47,6 +53,8 @@ public class GenerateInteropAttributeIsValidAnalyzerTests {
     [Fact]
     public async Task TargetStructNestedInNonPartialStruct_Warn() {
         const string code = """
+                            using System.Runtime.InteropServices;
+                            
                             public struct {|CSIG0002:TestStruct|}
                             {
                                 [StructLayout(LayoutKind.Explicit, Size=4)]
@@ -63,6 +71,8 @@ public class GenerateInteropAttributeIsValidAnalyzerTests {
     [Fact]
     public async Task TargetStructNestedInClass_Warn() {
         const string code = """
+                            using System.Runtime.InteropServices;
+                            
                             public class {|CSIG0003:TestStruct|}
                             {
                                 [StructLayout(LayoutKind.Explicit, Size=4)]
@@ -89,6 +99,8 @@ public class GenerateInteropAttributeIsValidAnalyzerTests {
     [Fact]
     public async Task TargetStructMustHaveExplicitLayout_Warn() {
         const string code = """
+                            using System.Runtime.InteropServices;
+                            
                             [{|CSIG0005:StructLayout(LayoutKind.Sequential, Size=4)|}]
                             [GenerateInterop]
                             public partial struct TestStruct
@@ -101,6 +113,8 @@ public class GenerateInteropAttributeIsValidAnalyzerTests {
     [Fact]
     public async Task TargetStructMustHaveExplicitSize_Warn() {
         const string code = """
+                            using System.Runtime.InteropServices;
+                            
                             [{|CSIG0006:StructLayout(LayoutKind.Explicit)|}]
                             [GenerateInterop]
                             public partial struct TestStruct

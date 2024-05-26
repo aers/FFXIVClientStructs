@@ -23,7 +23,7 @@ public class FixedSizeArrayAttributeTests {
                               unsafe partial struct TestStruct
                               {
                                   /// <inheritdoc cref="_tenIntArray" />
-                                  [UnscopedRef] public Span<int> TenIntArray => _tenIntArray;
+                                  [global::System.Diagnostics.CodeAnalysis.UnscopedRefAttribute] public Span<int> TenIntArray => _tenIntArray;
                               }
                               """;
 
@@ -54,9 +54,9 @@ public class FixedSizeArrayAttributeTests {
                               unsafe partial struct TestStruct
                               {
                                   /// <inheritdoc cref="_tenIntArray" />
-                                  [UnscopedRef] public Span<int> TenIntArray => _tenIntArray;
+                                  [global::System.Diagnostics.CodeAnalysis.UnscopedRefAttribute] public Span<int> TenIntArray => _tenIntArray;
                                   /// <inheritdoc cref="_tenUIntArray" />
-                                  [UnscopedRef] public Span<uint> TenUIntArray => _tenUIntArray;
+                                  [global::System.Diagnostics.CodeAnalysis.UnscopedRefAttribute] public Span<uint> TenUIntArray => _tenUIntArray;
                               }
                               """;
 
@@ -87,9 +87,9 @@ public class FixedSizeArrayAttributeTests {
                               unsafe partial struct TestStruct
                               {
                                   /// <inheritdoc cref="_tenIntArray" />
-                                  [UnscopedRef] public Span<int> TenIntArray => _tenIntArray;
+                                  [global::System.Diagnostics.CodeAnalysis.UnscopedRefAttribute] public Span<int> TenIntArray => _tenIntArray;
                                   /// <inheritdoc cref="_fiftySevenUIntArray" />
-                                  [UnscopedRef] public Span<uint> FiftySevenUIntArray => _fiftySevenUIntArray;
+                                  [global::System.Diagnostics.CodeAnalysis.UnscopedRefAttribute] public Span<uint> FiftySevenUIntArray => _fiftySevenUIntArray;
                               }
                               """;
 

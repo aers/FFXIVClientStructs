@@ -8,6 +8,9 @@ public class FixedSizeArrayAttributeIsValidAnalyzerTests {
     [Fact]
     public async Task FixedSizeArrayAttributeIsValid_NoWarn() {
         const string code = """
+                            using System.Runtime.CompilerServices;
+                            using System.Runtime.InteropServices;
+                            
                             [InlineArray(10)]
                             public struct FixedSizeArray10<T> where T : unmanaged
                             {
@@ -27,6 +30,9 @@ public class FixedSizeArrayAttributeIsValidAnalyzerTests {
     [Fact]
     public async Task FixedSizeArrayAttributeNotInternal_Warn() {
         const string code = """
+                            using System.Runtime.CompilerServices;
+                            using System.Runtime.InteropServices;
+                            
                             [InlineArray(10)]
                             public struct FixedSizeArray10<T> where T : unmanaged
                             {
@@ -46,6 +52,9 @@ public class FixedSizeArrayAttributeIsValidAnalyzerTests {
     [Fact]
     public async Task FixedSizeArrayAttributeFieldTypeMustStartWithFixedSizeArray_Warn() {
         const string code = """
+                            using System.Runtime.CompilerServices;
+                            using System.Runtime.InteropServices;
+                            
                             [InlineArray(10)]
                             public struct SomeType10<T> where T : unmanaged
                             {
@@ -65,6 +74,9 @@ public class FixedSizeArrayAttributeIsValidAnalyzerTests {
     [Fact]
     public async Task FixedSizeArrayAttributeFieldTypeMustEndWithSize_Warn() {
         const string code = """
+                            using System.Runtime.CompilerServices;
+                            using System.Runtime.InteropServices;
+                            
                             [InlineArray(10)]
                             public struct FixedSizeArrayTen<T> where T : unmanaged
                             {
@@ -84,6 +96,9 @@ public class FixedSizeArrayAttributeIsValidAnalyzerTests {
     [Fact]
     public async Task FixedSizeArrayAttributeImproperFieldName_Warn() {
         const string code = """
+                            using System.Runtime.CompilerServices;
+                            using System.Runtime.InteropServices;
+                            
                             [InlineArray(10)]
                             public struct FixedSizeArray10<T> where T : unmanaged
                             {

@@ -8,19 +8,19 @@ public class InheritsAttributeTests {
     [Fact]
     public async Task BasicFieldInheritance() {
         const string code = """
-                            [StructLayout(LayoutKind.Explicit, Size=4)]
+                            [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit, Size=4)]
                             [GenerateInterop(true)]
                             public partial struct BaseStruct
                             {
-                                [FieldOffset(0)] public int Field0;
+                                [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public int Field0;
                             }
 
-                            [StructLayout(LayoutKind.Explicit, Size=8)]
+                            [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit, Size=8)]
                             [GenerateInterop]
                             [Inherits<BaseStruct>]
                             public partial struct ChildStruct
                             {
-                                [FieldOffset(4)] public int Field4;
+                                [global::System.Runtime.InteropServices.FieldOffsetAttribute(4)] public int Field4;
                             }
                             """;
 
@@ -29,10 +29,10 @@ public class InheritsAttributeTests {
                                                   unsafe partial struct ChildStruct
                                                   {
                                                       /// <summary>Inherited parent class accessor for <see cref="BaseStruct">BaseStruct</see></summary>
-                                                      [FieldOffset(0)] public BaseStruct BaseStruct;
+                                                      [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public BaseStruct BaseStruct;
                                                       /// <inheritdoc cref="BaseStruct.Field0" />
                                                       /// <remarks>Field inherited from parent class <see cref="BaseStruct">BaseStruct</see>.</remarks>
-                                                      [FieldOffset(0)] public int Field0;
+                                                      [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public int Field0;
                                                   }
                                                   """;
 
@@ -46,19 +46,19 @@ public class InheritsAttributeTests {
     [Fact]
     public async Task BasicFieldInheritanceOffset() {
         const string code = """
-                            [StructLayout(LayoutKind.Explicit, Size=20)]
+                            [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit, Size=20)]
                             [GenerateInterop(true)]
                             public partial struct BaseStruct
                             {
-                                [FieldOffset(16)] public int Field0;
+                                [global::System.Runtime.InteropServices.FieldOffsetAttribute(16)] public int Field0;
                             }
 
-                            [StructLayout(LayoutKind.Explicit, Size=28)]
+                            [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit, Size=28)]
                             [GenerateInterop]
                             [Inherits<BaseStruct>]
                             public partial struct ChildStruct
                             {
-                                [FieldOffset(20)] public int Field4;
+                                [global::System.Runtime.InteropServices.FieldOffsetAttribute(20)] public int Field4;
                             }
                             """;
 
@@ -67,10 +67,10 @@ public class InheritsAttributeTests {
                                                   unsafe partial struct ChildStruct
                                                   {
                                                       /// <summary>Inherited parent class accessor for <see cref="BaseStruct">BaseStruct</see></summary>
-                                                      [FieldOffset(0)] public BaseStruct BaseStruct;
+                                                      [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public BaseStruct BaseStruct;
                                                       /// <inheritdoc cref="BaseStruct.Field0" />
                                                       /// <remarks>Field inherited from parent class <see cref="BaseStruct">BaseStruct</see>.</remarks>
-                                                      [FieldOffset(16)] public int Field0;
+                                                      [global::System.Runtime.InteropServices.FieldOffsetAttribute(16)] public int Field0;
                                                   }
                                                   """;
 
@@ -84,19 +84,19 @@ public class InheritsAttributeTests {
     [Fact]
     public async Task BasicFieldInheritanceExplicitParentOffset() {
         const string code = """
-                            [StructLayout(LayoutKind.Explicit, Size=4)]
+                            [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit, Size=4)]
                             [GenerateInterop(true)]
                             public partial struct BaseStruct
                             {
-                                [FieldOffset(0)] public int Field0;
+                                [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public int Field0;
                             }
 
-                            [StructLayout(LayoutKind.Explicit, Size=24)]
+                            [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit, Size=24)]
                             [GenerateInterop]
                             [Inherits<BaseStruct>(parentOffset: 16)]
                             public partial struct ChildStruct
                             {
-                                [FieldOffset(20)] public int Field20;
+                                [global::System.Runtime.InteropServices.FieldOffsetAttribute(20)] public int Field20;
                             }
                             """;
 
@@ -105,10 +105,10 @@ public class InheritsAttributeTests {
                                                   unsafe partial struct ChildStruct
                                                   {
                                                       /// <summary>Inherited parent class accessor for <see cref="BaseStruct">BaseStruct</see></summary>
-                                                      [FieldOffset(16)] public BaseStruct BaseStruct;
+                                                      [global::System.Runtime.InteropServices.FieldOffsetAttribute(16)] public BaseStruct BaseStruct;
                                                       /// <inheritdoc cref="BaseStruct.Field0" />
                                                       /// <remarks>Field inherited from parent class <see cref="BaseStruct">BaseStruct</see>.</remarks>
-                                                      [FieldOffset(16)] public int Field0;
+                                                      [global::System.Runtime.InteropServices.FieldOffsetAttribute(16)] public int Field0;
                                                   }
                                                   """;
 
@@ -122,27 +122,27 @@ public class InheritsAttributeTests {
     [Fact]
     public async Task ChainedFieldInheritance() {
         const string code = """
-                            [StructLayout(LayoutKind.Explicit, Size=4)]
+                            [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit, Size=4)]
                             [GenerateInterop(true)]
                             public partial struct BaseStruct
                             {
-                                [FieldOffset(0)] public int BaseStruct_Field0;
+                                [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public int BaseStruct_Field0;
                             }
 
-                            [StructLayout(LayoutKind.Explicit, Size=8)]
+                            [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit, Size=8)]
                             [GenerateInterop(true)]
                             [Inherits<BaseStruct>]
                             public partial struct MiddleStruct
                             {
-                                [FieldOffset(4)] public int MiddleStruct_Field4;
+                                [global::System.Runtime.InteropServices.FieldOffsetAttribute(4)] public int MiddleStruct_Field4;
                             }
 
-                            [StructLayout(LayoutKind.Explicit, Size=12)]
+                            [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit, Size=12)]
                             [GenerateInterop]
                             [Inherits<MiddleStruct>]
                             public partial struct ChildStruct
                             {
-                                [FieldOffset(8)] public int Field8;
+                                [global::System.Runtime.InteropServices.FieldOffsetAttribute(8)] public int Field8;
                             }
                             """;
 
@@ -151,10 +151,10 @@ public class InheritsAttributeTests {
                                                    unsafe partial struct MiddleStruct
                                                    {
                                                        /// <summary>Inherited parent class accessor for <see cref="BaseStruct">BaseStruct</see></summary>
-                                                       [FieldOffset(0)] public BaseStruct BaseStruct;
+                                                       [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public BaseStruct BaseStruct;
                                                        /// <inheritdoc cref="BaseStruct.BaseStruct_Field0" />
                                                        /// <remarks>Field inherited from parent class <see cref="BaseStruct">BaseStruct</see>.</remarks>
-                                                       [FieldOffset(0)] public int BaseStruct_Field0;
+                                                       [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public int BaseStruct_Field0;
                                                    }
                                                    """;
 
@@ -164,12 +164,12 @@ public class InheritsAttributeTests {
                                                   {
                                                       /// <inheritdoc cref="BaseStruct.BaseStruct_Field0" />
                                                       /// <remarks>Field inherited from parent class <see cref="BaseStruct">BaseStruct</see>.</remarks>
-                                                      [FieldOffset(0)] public int BaseStruct_Field0;
+                                                      [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public int BaseStruct_Field0;
                                                       /// <summary>Inherited parent class accessor for <see cref="MiddleStruct">MiddleStruct</see></summary>
-                                                      [FieldOffset(0)] public MiddleStruct MiddleStruct;
+                                                      [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public MiddleStruct MiddleStruct;
                                                       /// <inheritdoc cref="MiddleStruct.MiddleStruct_Field4" />
                                                       /// <remarks>Field inherited from parent class <see cref="MiddleStruct">MiddleStruct</see>.</remarks>
-                                                      [FieldOffset(4)] public int MiddleStruct_Field4;
+                                                      [global::System.Runtime.InteropServices.FieldOffsetAttribute(4)] public int MiddleStruct_Field4;
                                                   }
                                                   """;
 
@@ -185,27 +185,27 @@ public class InheritsAttributeTests {
     [Fact]
     public async Task FieldMultipleInheritance() {
         const string code = """
-                            [StructLayout(LayoutKind.Explicit, Size=4)]
+                            [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit, Size=4)]
                             [GenerateInterop(true)]
                             public partial struct BaseStruct
                             {
-                                [FieldOffset(0)] public int BaseStruct_Field0;
+                                [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public int BaseStruct_Field0;
                             }
 
-                            [StructLayout(LayoutKind.Explicit, Size=4)]
+                            [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit, Size=4)]
                             [GenerateInterop(true)]
                             public partial struct BaseStruct2
                             {
-                                [FieldOffset(0)] public int BaseStruct2_Field0;
+                                [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public int BaseStruct2_Field0;
                             }
 
-                            [StructLayout(LayoutKind.Explicit, Size=12)]
+                            [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit, Size=12)]
                             [GenerateInterop]
                             [Inherits<BaseStruct>]
                             [Inherits<BaseStruct2>]
                             public partial struct ChildStruct
                             {
-                                [FieldOffset(8)] public int Field8;
+                                [global::System.Runtime.InteropServices.FieldOffsetAttribute(8)] public int Field8;
                             }
                             """;
 
@@ -214,15 +214,15 @@ public class InheritsAttributeTests {
                                                   unsafe partial struct ChildStruct
                                                   {
                                                       /// <summary>Inherited parent class accessor for <see cref="BaseStruct">BaseStruct</see></summary>
-                                                      [FieldOffset(0)] public BaseStruct BaseStruct;
+                                                      [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public BaseStruct BaseStruct;
                                                       /// <inheritdoc cref="BaseStruct.BaseStruct_Field0" />
                                                       /// <remarks>Field inherited from parent class <see cref="BaseStruct">BaseStruct</see>.</remarks>
-                                                      [FieldOffset(0)] public int BaseStruct_Field0;
+                                                      [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public int BaseStruct_Field0;
                                                       /// <summary>Inherited parent class accessor for <see cref="BaseStruct2">BaseStruct2</see></summary>
-                                                      [FieldOffset(4)] public BaseStruct2 BaseStruct2;
+                                                      [global::System.Runtime.InteropServices.FieldOffsetAttribute(4)] public BaseStruct2 BaseStruct2;
                                                       /// <inheritdoc cref="BaseStruct2.BaseStruct2_Field0" />
                                                       /// <remarks>Field inherited from parent class <see cref="BaseStruct2">BaseStruct2</see>.</remarks>
-                                                      [FieldOffset(4)] public int BaseStruct2_Field0;
+                                                      [global::System.Runtime.InteropServices.FieldOffsetAttribute(4)] public int BaseStruct2_Field0;
                                                   }
                                                   """;
 
@@ -237,7 +237,7 @@ public class InheritsAttributeTests {
     [Fact]
     public async Task MemberFunctionInheritance() {
         const string code = """
-                            [StructLayout(LayoutKind.Explicit, Size=4)]
+                            [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit, Size=4)]
                             [GenerateInterop(true)]
                             public unsafe partial struct BaseStruct
                             {
@@ -245,7 +245,7 @@ public class InheritsAttributeTests {
                                 public partial int TestFunction(int argOne, void * argTwo);
                             }
 
-                            [StructLayout(LayoutKind.Explicit, Size=8)]
+                            [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit, Size=8)]
                             [GenerateInterop]
                             [Inherits<BaseStruct>]
                             public partial struct ChildStruct
@@ -259,7 +259,7 @@ public class InheritsAttributeTests {
                                                {
                                                    public static class Addresses
                                                    {
-                                                       public static readonly Address TestFunction = new Address("BaseStruct.TestFunction", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD ?? ?? ?? ??", 0, new ulong[] {0x00000000DDCCBBAA, 0x00000000DD00BBAA}, new ulong[] {0x00000000FFFFFFFF, 0x00000000FF00FFFF}, 0);
+                                                       public static readonly global::InteropGenerator.Runtime.Address TestFunction = new global::InteropGenerator.Runtime.Address("BaseStruct.TestFunction", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD ?? ?? ?? ??", 0, new ulong[] {0x00000000DDCCBBAA, 0x00000000DD00BBAA}, new ulong[] {0x00000000FFFFFFFF, 0x00000000FF00FFFF}, 0);
                                                    }
                                                    public unsafe static class MemberFunctionPointers
                                                    {
@@ -271,7 +271,7 @@ public class InheritsAttributeTests {
                                                        {
                                                            InteropGenerator.Runtime.ThrowHelper.ThrowNullAddress("BaseStruct.TestFunction", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD");
                                                        }
-                                                       return MemberFunctionPointers.TestFunction((BaseStruct*)Unsafe.AsPointer(ref this), argOne, argTwo);
+                                                       return MemberFunctionPointers.TestFunction((BaseStruct*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this), argOne, argTwo);
                                                    }
                                                }
                                                """;
@@ -281,10 +281,10 @@ public class InheritsAttributeTests {
                                                   unsafe partial struct ChildStruct
                                                   {
                                                       /// <summary>Inherited parent class accessor for <see cref="BaseStruct">BaseStruct</see></summary>
-                                                      [FieldOffset(0)] public BaseStruct BaseStruct;
+                                                      [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public BaseStruct BaseStruct;
                                                       /// <inheritdoc cref="BaseStruct.TestFunction" />
                                                       /// <remarks>Method inherited from parent class <see cref="BaseStruct">BaseStruct</see>.</remarks>
-                                                      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+                                                      [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
                                                       public int TestFunction(int argOne, void* argTwo) => BaseStruct.TestFunction(argOne, argTwo);
                                                   }
                                                   """;
@@ -300,7 +300,7 @@ public class InheritsAttributeTests {
     [Fact]
     public async Task MemberFunctionChainedInheritance() {
         const string code = """
-                            [StructLayout(LayoutKind.Explicit, Size=4)]
+                            [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit, Size=4)]
                             [GenerateInterop(true)]
                             public unsafe partial struct BaseStruct
                             {
@@ -308,14 +308,14 @@ public class InheritsAttributeTests {
                                 public partial int TestFunction(int argOne, void * argTwo);
                             }
 
-                            [StructLayout(LayoutKind.Explicit, Size=8)]
+                            [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit, Size=8)]
                             [GenerateInterop(true)]
                             [Inherits<BaseStruct>]
                             public partial struct MiddleStruct
                             {
                             }
 
-                            [StructLayout(LayoutKind.Explicit, Size=12)]
+                            [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit, Size=12)]
                             [GenerateInterop]
                             [Inherits<MiddleStruct>]
                             public partial struct ChildStruct
@@ -329,7 +329,7 @@ public class InheritsAttributeTests {
                                                {
                                                    public static class Addresses
                                                    {
-                                                       public static readonly Address TestFunction = new Address("BaseStruct.TestFunction", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD ?? ?? ?? ??", 0, new ulong[] {0x00000000DDCCBBAA, 0x00000000DD00BBAA}, new ulong[] {0x00000000FFFFFFFF, 0x00000000FF00FFFF}, 0);
+                                                       public static readonly global::InteropGenerator.Runtime.Address TestFunction = new global::InteropGenerator.Runtime.Address("BaseStruct.TestFunction", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD ?? ?? ?? ??", 0, new ulong[] {0x00000000DDCCBBAA, 0x00000000DD00BBAA}, new ulong[] {0x00000000FFFFFFFF, 0x00000000FF00FFFF}, 0);
                                                    }
                                                    public unsafe static class MemberFunctionPointers
                                                    {
@@ -341,7 +341,7 @@ public class InheritsAttributeTests {
                                                        {
                                                            InteropGenerator.Runtime.ThrowHelper.ThrowNullAddress("BaseStruct.TestFunction", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD");
                                                        }
-                                                       return MemberFunctionPointers.TestFunction((BaseStruct*)Unsafe.AsPointer(ref this), argOne, argTwo);
+                                                       return MemberFunctionPointers.TestFunction((BaseStruct*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this), argOne, argTwo);
                                                    }
                                                }
                                                """;
@@ -351,10 +351,10 @@ public class InheritsAttributeTests {
                                                    unsafe partial struct MiddleStruct
                                                    {
                                                        /// <summary>Inherited parent class accessor for <see cref="BaseStruct">BaseStruct</see></summary>
-                                                       [FieldOffset(0)] public BaseStruct BaseStruct;
+                                                       [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public BaseStruct BaseStruct;
                                                        /// <inheritdoc cref="BaseStruct.TestFunction" />
                                                        /// <remarks>Method inherited from parent class <see cref="BaseStruct">BaseStruct</see>.</remarks>
-                                                       [MethodImpl(MethodImplOptions.AggressiveInlining)]
+                                                       [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
                                                        public int TestFunction(int argOne, void* argTwo) => BaseStruct.TestFunction(argOne, argTwo);
                                                    }
                                                    """;
@@ -364,10 +364,10 @@ public class InheritsAttributeTests {
                                                   unsafe partial struct ChildStruct
                                                   {
                                                       /// <summary>Inherited parent class accessor for <see cref="MiddleStruct">MiddleStruct</see></summary>
-                                                      [FieldOffset(0)] public MiddleStruct MiddleStruct;
+                                                      [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public MiddleStruct MiddleStruct;
                                                       /// <inheritdoc cref="BaseStruct.TestFunction" />
                                                       /// <remarks>Method inherited from parent class <see cref="BaseStruct">BaseStruct</see>.</remarks>
-                                                      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+                                                      [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
                                                       public int TestFunction(int argOne, void* argTwo) => MiddleStruct.BaseStruct.TestFunction(argOne, argTwo);
                                                   }
                                                   """;
@@ -385,7 +385,7 @@ public class InheritsAttributeTests {
     [Fact]
     public async Task VirtualFunctionInheritance() {
         const string code = """
-                            [StructLayout(LayoutKind.Explicit, Size = 4)]
+                            [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit, Size = 4)]
                             [GenerateInterop(true)]
                             public unsafe partial struct BaseStruct
                             {
@@ -393,7 +393,7 @@ public class InheritsAttributeTests {
                                 public partial int TestFunction(int argOne, void * argTwo);
                             }
 
-                            [StructLayout(LayoutKind.Explicit, Size = 8)]
+                            [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit, Size = 8)]
                             [GenerateInterop]
                             [Inherits<BaseStruct>]
                             public unsafe partial struct ChildStruct
@@ -405,14 +405,14 @@ public class InheritsAttributeTests {
                                                // <auto-generated/>
                                                unsafe partial struct BaseStruct
                                                {
-                                                   [StructLayout(LayoutKind.Explicit)]
+                                                   [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit)]
                                                    public unsafe partial struct BaseStructVirtualTable
                                                    {
-                                                       [FieldOffset(40)] public delegate* unmanaged[Stdcall] <BaseStruct*, int, void*, int> TestFunction;
+                                                       [global::System.Runtime.InteropServices.FieldOffsetAttribute(40)] public delegate* unmanaged[Stdcall] <BaseStruct*, int, void*, int> TestFunction;
                                                    }
-                                                   [FieldOffset(0)] public BaseStructVirtualTable* VirtualTable;
-                                                   [MethodImpl(MethodImplOptions.AggressiveInlining)]
-                                                   public partial int TestFunction(int argOne, void* argTwo) => VirtualTable->TestFunction((BaseStruct*)Unsafe.AsPointer(ref this), argOne, argTwo);
+                                                   [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public BaseStructVirtualTable* VirtualTable;
+                                                   [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                                                   public partial int TestFunction(int argOne, void* argTwo) => VirtualTable->TestFunction((BaseStruct*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this), argOne, argTwo);
                                                }
                                                """;
 
@@ -421,17 +421,17 @@ public class InheritsAttributeTests {
                                                            unsafe partial struct ChildStruct
                                                            {
                                                                /// <summary>Inherited parent class accessor for <see cref="BaseStruct">BaseStruct</see></summary>
-                                                               [FieldOffset(0)] public BaseStruct BaseStruct;
-                                                               [StructLayout(LayoutKind.Explicit)]
+                                                               [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public BaseStruct BaseStruct;
+                                                               [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit)]
                                                                public unsafe partial struct ChildStructVirtualTable
                                                                {
-                                                                   [FieldOffset(40)] public delegate* unmanaged[Stdcall] <ChildStruct*, int, void*, int> TestFunction;
+                                                                   [global::System.Runtime.InteropServices.FieldOffsetAttribute(40)] public delegate* unmanaged[Stdcall] <ChildStruct*, int, void*, int> TestFunction;
                                                                }
-                                                               [FieldOffset(0)] public ChildStructVirtualTable* VirtualTable;
+                                                               [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public ChildStructVirtualTable* VirtualTable;
                                                                /// <inheritdoc cref="BaseStruct.TestFunction" />
                                                                /// <remarks>Method inherited from parent class <see cref="BaseStruct">BaseStruct</see>.</remarks>
-                                                               [MethodImpl(MethodImplOptions.AggressiveInlining)]
-                                                               public int TestFunction(int argOne, void* argTwo) => VirtualTable->TestFunction((ChildStruct*)Unsafe.AsPointer(ref this), argOne, argTwo);
+                                                               [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                                                               public int TestFunction(int argOne, void* argTwo) => VirtualTable->TestFunction((ChildStruct*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this), argOne, argTwo);
                                                            }
                                                            """;
 
@@ -445,7 +445,7 @@ public class InheritsAttributeTests {
     [Fact]
     public async Task VirtualFunctionInheritanceExistingVirtualTable() {
         const string code = """
-                            [StructLayout(LayoutKind.Explicit, Size = 4)]
+                            [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit, Size = 4)]
                             [GenerateInterop(true)]
                             public unsafe partial struct BaseStruct
                             {
@@ -453,7 +453,7 @@ public class InheritsAttributeTests {
                                 public partial int TestFunction(int argOne, void * argTwo);
                             }
 
-                            [StructLayout(LayoutKind.Explicit, Size = 8)]
+                            [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit, Size = 8)]
                             [GenerateInterop]
                             [Inherits<BaseStruct>]
                             public unsafe partial struct ChildStruct
@@ -467,14 +467,14 @@ public class InheritsAttributeTests {
                                                // <auto-generated/>
                                                unsafe partial struct BaseStruct
                                                {
-                                                   [StructLayout(LayoutKind.Explicit)]
+                                                   [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit)]
                                                    public unsafe partial struct BaseStructVirtualTable
                                                    {
-                                                       [FieldOffset(40)] public delegate* unmanaged[Stdcall] <BaseStruct*, int, void*, int> TestFunction;
+                                                       [global::System.Runtime.InteropServices.FieldOffsetAttribute(40)] public delegate* unmanaged[Stdcall] <BaseStruct*, int, void*, int> TestFunction;
                                                    }
-                                                   [FieldOffset(0)] public BaseStructVirtualTable* VirtualTable;
-                                                   [MethodImpl(MethodImplOptions.AggressiveInlining)]
-                                                   public partial int TestFunction(int argOne, void* argTwo) => VirtualTable->TestFunction((BaseStruct*)Unsafe.AsPointer(ref this), argOne, argTwo);
+                                                   [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public BaseStructVirtualTable* VirtualTable;
+                                                   [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                                                   public partial int TestFunction(int argOne, void* argTwo) => VirtualTable->TestFunction((BaseStruct*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this), argOne, argTwo);
                                                }
                                                """;
 
@@ -482,14 +482,14 @@ public class InheritsAttributeTests {
                                                 // <auto-generated/>
                                                 unsafe partial struct ChildStruct
                                                 {
-                                                    [StructLayout(LayoutKind.Explicit)]
+                                                    [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit)]
                                                     public unsafe partial struct ChildStructVirtualTable
                                                     {
-                                                        [FieldOffset(48)] public delegate* unmanaged[Stdcall] <ChildStruct*, int> TestFunction2;
+                                                        [global::System.Runtime.InteropServices.FieldOffsetAttribute(48)] public delegate* unmanaged[Stdcall] <ChildStruct*, int> TestFunction2;
                                                     }
-                                                    [FieldOffset(0)] public ChildStructVirtualTable* VirtualTable;
-                                                    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-                                                    public partial int TestFunction2() => VirtualTable->TestFunction2((ChildStruct*)Unsafe.AsPointer(ref this));
+                                                    [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public ChildStructVirtualTable* VirtualTable;
+                                                    [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                                                    public partial int TestFunction2() => VirtualTable->TestFunction2((ChildStruct*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this));
                                                 }
                                                 """;
 
@@ -498,15 +498,15 @@ public class InheritsAttributeTests {
                                                            unsafe partial struct ChildStruct
                                                            {
                                                                /// <summary>Inherited parent class accessor for <see cref="BaseStruct">BaseStruct</see></summary>
-                                                               [FieldOffset(0)] public BaseStruct BaseStruct;
+                                                               [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public BaseStruct BaseStruct;
                                                                public unsafe partial struct ChildStructVirtualTable
                                                                {
-                                                                   [FieldOffset(40)] public delegate* unmanaged[Stdcall] <ChildStruct*, int, void*, int> TestFunction;
+                                                                   [global::System.Runtime.InteropServices.FieldOffsetAttribute(40)] public delegate* unmanaged[Stdcall] <ChildStruct*, int, void*, int> TestFunction;
                                                                }
                                                                /// <inheritdoc cref="BaseStruct.TestFunction" />
                                                                /// <remarks>Method inherited from parent class <see cref="BaseStruct">BaseStruct</see>.</remarks>
-                                                               [MethodImpl(MethodImplOptions.AggressiveInlining)]
-                                                               public int TestFunction(int argOne, void* argTwo) => VirtualTable->TestFunction((ChildStruct*)Unsafe.AsPointer(ref this), argOne, argTwo);
+                                                               [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                                                               public int TestFunction(int argOne, void* argTwo) => VirtualTable->TestFunction((ChildStruct*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this), argOne, argTwo);
                                                            }
                                                            """;
 
@@ -520,20 +520,20 @@ public class InheritsAttributeTests {
     [Fact]
     public async Task VirtualFunctionInheritanceNotMainParent() {
         const string code = """
-                            [StructLayout(LayoutKind.Explicit, Size=4)]
+                            [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit, Size=4)]
                             [GenerateInterop(true)]
                             public partial struct BaseStruct
                             {
                             }
 
-                            [StructLayout(LayoutKind.Explicit, Size=4)]
+                            [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit, Size=4)]
                             [GenerateInterop(true)]
                             public unsafe partial struct BaseStruct2
                             {
                                 [VirtualFunction(5)] public partial int TestFunction(int argOne, void * argTwo);
                             }
 
-                            [StructLayout(LayoutKind.Explicit, Size=12)]
+                            [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit, Size=12)]
                             [GenerateInterop]
                             [Inherits<BaseStruct>]
                             [Inherits<BaseStruct2>]
@@ -546,14 +546,14 @@ public class InheritsAttributeTests {
                                        // <auto-generated/>
                                        unsafe partial struct BaseStruct2
                                        {
-                                           [StructLayout(LayoutKind.Explicit)]
+                                           [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit)]
                                            public unsafe partial struct BaseStruct2VirtualTable
                                            {
-                                               [FieldOffset(40)] public delegate* unmanaged[Stdcall] <BaseStruct2*, int, void*, int> TestFunction;
+                                               [global::System.Runtime.InteropServices.FieldOffsetAttribute(40)] public delegate* unmanaged[Stdcall] <BaseStruct2*, int, void*, int> TestFunction;
                                            }
-                                           [FieldOffset(0)] public BaseStruct2VirtualTable* VirtualTable;
-                                           [MethodImpl(MethodImplOptions.AggressiveInlining)]
-                                           public partial int TestFunction(int argOne, void* argTwo) => VirtualTable->TestFunction((BaseStruct2*)Unsafe.AsPointer(ref this), argOne, argTwo);
+                                           [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public BaseStruct2VirtualTable* VirtualTable;
+                                           [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                                           public partial int TestFunction(int argOne, void* argTwo) => VirtualTable->TestFunction((BaseStruct2*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this), argOne, argTwo);
                                        }
                                        """;
 
@@ -562,12 +562,12 @@ public class InheritsAttributeTests {
                                                   unsafe partial struct ChildStruct
                                                   {
                                                       /// <summary>Inherited parent class accessor for <see cref="BaseStruct">BaseStruct</see></summary>
-                                                      [FieldOffset(0)] public BaseStruct BaseStruct;
+                                                      [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public BaseStruct BaseStruct;
                                                       /// <summary>Inherited parent class accessor for <see cref="BaseStruct2">BaseStruct2</see></summary>
-                                                      [FieldOffset(4)] public BaseStruct2 BaseStruct2;
+                                                      [global::System.Runtime.InteropServices.FieldOffsetAttribute(4)] public BaseStruct2 BaseStruct2;
                                                       /// <inheritdoc cref="BaseStruct2.TestFunction" />
                                                       /// <remarks>Method inherited from parent class <see cref="BaseStruct2">BaseStruct2</see>.</remarks>
-                                                      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+                                                      [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
                                                       public int TestFunction(int argOne, void* argTwo) => BaseStruct2.TestFunction(argOne, argTwo);
                                                   }
                                                   """;
@@ -583,7 +583,7 @@ public class InheritsAttributeTests {
         [Fact]
     public async Task PublicMethodInheritance() {
         const string code = """
-                            [StructLayout(LayoutKind.Explicit, Size=4)]
+                            [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit, Size=4)]
                             [GenerateInterop(true)]
                             public partial struct BaseStruct
                             {
@@ -591,7 +591,7 @@ public class InheritsAttributeTests {
                                 private int TestPrivateFunction() => 0;
                             }
 
-                            [StructLayout(LayoutKind.Explicit, Size=8)]
+                            [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit, Size=8)]
                             [GenerateInterop]
                             [Inherits<BaseStruct>]
                             public partial struct ChildStruct
@@ -604,10 +604,10 @@ public class InheritsAttributeTests {
                                                   unsafe partial struct ChildStruct
                                                   {
                                                       /// <summary>Inherited parent class accessor for <see cref="BaseStruct">BaseStruct</see></summary>
-                                                      [FieldOffset(0)] public BaseStruct BaseStruct;
+                                                      [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public BaseStruct BaseStruct;
                                                       /// <inheritdoc cref="BaseStruct.TestFunction" />
                                                       /// <remarks>Method inherited from parent class <see cref="BaseStruct">BaseStruct</see>.</remarks>
-                                                      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+                                                      [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
                                                       public int TestFunction() => BaseStruct.TestFunction();
                                                   }
                                                   """;
@@ -622,7 +622,7 @@ public class InheritsAttributeTests {
     [Fact]
     public async Task StringOverloadsInheritance() {
         const string code = """
-                            [StructLayout(LayoutKind.Explicit, Size = 4)]
+                            [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit, Size = 4)]
                             [GenerateInterop(true)]
                             public unsafe partial struct BaseStruct
                             {
@@ -630,7 +630,7 @@ public class InheritsAttributeTests {
                                 public int TestFunction(int argOne, byte* stringArg) { return 0; }
                             }
                             
-                            [StructLayout(LayoutKind.Explicit, Size = 8)]
+                            [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit, Size = 8)]
                             [GenerateInterop]
                             [Inherits<BaseStruct>]
                             public partial struct ChildStruct
@@ -668,10 +668,10 @@ public class InheritsAttributeTests {
                                                 unsafe partial struct ChildStruct
                                                 {
                                                     /// <summary>Inherited parent class accessor for <see cref="BaseStruct">BaseStruct</see></summary>
-                                                    [FieldOffset(0)] public BaseStruct BaseStruct;
+                                                    [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public BaseStruct BaseStruct;
                                                     /// <inheritdoc cref="BaseStruct.TestFunction" />
                                                     /// <remarks>Method inherited from parent class <see cref="BaseStruct">BaseStruct</see>.</remarks>
-                                                    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+                                                    [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
                                                     public int TestFunction(int argOne, byte* stringArg) => BaseStruct.TestFunction(argOne, stringArg);
                                                     public int TestFunction(int argOne, string stringArg)
                                                     {
@@ -706,14 +706,14 @@ public class InheritsAttributeTests {
         const string code = """
                             using InteropGeneratorTesting;
 
-                            [StructLayout(LayoutKind.Explicit, Size=40)]
+                            [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit, Size=40)]
                             [GenerateInterop(true)]
                             public partial struct BaseStruct
                             {
-                                [FieldOffset(0)] [FixedSizeArray] internal FixedSizeArray10<int> _tenIntArray;
+                                [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] [FixedSizeArray] internal FixedSizeArray10<int> _tenIntArray;
                             }
                             
-                            [StructLayout(LayoutKind.Explicit, Size=40)]
+                            [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit, Size=40)]
                             [GenerateInterop]
                             [Inherits<BaseStruct>]
                             public partial struct ChildStruct
@@ -726,7 +726,7 @@ public class InheritsAttributeTests {
                               unsafe partial struct BaseStruct
                               {
                                   /// <inheritdoc cref="_tenIntArray" />
-                                  [UnscopedRef] public Span<int> TenIntArray => _tenIntArray;
+                                  [global::System.Diagnostics.CodeAnalysis.UnscopedRefAttribute] public Span<int> TenIntArray => _tenIntArray;
                               }
                               """;
 
@@ -735,10 +735,10 @@ public class InheritsAttributeTests {
                                                 unsafe partial struct ChildStruct
                                                 {
                                                     /// <summary>Inherited parent class accessor for <see cref="BaseStruct">BaseStruct</see></summary>
-                                                    [FieldOffset(0)] public BaseStruct BaseStruct;
+                                                    [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public BaseStruct BaseStruct;
                                                     /// <inheritdoc cref="BaseStruct.TenIntArray" />
                                                     /// <remarks>Field inherited from parent class <see cref="BaseStruct">BaseStruct</see>.</remarks>
-                                                    [UnscopedRef] public Span<int> TenIntArray => BaseStruct._tenIntArray;
+                                                    [global::System.Diagnostics.CodeAnalysis.UnscopedRefAttribute] public Span<int> TenIntArray => BaseStruct._tenIntArray;
                                                 }
                                                 """;
 

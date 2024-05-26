@@ -22,7 +22,7 @@ public class StaticAddressAttributeTests {
                               {
                                   public static class Addresses
                                   {
-                                      public static readonly Address Instance = new Address("TestStruct.Instance", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD ?? ?? ?? ??", 4, new ulong[] {0x00000000DDCCBBAA, 0x00000000DD00BBAA}, new ulong[] {0x00000000FFFFFFFF, 0x00000000FF00FFFF}, 0);
+                                      public static readonly global::InteropGenerator.Runtime.Address Instance = new global::InteropGenerator.Runtime.Address("TestStruct.Instance", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD ?? ?? ?? ??", 4, new ulong[] {0x00000000DDCCBBAA, 0x00000000DD00BBAA}, new ulong[] {0x00000000FFFFFFFF, 0x00000000FF00FFFF}, 0);
                                   }
                                   public unsafe static class StaticAddressPointers
                                   {
@@ -62,7 +62,7 @@ public class StaticAddressAttributeTests {
                               {
                                   public static class Addresses
                                   {
-                                      public static readonly Address Instance = new Address("TestStruct.Instance", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD ?? ?? ?? ??", 4, new ulong[] {0x00000000DDCCBBAA, 0x00000000DD00BBAA}, new ulong[] {0x00000000FFFFFFFF, 0x00000000FF00FFFF}, 0);
+                                      public static readonly global::InteropGenerator.Runtime.Address Instance = new global::InteropGenerator.Runtime.Address("TestStruct.Instance", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD ?? ?? ?? ??", 4, new ulong[] {0x00000000DDCCBBAA, 0x00000000DD00BBAA}, new ulong[] {0x00000000FFFFFFFF, 0x00000000FF00FFFF}, 0);
                                   }
                                   public unsafe static class StaticAddressPointers
                                   {
@@ -102,7 +102,7 @@ public class StaticAddressAttributeTests {
                               {
                                   public static class Addresses
                                   {
-                                      public static readonly Address Instance = new Address("TestStruct.Instance", "E8 BB CC DD ?? ?? ?? ?? AA BB ?? DD ?? ?? ?? ??", 1, new ulong[] {0x00000000DDCCBBE8, 0x00000000DD00BBAA}, new ulong[] {0x00000000FFFFFFFF, 0x00000000FF00FFFF}, 0);
+                                      public static readonly global::InteropGenerator.Runtime.Address Instance = new global::InteropGenerator.Runtime.Address("TestStruct.Instance", "E8 BB CC DD ?? ?? ?? ?? AA BB ?? DD ?? ?? ?? ??", 1, new ulong[] {0x00000000DDCCBBE8, 0x00000000DD00BBAA}, new ulong[] {0x00000000FFFFFFFF, 0x00000000FF00FFFF}, 0);
                                   }
                                   public unsafe static class StaticAddressPointers
                                   {
@@ -142,7 +142,7 @@ public class StaticAddressAttributeTests {
                               {
                                   public static class Addresses
                                   {
-                                      public static readonly Address Instance = new Address("TestStruct.Instance", "E9 BB CC DD ?? ?? ?? ?? AA BB ?? DD ?? ?? ?? ??", 1, new ulong[] {0x00000000DDCCBBE9, 0x00000000DD00BBAA}, new ulong[] {0x00000000FFFFFFFF, 0x00000000FF00FFFF}, 0);
+                                      public static readonly global::InteropGenerator.Runtime.Address Instance = new global::InteropGenerator.Runtime.Address("TestStruct.Instance", "E9 BB CC DD ?? ?? ?? ?? AA BB ?? DD ?? ?? ?? ??", 1, new ulong[] {0x00000000DDCCBBE9, 0x00000000DD00BBAA}, new ulong[] {0x00000000FFFFFFFF, 0x00000000FF00FFFF}, 0);
                                   }
                                   public unsafe static class StaticAddressPointers
                                   {
@@ -186,7 +186,7 @@ public class StaticAddressAttributeTests {
                               {
                                   public static class Addresses
                                   {
-                                      public static readonly Address Instance = new Address("TestNamespace.InnerNamespace.TestStruct.Instance", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD ?? ?? ?? ??", 4, new ulong[] {0x00000000DDCCBBAA, 0x00000000DD00BBAA}, new ulong[] {0x00000000FFFFFFFF, 0x00000000FF00FFFF}, 0);
+                                      public static readonly global::InteropGenerator.Runtime.Address Instance = new global::InteropGenerator.Runtime.Address("TestNamespace.InnerNamespace.TestStruct.Instance", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD ?? ?? ?? ??", 4, new ulong[] {0x00000000DDCCBBAA, 0x00000000DD00BBAA}, new ulong[] {0x00000000FFFFFFFF, 0x00000000FF00FFFF}, 0);
                                   }
                                   public unsafe static class StaticAddressPointers
                                   {
@@ -231,7 +231,7 @@ public class StaticAddressAttributeTests {
                                   {
                                       public static class Addresses
                                       {
-                                          public static readonly Address Instance = new Address("TestStruct+InnerStruct.Instance", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD ?? ?? ?? ??", 4, new ulong[] {0x00000000DDCCBBAA, 0x00000000DD00BBAA}, new ulong[] {0x00000000FFFFFFFF, 0x00000000FF00FFFF}, 0);
+                                          public static readonly global::InteropGenerator.Runtime.Address Instance = new global::InteropGenerator.Runtime.Address("TestStruct+InnerStruct.Instance", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD ?? ?? ?? ??", 4, new ulong[] {0x00000000DDCCBBAA, 0x00000000DD00BBAA}, new ulong[] {0x00000000FFFFFFFF, 0x00000000FF00FFFF}, 0);
                                       }
                                       public unsafe static class StaticAddressPointers
                                       {
@@ -274,8 +274,8 @@ public class StaticAddressAttributeTests {
                               {
                                   public static class Addresses
                                   {
-                                      public static readonly Address Instance = new Address("TestStruct.Instance", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD ?? ?? ?? ??", 4, new ulong[] {0x00000000DDCCBBAA, 0x00000000DD00BBAA}, new ulong[] {0x00000000FFFFFFFF, 0x00000000FF00FFFF}, 0);
-                                      public static readonly Address Instance2 = new Address("TestStruct.Instance2", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD ?? ?? ?? ??", 4, new ulong[] {0x00000000DDCCBBAA, 0x00000000DD00BBAA}, new ulong[] {0x00000000FFFFFFFF, 0x00000000FF00FFFF}, 0);
+                                      public static readonly global::InteropGenerator.Runtime.Address Instance = new global::InteropGenerator.Runtime.Address("TestStruct.Instance", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD ?? ?? ?? ??", 4, new ulong[] {0x00000000DDCCBBAA, 0x00000000DD00BBAA}, new ulong[] {0x00000000FFFFFFFF, 0x00000000FF00FFFF}, 0);
+                                      public static readonly global::InteropGenerator.Runtime.Address Instance2 = new global::InteropGenerator.Runtime.Address("TestStruct.Instance2", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD ?? ?? ?? ??", 4, new ulong[] {0x00000000DDCCBBAA, 0x00000000DD00BBAA}, new ulong[] {0x00000000FFFFFFFF, 0x00000000FF00FFFF}, 0);
                                   }
                                   public unsafe static class StaticAddressPointers
                                   {

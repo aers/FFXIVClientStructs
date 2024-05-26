@@ -53,13 +53,13 @@ public sealed partial class InteropGenerator {
             // write parent accessor if its directly inherited
             if (structInfo.InheritedStructs.Any(inheritanceInfo => inheritanceInfo.InheritedTypeName == inheritedStruct.FullyQualifiedMetadataName)) {
                 writer.WriteLine($"""/// <summary>Inherited parent class accessor for <see cref="{inheritedStruct.FullyQualifiedMetadataName}">{inheritedStruct.Name}</see></summary>""");
-                writer.WriteLine($"[FieldOffset({offset})] public {inheritedStruct.FullyQualifiedMetadataName} {inheritedStruct.Name};");
+                writer.WriteLine($"[global::System.Runtime.InteropServices.FieldOffsetAttribute({offset})] public {inheritedStruct.FullyQualifiedMetadataName} {inheritedStruct.Name};");
             }
             // write public fields
             foreach (FieldInfo field in inheritedStruct.ExtraInheritedStructInfo!.PublicFields) {
                 writer.WriteLine($"""/// <inheritdoc cref="{inheritedStruct.FullyQualifiedMetadataName}.{field.Name}" />""");
                 writer.WriteLine($"""/// <remarks>Field inherited from parent class <see cref="{inheritedStruct.FullyQualifiedMetadataName}">{inheritedStruct.Name}</see>.</remarks>""");
-                writer.WriteLine($"[FieldOffset({offset + field.Offset})] public {field.Type} {field.Name};");
+                writer.WriteLine($"[global::System.Runtime.InteropServices.FieldOffsetAttribute({offset + field.Offset})] public {field.Type} {field.Name};");
             }
         }
 
@@ -143,7 +143,7 @@ public sealed partial class InteropGenerator {
             MethodInfo methodInfo = memberFunctionInfo.MethodInfo;
             writer.WriteLine($"""/// <inheritdoc cref="{inheritedStruct.FullyQualifiedMetadataName}.{methodInfo.Name}" />""");
             writer.WriteLine($"""/// <remarks>Method inherited from parent class <see cref="{inheritedStruct.FullyQualifiedMetadataName}">{inheritedStruct.Name}</see>.</remarks>""");
-            writer.WriteLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
+            writer.WriteLine("[global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]");
             // public int SomeInheritedMethod(int param, int param2) => Path.To.Parent.SomeInheritedMethod(param, param2);
             writer.WriteLine($"{methodInfo.GetDeclarationStringWithoutPartial()} => {path}.{methodInfo.Name}({methodInfo.GetParameterNamesString()});");
         }
@@ -153,7 +153,7 @@ public sealed partial class InteropGenerator {
         // write virtual function pointers from inherited structs using the child struct type as the "this" pointer
         // StructLayout can't be duplicated so only write it if it hasnt been written before
         if (!structInfo.HasVirtualTable())
-            writer.WriteLine("[StructLayout(LayoutKind.Explicit)]");
+            writer.WriteLine("[global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit)]");
         writer.WriteLine($"public unsafe partial struct {structInfo.Name}VirtualTable");
         using (writer.WriteBlock()) {
             foreach ((StructInfo inheritedStruct, _, int offset) in resolvedInheritanceOrder) {
@@ -162,13 +162,13 @@ public sealed partial class InteropGenerator {
                     continue;
                 foreach (VirtualFunctionInfo virtualFunctionInfo in inheritedStruct.VirtualFunctions) {
                     var functionPointerType = $"delegate* unmanaged[Stdcall] <{structInfo.Name}*, {virtualFunctionInfo.MethodInfo.GetParameterTypeString()}{virtualFunctionInfo.MethodInfo.ReturnType}>";
-                    writer.WriteLine($"[FieldOffset({virtualFunctionInfo.Index * 8})] public {functionPointerType} {virtualFunctionInfo.MethodInfo.Name};");
+                    writer.WriteLine($"[global::System.Runtime.InteropServices.FieldOffsetAttribute({virtualFunctionInfo.Index * 8})] public {functionPointerType} {virtualFunctionInfo.MethodInfo.Name};");
                 }
             }
         }
         // if the only virtual functions were inherited we need to write the vtable accessor
         if (!structInfo.HasVirtualTable()) {
-            writer.WriteLine($"[FieldOffset(0)] public {structInfo.Name}VirtualTable* VirtualTable;");
+            writer.WriteLine($"[global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public {structInfo.Name}VirtualTable* VirtualTable;");
         }
     }
 
@@ -177,13 +177,13 @@ public sealed partial class InteropGenerator {
             MethodInfo methodInfo = virtualFunctionInfo.MethodInfo;
             writer.WriteLine($"""/// <inheritdoc cref="{inheritedStruct.FullyQualifiedMetadataName}.{methodInfo.Name}" />""");
             writer.WriteLine($"""/// <remarks>Method inherited from parent class <see cref="{inheritedStruct.FullyQualifiedMetadataName}">{inheritedStruct.Name}</see>.</remarks>""");
-            writer.WriteLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
+            writer.WriteLine("[global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]");
             // function in table - call via table
             if (offset == 0) {
                 var paramNames = string.Empty;
                 if (methodInfo.Parameters.Any())
                     paramNames = ", " + methodInfo.GetParameterNamesString();
-                writer.WriteLine($"{methodInfo.GetDeclarationStringWithoutPartial()} => VirtualTable->{methodInfo.Name}(({childTypeName}*)Unsafe.AsPointer(ref this){paramNames});");
+                writer.WriteLine($"{methodInfo.GetDeclarationStringWithoutPartial()} => VirtualTable->{methodInfo.Name}(({childTypeName}*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this){paramNames});");
             } else {
                 writer.WriteLine($"{methodInfo.GetDeclarationStringWithoutPartial()} => {path}.{methodInfo.Name}({methodInfo.GetParameterNamesString()});");
             }
@@ -194,7 +194,7 @@ public sealed partial class InteropGenerator {
         foreach (MethodInfo methodInfo in inheritedStruct.ExtraInheritedStructInfo!.PublicMethods) {
             writer.WriteLine($"""/// <inheritdoc cref="{inheritedStruct.FullyQualifiedMetadataName}.{methodInfo.Name}" />""");
             writer.WriteLine($"""/// <remarks>Method inherited from parent class <see cref="{inheritedStruct.FullyQualifiedMetadataName}">{inheritedStruct.Name}</see>.</remarks>""");
-            writer.WriteLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
+            writer.WriteLine("[global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]");
             // public int SomeInheritedMethod(int param, int param2) => Path.To.Parent.SomeInheritedMethod(param, param2);
             writer.WriteLine($"{methodInfo.GetDeclarationStringWithoutPartial()} => {path}.{methodInfo.Name}({methodInfo.GetParameterNamesString()});");
         }
@@ -205,7 +205,7 @@ public sealed partial class InteropGenerator {
             writer.WriteLine($"""/// <inheritdoc cref="{inheritedStruct.FullyQualifiedMetadataName}.{fixedSizeArrayInfo.GetPublicFieldName()}" />""");
             writer.WriteLine($"""/// <remarks>Field inherited from parent class <see cref="{inheritedStruct.FullyQualifiedMetadataName}">{inheritedStruct.Name}</see>.</remarks>""");
             // [UnscopedRef] public Span<T> FieldName => Path.To.Parent_fieldName;
-            writer.WriteLine($"[UnscopedRef] public Span<{fixedSizeArrayInfo.Type}> {fixedSizeArrayInfo.GetPublicFieldName()} => {path}.{fixedSizeArrayInfo.FieldName};");
+            writer.WriteLine($"[global::System.Diagnostics.CodeAnalysis.UnscopedRefAttribute] public Span<{fixedSizeArrayInfo.Type}> {fixedSizeArrayInfo.GetPublicFieldName()} => {path}.{fixedSizeArrayInfo.FieldName};");
         }
     }
 }

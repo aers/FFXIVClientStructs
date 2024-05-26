@@ -112,19 +112,19 @@ public sealed partial class InteropGenerator {
 
         string ulongArrayMask = "new ulong[] {" + string.Join(", ", groupedSigMask) + "}";
 
-        return $"""public static readonly Address {signatureName} = new Address("{structInfo.FullyQualifiedMetadataName}.{signatureName}", "{paddedSignature}", {adjustedOffset}, {ulongArraySignature}, {ulongArrayMask}, 0);""";
+        return $"""public static readonly global::InteropGenerator.Runtime.Address {signatureName} = new global::InteropGenerator.Runtime.Address("{structInfo.FullyQualifiedMetadataName}.{signatureName}", "{paddedSignature}", {adjustedOffset}, {ulongArraySignature}, {ulongArrayMask}, 0);""";
     }
 
     private static void RenderVirtualTable(StructInfo structInfo, IndentedTextWriter writer) {
-        writer.WriteLine("[StructLayout(LayoutKind.Explicit)]");
+        writer.WriteLine("[global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit)]");
         writer.WriteLine($"public unsafe partial struct {structInfo.Name}VirtualTable");
         using (writer.WriteBlock()) {
             foreach (VirtualFunctionInfo vfi in structInfo.VirtualFunctions) {
                 var functionPointerType = $"delegate* unmanaged[Stdcall] <{structInfo.Name}*, {vfi.MethodInfo.GetParameterTypeString()}{vfi.MethodInfo.ReturnType}>";
-                writer.WriteLine($"[FieldOffset({vfi.Index * 8})] public {functionPointerType} {vfi.MethodInfo.Name};");
+                writer.WriteLine($"[global::System.Runtime.InteropServices.FieldOffsetAttribute({vfi.Index * 8})] public {functionPointerType} {vfi.MethodInfo.Name};");
             }
         }
-        writer.WriteLine($"[FieldOffset(0)] public {structInfo.Name}VirtualTable* VirtualTable;");
+        writer.WriteLine($"[global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public {structInfo.Name}VirtualTable* VirtualTable;");
         if (structInfo.StaticVirtualTableSignature is not null) {
             writer.WriteLine($"public static {structInfo.Name}VirtualTable* StaticVirtualTablePointer => ({structInfo.Name}VirtualTable*)Addresses.StaticVirtualTable.Value;");
         }
@@ -154,7 +154,7 @@ public sealed partial class InteropGenerator {
                     var paramNames = string.Empty;
                     if (mfi.MethodInfo.Parameters.Any())
                         paramNames = ", " + mfi.MethodInfo.GetParameterNamesString();
-                    writer.WriteLine($"{mfi.MethodInfo.GetReturnString()}MemberFunctionPointers.{mfi.MethodInfo.Name}(({structInfo.Name}*)Unsafe.AsPointer(ref this){paramNames});");
+                    writer.WriteLine($"{mfi.MethodInfo.GetReturnString()}MemberFunctionPointers.{mfi.MethodInfo.Name}(({structInfo.Name}*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this){paramNames});");
                 }
             }
         }
@@ -162,11 +162,11 @@ public sealed partial class InteropGenerator {
 
     private static void RenderVirtualFunctions(StructInfo structInfo, IndentedTextWriter writer) {
         foreach (VirtualFunctionInfo virtualFunctionInfo in structInfo.VirtualFunctions) {
-            writer.WriteLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
+            writer.WriteLine("[global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]");
             var paramNames = string.Empty;
             if (virtualFunctionInfo.MethodInfo.Parameters.Any())
                 paramNames = ", " + virtualFunctionInfo.MethodInfo.GetParameterNamesString();
-            writer.WriteLine($"{virtualFunctionInfo.MethodInfo.GetDeclarationString()} => VirtualTable->{virtualFunctionInfo.MethodInfo.Name}(({structInfo.Name}*)Unsafe.AsPointer(ref this){paramNames});");
+            writer.WriteLine($"{virtualFunctionInfo.MethodInfo.GetDeclarationString()} => VirtualTable->{virtualFunctionInfo.MethodInfo.Name}(({structInfo.Name}*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this){paramNames});");
         }
     }
 
@@ -252,7 +252,7 @@ public sealed partial class InteropGenerator {
         foreach (FixedSizeArrayInfo fixedSizeArrayInfo in structInfo.FixedSizeArrays) {
             writer.WriteLine($"""/// <inheritdoc cref="{fixedSizeArrayInfo.FieldName}" />""");
             // [UnscopedRef] public Span<T> FieldName => _fieldName;
-            writer.WriteLine($"[UnscopedRef] public Span<{fixedSizeArrayInfo.Type}> {fixedSizeArrayInfo.GetPublicFieldName()} => {fixedSizeArrayInfo.FieldName};");
+            writer.WriteLine($"[global::System.Diagnostics.CodeAnalysis.UnscopedRefAttribute] public Span<{fixedSizeArrayInfo.Type}> {fixedSizeArrayInfo.GetPublicFieldName()} => {fixedSizeArrayInfo.FieldName};");
         }
     }
 
@@ -302,7 +302,7 @@ public sealed partial class InteropGenerator {
                 if (generatedSizes.Contains(fixedSizeArrayInfo.Size))
                     continue;
 
-                writer.WriteLine($"[InlineArray({fixedSizeArrayInfo.Size})]");
+                writer.WriteLine($"[global::System.Runtime.CompilerServices.InlineArrayAttribute({fixedSizeArrayInfo.Size})]");
                 writer.WriteLine($"public struct FixedSizeArray{fixedSizeArrayInfo.Size}<T> where T : unmanaged");
                 using (writer.WriteBlock()) {
                     writer.WriteLine("private T _element0;");

@@ -22,7 +22,7 @@ public class MemberFunctionAttributeTests {
                               {
                                   public static class Addresses
                                   {
-                                      public static readonly Address TestFunction = new Address("TestStruct.TestFunction", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD ?? ?? ?? ??", 0, new ulong[] {0x00000000DDCCBBAA, 0x00000000DD00BBAA}, new ulong[] {0x00000000FFFFFFFF, 0x00000000FF00FFFF}, 0);
+                                      public static readonly global::InteropGenerator.Runtime.Address TestFunction = new global::InteropGenerator.Runtime.Address("TestStruct.TestFunction", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD ?? ?? ?? ??", 0, new ulong[] {0x00000000DDCCBBAA, 0x00000000DD00BBAA}, new ulong[] {0x00000000FFFFFFFF, 0x00000000FF00FFFF}, 0);
                                   }
                                   public unsafe static class MemberFunctionPointers
                                   {
@@ -34,7 +34,7 @@ public class MemberFunctionAttributeTests {
                                       {
                                           InteropGenerator.Runtime.ThrowHelper.ThrowNullAddress("TestStruct.TestFunction", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD");
                                       }
-                                      return MemberFunctionPointers.TestFunction((TestStruct*)Unsafe.AsPointer(ref this), argOne, argTwo);
+                                      return MemberFunctionPointers.TestFunction((TestStruct*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this), argOne, argTwo);
                                   }
                               }
                               """;
@@ -62,7 +62,7 @@ public class MemberFunctionAttributeTests {
                               {
                                   public static class Addresses
                                   {
-                                      public static readonly Address TestFunction = new Address("TestStruct.TestFunction", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD ?? ?? ?? ??", 4, new ulong[] {0x00000000DDCCBBAA, 0x00000000DD00BBAA}, new ulong[] {0x00000000FFFFFFFF, 0x00000000FF00FFFF}, 0);
+                                      public static readonly global::InteropGenerator.Runtime.Address TestFunction = new global::InteropGenerator.Runtime.Address("TestStruct.TestFunction", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD ?? ?? ?? ??", 4, new ulong[] {0x00000000DDCCBBAA, 0x00000000DD00BBAA}, new ulong[] {0x00000000FFFFFFFF, 0x00000000FF00FFFF}, 0);
                                   }
                                   public unsafe static class MemberFunctionPointers
                                   {
@@ -74,7 +74,7 @@ public class MemberFunctionAttributeTests {
                                       {
                                           InteropGenerator.Runtime.ThrowHelper.ThrowNullAddress("TestStruct.TestFunction", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD");
                                       }
-                                      return MemberFunctionPointers.TestFunction((TestStruct*)Unsafe.AsPointer(ref this), argOne, argTwo);
+                                      return MemberFunctionPointers.TestFunction((TestStruct*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this), argOne, argTwo);
                                   }
                               }
                               """;
@@ -102,7 +102,7 @@ public class MemberFunctionAttributeTests {
                               {
                                   public static class Addresses
                                   {
-                                      public static readonly Address TestFunction = new Address("TestStruct.TestFunction", "E8 BB CC DD ?? ?? ?? ?? AA BB ?? DD ?? ?? ?? ??", 1, new ulong[] {0x00000000DDCCBBE8, 0x00000000DD00BBAA}, new ulong[] {0x00000000FFFFFFFF, 0x00000000FF00FFFF}, 0);
+                                      public static readonly global::InteropGenerator.Runtime.Address TestFunction = new global::InteropGenerator.Runtime.Address("TestStruct.TestFunction", "E8 BB CC DD ?? ?? ?? ?? AA BB ?? DD ?? ?? ?? ??", 1, new ulong[] {0x00000000DDCCBBE8, 0x00000000DD00BBAA}, new ulong[] {0x00000000FFFFFFFF, 0x00000000FF00FFFF}, 0);
                                   }
                                   public unsafe static class MemberFunctionPointers
                                   {
@@ -114,7 +114,7 @@ public class MemberFunctionAttributeTests {
                                       {
                                           InteropGenerator.Runtime.ThrowHelper.ThrowNullAddress("TestStruct.TestFunction", "E8 BB CC DD ?? ?? ?? ?? AA BB ?? DD");
                                       }
-                                      return MemberFunctionPointers.TestFunction((TestStruct*)Unsafe.AsPointer(ref this), argOne, argTwo);
+                                      return MemberFunctionPointers.TestFunction((TestStruct*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this), argOne, argTwo);
                                   }
                               }
                               """;
@@ -142,7 +142,7 @@ public class MemberFunctionAttributeTests {
                               {
                                   public static class Addresses
                                   {
-                                      public static readonly Address TestFunction = new Address("TestStruct.TestFunction", "E9 BB CC DD ?? ?? ?? ?? AA BB ?? DD ?? ?? ?? ??", 1, new ulong[] {0x00000000DDCCBBE9, 0x00000000DD00BBAA}, new ulong[] {0x00000000FFFFFFFF, 0x00000000FF00FFFF}, 0);
+                                      public static readonly global::InteropGenerator.Runtime.Address TestFunction = new global::InteropGenerator.Runtime.Address("TestStruct.TestFunction", "E9 BB CC DD ?? ?? ?? ?? AA BB ?? DD ?? ?? ?? ??", 1, new ulong[] {0x00000000DDCCBBE9, 0x00000000DD00BBAA}, new ulong[] {0x00000000FFFFFFFF, 0x00000000FF00FFFF}, 0);
                                   }
                                   public unsafe static class MemberFunctionPointers
                                   {
@@ -154,7 +154,7 @@ public class MemberFunctionAttributeTests {
                                       {
                                           InteropGenerator.Runtime.ThrowHelper.ThrowNullAddress("TestStruct.TestFunction", "E9 BB CC DD ?? ?? ?? ?? AA BB ?? DD");
                                       }
-                                      return MemberFunctionPointers.TestFunction((TestStruct*)Unsafe.AsPointer(ref this), argOne, argTwo);
+                                      return MemberFunctionPointers.TestFunction((TestStruct*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this), argOne, argTwo);
                                   }
                               }
                               """;
@@ -182,7 +182,7 @@ public class MemberFunctionAttributeTests {
                               {
                                   public static class Addresses
                                   {
-                                      public static readonly Address TestFunction = new Address("TestStruct.TestFunction", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD ?? ?? ?? ??", 0, new ulong[] {0x00000000DDCCBBAA, 0x00000000DD00BBAA}, new ulong[] {0x00000000FFFFFFFF, 0x00000000FF00FFFF}, 0);
+                                      public static readonly global::InteropGenerator.Runtime.Address TestFunction = new global::InteropGenerator.Runtime.Address("TestStruct.TestFunction", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD ?? ?? ?? ??", 0, new ulong[] {0x00000000DDCCBBAA, 0x00000000DD00BBAA}, new ulong[] {0x00000000FFFFFFFF, 0x00000000FF00FFFF}, 0);
                                   }
                                   public unsafe static class MemberFunctionPointers
                                   {
@@ -194,7 +194,7 @@ public class MemberFunctionAttributeTests {
                                       {
                                           InteropGenerator.Runtime.ThrowHelper.ThrowNullAddress("TestStruct.TestFunction", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD");
                                       }
-                                      MemberFunctionPointers.TestFunction((TestStruct*)Unsafe.AsPointer(ref this), argOne, argTwo);
+                                      MemberFunctionPointers.TestFunction((TestStruct*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this), argOne, argTwo);
                                   }
                               }
                               """;
@@ -222,7 +222,7 @@ public class MemberFunctionAttributeTests {
                               {
                                   public static class Addresses
                                   {
-                                      public static readonly Address TestFunction = new Address("TestStruct.TestFunction", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD ?? ?? ?? ??", 0, new ulong[] {0x00000000DDCCBBAA, 0x00000000DD00BBAA}, new ulong[] {0x00000000FFFFFFFF, 0x00000000FF00FFFF}, 0);
+                                      public static readonly global::InteropGenerator.Runtime.Address TestFunction = new global::InteropGenerator.Runtime.Address("TestStruct.TestFunction", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD ?? ?? ?? ??", 0, new ulong[] {0x00000000DDCCBBAA, 0x00000000DD00BBAA}, new ulong[] {0x00000000FFFFFFFF, 0x00000000FF00FFFF}, 0);
                                   }
                                   public unsafe static class MemberFunctionPointers
                                   {
@@ -265,8 +265,8 @@ public class MemberFunctionAttributeTests {
                               {
                                   public static class Addresses
                                   {
-                                      public static readonly Address TestFunction = new Address("TestStruct.TestFunction", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD ?? ?? ?? ??", 0, new ulong[] {0x00000000DDCCBBAA, 0x00000000DD00BBAA}, new ulong[] {0x00000000FFFFFFFF, 0x00000000FF00FFFF}, 0);
-                                      public static readonly Address TestFunction2 = new Address("TestStruct.TestFunction2", "?? ?? AA BB CC DD EE ?? ?? EE CC DD BB AA FF ?? ?? EE ?? ?? ?? ?? ?? ??", 0, new ulong[] {0x00EEDDCCBBAA0000, 0x00FFAABBDDCCEE00, 0x000000000000EE00}, new ulong[] {0x00FFFFFFFFFF0000, 0x00FFFFFFFFFFFF00, 0x000000000000FF00}, 0);
+                                      public static readonly global::InteropGenerator.Runtime.Address TestFunction = new global::InteropGenerator.Runtime.Address("TestStruct.TestFunction", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD ?? ?? ?? ??", 0, new ulong[] {0x00000000DDCCBBAA, 0x00000000DD00BBAA}, new ulong[] {0x00000000FFFFFFFF, 0x00000000FF00FFFF}, 0);
+                                      public static readonly global::InteropGenerator.Runtime.Address TestFunction2 = new global::InteropGenerator.Runtime.Address("TestStruct.TestFunction2", "?? ?? AA BB CC DD EE ?? ?? EE CC DD BB AA FF ?? ?? EE ?? ?? ?? ?? ?? ??", 0, new ulong[] {0x00EEDDCCBBAA0000, 0x00FFAABBDDCCEE00, 0x000000000000EE00}, new ulong[] {0x00FFFFFFFFFF0000, 0x00FFFFFFFFFFFF00, 0x000000000000FF00}, 0);
                                   }
                                   public unsafe static class MemberFunctionPointers
                                   {
@@ -279,7 +279,7 @@ public class MemberFunctionAttributeTests {
                                       {
                                           InteropGenerator.Runtime.ThrowHelper.ThrowNullAddress("TestStruct.TestFunction", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD");
                                       }
-                                      return MemberFunctionPointers.TestFunction((TestStruct*)Unsafe.AsPointer(ref this), argOne, argTwo);
+                                      return MemberFunctionPointers.TestFunction((TestStruct*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this), argOne, argTwo);
                                   }
                                   public partial int TestFunction2(int argOne, void* argTwo)
                                   {
@@ -287,7 +287,7 @@ public class MemberFunctionAttributeTests {
                                       {
                                           InteropGenerator.Runtime.ThrowHelper.ThrowNullAddress("TestStruct.TestFunction2", "?? ?? AA BB CC DD EE ?? ?? EE CC DD BB AA FF ?? ?? EE ?? ??");
                                       }
-                                      return MemberFunctionPointers.TestFunction2((TestStruct*)Unsafe.AsPointer(ref this), argOne, argTwo);
+                                      return MemberFunctionPointers.TestFunction2((TestStruct*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this), argOne, argTwo);
                                   }
                               }
                               """;
@@ -315,7 +315,7 @@ public class MemberFunctionAttributeTests {
                               {
                                   public static class Addresses
                                   {
-                                      public static readonly Address TestFunction = new Address("TestStruct.TestFunction", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD ?? ?? ?? ??", 0, new ulong[] {0x00000000DDCCBBAA, 0x00000000DD00BBAA}, new ulong[] {0x00000000FFFFFFFF, 0x00000000FF00FFFF}, 0);
+                                      public static readonly global::InteropGenerator.Runtime.Address TestFunction = new global::InteropGenerator.Runtime.Address("TestStruct.TestFunction", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD ?? ?? ?? ??", 0, new ulong[] {0x00000000DDCCBBAA, 0x00000000DD00BBAA}, new ulong[] {0x00000000FFFFFFFF, 0x00000000FF00FFFF}, 0);
                                   }
                                   public unsafe static class MemberFunctionPointers
                                   {
@@ -327,7 +327,7 @@ public class MemberFunctionAttributeTests {
                                       {
                                           InteropGenerator.Runtime.ThrowHelper.ThrowNullAddress("TestStruct.TestFunction", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD");
                                       }
-                                      return MemberFunctionPointers.TestFunction((TestStruct*)Unsafe.AsPointer(ref this), ref argOne, out argTwo);
+                                      return MemberFunctionPointers.TestFunction((TestStruct*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this), ref argOne, out argTwo);
                                   }
                               }
                               """;
@@ -359,7 +359,7 @@ public class MemberFunctionAttributeTests {
                               {
                                   public static class Addresses
                                   {
-                                      public static readonly Address TestFunction = new Address("TestNamespace.InnerNamespace.TestStruct.TestFunction", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD ?? ?? ?? ??", 0, new ulong[] {0x00000000DDCCBBAA, 0x00000000DD00BBAA}, new ulong[] {0x00000000FFFFFFFF, 0x00000000FF00FFFF}, 0);
+                                      public static readonly global::InteropGenerator.Runtime.Address TestFunction = new global::InteropGenerator.Runtime.Address("TestNamespace.InnerNamespace.TestStruct.TestFunction", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD ?? ?? ?? ??", 0, new ulong[] {0x00000000DDCCBBAA, 0x00000000DD00BBAA}, new ulong[] {0x00000000FFFFFFFF, 0x00000000FF00FFFF}, 0);
                                   }
                                   public unsafe static class MemberFunctionPointers
                                   {
@@ -371,7 +371,7 @@ public class MemberFunctionAttributeTests {
                                       {
                                           InteropGenerator.Runtime.ThrowHelper.ThrowNullAddress("TestStruct.TestFunction", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD");
                                       }
-                                      return MemberFunctionPointers.TestFunction((TestStruct*)Unsafe.AsPointer(ref this), argOne, argTwo);
+                                      return MemberFunctionPointers.TestFunction((TestStruct*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this), argOne, argTwo);
                                   }
                               }
                               """;
@@ -404,7 +404,7 @@ public class MemberFunctionAttributeTests {
                                   {
                                       public static class Addresses
                                       {
-                                          public static readonly Address TestFunction = new Address("TestStruct+InnerStruct.TestFunction", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD ?? ?? ?? ??", 0, new ulong[] {0x00000000DDCCBBAA, 0x00000000DD00BBAA}, new ulong[] {0x00000000FFFFFFFF, 0x00000000FF00FFFF}, 0);
+                                          public static readonly global::InteropGenerator.Runtime.Address TestFunction = new global::InteropGenerator.Runtime.Address("TestStruct+InnerStruct.TestFunction", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD ?? ?? ?? ??", 0, new ulong[] {0x00000000DDCCBBAA, 0x00000000DD00BBAA}, new ulong[] {0x00000000FFFFFFFF, 0x00000000FF00FFFF}, 0);
                                       }
                                       public unsafe static class MemberFunctionPointers
                                       {
@@ -416,7 +416,7 @@ public class MemberFunctionAttributeTests {
                                           {
                                               InteropGenerator.Runtime.ThrowHelper.ThrowNullAddress("InnerStruct.TestFunction", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD");
                                           }
-                                          return MemberFunctionPointers.TestFunction((InnerStruct*)Unsafe.AsPointer(ref this), argOne, argTwo);
+                                          return MemberFunctionPointers.TestFunction((InnerStruct*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this), argOne, argTwo);
                                       }
                                   }
                               }

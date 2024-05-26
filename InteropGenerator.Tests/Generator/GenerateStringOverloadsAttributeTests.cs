@@ -8,7 +8,7 @@ public class GenerateStringOverloadsAttributeTests {
     [Fact]
     public async Task GenerateStringOverloads() {
         const string code = """
-                            [StructLayout(LayoutKind.Explicit)]
+                            [global::System.Runtime.InteropServices.StructLayout(global::System.Runtime.InteropServices.LayoutKind.Explicit)]
                             [GenerateInterop]
                             public unsafe partial struct TestStruct
                             {
@@ -50,7 +50,7 @@ public class GenerateStringOverloadsAttributeTests {
     [Fact]
     public async Task GenerateMultipleStringOverloads() {
         const string code = """
-                            [StructLayout(LayoutKind.Explicit)]
+                            [global::System.Runtime.InteropServices.StructLayout(global::System.Runtime.InteropServices.LayoutKind.Explicit)]
                             [GenerateInterop]
                             public unsafe partial struct TestStruct
                             {
@@ -102,7 +102,7 @@ public class GenerateStringOverloadsAttributeTests {
     [Fact]
     public async Task GenerateStringOverloadsWithIgnoredParam() {
         const string code = """
-                            [StructLayout(LayoutKind.Explicit)]
+                            [global::System.Runtime.InteropServices.StructLayout(global::System.Runtime.InteropServices.LayoutKind.Explicit)]
                             [GenerateInterop]
                             public unsafe partial struct TestStruct
                             {
@@ -159,7 +159,7 @@ public class GenerateStringOverloadsAttributeTests {
                               {
                                   public static class Addresses
                                   {
-                                      public static readonly Address TestFunction = new Address("TestStruct.TestFunction", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD ?? ?? ?? ??", 0, new ulong[] {0x00000000DDCCBBAA, 0x00000000DD00BBAA}, new ulong[] {0x00000000FFFFFFFF, 0x00000000FF00FFFF}, 0);
+                                      public static readonly global::InteropGenerator.Runtime.Address TestFunction = new global::InteropGenerator.Runtime.Address("TestStruct.TestFunction", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD ?? ?? ?? ??", 0, new ulong[] {0x00000000DDCCBBAA, 0x00000000DD00BBAA}, new ulong[] {0x00000000FFFFFFFF, 0x00000000FF00FFFF}, 0);
                                   }
                                   public unsafe static class MemberFunctionPointers
                                   {
@@ -171,7 +171,7 @@ public class GenerateStringOverloadsAttributeTests {
                                       {
                                           InteropGenerator.Runtime.ThrowHelper.ThrowNullAddress("TestStruct.TestFunction", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD");
                                       }
-                                      return MemberFunctionPointers.TestFunction((TestStruct*)Unsafe.AsPointer(ref this), argOne, stringArg);
+                                      return MemberFunctionPointers.TestFunction((TestStruct*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this), argOne, stringArg);
                                   }
                                   public int TestFunction(int argOne, string stringArg)
                                   {

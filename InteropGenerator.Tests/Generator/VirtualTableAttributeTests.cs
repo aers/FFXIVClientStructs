@@ -8,7 +8,7 @@ public class VirtualTableAttributeTests {
     [Fact]
     public async Task GenerateStaticVirtualTable() {
         const string code = """
-                            [StructLayout(LayoutKind.Explicit)]
+                            [global::System.Runtime.InteropServices.StructLayout(global::System.Runtime.InteropServices.LayoutKind.Explicit)]
                             [GenerateInterop]
                             [VirtualTable("E8 ?? ?? ?? ??", 1)]
                             public partial struct TestStruct
@@ -22,13 +22,13 @@ public class VirtualTableAttributeTests {
                               {
                                   public static class Addresses
                                   {
-                                      public static readonly Address StaticVirtualTable = new Address("TestStruct.StaticVirtualTable", "E8 ?? ?? ?? ?? ?? ?? ??", 1, new ulong[] {0x00000000000000E8}, new ulong[] {0x00000000000000FF}, 0);
+                                      public static readonly global::InteropGenerator.Runtime.Address StaticVirtualTable = new global::InteropGenerator.Runtime.Address("TestStruct.StaticVirtualTable", "E8 ?? ?? ?? ?? ?? ?? ??", 1, new ulong[] {0x00000000000000E8}, new ulong[] {0x00000000000000FF}, 0);
                                   }
-                                  [StructLayout(LayoutKind.Explicit)]
+                                  [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit)]
                                   public unsafe partial struct TestStructVirtualTable
                                   {
                                   }
-                                  [FieldOffset(0)] public TestStructVirtualTable* VirtualTable;
+                                  [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public TestStructVirtualTable* VirtualTable;
                                   public static TestStructVirtualTable* StaticVirtualTablePointer => (TestStructVirtualTable*)Addresses.StaticVirtualTable.Value;
                               }
                               """;

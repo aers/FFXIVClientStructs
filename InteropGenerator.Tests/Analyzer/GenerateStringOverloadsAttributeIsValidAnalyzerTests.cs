@@ -8,6 +8,8 @@ public class GenerateStringOverloadsAttributeIsValidAnalyzerTests {
     [Fact]
     public async Task GenerateStringOverloadsAttributeIsValid_NoWarn() {
         const string code = """
+                            using System.Runtime.InteropServices;
+                            
                             [StructLayout(LayoutKind.Explicit, Size=4)]
                             [GenerateInterop]
                             public unsafe partial struct TestStruct
@@ -22,6 +24,8 @@ public class GenerateStringOverloadsAttributeIsValidAnalyzerTests {
     [Fact]
     public async Task GenerateStringOverloadsAttributeWithIgnoreIsValid_NoWarn() {
         const string code = """
+                            using System.Runtime.InteropServices;
+                            
                             [StructLayout(LayoutKind.Explicit, Size=4)]
                             [GenerateInterop]
                             public unsafe partial struct TestStruct
@@ -36,6 +40,8 @@ public class GenerateStringOverloadsAttributeIsValidAnalyzerTests {
     [Fact]
     public async Task GenerateStringOverloadsAttributeNoArgument_Warn() {
         const string code = """
+                            using System.Runtime.InteropServices;
+                            
                             [StructLayout(LayoutKind.Explicit, Size=4)]
                             [GenerateInterop]
                             public unsafe partial struct TestStruct
@@ -50,6 +56,8 @@ public class GenerateStringOverloadsAttributeIsValidAnalyzerTests {
     [Fact]
     public async Task GenerateStringOverloadsAttributeNoArgumentBecauseIgnore_Warn() {
         const string code = """
+                            using System.Runtime.InteropServices;
+                            
                             [StructLayout(LayoutKind.Explicit, Size=4)]
                             [GenerateInterop]
                             public unsafe partial struct TestStruct
@@ -64,6 +72,8 @@ public class GenerateStringOverloadsAttributeIsValidAnalyzerTests {
     [Fact]
     public async Task GenerateStringOverloadsAttributeStringIgnoreOnInvalidParameter_Warn() {
         const string code = """
+                            using System.Runtime.InteropServices;
+                            
                             [StructLayout(LayoutKind.Explicit, Size=4)]
                             [GenerateInterop]
                             public unsafe partial struct TestStruct

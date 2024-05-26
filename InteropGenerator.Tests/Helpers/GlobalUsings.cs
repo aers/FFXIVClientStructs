@@ -11,11 +11,6 @@ internal static class GlobalUsings {
                                     global using global::System.Threading;
                                     global using global::System.Threading.Tasks;
 
-                                    global using global::System.Runtime.InteropServices;
-                                    global using global::System.Runtime.CompilerServices;
-                                    global using global::System.Diagnostics.CodeAnalysis;
-
-                                    global using InteropGenerator.Runtime;
                                     global using InteropGenerator.Runtime.Attributes;
                                     """;
 }
