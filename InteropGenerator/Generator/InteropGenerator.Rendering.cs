@@ -1,4 +1,5 @@
 ﻿using System.Collections.Immutable;
+using System.Diagnostics;
 using InteropGenerator.Helpers;
 using InteropGenerator.Models;
 
@@ -254,6 +255,37 @@ public sealed partial class InteropGenerator {
             writer.WriteLine($"""/// <inheritdoc cref="{fixedSizeArrayInfo.FieldName}" />""");
             // [UnscopedRef] public Span<T> FieldName => _fieldName;
             writer.WriteLine($"[global::System.Diagnostics.CodeAnalysis.UnscopedRefAttribute] public Span<{fixedSizeArrayInfo.Type}> {fixedSizeArrayInfo.GetPublicFieldName()} => {fixedSizeArrayInfo.FieldName};");
+            if (fixedSizeArrayInfo.IsString) {
+                writer.WriteLine($"""/// <inheritdoc cref="{fixedSizeArrayInfo.FieldName}" />""");
+                writer.WriteLine($"public string {fixedSizeArrayInfo.GetPublicFieldName()}String");
+                using (writer.WriteBlock()) {
+                    if (fixedSizeArrayInfo.Type == "byte") {
+                        // Encoding.UTF8.GetString(MemoryMarshal.CreateReadOnlySpanFromNullTerminated((byte*)Unsafe.AsPointer(ref _field[0])))
+                        writer.WriteLine($"get => global::System.Text.Encoding.UTF8.GetString(global::System.Runtime.InteropServices.MemoryMarshal.CreateReadOnlySpanFromNullTerminated((byte*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref {fixedSizeArrayInfo.FieldName}[0])));");
+                        writer.WriteLine("set");
+                        using (writer.WriteBlock()) {
+                            writer.WriteLine($"if (global::System.Text.Encoding.UTF8.GetByteCount(value) > {fixedSizeArrayInfo.Size} - 1)");
+                            using (writer.WriteBlock()) {
+                                writer.WriteLine($"""InteropGenerator.Runtime.ThrowHelper.ThrowStringSizeTooLarge("{fixedSizeArrayInfo.GetPublicFieldName()}String", {fixedSizeArrayInfo.Size});""");
+                            }
+                            writer.WriteLine($"global::System.Text.Encoding.UTF8.GetBytes(value.AsSpan(), {fixedSizeArrayInfo.FieldName});");
+                            writer.WriteLine($"{fixedSizeArrayInfo.FieldName}[{fixedSizeArrayInfo.Size - 1}] = 0;");
+                        }
+                    }
+                    else if (fixedSizeArrayInfo.Type == "char") {
+                        writer.WriteLine($"get => new string({fixedSizeArrayInfo.FieldName});");
+                        writer.WriteLine("set");
+                        using (writer.WriteBlock()) {
+                            writer.WriteLine($"if (value.Length > {fixedSizeArrayInfo.Size} - 1)");
+                            using (writer.WriteBlock()) {
+                                writer.WriteLine($"""InteropGenerator.Runtime.ThrowHelper.ThrowStringSizeTooLarge("{fixedSizeArrayInfo.GetPublicFieldName()}String", {fixedSizeArrayInfo.Size});""");
+                            }
+                            writer.WriteLine($"value.CopyTo({fixedSizeArrayInfo.FieldName});");
+                            writer.WriteLine($"{fixedSizeArrayInfo.FieldName}[{fixedSizeArrayInfo.Size - 1}] = '\\0';");
+                        }
+                    }
+                }
+            }
         }
     }
 

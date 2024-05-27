@@ -6,6 +6,8 @@
 ///     and T is the type contained in the array.
 ///     For example, "private FixedSizeArray10&lt;int> _tenIntArray;" is a valid declaration.
 /// </summary>
+/// <param name="isString">Can be set to true on byte and char arrays to generate C# string accessors.</param>
 [AttributeUsage(AttributeTargets.Field)]
-public sealed class FixedSizeArrayAttribute : Attribute {
+public sealed class FixedSizeArrayAttribute(bool isString = false) : Attribute {
+    public bool IsString { get; } = isString;
 }

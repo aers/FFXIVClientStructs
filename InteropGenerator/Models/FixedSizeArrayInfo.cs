@@ -3,7 +3,8 @@
 internal sealed record FixedSizeArrayInfo(
     string FieldName,
     string Type,
-    int Size) {
+    int Size,
+    bool IsString) {
     public string GetPublicFieldName() =>
         // drop _, capitalize first letter
         // _someFieldName => SomeFieldName

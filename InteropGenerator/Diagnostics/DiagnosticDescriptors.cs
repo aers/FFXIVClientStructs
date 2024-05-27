@@ -205,4 +205,13 @@ internal static class DiagnosticDescriptors {
         DiagnosticSeverity.Error,
         true,
         "A field marked with the FixedSizeArray attribute does not use the proper naming scheme.");
+
+    public static readonly DiagnosticDescriptor FixedSizeArrayStringFieldMustBeByteOrChar = new(
+        "CSIG0304",
+        "Fixed size array string backing field must be byte or char type",
+        "The field {0} marked as a fixed size array string must use byte or char type",
+        "InteropGenerator.Field",
+        DiagnosticSeverity.Error,
+        true,
+        "A field marked with the FixedSizeArray attribute and isString set to true does not use the proper type.");
 }

@@ -9,7 +9,7 @@ namespace InteropGenerator.Diagnostics.Analyzers;
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class FixedSizeArrayAttributeIsValidAnalyzer : DiagnosticAnalyzer {
 
-    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = [FixedSizeArrayFieldMustBeInternal, FixedSizeArrayFieldMustHaveProperlyNamedType, FixedSizeArrayFieldMustHaveProperNaming];
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = [FixedSizeArrayFieldMustBeInternal, FixedSizeArrayFieldMustHaveProperlyNamedType, FixedSizeArrayFieldMustHaveProperNaming, FixedSizeArrayStringFieldMustBeByteOrChar];
 
     public override void Initialize(AnalysisContext context) {
         context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
@@ -24,8 +24,19 @@ public sealed class FixedSizeArrayAttributeIsValidAnalyzer : DiagnosticAnalyzer 
                     if (context.Symbol is not IFieldSymbol fieldSymbol)
                         return;
 
-                    if (!fieldSymbol.HasAttributeWithType(fixedSizeArrayAttribute))
+                    if (!fieldSymbol.TryGetAttributeWithType(fixedSizeArrayAttribute, out AttributeData? fixedSizeArrayAttributeData))
                         return;
+                    
+                    if (fixedSizeArrayAttributeData.TryGetConstructorArgument(0, out bool? isString) &&
+                        isString.Value &&
+                        fieldSymbol.Type is INamedTypeSymbol { TypeArguments.IsEmpty: false } fieldType &&
+                        !(fieldType.TypeArguments[0].SpecialType == SpecialType.System_Byte || fieldType.TypeArguments[0].SpecialType == SpecialType.System_Char))
+                    {
+                        context.ReportDiagnostic(Diagnostic.Create(
+                            FixedSizeArrayStringFieldMustBeByteOrChar,
+                            fieldSymbol.Locations.FirstOrDefault(),
+                            fieldSymbol.Name));
+                    }
 
                     if (fieldSymbol.DeclaredAccessibility != Accessibility.Internal) {
                         context.ReportDiagnostic(Diagnostic.Create(

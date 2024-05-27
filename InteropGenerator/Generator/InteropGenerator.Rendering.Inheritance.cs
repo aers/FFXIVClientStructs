@@ -206,6 +206,39 @@ public sealed partial class InteropGenerator {
             writer.WriteLine($"""/// <remarks>Field inherited from parent class <see cref="{inheritedStruct.FullyQualifiedMetadataName}">{inheritedStruct.Name}</see>.</remarks>""");
             // [UnscopedRef] public Span<T> FieldName => Path.To.Parent_fieldName;
             writer.WriteLine($"[global::System.Diagnostics.CodeAnalysis.UnscopedRefAttribute] public Span<{fixedSizeArrayInfo.Type}> {fixedSizeArrayInfo.GetPublicFieldName()} => {path}.{fixedSizeArrayInfo.FieldName};");
+            if (fixedSizeArrayInfo.IsString) {
+                writer.WriteLine($"""/// <inheritdoc cref="{inheritedStruct.FullyQualifiedMetadataName}.{fixedSizeArrayInfo.GetPublicFieldName()}" />""");
+                writer.WriteLine($"""/// <remarks>Field inherited from parent class <see cref="{inheritedStruct.FullyQualifiedMetadataName}">{inheritedStruct.Name}</see>.</remarks>""");
+                writer.WriteLine($"public string {fixedSizeArrayInfo.GetPublicFieldName()}String");
+                using (writer.WriteBlock()) {
+                    if (fixedSizeArrayInfo.Type == "byte") {
+                        // Encoding.UTF8.GetString(MemoryMarshal.CreateReadOnlySpanFromNullTerminated((byte*)Unsafe.AsPointer(ref _field[0])))
+                        writer.WriteLine($"get => global::System.Text.Encoding.UTF8.GetString(global::System.Runtime.InteropServices.MemoryMarshal.CreateReadOnlySpanFromNullTerminated((byte*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref {path}.{fixedSizeArrayInfo.FieldName}[0])));");
+                        writer.WriteLine("set");
+                        using (writer.WriteBlock()) {
+                            writer.WriteLine($"if (global::System.Text.Encoding.UTF8.GetByteCount(value) > {fixedSizeArrayInfo.Size} - 1)");
+                            using (writer.WriteBlock()) {
+                                writer.WriteLine($"""InteropGenerator.Runtime.ThrowHelper.ThrowStringSizeTooLarge("{fixedSizeArrayInfo.GetPublicFieldName()}String", {fixedSizeArrayInfo.Size});""");
+                            }
+                            writer.WriteLine($"global::System.Text.Encoding.UTF8.GetBytes(value.AsSpan(), {path}.{fixedSizeArrayInfo.FieldName});");
+                            writer.WriteLine($"{path}.{fixedSizeArrayInfo.FieldName}[{fixedSizeArrayInfo.Size - 1}] = 0;");
+                        }
+                    }
+                    else if (fixedSizeArrayInfo.Type == "char") {
+                        writer.WriteLine($"get => new string({path}.{fixedSizeArrayInfo.FieldName});");
+                        writer.WriteLine("set");
+                        using (writer.WriteBlock()) {
+                            writer.WriteLine($"if (value.Length > {fixedSizeArrayInfo.Size} - 1)");
+                            using (writer.WriteBlock()) {
+                                writer.WriteLine($"""InteropGenerator.Runtime.ThrowHelper.ThrowStringSizeTooLarge("{fixedSizeArrayInfo.GetPublicFieldName()}String", {fixedSizeArrayInfo.Size});""");
+                            }
+                            writer.WriteLine($"value.CopyTo({path}.{fixedSizeArrayInfo.FieldName});");
+                            writer.WriteLine($"{path}.{fixedSizeArrayInfo.FieldName}[{fixedSizeArrayInfo.Size - 1}] = '\\0';");
+                        }
+                    }
+                }
+            }
+
         }
     }
 }

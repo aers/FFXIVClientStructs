@@ -1,6 +1,5 @@
 ﻿using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
-using System.Runtime.InteropServices.ComTypes;
 using InteropGenerator.Extensions;
 using InteropGenerator.Helpers;
 using InteropGenerator.Models;
@@ -125,7 +124,7 @@ public sealed partial class InteropGenerator {
                 if (!mfAttribute.TryGetConstructorArgument(0, out string? signature))
                     continue;
                 
-                // if attribute has two arguments, its either a single byte or an array, if neither, attribute is invalid
+                // if attribute has two arguments, it's either a single byte or an array, if neither, attribute is invalid
                 if (mfAttribute.ConstructorArguments.Length == 2) {
                     if (mfAttribute.ConstructorArguments[1].Kind == TypedConstantKind.Array &&
                         mfAttribute.TryGetMultiValueConstructorArgument(1, out ImmutableArray<byte>? multipleOffsets))
@@ -258,7 +257,7 @@ public sealed partial class InteropGenerator {
         foreach (IFieldSymbol fieldSymbol in structSymbol.GetMembers().OfType<IFieldSymbol>()) {
             if (fieldSymbol.Type is not INamedTypeSymbol fieldTypeSymbol)
                 continue;
-            if (fieldSymbol.TryGetAttributeWithFullyQualifiedMetadataName(AttributeNames.FixedSizeArrayAttribute, out _)) {
+            if (fieldSymbol.TryGetAttributeWithFullyQualifiedMetadataName(AttributeNames.FixedSizeArrayAttribute, out AttributeData? fixedSizeArrayAttributeData)) {
                 if (!fieldTypeSymbol.IsGenericType || fieldTypeSymbol.TypeArguments.Length != 1) // malformed field
                     continue;
 
@@ -270,10 +269,14 @@ public sealed partial class InteropGenerator {
                 if (!int.TryParse(fieldTypeSymbol.Name[14..], out int size))
                     continue;
 
+                if (!fixedSizeArrayAttributeData.TryGetConstructorArgument(0, out bool? isString))
+                    continue;
+
                 FixedSizeArrayInfo fixedSizeArrayInfo = new(
                     fieldSymbol.Name,
                     fieldTypeSymbol.TypeArguments[0].GetFullyQualifiedName(),
-                    size
+                    size,
+                    isString.Value
                 );
 
                 fixedSizeArrayBuilder.Add(fixedSizeArrayInfo);
