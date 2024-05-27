@@ -23,7 +23,10 @@ public sealed partial class InteropGenerator : IIncrementalGenerator {
                 .Where(static si => si is not null)!;
 
         context.RegisterSourceOutput(structInfos,
-            static (sourceContext, item) => { sourceContext.AddSource($"{item.FullyQualifiedMetadataName}.InteropGenerator.g.cs", RenderStructInfo(item, sourceContext.CancellationToken)); });
+            static (sourceContext, item) => { 
+                if (item.NeedsRender()) 
+                    sourceContext.AddSource($"{item.FullyQualifiedMetadataName}.InteropGenerator.g.cs", RenderStructInfo(item, sourceContext.CancellationToken));
+            });
 
         // code to group structs with the structs they inherit from
         // importantly we need to end up with a grouping that can be incremental for unchanged inheritance trees

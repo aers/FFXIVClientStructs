@@ -17,4 +17,6 @@ internal sealed record StructInfo(
     public string Name => Hierarchy[0];
     public bool HasSignatures() => !MemberFunctions.IsEmpty || !StaticAddresses.IsEmpty || StaticVirtualTableSignature is not null;
     public bool HasVirtualTable() => !VirtualFunctions.IsEmpty || StaticVirtualTableSignature is not null;
+
+    public bool NeedsRender() => MemberFunctions.Any() || VirtualFunctions.Any() || StaticAddresses.Any() || StringOverloads.Any() || StaticVirtualTableSignature is not null || FixedSizeArrays.Any();
 }
