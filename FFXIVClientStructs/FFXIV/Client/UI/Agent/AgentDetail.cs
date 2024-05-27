@@ -7,9 +7,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 //     Component::GUI::AtkModuleInterface::AtkEventInterface
 [Agent(AgentId.Detail)]
 [StructLayout(LayoutKind.Explicit, Size = 0x48)]
+[GenerateInterop]
+[Inherits<AgentInterface>]
 public unsafe partial struct AgentDetail {
-    [FieldOffset(0)] public AgentInterface AgentInterface;
-
     [FieldOffset(0x30)] public InfoProxySearchComment* InfoProxySearchCommentPtr;
 
     // Don't use these, as they are probably used for SocialDetail.

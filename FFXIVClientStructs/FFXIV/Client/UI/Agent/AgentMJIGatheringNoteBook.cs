@@ -4,8 +4,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.MJIGatheringNoteBook)]
 [StructLayout(LayoutKind.Explicit, Size = 0x30)]
+[GenerateInterop]
+[Inherits<AgentInterface>]
 public unsafe partial struct AgentMJIGatheringNoteBook {
-    [FieldOffset(0)] public AgentInterface AgentInterface;
     [FieldOffset(0x28)] public AgentMJIGatheringNoteBookData* Data;
 
     [MemberFunction("40 53 48 83 EC 20 48 8B 41 28 48 8B D9 89 90")]

@@ -44,15 +44,15 @@ public sealed class GenerateStringOverloadsAttributeIsValidAnalyzer : Diagnostic
                             if (!hasStringIgnore)
                                 hasValidParameter = true;
                         }
-
-                        if (!hasValidParameter) {
-                            context.ReportDiagnostic(Diagnostic.Create(
-                                GenerateStringOverloadsMethodMustHaveValidParameter,
-                                methodSymbol.Locations.FirstOrDefault(),
-                                methodSymbol.Name));
-                        }
                     }
-
+                    
+                    
+                    if (!hasValidParameter) {
+                        context.ReportDiagnostic(Diagnostic.Create(
+                            GenerateStringOverloadsMethodMustHaveValidParameter,
+                            methodSymbol.Locations.FirstOrDefault(),
+                            methodSymbol.Name));
+                    }
                 },
                 SymbolKind.Method);
         });

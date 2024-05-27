@@ -2,9 +2,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.IKDFishingLog)]
 [StructLayout(LayoutKind.Explicit, Size = 0x460)]
+[GenerateInterop]
+[Inherits<AgentInterface>]
 public unsafe partial struct AgentIKDFishingLog {
-    [FieldOffset(0x00)] public AgentInterface AgentInterface;
-
     [FieldOffset(0x28)] public uint RouteId;
     [FieldOffset(0x2C)] public fixed uint SpotId[3];
     [FieldOffset(0x38)] public uint SpotIndex;

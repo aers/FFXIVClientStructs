@@ -8,8 +8,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 //     Component::GUI::AtkModuleInterface::AtkEventInterface
 [Agent(AgentId.Revive)]
 [StructLayout(LayoutKind.Explicit, Size = 0xB8)]
+[GenerateInterop]
+[Inherits<AgentInterface>]
 public unsafe partial struct AgentRevive {
-    [FieldOffset(0x0)] public AgentInterface AgentInterface;
     [FieldOffset(0x28)] public Revive* Revive; //callback for SelectYesNo
     [FieldOffset(0x38)] public byte ReviveState;
     [FieldOffset(0x40)] public int ResurrectionTimeLeft;

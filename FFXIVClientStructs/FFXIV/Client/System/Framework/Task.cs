@@ -1,6 +1,7 @@
 namespace FFXIVClientStructs.FFXIV.Client.System.Framework;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x38)]
+[GenerateInterop(isInherited: true)]
 public unsafe partial struct Task {
     [FieldOffset(0x08)] public void* Runner;
     [FieldOffset(0x10)] public Framework* Framework;

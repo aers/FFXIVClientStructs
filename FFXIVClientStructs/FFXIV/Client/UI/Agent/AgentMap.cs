@@ -9,9 +9,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 //     Component::GUI::AtkModuleInterface::AtkEventInterface
 [Agent(AgentId.Map)]
 [StructLayout(LayoutKind.Explicit, Size = 0x12AB8)]
+[GenerateInterop]
+[Inherits<AgentInterface>]
 public unsafe partial struct AgentMap {
-    [FieldOffset(0x0)] public AgentInterface AgentInterface;
-
     /// <summary> Pointers to markers in <see cref="EventMarkers"/>. </summary>
     [FieldOffset(0x88)] public StdVector<Pointer<MapMarkerData>> EventMarkersPtrs;
     /// <summary> Includes markers from FateManager, EventFramework and SequentialEvent (whatever that is). </summary>

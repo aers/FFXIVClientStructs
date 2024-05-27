@@ -3,12 +3,11 @@ using FFXIVClientStructs.FFXIV.Client.System.String;
 namespace FFXIVClientStructs.FFXIV.Client.Network;
 
 [StructLayout(LayoutKind.Explicit, Size = 0xB60)]
+[GenerateInterop]
 public unsafe partial struct NetworkModule {
     [FieldOffset(0x028)] public byte LobbyCount;
     [FieldOffset(0x02C)] public fixed uint LobbyPorts[12];
-    [FixedSizeArray<Utf8String>(12)]
-    [FieldOffset(0x060)] public fixed byte LobbyHosts[12 * 0x68];
-
+    [FieldOffset(0x060)] [FixedSizeArray] internal FixedSizeArray12<Utf8String> _lobbyHosts;
     [FieldOffset(0x5AC)] public int OperatingSystemTypeAndVersion; //Most likely this is an enum
     [FieldOffset(0x5B0)] public uint SaveDataBankPort;
     [FieldOffset(0x5B8)] public Utf8String SaveDataBankHost; //Config Saves

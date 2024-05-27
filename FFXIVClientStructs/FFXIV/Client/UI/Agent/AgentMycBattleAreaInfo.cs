@@ -4,8 +4,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.MycBattleAreaInfo)]
 [StructLayout(LayoutKind.Explicit, Size = 0x48)]
+[GenerateInterop]
+[Inherits<AgentInterface>]
 public unsafe partial struct AgentMycBattleAreaInfo {
-    [FieldOffset(0x0)] public AgentInterface AgentInterface;
 
     [FieldOffset(0x28)] public MycDynamicEventData* MycDynamicEventData;
 }

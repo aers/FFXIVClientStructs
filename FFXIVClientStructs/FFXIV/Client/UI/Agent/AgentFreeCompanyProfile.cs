@@ -4,8 +4,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.FreeCompanyProfile)]
 [StructLayout(LayoutKind.Explicit, Size = 0x27C)]
+[GenerateInterop]
+[Inherits<AgentInterface>]
 public unsafe partial struct AgentFreeCompanyProfile {
-    [FieldOffset(0x000)] public AgentInterface AgentInterface;
     //First = 0xe0 00 00 00 00 00 00 00
     //Next were the same as AgentINspect GuildStruct 0x08
     //These (in Decimal) are the same as used on the Lodestone

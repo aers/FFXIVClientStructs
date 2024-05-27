@@ -10,9 +10,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 // ctor "E8 ?? ?? ?? ?? EB 03 48 8B C5 45 33 C9 48 89 47 40"
 [Agent(AgentId.Hud)]
 [StructLayout(LayoutKind.Explicit, Size = 0x4BA0)]
+[GenerateInterop]
+[Inherits<AgentInterface>]
 public unsafe partial struct AgentHUD {
-    [FieldOffset(0x0)] public AgentInterface AgentInterface;
-
     [FieldOffset(0xAA8)] public uint CastBarAddonId;
 
     [FieldOffset(0xAB0)] public uint CurrentTargetId;

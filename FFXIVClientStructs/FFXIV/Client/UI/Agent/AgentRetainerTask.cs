@@ -2,9 +2,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.RetainerTask)]
 [StructLayout(LayoutKind.Explicit, Size = 0x90)]
+[GenerateInterop]
+[Inherits<AgentInterface>]
 public unsafe partial struct AgentRetainerTask {
-    [FieldOffset(0x00)] public AgentInterface AgentInterface;
-
     // 00 - None
     // 01 - Request Assignment
     // 02 - Venture in Progress

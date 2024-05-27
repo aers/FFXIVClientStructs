@@ -6,8 +6,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.InventoryContext)]
 [StructLayout(LayoutKind.Explicit, Size = 0x778)]
+[GenerateInterop]
+[Inherits<AgentInterface>]
 public unsafe partial struct AgentInventoryContext {
-    [FieldOffset(0x0)] public AgentInterface AgentInterface;
     [FieldOffset(0x28)] public uint BlockingAddonId;
     [FieldOffset(0x2C)] public int ContexItemStartIndex;
     [FieldOffset(0x30)] public int ContextItemCount;

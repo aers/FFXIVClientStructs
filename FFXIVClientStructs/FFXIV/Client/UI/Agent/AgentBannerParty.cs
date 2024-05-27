@@ -6,6 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 //       Component::GUI::AtkModuleInterface::AtkEventInterface
 [Agent(AgentId.BannerParty)]
 [StructLayout(LayoutKind.Explicit, Size = 0x38)]
+[GenerateInterop]
+[Inherits<AgentBannerInterface>]
 public unsafe partial struct AgentBannerParty {
-    [FieldOffset(0x0)] public AgentBannerInterface AgentBannerInterface;
 }

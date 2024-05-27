@@ -10,9 +10,10 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Framework;
 /// This class is a high level abstraction of sound and window systems. And handles sanity checks before propagating values to the more low-level classes respectively
 /// </summary>
 [StructLayout(LayoutKind.Explicit, Size = 0x698)]
+[GenerateInterop]
+[Inherits<Task>]
+[Inherits<ChangeEventInterface>]
 public partial struct EnvironmentManager {
-    [FieldOffset(0x000)] public Task Task;
-    [FieldOffset(0x038)] public ChangeEventInterface ChangeEventInterface;
     /// <summary>
     ///Cutscene Audio Language (-1 indicates to use ClientLanguage) 
     /// </summary>

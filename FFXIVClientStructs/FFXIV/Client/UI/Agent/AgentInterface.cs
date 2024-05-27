@@ -6,8 +6,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 //   Component::GUI::AtkModuleInterface::AtkEventInterface
 // ctor "E8 ?? ?? ?? ?? 80 63 30 80"
 [StructLayout(LayoutKind.Explicit, Size = 0x28)]
+[GenerateInterop(isInherited: true)]
+[Inherits<AtkEventInterface>]
 public unsafe partial struct AgentInterface {
-    [FieldOffset(0x0)] public AtkEventInterface AtkEventInterface;
     [FieldOffset(0x10)] public UIModule* UiModule;
     [FieldOffset(0x20)] public uint AddonId;
 

@@ -7,9 +7,9 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Scheduler.Base;
 //     Client::System::Scheduler::Base::SchedulerState
 // ctor "E8 ?? ?? ?? ?? 48 89 43 ?? 48 89 98"
 [StructLayout(LayoutKind.Explicit, Size = 0x280)]
+[GenerateInterop]
+[Inherits<TimelineController>]
 public unsafe partial struct SchedulerTimeline {
-    [FieldOffset(0)] public TimelineController TimelineController;
-
     // [FieldOffset(0x90)] public TimelineGroup* TimelineGroup;
     [FieldOffset(0x98)] public SchedulerResource* SchedulerResource;
 

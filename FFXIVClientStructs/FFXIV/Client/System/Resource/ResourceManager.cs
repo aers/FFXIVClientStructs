@@ -5,6 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Resource;
 // Client::System::Resource::ResourceManager
 // ctor "E8 ?? ?? ?? ?? 48 89 05 ?? ?? ?? ?? 48 8B 08"
 [StructLayout(LayoutKind.Explicit, Size = 0x1728)]
+[GenerateInterop]
 public unsafe partial struct ResourceManager {
     [FieldOffset(0x8)] public ResourceGraph* ResourceGraph;
 

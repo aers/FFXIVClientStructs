@@ -5,19 +5,24 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.AirShipExplorationResult)]
 [StructLayout(LayoutKind.Explicit, Size = 0x38)]
+[GenerateInterop]
+[Inherits<AgentExplorationResultInterface>]
 public unsafe partial struct AgentAirshipExplorationResult {
     [FieldOffset(0x00)] public AgentExplorationResultInterface Interface;
 }
 
 [Agent(AgentId.SubmersibleExplorationResult)]
 [StructLayout(LayoutKind.Explicit, Size = 0x38)]
+[GenerateInterop]
+[Inherits<AgentExplorationResultInterface>]
 public unsafe partial struct AgentSubmersibleExplorationResult {
     [FieldOffset(0x00)] public AgentExplorationResultInterface Interface;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x38)]
-public unsafe struct AgentExplorationResultInterface {
-    [FieldOffset(0x00)] public AgentInterface AgentInterface;
+[GenerateInterop(isInherited: true)]
+[Inherits<AgentInterface>]
+public unsafe partial struct AgentExplorationResultInterface {
     [FieldOffset(0x28)] public uint ItemId; // fuel tank or something
     [FieldOffset(0x30)] public ExplorationResultData* Data;
 }

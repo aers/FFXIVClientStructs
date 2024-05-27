@@ -4,8 +4,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.SatisfactionSupply)]
 [StructLayout(LayoutKind.Explicit, Size = 0x500)]
+[GenerateInterop]
+[Inherits<AgentInterface>]
 public unsafe partial struct AgentSatisfactionSupply {
-    [FieldOffset(0x00)] public AgentInterface AgentInterface;
 
     [FieldOffset(0x40)] public SatisfactionSupplyNpcInfo NpcInfo;
     [FieldOffset(0x5E)] public ushort ClassJobId;

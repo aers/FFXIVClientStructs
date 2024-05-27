@@ -2,8 +2,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.GatheringNote)]
 [StructLayout(LayoutKind.Explicit, Size = 0x178)]
+[GenerateInterop]
+[Inherits<AgentInterface>]
 public unsafe partial struct AgentGatheringNote {
-    [FieldOffset(0x0)] public AgentInterface AgentInterface;
 
     [FieldOffset(0xB8)] public GatheringAreaInfo* GatheringAreaInfo; // Represents the currently set gathering area
 

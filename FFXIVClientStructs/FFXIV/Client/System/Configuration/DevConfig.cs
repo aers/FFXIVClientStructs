@@ -5,6 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Configuration;
 //     Common::Configuration::ConfigBase
 //       Client::System::Common::NonCopyable
 [StructLayout(LayoutKind.Explicit, Size = 0x110)]
-public struct DevConfig {
-    [FieldOffset(0x0)] public Common.Configuration.DevConfig CommonDevConfig;
+[GenerateInterop]
+[Inherits<Common.Configuration.DevConfig>]
+public partial struct DevConfig {
 }

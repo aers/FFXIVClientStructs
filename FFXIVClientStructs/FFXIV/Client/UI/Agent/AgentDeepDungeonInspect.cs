@@ -5,8 +5,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.DeepDungeonInspect)]
 [StructLayout(LayoutKind.Explicit, Size = 0x30)]
+[GenerateInterop]
+[Inherits<AgentInterface>]
 public unsafe partial struct AgentDeepDungeonInspect {
-    [FieldOffset(0x00)] public AgentInterface AgentInterface;
     [FieldOffset(0x28)] public AgentDeepDungeonInspectData* Data;
     /*
     //Seems to be Show, but needs more investigation

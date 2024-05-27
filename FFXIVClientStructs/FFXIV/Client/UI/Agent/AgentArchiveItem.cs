@@ -4,8 +4,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.ArchiveItem)]
 [StructLayout(LayoutKind.Explicit, Size = 0x30)]
+[GenerateInterop]
+[Inherits<AgentInterface>]
 public unsafe partial struct AgentArchiveItem {
-    [FieldOffset(0x00)] public AgentInterface AgentInterface;
     [FieldOffset(0x28)] public ArchiveItem* ArchiveItem;
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 9C 24 ?? ?? ?? ?? C7 06")]

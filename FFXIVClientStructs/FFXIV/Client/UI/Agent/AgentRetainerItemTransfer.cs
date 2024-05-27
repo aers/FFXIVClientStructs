@@ -4,8 +4,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.RetainerItemTransfer)]
 [StructLayout(LayoutKind.Explicit, Size = 0x38)]
+[GenerateInterop]
+[Inherits<AgentInterface>]
 public unsafe partial struct AgentRetainerItemTransfer {
-    [FieldOffset(0x0)] public AgentInterface AgentInterface;
     [FieldOffset(0x28)] public AgentRetainerItemTransferData* Data;
 }
 

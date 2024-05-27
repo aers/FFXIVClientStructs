@@ -76,7 +76,8 @@ public unsafe partial struct ConfigEntry {
 
 // implemented by objects that want to listen for config changes - rapture atk module, etc
 [StructLayout(LayoutKind.Explicit, Size = 0x18)]
-public unsafe struct ChangeEventInterface {
+[GenerateInterop(isInherited: true)]
+public unsafe partial struct ChangeEventInterface {
     [FieldOffset(0x8)] public ChangeEventInterface* Next;
     [FieldOffset(0x10)] public ConfigBase* Owner;
 }
@@ -85,6 +86,7 @@ public unsafe struct ChangeEventInterface {
 //  Client::System::Common::NonCopyable
 // ctor "E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? C6 86 ?? ?? ?? ?? ?? 4C 8D B6"
 [StructLayout(LayoutKind.Explicit, Size = 0x110)]
+[GenerateInterop(isInherited: true)]
 public unsafe partial struct ConfigBase {
     [FieldOffset(0x8)] public ChangeEventInterface* Listener;
     [FieldOffset(0x14)] public uint ConfigCount;

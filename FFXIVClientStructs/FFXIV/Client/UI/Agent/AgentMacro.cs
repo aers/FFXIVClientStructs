@@ -6,8 +6,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.Macro)]
 [StructLayout(LayoutKind.Explicit, Size = 0xEB18)]
+[GenerateInterop]
+[Inherits<AgentInterface>]
 public unsafe partial struct AgentMacro {
-    [FieldOffset(0x00)] public AgentInterface AgentInterface;
     [FieldOffset(0x28)] public RaptureMacroModule.Macro ClipboardMacro;
     [FieldOffset(0x6B0)] public ExcelSheet* TextCommandParamSheet;
 

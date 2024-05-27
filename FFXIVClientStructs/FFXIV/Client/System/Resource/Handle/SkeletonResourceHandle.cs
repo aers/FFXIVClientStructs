@@ -6,7 +6,9 @@ using FFXIVClientStructs.Havok.Common.Serialize.Util;
 namespace FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x138)]
-public unsafe struct SkeletonResourceHandle {
+[GenerateInterop]
+[Inherits<ResourceHandle>]
+public unsafe partial struct SkeletonResourceHandle {
     [StructLayout(LayoutKind.Explicit, Size = 0x30)]
     public struct SkeletonHeader {
         [FieldOffset(0x0)] public uint SklbMagic;
@@ -20,7 +22,6 @@ public unsafe struct SkeletonResourceHandle {
         [FieldOffset(0x28)] public fixed ushort ConnectBoneIds[4];
     }
 
-    [FieldOffset(0x0)] public ResourceHandle ResourceHandle;
     [FieldOffset(0xC8)] public uint BoneCount;
     [FieldOffset(0xD0)] public hkaSkeleton* HavokSkeleton;
     [FieldOffset(0xD8)] public StdMap<uint, Pointer<hkaSkeletonMapper>> SkeletonMapperDict1;

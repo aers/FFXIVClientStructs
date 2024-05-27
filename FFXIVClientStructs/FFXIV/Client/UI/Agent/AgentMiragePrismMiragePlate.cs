@@ -5,9 +5,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.MiragePrismMiragePlate)]
 [StructLayout(LayoutKind.Explicit, Size = 0x350)]
+[GenerateInterop]
+[Inherits<AgentInterface>]
 public unsafe partial struct AgentMiragePrismMiragePlate {
-    [FieldOffset(0x00)] public AgentInterface AgentInterface;
-
     [FieldOffset(0x78)] public MiragePrismMiragePlateCharaView CharaView;
 
     /// <remarks>

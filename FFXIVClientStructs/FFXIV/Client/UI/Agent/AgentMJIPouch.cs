@@ -4,8 +4,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.MJIPouch)]
 [StructLayout(LayoutKind.Explicit, Size = 0x38)]
+[GenerateInterop]
+[Inherits<AgentInterface>]
 public unsafe partial struct AgentMJIPouch {
-    [FieldOffset(0x00)] public AgentInterface AgentInterface;
 
     [FieldOffset(0x28)] public PouchIndexInfo* InventoryIndex;
     [FieldOffset(0x30)] public PouchInventoryData* InventoryData;

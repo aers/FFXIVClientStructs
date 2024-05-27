@@ -3,6 +3,7 @@ using FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 namespace FFXIVClientStructs.FFXIV.Client.System.Scheduler.Resource;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x88)]
+[GenerateInterop]
 public unsafe partial struct SchedulerResource {
     [FieldOffset(0x08)] public SchedulerResource* Next;
     [FieldOffset(0x10)] public SchedulerResource* Previous;

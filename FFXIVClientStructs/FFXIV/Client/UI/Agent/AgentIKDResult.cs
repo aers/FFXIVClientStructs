@@ -4,8 +4,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.IKDResult)]
 [StructLayout(LayoutKind.Explicit, Size = 0x30)]
+[GenerateInterop]
+[Inherits<AgentInterface>]
 public unsafe partial struct AgentIKDResult {
-    [FieldOffset(0x00)] public AgentInterface AgentInterface;
     [FieldOffset(0x28)] public ResultData* Data;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x17A0)]

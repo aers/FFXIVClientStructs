@@ -5,10 +5,11 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.MJIGatheringHouse)]
 [StructLayout(LayoutKind.Explicit, Size = 0x200)]
+[GenerateInterop]
+[Inherits<AgentInterface>]
 public unsafe partial struct AgentMJIGatheringHouse {
     public enum Confirmation : int { None, Start, ChangeExtend, Change, Extend }
 
-    [FieldOffset(0x000)] public AgentInterface AgentInterface;
     [FieldOffset(0x028)] public MJIManager* Manager;
     [FieldOffset(0x030)] public MJIGranariesState* GranariesState;
     [FieldOffset(0x038)] public AgentData* Data;

@@ -19,6 +19,7 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Framework;
 // Client::System::Framework::Framework
 // ctor "E8 ?? ?? ?? ?? 48 8B C8 48 89 05 ?? ?? ?? ?? EB 0A 48 8B CE"
 [StructLayout(LayoutKind.Explicit, Size = 0x35C8)]
+[GenerateInterop]
 public unsafe partial struct Framework {
     [FieldOffset(0x0010)] public SystemConfig SystemConfig;
     [FieldOffset(0x0460)] public DevConfig DevConfig;
@@ -75,9 +76,9 @@ public unsafe partial struct Framework {
 
     [FieldOffset(0x17E0)] public int DataPathType;
 
-    [FieldOffset(0x19EC)] private fixed char gamePath[260]; // WideChar Array
-    [FieldOffset(0x1DFC)] private fixed char sqPackPath[260]; // WideChar Array
-    [FieldOffset(0x220C)] private fixed char userPath[260]; // WideChar Array
+    [FieldOffset(0x19EC)] [FixedSizeArray(isString: true)] internal FixedSizeArray260<char> _gamePath;
+    [FieldOffset(0x1DFC)] [FixedSizeArray(isString: true)] internal FixedSizeArray260<char> _sqPackPath;
+    [FieldOffset(0x220C)] [FixedSizeArray(isString: true)] internal FixedSizeArray260<char> _userPath;
 
     [FieldOffset(0x2B30)] public ExcelModuleInterface* ExcelModuleInterface;
     [FieldOffset(0x2B38)] public ExdModule* ExdModule;
@@ -134,8 +135,4 @@ public unsafe partial struct Framework {
     /// <returns>Returns true if the API is ready, false otherwise.</returns>
     [MemberFunction("E8 ?? ?? ?? ?? 88 43 08 84 C0 74 16")]
     public partial bool IsSteamApiInitialized();
-
-    public string GamePath => new((char*)Unsafe.AsPointer(ref gamePath[0]));
-    public string SqPackPath => new((char*)Unsafe.AsPointer(ref sqPackPath[0]));
-    public string UserPath => new((char*)Unsafe.AsPointer(ref userPath[0]));
 }

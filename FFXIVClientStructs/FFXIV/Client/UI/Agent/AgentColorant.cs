@@ -7,8 +7,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 //     Component::GUI::AtkModuleInterface::AtkEventInterface
 [Agent(AgentId.Colorant)]
 [StructLayout(LayoutKind.Explicit, Size = 0x3F0)]
+[GenerateInterop]
+[Inherits<AgentInterface>]
 public partial struct AgentColorant {
-    [FieldOffset(0x00)] public AgentInterface AgentInterface;
 
     [FieldOffset(0x108)] public ColorantCharaView CharaView;
 

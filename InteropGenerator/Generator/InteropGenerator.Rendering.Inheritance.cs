@@ -140,6 +140,8 @@ public sealed partial class InteropGenerator {
 
     private static void RenderInheritedMemberFunctions(StructInfo inheritedStruct, string path, IndentedTextWriter writer) {
         foreach (MemberFunctionInfo memberFunctionInfo in inheritedStruct.MemberFunctions) {
+            if (memberFunctionInfo.MethodInfo.Name == "Ctor")
+                continue;
             MethodInfo methodInfo = memberFunctionInfo.MethodInfo;
             writer.WriteLine($"""/// <inheritdoc cref="{inheritedStruct.FullyQualifiedMetadataName}.{methodInfo.Name}" />""");
             writer.WriteLine($"""/// <remarks>Method inherited from parent class <see cref="{inheritedStruct.FullyQualifiedMetadataName}">{inheritedStruct.Name}</see>.</remarks>""");
@@ -192,6 +194,8 @@ public sealed partial class InteropGenerator {
     
     private static void RenderInheritedPublicMethods(StructInfo inheritedStruct, string path, IndentedTextWriter writer) {
         foreach (MethodInfo methodInfo in inheritedStruct.ExtraInheritedStructInfo!.PublicMethods) {
+            if (methodInfo.Name == "Ctor")
+                continue;
             writer.WriteLine($"""/// <inheritdoc cref="{inheritedStruct.FullyQualifiedMetadataName}.{methodInfo.Name}" />""");
             writer.WriteLine($"""/// <remarks>Method inherited from parent class <see cref="{inheritedStruct.FullyQualifiedMetadataName}">{inheritedStruct.Name}</see>.</remarks>""");
             writer.WriteLine("[global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]");

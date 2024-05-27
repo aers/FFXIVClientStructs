@@ -8,11 +8,11 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 // ctor "E8 ?? ?? ?? ?? EB 03 48 8B C5 45 33 C9 48 89 47 20"
 [Agent(AgentId.Lobby)]
-[VirtualTable("48 8D 05 ?? ?? ?? ?? 48 89 71 18 48 89 01", 3)]
 [StructLayout(LayoutKind.Explicit, Size = 0x1DF8)]
+[GenerateInterop]
+[Inherits<AgentInterface>]
+[VirtualTable("48 8D 05 ?? ?? ?? ?? 48 89 71 18 48 89 01", 3)]
 public unsafe partial struct AgentLobby {
-    [FieldOffset(0)] public AgentInterface AgentInterface;
-
     [FieldOffset(0x40)] public LobbyData LobbyData; // for lack of a better name
     [FieldOffset(0xA00)] public UIModule* UIModule;
     [FieldOffset(0xA08)] internal nint TitleScreenMoviePtr;

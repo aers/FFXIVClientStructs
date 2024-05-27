@@ -5,9 +5,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.GrandCompanySupply)]
 [StructLayout(LayoutKind.Explicit, Size = 0x98)]
+[GenerateInterop]
+[Inherits<AgentInterface>]
 public unsafe partial struct AgentGrandCompanySupply {
-    [FieldOffset(0x00)] public AgentInterface AgentInterface;
-
     [FieldOffset(0x60)] public SupplyProvisioningData* SupplyProvisioningData;
     [FieldOffset(0x68)] public GrandCompanyItem* ItemArray;
 

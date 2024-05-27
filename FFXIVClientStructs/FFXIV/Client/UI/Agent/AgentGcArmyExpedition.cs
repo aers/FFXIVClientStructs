@@ -4,9 +4,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.GcArmyExpedition)]
 [StructLayout(LayoutKind.Explicit, Size = 0x48)]
+[GenerateInterop]
+[Inherits<AgentInterface>]
 public unsafe partial struct AgentGcArmyExpedition {
-    [FieldOffset(0x00)] public AgentInterface AgentInterface;
-
     [FieldOffset(0x28)] public GcArmyExpeditionData* ExpeditionData;
 
     [FieldOffset(0x40)] public int SelectedTab;

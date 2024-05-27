@@ -6,8 +6,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 // ctor "E8 ?? ?? ?? ?? EB 03 48 8B C5 33 D2 48 89 47 58"
 [StructLayout(LayoutKind.Explicit, Size = 0x30)]
 [Agent(AgentId.ScenarioTree)]
+[GenerateInterop]
+[Inherits<AgentInterface>]
 public unsafe partial struct AgentScenarioTree {
-    [FieldOffset(0x00)] public AgentInterface AgentInterface;
     [FieldOffset(0x28)] public AgentScenarioTreeData* Data;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x30)]

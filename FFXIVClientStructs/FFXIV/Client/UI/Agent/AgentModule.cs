@@ -5,6 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 // Client::UI::Agent::AgentModule
 // ctor "E8 ?? ?? ?? ?? 48 8B 85 ?? ?? ?? ?? 49 8B CE 48 89 87"
 [StructLayout(LayoutKind.Explicit, Size = 0xDF8)]
+[GenerateInterop]
 public unsafe partial struct AgentModule {
     public static AgentModule* Instance() => Framework.Instance()->GetUiModule()->GetAgentModule();
 

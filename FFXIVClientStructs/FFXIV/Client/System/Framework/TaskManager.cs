@@ -6,6 +6,7 @@ public struct TaskManagerOsData {
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x70)]
+[GenerateInterop]
 public unsafe partial struct TaskManager {
     [FieldOffset(0x08)] public TaskManagerOsData OsData;
     [FieldOffset(0x58)] public RootTask* TaskList;

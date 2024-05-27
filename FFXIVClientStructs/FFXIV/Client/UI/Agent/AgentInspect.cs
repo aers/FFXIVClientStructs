@@ -10,12 +10,13 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 //     Component::GUI::AtkModuleInterface::AtkEventInterface
 [Agent(AgentId.Inspect)]
 [StructLayout(LayoutKind.Explicit, Size = 0x820)]
+[GenerateInterop]
+[Inherits<AgentInterface>]
 public unsafe partial struct AgentInspect {
     //Notes to INfoProxies:
     //0xa used for DeepDungeon
     //0xd
 
-    [FieldOffset(0x000)] public AgentInterface AgentInterface;
     //First byte seems to be a bit field
     // [7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 ]
     // None: 7,6,5 set

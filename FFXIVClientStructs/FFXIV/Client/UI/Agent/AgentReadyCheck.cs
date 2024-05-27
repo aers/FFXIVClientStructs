@@ -2,8 +2,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.ReadyCheck)]
 [StructLayout(LayoutKind.Explicit, Size = 0x3B0)]
+[GenerateInterop]
+[Inherits<AgentInterface>]
 public unsafe partial struct AgentReadyCheck {
-    [FieldOffset(0x00)] public AgentInterface AgentInterface;
 
     [FixedSizeArray<ReadyCheckEntry>(48)]
     [FieldOffset(0xB0)] public fixed byte ReadyCheckEntries[16 * 48];

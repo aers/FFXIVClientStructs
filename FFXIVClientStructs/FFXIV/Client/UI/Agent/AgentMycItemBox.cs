@@ -2,8 +2,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.MycItemBox)]
 [StructLayout(LayoutKind.Explicit, Size = 0x58)]
+[GenerateInterop]
+[Inherits<AgentInterface>]
 public unsafe partial struct AgentMycItemBox {
-    [FieldOffset(0x00)] public AgentInterface AgentInterface;
 
     /// <remarks>
     /// Contains how many of each item the player has in both the cache and the holster

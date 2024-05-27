@@ -8,8 +8,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 //     Component::GUI::AtkModuleInterface::AtkEventInterface
 [Agent(AgentId.ChatLog)]
 [StructLayout(LayoutKind.Explicit, Size = 0xB28)]
+[GenerateInterop]
+[Inherits<AgentInterface>]
 public unsafe partial struct AgentChatLog {
-    [FieldOffset(0x00)] public AgentInterface AgentInterface;
 
     [FieldOffset(0x40)] public ChatChannel CurrentChannel;
     [FieldOffset(0x48)] public Utf8String ChannelLabel; // ie, "Say", "Party" that displays above the text input

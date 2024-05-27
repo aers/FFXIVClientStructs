@@ -4,8 +4,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.AozContentBriefing)]
 [StructLayout(LayoutKind.Explicit, Size = 0x1A0)]
+[GenerateInterop]
+[Inherits<AgentInterface>]
 public unsafe partial struct AgentAozContentBriefing {
-    [FieldOffset(0x00)] public AgentInterface AgentInterface;
     [FieldOffset(0x28)] public AozContentData* AozContentData;
     [FieldOffset(0x30)] public Utf8String WeeklyNoviceTitle;
     [FieldOffset(0x98)] public Utf8String WeeklyModerateTitle;
@@ -28,6 +29,7 @@ public unsafe partial struct AgentAozContentBriefing {
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x380)]
+[GenerateInterop]
 public unsafe partial struct AozContentData {
     [FieldOffset(0x04)] private int _UnkLoadState;
     [FieldOffset(0x0C)] public int SelectedContentIndex;
@@ -38,15 +40,13 @@ public unsafe partial struct AozContentData {
     [FieldOffset(0x48)] public byte CurrentActIndex;
     [FieldOffset(0x49)] public byte CurrentEnemyIndex;
 
-    [FixedSizeArray<AozArrangementData>(3)]
-    [FieldOffset(0x4A)] public fixed byte Arrangements[3 * 0x7A]; // 3 * AozArrangementData
+    [FieldOffset(0x4A)] [FixedSizeArray] internal FixedSizeArray3<AozArrangementData> _arrangements;
 
     [FieldOffset(0x228)] public Utf8String NoviceString;
     [FieldOffset(0x290)] public Utf8String ModerateString;
     [FieldOffset(0x2F8)] public Utf8String AdvancedString;
 
-    [FixedSizeArray<AozWeeklyReward>(3)]
-    [FieldOffset(0x360)] public fixed byte WeeklyRewards[3 * 0x8]; // 3 * AozContentRewards
+    [FieldOffset(0x360)] [FixedSizeArray] internal FixedSizeArray3<AozWeeklyReward> _weeklyRewards;
 
     [FieldOffset(0x37C)] private float _UnkFloat;
 }

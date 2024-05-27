@@ -3,10 +3,11 @@ using FFXIVClientStructs.FFXIV.Client.System.String;
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.RecipeMaterialList)]
-[VirtualTable("48 8D 05 ?? ?? ?? ?? 48 C7 43 ?? ?? ?? ?? ?? 48 89 03 33 C0 89 43 28", 3)]
 [StructLayout(LayoutKind.Explicit, Size = 0x40)]
+[GenerateInterop]
+[Inherits<AgentInterface>]
+[VirtualTable("48 8D 05 ?? ?? ?? ?? 48 C7 43 ?? ?? ?? ?? ?? 48 89 03 33 C0 89 43 28", 3)]
 public unsafe partial struct AgentRecipeMaterialList {
-    [FieldOffset(0)] public AgentInterface AgentInterface;
     [FieldOffset(0x28)] public ushort RecipeId;
 
     [FieldOffset(0x2C)] public uint Amount;

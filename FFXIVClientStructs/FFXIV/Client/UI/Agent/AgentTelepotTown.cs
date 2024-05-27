@@ -2,8 +2,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.TelepotTown)]
 [StructLayout(LayoutKind.Explicit, Size = 0x30)]
+[GenerateInterop]
+[Inherits<AgentInterface>]
 public unsafe partial struct AgentTelepotTown {
-    [FieldOffset(0)] public AgentInterface AgentInterface;
     [FieldOffset(0x28)] public AgentTelepotTownData* Data;
 
     [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 50 0F B6 FA")]

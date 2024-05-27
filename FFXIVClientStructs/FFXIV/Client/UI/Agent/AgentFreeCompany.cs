@@ -8,9 +8,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.FreeCompany)]
 [StructLayout(LayoutKind.Explicit, Size = 0xAD8)]
+[GenerateInterop]
+[Inherits<AgentInterface>]
 public unsafe partial struct AgentFreeCompany {
-    [FieldOffset(0x000)] public AgentInterface AgentInterface;
-
     [FieldOffset(0x040)] public RaptureTextModule* RaptureTextModule;
     [FieldOffset(0x048)] public void* InfoProxy0;
     [FieldOffset(0x050)] public void* InfoProxy1;

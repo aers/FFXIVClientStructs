@@ -5,8 +5,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.MJIAnimalManagement)]
 [StructLayout(LayoutKind.Explicit, Size = 0x1E0)]
+[GenerateInterop]
+[Inherits<AgentInterface>]
 public unsafe partial struct AgentMJIAnimalManagement {
-    [FieldOffset(0x000)] public AgentInterface AgentInterface;
     // 0x28 struct of size 0xA0 used for reading excel sheets
     // 0xC8 bool[3] pending initialization requests
     [FieldOffset(0x0D0)] public AtkEventInterface* OpHandler; // pointer to some class derived from AtkEventInterface of size 0x30

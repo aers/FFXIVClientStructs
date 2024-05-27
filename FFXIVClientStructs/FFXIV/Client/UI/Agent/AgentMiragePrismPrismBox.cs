@@ -5,8 +5,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.MiragePrismPrismBox)]
 [StructLayout(LayoutKind.Explicit, Size = 0x80)]
+[GenerateInterop]
+[Inherits<AgentInterface>]
 public unsafe partial struct AgentMiragePrismPrismBox {
-    [FieldOffset(0x00)] public AgentInterface AgentInterface;
     [FieldOffset(0x28)] public MiragePrismPrismBoxData* Data;
     [FieldOffset(0x39)] public byte TabIndex;
     [FieldOffset(0x3A)] public byte PageIndex;

@@ -4,8 +4,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.MonsterNote)]
 [StructLayout(LayoutKind.Explicit, Size = 0x68)]
+[GenerateInterop]
+[Inherits<AgentInterface>]
 public unsafe partial struct AgentMonsterNote {
-    [FieldOffset(0x00)] public AgentInterface AgentInterface;
     [FieldOffset(0x28)] public StdVector<Utf8String> StringVector;
     [FieldOffset(0x40)] public uint BaseId;
     [FieldOffset(0x44)] public byte ClassId;

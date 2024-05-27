@@ -8,6 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.System.String;
 // Client::System::String::Utf8String
 // ctor "E8 ?? ?? ?? ?? 44 2B F7"
 [StructLayout(LayoutKind.Explicit, Size = 0x68)]
+[GenerateInterop]
 public unsafe partial struct Utf8String : ICreatable, IDisposable, IStaticNativeObjectOperation<Utf8String> {
     [FieldOffset(0x0)] public byte* StringPtr; // pointer to null-terminated string
     [FieldOffset(0x8)] public long BufSize; // default buffer = 0x40
@@ -109,7 +110,7 @@ public unsafe partial struct Utf8String : ICreatable, IDisposable, IStaticNative
     [MemberFunction("E8 ?? ?? ?? ?? 49 83 6E")]
     public partial void Dtor();
 
-    [MemberFunction("E8 ?? ?? ?? ?? EB 30 40 84 F6"), GenerateCStrOverloads]
+    [MemberFunction("E8 ?? ?? ?? ?? EB 30 40 84 F6"), GenerateStringOverloads]
     public partial void SetString(byte* cStr);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 3B DD")]
@@ -121,7 +122,7 @@ public unsafe partial struct Utf8String : ICreatable, IDisposable, IStaticNative
     [MemberFunction("E9 ?? ?? ?? ?? 48 2B D8")]
     public partial bool EqualsUtf8(Utf8String* other);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8B 57 ?? 84 C0"), GenerateCStrOverloads]
+    [MemberFunction("E8 ?? ?? ?? ?? 8B 57 ?? 84 C0"), GenerateStringOverloads]
     public partial bool EqualsString(byte* other);
 
     [MemberFunction("45 33 C0 4C 8B C9 4C 39 41")]
