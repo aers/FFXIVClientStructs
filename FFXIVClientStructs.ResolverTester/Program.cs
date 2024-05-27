@@ -2,7 +2,7 @@ using System.Diagnostics;
 using System.Reflection.PortableExecutable;
 using InteropGenerator.Runtime;
 
-var gamePath = args.Length > 0 ? args[0] : @"F:\xiv-dev\ew-exes\ffxiv_dx11_2023.01.11.0000.0000.exe";
+var gamePath = args.Length > 0 ? args[0] : @"C:\Games\FFXIV\game\ffxiv_dx11.exe";
 
 using PEReader reader = new PEReader(File.OpenRead(gamePath));
 SectionHeader textHeader = reader.PEHeaders.SectionHeaders[0];
@@ -17,6 +17,8 @@ reader.GetSectionData(dataHeader.Name).GetContent().CopyTo(relocFile.Slice(dataH
 
 unsafe {
     fixed (byte* bytes = relocFile) {
+        FFXIVClientStructs.Interop.Generated.Addresses.Initialize();
+        
         var totalSigCount = Resolver.GetInstance.Addresses.Count;
         Console.WriteLine($"Unresolved count: {totalSigCount}");
 
