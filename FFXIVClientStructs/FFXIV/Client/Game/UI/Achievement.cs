@@ -5,6 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 /// </summary>
 // Client::Game::UI::Achievement
 [StructLayout(LayoutKind.Explicit, Size = 0x558)]
+[GenerateInterop]
 public unsafe partial struct Achievement {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 04 30", 3)]
     public static partial Achievement* Instance();

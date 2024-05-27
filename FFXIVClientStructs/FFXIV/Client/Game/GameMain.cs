@@ -1,12 +1,13 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x40E0)]
+[GenerateInterop]
 public unsafe partial struct GameMain {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? 38 05", 3)]
     public static partial GameMain* Instance();
 
-    [FieldOffset(0x0), FixedSizeArray<Festival>(4)] private fixed byte ActiveFestival[4 * 0x04];
-    [FieldOffset(0x40), FixedSizeArray<Festival>(4)] private fixed byte QueuedFestival[4 * 0x04];
+    [FieldOffset(0x0)] [FixedSizeArray] internal FixedSizeArray4<Festival> _activeFestival;
+    [FieldOffset(0x40)] [FixedSizeArray] internal FixedSizeArray4<Festival>  _queuedFestival;
 
     [FieldOffset(0xAD8)] public JobGaugeManager JobGaugeManager;
 

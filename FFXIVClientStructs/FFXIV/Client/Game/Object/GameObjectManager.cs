@@ -1,14 +1,12 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game.Object;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x3888)]
+[GenerateInterop]
 public unsafe partial struct GameObjectManager {
     [FieldOffset(0x04)] public byte Active;
-    [FixedSizeArray<Pointer<GameObject>>(599)]
-    [FieldOffset(0x18)] public fixed byte ObjectList[599 * 8];
-    [FixedSizeArray<Pointer<GameObject>>(599)]
-    [FieldOffset(0x12D0)] public fixed byte ObjectListFiltered[599 * 8];
-    [FixedSizeArray<Pointer<GameObject>>(599)]
-    [FieldOffset(0x2588)] public fixed byte ObjectList3[599 * 8];
+    [FieldOffset(0x18)] [FixedSizeArray] internal FixedSizeArray599<Pointer<GameObject>> _objectList;
+    [FieldOffset(0x12D0)] [FixedSizeArray] internal FixedSizeArray599<Pointer<GameObject>> _objectListFiltered;
+    [FieldOffset(0x2588)] [FixedSizeArray] internal FixedSizeArray599<Pointer<GameObject>> _objectList3; 
     [FieldOffset(0x3840)] public int ObjectListFilteredCount;
     [FieldOffset(0x3844)] public int ObjectList3Count;
 

@@ -4,6 +4,8 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.MJI;
 //   Client::Game::Event::EventHandler
 // ctor "48 89 6C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC 20 BA ?? ?? ?? ?? 48 8B F9"
 [StructLayout(LayoutKind.Explicit, Size = 0xB78)]
+[GenerateInterop]
+[Inherits<Client.Game.Event.EventHandler>]
 public unsafe partial struct MJIPastureHandler {
     // 0x230: AtkEventInterface-derived structure of size 0x30, used by agent to execute operations
 
@@ -21,23 +23,20 @@ public unsafe partial struct MJIPastureHandler {
     /// <summary>
     /// An array representing all animals currently present in the pastures on the Island. 
     /// </summary>
-    [FixedSizeArray<MJIAnimal>(20)]
-    [FieldOffset(0x2E8)] public fixed byte MJIAnimals[MJIAnimal.Size * 20];
+    [FieldOffset(0x2E8)] [FixedSizeArray] internal FixedSizeArray20<MJIAnimal> _MJIAnimals;
 
     /// <summary>
     /// An array representing which minions are currently out roaming the Island. This array is indexed by row ID from
     /// the Companion EXD sheet. See <see cref="MinionSlots"/> if information about minion locations is required.
     /// </summary>
     // Warning: This array will change size every time new minions are added!! Should be the row count of the Companion sheet.
-    [FixedSizeArray<bool>(512)]
-    [FieldOffset(0x6F8)] public fixed byte RoamingMinions[512];
+    [FieldOffset(0x6F8)] [FixedSizeArray] internal FixedSizeArray512<bool> _roamingMinions;
 
     /// <summary>
     /// An array containing information on all the minion slots present on the Island Sanctuary.
     /// This array is indexed by an internal ID and does not appear to be grouped by location or similar.
     /// </summary>
-    [FixedSizeArray<MJIMinionSlot>(50)]
-    [FieldOffset(0x8F8)] public fixed byte MinionSlots[50 * MJIMinionSlot.Size];
+    [FieldOffset(0x8F8)] [FixedSizeArray] internal FixedSizeArray50<MJIMinionSlot> _minionSlots;
 
     // 0xB50: substructure describing currently captured animal, if there are no slots available; size is at least 8
 

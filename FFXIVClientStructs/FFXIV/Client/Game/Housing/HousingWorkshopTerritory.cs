@@ -10,27 +10,26 @@ public unsafe partial struct HousingWorkshopTerritory {
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x28F8)]
+[GenerateInterop]
 public unsafe partial struct HousingWorkshopAirshipData {
-    [FixedSizeArray<HousingWorkshopAirshipSubData>(4)]
-    [FieldOffset(0x0)] public fixed byte DataList[0x1C0 * 4];
+    [FieldOffset(0x0)] [FixedSizeArray] internal FixedSizeArray4<HousingWorkshopAirshipSubData> _dataList; 
 
     [FieldOffset(0x770)] public byte ActiveAirshipId; // 0-3, 255 if none
     [FieldOffset(0x771)] public byte AirshipCount;
 
-    [FixedSizeArray<Utf8String>(82)]
-    [FieldOffset(0x778)] public fixed byte AirshipLogList[0x68 * 82];
+    [FieldOffset(0x778)] [FixedSizeArray] internal FixedSizeArray82<Utf8String> _airshipLogList;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x8F40)]
+[GenerateInterop]
 public unsafe partial struct HousingWorkshopSubmersibleData {
-    [FixedSizeArray<HousingWorkshopSubmersibleSubData>(4)]
-    [FieldOffset(0x0)] public fixed byte DataList[0x2320 * 4];
+    [FieldOffset(0x0)] [FixedSizeArray] internal FixedSizeArray4<HousingWorkshopSubmersibleSubData> _dataList;
 
-    [FixedSizeArray<Pointer<HousingWorkshopSubmersibleSubData>>(5)]
-    [FieldOffset(0x8C80)] public fixed byte DataPointerList[0x8 * 5]; // 0-3 is the same as SubmersibleDataList, 4 is the one you are currently using
+    [FieldOffset(0x8C80)] [FixedSizeArray] internal FixedSizeArray5<Pointer<HousingWorkshopSubmersibleSubData>> _dataPointerList;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x1C0)]
+[GenerateInterop]
 public unsafe partial struct HousingWorkshopAirshipSubData {
     [FieldOffset(0x4)] public uint RegisterTime;
     [FieldOffset(0xC)] public byte RankId;
@@ -51,8 +50,7 @@ public unsafe partial struct HousingWorkshopAirshipSubData {
 
     [FieldOffset(0x37)] public fixed byte Name[20];
 
-    [FixedSizeArray<HousingWorkshopAirshipGathered>(5)]
-    [FieldOffset(0x54)] public fixed byte GatheredData[0x38 * 5];
+    [FieldOffset(0x54)] [FixedSizeArray] internal FixedSizeArray5<HousingWorkshopAirshipGathered> _gatheredData;
 
     /// <summary>
     /// Points to <see cref="HousingWorkshopAirshipData.AirshipLogList"/>
@@ -88,6 +86,7 @@ public unsafe partial struct HousingWorkshopAirshipGathered {
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x2320)]
+[GenerateInterop]
 public unsafe partial struct HousingWorkshopSubmersibleSubData {
     [FieldOffset(0x0)] public HousingWorkshopSubmersibleData* Parent;
     [FieldOffset(0xE)] public byte RankId;
@@ -119,12 +118,10 @@ public unsafe partial struct HousingWorkshopSubmersibleSubData {
     [FieldOffset(0x60)] public SubmarineRating SubmarineRating;
     [FieldOffset(0x62)] public ushort LogSpeed;
 
-    [FixedSizeArray<HousingWorkshopSubmarineGathered>(5)]
-    [FieldOffset(0x64)] public fixed byte GatheredData[0x38 * 5];
+    [FieldOffset(0x64)] [FixedSizeArray] internal FixedSizeArray5<HousingWorkshopSubmarineGathered> _gatheredData;
 
-    [FixedSizeArray<Utf8String>(82)]
-    [FieldOffset(0x1B0)] public fixed byte LogList[0x68 * 82];
-
+    [FieldOffset(0x1B0)] [FixedSizeArray] internal FixedSizeArray82<Utf8String> _logList; 
+    
     /// <summary>Gets the registered time as a <see cref="DateTime"/> object</summary>
     public DateTime GetRegisterTime() => DateTime.UnixEpoch.AddSeconds(RegisterTime);
 

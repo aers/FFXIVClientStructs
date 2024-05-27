@@ -4,13 +4,14 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
 // Client::Game::UI::PlayerState
 // ctor "48 81 C1 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? C6 83"
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x818)]
 public unsafe partial struct PlayerState {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? 4D 8B F9", 3)]
     public static partial PlayerState* Instance();
 
     [FieldOffset(0x00)] public byte IsLoaded;
-    [FieldOffset(0x01)] public fixed byte CharacterName[64];
+    [FieldOffset(0x01)] [FixedSizeArray(isString: true)] internal FixedSizeArray64<byte> _characterName;
     [FieldOffset(0x41)] public fixed byte PSNOnlineId[17];
     [FieldOffset(0x64)] public uint ObjectId;
     [FieldOffset(0x68)] public ulong ContentId;
@@ -159,8 +160,7 @@ public unsafe partial struct PlayerState {
     #endregion
 
     /// <remarks> For easier access, use <see cref="GetContentValue"/>. </remarks>
-    [FixedSizeArray<StdPair<uint, uint>>(3)]
-    [FieldOffset(0x6E0)] public fixed byte ContentKeyValueData[0x8 * 3];
+    [FieldOffset(0x6E0)] [FixedSizeArray] internal FixedSizeArray3<StdPair<uint, uint>> _contentKeyValueData; 
 
     [FieldOffset(0x770)] public byte MentorVersion; // latest is 2
 
@@ -190,7 +190,7 @@ public unsafe partial struct PlayerState {
     /// </summary>
     public uint GetContentValue(uint key) {
         for (var i = 0; i < 3; i++) {
-            var entry = ContentKeyValueDataSpan.GetPointer(i);
+            var entry = ContentKeyValueData.GetPointer(i);
             if (entry->Item1 == key) {
                 return entry->Item2;
             }

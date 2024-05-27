@@ -2,6 +2,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
 // Client::Game::UI::RelicNote
 [StructLayout(LayoutKind.Explicit, Size = 0x18)]
+[GenerateInterop]
 public unsafe partial struct RelicNote {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 84 C0 74 7E", 3)]
     public static partial RelicNote* Instance();

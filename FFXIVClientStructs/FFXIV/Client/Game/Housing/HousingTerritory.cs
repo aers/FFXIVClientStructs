@@ -5,9 +5,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Housing;
 
 // 0xA160 for Indoor, 0xAE30 for Outdoor
 [StructLayout(LayoutKind.Explicit, Size = 0xA160)]
+[GenerateInterop]
 public unsafe partial struct HousingTerritory { // this should be renamed to IndoorHousingTerritory and the fields should be copied to OutdoorHousingTerritory
-    [FixedSizeArray<HousingFurniture>(732)]
-    [FieldOffset(0x10)] public fixed byte Furniture[732 * 0x30];
+    [FieldOffset(0x10)] [FixedSizeArray] internal FixedSizeArray732<HousingFurniture> _furniture; 
     [FieldOffset(0x8968)] public HousingObjectManager HousingObjectManager;
     [FieldOffset(0x96A0)] public uint HouseId; // Combines Ward, Plot, and Room
 }
@@ -22,7 +22,7 @@ public unsafe struct HousingFurniture {
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0xC98)]
+[GenerateInterop]
 public unsafe partial struct HousingObjectManager {
-    [FixedSizeArray<Pointer<GameObject>>(400)]
-    [FieldOffset(0x18)] public fixed byte Objects[400 * 8];
+    [FieldOffset(0x18)] [FixedSizeArray] internal FixedSizeArray400<Pointer<GameObject>> _objects;
 }

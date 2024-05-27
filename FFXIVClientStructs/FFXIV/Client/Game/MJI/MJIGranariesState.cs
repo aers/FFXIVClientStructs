@@ -17,11 +17,11 @@ public unsafe partial struct MJIGranaryState {
 // Client::Game::MJI::MJIGranariesState
 // ctor "48 89 7C 24 ?? 45 33 D2 48 8D 51 02"
 [StructLayout(LayoutKind.Explicit, Size = 0x98)]
+[GenerateInterop]
 public unsafe partial struct MJIGranariesState {
     public const int MaxGranaries = 2;
 
-    [FixedSizeArray<MJIGranaryState>(MaxGranaries)]
-    [FieldOffset(0)] public fixed byte Granary[MaxGranaries * 0x48];
+    [FieldOffset(0)] [FixedSizeArray] internal FixedSizeArray2<MJIGranaryState> _granary;
     //[FieldOffset(0x90)] public void* u90; // some connection to agent
 
     [MemberFunction("E8 ?? ?? ?? ?? C7 83 ?? ?? ?? ?? ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8D 54 24")]

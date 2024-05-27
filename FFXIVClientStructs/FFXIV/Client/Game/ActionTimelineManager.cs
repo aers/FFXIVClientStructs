@@ -6,6 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 // ctor "E8 ?? ?? ?? ?? 48 8B C8 48 89 05 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B 05"
 // TODO: check which namespace is correct
 [StructLayout(LayoutKind.Explicit, Size = 0x340)]
+[GenerateInterop]
 public unsafe partial struct ActionTimelineManager {
     [FieldOffset(0x08)] public Character.Character* Parent;
     [FieldOffset(0x10)] public ActionTimelineDriver Driver;

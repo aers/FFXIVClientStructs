@@ -27,6 +27,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 /// </remarks>
 // Client::Game::UI::MobHunt
 [StructLayout(LayoutKind.Explicit, Size = 0x198)]
+[GenerateInterop]
 public unsafe partial struct MobHunt {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? 0F B6 50 08 E8 ?? ?? ?? ?? 84 C0 74 16", 3)]
     public static partial MobHunt* Instance();
@@ -34,8 +35,7 @@ public unsafe partial struct MobHunt {
     [FieldOffset(0x08)] public fixed byte AvailableMarkId[18];
     [FieldOffset(0x1A)] public fixed byte ObtainedMarkId[18];
 
-    [FixedSizeArray<KillCounts>(18)]
-    [FieldOffset(0x2C)] public fixed byte CurrentKills[18 * 0x14];
+    [FieldOffset(0x2C)] [FixedSizeArray] internal FixedSizeArray18<KillCounts> _currentKills;
 
     [FieldOffset(0x194)] public int ObtainedFlags;
 

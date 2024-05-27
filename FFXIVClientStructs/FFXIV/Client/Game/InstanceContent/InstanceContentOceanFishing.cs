@@ -1,3 +1,5 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
 
 // Client::Game::InstanceContent::InstanceContentOceanFishing
@@ -9,8 +11,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
 // ctor "40 53 48 83 EC ?? 48 8B D9 E8 ?? ?? ?? ?? C6 83 ?? ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 03 48 8D 05 ?? ?? ?? ?? 48 89 83 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 83 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 83 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 83 ?? ?? ?? ?? 33 C0"
 // has id >63000 in InstanceContent sheet
 [StructLayout(LayoutKind.Explicit, Size = 0x1CA8 + 0x658)]
+[GenerateInterop]
+[Inherits<InstanceContentDirector>]
 public unsafe partial struct InstanceContentOceanFishing {
-    [FieldOffset(0x0)] public InstanceContentDirector InstanceContentDirector;
 
     // Most of the fields, if not specified, can be found in "83 FA ?? 0F 87 ?? ?? ?? ?? 48 89 5C 24 ?? 57 48 83 EC ?? 48 8B 05"
 
@@ -37,13 +40,15 @@ public unsafe partial struct InstanceContentOceanFishing {
     // Offest can be found with this sig "45 8B 84 CF ?? ?? ?? ?? 48 8B CD"
     // Struct size can be found with "83 C7 ?? 49 83 EE ?? 75 ?? FF C6"
     // Array size can be found with "83 FF ?? 72 ?? 4C 8B 74 24 ?? 49 8D 9F"
-    [FixedSizeArray<FishDataStruct>(60)]
-    [FieldOffset(0x1D3C)] public fixed byte FishData[0x10 * 60];
+    [FieldOffset(0x1D3C)] [FixedSizeArray] internal FixedSizeArray60<FishDataStruct> _fishData; 
 
     // The first 10 of them are normal fish, the rest are spectral fish
-    public Span<FishDataStruct> FirstZoneFishData => FishDataSpan.Slice(0, 20);
-    public Span<FishDataStruct> SecondZoneFishData => FishDataSpan.Slice(20, 20);
-    public Span<FishDataStruct> ThirdZoneFishData => FishDataSpan.Slice(40, 20);
+    [UnscopedRef]
+    public Span<FishDataStruct> FirstZoneFishData => FishData.Slice(0, 20);
+    [UnscopedRef]
+    public Span<FishDataStruct> SecondZoneFishData => FishData.Slice(20, 20);
+    [UnscopedRef]
+    public Span<FishDataStruct> ThirdZoneFishData => FishData.Slice(40, 20);
 
     // the function that sets the data -> "48 8D 81 ?? ?? ?? ?? B9 ?? ?? ?? ?? 0F 1F 40 ?? 48 8D 80"
     // Offsets can be found with "48 89 5C 24 ? 48 89 74 24 ? 57 48 81 EC ? ? ? ? 48 8B 05 ? ? ? ? 48 33 C4 48 89 84 24 ? ? ? ? 48 8B F1 48 8D 4C 24"
@@ -52,8 +57,7 @@ public unsafe partial struct InstanceContentOceanFishing {
     [FieldOffset(0x2101)] public byte LocalIndexInAllResult;
     [FieldOffset(0x2102)] public IndividualResultStruct IndividualResult;
     [FieldOffset(0x2124)] public AllResultStruct LocalPlayerAllResult;
-    [FixedSizeArray<AllResultStruct>(10)]
-    [FieldOffset(0x214C)] public fixed byte AllResult[0x28 * 10];
+    [FieldOffset(0x214C)] [FixedSizeArray] internal FixedSizeArray10<AllResultStruct> _allResult;
 
     // Row ID for IKDPlayerMissionCondition sheet
     // Description and required amount can be extracted from sheet

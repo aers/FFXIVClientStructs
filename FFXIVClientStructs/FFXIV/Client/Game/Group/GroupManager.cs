@@ -5,11 +5,10 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Group;
 // there are actually two copies of this back to back in the exe
 // maybe for 48 man raid support since the group manager can only hold 1 alliance worth of party members
 [StructLayout(LayoutKind.Explicit, Size = 0x63F0)]
+[GenerateInterop]
 public unsafe partial struct GroupManager {
-    [FixedSizeArray<PartyMember>(8)]
-    [FieldOffset(0x0)] public fixed byte PartyMembers[0x390 * 8]; // PartyMember type
-    [FixedSizeArray<PartyMember>(20)]
-    [FieldOffset(0x1C80)] public fixed byte AllianceMembers[0x390 * 20]; // PartyMember type
+    [FieldOffset(0x0)] [FixedSizeArray] internal FixedSizeArray8<PartyMember> _partyMembers;
+    [FieldOffset(0x1C80)] [FixedSizeArray] internal FixedSizeArray20<PartyMember> _allianceMembers;
     [FieldOffset(0x63C0)] public uint Unk_3D40;
     [FieldOffset(0x63C4)] public ushort Unk_3D44;
     [FieldOffset(0x63C8)] public long PartyId; // both seem to be unique per party and replicated to every member

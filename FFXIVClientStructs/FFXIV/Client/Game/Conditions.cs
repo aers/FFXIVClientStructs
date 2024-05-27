@@ -1,11 +1,12 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
-[StructLayout(LayoutKind.Sequential, Size = 104)]
+[StructLayout(LayoutKind.Explicit, Size = 104)]
+[GenerateInterop]
 public unsafe partial struct Conditions {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? 41 8D 50 77 E8 ?? ?? ?? ?? 48 8B 5C 24", 3)]
     public static partial Conditions* Instance();
 
-    public fixed bool Flags[104];
+    [FieldOffset(0x0)] [FixedSizeArray] internal FixedSizeArray104<bool> _flags; 
 
     /// <summary>
     /// Unable to execute command under normal conditions.

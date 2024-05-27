@@ -1,6 +1,7 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x7C)]
+[GenerateInterop]
 public unsafe partial struct PvPProfile {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B 43 08", 3)]
     public static partial PvPProfile* Instance();

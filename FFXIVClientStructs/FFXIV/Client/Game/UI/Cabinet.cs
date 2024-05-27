@@ -5,6 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 /// items.
 /// </summary>
 [StructLayout(LayoutKind.Explicit, Size = 0x84)]
+[GenerateInterop]
 public unsafe partial struct Cabinet {
     [FieldOffset(0x00)] public CabinetState State;
     [FieldOffset(0x04)] public fixed byte UnlockedItems[0x80];

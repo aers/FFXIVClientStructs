@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 //     Client::Game::Event::EventHandler
 // ctor "E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 07 0F B7 03"
 [StructLayout(LayoutKind.Explicit, Size = 0x4B8)]
-[GenerateInterop]
+[GenerateInterop(isInherited: true)]
 [Inherits<LuaEventHandler>]
 public unsafe partial struct Director {
     [FieldOffset(0x330)] public EventHandlerInfo* EventHandlerInfo;

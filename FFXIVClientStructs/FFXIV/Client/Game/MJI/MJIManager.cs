@@ -6,6 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.MJI;
 // Client::Game::MJI::MJIManager
 // ctor "48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 33 F6 48 C7 01"
 [StructLayout(LayoutKind.Explicit, Size = 0x440)]
+[GenerateInterop]
 public unsafe partial struct MJIManager {
     /// <summary>
     /// Reports if the player is currently on the Island Sanctuary.
@@ -47,8 +48,7 @@ public unsafe partial struct MJIManager {
     /// logic. To that end, this field doesn't actually seem authoritative for determining what's going on - see
     /// <see cref="MJI.IslandState.LandmarkIds"/> et al for what seems to be used by system logic.
     /// </remarks>
-    [FixedSizeArray<MJILandmarkPlacement>(5)]
-    [FieldOffset(0x1D4)] public fixed byte LandmarkPlacements[5 * MJILandmarkPlacement.Size]; // ??
+    [FieldOffset(0x1D4)] [FixedSizeArray] internal FixedSizeArray5<MJILandmarkPlacement> _landmarkPlacements;  // ??
 
     /// <summary>
     /// A struct representing building placements on the Island Sanctuary. Each index represents a specific building
@@ -60,9 +60,8 @@ public unsafe partial struct MJIManager {
     /// <see cref="MJI.IslandState.Granaries"/> and <see cref="MJI.IslandState.Workshops"/> for what seems to be
     /// used by system logic.
     /// </remarks>
-    [FixedSizeArray<MJIBuildingPlacement>(6)]
-    [FieldOffset(0x224)] public fixed byte BuildingPlacements[6 * MJIBuildingPlacement.Size];
-
+    [FieldOffset(0x224)] [FixedSizeArray] internal FixedSizeArray6<MJIBuildingPlacement> _buildingPlacements; 
+    
     /// <summary>
     /// A struct representing information about the cabin.
     /// </summary>
@@ -75,15 +74,13 @@ public unsafe partial struct MJIManager {
     /// <summary>
     /// A struct representing farm (garden/cropland) placements on the current Island Sanctuary.
     /// </summary>
-    [FixedSizeArray<MJIFarmPasturePlacement>(3)]
-    [FieldOffset(0x294)] public fixed byte FarmPlacements[MJIFarmPasturePlacement.Size * 3];
+    [FieldOffset(0x294)] [FixedSizeArray] internal FixedSizeArray3<MJIFarmPasturePlacement> _farmPlacements;
 
     /// <summary>
     /// A struct representing pasture placements on the current Island Sanctuary. Identical in behavior (hopefully)
     /// to that of <see cref="FarmPlacements"/>
     /// </summary>
-    [FixedSizeArray<MJIFarmPasturePlacement>(3)]
-    [FieldOffset(0x2B8)] public fixed byte PasturePlacements[MJIFarmPasturePlacement.Size * 3];
+    [FieldOffset(0x2B8)] [FixedSizeArray] internal FixedSizeArray3<MJIFarmPasturePlacement> _pasturePlacements;
 
     [FieldOffset(0x2E0)] public ushort RequestDemandCraftId;
     [FieldOffset(0x2E4)] public int RequestDemandType; // 0 = none, 1 = everything, 2 = specific object

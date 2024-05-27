@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 // Client::Game::Event::EventHandler
 // ctor "E8 ?? ?? ?? ?? 45 33 D2 48 8D 05"
 [StructLayout(LayoutKind.Explicit, Size = 0x210)]
-[GenerateInterop]
+[GenerateInterop(isInherited: true)]
 public unsafe partial struct EventHandler {
     [FieldOffset(0x08)] public StdSet<Pointer<GameObject>> EventObjects;
     [FieldOffset(0x18)] public EventSceneModuleUsualImpl* EventSceneModule;

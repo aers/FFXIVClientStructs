@@ -7,8 +7,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
 //         Client::Game::Event::EventHandler
 // ctor "E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 80 E3 01"
 [StructLayout(LayoutKind.Explicit, Size = 0x1CB0)]
-public unsafe struct InstanceContentDirector {
-    [FieldOffset(0x00)] public ContentDirector ContentDirector;
+[GenerateInterop(isInherited: true)]
+[Inherits<ContentDirector>]
+public unsafe partial struct InstanceContentDirector {
     //[FieldOffset(0x730)] public fixed byte InstanceContentExcelRow[0xA8];
 
     /// <summary>

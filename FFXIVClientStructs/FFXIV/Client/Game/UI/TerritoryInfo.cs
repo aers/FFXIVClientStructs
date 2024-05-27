@@ -4,6 +4,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 /// Contains the PlaceName values of where the player is currently located.
 /// </summary>
 [StructLayout(LayoutKind.Explicit, Size = 0x60)]
+[GenerateInterop]
 public unsafe partial struct TerritoryInfo {
     [FieldOffset(0x1C)] public int InSanctuary;
     [FieldOffset(0x24)] public uint AreaPlaceNameId;

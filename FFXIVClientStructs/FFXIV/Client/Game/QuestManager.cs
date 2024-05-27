@@ -4,20 +4,16 @@ using FFXIVClientStructs.FFXIV.Application.Network.WorkDefinitions;
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
 [StructLayout(LayoutKind.Explicit, Size = 0xF58)]
+[GenerateInterop]
 public unsafe partial struct QuestManager {
     [MemberFunction("E8 ?? ?? ?? ?? 66 BA 10 0C")]
     public static partial QuestManager* Instance();
 
-    [FixedSizeArray<QuestWork>(30)]
-    [FieldOffset(0x10)] public fixed byte NormalQuests[0x18 * 30];
-    [FixedSizeArray<DailyQuestWork>(12)]
-    [FieldOffset(0x5B8)] public fixed byte DailyQuests[0x10 * 12];
-    [FixedSizeArray<TrackingWork>(5)]
-    [FieldOffset(0x6A8)] public fixed byte TrackedQuests[0x10 * 5];
-    [FixedSizeArray<BeastReputationWork>(17)]
-    [FieldOffset(0xBC8)] public fixed byte BeastReputation[0x10 * 17];
-    [FixedSizeArray<LeveWork>(16)]
-    [FieldOffset(0xCD8)] public fixed byte LeveQuests[0x18 * 16];
+    [FieldOffset(0x10)] [FixedSizeArray] internal FixedSizeArray30<QuestWork> _normalQuests;
+    [FieldOffset(0x5B8)] [FixedSizeArray] internal FixedSizeArray12<DailyQuestWork> _dailyQuests;
+    [FieldOffset(0x6A8)] [FixedSizeArray] internal FixedSizeArray5<TrackingWork> _trackedQuests;
+    [FieldOffset(0xBC8)] [FixedSizeArray] internal FixedSizeArray17<BeastReputationWork> _beastReputation;
+    [FieldOffset(0xCD8)] [FixedSizeArray] internal FixedSizeArray16<LeveWork> _leveQuests;
     [FieldOffset(0xE58)] public byte NumLeveAllowances;
 
     [FieldOffset(0xF40)] public byte NumAcceptedQuests;
@@ -104,7 +100,7 @@ public unsafe partial struct QuestManager {
     }
 
     public QuestWork* GetQuestById(ushort questId) {
-        var span = NormalQuestsSpan;
+        var span = NormalQuests;
         for (var i = 0; i < span.Length; i++) {
             if (span[i].QuestId == questId)
                 return (QuestWork*)Unsafe.AsPointer(ref span[i]);
@@ -113,7 +109,7 @@ public unsafe partial struct QuestManager {
     }
 
     public DailyQuestWork* GetDailyQuestById(ushort questId) {
-        var span = DailyQuestsSpan;
+        var span = DailyQuests;
         for (var i = 0; i < span.Length; i++) {
             if (span[i].QuestId == questId)
                 return (DailyQuestWork*)Unsafe.AsPointer(ref span[i]);
@@ -122,7 +118,7 @@ public unsafe partial struct QuestManager {
     }
 
     public LeveWork* GetLeveQuestById(ushort leveId) {
-        var span = LeveQuestsSpan;
+        var span = LeveQuests;
         for (var i = 0; i < span.Length; i++) {
             if (span[i].LeveId == leveId)
                 return (LeveWork*)Unsafe.AsPointer(ref span[i]);
@@ -132,7 +128,7 @@ public unsafe partial struct QuestManager {
 
     public BeastReputationWork* GetBeastReputationById(uint beastTribeId) {
         var index = beastTribeId - 1;
-        var span = BeastReputationSpan;
+        var span = BeastReputation;
         if (index >= span.Length) return null;
         return (BeastReputationWork*)Unsafe.AsPointer(ref span[(int)index]);
     }

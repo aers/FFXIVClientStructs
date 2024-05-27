@@ -4,8 +4,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 //   Client::Game::CameraBase
 // ctor "E8 ?? ?? ?? ?? EB 03 48 8B C7 45 33 C0 48 89 03"
 [StructLayout(LayoutKind.Explicit, Size = 0x2B0)]
-public struct Camera {
-    [FieldOffset(0x00)] public CameraBase CameraBase;
+[GenerateInterop]
+[Inherits<CameraBase>]
+public partial struct Camera {
     [FieldOffset(0x114)] public float Distance;
     [FieldOffset(0x118)] public float MinDistance;
     [FieldOffset(0x11C)] public float MaxDistance;

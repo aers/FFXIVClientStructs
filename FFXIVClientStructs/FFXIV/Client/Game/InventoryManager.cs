@@ -4,6 +4,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 
 //ctor i guess 40 53 48 83 EC 20 48 8B D9 45 33 C9 B9
 [StructLayout(LayoutKind.Explicit, Size = 0x3620)]
+[GenerateInterop]
 public unsafe partial struct InventoryManager {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? 81 C2", 3)]
     public static partial InventoryManager* Instance();
@@ -80,6 +81,7 @@ public unsafe partial struct InventoryManager {
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x18)]
+[GenerateInterop]
 public unsafe partial struct InventoryContainer {
     [FieldOffset(0x00)] public InventoryItem* Items;
     [FieldOffset(0x08)] public InventoryType Type;
@@ -91,6 +93,7 @@ public unsafe partial struct InventoryContainer {
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x38)]
+[GenerateInterop]
 public unsafe partial struct InventoryItem : ICreatable {
     [FieldOffset(0x00)] public InventoryType Container;
     [FieldOffset(0x04)] public short Slot;

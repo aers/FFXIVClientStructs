@@ -4,6 +4,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
 // Client::Game::UI::MarkingController
 [StructLayout(LayoutKind.Explicit, Size = 0x2E0)]
+[GenerateInterop]
 public unsafe partial struct MarkingController {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? 4C 8B 85", 3)]
     public static partial MarkingController* Instance();
@@ -12,8 +13,7 @@ public unsafe partial struct MarkingController {
     [FieldOffset(0x98)] public fixed uint LetterMarkerArray[26]; //26 * ObjectId
     [FieldOffset(0x100)] public fixed long MarkerTimeArray[17]; //(1000 * QueryPerformanceCounter / QueryPerformanceFrequency)
 
-    [FixedSizeArray<FieldMarker>(8)]
-    [FieldOffset(0x1E0)] public fixed byte FieldMarkerArray[8 * 0x20];
+    [FieldOffset(0x1E0)] [FixedSizeArray] internal FixedSizeArray8<FieldMarker> _fieldMarkerArray;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x20)]

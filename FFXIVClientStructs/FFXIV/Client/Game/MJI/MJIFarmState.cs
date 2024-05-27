@@ -4,6 +4,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.MJI;
 // ctor "E8 ?? ?? ?? ?? EB 03 48 8B C7 33 D2 48 89 83 ?? ?? ?? ?? 45 33 C0 8D 4A 01"
 // vast majority of struct info from "E8 ?? ?? ?? ?? 8B 4C 24 24 E8"
 [StructLayout(LayoutKind.Explicit, Size = 0x148)]
+[GenerateInterop]
 public unsafe partial struct MJIFarmState {
     [FieldOffset(0x18)] public bool LayoutInitialized; // if false, PlotObjectIndex / LayoutId arrays are unset
     [FieldOffset(0x1A)] public ushort ReactionEventObjectRowId; // primary row index in ReactionEventObject sheet, equal to 5
@@ -13,8 +14,7 @@ public unsafe partial struct MJIFarmState {
     [FieldOffset(0x48)] public fixed byte WaterLevel[20];
     [FieldOffset(0x5C)] public fixed byte GardenerYield[20];
 
-    [FixedSizeArray<FarmSlotFlags>(20)]
-    [FieldOffset(0x70)] public fixed byte FarmSlotFlags[20];
+    [FieldOffset(0x70)] [FixedSizeArray] internal FixedSizeArray20<FarmSlotFlags> _farmSlotFlags; 
 
     [FieldOffset(0x88)] public fixed uint PlotObjectIndex[20]; // ??
     [FieldOffset(0xD8)] public fixed uint LayoutId[20];

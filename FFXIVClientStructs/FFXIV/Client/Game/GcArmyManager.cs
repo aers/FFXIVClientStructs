@@ -4,6 +4,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 
 // ctor "48 83 EC 28 48 83 3D ?? ?? ?? ?? ?? 75 2E 33 D2"
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
+[GenerateInterop]
 public unsafe partial struct GcArmyManager {
     [MemberFunction("E8 ?? ?? ?? ?? 8B 57 7C")]
     public static partial GcArmyManager* Instance();
@@ -21,9 +22,9 @@ public unsafe partial struct GcArmyManager {
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0xB18)]
+[GenerateInterop]
 public unsafe partial struct GcArmyData {
-    [FixedSizeArray<GcArmyMember>(8)]
-    [FieldOffset(0)] public fixed byte Members[8 * 0x50];
+    [FieldOffset(0)] [FixedSizeArray] internal FixedSizeArray8<GcArmyMember> _members;
     /// <remarks> RowId of GcArmyProgress </remarks>
     [FieldOffset(0x280)] public byte Progress;
 
