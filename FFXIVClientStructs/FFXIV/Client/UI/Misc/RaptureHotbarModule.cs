@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using FFXIVClientStructs.FFXIV.Client.Game;
 using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Client.UI.Misc.UserFileManager;
@@ -7,11 +8,11 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 // Client::UI::Misc::RaptureHotbarModule
 //   Client::UI::Misc::UserFileManager::UserFileEvent
 // ctor "E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 4C 8B C7 49 8B D4 E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 49 8B D4"
+[GenerateInterop, Inherits<UserFileEvent>]
 [StructLayout(LayoutKind.Explicit, Size = 0x288F8)]
 public unsafe partial struct RaptureHotbarModule {
     public static RaptureHotbarModule* Instance() => Framework.Instance()->GetUiModule()->GetRaptureHotbarModule();
 
-    [FieldOffset(0)] public UserFileEvent UserFileEvent; // to 0x40
     [FieldOffset(0x48)] public UIModule* UiModule;
 
     /// <summary>
@@ -68,11 +69,10 @@ public unsafe partial struct RaptureHotbarModule {
     /// An array of all active hotbars loaded and available to the player. This field tracks both normal hotbars
     /// (indices 0 to 9) and cross hotbars (indices 10 to 17).
     /// </summary>
-    [FixedSizeArray<HotBar>(18)]
-    [FieldOffset(0x90)] public fixed byte HotBars[18 * HotBar.Size];
+    [FieldOffset(0x90), FixedSizeArray] internal FixedSizeArray18<HotBar> _hotBars;
 
-    public Span<HotBar> StandardHotBars => this.HotBarsSpan[..10];
-    public Span<HotBar> CrossHotBars => this.HotBarsSpan[10..];
+    public Span<HotBar> StandardHotBars => new(Unsafe.AsPointer(ref HotBars[0]), 10);
+    public Span<HotBar> CrossHotBars => new(Unsafe.AsPointer(ref HotBars[10]), 8);
 
     [FieldOffset(0xFC90)] public HotBar PetHotBar;
     [FieldOffset(0x10A90)] public HotBar PetCrossHotBar;
@@ -98,8 +98,7 @@ public unsafe partial struct RaptureHotbarModule {
     /// To retrieve PvP hotbar information, pass in the result of the <see cref="GetPvPSavedHotbarIndexForClassJobId"/>
     /// method.
     /// </remarks>
-    [FixedSizeArray<SavedHotBarGroup>(65)]
-    [FieldOffset(0x11974)] public fixed byte SavedHotBars[65 * SavedHotBarGroup.Size];
+    [FieldOffset(0x11974), FixedSizeArray] internal FixedSizeArray65<SavedHotBarGroup> _savedHotBars;
 
     [FieldOffset(0x28714)] public CrossHotbarFlags CrossHotbarFlags;
 
@@ -130,8 +129,7 @@ public unsafe partial struct RaptureHotbarModule {
     /// <summary>
     /// Hotbar slots representing available Duty Actions (see also <see cref="ActionManager.GetDutyActionId"/>).
     /// </summary>
-    [FixedSizeArray<DutyActionSlot>(2)]
-    [FieldOffset(0x28720)] public fixed byte DutyActionSlots[2 * DutyActionSlot.Size];
+    [FieldOffset(0x28720), FixedSizeArray] internal FixedSizeArray2<DutyActionSlot> _dutyActionSlots;
 
     /// <summary>
     /// Sets whether Duty Actions are present or not. Controls whether to show the appropriate UI element and whether
@@ -345,7 +343,7 @@ public unsafe partial struct RaptureHotbarModule {
     public partial void LoadSavedHotbar(uint classJobId, uint hotbarId);
 
     /// <summary>
-    /// Get the Saved Hotbar Index for the PVP hotbar for a specific ClassJob, for use in <see cref="SavedHotBarsSpan"/>. 
+    /// Get the Saved Hotbar Index for the PVP hotbar for a specific ClassJob, for use in <see cref="SavedHotBars"/>. 
     /// </summary>
     /// <param name="classJobId">The ClassJob to look up, or 0 for the shared PVP hotbar.</param>
     /// <param name="negOneOnInvalid">Return -1 if the ClassJob can't have a PVP variant.</param>

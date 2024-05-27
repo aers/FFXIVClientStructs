@@ -6,14 +6,13 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 // Client::UI::Misc::RaptureGearsetModule
 //   Client::UI::Misc::UserFileManager::UserFileEvent
 // ctor "48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC 20 45 33 F6 48 89 51 10 48 8D 05 ?? ?? ?? ?? 4C 89 71 08 49 8B D8"
+[GenerateInterop, Inherits<UserFileEvent>]
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 48 89 5F 40 48 8D 77 48", 3)]
 [StructLayout(LayoutKind.Explicit, Size = 0xB670)]
 public unsafe partial struct RaptureGearsetModule {
     public static RaptureGearsetModule* Instance() => UIModule.Instance()->GetRaptureGearsetModule();
 
-    [FieldOffset(0)] public UserFileEvent UserFileEvent;
-    [FixedSizeArray<GearsetEntry>(100)]
-    [FieldOffset(0x48)] public fixed byte Entries[0x1C0 * 100];
+    [FieldOffset(0x48), FixedSizeArray] internal FixedSizeArray100<GearsetEntry> _entries;
 
     [FieldOffset(0xB434)] public int CurrentGearsetIndex;
 
@@ -248,8 +247,7 @@ public unsafe partial struct RaptureGearsetModule {
         /// <remarks>This is the BannerIndex, but offset by 1. If it's 0, the gearset is not linked to a banner.</remarks>
         [FieldOffset(0x36)] public byte BannerIndex;
         [FieldOffset(0x37)] public GearsetFlag Flags;
-        [FixedSizeArray<GearsetItem>(14)]
-        [FieldOffset(0x38)] public fixed byte Items[0x1C * 14];
+        [FieldOffset(0x38)] internal FixedSizeArray14<GearsetItem> _items;
         [FieldOffset(0x38 + GearsetItem.Size * 00), Obsolete("Use ItemsSpan[0]")] public GearsetItem MainHand;
         [FieldOffset(0x38 + GearsetItem.Size * 01), Obsolete("Use ItemsSpan[1]")] public GearsetItem OffHand;
         [FieldOffset(0x38 + GearsetItem.Size * 02), Obsolete("Use ItemsSpan[2]")] public GearsetItem Head;

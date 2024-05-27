@@ -6,19 +6,17 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 // Client::UI::Misc::RecipeFavoriteModule
 //   Client::UI::Misc::UserFileManager::UserFileEvent
 // ctor "E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 49 8B D4 E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 49 8B D4 E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? E8"
+[GenerateInterop, Inherits<UserFileEvent>]
 [StructLayout(LayoutKind.Explicit, Size = 0x188)]
 public unsafe partial struct RecipeFavoriteModule {
     public static RecipeFavoriteModule* Instance() => Framework.Instance()->GetUiModule()->GetRecipeFavoriteModule();
 
-    [FieldOffset(0)] public UserFileEvent UserFileEvent;
+    [FieldOffset(0x42), FixedSizeArray] internal FixedSizeArray8<CraftingTypeEntry> _craftingTypes;
 
-    [FixedSizeArray<CraftingTypeEntry>(8)]
-    [FieldOffset(0x42)] public fixed byte CraftingTypes[8 * 10 * 0x4];
-
+    [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x28)]
     public partial struct CraftingTypeEntry {
-        [FixedSizeArray<RecipeEntry>(10)]
-        [FieldOffset(0)] public fixed byte Recipes[10 * 0x4];
+        [FieldOffset(0), FixedSizeArray] internal FixedSizeArray10<RecipeEntry> _recipes;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x4)]

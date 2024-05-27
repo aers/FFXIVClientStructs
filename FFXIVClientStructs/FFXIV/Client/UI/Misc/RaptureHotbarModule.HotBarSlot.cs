@@ -5,6 +5,7 @@ using FFXIVClientStructs.FFXIV.Client.System.String;
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
 // ToDo: Wrap in RaptureHotbarModule partial struct for namespacing (API 10)
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = Size)]
 public unsafe partial struct HotBarSlot {
     public const int Size = 0xE0;

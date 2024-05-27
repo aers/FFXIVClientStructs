@@ -7,10 +7,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 // Client::UI::Misc::CharaViewPortrait
 //   Client::UI::Misc::CharaView
 // ctor "E8 ?? ?? ?? ?? 48 8B F8 45 33 C0"
+[GenerateInterop, Inherits<CharaView>]
 [StructLayout(LayoutKind.Explicit, Size = 0x3C0)]
 public unsafe partial struct CharaViewPortrait : ICreatable {
-    [FieldOffset(0)] public CharaView Base;
-
     // Spherical Camera?
     [FieldOffset(0x2D0)] public Vector4 CameraPosition;
     [FieldOffset(0x2E0)] public Vector4 CameraTarget;
@@ -48,19 +47,10 @@ public unsafe partial struct CharaViewPortrait : ICreatable {
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 89 83 ?? ?? ?? ?? EB 0B")]
     public readonly partial void Ctor();
-
-    [VirtualFunction(0)]
-    public readonly partial void Dtor(bool freeMemory);
-
+    
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 43 10 C6 80 ?? ?? ?? ?? ?? 48 8B 4B 10")]
     public readonly partial void Initialize(uint clientObjectId, CharaViewCharacterData* characterData, long a4, int a5, long a6); // a4 is set to +0x3A8, a5 is set to +0x3B0, a6 is set to +0x3B8
-
-    [VirtualFunction(2)]
-    public readonly partial void Release(); // aka Finalize
-
-    [VirtualFunction(3)]
-    public readonly partial void ResetPositions();
-
+    
     [VirtualFunction(4)]
     public readonly partial void SetCameraDistance(float deltaDistance);
 

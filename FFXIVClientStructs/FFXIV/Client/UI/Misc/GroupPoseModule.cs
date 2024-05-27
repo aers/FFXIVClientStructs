@@ -7,11 +7,11 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 // Client::UI::Misc::GroupPoseModule
 //   Client::UI::Misc::UserFileManager::UserFileEvent
 // ctor "E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 49 8B D4 E8 ?? ?? ?? ?? 33 C0"
+[GenerateInterop, Inherits<UserFileEvent>]
 [StructLayout(LayoutKind.Explicit, Size = 0x130)]
 public unsafe partial struct GroupPoseModule {
     public static GroupPoseModule* Instance() => Framework.Instance()->GetUiModule()->GetGroupPoseModule();
 
-    [FieldOffset(0)] public UserFileEvent UserFileEvent;
     // [FieldOffset(0x40)] public byte Unk40;
     // [FieldOffset(0x41)] public byte Unk41;
 
@@ -26,8 +26,7 @@ public unsafe partial struct GroupPoseModule {
     [FieldOffset(0x70)] public Vector4 CameraPosition; // maybe?
     [FieldOffset(0x80)] public bool IsCharacterOrientedCamera;
 
-    [FixedSizeArray<Light>(3)]
-    [FieldOffset(0x90)] public fixed byte Lights[3 * 0x30];
+    [FieldOffset(0x90)] internal FixedSizeArray3<Light> _lights;
 
     [FieldOffset(0x120)] public bool IsCharacterOrientedLight;
     [FieldOffset(0x121)] public bool IsManualBrightnessEnabled;

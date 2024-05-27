@@ -28,10 +28,8 @@ public unsafe partial struct InputTimerModule {
     [FieldOffset(0x54)] public int RightStickX;
     [FieldOffset(0x58)] public int RightStickY;
 
-    [FixedSizeArray<InputTimerData>(16)]
-    [FieldOffset(0x5C)] public fixed byte ControllerInputTimers[16 * 0x38];
-    [FixedSizeArray<InputTimerData>(5)]
-    [FieldOffset(0x3DC)] public fixed byte MouseInputTimers[5 * 0x38];
+    [FieldOffset(0x5C), FixedSizeArray] internal FixedSizeArray16<InputTimerData> _controllerInputTimers;
+    [FieldOffset(0x3DC), FixedSizeArray] internal FixedSizeArray5<InputTimerData> _mouseInputTimers;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x38)]
     public struct InputTimerData {

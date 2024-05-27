@@ -6,26 +6,22 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 // Client::UI::Misc::AozNoteModule
 //   Client::UI::Misc::UserFileManager::UserFileEvent
 // ctor "E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 49 8B D4 E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 49 8B D4 E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 49 8B D4 E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 49 8B D4 E8 ?? ?? ?? ?? 33 C0"
+[GenerateInterop, Inherits<UserFileEvent>]
 [StructLayout(LayoutKind.Explicit, Size = 0xD28)]
 public unsafe partial struct AozNoteModule {
     public static AozNoteModule* Instance() => Framework.Instance()->GetUiModule()->GetAozNoteModule();
+    
+    [FieldOffset(0x40), FixedSizeArray] internal FixedSizeArray5<ActiveSet> _activeSets;
 
-    [FieldOffset(0)] public UserFileEvent UserFileEvent;
-    [FixedSizeArray<ActiveSet>(5)]
-    [FieldOffset(0x40)] public fixed byte ActiveSets[5 * 0x290];
-
+    [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x290)]
     public partial struct ActiveSet {
         [FieldOffset(0)] public fixed uint ActiveActions[24]; // Action RowIds
-        [FieldOffset(0x60), FixedString("CustomName")] public fixed byte CustomNameBytes[61];
-        [FixedSizeArray<AozHotBar>(10)]
-        [FieldOffset(0x9D)] public fixed byte StandardHotBars[12 * 10];
-        [FixedSizeArray<AozCrossHotBar>(8)]
-        [FieldOffset(0x115)] public fixed byte CrossHotBars[8 * 16];
-        [FixedSizeArray<AozHotBarMacroFlag>(10)]
-        [FieldOffset(0x195)] public fixed byte StandardHotBarMacroFlags[12 * 10];
-        [FixedSizeArray<AozCrossHotBarMacroFlag>(8)]
-        [FieldOffset(0x20D)] public fixed byte CrossHotBarMacroFlags[8 * 16];
+        [FieldOffset(0x60), FixedSizeArray(isString: true)] internal FixedSizeArray61<byte> _customName;
+        [FieldOffset(0x9D), FixedSizeArray] internal FixedSizeArray10<AozHotBar> _standardHotBars;
+        [FieldOffset(0x115), FixedSizeArray] internal FixedSizeArray8<AozCrossHotBar> _crossHotBars;
+        [FieldOffset(0x195), FixedSizeArray] internal FixedSizeArray10<AozHotBarMacroFlag> _standardHotBarMacroFlags;
+        [FieldOffset(0x20D), FixedSizeArray] internal FixedSizeArray8<AozCrossHotBarMacroFlag> _crossHotBarMacroFlags;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 12)]
@@ -54,7 +50,7 @@ public unsafe partial struct AozNoteModule {
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 0C 8B D3 48 8B CD")]
     public partial bool HasActiveSetCustomName(int activeSetIndex);
 
-    [MemberFunction("41 0F 10 00 8B C2 48 69 D0 ?? ?? ?? ?? 0F 11 84 0A"), GenerateCStrOverloads]
+    [MemberFunction("41 0F 10 00 8B C2 48 69 D0 ?? ?? ?? ?? 0F 11 84 0A"), GenerateStringOverloads]
     public partial void SetActiveSetCustomName(int activeSetIndex, byte* name);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 69 F6")]

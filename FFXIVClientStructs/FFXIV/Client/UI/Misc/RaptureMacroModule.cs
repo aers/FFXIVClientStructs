@@ -6,18 +6,16 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 // Client::UI::Misc::RaptureMacroModule
 //   Client::UI::Misc::UserFileManager::UserFileEvent
 // ctor "E8 ?? ?? ?? ?? 48 8D B7 ?? ?? ?? ?? 4C 8B C7"
+[GenerateInterop, Inherits<UserFileEvent>]
 [StructLayout(LayoutKind.Explicit, Size = 0x51AA8)]
 public unsafe partial struct RaptureMacroModule {
     public static RaptureMacroModule* Instance() => UIModule.Instance()->GetRaptureMacroModule();
 
-    [FieldOffset(0)] public UserFileEvent UserFileEvent;
     [FieldOffset(0x40)] public RaptureTextModule* RaptureTextModule;
     //[FieldOffset(0x48)] public TextChecker* TextChecker;
 
-    [FixedSizeArray<Macro>(100)]
-    [FieldOffset(0x58)] public fixed byte Individual[100 * 0x688];
-    [FixedSizeArray<Macro>(100)]
-    [FieldOffset(0x28D78)] public fixed byte Shared[100 * 0x688];
+    [FieldOffset(0x58), FixedSizeArray] internal FixedSizeArray100<Macro> _individual;
+    [FieldOffset(0x28D78), FixedSizeArray] internal FixedSizeArray100<Macro> _shared;
 
     [MemberFunction("E8 ?? ?? ?? ?? 32 DB 83 C6 F9")]
     public partial Macro* GetMacro(uint set, uint index);
@@ -42,13 +40,13 @@ public unsafe partial struct RaptureMacroModule {
     [MemberFunction("45 85 C0 75 04 88 51 3D")]
     public partial void SetSavePendingFlag(bool needsSave, uint set);
 
+    [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x688)]
     public partial struct Macro {
         [FieldOffset(0)] public uint IconId;
         [FieldOffset(0x4)] public uint MacroIconRowId; // offset by +1
         [FieldOffset(0x8)] public Utf8String Name;
-        [FixedSizeArray<Utf8String>(15)]
-        [FieldOffset(0x70)] public fixed byte Lines[15 * 0x68];
+        [FieldOffset(0x70)] internal FixedSizeArray15<Utf8String> _lines;
 
         /// <summary>
         /// Set the Icon of this Macro and also sets the correct MacroIconRowId

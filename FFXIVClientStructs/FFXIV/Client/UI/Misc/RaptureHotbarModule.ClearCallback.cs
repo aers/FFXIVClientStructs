@@ -1,6 +1,7 @@
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
 public partial struct RaptureHotbarModule {
+    [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x08)]
     public unsafe partial struct ClearCallback {
         [VirtualFunction(0)]

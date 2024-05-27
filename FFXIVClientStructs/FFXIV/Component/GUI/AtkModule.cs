@@ -43,8 +43,8 @@ public unsafe partial struct AtkModule {
     // hope they don't add more soft keyboards later!
     [FieldOffset(0x8150)] public SteamGamepadSoftKeyboard SoftKeyboardDevice;
 
-    [FieldOffset(0x8268), FixedString("CurrentUIScene")] public fixed byte CurrentUISceneBytes[16];
-    [FieldOffset(0x8278), FixedString("LoadingUIScene")] public fixed byte LoadingUISceneBytes[16];
+    [FieldOffset(0x8268), FixedSizeArray(isString: true)] internal FixedSizeArray16<byte> _currentUIScene;
+    [FieldOffset(0x8278), FixedSizeArray(isString: true)] internal FixedSizeArray16<byte> _loadingUIScene;
 
     [FieldOffset(0x8290)] internal ushort ScreenWidth; // maybe UI dimensions?
     [FieldOffset(0x8292)] internal ushort ScreenHeight;

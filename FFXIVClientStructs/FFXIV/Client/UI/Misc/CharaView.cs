@@ -15,6 +15,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 //  4 used in BannerList, BannerEdit
 //  0 - 7 used in BannerParty
 //
+[GenerateInterop(isInherited: true)]
 [StructLayout(LayoutKind.Explicit, Size = 0x2C8)]
 public unsafe partial struct CharaView : ICreatable {
     [FieldOffset(0x8)] public uint State; // initialization state of KernelTexture, Camera etc. that happens in Render(), 6 = ready for use
@@ -34,11 +35,10 @@ public unsafe partial struct CharaView : ICreatable {
     //[FieldOffset(0xC0)] public float UnkC0;
     [FieldOffset(0xC4)] public float ZoomRatio;
 
-    [FixedSizeArray<CharaViewItem>(14)]
-    [FieldOffset(0xD0)] public fixed byte Items[0x20 * 14];
+    [FieldOffset(0xD0), FixedSizeArray] internal FixedSizeArray14<CharaViewItem> _items;
 
-    [FieldOffset(0x2B8)] public bool CharacterDataCopied;
-    [FieldOffset(0x2B9)] public bool CharacterLoaded;
+    [FieldOffset(0x2B8)] public bool CharaViewCharacterDataCopied;
+    [FieldOffset(0x2B9)] public bool CharaViewCharacterLoaded;
 
     public static CharaView* Create()
         => IMemorySpace.GetUISpace()->Create<CharaView>();
@@ -83,6 +83,7 @@ public unsafe partial struct CharaView : ICreatable {
     public readonly partial void ToggleDrawWeapon(bool drawn);
 }
 
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x68)]
 public unsafe partial struct CharaViewCharacterData : ICreatable {
     [FieldOffset(0)] public CustomizeData CustomizeData;

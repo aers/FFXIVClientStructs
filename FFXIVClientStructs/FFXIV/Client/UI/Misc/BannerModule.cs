@@ -7,11 +7,11 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 // Client::UI::Misc::BannerModule
 //   Client::UI::Misc::UserFileManager::UserFileEvent
 // ctor "E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 49 8B D4 E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 49 8B D4 E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 49 8B D4 E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 49 8B D4 E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 49 8B D4 E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 48 8B D7"
+[GenerateInterop, Inherits<UserFileEvent>]
 [StructLayout(LayoutKind.Explicit, Size = 0x48)]
 public unsafe partial struct BannerModule {
     public static BannerModule* Instance() => Framework.Instance()->GetUiModule()->GetBannerModule();
 
-    [FieldOffset(0)] public UserFileEvent UserFileEvent;
     [FieldOffset(0x40)] public BannerModuleData* Data;
 
     /// <summary>
@@ -54,10 +54,10 @@ public unsafe partial struct BannerModule {
 }
 
 // ctor "E8 ?? ?? ?? ?? 48 89 43 40 48 8B 4B 40 48 85 C9 74 0A"
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x3E60)]
 public unsafe partial struct BannerModuleData {
-    [FixedSizeArray<BannerModuleEntry>(110)]
-    [FieldOffset(0x00)] public fixed byte Entries[0x90 * 110];
+    [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray110<BannerModuleEntry> _entries;
     [FieldOffset(0x3DE0)] public fixed byte BannerId2BannerIndex[110];
     [FieldOffset(0x3E4E)] public byte NextId;
 
@@ -71,6 +71,7 @@ public unsafe partial struct BannerModuleData {
 }
 
 // ctor "E8 ?? ?? ?? ?? 0F B6 84 3E"
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x90)]
 public unsafe partial struct BannerModuleEntry {
     [FieldOffset(0x00)] public fixed byte BannerTimelineName[0x40];

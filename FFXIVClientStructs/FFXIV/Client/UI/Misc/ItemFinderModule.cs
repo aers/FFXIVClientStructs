@@ -7,11 +7,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 // Client::UI::Misc::ItemFinderModule
 //   Client::UI::Misc::UserFileManager::UserFileEvent
 // ctor "48 89 5C 24 ?? 57 48 83 EC 20 33 FF 48 89 51 10 48 8D 05 ?? ?? ?? ?? 48 89 79 08 48 8B D9 48 89 01 48 89 79 18 4C 8D 05 ?? ?? ?? ?? 89 79 20 8D 57 0C 48 89 79 28 89 79 3C 48 83 C1 30 E8 ?? ?? ?? ?? 89 BB"
+[GenerateInterop, Inherits<UserFileEvent>]
 [StructLayout(LayoutKind.Explicit, Size = 0x11D0)]
 public unsafe partial struct ItemFinderModule {
     public static ItemFinderModule* Instance() => Framework.Instance()->GetUiModule()->GetItemFinderModule();
-
-    [FieldOffset(0)] public UserFileEvent UserFileEvent;
 
     [FieldOffset(0x40)] public fixed uint RequestItemIds[24];
     [FieldOffset(0xA0)] public bool IsRequestUnfulfilled;

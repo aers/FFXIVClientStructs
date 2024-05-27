@@ -5,6 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
 // Client::UI::RecommendEquipModule
 // ctor "48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC 20 33 ED 48 8D 59 08 4C 8B F1"
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x80)]
 public unsafe partial struct RecommendEquipModule {
     public static RecommendEquipModule* Instance() => Framework.Instance()->GetUiModule()->GetRecommendEquipModule();
@@ -13,8 +14,7 @@ public unsafe partial struct RecommendEquipModule {
     [FieldOffset(0x01)] public bool IsSetupForDifferentClassJob;
     [FieldOffset(0x04)] public uint CurrentSlotIndex; // used as index in the update loop
 
-    [FixedSizeArray<Pointer<InventoryItem>>(14)]
-    [FieldOffset(0x08)] public fixed byte RecommendedItems[14 * 0x8];
+    [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray14<Pointer<InventoryItem>> _recommendedItems;
     [FieldOffset(0x08), CExportIgnore] public InventoryItem* EquippedMainHand;
     [FieldOffset(0x10), CExportIgnore] public InventoryItem* EquippedOffHand;
     [FieldOffset(0x18), CExportIgnore] public InventoryItem* EquippedHead;

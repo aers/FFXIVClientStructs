@@ -6,23 +6,23 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 // Client::UI::Misc::GoldSaucerModule
 //   Client::UI::Misc::UserFileManager::UserFileEvent
 // ctor "E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 49 8B D4 E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 49 8B D4 E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 49 8B D4"
+[GenerateInterop, Inherits<UserFileEvent>]
 [StructLayout(LayoutKind.Explicit, Size = 0x2C8)]
 public unsafe partial struct GoldSaucerModule {
     public static GoldSaucerModule* Instance() => Framework.Instance()->GetUiModule()->GetGoldSaucerModule();
 
-    [FieldOffset(0)] public UserFileEvent UserFileEvent;
-    [FixedSizeArray<TripleTriadDeck>(10)]
-    [FieldOffset(0x40)] public fixed byte Decks[10 * 0x3A];
+    [FieldOffset(0x40)] internal FixedSizeArray10<TripleTriadDeck> _decks;
     [FieldOffset(0x284)] public fixed ushort HotbarMinions[23]; // Companion RowIds
     [FieldOffset(0x2B4)] public fixed ushort UnseenCards[10]; // TripleTriadCard RowIds, the ones indicated with a green dot
 
+    [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x3A)]
     public unsafe partial struct TripleTriadDeck {
-        [FieldOffset(0), FixedString("Name")] public fixed byte NameBytes[0x30];
+        [FieldOffset(0), FixedSizeArray(isString: true)] internal FixedSizeArray48<byte> _name;
         [FieldOffset(0x30)] public fixed ushort Cards[5]; // TripleTriadCard RowIds
     }
 
-    [MemberFunction("48 89 5C 24 ?? 57 48 81 EC ?? ?? ?? ?? 48 63 DA"), GenerateCStrOverloads]
+    [MemberFunction("48 89 5C 24 ?? 57 48 81 EC ?? ?? ?? ?? 48 63 DA"), GenerateStringOverloads]
     public partial void SetDeckName(int deckIndex, byte* name);
 
     [MemberFunction("83 FA 09 77 1D")]

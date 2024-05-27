@@ -2,6 +2,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc.UserFileManager;
 
 // Client::UI::Misc::UserFileManager::UserFileEvent
 // ctor inlined
+[GenerateInterop(isInherited: true)]
 [StructLayout(LayoutKind.Explicit, Size = 0x40)]
 public unsafe partial struct UserFileEvent {
     [FieldOffset(0x08)] public ulong CharacterContentId;

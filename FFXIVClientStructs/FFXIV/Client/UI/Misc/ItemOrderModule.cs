@@ -7,14 +7,13 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 // Client::UI::Misc::ItemOrderModule
 //   Client::UI::Misc::UserFileManager::UserFileEvent
 // ctor "48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 41 56 41 57 48 83 EC 30 45 33 FF 48 89 51 10"
+[GenerateInterop, Inherits<UserFileEvent>]
 [StructLayout(LayoutKind.Explicit, Size = 0xD8)]
 public unsafe partial struct ItemOrderModule {
     public static ItemOrderModule* Instance() => Framework.Instance()->GetUiModule()->GetItemOrderModule();
 
-    [FieldOffset(0)] public UserFileEvent UserFileEvent;
     [FieldOffset(0x40)] public ItemOrderModuleSorter* InventorySorter;
-    [FixedSizeArray<Pointer<ItemOrderModuleSorter>>(12)]
-    [FieldOffset(0x48)] public fixed byte ArmourySorter[12 * 8];
+    [FieldOffset(0x48), FixedSizeArray] internal FixedSizeArray12<Pointer<ItemOrderModuleSorter>> _armourySorter;
     [FieldOffset(0x48), CExportIgnore] public ItemOrderModuleSorter* ArmouryMainHandSorter;
     [FieldOffset(0x50), CExportIgnore] public ItemOrderModuleSorter* ArmouryHeadSorter;
     [FieldOffset(0x58), CExportIgnore] public ItemOrderModuleSorter* ArmouryBodySorter;
