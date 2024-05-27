@@ -6,4 +6,6 @@ internal sealed record ParameterInfo(
     string Name,
     string Type,
     string? DefaultValue,
-    RefKind RefKind);
+    RefKind RefKind) {
+    public string GetDefaultValue() => DefaultValue is null ? string.Empty : $" = {DefaultValue}";
+};

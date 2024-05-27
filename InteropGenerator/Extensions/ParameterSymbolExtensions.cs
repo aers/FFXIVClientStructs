@@ -14,10 +14,13 @@ internal static class IParameterSymbolExtensions {
         object? defaultValue = symbol.ExplicitDefaultValue;
 
         if (defaultValue is null)
-            return null;
+            return "null";
 
         if (defaultValue is bool boolValue)
             return boolValue ? "true" : "false";
+
+        if (defaultValue is float floatValue)
+            return defaultValue.ToString() + "f";
 
         return defaultValue.ToString();
     }
