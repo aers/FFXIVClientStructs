@@ -58,7 +58,7 @@ public sealed partial class InteropGenerator {
             if (attributeSymbol.TypeArguments.Length != 1) continue;
 
             InheritanceInfo inheritanceInfo = new(
-                attributeSymbol.TypeArguments[0].GetFullyQualifiedMetadataName(),
+                attributeSymbol.TypeArguments[0].GetNameWithContainingTypeAndNamespace(),
                 parentOffset.Value
             );
             inheritanceInfoBuilder.Add(inheritanceInfo);
@@ -86,9 +86,8 @@ public sealed partial class InteropGenerator {
 
         // collect all info
         return new StructInfo(
-            structSymbol.GetFullyQualifiedMetadataName(),
-            structSymbol.ContainingNamespace.ToDisplayString(
-                new SymbolDisplayFormat(typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces)),
+            structSymbol.GetNameWithContainingTypeAndNamespace(),
+            structSymbol.ContainingNamespace.GetNameWithContainingTypeAndNamespace(),
             hierarchy.ToImmutable(),
             memberFunctions,
             virtualFunctions,

@@ -12,6 +12,9 @@ namespace InteropGenerator.Extensions;
 public static class ISymbolExtensions {
     public static string GetFullyQualifiedName(this ISymbol symbol) => symbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
 
+    private static readonly SymbolDisplayFormat ContainingTypesAndNamespaces = new SymbolDisplayFormat(typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces);
+    public static string GetNameWithContainingTypeAndNamespace(this ISymbol symbol) => symbol.ToDisplayString(ContainingTypesAndNamespaces);
+
     /// <summary>
     ///     Checks whether or not a given symbol has an attribute with the specified type.
     /// </summary>

@@ -271,7 +271,7 @@ public class StaticAddressAttributeTests {
                                   {
                                       public static class Addresses
                                       {
-                                          public static readonly global::InteropGenerator.Runtime.Address Instance = new global::InteropGenerator.Runtime.Address("TestStruct+InnerStruct.Instance", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD ?? ?? ?? ??", new byte[] {4}, new ulong[] {0x00000000DDCCBBAA, 0x00000000DD00BBAA}, new ulong[] {0x00000000FFFFFFFF, 0x00000000FF00FFFF}, 0);
+                                          public static readonly global::InteropGenerator.Runtime.Address Instance = new global::InteropGenerator.Runtime.Address("TestStruct.InnerStruct.Instance", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD ?? ?? ?? ??", new byte[] {4}, new ulong[] {0x00000000DDCCBBAA, 0x00000000DD00BBAA}, new ulong[] {0x00000000FFFFFFFF, 0x00000000FF00FFFF}, 0);
                                       }
                                       public unsafe static class StaticAddressPointers
                                       {
@@ -291,7 +291,7 @@ public class StaticAddressAttributeTests {
 
         await VerifyIG.VerifyGeneratorAsync(
             code,
-            ("TestStruct+InnerStruct.InteropGenerator.g.cs", result),
+            ("TestStruct.InnerStruct.InteropGenerator.g.cs", result),
             SourceGeneration.GetInitializerSource(string.Empty, "TestStruct.InnerStruct", ["Instance"]));
     }
 

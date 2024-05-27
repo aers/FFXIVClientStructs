@@ -133,6 +133,6 @@ public class GeneralInteropAttributeTests {
 
         await VerifyIG.VerifyGeneratorAsync(
             code,
-            ("TestStruct+InnerStruct.InteropGenerator.g.cs", result));
+            ("TestStruct.InnerStruct.InteropGenerator.g.cs", result));
     }
 }

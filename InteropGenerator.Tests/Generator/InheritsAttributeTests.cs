@@ -270,7 +270,7 @@ public class InheritsAttributeTests {
                                                   {
                                                       /// <summary>Inherited parent class accessor for <see cref="BaseStruct">BaseStruct</see></summary>
                                                       [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public BaseStruct BaseStruct;
-                                                      /// <inheritdoc cref="BaseStruct.TestFunction" />
+                                                      /// <inheritdoc cref="BaseStruct.TestFunction(int, void*)" />
                                                       /// <remarks>Method inherited from parent class <see cref="BaseStruct">BaseStruct</see>.</remarks>
                                                       [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
                                                       public int TestFunction(int argOne, void* argTwo) => BaseStruct.TestFunction(argOne, argTwo);
@@ -339,7 +339,7 @@ public class InheritsAttributeTests {
                                                    {
                                                        /// <summary>Inherited parent class accessor for <see cref="BaseStruct">BaseStruct</see></summary>
                                                        [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public BaseStruct BaseStruct;
-                                                       /// <inheritdoc cref="BaseStruct.TestFunction" />
+                                                       /// <inheritdoc cref="BaseStruct.TestFunction(int, void*)" />
                                                        /// <remarks>Method inherited from parent class <see cref="BaseStruct">BaseStruct</see>.</remarks>
                                                        [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
                                                        public int TestFunction(int argOne, void* argTwo) => BaseStruct.TestFunction(argOne, argTwo);
@@ -352,7 +352,7 @@ public class InheritsAttributeTests {
                                                   {
                                                       /// <summary>Inherited parent class accessor for <see cref="MiddleStruct">MiddleStruct</see></summary>
                                                       [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public MiddleStruct MiddleStruct;
-                                                      /// <inheritdoc cref="BaseStruct.TestFunction" />
+                                                      /// <inheritdoc cref="BaseStruct.TestFunction(int, void*)" />
                                                       /// <remarks>Method inherited from parent class <see cref="BaseStruct">BaseStruct</see>.</remarks>
                                                       [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
                                                       public int TestFunction(int argOne, void* argTwo) => MiddleStruct.BaseStruct.TestFunction(argOne, argTwo);
@@ -413,7 +413,7 @@ public class InheritsAttributeTests {
                                                                    [global::System.Runtime.InteropServices.FieldOffsetAttribute(40)] public delegate* unmanaged[Stdcall] <ChildStruct*, int, void*, int> TestFunction;
                                                                }
                                                                [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public ChildStructVirtualTable* VirtualTable;
-                                                               /// <inheritdoc cref="BaseStruct.TestFunction" />
+                                                               /// <inheritdoc cref="BaseStruct.TestFunction(int, void*)" />
                                                                /// <remarks>Method inherited from parent class <see cref="BaseStruct">BaseStruct</see>.</remarks>
                                                                [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
                                                                public int TestFunction(int argOne, void* argTwo) => VirtualTable->TestFunction((ChildStruct*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this), argOne, argTwo);
@@ -487,7 +487,7 @@ public class InheritsAttributeTests {
                                                                {
                                                                    [global::System.Runtime.InteropServices.FieldOffsetAttribute(40)] public delegate* unmanaged[Stdcall] <ChildStruct*, int, void*, int> TestFunction;
                                                                }
-                                                               /// <inheritdoc cref="BaseStruct.TestFunction" />
+                                                               /// <inheritdoc cref="BaseStruct.TestFunction(int, void*)" />
                                                                /// <remarks>Method inherited from parent class <see cref="BaseStruct">BaseStruct</see>.</remarks>
                                                                [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
                                                                public int TestFunction(int argOne, void* argTwo) => VirtualTable->TestFunction((ChildStruct*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this), argOne, argTwo);
@@ -549,7 +549,7 @@ public class InheritsAttributeTests {
                                                       [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public BaseStruct BaseStruct;
                                                       /// <summary>Inherited parent class accessor for <see cref="BaseStruct2">BaseStruct2</see></summary>
                                                       [global::System.Runtime.InteropServices.FieldOffsetAttribute(4)] public BaseStruct2 BaseStruct2;
-                                                      /// <inheritdoc cref="BaseStruct2.TestFunction" />
+                                                      /// <inheritdoc cref="BaseStruct2.TestFunction(int, void*)" />
                                                       /// <remarks>Method inherited from parent class <see cref="BaseStruct2">BaseStruct2</see>.</remarks>
                                                       [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
                                                       public int TestFunction(int argOne, void* argTwo) => BaseStruct2.TestFunction(argOne, argTwo);
@@ -587,7 +587,7 @@ public class InheritsAttributeTests {
                                                   {
                                                       /// <summary>Inherited parent class accessor for <see cref="BaseStruct">BaseStruct</see></summary>
                                                       [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public BaseStruct BaseStruct;
-                                                      /// <inheritdoc cref="BaseStruct.TestFunction" />
+                                                      /// <inheritdoc cref="BaseStruct.TestFunction()" />
                                                       /// <remarks>Method inherited from parent class <see cref="BaseStruct">BaseStruct</see>.</remarks>
                                                       [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
                                                       public int TestFunction() => BaseStruct.TestFunction();
@@ -624,7 +624,7 @@ public class InheritsAttributeTests {
                                                   {
                                                       /// <summary>Inherited parent class accessor for <see cref="BaseStruct">BaseStruct</see></summary>
                                                       [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public BaseStruct BaseStruct;
-                                                      /// <inheritdoc cref="BaseStruct.TestFunction<T>" />
+                                                      /// <inheritdoc cref="BaseStruct.TestFunction{T}()" />
                                                       /// <remarks>Method inherited from parent class <see cref="BaseStruct">BaseStruct</see>.</remarks>
                                                       [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
                                                       public int TestFunction<T>() => BaseStruct.TestFunction<T>();
@@ -661,7 +661,7 @@ public class InheritsAttributeTests {
                                                   {
                                                       /// <summary>Inherited parent class accessor for <see cref="BaseStruct">BaseStruct</see></summary>
                                                       [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public BaseStruct BaseStruct;
-                                                      /// <inheritdoc cref="BaseStruct.TestFunction<T>" />
+                                                      /// <inheritdoc cref="BaseStruct.TestFunction{T}()" />
                                                       /// <remarks>Method inherited from parent class <see cref="BaseStruct">BaseStruct</see>.</remarks>
                                                       [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
                                                       public int TestFunction<T>() where T : unmanaged => BaseStruct.TestFunction<T>();
@@ -723,7 +723,7 @@ public class InheritsAttributeTests {
                                                 {
                                                     /// <summary>Inherited parent class accessor for <see cref="BaseStruct">BaseStruct</see></summary>
                                                     [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public BaseStruct BaseStruct;
-                                                    /// <inheritdoc cref="BaseStruct.TestFunction" />
+                                                    /// <inheritdoc cref="BaseStruct.TestFunction(int, byte*)" />
                                                     /// <remarks>Method inherited from parent class <see cref="BaseStruct">BaseStruct</see>.</remarks>
                                                     [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
                                                     public int TestFunction(int argOne, byte* stringArg) => BaseStruct.TestFunction(argOne, stringArg);
@@ -1249,7 +1249,7 @@ public class InheritsAttributeTests {
                                                 /// <inheritdoc cref="BaseA_B.BaseA_B_field0" />
                                                 /// <remarks>Field inherited from parent class <see cref="BaseA_B">BaseA_B</see>.</remarks>
                                                 [global::System.Runtime.InteropServices.FieldOffsetAttribute(4)] public int BaseA_B_field0;
-                                                /// <inheritdoc cref="BaseA_A.BaseA_mf" />
+                                                /// <inheritdoc cref="BaseA_A.BaseA_mf()" />
                                                 /// <remarks>Method inherited from parent class <see cref="BaseA_A">BaseA_A</see>.</remarks>
                                                 [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
                                                 public int BaseA_mf() => BaseA_A.BaseA_mf();
@@ -1257,11 +1257,11 @@ public class InheritsAttributeTests {
                                                 {
                                                     [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public delegate* unmanaged[Stdcall] <MiddleA*, int*, void> BaseA_A_vf0;
                                                 }
-                                                /// <inheritdoc cref="BaseA_A.BaseA_A_vf0" />
+                                                /// <inheritdoc cref="BaseA_A.BaseA_A_vf0(int*)" />
                                                 /// <remarks>Method inherited from parent class <see cref="BaseA_A">BaseA_A</see>.</remarks>
                                                 [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
                                                 public void BaseA_A_vf0(int* arg) => VirtualTable->BaseA_A_vf0((MiddleA*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this), arg);
-                                                /// <inheritdoc cref="BaseA_B.BaseA_B_vf0" />
+                                                /// <inheritdoc cref="BaseA_B.BaseA_B_vf0(byte*)" />
                                                 /// <remarks>Method inherited from parent class <see cref="BaseA_B">BaseA_B</see>.</remarks>
                                                 [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
                                                 public void BaseA_B_vf0(byte* arg) => BaseA_B.BaseA_B_vf0(arg);
@@ -1304,7 +1304,7 @@ public class InheritsAttributeTests {
                                                     [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public delegate* unmanaged[Stdcall] <MiddleC*, int*, void> BaseC_vf0;
                                                 }
                                                 [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public MiddleCVirtualTable* VirtualTable;
-                                                /// <inheritdoc cref="BaseC.BaseC_vf0" />
+                                                /// <inheritdoc cref="BaseC.BaseC_vf0(int*)" />
                                                 /// <remarks>Method inherited from parent class <see cref="BaseC">BaseC</see>.</remarks>
                                                 [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
                                                 public void BaseC_vf0(int* arg) => VirtualTable->BaseC_vf0((MiddleC*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this), arg);
@@ -1336,15 +1336,15 @@ public class InheritsAttributeTests {
                                                 /// <inheritdoc cref="MiddleC.MiddleC_field4" />
                                                 /// <remarks>Field inherited from parent class <see cref="MiddleC">MiddleC</see>.</remarks>
                                                 [global::System.Runtime.InteropServices.FieldOffsetAttribute(24)] public int MiddleC_field4;
-                                                /// <inheritdoc cref="BaseA_A.BaseA_mf" />
+                                                /// <inheritdoc cref="BaseA_A.BaseA_mf()" />
                                                 /// <remarks>Method inherited from parent class <see cref="BaseA_A">BaseA_A</see>.</remarks>
                                                 [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
                                                 public int BaseA_mf() => MiddleA.BaseA_A.BaseA_mf();
-                                                /// <inheritdoc cref="BaseB.BaseB_mf" />
+                                                /// <inheritdoc cref="BaseB.BaseB_mf()" />
                                                 /// <remarks>Method inherited from parent class <see cref="BaseB">BaseB</see>.</remarks>
                                                 [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
                                                 public int BaseB_mf() => BaseB.BaseB_mf();
-                                                /// <inheritdoc cref="MiddleC.MiddleC_mf" />
+                                                /// <inheritdoc cref="MiddleC.MiddleC_mf()" />
                                                 /// <remarks>Method inherited from parent class <see cref="MiddleC">MiddleC</see>.</remarks>
                                                 [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
                                                 public int MiddleC_mf() => MiddleC.MiddleC_mf();
@@ -1353,23 +1353,23 @@ public class InheritsAttributeTests {
                                                     [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public delegate* unmanaged[Stdcall] <Child*, int*, void> BaseA_A_vf0;
                                                     [global::System.Runtime.InteropServices.FieldOffsetAttribute(32)] public delegate* unmanaged[Stdcall] <Child*, int*, void> MiddleA_vf4;
                                                 }
-                                                /// <inheritdoc cref="BaseA_A.BaseA_A_vf0" />
+                                                /// <inheritdoc cref="BaseA_A.BaseA_A_vf0(int*)" />
                                                 /// <remarks>Method inherited from parent class <see cref="BaseA_A">BaseA_A</see>.</remarks>
                                                 [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
                                                 public void BaseA_A_vf0(int* arg) => VirtualTable->BaseA_A_vf0((Child*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this), arg);
-                                                /// <inheritdoc cref="BaseA_B.BaseA_B_vf0" />
+                                                /// <inheritdoc cref="BaseA_B.BaseA_B_vf0(byte*)" />
                                                 /// <remarks>Method inherited from parent class <see cref="BaseA_B">BaseA_B</see>.</remarks>
                                                 [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
                                                 public void BaseA_B_vf0(byte* arg) => MiddleA.BaseA_B.BaseA_B_vf0(arg);
-                                                /// <inheritdoc cref="MiddleA.MiddleA_vf4" />
+                                                /// <inheritdoc cref="MiddleA.MiddleA_vf4(int*)" />
                                                 /// <remarks>Method inherited from parent class <see cref="MiddleA">MiddleA</see>.</remarks>
                                                 [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
                                                 public void MiddleA_vf4(int* arg) => VirtualTable->MiddleA_vf4((Child*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this), arg);
-                                                /// <inheritdoc cref="BaseC.BaseC_vf0" />
+                                                /// <inheritdoc cref="BaseC.BaseC_vf0(int*)" />
                                                 /// <remarks>Method inherited from parent class <see cref="BaseC">BaseC</see>.</remarks>
                                                 [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
                                                 public void BaseC_vf0(int* arg) => MiddleC.BaseC.BaseC_vf0(arg);
-                                                /// <inheritdoc cref="BaseB.BaseB_method" />
+                                                /// <inheritdoc cref="BaseB.BaseB_method()" />
                                                 /// <remarks>Method inherited from parent class <see cref="BaseB">BaseB</see>.</remarks>
                                                 [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
                                                 public void BaseB_method() => BaseB.BaseB_method();

@@ -139,7 +139,7 @@ public class VirtualFunctionAttributeTests {
 
         await VerifyIG.VerifyGeneratorAsync(
             code,
-            ("TestStruct+InnerStruct.InteropGenerator.g.cs", result));
+            ("TestStruct.InnerStruct.InteropGenerator.g.cs", result));
     }
 
     [Fact]

@@ -131,7 +131,8 @@ public sealed partial class InteropGenerator {
                 offset = inheritanceInfo.ParentOffset;
 
             StructInfo currentStruct = inheritedStructs[index + processed];
-            string newPath = path == string.Empty ? currentStruct.Name : path + "." + currentStruct.Name;
+            string baseName = structInfo.Name == currentStruct.Name ? currentStruct.Name + "Base" : currentStruct.Name;
+            string newPath = path == string.Empty ? baseName : path + "." + baseName;
 
             processed += 1;
 
@@ -151,7 +152,7 @@ public sealed partial class InteropGenerator {
             if (memberFunctionInfo.MethodInfo.Name == "Ctor")
                 continue;
             MethodInfo methodInfo = memberFunctionInfo.MethodInfo;
-            writer.WriteLine($"""/// <inheritdoc cref="{inheritedStruct.FullyQualifiedMetadataName}.{methodInfo.Name}" />""");
+            writer.WriteLine($"""/// <inheritdoc cref="{inheritedStruct.FullyQualifiedMetadataName}.{methodInfo.Name}({methodInfo.GetParameterTypeStringForCref()})" />""");
             writer.WriteLine($"""/// <remarks>Method inherited from parent class <see cref="{inheritedStruct.FullyQualifiedMetadataName}">{inheritedStruct.Name}</see>.</remarks>""");
             writer.WriteLine("[global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]");
             // public int SomeInheritedMethod(int param, int param2) => Path.To.Parent.SomeInheritedMethod(param, param2);
@@ -171,7 +172,7 @@ public sealed partial class InteropGenerator {
                 if (offset != 0)
                     continue;
                 foreach (VirtualFunctionInfo virtualFunctionInfo in inheritedStruct.VirtualFunctions) {
-                    var functionPointerType = $"delegate* unmanaged[Stdcall] <{structInfo.Name}*, {virtualFunctionInfo.MethodInfo.GetParameterTypeString()}{virtualFunctionInfo.MethodInfo.ReturnType}>";
+                    var functionPointerType = $"delegate* unmanaged[Stdcall] <{structInfo.Name}*, {virtualFunctionInfo.MethodInfo.GetParameterTypeStringWithTrailingType()}{virtualFunctionInfo.MethodInfo.ReturnType}>";
                     writer.WriteLine($"[global::System.Runtime.InteropServices.FieldOffsetAttribute({virtualFunctionInfo.Index * 8})] public {functionPointerType} {virtualFunctionInfo.MethodInfo.Name};");
                 }
             }
@@ -186,7 +187,7 @@ public sealed partial class InteropGenerator {
         foreach (VirtualFunctionInfo virtualFunctionInfo in inheritedStruct.VirtualFunctions) {
             MethodInfo methodInfo = virtualFunctionInfo.MethodInfo;
             if (offset != 0 && methodInfo.Name == "Dtor") continue;
-            writer.WriteLine($"""/// <inheritdoc cref="{inheritedStruct.FullyQualifiedMetadataName}.{methodInfo.Name}" />""");
+            writer.WriteLine($"""/// <inheritdoc cref="{inheritedStruct.FullyQualifiedMetadataName}.{methodInfo.Name}({methodInfo.GetParameterTypeStringForCref()})" />""");
             writer.WriteLine($"""/// <remarks>Method inherited from parent class <see cref="{inheritedStruct.FullyQualifiedMetadataName}">{inheritedStruct.Name}</see>.</remarks>""");
             writer.WriteLine("[global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]");
             // function in table - call via table
@@ -205,7 +206,7 @@ public sealed partial class InteropGenerator {
         foreach (MethodInfo methodInfo in inheritedStruct.ExtraInheritedStructInfo!.PublicMethods) {
             if (methodInfo.Name == "Ctor")
                 continue;
-            writer.WriteLine($"""/// <inheritdoc cref="{inheritedStruct.FullyQualifiedMetadataName}.{methodInfo.Name}" />""");
+            writer.WriteLine($"""/// <inheritdoc cref="{inheritedStruct.FullyQualifiedMetadataName}.{methodInfo.Name.Replace('<', '{').Replace('>', '}')}({methodInfo.GetParameterTypeStringForCref()})" />""");
             writer.WriteLine($"""/// <remarks>Method inherited from parent class <see cref="{inheritedStruct.FullyQualifiedMetadataName}">{inheritedStruct.Name}</see>.</remarks>""");
             writer.WriteLine("[global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]");
             // public int SomeInheritedMethod(int param, int param2) => Path.To.Parent.SomeInheritedMethod(param, param2);
