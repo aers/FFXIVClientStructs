@@ -29,49 +29,4 @@ internal static class DiagnosticDescriptors {
         DiagnosticSeverity.Error,
         true
     );
-
-    public static DiagnosticDescriptor InvalidSignature { get; } = new(
-        "CSIG0004",
-        "Invalid signature",
-        "Signature {0} is invalid. Signature must have 2 characters per byte, including wildcards.",
-        "General",
-        DiagnosticSeverity.Error,
-        true
-    );
-
-    public static DiagnosticDescriptor AttributeGenericTypeArgumentInvalid { get; } = new(
-        "CSIG0005",
-        "Attribute generic type argument invalid",
-        "Generic type argument for attribute type {0} is invalid",
-        "General",
-        DiagnosticSeverity.Error,
-        true
-    );
-
-    public static DiagnosticDescriptor FixedSizedAttributeOnInvalidField { get; } = new(
-        "CSIG0006",
-        "Fixed sized attribute used on invalid field",
-        "The fixed sized array attribute can only be used on fixed buffer fields of type byte",
-        "General",
-        DiagnosticSeverity.Error,
-        true
-    );
-
-    public static DiagnosticDescriptor MethodMustBePartial { get; } = new(
-        "CSIG0100",
-        "Method must be partial",
-        "Method {0} must be partial to allow generation",
-        "Function Generator",
-        DiagnosticSeverity.Error,
-        true
-    );
-
-    public static DiagnosticDescriptor MethodUsesForbiddenType { get; } = new(
-        "CSIG0101",
-        "Method uses forbidden type",
-        "Method {0} uses type {1} which is forbidden in function generators",
-        "Function Generator",
-        DiagnosticSeverity.Error,
-        true
-    );
 }
