@@ -2,6 +2,7 @@ using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x38)]
 public unsafe partial struct RaptureAtkHistory {
     // this stuff seems like some sort of cursed circular buffer kind of thing

@@ -6,6 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 // Client::UI::UI3DModule
 // ctor "E8 ?? ?? ?? ?? 48 8B 44 24 ?? 4C 8D B7"
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x11BE0)]
 public unsafe partial struct UI3DModule {
     // Client::UI::UI3DModule::MapInfo
@@ -76,24 +77,18 @@ public unsafe partial struct UI3DModule {
     [FieldOffset(0x20)] public fixed byte ObjectInfoArray[599 * 0x60]; // array of Client::UI::UI3DModule::ObjectInfo
     [FieldOffset(0xE0C0)] public fixed byte SortedObjectInfoPointerArray[599 * 0x8]; // array of Client::UI::UI3DModule::ObjectInfo*, distance sorted(?)
     [FieldOffset(0xF378)] public int SortedObjectInfoCount;
-    [FixedSizeArray<Pointer<ObjectInfo>>(50)]
-    [FieldOffset(0xF380)] public fixed byte NamePlateObjectInfoPointerArray[50 * 0x8]; // array of Client::UI::UI3DModule::ObjectInfo* for current nameplates
+    [FieldOffset(0xF380), FixedSizeArray] internal FixedSizeArray50<Pointer<ObjectInfo>> _namePlateObjectInfoPointerArray; // array of Client::UI::UI3DModule::ObjectInfo* for current nameplates
     [FieldOffset(0xF510)] public int NamePlateObjectInfoCount;
     // [FieldOffset(0xF518)] public Bit NamePlateBits; // Client::System::Data::Bit
-    [FixedSizeArray<GameObjectId>(50)]
-    [FieldOffset(0xF538)] public fixed byte NamePlateObjectIdList[50 * 0x8]; // array of GameObjectID (see GameObject.cs), ObjectId = E0000000 means it is empty, matches the order of nameplate addon objects
+    [FieldOffset(0xF538), FixedSizeArray] internal FixedSizeArray50<GameObjectId> _namePlateObjectIdList; // array of GameObjectID (see GameObject.cs), ObjectId = E0000000 means it is empty, matches the order of nameplate addon objects
     [FieldOffset(0xF6C8)] public fixed byte NamePlateObjectIdList_2[50 * 0x8]; // seems to contain same data as above, but may be for working data
-    [FixedSizeArray<Pointer<ObjectInfo>>(50)]
-    [FieldOffset(0xF858)] public fixed byte CharacterObjectInfoPointerArray[50 * 0x8]; // array of Client::UI::UI3DModule::ObjectInfo* for Characters on screen (players, attackable NPCs, etc)
+    [FieldOffset(0xF858), FixedSizeArray] internal FixedSizeArray50<Pointer<ObjectInfo>> _characterObjectInfoPointerArray; // array of Client::UI::UI3DModule::ObjectInfo* for Characters on screen (players, attackable NPCs, etc)
     [FieldOffset(0xF9E8)] public int CharacterObjectInfoCount;
-    [FixedSizeArray<Pointer<ObjectInfo>>(68)]
-    [FieldOffset(0xF9F0)] public fixed byte MapObjectInfoPointerArray[68 * 0x8]; // array of Client::UI::UI3DModule::ObjectInfo* for objects displayed on minimap - summoning bells, mailboxes, etc
+    [FieldOffset(0xF9F0), FixedSizeArray] internal FixedSizeArray68<Pointer<ObjectInfo>> _mapObjectInfoPointerArray; // array of Client::UI::UI3DModule::ObjectInfo* for objects displayed on minimap - summoning bells, mailboxes, etc
     [FieldOffset(0xFC10)] public int MapObjectInfoCount;
     [FieldOffset(0xFC18)] public ObjectInfo* TargetObjectInfo;
-    [FixedSizeArray<MemberInfo>(48)]
-    [FieldOffset(0xFC20)] public fixed byte MemberInfoArray[48 * 0x28]; // array of Client::UI::UI3DModule::MemberInfo, size = max alliance size
-    [FixedSizeArray<Pointer<MemberInfo>>(48)]
-    [FieldOffset(0x103A0)] public fixed byte MemberInfoPointerArray[48 * 0x8]; // array of Client::UI::UI3DModule::MemberInfo*
+    [FieldOffset(0xFC20), FixedSizeArray] internal FixedSizeArray48<MemberInfo> _memberInfoArray; // array of Client::UI::UI3DModule::MemberInfo, size = max alliance size
+    [FieldOffset(0x103A0), FixedSizeArray] internal FixedSizeArray48<Pointer<MemberInfo>> _memberInfoPointerArray; // array of Client::UI::UI3DModule::MemberInfo*
     [FieldOffset(0x10520)] public int MemberInfoCount;
     [FieldOffset(0x10530)] public fixed byte UnkInfoArray[30 * 0x40];
     [FieldOffset(0x10CB0)] public int UnkCount;

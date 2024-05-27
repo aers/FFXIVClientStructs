@@ -4,6 +4,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 // Client::UI::UIClipboard
 // ctor "E8 ?? ?? ?? ?? EB 03 48 8B C6 4C 8B 87"
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0xF8)]
 public unsafe partial struct UIClipboard {
     [FieldOffset(0x8)] public UIModule* UIModule;

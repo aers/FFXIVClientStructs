@@ -13,6 +13,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 // Client::UI::UIModule
 //   Client::UI::UIModuleInterface
+[GenerateInterop, Inherits<ChangeEventInterface>(0x18)]
 [StructLayout(LayoutKind.Explicit, Size = 0xEE030)]
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 4C 89 61 ?? 4C 8B F2", 3)]
 public unsafe partial struct UIModule {
@@ -20,18 +21,8 @@ public unsafe partial struct UIModule {
 
     [FieldOffset(0x8)] public void** AtkModuleEvent;
     [FieldOffset(0x10)] public void** ExcelLanguageEvent;
-    [FieldOffset(0x18)] public ChangeEventInterface ChangeEventInterface;
-    /*
-        dq 0                                    ; +0x30
-        dq 23000000000h                         ; +0x38
-        dq 0                                    ; +0x40
-        dq 23000000000h                         ; +0x48
-        dq 0                                    ; +0x50
-        and so on...
-    */
-
-    [FixedSizeArray<RaptureAtkHistory>(19)]
-    [FieldOffset(0x3B0)] public fixed byte AtkHistory[19 * 0x38];
+    
+    [FieldOffset(0x3B0), FixedSizeArray] internal FixedSizeArray19<RaptureAtkHistory> _atkHistory;
     [FieldOffset(0x7D8)] public int LinkshellCycle;
     [FieldOffset(0x7DC)] public int CrossWorldLinkshellCycle;
 
@@ -361,23 +352,19 @@ public unsafe partial struct UIModule {
     [VirtualFunction(167)]
     public partial void ShowImage(uint imageId, bool useLocalePath = false, int displayType = 0, bool playSound = false);
 
-    [VirtualFunction(168)]
-    [GenerateCStrOverloads]
+    [VirtualFunction(168), GenerateStringOverloads]
     public partial void ShowText(int position, byte* text, uint iconOrCheck1 = 0, bool playSound = true, uint iconOrCheck2 = 0, bool alsoPlaySound = true);
 
     [VirtualFunction(169)]
     public partial void ShowTextChain(int chain, int hqChain = 0);
 
-    [VirtualFunction(170)]
-    [GenerateCStrOverloads]
+    [VirtualFunction(170), GenerateStringOverloads]
     public partial void ShowAreaText(byte* text, int layer = 0, bool isTop = true, bool isFast = false, uint logMessageId = 0);
 
-    [VirtualFunction(171)]
-    [GenerateCStrOverloads]
+    [VirtualFunction(171), GenerateStringOverloads]
     public partial void ShowPoisonText(byte* text, int layer = 0);
 
-    [VirtualFunction(172)]
-    [GenerateCStrOverloads]
+    [VirtualFunction(172), GenerateStringOverloads]
     public partial void ShowErrorText(byte* text, bool forceVisible = true);
 
     [VirtualFunction(173)]
@@ -401,16 +388,13 @@ public unsafe partial struct UIModule {
     [VirtualFunction(184)]
     public partial void ShowBalloonMessage(float* worldPosition, byte pz, uint textImage); //121501 -> Nice Shot!
 
-    [VirtualFunction(185)]
-    [GenerateCStrOverloads]
+    [VirtualFunction(185), GenerateStringOverloads]
     public partial void ShowBattleTalk(byte* name, byte* text, float duration, byte style);
 
-    [VirtualFunction(186)]
-    [GenerateCStrOverloads]
+    [VirtualFunction(186), GenerateStringOverloads]
     public partial void ShowBattleTalkImage(byte* name, byte* text, float duration, uint image, byte style);
 
-    [VirtualFunction(188)]
-    [GenerateCStrOverloads]
+    [VirtualFunction(188), GenerateStringOverloads]
     public partial void ShowBattleTalkSound(byte* name, byte* text, float duration, int sound, byte style);
 
     [VirtualFunction(193)]
@@ -428,8 +412,7 @@ public unsafe partial struct UIModule {
     [MemberFunction("E8 ?? ?? ?? ?? 4D 39 BE")]
     public static partial bool PlaySound(uint effectId, long a2 = 0, long a3 = 0, byte a4 = 0);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 BF 4C 8B CB")]
-    [GenerateCStrOverloads]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 BF 4C 8B CB"), GenerateStringOverloads]
     public static partial bool IsPlayerCharacterName(byte* name);
 
     public static void PlayChatSoundEffect(uint effectId) {

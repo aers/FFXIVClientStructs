@@ -10,18 +10,16 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 // Client::UI::RaptureAtkModule
 //   Component::GUI::AtkModule
 //     Component::GUI::AtkModuleInterface
+[GenerateInterop, Inherits<AtkModule>]
 [StructLayout(LayoutKind.Explicit, Size = 0x28F98)]
 [VirtualTable("33 C9 48 8D 05 ?? ?? ?? ?? 48 89 8F", 5)]
 public unsafe partial struct RaptureAtkModule {
     public static RaptureAtkModule* Instance() => UIModule.Instance()->GetRaptureAtkModule();
 
-    [FieldOffset(0x0)] public AtkModule AtkModule;
-
     [FieldOffset(0x82C0)] public ushort UiMode; // 0 = In Lobby, 1 = In Game
 
     [FieldOffset(0x8338)] internal Utf8String Unk8338;
-    [FixedSizeArray<Utf8String>(6)]
-    [FieldOffset(0x83A0)] internal fixed byte Unk83A0[0x68 * 6];
+    [FieldOffset(0x83A0), FixedSizeArray] internal FixedSizeArray6<Utf8String> _unkArray;
     [FieldOffset(0x8610)] public Utf8String ItalicOn; // <italic(1)>
     [FieldOffset(0x8678)] public Utf8String ItalicOff; // <italic(0)>
     [FieldOffset(0x86E0)] public Utf8String BoldOn; // <bold(1)>
@@ -40,15 +38,12 @@ public unsafe partial struct RaptureAtkModule {
     [FieldOffset(0x1B938)] public RaptureAtkColorDataManager RaptureAtkColorDataManager;
 
     [FieldOffset(0x1BBB8)] public int NameplateInfoCount;
-    [FixedSizeArray<NamePlateInfo>(50)]
-    [FieldOffset(0x1BBC0)] public fixed byte NamePlateInfoEntries[0x248 * 50];
+    [FieldOffset(0x1BBC0), FixedSizeArray] internal FixedSizeArray50<NamePlateInfo> _namePlateInfoEntries;
 
-    [FixedSizeArray<CrystalCache>(18)]
-    [FieldOffset(0x22EA8)] public fixed byte CrystalItemCache[0x98 * 18];
+    [FieldOffset(0x22EA8), FixedSizeArray] internal FixedSizeArray18<CrystalCache> _crystalItemCache;
     [FieldOffset(0x23958)] public ItemCache* KeyItemCache; // ptr to 120 entries
     [FieldOffset(0x23960)] public ItemCache* EquippedItemCache; // ptr to 14 entries
-    [FixedSizeArray<InventoryCache>(160)]
-    [FieldOffset(0x23968)] public fixed byte InventoryItemCache[0x88 * 160]; // see "E8 ?? ?? ?? ?? 48 8B 07 8D 55 05", only 140 slots are processed, unused?
+    [FieldOffset(0x23968), FixedSizeArray] internal FixedSizeArray160<InventoryCache> _inventoryItemCache; // see "E8 ?? ?? ?? ?? 48 8B 07 8D 55 05", only 140 slots are processed, unused?
     [FieldOffset(0x28E68)] public uint InventoryItemCacheSlotCount;
     [FieldOffset(0x28E6C)] public uint GilCap;
 

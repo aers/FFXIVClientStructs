@@ -26,10 +26,8 @@ public unsafe partial struct RaptureShellModule {
     [FieldOffset(0x2C0)] public int MacroCurrentLine;
     [FieldOffset(0x2C8)] public Utf8String MacroLineText;
     [FieldOffset(0x338)] public Utf8String MacroName;
-    [FixedSizeArray<Utf8String>(15)]
-    [FieldOffset(0x3A0)] private fixed byte MacroLines[15 * 0x68];
-    [FixedSizeArray<Utf8String>(15)]
-    [FieldOffset(0x9B8)] private fixed byte SkippedMacroLines[15 * 0x68];
+    [FieldOffset(0x3A0), FixedSizeArray] internal FixedSizeArray15<Utf8String> _macroLines;
+    [FieldOffset(0x9B8), FixedSizeArray] internal FixedSizeArray15<Utf8String> _skippedMacroLines;
     [FieldOffset(0xFD0)] public int ChatType;
     [FieldOffset(0xFD8)] public Utf8String TellName;
     [FieldOffset(0x1040)] public Utf8String TellWorld;
