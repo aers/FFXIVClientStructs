@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Component.Text;
@@ -16,22 +17,18 @@ public unsafe partial struct MacroEncoder {
     [FieldOffset(0x2A8)] public Utf8String Str7;
 
     public MacroCodeDescription* GetMacroCode(string code) {
-        var currentNode = MacroCodeMap.SmallestValue;
-        while (currentNode != null && currentNode != MacroCodeMap.Head) {
-            if (currentNode->KeyValuePair.Item1.EqualsString(code))
-                return &currentNode->KeyValuePair.Item2;
-            currentNode = currentNode->Next();
-        }
-        return null;
+        using var us = new Utf8String();
+        us.Ctor();
+        us.SetString(code);
+        return MacroCodeMap.TryGetValuePointer(us, out var ptr) ? ptr : null;
     }
 
     public string? GetMacroString(byte code) {
-        var currentNode = MacroCodeMap.SmallestValue;
-        while (currentNode != null && currentNode != MacroCodeMap.Head) {
-            if (currentNode->KeyValuePair.Item2.Id == code)
-                return currentNode->KeyValuePair.Item1.ToString();
-            currentNode = currentNode->Next();
+        foreach (ref var node in MacroCodeMap) {
+            if (node.Item2.Id == code)
+                return node.Item1.ToString();
         }
+
         return null;
     }
 
