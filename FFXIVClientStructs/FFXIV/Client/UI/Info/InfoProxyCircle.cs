@@ -4,8 +4,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
 [InfoProxy(InfoProxyId.Circle)]
 [StructLayout(LayoutKind.Explicit, Size = 0x6BB8)]
+[GenerateInterop]
+[Inherits<InfoProxyInterface>]
 public unsafe partial struct InfoProxyCircle {
-    [FieldOffset(0x0000)] public InfoProxyInterface InfoProxyInterface;
 
     [FieldOffset(0x0020)] public Utf8String UnkString0020;
     //0x10 bytes
@@ -34,8 +35,7 @@ public unsafe partial struct InfoProxyCircle {
     [FieldOffset(0x06F0)] public Utf8String UnkString06F0;
     [FieldOffset(0x0758)] public Utf8String UnkString0758;
 
-    [FixedSizeArray<Unk1>(100)]
-    [FieldOffset(0x0A98)] public fixed byte Unk1Arr[100 * 0xF0];//5DC0
+    [FieldOffset(0x0A98)] [FixedSizeArray] internal FixedSizeArray100<Unk1> _unk1Arr;
 
     [FieldOffset(0x6850), CExportIgnore] public void* UnkObj6850;
     [FieldOffset(0x6878)] public Utf8String UnkString6878;

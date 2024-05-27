@@ -3,6 +3,7 @@ using FFXIVClientStructs.FFXIV.Client.System.String;
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x1C70)]
+[GenerateInterop]
 public unsafe partial struct InfoModule {
     public static InfoModule* Instance() => UIModule.Instance()->GetInfoModule();
 

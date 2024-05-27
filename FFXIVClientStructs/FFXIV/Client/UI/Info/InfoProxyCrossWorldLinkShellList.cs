@@ -4,15 +4,15 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
 [InfoProxy(InfoProxyId.CrossWorldLinkShell)]
 [StructLayout(LayoutKind.Explicit, Size = 0x558)]
+[GenerateInterop]
+[Inherits<InfoProxyInvitedInterface>]
 public unsafe partial struct InfoProxyCrossWorldLinkShell {
-    [FieldOffset(0x00)] public InfoProxyInvitedInterface InfoProxyInvitedInterface;
     [FieldOffset(0x28)] public uint NumInvites;
     //was 1 when 2 Invites
     [FieldOffset(0x30)] public byte Unk30;
     [FieldOffset(0x38)] public Utf8String InvitedName;
     [FieldOffset(0xA0)] public Utf8String UnkString0;
-    [FixedSizeArray<CWLSEntry>(0x8)]
-    [FieldOffset(0x108)] public fixed byte CWLSArray[8 * 0x88];
+    [FieldOffset(0x108)] [FixedSizeArray] internal FixedSizeArray8<CWLSEntry> _CWLSArray;
     //530 after
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B C8 E8 ?? ?? ?? ?? 45 8D 46 FB")]

@@ -4,8 +4,9 @@ using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
 [StructLayout(LayoutKind.Explicit, Size = 0xB8)]
+[GenerateInterop(isInherited: true)]
+[Inherits<InfoProxyPageInterface>]
 public unsafe partial struct InfoProxyCommonList {
-    [FieldOffset(0x0)] public InfoProxyPageInterface InfoProxyPageInterface;
     [FieldOffset(0x20)] public Utf8String Unk20;
     [FieldOffset(0x88)] public byte NumberArrayIndex;
     [FieldOffset(0x89)] public byte StringArrayIndex;
@@ -30,7 +31,7 @@ public unsafe partial struct InfoProxyCommonList {
     [MemberFunction("E9 ?? ?? ?? ?? 3B 5F 10")]
     public partial CharacterData* GetEntryByContentId(ulong contentId, uint nameCrc32 = 0, byte a4 = 0);
 
-    [MemberFunction("E8 ?? ?? ?? ?? EB 3C 8D 45 EF"), GenerateCStrOverloads]
+    [MemberFunction("E8 ?? ?? ?? ?? EB 3C 8D 45 EF"), GenerateStringOverloads]
     public partial CharacterData* GetEntryByName(byte* characterName, ushort worldId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 13 45 33 C9")]

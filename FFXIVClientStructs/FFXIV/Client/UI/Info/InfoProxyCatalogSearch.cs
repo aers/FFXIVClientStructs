@@ -4,13 +4,13 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
 [InfoProxy(InfoProxyId.CatalogSearch)]
 [StructLayout(LayoutKind.Explicit, Size = 0x3C8)]
+[GenerateInterop]
+[Inherits<InfoProxyPageInterface>]
 public unsafe partial struct InfoProxyCatalogSearch {
-    [FieldOffset(0x000)] public InfoProxyPageInterface InfoProxyPageInterface;
 
     [FieldOffset(0x028)] public Utf8String Query;
     //These seem to be only used when non partial matching
-    [FixedSizeArray<Entry>(20)]
-    [FieldOffset(0x90)] public fixed byte Entries[20 * 0x8];
+    [FieldOffset(0x90)] [FixedSizeArray] internal FixedSizeArray20<Entry> _entries;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x8)]
     public struct Entry {

@@ -2,8 +2,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
 [InfoProxy(InfoProxyId.CrossRealmParty)]
 [StructLayout(LayoutKind.Explicit, Size = 0x1620)]
+[GenerateInterop]
+[Inherits<InfoProxyInterface>]
 public unsafe partial struct InfoProxyCrossRealm {
-    [FieldOffset(0x00)] public InfoProxyInterface InfoProxyInterface;
 
     // memset((void *)(a1 + 0x30),  0, 0x358ui64);
     // memset((void *)(a1 + 0x3A0), 0, 0xF30ui64);
@@ -16,8 +17,7 @@ public unsafe partial struct InfoProxyCrossRealm {
     [FieldOffset(0x392)] public byte IsPartyLeader;
     [FieldOffset(0x393)] public byte IsInCrossRealmParty;
 
-    [FixedSizeArray<CrossRealmGroup>(6)]
-    [FieldOffset(0x3A0)] public fixed byte CrossRealmGroupArray[6 * 0x2C8];
+    [FieldOffset(0x3A0)] [FixedSizeArray] internal FixedSizeArray6<CrossRealmGroup> _crossRealmGroupArray;
 
     [MemberFunction("E8 ?? ?? ?? ?? F6 D8 1A C0")]
     public static partial bool IsCrossRealmParty();
@@ -48,10 +48,10 @@ public unsafe partial struct InfoProxyCrossRealm {
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x2C8)]
+[GenerateInterop]
 public unsafe partial struct CrossRealmGroup {
     [FieldOffset(0x00)] public byte GroupMemberCount;
-    [FixedSizeArray<CrossRealmMember>(8)]
-    [FieldOffset(0x08)] public fixed byte GroupMembers[8 * 0x58];
+    [FieldOffset(0x08)] [FixedSizeArray] internal FixedSizeArray8<CrossRealmMember> _groupMembers;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x58)]

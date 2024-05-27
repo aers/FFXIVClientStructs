@@ -177,6 +177,7 @@ public sealed partial class InteropGenerator {
     private static void RenderInheritedVirtualFunctions(string childTypeName, StructInfo inheritedStruct, string path, int offset, IndentedTextWriter writer) {
         foreach (VirtualFunctionInfo virtualFunctionInfo in inheritedStruct.VirtualFunctions) {
             MethodInfo methodInfo = virtualFunctionInfo.MethodInfo;
+            if (offset != 0 && methodInfo.Name == "Dtor") continue;
             writer.WriteLine($"""/// <inheritdoc cref="{inheritedStruct.FullyQualifiedMetadataName}.{methodInfo.Name}" />""");
             writer.WriteLine($"""/// <remarks>Method inherited from parent class <see cref="{inheritedStruct.FullyQualifiedMetadataName}">{inheritedStruct.Name}</see>.</remarks>""");
             writer.WriteLine("[global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]");

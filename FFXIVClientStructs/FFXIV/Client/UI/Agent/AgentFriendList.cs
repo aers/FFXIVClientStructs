@@ -14,7 +14,7 @@ public unsafe partial struct AgentFriendList {
     [FieldOffset(0xA0)] public ulong SelectedContentId;
     [FieldOffset(0xB0)] public byte SelectedIndex;
 
-    public uint Count => InfoProxy->InfoProxyCommonList.InfoProxyPageInterface.InfoProxyInterface.GetEntryCount();
+    public uint Count => InfoProxy->GetEntryCount();
     public InfoProxyCommonList.CharacterData* GetFriend(uint index) => InfoProxy->InfoProxyCommonList.GetEntry(index);
     public InfoProxyCommonList.CharacterData* this[uint index] => GetFriend(index);
 }
