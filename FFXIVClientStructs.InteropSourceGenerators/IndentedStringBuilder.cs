@@ -3,9 +3,6 @@
 
 // https://github.com/dotnet/efcore/blob/main/src/EFCore/Infrastructure/IndentedStringBuilder.cs
 
-using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text;
 
 namespace FFXIVClientStructs.InteropGenerator;

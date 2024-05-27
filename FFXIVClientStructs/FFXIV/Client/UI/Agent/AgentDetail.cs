@@ -1,5 +1,4 @@
 using FFXIVClientStructs.FFXIV.Client.UI.Info;
-using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
