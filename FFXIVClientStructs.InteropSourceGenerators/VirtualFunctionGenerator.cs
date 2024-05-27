@@ -4,7 +4,6 @@ using FFXIVClientStructs.InteropSourceGenerators.Models;
 using LanguageExt;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using static FFXIVClientStructs.InteropSourceGenerators.DiagnosticDescriptors;
 
 namespace FFXIVClientStructs.InteropSourceGenerators;
 

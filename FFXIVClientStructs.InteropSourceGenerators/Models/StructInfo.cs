@@ -1,4 +1,3 @@
-using System.Collections.Immutable;
 using FFXIVClientStructs.InteropGenerator;
 using FFXIVClientStructs.InteropSourceGenerators.Extensions;
 using LanguageExt;

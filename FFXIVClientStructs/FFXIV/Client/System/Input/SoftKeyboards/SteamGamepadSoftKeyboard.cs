@@ -1,5 +1,3 @@
-using System.Collections;
-
 namespace FFXIVClientStructs.FFXIV.Client.System.Input.SoftKeyboards;
 
 // ctor called from AtkModule.ctor, but cannot be sanely sigged.
