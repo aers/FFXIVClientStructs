@@ -10,7 +10,7 @@ public unsafe partial struct SteamCallbackBase {
         GameServer = 1 << 1,  // unused
     }
 
-    [FieldOffset(0x0)] public void** vtbl;
+    [FieldOffset(0x0), CExportIgnore] public void** vtbl;
     [FieldOffset(0x8)] public SteamCallbackFlags Flags;
     [FieldOffset(0xC)] public int CallbackId;
 

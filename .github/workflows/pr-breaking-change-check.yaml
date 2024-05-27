@@ -61,21 +61,37 @@ jobs:
         dotnet tool install -g Microsoft.DotNet.ApiCompat.Tool
         testout=$(apicompat -l ida/cs-main/FFXIVClientStructs.dll -r ida/cs-pr/FFXIVClientStructs.dll)
         echo $testout
-        if [[ "$testout" == *"exists on ida/cs-main/FFXIVClientStructs.dll but not on ida/cs-pr/FFXIVClientStructs.dll"* ]]; then
+        if [ "$testout" != "APICompat ran successfully without finding any breaking changes." ]; then
           echo "Breaking changes detected"
           echo "breaking=true" >> $GITHUB_OUTPUT
         else
           echo "No breaking changes detected"
           echo "breaking=false" >> $GITHUB_OUTPUT
         fi
-    - name: Add tag to PR
-      if: steps.breaking_changes.outputs.breaking == 'true'
+    - name: Handle breaking change label
       uses: actions/github-script@v7
+      env:
+        IS_BREAKING: ${{ steps.breaking_changes.outputs.breaking }}
       with:
         script: |
-          github.rest.issues.addLabels({
-            issue_number: context.payload.pull_request.number,
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            labels: ["breaking change"]
-          })
+          if (process.env.IS_BREAKING == "true") {
+            github.rest.issues.addLabels({
+              issue_number: context.payload.pull_request.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: ["breaking change"]
+            })
+          }
+          else {
+            try {
+              await github.rest.issues.removeLabel({
+                issue_number: context.payload.pull_request.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                name: "breaking change"
+              })
+              console.log(`Breaking change label removed successfully.`);
+            } catch (error) {
+              console.log(`Breaking change label was not found on the issue.`);
+            }
+          }

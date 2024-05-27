@@ -6,13 +6,38 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 // Client::Game::Event::EventHandler
 // ctor "E8 ?? ?? ?? ?? 45 33 D2 48 8D 05"
 [StructLayout(LayoutKind.Explicit, Size = 0x210)]
-public unsafe struct EventHandler {
+public unsafe partial struct EventHandler {
     [FieldOffset(0x08)] public StdSet<Pointer<GameObject>> EventObjects;
     [FieldOffset(0x18)] public EventSceneModuleUsualImpl* EventSceneModule;
     [FieldOffset(0x20)] public EventHandlerInfo Info;
+    [FieldOffset(0x5C)] public uint IconId;
 
     [FieldOffset(0xC8)] public Utf8String UnkString0;
     [FieldOffset(0x168)] public Utf8String UnkString1;
+
+    [VirtualFunction(197)]
+    public partial void GetTitle(Utf8String* outTitle);
+
+    [VirtualFunction(249)]
+    public partial void GetDescription(Utf8String* outDescription);
+
+    [VirtualFunction(250)]
+    public partial void GetReliefText(Utf8String* outReliefText);
+
+    [VirtualFunction(251)]
+    public partial int GetTimeRemaining(int currentTimestamp);
+
+    [VirtualFunction(252)]
+    public partial bool HasTimer();
+
+    [VirtualFunction(254)]
+    public partial uint GetEventItemId();
+
+    [VirtualFunction(256)]
+    public partial StdVector<EventHandlerObjective>* GetObjectives();
+
+    [VirtualFunction(259)]
+    public partial int GetRecommendedLevel();
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x38)]
@@ -21,9 +46,21 @@ public struct EventHandlerInfo {
     [FieldOffset(0x04)] public byte Flags;
 }
 
+[StructLayout(LayoutKind.Explicit, Size = 0x160)]
+public struct EventHandlerObjective {
+    [FieldOffset(0x00)] public bool Enabled;
+    [FieldOffset(0x04)] public int DisplayType;
+    [FieldOffset(0x08)] public Utf8String Label;
+
+    [FieldOffset(0x78)] public int CountCurrent;
+    [FieldOffset(0x7C)] public int CountNeeded;
+    [FieldOffset(0x80)] public ulong TimeLeft;
+    [FieldOffset(0x88)] public uint MapRowId;
+}
+
 [StructLayout(LayoutKind.Explicit, Size = 0x04)]
 public struct EventId {
-    [FieldOffset(0x00)] public uint Id;
+    [FieldOffset(0x00), CExportIgnore] public uint Id;
     [FieldOffset(0x00)] public ushort EntryId;
     [FieldOffset(0x02)] public EventHandlerType Type; //TODO: rename to ContentId
     public static implicit operator uint(EventId id) => id.Id;
@@ -42,6 +79,8 @@ public enum EventHandlerType : ushort {
     CustomTalk = 0x000B,
     CompanyLeveOfficer = 0x000C,
     Array = 0x000D,
+    CraftLeveClient = 0x000E,
+    [Obsolete("Use CraftLeveClient")]
     CraftLeve = 0x000E,
     GimmickAccessor = 0x000F,
     GimmickBill = 0x0010,
@@ -56,6 +95,8 @@ public enum EventHandlerType : ushort {
     ContentNpc = 0x0019,
     Story = 0x001A,
     SpecialShop = 0x001B,
+    DeepDungeon = 0x001C,
+    [Obsolete("Use DeepDungeon")]
     ContentTalk = 0x001C,
     InstanceContentGuide = 0x001D,
     HousingAethernet = 0x001E,
@@ -65,8 +106,28 @@ public enum EventHandlerType : ushort {
     DailyQuestSupply = 0x0022,
     TripleTriad = 0x0023,
     GoldSaucerArcadeMachine = 0x0024,
+    LotteryDaily = 0x0025, // Mini Cactpot
+    LotteryWeekly = 0x0026, // Jumbo Cactpot
+    RaceChocoboRegistrar = 0x0027,
+
+    GoldSaucerTalk = 0x0029, // Q'nabyano (responding with GoldSaucerTalk#162) and Reymanaud (responding with GoldSaucerTalk#161) use this
+    FreeCompanyCreditShop = 0x002A,
+    AetherCurrent = 0x002B,
+    ContentEntry = 0x002C,
+    Verminion = 0x002D, // Verminion Tables and Tournament Recordkeeper
+    SkyIslandEntrance = 0x002E,
+    DpsChallengeOfficer = 0x002F, // Stone, Sky, Sea
+    BeginnerTrainingOfficer = 0x0030,
+    RetainerBuyback = 0x0031,
+    TopicSelect = 0x0032,
     LotteryExchangeShop = 0x0034,
+    DisposalShop = 0x0035,
+    PreHandler = 0x0036, // checks quest completion before handling something, for example opening the Scrip Exchange
     TripleTriadCompetition = 0x0037,
+    Salvage = 0x0039, // Desynthesis (0x390000), Materia Extraction (0x390001), Aetherial Reduction (0x390002)
+    InclusionShop = 0x003A,
+    CollectablesShop = 0x003B,
+    EventPathMove = 0x003D, // Argos in Mare Lamentorum uses this
 
     BattleLeveDirector = 0x8001,
     GatheringLeveDirector = 0x8002,

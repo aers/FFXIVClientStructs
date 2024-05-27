@@ -10,9 +10,10 @@ public unsafe partial struct AddonGoldSaucerInfo {
     [FieldOffset(0x220)] public int SelectedCategory;
     [FieldOffset(0x224)] public int SelectedSubCategory;
 
+    [FieldOffset(0x230)] public AtkAddonControl AddonControl;
+
     [FixedSizeArray<Pointer<AtkComponentRadioButton>>(6)]
     [FieldOffset(0x2A0)] public fixed byte CategoryRadioButtons[0x8 * 6]; // General/Chocobo/CardList/CardDecks/Verminion/Mahjong
-
 
     [FixedSizeArray<Pointer<AtkComponentRadioButton>>(3)]
     [FieldOffset(0x2D0)] public fixed byte ChocoboRadioButtons[0x8 * 3]; // Parameters/Pedigree/Appearance

@@ -24,7 +24,7 @@ public unsafe partial struct AgentInventoryContext {
     [FieldOffset(0x6B8)] public int PositionY;
 
     [FieldOffset(0x6C8)] public uint OwnerAddonId;
-    [FieldOffset(0x6CC)] public int YesNoPosition; // 2 shorts combined, gets passed as int arg, default = -1
+    [FieldOffset(0x6CC), CExportIgnore] public int YesNoPosition; // 2 shorts combined, gets passed as int arg, default = -1
     [FieldOffset(0x6CC)] public short YesNoX;
     [FieldOffset(0x6CE)] public short YesNoY;
     [FieldOffset(0x6D0)] public InventoryType TargetInventoryId;

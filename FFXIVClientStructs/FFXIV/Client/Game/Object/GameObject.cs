@@ -1,6 +1,7 @@
 using FFXIVClientStructs.FFXIV.Client.Game.Event;
 using FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 using FFXIVClientStructs.FFXIV.Common.Math;
+using EventHandler = FFXIVClientStructs.FFXIV.Client.Game.Event.EventHandler;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Object;
 
@@ -20,6 +21,8 @@ public unsafe partial struct GameObject {
     [FieldOffset(0x88)] public ushort ObjectIndex; // index in object table
     [FieldOffset(0x8C)] public byte ObjectKind;
     [FieldOffset(0x8D)] public byte SubKind;
+    [FieldOffset(0x8E)] public byte Sex;
+    [Obsolete("Renamed to Sex")]
     [FieldOffset(0x8E)] public byte Gender;
     [FieldOffset(0x90)] public byte YalmDistanceFromPlayerX;
     [FieldOffset(0x91)] public byte TargetStatus; // Goes from 6 to 2 when selecting a target and flashing a highlight
@@ -38,6 +41,7 @@ public unsafe partial struct GameObject {
     [FieldOffset(0x110)] public uint NamePlateIconId;
     [FieldOffset(0x114)] public int RenderFlags;
     [FieldOffset(0x158)] public LuaActor* LuaActor;
+    [FieldOffset(0x160)] public EventHandler* EventHandler;
 
     [VirtualFunction(1)]
     public partial GameObjectID GetObjectID();

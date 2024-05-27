@@ -35,15 +35,39 @@ public unsafe partial struct Inspect {
     [FieldOffset(0x253)] public byte BuddyAttackerLevel;
     [FieldOffset(0x254)] public byte BuddyHealerLevel;
 
-    /// <remarks>
-    /// 1 = Eureka: Elemental Level<br/>
-    /// 2 = Eureka: Is Elemental Level Synced<br/>
-    /// 3 = Eureka: Time Remaining<br/>
-    /// 4 = Bozja: Resistance Rank<br/>
-    /// 5 = Bozja: Time Remaining
-    /// </remarks>
+    [Obsolete("Use ContentKeyValueData(Span) or GetContentValue instead")]
     [FixedSizeArray<ExtraInspectDataEntry>(3)]
     [FieldOffset(0x25B)] public fixed byte ExtraInspectData[3 * 0x8];
+
+    /// <remarks> For easier access, use <see cref="GetContentValue"/>. </remarks>
+    [FixedSizeArray<StdPair<uint, uint>>(3)]
+    [FieldOffset(0x25B)] public fixed byte ContentKeyValueData[0x8 * 3];
+
+    /// <summary>
+    /// Retrieves the value associated with the given key from ContentKeyValueData.<br/>
+    /// Only loaded inside the relevant content.<br/>
+    /// <br/>
+    /// <code>
+    /// |-----|-------------|---------------------------|
+    /// | Key | Content     | Usage                     |
+    /// |-----|-------------|---------------------------|
+    /// |   1 | Eureka      | Elemental Level           |
+    /// |   2 | Eureka      | Is Elemental Level Synced |
+    /// |   3 | Eureka      | Time Remaining            |
+    /// |   4 | Bozja       | Resistance Rank           |
+    /// |   5 | Bozja       | Time Remaining            |
+    /// |-----|-------------|---------------------------|
+    /// </code>
+    /// </summary>
+    public uint GetContentValue(uint key) {
+        for (var i = 0; i < 3; i++) {
+            var entry = ContentKeyValueDataSpan.GetPointer(i);
+            if (entry->Item1 == key) {
+                return entry->Item2;
+            }
+        }
+        return 0;
+    }
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x8)]

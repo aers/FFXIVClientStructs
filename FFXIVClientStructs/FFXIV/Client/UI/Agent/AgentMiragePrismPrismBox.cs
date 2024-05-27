@@ -1,6 +1,5 @@
 using FFXIVClientStructs.FFXIV.Client.Game;
 using FFXIVClientStructs.FFXIV.Client.System.String;
-using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
@@ -12,6 +11,9 @@ public unsafe partial struct AgentMiragePrismPrismBox {
     [FieldOffset(0x39)] public byte TabIndex;
     [FieldOffset(0x3A)] public byte PageIndex;
     [FieldOffset(0x48)] public InventoryItem TempDyeItem;
+
+    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 0F B6 43 3A")]
+    public partial void UpdateItems(bool resetTabIndex, bool a2);
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x1BAE0)]
@@ -35,6 +37,8 @@ public unsafe partial struct MiragePrismPrismBoxData {
     [FieldOffset(0x1B9F8)] public void* AgentCabinet;
     [FieldOffset(0x1BA00)] public AgentMiragePrismMiragePlate* AgentMiragePrismMiragePlate;
     [FieldOffset(0x1BA08)] public byte FilterLevel;
+    [FieldOffset(0x1BA0A)] public byte FilterSex;
+    [Obsolete("Renamed to FilterSex")]
     [FieldOffset(0x1BA0A)] public byte FilterGender;
     [FieldOffset(0x1BA10)] public Utf8String FilterString;
     [FieldOffset(0x1BA78)] public Utf8String SearchString;

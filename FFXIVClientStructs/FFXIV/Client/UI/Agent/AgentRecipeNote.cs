@@ -1,5 +1,4 @@
 using FFXIVClientStructs.FFXIV.Client.System.String;
-using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
@@ -7,6 +6,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [StructLayout(LayoutKind.Explicit, Size = 0x568)]
 public unsafe partial struct AgentRecipeNote {
     [FieldOffset(0x0)] public AgentInterface AgentInterface;
+
+    [FieldOffset(0x398)] public uint ContextMenuResultItemId;
 
     [FieldOffset(0x3B0)] public int SelectedCraftType;
     [FieldOffset(0x3BC)] public int SelectedRecipeIndex;

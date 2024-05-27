@@ -55,11 +55,11 @@ public unsafe partial struct AddonJobHudWHM0 {
         [FieldOffset(0x70)] public AtkResNode* BloodGemGlow1;
         [FieldOffset(0x78)] public AtkResNode* BloodGemGlow2;
         [FieldOffset(0x80)] public AtkResNode* BloodGemGlow3;
-        [FieldOffset(0x90)] public AtkComponentGaugeBar LilyTimerGaugeBar;
+        [FieldOffset(0x90), Obsolete("Wrongly defined most likely supposed to be a pointer")] public AtkComponentGaugeBar LilyTimerGaugeBar;
     }
 
     [FieldOffset(0x260)] public HealingGaugeData DataPrevious;
     [FieldOffset(0x280)] public HealingGaugeData DataCurrent;
     [FieldOffset(0x2A0)] public HealingGauge GaugeStandard;
-    [FieldOffset(0x310)] public HealingGaugeSimple GaugeSimple;
+    [FieldOffset(0x310), Obsolete("Wrongly defined supposed to be a pointer based on ctor reference")] public HealingGaugeSimple GaugeSimple;
 }

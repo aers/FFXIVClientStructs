@@ -15,6 +15,9 @@ public unsafe partial struct InfoProxyCrossWorldLinkShell {
     [FieldOffset(0x108)] public fixed byte CWLSArray[8 * 0x88];
     //530 after
 
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B C8 E8 ?? ?? ?? ?? 45 8D 46 FB")]
+    public partial Utf8String* GetCrossworldLinkshellName(uint index);
+
     [StructLayout(LayoutKind.Explicit, Size = 0x88)]
     public partial struct CWLSEntry {
         [FieldOffset(0x00)] public Utf8String Name;

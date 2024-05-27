@@ -1,5 +1,4 @@
 using FFXIVClientStructs.FFXIV.Client.System.String;
-using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
@@ -39,7 +38,7 @@ public unsafe partial struct AgentContentsFinder {
     public partial void* OpenRouletteDuty(byte roulette, byte a2 = 0);
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x20)]
+[StructLayout(LayoutKind.Explicit, Size = 0x20), CExporterStructUnion]
 public struct ContentsFinderRewards {
     [FieldOffset(0x00)] public int ExpReward;
     [FieldOffset(0x00)] public int GilReward;

@@ -12,6 +12,9 @@ public unsafe struct Model {
 
     [FieldOffset(0x40)] public Skeleton* Skeleton;
 
+    [FieldOffset(0x48)] public ModelRenderer.Callback* RenderModelCallback;
+    [FieldOffset(0x50)] public ModelRenderer.Callback* RenderMaterialCallback;
+
     [FieldOffset(0x58)] public void** BoneList;
     [FieldOffset(0x60)] public int BoneCount;
 

@@ -3,6 +3,7 @@ using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
+[InfoProxy(InfoProxyId.ItemSearch)]
 [StructLayout(LayoutKind.Explicit, Size = 0x5B98)]
 [VTableAddress("48 8D 05 ?? ?? ?? ?? 48 8B F1 48 89 01 48 8D 99 ?? ?? ?? ?? BF ?? ?? ?? ?? 0F 1F 84 00 ?? ?? ?? ?? 48 83 EB 78 48 8B CB E8 ?? ?? ?? ?? 48 83 EF 01 75 EE 8D 5F 14", 3)]
 public unsafe partial struct InfoProxyItemSearch {
@@ -166,7 +167,7 @@ public unsafe struct MarketBoardListing {
     [FieldOffset(0xB1)] public byte StainId;
 }
 
-[StructLayout(LayoutKind.Explicit)]
+[StructLayout(LayoutKind.Explicit, Size = 0x24)]
 public struct LastPurchasedMarketboardItem {
     [FieldOffset(0x00)] public ulong SellingRetainerContentId;
     [FieldOffset(0x08)] public ulong ListingId;

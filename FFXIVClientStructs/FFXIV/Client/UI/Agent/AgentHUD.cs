@@ -1,6 +1,6 @@
 using FFXIVClientStructs.FFXIV.Client.Game.Character;
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
-using FFXIVClientStructs.FFXIV.Component.GUI;
+using FFXIVClientStructs.FFXIV.Client.Game.UI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
@@ -13,11 +13,13 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 public unsafe partial struct AgentHUD {
     [FieldOffset(0x0)] public AgentInterface AgentInterface;
 
-    //[FieldOffset(0x9C0)] public uint CurrentTargetId;
-    //[FieldOffset(0x9C8)] public int TargetCounter;
-    //[FieldOffset(0x9D0)] public uint TargetPartyMemberId;
-    //[FieldOffset(0x9D8)] public int TargetSwitchToSelfCounter;
-    //[FieldOffset(0x9DC)] public uint CurrentBattleCharaTargetLevel;
+    [FieldOffset(0xAA8)] public uint CastBarAddonId;
+
+    [FieldOffset(0xAB0)] public uint CurrentTargetId;
+    [FieldOffset(0xAB8)] public int TargetCounter;
+    [FieldOffset(0xAC0)] public uint TargetPartyMemberId;
+    [FieldOffset(0xAC8)] public int TargetSwitchToSelfCounter;
+    [FieldOffset(0x9DC)] public uint CurrentBattleCharaTargetLevel;
 
     [FieldOffset(0xCB8)] public int CompanionSummonTimer;
 
@@ -29,7 +31,15 @@ public unsafe partial struct AgentHUD {
     [FieldOffset(0x12C4)] public fixed uint RaidMemberIds[40];
     [FieldOffset(0x1364)] public int RaidGroupSize;
 
+    [FixedSizeArray<HudPartyMemberEnmity>(10)]
+    [FieldOffset(0x1378)] public fixed byte HudPartyMemberEnmityEntries[0x0C * 10];
+    [FixedSizeArray<Pointer<HudPartyMemberEnmity>>(10)]
+    [FieldOffset(0x13F0)] public fixed byte HudPartyMemberEnmityPtrs[0x8 * 10];
+    [Obsolete("Use HudPartyMemberEnmityEntriesSpan or HudPartyMemberEnmityPtrsSpan")]
     [FieldOffset(0x13F0)] public HudPartyMemberEnmity* PartyEnmityList;
+
+    [FieldOffset(0x4808)] public StdVector<MapMarkerData> MapMarkers;
+    [FieldOffset(0x4820)] public StdVector<Pointer<MapMarkerData>> MapMarkerPtrs;
 
     [MemberFunction("48 8B 81 ?? ?? ?? ?? 44 8B C2 83 E2 1F")]
     public partial bool IsMainCommandEnabled(uint mainCommandId);
@@ -48,7 +58,7 @@ public unsafe partial struct AgentHUD {
 public struct HudPartyMemberEnmity {
     [FieldOffset(0x00)] public uint ObjectId;
     [FieldOffset(0x04)] public int Enmity;
-    [FieldOffset(0x08)] public int Index;
+    [FieldOffset(0x08)] public int Index; // TODO: change to short
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x20)]

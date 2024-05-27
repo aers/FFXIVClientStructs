@@ -1,4 +1,5 @@
 using FFXIVClientStructs.FFXIV.Component.Excel;
+using FFXIVClientStructs.FFXIV.Component.Exd.Sheets;
 
 namespace FFXIVClientStructs.FFXIV.Component.Exd;
 
@@ -14,4 +15,7 @@ public unsafe partial struct ExdModule {
 
     [MemberFunction("E8 ?? ?? ?? ?? 49 63 DD")]
     public static partial void* GetItemRowById(uint itemId);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 48 2B")]
+    public static partial BannerCondition* GetBannerCondition(uint index);
 }

@@ -6,6 +6,7 @@ using FFXIVClientStructs.FFXIV.Client.UI.Info;
 using FFXIVClientStructs.FFXIV.Client.UI.Misc;
 using FFXIVClientStructs.FFXIV.Client.UI.Shell;
 using FFXIVClientStructs.FFXIV.Common.Configuration;
+using FFXIVClientStructs.FFXIV.Component.Completion;
 using FFXIVClientStructs.FFXIV.Component.Excel;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
@@ -33,11 +34,13 @@ public unsafe partial struct UIModule {
 
     [FixedSizeArray<RaptureAtkHistory>(19)]
     [FieldOffset(0x3B0)] public fixed byte AtkHistory[19 * 0x38];
+    [FieldOffset(0x7D8)] public int LinkshellCycle;
+    [FieldOffset(0x7DC)] public int CrossWorldLinkshellCycle;
 
     [FieldOffset(0x7E4)] public uint FrameCount;
     [FieldOffset(0x7E8)] internal ExcelModule* ExcelModule;
     [FieldOffset(0x7F0)] internal RaptureTextModule RaptureTextModule;
-    // [FieldOffset(0x1650)] internal CompletionModule CompletionModule;
+    [FieldOffset(0x1650)] internal CompletionModule CompletionModule;
     [FieldOffset(0x19C8)] internal RaptureLogModule RaptureLogModule;
     // [FieldOffset(0x4E50)] internal UserFileManager UserFileManager;
     [FieldOffset(0x4E70)] internal RaptureMacroModule RaptureMacroModule;
@@ -55,9 +58,8 @@ public unsafe partial struct UIModule {
     [FieldOffset(0x8DFA0)] internal RecipeFavoriteModule RecipeFavoriteModule;
     // [FieldOffset(0x8E128)] internal CraftModule CraftModule;
     [FieldOffset(0x8E180)] internal RaptureUiDataModule RaptureUiDataModule;
-    // [FieldOffset(0x93C68)] internal Vf27Struct;
-    // [FieldOffset(0x93C88)] internal Vf28Struct;
-    // [FieldOffset(0x93CB0)] internal UnkStruct93CB0;
+    [FieldOffset(0x93C68)] internal DataCenterHelper DataCenterHelper;
+    [FieldOffset(0x93C88)] internal WorldHelper WorldHelper;
     [FieldOffset(0x93CC8)] internal GoldSaucerModule GoldSaucerModule;
     [FieldOffset(0x93F90)] internal RaptureTeleportHistory RaptureTeleportHistory;
     [FieldOffset(0x94050)] internal ItemContextCustomizeModule ItemContextCustomizeModule;
@@ -178,11 +180,11 @@ public unsafe partial struct UIModule {
     [VirtualFunction(26)]
     public partial RaptureUiDataModule* GetRaptureUiDataModule();
 
-    // [VirtualFunction(27)]
-    // public partial Vf27Struct* GetVf27Struct();
+    [VirtualFunction(27)]
+    public partial DataCenterHelper* GetDataCenterHelper();
 
-    // [VirtualFunction(28)]
-    // public partial Vf28Struct* GetVf28Struct();
+    [VirtualFunction(28)]
+    public partial WorldHelper* GetWorldHelper();
 
     [VirtualFunction(29)]
     public partial GoldSaucerModule* GetGoldSaucerModule();
@@ -281,7 +283,7 @@ public unsafe partial struct UIModule {
     // public partial AkatsukiNoteModule* GetAkatsukiNoteModule();
 
     // [VirtualFunction(61)]
-    // public partial GetVVDNoteModule* GetGetVVDNoteModule();
+    // public partial VVDNoteModule* GetVVDNoteModule();
 
     [VirtualFunction(62)]
     public partial VVDActionModule* GetVVDActionModule();
@@ -418,6 +420,12 @@ public unsafe partial struct UIModule {
 
     [VirtualFunction(194)]
     public partial bool IsMainCommandUnlocked(uint command);
+
+    [VirtualFunction(211)]
+    public partial int RotateLinkshellHistory(int offset);
+
+    [VirtualFunction(213)]
+    public partial int RotateCrossLinkshellHistory(int offset);
 
     [MemberFunction("E8 ?? ?? ?? ?? 4D 39 BE")]
     public static partial bool PlaySound(uint effectId, long a2 = 0, long a3 = 0, byte a4 = 0);

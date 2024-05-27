@@ -70,7 +70,7 @@ public unsafe partial struct PlayerState {
     // Size: (OrnamentSheet.RowCount + 7) >> 3
     /// <remarks> Use <see cref="IsOrnamentUnlocked"/> </remarks>
     [FieldOffset(0x300)] public fixed byte UnlockedOrnamentsBitmask[(41 + 7) >> 3];
-    [FieldOffset(0x306)] public byte NumOwnedMounts;
+    [FieldOffset(0x306)] public byte NumOwnedMounts; // TODO: change to ushort (see "E9 ?? ?? ?? ?? 8B CA 83 E2 07"+0x3E3)
 
     // Ref: "48 8D 0D ?? ?? ?? ?? 41 0F B6 0C 08 41 B0 01 84 D1 0F 95 C1 24 01 02 C0 0A C8 41 0F B6 C4"
     // Size: (FishParameterSheet.Count(row => row.IsInLog) + 7) >> 3
@@ -158,6 +158,10 @@ public unsafe partial struct PlayerState {
 
     #endregion
 
+    /// <remarks> For easier access, use <see cref="GetContentValue"/>. </remarks>
+    [FixedSizeArray<StdPair<uint, uint>>(3)]
+    [FieldOffset(0x6E0)] public fixed byte ContentKeyValueData[0x8 * 3];
+
     [FieldOffset(0x770)] public byte MentorVersion; // latest is 2
 
     [FieldOffset(0x774)] public fixed uint DesynthesisLevels[8];
@@ -167,6 +171,32 @@ public unsafe partial struct PlayerState {
 
     public float GetDesynthesisLevel(uint classJobId)
         => classJobId is < 8 or > 15 ? 0 : DesynthesisLevels[classJobId - 8] / 100f;
+
+    /// <summary>
+    /// Retrieves the value associated with the given key from ContentKeyValueData.<br/>
+    /// Only loaded inside the relevant content.<br/>
+    /// <br/>
+    /// <code>
+    /// |-----|-------------|------------------------------|
+    /// | Key | Content     | Usage                        |
+    /// |-----|-------------|------------------------------|
+    /// |   1 | Rival Wings | ManeuversArmor RowId         |
+    /// |   2 | Eureka      | Effective Elemental Level    |
+    /// |   3 | Eureka      | Is Elemental Level Synced    |
+    /// |   4 | Eureka      | Current Elemental Level      |
+    /// |   5 | Bozja       | Current Resistance Rank      |
+    /// |-----|-------------|------------------------------|
+    /// </code>
+    /// </summary>
+    public uint GetContentValue(uint key) {
+        for (var i = 0; i < 3; i++) {
+            var entry = ContentKeyValueDataSpan.GetPointer(i);
+            if (entry->Item1 == key) {
+                return entry->Item2;
+            }
+        }
+        return 0;
+    }
 
     [MemberFunction("E8 ?? ?? ?? ?? 41 3A 86")]
     public partial byte GetGrandCompanyRank();

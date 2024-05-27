@@ -13,9 +13,13 @@ public unsafe partial struct RaptureAtkUnitManager {
 
     [FieldOffset(0x0)] public AtkUnitManager AtkUnitManager;
 
-    [FieldOffset(0x9C88)] public RaptureAtkModuleFlags Flags;
+    [FieldOffset(0x9C88), Obsolete("Use AtkUnitManager.Flags instead")] public RaptureAtkModuleFlags Flags;
+    [FieldOffset(0x9C90), Obsolete("Renamed to WindowContextMenuHandler")] public AtkEventInterface AtkEventInterface;
+    [FieldOffset(0x9C90)] public AtkEventInterface WindowContextMenuHandler;
 
     [FieldOffset(0x9D00)] public UIModule.UiFlags UiFlags;
+
+    [FieldOffset(0x9D14)] public bool IsUiFading; // true whenever FadeMiddleBack is active
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B F8 41 B0 01")]
     [GenerateCStrOverloads]
@@ -26,6 +30,9 @@ public unsafe partial struct RaptureAtkUnitManager {
 
     [VirtualFunction(8)]
     public partial bool ShowAddonByID(ushort addonId, bool show); // True calls AtkUnitBase.Show, False calls AtkUnitBase.Hide
+
+    [VirtualFunction(10)]
+    public partial void RefreshAddon(AtkUnitBase* addon, uint numValues, AtkValue* values);
 
     [VirtualFunction(11)]
     public partial void UpdateAddonByID(ushort addonId, NumberArrayData** numberArrayData, StringArrayData** stringArrayData, bool forced);

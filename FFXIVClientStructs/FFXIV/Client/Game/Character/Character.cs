@@ -72,7 +72,7 @@ public unsafe partial struct Character {
     [FieldOffset(0x1BB0)] public ushort CurrentWorld;
     [FieldOffset(0x1BB2)] public ushort HomeWorld;
 
-    [FieldOffset(0x1BB6)] public byte EventState; // Leave for backwards compat. See Mode.
+    [FieldOffset(0x1BB6), Obsolete("Use Mode")] public byte EventState; // Leave for backwards compat. See Mode.
     [FieldOffset(0x1BB6)] public CharacterModes Mode;
     [FieldOffset(0x1BB7)] public byte ModeParam; // Different purpose depending on mode. See CharacterModes for more info.
 
@@ -131,7 +131,7 @@ public unsafe partial struct Character {
     [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 48 0F 45 F8")]
     public partial Character* GetParentCharacter();
 
-    /// <summary> Uses TransformationId, Clan, BodyType, Gender and Height as well as RSP scaling values to calculate current height.  </summary>
+    /// <summary> Uses TransformationId, Tribe, BodyType, Sex and Height as well as RSP scaling values to calculate current height.  </summary>
     [MemberFunction("E8 ?? ?? ?? ?? F3 0F 59 C7 48 8B CE")]
     public partial float CalculateHeight();
 

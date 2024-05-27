@@ -1,4 +1,5 @@
 using FFXIVClientStructs.FFXIV.Client.System.Framework;
+using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Component.Excel;
 using FFXIVClientStructs.FFXIV.Component.Text;
 
@@ -17,8 +18,35 @@ public unsafe partial struct RaptureTextModule {
     [FieldOffset(0x528)] public TextChecker TextChecker;
     [FieldOffset(0x620)] public ExcelSheet* AddonSheet;
 
+    [FieldOffset(0x630 + 0 * 0x68)] public Utf8String Unk630;
+    [FieldOffset(0x630 + 1 * 0x68)] public Utf8String Unk698;
+    [FieldOffset(0x630 + 2 * 0x68)] public Utf8String Unk700;
+    [FieldOffset(0x630 + 3 * 0x68)] public Utf8String Unk768;
+    [FieldOffset(0x630 + 4 * 0x68)] public Utf8String Unk7D0;
+    [FieldOffset(0x630 + 5 * 0x68)] public Utf8String Unk838;
+    [FieldOffset(0x630 + 6 * 0x68)] public Utf8String Unk8A0;
+
     [FieldOffset(0x908)] public StdDeque<TextParameter> LocalTextParameters;
     //[FieldOffset(0x930)] public StdDeque<TextParameter> ItemColorParameters;
+
+    [FieldOffset(0x958 + 0 * 0x68)] public Utf8String Unk958;
+    [FieldOffset(0x958 + 1 * 0x68)] public Utf8String Unk9C0;
+    [FieldOffset(0x958 + 2 * 0x68)] public Utf8String UnkA28;
+    [FieldOffset(0x958 + 3 * 0x68)] public Utf8String UnkA90;
+    [FieldOffset(0x958 + 4 * 0x68)] public Utf8String UnkAF8;
+    [FieldOffset(0x958 + 5 * 0x68)] public Utf8String UnkB60;
+    [FieldOffset(0x958 + 6 * 0x68)] public Utf8String UnBC8;
+    [FieldOffset(0x958 + 7 * 0x68)] public Utf8String UnC30;
+    [FieldOffset(0x958 + 8 * 0x68)] public Utf8String UnC98;
+
+    // [FieldOffset(0xD18)] public RowWrapper<Addon>* AddonRowCache; // only for the first 4000 Addon rows
+
+    [FieldOffset(0xE18)] internal ExcelSheet* AchievementSheet;
+    [FieldOffset(0xE20)] internal ExcelSheet* StatusSheet;
+    [FieldOffset(0xE28)] internal ExcelSheet* HowToSheet;
+    [FieldOffset(0xE30)] internal ExcelSheet* AkatsukiNoteStringSheet;
+    [FieldOffset(0xE38)] public int SoundId;
+    [FieldOffset(0xE3C)] public int IsJingle;
 
     [MemberFunction("E9 ?? ?? ?? ?? 80 EA 20")]
     public partial byte* GetAddonText(uint addonId);

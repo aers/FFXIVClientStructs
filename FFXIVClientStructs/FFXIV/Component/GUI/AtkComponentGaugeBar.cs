@@ -93,4 +93,7 @@ public unsafe partial struct AtkComponentGaugeBar {
     /// <param name="instant">Set the value instantaneously without animating the fill nodes.</param>
     [MemberFunction("E8 ?? ?? ?? ?? 49 8B 44 24 20 45 33 C9")]
     public partial void SetGaugeValue(int value, int secondaryValue, bool instant);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 89 AF ?? ?? ?? ?? 48 8B 46 20")]
+    public partial void SetGaugeRange(int value);
 }

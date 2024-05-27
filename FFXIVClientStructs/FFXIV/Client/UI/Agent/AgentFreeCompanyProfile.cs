@@ -1,5 +1,4 @@
 using FFXIVClientStructs.FFXIV.Client.System.String;
-using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
@@ -97,7 +96,7 @@ public struct CrestData {
     //7 bits unused
     //4 bits OrdinaryColor1
     //4 bits OrdinaryColor2
-    [FieldOffset(0x0)] public ulong Data;
+    [FieldOffset(0x0), CExportIgnore] public ulong Data;
     [FieldOffset(0x0)] public byte Charge;
     [FieldOffset(0x4)] public byte OrdinaryTinctures;
 

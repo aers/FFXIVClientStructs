@@ -102,11 +102,11 @@ public unsafe partial struct InventoryItem : ICreatable {
     /// <remarks> Only used if <see cref="IsSymbolic"/> is <c>false</c>. </remarks>
     [FieldOffset(0x08)] public uint ItemID;
     /// <remarks> Only used if <see cref="IsSymbolic"/> is <c>true</c>. </remarks>
-    [FieldOffset(0x08)] public ushort LinkedItemSlot;
+    [FieldOffset(0x08), CExportIgnore] public ushort LinkedItemSlot;
     /// <remarks> Only used if <see cref="IsSymbolic"/> is <c>true</c>. </remarks>
-    [FieldOffset(0x0A)] public ushort LinkedInventoryType;
+    [FieldOffset(0x0A), CExportIgnore] public ushort LinkedInventoryType;
     [FieldOffset(0x0C)] public uint Quantity;
-    [FieldOffset(0x10)] public ushort Spiritbond;
+    [FieldOffset(0x10)] public ushort Spiritbond; // TODO: This field is also used for the collectability value. Not sure if it's the same data type. See also: GetSpiritbond()
     [FieldOffset(0x12)] public ushort Condition;
     [FieldOffset(0x14)] public ItemFlags Flags;
     [FieldOffset(0x18)] public ulong CrafterContentID;
@@ -169,7 +169,7 @@ public unsafe partial struct InventoryItem : ICreatable {
     public partial byte GetStain();
 
     /// <summary>Gets the glamour id from the original InventoryItem or itself if not symbolic.</summary>
-    [MemberFunction("E9 ?? ?? ?? ?? 8B 43 30")]
+    [MemberFunction("E8 ?? ?? ?? ?? 39 33 75")]
     public partial uint GetGlamourId();
 
     /// <summary>Gets the materia id from the specified slot of the original InventoryItem or itself if not symbolic.</summary>

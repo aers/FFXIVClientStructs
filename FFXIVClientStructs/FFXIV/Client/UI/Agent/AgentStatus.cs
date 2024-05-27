@@ -1,5 +1,4 @@
 using FFXIVClientStructs.FFXIV.Client.UI.Misc;
-using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
@@ -10,6 +9,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [StructLayout(LayoutKind.Explicit, Size = 0x358)]
 public partial struct AgentStatus {
     [FieldOffset(0x00)] public AgentInterface AgentInterface;
+
+    [FieldOffset(0x3C)] public byte TabIndex;
 
     [FieldOffset(0x80)] public StatusCharaView CharaView;
 

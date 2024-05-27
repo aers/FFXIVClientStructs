@@ -2,7 +2,7 @@ using FFXIVClientStructs.FFXIV.Client.Game.Character;
 using FFXIVClientStructs.FFXIV.Client.Network;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Component.Excel;
-using FFXIVClientStructs.FFXIV.Component.GUI;
+using FFXIVClientStructs.FFXIV.Component.Text;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
@@ -15,27 +15,54 @@ public unsafe partial struct AgentLobby {
 
     [FieldOffset(0x40)] public LobbyData LobbyData; // for lack of a better name
     [FieldOffset(0xA00)] public UIModule* UIModule;
+    [FieldOffset(0xA08)] internal nint TitleScreenMoviePtr;
+
+    [FieldOffset(0xA30)] public uint AccountExpansion;
+    [FieldOffset(0xA34)] public bool ShowFreeTrialLogo;
+
+    [FieldOffset(0xA38)] public uint TitleScreenExpansion;
+    [FieldOffset(0xA3C)] public bool ShowOriginalLogo; // pre-relaunch
 
     [FieldOffset(0xA40)] public ExcelSheet* ErrorSheet;
     [FieldOffset(0xA48)] public ExcelSheet* LobbySheet;
-    //[FieldOffset(0xA50)] public NetworkModuleProxy* NetworkModuleProxy;
+    [FieldOffset(0xA50)] public NetworkModuleProxy* NetworkModuleProxy;
+    [FieldOffset(0xA58)] public StdDeque<TextParameter> LobbyTextParameters;
+    [FixedSizeArray<Utf8String>(13)]
+    [FieldOffset(0xA80)] public fixed byte Utf8StringsData[0x68 * 13];
 
     [FieldOffset(0x10E0)] public sbyte ServiceAccountIndex;
-    [FieldOffset(0x10E1)] public sbyte SelectedCharacterIndex; // index in CharaSelectCharacterList
-    [FieldOffset(0x10E8)] public ulong SelectedCharacterContentId;
+    [Obsolete("Renamed to HoveredCharacterIndex")]
+    [FieldOffset(0x10E1)] public sbyte SelectedCharacterIndex;
+    [FieldOffset(0x10E1)] public sbyte HoveredCharacterIndex; // index in CharaSelectCharacterList
+    [FieldOffset(0x10E8)] public ulong HoveredCharacterContentId;
     [FieldOffset(0x10F0)] public byte DataCenter;
 
     [FieldOffset(0x10F2)] public short WorldIndex; // index in CurrentDataCenterWorlds
     [FieldOffset(0x10F4)] public ushort WorldId;
 
+    [FieldOffset(0x10F8)] public uint DialogAddonId;
+    [FieldOffset(0x10FC)] public uint DialogAddonId2;
+    [FieldOffset(0x1100)] public uint LobbyScreenTextAddonId;
+
+    [Obsolete("Invalid type: this field is a byte, not a bool. Use LobbyUpdateStage.")] // used for a switch in AgentLobby_Update
     [FieldOffset(0x1104)] public bool RequestedDataReady;
+    [FieldOffset(0x1104)] public byte LobbyUpdateStage;
+
+    [FieldOffset(0x1107)] public byte LobbyUIStage;
+
     [FieldOffset(0x1110)] public uint IdleTime;
+
+    [FieldOffset(0x1138)] public ulong SelectedCharacterContentId;
+    [FieldOffset(0x1140)] public bool IsLoggedIn;
 
     [FieldOffset(0x1228)] public bool TemporaryLocked; // "Please wait and try logging in later."
 
     [FieldOffset(0x1240)] public long RequestContentId;
     [FieldOffset(0x1248)] public byte RequestCharaterIndex;
     [FieldOffset(0x1DA4)] public bool HasShownCharacterNotFound; // "The character you last logged out with in this play environment could not be found on the current data center."
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 41 8B D6")]
+    public readonly partial void UpdateLobbyUIStage();
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 07 C6 86 ?? ?? ?? ?? ?? 48 8B 8C 24")]
     public readonly partial void UpdateCharaSelectDisplay(sbyte index, bool a2);
@@ -95,6 +122,7 @@ public unsafe struct LobbySubscriptionInfo // name probably totally wrong
 
     [FieldOffset(0x30)] public uint TotalDaysSubscribed;
     [FieldOffset(0x34)] public uint DaysRemaining;
+    [FieldOffset(0x38)] public uint DaysUntilNextVeteranRank;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x6F8)]
@@ -117,15 +145,22 @@ public unsafe partial struct CharaSelectCharacterEntry {
 
     [MemberFunction("0F B6 41 ?? 84 05 ?? ?? ?? ?? 0F 94 C0")]
     public partial bool IsNotLocked();
+
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 0F 48 8B CB")]
+    public partial bool IsInDifferentRegion();
 }
 
+// see "E8 ?? ?? ?? ?? 44 0F B6 43 ?? 8D 57 7E"
 public enum CharaSelectCharacterEntryLoginFlags : byte {
     None = 0,
     Locked = 1, // Lobby#64: "You cannot select this character with your current account."
     NameChangeRequired = 2, // Lobby#26: "A name change is required to log in with this character."
-    ExpansionMissing = 4, // Lobby#68: "To log in with this character you must first install <ExVersion>."
-
-    DCTraveling = 16 // Lobby#1175: "This character is currently visiting the <value> data center."
+    [Obsolete("Renamed to MissingExVersionForLogin")]
+    ExpansionMissing = 4,
+    MissingExVersionForLogin = 4, // Lobby#68: "To log in with this character you must first install <ExVersion>."
+    MissingExVersionForCharacterEdit = 8, // Lobby#69: "To edit this character's race, sex, or appearance you must first install <ExVersion>."
+    DCTraveling = 16,// Lobby#1175: "This character is currently visiting the <value> data center."
+    Unk32 = 32, // unsure. sidebar should change to Lobby#1153 "TRAVELED TO" and might print LogMessage#5800 "Unable to execute command. Character is currently visiting the <string(lstr1)> data center."
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x58)]

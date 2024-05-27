@@ -14,11 +14,18 @@ public unsafe partial struct InfoModule {
     [FieldOffset(0x1BC8)] public Utf8String UnkString3;
     [FieldOffset(0x1C30)] public ulong OnlineStatusFlags;
 
-    public InfoProxyInterface* GetInfoProxyById(InfoProxyId id)
-        => GetInfoProxyById((uint)id);
-
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 55 68")]
-    public partial InfoProxyInterface* GetInfoProxyById(uint id);
+    public partial InfoProxyInterface* GetInfoProxyById(InfoProxyId id);
+
+    [Obsolete("Use GetInfoProxyById(InfoProxyId)")]
+    public InfoProxyInterface* GetInfoProxyById(uint id)
+        => GetInfoProxyById((InfoProxyId)id);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 49 83 C9 FF 48 8D 8C 24")]
+    public partial byte* GetLocalCharacterName();
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 39 03")]
+    public partial ulong GetLocalContentId();
 
     /// <summary>
     /// Checks if the local player has a specific online status set.
@@ -28,6 +35,14 @@ public unsafe partial struct InfoModule {
     public partial bool IsOnlineStatusSet(uint id);
 
     /// <summary>
+    /// Sets the local player's online status to the specified flag bitmask.
+    /// Sent by the server; devs should not call this manually. May be called multiple times.
+    /// </summary>
+    /// <param name="flags">A bitfield representing set flags.</param>
+    [MemberFunction("48 89 91 ?? ?? ?? ?? 48 8B 89 ?? ?? ?? ?? 48 85 C9 0F 85")]
+    public partial void SetOnlineStatusFlags(ulong flags);
+
+    /// <summary>
     /// Checks if the local player is in a cross world duty.
     /// </summary>
     [MemberFunction("E8 ?? ?? ?? ?? 44 8B 8C 24 ?? ?? ?? ?? 84 C0")]
@@ -35,11 +50,7 @@ public unsafe partial struct InfoModule {
 }
 
 public enum InfoProxyId : uint {
-    //ShellCommandChatLinkShell refers to 3,18
-    //Party Decline, PartyInv,PartyJoin  refer to 2
     //ShellCommandDice refers to  3, 13(Fc), 18 ,24
-    //AgentChatLogvf9 refers to 18
-    //15 and 16 are the same class
     Party = 0,
     Party2 = 1,
     PartyInvite = 2,
@@ -60,6 +71,7 @@ public enum InfoProxyId : uint {
     //OTherFCStuff = 17,
     LinkShellChat = 18,
     CrossRealmParty = 19,
+    NoviceNetwork = 20,
     CrossWorldLinkShell = 29,
     CrossWorldLinkShellMember = 30,
     CircleList = 31,

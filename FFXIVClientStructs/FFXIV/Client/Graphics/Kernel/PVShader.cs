@@ -1,6 +1,6 @@
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
 
-// unsure about the name, seems to be an intermediate superclass that extends Shader (of size 0x20)
+// unsure about the name, seems to be an intermediate superclass
 [StructLayout(LayoutKind.Explicit, Size = 0x60)]
 public unsafe struct PVShader {
     [StructLayout(LayoutKind.Explicit, Size = 0x8)]
@@ -17,8 +17,8 @@ public unsafe struct PVShader {
         [FieldOffset(0x4)] public uint Id;
     }
 
-    // 0x00 holds a vtbl pointer
-    // byte at 0x08 has been observed to always be 1
+    [FieldOffset(0)] public Shader Shader;
+
     // number at 0x20 has been observed to be ConstantBufferCount * 16 + SamplerCount * 24
     [FieldOffset(0x28)] public ResourceEntry* ConstantBuffers;
     [FieldOffset(0x30)] public ResourceEntry* Samplers;

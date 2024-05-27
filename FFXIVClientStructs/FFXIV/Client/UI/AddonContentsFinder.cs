@@ -11,6 +11,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 public unsafe partial struct AddonContentsFinder {
     [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
 
+    [FieldOffset(0x250)] public AtkAddonControl AddonControl;
+
     [FieldOffset(0x2B8)] public AtkComponentButton* JoinButton; // Both Join and Withdraw
     [FieldOffset(0x2C0)] public AtkComponentButton* ClearSelectionButton; // Both ClearSelection and DutyStatus
 

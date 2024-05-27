@@ -29,6 +29,9 @@ public unsafe partial struct Utf8String : ICreatable, IDisposable, IStaticNative
     public readonly ref readonly byte this[int index] => ref AsSpan()[index];
 
     public Utf8String() => Ctor();
+    public Utf8String(byte* str) : this() => SetString(str);
+    public Utf8String(string str) : this() => SetString(str);
+    public Utf8String(ReadOnlySpan<byte> str) : this() => SetString(str);
 
     public readonly ReadOnlySpan<byte> AsSpan() => new(StringPtr, Length);
 
@@ -154,6 +157,10 @@ public unsafe partial struct Utf8String : ICreatable, IDisposable, IStaticNative
 
     [MemberFunction("E8 ?? ?? ?? ?? 40 0F B6 C7 48 8D 35")]
     public static partial Utf8String* Concat(Utf8String* str, Utf8String* buffer, Utf8String* other);
+
+
+    [MemberFunction("E8 ?? ?? ?? ?? EB 0A 48 8D 4C 24 ?? E8 ?? ?? ?? ?? 48 8D 8D")]
+    public static partial void SanitizeString(ushort flags, Utf8String* characterList); // flags = 0x27F, characterList = nint.Zero
 
     public static implicit operator ReadOnlySpan<byte>(in Utf8String value)
         => value.AsSpan();

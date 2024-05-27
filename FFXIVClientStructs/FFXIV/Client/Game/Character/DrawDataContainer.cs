@@ -122,21 +122,62 @@ public unsafe partial struct DrawObjectData {
 public unsafe partial struct CustomizeData {
     private const int Count = 0x1A;
 
-    [FieldOffset(0x00)] public fixed byte Data[Count];
+    [FieldOffset(0x00), Obsolete("Use specific fields"), CExportIgnore] public fixed byte Data[Count]; // TODO: Change to private
+
     [FieldOffset(0x00)] public byte Race;
     [FieldOffset(0x01)] public byte Sex;
     [FieldOffset(0x02)] public byte BodyType;
+    [FieldOffset(0x03)] public byte Height;
+    [FieldOffset(0x04)] public byte Tribe;
+    [Obsolete("Renamed to Tribe")]
     [FieldOffset(0x04)] public byte Clan;
+    [FieldOffset(0x05)] public byte Face;
+    [FieldOffset(0x06)] public byte Hairstyle;
+    // 0x07: Highlights
+    [FieldOffset(0x08)] public byte SkinColor;
+    [FieldOffset(0x09)] public byte EyeColorRight;
+    [FieldOffset(0x0A)] public byte HairColor;
+    [FieldOffset(0x0B)] public byte HighlightsColor;
+    // 0x0C: FacialFeature1-7, LegacyTattoo
+    [FieldOffset(0x0D)] public byte TattooColor;
+    [FieldOffset(0x0E)] public byte Eyebrows;
+    [FieldOffset(0x0F)] public byte EyeColorLeft;
+    // 0x10: EyeShape, SmallIris
+    [FieldOffset(0x11)] public byte Nose;
+    [FieldOffset(0x12)] public byte Jaw;
+    // 0x13: Mouth, Lipstick
     [FieldOffset(0x14)] public byte LipColorFurPattern;
+    [FieldOffset(0x15)] public byte MuscleMass;
+    [FieldOffset(0x16)] public byte TailShape;
+    [FieldOffset(0x17)] public byte BustSize;
+    // 0x18: FacePaint, FacePaintReversed
+    [FieldOffset(0x19)] public byte FacePaintColor;
 
-    public byte this[int idx]
-        => Data[idx];
+    public bool Highlights => (byte)(Data[0x07] & 0b_1000_0000) != 0;
+
+    public bool FacialFeature1 => (byte)(Data[0x0C] & 0b_0000_0001) != 0;
+    public bool FacialFeature2 => (byte)(Data[0x0C] & 0b_0000_0010) != 0;
+    public bool FacialFeature3 => (byte)(Data[0x0C] & 0b_0000_0100) != 0;
+    public bool FacialFeature4 => (byte)(Data[0x0C] & 0b_0000_1000) != 0;
+    public bool FacialFeature5 => (byte)(Data[0x0C] & 0b_0001_0000) != 0;
+    public bool FacialFeature6 => (byte)(Data[0x0C] & 0b_0010_0000) != 0;
+    public bool FacialFeature7 => (byte)(Data[0x0C] & 0b_0100_0000) != 0;
+    public bool LegacyTattoo => (byte)(Data[0x0C] & 0b_1000_0000) != 0;
+
+    public byte EyeShape => (byte)(Data[0x10] & 0b_0111_1111);
+    public bool SmallIris => (byte)(Data[0x10] & 0b_1000_0000) != 0;
+
+    public byte Mouth => (byte)(Data[0x13] & 0b_0111_1111);
+    public bool Lipstick => (byte)(Data[0x13] & 0b_1000_0000) != 0;
+
+    public byte FacePaint => (byte)(Data[0x18] & 0b_0111_1111);
+    public bool FacePaintReversed => (byte)(Data[0x18] & 0b_1000_0000) != 0;
+
+    public byte this[int idx] => Data[idx];
 
     [MemberFunction("E8 ?? ?? ?? ?? 33 DB 48 8D 75")]
     public partial bool NormalizeCustomizeData(CustomizeData* source);
 }
-
-
 
 [StructLayout(LayoutKind.Explicit, Size = 8)]
 public struct WeaponModelId {
@@ -145,7 +186,7 @@ public struct WeaponModelId {
     [FieldOffset(4)] public ushort Variant;
     [FieldOffset(6)] public byte Stain;
 
-    [FieldOffset(0)] public ulong Value;
+    [FieldOffset(0), CExportIgnore] public ulong Value;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 4)]
@@ -154,5 +195,5 @@ public struct EquipmentModelId {
     [FieldOffset(2)] public byte Variant;
     [FieldOffset(3)] public byte Stain;
 
-    [FieldOffset(0)] public uint Value;
+    [FieldOffset(0), CExportIgnore] public uint Value;
 }
