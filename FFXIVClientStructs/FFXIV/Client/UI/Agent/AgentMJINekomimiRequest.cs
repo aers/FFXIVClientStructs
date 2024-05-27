@@ -10,11 +10,11 @@ public unsafe partial struct AgentMJINekomimiRequest {
     [FieldOffset(0x28)] public FavorsData* Data;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x318)]
+    [GenerateInterop]
     public unsafe partial struct FavorsData {
         [FieldOffset(0x000)] public int UpdateState; // 0 initial, 1 request sent, 2 response received, 3 addon updated
 
-        [FixedSizeArray<ItemData>(6)]
-        [FieldOffset(0x008)] public fixed byte Items[6 * 0x80];
+        [FieldOffset(0x008)] [FixedSizeArray] internal FixedSizeArray6<ItemData> _items;
 
         [FieldOffset(0x308)] public int WeekStartTime;
         [FieldOffset(0x30C)] public byte FullDeliveryBonus;

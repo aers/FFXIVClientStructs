@@ -27,10 +27,10 @@ public unsafe partial struct AgentMJIGatheringHouse {
     [FieldOffset(0x1FC)] public Confirmation ConfirmType;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x138)]
+    [GenerateInterop]
     public unsafe partial struct StringsData {
         [FieldOffset(0x00)] public Utf8String ConfirmText;
-        [FixedSizeArray<Utf8String>(MJIGranariesState.MaxGranaries)]
-        [FieldOffset(0x68)] public fixed byte FinishTimeText[MJIGranariesState.MaxGranaries * 0x68];
+        [FieldOffset(0x68)] [FixedSizeArray] internal FixedSizeArray2<Utf8String> _finishTimeText;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0xB8)]

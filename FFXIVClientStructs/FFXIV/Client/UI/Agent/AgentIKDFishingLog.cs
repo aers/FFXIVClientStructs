@@ -11,13 +11,10 @@ public unsafe partial struct AgentIKDFishingLog {
     [FieldOffset(0x3C)] public uint SelectedSpotIndex; // in the Potential Catch window
     [FieldOffset(0x40)] public uint Points;
     [FieldOffset(0x44)] public bool SpecialCurrent;
+    
+    [FieldOffset(0x48)] [FixedSizeArray] internal FixedSizeArray3<LogEntry> _log;
 
-    [FixedSizeArray<LogEntry>(3)]
-    [FieldOffset(0x48)] public fixed byte Log[3 * 0x10];
-
-    [FixedSizeArray<PotentialCatchSpot>(3)]
-    [FieldOffset(0x84)] public fixed byte PotentialCatchSpots[3 * 0x148];
-
+    [FieldOffset(0x84)] [FixedSizeArray] internal FixedSizeArray3<PotentialCatchSpot> _potentialCatchSpots;
     [FieldOffset(0x45C)] public bool DisplayOnlyCaught;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
@@ -29,13 +26,12 @@ public unsafe partial struct AgentIKDFishingLog {
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x148)]
+    [GenerateInterop]
     public unsafe partial struct PotentialCatchSpot {
         [FieldOffset(0x00)] public uint SpotId;
-        [FixedSizeArray<LogEntry>(10)]
-        [FieldOffset(0x04)] public fixed byte CatchEntries[10 * 0x10];
+        [FieldOffset(0x04)] [FixedSizeArray] internal FixedSizeArray10<LogEntry> _catchEntries;
 
         [FieldOffset(0xA4)] public uint SpecialSpotId;
-        [FixedSizeArray<LogEntry>(10)]
-        [FieldOffset(0xA8)] public fixed byte SpecialCatchEntries[10 * 0x10];
+        [FieldOffset(0xA8)] [FixedSizeArray] internal FixedSizeArray10<LogEntry> _specialCatchEntries;
     }
 }

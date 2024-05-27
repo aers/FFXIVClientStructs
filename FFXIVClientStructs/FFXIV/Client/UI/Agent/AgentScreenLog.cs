@@ -44,6 +44,5 @@ public unsafe partial struct AgentScreenLog {
     [FieldOffset(0x37C)]
     public int BalloonCounter; // count of all balloons since game launch, used as unique balloon ID
 
-    [FixedSizeArray<BalloonSlot>(10)]
-    [FieldOffset(0x390)] public fixed byte BalloonSlots[10 * 0x8]; // type BalloonSlot array
+    [FieldOffset(0x390)] [FixedSizeArray] internal FixedSizeArray10<BalloonSlot> _balloonSlots;
 }

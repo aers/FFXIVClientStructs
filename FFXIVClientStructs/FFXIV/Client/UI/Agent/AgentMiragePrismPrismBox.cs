@@ -18,9 +18,9 @@ public unsafe partial struct AgentMiragePrismPrismBox {
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x1BAE0)]
+[GenerateInterop]
 public unsafe partial struct MiragePrismPrismBoxData {
-    [FixedSizeArray<PrismBoxItem>(800)]
-    [FieldOffset(0x08)] public fixed byte PrismBoxItems[800 * 0x88]; // 800 * PrismBoxItem
+    [FieldOffset(0x08)] [FixedSizeArray] internal FixedSizeArray800<PrismBoxItem> _prismBoxItems;
     [FieldOffset(0x1A908)] public PrismBoxItem TempContextItem;
     [FieldOffset(0x1A990)] public fixed int PageItemIndexArray[50];
     [FieldOffset(0x1AA58)] public int TempContextItemIndex;
@@ -30,8 +30,7 @@ public unsafe partial struct MiragePrismPrismBoxData {
     [FieldOffset(0x1AA70)] public int CrystallizeCategory;
     [FieldOffset(0x1AA74)] public int CrystallizeItemIndex;
     [FieldOffset(0x1AA78)] public int CrystallizeItemCount;
-    [FixedSizeArray<PrismBoxCrystallizeItem>(140)]
-    [FieldOffset(0x1AA7C)] public fixed byte CrystallizeItems[140 * 0x1C]; // 140 * PrismBoxCrystallizeItem
+    [FieldOffset(0x1AA7C)] [FixedSizeArray] internal FixedSizeArray140<PrismBoxCrystallizeItem> _crystallizeItems;
     [FieldOffset(0x1B9CC)] public PrismBoxCrystallizeItem CrystallizeSelectedItem;
 
     [FieldOffset(0x1B9F4)] public uint FilterFlags;

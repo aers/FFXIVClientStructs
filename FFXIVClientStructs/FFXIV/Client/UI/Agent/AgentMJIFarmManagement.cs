@@ -13,8 +13,7 @@ public unsafe partial struct AgentMJIFarmManagement {
     [FieldOffset(0x0028)] public AtkEventInterface* OpHandler; // pointer to some class derived from AtkEventInterface of size 0x30
     // 0x30..0x40 - a bunch of different addon handles
 
-    [FixedSizeArray<Slot>(MaxSlots)]
-    [FieldOffset(0x0048)] public fixed byte Slots[MaxSlots * 0xF8];
+    [FieldOffset(0x0048)] [FixedSizeArray] internal FixedSizeArray20<Slot> _slots;
 
     [FieldOffset(0x13A8)] public StdVector<Seed> Seeds;
 

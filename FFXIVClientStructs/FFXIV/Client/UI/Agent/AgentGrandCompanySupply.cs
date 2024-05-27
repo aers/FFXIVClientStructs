@@ -16,12 +16,11 @@ public unsafe partial struct AgentGrandCompanySupply {
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x790)]
+[GenerateInterop]
 public unsafe partial struct SupplyProvisioningData {
-    [FixedSizeArray<SupplyProvisioningItem>(8)]
-    [FieldOffset(0x40)] public fixed byte SupplyData[0xA8 * 8];
+    [FieldOffset(0x40)] [FixedSizeArray] internal FixedSizeArray8<SupplyProvisioningItem> _supplyData;
 
-    [FixedSizeArray<SupplyProvisioningItem>(3)]
-    [FieldOffset(0x580)] public fixed byte ProvisioningData[0xA8 * 3];
+    [FieldOffset(0x580)] [FixedSizeArray] internal FixedSizeArray3<SupplyProvisioningItem> _provisioningData;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0xA8)]

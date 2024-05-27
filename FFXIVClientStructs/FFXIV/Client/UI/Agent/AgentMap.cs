@@ -28,23 +28,22 @@ public unsafe partial struct AgentMap {
     [FieldOffset(0x1C0)] public Utf8String SelectedMapPath;
     [FieldOffset(0x228)] public Utf8String SelectedMapBgPath;
     [FieldOffset(0x290)] public Utf8String CurrentMapBgPath;
-    [FieldOffset(0x2F8), FixedSizeArray<Utf8String>(4)] public fixed byte MapSelectionStrings[4 * 0x68]; // 4 * Utf8String
+    [FieldOffset(0x2F8)] [FixedSizeArray] internal FixedSizeArray4<Utf8String> _mapSelectionStrings;
     [FieldOffset(0x498)] public Utf8String MapTitleString;
 
-    [FieldOffset(0x638), FixedSizeArray<MapMarkerInfo>(132)] public fixed byte MapMarkerInfoArray[0x48 * 132]; // 132 * MapMarkerInfo
-    [FieldOffset(0x2B58), FixedSizeArray<TempMapMarker>(12)] public fixed byte TempMapMarkerArray[0x110 * 12]; // 12 * TempMapMarker
+    [FieldOffset(0x638)] [FixedSizeArray] internal FixedSizeArray132<MapMarkerInfo> _mapMarkerInfoArray;
+    [FieldOffset(0x2B58)] [FixedSizeArray] internal FixedSizeArray12<TempMapMarker> _tempMapMarkerArray;
 
     [FieldOffset(0x3818)] public FlagMapMarker FlagMapMarker;
 
-    [FieldOffset(0x3860), FixedSizeArray<MapMarkerBase>(12)] public fixed byte WarpMarkerArray[0x38 * 12]; // 12 * MapMarkerBase
+    [FieldOffset(0x3860)] [FixedSizeArray] internal FixedSizeArray12<MapMarkerBase> _warpMarkerArray;
     /// <remarks>
     /// 0 = mineral deposit and lush vegetation patch<br/>
     /// 1 = legendary mineral deposit<br/>
     /// 2 = unspoiled lush vegetation patch<br/>
     /// </remarks>
-    [FixedSizeArray<MiniMapGatheringMarker>(6)]
-    [FieldOffset(0x3B00)] public fixed byte MiniMapGatheringMarkers[0xA8 * 6];
-    [FieldOffset(0x3EF0), FixedSizeArray<MiniMapMarker>(100)] public fixed byte MiniMapMarkerArray[0x40 * 100]; // 100 * MiniMapMarker
+    [FieldOffset(0x3B00)] [FixedSizeArray] internal FixedSizeArray6<MiniMapGatheringMarker> _miniMapGatheringMarkers;
+    [FieldOffset(0x3EF0)] [FixedSizeArray] internal FixedSizeArray100<MiniMapMarker> _miniMapMarkerArray;
 
     [FieldOffset(0x5898)] public float SelectedMapSizeFactorFloat;
     [FieldOffset(0x589C)] public float CurrentMapSizeFactorFloat;
@@ -106,7 +105,7 @@ public unsafe partial struct AgentMap {
         marker->MapMarker.Y = (short)(position.Z * 16.0f);
         marker->MapMarker.Scale = scale;
         marker->MapMarker.IconId = icon;
-        MiniMapMarkerArraySpan[MiniMapMarkerCount++] = *marker;
+        MiniMapMarkerArray[MiniMapMarkerCount++] = *marker;
         return true;
     }
 
@@ -123,7 +122,7 @@ public unsafe partial struct AgentMap {
         marker->MapMarker.Subtext = text;
         marker->MapMarker.SubtextOrientation = textPosition;
         marker->MapMarker.SubtextStyle = textStyle;
-        MapMarkerInfoArraySpan[MapMarkerCount++] = *marker;
+        MapMarkerInfoArray[MapMarkerCount++] = *marker;
         return true;
     }
 
@@ -222,11 +221,11 @@ public struct OpenMapInfo {
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0xB58)]
+[GenerateInterop]
 public unsafe partial struct QuestLinkContainer {
     [FieldOffset(0x08)] public ushort MarkerCount;
 
-    [FixedSizeArray<QuestLinkMarker>(20)]
-    [FieldOffset(0x18)] public fixed byte Markers[0x88 * 20];
+    [FieldOffset(0x18)] [FixedSizeArray] internal FixedSizeArray20<QuestLinkMarker> _markers;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x88)]

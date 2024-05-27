@@ -31,8 +31,7 @@ public unsafe partial struct AgentMJIDisposeShop {
         [FieldOffset(0x0D8)] public StdVector<Utf8String> CategoryNames;
         [FieldOffset(0x0F0)] public StdVector<ItemData> Items;
 
-        [FixedSizeArray<StdVector<Pointer<ItemData>>>(NumCategories)]
-        [FieldOffset(0x108)] public fixed byte PerCategoryItems[NumCategories * 0x18]; // contain only unlocked items
+        [FieldOffset(0x108)] [FixedSizeArray] internal FixedSizeArray4<StdVector<Pointer<ItemData>>> _perCategoryItems;
 
         [FieldOffset(0x168)] public bool DataInitialized; // set after all sheets are read and vectors are filled with data
         [FieldOffset(0x169)] public bool AddonDirty;

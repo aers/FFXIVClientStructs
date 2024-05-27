@@ -14,11 +14,11 @@ public unsafe partial struct AgentGcArmyExpedition {
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x1998)]
+[GenerateInterop]
 public unsafe partial struct GcArmyExpeditionData {
     [FieldOffset(0x10)] public int NumEntries;
 
-    [FixedSizeArray<MissionInfo>(50)]
-    [FieldOffset(0x18)] public fixed byte MissionInfoArray[0x78 * 50];
+    [FieldOffset(0x18)] [FixedSizeArray] internal FixedSizeArray50<MissionInfo> _missionInfoArray;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x78)]

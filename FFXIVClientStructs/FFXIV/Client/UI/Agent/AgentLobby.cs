@@ -27,8 +27,7 @@ public unsafe partial struct AgentLobby {
     [FieldOffset(0xA48)] public ExcelSheet* LobbySheet;
     [FieldOffset(0xA50)] public NetworkModuleProxy* NetworkModuleProxy;
     [FieldOffset(0xA58)] public StdDeque<TextParameter> LobbyTextParameters;
-    [FixedSizeArray<Utf8String>(13)]
-    [FieldOffset(0xA80)] public fixed byte Utf8StringsData[0x68 * 13];
+    [FieldOffset(0xA80)] [FixedSizeArray] internal FixedSizeArray13<Utf8String> _utf8Strings;
 
     [FieldOffset(0x10E0)] public sbyte ServiceAccountIndex;
     [FieldOffset(0x10E1)] public sbyte HoveredCharacterIndex; // index in CharaSelectCharacterList
@@ -68,6 +67,7 @@ public unsafe partial struct AgentLobby {
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x9C0)]
+[GenerateInterop]
 public unsafe partial struct LobbyData {
     [FieldOffset(0)] public AgentLobby* AgentLobby;
     [FieldOffset(0x8)] public LobbyUIClient LobbyUIClient;
@@ -121,6 +121,7 @@ public unsafe struct LobbySubscriptionInfo // name probably totally wrong
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x6F8)]
+[GenerateInterop]
 public unsafe partial struct CharaSelectCharacterEntry {
     [FieldOffset(0x8)] public ulong ContentId;
     [FieldOffset(0x10)] public byte Index;
@@ -229,6 +230,7 @@ public enum CharaSelectCharacterConfigFlags : ushort {
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 40 * 0x10)]
+[GenerateInterop]
 public unsafe partial struct CharaSelectCharacterList {
     [StaticAddress("4C 8D 3D ?? ?? ?? ?? 48 8B DA", 3)]
     public static partial CharaSelectCharacterList* Instance();
@@ -239,8 +241,7 @@ public unsafe partial struct CharaSelectCharacterList {
     [MemberFunction("E8 ?? ?? ?? ?? 66 44 89 B6")]
     public static partial void CleanupCharacters();
 
-    [FixedSizeArray<CharaSelectCharacterMapping>(40)]
-    [FieldOffset(0)] public fixed byte CharacterMapping[40 * 0x10];
+    [FieldOffset(0)] [FixedSizeArray] internal FixedSizeArray40<CharaSelectCharacterMapping> _characterMapping;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]

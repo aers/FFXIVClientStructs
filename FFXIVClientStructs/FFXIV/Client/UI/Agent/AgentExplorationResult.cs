@@ -28,22 +28,19 @@ public unsafe partial struct AgentExplorationResultInterface {
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x4F70)]
+[GenerateInterop]
 public unsafe partial struct ExplorationResultData {
-    [FixedSizeArray<AtkValue>(151)]
-    [FieldOffset(0x00)] public fixed byte ValueArray[0x10 * 151];
+    [FieldOffset(0x00)] [FixedSizeArray] internal FixedSizeArray151<AtkValue> _valueArray;
 
     [FieldOffset(0x988)] public Utf8String Rating;
 
-    [FixedSizeArray<ExplorationResultDataItemReturn>(10)]
-    [FieldOffset(0xA00)] public fixed byte ItemReturn[0xB0 * 10];
+    [FieldOffset(0xA00)] [FixedSizeArray] internal FixedSizeArray10<ExplorationResultDataItemReturn> _itemReturn;
 
     [FieldOffset(0x10E0)] public byte ItemReturnListCount;
 
-    [FixedSizeArray<Utf8String>(100)]
-    [FieldOffset(0x10E8)] public fixed byte StringArray[0x68 * 100];
+    [FieldOffset(0x10E8)] [FixedSizeArray] internal FixedSizeArray100<Utf8String> _stringArray;
 
-    [FixedSizeArray<Pointer<Utf8String>>(100)]
-    [FieldOffset(0x3988)] public fixed byte StringPointerArray[0x8 * 100];
+    [FieldOffset(0x3988)] [FixedSizeArray] internal FixedSizeArray100<Pointer<Utf8String>> _stringPointerArray;
     [FieldOffset(0x3CA8)] public byte StringPointerListCount;
 }
 

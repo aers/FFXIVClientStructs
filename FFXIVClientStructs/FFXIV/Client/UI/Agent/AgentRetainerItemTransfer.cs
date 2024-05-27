@@ -11,10 +11,11 @@ public unsafe partial struct AgentRetainerItemTransfer {
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x41E8)]
+[GenerateInterop]
 public unsafe partial struct AgentRetainerItemTransferData {
     [FieldOffset(0x00)] public int ItemCount;
 
-    [FieldOffset(0x10), FixedSizeArray<DuplicateItemEntry>(140)] public fixed byte DuplicateItem[0x78 * 140];
+    [FieldOffset(0x10)] [FixedSizeArray] internal FixedSizeArray140<DuplicateItemEntry> _duplicateItem;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x78)]
     public struct DuplicateItemEntry {
