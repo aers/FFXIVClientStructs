@@ -149,7 +149,7 @@ public unsafe partial struct HotBarSlot {
     /// Borrows game logic of checking for a non-zero command ID. Kept as a byte for API compatibility though this
     /// probably should be a bool instead.
     /// </remarks>
-    public bool IsEmpty => this.CommandId == 0;
+    public bool IsEmpty => CommandId == 0;
 
     [MemberFunction("E8 ?? ?? ?? ?? 4C 39 6F 08")]
     public partial void Set(UIModule* uiModule, HotbarSlotType type, uint id);

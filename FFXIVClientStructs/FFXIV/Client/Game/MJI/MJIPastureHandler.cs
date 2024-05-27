@@ -5,8 +5,6 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.MJI;
 // ctor "48 89 6C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC 20 BA ?? ?? ?? ?? 48 8B F9"
 [StructLayout(LayoutKind.Explicit, Size = 0xB78)]
 public unsafe partial struct MJIPastureHandler {
-    [FieldOffset(0x0)] public void* vtbl;
-
     // 0x230: AtkEventInterface-derived structure of size 0x30, used by agent to execute operations
 
     /// <summary>
@@ -81,8 +79,6 @@ public unsafe struct MJIAnimal {
     /// </summary>
     [FieldOffset(0x26)] public byte Mood;
 
-    [FieldOffset(0x27), Obsolete("Use ManualLeavingsAvailable & UnderCare fields instead.")] public ushort Leavings; // ?? unsure why this is a ushort.
-
     /// <summary>
     /// True if there are some leavings that you can manually collect.
     /// </summary>
@@ -139,5 +135,5 @@ public struct MJIMinionSlot {
     /// Check if this specific Minion Slot contains a minion or not.
     /// </summary>
     /// <returns>Returns <c>true</c> if a minion is present, <c>false</c> otherwise.</returns>
-    public bool IsSlotPopulated() => this.MinionId != 0;
+    public bool IsSlotPopulated() => MinionId != 0;
 }

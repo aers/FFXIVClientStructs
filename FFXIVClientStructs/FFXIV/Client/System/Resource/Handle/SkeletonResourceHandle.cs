@@ -1,5 +1,7 @@
 using FFXIVClientStructs.FFXIV.Common.Math;
-using FFXIVClientStructs.Havok;
+using FFXIVClientStructs.Havok.Animation.Mapper;
+using FFXIVClientStructs.Havok.Animation.Rig;
+using FFXIVClientStructs.Havok.Common.Serialize.Util;
 
 namespace FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 

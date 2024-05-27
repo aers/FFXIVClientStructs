@@ -5,8 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 // Client::Game::Character::CharacterData
 // ctor "E8 ?? ?? ?? ?? 4C 8D 4B 30"
 [StructLayout(LayoutKind.Explicit, Size = 0x68)]
-public unsafe struct CharacterData {
-    [FieldOffset(0x0)] public void* vtbl;
+public struct CharacterData {
     [FieldOffset(0x8)] public float ModelScale;
     [FieldOffset(0xC)] public int ModelCharaId;
     [FieldOffset(0x10)] public int ModelSkeletonId;
@@ -22,8 +21,7 @@ public unsafe struct CharacterData {
     [FieldOffset(0x30)] public ushort CraftingPoints;
     [FieldOffset(0x32)] public ushort MaxCraftingPoints;
     [FieldOffset(0x34)] public short TransformationId;
-    [FieldOffset(0x36), Obsolete("Outdated - offset of TitleID")] public short StatusEffectVFXId;
-    [FieldOffset(0x36)] public ushort TitleID;
+    [FieldOffset(0x36)] public ushort TitleId;
 
     [FieldOffset(0x3A)] public byte ClassJob;
     [FieldOffset(0x3B)] public byte Level;
@@ -66,5 +64,5 @@ public unsafe struct CharacterData {
     /// A tagger is generally the first entity to deal damage to this character, and will persist until that entity
     /// has died, at which point it will reset.
     /// </remarks>
-    [FieldOffset(0x50)] public GameObjectID CombatTaggerId;
+    [FieldOffset(0x50)] public GameObjectId CombatTaggerId;
 }

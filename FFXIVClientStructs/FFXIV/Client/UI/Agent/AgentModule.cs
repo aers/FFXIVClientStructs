@@ -8,10 +8,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 public unsafe partial struct AgentModule {
     public static AgentModule* Instance() => Framework.Instance()->GetUiModule()->GetAgentModule();
 
-    [FieldOffset(0x0)] public void* vtbl;
     [FieldOffset(0x8)] public UIModule* UIModule;
     [FieldOffset(0x10)] public byte Initialized;
-    [FieldOffset(0x11)] public byte Unk_11;
     [FieldOffset(0x14)] public uint FrameCounter;
     [FieldOffset(0x18)] public float FrameDelta;
 
@@ -19,11 +17,7 @@ public unsafe partial struct AgentModule {
     [FieldOffset(0x20)] public fixed byte Agents[441 * 8];
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F B7 A8")]
-    public partial AgentInterface* GetAgentByInternalId(AgentId agentID);
-
-    [Obsolete("Use GetAgentByInternalId(AgentId)")]
-    public AgentInterface* GetAgentByInternalID(uint agentId)
-        => GetAgentByInternalId((AgentId)agentId);
+    public partial AgentInterface* GetAgentByInternalId(AgentId agentId);
 }
 
 public enum AgentId : uint {
@@ -60,7 +54,6 @@ public enum AgentId : uint {
     FishGuide = 29,
     FishRecord = 30,
 
-    [Obsolete("Renamed to QuestJournal")] Journal = 32,
     QuestJournal = 32,
     ActionMenu = 33,
     Marker = 34,
@@ -92,8 +85,6 @@ public enum AgentId : uint {
     // PartyInvite,
     SocialSearch = 61,
     Detail = 62,
-    [Obsolete("Renamed to Detail")]
-    SocialDetail = 62,
     LetterList = 63,
     LetterView = 64,
     LetterEdit = 65,
@@ -129,7 +120,6 @@ public enum AgentId : uint {
     GrandCompanyRank = 93,
     GrandCompanySupply = 94,
     GrandCompanyExchange = 95,
-    [Obsolete("Renamed to GearSet")] Gearset = 96,
     GearSet = 96,
     SupportMain = 97,
     SupportList = 98,

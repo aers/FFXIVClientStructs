@@ -9,10 +9,10 @@ public unsafe partial struct AgentFreeCompanyProfile {
     //First = 0xe0 00 00 00 00 00 00 00
     //Next were the same as AgentINspect GuildStruct 0x08
     //These (in Decimal) are the same as used on the Lodestone
-    [FieldOffset(0x028)] public long RequestID;
-    [FieldOffset(0x030)] public long UnkID2;
-    [FieldOffset(0x038)] public long UnkID3;
-    [FieldOffset(0x040)] public long UnkID4;
+    [FieldOffset(0x028)] public long RequestId;
+    [FieldOffset(0x030)] public long UnkId2;
+    [FieldOffset(0x038)] public long UnkId3;
+    [FieldOffset(0x040)] public long UnkId4;
     [FieldOffset(0x048)] public CrestData Crest;
     //Estate Data
     [FieldOffset(0x050)] public ushort PlotNumber; //Starts at 0 (+1 in UI) Only last 6 bits are valid
@@ -50,8 +50,8 @@ public unsafe partial struct AgentFreeCompanyProfile {
         public enum SeekingType : ushort {
             None = 0,
             Tank = 1,
-            HEaler = 2,
-            DPS = 4,
+            Healer = 2,
+            Dps = 4,
             Crafter = 8,
             Gatherer = 16,
         }

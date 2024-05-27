@@ -1,11 +1,13 @@
-namespace FFXIVClientStructs.Havok;
+using FFXIVClientStructs.Havok.Common.Base.Math.Vector;
 
-[StructLayout(LayoutKind.Sequential)]
+namespace FFXIVClientStructs.Havok.Common.Base.Math.Quaternion;
+
+[StructLayout(LayoutKind.Explicit, Size = 0x10)]
 public unsafe partial struct hkQuaternionf {
-    public float X;
-    public float Y;
-    public float Z;
-    public float W;
+    [FieldOffset(0x00)] public float X;
+    [FieldOffset(0x04)] public float Y;
+    [FieldOffset(0x08)] public float Z;
+    [FieldOffset(0x0C)] public float W;
 
     [MemberFunction("F3 0F 11 54 24 ?? 48 83 EC 38")]
     public partial void setAxisAngle1(hkVector4f* axis, float angle);

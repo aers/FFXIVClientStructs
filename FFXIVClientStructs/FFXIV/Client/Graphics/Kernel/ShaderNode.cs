@@ -9,7 +9,6 @@ public unsafe struct ShaderNode {
         [FieldOffset(0x4)] public uint PixelShader;
     }
 
-    [FieldOffset(0x00)] public void* vtbl;
     [FieldOffset(0x08)] public ShaderPackage* OwnerPackage;
     [FieldOffset(0x10)] public uint PassNum;
     [FieldOffset(0x14)] public fixed byte PassIndices[16];

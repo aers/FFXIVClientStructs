@@ -1,4 +1,8 @@
-namespace FFXIVClientStructs.Havok;
+using FFXIVClientStructs.Havok.Common.Base.Object;
+using FFXIVClientStructs.Havok.Common.Base.System.IO.Writer;
+using FFXIVClientStructs.Havok.Common.Base.Types;
+
+namespace FFXIVClientStructs.Havok.Common.Base.System.IO.OStream;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x18)]
 public unsafe partial struct hkOstream {

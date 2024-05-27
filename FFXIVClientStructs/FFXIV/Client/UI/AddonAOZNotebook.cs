@@ -67,16 +67,16 @@ public unsafe partial struct AddonAOZNotebook {
         [FieldOffset(0x20)] public AtkTextNode* AtkTextNode;
         [FieldOffset(0x28)] public AtkResNode* AtkResNode1;
         [FieldOffset(0x30)] public AtkResNode* AtkResNode2;
-        [FieldOffset(0x38)] public char* Name; // TODO: change to byte*
-        [FieldOffset(0x40)] public uint ActionID;
+        [FieldOffset(0x38)] public byte* Name;
+        [FieldOffset(0x40)] public uint ActionId;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public struct ActiveActions {
         [FieldOffset(0x0)] public AtkComponentDragDrop* AtkComponentDragDrop;
         [FieldOffset(0x8)] public AtkTextNode* AtkTextNode;
-        [FieldOffset(0x10)] public char* Name; // TODO: change to byte*
-        [FieldOffset(0x18)] public int ActionID;
+        [FieldOffset(0x10)] public byte* Name;
+        [FieldOffset(0x18)] public uint ActionId;
     }
 
     public SpellbookBlock GetSpellbookBlock(int index) {

@@ -1,4 +1,4 @@
-namespace FFXIVClientStructs.Havok;
+namespace FFXIVClientStructs.Havok.Common.Base.Types;
 
 [StructLayout(LayoutKind.Sequential)]
 public struct hkEnum<T, U> where T : unmanaged, Enum where U : unmanaged {

@@ -23,10 +23,7 @@ public unsafe partial struct SoundManager {
     [FieldOffset(0x0120)] public fixed float UnkVolume4[0x13]; // All are 1.0f
     [FieldOffset(0x016C)] public fixed bool ChannelMutedArray[0x13];
     [FieldOffset(0x017F)] public fixed bool ChannelAlwaysOn[0x13];
-    [Obsolete("Use ChannelAlwaysOn")]
-    [FieldOffset(0x017F)]
-    public fixed bool ChannelAlwayOn[0x13];
-
+    
     [FieldOffset(0x01C9)] public bool MasterEnabled;
     [FieldOffset(0x01CA)] public bool IsSoundAlways;
     [FieldOffset(0x01CB)] public bool SoundEnabled;

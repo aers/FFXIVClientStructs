@@ -184,8 +184,6 @@ public unsafe struct IslandState {
 public unsafe struct MJIWorkshops {
     private const int MaxWorkshops = 4;
 
-    public void* vtbl;
-
     /// <summary>
     /// The MJIBuildingPlace in which this particular building resides.
     /// 
@@ -249,8 +247,6 @@ public unsafe struct MJIWorkshops {
 [StructLayout(LayoutKind.Sequential, Size = 0x08 + 5 * MaxGranaries)]
 public unsafe struct MJIGranaries {
     private const int MaxGranaries = 2;
-
-    public void* vtbl;
 
     /// <inheritdoc cref="MJIWorkshops.PlaceId"/>
     public fixed byte PlaceId[MaxGranaries];

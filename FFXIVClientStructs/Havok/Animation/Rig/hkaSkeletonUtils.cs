@@ -1,7 +1,12 @@
-namespace FFXIVClientStructs.Havok;
+using FFXIVClientStructs.Havok.Common.Base.Container.Array;
+using FFXIVClientStructs.Havok.Common.Base.Math.QsTransform;
+using FFXIVClientStructs.Havok.Common.Base.Types.Geometry;
+
+namespace FFXIVClientStructs.Havok.Animation.Rig;
 
 public unsafe delegate int hkStringCompareFunc(char* a, char* b);
 
+[StructLayout(LayoutKind.Explicit, Size = 0)]
 public unsafe partial struct hkaSkeletonUtils {
     [MemberFunction("E8 ?? ?? ?? ?? 41 8B FF 85 DB")]
     public static partial void transformLocalPoseToModelPose(int numTransforms, short* parentIndices, hkQsTransformf* poseLocal, hkQsTransformf* poseModelOut);

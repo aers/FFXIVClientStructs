@@ -62,11 +62,12 @@ public struct EventHandlerObjective {
 public struct EventId {
     [FieldOffset(0x00), CExportIgnore] public uint Id;
     [FieldOffset(0x00)] public ushort EntryId;
-    [FieldOffset(0x02)] public EventHandlerType Type; //TODO: rename to ContentId
+    [FieldOffset(0x02)] public EventHandlerType ContentId;
     public static implicit operator uint(EventId id) => id.Id;
     public static implicit operator EventId(uint id) => new() { Id = id };
 }
 
+// TODO adjust for name change EventId.Type -> EventId.ContentId?
 public enum EventHandlerType : ushort {
     Quest = 0x0001,
     Warp = 0x0002,
@@ -80,8 +81,6 @@ public enum EventHandlerType : ushort {
     CompanyLeveOfficer = 0x000C,
     Array = 0x000D,
     CraftLeveClient = 0x000E,
-    [Obsolete("Use CraftLeveClient")]
-    CraftLeve = 0x000E,
     GimmickAccessor = 0x000F,
     GimmickBill = 0x0010,
     GimmickRect = 0x0011,
@@ -96,8 +95,6 @@ public enum EventHandlerType : ushort {
     Story = 0x001A,
     SpecialShop = 0x001B,
     DeepDungeon = 0x001C,
-    [Obsolete("Use DeepDungeon")]
-    ContentTalk = 0x001C,
     InstanceContentGuide = 0x001D,
     HousingAethernet = 0x001E,
     FcTalk = 0x001F,

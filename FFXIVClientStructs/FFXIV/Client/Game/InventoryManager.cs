@@ -100,7 +100,7 @@ public unsafe partial struct InventoryItem : ICreatable {
     /// </summary>
     [FieldOffset(0x06)] public bool IsSymbolic;
     /// <remarks> Only used if <see cref="IsSymbolic"/> is <c>false</c>. </remarks>
-    [FieldOffset(0x08)] public uint ItemID;
+    [FieldOffset(0x08)] public uint ItemId;
     /// <remarks> Only used if <see cref="IsSymbolic"/> is <c>true</c>. </remarks>
     [FieldOffset(0x08), CExportIgnore] public ushort LinkedItemSlot;
     /// <remarks> Only used if <see cref="IsSymbolic"/> is <c>true</c>. </remarks>
@@ -109,16 +109,16 @@ public unsafe partial struct InventoryItem : ICreatable {
     [FieldOffset(0x10)] public ushort Spiritbond; // TODO: This field is also used for the collectability value. Not sure if it's the same data type. See also: GetSpiritbond()
     [FieldOffset(0x12)] public ushort Condition;
     [FieldOffset(0x14)] public ItemFlags Flags;
-    [FieldOffset(0x18)] public ulong CrafterContentID;
+    [FieldOffset(0x18)] public ulong CrafterContentId;
     [FieldOffset(0x20)] public fixed ushort Materia[5];
     [FieldOffset(0x2A)] public fixed byte MateriaGrade[5];
     [FieldOffset(0x2F)] public byte Stain;
-    [FieldOffset(0x30)] public uint GlamourID;
+    [FieldOffset(0x30)] public uint GlamourId;
 
     [Flags]
     public enum ItemFlags : byte {
         None = 0,
-        HQ = 1,
+        HighQuality = 1,
         CompanyCrestApplied = 2,
         Relic = 4,
         Collectable = 8
@@ -128,7 +128,7 @@ public unsafe partial struct InventoryItem : ICreatable {
     public partial void Ctor();
 
     [MemberFunction("8B 42 08 4C 8B C1")]
-    public partial bool Equals(InventoryItem* other);
+    public partial bool IsEqual(InventoryItem* other);
 
     /// <summary>Copies the values from the other InventoryItem and, if it's symbolic, resolves its linked item.</summary>
     [MemberFunction("E9 ?? ?? ?? ?? 48 8D 4B 48")]

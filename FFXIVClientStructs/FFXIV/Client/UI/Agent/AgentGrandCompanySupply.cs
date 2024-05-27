@@ -50,7 +50,7 @@ public struct GrandCompanyItem {
     /// </summary>
     [FieldOffset(0x68)] public InventoryType Inventory;
 
-    [FieldOffset(0x70)] public int IconID;
+    [FieldOffset(0x70)] public int IconId;
     [FieldOffset(0x74)] public int ExpReward;
     [FieldOffset(0x78)] public int SealReward;
     [FieldOffset(0x80)] public int NumPossessed;

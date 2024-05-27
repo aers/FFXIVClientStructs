@@ -5,7 +5,6 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 // ctor "48 89 01 48 8D 59 08"
 [StructLayout(LayoutKind.Explicit, Size = 0x2D750)]
 public unsafe partial struct Manager {
-    [FieldOffset(0x0)] public void* Vtbl;
     [FixedSizeArray<View>(32)]
     [FieldOffset(0x8)] public fixed byte ViewArray[32 * 0x5A0]; // 32x Client::Graphics::Render::View
 

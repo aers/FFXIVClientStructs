@@ -72,7 +72,6 @@ public unsafe struct ShaderPackage {
     [FieldOffset(0xE8)] public uint* MaterialValues;
     [FieldOffset(0xF0)] public uint SubviewValue1;
     [FieldOffset(0xF4)] public uint SubviewValue2;
-    [FieldOffset(0xF8)] public void* ShaderNodeTreeVtbl; // class I haven't defined yet
 
     public readonly Span<MaterialElement> MaterialElementsSpan
         => new(MaterialElements, MaterialElementCount);

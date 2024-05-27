@@ -10,5 +10,5 @@ public unsafe struct FileDescriptor {
     [FieldOffset(0x30)] public void* FileInterface; // Client::System::File::FileInterface
     [FieldOffset(0x60)] public FileDescriptor* Previous; // believe its a queue
     [FieldOffset(0x68)] public FileDescriptor* Next;
-    [FieldOffset(0x70)] public fixed byte Utf16FilePath[520]; //Todo: char array
+    [FieldOffset(0x70)] public fixed char FilePath[260];
 }

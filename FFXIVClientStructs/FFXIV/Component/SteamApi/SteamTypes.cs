@@ -46,7 +46,7 @@ public static class SteamTypes {
         /// </summary>
         public nint GetInterface() {
             fixed (SteamInterfaceContext* ptr = &this) {
-                // ToDo: Actually call `SteamInternal_ContextInit(ctx)` here, rather than just returning the cached pointer.
+                // TODO: Actually call `SteamInternal_ContextInit(ctx)` here, rather than just returning the cached pointer.
                 //       Needs some way to get the fptr for that method first. For now this is *probably fine* (and won't blow up)
                 //       but isn't awesome.
                 return (nint)ptr->CachedInterfacePtr;

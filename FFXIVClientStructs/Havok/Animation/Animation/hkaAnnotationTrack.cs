@@ -1,13 +1,16 @@
-namespace FFXIVClientStructs.Havok;
+using FFXIVClientStructs.Havok.Common.Base.Container.Array;
+using FFXIVClientStructs.Havok.Common.Base.Container.String;
 
-[StructLayout(LayoutKind.Sequential)]
+namespace FFXIVClientStructs.Havok.Animation.Animation;
+
+[StructLayout(LayoutKind.Explicit, Size = 0x18)]
 public struct hkaAnnotationTrack {
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct Annotation {
-        public float Time;
-        public hkStringPtr Text;
+        [FieldOffset(0x00)] public float Time;
+        [FieldOffset(0x08)] public hkStringPtr Text;
     }
 
-    public hkStringPtr TrackName;
-    public hkArray<Annotation> Annotations;
+    [FieldOffset(0x00)] public hkStringPtr TrackName;
+    [FieldOffset(0x08)] public hkArray<Annotation> Annotations;
 }

@@ -1,20 +1,27 @@
-namespace FFXIVClientStructs.Havok;
+using FFXIVClientStructs.Havok.Animation.Animation;
+using FFXIVClientStructs.Havok.Animation.Playback.Control;
+using FFXIVClientStructs.Havok.Animation.Playback.Control.Default;
+using FFXIVClientStructs.Havok.Animation.Rig;
+using FFXIVClientStructs.Havok.Common.Base.Container.Array;
+using FFXIVClientStructs.Havok.Common.Base.Math.QsTransform;
+using FFXIVClientStructs.Havok.Common.Base.Object;
 
-[StructLayout(LayoutKind.Sequential, Pack = 16)]
+namespace FFXIVClientStructs.Havok.Animation.Playback;
+
+[StructLayout(LayoutKind.Explicit, Size = 0x40)]
 public unsafe partial struct hkaAnimatedSkeleton {
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public struct BoneAnnotation {
-        public ushort BoneID;
-        public hkaAnnotationTrack.Annotation Annotation;
+        [FieldOffset(0x00)] public ushort BoneId;
+        [FieldOffset(0x08)] public hkaAnnotationTrack.Annotation Annotation;
     }
 
-    public hkReferencedObject hkReferencedObject;
-    public hkaAnimationControlListener hkaAnimationControlListener;
-    private nint Padding;
-    public hkArray<Pointer<hkaDefaultAnimationControl>> AnimationControls;
-    public hkaSkeleton* Skeleton;
-    public float ReferencePoseWeightThreshold;
-    public int NumQuantizedAnimations;
+    [FieldOffset(0x00)] public hkReferencedObject hkReferencedObject;
+    [FieldOffset(0x10)] public hkaAnimationControlListener hkaAnimationControlListener;
+    [FieldOffset(0x20)] public hkArray<Pointer<hkaDefaultAnimationControl>> AnimationControls;
+    [FieldOffset(0x30)] public hkaSkeleton* Skeleton;
+    [FieldOffset(0x38)] public float ReferencePoseWeightThreshold;
+    [FieldOffset(0x3C)] public int NumQuantizedAnimations;
 
     [MemberFunction("E8 ?? ?? ?? ?? EB ?? 48 8B C3 48 89 07 48 83 C7")]
     public partial hkaAnimatedSkeleton* Ctor1(hkaSkeleton* skeleton);

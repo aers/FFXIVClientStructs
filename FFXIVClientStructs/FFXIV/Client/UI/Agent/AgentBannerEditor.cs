@@ -60,20 +60,6 @@ public unsafe partial struct AgentBannerEditorState {
         // 3 unused bytes?!
     }
 
-    [Obsolete("Use DatasetEntry", true)]
-    [StructLayout(LayoutKind.Explicit, Size = 0x18)]
-    public struct GenericDropdownItem {
-        [FieldOffset(0)] public nint Data;
-        [FieldOffset(0x10)] public ushort Id;
-    }
-
-    [Obsolete("Use DatasetEntry", true)]
-    [StructLayout(LayoutKind.Explicit, Size = 0x18)]
-    public struct ExpressionDropdownItem {
-        [FieldOffset(0x08)] public nint Data;
-        [FieldOffset(0x10)] public ushort Id;
-    }
-
     // Datasets are created here: "E8 ?? ?? ?? ?? 48 8B 4D 28 E8"
     [FieldOffset(0)] public Dataset Presets;
     [FieldOffset(0x30)] public Dataset Backgrounds;
@@ -81,37 +67,7 @@ public unsafe partial struct AgentBannerEditorState {
     [FieldOffset(0x90)] public Dataset Accents;
     [FieldOffset(0xC0)] public Dataset Poses;
     [FieldOffset(0xF0)] public Dataset Expressions;
-
-    [Obsolete("Use Presets.UnsortedEntries", true)]
-    [FieldOffset(0x20)] public nint PresetItems;
-    [Obsolete("Use Presets.UnsortedEntriesCount", true)]
-    [FieldOffset(0x28)] public uint PresetItemsCount;
-
-    [Obsolete("Use Backgrounds.UnlockedEntries", true)]
-    [FieldOffset(0x40)] public GenericDropdownItem** BackgroundItems;
-    [Obsolete("Use Backgrounds.UnlockedEntriesCount", true)]
-    [FieldOffset(0x48)] public uint BackgroundItemsCount;
-
-    [Obsolete("Use Frames.UnlockedEntries", true)]
-    [FieldOffset(0x70)] public GenericDropdownItem** FrameItems;
-    [Obsolete("Use Frames.UnlockedEntriesCount", true)]
-    [FieldOffset(0x78)] public uint FrameItemsCount;
-
-    [Obsolete("Use Accents.UnlockedEntries", true)]
-    [FieldOffset(0xA0)] public GenericDropdownItem** AccentItems;
-    [Obsolete("Use Accents.UnlockedEntriesCount", true)]
-    [FieldOffset(0xA8)] public uint AccentItemsCount;
-
-    [Obsolete("Use Poses.UnlockedEntries", true)]
-    [FieldOffset(0xD0)] public GenericDropdownItem** BannerTimelineItems;
-    [Obsolete("Use Poses.UnlockedEntriesCount", true)]
-    [FieldOffset(0xD8)] public uint BannerTimelineItemsCount;
-
-    [Obsolete("Use Expressions.UnlockedEntries", true)]
-    [FieldOffset(0x100)] public ExpressionDropdownItem** ExpressionItems;
-    [Obsolete("Use Expressions.UnlockedEntriesCount", true)]
-    [FieldOffset(0x108)] public uint ExpressionItemsCount;
-
+    
     [FieldOffset(0x120)] public BannerModuleEntry BannerEntry;
 
     [FieldOffset(0x240)] public fixed uint ItemIds[14];

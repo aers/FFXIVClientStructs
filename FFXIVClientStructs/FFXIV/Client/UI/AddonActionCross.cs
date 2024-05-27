@@ -128,24 +128,6 @@ public unsafe partial struct AddonActionCross {
     /// The Cycle Up/Down options will return the values 18 or 19, which are not actual bar IDs. You can use <see cref="GetAdjustedBarTarget"/> instead to account for this.</returns>
     [MemberFunction("E8 ?? ?? ?? ?? 8B D0 83 F8 12 74 38")]
     public static partial uint GetBarTarget(uint mapValue, bool* useLeftSide);
-
-    // renamed fields for clarity
-    [Obsolete("use ExpandedHoldMapValueLR")]
-    [FieldOffset(0x6E8)] public int ExpandedHoldControlsLTRT;
-    [Obsolete("use ExpandedHoldMapValueRL")]
-    [FieldOffset(0x6EC)] public int ExpandedHoldControlsRTLT;
-    [Obsolete("use SelectedDoubleCrossLeft")]
-    [FieldOffset(0x6F0)] public bool DoubleCrossLeft;
-    [Obsolete("use SelectedDoubleCrossRight")]
-    [FieldOffset(0x6F4)] public bool DoubleCrossRight;
-    [Obsolete("use SelectedLeftBar")]
-    [FieldOffset(0x701)] public bool LeftBar;
-    [Obsolete("use SelectedRightBar")]
-    [FieldOffset(0x702)] public bool RightBar;
-    [Obsolete("use DisplayPetBar")]
-    [FieldOffset(0x704)] public bool PetBar;
-    [Obsolete("use ExpandedHoldMapValue")]
-    public int ExpandedHoldControls => (int)ExpandedHoldMapValue;
 }
 
 /// <summary>Possible selection states for the Cross Hotbar.</summary>

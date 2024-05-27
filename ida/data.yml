@@ -1774,21 +1774,22 @@ classes:
       0x14097FCC0: IsDungeonComplete
       0x14097FD00: IsFateComplete
       0x14097FD40: IsLeveComplete
-  Client::Game::UI::TradeMultiple:
+  Client::Game::UI::MateriaTrade:
     vtbls:
       - ea: 0x141A6FD50
         base: Component::GUI::AtkModuleInterface::AtkEventInterface
-  Client::Game::UI::AreaInstance:
+  Client::Game::UI::PublicInstance:
     instances:
       - ea: 0x142207F70
         pointer: False
-    vtbls:
-      - ea: 0x141A6FD68
-        base: Component::GUI::AtkModuleInterface::AtkEventInterface
     funcs:
       0x140983AF0: SetInstance
       0x140983B00: GetInstance
       0x140983B10: IsInstancedArea
+  Client::Game::UI::PublicInstance::Listener:
+    vtbls:
+      - ea: 0x141A6FD68
+        base: Component::GUI::AtkModuleInterface::AtkEventInterface
   Client::Game::UI::RelicSphereUpgrade:
     instances:
       - ea: 0x142207F98
@@ -1953,7 +1954,7 @@ classes:
         pointer: False
     funcs:
       0x1409A9D60: ctor
-  Client::Game::UI::RouletteController:
+  Client::Game::UI::InstanceContent:
     instances:
       - ea: 0x142216EB8
         pointer: False
@@ -7000,7 +7001,7 @@ classes:
       0x1406A3240: GetBannerIndex
       0x1406A32A0: SetBannerIndex
       0x1406A3360: HasLinkedBanner
-      0x1406A3730: FindGearsetIDByName
+      0x1406A3730: FindGearsetIdByName
   Client::UI::Misc::ItemFinderModule:
     vtbls:
       - ea: 0x141A1EF38
