@@ -10,4 +10,4 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 // type 24
 [GenerateInterop, Inherits<AtkComponentButton>]
 [StructLayout(LayoutKind.Explicit, Size = 0x120)]
-public struct AtkComponentHoldButton;
+public partial struct AtkComponentHoldButton;

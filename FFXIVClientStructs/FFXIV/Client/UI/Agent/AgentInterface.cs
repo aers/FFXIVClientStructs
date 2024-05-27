@@ -13,9 +13,6 @@ public unsafe partial struct AgentInterface {
     [FieldOffset(0x10)] public UIModule* UiModule;
     [FieldOffset(0x20)] public uint AddonId;
 
-    [VirtualFunction(0)]
-    public partial void* ReceiveEvent(void* eventData, AtkValue* values, uint valueCount, ulong eventKind); // TODO: return AtkValue* and change "void* eventData" to "AtkValue* returnValue"
-
     [VirtualFunction(3)]
     public partial void Show();
 
