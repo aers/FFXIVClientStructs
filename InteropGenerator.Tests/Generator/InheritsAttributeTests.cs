@@ -38,8 +38,6 @@ public class InheritsAttributeTests {
 
         await VerifyIG.VerifyGeneratorAsync(
             code,
-            SourceGeneration.GetEmptyGenerationSource("BaseStruct"),
-            SourceGeneration.GetEmptyGenerationSource("ChildStruct"),
             ("ChildStruct.Inheritance.InteropGenerator.g.cs", childStructInheritanceCode));
     }
 
@@ -76,8 +74,6 @@ public class InheritsAttributeTests {
 
         await VerifyIG.VerifyGeneratorAsync(
             code,
-            SourceGeneration.GetEmptyGenerationSource("BaseStruct"),
-            SourceGeneration.GetEmptyGenerationSource("ChildStruct"),
             ("ChildStruct.Inheritance.InteropGenerator.g.cs", childStructInheritanceCode));
     }
 
@@ -114,8 +110,6 @@ public class InheritsAttributeTests {
 
         await VerifyIG.VerifyGeneratorAsync(
             code,
-            SourceGeneration.GetEmptyGenerationSource("BaseStruct"),
-            SourceGeneration.GetEmptyGenerationSource("ChildStruct"),
             ("ChildStruct.Inheritance.InteropGenerator.g.cs", childStructInheritanceCode));
     }
 
@@ -175,9 +169,6 @@ public class InheritsAttributeTests {
 
         await VerifyIG.VerifyGeneratorAsync(
             code,
-            SourceGeneration.GetEmptyGenerationSource("BaseStruct"),
-            SourceGeneration.GetEmptyGenerationSource("MiddleStruct"),
-            SourceGeneration.GetEmptyGenerationSource("ChildStruct"),
             ("MiddleStruct.Inheritance.InteropGenerator.g.cs", middleStructInheritanceCode),
             ("ChildStruct.Inheritance.InteropGenerator.g.cs", childStructInheritanceCode));
     }
@@ -228,9 +219,6 @@ public class InheritsAttributeTests {
 
         await VerifyIG.VerifyGeneratorAsync(
             code,
-            SourceGeneration.GetEmptyGenerationSource("BaseStruct"),
-            SourceGeneration.GetEmptyGenerationSource("BaseStruct2"),
-            SourceGeneration.GetEmptyGenerationSource("ChildStruct"),
             ("ChildStruct.Inheritance.InteropGenerator.g.cs", childStructInheritanceCode));
     }
 
@@ -292,7 +280,6 @@ public class InheritsAttributeTests {
         await VerifyIG.VerifyGeneratorAsync(
             code,
             ("BaseStruct.InteropGenerator.g.cs", baseStructGeneratedCode),
-            SourceGeneration.GetEmptyGenerationSource("ChildStruct"),
             ("ChildStruct.Inheritance.InteropGenerator.g.cs", childStructInheritanceCode),
             SourceGeneration.GetInitializerSource(string.Empty, "BaseStruct", ["TestFunction"]));
     }
@@ -375,8 +362,6 @@ public class InheritsAttributeTests {
         await VerifyIG.VerifyGeneratorAsync(
             code,
             ("BaseStruct.InteropGenerator.g.cs", baseStructGeneratedCode),
-            SourceGeneration.GetEmptyGenerationSource("MiddleStruct"),
-            SourceGeneration.GetEmptyGenerationSource("ChildStruct"),
             ("MiddleStruct.Inheritance.InteropGenerator.g.cs", middleStructInheritanceCode),
             ("ChildStruct.Inheritance.InteropGenerator.g.cs", childStructInheritanceCode),
             SourceGeneration.GetInitializerSource(string.Empty, "BaseStruct", ["TestFunction"]));
@@ -438,7 +423,6 @@ public class InheritsAttributeTests {
         await VerifyIG.VerifyGeneratorAsync(
             code,
             ("BaseStruct.InteropGenerator.g.cs", baseStructGeneratedCode),
-            SourceGeneration.GetEmptyGenerationSource("ChildStruct"),
             ("ChildStruct.Inheritance.InteropGenerator.g.cs", childStructInheritanceGeneratedCode));
     }
 
@@ -574,13 +558,11 @@ public class InheritsAttributeTests {
 
         await VerifyIG.VerifyGeneratorAsync(
             code,
-            SourceGeneration.GetEmptyGenerationSource("BaseStruct"),
             ("BaseStruct2.InteropGenerator.g.cs", baseStruct2Code),
-            SourceGeneration.GetEmptyGenerationSource("ChildStruct"),
             ("ChildStruct.Inheritance.InteropGenerator.g.cs", childStructInheritanceCode));
     }
     
-        [Fact]
+    [Fact]
     public async Task PublicMethodInheritance() {
         const string code = """
                             [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit, Size=4)]
@@ -614,8 +596,80 @@ public class InheritsAttributeTests {
 
         await VerifyIG.VerifyGeneratorAsync(
             code,
-            SourceGeneration.GetEmptyGenerationSource("BaseStruct"),
-            SourceGeneration.GetEmptyGenerationSource("ChildStruct"),
+            ("ChildStruct.Inheritance.InteropGenerator.g.cs", childStructInheritanceCode));
+    }
+    
+    [Fact]
+    public async Task MethodWithGenericArgumentInheritance() {
+        const string code = """
+                            [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit, Size=4)]
+                            [GenerateInterop(true)]
+                            public partial struct BaseStruct
+                            {
+                                public int TestFunction<T>() => 0;
+                                private int TestPrivateFunction() => 0;
+                            }
+
+                            [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit, Size=8)]
+                            [GenerateInterop]
+                            [Inherits<BaseStruct>]
+                            public partial struct ChildStruct
+                            {
+                            }
+                            """;
+
+        const string childStructInheritanceCode = """
+                                                  // <auto-generated/>
+                                                  unsafe partial struct ChildStruct
+                                                  {
+                                                      /// <summary>Inherited parent class accessor for <see cref="BaseStruct">BaseStruct</see></summary>
+                                                      [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public BaseStruct BaseStruct;
+                                                      /// <inheritdoc cref="BaseStruct.TestFunction<T>" />
+                                                      /// <remarks>Method inherited from parent class <see cref="BaseStruct">BaseStruct</see>.</remarks>
+                                                      [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                                                      public int TestFunction<T>() => BaseStruct.TestFunction<T>();
+                                                  }
+                                                  """;
+
+        await VerifyIG.VerifyGeneratorAsync(
+            code,
+            ("ChildStruct.Inheritance.InteropGenerator.g.cs", childStructInheritanceCode));
+    }
+    
+    [Fact]
+    public async Task MethodWithGenericArgumentAndTypeConstraintsInheritance() {
+        const string code = """
+                            [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit, Size=4)]
+                            [GenerateInterop(true)]
+                            public partial struct BaseStruct
+                            {
+                                public int TestFunction<T>() where T : unmanaged => 0;
+                                private int TestPrivateFunction() => 0;
+                            }
+
+                            [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit, Size=8)]
+                            [GenerateInterop]
+                            [Inherits<BaseStruct>]
+                            public partial struct ChildStruct
+                            {
+                            }
+                            """;
+
+        const string childStructInheritanceCode = """
+                                                  // <auto-generated/>
+                                                  unsafe partial struct ChildStruct
+                                                  {
+                                                      /// <summary>Inherited parent class accessor for <see cref="BaseStruct">BaseStruct</see></summary>
+                                                      [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public BaseStruct BaseStruct;
+                                                      /// <inheritdoc cref="BaseStruct.TestFunction<T>" />
+                                                      /// <remarks>Method inherited from parent class <see cref="BaseStruct">BaseStruct</see>.</remarks>
+                                                      [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                                                      public int TestFunction<T>() where T : unmanaged => BaseStruct.TestFunction<T>();
+                                                  }
+                                                  """;
+
+        await VerifyIG.VerifyGeneratorAsync(
+            code,
             ("ChildStruct.Inheritance.InteropGenerator.g.cs", childStructInheritanceCode));
     }
     
@@ -697,7 +751,6 @@ public class InheritsAttributeTests {
         await VerifyIG.VerifyGeneratorAsync(
             code,
             ("BaseStruct.InteropGenerator.g.cs", baseStructCode),
-            SourceGeneration.GetEmptyGenerationSource("ChildStruct"),
             ("ChildStruct.Inheritance.InteropGenerator.g.cs", childStructGeneratedCode));
     }
     
@@ -745,7 +798,6 @@ public class InheritsAttributeTests {
         await VerifyIG.VerifyGeneratorAsync(
             code,
             ("BaseStruct.InteropGenerator.g.cs", baseStructCode),
-            SourceGeneration.GetEmptyGenerationSource("ChildStruct"),
             ("ChildStruct.Inheritance.InteropGenerator.g.cs", childStructInheritedCode),
             SourceGeneration.GetFixedSizeArraySource([10]));
     }
@@ -823,7 +875,6 @@ public class InheritsAttributeTests {
         await VerifyIG.VerifyGeneratorAsync(
             code,
             ("BaseStruct.InteropGenerator.g.cs", baseStructCode),
-            SourceGeneration.GetEmptyGenerationSource("ChildStruct"),
             ("ChildStruct.Inheritance.InteropGenerator.g.cs", childStructInheritedCode),
             SourceGeneration.GetFixedSizeArraySource([10]));
     }
@@ -901,7 +952,6 @@ public class InheritsAttributeTests {
         await VerifyIG.VerifyGeneratorAsync(
             code,
             ("BaseStruct.InteropGenerator.g.cs", baseStructCode),
-            SourceGeneration.GetEmptyGenerationSource("ChildStruct"),
             ("ChildStruct.Inheritance.InteropGenerator.g.cs", childStructInheritedCode),
             SourceGeneration.GetFixedSizeArraySource([10]));
     }

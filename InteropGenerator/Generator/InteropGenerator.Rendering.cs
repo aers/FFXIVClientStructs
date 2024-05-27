@@ -123,10 +123,10 @@ public sealed partial class InteropGenerator {
         using (writer.WriteBlock()) {
             foreach (VirtualFunctionInfo vfi in structInfo.VirtualFunctions) {
                 var functionPointerType = $"delegate* unmanaged[Stdcall] <{structInfo.Name}*, {vfi.MethodInfo.GetParameterTypeString()}{vfi.MethodInfo.ReturnType}>";
-                writer.WriteLine($"[global::System.Runtime.InteropServices.FieldOffsetAttribute(0x{vfi.Index * 8:X})] public {functionPointerType} {vfi.MethodInfo.Name};");
+                writer.WriteLine($"[global::System.Runtime.InteropServices.FieldOffsetAttribute({vfi.Index * 8})] public {functionPointerType} {vfi.MethodInfo.Name};");
             }
         }
-        writer.WriteLine($"[global::System.Runtime.InteropServices.FieldOffsetAttribute(0x0)] public {structInfo.Name}VirtualTable* VirtualTable;");
+        writer.WriteLine($"[global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public {structInfo.Name}VirtualTable* VirtualTable;");
         if (structInfo.StaticVirtualTableSignature is not null) {
             writer.WriteLine($"public static {structInfo.Name}VirtualTable* StaticVirtualTablePointer => ({structInfo.Name}VirtualTable*)Addresses.StaticVirtualTable.Value;");
         }

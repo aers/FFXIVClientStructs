@@ -230,11 +230,19 @@ public sealed partial class InteropGenerator {
             return false; // unable to get method syntax
         }
 
+        var constraints = string.Empty;
+
+        if (methodSymbol.TypeParameters.Any()) {
+            ImmutableArray<SymbolDisplayPart> symbolDisplayParts = methodSymbol.ToDisplayParts(new SymbolDisplayFormat(genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeConstraints));
+            constraints = string.Join("", symbolDisplayParts[1..]);
+        }
+        
         methodInfo =
             new MethodInfo(
-                methodSymbol.Name,
+                methodSymbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat),
                 methodSyntax.Modifiers.ToString(),
                 methodSymbol.ReturnType.GetFullyQualifiedName(),
+                constraints,
                 methodSymbol.IsStatic,
                 methodSymbol.Parameters.Select(ParseParameter).ToImmutableArray()
             );
