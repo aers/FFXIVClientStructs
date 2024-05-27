@@ -15,9 +15,9 @@ public partial struct AgentColorant {
 
     // Client::UI::Agent::AgentColorant::ColorantCharaView
     //   Client::UI::Misc::CharaView
+    [GenerateInterop, Inherits<CharaView>]
     [StructLayout(LayoutKind.Explicit, Size = 0x2D8)]
-    public unsafe struct ColorantCharaView {
-        [FieldOffset(0)] public CharaView Base;
+    public unsafe partial struct ColorantCharaView {
         [FieldOffset(0x2C8)] public uint Unk2C8; // a3 passed to vf13
         [FieldOffset(0x2CC)] public uint ObjectId; // of local player
         [FieldOffset(0x2D0)] public bool DoUpdate;

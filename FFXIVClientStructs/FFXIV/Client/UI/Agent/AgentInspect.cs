@@ -45,10 +45,9 @@ public unsafe partial struct AgentInspect {
 
     // Client::UI::Agent::AgentInspect::InspectCharaView
     //   Client::UI::Misc::CharaView
+    [GenerateInterop, Inherits<CharaView>]
     [StructLayout(LayoutKind.Explicit, Size = 0x2C8)]
-    public struct InspectCharaView {
-        [FieldOffset(0)] public CharaView Base;
-    }
+    public partial struct InspectCharaView;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x86)]
     public struct FreeCompanyData {

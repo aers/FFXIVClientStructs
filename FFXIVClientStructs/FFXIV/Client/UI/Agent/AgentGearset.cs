@@ -15,9 +15,9 @@ public partial struct AgentGearSet {
 
     // Client::UI::Agent::AgentGearSet::GearsetCharaView
     //   Client::UI::Misc::CharaView
+    [GenerateInterop, Inherits<CharaView>]
     [StructLayout(LayoutKind.Explicit, Size = 0x2D8)]
-    public unsafe struct GearsetCharaView {
-        [FieldOffset(0)] public CharaView Base;
+    public unsafe partial struct GearsetCharaView {
         [FieldOffset(0x2C8)] public bool UpdateVisibility;
         [FieldOffset(0x2C9)] public bool UpdateItems;
         [FieldOffset(0x2CA)] public bool HideVisor;
