@@ -9,7 +9,8 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Object;
 // ctor "E8 ?? ?? ?? ?? 48 8D 8E ?? ?? ?? ?? 48 89 AE ?? ?? ?? ?? 48 8B D3"
 // base class for game objects in the world
 [StructLayout(LayoutKind.Explicit, Size = 0x1A0)]
-[VTableAddress("48 8d 05 ?? ?? ?? ?? c7 81 80 00 00 00 00 00 00 00", 3)]
+[GenerateInterop(isInherited: true)]
+[VirtualTable("48 8D 05 ?? ?? ?? ?? C7 81 80 00 00 00 00 00 00 00", 3)]
 public unsafe partial struct GameObject {
     [FieldOffset(0x10)] public Vector3 DefaultPosition;
     [FieldOffset(0x20)] public float DefaultRotation;

@@ -7,7 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //     Component::GUI::AtkEventListener
 [Addon("RetainerTaskAsk")]
 [StructLayout(LayoutKind.Explicit, Size = 0x2B8)]
-[VTableAddress("48 8d 05 ?? ?? ?? ?? 48 89 03 48 8d 83 50 02 00 00 48 89 93 20 02 00 00", 3)]
+[VirtualTable("48 8d 05 ?? ?? ?? ?? 48 89 03 48 8d 83 50 02 00 00 48 89 93 20 02 00 00", 3)]
 public unsafe partial struct AddonRetainerTaskAsk {
     [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
     [FieldOffset(0x2A8)] public AtkComponentButton* AssignButton;

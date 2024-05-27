@@ -1,9 +1,9 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x338)]
+[GenerateInterop]
 public unsafe partial struct CharacterManager {
-    [FixedSizeArray<Pointer<BattleChara>>(100)]
-    [FieldOffset(0x00)] public fixed byte BattleCharaList[100 * 8];
+    [FieldOffset(0x00)] [FixedSizeArray] internal FixedSizeArray100<Pointer<BattleChara>> _battleCharaList;
     [FieldOffset(0x320)] public BattleChara* BattleCharaMemory;
     [FieldOffset(0x328)] public Companion* CompanionMemory;
     //used to calculate the minion address in CompanionMemory when adding a BattleChara
@@ -17,7 +17,7 @@ public unsafe partial struct CharacterManager {
     public partial BattleChara* LookupBattleCharaByObjectId(uint objectId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B F8 48 85 C0 74 3A 0F B7 4C 24")]
-    [GenerateCStrOverloads]
+    [GenerateStringOverloads]
     public partial BattleChara* LookupBattleCharaByName(byte* name, bool onlyPlayers = false, short world = -1);
 
     [MemberFunction("E8 ?? ?? ?? ?? 49 8D 4D 20 48 89 44 24")]

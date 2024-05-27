@@ -3,7 +3,6 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 // Client::Game::Event::EventSceneTaskInterface
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
 public unsafe struct EventSceneTaskInterface {
-    [FieldOffset(0x00)] public void* vtbl;
     [FieldOffset(0x08)] public EventSceneTaskType Type;
     [FieldOffset(0x0C)] public byte Flags;
 }

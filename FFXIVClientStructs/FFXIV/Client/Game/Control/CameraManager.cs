@@ -1,6 +1,7 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game.Control;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x180)]
+[GenerateInterop]
 public unsafe partial struct CameraManager {
     public static CameraManager* Instance() => (CameraManager*)Control.Instance();
 

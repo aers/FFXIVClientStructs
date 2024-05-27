@@ -11,11 +11,11 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 //   Client::Game::Character::CharacterData
 // ctor "E8 ?? ?? ?? ?? 48 8B C8 48 8B 43 08 45 33 C9"
 [StructLayout(LayoutKind.Explicit, Size = 0x1BD0)]
-[VTableAddress("48 8D 05 ?? ?? ?? ?? 48 8B D9 48 89 01 48 8D 05 ?? ?? ?? ?? 48 89 81 ?? ?? ?? ?? 48 81 C1 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 8B ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 8B ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 35", 3)]
+[GenerateInterop(isInherited: true)]
+[Inherits<GameObject>]
+[Inherits<CharacterData>(parentOffset: 0x1A0)]
+[VirtualTable("48 8D 05 ?? ?? ?? ?? 48 8B D9 48 89 01 48 8D 05 ?? ?? ?? ?? 48 89 81 ?? ?? ?? ?? 48 81 C1 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 8B ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 8B ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 35", 3)]
 public unsafe partial struct Character {
-    [FieldOffset(0x0)] public GameObject GameObject;
-    [FieldOffset(0x1A0)] public CharacterData CharacterData;
-
     [FieldOffset(0x630)] public EmoteController EmoteController;
     [FieldOffset(0x670)] public MountContainer Mount;
     [FieldOffset(0x6D8)] public CompanionContainer Companion;
@@ -38,7 +38,7 @@ public unsafe partial struct Character {
 
     [FieldOffset(0x1B30)] public Companion* CompanionObject; // minion
 
-    [FieldOffset(0x1B40)] public fixed byte FreeCompanyTag[6];
+    [FieldOffset(0x1B40)] [FixedSizeArray(isString: true)] internal FixedSizeArray6<byte> _freeCompanyTag;
 
     /// <summary>
     /// The current (hard) target for this Character. This will not be set for the LocalPlayer.
@@ -144,7 +144,8 @@ public unsafe partial struct Character {
     public partial bool IsMount();
 
     [StructLayout(LayoutKind.Explicit, Size = 0x170)]
-    public struct CastInfo {
+    [GenerateInterop]
+    public partial struct CastInfo {
         [FieldOffset(0x00)] public byte IsCasting;
         [FieldOffset(0x01)] public byte Interruptible;
         [FieldOffset(0x02)] public ActionType ActionType;
@@ -161,7 +162,7 @@ public unsafe partial struct Character {
         //[FieldOffset(0x4C)] public uint TotalActionCounter?;
         //[FieldOffset(0x50)] public uint OwnActionCounter?;
 
-        [FieldOffset(0x58)] public fixed ulong ActionRecipientsObjectIdArray[32];
+        [FieldOffset(0x58)] [FixedSizeArray] internal FixedSizeArray32<GameObjectId> _actionRecipientsObjectIdArray;
         [FieldOffset(0x158)] public int ActionRecipientsCount;
     }
 
@@ -172,6 +173,7 @@ public unsafe partial struct Character {
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0xF0)]
+    [GenerateInterop]
     public partial struct VfxContainer {
         [FieldOffset(0x08)] public BattleChara* OwnerObject;
 
@@ -187,6 +189,7 @@ public unsafe partial struct Character {
 
     //0x10 bytes are from the base class which is just vtable + gameobject ptr (same as Companion-/DrawDataContainer)
     [StructLayout(LayoutKind.Explicit, Size = 0x68)]
+    [GenerateInterop]
     public partial struct MountContainer {
         [FieldOffset(0x08)] public BattleChara* OwnerObject;
         [FieldOffset(0x10)] public Character* MountObject;
@@ -204,6 +207,7 @@ public unsafe partial struct Character {
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]
+    [GenerateInterop]
     public partial struct CompanionContainer {
         [FieldOffset(0x08)] public BattleChara* OwnerObject;
         [FieldOffset(0x10)] public Companion* CompanionObject;
@@ -215,6 +219,7 @@ public unsafe partial struct Character {
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x78)]
+    [GenerateInterop]
     public partial struct OrnamentContainer {
         [FieldOffset(0x08)] public BattleChara* OwnerObject;
         [FieldOffset(0x10)] public Ornament* OrnamentObject;

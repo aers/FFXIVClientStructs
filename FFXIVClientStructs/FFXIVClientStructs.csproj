@@ -27,12 +27,22 @@
     <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
     <CompilerGeneratedFilesOutputPath>Generated</CompilerGeneratedFilesOutputPath>
     -->
+    
+    <InteropGenerator_InteropNamespace>FFXIVClientStructs.Interop.Generated</InteropGenerator_InteropNamespace>
   </PropertyGroup>
+  
   <ItemGroup>
-    <PackageReference Include="JetBrains.Annotations" Version="2021.2.0" />
+    <CompilerVisibleProperty Include="InteropGenerator_InteropNamespace" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="JetBrains.Annotations" Version="2023.3.0" />
     <ProjectReference
       Include="..\FFXIVClientStructs.InteropSourceGenerators\FFXIVClientStructs.InteropSourceGenerators.csproj"
       OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\InteropGenerator\InteropGenerator.csproj"
+                      OutputItemType="Analyzer" ReferenceOutputAssembly="false"/>
+    <ProjectReference Include="..\InteropGenerator.Runtime\InteropGenerator.Runtime.csproj" />
   </ItemGroup>
 
   <ItemGroup>

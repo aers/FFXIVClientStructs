@@ -12,6 +12,7 @@ public unsafe struct EventSceneModule {
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x38)]
+[GenerateInterop]
 public unsafe partial struct EventSceneModuleTaskManager {
     [FieldOffset(0x00)] public StdVector<Pointer<EventSceneTaskInterface>> Tasks;
     [FieldOffset(0x18)] public StdVector<Pointer<EventSceneTaskInterface>> GroupPoseTasks;

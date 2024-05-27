@@ -3,7 +3,7 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 [Addon("CharacterClass")]
-[VTableAddress("48 8D 05 ?? ?? ?? ?? 48 89 03 48 8D 83 ?? ?? ?? ?? 48 89 90", 3)]
+[VirtualTable("48 8D 05 ?? ?? ?? ?? 48 89 03 48 8D 83 ?? ?? ?? ?? 48 89 90", 3)]
 [StructLayout(LayoutKind.Explicit, Size = 0x830)]
 public unsafe partial struct AddonCharacterClass {
     [FieldOffset(0)] public AtkUnitBase AtkUnitBase;

@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
@@ -5,15 +6,15 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 // Client::Game::Character::DrawDataContainer
 // ctor "E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 59 ?? 48 89 01 E8"
 [StructLayout(LayoutKind.Explicit, Size = 0x1A8)]
+[GenerateInterop]
 public unsafe partial struct DrawDataContainer {
     [FieldOffset(0x008)] public Character* Parent;
 
-    [FixedSizeArray<DrawObjectData>(3)]
-    [FieldOffset(0x010)] public fixed byte WeaponData[3 * DrawObjectData.Size];
+    [FieldOffset(0x010)] [FixedSizeArray] internal FixedSizeArray3<DrawObjectData> _weaponData; 
 
+    [UnscopedRef]
     public ref DrawObjectData Weapon(WeaponSlot which) {
-        fixed (byte* ptr = WeaponData)
-            return ref ((DrawObjectData*)ptr)[(int)which];
+        return ref WeaponData[(int) which];
     }
 
     [FieldOffset(0x010 + 3 * DrawObjectData.Size + 0x00)] public EquipmentModelId Head;
@@ -117,6 +118,7 @@ public unsafe partial struct DrawObjectData {
 }
 
 [StructLayout(LayoutKind.Explicit, Size = Count)]
+[GenerateInterop]
 public unsafe partial struct CustomizeData {
     private const int Count = 0x1A;
 

@@ -8,8 +8,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 //     Client::Game::Event::EventHandler
 // ctor "E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 07 0F B7 03"
 [StructLayout(LayoutKind.Explicit, Size = 0x4B8)]
+[GenerateInterop]
+[Inherits<LuaEventHandler>]
 public unsafe partial struct Director {
-    [FieldOffset(0x00)] public LuaEventHandler LuaEventHandler;
     [FieldOffset(0x330)] public EventHandlerInfo* EventHandlerInfo;
     [FieldOffset(0x338)] public uint ContentId;
     [FieldOffset(0x33C)] public byte ContentFlags; // 1 = Tourism (Explorer Mode)

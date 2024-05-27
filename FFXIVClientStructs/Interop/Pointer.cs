@@ -14,6 +14,6 @@ public readonly unsafe struct Pointer<T> where T : unmanaged {
     }
 
     public static implicit operator Pointer<T>(T* p) {
-        return new(p);
+        return new Pointer<T>(p);
     }
 }

@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 // Client::UI::Misc::RaptureGearsetModule
 //   Client::UI::Misc::UserFileManager::UserFileEvent
 // ctor "48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC 20 45 33 F6 48 89 51 10 48 8D 05 ?? ?? ?? ?? 4C 89 71 08 49 8B D8"
-[VTableAddress("48 8D 05 ?? ?? ?? ?? 48 89 5F 40 48 8D 77 48", 3)]
+[VirtualTable("48 8D 05 ?? ?? ?? ?? 48 89 5F 40 48 8D 77 48", 3)]
 [StructLayout(LayoutKind.Explicit, Size = 0xB670)]
 public unsafe partial struct RaptureGearsetModule {
     public static RaptureGearsetModule* Instance() => UIModule.Instance()->GetRaptureGearsetModule();

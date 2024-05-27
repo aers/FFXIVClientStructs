@@ -53,13 +53,13 @@ public sealed partial class InteropGenerator {
             // write parent accessor if its directly inherited
             if (structInfo.InheritedStructs.Any(inheritanceInfo => inheritanceInfo.InheritedTypeName == inheritedStruct.FullyQualifiedMetadataName)) {
                 writer.WriteLine($"""/// <summary>Inherited parent class accessor for <see cref="{inheritedStruct.FullyQualifiedMetadataName}">{inheritedStruct.Name}</see></summary>""");
-                writer.WriteLine($"[global::System.Runtime.InteropServices.FieldOffsetAttribute({offset})] public {inheritedStruct.FullyQualifiedMetadataName} {inheritedStruct.Name};");
+                writer.WriteLine($"[global::System.Runtime.InteropServices.FieldOffsetAttribute(0x{offset:X})] public {inheritedStruct.FullyQualifiedMetadataName} {inheritedStruct.Name};");
             }
             // write public fields
             foreach (FieldInfo field in inheritedStruct.ExtraInheritedStructInfo!.PublicFields) {
                 writer.WriteLine($"""/// <inheritdoc cref="{inheritedStruct.FullyQualifiedMetadataName}.{field.Name}" />""");
                 writer.WriteLine($"""/// <remarks>Field inherited from parent class <see cref="{inheritedStruct.FullyQualifiedMetadataName}">{inheritedStruct.Name}</see>.</remarks>""");
-                writer.WriteLine($"[global::System.Runtime.InteropServices.FieldOffsetAttribute({offset + field.Offset})] public {field.Type} {field.Name};");
+                writer.WriteLine($"[global::System.Runtime.InteropServices.FieldOffsetAttribute(0x{offset + field.Offset:X})] public {field.Type} {field.Name};");
             }
         }
 
@@ -162,13 +162,13 @@ public sealed partial class InteropGenerator {
                     continue;
                 foreach (VirtualFunctionInfo virtualFunctionInfo in inheritedStruct.VirtualFunctions) {
                     var functionPointerType = $"delegate* unmanaged[Stdcall] <{structInfo.Name}*, {virtualFunctionInfo.MethodInfo.GetParameterTypeString()}{virtualFunctionInfo.MethodInfo.ReturnType}>";
-                    writer.WriteLine($"[global::System.Runtime.InteropServices.FieldOffsetAttribute({virtualFunctionInfo.Index * 8})] public {functionPointerType} {virtualFunctionInfo.MethodInfo.Name};");
+                    writer.WriteLine($"[global::System.Runtime.InteropServices.FieldOffsetAttribute(0x{virtualFunctionInfo.Index * 8:X})] public {functionPointerType} {virtualFunctionInfo.MethodInfo.Name};");
                 }
             }
         }
         // if the only virtual functions were inherited we need to write the vtable accessor
         if (!structInfo.HasVirtualTable()) {
-            writer.WriteLine($"[global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public {structInfo.Name}VirtualTable* VirtualTable;");
+            writer.WriteLine($"[global::System.Runtime.InteropServices.FieldOffsetAttribute(0x0)] public {structInfo.Name}VirtualTable* VirtualTable;");
         }
     }
 
