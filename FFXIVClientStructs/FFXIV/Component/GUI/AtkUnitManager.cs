@@ -3,8 +3,9 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 // Component::GUI::AtkUnitManager
 //   Component::GUI::AtkEventListener
 // ctor "E8 ?? ?? ?? ?? C6 83 ?? ?? ?? ?? ?? 48 8D 8B ?? ?? ?? ?? 48 8D 05"
+[GenerateInterop(isInherited: true)]
 [StructLayout(LayoutKind.Explicit, Size = 0x9C90)]
-public struct AtkUnitManager {
+public partial struct AtkUnitManager {
     [FieldOffset(0x0)] public AtkEventListener AtkEventListener;
     [FieldOffset(0x30)] public AtkUnitList DepthLayerOneList;
     [FieldOffset(0x840)] public AtkUnitList DepthLayerTwoList;

@@ -7,9 +7,9 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 //     Component::GUI::AtkEventTarget
 // common CreateAtkNode function "E8 ?? ?? ?? ?? 48 8B 4C 24 ?? 48 8B 51 08"
 // type 8
+[GenerateInterop, Inherits<AtkResNode>]
 [StructLayout(LayoutKind.Explicit, Size = 0xC0)]
 public unsafe partial struct AtkCollisionNode : ICreatable {
-    [FieldOffset(0x0)] public AtkResNode AtkResNode;
     [FieldOffset(0xB0)] public ushort CollisionType;
     [FieldOffset(0xB2)] public ushort Uses;
     [FieldOffset(0xB8)] public AtkComponentBase* LinkedComponent;

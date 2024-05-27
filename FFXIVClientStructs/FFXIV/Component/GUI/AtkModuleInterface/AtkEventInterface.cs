@@ -1,4 +1,4 @@
-namespace FFXIVClientStructs.FFXIV.Component.GUI;
+namespace FFXIVClientStructs.FFXIV.Component.GUI.AtkModuleInterface;
 
 // Component::GUI::AtkModuleInterface::AtkEventInterface
 // no explicit constructor, just an event interface 

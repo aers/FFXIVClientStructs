@@ -1,7 +1,7 @@
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
+[GenerateInterop, Inherits<AtkUldComponentDataBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x14)]
-public unsafe struct AtkUldComponentDataDropDownList {
-    [FieldOffset(0x00)] public AtkUldComponentDataBase Base;
+public unsafe partial struct AtkUldComponentDataDropDownList {
     [FieldOffset(0x0C)] public fixed uint Nodes[2];
 }

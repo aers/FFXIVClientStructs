@@ -10,9 +10,9 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 // common CreateAtkNode function "E8 ?? ?? ?? ?? 48 8B 4C 24 ?? 48 8B 51 08"
 // type 3
 // simple text node
+[GenerateInterop, Inherits<AtkResNode>]
 [StructLayout(LayoutKind.Explicit, Size = 0x160)]
 public unsafe partial struct AtkTextNode : ICreatable {
-    [FieldOffset(0x0)] public AtkResNode AtkResNode;
     [FieldOffset(0xB0)] public uint TextId;
     [FieldOffset(0xB4)] public ByteColor TextColor;
     [FieldOffset(0xB8)] public ByteColor EdgeColor;
@@ -40,8 +40,7 @@ public unsafe partial struct AtkTextNode : ICreatable {
     [MemberFunction("40 53 48 83 EC 20 48 8D 05 ?? ?? ?? ?? 48 8B D9 48 89 01 33 C0 48 89 41 18 89 41 08 89 41 40 88 81 ?? ?? ?? ?? 48 89 41 10 48 89 41 20 48 89 41 28 48 89 41 30 48 89 41 38 89 81 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 8D 8B ?? ?? ?? ?? 48 89 03 E8 ?? ?? ?? ?? 48 8B C3 48 83 C4 20 5B C3 CC CC CC CC CC CC CC CC CC CC CC CC CC 48 8B C1")]
     public partial void Ctor();
 
-    [GenerateCStrOverloads]
-    [MemberFunction("E8 ?? ?? ?? ?? 8D 4E 32")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8D 4E 32"), GenerateStringOverloads]
     public partial void SetText(byte* str);
 
     [MemberFunction("E8 ?? ?? ?? ?? 80 38 00 74 27")]

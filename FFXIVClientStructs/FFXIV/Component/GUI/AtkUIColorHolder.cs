@@ -3,6 +3,7 @@ using FFXIVClientStructs.FFXIV.Component.Exd;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0xA0)]
 public unsafe partial struct AtkUIColorHolder {
     [FieldOffset(0x00)] public ExdModule* ExdModule;

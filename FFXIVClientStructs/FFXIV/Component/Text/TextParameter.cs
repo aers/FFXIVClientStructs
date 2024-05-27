@@ -3,6 +3,7 @@ using FFXIVClientStructs.FFXIV.Client.System.String;
 namespace FFXIVClientStructs.FFXIV.Component.Text;
 
 // TODO: might be Client::System::Data::Variant<> and Client::System::Data::VariantPtr<> for the Utf8String?
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x18)]
 public unsafe partial struct TextParameter {
     [FieldOffset(0), CExporterUnion("Union.Value")] public int IntValue;

@@ -14,6 +14,7 @@ namespace FFXIVClientStructs.FFXIV.Component.SteamApi;
 /// construction by Square Enix, and certain things will shift either as we learn more about how the API works
 /// or SE makes their own changes. If you're using this struct, you are signing up for breakage.
 /// </remarks>
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x4D0)]
 public unsafe partial struct SteamApi {
     // 0x0 to 0x400 appears to be blank space, though some references to AuthTicket and FriendsList do exist.

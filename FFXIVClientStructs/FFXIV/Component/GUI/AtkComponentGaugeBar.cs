@@ -5,10 +5,9 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 //     Component::GUI::AtkEventListener
 // common CreateAtkComponent function "E8 ?? ?? ?? ?? 48 8B F8 48 85 C0 0F 84 ?? ?? ?? ?? 49 8B 0F"
 // type 5
+[GenerateInterop, Inherits<AtkComponentBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x1A8)]
 public unsafe partial struct AtkComponentGaugeBar {
-    [FieldOffset(0x0)] public AtkComponentBase AtkComponentBase;
-
     /// <summary>
     /// Data describing a value transition. Informs the fields in <see cref="GaugeValue"/>. These fields aren't overwritten until the next transition of the same type occurs.
     /// </summary>
@@ -57,11 +56,8 @@ public unsafe partial struct AtkComponentGaugeBar {
     // There are fields and functions to track two values per gauge, but the vast majority of gauges only use the first value
     // The main (only?) use-case for the secondary gauge value is to display shields on Party List HP bars
 
-    [FixedSizeArray<GaugeValueTransitionData>(2)]
-    [FieldOffset(0xC0)] public fixed byte TransitionData[2 * GaugeValueTransitionData.Size];
-
-    [FixedSizeArray<GaugeValue>(2)]
-    [FieldOffset(0x100)] public fixed byte Values[2 * GaugeValue.Size];
+    [FieldOffset(0xC0), FixedSizeArray] internal FixedSizeArray2<GaugeValueTransitionData> _transitionData;
+    [FieldOffset(0x100), FixedSizeArray] internal FixedSizeArray2<GaugeValue> _values;
 
     [FieldOffset(0x120)] public AtkImageNode* BackdropImageNode;
     [FieldOffset(0x128)] public GaugeFill PrimaryFill;

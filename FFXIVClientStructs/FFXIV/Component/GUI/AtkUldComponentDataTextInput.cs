@@ -2,9 +2,9 @@ using FFXIVClientStructs.FFXIV.Client.Graphics;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
+[GenerateInterop, Inherits<AtkUldComponentDataInputBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x7C)]
-public unsafe struct AtkUldComponentDataTextInput {
-    [FieldOffset(0x00)] public AtkUldComponentDataInputBase InputBase;
+public unsafe partial struct AtkUldComponentDataTextInput {
     [FieldOffset(0x10)] public fixed uint Nodes[16];
     [FieldOffset(0x50)] public ByteColor CandidateColor;
     [FieldOffset(0x54)] public ByteColor IMEColor;

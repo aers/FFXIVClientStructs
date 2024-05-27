@@ -1,5 +1,6 @@
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x20)]
 public partial struct AtkCursor {
     [FieldOffset(0x00)] public bool ShouldAutoHide;

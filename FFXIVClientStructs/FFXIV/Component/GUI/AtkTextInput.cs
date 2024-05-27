@@ -6,12 +6,12 @@ using FFXIVClientStructs.FFXIV.Component.Completion;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0xCC0)]
 public unsafe partial struct AtkTextInput {
     [FieldOffset(0x10)] public CompletionModule* CompletionModule;
     [FieldOffset(0x18)] public TextService* TextService;
-    [FixedSizeArray<Pointer<RaptureAtkHistory>>(19)]
-    [FieldOffset(0x20)] public fixed byte RaptureAtkHistories[0x8 * 19];
+    [FieldOffset(0x20), FixedSizeArray] internal FixedSizeArray19<Pointer<RaptureAtkHistory>> _atkHistory;
     [FieldOffset(0xC0)] public RaptureTextModule* RaptureTextModule;
     [FieldOffset(0xD0)] public AtkFontCodeModule* AtkFontCodeModule;
     [FieldOffset(0x1C0)] public ClipBoard ClipboardData;

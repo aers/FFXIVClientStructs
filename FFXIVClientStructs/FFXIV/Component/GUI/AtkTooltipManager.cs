@@ -4,6 +4,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
 // Component::GUI::AtkToolTipManager
 //      Component::GUI::AtkEventListener
+[GenerateInterop, Inherits<AtkEventListener>]
 [StructLayout(LayoutKind.Explicit, Size = 0x150)]
 public unsafe partial struct AtkTooltipManager {
     public enum AtkTooltipType : byte {
@@ -13,6 +14,7 @@ public unsafe partial struct AtkTooltipManager {
         Action = 4
     }
 
+    [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public partial struct AtkTooltipArgs : ICreatable {
         [FieldOffset(0x0)] public byte* Text;
@@ -31,8 +33,7 @@ public unsafe partial struct AtkTooltipManager {
         [FieldOffset(0x18)] public ushort ParentId; // same as IDs in addons
         [FieldOffset(0x1A)] public AtkTooltipType Type;
     }
-
-    [FieldOffset(0x0)] public AtkEventListener AtkEventListener;
+    
     [FieldOffset(0x8)] public StdMap<Pointer<AtkResNode>, Pointer<AtkTooltipInfo>> TooltipMap;
     [FieldOffset(0x18)] public AtkStage* AtkStage;
 
@@ -52,7 +53,7 @@ public unsafe partial struct AtkTooltipManager {
         bool unk7 = false,
         bool unk8 = true);
 
-    [GenerateCStrOverloads] // cursed forced partial to make generator happy
+    [GenerateStringOverloads] // cursed forced partial to make generator happy
     public partial void ShowTooltip(ushort parentId, AtkResNode* targetNode, byte* tooltipString);
     public partial void ShowTooltip(ushort parentId, AtkResNode* targetNode, byte* tooltipString) {
         var args = stackalloc AtkTooltipArgs[1];

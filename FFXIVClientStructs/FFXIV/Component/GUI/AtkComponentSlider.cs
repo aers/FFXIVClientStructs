@@ -5,10 +5,9 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 //     Component::GUI::AtkEventListener
 // common CreateAtkComponent function "E8 ?? ?? ?? ?? 48 8B F8 48 85 C0 0F 84 ?? ?? ?? ?? 49 8B 0F"
 // type 6
+[GenerateInterop, Inherits<AtkComponentBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x100)]
 public partial struct AtkComponentSlider {
-    [FieldOffset(0x0)] public AtkComponentBase AtkComponentBase;
-
     [FieldOffset(0xE8)] public int MinValue;
     [FieldOffset(0xEC)] public int MaxValue;
     [FieldOffset(0xF0)] public int Value;

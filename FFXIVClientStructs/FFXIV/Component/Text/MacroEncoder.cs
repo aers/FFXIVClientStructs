@@ -1,8 +1,8 @@
-using System.Runtime.CompilerServices;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Component.Text;
 
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x310)]
 public unsafe partial struct MacroEncoder {
     [FieldOffset(0x08)] public StdMap<Utf8String, MacroCodeDescription> MacroCodeMap;
@@ -35,10 +35,10 @@ public unsafe partial struct MacroEncoder {
     [MemberFunction("E8 ?? ?? ?? ?? FF CF 89 7C 24 ?? EB")]
     public partial int EncodeParameter(Utf8String* output, Utf8String* param, byte type, int* outExtraParams);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8B F8 83 F8 ?? 0F 8C"), GenerateCStrOverloads]
+    [MemberFunction("E8 ?? ?? ?? ?? 8B F8 83 F8 ?? 0F 8C"), GenerateStringOverloads]
     public partial int EncodeMacro(Utf8String* output, byte* input, int* outNumCharsRead);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8B D8 83 F8 ?? 7C ?? 49 8D 8E"), GenerateCStrOverloads]
+    [MemberFunction("E8 ?? ?? ?? ?? 8B D8 83 F8 ?? 7C ?? 49 8D 8E"), GenerateStringOverloads]
     public partial void EncodeString(Utf8String* output, byte* input);
 
     [StructLayout(LayoutKind.Explicit, Size = 0x50)]

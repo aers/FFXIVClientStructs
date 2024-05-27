@@ -6,9 +6,9 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 //   Component::GUI::AtkEventListener
 // ctor "E8 ?? ?? ?? ?? 83 8B ?? ?? ?? ?? ?? 33 C0"
 // base class for all AddonXXX classes (visible UI objects)
+[GenerateInterop, Inherits<AtkEventListener>]
 [StructLayout(LayoutKind.Explicit, Size = 0x220)]
 public unsafe partial struct AtkUnitBase {
-    [FieldOffset(0x0)] public AtkEventListener AtkEventListener;
     [FieldOffset(0x8)] public fixed byte Name[32];
     [FieldOffset(0x28)] public AtkUldManager UldManager;
     [FieldOffset(0xC8)] public AtkResNode* RootNode;
@@ -215,8 +215,7 @@ public unsafe partial struct AtkUnitBase {
     [VirtualFunction(62)]
     public partial void OnMouseOut();
 
-    [MemberFunction("E9 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 8D 15")]
-    [GenerateCStrOverloads]
+    [MemberFunction("E9 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 8D 15"), GenerateStringOverloads]
     public partial bool LoadUldByName(byte* name, byte a3 = 0, uint a4 = 6);
 
     [MemberFunction("E8 ?? ?? ?? ?? 8D 53 24")]

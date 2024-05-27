@@ -5,9 +5,9 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 //     Component::GUI::AtkEventListener
 // common CreateAtkComponent function "E8 ?? ?? ?? ?? 48 8B F8 48 85 C0 0F 84 ?? ?? ?? ?? 49 8B 0F"
 // type 15
+[GenerateInterop, Inherits<AtkComponentBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x118)]
 public unsafe partial struct AtkComponentIcon {
-    [FieldOffset(0x00)] public AtkComponentBase AtkComponentBase;
     [FieldOffset(0xC0)] public long IconId;
     [FieldOffset(0xC8)] public AtkUldAsset* Texture;
     [FieldOffset(0xD0)] public AtkResNode* IconAdditionsContainer;

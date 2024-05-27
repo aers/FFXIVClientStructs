@@ -6,20 +6,13 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 //       Component::GUI::AtkEventListener
 // common CreateAtkComponent function "E8 ?? ?? ?? ?? 48 8B F8 48 85 C0 0F 84 ?? ?? ?? ?? 49 8B 0F"
 // type 12
+[GenerateInterop, Inherits<AtkComponentList>]
 [StructLayout(LayoutKind.Explicit, Size = 0x228)]
 public unsafe partial struct AtkComponentTreeList {
-    [FieldOffset(0x0)] public AtkComponentList AtkComponentList;
-
     [FieldOffset(0x1A8)] public StdVector<Pointer<AtkComponentTreeListItem>> Items;
 
     [FieldOffset(0x21C)] public bool LayoutRefreshPending;
-
-    [VirtualFunction(31)]
-    public partial void SelectItem(uint index, bool dispatchEvent);
-
-    [VirtualFunction(32)]
-    public partial void DeselectItem();
-
+    
     /// <remarks> Does not add it to the <see cref="Items"/> list automatically! </remarks>
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B D8 45 85 ED")]
     public partial AtkComponentTreeListItem* CreateItem();

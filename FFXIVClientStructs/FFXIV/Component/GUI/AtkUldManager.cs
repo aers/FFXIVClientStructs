@@ -4,6 +4,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
 // used in both addons (AtkUnitBase derived classes) and components (AtkComponentBase derived classes) to read data from uld files
 // also used to render UI components
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x90)]
 public unsafe partial struct AtkUldManager {
     [StructLayout(LayoutKind.Explicit, Size = 0x8)]

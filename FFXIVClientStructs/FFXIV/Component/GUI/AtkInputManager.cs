@@ -1,11 +1,11 @@
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x18A0)]
 public unsafe partial struct AtkInputManager {
     [FieldOffset(0)] public AtkTextInput* TextInput;
 
-    [FixedSizeArray<FocusEntry>(256)]
-    [FieldOffset(0x80)] public fixed byte FocusList[0x18 * 256];
+    [FieldOffset(0x80), FixedSizeArray] internal FixedSizeArray256<FocusEntry> _focusList;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public struct FocusEntry {

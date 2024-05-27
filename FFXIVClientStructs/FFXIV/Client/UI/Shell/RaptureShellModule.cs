@@ -7,11 +7,11 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Shell;
 
 // Client::UI::Shell::RaptureShellModule
 // ctor "E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 4C 8B CF"
+[GenerateInterop, Inherits<ShellCommandModule>]
 [StructLayout(LayoutKind.Explicit, Size = 0x1208)]
 public unsafe partial struct RaptureShellModule {
     public static RaptureShellModule* Instance() => UIModule.Instance()->GetRaptureShellModule();
 
-    [FieldOffset(0x00)] public ShellCommandModule ShellCommandModule;
     [FieldOffset(0x250)] public ShellCommandInterface ShellCommandInterface;
     [FieldOffset(0x258)] public UIModule* UiModule;
     [FieldOffset(0x260)] public ShellCommandInterface ShellCommandEmote;

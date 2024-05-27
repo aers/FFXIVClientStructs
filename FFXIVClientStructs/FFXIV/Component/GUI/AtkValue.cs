@@ -34,6 +34,7 @@ public enum ValueType {
     AllocatedVector = 0x29
 }
 
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
 public unsafe partial struct AtkValue : ICreatable, IDisposable {
     [FieldOffset(0x0)] public ValueType Type;
@@ -84,13 +85,11 @@ public unsafe partial struct AtkValue : ICreatable, IDisposable {
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 06 4C 8D 4C 24 ?? 44 8B C3")]
     public partial void ChangeType(ValueType type);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 41 03 ED")] // TODO: replace sig with unmanaged variant "E8 ?? ?? ?? ?? 83 0E 20" and remove ObsoleteAttribute
-    [GenerateCStrOverloads]
+    [MemberFunction("E8 ?? ?? ?? ?? 41 03 ED"), GenerateStringOverloads] // TODO: replace sig with unmanaged variant "E8 ?? ?? ?? ?? 83 0E 20" and remove ObsoleteAttribute
     [Obsolete("Use SetManagedString instead. This will be replaced by the unmanaged function in Dawntrail.")]
     public partial void SetString(byte* value);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 41 03 ED")]
-    [GenerateCStrOverloads]
+    [MemberFunction("E8 ?? ?? ?? ?? 41 03 ED"), GenerateStringOverloads]
     public partial void SetManagedString(byte* value);
 
     [MemberFunction("E8 ?? ?? ?? ?? 33 FF 89 7C 24")]
@@ -112,8 +111,7 @@ public unsafe partial struct AtkValue : ICreatable, IDisposable {
     [MemberFunction("E8 ?? ?? ?? ?? 48 8D 4C 24 ?? EB 64")]
     public partial bool SetVectorValue(uint index, AtkValue* value);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 41 83 C6 02 FF C7")]
-    [GenerateCStrOverloads]
+    [MemberFunction("E8 ?? ?? ?? ?? 41 83 C6 02 FF C7"), GenerateStringOverloads]
     public partial bool SetVectorString(uint index, byte* value);
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B 44 24 48 83 E0 0F")]

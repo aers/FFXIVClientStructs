@@ -62,6 +62,7 @@ public enum AtkEventType : byte {
     LinkMouseOut = 74,
 }
 
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x30)]
 public unsafe partial struct AtkEvent {
     [FieldOffset(0x0)] public AtkResNode* Node; // extra node param, unused a lot

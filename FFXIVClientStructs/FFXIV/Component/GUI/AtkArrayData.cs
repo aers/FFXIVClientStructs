@@ -1,7 +1,8 @@
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
+[GenerateInterop(isInherited: true)]
 [StructLayout(LayoutKind.Explicit, Size = 0x20)]
-public unsafe struct AtkArrayData {
+public unsafe partial struct AtkArrayData {
     [FieldOffset(0x8)] public int Size;
     [FieldOffset(0xC)] public fixed byte SubscribedAddons[16];
     [FieldOffset(0x1C)] public byte Unk1C;

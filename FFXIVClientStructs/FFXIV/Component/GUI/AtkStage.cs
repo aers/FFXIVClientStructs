@@ -7,6 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 // Component::GUI::AtkStage
 //   Component::GUI::AtkEventTarget
 // ctor "E8 ?? ?? ?? ?? 48 8B F8 48 89 BE ?? ?? ?? ?? 48 8B 43 10"
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x75E00)]
 public unsafe partial struct AtkStage {
     [FieldOffset(0x0)] public AtkEventTarget AtkEventTarget;
@@ -27,12 +28,10 @@ public unsafe partial struct AtkStage {
     [FieldOffset(0x168)] public AtkTooltipManager TooltipManager;
     [FieldOffset(0x2C0)] public AtkDialogue AtkDialogue;
     [FieldOffset(0x338)] public AtkCursor AtkCursor;
-    [FixedSizeArray<AtkEventDispatcher>(32)]
-    [FieldOffset(0x358)] public fixed byte AtkEventDispatcher[0x28 * 32];
+    [FieldOffset(0x358), FixedSizeArray] internal FixedSizeArray32<AtkEventDispatcher> _atkEventDispatcher;
     [FieldOffset(0x858)] public uint NextEventDispatcherIndex;
     //[FieldOffset(0x85C)] public bool DispatchEvents;
-    [FixedSizeArray<AtkEvent>(10000)]
-    [FieldOffset(0x878)] public fixed byte RegisteredEvents[0x30 * 10000];
+    [FieldOffset(0x878), FixedSizeArray] internal FixedSizeArray10000<AtkEvent> _registeredEvents;
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F BF D5")]
     public static partial AtkStage* GetSingleton();

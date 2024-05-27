@@ -1,9 +1,8 @@
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
+[GenerateInterop, Inherits<AtkEventListener>]
 [StructLayout(LayoutKind.Explicit, Size = 0xC8)]
-public unsafe struct AtkDragDropManager {
-    [FieldOffset(0x00)] public AtkEventListener AtkEventListener;
-
+public unsafe partial struct AtkDragDropManager {
     //[FieldOffset(0x08)] public uint UnkNum_1; //some sort of identifier?
     //[FieldOffset(0x0C)] public int UnkNum_2; //ActionId, ItemId, InventorySlotIndex, ListIndex  etc.
 

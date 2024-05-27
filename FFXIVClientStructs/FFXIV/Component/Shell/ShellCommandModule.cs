@@ -5,8 +5,9 @@ using FFXIVClientStructs.FFXIV.Component.Text;
 
 namespace FFXIVClientStructs.FFXIV.Component.Shell;
 
+[GenerateInterop(isInherited: true)]
 [StructLayout(LayoutKind.Explicit, Size = 0x250)]
-public unsafe struct ShellCommandModule {
+public unsafe partial struct ShellCommandModule {
     [FieldOffset(0x38)] public ExcelModuleInterface* ExcelModuleInterface;
     [FieldOffset(0x40)] public RaptureTextModule* RaptureTextModule;
     [FieldOffset(0x48)] public TextChecker TextChecker;

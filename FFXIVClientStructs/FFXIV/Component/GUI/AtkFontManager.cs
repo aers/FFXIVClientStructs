@@ -4,6 +4,7 @@ using FFXIVClientStructs.FFXIV.Component.Text;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x90)]
 public unsafe partial struct AtkFontManager {
     [FieldOffset(0x08)] public Font* Fonts; // 41 * 0xF0
@@ -15,14 +16,11 @@ public unsafe partial struct AtkFontManager {
     [FieldOffset(0x38)] public AtkFontAnalyzer* AtkFontAnalyzer;
     [FieldOffset(0x50)] public uint SetupState;
 
+    [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0xF0)]
     public unsafe partial struct Font {
-        [FixedSizeArray<Pointer<TextureResourceHandle>>(10)]
-        [FieldOffset(0)] public fixed byte TextureResourceHandles[0x8 * 10];
-
-        [FixedSizeArray<Pointer<Texture>>(10)]
-        [FieldOffset(0x58)] public fixed byte Textures[0x8 * 10];
-
+        [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray10<Pointer<TextureResourceHandle>> _textureResourceHandles;
+        [FieldOffset(0x58), FixedSizeArray] internal FixedSizeArray10<Pointer<Texture>> _textures;
         [FieldOffset(0xE8)] public ushort TextureCount;
     }
 

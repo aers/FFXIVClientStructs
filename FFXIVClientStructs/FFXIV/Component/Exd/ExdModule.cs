@@ -3,6 +3,7 @@ using FFXIVClientStructs.FFXIV.Component.Exd.Sheets;
 
 namespace FFXIVClientStructs.FFXIV.Component.Exd;
 
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x28)]
 public unsafe partial struct ExdModule {
     [FieldOffset(0x20)] public ExcelModule* ExcelModule;

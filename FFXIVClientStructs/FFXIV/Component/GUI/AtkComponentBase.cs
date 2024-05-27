@@ -5,9 +5,9 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 // common CreateAtkComponent function "E8 ?? ?? ?? ?? 48 8B F8 48 85 C0 0F 84 ?? ?? ?? ?? 49 8B 0F"
 // type 0
 // base class for UI components that are more complicated than a single node
+[GenerateInterop(isInherited: true), Inherits<AtkEventListener>]
 [StructLayout(LayoutKind.Explicit, Size = 0xC0)]
 public unsafe partial struct AtkComponentBase {
-    [FieldOffset(0x00)] public AtkEventListener AtkEventListener;
     [FieldOffset(0x08)] public AtkUldManager UldManager;
     [FieldOffset(0xA0)] public AtkResNode* AtkResNode;
     [FieldOffset(0xA8)] public AtkComponentNode* OwnerNode;

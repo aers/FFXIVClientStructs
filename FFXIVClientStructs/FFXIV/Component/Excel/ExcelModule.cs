@@ -1,15 +1,14 @@
 namespace FFXIVClientStructs.FFXIV.Component.Excel;
 
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x818)]
 public unsafe partial struct ExcelModule {
     [VirtualFunction(1)]
     public partial ExcelSheet* GetSheetByIndex(uint sheetIndex);
 
-    [VirtualFunction(2)]
-    [GenerateCStrOverloads]
+    [VirtualFunction(2), GenerateStringOverloads]
     public partial ExcelSheet* GetSheetByName(byte* sheetName);
 
-    [VirtualFunction(3)]
-    [GenerateCStrOverloads]
+    [VirtualFunction(3), GenerateStringOverloads]
     public partial void LoadSheet(byte* sheetName, byte a3 = 0, byte a4 = 0);
 }

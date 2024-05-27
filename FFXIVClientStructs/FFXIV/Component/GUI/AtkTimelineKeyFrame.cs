@@ -8,3 +8,11 @@ public struct AtkTimelineKeyFrame {
     [FieldOffset(0x0A)] public AtkTimelineInterpolation Interpolation;
     [FieldOffset(0x0C)] public AtkTimelineKeyValue Value;
 }
+
+public enum AtkTimelineInterpolation : byte {
+    // Some animated properties cannot be interpolated
+    None,
+    Linear,
+    // Speed coefficients dictate the interpolation, but only when smooth.
+    Smooth,
+}

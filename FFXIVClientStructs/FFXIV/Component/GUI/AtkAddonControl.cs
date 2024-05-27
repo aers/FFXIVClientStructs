@@ -3,10 +3,9 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 // Component::GUI::AtkAddonControl
 //   Component::GUI::AtkEventTarget
 //   Component::GUI::AtkEventListener
+[GenerateInterop, Inherits<AtkEventTarget>, Inherits<AtkEventListener>(8)]
 [StructLayout(LayoutKind.Explicit, Size = 0x60)]
-public unsafe struct AtkAddonControl {
-    [FieldOffset(0x00)] public AtkEventTarget EventTarget;
-    [FieldOffset(0x08)] public AtkEventListener EventListener;
+public unsafe partial struct AtkAddonControl {
     [FieldOffset(0x10)] public StdList<Pointer<ChildAddonInfo>> ChildAddons;
     [FieldOffset(0x20)] public AtkEventManager EventManager;
     [FieldOffset(0x28)] public AtkUnitBase* ParentAddon;

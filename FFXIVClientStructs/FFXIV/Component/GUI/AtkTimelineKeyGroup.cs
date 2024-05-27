@@ -6,3 +6,15 @@ public unsafe struct AtkTimelineKeyGroup {
     [FieldOffset(0x02)] public AtkTimelineKeyGroupType Type;
     [FieldOffset(0x08)] public AtkTimelineKeyFrame* KeyFrames;
 }
+
+public enum AtkTimelineKeyGroupType : ushort {
+    Float2,
+    Float,
+    Byte,
+    NodeTint,
+    UShort,
+    RGB,
+    Label,
+    Short,
+    None = 0xFFFF
+}

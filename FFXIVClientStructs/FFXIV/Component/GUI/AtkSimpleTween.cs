@@ -11,6 +11,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 /// <remarks>
 /// Transitions are calculated with a sinusoidal ease-out function and will run simultaneously.
 /// </remarks>
+[GenerateInterop, Inherits<AtkEventTarget>]
 [StructLayout(LayoutKind.Explicit, Size = 0x50)]
 public unsafe partial struct AtkSimpleTween : ICreatable {
     [FieldOffset(0x8)] public SimpleTweenState State;

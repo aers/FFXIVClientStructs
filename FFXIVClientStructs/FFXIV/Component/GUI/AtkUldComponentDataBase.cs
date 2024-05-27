@@ -1,7 +1,8 @@
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
+[GenerateInterop(isInherited: true)]
 [StructLayout(LayoutKind.Explicit, Size = 0x9)]
-public struct AtkUldComponentDataBase {
+public partial struct AtkUldComponentDataBase {
     [FieldOffset(0x0)] public byte Index;
     [FieldOffset(0x1)] public byte Up;
     [FieldOffset(0x2)] public byte Down;

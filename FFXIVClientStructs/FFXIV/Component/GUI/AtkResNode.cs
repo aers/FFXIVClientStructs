@@ -8,9 +8,9 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 //   Component::GUI::AtkEventTarget
 // ctor "E9 ?? ?? ?? ?? 33 C0 48 83 C4 20 5B C3 66 90"
 // base class for all UI "nodes" which represent elements of the UI
+[GenerateInterop(isInherited: true), Inherits<AtkEventTarget>]
 [StructLayout(LayoutKind.Explicit, Size = 0xB0)]
 public unsafe partial struct AtkResNode : ICreatable {
-    [FieldOffset(0x0)] public AtkEventTarget AtkEventTarget;
     [FieldOffset(0x8)] public uint NodeId;
     [FieldOffset(0x10)] public AtkTimeline* Timeline;
 

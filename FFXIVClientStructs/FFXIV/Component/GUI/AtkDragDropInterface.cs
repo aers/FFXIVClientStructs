@@ -1,5 +1,6 @@
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
+[GenerateInterop(isInherited: true)]
 [StructLayout(LayoutKind.Explicit, Size = 0x30)]
 public unsafe partial struct AtkDragDropInterface {
     [FieldOffset(0x08)] public AtkComponentNode* ComponentNode;

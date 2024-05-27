@@ -2,7 +2,6 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
 // Component::GUI::AtkFontAnalyzerCheckStringOnlyNumSymbol
 //   Component::GUI::AtkFontAnalyzerBase
+[GenerateInterop, Inherits<AtkFontAnalyzerBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x68)]
-public struct AtkFontAnalyzerCheckStringOnlyNumSymbol {
-    [FieldOffset(0x0)] public AtkFontAnalyzerBase AtkFontAnalyzerBase;
-}
+public partial struct AtkFontAnalyzerCheckStringOnlyNumSymbol;

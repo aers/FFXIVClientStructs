@@ -8,6 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
 // Component::GUI::AtkModule
 //   Component::GUI::AtkModuleInterface
+[GenerateInterop(isInherited: true)]
 [StructLayout(LayoutKind.Explicit, Size = 0x82A0)]
 public unsafe partial struct AtkModule {
     [FieldOffset(0x8)] public AtkExternalInterface AtkExternalInterface;
