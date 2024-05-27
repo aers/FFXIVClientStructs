@@ -23,7 +23,7 @@ public class VirtualFunctionAttributeTests {
                                   [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit)]
                                   public unsafe partial struct TestStructVirtualTable
                                   {
-                                      [global::System.Runtime.InteropServices.FieldOffsetAttribute(40)] public delegate* unmanaged[Stdcall] <TestStruct*, int, void*, int> TestFunction;
+                                      [global::System.Runtime.InteropServices.FieldOffsetAttribute(40)] public delegate* unmanaged <TestStruct*, int, void*, int> TestFunction;
                                   }
                                   [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public TestStructVirtualTable* VirtualTable;
                                   [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
@@ -55,7 +55,7 @@ public class VirtualFunctionAttributeTests {
                                   [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit)]
                                   public unsafe partial struct TestStructVirtualTable
                                   {
-                                      [global::System.Runtime.InteropServices.FieldOffsetAttribute(40)] public delegate* unmanaged[Stdcall] <TestStruct*, int, void*, void> TestFunction;
+                                      [global::System.Runtime.InteropServices.FieldOffsetAttribute(40)] public delegate* unmanaged <TestStruct*, int, void*, void> TestFunction;
                                   }
                                   [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public TestStructVirtualTable* VirtualTable;
                                   [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
@@ -91,7 +91,7 @@ public class VirtualFunctionAttributeTests {
                                   [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit)]
                                   public unsafe partial struct TestStructVirtualTable
                                   {
-                                      [global::System.Runtime.InteropServices.FieldOffsetAttribute(40)] public delegate* unmanaged[Stdcall] <TestStruct*, int, void*, int> TestFunction;
+                                      [global::System.Runtime.InteropServices.FieldOffsetAttribute(40)] public delegate* unmanaged <TestStruct*, int, void*, int> TestFunction;
                                   }
                                   [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public TestStructVirtualTable* VirtualTable;
                                   [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
@@ -128,7 +128,7 @@ public class VirtualFunctionAttributeTests {
                                       [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit)]
                                       public unsafe partial struct InnerStructVirtualTable
                                       {
-                                          [global::System.Runtime.InteropServices.FieldOffsetAttribute(40)] public delegate* unmanaged[Stdcall] <InnerStruct*, int, void*, int> TestFunction;
+                                          [global::System.Runtime.InteropServices.FieldOffsetAttribute(40)] public delegate* unmanaged <InnerStruct*, int, void*, int> TestFunction;
                                       }
                                       [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public InnerStructVirtualTable* VirtualTable;
                                       [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
@@ -161,7 +161,7 @@ public class VirtualFunctionAttributeTests {
                                   [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit)]
                                   public unsafe partial struct TestStructVirtualTable
                                   {
-                                      [global::System.Runtime.InteropServices.FieldOffsetAttribute(40)] public delegate* unmanaged[Stdcall] <TestStruct*, out int, void*, int> TestFunction;
+                                      [global::System.Runtime.InteropServices.FieldOffsetAttribute(40)] public delegate* unmanaged <TestStruct*, out int, void*, int> TestFunction;
                                   }
                                   [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public TestStructVirtualTable* VirtualTable;
                                   [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
@@ -196,8 +196,8 @@ public class VirtualFunctionAttributeTests {
                                   [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit)]
                                   public unsafe partial struct TestStructVirtualTable
                                   {
-                                      [global::System.Runtime.InteropServices.FieldOffsetAttribute(40)] public delegate* unmanaged[Stdcall] <TestStruct*, int, void*, int> TestFunction;
-                                      [global::System.Runtime.InteropServices.FieldOffsetAttribute(136)] public delegate* unmanaged[Stdcall] <TestStruct*, void> TestFunction2;
+                                      [global::System.Runtime.InteropServices.FieldOffsetAttribute(40)] public delegate* unmanaged <TestStruct*, int, void*, int> TestFunction;
+                                      [global::System.Runtime.InteropServices.FieldOffsetAttribute(136)] public delegate* unmanaged <TestStruct*, void> TestFunction2;
                                   }
                                   [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public TestStructVirtualTable* VirtualTable;
                                   [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]

@@ -205,7 +205,7 @@ public class GenerateStringOverloadsAttributeTests {
                                   }
                                   public unsafe static class MemberFunctionPointers
                                   {
-                                      public static delegate* unmanaged[Stdcall] <TestStruct*, int, byte*, int> TestFunction => (delegate* unmanaged[Stdcall] <TestStruct*, int, byte*, int>) TestStruct.Addresses.TestFunction.Value;
+                                      public static delegate* unmanaged <TestStruct*, int, byte*, int> TestFunction => (delegate* unmanaged <TestStruct*, int, byte*, int>) TestStruct.Addresses.TestFunction.Value;
                                   }
                                   public partial int TestFunction(int argOne, byte* stringArg)
                                   {

@@ -122,7 +122,7 @@ public sealed partial class InteropGenerator {
         writer.WriteLine($"public unsafe partial struct {structInfo.Name}VirtualTable");
         using (writer.WriteBlock()) {
             foreach (VirtualFunctionInfo vfi in structInfo.VirtualFunctions) {
-                var functionPointerType = $"delegate* unmanaged[Stdcall] <{structInfo.Name}*, {vfi.MethodInfo.GetParameterTypeStringWithTrailingType()}{vfi.MethodInfo.ReturnType}>";
+                var functionPointerType = $"delegate* unmanaged <{structInfo.Name}*, {vfi.MethodInfo.GetParameterTypeStringWithTrailingType()}{vfi.MethodInfo.ReturnType}>";
                 writer.WriteLine($"[global::System.Runtime.InteropServices.FieldOffsetAttribute({vfi.Index * 8})] public {functionPointerType} {vfi.MethodInfo.Name};");
             }
         }
@@ -139,7 +139,7 @@ public sealed partial class InteropGenerator {
             foreach (MemberFunctionInfo mfi in structInfo.MemberFunctions) {
                 // add struct type as first argument if method is not static
                 string thisPtrType = mfi.MethodInfo.IsStatic ? string.Empty : $"{structInfo.Name}*, ";
-                var functionPointerType = $"delegate* unmanaged[Stdcall] <{thisPtrType}{mfi.MethodInfo.GetParameterTypeStringWithTrailingType()}{mfi.MethodInfo.ReturnType}>";
+                var functionPointerType = $"delegate* unmanaged <{thisPtrType}{mfi.MethodInfo.GetParameterTypeStringWithTrailingType()}{mfi.MethodInfo.ReturnType}>";
                 writer.WriteLine($"public static {functionPointerType} {mfi.MethodInfo.Name} => ({functionPointerType}) {structInfo.Name}.Addresses.{mfi.MethodInfo.Name}.Value;");
             }
         }

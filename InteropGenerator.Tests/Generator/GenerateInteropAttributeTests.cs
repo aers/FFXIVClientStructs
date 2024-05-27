@@ -36,7 +36,7 @@ public class GeneralInteropAttributeTests {
                                   [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit)]
                                   public unsafe partial struct TestStructVirtualTable
                                   {
-                                      [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public delegate* unmanaged[Stdcall] <TestStruct*, void> TestFunction;
+                                      [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public delegate* unmanaged <TestStruct*, void> TestFunction;
                                   }
                                   [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public TestStructVirtualTable* VirtualTable;
                                   [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
@@ -85,7 +85,7 @@ public class GeneralInteropAttributeTests {
                                   [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit)]
                                   public unsafe partial struct TestStructVirtualTable
                                   {
-                                      [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public delegate* unmanaged[Stdcall] <TestStruct*, void> TestFunction;
+                                      [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public delegate* unmanaged <TestStruct*, void> TestFunction;
                                   }
                                   [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public TestStructVirtualTable* VirtualTable;
                                   [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
@@ -122,7 +122,7 @@ public class GeneralInteropAttributeTests {
                                       [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit)]
                                       public unsafe partial struct InnerStructVirtualTable
                                       {
-                                          [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public delegate* unmanaged[Stdcall] <InnerStruct*, void> TestFunction;
+                                          [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public delegate* unmanaged <InnerStruct*, void> TestFunction;
                                       }
                                       [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public InnerStructVirtualTable* VirtualTable;
                                       [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]

@@ -251,7 +251,7 @@ public class InheritsAttributeTests {
                                                    }
                                                    public unsafe static class MemberFunctionPointers
                                                    {
-                                                       public static delegate* unmanaged[Stdcall] <BaseStruct*, int, void*, int> TestFunction => (delegate* unmanaged[Stdcall] <BaseStruct*, int, void*, int>) BaseStruct.Addresses.TestFunction.Value;
+                                                       public static delegate* unmanaged <BaseStruct*, int, void*, int> TestFunction => (delegate* unmanaged <BaseStruct*, int, void*, int>) BaseStruct.Addresses.TestFunction.Value;
                                                    }
                                                    public partial int TestFunction(int argOne, void* argTwo)
                                                    {
@@ -320,7 +320,7 @@ public class InheritsAttributeTests {
                                                    }
                                                    public unsafe static class MemberFunctionPointers
                                                    {
-                                                       public static delegate* unmanaged[Stdcall] <BaseStruct*, int, void*, int> TestFunction => (delegate* unmanaged[Stdcall] <BaseStruct*, int, void*, int>) BaseStruct.Addresses.TestFunction.Value;
+                                                       public static delegate* unmanaged <BaseStruct*, int, void*, int> TestFunction => (delegate* unmanaged <BaseStruct*, int, void*, int>) BaseStruct.Addresses.TestFunction.Value;
                                                    }
                                                    public partial int TestFunction(int argOne, void* argTwo)
                                                    {
@@ -393,7 +393,7 @@ public class InheritsAttributeTests {
                                                    [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit)]
                                                    public unsafe partial struct BaseStructVirtualTable
                                                    {
-                                                       [global::System.Runtime.InteropServices.FieldOffsetAttribute(40)] public delegate* unmanaged[Stdcall] <BaseStruct*, int, void*, int> TestFunction;
+                                                       [global::System.Runtime.InteropServices.FieldOffsetAttribute(40)] public delegate* unmanaged <BaseStruct*, int, void*, int> TestFunction;
                                                    }
                                                    [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public BaseStructVirtualTable* VirtualTable;
                                                    [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
@@ -410,7 +410,7 @@ public class InheritsAttributeTests {
                                                                [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit)]
                                                                public unsafe partial struct ChildStructVirtualTable
                                                                {
-                                                                   [global::System.Runtime.InteropServices.FieldOffsetAttribute(40)] public delegate* unmanaged[Stdcall] <ChildStruct*, int, void*, int> TestFunction;
+                                                                   [global::System.Runtime.InteropServices.FieldOffsetAttribute(40)] public delegate* unmanaged <ChildStruct*, int, void*, int> TestFunction;
                                                                }
                                                                [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public ChildStructVirtualTable* VirtualTable;
                                                                /// <inheritdoc cref="BaseStruct.TestFunction(int, void*)" />
@@ -454,7 +454,7 @@ public class InheritsAttributeTests {
                                                    [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit)]
                                                    public unsafe partial struct BaseStructVirtualTable
                                                    {
-                                                       [global::System.Runtime.InteropServices.FieldOffsetAttribute(40)] public delegate* unmanaged[Stdcall] <BaseStruct*, int, void*, int> TestFunction;
+                                                       [global::System.Runtime.InteropServices.FieldOffsetAttribute(40)] public delegate* unmanaged <BaseStruct*, int, void*, int> TestFunction;
                                                    }
                                                    [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public BaseStructVirtualTable* VirtualTable;
                                                    [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
@@ -469,7 +469,7 @@ public class InheritsAttributeTests {
                                                     [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit)]
                                                     public unsafe partial struct ChildStructVirtualTable
                                                     {
-                                                        [global::System.Runtime.InteropServices.FieldOffsetAttribute(48)] public delegate* unmanaged[Stdcall] <ChildStruct*, int> TestFunction2;
+                                                        [global::System.Runtime.InteropServices.FieldOffsetAttribute(48)] public delegate* unmanaged <ChildStruct*, int> TestFunction2;
                                                     }
                                                     [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public ChildStructVirtualTable* VirtualTable;
                                                     [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
@@ -485,7 +485,7 @@ public class InheritsAttributeTests {
                                                                [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public BaseStruct BaseStruct;
                                                                public unsafe partial struct ChildStructVirtualTable
                                                                {
-                                                                   [global::System.Runtime.InteropServices.FieldOffsetAttribute(40)] public delegate* unmanaged[Stdcall] <ChildStruct*, int, void*, int> TestFunction;
+                                                                   [global::System.Runtime.InteropServices.FieldOffsetAttribute(40)] public delegate* unmanaged <ChildStruct*, int, void*, int> TestFunction;
                                                                }
                                                                /// <inheritdoc cref="BaseStruct.TestFunction(int, void*)" />
                                                                /// <remarks>Method inherited from parent class <see cref="BaseStruct">BaseStruct</see>.</remarks>
@@ -533,7 +533,7 @@ public class InheritsAttributeTests {
                                            [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit)]
                                            public unsafe partial struct BaseStruct2VirtualTable
                                            {
-                                               [global::System.Runtime.InteropServices.FieldOffsetAttribute(40)] public delegate* unmanaged[Stdcall] <BaseStruct2*, int, void*, int> TestFunction;
+                                               [global::System.Runtime.InteropServices.FieldOffsetAttribute(40)] public delegate* unmanaged <BaseStruct2*, int, void*, int> TestFunction;
                                            }
                                            [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public BaseStruct2VirtualTable* VirtualTable;
                                            [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
@@ -1108,12 +1108,12 @@ public class InheritsAttributeTests {
                                      [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit)]
                                      public unsafe partial struct BaseA_AVirtualTable
                                      {
-                                         [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public delegate* unmanaged[Stdcall] <BaseA_A*, int*, void> BaseA_A_vf0;
+                                         [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public delegate* unmanaged <BaseA_A*, int*, void> BaseA_A_vf0;
                                      }
                                      [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public BaseA_AVirtualTable* VirtualTable;
                                      public unsafe static class MemberFunctionPointers
                                      {
-                                         public static delegate* unmanaged[Stdcall] <BaseA_A*, int> BaseA_mf => (delegate* unmanaged[Stdcall] <BaseA_A*, int>) BaseA_A.Addresses.BaseA_mf.Value;
+                                         public static delegate* unmanaged <BaseA_A*, int> BaseA_mf => (delegate* unmanaged <BaseA_A*, int>) BaseA_A.Addresses.BaseA_mf.Value;
                                      }
                                      public partial int BaseA_mf()
                                      {
@@ -1137,7 +1137,7 @@ public class InheritsAttributeTests {
                                        [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit)]
                                        public unsafe partial struct BaseA_BVirtualTable
                                        {
-                                           [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public delegate* unmanaged[Stdcall] <BaseA_B*, byte*, void> BaseA_B_vf0;
+                                           [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public delegate* unmanaged <BaseA_B*, byte*, void> BaseA_B_vf0;
                                        }
                                        [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public BaseA_BVirtualTable* VirtualTable;
                                        [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
@@ -1174,7 +1174,7 @@ public class InheritsAttributeTests {
                                        [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit)]
                                        public unsafe partial struct MiddleAVirtualTable
                                        {
-                                           [global::System.Runtime.InteropServices.FieldOffsetAttribute(32)] public delegate* unmanaged[Stdcall] <MiddleA*, int*, void> MiddleA_vf4;
+                                           [global::System.Runtime.InteropServices.FieldOffsetAttribute(32)] public delegate* unmanaged <MiddleA*, int*, void> MiddleA_vf4;
                                        }
                                        [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public MiddleAVirtualTable* VirtualTable;
                                        public static MiddleAVirtualTable* StaticVirtualTablePointer => (MiddleAVirtualTable*)Addresses.StaticVirtualTable.Value;
@@ -1193,7 +1193,7 @@ public class InheritsAttributeTests {
                                      }
                                      public unsafe static class MemberFunctionPointers
                                      {
-                                         public static delegate* unmanaged[Stdcall] <BaseB*, int> BaseB_mf => (delegate* unmanaged[Stdcall] <BaseB*, int>) BaseB.Addresses.BaseB_mf.Value;
+                                         public static delegate* unmanaged <BaseB*, int> BaseB_mf => (delegate* unmanaged <BaseB*, int>) BaseB.Addresses.BaseB_mf.Value;
                                      }
                                      public partial int BaseB_mf()
                                      {
@@ -1217,7 +1217,7 @@ public class InheritsAttributeTests {
                                      [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit)]
                                      public unsafe partial struct BaseCVirtualTable
                                      {
-                                         [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public delegate* unmanaged[Stdcall] <BaseC*, int*, void> BaseC_vf0;
+                                         [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public delegate* unmanaged <BaseC*, int*, void> BaseC_vf0;
                                      }
                                      [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public BaseCVirtualTable* VirtualTable;
                                      [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
@@ -1247,7 +1247,7 @@ public class InheritsAttributeTests {
                                        }
                                        public unsafe static class MemberFunctionPointers
                                        {
-                                           public static delegate* unmanaged[Stdcall] <MiddleC*, int> MiddleC_mf => (delegate* unmanaged[Stdcall] <MiddleC*, int>) MiddleC.Addresses.MiddleC_mf.Value;
+                                           public static delegate* unmanaged <MiddleC*, int> MiddleC_mf => (delegate* unmanaged <MiddleC*, int>) MiddleC.Addresses.MiddleC_mf.Value;
                                        }
                                        public partial int MiddleC_mf()
                                        {
@@ -1267,7 +1267,7 @@ public class InheritsAttributeTests {
                                      [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit)]
                                      public unsafe partial struct ChildVirtualTable
                                      {
-                                         [global::System.Runtime.InteropServices.FieldOffsetAttribute(80)] public delegate* unmanaged[Stdcall] <Child*, int*, void> Child_vf10;
+                                         [global::System.Runtime.InteropServices.FieldOffsetAttribute(80)] public delegate* unmanaged <Child*, int*, void> Child_vf10;
                                      }
                                      [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public ChildVirtualTable* VirtualTable;
                                      [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
@@ -1292,7 +1292,7 @@ public class InheritsAttributeTests {
                                                 public int BaseA_mf() => BaseA_A.BaseA_mf();
                                                 public unsafe partial struct MiddleAVirtualTable
                                                 {
-                                                    [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public delegate* unmanaged[Stdcall] <MiddleA*, int*, void> BaseA_A_vf0;
+                                                    [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public delegate* unmanaged <MiddleA*, int*, void> BaseA_A_vf0;
                                                 }
                                                 /// <inheritdoc cref="BaseA_A.BaseA_A_vf0(int*)" />
                                                 /// <remarks>Method inherited from parent class <see cref="BaseA_A">BaseA_A</see>.</remarks>
@@ -1338,7 +1338,7 @@ public class InheritsAttributeTests {
                                                 [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit)]
                                                 public unsafe partial struct MiddleCVirtualTable
                                                 {
-                                                    [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public delegate* unmanaged[Stdcall] <MiddleC*, int*, void> BaseC_vf0;
+                                                    [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public delegate* unmanaged <MiddleC*, int*, void> BaseC_vf0;
                                                 }
                                                 [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public MiddleCVirtualTable* VirtualTable;
                                                 /// <inheritdoc cref="BaseC.BaseC_vf0(int*)" />
@@ -1387,8 +1387,8 @@ public class InheritsAttributeTests {
                                                 public int MiddleC_mf() => MiddleC.MiddleC_mf();
                                                 public unsafe partial struct ChildVirtualTable
                                                 {
-                                                    [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public delegate* unmanaged[Stdcall] <Child*, int*, void> BaseA_A_vf0;
-                                                    [global::System.Runtime.InteropServices.FieldOffsetAttribute(32)] public delegate* unmanaged[Stdcall] <Child*, int*, void> MiddleA_vf4;
+                                                    [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public delegate* unmanaged <Child*, int*, void> BaseA_A_vf0;
+                                                    [global::System.Runtime.InteropServices.FieldOffsetAttribute(32)] public delegate* unmanaged <Child*, int*, void> MiddleA_vf4;
                                                 }
                                                 /// <inheritdoc cref="BaseA_A.BaseA_A_vf0(int*)" />
                                                 /// <remarks>Method inherited from parent class <see cref="BaseA_A">BaseA_A</see>.</remarks>

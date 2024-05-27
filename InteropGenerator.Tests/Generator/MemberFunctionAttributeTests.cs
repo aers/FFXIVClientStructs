@@ -26,7 +26,7 @@ public class MemberFunctionAttributeTests {
                                   }
                                   public unsafe static class MemberFunctionPointers
                                   {
-                                      public static delegate* unmanaged[Stdcall] <TestStruct*, int, void*, int> TestFunction => (delegate* unmanaged[Stdcall] <TestStruct*, int, void*, int>) TestStruct.Addresses.TestFunction.Value;
+                                      public static delegate* unmanaged <TestStruct*, int, void*, int> TestFunction => (delegate* unmanaged <TestStruct*, int, void*, int>) TestStruct.Addresses.TestFunction.Value;
                                   }
                                   public partial int TestFunction(int argOne, void* argTwo)
                                   {
@@ -66,7 +66,7 @@ public class MemberFunctionAttributeTests {
                                   }
                                   public unsafe static class MemberFunctionPointers
                                   {
-                                      public static delegate* unmanaged[Stdcall] <TestStruct*, int, void*, int> TestFunction => (delegate* unmanaged[Stdcall] <TestStruct*, int, void*, int>) TestStruct.Addresses.TestFunction.Value;
+                                      public static delegate* unmanaged <TestStruct*, int, void*, int> TestFunction => (delegate* unmanaged <TestStruct*, int, void*, int>) TestStruct.Addresses.TestFunction.Value;
                                   }
                                   public partial int TestFunction(int argOne, void* argTwo)
                                   {
@@ -106,7 +106,7 @@ public class MemberFunctionAttributeTests {
                                   }
                                   public unsafe static class MemberFunctionPointers
                                   {
-                                      public static delegate* unmanaged[Stdcall] <TestStruct*, int, void*, int> TestFunction => (delegate* unmanaged[Stdcall] <TestStruct*, int, void*, int>) TestStruct.Addresses.TestFunction.Value;
+                                      public static delegate* unmanaged <TestStruct*, int, void*, int> TestFunction => (delegate* unmanaged <TestStruct*, int, void*, int>) TestStruct.Addresses.TestFunction.Value;
                                   }
                                   public partial int TestFunction(int argOne, void* argTwo)
                                   {
@@ -146,7 +146,7 @@ public class MemberFunctionAttributeTests {
                                   }
                                   public unsafe static class MemberFunctionPointers
                                   {
-                                      public static delegate* unmanaged[Stdcall] <TestStruct*, int, void*, int> TestFunction => (delegate* unmanaged[Stdcall] <TestStruct*, int, void*, int>) TestStruct.Addresses.TestFunction.Value;
+                                      public static delegate* unmanaged <TestStruct*, int, void*, int> TestFunction => (delegate* unmanaged <TestStruct*, int, void*, int>) TestStruct.Addresses.TestFunction.Value;
                                   }
                                   public partial int TestFunction(int argOne, void* argTwo)
                                   {
@@ -186,7 +186,7 @@ public class MemberFunctionAttributeTests {
                                   }
                                   public unsafe static class MemberFunctionPointers
                                   {
-                                      public static delegate* unmanaged[Stdcall] <TestStruct*, int, void*, int> TestFunction => (delegate* unmanaged[Stdcall] <TestStruct*, int, void*, int>) TestStruct.Addresses.TestFunction.Value;
+                                      public static delegate* unmanaged <TestStruct*, int, void*, int> TestFunction => (delegate* unmanaged <TestStruct*, int, void*, int>) TestStruct.Addresses.TestFunction.Value;
                                   }
                                   public partial int TestFunction(int argOne, void* argTwo)
                                   {
@@ -226,7 +226,7 @@ public class MemberFunctionAttributeTests {
                                   }
                                   public unsafe static class MemberFunctionPointers
                                   {
-                                      public static delegate* unmanaged[Stdcall] <TestStruct*, int, void*, void> TestFunction => (delegate* unmanaged[Stdcall] <TestStruct*, int, void*, void>) TestStruct.Addresses.TestFunction.Value;
+                                      public static delegate* unmanaged <TestStruct*, int, void*, void> TestFunction => (delegate* unmanaged <TestStruct*, int, void*, void>) TestStruct.Addresses.TestFunction.Value;
                                   }
                                   public partial void TestFunction(int argOne, void* argTwo)
                                   {
@@ -266,7 +266,7 @@ public class MemberFunctionAttributeTests {
                                   }
                                   public unsafe static class MemberFunctionPointers
                                   {
-                                      public static delegate* unmanaged[Stdcall] <int, void*, int> TestFunction => (delegate* unmanaged[Stdcall] <int, void*, int>) TestStruct.Addresses.TestFunction.Value;
+                                      public static delegate* unmanaged <int, void*, int> TestFunction => (delegate* unmanaged <int, void*, int>) TestStruct.Addresses.TestFunction.Value;
                                   }
                                   public static partial int TestFunction(int argOne, void* argTwo)
                                   {
@@ -310,8 +310,8 @@ public class MemberFunctionAttributeTests {
                                   }
                                   public unsafe static class MemberFunctionPointers
                                   {
-                                      public static delegate* unmanaged[Stdcall] <TestStruct*, int, void*, int> TestFunction => (delegate* unmanaged[Stdcall] <TestStruct*, int, void*, int>) TestStruct.Addresses.TestFunction.Value;
-                                      public static delegate* unmanaged[Stdcall] <TestStruct*, int, void*, int> TestFunction2 => (delegate* unmanaged[Stdcall] <TestStruct*, int, void*, int>) TestStruct.Addresses.TestFunction2.Value;
+                                      public static delegate* unmanaged <TestStruct*, int, void*, int> TestFunction => (delegate* unmanaged <TestStruct*, int, void*, int>) TestStruct.Addresses.TestFunction.Value;
+                                      public static delegate* unmanaged <TestStruct*, int, void*, int> TestFunction2 => (delegate* unmanaged <TestStruct*, int, void*, int>) TestStruct.Addresses.TestFunction2.Value;
                                   }
                                   public partial int TestFunction(int argOne, void* argTwo)
                                   {
@@ -359,7 +359,7 @@ public class MemberFunctionAttributeTests {
                                   }
                                   public unsafe static class MemberFunctionPointers
                                   {
-                                      public static delegate* unmanaged[Stdcall] <TestStruct*, ref int, out int, int> TestFunction => (delegate* unmanaged[Stdcall] <TestStruct*, ref int, out int, int>) TestStruct.Addresses.TestFunction.Value;
+                                      public static delegate* unmanaged <TestStruct*, ref int, out int, int> TestFunction => (delegate* unmanaged <TestStruct*, ref int, out int, int>) TestStruct.Addresses.TestFunction.Value;
                                   }
                                   public partial int TestFunction(ref int argOne, out int argTwo)
                                   {
@@ -403,7 +403,7 @@ public class MemberFunctionAttributeTests {
                                   }
                                   public unsafe static class MemberFunctionPointers
                                   {
-                                      public static delegate* unmanaged[Stdcall] <TestStruct*, int, void*, int> TestFunction => (delegate* unmanaged[Stdcall] <TestStruct*, int, void*, int>) TestStruct.Addresses.TestFunction.Value;
+                                      public static delegate* unmanaged <TestStruct*, int, void*, int> TestFunction => (delegate* unmanaged <TestStruct*, int, void*, int>) TestStruct.Addresses.TestFunction.Value;
                                   }
                                   public partial int TestFunction(int argOne, void* argTwo)
                                   {
@@ -448,7 +448,7 @@ public class MemberFunctionAttributeTests {
                                       }
                                       public unsafe static class MemberFunctionPointers
                                       {
-                                          public static delegate* unmanaged[Stdcall] <InnerStruct*, int, void*, int> TestFunction => (delegate* unmanaged[Stdcall] <InnerStruct*, int, void*, int>) InnerStruct.Addresses.TestFunction.Value;
+                                          public static delegate* unmanaged <InnerStruct*, int, void*, int> TestFunction => (delegate* unmanaged <InnerStruct*, int, void*, int>) InnerStruct.Addresses.TestFunction.Value;
                                       }
                                       public partial int TestFunction(int argOne, void* argTwo)
                                       {
