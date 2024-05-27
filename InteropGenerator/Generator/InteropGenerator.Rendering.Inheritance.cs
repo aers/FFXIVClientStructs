@@ -48,12 +48,20 @@ public sealed partial class InteropGenerator {
 
         token.ThrowIfCancellationRequested();
 
+        HashSet<string> alreadyWrittenParents = new();
+        
         // inherited fields
         foreach ((StructInfo inheritedStruct, _, int offset) in resolvedInheritanceOrder) {
             // write parent accessor if its directly inherited
-            if (structInfo.InheritedStructs.Any(inheritanceInfo => inheritanceInfo.InheritedTypeName == inheritedStruct.FullyQualifiedMetadataName)) {
+
+            if (structInfo.InheritedStructs.Any(inheritanceInfo => inheritanceInfo.InheritedTypeName == inheritedStruct.FullyQualifiedMetadataName)
+                && !alreadyWrittenParents.Contains(inheritedStruct.FullyQualifiedMetadataName)) {
+                string fieldName = inheritedStruct.Name;
+                if (inheritedStruct.Name == structInfo.Name)
+                    fieldName = inheritedStruct.Name + "Base";
                 writer.WriteLine($"""/// <summary>Inherited parent class accessor for <see cref="{inheritedStruct.FullyQualifiedMetadataName}">{inheritedStruct.Name}</see></summary>""");
-                writer.WriteLine($"[global::System.Runtime.InteropServices.FieldOffsetAttribute({offset})] public {inheritedStruct.FullyQualifiedMetadataName} {inheritedStruct.Name};");
+                writer.WriteLine($"[global::System.Runtime.InteropServices.FieldOffsetAttribute({offset})] public {inheritedStruct.FullyQualifiedMetadataName} {fieldName};");
+                alreadyWrittenParents.Add(inheritedStruct.FullyQualifiedMetadataName);
             }
             // write public fields
             foreach (FieldInfo field in inheritedStruct.ExtraInheritedStructInfo!.PublicFields) {
