@@ -6,10 +6,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //   Component::GUI::AtkUnitBase
 //     Component::GUI::AtkEventListener
 [Addon("Repair")]
+[GenerateInterop, Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0xF7E8)]
-public unsafe struct AddonRepair {
-    [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
-
+public unsafe partial struct AddonRepair {
     [FieldOffset(0x228)] public AtkTextNode* UnusedText1; // Top right corner
     [FieldOffset(0x230)] public AtkTextNode* JobLevel;
     [FieldOffset(0x238)] public AtkImageNode* JobIcon;

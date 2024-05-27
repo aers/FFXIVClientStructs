@@ -6,10 +6,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //   Component::GUI::AtkUnitBase
 //     Component::GUI::AtkEventListener
 [Addon("_Exp")]
+[GenerateInterop, Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x290)]
-public struct AddonExp {
-    [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
-
+public partial struct AddonExp {
     [FieldOffset(0x270)] public byte ClassJob;
 
     [FieldOffset(0x278)] public uint CurrentExp;

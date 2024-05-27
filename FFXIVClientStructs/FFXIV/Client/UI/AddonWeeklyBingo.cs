@@ -6,9 +6,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //   Component::GUI::AtkUnitBase
 //     Component::GUI::AtkEventListener
 [Addon("WeeklyBingo")]
+[GenerateInterop, Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x23C8)]
-public struct AddonWeeklyBingo {
-    [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
+public partial struct AddonWeeklyBingo {
     [FieldOffset(0x220)] public DutySlotList DutySlotList;
 
     [FieldOffset(0x18E8)] public StringThing StringThing;

@@ -3,10 +3,9 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 [Addon("MiragePrismPrismBox")]
+[GenerateInterop, Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0xC28)]
-public unsafe struct AddonMiragePrismPrismBox {
-    [FieldOffset(0)] public AtkUnitBase AtkUnitBase;
-
+public unsafe partial struct AddonMiragePrismPrismBox {
     [FieldOffset(0xA00)] public AtkComponentButton* PrevButton;
     [FieldOffset(0xA08)] public AtkComponentButton* NextButton;
 

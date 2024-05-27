@@ -4,9 +4,9 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 [Addon("Social")]
+[GenerateInterop, Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x320)]
 public unsafe partial struct AddonSocial {
-    [FieldOffset(0x00)] public AtkUnitBase AtkUnitBase;
     [FieldOffset(0x230)] public AtkAddonControl AddonControl;
     [FieldOffset(0x290)] public AtkComponentRadioButton* PartyMembersRadioButton;
     [FieldOffset(0x298)] public AtkComponentRadioButton* FriendListRadioButton;

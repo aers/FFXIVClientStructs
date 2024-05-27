@@ -6,9 +6,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //   Component::GUI::AtkUnitBase
 //     Component::GUI::AtkEventListener
 [Addon("SelectYesNo")]
+[GenerateInterop, Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x2D0)]
-public unsafe struct AddonSelectYesno {
-    [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
+public unsafe partial struct AddonSelectYesno {
     [FieldOffset(0x220)] public AtkTextNode* PromptText;
     [FieldOffset(0x228)] public AtkComponentButton* YesButton;
     [FieldOffset(0x230)] public AtkComponentButton* NoButton;

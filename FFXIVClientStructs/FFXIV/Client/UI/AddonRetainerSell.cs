@@ -6,10 +6,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //   Component::GUI::AtkUnitBase
 //     Component::GUI::AtkEventListener
 [Addon("RetainerSell")]
+[GenerateInterop, Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x278)]
-public unsafe struct AddonRetainerSell {
-    [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
-
+public unsafe partial struct AddonRetainerSell {
     [FieldOffset(0x220)] public AtkComponentButton* Confirm;
     [FieldOffset(0x228)] public AtkComponentButton* Cancel;
     [FieldOffset(0x230)] public AtkComponentButton* ComparePrices;

@@ -3,10 +3,9 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 [Addon("GrandCompanySupplyList")]
+[GenerateInterop, Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x760)]
-public unsafe struct AddonGrandCompanySupplyList {
-    [FieldOffset(0x00)] public AtkUnitBase AtkUnitBase;
-
+public unsafe partial struct AddonGrandCompanySupplyList {
     [FieldOffset(0x280)] public AtkComponentList* SupplyProvisioningList;
     [FieldOffset(0x288)] public AtkComponentList* ExpertDeliveryList;
 

@@ -7,9 +7,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //   Component::GUI::AtkUnitBase
 //     Component::GUI::AtkEventListener
 [Addon("GuildLeve")]
+[GenerateInterop, Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x1900)]
-public unsafe struct AddonGuildLeve {
-    [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
+public unsafe partial struct AddonGuildLeve {
     [FieldOffset(0x228)] public AtkComponentTreeList* AtkComponentTreeList228;
     [FieldOffset(0x230)] public AtkComponentRadioButton* FieldcraftButton;
     [FieldOffset(0x238)] public AtkComponentRadioButton* TradecraftButton;

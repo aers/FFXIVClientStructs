@@ -3,10 +3,9 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 [Addon("FriendList")]
+[GenerateInterop, Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x380)]
 public unsafe partial struct AddonFriendList {
-    [FieldOffset(0x00)] public AtkUnitBase AtkUnitBase;
-
     [FieldOffset(0x2F0)] public AtkComponentList* FriendList;
     [FieldOffset(0x2F8)] public AtkComponentButton* AddButton;
     [FieldOffset(0x300)] public AtkComponentCheckBox* MoveOnlineToTopCheckBox;

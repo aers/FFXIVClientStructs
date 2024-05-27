@@ -6,9 +6,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //   Component::GUI::AtkUnitBase
 //     Component::GUI::AtkEventListener
 [Addon("SelectOk")]
+[GenerateInterop, Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x2A8)]
-public unsafe struct AddonSelectOk {
-    [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
+public unsafe partial struct AddonSelectOk {
     [FieldOffset(0x220)] public AtkTextNode* PromptText;
     [FieldOffset(0x228)] public AtkComponentButton* OkButton;
 }

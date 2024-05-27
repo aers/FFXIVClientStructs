@@ -3,9 +3,9 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 [Addon("_PartyList")]
+[GenerateInterop, Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x13E0)]
-public unsafe struct AddonPartyList {
-    [FieldOffset(0x000)] public AtkUnitBase AtkUnitBase;
+public unsafe partial struct AddonPartyList {
     [FieldOffset(0x220)] public PartyMembers PartyMember; // 8 PartyListMember
     [FieldOffset(0x9E0)] public TrustMembers TrustMember; // 7 PartyListMember
     [FieldOffset(0x10A8)] public PartyListMemberStruct Chocobo;

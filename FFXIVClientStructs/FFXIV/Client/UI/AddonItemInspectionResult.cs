@@ -5,7 +5,6 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 // Client::UI::AddonItemInspectionResult
 //   Component::GUI::AtkUnitBase
 //     Component::GUI::AtkEventListener
+[GenerateInterop, Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x2F8)]
-public struct AddonItemInspectionResult {
-    [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
-}
+public partial struct AddonItemInspectionResult;

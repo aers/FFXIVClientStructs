@@ -4,10 +4,9 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 [Addon("_DTR")]
+[GenerateInterop, Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x368)]
 public unsafe partial struct AddonDtr {
-    [FieldOffset(0x00)] public AtkUnitBase AtkUnitBase;
-
     [FieldOffset(0x220)] public Utf8String TimeModeTooltip; // Example: "Eorzea Time/Local Time"
     [FieldOffset(0x288)] public Utf8String NetworkInfoTooltip;
     [FieldOffset(0x2F8)] public AtkTextNode* TimeText;

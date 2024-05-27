@@ -6,9 +6,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //   Component::GUI::AtkUnitBase
 //     Component::GUI::AtkEventListener
 [Addon("LotteryDaily")]
+[GenerateInterop, Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x408)]
-public unsafe struct AddonLotteryDaily {
-    [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
+public unsafe partial struct AddonLotteryDaily {
     [FieldOffset(0x220)] public GameTileBoard GameBoard;
     [FieldOffset(0x268)] public LaneTileSelector LaneSelector;
     [FieldOffset(0x2A8)] public AtkComponentBase* UnkCompBase2A8;

@@ -3,10 +3,9 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 [Addon("GcArmyCapture")]
+[GenerateInterop, Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x268)]
-public unsafe struct AddonGcArmyCapture {
-    [FieldOffset(0x00)] public AtkUnitBase AtkUnitBase;
-
+public unsafe partial struct AddonGcArmyCapture {
     [FieldOffset(0x220)] public AtkComponentButton* DeployButton;
     [FieldOffset(0x228)] public AtkComponentList* MissionList;
     [FieldOffset(0x230)] public AtkComponentList* ChosenRecruitList;
