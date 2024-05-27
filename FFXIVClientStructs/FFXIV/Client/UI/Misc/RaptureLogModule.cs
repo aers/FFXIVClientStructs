@@ -9,11 +9,11 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 // Client::UI::Misc::RaptureLogModule
 //   Component::Log::LogModule
 // ctor "E8 ?? ?? ?? ?? 4C 8D A7 ?? ?? ?? ?? 49 8B CC E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ??"
+[GenerateInterop, Inherits<LogModule>]
 [StructLayout(LayoutKind.Explicit, Size = 0x3488)]
 public unsafe partial struct RaptureLogModule {
     public static RaptureLogModule* Instance() => Framework.Instance()->GetUiModule()->GetRaptureLogModule();
-
-    [FieldOffset(0x00)] public LogModule LogModule;
+    
     /// <remarks> Always <c>0x1F</c>, used as column terminator in <see cref="LogModule.LogMessageData"/>. </remarks>
     [FieldOffset(0x80)] internal Utf8String LogMessageDataTerminator;
     [FieldOffset(0xE8)] public UIModule* UIModule;
@@ -21,13 +21,11 @@ public unsafe partial struct RaptureLogModule {
     [FieldOffset(0xF8)] public RaptureTextModule* RaptureTextModule;
 
     [FieldOffset(0x100)] public AtkFontCodeModule* AtkFontCodeModule;
-    [FixedSizeArray<Utf8String>(10)]
-    [FieldOffset(0x108)] public fixed byte TempParseMessage[0x68 * 10];
+    [FieldOffset(0x108), FixedSizeArray] internal FixedSizeArray10<Utf8String> _tempParseMessage;
 
     [FieldOffset(0x520)] public ExcelSheet* LogKindSheet;
 
-    [FixedSizeArray<RaptureLogModuleTab>(5)]
-    [FieldOffset(0x530)] public fixed byte ChatTabs[0x928 * 5];
+    [FieldOffset(0x530), FixedSizeArray] internal FixedSizeArray5<RaptureLogModuleTab> _chatTabs;
 
     [FieldOffset(0x33D8)] public ExcelSheet* LogMessageSheet;
     /// <remarks> Set to <c>true</c> to reload the tab. </remarks>
@@ -60,8 +58,7 @@ public unsafe partial struct RaptureLogModule {
     [MemberFunction("E8 ?? ?? ?? ?? EB 68 48 8B 07")]
     public partial void ShowLogMessageString(uint logMessageId, Utf8String* value);
 
-    [MemberFunction("E8 ?? ?? ?? ?? FE 44 24 50")]
-    [GenerateCStrOverloads]
+    [MemberFunction("E8 ?? ?? ?? ?? FE 44 24 50"), GenerateStringOverloads]
     public partial void PrintString(byte* str);
 
     [MemberFunction("4C 8B 81 ?? ?? ?? ?? 4D 85 C0 74 17")]

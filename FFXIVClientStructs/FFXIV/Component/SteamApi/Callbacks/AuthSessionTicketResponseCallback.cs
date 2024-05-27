@@ -2,8 +2,4 @@ namespace FFXIVClientStructs.FFXIV.Component.SteamApi.Callbacks;
 
 [GenerateInterop, Inherits<SteamCallbackBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
-public unsafe partial struct AuthSessionTicketResponseCallback {
-    [VirtualFunction(1)]
-    public partial void Run(SteamTypes.AuthSessionTicketResponse* outCallbackParams);
-}
-
+public unsafe partial struct AuthSessionTicketResponseCallback;

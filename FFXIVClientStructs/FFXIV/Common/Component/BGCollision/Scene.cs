@@ -2,6 +2,7 @@ using System.Numerics;
 
 namespace FFXIVClientStructs.FFXIV.Common.Component.BGCollision;
 
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x38)]
 public unsafe partial struct SceneManager {
     [FieldOffset(0x08)] public void* ResourceManager;
@@ -19,9 +20,9 @@ public unsafe partial struct SceneManager {
     public NodeEnumerator<SceneWrapper> Scenes => new(&FirstScene->Node);
 }
 
+[GenerateInterop, Inherits<Node>]
 [StructLayout(LayoutKind.Explicit, Size = 0x30)]
 public unsafe partial struct SceneWrapper {
-    [FieldOffset(0x00)] public Node Node; // base class
     [FieldOffset(0x20)] public SceneManager* Manager;
     [FieldOffset(0x28)] public Scene* Scene;
 
@@ -90,9 +91,10 @@ public unsafe partial struct SceneWrapper {
     //[VirtualFunction(21)]
     //public partial bool Visit3(void* visitor, Vector3* pos);
 
+    [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x84)]
     public unsafe partial struct ColliderList {
-        [FieldOffset(0x00), FixedSizeArray<Pointer<Collider>>(16)] public fixed byte Colliders[16 * 8];
+        [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray16<Pointer<Collider>> _colliders;
         [FieldOffset(0x80)] public int Count;
     }
 }

@@ -44,6 +44,7 @@ public unsafe struct ConfigValue {
     [FieldOffset(0x0)] public Utf8String* String;
 }
 
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x38)]
 public unsafe partial struct ConfigEntry {
     [FieldOffset(0x0)] public ConfigProperties Properties;

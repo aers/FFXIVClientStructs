@@ -2,6 +2,7 @@ using FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 
 namespace FFXIVClientStructs.FFXIV.Common.Component.BGCollision;
 
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x88)]
 public unsafe partial struct Resource {
     //[FieldOffset(0x08)] public void* VTable8; // unknown base class

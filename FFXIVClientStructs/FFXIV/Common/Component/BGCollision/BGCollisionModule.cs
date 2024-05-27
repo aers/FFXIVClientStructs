@@ -28,6 +28,7 @@ namespace FFXIVClientStructs.FFXIV.Common.Component.BGCollision;
 /// Bit 1 set: ignore 'horizontal' collisions (ones where normal.Y is > threshold, i.e. angle to vertical axis is smaller than some threshold)
 /// Bit 2 set: perform material filtering
 /// </summary>
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0xA0)]
 public unsafe partial struct BGCollisionModule {
     //[FieldOffset(0x00)] public byte u0; - this is set to an argument passed to Initialize function by Framework setup, and it's always 0; this is passed to some scene object constructors, but ultimately doesn't seem to be used - some debug switch?

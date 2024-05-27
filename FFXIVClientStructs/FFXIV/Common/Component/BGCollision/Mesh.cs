@@ -4,23 +4,15 @@ using FFXIVClientStructs.FFXIV.Common.Component.BGCollision.Math;
 
 namespace FFXIVClientStructs.FFXIV.Common.Component.BGCollision;
 
+[GenerateInterop(isInherited: true)]
 [StructLayout(LayoutKind.Explicit, Size = 8)]
-public unsafe partial struct IMesh {
-    [VirtualFunction(0)]
-    public partial void Dtor(byte freeFlags);
+public unsafe partial struct IMesh;
 
-    // vf1: clone
-}
-
+[GenerateInterop, Inherits<Object>, Inherits<IMesh>(8)]
 [StructLayout(LayoutKind.Explicit, Size = 0x18)]
 public unsafe partial struct Mesh {
-    [FieldOffset(0x00)] public Object Object; // base class
-    [FieldOffset(0x08)] public IMesh IMesh; // base class
     [FieldOffset(0x10)] public ColliderMesh* OwnerCollider;
-
-    [VirtualFunction(0)]
-    public partial void Dtor(byte freeFlags);
-
+    
     //[VirtualFunction(1)]
     //public partial nint vf1(ColliderMesh* collider, Matrix4x4* worldTransform, void* visitor);
 

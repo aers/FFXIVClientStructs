@@ -2,6 +2,7 @@ namespace FFXIVClientStructs.FFXIV.Common.Lua;
 
 // Common::Lua::LuaState
 //ctor "48 8D 05 ?? ?? ?? ?? C6 41 10 01 48 89 01 33 C0"
+[GenerateInterop(isInherited: true)]
 [StructLayout(LayoutKind.Explicit, Size = 0x28)]
 public unsafe struct LuaState {
     [FieldOffset(0x08)] public lua_State* State;
@@ -33,6 +34,7 @@ public unsafe struct LuaState {
     }
 }
 
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0xB0)]
 public unsafe partial struct lua_State {
     [MemberFunction("E8 ?? ?? ?? ?? FF C7 03 F8")]
@@ -53,12 +55,10 @@ public unsafe partial struct lua_State {
     [MemberFunction("E8 ?? ?? ?? ?? 4D 8B 06 41 8B D7")]
     public partial void lua_pushcclosure(delegate*<lua_State*, int> fn, int n);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8B 56 ?? 85 D2 0F 88")]
-    [GenerateCStrOverloads]
+    [MemberFunction("E8 ?? ?? ?? ?? 8B 56 ?? 85 D2 0F 88"), GenerateStringOverloads]
     public partial void lua_setfield(int idx, byte* k);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4F ?? 48 85 ED")]
-    [GenerateCStrOverloads]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4F ?? 48 85 ED"), GenerateStringOverloads]
     public partial void lua_getfield(int idx, byte* k);
 
     [MemberFunction("E8 ?? ?? ?? ?? 33 C9 40 F6 C6")]
@@ -67,16 +67,14 @@ public unsafe partial struct lua_State {
     [MemberFunction("E8 ?? ?? ?? ?? 8B D8 85 C0 74 6F")]
     public partial int lua_pcall(int nargs, int nresults, int errfunc);
 
-    [MemberFunction("48 83 EC 38 48 89 54 24 ?? 48 8D 15")]
-    [GenerateCStrOverloads]
+    [MemberFunction("48 83 EC 38 48 89 54 24 ?? 48 8D 15"), GenerateStringOverloads]
     public partial int luaL_loadbuffer(byte* buff, long size, byte* name);
 
     public int luaL_loadbuffer(string buff, long size) {
         return luaL_loadbuffer(buff, size, "?");
     }
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8B D8 85 C0 75 ?? 40 84 ED")]
-    [GenerateCStrOverloads]
+    [MemberFunction("E8 ?? ?? ?? ?? 8B D8 85 C0 75 ?? 40 84 ED"), GenerateStringOverloads]
     public partial int luaL_loadfile(byte* filename);
 
     [MemberFunction("E8 ?? ?? ?? ?? 3B C3 74 0D")]
