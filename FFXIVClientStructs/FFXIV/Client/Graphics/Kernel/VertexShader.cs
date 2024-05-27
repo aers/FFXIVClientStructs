@@ -29,6 +29,6 @@ public unsafe struct VertexShader {
     [FieldOffset(0x68)] public byte* DxbcBlob;
     [FieldOffset(0x70)] public void* DirectXObject;
 
-    public readonly Span<byte> DxbcBlobSpan
+    public Span<byte> DxbcBlobSpan
         => new(DxbcBlob, unchecked((int)Shader.DxbcBlobSize));
 }

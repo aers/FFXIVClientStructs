@@ -57,13 +57,13 @@ public unsafe partial struct AgentLobby {
     [FieldOffset(0x1DA4)] public bool HasShownCharacterNotFound; // "The character you last logged out with in this play environment could not be found on the current data center."
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 41 8B D6")]
-    public readonly partial void UpdateLobbyUIStage();
+    public partial void UpdateLobbyUIStage();
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 07 C6 86 ?? ?? ?? ?? ?? 48 8B 8C 24")]
-    public readonly partial void UpdateCharaSelectDisplay(sbyte index, bool a2);
+    public partial void UpdateCharaSelectDisplay(sbyte index, bool a2);
 
     [MemberFunction("E8 ?? ?? ?? ?? EB 4A 84 C0")]
-    public readonly partial void OpenLoginWaitDialog(int position);
+    public partial void OpenLoginWaitDialog(int position);
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x9C0)]

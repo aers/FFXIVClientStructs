@@ -54,7 +54,7 @@ public unsafe partial struct AtkUnitBase {
     }
 
     /// <summary> <c>true</c> when Setup is complete. </summary>
-    public readonly bool IsReady => (UnkFlags189 & 0x01) != 0;
+    public bool IsReady => (UnkFlags189 & 0x01) != 0;
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F BF CB 0F 28 F8")]
     public partial float GetScale();

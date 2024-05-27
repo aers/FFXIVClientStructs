@@ -1,6 +1,6 @@
 using System.Diagnostics;
 using System.Reflection.PortableExecutable;
-using FFXIVClientStructs.Interop;
+using InteropGenerator.Runtime;
 
 var gamePath = args.Length > 0 ? args[0] : @"F:\xiv-dev\ew-exes\ffxiv_dx11_2023.01.11.0000.0000.exe";
 
@@ -42,9 +42,5 @@ unsafe {
         var unresolvedSigs = Resolver.GetInstance.Addresses.Where(sig => sig.Value == 0);
         foreach (var sig in unresolvedSigs)
             Console.WriteLine($"[FAIL] {sig.Name}: {sig.String}");
-
-        Console.WriteLine("\n=== Static Addresses ===");
-        foreach (var address in Resolver.GetInstance.Addresses.Where(address => address is StaticAddress))
-            Console.WriteLine($"{address.Name} - {address.String} - {address.Value - new UIntPtr(bytes):X16}");
     }
 }

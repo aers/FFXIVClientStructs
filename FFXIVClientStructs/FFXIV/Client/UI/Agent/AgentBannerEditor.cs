@@ -11,7 +11,7 @@ public unsafe partial struct AgentBannerEditor {
     [FieldOffset(0x28)] public AgentBannerEditorState* EditorState;
 
     [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 30 48 83 3D ?? ?? ?? ?? ?? 8B FA 48 8B D9 0F 84")]
-    public readonly partial void OpenForGearset(int gearsetId);
+    public partial void OpenForGearset(int gearsetId);
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x2D8)]
@@ -93,17 +93,17 @@ public unsafe partial struct AgentBannerEditorState {
     [FieldOffset(0x2D4)] public bool HasDataChanged;
 
     [MemberFunction("E8 ?? ?? ?? ?? 33 D2 48 8B CE E8 ?? ?? ?? ?? 48 8B 8E")]
-    public readonly partial void Save();
+    public partial void Save();
 
     [MemberFunction("48 89 5C 24 ?? 48 89 7C 24 ?? 80 79 2C 00")]
-    public readonly partial int GetPresetIndex(ushort backgroundIndex, ushort frameIndex, ushort accentIndex);
+    public partial int GetPresetIndex(ushort backgroundIndex, ushort frameIndex, ushort accentIndex);
 
     [MemberFunction("E8 ?? ?? ?? ?? 44 0A E8 45 8B C7")]
-    public readonly partial void SetFrame(int frameId);
+    public partial void SetFrame(int frameId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 4C 8B 64 24 ?? 44 0A E8")]
-    public readonly partial void SetAccent(int accentId);
+    public partial void SetAccent(int accentId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 32 C0 48 8B 4D 37")]
-    public readonly partial void SetHasChanged(bool hasDataChanged);
+    public partial void SetHasChanged(bool hasDataChanged);
 }

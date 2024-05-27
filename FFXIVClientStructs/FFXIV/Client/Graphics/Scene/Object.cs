@@ -13,7 +13,7 @@ public unsafe partial struct Object {
     [FieldOffset(0x28)] public Object* NextSiblingObject;
     [FieldOffset(0x30)] public Object* ChildObject; // for humans this is a weapon
 
-    public readonly SiblingEnumerator ChildObjects
+    public SiblingEnumerator ChildObjects
         => new(ChildObject);
 
     [FieldOffset(0x50)] public Vector3 Position;
@@ -24,10 +24,10 @@ public unsafe partial struct Object {
     public partial ObjectType GetObjectType();
 
     public struct SiblingEnumerator {
-        private readonly Object* _first;
+        private Object* _first;
         private Object* _current;
 
-        public readonly Object* Current
+        public Object* Current
             => _current;
 
         public SiblingEnumerator(Object* first) {
@@ -47,7 +47,7 @@ public unsafe partial struct Object {
             return _current != null;
         }
 
-        public readonly SiblingEnumerator GetEnumerator()
+        public SiblingEnumerator GetEnumerator()
             => this;
     }
 }

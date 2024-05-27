@@ -23,22 +23,22 @@ public unsafe partial struct MaterialResourceHandle {
         public ushort Flags;
 
         public bool IsDX11 {
-            readonly get => (Flags & 0x8000) != 0;
+            get => (Flags & 0x8000) != 0;
             set => Flags = value ? (ushort)(Flags | 0x8000) : (ushort)(Flags & ~0x8000);
         }
 
         public ushort Index1 {
-            readonly get => (ushort)(Flags & 0x001F);
+            get => (ushort)(Flags & 0x001F);
             set => Flags = (ushort)((Flags & ~0x001F) | (value & 0x001F));
         }
 
         public ushort Index2 {
-            readonly get => (ushort)((Flags & 0x03E0) >> 5);
+            get => (ushort)((Flags & 0x03E0) >> 5);
             set => Flags = (ushort)((Flags & ~0x03E0) | ((value & 0x001F) << 5));
         }
 
         public ushort Index3 {
-            readonly get => (ushort)((Flags & 0x7C00) >> 10);
+            get => (ushort)((Flags & 0x7C00) >> 10);
             set => Flags = (ushort)((Flags & ~0x7C00) | ((value & 0x001F) << 10));
         }
     }
@@ -74,7 +74,7 @@ public unsafe partial struct MaterialResourceHandle {
         [FieldOffset(0x1E)] public Half TileScaleVV;
 
         public ushort TileIndex {
-            readonly get => (ushort)((float)TileIndexW * 64.0f);
+            get => (ushort)((float)TileIndexW * 64.0f);
             set => TileIndexW = (Half)((value + 0.5f) / 64.0f);
         }
 
@@ -84,7 +84,7 @@ public unsafe partial struct MaterialResourceHandle {
             }
         }
 
-        public readonly ReadOnlySpan<Half> AsReadOnlySpan() {
+        public ReadOnlySpan<Half> AsReadOnlySpan() {
             fixed (Half* ptr = &DiffuseRed) {
                 return new(ptr, 16);
             }
@@ -97,32 +97,32 @@ public unsafe partial struct MaterialResourceHandle {
         public ushort RawData;
 
         public ushort Template {
-            readonly get => (ushort)(RawData >> 5);
+            get => (ushort)(RawData >> 5);
             set => RawData = (ushort)((RawData & 0x1F) | (value << 5));
         }
 
         public bool Diffuse {
-            readonly get => (RawData & 0x01) != 0;
+            get => (RawData & 0x01) != 0;
             set => RawData = (ushort)(value ? RawData | 0x01 : RawData & 0xFFFE);
         }
 
         public bool Specular {
-            readonly get => (RawData & 0x02) != 0;
+            get => (RawData & 0x02) != 0;
             set => RawData = (ushort)(value ? RawData | 0x02 : RawData & 0xFFFD);
         }
 
         public bool Emissive {
-            readonly get => (RawData & 0x04) != 0;
+            get => (RawData & 0x04) != 0;
             set => RawData = (ushort)(value ? RawData | 0x04 : RawData & 0xFFFB);
         }
 
         public bool Gloss {
-            readonly get => (RawData & 0x08) != 0;
+            get => (RawData & 0x08) != 0;
             set => RawData = (ushort)(value ? RawData | 0x08 : RawData & 0xFFF7);
         }
 
         public bool SpecularStrength {
-            readonly get => (RawData & 0x10) != 0;
+            get => (RawData & 0x10) != 0;
             set => RawData = (ushort)(value ? RawData | 0x10 : RawData & 0xFFEF);
         }
     }
@@ -149,68 +149,68 @@ public unsafe partial struct MaterialResourceHandle {
     /// </summary>
     [FieldOffset(0x100)] public ushort TotalDataSize;
 
-    public readonly Span<TextureEntry> TexturesSpan
+    public Span<TextureEntry> TexturesSpan
         => new(Textures, TextureCount);
 
-    public readonly Span<AttributeSetEntry> AttributeSetsSpan
+    public Span<AttributeSetEntry> AttributeSetsSpan
         => new(AttributeSets, UvSetCount + ColorSetCount);
 
-    public readonly uint DataFlags
+    public uint DataFlags
         => AdditionalDataSize >= 4 ? *(uint*)AdditionalData : 0u;
 
-    public readonly bool HasColorTable
+    public bool HasColorTable
         => (DataFlags & 0x4) != 0;
 
-    public readonly bool HasStainTable
+    public bool HasStainTable
         => (DataFlags & 0x8) != 0;
 
-    public readonly ColorTableRow* ColorTable
+    public ColorTableRow* ColorTable
         => DataSetSize >= TableRows * sizeof(ColorTableRow) && HasColorTable ? (ColorTableRow*)DataSet : null;
 
-    public readonly Span<ColorTableRow> ColorTableSpan
+    public Span<ColorTableRow> ColorTableSpan
         => ColorTable switch { null => default, var ptr => new(ptr, TableRows) };
 
-    public readonly StainTableRow* StainTable {
+    public StainTableRow* StainTable {
         get {
             var offset = HasColorTable ? TableRows * sizeof(ColorTableRow) : 0;
             return DataSetSize >= offset + TableRows * sizeof(StainTableRow) && HasStainTable ? (StainTableRow*)(DataSet + offset) : null;
         }
     }
 
-    public readonly Span<StainTableRow> StainTableSpan
+    public Span<StainTableRow> StainTableSpan
         => StainTable switch { null => default, var ptr => new(ptr, TableRows) };
 
-    public readonly byte* ShpkName
+    public byte* ShpkName
         => Strings + ShpkNameOffset;
 
-    public readonly ReadOnlySpan<byte> ShpkNameSpan
+    public ReadOnlySpan<byte> ShpkNameSpan
         => MemoryMarshal.CreateReadOnlySpanFromNullTerminated(ShpkName);
 
-    public readonly string ShpkNameString
+    public string ShpkNameString
         => Encoding.UTF8.GetString(ShpkNameSpan);
 
-    public readonly byte* TexturePath(int index) {
+    public byte* TexturePath(int index) {
         if (index < 0 || index >= TextureCount)
             throw new ArgumentOutOfRangeException(nameof(index));
         return Strings + Textures[index].PathOffset;
     }
 
-    public readonly ReadOnlySpan<byte> TexturePathSpan(int index)
+    public ReadOnlySpan<byte> TexturePathSpan(int index)
         => MemoryMarshal.CreateReadOnlySpanFromNullTerminated(TexturePath(index));
 
-    public readonly string TexturePathString(int index)
+    public string TexturePathString(int index)
         => Encoding.UTF8.GetString(TexturePathSpan(index));
 
-    public readonly byte* AttributeSetName(int index) {
+    public byte* AttributeSetName(int index) {
         if (index < 0 || index >= UvSetCount + ColorSetCount)
             throw new ArgumentOutOfRangeException(nameof(index));
         return Strings + AttributeSets[index].NameOffset;
     }
 
-    public readonly ReadOnlySpan<byte> AttributeSetNameSpan(int index)
+    public ReadOnlySpan<byte> AttributeSetNameSpan(int index)
         => MemoryMarshal.CreateReadOnlySpanFromNullTerminated(AttributeSetName(index));
 
-    public readonly string AttributeSetNameString(int index)
+    public string AttributeSetNameString(int index)
         => Encoding.UTF8.GetString(AttributeSetNameSpan(index));
 
     [MemberFunction("4C 8B DC 49 89 5B ?? 49 89 73 ?? 55 57 41 55")]

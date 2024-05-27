@@ -58,9 +58,9 @@ public unsafe partial struct Human {
     [FieldOffset(0x9D8)] public ConstantBuffer* CustomizeParameterCBuffer;
     [FieldOffset(0x9E0)] public ConstantBuffer* DecalColorCBuffer;
 
-    public readonly ConstantBufferPointer<CustomizeParameter> CustomizeParameterTypedCBuffer
+    public ConstantBufferPointer<CustomizeParameter> CustomizeParameterTypedCBuffer
         => new(CustomizeParameterCBuffer);
-    public readonly ConstantBufferPointer<Vector4> DecalColorTypedCBuffer
+    public ConstantBufferPointer<Vector4> DecalColorTypedCBuffer
         => new(DecalColorCBuffer);
 
     [FieldOffset(0x9E8)] public TextureResourceHandle* Decal;

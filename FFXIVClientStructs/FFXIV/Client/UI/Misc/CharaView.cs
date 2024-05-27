@@ -44,43 +44,43 @@ public unsafe partial struct CharaView : ICreatable {
         => IMemorySpace.GetUISpace()->Create<CharaView>();
 
     [MemberFunction("E8 ?? ?? ?? ?? 41 80 A6 ?? ?? ?? ?? ?? 48 8D 05")]
-    public readonly partial void Ctor();
+    public partial void Ctor();
 
     [VirtualFunction(0)]
-    public readonly partial void Dtor(bool freeMemory);
+    public partial void Dtor(bool freeMemory);
 
     [VirtualFunction(1)]
-    public readonly partial void Initialize(nint agent, uint clientObjectId, nint agentCallbackReady);
+    public partial void Initialize(nint agent, uint clientObjectId, nint agentCallbackReady);
 
     [VirtualFunction(2)]
-    public readonly partial void Release(); // aka Finalize
+    public partial void Release(); // aka Finalize
 
     [VirtualFunction(3)]
-    public readonly partial void ResetPositions();
+    public partial void ResetPositions();
 
     [MemberFunction("0F 10 02 0F 11 41 48")]
-    public readonly partial void SetCustomizeData(CharaViewCharacterData* data);
+    public partial void SetCustomizeData(CharaViewCharacterData* data);
 
     [MemberFunction("E8 ?? ?? ?? ?? EB 27 8B D6")]
-    public readonly partial void Render(uint frameIndex);
+    public partial void Render(uint frameIndex);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 75 05 0F 57 C9")]
-    public readonly partial Character* GetCharacter();
+    public partial Character* GetCharacter();
 
     [MemberFunction("E8 ?? ?? ?? ?? 49 8D 4F 10 88 85")]
-    public readonly partial bool IsAnimationPaused();
+    public partial bool IsAnimationPaused();
 
     [MemberFunction("E8 ?? ?? ?? ?? B2 01 48 8B CE E8 ?? ?? ?? ?? 32 C0")]
-    public readonly partial void ToggleAnimationPlayback(bool paused);
+    public partial void ToggleAnimationPlayback(bool paused);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 47 28 BA")]
-    public readonly partial void UnequipGear(bool hasCharacterData = false, bool characterLoaded = true);
+    public partial void UnequipGear(bool hasCharacterData = false, bool characterLoaded = true);
 
     [MemberFunction("E8 ?? ?? ?? ?? 45 33 DB FF C3")]
-    public readonly partial void SetItemSlotData(byte slotId, uint itemId, byte stainId, uint glamourItemId = 0, byte a6 = 1);
+    public partial void SetItemSlotData(byte slotId, uint itemId, byte stainId, uint glamourItemId = 0, byte a6 = 1);
 
     [MemberFunction("E8 ?? ?? ?? ?? B1 01 0F B6 86")]
-    public readonly partial void ToggleDrawWeapon(bool drawn);
+    public partial void ToggleDrawWeapon(bool drawn);
 }
 
 [GenerateInterop]
@@ -108,10 +108,10 @@ public unsafe partial struct CharaViewCharacterData : ICreatable {
     }
 
     [MemberFunction("E8 ?? ?? ?? ?? 4C 8D 45 10 48 8B CF")]
-    public readonly partial void Ctor();
+    public partial void Ctor();
 
     [MemberFunction("E9 ?? ?? ?? ?? 41 0F B6 40 ?? 88 42 62")]
-    public readonly partial void ImportLocalPlayerEquipment();
+    public partial void ImportLocalPlayerEquipment();
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x20)]

@@ -27,5 +27,5 @@ public unsafe partial struct AtkComponentTextInput {
     [FieldOffset(0x4B8)] public Utf8String UnkText05;
 
     [MemberFunction("E8 ?? ?? ?? ?? 45 32 C0 8B D6"), GenerateStringOverloads]
-    public readonly partial void SetText(byte* text);
+    public partial void SetText(byte* text);
 }

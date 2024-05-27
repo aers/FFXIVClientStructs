@@ -4,7 +4,7 @@ namespace FFXIVClientStructs.FFXIV.Common.Lua;
 //ctor "48 8D 05 ?? ?? ?? ?? C6 41 10 01 48 89 01 33 C0"
 [GenerateInterop(isInherited: true)]
 [StructLayout(LayoutKind.Explicit, Size = 0x28)]
-public unsafe struct LuaState {
+public unsafe partial struct LuaState {
     [FieldOffset(0x08)] public lua_State* State;
     [FieldOffset(0x10)] public bool GCEnabled;
     [FieldOffset(0x18)] public long LastGCRestart;

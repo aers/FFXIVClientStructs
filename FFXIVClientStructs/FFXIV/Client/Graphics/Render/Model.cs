@@ -24,6 +24,6 @@ public unsafe partial struct Model {
 
     [FieldOffset(0xE8)] public uint SlotIndex;
 
-    public readonly ReadOnlySpan<Pointer<Material>> MaterialsSpan
+    public ReadOnlySpan<Pointer<Material>> MaterialsSpan
         => new(Materials, MaterialCount);
 }

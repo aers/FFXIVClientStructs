@@ -10,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 public unsafe partial struct AddonSalvageItemSelector {
     [FieldOffset(0x0228)] public AgentSalvage.SalvageItemCategory SelectedCategory;
 
-    [FieldOffset(0x02B0), FixedSizeArray] FixedSizeArray140<SalvageItem> _items;
+    [FieldOffset(0x02B0), FixedSizeArray] internal FixedSizeArray140<SalvageItem> _items;
 
     [FieldOffset(0x1CF0)] public uint ItemCount;
 

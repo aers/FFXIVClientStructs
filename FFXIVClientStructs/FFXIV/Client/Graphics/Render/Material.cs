@@ -41,13 +41,13 @@ public unsafe partial struct Material {
     [FieldOffset(0x30)] public TextureEntry* Textures;
     [FieldOffset(0x38)] public ushort TextureCount;
 
-    public readonly int ShaderKeyCount
+    public int ShaderKeyCount
         => (int)((uint*)Textures - ShaderKeyValues);
 
-    public readonly Span<uint> ShaderKeyValuesSpan
+    public Span<uint> ShaderKeyValuesSpan
         => new(ShaderKeyValues, ShaderKeyCount);
 
-    public readonly Span<TextureEntry> TexturesSpan
+    public Span<TextureEntry> TexturesSpan
         => new(Textures, TextureCount);
 
     /// <summary>

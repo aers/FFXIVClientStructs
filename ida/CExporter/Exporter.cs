@@ -6,7 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using FFXIVClientStructs.Attributes;
-using FFXIVClientStructs.Interop.Attributes;
+using InteropGenerator.Runtime.Attributes;
 using Pastel;
 using YamlDotNet.Core;
 using YamlDotNet.Core.Events;

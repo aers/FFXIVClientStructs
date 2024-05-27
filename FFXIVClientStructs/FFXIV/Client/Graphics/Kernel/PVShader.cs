@@ -29,12 +29,9 @@ public unsafe struct PVShader {
     [FieldOffset(0x4C)] public ushort Unk2Count;
     [FieldOffset(0x58)] public uint DxbcBlobSize;
 
-    public readonly Span<ResourceEntry> ConstantBuffersSpan
-        => new(ConstantBuffers, ConstantBufferCount);
+    public Span<ResourceEntry> ConstantBuffersSpan => new(ConstantBuffers, ConstantBufferCount);
 
-    public readonly Span<ResourceEntry> SamplersSpan
-        => new(Samplers, SamplerCount);
+    public Span<ResourceEntry> SamplersSpan => new(Samplers, SamplerCount);
 
-    public readonly Span<ResourceEntry> UnknownsSpan
-        => new(Unknowns, Unk2Count);
+    public Span<ResourceEntry> UnknownsSpan => new(Unknowns, Unk2Count);
 }

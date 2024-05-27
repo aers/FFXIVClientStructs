@@ -73,26 +73,26 @@ public unsafe struct ShaderPackage {
     [FieldOffset(0xF0)] public uint SubviewValue1;
     [FieldOffset(0xF4)] public uint SubviewValue2;
 
-    public readonly Span<MaterialElement> MaterialElementsSpan
+    public Span<MaterialElement> MaterialElementsSpan
         => new(MaterialElements, MaterialElementCount);
 
-    public readonly Span<ConstantSamplerUnknown> ConstantsSpan
+    public Span<ConstantSamplerUnknown> ConstantsSpan
         => new(Constants, ConstantCount);
-    public readonly Span<ConstantSamplerUnknown> SamplersSpan
+    public Span<ConstantSamplerUnknown> SamplersSpan
         => new(Samplers, SamplerCount);
-    public readonly Span<ConstantSamplerUnknown> UnknownsSpan
+    public Span<ConstantSamplerUnknown> UnknownsSpan
         => new(Unknowns, UnkCount);
 
-    public readonly Span<uint> SystemKeysSpan
+    public Span<uint> SystemKeysSpan
         => new(SystemKeys, SystemKeyCount);
-    public readonly Span<uint> SceneKeysSpan
+    public Span<uint> SceneKeysSpan
         => new(SceneKeys, SceneKeyCount);
-    public readonly Span<uint> MaterialKeysSpan
+    public Span<uint> MaterialKeysSpan
         => new(MaterialKeys, MaterialKeyCount);
-    public readonly Span<uint> SystemValuesSpan
+    public Span<uint> SystemValuesSpan
         => new(SystemValues, SystemKeyCount);
-    public readonly Span<uint> SceneValuesSpan
+    public Span<uint> SceneValuesSpan
         => new(SceneValues, SceneKeyCount);
-    public readonly Span<uint> MaterialValuesSpan
+    public Span<uint> MaterialValuesSpan
         => new(MaterialValues, MaterialKeyCount);
 }
