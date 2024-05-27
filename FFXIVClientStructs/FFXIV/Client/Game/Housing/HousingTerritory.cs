@@ -9,7 +9,7 @@ public unsafe partial struct HousingTerritory { // this should be renamed to Ind
     [FixedSizeArray<HousingFurniture>(732)]
     [FieldOffset(0x10)] public fixed byte Furniture[732 * 0x30];
     [FieldOffset(0x8968)] public HousingObjectManager HousingObjectManager;
-    [FieldOffset(0x96A0)] public uint HouseID; // Combines Ward, Plot, and Room
+    [FieldOffset(0x96A0)] public uint HouseId; // Combines Ward, Plot, and Room
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x30)]

@@ -6,8 +6,6 @@ public partial struct SoftKeyboardDeviceInterface {
 
     [StructLayout(LayoutKind.Explicit, Size = 0x8)]
     public unsafe partial struct SoftKeyboardInputInterface {
-        [FieldOffset(0x0), CExportIgnore] public void** vtbl;
-
         // CAUTION: May be the concrete class' dtor!
         [VirtualFunction(0)]
         public partial void Dtor(bool freeMemory);

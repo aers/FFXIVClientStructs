@@ -1,10 +1,20 @@
-namespace FFXIVClientStructs.Havok;
+using FFXIVClientStructs.Havok.Common.Base.Container.String;
+using FFXIVClientStructs.Havok.Common.Base.Reflection;
+using FFXIVClientStructs.Havok.Common.Base.Reflection.Registry;
+using FFXIVClientStructs.Havok.Common.Base.System.IO.IStream;
+using FFXIVClientStructs.Havok.Common.Base.System.IO.Reader;
+using FFXIVClientStructs.Havok.Common.Base.System.IO.Writer;
+using FFXIVClientStructs.Havok.Common.Base.Types;
+using FFXIVClientStructs.Havok.Common.Serialize.Resource;
 
+namespace FFXIVClientStructs.Havok.Common.Serialize.Util;
+
+[StructLayout(LayoutKind.Explicit, Size = 0)]
 public unsafe partial struct hkSerializeUtil {
 
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct ErrorDetails {
-        public enum ErrorID : int {
+        public enum ErrorId {
             None = 0x00,
             ReadFailed,
             UnsupportedFormat,
@@ -16,12 +26,12 @@ public unsafe partial struct hkSerializeUtil {
             MaxId,
         }
 
-        [FieldOffset(0x0)] public hkEnum<ErrorID, int> Id;
+        [FieldOffset(0x0)] public hkEnum<ErrorId, int> Id;
         [FieldOffset(0x8)] public hkStringPtr DefaultMessage;
     }
 
     [Flags]
-    public enum SaveOptionBits : int {
+    public enum SaveOptionBits {
         Default = 0x00,
         TextFormat = 0x01,
         SerializeIgnoredMembers = 0x02,
@@ -35,7 +45,7 @@ public unsafe partial struct hkSerializeUtil {
     }
 
     [Flags]
-    public enum LoadOptionBits : int {
+    public enum LoadOptionBits {
         Default = 0x00,
         FailIfVersioning = 0x01,
         Forced = 0x02,

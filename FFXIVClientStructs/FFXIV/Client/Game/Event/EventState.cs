@@ -4,5 +4,5 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x30)]
 public struct EventState {
-    [FieldOffset(0x10)] public GameObjectID ObjectId;
+    [FieldOffset(0x10)] public GameObjectId ObjectId;
 }

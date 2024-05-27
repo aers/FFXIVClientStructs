@@ -27,6 +27,9 @@ public unsafe partial struct AcquaintanceModule {
         [FieldOffset(0xD8)] public ulong ContentId;
     }
 
+    [MemberFunction("44 8B 89 ?? ?? ?? ?? 4C 8B C1 45 85 C9")]
+    public partial Acquaintance* GetTellHistory(int index);
+
     [MemberFunction("E8 ?? ?? ?? ?? 49 8B 45 00 49 8B CD FF 50 48")]
     public partial void ClearTellHistory(bool save = true);
 }

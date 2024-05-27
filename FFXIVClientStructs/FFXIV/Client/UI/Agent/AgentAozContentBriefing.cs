@@ -1,5 +1,4 @@
 using FFXIVClientStructs.FFXIV.Client.System.String;
-using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
@@ -41,9 +40,6 @@ public unsafe partial struct AozContentData {
 
     [FixedSizeArray<AozArrangementData>(3)]
     [FieldOffset(0x4A)] public fixed byte Arrangements[3 * 0x7A]; // 3 * AozArrangementData
-    [FieldOffset(0x4A), Obsolete("Use ArrangementsSpan[0]")] public AozArrangementData Act1Arrangement;
-    [FieldOffset(0xC4), Obsolete("Use ArrangementsSpan[1]")] public AozArrangementData Act2Arrangement;
-    [FieldOffset(0x13E), Obsolete("Use ArrangementsSpan[2]")] public AozArrangementData Act3Arrangement;
 
     [FieldOffset(0x228)] public Utf8String NoviceString;
     [FieldOffset(0x290)] public Utf8String ModerateString;
@@ -51,9 +47,6 @@ public unsafe partial struct AozContentData {
 
     [FixedSizeArray<AozWeeklyReward>(3)]
     [FieldOffset(0x360)] public fixed byte WeeklyRewards[3 * 0x8]; // 3 * AozContentRewards
-    [FieldOffset(0x360), Obsolete("Use WeeklyRewardsSpan[0]")] public AozWeeklyReward NoviceRewards;
-    [FieldOffset(0x368), Obsolete("Use WeeklyRewardsSpan[1]")] public AozWeeklyReward ModerateRewards;
-    [FieldOffset(0x370), Obsolete("Use WeeklyRewardsSpan[2]")] public AozWeeklyReward AdvancedRewards;
 
     [FieldOffset(0x37C)] private float _UnkFloat;
 }

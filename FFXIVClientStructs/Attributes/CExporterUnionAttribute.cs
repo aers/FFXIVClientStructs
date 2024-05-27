@@ -1,5 +1,3 @@
-using System.Diagnostics.CodeAnalysis;
-
 namespace FFXIVClientStructs.Attributes;
 [AttributeUsage(AttributeTargets.Field)]
 internal class CExporterUnionAttribute : Attribute {

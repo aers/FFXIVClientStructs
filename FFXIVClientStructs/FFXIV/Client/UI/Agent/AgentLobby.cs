@@ -2,7 +2,6 @@ using FFXIVClientStructs.FFXIV.Client.Game.Character;
 using FFXIVClientStructs.FFXIV.Client.Network;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Component.Excel;
-using FFXIVClientStructs.FFXIV.Component.GUI;
 using FFXIVClientStructs.FFXIV.Component.Text;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
@@ -32,8 +31,6 @@ public unsafe partial struct AgentLobby {
     [FieldOffset(0xA80)] public fixed byte Utf8StringsData[0x68 * 13];
 
     [FieldOffset(0x10E0)] public sbyte ServiceAccountIndex;
-    [Obsolete("Renamed to HoveredCharacterIndex")]
-    [FieldOffset(0x10E1)] public sbyte SelectedCharacterIndex;
     [FieldOffset(0x10E1)] public sbyte HoveredCharacterIndex; // index in CharaSelectCharacterList
     [FieldOffset(0x10E8)] public ulong HoveredCharacterContentId;
     [FieldOffset(0x10F0)] public byte DataCenter;
@@ -45,8 +42,6 @@ public unsafe partial struct AgentLobby {
     [FieldOffset(0x10FC)] public uint DialogAddonId2;
     [FieldOffset(0x1100)] public uint LobbyScreenTextAddonId;
 
-    [Obsolete("Invalid type: this field is a byte, not a bool. Use LobbyUpdateStage.")] // used for a switch in AgentLobby_Update
-    [FieldOffset(0x1104)] public bool RequestedDataReady;
     [FieldOffset(0x1104)] public byte LobbyUpdateStage;
 
     [FieldOffset(0x1107)] public byte LobbyUIStage;
@@ -97,7 +92,6 @@ public unsafe partial struct LobbyData {
 [VTableAddress("48 8D 05 ?? ?? ?? ?? 48 8B F9 48 89 01 48 81 C1 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 8F", 3)]
 [StructLayout(LayoutKind.Explicit, Size = 0x848)]
 public unsafe partial struct LobbyUIClient {
-    [FieldOffset(0x00), Obsolete("Use LobbyUIClient.StaticAddressPointers.VTable")] public void** vtbl;
     [FieldOffset(0x10)] public NetworkModuleProxy* NetworkModuleProxy;
     //[FieldOffset(0x18)] public ?* NetworConfig; // contains hosts and ports
 
@@ -156,8 +150,6 @@ public enum CharaSelectCharacterEntryLoginFlags : byte {
     None = 0,
     Locked = 1, // Lobby#64: "You cannot select this character with your current account."
     NameChangeRequired = 2, // Lobby#26: "A name change is required to log in with this character."
-    [Obsolete("Renamed to MissingExVersionForLogin")]
-    ExpansionMissing = 4,
     MissingExVersionForLogin = 4, // Lobby#68: "To log in with this character you must first install <ExVersion>."
     MissingExVersionForCharacterEdit = 8, // Lobby#69: "To edit this character's race, sex, or appearance you must first install <ExVersion>."
     DCTraveling = 16,// Lobby#1175: "This character is currently visiting the <value> data center."

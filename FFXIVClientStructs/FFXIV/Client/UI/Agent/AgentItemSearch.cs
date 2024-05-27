@@ -1,5 +1,3 @@
-using FFXIVClientStructs.FFXIV.Component.GUI;
-
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 // Client::UI::Agent::AgentItemSearch
@@ -10,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [StructLayout(LayoutKind.Explicit, Size = 0x37F0)]
 public unsafe partial struct AgentItemSearch {
     [FieldOffset(0x0)] public AgentInterface AgentInterface;
-    [FieldOffset(0x3304)] public uint ResultItemID;
+    [FieldOffset(0x3304)] public uint ResultItemId;
     [FieldOffset(0x330C)] public uint ResultSelectedIndex;
     [FieldOffset(0x331C)] public uint ResultHoveredIndex;
     [FieldOffset(0x3324)] public uint ResultHoveredCount;

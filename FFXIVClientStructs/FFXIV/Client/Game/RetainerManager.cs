@@ -35,8 +35,8 @@ public unsafe partial struct RetainerManager {
 
     [StructLayout(LayoutKind.Explicit, Size = 0x48)]
     public struct Retainer {
-        [FieldOffset(0x00)] public ulong RetainerID;
-        [FieldOffset(0x08)] public fixed byte Name[0x20];
+        [FieldOffset(0x00)] public ulong RetainerId;
+        [FieldOffset(0x08)] public fixed byte Name[32];
         [FieldOffset(0x28)] public bool Available;
         [FieldOffset(0x29)] public byte ClassJob;
         [FieldOffset(0x2A)] public byte Level;
@@ -45,7 +45,7 @@ public unsafe partial struct RetainerManager {
         [FieldOffset(0x30)] public RetainerTown Town;
         [FieldOffset(0x31)] public byte MarkerItemCount;
         [FieldOffset(0x34)] public uint MarketExpire; // 7 Days after last opened retainer
-        [FieldOffset(0x38)] public uint VentureID;
+        [FieldOffset(0x38)] public uint VentureId;
         [FieldOffset(0x3C)] public uint VentureComplete;
     }
 

@@ -1,4 +1,6 @@
-namespace FFXIVClientStructs.Havok;
+using FFXIVClientStructs.Havok.Common.Base.Object;
+
+namespace FFXIVClientStructs.Havok.Common.Base.Reflection.Registry;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x30)]
 public struct hkTypeInfoRegistry {

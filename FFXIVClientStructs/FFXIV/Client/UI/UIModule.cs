@@ -6,6 +6,7 @@ using FFXIVClientStructs.FFXIV.Client.UI.Info;
 using FFXIVClientStructs.FFXIV.Client.UI.Misc;
 using FFXIVClientStructs.FFXIV.Client.UI.Shell;
 using FFXIVClientStructs.FFXIV.Common.Configuration;
+using FFXIVClientStructs.FFXIV.Component.Completion;
 using FFXIVClientStructs.FFXIV.Component.Excel;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
@@ -17,8 +18,6 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 public unsafe partial struct UIModule {
     public static UIModule* Instance() => Framework.Instance()->GetUiModule();
 
-    [FieldOffset(0x0), Obsolete("Use UIModule.StaticAddressPointers.VTable")] public void* vtbl;
-    [FieldOffset(0x0), Obsolete("Use UIModule.StaticAddressPointers.VTable")] public void** vfunc;
     [FieldOffset(0x8)] public void** AtkModuleEvent;
     [FieldOffset(0x10)] public void** ExcelLanguageEvent;
     [FieldOffset(0x18)] public ChangeEventInterface ChangeEventInterface;
@@ -33,11 +32,13 @@ public unsafe partial struct UIModule {
 
     [FixedSizeArray<RaptureAtkHistory>(19)]
     [FieldOffset(0x3B0)] public fixed byte AtkHistory[19 * 0x38];
+    [FieldOffset(0x7D8)] public int LinkshellCycle;
+    [FieldOffset(0x7DC)] public int CrossWorldLinkshellCycle;
 
     [FieldOffset(0x7E4)] public uint FrameCount;
     [FieldOffset(0x7E8)] internal ExcelModule* ExcelModule;
     [FieldOffset(0x7F0)] internal RaptureTextModule RaptureTextModule;
-    // [FieldOffset(0x1650)] internal CompletionModule CompletionModule;
+    [FieldOffset(0x1650)] internal CompletionModule CompletionModule;
     [FieldOffset(0x19C8)] internal RaptureLogModule RaptureLogModule;
     // [FieldOffset(0x4E50)] internal UserFileManager UserFileManager;
     [FieldOffset(0x4E70)] internal RaptureMacroModule RaptureMacroModule;
@@ -417,6 +418,12 @@ public unsafe partial struct UIModule {
 
     [VirtualFunction(194)]
     public partial bool IsMainCommandUnlocked(uint command);
+
+    [VirtualFunction(211)]
+    public partial int RotateLinkshellHistory(int offset);
+
+    [VirtualFunction(213)]
+    public partial int RotateCrossLinkshellHistory(int offset);
 
     [MemberFunction("E8 ?? ?? ?? ?? 4D 39 BE")]
     public static partial bool PlaySound(uint effectId, long a2 = 0, long a3 = 0, byte a4 = 0);

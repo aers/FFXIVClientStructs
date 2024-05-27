@@ -28,6 +28,5 @@ public unsafe struct AddonTalk {
     // there are 16 more strings here with 0x20 bytes between them
     // might be an array of structs that have Utf8String + other things
 
-    [FieldOffset(0xE18)] public AtkEventTarget AtkEventTarget;
-    [FieldOffset(0xE20)] public AtkEventListenerUnk1 AtkEventListenerUnk;
+    [FieldOffset(0xE18)] public AtkAddonControl AddonControl;
 }

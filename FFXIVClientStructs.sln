@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FFXIVClientStructs.InteropS
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FFXIVClientStructs.ResolverTester", "FFXIVClientStructs.ResolverTester\FFXIVClientStructs.ResolverTester.csproj", "{1830145F-E3E8-4A4F-A2C5-A773B3A583F0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FFXIVClientStructs.StdContainerTester", "FFXIVClientStructs.StdContainerTester\FFXIVClientStructs.StdContainerTester.csproj", "{4B49B5E4-875B-431D-B566-D56F11D6FB1A}"
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CExporter", "ida\CExporter\CExporter.csproj", "{C204099B-4058-4FCE-A0EC-60DE4ACB1DF9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E0F5E1D6-434A-4472-BF57-C95238F4B03B}"
@@ -40,6 +42,10 @@ Global
 		{1830145F-E3E8-4A4F-A2C5-A773B3A583F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1830145F-E3E8-4A4F-A2C5-A773B3A583F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1830145F-E3E8-4A4F-A2C5-A773B3A583F0}.Release|Any CPU.Build.0 = Release|Any CPU
+    {4B49B5E4-875B-431D-B566-D56F11D6FB1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B49B5E4-875B-431D-B566-D56F11D6FB1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B49B5E4-875B-431D-B566-D56F11D6FB1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B49B5E4-875B-431D-B566-D56F11D6FB1A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C204099B-4058-4FCE-A0EC-60DE4ACB1DF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C204099B-4058-4FCE-A0EC-60DE4ACB1DF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C204099B-4058-4FCE-A0EC-60DE4ACB1DF9}.Release|Any CPU.ActiveCfg = Release|Any CPU

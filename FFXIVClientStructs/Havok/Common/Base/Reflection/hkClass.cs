@@ -1,5 +1,4 @@
-namespace FFXIVClientStructs.Havok;
+namespace FFXIVClientStructs.Havok.Common.Base.Reflection;
 
-public struct hkClass {
-
-}
+[StructLayout(LayoutKind.Explicit, Size = 0)]
+public struct hkClass;

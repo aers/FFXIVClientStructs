@@ -372,6 +372,28 @@ if api is None:
                 else:
                     return ida_struct.get_struc_size(ida_struct.get_struc_id(type))
 
+            def get_named_type(self, tinfo, name):
+                # type: (idaapi.tinfo_t, str) -> None
+                if (
+                    ida_struct.get_struc_id(self.clean_struct_name(name))
+                    != idaapi.BADADDR
+                ):
+                    if not tinfo.get_named_type(idaapi.get_idati(), name):
+                        tinfo.get_named_type(
+                            idaapi.get_idati(), self.clean_struct_name(name)
+                        )
+                        return
+
+                terminated = name + ";"
+                idaapi.parse_decl(tinfo, idaapi.get_idati(), terminated, idaapi.PT_SIL)
+
+                tinfo_str = tinfo.dstr()
+                if tinfo_str == name or tinfo_str == self.clean_struct_name(name):
+                    return
+
+                terminated = self.clean_struct_name(name) + ";"
+                idaapi.parse_decl(tinfo, idaapi.get_idati(), terminated, idaapi.PT_SIL)
+
             def get_tinfo_from_type(self, raw_type, array_size=0):
                 # type: (str, int) -> idaapi.tinfo_t
                 """
@@ -384,11 +406,7 @@ if api is None:
                 type = raw_type.rstrip("*")
                 ptr_count = len(raw_type) - len(type)
 
-                type_tinfo.get_named_type(idaapi.get_idati(), type)
-                terminated = type + ";"
-                idaapi.parse_decl(
-                    type_tinfo, idaapi.get_idati(), terminated, idaapi.PT_SIL
-                )
+                self.get_named_type(type_tinfo, type)
 
                 if ptr_count > 0:
                     ptr_tinfo = idaapi.tinfo_t()
@@ -409,12 +427,20 @@ if api is None:
 
                 return ptr_tinfo
 
+            def get_void_tinfo(self):
+                # type: () -> idaapi.tinfo_t
+                tinfo = self.get_tinfo_from_type("void (__fastcall)()")
+                return tinfo.get_rettype()
+
             def get_tinfo_from_func_data(self, data):
                 # type: (DefinedFuncField) -> idaapi.tinfo_t
                 tinfo = ida_typeinf.tinfo_t()
                 func_data = ida_typeinf.func_type_data_t()
                 func_data.cc = ida_typeinf.CM_CC_FASTCALL
-                func_data.rettype = self.get_tinfo_from_type(data.return_type)
+                if data.return_type != "void":
+                    func_data.rettype = self.get_tinfo_from_type(data.return_type)
+                else:
+                    func_data.rettype = self.get_void_tinfo()
                 for param in data.parameters:
                     arg = ida_typeinf.funcarg_t()
                     arg.type = self.get_tinfo_from_type(param.type)
@@ -422,7 +448,6 @@ if api is None:
                     func_data.push_back(arg)
 
                 tinfo.create_func(func_data)
-                print(tinfo)
                 return tinfo
 
             def get_struct_opinfo_from_type(self, raw_type):
@@ -440,6 +465,17 @@ if api is None:
             def clean_name(self, name):
                 # type: (str) -> str
                 return name
+
+            def clean_struct_name(self, name):
+                # type: (str) -> str
+                return (
+                    name.replace(" ", "")
+                    .replace("unsigned", "u")
+                    .replace("__int64", "long")
+                    .replace("__int32", "int")
+                    .replace("__int16", "short")
+                    .replace("__int8", "byte")
+                )
 
             def search_binary(self, ea, pattern, flag):
                 # type: (int, str, int) -> int
@@ -500,6 +536,20 @@ if api is None:
                         s, 0, ida_struct.get_struc_last_offset(s) + 1
                     )
 
+            def delete_enum_members(self, enum):
+                # type: (DefinedEnum) -> None
+                e = ida_enum.get_enum(enum.type)
+                for value in enum.values:
+                    mem = ida_enum.get_enum_member_by_name(
+                        "{0}.{1}".format(enum.name, value)
+                    )
+                    ida_enum.del_enum_member(
+                        e,
+                        ida_enum.get_enum_member_value(mem),
+                        ida_enum.get_enum_member_serial(mem),
+                        ida_enum.get_enum_member_bmask(mem),
+                    )
+
             @property
             def get_file_path(self):
                 return os.path.join(
@@ -521,18 +571,18 @@ if api is None:
 
             def delete_enum(self, enum):
                 # type: (DefinedEnum) -> None
-                ida_enum.del_enum(ida_enum.get_enum(enum.type))
+                self.delete_enum_members(enum)
 
             def delete_struct(self, struct):
                 # type: (DefinedStruct) -> None
-                fullname = self.clean_name(struct.type)
+                fullname = self.clean_struct_name(struct.type)
                 self.delete_struct_members(fullname)
                 self.delete_struct_members(fullname + "Union")
                 self.delete_struct_members(fullname + "VTable")
 
             def create_struct(self, struct):
                 # type: (DefinedStruct) -> None
-                fullname = self.clean_name(struct.type)
+                fullname = self.clean_struct_name(struct.type)
                 if ida_struct.get_struc_id(fullname) == idaapi.BADADDR:
                     ida_struct.add_struc(-1, fullname, struct.union)
                 s = 0
@@ -543,7 +593,7 @@ if api is None:
 
             def create_struct_members(self, struct):
                 # type: (DefinedStruct) -> None
-                fullname = self.clean_name(struct.type)
+                fullname = self.clean_struct_name(struct.type)
                 s = ida_struct.get_struc(ida_struct.get_struc_id(fullname))
                 for field in struct.fields:
                     offset = field.offset
@@ -567,9 +617,12 @@ if api is None:
                             field_type = field_type + param.name + ","
                         field_type = field_type[:-2] + ")"
                     elif (
-                        self.get_idc_type_from_ida_type(field_type)
+                        self.get_idc_type_from_ida_type(
+                            self.clean_struct_name(field_type)
+                        )
                         == ida_bytes.stru_flag()
                     ):
+                        field_type = self.clean_struct_name(field_type)
                         ida_struct.add_struc_member(
                             s,
                             field_name,
@@ -789,14 +842,19 @@ if api is None:
                 tif.get_func_details(func_data)
                 func_data.clear()
                 func_data.cc = ida_typeinf.CM_CC_FASTCALL
-                func_data.rettype = self.get_tinfo_from_type(member_func.return_type)
+                if member_func.return_type != "void":
+                    func_data.rettype = self.get_tinfo_from_type(
+                        member_func.return_type
+                    )
+                else:
+                    func_data.rettype = self.get_void_tinfo()
                 for param in member_func.parameters:
                     arg = ida_typeinf.funcarg_t()
                     arg.type = self.get_tinfo_from_type(param.type)
                     arg.name = param.name
                     func_data.push_back(arg)
                 tif.create_func(func_data)
-                print(tif)
+                print(f"updating {func_name} with {tif}")
                 ida_typeinf.apply_tinfo(ea, tif, ida_typeinf.TINFO_DEFINITE)
 
             def should_update_member_func(self):
@@ -815,6 +873,8 @@ if api is None:
         import re
 
         from ghidra.program.model.data import *
+        from ghidra.program.model.listing import *
+        from ghidra.program.model.symbol import SourceType
         from ghidra.app.util import SymbolPathParser
 
     except ImportError:
@@ -847,11 +907,15 @@ if api is None:
                     return "byte"
                 elif name == "__int16":
                     return "short"
-                elif name == "unsigned __int16":
+                elif name == "unsigned __int16" or name == "unsigned short":
                     return "ushort"
                 elif name == "__int32":
                     return "int"
-                elif name == "unsigned __int32" or name == "_DWORD":
+                elif (
+                    name == "unsigned __int32"
+                    or name == "_DWORD"
+                    or name == "unsigned int"
+                ):
                     return "uint"
                 elif name == "__int64":
                     return "longlong"
@@ -865,7 +929,7 @@ if api is None:
                     return "ushort*"
                 elif name == "__int32*":
                     return "int*"
-                elif name == "unsigned __int32*":
+                elif name == "unsigned __int32*" or name == "unsigned int*":
                     return "uint*"
                 elif name == "__int64*":
                     return "longlong*"
@@ -918,6 +982,21 @@ if api is None:
                 fd.setArguments(args)
                 return fd
 
+            def get_func_by_name(self, name):
+                # type: (str) -> Function
+                funcs = getGlobalFunctions(name)
+                return funcs.first if not funcs.size() == 0 else None
+
+            def create_memberfunc_args(self, member_func):
+                # type: (DefinedMemFunc) -> list[ParameterImpl]
+                arg_vars = []
+                for param in member_func.parameters:
+                    dt = self.get_datatype(param.type)
+                    if not dt:
+                        return []
+                    arg_vars.append(ParameterImpl(param.name, dt, currentProgram))
+                return arg_vars
+
             @property
             def get_file_path(self):
                 return os.path.join(
@@ -928,7 +1007,8 @@ if api is None:
                 # type: (DefinedEnum) -> None
                 if monitor.isCancelled():
                     return
-                dt = EnumDataType(enum.name, self.get_size_from_type(enum.underlying))
+                enum_size = self.get_size_from_type(enum.underlying) or 4
+                dt = EnumDataType(enum.name, enum_size)
                 dt.setCategoryPath(self.get_category_path(enum.type))
                 for value in enum.values:
                     dt.add(value, enum.values[value])
@@ -1105,11 +1185,30 @@ if api is None:
 
             def update_member_func(self, member_func, struct):
                 # type: (DefinedMemFunc, DefinedStruct) -> None
-                pass
+                if monitor.isCancelled():
+                    return
+                func_name = "{0}.{1}".format(struct.type, member_func.name)
+                func = self.get_func_by_name(func_name)
+                if not func:
+                    return
+                arg_vars = self.create_memberfunc_args(member_func)
+                return_type = self.get_datatype(member_func.return_type)
+                if not return_type:
+                    return
+                return_var = ReturnParameterImpl(return_type, currentProgram)
+                update_type = Function.FunctionUpdateType.DYNAMIC_STORAGE_ALL_PARAMS
+                func.updateFunction(
+                    "__fastcall",
+                    return_var,
+                    arg_vars,
+                    update_type,
+                    False,
+                    SourceType.USER_DEFINED,
+                )
 
             def should_update_member_func(self):
-                # Not currently implemented in Ghidra once implemented replace this with a proper askYesNo
-                return False
+                # type: () -> bool
+                return askYesNo("ffxiv_structimporter", "Update member function types?")
 
         api = GhidraApi()
 

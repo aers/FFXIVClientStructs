@@ -5,7 +5,7 @@ public unsafe partial struct CSBonusManager {
     [StaticAddress("48 8B 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 63 D0", 3, true)]
     public static partial CSBonusManager* Instance();
 
-    [FieldOffset(0x08)] public ushort State; // 1 = Pending, 2 = Underway, 3 = Finished
+    [FieldOffset(0x08)] public ushort State; // 1 = Pending, 2 = Underway, 3 = Finished, 4 = Part 2 Underway, 5 = Part 2 Finished
 
     [FieldOffset(0x0C)] public uint BaseTime;
     [FieldOffset(0x10)] public uint SeasonTarget;

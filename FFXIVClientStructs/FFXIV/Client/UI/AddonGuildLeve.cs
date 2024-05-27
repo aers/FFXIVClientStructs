@@ -7,7 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //   Component::GUI::AtkUnitBase
 //     Component::GUI::AtkEventListener
 [Addon("GuildLeve")]
-[StructLayout(LayoutKind.Explicit, Size = 0x18F0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x1900)]
 public unsafe struct AddonGuildLeve {
     [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
     [FieldOffset(0x228)] public AtkComponentTreeList* AtkComponentTreeList228;
@@ -46,4 +46,6 @@ public unsafe struct AddonGuildLeve {
     [FieldOffset(0x5D8)] public AtkTextNode* AtkTextNode298;
     [FieldOffset(0x5E0)] public AtkComponentBase* AtkComponentBase290;
     [FieldOffset(0x5E8)] public AtkComponentBase* AtkComponentBase298;
+
+    [FieldOffset(0x18A0)] public AtkAddonControl AddonControl;
 }

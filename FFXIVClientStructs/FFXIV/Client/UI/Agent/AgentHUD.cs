@@ -1,8 +1,6 @@
 using FFXIVClientStructs.FFXIV.Client.Game.Character;
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
 using FFXIVClientStructs.FFXIV.Client.Game.UI;
-using FFXIVClientStructs.FFXIV.Client.System.String;
-using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
@@ -37,8 +35,6 @@ public unsafe partial struct AgentHUD {
     [FieldOffset(0x1378)] public fixed byte HudPartyMemberEnmityEntries[0x0C * 10];
     [FixedSizeArray<Pointer<HudPartyMemberEnmity>>(10)]
     [FieldOffset(0x13F0)] public fixed byte HudPartyMemberEnmityPtrs[0x8 * 10];
-    [Obsolete("Use HudPartyMemberEnmityEntriesSpan or HudPartyMemberEnmityPtrsSpan")]
-    [FieldOffset(0x13F0)] public HudPartyMemberEnmity* PartyEnmityList;
 
     [FieldOffset(0x4808)] public StdVector<MapMarkerData> MapMarkers;
     [FieldOffset(0x4820)] public StdVector<Pointer<MapMarkerData>> MapMarkerPtrs;
@@ -60,7 +56,7 @@ public unsafe partial struct AgentHUD {
 public struct HudPartyMemberEnmity {
     [FieldOffset(0x00)] public uint ObjectId;
     [FieldOffset(0x04)] public int Enmity;
-    [FieldOffset(0x08)] public int Index; // TODO: change to short
+    [FieldOffset(0x08)] public short Index;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x20)]

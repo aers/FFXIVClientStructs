@@ -28,14 +28,14 @@ public unsafe partial struct RecipeFavoriteModule {
     }
 
     [MemberFunction("48 63 C2 45 0F B7 C8")]
-    public partial RecipeEntry* GetEntry(byte craftType, ushort recipeID);
+    public partial RecipeEntry* GetEntry(byte craftType, ushort recipeId);
 
     [MemberFunction("85 D2 78 32 48 63 C2")]
-    public partial bool IsFavorited(byte craftType, ushort recipeID);
+    public partial bool IsFavorited(byte craftType, ushort recipeId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B CD 48 8B C5")]
-    public partial uint RemoveFromFavorites(byte craftType, ushort recipeID); // returns LogMessage RowId
+    public partial uint RemoveFromFavorites(byte craftType, ushort recipeId); // returns LogMessage RowId
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B F8 49 8B CE")]
-    public partial uint AddToFavorites(byte craftType, ushort recipeID); // returns LogMessage RowId
+    public partial uint AddToFavorites(byte craftType, ushort recipeId); // returns LogMessage RowId
 }

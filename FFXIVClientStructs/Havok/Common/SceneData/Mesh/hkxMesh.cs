@@ -1,9 +1,10 @@
-namespace FFXIVClientStructs.Havok;
+using FFXIVClientStructs.Havok.Common.Base.Object;
 
-// TODO
-[StructLayout(LayoutKind.Sequential)]
+namespace FFXIVClientStructs.Havok.Common.SceneData.Mesh;
+
+[StructLayout(LayoutKind.Explicit, Size = 0x10)]
 public struct hkxMesh {
-    hkReferencedObject hkReferencedObject;
+    [FieldOffset(0x00)] public hkReferencedObject hkReferencedObject;
     // hkArray<hkRefPtr<hkxMeshSection>> m_sections;
     // hkArray<hkRefPtr<hkxMesh::UserChannelInfo>> m_userChannelInfos;
 }

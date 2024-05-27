@@ -6,7 +6,6 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 // ctor "E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 59 ?? 48 89 01 E8"
 [StructLayout(LayoutKind.Explicit, Size = 0x1A8)]
 public unsafe partial struct DrawDataContainer {
-    [FieldOffset(0x000)] public void** Vtable;
     [FieldOffset(0x008)] public Character* Parent;
 
     [FixedSizeArray<DrawObjectData>(3)]
@@ -106,7 +105,6 @@ public unsafe partial struct DrawObjectData {
     public const int Size = 0x70;
 
     [FieldOffset(0x00)] public WeaponModelId ModelId;
-    [FieldOffset(0x10)] public void** VTable;
     [FieldOffset(0x18)] public DrawObject* DrawObject;
     [FieldOffset(0x60)] public byte State;
     [FieldOffset(0x62)] public ushort Flags1;
@@ -122,15 +120,13 @@ public unsafe partial struct DrawObjectData {
 public unsafe partial struct CustomizeData {
     private const int Count = 0x1A;
 
-    [FieldOffset(0x00), Obsolete("Use specific fields"), CExportIgnore] public fixed byte Data[Count]; // TODO: Change to private
+    [FieldOffset(0x00), CExportIgnore] public fixed byte Data[Count];
 
     [FieldOffset(0x00)] public byte Race;
     [FieldOffset(0x01)] public byte Sex;
     [FieldOffset(0x02)] public byte BodyType;
     [FieldOffset(0x03)] public byte Height;
     [FieldOffset(0x04)] public byte Tribe;
-    [Obsolete("Renamed to Tribe")]
-    [FieldOffset(0x04)] public byte Clan;
     [FieldOffset(0x05)] public byte Face;
     [FieldOffset(0x06)] public byte Hairstyle;
     // 0x07: Highlights

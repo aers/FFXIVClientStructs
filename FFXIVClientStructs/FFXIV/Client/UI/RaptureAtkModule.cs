@@ -29,18 +29,17 @@ public unsafe partial struct RaptureAtkModule {
 
     [FieldOffset(0x87F7)] public AgentUpdateFlags AgentUpdateFlag; // reset happens in RaptureAtkModule_OnUpdate
     [FieldOffset(0x87F8)] internal fixed byte AddonAllocators[0x28 * 853];
-    [FieldOffset(0x10D40)] public Utf8String* AddonNames; // TODO: change to StdVector<Utf8String>
+    [FieldOffset(0x10D40)] public StdVector<Utf8String> AddonNames;
     [FieldOffset(0x10D58)] public AddonConfig* AddonConfigPtr;
 
     [FieldOffset(0x10E10)] public UIModule* UIModulePtr;
     [FieldOffset(0x10E18)] public RaptureLogModule* RaptureLogModulePtr;
     [FieldOffset(0x10E20)] public AgentModule AgentModule;
+    [FieldOffset(0x11C18)] public RaptureHotbarModule* RaptureHotbarModulePtr;
     [FieldOffset(0x11C20)] public RaptureAtkUnitManager RaptureAtkUnitManager;
     [FieldOffset(0x1B938)] public RaptureAtkColorDataManager RaptureAtkColorDataManager;
 
     [FieldOffset(0x1BBB8)] public int NameplateInfoCount;
-    [Obsolete($"Use {nameof(NamePlateInfoEntriesSpan)}")]
-    [FieldOffset(0x1BBC0)] public NamePlateInfo NamePlateInfoArray; // 0-50, &NamePlateInfoArray[i]
     [FixedSizeArray<NamePlateInfo>(50)]
     [FieldOffset(0x1BBC0)] public fixed byte NamePlateInfoEntries[0x248 * 50];
 
@@ -95,7 +94,7 @@ public unsafe partial struct RaptureAtkModule {
 
     [StructLayout(LayoutKind.Explicit, Size = 0x248)]
     public struct NamePlateInfo {
-        [FieldOffset(0x00)] public GameObjectID ObjectID;
+        [FieldOffset(0x00)] public GameObjectId ObjectId;
         [FieldOffset(0x30)] public Utf8String Name;
         [FieldOffset(0x98)] public Utf8String FcName;
         [FieldOffset(0x100)] public Utf8String Title;
@@ -144,18 +143,4 @@ public unsafe partial struct RaptureAtkModule {
         MainCommandEnabledStateUpdate = 0x20,
         HousingInventoryUpdate = 0x40,
     }
-}
-
-[Flags]
-[Obsolete("Use AtkUnitManagerFlags instead")]
-public enum RaptureAtkModuleFlags : byte {
-    None = 0x00,
-    Unk01 = 0x01,
-    Unk02 = 0x02,
-    UiHidden = 0x04,
-    Unk08 = 0x08,
-    Unk10 = 0x10,
-    Unk20 = 0x20,
-    Unk40 = 0x40,
-    Unk80 = 0x80,
 }

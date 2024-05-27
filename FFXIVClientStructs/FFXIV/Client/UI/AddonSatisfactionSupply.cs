@@ -13,7 +13,7 @@ public unsafe partial struct AddonSatisfactionSupply {
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x68)]
-public unsafe partial struct AddonDeliveryItemInfo {
+public struct AddonDeliveryItemInfo {
     [FieldOffset(0x00)] public uint ItemId;
 
     // The rest of this array are pointers to various other blocks of memory it seems.

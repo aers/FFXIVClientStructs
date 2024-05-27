@@ -5,12 +5,6 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.MJI;
 // vast majority of struct info from "E8 ?? ?? ?? ?? 8B 4C 24 24 E8"
 [StructLayout(LayoutKind.Explicit, Size = 0x148)]
 public unsafe partial struct MJIFarmState {
-    [FieldOffset(0x00)] public void* vtbl;
-
-    // 0x08: substructure of size 0x10, some interface with vtable and pointer back to the outer object
-    [FieldOffset(0x08)] public void* vtbl2; // ??
-    // 0x08+0x08: MJIFarmState* owner
-
     [FieldOffset(0x18)] public bool LayoutInitialized; // if false, PlotObjectIndex / LayoutId arrays are unset
     [FieldOffset(0x1A)] public ushort ReactionEventObjectRowId; // primary row index in ReactionEventObject sheet, equal to 5
 

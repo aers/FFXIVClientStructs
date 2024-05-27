@@ -39,10 +39,10 @@ public unsafe partial struct GazeController {
             /// the soft target if set, then the hard target).
             /// </summary>
             /// <remarks>
-            /// Used when Type is <see cref="TargetInfoType.GameObjectID"/>.<br/>
+            /// Used when Type is <see cref="TargetInfoType.GameObjectId"/>.<br/>
             /// Unlike other GameObjectIDs, this one appears to be set to fully 0 if the player is not looking at anything.
             /// </remarks>
-            [FieldOffset(0x10), CExporterUnion("Union.Target")] public GameObjectID TargetId;
+            [FieldOffset(0x10), CExporterUnion("Union.Target")] public GameObjectId TargetId;
 
             /// <remarks>
             /// Used when Type is <see cref="TargetInfoType.Unk2"/> or <see cref="TargetInfoType.Unk3"/>.
@@ -52,7 +52,7 @@ public unsafe partial struct GazeController {
 
             public enum TargetInfoType {
                 None = 0,
-                GameObjectID = 1,
+                GameObjectId = 1,
                 Unk2 = 2,
                 Unk3 = 3,
             }

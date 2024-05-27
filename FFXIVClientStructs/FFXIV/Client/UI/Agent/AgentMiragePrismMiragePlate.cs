@@ -1,6 +1,5 @@
 using FFXIVClientStructs.FFXIV.Client.Game;
 using FFXIVClientStructs.FFXIV.Client.UI.Misc;
-using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
@@ -10,10 +9,6 @@ public unsafe partial struct AgentMiragePrismMiragePlate {
     [FieldOffset(0x00)] public AgentInterface AgentInterface;
 
     [FieldOffset(0x78)] public MiragePrismMiragePlateCharaView CharaView;
-
-    [FixedSizeArray<MiragePlateItem>(14)]
-    [Obsolete("Use MiragePlateCharaView.Base.Items")]
-    [FieldOffset(0x148)] public unsafe fixed byte PlateItems[14 * 0x20]; // 14 * MiragePlateItem
 
     /// <remarks>
     /// The game checks <see cref="GameMain.IsInSanctuary"/> before calling this, and if false, it prints LogMessage 4316: "Unable to apply glamour plates here.".
@@ -55,15 +50,4 @@ public unsafe partial struct AgentMiragePrismMiragePlate {
             set => Flags = (uint)(value ? Flags | 0x10 : Flags & ~0x10);
         }
     }
-}
-
-[StructLayout(LayoutKind.Explicit, Size = 0x20)]
-[Obsolete("Same as CharaViewItem")]
-public struct MiragePlateItem {
-    [FieldOffset(0x00)] public byte EquipType;
-    [FieldOffset(0x01)] public byte EquipSlotCategory;
-    [FieldOffset(0x03)] public byte Stain;
-    [FieldOffset(0x08)] public uint ItemId;
-    [FieldOffset(0x10)] public ulong ModelMain;
-    [FieldOffset(0x18)] public ulong ModelSub;
 }

@@ -1,4 +1,6 @@
-namespace FFXIVClientStructs.Havok;
+using FFXIVClientStructs.Havok.Common.Base.Math.Vector;
+
+namespace FFXIVClientStructs.Havok.Common.Base.Math.Matrix;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x40)]
 public struct hkMatrix4f {

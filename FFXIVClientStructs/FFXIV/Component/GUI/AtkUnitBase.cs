@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [StructLayout(LayoutKind.Explicit, Size = 0x220)]
 public unsafe partial struct AtkUnitBase {
     [FieldOffset(0x0)] public AtkEventListener AtkEventListener;
-    [FieldOffset(0x8)] public fixed byte Name[0x20];
+    [FieldOffset(0x8)] public fixed byte Name[32];
     [FieldOffset(0x28)] public AtkUldManager UldManager;
     [FieldOffset(0xC8)] public AtkResNode* RootNode;
     [FieldOffset(0xD0)] public AtkCollisionNode* WindowCollisionNode;
@@ -20,6 +20,7 @@ public unsafe partial struct AtkUnitBase {
     [FieldOffset(0x110)] public AtkSimpleTween RootNodeTween; // used for open/close transitions
     [FieldOffset(0x160)] public AtkValue* AtkValues;
     [FieldOffset(0x182)] public byte Flags;
+    [FieldOffset(0x189)] public byte UnkFlags189;
     [FieldOffset(0x194)] public uint OpenTransitionDuration;
     [FieldOffset(0x198)] public uint CloseTransitionDuration;
     [FieldOffset(0x1A1)] public byte NumOpenPopups; // used for dialogs and context menus to block inputs via ShouldIgnoreInputs
@@ -36,12 +37,10 @@ public unsafe partial struct AtkUnitBase {
     [FieldOffset(0x1C6)] public short CloseTransitionOffsetY;
     [FieldOffset(0x1C8)] public short OpenSoundEffectId;
     [FieldOffset(0x1CA)] public ushort AtkValuesCount;
-    [FieldOffset(0x1CC)] public ushort ID;
-    [FieldOffset(0x1CE)] public ushort ParentID;
-    [FieldOffset(0x1D0)] public ushort HostID; // for example, in CharacterProfile this holds the ID of the Character addon
-    [Obsolete("Use HostID")]
-    [FieldOffset(0x1D0)] public ushort UnknownID;
-    [FieldOffset(0x1D2)] public ushort ContextMenuParentID;
+    [FieldOffset(0x1CC)] public ushort Id;
+    [FieldOffset(0x1CE)] public ushort ParentId;
+    [FieldOffset(0x1D0)] public ushort HostId; // for example, in CharacterProfile this holds the ID of the Character addon
+    [FieldOffset(0x1D2)] public ushort ContextMenuParentId;
     [FieldOffset(0x1D5)] public byte Alpha;
     [FieldOffset(0x1D6)] public byte ShowHideFlags;
     [FieldOffset(0x1D8)] public AtkResNode** CollisionNodeList; // seems to be all collision nodes in tree, may be something else though
@@ -53,6 +52,9 @@ public unsafe partial struct AtkUnitBase {
         get => (Flags & 0x20) == 0x20;
         set => Flags = value ? Flags |= 0x20 : Flags &= 0xDF;
     }
+
+    /// <summary> <c>true</c> when Setup is complete. </summary>
+    public readonly bool IsReady => (UnkFlags189 & 0x01) != 0;
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F BF CB 0F 28 F8")]
     public partial float GetScale();
@@ -91,7 +93,7 @@ public unsafe partial struct AtkUnitBase {
     public partial byte FireCallbackInt(int callbackValue);
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B 44 24 20 C1 E8 05")]
-    public partial void FireCallback(int valueCount, AtkValue* values, void* a4 = null); // TODO: a4 is a bool to hide/close the window (depends on flag +0x188 & 1)
+    public partial void FireCallback(int valueCount, AtkValue* values, bool close = false);
 
     [MemberFunction("E8 ?? ?? ?? ?? F6 46 40 0F")]
     public partial void UpdateCollisionNodeList(bool clearFocus);
@@ -181,7 +183,7 @@ public unsafe partial struct AtkUnitBase {
 
     /// <remarks>
     /// The name "Finalizer" is used instead of "Finalize" to avoid conflicts
-    /// with the <see cref="System.Object.Finalize"/> method.
+    /// with the <see cref="object.Finalize"/> method.
     /// </remarks>
     [VirtualFunction(41)]
     public partial void Finalizer();
@@ -222,6 +224,9 @@ public unsafe partial struct AtkUnitBase {
 
     [MemberFunction("E8 ?? ?? ?? ?? 8D 55 06 48 8B CE")]
     public partial void SetCloseTransition(float duration, short offsetX, short offsetY, float scale);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 4D 8B C6 48 8B D3 48 8B CF")]
+    public partial bool SetAtkValues(uint numValues, AtkValue* values);
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F BF 8C 24 ?? ?? ?? ?? 01 8F")]
     public partial bool MoveDelta(short* xDelta, short* yDelta);

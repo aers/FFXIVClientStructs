@@ -7,6 +7,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 public partial struct AddonInventoryExpansion {
     [FieldOffset(0)] public AtkUnitBase AtkUnitBase;
 
+    [FieldOffset(0x280)] public AtkAddonControl AddonControl;
+
     [FieldOffset(0x328)] public int TabIndex;
 
     [MemberFunction("E8 ?? ?? ?? ?? BB ?? ?? ?? ?? 83 EB 01")]

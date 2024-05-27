@@ -34,7 +34,7 @@ public unsafe partial struct RaptureGearsetModule {
     /// <param name="gearsetName">The name of the gearset to look up.</param>
     /// <returns>Returns the index/ID of a GearsetEntry</returns>
     [MemberFunction("E8 ?? ?? ?? ?? 8B D8 81 FB")]
-    public partial int FindGearsetIDByName(Utf8String* gearsetName);
+    public partial int FindGearsetIdByName(Utf8String* gearsetName);
 
     /// <summary>
     /// Check if a gearset at a specific index is valid.
@@ -229,7 +229,7 @@ public unsafe partial struct RaptureGearsetModule {
     public struct GearsetItem {
         public const int Size = 0x1C;
 
-        [FieldOffset(0x00)] public uint ItemID;
+        [FieldOffset(0x00)] public uint ItemId;
         [FieldOffset(0x04)] public uint GlamourId;
         [FieldOffset(0x08)] public byte Stain;
 
@@ -240,7 +240,7 @@ public unsafe partial struct RaptureGearsetModule {
 
     [StructLayout(LayoutKind.Explicit, Size = 0x1C0)]
     public partial struct GearsetEntry {
-        [FieldOffset(0x00)] public byte ID;    // This may actually be set number, which is not _quite_ ID.
+        [FieldOffset(0x00)] public byte Id;    // This may actually be set number, which is not _quite_ ID.
         [FieldOffset(0x01)] public fixed byte Name[0x30];
         [FieldOffset(0x31)] public byte ClassJob;
         [FieldOffset(0x32)] public byte GlamourSetLink;

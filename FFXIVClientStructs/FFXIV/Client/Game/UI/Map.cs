@@ -24,14 +24,6 @@ public unsafe partial struct Map {
     [FieldOffset(0x3E98)] public StdList<MarkerInfo> TripleTriad;
     [FieldOffset(0x3EA8)] public StdList<MarkerInfo> CustomTalk;
     [FieldOffset(0x3F50)] public StdList<MarkerInfo> GemstoneTraders;
-
-    [FieldOffset(0x1AF0), Obsolete("Use ActiveLevequest")] public StdVector<MapMarkerData> ActiveLevequestMarkerData;
-    [FieldOffset(0x1B18), Obsolete("Use List<T> UnacceptedQuests")] public MapMarkerContainer QuestMarkerData;
-    [FieldOffset(0x1B60), Obsolete("Use List<T> GuildLeveAssignments")] public MapMarkerContainer GuildLeveAssignmentMapMarkerData;
-    [FieldOffset(0x1BA8), Obsolete("Use List<T> GuildOrderGuides")] public MapMarkerContainer GuildOrderGuideMarkerData;
-    [FieldOffset(0x3E98), Obsolete("Use List<T> TripleTriad")] public MapMarkerContainer TripleTriadMarkerData;
-    [FieldOffset(0x3EA8), Obsolete("Use List<T> CustomTalk")] public MapMarkerContainer CustomTalkMarkerData;
-    [FieldOffset(0x3F50), Obsolete("Use List<T> GemstoneTraders")] public MapMarkerContainer GemstoneTraderMarkerData;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x90)]
@@ -76,43 +68,4 @@ public unsafe partial struct MapMarkerData {
         uint placeNameId,
         ushort recommendedLevel,
         sbyte a14 = -1);
-}
-
-/// <summary>
-/// This container uses a linked list internally to contain Map Markers that contain tooltip information.
-/// </summary>
-[Obsolete("Use StdList<T> instead.")]
-[StructLayout(LayoutKind.Sequential)]
-public unsafe partial struct MapMarkerContainer {
-    public LinkedList* List;
-    public int Size;
-
-    [Obsolete("Use StdList<T> instead.")]
-    [StructLayout(LayoutKind.Sequential)]
-    public unsafe partial struct LinkedList {
-        public MapMarkerNode* First;
-        public MapMarkerNode* Last;
-    }
-
-    [Obsolete("Use StdList<T> instead.")]
-    public IEnumerable<MarkerInfo> GetAllMarkers() {
-        var result = new List<MarkerInfo>();
-        var current = List->First;
-
-        foreach (var _ in Enumerable.Range(0, Size)) {
-            result.Add(current->Data);
-            current = current->Next;
-        }
-
-        return result;
-    }
-}
-
-[Obsolete("Use StdList<T> instead.")]
-[StructLayout(LayoutKind.Sequential)]
-public unsafe partial struct MapMarkerNode {
-    public MapMarkerNode* Next;
-    public MapMarkerNode* Previous;
-
-    public MarkerInfo Data;
 }

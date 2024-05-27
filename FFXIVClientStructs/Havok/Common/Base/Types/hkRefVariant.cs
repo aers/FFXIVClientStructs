@@ -1,8 +1,11 @@
-namespace FFXIVClientStructs.Havok;
+using FFXIVClientStructs.Havok.Common.Base.Object;
+using FFXIVClientStructs.Havok.Common.Base.Reflection;
 
-[StructLayout(LayoutKind.Sequential)]
+namespace FFXIVClientStructs.Havok.Common.Base.Types;
+
+[StructLayout(LayoutKind.Explicit, Size = 0x08)]
 public unsafe partial struct hkRefVariant {
-    public hkRefPtr<hkReferencedObject> hkRefPtr;
+    [FieldOffset(0x00)] public hkRefPtr<hkReferencedObject> hkRefPtr;
 
     [MemberFunction("E8 ?? ?? ?? ?? 49 8D 4E 10 E8 ?? ?? ?? ?? 48 85 C0")]
     public partial void set(void* o, hkClass* k);

@@ -1,5 +1,3 @@
-using FFXIVClientStructs.FFXIV.Component.GUI;
-
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 //Client::UI::Agent::AgentCompanyCraftMaterial

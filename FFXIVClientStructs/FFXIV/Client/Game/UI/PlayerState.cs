@@ -11,13 +11,13 @@ public unsafe partial struct PlayerState {
 
     [FieldOffset(0x00)] public byte IsLoaded;
     [FieldOffset(0x01)] public fixed byte CharacterName[64];
-    [FieldOffset(0x41)] public fixed byte PSNOnlineID[17];
+    [FieldOffset(0x41)] public fixed byte PSNOnlineId[17];
     [FieldOffset(0x64)] public uint ObjectId;
     [FieldOffset(0x68)] public ulong ContentId;
     /// <remarks>
     /// 0 = Duty penalty<br/>
     /// 1 = Unknown<br/>
-    /// See also: <see cref="RouletteController.GetPenaltyRemainingInMinutes" />
+    /// See also: <see cref="InstanceContent.GetPenaltyRemainingInMinutes" />
     /// </remarks>
     [FieldOffset(0x70)] public fixed uint PenaltyTimestamps[2];
 
@@ -70,7 +70,7 @@ public unsafe partial struct PlayerState {
     // Size: (OrnamentSheet.RowCount + 7) >> 3
     /// <remarks> Use <see cref="IsOrnamentUnlocked"/> </remarks>
     [FieldOffset(0x300)] public fixed byte UnlockedOrnamentsBitmask[(41 + 7) >> 3];
-    [FieldOffset(0x306)] public byte NumOwnedMounts;
+    [FieldOffset(0x306)] public ushort NumOwnedMounts;
 
     // Ref: "48 8D 0D ?? ?? ?? ?? 41 0F B6 0C 08 41 B0 01 84 D1 0F 95 C1 24 01 02 C0 0A C8 41 0F B6 C4"
     // Size: (FishParameterSheet.Count(row => row.IsInLog) + 7) >> 3
@@ -89,7 +89,7 @@ public unsafe partial struct PlayerState {
 
     /// <remarks>
     /// Index is column 27 of ContentRoulette sheet.<br/>
-    /// See also: <see cref="RouletteController.IsRouletteComplete" />
+    /// See also: <see cref="InstanceContent.IsRouletteComplete" />
     /// </remarks>
     [FieldOffset(0x494)] public fixed byte ContentRouletteCompletion[12];
     [FieldOffset(0x4A0)] public short PlayerCommendations;

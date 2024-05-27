@@ -12,7 +12,4 @@ public unsafe partial struct AddonRetainerTaskResult {
     [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
     [FieldOffset(0x240)] public AtkComponentButton* ReassignButton;
     [FieldOffset(0x248)] public AtkComponentButton* ConfirmButton;
-
-    [VirtualFunction(48), Obsolete("Use AtkUnitBase.OnSetup")]
-    public partial void OnSetup(uint a2, AtkValue* atkValues);
 }

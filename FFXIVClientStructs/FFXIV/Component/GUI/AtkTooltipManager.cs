@@ -16,7 +16,7 @@ public unsafe partial struct AtkTooltipManager {
     [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public partial struct AtkTooltipArgs : ICreatable {
         [FieldOffset(0x0)] public byte* Text;
-        [FieldOffset(0x8)] public ulong TypeSpecificID;
+        [FieldOffset(0x8)] public ulong TypeSpecificId;
         [FieldOffset(0x10)] public uint Flags;
         [FieldOffset(0x14)] public short Unk_14;
         [FieldOffset(0x16)] public byte Unk_16;
@@ -28,7 +28,7 @@ public unsafe partial struct AtkTooltipManager {
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public struct AtkTooltipInfo {
         [FieldOffset(0x0)] public AtkTooltipArgs AtkTooltipArgs;
-        [FieldOffset(0x18)] public ushort ParentID; // same as IDs in addons
+        [FieldOffset(0x18)] public ushort ParentId; // same as IDs in addons
         [FieldOffset(0x1A)] public AtkTooltipType Type;
     }
 
@@ -37,8 +37,7 @@ public unsafe partial struct AtkTooltipManager {
     [FieldOffset(0x18)] public AtkStage* AtkStage;
 
     [MemberFunction("E8 ?? ?? ?? ?? 43 88 34 26")]
-    public partial void AddTooltip(AtkTooltipType type, ushort parentID, AtkResNode* targetNode,
-        AtkTooltipArgs* tooltipArgs);
+    public partial void AddTooltip(AtkTooltipType type, ushort parentId, AtkResNode* targetNode, AtkTooltipArgs* tooltipArgs);
 
     [MemberFunction("E8 ?? ?? ?? ?? 45 33 C9 45 8D 44 24")]
     public partial void RemoveTooltip(AtkResNode* targetNode);
@@ -46,7 +45,7 @@ public unsafe partial struct AtkTooltipManager {
     [MemberFunction("E8 ?? ?? ?? ?? EB 24 66 83 FA 22")]
     public partial void ShowTooltip(
         AtkTooltipType type,
-        ushort parentID,
+        ushort parentId,
         AtkResNode* targetNode,
         AtkTooltipArgs* tooltipArgs,
         delegate* unmanaged[Stdcall]<float*, float*, void*> unkDelegate = null,

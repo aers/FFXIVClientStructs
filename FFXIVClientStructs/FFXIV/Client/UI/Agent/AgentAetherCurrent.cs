@@ -1,5 +1,3 @@
-using FFXIVClientStructs.FFXIV.Component.GUI;
-
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [VTableAddress("C6 43 30 01 48 8D 05", 7)]

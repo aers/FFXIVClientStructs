@@ -1,7 +1,6 @@
 using System.Numerics;
 using FFXIVClientStructs.FFXIV.Client.Game.UI;
 using FFXIVClientStructs.FFXIV.Client.System.String;
-using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
@@ -29,21 +28,15 @@ public unsafe partial struct AgentMap {
     [FieldOffset(0x1C0)] public Utf8String SelectedMapPath;
     [FieldOffset(0x228)] public Utf8String SelectedMapBgPath;
     [FieldOffset(0x290)] public Utf8String CurrentMapBgPath;
-    [FieldOffset(0x2F8), FixedSizeArray<Utf8String>(4)]
-    public fixed byte MapSelectionStrings[4 * 0x68]; // 4 * Utf8String
+    [FieldOffset(0x2F8), FixedSizeArray<Utf8String>(4)] public fixed byte MapSelectionStrings[4 * 0x68]; // 4 * Utf8String
     [FieldOffset(0x498)] public Utf8String MapTitleString;
 
-    [FieldOffset(0x638), FixedSizeArray<MapMarkerInfo>(132)]
-    public fixed byte MapMarkerInfoArray[0x48 * 132]; // 132 * MapMarkerInfo
-    [FieldOffset(0x2B58), FixedSizeArray<TempMapMarker>(12)]
-    public fixed byte TempMapMarkerArray[0x110 * 12]; // 12 * TempMapMarker
+    [FieldOffset(0x638), FixedSizeArray<MapMarkerInfo>(132)] public fixed byte MapMarkerInfoArray[0x48 * 132]; // 132 * MapMarkerInfo
+    [FieldOffset(0x2B58), FixedSizeArray<TempMapMarker>(12)] public fixed byte TempMapMarkerArray[0x110 * 12]; // 12 * TempMapMarker
 
     [FieldOffset(0x3818)] public FlagMapMarker FlagMapMarker;
 
-    [FieldOffset(0x3860), FixedSizeArray<MapMarkerBase>(12)]
-    public fixed byte WarpMarkerArray[0x38 * 12]; // 12 * MapMarkerBase
-    [Obsolete("Use MiniMapGatheringMarkersSpan")]
-    [FieldOffset(0x3B00)] public fixed byte UnkArray2[0xA8 * 6];
+    [FieldOffset(0x3860), FixedSizeArray<MapMarkerBase>(12)] public fixed byte WarpMarkerArray[0x38 * 12]; // 12 * MapMarkerBase
     /// <remarks>
     /// 0 = mineral deposit and lush vegetation patch<br/>
     /// 1 = legendary mineral deposit<br/>
@@ -51,8 +44,7 @@ public unsafe partial struct AgentMap {
     /// </remarks>
     [FixedSizeArray<MiniMapGatheringMarker>(6)]
     [FieldOffset(0x3B00)] public fixed byte MiniMapGatheringMarkers[0xA8 * 6];
-    [FieldOffset(0x3EF0), FixedSizeArray<MiniMapMarker>(100)]
-    public fixed byte MiniMapMarkerArray[0x40 * 100]; // 100 * MiniMapMarker
+    [FieldOffset(0x3EF0), FixedSizeArray<MiniMapMarker>(100)] public fixed byte MiniMapMarkerArray[0x40 * 100]; // 100 * MiniMapMarker
 
     [FieldOffset(0x5898)] public float SelectedMapSizeFactorFloat;
     [FieldOffset(0x589C)] public float CurrentMapSizeFactorFloat;
@@ -210,7 +202,7 @@ public struct MiniMapMarker {
     [FieldOffset(0x08)] public MapMarkerBase MapMarker;
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x108)]
+[StructLayout(LayoutKind.Explicit, Size = 0x110)]
 public struct TempMapMarker {
     [FieldOffset(0x00)] public Utf8String TooltipText;
     [FieldOffset(0x68)] public MapMarkerBase MapMarker;

@@ -10,29 +10,25 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 //   Component::GUI::AtkModuleInterface
 [StructLayout(LayoutKind.Explicit, Size = 0x82A0)]
 public unsafe partial struct AtkModule {
-    [FieldOffset(0x0), CExportIgnore] public void* vtbl;
     [FieldOffset(0x8)] public AtkExternalInterface AtkExternalInterface;
 
     [FieldOffset(0x20)] public ExcelSheet* AddonSheet;
 
     [FieldOffset(0x128)] public AtkStage* AtkStage;
     [FieldOffset(0x130)] internal nint Resources;
-
+    [FieldOffset(0x1B8)] public AtkFontManager AtkFontManager;
     [FieldOffset(0x250)] public AtkTextureResourceManager AtkTextureResourceManager;
     [FieldOffset(0x2A8)] public RaptureAtkUnitManager* RaptureAtkUnitManager;
-
-    [FieldOffset(0x1B58)] public AtkUnitBase* IntersectingAddon;
-    [FieldOffset(0x1B60)] public AtkCollisionNode* IntersectingCollisionNode;
-
+    [FieldOffset(0x2B0)] public AtkInputManager AtkInputManager;
+    [FieldOffset(0x1B50)] public AtkCollisionManager AtkCollisionManager;
     [FieldOffset(0x1B90)] public AtkArrayDataHolder AtkArrayDataHolder;
-
-    [FieldOffset(0x5C50)] public Utf8String UIColorSheetName;
-
-    [FieldOffset(0x5CC4)] public byte ActiveColorThemeType;
+    [FieldOffset(0x1BE0)] public AtkTimerHolder AtkTimerHolder;
+    [FieldOffset(0x1C00)] public AtkSimpleTweenHolder AtkSimpleTweenHolder;
+    [FieldOffset(0x5C08)] public AtkCrestManager AtkCrestManager;
+    [FieldOffset(0x5C50)] public AtkUIColorHolder AtkUIColorHolder;
 
     [FieldOffset(0x5D00)] public AtkFontCodeModule AtkFontCodeModule;
     [FieldOffset(0x7280)] internal StdVector<nint> CallbackHandlerFunctions;
-    [FieldOffset(0x7298)] public UIModule* UIModulePtr;
     //[FieldOffset(0x72A0)] internal StdMap<?,?> AgentAddonMapping; // maybe?
 
     [FieldOffset(0x72B8)] public TextService TextService;

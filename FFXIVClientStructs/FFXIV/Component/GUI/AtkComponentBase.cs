@@ -30,9 +30,8 @@ public unsafe partial struct AtkComponentBase {
     [VirtualFunction(5)]
     public partial void OnUldUpdate();
 
-    // TODO: return void
     [VirtualFunction(10)]
-    public partial void* SetEnabledState(bool enabled);
+    public partial void SetEnabledState(bool enabled);
 }
 
 public enum ComponentType : byte {

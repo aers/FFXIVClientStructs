@@ -8,8 +8,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 public unsafe partial struct InfoProxyFreeCompany {
     [FieldOffset(0x00)] public InfoProxyInterface InfoProxyInterface;
     [FieldOffset(0x20)] public void* Unk20; //Low adress probably high in hierarchy
-    [FieldOffset(0x30)] public ulong ID;
-    [FieldOffset(0x46)] public ushort HomeWorldID;
+    [FieldOffset(0x30)] public ulong Id;
+    [FieldOffset(0x46)] public ushort HomeWorldId;
     [FieldOffset(0x69)] public GrandCompany GrandCompany;
     [FieldOffset(0x6B)] public byte Rank;
     [FieldOffset(0x70)] public CrestData Crest;
@@ -29,7 +29,7 @@ public unsafe partial struct InfoProxyFreeCompany {
     //0x100fc0d0
     //40 53 48 81 EC 80 0F 00 00 48 8B 05 E0 47 F9 01 48 33 C4 48 89 84 24 70 0F 00 00 48 8B 0D E6 1E FB 01 8B DA
     [MemberFunction("E8 ?? ?? ?? ?? EB 2F E8")]
-    public partial void RequestDataForCharacter(uint objectID);
+    public partial void RequestDataForCharacter(uint objectId);
 
     [StructLayout(LayoutKind.Explicit, Size = 0x58)]
     public struct RankData {

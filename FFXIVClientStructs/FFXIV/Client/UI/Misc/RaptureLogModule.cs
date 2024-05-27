@@ -3,7 +3,6 @@ using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Common.Log;
 using FFXIVClientStructs.FFXIV.Component.Excel;
 using FFXIVClientStructs.FFXIV.Component.GUI;
-using FFXIVClientStructs.FFXIV.Component.Text;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
@@ -22,7 +21,6 @@ public unsafe partial struct RaptureLogModule {
     [FieldOffset(0xF8)] public RaptureTextModule* RaptureTextModule;
 
     [FieldOffset(0x100)] public AtkFontCodeModule* AtkFontCodeModule;
-    [FieldOffset(0x100), Obsolete("Use AtkFontCodeModule instead")] public MacroDecoder* MacroDecoder;
     [FixedSizeArray<Utf8String>(10)]
     [FieldOffset(0x108)] public fixed byte TempParseMessage[0x68 * 10];
 
@@ -32,9 +30,6 @@ public unsafe partial struct RaptureLogModule {
     [FieldOffset(0x530)] public fixed byte ChatTabs[0x928 * 5];
 
     [FieldOffset(0x33D8)] public ExcelSheet* LogMessageSheet;
-
-    [Obsolete("Use ChatTabIsPendingReload")]
-    [FieldOffset(0x33E8)] public fixed byte ChatTabsPendingReload[4];
     /// <remarks> Set to <c>true</c> to reload the tab. </remarks>
     [FieldOffset(0x33E8)] public fixed bool ChatTabIsPendingReload[4];
     /// <remarks> Controlled by config options <c>LogTimeDisp</c>, <c>LogTimeDispLog2</c>, <c>LogTimeDispLog3</c> and <c>LogTimeDispLog4</c>. </remarks>
@@ -51,7 +46,7 @@ public unsafe partial struct RaptureLogModule {
     public partial uint PrintMessage(ushort logKindId, Utf8String* senderName, Utf8String* message, int timestamp, bool silent = false);
 
     [MemberFunction("E8 ?? ?? ?? ?? 44 03 FB")]
-    public partial void ShowLogMessage(uint logMessageID);
+    public partial void ShowLogMessage(uint logMessageId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 32 C0 EB 17")]
     public partial void ShowLogMessageUInt(uint logMessageId, uint value);
@@ -77,6 +72,9 @@ public unsafe partial struct RaptureLogModule {
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 ?? 0F B6 85 ?? ?? ?? ?? 48 8D 8D")]
     public partial bool GetLogMessageDetail(int index, short* logKind, Utf8String* sender, Utf8String* message, uint* timeStamp);
+
+    [MemberFunction("4C 8B D1 48 8B 89 ?? ?? ?? ?? 48 85 C9")]
+    public partial void AddMsgSourceEntry(ulong contentId, int messageIndex, ushort worldId, ushort chatType);
 
     public bool GetLogMessage(int index, out byte[] message) {
         var pMsg = stackalloc Utf8String[1];

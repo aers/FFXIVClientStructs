@@ -83,8 +83,6 @@ public unsafe partial struct BannerModuleEntry {
     [FieldOffset(0x5E)] public short DirectionalLightingHorizontalAngle;
     [FieldOffset(0x60)] public byte Race; // CustomizeData[0]
     [FieldOffset(0x61)] public byte Sex; // CustomizeData[1]
-    [Obsolete("Renamed to Sex")]
-    [FieldOffset(0x61)] public byte Gender; // CustomizeData[1]
     [FieldOffset(0x62)] public byte Height; // CustomizeData[3]
     [FieldOffset(0x63)] public byte Tribe; // CustomizeData[4]
     [FieldOffset(0x64)] public byte DirectionalLightingColorRed;
@@ -93,8 +91,6 @@ public unsafe partial struct BannerModuleEntry {
     [FieldOffset(0x67)] public byte AmbientLightingColorRed;
     [FieldOffset(0x68)] public byte AmbientLightingColorGreen;
     [FieldOffset(0x69)] public byte AmbientLightingColorBlue;
-    // [FieldOffset(0x6A)] public byte Unk6A;
-    // [FieldOffset(0x6B)] public byte Unk6B;
     [FieldOffset(0x6C)] public float AnimationProgress;
     [FieldOffset(0x70)] public uint BannerTimelineIcon;
     [FieldOffset(0x74)] public uint LastUpdated; // unix timestamp
@@ -112,11 +108,9 @@ public unsafe partial struct BannerModuleEntry {
     [FieldOffset(0x8B)] public byte DirectionalLightingBrightness;
     [FieldOffset(0x8C)] public byte AmbientLightingBrightness;
     [FieldOffset(0x8D)] public byte HasBannerTimelineCustomName;
-    // [FieldOffset(0x8E)] public byte Unk8E;
-    // [FieldOffset(0x8F)] public byte Unk8F;
 
     [MemberFunction("0F B7 42 7C 66 39 41 7C")]
-    public partial bool Equals(BannerModuleEntry* other);
+    public partial bool IsEqual(BannerModuleEntry* other);
 
     /// <param name="itemIds">A pointer to 14 Item Ids</param>
     /// <param name="stainIds">A pointer to 14 Stain Ids</param>

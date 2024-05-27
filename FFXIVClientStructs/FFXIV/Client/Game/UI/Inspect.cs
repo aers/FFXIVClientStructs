@@ -4,12 +4,12 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x278)]
 public unsafe partial struct Inspect {
-    [FieldOffset(0xC)] public uint ObjectID;
+    [FieldOffset(0xC)] public uint ObjectId;
     [FieldOffset(0x10)] public byte Type;
     [FieldOffset(0x12)] public short WorldId;
     [FieldOffset(0x14)] public fixed byte Name[64];
 
-    [FieldOffset(0x54)] public fixed byte PSNOnlineID[17]; // this got bigger for the Gamertag, unsure about its size yet
+    [FieldOffset(0x54)] public fixed byte PSNOnlineId[17]; // this got bigger for the Gamertag, unsure about its size yet
 
     [FieldOffset(0x75)] public byte ClassJobId;
     [FieldOffset(0x76)] public byte Level;
@@ -34,10 +34,6 @@ public unsafe partial struct Inspect {
     [FieldOffset(0x252)] public byte BuddyDefenderLevel;
     [FieldOffset(0x253)] public byte BuddyAttackerLevel;
     [FieldOffset(0x254)] public byte BuddyHealerLevel;
-
-    [Obsolete("Use ContentKeyValueData(Span) or GetContentValue instead")]
-    [FixedSizeArray<ExtraInspectDataEntry>(3)]
-    [FieldOffset(0x25B)] public fixed byte ExtraInspectData[3 * 0x8];
 
     /// <remarks> For easier access, use <see cref="GetContentValue"/>. </remarks>
     [FixedSizeArray<StdPair<uint, uint>>(3)]
@@ -68,10 +64,4 @@ public unsafe partial struct Inspect {
         }
         return 0;
     }
-}
-
-[StructLayout(LayoutKind.Explicit, Size = 0x8)]
-public struct ExtraInspectDataEntry {
-    [FieldOffset(0x00)] public int Key;
-    [FieldOffset(0x04)] public int Value;
 }

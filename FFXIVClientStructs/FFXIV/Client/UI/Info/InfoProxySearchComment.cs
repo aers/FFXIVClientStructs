@@ -9,10 +9,7 @@ public unsafe partial struct InfoProxySearchComment {
 
     [FieldOffset(0x20)] public void* Unk20;
     [FieldOffset(0x28)] public UpdateDataPacket UpdateData;
-
-    [Obsolete("Use UpdateData.SearchComment")]
-    [FieldOffset(0x3A)] public fixed byte SearchCommentAsByteArr[62]; //Length is guessed
-
+    
     [FieldOffset(0x100)] public Utf8String SearchComment;
     [FieldOffset(0x168)] public Utf8String UnkString1;
     [FieldOffset(0x1D0)] public Utf8String UnkString2;
@@ -34,7 +31,7 @@ public unsafe partial struct InfoProxySearchComment {
     public partial void SetUpdateLookingForPartyClassJobIdMask(ulong classJobIdMask);
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 53 15")]
-    public partial void SetUpdateOnlineStatus(InfoProxyCommonList.CharacterData.OnlineStatus onlineStatus);
+    public partial void SetUpdateOnlineStatus(InfoProxyCommonList.CharacterData.OnlineStatus onlineStatus, bool skipAwayCheck = false);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8D 53 16")]
     public partial void SetUpdateLanguageMask(InfoProxyCommonList.CharacterData.LanguageMask languageMask);

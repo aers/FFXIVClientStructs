@@ -1,6 +1,8 @@
-namespace FFXIVClientStructs.Havok;
+using FFXIVClientStructs.Havok.Common.Base.Types;
 
-[StructLayout(LayoutKind.Sequential, Pack = 16)]
+namespace FFXIVClientStructs.Havok.Common.Base.Thread.JobQueue;
+
+[StructLayout(LayoutKind.Explicit, Size = 0x08)]
 public struct hkJob {
     public enum hkJobType {
         Dynamics,
@@ -31,9 +33,9 @@ public struct hkJob {
         Disabled,
     }
 
-    public byte JobSubType;
-    public hkEnum<hkJobType, byte> JobType;
-    public hkEnum<hkJobSpuType, byte> SpuType;
-    public ushort Size;
-    public short ThreadAffinity;
+    [FieldOffset(0x00)] public byte JobSubType;
+    [FieldOffset(0x01)] public hkEnum<hkJobType, byte> JobType;
+    [FieldOffset(0x02)] public hkEnum<hkJobSpuType, byte> SpuType;
+    [FieldOffset(0x04)] public ushort Size;
+    [FieldOffset(0x06)] public short ThreadAffinity;
 }

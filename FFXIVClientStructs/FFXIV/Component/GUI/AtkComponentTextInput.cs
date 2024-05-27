@@ -15,7 +15,6 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 public unsafe partial struct AtkComponentTextInput {
     [FieldOffset(0x0)] public AtkComponentInputBase AtkComponentInputBase;
 
-    [FieldOffset(0x1E0), CExportIgnore] public void** AtkTextInputEventInterfaceVtbl;
     [FieldOffset(0x1E8)] public SoftKeyboardDeviceInterface.SoftKeyboardInputInterface SoftKeyboardInputInterface; // implemented by class
 
     [FieldOffset(0x250)] public uint MaxTextLength;

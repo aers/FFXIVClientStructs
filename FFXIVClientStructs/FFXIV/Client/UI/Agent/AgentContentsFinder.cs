@@ -1,5 +1,4 @@
 using FFXIVClientStructs.FFXIV.Client.System.String;
-using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
@@ -39,6 +38,7 @@ public unsafe partial struct AgentContentsFinder {
     public partial void* OpenRouletteDuty(byte roulette, byte a2 = 0);
 }
 
+// TODO: remove unused struct?
 [StructLayout(LayoutKind.Explicit, Size = 0x20), CExporterStructUnion]
 public struct ContentsFinderRewards {
     [FieldOffset(0x00)] public int ExpReward;
@@ -53,7 +53,7 @@ public struct ContentsFinderRewards {
 
 [StructLayout(LayoutKind.Explicit, Size = 0x130)]
 public struct ItemReward {
-    [FieldOffset(0x04)] public int ItemId; // TODO: Change this to a uint
+    [FieldOffset(0x04)] public uint ItemId;
     [FieldOffset(0x08)] public int Quantity; // -1 seems to be arrow up
     [FieldOffset(0x10)] public uint IconId;
     [FieldOffset(0x18)] public Utf8String TooltipString;
@@ -63,6 +63,6 @@ public struct ItemReward {
 public enum ContentsRouletteRole : byte {
     Tank = 0,
     Healer = 1,
-    DPS = 2,
+    Dps = 2,
     None = 3,
 }

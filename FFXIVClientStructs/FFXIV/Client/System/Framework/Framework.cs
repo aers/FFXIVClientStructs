@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using FFXIVClientStructs.FFXIV.Client.Game;
 using FFXIVClientStructs.FFXIV.Client.Network;
 using FFXIVClientStructs.FFXIV.Client.Sound;
@@ -39,9 +40,6 @@ public unsafe partial struct Framework {
     [FieldOffset(0x1678)] public bool IsNetworkModuleInitialized;
     [FieldOffset(0x1679)] public bool EnableNetworking;
     [FieldOffset(0x1680)] public TimePoint UtcTime;
-    [Obsolete("Use UtcTime.Timestamp")][FieldOffset(0x1680)] public long ServerTime; // TODO: change to uint
-    [Obsolete("Use UtcTime.CpuMilliSeconds")][FieldOffset(0x1688)] public long PerformanceCounterInMilliSeconds;
-    [Obsolete("Use UtcTime.CpuMicroSeconds")][FieldOffset(0x1688)] public long PerformanceCounterInMicroSeconds;
     [FieldOffset(0x1698)] public uint TimerResolutionMillis;
     [FieldOffset(0x16A0)] public long PerformanceCounterFrequency;
     [FieldOffset(0x16A8)] public long PerformanceCounterValue;
@@ -64,15 +62,6 @@ public unsafe partial struct Framework {
     [FieldOffset(0x16C8)] public uint FrameCounter;
     [FieldOffset(0x16F8)] public TaskManager TaskManager;
     [FieldOffset(0x1768)] public ClientTime ClientTime;
-    [FieldOffset(0x1770)]
-    [Obsolete("Use ClientTime.EorzeaTime")]
-    public long EorzeaTime;
-    [FieldOffset(0x1798)]
-    [Obsolete("Use ClientTime.EorzeaTimeOverride")]
-    public long EorzeaTimeOverride;
-    [FieldOffset(0x17A0)]
-    [Obsolete("Use ClientTime.IsEorzeaTimeOverridden")]
-    public bool IsEorzeaTimeOverridden;
     [FieldOffset(0x17C4)] public float FrameRate;
     /// <summary>
     /// If true <see cref="FrameDeltaTime"/> is set to 0.
@@ -146,22 +135,7 @@ public unsafe partial struct Framework {
     [MemberFunction("E8 ?? ?? ?? ?? 88 43 08 84 C0 74 16")]
     public partial bool IsSteamApiInitialized();
 
-    public string GamePath {
-        get {
-            fixed (char* p = gamePath)
-                return new string(p);
-        }
-    }
-    public string SqPackPath {
-        get {
-            fixed (char* p = sqPackPath)
-                return new string(p);
-        }
-    }
-    public string UserPath {
-        get {
-            fixed (char* p = userPath)
-                return new string(p);
-        }
-    }
+    public string GamePath => new((char*)Unsafe.AsPointer(ref gamePath[0]));
+    public string SqPackPath => new((char*)Unsafe.AsPointer(ref sqPackPath[0]));
+    public string UserPath => new((char*)Unsafe.AsPointer(ref userPath[0]));
 }

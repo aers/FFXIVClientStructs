@@ -1,5 +1,4 @@
 using FFXIVClientStructs.FFXIV.Client.UI.Misc;
-using FFXIVClientStructs.FFXIV.Component.GUI;
 using static FFXIVClientStructs.FFXIV.Client.UI.Misc.RaptureGearsetModule;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;

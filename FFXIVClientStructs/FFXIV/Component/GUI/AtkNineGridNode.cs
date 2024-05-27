@@ -11,7 +11,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 public unsafe partial struct AtkNineGridNode : ICreatable {
     [FieldOffset(0x0)] public AtkResNode AtkResNode;
     [FieldOffset(0xB0)] public AtkUldPartsList* PartsList;
-    [FieldOffset(0xB8)] public uint PartID;
+    [FieldOffset(0xB8)] public uint PartId;
     [FieldOffset(0xBC)] public short TopOffset;
     [FieldOffset(0xBE)] public short BottomOffset;
     [FieldOffset(0xC0)] public short LeftOffset;

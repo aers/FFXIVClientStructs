@@ -1,7 +1,6 @@
 using FFXIVClientStructs.FFXIV.Client.Game.Character;
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
 using FFXIVClientStructs.FFXIV.Client.System.String;
-using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
@@ -9,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 public unsafe struct BalloonInfo {
     [FieldOffset(0x0)] public Utf8String FormattedText; // Contains breaks for newlines
     [FieldOffset(0x68)] public Utf8String OriginalText;
-    [FieldOffset(0xD0)] public GameObjectID ObjectId;
+    [FieldOffset(0xD0)] public GameObjectId ObjectId;
 
     [FieldOffset(0xD8)]
     public Character*

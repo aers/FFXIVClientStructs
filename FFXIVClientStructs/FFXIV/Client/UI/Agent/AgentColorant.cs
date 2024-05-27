@@ -1,5 +1,4 @@
 using FFXIVClientStructs.FFXIV.Client.UI.Misc;
-using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
@@ -19,7 +18,7 @@ public partial struct AgentColorant {
     public unsafe struct ColorantCharaView {
         [FieldOffset(0)] public CharaView Base;
         [FieldOffset(0x2C8)] public uint Unk2C8; // a3 passed to vf13
-        [FieldOffset(0x2CC)] public uint ObjectID; // of local player
+        [FieldOffset(0x2CC)] public uint ObjectId; // of local player
         [FieldOffset(0x2D0)] public bool DoUpdate;
         [FieldOffset(0x2D1)] public bool HideOtherEquipment;
         [FieldOffset(0x2D2)] public bool GearPreview;

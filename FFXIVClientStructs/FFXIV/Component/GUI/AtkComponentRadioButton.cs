@@ -9,8 +9,6 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [StructLayout(LayoutKind.Explicit, Size = 0xF8)]
 public struct AtkComponentRadioButton {
     [FieldOffset(0x0)] public AtkComponentButton AtkComponentButton;
-    [Obsolete("Use AtkComponentButton.AtkComponentBase")]
-    [FieldOffset(0x0)] public AtkComponentBase AtkComponentBase;
 
     public bool IsSelected {
         get => AtkComponentButton.IsChecked;

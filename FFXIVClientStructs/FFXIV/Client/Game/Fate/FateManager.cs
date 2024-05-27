@@ -7,7 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Fate;
 // ctor "48 89 5C 24 ?? 57 48 83 EC 20 33 FF 48 8B D9 48 89 39 48 89 79 08 48 89 79 10 48 83 C1 18 E8 ?? ?? ?? ?? 48 89 BB"
 [StructLayout(LayoutKind.Explicit, Size = 0xB8)]
 public unsafe partial struct FateManager {
-    [FieldOffset(0x00)] public StdVector<GameObjectID> Unk_Vector;
+    [FieldOffset(0x00)] public StdVector<GameObjectId> Unk_Vector;
     [FieldOffset(0x18)] public Utf8String Unk_String;
     [FieldOffset(0x80)] public FateDirector* FateDirector;
     [FieldOffset(0x88)] public FateContext* CurrentFate;

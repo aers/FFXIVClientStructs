@@ -4,7 +4,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc.UserFileManager;
 // ctor inlined
 [StructLayout(LayoutKind.Explicit, Size = 0x40)]
 public unsafe partial struct UserFileEvent {
-    [FieldOffset(0x08)] public ulong CharacterContentID;
+    [FieldOffset(0x08)] public ulong CharacterContentId;
     [FieldOffset(0x10)] public nint UserFileManager;
     [FieldOffset(0x18)] public nint TempDataPtr;
     [FieldOffset(0x20)] public uint TempDataBytesWritten;
@@ -44,7 +44,7 @@ public unsafe partial struct UserFileEvent {
     public partial byte GetIsSavePending();
 
     [VirtualFunction(11)]
-    public partial void SetCharacterContentId(ulong contentID);
+    public partial void SetCharacterContentId(ulong contentId);
 
     [VirtualFunction(12)]
     public partial void SaveFile(bool force);
