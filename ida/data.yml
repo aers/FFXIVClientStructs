@@ -1459,6 +1459,7 @@ classes:
       0x14005DC00: FindLastOfImpl
       0x14005E100: FindFirstOfImpl
       0x14064FF30: ToInteger # strtoi for utf8string (str, base)
+      0x141445CC0: SanitizeString
   Component::GUI::AtkValue:
     funcs:
       0x140507C50: ctor_copy # copy constructor
@@ -3480,6 +3481,8 @@ classes:
         base: Client::UI::Info::InfoProxyPageInterface
     funcs:
       0x140106A70: ctor
+      0x1401078D0: GetLinkshellInfo
+      0x140107DB0: GetLinkshellName
       0x14017C920: Finalize
   Client::UI::Info::InfoProxyLinkshellMember:
     vtbls:
@@ -3598,6 +3601,7 @@ classes:
         base: Client::UI::Info::InfoProxyInterface
     funcs:
       0x140117010: ctor
+      0x140117AA0: GetCrossworldLinkshellName
       0x14017C6E0: Finalize
   Client::UI::Info::InfoProxyCrossWorldLinkShellMember:
     vtbls:
@@ -6465,6 +6469,8 @@ classes:
       194: IsMainCommandUnlocked
       197: ShowRaceCountdownEnd
       201: IsDutyRaidFinderOpen
+      211: RotateLinkshellHistory
+      213: RotateCrossLinkshellHistory
       228: ShowRaceCountdownStart
       229: ShowRaceCountdownEnd_2
   Client::UI::UIModule:
@@ -6718,6 +6724,7 @@ classes:
     funcs:
       0x140631B10: Finalize
       0x140699970: ctor
+      0x140699B60: GetTellHistory
       0x140699E80: ClearTellHistory
   Client::UI::Misc::LogFilterConfig:
     vtbls:
@@ -6841,6 +6848,7 @@ classes:
       0x140685470: GetLogMessage
       0x140685F60: GetLogMessageDetail
       0x140687ED0: FormatLogMessage
+      0x1406891E0: AddMsgSourceEntry
   Component::Prohibit::ProhibitModuleInterface:
     vtbls:
       - ea: 0x141A3A958
@@ -7379,8 +7387,13 @@ classes:
       0x140785F90: Finalize
       0x140786D80: ExecuteMacro
       0x140786E60: TryGetMacroIconCommand
+      0x140786FF0: ChangeChatChannel
+      0x140787490: SetContextTellTarget
+      0x140787B80: SetContextTellTargetInForay
       0x140787C70: SetChatChannel
       0x140787FF0: SetFlags
+      0x1407876E0: SetTellTargetInForay
+      0x140CD1510: ReplyInSelectedChatMode
   Client::UI::Shell::ShellCommandBlueAction:
     vtbls:
       - ea: 0x141A37400
@@ -7876,6 +7889,7 @@ classes:
       0x140CCB2F0: Finalize
       0x140CD03A0: InsertTextCommandParam
       0x140CD09B0: LinkItem
+      0x140CD18D0: ChangeChannelName
   Client::UI::Agent::AgentInventory:
     vtbls:
       - ea: 0x141A89E18
