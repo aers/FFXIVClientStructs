@@ -5,14 +5,12 @@ using FFXIVClientStructs.FFXIV.Common.Math;
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x410)]
+[GenerateInterop]
 public unsafe partial struct CharacterUtility {
     [StaticAddress("48 8B 05 ?? ?? ?? ?? 83 B9", 3, true)]
     public static partial CharacterUtility* Instance();
 
-    public const int ResourceHandleCount = 87;
-
-    [FixedSizeArray<Pointer<ResourceHandle>>(ResourceHandleCount)]
-    [FieldOffset(0x8)] public fixed byte ResourceHandles[ResourceHandleCount * 8];
+    [FieldOffset(0x8)] [FixedSizeArray] internal FixedSizeArray87<Pointer<ResourceHandle>> _resourceHandles;
 
     [FieldOffset(0x2F8)] public ConstantBuffer* LegacyBodyDecalColorCBuffer;
     [FieldOffset(0x300)] public ConstantBuffer* FreeCompanyCrestColorCBuffer;

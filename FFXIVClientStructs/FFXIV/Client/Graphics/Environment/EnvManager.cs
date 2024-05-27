@@ -4,6 +4,7 @@ using FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Environment;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x910)]
+[GenerateInterop]
 public unsafe partial struct EnvManager {
     [FieldOffset(0x08)] public EnvScene* EnvScene;
     [FieldOffset(0x10)] public float DayTimeSeconds;

@@ -14,11 +14,12 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 // ctor "E8 ?? ?? ?? ?? 33 C9 48 8D 05 ?? ?? ?? ?? 48 89 03 48 B8"
 // base class for graphics objects representing characters (human, demihuman, monster, and weapons)
 [StructLayout(LayoutKind.Explicit, Size = 0x8F0)]
-[VirtualTable("48 8d 05 ?? ?? ?? ?? 48 89 07 48 8d 9f d0 00 00 00", 3)]
+[GenerateInterop(isInherited: true)]
+[Inherits<DrawObject>]
+[VirtualTable("48 8D 05 ?? ?? ?? ?? 48 89 07 48 8D 9F D0 00 00 00", 3)]
 public unsafe partial struct CharacterBase {
     public const int PathBufferSize = 260;
 
-    [FieldOffset(0x0)] public DrawObject DrawObject;
     [FieldOffset(0x90)] public byte UnkFlags_01;
     [FieldOffset(0x91)] public byte UnkFlags_02;
     [FieldOffset(0x92)] public byte UnkFlags_03;

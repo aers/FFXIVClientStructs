@@ -4,9 +4,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 //  Client::Graphics::Singleton<Client::Graphics::Render::Manager>
 // ctor "48 89 01 48 8D 59 08"
 [StructLayout(LayoutKind.Explicit, Size = 0x2D750)]
+[GenerateInterop]
 public unsafe partial struct Manager {
-    [FixedSizeArray<View>(32)]
-    [FieldOffset(0x8)] public fixed byte ViewArray[32 * 0x5A0]; // 32x Client::Graphics::Render::View
+    [FieldOffset(0x8)] [FixedSizeArray] internal FixedSizeArray32<View> _viewArray;
 
     [FieldOffset(0x13660)] public ModelRenderer ModelRenderer;
 

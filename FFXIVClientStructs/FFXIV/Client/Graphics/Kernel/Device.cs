@@ -5,6 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
 
 // Client::Graphics::Kernel::DeviceDX11
 [StructLayout(LayoutKind.Explicit, Size = 0x258)]
+[GenerateInterop]
 public unsafe partial struct Device {
     [FieldOffset(0x8)] public void* ContextArray; // Client::Graphics::Kernel::Context array
     [FieldOffset(0x10)] public void* RenderThread; // Client::Graphics::Kernel::RenderThread

@@ -13,8 +13,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 //       Client::Graphics::Scene::Object
 // ctor "E8 ?? ?? ?? ?? 48 8B F8 48 85 C0 74 28 48 8D 55 D7"
 [StructLayout(LayoutKind.Explicit, Size = 0xA80)]
+[GenerateInterop]
+[Inherits<CharacterBase>]
 public unsafe partial struct Human {
-    [FieldOffset(0x0)] public CharacterBase CharacterBase;
     [FieldOffset(0x8F0)] public CustomizeData Customize;
     [FieldOffset(0x90C)] public uint SlotNeedsUpdateBitfield;
     [FieldOffset(0x910)] public EquipmentModelId Head;

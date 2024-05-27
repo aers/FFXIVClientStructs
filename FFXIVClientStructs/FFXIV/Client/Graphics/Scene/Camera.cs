@@ -5,8 +5,9 @@ using FFXIVClientStructs.FFXIV.Common.Math;
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 
 [StructLayout(LayoutKind.Explicit, Size = 0xF0)]
+[GenerateInterop]
+[Inherits<Object>]
 public unsafe partial struct Camera {
-    [FieldOffset(0x00)] public Object Object;
     [FieldOffset(0x80)] public Vector3 LookAtVector;
     [FieldOffset(0x90)] public Vector3 Vector_1;
     [FieldOffset(0xA0)] public Matrix4x4 ViewMatrix;

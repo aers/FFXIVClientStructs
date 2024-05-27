@@ -8,9 +8,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 //       Client::Graphics::Scene::Object
 // ctor "E8 ?? ?? ?? ?? 4C 8B F0 4C 89 B7"
 [StructLayout(LayoutKind.Explicit, Size = 0x920)]
+[GenerateInterop]
+[Inherits<CharacterBase>]
 public unsafe partial struct Monster {
-    [FieldOffset(0x0)] public CharacterBase CharacterBase;
-
     [FieldOffset(0x8F0)] public ushort ModelSetId;
     [FieldOffset(0x8F2)] public ushort SecondaryId;
     [FieldOffset(0x8F4)] public ushort Variant;

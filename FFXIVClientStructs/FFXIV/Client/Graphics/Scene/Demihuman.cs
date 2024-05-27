@@ -10,9 +10,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 //       Client::Graphics::Scene::Object
 // ctor "E8 ?? ?? ?? ?? 48 8B F8 48 85 C0 0F 84 ?? ?? ?? ?? 48 8D 55 BF"
 [StructLayout(LayoutKind.Explicit, Size = 0x978)]
+[GenerateInterop]
+[Inherits<CharacterBase>]
 public unsafe partial struct Demihuman {
-    [FieldOffset(0x0)] public CharacterBase CharacterBase;
-
     [FieldOffset(0x928), CExportIgnore] private nint _slotDecalBase;
     [FieldOffset(0x928)] public TextureResourceHandle* HeadDecal;
     [FieldOffset(0x930)] public TextureResourceHandle* TopDecal;

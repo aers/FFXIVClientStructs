@@ -4,6 +4,7 @@ using FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x228)]
+[GenerateInterop]
 public unsafe partial struct ModelRenderer {
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public partial struct Callback {
@@ -40,11 +41,9 @@ public unsafe partial struct ModelRenderer {
     /// <summary> <see cref="ShaderPackage.ConstantSamplerUnknown.Id"/> of the g_SamplerViewPosition sampler/texture (CRC: 0xBC615663). </summary>
     [FieldOffset(0x20)] public uint SamplerViewPositionId;
 
-    [FixedSizeArray<ShaderSceneKey>(6)]
-    [FieldOffset(0x28)] public fixed byte SceneKeys[6 * ShaderSceneKey.Size];
+    [FieldOffset(0x28)] [FixedSizeArray] internal FixedSizeArray6<ShaderSceneKey> _sceneKeys;
 
-    [FixedSizeArray<ShaderSubViewKey>(3)]
-    [FieldOffset(0x88)] public fixed byte SubViewKeys[3 * ShaderSubViewKey.Size];
+    [FieldOffset(0x88)] [FixedSizeArray] internal FixedSizeArray3<ShaderSubViewKey> _subViewKeys;
 
     [FieldOffset(0xB8)] public ShaderCodeResourceHandle* CharacterSelectionModelVS;
     [FieldOffset(0xC0)] public ShaderCodeResourceHandle* CharacterSelectionModelPS;

@@ -6,9 +6,9 @@ using FFXIVClientStructs.Havok.Animation.Rig;
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x1C0)]
+[GenerateInterop]
 public unsafe partial struct PartialSkeleton {
-    [FixedSizeArray<hkaSampleBlendJob>(2)]
-    [FieldOffset(0x20)] public fixed byte Jobs[2 * 0x80]; // 2 * hkaSampleBlendJob
+    [FieldOffset(0x20)] [FixedSizeArray] internal FixedSizeArray2<hkaSampleBlendJob> _jobs;
     [FieldOffset(0x120)] public short ConnectedParentBoneIndex;
     [FieldOffset(0x122)] public short ConnectedBoneIndex;
     [FieldOffset(0x130)] public fixed ulong HavokAnimatedSkeleton[2];

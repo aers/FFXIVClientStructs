@@ -12,7 +12,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 /// <see cref="ShaderPackage.Samplers"/> with <see cref="ShaderPackage.ConstantSamplerUnknown.Slot"/> == <see cref="ShaderPackage.SamplerSlotMaterial"/>.
 /// </remarks>
 [StructLayout(LayoutKind.Explicit, Size = 0x40)]
-public unsafe struct Material {
+[GenerateInterop]
+[Inherits<ReferencedClassBase>]
+public unsafe partial struct Material {
     [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public struct TextureEntry {
         /// <summary>
@@ -26,7 +28,6 @@ public unsafe struct Material {
         public uint SamplerFlags;
     }
 
-    [FieldOffset(0x00)] public ReferencedClassBase ReferencedClassBase;
     /// <summary>
     /// The resource handle this material was instantiated from. Its <see cref="MaterialResourceHandle.Material"/> will be the current structure.
     /// </summary>
