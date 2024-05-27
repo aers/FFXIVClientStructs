@@ -4,9 +4,9 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 [Addon("RaidFinder")]
+[GenerateInterop, Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0xF00)]
 public unsafe partial struct AddonRaidFinder {
-    [FieldOffset(0x00)] public AtkUnitBase AtkUnitBase;
     [FieldOffset(0x220)] public AtkAddonControl AddonControl;
 
     [FieldOffset(0x288)] public AtkComponentList* DutyList;
@@ -25,8 +25,7 @@ public unsafe partial struct AddonRaidFinder {
     [FieldOffset(0x4DC)] public int NumDisplayedEntries; // Use to index into EntryInfoArray
     [FieldOffset(0x4E0)] public int SelectedTab;
 
-    [FixedSizeArray<RaidFinderDutyEntry>(8)]
-    [FieldOffset(0x4E8)] public fixed byte EntryInfoArray[0x140 * 8];
+    [FieldOffset(0x4E8), FixedSizeArray] internal FixedSizeArray8<RaidFinderDutyEntry> _entryInfoArray;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x140)]

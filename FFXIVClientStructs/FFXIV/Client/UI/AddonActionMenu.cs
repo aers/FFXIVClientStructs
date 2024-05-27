@@ -3,10 +3,9 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 [Addon("ActionMenu")]
+[GenerateInterop, Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x1720)]
 public unsafe partial struct AddonActionMenu {
-    [FieldOffset(0x00)] public AtkUnitBase AtkUnitBase;
-
     [FieldOffset(0x220)] public AtkComponentList* ActionList;
     [FieldOffset(0x228)] public AtkComponentList* TraitList;
     [FieldOffset(0x230)] public AtkComponentRadioButton* ActionsRadioButton;
@@ -19,8 +18,7 @@ public unsafe partial struct AddonActionMenu {
     [FieldOffset(0x268)] public AtkComponentRadioButton* ExtrasRadioButton;
     [FieldOffset(0x270)] public AtkComponentRadioButton* RoleRadioButton;
 
-    [FixedSizeArray<ActionInfo>(80)]
-    [FieldOffset(0x318)] public fixed byte ActionArray[0x38 * 80];
+    [FieldOffset(0x318), FixedSizeArray] internal FixedSizeArray80<ActionInfo> _actionArray;
 
     [FieldOffset(0x14A8)] public AtkResNode* SidebarContainer; // Contains radio buttons for Actions, Role, Traits etc, including all of the icon buttons that are on the left side
     [FieldOffset(0x14B0)] public AtkResNode* ContentsContainer; // Contains all the nodes tha appear in the main area of the window

@@ -5,13 +5,12 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 [Addon("SalvageItemSelector")]
+[GenerateInterop, Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x1CF8)]
 public unsafe partial struct AddonSalvageItemSelector {
-    [FieldOffset(0x0000)] public AtkUnitBase AtkUnitBase;
     [FieldOffset(0x0228)] public AgentSalvage.SalvageItemCategory SelectedCategory;
 
-    [FixedSizeArray<SalvageItem>(140)]
-    [FieldOffset(0x02B0)] public fixed byte Items[0x30 * 140];
+    [FieldOffset(0x02B0), FixedSizeArray] FixedSizeArray140<SalvageItem> _items;
 
     [FieldOffset(0x1CF0)] public uint ItemCount;
 

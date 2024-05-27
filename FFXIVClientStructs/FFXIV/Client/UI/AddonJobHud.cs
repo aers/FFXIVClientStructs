@@ -5,10 +5,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 /// <summary>
 /// Base struct for all job gauge addons.
 /// </summary>
+[GenerateInterop(isInherited: true), Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x260)]
-public unsafe struct AddonJobHud {
-    [FieldOffset(0x000)] public AtkUnitBase AtkUnitBase;
-
+public unsafe partial struct AddonJobHud {
     [FieldOffset(0x220)] public byte Unk220;
     [FieldOffset(0x221)] public bool UseSimpleGauge;
     [FieldOffset(0x222)] public byte Unk222;
@@ -27,17 +26,17 @@ public unsafe struct AddonJobHud {
     /// <summary>
     /// Base struct containing the data that each particular gauge relies on.<br/>
     /// </summary>
+    [GenerateInterop(isInherited: true)]
     [StructLayout(LayoutKind.Explicit, Size = 0x08)]
-    public struct AddonJobHudGaugeData {
-        
-    }
+    public partial struct AddonJobHudGaugeData;
 
     /// <summary>
     /// Base struct for the gauges themselves.<br/>
     /// The majority of the fields in any given gauge will be pointers to Nodes and Components within its addon, but data values are usually sprinkled in too.
     /// </summary>
+    [GenerateInterop(isInherited: true)]
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
-    public struct AddonJobHudGauge {
+    public partial struct AddonJobHudGauge {
         [FieldOffset(0x8)] public AddonJobHud* JobHud;
     }
 }

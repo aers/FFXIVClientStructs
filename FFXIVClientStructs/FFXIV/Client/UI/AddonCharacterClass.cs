@@ -3,19 +3,17 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 [Addon("CharacterClass")]
+[GenerateInterop, Inherits<AtkUnitBase>]
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 48 89 03 48 8D 83 ?? ?? ?? ?? 48 89 90", 3)]
 [StructLayout(LayoutKind.Explicit, Size = 0x830)]
 public unsafe partial struct AddonCharacterClass {
-    [FieldOffset(0)] public AtkUnitBase AtkUnitBase;
-    [FixedSizeArray<Pointer<AtkComponentButton>>(31)]
-    [FieldOffset(0x220)] public fixed byte ButtonNodes[0x8 * 31];
+    [FieldOffset(0x220), FixedSizeArray] internal FixedSizeArray31<Pointer<AtkComponentButton>> _buttonNodes;
     [FieldOffset(0x318)] public AtkComponentButton* TabsNode;
     [FieldOffset(0x320)] public AtkTextNode* CurrentXPTextNode;
     [FieldOffset(0x328)] public AtkTextNode* MaxXPTextNode;
     [FieldOffset(0x330)] public AtkTextNode* CurrentDesynthesisLevelTextNode;
     [FieldOffset(0x338)] public AtkTextNode* MaxDesynthesisLevelTextNode;
-    [FixedSizeArray<ClassEntry>(31)]
-    [FieldOffset(0x340)] public fixed byte ClassEntries[0x28 * 31];
+    [FieldOffset(0x340), FixedSizeArray] internal FixedSizeArray31<ClassEntry> _classEntries;
 
     [FieldOffset(0x828)] public int TabIndex;
 

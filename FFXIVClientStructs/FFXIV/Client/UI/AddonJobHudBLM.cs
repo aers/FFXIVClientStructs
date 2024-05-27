@@ -7,13 +7,17 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 /// BLM - Elemental Gauge
 /// </summary>
 [Addon("JobHudBLM0")]
+[GenerateInterop, Inherits<AddonJobHud>]
 [StructLayout(LayoutKind.Explicit, Size = 0x4E0)]
 public unsafe partial struct AddonJobHudBLM0 {
-    [FieldOffset(0x000)] public AddonJobHud JobHud;
+    [FieldOffset(0x260)] public ElementalGaugeData DataPrevious;
+    [FieldOffset(0x298)] public ElementalGaugeData DataCurrent;
+    [FieldOffset(0x2D0)] public ElementalGauge GaugeStandard;
+    [FieldOffset(0x438)] public ElementalGaugeSimple GaugeSimple;
 
+    [GenerateInterop, Inherits<AddonJobHudGaugeData>]
     [StructLayout(LayoutKind.Explicit, Size = 0x38)]
     public partial struct ElementalGaugeData {
-        [FieldOffset(0x00)] public AddonJobHudGaugeData GaugeData;
         [FieldOffset(0x08)] public fixed byte Prerequisites[5];
         [FieldOffset(0x10)] public int ElementStacks; // Positive = Fire, Negative = Ice
         [FieldOffset(0x14)] public int ElementStackMax;
@@ -27,16 +31,15 @@ public unsafe partial struct AddonJobHudBLM0 {
         [FieldOffset(0x34)] public bool ParadoxReady;
     }
 
+    [GenerateInterop, Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0x168)]
     public partial struct ElementalGauge {
-        [FieldOffset(0x000)] public AddonJobHudGauge Gauge;
         [FieldOffset(0x010)] public AtkResNode* Container;
         [FieldOffset(0x018)] public AtkResNode* ElementalCrescent;
         [FieldOffset(0x020)] public bool ElementActive;
         [FieldOffset(0x028)] public AtkResNode* ElementStacks;
 
-        [FixedSizeArray<Pointer<AtkComponentBase>>(3)]
-        [FieldOffset(0x030)] public fixed byte ElementStack[3 * 0x08];
+        [FieldOffset(0x030), FixedSizeArray] internal FixedSizeArray3<Pointer<AtkComponentBase>> _elementStack;
 
         [FieldOffset(0x048)] public int TimelineStartFrameId;
         [FieldOffset(0x050)] public AtkTextNode* ElementTimerText;
@@ -44,15 +47,13 @@ public unsafe partial struct AddonJobHudBLM0 {
         [FieldOffset(0x060)] public AtkResNode* FireOrb;
         [FieldOffset(0x068)] public AtkResNode* IceOrb;
 
-        [StructLayout(LayoutKind.Explicit, Size = Size)]
-        public unsafe partial struct UmbralHeart {
-            public const int Size = 0x10;
+        [StructLayout(LayoutKind.Explicit, Size = 0x10)]
+        public struct UmbralHeart {
             [FieldOffset(0x0)] public AtkComponentBase* Container;
             [FieldOffset(0x8)] public AtkResNode* Glow;
         }
 
-        [FixedSizeArray<UmbralHeart>(3)]
-        [FieldOffset(0x070)] public fixed byte UmbralHearts[3 * UmbralHeart.Size];
+        [FieldOffset(0x070), FixedSizeArray] internal FixedSizeArray3<UmbralHeart> _umbralHearts;
 
         [FieldOffset(0x0A0)] public AtkResNode* UmbralHeartContainer;
         [FieldOffset(0x0A8)] public int UmbralHeartTimelineFrameId;
@@ -64,16 +65,14 @@ public unsafe partial struct AddonJobHudBLM0 {
         [FieldOffset(0x0DC)] public int EnochianTimePassed; // seconds
         [FieldOffset(0x0E8)] public AtkResNode* PolyglotContainer;
 
-        [StructLayout(LayoutKind.Explicit, Size = Size)]
-        public unsafe partial struct PolyglotStack {
-            public const int Size = 0x18;
+        [StructLayout(LayoutKind.Explicit, Size = 0x18)]
+        public struct PolyglotStack {
             [FieldOffset(0x00)] public AtkComponentBase* Container;
             [FieldOffset(0x08)] public AtkResNode* Gem;
             [FieldOffset(0x10)] public AtkResNode* Slot;
         }
 
-        [FixedSizeArray<PolyglotStack>(2)]
-        [FieldOffset(0x0F0)] public fixed byte Polyglot[2 * PolyglotStack.Size];
+        [FieldOffset(0x0F0), FixedSizeArray] internal FixedSizeArray2<PolyglotStack> _polyglot;
 
         [FieldOffset(0x120)] public int PolyglotTimelineFrameId;
         [FieldOffset(0x124)] public int PolyglotStacks;
@@ -85,26 +84,21 @@ public unsafe partial struct AddonJobHudBLM0 {
         [FieldOffset(0x158)] public AtkResNode* ParadoxGemBase;
     }
 
+    [GenerateInterop, Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0xA8)]
     public partial struct ElementalGaugeSimple {
-        [FieldOffset(0x00)] public AddonJobHudGauge Gauge;
-
         [FieldOffset(0x10)] public AtkResNode* Container;
         [FieldOffset(0x18)] public AtkResNode* Container2;
         [FieldOffset(0x20)] public AtkComponentTextNineGrid* ElementalTimerDisplay;
 
-        [FixedSizeArray<Pointer<AtkComponentBase>>(3)]
-        [FieldOffset(0x28)] public fixed byte ElementStack[3 * 0x08];
-
-        [FixedSizeArray<Pointer<AtkComponentBase>>(3)]
-        [FieldOffset(0x40)] public fixed byte UmbralHearts[3 * 0x08];
+        [FieldOffset(0x28), FixedSizeArray] internal FixedSizeArray3<Pointer<AtkComponentBase>> _elementStack;
+        [FieldOffset(0x40), FixedSizeArray] internal FixedSizeArray3<Pointer<AtkComponentBase>> _umbralHearts;
 
         [FieldOffset(0x58)] public AtkComponentBase* ElementalIcon;
         [FieldOffset(0x60)] public AtkResNode* EnochianGauge;
         [FieldOffset(0x68)] public AtkComponentGaugeBar* EnochianGaugeBar;
 
-        [FixedSizeArray<Pointer<AtkComponentBase>>(2)]
-        [FieldOffset(0x70)] public fixed byte PolyglotGem[2 * 0x08];
+        [FieldOffset(0x70), FixedSizeArray] internal FixedSizeArray2<Pointer<AtkComponentBase>> _polyglotGem;
 
         [FieldOffset(0x80)] public AtkComponentBase* ParadoxGem;
         [FieldOffset(0x88)] public int AstralFireStacks;
@@ -114,9 +108,4 @@ public unsafe partial struct AddonJobHudBLM0 {
         [FieldOffset(0x9C)] public int PolyglotStacks;
         [FieldOffset(0xA0)] public int TimelineFrameId;
     }
-
-    [FieldOffset(0x260)] public ElementalGaugeData DataPrevious;
-    [FieldOffset(0x298)] public ElementalGaugeData DataCurrent;
-    [FieldOffset(0x2D0)] public ElementalGauge GaugeStandard;
-    [FieldOffset(0x438)] public ElementalGaugeSimple GaugeSimple;
 }

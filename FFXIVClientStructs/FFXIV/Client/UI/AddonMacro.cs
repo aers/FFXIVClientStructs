@@ -8,12 +8,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 // size 0x30B0
 
 [Addon("Macro")]
+[GenerateInterop, Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x30B0)]
 public unsafe partial struct AddonMacro {
-    [FieldOffset(0x0000)] public AtkUnitBase AtkUnitBase;
-
-    [FixedSizeArray<Pointer<AtkComponentDragDrop>>(100)]
-    [FieldOffset(0x2B8)] public fixed byte DragDropComponent[100 * 8];
+    [FieldOffset(0x2B8), FixedSizeArray] internal FixedSizeArray100<Pointer<AtkComponentDragDrop>> _dragDropComponent;
 
     /// <summary>
     /// Used when creating a new macro from a blank state.
@@ -26,8 +24,7 @@ public unsafe partial struct AddonMacro {
     /// </summary>
     [FieldOffset(0x5EC)] public fixed int MacroSetIcon[100];
 
-    [FixedSizeArray<Utf8String>(100)]
-    [FieldOffset(0x780)] public fixed byte MacroName[0x68 * 100];
+    [FieldOffset(0x780), FixedSizeArray] internal FixedSizeArray100<Utf8String> _macroName;
 
     [FieldOffset(0x3020)] public fixed bool MacroCreated[100];
 

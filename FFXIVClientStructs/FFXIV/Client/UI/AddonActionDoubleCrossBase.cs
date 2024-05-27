@@ -4,19 +4,16 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 [Addon("_ActionDoubleCrossL", "_ActionDoubleCrossR")]
+[GenerateInterop, Inherits<AddonActionBarBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x2F8)]
 public unsafe partial struct AddonActionDoubleCrossBase {
-    [FieldOffset(0x000)] public AddonActionBarBase ActionBarBase;
-
     [FieldOffset(0x248)] public AtkResNode* ContainerNode;
     [FieldOffset(0x250)] public AtkComponentNode* SlotContainerL;
     [FieldOffset(0x258)] public AtkComponentNode* SlotContainerR;
 
-    [FixedSizeArray<AddonActionCross.HelpMessage>(4)]
-    [FieldOffset(0x260)] public fixed byte HotbarHelpL[4 * AddonActionCross.HelpMessage.Size];
+    [FieldOffset(0x260), FixedSizeArray] internal FixedSizeArray4<AddonActionCross.HelpMessage> _hotbarHelpL;
 
-    [FixedSizeArray<AddonActionCross.HelpMessage>(4)]
-    [FieldOffset(0x2A0)] public fixed byte HotbarHelpR[4 * AddonActionCross.HelpMessage.Size];
+    [FieldOffset(0x2A0), FixedSizeArray] internal FixedSizeArray4<AddonActionCross.HelpMessage> _hotbarHelpR;
 
     /// <summary>
     /// Indicates whether this bar is selected.

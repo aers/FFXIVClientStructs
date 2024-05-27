@@ -4,14 +4,12 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 [Addon("LookingForGroupDetail")]
+[GenerateInterop, Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x3E8)]
 public unsafe partial struct AddonLookingForGroupDetail {
-    [FieldOffset(0x00)] public AtkUnitBase AtkUnitBase;
-
     [FieldOffset(0x248)] public AtkComponentButton* JoinPartyButton;
 
-    [FixedSizeArray<Pointer<AtkComponentButton>>(6)]
-    [FieldOffset(0x250)] public fixed byte JoinAllianceButtons[0x8 * 6];
+    [FieldOffset(0x250), FixedSizeArray] internal FixedSizeArray6<Pointer<AtkComponentButton>> _joinAllianceButtons;
 
     [FieldOffset(0x280)] public AtkComponentButton* SendTellButton;
     [FieldOffset(0x288)] public AtkComponentButton* AllianceBackButton; // Not visible in 8-man parties

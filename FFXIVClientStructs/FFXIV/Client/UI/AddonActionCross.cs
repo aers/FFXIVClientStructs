@@ -3,16 +3,14 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 [Addon("_ActionCross")]
+[GenerateInterop, Inherits<AddonActionBarBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x710)]
 public unsafe partial struct AddonActionCross {
-    [FieldOffset(0x000)] public AddonActionBarBase ActionBarBase;
-
     [FieldOffset(0x248)] public ChangeSetUI ChangeSet;
     [FieldOffset(0x3A0)] public AtkComponentNode* PadlockNode;
     [FieldOffset(0x3A8)] public AtkComponentCheckBox* PadlockCheckbox;
 
-    [FixedSizeArray<SlotGroup>(4)]
-    [FieldOffset(0x3B0)] public fixed byte SlotGroups[4 * SlotGroup.Size];
+    [FieldOffset(0x3B0), FixedSizeArray] internal FixedSizeArray4<SlotGroup> _slotGroups;
 
     [FieldOffset(0x530)] public ControlGuide ControlGuideDpad;
     [FieldOffset(0x578)] public ControlGuide ControlGuideActionButtons;
@@ -32,7 +30,7 @@ public unsafe partial struct AddonActionCross {
     [FieldOffset(0x701)] public bool SelectedLeft;
     [FieldOffset(0x702)] public bool SelectedRight;
     [FieldOffset(0x703)] public bool DisplayChangeSet;
-    [FieldOffset(0x704)] public bool DisplayPetBar;
+    [FieldOffset(0x704)] public bool DisplayPetBarCross;
     [FieldOffset(0x706)] public bool AlternateDisplayType;
     [FieldOffset(0x707)] public bool OverrideHidden; // if the XHB is hidden via HUD options, this field indicates whether it should be temporarily revealed
 
@@ -40,58 +38,40 @@ public unsafe partial struct AddonActionCross {
     [FieldOffset(0x709)] public byte AlphaActive;
     [FieldOffset(0x70A)] public byte AlphaInactive;
 
+    [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x158)]
     public partial struct ChangeSetUI { // in control guide arrays: 0=top, 1=right, 2=bottom, 3=left
 
-        [FixedSizeArray<HelpMessage>(8)]
-        [FieldOffset(0x000)] public fixed byte HelpMessages[8 * HelpMessage.Size]; // hidden "hotbar help" style nodes attached to the Change Set display for some reason
-
-        [FixedSizeArray<Pointer<AtkComponentNode>>(8)]
-        [FieldOffset(0x080)] public fixed byte NumIcons[8 * 8];
-
+        [FieldOffset(0x000), FixedSizeArray] internal FixedSizeArray8<HelpMessage> _helpMessages; // hidden "hotbar help" style nodes attached to the Change Set display for some reason
+        [FieldOffset(0x080), FixedSizeArray] internal FixedSizeArray8<Pointer<AtkComponentNode>> _numIcons;
         [FieldOffset(0x0C0)] public AtkResNode* ContainerNode;
-
-        [FixedSizeArray<Pointer<AtkComponentBase>>(4)]
-        [FieldOffset(0x0D0)] public fixed byte DpadComponents[4 * 8];
-
-        [FixedSizeArray<Pointer<AtkResNode>>(4)]
-        [FieldOffset(0x0F0)] public fixed byte DpadNodes[4 * 8];
-
-        [FixedSizeArray<Pointer<AtkComponentBase>>(4)]
-        [FieldOffset(0x118)] public fixed byte ActionButtonComponents[4 * 8];
-
-        [FixedSizeArray<Pointer<AtkResNode>>(4)]
-        [FieldOffset(0x138)] public fixed byte ActionButtonNodes[4 * 8];
+        [FieldOffset(0x0D0), FixedSizeArray] internal FixedSizeArray4<Pointer<AtkComponentBase>> _dpadComponents;
+        [FieldOffset(0x0F0), FixedSizeArray] internal FixedSizeArray4<Pointer<AtkResNode>> _dpadNodes;
+        [FieldOffset(0x118), FixedSizeArray] internal FixedSizeArray4<Pointer<AtkComponentBase>> _actionButtonComponents;
+        [FieldOffset(0x138), FixedSizeArray] internal FixedSizeArray4<Pointer<AtkResNode>> _actionButtonNodes;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = Size)]
+    [GenerateInterop]
+    [StructLayout(LayoutKind.Explicit, Size = 0x60)]
     public partial struct SlotGroup {
-        public const int Size = 0x60;
-
-        [FixedSizeArray<HelpMessage>(4)]
-        [FieldOffset(0x00)] public fixed byte HotbarHelp[4 * HelpMessage.Size];
+        [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray4<HelpMessage> _hotbarHelp;
 
         [FieldOffset(0x40)] public AtkComponentNode* SlotContainer;
         [FieldOffset(0x48)] public AtkComponentNode* HotbarHelpContainer;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = Size)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public partial struct HelpMessage {
-        public const int Size = 0x10;
-
         [FieldOffset(0x00)] public AtkComponentBase* HelpComponent;
         [FieldOffset(0x08)] public AtkTextNode* HelpText;
     }
 
+    [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x48)] // in control guide arrays: 0=top, 1=right, 2=bottom, 3=left
     public partial struct ControlGuide {
         [FieldOffset(0x00)] public AtkComponentBase* ComponentBase;
-
-        [FixedSizeArray<Pointer<AtkComponentBase>>(4)]
-        [FieldOffset(0x08)] public fixed byte Components[4 * 8];
-
-        [FixedSizeArray<Pointer<AtkResNode>>(4)]
-        [FieldOffset(0x28)] public fixed byte Nodes[4 * 8];
+        [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray4<Pointer<AtkComponentBase>> _components;
+        [FieldOffset(0x28), FixedSizeArray] internal FixedSizeArray4<Pointer<AtkResNode>> _nodes;
     }
 
     /// <summary>The current selection state of the Cross hotbar.</summary>
@@ -112,8 +92,8 @@ public unsafe partial struct AddonActionCross {
     /// <remarks>Anytime the client calls GetBarTarget(), it always adjusts the result in this way before actually using it.</remarks>
     public uint GetAdjustedBarTarget(uint mapValue, bool* useLeftSide) {
         var target = GetBarTarget(mapValue, useLeftSide);
-        if (target == 19) target = (uint)(ActionBarBase.RaptureHotbarId - 1);
-        if (target == 18) target = (uint)(ActionBarBase.RaptureHotbarId + 1);
+        if (target == 19) target = (uint)(AddonActionBarBase.RaptureHotbarId - 1);
+        if (target == 18) target = (uint)(AddonActionBarBase.RaptureHotbarId + 1);
         return target >= 18 ? 10 :
                target < 10 ? 17 :
                target;

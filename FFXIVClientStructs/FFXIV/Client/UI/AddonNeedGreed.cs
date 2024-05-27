@@ -3,12 +3,10 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 [Addon("NeedGreed")]
+[GenerateInterop, Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x510)]
 public unsafe partial struct AddonNeedGreed {
-    [FieldOffset(0x00)] public AtkUnitBase AtkUnitBase;
-
-    [FixedSizeArray<LootItemInfo>(16)]
-    [FieldOffset(0x220)] public fixed byte Items[0x28 * 16];
+    [FieldOffset(0x220), FixedSizeArray] internal FixedSizeArray16<LootItemInfo> _items;
 
     [FieldOffset(0x4FC)] public int NumItems;
     [FieldOffset(0x508)] public int SelectedItemIndex;

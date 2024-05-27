@@ -3,10 +3,9 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 [Addon("InventoryLarge")]
+[GenerateInterop, Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x330)]
 public partial struct AddonInventoryLarge {
-    [FieldOffset(0)] public AtkUnitBase AtkUnitBase;
-
     [FieldOffset(0x290)] public AtkAddonControl AddonControl;
 
     [FieldOffset(0x320)] public int TabIndex;

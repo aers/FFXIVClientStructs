@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 //   Component::GUI::AtkEventListener
 // ctor "E8 ?? ?? ?? ?? 83 8B ?? ?? ?? ?? ?? 33 C0"
 // base class for all AddonXXX classes (visible UI objects)
-[GenerateInterop, Inherits<AtkEventListener>]
+[GenerateInterop(isInherited: true), Inherits<AtkEventListener>]
 [StructLayout(LayoutKind.Explicit, Size = 0x220)]
 public unsafe partial struct AtkUnitBase {
     [FieldOffset(0x8)] public fixed byte Name[32];

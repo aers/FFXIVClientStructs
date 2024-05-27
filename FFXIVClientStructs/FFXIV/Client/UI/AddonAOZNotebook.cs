@@ -6,10 +6,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //   Component::GUI::AtkUnitBase
 //     Component::GUI::AtkEventListener
 [Addon("AOZNotebook")]
+[GenerateInterop, Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0xCC8)]
 public unsafe partial struct AddonAOZNotebook {
-    [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
-
     [FieldOffset(0x308)] public SpellbookBlock SpellbookBlock01;
     [FieldOffset(0x350)] public SpellbookBlock SpellbookBlock02;
     [FieldOffset(0x398)] public SpellbookBlock SpellbookBlock03;

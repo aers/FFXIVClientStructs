@@ -3,10 +3,9 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 [Addon("ArmouryBoard")]
+[GenerateInterop, Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x6C0)]
 public partial struct AddonArmouryBoard {
-    [FieldOffset(0)] public AtkUnitBase AtkUnitBase;
-
     [FieldOffset(0x690)] public int TabIndex;
 
     [MemberFunction("E8 ?? ?? ?? ?? EB E0 84 C9")]

@@ -6,11 +6,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //   Component::GUI::AtkUnitBase
 //     Component::GUI::AtkEventListener
 [Addon("ContentsFinder")]
+[GenerateInterop, Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x16C8)]
-[VirtualTable("48 8d 05 ?? ?? ?? ?? 48 89 03 48 8d b3 38 02 00 00 48 8d 05 ?? ?? ?? ?? 48 89 ab 28 02 00 00 48 89 83 ?? ?? ?? ?? 8d 7d 02 48 89 ab 30 02 00 00 66 90 48 8b ce e8 ?? ?? ?? ?? 48 83 c6 09 48 83 ef 01 75 ?? 48", 3)]
+[VirtualTable("48 8D 05 ?? ?? ?? ?? 48 89 03 48 8D B3 38 02 00 00 48 8D 05 ?? ?? ?? ?? 48 89 AB 28 02 00 00 48 89 83 ?? ?? ?? ?? 8D 7D 02 48 89 AB 30 02 00 00 66 90 48 8B CE E8 ?? ?? ?? ?? 48 83 C6 09 48 83 EF 01 75 ?? 48", 3)]
 public unsafe partial struct AddonContentsFinder {
-    [FieldOffset(0x0)] public AtkUnitBase AtkUnitBase;
-
     [FieldOffset(0x250)] public AtkAddonControl AddonControl;
 
     [FieldOffset(0x2B8)] public AtkComponentButton* JoinButton; // Both Join and Withdraw
@@ -27,12 +26,10 @@ public unsafe partial struct AddonContentsFinder {
     [FieldOffset(0x308)] public AtkComponentRadioButton* PvpRadioButton;
     [FieldOffset(0x310)] public AtkComponentRadioButton* GoldSaucerRadioButton;
 
-    [FixedSizeArray<Pointer<AtkTextNode>>(5)]
-    [FieldOffset(0x318)] public fixed byte SelectedDutyTextNode[0x8 * 5];
+    [FieldOffset(0x318), FixedSizeArray] internal FixedSizeArray5<Pointer<AtkTextNode>> _selectedDutyTextNode;
 
     // Top bar buttons/icons indicating what duty finder settings are active, ie Unsync, LootMaster
-    [FixedSizeArray<Pointer<AtkComponentButton>>(8)]
-    [FieldOffset(0x3C8)] public fixed byte SettingsButton[0x8 * 8];
+    [FieldOffset(0x3C8), FixedSizeArray] internal FixedSizeArray8<Pointer<AtkComponentButton>> _settingsButton;
 
     [FieldOffset(0x340)] public AtkComponentTreeList* DutyList; // Does not contain a pointer to the rendered list =(
     [FieldOffset(0x348)] public AtkComponentDropDownList* OrderByButton;
