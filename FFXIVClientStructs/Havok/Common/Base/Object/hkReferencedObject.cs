@@ -1,8 +1,8 @@
 namespace FFXIVClientStructs.Havok.Common.Base.Object;
 
+[GenerateInterop(isInherited: true), Inherits<hkBaseObject>]
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
 public partial struct hkReferencedObject {
-    [FieldOffset(0x0)] public hkBaseObject hkBaseObject;
     [FieldOffset(0x8)] public uint MemSizeAndRefCount;
     // private uint Padding;
 

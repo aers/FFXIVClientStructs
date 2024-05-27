@@ -5,9 +5,9 @@ using FFXIVClientStructs.Havok.Common.Base.Types;
 
 namespace FFXIVClientStructs.Havok.Animation.Playback.Control;
 
+[GenerateInterop(isInherited: true), Inherits<hkReferencedObject>]
 [StructLayout(LayoutKind.Explicit, Size = 0x58)]
 public unsafe partial struct hkaAnimationControl {
-    [FieldOffset(0x00)] public hkReferencedObject hkReferencedObject;
     [FieldOffset(0x10)] public float LocalTime;
     [FieldOffset(0x14)] public float Weight;
     [FieldOffset(0x18)] public hkArray<byte> TransformTrackWeights;

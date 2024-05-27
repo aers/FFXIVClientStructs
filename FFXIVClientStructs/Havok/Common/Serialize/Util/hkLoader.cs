@@ -5,9 +5,9 @@ using FFXIVClientStructs.Havok.Common.Serialize.Resource;
 
 namespace FFXIVClientStructs.Havok.Common.Serialize.Util;
 
+[GenerateInterop, Inherits<hkReferencedObject>]
 [StructLayout(LayoutKind.Explicit, Size = 0x20)]
 public unsafe partial struct hkLoader {
-    [FieldOffset(0x00)] public hkReferencedObject hkReferencedObject;
     [FieldOffset(0x10)] public hkArray<Pointer<hkResource>> LoadedData;
 
     // [MemberFunction("")]

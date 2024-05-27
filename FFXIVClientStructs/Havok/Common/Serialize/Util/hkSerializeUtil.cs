@@ -9,6 +9,7 @@ using FFXIVClientStructs.Havok.Common.Serialize.Resource;
 
 namespace FFXIVClientStructs.Havok.Common.Serialize.Util;
 
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0)]
 public unsafe partial struct hkSerializeUtil {
 

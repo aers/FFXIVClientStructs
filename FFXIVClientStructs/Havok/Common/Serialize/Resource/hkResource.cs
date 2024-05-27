@@ -3,11 +3,9 @@ using FFXIVClientStructs.Havok.Common.Base.Reflection.Registry;
 
 namespace FFXIVClientStructs.Havok.Common.Serialize.Resource;
 
+[GenerateInterop, Inherits<hkReferencedObject>]
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
 public unsafe partial struct hkResource {
-    [FieldOffset(0x0)] public hkReferencedObject HkReferencedObject;
-
-    [VirtualFunction(7)]
-    [GenerateCStrOverloads]
+    [VirtualFunction(7), GenerateStringOverloads]
     public partial void* GetContentsPointer(byte* className, hkTypeInfoRegistry* typeInfoRegistry);
 }

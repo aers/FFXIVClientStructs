@@ -2,8 +2,9 @@ using FFXIVClientStructs.Havok.Common.Base.Types;
 
 namespace FFXIVClientStructs.Havok.Common.Base.Thread.JobQueue;
 
+[GenerateInterop(isInherited: true)]
 [StructLayout(LayoutKind.Explicit, Size = 0x08)]
-public struct hkJob {
+public partial struct hkJob {
     public enum hkJobType {
         Dynamics,
         Collide,

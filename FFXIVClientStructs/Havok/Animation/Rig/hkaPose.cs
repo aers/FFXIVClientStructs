@@ -4,6 +4,7 @@ using FFXIVClientStructs.Havok.Common.Base.Types.Geometry;
 
 namespace FFXIVClientStructs.Havok.Animation.Rig;
 
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x50)]
 public unsafe partial struct hkaPose {
     public enum PoseSpace {

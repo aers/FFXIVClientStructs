@@ -5,8 +5,9 @@ using FFXIVClientStructs.Havok.Common.Base.Types;
 
 namespace FFXIVClientStructs.Havok.Animation.Animation;
 
+[GenerateInterop, Inherits<hkReferencedObject>]
 [StructLayout(LayoutKind.Explicit, Size = 0x58)]
-public unsafe struct hkaAnimationBinding {
+public unsafe partial struct hkaAnimationBinding {
     public enum BlendHintEnum {
         Normal = 0x0,
         AdditiveDeprecated = 0x1,
@@ -18,7 +19,6 @@ public unsafe struct hkaAnimationBinding {
         public byte BlendHint;
     }
 
-    [FieldOffset(0x00)] public hkReferencedObject hkReferencedObject;
     [FieldOffset(0x10)] public hkStringPtr OriginalSkeletonName;
     [FieldOffset(0x18)] public hkRefPtr<hkaAnimation> Animation;
     [FieldOffset(0x20)] public hkArray<short> TransformTrackToBoneIndices;

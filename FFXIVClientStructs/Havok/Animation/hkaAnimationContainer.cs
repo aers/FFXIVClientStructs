@@ -7,9 +7,9 @@ using FFXIVClientStructs.Havok.Common.Base.Types;
 
 namespace FFXIVClientStructs.Havok.Animation;
 
+[GenerateInterop, Inherits<hkReferencedObject>]
 [StructLayout(LayoutKind.Explicit, Size = 0x60)]
-public struct hkaAnimationContainer {
-    [FieldOffset(0x00)] public hkReferencedObject hkReferencedObject;
+public partial struct hkaAnimationContainer {
     [FieldOffset(0x10)] public hkArray<hkRefPtr<hkaSkeleton>> Skeletons;
     [FieldOffset(0x20)] public hkArray<hkRefPtr<hkaAnimation>> Animations;
     [FieldOffset(0x30)] public hkArray<hkRefPtr<hkaAnimationBinding>> Bindings;

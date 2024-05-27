@@ -7,8 +7,9 @@ using FFXIVClientStructs.Havok.Common.Base.Types;
 
 namespace FFXIVClientStructs.Havok.Animation.Playback.SampleAndBlend;
 
+[GenerateInterop, Inherits<hkJob>]
 [StructLayout(LayoutKind.Explicit, Size = 0x70)]
-public unsafe struct hkaSampleBlendJob {
+public unsafe partial struct hkaSampleBlendJob {
     [StructLayout(LayoutKind.Explicit, Size = 0x190)]
     public struct SingleAnimation {
         public enum ChunkNums {
@@ -42,7 +43,6 @@ public unsafe struct hkaSampleBlendJob {
         [FieldOffset(0x188)] public short NumPartitions;
     }
 
-    [FieldOffset(0x00)] public hkJob hkJob;
     [FieldOffset(0x08)] public hkaAnimatedSkeleton* Skeleton;
     [FieldOffset(0x10)] public hkQsTransformf* ReferenceBones;
     [FieldOffset(0x18)] public float* ReferenceFloats;

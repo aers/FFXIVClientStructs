@@ -5,9 +5,10 @@ using FFXIVClientStructs.Havok.Common.Base.Types;
 
 namespace FFXIVClientStructs.Havok.Animation.Animation;
 
+[GenerateInterop, Inherits<hkReferencedObject>]
 [StructLayout(LayoutKind.Explicit, Size = 0x38)]
-public struct hkaAnimation {
-    public enum AnimationType : int {
+public partial struct hkaAnimation {
+    public enum AnimationType {
         UnknownAnimation = 0x0,
         InterleavedAnimation = 0x1,
         MirroredAnimation = 0x2,
@@ -29,7 +30,6 @@ public struct hkaAnimation {
         [FieldOffset(0x08)] public hkaAnnotationTrack.Annotation Annotation;
     }
 
-    [FieldOffset(0x00)] public hkReferencedObject hkReferencedObject;
     [FieldOffset(0x10)] public AnimationType Type;
     [FieldOffset(0x14)] public float Duration;
     [FieldOffset(0x18)] public int NumberOfTransformTracks;

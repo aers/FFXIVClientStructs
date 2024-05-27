@@ -5,6 +5,7 @@ using FFXIVClientStructs.Havok.Common.Base.Object;
 
 namespace FFXIVClientStructs.Havok.Animation.Playback.Control.Default;
 
+[GenerateInterop, Inherits<hkaAnimationControl>]
 [StructLayout(LayoutKind.Explicit, Size = 0xC0)]
 public unsafe partial struct hkaDefaultAnimationControl {
     public enum EaseStatusEnum {
@@ -17,16 +18,15 @@ public unsafe partial struct hkaDefaultAnimationControl {
     [StructLayout(LayoutKind.Explicit, Size = 0x08)]
     public struct hkaDefaultAnimationControlListener;
 
+    [GenerateInterop, Inherits<hkReferencedObject>]
     [StructLayout(LayoutKind.Explicit, Size = 0x48)]
-    public struct hkaDefaultAnimationControlMapperData {
-        [FieldOffset(0x00)] public hkReferencedObject hkReferencedObject;
+    public partial struct hkaDefaultAnimationControlMapperData {
         [FieldOffset(0x10)] public hkaSkeletonMapper* Mapper;
         [FieldOffset(0x18)] public hkArray<short> SrcBoneToTrackIndices;
         [FieldOffset(0x28)] public hkArray<short> DstBoneToTrackIndices;
         [FieldOffset(0x38)] public hkArray<short> DstTrackToBoneIndices;
     }
 
-    [FieldOffset(0x00)] public hkaAnimationControl hkaAnimationControl;
     [FieldOffset(0x58)] public float MasterWeight;
     [FieldOffset(0x5C)] public float PlaybackSpeed;
     [FieldOffset(0x60)] public uint OverflowCount;

@@ -8,6 +8,7 @@ using FFXIVClientStructs.Havok.Common.Base.Object;
 
 namespace FFXIVClientStructs.Havok.Animation.Playback;
 
+[GenerateInterop, Inherits<hkReferencedObject>]
 [StructLayout(LayoutKind.Explicit, Size = 0x40)]
 public unsafe partial struct hkaAnimatedSkeleton {
     [StructLayout(LayoutKind.Explicit, Size = 0x18)]
@@ -16,7 +17,6 @@ public unsafe partial struct hkaAnimatedSkeleton {
         [FieldOffset(0x08)] public hkaAnnotationTrack.Annotation Annotation;
     }
 
-    [FieldOffset(0x00)] public hkReferencedObject hkReferencedObject;
     [FieldOffset(0x10)] public hkaAnimationControlListener hkaAnimationControlListener;
     [FieldOffset(0x20)] public hkArray<Pointer<hkaDefaultAnimationControl>> AnimationControls;
     [FieldOffset(0x30)] public hkaSkeleton* Skeleton;

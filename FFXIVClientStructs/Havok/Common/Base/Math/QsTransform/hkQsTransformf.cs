@@ -4,6 +4,7 @@ using FFXIVClientStructs.Havok.Common.Base.Math.Vector;
 
 namespace FFXIVClientStructs.Havok.Common.Base.Math.QsTransform;
 
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x30)]
 public unsafe partial struct hkQsTransformf {
     [FieldOffset(0x00)] public hkVector4f Translation;

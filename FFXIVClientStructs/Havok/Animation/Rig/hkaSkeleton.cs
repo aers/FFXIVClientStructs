@@ -7,8 +7,9 @@ using FFXIVClientStructs.Havok.Common.Base.Types.Geometry.LocalFrame;
 
 namespace FFXIVClientStructs.Havok.Animation.Rig;
 
+[GenerateInterop, Inherits<hkReferencedObject>]
 [StructLayout(LayoutKind.Explicit, Size = 0x88)]
-public struct hkaSkeleton {
+public partial struct hkaSkeleton {
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct LocalFrameOnBone {
         [FieldOffset(0x00)] public hkRefPtr<hkLocalFrame> LocalFrame;
@@ -22,7 +23,6 @@ public struct hkaSkeleton {
         [FieldOffset(0x0A)] public short NumBones;
     }
 
-    [FieldOffset(0x00)] public hkReferencedObject hkReferencedObject;
     [FieldOffset(0x10)] public hkStringPtr Name;
     [FieldOffset(0x18)] public hkArray<short> ParentIndices;
     [FieldOffset(0x28)] public hkArray<hkaBone> Bones;

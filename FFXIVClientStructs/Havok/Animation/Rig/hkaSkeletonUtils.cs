@@ -6,6 +6,7 @@ namespace FFXIVClientStructs.Havok.Animation.Rig;
 
 public unsafe delegate int hkStringCompareFunc(char* a, char* b);
 
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0)]
 public unsafe partial struct hkaSkeletonUtils {
     [MemberFunction("E8 ?? ?? ?? ?? 41 8B FF 85 DB")]

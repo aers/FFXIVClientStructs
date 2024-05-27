@@ -2,6 +2,7 @@ using FFXIVClientStructs.Havok.Common.Base.Math.Vector;
 
 namespace FFXIVClientStructs.Havok.Common.Base.Math.Quaternion;
 
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
 public unsafe partial struct hkQuaternionf {
     [FieldOffset(0x00)] public float X;

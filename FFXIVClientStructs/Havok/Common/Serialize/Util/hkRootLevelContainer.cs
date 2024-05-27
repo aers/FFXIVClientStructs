@@ -5,6 +5,7 @@ using FFXIVClientStructs.Havok.Common.Base.Types;
 
 namespace FFXIVClientStructs.Havok.Common.Serialize.Util;
 
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
 public unsafe partial struct hkRootLevelContainer {
     [StructLayout(LayoutKind.Explicit, Size = 0x18)]
@@ -16,11 +17,9 @@ public unsafe partial struct hkRootLevelContainer {
 
     [FieldOffset(0x00)] public hkArray<NamedVariant> NamedVariants;
 
-    [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 57 48 83 EC 20 33 DB 48 8B EA")]
-    [GenerateCStrOverloads]
+    [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 57 48 83 EC 20 33 DB 48 8B EA"), GenerateStringOverloads]
     public partial void* findObjectByType(byte* typeName, void* prevObject);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 44 8B 45 1B")]
-    [GenerateCStrOverloads]
+    [MemberFunction("E8 ?? ?? ?? ?? 44 8B 45 1B"), GenerateStringOverloads]
     public partial void* findObjectByName(byte* objectName, void* prevObject);
 }
