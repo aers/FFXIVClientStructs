@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [GenerateInterop, Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x1C00)]
 public unsafe partial struct AddonCharacter {
-    [FieldOffset(0x228), FixedSizeArray] internal FixedSizeArray4<Pointer<AtkComponentRadioButton>> _adioButtons;
+    [FieldOffset(0x228), FixedSizeArray] internal FixedSizeArray4<Pointer<AtkComponentRadioButton>> _radioButtons;
 
     [FieldOffset(0x488)] public int TabIndex;
     [FieldOffset(0x48C)] public int TabCount;

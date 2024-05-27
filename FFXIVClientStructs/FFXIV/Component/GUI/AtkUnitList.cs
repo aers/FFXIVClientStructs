@@ -5,6 +5,6 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x810)]
 public unsafe partial struct AtkUnitList {
-    [FieldOffset(0x8)] internal FixedSizeArray256<Pointer<AtkUnitBase>> _entries;
+    [FieldOffset(0x8), FixedSizeArray] internal FixedSizeArray256<Pointer<AtkUnitBase>> _entries;
     [FieldOffset(0x808)] public ushort Count;
 }

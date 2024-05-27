@@ -237,6 +237,7 @@ public unsafe partial struct RaptureGearsetModule {
         [FieldOffset(0x19)] public GearsetItemFlag Flags;
     }
 
+    [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x1C0)]
     public partial struct GearsetEntry {
         [FieldOffset(0x00)] public byte Id;    // This may actually be set number, which is not _quite_ ID.
@@ -247,7 +248,7 @@ public unsafe partial struct RaptureGearsetModule {
         /// <remarks>This is the BannerIndex, but offset by 1. If it's 0, the gearset is not linked to a banner.</remarks>
         [FieldOffset(0x36)] public byte BannerIndex;
         [FieldOffset(0x37)] public GearsetFlag Flags;
-        [FieldOffset(0x38)] internal FixedSizeArray14<GearsetItem> _items;
+        [FieldOffset(0x38), FixedSizeArray] internal FixedSizeArray14<GearsetItem> _items;
         [FieldOffset(0x38 + GearsetItem.Size * 00), Obsolete("Use ItemsSpan[0]")] public GearsetItem MainHand;
         [FieldOffset(0x38 + GearsetItem.Size * 01), Obsolete("Use ItemsSpan[1]")] public GearsetItem OffHand;
         [FieldOffset(0x38 + GearsetItem.Size * 02), Obsolete("Use ItemsSpan[2]")] public GearsetItem Head;
