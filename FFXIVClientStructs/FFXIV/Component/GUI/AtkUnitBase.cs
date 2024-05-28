@@ -112,9 +112,6 @@ public unsafe partial struct AtkUnitBase {
     [MemberFunction("E8 ?? ?? ?? ?? 45 33 C9 8D 56 01")]
     public partial void UnsubscribeAtkArrayData(byte arrayType, byte arrayIndex, bool clean = false);
 
-    [VirtualFunction(2)]
-    public partial void ReceiveEvent(AtkEventType eventType, int eventParam, AtkEvent* atkEvent, nint a5 = 0);
-
     [VirtualFunction(3)]
     public partial bool Open(uint depthLayer);
 
