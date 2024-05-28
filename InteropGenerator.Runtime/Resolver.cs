@@ -2,32 +2,26 @@ using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 
 namespace InteropGenerator.Runtime;
 
-public sealed partial class Resolver {
+public sealed class Resolver {
     private static readonly Lazy<Resolver> Instance = new(() => new Resolver());
 
-    private readonly List<Address> _addresses = new();
+    public readonly HashSet<Address> Addresses = new();
 
     private readonly List<Address>?[] _preResolveArray = new List<Address>[256];
 
     private nint _baseAddress;
     private bool _cacheChanged;
     private FileInfo? _cacheFile;
-    private int _dataSectionOffset;
-    private int _dataSectionSize;
-
-    private bool _hasResolved;
+    
     private bool _isSetup;
-    private int _rdataSectionOffset;
-    private int _rdataSectionSize;
+
+    private ResolverCache? _resolverCache;
     private int _targetLength;
 
     private nint _targetSpace;
-
-    private ConcurrentDictionary<string, long>? _textCache;
 
     private int _textSectionOffset;
     private int _textSectionSize;
@@ -37,43 +31,41 @@ public sealed partial class Resolver {
     }
 
     public static Resolver GetInstance => Instance.Value;
-    public IReadOnlyList<Address> Addresses => _addresses.AsReadOnly();
 
-    public void SetupSearchSpace(nint moduleCopy = 0, FileInfo? cacheFile = null) {
+    public void Setup(nint moduleCopyPointer = 0, string version = "", FileInfo? cacheFile = null) {
         if (_isSetup) return;
         var module = Process.GetCurrentProcess().MainModule;
         if (module == null)
-            throw new Exception("[FFXIVClientStructs.Resolver] Unable to access process module.");
+            throw new Exception("[InteropGenerator.Runtime.Resolver] Unable to access process module.");
 
-        _baseAddress = module.BaseAddress;
+        Setup(module.BaseAddress, module.ModuleMemorySize, moduleCopyPointer, version, cacheFile);
+    }
 
-        _targetSpace = moduleCopy == 0 ? _baseAddress : moduleCopy;
-        _targetLength = module.ModuleMemorySize;
+    public void Setup(nint modulePointer, int moduleSize, nint moduleCopyPointer = 0, string version = "", FileInfo? cacheFile = null) {
+        _baseAddress = modulePointer;
+
+        _targetSpace = moduleCopyPointer == 0 ? _baseAddress : moduleCopyPointer;
+        _targetLength = moduleSize;
 
         _cacheFile = cacheFile;
         if (_cacheFile is not null)
-            LoadCache();
+            LoadCache(version);
 
         SetupSections();
         _isSetup = true;
     }
 
-    public void SetupSearchSpace(nint memoryPointer, int memorySize, int textSectionOffset, int textSectionSize,
-        int dataSectionOffset, int dataSectionSize, int rdataSectionOffset, int rdataSectionSize, FileInfo? cacheFile = null) {
+    public void Setup(nint memoryPointer, int memorySize, int textSectionOffset, int textSectionSize, string version = "", FileInfo? cacheFile = null) {
         if (_isSetup) return;
         _baseAddress = memoryPointer;
         _targetSpace = memoryPointer;
         _targetLength = memorySize;
         _textSectionOffset = textSectionOffset;
         _textSectionSize = textSectionSize;
-        _dataSectionOffset = dataSectionOffset;
-        _dataSectionSize = dataSectionSize;
-        _rdataSectionOffset = rdataSectionOffset;
-        _rdataSectionSize = rdataSectionSize;
 
         _cacheFile = cacheFile;
         if (_cacheFile is not null)
-            LoadCache();
+            LoadCache(version);
         _isSetup = true;
     }
 
@@ -100,42 +92,36 @@ public sealed partial class Resolver {
             var sectionName = BitConverter.ToInt64(sectionCursor);
 
             // .text
-            switch (sectionName) {
-                case 0x747865742E: // .text
-                    _textSectionOffset = BitConverter.ToInt32(sectionCursor.Slice(12, 4));
-                    _textSectionSize = BitConverter.ToInt32(sectionCursor.Slice(8, 4));
-                    break;
-                case 0x617461642E: // .data
-                    _dataSectionOffset = BitConverter.ToInt32(sectionCursor.Slice(12, 4));
-                    _dataSectionSize = BitConverter.ToInt32(sectionCursor.Slice(8, 4));
-                    break;
-                case 0x61746164722E: // .rdata
-                    _rdataSectionOffset = BitConverter.ToInt32(sectionCursor.Slice(12, 4));
-                    _rdataSectionSize = BitConverter.ToInt32(sectionCursor.Slice(8, 4));
-                    break;
+            if (sectionName == 0x747865742E) {
+                // .text
+                _textSectionOffset = BitConverter.ToInt32(sectionCursor.Slice(12, 4));
+                _textSectionSize = BitConverter.ToInt32(sectionCursor.Slice(8, 4));
             }
 
             sectionCursor = sectionCursor[40..]; // advance by 40
         }
     }
-    private void LoadCache() {
+    private void LoadCache(string version) {
         if (_cacheFile is not { Exists: true }) {
-            _textCache = new ConcurrentDictionary<string, long>();
+            _resolverCache = new ResolverCache(version, new ConcurrentDictionary<string, long>());
             return;
         }
 
         try {
             var json = File.ReadAllText(_cacheFile.FullName);
-            _textCache = JsonSerializer.Deserialize(json, ResolverJsonContext.Default.ConcurrentDictionaryStringInt64) ?? new ConcurrentDictionary<string, long>();
+            _resolverCache = JsonSerializer.Deserialize(json, ResolverCacheSerializerContext.Default.ResolverCache);
+            if (_resolverCache is null ||
+                _resolverCache.Version != version)
+                _resolverCache = new ResolverCache(version, new ConcurrentDictionary<string, long>());
         } catch {
-            _textCache = new ConcurrentDictionary<string, long>();
+            _resolverCache = new ResolverCache(version, new ConcurrentDictionary<string, long>());
         }
     }
 
     private void SaveCache() {
-        if (_cacheFile == null || _textCache == null || _cacheChanged == false)
+        if (_cacheFile == null || _resolverCache == null || _cacheChanged == false)
             return;
-        var json = JsonSerializer.Serialize(_textCache, ResolverJsonContext.Default.ConcurrentDictionaryStringInt64);
+        var json = JsonSerializer.Serialize(_resolverCache, ResolverCacheSerializerContext.Default.ResolverCache);
         if (string.IsNullOrWhiteSpace(json))
             return;
         if (_cacheFile.Directory is { Exists: false })
@@ -144,30 +130,31 @@ public sealed partial class Resolver {
     }
 
     private bool ResolveFromCache() {
-        foreach (var address in _addresses) {
-            if (_textCache!.TryGetValue(address.CacheKey, out var offset)) {
-                address.Value = (nuint)(offset + _baseAddress);
-                var firstByte = (byte)address.Bytes[0];
-                _preResolveArray[firstByte]!.Remove(address);
-                if (_preResolveArray[firstByte]!.Count == 0) {
-                    _preResolveArray[firstByte] = null;
-                    _totalBuckets--;
+        foreach (var address in Addresses) {
+            if (address.Value == 0) {
+                if (_resolverCache!.Cache.TryGetValue(address.CacheKey, out var offset)) {
+                    address.Value = (nuint)(offset + _baseAddress);
+                    var firstByte = (byte)address.Bytes[0];
+                    if (_preResolveArray[firstByte] != null) {
+                        _preResolveArray[firstByte]!.Remove(address);
+                        if (_preResolveArray[firstByte]!.Count == 0) {
+                            _preResolveArray[firstByte] = null;
+                            _totalBuckets--;
+                        }
+                    }
                 }
             }
         }
 
-        return _addresses.All(a => a.Value != 0);
+        return Addresses.All(a => a.Value != 0);
     }
 
     // This function is a bit messy, but everything to make it cleaner is slower, so don't bother.
     public unsafe void Resolve() {
-        if (_hasResolved)
-            return;
-
         if (_targetSpace == 0)
             throw new Exception("[FFXIVClientStructs.Resolver] Attempted to call Resolve() without initializing the search space.");
 
-        if (_textCache is not null) {
+        if (_resolverCache is not null) {
             if (ResolveFromCache())
                 return;
         }
@@ -204,7 +191,7 @@ public sealed partial class Resolver {
 
                         address.Value = (nuint)(_baseAddress + _textSectionOffset + outLocation);
 
-                        if (_textCache?.TryAdd(address.CacheKey, outLocation + _textSectionOffset) == true)
+                        if (_resolverCache?.Cache.TryAdd(address.CacheKey, outLocation + _textSectionOffset) == true)
                             _cacheChanged = true;
 
                         _preResolveArray[targetSpan[location]]!.Remove(address);
@@ -221,24 +208,18 @@ public sealed partial class Resolver {
 outLoop:;
 
         SaveCache();
-        _hasResolved = true;
     }
 
     public void RegisterAddress(Address address) {
-        _addresses.Add(address);
+        if (Addresses.Add(address)) {
+            var firstByte = (byte)address.Bytes[0];
 
-        var firstByte = (byte)address.Bytes[0];
+            if (_preResolveArray[firstByte] is null) {
+                _preResolveArray[firstByte] = new List<Address>();
+                _totalBuckets++;
+            }
 
-        if (_preResolveArray[firstByte] is null) {
-            _preResolveArray[firstByte] = new List<Address>();
-            _totalBuckets++;
+            _preResolveArray[firstByte]!.Add(address);
         }
-
-        _preResolveArray[firstByte]!.Add(address);
-    }
-
-    [JsonSerializable(typeof(ConcurrentDictionary<string, long>))]
-    [JsonSourceGenerationOptions(WriteIndented = true)]
-    private partial class ResolverJsonContext : JsonSerializerContext {
     }
 }
